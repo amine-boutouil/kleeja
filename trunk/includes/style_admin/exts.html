@@ -1,0 +1,39 @@
+
+<div class="middle">
+<form method="post" action="{action}">
+	<fieldset>
+		<legend>{exts_name}</legend>
+
+<table style="width: 100%">
+	<tr style="background-color:silver">
+		<td>{n_ext}</td>
+		<td>{n_group}</td>
+		<td>{n_gsize}</td>
+		<td>{n_gallow}</td>
+		<td>{n_usize}</td>
+		<td>{n_uallow}</td>
+	</tr>
+<LOOP NAME="arr" LIMIT="15">
+	<tr>
+		<td>{{name}}</td>
+		<td>{{group}}</td>
+		<td><input name="gsz_{{id}}" type="text" value="{{g_size}}" size="7"/></td>
+		<td>{{g_allow}}</td>
+		<td><input name="usz_{{id}}" type="text" value="{{u_size}}" size="7"/></td>
+		<td>{{u_allow}}</td>
+	</tr>
+</LOOP>
+
+</table>
+
+</fieldset>
+<fieldset class="quick" style="text-align:center">
+		<input class="button2" name="submit" type="submit" value="{n_submit}" />
+		<br />
+		{n_note}
+</fieldset>
+</form>
+<div style="text-align:center"><b>{arr_paging}</b></div>
+</div>
+
+

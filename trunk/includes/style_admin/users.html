@@ -1,0 +1,33 @@
+
+<div class="middle">
+<form method="post" action="{action}">
+	<fieldset>
+		<legend>{users_name}</legend>
+
+<table style="width: 100%">
+	<tr style="background-color:silver">
+		<td>{n_name}</td>
+		<td>{n_mail}</td>
+		<td>{n_pass}</td>
+		<td>{n_admin}</td>
+		<td>{n_del}</td>
+	</tr>
+<LOOP NAME="arr" LIMIT="15">
+	<tr style="background-color:#F5F5F5">
+		<td><label><input type="text" name="nm_{{id}}" value="{{name}}" size="20"></label></td>
+		<td><label><input type="text" name="ml_{{id}}" value="{{mail}}" size="20"></label></td>
+		<td><label><input type="password" name="ps_{{id}}" value="" size="10"></label></td>
+		<td>{{admin}}</td>
+		<td><input type="checkbox" name="del_{{id}}" value="1"></td>
+	</tr>
+</LOOP>
+
+</table>
+
+</fieldset>
+<fieldset class="quick" style="text-align:center">
+		<input class="button2" name="submit" type="submit" value="{n_submit}" />
+</fieldset>
+</form>
+<div style="text-align:center"><b>{arr_paging}</b></div>
+</div>

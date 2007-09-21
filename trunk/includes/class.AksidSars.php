@@ -6,7 +6,7 @@
 # purpose :  cache for all script.
 # copyright 2007 Kleeja.com ..
 #class by : Nadorino [@msn.com]
-# changed for specially for this script , i love this  sentence .. (  start from same way was people finished)   
+# changed specially for this script , i love this  sentence .. (  start from same way was people finished)   
 ##################################################
 
 	  if (!defined('IN_COMMON'))

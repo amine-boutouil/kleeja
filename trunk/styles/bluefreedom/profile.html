@@ -1,5 +1,5 @@
 <div class="middle">
-
+<h2>{N_EDIT_DATA}</h2>
 <form action="{action}" method="post">
 {L_NAME} : <input type="text" name="pname" value="{name}" readonly="readonly" /><br />
 {L_MAIL} :<input type="text" name="pmail" value="{mail}"  /><br />
@@ -9,7 +9,31 @@
 {L_PASS_NEW} :<input type="password" name="ppass_new" value="{_POST.ppass_new}"  /><br />
 {L_PASS_NEW2} :<input type="password" name="ppass_new2" value="{_POST.ppass_new2}"  /><br />
 		</fieldset>
-<input type="submit" name="submit" value="{n_submit}" />
-</form>
+<input type="submit" name="submit_data" value="{n_submit_data}" />
 
+<br />
+<h2>{N_EDIT_FILES}</h2>
+<table style="width: 100%">
+	<tr style="background-color:silver">
+		<td>{n_name}</td>
+		<td>{n_size}</td>
+		<td>{n_time}</td>
+		<td>{n_type}</td>
+		<td>{n_del}</td>
+	</tr>
+<IF NAME="arr">
+<LOOP NAME="arr" LIMIT="10">
+	<tr style="background-color:#F5F5F5">
+		<td>{{name}}</td>
+		<td>{{size}}</td>
+		<td>{{time}}</td>
+		<td>{{type}}</td>
+		<td><input type="checkbox" name="del_{{id}}" value="1"></td>
+	</tr>
+</LOOP>
+</IF>
+</table>
+<input type="submit" name="submit_files" value="{n_submit_files}" />
+</form>
+<div style="text-align:center"><b>{arr_paging}</b></div>
 </div>

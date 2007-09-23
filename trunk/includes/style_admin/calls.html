@@ -27,6 +27,7 @@ document.getElementById('mail_here').innerHTML= iee;
 		<td>{n_ip}</td>
 		<td>{n_del}</td>
 	</tr>
+<IF NAME="arr">
 <LOOP NAME="arr" LIMIT="15">
 	<tr style="background-color:#F5F5F5">
 		<td><a title="{n_mail}:{{mail}}" onclick="javascript:show_msg('{{mail}} :<br />{{text}}',{{id}});">{{name}}</a></td>
@@ -35,7 +36,7 @@ document.getElementById('mail_here').innerHTML= iee;
 		<td><input type="checkbox" name="del_{{id}}" value="1"></td>
 	</tr>
 </LOOP>
-
+</IF>
 </table>
 
 </fieldset>

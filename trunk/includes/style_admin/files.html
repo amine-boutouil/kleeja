@@ -16,6 +16,7 @@
 		<td>{n_report}</td>
 		<td>{n_del}</td>
 	</tr>
+<IF NAME="arr">
 <LOOP NAME="arr" LIMIT="15">
 	<tr style="background-color:#F5F5F5">
 		<td>{{name}}</td>
@@ -29,7 +30,7 @@
 		<td><input type="checkbox" name="del_{{id}}" value="1"></td>
 	</tr>
 </LOOP>
-
+</IF>
 </table>
 
 </fieldset>

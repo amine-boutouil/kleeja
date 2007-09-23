@@ -23,6 +23,10 @@
 // Report all errors, except notices
 error_reporting(E_ALL ^ E_NOTICE);
 
+$starttm = explode(" ", microtime());
+$starttm = $starttm[1] + $starttm[0];
+
+
 
     // support for php older than 4.1.0 
     if ( phpversion() < '4.1.0' ){
@@ -123,7 +127,16 @@ error_reporting(E_ALL ^ E_NOTICE);
 	if ($config[siteclose] == 1) {
 	Saaheader("الموقع مغلق !");
 	$text = $config[closemsg];
-	 print $tpl->display("info.html");
+	print $tpl->display("info.html");
+	Saafooter();
+	exit();
+	}
+	
+	//exceed total size 
+	if ($stat_sizes >= ($config[total_size] *(1048576))) { // convert megabytes to bytes
+	Saaheader("متوقف حالياً !");
+	$text = "الحجم الكلي للمركز إستنفذ .. سوف نعود قريباً";
+	print $tpl->display("info.html");
 	Saafooter();
 	exit();
 	}

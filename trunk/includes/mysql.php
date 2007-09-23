@@ -28,7 +28,6 @@ var $db_name              		 =        "";
 var $connect_id              	 =        null;		
 var $result;		
 var $query_num					 = 			0;
-var $time_of_sql				 = 			0;
 var $mysql_version;
 
 /***************/
@@ -62,11 +61,9 @@ var $mysql_version;
                 function query($query)
 				{
 						$this->query_num++;
-                        $timef = microtime(true);
-						$times = microtime(true);
-                        $this->time_of_sql = ($times-$timef)*(pow(10,5));
-						
+
                         $this->result = @mysql_query($query, $this->connect_id) or die($this->error_msg("خطأ في الاستعلام"));
+						
 						return $this->result;
 				}
 /***************/

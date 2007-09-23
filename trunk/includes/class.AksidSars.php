@@ -14,6 +14,7 @@
 	  echo '<strong><br /><span style="color:red">[NOTE]: This Is Dangrous Place !! [2007 saanina@gmail.com]</span></strong>';
 	  exit();
 	  }
+	  
 class AksidSars
 {
     var $asarsi;  // متغير اسم المجلد
@@ -86,33 +87,33 @@ class AksidSars
 } //thwara نهاية
 function aksid(){  //Aksid بداية
 		global $SQL,$dbprefix,$config;
-//by saanina
-if(file_exists($this->asarsi)){   //بداية التحقق من المجلد هل هو موجود ام لا
- //يبقى فارغا اذا كان المجلد موجود
-for($i=0;$i<$this->thwara;$i++){   // for بداية
+	//by saanina
+	if(file_exists($this->asarsi)){   //بداية التحقق من المجلد هل هو موجود ام لا
+	 //يبقى فارغا اذا كان المجلد موجود
+	for($i=0;$i<$this->thwara;$i++){   // for بداية
 
 
-$this->baddarisam=@explode(".",$_FILES['file']['name'][$i]);
-$this->baddarisam=$this->baddarisam[count($this->baddarisam)-1];
-$this->typet = $this->baddarisam;
-if($this->tashfir == "time"){  //if($this->tashfir == "time"){
-$zaid=time();
-$this->baddarisam=$this->isam.$zaid.$i.".".$this->baddarisam;
-}
-elseif($this->tashfir == "md5")
-{
-$zaid=md5(time());
-$zaid=substr($zaid,0,10);
-$this->baddarisam=$this->isam.$zaid.$i.".".$this->baddarisam;
-}  //if($this->tashfir == "time"){
-else
-{
-// اسم الصورة الحقيقي
-$this->baddarisam=$_FILES['file']['name'][$i];
-}
-if(empty($_FILES['file']['tmp_name'][$i])){ // التحقق من الملف هل هو فارغ
-// فارغ
-}
+	$this->baddarisam=@explode(".",$_FILES['file']['name'][$i]);
+	$this->baddarisam=$this->baddarisam[count($this->baddarisam)-1];
+	$this->typet = $this->baddarisam;
+	if($this->tashfir == "time"){  //if($this->tashfir == "time"){
+	$zaid=time();
+	$this->baddarisam=$this->isam.$zaid.$i.".".$this->baddarisam;
+	}
+	elseif($this->tashfir == "md5")
+	{
+	$zaid=md5(time());
+	$zaid=substr($zaid,0,10);
+	$this->baddarisam=$this->isam.$zaid.$i.".".$this->baddarisam;
+	}  //if($this->tashfir == "time"){
+	else
+	{
+	// اسم الصورة الحقيقي
+	$this->baddarisam=$_FILES['file']['name'][$i];
+	}
+	if(empty($_FILES['file']['tmp_name'][$i])){ // التحقق من الملف هل هو فارغ
+	// فارغ
+	}
 else
 {
 
@@ -141,12 +142,12 @@ $file=move_uploaded_file($_FILES['file']['tmp_name'][$i], $this->asarsi."/".$thi
 
 if($file){ //if بداية
 //---------->
-				$name 	= (string) $SQL->escape($this->baddarisam);
-				$size	= (int) $_FILES['file']['size'][$i];
-				$type 	= (string) $SQL->escape($this->typet);
-				$folder	= (string) $SQL->escape($this->asarsi);
-				$timeww	= (int) time();
-				$user	= (int) $this->id_user;
+				$name 	= (string)	$SQL->escape($this->baddarisam);
+				$size	= (int) 	$_FILES['file']['size'][$i];
+				$type 	= (string)	$SQL->escape($this->typet);
+				$folder	= (string)	$SQL->escape($this->asarsi);
+				$timeww	= (int)		time();
+				$user	= (int)		$this->id_user;
 				
 				$insert	= $SQL->query("INSERT INTO `{$dbprefix}files`(
 				`name` ,`size` ,`time` ,`folder` ,`type`,`user`
@@ -158,26 +159,34 @@ if($file){ //if بداية
 				if (!$insert) { $this->errs[]=  'خطأ .. لايمكن إدخال المعلومات لقاعدة البيانات!';}	
 				
 				$this->id_for_url =  $SQL->insert_id();
+				
+				//calculate stats ..s
+				$update1 = $SQL->query("UPDATE `{$dbprefix}stats` SET 
+				`files`=files+1,
+				`sizes`=sizes+" . $size . ",
+				`last_file`='" . $folder ."/". $name . "'
+				");
+				if ( !$update1 ){ die("لم يتم تحديث الإحصائيات !!!!");}
+				//calculate stats ..e
 //<---------------
 	//must be img //	
 $this->ansaqimages= array('png','gif','jpg','jpeg','tif','tiff');
 //show imgs
 if (in_array(strtolower($this->typet),$this->ansaqimages)){
-$this->errs[] = '
-		.. لقد تم تحميل الملف بنجاح<br />
-		رابط مباشر :<br /><textarea rows=2 cols=49 rows=1>'.$this->linksite."download.php?img=".$this->id_for_url.'</textarea>
-		شفرة المنتديات :<br /><textarea rows=2 cols=49 rows=1>[url='.$config[siteurl].'][img]'.$this->linksite."download.php?img=".$this->id_for_url.'[/img][/url]</textarea><br />
-';
+	$this->errs[] = '
+			.. لقد تم تحميل الملف بنجاح<br />
+			رابط مباشر :<br /><textarea rows=2 cols=49 rows=1>'.$this->linksite."download.php?img=".$this->id_for_url.'</textarea>
+			شفرة المنتديات :<br /><textarea rows=2 cols=49 rows=1>[url='.$config[siteurl].'][img]'.$this->linksite."download.php?img=".$this->id_for_url.'[/img][/url]</textarea><br />';
 }else {
-$this->errs[] = '
-		.. لقد تم تحميل الملف بنجاح<br />
-		رابط مباشر :<br /><textarea cols=49 rows=1>'.$this->linksite."download.php?id=".$this->id_for_url.'</textarea>';
+	$this->errs[] = '
+			.. لقد تم تحميل الملف بنجاح<br />
+			رابط مباشر :<br /><textarea cols=49 rows=1>'.$this->linksite."download.php?id=".$this->id_for_url.'</textarea>';
 }
 
 }
 else
 {
-$this->errs[]=  'خطأ... لم يتم تحميل الملف  لاسباب غير معروفة';
+	$this->errs[]=  'خطأ... لم يتم تحميل الملف  لاسباب غير معروفة';
 }   // if نهاية
 
 
@@ -214,32 +223,5 @@ $this->errs[]=  " <font color=red><b>ضروري انشاء مجلد<b></font>".$
 	
 
 }#end class
-
-##################
-function ByteSize($bytes)  
-    { 
-    $size = $bytes / 1024; 
-    if($size < 1024) 
-        { 
-        $size = number_format($size, 2); 
-        $size .= ' KB'; 
-        }  
-    else  
-        { 
-        if($size / 1024 < 1024)  
-            { 
-            $size = number_format($size / 1024, 2); 
-            $size .= ' MB'; 
-            }  
-        else if ($size / 1024 / 1024 < 1024)   
-            { 
-            $size = number_format($size / 1024 / 1024, 2); 
-            $size .= ' GB'; 
-            }  
-        } 
-    return $size; 
-    } 
-
-
 
 ?>

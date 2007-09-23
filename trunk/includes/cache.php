@@ -108,15 +108,24 @@
 	fclose($filenums);
 	}
 	
+	//stats .. 	while($row=$SQL->fetch_array($sqls)){
+	$sqlstat	=	$SQL->query("SELECT * FROM {$dbprefix}stats");
+	while($row=$SQL->fetch_array($sqlstat)){
+	$stat_files = $row[files];
+	$stat_sizes = $row[sizes];
+	$stat_users = $row[users];
+	$stat_last_file =  $row[last_file];
+	} 
+	$SQL->freeresult($sqlstat);   
+	//
+	
 	
 	//some function .. for disply .. 
 	function Saaheader($title) {
 	global $tpl,$usrcp;
 	
-	$start = explode(" ", microtime());
-	$start = $start[1] + $start[0];
 	
-	//login - logout-profile
+	//login - logout-profile...
 	if ( !$usrcp->name() ) { $login_name= "دخول";  $login_url= "usrcp.php?go=login"; 
 	$usrcp_name = "تسجيل عضويه";$usrcp_url = "usrcp.php?go=register";
 	}
@@ -138,18 +147,15 @@
 
 	
 	function Saafooter() {
-	global $tpl,$SQL,$start,$config,$usrcp;
+	global $tpl,$SQL,$starttm,$config,$usrcp;
 	//show stats .. 
 	if ($config[statfooter]) {
 	if ($do_gzip_compress) { $gzip = "Enabled"; } else { $gzip = "Disabled"; }
 	$end = explode(" ", microtime());
-	$end = $end[1] + $end[0];
-	$loadtime=$end-$start; 
-	$loadtime=substr((number_format($loadtime,2,',','.')), 0, 4); 
-	$sql_time = ($SQL->time_of_sql / $loadtime  ) * 100 ;
-	$php_time =( ($loadtime  - $SQL->time_of_sql ) / $loadtime ) * 100 ;
+	$loadtime = number_format($end[1] + $end[0] - $starttm , 4);
 	$queries_num = $SQL->query_num;
-	$page_stats = "<b>[</b> GZIP : $gzip - Generation Time: $loadtime Sec [SQL: $sql_time % | PHP : $php_time %] - Queries: $queries_num <b>]</b>" ;  
+	$time_sql = round($SQL->query_num / $loadtime) ;
+	$page_stats = "<b>[</b> GZIP : $gzip - Generation Time: $loadtime Sec [SQL: $time_sql % ] - Queries: $queries_num <b>]</b>" ;  
 	$tpl->assign("page_stats",$page_stats);
 	}#end statfooter
 	
@@ -165,6 +171,18 @@
 	$SQL->close();
 	}
 	
+	//size function
+	function Customfile_size($size)
+	{
+	  $sizes = array(' B', ' KB', ' MB', ' GB', ' TB', 'PB', ' EB');
+	  $ext = $sizes[0];
+	  for ($i=1; (($i < count($sizes)) && ($size >= 1024)); $i++) {
+	   $size = $size / 1024;
+	   $ext  = $sizes[$i];
+	  }
+	  return round($size, 2).$ext;
+	}
+
 
 
 ?>

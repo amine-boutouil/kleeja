@@ -3,10 +3,18 @@
     margin: 0;
 } 
 
+html {
+        font-size: 100%;
+        /* Always show a scrollbar for short pages - stops the jump when the scrollbar appears. non-IE browsers */
+        height: 100%;
+        margin-bottom: 1px;
+}
 body {
     background: #fff;
 	font: .74em "Tahoma" Verdana, Arial, sans-serif;
 	line-height: 1.5em; 
+    margin: 0;
+    padding: 12px 0;
 }
 a {
 	color: #3B6EBF;
@@ -43,12 +51,28 @@ height: 20px;
 
 .header {
 height: 100px;
-background: #85ACF7 url('images/hidr.jpg');
+background: #85ACF7 url('images/top_bg.gif');
+
 }
 
-.header h1 { padding-left: 17px; padding-top: 22px; font-size: 22px; color: #FFF; }
+.header h1 {
+        /* Forum name */
+        font-family: "Tahoma", Trebuchet MS, Arial, Helvetica, sans-serif;
+        margin-right: 200px;
+        color: #FFFFFF;
+        margin-top: 15px;
+        font-weight: bold;
+        font-size: 2em;
+}
 .header h1 a { font-size: 22px; color: #FFF; text-decoration: none;}
-.header h2 { padding-left: 17px; padding-top: 0px; font-size: 17px; color: #FFF; }
+.header h2 {
+        /* Forum header titles */
+        font-family: "Tahoma", Trebuchet MS, Arial, Helvetica, sans-serif;
+        font-weight: normal;
+        color: #3f3f3f;
+        font-size: 2em;
+        margin: 0.8em 0 0.2em 0;
+}
 
 .breadcrumbs { 
     background: #F6F9FB; 
@@ -120,6 +144,9 @@ fieldset {
         border-left: 1px solid #D7D7D7;
         background-color: #FFFFFF;
         position: relative;
+		/* rounded corners for firefox .. love u saanina ;) */
+		-moz-border-radius: 8px; border-radius:1px;
+
 }
 * html fieldset {
         padding: 0 10px 5px 10px;

@@ -139,7 +139,12 @@
 							 )";
 							 
 							$insert = $SQL->query($sql);
-
+							
+							//calculate stats ..s
+							$update1 = $SQL->query("UPDATE `{$dbprefix}stats` SET `users`=users+1 ");
+							if ( !$update1 ){ die("لم يتم تحديث الإحصائيات !!!!");}
+							//calculate stats ..e
+							
 							if (!$insert) {
 							$text =  'خطأ .. لايمكن إدخال المعلومات لقاعدة البيانات!';
 							$stylee = 'err.html';	
@@ -149,6 +154,7 @@
 							$text = 'شكراً لتسجيلك في مركزنا ..<a href="usrcp.php?go=login">دخول..</a>';
 							$stylee = 'info.html';	
 							}
+
 						}
 			}
 		
@@ -181,13 +187,14 @@
 			Saafooter();
 			exit();
 			}
-			
-			if ( !isset($_POST['submit']) )
-			{
-			
+
 			$stylee = "profile.html";
 			$titlee = "الملف الشخضي";
+			$N_EDIT_DATA = "تعديل بياناتك";
+			$N_EDIT_FILES = "تعديل ملفاتك";
 			$action = "usrcp.php?go=profile";
+			$n_submit_data = "تحديث بياناتك";
+			$n_submit_files = "تحديث ملفاتك";
 			$L_NAME = "اسم المستخدم";
 			$L_PASS = "كلمة المرور ..عند التغيير فقط";
 			$L_PASS_OLD = "القديمه";
@@ -198,8 +205,36 @@
 			$name = $usrcp->name(); //<<
 			$mail = $usrcp->mail(); // <<
 			
-			
-			}else{//submit
+			//te get files and update them !!
+			$sql	=	$SQL->query("SELECT id,name,size,type,time,folder FROM `{$dbprefix}files` WHERE id='".$usrcp->id()."' ORDER BY `id` DESC");
+			while($row=$SQL->fetch_array($sql)){
+			//make new lovely arrays !!
+				$ids[$row['id']]=$row['id'];
+				$name[$row['id']]=$row['name'];
+				$size[$row['id']]=$row['size'];
+				$time[$row['id']]=$row['time'];
+				$type[$row['id']]=$row['type'];
+				$folder[$row['id']]=$row['folder'];
+				
+				//
+				$del[$row[id]] = ( isset($_POST["del_".$row[id]]) ) ? $_POST["del_".$row[id]] : "";
+
+				if ($del[$row[id]])
+				{
+					//when submit !!
+					if ( isset($_POST['submit_files']) ) {
+					$update = $SQL->query("DELETE FROM `{$dbprefix}files` WHERE id='" . intval($ids[$row[id]]) . "' ");
+					if (!$update) {die("لايمكن تحديث البيانات !!");}
+					
+					//delete from folder .. 
+					@unlink ( $folder[$row['id']] . "/" . $name[$row['id']] );
+					}
+				}
+			}
+			$SQL->freeresult($sql);
+		
+			if ( isset($_POST['submit_data']) )
+			{	
 
 			if( empty($_POST['pname']) || empty($_POST['pmail']) )
 			{
@@ -246,7 +281,24 @@
 			}
 
 		}#else submit
+		if (!is_array($ids)){$ids = array();}//fix bug
+		foreach($ids as $i)
+		{
+		$arr[] = array( id =>$i,
+						name =>"<a href=\"./download.php?id={$i}\" target=\"blank\">".$name[$i]."</a>",
+						size =>ByteSize($size[$i]),
+						time => date("d-m-Y H:a", $time[$i]),
+						type =>$type[$i],
+						);
+		}
+		if (!is_array($arr)){$arr = array();}
 		
+		//after submit ////////////////
+		if ( isset($_POST['submit_files']) ) 
+		{
+		$text = "تم تحديث الملفات بنجاح";
+		$stylee	= "info.html";
+		}
 		
 		break; //=================================================
 		case "get_pass" : //=============================[get_pass]

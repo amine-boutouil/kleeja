@@ -36,7 +36,7 @@
 	$url_file = "./go.php?go=down&amp;n=$name&amp;f=$folder&amp;i=$id";
 	$seconds_w = $config[sec_down];
 	$time = date("d-m-Y H:a", $time);
-	$size = ByteSize($size);
+	$size = Customfile_size($size);
 	$information = "معلومات عن الملف ";
 	$L_FILE = "إسم الملف";
 	$L_SIZE= "حجم الملف";

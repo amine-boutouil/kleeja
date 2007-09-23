@@ -14,9 +14,12 @@
 	require ('includes/common.php');
 
 
-	//decode
-	if ($config[decode] == 1 ) {$decode = "time";} elseif ($config[decode] == 2) {$decode = "md5";}
+	//decode s
+	if ($config[decode] == 1 ) {$decode = "time";} 
+	elseif ($config[decode] == 2) {$decode = "md5";}
 	else{$decode = "";}
+	//decode e
+	
 	
 	//start class .. 
 	$tahmil->tashfir=$decode;              
@@ -26,18 +29,9 @@
 	$tahmil->amchan="index.php";
 	$tahmil->thwara=$config[filesnum];
 	//--------------------- s user system part
-	if ( $usrcp->name() )
-	{
-	$tahmil->ansaq= $u_exts;
-	$tahmil->sizes= $u_sizes;	
-	$tahmil->id_user = $usrcp->id();
-	}
-	else
-	{
-	$tahmil->ansaq= $g_exts;
-	$tahmil->sizes= $g_sizes;	
-	$tahmil->name_user = '-1';
-	}
+	$tahmil->ansaq= ( $usrcp->name() ) ? $u_exts : $g_exts;
+	$tahmil->sizes= ( $usrcp->name() ) ? $u_sizes : $g_sizes ;	
+	$tahmil->id_user = ( $usrcp->name() ) ? $usrcp->id() : '-1';
 	//--------------------- e user system part
 	$inputs = $tahmil->thwara(); //<<--- template
 	$tahmil->aksid();
@@ -58,7 +52,7 @@
 
 
 	//header
-	Saaheader("SaaUp");
+	Saaheader("Kleeja");
 	//index
 	print $tpl->display("index_body.html");
 	//footer

@@ -25,7 +25,7 @@
 	foreach($g_exts as $s )
 	{
 	$gggg[] = array( 'ext' => $s,
-					'num' => ByteSize($g_sizes[$s])
+					'num' => Customfile_size($g_sizes[$s])
 					
 	);
 	}
@@ -35,7 +35,7 @@
 	foreach($u_exts as $s )
 	{
 	$uuuu[] = array( 'ext' => $s,
-					'num' => ByteSize($u_sizes[$s])
+					'num' => Customfile_size($u_sizes[$s])
 					
 	);
 	}

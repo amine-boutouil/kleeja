@@ -32,6 +32,8 @@
 	exit();
 	}
 	
+	//fix bug 
+	$SHOW_LIST = true;
 
 	// now we will navigate 
 	switch ($_GET['cp']) { 
@@ -65,6 +67,8 @@
 		$us_phpbb = "مربوط phpbb";
 		$us_vb = "مربوط vb";
 		$n_register = "فتح التسجيل ";
+		$n_total_size = "أقصى حجم كلي ميقا";
+		
 		
 		$sql	=	$SQL->query("SELECT * FROM {$dbprefix}config");
 		while($row=$SQL->fetch_array($sql)){
@@ -185,7 +189,7 @@
 				
 		}
 		$SQL->freeresult($sql);
-		
+		if (!is_array($ids)){$ids = array();}//fix bug
 		foreach($ids as $i)
 		{
 		$arr[] = array( id =>$i,
@@ -254,13 +258,13 @@
 		}
 		$SQL->freeresult($sql);
 		
-		//for($i=1;$i<count($name);$i++)
+		if (!is_array($ids)){$ids = array();}//fix bug
 		foreach($ids as $i)
 		{
 		$s = $SQL->fetch_array($SQL->query("select name from `{$dbprefix}users` where id='".$user[$i]."' "));
 		$arr[] = array( id =>$i,
 						name =>"<a href=\"./$folder[$i]/$name[$i]\" target=\"blank\">".$name[$i]."</a>",
-						size =>ByteSize($size[$i]),
+						size =>Customfile_size($size[$i]),
 						ups =>$uploads[$i],
 						time => date("d-m-Y H:a", $time[$i]),
 						type =>$type[$i],
@@ -333,7 +337,7 @@
 		}
 		$SQL->freeresult($sql);
 		
-		//for($i=1;$i<count($name);$i++)
+		if (!is_array($ids)){$ids = array();}//fix bug
 		foreach($ids as $i)
 		{
 		$arr[] = array( id =>$i,
@@ -407,7 +411,7 @@
 		}
 		$SQL->freeresult($sql);
 		
-		//for($i=1;$i<count($name);$i++)
+		if (!is_array($ids)){$ids = array();}//fix bug
 		foreach($ids as $i)
 		{
 		$arr[] = array( id =>$i,
@@ -479,6 +483,7 @@
 		}
 		$SQL->freeresult($sql);
 		
+		if (!is_array($ids)){$ids = array();}//fix bug
 		foreach($ids as $i)
 		{
 		$arr[] = array( id =>$i,
@@ -496,9 +501,175 @@
 		$stylee	= "info.html";
 		}
 		break; //=================================================
-		default:
-		$stylee = "start.html";
+		case "backup" ://===================================== [ backup]
+		//thanks for [coder] from montadaphp.net  for his simle lession
+		//@set_time_limit(1000);
+		//for style .. 
+		$stylee = "backup.html";
+		//words
+		$action = "admin.php?cp=backup";
+		$n_explain = "اختر الجداول التي تريد تضمينها في النسخة الاحتياطية ومن ثم اضغط على تحميل";
+		$n_name = "الإسم";
+		$n_size = "الحجم";
+		$n_submit = "تحميل..";
 
+		
+		$sql	=	$SQL->query("SHOW TABLE STATUS");
+		$i = 0;
+		while($row=$SQL->fetch_array($sql)){
+
+			//make new lovely arrays !!
+			$id		= $i++;
+			$size[$id]	= round($row['Data_length']/1024, 2);
+			$name[$id]   = $row[Name];
+
+		}
+		$SQL->freeresult($sql);
+		
+
+		for($i=0;$i<$id;$i++)
+		{
+		$arr[] = array( name =>$name[$i],
+						size =>$size[$i]
+						);
+		}
+		if (!is_array($arr)){$arr = array();}
+		
+		//after submit ////////////////
+		if ( isset($_POST['submit']) ) {
+		//variables 
+		$tables = $_POST['check'];
+		$outta = "";
+		//then
+		foreach($tables as $table)
+		{
+		    $sql = $SQL->query("SHOW CREATE TABLE `".$table."`"); //get code of tables ceation
+		    $que = $SQL->fetch_array($sql);
+		    $outta .= $que['Create Table'] . "\r\n";//preivous code iside file
+		    $sql2 = $SQL->query("SELECT * FROM `$que[Table]`");// gets rows of table
+		    while($result = $SQL->fetch_array($sql2))
+		    {
+		        while($res = current($result))
+		        {
+		            $fields[] .= "`".key($result)."`";
+		            $values[] .= "'$res'";
+		            next($result);
+		        }
+				
+		        $fields = join(", ", $fields);
+		        $values = join(", ", $values);
+		        $q = "INSERT INTO `$que[Table]` ($fields) VALUES ($values);";
+		        $outta .= $q . "\r\n";
+		        unset($fields);
+		        unset($values);
+		    }
+			
+			$SQL->freeresult($sql);
+			$SQL->freeresult($sql2);
+		}
+		header("Content-length: " . strlen($outta));
+		header("Content-type: text/plain");
+		header("Content-Disposition: attachment; filename=$dbname.sql");
+		echo $outta;
+		exit;
+		}
+		break; //=================================================
+		case "repair" ://===================================== [ repair]
+		
+		//prevent err
+		$text = '';
+
+		//fix tables .. 
+		$sql	=	$SQL->query("SHOW TABLE STATUS");
+
+		while($row=$SQL->fetch_array($sql)){
+
+			//fix
+			$sqlf = $SQL->query("REPAIR TABLE `".$row[Name]."`");
+			if ($sqlf) { $text .= "[جداول] تم إصلاح  " . $row[Name] . "<br />";}
+
+		}
+		$SQL->freeresult($sql);
+		
+		
+		//fix stats ..
+		$sqlr	=	$SQL->query("SELECT size FROM `{$dbprefix}files`");
+		$files_number = 0;
+		$files_sizes = 0;
+		while($row=$SQL->fetch_array($sqlr)){
+
+			//stats files 
+			$files_number++;
+			$files_sizes = $files_sizes+$row[size];
+
+		}
+		$SQL->freeresult($sqlr);
+		
+		$sqlw	=	$SQL->query("SELECT name FROM `{$dbprefix}users`");
+		$user_number = 0;
+		while($row=$SQL->fetch_array($sqlw)){
+
+			//stats files 
+			$user_number++;
+		}
+		$SQL->freeresult($sqlw);
+		
+		$update1 = $SQL->query("UPDATE `{$dbprefix}stats` SET 
+		`files`=" . $files_number . ",
+		`sizes`=" . $files_sizes . ",
+		`users`=" . $user_number . "
+		");
+		if ( $update1 ){
+		$text .= "[إحصائيات] تم إعادة إحتساب عدد الملفات<br />";
+		$text .= "[إحصائيات] تم إعادة إحتساب حجم الملفات <br />";
+		}
+
+		//clear cache
+		$path = "cache";
+		$dh = opendir($path);
+		$i=1;
+		while (($file = readdir($dh)) !== false) {
+		    if($file != "." && $file != ".." && $file != ".htaccess" && $file != "index.html") {
+		       $del =  @unlink ( $path . "/" . $file );
+			  $text .= "[كاش] تم حذف  ..".$file."<br />";
+		        $i++;
+		    }
+		}
+		closedir($dh);
+
+		
+		$stylee = "info.html";
+
+		break; //=================================================
+		default:
+		$Kleja_cp = "لوحة تحكم [ كليجا ]";
+		$stylee = "start.html";
+		$n_general_stats = "إحصائيات عامه";
+		$n_sizes_stats = "إحصائيات الحجم";
+		$n_other_stats = "معلومات أخرى";
+		$n_files_number = "عدد الملفات كلها";
+		$n_stat_sizes = "أحجام الملفات كلها";
+		$n_users_number = "عدد الإعضاء";
+		$n_welcome_msg = "أهلا وسهلاً بك في لوحة التحكم لمركز التحميل <b>كليجا</b>";
+		$N_SIZE_STATUS = "الحجم المستخدم";
+		$n_php_version = "إصدار php";
+		$n_mysql_version = "إصدار mysql";
+		$n_max_execution_time = "max_execution_time";
+		$n_upload_max_filesize = "upload_max_filesize";
+		
+		//data 
+		$files_number = $stat_files ;
+		$files_sizes = Customfile_size($stat_sizes);	
+		$users_number = $stat_users;
+		$php_version = 'php '.phpversion();
+		$mysql_version = 'MYSQL '.$SQL->mysql_version;
+		$max_execution_time =  ini_get('max_execution_time');
+		$upload_max_filesize = ini_get('upload_max_filesize');
+		
+		//size board by percent
+		$per1 = round($stat_sizes / ($config[total_size] *1048576) ,2) *100;
+		
+		
 	}#end switch
 
 	
@@ -521,7 +692,11 @@
 	
 	//show style ..
 	$cp_admin = "لوحة التحكم";
+	
 	$index_name = "<<  رجوع للمركز";
+	$configs_name = "إعدادات المركز";
+	$cp_name = "بداية لوحة التحكم";
+	$cp_url = "admin.php";
 	$configs_name = "إعدادات المركز";
 	$configs_url = "admin.php?cp=configs";
 	$exts_name = "إعدادات الإمتدادات";
@@ -534,7 +709,11 @@
 	$calls_url = "admin.php?cp=calls";
 	$users_name = "التحكم بالأعضاء";
 	$users_url = "admin.php?cp=users";
-
+	$backup_name = "نسخه إحتياطيه";
+	$backup_url = "admin.php?cp=backup";
+	$repair_name = "صيانه شامله";
+	$repair_url = "admin.php?cp=repair";	
+	
 	//header
 	print $tpl->display("header.html");
  	//body	

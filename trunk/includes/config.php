@@ -7,12 +7,17 @@
 	$dbpass		= '';
     $dbname		= 'upp';
 	$dbprefix	 = '';
-	//for integration
+	//for integration with forums
 	$forum_srv = "localhost";
 	$forum_db ="mysmartbb";
 	$forum_user = "root";
 	$forum_pass = "";
 	$forum_prefix = "mysbb_";
-	$forum_path ="/vb";
+	$forum_path ="/mysmartbb";
+	//for use ftp account to uplaod
+	$use_ftp = 0;
+	$ftp_server = "ftp.example.com";
+	$ftp_user = "";
+	$ftp_pass = "";
 	
 ?>

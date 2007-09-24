@@ -71,6 +71,7 @@
 		$n_total_size = "أقصى حجم كلي ميقا";
 		$n_thumbs_imgs = "مصغرات للصور";
 		$n_write_imgs = "طبع صوره على الصور";
+		$n_del_url_file = "إعطاء رابط الحذف";
 		
 		
 		$sql	=	$SQL->query("SELECT * FROM {$dbprefix}config");
@@ -116,6 +117,8 @@
 		if ($con[thumbs_imgs] == "1" ) {$ythumbs_imgs = true; }else {$nthumbs_imgs = true;}	
 		//..
 		if ($con[write_imgs] == "1" ) {$ywrite_imgs = true; }else {$nwrite_imgs = true;}			
+		//..
+		if ($con[del_url_file] == "1" ) {$ydel_url_file = true; }else {$ndel_url_file = true;}			
 		
 		//after submit ////////////////
 		if ( isset($_POST['submit']) ) 
@@ -260,6 +263,10 @@
 				
 				//delete from folder .. 
 				@unlink ( $folder[$row['id']] . "/" . $name[$row['id']] );
+					//delete thumb
+					if (is_file($folder[$row['id']] . "/thumbs/" . $name[$row['id']] ))
+					{@unlink ( $folder[$row['id']] . "/thumbs/" . $name[$row['id']] );}
+					//delete thumb
 				}
 			}
 		}

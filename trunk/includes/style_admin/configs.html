@@ -65,8 +65,14 @@
 		<option <IF NAME="md5_decode">selected="selected"</IF> value="2">{n_md5}</option>
 		<option <IF NAME="time_decode">selected="selected"</IF> value="1">{n_time}</option>
 		</select>
-
 		</label></td>
+	</tr>
+	<tr>
+		<td><label for="del_url_file">{n_del_url_file}</label></td>
+		<td>
+		<label>{n_yes}<input type="radio" id="del_url_file" name="del_url_file" value="1"  <IF NAME="ydel_url_file"> checked="checked"</IF>></label>
+		<label>{n_no}<input type="radio" id="del_url_file" name="del_url_file" value="0"  <IF NAME="ndel_url_file"> checked="checked"</IF>></label>
+		</td>
 	</tr>
 	<tr>
 		<td><label for="user_system">{n_user_system}</label></td>

@@ -162,8 +162,9 @@ function createthumb($name,$filename,$new_w,$new_h)
 	return $sss;
 } //thwara نهاية
 function aksid(){  //Aksid بداية
-		global $SQL,$dbprefix,$config;
-	//by saanina
+		global $SQL,$dbprefix,$config,$use_ftp,$ftp_server,$ftp_user,$ftp_pass;
+		
+	//new
 	if(file_exists($this->asarsi)){   //بداية التحقق من المجلد هل هو موجود ام لا
 	 //يبقى فارغا اذا كان المجلد موجود
 	for($i=0;$i<$this->thwara;$i++){   // for بداية
@@ -209,10 +210,28 @@ if(file_exists($this->asarsi.'/'.$_FILES['file']['name'][$i])){  // if بداي�
 	}
     else
     {
-#------------------------------------------------------------------------------------------------------------------------------------------------
+#----------------------------------------------------------uplaod----------------------------------------------------------------------
 //ob_end_flush();  
 //flush();
-$file=move_uploaded_file($_FILES['file']['tmp_name'][$i], $this->asarsi."/".$this->baddarisam); 
+if (!$use_ftp)
+{
+			$file = move_uploaded_file($_FILES['file']['tmp_name'][$i], $this->asarsi."/".$this->baddarisam); 
+}
+else // use ftp account
+{
+			// set up a connection or die
+			$conn_id = @ftp_connect($ftp_server);
+            // Login with username and password  
+            $login_result = @ftp_login($conn_id, $ftp_user, $ftp_pass);  
+             
+            // Check the connection  
+            if ((!$conn_id) || (!$login_result)) {  
+                  $this->errs[]= "لا يمكن الاتصال بـ  $ftp_server"; 
+                } 
+            // Upload the file  
+            $file = @ftp_put($conn_id, $this->asarsi."/".$this->baddarisam,$_FILES['file']['tmp_name'][$i], FTP_BINARY); 
+			@ftp_close($conn_id);  			
+}
 //flush();
 #------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -225,12 +244,13 @@ if($file){ //if بداية
 				$folder	= (string)	$SQL->escape($this->asarsi);
 				$timeww	= (int)		time();
 				$user	= (int)		$this->id_user;
+				$code_del= (string)	md5(time());
 				
 				$insert	= $SQL->query("INSERT INTO `{$dbprefix}files`(
-				`name` ,`size` ,`time` ,`folder` ,`type`,`user`
+				`name` ,`size` ,`time` ,`folder` ,`type`,`user`,`code_del`
 				) 
 				VALUES (
-				'$name','$size','$timeww','$folder','$type','$user'
+				'$name','$size','$timeww','$folder','$type','$user','$code_del'
 				)");
 
 				if (!$insert) { $this->errs[]=  'خطأ .. لايمكن إدخال المعلومات لقاعدة البيانات!';}	
@@ -249,6 +269,8 @@ if($file){ //if بداية
 	//must be img //	
 $this->ansaqimages= array('png','gif','jpg','jpeg','tif','tiff');
 $this->ansaqthumbs= array('png','jpg','jpeg','gif');
+if ($config[del_url_file]){$extra_del = 'رابط للحذف :<br /><textarea rows=2 cols=49 rows=1>'.$this->linksite.'go.php?go=del&amp;id='.$this->id_for_url.'&amp;cd='.$code_del.'</textarea><br/>';}
+
 
 //show imgs
 if (in_array(strtolower($this->typet),$this->ansaqimages)){
@@ -270,12 +292,13 @@ if (in_array(strtolower($this->typet),$this->ansaqimages)){
 			.. لقد تم تحميل الملف بنجاح<br />
 			رابط مباشر :<br /><textarea rows=2 cols=49 rows=1>'.$this->linksite."download.php?img=".$this->id_for_url.'</textarea>
 			شفرة المنتديات :<br /><textarea rows=2 cols=49 rows=1>[url='.$config[siteurl].'][img]'.$this->linksite."download.php?img=".$this->id_for_url.'[/img][/url]</textarea><br />
-			'.$extra_thmb;
+			'.$extra_thmb.$extra_del;
 }else {
 	//then show other files
 	$this->errs[] = '
 			.. لقد تم تحميل الملف بنجاح<br />
-			رابط مباشر :<br /><textarea cols=49 rows=1>'.$this->linksite."download.php?id=".$this->id_for_url.'</textarea>';
+			رابط مباشر :<br /><textarea cols=49 rows=1>'.$this->linksite."download.php?id=".$this->id_for_url.'</textarea>
+			'.$extra_del;
 }
 
 }

@@ -237,7 +237,7 @@
 			$mail = $usrcp->mail(); // <<
 			
 			//te get files and update them !!
-			$sql	=	$SQL->query("SELECT id,name,size,type,time,folder FROM `{$dbprefix}files` WHERE id='".$usrcp->id()."' ORDER BY `id` DESC");
+			$sql	=	$SQL->query("SELECT id,name,size,type,time,folder FROM `{$dbprefix}files` WHERE user='".$usrcp->id()."' ORDER BY `id` DESC");
 			while($row=$SQL->fetch_array($sql)){
 			//make new lovely arrays !!
 				$ids[$row['id']]=$row['id'];
@@ -259,6 +259,10 @@
 					
 					//delete from folder .. 
 					@unlink ( $folder[$row['id']] . "/" . $name[$row['id']] );
+					//delete thumb
+					if (is_file($folder[$row['id']] . "/thumbs/" . $name[$row['id']] ))
+					{@unlink ( $folder[$row['id']] . "/thumbs/" . $name[$row['id']] );}
+					//delete thumb
 					}
 				}
 			}

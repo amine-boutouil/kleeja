@@ -275,6 +275,60 @@
 	}
 	
 	break; //=================================================
+	case "del" : //=============================[del]
+	
+	//stop .. check first .. 
+	if (!$config[del_url_file])
+	{
+			$text = "نأسف .هذه الخاصيه معطله من المدير";
+			$stylee = "info.html";
+			//header
+			Saaheader("حذف مباشر ..");
+			//index
+			print $tpl->display($stylee);
+			//footer
+			Saafooter();
+			exit();
+	}
+	
+	//ok .. go on
+	$id = intval($_GET['id']);
+	$cd = $_GET['cd']; // may.. will protect 
+	
+	if (!$id || !$cd )
+	{
+			$text =  'خطأ .. في الرابط ..';
+			$stylee = 'err.html';	
+	}
+	else
+	{
+			$sql	=	$SQL->query("SELECT name,folder FROM `{$dbprefix}files` WHERE id='".$id."' AND code_del='" . $cd . "'");
+			
+			if ($SQL->num_rows($sql) == 0) {
+			$text =  'خطأ ..لايمكن حذف الملف .. ربما معلوماتك خاطئه او قد تم حذف مسبقاً';
+			$stylee = 'err.html';
+			}
+			else
+			{
+				while($row=$SQL->fetch_array($sql)){
+				@unlink ( $row[folder] . "/" . $row[name] );
+				//delete thumb
+				if (is_file($row[folder] . "/thumbs/" . $row[name]))
+				{@unlink ( $row[folder] . "/thumbs/" . $row[name] );}
+				//delete thumb
+				$del = $SQL->query("DELETE FROM {$dbprefix}files WHERE 	id='" . $id . "' ");
+				if (!$del) {die("لم يتم الحذف ..من قاعدة البيانات!!");}
+				}
+				$SQL->freeresult($sql);
+				
+				$text = 'تم حذف الملف بنجاح';
+				$stylee = 'info.html';	
+				
+			}
+		
+	}
+	
+	break; //=================================================
 	/*case "example" : //=============================[example]
 	$stylee = "example.html"; //>> style 
 	$titlee = "دليل الملفات"; // >> title

@@ -105,3 +105,6 @@ div#loadbox {
 	padding: 10px;
 	display: none;
 }
+img {
+        border: none;
+}

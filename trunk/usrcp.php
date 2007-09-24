@@ -22,6 +22,9 @@
 			$L_NAME = "اسم المستخدم";
 			$L_PASS = "كلمة المرور";
 			$n_submit = "دخول";
+			$err_empty_name = "حقل اسم المستخدم فارغ";
+			$err_empty_pass = "حقل كلمة المرور فارغ";
+			
 			$forget_pass = '<a href="usrcp.php?go=get_pass">نسيت كلمة المرور؟</a>';
 			
 			
@@ -33,20 +36,48 @@
 			}
 			elseif ( isset($_POST['submit']) )
 			{
+		
+			if ($config[user_system] == 3){  // vb 
 			
-			if( $usrcp->data($_POST['lname'],$_POST['lpass']) )
-			{
-			$text = "لقد تم الدخول بنجاح <br /> <a href=\"index.php\">البدايه</a>";
-			$stylee = "info.html";
-
+			
+				if ( empty($_POST['lname']) || empty($_POST['challenge']) ) //challenge just for vb
+				{
+				$text = "خطأ ..حقول ناقصه!";
+				$stylee = "err.html";
+				}
+				elseif( $usrcp->data($_POST['lname'],$_POST['challenge']) )
+				{
+				$text = "لقد تم الدخول بنجاح <br /> <a href=\"index.php\">البدايه</a>";
+				$stylee = "info.html";
+				}
+				else
+				{
+				$text = "خطأ .. لا يمكنك الدخول!";
+				$stylee = "err.html";
+				}
+			
 			}
 			else
 			{
-			$text = "خطأ .. لا يمكنك الدخول!";
-			$stylee = "err.html";
+				if ( empty($_POST['lname']) || empty($_POST['lpass']) )
+				{
+				$text = "خطأ ..حقول ناقصه!";
+				$stylee = "err.html";
+				}
+				elseif( $usrcp->data($_POST['lname'],$_POST['lpass']) )
+				{
+				$text = "لقد تم الدخول بنجاح <br /> <a href=\"index.php\">البدايه</a>";
+				$stylee = "info.html";
+				}
+				else
+				{
+				$text = "خطأ .. لا يمكنك الدخول!";
+				$stylee = "err.html";
+				}
 			}
+
 		}
-		
+	
 		break; //=================================================
 		case "register" : //=============================[register]
 			//config register

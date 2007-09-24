@@ -1,8 +1,73 @@
+<!---JustForVb-->
+<script type="text/javascript" src="includes/md5.js"></script>
+<script type="text/javascript">
+function doCHAP(){
+  valid=true;
+  // get 'name' field
+   var nam=document.getElementById('lname');
+  if(!nam){return};
+  if(!nam.value){showError(nam,'{err_empty_name}')
+  return false;
+  };
+  // get 'password' field
+  var psw=document.getElementById('lpass');
+  if(!psw){return};
+  if(!psw.value){showError(psw,'{err_empty_pass}')
+    return false;};
+  // get 'challenge' field
+  var chlng=document.getElementById('challenge');
+  if(!chlng){return};
+  // make MD5 hash of password and concatenate challenge value
+  // next calculate MD5 hash of combined values
+  chlng.value=hex_md5(psw.value);
+  return valid;
+}
+/*
+ * display error messages
+ */
+function showError(obj,message){
+  if(!obj.errorNode){
+    obj.onchange=hideError;
+    var p=document.createElement('p');
+    p.appendChild(document.createTextNode(message));
+    obj.parentNode.appendChild(p);
+   obj.errorNode=p;
+ }
+  valid=false;
+  return
+}
+/*
+ * hide error messages
+ */
+function hideError(){
+  this.parentNode.removeChild(this.errorNode);
+  this.errorNode=null;
+  this.onchange=null;
+}
+/*
+ * execute 'doCHAP()' function when page is loaded
+ */
+window.onload=function(){
+  var W3CDOM=document.getElementById&&document.
+getElementsByTagName&&document.createElement;
+  // check if browser is W3CDOM compatible
+  if(W3CDOM){
+    document.getElementsByTagName('form')[0].
+    onsubmit=function(){
+      return doCHAP();
+    }
+  }
+}
+
+</script>
+<!---JustForVb-->
+
 <div class="middle">
 
 <form action="{action}" method="post">
 {L_NAME} : <input type="text" name="lname" value="{_POST.lname}"  /><br />
 {L_PASS} : <input type="password" name="lpass" value="{_POST.lpass}"  /><br />
+<input type="hidden" name="challenge" id="challenge" />
 <input type="submit" name="submit" value="{n_submit}" />
 </form>
 <br />

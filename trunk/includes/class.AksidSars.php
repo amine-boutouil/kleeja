@@ -290,38 +290,38 @@ else
 } // نهاية for
 
 }    // نهاية التحقق من الملف
-else    // نهاية التحقق من الملف
-{        // نهاية التحقق من الملف
-$jadid=@mkdir($this->asarsi);
-$jadid2=@mkdir($this->asarsi.'/thumbs');
-if($jadid){  
+else  
+{      
+	$jadid=@mkdir($this->asarsi);
+	$jadid2=@mkdir($this->asarsi.'/thumbs');
+	if($jadid){  
 
-$this->errs[]=  "لقد تم انشاء مجلد جديد<br />";
+	$this->errs[]=  "لقد تم انشاء مجلد جديد<br />";
 
-$fo=@fopen($this->asarsi."/index.html","w"); 
-$fo2=@fopen($this->asarsi."/thumbs/index.html","w"); 
-$fw=@fwrite($fo,'<p>مرحبا بك</p>'); 
-$fw2=@fwrite($fo2,'<p>مرحبا بك</p>'); 
-$fi=@fopen($this->asarsi."/.htaccess","w");
-$fi2=@fopen($this->asarsi."/thumbs/.htaccess","w");
-$fy=@fwrite($fi,'<Files *>
-	Order Allow,Deny
-	Deny from All
-</Files>');
-$fy2=@fwrite($fi2,'<Files ~ "\.(php*|s?p?x?i?html|cgi|asp|php3|php4|pl|htm)$">   
-  deny from all   
-</Files>   
-php_flag engine off');
-$chmod=@chmod($this->asarsi,0777);
-$chmod2=@chmod($this->asarsi.'/thumbs/',0777);
+	$fo=@fopen($this->asarsi."/index.html","w"); 
+	$fo2=@fopen($this->asarsi."/thumbs/index.html","w"); 
+	$fw=@fwrite($fo,'<p>مرحبا بك</p>'); 
+	$fw2=@fwrite($fo2,'<p>مرحبا بك</p>'); 
+	$fi=@fopen($this->asarsi."/.htaccess","w");
+	$fi2=@fopen($this->asarsi."/thumbs/.htaccess","w");
+	$fy=@fwrite($fi,'<Files *>
+		Order Allow,Deny
+		Deny from All
+	</Files>');
+	$fy2=@fwrite($fi2,'<Files ~ "\.(php*|s?p?x?i?html|cgi|asp|php3|php4|pl|htm)$">   
+	  deny from all   
+	</Files>   
+	php_flag engine off');
+	$chmod=@chmod($this->asarsi,0777);
+	$chmod2=@chmod($this->asarsi.'/thumbs/',0777);
 
-if(!$chmod){ //if(!$chmod){
-$this->errs[]=   " لم يتم اعطاء التصريح للمجلد ";
-} //if(!$chmod){
+	if(!$chmod){
+	$this->errs[]=   " لم يتم اعطاء التصريح للمجلد ";
+	} //if !chmod
 }
 else
 {
-$this->errs[]=  " <font color=red><b>ضروري انشاء مجلد<b></font>".$this->asarsi."  لم يتم انشاء مجلد جديد لاسباب لا اعرفها<br />";
+	$this->errs[]=  " <font color=red><b>ضروري انشاء مجلد<b></font>".$this->asarsi."  لم يتم انشاء مجلد جديد لاسباب لا اعرفها<br />";
 }      // نهاية التحقق من انشاء ممجلد جديد
 
 

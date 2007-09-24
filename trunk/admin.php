@@ -65,6 +65,7 @@
 		$n_user_system = "نظام العضويات";
 		$us_normal = "عادي";
 		$us_phpbb = "مربوط phpbb";
+		$us_mysbb = "مربوط mysmartbb";
 		$us_vb = "مربوط vb";
 		$n_register = "فتح التسجيل ";
 		$n_total_size = "أقصى حجم كلي ميقا";
@@ -104,7 +105,7 @@
 		else {$none_decode = true; }
 		//..
 		if ($con[user_system] == "1" ) {$user_system_normal = true; }elseif ($con[user_system] == "2" ) {$user_system_phpbb = true;}
-		elseif($con[user_system] == "3" ) {$user_system_vb = true; }
+		elseif($con[user_system] == "3" ) {$user_system_vb = true; }elseif($con[user_system] == "4" ) {$user_system_mysbb = true; }
 		//..
 		if ($con[statfooter] == "1" ) {$ystatfooter = true; }else {$nstatfooter = true;}
 		//..
@@ -662,6 +663,7 @@
 		$n_mysql_version = "إصدار mysql";
 		$n_max_execution_time = "max_execution_time";
 		$n_upload_max_filesize = "upload_max_filesize";
+		$n_post_max_size = "post_max_size";
 		
 		//data 
 		$files_number = $stat_files ;
@@ -671,7 +673,7 @@
 		$mysql_version = 'MYSQL '.$SQL->mysql_version;
 		$max_execution_time =  ini_get('max_execution_time');
 		$upload_max_filesize = ini_get('upload_max_filesize');
-		
+		$post_max_size = ini_get('post_max_size');
 		//size board by percent
 		$per1 = round($stat_sizes / ($config[total_size] *1048576) ,2) *100;
 		

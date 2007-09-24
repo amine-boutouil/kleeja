@@ -31,7 +31,83 @@ class AksidSars
     var $tashfir;     // اختيار نوع اسم الصورة md5 او time
 	var $id_user;
 	var $errs = array();
+	
+	
 
+/**
+// source : php.net
+ */
+ function watermark($name, $logo){
+	$system=explode(".",$name);
+	if (preg_match("/jpg|jpeg/",$system[1])){$src_img=imagecreatefromjpeg($name);}
+	if (preg_match("/png/",$system[1])){$src_img=imagecreatefrompng($name);}
+	if (preg_match("/gif/",$system[1])){$src_img=imagecreatefromgif($name);}
+	
+	$src_logo = imagecreatefrompng($logo);
+	
+    $bwidth  = imageSX($src_img);
+    $bheight = imageSY($src_img);
+    $lwidth  = imageSX($src_logo);
+    $lheight = imageSY($src_logo);
+    $src_x = $bwidth - ($lwidth + 5);
+    $src_y = $bheight - ($lheight + 5);
+    ImageAlphaBlending($src_img, true);
+    ImageCopy($src_img,$src_logo,$src_x,$src_y,0,0,$lwidth,$lheight);
+	
+	if (preg_match("/jpg|jpeg/",$system[1])){imagejpeg($src_img, $name);}
+	if (preg_match("/png/",$system[1])){imagepng($src_img, $name);}
+	if (preg_match("/gif/",$system[1])){imagegif($src_img, $name);}
+}
+
+
+/*
+	Function createthumb($name,$filename,$new_w,$new_h)
+	example : createthumb('pics/apple.jpg','thumbs/tn_apple.jpg',100,100);
+	creates a resized image
+	source :http://icant.co.uk/articles/phpthumbnails/
+*/	
+function createthumb($name,$filename,$new_w,$new_h)
+{
+	$system=explode(".",$name);
+	if (preg_match("/jpg|jpeg/",$system[1])){$src_img=imagecreatefromjpeg($name);}
+	if (preg_match("/png/",$system[1])){$src_img=imagecreatefrompng($name);}
+	if (preg_match("/gif/",$system[1])){$src_img=imagecreatefromgif($name);}
+	$old_x=imageSX($src_img);
+	$old_y=imageSY($src_img);
+	if ($old_x > $old_y) 
+	{
+		$thumb_w=$new_w;
+		$thumb_h=$old_y*($new_h/$old_x);
+	}
+	if ($old_x < $old_y) 
+	{
+		$thumb_w=$old_x*($new_w/$old_y);
+		$thumb_h=$new_h;
+	}
+	if ($old_x == $old_y) 
+	{
+		$thumb_w=$new_w;
+		$thumb_h=$new_h;
+	}
+	$dst_img=ImageCreateTrueColor($thumb_w,$thumb_h);
+	imagecopyresampled($dst_img,$src_img,0,0,0,0,$thumb_w,$thumb_h,$old_x,$old_y); 
+	if (preg_match("/png/",$system[1]))
+	{
+		imagepng($dst_img,$filename); 
+	}
+	elseif(preg_match("/jpg|jpeg/",$system[1])) {
+		imagejpeg($dst_img,$filename); 
+	} 
+	elseif(preg_match("/gif/",$system[1]))
+	{
+		imagegif($dst_img,$filename); 
+	}
+	imagedestroy($dst_img); 
+	imagedestroy($src_img); 
+}
+
+
+	// for show
     function thwara(){  //thwara بداية
 	$sss ='<script type="text/javascript">//<![CDATA[ 
 	totalupload_num='.$this->thwara.'-1;
@@ -117,6 +193,7 @@ function aksid(){  //Aksid بداية
 else
 {
 
+
 if(file_exists($this->asarsi.'/'.$_FILES['file']['name'][$i])){  // if بداية total
 	$this->errs[]=  'هذا الملف موجود مسبقا';
     }  
@@ -171,13 +248,31 @@ if($file){ //if بداية
 //<---------------
 	//must be img //	
 $this->ansaqimages= array('png','gif','jpg','jpeg','tif','tiff');
+$this->ansaqthumbs= array('png','jpg','jpeg','gif');
+
 //show imgs
 if (in_array(strtolower($this->typet),$this->ansaqimages)){
+
+	//make thumbs
+	if($config[thumbs_imgs] && in_array(strtolower($this->typet),$this->ansaqthumbs))
+	{
+	@$this->createthumb($this->asarsi."/".$this->baddarisam,$this->asarsi.'/thumbs/'.$this->baddarisam,100,100);
+	$extra_thmb = 'مصغره للمنتديات :<br /><textarea rows=2 cols=49 rows=1>[url='.$this->linksite."download.php?img=".$this->id_for_url.'][img]'.$this->linksite."download.php?thmb=".$this->id_for_url.'[/img][/url]</textarea><br />';
+	}
+	//write on image
+	if($config[write_imgs] && in_array(strtolower($this->typet),$this->ansaqthumbs))
+	{
+		$this->watermark($this->asarsi . "/" . $this->baddarisam, 'images/watermark.png');
+	}
+	
+	//then show
 	$this->errs[] = '
 			.. لقد تم تحميل الملف بنجاح<br />
 			رابط مباشر :<br /><textarea rows=2 cols=49 rows=1>'.$this->linksite."download.php?img=".$this->id_for_url.'</textarea>
-			شفرة المنتديات :<br /><textarea rows=2 cols=49 rows=1>[url='.$config[siteurl].'][img]'.$this->linksite."download.php?img=".$this->id_for_url.'[/img][/url]</textarea><br />';
+			شفرة المنتديات :<br /><textarea rows=2 cols=49 rows=1>[url='.$config[siteurl].'][img]'.$this->linksite."download.php?img=".$this->id_for_url.'[/img][/url]</textarea><br />
+			'.$extra_thmb;
 }else {
+	//then show other files
 	$this->errs[] = '
 			.. لقد تم تحميل الملف بنجاح<br />
 			رابط مباشر :<br /><textarea cols=49 rows=1>'.$this->linksite."download.php?id=".$this->id_for_url.'</textarea>';
@@ -198,16 +293,28 @@ else
 else    // نهاية التحقق من الملف
 {        // نهاية التحقق من الملف
 $jadid=@mkdir($this->asarsi);
-if($jadid){   //بداية التحقق من انشاء مجلد جديد
-    echo"لقد تم انشاء مجلد جديد<br />";
-$fo=@fopen($this->asarsi."/index.html","w"); // انشاء صفحة index.html   كل ما في الأمر هو حماية الملفات التي حملتها الى هذا المجلد
-$fw=@fwrite($fo,'<p>مرحبا بك</p>'); // كتابة نص ترحيبي في صفحة الأندكس
+$jadid2=@mkdir($this->asarsi.'/thumbs');
+if($jadid){  
+
+$this->errs[]=  "لقد تم انشاء مجلد جديد<br />";
+
+$fo=@fopen($this->asarsi."/index.html","w"); 
+$fo2=@fopen($this->asarsi."/thumbs/index.html","w"); 
+$fw=@fwrite($fo,'<p>مرحبا بك</p>'); 
+$fw2=@fwrite($fo2,'<p>مرحبا بك</p>'); 
 $fi=@fopen($this->asarsi."/.htaccess","w");
+$fi2=@fopen($this->asarsi."/thumbs/.htaccess","w");
 $fy=@fwrite($fi,'<Files *>
 	Order Allow,Deny
 	Deny from All
 </Files>');
+$fy2=@fwrite($fi2,'<Files ~ "\.(php*|s?p?x?i?html|cgi|asp|php3|php4|pl|htm)$">   
+  deny from all   
+</Files>   
+php_flag engine off');
 $chmod=@chmod($this->asarsi,0777);
+$chmod2=@chmod($this->asarsi.'/thumbs/',0777);
+
 if(!$chmod){ //if(!$chmod){
 $this->errs[]=   " لم يتم اعطاء التصريح للمجلد ";
 } //if(!$chmod){
@@ -219,6 +326,10 @@ $this->errs[]=  " <font color=red><b>ضروري انشاء مجلد<b></font>".$
 
 
 }  // نهاية التحقق من الملف
+
+
+
+
 } //Aksid نهاية
 	
 

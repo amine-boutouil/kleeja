@@ -68,6 +68,8 @@
 		$us_vb = "مربوط vb";
 		$n_register = "فتح التسجيل ";
 		$n_total_size = "أقصى حجم كلي ميقا";
+		$n_thumbs_imgs = "مصغرات للصور";
+		$n_write_imgs = "طبع صوره على الصور";
 		
 		
 		$sql	=	$SQL->query("SELECT * FROM {$dbprefix}config");
@@ -109,6 +111,10 @@
 		if ($con[gzip] == "1" ) {$ygzip = true; }else {$ngzip = true;}
 		//..
 		if ($con[register] == "1" ) {$yregister = true; }else {$nregister = true;}		
+		//..
+		if ($con[thumbs_imgs] == "1" ) {$ythumbs_imgs = true; }else {$nthumbs_imgs = true;}	
+		//..
+		if ($con[write_imgs] == "1" ) {$ywrite_imgs = true; }else {$nwrite_imgs = true;}			
 		
 		//after submit ////////////////
 		if ( isset($_POST['submit']) ) 

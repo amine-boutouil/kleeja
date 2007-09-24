@@ -54,7 +54,7 @@ class usrcp {
 					$_SESSION['USER_NAME']	=	$row['name'];
 					$_SESSION['USER_MAIL']	=	$row['mail'];
 					$_SESSION['USER_ADMIN']	=	$row['admin'];
-					$_SESSION['USER_SESS']	=	$row['session_id'];
+					$_SESSION['USER_SESS']	=	session_id();
 					
 					//update session_id
 					$id 		= (int) 	$row['id'];

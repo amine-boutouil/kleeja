@@ -33,6 +33,20 @@
 		<td><label><input type="text" id="filesnum" name="filesnum" value="{con.filesnum}" size="10"></label></td>
 	</tr>
 	<tr>
+		<td><label for="thumbs_imgs">{n_thumbs_imgs}</label></td>
+		<td>
+		<label>{n_yes}<input type="radio" id="thumbs_imgs" name="thumbs_imgs" value="1"  <IF NAME="ythumbs_imgs"> checked="checked"</IF>></label>
+		<label>{n_no}<input type="radio" id="thumbs_imgs" name="thumbs_imgs" value="0"  <IF NAME="nthumbs_imgs"> checked="checked"</IF>></label>
+		</td>
+	</tr>
+	<tr>
+		<td><label for="write_imgs">{n_write_imgs}</label></td>
+		<td>
+		<label>{n_yes}<input type="radio" id="write_imgs" name="write_imgs" value="1"  <IF NAME="ywrite_imgs"> checked="checked"</IF>></label>
+		<label>{n_no}<input type="radio" id="write_imgs" name="write_imgs" value="0"  <IF NAME="nwrite_imgs"> checked="checked"</IF>></label>
+		</td>
+	</tr>	
+	<tr>
 		<td><label for="siteclose">{n_siteclose}</label></td>
 		<td>
 		<label>{n_yes}<input type="radio" id="siteclose" name="siteclose" value="1"  <IF NAME="yclose"> checked="checked"</IF>></label>

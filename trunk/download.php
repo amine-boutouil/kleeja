@@ -105,6 +105,44 @@
 	header("Location: ./$f/$n");
 	}
 	}
+	else if( isset($_GET['thmb']) ) // thumb
+	{
+	//for safe
+	$thmb = intval ($_GET['thmb']);
+	
+	//updates ups ..
+	$sql	=	$SQL->query("SELECT name,folder,type FROM {$dbprefix}files where id=$thmb");
+	
+	if ($SQL->num_rows($sql) != 0  ) 
+	{
+		while($row=$SQL->fetch_array($sql)){
+		$n =  $row[name];
+		$f =  $row[folder];
+		$t =  $row[type];
+		}
+	}
+	else
+	{
+		$text = 'لم نتمكن من إيجاد الصوره ..!!';
+		$sty = 'err.html';	
+	}
+	$SQL->freeresult($sql);   
+
+
+	//must be img //	
+	$imgs = array('png','jpg','jpeg','gif');
+	if (!in_array($t,$imgs) )
+	{
+		$text = 'هذا النوع من الملفات لا يملك صوره مصغره!!<br> توجه إلى <a href="./download.php?id=$img"></a>';
+		$sty = 'err.html';	
+	}
+	else
+	{
+	//show img
+	header("Location: ./$f/thumbs/$n");
+	}
+	
+	}
 	else 
 	{
 	die ('<STRONG style="color:red">مكان خاطئ</STRONG>');

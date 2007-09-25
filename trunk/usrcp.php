@@ -217,53 +217,51 @@
 			exit();
 			}
 
-			$stylee = "profile.html";
-			$titlee = $lang['PROFILE'];
-			$N_EDIT_DATA = $lang['EDIT_U_DATA'];
-			$N_EDIT_FILES = $lang['EDIT_U_FILES'];
-			$action = "usrcp.php?go=profile";
-			$n_submit_data = $lang['EDIT_U_DATA'];
-			$n_submit_files = $lang['EDIT_U_FILES'];
-			$L_NAME = $lang['USERNAME'];
-			$L_PASS = $lang['PASS_ON_CHANGE'];
-			$L_PASS_OLD = $lang['OLD'];
-			$L_PASS_NEW = $lang['NEW'];
-			$L_PASS_NEW2 = $lang['NEW_AGAIN'];
-			$L_MAIL = $lang['EMAIL'];
-			$name = $usrcp->name(); //<<
-			$mail = $usrcp->mail(); // <<
-			$data_forum = ($config[user_system]==1 ) ? TRUE : FALSE ;
-			$goto_forum = '<a href="' . $forum_path . '">' . $lang['PFILE_4_FORUM'] . '</a>';
+			$stylee 		= "profile.html";
+			$titlee 		= $lang['PROFILE'];
+			$N_EDIT_DATA 	= $lang['EDIT_U_DATA'];
+			$N_EDIT_FILES 	= $lang['EDIT_U_FILES'];
+			$action 		= "usrcp.php?go=profile";
+			$n_submit_data 	= $lang['EDIT_U_DATA'];
+			$n_submit_files = $lang['DEL_SELECTED'];
+			$L_NAME 		= $lang['USERNAME'];
+			$L_PASS 		= $lang['PASS_ON_CHANGE'];
+			$L_PASS_OLD 	= $lang['OLD'];
+			$L_PASS_NEW 	= $lang['NEW'];
+			$L_PASS_NEW2 	= $lang['NEW_AGAIN'];
+			$L_MAIL 		= $lang['EMAIL'];
+			$name 			= $usrcp->name(); //<<
+			$mail 			= $usrcp->mail(); // <<
+			$data_forum 	= ($config[user_system]==1 ) ? TRUE : FALSE ;
+			$goto_forum 	= '<a href="' . $forum_path . '">' . $lang['PFILE_4_FORUM'] . '</a>';
 			
 			
 			//te get files and update them !!
-			$sql	=	$SQL->query("SELECT id,name,size,type,time,folder FROM `{$dbprefix}files` WHERE user='".$usrcp->id()."' ORDER BY `id` DESC");
+			$sql	=	$SQL->query("SELECT id,name,folder FROM `{$dbprefix}files` WHERE user='".$usrcp->id()."' ORDER BY `id` DESC");
 			while($row=$SQL->fetch_array($sql)){
 			//make new lovely arrays !!
-				$ids[$row['id']]=$row['id'];
-				$name[$row['id']]=$row['name'];
-				$size[$row['id']]=$row['size'];
-				$time[$row['id']]=$row['time'];
-				$type[$row['id']]=$row['type'];
-				$folder[$row['id']]=$row['folder'];
+				$ids[$row['id']]	=$row['id'];
+				$name[$row['id']]	=$row['name'];
+				$folder[$row['id']]	=$row['folder'];
 				
 				//
 				$del[$row[id]] = ( isset($_POST["del_".$row[id]]) ) ? $_POST["del_".$row[id]] : "";
 
-				if ($del[$row[id]])
-				{
+
 					//when submit !!
 					if ( isset($_POST['submit_files']) ) {
-					$update = $SQL->query("DELETE FROM `{$dbprefix}files` WHERE id='" . intval($ids[$row[id]]) . "' ");
-					if (!$update) {die($lang['CANT_UPDATE_SQL']);}
-					
-					//delete from folder .. 
-					@unlink ( $folder[$row['id']] . "/" . $name[$row['id']] );
-					//delete thumb
-					if (is_file($folder[$row['id']] . "/thumbs/" . $name[$row['id']] ))
-					{@unlink ( $folder[$row['id']] . "/thumbs/" . $name[$row['id']] );}
-					//delete thumb
-					}
+						if ($del[$row[id]])
+						{
+							$update = $SQL->query("DELETE FROM `{$dbprefix}files` WHERE id='" . intval($ids[$row[id]]) . "' ");
+							if (!$update) {die($lang['CANT_UPDATE_SQL']);}
+							
+							//delete from folder .. 
+							@unlink ( $folder[$row['id']] . "/" . $name[$row['id']] );
+							//delete thumb
+							if (is_file($folder[$row['id']] . "/thumbs/" . $name[$row['id']] ))
+							{@unlink ( $folder[$row['id']] . "/thumbs/" . $name[$row['id']] );}
+							//delete thumb
+						}
 				}
 			}
 			$SQL->freeresult($sql);
@@ -320,10 +318,7 @@
 		foreach($ids as $i)
 		{
 		$arr[] = array( id =>$i,
-						name =>"<a href=\"./download.php?id={$i}\" target=\"blank\">".$name[$i]."</a>",
-						size =>Customfile_size($size[$i]),
-						time => date("d-m-Y H:a", $time[$i]),
-						type =>$type[$i],
+						name =>"<a href=\"./download.php?id={$i}\" target=\"blank\">".$name[$i]."</a>"
 						);
 		}
 		if (!is_array($arr)){$arr = array();}

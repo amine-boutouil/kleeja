@@ -2,19 +2,20 @@
 function show_msg (text , id)
 {
 var iee = text;
-	iee += "<br /><textarea name='v_" + id + "' cols='50' rows='4'></textarea>";
-	iee += "<input class='button2' name='submit' type='submit' value='{n_reply}' />";	
+	iee += "<br /><form method='post' action='{action}'><textarea name='v_[" + id + "]' cols='50' rows='4'></textarea>";
+	iee += "<input class='button2' name='reply_submit' type='submit' value='{n_reply}' /></form>";	
 document.getElementById('mail_here').innerHTML= iee;
 
 }
 </script>
 <div class="middle">
-<form method="post" action="{action}">
-
 	<fieldset>
 		<legend>{n_text}</legend>
 <div id="mail_here">{n_mouse}</div>
 	</fieldset>
+<form method="post" action="{action}">
+
+
 	
 <form method="post" action="{action}">
 	<fieldset>
@@ -31,7 +32,7 @@ document.getElementById('mail_here').innerHTML= iee;
 <IF NAME="arr">
 <LOOP NAME="arr" LIMIT="15">
 	<tr style="background-color:#F5F5F5">
-		<td><a title="{n_mail}:{{mail}}" onclick="javascript:show_msg('{{mail}} :<br />{{text}}',{{id}});">{{name}}</a></td>
+		<td><a title="{n_mail}:{{mail}}" onclick="javascript:show_msg( '{{mail}} :<br />{{text}}', {{id}} );">{{name}}</a></td>
 		<td><a href="{{url}}">{n_click}<a/></td>
 		<td>{{time}}</td>
 		<td>{{ip}}</td>

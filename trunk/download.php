@@ -29,35 +29,35 @@
 	$SQL->freeresult($sql);   
 	
 	// SOME WORDS FOR TEMPLATE
-	$file_found = "تم إيجاد الملف .. ";
-	$wait  = "إنتظر رجاءاً ..";
-	$click = "اضغط هنا لتنزيل الملف";
-	$err_jv = "لا بد من تفعيل الجافا سكربت في  متصفحك !!";
-	$url_file = "./go.php?go=down&amp;n=$name&amp;f=$folder&amp;i=$id";
-	$seconds_w = $config[sec_down];
-	$time = date("d-m-Y H:a", $time);
-	$size = Customfile_size($size);
-	$information = "معلومات عن الملف ";
-	$L_FILE = "إسم الملف";
-	$L_SIZE= "حجم الملف";
-	$L_TYPE= "نوع الملف";
-	$L_TIME= "تم رفعه في";
-	$L_UPS= "عدد التحميلات";
-	$L_REPORT = "تبليغ : ملف مخالف للقوانين";
-	$REPORT = "./go.php?go=report&amp;id=$id";
+	$file_found = $lang['FILE_FOUNDED'];
+	$wait  		= $lang['WAIT'];
+	$click 		= $lang['CLICK_DOWN'];
+	$err_jv 	= $lang['JS_MUST_ON'];
+	$url_file 	= "./go.php?go=down&amp;n=$name&amp;f=$folder&amp;i=$id";
+	$seconds_w 	= $config[sec_down];
+	$time 		= date("d-m-Y H:a", $time);
+	$size 		= Customfile_size($size);
+	$information= $lang['FILE_INFO'];
+	$L_FILE 	= $lang['FILENAME'];
+	$L_SIZE		= $lang['FILESIZE'];
+	$L_TYPE		= $lang['FILETYPE'];
+	$L_TIME		= $lang['FILEDATE'];
+	$L_UPS		= $lang['FILEUPS'];
+	$L_REPORT 	= $lang['FILEREPORT'];
+	$REPORT 	= "./go.php?go=report&amp;id=$id";
 	
 	$sty = 'download.html';	
 
 	}
 	else
 	{
-		$text = 'لم نتمكن من إيجاد الملف ..!!';
+		$text = $lang['FILE_NO_FOUNDED'];
 		$sty = 'err.html';	
 	}
 	 // show style ...
 	 
 	//header
-	Saaheader("تحميل !");
+	Saaheader($lang['DOWNLAOD']);
  	//body	
 	print $tpl->display($sty);
 	//footer
@@ -82,7 +82,7 @@
 	}
 	else
 	{
-		$text = 'لم نتمكن من إيجاد الصوره ..!!';
+		$text =	$lang['IMG_NO_FOUNDED'];
 		$sty = 'err.html';	
 	}
 	$SQL->freeresult($sql);   
@@ -90,13 +90,13 @@
 	$update = $SQL->query("UPDATE {$dbprefix}files SET 						
 							uploads=uploads+1
                             WHERE id='$img' ");
-	if (!$update){ die("لم يتم تحديث عدد التحميلات !!!!");}
+	if (!$update){ die(	$lang['CANT_UPDATE_SQL']);}
 
 	//must be img //	
 	$imgs = array('png','gif','jpg','jpeg','tif','tiff');
 	if (!in_array($t,$imgs) )
 	{
-		$text = 'ليست صوره  ..هذا ملف!!<br> توجه إلى <a href="./download.php?id=$img"></a>';
+		$text = $lang['NOT_IMG'] . '<br /><a href="./download.php?id=$img">' . $lang['CLICK_DOWN'] . '</a>';
 		$sty = 'err.html';	
 	}
 	else
@@ -123,7 +123,7 @@
 	}
 	else
 	{
-		$text = 'لم نتمكن من إيجاد الصوره ..!!';
+		$text = $lang['IMG_NO_FOUNDED'];
 		$sty = 'err.html';	
 	}
 	$SQL->freeresult($sql);   
@@ -133,9 +133,7 @@
 	$imgs = array('png','jpg','jpeg','gif');
 	if (!in_array($t,$imgs) )
 	{
-		$text = 'هذا النوع من الملفات لا يملك صوره مصغره!!<br> توجه إلى <a href="./download.php?id=$img"></a>';
-		$sty = 'err.html';	
-	}
+	header("Location: ./$f/$n");} // no thumbs .. 
 	else
 	{
 	//show img
@@ -145,7 +143,7 @@
 	}
 	else 
 	{
-	die ('<STRONG style="color:red">مكان خاطئ</STRONG>');
+	die ('<STRONG style="color:red">' . $lang['ERROR_NAVIGATATION'] . '</STRONG>');
 	}
 	
 	

@@ -122,19 +122,19 @@
 	
 	//some function .. for disply .. 
 	function Saaheader($title) {
-	global $tpl,$usrcp;
+	global $tpl,$usrcp,$lang;
 	
 	
 	//login - logout-profile...
-	if ( !$usrcp->name() ) { $login_name= "دخول";  $login_url= "usrcp.php?go=login"; 
-	$usrcp_name = "تسجيل عضويه";$usrcp_url = "usrcp.php?go=register";
+	if ( !$usrcp->name() ) { $login_name= $lang['LOGIN'];  $login_url= "usrcp.php?go=login"; 
+	$usrcp_name = $lang['REGISTER'];$usrcp_url = "usrcp.php?go=register";
 	}
-	else{ $login_name= "خروج"."[".$usrcp->name()."]";  $login_url= "usrcp.php?go=logout"; 
-	$usrcp_name = "ملفك ..";$usrcp_url = "usrcp.php?go=profile";
+	else{ $login_name= $lang['LOGOUT']."[".$usrcp->name()."]";  $login_url= "usrcp.php?go=logout"; 
+	$usrcp_name = $lang['PROFILE'];$usrcp_url = "usrcp.php?go=profile";
 	}
 	
 	$vars = array (0=>"navigation",1=>"index_name",2=>"guide_name",3=>"guide_url",4=>"rules_name",5=>"rules_url",6=>"call_name",7=>"call_url",8=>"login_name",9=>"login_url",10=>"usrcp_name",11=>"usrcp_url");
-	$vars2 = array(0=>"إنتقل إلى",1=>"الرئيسيه",2=>"الملفات المسوحه",3=>"go.php?go=guide",4=>"الشروط",5=>"go.php?go=rules",6=>"إتصل بنا",7=>"go.php?go=call",8=>$login_name,9=>$login_url,10=>$usrcp_name,11=>$usrcp_url);
+	$vars2 = array(0=>$lang['JUMPTO'],1=>$lang['INDEX'],2=>$lang['GUIDE'],3=>"go.php?go=guide",4=>$lang['RULES'],5=>"go.php?go=rules",6=>$lang['CALL'],7=>"go.php?go=call",8=>$login_name,9=>$login_url,10=>$usrcp_name,11=>$usrcp_url);
 	
 	//assign variables 
 	for($i=0;$i<count($vars);$i++){$tpl->assign($vars[$i],$vars2[$i]);}
@@ -147,7 +147,7 @@
 
 	
 	function Saafooter() {
-	global $tpl,$SQL,$starttm,$config,$usrcp;
+	global $tpl,$SQL,$starttm,$config,$usrcp,$lang;
 	//show stats .. 
 	if ($config[statfooter]) {
 	if ($do_gzip_compress) { $gzip = "Enabled"; } else { $gzip = "Disabled"; }
@@ -161,7 +161,7 @@
 	
 	if ( $usrcp->admin() )
 	{
-	$admin_page = '<br /><a href="./admin.php">مركز التحكم</a><br />';
+	$admin_page = '<br /><a href="./admin.php">' . $lang['ADMINCP'] .  '</a><br />';
 	$tpl->assign("admin_page",$admin_page);
 	}
 	//show footer

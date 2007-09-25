@@ -16,19 +16,20 @@
 	switch ($_GET['go']) { 	
 	case "guide" : //=============================[guide]
 	$stylee = "guide.html";
-	$titlee = "دليل الملفات";
-	$text_msg_g = 'الإمتدادات المسموحه للزوار وامتداداتها:';
-	$text_msg_u = 'الإمتدادات المسموحه للأعضاء وامتداداتها:';
-	$L_EXT	= 'الإمتداد';
-	$L_SIZE = 'الحجم';
+	$titlee = $lang['GUIDE'];
+	$text_msg_g = $lang['GUIDE_VISITORS'];
+	$text_msg_u = $lang['GUIDE_USERS'];
+	$L_EXT	= $lang['EXT'];
+	$L_SIZE = $lang['SIZE'];
 	//make it loop
 	foreach($g_exts as $s )
 	{
-	$gggg[] = array( 'ext' => $s,
-					'num' => Customfile_size($g_sizes[$s])
-					
-	);
+		$gggg[] = array( 'ext' => $s,
+						'num' => Customfile_size($g_sizes[$s])	
+		);
+	
 	}
+	
 	if (!is_array($gggg)){$gggg = array();}
 	
 	//make it loop
@@ -56,15 +57,15 @@
 	if ( !isset($_POST['submit']) ) 
 	{
 	$stylee = "report.html";
-	$titlee = "تبليغ ..";
+	$titlee = $lang['REPORT'];
 	$url_id = $config[siteurl]."download.php?id=".intval($_GET['id']);
 	$action = "./go.php?go=report";
-	$submit = "إرسال..";
-	$L_NAME = "الإسم";
-	$L_MAIL = "البريد";
-	$L_URL = "الرابط";
-	$L_TEXT = "السبب";
-	$L_CODE = "كود الأمان";
+	$submit = $lang['REPORT'];
+	$L_NAME = $lang['YOURNAME'];
+	$L_MAIL = $lang['EMAIL'];
+	$L_URL 	= $lang['URL'];
+	$L_TEXT = $lang['REASON'];
+	$L_CODE = $lang['VERTY_CODE'];
 	$code = $ch->rand();
 	$code_input = $ch->show();
 	$id_d = intval($_GET['id']);
@@ -72,7 +73,7 @@
 
 		// first 
 	if (!$_GET['id']) {
-			$text = 'لم تحدد مقال ..!!';
+			$text = $lang['NO_ID'];
 			$stylee = 'err.html';	
 	}
 		
@@ -83,23 +84,23 @@
 		if (empty($_POST['rname']) || empty($_POST['rmail']) || empty($_POST['rurl']) )
 		{
 			
-			$text = 'هناك حقول ناقصه ..!!';
+			$text = $lang['EMPTY_FIELDS'];
 			$stylee = 'err.html';	
 
 		}
 		else if (!eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$", trim($_POST['rmail'])))
 		{
-			$text = 'بريد خاطئ ..!!';
+			$text = $lang['WRONG_EMAIL'];
 			$stylee = 'err.html';	
 		}
 		else if (strlen($_POST['rtext']) > 300 )
 		{
-			$text = 'رجاءاً .. حقل السبب لا يمكن ملأه بأكثر من 300 حرف ..!!';
+			$text = $lang['NO_ME300RES'];
 			$stylee = 'err.html';	
 		}
 		else if ( !$ch->result($_SESSION['ocheck']) )
 		{
-			$text = 'كود الأمان خاطئ ..!!';
+			$text = $lang['WRONG_VERTY_CODE'];
 			$stylee = 'err.html';	
 		}
 		else 
@@ -130,22 +131,22 @@
 				
 				
 				if (!$insert) {
-				$text =  'خطأ .. لايمكن إدخال المعلومات لقاعدة البيانات!';
+				$text =  $lang['CANT_INSERT_SQL'];
 				$stylee = 'err.html';	
 				}	
 				else
 				{
-				$text = 'تم التبليغ . شكراً لإهتمامك  ';
+				$text = $lang['THNX_REPORTED'];
 				$stylee = 'info.html';	
 				}
 				
-				if (!$update){ die("لم يتم تحديث عدد التقارير!!!!");}
+				if (!$update){ die($lang['CANT_UPDATE_SQL']);}
 		}
 	}
 	break; //=================================================
 	case "rules" : //=============================[rules]
 	$stylee = "rules.html";
-	$titlee = "شروط المركز";
+	$titlee = $lang['RULES'];
 	
 	//get rules from txt 
 	$filename = "rules.txt";
@@ -158,9 +159,9 @@
 	}
 	else
 	{
-	$contents = "لا يوجد قوانين حالياً ..";
+	$contents = $lang['NO_RULES_NOW'];
 	}
-	$text_msg = 'هذه هي شروط مركز التحميل ';
+	$text_msg = $lang['E_RULES'];
 	
 	
 	break; //=================================================
@@ -177,13 +178,13 @@
 	if ( !isset($_POST['submit']) ) 
 	{
 	$stylee = "call.html";
-	$titlee = "إتصل بنا";
+	$titlee = $lang['CALL'];
 	$action = "./go.php?go=call";
-	$submit = "إرسال..";
-	$L_NAME = "الإسم";
-	$L_MAIL = "البريد";
-	$L_TEXT = "النص";
-	$L_CODE = "كود الأمان";
+	$submit = $lang['SEND'];
+	$L_NAME = $lang['YOURNAME'];
+	$L_MAIL = $lang['EMAIL'];
+	$L_TEXT = $lang['TEXT'];
+	$L_CODE = $lang['VERTY_CODE'];
 	$code = $ch->rand();
 	$code_input = $ch->show();
 	
@@ -194,23 +195,23 @@
 		if (empty($_POST['cname']) || empty($_POST['cmail']) || empty($_POST['ctext']) )
 		{
 			
-			$text = 'هناك حقول ناقصه ..!!';
+			$text = $lang['EMPTY_FIELDS'];
 			$stylee = 'err.html';	
 
 		}	
 		else if (!eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$", trim($_POST['cmail'])))
 		{
-			$text = 'بريد خاطئ ..!!';
+			$text = $lang['WRONG_EMAIL'];
 			$stylee = 'err.html';	
 		}
 		else if (strlen($_POST['ctext']) > 300 )
 		{
-			$text = 'رجاءاً .. حقل النص لا يمكن ملأه بأكثر من 300 حرف ..!!';
+			$text = $lang['NO_ME300TEXT'];
 			$stylee = 'err.html';	
 		}
 		else if ( !$ch->result($_SESSION['ocheck']) )
 		{
-			$text = 'كود الأمان خاطئ ..!!';
+			$text = $lang['WRONG_VERTY_CODE'];
 			$stylee = 'err.html';	
 		}
 		else 
@@ -232,12 +233,12 @@
 			$insert = $SQL->query($sql);
 
 			if (!$insert) {
-			$text =  'خطأ .. لايمكن إدخال المعلومات لقاعدة البيانات!';
+			$text = $lang['CANT_INSERT_SQL'];
 			$stylee = 'err.html';	
 			}	
 			else
 			{
-			$text = 'تم الإرسال. . سوف يتم الرد قريباً  ';
+			$text =$lang['THNX_CALLED'];
 			$stylee = 'info.html';	
 			}
 		}
@@ -262,7 +263,7 @@
 	$update = $SQL->query("UPDATE {$dbprefix}files SET 						
 							uploads=uploads+1
                             WHERE id='$id' ");
-	if (!$update){ die("لم يتم تحديث عدد التحميلات !!!!");}
+	if (!$update){ die($lang['CANT_UPDATE_SQL']);}
 
 	//for safe !!!
 	$n = saff($_GET[n]);
@@ -280,10 +281,10 @@
 	//stop .. check first .. 
 	if (!$config[del_url_file])
 	{
-			$text = "نأسف .هذه الخاصيه معطله من المدير";
+			$text = $lang['NO_DEL_F'];
 			$stylee = "info.html";
 			//header
-			Saaheader("حذف مباشر ..");
+			Saaheader($lang['E_DEL_F']);
 			//index
 			print $tpl->display($stylee);
 			//footer
@@ -297,7 +298,7 @@
 	
 	if (!$id || !$cd )
 	{
-			$text =  'خطأ .. في الرابط ..';
+			$text =  $lang['WRONG_URL'];
 			$stylee = 'err.html';	
 	}
 	else
@@ -305,7 +306,7 @@
 			$sql	=	$SQL->query("SELECT name,folder FROM `{$dbprefix}files` WHERE id='".$id."' AND code_del='" . $cd . "'");
 			
 			if ($SQL->num_rows($sql) == 0) {
-			$text =  'خطأ ..لايمكن حذف الملف .. ربما معلوماتك خاطئه او قد تم حذف مسبقاً';
+			$text =   $lang['CANT_DEL_F'];
 			$stylee = 'err.html';
 			}
 			else
@@ -317,11 +318,11 @@
 				{@unlink ( $row[folder] . "/thumbs/" . $row[name] );}
 				//delete thumb
 				$del = $SQL->query("DELETE FROM {$dbprefix}files WHERE 	id='" . $id . "' ");
-				if (!$del) {die("لم يتم الحذف ..من قاعدة البيانات!!");}
+				if (!$del) {die($lang['CANT_DELETE_SQL']);}$lang['CANT_DELETE_SQL'];
 				}
 				$SQL->freeresult($sql);
 				
-				$text = 'تم حذف الملف بنجاح';
+				$text = $lang['DELETE_SUCCESFUL'];
 				$stylee = 'info.html';	
 				
 			}
@@ -331,12 +332,10 @@
 	break; //=================================================
 	/*case "example" : //=============================[example]
 	$stylee = "example.html"; //>> style 
-	$titlee = "دليل الملفات"; // >> title
-	
-	
+	$titlee = $lang['EXAMPLE_TITLE'];  // >> title
 	break; //=================================================*/
 	default:
-	$text = "مكان خاطئ";
+	$text = $lang['ERROR_NAVIGATATION'];
 	$stylee = "err.html";
 	}#end switch
 	

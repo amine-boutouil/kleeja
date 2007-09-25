@@ -41,14 +41,14 @@ var $mysql_version;
 /***************/
                 function connect()
 				{
-                        $this->connect_id = @mysql_connect($this->host,$this->db_username,$this->db_password) or die($this->error_msg("لم يتمكن من الاتصال"));
+                        $this->connect_id = @mysql_connect($this->host,$this->db_username,$this->db_password) or die($this->error_msg("ERROR: CANT CONNECT"));
 						//version of mysql
 						$this->mysql_version = mysql_get_server_info($this->connect_id);
 				}
 /***************/
                 function selectdb()
 				{
-                        $this->select=@mysql_select_db($this->db_name) or die($this->error_msg("خطأ في اختيار قاعدة البيانات"));
+                        $this->select=@mysql_select_db($this->db_name) or die($this->error_msg("ERROR:IN SELECTION DATABASE .."));
 						if ($this->select) {if (mysql_version>='4.1.0') mysql_query("SET NAMES 'utf8'"); }
 			   }
 /***************/
@@ -62,7 +62,7 @@ var $mysql_version;
 				{
 						$this->query_num++;
 
-                        $this->result = @mysql_query($query, $this->connect_id) or die($this->error_msg("خطأ في الاستعلام"));
+                        $this->result = @mysql_query($query, $this->connect_id) or die($this->error_msg("ERROR : IN QUERY"));
 						
 						return $this->result;
 				}
@@ -121,15 +121,15 @@ var $mysql_version;
                           echo "<style>BODY{FONT-FAMILY:tahoma;FONT-SIZE:12px;}
 								textarea {color: #FF0000;background-color: #FFECEC;border-width: 1px;
 								border-color: #000000;border-style: solid;}</style>";
-                          echo "<html><head></head><title>خطأ في قواعد البيانات</title><body>";
+                          echo "<html><head></head><title>ERROR IM MYSQL</title><body>";
                           echo '<br /><div style="text-align:center;color:red;"><b>';
-                          echo '<textarea  readonly="readonly" style="width: 500px; height: 161px" dir="rtl">';
+                          echo '<textarea  readonly="readonly" style="width: 500px; height: 161px">';
 						  echo "
-المعذرة، هناك مشكلة في قواعد البيانات و سببها : $msg
+SORRY , THERE IS AN ERROR IN MYSQL , ERROR IS : $msg
 
 [$error_no : $error_msg]
 
-يرجى الإتصال بمدير الموقع !
+YOU MUST TELL MODERATOR BY THIS ERROR!
 							
 Script: SaaUp : By :Saanina
 </textarea>";

@@ -109,8 +109,10 @@ function createthumb($name,$filename,$new_w,$new_h)
 
 	// for show
     function thwara(){  //thwara بداية
+	global $lang;
+	
 	$sss ='<script type="text/javascript">//<![CDATA[ 
-	totalupload_num='.$this->thwara.'-1;
+	totalupload_num=' . $this->thwara . '-1;
 	function makeupload(){
 	upload_show_num=\'\';
 	uploaded=2;
@@ -125,23 +127,25 @@ function createthumb($name,$filename,$new_w,$new_h)
 	}
 	function plus ()
 	{
-	var num = '.$this->thwara.';
+	var num = ' . $this->thwara . ';
 	if (document.uploader.upload_num.value < num )
 	{
 	document.uploader.upload_num.value++;
 	}
 	else
 	{
-	alert(\'هذا آخر حد يمكنك تحميله !!\');
+	alert("' . $lang['MORE_F_FILES'] . '");
 	}
 	}
 	function minus ()
 	{
-	var num = '.$this->thwara.';
+	var num = ' . $this->thwara . ';
 	if (document.uploader.upload_num.value != 1 )
 	{
 	document.uploader.upload_num.value--;
 	}
+	
+
 
 	}
 	function form_submit() {
@@ -150,19 +154,25 @@ function createthumb($name,$filename,$new_w,$new_h)
 		load.style.display = \'block\';
 		load.src = \'images/loading.gif\';
 	}
-
+	function wdwdwd (){
+	var ch = document.getElementById("checkr");
+	var submitr = document.getElementById("submitr");
+	if ( ch.checked ){submitr.disabled = ""; }else{submitr.disabled = "disabled"; }
+	}
 //]]>>
 </script>
 	';
     $sss .= '<form name="uploader" action="'.$this->amchan.'" method="post"  encType="multipart/form-data"> ';
     $sss .= '<input type="file" name="file[]"><br><span id="upload_forum"></span>';
     $sss .= '<input name="mraupload" onclick="javascript:plus();makeupload();" type="button" value="+" /><input name="mreupload" onclick="javascript:minus();makeupload();" type="button" value="-" /><br>';	
-    $sss .= '<input type="submit" value="[ تحميل الملفات ]"  onClick="form_submit();"><input type="text" name="upload_num" value="1" size="1" /> </form>';
+	$sss .= '<input id="checkr" type="checkbox" onclick="wdwdwd();" />' . $lang['AGREE_RULES'];
+	$sss .= '<br /><input type="submit" id="submitr" value="' . $lang['DOWNLOAD_F'] . '"  onclick="form_submit();" disabled="disabled" /><input type="text" name="upload_num" value="1" size="1" /> </form>';
 	$sss .= '<div id="loadbox"><img src="images/loading.gif" id="loading"></div>';
 	return $sss;
 } //thwara نهاية
 function aksid(){  //Aksid بداية
-		global $SQL,$dbprefix,$config,$use_ftp,$ftp_server,$ftp_user,$ftp_pass;
+		global $SQL,$dbprefix,$config,$lang;
+		global $use_ftp,$ftp_server,$ftp_user,$ftp_pass;
 		
 	//new
 	if(file_exists($this->asarsi)){   //بداية التحقق من المجلد هل هو موجود ام لا
@@ -196,17 +206,17 @@ else
 
 
 if(file_exists($this->asarsi.'/'.$_FILES['file']['name'][$i])){  // if بداية total
-	$this->errs[]=  'هذا الملف موجود مسبقا';
+	$this->errs[]=  $lang['SAME_FILE_EXIST'];
     }  
 	elseif( preg_match ("#[\\\/\:\*\?\<\>\|\"]#", $this->baddarisam ) ){
-    $this->errs[]= 'اسم الملف غير يحوي أحرف غير مسموحه ['.$this->baddarisam.']';
+    $this->errs[]= $lang['WRONG_F_NAME'] . '['.$this->baddarisam.']';
     }
     elseif(!in_array(strtolower($this->typet),$this->ansaq)){
-    $this->errs[]= 'هذه الصيغة غير مدعومه ['.$this->typet.']';
+    $this->errs[]= $lang['FORBID_EXT'] . '['.$this->typet.']';
     }
 	elseif($this->sizes[strtolower($this->typet)] > 0 && $_FILES['file']['size'][$i] >= $this->sizes[strtolower($this->typet)])
 	{
-	$this->errs[]=  'الحجم للملف المختار يجب أن يكون أقل من '.$this->sizes[$this->typet].'';
+	$this->errs[]=  $lang['SIZE_F_BIG'] . ' ' . $this->sizes[$this->typet];
 	}
     else
     {
@@ -226,7 +236,7 @@ else // use ftp account
              
             // Check the connection  
             if ((!$conn_id) || (!$login_result)) {  
-                  $this->errs[]= "لا يمكن الاتصال بـ  $ftp_server"; 
+                  $this->errs[]= $lang['CANT_CON_FTP'] . $ftp_server; 
                 } 
             // Upload the file  
             $file = @ftp_put($conn_id, $this->asarsi."/".$this->baddarisam,$_FILES['file']['tmp_name'][$i], FTP_BINARY); 
@@ -253,7 +263,7 @@ if($file){ //if بداية
 				'$name','$size','$timeww','$folder','$type','$user','$code_del'
 				)");
 
-				if (!$insert) { $this->errs[]=  'خطأ .. لايمكن إدخال المعلومات لقاعدة البيانات!';}	
+				if (!$insert) { $this->errs[]=  $lang['CANT_INSERT_SQL'];}	
 				
 				$this->id_for_url =  $SQL->insert_id();
 				
@@ -263,13 +273,13 @@ if($file){ //if بداية
 				`sizes`=sizes+" . $size . ",
 				`last_file`='" . $folder ."/". $name . "'
 				");
-				if ( !$update1 ){ die("لم يتم تحديث الإحصائيات !!!!");}
+				if ( !$update1 ){ die($lang['CANT_UPDATE_SQL']);}
 				//calculate stats ..e
 //<---------------
 	//must be img //	
 $this->ansaqimages= array('png','gif','jpg','jpeg','tif','tiff');
 $this->ansaqthumbs= array('png','jpg','jpeg','gif');
-if ($config[del_url_file]){$extra_del = 'رابط للحذف :<br /><textarea rows=2 cols=49 rows=1>'.$this->linksite.'go.php?go=del&amp;id='.$this->id_for_url.'&amp;cd='.$code_del.'</textarea><br/>';}
+if ($config[del_url_file]){$extra_del = $lang['URL_F_DEL'] . ':<br /><textarea rows=2 cols=49 rows=1>'.$this->linksite.'go.php?go=del&amp;id='.$this->id_for_url.'&amp;cd='.$code_del.'</textarea><br/>';}
 
 
 //show imgs
@@ -279,7 +289,7 @@ if (in_array(strtolower($this->typet),$this->ansaqimages)){
 	if($config[thumbs_imgs] && in_array(strtolower($this->typet),$this->ansaqthumbs))
 	{
 	@$this->createthumb($this->asarsi."/".$this->baddarisam,$this->asarsi.'/thumbs/'.$this->baddarisam,100,100);
-	$extra_thmb = 'مصغره للمنتديات :<br /><textarea rows=2 cols=49 rows=1>[url='.$this->linksite."download.php?img=".$this->id_for_url.'][img]'.$this->linksite."download.php?thmb=".$this->id_for_url.'[/img][/url]</textarea><br />';
+	$extra_thmb = $lang['URL_F_THMB'] . ':<br /><textarea rows=2 cols=49 rows=1>[url='.$this->linksite."download.php?img=".$this->id_for_url.'][img]'.$this->linksite."download.php?thmb=".$this->id_for_url.'[/img][/url]</textarea><br />';
 	}
 	//write on image
 	if($config[write_imgs] && in_array(strtolower($this->typet),$this->ansaqthumbs))
@@ -288,23 +298,22 @@ if (in_array(strtolower($this->typet),$this->ansaqimages)){
 	}
 	
 	//then show
-	$this->errs[] = '
-			.. لقد تم تحميل الملف بنجاح<br />
-			رابط مباشر :<br /><textarea rows=2 cols=49 rows=1>'.$this->linksite."download.php?img=".$this->id_for_url.'</textarea>
-			شفرة المنتديات :<br /><textarea rows=2 cols=49 rows=1>[url='.$config[siteurl].'][img]'.$this->linksite."download.php?img=".$this->id_for_url.'[/img][/url]</textarea><br />
+	$this->errs[] = $lang['IMG_DOWNLAODED'] . '<br />
+			' . $lang['URL_F_IMG'] . ':<br /><textarea rows=2 cols=49 rows=1>'.$this->linksite."download.php?img=".$this->id_for_url.'</textarea>
+			' . $lang['URL_F_BBC'] . ':<br /><textarea rows=2 cols=49 rows=1>[url='.$config[siteurl].'][img]'.$this->linksite."download.php?img=".$this->id_for_url.'[/img][/url]</textarea><br />
 			'.$extra_thmb.$extra_del;
 }else {
 	//then show other files
-	$this->errs[] = '
-			.. لقد تم تحميل الملف بنجاح<br />
-			رابط مباشر :<br /><textarea cols=49 rows=1>'.$this->linksite."download.php?id=".$this->id_for_url.'</textarea>
+	$this->errs[] = $lang['FILE_DOWNLAODED'] . '<br />
+			' . $lang['URL_F_FILE'] . ':<br /><textarea cols=49 rows=1>'.$this->linksite."download.php?id=".$this->id_for_url.'</textarea>
+			' . $lang['URL_F_BBC'] . ':<br /><textarea rows=2 cols=49 rows=1>[url]'.$this->linksite."download.php?id=".$this->id_for_url.'[/url]</textarea><br />
 			'.$extra_del;
 }
 
 }
 else
 {
-	$this->errs[]=  'خطأ... لم يتم تحميل الملف  لاسباب غير معروفة';
+	$this->errs[]=  $lang['CANT_UPLAOD'];
 }   // if نهاية
 
 
@@ -319,12 +328,12 @@ else
 	$jadid2=@mkdir($this->asarsi.'/thumbs');
 	if($jadid){  
 
-	$this->errs[]=  "لقد تم انشاء مجلد جديد<br />";
+	$this->errs[]= $lang['NEW_DIR_CRT']; 
 
 	$fo=@fopen($this->asarsi."/index.html","w"); 
 	$fo2=@fopen($this->asarsi."/thumbs/index.html","w"); 
-	$fw=@fwrite($fo,'<p>مرحبا بك</p>'); 
-	$fw2=@fwrite($fo2,'<p>مرحبا بك</p>'); 
+	$fw=@fwrite($fo,'<p>KLEEJA ..</p>'); 
+	$fw2=@fwrite($fo2,'<p>KLEEJA ..</p>'); 
 	$fi=@fopen($this->asarsi."/.htaccess","w");
 	$fi2=@fopen($this->asarsi."/thumbs/.htaccess","w");
 	$fy=@fwrite($fi,'<Files *>
@@ -339,12 +348,12 @@ else
 	$chmod2=@chmod($this->asarsi.'/thumbs/',0777);
 
 	if(!$chmod){
-	$this->errs[]=   " لم يتم اعطاء التصريح للمجلد ";
+	$this->errs[]=   $lang['PR_DIR_CRT'];
 	} //if !chmod
 }
 else
 {
-	$this->errs[]=  " <font color=red><b>ضروري انشاء مجلد<b></font>".$this->asarsi."  لم يتم انشاء مجلد جديد لاسباب لا اعرفها<br />";
+	$this->errs[]= '"<font color=red><b>' . $lang['CANT_DIR_CRT'] . '<b></font>';
 }      // نهاية التحقق من انشاء ممجلد جديد
 
 

@@ -22,7 +22,7 @@
 	
 	//for security
 	if ( !$usrcp->admin() ) { 
-			$text = '<span style="color:red;">لست مديراً!!</span><br/><a href="usrcp.php?go=login">دخول</a>';
+			$text = '<span style="color:red;">' . $lang['U_NOT_ADMIN'] . '</span><br/><a href="usrcp.php?go=login">' . $lang['LOGIN'] . '</a>';
 			//header
 			print $tpl->display("header.html");
 			//index
@@ -39,39 +39,40 @@
 	switch ($_GET['cp']) { 
 		case "configs" ://===================================== [ CONFIGS]
 		//for style .. 
-		$stylee = "configs.html";
+		$stylee 	= "configs.html";
 		//words
-		$action = "admin.php?cp=configs";
-		$n_submit = "حفظ البيانات";
-		$n_yes = "نعم";
-		$n_no = "لا";
-		$n_none = "لا تغير اسم الملف";
-		$n_md5 = "تغيير مع دالة md5";
-		$n_time = "تغيير مع دالة time";
-		$n_sitename = "إسم المركز";
-		$n_sitemail = "بريد المركز";		
-		$n_siteurl	= "رابط المركز(مع /)";
-		$n_foldername = "إسم مجلد التحميل";
-		$n_prefixname = "بداية لاسم الملفات";
-		$n_filesnum = "عدد ملفات التحميل";
-		$n_siteclose = "إغلاق المركز";
-		$n_closemsg = "رسالة الإغلاق";
-		$n_decode = " تغيير إسم الملف";
-		$n_style = "ستايل المركز";
-		$n_sec_down = "الثواني قبل بدء التحميل";		
-		$n_statfooter = "إحصائيات الصفحه بالفوتر";
-		$n_gzip = "gzip مسرع";
-		$n_welcome_msg = "كلمة الترحيب";
-		$n_user_system = "نظام العضويات";
-		$us_normal = "عادي";
-		$us_phpbb = "مربوط phpbb";
-		$us_mysbb = "مربوط mysmartbb";
-		$us_vb = "مربوط vb";
-		$n_register = "فتح التسجيل ";
-		$n_total_size = "أقصى حجم كلي ميقا";
-		$n_thumbs_imgs = "مصغرات للصور";
-		$n_write_imgs = "طبع صوره على الصور";
-		$n_del_url_file = "إعطاء رابط الحذف";
+		$action 		= "admin.php?cp=configs";
+		$n_submit 		= $lang['UPDATE_CONFIG'];
+		$n_yes 			= $lang['YES'];
+		$n_no 			= $lang['NO'];
+		$n_none 		= $lang['NO_CHANGE'];
+		$n_md5 			= $lang['CHANGE_MD5'];
+		$n_time 		= $lang['CHANGE_TIMW'];
+		$n_sitename 	= $lang['SITENAME'];
+		$n_sitemail	 	= $lang['SITEMAIL'];	
+		$n_siteurl		= $lang['SITEURL'];
+		$n_foldername 	= $lang['FOLDERNAME'];
+		$n_prefixname 	= $lang['FILES_PREFIX'];
+		$n_filesnum 	= $lang['FILES_NUMB'];
+		$n_siteclose 	= $lang['SITECLOSE'];
+		$n_closemsg 	= $lang['CLOSE_MSG'];
+		$n_decode 		= $lang['FILENAME_CHNG'];
+		$n_style 		= $lang['STYLENAME'];
+		$n_sec_down 	= $lang['SC_BEFOR_DOWM'];
+		$n_statfooter 	= $lang['SHOW_PHSTAT'];
+		$n_gzip 		= $lang['EN_GZIP'];
+		$n_welcome_msg 	= $lang['WELC_MSG'];
+		$n_user_system 	= $lang['USER_SYSTEM'];
+		$us_normal 		= $lang['NORMAL'];
+		$us_phpbb 		= $lang['W_PHPBB'];
+		$us_mysbb 		= $lang['W_MYSBB'];
+		$us_vb			= $lang['W_VBB'];
+		$n_register 	= $lang['ENAB_REG'];
+		$n_total_size 	= $lang['MAX_SIZE_SITE'];
+		$n_thumbs_imgs 	= $lang['ENAB_THMB'];
+		$n_write_imgs 	= $lang['ENAB_STAMP'];
+		$n_del_url_file = $lang['ENAB_DELURL'];
+		$n_language		= $lang['LANGUAGE'];
 		
 		
 		$sql	=	$SQL->query("SELECT * FROM {$dbprefix}config");
@@ -86,7 +87,7 @@
 				$update = $SQL->query("UPDATE `{$dbprefix}config` SET 
 				value = '" . $SQL->escape($new[$row[name]]) . "'
 				WHERE name = '$row[name]'");
-				if (!$update) {die("لايمكن تحديث البيانات !!");}
+				if (!$update) { die($lang['CANT_UPDATE_SQL']);}
 				else
 				{
 				//delete cache .. 
@@ -127,17 +128,17 @@
 		if (empty($_POST['sitename']) || empty($_POST['siteurl']) || empty($_POST['foldername']) || empty($_POST['filesnum'])
 				|| empty($_POST['style']) )
 		{
-		$text = "هناك حقول مهمه فارغه !!";
+		$text = $lang['EMPTY_FIELDS'];
 		$stylee	= "err.html";
 		}
 		elseif (!is_numeric($_POST['filesnum']) || !is_numeric($_POST['sec_down']))
 		{
-		$text = "رجاءاً .. الحقول الرقميه .. يجب ان تكون رقميه !!";
+		$text = $lang['NUMFIELD_S'];
 		$stylee	= "err.html";
 		}
 		else
 		{
-		$text = "تم تحديت الإعدادات بنجاح";
+		$text = $lang['CONFIGS_UPDATED'];
 		$stylee	= "info.html";
 		}
 				
@@ -147,15 +148,15 @@
 		//for style .. 
 		$stylee = "exts.html";
 		//words
-		$action = "admin.php?cp=exts";
-		$n_submit = "تعديل البيانات";
-		$n_ext = "الإمتداد";
-		$n_group = "المجموعه";
-		$n_gsize = "الحجم ز";
-		$n_gallow ="سماح ز";
-		$n_usize = "الحجم م";
-		$n_uallow ="سماح م";
-		$n_note = "ز :تعني الزوار<br />م : تعني الأعضاء <br />الأحجام تظبط بالبايت.";
+		$action 	= "admin.php?cp=exts";
+		$n_submit 	= $lang['UPDATE_EXTS'];
+		$n_ext 		= $lang['EXT'];
+		$n_group 	= $lang['GROUP'];
+		$n_gsize 	= $lang['SIZE_G'];
+		$n_gallow 	= $lang['ALLOW_G'];
+		$n_usize 	= $lang['SIZE_U'];
+		$n_uallow 	= $lang['ALLOW_U'];
+		$n_note 	= $lang['E_EXTS'];
 		
 		
 		$sql	=	$SQL->query("SELECT * FROM `{$dbprefix}exts`");
@@ -184,7 +185,7 @@
 				user_size = '" . intval($u_sz[$row[id]]) . "',
 				user_allow = '" . intval($u_al[$row[id]]) . "'
 				WHERE id = '$row[id]'");
-				if (!$update) {die("لايمكن تحديث البيانات !!");}
+				if (!$update){ die($lang['CANT_UPDATE_SQL']);}
 				else
 				{
 				//delete cache .. 
@@ -216,7 +217,7 @@
 		//after submit ////////////////
 		if ( isset($_POST['submit']) ) 
 		{
-		$text = "تم تحديت الإمتدادات بنجاح";
+		$text = $lang['UPDATED_EXTS'];
 		$stylee	= "info.html";
 		}
 
@@ -225,17 +226,17 @@
 		//for style .. 
 		$stylee = "files.html";
 		//words
-		$action = "admin.php?cp=files";
-		$n_submit = "تحديث الملفات";
-		$n_name = "الإسم";
-		$n_user = "بـ";
-		$n_size = "الحجم";
-		$n_time ="الوقت";
-		$n_uploads ="حُمل";
-		$n_type ="النوع";
-		$n_folder = "في مجلد";
-		$n_report = "تبليغ";
-		$n_del ="حذف";
+		$action 	= "admin.php?cp=files";
+		$n_submit 	= $lang['UPDATE_FILES'];
+		$n_name 	= $lang['FILENAME'];
+		$n_user 	= $lang['BY'];
+		$n_size 	= $lang['FILESIZE'];
+		$n_time 	= $lang['FILEDATE'];
+		$n_uploads 	= $lang['FILEUPS'];
+		$n_type	 	= $lang['FILETYPE'];
+		$n_folder 	= $lang['FILDER'];
+		$n_report 	= $lang['REPORT'];
+		$n_del 		= $lang['DELETE'];
 
 		
 		$sql	=	$SQL->query("SELECT * FROM `{$dbprefix}files` ORDER BY `id` DESC");
@@ -254,20 +255,21 @@
 			//
 			$del[$row[id]] = ( isset($_POST["del_".$row[id]]) ) ? $_POST["del_".$row[id]] : "";
 
-			if ($del[$row[id]])
-			{
+
 				//when submit !!
 				if ( isset($_POST['submit']) ) {
-				$update = $SQL->query("DELETE FROM `{$dbprefix}files` WHERE id='" . intval($ids[$row[id]]) . "' ");
-				if (!$update) {die("لايمكن تحديث البيانات !!");}
-				
-				//delete from folder .. 
-				@unlink ( $folder[$row['id']] . "/" . $name[$row['id']] );
-					//delete thumb
-					if (is_file($folder[$row['id']] . "/thumbs/" . $name[$row['id']] ))
-					{@unlink ( $folder[$row['id']] . "/thumbs/" . $name[$row['id']] );}
-					//delete thumb
-				}
+					if ($del[$row[id]])
+					{
+						$update = $SQL->query("DELETE FROM `{$dbprefix}files` WHERE id='" . intval($ids[$row[id]]) . "' ");
+						if (!$update) { die($lang['CANT_UPDATE_SQL']);}
+						
+						//delete from folder .. 
+						@unlink ( $folder[$row['id']] . "/" . $name[$row['id']] );
+							//delete thumb
+							if (is_file($folder[$row['id']] . "/thumbs/" . $name[$row['id']] ))
+							{@unlink ( $folder[$row['id']] . "/thumbs/" . $name[$row['id']] );}
+							//delete thumb
+					}
 			}
 		}
 		$SQL->freeresult($sql);
@@ -284,7 +286,7 @@
 						type =>$type[$i],
 						folder =>$folder[$i],
 						report =>($report[$i] > 4)? "<span style=\"color:red\"><big>".$report[$i]."</big></span>":$report[$i],
-						user =>($user[$i] == '-1') ? "زائر":  $s[0],
+						user =>($user[$i] == '-1') ? $lang['GUST']:  $s[0],
 						);
 		}
 		if (!is_array($arr)){$arr = array();}
@@ -292,60 +294,66 @@
 		//after submit ////////////////
 		if ( isset($_POST['submit']) ) 
 		{
-		$text = "تم تحديث الملفات بنجاح";
+		$text = $lang['FILES_UPDATED'];
 		$stylee	= "info.html";
 		}
 		break; //=================================================
 		case "reports" ://===================================== [ reports]
 		//for style .. 
-		$stylee = "reports.html";
+		$stylee 		= "reports.html";
 		//words
-		$action = "admin.php?cp=reports";
-		$n_submit = "تحديث التبليغات";
-		$n_name = "الإسم";
-		$n_mail = "البريد";
-		$n_url ="الرابط";
-		$n_click ="إظغط هنا";
-		$n_text ="النص";
-		$n_time ="الوقت";
-		$n_mouse = "إظغط على أحد التبليغات لتظهر هنا!";
-		$n_ip = "ip";
-		$n_reply = "[ رد ]";
-		$n_del ="حذف";
+		$action 		= "admin.php?cp=reports";
+		$n_submit 		= $lang['UPDATE_REPORTS'];
+		$n_name 		= $lang['NAME'];
+		$n_mail 		= $lang['EMAIL'];
+		$n_url 			= $lang['URL'];
+		$n_click 		= $lang['CLICKHERE'];
+		$n_text 		= $lang['TEXT'];
+		$n_time 		= $lang['TIME'];
+		$n_mouse 		= $lang['E_CLICK'];
+		$n_ip 			= $lang['IP'];
+		$n_reply 		= $lang['REPLY'];
+		$n_del 			= $lang['DELETE'];
 		
-		$sql	=	$SQL->query("SELECT * FROM `{$dbprefix}reports`");
+		$sql	=	$SQL->query("SELECT * FROM `{$dbprefix}reports`  ORDER BY `id` DESC");
 		while($row=$SQL->fetch_array($sql)){
 		//make new lovely arrays !!
-			$ids[$row['id']] =  $row['id'];
-			$name[$row['id']]=$row['name'];
-			$mail[$row['id']]=$row['mail'];
-			$url[$row['id']]=$row['url'];
-			$text[$row['id']]=$row['text'];
-			$time[$row['id']]=$row['time'];
-			$ip[$row['id']]=$row['ip'];
+			$ids[$row['id']]	=$row['id'];
+			$name[$row['id']]	=$row['name'];
+			$mail[$row['id']]	=$row['mail'];
+			$url[$row['id']]	=$row['url'];
+			$text[$row['id']]	=$row['text'];
+			$time[$row['id']]	=$row['time'];
+			$ip[$row['id']]		=$row['ip'];
 
 			//
 			$del[$row[id]] = ( isset($_POST["del_".$row[id]]) ) ? $_POST["del_".$row[id]] : "";
 			$sen[$row[id]] = ( isset($_POST["v_".$row[id]]) ) ? $_POST["v_".$row[id]] : "";
 			//when submit !!
 			if ( isset($_POST['submit']) ) {
-				if ($del[$row[id]])
-				{		
-				$update = $SQL->query("DELETE FROM `{$dbprefix}reports` WHERE id='" . intval($ids[$row[id]]) . "' ");
-				if (!$update) {die("لايمكن تحديث البيانات !!");}
+					if ($del[$row[id]])
+					{		
+					$update = $SQL->query("DELETE FROM `{$dbprefix}reports` WHERE id='" . intval($ids[$row[id]]) . "' ");
+					if (!$update) { die($lang['CANT_UPDATE_SQL']);}
+					}
 				}
-				
-			if ($sen[$row[id]])
-				{		
-				$to      = $mail[$row['id']];
-				$subject = 'رد على تبليغ:'.$config[sitename];
-				$message = "\n اهلاً ".$name[$row['id']]."\r\n بخصوص تبليغك في مركز التحميل  ".$config[sitename]. "\r\n ببريدك الالكتروني: ".$mail[$row['id']]."\r\nفقد قام المدير بالرد التالي: \r\n".$sen[$row[id]]."\r\n\r\n SaaUp Script";
-				$headers = 'From: '. $config[sitename]. '<'. $config[sitemail]. '>' . "\r\n" .
-				    'MIME-Version: 1.0' . "\r\n" .
-				    'X-Mailer: PHP/' . phpversion();
-				$send =  @mail($to, $subject, $message, $headers);
-				if (!$send) {die("لا يمكن إرسال الرد ... !!");}
-				}
+			if ( isset($_POST['reply_submit']) ) {	
+				if ($v_[$row[id]])
+					{		
+						$to      = $mail[$row['id']];
+						$subject = $lang['REPLY_REPORT'] . ':'.$config[sitename];
+						$message = "\n " . $lang['WELCOME'] . " ".$name[$row['id']]."\r\n " . $lang['U_REPORT_ON'] . " ".$config[sitename]. "\r\n " . $lang['BY_EMAIL'] . ": ".$mail[$row['id']]."\r\n" . $lang['ADMIN_REPLIED'] . ": \r\n".$sen[$row[id]]."\r\n\r\n SaaUp Script";
+						$headers = 'From: '. $config[sitename]. '<'. $config[sitemail]. '>' . "\r\n" .
+						    'MIME-Version: 1.0' . "\r\n" .
+						    'X-Mailer: PHP/' . phpversion();
+						$send =  @mail($to, $subject, $message, $headers);
+						if (!$send) {die($lang['CANT_SEND_MAIL']);}
+						else {
+						$text = $lang['IS_SEND_MAIL'];
+						$stylee	= "info.html";
+						}
+					
+					}
 				//may send
 			}
 		}
@@ -368,7 +376,7 @@
 		//after submit ////////////////
 		if ( isset($_POST['submit']) ) 
 		{
-		$text = "تم تحديث التبليغات بنجاح";
+		$text = $lang['REPORTS_UPDATED'];
 		$stylee	= "info.html";
 		}
 		
@@ -377,26 +385,26 @@
 		//for style .. 
 		$stylee = "calls.html";
 		//words
-		$action = "admin.php?cp=calls";
-		$n_submit = "تحديث المراسلات";
-		$n_name = "الإسم";
-		$n_mail = "البريد";
-		$n_text ="النص";
-		$n_time ="الوقت";
-		$n_mouse = "إظغط على أحد المراسلات لتظهر هنا!";
-		$n_ip = "ip";
-		$n_reply = "[ رد ]";
-		$n_del ="حذف";
+		$action 		= "admin.php?cp=calls";
+		$n_submit		= $lang['UPDATE_CALSS'];
+		$n_name 		= $lang['NAME'];
+		$n_mail 		= $lang['EMAIL'];
+		$n_text			= $lang['TEXT'];
+		$n_time 		= $lang['TIME'];
+		$n_mouse		= $lang['E_CLICK'];
+		$n_ip 			= $lang['IP'];
+		$n_reply 		= $lang['REPLY'];
+		$n_del 			= $lang['DELETE'];
 		
-		$sql	=	$SQL->query("SELECT * FROM `{$dbprefix}call`");
+		$sql	=	$SQL->query("SELECT * FROM `{$dbprefix}call` ORDER BY `id` DESC");
 		while($row=$SQL->fetch_array($sql)){
 		//make new lovely arrays !!
-			$ids[$row['id']] =$row['id'];
-			$name[$row['id']]=$row['name'];
-			$mail[$row['id']]=$row['mail'];
-			$text[$row['id']]=$row['text'];
-			$time[$row['id']]=$row['time'];
-			$ip[$row['id']]=$row['ip'];
+			$ids[$row['id']] 	=$row['id'];
+			$name[$row['id']]	=$row['name'];
+			$mail[$row['id']]	=$row['mail'];
+			$text[$row['id']]	=$row['text'];
+			$time[$row['id']]	=$row['time'];
+			$ip[$row['id']]		=$row['ip'];
 
 			//
 			$del[$row[id]] = ( isset($_POST["del_".$row[id]]) ) ? $_POST["del_".$row[id]] : "";
@@ -406,19 +414,24 @@
 				if ($del[$row[id]])
 				{		
 				$update = $SQL->query("DELETE FROM `{$dbprefix}call` WHERE id='" . intval($ids[$row[id]]) . "' ");
-				if (!$update) {die("لايمكن تحديث البيانات !!");}
+				if (!$update) { die($lang['CANT_UPDATE_SQL']);}
 				}
-				
-			if ($sen[$row[id]])
-				{		
+			}
+			if ( isset($_POST['reply_submit']) ) {	
+				if ($v_[$row[id]])
+				{			
 				$to      = $mail[$row['id']];
-				$subject = 'رد على مراسلتك:'.$config[sitename];
-				$message = "\n اهلاً ".$name[$row['id']]."\r\n بخصوص مراسلتك لـ مركز التحميل  ".$config[sitename]. "\r\n ببريدك الالكتروني: ".$mail[$row['id']]."\r\nفقد قام المدير بالرد التالي: \r\n".$sen[$row[id]]."\r\n\r\n SaaUp Script";
+				$subject = $lang['REPLY_CALL'] . ':'.$config[sitename];
+				$message = "\n " . $lang['REPLY_CALL'] . " ".$name[$row['id']]."\r\n " . $lang['REPLIED_ON_CAL'] . " : ".$config[sitename]. "\r\n " . $lang['BY_EMAIL'] . ": ".$mail[$row['id']]."\r\n" . $lang['ADMIN_REPLIED'] . "\r\n".$sen[$row[id]]."\r\n\r\n SaaUp Script";
 				$headers = 'From: '. $config[sitename]. '<'. $config[sitemail]. '>' . "\r\n" .
 				    'MIME-Version: 1.0' . "\r\n" .
 				    'X-Mailer: PHP/' . phpversion();
 				$send =  @mail($to, $subject, $message, $headers);
-				if (!$send) {die("لا يمكن إرسال الرد ... !!");}
+				if (!$send) { die($lang['CANT_SEND_MAIL']);}
+				else {
+					$text = $lang['IS_SEND_MAIL'];
+					$stylee	= "info.html";
+					}
 				}
 				//may send
 			}
@@ -441,7 +454,7 @@
 		//after submit ////////////////
 		if ( isset($_POST['submit']) ) 
 		{
-		$text = "تم تحديث المراسلات بنجاح";
+		$text = $lang['CALLS_UPDATED'];
 		$stylee	= "info.html";
 		}
 		
@@ -450,17 +463,17 @@
 		//for style .. 
 		$stylee = "users.html";
 		//words
-		$action = "admin.php?cp=users";
-		$n_name = "الإسم";
-		$n_mail = "البريد";
-		$n_admin ="مدير";
-		$n_pass ="كلمة المرور";
-		$n_submit = "تحديث البيانات";
-		//$n_files = "ملفاته";
-		$n_del ="حذف";
+		$action 	= "admin.php?cp=users";
+		$n_name 	= $lang['USERNAME'];
+		$n_mail 	= $lang['EMAIL'];
+		$n_admin 	= $lang['IS_ADMIN'];
+		$n_pass 	= $lang['PASSWORD'];
+		$n_submit 	= $lang['UPDATE_USERS'];
+		//$n_files = "HIS FILES";
+		$n_del		= $lang['DELETE'];
 
 		
-		$sql	=	$SQL->query("SELECT * FROM `{$dbprefix}users`");
+		$sql	=	$SQL->query("SELECT * FROM `{$dbprefix}users`  ORDER BY `id` DESC");
 		while($row=$SQL->fetch_array($sql)){
 
 			//make new lovely arrays !!
@@ -478,7 +491,7 @@
 				{
 					//when submit !!
 					$update = $SQL->query("DELETE FROM `{$dbprefix}users` WHERE id='" . intval($ids[$row[id]]) . "' ");
-					if (!$update) {die("لايمكن تحديث البيانات !!");}
+					if (!$update) { die($lang['CANT_UPDATE_SQL']);}
 				}
 				
 				//update
@@ -491,7 +504,7 @@
 				".$pass[$row[id]]."
 				admin = '" . intval($admin[$row[id]]) . "'
 				WHERE id = '$row[id]'");
-				if (!$update2) {die("لايمكن تحديث البيانات !!");}
+				if (!$update2) { die($lang['CANT_UPDATE_SQL']);}
 
 			}
 		}
@@ -511,7 +524,7 @@
 		//after submit ////////////////
 		if ( isset($_POST['submit']) ) 
 		{
-		$text = "تم تحديث الملفات بنجاح";
+		$text = $lang['USERS_UPDATED'];
 		$stylee	= "info.html";
 		}
 		break; //=================================================
@@ -521,11 +534,11 @@
 		//for style .. 
 		$stylee = "backup.html";
 		//words
-		$action = "admin.php?cp=backup";
-		$n_explain = "اختر الجداول التي تريد تضمينها في النسخة الاحتياطية ومن ثم اضغط على تحميل";
-		$n_name = "الإسم";
-		$n_size = "الحجم";
-		$n_submit = "تحميل..";
+		$action 		= "admin.php?cp=backup";
+		$n_explain 		= $lang['E_BACKUP'];
+		$n_name 		= $lang['NAME'];
+		$n_size 		= $lang['SIZE'];
+		$n_submit 		= $lang['TAKE_BK'];
 
 		
 		$sql	=	$SQL->query("SHOW TABLE STATUS");
@@ -600,7 +613,7 @@
 
 			//fix
 			$sqlf = $SQL->query("REPAIR TABLE `".$row[Name]."`");
-			if ($sqlf) { $text .= "[جداول] تم إصلاح  " . $row[Name] . "<br />";}
+			if ($sqlf) { $text .= $lang['REPAIRE_TABLE'] . $row[Name] . "<br />";}
 
 		}
 		$SQL->freeresult($sql);
@@ -634,8 +647,8 @@
 		`users`=" . $user_number . "
 		");
 		if ( $update1 ){
-		$text .= "[إحصائيات] تم إعادة إحتساب عدد الملفات<br />";
-		$text .= "[إحصائيات] تم إعادة إحتساب حجم الملفات <br />";
+		$text .=  $lang['REPAIRE_F_STAT'] . "<br />";
+		$text .= $lang['REPAIRE_S_STAT'] . "<br />";
 		}
 
 		//clear cache
@@ -645,7 +658,7 @@
 		while (($file = readdir($dh)) !== false) {
 		    if($file != "." && $file != ".." && $file != ".htaccess" && $file != "index.html") {
 		       $del =  @unlink ( $path . "/" . $file );
-			  $text .= "[كاش] تم حذف  ..".$file."<br />";
+			  $text .= $lang['REPAIRE_CACHE']  . $file . "<br />";
 		        $i++;
 		    }
 		}
@@ -656,21 +669,21 @@
 
 		break; //=================================================
 		default:
-		$Kleja_cp = "لوحة تحكم [ كليجا ]";
-		$stylee = "start.html";
-		$n_general_stats = "إحصائيات عامه";
-		$n_sizes_stats = "إحصائيات الحجم";
-		$n_other_stats = "معلومات أخرى";
-		$n_files_number = "عدد الملفات كلها";
-		$n_stat_sizes = "أحجام الملفات كلها";
-		$n_users_number = "عدد الإعضاء";
-		$n_welcome_msg = "أهلا وسهلاً بك في لوحة التحكم لمركز التحميل <b>كليجا</b>";
-		$N_SIZE_STATUS = "الحجم المستخدم";
-		$n_php_version = "إصدار php";
-		$n_mysql_version = "إصدار mysql";
-		$n_max_execution_time = "max_execution_time";
-		$n_upload_max_filesize = "upload_max_filesize";
-		$n_post_max_size = "post_max_size";
+		$Kleja_cp 				= $lang['KLEEJA_CP'];
+		$stylee 				= "start.html";
+		$n_general_stats 		= $lang['GENERAL_STAT'];
+		$n_sizes_stats 			= $lang['SIZE_STAT'];
+		$n_other_stats 			= $lang['OTHER_INFO'];
+		$n_files_number 		= $lang['AFILES_NUM'];
+		$n_stat_sizes 			= $lang['AFILES_SIZE'];
+		$n_users_number 		= $lang['AUSERS_NUM'];
+		$n_welcome_msg 			= $lang['KLEEJA_CP_W'];
+		$N_SIZE_STATUS 			= $lang['USING_SIZE'];
+		$n_php_version 			= $lang['PHP_VER'];
+		$n_mysql_version 		= $lang['MYSQL_VER'];
+		$n_max_execution_time 	= "max_execution_time";
+		$n_upload_max_filesize 	= "upload_max_filesize";
+		$n_post_max_size 		= "post_max_size";
 		
 		//data 
 		$files_number = $stat_files ;
@@ -690,9 +703,9 @@
 	
 	//admin functions
 	function ch_g ($id,$def)
-	{
-	$s =  array(0=>'',1=>"الصور",2=>"ملفات الظغط",3=>"نصوص",4=>"مستندات",5=>"RealMedia",6=>"WindowsMedia",
-				7=>"ملفات الفلاش",8=>"QuickTime",9=>"ملفات أخرى");
+	{global $lang;
+	$s =  array(0=>'',1=>$lang['N_IMGS'],2=>$lang['N_ZIPS'],3=>$lang['N_TXTS'],4=>$lang['N_DOCS'],5=>$lang['N_RM'],6=>$lang['N_WM'],
+				7=>$lang['N_SWF'],8=>$lang['N_QT'],9=>$lang['N_OTHERFILE']);
 	$show = "<select name=\"gr_{$id}\">";
 	for($i=1;$i<count($s);$i++)
 	{
@@ -706,28 +719,27 @@
 	
 	
 	//show style ..
-	$cp_admin = "لوحة التحكم";
+	$cp_admin 		= $lang['KLEEJA_CP'];
 	
-	$index_name = "<<  رجوع للمركز";
-	$configs_name = "إعدادات المركز";
-	$cp_name = "بداية لوحة التحكم";
-	$cp_url = "admin.php";
-	$configs_name = "إعدادات المركز";
-	$configs_url = "admin.php?cp=configs";
-	$exts_name = "إعدادات الإمتدادات";
-	$exts_url = "admin.php?cp=exts";
-	$files_name = "التحكم بالملفات";
-	$files_url = "admin.php?cp=files";
-	$reports_name = "التحكم بالتبليغات";
-	$reports_url = "admin.php?cp=reports";
-	$calls_name = "التحكم بالمراسلات";
-	$calls_url = "admin.php?cp=calls";
-	$users_name = "التحكم بالأعضاء";
-	$users_url = "admin.php?cp=users";
-	$backup_name = "نسخه إحتياطيه";
-	$backup_url = "admin.php?cp=backup";
-	$repair_name = "صيانه شامله";
-	$repair_url = "admin.php?cp=repair";	
+	$index_name 	= $lang['RETURN_HOME'];
+	$cp_name 		= $lang['R_CPINDEX'];
+	$cp_url 		= "admin.php";
+	$configs_name 	= $lang['R_CONFIGS'];
+	$configs_url 	= "admin.php?cp=configs";
+	$exts_name 		= $lang['R_EXTS'];
+	$exts_url 		= "admin.php?cp=exts";
+	$files_name 	= $lang['R_FILES'];
+	$files_url 		= "admin.php?cp=files";
+	$reports_name 	= $lang['R_REPORTS'];
+	$reports_url 	= "admin.php?cp=reports";
+	$calls_name 	= $lang['R_CALLS'];
+	$calls_url 		= "admin.php?cp=calls";
+	$users_name 	= $lang['R_USERS'];
+	$users_url 		= "admin.php?cp=users";
+	$backup_name 	= $lang['R_BCKUP'];
+	$backup_url 	= "admin.php?cp=backup";
+	$repair_name 	= $lang['R_REPAIR'];
+	$repair_url 	= "admin.php?cp=repair";	
 	
 	//header
 	print $tpl->display("header.html");

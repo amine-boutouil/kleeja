@@ -46,8 +46,8 @@
 	
 	
 	//some words for template
-	$info_lang = "تعليمات";
-	$welcome = "أهلاً";
+	$info_lang = $lang['INFORMATION'];
+	$welcome = $lang['WELCOME'];
 	$welcome_msg = $config[welcome_msg];
 
 

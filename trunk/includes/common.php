@@ -79,6 +79,10 @@ $starttm = $starttm[1] + $starttm[0];
 	//get caches .. 
 	require ($path.'cache.php');
 	
+	//get language .. 
+	if (!$config[lang]) { $config[lang] = "ar"; }
+	include ('language/'.$config[lang].'.php' );
+	
 	// for gzip
 	$do_gzip_compress = FALSE; 
 	if ( $config[gzip] ) 
@@ -126,7 +130,7 @@ $starttm = $starttm[1] + $starttm[0];
 	
 	//site close ..
 	if ($config[siteclose] == 1) {
-	Saaheader("الموقع مغلق !");
+	Saaheader($lang['SITE_CLOSED']);
 	$text = $config[closemsg];
 	print $tpl->display("info.html");
 	Saafooter();
@@ -135,8 +139,8 @@ $starttm = $starttm[1] + $starttm[0];
 	
 	//exceed total size 
 	if ($stat_sizes >= ($config[total_size] *(1048576))) { // convert megabytes to bytes
-	Saaheader("متوقف حالياً !");
-	$text = "الحجم الكلي للمركز إستنفذ .. سوف نعود قريباً";
+	Saaheader($lang['STOP_FOR_SIZE']);
+	$text = $lang['SIZES_EXCCEDED'];
 	print $tpl->display("info.html");
 	Saafooter();
 	exit();

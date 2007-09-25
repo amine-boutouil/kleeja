@@ -80,8 +80,8 @@ $starttm = $starttm[1] + $starttm[0];
 	require ($path.'cache.php');
 	
 	//get language .. 
-	if (!$config[lang]) { $config[lang] = "ar"; }
-	include ('language/'.$config[lang].'.php' );
+	if (!$config[language]) { $config[language] = "ar"; }
+	include ('language/'.$config[language].'.php' );
 	
 	// for gzip
 	$do_gzip_compress = FALSE; 

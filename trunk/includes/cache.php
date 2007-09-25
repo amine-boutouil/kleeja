@@ -138,6 +138,7 @@
 	
 	//assign variables 
 	for($i=0;$i<count($vars);$i++){$tpl->assign($vars[$i],$vars2[$i]);}
+	$tpl->assign("dir",$lang['DIR']);
 	$tpl->assign("title",$title);
 
 	

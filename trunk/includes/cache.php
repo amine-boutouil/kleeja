@@ -150,8 +150,8 @@
 	function Saafooter() {
 	global $tpl,$SQL,$starttm,$config,$usrcp,$lang;
 	//show stats .. 
-	if ($config[statfooter]) {
-	if ($do_gzip_compress) { $gzip = "Enabled"; } else { $gzip = "Disabled"; }
+	if ($config[statfooter] !=1) {
+	if ($do_gzip_compress !=0 ) { $gzip = "Enabled"; } else { $gzip = "Disabled"; }
 	$end = explode(" ", microtime());
 	$loadtime = number_format($end[1] + $end[0] - $starttm , 4);
 	$queries_num = $SQL->query_num;

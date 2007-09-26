@@ -39,7 +39,7 @@ $starttm = $starttm[1] + $starttm[0];
 		$_FILES 		= $HTTP_POST_FILES;
      }
 	  
-	##  important process
+	/*##  important process
 	if (!@ini_get('register_globals')) {  
 		extract($_GET);  
 	    extract($_POST);  
@@ -47,7 +47,7 @@ $starttm = $starttm[1] + $starttm[0];
 		extract($_SESSION); 
 		extract($_SERVER);  
 		extract($_FILES);  
-	}  
+	}  */
 	  
 	  
 	//include files .. & classes ..
@@ -67,7 +67,11 @@ $starttm = $starttm[1] + $starttm[0];
 	$usrcp	= new usrcp;			# Author : saanina
 	
 	//no data
-	if (!$dbserver && !$dbname) {echo 'يبدو أنك لم تقم بتثبيت السكربت !!'; exit();}
+	if (!$dbname || !$dbuser)
+	{
+	print '<span style="color:red;">CHANGE DATA IN config.php OR INSTALL FROM <a href="./install.php">INSTALL NOW</a></span>';
+	exit();
+	}
 	
 	//some of classes need .. 
 	#connect     

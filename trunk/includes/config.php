@@ -5,7 +5,7 @@
 	$dbserver	= 'localhost';
     $dbuser		= 'root';
 	$dbpass		= '';
-    $dbname		= 'upp';
+    $dbname		= 'kleeja';
 	$dbprefix	 = '';
 	//for integration with forums
 	$forum_srv = "localhost";

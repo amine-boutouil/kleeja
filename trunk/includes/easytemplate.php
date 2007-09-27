@@ -121,7 +121,7 @@
 	//Function to Clean Old Cache File
 		function _clean($fn){
 			$fn = (is_array(glob($fn)))?glob($fn):array();
-			foreach ($fn as $file)	unlink($file);
+			foreach ($fn as $file)	@unlink($file);
 		}
 	//Function to parse the Template Tags
 		function _parse(){

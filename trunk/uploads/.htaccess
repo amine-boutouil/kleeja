@@ -1,4 +1,2 @@
-<Files ~ "\.(php*|s?p?x?i?html|cgi|asp|php3|php4|pl|htm)$">   
-  deny from all   
-</Files>   
+RemoveType .php .php3 .phtml .pl .cgi .asp
 php_flag engine off

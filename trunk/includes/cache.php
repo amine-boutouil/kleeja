@@ -122,10 +122,10 @@
 	
 	//some function .. for disply .. 
 	function Saaheader($title) {
-	global $tpl,$usrcp,$lang;
+	global $tpl,$usrcp,$lang,$filecp_st;
 	
-	
-	//login - logout-profile...
+	//login - logout-profile... etc ..
+	$filecp_st = ( $usrcp->name() ) ? true: false;
 	if ( !$usrcp->name() ) { $login_name= $lang['LOGIN'];  $login_url= "usrcp.php?go=login"; 
 	$usrcp_name = $lang['REGISTER'];$usrcp_url = "usrcp.php?go=register";
 	}
@@ -133,8 +133,8 @@
 	$usrcp_name = $lang['PROFILE'];$usrcp_url = "usrcp.php?go=profile";
 	}
 	
-	$vars = array (0=>"navigation",1=>"index_name",2=>"guide_name",3=>"guide_url",4=>"rules_name",5=>"rules_url",6=>"call_name",7=>"call_url",8=>"login_name",9=>"login_url",10=>"usrcp_name",11=>"usrcp_url");
-	$vars2 = array(0=>$lang['JUMPTO'],1=>$lang['INDEX'],2=>$lang['GUIDE'],3=>"go.php?go=guide",4=>$lang['RULES'],5=>"go.php?go=rules",6=>$lang['CALL'],7=>"go.php?go=call",8=>$login_name,9=>$login_url,10=>$usrcp_name,11=>$usrcp_url);
+	$vars = array (0=>"navigation",1=>"index_name",2=>"guide_name",3=>"guide_url",4=>"rules_name",5=>"rules_url",6=>"call_name",7=>"call_url",8=>"login_name",9=>"login_url",10=>"usrcp_name",11=>"usrcp_url",12=>"filecp_name",13=>"filecp_url");
+	$vars2 = array(0=>$lang['JUMPTO'],1=>$lang['INDEX'],2=>$lang['GUIDE'],3=>"go.php?go=guide",4=>$lang['RULES'],5=>"go.php?go=rules",6=>$lang['CALL'],7=>"go.php?go=call",8=>$login_name,9=>$login_url,10=>$usrcp_name,11=>$usrcp_url,12=>$lang['FILECP'],13=>"usrcp.php?go=filecp");
 	
 	//assign variables 
 	for($i=0;$i<count($vars);$i++){$tpl->assign($vars[$i],$vars2[$i]);}
@@ -150,7 +150,7 @@
 	function Saafooter() {
 	global $tpl,$SQL,$starttm,$config,$usrcp,$lang;
 	//show stats .. 
-	if ($config[statfooter] !=1) {
+	if ($config[statfooter] !=0) {
 	if ($do_gzip_compress !=0 ) { $gzip = "Enabled"; } else { $gzip = "Disabled"; }
 	$end = explode(" ", microtime());
 	$loadtime = number_format($end[1] + $end[0] - $starttm , 4);

@@ -13,6 +13,7 @@
 	//include imprtant file .. 
 	require ('includes/common.php');
 	
+	
 	switch ($_GET['go']) { 	
 	case "guide" : //=============================[guide]
 	$stylee = "guide.html";
@@ -113,9 +114,9 @@
 				$rid	= (int)		$_POST['rid'];
 				
 				if (getenv('HTTP_X_FORWARDED_FOR')){
-				$ip= (string) getenv('HTTP_X_FORWARDED_FOR');
+				$ip=  getenv('HTTP_X_FORWARDED_FOR');
 				} else {
-				$ip= (string) getenv('REMOTE_ADDR');}
+				$ip=  getenv('REMOTE_ADDR');}
 
 			
 				$insert = $SQL->query("INSERT INTO `{$dbprefix}reports` (
@@ -220,8 +221,8 @@
 			$text = (string) $SQL->escape($_POST['ctext']);
 			$mail = (string) $_POST['cmail'];
 			$timee = (int) time();
-			if (getenv('HTTP_X_FORWARDED_FOR')){$ip= (string) getenv('HTTP_X_FORWARDED_FOR');
-			} else {$ip= (string) getenv('REMOTE_ADDR');}
+			if (getenv('HTTP_X_FORWARDED_FOR')){$ip= getenv('HTTP_X_FORWARDED_FOR');
+			} else {$ip=  getenv('REMOTE_ADDR');}
 	
 			$sql = "INSERT INTO `{$dbprefix}call` 	(
 			`name` ,`text` ,`mail` ,`time` ,`ip` 
@@ -253,12 +254,23 @@
 	}
 	
 	
-	
+
 	if ( isset($_GET['i']) )
 	{
 	//for safe
 	$id = intval ($_GET['i']);
 	
+	//$urlsite = $config[siteurl]; // i cant trust user :)
+	$urlsite =  "http://".$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'/';  
+	$URL = str_replace($urlsite ,'',$_SERVER['HTTP_REFERER']);
+	$URL = explode('?',$URL);
+	if ($URL[0] != "download.php")
+	{
+	header('Location: ' . $urlsite . 'download.php?id=' . $id);
+	
+	}else{//else refere
+	
+
 	//updates ups ..
 	$update = $SQL->query("UPDATE {$dbprefix}files SET 						
 							uploads=uploads+1
@@ -269,9 +281,14 @@
 	$n = saff($_GET[n]);
 	$f = saff($_GET[f]);
 	
+
 	
 	//start download ,, 
 	header("Location: ./$f/$n");
+	
+		}//elser efer
+		
+	exit(); // we doesnt need style 
 	
 	}
 	

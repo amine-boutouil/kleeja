@@ -12,8 +12,9 @@
 	define ( 'IN_INDEX' , true);
 	//include imprtant file .. 
 	require ('includes/common.php');
+	
 
-
+	
 	//decode s
 	if ($config[decode] == 1 ) {$decode = "time";} 
 	elseif ($config[decode] == 2) {$decode = "md5";}

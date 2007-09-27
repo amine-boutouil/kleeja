@@ -47,7 +47,7 @@
 		$n_no 			= $lang['NO'];
 		$n_none 		= $lang['NO_CHANGE'];
 		$n_md5 			= $lang['CHANGE_MD5'];
-		$n_time 		= $lang['CHANGE_TIMW'];
+		$n_time 		= $lang['CHANGE_TIME'];
 		$n_sitename 	= $lang['SITENAME'];
 		$n_sitemail	 	= $lang['SITEMAIL'];	
 		$n_siteurl		= $lang['SITEURL'];
@@ -324,8 +324,8 @@
 			$url[$row['id']]	=$row['url'];
 			$text[$row['id']]	=$row['text'];
 			$time[$row['id']]	=$row['time'];
-			$ip[$row['id']]		=$row['ip'];
-
+			$ip_{$row['id']}	=$row['ip'];
+			
 			//
 			$del[$row[id]] = ( isset($_POST["del_".$row[id]]) ) ? $_POST["del_".$row[id]] : "";
 			$sen[$row[id]] = ( isset($_POST["v_".$row[id]]) ) ? $_POST["v_".$row[id]] : "";
@@ -338,11 +338,11 @@
 					}
 				}
 			if ( isset($_POST['reply_submit']) ) {	
-				if ($v_[$row[id]])
+				if ($sen[$row[id]])
 					{		
 						$to      = $mail[$row['id']];
 						$subject = $lang['REPLY_REPORT'] . ':'.$config[sitename];
-						$message = "\n " . $lang['WELCOME'] . " ".$name[$row['id']]."\r\n " . $lang['U_REPORT_ON'] . " ".$config[sitename]. "\r\n " . $lang['BY_EMAIL'] . ": ".$mail[$row['id']]."\r\n" . $lang['ADMIN_REPLIED'] . ": \r\n".$sen[$row[id]]."\r\n\r\n SaaUp Script";
+						$message = "\n " . $lang['WELCOME'] . " ".$name[$row['id']]."\r\n " . $lang['U_REPORT_ON'] . " ".$config[sitename]. "\r\n " . $lang['BY_EMAIL'] . ": ".$mail[$row['id']]."\r\n" . $lang['ADMIN_REPLIED'] . ": \r\n".$sen[$row[id]]."\r\n\r\n Kleeja Script";
 						$headers = 'From: '. $config[sitename]. '<'. $config[sitemail]. '>' . "\r\n" .
 						    'MIME-Version: 1.0' . "\r\n" .
 						    'X-Mailer: PHP/' . phpversion();
@@ -363,13 +363,15 @@
 		foreach($ids as $i)
 		{
 		$arr[] = array( id =>$i,
-						name =>$name[$i],
-						mail =>$mail[$i],
-						url =>$url[$i],
-						text => $text[$i],
-						time =>date("d-m-Y H:a", $time[$i]),
-						ip =>"<a href=\"http://www.ripe.net/whois?form_type=simple&full_query_string=&searchtext=$ip[$i]&do_search=Search\" target=\"blank\">".$ip[$i]."</a>"
+						name 		=> $name[$i],
+						mail 		=> $mail[$i],
+						url  		=> $url[$i],
+						text 		=> $text[$i],
+						time 		=> date("d-m-Y H:a", $time[$i]),
+						ip	 		=> $ip_{$i},
+						ip_finder	=> 'http://www.ripe.net/whois?form_type=simple&full_query_string=&searchtext=' . $ip_{$i} . '&do_search=Search'
 						);
+						
 		}
 		if (!is_array($arr)){$arr = array();}
 		
@@ -404,7 +406,7 @@
 			$mail[$row['id']]	=$row['mail'];
 			$text[$row['id']]	=$row['text'];
 			$time[$row['id']]	=$row['time'];
-			$ip[$row['id']]		=$row['ip'];
+			$ip_{$row['id']}		=$row['ip'];
 
 			//
 			$del[$row[id]] = ( isset($_POST["del_".$row[id]]) ) ? $_POST["del_".$row[id]] : "";
@@ -418,11 +420,11 @@
 				}
 			}
 			if ( isset($_POST['reply_submit']) ) {	
-				if ($v_[$row[id]])
+				if ($sen[$row[id]])
 				{			
 				$to      = $mail[$row['id']];
 				$subject = $lang['REPLY_CALL'] . ':'.$config[sitename];
-				$message = "\n " . $lang['REPLY_CALL'] . " ".$name[$row['id']]."\r\n " . $lang['REPLIED_ON_CAL'] . " : ".$config[sitename]. "\r\n " . $lang['BY_EMAIL'] . ": ".$mail[$row['id']]."\r\n" . $lang['ADMIN_REPLIED'] . "\r\n".$sen[$row[id]]."\r\n\r\n SaaUp Script";
+				$message = "\n " . $lang['REPLY_CALL'] . " ".$name[$row['id']]."\r\n " . $lang['REPLIED_ON_CAL'] . " : ".$config[sitename]. "\r\n " . $lang['BY_EMAIL'] . ": ".$mail[$row['id']]."\r\n" . $lang['ADMIN_REPLIED'] . "\r\n".$sen[$row[id]]."\r\n\r\n Kleeja Script";
 				$headers = 'From: '. $config[sitename]. '<'. $config[sitemail]. '>' . "\r\n" .
 				    'MIME-Version: 1.0' . "\r\n" .
 				    'X-Mailer: PHP/' . phpversion();
@@ -442,12 +444,15 @@
 		foreach($ids as $i)
 		{
 		$arr[] = array( id =>$i,
-						name =>$name[$i],
-						mail =>$mail[$i],
-						text => $text[$i],
-						time =>date("d-m-Y H:a", $time[$i]),
-						ip =>"<a href=\"http://www.ripe.net/whois?form_type=simple&full_query_string=&searchtext=$ip[$i]&do_search=Search\" target=\"blank\">".$ip[$i]."</a>"
+						name 		=> $name[$i],
+						mail 		=> $mail[$i],
+						text 		=> $text[$i],
+						time 		=> date("d-m-Y H:a", $time[$i]),
+						ip 			=> $ip_{$i},
+						ip_finder	=> 'http://www.ripe.net/whois?form_type=simple&full_query_string=&searchtext=' . $ip_{$i} . '&do_search=Search'
 						);
+						
+
 		}
 		if (!is_array($arr)){$arr = array();}
 		
@@ -668,6 +673,16 @@
 		$stylee = "info.html";
 
 		break; //=================================================
+		case "lgutcp" ://===================================== [ lgutcp]
+		
+		if ( $usrcp->logout_cp() )
+		{
+		$text = $lang['LOGOUT_CP_OK'];
+		$stylee	= "info.html";
+		}
+		
+		
+		break; //=================================================
 		default:
 		$Kleja_cp 				= $lang['KLEEJA_CP'];
 		$stylee 				= "start.html";
@@ -740,6 +755,8 @@
 	$backup_url 	= "admin.php?cp=backup";
 	$repair_name 	= $lang['R_REPAIR'];
 	$repair_url 	= "admin.php?cp=repair";	
+	$lgutcp_name 	= $lang['R_LGOUTCP'];
+	$lgutcp_url 	= "admin.php?cp=lgutcp";	
 	
 	//header
 	print $tpl->display("header.html");

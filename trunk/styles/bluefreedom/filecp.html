@@ -1,0 +1,21 @@
+
+<div class="middle">
+
+<h2>{N_EDIT_FILES}</h2>
+
+<form action="{action}" method="post">
+<table style="width: 100%">
+	<tr style="background-color:silver"><td>{n_name}</td><td>{n_del}</td></tr>
+<IF NAME="arr">
+<LOOP NAME="arr" LIMIT="6">
+	<tr style="background-color:#F5F5F5">
+	<td>{{name}}</td><td><input type="checkbox" name="del_{{id}}" value="1"></td>
+	</tr>
+</LOOP>
+</IF>
+</table>
+<input type="submit" name="submit_files" value="{n_submit_files}" />
+</form>
+<div style="text-align:center"><b>{arr_paging}</b></div>
+
+</div>

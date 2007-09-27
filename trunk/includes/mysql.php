@@ -131,7 +131,7 @@ SORRY , THERE IS AN ERROR IN MYSQL , ERROR IS : $msg
 
 YOU MUST TELL MODERATOR BY THIS ERROR!
 							
-Script: SaaUp : By :Saanina
+Script: Kleeja : By :Saanina
 </textarea>";
                           echo '</b></div>';
                           echo '</body></html>';

@@ -203,38 +203,12 @@
 			}
 		
 		break; //=================================================
-		case "profile" : //=============================[profile]
-			if (!$usrcp->name())
-			{
-			$text = $lang['USER_PLACE'];
-			$stylee = "info.html";
-			//header
-			Saaheader($lang['PLACE_NO_YOU']);
-			//index
-			print $tpl->display($stylee);
-			//footer
-			Saafooter();
-			exit();
-			}
-
-			$stylee 		= "profile.html";
-			$titlee 		= $lang['PROFILE'];
-			$N_EDIT_DATA 	= $lang['EDIT_U_DATA'];
+		case "filecp" : //=============================[filecp]
+			$stylee 		= "filecp.html";
+			$titlee 		= $lang['FILECP'];
 			$N_EDIT_FILES 	= $lang['EDIT_U_FILES'];
-			$action 		= "usrcp.php?go=profile";
-			$n_submit_data 	= $lang['EDIT_U_DATA'];
+			$action 		= "usrcp.php?go=filecp";
 			$n_submit_files = $lang['DEL_SELECTED'];
-			$L_NAME 		= $lang['USERNAME'];
-			$L_PASS 		= $lang['PASS_ON_CHANGE'];
-			$L_PASS_OLD 	= $lang['OLD'];
-			$L_PASS_NEW 	= $lang['NEW'];
-			$L_PASS_NEW2 	= $lang['NEW_AGAIN'];
-			$L_MAIL 		= $lang['EMAIL'];
-			$name 			= $usrcp->name(); //<<
-			$mail 			= $usrcp->mail(); // <<
-			$data_forum 	= ($config[user_system]==1 ) ? TRUE : FALSE ;
-			$goto_forum 	= '<a href="' . $forum_path . '">' . $lang['PFILE_4_FORUM'] . '</a>';
-			
 			
 			//te get files and update them !!
 			$sql	=	$SQL->query("SELECT id,name,folder FROM `{$dbprefix}files` WHERE user='".$usrcp->id()."' ORDER BY `id` DESC");
@@ -265,6 +239,56 @@
 				}
 			}
 			$SQL->freeresult($sql);
+			
+			if (!is_array($ids)){$ids = array();}//fix bug
+			foreach($ids as $i)
+			{
+			$arr[] = array( id =>$i,
+							name =>"<a href=\"./download.php?id={$i}\" target=\"blank\">".$name[$i]."</a>"
+							);
+			}
+			if (!is_array($arr)){$arr = array();}
+			
+			//after submit ////////////////
+			if ( isset($_POST['submit_files']) ) 
+			{
+			$text = $lang['FILES_UPDATED'];
+			$stylee	= "info.html";
+			}
+				
+		break; //=================================================
+		case "profile" : //=============================[profile]
+			if (!$usrcp->name())
+			{
+			$text = $lang['USER_PLACE'];
+			$stylee = "info.html";
+			//header
+			Saaheader($lang['PLACE_NO_YOU']);
+			//index
+			print $tpl->display($stylee);
+			//footer
+			Saafooter();
+			exit();
+			}
+
+			$stylee 		= "profile.html";
+			$titlee 		= $lang['PROFILE'];
+			$N_EDIT_DATA 	= $lang['EDIT_U_DATA'];
+			$action 		= "usrcp.php?go=profile";
+			$n_submit_data 	= $lang['EDIT_U_DATA'];
+			$L_NAME 		= $lang['USERNAME'];
+			$L_PASS 		= $lang['PASS_ON_CHANGE'];
+			$L_PASS_OLD 	= $lang['OLD'];
+			$L_PASS_NEW 	= $lang['NEW'];
+			$L_PASS_NEW2 	= $lang['NEW_AGAIN'];
+			$L_MAIL 		= $lang['EMAIL'];
+			$name 			= $usrcp->name(); //<<
+			$mail 			= $usrcp->mail(); // <<
+			$data_forum 	= ($config[user_system]==1 ) ? TRUE : FALSE ;
+			$goto_forum 	= '<a href="' . $forum_path . '">' . $lang['PFILE_4_FORUM'] . '</a>';
+			
+			
+		
 		
 			if ( isset($_POST['submit_data']) )
 			{	
@@ -314,21 +338,7 @@
 			}
 
 		}#else submit
-		if (!is_array($ids)){$ids = array();}//fix bug
-		foreach($ids as $i)
-		{
-		$arr[] = array( id =>$i,
-						name =>"<a href=\"./download.php?id={$i}\" target=\"blank\">".$name[$i]."</a>"
-						);
-		}
-		if (!is_array($arr)){$arr = array();}
 		
-		//after submit ////////////////
-		if ( isset($_POST['submit_files']) ) 
-		{
-		$text = $lang['FILES_UPDATED'];
-		$stylee	= "info.html";
-		}
 		
 		break; //=================================================
 		case "get_pass" : //=============================[get_pass]

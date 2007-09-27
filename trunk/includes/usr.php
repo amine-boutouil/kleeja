@@ -334,6 +334,12 @@ class usrcp {
 				unset( $_SESSION['USER_SESS'] );
 				return true;
 				}
+				
+				function logout_cp()
+				{
+				unset( $_SESSION['USER_ADMIN'] );
+				return true;
+				}
 }#end class
 
 

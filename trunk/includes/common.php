@@ -66,11 +66,17 @@ $starttm = $starttm[1] + $starttm[0];
 	$tahmil	= new AksidSars;		# Author : Nadorino
 	$usrcp	= new usrcp;			# Author : saanina
 	
-	//no data
+	//no data.. install.php exists
 	if (!$dbname || !$dbuser)
 	{
 	print '<span style="color:red;">CHANGE DATA IN config.php OR INSTALL FROM <a href="./install.php">INSTALL NOW</a></span>';
 	exit();
+	}
+	elseif ( file_exists('./install.php') ) 
+	{
+	 echo '<span style="color:red;"> inatall.php exist .. you must delete it .. or if you dont
+	 install Kleeja yet ..  <a href="./install.php">Click to Install</a></apan>';
+	 exit();
 	}
 	
 	//some of classes need .. 
@@ -133,7 +139,7 @@ $starttm = $starttm[1] + $starttm[0];
 	
 	
 	//site close ..
-	if ($config[siteclose] == 1) {
+	if ($config[siteclose] == 1 && !$usrcp->admin() ) {
 	Saaheader($lang['SITE_CLOSED']);
 	$text = $config[closemsg];
 	print $tpl->display("info.html");

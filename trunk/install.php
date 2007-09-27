@@ -339,6 +339,8 @@ case 'data' :
 			
 		$connect = @mysql_connect($dbserver,$dbuser,$dbpass);
 		$select = @mysql_select_db($dbname);
+		if ($select) {if (mysql_version>='4.1.0') mysql_query("SET NAMES 'utf8'"); }
+		
 		
 		$pass = md5($_POST['password']);
 		
@@ -419,7 +421,7 @@ case 'data' :
 	}else{
 	
 	//$sitepath = $_SERVER['DOCUMENT_ROOT'].dirname($_SERVER['PHP_SELF']);  
-	$urlsite =  "http://".$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF'].'/');  
+	$urlsite =  "http://".$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'/';  
 
  print '<form method="post" action="' . $_SERVER[PHP_SELF] . '?step=data">
 	<fieldset name="Group1" dir="' . $lang['DIR'] . '">

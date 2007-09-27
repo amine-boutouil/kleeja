@@ -216,7 +216,7 @@ if(file_exists($this->asarsi.'/'.$_FILES['file']['name'][$i])){  // if بداي�
     }
 	elseif($this->sizes[strtolower($this->typet)] > 0 && $_FILES['file']['size'][$i] >= $this->sizes[strtolower($this->typet)])
 	{
-	$this->errs[]=  $lang['SIZE_F_BIG'] . ' ' . $this->sizes[$this->typet];
+	$this->errs[]=  $lang['SIZE_F_BIG'] . ' ' . Customfile_size($this->sizes[$this->typet]);
 	}
     else
     {
@@ -243,6 +243,9 @@ else // use ftp account
 			@ftp_close($conn_id);  			
 }
 //flush();
+
+	// sometime cant see file after uploading.. but ..
+	@chmod($this->asarsi."/".$this->baddarisam, 0644);//0755
 #------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -286,13 +289,13 @@ if ($config[del_url_file]){$extra_del = $lang['URL_F_DEL'] . ':<br /><textarea r
 if (in_array(strtolower($this->typet),$this->ansaqimages)){
 
 	//make thumbs
-	if($config[thumbs_imgs] && in_array(strtolower($this->typet),$this->ansaqthumbs))
+	if( ($config[thumbs_imgs]!=0) && in_array(strtolower($this->typet),$this->ansaqthumbs))
 	{
 	@$this->createthumb($this->asarsi."/".$this->baddarisam,$this->asarsi.'/thumbs/'.$this->baddarisam,100,100);
 	$extra_thmb = $lang['URL_F_THMB'] . ':<br /><textarea rows=2 cols=49 rows=1>[url='.$this->linksite."download.php?img=".$this->id_for_url.'][img]'.$this->linksite."download.php?thmb=".$this->id_for_url.'[/img][/url]</textarea><br />';
 	}
 	//write on image
-	if($config[write_imgs] && in_array(strtolower($this->typet),$this->ansaqthumbs))
+	if( ($config[write_imgs]!=0) && in_array(strtolower($this->typet),$this->ansaqthumbs))
 	{
 		$this->watermark($this->asarsi . "/" . $this->baddarisam, 'images/watermark.png');
 	}
@@ -336,14 +339,10 @@ else
 	$fw2=@fwrite($fo2,'<p>KLEEJA ..</p>'); 
 	$fi=@fopen($this->asarsi."/.htaccess","w");
 	$fi2=@fopen($this->asarsi."/thumbs/.htaccess","w");
-	$fy=@fwrite($fi,'<Files *>
-		Order Allow,Deny
-		Deny from All
-	</Files>');
-	$fy2=@fwrite($fi2,'<Files ~ "\.(php*|s?p?x?i?html|cgi|asp|php3|php4|pl|htm)$">   
-	  deny from all   
-	</Files>   
-	php_flag engine off');
+	$fy=@fwrite($fi,'RemoveType .php .php3 .phtml .pl .cgi .asp .htm .html
+php_flag engine off');
+	$fy2=@fwrite($fi2,'RemoveType .php .php3 .phtml .pl .cgi .asp .htm .html
+php_flag engine off');
 	$chmod=@chmod($this->asarsi,0777);
 	$chmod2=@chmod($this->asarsi.'/thumbs/',0777);
 

@@ -160,8 +160,8 @@ class usrcp {
 				global $forum_prefix;
 
 					
-					#$pass = ...... // without normal md5 .. as in mad-house ... vb is the worst
-					
+					$pass = md5($pass);
+				
 					$SQLVB	= new SSQL;
 				    $SQLVB->setinfo($forum_srv,$forum_user,$forum_pass,$forum_db);
 				    $SQLVB->connect();
@@ -174,7 +174,7 @@ class usrcp {
 					{
 					while($row1=$SQLVB->fetch_array($sql)){
 					
-					$pass = md5($pass . $row1[salt]); 
+					$pass = md5($pass . $row1[salt]);  // without normal md5 .. as in mad-house ... vb is the worst
 					
 					$sql2	=	$SQLVB->query("SELECT * FROM `{$forum_prefix}user` WHERE username='$name' AND password='$pass' ");
 				

@@ -9,11 +9,11 @@
 	$dbprefix	 = '';
 	//for integration with forums
 	$forum_srv = "localhost";
-	$forum_db ="mysmartbb";
+	$forum_db ="vb368";
 	$forum_user = "root";
 	$forum_pass = "";
-	$forum_prefix = "mysbb_";
-	$forum_path ="/mysmartbb";
+	$forum_prefix = "";
+	$forum_path ="/vb";
 	//for use ftp account to uplaod
 	$use_ftp = 0;
 	$ftp_server = "ftp.example.com";

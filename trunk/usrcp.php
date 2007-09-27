@@ -37,28 +37,28 @@
 			elseif ( isset($_POST['submit']) )
 			{
 		
-			if ($config[user_system] == 3){  // vb 
+			//if ($config[user_system] == 3){  // vb 
 			
 			
-				if ( empty($_POST['lname']) || empty($_POST['challenge']) ) //challenge just for vb [i hate vb]
-				{
-				$text = $lang['EMPTY_FIELDS'];
-				$stylee = "err.html";
-				}
-				elseif( $usrcp->data($_POST['lname'],$_POST['challenge']) )
-				{
-				$text = $lang['LOGIN_SUCCESFUL'].' <br /> <a href="./index.php">'. $lang['HOME'] . '</a>';
-				$stylee = "info.html";
-				}
-				else
-				{
-				$text = $lang['LOGIN_ERROR'];
-				$stylee = "err.html";
-				}
+			//	if ( empty($_POST['lname']) || empty($_POST['challenge']) ) //challenge just for vb [i hate vb]
+			//	{
+			//	$text = $lang['EMPTY_FIELDS'];
+			//	$stylee = "err.html";
+			//	}
+			//	elseif( $usrcp->data($_POST['lname'],$_POST['challenge']) )
+			//	{
+			//	$text = $lang['LOGIN_SUCCESFUL'].' <br /> <a href="./index.php">'. $lang['HOME'] . '</a>';
+			//	$stylee = "info.html";
+			//	}
+			//	else
+			//	{
+			//	$text = $lang['LOGIN_ERROR'];
+			//	$stylee = "err.html";
+			//	}
 			
-			}
-			else
-			{
+			//}
+			//else
+			//{
 				if ( empty($_POST['lname']) || empty($_POST['lpass']) )
 				{
 				$text = $lang['EMPTY_FIELDS'];
@@ -74,7 +74,7 @@
 				$text = $lang['LOGIN_ERROR'];
 				$stylee = "err.html";
 				}
-			}
+			//}
 
 		}
 	

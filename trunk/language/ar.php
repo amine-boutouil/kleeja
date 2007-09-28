@@ -22,7 +22,8 @@ $lang = array (
 		'SIZES_EXCCEDED' 	=> 'الحجم الكلي للمركز إستنفذ .. سوف نعود قريباً',
 		//index.php  
 		'INFORMATION'		=> 'تعليمات',	
-		'WELCOME' 			=> 'أهلاً',	
+		'WELCOME' 			=> 'أهلاً',
+		'KLEEJA_VERSION' 	=> 'إصدار كليجا',		
 		//usercp.php 
 		'USERS_SYSTEM' 			=> 'نظام المستخدمين',
 		'ERROR_NAVIGATATION'=> 'خطأ بالتوجه ..',	

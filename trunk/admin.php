@@ -13,6 +13,8 @@
 	define ( 'IN_INDEX' , true);
 	//include imprtant file .. 
 	require ('includes/common.php');
+	include ('includes/version.php');
+	
 	
 	//change style just for admin
 	$tpl->Temp = "includes/style_admin/";
@@ -699,6 +701,7 @@
 		$n_max_execution_time 	= "max_execution_time";
 		$n_upload_max_filesize 	= "upload_max_filesize";
 		$n_post_max_size 		= "post_max_size";
+		$n_kleeja_version		= $lang['KLEEJA_VERSION'];
 		
 		//data 
 		$files_number = $stat_files ;
@@ -712,7 +715,7 @@
 		//size board by percent
 		$per1 = round($stat_sizes / ($config[total_size] *1048576) ,2) *100;
 		
-		
+		$kleeja_version		= KLEEJA_VERSION;		
 	}#end switch
 
 	

@@ -91,7 +91,7 @@ var $mysql_version;
 
                 }
 /***************/
-				function escape($msg)
+				function escape($msg) // for kleeja ,, its all thing
 				{
 					// make sure no HTML entities were matched
 					$chars = array('<', '>', '"');
@@ -99,6 +99,10 @@ var $mysql_version;
 
 					$msg = str_replace(array('\&', '\"', '\\\'', '<', '>')
 									,array('&amp;', '&quot;', "'", '&lt;', '&gt;'), $msg);
+					
+					if(get_magic_quotes_gpc()) {
+					 $msg       = stripslashes($msg);
+					}
 					
 					if (!$this->connect_id)
 					{

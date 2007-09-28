@@ -274,6 +274,9 @@ case 'check':
 	if (!$connect) {$texterr .= '<span style="color:red;">' . $lang['INST_CONNCET_ERR'] . '</span><br/>';}
 	$select = @mysql_select_db($dbname);
 	if (!$select) {$texterr .= '<span style="color:red;">' . $lang['INST_SELECT_ERR'] . '</span><br/>';}
+	if ( !is_writable('cache') ) {$texterr .= '<span style="color:red;">[cache]: ' . $lang['INST_NO_WRTABLE'] . '</span><br/>';};
+	if ( !is_writable('uploads') ) {$texterr .= '<span style="color:red;">[uploads]: ' . $lang['INST_NO_WRTABLE'] . '</span><br/>';};
+	
 	if ($texterr !='') 
 	{
 	print $texterr;

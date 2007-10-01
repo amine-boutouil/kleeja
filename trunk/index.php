@@ -23,33 +23,35 @@
 	
 	
 	//start class .. 
-	$tahmil->tashfir=$decode;              
-	$tahmil->linksite= $config[siteurl]; 
-	$tahmil->asarsi=$config[foldername];
-	$tahmil->isam=$config[prefixname];
-	$tahmil->amchan="index.php";
-	$tahmil->thwara=$config[filesnum];
+	$kljup->decode		=	$decode;              
+	$kljup->linksite	=	$config[siteurl]; 
+	$kljup->folder		=	$config[foldername];
+	$kljup->filename	=	$config[prefixname];
+	$kljup->action		=	"index.php";
+	$kljup->filesnum	=	$config[filesnum];
 	//--------------------- s user system part
-	$tahmil->ansaq= ( $usrcp->name() ) ? $u_exts : $g_exts;
-	$tahmil->sizes= ( $usrcp->name() ) ? $u_sizes : $g_sizes ;	
-	$tahmil->id_user = ( $usrcp->name() ) ? $usrcp->id() : '-1';
+	$kljup->types		= ( $usrcp->name() ) ? $u_exts : $g_exts;
+	$kljup->sizes		= ( $usrcp->name() ) ? $u_sizes : $g_sizes ;	
+	$kljup->id_user 	= ( $usrcp->name() ) ? $usrcp->id() : '-1';
 	//--------------------- e user system part
-	$inputs = $tahmil->thwara(); //<<--- template
-	$tahmil->aksid();
+	$inputs 			= $kljup->tpl(); //<<--- template
+	$kljup->process();
+
+	
 	
 
 	//show errors and info
-	foreach($tahmil->errs as $s )
+	foreach($kljup->errs as $s )
 	{
-	$info[] = array( 'i' => $s );
+	$info[] 	= array( 'i' => $s );
 	}
 	if (!is_array($info)){$info = array();}
 	
 	
 	//some words for template
-	$info_lang = $lang['INFORMATION'];
-	$welcome = $lang['WELCOME'];
-	$welcome_msg = $config[welcome_msg];
+	$info_lang 		= $lang['INFORMATION'];
+	$welcome 		= $lang['WELCOME'];
+	$welcome_msg 	= $config[welcome_msg];
 
 
 	//header

@@ -48,6 +48,7 @@ $lang = array (
 		'VERTY_CODE'		=> 'كود الأمان',	
 		'WRONG_EMAIL' 		=> 'بريد خاطئ',	
 		'WRONG_NAME' 		=> 'الإسم يجب أن يكون أكبر من 4 احرف وغير طويل',	
+		'WRONG_LINK' 		=> 'رابط خاطئ ..',	
 		'EXIST_NAME'		=> 'الإسم موجود مسبقاً',	
 		'EXIST_EMAIL' 		=> 'البريد موجود مسبقاً',	
 		'WRONG_VERTY_CODE' 	=> 'كود الأمان خاطئ',	
@@ -134,10 +135,13 @@ $lang = array (
 		'FILE_NO_FOUNDED' 	=> 'لم نتمكن من إيجاد الملف ..!!',
 		'IMG_NO_FOUNDED' 	=> 'لم نتمكن من إيجاد الصوره ..!!',
 		'NOT_IMG' 			=> 'ليست صوره  ..هذا ملف!!',
-		//includes/class.Alsid.Sars.php
+		//includes/KljUploader.php
 		'MORE_F_FILES' 		=> 'هذا آخر حد يمكنك تحميله',
 		'DOWNLOAD_F' 		=> '[ تحميل الملفات ]',
+		'DOWNLOAD_T' 		=> '[ تحميل من الرابط ]',
+		'PAST_URL_HERE' 	=> '[ ألصق الرابط هنا ]',
 		'SAME_FILE_EXIST' 	=> 'هذا الملف موجود مسبقا',
+		'NO_FILE_SELECTED' 	=> 'لم تقم بإختيار ملف !!',
 		'WRONG_F_NAME' 		=> 'اسم الملف غير يحوي أحرف غير مسموحه',
 		'FORBID_EXT' 		=> 'هذه الإمتداد غير مدعومه',
 		'SIZE_F_BIG' 		=> 'الحجم للملف المختار يجب أن يكون أقل من',
@@ -154,6 +158,8 @@ $lang = array (
 		'PR_DIR_CRT' 		=> 'لم يتم اعطاء التصريح للمجلد',
 		'CANT_DIR_CRT' 		=> 'لم يتم إنشاء مجلد تلقائياً .. قم بإنشاءه انت',
 		'AGREE_RULES'		=> 'أوافق على شروط المركز',
+		'CHANG_TO_URL_FILE'	=> 'تبديل طريقة التحميل..رابط أو إدخال',
+		
 		//includes/cache.php
 		'ADMINCP' 			=> 'مركز التحكم',
 		'JUMPTO' 			=> 'إنتقل إلى',

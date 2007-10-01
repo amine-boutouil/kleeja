@@ -1,2 +1,0 @@
-RemoveType .php .php3 .phtml .pl .cgi .asp
-php_flag engine off

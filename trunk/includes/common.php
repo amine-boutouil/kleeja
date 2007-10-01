@@ -56,14 +56,14 @@ $starttm = $starttm[1] + $starttm[0];
 	include ($path.'config.php');
 	include ($path.'easytemplate.php');
 	include ($path.'mysql.php');
-	include ($path.'class.AksidSars.php');
+	include ($path.'KljUploader.php');
 	include ($path.'usr.php');
 
 	
 	// start classes ..
-	$SQL	= new SSQL;				# Author : MaaSTaaR & me
+	$SQL	= new SSQL;				# Author : MaaSTaaR & saanina
 	$tpl	= new EasyTemplate;		# Author : daif
-	$tahmil	= new AksidSars;		# Author : Nadorino
+	$kljup	= new KljUploader;		# Author : Nadorino and saanina
 	$usrcp	= new usrcp;			# Author : saanina
 	
 	//no data.. install.php exists

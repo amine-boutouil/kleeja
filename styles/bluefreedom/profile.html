@@ -1,0 +1,26 @@
+<div class="middle">
+
+<h2>{N_EDIT_DATA}</h2>
+
+<IF NAME="data_forum">
+
+<form action="{action}" method="post">
+{L_NAME} : <input type="text" name="pname" value="{name}" readonly="readonly" /><br />
+{L_MAIL} :<input type="text" name="pmail" value="{mail}"  /><br />
+	<fieldset>
+		<legend>{L_PASS}</legend>
+{L_PASS_OLD} :<input type="password" name="ppass_old" value="{_POST.ppass_old}"  /><br />
+{L_PASS_NEW} :<input type="password" name="ppass_new" value="{_POST.ppass_new}"  /><br />
+{L_PASS_NEW2} :<input type="password" name="ppass_new2" value="{_POST.ppass_new2}"  /><br />
+		</fieldset>
+<input type="submit" name="submit_data" value="{n_submit_data}" />
+</form>
+<ELSE>
+
+{goto_forum}
+
+</IF>
+
+
+
+</div>

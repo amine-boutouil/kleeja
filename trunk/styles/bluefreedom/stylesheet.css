@@ -99,12 +99,21 @@ background: #85ACF7 url('images/hidr.jpg');
 	text-align: center;
 	color: #666;
 }
+img {
+        border: none;
+}
 
-
+/*
+dont remove it  start
+*/
 div#loadbox {
 	padding: 10px;
 	display: none;
 }
-img {
-        border: none;
+div#texttype {
+	display: none;
 }
+
+/*
+dont remove it  end
+*/

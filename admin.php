@@ -76,6 +76,7 @@
 		$n_del_url_file = $lang['ENAB_DELURL'];
 		$n_language		= $lang['LANGUAGE'];
 		$n_www_url		= $lang['WWW_URL'];
+		$n_del_f_day	= $lang['DEL_FDAY'];
 
 
 		$sql	=	$SQL->query("SELECT * FROM {$dbprefix}config");

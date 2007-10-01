@@ -1,33 +1,33 @@
 <?
 ##################################################
-#						Kleeja 
+#						Kleeja
 #
-# Filename : download.php 
+# Filename : download.php
 # purpose :  when user  request file to  download it.
 # copyright 2007 Kleeja.com ..
 #
 ##################################################
 
-	// security .. 
+	// security ..
 	define ( 'IN_INDEX' , true);
-	//include imprtant file .. 
+	//include imprtant file ..
 	require ('includes/common.php');
 
-	
+
 	if ( isset($_GET['id']) )
 	{
 	//for safe
 	$id = intval ($_GET['id']);
-	  	
+
 	$sql	=	$SQL->query("SELECT * FROM {$dbprefix}files where id=$id");
-	
-	if ($SQL->num_rows($sql) != 0  ) 
+
+	if ($SQL->num_rows($sql) != 0  )
 	{
 		while($row=$SQL->fetch_array($sql)){
 		@extract ($row);
 	}
-	$SQL->freeresult($sql);   
-	
+	$SQL->freeresult($sql);
+
 	// SOME WORDS FOR TEMPLATE
 	$file_found = $lang['FILE_FOUNDED'];
 	$wait  		= $lang['WAIT'];
@@ -45,20 +45,20 @@
 	$L_UPS		= $lang['FILEUPS'];
 	$L_REPORT 	= $lang['FILEREPORT'];
 	$REPORT 	= "./go.php?go=report&amp;id=$id";
-	
-	$sty = 'download.html';	
+
+	$sty = 'download.html';
 
 	}
 	else
 	{
 		$text = $lang['FILE_NO_FOUNDED'];
-		$sty = 'err.html';	
+		$sty = 'err.html';
 	}
 	 // show style ...
-	 
+
 	//header
 	Saaheader($lang['DOWNLAOD']);
- 	//body	
+ 	//body
 	print $tpl->display($sty);
 	//footer
 	Saafooter();
@@ -68,11 +68,11 @@
 	{
 	//for safe
 	$img = intval ($_GET['img']);
-	
+
 	//updates ups ..
 	$sql	=	$SQL->query("SELECT name,folder,type FROM {$dbprefix}files where id=$img");
-	
-	if ($SQL->num_rows($sql) != 0  ) 
+
+	if ($SQL->num_rows($sql) != 0  )
 	{
 		while($row=$SQL->fetch_array($sql)){
 		$n =  $row[name];
@@ -83,21 +83,22 @@
 	else
 	{
 		$text =	$lang['IMG_NO_FOUNDED'];
-		$sty = 'err.html';	
+		$sty = 'err.html';
 	}
-	$SQL->freeresult($sql);   
-	
-	$update = $SQL->query("UPDATE {$dbprefix}files SET 						
-							uploads=uploads+1
+	$SQL->freeresult($sql);
+
+	$update = $SQL->query("UPDATE {$dbprefix}files SET
+							uploads=uploads+1,
+							last_down='". time() . "'
                             WHERE id='$img' ");
 	if (!$update){ die(	$lang['CANT_UPDATE_SQL']);}
 
-	//must be img //	
+	//must be img //
 	$imgs = array('png','gif','jpg','jpeg','tif','tiff');
 	if (!in_array($t,$imgs) )
 	{
 		$text = $lang['NOT_IMG'] . '<br /><a href="./download.php?id=$img">' . $lang['CLICK_DOWN'] . '</a>';
-		$sty = 'err.html';	
+		$sty = 'err.html';
 	}
 	else
 	{
@@ -109,11 +110,11 @@
 	{
 	//for safe
 	$thmb = intval ($_GET['thmb']);
-	
+
 	//updates ups ..
 	$sql	=	$SQL->query("SELECT name,folder,type FROM {$dbprefix}files where id=$thmb");
-	
-	if ($SQL->num_rows($sql) != 0  ) 
+
+	if ($SQL->num_rows($sql) != 0  )
 	{
 		while($row=$SQL->fetch_array($sql)){
 		$n =  $row[name];
@@ -124,28 +125,28 @@
 	else
 	{
 		$text = $lang['IMG_NO_FOUNDED'];
-		$sty = 'err.html';	
+		$sty = 'err.html';
 	}
-	$SQL->freeresult($sql);   
+	$SQL->freeresult($sql);
 
 
-	//must be img //	
+	//must be img //
 	$imgs = array('png','jpg','jpeg','gif');
 	if (!in_array($t,$imgs) )
 	{
-	header("Location: ./$f/$n");} // no thumbs .. 
+	header("Location: ./$f/$n");} // no thumbs ..
 	else
 	{
 	//show img
 	header("Location: ./$f/thumbs/$n");
 	}
-	
+
 	}
-	else 
+	else
 	{
 	die ('<STRONG style="color:red">' . $lang['ERROR_NAVIGATATION'] . '</STRONG>');
 	}
-	
-	
-	
+
+
+
 ?>

@@ -1,8 +1,8 @@
 <?
 ##################################################
-#						Kleeja 
+#						Kleeja
 #
-# Filename : cache.php 
+# Filename : cache.php
 # purpose :  cache for all script.
 # copyright 2007 Kleeja.com ..
 #
@@ -13,8 +13,8 @@
 	  echo '<strong><br /><span style="color:red">[NOTE]: This Is Dangrous Place !! [2007 saanina@gmail.com]</span></strong>';
 	  exit();
 	  }
-	  
-	  
+
+
 	//get config data from config table  ... ===========================================
 	if (file_exists('cache/data_config.php')){include ('cache/data_config.php'); }
 	if ( !$config or !file_exists('cache/data_config.php') )
@@ -29,18 +29,18 @@
 			$config[$row['name']] =$row['value'];
 			$file_datac .= '\''.$row['name'].'\' => \'' . $row['value'] . '\',' . "\n";
 		}
-			$file_datac .= ');'."\n\n";	
-			$file_datac .= '?' . '>'; 
- 	$SQL->freeresult($sqlc);   
-	
+			$file_datac .= ');'."\n\n";
+			$file_datac .= '?' . '>';
+ 	$SQL->freeresult($sqlc);
+
 	$filenumc = @fopen('cache/data_config.php', 'w');
 	flock($filenumc, LOCK_EX); // exlusive look
 	@fwrite($filenumc, $file_datac);
 	fclose($filenumc);
 	}
-	
-	
-	
+
+
+
 	//get data from types table ... ===================================
 	if (file_exists('cache/data_exts.php')){include ('cache/data_exts.php'); }
 	if ( !($g_exts || $u_exts) || !( file_exists('cache/data_exts.php') ) )
@@ -64,16 +64,16 @@
 			}
 		}
 			$file_datat .= "\n\n";
-			$file_datat .= '?' . '>'; 
- 	$SQL->freeresult($sqlt);   
-	
+			$file_datat .= '?' . '>';
+ 	$SQL->freeresult($sqlt);
+
 	$filenumt = @fopen('cache/data_exts.php', 'w');
 	flock($filenumt, LOCK_EX); // exlusive look
 	@fwrite($filenumt, $file_datat);
 	fclose($filenumt);
 	}
-	
-	
+
+
 	//get sizes data from types table ... ===========================================
 	if (file_exists('cache/data_sizes.php')){include ('cache/data_sizes.php'); }
 	if ( !($g_sizes || $u_sizes) || !( file_exists('cache/data_sizes.php') ) )
@@ -97,69 +97,127 @@
 			$file_datas .= '$u_sizes[' . $row['ext'] . ']  =   \'' . $row['user_size'] . '\';' . "\n";
 			}
 		}
-			$file_datas .= "\n\n".'if (!is_array($g_sizes)){$g_sizes = array();}'."\n";	
-			$file_datas .= 'if (!is_array($u_sizes)){$u_sizes = array();}'."\n\n";	
-			$file_datas .= '?' . '>'; 
- 	$SQL->freeresult($sqls);   
-	
+			$file_datas .= "\n\n".'if (!is_array($g_sizes)){$g_sizes = array();}'."\n";
+			$file_datas .= 'if (!is_array($u_sizes)){$u_sizes = array();}'."\n\n";
+			$file_datas .= '?' . '>';
+ 	$SQL->freeresult($sqls);
+
 	$filenums = @fopen('cache/data_sizes.php', 'w');
 	flock($filenums, LOCK_EX); // exlusive look
 	@fwrite($filenums, $file_datas);
 	fclose($filenums);
 	}
-	
-	//stats .. 	while($row=$SQL->fetch_array($sqls)){
+
+
+
+	//stats .. to cache
+	if(file_exists("cache/data_stats.php")){	//1
+    include ("cache/data_stats.php");
+	//2
+	$tfile		= @filemtime("cache/data_stats.php");
+    if($tpage >= ($tpage+(60*60))){    //after 1 hours
+    unlink("$this->cachedir/$npage");
+    }
+    }else{//no file stat
 	$sqlstat	=	$SQL->query("SELECT * FROM {$dbprefix}stats");
+
+	$file_dataw = '<' . '?php' . "\n\n";
+	$file_dataw .= "\n// auto-generated cache files\n//By:Saanina@gmail.com \n\n";
+
 	while($row=$SQL->fetch_array($sqlstat)){
 	$stat_files = $row[files];
 	$stat_sizes = $row[sizes];
 	$stat_users = $row[users];
 	$stat_last_file =  $row[last_file];
-	} 
-	$SQL->freeresult($sqlstat);   
-	//
-	
-	
-	//some function .. for disply .. 
+	$stat_last_f_del =  $row[last_f_del];
+
+	//write
+	$file_dataw .= '$stat_files  	=   \'' . $row['files'] . '\';' . "\n";
+	$file_dataw .= '$stat_sizes  	=   \'' . $row['sizes'] . '\';' . "\n";
+	$file_dataw .= '$stat_users  	=   \'' . $row['users'] . '\';' . "\n";
+	$file_dataw .= '$stat_last_file =	\'' . $row['last_file'] . '\';' . "\n\n";
+	$file_dataw .= '$stat_last_f_del =	\'' . $row['last_f_del'] . '\';' . "\n\n";
+		}
+	$file_dataw .= '?' . '>';
+	$SQL->freeresult($sqlstat);
+	$filenumw = @fopen('cache/data_stats.php', 'w');
+	flock($filenumw, LOCK_EX); // exlusive look
+	@fwrite($filenumw, $file_dataw);
+	fclose($filenumw);
+	}//end else
+
+
+	// administarator sometime need some files and delete other .. we
+	// do that for him .. becuase he had no time .. :)            last_down - $config[del_f_day]
+    if ( date( "j" ,$stat_last_f_del ) < date( "j" ,time() ) )
+    {	$filesql	=	$SQL->query("SELECT id,last_down,name,folder FROM {$dbprefix}files");
+	while($row=$SQL->fetch_array($filesql)){
+
+	     #time per day ..
+	    $del_date = mktime(0, 0, 0, date(m), date(d)+$config[del_f_day], date(y));
+		$totaldays = (time() - $row[last_down] )  / (60 * 60 * 24);
+
+	    if ( $totaldays <= $del_date )
+	    {						$update = $SQL->query("DELETE FROM `{$dbprefix}files` WHERE id='" . intval($row['id']) . "' ");
+						if (!$update) { die($lang['CANT_UPDATE_SQL']);}
+
+						//delete from folder ..
+						@unlink ( $row['folder'] . "/" . $row['name'] );
+							//delete thumb
+							if (is_file($row['folder'] . "/thumbs/" . $row['name'] ))
+							{@unlink ($row['folder'] . "/thumbs/" . $row['name'] );}
+							//delete thumb
+	    }
+
+    }
+    //update $stat_last_f_del !!
+				$update2 = $SQL->query("UPDATE `{$dbprefix}stats` SET
+				last_f_del  = '" . time() . "' ");
+				if (!$update2) { die($lang['CANT_UPDATE_SQL']);}
+    } //stat_del
+
+
+
+	//some function .. for disply ..
 	function Saaheader($title) {
 	global $tpl,$usrcp,$lang,$filecp_st;
-	
+
 	//login - logout-profile... etc ..
 	$filecp_st = ( $usrcp->name() ) ? true: false;
-	if ( !$usrcp->name() ) { $login_name= $lang['LOGIN'];  $login_url= "usrcp.php?go=login"; 
+	if ( !$usrcp->name() ) { $login_name= $lang['LOGIN'];  $login_url= "usrcp.php?go=login";
 	$usrcp_name = $lang['REGISTER'];$usrcp_url = "usrcp.php?go=register";
 	}
-	else{ $login_name= $lang['LOGOUT']."[".$usrcp->name()."]";  $login_url= "usrcp.php?go=logout"; 
+	else{ $login_name= $lang['LOGOUT']."[".$usrcp->name()."]";  $login_url= "usrcp.php?go=logout";
 	$usrcp_name = $lang['PROFILE'];$usrcp_url = "usrcp.php?go=profile";
 	}
-	
+
 	$vars = array (0=>"navigation",1=>"index_name",2=>"guide_name",3=>"guide_url",4=>"rules_name",5=>"rules_url",6=>"call_name",7=>"call_url",8=>"login_name",9=>"login_url",10=>"usrcp_name",11=>"usrcp_url",12=>"filecp_name",13=>"filecp_url");
 	$vars2 = array(0=>$lang['JUMPTO'],1=>$lang['INDEX'],2=>$lang['GUIDE'],3=>"go.php?go=guide",4=>$lang['RULES'],5=>"go.php?go=rules",6=>$lang['CALL'],7=>"go.php?go=call",8=>$login_name,9=>$login_url,10=>$usrcp_name,11=>$usrcp_url,12=>$lang['FILECP'],13=>"usrcp.php?go=filecp");
-	
-	//assign variables 
+
+	//assign variables
 	for($i=0;$i<count($vars);$i++){$tpl->assign($vars[$i],$vars2[$i]);}
 	$tpl->assign("dir",$lang['DIR']);
 	$tpl->assign("title",$title);
 
-	
+
 	print $tpl->display("header.html");
 	}
-	
 
-	
+
+
 	function Saafooter() {
 	global $tpl,$SQL,$starttm,$config,$usrcp,$lang;
-	//show stats .. 
+	//show stats ..
 	if ($config[statfooter] !=0) {
 	if ($do_gzip_compress !=0 ) { $gzip = "Enabled"; } else { $gzip = "Disabled"; }
 	$end = explode(" ", microtime());
 	$loadtime = number_format($end[1] + $end[0] - $starttm , 4);
 	$queries_num = $SQL->query_num;
 	$time_sql = round($SQL->query_num / $loadtime) ;
-	$page_stats = "<b>[</b> GZIP : $gzip - Generation Time: $loadtime Sec [SQL: $time_sql % ] - Queries: $queries_num <b>]</b>" ;  
+	$page_stats = "<b>[</b> GZIP : $gzip - Generation Time: $loadtime Sec [SQL: $time_sql % ] - Queries: $queries_num <b>]</b>" ;
 	$tpl->assign("page_stats",$page_stats);
 	}#end statfooter
-	
+
 	if ( $usrcp->admin() )
 	{
 	$admin_page = '<br /><a href="./admin.php">' . $lang['ADMINCP'] .  '</a><br />';
@@ -167,11 +225,11 @@
 	}
 	//show footer
 	print $tpl->display("footer.html");
-	
+
 	// THEN .. at finish
 	$SQL->close();
 	}
-	
+
 	//size function
 	function Customfile_size($size)
 	{

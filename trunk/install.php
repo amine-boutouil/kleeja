@@ -94,12 +94,13 @@ CREATE TABLE `{$dbprefix}stats` (
   `files` int(10) NOT NULL default '0',
   `users` int(10) NOT NULL default '0',
   `sizes` int(10) NOT NULL default '0',
-  `last_file` varchar(200) collate utf8_bin NOT NULL
+  `last_file` varchar(200) collate utf8_bin NOT NULL,
+  `last_f_del` int(10) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 ";
 
 $sql_stat2 = "
-INSERT INTO `{$dbprefix}stats` (`files`, `users`, `sizes`, `last_file`) VALUES (0, 1, 0, '000');
+INSERT INTO `{$dbprefix}stats` (`files`, `users`, `sizes`, `last_file`,`last_f_del`) VALUES (0, 1, 0, '000','0');
 ";
 
 $sql_users = "
@@ -117,6 +118,7 @@ CREATE TABLE `{$dbprefix}users` (
 $sql_files = "
 CREATE TABLE `{$dbprefix}files` (
   `id` int(10) NOT NULL auto_increment,
+  `last_down` int(10) NOT NULL,
   `name` varchar(255) collate utf8_bin NOT NULL,
   `size` int(10) NOT NULL,
   `uploads` int(10) NOT NULL,
@@ -157,6 +159,7 @@ $sql_config16 = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('writ
 $sql_config17 = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('del_url_file', '1')";
 $sql_config18 = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('language', '$_COOKIE[lang]')";
 $sql_config19 = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('www_url', '0')";
+$sql_config20 = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('del_f_day', '10')";
 
 $sql_exts = "
 CREATE TABLE `{$dbprefix}exts` (
@@ -380,13 +383,14 @@ case 'data' :
 		 $sql[28] =  @mysql_query($sql_config17, $connect);
 		 $sql[29] =  @mysql_query($sql_config18, $connect);
 		 $sql[30] =  @mysql_query($sql_config19, $connect);
-		 $sql[31] =  @mysql_query($sql_exts, $connect);
-		 $sql[32] =  @mysql_query($sql_exts2, $connect);
-		 $sql[33] =  @mysql_query($sql_exts3, $connect);
-		 $sql[34] =  @mysql_query($sql_exts4, $connect);
-		 $sql[35] =  @mysql_query($sql_exts5, $connect);
-		 $sql[36] =  @mysql_query($sql_exts6, $connect);
-		 $sql[37] =  @mysql_query($sql_exts7, $connect);
+		 $sql[31] =  @mysql_query($sql_config20, $connect);
+		 $sql[32] =  @mysql_query($sql_exts, $connect);
+		 $sql[33] =  @mysql_query($sql_exts2, $connect);
+		 $sql[34] =  @mysql_query($sql_exts3, $connect);
+		 $sql[35] =  @mysql_query($sql_exts4, $connect);
+		 $sql[36] =  @mysql_query($sql_exts5, $connect);
+		 $sql[37] =  @mysql_query($sql_exts6, $connect);
+		 $sql[38] =  @mysql_query($sql_exts7, $connect);
 
 		 $err = 0;
 		for ($i=0; $i<count($sql); $i++)
@@ -409,7 +413,7 @@ case 'data' :
 				$err++;
 			}
 
-		if ($i == '37') { $ok = true;}
+		if ($i == '38') { $ok = true;}
 		}#for
 
 		if ($ok && !$err)

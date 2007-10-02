@@ -111,7 +111,8 @@
 
 
 	//stats .. to cache
-	if(file_exists("cache/data_stats.php")){	//1
+	if(file_exists("cache/data_stats.php")){
+	//1
     include ("cache/data_stats.php");
 	//2
 	$tfile		= @filemtime("cache/data_stats.php");
@@ -150,7 +151,8 @@
 	// administarator sometime need some files and delete other .. we
 	// do that for him .. becuase he had no time .. :)            last_down - $config[del_f_day]
     if ( date( "j" ,$stat_last_f_del ) < date( "j" ,time() ) )
-    {	$filesql	=	$SQL->query("SELECT id,last_down,name,folder FROM {$dbprefix}files");
+    {
+	$filesql	=	$SQL->query("SELECT id,last_down,name,folder FROM {$dbprefix}files");
 	while($row=$SQL->fetch_array($filesql)){
 
 	     #time per day ..
@@ -158,7 +160,8 @@
 		$totaldays = (time() - $row[last_down] )  / (60 * 60 * 24);
 
 	    if ( $totaldays <= $del_date )
-	    {						$update = $SQL->query("DELETE FROM `{$dbprefix}files` WHERE id='" . intval($row['id']) . "' ");
+	    {
+						$update = $SQL->query("DELETE FROM `{$dbprefix}files` WHERE id='" . intval($row['id']) . "' ");
 						if (!$update) { die($lang['CANT_UPDATE_SQL']);}
 
 						//delete from folder ..
@@ -191,8 +194,10 @@
 	$usrcp_name = $lang['PROFILE'];$usrcp_url = "usrcp.php?go=profile";
 	}
 
-	$vars = array (0=>"navigation",1=>"index_name",2=>"guide_name",3=>"guide_url",4=>"rules_name",5=>"rules_url",6=>"call_name",7=>"call_url",8=>"login_name",9=>"login_url",10=>"usrcp_name",11=>"usrcp_url",12=>"filecp_name",13=>"filecp_url");
-	$vars2 = array(0=>$lang['JUMPTO'],1=>$lang['INDEX'],2=>$lang['GUIDE'],3=>"go.php?go=guide",4=>$lang['RULES'],5=>"go.php?go=rules",6=>$lang['CALL'],7=>"go.php?go=call",8=>$login_name,9=>$login_url,10=>$usrcp_name,11=>$usrcp_url,12=>$lang['FILECP'],13=>"usrcp.php?go=filecp");
+	$vars = array (0=>"navigation",1=>"index_name",2=>"guide_name",3=>"guide_url",4=>"rules_name",5=>"rules_url",
+					6=>"call_name",7=>"call_url",8=>"login_name",9=>"login_url",10=>"usrcp_name",11=>"usrcp_url",12=>"filecp_name",13=>"filecp_url",14=>"stats_name",15=>"stats_url");
+	$vars2 = array(0=>$lang['JUMPTO'],1=>$lang['INDEX'],2=>$lang['GUIDE'],3=>"go.php?go=guide",4=>$lang['RULES'],5=>"go.php?go=rules",
+					6=>$lang['CALL'],7=>"go.php?go=call",8=>$login_name,9=>$login_url,10=>$usrcp_name,11=>$usrcp_url,12=>$lang['FILECP'],13=>"usrcp.php?go=filecp",14=>$lang['STATS'],15=>"go.php?go=stats");
 
 	//assign variables
 	for($i=0;$i<count($vars);$i++){$tpl->assign($vars[$i],$vars2[$i]);}

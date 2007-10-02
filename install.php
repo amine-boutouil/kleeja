@@ -160,6 +160,7 @@ $sql_config17 = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('del_
 $sql_config18 = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('language', '$_COOKIE[lang]')";
 $sql_config19 = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('www_url', '0')";
 $sql_config20 = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('del_f_day', '10')";
+$sql_config21 = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('allow_stat_pg', '1')";
 
 $sql_exts = "
 CREATE TABLE `{$dbprefix}exts` (
@@ -384,13 +385,14 @@ case 'data' :
 		 $sql[29] =  @mysql_query($sql_config18, $connect);
 		 $sql[30] =  @mysql_query($sql_config19, $connect);
 		 $sql[31] =  @mysql_query($sql_config20, $connect);
-		 $sql[32] =  @mysql_query($sql_exts, $connect);
-		 $sql[33] =  @mysql_query($sql_exts2, $connect);
-		 $sql[34] =  @mysql_query($sql_exts3, $connect);
-		 $sql[35] =  @mysql_query($sql_exts4, $connect);
-		 $sql[36] =  @mysql_query($sql_exts5, $connect);
-		 $sql[37] =  @mysql_query($sql_exts6, $connect);
-		 $sql[38] =  @mysql_query($sql_exts7, $connect);
+		 $sql[32] =  @mysql_query($sql_config21, $connect);
+		 $sql[33] =  @mysql_query($sql_exts, $connect);
+		 $sql[34] =  @mysql_query($sql_exts2, $connect);
+		 $sql[35] =  @mysql_query($sql_exts3, $connect);
+		 $sql[36] =  @mysql_query($sql_exts4, $connect);
+		 $sql[37] =  @mysql_query($sql_exts5, $connect);
+		 $sql[38] =  @mysql_query($sql_exts6, $connect);
+		 $sql[39] =  @mysql_query($sql_exts7, $connect);
 
 		 $err = 0;
 		for ($i=0; $i<count($sql); $i++)
@@ -413,7 +415,7 @@ case 'data' :
 				$err++;
 			}
 
-		if ($i == '38') { $ok = true;}
+		if ($i == '39') { $ok = true;}
 		}#for
 
 		if ($ok && !$err)

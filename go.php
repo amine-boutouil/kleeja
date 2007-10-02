@@ -348,6 +348,43 @@
 	}
 
 	break; //=================================================
+	case "stats" : //=============================[del]
+
+	//stop .. check first ..
+	if (!$config[allow_stat_pg])
+	{
+			$text = $lang['STATS_CLOSED'];
+			$stylee = "info.html";
+			//header
+			Saaheader($lang['STATS_CLOSED']);
+			//index
+			print $tpl->display($stylee);
+			//footer
+			Saafooter();
+			exit();
+	}
+
+	//ok .. go on
+	$titlee 	= $lang['STATS'];
+	$stylee 	= "stats.html";
+	$n_explain 	= $lang['STATS'];
+	$n_files_st = $lang['FILES_ST'];
+	$n_file 	= $lang['FILE'];
+	$n_users_st = $lang['USERS_ST'];
+	$n_user 	= $lang['USER'];	
+	$n_sizes_st = $lang['SIZES_ST'];
+	//$n_lstfle_st= $lang['LSTFLE_ST'];
+	$n_lst_dl_st= $lang['LSTDELST'];
+	
+	//////
+	$files_st	= $stat_files;
+	$users_st	= $stat_users;
+	$sizes_st	= Customfile_size($stat_sizes);
+	//$lstfle_st	= $stat_last_file;
+	$lst_dl_st	= date("d-m-Y H:a", $stat_last_f_del);
+	
+	
+	break; //=================================================
 	/*case "example" : //=============================[example]
 	$stylee = "example.html"; //>> style
 	$titlee = $lang['EXAMPLE_TITLE'];  // >> title

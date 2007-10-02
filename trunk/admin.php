@@ -77,6 +77,7 @@
 		$n_language		= $lang['LANGUAGE'];
 		$n_www_url		= $lang['WWW_URL'];
 		$n_del_f_day	= $lang['DEL_FDAY'];
+		$n_allow_stat_pg= $lang['ALLOW_STAT_PG'];
 
 
 		$sql	=	$SQL->query("SELECT * FROM {$dbprefix}config");
@@ -126,7 +127,8 @@
 		if ($con[del_url_file] == "1" ) {$ydel_url_file = true; }else {$ndel_url_file = true;}
         //..
 		if ($con[www_url] == "1" ) {$ywww_url = true; }else {$nwww_url = true;}
-
+        //..
+		if ($con[allow_stat_pg] == "1" ) {$yallow_stat_pg = true; }else {$nallow_stat_pg = true;}
 
 		//after submit ////////////////
 		if ( isset($_POST['submit']) )
@@ -699,6 +701,8 @@
 		$n_files_number 		= $lang['AFILES_NUM'];
 		$n_stat_sizes 			= $lang['AFILES_SIZE'];
 		$n_users_number 		= $lang['AUSERS_NUM'];
+		$n_last_del_fles		= $lang['LSTDELST'];
+		$n_last_file_up			= $lang['LSTFLE_ST'];
 		$n_welcome_msg 			= $lang['KLEEJA_CP_W'];
 		$N_SIZE_STATUS 			= $lang['USING_SIZE'];
 		$n_php_version 			= $lang['PHP_VER'];
@@ -709,14 +713,16 @@
 		$n_kleeja_version		= $lang['KLEEJA_VERSION'];
 
 		//data
-		$files_number = $stat_files ;
-		$files_sizes = Customfile_size($stat_sizes);
-		$users_number = $stat_users;
-		$php_version = 'php '.phpversion();
-		$mysql_version = 'MYSQL '.$SQL->mysql_version;
+		$files_number 		= $stat_files ;
+		$files_sizes 		= Customfile_size($stat_sizes);
+		$users_number 		= $stat_users;
+		$last_file_up		= $stat_last_file;
+		$last_del_fles 		= date("d-m-Y H:a", $stat_last_f_del);
+		$php_version 		= 'php '.phpversion();
+		$mysql_version 		= 'MYSQL '.$SQL->mysql_version;
 		$max_execution_time =  ini_get('max_execution_time');
-		$upload_max_filesize = ini_get('upload_max_filesize');
-		$post_max_size = ini_get('post_max_size');
+		$upload_max_filesize= ini_get('upload_max_filesize');
+		$post_max_size 		= ini_get('post_max_size');
 		//size board by percent
 		$per1 = round($stat_sizes / ($config[total_size] *1048576) ,2) *100;
 

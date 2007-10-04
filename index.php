@@ -82,8 +82,6 @@
 		{
 		$visitornum++; 
 		}
-	//fix
-	if ($row[username] == $usrcp->name() ) {}else {unset($_SESSION[online_reg]);}
 	
 	} #while
  	$SQL->freeresult($result);

@@ -73,7 +73,7 @@ CREATE TABLE `{$dbprefix}call` (
   `time` int(10) NOT NULL,
   `ip` varchar(40) collate utf8_bin NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=8 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 ";
 
 $sql_reports = "
@@ -86,7 +86,7 @@ CREATE TABLE `{$dbprefix}reports` (
   `time` int(10) NOT NULL,
   `ip` varchar(40) collate utf8_bin NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=10 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 ";
 
 $sql_stat = "
@@ -95,12 +95,16 @@ CREATE TABLE `{$dbprefix}stats` (
   `users` int(10) NOT NULL default '0',
   `sizes` int(10) NOT NULL default '0',
   `last_file` varchar(200) collate utf8_bin NOT NULL,
-  `last_f_del` int(10) NOT NULL
+  `last_f_del` int(10) NOT NULL,
+  `today` int(4) NOT NULL,
+  `counter_today` int(12) NOT NULL,
+  `counter_all` int(12) NOT NULL,
+  `counter_yesterday` int(12) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 ";
 
 $sql_stat2 = "
-INSERT INTO `{$dbprefix}stats` (`files`, `users`, `sizes`, `last_file`,`last_f_del`) VALUES (0, 1, 0, '000','0');
+INSERT INTO `{$dbprefix}stats`  VALUES (0,1,0,0,0,0,0,0,0);
 ";
 
 $sql_users = "
@@ -112,7 +116,7 @@ CREATE TABLE `{$dbprefix}users` (
   `admin` tinyint(1) NOT NULL default '0',
   `session_id` char(32) collate utf8_bin NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 ";
 
 $sql_files = "
@@ -129,7 +133,7 @@ CREATE TABLE `{$dbprefix}files` (
   `user` int(10) NOT NULL default '-1',
   `code_del` varchar(150) collate utf8_bin NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=2222412 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 ";
 
 $sql_config = "
@@ -141,12 +145,13 @@ CREATE TABLE `{$dbprefix}config` (
 ";
 $sql_online = "
 CREATE TABLE `{$dbprefix}online` (
-  `sid` varchar(100) collate utf8_bin NOT NULL,
+  `id` int(12) NOT NULL auto_increment,
   `ip` varchar(30) collate utf8_bin NOT NULL,
   `username` varchar(100) collate utf8_bin NOT NULL,
   `agent` varchar(100) collate utf8_bin NOT NULL,
-  `time` int(10) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `time` int(10) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 ";
 
 $sql_config1 = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('foldername', 'uploads')";

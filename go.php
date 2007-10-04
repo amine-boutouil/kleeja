@@ -375,6 +375,7 @@
 	$n_sizes_st = $lang['SIZES_ST'];
 	//$n_lstfle_st= $lang['LSTFLE_ST'];
 	$n_lst_dl_st= $lang['LSTDELST'];
+	$n_dpnd_on_h= $lang['LAST_1_H'];
 	
 	//////
 	$files_st	= $stat_files;

@@ -715,13 +715,19 @@
 		$n_upload_max_filesize 	= "upload_max_filesize";
 		$n_post_max_size 		= "post_max_size";
 		$n_kleeja_version		= $lang['KLEEJA_VERSION'];
-
+		$n_s_c_t				= $lang['S_C_T'];
+		$n_s_c_y				= $lang['S_C_Y'];
+		$n_s_c_a				= $lang['S_C_A'];
+		
 		//data
 		$files_number 		= $stat_files ;
 		$files_sizes 		= Customfile_size($stat_sizes);
 		$users_number 		= $stat_users;
 		$last_file_up		= $stat_last_file;
 		$last_del_fles 		= date("d-m-Y H:a", $stat_last_f_del);
+		$s_c_t				= $stat_counter_today;
+		$s_c_y				= $stat_counter_yesterday;
+		$s_c_a				= $stat_counter_all;
 		$php_version 		= 'php '.phpversion();
 		$mysql_version 		= 'MYSQL '.$SQL->mysql_version;
 		$max_execution_time =  ini_get('max_execution_time');

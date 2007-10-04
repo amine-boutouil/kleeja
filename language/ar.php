@@ -8,7 +8,7 @@
 /*
 Information :
 Arabic Language .. from right-to-left and it use utf8
-Spoken bY many country in middle east ..
+Spoken by many countries in the middle east ..
 */
 
 $lang = array (
@@ -132,6 +132,9 @@ $lang = array (
 		'SIZES_ST' 			=> 'حجم كل الملفات',	
 		'LSTFLE_ST' 		=> 'آخر مارفع',	
 		'LSTDELST' 			=> 'آخر فحص للملفات الخامله',	
+		'S_C_T' 			=> 'زوار اليوم',	
+		'S_C_Y' 			=> 'زوار أمس',	
+		'S_C_A' 			=> 'عدد الزوار كلياً',	
 		'LAST_1_H' 			=> 'هذه الإحصائيات لقبل ساعه من الآن',	
 		//download.php
 		'DOWNLAOD' 			=> 'تحميل',

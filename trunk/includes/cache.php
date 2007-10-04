@@ -111,33 +111,41 @@
 
 
 	//stats .. to cache
-	if(file_exists("cache/data_stats.php")){
+	if( file_exists("cache/data_stats.php") ){
 	//1
     include ("cache/data_stats.php");
 	//2
-	$tfile		= @filemtime("cache/data_stats.php");
-    if($tpage >= ($tpage+(60*60))){    //after 1 hours
-    unlink("$this->cachedir/$npage");
-    }
-    }else{//no file stat
+	$tfile		= @filectime("cache/data_stats.php");
+    if( (time-$tfile) >= 3600){    //after 1 hours
+    @unlink("cache/data_stats.php");
+		}
+	}else{
 	$sqlstat	=	$SQL->query("SELECT * FROM {$dbprefix}stats");
 
 	$file_dataw = '<' . '?php' . "\n\n";
 	$file_dataw .= "\n// auto-generated cache files\n//By:Saanina@gmail.com \n\n";
 
 	while($row=$SQL->fetch_array($sqlstat)){
-	$stat_files = $row[files];
-	$stat_sizes = $row[sizes];
-	$stat_users = $row[users];
-	$stat_last_file =  $row[last_file];
-	$stat_last_f_del =  $row[last_f_del];
-
+	$stat_files 			= $row[files];
+	$stat_sizes 			= $row[sizes];
+	$stat_users 			= $row[users];
+	$stat_last_file 		=  $row[last_file];
+	$stat_last_f_del 		=  $row[last_f_del];
+	$stat_today 			=  $row[today];
+	$stat_counter_today 	=  $row[counter_today];
+	$stat_counter_yesterday	=  $row[counter_yesterday];
+	$stat_counter_all		=  $row[counter_all];
+	
 	//write
-	$file_dataw .= '$stat_files  	=   \'' . $row['files'] . '\';' . "\n";
-	$file_dataw .= '$stat_sizes  	=   \'' . $row['sizes'] . '\';' . "\n";
-	$file_dataw .= '$stat_users  	=   \'' . $row['users'] . '\';' . "\n";
-	$file_dataw .= '$stat_last_file =	\'' . $row['last_file'] . '\';' . "\n\n";
-	$file_dataw .= '$stat_last_f_del =	\'' . $row['last_f_del'] . '\';' . "\n\n";
+	$file_dataw .= '$stat_files  			=   \'' . $row['files'] . '\';' . "\n";
+	$file_dataw .= '$stat_sizes  			=   \'' . $row['sizes'] . '\';' . "\n";
+	$file_dataw .= '$stat_users  			=   \'' . $row['users'] . '\';' . "\n";
+	$file_dataw .= '$stat_last_file 		=	\'' . $row['last_file'] . '\';' . "\n";
+	$file_dataw .= '$stat_last_f_del		=	\'' . $row['last_f_del'] . '\';' . "\n";
+	$file_dataw .= '$stat_today 			=	\'' . $row['today'] . '\';' . "\n";
+	$file_dataw .= '$stat_counter_today		=	\'' . $row['counter_today'] . '\';' . "\n";
+	$file_dataw .= '$stat_counter_yesterday =	\'' . $row['counter_yesterday'] . '\';' . "\n";
+	$file_dataw .= '$stat_counter_all 		=	\'' . $row['counter_all'] . '\';' . "\n\n";
 		}
 	$file_dataw .= '?' . '>';
 	$SQL->freeresult($sqlstat);
@@ -260,21 +268,50 @@
 	$ip			= getenv('REMOTE_ADDR');
 	}
 	$agent		= $_SERVER['HTTP_USER_AGENT'];
-	$sid		= md5( session_id() );//$_COOKIE["PHPSESSID"];    
-	$timeout 	= 300; //seconds
+	$timeout 	= 600; //seconds
 	$time 		= time();  
-	$time2		= time() + (1* 60);   
 	$timeout2 	= $time-$timeout;  
-	$username	= ( $usrcp->name() ) ? $usrcp->name() : '-1';
+	#$username	= ( $usrcp->name() ) ?  (($usrcp->admin() )?  '<span style="color:blue;"><b>' .$usrcp->name(). '</b></span>' : $usrcp->name() ): '-1';
+	$username	= ( $usrcp->name() ) ? $usrcp->name(): '-1';
 	//
-	if(!$_SESSION[online_reg] ) {
-	$insert		= $SQL->query("INSERT INTO {$dbprefix}online VALUES ('$sid','$ip','$username','$agent','$time')");  
-	$_SESSION[online_reg] =true;
+	
+	$who_here	= $SQL->num_rows($SQL->query("SELECT id FROM {$dbprefix}online WHERE  ip='$ip'"));  
+	
+	if(!$who_here){
+	$SQL->query("INSERT INTO {$dbprefix}online VALUES ('','$ip','$username','$agent','$time')");  
+	}else
+	{
+	$SQL->query("UPDATE {$dbprefix}online set time='$time' WHERE ip='$ip'");  
 	}
+
 	
-	$delete 	= $SQL->query("DELETE FROM {$dbprefix}online WHERE time<$timeout2");  
-	
+	$delete 	= $SQL->query("DELETE FROM {$dbprefix}online WHERE time < $timeout2");  
 	return;
 	}#End function
+	
+	
+	function visit_stats ()
+	{
+	global $SQL,$usrcp,$dbprefix,$stat_today;
+	
+	$today = date("j");
 
+	if ($today !=  $stat_today  ) {
+	
+	//counter yesterday .. and make toaay counter as 0 , then get date of today .. 
+	$sqlstat	=	$SQL->query("SELECT counter_today FROM {$dbprefix}stats");
+	while($row=$SQL->fetch_array($sqlstat)){ $yesterday_cout = $row[counter_today]; }
+	$sql = $SQL->query("UPDATE {$dbprefix}stats set counter_yesterday='$yesterday_cout',counter_today='0',today='$today'");
+	if ($sql){ @unlink("cache/data_stats.php"); } 
+	
+	}
+	
+	
+		if ( !$_SESSION['visitor'] )
+		{
+		$sqls = $SQL->query("UPDATE {$dbprefix}stats set counter_today=counter_today+1, counter_all=counter_all+1");  
+		if ($sqls){$_SESSION['visitor'] = true};
+		}
+		
+	}
 ?>

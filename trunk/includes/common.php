@@ -162,4 +162,8 @@ $starttm = $starttm[1] + $starttm[0];
 	KleejaOnline();
 	}
 	
+	// claculate for counter ..
+	visit_stats();
+	
+	
 ?>

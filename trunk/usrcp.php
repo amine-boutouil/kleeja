@@ -36,7 +36,11 @@
 			
 			elseif ( isset($_POST['submit']) )
 			{
-		
+					//for onlines
+					if (getenv('HTTP_X_FORWARDED_FOR')){$ip	= getenv('HTTP_X_FORWARDED_FOR');} else {$ip= getenv('REMOTE_ADDR');}
+					if ($config[allow_online] == 1 ){$SQL->query("DELETE FROM {$dbprefix}online WHERE ip='$ip'");  }
+					//
+					
 			//if ($config[user_system] == 3){  // vb 
 			
 			
@@ -66,9 +70,10 @@
 				}
 				elseif( $usrcp->data($_POST['lname'],$_POST['lpass']) )
 				{
+
 				$text = $lang['LOGIN_SUCCESFUL'].' <br /> <a href="./index.php">'. $lang['HOME'] . '</a>';
 				$stylee = "info.html";
-				unset($_SESSION[online_reg]);
+				
 				}
 				else
 				{
@@ -196,7 +201,10 @@
 			{
 			$text =$lang['LOGOUT_SUCCESFUL'] . '<br /> <a href="index.php">' . $lang['HOME'] . '</a>';
 			$stylee = "info.html";
-			unset($_SESSION[online_reg]);
+					//for onlines
+					if (getenv('HTTP_X_FORWARDED_FOR')){$ip	= getenv('HTTP_X_FORWARDED_FOR');} else {$ip= getenv('REMOTE_ADDR');}
+					if ($config[allow_online] == 1 ){$SQL->query("DELETE FROM {$dbprefix}online WHERE ip='$ip'");  }
+					//
 			}
 			else
 			{

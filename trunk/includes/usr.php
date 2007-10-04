@@ -324,7 +324,7 @@ class usrcp {
 					return false;
 					}
 				}
-				
+
 				function logout()
 				{
 				unset( $_SESSION['USER_ID'] );

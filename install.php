@@ -139,6 +139,15 @@ CREATE TABLE `{$dbprefix}config` (
   PRIMARY KEY  (`name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 ";
+$sql_online = "
+CREATE TABLE `{$dbprefix}online` (
+  `sid` varchar(100) collate utf8_bin NOT NULL,
+  `ip` varchar(30) collate utf8_bin NOT NULL,
+  `username` varchar(100) collate utf8_bin NOT NULL,
+  `agent` varchar(100) collate utf8_bin NOT NULL,
+  `time` int(10) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+";
 
 $sql_config1 = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('foldername', 'uploads')";
 $sql_config2 = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('prefixname', '')";
@@ -161,6 +170,7 @@ $sql_config18 = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('lang
 $sql_config19 = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('www_url', '0')";
 $sql_config20 = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('del_f_day', '10')";
 $sql_config21 = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('allow_stat_pg', '1')";
+$sql_config22 = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('allow_online', '0')";
 
 $sql_exts = "
 CREATE TABLE `{$dbprefix}exts` (
@@ -386,14 +396,15 @@ case 'data' :
 		 $sql[30] =  @mysql_query($sql_config19, $connect);
 		 $sql[31] =  @mysql_query($sql_config20, $connect);
 		 $sql[32] =  @mysql_query($sql_config21, $connect);
-		 $sql[33] =  @mysql_query($sql_exts, $connect);
-		 $sql[34] =  @mysql_query($sql_exts2, $connect);
-		 $sql[35] =  @mysql_query($sql_exts3, $connect);
-		 $sql[36] =  @mysql_query($sql_exts4, $connect);
-		 $sql[37] =  @mysql_query($sql_exts5, $connect);
-		 $sql[38] =  @mysql_query($sql_exts6, $connect);
-		 $sql[39] =  @mysql_query($sql_exts7, $connect);
-
+		 $sql[33] =  @mysql_query($sql_config22, $connect);
+		 $sql[34] =  @mysql_query($sql_exts, $connect);
+		 $sql[35] =  @mysql_query($sql_exts2, $connect);
+		 $sql[36] =  @mysql_query($sql_exts3, $connect);
+		 $sql[37] =  @mysql_query($sql_exts4, $connect);
+		 $sql[38] =  @mysql_query($sql_exts5, $connect);
+		 $sql[39] =  @mysql_query($sql_exts6, $connect);
+		 $sql[40] =  @mysql_query($sql_exts7, $connect);
+		 $sql[41] =  @mysql_query($sql_online, $connect);
 		 $err = 0;
 		for ($i=0; $i<count($sql); $i++)
 		{
@@ -408,6 +419,7 @@ case 'data' :
 				elseif ($i == 7) {print '<span style="color:green;">' . $lang['INST_CRT_FLS'] . '</span><br/>';}
 				elseif ($i == 8) {print '<span style="color:green;">' . $lang['INST_CRT_CNF'] . '</span><br/>';}
 				elseif ($i == 30) {print '<span style="color:green;">' . $lang['INST_CRT_EXT'] . '</span><br/>';}
+				elseif ($i == 41) {print '<span style="color:green;">' . $lang['INST_CRT_ONL'] . '</span><br/>';}
 				else {print '<span style="color:green;">' . $lang['INST_SQL_OK'] . '</span><br/>';}
 
 			}else{
@@ -415,7 +427,7 @@ case 'data' :
 				$err++;
 			}
 
-		if ($i == '39') { $ok = true;}
+		if ($i == '41') { $ok = true;}
 		}#for
 
 		if ($ok && !$err)

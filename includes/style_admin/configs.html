@@ -117,6 +117,13 @@
 		<td><label><input type="text" id="sec_down" name="sec_down" value="{con.sec_down}" size="40"></label></td>
 	</tr>
 	<tr>
+		<td><label for="allow_online">{n_allow_online}</label></td>
+		<td>
+		<label>{n_yes}<input type="radio" id="allow_online" name="allow_online" value="1"  <IF NAME="yallow_online"> checked="checked"</IF>></label>
+		<label>{n_no}<input type="radio" id="allow_online" name="allow_online" value="0"  <IF NAME="nallow_online"> checked="checked"</IF>></label>
+		</td>	
+	</tr>	
+	<tr>
 		<td><label for="allow_stat_pg">{n_allow_stat_pg}</label></td>
 		<td>
 		<label>{n_yes}<input type="radio" id="allow_stat_pg" name="allow_stat_pg" value="1"  <IF NAME="yallow_stat_pg"> checked="checked"</IF>></label>

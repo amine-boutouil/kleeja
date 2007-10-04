@@ -9,9 +9,22 @@
 <br />
 <br />
 
+<!---- START  FOR INFORMATION ---->
 <LOOP NAME="info">
 <b>{info_lang}:</b> {{i}}<br />
 </LOOP>
+<!---- END  FOR INFORMATION ---->
+
+
+<!---- START FOR ONLINE ---->
+<IF NAME="show_online">
+<b>{NUMBER_ONLINE} :</b>{allnumbers} ( {NUMBER_UONLINE} : {usersnum} , {NUMBER_VONLINE}: {visitornum} )
+<br/>
+<LOOP NAME="shownames">
+{{name}} , 
+</LOOP>
+</IF>
+<!---- END FOR ONLINE ---->
 
 </div>
 		

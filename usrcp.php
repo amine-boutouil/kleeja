@@ -68,6 +68,7 @@
 				{
 				$text = $lang['LOGIN_SUCCESFUL'].' <br /> <a href="./index.php">'. $lang['HOME'] . '</a>';
 				$stylee = "info.html";
+				unset($_SESSION[online_reg]);
 				}
 				else
 				{
@@ -195,6 +196,7 @@
 			{
 			$text =$lang['LOGOUT_SUCCESFUL'] . '<br /> <a href="index.php">' . $lang['HOME'] . '</a>';
 			$stylee = "info.html";
+			unset($_SESSION[online_reg]);
 			}
 			else
 			{

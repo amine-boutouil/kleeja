@@ -206,6 +206,7 @@
 
 
 	print $tpl->display("header.html");
+	return;
 	}
 
 
@@ -233,6 +234,7 @@
 
 	// THEN .. at finish
 	$SQL->close();
+	return;
 	}
 
 	//size function
@@ -247,6 +249,32 @@
 	  return round($size, 2).$ext;
 	}
 
-
+	// for who online .. 
+	function KleejaOnline () {
+	global $SQL,$usrcp,$dbprefix;
+	
+	// get information .. 
+	if (getenv('HTTP_X_FORWARDED_FOR')){
+	$ip			= getenv('HTTP_X_FORWARDED_FOR');} 
+	else {
+	$ip			= getenv('REMOTE_ADDR');
+	}
+	$agent		= $_SERVER['HTTP_USER_AGENT'];
+	$sid		= md5( session_id() );//$_COOKIE["PHPSESSID"];    
+	$timeout 	= 300; //seconds
+	$time 		= time();  
+	$time2		= time() + (1* 60);   
+	$timeout2 	= $time-$timeout;  
+	$username	= ( $usrcp->name() ) ? $usrcp->name() : '-1';
+	//
+	if(!$_SESSION[online_reg] ) {
+	$insert		= $SQL->query("INSERT INTO {$dbprefix}online VALUES ('$sid','$ip','$username','$agent','$time')");  
+	$_SESSION[online_reg] =true;
+	}
+	
+	$delete 	= $SQL->query("DELETE FROM {$dbprefix}online WHERE time<$timeout2");  
+	
+	return;
+	}#End function
 
 ?>

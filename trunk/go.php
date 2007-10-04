@@ -376,6 +376,9 @@
 	//$n_lstfle_st= $lang['LSTFLE_ST'];
 	$n_lst_dl_st= $lang['LSTDELST'];
 	$n_dpnd_on_h= $lang['LAST_1_H'];
+	$n_s_c_t	= $lang['S_C_T'];
+	$n_s_c_y	= $lang['S_C_Y'];
+	$n_s_c_a	= $lang['S_C_A'];
 	
 	//////
 	$files_st	= $stat_files;
@@ -383,7 +386,9 @@
 	$sizes_st	= Customfile_size($stat_sizes);
 	//$lstfle_st	= $stat_last_file;
 	$lst_dl_st	= date("d-m-Y H:a", $stat_last_f_del);
-	
+	$s_c_t		= $stat_counter_today;
+	$s_c_y		= $stat_counter_yesterday;
+	$s_c_a		= $stat_counter_all;
 	
 	break; //=================================================
 	/*case "example" : //=============================[example]

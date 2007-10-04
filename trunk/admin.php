@@ -78,6 +78,7 @@
 		$n_www_url		= $lang['WWW_URL'];
 		$n_del_f_day	= $lang['DEL_FDAY'];
 		$n_allow_stat_pg= $lang['ALLOW_STAT_PG'];
+		$n_allow_online = $lang['ALLOW_ONLINE'];
 
 
 		$sql	=	$SQL->query("SELECT * FROM {$dbprefix}config");
@@ -129,6 +130,8 @@
 		if ($con[www_url] == "1" ) {$ywww_url = true; }else {$nwww_url = true;}
         //..
 		if ($con[allow_stat_pg] == "1" ) {$yallow_stat_pg = true; }else {$nallow_stat_pg = true;}
+        //..
+		if ($con[allow_online] == "1" ) {$yallow_online = true; }else {$nallow_online = true;}
 
 		//after submit ////////////////
 		if ( isset($_POST['submit']) )

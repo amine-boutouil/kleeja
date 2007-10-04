@@ -155,4 +155,11 @@ $starttm = $starttm[1] + $starttm[0];
 	Saafooter();
 	exit();
 	}
+	
+	//calculate  onlines ...  
+	if ($config[allow_online] == 1 )
+	{
+	KleejaOnline();
+	}
+	
 ?>

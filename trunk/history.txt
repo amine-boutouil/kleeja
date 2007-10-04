@@ -1,0 +1,21 @@
+############################
+# kleeja history .. 
+############################
+
+guide : 
++  : add .. 
+ -  : fix .. 
+#  : 
+
+beta1 : 
+ -  fix progress picture ..
++ install file ..
++ more opitions in cp
+
+beta2
++ stats page .
++ automatic delete for files ..
++ upload url .. 
++ more opitions in cp
++ advanced cache ..
++ who online .. with allow from acp

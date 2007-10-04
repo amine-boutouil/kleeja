@@ -232,11 +232,24 @@
 	$tpl->assign("page_stats",$page_stats);
 	}#end statfooter
 
+	//if admin
 	if ( $usrcp->admin() )
 	{
 	$admin_page = '<br /><a href="./admin.php">' . $lang['ADMINCP'] .  '</a><br />';
 	$tpl->assign("admin_page",$admin_page);
 	}
+	// if google analytics .. 
+	if ( $config[googleanalytics] != '' ) {
+		$googleanalytics = '
+		<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+			</script>
+			<script type="text/javascript">
+				  _uacct="' . $config[googleanalytics] . '";
+				  urchinTracker();
+			</script>';
+		$tpl->assign("googleanalytics",$googleanalytics);
+	}
+
 	//show footer
 	print $tpl->display("footer.html");
 
@@ -310,7 +323,7 @@
 		if ( !$_SESSION['visitor'] )
 		{
 		$sqls = $SQL->query("UPDATE {$dbprefix}stats set counter_today=counter_today+1, counter_all=counter_all+1");  
-		if ($sqls){$_SESSION['visitor'] = true};
+		if ($sqls){$_SESSION['visitor'] = true;}
 		}
 		
 	}

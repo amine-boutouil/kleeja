@@ -79,6 +79,7 @@
 		$n_del_f_day	= $lang['DEL_FDAY'];
 		$n_allow_stat_pg= $lang['ALLOW_STAT_PG'];
 		$n_allow_online = $lang['ALLOW_ONLINE'];
+		$n_googleanalytics = '<a href="http://www.google.com/analytics">Google Analytics</a>';
 
 
 		$sql	=	$SQL->query("SELECT * FROM {$dbprefix}config");

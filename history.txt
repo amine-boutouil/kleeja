@@ -19,3 +19,6 @@ beta2
 + more opitions in cp
 + advanced cache ..
 + who online .. with allow from acp
++ visitors countor for today ..
++ visitors countor for yesterday and all days..
++ googleanalytics code .. 

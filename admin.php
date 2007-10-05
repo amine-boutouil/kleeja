@@ -546,6 +546,48 @@
 		$stylee	= "info.html";
 		}
 		break; //=================================================
+		case "ban" ://===================================== [ ban]
+		//for style ..
+		$stylee = "ban.html";
+		//words
+		$action 		= "admin.php?cp=ban";
+		$n_explain_top 	= $lang['BAN_EXP1'];
+		$n_explain_btm 	= $lang['BAN_EXP2'];
+		$n_submit 		= $lang['UPDATE_BAN'];
+
+
+		$sql	=	$SQL->query("SELECT ban FROM `{$dbprefix}stats`");
+		while($row=$SQL->fetch_array($sql)){
+
+		
+			$ban = ( isset($_POST["ban_text"]) ) ? $_POST["ban_text"] : $row[ban];
+				//when submit !!
+			if ( isset($_POST['submit']) ) {
+
+				//update
+				$update2 = $SQL->query("UPDATE `{$dbprefix}stats` SET
+				ban = '" . $SQL->escape($ban) . "' ");
+				if (!$update2) { die($lang['CANT_UPDATE_SQL']);}
+				else
+				{
+				//delete cache ..
+					if (file_exists('cache/data_ban.php')){
+					@unlink('cache/data_ban.php');
+					}
+				}
+			}
+		}
+		$SQL->freeresult($sql);
+
+
+		//after submit ////////////////
+		if ( isset($_POST['submit']) )
+		{
+		$text = $lang['BAN_UPDATED'];
+		$stylee	= "info.html";
+		}
+		
+		break; //=================================================
 		case "backup" ://===================================== [ backup]
 		//thanks for [coder] from montadaphp.net  for his simle lession
 		//@set_time_limit(1000);
@@ -781,6 +823,8 @@
 	$repair_url 	= "admin.php?cp=repair";
 	$lgutcp_name 	= $lang['R_LGOUTCP'];
 	$lgutcp_url 	= "admin.php?cp=lgutcp";
+	$ban_name 		= $lang['R_BAN'];
+	$ban_url 		= "admin.php?cp=ban";
 
 	//header
 	print $tpl->display("header.html");

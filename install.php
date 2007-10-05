@@ -99,12 +99,13 @@ CREATE TABLE `{$dbprefix}stats` (
   `today` int(4) NOT NULL,
   `counter_today` int(12) NOT NULL,
   `counter_all` int(12) NOT NULL,
-  `counter_yesterday` int(12) NOT NULL
+  `counter_yesterday` int(12) NOT NULL,
+  `ban` text collate utf8_bin NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 ";
 
 $sql_stat2 = "
-INSERT INTO `{$dbprefix}stats`  VALUES (0,1,0,0,0,0,0,0,0);
+INSERT INTO `{$dbprefix}stats`  VALUES (0,1,0,0,0,0,0,0,0,'');
 ";
 
 $sql_users = "

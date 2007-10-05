@@ -2,10 +2,12 @@
 # kleeja history .. 
 ############################
 
-guide : 
+---------------------------------
+Guide : 
 +  : add .. 
- -  : fix .. 
-#  : 
+-  : fix .. 
+---------------------------------
+
 
 beta1 : 
  -  fix progress picture ..
@@ -22,3 +24,4 @@ beta2
 + visitors countor for today ..
 + visitors countor for yesterday and all days..
 + googleanalytics code .. 
++ ban system (cp + full ips ban )

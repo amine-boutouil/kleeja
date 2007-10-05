@@ -188,8 +188,45 @@
     } //stat_del
 
 
+	//get banned ips data from stats table  ... ===========================================
+	if (file_exists('cache/data_ban.php')){include ('cache/data_ban.php'); }
+	if ( !$ban or !file_exists('cache/data_ban.php') )
+	{
 
+  	$sqlb	=	$SQL->query("SELECT ban FROM {$dbprefix}stats");
+	
+		$file_datab = '<' . '?php' . "\n\n";
+		$file_datab .= "\n// auto-generated cache files\n//By:Saanina@gmail.com \n\n";
+		$file_datab .= '$banss = array( ' . "\n";
+
+	while($row=$SQL->fetch_array($sqlb)){$ban1 = $row[ban]; }
+	$SQL->freeresult($sqlb);
+	
+	if ($ban1 != '' || $ban1 != ' '|| $ban1 != '  ')
+	{
+		//seperate ips .. 
+		$ban2 = explode("|", $ban1);
+		for ( $i=0;$i<count($ban2);$i++)
+		{
+		$banss[$i] = $ban2[$i];
+		$file_datab .= '\'' . trim($ban2[$i]) . '\',' . "\n";
+		}#for
+	
+		$file_datab .= ');'."\n\n";
+		$file_datab .= '?' . '>';
+ 	}
+
+	$filenumb = @fopen('cache/data_ban.php', 'w');
+	flock($filenumb, LOCK_EX); // exlusive look
+	@fwrite($filenumb, $file_datab);
+	fclose($filenumb);
+	}
+	
+	
+	
+	
 	//some function .. for disply ..
+	
 	function Saaheader($title) {
 	global $tpl,$usrcp,$lang,$filecp_st;
 
@@ -326,5 +363,38 @@
 		if ($sqls){$_SESSION['visitor'] = true;}
 		}
 		
+	return;
+	}
+	
+	/// for ban ips .. 
+	function get_ban () {
+	global $banss,$lang,$tpl,$text;
+	
+		//visitor ip now 
+		if (getenv('HTTP_X_FORWARDED_FOR')){$ip	= getenv('HTTP_X_FORWARDED_FOR');} else {$ip= getenv('REMOTE_ADDR');}
+	
+		//now .. looL for banned ips 
+		if (empty($banss) || !is_array($banss)){$banss = array();}
+		foreach ( $banss as $ip2 ) {
+			//first .. replace all * with something good .
+			$replaceIt = str_replace("*", '[0-9]{1,3}', $ip2);
+			if ( $ip == $ip2 || eregi($replaceIt , $ip) )
+			{
+			
+			$text = $lang['U_R_BANNED'];
+			$stylee = "info.html";
+			//header
+			Saaheader($lang['U_R_BANNED']);
+			//index
+			print $tpl->display($stylee);
+			//footer
+			Saafooter();
+			exit();
+			
+			}
+		
+		}
+		
+	return;
 	}
 ?>

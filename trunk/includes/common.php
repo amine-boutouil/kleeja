@@ -137,6 +137,9 @@ $starttm = $starttm[1] + $starttm[0];
 	header('Expires: 0');
 	header('Pragma: no-cache');	
 	
+	//ban system 
+	get_ban();
+	
 	
 	//site close ..
 	if ($config[siteclose] == 1 && !$usrcp->admin() ) {

@@ -374,11 +374,12 @@
 		if (getenv('HTTP_X_FORWARDED_FOR')){$ip	= getenv('HTTP_X_FORWARDED_FOR');} else {$ip= getenv('REMOTE_ADDR');}
 	
 		//now .. looL for banned ips 
-		if (empty($banss) || !is_array($banss)){$banss = array();}
+		if ( !empty($banss) ) {
+		if (!is_array($banss)){$banss = array();}
 		foreach ( $banss as $ip2 ) {
 			//first .. replace all * with something good .
 			$replaceIt = str_replace("*", '[0-9]{1,3}', $ip2);
-			if ( $ip == $ip2 || eregi($replaceIt , $ip) )
+			if ( $ip == $ip2 || @eregi($replaceIt , $ip) )
 			{
 			
 			$text = $lang['U_R_BANNED'];
@@ -394,7 +395,7 @@
 			}
 		
 		}
-		
+	}#empty	
 	return;
 	}
 ?>

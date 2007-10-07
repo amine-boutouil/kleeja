@@ -94,19 +94,22 @@ var $mysql_version;
 				function escape($msg) // for kleeja ,, its all thing
 				{
 					// make sure no HTML entities were matched
-					$msg = str_replace(array('\&', '\"', '\\\'', '<', '>')
-									,array('&amp;', '&quot;', "'", '&lt;', '&gt;'), $msg);
+					//$msg = str_replace(array('\&', '\"', '\\\'', '<', '>')
+						//			,array('&amp;', '&quot;', "'", '&lt;', '&gt;'), $msg);
 					
-					if(get_magic_quotes_gpc()) {
-					 $msg       = stripslashes($msg);
-					}
+					//if(get_magic_quotes_gpc()) {
+					 //$msg       = stripslashes($msg);
+					//}
 					
-					if (!$this->connect_id)
-					{
-						return @mysql_real_escape_string($msg);
-					}
-					return @mysql_real_escape_string($msg, $this->connect_id);
-					
+					$msg = htmlspecialchars($msg , ENT_QUOTES);
+					$msg = (! get_magic_quotes_gpc ()) ? addslashes ($msg) : $msg;
+
+					//if (!$this->connect_id)
+					//{
+					//	return @mysql_real_escape_string($msg);
+					//}
+					//return @mysql_real_escape_string($msg, $this->connect_id);
+					return $msg;
 				}
 /***************/
 				function server_info()

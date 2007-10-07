@@ -25,3 +25,8 @@ beta2
 + visitors countor for yesterday and all days..
 + googleanalytics code .. 
 + ban system (cp + full ips ban )
+
+beta3 
++ english language 
+-  some language words
+- insert data bugs 

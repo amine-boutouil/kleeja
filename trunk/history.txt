@@ -8,6 +8,8 @@ Guide :
 -  : fix .. 
 ---------------------------------
 
+beta..
++ first release .. 
 
 beta1 : 
  -  fix progress picture ..
@@ -30,3 +32,7 @@ beta3
 + english language 
 -  some language words
 - insert data bugs 
++antifloods system
++show thumbs when image uploads 
+- some bugs with creat thumbs and watermark
+

@@ -141,6 +141,10 @@ $starttm = $starttm[1] + $starttm[0];
 	get_ban();
 	
 	
+	//no floods  system
+	antifloods(6, 60); // (number of floods, per seconds ) 
+	
+	
 	//site close ..
 	if ($config[siteclose] == 1 && !$usrcp->admin() ) {
 	Saaheader($lang['SITE_CLOSED']);

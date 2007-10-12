@@ -101,6 +101,7 @@ CREATE TABLE `{$dbprefix}stats` (
   `counter_all` int(12) NOT NULL,
   `counter_yesterday` int(12) NOT NULL,
   `ban` text collate utf8_bin NOT NULL
+  
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 ";
 

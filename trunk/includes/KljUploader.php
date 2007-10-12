@@ -2,10 +2,10 @@
 ##################################################
 #						Kleeja
 #
-# Filename : class.AksidSars.php
-# purpose :  cache for all script.
+# Filename : KljUplaoder.php
+# purpose :  main class of script
 # copyright 2007 Kleeja.com ..
-#class by : saanina based on class.AksidSars.php  of Nadorino [@msn.com]
+#class by :  based on class.AksidSars.php  of Nadorino [@msn.com]
 ##################################################
 
 	  if (!defined('IN_COMMON'))
@@ -37,11 +37,11 @@ class KljUploader
 /**
 // source : php.net
  */
- function watermark($name, $logo){
-	$system=explode(".",$name);
-	if (preg_match("/jpg|jpeg/",$system[1])){$src_img=imagecreatefromjpeg($name);}
-	if (preg_match("/png/",$system[1])){$src_img=imagecreatefrompng($name);}
-	if (preg_match("/gif/",$system[1])){$src_img=imagecreatefromgif($name);}
+ function watermark($name, $ext, $logo){
+
+	if (preg_match("/jpg|jpeg/",$ext)){$src_img=imagecreatefromjpeg($name);}
+	if (preg_match("/png/",$ext)){$src_img=imagecreatefrompng($name);}
+	if (preg_match("/gif/",$ext)){$src_img=imagecreatefromgif($name);}
 
 	$src_logo = imagecreatefrompng($logo);
 
@@ -49,14 +49,25 @@ class KljUploader
     $bheight = imageSY($src_img);
     $lwidth  = imageSX($src_logo);
     $lheight = imageSY($src_logo);
+	
+	//fix bug for 1beta3
+	if ( $bwidth > 160 &&  $bheight > 130 ) { 
+	
     $src_x = $bwidth - ($lwidth + 5);
     $src_y = $bheight - ($lheight + 5);
     ImageAlphaBlending($src_img, true);
     ImageCopy($src_img,$src_logo,$src_x,$src_y,0,0,$lwidth,$lheight);
 
-	if (preg_match("/jpg|jpeg/",$system[1])){imagejpeg($src_img, $name);}
-	if (preg_match("/png/",$system[1])){imagepng($src_img, $name);}
-	if (preg_match("/gif/",$system[1])){imagegif($src_img, $name);}
+	if (preg_match("/jpg|jpeg/",$ext)){imagejpeg($src_img, $name);}
+	if (preg_match("/png/",$ext)){imagepng($src_img, $name);}
+	if (preg_match("/gif/",$ext)){imagegif($src_img, $name);}
+	
+	}# < 150
+	else 
+	{
+	return false;
+	}
+	
 }
 
 
@@ -66,42 +77,38 @@ class KljUploader
 	creates a resized image
 	source :http://icant.co.uk/articles/phpthumbnails/
 */
-function createthumb($name,$filename,$new_w,$new_h)
+function createthumb($name,$ext,$filename,$new_w,$new_h)
 {
-	$system=explode(".",$name);
-	if (preg_match("/jpg|jpeg/",$system[1])){$src_img=imagecreatefromjpeg($name);}
-	if (preg_match("/png/",$system[1])){$src_img=imagecreatefrompng($name);}
-	if (preg_match("/gif/",$system[1])){$src_img=imagecreatefromgif($name);}
+
+	if (preg_match("/jpg|jpeg/",$ext)){$src_img=imagecreatefromjpeg($name);}
+	if (preg_match("/png/",$ext)){$src_img=imagecreatefrompng($name);}
+	if (preg_match("/gif/",$ext)){$src_img=imagecreatefromgif($name);}
+
 	$old_x=imageSX($src_img);
 	$old_y=imageSY($src_img);
+	
 	if ($old_x > $old_y)
 	{
 		$thumb_w=$new_w;
 		$thumb_h=$old_y*($new_h/$old_x);
 	}
-	if ($old_x < $old_y)
+	elseif ($old_x < $old_y)
 	{
 		$thumb_w=$old_x*($new_w/$old_y);
 		$thumb_h=$new_h;
 	}
-	if ($old_x == $old_y)
+	elseif ($old_x == $old_y)
 	{
 		$thumb_w=$new_w;
 		$thumb_h=$new_h;
 	}
 	$dst_img=ImageCreateTrueColor($thumb_w,$thumb_h);
 	imagecopyresampled($dst_img,$src_img,0,0,0,0,$thumb_w,$thumb_h,$old_x,$old_y);
-	if (preg_match("/png/",$system[1]))
-	{
-		imagepng($dst_img,$filename);
-	}
-	elseif(preg_match("/jpg|jpeg/",$system[1])) {
-		imagejpeg($dst_img,$filename);
-	}
-	elseif(preg_match("/gif/",$system[1]))
-	{
-		imagegif($dst_img,$filename);
-	}
+
+	if (preg_match("/jpg|jpeg/",$ext)){imagejpeg($dst_img,$filename);}
+	if (preg_match("/png/",$ext)){imagepng($dst_img,$filename);}
+	if (preg_match("/gif/",$ext)){imagegif($dst_img,$filename);}
+	
 	imagedestroy($dst_img);
 	imagedestroy($src_img);
 }
@@ -431,7 +438,7 @@ function saveit ($filname,$folderee,$sizeee,$typeee) { //
 		global $SQL,$dbprefix,$config,$lang;
 
 				// sometime cant see file after uploading.. but ..
-				@chmod($filname."/".$folderee, 0666);//0755
+				@chmod($filname."/".$folderee, 0755);//0755
 //---------->
 				$name 	= (string)	$SQL->escape($filname);
 				$size	= (int) 	$sizeee;
@@ -473,17 +480,19 @@ if (in_array(strtolower($this->typet),$this->imgstypes)){
 	//make thumbs
 	if( ($config[thumbs_imgs]!=0) && in_array(strtolower($this->typet),$this->thmbstypes))
 	{
-	@$this->createthumb($folderee."/".$filname,$folderee.'/thumbs/'.$filname,100,100);
+	@$this->createthumb($folderee."/".$filname,strtolower($this->typet),$folderee.'/thumbs/'.$filname,100,100);
 	$extra_thmb = $lang['URL_F_THMB'] . ':<br /><textarea rows=2 cols=49 rows=1>[url='.$this->linksite."download.php?img=".$this->id_for_url.'][img]'.$this->linksite."download.php?thmb=".$this->id_for_url.'[/img][/url]</textarea><br />';
+	$extra_show_img = '<div style="text-align:center"><img src="'.$this->linksite."download.php?thmb=".$this->id_for_url.'" /></div></br>';
 	}
+	
 	//write on image
 	if( ($config[write_imgs]!=0) && in_array(strtolower($this->typet),$this->thmbstypes))
 	{
-		$this->watermark($folderee . "/" . $filname, 'images/watermark.png');
+		$this->watermark($folderee . "/" . $filname,strtolower($this->typet), 'images/watermark.png');
 	}
 
 	//then show
-	$this->errs[] = $lang['IMG_DOWNLAODED'] . '<br />
+	$this->errs[] = $lang['IMG_DOWNLAODED'] . '<br />' . $extra_show_img . '
 			' . $lang['URL_F_IMG'] . ':<br /><textarea rows=2 cols=49 rows=1>'.$this->linksite."download.php?img=".$this->id_for_url.'</textarea>
 			' . $lang['URL_F_BBC'] . ':<br /><textarea rows=2 cols=49 rows=1>[url='.$config[siteurl].'][img]'.$this->linksite."download.php?img=".$this->id_for_url.'[/img][/url]</textarea><br />
 			'.$extra_thmb.$extra_del;

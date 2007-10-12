@@ -398,4 +398,55 @@
 	}#empty	
 	return;
 	}
+
+	
+	//no floods ..
+	//floods : floods can get by this time 
+	//pertime : time which u must dont get more floods in it ..
+	function antifloods ($floods, $pertime) { 
+	global $tpl, $lang, $text;
+	
+	
+	$many	= $floods; // many [times of max floods ] 
+	$time	= $pertime; // per second 
+	
+	//go 
+	if(isset($_SESSION['antiflood']))
+    {
+        if((time()-$_SESSION['antiflood']['time']) >= $time)
+        {
+            unset($_SESSION['antiflood']);
+            
+            $_SESSION['antiflood']['time']=time();
+            $_SESSION['antiflood']['looks']=1;
+        }
+        else
+        {
+            $_SESSION['antiflood']['looks']++;
+            
+            if($_SESSION['antiflood']['looks']>=$many)
+            {
+				//error
+	           $text = $lang['U_R_FLOODER'].' #' . $many . '/' . $time;
+				$stylee = "err.html";
+				//header
+				Saaheader($lang['U_R_FLOODER']);
+				//index
+				print $tpl->display($stylee);
+				//footer
+				Saafooter();
+				exit();
+            }
+        }
+
+    }
+    else
+    {
+        $_SESSION['antiflood']['time']=time();
+        $_SESSION['antiflood']['looks']=1;
+
+    }
+}#end antifloods
+
+
 ?>

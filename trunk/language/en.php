@@ -28,7 +28,7 @@ $lang = array (
 		'NUMBER_UONLINE' 	=> 'users',
 		'NUMBER_VONLINE' 	=> 'guests',
 		//usercp.php
-		'USERS_SYSTEM' 			=> 'Users System',
+		'USERS_SYSTEM' 		=> 'Users System',
 		'ERROR_NAVIGATATION'=> 'Redirection Error ..',
 				#go=login
 		'LOGIN' 			=> 'Login',
@@ -181,7 +181,8 @@ $lang = array (
 		'ADMINCP' 			=> 'Administration Panel',
 		'JUMPTO' 			=> 'Navigate to',
 		'U_R_BANNED' 		=> 'Your IP has been banned.',
-		
+		'U_R_FLOODER' 		=> 'لقد قمت بتخطي عدد مرات عرض الصفحه بالوقت المحدد  ...',
+
 		//admin.php
 		'U_NOT_ADMIN' 		=> 'You do not have the administration permissions',
 		'UPDATE_CONFIG' 	=> 'Update Settings',

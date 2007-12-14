@@ -56,8 +56,10 @@ $starttm = $starttm[1] + $starttm[0];
 	include ($path.'config.php');
 	include ($path.'easytemplate.php');
 	include ($path.'mysql.php');
+	include ($path.'js.php');
 	include ($path.'KljUploader.php');
 	include ($path.'usr.php');
+
 
 	
 	// start classes ..
@@ -74,8 +76,8 @@ $starttm = $starttm[1] + $starttm[0];
 	}
 	elseif ( file_exists('./install.php') ) 
 	{
-	 echo '<span style="color:red;"> inatall.php exist .. you must delete it .. or if you dont
-	 install Kleeja yet ..  <a href="./install.php">Click to Install</a></apan>';
+	 echo '<span style="color:red;"> Install.php detected! please delete it OR install kleeja if you haven\'t done so yet...
+			<br/><a href="./install.php">Click to Install</a></apan>';
 	 exit();
 	}
 	
@@ -142,7 +144,7 @@ $starttm = $starttm[1] + $starttm[0];
 	
 	
 	//no floods  system
-	antifloods(6, 60); // (number of floods, per seconds ) 
+	//antifloods(6, 220); // (number of floods, per seconds ) 
 	
 	
 	//site close ..

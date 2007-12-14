@@ -1,4 +1,4 @@
-<?
+<?php
 # KLEEJA INSTALLER ... BY SAANINA
 # 12:11 AM 14/9/1428
 
@@ -337,8 +337,8 @@ case 'gpl2':
 	</textarea>
 
 	<br />
-	' . $lang['INST_AGR_GPL2'] . ' <input name="agrec" type="checkbox" onclick="agree()"  /><br />
-	<input name="agres" type="submit" value="' . $lang['INST_SUBMIT'] . '" disabled="disabled"/>
+	' . $lang['INST_AGR_GPL2'] . ' <input name="agrec" id="agrec" type="checkbox" onclick="javascript:agree();"  /><br />
+	<input name="agres" id="agres" type="submit" value="' . $lang['INST_SUBMIT'] . '" disabled="disabled"/>
 
 	</form>';
 

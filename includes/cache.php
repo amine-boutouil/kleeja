@@ -55,12 +55,12 @@
 			if ( $row['gust_allow'] )
 			{
 			$g_exts[$row['id']] = $row['ext'];
-			$file_datat .= '$g_exts[' . $row['id'] . ']  =   \'' . $row['ext'] . '\';' . "\n";
+			$file_datat .= '$g_exts[\'' . $row['id'] . '\']  =   \'' . $row['ext'] . '\';' . "\n";
 			}
 			if ( $row['user_allow'] )
 			{
 			$u_exts[$row['id']] = $row['ext'];
-			$file_datat .= '$u_exts[' . $row['id'] . ']  =   \'' . $row['ext'] . '\';' . "\n";
+			$file_datat .= '$u_exts[\'' . $row['id'] . '\']  =   \'' . $row['ext'] . '\';' . "\n";
 			}
 		}
 			$file_datat .= "\n\n";
@@ -89,12 +89,12 @@
 			if ( $row['gust_allow'])
 			{
 			$g_sizes[$row['id']] = $row['gust_size'];
-			$file_datas .= '$g_sizes[' . $row['ext'] . ']  =   \'' . $row['gust_size'] . '\';' . "\n";
+			$file_datas .= '$g_sizes[\'' . $row['ext'] . '\']  =   \'' . $row['gust_size'] . '\';' . "\n";
 			}
 			if ( $row['user_allow'])
 			{
 			$u_sizes[$row['id']] = $row['user_size'];
-			$file_datas .= '$u_sizes[' . $row['ext'] . ']  =   \'' . $row['user_size'] . '\';' . "\n";
+			$file_datas .= '$u_sizes[\'' . $row['ext'] . '\']  =   \'' . $row['user_size'] . '\';' . "\n";
 			}
 		}
 			$file_datas .= "\n\n".'if (!is_array($g_sizes)){$g_sizes = array();}'."\n";

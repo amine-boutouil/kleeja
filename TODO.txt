@@ -11,3 +11,4 @@ use mime types when download
 shows the uploaded images on a page with a slideshow....
 make downlaod from url like from pc .. increasing inputs.
 disallow download from outside our site.
+Şáå íÙÈØ ãæÏ ÑÇíÊÑ + ÇÓã ááãáİ  æÕİ ááãáİ ÇÎÊíÇÑí ææŞÊ ÊÍãíá Çáãáİ íßæä ÊíÊá ÇáÕİÍÉ ÇÓã Çáãáİ ææÕİ ÇáÕİÍÉ İí ÇáãíÊÇ æÕİ Çáãáİ íÕíÑ 100% ÚÔÇä ãÍÑßÇÊ ÇáÈÍË ãËáÇ ğ Çáí Íãá ÈÑäÇãÌ íÍØ ÇÓãå íÕíÑ ÇáãÑßÒí ÊãÇÇÇÇã İí ãÍÑßÇÊ ÇáÈÍË

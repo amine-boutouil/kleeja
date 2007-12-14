@@ -119,72 +119,7 @@ function createthumb($name,$ext,$filename,$new_w,$new_h)
 function tpl(){  //thwara بداية
 	global $lang,$config;
 
-	$sss ='<script type="text/javascript">//<![CDATA[
-	totalupload_num=' . $this->filesnum . '-1;
-	function makeupload(){
-	upload_show_num=\'\';
-	uploaded=2;
-	upload_num=document.uploader.upload_num.value-1;
-	if(upload_num>totalupload_num){	upload_num=totalupload_num;	}
-	for(i=0;i<upload_num;i++){
-	thisuid = uploaded+i;
-	upload_show_num=upload_show_num+\'<input type="file" name="file[]"><br>\';
-
-		}
-		document.getElementById(\'upload_forum\').innerHTML  = upload_show_num;
-	}
-	function plus ()
-	{
-	var num = ' . $this->filesnum . ';
-	if (document.uploader.upload_num.value < num )
-	{
-	document.uploader.upload_num.value++;
-	}
-	else
-	{
-	alert("' . $lang['MORE_F_FILES'] . '");
-	}
-	}
-	function minus ()
-	{
-	var num = ' . $this->filesnum . ';
-	if (document.uploader.upload_num.value != 1 )
-	{
-	document.uploader.upload_num.value--;
-	}
-	}
-	function form_submit() {
-		var load = document.getElementById(\'loadbox\');
-		document.uploader.submit();
-		load.style.display = \'block\';
-		load.src = \'images/loading.gif\';
-		var txt = document.getElementById("texttype");
-		var fle = document.getElementById("filetype");
-		txt.style.display = \'none\';
-		fle.style.display = \'none\'
-	}
-	function wdwdwd (sub,ch){
-	var submit = document.getElementById(sub);
-	var checker = document.getElementById(ch);
-	if ( checker.checked ){submit.disabled = ""; }else{submit.disabled = "disabled"; }
-	}
-
-	function showhide() {
-	var txt = document.getElementById("texttype");
-	var fle = document.getElementById("filetype");
-
-	if (txt.style.display == \'none\'){
-	txt.style.display = \'block\';
-	fle.style.display = \'none\'
-	}else{
-	fle.style.display = \'block\';
-	txt.style.display = \'none\'
-	}
-
-
-	}
-//]]>>
-</script>';
+	$sss = js_uploader($this->filesnum);
 	//www url icon
 	if ($config['www_url'] != '0') {
     $sss .= '<a href="#"  onclick="showhide();" title="' . $lang['CHANG_TO_URL_FILE'] . '"><img src="images/urlORfile.gif" alt="' . $lang['CHANG_TO_URL_FILE'] . '"  /></a>';

@@ -312,11 +312,7 @@
 	global $SQL,$usrcp,$dbprefix;
 	
 	// get information .. 
-	if (getenv('HTTP_X_FORWARDED_FOR')){
-	$ip			= getenv('HTTP_X_FORWARDED_FOR');} 
-	else {
-	$ip			= getenv('REMOTE_ADDR');
-	}
+	$ip	 = (getenv('HTTP_X_FORWARDED_FOR')) ? getenv('HTTP_X_FORWARDED_FOR') : getenv('REMOTE_ADDR');
 	$agent		= $_SERVER['HTTP_USER_AGENT'];
 	$timeout 	= 600; //seconds
 	$time 		= time();  
@@ -328,39 +324,37 @@
 	$who_here	= $SQL->num_rows($SQL->query("SELECT id FROM {$dbprefix}online WHERE  ip='$ip'"));  
 	
 	if(!$who_here){
-	$SQL->query("INSERT INTO {$dbprefix}online VALUES ('','$ip','$username','$agent','$time')");  
+		$SQL->query("INSERT INTO {$dbprefix}online VALUES ('','$ip','$username','$agent','$time')");  
 	}else
 	{
-	$SQL->query("UPDATE {$dbprefix}online set time='$time' WHERE ip='$ip'");  
+		$SQL->query("UPDATE {$dbprefix}online set time='$time' WHERE ip='$ip'");  
 	}
 
-	
+	// i hate who online feature due to this step .. :( 
 	$delete 	= $SQL->query("DELETE FROM {$dbprefix}online WHERE time < $timeout2");  
 	return;
 	}#End function
 	
 	
-	function visit_stats ()
-	{
+	function visit_stats (){
 	global $SQL,$usrcp,$dbprefix,$stat_today;
 	
 	$today = date("j");
 
 	if ($today !=  $stat_today  ) {
 	
-	//counter yesterday .. and make toaay counter as 0 , then get date of today .. 
-	$sqlstat	=	$SQL->query("SELECT counter_today FROM {$dbprefix}stats");
-	while($row=$SQL->fetch_array($sqlstat)){ $yesterday_cout = $row[counter_today]; }
-	$sql = $SQL->query("UPDATE {$dbprefix}stats set counter_yesterday='$yesterday_cout',counter_today='0',today='$today'");
-	if ($sql){ @unlink("cache/data_stats.php"); } 
+		//counter yesterday .. and make toaay counter as 0 , then get date of today .. 
+		$sqlstat	=	$SQL->query("SELECT counter_today FROM {$dbprefix}stats");
+		while($row=$SQL->fetch_array($sqlstat)){ $yesterday_cout = $row[counter_today]; }
+		$sql = $SQL->query("UPDATE {$dbprefix}stats set counter_yesterday='$yesterday_cout',counter_today='0',today='$today'");
+		if ($sql){ @unlink("cache/data_stats.php"); } 
 	
 	}
 	
 	
-		if ( !$_SESSION['visitor'] )
-		{
-		$sqls = $SQL->query("UPDATE {$dbprefix}stats set counter_today=counter_today+1, counter_all=counter_all+1");  
-		if ($sqls){$_SESSION['visitor'] = true;}
+		if ( !$_SESSION['visitor'] ){
+			$sqls = $SQL->query("UPDATE {$dbprefix}stats set counter_today=counter_today+1, counter_all=counter_all+1");  
+			if ($sqls){$_SESSION['visitor'] = true;}
 		}
 		
 	return;
@@ -376,21 +370,22 @@
 		//now .. looL for banned ips 
 		if ( !empty($banss) ) {
 		if (!is_array($banss)){$banss = array();}
+		
 		foreach ( $banss as $ip2 ) {
 			//first .. replace all * with something good .
 			$replaceIt = str_replace("*", '[0-9]{1,3}', $ip2);
-			if ( $ip == $ip2 || @eregi($replaceIt , $ip) )
-			{
 			
-			$text = $lang['U_R_BANNED'];
-			$stylee = "info.html";
-			//header
-			Saaheader($lang['U_R_BANNED']);
-			//index
-			print $tpl->display($stylee);
-			//footer
-			Saafooter();
-			exit();
+			if ( $ip == $ip2 || @eregi($replaceIt , $ip) ){
+				
+				$text = $lang['U_R_BANNED'];
+				$stylee = "info.html";
+				//header
+				Saaheader($lang['U_R_BANNED']);
+				//index
+				print $tpl->display($stylee);
+				//footer
+				Saafooter();
+				exit();
 			
 			}
 		

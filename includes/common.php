@@ -39,7 +39,7 @@ $starttm = $starttm[1] + $starttm[0];
 		$_FILES 		= $HTTP_POST_FILES;
      }
 	  
-	/*##  important process
+	/*##  not now , script is more stable now ...
 	if (!@ini_get('register_globals')) {  
 		extract($_GET);  
 	    extract($_POST);  
@@ -143,36 +143,35 @@ $starttm = $starttm[1] + $starttm[0];
 	get_ban();
 	
 	
-	//no floods  system
-	//antifloods(6, 220); // (number of floods, per seconds ) 
+	//anti floods  system
+	antifloods(10, 500); // (number of floods, per seconds ) 
 	
 	
 	//site close ..
 	if ($config[siteclose] == 1 && !$usrcp->admin() ) {
-	Saaheader($lang['SITE_CLOSED']);
-	$text = $config[closemsg];
-	print $tpl->display("info.html");
-	Saafooter();
-	exit();
+		Saaheader($lang['SITE_CLOSED']);
+		$text = $config[closemsg];
+		print $tpl->display("info.html");
+		Saafooter();
+		exit();
 	}
 	
 	//exceed total size 
 	if ($stat_sizes >= ($config[total_size] *(1048576))) { // convert megabytes to bytes
-	Saaheader($lang['STOP_FOR_SIZE']);
-	$text = $lang['SIZES_EXCCEDED'];
-	print $tpl->display("info.html");
-	Saafooter();
-	exit();
+		Saaheader($lang['STOP_FOR_SIZE']);
+		$text = $lang['SIZES_EXCCEDED'];
+		print $tpl->display("info.html");
+		Saafooter();
+		exit();
 	}
 	
 	//calculate  onlines ...  
-	if ($config[allow_online] == 1 )
-	{
-	KleejaOnline();
+	if ($config[allow_online] == 1 ){
+		KleejaOnline();
 	}
 	
 	// claculate for counter ..
-	visit_stats();
+	visit_stats(); // of course , its not printable function , its just for calculate :)
 	
 	
 ?>

@@ -188,8 +188,8 @@
 
 				//when submit !!
 				if ( isset($_POST['submit']) ) {
-				$g_al[$row[id]] = isset($_POST["gal_".$row[id]])  ? 1 : 0 ;
-				$u_al[$row[id]] = isset($_POST["ual_".$row[id]])  ? 1 : 0 ;
+				$g_al[$row[id]] = isset($_POST["gal_".$row[id]])  ? 1 : $row['gust_allow'] ;
+				$u_al[$row[id]] = isset($_POST["ual_".$row[id]])  ? 1 : $row['user_allow'] ;
 
 				$update = $SQL->query("UPDATE `{$dbprefix}exts` SET
 				group_id = '" . intval($gr[$row[id]]) . "',

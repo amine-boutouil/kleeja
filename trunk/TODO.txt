@@ -1,5 +1,6 @@
 file password .. 
-img for wrong file
+img for wrong file [ ok ]
+fix exts panel in cp 
 fixing  downloading by ftp 
 use html seo opition for url
 last visit for bots [beta4]

@@ -112,12 +112,12 @@
 
 	//stats .. to cache
 	if( file_exists("cache/data_stats.php") ){
-	//1
-    include ("cache/data_stats.php");
-	//2
-	$tfile		= @filectime("cache/data_stats.php");
-    if( (time-$tfile) >= 3600){    //after 1 hours
-    @unlink("cache/data_stats.php");
+		//1
+		include ("cache/data_stats.php");
+		//2
+		$tfile		= @filectime("cache/data_stats.php");
+		if( (time()-$tfile) >= 3600){    //after 1 hours
+		@unlink("cache/data_stats.php");
 		}
 	}else{
 	$sqlstat	=	$SQL->query("SELECT * FROM {$dbprefix}stats");
@@ -126,15 +126,20 @@
 	$file_dataw .= "\n// auto-generated cache files\n//By:Saanina@gmail.com \n\n";
 
 	while($row=$SQL->fetch_array($sqlstat)){
-	$stat_files 			= $row[files];
-	$stat_sizes 			= $row[sizes];
-	$stat_users 			= $row[users];
+	$stat_files 			=  $row[files];
+	$stat_sizes 			=  $row[sizes];
+	$stat_users 			=  $row[users];
 	$stat_last_file 		=  $row[last_file];
 	$stat_last_f_del 		=  $row[last_f_del];
 	$stat_today 			=  $row[today];
 	$stat_counter_today 	=  $row[counter_today];
 	$stat_counter_yesterday	=  $row[counter_yesterday];
 	$stat_counter_all		=  $row[counter_all];
+	$stat_last_google		=  $row[last_google];
+	$stat_last_yahoo		=  $row[last_yahoo];
+	$stat_google_num		=  $row[google_num];
+	$stat_yahoo_num			=  $row[yahoo_num];
+	//$stat_rules				=  $row[rules];
 	
 	//write
 	$file_dataw .= '$stat_files  			=   \'' . $row['files'] . '\';' . "\n";
@@ -145,7 +150,13 @@
 	$file_dataw .= '$stat_today 			=	\'' . $row['today'] . '\';' . "\n";
 	$file_dataw .= '$stat_counter_today		=	\'' . $row['counter_today'] . '\';' . "\n";
 	$file_dataw .= '$stat_counter_yesterday =	\'' . $row['counter_yesterday'] . '\';' . "\n";
-	$file_dataw .= '$stat_counter_all 		=	\'' . $row['counter_all'] . '\';' . "\n\n";
+	$file_dataw .= '$stat_counter_all 		=	\'' . $row['counter_all'] . '\';' . "\n";
+	$file_dataw .= '$stat_last_google 		=	\'' . $row['last_google'] . '\';' . "\n";
+	$file_dataw .= '$stat_google_num 		=	\'' . $row['google_num'] . '\';' . "\n";
+	$file_dataw .= '$stat_last_yahoo 		=	\'' . $row['last_yahoo'] . '\';' . "\n";
+	$file_dataw .= '$stat_yahoo_num 		=	\'' . $row['yahoo_num'] . '\';' . "\n";
+	//$file_dataw .= '$stat_rules				=	\'' . $row['rules'] . '\';' . "\n";
+	
 		}
 	$file_dataw .= '?' . '>';
 	$SQL->freeresult($sqlstat);
@@ -190,7 +201,7 @@
 
 	//get banned ips data from stats table  ... ===========================================
 	if (file_exists('cache/data_ban.php')){include ('cache/data_ban.php'); }
-	if ( !$ban or !file_exists('cache/data_ban.php') )
+	if ( !$banss or !file_exists('cache/data_ban.php') )
 	{
 
   	$sqlb	=	$SQL->query("SELECT ban FROM {$dbprefix}stats");
@@ -202,7 +213,7 @@
 	while($row=$SQL->fetch_array($sqlb)){$ban1 = $row[ban]; }
 	$SQL->freeresult($sqlb);
 	
-	if ($ban1 != '' || $ban1 != ' '|| $ban1 != '  ')
+	if (!empty($ban1) || $ban1 != ' '|| $ban1 != '  ')
 	{
 		//seperate ips .. 
 		$ban2 = explode("|", $ban1);
@@ -220,6 +231,34 @@
 	flock($filenumb, LOCK_EX); // exlusive look
 	@fwrite($filenumb, $file_datab);
 	fclose($filenumb);
+	}	
+	
+	//get rules data from stats table  ... ===========================================
+	if (file_exists('cache/data_rules.php')){include ('cache/data_rules.php'); }
+	if ( !$ruless or !file_exists('cache/data_rules.php') )
+	{
+
+  	$sqlb	=	$SQL->query("SELECT rules FROM {$dbprefix}stats");
+	
+		$file_datar = '<' . '?php' . "\n\n";
+		$file_datar .= "\n// auto-generated cache files\n//By:Saanina@gmail.com \n\n";
+
+	while($row=$SQL->fetch_array($sqlb)){$rules1 = $row[rules]; }
+	$SQL->freeresult($sqlb);
+	
+	if ( !empty($rules1) || $rules1 != ' '|| $rules1 != '  ')
+	{
+
+		$ruless = $rules1;
+		$file_datar .= '$ruless = \'' .str_replace(array("'","\'"), "\'", $rules1) .'\';'."\n\n"; // its took 2 hours ..
+
+ 	}
+	
+	$file_datar .= '?' . '>';
+	$filenumr = @fopen('cache/data_rules.php', 'w');
+	flock($filenumr, LOCK_EX); // exlusive look
+	@fwrite($filenumr, $file_datar);
+	fclose($filenumr);
 	}
 	
 	
@@ -228,7 +267,7 @@
 	//some function .. for disply ..
 	
 	function Saaheader($title) {
-	global $tpl,$usrcp,$lang,$filecp_st;
+	global $tpl,$usrcp,$lang,$filecp_st,$config;
 
 	//login - logout-profile... etc ..
 	$filecp_st = ( $usrcp->name() ) ? true: false;
@@ -241,8 +280,15 @@
 
 	$vars = array (0=>"navigation",1=>"index_name",2=>"guide_name",3=>"guide_url",4=>"rules_name",5=>"rules_url",
 					6=>"call_name",7=>"call_url",8=>"login_name",9=>"login_url",10=>"usrcp_name",11=>"usrcp_url",12=>"filecp_name",13=>"filecp_url",14=>"stats_name",15=>"stats_url");
+	
+	if($config[mod_writer]){
+	$vars2 = array(0=>$lang['JUMPTO'],1=>$lang['INDEX'],2=>$lang['GUIDE'],3=>"guide.html",4=>$lang['RULES'],5=>"rules.html",
+					6=>$lang['CALL'],7=>"go.php?go=call",8=>$login_name,9=>$login_url,10=>$usrcp_name,11=>$usrcp_url,12=>$lang['FILECP'],13=>"filecp.html",14=>$lang['STATS'],15=>"stats.html");
+	}else{
 	$vars2 = array(0=>$lang['JUMPTO'],1=>$lang['INDEX'],2=>$lang['GUIDE'],3=>"go.php?go=guide",4=>$lang['RULES'],5=>"go.php?go=rules",
 					6=>$lang['CALL'],7=>"go.php?go=call",8=>$login_name,9=>$login_url,10=>$usrcp_name,11=>$usrcp_url,12=>$lang['FILECP'],13=>"usrcp.php?go=filecp",14=>$lang['STATS'],15=>"go.php?go=stats");
+
+	}
 
 	//assign variables
 	for($i=0;$i<count($vars);$i++){$tpl->assign($vars[$i],$vars2[$i]);}
@@ -275,15 +321,19 @@
 	$admin_page = '<br /><a href="./admin.php">' . $lang['ADMINCP'] .  '</a><br />';
 	$tpl->assign("admin_page",$admin_page);
 	}
+	
 	// if google analytics .. 
-	if ( $config[googleanalytics] != '' ) {
+	if ( strlen($config[googleanalytics]) > 4 ) {
 		$googleanalytics = '
-		<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
-			</script>
-			<script type="text/javascript">
-				  _uacct="' . $config[googleanalytics] . '";
-				  urchinTracker();
-			</script>';
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write("\<script src=\'" + gaJsHost + "google-analytics.com/ga.js\' type=\'text/javascript\'>\<\/script>" );
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("' . $config[googleanalytics] . '");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>';
 		$tpl->assign("googleanalytics",$googleanalytics);
 	}
 
@@ -320,6 +370,16 @@
 	#$username	= ( $usrcp->name() ) ?  (($usrcp->admin() )?  '<span style="color:blue;"><b>' .$usrcp->name(). '</b></span>' : $usrcp->name() ): '-1';
 	$username	= ( $usrcp->name() ) ? $usrcp->name(): '-1';
 	//
+	//for stats ------------
+	if (strstr($agent, 'Googlebot')) {
+		$SQL->query("UPDATE {$dbprefix}stats set last_google='$time'");  
+		$SQL->query("UPDATE {$dbprefix}stats set google_num=google_num+1");  
+	}elseif (strstr($agent, 'Yahoo! Slurp')) {
+		$SQL->query("UPDATE {$dbprefix}stats set last_yahoo='$time'");  
+		$SQL->query("UPDATE {$dbprefix}stats set yahoo_num=yahoo_num+1");  
+	}
+	
+	//---
 	
 	$who_here	= $SQL->num_rows($SQL->query("SELECT id FROM {$dbprefix}online WHERE  ip='$ip'"));  
 	

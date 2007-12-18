@@ -36,3 +36,23 @@ beta3
 +show thumbs when image uploads 
 - some bugs with creat thumbs and watermark
 
+beta4 [ 15-12-2008]
+-  fix bug with admin panel [extensions section]
++ seperate javascript in seperated file 
+- fix flood system.
+- fix cache system.
++ specific image for wrong images or delted images.
+
+
+beta 5 ..
++ add new code of google analytics.
++ add last time for google visit 
++ add numbers of google visits
++ add last time for yahoo visit 
++ add numbers of  yahoo visits
++ add rules panel in cp .. 
++ add rules in cache .. 
++ add select for languages in cp 
++ add select for styles in cp 
+
+thank you for reading this file. 

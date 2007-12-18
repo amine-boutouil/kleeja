@@ -1,4 +1,4 @@
-<?
+<?php
 #####################################
 ##			English language for Kleeja
 ## By 	: NK
@@ -219,6 +219,8 @@ $lang = array (
 		'WWW_URL'			=> 'Enable uploading from URL',
 		'ALLOW_STAT_PG'		=> 'Enable statistics page',
 		'ALLOW_ONLINE'		=> 'Enable Who is Online',
+		'MOD_WRITER'		=> 'Mod Rewrite',
+		'MOD_WRITER_EX'		=> 'روابط كهتمل..',
 		'DEL_FDAY'			=> 'Delete undownloaded files in',
 		'NUMFIELD_S' 		=> 'You can only use numbers with some fields !!',
 		'CONFIGS_UPDATED' 	=> 'Settings updated successfully.',
@@ -271,6 +273,10 @@ $lang = array (
 		'AFILES_NUM' 		=> 'Total number of files',
 		'AFILES_SIZE' 		=> 'Total size of files',
 		'AUSERS_NUM' 		=> 'Total users',
+		'LAST_GOOGLE'		=> 'آخر زيارة لجوجل',
+		'GOOGLE_NUM'		=> 'زيارات جوجل',
+		'LAST_YAHOO'		=> 'آخر زيارة للياهو',
+		'YAHOO_NUM'			=> 'زيارات الياهو',
 		'KLEEJA_CP_W' 		=> 'Welcome to <b>Kleeja</b> administration panel',
 		'USING_SIZE' 		=> 'Disk Usage',
 		'PHP_VER' 			=> 'php version',
@@ -300,7 +306,11 @@ $lang = array (
 		'BAN_EXP1' 			=> 'Edit the banned IPs and add new ones here ..',
 		'BAN_EXP2' 			=> 'Use the star (*) symbol to replace numbers if you want a total ban.... and use the (|) to separate the IPs',
 		'UPDATE_BAN' 		=> 'Save Changes',	
-		'BAN_UPDATED' 		=> 'Changes saved successfully.',	
+		'BAN_UPDATED' 		=> 'Changes saved successfully.',
+		'R_RULES'			=> 'التحكم بالشروط',
+		'RULES_EXP'			=> 'من هنا تستطيع تعديل الشروط التي سوف تظهر للزوار والأعضاء',
+		'UPDATE_RULES'		=> 'تحديث الشروط',
+		'RULES_UPDATED' 	=> 'تم تحديث الشروط بنجاح ..',	
 		//install.php
 		'INST_AGR_GPL2'		=> 'I agree to all of these terms',
 		'INST_SUBMIT' 		=> '[  Continue  ]',

@@ -1,15 +1,14 @@
 file password .. 
 img for wrong file [beta4]
-fix exts panel in cp 
+fix exts panel in cp [ beta 4] 
 fixing  downloading by ftp 
 use html seo opition for url
-last visit for bots 
+last visit for bots [ beta5]
 use seperated file for javascript [beta4]
 confirm msg when del something 
 complitaple with w3c
-improve rules system
-use mime types when download
+improve rules system [beta5]
 shows the uploaded images on a page with a slideshow....
 make downlaod from url like from pc .. increasing inputs.
 disallow download from outside our site.
-ﬁ·Â ÌŸ»ÿ „Êœ —«Ì — + «”„ ··„·›  Ê’› ··„·› «Œ Ì«—Ì ÊÊﬁ   Õ„Ì· «·„·› ÌﬂÊ‰  Ì · «·’›Õ… «”„ «·„·› ÊÊ’› «·’›Õ… ›Ì «·„Ì « Ê’› «·„·› Ì’Ì— 100% ⁄‘«‰ „Õ—ﬂ«  «·»ÕÀ „À·«  «·Ì Õ„· »—‰«„Ã ÌÕÿ «”„Â Ì’Ì— «·„—ﬂ“Ì  „««««„ ›Ì „Õ—ﬂ«  «·»ÕÀ
+name of file in title. and meta 

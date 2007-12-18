@@ -79,6 +79,8 @@
 		$n_del_f_day	= $lang['DEL_FDAY'];
 		$n_allow_stat_pg= $lang['ALLOW_STAT_PG'];
 		$n_allow_online = $lang['ALLOW_ONLINE'];
+		$n_mod_writer 	= $lang['MOD_WRITER'];
+		$n_mod_writer_ex= $lang['MOD_WRITER_EX'];
 		$n_googleanalytics = '<a href="http://www.google.com/analytics">Google Analytics</a>';
 
 
@@ -133,7 +135,32 @@
 		if ($con[allow_stat_pg] == "1" ) {$yallow_stat_pg = true; }else {$nallow_stat_pg = true;}
         //..
 		if ($con[allow_online] == "1" ) {$yallow_online = true; }else {$nallow_online = true;}
+		if ($con[mod_writer] == "1" ) {$ymod_writer = true; }else {$nmod_writer = true;}
 
+
+		//get language from LANGUAGE folder
+		$path = "language";
+		$dh = opendir($path);
+		$lngfiles = '';
+		$i=1;
+		while (($file = readdir($dh)) !== false) {
+		    if($file != "." && $file != ".."  && $file != "index.html") {
+			$file = str_replace('.php','', $file);
+			  $lngfiles .= ($con[language]==$file) ? '<option selected="selected" value="' . $file . '">' . $file . '</option>': '<option value="' . $file . '">' . $file . '</option>';
+		    }
+		}
+		closedir($dh);
+		//get styles from styles folder
+		$dhs = opendir("styles");
+		$stylfiles = '';
+		$i=1;
+		while (($file = readdir($dhs)) !== false) {
+		    if($file != "." && $file != ".."  && $file != "index.html") {
+			  $stylfiles .= ($con[style]==$file) ? '<option selected="selected" value="' . $file . '">' . $file . '</option>': '<option value="' . $file . '">' . $file . '</option>';
+		    }
+		}
+		closedir($dhs);
+		
 		//after submit ////////////////
 		if ( isset($_POST['submit']) )
 		{
@@ -587,6 +614,49 @@
 		$stylee	= "info.html";
 		}
 		
+		break; //=================================================		
+		case "rules" ://===================================== [ rules]
+		//for style ..
+		$stylee = "rules.html";
+		//words
+		$action 		= "admin.php?cp=rules";
+		$n_explain_top 	= $lang['RULES_EXP'];
+		$n_submit 		= $lang['UPDATE_RULES'];
+
+
+		$sql	=	$SQL->query("SELECT rules FROM `{$dbprefix}stats`");
+		while($row=$SQL->fetch_array($sql)){
+
+		
+			$rulesw = ( isset($_POST["rules_text"]) ) ? $_POST["rules_text"] : $row['rules'];
+			$rules = stripslashes($rulesw);
+			//addcslashes
+				//when submit !!
+			if ( isset($_POST['submit']) ) {
+
+				//update
+				$update2 = $SQL->query("UPDATE `{$dbprefix}stats` SET
+				rules = '". $rulesw ."' ");
+				if (!$update2) { die($lang['CANT_UPDATE_SQL']);}
+				else
+				{
+				//delete cache ..
+					if (file_exists('cache/data_rules.php')){
+					@unlink('cache/data_rules.php');
+					}
+				}
+			}
+		}
+		$SQL->freeresult($sql);
+
+
+		//after submit ////////////////
+		if ( isset($_POST['submit']) )
+		{
+		$text = $lang['BAN_UPDATED'];
+		$stylee	= "info.html";
+		}
+		
 		break; //=================================================
 		case "backup" ://===================================== [ backup]
 		//thanks for [coder] from montadaphp.net  for his simle lession
@@ -749,6 +819,10 @@
 		$n_users_number 		= $lang['AUSERS_NUM'];
 		$n_last_del_fles		= $lang['LSTDELST'];
 		$n_last_file_up			= $lang['LSTFLE_ST'];
+		$n_last_google			= $lang['LAST_GOOGLE'];
+		$n_google_num			= $lang['GOOGLE_NUM'];
+		$n_last_yahoo			= $lang['LAST_YAHOO'];
+		$n_yahoo_num			= $lang['YAHOO_NUM'];
 		$n_welcome_msg 			= $lang['KLEEJA_CP_W'];
 		$N_SIZE_STATUS 			= $lang['USING_SIZE'];
 		$n_php_version 			= $lang['PHP_VER'];
@@ -772,9 +846,13 @@
 		$s_c_a				= $stat_counter_all;
 		$php_version 		= 'php '.phpversion();
 		$mysql_version 		= 'MYSQL '.$SQL->mysql_version;
-		$max_execution_time =  ini_get('max_execution_time');
+		$max_execution_time = ini_get('max_execution_time');
 		$upload_max_filesize= ini_get('upload_max_filesize');
 		$post_max_size 		= ini_get('post_max_size');
+		$s_last_google		= ($stat_last_google == 0) ? '[ ? ]' : date("d-m-Y H:a", $stat_last_google);
+		$s_google_num		= $stat_google_num;
+		$s_last_yahoo		= ($stat_last_yahoo == 0) ? '[ ? ]' : date("d-m-Y H:a", $stat_last_yahoo);
+		$s_yahoo_num		= $stat_yahoo_num;
 		//size board by percent
 		$per1 = round($stat_sizes / ($config[total_size] *1048576) ,2) *100;
 
@@ -824,7 +902,9 @@
 	$lgutcp_name 	= $lang['R_LGOUTCP'];
 	$lgutcp_url 	= "admin.php?cp=lgutcp";
 	$ban_name 		= $lang['R_BAN'];
-	$ban_url 		= "admin.php?cp=ban";
+	$ban_url 		= "admin.php?cp=ban";	
+	$rules_name 	= $lang['R_RULES'];
+	$rules_url 		= "admin.php?cp=rules";
 
 	//header
 	print $tpl->display("header.html");

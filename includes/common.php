@@ -144,8 +144,9 @@ $starttm = $starttm[1] + $starttm[0];
 	
 	
 	//anti floods  system
-	antifloods(10, 500); // (number of floods, per seconds ) 
-	
+	if ( $usrcp->admin() === false ){
+	antifloods(7, 700); // (number of floods, per seconds ) 
+	}
 	
 	//site close ..
 	if ($config[siteclose] == 1 && !$usrcp->admin() ) {

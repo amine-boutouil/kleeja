@@ -106,11 +106,19 @@
 	</tr>
 	<tr>
 		<td><label for="style">{n_style}</label></td>
-		<td><label><input type="text" id="style" name="style" value="{con.style}" size="40"></label></td>
+		<td><label>
+		<select name="style" id="style">
+		{stylfiles}
+		</select>
+		</label></td>
 	</tr>
 	<tr>
 		<td><label for="language">{n_language}</label></td>
-		<td><label><input type="text" id="language" name="language" value="{con.language}" size="40"></label></td>
+		<td><label>
+		<select name="language" id="language">
+		{lngfiles}
+		</select>
+		</label></td>
 	</tr>
 	<tr>
 		<td><label for="sec_down">{n_sec_down}</label></td>
@@ -153,6 +161,14 @@
 		<td><label for="googleanalytics">{n_googleanalytics}</label></td>
 		<td><label><input type="text" id="googleanalytics" name="googleanalytics" value="{con.googleanalytics}" size="10"></label></td>
 	</tr>
+	<tr>
+		<td><label for="mod_writer">{n_mod_writer}</label></td>
+		<td>
+		<label>{n_yes}<input type="radio" id="mod_writer" name="mod_writer" value="1"  <IF NAME="ymod_writer"> checked="checked"</IF>></label>
+		<label>{n_no}<input type="radio" id="mod_writer" name="mod_writer" value="0"  <IF NAME="nmod_writer"> checked="checked"</IF>></label>
+		  [ {n_mod_writer_ex} ]
+		</td>	
+	</tr>	
 </table>
 </fieldset>
 <fieldset class="quick" style="text-align:center">

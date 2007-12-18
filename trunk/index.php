@@ -67,16 +67,16 @@
 	while($row=$SQL->fetch_array($result)){
 		//googlebot
 		if (strstr($row[agent], 'Googlebot')) {
-		$usersnum++; 
-		$OnlineNames[] = '<span style="color:orange;">[Googlebot]</span>';
+			$usersnum++; 
+			$OnlineNames[] = '<span style="color:orange;">[Googlebot]</span>';
 		}
 		elseif (strstr($row[agent], 'Yahoo! Slurp')) {
-		$usersnum++; 
-		$OnlineNames[] = '<span style="color:red;">[Googlebot]</span>';
+			$usersnum++; 
+			$OnlineNames[] = '<span style="color:red;">[Yahoo!Slurp]</span>';
 		}
 		elseif($row[username] != "-1") {
-		$usersnum++; 
-		$OnlineNames[] =  $row[username];
+			$usersnum++; 
+			$OnlineNames[] =  $row[username];
 		}
 		else
 		{

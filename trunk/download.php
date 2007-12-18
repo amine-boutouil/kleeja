@@ -33,7 +33,7 @@
 			$wait  		= $lang['WAIT'];
 			$click 		= $lang['CLICK_DOWN'];
 			$err_jv 	= $lang['JS_MUST_ON'];
-			$url_file 	= "./go.php?go=down&amp;n=$name&amp;f=$folder&amp;i=$id";
+			$url_file 	= ($config[mod_writer]) ? $config[siteurl]."down-".$name."-".$folder."-".$id.".html" : $config[siteurl]."go.php?go=down&amp;n=$name&amp;f=$folder&amp;i=$id";
 			$seconds_w 	= $config[sec_down];
 			$time 		= date("d-m-Y H:a", $time);
 			$size 		= Customfile_size($size);
@@ -44,7 +44,7 @@
 			$L_TIME		= $lang['FILEDATE'];
 			$L_UPS		= $lang['FILEUPS'];
 			$L_REPORT 	= $lang['FILEREPORT'];
-			$REPORT 	= "./go.php?go=report&amp;id=$id";
+			$REPORT 	= ($config[mod_writer]) ?  $config[siteurl]."report_".$id.".html" :  $config[siteurl]."go.php?go=report&amp;id=$id";
 
 			$sty = 'download.html';
 
@@ -97,7 +97,7 @@
 			$imgs = array('png','gif','jpg','jpeg','tif','tiff');
 			if (!in_array($t,$imgs) )
 			{
-				$text = $lang['NOT_IMG'] . '<br /><a href="./download.php?id=$img">' . $lang['CLICK_DOWN'] . '</a>';
+				$text = $lang['NOT_IMG'] . '<br /><a href="'.(($config[mod_writer])?  $config[siteurl].'download'.$img.'.html': $config[siteurl]."download.php?id=$img"  ).'">' . $lang['CLICK_DOWN'] . '</a>';
 				$sty = 'err.html';
 			}
 			else

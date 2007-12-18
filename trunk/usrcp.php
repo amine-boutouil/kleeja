@@ -254,7 +254,7 @@
 			foreach($ids as $i)
 			{
 			$arr[] = array( id =>$i,
-							name =>"<a href=\"./download.php?id={$i}\" target=\"blank\">".$name[$i]."</a>"
+							name =>'<a href="'.(($config[mod_writer])?  $config[siteurl].'download'.$i.'.html': $config[siteurl]."download.php?id=$i"  ).'" target="blank">'.$name[$i].'</a>'
 							);
 			}
 			if (!is_array($arr)){$arr = array();}

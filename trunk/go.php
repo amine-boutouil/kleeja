@@ -59,7 +59,7 @@
 	{
 	$stylee = "report.html";
 	$titlee = $lang['REPORT'];
-	$url_id = $config[siteurl]."download.php?id=".intval($_GET['id']);
+	$url_id = ($config[mod_writer]) ? $config[siteurl]."download".intval($_GET['id']).".html" : $config[siteurl]."download.php?id=".intval($_GET['id']);
 	$action = "./go.php?go=report";
 	$submit = $lang['REPORT'];
 	$L_NAME = $lang['YOURNAME'];
@@ -148,23 +148,15 @@
 	case "rules" : //=============================[rules]
 	$stylee = "rules.html";
 	$titlee = $lang['RULES'];
-
-	//get rules from txt
-	$filename = "rules.txt";
-	//prevent error !!
-	if (filesize($filename) > 10 )
-	{
-	$handle = fopen($filename, "r");
-	$contents = fread($handle, filesize($filename));
-	fclose($handle);
-	}
-	else
-	{
-	$contents = $lang['NO_RULES_NOW'];
-	}
 	$text_msg = $lang['E_RULES'];
-
-
+	
+	//prevent empty !!
+	if (strlen($ruless) > 5 ){
+		$contents = stripslashes($ruless);
+	}else{
+		$contents = $lang['NO_RULES_NOW'];
+	}
+	
 	break; //=================================================
 	case "call" : //=============================[call]
 
@@ -266,6 +258,7 @@
 	$URL = explode('?',$URL);
 	if ($URL[0] != "download.php")
 	{
+	$linkoo = ($config[mod_writer]) ? $urlsite . 'download' . $id .'.html' : $urlsite . 'download.php?id=' . $id}
 	header('Location: ' . $urlsite . 'download.php?id=' . $id);
 
 	}else{//else refere

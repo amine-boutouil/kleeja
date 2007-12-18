@@ -125,7 +125,7 @@ function tpl(){  //thwara بداية
     $sss .= '<a href="#"  onclick="showhide();" title="' . $lang['CHANG_TO_URL_FILE'] . '"><img src="images/urlORfile.gif" alt="' . $lang['CHANG_TO_URL_FILE'] . '"  /></a>';
     }
 
-    $sss .= '<form name="uploader" action="' . $this->action . '" method="post"  encType="multipart/form-data" onsubmit="form_submit();"> ';
+    $sss .= '<form name="uploader" id="uploader" action="' . $this->action . '" method="post"  encType="multipart/form-data" onsubmit="form_submit();"> ';
 	$sss .= '<div id="loadbox"><img src="images/loading.gif" id="loading"></div>';
 
 
@@ -416,8 +416,8 @@ if (in_array(strtolower($this->typet),$this->imgstypes)){
 	if( ($config[thumbs_imgs]!=0) && in_array(strtolower($this->typet),$this->thmbstypes))
 	{
 	@$this->createthumb($folderee."/".$filname,strtolower($this->typet),$folderee.'/thumbs/'.$filname,100,100);
-	$extra_thmb = $lang['URL_F_THMB'] . ':<br /><textarea rows=2 cols=49 rows=1>[url='.$this->linksite."download.php?img=".$this->id_for_url.'][img]'.$this->linksite."download.php?thmb=".$this->id_for_url.'[/img][/url]</textarea><br />';
-	$extra_show_img = '<div style="text-align:center"><img src="'.$this->linksite."download.php?thmb=".$this->id_for_url.'" /></div></br>';
+	$extra_thmb = $lang['URL_F_THMB'] . ':<br /><textarea rows=2 cols=49 rows=1>[url='.$this->linksite.(($config[mod_writer]) ? "image".$this->id_for_url.".html" : "download.php?img=".$this->id_for_url ).'][img]'.$this->linksite.(($config[mod_writer]) ? "thumb".$this->id_for_url.".html" : "download.php?thmb=".$this->id_for_url ).'[/img][/url]</textarea><br />';
+	$extra_show_img = '<div style="text-align:center"><img src="'.$this->linksite.(($config[mod_writer]) ? "thumb".$this->id_for_url.".html" : "download.php?thmb=".$this->id_for_url ).'" /></div></br>';
 	}
 	
 	//write on image
@@ -428,15 +428,15 @@ if (in_array(strtolower($this->typet),$this->imgstypes)){
 
 	//then show
 	$this->errs[] = $lang['IMG_DOWNLAODED'] . '<br />' . $extra_show_img . '
-			' . $lang['URL_F_IMG'] . ':<br /><textarea rows=2 cols=49 rows=1>'.$this->linksite."download.php?img=".$this->id_for_url.'</textarea>
-			' . $lang['URL_F_BBC'] . ':<br /><textarea rows=2 cols=49 rows=1>[url='.$config[siteurl].'][img]'.$this->linksite."download.php?img=".$this->id_for_url.'[/img][/url]</textarea><br />
+			' . $lang['URL_F_IMG'] . ':<br /><textarea rows=2 cols=49 rows=1>'.$this->linksite.(($config[mod_writer]) ? "image".$this->id_for_url.".html" : "download.php?img=".$this->id_for_url ).'</textarea>
+			' . $lang['URL_F_BBC'] . ':<br /><textarea rows=2 cols=49 rows=1>[url='.$config[siteurl].'][img]'.$this->linksite.(($config[mod_writer]) ? "image".$this->id_for_url.".html" : "download.php?img=".$this->id_for_url ).'[/img][/url]</textarea><br />
 			'.$extra_thmb.$extra_del;
 
 }else {
 	//then show other files
 	$this->errs[] = $lang['FILE_DOWNLAODED'] . '<br />
-			' . $lang['URL_F_FILE'] . ':<br /><textarea cols=49 rows=1>'.$this->linksite."download.php?id=".$this->id_for_url.'</textarea>
-			' . $lang['URL_F_BBC'] . ':<br /><textarea rows=2 cols=49 rows=1>[url]'.$this->linksite."download.php?id=".$this->id_for_url.'[/url]</textarea><br />
+			' . $lang['URL_F_FILE'] . ':<br /><textarea cols=49 rows=1>'.$this->linksite.(($config[mod_writer]) ? "download".$this->id_for_url.".html" : "download.php?id=".$this->id_for_url ).'</textarea>
+			' . $lang['URL_F_BBC'] . ':<br /><textarea rows=2 cols=49 rows=1>[url]'.$this->linksite.(($config[mod_writer]) ? "download".$this->id_for_url.".html" : "download.php?id=".$this->id_for_url ).'[/url]</textarea><br />
 			'.$extra_del;
 }
 

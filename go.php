@@ -258,7 +258,7 @@
 	$URL = explode('?',$URL);
 	if ($URL[0] != "download.php")
 	{
-	$linkoo = ($config[mod_writer]) ? $urlsite . 'download' . $id .'.html' : $urlsite . 'download.php?id=' . $id}
+	$linkoo = ($config[mod_writer]) ? $urlsite . 'download' . $id .'.html' : $urlsite . 'download.php?id=' . $id;
 	header('Location: ' . $urlsite . 'download.php?id=' . $id);
 
 	}else{//else refere

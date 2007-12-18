@@ -54,5 +54,9 @@ beta 5 ..
 + add rules in cache .. 
 + add select for languages in cp 
 + add select for styles in cp 
++add Mod Rewriter in all important links 
++ add mod Rewriter as option an cp 
++ add docs folder with important files
+
 
 thank you for reading this file. 

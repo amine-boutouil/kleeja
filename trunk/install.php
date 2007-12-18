@@ -110,7 +110,7 @@ CREATE TABLE `{$dbprefix}stats` (
 ";
 
 $sql_stat2 = "
-INSERT INTO `{$dbprefix}stats`  VALUES (0,1,0,0,0,0,0,0,0,'',0,0,0,0,'');
+INSERT INTO `{$dbprefix}stats`  VALUES (0,1,0,0,0,0,0,0,0,'',0,0,0,0,'')
 ";
 
 $sql_users = "

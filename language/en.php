@@ -66,7 +66,14 @@ $lang = array (
 		'DEL_SELECTED' 		=> 'Delete selected',
 		'EDIT_U_FILES' 		=> 'Update files',
 		'FILES_UPDATED' 	=> 'Your files have been updated.',
-
+		
+				#go=fileuser
+		'PUBLIC_USER_FILES'	=> 'مجلد ملفات العضو ',
+		'FILEUSER'			=> 'مجلد ملفات عضو',
+		'GO_FILECP'			=> 'إظغط هنا لإدارة ملفاتك هذه',
+		'YOUR_FILEUSER'		=> 'مجلدك',
+		'COPY_AND_GET_DUD'	=> 'إنسخ الرابط وأعطه لأصدقائك ليطلعو على مجلدك ',
+		
 				#go=profile
 		'PFILE_4_FORUM' 	=> 'Go to the forum to change your details',
 		'USER_PLACE' 		=> 'Users Area',
@@ -298,7 +305,7 @@ $lang = array (
 		'R_EXTS' 			=> 'Extensions Settings',
 		'R_FILES' 			=> 'Files Control',
 		'R_REPORTS' 		=> 'Reports Control',
-		'R_CALLS' 			=> 'Comments Control',
+		'R_CALLS' 			=> 'Messages Control',
 		'R_USERS' 			=> 'Users Control',
 		'R_BCKUP' 			=> 'Back-Up',
 		'R_REPAIR' 			=> 'Total Repair',
@@ -322,6 +329,12 @@ $lang = array (
 		'BITE'				=> 'بايت',
 		'SEARCH_USERS'		=> 'بحث عن مستخدمين',	
 		'R_IMG_CTRL'		=> 'تحكم بالصور فقط',
+		'ENABLE_USER_FILE'	=> 'تفعيل مجلدات المستخدمين',
+		'R_EXTRA'			=> 'هيدر وفوتر إضافي',
+		'EX_HEADER_N'		=> 'الهيدر الإضافي .. وهو مايظهر أسفل الهيدر الأصلي ..',
+		'EX_FOOTER_N'		=> 'الفوتر الإضافي .. وهو مايظهر أعلى الفوتر الأصلي ..',
+		'UPDATE_EXTRA'		=> 'تحديث الإضافات القوالبيه',
+		'EXTRA_UPDATED'		=> 'تم تحديث الإضافات القوالبيه',
 		
 		//install.php
 		'INST_AGR_GPL2'		=> 'I agree to all of these terms',

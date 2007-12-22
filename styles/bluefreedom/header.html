@@ -22,6 +22,10 @@
 <a href="{config.siteurl}">{config.sitename}</a> &middot; {title}
 </div>
 
+
+{extras.header}
+
+
 <div class="right">
 <h2>{navigation}</h2>
 
@@ -38,7 +42,11 @@
 <a href="{login_url}">{login_name}</a></li>
 <li><img src="{stylepath}/images/user_button.gif" alt="{usrcp_name}" />
 <a href="{usrcp_url}">{usrcp_name}</a></li>
-<IF NAME="filecp_st">
+<IF NAME="user_is">
+	<IF NAME="config.enable_userfile">
+	<li><img src="{stylepath}/images/userfile_button.gif" alt="{usrfile_name}" />
+	<a href="{usrfile_url}">{usrfile_name}</a></li>
+	</IF>
 <li><img src="{stylepath}/images/filecp_button.gif" alt="{filecp_name}" />
 <a href="{filecp_url}">{filecp_name}</a></li>
 </IF>
@@ -50,5 +58,3 @@
 </ul>
 		
 </div>
-
-

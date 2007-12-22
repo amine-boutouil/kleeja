@@ -125,13 +125,13 @@ function tpl(){  //thwara بداية
 
 	//www url icon
 	if ($config['www_url'] != '0') {
-    $sss .= '<a href="#"  onclick="showhide();" title="' . $lang['CHANG_TO_URL_FILE'] . '"><img src="images/urlORfile.gif" alt="' . $lang['CHANG_TO_URL_FILE'] . '"  /></a>';
+    $sss .= '<a href="#"  onclick="showhide();" title="' . $lang['CHANG_TO_URL_FILE'] . '"><img src="images/urlORfile.gif" alt="' . $lang['CHANG_TO_URL_FILE'] . '"  /></a><br /><br />';
     }
 
 
 	//file input
     $sss .= '<div id="filetype"><input type="file" name="file[]"><br><div id="upload_forum"></div>';
-    $sss .= '<input name="mraupload" onclick="javascript:plus(1);makeupload(1);" type="button" value="+" />';
+    $sss .= '<br /><input name="mraupload" onclick="javascript:plus(1);makeupload(1);" type="button" value="+" />';
 	$sss .= '<input name="mreupload" onclick="javascript:minus(1);makeupload(1);" type="button" value="-" />';
 	$sss .= '<br /><input id="checkr" type="checkbox" onclick="wdwdwd(\'submitr\',\'checkr\');" />' . $lang['AGREE_RULES'];
 	$sss .= '<br /><input type="submit" id="submitr" name="submitr" value="' . $lang['DOWNLOAD_F'] . '"  disabled="disabled" />';
@@ -140,7 +140,7 @@ function tpl(){  //thwara بداية
 	//www input
 	if ($config['www_url'] != '0') {
     $sss .= '<div id="texttype"><input type="text" name="file[0]" size="50" value="' . $lang['PAST_URL_HERE'] . '" onclick="this.value=\'\'" style="color:silver;" dir="ltr"><br><div id="upload_f_forum"></div>';
-    $sss .= '<input name="mraupload" onclick="javascript:plus(2);makeupload(2);" type="button" value="+" />';
+    $sss .= '<br /><input name="mraupload" onclick="javascript:plus(2);makeupload(2);" type="button" value="+" />';
 	$sss .= '<input name="mreupload" onclick="javascript:minus(2);makeupload(2);" type="button" value="-" />';
 	$sss .= '<br /><input id="checkr2" type="checkbox" onclick="wdwdwd(\'submittxt\',\'checkr2\');" />' . $lang['AGREE_RULES'];
 	$sss .= '<br /><input type="submit" id="submittxt" name="submittxt" value="' . $lang['DOWNLOAD_T'] . '"   disabled="disabled" />';
@@ -150,7 +150,7 @@ function tpl(){  //thwara بداية
 
 	$sss .= '</form>';
 
-	$sss .= '<div id="loadbox">ss</div>';
+	$sss .= '<div id="loadbox"></div>';
 
 	return $sss;
 

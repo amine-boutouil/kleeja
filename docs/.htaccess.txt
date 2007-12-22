@@ -8,6 +8,8 @@ RewriteRule ^call.html$ go.php?go=call
 RewriteRule ^guide.html$ go.php?go=guide
 RewriteRule ^rules.html$ go.php?go=rules
 RewriteRule ^filecp.html$ usrcp.php?go=filecp
+RewriteRule ^fileuser.html$ usrcp.php?go=fileuser
+RewriteRule ^fileuser_([0-9]*).html$ usrcp.php?go=fileuser&id=$1
 RewriteRule ^stats.html$ go.php?go=stats
 RewriteRule ^thumb([0-9]*).html$ download.php?thmb=$1
 RewriteRule ^image([0-9]*).html$ download.php?img=$1

@@ -259,6 +259,36 @@
 	flock($filenumr, LOCK_EX); // exlusive look
 	@fwrite($filenumr, $file_datar);
 	fclose($filenumr);
+	}	
+	//get ex-header-footer data from stats table  ... ===========================================
+	if (file_exists('cache/data_extra.php')){include ('cache/data_extra.php'); }
+	if ( !$extras or !file_exists('cache/data_extra.php') )
+	{
+
+  	$sqlb	=	$SQL->query("SELECT ex_header,ex_footer FROM {$dbprefix}stats");
+	
+		$file_datae = '<' . '?php' . "\n\n";
+		$file_datae .= "\n// auto-generated cache files\n//By:Saanina@gmail.com \n\n";
+
+	while($row=$SQL->fetch_array($sqlb)){$headerr = $row['ex_header'];$footerr = $row['ex_footer']; }
+	$SQL->freeresult($sqlb);
+	
+	if ( !empty($headerr) || $headerr != ' '|| $headerr != '  ')
+	{
+		$extras['header'] = $headerr;
+		$file_datae .= '$extras[\'header\'] = \'' .str_replace(array("'","\'"), "\'", $headerr) .'\';'."\n\n";
+ 	}
+	if ( !empty($footerr) || $footerr != ' '|| $footerr != '  ')
+	{
+		$extras['footer'] = $footerr;
+		$file_datae .= '$extras[\'footer\'] = \'' .str_replace(array("'","\'"), "\'", $footerr) .'\';'."\n\n";
+ 	}
+	
+	$file_datae .= '?' . '>';
+	$filenume = @fopen('cache/data_extra.php', 'w');
+	flock($filenume, LOCK_EX); // exlusive look
+	@fwrite($filenume, $file_datae);
+	fclose($filenume);
 	}
 	
 	
@@ -267,26 +297,34 @@
 	//some function .. for disply ..
 	
 	function Saaheader($title) {
-	global $tpl,$usrcp,$lang,$filecp_st,$config;
+	global $tpl,$usrcp,$lang,$user_is,$config,$extras;
 
 	//login - logout-profile... etc ..
-	$filecp_st = ( $usrcp->name() ) ? true: false;
-	if ( !$usrcp->name() ) { $login_name= $lang['LOGIN'];  $login_url= "usrcp.php?go=login";
-	$usrcp_name = $lang['REGISTER'];$usrcp_url = "usrcp.php?go=register";
+	$user_is = ( $usrcp->name() ) ? true: false;
+	if ( !$usrcp->name() ) {
+		$login_name		= $lang['LOGIN']; 
+		$login_url		= "usrcp.php?go=login";
+		$usrcp_name 	= $lang['REGISTER'];
+		$usrcp_url 		= "usrcp.php?go=register";
 	}
-	else{ $login_name= $lang['LOGOUT']."[".$usrcp->name()."]";  $login_url= "usrcp.php?go=logout";
-	$usrcp_name = $lang['PROFILE'];$usrcp_url = "usrcp.php?go=profile";
+	else{
+		$login_name		= $lang['LOGOUT']."[".$usrcp->name()."]";
+		$login_url		= "usrcp.php?go=logout";
+		$usrcp_name 	= $lang['PROFILE'];
+		$usrcp_url 		= "usrcp.php?go=profile";
+		$usrfile_name 	=  $lang['YOUR_FILEUSER'];
+		$usrfile_url 	= ($config[mod_writer]) ? "fileuser.html" : "usrcp.php?go=fileuser";
 	}
 
 	$vars = array (0=>"navigation",1=>"index_name",2=>"guide_name",3=>"guide_url",4=>"rules_name",5=>"rules_url",
-					6=>"call_name",7=>"call_url",8=>"login_name",9=>"login_url",10=>"usrcp_name",11=>"usrcp_url",12=>"filecp_name",13=>"filecp_url",14=>"stats_name",15=>"stats_url");
+					6=>"call_name",7=>"call_url",8=>"login_name",9=>"login_url",10=>"usrcp_name",11=>"usrcp_url",12=>"filecp_name",13=>"filecp_url",14=>"stats_name",15=>"stats_url",16=>"usrfile_name",17=>"usrfile_url");
 	
 	if($config[mod_writer]){
 	$vars2 = array(0=>$lang['JUMPTO'],1=>$lang['INDEX'],2=>$lang['GUIDE'],3=>"guide.html",4=>$lang['RULES'],5=>"rules.html",
-					6=>$lang['CALL'],7=>"go.php?go=call",8=>$login_name,9=>$login_url,10=>$usrcp_name,11=>$usrcp_url,12=>$lang['FILECP'],13=>"filecp.html",14=>$lang['STATS'],15=>"stats.html");
+					6=>$lang['CALL'],7=>"go.php?go=call",8=>$login_name,9=>$login_url,10=>$usrcp_name,11=>$usrcp_url,12=>$lang['FILECP'],13=>"filecp.html",14=>$lang['STATS'],15=>"stats.html",16=>$usrfile_name,17=>$usrfile_url);
 	}else{
 	$vars2 = array(0=>$lang['JUMPTO'],1=>$lang['INDEX'],2=>$lang['GUIDE'],3=>"go.php?go=guide",4=>$lang['RULES'],5=>"go.php?go=rules",
-					6=>$lang['CALL'],7=>"go.php?go=call",8=>$login_name,9=>$login_url,10=>$usrcp_name,11=>$usrcp_url,12=>$lang['FILECP'],13=>"usrcp.php?go=filecp",14=>$lang['STATS'],15=>"go.php?go=stats");
+					6=>$lang['CALL'],7=>"go.php?go=call",8=>$login_name,9=>$login_url,10=>$usrcp_name,11=>$usrcp_url,12=>$lang['FILECP'],13=>"usrcp.php?go=filecp",14=>$lang['STATS'],15=>"go.php?go=stats",16=>$usrfile_name,17=>$usrfile_url);
 
 	}
 
@@ -294,6 +332,7 @@
 	for($i=0;$i<count($vars);$i++){$tpl->assign($vars[$i],$vars2[$i]);}
 	$tpl->assign("dir",$lang['DIR']);
 	$tpl->assign("title",$title);
+	//$tpl->assign("ex_header",$extras['header']);
 
 
 	print $tpl->display("header.html");

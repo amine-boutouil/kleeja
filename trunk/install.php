@@ -105,12 +105,14 @@ CREATE TABLE `{$dbprefix}stats` (
   `google_num` INT(11) UNSIGNED NOT NULL,
   `last_yahoo` INT(11) UNSIGNED NOT NULL,
   `yahoo_num` INT(11) UNSIGNED NOT NULL,
-   `rules` text collate utf8_bin NOT NULL
+   `rules` text collate utf8_bin NOT NULL,
+   `ex_header` text collate utf8_bin NOT NULL,
+   `ex_footer` text collate utf8_bin NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 ";
 
 $sql_stat2 = "
-INSERT INTO `{$dbprefix}stats`  VALUES (0,1,0,0,0,0,0,0,0,'',0,0,0,0,'')
+INSERT INTO `{$dbprefix}stats`  VALUES (0,1,0,0,0,0,0,0,0,'',0,0,0,0,'','','')
 ";
 
 $sql_users = "
@@ -183,7 +185,8 @@ $sql_config20 = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('del_
 $sql_config21 = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('allow_stat_pg', '1')";
 $sql_config22 = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('allow_online', '0')";
 $sql_config23 = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('googleanalytics', '')";
-$sql_config24 = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('mod_writer', 0)";
+$sql_config24 = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('mod_writer', '0')";
+$sql_config25 = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('enable_userfile', '1')";
 
 $sql_exts = "
 CREATE TABLE `{$dbprefix}exts` (
@@ -412,14 +415,16 @@ case 'data' :
 		 $sql[33] =  @mysql_query($sql_config22, $connect);
 		 $sql[34] =  @mysql_query($sql_config23, $connect);
 		 $sql[35] =  @mysql_query($sql_config24, $connect);
-		 $sql[36] =  @mysql_query($sql_exts, $connect);
-		 $sql[37] =  @mysql_query($sql_exts2, $connect);
-		 $sql[38] =  @mysql_query($sql_exts3, $connect);
-		 $sql[39] =  @mysql_query($sql_exts4, $connect);
-		 $sql[40] =  @mysql_query($sql_exts5, $connect);
-		 $sql[41] =  @mysql_query($sql_exts6, $connect);
-		 $sql[42] =  @mysql_query($sql_exts7, $connect);
-		 $sql[43] =  @mysql_query($sql_online, $connect);
+		 $sql[36] =  @mysql_query($sql_config25, $connect);
+		 $sql[37] =  @mysql_query($sql_exts, $connect);
+		 $sql[38] =  @mysql_query($sql_exts2, $connect);
+		 $sql[39] =  @mysql_query($sql_exts3, $connect);
+		 $sql[41] =  @mysql_query($sql_exts4, $connect);
+		 $sql[41] =  @mysql_query($sql_exts5, $connect);
+		 $sql[42] =  @mysql_query($sql_exts6, $connect);
+		 $sql[43] =  @mysql_query($sql_exts7, $connect);
+		 $sql[44] =  @mysql_query($sql_online, $connect);
+		 
 		 $err = 0;
 		for ($i=0; $i<count($sql); $i++)
 		{
@@ -433,8 +438,8 @@ case 'data' :
 				elseif ($i == 6) {print '<span style="color:green;">' . $lang['INST_CRT_ADM'] . '</span><br/>';}
 				elseif ($i == 7) {print '<span style="color:green;">' . $lang['INST_CRT_FLS'] . '</span><br/>';}
 				elseif ($i == 8) {print '<span style="color:green;">' . $lang['INST_CRT_CNF'] . '</span><br/>';}
-				elseif ($i == 36) {print '<span style="color:green;">' . $lang['INST_CRT_EXT'] . '</span><br/>';}
-				elseif ($i == 43) {print '<span style="color:green;">' . $lang['INST_CRT_ONL'] . '</span><br/>';}
+				elseif ($i == 37) {print '<span style="color:green;">' . $lang['INST_CRT_EXT'] . '</span><br/>';}
+				elseif ($i == 44) {print '<span style="color:green;">' . $lang['INST_CRT_ONL'] . '</span><br/>';}
 				else {print '<span style="color:green;">' . $lang['INST_SQL_OK'] . '</span><br/>';}
 
 			}else{
@@ -442,7 +447,7 @@ case 'data' :
 				$err++;
 			}
 
-		if ($i == '42') { $ok = true;}
+		if ($i == '44') { $ok = true;}
 		}#for
 
 		if ($ok && !$err)

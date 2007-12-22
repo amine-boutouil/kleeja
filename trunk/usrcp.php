@@ -213,6 +213,52 @@
 			}
 		
 		break; //=================================================
+		case "fileuser" : //=============================[fileuser]
+			$stylee 			= "fileuser.html";
+			$titlee 			= $lang['FILEUSER'];
+			$public_user_files 	= $lang['PUBLIC_USER_FILES'];
+			$filecp_goto		= $lang['GO_FILECP'];
+			$get_link_to_dudes	= $lang['COPY_AND_GET_DUD'];
+			
+			//// 
+				$user_id = intval($_GET['id']);
+				$user_id = (!$user_id and $usrcp->id()!==false) ? $usrcp->id() : $user_id;
+				
+				//te get files and update them !!
+				$user_name = $SQL->fetch_array($SQL->query("SELECT name FROM `{$dbprefix}users` WHERE id='".$user_id."' "));
+				$user_name = (!$user_name) ? false : $user_name['name'];
+				/////////////pager 
+				$sql	=	$SQL->query("SELECT id,name,folder,type FROM `{$dbprefix}files` WHERE user='".$user_id."' ORDER BY `id` DESC");
+				$nums_rows = $SQL->num_rows($sql);
+				$currentPage = (isset($_GET['page']))? intval($_GET['page']) : 1;
+				$Pager = new SimplePager($perpage,$nums_rows,$currentPage);
+				$start = $Pager->getStartRow();
+				////////////////
+			$no_results = false;
+			if($nums_rows != 0) {
+			
+
+			while($row=$SQL->fetch_array($sql)){
+			//make new lovely arrays !!
+
+				$arr[] = array( id =>$row['id'],
+								name =>'<a href="'.(($config[mod_writer])?  $config[siteurl].'download'.$row['id'].'.html': $config[siteurl]."download.php?id=".$row['id']  ).'" target="blank">'.$row['name'].'</a>',
+								icon_link =>(file_exists("images/filetypes/".$row['type'].".gif"))? "images/filetypes/".$row['type'].".gif" : 'images/filetypes/file.gif',
+								file_type => $row['type']
+							);
+
+			}
+			$SQL->freeresult($sql);
+		}else{ #nums_rows
+		$no_results = true;
+		}
+			$your_fileuser =  $config[siteurl].(($config[mod_writer])? 'fileuser_'.$usrcp->id().'.html' : 'usrcp.php?go=fileuser&amp;id='.$usrcp->id() );
+			$filecp_link	= ($user_id==$usrcp->id()) ?  $config[siteurl].(($config[mod_writer])? 'filecp.html':'usrcp.php?go=filecp' ) : false;
+			$total_pages 	= $Pager->getTotalPages(); 
+			$linkgoto 		= ($config[mod_writer]) ? 'fileuser_'.$user_id.'.html' : 'usrcp.php?go=fileuser&amp;id='.$user_id;
+			$page_nums 		= $Pager->print_nums($linkgoto); 
+			
+		break; //=================================================
 		case "filecp" : //=============================[filecp]
 			$stylee 		= "filecp.html";
 			$titlee 		= $lang['FILECP'];
@@ -262,7 +308,8 @@
 		}
 		
 			$total_pages 	= $Pager->getTotalPages(); 
-			$page_nums 		= $Pager->print_nums('/usercp.php?go=filecp'); 
+			$linkgoto 		= ($config[mod_writer]) ? 'filecp.html' : 'usrcp.php?go=filecp';
+			$page_nums 		= $Pager->print_nums($linkgoto); 
 			//after submit ////////////////
 			if ( isset($_POST['submit_files']) ) 
 			{

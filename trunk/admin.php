@@ -81,6 +81,7 @@
 		$n_allow_online = $lang['ALLOW_ONLINE'];
 		$n_mod_writer 	= $lang['MOD_WRITER'];
 		$n_mod_writer_ex= $lang['MOD_WRITER_EX'];
+		$n_enable_fileuser = $lang['ENABLE_USER_FILE'];
 		$n_googleanalytics = '<a href="http://www.google.com/analytics">Google Analytics</a>';
 
 
@@ -111,31 +112,21 @@
 
 		//for  choose
 		if ($con[siteclose] == "1" ) {$yclose = true; }else {$nclose = true;}
-		//..
 		if ($con[decode] == "2" ) {$md5_decode = true; }elseif ($con[decode] == "1" ) {$time_decode = true;}
 		else {$none_decode = true; }
-		//..
 		if ($con[user_system] == "1" ) {$user_system_normal = true; }elseif ($con[user_system] == "2" ) {$user_system_phpbb = true;}
 		elseif($con[user_system] == "3" ) {$user_system_vb = true; }elseif($con[user_system] == "4" ) {$user_system_mysbb = true; }
-		//..
 		if ($con[statfooter] == "1" ) {$ystatfooter = true; }else {$nstatfooter = true;}
-		//..
 		if ($con[gzip] == "1" ) {$ygzip = true; }else {$ngzip = true;}
-		//..
 		if ($con[register] == "1" ) {$yregister = true; }else {$nregister = true;}
-		//..
 		if ($con[thumbs_imgs] == "1" ) {$ythumbs_imgs = true; }else {$nthumbs_imgs = true;}
-		//..
 		if ($con[write_imgs] == "1" ) {$ywrite_imgs = true; }else {$nwrite_imgs = true;}
-		//..
 		if ($con[del_url_file] == "1" ) {$ydel_url_file = true; }else {$ndel_url_file = true;}
-        //..
 		if ($con[www_url] == "1" ) {$ywww_url = true; }else {$nwww_url = true;}
-        //..
 		if ($con[allow_stat_pg] == "1" ) {$yallow_stat_pg = true; }else {$nallow_stat_pg = true;}
-        //..
 		if ($con[allow_online] == "1" ) {$yallow_online = true; }else {$nallow_online = true;}
 		if ($con[mod_writer] == "1" ) {$ymod_writer = true; }else {$nmod_writer = true;}
+		if ($con[enable_userfile] == "1" ) {$yenable_userfile = true; }else {$nenable_userfile = true;}
 
 
 		//get language from LANGUAGE folder
@@ -793,6 +784,54 @@
 		$stylee	= "info.html";
 		}
 		
+		break; //=================================================	
+		case "extra" ://===================================== [ extra]
+		//for style ..
+		$stylee = "extra.html";
+		//words
+		$action 		= "admin.php?cp=extra";
+		$n_explain_top 	= $lang['RULES_EXP'];
+		$n_submit 		= $lang['UPDATE_EXTRA'];
+		$n_ex_header	= $lang['EX_HEADER_N'];
+		$n_ex_footer	= $lang['EX_FOOTER_N'];
+
+		$sql	=	$SQL->query("SELECT ex_header,ex_footer FROM `{$dbprefix}stats`");
+		while($row=$SQL->fetch_array($sql)){
+
+		
+			$ex_headere = ( isset($_POST["ex_header"]) ) ? $_POST["ex_header"] : $row['ex_header'];
+			$ex_footere = ( isset($_POST["ex_footer"]) ) ? $_POST["ex_footer"] : $row['ex_footer'];
+			
+			$ex_header = stripslashes($ex_headere);
+			$ex_footer = stripslashes($ex_footere);
+			//addcslashes
+				//when submit !!
+			if ( isset($_POST['submit']) ) {
+
+				//update
+				$update2 = $SQL->query("UPDATE `{$dbprefix}stats` SET
+				ex_header = '". $ex_headere ."',
+				ex_footer = '". $ex_footere ."'");
+				if (!$update2) { die($lang['CANT_UPDATE_SQL']);}
+				else
+				{
+				//delete cache ..
+					if (file_exists('cache/data_extra.php')){
+					@unlink('cache/data_extra.php');
+					}
+				}
+			}
+		}
+		$SQL->freeresult($sql);
+
+
+		//after submit ////////////////
+		if ( isset($_POST['submit']) )
+		{
+		$text = $lang['EXTRA_UPDATED'];
+		$stylee	= "info.html";
+		}
+		
 		break; //=================================================
 		case "backup" ://===================================== [ backup]
 		//thanks for [coder] from montadaphp.net  for his simle lession
@@ -1042,7 +1081,9 @@
 	$rules_name 	= $lang['R_RULES'];
 	$rules_url 		= "admin.php?cp=rules";	
 	$search_name 	= $lang['R_SEARCH'];
-	$search_url 		= "admin.php?cp=search";	
+	$search_url 	= "admin.php?cp=search";		
+	$extra_name 	= $lang['R_EXTRA'];
+	$extra_url 		= "admin.php?cp=extra";	
 	$img_ctrl_name 	= $lang['R_IMG_CTRL'];
 	$img_ctrl_url 		= "admin.php?cp=img";
 

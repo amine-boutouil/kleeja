@@ -66,5 +66,7 @@ beta 6 :
 + fix backup cp section
 + multiple inputs for link download ,,
 + add images panel [ thumbs] in cp
++add extra [header+footer] panel 
++ public user folder 
 
 thank you for reading this file. 

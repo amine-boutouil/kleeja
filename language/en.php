@@ -176,7 +176,8 @@ $lang = array (
 		'CANT_DIR_CRT' 		=> 'The folder has not been created automatically, you must create it manually.',
 		'AGREE_RULES'		=> 'I Agree to the terms',
 		'CHANG_TO_URL_FILE'	=> 'Change uploading method',
-
+		'CURL_IS_OFF'		=> 'دوال CURL معطله ..',
+		
 		//includes/cache.php
 		'ADMINCP' 			=> 'Administration Panel',
 		'JUMPTO' 			=> 'Navigate to',
@@ -311,6 +312,17 @@ $lang = array (
 		'RULES_EXP'			=> 'من هنا تستطيع تعديل الشروط التي سوف تظهر للزوار والأعضاء',
 		'UPDATE_RULES'		=> 'تحديث الشروط',
 		'RULES_UPDATED' 	=> 'تم تحديث الشروط بنجاح ..',	
+		'R_SEARCH'			=> 'بحث متقدم',
+		'SEARCH_FILES'		=> 'بحث عن الملفات',
+		'SEARCH_SUBMIT'		=> 'بحث الآن',
+		'LAST_DOWN'			=> 'آخر تحميل',
+		'TODAY'				=> 'اليوم',
+		'DAYS'				=>	'أيام',
+		'WAS_B4'			=> 'كان قبل',
+		'BITE'				=> 'بايت',
+		'SEARCH_USERS'		=> 'بحث عن مستخدمين',	
+		'R_IMG_CTRL'		=> 'تحكم بالصور فقط',
+		
 		//install.php
 		'INST_AGR_GPL2'		=> 'I agree to all of these terms',
 		'INST_SUBMIT' 		=> '[  Continue  ]',

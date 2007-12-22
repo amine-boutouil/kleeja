@@ -128,11 +128,11 @@ CREATE TABLE `{$dbprefix}users` (
 $sql_files = "
 CREATE TABLE `{$dbprefix}files` (
   `id` int(10) NOT NULL auto_increment,
-  `last_down` int(10) NOT NULL,
+  `last_down` int(11) NOT NULL,
   `name` varchar(255) collate utf8_bin NOT NULL,
   `size` int(10) NOT NULL,
   `uploads` int(10) NOT NULL,
-  `time` int(10) NOT NULL,
+  `time` int(11) NOT NULL,
   `type` varchar(100) collate utf8_bin NOT NULL,
   `folder` varchar(100) collate utf8_bin NOT NULL,
   `report` int(10) NOT NULL,

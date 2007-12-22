@@ -120,31 +120,37 @@ function tpl(){  //thwara بداية
 	global $lang,$config;
 
 	$sss = js_uploader($this->filesnum);
+	
+	 $sss .= '<form name="uploader" id="uploader" action="' . $this->action . '" method="post"  encType="multipart/form-data" onsubmit="form_submit();"> ';
+
 	//www url icon
 	if ($config['www_url'] != '0') {
     $sss .= '<a href="#"  onclick="showhide();" title="' . $lang['CHANG_TO_URL_FILE'] . '"><img src="images/urlORfile.gif" alt="' . $lang['CHANG_TO_URL_FILE'] . '"  /></a>';
     }
 
-    $sss .= '<form name="uploader" id="uploader" action="' . $this->action . '" method="post"  encType="multipart/form-data" onsubmit="form_submit();"> ';
-	$sss .= '<div id="loadbox"><img src="images/loading.gif" id="loading"></div>';
-
 
 	//file input
-    $sss .= '<div id="filetype"><input type="file" name="file[]"><br><span id="upload_forum"></span>';
-    $sss .= '<input name="mraupload" onclick="javascript:plus();makeupload();" type="button" value="+" />';
-	$sss .= '<input name="mreupload" onclick="javascript:minus();makeupload();" type="button" value="-" />';
+    $sss .= '<div id="filetype"><input type="file" name="file[]"><br><div id="upload_forum"></div>';
+    $sss .= '<input name="mraupload" onclick="javascript:plus(1);makeupload(1);" type="button" value="+" />';
+	$sss .= '<input name="mreupload" onclick="javascript:minus(1);makeupload(1);" type="button" value="-" />';
 	$sss .= '<br /><input id="checkr" type="checkbox" onclick="wdwdwd(\'submitr\',\'checkr\');" />' . $lang['AGREE_RULES'];
 	$sss .= '<br /><input type="submit" id="submitr" name="submitr" value="' . $lang['DOWNLOAD_F'] . '"  disabled="disabled" />';
-	$sss .= '<input type="text" name="upload_num" value="1" size="1" readonly="readonly"/></div>';
+	$sss .= '<input type="text" id="upload_num" value="1" size="1" readonly="readonly"/></div>';
 
 	//www input
 	if ($config['www_url'] != '0') {
-    $sss .= '<div id="texttype"><input type="text" name="file" size="50" value="' . $lang['PAST_URL_HERE'] . '" onclick="this.value=\'\'" style="color:silver;" dir="ltr">';
+    $sss .= '<div id="texttype"><input type="text" name="file[0]" size="50" value="' . $lang['PAST_URL_HERE'] . '" onclick="this.value=\'\'" style="color:silver;" dir="ltr"><br><div id="upload_f_forum"></div>';
+    $sss .= '<input name="mraupload" onclick="javascript:plus(2);makeupload(2);" type="button" value="+" />';
+	$sss .= '<input name="mreupload" onclick="javascript:minus(2);makeupload(2);" type="button" value="-" />';
 	$sss .= '<br /><input id="checkr2" type="checkbox" onclick="wdwdwd(\'submittxt\',\'checkr2\');" />' . $lang['AGREE_RULES'];
-	$sss .= '<br /><input type="submit" id="submittxt" name="submittxt" value="' . $lang['DOWNLOAD_T'] . '"   disabled="disabled" /></div>';
+	$sss .= '<br /><input type="submit" id="submittxt" name="submittxt" value="' . $lang['DOWNLOAD_T'] . '"   disabled="disabled" />';
+	$sss .= '<input type="text" id="upload_f_num" value="1" size="1" readonly="readonly"/></div>';
+
 	}
 
 	$sss .= '</form>';
+
+	$sss .= '<div id="loadbox">ss</div>';
 
 	return $sss;
 
@@ -274,40 +280,40 @@ if(!file_exists($this->folder))   // نهاية التحقق من المجلد
 	 #-----------------------------------------------------------------------------------------------------------------------------------------------------------#
 
 	}#wut=1
-	elseif ( $wut == 2 && $config['www_url'] == '1' )
-	{
+	elseif ( $wut == 2 && $config['www_url'] == '1' ){
+////
+for($i=0;$i<$this->filesnum;$i++){
+//
 
 
-		$filename =  basename($_POST['file']);
-		$this->filename2=@explode(".",$filename);
-		$this->filename2=$this->filename2[count($this->filename2)-1];
-		$this->typet = $this->filename2;
+		$filename 			=  basename($_POST['file'][$i]);
+		$this->filename2	= @explode(".",$filename);
+		$this->filename2	= $this->filename2[count($this->filename2)-1];
+		$this->typet 		= $this->filename2;
 
+		
 		//tashfer [decode]
 		if($this->decode == "time"){
 		$zaid=time();
 		$this->filename2=$this->filename.$zaid.$i.".".$this->filename2;
 		}
-		elseif($this->tashfir == "md5")
-		{
+		elseif($this->tashfir == "md5"){
 		$zaid=md5(time());
 		$zaid=substr($zaid,0,10);
 		$this->filename2=$this->filename.$zaid.$i.".".$this->filename2;
 		}
-		else
-		{
+		else{
 		// اسم الملف الحقيقي
 		$this->filename2=$filename;
 		}
 		//end tashfer
 
 
-	if(empty($_POST['file'])){
-	$this->errs[]	= $lang['NO_FILE_SELECTED'];
-	}
-	elseif(!preg_match('#^http[s]?\\:\\/\\/[a-z0-9\-]+\.([a-z0-9\-]+\.)?[a-z]+#i', $_POST['file']))
+	if(empty($_POST['file'][$i])){}
+	else
+	if(!preg_match('#^http[s]?\\:\\/\\/[a-z0-9\-]+\.([a-z0-9\-]+\.)?[a-z]+#i', $_POST['file'][$i]))
 	{
-	$this->errs[]=  $lang['WRONG_LINK'];
+	$this->errs[]=  $lang['WRONG_LINK'].$filename ;
     }
 	elseif(file_exists($this->folder.'/'.$filename))
 	{
@@ -325,12 +331,12 @@ if(!file_exists($this->folder))   // نهاية التحقق من المجلد
 	{
 
 	//sooo
-	if ( function_exists('curl_init') )
+	if (function_exists('curl_init'))
 	{
 
 	// attempt retrieveing the url
 	$curl_handle=curl_init();
-	curl_setopt($curl_handle,CURLOPT_URL,$_POST['file']);
+	curl_setopt($curl_handle,CURLOPT_URL,$_POST['file'][$i]);
 	curl_setopt($curl_handle,CURLOPT_TIMEOUT,30);
 	curl_setopt($curl_handle,CURLOPT_CONNECTTIMEOUT,15);
 	curl_setopt($curl_handle,CURLOPT_RETURNTRANSFER,1);
@@ -356,11 +362,12 @@ if(!file_exists($this->folder))   // نهاية التحقق من المجلد
 	}
 	else
 	{
-	$this->errs[]	= $lang['CANT_UPLAOD'];
+	$this->errs[]	= $lang['CURL_IS_OFF'];
 	}
 
 }#else
 
+		}#end loop
 	}#end wut2
 
 }#END process
@@ -406,7 +413,7 @@ function saveit ($filname,$folderee,$sizeee,$typeee) { //
 	//must be img //
 $this->imgstypes	= array('png','gif','jpg','jpeg','tif','tiff');
 $this->thmbstypes	= array('png','jpg','jpeg','gif');
-if ($config[del_url_file]){$extra_del = $lang['URL_F_DEL'] . ':<br /><textarea rows=2 cols=49 rows=1>'.$this->linksite.'go.php?go=del&amp;id='.$this->id_for_url.'&amp;cd='.$code_del.'</textarea><br/>';}
+if ($config[del_url_file]){$extra_del = $lang['URL_F_DEL'] . ':<br /><textarea rows=2 cols=49 rows=1>'.$this->linksite.(($config[mod_writer]) ? "del".$this->id_for_url."_".$code_del.".html" : 'go.php?go=del&amp;id='.$this->id_for_url.'&amp;cd='.$code_del ).'</textarea><br/>';}
 
 
 //show imgs

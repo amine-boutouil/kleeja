@@ -7,6 +7,8 @@
 	$dbpass		= '';
     $dbname		= 'kleeja';
 	$dbprefix	 = '';
+	$perpage	= '10';
+	
 	//for integration with forums
 	$forum_srv = "localhost";
 	$forum_db ="vb368";

@@ -12,8 +12,10 @@
 		<td>{n_admin}</td>
 		<td>{n_del}</td>
 	</tr>
-<IF NAME="arr">
-<LOOP NAME="arr" LIMIT="15">
+<IF NAME="no_results">
+...
+<ELSE>
+<LOOP NAME="arr">
 	<tr style="background-color:#F5F5F5">
 		<td><label><input type="text" name="nm_{{id}}" value="{{name}}" size="20"></label></td>
 		<td><label><input type="text" name="ml_{{id}}" value="{{mail}}" size="20"></label></td>
@@ -30,5 +32,5 @@
 		<input class="button2" name="submit" type="submit" value="{n_submit}" />
 </fieldset>
 </form>
-<div style="text-align:center"><b>{arr_paging}</b></div>
+<div style="text-align:center"><b>{page_nums}</b></div>
 </div>

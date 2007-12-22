@@ -39,16 +39,7 @@ $starttm = $starttm[1] + $starttm[0];
 		$_FILES 		= $HTTP_POST_FILES;
      }
 	  
-	/*##  not now , script is more stable now ...
-	if (!@ini_get('register_globals')) {  
-		extract($_GET);  
-	    extract($_POST);  
-		extract($_COOKIE); 
-		extract($_SESSION); 
-		extract($_SERVER);  
-		extract($_FILES);  
-	}  */
-	  
+
 	  
 	//include files .. & classes ..
 	$path = dirname(__FILE__).'/';
@@ -59,15 +50,9 @@ $starttm = $starttm[1] + $starttm[0];
 	include ($path.'js.php');
 	include ($path.'KljUploader.php');
 	include ($path.'usr.php');
+	include ($path.'pager.php');
 
 
-	
-	// start classes ..
-	$SQL	= new SSQL;				# Author : MaaSTaaR & saanina
-	$tpl	= new EasyTemplate;		# Author : daif
-	$kljup	= new KljUploader;		# Author : Nadorino and saanina
-	$usrcp	= new usrcp;			# Author : saanina
-	
 	//no data.. install.php exists
 	if (!$dbname || !$dbuser)
 	{
@@ -81,11 +66,13 @@ $starttm = $starttm[1] + $starttm[0];
 	 exit();
 	}
 	
-	//some of classes need .. 
-	#connect     
-    $SQL->setinfo($dbserver,$dbuser,$dbpass,$dbname);
-    $SQL->connect();
-    $SQL->selectdb();
+	// start classes ..
+	$SQL	= new SSQL($dbserver,$dbuser,$dbpass,$dbname);				# Author : MaaSTaaR & saanina
+	$tpl	= new EasyTemplate;		# Author : daif
+	$kljup	= new KljUploader;		# Author : Nadorino and saanina
+	$usrcp	= new usrcp;			# Author : saanina
+	
+
 	unset($dbpass); // We do not need this any longer, unset for safety purposes
 
 	//get caches .. 
@@ -144,9 +131,9 @@ $starttm = $starttm[1] + $starttm[0];
 	
 	
 	//anti floods  system
-	if ( $usrcp->admin() === false ){
-	antifloods(7, 700); // (number of floods, per seconds ) 
-	}
+	//if ( $usrcp->admin() === false ){
+	//antifloods(7, 700); // (number of floods, per seconds ) 
+	//}
 	
 	//site close ..
 	if ($config[siteclose] == 1 && !$usrcp->admin() ) {

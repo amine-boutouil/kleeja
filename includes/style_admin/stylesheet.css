@@ -123,6 +123,9 @@ background: #85ACF7 url('images/top_bg.gif');
 	text-align: center;
 	color: #666;
 }
+
+img { border:0px;}
+
 textarea {
         font-family: Tahoma, Verdana, Helvetica, Arial, sans-serif;
         font-size: 0.85em;
@@ -249,4 +252,27 @@ a.button2, input.button2 {
         font-size: 0.85em;
         background: #EFEFEF url("images/button.gif") repeat-x top;
         cursor: pointer;
+}
+
+.bg_img {
+	text-align:center;
+	width:112px;
+	height:112px;
+	padding: 20px 0;
+	cursor: pointer;
+	background-image: url('images/bg_img.gif');
+	background-repeat: no-repeat;
+}
+#toolTipBox {
+	display: none;
+	padding: 5;
+	font-size: 11px;
+	font-family: Tahoma;
+	position: fixed;
+	background-color: #FCFCCD;
+	border: 1px solid #FFFF00;
+	color: 000000;
+}
+.tipp {
+
 }

@@ -335,11 +335,14 @@ pageTracker._initData();
 pageTracker._trackPageview();
 </script>';
 		$tpl->assign("googleanalytics",$googleanalytics);
+		
 	}
 
 	//show footer
 	print $tpl->display("footer.html");
-
+	
+	/*DEBUG*//*DEBUG*//*DEBUG*/ print $SQL->debug(); /* DEBUG*//* DEBUG*//* DEBUG*/
+	
 	// THEN .. at finish
 	$SQL->close();
 	return;

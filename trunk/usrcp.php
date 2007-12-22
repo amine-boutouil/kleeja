@@ -221,44 +221,48 @@
 			$n_submit_files = $lang['DEL_SELECTED'];
 			
 			//te get files and update them !!
+			/////////////pager 
 			$sql	=	$SQL->query("SELECT id,name,folder FROM `{$dbprefix}files` WHERE user='".$usrcp->id()."' ORDER BY `id` DESC");
+			$nums_rows = $SQL->num_rows($sql);
+			$currentPage = (isset($_GET['page']))? intval($_GET['page']) : 1;
+			$Pager = new SimplePager($perpage,$nums_rows,$currentPage);
+			$start = $Pager->getStartRow();
+			////////////////
+			$no_results = false;
+			if($nums_rows != 0) {
 			while($row=$SQL->fetch_array($sql)){
 			//make new lovely arrays !!
-				$ids[$row['id']]	=$row['id'];
-				$name[$row['id']]	=$row['name'];
-				$folder[$row['id']]	=$row['folder'];
-				
+
 				//
 				$del[$row[id]] = ( isset($_POST["del_".$row[id]]) ) ? $_POST["del_".$row[id]] : "";
 
-
+				$arr[] = array( id =>$row['id'],
+								name =>'<a href="'.(($config[mod_writer])?  $config[siteurl].'download'.$row['id'].'.html': $config[siteurl]."download.php?id=".$row['id']  ).'" target="blank">'.$row['name'].'</a>'
+							);
+							
 					//when submit !!
 					if ( isset($_POST['submit_files']) ) {
 						if ($del[$row[id]])
 						{
-							$update = $SQL->query("DELETE FROM `{$dbprefix}files` WHERE id='" . intval($ids[$row[id]]) . "' ");
+							$update = $SQL->query("DELETE FROM `{$dbprefix}files` WHERE id='" . intval($row[id]) . "' ");
 							if (!$update) {die($lang['CANT_UPDATE_SQL']);}
 							
 							//delete from folder .. 
-							@unlink ( $folder[$row['id']] . "/" . $name[$row['id']] );
+							@unlink ($row['folder'] . "/" . $row['name'] );
 							//delete thumb
-							if (is_file($folder[$row['id']] . "/thumbs/" . $name[$row['id']] ))
-							{@unlink ( $folder[$row['id']] . "/thumbs/" . $name[$row['id']] );}
+							if (is_file($row['folder'] . "/thumbs/" . $row['name'] ))
+							{@unlink ($row['folder'] . "/thumbs/" . $row['name'] );}
 							//delete thumb
 						}
 				}
 			}
 			$SQL->freeresult($sql);
-			
-			if (!is_array($ids)){$ids = array();}//fix bug
-			foreach($ids as $i)
-			{
-			$arr[] = array( id =>$i,
-							name =>'<a href="'.(($config[mod_writer])?  $config[siteurl].'download'.$i.'.html': $config[siteurl]."download.php?id=$i"  ).'" target="blank">'.$name[$i].'</a>'
-							);
-			}
-			if (!is_array($arr)){$arr = array();}
-			
+		}else{ #nums_rows
+		$no_results = true;
+		}
+		
+			$total_pages 	= $Pager->getTotalPages(); 
+			$page_nums 		= $Pager->print_nums('/usercp.php?go=filecp'); 
 			//after submit ////////////////
 			if ( isset($_POST['submit_files']) ) 
 			{

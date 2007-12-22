@@ -58,5 +58,13 @@ beta 5 ..
 + add mod Rewriter as option an cp 
 + add docs folder with important files
 
+beta 6 : 
++ new mysql class .. [ more stable, more strong ] 
++ new pages system [pager class].. 
++ new advanced search system in cp.. 
+- reprogram cp admin ,, 
++ fix backup cp section
++ multiple inputs for link download ,,
++ add images panel [ thumbs] in cp
 
 thank you for reading this file. 

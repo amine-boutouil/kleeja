@@ -11,3 +11,4 @@ RewriteRule ^filecp.html$ usrcp.php?go=filecp
 RewriteRule ^stats.html$ go.php?go=stats
 RewriteRule ^thumb([0-9]*).html$ download.php?thmb=$1
 RewriteRule ^image([0-9]*).html$ download.php?img=$1
+RewriteRule ^del([0-9]*)_([0-9]*).html$ go.php?go=del&id=$1&cd=$2

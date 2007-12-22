@@ -20,15 +20,30 @@ function checkall() {
 		<td>{n_size}</td>
 		<td><input type="checkbox" name="check_all" checked="checked" onClick="checkall();"/></td>
 	</tr>
-<IF NAME="arr">
-<LOOP NAME="arr">
 	<tr style="background-color:#F5F5F5">
-		<td>{{name}}</td>
-		<td>{{size}} kb</td>
-		<td><input type="checkbox" name="check[]" value="{{name}}" checked="checked" /></td>
+		<td>{config_t.name}</td><td>{config_t.size} kb</td><td><input type="checkbox" name="check[]" value="{config_t.name}" checked="checked" /></td>
+	</tr>	
+	<tr style="background-color:#F5F5F5">
+		<td>{files_t.name}</td><td>{files_t.size} kb</td><td><input type="checkbox" name="check[]" value="{files_t.name}" checked="checked" /></td>
+	</tr>	
+	<tr style="background-color:#F5F5F5">
+		<td>{stats_t.name}</td><td>{stats_t.size} kb</td><td><input type="checkbox" name="check[]" value="{stats_t.name}" checked="checked" /></td>
+	</tr>	
+	<tr style="background-color:#F5F5F5">
+	<td>{users_t.name}</td><td>{users_t.size} kb</td><td><input type="checkbox" name="check[]" value="{users_t.name}" checked="checked" /></td>
+	</tr>	
+	<tr style="background-color:#F5F5F5">
+	<td>{call_t.name}</td><td>{call_t.size} kb</td><td><input type="checkbox" name="check[]" value="{call_t.name}" checked="checked" /></td>
+	</tr>	
+	<tr style="background-color:#F5F5F5">
+	<td>{exts_t.name}</td><td>{exts_t.size} kb</td><td><input type="checkbox" name="check[]" value="{exts_t.name}" checked="checked" /></td>
+	</tr>	
+	<tr style="background-color:#F5F5F5">
+	<td>{online_t.name}</td><td>{online_t.size} kb</td><td><input type="checkbox" name="check[]" value="{online_t.name}" checked="checked" /></td>
+	</tr>	
+	<tr style="background-color:#F5F5F5">
+	<td>{reports_t.name}</td><td>{reports_t.size} kb</td><td><input type="checkbox" name="check[]" value="{reports_t.name}" checked="checked" /></td>
 	</tr>
-</LOOP>
-</IF>
 </table>
 
 </fieldset>

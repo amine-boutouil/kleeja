@@ -262,6 +262,36 @@
 		}
 
 		break; //=================================================
+		case "search" ://===================================== [ search]
+		//for style ..
+		$stylee = "search.html";
+		//words
+		$action1 			= "admin.php?cp=files";
+		$n_search_submit 	= $lang['SEARCH_SUBMIT'];
+		$search_files		= $lang['SEARCH_FILES'];
+		$n_name 			= $lang['FILENAME'];
+		$n_user 			= $lang['USERNAME'];
+		$n_size 			= $lang['FILESIZE'];
+		$n_time 			= $lang['FILEDATE'];
+		$n_uploads 			= $lang['FILEUPS'];
+		$n_type	 			= $lang['FILETYPE'];
+		$n_folder 			= $lang['FILDER'];
+		$n_report 			= $lang['REPORT'];
+		$n_last_down 		= $lang['LAST_DOWN'];
+		$n_today 			= $lang['TODAY'];
+		$n_days				= $lang['DAYS'];
+		$n_was_b4			= $lang['WAS_B4'];
+		$n_bite				= $lang['BITE'];
+		//
+		$action2 			= "admin.php?cp=users";	
+		$search_users		= $lang['SEARCH_USERS'];
+		$n_username			= $lang['USERNAME'];
+		$n_usermail			= $lang['EMAIL'];
+		
+		// ITS DEFAULT SYSTEM USER !
+		$default_user_system= (true) ? true : false;
+		
+		break; //=================================================
 		case "files" ://===================================== [ files]
 		//for style ..
 		$stylee = "files.html";
@@ -277,21 +307,47 @@
 		$n_folder 	= $lang['FILDER'];
 		$n_report 	= $lang['REPORT'];
 		$n_del 		= $lang['DELETE'];
-
-
-		$sql	=	$SQL->query("SELECT * FROM `{$dbprefix}files` ORDER BY `id` DESC");
+	
+		//posts search ..
+		if (isset($_POST['search_file'])){
+			$file_namee	= ($_POST['filename']!='') ? 'AND f.name LIKE \'%'.$SQL->escape($_POST['filename']).'%\' ' : ''; 
+			$usernamee	= ($_POST['username']!='') ? 'AND u.name LIKE \'%'.$SQL->escape($_POST['username']).'%\' AND u.id=f.user' : ''; 
+			$size_than	=   ' `size` '.(($_POST['than']==1) ? '>' : '<').intval($_POST['size']).' ';
+			$ups_than	=  ($_POST['ups']!='') ? 'AND f.uploads '.(($_POST['uthan']==1) ? '>' : '<').intval($_POST['ups']).' ' : '';
+			$rep_than	=  ($_POST['rep']!='') ? 'AND f.report '.(($_POST['rthan']==1) ? '>' : '<').intval($_POST['rep']).' ' : '';
+			$lstd_than	=  ($_POST['lastdown']!='') ? 'AND f.last_down ='.(time()-intval($_POST['lastdown'])).' ' : '';
+			$exte		=  ($_POST['ext']!='') ? 'AND f.type LIKE \'%'.$SQL->escape($_POST['ext']).'%\' ' : '';
+			
+			$sql = $SQL->query("SELECT f.* 
+			FROM {$dbprefix}files f , {$dbprefix}users u
+			WHERE $size_than $file_namee $ups_than $exte $rep_than $usernamee
+			ORDER BY `id` DESC");
+		}else{
+			$sql = $SQL->query("SELECT * FROM `{$dbprefix}files` ORDER BY `id` DESC");
+		}
+		/////////////pager 
+		$nums_rows = $SQL->num_rows($sql);
+		$currentPage = (isset($_GET['page']))? intval($_GET['page']) : 1;
+		$Pager = new SimplePager($perpage,$nums_rows,$currentPage);
+		$start = $Pager->getStartRow();
+		////////////////
+		
+		$no_results = false;
+		
+		if ( $nums_rows > 0  ) {
 		while($row=$SQL->fetch_array($sql)){
 		//make new lovely arrays !!
-			$ids[$row['id']] =  $row['id'];
-			$name[$row['id']]=$row['name'];
-			$size[$row['id']]=$row['size'];
-			$uploads[$row['id']]=$row['uploads'];
-			$time[$row['id']]=$row['time'];
-			$type[$row['id']]=$row['type'];
-			$folder[$row['id']]=$row['folder'];
-			$report[$row['id']]=$row['report'];
-			$user[$row['id']]=$row['user'];
-
+			$user_name = $SQL->fetch_array($SQL->query("SELECT name FROM `{$dbprefix}users` WHERE id='".$row['user']."' "));
+			$arr[] = array(id =>$row['id'],
+						name =>"<a href=\"./".$row['folder']."/".$row['name']."\" target=\"blank\">".$row['name']."</a>",
+						size =>Customfile_size($row['size']),
+						ups =>$row['uploads'],
+						time => date("d-m-Y H:a", $row['time']),
+						type =>$row['type'],
+						folder =>$row['folder'],
+						report =>($row['report'] > 4)? "<span style=\"color:red\"><big>".$row['report']."</big></span>":$row['report'],
+						user =>($row['user'] == '-1') ? $lang['GUST'] :  $user_name['name'],
+						);
 			//
 			$del[$row[id]] = ( isset($_POST["del_".$row[id]]) ) ? $_POST["del_".$row[id]] : "";
 
@@ -300,43 +356,99 @@
 				if ( isset($_POST['submit']) ) {
 					if ($del[$row[id]])
 					{
-						$update = $SQL->query("DELETE FROM `{$dbprefix}files` WHERE id='" . intval($ids[$row[id]]) . "' ");
+						$update = $SQL->query("DELETE FROM `{$dbprefix}files` WHERE id='" . intval($row[id]) . "' ");
 						if (!$update) { die($lang['CANT_UPDATE_SQL']);}
 
 						//delete from folder ..
-						@unlink ( $folder[$row['id']] . "/" . $name[$row['id']] );
+						@unlink ($row['folder'] . "/" .$row['name'] );
 							//delete thumb
-							if (is_file($folder[$row['id']] . "/thumbs/" . $name[$row['id']] ))
-							{@unlink ( $folder[$row['id']] . "/thumbs/" . $name[$row['id']] );}
+							if (is_file($row['folder'] . "/thumbs/" . $row['name'] ))
+							{@unlink ($row['folder'] . "/thumbs/" . $row['name'] );}
 							//delete thumb
 					}
 			}
 		}
 		$SQL->freeresult($sql);
-
-		if (!is_array($ids)){$ids = array();}//fix bug
-		foreach($ids as $i)
-		{
-		$s = $SQL->fetch_array($SQL->query("select name from `{$dbprefix}users` where id='".$user[$i]."' "));
-		$arr[] = array( id =>$i,
-						name =>"<a href=\"./$folder[$i]/$name[$i]\" target=\"blank\">".$name[$i]."</a>",
-						size =>Customfile_size($size[$i]),
-						ups =>$uploads[$i],
-						time => date("d-m-Y H:a", $time[$i]),
-						type =>$type[$i],
-						folder =>$folder[$i],
-						report =>($report[$i] > 4)? "<span style=\"color:red\"><big>".$report[$i]."</big></span>":$report[$i],
-						user =>($user[$i] == '-1') ? $lang['GUST']:  $s[0],
-						);
-		}
-		if (!is_array($arr)){$arr = array();}
-
+	}else{#num_rows
+	$no_results = true;
+	}
+		$total_pages 	= $Pager->getTotalPages(); 
+		$page_nums 		= $Pager->print_nums('/admin.php?go=files'); 
 		//after submit ////////////////
 		if ( isset($_POST['submit']) )
 		{
 		$text = $lang['FILES_UPDATED'];
 		$stylee	= "info.html";
 		}
+		
+		break; //=================================================
+		case "img" ://===================================== [ files]
+		//for style ..
+		$stylee = "img.html";
+		//words
+		$action 	= "admin.php?cp=img";
+		$n_submit 	= $lang['UPDATE_FILES'];
+		$n_del 		= $lang['DELETE'];
+	
+
+		$sql = $SQL->query("SELECT * FROM `{$dbprefix}files` WHERE type IN ('gif','jpg','png','bmp','jpeg','tif','tiff') ORDER BY `id` DESC");
+	
+		/////////////pager 
+		$nums_rows = $SQL->num_rows($sql);
+		$currentPage = (isset($_GET['page']))? intval($_GET['page']) : 1;
+		$Pager = new SimplePager($perpage,$nums_rows,$currentPage);
+		$start = $Pager->getStartRow();
+		////////////////
+		
+		$no_results = false;
+		
+		if ( $nums_rows > 0  ) {
+		while($row=$SQL->fetch_array($sql)){
+		//make new lovely arrays !!
+			$user_name = $SQL->fetch_array($SQL->query("SELECT name FROM `{$dbprefix}users` WHERE id='".$row['user']."' "));
+			$arr[] = array(id =>$row['id'],
+						name =>$row['name'],
+						href =>$row['folder']."/".$row['name'],
+						size =>$lang['FILESIZE']. ':' . Customfile_size($row['size']),
+						ups => $lang['FILEUPS'] .' : '.$row['uploads'],
+						time => $lang['FILEDATE']. ':' .date("d-m-Y H:a", $row['time']),
+						user =>$lang['BY'] . ':' .(($row['user'] == '-1') ? $lang['GUST'] :  $user_name['name']),
+						thumb_link => (is_file($row['folder'] . "/thumbs/" . $row['name'] )) ? $row['folder'] . "/thumbs/" . $row['name'] : $row['folder'] . "/" . $row['name'],
+						);
+
+
+			//
+			$del[$row[id]] = ( isset($_POST["del_".$row[id]]) ) ? $_POST["del_".$row[id]] : "";
+
+		//when submit by get !! !!
+				if ( isset($_POST['submit']) ) {
+					if ($del[$row[id]])
+					{
+						$update = $SQL->query("DELETE FROM `{$dbprefix}files` WHERE id='" . intval($row[id]) . "' ");
+						if (!$update) { die($lang['CANT_UPDATE_SQL']);}
+
+						//delete from folder ..
+						@unlink ($row['folder'] . "/" .$row['name'] );
+							//delete thumb
+							if (is_file($row['folder'] . "/thumbs/" . $row['name'] ))
+							{@unlink ($row['folder'] . "/thumbs/" . $row['name'] );}
+							//delete thumb
+					}
+			}
+		}
+		$SQL->freeresult($sql);
+	}else{#num_rows
+	$no_results = true;
+	}
+		$total_pages 	= $Pager->getTotalPages(); 
+		$page_nums 		= $Pager->print_nums('/admin.php?go=img'); 
+		//after submit ////////////////
+		if ( isset($_POST['submit']) )
+		{
+		$text = $lang['FILES_UPDATED'];
+		$stylee	= "info.html";
+		}
+		
 		break; //=================================================
 		case "reports" ://===================================== [ reports]
 		//for style ..
@@ -355,17 +467,28 @@
 		$n_reply 		= $lang['REPLY'];
 		$n_del 			= $lang['DELETE'];
 
+		/////////////pager 
 		$sql	=	$SQL->query("SELECT * FROM `{$dbprefix}reports`  ORDER BY `id` DESC");
+		$nums_rows = $SQL->num_rows($sql);
+		$currentPage = (isset($_GET['page']))? intval($_GET['page']) : 1;
+		$Pager = new SimplePager($perpage,$nums_rows,$currentPage);
+		$start = $Pager->getStartRow();
+		////////////////
+		
+		$no_results = false;
+		
+		if ( $nums_rows > 0  ) {
 		while($row=$SQL->fetch_array($sql)){
 		//make new lovely arrays !!
-			$ids[$row['id']]	=$row['id'];
-			$name[$row['id']]	=$row['name'];
-			$mail[$row['id']]	=$row['mail'];
-			$url[$row['id']]	=$row['url'];
-			$text[$row['id']]	=$row['text'];
-			$time[$row['id']]	=$row['time'];
-			$ip_{$row['id']}	=$row['ip'];
-
+		$arr[] = array( id =>$row['id'],
+						name 		=> $row['name'],
+						mail 		=> $row['mail'],
+						url  		=> $row['url'],
+						text 		=> $row['text'],
+						time 		=> date("d-m-Y H:a", $row['time']),
+						ip	 		=> $row['ip'],
+						ip_finder	=> 'http://www.ripe.net/whois?form_type=simple&full_query_string=&searchtext=' . $row['ip'] . '&do_search=Search'
+						);
 			//
 			$del[$row[id]] = ( isset($_POST["del_".$row[id]]) ) ? $_POST["del_".$row[id]] : "";
 			$sen[$row[id]] = ( isset($_POST["v_".$row[id]]) ) ? $_POST["v_".$row[id]] : "";
@@ -373,16 +496,16 @@
 			if ( isset($_POST['submit']) ) {
 					if ($del[$row[id]])
 					{
-					$update = $SQL->query("DELETE FROM `{$dbprefix}reports` WHERE id='" . intval($ids[$row[id]]) . "' ");
+					$update = $SQL->query("DELETE FROM `{$dbprefix}reports` WHERE id='" . intval($row['id']) . "' ");
 					if (!$update) { die($lang['CANT_UPDATE_SQL']);}
 					}
 				}
 			if ( isset($_POST['reply_submit']) ) {
 				if ($sen[$row[id]])
 					{
-						$to      = $mail[$row['id']];
+						$to      = $row['mail'];
 						$subject = $lang['REPLY_REPORT'] . ':'.$config[sitename];
-						$message = "\n " . $lang['WELCOME'] . " ".$name[$row['id']]."\r\n " . $lang['U_REPORT_ON'] . " ".$config[sitename]. "\r\n " . $lang['BY_EMAIL'] . ": ".$mail[$row['id']]."\r\n" . $lang['ADMIN_REPLIED'] . ": \r\n".$sen[$row[id]]."\r\n\r\n Kleeja Script";
+						$message = "\n " . $lang['WELCOME'] . " ".$row['name']."\r\n " . $lang['U_REPORT_ON'] . " ".$config[sitename]. "\r\n " . $lang['BY_EMAIL'] . ": ".$row['mail']."\r\n" . $lang['ADMIN_REPLIED'] . ": \r\n".$sen[$row[id]]."\r\n\r\n Kleeja Script";
 						$headers = 'From: '. $config[sitename]. '<'. $config[sitemail]. '>' . "\r\n" .
 						    'MIME-Version: 1.0' . "\r\n" .
 						    'X-Mailer: PHP/' . phpversion();
@@ -398,23 +521,12 @@
 			}
 		}
 		$SQL->freeresult($sql);
-
-		if (!is_array($ids)){$ids = array();}//fix bug
-		foreach($ids as $i)
-		{
-		$arr[] = array( id =>$i,
-						name 		=> $name[$i],
-						mail 		=> $mail[$i],
-						url  		=> $url[$i],
-						text 		=> $text[$i],
-						time 		=> date("d-m-Y H:a", $time[$i]),
-						ip	 		=> $ip_{$i},
-						ip_finder	=> 'http://www.ripe.net/whois?form_type=simple&full_query_string=&searchtext=' . $ip_{$i} . '&do_search=Search'
-						);
-
-		}
-		if (!is_array($arr)){$arr = array();}
-
+	}else{ #num rows
+		$no_results = true;
+	}
+	
+		$total_pages 	= $Pager->getTotalPages(); 
+		$page_nums 		= $Pager->print_nums('/admin.php?go=report'); 
 		//after submit ////////////////
 		if ( isset($_POST['submit']) )
 		{
@@ -437,16 +549,28 @@
 		$n_ip 			= $lang['IP'];
 		$n_reply 		= $lang['REPLY'];
 		$n_del 			= $lang['DELETE'];
-
+		
+		/////////////pager 
 		$sql	=	$SQL->query("SELECT * FROM `{$dbprefix}call` ORDER BY `id` DESC");
+		$nums_rows = $SQL->num_rows($sql);
+		$currentPage = (isset($_GET['page']))? intval($_GET['page']) : 1;
+		$Pager = new SimplePager($perpage,$nums_rows,$currentPage);
+		$start = $Pager->getStartRow();
+		////////////////
+		
+		$no_results = false;
+		
+		if ( $nums_rows > 0  ) {
 		while($row=$SQL->fetch_array($sql)){
 		//make new lovely arrays !!
-			$ids[$row['id']] 	=$row['id'];
-			$name[$row['id']]	=$row['name'];
-			$mail[$row['id']]	=$row['mail'];
-			$text[$row['id']]	=$row['text'];
-			$time[$row['id']]	=$row['time'];
-			$ip_{$row['id']}		=$row['ip'];
+		$arr[] = array( id =>$row['id'],
+						name 		=> $row['name'],
+						mail 		=> $row['mail'],
+						text 		=> $row['text'],
+						time 		=> date("d-m-Y H:a", $row['time']),
+						ip 			=> $row['ip'],
+						ip_finder	=> 'http://www.ripe.net/whois?form_type=simple&full_query_string=&searchtext=' . $row['ip'] . '&do_search=Search'
+						);
 
 			//
 			$del[$row[id]] = ( isset($_POST["del_".$row[id]]) ) ? $_POST["del_".$row[id]] : "";
@@ -455,16 +579,16 @@
 			if ( isset($_POST['submit']) ) {
 				if ($del[$row[id]])
 				{
-				$update = $SQL->query("DELETE FROM `{$dbprefix}call` WHERE id='" . intval($ids[$row[id]]) . "' ");
+				$update = $SQL->query("DELETE FROM `{$dbprefix}call` WHERE id='" . intval($row['id']) . "' ");
 				if (!$update) { die($lang['CANT_UPDATE_SQL']);}
 				}
 			}
 			if ( isset($_POST['reply_submit']) ) {
 				if ($sen[$row[id]])
 				{
-				$to      = $mail[$row['id']];
+				$to      = $row['mail'];
 				$subject = $lang['REPLY_CALL'] . ':'.$config[sitename];
-				$message = "\n " . $lang['REPLY_CALL'] . " ".$name[$row['id']]."\r\n " . $lang['REPLIED_ON_CAL'] . " : ".$config[sitename]. "\r\n " . $lang['BY_EMAIL'] . ": ".$mail[$row['id']]."\r\n" . $lang['ADMIN_REPLIED'] . "\r\n".$sen[$row[id]]."\r\n\r\n Kleeja Script";
+				$message = "\n " . $lang['REPLY_CALL'] . " ".$row['name']."\r\n " . $lang['REPLIED_ON_CAL'] . " : ".$config[sitename]. "\r\n " . $lang['BY_EMAIL'] . ": ".$row['mail']."\r\n" . $lang['ADMIN_REPLIED'] . "\r\n".$sen[$row[id]]."\r\n\r\n Kleeja Script";
 				$headers = 'From: '. $config[sitename]. '<'. $config[sitemail]. '>' . "\r\n" .
 				    'MIME-Version: 1.0' . "\r\n" .
 				    'X-Mailer: PHP/' . phpversion();
@@ -480,22 +604,12 @@
 		}
 		$SQL->freeresult($sql);
 
-		if (!is_array($ids)){$ids = array();}//fix bug
-		foreach($ids as $i)
-		{
-		$arr[] = array( id =>$i,
-						name 		=> $name[$i],
-						mail 		=> $mail[$i],
-						text 		=> $text[$i],
-						time 		=> date("d-m-Y H:a", $time[$i]),
-						ip 			=> $ip_{$i},
-						ip_finder	=> 'http://www.ripe.net/whois?form_type=simple&full_query_string=&searchtext=' . $ip_{$i} . '&do_search=Search'
-						);
-
-
-		}
-		if (!is_array($arr)){$arr = array();}
-
+	}else{ #num rows
+		$no_results = true;
+	}
+	
+		$total_pages 	= $Pager->getTotalPages(); 
+		$page_nums 		= $Pager->print_nums('/admin.php?go=calls'); 
 		//after submit ////////////////
 		if ( isset($_POST['submit']) )
 		{
@@ -516,20 +630,47 @@
 		$n_submit 	= $lang['UPDATE_USERS'];
 		//$n_files = "HIS FILES";
 		$n_del		= $lang['DELETE'];
+		
+		//posts search ..
+		if (isset($_POST['search_user'])){
+			$usernamee	= ($_POST['username']!='') ? 'AND name  LIKE \'%'.$SQL->escape($_POST['username']).'%\' ' : ''; 
+			$usermailee	= ($_POST['usermail']!='') ? 'AND mail  LIKE \'%'.$SQL->escape($_POST['usermail']).'%\' ' : ''; 
 
-
+			$sql = $SQL->query("SELECT * 
+			FROM {$dbprefix}users
+			WHERE name != '' $usernamee $usermailee
+			ORDER BY `id` DESC");
+		}else{
 		$sql	=	$SQL->query("SELECT * FROM `{$dbprefix}users`  ORDER BY `id` DESC");
+		}
+		/////////////pager 
+		$nums_rows = $SQL->num_rows($sql);
+		$currentPage = (isset($_GET['page']))? intval($_GET['page']) : 1;
+		$Pager = new SimplePager($perpage,$nums_rows,$currentPage);
+		$start = $Pager->getStartRow();
+		////////////////
+		
+		$no_results = false;
+		
+		if ( $nums_rows > 0  ) {
 		while($row=$SQL->fetch_array($sql)){
 
 			//make new lovely arrays !!
-			$ids[$row['id']]=	$row['id'];
-			$name[$row[id]] 	=( isset($_POST["nm_".$row[id]])  ) ? $_POST["nm_".$row[id]]  : $row['name'];
-			$mail[$row[id]]	=	( isset($_POST["ml_".$row[id]]) ) ? $_POST["ml_".$row[id]] : $row['mail'];
-			$pass[$row[id]]	=	( isset($_POST["ps_".$row[id]]) ) ? $_POST["ps_".$row[id]] :"";
-			$admin[$row[id]]	=	$row['admin'];
-			$del[$row[id]] = ( isset($_POST["del_".$row[id]]) ) ? $_POST["del_".$row[id]] : "";
+			$ids[$row['id']]	= $row['id'];
+			$name[$row[id]] 	= (isset($_POST["nm_".$row[id]])) ? $_POST["nm_".$row[id]]  : $row['name'];
+			$mail[$row[id]]		= (isset($_POST["ml_".$row[id]])) ? $_POST["ml_".$row[id]] : $row['mail'];
+			$pass[$row[id]]		= (isset($_POST["ps_".$row[id]])) ? $_POST["ps_".$row[id]] :"";
+			$admin[$row[id]]	= $row['admin'];
+			$del[$row[id]] 		= (isset($_POST["del_".$row[id]])) ? $_POST["del_".$row[id]] : "";
+
+			$arr[] = array( id =>$ids[$row['id']],
+						name =>$name[$row[id]],
+						mail =>$mail[$row[id]],
+						admin =>($admin[$row[id]])? "<input name=\"ad_{$row[id]}\" type=\"checkbox\" checked=\"checked\" />":"<input name=\"ad_{$row[id]}\" type=\"checkbox\"  />"
+						);
 
 
+		
 				//when submit !!
 			if ( isset($_POST['submit']) ) {
 				if ($del[$row[id]])
@@ -555,17 +696,12 @@
 		}
 		$SQL->freeresult($sql);
 
-		if (!is_array($ids)){$ids = array();}//fix bug
-		foreach($ids as $i)
-		{
-		$arr[] = array( id =>$i,
-						name =>$name[$i],
-						mail =>$mail[$i],
-						admin =>($admin[$i])? "<input name=\"ad_{$i}\" type=\"checkbox\" checked=\"checked\" />":"<input name=\"ad_{$i}\" type=\"checkbox\"  />"
-						);
-		}
-		if (!is_array($arr)){$arr = array();}
-
+	}else{ #num rows
+		$no_results = true;
+	}
+	
+		$total_pages 	= $Pager->getTotalPages(); 
+		$page_nums 		= $Pager->print_nums('/admin.php?go=users'); 
 		//after submit ////////////////
 		if ( isset($_POST['submit']) )
 		{
@@ -653,14 +789,14 @@
 		//after submit ////////////////
 		if ( isset($_POST['submit']) )
 		{
-		$text = $lang['BAN_UPDATED'];
+		$text = $lang['RULES_UPDATED'];
 		$stylee	= "info.html";
 		}
 		
 		break; //=================================================
 		case "backup" ://===================================== [ backup]
 		//thanks for [coder] from montadaphp.net  for his simle lession
-		//@set_time_limit(1000);
+		@set_time_limit(0);
 		//for style ..
 		$stylee = "backup.html";
 		//words
@@ -676,21 +812,21 @@
 		while($row=$SQL->fetch_array($sql)){
 
 			//make new lovely arrays !!
-			$id		= $i++;
-			$size[$id]	= round($row['Data_length']/1024, 2);
-			$name[$id]   = $row[Name];
-
+			$size[$row["Name"]]	= round($row['Data_length']/1024, 2);
 		}
 		$SQL->freeresult($sql);
 
 
-		for($i=0;$i<$id;$i++)
-		{
-		$arr[] = array( name =>$name[$i],
-						size =>$size[$i]
-						);
-		}
-		if (!is_array($arr)){$arr = array();}
+		// to output our tables on;ly !!
+		$config_t  = array( name =>"{$dbprefix}config",size =>$size["{$dbprefix}config"]);
+		$files_t  = array( name =>"{$dbprefix}files",size =>$size["{$dbprefix}files"]);
+		$stats_t  = array( name =>"{$dbprefix}stats",size =>$size["{$dbprefix}stats"]);
+		$users_t  = array( name =>"{$dbprefix}users",size =>$size["{$dbprefix}users"]);
+		$call_t  = array( name =>"{$dbprefix}call",size =>$size["{$dbprefix}call"]);
+		$exts_t  = array( name =>"{$dbprefix}exts",size =>$size["{$dbprefix}exts"]);
+		$online_t  = array( name =>"{$dbprefix}online",size =>$size["{$dbprefix}online"]);
+		$reports_t  = array( name =>"{$dbprefix}reports",size =>$size["{$dbprefix}reports"]);
+
 
 		//after submit ////////////////
 		if ( isset($_POST['submit']) ) {
@@ -904,7 +1040,11 @@
 	$ban_name 		= $lang['R_BAN'];
 	$ban_url 		= "admin.php?cp=ban";	
 	$rules_name 	= $lang['R_RULES'];
-	$rules_url 		= "admin.php?cp=rules";
+	$rules_url 		= "admin.php?cp=rules";	
+	$search_name 	= $lang['R_SEARCH'];
+	$search_url 		= "admin.php?cp=search";	
+	$img_ctrl_name 	= $lang['R_IMG_CTRL'];
+	$img_ctrl_url 		= "admin.php?cp=img";
 
 	//header
 	print $tpl->display("header.html");

@@ -1,14 +1,17 @@
 file password .. 
+file description .. 
+extra header field 
+extra footer filed
 img for wrong file [beta4]
 fix exts panel in cp [ beta 4] 
 fixing  downloading by ftp 
-use html seo opition for url
+use html seo opition for url [o k]
 last visit for bots [ beta5]
 use seperated file for javascript [beta4]
 confirm msg when del something 
 complitaple with w3c
 improve rules system [beta5]
-shows the uploaded images on a page with a slideshow....
-make downlaod from url like from pc .. increasing inputs.
-disallow download from outside our site.
+make downlaod from url like from pc .. increasing inputs.[ok]
+disallow download from outside our site. [ OK] 
 name of file in title. and meta 
+public user files link 

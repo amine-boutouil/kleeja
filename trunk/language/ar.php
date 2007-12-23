@@ -67,12 +67,14 @@ $lang = array (
 		'EDIT_U_FILES' 		=> 'تحديث ملفاتك',
 		'FILES_UPDATED' 	=> 'تم تحديث الملفات',
 		
-				#go=filecp
+				#go=userfile
 		'PUBLIC_USER_FILES'	=> 'مجلد ملفات العضو ',
 		'FILEUSER'			=> 'مجلد ملفات عضو',
 		'GO_FILECP'			=> 'إظغط هنا لإدارة ملفاتك هذه',
 		'YOUR_FILEUSER'		=> 'مجلدك',
 		'COPY_AND_GET_DUD'	=> 'إنسخ الرابط وأعطه لأصدقائك ليطلعو على مجلدك ',
+		'CLOSED_FEATURE'	=> 'خاصية مغلقه',
+		'USERFILE_CLOSED'	=> 'خاصية مجلدات المستخدمين مغلقه !',
 		
 				#go=profile
 		'PFILE_4_FORUM' 	=> 'قم بالذهاب للمنتدى لتغيير بياناتك',
@@ -188,6 +190,7 @@ $lang = array (
 		//includes/cache.php
 		'ADMINCP' 			=> 'مركز التحكم',
 		'JUMPTO' 			=> 'إنتقل إلى',
+		'GO_BACK_BROWSER' 	=> 'رجوع للخلف',
 		'U_R_BANNED' 		=> 'لقد تم حظر الآي بي هذا..',
 		'U_R_FLOODER' 		=> 'لقد قمت بتخطي عدد مرات عرض الصفحه بالوقت المحدد  ...',
 		

@@ -1,0 +1,36 @@
+
+<div class="middle">
+			
+<h2>{welcome}..</h2>	
+{welcome_msg}
+<br />
+<br />
+{inputs}
+<br />
+<br />
+
+<!---- START  FOR INFORMATION ---->
+<IF NAME="info">
+	<div class="result">
+		<LOOP NAME="info">
+
+		<b>{info_lang}:</b> {{i}}<br />
+		</LOOP>
+	</div>
+</IF>
+<!---- END  FOR INFORMATION ---->
+
+
+<!---- START FOR ONLINE ---->
+<IF NAME="show_online">
+<b>{NUMBER_ONLINE} :</b>{allnumbers} ( {NUMBER_UONLINE} : {usersnum} , {NUMBER_VONLINE}: {visitornum} )
+<br/>
+<LOOP NAME="shownames">
+{{name}} , 
+</LOOP>
+</IF>
+<!---- END FOR ONLINE ---->
+
+</div>
+		
+

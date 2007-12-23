@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="{dir}">
+<head>
+<title>{title} - {config.sitename}</title>
+<meta http-equiv="Content-Language" content="ar" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="{stylepath}/stylesheet.css" media="screen" />
+</head>
+<body>
+<div id="wrap">
+
+<div class="roundedcornr_box_459680"><div class="roundedcornr_top_459680"><div></div></div><div class="roundedcornr_content_459680">
+
+<div id="content">
+
+	<div id="header">
+			<div class="roundedcornr_box_561672"><div class="roundedcornr_top_561671"><div></div></div><div class="roundedcornr_content_561671">
+					<a href="{config.siteurl}"><img src="{stylepath}/images/logo.gif" alt="{config.sitename}" style="border:0px" /></a>
+			</div><div class="roundedcornr_bottom_561671"><div></div></div></div>
+	</div>
+
+	<div class="breadcrumbs">
+	<a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}
+	</div>
+
+
+	{extras.header}
+
+
+	<div class="right">
+		<div class="roundedcornr_box_561672"> <div class="roundedcornr_top_561671"><div></div></div><div class="roundedcornr_content_561671">
+
+		<ul>
+			<li><img src="{stylepath}/images/index_button.gif" alt="{index_name}" />
+			<a href="{config.siteurl}">{index_name}</a></li>
+			<li><img src="{stylepath}/images/guide_button.gif" alt="{guide_name}" />
+			<a href="{guide_url}">{guide_name}</a></li>
+			<li><img src="{stylepath}/images/rules_button.gif" alt="{rules_name}" />
+			<a href="{rules_url}">{rules_name}</a></li>
+			<li><img src="{stylepath}/images/call_button.gif" alt="{call_name}" />
+			<a href="{call_url}">{call_name}</a></li>
+			<li><img src="{stylepath}/images/log_button.gif" alt="{login_name}" />
+			<a href="{login_url}">{login_name}</a></li>
+			<li><img src="{stylepath}/images/user_button.gif" alt="{usrcp_name}" />
+			<a href="{usrcp_url}">{usrcp_name}</a></li>
+			<IF NAME="user_is">
+				<IF NAME="config.enable_userfile">
+				<li><img src="{stylepath}/images/userfile_button.gif" alt="{usrfile_name}" />
+				<a href="{usrfile_url}">{usrfile_name}</a></li>
+				</IF>
+			<li><img src="{stylepath}/images/filecp_button.gif" alt="{filecp_name}" />
+			<a href="{filecp_url}">{filecp_name}</a></li>
+			</IF>
+			<IF NAME="config.allow_stat_pg">
+			<li><img src="{stylepath}/images/stats_button.gif" alt="{stats_name}" />
+			<a href="{stats_url}">{stats_name}</a></li>
+			</IF>
+			</ul>
+			
+		</div><div class="roundedcornr_bottom_561671"><div></div></div></div>
+	</div>

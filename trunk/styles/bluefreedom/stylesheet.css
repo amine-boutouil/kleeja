@@ -100,9 +100,25 @@ background: #85ACF7 url('images/hidr.jpg');
 	color: #666;
 }
 img {
-        border: none;
+    border: none;
 }
 
+.err {
+	padding: 5px;
+	background-color: #FFEBE9;
+	border: 1.5px solid #DD3F0E;
+	margin: 10px 10px;
+	font-size: 13px;
+	font-family: "Tahoma", Times, serif;
+}
+.info {
+	padding: 5px;
+	background-color: #FFFFE6;
+	border: 1.5px solid #E2EE0B;
+	margin: 10px 10px;
+	font-size: 13px;
+	font-family: "Tahoma", Times, serif;
+}
 
 .daaf {
 	background-color: #FFFFD7;

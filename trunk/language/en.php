@@ -73,6 +73,8 @@ $lang = array (
 		'GO_FILECP'			=> 'إظغط هنا لإدارة ملفاتك هذه',
 		'YOUR_FILEUSER'		=> 'مجلدك',
 		'COPY_AND_GET_DUD'	=> 'إنسخ الرابط وأعطه لأصدقائك ليطلعو على مجلدك ',
+		'CLOSED_FEATURE'	=> 'خاصية مغلقه',
+		'USERFILE_CLOSED'	=> 'خاصية مجلدات المستخدمين مغلقه !',
 		
 				#go=profile
 		'PFILE_4_FORUM' 	=> 'Go to the forum to change your details',
@@ -188,6 +190,7 @@ $lang = array (
 		//includes/cache.php
 		'ADMINCP' 			=> 'Administration Panel',
 		'JUMPTO' 			=> 'Navigate to',
+		'GO_BACK_BROWSER' 	=> 'رجوع للخلف',
 		'U_R_BANNED' 		=> 'Your IP has been banned.',
 		'U_R_FLOODER' 		=> 'لقد قمت بتخطي عدد مرات عرض الصفحه بالوقت المحدد  ...',
 

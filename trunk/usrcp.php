@@ -28,14 +28,10 @@
 			$forget_pass = '<a href="usrcp.php?go=get_pass">' .$lang['LOSS_PASSWORD'] . '</a>';
 			
 			
-			if ($usrcp->name())
-			{
-			$text = $lang['LOGINED_BEFORE'].' ..<br / > <a href="usrcp.php?go=logout">' . $lang['LOGOUT'] . '</a>';
-			$stylee = "info.html";
-			}
-			
-			elseif ( isset($_POST['submit']) )
-			{
+			if ($usrcp->name()){
+				$text = $lang['LOGINED_BEFORE'].' ..<br / > <a href="usrcp.php?go=logout">' . $lang['LOGOUT'] . '</a>';
+				$stylee = "info.html";
+			}elseif (isset($_POST['submit'])){
 					//for onlines
 					if (getenv('HTTP_X_FORWARDED_FOR')){$ip	= getenv('HTTP_X_FORWARDED_FOR');} else {$ip= getenv('REMOTE_ADDR');}
 					if ($config[allow_online] == 1 ){$SQL->query("DELETE FROM {$dbprefix}online WHERE ip='$ip'");  }
@@ -87,18 +83,18 @@
 		break; //=================================================
 		case "register" : //=============================[register]
 			//config register
-			if ( !$config[register] || $config[user_system] !=1 )
-			{
-			$text = $lang['REGISTER_CLOSED'];
-			$stylee = "info.html";
-			//header
-			Saaheader($lang['PLACE_NO_YOU']);
-			//index
-			print $tpl->display($stylee);
-			//footer
-			Saafooter();
-			exit();
+			if ( !$config[register] || $config[user_system] !=1 ){
+				$text = $lang['REGISTER_CLOSED'];
+				$stylee = "info.html";
+				//header
+				Saaheader($lang['PLACE_NO_YOU']);
+				//index
+				print $tpl->display($stylee);
+				//footer
+				Saafooter();
+				exit();
 			}
+			
 			//inlude class
 			require ('includes/ocheck_class.php');
 			//start ocheck class
@@ -214,6 +210,21 @@
 		
 		break; //=================================================
 		case "fileuser" : //=============================[fileuser]
+		
+			//config register
+			if ( $config[enable_userfile] !=1 ){
+				$text = $lang['USERFILE_CLOSED'];
+				$stylee = "info.html";
+				//header
+				Saaheader($lang['CLOSED_FEATURE']);
+				//index
+				print $tpl->display($stylee);
+				//footer
+				Saafooter();
+				exit();
+			}
+		
+		
 			$stylee 			= "fileuser.html";
 			$titlee 			= $lang['FILEUSER'];
 			$public_user_files 	= $lang['PUBLIC_USER_FILES'];

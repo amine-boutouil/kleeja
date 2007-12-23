@@ -1,6 +1,7 @@
 <?php
 # KLEEJA INSTALLER ... BY SAANINA
 # 12:11 AM 14/9/1428
+# up dated 13/12/1248 [12/2007]
 
 /*
 include important files
@@ -29,10 +30,9 @@ include important files
 
 	//for language //
 	if ( isset($_COOKIE['lang']) ) {
-	include ('language/' . $_COOKIE['lang'] . '.php');
-	}else
-	{
-	include ('language/ar.php');
+		include ('language/' . $_COOKIE['lang'] . '.php');
+	}else{
+		include ('language/ar.php');
 	}
 
 
@@ -54,7 +54,7 @@ a {color: #3B6EBF;text-decoration: none;}a:hover {text-decoration: underline;}
 .roundedcornr_top_283542 div, .roundedcornr_top_283542, .roundedcornr_bottom_283542 div, .roundedcornr_bottom_283542 {
 width: 100%;height: 30px;font-size: 1px;}.roundedcornr_content_283542 { margin: 0 30px; }</style></head><body><br/>
 <div class="roundedcornr_box_283542"><div class="roundedcornr_top_283542"><div></div></div><div class="roundedcornr_content_283542">
-<img src="./images/inst/logo_install.png" style="border:0;">
+<img src="./images/inst/logo.gif" style="border:0;">
 <br/>
 <!-- Header End -->
 <br/>
@@ -167,7 +167,7 @@ $sql_config2 = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('prefi
 $sql_config3 = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('filesnum', '5')";
 $sql_config4 = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('siteclose', '0')";
 $sql_config5 = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('decode', '1')";
-$sql_config6 = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('style', 'bluefreedom')";
+$sql_config6 = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('style', 'default')";
 $sql_config7 = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('closemsg', 'sits is closed now')";
 $sql_config8 = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('sec_down', '10')";
 $sql_config9 = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('statfooter', '0')";
@@ -419,7 +419,7 @@ case 'data' :
 		 $sql[37] =  @mysql_query($sql_exts, $connect);
 		 $sql[38] =  @mysql_query($sql_exts2, $connect);
 		 $sql[39] =  @mysql_query($sql_exts3, $connect);
-		 $sql[41] =  @mysql_query($sql_exts4, $connect);
+		 $sql[40] =  @mysql_query($sql_exts4, $connect);
 		 $sql[41] =  @mysql_query($sql_exts5, $connect);
 		 $sql[42] =  @mysql_query($sql_exts6, $connect);
 		 $sql[43] =  @mysql_query($sql_exts7, $connect);

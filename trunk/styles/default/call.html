@@ -1,0 +1,28 @@
+<div class="middle">
+
+<form action="{action}" method="post">
+
+<table>
+	<tr>
+		<td class="row1">{L_NAME} : </td>
+		<td class="row2"><input type="text" name="cname" value="{_POST.cname}"  /></td>
+	</tr>
+	<tr>
+		<td class="row1">{L_MAIL} : </td>
+		<td class="row2"><input type="text" name="cmail" value="{_POST.cmail}"  /></td>
+	</tr>
+	<tr>
+		<td class="row1">{L_TEXT} :</td>
+		<td class="row2"><textarea name="ctext" rows="3">{_POST.ctext}</textarea></td>
+	</tr>
+	<tr>
+		<td class="row1">{L_CODE} {code}</td>
+		<td class="row2">{code_input}</td>
+	</tr>
+	<tr>
+		<td colspan="2" style="text-align:center"><input type="submit" name="submit" value="{submit}" /></td>
+	</tr>
+</table>
+</form>
+
+</div>

@@ -135,7 +135,7 @@ function tpl(){  //thwara بداية
 	$sss .= '<input name="mreupload" onclick="javascript:minus(1);makeupload(1);" type="button" value="-" />';
 	$sss .= '<br /><input id="checkr" type="checkbox" onclick="wdwdwd(\'submitr\',\'checkr\');" />' . $lang['AGREE_RULES'];
 	$sss .= '<br /><input type="submit" id="submitr" name="submitr" value="' . $lang['DOWNLOAD_F'] . '"  disabled="disabled" />';
-	$sss .= '<input type="text" id="upload_num" value="1" size="1" readonly="readonly"/></div>';
+	$sss .= '  <input type="text" id="upload_num" value="1" size="1" readonly="readonly"/></div>';
 
 	//www input
 	if ($config['www_url'] != '0') {
@@ -144,7 +144,7 @@ function tpl(){  //thwara بداية
 	$sss .= '<input name="mreupload" onclick="javascript:minus(2);makeupload(2);" type="button" value="-" />';
 	$sss .= '<br /><input id="checkr2" type="checkbox" onclick="wdwdwd(\'submittxt\',\'checkr2\');" />' . $lang['AGREE_RULES'];
 	$sss .= '<br /><input type="submit" id="submittxt" name="submittxt" value="' . $lang['DOWNLOAD_T'] . '"   disabled="disabled" />';
-	$sss .= '<input type="text" id="upload_f_num" value="1" size="1" readonly="readonly"/></div>';
+	$sss .= '  <input type="text" id="upload_f_num" value="1" size="1" readonly="readonly"/></div>';
 
 	}
 
@@ -435,14 +435,14 @@ if (in_array(strtolower($this->typet),$this->imgstypes)){
 
 	//then show
 	$this->errs[] = $lang['IMG_DOWNLAODED'] . '<br />' . $extra_show_img . '
-			' . $lang['URL_F_IMG'] . ':<br /><textarea rows=2 cols=49 rows=1>'.$this->linksite.(($config[mod_writer]) ? "image".$this->id_for_url.".html" : "download.php?img=".$this->id_for_url ).'</textarea>
+			' . $lang['URL_F_IMG'] . ':<br /><textarea rows=2 cols=49 rows=1>'.$this->linksite.(($config[mod_writer]) ? "image".$this->id_for_url.".html" : "download.php?img=".$this->id_for_url ).'</textarea><br />
 			' . $lang['URL_F_BBC'] . ':<br /><textarea rows=2 cols=49 rows=1>[url='.$config[siteurl].'][img]'.$this->linksite.(($config[mod_writer]) ? "image".$this->id_for_url.".html" : "download.php?img=".$this->id_for_url ).'[/img][/url]</textarea><br />
 			'.$extra_thmb.$extra_del;
 
 }else {
 	//then show other files
 	$this->errs[] = $lang['FILE_DOWNLAODED'] . '<br />
-			' . $lang['URL_F_FILE'] . ':<br /><textarea cols=49 rows=1>'.$this->linksite.(($config[mod_writer]) ? "download".$this->id_for_url.".html" : "download.php?id=".$this->id_for_url ).'</textarea>
+			' . $lang['URL_F_FILE'] . ':<br /><textarea cols=49 rows=1>'.$this->linksite.(($config[mod_writer]) ? "download".$this->id_for_url.".html" : "download.php?id=".$this->id_for_url ).'</textarea><br />
 			' . $lang['URL_F_BBC'] . ':<br /><textarea rows=2 cols=49 rows=1>[url]'.$this->linksite.(($config[mod_writer]) ? "download".$this->id_for_url.".html" : "download.php?id=".$this->id_for_url ).'[/url]</textarea><br />
 			'.$extra_del;
 }

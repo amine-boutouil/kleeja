@@ -332,6 +332,7 @@
 	for($i=0;$i<count($vars);$i++){$tpl->assign($vars[$i],$vars2[$i]);}
 	$tpl->assign("dir",$lang['DIR']);
 	$tpl->assign("title",$title);
+	$tpl->assign("go_back_browser",$lang['GO_BACK_BROWSER']);
 	//$tpl->assign("ex_header",$extras['header']);
 
 
@@ -380,7 +381,9 @@ pageTracker._trackPageview();
 	//show footer
 	print $tpl->display("footer.html");
 	
-	/*DEBUG*//*DEBUG*//*DEBUG*/ print $SQL->debug(); /* DEBUG*//* DEBUG*//* DEBUG*/
+	/*DEBUG*//*DEBUG*//*DEBUG*/ 
+		if ($usrcp->admin()) print $SQL->debug(); 
+	/* DEBUG*//* DEBUG*//* DEBUG*/
 	
 	// THEN .. at finish
 	$SQL->close();

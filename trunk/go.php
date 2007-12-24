@@ -49,11 +49,10 @@
 
 
 	//inlude class
-	require ('includes/ocheck_class.php');
-	//start ocheck class
-	$ch = new ocheck;
-	$ch->method = 'post';
-	$ch->PathImg = 'images/code';
+	require ('includes/ocr_captcha.php');
+	//start check class
+	$ch = new ocr_captcha;
+
 
 	if ( !isset($_POST['submit']) )
 	{
@@ -67,8 +66,7 @@
 	$L_URL 	= $lang['URL'];
 	$L_TEXT = $lang['REASON'];
 	$L_CODE = $lang['VERTY_CODE'];
-	$code = $ch->rand();
-	$code_input = $ch->show();
+	$code = $ch->display_captcha(true);
 	$id_d = intval($_GET['id']);
 
 
@@ -99,7 +97,7 @@
 			$text = $lang['NO_ME300RES'];
 			$stylee = 'err.html';
 		}
-		else if ( !$ch->result($_SESSION['ocheck']) )
+		else if ( !$ch->check_captcha($_POST['public_key'],$_POST['code_answer']) )
 		{
 			$text = $lang['WRONG_VERTY_CODE'];
 			$stylee = 'err.html';
@@ -161,11 +159,9 @@
 	case "call" : //=============================[call]
 
 	//inlude class
-	require ('includes/ocheck_class.php');
-	//start ocheck class
-	$ch = new ocheck;
-	$ch->method = 'post';
-	$ch->PathImg = 'images/code';
+	require ('includes/ocr_captcha.php');
+	//start check class
+	$ch = new ocr_captcha;
 
 
 	if ( !isset($_POST['submit']) )
@@ -178,8 +174,7 @@
 	$L_MAIL = $lang['EMAIL'];
 	$L_TEXT = $lang['TEXT'];
 	$L_CODE = $lang['VERTY_CODE'];
-	$code = $ch->rand();
-	$code_input = $ch->show();
+	$code = $ch->display_captcha(true);
 
 	}
 	else
@@ -202,7 +197,7 @@
 			$text = $lang['NO_ME300TEXT'];
 			$stylee = 'err.html';
 		}
-		else if ( !$ch->result($_SESSION['ocheck']) )
+		else if ( !$ch->check_captcha($_POST['public_key'],$_POST['code_answer']) )
 		{
 			$text = $lang['WRONG_VERTY_CODE'];
 			$stylee = 'err.html';

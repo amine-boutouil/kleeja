@@ -306,12 +306,12 @@
 			$size_than	=   ' `size` '.(($_POST['than']==1) ? '>' : '<').intval($_POST['size']).' ';
 			$ups_than	=  ($_POST['ups']!='') ? 'AND f.uploads '.(($_POST['uthan']==1) ? '>' : '<').intval($_POST['ups']).' ' : '';
 			$rep_than	=  ($_POST['rep']!='') ? 'AND f.report '.(($_POST['rthan']==1) ? '>' : '<').intval($_POST['rep']).' ' : '';
-			$lstd_than	=  ($_POST['lastdown']!='') ? 'AND f.last_down ='.(time()-intval($_POST['lastdown'])).' ' : '';
+			$lstd_than	=  ($_POST['lastdown']!='') ? 'AND f.last_down ='.(time()-(intval($_POST['lastdown']) * (24 * 60 * 60))).' ' : '';
 			$exte		=  ($_POST['ext']!='') ? 'AND f.type LIKE \'%'.$SQL->escape($_POST['ext']).'%\' ' : '';
 			
 			$sql = $SQL->query("SELECT f.* 
 			FROM {$dbprefix}files f , {$dbprefix}users u
-			WHERE $size_than $file_namee $ups_than $exte $rep_than $usernamee
+			WHERE $size_than $file_namee $ups_than $exte $rep_than $usernamee $lstd_than $exte
 			ORDER BY `id` DESC");
 		}else{
 			$sql = $SQL->query("SELECT * FROM `{$dbprefix}files` ORDER BY `id` DESC");

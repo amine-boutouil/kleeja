@@ -96,11 +96,10 @@
 			}
 			
 			//inlude class
-			require ('includes/ocheck_class.php');
-			//start ocheck class
-			$ch = new ocheck;
-			$ch->method = 'post';
-			$ch->PathImg = 'images/code';
+			require ('includes/ocr_captcha.php');
+			//start check class
+			$ch = new ocr_captcha;
+
 			
 			
 			if ($usrcp->name())
@@ -121,8 +120,7 @@
 			$L_MAIL = $lang['EMAIL'];
 			$L_CODE = $lang['VERTY_CODE'];
 			$n_submit =  $lang['REGISTER'];
-			$code = $ch->rand();
-			$code_input = $ch->show();
+			$code = $ch->display_captcha(true);
 			
 			}else { // submit
 				
@@ -141,6 +139,11 @@
 							$text 	=  $lang['WRONG_NAME'];
 							$stylee = 'err.html';	
 						}
+						else if ( !$ch->check_captcha($_POST['public_key'],$_POST['code_answer']) )
+						{
+							$text = $lang['WRONG_VERTY_CODE'];
+							$stylee = 'err.html';	
+						}
 						else if ($SQL->num_rows($SQL->query("select * from `{$dbprefix}users` where name='$_POST[lname]' ")) !=0 )
 						{
 							$text = $lang['EXIST_NAME'];
@@ -149,11 +152,6 @@
 						else if ($SQL->num_rows($SQL->query("select * from `{$dbprefix}users` where mail='$_POST[lmail]' ")) !=0 )
 						{
 							$text = $lang['EXIST_EMAIL'];
-							$stylee = 'err.html';	
-						}
-						else if ( !$ch->result($_SESSION['ocheck']) )
-						{
-							$text = $lang['WRONG_VERTY_CODE'];
 							$stylee = 'err.html';	
 						}
 						else 

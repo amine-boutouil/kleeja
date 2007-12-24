@@ -93,7 +93,6 @@ table{
 
 #header {
 	width:50%;
-	background: #85ACF7 url('images/hidr.jpg');
 	margin-bottom:5px;
 }
 
@@ -116,16 +115,15 @@ table{
 #footer {
 	text-align: center;
 	color: #666;
+	direction:ltr;
 }
 
 
 .middle{
-	float: right;
 	width: 60%;
-	margin: 0 10px;
+	margin: 0 auto;
 	padding: 1% 1%;
-	text-align: justify;
-
+	float:left;
 }
 
 .breadcrumbs { 

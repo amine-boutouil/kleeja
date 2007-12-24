@@ -17,7 +17,7 @@
 
 
 	//change style just for admin
-	$tpl->Temp = "includes/style_admin/";
+	$tpl->Temp = "includes/style_admin";
 	$tpl->Cache = "cache";
 	$stylepath = $tpl->Temp;
 
@@ -378,13 +378,14 @@
 		$stylee = "img.html";
 		//words
 		$action 	= "admin.php?cp=img";
-		$n_submit 	= $lang['UPDATE_FILES'];
+		$n_submit 	= $lang['DEL_SELECTED'];
 		$n_del 		= $lang['DELETE'];
 	
 
 		$sql = $SQL->query("SELECT * FROM `{$dbprefix}files` WHERE type IN ('gif','jpg','png','bmp','jpeg','tif','tiff') ORDER BY `id` DESC");
 	
 		/////////////pager 
+		$perpage = 9;
 		$nums_rows = $SQL->num_rows($sql);
 		$currentPage = (isset($_GET['page']))? intval($_GET['page']) : 1;
 		$Pager = new SimplePager($perpage,$nums_rows,$currentPage);
@@ -394,10 +395,15 @@
 		$no_results = false;
 		
 		if ( $nums_rows > 0  ) {
+		$tdnum = 0;
+		//$all_tdnum = 0;
 		while($row=$SQL->fetch_array($sql)){
 		//make new lovely arrays !!
 			$user_name = $SQL->fetch_array($SQL->query("SELECT name FROM `{$dbprefix}users` WHERE id='".$row['user']."' "));
 			$arr[] = array(id =>$row['id'],
+						tdnum=>($tdnum==0) ? "<tr>": "",
+						tdnum2=>($tdnum==2) ? "</tr>" : "",
+					//	tdnum3=>($all_tdnum >= $nums_rows) ? "</tr>" : "",
 						name =>$row['name'],
 						href =>$row['folder']."/".$row['name'],
 						size =>$lang['FILESIZE']. ':' . Customfile_size($row['size']),
@@ -406,7 +412,12 @@
 						user =>$lang['BY'] . ':' .(($row['user'] == '-1') ? $lang['GUST'] :  $user_name['name']),
 						thumb_link => (is_file($row['folder'] . "/thumbs/" . $row['name'] )) ? $row['folder'] . "/thumbs/" . $row['name'] : $row['folder'] . "/" . $row['name'],
 						);
-
+			
+			
+			//fix ... 
+			
+			$tdnum = ($tdnum==2) ? 0 : $tdnum+1; 
+			//$all_tdnum++;
 
 			//
 			$del[$row[id]] = ( isset($_POST["del_".$row[id]]) ) ? $_POST["del_".$row[id]] : "";

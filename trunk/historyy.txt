@@ -73,8 +73,9 @@ RC1 :
 + new default style
 - fix usefile section 
 - fix filecp section
-- fix install file 
+- fix install file [ sql 40]
 + add new variable to err file [ go to back browser ] 
+- fix image section in paenl [ more <td> , no <tr> ]
  
 
 thank you for reading this file. 

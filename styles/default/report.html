@@ -20,8 +20,11 @@
 		<td class="row2"><textarea name="rtext" rows="3">{_POST.rtext}</textarea></td>
 	</tr>
 	<tr>
-		<td class="row1">{L_CODE} {code}</td>
-		<td class="row2">{code_input}</td>
+		<td class="row1">{L_CODE}</td>
+		<td class="row2">
+			{code}<br/>
+			<input type="text" name="code_answer" style="direction:ltr" />
+		</td>
 	</tr>
 	<tr>
 		<td colspan="2" style="text-align:center"><input type="submit" name="submit" value="{submit}" /></td>

@@ -76,6 +76,8 @@ RC1 :
 - fix install file [ sql 40]
 + add new variable to err file [ go to back browser ] 
 - fix image section in paenl [ more <td> , no <tr> ]
- 
+ - fix advanced search in admin cp 
++ add new captcha system
+
 
 thank you for reading this file. 

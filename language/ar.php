@@ -20,6 +20,8 @@ $lang = array (
 		'SITE_CLOSED' 		=> 'الموقع مغلق !',
 		'STOP_FOR_SIZE' 	=> 'متوقف حالياً !',
 		'SIZES_EXCCEDED' 	=> 'الحجم الكلي للمركز إستنفذ .. سوف نعود قريباً',
+		'ENTER_CODE_IMG'	=> 'إدخل ماتراه بالصوره داخل الصندوق',
+		
 		//index.php
 		'INFORMATION'		=> 'تعليمات',
 		'WELCOME' 			=> 'أهلاً',

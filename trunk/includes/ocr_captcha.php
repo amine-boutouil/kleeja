@@ -1,50 +1,7 @@
 <?php
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// CLASS NAME:  OCR_CAPTCHA                                                                               //
-// FILE NAME :  CLASS_SESSION.INC.PHP                                                                     //
-// LANGUAGE  :  PHP                                                                                       //
-// AUTHOR    :  Julien PACHET                                                                             //
-// EMAIL     :  j|u|l|i|e|n| [@] |p|a|c|h|e|t.c|o|m                                                       //
-// VERSION   :  1.0                                                                                       //
-// CREATION  :  17/03/2004                                                                                //
-// LICENCE   :  GNU GPL                                                                                   //
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// What the class does:                                                                                   //
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// * Make a catcha picture (Completely Automated Public Turing to tell Computers from Humans Apart)       //
-//   To test if a human is really behind the web page. In a form, you put a captcha picture, and a text   //
-//   Field, and then...                                                                                   //
-// * Check if the text typed in the field from the picture (private key) corrrespond to the public_key    //
-//   that the class inserted in a hidden field                                                            //
-// Indeed, the class can prevent from automatic (bot) filling form for example:                           //
-//   _ poll                                                                                               //
-//   _ account creation                                                                                   //
-//   _ account loggin (prevent from brute force password tries                                            //
-//   _ check for access to a given page (to stop bot like search bot or spam bot                          //
-//   _ ...                                                                                                //
-// More infos at http://www.captcha.net                                                                   //
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Changelog:                                                                                             //
-// ----------                                                                                             //
-//  Date        Version   Actions                                                                         //
-// ------------------------------------------------------------------------------------------------------ //
-//  16/03/2004  0.90      Class creation and test                                                         //
-//  17/03/2004  1.0       Final and tested version                                                        //
-//  22/03/2004  1.1       picture can now be either jpg or png type (default png)                         //
-//  13/04/2004  1.2       picture file is now placed in tmp directory in the webserver, neither in system //
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Need to work:                                                                                          //
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// other files: none                                                                                      //
-// other datas: a private string (see in file class) use to make private key from public key              //
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// AUTHOR    :  Julien PACHET       
+// EMAIL     :  julien@pachet.com                     
+# last edit by : saanina
 
   class ocr_captcha {
     var $key;       // ultra private static text

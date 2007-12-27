@@ -1,5 +1,7 @@
 <?php 
-// This cclass for someone  idont remmber his name .. with may changes
+// This cclass for someone  idont remmber his name .. with may changes [ phpclasses.org]
+# last edit by : saanina
+
 if (!defined('IN_COMMON')) {die("Hacking attempt");	  exit(); }	  
 class SimplePager { 
     var $totalPages; 

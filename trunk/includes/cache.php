@@ -1,11 +1,11 @@
-<?
+<?php
 ##################################################
 #						Kleeja
 #
 # Filename : cache.php
 # purpose :  cache for all script.
 # copyright 2007 Kleeja.com ..
-#
+# last edit by : saanina
 ##################################################
 
 	  if (!defined('IN_COMMON'))
@@ -235,34 +235,31 @@
 	
 	//get rules data from stats table  ... ===========================================
 	if (file_exists('cache/data_rules.php')){include ('cache/data_rules.php'); }
-	if ( !$ruless or !file_exists('cache/data_rules.php') )
+	
+	if ( !isset($ruless) or !file_exists('cache/data_rules.php') )
 	{
 
-  	$sqlb	=	$SQL->query("SELECT rules FROM {$dbprefix}stats");
+		$sqlbw	=	$SQL->query("SELECT rules FROM {$dbprefix}stats");
 	
 		$file_datar = '<' . '?php' . "\n\n";
 		$file_datar .= "\n// auto-generated cache files\n//By:Saanina@gmail.com \n\n";
 
-	while($row=$SQL->fetch_array($sqlb)){$rules1 = $row[rules]; }
-	$SQL->freeresult($sqlb);
+	while($row=$SQL->fetch_array($sqlbw)){$rules1 = $row['rules']; }
+	$SQL->freeresult($sqlbw);
 	
-	if ( !empty($rules1) || $rules1 != ' '|| $rules1 != '  ')
-	{
-
 		$ruless = $rules1;
 		$file_datar .= '$ruless = \'' .str_replace(array("'","\'"), "\'", $rules1) .'\';'."\n\n"; // its took 2 hours ..
-
- 	}
-	
+		
 	$file_datar .= '?' . '>';
 	$filenumr = @fopen('cache/data_rules.php', 'w');
 	flock($filenumr, LOCK_EX); // exlusive look
 	@fwrite($filenumr, $file_datar);
 	fclose($filenumr);
 	}	
+	
 	//get ex-header-footer data from stats table  ... ===========================================
 	if (file_exists('cache/data_extra.php')){include ('cache/data_extra.php'); }
-	if ( !$extras or !file_exists('cache/data_extra.php') )
+	if ( !isset($extras) or !file_exists('cache/data_extra.php') )
 	{
 
   	$sqlb	=	$SQL->query("SELECT ex_header,ex_footer FROM {$dbprefix}stats");
@@ -273,16 +270,13 @@
 	while($row=$SQL->fetch_array($sqlb)){$headerr = $row['ex_header'];$footerr = $row['ex_footer']; }
 	$SQL->freeresult($sqlb);
 	
-	if ( !empty($headerr) || $headerr != ' '|| $headerr != '  ')
-	{
+
 		$extras['header'] = $headerr;
 		$file_datae .= '$extras[\'header\'] = \'' .str_replace(array("'","\'"), "\'", $headerr) .'\';'."\n\n";
- 	}
-	if ( !empty($footerr) || $footerr != ' '|| $footerr != '  ')
-	{
+
 		$extras['footer'] = $footerr;
 		$file_datae .= '$extras[\'footer\'] = \'' .str_replace(array("'","\'"), "\'", $footerr) .'\';'."\n\n";
- 	}
+ 
 	
 	$file_datae .= '?' . '>';
 	$filenume = @fopen('cache/data_extra.php', 'w');
@@ -419,7 +413,13 @@ pageTracker._trackPageview();
 	if (strstr($agent, 'Googlebot')) {
 		$SQL->query("UPDATE {$dbprefix}stats set last_google='$time'");  
 		$SQL->query("UPDATE {$dbprefix}stats set google_num=google_num+1");  
+	}elseif (strstr($agent, 'Google')) {
+		$SQL->query("UPDATE {$dbprefix}stats set last_google='$time'");  
+		$SQL->query("UPDATE {$dbprefix}stats set google_num=google_num+1");  
 	}elseif (strstr($agent, 'Yahoo! Slurp')) {
+		$SQL->query("UPDATE {$dbprefix}stats set last_yahoo='$time'");  
+		$SQL->query("UPDATE {$dbprefix}stats set yahoo_num=yahoo_num+1");  
+	}elseif (strstr($agent, 'Yahoo')) {
 		$SQL->query("UPDATE {$dbprefix}stats set last_yahoo='$time'");  
 		$SQL->query("UPDATE {$dbprefix}stats set yahoo_num=yahoo_num+1");  
 	}

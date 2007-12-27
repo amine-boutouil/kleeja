@@ -21,6 +21,10 @@ $lang = array (
 		'STOP_FOR_SIZE' 	=> 'متوقف حالياً !',
 		'SIZES_EXCCEDED' 	=> 'الحجم الكلي للمركز إستنفذ .. سوف نعود قريباً',
 		'ENTER_CODE_IMG'	=> 'إدخل ماتراه بالصوره داخل الصندوق',
+		'SAFE_CODE_UPLOAD'	=> 'تفعيل الكود الامني في التحميل',
+		'LAST_VISIT'		=> 'آخر زياره لك',
+		'FLS_LST_VST_SEARCH'=> 'عرض الملفات منذ آخر زياره',
+		'IMG_LST_VST_SEARCH'=> 'عرض الصور منذ آخر زياره',
 		
 		//index.php
 		'INFORMATION'		=> 'تعليمات',

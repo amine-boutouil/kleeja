@@ -6,6 +6,7 @@
 # purpose :  main class of script
 # copyright 2007 Kleeja.com ..
 #class by :  based on class.AksidSars.php  of Nadorino [@msn.com]
+# last edit by : saanina
 ##################################################
 
 	  if (!defined('IN_COMMON'))
@@ -17,21 +18,21 @@
 class KljUploader
 {
     var $folder;
-    var $action; //رابط الصفحة
-    var $filesnum; //عدد الحقول
-    var $types;  // الأنساق
-    var $ansaqimages;   // انساق الصور
-    var $filename;     // اسم الصورة
+    var $action; //page action
+    var $filesnum; //number of fields
+    var $types;  // filetypes
+    var $ansaqimages;   // imagestypes
+    var $filename;     // filename
 	var $sizes;
 	var $typet;
 	var $sizet;
 	var $id_for_url;
-    var $filename2;  // بعد تغيير الاسم
-    var $linksite;    // رابط الموقع
-    var $decode;     // اختيار نوع اسم الصورة md5 او time
+    var $filename2;  //alternative file name
+    var $linksite;    //site link
+    var $decode;     // decoding name with md5 or time
 	var $id_user;
 	var $errs = array();
-
+	var $safe_code;
 
 
 /**
@@ -114,47 +115,6 @@ function createthumb($name,$ext,$filename,$new_w,$new_h)
 }
 
 
-	// for show
-
-function tpl(){  //thwara بداية
-	global $lang,$config;
-
-	$sss = js_uploader($this->filesnum);
-	
-	 $sss .= '<form name="uploader" id="uploader" action="' . $this->action . '" method="post"  encType="multipart/form-data" onsubmit="form_submit();"> ';
-
-	//www url icon
-	if ($config['www_url'] != '0') {
-    $sss .= '<a href="#"  onclick="showhide();" title="' . $lang['CHANG_TO_URL_FILE'] . '"><img src="images/urlORfile.gif" alt="' . $lang['CHANG_TO_URL_FILE'] . '"  /></a><br /><br />';
-    }
-
-
-	//file input
-    $sss .= '<div id="filetype"><input type="file" name="file[]"><br><div id="upload_forum"></div>';
-    $sss .= '<br /><input name="mraupload" onclick="javascript:plus(1);makeupload(1);" type="button" value="+" />';
-	$sss .= '<input name="mreupload" onclick="javascript:minus(1);makeupload(1);" type="button" value="-" />';
-	$sss .= '<br /><input id="checkr" type="checkbox" onclick="wdwdwd(\'submitr\',\'checkr\');" />' . $lang['AGREE_RULES'];
-	$sss .= '<br /><input type="submit" id="submitr" name="submitr" value="' . $lang['DOWNLOAD_F'] . '"  disabled="disabled" />';
-	$sss .= '  <input type="text" id="upload_num" value="1" size="1" readonly="readonly"/></div>';
-
-	//www input
-	if ($config['www_url'] != '0') {
-    $sss .= '<div id="texttype"><input type="text" name="file[0]" size="50" value="' . $lang['PAST_URL_HERE'] . '" onclick="this.value=\'\'" style="color:silver;" dir="ltr"><br><div id="upload_f_forum"></div>';
-    $sss .= '<br /><input name="mraupload" onclick="javascript:plus(2);makeupload(2);" type="button" value="+" />';
-	$sss .= '<input name="mreupload" onclick="javascript:minus(2);makeupload(2);" type="button" value="-" />';
-	$sss .= '<br /><input id="checkr2" type="checkbox" onclick="wdwdwd(\'submittxt\',\'checkr2\');" />' . $lang['AGREE_RULES'];
-	$sss .= '<br /><input type="submit" id="submittxt" name="submittxt" value="' . $lang['DOWNLOAD_T'] . '"   disabled="disabled" />';
-	$sss .= '  <input type="text" id="upload_f_num" value="1" size="1" readonly="readonly"/></div>';
-
-	}
-
-	$sss .= '</form>';
-
-	$sss .= '<div id="loadbox"></div>';
-
-	return $sss;
-
-} //thwara نهاية
 
 ################################
 
@@ -163,7 +123,7 @@ function tpl(){  //thwara بداية
 
 function process () {
 		global $SQL,$dbprefix,$config,$lang;
-		global $use_ftp,$ftp_server,$ftp_user,$ftp_pass;
+		global $use_ftp,$ftp_server,$ftp_user,$ftp_pass,$ch;
 
 //for folder
 if(!file_exists($this->folder))   // نهاية التحقق من المجلد
@@ -199,6 +159,13 @@ if(!file_exists($this->folder))   // نهاية التحقق من المجلد
 	if ( isset($_POST['submitr']) ) { $wut=1; }
 	elseif( isset($_POST['submittxt']) ){$wut=2;}
 
+	//safe_code
+	if($this->safe_code and ($wut==1 or $wut==3)){
+		if(!$ch->check_captcha($_POST['public_key'],$_POST['answer_safe'])){
+		return $this->errs[]= $lang['WRONG_VERTY_CODE'];
+		}
+	}
+	
 	// no url
 	if ($wut == 1) {
 	 #-----------------------------------------------------------------------------------------------------------------------------------------------------------#

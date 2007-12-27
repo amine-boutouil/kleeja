@@ -81,6 +81,17 @@
 <td>{s_yahoo_num}
 </td>
 </tr>
+<IF NAME="last_visit">
+	<tr>
+	<td><b>{n_last_visit} :</b>
+	</td>
+	<td>
+	{last_visit}<br/>
+	<a href="{h_lst_files}">{n_files_last_visit}</a><br/>
+	<a href="{h_lst_imgs}">{n_imgs_last_visit}</a>
+	</td>
+	</tr>
+</IF>
 </table>
 
 	</fieldset>

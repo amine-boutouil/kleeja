@@ -3,13 +3,13 @@
 # Filename : mysql.php
 # purpose :  controll  mysql database.:
 #Developer: Saanina @ gmail.com
+# last edit by : saanina
 ##################################################
 
 
 if (!defined('IN_COMMON')) {die("Hacking attempt");	  exit(); }	  
  
-if(!defined("SQL_LAYER"))
-{
+if(!defined("SQL_LAYER")){
 
 define("SQL_LAYER","mysql4");
 

@@ -1,7 +1,8 @@
 <?php
-# KLEEJA INSTALLER ... BY SAANINA
-# 12:11 AM 14/9/1428
-# up dated 13/12/1248 [12/2007]
+# KLEEJA INSTALLER ...
+# updated 14/12/1248 [12/2007]
+# this file hav many updates .. dont use previous ones
+# last edit by : saanina
 
 /*
 include important files
@@ -29,10 +30,16 @@ include important files
 
 
 	//for language //
+
+	
 	if ( isset($_COOKIE['lang']) ) {
-		include ('language/' . $_COOKIE['lang'] . '.php');
+			if(file_exists('language/' . $_COOKIE['lang'] . '.php')){
+				include ('language/' . $_COOKIE['lang'] . '.php');
+			}else{
+				include ('language/en.php');
+			}	
 	}else{
-		include ('language/ar.php');
+			include ('language/en.php');
 	}
 
 
@@ -44,7 +51,7 @@ $header = '<!-- Header Start -->
 <html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" dir="' . $lang['DIR'] . '"/>
 <title>...Kleeja...</title><style type="text/css">
 * { padding: 0;margin: 0;}
-body {background: FF9933;font: .74em "Tahoma" Verdana, Arial, sans-serif;line-height: 1.5em;text-align:center; }
+body {background: #FF9933;font: 0.74em "Tahoma" Verdana, Arial, sans-serif;line-height: 1.5em;text-align:center; }
 a {color: #3B6EBF;text-decoration: none;}a:hover {text-decoration: underline;}
 .roundedcornr_box_283542 {background: #fff0d2;margin-left: 10%; margin-right: 10%;width: 724px;}
 .roundedcornr_top_283542 div {background: url(./images/inst/roundedcornr_283542_tl.png) no-repeat top left;}
@@ -123,6 +130,7 @@ CREATE TABLE `{$dbprefix}users` (
   `mail` varchar(250) collate utf8_bin NOT NULL,
   `admin` tinyint(1) NOT NULL default '0',
   `session_id` char(32) collate utf8_bin NOT NULL,
+  `last_visit` INT(11) NOT NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 ";
@@ -187,6 +195,7 @@ $sql_config22 = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('allo
 $sql_config23 = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('googleanalytics', '')";
 $sql_config24 = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('mod_writer', '0')";
 $sql_config25 = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('enable_userfile', '1')";
+$sql_config26 = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('safe_code', '0')";
 
 $sql_exts = "
 CREATE TABLE `{$dbprefix}exts` (
@@ -256,7 +265,7 @@ case 'language':
 		//go to .. 2step
 		setcookie("lang", $_POST['lang'], time()+3600);
 		echo '<meta http-equiv="refresh" content="0;url=' . $_SERVER[PHP_SELF].'?step=check">';
-			}
+	}
 
 		}else { //no language
 
@@ -416,14 +425,15 @@ case 'data' :
 		 $sql[34] =  @mysql_query($sql_config23, $connect);
 		 $sql[35] =  @mysql_query($sql_config24, $connect);
 		 $sql[36] =  @mysql_query($sql_config25, $connect);
-		 $sql[37] =  @mysql_query($sql_exts, $connect);
-		 $sql[38] =  @mysql_query($sql_exts2, $connect);
-		 $sql[39] =  @mysql_query($sql_exts3, $connect);
-		 $sql[40] =  @mysql_query($sql_exts4, $connect);
-		 $sql[41] =  @mysql_query($sql_exts5, $connect);
-		 $sql[42] =  @mysql_query($sql_exts6, $connect);
-		 $sql[43] =  @mysql_query($sql_exts7, $connect);
-		 $sql[44] =  @mysql_query($sql_online, $connect);
+		 $sql[37] =  @mysql_query($sql_config26, $connect);
+		 $sql[38] =  @mysql_query($sql_exts, $connect);
+		 $sql[39] =  @mysql_query($sql_exts2, $connect);
+		 $sql[40] =  @mysql_query($sql_exts3, $connect);
+		 $sql[41] =  @mysql_query($sql_exts4, $connect);
+		 $sql[42] =  @mysql_query($sql_exts5, $connect);
+		 $sql[43] =  @mysql_query($sql_exts6, $connect);
+		 $sql[44] =  @mysql_query($sql_exts7, $connect);
+		 $sql[45] =  @mysql_query($sql_online, $connect);
 		 
 		 $err = 0;
 		for ($i=0; $i<count($sql); $i++)
@@ -438,8 +448,8 @@ case 'data' :
 				elseif ($i == 6) {print '<span style="color:green;">' . $lang['INST_CRT_ADM'] . '</span><br/>';}
 				elseif ($i == 7) {print '<span style="color:green;">' . $lang['INST_CRT_FLS'] . '</span><br/>';}
 				elseif ($i == 8) {print '<span style="color:green;">' . $lang['INST_CRT_CNF'] . '</span><br/>';}
-				elseif ($i == 37) {print '<span style="color:green;">' . $lang['INST_CRT_EXT'] . '</span><br/>';}
-				elseif ($i == 44) {print '<span style="color:green;">' . $lang['INST_CRT_ONL'] . '</span><br/>';}
+				elseif ($i == 38) {print '<span style="color:green;">' . $lang['INST_CRT_EXT'] . '</span><br/>';}
+				elseif ($i == 45) {print '<span style="color:green;">' . $lang['INST_CRT_ONL'] . '</span><br/>';}
 				else {print '<span style="color:green;">' . $lang['INST_SQL_OK'] . '</span><br/>';}
 
 			}else{
@@ -447,7 +457,7 @@ case 'data' :
 				$err++;
 			}
 
-		if ($i == '44') { $ok = true;}
+		if ($i == '45') { $ok = true;}
 		}#for
 
 		if ($ok && !$err)

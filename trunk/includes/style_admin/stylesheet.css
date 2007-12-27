@@ -28,7 +28,7 @@ a:hover {
 
 #wrap {
 margin: 20px auto;
-width: 724px;
+width: 85%;
 background: #fff;
 background-repeat: repeat-y;
 }
@@ -75,7 +75,7 @@ padding: 0 40px 0 40px;
 	
 .middle {
 	float: right;
-	width: 59%;
+	width: 70%;
 	margin: 0 10px;
 	padding: 1% 1%;
 	text-align: justify;
@@ -83,7 +83,7 @@ padding: 0 40px 0 40px;
 
 .right {
 	float: right;
-	width: 30%;
+	width: 25%;
 	margin: 0 10px;
 	padding: 1% 1%;
 	

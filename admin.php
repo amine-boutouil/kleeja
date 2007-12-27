@@ -5,7 +5,7 @@
 # Filename : admin.php
 # purpose :  control panel for administarator
 # copyright 2007 Kleeja.com ..
-# rev id : $id$
+# last edit by : saanina
 ##################################################
 
 
@@ -81,6 +81,7 @@
 		$n_allow_online = $lang['ALLOW_ONLINE'];
 		$n_mod_writer 	= $lang['MOD_WRITER'];
 		$n_mod_writer_ex= $lang['MOD_WRITER_EX'];
+		$n_safe_code	= $lang['SAFE_CODE_UPLOAD'];
 		$n_enable_fileuser = $lang['ENABLE_USER_FILE'];
 		$n_googleanalytics = '<a href="http://www.google.com/analytics">Google Analytics</a>';
 
@@ -127,6 +128,8 @@
 		if ($con[allow_online] == "1" ) {$yallow_online = true; }else {$nallow_online = true;}
 		if ($con[mod_writer] == "1" ) {$ymod_writer = true; }else {$nmod_writer = true;}
 		if ($con[enable_userfile] == "1" ) {$yenable_userfile = true; }else {$nenable_userfile = true;}
+		if ($con[enable_userfile] == "1" ) {$yenable_userfile = true; }else {$nenable_userfile = true;}
+		if ($con[safe_code] == "1" ) {$ysafe_code = true; }else {$nsafe_code = true;}
 
 
 		//get language from LANGUAGE folder
@@ -301,6 +304,7 @@
 	
 		//posts search ..
 		if (isset($_POST['search_file'])){
+		
 			$file_namee	= ($_POST['filename']!='') ? 'AND f.name LIKE \'%'.$SQL->escape($_POST['filename']).'%\' ' : ''; 
 			$usernamee	= ($_POST['username']!='') ? 'AND u.name LIKE \'%'.$SQL->escape($_POST['username']).'%\' AND u.id=f.user' : ''; 
 			$size_than	=   ' `size` '.(($_POST['than']==1) ? '>' : '<').intval($_POST['size']).' ';
@@ -312,6 +316,11 @@
 			$sql = $SQL->query("SELECT f.* 
 			FROM {$dbprefix}files f , {$dbprefix}users u
 			WHERE $size_than $file_namee $ups_than $exte $rep_than $usernamee $lstd_than $exte
+			ORDER BY `id` DESC");
+			
+		}elseif(isset($_GET['last_visit'])){
+			$sql = $SQL->query("SELECT * FROM `{$dbprefix}files` 
+			WHERE time > '". intval($_GET['last_visit']) ."'
 			ORDER BY `id` DESC");
 		}else{
 			$sql = $SQL->query("SELECT * FROM `{$dbprefix}files` ORDER BY `id` DESC");
@@ -325,9 +334,12 @@
 		
 		$no_results = false;
 		
+
 		if ( $nums_rows > 0  ) {
 		while($row=$SQL->fetch_array($sql)){
+		
 		//make new lovely arrays !!
+			$userfile =  $config[siteurl].(($config[mod_writer])? 'fileuser_'.$row['user'].'.html' : 'usrcp.php?go=fileuser&amp;id='.$row['user'] );
 			$user_name = $SQL->fetch_array($SQL->query("SELECT name FROM `{$dbprefix}users` WHERE id='".$row['user']."' "));
 			$arr[] = array(id =>$row['id'],
 						name =>"<a href=\"./".$row['folder']."/".$row['name']."\" target=\"blank\">".$row['name']."</a>",
@@ -337,7 +349,7 @@
 						type =>$row['type'],
 						folder =>$row['folder'],
 						report =>($row['report'] > 4)? "<span style=\"color:red\"><big>".$row['report']."</big></span>":$row['report'],
-						user =>($row['user'] == '-1') ? $lang['GUST'] :  $user_name['name'],
+						user =>($row['user'] == '-1') ? $lang['GUST'] :  '<a href="'.$userfile.'" target="_blank">'. $user_name['name'] . '</a>',
 						);
 			//
 			$del[$row[id]] = ( isset($_POST["del_".$row[id]]) ) ? $_POST["del_".$row[id]] : "";
@@ -381,9 +393,15 @@
 		$n_submit 	= $lang['DEL_SELECTED'];
 		$n_del 		= $lang['DELETE'];
 	
-
+		if(isset($_GET['last_visit'])){
+			$sql = $SQL->query("SELECT * FROM `{$dbprefix}files` 
+			WHERE 
+			time > '". intval($_GET['last_visit']) ."'
+			AND type IN ('gif','jpg','png','bmp','jpeg','tif','tiff')
+			ORDER BY `id` DESC");
+		}else{
 		$sql = $SQL->query("SELECT * FROM `{$dbprefix}files` WHERE type IN ('gif','jpg','png','bmp','jpeg','tif','tiff') ORDER BY `id` DESC");
-	
+	}
 		/////////////pager 
 		$perpage = 9;
 		$nums_rows = $SQL->num_rows($sql);
@@ -1020,13 +1038,21 @@
 		$n_s_c_t				= $lang['S_C_T'];
 		$n_s_c_y				= $lang['S_C_Y'];
 		$n_s_c_a				= $lang['S_C_A'];
+		$n_last_visit			= $lang['LAST_VISIT'];
+		$n_files_last_visit		= $lang['FLS_LST_VST_SEARCH'];
+		$n_imgs_last_visit		= $lang['IMG_LST_VST_SEARCH'];
+		
+		//last visit
+		$last_visit				= ($_SESSION['LAST_VISIT']) ?  date("d-m-Y h:i a", $_SESSION['LAST_VISIT']) : false;
+		$h_lst_files			= './admin.php?cp=files&last_visit='.$_SESSION['LAST_VISIT'];
+		$h_lst_imgs				= './admin.php?cp=img&last_visit='.$_SESSION['LAST_VISIT'];
 		
 		//data
 		$files_number 		= $stat_files ;
 		$files_sizes 		= Customfile_size($stat_sizes);
 		$users_number 		= $stat_users;
 		$last_file_up		= $stat_last_file;
-		$last_del_fles 		= date("d-m-Y H:a", $stat_last_f_del);
+		$last_del_fles 		= date("d-m-Y h:i a", $stat_last_f_del);
 		$s_c_t				= $stat_counter_today;
 		$s_c_y				= $stat_counter_yesterday;
 		$s_c_a				= $stat_counter_all;
@@ -1035,9 +1061,9 @@
 		$max_execution_time = ini_get('max_execution_time');
 		$upload_max_filesize= ini_get('upload_max_filesize');
 		$post_max_size 		= ini_get('post_max_size');
-		$s_last_google		= ($stat_last_google == 0) ? '[ ? ]' : date("d-m-Y H:a", $stat_last_google);
+		$s_last_google		= ($stat_last_google == 0) ? '[ ? ]' : date("d-m-Y h:i a", $stat_last_google);
 		$s_google_num		= $stat_google_num;
-		$s_last_yahoo		= ($stat_last_yahoo == 0) ? '[ ? ]' : date("d-m-Y H:a", $stat_last_yahoo);
+		$s_last_yahoo		= ($stat_last_yahoo == 0) ? '[ ? ]' : date("d-m-Y h:i a", $stat_last_yahoo);
 		$s_yahoo_num		= $stat_yahoo_num;
 		//size board by percent
 		$per1 = round($stat_sizes / ($config[total_size] *1048576) ,2) *100;

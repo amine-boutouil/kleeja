@@ -5,7 +5,7 @@
 # Filename : usrcp.php 
 # purpose :  every things for users.
 # copyright 2007 Kleeja.com ..
-#
+# last edit by : saanina
 ##################################################
 
 	// security .. 
@@ -210,13 +210,13 @@
 		case "fileuser" : //=============================[fileuser]
 		
 			//config register
-			if ( $config[enable_userfile] !=1 ){
+			if ($config[enable_userfile] !=1 and $usrcp->admin()==false){
 				$text = $lang['USERFILE_CLOSED'];
 				$stylee = "info.html";
 				//header
 				Saaheader($lang['CLOSED_FEATURE']);
-				//index
-				print $tpl->display($stylee);
+					//index
+					print $tpl->display($stylee);
 				//footer
 				Saafooter();
 				exit();

@@ -1,4 +1,4 @@
-<?
+<?php
 ##################################################
 #						Kleeja 
 #
@@ -6,6 +6,7 @@
 # purpose :  get user data ..even from board database, its comlicated ...: supoort many types of forums ..
 # copyright 2007 Kleeja.com ..
 #class by : Saanina [@gmail.com]
+# last edit by : saanina
 ##################################################
 
 	  if (!defined('IN_COMMON'))
@@ -59,15 +60,18 @@ class usrcp {
 					$_SESSION['USER_MAIL']	=	$row['mail'];
 					$_SESSION['USER_ADMIN']	=	$row['admin'];
 					$_SESSION['USER_SESS']	=	session_id();
+					$_SESSION['LAST_VISIT']	=	$row['last_visit'];
 					
 					//update session_id
 					$id 		= (int) 	$row['id'];
 					$session_id = (string)  session_id();
 					
 					$update = $SQL->query("UPDATE `{$dbprefix}users` SET 
-						session_id = '" . $session_id . "'
-						WHERE id='" . $id . "'");
-					if (!$update) {die("áÇíãßä ÊÍÏíË ÑÞã ÇáÌáÓå !!");}
+						session_id = '" . $session_id . "',
+						last_visit='". time() ."'
+						WHERE id='" . $id . "'
+						");
+					if (!$update) {die("cant update user session !!");}
 					
 					}
 					$SQL->freeresult($sql);   

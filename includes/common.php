@@ -1,11 +1,11 @@
-<?
+<?php
 ##################################################
 #						Kleeja 
 #
 # Filename : common.php 
 # purpose :  all things came from here ..:
 # copyright 2007 Kleeja.com ..
-#
+# last edit by : saanina
 ##################################################
 
 	// start session
@@ -39,7 +39,12 @@ $starttm = $starttm[1] + $starttm[0];
 		$_FILES 		= $HTTP_POST_FILES;
      }
 	  
-
+	//
+	if(@phpversion() >= '5.0.0') {
+	print '<span style="color:red;">Kleeja 1 doesnt work with php5, please wait Kleeja2 or convert to php4</span>';
+	
+	}
+	
 	  
 	//include files .. & classes ..
 	$path = dirname(__FILE__).'/';
@@ -47,7 +52,6 @@ $starttm = $starttm[1] + $starttm[0];
 	include ($path.'config.php');
 	include ($path.'easytemplate.php');
 	include ($path.'mysql.php');
-	include ($path.'js.php');
 	include ($path.'KljUploader.php');
 	include ($path.'usr.php');
 	include ($path.'pager.php');
@@ -136,7 +140,8 @@ $starttm = $starttm[1] + $starttm[0];
 	//}
 	
 	//site close ..
-	if ($config[siteclose] == 1 && !$usrcp->admin() ) {
+	$login_page = '';
+	if ($config[siteclose] == 1 && !$usrcp->admin() &&  $_GET['go']!='login' && $_GET['go']!='logout') {
 		Saaheader($lang['SITE_CLOSED']);
 		$text = $config[closemsg];
 		print $tpl->display("info.html");
@@ -145,7 +150,7 @@ $starttm = $starttm[1] + $starttm[0];
 	}
 	
 	//exceed total size 
-	if ($stat_sizes >= ($config[total_size] *(1048576))) { // convert megabytes to bytes
+	if (($stat_sizes >= ($config[total_size] *(1048576))) && $_GET['go']!='login' && $_GET['go']!='logout') { // convert megabytes to bytes
 		Saaheader($lang['STOP_FOR_SIZE']);
 		$text = $lang['SIZES_EXCCEDED'];
 		print $tpl->display("info.html");

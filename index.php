@@ -5,7 +5,7 @@
 # Filename : index.php 
 # purpose :  home page  .
 # copyright 2007 Kleeja.com ..
-#
+# last edit by : saanina
 ##################################################
 
 	// security .. 
@@ -21,29 +21,37 @@
 	else{$decode = "";}
 	//decode e
 	
+	//safe code 
+	if ($config['safe_code']){
+		//inlude class
+		require ('includes/ocr_captcha.php');
+		//start check class
+		$ch = new ocr_captcha;
+	}
+	//
+	
 	
 	//start class .. 
 	$kljup->decode		=	$decode;              
 	$kljup->linksite	=	$config[siteurl]; 
 	$kljup->folder		=	$config[foldername];
 	$kljup->filename	=	$config[prefixname];
-	$kljup->action		=	"index.php";
+	$kljup->action		= 	$action = "index.php";
 	$kljup->filesnum	=	$config[filesnum];
 	//--------------------- s user system part
 	$kljup->types		= ( $usrcp->name() ) ? $u_exts : $g_exts;
 	$kljup->sizes		= ( $usrcp->name() ) ? $u_sizes : $g_sizes ;	
 	$kljup->id_user 	= ( $usrcp->name() ) ? $usrcp->id() : '-1';
+	$kljup->safe_code	= $config['safe_code'];
 	//--------------------- e user system part
-	$inputs 			= $kljup->tpl(); //<<--- template
 	$kljup->process();
 
 	
 	
 
 	//show errors and info
-	foreach($kljup->errs as $s )
-	{
-	$info[] 	= array( 'i' => $s );
+	foreach($kljup->errs as $s ){
+		$info[] 	= array( 'i' => $s );
 	}
 	if (!is_array($info)){$info = array();}
 	
@@ -55,7 +63,9 @@
 	$NUMBER_ONLINE	= $lang['NUMBER_ONLINE'];
 	$NUMBER_UONLINE	= $lang['NUMBER_UONLINE'];
 	$NUMBER_VONLINE	= $lang['NUMBER_VONLINE'];
-	
+	if ($config['safe_code']){
+	$SAFE_CODE		= $ch->display_captcha(true);
+	}
 	
 	//for online .. 
 	if ($config[allow_online] == 1 ){
@@ -65,8 +75,12 @@
 	$OnlineNames = array();
 	$result 	= $SQL->query("SELECT DISTINCT(ip),username,agent FROM {$dbprefix}online");  
 	while($row=$SQL->fetch_array($result)){
-		//googlebot
+		//bot
 		if (strstr($row[agent], 'Googlebot')) {
+			$usersnum++; 
+			$OnlineNames[] = '<span style="color:orange;">[Googlebot]</span>';
+		}
+		elseif (strstr($row[agent], 'Google')) {
 			$usersnum++; 
 			$OnlineNames[] = '<span style="color:orange;">[Googlebot]</span>';
 		}
@@ -74,12 +88,14 @@
 			$usersnum++; 
 			$OnlineNames[] = '<span style="color:red;">[Yahoo!Slurp]</span>';
 		}
+		elseif (strstr($row[agent], 'Yahoo')) {
+			$usersnum++; 
+			$OnlineNames[] = '<span style="color:red;">[Yahoo!Slurp]</span>';
+		}
 		elseif($row[username] != "-1") {
 			$usersnum++; 
 			$OnlineNames[] =  $row[username];
-		}
-		else
-		{
+		}else{
 		$visitornum++; 
 		}
 	
@@ -98,13 +114,12 @@
 	
 	
 	//for show .. 
-	
-	//header
-	Saaheader("Kleeja");
-	//index
-	print $tpl->display("index_body.html");
-	//footer
-	Saafooter();
+		//header
+		Saaheader("Kleeja");
+			//index
+			print $tpl->display("index_body.html");
+		//footer
+		Saafooter();
 	
 
 ?>

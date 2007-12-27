@@ -78,6 +78,15 @@ RC1 :
 - fix image section in paenl [ more <td> , no <tr> ]
  - fix advanced search in admin cp 
 + add new captcha system
++ add safe_code in upload if you want .. [ more security]
+- seperate upload codes to style [ good for designers ]
++ seperate javascript to real javascript file [ b4 was php file ] [ good for designers ]
+- fix time format in admin cp [start page ]
++ add last files or imgs from last visit [ just for kleeja user system ]
+- fix cache system [ related with rules cache ]
+- rebulid admin cp style
+-fix slsecting language in install file
+- fix login or logout admin when center closed or size limited ..
 
 
 thank you for reading this file. 

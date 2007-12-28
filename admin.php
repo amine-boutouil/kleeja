@@ -11,6 +11,8 @@
 
 	// security ..
 	define ( 'IN_INDEX' , true);
+	define ( 'IN_ADMIN' , true);
+	
 	//include imprtant file ..
 	require ('includes/common.php');
 	include ('includes/version.php');
@@ -1066,7 +1068,7 @@
 		$s_last_yahoo		= ($stat_last_yahoo == 0) ? '[ ? ]' : date("d-m-Y h:i a", $stat_last_yahoo);
 		$s_yahoo_num		= $stat_yahoo_num;
 		//size board by percent
-		$per1 = round($stat_sizes / ($config[total_size] *1048576) ,2) *100;
+		$per1 = @round($stat_sizes / ($config[total_size] *1048576) ,2) *100;
 
 		$kleeja_version		= KLEEJA_VERSION;
 	}#end switch

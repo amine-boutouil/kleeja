@@ -299,17 +299,17 @@
 	}
 
 	//ok .. go on
-	$id = intval($_GET['id']);
+	//$id = intval($_GET['id']);
 	$cd = $_GET['cd']; // may.. will protect
 
-	if (!$id || !$cd )
+	if (!$cd )
 	{
 			$text =  $lang['WRONG_URL'];
 			$stylee = 'err.html';
 	}
 	else
 	{
-			$sql	=	$SQL->query("SELECT name,folder FROM `{$dbprefix}files` WHERE id='".$id."' AND code_del='" . $cd . "'");
+			$sql	=	$SQL->query("SELECT name,folder FROM `{$dbprefix}files` WHERE code_del='" . $cd . "'");
 
 			if ($SQL->num_rows($sql) == 0) {
 			$text =   $lang['CANT_DEL_F'];
@@ -320,11 +320,11 @@
 				while($row=$SQL->fetch_array($sql)){
 				@unlink ( $row[folder] . "/" . $row[name] );
 				//delete thumb
-				if (is_file($row[folder] . "/thumbs/" . $row[name]))
-				{@unlink ( $row[folder] . "/thumbs/" . $row[name] );}
+					if (is_file($row[folder] . "/thumbs/" . $row[name]))
+					{@unlink ( $row[folder] . "/thumbs/" . $row[name] );}
 				//delete thumb
-				$del = $SQL->query("DELETE FROM {$dbprefix}files WHERE 	id='" . $id . "' ");
-				if (!$del) {die($lang['CANT_DELETE_SQL']);}$lang['CANT_DELETE_SQL'];
+					$del = $SQL->query("DELETE FROM {$dbprefix}files WHERE 	id='" . $row[id] . "' ");
+					if (!$del) {die($lang['CANT_DELETE_SQL']);}
 				}
 				$SQL->freeresult($sql);
 

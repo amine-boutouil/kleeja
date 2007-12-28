@@ -64,6 +64,55 @@
 			Saafooter();
 	 //
 	}
+	elseif ( isset($_GET['filename']) )
+	{
+			//for safe
+			$name 	= (string)	$SQL->escape($_GET['filename']);
+			$sql	=	$SQL->query("SELECT * FROM {$dbprefix}files where name=$name");
+
+			if ($SQL->num_rows($sql) != 0  )
+			{
+				while($row=$SQL->fetch_array($sql)){
+				@extract ($row);
+			}
+			$SQL->freeresult($sql);
+
+			// SOME WORDS FOR TEMPLATE
+			$file_found = $lang['FILE_FOUNDED'];
+			$wait  		= $lang['WAIT'];
+			$click 		= $lang['CLICK_DOWN'];
+			$err_jv 	= $lang['JS_MUST_ON'];
+			$url_file 	= ($config[mod_writer]) ? $config[siteurl]."down-".$name."-".$folder."-".$id.".html" : $config[siteurl]."go.php?go=down&amp;n=$name&amp;f=$folder&amp;i=$id";
+			$seconds_w 	= $config[sec_down];
+			$time 		= date("d-m-Y H:a", $time);
+			$size 		= Customfile_size($size);
+			$information= $lang['FILE_INFO'];
+			$L_FILE 	= $lang['FILENAME'];
+			$L_SIZE		= $lang['FILESIZE'];
+			$L_TYPE		= $lang['FILETYPE'];
+			$L_TIME		= $lang['FILEDATE'];
+			$L_UPS		= $lang['FILEUPS'];
+			$L_REPORT 	= $lang['FILEREPORT'];
+			$REPORT 	= ($config[mod_writer]) ?  $config[siteurl]."report_".$id.".html" :  $config[siteurl]."go.php?go=report&amp;id=$id";
+
+			$sty = 'download.html';
+
+			}
+			else
+			{
+				$text = $lang['FILE_NO_FOUNDED'];
+				$sty = 'err.html';
+			}
+			 // show style ...
+
+			//header
+			Saaheader($lang['DOWNLAOD']);
+		 	//body
+			print $tpl->display($sty);
+			//footer
+			Saafooter();
+	 //
+	}
 	else if( isset($_GET['img']) )
 	{
 			//for safe

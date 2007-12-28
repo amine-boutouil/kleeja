@@ -87,6 +87,8 @@ RC1 :
 - rebulid admin cp style
 -fix slsecting language in install file
 - fix login or logout admin when center closed or size limited ..
+- fix some features to be able work when someone converted from another script 
+- fix error in admin file when limited size is zero .. 
 
 
 thank you for reading this file. 

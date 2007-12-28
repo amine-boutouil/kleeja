@@ -380,7 +380,7 @@ function saveit ($filname,$folderee,$sizeee,$typeee) { //
 	//must be img //
 $this->imgstypes	= array('png','gif','jpg','jpeg','tif','tiff');
 $this->thmbstypes	= array('png','jpg','jpeg','gif');
-if ($config[del_url_file]){$extra_del = $lang['URL_F_DEL'] . ':<br /><textarea rows=2 cols=49 rows=1>'.$this->linksite.(($config[mod_writer]) ? "del".$this->id_for_url."_".$code_del.".html" : 'go.php?go=del&amp;id='.$this->id_for_url.'&amp;cd='.$code_del ).'</textarea><br/>';}
+if ($config[del_url_file]){$extra_del = $lang['URL_F_DEL'] . ':<br /><textarea rows=2 cols=49 rows=1>'.$this->linksite.(($config[mod_writer]) ? "del".$code_del.".html" : 'go.php?go=del&amp;cd='.$code_del ).'</textarea><br/>';}
 
 
 //show imgs

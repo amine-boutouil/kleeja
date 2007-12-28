@@ -141,7 +141,7 @@ $starttm = $starttm[1] + $starttm[0];
 	
 	//site close ..
 	$login_page = '';
-	if ($config[siteclose] == 1 && !$usrcp->admin() &&  $_GET['go']!='login' && $_GET['go']!='logout') {
+	if ($config[siteclose] == 1 && !$usrcp->admin() &&  $_GET['go']!='login' && $_GET['go']!='logout' && !IN_ADMIN) {
 		Saaheader($lang['SITE_CLOSED']);
 		$text = $config[closemsg];
 		print $tpl->display("info.html");
@@ -150,7 +150,7 @@ $starttm = $starttm[1] + $starttm[0];
 	}
 	
 	//exceed total size 
-	if (($stat_sizes >= ($config[total_size] *(1048576))) && $_GET['go']!='login' && $_GET['go']!='logout') { // convert megabytes to bytes
+	if (($stat_sizes >= ($config[total_size] *(1048576))) && $_GET['go']!='login' && $_GET['go']!='logout' && !IN_ADMIN) { // convert megabytes to bytes
 		Saaheader($lang['STOP_FOR_SIZE']);
 		$text = $lang['SIZES_EXCCEDED'];
 		print $tpl->display("info.html");

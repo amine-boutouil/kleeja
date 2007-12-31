@@ -12,7 +12,6 @@ Spoken by many countries in the middle east ..
 */
 
 $lang = array (
-
 		'DIR'				=> 'rtl', // rtl or ltr
 		'HOME'				=> 'البدايه',
 		'INDEX'				=> 'الرئيسيه',
@@ -25,6 +24,8 @@ $lang = array (
 		'LAST_VISIT'		=> 'آخر زياره لك',
 		'FLS_LST_VST_SEARCH'=> 'عرض الملفات منذ آخر زياره',
 		'IMG_LST_VST_SEARCH'=> 'عرض الصور منذ آخر زياره',
+		'NEXT'				=> 'التالي',
+		'PREV'				=> 'السابق',
 		
 		//index.php
 		'INFORMATION'		=> 'تعليمات',

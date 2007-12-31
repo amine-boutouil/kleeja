@@ -22,10 +22,11 @@ class SimplePager {
     function getTotalPages () {return $this->totalPages;} 
     function getStartRow() {return $this->startRow;} 
 	function print_nums($link){
+	global $lang;
 			if($this->totalPages < 2) return;
-			$re = ($this->currentPage>1) ? '<a href="'.$link.'&amp;page='.($this->currentPage-1).'" class=paging>Prev.</a> ': '';
+			$re = ($this->currentPage>1) ? '<a href="'.$link.'&amp;page='.($this->currentPage-1).'" class=paging>'. $lang['PREV'] .'</a> ': '';
 			for($s=1;$s<$this->totalPages+1;$s++){$re .= ($this->currentPage==$s)?"<span class=here_psge>$s</span>":"<a href=".$link."&amp;page=$s class=paging>$s</a> ";}
-			$re .= ($this->currentPage<$this->totalPages) ? ' <a href="'.$link.'&amp;page='.($this->currentPage+1).'" class=paging>Next </a>': '';
+			$re .= ($this->currentPage<$this->totalPages) ? ' <a href="'.$link.'&amp;page='.($this->currentPage+1).'" class=paging>'. $lang['NEXT'] .'</a>': '';
 		return $re;
 	}
 } 

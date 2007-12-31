@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="rtl"/><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>...Kleeja...</title><style type="text/css">
+* { padding: 0;margin: 0;}
+body {background: #FF9933;font: 0.74em "Tahoma" Verdana, Arial, sans-serif;line-height: 1.5em;}
+a {color: #3B6EBF;text-decoration: none;}a:hover {text-decoration: underline;}
+.roundedcornr_box_283542 {background: #fff0d2;margin-left: 10%; margin-right: 10%;width: 724px;}
+.roundedcornr_top_283542 div {background: url(../images/inst/roundedcornr_283542_tl.png) no-repeat top left;}
+.roundedcornr_top_283542 {background: url(../images/inst/roundedcornr_283542_tr.png) no-repeat top right;}
+.roundedcornr_bottom_283542 div {background: url(../images/inst/roundedcornr_283542_bl.png) no-repeat bottom left;}
+.roundedcornr_bottom_283542 {background: url(../images/inst/roundedcornr_283542_br.png) no-repeat bottom right;}
+.roundedcornr_top_283542 div, .roundedcornr_top_283542, .roundedcornr_bottom_283542 div, .roundedcornr_bottom_283542 {
+width: 100%;height: 30px;font-size: 1px;}.roundedcornr_content_283542 { margin: 0 30px; }
+.code {
+	background-color: #F2F1EE;
+	border: 1px solid #999999;
+	font-family: "courier New", Courier, monospace;
+	direction:ltr;
+}
+
+</style></head><body><br/>
+<div class="roundedcornr_box_283542"><div class="roundedcornr_top_283542"><div></div></div><div class="roundedcornr_content_283542">
+<img src="../images/inst/logo.gif" style="border:0;">
+<br/>
+
+<br/>
+<!-- Header End -->
+<a name="top"></a>
+<ol>
+	<li>
+	<a href="#install">طريقة التركيب</a>
+	</li>
+	<li>
+	<a href="#forum">طريقة الربط بالمنتديات</a>
+	</li>
+		<li>
+	<a href="#convert">كيف أقوم بالتحويل لسكربت كليجا من اي سكربت آخر</a>
+	</li>		
+	<li>
+	<a href="#mod_re">كيف أقوم بجعل الروابط هتمل للتتوافق مع SEO</a>
+	</li>
+</ol>
+
+<br/><br/>
+<br/><br/>
+<br/><br/>
+
+<hr/>
+
+<div id="">
+<a href="#top">إلى إعلى</a> <br/>
+<a name="install"></a>
+<B># : طريقة التركيب  </B><br/><br/>
+
+1 - قم برفع النسخه إلى الخادم بأي برنامج  FTP 
+
+<BR/>
+
+2- قم بتعديل ملف المعلومات للسكربت includes/config.php 
+<Br/>
+كالتالي : 
+
+<br/>
+<div class="code">
+	$dbserver	= 'localhost'; 				//خادم قاعدة البيانات .. وغالبا هذا الافتراضي<br/>
+    $dbuser		= 'root';					// اسم المستخدم لقاعدة البيانات <br/>
+	$dbpass		= '';						// كلمة المرور لقاعدة البيانات <br/>
+    $dbname		= 'tt'; 					// اسم قاعدة البيانات<br/>
+	$dbprefix	 = '';						// اذا كانت قاعدة البيانات تحوي أكثر من سكربت ضع بدايه للجداول  <br/>
+	$perpage	= '10';						// عدد النتائج بكل صفحه :النتائج لكل السكربت ..  <br/>
+</div>
+
+<br/>
+حرر السابق وإترك  الباقي ..
+
+
+<br/>
+<br/>
+3- شغل معالج التثبيت عن طريقة الرابط 
+<br/>
+http://sitename.com/kleeja/install.php
+
+<br/>
+وبدل : 
+<br/>
+sitename.com  : دومين موقعك
+<br/>
+kleeja  : مجلد سكربت كليجا
+<br/>
+<br/>
+4- احذف ملف التثبيت السابق .. للأمان 
+<br/>
+5- إدخل موقعك الآن وستجد كل شيء بشكل جيد .. للدخول للوحة التحكم أدخل كعضو وسوف تجد رابط اسفل السكربت للمسؤول
+<br/>
+6- لا تحاول نزع الحقوق من السكربت , فنزع الحقوق هو نكران للجميل 
+ .. إذا أردت إزالة الحقوق راسلنا لشراء حقوق النسخه بثمن بسيط جد لكي نستمر بالتطوير ..
+ 
+ </div>
+
+<BR/>
+<HR/>
+<BR/>
+
+<a href="#top">إلى إعلى</a> <br/>
+<a name="forum"></a>
+<B># : طريقة الربط بالمنتديات</B><br/><br/>
+
+1- بعد تثبيت السكربت كما هو موضح بالنقطه السابقه . 
+<br/>
+2- قم بفتح لوحة التحكم والذهاب "للإعدادات".
+<br/>
+3- قم بتعديل خيار "نظام العضويات" لنوع المنتدى المراد .
+<br/>
+4- قم بتعديل ملف includes/config.php الجزء الثاني منه
+<br/>
+كالتالي <br/>
+<div class="code">
+	//for integration with forums [ must change user systen from admin cp ] <br/>
+	$forum_srv = "localhost";				// خادم قاعدة البيانات للمنتدى افتراضيا كما هو<br/>
+	$forum_user = "root";					// اسم مستخدم قاعدة البيانات للمنتدى<br/>
+	$forum_pass = "";						// كلمة مرور قاعدة البيانات للمنتدى<br/>
+	$forum_db ="vb368";						// اسم قاعدة بيانات المنتدى<br/>
+	$forum_prefix = ""; 					//بداية جداول قاعدة بيانات المنتدى <br/>
+	$forum_path ="/vb"; 					// مجلد المنتدى ..<br/>
+</div>
+<br>
+
+احفظ الملف واذهب للدخول , اذا كنت مديرا بالمنتدى سوف يتعرف عليك كمدير للسكربت .. 
+
+<br/>
+<br/>
+<hr/>
+<a href="#top">إلى إعلى</a> <br/>
+<a name="convert"></a>
+<B># : طريقة التحويل لسكربت كليجا من سكربت تحميل آخر</B><br/><br/>
+
+نحن نثق أن سكربت كليجا متميز جداً .. وهو جهد عمل مميز ويقف الجميع خلفه لانهم عرفو ذلك ..
+<br>
+لذا كان لزاماً .. علينا أن نقوم بوضح بريمج تحويل من اي سكربت إلى كليجا .. 
+<br/>
+قم بالذهاب لموقع كليجا 
+<br/>
+<a href="http://www.kleeja.com">www.kleeja.com</a>
+<br/>
+وقم بالذهاب لقسم التحميل وسوف تجده هناك ..
+
+
+
+<br/>
+<br/>
+<hr/>
+<a href="#top">إلى إعلى</a> <br/>
+<a name="mod_re"></a>
+<B># : كيف أقوم بجعل الروابط هتمل للتتوافق مع SEO</B><br/><br/>
+
+1- من لوحة التحكم إذهب لـ "اعدادات"
+<br>
+2- قم بتفعيل خيار "روابط هتمل"
+
+<br/>
+3- قم بنقل ملف docs/.htaccess.txt إلى المجلد الرئيسي 
+<br/>
+4- بعد نقله قم بتغيير الاسم إلى .htaccess 
+<br/>
+استمتع بالروابط ..
+
+
+
+<br/>
+<!-- Foterr Start -->
+<br/>
+
+</div><div class="roundedcornr_bottom_283542"><div></div></div></div></body></html>
+<br/>
+<!-- Foterr End -->

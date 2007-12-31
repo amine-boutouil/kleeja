@@ -31,17 +31,18 @@ include important files
 
 	//for language //
 
-	
-	if ( isset($_COOKIE['lang']) ) {
-			if(file_exists('language/' . $_COOKIE['lang'] . '.php')){
-				include ('language/' . $_COOKIE['lang'] . '.php');
-			}else{
-				include ('language/en.php');
-			}	
-	}else{
-			include ('language/en.php');
-	}
+if ( !isset($_POST['lang']) ) { //fix for 1rc1
 
+		if ( isset($_COOKIE['lang']) ) {
+				if(file_exists('language/' . $_COOKIE['lang'] . '.php')){
+					include ('language/' . $_COOKIE['lang'] . '.php');
+				}else{
+					include ('language/en.php');
+				}	
+		}else{
+				include ('language/en.php');
+		}
+}
 
 /*
 style of installer
@@ -239,8 +240,8 @@ $sql_exts7 = "
 INSERT INTO `{$dbprefix}exts` (`id`, `group_id`, `ext`, `gust_size`, `gust_allow`, `user_size`, `user_allow`) VALUES
 (54, 7, 0x737766, 0, 0, 0, 0),(55, 8, 0x6d6f76, 0, 0, 0, 0),(56, 8, 0x6d3476, 0, 0, 0, 0),(57, 8, 0x6d3461, 0, 0, 0, 0),
 (58, 8, 0x6d7034, 0, 0, 0, 0),(59, 8, 0x336770, 0, 0, 0, 0),(60, 8, 0x336732, 0, 0, 0, 0),(61, 8, 0x7174, 0, 0, 0, 0),
-(62, 9, 0x6d706567, 0, 0, 0, 0),(63, 9, 0x6d7067, 0, 0, 0, 0),(64, 9, 0x6d7033, 0, 0, 0, 0),
-(65, 9, 0x6f6767, 0, 0, 0, 0),(66, 9, 0x6f676d, 0, 0, 0, 0),(67, 8, 0x617669, 0, 0, 0, 0);";
+(62, 8, 0x617669, 0, 0, 0, 0),(63, 9, 0x6d706567, 0, 0, 0, 0),(64, 9, 0x6d7067, 0, 0, 0, 0),(65, 9, 0x6d7033, 0, 0, 0, 0),
+(66, 9, 0x6f6767, 0, 0, 0, 0),(67, 9, 0x6f676d, 0, 0, 0, 0);";
 
 
 
@@ -248,10 +249,9 @@ INSERT INTO `{$dbprefix}exts` (`id`, `group_id`, `ext`, `gust_size`, `gust_allow
 /*
 //print header
 */
-if ( !isset($_POST['submitlang']) ) {
-print $header;
+if ( !isset($_POST['lang']) ) {
+	print $header;
 }
-
 
 
 /*
@@ -260,12 +260,13 @@ print $header;
 switch ($_GET['step']) {
 default:
 case 'language':
-	if ( isset($_POST['submitlang']) ) {
-		if ($_POST['lang'] == ''){return false;}else{
-		//go to .. 2step
-		setcookie("lang", $_POST['lang'], time()+3600);
-		echo '<meta http-equiv="refresh" content="0;url=' . $_SERVER[PHP_SELF].'?step=check">';
-	}
+	if (isset($_POST['lang'])) {
+			if (!empty($_POST['lang'])){
+				//go to .. 2step
+				setcookie("lang", $_POST['lang'], time()+60*60*24*365);
+				echo '<meta http-equiv="refresh" content="0;url=' . $_SERVER[PHP_SELF].'?step=check">';
+			//	@header("Location:".$_SERVER[PHP_SELF]."?step=check"); /* Redirect browser */
+			}
 
 		}else { //no language
 
@@ -524,8 +525,8 @@ case 'end' :
 		print '<span style="color:blue;">' . $lang['INST_FINISH_SQL'] . '</span><br/><br/>';
 		print '<a href="./index.php">' . $lang['INDEX'] . '</a><br/><br/>';
 		print '<a href="./admin.php">' . $lang['ADMINCP'] . '</a><br/><br>';
-		print '' . $lang['INST_KLEEJADEVELOPERS'] . '';
-
+		print '' . $lang['INST_KLEEJADEVELOPERS'] . '<br/><br>';
+		print '<a href="http://www.kleeja.com">www.kleeja.com</a><br/><br>';
 		//for safe ..
 		@rename("install.php", "install.lock");
 break;

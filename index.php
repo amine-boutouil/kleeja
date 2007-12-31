@@ -115,7 +115,7 @@
 	
 	//for show .. 
 		//header
-		Saaheader("Kleeja");
+		Saaheader($lang['HOME']);
 			//index
 			print $tpl->display("index_body.html");
 		//footer

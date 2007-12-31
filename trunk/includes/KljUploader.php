@@ -390,7 +390,7 @@ if (in_array(strtolower($this->typet),$this->imgstypes)){
 	if( ($config[thumbs_imgs]!=0) && in_array(strtolower($this->typet),$this->thmbstypes))
 	{
 	@$this->createthumb($folderee."/".$filname,strtolower($this->typet),$folderee.'/thumbs/'.$filname,100,100);
-	$extra_thmb = $lang['URL_F_THMB'] . ':<br /><textarea rows=2 cols=49 rows=1>[url='.$this->linksite.(($config[mod_writer]) ? "image".$this->id_for_url.".html" : "download.php?img=".$this->id_for_url ).'][img]'.$this->linksite.(($config[mod_writer]) ? "thumb".$this->id_for_url.".html" : "download.php?thmb=".$this->id_for_url ).'[/img][/url]</textarea><br />';
+	$extra_thmb = $lang['URL_F_THMB'] . ':<br /><textarea rows=2 cols=49 rows=1>[url='.$this->linksite.(($config[mod_writer]) ? "image".$this->id_for_url.".html" : "download.php?img=".$this->id_for_url ).'][img]'.$this->linksite.$folderee.'/thumbs/'.$filname.'[/img][/url]</textarea><br />';
 	$extra_show_img = '<div style="text-align:center"><img src="'.$this->linksite.(($config[mod_writer]) ? "thumb".$this->id_for_url.".html" : "download.php?thmb=".$this->id_for_url ).'" /></div></br>';
 	}
 	
@@ -403,7 +403,7 @@ if (in_array(strtolower($this->typet),$this->imgstypes)){
 	//then show
 	$this->errs[] = $lang['IMG_DOWNLAODED'] . '<br />' . $extra_show_img . '
 			' . $lang['URL_F_IMG'] . ':<br /><textarea rows=2 cols=49 rows=1>'.$this->linksite.(($config[mod_writer]) ? "image".$this->id_for_url.".html" : "download.php?img=".$this->id_for_url ).'</textarea><br />
-			' . $lang['URL_F_BBC'] . ':<br /><textarea rows=2 cols=49 rows=1>[url='.$config[siteurl].'][img]'.$this->linksite.(($config[mod_writer]) ? "image".$this->id_for_url.".html" : "download.php?img=".$this->id_for_url ).'[/img][/url]</textarea><br />
+			' . $lang['URL_F_BBC'] . ':<br /><textarea rows=2 cols=49 rows=1>[url='.$config[siteurl].(($config[mod_writer]) ? "image".$this->id_for_url.".html" : "download.php?img=".$this->id_for_url ).'][img]'.$this->linksite.$folderee . '/' . $filname .'[/img][/url]</textarea><br />
 			'.$extra_thmb.$extra_del;
 
 }else {

@@ -91,4 +91,11 @@ RC1 :
 - fix error in admin file when limited size is zero .. 
 
 
+RC2 : 
+- fix pager syatem [ was no more one page ]
+ -fix page number in all sections in admin.php file
+- fix page number in usercp file 
+ - fix bbcodes links , cuz its doesnt work with forums ..
++ add copyrights in footer for the user .. not for kleeja .. but keeja is powerd by ... so dont remove it man 
+
 thank you for reading this file. 

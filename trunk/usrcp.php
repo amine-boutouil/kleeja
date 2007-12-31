@@ -246,6 +246,8 @@
 			$no_results = false;
 			if($nums_rows != 0) {
 			
+				$sql	=	$SQL->query("SELECT id,name,folder,type FROM `{$dbprefix}files` WHERE user='".$user_id."' ORDER BY `id` DESC LIMIT $start,$perpage");
+
 
 			while($row=$SQL->fetch_array($sql)){
 			//make new lovely arrays !!
@@ -264,7 +266,7 @@
 			$your_fileuser =  $config[siteurl].(($config[mod_writer])? 'fileuser_'.$usrcp->id().'.html' : 'usrcp.php?go=fileuser&amp;id='.$usrcp->id() );
 			$filecp_link	= ($user_id==$usrcp->id()) ?  $config[siteurl].(($config[mod_writer])? 'filecp.html':'usrcp.php?go=filecp' ) : false;
 			$total_pages 	= $Pager->getTotalPages(); 
-			$linkgoto 		= ($config[mod_writer]) ? 'fileuser_'.$user_id.'.html' : 'usrcp.php?go=fileuser&amp;id='.$user_id;
+			$linkgoto 		= ($config[mod_writer]) ? $config[siteurl].'fileuser_'.$user_id.'.html' : $config[siteurl].'usrcp.php?go=fileuser&amp;id='.$user_id;
 			$page_nums 		= $Pager->print_nums($linkgoto); 
 			
 		break; //=================================================
@@ -285,6 +287,9 @@
 			////////////////
 			$no_results = false;
 			if($nums_rows != 0) {
+			
+						$sql	=	$SQL->query("SELECT id,name,folder FROM `{$dbprefix}files` WHERE user='".$usrcp->id()."' ORDER BY `id` DESC LIMIT $start,$perpage");
+
 			while($row=$SQL->fetch_array($sql)){
 			//make new lovely arrays !!
 
@@ -317,7 +322,7 @@
 		}
 		
 			$total_pages 	= $Pager->getTotalPages(); 
-			$linkgoto 		= ($config[mod_writer]) ? 'filecp.html' : 'usrcp.php?go=filecp';
+			$linkgoto 		= ($config[mod_writer]) ? $config[siteurl].'filecp.html' : $config[siteurl].'usrcp.php?go=filecp';
 			$page_nums 		= $Pager->print_nums($linkgoto); 
 			//after submit ////////////////
 			if ( isset($_POST['submit_files']) ) 

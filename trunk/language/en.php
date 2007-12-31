@@ -12,7 +12,6 @@ Spoken by billions of people world wide ..
 */
 
 $lang = array (
-
 		'DIR'				=> 'ltr', // rtl or ltr
 		'HOME'				=> 'Continue',
 		'INDEX'				=> 'Home',
@@ -25,6 +24,8 @@ $lang = array (
 		'LAST_VISIT'		=> 'Your last visit',
 		'FLS_LST_VST_SEARCH'=> 'Show files from last visit ?',
 		'IMG_LST_VST_SEARCH'=> 'Show images from last visit ?',
+		'NEXT'				=> 'Next',
+		'PREV'				=> 'Prev.',
 		
 		//index.php
 		'INFORMATION'		=> 'Instructions',
@@ -191,7 +192,7 @@ $lang = array (
 		'CANT_DIR_CRT' 		=> 'The folder has not been created automatically, you must create it manually.',
 		'AGREE_RULES'		=> 'I Agree to the terms',
 		'CHANG_TO_URL_FILE'	=> 'Change uploading method',
-		'CURL_IS_OFF'		=> 'دوال CURL معطله ..',
+		'CURL_IS_OFF'		=> 'CURL functions is disabled..',
 		
 		//includes/cache.php
 		'ADMINCP' 			=> 'Administration Panel',
@@ -369,7 +370,7 @@ $lang = array (
 		'INST_SQL_ERR'		=> 'Error Executing SQL .. ',
 		'INST_FINISH_SQL' 	=> 'Kleeja was installed successfully, Please remove install.php file',
 		'INST_FINISH_ERRSQL'=> 'OopS! there seems to be a problem, try again.',
-		'INST_KLEEJADEVELOPERS'=> 'Thank you for using Kleeja and good luck from our development team.'
+		'INST_KLEEJADEVELOPERS'=> 'Thank you for using Kleeja and good luck from our development team.',
 );
 
 

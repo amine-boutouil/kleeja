@@ -315,18 +315,21 @@
 			$lstd_than	=  ($_POST['lastdown']!='') ? 'AND f.last_down ='.(time()-(intval($_POST['lastdown']) * (24 * 60 * 60))).' ' : '';
 			$exte		=  ($_POST['ext']!='') ? 'AND f.type LIKE \'%'.$SQL->escape($_POST['ext']).'%\' ' : '';
 			
-			$sql = $SQL->query("SELECT f.* 
+			$sql_text = "SELECT f.* 
 			FROM {$dbprefix}files f , {$dbprefix}users u
 			WHERE $size_than $file_namee $ups_than $exte $rep_than $usernamee $lstd_than $exte
-			ORDER BY `id` DESC");
+			ORDER BY `id` DESC";
 			
 		}elseif(isset($_GET['last_visit'])){
-			$sql = $SQL->query("SELECT * FROM `{$dbprefix}files` 
+			$sql_text = "SELECT * FROM `{$dbprefix}files` 
 			WHERE time > '". intval($_GET['last_visit']) ."'
-			ORDER BY `id` DESC");
+			ORDER BY `id` DESC";
 		}else{
-			$sql = $SQL->query("SELECT * FROM `{$dbprefix}files` ORDER BY `id` DESC");
+			$sql_text = "SELECT * FROM `{$dbprefix}files` ORDER BY `id` DESC";
 		}
+		
+		$sql = $SQL->query($sql_text);
+		
 		/////////////pager 
 		$nums_rows = $SQL->num_rows($sql);
 		$currentPage = (isset($_GET['page']))? intval($_GET['page']) : 1;
@@ -338,6 +341,9 @@
 		
 
 		if ( $nums_rows > 0  ) {
+		
+		$sql = $SQL->query($sql_text . " LIMIT $start,$perpage");
+		
 		while($row=$SQL->fetch_array($sql)){
 		
 		//make new lovely arrays !!
@@ -378,7 +384,7 @@
 	$no_results = true;
 	}
 		$total_pages 	= $Pager->getTotalPages(); 
-		$page_nums 		= $Pager->print_nums('/admin.php?go=files'); 
+		$page_nums 		= $Pager->print_nums($config[siteurl].'admin.php?cp=files'); 
 		//after submit ////////////////
 		if ( isset($_POST['submit']) )
 		{
@@ -405,16 +411,19 @@
 		$sql = $SQL->query("SELECT * FROM `{$dbprefix}files` WHERE type IN ('gif','jpg','png','bmp','jpeg','tif','tiff') ORDER BY `id` DESC");
 	}
 		/////////////pager 
-		$perpage = 9;
+		$perpag2e = 9;
 		$nums_rows = $SQL->num_rows($sql);
 		$currentPage = (isset($_GET['page']))? intval($_GET['page']) : 1;
-		$Pager = new SimplePager($perpage,$nums_rows,$currentPage);
+		$Pager = new SimplePager($perpag2e,$nums_rows,$currentPage);
 		$start = $Pager->getStartRow();
 		////////////////
 		
 		$no_results = false;
 		
 		if ( $nums_rows > 0  ) {
+		
+		$sql = $SQL->query("SELECT * FROM `{$dbprefix}files` WHERE type IN ('gif','jpg','png','bmp','jpeg','tif','tiff') ORDER BY `id` DESC LIMIT $start,$perpag2e");
+		
 		$tdnum = 0;
 		//$all_tdnum = 0;
 		while($row=$SQL->fetch_array($sql)){
@@ -463,7 +472,7 @@
 	$no_results = true;
 	}
 		$total_pages 	= $Pager->getTotalPages(); 
-		$page_nums 		= $Pager->print_nums('/admin.php?go=img'); 
+		$page_nums 		= $Pager->print_nums($config[siteurl].'admin.php?cp=img'); 
 		//after submit ////////////////
 		if ( isset($_POST['submit']) )
 		{
@@ -500,6 +509,7 @@
 		$no_results = false;
 		
 		if ( $nums_rows > 0  ) {
+		$sql	=	$SQL->query("SELECT * FROM `{$dbprefix}reports`  ORDER BY `id` DESC LIMIT $start,$perpage");
 		while($row=$SQL->fetch_array($sql)){
 		//make new lovely arrays !!
 		$arr[] = array( id =>$row['id'],
@@ -548,7 +558,7 @@
 	}
 	
 		$total_pages 	= $Pager->getTotalPages(); 
-		$page_nums 		= $Pager->print_nums('/admin.php?go=report'); 
+		$page_nums 		= $Pager->print_nums($config[siteurl].'admin.php?cp=report'); 
 		//after submit ////////////////
 		if ( isset($_POST['submit']) )
 		{
@@ -583,6 +593,8 @@
 		$no_results = false;
 		
 		if ( $nums_rows > 0  ) {
+		$sql	=	$SQL->query("SELECT * FROM `{$dbprefix}call` ORDER BY `id` DESC LIMIT $start,$perpage");
+		
 		while($row=$SQL->fetch_array($sql)){
 		//make new lovely arrays !!
 		$arr[] = array( id =>$row['id'],
@@ -631,7 +643,7 @@
 	}
 	
 		$total_pages 	= $Pager->getTotalPages(); 
-		$page_nums 		= $Pager->print_nums('/admin.php?go=calls'); 
+		$page_nums 		= $Pager->print_nums($config[siteurl].'admin.php?cp=calls'); 
 		//after submit ////////////////
 		if ( isset($_POST['submit']) )
 		{
@@ -658,13 +670,16 @@
 			$usernamee	= ($_POST['username']!='') ? 'AND name  LIKE \'%'.$SQL->escape($_POST['username']).'%\' ' : ''; 
 			$usermailee	= ($_POST['usermail']!='') ? 'AND mail  LIKE \'%'.$SQL->escape($_POST['usermail']).'%\' ' : ''; 
 
-			$sql = $SQL->query("SELECT * 
+			$sql_text	=	"SELECT * 
 			FROM {$dbprefix}users
 			WHERE name != '' $usernamee $usermailee
-			ORDER BY `id` DESC");
+			ORDER BY `id` DESC";
+			
 		}else{
-		$sql	=	$SQL->query("SELECT * FROM `{$dbprefix}users`  ORDER BY `id` DESC");
+		$sql_text	=	"SELECT * FROM `{$dbprefix}users`  ORDER BY `id` DESC";
 		}
+		
+		$sql	= $SQL->query($sql_text);
 		/////////////pager 
 		$nums_rows = $SQL->num_rows($sql);
 		$currentPage = (isset($_GET['page']))? intval($_GET['page']) : 1;
@@ -675,8 +690,11 @@
 		$no_results = false;
 		
 		if ( $nums_rows > 0  ) {
+		
+		$sql	= $SQL->query($sql_text . " LIMIT $start,$perpage");
+		
 		while($row=$SQL->fetch_array($sql)){
-
+	
 			//make new lovely arrays !!
 			$ids[$row['id']]	= $row['id'];
 			$name[$row[id]] 	= (isset($_POST["nm_".$row[id]])) ? $_POST["nm_".$row[id]]  : $row['name'];
@@ -723,7 +741,7 @@
 	}
 	
 		$total_pages 	= $Pager->getTotalPages(); 
-		$page_nums 		= $Pager->print_nums('/admin.php?go=users'); 
+		$page_nums 		= $Pager->print_nums($config[siteurl].'admin.php?cp=users'); 
 		//after submit ////////////////
 		if ( isset($_POST['submit']) )
 		{

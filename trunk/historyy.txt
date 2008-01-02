@@ -97,5 +97,6 @@ RC2 :
 - fix page number in usercp file 
  - fix bbcodes links , cuz its doesnt work with forums ..
 + add copyrights in footer for the user .. not for kleeja .. but keeja is powerd by ... so dont remove it man 
++ add install help file in docs install_ar.html 
 
 thank you for reading this file. 

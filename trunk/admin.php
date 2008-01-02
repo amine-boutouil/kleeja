@@ -6,6 +6,8 @@
 # purpose :  control panel for administarator
 # copyright 2007 Kleeja.com ..
 # last edit by : saanina
+#
+# $Rev$:   $Author$:  $Date$:  
 ##################################################
 
 

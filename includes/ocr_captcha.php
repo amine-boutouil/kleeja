@@ -13,7 +13,7 @@
     var $imagetype="png"; // can also be "png";
     var $lang="Ëì"; // also "en"
     var $public_key;    // public key
-    var $font_file="comic";
+    var $font_file="./includes/DUNGEON.TTF";
     function ocr_captcha($long=6,$lx=120,$ly=30,$nb_noise=25) {
       $this->key=md5("HI, WITH NEW LIFE1#! , SAANINA IS ME#! , NO PROBLEM!#!");
       $this->long=$long;

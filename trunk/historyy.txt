@@ -102,6 +102,9 @@ RC2 :
 
 RC3 : 
  - fix captcha  ,, 
+- fix captcha [ was error with gd ] 
+- fix dome file and template engine to work with php5
+- fix some code on go.php and usercp.php
 
 
 thank you for reading this file. 

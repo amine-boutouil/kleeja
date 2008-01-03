@@ -11,7 +11,6 @@
     var $nb_noise;  // nb of background noisy characters
     var $filename;  // file of captcha picture stored on disk
     var $imagetype="png"; // can also be "png";
-    var $lang="Ëì"; // also "en"
     var $public_key;    // public key
     var $font_file="./includes/DUNGEON.TTF";
     function ocr_captcha($long=6,$lx=120,$ly=30,$nb_noise=25) {
@@ -53,7 +52,16 @@
     // display a captcha picture with private text and return the public text
     function make_captcha($noise=true) {
       $private_key = $this->generate_private();
-      $image = imagecreatetruecolor($this->lx,$this->ly);
+	  
+	if(function_exists('imagecreatetruecolor')){
+		$image = @imagecreatetruecolor($this->lx,$this->ly);
+	}else{
+		print '<b>imagecreatetruecolor</b> function Doesnt exists , That mean GD is disabled or very very old.';
+		exit();
+	}
+     
+
+	
       $back=ImageColorAllocate($image,intval(rand(224,255)),intval(rand(224,255)),intval(rand(224,255)));
       ImageFilledRectangle($image,0,0,$this->lx,$this->ly,$back);
       if ($noise) { // rand characters in background with random position, angle, color

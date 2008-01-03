@@ -95,8 +95,7 @@
 				exit();
 			}
 			
-			//inlude class
-			require ('includes/ocr_captcha.php');
+
 			//start check class
 			$ch = new ocr_captcha;
 

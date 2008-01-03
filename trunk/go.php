@@ -48,8 +48,7 @@
 	case "report" : //=============================[report]
 
 
-	//inlude class
-	require ('includes/ocr_captcha.php');
+
 	//start check class
 	$ch = new ocr_captcha;
 
@@ -159,7 +158,7 @@
 	case "call" : //=============================[call]
 
 	//inlude class
-	require ('includes/ocr_captcha.php');
+	
 	//start check class
 	$ch = new ocr_captcha;
 

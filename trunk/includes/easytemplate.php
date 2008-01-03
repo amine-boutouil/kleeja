@@ -42,15 +42,15 @@
 		);
 		//Replacements Array
 		var $reps = array(
-		"<?= \$var[\"\\1\"]?>",
-		"<?= \$this->vars[\"\\1\"]?>",
-		"<? foreach(\$this->vars[\"\\2\"] as \$key=>\$var){ ?>",
-		"<? \$this->_limit(\"\\2\",\\4);foreach(\$this->vars[\"\\2\"] as \$key=>\$var){ ?>",
-		"<? } ?>",
-		"<?} else {?>",
-		"<? } ?>",
-		"<?= \$this->_switch(\$this->vars[\"\\1\"],\"\\2\",\"\\3\")?>",
-		"<?= EasyTemplate::_include(\"\\1\",array(\"\$this->Temp\",\"\$this->Cache\")); ?>"
+		"<?php print \$var[\"\\1\"]?>",
+		"<?php print \$this->vars[\"\\1\"]?>",
+		"<?php foreach(\$this->vars[\"\\2\"] as \$key=>\$var){ ?>",
+		"<?php \$this->_limit(\"\\2\",\\4);foreach(\$this->vars[\"\\2\"] as \$key=>\$var){ ?>",
+		"<?php } ?>",
+		"<?php } else { ?>",
+		"<?php } ?>",
+		"<?php print \$this->_switch(\$this->vars[\"\\1\"],\"\\2\",\"\\3\")?>",
+		"<?php print EasyTemplate::_include(\"\\1\",array(\"\$this->Temp\",\"\$this->Cache\")); ?>"
 		);
 		function EasyTemplate(){
 			$php = (phpversion()>="4.3.0")?1:0;
@@ -83,9 +83,9 @@
 				$condition = "$matches[2]\"]==\"$matches[4]\"";
 			}
 			if(strtoupper($matches[1])=="LOOP"){
-				return "<? if(\$var[\"$condition){ ?>";
+				return "<?php if(\$var[\"$condition){ ?>";
 			}else{
-				return "<? if(\$this->vars[\"$condition){ ?>";
+				return "<?php if(\$this->vars[\"$condition){ ?>";
 			}
 		}
 	//Function to Switch Color.
@@ -99,7 +99,7 @@
 	//Function to Replace Array Variables
 		function _color_callback($matches){
 			$rand = rand();
-			return "=<?= (\$this->_sw($rand)) ? \"$matches[1]\":\"$matches[2]\"?>";
+			return "=<?php print (\$this->_sw($rand)) ? \"$matches[1]\":\"$matches[2]\"?>";
 		}
 	//switch Tag
 		function _switch($var,$case,$value){

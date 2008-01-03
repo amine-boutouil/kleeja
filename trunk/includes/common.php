@@ -40,10 +40,9 @@ $starttm = $starttm[1] + $starttm[0];
      }
 	  
 	//
-	if(@phpversion() >= '5.0.0') {
-	print '<span style="color:red;">Kleeja 1 doesnt work with php5, please wait Kleeja2 or convert to php4</span>';
-	
-	}
+	//if(@phpversion() >= '5.0.0') {
+	//print '<span style="color:red;">Kleeja 1 doesnt work with php5, please wait Kleeja2 or convert to php4</span>';
+	//}
 	
 	  
 	//include files .. & classes ..
@@ -55,7 +54,7 @@ $starttm = $starttm[1] + $starttm[0];
 	include ($path.'KljUploader.php');
 	include ($path.'usr.php');
 	include ($path.'pager.php');
-
+	include ($path.'ocr_captcha.php');
 
 	//no data.. install.php exists
 	if (!$dbname || !$dbuser)

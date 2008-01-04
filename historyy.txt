@@ -105,6 +105,9 @@ RC3 :
 - fix captcha [ was error with gd ] 
 - fix dome file and template engine to work with php5
 - fix some code on go.php and usercp.php
+- fix mysql class for security ..
+- rewrite some parts in kljuploader.php
++ add filename for error msg
 
 
 thank you for reading this file. 

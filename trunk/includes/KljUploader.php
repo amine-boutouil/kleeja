@@ -3,24 +3,24 @@
 #						Kleeja
 #
 # Filename : KljUplaoder.php
-# purpose :  main class of script
+# purpose :  skeleton of script
 # copyright 2007 Kleeja.com ..
 #class by :  based on class.AksidSars.php  of Nadorino [@msn.com]
 # last edit by : saanina
 ##################################################
 
-	  if (!defined('IN_COMMON'))
-	  {
-	  echo '<strong><br /><span style="color:red">[NOTE]: This Is Dangrous Place !! [2007 saanina@gmail.com]</span></strong>';
-	  exit();
-	  }
+//no for directly open
+if (!defined('IN_COMMON'))
+{
+	exit;
+}
 
 class KljUploader
 {
     var $folder;
-    var $action; //page action
-    var $filesnum; //number of fields
-    var $types;  // filetypes
+    var $action;		 //page action
+    var $filesnum; 		//number of fields
+    var $types; 		 // filetypes
     var $ansaqimages;   // imagestypes
     var $filename;     // filename
 	var $sizes;
@@ -29,17 +29,21 @@ class KljUploader
 	var $id_for_url;
     var $filename2;  //alternative file name
     var $linksite;    //site link
-    var $decode;     // decoding name with md5 or time
+    var $decode;     // decoding name with md5 or time or no
 	var $id_user;
 	var $errs = array();
-	var $safe_code;
+	var $safe_code;	// captcha is on or off 
 
 
 /**
+// watermark
 // source : php.net
  */
- function watermark($name, $ext, $logo){
-
+ function watermark($name, $ext, $logo)
+ {
+ 
+	($hook = kleeja_run_hook('watermark_func_kljuploader')) ? eval($hook) : null; //run hook	
+	
 	if (preg_match("/jpg|jpeg/",$ext))
 	{
 		$src_img=imagecreatefromjpeg($name);
@@ -61,8 +65,8 @@ class KljUploader
     $lheight = imageSY($src_logo);
 	
 	//fix bug for 1beta3
-	if ( $bwidth > 160 &&  $bheight > 130 )
-	{ 
+	if ($bwidth > 160 &&  $bheight > 130)
+	{
 	
 		    $src_x = $bwidth - ($lwidth + 5);
 		    $src_y = $bheight - ($lheight + 5);
@@ -97,9 +101,10 @@ class KljUploader
 	creates a resized image
 	source :http://icant.co.uk/articles/phpthumbnails/
 */
-function createthumb($name,$ext,$filename,$new_w,$new_h)
+function createthumb($name, $ext, $filename, $new_w, $new_h)
 {
-
+	($hook = kleeja_run_hook('createthumb_func_kljuploader')) ? eval($hook) : null; //run hook	
+	
 	if (preg_match("/jpg|jpeg/",$ext))
 	{
 		$src_img=imagecreatefromjpeg($name);
@@ -155,43 +160,42 @@ function createthumb($name,$ext,$filename,$new_w,$new_h)
 
 
 
-################################
 
-
-################################
-
-function process () {
+//
+// prorcess
+//
+function process () 
+{
 		global $SQL,$dbprefix,$config,$lang;
 		global $use_ftp,$ftp_server,$ftp_user,$ftp_pass,$ch;
 
-//for folder
-if(!file_exists($this->folder))   // check folder
+// check folder
+if(!file_exists($this->folder)) 
 {
+	($hook = kleeja_run_hook('no_uploadfolder_kljuploader')) ? eval($hook) : null; //run hook	
+
 	$jadid	=	mkdir($this->folder);
 	$jadid2	=	mkdir($this->folder.'/thumbs');
 	
 	if($jadid)
 	{
-
 		$this->errs[]	=	$lang['NEW_DIR_CRT'];
 
-		$fo		=	fopen($this->folder."/index.html","w");
-		$fo2	=	fopen($this->folder."/thumbs/index.html","w");
-		$fw		=	fwrite($fo,'<p>KLEEJA ..</p>');
-		$fw2	=	fwrite($fo2,'<p>KLEEJA ..</p>');
-		$fi		=	fopen($this->folder."/.htaccess","w");
-		$fi2	=	fopen($this->folder."/thumbs/.htaccess","w");
-		$fy		=	fwrite($fi,'RemoveType .php .php3 .phtml .pl .cgi .asp .htm .html
-		php_flag engine off');
-		$fy2	=	fwrite($fi2,'RemoveType .php .php3 .phtml .pl .cgi .asp .htm .html
-		php_flag engine off');
-		$chmod	=	chmod($this->folder,0777);
-		$chmod2	=	chmod($this->folder.'/thumbs/',0777);
+		$fo		=	fopen($this->folder . "/index.html","w");
+		$fo2	=	fopen($this->folder . "/thumbs/index.html","w");
+		$fw		=	fwrite($fo,'<a href="http://kleeja.com"><p>KLEEJA ..</p></a>');
+		$fw2	=	fwrite($fo2,'<a href="http://kleeja.com"><p>KLEEJA ..</p></a>');
+		$fi		=	fopen($this->folder . "/.htaccess", "w");
+		$fi2	=	fopen($this->folder . "/thumbs/.htaccess","w");
+		$fy		=	fwrite($fi,"RemoveType .php .php3 .phtml .pl .cgi .asp .htm .html \n php_flag engine off");
+		$fy2	=	fwrite($fi2,"RemoveType .php .php3 .phtml .pl .cgi .asp .htm .html \n php_flag engine off");
+		$chmod	=	chmod($this->folder, 0777);
+		$chmod2	=	chmod($this->folder . '/thumbs/', 0777);
 
 		if(!$chmod)
 		{
 			$this->errs[]=   $lang['PR_DIR_CRT'];
-		} //if !chmod
+		} 
 	}
 	else
 	{
@@ -200,26 +204,32 @@ if(!file_exists($this->folder))   // check folder
 }
 
 	//then wut did u click
-	if (isset($_POST['submitr'])) {
-		$wut=1;
+	if (isset($_POST['submitr']))
+	{
+		$wut	=	1;
 	}
-	elseif(isset($_POST['submittxt'])){
-		$wut=2;
+	elseif(isset($_POST['submittxt']))
+	{
+		$wut	=	2;
 	}
 
-	//safe_code
-	if($this->safe_code and ($wut==1 or $wut==3))
+
+	//safe_code .. captcha is on
+	if($this->safe_code &&($wut==1 || $wut==2)) 
 	{
-		if(!$ch->check_captcha($_POST['public_key'],$_POST['answer_safe']))
+		if(!$ch->check_captcha($_POST['public_key'], $_POST['answer_safe']))
 		{
-			return $this->errs[]= $lang['WRONG_VERTY_CODE'];
+			($hook = kleeja_run_hook('wrong_captcha_kljuploader')) ? eval($hook) : null; //run hook	
+			 return $this->errs[]	= $lang['WRONG_VERTY_CODE'];
 		}
 	}
 	
-	// no url
+	// uploading process 
 	if ($wut == 1)
 	{
-	 #-----------------------------------------------------------------------------------------------------------------------------------------------------------#
+		($hook = kleeja_run_hook('submit_filesupload_kljuploader')) ? eval($hook) : null; //run hook	
+	
+		//
 		for($i=0;$i<$this->filesnum;$i++)
 		{
 			$this->filename2	=	@explode(".",$_FILES['file']['name'][$i]);
@@ -227,16 +237,16 @@ if(!file_exists($this->folder))   // check folder
 			$this->typet		=	$this->filename2;
 			$this->sizet		=	$_FILES['file']['size'][$i];
 			
-				//tashfer [decode]
+				// decoding
 				if($this->decode == "time")
 				{
-					$zaid=time();
+					$zaid	=	time();
 					$this->filename2=$this->filename.$zaid.$i.".".$this->filename2;
 				}
 				elseif($this->tashfir == "md5")
 				{
-					$zaid=md5(time());
-					$zaid=substr($zaid,0,10);
+					$zaid	=	md5(time());
+					$zaid	=	substr($zaid,0,10);
 					$this->filename2=$this->filename.$zaid.$i.".".$this->filename2;
 				}  
 				else
@@ -244,11 +254,11 @@ if(!file_exists($this->folder))   // check folder
 					//real name of file
 					$this->filename2=$_FILES['file']['name'][$i];
 				}
-				//end tashfer
+				
 
 				if(empty($_FILES['file']['tmp_name'][$i]))
 				{
-					//nathin
+					//if no file ? natin to do ,, why ? becuase its multipl fields
 				}
 				elseif(file_exists($this->folder.'/'.$_FILES['file']['name'][$i]))
 				{
@@ -268,24 +278,30 @@ if(!file_exists($this->folder))   // check folder
 				}
 			    else
 			    {
-#----------------------------------------------------------uplaod----------------------------------------------------------------------
-//ob_end_flush();
-//flush();
+				//
+				// no errors , so uploading
+				//
+				
+						//ob_end_flush();
+						//flush();
 						if (!$use_ftp)
 						{
+									($hook = kleeja_run_hook('move_uploaded_file_kljuploader')) ? eval($hook) : null; //run hook	
 									$file = move_uploaded_file($_FILES['file']['tmp_name'][$i], $this->folder."/".$this->filename2);
 						}
 						else // use ftp account
 						{
+									($hook = kleeja_run_hook('ftp_connect_kljuploader')) ? eval($hook) : null; //run hook
 									// set up a connection or die
-									$conn_id = @ftp_connect($ftp_server);
+									$conn_id		= @ftp_connect($ftp_server);
 						            // Login with username and password
-						            $login_result = @ftp_login($conn_id, $ftp_user, $ftp_pass);
+						            $login_result	= @ftp_login($conn_id, $ftp_user, $ftp_pass);
 
 						            // Check the connection
-						            if ((!$conn_id) || (!$login_result)) {
+						            if ((!$conn_id) || (!$login_result)) 
+									{
 						                  $this->errs[]= $lang['CANT_CON_FTP'] . $ftp_server;
-						                }
+									}
 						            // Upload the file
 						            $file = @ftp_put($conn_id, $this->folder."/".$this->filename2,$_FILES['file']['tmp_name'][$i], FTP_BINARY);
 									@ftp_close($conn_id);
@@ -300,14 +316,15 @@ if(!file_exists($this->folder))   // check folder
 						{
 							$this->errs[]	= '[ ' . $this->filename2 . ' ] ' . $lang['CANT_UPLAOD'];
 						}
-#-----------------------------------------------------------------------------------------------------------------------------------------------------------#
-					}
+
+				}
 		}#for ... lmean loop
 
 
 	}#wut=1
-	elseif ( $wut == 2 && $config['www_url'] == '1' )
+	elseif ($wut == 2 && $config['www_url'] == '1')
 	{
+		($hook = kleeja_run_hook('submit_urlupload_kljuploader')) ? eval($hook) : null; //run hook
 		//looop text inputs
 		for($i=0;$i<$this->filesnum;$i++)
 		{
@@ -360,20 +377,23 @@ if(!file_exists($this->folder))   // check folder
 								{
 									$this->errs[]= '[ ' . $_FILES['file']['name'][$i] . ' ] ' . $lang['FORBID_EXT'] . '['.$this->typet.']';
 							    }
-								else //end err .. start upload
+								else
 								{
-
-								//sooo
+								
+								//
+								//end err .. start upload from url
+								//
 										if (function_exists('curl_init'))
 										{
-
+												($hook = kleeja_run_hook('curlupload_kljuploader')) ? eval($hook) : null; //run hook
+	
 												// attempt retrieveing the url
 												$curl_handle=curl_init();
-												curl_setopt($curl_handle,CURLOPT_URL,$_POST['file'][$i]);
-												curl_setopt($curl_handle,CURLOPT_TIMEOUT,30);
-												curl_setopt($curl_handle,CURLOPT_CONNECTTIMEOUT,15);
-												curl_setopt($curl_handle,CURLOPT_RETURNTRANSFER,1);
-												curl_setopt($curl_handle,CURLOPT_FAILONERROR,1);
+												curl_setopt($curl_handle, CURLOPT_URL,$_POST['file'][$i]);
+												curl_setopt($curl_handle, CURLOPT_TIMEOUT,30);
+												curl_setopt($curl_handle, CURLOPT_CONNECTTIMEOUT,15);
+												curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER,1);
+												curl_setopt($curl_handle, CURLOPT_FAILONERROR,1);
 												$data = curl_exec($curl_handle);
 												curl_close($curl_handle);
 
@@ -386,12 +406,12 @@ if(!file_exists($this->folder))   // check folder
 												else
 												{
 													//then ..write new file
-												    $fp2 = @fopen($this->folder."/".$this->filename2,"w");
-												    fwrite($fp2,$data);
+												    $fp2 = @fopen($this->folder . "/".$this->filename2,"w");
+												    fwrite($fp2, $data);
 												    fclose($fp2);
 												}
 
-												$this->saveit ($this->filename2,$this->folder,$this->sizet,$this->typet);
+												$this->saveit ($this->filename2, $this->folder, $this->sizet, $this->typet);
 										}
 										else
 										{
@@ -409,13 +429,16 @@ if(!file_exists($this->folder))   // check folder
 
 
 
-
-function saveit ($filname,$folderee,$sizeee,$typeee) { //
+//
+// save data and insert in the database
+//
+function saveit ($filname, $folderee, $sizeee, $typeee)
+{
 		global $SQL,$dbprefix,$config,$lang;
 
 				// sometime cant see file after uploading.. but ..
-				chmod($filname."/".$folderee, 0755);//0755
-//---------->
+				chmod($filname . "/" . $folderee, 0755); //0755
+
 				$name 	= (string)	$SQL->escape($filname);
 				$size	= (int) 	$sizeee;
 				$type 	= (string)	$SQL->escape($typeee);
@@ -423,15 +446,17 @@ function saveit ($filname,$folderee,$sizeee,$typeee) { //
 				$timeww	= (int)		time();
 				$user	= (int)		$this->id_user;
 				$code_del=(string)	md5(time());
-
-				$insert	= $SQL->query("INSERT INTO `{$dbprefix}files`(
-				`name` ,`size` ,`time` ,`folder` ,`type`,`user`,`code_del`
-				)
-				VALUES (
-				'$name','$size','$timeww','$folder','$type','$user','$code_del'
-				)");
-
-				if (!$insert) 
+				
+				
+				$insert_query = array(
+									'INSERT'	=> '`name` ,`size` ,`time` ,`folder` ,`type`,`user`,`code_del`',
+									'INTO'		=> "`{$dbprefix}files`",
+									'VALUES'	=> "'$name', '$size', '$timeww', '$folder','$type', '$user', '$code_del'"
+									);
+									
+				($hook = kleeja_run_hook('qr_insert_new_file_kljuploader')) ? eval($hook) : null; //run hook
+				
+				if (!$SQL->build($insert_query)) 
 				{ 
 					$this->errs[]=  $lang['CANT_INSERT_SQL'];
 				}
@@ -439,46 +464,39 @@ function saveit ($filname,$folderee,$sizeee,$typeee) { //
 				$this->id_for_url =  $SQL->insert_id();
 
 				//calculate stats ..s
-					$update1 = $SQL->query("UPDATE `{$dbprefix}stats` SET
-					`files`=files+1,
-					`sizes`=sizes+" . $size . ",
-					`last_file`='" . $folder ."/". $name . "'
-					");
-					
-					if (!$update1)
-					{
-						die($lang['CANT_UPDATE_SQL']);
-					}
-				//calculate stats ..e
-//<---------------
-	//must be img //
-					$this->imgstypes	= array('png','gif','jpg','jpeg','tif','tiff');
-					$this->thmbstypes	= array('png','jpg','jpeg','gif');
-					
-					if ($config[del_url_file])
+				$update_query = array(
+									'UPDATE'	=> "{$dbprefix}stats",
+									'SET'		=> "`files`=files+1,`sizes`=sizes+" . $size . ",`last_file`='" . $folder ."/". $name . "'"
+								);
+								
+				($hook = kleeja_run_hook('qr_update_no_files_kljuploader')) ? eval($hook) : null; //run hook
+				if (!$SQL->build($update_query)){ die($lang['CANT_UPDATE_SQL']);}	
+
+					//show del code link
+					if ($config['del_url_file'])
 					{
 							$extra_del	= $lang['URL_F_DEL'] . ':<br /><textarea rows=2 cols=49 rows=1>';
-							$extra_del	.= $this->linksite.(($config[mod_writer]) ? "del".$code_del.".html" : 'go.php?go=del&amp;cd='.$code_del );
+							$extra_del	.= $this->linksite.(($config[mod_writer]) ? "del" .$code_del. ".html" : 'go.php?go=del&amp;cd=' . $code_del );
 							$extra_del	.='</textarea><br/>';
 					}
 
 
 					//show imgs
-					if (in_array(strtolower($this->typet),$this->imgstypes))
+					if (in_array(strtolower($this->typet), array('png','gif','jpg','jpeg','tif','tiff')))
 					{
 
 						//make thumbs
-						if( ($config[thumbs_imgs]!=0) && in_array(strtolower($this->typet),$this->thmbstypes))
+						if( ($config['thumbs_imgs']!=0) && in_array(strtolower($this->typet), array('png','jpg','jpeg','gif')))
 						{
-							$this->createthumb($folderee."/".$filname,strtolower($this->typet),$folderee.'/thumbs/'.$filname,100,100);
-							$extra_thmb = $lang['URL_F_THMB'] . ':<br /><textarea rows=2 cols=49 rows=1>';
-							$extra_thmb .= '[url='.$this->linksite.(($config[mod_writer]) ? "image".$this->id_for_url.".html" : "download.php?img=".$this->id_for_url ).'][img]'.$this->linksite.$folderee.'/thumbs/'.$filname.'[/img][/url]';
-							$extra_thmb .= '</textarea><br />';
-							$extra_show_img = '<div style="text-align:center"><img src="'.$this->linksite.(($config[mod_writer]) ? "thumb".$this->id_for_url.".html" : "download.php?thmb=".$this->id_for_url ).'" /></div></br>';
+							$this->createthumb($folderee . "/" . $filname,strtolower($this->typet),$folderee . '/thumbs/' . $filname, 100, 100);
+							$extra_thmb 	= $lang['URL_F_THMB'] . ':<br /><textarea rows=2 cols=49 rows=1>';
+							$extra_thmb 	.= '[url='.$this->linksite . (($config['mod_writer']) ? "image" . $this->id_for_url . ".html" : "download.php?img=".$this->id_for_url ).'][img]'.$this->linksite.$folderee.'/thumbs/'.$filname.'[/img][/url]';
+							$extra_thmb 	.= '</textarea><br />';
+							$extra_show_img = '<div style="text-align:center"><img src="'.$this->linksite.(($config['mod_writer']) ? "thumb".$this->id_for_url.".html" : "download.php?thmb=".$this->id_for_url ).'" /></div></br>';
 						}
 						
 						//write on image
-						if( ($config[write_imgs]!=0) && in_array(strtolower($this->typet),$this->thmbstypes))
+						if( ($config['write_imgs']!=0) && in_array(strtolower($this->typet), array('png','jpg','jpeg','gif')))
 						{
 							$this->watermark($folderee . "/" . $filname,strtolower($this->typet), 'images/watermark.png');
 						}
@@ -498,11 +516,13 @@ function saveit ($filname,$folderee,$sizeee,$typeee) { //
 								'.$extra_del;
 					}
 
+					($hook = kleeja_run_hook('saveit_func_kljuploader')) ? eval($hook) : null; //run hook
+						
 					unset ($filename,$folderee,$sizeee,$typeee);
+					
+				
 
 }#save it
-
-
 
 
 }#end class

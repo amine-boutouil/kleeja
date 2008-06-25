@@ -1,0 +1,136 @@
+############################
+# kleeja history .. 
+############################
+
+---------------------------------
+Guide : 
++  : add .. 
+-  : fix .. 
+---------------------------------
+
+beta..
++ first release .. 
+
+beta1 : 
+ -  fix progress picture ..
++ install file ..
++ more opitions in cp
+
+beta2
++ stats page .
++ automatic delete for files ..
++ upload url .. 
++ more opitions in cp
++ advanced cache ..
++ who online .. with allow from acp
++ visitors countor for today ..
++ visitors countor for yesterday and all days..
++ googleanalytics code .. 
++ ban system (cp + full ips ban )
+
+beta3 
++ english language 
+-  some language words
+- insert data bugs 
++antifloods system
++show thumbs when image uploads 
+- some bugs with creat thumbs and watermark
+
+beta4 [ 15-12-2007]
+-  fix bug with admin panel [extensions section]
++ seperate javascript in seperated file 
+- fix flood system.
+- fix cache system.
++ specific image for wrong images or delted images.
+
+
+beta 5 ..
++ add new code of google analytics.
++ add last time for google visit 
++ add numbers of google visits
++ add last time for yahoo visit 
++ add numbers of  yahoo visits
++ add rules panel in cp .. 
++ add rules in cache .. 
++ add select for languages in cp 
++ add select for styles in cp 
++add Mod Rewriter in all important links 
++ add mod Rewriter as option an cp 
++ add docs folder with important files
+
+beta 6 : 
++ new mysql class .. [ more stable, more strong ] 
++ new pages system [pager class].. 
++ new advanced search system in cp.. 
+- reprogram cp admin ,, 
++ fix backup cp section
++ multiple inputs for link download ,,
++ add images panel [ thumbs] in cp
++add extra [header+footer] panel 
++ public user folder 
+
+RC1 : 
++ new design for default style
+- fix usefile section 
+- fix filecp section
+- fix install file [ sql 40 ]
++ add new variable to err file [ go to back browser ] 
+- fix image section in paenl [ more <td> , no <tr> ]
+ - fix advanced search in admin cp 
++ add new captcha system
++ add safe_code in upload if you want .. [ more security]
+- seperate upload codes to style [ good for designers ]
++ seperate javascript to real javascript file [ b4 was php file ] [ good for designers ]
+- fix time format in admin cp [start page ]
++ add last files or imgs from last visit [ just for kleeja user system ]
+- fix cache system [ related with rules cache ]
+- rebulid admin cp style
+-fix slsecting language in install file
+- fix login or logout admin when center closed or size limited ..
+- fix some features to be able work when someone converted from another script 
+- fix error in admin file when limited size is zero .. 
+
+
+RC2 : 
+- fix pager syatem [ was no more one page ]
+ -fix page number in all sections in admin.php file
+- fix page number in usercp file 
+ - fix bbcodes links , cuz its doesnt work with forums ..
++ add copyrights in footer for the user .. not for kleeja .. but keeja is powerd by ... so dont remove it man 
++ add install help file in docs install_ar.html 
+
+
+RC3 : 
+ - fix captcha  ,, 
+- fix captcha [ was error with gd ] 
+- fix some files and template engine to work with php5 and php4
+- fix some codes on go.php and usercp.php
+- fix mysql class for security ..
+- rewrite some parts in kljuploader.php
++ add filename for error msg
+- fix big error when join with forum system
++ add new sql system prepared to use hook system in future
+- rewriting many codes and using new sql system 
++ add new style system controlling from acp .. 
++ add xml style file sytrem to export and import 
++ add new lang system controlling from acp and edit alots of template to put language vars
++ add xml language file sytrem to export and import 
++ add plugins system controlling from acp .. 
++ add xml style file sytrem to import plugins 
++ add many snaps of hook system and we will improve it in future  .. 
+ - fix error system and info system 
+- rewriting some codes for error and info system 
++ add some features for debug system .. [?debug=1 just for admin]
+-fix automatic deleting system 
++ new admin extensions system ( every section as a file )
+- fix admin css with firefox [ and javascript  error with edit_tpl template]
+-fix backup system  and improve teqnique to put new tables in futres
++- new install+update system
+- fix extension in acp , error when change some ext.'s doesnt change : ). 
+-fix style (some vars to be easy to redesign after now) and fix uploader class for captcha issue .
+-fix info msg in index [ security field is worng ] 
++ add new instruction for style class [ ODD + EVEN + RAND] 
+---------------- todo 
+
+
+thank you for reading this file. 

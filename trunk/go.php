@@ -4,104 +4,96 @@
 #
 # Filename : go.php
 # purpose :  File for Navigataion .
-# copyright 2007 Kleeja.com ..
+# copyright 2007-2008 Kleeja.com ..
 # last edit by : saanina
 ##################################################
 
-	// security ..
-	define ( 'IN_INDEX' , true);
-	//include imprtant file ..
-	require ('includes/common.php');
+// security ..
+define ('IN_INDEX' , true);
+//include imprtant file ..
+require ('includes/common.php');
+
+($hook = kleeja_run_hook('begin_go_page')) ? eval($hook) : null; //run hook
 
 
-	switch ($_GET['go']) {
-	case "guide" : //=============================[guide]
-	$stylee = "guide.html";
+switch ($_GET['go'])
+{
+	case "guide" : 
+
+	$stylee = "guide";
 	$titlee = $lang['GUIDE'];
-	$text_msg_g = $lang['GUIDE_VISITORS'];
-	$text_msg_u = $lang['GUIDE_USERS'];
-	$L_EXT	= $lang['EXT'];
-	$L_SIZE = $lang['SIZE'];
+
 	//make it loop
+	$gusts_data = array();
 	foreach($g_exts as $s )
 	{
-		$gggg[] = array( 'ext' => $s,
-						'num' => Customfile_size($g_sizes[$s])
-		);
-
+		$gusts_data[] = array( 'ext'	=> $s,
+								'num'	=> Customfile_size($g_sizes[$s])
+							);
 	}
-
-	if (!is_array($gggg)){$gggg = array();}
 
 	//make it loop
+	$users_data = array();
 	foreach($u_exts as $s )
 	{
-	$uuuu[] = array( 'ext' => $s,
-					'num' => Customfile_size($u_sizes[$s])
-
-	);
+		$users_data[] = array(	'ext' => $s,
+								'num' => Customfile_size($u_sizes[$s])
+	
+							);
 	}
-	if (!is_array($uuuu)){$uuuu = array();}
+	
 
+	($hook = kleeja_run_hook('guide_go_page')) ? eval($hook) : null; //run hook
+	
+	break;
+	
+	case "report" :
 
-	break; //=================================================
-	case "report" : //=============================[report]
-
-
-
-	//start check class
+	//start captcha class
 	$ch = new ocr_captcha;
 
-
-	if ( !isset($_POST['submit']) )
+	if (!isset($_POST['submit']))
 	{
-	$stylee = "report.html";
-	$titlee = $lang['REPORT'];
-	$url_id = ($config[mod_writer]) ? $config[siteurl]."download".intval($_GET['id']).".html" : $config[siteurl]."download.php?id=".intval($_GET['id']);
-	$action = "./go.php?go=report";
-	$submit = $lang['REPORT'];
-	$L_NAME = $lang['YOURNAME'];
-	$L_MAIL = $lang['EMAIL'];
-	$L_URL 	= $lang['URL'];
-	$L_TEXT = $lang['REASON'];
-	$L_CODE = $lang['VERTY_CODE'];
-	$code = $ch->display_captcha(true);
-	$id_d = intval($_GET['id']);
-
-
-		// first
-	if (!$_GET['id']) {
-			$text = $lang['NO_ID'];
-			$stylee = 'err.html';
-	}
-
+			$stylee = "report";
+			$titlee = $lang['REPORT'];
+			$url_id = ($config['mod_writer']) ? $config['siteurl']."download".intval($_GET['id']).".html" : $config['siteurl']."download.php?id=".intval($_GET['id']);
+			$action = "./go.php?go=report";
+			$code	= $ch->display_captcha(true);
+			$id_d	= intval($_GET['id']);
+			
+			// first
+			if (!$_GET['id'])
+			{
+				kleeja_err($lang['NO_ID']);
+			}
+			
+			($hook = kleeja_run_hook('no_submit_report_go_page')) ? eval($hook) : null; //run hook
 	}
 	else
 	{
+		$ERRORS	=	'';
+		($hook = kleeja_run_hook('submit_report_go_page')) ? eval($hook) : null; //run hook
 
 		if (empty($_POST['rname']) || empty($_POST['rmail']) || empty($_POST['rurl']) )
 		{
-
-			$text = $lang['EMPTY_FIELDS'];
-			$stylee = 'err.html';
-
+			$ERRORS[]	=	$lang['EMPTY_FIELDS'];
 		}
 		else if (!eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$", trim($_POST['rmail'])))
 		{
-			$text = $lang['WRONG_EMAIL'];
-			$stylee = 'err.html';
+			$ERRORS[]	=	$lang['WRONG_EMAIL'];
 		}
-		else if (strlen($_POST['rtext']) > 300 )
+		else if (strlen($_POST['rtext']) > 300)
 		{
-			$text = $lang['NO_ME300RES'];
-			$stylee = 'err.html';
+			$ERRORS[]	=	$lang['NO_ME300RES'];
 		}
-		else if ( !$ch->check_captcha($_POST['public_key'],$_POST['code_answer']) )
+		else if (!$ch->check_captcha($_POST['public_key'], $_POST['code_answer']))
 		{
-			$text = $lang['WRONG_VERTY_CODE'];
-			$stylee = 'err.html';
+			$ERRORS[]	=	$lang['WRONG_VERTY_CODE'];
 		}
-		else
+		
+		
+		
+		if(empty($ERRORS))
 		{
 				$name	= (string)	$SQL->escape($_POST['rname']);
 				$text	= (string)	$SQL->escape($_POST['rtext']);
@@ -109,284 +101,317 @@
 				$url	= (string)	$_POST['rurl'];
 				$time 	= (int)		time();
 				$rid	= (int)		$_POST['rid'];
-
-				if (getenv('HTTP_X_FORWARDED_FOR')){
-				$ip=  getenv('HTTP_X_FORWARDED_FOR');
-				} else {
-				$ip=  getenv('REMOTE_ADDR');}
+				$ip  	=	(getenv('HTTP_X_FORWARDED_FOR')) ? getenv('HTTP_X_FORWARDED_FOR') : getenv('REMOTE_ADDR');
 
 
-				$insert = $SQL->query("INSERT INTO `{$dbprefix}reports` (
-				`name` ,`mail` ,`url` ,`text` ,`time` ,`ip`
-				)
-				VALUES (
-				'$name','$mail','$url','$text','$time','$ip'
-				)");
-
-				$update = $SQL->query("UPDATE {$dbprefix}files SET
-								report=report+1
-	                            WHERE id='$rid' ");
-
-
-				if (!$insert) {
-				$text =  $lang['CANT_INSERT_SQL'];
-				$stylee = 'err.html';
+				$insert_query = array(
+					'INSERT'	=> '`name` ,`mail` ,`url` ,`text` ,`time` ,`ip`',
+					'INTO'		=> "`{$dbprefix}reports`",
+					'VALUES'	=> "'$name','$mail','$url','$text','$time','$ip'"
+				);
+				
+				($hook = kleeja_run_hook('qr_insert_new_report')) ? eval($hook) : null; //run hook
+		
+				if (!$SQL->build($insert_query))
+				{
+					kleeja_err($lang['CANT_INSERT_SQL']);
 				}
 				else
 				{
-				$text = $lang['THNX_REPORTED'];
-				$stylee = 'info.html';
+					kleeja_info($lang['THNX_REPORTED']);
 				}
-
-				if (!$update){ die($lang['CANT_UPDATE_SQL']);}
-		}
-	}
-	break; //=================================================
-	case "rules" : //=============================[rules]
-	$stylee = "rules.html";
-	$titlee = $lang['RULES'];
-	$text_msg = $lang['E_RULES'];
-	
-	//prevent empty !!
-	if (strlen($ruless) > 5 ){
-		$contents = stripslashes($ruless);
-	}else{
-		$contents = $lang['NO_RULES_NOW'];
-	}
-	
-	break; //=================================================
-	case "call" : //=============================[call]
-
-	//inlude class
-	
-	//start check class
-	$ch = new ocr_captcha;
-
-
-	if ( !isset($_POST['submit']) )
-	{
-	$stylee = "call.html";
-	$titlee = $lang['CALL'];
-	$action = "./go.php?go=call";
-	$submit = $lang['SEND'];
-	$L_NAME = $lang['YOURNAME'];
-	$L_MAIL = $lang['EMAIL'];
-	$L_TEXT = $lang['TEXT'];
-	$L_CODE = $lang['VERTY_CODE'];
-	$code = $ch->display_captcha(true);
-
-	}
-	else
-	{
-
-		if (empty($_POST['cname']) || empty($_POST['cmail']) || empty($_POST['ctext']) )
-		{
-
-			$text = $lang['EMPTY_FIELDS'];
-			$stylee = 'err.html';
-
-		}
-		else if (!eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$", trim($_POST['cmail'])))
-		{
-			$text = $lang['WRONG_EMAIL'];
-			$stylee = 'err.html';
-		}
-		else if (strlen($_POST['ctext']) > 300 )
-		{
-			$text = $lang['NO_ME300TEXT'];
-			$stylee = 'err.html';
-		}
-		else if ( !$ch->check_captcha($_POST['public_key'],$_POST['code_answer']) )
-		{
-			$text = $lang['WRONG_VERTY_CODE'];
-			$stylee = 'err.html';
+				
+				//update number of reports
+				$update_query = array(
+							'UPDATE'	=> "{$dbprefix}files",
+							'SET'		=> 'report=report+1',
+							'WHERE'		=> 'id='.$rid,
+							);
+							
+				($hook = kleeja_run_hook('qr_update_no_file_report')) ? eval($hook) : null; //run hook
+				
+				if (!$SQL->build($update_query)){ die($lang['CANT_UPDATE_SQL']);}
 		}
 		else
 		{
-			$name = (string) $SQL->escape($_POST['cname']);
-			$text = (string) $SQL->escape($_POST['ctext']);
-			$mail = (string) $_POST['cmail'];
-			$timee = (int) time();
-			if (getenv('HTTP_X_FORWARDED_FOR')){$ip= getenv('HTTP_X_FORWARDED_FOR');
-			} else {$ip=  getenv('REMOTE_ADDR');}
+				foreach($ERRORS as $r) 
+							$errs	.= '- ' . $r . '. <br/>';
+							
+				kleeja_err($errs);
+		}
+	}
+	
+	($hook = kleeja_run_hook('report_go_page')) ? eval($hook) : null; //run hook
+	
+	break; 
+	
+	
+	case "rules" :
+	
+	$stylee = "rules";
+	$titlee = $lang['RULES'];
+	
+	//prevent empty !!
+	if (strlen($ruless) > 5)
+	{
+		$contents = stripslashes($ruless);
+	}
+	else
+	{
+		$contents = $lang['NO_RULES_NOW'];
+	}
+	
+	($hook = kleeja_run_hook('rules_go_page')) ? eval($hook) : null; //run hook
+	
+	break;
+	
+	
+	case "call" : 
+	
+	//start  captcha class
+	$ch = new ocr_captcha;
 
-			$sql = "INSERT INTO `{$dbprefix}call` 	(
-			`name` ,`text` ,`mail` ,`time` ,`ip`
-			)
-			 VALUES (
-			 '$name', '$text', '$mail', '$timee', '$ip'
-			 )";
 
-			$insert = $SQL->query($sql);
+	if (!isset($_POST['submit']))
+	{
+		$stylee = "call";
+		$titlee = $lang['CALL'];
+		$action = "./go.php?go=call";
+		$code = $ch->display_captcha(true);
+		
+		($hook = kleeja_run_hook('no_submit_call_go_page')) ? eval($hook) : null; //run hook
+	}
+	else
+	{
+		$ERRORS	=	'';
+		($hook = kleeja_run_hook('submit_call_go_page')) ? eval($hook) : null; //run hook
+		
+		if (empty($_POST['cname']) || empty($_POST['cmail']) || empty($_POST['ctext']) )
+		{
+			$ERRORS[]	=	$lang['EMPTY_FIELDS'];
+		}
+		else if (!eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$", trim($_POST['cmail'])))
+		{
+			$ERRORS[]	=	$lang['WRONG_EMAIL'];
+		}
+		else if (strlen($_POST['ctext']) > 300)
+		{
+			$ERRORS[]	=	$lang['NO_ME300TEXT'];
+		}
+		else if (!$ch->check_captcha($_POST['public_key'], $_POST['code_answer']))
+		{
+			$ERRORS[]	=	$lang['WRONG_VERTY_CODE'];
+		}
+		
+		
+		
+		if(empty($ERRORS))
+		{
+			$name	= (string) $SQL->escape($_POST['cname']);
+			$text	= (string) $SQL->escape($_POST['ctext']);
+			$mail	= (string) $_POST['cmail'];
+			$timee	= (int) time();
+			$ip		= (int)	(getenv('HTTP_X_FORWARDED_FOR')) ? getenv('HTTP_X_FORWARDED_FOR') : getenv('REMOTE_ADDR');
+				
 
-			if (!$insert) {
-			$text = $lang['CANT_INSERT_SQL'];
-			$stylee = 'err.html';
+			$insert_query = array(
+					'INSERT'	=> "`name` ,`text` ,`mail` ,`time` ,`ip`",
+					'INTO'		=> "`{$dbprefix}call`",
+					'VALUES'	=> "'$name', '$text', '$mail', '$timee', '$ip'"
+				);
+				
+			($hook = kleeja_run_hook('qr_insert_new_call')) ? eval($hook) : null; //run hook
+		
+			if (!$SQL->build($insert_query))
+			{
+				kleeja_err($lang['CANT_INSERT_SQL']);
 			}
 			else
 			{
-			$text =$lang['THNX_CALLED'];
-			$stylee = 'info.html';
+				kleeja_info($lang['THNX_CALLED']);
 			}
 		}
+		else
+		{
+			foreach($ERRORS as $r) 
+				$errs	.= '- ' . $r . '. <br/>';
+							
+			kleeja_err($errs);
+		}
 	}
+	
+	($hook = kleeja_run_hook('call_go_page')) ? eval($hook) : null; //run hook
 
-	break; //=================================================
-	case "down" : //=============================[down]
+	break;
+	
+	
+	case "down" :
+	
+	($hook = kleeja_run_hook('begin_down_go_page')) ? eval($hook) : null; //run hook	
+	
 	//maybe ..
-	function saff ($var) {
-   	$var = str_replace(array('http', ':','//','/','>', '<', '.com', '.net', '.org'), '', $var);
-	return $var;
+	function saff ($var)
+	{
+		 return str_replace(array('http', ':','//','/','>', '<', '.com', '.net', '.org'), '', $var);
 	}
 
 
-
-	if ( isset($_GET['i']) )
+	if (isset($_GET['i']))
 	{
-	//for safe
-	$id = intval ($_GET['i']);
+		//for safe
+		$id = intval($_GET['i']);
 
-	//$urlsite = $config[siteurl]; // i cant trust user :)
-	$urlsite =  "http://".$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']).'/';
-	$URL = str_replace($urlsite ,'',$_SERVER['HTTP_REFERER']);
-	$URL = explode('?',$URL);
-	if ($URL[0] != "download.php")
-	{
-	$linkoo = ($config[mod_writer]) ? $urlsite . 'download' . $id .'.html' : $urlsite . 'download.php?id=' . $id;
-	header('Location: ' . $urlsite . 'download.php?id=' . $id);
+		//$urlsite = $config[siteurl]; // i cant trust user :)
+		$urlsite	= "http://".$_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . '/';
+		$URL 		= str_replace($urlsite ,'' ,$_SERVER['HTTP_REFERER']);
+		$URL 		= (strpos($URL, '?') !==false) ? @explode('?', $URL) : $URL;
+	
+		if (strpos($URL[0], 'download') === false)
+		{
+			$linkoo = ($config['mod_writer']) ? $urlsite . 'download' . $id .'.html' : $urlsite . 'download.php?id=' . $id;
+			header('Location: ' . $urlsite . 'download.php?id=' . $id);
+		
+		}
+		else //else refere
+		{
+			//updates ups ..
+			$update_query = array(
+					'UPDATE'	=> "{$dbprefix}files",
+					'SET'		=> 'uploads=uploads+1, last_down='. time(),
+					'WHERE'		=> "id='". $id ."'",
+				);
 
-	}else{//else refere
+			($hook = kleeja_run_hook('qr_update_no_uploads_down')) ? eval($hook) : null; //run hook
+			
+			if (!$SQL->build($update_query)){ die($lang['CANT_UPDATE_SQL']);}
 
+			//for safe !!!
+			$n = saff($_GET['n']);
+			$f = saff($_GET['f']);
 
-	//updates ups ..
-	$update = $SQL->query("UPDATE {$dbprefix}files SET
-							uploads=uploads+1,
-                            last_down='". time() . "'
-                            WHERE id='$id' ");
-	if (!$update){ die($lang['CANT_UPDATE_SQL']);}
-
-	//for safe !!!
-	$n = saff($_GET[n]);
-	$f = saff($_GET[f]);
-
-
-
-	//start download ,,
-	header("Location: ./$f/$n");
+			($hook = kleeja_run_hook('down_go_page')) ? eval($hook) : null; //run hook	
+			
+			//start download ,,
+			header("Location: ./$f/$n");
 
 		}//elser efer
 
-	exit(); // we doesnt need style
+		exit; // we doesnt need style
 
 	}
 
-	break; //=================================================
-	case "del" : //=============================[del]
+	break;
+	
+	
+	case "del" :
 
+	($hook = kleeja_run_hook('del_go_page')) ? eval($hook) : null; //run hook
+	
 	//stop .. check first ..
-	if (!$config[del_url_file])
+	if (!$config['del_url_file'])
 	{
-			$text = $lang['NO_DEL_F'];
-			$stylee = "info.html";
-			//header
-			Saaheader($lang['E_DEL_F']);
-			//index
-			print $tpl->display($stylee);
-			//footer
-			Saafooter();
-			exit();
+			kleeja_info($lang['NO_DEL_F'],$lang['E_DEL_F']);
 	}
 
 	//ok .. go on
 	//$id = intval($_GET['id']);
-	$cd = $_GET['cd']; // may.. will protect
+	$cd = $SQL->escape($_GET['cd']); // may.. will protect
 
-	if (!$cd )
+	if (!$cd)
 	{
-			$text =  $lang['WRONG_URL'];
-			$stylee = 'err.html';
+		kleeja_err($lang['WRONG_URL']);
 	}
 	else
 	{
-			$sql	=	$SQL->query("SELECT name,folder FROM `{$dbprefix}files` WHERE code_del='" . $cd . "'");
+		$query = array(
+					'SELECT'	=> 'f.name, f.folder',
+					'FROM'		=> "{$dbprefix}files f",
+					'WHERE'		=> "f.code_del='".$cd."'"
+				);
+				
+		($hook = kleeja_run_hook('qr_select_file_with_code_del')) ? eval($hook) : null; //run hook	
+			
+		$result	=	$SQL->build($query);
 
-			if ($SQL->num_rows($sql) == 0) {
-			$text =   $lang['CANT_DEL_F'];
-			$stylee = 'err.html';
-			}
-			else
+		if ($SQL->num_rows($result) == 0)
+		{
+			kleeja_err($lang['CANT_DEL_F']);
+		}
+		else
+		{
+			while($row=$SQL->fetch_array($sql))
 			{
-				while($row=$SQL->fetch_array($sql)){
-				@unlink ( $row[folder] . "/" . $row[name] );
+				@unlink ( $row['folder'] . "/" . $row['name'] );
 				//delete thumb
-					if (is_file($row[folder] . "/thumbs/" . $row[name]))
-					{@unlink ( $row[folder] . "/thumbs/" . $row[name] );}
-				//delete thumb
-					$del = $SQL->query("DELETE FROM {$dbprefix}files WHERE 	id='" . $row[id] . "' ");
-					if (!$del) {die($lang['CANT_DELETE_SQL']);}
+				if (is_file($row['folder'] . "/thumbs/" . $row['name']))
+				{
+					@unlink ( $row['folder'] . "/thumbs/" . $row['name'] );
 				}
-				$SQL->freeresult($sql);
-
-				$text = $lang['DELETE_SUCCESFUL'];
-				$stylee = 'info.html';
-
+				
+				$query_del = array(
+						'DELETE'	=> "{$dbprefix}files",
+						'WHERE'		=> "id='".$row['id']."'"
+						);
+						
+				($hook = kleeja_run_hook('qr_del_file_with_code_del')) ? eval($hook) : null; //run hook	
+				
+				if ($SQL->build($query_del))
+				{
+					kleeja_info($lang['DELETE_SUCCESFUL']);
+				}
+				else
+				{
+					die($lang['CANT_DELETE_SQL']);
+				}
+				
+				
+				
 			}
+				$SQL->freeresult($result);
+
+				
+		}
 
 	}
 
-	break; //=================================================
-	case "stats" : //=============================[del]
-
-	//stop .. check first ..
-	if (!$config[allow_stat_pg])
-	{
-			$text = $lang['STATS_CLOSED'];
-			$stylee = "info.html";
-			//header
-			Saaheader($lang['STATS_CLOSED']);
-			//index
-			print $tpl->display($stylee);
-			//footer
-			Saafooter();
-			exit();
-	}
-
-	//ok .. go on
-	$titlee 	= $lang['STATS'];
-	$stylee 	= "stats.html";
-	$n_explain 	= $lang['STATS'];
-	$n_files_st = $lang['FILES_ST'];
-	$n_file 	= $lang['FILE'];
-	$n_users_st = $lang['USERS_ST'];
-	$n_user 	= $lang['USER'];	
-	$n_sizes_st = $lang['SIZES_ST'];
-	//$n_lstfle_st= $lang['LSTFLE_ST'];
-	$n_lst_dl_st= $lang['LSTDELST'];
-	$n_dpnd_on_h= $lang['LAST_1_H'];
-	$n_s_c_t	= $lang['S_C_T'];
-	$n_s_c_y	= $lang['S_C_Y'];
-	$n_s_c_a	= $lang['S_C_A'];
+	break;
 	
-	//////
-	$files_st	= $stat_files;
-	$users_st	= $stat_users;
-	$sizes_st	= Customfile_size($stat_sizes);
-	//$lstfle_st	= $stat_last_file;
-	$lst_dl_st	= date("d-m-Y H:a", $stat_last_f_del);
-	$s_c_t		= $stat_counter_today;
-	$s_c_y		= $stat_counter_yesterday;
-	$s_c_a		= $stat_counter_all;
 	
-	break; //=================================================
-	/*case "example" : //=============================[example]
-	$stylee = "example.html"; //>> style
-	$titlee = $lang['EXAMPLE_TITLE'];  // >> title
-	break; //=================================================*/
+	case "stats" :
+
+		//stop .. check first ..
+		if (!$config['allow_stat_pg'])
+		{
+			kleeja_info($lang['STATS_CLOSED'],$lang['STATS_CLOSED']);
+		}
+
+		//ok .. go on
+		$titlee 	= $lang['STATS'];
+		$stylee 	= "stats";
+		$files_st	= $stat_files;
+		$users_st	= $stat_users;
+		$sizes_st	= Customfile_size($stat_sizes);
+		//$lstfle_st	= $stat_last_file;
+		$lst_dl_st	= date("d-m-Y H:a", $stat_last_f_del);
+		$s_c_t		= $stat_counter_today;
+		$s_c_y		= $stat_counter_yesterday;
+		$s_c_a		= $stat_counter_all;
+		
+		($hook = kleeja_run_hook('stats_go_page')) ? eval($hook) : null; //run hook
+		
+	break; 
+
+	($hook = kleeja_run_hook('another_case_go_page')) ? eval($hook) : null; //run hook
+	
 	default:
-	$text = $lang['ERROR_NAVIGATATION'];
-	$stylee = "err.html";
-	}#end switch
+	($hook = kleeja_run_hook('default_go_page')) ? eval($hook) : null; //run hook	
+	
+	kleeja_err($lang['ERROR_NAVIGATATION']);
+	
+	break;
+}#end switch
 
+($hook = kleeja_run_hook('end_go_page')) ? eval($hook) : null; //run hook
 
 	//show style ...
 	//header

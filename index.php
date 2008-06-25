@@ -4,7 +4,7 @@
 #
 # Filename : index.php 
 # purpose :  home page  .
-# copyright 2007 Kleeja.com ..
+# copyright 2007-2008 Kleeja.com ..
 # last edit by : saanina
 ##################################################
 
@@ -13,139 +13,127 @@
 	//include imprtant file .. 
 	require ('includes/common.php');
 	
+	($hook = kleeja_run_hook('begin_index_page')) ? eval($hook) : null; //run hook
+	
+	//type of how will decoding name ..
+	switch($config['decode']):
+	case 1	:	$decode = "time";	break;
+	case 2	:	$decode = "md5";	break;
+	default :	$decode = "";		break;
+	endswitch;
 
-	
-	//decode s
-	if ($config[decode] == 1 ) 
-	{
-		$decode = "time";
-	} 
-	elseif ($config[decode] == 2) 
-	{
-		$decode = "md5";
-	}
-	else{
-		$decode = "";
-	}
-	
-	
-	//safe code 
+
+	//safe code
 	if ($config['safe_code'])
 	{
-		//inlude class
-		require ('includes/ocr_captcha.php');
-		//start check class
 		$ch = new ocr_captcha;
 	}
 	
 	
-	
 	//start class .. 
 	$kljup->decode		=	$decode;              
-	$kljup->linksite	=	$config[siteurl]; 
-	$kljup->folder		=	$config[foldername];
-	$kljup->filename	=	$config[prefixname];
+	$kljup->linksite	=	$config['siteurl']; 
+	$kljup->folder		=	$config['foldername'];
+	$kljup->filename	=	$config['prefixname'];
 	$kljup->action		= 	$action = "index.php";
-	$kljup->filesnum	=	$config[filesnum];
+	$kljup->filesnum	=	$config['filesnum'];
 	//--------------------- s user system part
-	$kljup->types		= ($usrcp->name()) ? $u_exts : $g_exts;
-	$kljup->sizes		= ($usrcp->name()) ? $u_sizes : $g_sizes ;	
-	$kljup->id_user 	= ($usrcp->name()) ? $usrcp->id() : '-1';
-	$kljup->safe_code	= $config['safe_code'];
+	$kljup->types		=	($usrcp->name()) ? $u_exts : $g_exts;
+	$kljup->sizes		=	($usrcp->name()) ? $u_sizes : $g_sizes ;	
+	$kljup->id_user 	=	($usrcp->name()) ? $usrcp->id() : '-1';
+	$kljup->safe_code	=	$config['safe_code'];
 	//--------------------- e user system part
 	$kljup->process();
 
 	
-	
 
 	//show errors and info
-	foreach($kljup->errs as $s )
+	$info = array();
+	foreach($kljup->errs as $s )	
 	{
 		$info[] 	= array( 'i' => $s );
 	}
 	
-	if (!is_array($info))
-	{
-		$info = array();
-	}
-	
-	
 	//some words for template
-	$info_lang 		= $lang['INFORMATION'];
-	$welcome 		= $lang['WELCOME'];
-	$welcome_msg 	= $config[welcome_msg];
-	$NUMBER_ONLINE	= $lang['NUMBER_ONLINE'];
-	$NUMBER_UONLINE	= $lang['NUMBER_UONLINE'];
-	$NUMBER_VONLINE	= $lang['NUMBER_VONLINE'];
-	if ($config['safe_code']){
-	$SAFE_CODE		= $ch->display_captcha(true);
-	}
+	$welcome_msg 	= $config['welcome_msg'];
+	$SAFE_CODE		= ($config['safe_code']) ? $ch->display_captcha(true) : false;
+
 	
-	//for online .. 
-	if ($config[allow_online] == 1 ){
-	$visitornum	=	0;
-	$usersnum	=	0;
-	$show_online= true;
-	$OnlineNames = array();
-	$result 	= $SQL->query("SELECT DISTINCT(ip),username,agent FROM {$dbprefix}online");  
-	while($row=$SQL->fetch_array($result)){
-		//bot
-		if (strstr($row[agent], 'Googlebot'))
-		{
-			$usersnum++; 
-			$OnlineNames[] = '<span style="color:orange;">[Googlebot]</span>';
-		}
-		elseif (strstr($row[agent], 'Google')) 
-		{
-			$usersnum++; 
-			$OnlineNames[] = '<span style="color:orange;">[Googlebot]</span>';
-		}
-		elseif (strstr($row[agent], 'Yahoo! Slurp')) 
-		{
-			$usersnum++; 
-			$OnlineNames[] = '<span style="color:red;">[Yahoo!Slurp]</span>';
-		}
-		elseif (strstr($row[agent], 'Yahoo')) 
-		{
-			$usersnum++; 
-			$OnlineNames[] = '<span style="color:red;">[Yahoo!Slurp]</span>';
-		}
-		elseif($row[username] != "-1") 
-		{
-			$usersnum++; 
-			$OnlineNames[] =  $row[username];
-		}
-		else
-		{
-			$visitornum++; 
-		}
-	
-	} #while
-	
- 	$SQL->freeresult($result);
-	
-	foreach ($OnlineNames as $k) 
+	//
+	//for who online now..  
+	// i dont like this feature and i prefer close it
+	//
+	if ($config['allow_online'] == 1)
 	{
-		$shownames[] = array( name => $k );
-	}
 	
-	if (!is_array($shownames))
-	{
+		$visitornum		= $usersnum	=	0;
+		$show_online	= true;
+		$OnlineNames	= array();
+		
+		$query = array(
+				'SELECT'	=> 'DISTINCT(n.ip), n.username, n.agent',
+				'FROM'		=> "{$dbprefix}online n",
+				);
+				
+		($hook = kleeja_run_hook('qr_select_online_index_page')) ? eval($hook) : null; //run hook
+		$result	=	$SQL->build($query);  
+		
+		while($row=$SQL->fetch_array($result))
+		{
+			($hook = kleeja_run_hook('while_qr_select_online_index_page')) ? eval($hook) : null; //run hook	
+			
+			//bots
+			if (strstr($row['agent'], 'Googlebot') || strstr($row['agent'], 'Google'))
+			{
+				$usersnum++; 
+				$OnlineNames[] = '<span style="color:orange;">[Googlebot]</span>';
+			}
+			
+			if (strstr($row['agent'], 'Yahoo! Slurp') || strstr($row['agent'], 'Yahoo')) 
+			{
+				$usersnum++; 
+				$OnlineNames[] = '<span style="color:red;">[Yahoo!Slurp]</span>';
+			}
+			
+			//put another bot name
+			($hook = kleeja_run_hook('anotherbots_online_index_page')) ? eval($hook) : null; //run hook
+			
+			if($row['username'] != "-1") 
+			{
+				$usersnum++; 
+				$OnlineNames[] =  $row['username'];
+			}
+			else
+			{
+				$visitornum++; 
+			}
+		
+		} #while
+		
+	 	$SQL->freeresult($result);
+		
 		$shownames = array();
-	}
+		foreach ($OnlineNames as $k)	$shownames[] = array( name => $k );
+		
+		/*
+		wanna increase your onlines counter ..you can from next line 
+		 but you must know this is illegial method ... 
+		*/
+		$allnumbers = $usersnum + $visitornum;
+
+	($hook = kleeja_run_hook('if_online_index_page')) ? eval($hook) : null; //run hook	
 	
-	//wanna increas your onlines counter ..you can from next line 
-	// but you must no this is illegial ... 
-	$allnumbers = $usersnum +$visitornum;
-	}#allow_online
+}#allow_online
 	
-	
+	($hook = kleeja_run_hook('end_index_page')) ? eval($hook) : null; //run hook	
+
 	//for show .. 
 		//header
 		Saaheader($lang['HOME']);
 			//index
-			print $tpl->display("index_body.html");
+			print $tpl->display("index_body");
 		//footer
+		
 		Saafooter();
 	
 

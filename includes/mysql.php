@@ -7,8 +7,13 @@
 ##################################################
 
 
-if (!defined('IN_COMMON')) {die("Hacking attempt");	  exit(); }	  
- 
+//no for directly open
+if (!defined('IN_COMMON'))
+{
+	exit;
+}  
+
+	
 if(!defined("SQL_LAYER")){
 
 define("SQL_LAYER","mysql4");
@@ -16,39 +21,43 @@ define("SQL_LAYER","mysql4");
   
 class SSQL {
 
-/*****************/
+	var $connect_id              	= null;		
+	var $result;		
+	var $query_num					= 0;
+	var $mysql_version;
+	var $in_transaction 			= 0;
+	var $row						= array();
+	var $rowset						= array();
+	var $debugr						= false;
 
 
-var $connect_id              	=        null;		
-var $result;		
-var $query_num					= 			0;
-var $mysql_version;
-var $in_transaction 			=			0;
-var $row = array();
-var $rowset = array();
-var $debugr = false;
-/***************/
+				/*
+				initiate the class
+				wirth basic data
+				*/
                 function SSQL($host,$db_username,$db_password,$db_name)
 				{
                           $this->host        = $host;
                           $this->db_username = $db_username;
-						//
                           $this->db_name     = $db_name;
+                          $this->db_password = 'hidden';
 
 						  
-                        $this->connect_id = @mysql_connect($this->host,$this->db_username,$db_password) or die($this->error_msg("ERROR: CANT CONNECT"));
+                        $this->connect_id	= @mysql_connect($this->host,$this->db_username,$db_password) or die($this->error_msg("ERROR: CANT CONNECT"));
 						//version of mysql
 						$this->mysql_version = mysql_get_server_info($this->connect_id);
 						
-						if( $this->connect_id )
+						if($this->connect_id)
 						{
-							if( $db_name != "" )
+							if(!empty($db_name))
 							{
-								$this->db_name = $db_name;
 								$dbselect = mysql_select_db($this->db_name);
 								
-								if ($dbselect) {if ($this->mysql_version>='4.1.0') mysql_query("SET NAMES 'utf8'"); }
-								if( !$dbselect )
+								if ($dbselect)
+								{
+									if ($this->mysql_version>='4.1.0') mysql_query("SET NAMES 'utf8'");
+								}
+								else if(!$dbselect)
 								{
 									mysql_close($this->connect_id);
 									$this->connect_id = $dbselect;
@@ -63,8 +72,12 @@ var $debugr = false;
 						}
 				}
 
-/***************/
-                function close(){		
+				/*
+				close the connection
+				*/
+                function close()
+				{		
+				
 					if( $this->connect_id )
 					{
 						//
@@ -81,25 +94,26 @@ var $debugr = false;
 					{
 						return false;
 					}
-					
-     }
-/***************/
+				}
+
+				/*
+				the query func . its so important to do 
+				the quries and give results
+				*/
                 function query($query, $transaction = FALSE)
 				{
-						//
-						// Remove any pre-existing queries
-						//
-						unset($this->result);
+					//
+					// Remove any pre-existing queries
+					//
+					unset($this->result);
 
 
 					
-					
-					if( $query != "" )
+					if(!empty($query))
 					{
-					//debug .. //////////////
-					if($_GET['debug']) {
-					$this->debugr[] = $query;	
-					}////////////////
+						//debug .. //////////////
+						$srartum_sql	=	get_microtime();
+						////////////////
 						
 						if( $transaction == 1 && !$this->in_transaction )
 						{
@@ -112,25 +126,37 @@ var $debugr = false;
 							$this->in_transaction = TRUE;
 						}
 
-						$this->result = @mysql_query($query, $this->connect_id) or $this->error_msg('Error In query');
+						$this->result = @mysql_query($query, $this->connect_id);
+						
+						//debug .. //////////////
+						$this->debugr[$this->query_num+1] = array($query, sprintf('%.5f', get_microtime() - $srartum_sql));
+						////////////////
+						
+						if(!$this->result)
+						{
+							$this->error_msg('Error In query');
+						}
 					}
 					else
 					{
 						if( $transaction == 2 && $this->in_transaction )
 						{
-							$result = mysql_query("COMMIT", $this->connect_id);
+							$this->result = mysql_query("COMMIT", $this->connect_id);
 						}
 					}
-					if( $this->result )
+					
+					//is there any result
+					if($this->result)
 					{
+					
 						unset($this->row[$this->result]);
 						unset($this->rowset[$this->result]);
 
-						if( $transaction == 2 && $this->in_transaction )
+						if($transaction == 2 && $this->in_transaction)
 						{
 							$this->in_transaction = FALSE;
 
-							if ( !mysql_query("COMMIT", $this->connect_id) )
+							if (!mysql_query("COMMIT", $this->connect_id))
 							{
 								mysql_query("ROLLBACK", $this->connect_id);
 								return false;
@@ -138,6 +164,7 @@ var $debugr = false;
 						}
 						
 						$this->query_num++;
+		
 						
 						return $this->result;
 					}
@@ -151,8 +178,81 @@ var $debugr = false;
 						return false;
 					}
 									
-}
-/***************/
+				}
+				
+				
+				/*
+				query build 
+				*/
+				function build($query)
+				{
+					$sql = '';
+
+					if (isset($query['SELECT']))
+					{
+						$sql = 'SELECT '.$query['SELECT'].' FROM '.$query['FROM'];
+
+						if (isset($query['JOINS']))
+						{
+							foreach ($query['JOINS'] as $cur_join)
+								$sql .= ' '.key($cur_join).' '.current($cur_join).' ON '.$cur_join['ON'];
+						}
+
+						if (!empty($query['WHERE']))
+							$sql .= ' WHERE '.$query['WHERE'];
+						if (!empty($query['GROUP BY']))
+							$sql .= ' GROUP BY '.$query['GROUP BY'];
+						if (!empty($query['HAVING']))
+							$sql .= ' HAVING '.$query['HAVING'];
+						if (!empty($query['ORDER BY']))
+							$sql .= ' ORDER BY '.$query['ORDER BY'];
+						if (!empty($query['LIMIT']))
+							$sql .= ' LIMIT '.$query['LIMIT'];
+					}
+					else if (isset($query['INSERT']))
+					{
+						$sql = 'INSERT INTO '.$query['INTO'];
+
+						if (!empty($query['INSERT']))
+							$sql .= ' ('.$query['INSERT'].')';
+
+						$sql .= ' VALUES('.$query['VALUES'].')';
+					}
+					else if (isset($query['UPDATE']))
+					{
+						$query['UPDATE'] = $query['UPDATE'];
+
+						if (isset($query['PARAMS']['LOW_PRIORITY']))
+							$query['UPDATE'] = 'LOW_PRIORITY '.$query['UPDATE'];
+
+						$sql = 'UPDATE '.$query['UPDATE'].' SET '.$query['SET'];
+
+						if (!empty($query['WHERE']))
+							$sql .= ' WHERE '.$query['WHERE'];
+					}
+					else if (isset($query['DELETE']))
+					{
+						$sql = 'DELETE FROM '.$query['DELETE'];
+
+						if (!empty($query['WHERE']))
+							$sql .= ' WHERE '.$query['WHERE'];
+					}
+					else if (isset($query['REPLACE']))
+					{
+						$sql = 'REPLACE INTO '.$query['INTO'];
+
+						if (!empty($query['REPLACE']))
+							$sql .= ' ('.$query['REPLACE'].')';
+
+						$sql .= ' VALUES('.$query['VALUES'].')';
+					}
+
+					return $this->query($sql);
+				}
+
+					/*
+					free the memmory from the last results
+					*/
 					function freeresult($query_id = 0)
 					{
 						if( !$query_id )
@@ -174,7 +274,11 @@ var $debugr = false;
 							return false;
 						}
 					}
-/***************/
+				
+				/*
+				if the result is an arry ,
+				this func is so important to order them as a array
+				*/
                 function fetch_array($query_id = 0)
 				{
                  	if( !$query_id )
@@ -192,7 +296,11 @@ var $debugr = false;
 						return false;
 					}
                 }
-/***************/
+
+				/*
+				if we have a result and we have to know 
+				the number of it , this is a func ..
+				*/
                 function num_rows($query_id = 0)
 				{
 					if( !$query_id )
@@ -202,44 +310,80 @@ var $debugr = false;
 
 					return ( $query_id ) ? mysql_num_rows($query_id) : false;
                 }
-/***************/
+
+				
+				/*
+				last id inserted in sql
+				*/
                 function insert_id()
 				{
 					return ( $this->connect_id ) ? mysql_insert_id($this->connect_id) : false;
                 }
-/***************/
-				function escape($msg) // for kleeja ,, its all thing
+
+				/*
+				clean the qurery before insert it
+				*/
+				function escape($msg)
 				{
 
 					$msg = htmlspecialchars($msg , ENT_QUOTES);
 					$msg = (!get_magic_quotes_gpc()) ? addslashes ($msg) : $msg;
 					return $msg;
 				}
-/***************/
+				
+				/*
+				real escape .. 
+				*/
+				function real_escape($msg)
+				{
+					if (is_array($msg))
+					{
+						return '';
+					}
+					else if (function_exists('mysql_real_escape_string'))
+					{
+						return mysql_real_escape_string($msg, $this->connect_id);
+					}
+					else
+					{
+						return mysql_escape_string($msg);
+					}
+
+				}
+				/*
+				get the information of mysql server
+				*/
 				function server_info()
 				{
 					return 'MySQL ' . $this->mysql_version;
 				}
-/***************/
-                           function error_msg($msg)
+
+				/*
+				error message func
+				*/
+				function error_msg($msg)
 				{
                           $error_no  = mysql_errno();
                           $error_msg = mysql_error();
+						  $error_sql = @current($this->debugr[$this->query_num+1]);
 
                           echo "<style>BODY{FONT-FAMILY:tahoma;FONT-SIZE:12px;}
 								textarea {color: #FF0000;background-color: #FFECEC;border-width: 1px;
 								border-color: #000000;border-style: solid;}</style>";
                           echo "<html><head></head><title>ERROR IM MYSQL</title><body>";
                           echo '<br /><div style="text-align:center;color:red;"><b>';
-                          echo '<textarea  readonly="readonly" style="width: 500px; height: 161px">';
+                          echo '<textarea  readonly="readonly" style="width: 500px; height: 161px" dir="ltr">';
 						  echo "
-SORRY , THERE IS AN ERROR IN MYSQL , ERROR IS : $msg
+Sorry , There is an error in mysql , error : $msg
+
+--[query]--------------------------
+$error_sql
+----------------------------------
 
 [$error_no : $error_msg]
-
-YOU MUST TELL MODERATOR BY THIS ERROR!
 							
-Script: Kleeja : By :Saanina
+Script: Kleeja
+www.kleeja.com
 </textarea>";
                           echo '</b></div>';
                           echo '</body></html>';
@@ -247,20 +391,9 @@ Script: Kleeja : By :Saanina
 						exit();
 				}
 				
-/***************/
-function debug (){ 
-if($_GET['debug']) {
-	$e = '';
-	if(is_array($this->debugr)){ 
-	foreach($this->debugr as $key=>$val){ $e .= '<br/>-['.$key.'] '.$val .'<hr/>';}
-	}
-	return $e."<br/><b>Query Number : ".$this->query_num ."</b><br/> this Class is created by Saanina@gmail.com";
-	}else{
-	return false;
-	}
-}
-/***************/
+			
 
-        }#end of class
+
+}#end of class
 }#if
 ?>

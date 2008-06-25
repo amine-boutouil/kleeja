@@ -1,14 +1,13 @@
 ##################################
 # Kleeja ... the best uploader ...
 #-----------------------------------------------------------------
-# saanina@gmail.com 
 # kleeja.com
 #-----------------------------------------------------------------
 #
 #1- upload Kleeja folder to your host by FTP
 #2- Edit 'includes/config.php'
 #3- run Installer from your browser 
-#  http://yoursite.com/kleeja/install.php
+#  http://yoursite.com/kleeja/install
 # and go on with steps .. 
 #4- to enter administration panel go to 
 # http://yoursite.com/kleeja/admin.php 

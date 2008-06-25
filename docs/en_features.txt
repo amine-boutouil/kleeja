@@ -1,4 +1,8 @@
+#
 #translated by : NK /     n.k@cityofangelz.com
+#
+#kleeja.com
+#
 
 Script Requirements
 PHP4+ 

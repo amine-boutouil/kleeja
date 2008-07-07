@@ -512,7 +512,9 @@ function creat_style_xml($contents, $def=false)
 						//update
 						$update_query = array(
 											'UPDATE'	=> "{$dbprefix}config",
-											'SET'		=> "style='". $new_style_id ."'"
+											'SET'		=> "value='". $new_style_id ."'",
+											'WHERE'		=>	"`name`='style'"
+											
 										);
 										
 										($hook = kleeja_run_hook('qr_update_defsty_crtxmlstyle_func')) ? eval($hook) : null; //run hook

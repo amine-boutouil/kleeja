@@ -107,19 +107,19 @@ function createthumb($name, $ext, $filename, $new_w, $new_h)
 	
 	if (preg_match("/jpg|jpeg/",$ext))
 	{
-		$src_img=imagecreatefromjpeg($name);
+		$src_img	=	imagecreatefromjpeg($name);
 	}
 	elseif (preg_match("/png/",$ext))
 	{
-		$src_img=imagecreatefrompng($name);
+		$src_img	=	imagecreatefrompng($name);
 	}
 	elseif (preg_match("/gif/",$ext))
 	{
-		$src_img=imagecreatefromgif($name);
+		$src_img	=	imagecreatefromgif($name);
 	}
 	
-	$old_x=imageSX($src_img);
-	$old_y=imageSY($src_img);
+	$old_x	=	imageSX($src_img);
+	$old_y	=	imageSY($src_img);
 	
 	if ($old_x > $old_y)
 	{

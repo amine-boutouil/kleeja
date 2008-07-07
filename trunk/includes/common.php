@@ -47,7 +47,6 @@
 	require ($path.'pager.php');
 	require ($path.'ocr_captcha.php');
 	require ($path.'functions.php');
-	require ($path.'cache.php');
 	
 	
 	//no data.. install.php exists
@@ -57,7 +56,7 @@
 	}
 	elseif (file_exists('./install')) 
 	{
-		big_error('install folder exists!', 'Install.php detected! please delete it OR install kleeja if you haven\'t done so yet...<br/><br/><a href="./install">Click to Install</a><br/><br/>');
+		//big_error('install folder exists!', '<b>Install</b> folder detected! please delete it OR install kleeja if you haven\'t done so yet...<br/><br/><a href="./install">Click to Install</a><br/><br/>');
 	}
 
 	//gd 
@@ -75,6 +74,10 @@
 	//no need after now 
 	unset($dbpass);
 
+
+	//then get
+	
+	require ($path.'cache.php');
 	
 	// for gzip
 	$do_gzip_compress = false; 

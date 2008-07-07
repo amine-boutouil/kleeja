@@ -44,7 +44,7 @@
 	$dh = @opendir($path_adm);
 	while (($file = @readdir($dh)) !== false)
 	{
-		    if($file != "." && $file != ".." && $file != ".htaccess" && $file != "index.html")
+		    if(strpos($file, '.php') !== false) // fixed
 			{
 				$adm_extensions[]	=  str_replace('.php', '', $file);
 		    }

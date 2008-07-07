@@ -605,7 +605,7 @@ function creat_lang_xml($contents, $def=false)
 					foreach($word_s as $wd)
 					{
 						$lang_word		= $wd['attributes']['name'];
-						$lang_trans		= $SQL->escape($wd['value']);
+						$lang_trans		= addslashes(strip_tags($wd['value'], '<b><br><br/><i><u>')); //fixed
 						
 						$insert_query = array(
 											'INSERT'	=> 'lang_id, word, trans',
@@ -791,7 +791,7 @@ function creat_plugin_xml($contents)
 								{
 
 									$lang_word			=	$SQL->real_escape($ln['attributes']['word']);
-									$lang_trans			=	$SQL->real_escape($ln['value']);
+									$lang_trans			=	addslashes(strip_tags($ln['value'], '<b><br><br/><i><u>')); //fixed
 
 									$insert_query = array(
 														'INSERT'	=> 'word, trans, lang_id',
@@ -902,21 +902,21 @@ function kleeja_adm_info($msg,$title='', $exit=true)
 {
 	global $text, $tpl;
 	
-				($hook = kleeja_run_hook('kleeja_adm_info_func')) ? eval($hook) : null; //run hook
+			($hook = kleeja_run_hook('kleeja_adm_info_func')) ? eval($hook) : null; //run hook
 				
-				$text	= $msg;
+			$text	= $msg;
 				
-				//header
-				print $tpl->display("admin_header");
-				//index
-				print $tpl->display('admin_info');
-				//footer
-				print $tpl->display("admin_footer");
+			//header
+			print $tpl->display("admin_header");
+			//index
+			print $tpl->display('admin_info');
+			//footer
+			print $tpl->display("admin_footer");
 					
-				if ($exit)
-				{
+			if ($exit)
+			{
 					exit();
-				}
+			}
 			
 }
 
@@ -1003,8 +1003,9 @@ function kleeja_debug ()
 	
 	($hook = kleeja_run_hook('kleeja_debug_func')) ? eval($hook) : null; //run hook
 	
+		//get memory usage ; code of phpbb
 		if (function_exists('memory_get_usage'))
-		{	//some form bb3
+		{
 				if ($memory_usage = memory_get_usage())
 				{
 					$base_memory_usage	=	0;
@@ -1015,51 +1016,47 @@ function kleeja_debug ()
 				}
 		}
 		
-			print '
-<br/>
-<fieldset  dir="ltr" style="background:white"><legend style="font-family: Arial; color:red"><em>[Page Analysis]</em></legend>
-<p>&nbsp;</p>
-		<p><h2><strong>General Information :</strong></h2></p>
-		<p>Gzip : <i>' . (($do_gzip_compress !=0 )?  "Enabled" : "Disabled") . '</i></p>
-		<p>Queries Number :<i> ' .  $SQL->query_num . ' </i></p>
-		<p>Hook System :<i> ' .  ((!defined('STOP_HOOKS'))?  "Enabled" : "Disabled"). ' </i></p>
-		<p>Active Hooks :<i> ' .  sizeof($all_plg_hooks). ' </i></p>
-		<p>'.$debug_output.'</p>
-		<p>&nbsp;</p>
-		<p><h2><strong><em>SQL</em> Information :</strong></h2></p> ';
+		//thrn show it
+		print '<br/>';
+		print '<fieldset  dir="ltr" style="background:white"><legend style="font-family: Arial; color:red"><em>[Page Analysis]</em></legend>';
+		print '<p>&nbsp;</p>';
+		print '<p><h2><strong>General Information :</strong></h2></p>';
+		print '<p>Gzip : <i>' . (($do_gzip_compress !=0 )?  "Enabled" : "Disabled") . '</i></p>';
+		print '<p>Queries Number :<i> ' .  $SQL->query_num . ' </i></p>';
+		print '<p>Hook System :<i> ' .  ((!defined('STOP_HOOKS'))?  "Enabled" : "Disabled"). ' </i></p>';
+		print '<p>Active Hooks :<i> ' .  sizeof($all_plg_hooks). ' </i></p>';
+		print '<p>' . $debug_output . '</p>';
+		print '<p>&nbsp;</p>';
+		print '<p><h2><strong><em>SQL</em> Information :</strong></h2></p> ';
 		
 		if(is_array($SQL->debugr))
 		{ 
 			foreach($SQL->debugr as $key=>$val)
 			{
-				print '
-<fieldset name="sql"  dir="ltr" style="background:white"><legend><em>query 
-		# ['.($key+1) .'</em>]</legend> 
-<textarea style="font-family:Courier New,monospace;width:99%; background:#F4F4F4" rows="5" cols="10">
-'.$val[0] .'
-</textarea>	<br />
-Duration :'.$val[1].' 
-</fieldset>	
-<br/><br/>';
-
+				print '<fieldset name="sql"  dir="ltr" style="background:white"><legend><em>query # ['.($key+1) .'</em>]</legend> ';
+				print '<textarea style="font-family:Courier New,monospace;width:99%; background:#F4F4F4" rows="5" cols="10">'.$val[0] .'';
+				print '</textarea>	<br />';
+				print 'Duration :'.$val[1].''; 
+				print '</fieldset>';
+				print '<br/><br/>';
 			}
 		}
 		else
 		{
-			print '<p><b>NO-SQL</b></p>';
+			print '<p><b>NO SQLs</b></p>';
 		}
 		
-print '<p>&nbsp;</p><p><h2><strong><em>HOOK</em> Information :</strong></h2></p> ';
+		print '<p>&nbsp;</p><p><h2><strong><em>HOOK</em> Information :</strong></h2></p> ';
 		
 		if(sizeof($all_plg_hooks) > 0)
 		{ 
 				foreach($all_plg_hooks as $k=>$v)
 				{
-					foreach($v as $p=>$c) $p=$p; $c=$c;
+					foreach($v as $p=>$c) $p=$p; $c=$c; // axactly 
 					
-					print '<fieldset name="hook"  dir="ltr" style="background:white"><legend><em>Plugin  # ['. $p .']</em></legend>';
+					print '<fieldset name="hook"  dir="ltr" style="background:white"><legend><em>Plugin  # [' . $p . ']</em></legend>';
 					print '<textarea style="font-family:Courier New,monospace;width:99%; background:#F4F4F4" rows="5" cols="10">'. htmlspecialchars($c) .'</textarea><br />';
-					print 'for hook_name :'.$k.'</fieldset><br/><br/>';
+					print 'for hook_name :' . $k . '</fieldset><br/><br/>';
 
 				}
 
@@ -1069,7 +1066,7 @@ print '<p>&nbsp;</p><p><h2><strong><em>HOOK</em> Information :</strong></h2></p>
 			print '<p><b>NO-HOOKS</b></p>';
 		}
 		
-print '<br/><br/><br/></fieldset>';
+		print '<br/><br/><br/></fieldset>';
 
 }
 
@@ -1096,4 +1093,39 @@ function big_error ($error_title, $msg_text)
 
 }
 
+/// for our extentions and plugins
+function kj_lang($word, $trans, $language=false)
+{
+global $lang, $SQL, $config, $$dbprefix;
+
+	
+	if(!$word || $word == '') return false;
+	
+	if($lang[$word])
+	{
+		return $lang[$word];
+	}
+	else
+	{
+		$lang_word			=	$SQL->real_escape($word);
+		$lang_trans			=	addslashes(strip_tags($trans, '<b><br><br/><i><u>')); //fixed
+		$language			=	($language!==false) ?  $language : $config['language'];
+		$insert_query = array(
+							'INSERT'	=> 'word, trans, lang_id',
+							'INTO'		=> "{$dbprefix}lang",
+							'VALUES'	=> "'". $lang_word ."','".$lang_trans."', '".$language ."'"
+														);
+		($hook = kleeja_run_hook('qr_insert_lang_kj_lang_func')) ? eval($hook) : null; //run hook
+		$SQL->build($insert_query);		
+		
+		//delete cache ..
+		if (file_exists('cache/langs_' . $lang_id . '.php'))
+		{
+			@unlink('cache/langs_' . $language . '.php');
+		}
+		
+		return $lang_trans;
+	}
+
+}
 ?>

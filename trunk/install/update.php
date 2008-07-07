@@ -20,7 +20,7 @@ include important files
 	header('Content-type: text/html; charset=UTF-8');
 	header('Cache-Control: private, no-cache="set-cookie"');
 	header('Expires: 0');
-	header('Pragma: no-cache');rr
+	header('Pragma: no-cache');
 
 
 //for language //	

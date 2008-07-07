@@ -213,7 +213,7 @@
 	<word name="SIZE_U"><![CDATA[الحجم م]]></word>
 	<word name="ALLOW_G"><![CDATA[سماح ز]]></word>
 	<word name="ALLOW_U"><![CDATA[سماح م]]></word>
-	<word name="E_EXTS"><![CDATA[ز :تعني الزوار&lt;br /&gt;م : تعني الأعضاء &lt;br /&gt;الأحجام تظبط بالبايت.]]></word>
+	<word name="E_EXTS"><![CDATA[<b>ز</b>:تعني الزوار <br/> <b>م</b>: تعني الأعضاء  <br/>الأحجام تظبط بالبايت.]]></word>
 	<word name="UPDATED_EXTS"><![CDATA[تم تحديث الإمتدادات بنجاح]]></word>
 	<word name="UPDATE_FILES"><![CDATA[تحديث الملفات]]></word>
 	<word name="BY"><![CDATA[من]]></word>
@@ -258,7 +258,7 @@
 	<word name="GOOGLE_NUM"><![CDATA[زيارات جوجل]]></word>
 	<word name="LAST_YAHOO"><![CDATA[آخر زيارة للياهو]]></word>
 	<word name="YAHOO_NUM"><![CDATA[زيارات الياهو]]></word>
-	<word name="KLEEJA_CP_W"><![CDATA[أهلا وسهلاً بك في لوحة التحكم لمركز التحميل &lt;b&gt;كليجا&lt;/b&gt;]]></word>
+	<word name="KLEEJA_CP_W"><![CDATA[أهلا وسهلاً بك في لوحة التحكم لمركز التحميل <b>كليجا</b>]]></word>
 	<word name="USING_SIZE"><![CDATA[الحجم المستخدم]]></word>
 	<word name="PHP_VER"><![CDATA[إصدار php]]></word>
 	<word name="MYSQL_VER"><![CDATA[إصدار mysql]]></word>

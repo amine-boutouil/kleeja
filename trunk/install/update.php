@@ -12,14 +12,15 @@ include important files
 	include ($path.'functions.php');
 	include ($path.'mysql.php');
 
-	
+	function get_microtime(){	list($usec, $sec) = explode(' ', microtime());	return ((float)$usec + (float)$sec);	}
+
 	if (phpversion() < '4.1.0') exit('Your php version is too old !');
  
 	// ...header ..  i like it ;)
 	header('Content-type: text/html; charset=UTF-8');
 	header('Cache-Control: private, no-cache="set-cookie"');
 	header('Expires: 0');
-	header('Pragma: no-cache');
+	header('Pragma: no-cache');rr
 
 
 //for language //	

@@ -13,6 +13,7 @@ include important files
 	include ($path.'config.php');
 	include ($path.'functions.php');
 
+	function get_microtime(){	list($usec, $sec) = explode(' ', microtime());	return ((float)$usec + (float)$sec);	}
 
     if (phpversion() < '4.1.0') exit('Your php version is too old !');
 

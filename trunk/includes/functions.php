@@ -589,7 +589,8 @@ function creat_lang_xml($contents, $def=false)
 						//update
 						$update_query = array(
 											'UPDATE'	=> "{$dbprefix}config",
-											'SET'		=> "language='". $new_lang_id ."'"
+											'SET'		=> "value='". $new_lang_id ."'",
+											'WHERE'		=>	"`name`='language'"
 										);
 										
 										($hook = kleeja_run_hook('qr_update_deflang_crtlangxml_func')) ? eval($hook) : null; //run hook

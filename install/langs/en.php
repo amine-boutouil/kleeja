@@ -2,9 +2,9 @@
 //english language By:NK
 // Email: n.k@cityofangelz.com 
 	
-	$lang['INST_INSTALL_CLEAN_VER']	=	"สหศํส ไำฮๅ ฬฯํฯๅ";
-	$lang['INST_UPDATE_P_VER']	=	"สอฯํห ไำฮๅ ำวศÞๅ ";
-	$lang['INST_CHOOSE_INSTALLER']	=	"... Þใ ศลฮสํวั ใว ํไวำศ฿  ใไ ใฺวแฬ สหศํส ฿แํฬว ...";
+	$lang['INST_INSTALL_CLEAN_VER']	=	"ุชุซุจูุช ูุณุฎู ุฌุฏูุฏู";
+	$lang['INST_UPDATE_P_VER']	=	"ุชุญุฏูุซ ูุณุฎู ุณุงุจูู ";
+	$lang['INST_CHOOSE_INSTALLER']	=	"... ูู… ุจุฅุฎุชูุงุฑ ู…ุง ููุงุณุจู  ู…ู ู…ุนุงูุฌ ุชุซุจูุช ูููุฌุง ...";
 	$lang['INST_AGR_GPL2'] = 'I agree to all of these terms';
 	$lang['INST_SUBMIT'] = '[  Continue  ]';
 	$lang['INST_SITE_INFO'] = 'Site Info';
@@ -29,20 +29,23 @@
 	$lang['INST_FINISH_SQL'] = 'Kleeja was installed successfully, Please remove install.php file';
 	$lang['INST_FINISH_ERRSQL'] = 'OopS! there seems to be a problem, try again.';
 	$lang['INST_KLEEJADEVELOPERS'] = 'Thank you for using Kleeja and good luck from our development team.';
-	$lang['USERNAME'] = 'วำใ วแใำสฮฯใ';
-	$lang['PASSWORD'] = '฿แใษ วแใัๆั';
-	$lang['EMAIL'] = 'วแศัํฯ วแวแ฿สัๆไํ';
-	$lang['INDEX'] = 'วแัฦํำํๅ';
-	$lang['ADMINCP'] = 'แๆอษ วแสอ฿ใ';
-	$lang['DIR'] = 'ltr';
+	$lang['SITENAME'] = 'ุงุณู… ุงูู…ููุน';
+	$lang['SITEURL'] = 'ุฑุงุจุท ุงูู…ููุน';
+	$lang['SITEMAIL'] = 'ุจุฑูุฏ ุงูู…ููุน';
+	$lang['USERNAME'] = 'ุงุณู… ุงูู…ุณุชุฎุฏู…';
+	$lang['PASSWORD'] = 'ููู…ุฉ ุงูู…ุฑูุฑ';
+	$lang['EMAIL'] = 'ุงูุจุฑูุฏ ุงูุงููุชุฑููู';
+	$lang['INDEX'] = 'ุงูุฑุฆูุณูู';
+	$lang['ADMINCP'] = 'ููุญุฉ ุงูุชุญูู…';
+	$lang['DIR'] = 'rtl';
 	
 	//UPDATOR
-	$lang['INST_CHOOSE_UPDATE_FILE']	=	'Þใ ศลฮสํวั วแสอฯํห วแใไวำศ แ฿ ๆใไ หใ สวศฺ วแสอฯํห ..';
-	$lang['INST_ERR_NO_SELECTED_UPFILE_GOOD']	=	'ใแÝ วแสอฯํห Ûํั ใไวำศ วๆ วไๅ Ûํั ใๆฬๆฯ ใไ วแรำวำ ! ..';
+	$lang['INST_CHOOSE_UPDATE_FILE']	=	'ูู… ุจุฅุฎุชูุงุฑ ุงูุชุญุฏูุซ ุงูู…ูุงุณุจ ูู ูู…ู ุซู… ุชุงุจุน ุงูุชุญุฏูุซ ..';
+	$lang['INST_ERR_NO_SELECTED_UPFILE_GOOD']	=	'ู…ูู ุงูุชุญุฏูุซ ุบูุฑ ู…ูุงุณุจ ุงู ุงูู ุบูุฑ ู…ูุฌูุฏ ู…ู ุงูุฃุณุงุณ ! ..';
 	
-	$lang['INST_NOTES_UPDATE']		=	'ใแวอูวส วแสอฯํห';
-	$lang['INST_NOTE_RC2_TO_RC3']	=	'แว ศฯ วไ สÞๆใ รํึว ศสอฯํห ใแÝวส วแไำฮๅ ฿฿แ ๆแํำ ÝÞุ สิÛํแ ๅะว วแใฺวแฬ ...';
-	$lang['INST_UPDATE_IS_FINISH']	=	"ใฺวแฬ วแสอฯํห วไสๅ์ .. ํใ฿ไ฿ วแยไ อะÝ ใฬแฯ <br/><b>INSTALL</b><br/> ๆ ใสวศฺษ ฺใแ฿ Ýํ ฿แํฬว ..";
+	$lang['INST_NOTES_UPDATE']		=	'ู…ูุงุญุธุงุช ุงูุชุญุฏูุซ';
+	$lang['INST_NOTE_RC2_TO_RC3']	=	'ูุง ุจุฏ ุงู ุชููู… ุฃูุถุง ุจุชุญุฏูุซ ู…ููุงุช ุงููุณุฎู ููู ูููุณ ููุท ุชุดุบูู ูุฐุง ุงูู…ุนุงูุฌ ...';
+	$lang['INST_UPDATE_IS_FINISH']	=	"ู…ุนุงูุฌ ุงูุชุญุฏูุซ ุงูุชูู .. ูู…ููู ุงูุขู ุญุฐู ู…ุฌูุฏ <br/><b>INSTALL</b><br/> ู ู…ุชุงุจุนุฉ ุนู…ูู ูู ูููุฌุง ..";
 	
 	
 ?>

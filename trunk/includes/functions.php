@@ -531,8 +531,8 @@ function creat_style_xml($contents, $def=false)
 					//insert templates
 					foreach($template_s as $tpls)
 					{
-						$template_name		= $tpls['attributes']['name'];
-						$template_content	= $SQL->escape($tpls['value']);
+						$template_name		= $SQL->real_escape($tpls['attributes']['name']);
+						$template_content	= $SQL->real_escape($tpls['value']);
 						
 						$insert_query = array(
 											'INSERT'	=> 'style_id, template_name, template_content',
@@ -690,7 +690,7 @@ function creat_plugin_xml($contents)
 									$query = array(
 												'SELECT'	=> 'template_content',
 												'FROM'		=> "{$dbprefix}templates",
-												'WHERE'		=>	"style_id='".$config['style']."' AND template_name='".$template_name."'"
+												'WHERE'		=>	"style_id='".intval($config['style'])."' AND template_name='". $template_name ."'"
 												);
 									($hook = kleeja_run_hook('qr_select_tplcntedit_crtplgxml_func')) ? eval($hook) : null; //run hook
 									$result	= $SQL->fetch_array($SQL->build($query));
@@ -704,8 +704,8 @@ function creat_plugin_xml($contents)
 										//update
 										$update_query = array(
 																'UPDATE'	=> "{$dbprefix}templates",
-																'SET'		=> "template_content = '". $SQL->escape($finder->text) ."'",
-																'WHERE'		=>	"style_id='".$config['style']."' AND template_name='".$template_name."'"
+																'SET'		=> "template_content = '". $SQL->real_escape($finder->text) ."'",
+																'WHERE'		=>	"style_id='". intval($config['style']) ."' AND template_name='". $template_name . "'"
 															);
 										($hook = kleeja_run_hook('qr_update_tplcntedit_crtplgxml_func')) ? eval($hook) : null; //run hook
 										if ($SQL->build($update_query))

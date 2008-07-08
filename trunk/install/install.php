@@ -8,13 +8,7 @@
 include important files
 */
 
-	// ...header ..  i like it ;)
-	header('Content-type: text/html; charset=UTF-8');
-	header('Cache-Control: private, no-cache="set-cookie"');
-	header('Expires: 0');
-	header('Pragma: no-cache');
-	
-	
+
 	define ( 'IN_COMMON' , true);
 	$path = "../includes/";
 	include ($path.'config.php');
@@ -50,8 +44,9 @@ style of installer
 */
 $header = '<!-- Header Start -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"  dir="' . $lang['DIR'] . '">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="' . $_COOKIE['lang'] . '" lang="' . $_COOKIE['lang'] . '" dir="' . $lang['DIR'] . '">
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>...Kleeja...</title><style type="text/css">
 * { padding: 0;margin: 0;}
 body {background: #FF9933;font: 0.74em "Tahoma" Verdana, Arial, sans-serif;line-height: 1.5em;text-align:center; }
@@ -64,7 +59,7 @@ a {color: #3B6EBF;text-decoration: none;}a:hover {text-decoration: underline;}
 .roundedcornr_top_283542 div, .roundedcornr_top_283542, .roundedcornr_bottom_283542 div, .roundedcornr_bottom_283542 {
 width: 100%;height: 30px;font-size: 1px;}.roundedcornr_content_283542 { margin: 0 30px; }</style></head><body><br/>
 <div class="roundedcornr_box_283542"><div class="roundedcornr_top_283542"><div></div></div><div class="roundedcornr_content_283542">
-<img src="../images/inst/logo.gif" style="border:0;">
+<img src="../images/inst/logo.gif" style="border:0;" alt="kleeja" />
 <br/>
 <br/>
 <!-- Header End -->

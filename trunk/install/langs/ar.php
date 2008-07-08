@@ -34,6 +34,7 @@
 	$lang['EMAIL'] = 'البريد الالكتروني';
 	$lang['INDEX'] = 'الرئيسيه';
 	$lang['ADMINCP'] = 'لوحة التحكم';
+	$lang['DIR'] = 'rtl';
 	
 	
 	

@@ -34,6 +34,7 @@
 	$lang['EMAIL'] = '«б»—нѕ «б«бя —ждн';
 	$lang['INDEX'] = '«б—∆н”не';
 	$lang['ADMINCP'] = 'бжЌ… «б Ќяг';
+	$lang['DIR'] = 'ltr';
 	
 	//UPDATOR
 	$lang['INST_CHOOSE_UPDATE_FILE']	=	'ёг »≈ќ н«— «б ЌѕнЋ «бгд«”» бя жгд Ћг  «»Џ «б ЌѕнЋ ..';

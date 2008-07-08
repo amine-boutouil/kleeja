@@ -7,7 +7,8 @@
 	$lang['INST_CHOOSE_INSTALLER']	=	"... ﬁ„ »≈Œ Ì«— „« Ì‰«”»ﬂ  „‰ „⁄«·Ã  À»Ì  ﬂ·ÌÃ« ...";
 	$lang['INST_AGR_GPL2'] = 'I agree to all of these terms';
 	$lang['INST_SUBMIT'] = '[  Continue  ]';
-	$lang['INST_SITE_INFO'] = 'Admin Info';
+	$lang['INST_SITE_INFO'] = 'Site Info';
+	$lang['INST_ADMIN_INFO'] = 'Admin Info';
 	$lang['INST_CHANG_CONFIG'] = 'Missing requirements ... make sure you have edited the config.php file.';
 	$lang['INST_CONNCET_ERR'] = 'Cannot connect ..';
 	$lang['INST_SELECT_ERR'] = 'Cannot select database';
@@ -28,6 +29,11 @@
 	$lang['INST_FINISH_SQL'] = 'Kleeja was installed successfully, Please remove install.php file';
 	$lang['INST_FINISH_ERRSQL'] = 'OopS! there seems to be a problem, try again.';
 	$lang['INST_KLEEJADEVELOPERS'] = 'Thank you for using Kleeja and good luck from our development team.';
+	$lang['USERNAME'] = '«”„ «·„” Œœ„';
+	$lang['PASSWORD'] = 'ﬂ·„… «·„—Ê—';
+	$lang['EMAIL'] = '«·»—Ìœ «·«·ﬂ —Ê‰Ì';
+	$lang['INDEX'] = '«·—∆Ì”ÌÂ';
+	$lang['ADMINCP'] = '·ÊÕ… «· Õﬂ„';
 	
 	//UPDATOR
 	$lang['INST_CHOOSE_UPDATE_FILE']	=	'ﬁ„ »≈Œ Ì«— «· ÕœÌÀ «·„‰«”» ·ﬂ Ê„‰ À„  «»⁄ «· ÕœÌÀ ..';

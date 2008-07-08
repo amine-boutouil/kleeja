@@ -8,6 +8,13 @@
 include important files
 */
 
+	// ...header ..  i like it ;)
+	header('Content-type: text/html; charset=UTF-8');
+	header('Cache-Control: private, no-cache="set-cookie"');
+	header('Expires: 0');
+	header('Pragma: no-cache');
+	
+	
 	define ( 'IN_COMMON' , true);
 	$path = "../includes/";
 	include ($path.'config.php');
@@ -16,13 +23,6 @@ include important files
 	function get_microtime(){	list($usec, $sec) = explode(' ', microtime());	return ((float)$usec + (float)$sec);	}
 
     if (phpversion() < '4.1.0') exit('Your php version is too old !');
-
-
-	// ...header ..  i like it ;)
-	header('Content-type: text/html; charset=UTF-8');
-	header('Cache-Control: private, no-cache="set-cookie"');
-	header('Expires: 0');
-	header('Pragma: no-cache');
 
 
 //for language //	fix for 1rc1
@@ -49,8 +49,9 @@ if ( !isset($_POST['lang']) )
 style of installer
 */
 $header = '<!-- Header Start -->
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"  dir="' . $lang['DIR'] . '"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"  dir="' . $lang['DIR'] . '">
+<head>
 <title>...Kleeja...</title><style type="text/css">
 * { padding: 0;margin: 0;}
 body {background: #FF9933;font: 0.74em "Tahoma" Verdana, Arial, sans-serif;line-height: 1.5em;text-align:center; }

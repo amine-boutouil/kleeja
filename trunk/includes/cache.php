@@ -21,7 +21,6 @@ if (!defined('IN_COMMON'))
 	if (file_exists('cache/data_config.php'))
 	{
 		include ('cache/data_config.php');
-		
 	}
 	
 	if (!$config or !file_exists('cache/data_config.php'))

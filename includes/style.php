@@ -130,16 +130,21 @@ class kleeja_style
 		{
 			global $config, $SQL;
 			
+			if(!$config['style']) $config['style']  =1;
+			
 					$query = array(
 								'SELECT'	=> 'template_content',
 								'FROM'		=> "{$dbprefix}templates",
-								'WHERE'		=>	"style_id='".$config['style']."' AND template_name='" . $template_name . "'"
+								'WHERE'		=>	"style_id='". $config['style'] ."' AND template_name='" . $template_name . "'"
 								);
 				$result	=	$SQL->build($query);
 				$template_content = $SQL->fetch_array($result);
 				
-					if(!$template_content['template_content']) big_error('No Template !', 'requested "' . $template_name . '" template doesnt exists !! ');
-				
+					if(!$template_content['template_content']) 
+					{
+						big_error('No Template !', 'Requested "' . $template_name . '" template doesnt exists !! ');
+					}
+					
 				$this->HTML = $template_content['template_content'];
 				$this->_parse();
 				$filename = @fopen('cache/' . $config['style'] . '_' . $template_name . '.php', 'w');

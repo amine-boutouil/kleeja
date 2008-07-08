@@ -1,6 +1,6 @@
 <?php
 # KLEEJA INSTALLER ...
-# updated 22/4/1249 [4/2008]
+# updated  [7/7/2008]
 # this file have many updates .. dont use previous ones
 # last edit by : saanina
 
@@ -13,7 +13,8 @@ include important files
 	$path = "../includes/";
 	include ($path.'config.php');
 	include ($path.'functions.php');
-
+	include ($path.'mysql.php');
+	
 	function get_microtime(){	list($usec, $sec) = explode(' ', microtime());	return ((float)$usec + (float)$sec);	}
 
     if (phpversion() < '4.1.0') exit('Your php version is too old !');
@@ -239,15 +240,20 @@ case 'data' :
 			
 			if($do_it)
 			{
-				if ($name == 'call')		print '<span style="color:green;">' . $lang['INST_CRT_CALL'] . '</span><br/>';
-				elseif ($name == 'reports')	print '<span style="color:green;">' . $lang['INST_CRT_REPRS'] . '</span><br/>';
-				elseif ($name == 'stats')	print '<span style="color:green;">' . $lang['INST_CRT_STS'] . '</span><br/>';
-				elseif ($name == 'users')	print '<span style="color:green;">' . $lang['INST_CRT_USRS'] . '</span><br/>';
-				elseif ($name == 'users')	print '<span style="color:green;">' . $lang['INST_CRT_ADM'] . '</span><br/>';
-				elseif ($name == 'files')	print '<span style="color:green;">' . $lang['INST_CRT_FLS'] . '</span><br/>';
-				elseif ($name == 'config')	print '<span style="color:green;">' . $lang['INST_CRT_CNF'] . '</span><br/>';
-				elseif ($name == 'exts')	print '<span style="color:green;">' . $lang['INST_CRT_EXT'] . '</span><br/>';
-				elseif ($name == 'online')	print '<span style="color:green;">' . $lang['INST_CRT_ONL'] . '</span><br/>';
+				if ($name == 'call')			print '<span style="color:green;">' . $lang['INST_CRT_CALL'] . '</span><br/>';
+				elseif ($name == 'reports')		print '<span style="color:green;">' . $lang['INST_CRT_REPRS'] . '</span><br/>';
+				elseif ($name == 'stats')		print '<span style="color:green;">' . $lang['INST_CRT_STS'] . '</span><br/>';
+				elseif ($name == 'users')		print '<span style="color:green;">' . $lang['INST_CRT_USRS'] . '</span><br/>';
+				elseif ($name == 'users')		print '<span style="color:green;">' . $lang['INST_CRT_ADM'] . '</span><br/>';
+				elseif ($name == 'files')		print '<span style="color:green;">' . $lang['INST_CRT_FLS'] . '</span><br/>';
+				elseif ($name == 'config')		print '<span style="color:green;">' . $lang['INST_CRT_CNF'] . '</span><br/>';
+				elseif ($name == 'exts')		print '<span style="color:green;">' . $lang['INST_CRT_EXT'] . '</span><br/>';
+				elseif ($name == 'online')		print '<span style="color:green;">' . $lang['INST_CRT_ONL'] . '</span><br/>';
+				elseif ($name == 'hooks')		print '<span style="color:green;">' . $lang['INST_CRT_HKS'] . '</span><br/>';
+				elseif ($name == 'lang')		print '<span style="color:green;">' . $lang['INST_CRT_LNG'] . '</span><br/>';
+				elseif ($name == 'lists')		print '<span style="color:green;">' . $lang['INST_CRT_LSTS'] . '</span><br/>';
+				elseif ($name == 'plugins')		print '<span style="color:green;">' . $lang['INST_CRT_PLG'] . '</span><br/>';
+				elseif ($name == 'templates')	print '<span style="color:green;">' . $lang['INST_CRT_TPL'] . '</span><br/>';
 				else
 					print '<span style="color:green;"> [' .$name .'] : ' . $lang['INST_SQL_OK'] . '</span><br/>';
 			}
@@ -261,6 +267,8 @@ case 'data' :
 
 		if (!$err)
 		{
+			// start classe..
+			$SQL	= new SSQL($dbserver,$dbuser,$dbpass,$dbname);
 			make_style();
 			make_language($_COOKIE['lang']);
 			
@@ -276,11 +284,11 @@ case 'data' :
 	}else{
 
 	//$sitepath = $_SERVER['DOCUMENT_ROOT'].dirname($_SERVER['PHP_SELF']);
-	$urlsite =  "http://".$_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']).'/';
+	$urlsite =  "http://".$_SERVER['HTTP_HOST'] . str_replace('install','',dirname($_SERVER['PHP_SELF']));
 
- print '<form method="post" action="' . $_SERVER[PHP_SELF] . '?step=data">
+ print '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=data">
 	<fieldset name="Group1" dir="' . $lang['DIR'] . '">
-	<legend style="width: 73px">' . $lang['INST_SITE_INFO'] . '</legend>
+	<legend style="width: 73px"><b>' . $lang['INST_SITE_INFO'] . '</b></legend>
 	<table style="width: 100%">
 		<tr>
 			<td>' . $lang['SITENAME'] . '</td>
@@ -300,7 +308,7 @@ case 'data' :
 	<br />
 
 	<fieldset name="Group2" dir="' . $lang['DIR'] . '">
-	<legend style="width: 73px">' . $lang['INST_ADMIN_INFO'] . '</legend>
+	<legend style="width: 73px"><b>' . $lang['INST_ADMIN_INFO'] . '</b></legend>
 	<table style="width: 100%">
 		<tr>
 			<td>' . $lang['USERNAME'] . '</td>

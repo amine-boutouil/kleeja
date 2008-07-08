@@ -24,6 +24,11 @@
 	$lang['INST_CRT_FLS'] = 'Files table created.';
 	$lang['INST_CRT_CNF'] = 'Settings table created.';
 	$lang['INST_CRT_EXT'] = 'Extensions table created.';
+	$lang['INST_CRT_HKS'] = 'تم إنشاء جدول الهاكات';
+	$lang['INST_CRT_LNG'] = 'تم إنشاء جدول اللغه';
+	$lang['INST_CRT_LSTS'] = 'تم إنشاء جدول القوائم';
+	$lang['INST_CRT_PLG'] = 'تم إنشاء جدول الإضافات';
+	$lang['INST_CRT_TPL'] = 'تم إنشاء جدول القوالب';
 	$lang['INST_SQL_OK'] = 'SQL Executed Successfully ..';
 	$lang['INST_SQL_ERR'] = 'Error Executing SQL .. ';
 	$lang['INST_FINISH_SQL'] = 'Kleeja was installed successfully, Please remove install.php file';
@@ -38,6 +43,8 @@
 	$lang['INDEX'] = 'الرئيسيه';
 	$lang['ADMINCP'] = 'لوحة التحكم';
 	$lang['DIR'] = 'rtl';
+	$lang['EMPTY_FIELDS'] = 'هنـــاك حقول مهمه, تركتها فارغه...';
+	$lang['WRONG_EMAIL'] = 'البريد الإلكتروني خاطئ !';
 	
 	//UPDATOR
 	$lang['INST_CHOOSE_UPDATE_FILE']	=	'قم بإختيار التحديث المناسب لك ومن ثم تابع التحديث ..';

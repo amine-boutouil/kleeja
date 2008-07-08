@@ -7,7 +7,8 @@
 	$lang['INST_CHOOSE_INSTALLER']	=	"... قم بإختيار ما يناسبك  من معالج تثبيت كليجا ...";
 	$lang['INST_AGR_GPL2'] = 'أوافق على هذه الشروط كلها';
 	$lang['INST_SUBMIT'] = '[  متابعه  ]';
-	$lang['INST_SITE_INFO'] = 'معلومات المسؤول';
+	$lang['INST_SITE_INFO'] = 'معلومات الموقع';
+	$lang['INST_ADMIN_INFO'] = 'معلومات المسؤول';
 	$lang['INST_CHANG_CONFIG'] = ' config.php بعض البيانات المهمه ناقصه إملأ ملف';
 	$lang['INST_CONNCET_ERR'] = 'لا يمكن الإتصال ..';
 	$lang['INST_SELECT_ERR'] = 'لا يمكن الإرتباط بقاعدة البيانات';
@@ -28,6 +29,12 @@
 	$lang['INST_FINISH_SQL'] = 'تم الإنتهاء من التثبيت .. قم بحذف ملف التثبيت وتوجه للرئيسيه';
 	$lang['INST_FINISH_ERRSQL'] = 'يبدوا ان هناك مشكله تعيق التثبيت .. حاول مجدداً او استفسر من المطورين';
 	$lang['INST_KLEEJADEVELOPERS'] = 'مع أحلى و أطيب التمنيات .. من فريق عمل كليجا';
+	$lang['USERNAME'] = 'اسم المستخدم';
+	$lang['PASSWORD'] = 'كلمة المرور';
+	$lang['EMAIL'] = 'البريد الالكتروني';
+	$lang['INDEX'] = 'الرئيسيه';
+	$lang['ADMINCP'] = 'لوحة التحكم';
+	
 	
 	
 	//UPDATOR

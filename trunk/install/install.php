@@ -305,7 +305,7 @@ case 'data' :
 	<br />
 
 	<fieldset name="Group2" dir="' . $lang['DIR'] . '">
-	<legend style="width: 73px">' . $lang['INST_SITE_INFO'] . '</legend>
+	<legend style="width: 73px">' . $lang['INST_ADMIN_INFO'] . '</legend>
 	<table style="width: 100%">
 		<tr>
 			<td>' . $lang['USERNAME'] . '</td>

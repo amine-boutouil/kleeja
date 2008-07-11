@@ -56,7 +56,7 @@
 	}
 	elseif (file_exists('./install')) 
 	{
-		//big_error('install folder exists!', '<b>Install</b> folder detected! please delete it OR install kleeja if you haven\'t done so yet...<br/><br/><a href="./install">Click to Install</a><br/><br/>');
+		big_error('install folder exists!', '<b>Install</b> folder detected! please delete it OR install kleeja if you haven\'t done so yet...<br/><br/><a href="./install">Click to Install</a><br/><br/>');
 	}
 
 	//gd 
@@ -76,7 +76,6 @@
 
 
 	//then get
-	
 	require ($path.'cache.php');
 	
 	// for gzip
@@ -126,7 +125,7 @@
 	}
 	
 	//calculate  onlines ...  
-	if ($config['allow_online'] == 1 )
+	if ($config['allow_online'] == 1)
 	{
 		KleejaOnline();
 	}

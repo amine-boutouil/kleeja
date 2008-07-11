@@ -14,71 +14,17 @@ include important files
 	include ($path.'config.php');
 	include ($path.'functions.php');
 	include ($path.'mysql.php');
-
-	function get_microtime(){	list($usec, $sec) = explode(' ', microtime());	return ((float)$usec + (float)$sec);	}
-
-	if (phpversion() < '4.1.0') exit('Your php version is too old !');
- 
+	include ('func_inst.php');
+	
 
 
-//for language //	
-if (!isset($_POST['lang']))
-{ 
-		if ( isset($_COOKIE['lang']) )
-		{
-				if(file_exists('langs/' . $_COOKIE['lang'] . '.php'))
-				{
-					include ('langs/' . $_COOKIE['lang'] . '.php');
-				}
-				else
-				{
-					include ('langs/en.php');
-				}	
-		}
-		else
-		{
-			include ('langs/en.php');
-		}
-}
-
-/*
-style of installer
-*/
-$header = '<!-- Header Start -->
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="' . $_COOKIE['lang'] . '" lang="' . $_COOKIE['lang'] . '" dir="' . $lang['DIR'] . '">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>...Kleeja...</title><style type="text/css">
-* { padding: 0;margin: 0;}
-body {background: #FF9933;font: 0.74em "Tahoma" Verdana, Arial, sans-serif;line-height: 1.5em;text-align:center; }
-a {color: #3B6EBF;text-decoration: none;}a:hover {text-decoration: underline;}
-.roundedcornr_box_283542 {background: #fff0d2;margin-left: 10%; margin-right: 10%;width: 724px;}
-.roundedcornr_top_283542 div {background: url(../images/inst/roundedcornr_283542_tl.png) no-repeat top left;}
-.roundedcornr_top_283542 {background: url(../images/inst/roundedcornr_283542_tr.png) no-repeat top right;}
-.roundedcornr_bottom_283542 div {background: url(../images/inst/roundedcornr_283542_bl.png) no-repeat bottom left;}
-.roundedcornr_bottom_283542 {background: url(../images/inst/roundedcornr_283542_br.png) no-repeat bottom right;}
-.roundedcornr_top_283542 div, .roundedcornr_top_283542, .roundedcornr_bottom_283542 div, .roundedcornr_bottom_283542 {
-width: 100%;height: 30px;font-size: 1px;}.roundedcornr_content_283542 { margin: 0 30px; }</style></head><body><br/>
-<div class="roundedcornr_box_283542"><div class="roundedcornr_top_283542"><div></div></div><div class="roundedcornr_content_283542">
-<img src="../images/inst/logo.gif" style="border:0;">
-<br/>
-<!-- Header End -->
-<br/>
-';
-
-
-$footer = '<br/>
-<!-- Foterr Start -->
-</div><div class="roundedcornr_bottom_283542"><div></div></div></div></body></html>
-<!-- Foterr End -->';
 
 /*
 //print header
 */
 if (!isset($_POST['action_file_do']))
 {
-	print $header;
+	print $header_inst;
 }
 
 /*
@@ -136,7 +82,7 @@ case 'action_file':
 			{
 				//go to .. 2step
 				setcookie("action_file_do", $_POST['action_file_do'], time()+60*60*24*365);
-				echo '<meta http-equiv="refresh" content="0;url=' . $_SERVER[PHP_SELF].'?step=update_now">';
+				echo '<meta http-equiv="refresh" content="0;url=' . $_SERVER['PHP_SELF'].'?step=update_now">';
 			//	@header("Location:".$_SERVER[PHP_SELF]."?step=check"); /* Redirect browser */
 			}
 
@@ -163,7 +109,7 @@ case 'action_file':
 		// show   list ..
 		print '
 		<br />
-		<br /><form  action="' . $_SERVER[PHP_SELF] . '?step=action_file" method="post">
+		<br /><form  action="' . $_SERVER['PHP_SELF'] . '?step=action_file" method="post">
 		'.$lang['INST_CHOOSE_UPDATE_FILE'].' 
 		<br/>
 		<select name="action_file_do" style="width: 352px">
@@ -245,6 +191,6 @@ break;
 /*
 //print footer
 */
-print $footer;
+print $footer_inst;
 
 ?>

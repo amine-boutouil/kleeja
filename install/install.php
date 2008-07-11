@@ -14,96 +14,13 @@ include important files
 	include ($path.'config.php');
 	include ($path.'functions.php');
 	include ($path.'mysql.php');
+	include ('func_inst.php');
 	
-	function get_microtime(){	list($usec, $sec) = explode(' ', microtime());	return ((float)$usec + (float)$sec);	}
-
-    if (phpversion() < '4.1.0') exit('Your php version is too old !');
-
-
-//for language //	fix for 1rc1
-if ( !isset($_POST['lang']) )
-{ 
-		if ( isset($_COOKIE['lang']) )
-		{
-				if(file_exists('langs/' . $_COOKIE['lang'] . '.php'))
-				{
-					include ('langs/' . $_COOKIE['lang'] . '.php');
-				}
-				else
-				{
-					include ('langs/en.php');
-				}	
-		}
-		else
-		{
-			include ('langs/en.php');
-		}
-}
-
-/*
-style of installer
-*/
-$header = '<!-- Header Start -->
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="' . $_COOKIE['lang'] . '" lang="' . $_COOKIE['lang'] . '" dir="' . $lang['DIR'] . '">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>...Kleeja...</title><style type="text/css">
-* { padding: 0;margin: 0;}
-body {background: #FF9933;font: 0.74em "Tahoma" Verdana, Arial, sans-serif;line-height: 1.5em;text-align:center; }
-a {color: #3B6EBF;text-decoration: none;}a:hover {text-decoration: underline;}
-.roundedcornr_box_283542 {background: #fff0d2;margin-left: 10%; margin-right: 10%;width: 724px;}
-.roundedcornr_top_283542 div {background: url(../images/inst/roundedcornr_283542_tl.png) no-repeat top left;}
-.roundedcornr_top_283542 {background: url(../images/inst/roundedcornr_283542_tr.png) no-repeat top right;}
-.roundedcornr_bottom_283542 div {background: url(../images/inst/roundedcornr_283542_bl.png) no-repeat bottom left;}
-.roundedcornr_bottom_283542 {background: url(../images/inst/roundedcornr_283542_br.png) no-repeat bottom right;}
-.roundedcornr_top_283542 div, .roundedcornr_top_283542, .roundedcornr_bottom_283542 div, .roundedcornr_bottom_283542 {
-width: 100%;height: 30px;font-size: 1px;}.roundedcornr_content_283542 { margin: 0 30px; }</style></head><body><br/>
-<div class="roundedcornr_box_283542"><div class="roundedcornr_top_283542"><div></div></div><div class="roundedcornr_content_283542">
-<img src="../images/inst/logo.gif" style="border:0;" alt="kleeja" />
-<br/>
-<br/>
-<!-- Header End -->
-';
-
-
-$footer = '<!-- Foterr Start -->
-<br/>
-</div><div class="roundedcornr_bottom_283542"><div></div></div></div></body></html>
-<!-- Foterr End -->';
-
-
-//functions
-function make_style()
-{
-	$contents	=	file_get_contents('res/style.xml');
-	creat_style_xml($contents, true);
-}
-
-function make_language($def)
-{
-	if(!$def || $def=='en') 
-	{
-		$ar = false; 
-		$en = true; 
-	}
-	else
-	{
-		$ar = true; 
-		$en = false;
-	}
-	
-	$contents	=	file_get_contents('res/lang_ar.xml');
-	$contents1	=	file_get_contents('res/lang_en.xml');
-	creat_lang_xml($contents, $ar);
-	creat_lang_xml($contents1, $en);
-
-}
 
 /*
 //print header
 */
-print $header;
+print $header_inst;
 
 
 /*
@@ -148,16 +65,16 @@ case 'check':
 	
 	if ($texterr !='')
 	{
-		print $texterr;
+		print '<br/><img src="img/bad.gif" alt="bad." /> <br/>'.$texterr;
 		$submit_wh = 'disabled="disabled"';
 	}
 
 	if($submit_wh == '')
 	{
-		print '<br/><span style="color:green;"><b>[ ' . $lang['INST_GOOD_GO'] . ' ]</b></span><br/><br/>';
+		print '<br/><img src="img/good.gif" alt="good" /> <br/><span style="color:green;"><b>[ ' . $lang['INST_GOOD_GO'] . ' ]</b></span><br/><br/>';
 	}
 
-	print '<form method="post" action="' . $_SERVER[PHP_SELF] . '?step=gpl2">
+	print '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=gpl2">
 	<input name="agres" type="submit" value="' . $lang['INST_SUBMIT'] . '" ' . $submit_wh . '/>
 	</form>';
 
@@ -170,18 +87,7 @@ case 'gpl2':
 				$contentofgpl2 = "CANT FIND 'GPL2.TXT. FILE .. SEARCH ON NET ABOUT GPL2";
 
 	print '
-	<script type="text/javascript">
-	function agree ()
-	{
-		var agrec = document.getElementById(\'agrec\');
-		var agres = document.getElementById(\'agres\');
-
-		if (agrec.checked) { agres.disabled= \'\';}else{agres.disabled= \'disabled\';}
-	}
-
-	</script>
-
-	<form method="post" action="' . $_SERVER[PHP_SELF] . '?step=data">
+	<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=data">
 	<textarea name="gpl2" style="width: 456px; height: 365px">
 	' . $contentofgpl2 . '
 	</textarea>
@@ -204,14 +110,14 @@ case 'data' :
 			 || empty($_POST['username']) || empty($_POST['password']) || empty($_POST['email']) )
 		{
 			print $lang['EMPTY_FIELDS'];
-			print $footer;
+			print $footer_inst;
 			exit();
 		}
 
 		 if (!eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$", trim($_POST['email'])))
 		 {
 			print $lang['WRONG_EMAIL'];
-			print $footer;
+			print $footer_inst;
 			exit();
 		}
 
@@ -300,8 +206,8 @@ case 'data' :
 		</tr>
 		<tr>
 			<td>' . $lang['SITEMAIL'] . '</td>
-			<td><input name="sitemail" type="text" style="width: 256px" /></td>
-		</tr>
+			<td><input name="sitemail" id="sitemail" type="text" style="width: 256px" onchange="return w_email(this.name);" /></td>
+		</tr>       
 	</table>
 	</fieldset>
 
@@ -316,11 +222,11 @@ case 'data' :
 		</tr>
 		<tr>
 			<td>' . $lang['PASSWORD'] . '</td>
-			<td><input name="password" type="text" style="width: 256px" /></td>
+			<td><input name="password" ID="password" type="text" style="width: 173px"  onkeyup="return passwordChanged();"/> <span id="strength"><img src="img/p1.gif" alt="! .." /></span></td>
 		</tr>
 		<tr>
 			<td>' . $lang['EMAIL'] . '</td>
-			<td><input name="email" type="text" style="width: 256px" /></td>
+			<td><input name="email" id="email" type="text" style="width: 256px"  onchange="return w_email(this.name);" /></td>
 		</tr>
 	</table>
 	</fieldset>
@@ -331,13 +237,14 @@ case 'data' :
 
 break;
 case 'end' :
+		print '<img src="img/wink.gif" alt="congratulation" /><br/><br/>';
 		print '<span style="color:blue;">' . $lang['INST_FINISH_SQL'] . '</span><br/><br/>';
-		print '<a href="../index.php">' . $lang['INDEX'] . '</a><br/><br/>';
-		print '<a href="../admin.php">' . $lang['ADMINCP'] . '</a><br/><br>';
+		print '<img src="img/home.gif" alt="home" />&nbsp;<a href="../index.php">' . $lang['INDEX'] . '</a><br/><br/>';
+		print '<img src="img/adm.gif" alt="admin" />&nbsp;<a href="../admin.php">' . $lang['ADMINCP'] . '</a><br/><br>';
 		print '' . $lang['INST_KLEEJADEVELOPERS'] . '<br/><br>';
 		print '<a href="http://www.kleeja.com">www.kleeja.com</a><br/><br>';
 		//for safe ..
-		@rename("install.php", "install.lock");
+		//@rename("install.php", "install.lock");
 break;
 }#endOFswitch
 
@@ -346,6 +253,6 @@ break;
 /*
 //print footer
 */
-print $footer;
+print $footer_inst;
 
 

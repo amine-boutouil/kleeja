@@ -1,6 +1,6 @@
 <?php
 # KLEEJA INSTALLER ...
-# updated 22/4/1249 [4/2008]
+# updated  [7/2008]
 # this file hav many updates .. dont use previous ones
 # last edit by : saanina
 
@@ -68,14 +68,12 @@ case 'language':
 	// show  language list ..
 	print '<br />		
 	<div class="centery">
-	<a href="http://en.wikipedia.org/wiki/Muhammad_al-Idrisi" target="_blank" title="al-Idrisi Map">
-		<img src="img/aledrisiMap.gif" style="border:0" alt="al-Idrisi Map">
-	</a>
+		<img src="img/map.gif" style="border:0" alt="al-Idrisi Map">
 	<br /><form  action="' . $_SERVER['PHP_SELF'] . '?step=language" method="post">
 	<select name="lang" style="width: 352px">
 	' . $lngfiles . '
 	</select>
-	<br /><input name="submitlang" type="submit" value="[  >>>  ] " /><br /><br /><br /></form></div>';
+	<br /><input name="submitlang" type="submit" value=" [  Next  ] " /><br /><br /><br /></form></div>';
 
 		}//no language else
 
@@ -87,7 +85,7 @@ case 'choose' :
 		print '<a href="./install.php"><img src="img/installer.gif" alt="installer" /><br/>  ' . $lang['INST_INSTALL_CLEAN_VER'] . ' </a><br/><br/>';
 		print '<a href="./update.php"><img src="img/updater.gif" alt="updater" /> <br/> ' . $lang['INST_UPDATE_P_VER'] . ' </a><br/><br/><br/>';
 
-		print '<a href="http://www.kleeja.com"><span style="color:black;">www.kleeja.com</span></a><br/><br>';
+		print '<a href="http://www.kleeja.com"><span style="color:black;">www.kleeja.com</span></a><br/><br/>';
 
 break;
 }#endOFswitch

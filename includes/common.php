@@ -39,7 +39,7 @@
 	//include files .. & classes ..
 	$path = dirname(__FILE__) . DIRECTORY_SEPARATOR;
 
-	require ($path.'config.php');
+	require ('config.php');
 	require ($path.'style.php');
 	require ($path.'mysql.php');
 	require ($path.'KljUploader.php');
@@ -56,13 +56,13 @@
 	}
 	elseif (file_exists('./install')) 
 	{
-		big_error('install folder exists!', '<b>Install</b> folder detected! please delete it OR install kleeja if you haven\'t done so yet...<br/><br/><a href="./install">Click to Install</a><br/><br/>');
+		big_error('install folder exists!', '<b>Install</b> folder detected! please delete it OR install <b>Kleeja</b> if you haven\'t done so yet...<br/><br/><a href="./install">Click to Install</a><br/><br/>');
 	}
 
 	//gd 
 	if(!function_exists('imagecreatetruecolor'))
 	{
-		big_error('No GD !', '<b>imagecreatetruecolor</b> function Doesnt exists , That mean GD is disabled or it\'s very very old. <br/> If you dont want this feature, then delete this error from file <i>'. __file__ . '</i> in line </i>' . __line__ .'</i>');
+		big_error('No GD !', '<b>imagecreatetruecolor</b> function Doesnt exists , That mean GD is disabled or it\'s very very old. <br/> If you don\'t want this feature, then delete this error from file <i>'. __file__ . '</i> in line </i>' . __line__ .'</i>');
 	}
      
 	// start classes ..

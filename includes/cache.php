@@ -56,6 +56,8 @@ if (!defined('IN_COMMON'))
 //
 //get lang data from lang table  ...
 //
+	if(!$lang || !is_array($lang))	$lang	=	array();
+	
 	if (file_exists('cache/data_lang_'.$config['language'].'.php'))
 	{
 		include ('cache/data_lang_'.$config['language'].'.php');

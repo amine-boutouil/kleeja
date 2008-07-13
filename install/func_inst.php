@@ -32,25 +32,30 @@ if (!isset($_POST['lang']))
 					include ('langs/en.php');
 				}	
 
+}
 
 /*
 style of installer
 */
 $header_inst = '<!-- Header Start -->
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="' . $_COOKIE['lang'] . '" lang="' . $_COOKIE['lang'] . '" dir="' . $lang['DIR'] . '">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>...Kleeja...</title><style type="text/css">
 * { padding: 0;margin: 0;}
-body {background: #FF9933;font: 0.74em "Tahoma" Verdana, Arial, sans-serif;line-height: 1.5em;text-align:center;}
+body {
+background: #FF9933;
+font: 0.74em "Tahoma" Verdana, Arial, sans-serif;line-height: 1.5em;
+margin:0px auto; text-align: center
+}
 aligny {
 float : '.(($lang['DIR']=='ltr') ? 'left' : 'right') .'
 }
 input { font-family:Tahoma; } 
 img { border:0px } 
 a {color: #3B6EBF;text-decoration: none;}a:hover {text-decoration: underline;}
-.roundedcornr_box_283542 {background: #fff0d2;margin-left: 10%; margin-right: 10%;width: 724px;}
+.roundedcornr_box_283542 {background: #fff0d2;margin-left: 10%; margin:0 auto;width: 724px;}
 .roundedcornr_top_283542 div {background: url(img/roundedcornr_283542_tl.png) no-repeat top left;}
 .roundedcornr_top_283542 {background: url(img/roundedcornr_283542_tr.png) no-repeat top right;}
 .roundedcornr_bottom_283542 div {background: url(img/roundedcornr_283542_bl.png) no-repeat bottom left;}
@@ -59,6 +64,7 @@ a {color: #3B6EBF;text-decoration: none;}a:hover {text-decoration: underline;}
 width: 100%;height: 30px;font-size: 1px;}.roundedcornr_content_283542 { margin: 0 30px; }
 </style>
 	<script type="text/javascript">
+	//<![CDATA[
 	function agree ()
 	{
 		var agrec = document.getElementById(\'agrec\');
@@ -107,7 +113,83 @@ function w_email(l)
 			m.focus();
 		}
 }
-	</script>
+
+//By JavaScript Kit (http://javascriptkit.com)
+function checkrequired(which)
+{
+	var pass	=	true;
+	if (document.images)
+	{
+		for (i=0;i<which.length;i++)
+		{
+			var tempobj=which.elements[i]
+			if (tempobj.name.substring(0,8)=="required")
+			{
+				if (((tempobj.type=="text"||tempobj.type=="textarea")&&tempobj.value==\'\')||(tempobj.type.toString().charAt(0)=="s"&&tempobj.selectedIndex==-1))
+				{
+					pass	=	false;
+					break
+				}
+			}
+		}
+	}
+	if (!pass)
+	{
+		alert("' . $lang['VALIDATING_FORM_WRONG'] . '");
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+}
+
+// http://www.dynamicdrive.com/ 
+function formCheck(formobj, fieldRequired){
+
+
+	// dialog message
+	var alertMsg = "' . $lang['VALIDATING_FORM_WRONG'] . ':\n";
+	
+	var l_Msg = alertMsg.length;
+	
+	for (var i = 0; i < fieldRequired.length; i++){
+		var obj = formobj.elements[fieldRequired[i]];
+		if (obj){
+			switch(obj.type){
+			case "text":
+			case "textarea":
+				if (obj.value == "" || obj.value == null){
+					alertMsg += " - " + fieldRequired[i] + "\n";
+				}
+				break;
+			default:
+			}
+			if (obj.type == undefined){
+				var blnchecked = false;
+				for (var j = 0; j < obj.length; j++){
+					if (obj[j].checked){
+						blnchecked = true;
+					}
+				}
+				if (!blnchecked){
+					alertMsg += " - " + fieldRequired[i] + "\n";
+				}
+			}
+		}
+	}
+
+	if (alertMsg.length == l_Msg){
+		return true;
+	}else{
+		alert(alertMsg);
+		return false;
+	}
+}
+// -->
+//]]>
+
+</script>
 </head>
 <body>
 <br/>
@@ -139,7 +221,7 @@ $header_inst .= '</select>
 </form>';
 }
 $header_inst .= '
-<img src="img/logo.gif" style="border:0;">
+<img src="img/logo.gif" style="border:0;" alt="kleeja" />
 <br/>
 <!-- Header End -->
 <br/>
@@ -181,12 +263,52 @@ function make_language($def)
 
 
 
-}
+	//export config 
+	function do_config_export($srv, $usr, $pass, $nm, $prf)
+	{
+	
+		$data	= '<?php'."\n\n" . 'if (!defined(\'IN_COMMON\')) exit();' . "\n\n\n";
+		$data	.= '$dbserver		= \''.addslashes($srv)."';//database server \n";
+		$data	.= '$dbuser			= \''.addslashes($usr)."';// database user \n";
+		$data	.= '$dbpass			= \''.addslashes($pass)."';// database password \n";
+		$data	.= '$dbname			= \''.addslashes($nm)."';// database name \n";
+		$data	.= '$dbprefix		= \''.addslashes($prf)."';// if you use perfix for tables , fill it \n";
+		$data	.= '$perpage		= 10;'."// number of results in each page  \n";
+		$data	.= "\n\n\n";
+		$data	.= "//for integration with forums [ must change user systen from admin cp ] \n";
+		$data	.= '$forum_srv		= "localhost";'."// forum database server  \n";
+		$data	.= '$forum_user		= "root";'."// forum database user  \n";
+		$data	.= '$forum_pass		= "";'."// forum database password  \n";
+		$data	.= '$forum_prefix	= "";'."//the perfix before name of forum tables  \n";
+		$data	.= '$forum_path		= "/forum";'."// path of forums  \n";
+		$data	.= "\n\n\n";
+		$data	.= "//for use ftp account to uplaod [ Under Develpment ] \n";
+		$data	.= '$use_ftp		= 0;'."// 1 : yes  - 0 : no   \n";
+		$data	.= '$ftp_server		= "ftp.example.com";'."// ...   \n";
+		$data	.= '$ftp_user		= "";'."//    \n";
+		$data	.= '$ftp_pass		= "";'."//    \n";
+		$data	.= "\n\n\n";
+		$data	.= "// stop hook system if you need, to stop remove the \\ from the next line  \n";
+		$data	.= "//define('STOP_HOOKS', true); \n";
+		$data	.= "// \n";
+		$data	.= "\n\n";
+		$data	.= '?'.'>';
+	
+			
+		header('Content-Type: text/x-delimtext; name="config.php"');
+		header('Content-disposition: attachment; filename=config.php');
+		echo $data;
+		exit;
+}	
 
+	
+	
 	function get_microtime(){	list($usec, $sec) = explode(' ', microtime());	return ((float)$usec + (float)$sec);	}
 
 	
     if (phpversion() < '4.1.0') exit('Your php version is too old !');
 
+
+	
 
 ?>

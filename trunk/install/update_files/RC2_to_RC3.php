@@ -88,13 +88,13 @@ $update_notes[]	=	$lang['INST_NOTE_RC2_TO_RC3'];
 //functions ////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function make_style()
+function up_make_style()
 {
 	$contents	=	file_get_contents('res/style.xml');
 	creat_style_xml($contents, true);
 }
 
-function make_language()
+function up_make_language()
 {
 	$contents	=	file_get_contents('res/lang_ar.xml');
 	$contents1	=	file_get_contents('res/lang_en.xml');
@@ -103,8 +103,8 @@ function make_language()
 
 }
 
-$update_functions[]	=	'make_style()';
-$update_functions[]	=	'make_language()';
+$update_functions[]	=	'up_make_style()';
+$update_functions[]	=	'up_make_language()';
 
 
 ?>

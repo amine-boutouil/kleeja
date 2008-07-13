@@ -11,19 +11,19 @@
 
 	
 	//for integration with forums [ must change user systen from admin cp ] 
-	$forum_srv = "localhost";				// forum database server
-	$forum_user = "root";					// forum database user
-	$forum_pass = "";						// forum database password
-	$forum_db ="vb368";						// forum database name
-	$forum_prefix = ""; 					//the perfix before name of tables
-	$forum_path ="/vb"; 					// folder of forum
+	$forum_srv		=	"localhost";				// forum database server
+	$forum_user		=	"root";					// forum database user
+	$forum_pass		=	"";						// forum database password
+	$forum_db		=	"vb368";						// forum database name
+	$forum_prefix	=	""; 					//the perfix before name of tables
+	$forum_path		=	"/vb"; 					// folder of forum
 	
 	
 	//for use ftp account to uplaod [ under develpment ]
-	$use_ftp = 0;							// 1 : yes / 0 : no 
-	$ftp_server = "ftp.example.com";		// ...
-	$ftp_user = "";							//
-	$ftp_pass = "";							//
+	$use_ftp		=	0;							// 1 : yes / 0 : no 
+	$ftp_server		=	"ftp.example.com";		// ...
+	$ftp_user		=	"";							//
+	$ftp_pass		=	"";							//
 	
 	
 	

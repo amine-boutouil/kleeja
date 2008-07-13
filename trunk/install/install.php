@@ -11,7 +11,7 @@ include important files
 
 	define ( 'IN_COMMON' , true);
 	$path = "../includes/";
-	include ($path.'config.php');
+	include ('../config.php');
 	include ($path.'functions.php');
 	include ($path.'mysql.php');
 	include ('func_inst.php');
@@ -20,7 +20,8 @@ include important files
 /*
 //print header
 */
-print $header_inst;
+if(!isset($_POST['dbsubmit']))
+	print $header_inst;	
 
 
 /*
@@ -29,6 +30,107 @@ print $header_inst;
 switch ($_GET['step']) 
 {
 default:
+case 'gpl2':
+
+	$contentofgpl2 = @file_get_contents('../docs/GPL2.txt');
+	
+	if (strlen($contentofgpl2) < 3 ) 
+				$contentofgpl2 = "CANT FIND 'GPL2.TXT. FILE .. SEARCH ON NET ABOUT GPL2";
+
+	print '
+	<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=config">
+	<textarea name="gpl2" rows="" cols="" style="width: 456px; height: 365px">
+	' . $contentofgpl2 . '
+	</textarea>
+
+	<br />
+	' . $lang['INST_AGR_GPL2'] . ' <input name="agrec" id="agrec" type="checkbox" onclick="javascript:agree();"  /><br />
+	<input name="agres" id="agres" type="submit" value="' . $lang['INST_SUBMIT'] . '" disabled="disabled"/>
+
+	</form>';
+
+
+break;
+case 'config':
+	
+	
+	// SUBMIT
+	if(isset($_POST['dbsubmit']))
+	{
+		//lets do it
+	do_config_export(
+					$_POST['db_server'],
+					$_POST['db_user'],
+					$_POST['db_pass'],
+					$_POST['db_name'],
+					$_POST['db_prefix']
+					);
+	
+	}
+	
+	$xs	=(!file_exists('../config.php')) ? false : true;
+	
+	
+	if($xs== false)
+	{
+		 print '<br/><form method="post"  action="' . $_SERVER['PHP_SELF'] . '?step=config"  onsubmit="javascript:return formCheck(this, Array(\'db_server\',\'db_user\',\'db_pass\' ,\'db_name\',\'db_prefix\' ));">
+
+			<fieldset id="Group1" dir="' . $lang['DIR'] . '">
+			<b>' . $lang['DB_INFO'] . '</b>
+			<br/>
+			<br/>
+			<table style="width: 100%">
+				<tr>
+					<td>' . $lang['DB_SERVER'] . '</td>
+					<td><input name="db_server" type="text" value="localhost" style="width: 256px" />
+					</td>
+				</tr>
+				<tr>
+					<td>' . $lang['DB_USER'] . '</td>
+					<td><input name="db_user" type="text" style="width: 256px" />
+					</td>
+				</tr>
+				<tr>
+					<td>' . $lang['DB_PASSWORD'] . '</td>
+					<td><input name="db_pass" type="text" style="width: 256px" />
+					</td>
+				</tr>  
+				<tr>
+					<td>' . $lang['DB_NAME'] . '</td>
+					<td><input name="db_name" type="text" style="width: 256px" />
+					</td>
+				</tr> 
+				<tr>
+					<td>' . $lang['DB_PREFIX'] . '</td>
+					<td><input name="db_prefix" type="text" style="width: 256px" />
+					</td>
+				</tr>       
+			</table>
+			<br/>
+			</fieldset>
+
+			<input name="dbsubmit" type="submit" value="' . $lang['INST_EXPORT'] . '" />
+			</form>
+			<br/>
+			<br/>
+			<hr/>
+			<br/>
+			<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=config">
+			<input  type="submit" value="' . $lang['INST_SUBMIT_CONFIGOK'] . '" />
+			</form>
+		';
+	}
+	else
+	{
+		print ' <br/><span style="color:green;"><b>'. $lang['CONFIG_EXISTS'] . '</b><br/>';
+		print '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=check">
+		<input name="agres" type="submit" value="' . $lang['INST_SUBMIT'] . '" />
+		</form>';
+	}
+
+
+
+break;
 case 'check':
 
 	$submit_wh = '';
@@ -74,32 +176,12 @@ case 'check':
 		print '<br/><img src="img/good.gif" alt="good" /> <br/><span style="color:green;"><b>[ ' . $lang['INST_GOOD_GO'] . ' ]</b></span><br/><br/>';
 	}
 
-	print '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=gpl2">
+	print '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=data">
 	<input name="agres" type="submit" value="' . $lang['INST_SUBMIT'] . '" ' . $submit_wh . '/>
 	</form>';
 
 break;
-case 'gpl2':
 
-	$contentofgpl2 = @file_get_contents('../docs/GPL2.txt');
-	
-	if (strlen($contentofgpl2) < 3 ) 
-				$contentofgpl2 = "CANT FIND 'GPL2.TXT. FILE .. SEARCH ON NET ABOUT GPL2";
-
-	print '
-	<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=data">
-	<textarea name="gpl2" style="width: 456px; height: 365px">
-	' . $contentofgpl2 . '
-	</textarea>
-
-	<br />
-	' . $lang['INST_AGR_GPL2'] . ' <input name="agrec" id="agrec" type="checkbox" onclick="javascript:agree();"  /><br />
-	<input name="agres" id="agres" type="submit" value="' . $lang['INST_SUBMIT'] . '" disabled="disabled"/>
-
-	</form>';
-
-
-break;
 case 'data' :
 
 	if (isset($_POST['datasubmit']))
@@ -178,7 +260,7 @@ case 'data' :
 			make_style();
 			make_language($_COOKIE['lang']);
 			
-			print '<form method="post" action="' . $_SERVER[PHP_SELF] . '?step=end">
+			print '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=end">
 			<input name="agres" type="submit" value="' . $lang['INST_SUBMIT'] . '"/>
 			</form>';
 		}
@@ -192,8 +274,8 @@ case 'data' :
 	//$sitepath = $_SERVER['DOCUMENT_ROOT'].dirname($_SERVER['PHP_SELF']);
 	$urlsite =  "http://".$_SERVER['HTTP_HOST'] . str_replace('install','',dirname($_SERVER['PHP_SELF']));
 
- print '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=data">
-	<fieldset name="Group1" dir="' . $lang['DIR'] . '">
+ print '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=data"  onsubmit="javascript:return formCheck(this, Array(\'sitename\',\'siteurl\',\'sitemail\' ,\'username\',\'password\',\'email\' ));">
+	<fieldset id="Group1" dir="' . $lang['DIR'] . '">
 	<legend style="width: 73px"><b>' . $lang['INST_SITE_INFO'] . '</b></legend>
 	<table style="width: 100%">
 		<tr>
@@ -213,7 +295,7 @@ case 'data' :
 
 	<br />
 
-	<fieldset name="Group2" dir="' . $lang['DIR'] . '">
+	<fieldset id="Group2" dir="' . $lang['DIR'] . '">
 	<legend style="width: 73px"><b>' . $lang['INST_ADMIN_INFO'] . '</b></legend>
 	<table style="width: 100%">
 		<tr>
@@ -222,7 +304,7 @@ case 'data' :
 		</tr>
 		<tr>
 			<td>' . $lang['PASSWORD'] . '</td>
-			<td><input name="password" ID="password" type="text" style="width: 173px"  onkeyup="return passwordChanged();"/> <span id="strength"><img src="img/p1.gif" alt="! .." /></span></td>
+			<td><input name="password" id="password" type="text" style="width: 173px"  onkeyup="return passwordChanged();"/> <span id="strength"><img src="img/p1.gif" alt="! .." /></span></td>
 		</tr>
 		<tr>
 			<td>' . $lang['EMAIL'] . '</td>
@@ -231,7 +313,8 @@ case 'data' :
 	</table>
 	</fieldset>
 
-	<input name="datasubmit" type="submit" value="' . $lang['INST_SUBMIT'] . '" />';
+	<input name="datasubmit" type="submit" value="' . $lang['INST_SUBMIT'] . '" />
+	</form>';
 	}#else
 
 
@@ -240,9 +323,9 @@ case 'end' :
 		print '<img src="img/wink.gif" alt="congratulation" /><br/><br/>';
 		print '<span style="color:blue;">' . $lang['INST_FINISH_SQL'] . '</span><br/><br/>';
 		print '<img src="img/home.gif" alt="home" />&nbsp;<a href="../index.php">' . $lang['INDEX'] . '</a><br/><br/>';
-		print '<img src="img/adm.gif" alt="admin" />&nbsp;<a href="../admin.php">' . $lang['ADMINCP'] . '</a><br/><br>';
-		print '' . $lang['INST_KLEEJADEVELOPERS'] . '<br/><br>';
-		print '<a href="http://www.kleeja.com">www.kleeja.com</a><br/><br>';
+		print '<img src="img/adm.gif" alt="admin" />&nbsp;<a href="../admin.php">' . $lang['ADMINCP'] . '</a><br/><br />';
+		print '' . $lang['INST_KLEEJADEVELOPERS'] . '<br/><br/>';
+		print '<a href="http://www.kleeja.com">www.kleeja.com</a><br/><br/>';
 		//for safe ..
 		//@rename("install.php", "install.lock");
 break;

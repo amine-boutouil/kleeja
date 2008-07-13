@@ -11,7 +11,7 @@ include important files
 	
 	define ( 'IN_COMMON' , true);
 	$path = "../includes/";
-	include ($path.'config.php');
+	include ('../config.php');
 	include ($path.'functions.php');
 	include ($path.'mysql.php');
 	include ('func_inst.php');

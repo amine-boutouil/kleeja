@@ -190,7 +190,7 @@ $install_sqls['config_insert2'] = "INSERT INTO `{$dbprefix}config` (`name`, `val
 $install_sqls['config_insert3'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('filesnum', '5')";
 $install_sqls['config_insert4'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('siteclose', '0')";
 $install_sqls['config_insert5'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('decode', '1')";
-//$install_sqls['config_insert6'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('style', '1')";
+$install_sqls['config_insert6'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('style', '1')";
 $install_sqls['config_insert7'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('closemsg', 'sits is closed now')";
 $install_sqls['config_insert8'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('sec_down', '10')";
 $install_sqls['config_insert9'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('statfooter', '0')";
@@ -202,7 +202,7 @@ $install_sqls['config_insert14'] = "INSERT INTO `{$dbprefix}config` (`name`, `va
 $install_sqls['config_insert15'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('thumbs_imgs', '0')";
 $install_sqls['config_insert16'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('write_imgs', '0')";
 $install_sqls['config_insert17'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('del_url_file', '1')";
-//$install_sqls['config_insert18'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('language', '" . ($_COOKIE['lang']=='ar' ? '2' : '3') . "')";
+$install_sqls['config_insert18'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('language', '" . ($_COOKIE['lang']=='ar' ? '2' : '3') . "')";
 $install_sqls['config_insert19'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('www_url', '0')";
 $install_sqls['config_insert20'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('del_f_day', '10')";
 $install_sqls['config_insert21'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('allow_stat_pg', '1')";

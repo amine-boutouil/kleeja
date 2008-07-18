@@ -11,7 +11,7 @@ include important files
 	
 	define ( 'IN_COMMON' , true);
 	$path = "../includes/";
-	include ('../config.php');
+	(file_exists('../config.php')) ? include ('../config.php') : null;
 	include ($path.'functions.php');
 	include ($path.'mysql.php');
 	include ('func_inst.php');
@@ -68,7 +68,7 @@ case 'check':
 		print '<br/><span style="color:green;"><b>[ ' . $lang['INST_GOOD_GO'] . ' ]</b></span><br/><br/>';
 	}
 
-	print '<form method="post" action="' . $_SERVER[PHP_SELF] . '?step=action_file">
+	print '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=action_file&'.get_lang(1).'">
 	<input name="agres" type="submit" value="' . $lang['INST_SUBMIT'] . '" ' . $submit_wh . '/>
 	</form>';
 
@@ -81,8 +81,7 @@ case 'action_file':
 			if (!empty($_POST['action_file_do']))
 			{
 				//go to .. 2step
-				setcookie("action_file_do", $_POST['action_file_do'], time()+60*60*24*365);
-				echo '<meta http-equiv="refresh" content="0;url=' . $_SERVER['PHP_SELF'].'?step=update_now">';
+				echo '<meta http-equiv="refresh" content="0;url=' . $_SERVER['PHP_SELF'].'?step=update_now&action_file_do='. htmlspecialchars($_POST['action_file_do']) .'&'.get_lang(1).'">';
 			//	@header("Location:".$_SERVER[PHP_SELF]."?step=check"); /* Redirect browser */
 			}
 
@@ -109,7 +108,7 @@ case 'action_file':
 		// show   list ..
 		print '
 		<br />
-		<br /><form  action="' . $_SERVER['PHP_SELF'] . '?step=action_file" method="post">
+		<br /><form  action="' . $_SERVER['PHP_SELF'] . '?step=action_file&'.get_lang(1).'" method="post">
 		'.$lang['INST_CHOOSE_UPDATE_FILE'].' 
 		<br/>
 		<select name="action_file_do" style="width: 352px">
@@ -127,7 +126,13 @@ break;
 
 case 'update_now':
 	
-		$file_for_up	=	'update_files/'.$_COOKIE['action_file_do'].'.php';
+		if(!isset($_GET['action_file_do']))
+		{
+			echo '<meta http-equiv="refresh" content="0;url=' . $_SERVER['PHP_SELF'].'?step=action_file&'.get_lang(1).'">';
+			exit();
+		}
+		
+		$file_for_up	=	'update_files/'.htmlspecialchars($_GET['action_file_do']).'.php';
 		if(!file_exists($file_for_up))
 		{
 			print '<span style="color:red;">' . $lang['INST_ERR_NO_SELECTED_UPFILE_GOOD'] . ' [ '.$file_for_up.' ]</span><br/>';

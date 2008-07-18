@@ -19,7 +19,7 @@ switch ($_GET['lan_t'])
 		
 		//for style ..
 		$stylee = "admin_langs";
-		$action 		= "admin.php?cp=langs&lan_t=ln";
+		$action = "admin.php?cp=langs&lan_t=ln";
 
 		//get styles
 		$query = array(
@@ -51,7 +51,7 @@ switch ($_GET['lan_t'])
 					//for style ..
 					$stylee = "admin_show_words";
 					//words
-					$action 		= "admin.php?cp=langs&lan_t=lang_orders";
+					$action = "admin.php?cp=langs&lan_t=lang_orders";
 					
 					//get_tpls
 					$query = array(
@@ -67,8 +67,8 @@ switch ($_GET['lan_t'])
 					while($row=$SQL->fetch_array($result))
 					{
 							$arr[] = array(
-											lang_word =>$row['word'],
-											lang_trans =>$row['trans']
+											'lang_word' =>$row['word'],
+											'lang_trans' =>$row['trans']
 							);
 					}
 					$SQL->freeresult($result);

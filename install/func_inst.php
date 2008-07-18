@@ -9,37 +9,45 @@ if(isset($_GET['change_lang']))
 			if (!empty($_POST['lang']))
 			{
 				//go to .. 2step
-				setcookie("lang", htmlspecialchars($_POST['lang']), time()+60*60*24*365);
 			//	echo '<meta http-equiv="refresh" content="0;url=' . $_SERVER['PHP_SELF'].'?step=">';
-				@header("Location:".$_SERVER['PHP_SELF']."?step=" . $_POST['step_is']); /* Redirect browser */
+				@header("Location:".$_SERVER['PHP_SELF']."?step=" . $_POST['step_is'] . "&lang=".$_POST['lang'] ); /* Redirect browser */
 			}
 			
 }
 
+function get_lang ($link=false)
+{
+	if (isset($_GET['lang']))
+	{ 
+					if(empty($_GET['lang']))  $_GET['lang'] = 'en';
+					
+					if(file_exists('langs/' . htmlspecialchars($_GET['lang']) . '.php'))
+					{
+						$ln	=  htmlspecialchars($_GET['lang']);
+					}
+					else
+					{
+						$ln = 'en';
+					}	
 
+	}
+	else
+	{
+		$ln	=	'en';
+	}
 
-//for language //	fix for 1rc1
-if (!isset($_POST['lang']))
-{ 
-				if(!$_COOKIE['lang'])  $_COOKIE['lang'] = 'en';
-				
-				if(file_exists('langs/' . htmlspecialchars($_COOKIE['lang']) . '.php'))
-				{
-					include ('langs/' . htmlspecialchars($_COOKIE['lang']) . '.php');
-				}
-				else
-				{
-					include ('langs/en.php');
-				}	
-
+	return ($link != false) ? 'lang='.$ln : $ln;
 }
+
+//for language //	fix for 1rc3
+include ('langs/' .get_lang() . '.php');
 
 /*
 style of installer
 */
 $header_inst = '<!-- Header Start -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="' . $_COOKIE['lang'] . '" lang="' . $_COOKIE['lang'] . '" dir="' . $lang['DIR'] . '">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="' . get_lang() . '" lang="' . get_lang() . '" dir="' . $lang['DIR'] . '">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>...Kleeja...</title><style type="text/css">

@@ -1,5 +1,5 @@
 <?php
-	//img_ctrl
+	//img
 	//part of admin extensions
 	//conrtoll imgs
 	//kleeja.com
@@ -13,7 +13,7 @@
 	
 		//for style ..
 		$stylee		= "admin_img";
-		$action 	= "admin.php?cp=img";
+		$action 	= "admin.php?cp=img_ctrl";
 
 		$query = array(
 					'SELECT'	=> '*',
@@ -62,17 +62,17 @@
 			$user_name = $SQL->fetch_array($SQL->build($query_name));
 			
 			//make new lovely arrays !!
-			$arr[] = array(id =>$row['id'],
-						tdnum=>($tdnum==0) ? "<tr>": "",
-						tdnum2=>($tdnum==2) ? "</tr>" : "",
-					//	tdnum3=>($all_tdnum >= $nums_rows) ? "</tr>" : "",
-						name =>$row['name'],
-						href =>$row['folder']."/".$row['name'],
-						size =>$lang['FILESIZE']. ':' . Customfile_size($row['size']),
-						ups => $lang['FILEUPS'] .' : '.$row['uploads'],
-						time => $lang['FILEDATE']. ':' .date("d-m-Y H:a", $row['time']),
-						user =>$lang['BY'] . ':' .(($row['user'] == '-1') ? $lang['GUST'] :  $user_name['name']),
-						thumb_link => (is_file($row['folder'] . "/thumbs/" . $row['name'] )) ? $row['folder'] . "/thumbs/" . $row['name'] : $row['folder'] . "/" . $row['name'],
+			$arr[]	=	array('id'		=>$row['id'],
+							'tdnum'		=>($tdnum==0) ? "<tr>": "",
+							'tdnum2'	=>($tdnum==2) ? "</tr>" : "",
+						//	'tdnum3'		=>($all_tdnum >= $nums_rows) ? "</tr>" : "",
+							'name'		=>$row['name'],
+							'href'		=>$row['folder']."/".$row['name'],
+							'size'		=>$lang['FILESIZE']. ':' . Customfile_size($row['size']),
+							'ups'		=> $lang['FILEUPS'] .' : '.$row['uploads'],
+							'time'		=> $lang['FILEDATE']. ':' .date("d-m-Y H:a", $row['time']),
+							'user'		=>$lang['BY'] . ':' .(($row['user'] == '-1') ? $lang['GUST'] :  $user_name['name']),
+							'thumb_link'=> (is_file($row['folder'] . "/thumbs/" . $row['name'] )) ? $row['folder'] . "/thumbs/" . $row['name'] : $row['folder'] . "/" . $row['name'],
 						);
 			
 			//fix ... 

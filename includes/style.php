@@ -128,7 +128,7 @@ class kleeja_style
 		//get tpl
 		function _load_template($template_name)
 		{
-			global $config, $SQL;
+			global $config, $SQL,$dbprefix;
 			
 			if(!$config['style']) $config['style']  =1;
 			

@@ -5,14 +5,13 @@
 #-----------------------------------------------------------------
 #
 #1- upload Kleeja folder to your host by FTP
-#2- Edit 'includes/config.php'
-#3- run Installer from your browser 
+#2- run Installer from your browser 
 #  http://yoursite.com/kleeja/install
 # and go on with steps .. 
-#4- to enter administration panel go to 
+#3- to enter administration panel go to 
 # http://yoursite.com/kleeja/admin.php 
 #
-#5- thank you for using our script .. and dont remove copyrights ..
+#4- thank you for using our script .. and dont remove copyrights ..
 
 
 ##################################### 

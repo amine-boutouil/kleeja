@@ -161,7 +161,7 @@
 	<word name="CANT_DIR_CRT"><![CDATA[لم يتم إنشاء مجلد تلقائياً .. قم بإنشاءه انت]]></word>
 	<word name="AGREE_RULES"><![CDATA[أوافق على شروط المركز]]></word>
 	<word name="CHANG_TO_URL_FILE"><![CDATA[تبديل طريقة التحميل..رابط أو إدخال]]></word>
-	<word name="CURL_IS_OFF"><![CDATA[دوال CURL معطله ..]]></word>
+	<word name="URL_CANT_GET"><![CDATA[خطأ في جلب الملف من الرابط]]></word>
 	<word name="ADMINCP"><![CDATA[مركز التحكم]]></word>
 	<word name="JUMPTO"><![CDATA[إنتقل إلى]]></word>
 	<word name="GO_BACK_BROWSER"><![CDATA[رجوع للخلف]]></word>
@@ -355,5 +355,9 @@
 	<word name="PLGUIN_DISABLED_ENABLED"><![CDATA[لقد تم تفعيل \ تعطيل الإضافه البرمجيه..]]></word>
 	<word name="NO_PLUGINS"><![CDATA[لا يوجد أي إضافات برمجيه ..]]></word>
 	<word name="NEW_PLUGIN_ADDED"><![CDATA[لقد تمت إضافة الإضافة البرمجيه ..]]></word>
+	<word name="R_CHECK_UPDATE"><![CDATA[فحص عن تحديثات]]></word>
+	<word name="ERROR_CHECK_VER"><![CDATA[خطأ: لا يمكن جلب معلومات عن اخر نسخه في هذه اللحظه , حاول مجدداً لاحقا!.]]></word>
+	<word name="UPDATE_KLJ_NOW"><![CDATA[يجب أن تقوم بتحديث نسختك إلى آخر نسخه الآن , قم بالذهاب لموقع كليجا لمعلومات أكثر .]]></word>
+	<word name="U_LAST_VER_KLJ"><![CDATA[أنت تستخدم آخر نسخه من كليجا. شكراً لمتابعة نسختك بإستمرار.]]></word>
 </words>
 </kleeja>

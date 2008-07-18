@@ -208,24 +208,27 @@ switch ($_GET['go'])
 			
 			if ($usrcp->logout())
 			{
-				$text	= $lang['LOGOUT_SUCCESFUL'] . '<br /> <a href="index.php">' . $lang['HOME'] . '</a>';
-				kleeja_info($text, '', 0);
-				
-				//
-				//for onlines
-				//
-				$ip	=	(getenv('HTTP_X_FORWARDED_FOR')) ?  getenv('HTTP_X_FORWARDED_FOR') : getenv('REMOTE_ADDR');
-				
 				if ($config['allow_online'] == 1)
 				{
+					//
+					//for onlines
+					//
+					$ip	=	(getenv('HTTP_X_FORWARDED_FOR')) ?  getenv('HTTP_X_FORWARDED_FOR') : getenv('REMOTE_ADDR');
+					
 					$query_del = array(
 									'DELETE'	=> "{$dbprefix}online",
-									'WHERE'		=> "ip='". $SQL->escape($ip) ."'"
+									'WHERE'		=> "ip='" . $SQL->escape($ip) . "'"
 									);
 					($hook = kleeja_run_hook('qr_delete_onlines_in_logout')) ? eval($hook) : null; //run hook
 
 					if (!$SQL->build($query_del)) {die($lang['CANT_DELETE_SQL']);}
 				}
+				
+				$text	= $lang['LOGOUT_SUCCESFUL'] . '<br /> <a href="index.php">' . $lang['HOME'] . '</a>';
+				kleeja_info($text, '', 1);
+				
+
+
 			}
 			else
 			{

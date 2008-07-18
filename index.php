@@ -57,6 +57,7 @@
 	//some words for template
 	$welcome_msg 	= $config['welcome_msg'];
 	$SAFE_CODE		= ($config['safe_code']) ? $ch->display_captcha(true) : false;
+	$SAFE_CODE2		= ($config['safe_code']) ? str_replace('public_key', 'public_key2',$ch->display_captcha(true)) : false;
 
 	
 	//
@@ -113,7 +114,7 @@
 	 	$SQL->freeresult($result);
 		
 		$shownames = array();
-		foreach ($OnlineNames as $k)	$shownames[] = array( name => $k );
+		foreach ($OnlineNames as $k)	$shownames[] = array('name' => $k );
 		
 		/*
 		wanna increase your onlines counter ..you can from next line 
@@ -121,9 +122,9 @@
 		*/
 		$allnumbers = $usersnum + $visitornum;
 
-	($hook = kleeja_run_hook('if_online_index_page')) ? eval($hook) : null; //run hook	
+		($hook = kleeja_run_hook('if_online_index_page')) ? eval($hook) : null; //run hook	
 	
-}#allow_online
+	}#allow_online
 	
 	($hook = kleeja_run_hook('end_index_page')) ? eval($hook) : null; //run hook	
 

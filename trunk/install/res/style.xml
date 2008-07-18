@@ -547,6 +547,7 @@ document.getElementById("url").innerHTML = "<a href=\"{url_file}\" target=\"baln
 	</template>
 	<template name="index_body">
 	<![CDATA[
+
 <div class="middle">
 			
 <h2>{lang.WELCOME}..</h2>	
@@ -601,9 +602,9 @@ document.getElementById("url").innerHTML = "<a href=\"{url_file}\" target=\"baln
 		<br />
 		<br />
 	<IF NAME="config.safe_code">
-			{SAFE_CODE}
+			{SAFE_CODE2}
 			<br/>
-			<input type="text" name="answer_safe" style="direction:ltr;" />
+			<input type="text" name="answer_safe2" style="direction:ltr;" />
 			<br/>
 	</IF>
 		<input id="checkr2" type="checkbox" onclick="accept_terms('submittxt','checkr2');" />{lang.AGREE_RULES}
@@ -643,7 +644,7 @@ document.getElementById("url").innerHTML = "<a href=\"{url_file}\" target=\"baln
 <!---- END FOR ONLINE ---->
 
 </div>
-		
+
 
 ]]>
 	</template>

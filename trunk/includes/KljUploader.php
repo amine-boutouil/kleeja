@@ -44,6 +44,8 @@ class KljUploader
  
 	($hook = kleeja_run_hook('watermark_func_kljuploader')) ? eval($hook) : null; //run hook	
 	
+	if(!file_exists($name)) return;
+	
 	if (preg_match("/jpg|jpeg/",$ext))
 	{
 		$src_img=imagecreatefromjpeg($name);
@@ -104,6 +106,8 @@ class KljUploader
 function createthumb($name, $ext, $filename, $new_w, $new_h)
 {
 	($hook = kleeja_run_hook('createthumb_func_kljuploader')) ? eval($hook) : null; //run hook	
+	
+	if(!file_exists($name)) return;
 	
 	if (preg_match("/jpg|jpeg/",$ext))
 	{
@@ -215,9 +219,17 @@ if(!file_exists($this->folder))
 
 
 	//safe_code .. captcha is on
-	if($this->safe_code &&($wut==1 || $wut==2)) 
+	if($this->safe_code && $wut==1)
 	{
 		if(!$ch->check_captcha($_POST['public_key'], $_POST['answer_safe']))
+		{
+			($hook = kleeja_run_hook('wrong_captcha_kljuploader')) ? eval($hook) : null; //run hook	
+			 return $this->errs[]	= $lang['WRONG_VERTY_CODE'];
+		}
+	}
+	else if($this->safe_code && $wut==2)
+	{
+		if(!$ch->check_captcha($_POST['public_key2'], $_POST['answer_safe2']))
 		{
 			($hook = kleeja_run_hook('wrong_captcha_kljuploader')) ? eval($hook) : null; //run hook	
 			 return $this->errs[]	= $lang['WRONG_VERTY_CODE'];
@@ -380,43 +392,36 @@ if(!file_exists($this->folder))
 								else
 								{
 								
-								//
-								//end err .. start upload from url
-								//
-										if (function_exists('curl_init'))
+									//
+									//end err .. start upload from url
+									//
+									$data = fetch_remote_file($_POST['file'][$i]);
+
+									if($data === false)
+									{
+										$this->errs[]	= $lang['URL_CANT_GET'];		
+									}
+									else
+									{
+										$this->sizet = strlen($data);
+
+										if($this->sizes[strtolower($this->typet)] > 0 && $this->sizet >= $this->sizes[strtolower($this->typet)])
 										{
-												($hook = kleeja_run_hook('curlupload_kljuploader')) ? eval($hook) : null; //run hook
-	
-												// attempt retrieveing the url
-												$curl_handle=curl_init();
-												curl_setopt($curl_handle, CURLOPT_URL,$_POST['file'][$i]);
-												curl_setopt($curl_handle, CURLOPT_TIMEOUT,30);
-												curl_setopt($curl_handle, CURLOPT_CONNECTTIMEOUT,15);
-												curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER,1);
-												curl_setopt($curl_handle, CURLOPT_FAILONERROR,1);
-												$data = curl_exec($curl_handle);
-												curl_close($curl_handle);
-
-												$this->sizet = strlen($data);
-
-												if($this->sizes[strtolower($this->typet)] > 0 && $this->sizet >= $this->sizes[strtolower($this->typet)])
-												{
-													$this->errs[]=  $lang['SIZE_F_BIG'] . ' ' . Customfile_size($this->sizes[$this->typet]);
-												}
-												else
-												{
-													//then ..write new file
-												    $fp2 = @fopen($this->folder . "/".$this->filename2,"w");
-												    fwrite($fp2, $data);
-												    fclose($fp2);
-												}
-
-												$this->saveit ($this->filename2, $this->folder, $this->sizet, $this->typet);
+											$this->errs[]=  $lang['SIZE_F_BIG'] . ' ' . Customfile_size($this->sizes[$this->typet]);
 										}
 										else
 										{
-											$this->errs[]	= $lang['CURL_IS_OFF'];
+											//then ..write new file
+											$fp2 = @fopen($this->folder . "/".$this->filename2,"w");
+											fwrite($fp2, $data);
+											fclose($fp2);
 										}
+
+										$this->saveit ($this->filename2, $this->folder, $this->sizet, $this->typet);
+									}
+
+										
+	
 
 								}#else
 						}//big else
@@ -437,7 +442,7 @@ function saveit ($filname, $folderee, $sizeee, $typeee)
 		global $SQL,$dbprefix,$config,$lang;
 
 				// sometime cant see file after uploading.. but ..
-				chmod($filname . "/" . $folderee, 0755); //0755
+				@chmod($folderee . '' . $filname , 0755); //0755
 
 				$name 	= (string)	$SQL->escape($filname);
 				$size	= (int) 	$sizeee;

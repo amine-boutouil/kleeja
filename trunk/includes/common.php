@@ -39,7 +39,7 @@
 	//include files .. & classes ..
 	$path = dirname(__FILE__) . DIRECTORY_SEPARATOR;
 
-	require ('config.php');
+	(file_exists('config.php')) ? require ('config.php') : null;
 	require ($path.'style.php');
 	require ($path.'mysql.php');
 	require ($path.'KljUploader.php');

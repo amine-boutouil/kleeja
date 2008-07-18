@@ -50,7 +50,7 @@ class usrcp
 				//now ..  .. our table
 				function normal ($name,$pass)
 				{
-					global $SQL;
+					global $SQL,$dbprefix;
 					
 					$pass = md5($pass);
 					

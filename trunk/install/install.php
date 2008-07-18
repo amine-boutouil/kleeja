@@ -11,7 +11,7 @@ include important files
 
 	define ( 'IN_COMMON' , true);
 	$path = "../includes/";
-	include ('../config.php');
+	(file_exists('../config.php')) ? include ('../config.php') : null;
 	include ($path.'functions.php');
 	include ($path.'mysql.php');
 	include ('func_inst.php');
@@ -38,8 +38,8 @@ case 'gpl2':
 				$contentofgpl2 = "CANT FIND 'GPL2.TXT. FILE .. SEARCH ON NET ABOUT GPL2";
 
 	print '
-	<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=config">
-	<textarea name="gpl2" rows="" cols="" style="width: 456px; height: 365px">
+	<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=config&'.get_lang(1).'">
+	<textarea name="gpl2" rows="" cols="" style="width: 456px; height: 365px;direction:ltr;">
 	' . $contentofgpl2 . '
 	</textarea>
 
@@ -73,7 +73,7 @@ case 'config':
 	
 	if($xs== false)
 	{
-		 print '<br/><form method="post"  action="' . $_SERVER['PHP_SELF'] . '?step=config"  onsubmit="javascript:return formCheck(this, Array(\'db_server\',\'db_user\',\'db_pass\' ,\'db_name\',\'db_prefix\' ));">
+		 print '<br/><form method="post"  action="' . $_SERVER['PHP_SELF'] . '?step=config&'.get_lang(1).'"  onsubmit="javascript:return formCheck(this, Array(\'db_server\',\'db_user\',\'db_pass\' ,\'db_name\',\'db_prefix\' ));">
 
 			<fieldset id="Group1" dir="' . $lang['DIR'] . '">
 			<b>' . $lang['DB_INFO'] . '</b>
@@ -86,6 +86,11 @@ case 'config':
 					</td>
 				</tr>
 				<tr>
+					<td>' . $lang['DB_NAME'] . '</td>
+					<td><input name="db_name" type="text" style="width: 256px" />
+					</td>
+				</tr> 
+				<tr>
 					<td>' . $lang['DB_USER'] . '</td>
 					<td><input name="db_user" type="text" style="width: 256px" />
 					</td>
@@ -96,13 +101,8 @@ case 'config':
 					</td>
 				</tr>  
 				<tr>
-					<td>' . $lang['DB_NAME'] . '</td>
-					<td><input name="db_name" type="text" style="width: 256px" />
-					</td>
-				</tr> 
-				<tr>
 					<td>' . $lang['DB_PREFIX'] . '</td>
-					<td><input name="db_prefix" type="text" style="width: 256px" />
+					<td><input name="db_prefix" type="text" value="klj_" style="width: 256px" />
 					</td>
 				</tr>       
 			</table>
@@ -115,7 +115,7 @@ case 'config':
 			<br/>
 			<hr/>
 			<br/>
-			<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=config">
+			<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=config&'.get_lang(1).'">
 			<input  type="submit" value="' . $lang['INST_SUBMIT_CONFIGOK'] . '" />
 			</form>
 		';
@@ -123,7 +123,7 @@ case 'config':
 	else
 	{
 		print ' <br/><span style="color:green;"><b>'. $lang['CONFIG_EXISTS'] . '</b><br/>';
-		print '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=check">
+		print '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=check&'.get_lang(1).'">
 		<input name="agres" type="submit" value="' . $lang['INST_SUBMIT'] . '" />
 		</form>';
 	}
@@ -176,7 +176,7 @@ case 'check':
 		print '<br/><img src="img/good.gif" alt="good" /> <br/><span style="color:green;"><b>[ ' . $lang['INST_GOOD_GO'] . ' ]</b></span><br/><br/>';
 	}
 
-	print '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=data">
+	print '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=data&'.get_lang(1).'">
 	<input name="agres" type="submit" value="' . $lang['INST_SUBMIT'] . '" ' . $submit_wh . '/>
 	</form>';
 
@@ -260,7 +260,7 @@ case 'data' :
 			make_style();
 			make_language($_COOKIE['lang']);
 			
-			print '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=end">
+			print '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=end&'.get_lang(1).'">
 			<input name="agres" type="submit" value="' . $lang['INST_SUBMIT'] . '"/>
 			</form>';
 		}
@@ -274,7 +274,7 @@ case 'data' :
 	//$sitepath = $_SERVER['DOCUMENT_ROOT'].dirname($_SERVER['PHP_SELF']);
 	$urlsite =  "http://".$_SERVER['HTTP_HOST'] . str_replace('install','',dirname($_SERVER['PHP_SELF']));
 
- print '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=data"  onsubmit="javascript:return formCheck(this, Array(\'sitename\',\'siteurl\',\'sitemail\' ,\'username\',\'password\',\'email\' ));">
+ print '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=data&'.get_lang(1).'"  onsubmit="javascript:return formCheck(this, Array(\'sitename\',\'siteurl\',\'sitemail\' ,\'username\',\'password\',\'email\' ));">
 	<fieldset id="Group1" dir="' . $lang['DIR'] . '">
 	<legend style="width: 73px"><b>' . $lang['INST_SITE_INFO'] . '</b></legend>
 	<table style="width: 100%">

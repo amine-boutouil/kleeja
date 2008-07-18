@@ -38,7 +38,7 @@
 	
 	$SHOW_LIST = true; //fix bug
 
-	$go_to	=	$_GET['cp'];
+	$go_to	=	htmlspecialchars($_GET['cp']);
 	
 	//get adm extensions
 	$dh = @opendir($path_adm);
@@ -86,7 +86,7 @@
 		
 		$adm_extensions_menu[]	=	array(	'icon'	=> (file_exists('./images/style/admin/' . $m . '_button.gif'))	? './images/style/admin/' . $m . '_button.gif' : './images/style/admin/no_icon_button.gif',
 											'lang'	=>	($lang['R_'. strtoupper($m)]) ? $lang['R_'. strtoupper($m)]: (($lang[strtoupper($m)]) ? $lang[strtoupper($m)] : strtoupper($m)),
-											'link'	=>	'admin.php?cp='. $m,
+											'link'	=>	'admin.php?cp=' . $m,
 										);
 	
 	}

@@ -11,7 +11,7 @@ include important files
 	
 	define ( 'IN_COMMON' , true);
 	$path = "../includes/";
-	include ($path.'config.php');
+	(file_exists('../config.php')) ? include ('../config.php') : null;
 	include ($path.'functions.php');
 	include ('func_inst.php');
 
@@ -40,11 +40,9 @@ case 'language':
 			if (!empty($_POST['lang']))
 			{
 				//go to .. 2step
-				setcookie("lang", htmlspecialchars($_POST['lang']), time()+60*60*24*365);
-				echo '<meta http-equiv="refresh" content="0;url=' . $_SERVER['PHP_SELF'].'?step=choose">';
+				echo '<meta http-equiv="refresh" content="0;url=' . $_SERVER['PHP_SELF'].'?step=choose&lang='.$_POST['lang'].'">';
 			//	@header("Location:".$_SERVER[PHP_SELF]."?step=check"); /* Redirect browser */
 			}
-
 		}
 		else //no language
 		{ 
@@ -69,7 +67,7 @@ case 'language':
 	print '<br />		
 	<div class="centery">
 		<img src="img/map.gif" style="border:0" alt="al-Idrisi Map">
-	<br /><form  action="' . $_SERVER['PHP_SELF'] . '?step=language" method="post">
+	<br /><form  action="' . $_SERVER['PHP_SELF'] . '?step=language&'.get_lang(1).'" method="post">
 	<select name="lang" style="width: 352px">
 	' . $lngfiles . '
 	</select>
@@ -82,8 +80,8 @@ case 'language':
 break; // end case language
 case 'choose' :
 		print '<span style="color:green;">' . $lang['INST_CHOOSE_INSTALLER'] . '</span><br/><br/><br/>';
-		print '<a href="./install.php"><img src="img/installer.gif" alt="installer" /><br/>  ' . $lang['INST_INSTALL_CLEAN_VER'] . ' </a><br/><br/>';
-		print '<a href="./update.php"><img src="img/updater.gif" alt="updater" /> <br/> ' . $lang['INST_UPDATE_P_VER'] . ' </a><br/><br/><br/>';
+		print '<a href="./install.php?'.get_lang(1).'"><img src="img/installer.gif" alt="installer" /><br/>  ' . $lang['INST_INSTALL_CLEAN_VER'] . ' </a><br/><br/>';
+		print '<a href="./update.php?'.get_lang(1).'"><img src="img/updater.gif" alt="updater" /> <br/> ' . $lang['INST_UPDATE_P_VER'] . ' </a><br/><br/><br/>';
 
 		print '<a href="http://www.kleeja.com"><span style="color:black;">www.kleeja.com</span></a><br/><br/>';
 

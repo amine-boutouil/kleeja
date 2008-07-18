@@ -28,14 +28,14 @@ class ocr_captcha
     var $font_file="./includes/DUNGEON.TTF";
 	
 	
-    function ocr_captcha($long=6,$lx=120,$ly=30,$nb_noise=25)
+    function ocr_captcha($long=6,$lx=120,$ly=30,$nb_noise=20)
 	{
-      $this->key=md5("HI, WITH NEW LIFE1#! , SAANINA IS ME#! , NO PROBLEM!#! Kleeja is updated");
-      $this->long=$long;
-      $this->lx=$lx;
-      $this->ly=$ly;
-      $this->nb_noise=$nb_noise;
-      $this->public_key=substr(md5(uniqid(rand(),true)),0,$this->long); // generate public key with entropy
+      $this->key		=	md5("HI, WITH NEW LIFE1#! , SAANINA IS ME#! , NO PROBLEM!#! Kleeja is updated");
+      $this->long		=	$long;
+	   $this->lx		=	$lx;
+      $this->ly			=	$ly;
+      $this->nb_noise	=	$nb_noise;
+      $this->public_key	=	'captcha_' .  substr(md5(uniqid(rand(),true)),0,$this->long); // generate public key with entropy
     }
     
     function get_filename($public="")
@@ -51,10 +51,10 @@ class ocr_captcha
 		}
 		else // windows system 
         {
-			$rad="cache\\"; 
+			$rad="cache/"; 
 		}
 		
-		return $rad.$public.".".$this->imagetype;
+		return $rad . $public . "." . $this->imagetype;
     }
     
     // generate the private text coming from the public text, using $this->key 
@@ -71,21 +71,32 @@ class ocr_captcha
     // check if the public text is link to the private text
     function check_captcha($public,$private)
 	{
-      // when check, destroy picture on disk
-		if (file_exists($this->get_filename($public)))
-		{
-			unlink($this->get_filename($public));
-		}
+			//delete all captcha files 
+			if (is_dir('cache')) 
+			{
+			    if ($dh = opendir('cache')) 
+				{
+			        while (($file = readdir($dh)) !== false) 
+					{
+			            if(strpos($file, 'captcha_') !== false)
+						{
+							@unlink('cache/'.$file);
+						}
+			        }
+			        closedir($dh);
+			    }
+			}
+		
 		return (strtolower($private)==strtolower($this->generate_private($public)));
     }
     
     // display a captcha picture with private text and return the public text
     function make_captcha($noise=true)
 	{
-	   $private_key = $this->generate_private();
+	   $private_key	= $this->generate_private();
 		  
 
-		$image = @imagecreatetruecolor($this->lx,$this->ly);
+		$image		= @imagecreatetruecolor($this->lx,$this->ly);
 
 	
       $back=ImageColorAllocate($image,intval(rand(224,255)),intval(rand(224,255)),intval(rand(224,255)));

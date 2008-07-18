@@ -108,7 +108,7 @@ RC3 :
 - fix mysql class for security ..
 - rewrite some parts in kljuploader.php
 + add filename for error msg
-- fix big error when join with forum system
+- fix big_error function when join with forum system
 + add new sql system prepared to use hook system in future
 - rewriting many codes and using new sql system 
 + add new style system controlling from acp .. 
@@ -124,13 +124,14 @@ RC3 :
 -fix automatic deleting system 
 + new admin extensions system ( every section as a file )
 - fix admin css with firefox [ and javascript  error with edit_tpl template]
--fix backup system  and improve teqnique to put new tables in futres
+-fix backup system  and improve teqnique to add new database tables in futres
 +- new install+update system
 - fix extension in acp , error when change some ext.'s doesnt change : ). 
 -fix style (some vars to be easy to redesign after now) and fix uploader class for captcha issue .
 -fix info msg in index [ security field is worng ] 
 + add new instruction for style class [ ODD + EVEN + RAND] 
----------------- todo 
++ check for new updates 
+- fix upload from link 
 
 
 thank you for reading this file. 

@@ -1101,7 +1101,8 @@ function kj_lang($word, $trans, $language=false)
 {
 global $lang, $SQL, $config, $$dbprefix;
 
-	
+	($hook = kleeja_run_hook('kleeja_kj_lang_func')) ? eval($hook) : null; //run hook
+			
 	if(!$word || $word == '') return false;
 	
 	if($lang[$word])
@@ -1130,5 +1131,75 @@ global $lang, $SQL, $config, $$dbprefix;
 		return $lang_trans;
 	}
 
+}
+
+//some from mybb
+function fetch_remote_file($url)
+{
+
+	($hook = kleeja_run_hook('kleeja_fetch_remote_file_func')) ? eval($hook) : null; //run hook
+
+	if(function_exists("curl_init"))
+	{
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_HEADER, 0);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+		$data = curl_exec($ch);
+		curl_close($ch);
+		return $data;
+	}
+	else if(function_exists("fsockopen"))
+	{
+
+		@set_time_limit(0);
+		$url = parse_url($url);
+
+		$host = $url['host'];
+		$path = $url['path'];
+		$port = (!empty($url['port'])) ? (int) $url['port'] : 80;
+		
+		print_r($url);
+		
+		$errno = 0;
+		$errstr = '';
+
+		if (!($fsock = @fsockopen($host, $port, $errno, $errstr)))
+		{
+			return false;
+		}
+		
+		// Make sure $path not beginning with /
+		if (strpos($path, '/') === 0)
+		{
+			$path = substr($path, 1);
+		}
+		
+		fputs($fsock, 'GET /' . $path . " HTTP/1.1\r\n");
+		fputs($fsock, "HOST: " . $host . "\r\n");
+		fputs($fsock, "Connection: close\r\n\r\n");
+
+		$data	=	'';
+		
+		while(!@feof($fsock))
+		{
+			$data .= @fread($fsock, 3000);
+		}
+		@fclose($fsock);
+
+		
+		if (empty($data))
+		{
+			return false;
+		}
+		
+		return $data;
+		
+	}
+	else
+	{
+		return @implode("", @file($url));
+	}
 }
 ?>

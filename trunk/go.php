@@ -11,7 +11,7 @@
 // security ..
 define ('IN_INDEX' , true);
 //include imprtant file ..
-require ('includes/common.php');
+include ('includes/common.php');
 
 ($hook = kleeja_run_hook('begin_go_page')) ? eval($hook) : null; //run hook
 
@@ -298,6 +298,10 @@ switch ($_GET['go'])
 
 		exit; // we doesnt need style
 
+	}
+	else
+	{
+		die('No Requisted File');
 	}
 
 	break;

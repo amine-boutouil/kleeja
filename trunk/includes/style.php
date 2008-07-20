@@ -11,7 +11,7 @@
 //no for directly open
 if (!defined('IN_COMMON'))
 {
-	exit;
+	exit('no directly opening : ' . __file__);
 }
 
 class kleeja_style
@@ -38,9 +38,9 @@ class kleeja_style
 		//Include Statement
 		"/<INCLUDE\s+NAME\s*=\s*\"(.+)\"\s*>/iU",
 		//----------------->++
-		"/<ODD=\"([a-zA-Z0-9\_\-\+\./]+)\"\s*>(.*?)<\/ODD>/i",
-		"/<EVEN=\"([a-zA-Z0-9\_\-\+\./]+)\"\s*>(.*?)<\/EVEN>/i",
-		"/<RAND=\"(.*?)\"\s*,\s*\"(.*?)\"\s*>/i",
+		'#<ODD="([a-zA-Z0-9\_\-\+\./]+)"\>(.*?)<\/ODD\>#is',
+		'#<EVEN="([a-zA-Z0-9\_\-\+\./]+)"\>(.*?)<\/EVEN\>#is',
+		'#<RAND="(.*?)\"[^>],[^>]"(.*?)"[^>]>#is',
 		//<-----------------
 		);
 		//Replacements Array
@@ -118,19 +118,20 @@ class kleeja_style
 			$GLOBALS[$var] = $to;
 		}
 		
-		function _parse(){
-			$this->HTML = preg_replace_callback("/<IF\s+(NAME|LOOP)\s*=\s*\"([A-Z0-9_\.\-]{1,})+(=(.*)|)\"\s*>/i",array('kleeja_style','_if_callback'),$this->HTML);
-			$this->HTML = preg_replace_callback("/({[A-Z0-9_\.\-]{1,}})/i",array('kleeja_style','_replace_callback'),$this->HTML);
-			$this->HTML = preg_replace_callback("/=\"([#0-9A-Z_\.\-\/]{1,})\|([#0-9A-Z_\.\-\/]{1,})\"/iU",array('kleeja_style','_color_callback'),$this->HTML);
-			$this->HTML = @preg_replace($this->pats,$this->reps,$this->HTML);
+		function _parse($code){
+			$code = preg_replace_callback("/<IF\s+(NAME|LOOP)\s*=\s*\"([A-Z0-9_\.\-]{1,})+(=(.*)|)\"\s*>/i",array('kleeja_style','_if_callback'),$code);
+			$code = preg_replace_callback("/({[A-Z0-9_\.\-]{1,}})/i",array('kleeja_style','_replace_callback'),$code);
+			$code = preg_replace_callback("/=\"([#0-9A-Z_\.\-\/]{1,})\|([#0-9A-Z_\.\-\/]{1,})\"/iU",array('kleeja_style','_color_callback'),$code);
+			$code = preg_replace($this->pats, $this->reps ,$code);
+			return $code;
 		}
 
 		//get tpl
 		function _load_template($template_name)
 		{
-			global $config, $SQL,$dbprefix;
+			global $config, $SQL,$dbprefix,$root_path;
 			
-			if(!$config['style']) $config['style']  =1;
+			if(!$config['style']) $config['style']  = 1;
 			
 					$query = array(
 								'SELECT'	=> 'template_content',
@@ -139,43 +140,42 @@ class kleeja_style
 								);
 				$result	=	$SQL->build($query);
 				$template_content = $SQL->fetch_array($result);
-				
-					if(!$template_content['template_content']) 
-					{
-						big_error('No Template !', 'Requested "' . $template_name . '" template doesnt exists !! ');
-					}
+
+				if(!$template_content['template_content'] || empty($template_content['template_content'])) 
+				{
+					big_error('No Template !', 'Requested "' . $template_name . '" template doesnt exists or an empty !! ');
+				}
 					
 				$this->HTML = $template_content['template_content'];
-				$this->_parse();
-				$filename = @fopen('cache/' . $config['style'] . '_' . $template_name . '.php', 'w');
+				$this->HTML = $this->_parse($this->HTML);
+				$filename = fopen($root_path . 'cache/' . $config['style'] . '_' . $template_name . '.php', 'w');
 				flock($filename, LOCK_EX); // exlusive look
-				@fwrite($filename, $this->HTML);
+				fwrite($filename, $this->HTML);
 				fclose($filename);
-
 
 		}
 		
 		//show it
 		function display($template_name)
 		{	
-			global $config, $SQL;
+			global $config, $SQL, $root_path;
 			
 			$this->vars  = &$GLOBALS;
 			//clean the name 
 			$template_name	=	$SQL->escape($template_name);
 					
 			//is there ?
-			if(!file_exists('cache/' . $config['style'] . '_' . $template_name . '.php'))
+			if(!file_exists($root_path.'cache/' . $config['style'] . '_' . $template_name . '.php'))
 			{
-				$this->HTML	= $this->_load_template($template_name);
+				$this->_load_template($template_name);
 			}
-			
+
 			ob_start();
-			include('cache/' . $config['style'] . '_' . $template_name . '.php');
+			include($root_path.'cache/' . $config['style'] . '_' . $template_name . '.php');
 			$page = ob_get_contents();
 			ob_end_clean();
+		
 			return $page;
-
 		}
 
 }

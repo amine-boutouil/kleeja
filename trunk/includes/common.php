@@ -12,14 +12,12 @@
 	session_start();
 		
 	// not for directly open
-	 if (!defined('IN_INDEX'))
+	if (!defined('IN_INDEX'))
 	{
-		exit();
+		exit('no directly opening : ' . __file__);
 	}
 		  
-	//
 	//we are in the common file 
-	//
 	define ('IN_COMMON' , true);
 		 
 		 
@@ -35,28 +33,38 @@
 	//php must be newer than this
 	 if (phpversion() < '4.1.0') exit('Your php version is too old !');
 	 
-	 
-	//include files .. & classes ..
-	$path = dirname(__FILE__) . DIRECTORY_SEPARATOR;
-
-	(file_exists('config.php')) ? require ('config.php') : null;
-	require ($path.'style.php');
-	require ($path.'mysql.php');
-	require ($path.'KljUploader.php');
-	require ($path.'usr.php');
-	require ($path.'pager.php');
-	require ($path.'ocr_captcha.php');
-	require ($path.'functions.php');
 	
+	// no config
+	if (!file_exists('config.php'))
+	{
+		header('Location: ./install/index.php');
+		exit;
+	}
 	
-	//no data.. install.php exists
+	// there is a config
+	require ('config.php');
+	//no enough data
 	if (!$dbname || !$dbuser)
 	{
-		big_error('No Data In config.php !', 'Edit the information  in <i>config.php</i> OR install kleeja if you haven\'t done so yet...<br/><br/><a href="./install">Click to Install</a><br/><br/>');
+		header('Location: ./install/index.php');
+		exit;
 	}
-	elseif (file_exists('./install')) 
+	
+	//include files .. & classes ..
+	$path		=	dirname(__FILE__) . DIRECTORY_SEPARATOR;
+	$root_path	=	'./';
+	require ($path . 'style.php');
+	require ($path . 'mysql.php');
+	require ($path . 'KljUploader.php');
+	require ($path . 'usr.php');
+	require ($path . 'pager.php');
+	require ($path . 'ocr_captcha.php');
+	require ($path . 'functions.php');
+
+	//. install.php exists
+	if (file_exists($root_path.'install')) 
 	{
-		big_error('install folder exists!', '<b>Install</b> folder detected! please delete it OR install <b>Kleeja</b> if you haven\'t done so yet...<br/><br/><a href="./install">Click to Install</a><br/><br/>');
+		big_error('install folder exists!', '<b>Install</b> folder detected! please delete it OR install <b>Kleeja</b> if you haven\'t done so yet...<br/><br/><a href="'.$root_path.'install">Click to Install</a><br/><br/>');
 	}
 
 	//gd 
@@ -66,7 +74,7 @@
 	}
      
 	// start classes ..
-	$SQL	= new SSQL($dbserver,$dbuser,$dbpass,$dbname);
+	$SQL	= new SSQL($dbserver, $dbuser, $dbpass, $dbname);
 	$tpl	= new kleeja_style;		# Depend on easytemplate::daif
 	$kljup	= new KljUploader;		#  Depend on Nadorino class
 	$usrcp	= new usrcp;			
@@ -76,21 +84,27 @@
 
 
 	//then get
-	require ($path.'cache.php');
+	require ($path . 'cache.php');
 	
-	// for gzip
+	
+	// for gzip : php.net
 	$do_gzip_compress = false; 
 	if ($config['gzip']) 
 	{ 
-		if (@extension_loaded('zlib'))
+	    function compress_output($output) {return gzencode($output);} 
+	    // Check if the browser supports gzip encoding, HTTP_ACCEPT_ENCODING
+	    if (strstr($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')
+			|| strstr($_SERVER['HTTP_ACCEPT_ENCODING'], 'x-gzip'))
 		{
 			$do_gzip_compress = true; 
-			ob_start('ob_gzhandler');
-		}
-	
-	} ## end gzip 
-	
+	        // Start output buffering, and register compress_output()
+	        ob_start("compress_output");
+	        // Tell the browser the content is compressed with gzip
+	        header("Content-Encoding: gzip");
+	    }
+	}
 
+	
 	
 	// ...header ..  i like it ;)
 	header('Content-type: text/html; charset=UTF-8');

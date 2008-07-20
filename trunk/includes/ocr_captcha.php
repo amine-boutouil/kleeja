@@ -12,7 +12,7 @@
 //no for directly open
 if (!defined('IN_COMMON'))
 {
-	exit;
+	exit('no directly opening : ' . __file__);
 }
 
 class ocr_captcha

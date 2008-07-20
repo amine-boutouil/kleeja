@@ -10,7 +10,7 @@
 //no for directly open
 if (!defined('IN_COMMON'))
 {
-	exit;
+	exit('no directly opening : ' . __file__);
 }  
 
 	

@@ -8,7 +8,7 @@
 	// not for directly open
 	if (!defined('IN_ADMIN'))
 	{
-		exit();
+		exit('no directly opening : ' . __file__);
 	}
 	
 

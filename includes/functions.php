@@ -11,7 +11,7 @@
 //no for directly open
 if (!defined('IN_COMMON'))
 {
-	exit;
+	exit('no directly opening : ' . __file__);
 }
 
 	  
@@ -69,7 +69,6 @@ function Saaheader($title)
 		($hook = kleeja_run_hook('func_Saaheader')) ? eval($hook) : null; //run hook
 		
 		print $tpl->display("header");
-		return;
 	}
 
 
@@ -134,7 +133,6 @@ pageTracker._trackPageview();
 		// THEN .. at finish
 		$SQL->close();
 
-		return;
 }
 
 //
@@ -235,8 +233,7 @@ function KleejaOnline ()
 		if (!$SQL->build($query_del)) {die($lang['CANT_DELETE_SQL']);}	
 		
 		($hook = kleeja_run_hook('KleejaOnline_func')) ? eval($hook) : null; //run hook	
-		
-		return;
+
 		
 }#End function
 	
@@ -298,8 +295,7 @@ function visit_stats ()
 
 			}
 		($hook = kleeja_run_hook('visit_stats_func')) ? eval($hook) : null; //run hook	
-			
-		return;
+
 }
 	
 //
@@ -334,8 +330,7 @@ function get_ban ()
 		}#empty	
 		
 		($hook = kleeja_run_hook('get_ban_func')) ? eval($hook) : null; //run hook	
-		
-		return;
+
 }
 
 	

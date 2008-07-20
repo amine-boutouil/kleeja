@@ -11,7 +11,7 @@
 	// security .. 
 	define ( 'IN_INDEX' , true);
 	//include imprtant file .. 
-	require ('includes/common.php');
+	include ('includes/common.php');
 	
 	($hook = kleeja_run_hook('begin_index_page')) ? eval($hook) : null; //run hook
 	

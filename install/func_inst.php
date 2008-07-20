@@ -275,7 +275,7 @@ function make_language($def)
 	function do_config_export($srv, $usr, $pass, $nm, $prf)
 	{
 	
-		$data	= '<?php'."\n\n" . 'if (!defined(\'IN_COMMON\')) exit();' . "\n\n\n";
+		$data	= '<?php'."\n\n" . '' . "\n\n\n";
 		$data	.= '$dbserver		= \''.addslashes($srv)."';//database server \n";
 		$data	.= '$dbuser			= \''.addslashes($usr)."';// database user \n";
 		$data	.= '$dbpass			= \''.addslashes($pass)."';// database password \n";

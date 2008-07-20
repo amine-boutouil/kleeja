@@ -11,7 +11,7 @@
 //no for directly open
 if (!defined('IN_COMMON'))
 {
-	exit;
+	exit('no directly opening : ' . __file__);
 }
 
 //by : saanina@gmail.om  as experince .. not final version .

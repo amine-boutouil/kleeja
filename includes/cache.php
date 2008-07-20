@@ -18,12 +18,12 @@ if (!defined('IN_COMMON'))
 //
 //get config data from config table  ...
 //
-	if (file_exists('cache/data_config.php'))
+	if (file_exists($root_path.'cache/data_config.php'))
 	{
-		include ('cache/data_config.php');
+		include ($root_path.'cache/data_config.php');
 	}
 	
-	if (!$config or !file_exists('cache/data_config.php'))
+	if (!$config or !file_exists($root_path.'cache/data_config.php'))
 	{
 		$query = array(
 					'SELECT'	=> 'c.*',
@@ -34,7 +34,7 @@ if (!defined('IN_COMMON'))
 		$result = $SQL->build($query);
 			
 				$file_datac = '<' . '?php' . "\n\n";
-				$file_datac .= "if (!defined('IN_COMMON')) exit;";
+				//$file_datac .= "if (!defined('IN_COMMON')) exit('no directly opening : ' . __file__);";
 				$file_datac .= "\n// auto-generated cache files\n//For: Kleeja \n\n";
 				$file_datac .= '$config = array( ' . "\n";
 
@@ -48,22 +48,22 @@ if (!defined('IN_COMMON'))
 				
 	 	$SQL->freeresult($result);
 
-		$filenumc = @fopen('cache/data_config.php', 'w');
-		flock($filenumc, LOCK_EX); // exlusive look
+		$filenumc = @fopen($root_path.'cache/data_config.php', 'w');
+		@flock($filenumc, LOCK_EX); // exlusive look
 		@fwrite($filenumc, $file_datac);
-		fclose($filenumc);
+		@fclose($filenumc);
 	}
 //
 //get lang data from lang table  ...
 //
 	if(!$lang || !is_array($lang))	$lang	=	array();
 	
-	if (file_exists('cache/data_lang_'.$config['language'].'.php'))
+	if (file_exists($root_path.'cache/data_lang_'.$config['language'].'.php'))
 	{
-		include ('cache/data_lang_'.$config['language'].'.php');
+		include ($root_path.'cache/data_lang_'.$config['language'].'.php');
 	}
 	
-	if (!$lang or !file_exists('cache/data_lang_'.$config['language'].'.php'))
+	if (!$lang or !file_exists($root_path.'cache/data_lang_'.$config['language'].'.php'))
 	{
 		$query = array(
 					'SELECT'	=> 'l.*',
@@ -75,7 +75,7 @@ if (!defined('IN_COMMON'))
 		$result = $SQL->build($query);
 			
 				$file_datac = '<' . '?php' . "\n\n";
-				$file_datac .= "if (!defined('IN_COMMON')) exit;";
+				//$file_datac .= "if (!defined('IN_COMMON')) exit('no directly opening : ' . __file__);";
 				$file_datac .= "\n// auto-generated cache files\n//For: Kleeja \n\n";
 				$file_datac .= '$lang = array( ' . "\n";
 
@@ -89,21 +89,21 @@ if (!defined('IN_COMMON'))
 				
 	 	$SQL->freeresult($result);
 
-		$filenumc = @fopen('cache/data_lang_'.$config['language'].'.php', 'w');
-		flock($filenumc, LOCK_EX); // exlusive look
+		$filenumc = @fopen($root_path.'cache/data_lang_'.$config['language'].'.php', 'w');
+		@flock($filenumc, LOCK_EX); // exlusive look
 		@fwrite($filenumc, $file_datac);
-		fclose($filenumc);
+		@fclose($filenumc);
 	}
 
 //
 //get data from types table ... 
 //
-	if (file_exists('cache/data_exts.php'))
+	if (file_exists($root_path.'cache/data_exts.php'))
 	{
-		include ('cache/data_exts.php');
+		include ($root_path.'cache/data_exts.php');
 	}
 	
-	if (!($g_exts || $u_exts) || !(file_exists('cache/data_exts.php')))
+	if (!($g_exts || $u_exts) || !(file_exists($root_path.'cache/data_exts.php')))
 	{
 		$query = array(
 					'SELECT'	=> 'e.*',
@@ -114,7 +114,7 @@ if (!defined('IN_COMMON'))
 		$result = $SQL->build($query);
 		
 				$file_datat = '<' . '?php' . "\n\n";
-				$file_datat .= "if (!defined('IN_COMMON')) exit;";
+				//$file_datat .= "if (!defined('IN_COMMON')) exit('no directly opening : ' . __file__);";
 				$file_datat .= "\n// auto-generated cache files\n//For: Kleeja \n\n";
 				$file_datat .= 'if (empty($g_exts) || !is_array($g_exts)){$g_exts = array();}'."\n";
 				$file_datat .= 'if (empty($u_exts) || !is_array($u_exts)){$u_exts = array();}'."\n\n";
@@ -137,21 +137,21 @@ if (!defined('IN_COMMON'))
 				
 	 	$SQL->freeresult($result);
 
-		$filenumt = @fopen('cache/data_exts.php', 'w');
-		flock($filenumt, LOCK_EX); // exlusive look
+		$filenumt = @fopen($root_path.'cache/data_exts.php', 'w');
+		@flock($filenumt, LOCK_EX); // exlusive look
 		@fwrite($filenumt, $file_datat);
-		fclose($filenumt);
+		@fclose($filenumt);
 	}
 
 //
 //get sizes data from types table ... 
 //
-	if (file_exists('cache/data_sizes.php'))
+	if (file_exists($root_path.'cache/data_sizes.php'))
 	{
-		include ('cache/data_sizes.php');
+		include ($root_path.'cache/data_sizes.php');
 	}
 	
-	if (!($g_sizes || $u_sizes) || !(file_exists('cache/data_sizes.php')))
+	if (!($g_sizes || $u_sizes) || !(file_exists($root_path.'cache/data_sizes.php')))
 	{
 		$query = array(
 					'SELECT'	=> 'e.*',
@@ -162,7 +162,7 @@ if (!defined('IN_COMMON'))
 		$result = $SQL->build($query);
 
 				$file_datas = '<' . '?php' . "\n\n";
-				$file_datas .= "if (!defined('IN_COMMON')) exit;";
+				//$file_datas .= "if (!defined('IN_COMMON')) exit('no directly opening : ' . __file__);";
 				$file_datas .= "\n// auto-generated cache files\n//For: Kleeja \n\n";
 				$file_datas .= 'if (empty($g_sizes) || !is_array($g_sizes)){$g_sizes = array();}'."\n";
 				$file_datas .= 'if (empty($u_sizes) || !is_array($u_sizes)){$u_sizes = array();}'."\n\n";
@@ -186,10 +186,10 @@ if (!defined('IN_COMMON'))
 			
 	 	$SQL->freeresult($result);
 
-		$filenums = @fopen('cache/data_sizes.php', 'w');
-		flock($filenums, LOCK_EX); // exlusive look
+		$filenums = @fopen($root_path.'cache/data_sizes.php', 'w');
+		@flock($filenums, LOCK_EX); // exlusive look
 		@fwrite($filenums, $file_datas);
-		fclose($filenums);
+		@fclose($filenums);
 	}
 
 
@@ -219,7 +219,7 @@ if (!defined('IN_COMMON'))
 		$result = $SQL->build($query);
 		
 		$file_dataw = '<' . '?php' . "\n\n";
-		$file_dataw .= "if (!defined('IN_COMMON')) exit;";
+		//$file_dataw .= "if (!defined('IN_COMMON')) exit('no directly opening : ' . __file__);";
 		$file_dataw .= "\n// auto-generated cache files\n//For: Kleeja \n\n";
 
 		while($row=$SQL->fetch_array($result))
@@ -260,10 +260,10 @@ if (!defined('IN_COMMON'))
 		
 		$SQL->freeresult($result);
 		
-		$filenumw = @fopen('cache/data_stats.php', 'w');
-		flock($filenumw, LOCK_EX); // exlusive look
+		$filenumw = @fopen($root_path.'cache/data_stats.php', 'w');
+		@flock($filenumw, LOCK_EX); // exlusive look
 		@fwrite($filenumw, $file_dataw);
-		fclose($filenumw);
+		@fclose($filenumw);
 	}//end else
 
 	
@@ -325,12 +325,12 @@ if (!defined('IN_COMMON'))
 //
 //get banned ips data from stats table  ...
 //
-	if (file_exists('cache/data_ban.php'))
+	if (file_exists($root_path.'cache/data_ban.php'))
 	{
-		include ('cache/data_ban.php');
+		include ($root_path.'cache/data_ban.php');
 	}
 	
-	if (!$banss or !file_exists('cache/data_ban.php'))
+	if (!$banss or !file_exists($root_path.'cache/data_ban.php'))
 	{
 		$query = array(
 					'SELECT'	=> 's.ban',
@@ -341,7 +341,7 @@ if (!defined('IN_COMMON'))
 		$result = $SQL->build($query);
 	
 		$file_datab = '<' . '?php' . "\n\n";
-		$file_datab .= "if (!defined('IN_COMMON')) exit;";
+		//$file_datab .= "if (!defined('IN_COMMON')) exit('no directly opening : ' . __file__);";
 		$file_datab .= "\n// auto-generated cache files\n//For: Kleeja \n\n";
 		$file_datab .= '$banss = array( ' . "\n";
 
@@ -366,21 +366,21 @@ if (!defined('IN_COMMON'))
 			$file_datab .= '?' . '>';
 	 	}
 
-		$filenumb = @fopen('cache/data_ban.php', 'w');
-		flock($filenumb, LOCK_EX); // exlusive look
+		$filenumb = @fopen($root_path.'cache/data_ban.php', 'w');
+		@flock($filenumb, LOCK_EX); // exlusive look
 		@fwrite($filenumb, $file_datab);
-		fclose($filenumb);
+		@fclose($filenumb);
 	}
 	
 //	
 //get rules data from stats table  ...
 //
-	if (file_exists('cache/data_rules.php'))
+	if (file_exists($root_path.'cache/data_rules.php'))
 	{
-		include ('cache/data_rules.php'); 
+		include ($root_path.'cache/data_rules.php'); 
 	}
 	
-	if (!isset($ruless) or !file_exists('cache/data_rules.php'))
+	if (!isset($ruless) or !file_exists($root_path.'cache/data_rules.php'))
 	{
 		$query = array(
 					'SELECT'	=> 's.rules',
@@ -392,7 +392,7 @@ if (!defined('IN_COMMON'))
 		
 	
 		$file_datar = '<' . '?php' . "\n\n";
-		$file_datar .= "if (!defined('IN_COMMON')) exit;";
+		//$file_datar .= "if (!defined('IN_COMMON')) exit('no directly opening : ' . __file__);";
 		$file_datar .= "\n// auto-generated cache files\n//For: Kleeja \n\n";
 
 		while($row=$SQL->fetch_array($result))
@@ -405,21 +405,21 @@ if (!defined('IN_COMMON'))
 			$file_datar .= '$ruless = \'' .str_replace(array("'","\'"), "\'", $rules1) .'\';'."\n\n"; // its took 2 hours ..
 			
 		$file_datar .= '?' . '>';
-		$filenumr = @fopen('cache/data_rules.php', 'w');
-		flock($filenumr, LOCK_EX); // exlusive look
+		$filenumr = @fopen($root_path.'cache/data_rules.php', 'w');
+		@flock($filenumr, LOCK_EX); // exlusive look
 		@fwrite($filenumr, $file_datar);
-		fclose($filenumr);
+		@fclose($filenumr);
 	}	
 	
 //	
 //get ex-header-footer data from stats table  ... 
 //
-	if (file_exists('cache/data_extra.php'))
+	if (file_exists($root_path.'cache/data_extra.php'))
 	{
-		include ('cache/data_extra.php');
+		include ($root_path.'cache/data_extra.php');
 	}
 	
-	if (!isset($extras) or !file_exists('cache/data_extra.php'))
+	if (!isset($extras) or !file_exists($root_path.'cache/data_extra.php'))
 	{
 		$query = array(
 					'SELECT'	=> 's.ex_header, s.ex_footer',
@@ -431,7 +431,7 @@ if (!defined('IN_COMMON'))
 
 	
 		$file_datae = '<' . '?php' . "\n\n";
-		$file_datae .= "if (!defined('IN_COMMON')) exit;";
+		//$file_datae .= "if (!defined('IN_COMMON')) exit('no directly opening : ' . __file__);";
 		$file_datae .= "\n// auto-generated cache files\n//For: Kleeja \n\n";
 
 		while($row=$SQL->fetch_array($result))
@@ -451,10 +451,10 @@ if (!defined('IN_COMMON'))
 	 
 		
 		$file_datae .= '?' . '>';
-		$filenume = @fopen('cache/data_extra.php', 'w');
-		flock($filenume, LOCK_EX); // exlusive look
+		$filenume = @fopen($root_path.'cache/data_extra.php', 'w');
+		@flock($filenume, LOCK_EX); // exlusive look
 		@fwrite($filenume, $file_datae);
-		fclose($filenume);
+		@fclose($filenume);
 	}
 	
 	
@@ -463,12 +463,12 @@ if (!defined('IN_COMMON'))
 //
 if(!defined('STOP_HOOKS'))
 {
-	if (file_exists('cache/data_hooks.php'))
+	if (file_exists($root_path.'cache/data_hooks.php'))
 	{
-		include ('cache/data_hooks.php');
+		include ($root_path.'cache/data_hooks.php');
 	}
 	
-	if (!$all_plg_hooks && !file_exists('cache/data_hooks.php'))
+	if (!$all_plg_hooks && !file_exists($root_path.'cache/data_hooks.php'))
 	{
 		//get all hooks
 		$query = array(
@@ -488,7 +488,7 @@ if(!defined('STOP_HOOKS'))
 		$result = $SQL->build($query);
 			
 				$file_datac = '<' . '?php' . "\n\n";
-				$file_datac .= "if (!defined('IN_COMMON')) exit;";
+				//$file_datac .= "if (!defined('IN_COMMON')) exit('no directly opening : ' . __file__);";
 				$file_datac .= "\n// auto-generated cache files\n//For: Kleeja \n\n";
 				$file_datac .= '$all_plg_hooks = array();' ."\n\n";
 
@@ -503,10 +503,10 @@ if(!defined('STOP_HOOKS'))
 				
 	 	$SQL->freeresult($result);
 
-		$filenumc = @fopen('cache/data_hooks.php', 'w');
-		flock($filenumc, LOCK_EX); // exlusive look
+		$filenumc = @fopen($root_path.'cache/data_hooks.php', 'w');
+		@flock($filenumc, LOCK_EX); // exlusive look
 		@fwrite($filenumc, $file_datac);
-		fclose($filenumc);
+		@fclose($filenumc);
 	}
 }#plugins is on
  

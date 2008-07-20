@@ -2,12 +2,12 @@
 	//no for directly open
 	if (!defined('IN_COMMON'))
 	{
-		exit;
+		exit('no directly opening : ' . __file__);
 	}
 	
 	
 	//dont change it .. plz man 
-	 define ('KLEEJA_VERSION' , '1.0.0RC3');
+	 define ('KLEEJA_VERSION' , '1.0.0RC4');
  
 	/*
 	

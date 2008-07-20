@@ -1,4 +1,4 @@
-<?php
+<?php 
 ##################################################
 #						Kleeja
 #
@@ -14,7 +14,7 @@
 	define ( 'IN_ADMIN' , true);
 	
 	//include imprtant file ..
-	require ('includes/common.php');
+	include ('includes/common.php');
 	include ('includes/version.php');
 
 	//path of admin extensions

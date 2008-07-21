@@ -134,4 +134,11 @@ RC3 :
 - fix upload from link 
 
 
+RC4
+- fix style doenst apear .. 
+- fix firectly open of caches 
+- fix gzip feature ..
+
+
+ 
 thank you for reading this file. 

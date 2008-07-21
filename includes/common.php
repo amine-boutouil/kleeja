@@ -148,7 +148,11 @@
 	 // of course , its not printable function , its just for calculating :)
 	visit_stats();
 	
-	
+	//
+	if(!$perpage || intval($perpage)==0)
+	{
+		$perpage = 10;
+	}
 
 	($hook = kleeja_run_hook('end_common')) ? eval($hook) : null; //run hook
 

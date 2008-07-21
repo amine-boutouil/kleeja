@@ -2,7 +2,7 @@
 <kleeja>
 <info>
 	<style_name>default</style_name>
-	<style_author>official style by kleeja team</style_author>
+	<style_author></style_author>
 </info>
 <templates>
 	<template name="header">
@@ -547,7 +547,6 @@ document.getElementById("url").innerHTML = "<a href=\"{url_file}\" target=\"baln
 	</template>
 	<template name="index_body">
 	<![CDATA[
-
 <div class="middle">
 			
 <h2>{lang.WELCOME}..</h2>	
@@ -644,7 +643,7 @@ document.getElementById("url").innerHTML = "<a href=\"{url_file}\" target=\"baln
 <!---- END FOR ONLINE ---->
 
 </div>
-
+		
 
 ]]>
 	</template>
@@ -834,7 +833,7 @@ function checkall() {
 <div class="middle">
 <form  method="post" action="{action}">
 	<fieldset>
-		<legend>{backup_name}</legend>
+		<legend>{lang.R_BCKUP}</legend>
 		
 {lang.E_BACKUP}
 
@@ -844,30 +843,12 @@ function checkall() {
 		<td>{lang.SIZE}</td>
 		<td><input type="checkbox" name="check_all" checked="checked" onClick="checkall();"/></td>
 	</tr>
+	<LOOP NAME="tables_sho">
 	<tr style="background-color:#F5F5F5">
-		<td>{config_t.name}</td><td>{config_t.size} kb</td><td><input type="checkbox" name="check[]" value="{config_t.name}" checked="checked" /></td>
+		<td>{{name}}</td><td>{{size}} kb</td><td><input type="checkbox" name="check[]" value="{{name}}" checked="checked" /></td>
 	</tr>	
-	<tr style="background-color:#F5F5F5">
-		<td>{files_t.name}</td><td>{files_t.size} kb</td><td><input type="checkbox" name="check[]" value="{files_t.name}" checked="checked" /></td>
-	</tr>	
-	<tr style="background-color:#F5F5F5">
-		<td>{stats_t.name}</td><td>{stats_t.size} kb</td><td><input type="checkbox" name="check[]" value="{stats_t.name}" checked="checked" /></td>
-	</tr>	
-	<tr style="background-color:#F5F5F5">
-	<td>{users_t.name}</td><td>{users_t.size} kb</td><td><input type="checkbox" name="check[]" value="{users_t.name}" checked="checked" /></td>
-	</tr>	
-	<tr style="background-color:#F5F5F5">
-	<td>{call_t.name}</td><td>{call_t.size} kb</td><td><input type="checkbox" name="check[]" value="{call_t.name}" checked="checked" /></td>
-	</tr>	
-	<tr style="background-color:#F5F5F5">
-	<td>{exts_t.name}</td><td>{exts_t.size} kb</td><td><input type="checkbox" name="check[]" value="{exts_t.name}" checked="checked" /></td>
-	</tr>	
-	<tr style="background-color:#F5F5F5">
-	<td>{online_t.name}</td><td>{online_t.size} kb</td><td><input type="checkbox" name="check[]" value="{online_t.name}" checked="checked" /></td>
-	</tr>	
-	<tr style="background-color:#F5F5F5">
-	<td>{reports_t.name}</td><td>{reports_t.size} kb</td><td><input type="checkbox" name="check[]" value="{reports_t.name}" checked="checked" /></td>
-	</tr>
+	</LOOP>
+	
 </table>
 
 </fieldset>
@@ -881,7 +862,7 @@ function checkall() {
 	<![CDATA[<div class="middle">
 <form method="post" action="{action}">
 	<fieldset>
-		<legend>{ban_name}</legend>
+		<legend>{lang.R_BAN}</legend>
 
 <table style="width: 90%">
 	<tr>
@@ -910,7 +891,7 @@ function checkall() {
 	<![CDATA[<div class="middle">
 <form method="post" action="{action}">
 	<fieldset>
-		<legend>{rules_name}</legend>
+		<legend>{lang.R_RULES}</legend>
 
 <table style="width: 90%">
 	<tr>
@@ -953,7 +934,7 @@ document.getElementById('mail_here').innerHTML= iee;
 	
 <form method="post" action="{action}">
 	<fieldset>
-		<legend>{calls_name}</legend>
+		<legend>{lang.R_CALLS}</legend>
 
 <table style="width: 100%">
 	<tr style="background-color:silver">
@@ -993,7 +974,7 @@ document.getElementById('mail_here').innerHTML= iee;
 	<![CDATA[<div class="middle">
 <form method="post" action="{action}">
 	<fieldset>
-		<legend>{configs_name}</legend>
+		<legend>{lang.R_CONFIGS}</legend>
 
 <table style="width: 90%">
 	<tr>
@@ -1197,7 +1178,7 @@ document.getElementById('mail_here').innerHTML= iee;
 <div class="middle">
 <form method="post" action="{action}">
 	<fieldset>
-		<legend>{exts_name}</legend>
+		<legend>{lang.R_EXTS}</legend>
 
 <table style="width: 100%">
 	<tr style="background-color:silver">
@@ -1208,14 +1189,16 @@ document.getElementById('mail_here').innerHTML= iee;
 		<td>{lang.SIZE_U}</td>
 		<td>{lang.ALLOW_U}</td>
 	</tr>
-<IF NAME="arr">
-<LOOP NAME="arr" LIMIT="15">
+<IF NAME="no_results">
+...
+<ELSE>
+<LOOP NAME="arr">
 	<tr>
 		<td>{{name}}</td>
 		<td>{{group}}</td>
-		<td><input name="gsz_{{id}}" type="text" value="{{g_size}}" size="7"/></td>
+		<td><input name="gsz[{{id}}]" type="text" value="{{g_size}}" size="7"/></td>
 		<td>{{g_allow}}</td>
-		<td><input name="usz_{{id}}" type="text" value="{{u_size}}" size="7"/></td>
+		<td><input name="usz[{{id}}]" type="text" value="{{u_size}}" size="7"/></td>
 		<td>{{u_allow}}</td>
 	</tr>
 </LOOP>
@@ -1241,7 +1224,7 @@ document.getElementById('mail_here').innerHTML= iee;
 <div class="middle">
 <form method="post" action="{action}">
 	<fieldset>
-		<legend>{files_name}</legend>
+		<legend>{lang.R_FILES}</legend>
 
 <table style="width: 100%">
 	<tr style="background-color:silver">
@@ -1337,6 +1320,11 @@ Styles, Hacks in <a href="http://www.kleeja.com">Kleeja Official Website</a>
 [<a href="{config.siteurl}">{lang.RETURN_HOME}</a>]</li>
 <li><img src="./images/style/admin/cp_button.gif" />
 [<a href="admin.php">{lang.R_CPINDEX}</a>]</li>
+<LOOP NAME="adm_extensions_menu">
+<li><img src="{{icon}}" />
+[<a href="{{link}}">{{lang}}</a>]</li>
+</LOOP>
+<!--
 <li><img src="./images/style/admin/configs_button.gif" />
 [<a href="admin.php?cp=configs">{lang.R_CONFIGS}</a>]</li>
 <li><img src="./images/style/admin/search_button.gif" />
@@ -1371,6 +1359,7 @@ Styles, Hacks in <a href="http://www.kleeja.com">Kleeja Official Website</a>
 [<a href="admin.php?cp=repair">{lang.R_REPAIR}</a>]</li>
 <li><img src="./images/style/admin/lgutcp_button.gif" />
 [<a href="admin.php?cp=lgutcp">{lang.R_LGOUTCP}</a>]</li>
+!-->
 </ul>
 <!-- END ADMIN MENU -->
 	</div><div class="roundedcornr_bottom_561671"><div></div></div></div>
@@ -1413,7 +1402,7 @@ document.getElementById('mail_here').innerHTML = iee;
 	
 <form method="post" action="{action}">
 	<fieldset>
-		<legend>{reports_name}</legend>
+		<legend>{lang.R_REPORTS}</legend>
 
 <table style="width: 100%">
 	<tr style="background-color:silver">
@@ -1625,22 +1614,22 @@ document.getElementById('mail_here').innerHTML = iee;
 ]]>
 	</template>
 	<template name="admin_stylesheet">
-	<![CDATA[* {
+	<![CDATA[
+* {
     padding: 0;
     margin: 0;
 } 
 
+
 html {
         font-size: 100%;
-        /* Always show a scrollbar for short pages - stops the jump when the scrollbar appears. non-IE browsers */
-        height: 100%;
-        margin-bottom: 1px;
+
 }
 body {
     background-color: #CCCCCC;
 	font: .74em "Tahoma" Verdana, Arial, sans-serif;
 	line-height: 1.5em; 
-    margin: 0;
+    margin: 10px 15px;
     padding: 12px 0;
 }
 a {
@@ -1654,25 +1643,26 @@ a:hover {
 
 
 #wrap {
-margin: 20px auto;
-width:97%;
-background: #fff;
-background-repeat: repeat-y;
+	margin: 20px auto;
+	width: 920px;
+
 }
 
 
 	
 
 
-#content {
-padding: 0 40px 0 40px;
-}
-
-
 #header {
 	width:50%;
-	margin-bottom:10px;
+	margin-bottom:5px;
 }
+
+
+#content {
+	padding: 0 40px 0 40px;
+}
+
+
 
 
 /* rodded corners box  */
@@ -1700,18 +1690,18 @@ padding: 0 40px 0 40px;
 	padding: 5px;
 }
 	
-.middle {
-	float: right;
+
+.middle{
 	width: 70%;
-	margin: 0 10px;
+	margin: 0 auto;
 	padding: 1% 1%;
-	text-align: justify;
+	float:left;
 }
 
 .right {
 	float: right;
 	width: 25%;
-	margin: 0 10px;
+	margin: 0 1px;
 	padding: 1% 1%;
 	
 }
@@ -1903,7 +1893,7 @@ a.button2, input.button2 {
 <div class="middle">
 <form method="post" action="{action}">
 	<fieldset>
-		<legend>{users_name}</legend>
+		<legend>{lang.R_USERS}</legend>
 
 <table style="width: 100%">
 	<tr style="background-color:silver">
@@ -2012,7 +2002,7 @@ a.button2, input.button2 {
 <div class="middle">
 <form method="post" action="{action}">
 	<fieldset>
-		<legend>{img_ctrl_name}</legend>
+		<legend>{lang.R_IMG_CTRL}</legend>
 
 <table style="width: 100%">
 
@@ -2058,7 +2048,7 @@ a.button2, input.button2 {
 	<![CDATA[<div class="middle">
 <form method="post" action="{action}">
 	<fieldset>
-		<legend>{extra_name}</legend>
+		<legend>{lang.R_EXTRA}</legend>
 
 <table style="width: 90%">
 	<tr>
@@ -2095,31 +2085,29 @@ a.button2, input.button2 {
 <div class="middle">
 <form method="post" action="{action}">
 	<fieldset>
-		<legend>{styles_name}</legend>
+		<legend>{lang.R_STYLES}</legend>
 
 <table style="width: 100%">
-	<tr style="background-color:silver">
-		<td>{lang.STYLES_EXP}</td>
-
-	</tr>
+<tr style="background-color:silver">
+	<td>{lang.STYLES_EXP}</td>
+</tr>
 <tr style="background-color:#F5F5F5">
-<td>
+	<td>
+	<select name="style_choose">
+	<LOOP NAME="arr">
+	<option  value="{{style_id}}">{{style_name}}</option>
+	</LOOP>
+	</select>
 
-<select name="style_choose">
-<LOOP NAME="arr">
-<option  value="{{style_id}}">{{style_name}}</option>
-</LOOP>
-</select>
+	<br/>
+	<input name="method" value="1" type="radio" checked="checked" /> {lang.SHOW_TPLS}
+	<br/>
+	<input name="method" value="2" type="radio" /> {lang.DELETE}
+	<br/>
+	<input name="method" value="3" type="radio" /> {lang.EXPORT_AS_XML}
 
-<br/>
-<input name="method" value="1" type="radio" checked="checked" /> {lang.SHOW_TPLS}
-<br/>
-<input name="method" value="2" type="radio" /> {lang.DELETE}
-<br/>
-<input name="method" value="3" type="radio" /> {lang.EXPORT_AS_XML}
-
-</td>
-	</tr>
+	</td>
+</tr>
 </table>
 
 </fieldset>
@@ -2130,7 +2118,6 @@ a.button2, input.button2 {
 </div>
 
 <br/>
-<hr/>
 <br/>
 
 <div class="middle">
@@ -2139,18 +2126,17 @@ a.button2, input.button2 {
 		<legend>{lang.ADD_NEW_STYLE}</legend>
 
 <table style="width: 100%">
-	<tr style="background-color:silver">
+<tr style="background-color:silver">
 		<td>{lang.NEW_STYLES_EXP}</td>
-
-	</tr>
+</tr>
 <tr style="background-color:#F5F5F5">
-<td>
+	<td>
 
-<input name="imp_file" type="file" />
+	<input name="imp_file" type="file" />
 
 
-</td>
-	</tr>
+	</td>
+</tr>
 </table>
 
 </fieldset>
@@ -2159,11 +2145,7 @@ a.button2, input.button2 {
 </fieldset>
 </form>
 
-</div>
-
-
-</div>
-]]>
+</div>]]>
 	</template>
 	<template name="admin_show_tpls">
 	<![CDATA[
@@ -2201,7 +2183,7 @@ a.button2, input.button2 {
 
 </div>
 <br/>
-<hr/>
+
 <br/>
 
 <div class="middle">
@@ -2235,19 +2217,24 @@ a.button2, input.button2 {
 ]]>
 	</template>
 	<template name="admin_edit_tpl">
-	<![CDATA[<script type="text/javascript" defer="defer">
+	<![CDATA[
+<script type="text/javascript" defer="defer">
 
-			function change_editor_height(height)
+			function change_editor_height(height, d)
 			{
-				height = Number(height);
 
-				if (isNaN(height))
+
+				var editor 		= document.getElementById('template_content');
+				var od_height	= Number(editor.style.height.replace('px' ,''));
+				
+				if (d == '-') 
 				{
-					return;
+					editor.style.height	=od_height - height + 'px';
 				}
-
-				editor = document.getElementById('template_content');
-				editor.rows = editor.rows+height;
+				else
+				{
+					editor.style.height	= od_height + height + 'px';	
+				}
 			}
 			
 </script>
@@ -2262,11 +2249,11 @@ a.button2, input.button2 {
 <tr style="background-color:#F5F5F5">
 <td>
 
-<textarea name="template_content" id="template_content"  style="width: 490px; height: 260px;direction:ltr;" >
+<textarea name="template_content" id="template_content"  rows="" style="width: 490px; height: 260px;direction:ltr;" >
 {template_content}
 </textarea>
-<input class="button2" type="button"  onclick="change_editor_height('+5');" value="[+]" />
-<input class="button2" type="button"  onclick="change_editor_height('-5');" value="[-]" />
+<input class="button2" type="button"  onclick="javascript:change_editor_height(100, '+');" value="[+]" />
+<input class="button2" type="button"  onclick="javascript:change_editor_height(100, '-');" value="[-]" />
 <br/>
 <input type="hidden" name="style_id" value="{style_id}" />
 <input type="hidden" name="tpl_choose" value="{tpl_name}" />
@@ -2281,7 +2268,8 @@ a.button2, input.button2 {
 </fieldset>
 </form>
 
-</div>]]>
+</div>
+]]>
 	</template>
 	<template name="admin_plugins">
 	<![CDATA[
@@ -2325,7 +2313,7 @@ a.button2, input.button2 {
 </div>
 
 <br/>
-<hr/>
+
 <br/>
 
 <div class="middle">
@@ -2357,7 +2345,6 @@ a.button2, input.button2 {
 </div>
 
 
-</div>
 ]]>
 	</template>
 	<template name="admin_show_words">
@@ -2400,7 +2387,7 @@ a.button2, input.button2 {
 
 </div>
 <br/>
-<hr/>
+
 <br/>
 
 <div class="middle">
@@ -2479,7 +2466,7 @@ a.button2, input.button2 {
 <div class="middle">
 <form method="post" action="{action}">
 	<fieldset>
-		<legend>{langs_name}</legend>
+		<legend>{lang.R_LANGS}</legend>
 
 <table style="width: 100%">
 	<tr style="background-color:silver">
@@ -2514,7 +2501,7 @@ a.button2, input.button2 {
 </div>
 
 <br/>
-<hr/>
+
 <br/>
 
 <div class="middle">
@@ -2542,9 +2529,6 @@ a.button2, input.button2 {
 		<input class="button2" name="submit_new_lang" type="submit" value="{lang.SUBMIT}" />
 </fieldset>
 </form>
-
-</div>
-
 
 </div>
 ]]>

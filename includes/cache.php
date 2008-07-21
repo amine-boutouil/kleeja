@@ -14,6 +14,60 @@ if (!defined('IN_COMMON'))
 	exit;
 }
 
+	
+//	
+//get hooks data from hooks table  ... 
+//
+if(!defined('STOP_HOOKS'))
+{
+	if (file_exists($root_path.'cache/data_hooks.php'))
+	{
+		include ($root_path.'cache/data_hooks.php');
+	}
+	
+	if (!$all_plg_hooks && !file_exists($root_path.'cache/data_hooks.php'))
+	{
+		//get all hooks
+		$query = array(
+		'SELECT'	=> 'h.hook_id,h.hook_name, h.hook_content, h.plg_id, p.plg_name',
+		'FROM'		=> "{$dbprefix}hooks AS h",
+		'JOINS'		=> array(
+			array(
+				'INNER JOIN'	=> "{$dbprefix}plugins AS p",
+				'ON'			=> 'p.plg_id=h.plg_id'
+			)
+		),
+		'WHERE'		=> 'p.plg_disabled=0',
+		'ORDER BY'	=> 'h.hook_id'
+	);
+	
+		($hook = kleeja_run_hook('qr_select_hooks_cache')) ? eval($hook) : null; //run hook
+		$result = $SQL->build($query);
+			
+				$file_datac = '<' . '?php' . "\n\n";
+				//$file_datac .= "if (!defined('IN_COMMON')) exit('no directly opening : ' . __file__);";
+				$file_datac .= "\n// auto-generated cache files\n//For: Kleeja \n\n";
+				$file_datac .= '$all_plg_hooks = array();' ."\n\n";
+
+
+		while($row=$SQL->fetch_array($result))
+		{
+				$all_plg_hooks[$row['hook_name']][$row['plg_name']] =	$row['hook_content'];
+				$file_datac .= '$all_plg_hooks[\''.$row['hook_name'].'\'][\''.$row['plg_name'].'\'] = \'' . str_replace(array("'","\'"), "\'",  $row['hook_content']) . '\';' . "\n";
+		}
+				$file_datac .= ''."\n\n";
+				$file_datac .= '?' . '>';
+				
+	 	$SQL->freeresult($result);
+
+		$filenumc = @fopen($root_path.'cache/data_hooks.php', 'w');
+		@flock($filenumc, LOCK_EX); // exlusive look
+		@fwrite($filenumc, $file_datac);
+		@fclose($filenumc);
+	}
+}#plugins is on
+
+
 
 //
 //get config data from config table  ...
@@ -228,7 +282,7 @@ if (!defined('IN_COMMON'))
 			$stat_sizes 			=  $row['sizes'];
 			$stat_users 			=  $row['users'];
 			$stat_last_file 		=  $row['last_file'];
-			$stat_last_f_del 		=  $row['last_f_del'];
+			$stat_last_f_del		=  $row['last_f_del'];
 			$stat_today 			=  $row['today'];
 			$stat_counter_today 	=  $row['counter_today'];
 			$stat_counter_yesterday	=  $row['counter_yesterday'];
@@ -271,11 +325,18 @@ if (!defined('IN_COMMON'))
 // administarator sometime need some files and delete other .. we
 // do that for him .. becuase he has no time .. :)            last_down - $config[del_f_day]
 //
-    if (date( "j" ,$stat_last_f_del ) < date( "j" ,time()))
+if($config['del_f_day'] > 0)
+{
+	if(!$stat_last_f_del || empty($stat_last_f_del)) $stat_last_f_del = time();
+	
+    if (gmdate( "j" ,$stat_last_f_del) < gmdate( "j" ,time()))
     {
+		$totaldays	= (time() - ($config['del_f_day']*86400));
+		
 		$query = array(
 					'SELECT'	=> 'f.id, f.last_down, f.name, f.folder',
-					'FROM'		=> "{$dbprefix}files f"
+					'FROM'		=> "{$dbprefix}files f",
+					'WHERE'		=> "last_post < $totaldays"
 					);
 					
 		($hook = kleeja_run_hook('qr_select_delfiles_cache')) ? eval($hook) : null; //run hook			
@@ -283,16 +344,9 @@ if (!defined('IN_COMMON'))
 
 		while($row=$SQL->fetch_array($result))
 		{
-
-		     #time per day ..
-		    $del_date	= mktime(0, 0, 0, date(m), date(d)+$config['del_f_day'], date(y));
-			$totaldays	= (time() - $row['last_down'] )  / (60 * 60 * 24);
-
-		    if ( $totaldays <= $del_date )
-		    {
 					$query_del = array(
 									'DELETE'	=> "{$dbprefix}files",
-									'WHERE'		=> "id='".intval($row['id'])."'"
+									'WHERE'		=> "id='".intval($row['id'])."' AND last_post < $totaldays"
 									);
 									
 					($hook = kleeja_run_hook('qr_del_delfiles_cache')) ? eval($hook) : null; //run hook				
@@ -300,15 +354,13 @@ if (!defined('IN_COMMON'))
 
 
 					//delete from folder ..
-					@unlink ( $row['folder'] . "/" . $row['name'] );
+					@unlink ($row['folder'] . "/" . $row['name']);
 					//delete thumb
 					if (is_file($row['folder'] . "/thumbs/" . $row['name'] ))
 					{
 						@unlink ($row['folder'] . "/thumbs/" . $row['name'] );
 					}
-					
-		    }
-
+		
 	    }#END WHILE
 		
 	    //update $stat_last_f_del !!
@@ -321,11 +373,13 @@ if (!defined('IN_COMMON'))
 		if (!$SQL->build($update_query)){ die($lang['CANT_UPDATE_SQL']);}
 
     } //stat_del
+}#no automated delete
+
 
 //
 //get banned ips data from stats table  ...
 //
-	if (file_exists($root_path.'cache/data_ban.php'))
+	if (file_exists($root_path . 'cache/data_ban.php'))
 	{
 		include ($root_path.'cache/data_ban.php');
 	}
@@ -457,58 +511,7 @@ if (!defined('IN_COMMON'))
 		@fclose($filenume);
 	}
 	
-	
-//	
-//get hooks data from hooks table  ... 
-//
-if(!defined('STOP_HOOKS'))
-{
-	if (file_exists($root_path.'cache/data_hooks.php'))
-	{
-		include ($root_path.'cache/data_hooks.php');
-	}
-	
-	if (!$all_plg_hooks && !file_exists($root_path.'cache/data_hooks.php'))
-	{
-		//get all hooks
-		$query = array(
-		'SELECT'	=> 'h.hook_id,h.hook_name, h.hook_content, h.plg_id, p.plg_name',
-		'FROM'		=> "{$dbprefix}hooks AS h",
-		'JOINS'		=> array(
-			array(
-				'INNER JOIN'	=> "{$dbprefix}plugins AS p",
-				'ON'			=> 'p.plg_id=h.plg_id'
-			)
-		),
-		'WHERE'		=> 'p.plg_disabled=0',
-		'ORDER BY'	=> 'h.hook_id'
-	);
-	
-		($hook = kleeja_run_hook('qr_select_hooks_cache')) ? eval($hook) : null; //run hook
-		$result = $SQL->build($query);
-			
-				$file_datac = '<' . '?php' . "\n\n";
-				//$file_datac .= "if (!defined('IN_COMMON')) exit('no directly opening : ' . __file__);";
-				$file_datac .= "\n// auto-generated cache files\n//For: Kleeja \n\n";
-				$file_datac .= '$all_plg_hooks = array();' ."\n\n";
 
-
-		while($row=$SQL->fetch_array($result))
-		{
-				$all_plg_hooks[$row['hook_name']][$row['plg_name']] =	$row['hook_content'];
-				$file_datac .= '$all_plg_hooks[\''.$row['hook_name'].'\'][\''.$row['plg_name'].'\'] = \'' . str_replace(array("'","\'"), "\'",  $row['hook_content']) . '\';' . "\n";
-		}
-				$file_datac .= ''."\n\n";
-				$file_datac .= '?' . '>';
-				
-	 	$SQL->freeresult($result);
-
-		$filenumc = @fopen($root_path.'cache/data_hooks.php', 'w');
-		@flock($filenumc, LOCK_EX); // exlusive look
-		@fwrite($filenumc, $file_datac);
-		@fclose($filenumc);
-	}
-}#plugins is on
  
 ($hook = kleeja_run_hook('in_cache_page')) ? eval($hook) : null; //run hook
 ?>

@@ -26,6 +26,7 @@ class ocr_captcha
     var $imagetype="png"; // can also be "png";
     var $public_key;    // public key
     var $font_file="./includes/DUNGEON.TTF";
+    var $font_file2="./includes/DUNGEON.GDF";
 	
 	
     function ocr_captcha($long=6,$lx=120,$ly=30,$nb_noise=20)
@@ -105,13 +106,17 @@ class ocr_captcha
 	  { // rand characters in background with random position, angle, color
 	        for ($i=0;$i<$this->nb_noise;$i++)
 			{
-		          $size=intval(rand(6,14));
-		          $angle=intval(rand(0,360));
-		          $x=intval(rand(10,$this->lx-10));
-		          $y=intval(rand(0,$this->ly-5));
-		          $color=imagecolorallocate($image,intval(rand(160,224)),intval(rand(160,224)),intval(rand(160,224)));
-		          $text=chr(intval(rand(45,250)));
-		          ImageTTFText ($image,$size,$angle,$x,$y,$color,$this->font_file,$text);
+				$size=intval(rand(6,14));
+				$angle=intval(rand(0,360));
+				$x=intval(rand(10,$this->lx-10));
+				$y=intval(rand(0,$this->ly-5));
+				$color=imagecolorallocate($image,intval(rand(160,224)),intval(rand(160,224)),intval(rand(160,224)));
+				$text=chr(intval(rand(45,250)));
+		         
+				//fix in 1rc4  
+				$this->klg_ImageTTFText($image, $size, $angle, $x, $y, $color, $text);
+
+
 	        }
       }
       else
@@ -139,8 +144,8 @@ class ocr_captcha
 	        $size=intval(rand(12,17));
 	        $angle=intval(rand(-30,30));
 	        $text=strtoupper(substr($private_key,$i,1));
-	        ImageTTFText($image,$size,$angle,$x+2,26,$shadow,$this->font_file,$text);
-	        ImageTTFText($image,$size,$angle,$x,24,$color,$this->font_file,$text);
+	        $this->klg_ImageTTFText($image,$size,$angle,$x+2,26,$shadow,$text);
+	        $this->klg_ImageTTFText($image,$size,$angle,$x,24,$color,$text);
 	        $x+=$size+2;
       }
 	  
@@ -165,6 +170,19 @@ class ocr_captcha
 	      $res.="<img src='".$this->get_filename()."' alt='$alt' border='0'>\n";
 	      return $res;
     }
+	
+	function klg_ImageTTFText($image,$size,$angle,$x,$y,$color,$text)
+	{
+		if(function_exists('imagettftext'))
+		{
+			imagettftext ($image, $size, $angle, $x, $y, $color,$this->font_file, $text);
+		}
+		else
+		{
+			$font = imageloadfont($this->font_file2);
+			imagestring ($image, $font, $x, $y-17, $text, $color);
+		}
+	}
 }
   
 ?>

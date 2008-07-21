@@ -494,7 +494,7 @@ function creat_style_xml($contents, $def=false)
 					$insert_query = array(
 										'INSERT'	=> 'list_name, list_author, list_type',
 										'INTO'		=> "{$dbprefix}lists",
-										'VALUES'	=> "'".$style_info['style_name']['value']."','".$style_info['style_author']['value']."', '2'"
+										'VALUES'	=> "'".$style_info['style_name']['value']."','".$style_info['style_author']['value']."', '1'"
 										);
 					($hook = kleeja_run_hook('qr_select_styleinfo_crtxmlstyle_func')) ? eval($hook) : null; //run hook	
 					$SQL->build($insert_query);

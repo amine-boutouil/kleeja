@@ -244,7 +244,7 @@ if(!file_exists($this->folder))
 		//
 		for($i=0;$i<$this->filesnum;$i++)
 		{
-			$this->filename2	=	@explode(".",$_FILES['file']['name'][$i]);
+			$this->filename2	=	explode(".",$_FILES['file']['name'][$i]);
 			$this->filename2	=	$this->filename2[count($this->filename2)-1];
 			$this->typet		=	$this->filename2;
 			$this->sizet		=	$_FILES['file']['size'][$i];
@@ -305,9 +305,9 @@ if(!file_exists($this->folder))
 						{
 									($hook = kleeja_run_hook('ftp_connect_kljuploader')) ? eval($hook) : null; //run hook
 									// set up a connection or die
-									$conn_id		= @ftp_connect($ftp_server);
+									$conn_id		= ftp_connect($ftp_server);
 						            // Login with username and password
-						            $login_result	= @ftp_login($conn_id, $ftp_user, $ftp_pass);
+						            $login_result	= ftp_login($conn_id, $ftp_user, $ftp_pass);
 
 						            // Check the connection
 						            if ((!$conn_id) || (!$login_result)) 
@@ -315,8 +315,8 @@ if(!file_exists($this->folder))
 						                  $this->errs[]= $lang['CANT_CON_FTP'] . $ftp_server;
 									}
 						            // Upload the file
-						            $file = @ftp_put($conn_id, $this->folder."/".$this->filename2,$_FILES['file']['tmp_name'][$i], FTP_BINARY);
-									@ftp_close($conn_id);
+						            $file = ftp_put($conn_id, $this->folder."/".$this->filename2,$_FILES['file']['tmp_name'][$i], FTP_BINARY);
+									ftp_close($conn_id);
 						}
 						//flush();
 
@@ -342,7 +342,7 @@ if(!file_exists($this->folder))
 		{
 
 							$filename 			=  basename($_POST['file'][$i]);
-							$this->filename2	= @explode(".",$filename);
+							$this->filename2	= explode(".",$filename);
 							$this->filename2	= $this->filename2[count($this->filename2)-1];
 							$this->typet 		= $this->filename2;
 
@@ -412,7 +412,7 @@ if(!file_exists($this->folder))
 										else
 										{
 											//then ..write new file
-											$fp2 = @fopen($this->folder . "/".$this->filename2,"w");
+											$fp2 = fopen($this->folder . "/".$this->filename2,"w");
 											fwrite($fp2, $data);
 											fclose($fp2);
 										}
@@ -442,7 +442,7 @@ function saveit ($filname, $folderee, $sizeee, $typeee)
 		global $SQL,$dbprefix,$config,$lang;
 
 				// sometime cant see file after uploading.. but ..
-				@chmod($folderee . '' . $filname , 0755); //0755
+				chmod($folderee . '' . $filname , 0755); //0755
 
 				$name 	= (string)	$SQL->escape($filname);
 				$size	= (int) 	$sizeee;

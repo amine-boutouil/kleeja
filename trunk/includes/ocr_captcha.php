@@ -81,7 +81,7 @@ class ocr_captcha
 					{
 			            if(strpos($file, 'captcha_') !== false)
 						{
-							@unlink('cache/'.$file);
+							unlink('cache/'.$file);
 						}
 			        }
 			        closedir($dh);
@@ -97,7 +97,7 @@ class ocr_captcha
 	   $private_key	= $this->generate_private();
 		  
 
-		$image		= @imagecreatetruecolor($this->lx,$this->ly);
+		$image		= imagecreatetruecolor($this->lx,$this->ly);
 
 	
       $back=ImageColorAllocate($image,intval(rand(224,255)),intval(rand(224,255)),intval(rand(224,255)));

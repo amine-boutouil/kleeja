@@ -69,7 +69,9 @@
 		
 		$total_pages 	= $Pager->getTotalPages(); 
 		$arr_paging 	= $Pager->print_nums($config['siteurl'] . 'admin.php?cp=exts'); 
+		
 
+	
 		//after submit ////////////////
 		if (isset($_POST['submit']))
 		{
@@ -81,9 +83,9 @@
 						$update_query = array(
 											'UPDATE'	=> "{$dbprefix}exts",
 											'SET'		=> 	"group_id = '" . intval($_POST['gr'][$n]) . "',
-															gust_size = '" . intval($_POST['gsz_'.$n]) . "',
+															gust_size = '" . intval($_POST['gsz'][$n]) . "',
 															gust_allow = '" . (isset($_POST['gal'][$n]) ? 1 : 0) . "',
-															user_size = '" . intval($_POST['usz_'.$n]) . "',
+															user_size = '" . intval($_POST['usz'][$n]) . "',
 															user_allow = '" .  (isset($_POST['ual'][$n])? 1 : 0) . "'",
 											'WHERE'		=>	"id='" . intval($n) ."'"
 											);

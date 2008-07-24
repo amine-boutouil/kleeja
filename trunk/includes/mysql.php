@@ -19,7 +19,8 @@ if(!defined("SQL_LAYER")){
 define("SQL_LAYER","mysql4");
 
   
-class SSQL {
+class SSQL 
+{
 
 	var $connect_id              	= null;		
 	var $result;		
@@ -43,7 +44,7 @@ class SSQL {
                           $this->db_password = 'hidden';
 
 						  
-                        $this->connect_id	= @mysql_connect($this->host,$this->db_username,$db_password) or die($this->error_msg("ERROR: CANT CONNECT"));
+                        $this->connect_id	= mysql_connect($this->host,$this->db_username,$db_password) or die($this->error_msg("ERROR: CANT CONNECT"));
 						//version of mysql
 						$this->mysql_version = mysql_get_server_info($this->connect_id);
 						
@@ -126,7 +127,7 @@ class SSQL {
 							$this->in_transaction = TRUE;
 						}
 
-						$this->result = @mysql_query($query, $this->connect_id);
+						$this->result = mysql_query($query, $this->connect_id);
 						
 						//debug .. //////////////
 						$this->debugr[$this->query_num+1] = array($query, sprintf('%.5f', get_microtime() - $srartum_sql));
@@ -366,7 +367,7 @@ class SSQL {
 				{
                           $error_no  = mysql_errno();
                           $error_msg = mysql_error();
-						  $error_sql = @current($this->debugr[$this->query_num+1]);
+						  $error_sql = current($this->debugr[$this->query_num+1]);
 
                           echo "<style>BODY{FONT-FAMILY:tahoma;FONT-SIZE:12px;}
 								textarea {color: #FF0000;background-color: #FFECEC;border-width: 1px;

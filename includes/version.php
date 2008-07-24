@@ -7,7 +7,7 @@
 	
 	
 	//dont change it .. plz man 
-	 define ('KLEEJA_VERSION' , '1.0.0RC4');
+	 define ('KLEEJA_VERSION' , '1.0.0RC5');
  
 	/*
 	

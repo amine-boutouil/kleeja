@@ -60,10 +60,10 @@ if(!defined('STOP_HOOKS'))
 				
 	 	$SQL->freeresult($result);
 
-		$filenumc = @fopen($root_path.'cache/data_hooks.php', 'w');
-		@flock($filenumc, LOCK_EX); // exlusive look
-		@fwrite($filenumc, $file_datac);
-		@fclose($filenumc);
+		$filenumc = fopen($root_path.'cache/data_hooks.php', 'w');
+		flock($filenumc, LOCK_EX); // exlusive look
+		fwrite($filenumc, $file_datac);
+		fclose($filenumc);
 	}
 }#plugins is on
 
@@ -102,10 +102,10 @@ if(!defined('STOP_HOOKS'))
 				
 	 	$SQL->freeresult($result);
 
-		$filenumc = @fopen($root_path.'cache/data_config.php', 'w');
-		@flock($filenumc, LOCK_EX); // exlusive look
-		@fwrite($filenumc, $file_datac);
-		@fclose($filenumc);
+		$filenumc = fopen($root_path.'cache/data_config.php', 'w');
+		flock($filenumc, LOCK_EX); // exlusive look
+		fwrite($filenumc, $file_datac);
+		fclose($filenumc);
 	}
 //
 //get lang data from lang table  ...
@@ -143,10 +143,10 @@ if(!defined('STOP_HOOKS'))
 				
 	 	$SQL->freeresult($result);
 
-		$filenumc = @fopen($root_path.'cache/data_lang_'.$config['language'].'.php', 'w');
-		@flock($filenumc, LOCK_EX); // exlusive look
-		@fwrite($filenumc, $file_datac);
-		@fclose($filenumc);
+		$filenumc = fopen($root_path.'cache/data_lang_'.$config['language'].'.php', 'w');
+		flock($filenumc, LOCK_EX); // exlusive look
+		fwrite($filenumc, $file_datac);
+		fclose($filenumc);
 	}
 
 //
@@ -191,10 +191,10 @@ if(!defined('STOP_HOOKS'))
 				
 	 	$SQL->freeresult($result);
 
-		$filenumt = @fopen($root_path.'cache/data_exts.php', 'w');
-		@flock($filenumt, LOCK_EX); // exlusive look
-		@fwrite($filenumt, $file_datat);
-		@fclose($filenumt);
+		$filenumt = fopen($root_path.'cache/data_exts.php', 'w');
+		flock($filenumt, LOCK_EX); // exlusive look
+		fwrite($filenumt, $file_datat);
+		fclose($filenumt);
 	}
 
 //
@@ -240,10 +240,10 @@ if(!defined('STOP_HOOKS'))
 			
 	 	$SQL->freeresult($result);
 
-		$filenums = @fopen($root_path.'cache/data_sizes.php', 'w');
-		@flock($filenums, LOCK_EX); // exlusive look
-		@fwrite($filenums, $file_datas);
-		@fclose($filenums);
+		$filenums = fopen($root_path.'cache/data_sizes.php', 'w');
+		flock($filenums, LOCK_EX); // exlusive look
+		fwrite($filenums, $file_datas);
+		fclose($filenums);
 	}
 
 
@@ -255,10 +255,10 @@ if(!defined('STOP_HOOKS'))
 		//1
 		include ("cache/data_stats.php");
 		//2
-		$tfile		= @filemtime("cache/data_stats.php");
+		$tfile		= filemtime("cache/data_stats.php");
 		if((time()-$tfile) >= 3600)//after 1 hours
 		{    
-			@unlink("cache/data_stats.php");
+			unlink("cache/data_stats.php");
 		}
 	}
 	else
@@ -314,10 +314,10 @@ if(!defined('STOP_HOOKS'))
 		
 		$SQL->freeresult($result);
 		
-		$filenumw = @fopen($root_path.'cache/data_stats.php', 'w');
-		@flock($filenumw, LOCK_EX); // exlusive look
-		@fwrite($filenumw, $file_dataw);
-		@fclose($filenumw);
+		$filenumw = fopen($root_path.'cache/data_stats.php', 'w');
+		flock($filenumw, LOCK_EX); // exlusive look
+		fwrite($filenumw, $file_dataw);
+		fclose($filenumw);
 	}//end else
 
 	
@@ -336,7 +336,7 @@ if($config['del_f_day'] > 0)
 		$query = array(
 					'SELECT'	=> 'f.id, f.last_down, f.name, f.folder',
 					'FROM'		=> "{$dbprefix}files f",
-					'WHERE'		=> "last_post < $totaldays"
+					'WHERE'		=> "f.last_post < $totaldays"
 					);
 					
 		($hook = kleeja_run_hook('qr_select_delfiles_cache')) ? eval($hook) : null; //run hook			
@@ -354,11 +354,11 @@ if($config['del_f_day'] > 0)
 
 
 					//delete from folder ..
-					@unlink ($row['folder'] . "/" . $row['name']);
+					unlink ($row['folder'] . "/" . $row['name']);
 					//delete thumb
 					if (is_file($row['folder'] . "/thumbs/" . $row['name'] ))
 					{
-						@unlink ($row['folder'] . "/thumbs/" . $row['name'] );
+						unlink ($row['folder'] . "/thumbs/" . $row['name'] );
 					}
 		
 	    }#END WHILE
@@ -420,10 +420,10 @@ if($config['del_f_day'] > 0)
 			$file_datab .= '?' . '>';
 	 	}
 
-		$filenumb = @fopen($root_path.'cache/data_ban.php', 'w');
-		@flock($filenumb, LOCK_EX); // exlusive look
-		@fwrite($filenumb, $file_datab);
-		@fclose($filenumb);
+		$filenumb = fopen($root_path.'cache/data_ban.php', 'w');
+		flock($filenumb, LOCK_EX); // exlusive look
+		fwrite($filenumb, $file_datab);
+		fclose($filenumb);
 	}
 	
 //	
@@ -459,10 +459,10 @@ if($config['del_f_day'] > 0)
 			$file_datar .= '$ruless = \'' .str_replace(array("'","\'"), "\'", $rules1) .'\';'."\n\n"; // its took 2 hours ..
 			
 		$file_datar .= '?' . '>';
-		$filenumr = @fopen($root_path.'cache/data_rules.php', 'w');
-		@flock($filenumr, LOCK_EX); // exlusive look
-		@fwrite($filenumr, $file_datar);
-		@fclose($filenumr);
+		$filenumr = fopen($root_path.'cache/data_rules.php', 'w');
+		flock($filenumr, LOCK_EX); // exlusive look
+		fwrite($filenumr, $file_datar);
+		fclose($filenumr);
 	}	
 	
 //	
@@ -505,10 +505,10 @@ if($config['del_f_day'] > 0)
 	 
 		
 		$file_datae .= '?' . '>';
-		$filenume = @fopen($root_path.'cache/data_extra.php', 'w');
-		@flock($filenume, LOCK_EX); // exlusive look
-		@fwrite($filenume, $file_datae);
-		@fclose($filenume);
+		$filenume = fopen($root_path.'cache/data_extra.php', 'w');
+		flock($filenume, LOCK_EX); // exlusive look
+		fwrite($filenume, $file_datae);
+		fclose($filenume);
 	}
 	
 

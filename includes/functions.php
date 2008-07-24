@@ -267,7 +267,7 @@ function visit_stats ()
 			($hook = kleeja_run_hook('qr_update_counters_ststs_func')) ? eval($hook) : null; //run hook
 			if ($SQL->build($update_query))
 			{
-				@unlink("cache/data_stats.php");
+				unlink("cache/data_stats.php");
 			}
 			else
 			{ 
@@ -309,7 +309,7 @@ function get_ban ()
 		if (getenv('HTTP_X_FORWARDED_FOR')){$ip	= getenv('HTTP_X_FORWARDED_FOR');} else {$ip= getenv('REMOTE_ADDR');}
 	
 		//now .. loop for banned ips 
-		if (!empty($banss))
+		if (!trim($banss) != '')
 		{
 			if (!is_array($banss))	$banss = array();
 			
@@ -318,7 +318,7 @@ function get_ban ()
 				//first .. replace all * with something good .
 				$replaceIt = str_replace("*", '[0-9]{1,3}', $ip2);
 				
-				if ($ip == $ip2 || @eregi($replaceIt , $ip))
+				if ($ip == $ip2 || eregi($replaceIt , $ip))
 				{
 					
 					($hook = kleeja_run_hook('banned_get_ban_func')) ? eval($hook) : null; //run hook	
@@ -518,7 +518,7 @@ function creat_style_xml($contents, $def=false)
 												//delete cache ..
 												if (file_exists('cache/data_config.php'))
 												{
-													@unlink('cache/data_config.php');
+													unlink('cache/data_config.php');
 												}
 										}
 					}
@@ -594,7 +594,7 @@ function creat_lang_xml($contents, $def=false)
 												//delete cache ..
 												if (file_exists('cache/data_config.php'))
 												{
-													@unlink('cache/data_config.php');
+													unlink('cache/data_config.php');
 												}
 										}
 					}
@@ -708,7 +708,7 @@ function creat_plugin_xml($contents)
 												//delete cache ..
 												if (file_exists('cache/' . $config['style'] . '_' .$template_name . '.php'))
 												{
-													@unlink('cache/' . $config['style'] . '_' . $$template_namee . '.php');
+													unlink('cache/' . $config['style'] . '_' . $$template_namee . '.php');
 												}
 										}
 									}
@@ -1120,7 +1120,7 @@ global $lang, $SQL, $config, $$dbprefix;
 		//delete cache ..
 		if (file_exists('cache/langs_' . $lang_id . '.php'))
 		{
-			@unlink('cache/langs_' . $language . '.php');
+			unlink('cache/langs_' . $language . '.php');
 		}
 		
 		return $lang_trans;
@@ -1148,7 +1148,7 @@ function fetch_remote_file($url)
 	else if(function_exists("fsockopen"))
 	{
 
-		@set_time_limit(0);
+		set_time_limit(0);
 		$url = parse_url($url);
 
 		$host = $url['host'];
@@ -1160,7 +1160,7 @@ function fetch_remote_file($url)
 		$errno = 0;
 		$errstr = '';
 
-		if (!($fsock = @fsockopen($host, $port, $errno, $errstr)))
+		if (!($fsock = fsockopen($host, $port, $errno, $errstr)))
 		{
 			return false;
 		}
@@ -1177,11 +1177,11 @@ function fetch_remote_file($url)
 
 		$data	=	'';
 		
-		while(!@feof($fsock))
+		while(!feof($fsock))
 		{
-			$data .= @fread($fsock, 3000);
+			$data .= fread($fsock, 3000);
 		}
-		@fclose($fsock);
+		fclose($fsock);
 
 		
 		if (empty($data))
@@ -1194,7 +1194,7 @@ function fetch_remote_file($url)
 	}
 	else
 	{
-		return @implode("", @file($url));
+		return implode("", file($url));
 	}
 }
 ?>

@@ -36,7 +36,7 @@ class SSQL
 				initiate the class
 				wirth basic data
 				*/
-                function SSQL($host,$db_username,$db_password,$db_name)
+                function SSQL($host,$db_username,$db_password,$db_name, $bad_forum = false)
 				{
                           $this->host        = $host;
                           $this->db_username = $db_username;
@@ -56,7 +56,14 @@ class SSQL
 								
 								if ($dbselect)
 								{
-									if ($this->mysql_version>='4.1.0') mysql_query("SET NAMES 'utf8'");
+									if($bad_forum != false)
+									{
+										mysql_query("SET NAMES latin1_swedish_ci");
+									}
+									else
+									{
+										if ($this->mysql_version>='4.1.0') mysql_query("SET NAMES 'utf8'");
+									}
 								}
 								else if(!$dbselect)
 								{

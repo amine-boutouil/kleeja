@@ -336,7 +336,7 @@ if($config['del_f_day'] > 0)
 		$query = array(
 					'SELECT'	=> 'f.id, f.last_down, f.name, f.folder',
 					'FROM'		=> "{$dbprefix}files f",
-					'WHERE'		=> "f.last_post < $totaldays"
+					'WHERE'		=> "f.last_down < $totaldays"
 					);
 					
 		($hook = kleeja_run_hook('qr_select_delfiles_cache')) ? eval($hook) : null; //run hook			
@@ -346,7 +346,7 @@ if($config['del_f_day'] > 0)
 		{
 					$query_del = array(
 									'DELETE'	=> "{$dbprefix}files",
-									'WHERE'		=> "id='".intval($row['id'])."' AND last_post < $totaldays"
+									'WHERE'		=> "id='".intval($row['id'])."' AND last_down < $totaldays"
 									);
 									
 					($hook = kleeja_run_hook('qr_del_delfiles_cache')) ? eval($hook) : null; //run hook				
@@ -354,11 +354,14 @@ if($config['del_f_day'] > 0)
 
 
 					//delete from folder ..
-					unlink ($row['folder'] . "/" . $row['name']);
-					//delete thumb
-					if (is_file($row['folder'] . "/thumbs/" . $row['name'] ))
+					if (file_exists($row['folder'] . "/" . $row['name']))
 					{
-						unlink ($row['folder'] . "/thumbs/" . $row['name'] );
+						@unlink ($row['folder'] . "/" . $row['name']);
+					}
+					//delete thumb
+					if (file_exists($row['folder'] . "/thumbs/" . $row['name'] ))
+					{
+						@unlink ($row['folder'] . "/thumbs/" . $row['name'] );
 					}
 		
 	    }#END WHILE

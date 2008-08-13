@@ -692,6 +692,12 @@ document.getElementById("url").innerHTML = "<a href=\"{url_file}\" target=\"baln
 <form action="{action}" method="post">
 {lang.USERNAME} : <input type="text" name="pname" value="{name}" readonly="readonly" /><br />
 {lang.EMAIL} :<input type="text" name="pmail" value="{mail}"  /><br />
+{lang.SHOW_MY_FILECP} :
+<select name="show_my_filecp">
+<option value="1" <IF NAME="show_my_filecp=1">selected="selected"</IF> >{lang.YES}</option>
+<option value="0" <IF NAME="show_my_filecp=0">selected="selected"</IF> >{lang.NO}</option>
+</select>
+<br />
 	<fieldset>
 		<legend>{lang.PASS_ON_CHANGE}</legend>
 {lang.OLD} :<input type="password" name="ppass_old" value="{_POST.ppass_old}"  /><br />

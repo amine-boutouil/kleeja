@@ -175,7 +175,7 @@ class ocr_captcha
 	{
 		if(function_exists('imagettftext'))
 		{
-			imagettftext ($image, $size, $angle, $x, $y, $color,$this->font_file, $text);
+			@imagettftext ($image, $size, $angle, $x, $y, $color,$this->font_file, $text);
 		}
 		else
 		{

@@ -111,7 +111,7 @@
 		$no_results = true;
 	}
 		$total_pages 	= $Pager->getTotalPages(); 
-		$page_nums 		= $Pager->print_nums($config['siteurl'].'admin.php?cp=img'); 
+		$page_nums 		= $Pager->print_nums($config['siteurl'].'admin.php?cp=img_ctrl'); 
 		
 	//after submit 
 	if(isset($_POST['submit']))

@@ -106,13 +106,30 @@ class usrcp
 				function phpbb ($name,$pass)
 				{
 					global $forum_srv,$forum_user,$forum_pass,$forum_db;
-					global $forum_prefix;
+					global $forum_prefix,$forum_path;
 				
 				
-					$pass = md5($pass);
+					
 					
 					//fix bug .. 
 					if(empty($forum_srv) || empty($forum_user) || empty($forum_db)) return;
+					
+					
+					if(file_exists($forum_path . '/adm/index.php'))
+					{
+						include($forum_path . "/includes/functions.php");
+						$pass = phpbb_hash($pass);
+						$where_sql	=		"username_clean='" . strtolower($name) ."' AND user_password='$pass'";
+						$row_leve		=	'user_type';
+						$admin_level	=	3;
+					}
+					else
+					{
+						$pass = md5($pass);
+						$where_sql	=		"username='$name' AND user_password='$pass'";
+						$row_leve		=	'user_level';
+						$admin_level	=	1;
+					}
 					
 					$SQLBB	= new SSQL($forum_srv,$forum_user,$forum_pass,$forum_db);
 					unset($forum_pass); // We do not need this any longe
@@ -120,7 +137,7 @@ class usrcp
 					$query = array(
 								'SELECT'	=> '*',
 								'FROM'		=> "`{$forum_prefix}users`",
-								'WHERE'		=> "username='$name' AND user_password='$pass'"
+								'WHERE'		=>$where_sql	
 								);
 								
 					($hook = kleeja_run_hook('qr_select_usrdata_php_usr_class')) ? eval($hook) : null; //run hook		
@@ -135,7 +152,7 @@ class usrcp
 							$_SESSION['USER_ID']	=	$row['user_id'];
 							$_SESSION['USER_NAME']	=	$row['username'];
 							$_SESSION['USER_MAIL']	=	$row['user_email'];
-							$_SESSION['USER_ADMIN']	=	($row['user_level'] == 1) ? 1 : 0;
+							$_SESSION['USER_ADMIN']	=	($row[$row_leve] == $admin_level) ? 1 : 0;
 							$_SESSION['USER_SESS']	=	session_id();
 							($hook = kleeja_run_hook('qr_while_usrdata_php_usr_class')) ? eval($hook) : null; //run hook
 							
@@ -189,12 +206,13 @@ class usrcp
 				global $forum_srv,$forum_user,$forum_pass,$forum_db;
 				global $forum_prefix;
 
-					
+					//header("Content-Type: text/html; charset=Windows-1256");
 					$pass = md5($pass);
 					
 					//fix bug .. 
 					if(empty($forum_srv) || empty($forum_user) || empty($forum_db)) return;
 					
+					//$SQLVB	= new SSQL($forum_srv,$forum_user,$forum_pass,$forum_db, true);
 					$SQLVB	= new SSQL($forum_srv,$forum_user,$forum_pass,$forum_db);
 					unset($forum_pass); // We do not need this any longe
 					
@@ -211,7 +229,7 @@ class usrcp
 					{
 						while($row1=$SQLVB->fetch_array($sql))
 						{
-						
+							
 							$pass = md5($pass . $row1[salt]);  // without normal md5
 							
 							$query = array(
@@ -309,6 +327,28 @@ class usrcp
 					}
 				}
 				
+				/*
+					get user data
+					new function 1rc5
+				*/
+				function get_data($type="*", $user_id=false)
+				{
+					global $dbprefix, $SQL;
+					
+					if(!$user_id) $user_id	=	$this->id();
+					
+					//te get files and update them !!
+					$query_name = array(
+									'SELECT'	=> $type,
+									'FROM'		=> "{$dbprefix}users",
+									'WHERE'		=> "id='". $user_id ."'"
+								);
+								
+					($hook = kleeja_run_hook('qr_select_userdata_in_usrclass')) ? eval($hook) : null; //run hook
+					$data_user = $SQL->fetch_array($SQL->build($query_name));
+						
+					return $data_user;
+				}
 				
 				/*
 				user ids

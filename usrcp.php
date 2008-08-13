@@ -258,18 +258,17 @@ switch ($_GET['go'])
 			$user_id = (!$user_id && $usrcp->id()!==false) ? $usrcp->id() : $user_id;
 			
 
-			//te get files and update them !!
-			$query_name = array(
-							'SELECT'	=> 'u.name',
-							'FROM'		=> "{$dbprefix}users u",
-							'WHERE'		=> "u.id='".$user_id."'"
-						);
-						
-			($hook = kleeja_run_hook('qr_select_username_in_fileuser')) ? eval($hook) : null; //run hook
-			$user_name = $SQL->fetch_array($SQL->build($query_name));
-				
-			$user_name = (!$user_name) ? false : $user_name['name'];
-				
+			//te get userdata!!
+			$data_user = $usrcp->get_data('name, show_my_filecp', $user_id);
+			$user_name		=   (!$data_user['name']) ? false : $data_user['name'];
+			$show_my_filecp	=  $data_user['show_my_filecp'];
+			
+			//new feature 1rc5
+			if($show_my_filecp == 1 && ($usrcp->id() != $user_id))
+			{
+				kleeja_info($lang['USERFILE_CLOSED'],$lang['CLOSED_FEATURE']);		
+			}
+			
 			$query = array(
 							'SELECT'	=> 'f.id, f.name, f.folder, f.type',
 							'FROM'		=> "{$dbprefix}files f",
@@ -422,13 +421,15 @@ switch ($_GET['go'])
 				kleeja_info($lang['USER_PLACE'],$lang['PLACE_NO_YOU']);
 			}
 
-			$stylee 		= "profile";
-			$titlee 		= $lang['PROFILE'];
-			$action 		= "usrcp.php?go=profile";
-			$name 			= $usrcp->name(); //<<
-			$mail 			= $usrcp->mail(); // <<
-			$data_forum 	= ($config[user_system]==1) ? true : false ;
-			$goto_forum_link= $forum_path;
+			$stylee						= "profile";
+			$titlee						= $lang['PROFILE'];
+			$action						= "usrcp.php?go=profile";
+			$name						= $usrcp->name(); //<<
+			$mail							= $usrcp->mail(); // <<
+			$show_my_filecp			= $usrcp->get_data('show_my_filecp'); // <<
+			$data_forum				= ($config[user_system]==1) ? true : false ;
+			$goto_forum_link			= $forum_path;
+			
 			
 			($hook = kleeja_run_hook('no_submit_profile')) ? eval($hook) : null; //run hook
 			
@@ -461,7 +462,8 @@ switch ($_GET['go'])
 				{
 				
 
-						$mail	= "mail='" . $SQL->escape($_POST['pmail']) . "'";
+						$mail	= "mail='" . $SQL->escape($_POST['pmail']) . "',";
+						$show_my_filecp	= "show_my_filecp='" . intval($_POST['show_my_filecp']) . "'";
 						$pass	= (!empty($_POST['ppass_new'])) ? "password='" . md5($SQL->escape($_POST['ppass_new'])) . "'" : "";
 						$comma	= (!empty($_POST['ppass_new']))? "," : "";
 						$id		= (int)		$usrcp->id();
@@ -469,7 +471,7 @@ switch ($_GET['go'])
 						
 						$update_query = array(
 									'UPDATE'	=> "{$dbprefix}users",
-									'SET'		=> $mail.$comma.$pass,
+									'SET'		=> $mail.$show_my_filecp.$comma.$pass,
 									'WHERE'		=> "id='".$id."'",
 								);
 								

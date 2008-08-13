@@ -66,9 +66,11 @@
 	//get it 
 	if (file_exists($path_adm . '/' . $go_to . '.php'))	
 	{
-		($hook = kleeja_run_hook('require_goto_admin_admin_page')) ? eval($hook) : null; //run hook 
+		($hook = kleeja_run_hook("require_admin_page_begin_{$go_to}")) ? eval($hook) : null; //run hook 
 		
 		require ($path_adm . '/' . $go_to . '.php');
+		
+		($hook = kleeja_run_hook("require_admin_page_end_{$go_to}")) ? eval($hook) : null; //run hook 
 	}
 	else
 	{

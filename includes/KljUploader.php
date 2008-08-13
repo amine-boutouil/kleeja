@@ -4,7 +4,7 @@
 #
 # Filename : KljUplaoder.php
 # purpose :  skeleton of script
-# copyright 2007 Kleeja.com ..
+# copyright 2007-2008 Kleeja.com ..
 #class by :  based on class.AksidSars.php  of Nadorino [@msn.com]
 # last edit by : saanina
 ##################################################
@@ -96,6 +96,24 @@ class KljUploader
 	
 }
 
+//
+//check exts inside file to be safe
+//
+function ext_check_safe ($filename)
+{
+	$not_allowed =	array('php','php3' ,'php5', 'php4','asp' ,'shtml' , 'html' ,'htm' ,'xhtml' ,'phtml', 'pl', 'cgi');
+	$tmp	= explode(".", $filename);
+	$before_last_ext	= $tmp[sizeof($tmp)-2];
+
+	if (in_array(strtolower($before_last_ext), $not_allowed)) 
+	{
+		return false;
+	}
+	else
+	{
+		return true;
+	}	
+}
 
 /*
 	Function createthumb($name,$filename,$new_w,$new_h)
@@ -280,6 +298,10 @@ if(!file_exists($this->folder))
 				{
 					$this->errs[]= $lang['WRONG_F_NAME'] . '[' . $_FILES['file']['name'][$i] . ']';
 			    }
+				elseif($this->ext_check_safe($_FILES['file']['name'][$i]) ===false)
+				{
+					$this->errs[]= $lang['WRONG_F_NAME'] . '[' . $_FILES['file']['name'][$i] . ']';
+			    }
 			    elseif(!in_array(strtolower($this->typet),$this->types))
 				{
 					$this->errs[]= '[ ' . $_FILES['file']['name'][$i] . ' ] ' . $lang['FORBID_EXT'] . '['.$this->typet.']';
@@ -351,18 +373,18 @@ if(!file_exists($this->folder))
 							if($this->decode == "time")
 							{
 								$zaid=time();
-								$this->filename2=$this->filename.$zaid.$i.".".$this->filename2;
+								$this->filename2 = $this->filename . $zaid.$i . "." . $this->filename2;
 							}
 							elseif($this->tashfir == "md5")
 							{
 								$zaid=md5(time());
 								$zaid=substr($zaid,0,10);
-								$this->filename2=$this->filename.$zaid.$i.".".$this->filename2;
+								$this->filename2 = $this->filename.$zaid.$i . "." . $this->filename2;
 							}
 							else
 							{
 							// real name of file
-								$this->filename2=$filename;
+								$this->filename2 = $filename;
 							}
 							//end tashfer
 
@@ -381,10 +403,14 @@ if(!file_exists($this->folder))
 								{
 									$this->errs[]=  '[ ' . $_FILES['file']['name'][$i] . ' ] ' . $lang['SAME_FILE_EXIST'];
 							    }
-								elseif( preg_match ("#[\\\/\:\*\?\<\>\|\"]#", $this->filename2 ) )
+								elseif( preg_match ("#[\\\/\:\*\?\<\>\|\"]#", $this->filename2))
 								{
 									$this->errs[]= $lang['WRONG_F_NAME'] . '[' . $_FILES['file']['name'][$i] . ']';
 							    }
+								elseif($this->ext_check_safe($_FILES['file']['name'][$i]) ===false)
+								{
+									$this->errs[]= $lang['WRONG_F_NAME'] . '[' . $_FILES['file']['name'][$i] . ']';
+								}
 							    elseif(!in_array(strtolower($this->typet),$this->types))
 								{
 									$this->errs[]= '[ ' . $_FILES['file']['name'][$i] . ' ] ' . $lang['FORBID_EXT'] . '['.$this->typet.']';

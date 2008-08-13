@@ -75,6 +75,7 @@ CREATE TABLE `{$dbprefix}users` (
   `admin` tinyint(1) NOT NULL default '0',
   `session_id` char(32) collate utf8_bin NOT NULL,
   `last_visit` INT(11) NOT NULL,
+  `show_my_filecp` tinyint(1) unsigned NOT NULL default '1',
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 ";

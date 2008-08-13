@@ -139,6 +139,15 @@ RC4
 - fix firectly open of caches 
 - fix gzip feature ..
 
-
+RC5:
+- fix styles system 
+- fix extensions system [ cant updating ]
+- fix navigating page in img controls 
++ add new feature for user privacy [can prevent other see his files folder ]
+ - hook system now more stable , as styles , language systems.
+- fix update check service ..
+- new check technique for bad file !
++ support phpbb3
+- fix cache file and process
  
 thank you for reading this file. 

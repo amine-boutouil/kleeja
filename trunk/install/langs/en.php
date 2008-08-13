@@ -67,6 +67,7 @@
 	
 	$lang['INST_NOTES_UPDATE']						= 'Update Notes';
 	$lang['INST_NOTE_RC2_TO_RC3']					= 'You need to replace all the script files and not just running this wizard  ...';
+	$lang['INST_NOTE_RC4_TO_RC5']					=	'You need to replace all new the script file with the old one !';
 	$lang['INST_UPDATE_IS_FINISH']					= 'Installation completed! you can now delete the <br/><b>INSTALL</b><br/> directory...';
 	
 	

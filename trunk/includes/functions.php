@@ -267,7 +267,7 @@ function visit_stats ()
 			($hook = kleeja_run_hook('qr_update_counters_ststs_func')) ? eval($hook) : null; //run hook
 			if ($SQL->build($update_query))
 			{
-				unlink("cache/data_stats.php");
+				@unlink("cache/data_stats.php");
 			}
 			else
 			{ 
@@ -1147,49 +1147,44 @@ function fetch_remote_file($url)
 	}
 	else if(function_exists("fsockopen"))
 	{
-
-		set_time_limit(0);
-		$url = parse_url($url);
-
-		$host = $url['host'];
-		$path = $url['path'];
-		$port = (!empty($url['port'])) ? (int) $url['port'] : 80;
-		
-		print_r($url);
-		
-		$errno = 0;
-		$errstr = '';
-
-		if (!($fsock = fsockopen($host, $port, $errno, $errstr)))
+	    $url_parsed = parse_url($url);
+	    $host = $url_parsed["host"];
+	    $port = $url_parsed["port"];
+	    if ($port==0)
 		{
-			return false;
+	        $port = 80;
 		}
 		
-		// Make sure $path not beginning with /
-		if (strpos($path, '/') === 0)
+		$path = $url_parsed["path"];
+	    
+		if ($url_parsed["query"] != "")
 		{
-			$path = substr($path, 1);
+			$path .= "?" . $url_parsed["query"];
 		}
 		
-		fputs($fsock, 'GET /' . $path . " HTTP/1.1\r\n");
-		fputs($fsock, "HOST: " . $host . "\r\n");
-		fputs($fsock, "Connection: close\r\n\r\n");
+	    $out = "GET $path HTTP/1.0\r\nHost: $host\r\n\r\n";
 
-		$data	=	'';
-		
-		while(!feof($fsock))
-		{
-			$data .= fread($fsock, 3000);
-		}
-		fclose($fsock);
+	    $fp = fsockopen($host, $port, $errno, $errstr, 30);
 
-		
-		if (empty($data))
+	    fwrite($fp, $out);
+	    $body = false;
+	    while (!feof($fp))
 		{
-			return false;
-		}
-		
-		return $data;
+	        $s = fgets($fp, 1024);
+	        if ( $body )
+			{
+	            $in .= $s;
+	        }
+			
+			if ( $s == "\r\n" )
+			{
+				$body = true;
+			}
+	    }
+	   
+	    fclose($fp);
+	   
+	    return $in;
 		
 	}
 	else

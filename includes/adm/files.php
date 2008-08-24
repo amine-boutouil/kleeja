@@ -13,7 +13,7 @@
 
 		//for style ..
 		$stylee		= "admin_files";
-		$action 	= "admin.php?cp=files";
+		$action		= "admin.php?cp=files&amp;page=" . intval($_GET['page']);
 
 		//posts search ..
 		if (isset($_POST['search_file']))
@@ -136,7 +136,7 @@
 	//after submit 
 	if (isset($_POST['submit']))
 	{
-		$text	= $lang['FILES_UPDATED'];
+		$text	= $lang['FILES_UPDATED'] . '<meta HTTP-EQUIV="REFRESH" content="0; url=./admin.php?cp=files&amp;page=' . intval($_GET['page']). '">' ."\n";
 		$stylee	= "admin_info";
 	}
 ?>

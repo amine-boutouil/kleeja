@@ -15,7 +15,7 @@
 		//for style ..
 		$stylee = "admin_exts";
 		//words
-		$action 	= "admin.php?cp=exts";
+		$action 	= "admin.php?cp=exts&amp;page=". intval($_GET['page']);
 		$n_submit 	= $lang['UPDATE_EXTS'];
 
 					
@@ -105,7 +105,7 @@
 				unlink('./cache/data_sizes.php');
 			}
 			
-			$text	= $lang['UPDATED_EXTS'];
+			$text	= $lang['UPDATED_EXTS']. '<meta HTTP-EQUIV="REFRESH" content="0; url=./admin.php?cp=exts&amp;page=' . intval($_GET['page']). '">' ."\n";
 			$stylee	= "admin_info";
 		}
 

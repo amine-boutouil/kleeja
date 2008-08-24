@@ -1,7 +1,7 @@
 <?php
 
 //
-// sql of installign a clean version of Kleeja ..
+// sql of installing a clean version of Kleeja ..
 // kleeja.com
 //
 
@@ -132,7 +132,7 @@ CREATE TABLE `{$dbprefix}online` (
 
 $install_sqls['hooks'] = "
 CREATE TABLE `{$dbprefix}hooks` (
-  `hook_id` int(11) unsigned NOT NULL,
+  `hook_id` int(11) unsigned NOT NULL  auto_increment,
   `plg_id` int(11) unsigned NOT NULL,
   `hook_name` varchar(255) collate utf8_bin NOT NULL,
   `hook_content` mediumtext collate utf8_bin NOT NULL,

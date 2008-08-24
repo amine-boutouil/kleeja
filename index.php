@@ -5,6 +5,7 @@
 # Filename : index.php 
 # purpose :  home page  .
 # copyright 2007-2008 Kleeja.com ..
+#license http://opensource.org/licenses/gpl-license.php GNU Public License
 # last edit by : saanina
 ##################################################
 
@@ -19,9 +20,8 @@
 	switch($config['decode']):
 	case 1	:	$decode = "time";	break;
 	case 2	:	$decode = "md5";	break;
-	default :	$decode = "";		break;
+	default  :	$decode = "";		break;
 	endswitch;
-
 
 	//safe code
 	if ($config['safe_code'])
@@ -32,17 +32,17 @@
 	
 	//start class .. 
 	$kljup->decode		=	$decode;              
-	$kljup->linksite	=	$config['siteurl']; 
+	$kljup->linksite		=	$config['siteurl']; 
 	$kljup->folder		=	$config['foldername'];
 	$kljup->filename	=	$config['prefixname'];
 	$kljup->action		= 	$action = "index.php";
 	$kljup->filesnum	=	$config['filesnum'];
-	//--------------------- s user system part
+	//--------------------- start user system part
 	$kljup->types		=	($usrcp->name()) ? $u_exts : $g_exts;
-	$kljup->sizes		=	($usrcp->name()) ? $u_sizes : $g_sizes ;	
-	$kljup->id_user 	=	($usrcp->name()) ? $usrcp->id() : '-1';
+	$kljup->sizes			=	($usrcp->name()) ? $u_sizes : $g_sizes ;	
+	$kljup->id_user		=	($usrcp->name()) ? $usrcp->id() : '-1';
 	$kljup->safe_code	=	$config['safe_code'];
-	//--------------------- e user system part
+	//--------------------- end user system part
 	$kljup->process();
 
 	
@@ -51,18 +51,17 @@
 	$info = array();
 	foreach($kljup->errs as $s )	
 	{
-		$info[] 	= array( 'i' => $s );
+		$info[] 	= array( 'i' => $s);
 	}
 	
 	//some words for template
-	$welcome_msg 	= $config['welcome_msg'];
+	$welcome_msg	= $config['welcome_msg'];
 	$SAFE_CODE		= ($config['safe_code']) ? $ch->display_captcha(true) : false;
-	$SAFE_CODE2		= ($config['safe_code']) ? str_replace('public_key', 'public_key2',$ch->display_captcha(true)) : false;
+	$SAFE_CODE2	= ($config['safe_code']) ? str_replace('public_key', 'public_key2',$ch->display_captcha(true)) : false;
 
-	
 	//
 	//for who online now..  
-	// i dont like this feature and i prefer close it
+	// i dont like this feature and i prefer disable it
 	//
 	if ($config['allow_online'] == 1)
 	{
@@ -72,8 +71,8 @@
 		$OnlineNames	= array();
 		
 		$query = array(
-				'SELECT'	=> 'DISTINCT(n.ip), n.username, n.agent',
-				'FROM'		=> "{$dbprefix}online n",
+						'SELECT'	=> 'DISTINCT(n.ip), n.username, n.agent',
+						'FROM'		=> "{$dbprefix}online n",
 				);
 				
 		($hook = kleeja_run_hook('qr_select_online_index_page')) ? eval($hook) : null; //run hook

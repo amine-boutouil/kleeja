@@ -14,7 +14,7 @@
 	
 		//for style ..
 		$stylee 	= "admin_calls";
-		$action 	= "admin.php?cp=calls";
+		$action 	= "admin.php?cp=calls&amp;page=". intval($_GET['page']);
 		
 		$query = array(
 					'SELECT'	=> '*',
@@ -99,13 +99,13 @@
 		$no_results = true;
 	}
 	
-	$total_pages 	= $Pager->getTotalPages(); 
-	$page_nums 		= $Pager->print_nums($config['siteurl'].'admin.php?cp=calls'); 
+	$total_pages	= $Pager->getTotalPages(); 
+	$page_nums	= $Pager->print_nums($config['siteurl'].'admin.php?cp=calls'); 
 		
 	//after submit
 	if (isset($_POST['submit']))
 	{
-			$text	= $lang['CALLS_UPDATED'];
+			$text	= $lang['CALLS_UPDATED'] . '<meta HTTP-EQUIV="REFRESH" content="0; url=./admin.php?cp=calls&amp;page=' . intval($_GET['page']). '">' ."\n";
 			$stylee	= "admin_info";
 	}
 

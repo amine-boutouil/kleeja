@@ -19,7 +19,7 @@ switch ($_GET['lan_t'])
 		
 		//for style ..
 		$stylee = "admin_langs";
-		$action = "admin.php?cp=langs&lan_t=ln";
+		$action = "admin.php?cp=langs&amp;lan_t=ln";
 
 		//get styles
 		$query = array(
@@ -41,6 +41,12 @@ switch ($_GET['lan_t'])
 	
 
 		//after submit ////////////////
+		if(isset($_GET['style_choose']))
+		{
+			$_POST['submit']			= true;
+			$_POST['lang_choose']	=	$_GET['lang_choose'];
+			$_POST['method']			=	$_GET['method'];
+		}
 		if (isset($_POST['submit']))
 		{
 			$lang_id 		= intval($_POST['lang_choose']);
@@ -96,12 +102,12 @@ switch ($_GET['lan_t'])
 							if (!$SQL->build($query_del2)) {die($lang['CANT_DELETE_SQL'].'2');}	
 							
 							//show msg
-							$text	= $lang['LANG_DELETED'];
+							$text	= $lang['LANG_DELETED'] . '<meta HTTP-EQUIV="REFRESH" content="2; url=./admin.php?cp=langs">' ."\n";
 						}
 						else
 						{
 							//show msg
-							$text	= $lang['LANG_1_NOT_FOR_DEL'];
+							$text	= $lang['LANG_1_NOT_FOR_DEL']. '<meta HTTP-EQUIV="REFRESH" content="2; url=./admin.php?cp=langs">' ."\n";
 						}
 
 							$stylee	= "admin_info";
@@ -192,7 +198,7 @@ switch ($_GET['lan_t'])
 			{
 				if(creat_lang_xml($contents))
 				{
-					$text	= $lang['NEW_LANG_ADDED'];	
+					$text	= $lang['NEW_LANG_ADDED']. '<meta HTTP-EQUIV="REFRESH" content="2; url=./admin.php?cp=langs">' ."\n";
 				}
 				else
 				{
@@ -215,11 +221,11 @@ switch ($_GET['lan_t'])
 		{
 			
 			//lang id 
-			$lang_id	=	intval($_POST['lang_id']);
+			$lang_id	=	$_POST['lang_id'];
 			//tpl name 
 			$lang_word	=	$SQL->escape($_POST['word_choose']);
 			
-			if(!$lang_id)
+			if(!is_numeric($lang_id))
 			{
 				exit('lang_id is not exists!!');
 			}
@@ -234,7 +240,7 @@ switch ($_GET['lan_t'])
 				case '1': //edit tpl
 					//for style ..
 					$stylee		= "admin_edit_word";
-					$action 	= "admin.php?cp=langs&lan_t=lang_orders";
+					$action 	= "admin.php?cp=langs&amp;lan_t=lang_orders";
 
 					
 					$query = array(
@@ -257,7 +263,7 @@ switch ($_GET['lan_t'])
 						if (!$SQL->build($query_del)) {die($lang['CANT_DELETE_SQL']);}	
 						
 						//show msg
-						$text	= $lang['WORD_DELETED'];
+						$text	= $lang['WORD_DELETED'] . '<meta HTTP-EQUIV="REFRESH" content="2; url=./admin.php?cp=langs&amp;lang_choose=' . $lang_id . '">' ."\n";
 						$stylee	= "admin_info";
 						
 				break;
@@ -300,7 +306,7 @@ switch ($_GET['lan_t'])
 					}
 					
 					//show msg
-					$text	= $lang['WORD_UPDATED'];
+					$text	= $lang['WORD_UPDATED'] . '<meta HTTP-EQUIV="REFRESH" content="2; url=./admin.php?cp=langs&amp;lang_choose=' . $lang_id . '">' ."\n";
 					$stylee	= "admin_info";
 			}
 			else
@@ -315,11 +321,11 @@ switch ($_GET['lan_t'])
 		{
 		
 			//lang id 
-			$lang_id	=	intval($_POST['lang_id']);
+			$lang_id	=	$_POST['lang_id'];
 			$word		=	$SQL->escape($_POST['new_word']);	
 			$trans		=	$SQL->escape($_POST['new_trans']);	
 		
-			if(!$lang_id)
+			if(!is_numeric($lang_id))
 			{
 				exit('lang_id is not exists!!');
 			}
@@ -346,7 +352,7 @@ switch ($_GET['lan_t'])
 						@unlink('cache/langs_' . $lang_id . '.php');
 					}
 					
-					$text	= $lang['WORD_CREATED'] . "<META HTTP-EQUIV=\"refresh\" CONTENT=\"2; URL=./admin.php?cp=langs&lan_t=ln\">\n";;
+					$text		= $lang['WORD_CREATED']  . '<meta HTTP-EQUIV="REFRESH" content="2; url=./admin.php?cp=langs&amp;lang_choose=' . $lang_id . '">' ."\n";
 					$stylee	= "admin_info";
 			}
 			else

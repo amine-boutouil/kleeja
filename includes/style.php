@@ -5,7 +5,8 @@
 # Filename : style.php 
 # purpose :  Template engine ..:
 # copyright 2007-2008 Kleeja.com ..
-#BASED ON : easytemplate version  1.3 .. <http://daif.net/easy>
+#license http://opensource.org/licenses/gpl-license.php GNU Public License
+#based on : easytemplate version  1.3 .. <http://daif.net/easy>
 ##################################################
 
 //no for directly open

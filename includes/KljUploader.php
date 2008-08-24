@@ -5,7 +5,8 @@
 # Filename : KljUplaoder.php
 # purpose :  skeleton of script
 # copyright 2007-2008 Kleeja.com ..
-#class by :  based on class.AksidSars.php  of Nadorino [@msn.com]
+#license http://opensource.org/licenses/gpl-license.php GNU Public License
+#class by :  based on class.AksidSars.php  of Nadorino [@msn.com] and he disterbuted for free
 # last edit by : saanina
 ##################################################
 
@@ -468,7 +469,7 @@ function saveit ($filname, $folderee, $sizeee, $typeee)
 		global $SQL,$dbprefix,$config,$lang;
 
 				// sometime cant see file after uploading.. but ..
-				chmod($folderee . '' . $filname , 0755); //0755
+				chmod($folderee . '/' . $filname , 0755); //0755
 
 				$name 	= (string)	$SQL->escape($filname);
 				$size	= (int) 	$sizeee;
@@ -519,11 +520,11 @@ function saveit ($filname, $folderee, $sizeee, $typeee)
 						//make thumbs
 						if( ($config['thumbs_imgs']!=0) && in_array(strtolower($this->typet), array('png','jpg','jpeg','gif')))
 						{
-							$this->createthumb($folderee . "/" . $filname,strtolower($this->typet),$folderee . '/thumbs/' . $filname, 100, 100);
-							$extra_thmb 	= $lang['URL_F_THMB'] . ':<br /><textarea rows=2 cols=49 rows=1>';
+							$this->createthumb($folderee . "/" . $filname, strtolower($this->typet), $folderee . '/thumbs/' . $filname, 100, 100);
+							$extra_thmb 	= $lang['URL_F_THMB'] . ':<br /><textarea rows="2" cols="49">';
 							$extra_thmb 	.= '[url='.$this->linksite . (($config['mod_writer']) ? "image" . $this->id_for_url . ".html" : "download.php?img=".$this->id_for_url ).'][img]'.$this->linksite.$folderee.'/thumbs/'.$filname.'[/img][/url]';
 							$extra_thmb 	.= '</textarea><br />';
-							$extra_show_img = '<div style="text-align:center"><img src="'.$this->linksite.(($config['mod_writer']) ? "thumb".$this->id_for_url.".html" : "download.php?thmb=".$this->id_for_url ).'" /></div></br>';
+							$extra_show_img = '<div style="text-align:center"><img src="' . $this->linksite.(($config['mod_writer']) ? "thumb".$this->id_for_url.".html" : "download.php?thmb=".$this->id_for_url ).'" style="width:100px; height:100px" /></div></br>';
 						}
 						
 						//write on image
@@ -534,16 +535,16 @@ function saveit ($filname, $folderee, $sizeee, $typeee)
 
 						//then show
 						$this->errs[] = $lang['IMG_DOWNLAODED'] . '<br />' . $extra_show_img . '
-								' . $lang['URL_F_IMG'] . ':<br /><textarea rows=2 cols=49 rows=1>'.$this->linksite.(($config[mod_writer]) ? "image".$this->id_for_url.".html" : "download.php?img=".$this->id_for_url ).'</textarea><br />
-								' . $lang['URL_F_BBC'] . ':<br /><textarea rows=2 cols=49 rows=1>' .
-								'[url='.$config[siteurl].(($config[mod_writer]) ? "image".$this->id_for_url.".html" : "download.php?img=".$this->id_for_url ).'][img]'.$this->linksite.$folderee . '/' . $filname .'[/img][/url]</textarea><br />
+								' . $lang['URL_F_IMG'] . ':<br /><textarea rows="2" cols="49">'.$this->linksite.(($config[mod_writer]) ? "image".$this->id_for_url.".html" : "download.php?img=".$this->id_for_url ).'</textarea><br />
+								' . $lang['URL_F_BBC'] . ':<br /><textarea rows="2" cols="49">' .
+								'[url='.$config['siteurl'].(($config['mod_writer']) ? "image".$this->id_for_url.".html" : "download.php?img=".$this->id_for_url ).'][img]'.$this->linksite.$folderee . '/' . $filname .'[/img][/url]</textarea><br />
 								'.$extra_thmb.$extra_del;
 
 					}else {
 						//then show other files
 						$this->errs[] = $lang['FILE_DOWNLAODED'] . '<br />
-								' . $lang['URL_F_FILE'] . ':<br /><textarea cols=49 rows=1>'.$this->linksite.(($config[mod_writer]) ? "download".$this->id_for_url.".html" : "download.php?id=".$this->id_for_url ).'</textarea><br />
-								' . $lang['URL_F_BBC'] . ':<br /><textarea rows=2 cols=49 rows=1>[url]'.$this->linksite.(($config[mod_writer]) ? "download".$this->id_for_url.".html" : "download.php?id=".$this->id_for_url ).'[/url]</textarea><br />
+								' . $lang['URL_F_FILE'] . ':<br /><textarea cols="49" rows="1">' . $this->linksite.(($config['mod_writer']) ? "download".$this->id_for_url.".html" : "download.php?id=".$this->id_for_url ).'</textarea><br />
+								' . $lang['URL_F_BBC'] . ':<br /><textarea rows="2" cols="49">[url]' . $this->linksite.(($config['mod_writer']) ? "download".$this->id_for_url.".html" : "download.php?id=".$this->id_for_url ).'[/url]</textarea><br />
 								'.$extra_del;
 					}
 

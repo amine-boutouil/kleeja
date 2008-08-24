@@ -18,7 +18,7 @@ switch ($_GET['sty_t'])
 		
 		//for style ..
 		$stylee 	= "admin_styles";
-		$action 	= "admin.php?cp=styles&sty_t=st";
+		$action 	= "admin.php?cp=styles&amp;sty_t=st";
 
 		//get styles
 		$query = array(
@@ -31,8 +31,8 @@ switch ($_GET['sty_t'])
 
 		while($row=$SQL->fetch_array($result))
 		{
-				$arr[] = array( style_id =>$row['list_id'],
-								style_name =>$row['list_name'],
+				$arr[] = array( 'style_id'			=>$row['list_id'],
+										'style_name'	=>$row['list_name'],
 							);
 
 		}
@@ -40,6 +40,13 @@ switch ($_GET['sty_t'])
 	
 
 		//after submit
+		if(isset($_GET['style_choose']))
+		{
+			$_POST['submit']			= true;
+			$_POST['style_choose']	=	$_GET['style_choose'];
+			$_POST['method']			=	$_GET['method'];
+		}
+		
 		if (isset($_POST['submit']))
 		{
 			$style_id 		= intval($_POST['style_choose']);
@@ -50,7 +57,7 @@ switch ($_GET['sty_t'])
 					//for style ..
 					$stylee = "admin_show_tpls";
 					//words
-					$action 		= "admin.php?cp=styles&&sty_t=style_orders";
+					$action 		= "admin.php?cp=styles&sty_t=style_orders";
 					
 					//get_tpls
 					$query = array(
@@ -66,7 +73,7 @@ switch ($_GET['sty_t'])
 					while($row=$SQL->fetch_array($result))
 					{
 							$arr[] = array(
-											template_name =>$row['template_name']
+											'template_name' =>$row['template_name']
 							);
 					}
 					$SQL->freeresult($result);
@@ -91,15 +98,15 @@ switch ($_GET['sty_t'])
 											'WHERE'		=> 'style_id='. $style_id
 											);		
 											
-							if (!$SQL->build($query_del2)) {die($lang['CANT_DELETE_SQL'].'2');}	
+							if (!$SQL->build($query_del2)) {die($lang['CANT_DELETE_SQL'].' 2');}	
 							
 							//show msg
-							$text	= $lang['STYLE_DELETED'];
+							$text	= $lang['STYLE_DELETED'] . '<meta HTTP-EQUIV="REFRESH" content="2; url=./admin.php?cp=styles">' ."\n";
 						}
 						else
 						{
 							//show msg
-							$text	= $lang['STYLE_1_NOT_FOR_DEL'];
+							$text	= $lang['STYLE_1_NOT_FOR_DEL'].'<meta HTTP-EQUIV="REFRESH" content="2; url=./admin.php?cp=styles">' ."\n";
 						}
 
 							$stylee	= "admin_info";
@@ -190,7 +197,7 @@ switch ($_GET['sty_t'])
 			{
 				if(creat_style_xml($contents))
 				{
-					$text	= $lang['NEW_STYLE_ADDED'];	
+					$text	= $lang['NEW_STYLE_ADDED'].'<meta HTTP-EQUIV="REFRESH" content="2; url=./admin.php?cp=styles">' ."\n";	
 				}
 				else
 				{
@@ -208,17 +215,17 @@ switch ($_GET['sty_t'])
 		
 		case "style_orders" :
 		
-		
 		//edit or del tpl 
 		if(isset($_POST['tpls_submit']))
 		{
 			
-			//style id 
-			$style_id	=	intval($_POST['style_id']);
+			//style id ..fix for zooz
+			$style_id	=	$_POST['style_id'];
+			
 			//tpl name 
 			$tpl_name	=	$SQL->escape($_POST['tpl_choose']);
 			
-			if(!$style_id)
+			if(!is_numeric($style_id))
 			{
 				exit('style_id is not exists!!');
 			}
@@ -233,7 +240,7 @@ switch ($_GET['sty_t'])
 				case '1': //edit tpl
 					//for style ..
 					$stylee = "admin_edit_tpl";
-					$action = "admin.php?cp=styles&sty_t=style_orders";
+					$action = "admin.php?cp=styles&amp;sty_t=style_orders";
 
 					
 					$query = array(
@@ -258,7 +265,7 @@ switch ($_GET['sty_t'])
 						if (!$SQL->build($query_del)) {die($lang['CANT_DELETE_SQL']);}	
 						
 						//show msg
-						$text	= $lang['TPL_DELETED'];
+						$text	= $lang['TPL_DELETED'].'<meta HTTP-EQUIV="REFRESH" content="2; url=./admin.php?cp=styles&amp;style_choose=' . $style_id . '">' ."\n";
 						$stylee	= "admin_info";
 						
 				break;
@@ -291,8 +298,9 @@ switch ($_GET['sty_t'])
 					}
 					
 					//show msg
-					$text	= $lang['TPL_UPDATED'];
+					$text	= $lang['TPL_UPDATED'] . '<meta HTTP-EQUIV="REFRESH" content="2; url=./admin.php?cp=styles&amp;style_choose=' . $style_id . '">' ."\n";
 					$stylee	= "admin_info";
+					
 			}
 			else
 			{
@@ -306,11 +314,11 @@ switch ($_GET['sty_t'])
 		{
 		
 			//style id 
-			$style_id	=	intval($_POST['style_id']);
+			$style_id	=	$_POST['style_id'];
 			//tpl name 
 			$tpl_name	=	$SQL->escape($_POST['new_tpl']);
 		
-			if(!$style_id)
+			if(!is_numeric($style_id))
 			{
 				exit('style_id is not exists!!');
 			}
@@ -329,7 +337,7 @@ switch ($_GET['sty_t'])
 			
 			if($SQL->build($insert_query))
 			{
-					$text	= $lang['TPL_CREATED'] . "<META HTTP-EQUIV=\"refresh\" CONTENT=\"2; URL=./admin.php?cp=styles&sty_t=st\">\n";;
+					$text	= $lang['TPL_CREATED'] . '<meta HTTP-EQUIV="REFRESH" content="2; url=./admin.php?cp=styles&amp;style_choose=' . $style_id . '">' ."\n";
 					$stylee	= "admin_info";
 			}
 			else

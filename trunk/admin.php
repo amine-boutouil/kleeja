@@ -10,7 +10,7 @@
 
 
 	// security ..
-	define ( 'IN_INDEX' , false);
+	define ( 'IN_INDEX' , true);
 	define ( 'IN_ADMIN' , true);
 	
 	//include imprtant file ..

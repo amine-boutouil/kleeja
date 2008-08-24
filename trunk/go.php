@@ -5,6 +5,7 @@
 # Filename : go.php
 # purpose :  File for Navigataion .
 # copyright 2007-2008 Kleeja.com ..
+#license http://opensource.org/licenses/gpl-license.php GNU Public License
 # last edit by : saanina
 ##################################################
 
@@ -15,34 +16,31 @@ include ('includes/common.php');
 
 ($hook = kleeja_run_hook('begin_go_page')) ? eval($hook) : null; //run hook
 
-
 switch ($_GET['go'])
 {
 	case "guide" : 
 
-	$stylee = "guide";
-	$titlee = $lang['GUIDE'];
+	$stylee	= "guide";
+	$titlee	= $lang['GUIDE'];
 
 	//make it loop
 	$gusts_data = array();
 	foreach($g_exts as $s )
 	{
-		$gusts_data[] = array( 'ext'	=> $s,
-								'num'	=> Customfile_size($g_sizes[$s])
-							);
+		$gusts_data[]	=	array(	'ext'		=> $s,
+											'num'	=> Customfile_size($g_sizes[$s])
+									);
 	}
 
 	//make it loop
 	$users_data = array();
 	foreach($u_exts as $s )
 	{
-		$users_data[] = array(	'ext' => $s,
-								'num' => Customfile_size($u_sizes[$s])
-	
-							);
+		$users_data[]	=	array(	'ext' => $s,
+											'num' => Customfile_size($u_sizes[$s])
+									);
 	}
 	
-
 	($hook = kleeja_run_hook('guide_go_page')) ? eval($hook) : null; //run hook
 	
 	break;
@@ -54,10 +52,10 @@ switch ($_GET['go'])
 
 	if (!isset($_POST['submit']))
 	{
-			$stylee = "report";
-			$titlee = $lang['REPORT'];
-			$url_id = ($config['mod_writer']) ? $config['siteurl']."download".intval($_GET['id']).".html" : $config['siteurl']."download.php?id=".intval($_GET['id']);
-			$action = "./go.php?go=report";
+			$stylee	= "report";
+			$titlee	= $lang['REPORT'];
+			$url_id	= ($config['mod_writer']) ? $config['siteurl']."download".intval($_GET['id']).".html" : $config['siteurl']."download.php?id=".intval($_GET['id']);
+			$action	= "./go.php?go=report";
 			$code	= $ch->display_captcha(true);
 			$id_d	= intval($_GET['id']);
 			
@@ -91,24 +89,23 @@ switch ($_GET['go'])
 			$ERRORS[]	=	$lang['WRONG_VERTY_CODE'];
 		}
 		
-		
-		
+		//no error , lets do process
 		if(empty($ERRORS))
 		{
 				$name	= (string)	$SQL->escape($_POST['rname']);
-				$text	= (string)	$SQL->escape($_POST['rtext']);
+				$text		= (string)	$SQL->escape($_POST['rtext']);
 				$mail	= (string)	$_POST['rmail'];
-				$url	= (string)	$_POST['rurl'];
+				$url		= (string)	$_POST['rurl'];
 				$time 	= (int)		time();
-				$rid	= (int)		$_POST['rid'];
-				$ip  	=	(getenv('HTTP_X_FORWARDED_FOR')) ? getenv('HTTP_X_FORWARDED_FOR') : getenv('REMOTE_ADDR');
+				$rid		= (int)		$_POST['rid'];
+				$ip		=	(getenv('HTTP_X_FORWARDED_FOR')) ? getenv('HTTP_X_FORWARDED_FOR') : getenv('REMOTE_ADDR');
 
 
 				$insert_query = array(
-					'INSERT'	=> '`name` ,`mail` ,`url` ,`text` ,`time` ,`ip`',
-					'INTO'		=> "`{$dbprefix}reports`",
-					'VALUES'	=> "'$name','$mail','$url','$text','$time','$ip'"
-				);
+										'INSERT'	=> '`name` ,`mail` ,`url` ,`text` ,`time` ,`ip`',
+										'INTO'		=> "`{$dbprefix}reports`",
+										'VALUES'	=> "'$name', '$mail', '$url', '$text', '$time', '$ip'"
+									);
 				
 				($hook = kleeja_run_hook('qr_insert_new_report')) ? eval($hook) : null; //run hook
 		
@@ -123,10 +120,10 @@ switch ($_GET['go'])
 				
 				//update number of reports
 				$update_query = array(
-							'UPDATE'	=> "{$dbprefix}files",
-							'SET'		=> 'report=report+1',
-							'WHERE'		=> 'id='.$rid,
-							);
+											'UPDATE'	=> "{$dbprefix}files",
+											'SET'			=> 'report=report+1',
+											'WHERE'	=> 'id=' . $rid,
+										);
 							
 				($hook = kleeja_run_hook('qr_update_no_file_report')) ? eval($hook) : null; //run hook
 				
@@ -134,9 +131,10 @@ switch ($_GET['go'])
 		}
 		else
 		{
-				foreach($ERRORS as $r) 
-							$errs	.= '- ' . $r . '. <br/>';
-							
+				foreach($ERRORS as $r)
+				{
+							$errs	.= '- ' . $r . ' <br/>';
+				}			
 				kleeja_err($errs);
 		}
 	}
@@ -148,17 +146,17 @@ switch ($_GET['go'])
 	
 	case "rules" :
 	
-	$stylee = "rules";
-	$titlee = $lang['RULES'];
+	$stylee	= "rules";
+	$titlee	= $lang['RULES'];
 	
 	//prevent empty !!
-	if (strlen($ruless) > 5)
+	if (strlen($ruless) > 3)
 	{
 		$contents = stripslashes($ruless);
 	}
 	else
 	{
-		$contents = $lang['NO_RULES_NOW'];
+		$contents	= $lang['NO_RULES_NOW'];
 	}
 	
 	($hook = kleeja_run_hook('rules_go_page')) ? eval($hook) : null; //run hook
@@ -171,18 +169,18 @@ switch ($_GET['go'])
 	//start  captcha class
 	$ch = new ocr_captcha;
 
-
 	if (!isset($_POST['submit']))
 	{
-		$stylee = "call";
-		$titlee = $lang['CALL'];
-		$action = "./go.php?go=call";
-		$code = $ch->display_captcha(true);
+		$stylee	= "call";
+		$titlee	= $lang['CALL'];
+		$action	= "./go.php?go=call";
+		$code	= $ch->display_captcha(true);
 		
 		($hook = kleeja_run_hook('no_submit_call_go_page')) ? eval($hook) : null; //run hook
 	}
 	else
 	{
+		//after sumit
 		$ERRORS	=	'';
 		($hook = kleeja_run_hook('submit_call_go_page')) ? eval($hook) : null; //run hook
 		
@@ -203,22 +201,21 @@ switch ($_GET['go'])
 			$ERRORS[]	=	$lang['WRONG_VERTY_CODE'];
 		}
 		
-		
-		
+		//no errors ,lets do process
 		if(empty($ERRORS))
 		{
 			$name	= (string) $SQL->escape($_POST['cname']);
-			$text	= (string) $SQL->escape($_POST['ctext']);
+			$text		= (string) $SQL->escape($_POST['ctext']);
 			$mail	= (string) $_POST['cmail'];
-			$timee	= (int) time();
+			$timee	= (int)	time();
 			$ip		= (int)	(getenv('HTTP_X_FORWARDED_FOR')) ? getenv('HTTP_X_FORWARDED_FOR') : getenv('REMOTE_ADDR');
 				
 
 			$insert_query = array(
-					'INSERT'	=> "`name` ,`text` ,`mail` ,`time` ,`ip`",
-					'INTO'		=> "`{$dbprefix}call`",
-					'VALUES'	=> "'$name', '$text', '$mail', '$timee', '$ip'"
-				);
+									'INSERT'	=> "`name` ,`text` ,`mail` ,`time` ,`ip`",
+									'INTO'		=> "`{$dbprefix}call`",
+									'VALUES'	=> "'$name', '$text', '$mail', '$timee', '$ip'"
+									);
 				
 			($hook = kleeja_run_hook('qr_insert_new_call')) ? eval($hook) : null; //run hook
 		
@@ -233,9 +230,10 @@ switch ($_GET['go'])
 		}
 		else
 		{
-			foreach($ERRORS as $r) 
+			foreach($ERRORS as $r)
+			{
 				$errs	.= '- ' . $r . '. <br/>';
-							
+			}				
 			kleeja_err($errs);
 		}
 	}
@@ -252,42 +250,37 @@ switch ($_GET['go'])
 	//maybe ..
 	function saff ($var)
 	{
-		 return str_replace(array('http', ':','//','/','>', '<', '.com', '.net', '.org'), '', $var);
+		 return str_replace(array('./','http', ':','//','www.','>', '<', '.com', '.net', '.org'), '', $var);
 	}
 
 
 	if (isset($_GET['i']))
 	{
 		//for safe
-		$id = intval($_GET['i']);
+		$id	= intval($_GET['i']);
 
-		//$urlsite = $config[siteurl]; // i cant trust user :)
-		$urlsite	= "http://".$_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . '/';
-		$URL 		= str_replace($urlsite ,'' ,$_SERVER['HTTP_REFERER']);
-		$URL 		= (strpos($URL, '?') !==false) ? @explode('?', $URL) : $URL;
-	
-		if (strpos($URL[0], 'download') === false)
+		if (strpos($_SERVER['HTTP_REFERER'], 'download') === false)
 		{
-			$linkoo = ($config['mod_writer']) ? $urlsite . 'download' . $id .'.html' : $urlsite . 'download.php?id=' . $id;
-			header('Location: ' . $urlsite . 'download.php?id=' . $id);
+			$linkoo	= ($config['mod_writer']) ?	'./download' . $id . '.html' : './download.php?id=' . $id;
+			header('Location: ' . $linkoo);
 		
 		}
-		else //else refere
+		else
 		{
 			//updates ups ..
 			$update_query = array(
-					'UPDATE'	=> "{$dbprefix}files",
-					'SET'		=> 'uploads=uploads+1, last_down='. time(),
-					'WHERE'		=> "id='". $id ."'",
-				);
+									'UPDATE'	=> "{$dbprefix}files",
+									'SET'		=> 'uploads=uploads+1, last_down=' . time(),
+									'WHERE'		=> "id='" . $id . "'",
+								);
 
 			($hook = kleeja_run_hook('qr_update_no_uploads_down')) ? eval($hook) : null; //run hook
 			
-			if (!$SQL->build($update_query)){ die($lang['CANT_UPDATE_SQL']);}
+			if (!$SQL->build($update_query)) die($lang['CANT_UPDATE_SQL']);
 
 			//for safe !!!
-			$n = saff($_GET['n']);
-			$f = saff($_GET['f']);
+			$n	= saff($_GET['n']);
+			$f	= saff($_GET['f']);
 
 			($hook = kleeja_run_hook('down_go_page')) ? eval($hook) : null; //run hook	
 			
@@ -297,15 +290,13 @@ switch ($_GET['go'])
 		}//elser efer
 
 		exit; // we doesnt need style
-
 	}
 	else
 	{
-		die('No Requisted File');
+		die('No requested file');
 	}
 
 	break;
-	
 	
 	case "del" :
 
@@ -314,12 +305,11 @@ switch ($_GET['go'])
 	//stop .. check first ..
 	if (!$config['del_url_file'])
 	{
-			kleeja_info($lang['NO_DEL_F'],$lang['E_DEL_F']);
+			kleeja_info($lang['NO_DEL_F'], $lang['E_DEL_F']);
 	}
 
 	//ok .. go on
-	//$id = intval($_GET['id']);
-	$cd = $SQL->escape($_GET['cd']); // may.. will protect
+	$cd	= $SQL->escape($_GET['cd']); // may.. will protect
 
 	if (!$cd)
 	{
@@ -328,10 +318,10 @@ switch ($_GET['go'])
 	else
 	{
 		$query = array(
-					'SELECT'	=> 'f.name, f.folder',
-					'FROM'		=> "{$dbprefix}files f",
-					'WHERE'		=> "f.code_del='".$cd."'"
-				);
+							'SELECT'	=> 'f.name, f.folder',
+							'FROM'		=> "{$dbprefix}files f",
+							'WHERE'	=> "f.code_del='" . $cd . "'"
+						);
 				
 		($hook = kleeja_run_hook('qr_select_file_with_code_del')) ? eval($hook) : null; //run hook	
 			
@@ -345,38 +335,33 @@ switch ($_GET['go'])
 		{
 			while($row=$SQL->fetch_array($sql))
 			{
-				@unlink ( $row['folder'] . "/" . $row['name'] );
-				//delete thumb
-				if (is_file($row['folder'] . "/thumbs/" . $row['name']))
-				{
-					@unlink ( $row['folder'] . "/thumbs/" . $row['name'] );
-				}
-				
-				$query_del = array(
-						'DELETE'	=> "{$dbprefix}files",
-						'WHERE'		=> "id='".$row['id']."'"
-						);
-						
-				($hook = kleeja_run_hook('qr_del_file_with_code_del')) ? eval($hook) : null; //run hook	
-				
-				if ($SQL->build($query_del))
-				{
-					kleeja_info($lang['DELETE_SUCCESFUL']);
-				}
-				else
-				{
-					die($lang['CANT_DELETE_SQL']);
-				}
-				
-				
-				
+					@unlink ( $row['folder'] . "/" . $row['name'] );
+					//delete thumb
+					if (file_exists($row['folder'] . "/thumbs/" . $row['name']))
+					{
+						@unlink ( $row['folder'] . "/thumbs/" . $row['name'] );
+					}
+					
+					$query_del = array(
+										'DELETE'	=> "{$dbprefix}files",
+										'WHERE'	=> "id='" . $row['id'] . "'"
+										);
+							
+					($hook = kleeja_run_hook('qr_del_file_with_code_del')) ? eval($hook) : null; //run hook	
+					
+					if ($SQL->build($query_del))
+					{
+						kleeja_info($lang['DELETE_SUCCESFUL']);
+					}
+					else
+					{
+						die($lang['CANT_DELETE_SQL']);
+					}
 			}
 				$SQL->freeresult($result);
-
-				
 		}
 
-	}
+	}#else
 
 	break;
 	
@@ -390,8 +375,8 @@ switch ($_GET['go'])
 		}
 
 		//ok .. go on
-		$titlee 	= $lang['STATS'];
-		$stylee 	= "stats";
+		$titlee		= $lang['STATS'];
+		$stylee		= "stats";
 		$files_st	= $stat_files;
 		$users_st	= $stat_users;
 		$sizes_st	= Customfile_size($stat_sizes);
@@ -420,8 +405,8 @@ switch ($_GET['go'])
 	//show style ...
 	//header
 	Saaheader($titlee);
-	//index
-	print $tpl->display($stylee);
+		//tpl
+		print $tpl->display($stylee);
 	//footer
 	Saafooter();
 ?>

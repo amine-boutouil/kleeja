@@ -2,7 +2,8 @@
 ##################################################
 # Filename : mysql.php
 # purpose :  controll  mysql database.:
-#Developer: Saanina @ gmail.com
+# copyright 2007-2008 Kleeja.com ..
+#license http://opensource.org/licenses/gpl-license.php GNU Public License
 # last edit by : saanina
 ##################################################
 

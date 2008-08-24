@@ -1,5 +1,6 @@
 ############################
 # kleeja history .. 
+# http://kleeja.com/bugs/
 ############################
 
 ---------------------------------
@@ -136,11 +137,13 @@ RC3 :
 
 RC4
 - fix style doenst apear .. 
-- fix firectly open of caches 
+- fix directly open of caches 
 - fix gzip feature ..
 
 RC5:
-- fix styles system 
+- fix styles system  [ and admin panel style]
+- fix styles show in config in admin panel
+- fix add new style system [ bad numbering]
 - fix extensions system [ cant updating ]
 - fix navigating page in img controls 
 + add new feature for user privacy [can prevent other see his files folder ]
@@ -149,5 +152,12 @@ RC5:
 - new check technique for bad file !
 + support phpbb3
 - fix cache file and process
- 
+- fix if extrension of file not small [download.php]
+- fix style and language sections in admin [ in adding new tpl or word ] 
++ add redirects for admin panel in many sections to be more editlable !
+ - fix replace and add class realted with plugins system !
+- fix hooks table 'hook_id' was not auto insertment
+ + auto delete codes from style , new function related with plugins system 
+- fix unistall step in plugin 
+
 thank you for reading this file. 

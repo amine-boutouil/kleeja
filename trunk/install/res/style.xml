@@ -338,9 +338,9 @@ dont remove it  end
 	<template name="footer">
 	<![CDATA[
 <div id="clear"></div>
-
+<!-- begin extra footer -->
 {extras.footer}
-
+<!-- end extra footer -->
 </div>
 
 </div><div class="roundedcornr_bottom_459680"><div></div></div></div> </div>
@@ -352,7 +352,7 @@ dont remove it  end
 	<br/>
 	<br/>
 	<!-- IF REMOVE: Pay for a license - see http://www.kleeja.com -->
-	Powered by <a href="http://www.kleeja.com">Kleeja</a>
+	Powered by <a href="http://www.kleeja.com/">Kleeja</a>
 	<!-- IF REMOVE: Pay for a license - see http://www.kleeja.com -->
 	<br />
 	{page_stats}
@@ -388,6 +388,7 @@ dont remove it  end
 			<input type="text" name="code_answer" style="direction:ltr" />
 		</td>
 	</tr>
+	<!-- call template before submit-->
 	<tr>
 		<td colspan="2" style="text-align:center"><input type="submit" name="submit" value="{lang.SEND}" /></td>
 	</tr>
@@ -410,7 +411,7 @@ dont remove it  end
 {lang.FILESIZE} : {size} <br />
 {lang.FILEDATE} : {time} <br />
 {lang.FILEUPS} : {uploads} <br />
-
+<!-- download template after info -->
 <br />
 <br />
 <a href="{REPORT}">{lang.FILEREPORT}</a>
@@ -433,13 +434,13 @@ document.getElementById("url").innerHTML = "<a href=\"{url_file}\" target=\"baln
 	</template>
 	<template name="err">
 	<![CDATA[<div class="middle">
-
+	<!-- begin err template -->
 	<div class="err">
 	{text} 
 	<br/>
 	<a href="javascript:history.go(-1)">{go_back_browser}</a>
 	</div>
-
+	<!-- end err template -->
 
 </div>]]>
 	</template>
@@ -548,13 +549,14 @@ document.getElementById("url").innerHTML = "<a href=\"{url_file}\" target=\"baln
 	<template name="index_body">
 	<![CDATA[
 <div class="middle">
-			
+
+<!-- begin welcome index -->
 <h2>{lang.WELCOME}..</h2>	
 <br/>
 {welcome_msg}
 <br />
 <br />
-
+<!-- end welcome index -->
 
 
 <!---- START  FOR UPLOAD BOXES ---->
@@ -1161,6 +1163,7 @@ document.getElementById('mail_here').innerHTML= iee;
 		  [ {lang.MOD_WRITER_EX} ]
 		</td>	
 	</tr>	
+	<!-- admin configs tr extra -->
 </table>
 </fieldset>
 <fieldset class="quick" style="text-align:center">
@@ -1194,6 +1197,7 @@ document.getElementById('mail_here').innerHTML= iee;
 		<td>{lang.ALLOW_G}</td>
 		<td>{lang.SIZE_U}</td>
 		<td>{lang.ALLOW_U}</td>
+		<!-- admin ext info tr extra -->
 	</tr>
 <IF NAME="no_results">
 ...
@@ -1206,6 +1210,7 @@ document.getElementById('mail_here').innerHTML= iee;
 		<td>{{g_allow}}</td>
 		<td><input name="usz[{{id}}]" type="text" value="{{u_size}}" size="7"/></td>
 		<td>{{u_allow}}</td>
+		<!-- admin ext data tr extra -->
 	</tr>
 </LOOP>
 </IF>
@@ -1243,6 +1248,7 @@ document.getElementById('mail_here').innerHTML= iee;
 		<td>{lang.FILDER}</td>
 		<td>{lang.REPORT}</td>
 		<td>{lang.DELETE}</td>
+		<!-- admin files info tr extra -->
 	</tr>
 <IF NAME="no_results">
 ...
@@ -1258,6 +1264,7 @@ document.getElementById('mail_here').innerHTML= iee;
 		<td>{{folder}}</td>
 		<td>{{report}}</td>
 		<td><input type="checkbox" name="del_{{id}}" value="1"></td>
+		<!-- admin files data tr extra -->
 	</tr>
 </LOOP>
 </IF>
@@ -1330,42 +1337,7 @@ Styles, Hacks in <a href="http://www.kleeja.com">Kleeja Official Website</a>
 <li><img src="{{icon}}" />
 [<a href="{{link}}">{{lang}}</a>]</li>
 </LOOP>
-<!--
-<li><img src="./images/style/admin/configs_button.gif" />
-[<a href="admin.php?cp=configs">{lang.R_CONFIGS}</a>]</li>
-<li><img src="./images/style/admin/search_button.gif" />
-[<a href="admin.php?cp=search">{lang.R_SEARCH}</a>]</li>
-<li><img src="./images/style/admin/exts_button.gif" />
-[<a href="admin.php?cp=exts">{lang.R_EXTS}</a>]</li>
-<li><img src="./images/style/admin/files_button.gif" />
-[<a href="admin.php?cp=files">{lang.R_FILES}</a>]</li>
-<li><img src="./images/style/admin/img_ctrl_button.gif" />
-[<a href="admin.php?cp=img">{lang.R_IMG_CTRL}</a>]</li>
-<li><img src="./images/style/admin/reports_button.gif" />
-[<a href="admin.php?cp=reports">{lang.R_REPORTS}</a>]</li>
-<li><img src="./images/style/admin/calls_button.gif" />
-[<a href="admin.php?cp=calls">{lang.R_CALLS}</a>]</li>
-<li><img src="./images/style/admin/users_button.gif" />
-[<a href="admin.php?cp=users">{lang.R_USERS}</a>]</li>
-<li><img src="./images/style/admin/ban_button.gif" />
-[<a href="admin.php?cp=ban">{lang.R_BAN}</a>]</li>
-<li><img src="./images/style/admin/rules_button.gif" />
-[<a href="admin.php?cp=rules">{lang.R_RULES}</a>]</li>
-<li><img src="./images/style/admin/extra_button.gif" />
-[<a href="admin.php?cp=extra">{lang.R_EXTRA}</a>]</li>
-<li><img src="./images/style/admin/styles_button.gif" />
-[<a href="admin.php?cp=styles">{lang.R_STYLES}</a>]</li>
-<li><img src="./images/style/admin/langs_button.gif" />
-[<a href="admin.php?cp=langs">{lang.R_LANGS}</a>]</li>
-<li><img src="./images/style/admin/plugins_button.gif" />
-[<a href="admin.php?cp=plugins">{lang.PLUGINS}</a>]</li>
-<li><img src="./images/style/admin/backup_button.gif" />
-[<a href="admin.php?cp=backup">{lang.R_BCKUP}</a>]</li>
-<li><img src="./images/style/admin/repair_button.gif" />
-[<a href="admin.php?cp=repair">{lang.R_REPAIR}</a>]</li>
-<li><img src="./images/style/admin/lgutcp_button.gif" />
-[<a href="admin.php?cp=lgutcp">{lang.R_LGOUTCP}</a>]</li>
-!-->
+<!-- admin header menu extra -->
 </ul>
 <!-- END ADMIN MENU -->
 	</div><div class="roundedcornr_bottom_561671"><div></div></div></div>
@@ -1417,6 +1389,7 @@ document.getElementById('mail_here').innerHTML = iee;
 		<td>{lang.TIME}</td>
 		<td>{lang.IP}</td>
 		<td>{lang.DELETE}</td>
+		<!-- admin reports info tr extra -->
 	</tr>
 <IF NAME="no_results">
 ...
@@ -1430,6 +1403,7 @@ document.getElementById('mail_here').innerHTML = iee;
 		<td>{{time}}</td>
 		<td><a href="{{ip_finder}}" target="blank">{{ip}}</a></td>
 		<td><input type="checkbox" name="del_{{id}}" value="1"></td>
+			<!-- admin reports data tr extra -->
 	</tr>
 </LOOP>
 </IF>
@@ -1541,6 +1515,7 @@ document.getElementById('mail_here').innerHTML = iee;
 	</td>
 	</tr>
 </IF>
+	<!-- admin start info tr extra -->
 </table>
 
 	</fieldset>
@@ -1610,6 +1585,7 @@ document.getElementById('mail_here').innerHTML = iee;
 <td>{post_max_size}
 </td>
 </tr>
+<!-- admin start info2 tr extra -->
 </table>
 	</fieldset>
 
@@ -1908,6 +1884,7 @@ a.button2, input.button2 {
 		<td>{lang.PASSWORD}</td>
 		<td>{lang.IS_ADMIN}</td>
 		<td>{lang.DELETE}</td>
+		<!-- admin users info tr extra -->
 	</tr>
 <IF NAME="no_results">
 ...
@@ -1919,6 +1896,7 @@ a.button2, input.button2 {
 		<td><label><input type="password" name="ps_{{id}}" value="" size="10"></label></td>
 		<td>{{admin}}</td>
 		<td><input type="checkbox" name="del_{{id}}" value="1"></td>
+		<!-- admin users data tr extra -->
 	</tr>
 </LOOP>
 </IF>
@@ -1972,6 +1950,7 @@ a.button2, input.button2 {
 		{lang.DAYS}
 		</td>
 	</tr>
+	<!-- admin search data tr extra -->
 </table>
 </fieldset>
 <fieldset class="quick" style="text-align:center">
@@ -1994,6 +1973,7 @@ a.button2, input.button2 {
 		<td><label for="usermail">{lang.EMAIL}</label></td>
 		<td><label><input type="text" id="usermail" name="usermail" value="{_POST.usermail}" size="40"></label></td>
 	</tr>	
+	<!-- admin search data2 tr extra -->
 </table>
 </fieldset>
 <fieldset class="quick" style="text-align:center">

@@ -5,6 +5,7 @@
 # Filename : admin.php
 # purpose :  control panel for administarator
 # copyright 2007-2008 Kleeja.com ..
+#license http://opensource.org/licenses/gpl-license.php GNU Public License
 # last edit by : saanina
 ##################################################
 
@@ -99,8 +100,8 @@
 	//show style .
 	//header
 	print $tpl->display("admin_header");
- 	//body
-	print $tpl->display($stylee);
+		//body
+		print $tpl->display($stylee);
 	//footer
 	print $tpl->display("admin_footer");
 

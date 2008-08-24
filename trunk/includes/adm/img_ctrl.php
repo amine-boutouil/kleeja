@@ -13,7 +13,7 @@
 	
 		//for style ..
 		$stylee		= "admin_img";
-		$action 	= "admin.php?cp=img_ctrl";
+		$action 	= "admin.php?cp=img_ctrl&amp;page=" . intval($_GET['page']) ;
 
 		$query = array(
 					'SELECT'	=> '*',
@@ -116,7 +116,7 @@
 	//after submit 
 	if(isset($_POST['submit']))
 	{
-		$text	= $lang['FILES_UPDATED'];
+		$text	= $lang['FILES_UPDATED']. '<meta HTTP-EQUIV="REFRESH" content="0; url=./admin.php?cp=img_ctrl&amp;page=' . intval($_GET['page']). '">' ."\n";
 		$stylee	= "admin_info";
 	}
 ?>

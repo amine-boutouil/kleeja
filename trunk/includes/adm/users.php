@@ -14,7 +14,7 @@
 
 	//for style ..
 		$stylee 	= "admin_users";
-		$action 	= "admin.php?cp=users";
+		$action 	= "admin.php?cp=users&amp;page=". intval($_GET['page']);
 
 		
 		$query = array(
@@ -114,7 +114,7 @@
 	//after submit 
 	if (isset($_POST['submit']))
 	{
-			$text	= $lang['USERS_UPDATED'];
+			$text	= $lang['USERS_UPDATED'] . '<meta HTTP-EQUIV="REFRESH" content="0; url=./admin.php?cp=users&amp;page=' . intval($_GET['page']). '">' ."\n";
 			$stylee	= "admin_info";
 	}
 ?>

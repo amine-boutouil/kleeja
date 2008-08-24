@@ -1,12 +1,13 @@
 <?php
-##################################################
+#########################################
 #						Kleeja
 #
 # Filename : functions.php
 # purpose :  cache for all script. the important feature of kleeja
 # copyright 2007-2008 Kleeja.com ..
+#license http://opensource.org/licenses/gpl-license.php GNU Public License
 # last edit by : saanina
-##################################################
+#########################################
 
 //no for directly open
 if (!defined('IN_COMMON'))
@@ -17,53 +18,86 @@ if (!defined('IN_COMMON'))
 	  
 
 /*
-header of kleeja
+* header of kleeja
+* to show header in any page you want .. 
+*  parameter : title : title of page as in <titl></titl>
 */	
 function Saaheader($title)
 {
 		global $tpl,$usrcp,$lang,$user_is,$config,$extras;
 
-		
 		$user_is = ($usrcp->name()) ? true: false;
 		
 		//login - logout-profile... etc ..
 		if (!$usrcp->name()) 
 		{
 			$login_name		= $lang['LOGIN']; 
-			$login_url		= "usrcp.php?go=login";
-			$usrcp_name 	= $lang['REGISTER'];
-			$usrcp_url 		= "usrcp.php?go=register";
+			$login_url			= "usrcp.php?go=login";
+			$usrcp_name		= $lang['REGISTER'];
+			$usrcp_url			= "usrcp.php?go=register";
 		}
 		else
 		{
 			$login_name		= $lang['LOGOUT']."[".$usrcp->name()."]";
-			$login_url		= "usrcp.php?go=logout";
-			$usrcp_name 	= $lang['PROFILE'];
-			$usrcp_url 		= "usrcp.php?go=profile";
-			$usrfile_name 	=  $lang['YOUR_FILEUSER'];
-			$usrfile_url 	= ($config['mod_writer']) ? "fileuser.html" : "usrcp.php?go=fileuser";
+			$login_url			= "usrcp.php?go=logout";
+			$usrcp_name		= $lang['PROFILE'];
+			$usrcp_url			= "usrcp.php?go=profile";
+			$usrfile_name	=  $lang['YOUR_FILEUSER'];
+			$usrfile_url		= ($config['mod_writer']) ? "fileuser.html" : "usrcp.php?go=fileuser";
 		}
 
-		$vars = array (0=>"navigation",1=>"index_name",2=>"guide_name",3=>"guide_url",4=>"rules_name",5=>"rules_url",
-						6=>"call_name",7=>"call_url",8=>"login_name",9=>"login_url",10=>"usrcp_name",11=>"usrcp_url",12=>"filecp_name",13=>"filecp_url",14=>"stats_name",15=>"stats_url",16=>"usrfile_name",17=>"usrfile_url");
+		$vars = array (
+							0=>"navigation",
+							1=>"index_name",
+							2=>"guide_name",3=>"guide_url",
+							4=>"rules_name",5=>"rules_url",
+							6=>"call_name",7=>"call_url",
+							8=>"login_name",9=>"login_url",
+							10=>"usrcp_name",11=>"usrcp_url",
+							12=>"filecp_name",13=>"filecp_url",
+							14=>"stats_name",15=>"stats_url",
+							16=>"usrfile_name",17=>"usrfile_url"
+						);
 		
 		if($config['mod_writer'])
 		{
-			$vars2 = array(0=>$lang['JUMPTO'],1=>$lang['INDEX'],2=>$lang['GUIDE'],3=>"guide.html",4=>$lang['RULES'],5=>"rules.html",
-						6=>$lang['CALL'],7=>"go.php?go=call",8=>$login_name,9=>$login_url,10=>$usrcp_name,11=>$usrcp_url,12=>$lang['FILECP'],13=>"filecp.html",14=>$lang['STATS'],15=>"stats.html",16=>$usrfile_name,17=>$usrfile_url);
+			$vars2 = array(
+							0=>$lang['JUMPTO'],
+							1=>$lang['INDEX'],
+							2=>$lang['GUIDE'],3=>"guide.html",
+							4=>$lang['RULES'],5=>"rules.html",
+							6=>$lang['CALL'],7=>"go.php?go=call",
+							8=>$login_name,9=>$login_url,
+							10=>$usrcp_name,11=>$usrcp_url,
+							12=>$lang['FILECP'],13=>"filecp.html",
+							14=>$lang['STATS'],15=>"stats.html",
+							16=>$usrfile_name,17=>$usrfile_url
+						);
 		}
 		else
 		{
-			$vars2 = array(0=>$lang['JUMPTO'],1=>$lang['INDEX'],2=>$lang['GUIDE'],3=>"go.php?go=guide",4=>$lang['RULES'],5=>"go.php?go=rules",
-						6=>$lang['CALL'],7=>"go.php?go=call",8=>$login_name,9=>$login_url,10=>$usrcp_name,11=>$usrcp_url,12=>$lang['FILECP'],13=>"usrcp.php?go=filecp",14=>$lang['STATS'],15=>"go.php?go=stats",16=>$usrfile_name,17=>$usrfile_url);
-
+			$vars2 = array(
+							0=>$lang['JUMPTO'],
+							1=>$lang['INDEX'],
+							2=>$lang['GUIDE'],3=>"go.php?go=guide",
+							4=>$lang['RULES'],5=>"go.php?go=rules",
+							6=>$lang['CALL'],7=>"go.php?go=call",
+							8=>$login_name,9=>$login_url,
+							10=>$usrcp_name,11=>$usrcp_url,
+							12=>$lang['FILECP'],13=>"usrcp.php?go=filecp",
+							14=>$lang['STATS'],15=>"go.php?go=stats",
+							16=>$usrfile_name,17=>$usrfile_url
+						);
 		}
 
 		//assign variables
-		for($i=0;$i<count($vars);$i++){$tpl->assign($vars[$i],$vars2[$i]);}
-		$tpl->assign("dir",$lang['DIR']);
-		$tpl->assign("title",$title);
-		$tpl->assign("go_back_browser",$lang['GO_BACK_BROWSER']);
+		for($i=0;$i<count($vars);$i++)
+		{
+			$tpl->assign($vars[$i],$vars2[$i]);
+		}
+		$tpl->assign("dir", $lang['DIR']);
+		$tpl->assign("title", $title);
+		$tpl->assign("go_back_browser", $lang['GO_BACK_BROWSER']);
 		//$tpl->assign("ex_header",$extras['header']);
 
 		($hook = kleeja_run_hook('func_Saaheader')) ? eval($hook) : null; //run hook
@@ -72,14 +106,14 @@ function Saaheader($title)
 	}
 
 
-//
-// footer
-//
+/*
+*footer
+* to show footer of any page you want 
+* paramenters : none
+*/
 function Saafooter()
 {
 		global $tpl,$SQL,$starttm,$config,$usrcp,$lang,$do_gzip_compress;
-		
-
 		
 		//show stats ..
 		if ($config['statfooter'] !=0) 
@@ -88,14 +122,14 @@ function Saafooter()
 			$hksys			= (!defined('STOP_HOOKS'))?  "Enabled" : "Disabled";
 			$endtime		= get_microtime();
 			$loadtime		= number_format($endtime - $starttm , 4);
-			$queries_num	= $SQL->query_num;
+			$queries_num= $SQL->query_num;
 			$time_sql		= round($SQL->query_num / $loadtime) ;
 			$link_dbg		= (($usrcp->admin()) ? "[ <a href=" .  str_replace('debug','',kleeja_get_page()) . ((strpos(kleeja_get_page(), '?') === false) ? '?' : '&') . "debug>More Details ... </a> ]" : null);
-			$page_stats		= "<b>[</b> GZIP : $gzip - Generation Time: $loadtime Sec [SQL: $time_sql % ] - Queries: $queries_num - Hook System:  $hksys <b>]</b>  " . $link_dbg ;
+			$page_stats	= "<b>[</b> GZIP : $gzip - Generation Time: $loadtime Sec [SQL: $time_sql % ] - Queries: $queries_num - Hook System:  $hksys <b>]</b>  " . $link_dbg ;
 			$tpl->assign("page_stats",$page_stats);
 		}#end statfooter
 
-		//if admin
+		//if admin, show admin in the bottom of all page
 		if ($usrcp->admin())
 		{
 			$admin_page = '<br /><a href="./admin.php">' . $lang['ADMINCP'] .  '</a><br />';
@@ -105,18 +139,16 @@ function Saafooter()
 		// if google analytics .. 
 		if (strlen($config['googleanalytics']) > 4)
 		{
-			$googleanalytics = '
-<script type="text/javascript">
-var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-document.write("\<script src=\'" + gaJsHost + "google-analytics.com/ga.js\' type=\'text/javascript\'>\<\/script>" );
-</script>
-<script type="text/javascript">
-var pageTracker = _gat._getTracker("' . $config['googleanalytics'] . '");
-pageTracker._initData();
-pageTracker._trackPageview();
-</script>';
+			$googleanalytics = '<script type="text/javascript">' . "\n";
+			$googleanalytics = 'var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");' . "\n";
+			$googleanalytics = 'document.write("\<script src=\'" + gaJsHost + "google-analytics.com/ga.js\' type=\'text/javascript\'>\<\/script>" );' . "\n";
+			$googleanalytics = '</script>' . "\n";
+			$googleanalytics = '<script type="text/javascript">' . "\n";
+			$googleanalytics = 'var pageTracker = _gat._getTracker("' . $config['googleanalytics'] . '");' . "\n";
+			$googleanalytics = 'pageTracker._initData();' . "\n";
+			$googleanalytics = 'pageTracker._trackPageview();' . "\n";
+			$googleanalytics = '</script>' . "\n";
 			$tpl->assign("googleanalytics",$googleanalytics);
-			
 		}
 		
 		($hook = kleeja_run_hook('func_Saafooter')) ? eval($hook) : null; //run hook
@@ -130,14 +162,14 @@ pageTracker._trackPageview();
 			kleeja_debug();
 		}
 		
-		// THEN .. at finish
+		// THEN .. at finish, close sql connections
 		$SQL->close();
-
 }
 
-//
-//size function
-//
+/*
+*to return file size in propriate format
+* parameters : size: file of size in bites
+*/
 function Customfile_size($size)
 {
 	  $sizes = array(' B', ' KB', ' MB', ' GB', ' TB', 'PB', ' EB');
@@ -152,19 +184,20 @@ function Customfile_size($size)
 	  return  $result;
 }
 
-//
-// for who online .. 
-//
+/*
+*for recording who onlines now .. 
+*prameters : none
+*/
 function KleejaOnline ()
 {
 		global $SQL,$usrcp,$dbprefix;
 		
 		// get information .. 
-		$ip			= (getenv('HTTP_X_FORWARDED_FOR')) ? getenv('HTTP_X_FORWARDED_FOR') : getenv('REMOTE_ADDR');
-		$agent		= $_SERVER['HTTP_USER_AGENT'];
-		$timeout 	= 600; //seconds
-		$time 		= time();  
-		$timeout2 	= $time-$timeout;  
+		$ip				= (getenv('HTTP_X_FORWARDED_FOR')) ? getenv('HTTP_X_FORWARDED_FOR') : getenv('REMOTE_ADDR');
+		$agent			= $_SERVER['HTTP_USER_AGENT'];
+		$timeout		= 600; //seconds
+		$time			= time();  
+		$timeout2		= $time-$timeout;  
 		#$username	= ( $usrcp->name() ) ?  (($usrcp->admin() )?  '<span style="color:blue;"><b>' .$usrcp->name(). '</b></span>' : $usrcp->name() ): '-1';
 		$username	= ($usrcp->name()) ? $usrcp->name(): '-1';
 		
@@ -176,27 +209,28 @@ function KleejaOnline ()
 				$update_query = array(
 									'UPDATE'	=> "{$dbprefix}stats",
 									'SET'		=> "last_google='$time', google_num=google_num+1"
-							);
+									);
 				($hook = kleeja_run_hook('qr_update_google_lst_num')) ? eval($hook) : null; //run hook
-				if (!$SQL->build($update_query)){ die($lang['CANT_UPDATE_SQL']);}
+				if (!$SQL->build($update_query)) die($lang['CANT_UPDATE_SQL']);
 		}
 		elseif (strstr($agent, 'Yahoo'))
 		{
 				$update_query = array(
 									'UPDATE'	=> "{$dbprefix}stats",
 									'SET'		=> "last_yahoo='$time', yahoo_num=yahoo_num+1"
-							);
+									);
 				($hook = kleeja_run_hook('qr_update_yahoo_lst_num')) ? eval($hook) : null; //run hook	
-				if (!$SQL->build($update_query)){ die($lang['CANT_UPDATE_SQL']);}
+				if (!$SQL->build($update_query))	die($lang['CANT_UPDATE_SQL']);
 		}
-		//put another bots
+		
+		//put another bots as a hook if you want !
 		($hook = kleeja_run_hook('anotherbots_onlline_func')) ? eval($hook) : null; //run hook
 		
 		//---
 		$query_on_id = array(
 								'SELECT'	=> 'id',
 								'FROM'		=> "{$dbprefix}online",
-								'WHERE'		=> "ip='$ip'"
+								'WHERE'	=> "ip='$ip'"
 							);
 		($hook = kleeja_run_hook('qr_select_ip_onlline_func')) ? eval($hook) : null; //run hook					
 		$result = $SQL->build($query_on_id);
@@ -217,29 +251,29 @@ function KleejaOnline ()
 		{
 			$update_query = array(
 								'UPDATE'	=> "{$dbprefix}online",
-								'SET'		=> "time='$time'",
-								'WHERE'		=> "ip='$ip'"
+								'SET'			=> "time='$time'",
+								'WHERE'	=> "ip='$ip'"
 							);
 			($hook = kleeja_run_hook('qr_update_ifis_onlline_func')) ? eval($hook) : null; //run hook
-			if (!$SQL->build($update_query)){ die($lang['CANT_UPDATE_SQL']);}			
+			if (!$SQL->build($update_query)) die($lang['CANT_UPDATE_SQL']);			
 		}
 
 		// i hate who online feature due to this step .. :( 
 		$query_del = array(
 						'DELETE'	=> "{$dbprefix}online",
 						'WHERE'		=> "time < '$timeout2'"
-						);
+							);
 		($hook = kleeja_run_hook('qr_del_ifgo_onlline_func')) ? eval($hook) : null; //run hook									
-		if (!$SQL->build($query_del)) {die($lang['CANT_DELETE_SQL']);}	
+		if (!$SQL->build($query_del))	die($lang['CANT_DELETE_SQL']);
 		
 		($hook = kleeja_run_hook('KleejaOnline_func')) ? eval($hook) : null; //run hook	
 
-		
 }#End function
 	
-//
-// visitors calculator
-//	
+/*
+* visitors calculator
+* parameters : none
+*/
 function visit_stats ()
 {
 		global $SQL,$usrcp,$dbprefix,$stat_today;
@@ -248,7 +282,7 @@ function visit_stats ()
 
 		if ($today !=  $stat_today)
 		{
-			//counter yesterday .. and make toaay counter as 0 , then get date of today .. 
+			//counter yesterday .. and make today counter as 0 , then get date of today .. 
 			$query = array(
 						'SELECT'	=> 'counter_today',
 						'FROM'		=> "{$dbprefix}stats"
@@ -262,7 +296,7 @@ function visit_stats ()
 			
 			$update_query = array(
 							'UPDATE'	=> "{$dbprefix}stats",
-							'SET'		=> "counter_yesterday='$yesterday_cout',counter_today='0', today='$today'"
+							'SET'		=> "counter_yesterday='$yesterday_cout', counter_today='0', today='$today' "
 						);
 			($hook = kleeja_run_hook('qr_update_counters_ststs_func')) ? eval($hook) : null; //run hook
 			if ($SQL->build($update_query))
@@ -276,40 +310,40 @@ function visit_stats ()
 			
 		}
 		
-		
+			//not registered as visitor yet ,, becuase visist mean one visit !  
 			if (!$_SESSION['visitor'])
 			{
-				$update_query = array(
-								'UPDATE'	=> "{$dbprefix}stats",
-								'SET'		=> "counter_today=counter_today+1, counter_all=counter_all+1"
-							);
-				($hook = kleeja_run_hook('qr_update_countersall_ststs_func')) ? eval($hook) : null; //run hook	
-				if ($SQL->build($update_query))
-				{
-					$_SESSION['visitor'] = true;
-				}
-				else
-				{ 
-					die($lang['CANT_UPDATE_SQL']);
-				}	
-
+					$update_query = array(
+												'UPDATE'	=> "{$dbprefix}stats",
+												'SET'		=> "counter_today=counter_today+1, counter_all=counter_all+1"
+												);
+					($hook = kleeja_run_hook('qr_update_countersall_ststs_func')) ? eval($hook) : null; //run hook	
+					if ($SQL->build($update_query))
+					{
+						$_SESSION['visitor'] = true;
+					}
+					else
+					{ 
+						die($lang['CANT_UPDATE_SQL']);
+					}	
 			}
-		($hook = kleeja_run_hook('visit_stats_func')) ? eval($hook) : null; //run hook	
-
-}
+			
+			($hook = kleeja_run_hook('visit_stats_func')) ? eval($hook) : null; //run hook	
+}#end func
 	
-//
-// for ban ips .. 
-//
+/*
+*for ban ips .. 
+*parameters : none
+*/
 function get_ban ()
 {
-		global $banss,$lang,$tpl,$text;
+		global $banss, $lang, $tpl, $text;
 	
 		//visitor ip now 
-		if (getenv('HTTP_X_FORWARDED_FOR')){$ip	= getenv('HTTP_X_FORWARDED_FOR');} else {$ip= getenv('REMOTE_ADDR');}
-	
+		$ip	=  (getenv('HTTP_X_FORWARDED_FOR')) ? getenv('HTTP_X_FORWARDED_FOR') : getenv('REMOTE_ADDR');
+
 		//now .. loop for banned ips 
-		if (!trim($banss) != '')
+		if (trim($banss) != '')
 		{
 			if (!is_array($banss))	$banss = array();
 			
@@ -320,70 +354,21 @@ function get_ban ()
 				
 				if ($ip == $ip2 || eregi($replaceIt , $ip))
 				{
-					
 					($hook = kleeja_run_hook('banned_get_ban_func')) ? eval($hook) : null; //run hook	
-
 					kleeja_info($lang['U_R_BANNED'],$lang['U_R_BANNED']);
-
 				}
 			}
 		}#empty	
 		
 		($hook = kleeja_run_hook('get_ban_func')) ? eval($hook) : null; //run hook	
-
 }
 
-	
-//no floods ..
-//floods : floods can get by this time 
-//pertime : time which u must dont get more floods in it ..
-function antifloods ($floods, $pertime)
-{ 
-		global $tpl, $lang, $text;
-		
-		
-		$many	= $floods; // many [times of max floods ] 
-		$time	= $pertime; // per second 
-		
-		//go 
-		if(isset($_SESSION['antiflood']))
-	    {
-	        if((time()-$_SESSION['antiflood']['time']) >= $time)
-	        {
-	            unset($_SESSION['antiflood']);
-	            
-	            $_SESSION['antiflood']['time']=time();
-	            $_SESSION['antiflood']['looks']=1;
-	        }
-	        else
-	        {
-	            $_SESSION['antiflood']['looks']++;
-	            
-	            if($_SESSION['antiflood']['looks']>=$many)
-	            {
-					//error
-					$text = $lang['U_R_FLOODER'].' #' . $many . '/' . $time;
-					kleeja_err($text, $lang['U_R_FLOODER']);
-	            }
-	        }
-
-	    }
-	    else
-	    {
-	        $_SESSION['antiflood']['time']=time();
-	        $_SESSION['antiflood']['looks']=1;
-
-	    }
-		
-	($hook = kleeja_run_hook('antifloods_func')) ? eval($hook) : null; //run hook	
-		
-}#end antifloods
 
 
-
-
-//xml  
-//  codes from mybb
+/*convert xml codes to array  
+* parameters : raw_xml : xml codes
+*codes from mybb
+*/ 
 function xml_to_array($raw_xml) 
 {
 		$parser = xml_parser_create();
@@ -393,12 +378,15 @@ function xml_to_array($raw_xml)
 		{
 			return false;
 		}
-
 		$i = -1;
 		return xml_get_children($vals, $i);
 }
 
-//related with xml_to_array
+/*
+ * xml_build_tag
+* parameters : thisvals, vals, i, type
+*codes from mybb
+*/
 function xml_build_tag($thisvals, $vals, &$i, $type)
 {
 		$tag['tag'] = $thisvals['tag'];
@@ -418,7 +406,10 @@ function xml_build_tag($thisvals, $vals, &$i, $type)
 		return $tag;
 }
 	
-//related with xml_to_array
+/*
+*xml_get_children
+*parameters: vals, i
+*/
 function xml_get_children($vals, &$i)
 {
 		$collapse_dups = 1;
@@ -442,12 +433,12 @@ function xml_get_children($vals, &$i)
 				$tag = xml_build_tag($vals[$i], $vals, $i, $type);
 				if($index_numeric)
 				{
-					$tag['tag'] = $vals[$i]['tag'];
-					$children[] = $tag;
+					$tag['tag']	= $vals[$i]['tag'];
+					$children[]	= $tag;
 				}
 				else
 				{
-					$children[$tag['tag']][] = $tag;
+					$children[$tag['tag']][]	= $tag;
 				}
 			}
 			elseif($type == "close")
@@ -461,41 +452,44 @@ function xml_get_children($vals, &$i)
 			{
 				if(is_array($value) && (count($value) == 1))
 				{
-					$children[$key] = $value[0];
+					$children[$key]	= $value[0];
 				}
 			}
 		}
 		return $children;
 }
 
-//creat a new style
+/*
+* insert a new srtyle in db from xml file
+* parameters : contents : xml content of style
+					def : boolen 1 or 0 , default style or not
+*/
 function creat_style_xml($contents, $def=false) 
 {
 	global $dbprefix, $SQL;
 
-				$gtree = xml_to_array($contents);
-						
+				($hook = kleeja_run_hook('creat_style_xml_func')) ? eval($hook) : null; //run hook	
 				
+				$gtree = xml_to_array($contents);
+					
 				$tree				=	$gtree['kleeja'];
-				$style_info			=	$tree['info'];
-				$templates			=	$tree['templates'];
-				$template_s			=	$tree['templates']['template'];		
-
+				$style_info		=	$tree['info'];
+				$templates		=	$tree['templates'];
+				$template_s	=	$tree['templates']['template'];		
 
 				//important tags not exists 
 				if(!is_array($style_info) || !isset($templates))
 				{
 					die($lang['ERR_XML_NO_G_TAGS']);
-					return false;
 				}
 				else
 				{
 					//insert in lists table 
 					$insert_query = array(
-										'INSERT'	=> 'list_name, list_author, list_type',
-										'INTO'		=> "{$dbprefix}lists",
-										'VALUES'	=> "'".$style_info['style_name']['value']."','".$style_info['style_author']['value']."', '1'"
-										);
+											'INSERT'	=> 'list_name, list_author, list_type',
+											'INTO'		=> "{$dbprefix}lists",
+											'VALUES'	=> "'".$style_info['style_name']['value']."','".$style_info['style_author']['value']."', '1'"
+											);
 					($hook = kleeja_run_hook('qr_select_styleinfo_crtxmlstyle_func')) ? eval($hook) : null; //run hook	
 					$SQL->build($insert_query);
 					
@@ -506,11 +500,10 @@ function creat_style_xml($contents, $def=false)
 					{
 						//update
 						$update_query = array(
-											'UPDATE'	=> "{$dbprefix}config",
-											'SET'		=> "value='". $new_style_id ."'",
-											'WHERE'		=>	"`name`='style'"
-											
-										);
+												'UPDATE'	=> "{$dbprefix}config",
+												'SET'		=> "value='". $new_style_id ."'",
+												'WHERE'		=>	"`name`='style'"
+											);
 										
 										($hook = kleeja_run_hook('qr_update_defsty_crtxmlstyle_func')) ? eval($hook) : null; //run hook
 										if ($SQL->build($update_query))
@@ -527,7 +520,7 @@ function creat_style_xml($contents, $def=false)
 					foreach($template_s as $tpls)
 					{
 						$template_name		= $SQL->real_escape($tpls['attributes']['name']);
-						$template_content	= $SQL->real_escape($tpls['value']);
+						$template_content		= $SQL->real_escape($tpls['value']);
 						
 						$insert_query = array(
 											'INSERT'	=> 'style_id, template_name, template_content',
@@ -536,44 +529,45 @@ function creat_style_xml($contents, $def=false)
 											);
 						($hook = kleeja_run_hook('qr_insert_tpls_crtxmlstyle_func')) ? eval($hook) : null; //run hook	
 						$SQL->build($insert_query);
-
 					}
-					
+	
 					return true;
 				}
 					
-				($hook = kleeja_run_hook('creat_style_xml_func')) ? eval($hook) : null; //run hook	
 				return false;
 }
 
-//creat a new language
+/*
+* insert a new language from xml file
+* parameters : contents : xml file contents
+						def : true or false to be default style
+*/
 function creat_lang_xml($contents, $def=false) 
 {
 	global $dbprefix, $SQL;
 
+				($hook = kleeja_run_hook('creat_lang_xml_func')) ? eval($hook) : null; //run hook
+				
 				$gtree = xml_to_array($contents);
 						
-				
 				$tree				=	$gtree['kleeja'];
-				$lang_info			=	$tree['info'];
-				$words				=	$tree['words'];
-				$word_s				=	$tree['words']['word'];		
-
+				$lang_info		=	$tree['info'];
+				$words			=	$tree['words'];
+				$word_s		=	$tree['words']['word'];		
 
 				//important tags not exists 
 				if(!is_array($lang_info) || !isset($words))
 				{
 					die($lang['ERR_XML_NO_G_TAGS']);
-					return false;
 				}
 				else
 				{
 					//insert in lists table 
 					$insert_query = array(
-										'INSERT'	=> 'list_name, list_author, list_type',
-										'INTO'		=> "{$dbprefix}lists",
-										'VALUES'	=> "'".$lang_info['lang_name']['value']."','".$lang_info['lang_author']['value']."', '2'"
-										);
+												'INSERT'	=> 'list_name, list_author, list_type',
+												'INTO'		=> "{$dbprefix}lists",
+												'VALUES'	=> "'".$lang_info['lang_name']['value']."','".$lang_info['lang_author']['value']."', '2'"
+											);
 					($hook = kleeja_run_hook('qr_select_langinfo_crtlangxml_func')) ? eval($hook) : null; //run hook	
 					$SQL->build($insert_query);
 					
@@ -583,10 +577,10 @@ function creat_lang_xml($contents, $def=false)
 					{
 						//update
 						$update_query = array(
-											'UPDATE'	=> "{$dbprefix}config",
-											'SET'		=> "value='". $new_lang_id ."'",
-											'WHERE'		=>	"`name`='language'"
-										);
+													'UPDATE'	=> "{$dbprefix}config",
+													'SET'		=> "value='". $new_lang_id ."'",
+													'WHERE'		=>	"`name`='language'"
+											);
 										
 										($hook = kleeja_run_hook('qr_update_deflang_crtlangxml_func')) ? eval($hook) : null; //run hook
 										if ($SQL->build($update_query))
@@ -612,50 +606,46 @@ function creat_lang_xml($contents, $def=false)
 											);
 						($hook = kleeja_run_hook('qr_insert_words_crtlangxml_func')) ? eval($hook) : null; //run hook	
 						$SQL->build($insert_query);
-
 					}
 					
 					return true;
 				}
 				
-				($hook = kleeja_run_hook('creat_lang_xml_func')) ? eval($hook) : null; //run hook
 				return false;
 }	  
 
 
-//creat a new plugin
+/*
+* insert a new plugin from xml file
+* parameters : contents : xml contents of plugin
+*/
 function creat_plugin_xml($contents) 
 {
-	global $dbprefix, $SQL, $lang;
+	global $dbprefix, $SQL, $lang, $config;
 
 				$gtree = xml_to_array($contents);
-
-				$tree				=	$gtree['kleeja'];
+				
+				$tree					=	$gtree['kleeja'];
 				$plg_info			=	$tree['info'];
 				$plg_install		=	$tree['install'];
-				$plg_uninstall		=	$tree['uninstall'];
+				$plg_uninstall	=	$tree['uninstall'];
 				$plg_tpl			=	$tree['templates'];		
-				$plg_hooks			=	$tree['hooks'];		
+				$plg_hooks		=	$tree['hooks'];		
 				$plg_langs			=	$tree['langs'];		
-
 
 				//important tags not exists 
 				if(!isset($plg_info))
 				{
 					die($lang['ERR_XML_NO_G_TAGS']);
-					return false;
 				}
 				else
 				{
-				
 					$plg_errors	=	array();
-					
 					//eval install code
 					if (isset($plg_install) && trim($plg_install['value']) != '')
 					{
 						eval($plg_install['value']);
 					}
-					
 					
 					//some actions with tpls
 					if(isset($plg_tpl))
@@ -663,9 +653,16 @@ function creat_plugin_xml($contents)
 						//edit template
 						if(isset($plg_tpl['edit']))
 						{
-							require "./s_strings.php";
-							
+							require "s_strings.php";
 							$finder	=	new sa_srch;
+							
+							if(is_array($plg_tpl['edit']['template']))
+							{
+								if(array_key_exists("attributes",$plg_tpl['edit']['template']))
+								{
+									$plg_tpl['edit']['template'] = array($plg_tpl['edit']['template']);
+								}
+							}		
 							
 							foreach($plg_tpl['edit']['template'] as $temp)
 							{
@@ -680,18 +677,18 @@ function creat_plugin_xml($contents)
 										case 'replace_with': $action_type =1; break;
 									endswitch;
 
-									
 									//get template content and do wut we have to do , then updated .. 
 									$query = array(
-												'SELECT'	=> 'template_content',
-												'FROM'		=> "{$dbprefix}templates",
-												'WHERE'		=>	"style_id='".intval($config['style'])."' AND template_name='". $template_name ."'"
+													'SELECT'	=> 'template_content',
+													'FROM'		=> "{$dbprefix}templates",
+													'WHERE'		=>	"style_id='".intval($config['style'])."' AND template_name='". $template_name ."'"
 												);
 									($hook = kleeja_run_hook('qr_select_tplcntedit_crtplgxml_func')) ? eval($hook) : null; //run hook
 									$result	= $SQL->fetch_array($SQL->build($query));
-									if(!$result) continue;
+							
+									if(!$result['template_content'])	continue;
 									
-									$finder->text	=	$result['template_content'];
+									$finder->text		=	$result['template_content'];
 									$finder->do_search($action_type);
 									
 									if($finder->text != $result['template_content'])
@@ -708,57 +705,64 @@ function creat_plugin_xml($contents)
 												//delete cache ..
 												if (file_exists('cache/' . $config['style'] . '_' .$template_name . '.php'))
 												{
-													unlink('cache/' . $config['style'] . '_' . $$template_namee . '.php');
+													unlink('cache/' . $config['style'] . '_' . $template_name . '.php');
 												}
 										}
 									}
 								}
-							}#end edit
+						}#end edit
 							
 							//new templates 
 							if(isset($plg_tpl['new']))
 							{
+								
+								if(is_array($plg_tpl['new']['template']))
+								{
+									if(array_key_exists("attributes",$plg_tpl['new']['template']))
+									{
+										$plg_tpl['new']['template'] = array($plg_tpl['new']['template']);
+									}
+								}		
+							
 								foreach($plg_tpl['new']['template'] as $temp)
 								{
-									$template_name				=	$SQL->real_escape($temp['attributes']['name']);
-									$template_content			=	$SQL->real_escape($temp['value']);
+									$template_name		=	$SQL->real_escape($temp['attributes']['name']);
+									$template_content		=	$SQL->real_escape($temp['value']);
 
 									$insert_query = array(
-														'INSERT'	=> 'style_id, template_name, template_content',
-														'INTO'		=> "{$dbprefix}templates",
-														'VALUES'	=> "'". $config['style']."','$template_name', '$template_content'"
-														);
+																'INSERT'	=> 'style_id, template_name, template_content',
+																'INTO'		=> "{$dbprefix}templates",
+																'VALUES'	=> "'". $config['style']."','$template_name', '$template_content'"
+																);
 									($hook = kleeja_run_hook('qr_insert_newtpls_crtplgxml_func')) ? eval($hook) : null; //run hook
 									$SQL->build($insert_query);		
-									
 								}
 							
 							} #end new
-						}
+					}#ens tpl
 						
 						//hooks
 						if(isset($plg_hooks['hook']))
 						{
-						
-						//insert in plugin table 
-						$insert_query = array(
-										'INSERT'	=> 'plg_name, plg_ver, plg_author, plg_dsc, plg_uninstall',
-										'INTO'		=> "{$dbprefix}plugins",
-										'VALUES'	=> "'".$SQL->escape($plg_info['plugin_name']['value'])."','".$SQL->escape($plg_info['plugin_version']['value'])."','".$SQL->escape($plg_info['plugin_author']['value'])."','".$SQL->escape($plg_info['plugin_description']['value'])."','".$SQL->real_escape($plg_uninstall['value'])."'"
-										);
-						($hook = kleeja_run_hook('qr_insert_plugininfo_crtplgxml_func')) ? eval($hook) : null; //run hook
-						$SQL->build($insert_query);
-	
-						$new_plg_id	=	$SQL->insert_id();
-						
-						//then
-							if(is_array($plg_hooks['hook']))
-							{
-								if(array_key_exists("attributes",$plg_hooks['hook']))
+							//insert in plugin table 
+							$insert_query = array(
+											'INSERT'	=> 'plg_name, plg_ver, plg_author, plg_dsc, plg_uninstall',
+											'INTO'		=> "{$dbprefix}plugins",
+											'VALUES'	=> "'".$SQL->escape($plg_info['plugin_name']['value'])."','".$SQL->escape($plg_info['plugin_version']['value'])."','".$SQL->escape($plg_info['plugin_author']['value'])."','".$SQL->escape($plg_info['plugin_description']['value'])."','".$SQL->real_escape($plg_uninstall['value'])."'"
+											);
+							($hook = kleeja_run_hook('qr_insert_plugininfo_crtplgxml_func')) ? eval($hook) : null; //run hook
+							$SQL->build($insert_query);
+		
+							$new_plg_id	=	$SQL->insert_id();
+							
+							//then
+								if(is_array($plg_hooks['hook']))
 								{
-									$plg_hooks['hook'] = array($plg_hooks['hook']);
+									if(array_key_exists("attributes",$plg_hooks['hook']))
+									{
+										$plg_hooks['hook'] = array($plg_hooks['hook']);
+									}
 								}
-							}
 								foreach($plg_hooks['hook'] as $hk)
 								{
 
@@ -772,6 +776,11 @@ function creat_plugin_xml($contents)
 														);
 									($hook = kleeja_run_hook('qr_insert_hooks_crtplgxml_func')) ? eval($hook) : null; //run hook
 									$SQL->build($insert_query);		
+								}
+								//delete cache ..
+								if (file_exists('cache/data_hooks.php'))
+								{
+										unlink('cache/data_hooks.php');
 								}
 						}
 						
@@ -787,19 +796,24 @@ function creat_plugin_xml($contents)
 							}
 								foreach($plg_langs['lang'] as $ln)
 								{
-
 									$lang_word			=	$SQL->real_escape($ln['attributes']['word']);
 									$lang_trans			=	addslashes(strip_tags($ln['value'], '<b><br><br/><i><u>')); //fixed
 
 									$insert_query = array(
-														'INSERT'	=> 'word, trans, lang_id',
-														'INTO'		=> "{$dbprefix}lang",
-														'VALUES'	=> "'". $lang_word ."','".$lang_trans."', '".$config['language']."'"
-														);
+															'INSERT'	=> 'word, trans, lang_id',
+															'INTO'		=> "{$dbprefix}lang",
+															'VALUES'	=> "'". $lang_word ."','".$lang_trans."', '".$config['language']."'"
+															);
 									($hook = kleeja_run_hook('qr_insert_langs_crtplgxml_func')) ? eval($hook) : null; //run hook
 									$SQL->build($insert_query);		
 								}
-						}					
+								
+								//delete cache ..
+								if (file_exists('cache/data_lang_' . $config['language'] . '.php'))
+								{
+										unlink('cache/data_lang_' . $config['language'] . '.php');
+								}
+						}	
 					
 					if(sizeof($plg_errors)<1) 
 					{
@@ -815,7 +829,10 @@ function creat_plugin_xml($contents)
 				return false;
 }	  
 	    
-//hook systerm 
+/*
+*run hooks of kleeja
+* parameter : hook_name: name of hook or place that will run at.
+*/
 function kleeja_run_hook ($hook_name)
 {
 	global $all_plg_hooks;
@@ -823,11 +840,13 @@ function kleeja_run_hook ($hook_name)
 	if(defined('STOP_HOOKS') || !isset($all_plg_hooks[$hook_name])) return false;
 
 	return implode("\n", $all_plg_hooks[$hook_name]);
-
 }
-	  
-//admin functions
-//types of ext
+
+/*
+*admin function for extensions types
+*parameters : id : type id
+*					def : default or not
+*/
 function ch_g ($id,$def)
 {
 		global $lang;
@@ -850,13 +869,19 @@ function ch_g ($id,$def)
 		return $show;
 }  
 
-//info 
+/*
+* print inforamtion message 
+* parameters : msg : text that will show as inforamtion
+					title : <title>title of page</title>
+					exit : stop script after showing msg 
+*/
 function kleeja_info($msg,$title='', $exit=true)
 {
 	global $text, $tpl;
 	
 				($hook = kleeja_run_hook('kleeja_info_func')) ? eval($hook) : null; //run hook
 				
+				// assign {text} in info template
 				$text	= $msg;
 				//header
 				Saaheader($title);
@@ -869,16 +894,21 @@ function kleeja_info($msg,$title='', $exit=true)
 				{
 					exit();
 				}
-			
 }
 
-//err
+/*
+* print error message 
+* parameters : msg : text that will show as error mressage
+					title : <title>title of page</title>
+					exit : stop script after showing msg 
+*/
 function kleeja_err($msg,$title='', $exit=true)
 {
 	global $text, $tpl;
 	
 				($hook = kleeja_run_hook('kleeja_err_func')) ? eval($hook) : null; //run hook
 				
+				// assign {text} in err template
 				$text	= $msg;
 				//header
 				Saaheader($title);
@@ -891,45 +921,54 @@ function kleeja_err($msg,$title='', $exit=true)
 				{
 					exit();
 				}
-			
 }
 
-//admin
-//info 
+/*
+* print inforamtion message in admin panel
+* parameters : msg : text that will show as inforamtion
+					title : <title>title of page</title>
+					exit : stop script after showing msg 
+*/
 function kleeja_adm_info($msg,$title='', $exit=true)
 {
 	global $text, $tpl;
 	
 			($hook = kleeja_run_hook('kleeja_adm_info_func')) ? eval($hook) : null; //run hook
 				
+			// assign {text} in admin_info template	
 			$text	= $msg;
 				
 			//header
 			print $tpl->display("admin_header");
-			//index
-			print $tpl->display('admin_info');
+				//info tpl
+				print $tpl->display('admin_info');
 			//footer
 			print $tpl->display("admin_footer");
 					
 			if ($exit)
 			{
 					exit();
-			}
-			
+			}			
 }
 
-//err
-function kleeja_adm_err($msg,$title='', $exit=true)
+/*
+* print error message in admin panel
+* parameters : msg : text that will show as error message
+					title : <title>title of page</title>
+					exit : stop script after showing msg 
+*/
+function kleeja_adm_err($msg, $title='', $exit=true)
 {
 	global $text, $tpl;
 	
 				($hook = kleeja_run_hook('kleeja_adm_err_func')) ? eval($hook) : null; //run hook
 				
+				// assign {text} in admin_info template	
 				$text	= $msg;
 				//header
 				print $tpl->display("admin_header");
-				//index
-				print $tpl->display('admin_err');
+					//err tpl
+					print $tpl->display('admin_err');
 				//footer
 				print $tpl->display("admin_footer");
 				
@@ -937,11 +976,11 @@ function kleeja_adm_err($msg,$title='', $exit=true)
 				{
 					exit();
 				}
-			
 }
 
 /*
-current page 
+* return current page 
+* parameters : none
 */
 function kleeja_get_page ()
 {
@@ -984,16 +1023,14 @@ function kleeja_get_page ()
 		}
 	}
 
-
-return $location;
-
+	return $location;
 }
 
 
 /**
-** debug
+** show debug information 
+** parameters: none
 **/
-
 function kleeja_debug ()
 {
 	global $SQL,$do_gzip_compress, $all_plg_hooks;
@@ -1009,92 +1046,91 @@ function kleeja_debug ()
 					$base_memory_usage	=	0;
 					$memory_usage -= $base_memory_usage;
 					$memory_usage = ($memory_usage >= 1048576) ? round((round($memory_usage / 1048576 * 100) / 100), 2) . ' MB' : (($memory_usage >= 1024) ? round((round($memory_usage / 1024 * 100) / 100), 2) . ' KB' : $memory_usage . ' BYTES');
-
 					$debug_output = 'Memory Usage : <i>' . $memory_usage . '</i>';
 				}
 		}
 		
 		//thrn show it
-		print '<br/>';
-		print '<fieldset  dir="ltr" style="background:white"><legend style="font-family: Arial; color:red"><em>[Page Analysis]</em></legend>';
-		print '<p>&nbsp;</p>';
-		print '<p><h2><strong>General Information :</strong></h2></p>';
-		print '<p>Gzip : <i>' . (($do_gzip_compress !=0 )?  "Enabled" : "Disabled") . '</i></p>';
-		print '<p>Queries Number :<i> ' .  $SQL->query_num . ' </i></p>';
-		print '<p>Hook System :<i> ' .  ((!defined('STOP_HOOKS'))?  "Enabled" : "Disabled"). ' </i></p>';
-		print '<p>Active Hooks :<i> ' .  sizeof($all_plg_hooks). ' </i></p>';
-		print '<p>' . $debug_output . '</p>';
-		print '<p>&nbsp;</p>';
-		print '<p><h2><strong><em>SQL</em> Information :</strong></h2></p> ';
+		echo '<br/>';
+		echo '<fieldset  dir="ltr" style="background:white"><legend style="font-family: Arial; color:red"><em>[Page Analysis]</em></legend>';
+		echo '<p>&nbsp;</p>';
+		echo '<p><h2><strong>General Information :</strong></h2></p>';
+		echo '<p>Gzip : <i>' . (($do_gzip_compress !=0 )?  "Enabled" : "Disabled") . '</i></p>';
+		echo '<p>Queries Number :<i> ' .  $SQL->query_num . ' </i></p>';
+		echo '<p>Hook System :<i> ' .  ((!defined('STOP_HOOKS'))?  "Enabled" : "Disabled"). ' </i></p>';
+		echo '<p>Active Hooks :<i> ' .  sizeof($all_plg_hooks). ' </i></p>';
+		echo '<p>' . $debug_output . '</p>';
+		echo '<p>&nbsp;</p>';
+		echo '<p><h2><strong><em>SQL</em> Information :</strong></h2></p> ';
 		
 		if(is_array($SQL->debugr))
 		{ 
 			foreach($SQL->debugr as $key=>$val)
 			{
-				print '<fieldset name="sql"  dir="ltr" style="background:white"><legend><em>query # ['.($key+1) .'</em>]</legend> ';
-				print '<textarea style="font-family:Courier New,monospace;width:99%; background:#F4F4F4" rows="5" cols="10">'.$val[0] .'';
-				print '</textarea>	<br />';
-				print 'Duration :'.$val[1].''; 
-				print '</fieldset>';
-				print '<br/><br/>';
+				echo '<fieldset name="sql"  dir="ltr" style="background:white"><legend><em>query # [' . ($key+1) . '</em>]</legend> ';
+				echo '<textarea style="font-family:Courier New,monospace;width:99%; background:#F4F4F4" rows="5" cols="10">' . $val[0] . '';
+				echo '</textarea>	<br />';
+				echo 'Duration :' . $val[1] . ''; 
+				echo '</fieldset>';
+				echo '<br/><br/>';
 			}
 		}
 		else
 		{
-			print '<p><b>NO SQLs</b></p>';
+			echo '<p><b>NO SQLs</b></p>';
 		}
 		
-		print '<p>&nbsp;</p><p><h2><strong><em>HOOK</em> Information :</strong></h2></p> ';
+		echo '<p>&nbsp;</p><p><h2><strong><em>HOOK</em> Information :</strong></h2></p> ';
 		
 		if(sizeof($all_plg_hooks) > 0)
 		{ 
 				foreach($all_plg_hooks as $k=>$v)
 				{
-					foreach($v as $p=>$c) $p=$p; $c=$c; // axactly 
+					foreach($v as $p=>$c) $p=$p; $c=$c; // exactly 
 					
-					print '<fieldset name="hook"  dir="ltr" style="background:white"><legend><em>Plugin  # [' . $p . ']</em></legend>';
-					print '<textarea style="font-family:Courier New,monospace;width:99%; background:#F4F4F4" rows="5" cols="10">'. htmlspecialchars($c) .'</textarea><br />';
-					print 'for hook_name :' . $k . '</fieldset><br/><br/>';
-
+					echo '<fieldset name="hook"  dir="ltr" style="background:white"><legend><em>Plugin  # [' . $p . ']</em></legend>';
+					echo '<textarea style="font-family:Courier New,monospace;width:99%; background:#F4F4F4" rows="5" cols="10">' . htmlspecialchars($c) . '</textarea><br />';
+					echo 'for hook_name :' . $k . '</fieldset><br/><br/>';
 				}
-
 		}
 		else
 		{
-			print '<p><b>NO-HOOKS</b></p>';
+			echo '<p><b>NO-HOOKS</b></p>';
 		}
 		
-		print '<br/><br/><br/></fieldset>';
-
+		echo '<br/><br/><br/></fieldset>';
 }
 
-//big_error
-function big_error ($error_title, $msg_text)
+/*
+* show error of critical problem !
+* parameter: error_title : title of prblem
+*					msg_text: message of problem
+*/
+function big_error ($error_title,  $msg_text)
 {
-
-		($hook = kleeja_run_hook('kleeja_big_error_func')) ? eval($hook) : null; //run hook
-		
-		print '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">';
-		print '<html xmlns="http://www.w3.org/1999/xhtml">';
-		print '<head>';
-		print '<meta http-equiv="Content-Language" content="en-us" />';
-		print '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />';
-		print '<title>Error In Kleeja</title>';
-		print '</head>';
-		print '<body>';
-		print '<p style="color: #FF0000;"><strong>Error In Kleeja : [<span  style="color: #800000;">&nbsp; '. $error_title .' </span>&nbsp;]</strong></p>';
-		print '<div style="border: 1px dashed #808080;background-color: #FFF7F4; width: 70%;font-family:Arial">'. $msg_text .'</div>';
-		print '</body>';
-		print '</html>';
-		
+		echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">';
+		echo '<html xmlns="http://www.w3.org/1999/xhtml">';
+		echo '<head>';
+		echo '<meta http-equiv="Content-Language" content="en-us" />';
+		echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />';
+		echo '<title>Error In Kleeja</title>';
+		echo '</head>';
+		echo '<body>';
+		echo '<p style="color: #FF0000;"><strong>Error In Kleeja : [<span  style="color: #800000;">&nbsp; '. $error_title .' </span>&nbsp;]</strong></p>';
+		echo '<div style="border: 1px dashed #808080;background-color: #FFF7F4; width: 70%;font-family:Arial">'. $msg_text .'</div>';
+		echo '</body>';
+		echo '</html>';
 		exit();
-
 }
 
-/// for our extentions and plugins
+/*check for word in current language , if not add it
+*	parameters : word : language word as in $lang[word]
+						trans : translation of this word as in $lang[word] = trans;
+						language : witch languge will add to 
+*/
 function kj_lang($word, $trans, $language=false)
 {
-global $lang, $SQL, $config, $$dbprefix;
+	global $lang, $SQL, $config, $dbprefix;
 
 	($hook = kleeja_run_hook('kleeja_kj_lang_func')) ? eval($hook) : null; //run hook
 			
@@ -1106,14 +1142,14 @@ global $lang, $SQL, $config, $$dbprefix;
 	}
 	else
 	{
-		$lang_word			=	$SQL->real_escape($word);
-		$lang_trans			=	addslashes(strip_tags($trans, '<b><br><br/><i><u>')); //fixed
+		$lang_word		=	$SQL->real_escape($word);
+		$lang_trans		=	addslashes(strip_tags($trans, '<b><br><br/><i><u>')); //fixed
 		$language			=	($language!==false) ?  $language : $config['language'];
 		$insert_query = array(
-							'INSERT'	=> 'word, trans, lang_id',
-							'INTO'		=> "{$dbprefix}lang",
-							'VALUES'	=> "'". $lang_word ."','".$lang_trans."', '".$language ."'"
-														);
+										'INSERT'	=> 'word, trans, lang_id',
+										'INTO'		=> "{$dbprefix}lang",
+										'VALUES'	=> "'". $lang_word ."','".$lang_trans."', '".$language ."'"
+									);
 		($hook = kleeja_run_hook('qr_insert_lang_kj_lang_func')) ? eval($hook) : null; //run hook
 		$SQL->build($insert_query);		
 		
@@ -1128,7 +1164,10 @@ global $lang, $SQL, $config, $$dbprefix;
 
 }
 
-//some from mybb
+/*
+* get remote files
+* parameters : url : link of file
+*/
 function fetch_remote_file($url)
 {
 
@@ -1149,19 +1188,14 @@ function fetch_remote_file($url)
 	{
 	    $url_parsed = parse_url($url);
 	    $host = $url_parsed["host"];
-	    $port = $url_parsed["port"];
-	    if ($port==0)
-		{
-	        $port = 80;
-		}
-		
+	    $port = ($url_parsed["port"] == 0) ? 80 : $url_parsed["port"];
 		$path = $url_parsed["path"];
 	    
 		if ($url_parsed["query"] != "")
 		{
 			$path .= "?" . $url_parsed["query"];
 		}
-		
+	
 	    $out = "GET $path HTTP/1.0\r\nHost: $host\r\n\r\n";
 
 	    $fp = fsockopen($host, $port, $errno, $errstr, 30);
@@ -1171,25 +1205,80 @@ function fetch_remote_file($url)
 	    while (!feof($fp))
 		{
 	        $s = fgets($fp, 1024);
-	        if ( $body )
+	        if ($body)
 			{
 	            $in .= $s;
 	        }
 			
-			if ( $s == "\r\n" )
+			if ($s == "\r\n")
 			{
 				$body = true;
 			}
 	    }
 	   
 	    fclose($fp);
-	   
 	    return $in;
-		
 	}
 	else
 	{
 		return implode("", file($url));
 	}
 }
+
+/*
+* for delete changes in any template
+*paramters : array : this array will include name of template and code
+							will delete as name=>code
+*/
+function delete_change_styles($array)
+{
+	global $dbprefix, $SQL, $lang, $config;
+	
+	if(!is_array($array)) return false;
+	require "s_strings.php";
+	$finder	=	new sa_srch;
+
+	foreach($array as $tplname=>$codes)
+	{
+		$finder->find_word		=	$codes;
+		$finder->another_word	=	'<!-- auto delete k l e e j a . c o m -->';
+		//get template content and do wut we have to do , then updated .. 
+		$query = array(
+								'SELECT'	=> 'template_content',
+								'FROM'		=> "{$dbprefix}templates",
+								'WHERE'	=>	"style_id='".intval($config['style'])."' AND template_name='". $tplname ."'"
+							);
+		($hook = kleeja_run_hook('qr_select_delete_change_styles_func')) ? eval($hook) : null; //run hook
+		$result	= $SQL->fetch_array($SQL->build($query));
+		//no conents					
+		if(!$result['template_content']) continue;
+		
+		$finder->text	=	$result['template_content'];
+		$finder->do_search(1);
+									
+		if($finder->text != $result['template_content'])
+		{
+					//update
+					$update_query = array(
+												'UPDATE'	=> "{$dbprefix}templates",
+												'SET'		=> "template_content = '". $SQL->real_escape($finder->text) ."'",
+												'WHERE'		=>	"style_id='". intval($config['style']) ."' AND template_name='". $tplname . "'"
+											);
+					($hook = kleeja_run_hook('qr_update_delete_change_styles_func')) ? eval($hook) : null; //run hook
+					if ($SQL->build($update_query))
+					{
+						//delete cache ..
+						if (file_exists('cache/' . $config['style'] . '_' .$tplname . '.php'))
+						{
+								unlink('cache/' . $config['style'] . '_' . $tplname . '.php');
+						}
+					}
+		}
+
+	}
+}#end fun
+
+
+
+
 ?>

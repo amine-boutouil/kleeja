@@ -5,6 +5,7 @@
 # Filename : s_strings.php
 # purpose : find strings in texrt and add after in another text or replace it ..
 # copyright 2007-2008 Kleeja.com ..
+#license http://opensource.org/licenses/gpl-license.php GNU Public License
 # last edit by : saanina
 ##################################################
 
@@ -24,7 +25,7 @@ if (!defined('IN_COMMON'))
 // 6 : find and add before in the same liner
 
 //more discussions about this file , mail me at saanina@gmail.com 
-// for real discuss 
+// for real discuss , and in http://moffed.com
 // for try use the code in the end of  this file ;) 
 
 class sa_srch

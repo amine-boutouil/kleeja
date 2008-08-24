@@ -29,9 +29,9 @@
 		{
 			while($row=$SQL->fetch_array($result))
 			{
-					$arr[] = array( plg_id =>$row['plg_id'],
-									plg_name =>$row['plg_name'].(($row['plg_disabled']==1)? ' [x]': ''),
-									plg_disabled =>$row['plg_disabled']
+					$arr[] = array( 'plg_id'			=>$row['plg_id'],
+											'plg_name'		=>$row['plg_name'].(($row['plg_disabled']==1)? ' [x]': ''),
+											'plg_disabled'	=>$row['plg_disabled']
 								);
 
 			}
@@ -86,11 +86,11 @@
 				
 				case '3': // del the plguin
 				
-					
 							//before delete we have look for unistalling 
 							$query = array(
 										'SELECT'	=> 'plg_uninstall',
-										'FROM'		=> "{$dbprefix}plugins"
+										'FROM'		=> "{$dbprefix}plugins",
+										'WHERE'		=> "plg_id='". $plg_id ."'"
 										);
 											
 							$result = $SQL->fetch_array($SQL->build($query));

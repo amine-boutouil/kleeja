@@ -5,7 +5,8 @@
 # Filename : common.php 
 # purpose :  pages system 
 # copyright 2007-2008 Kleeja.com ..
-# Author : Based on class from phpclasses.org
+#license http://opensource.org/licenses/gpl-license.php GNU Public License
+# Author : Based on class from phpclasses.org, i forgot who was.
 # last edit by : saanina
 ##################################################
 

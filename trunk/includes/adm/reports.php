@@ -14,7 +14,7 @@
 	
 		//for style ..
 		$stylee 		= "admin_reports";
-		$action 		= "admin.php?cp=reports";
+		$action 		= "admin.php?cp=reports&amp;page=" .  intval($GET['page']);
 
 		$query = array(
 					'SELECT'	=> '*',
@@ -107,7 +107,7 @@
 		//after submit 
 	if (isset($_POST['submit']))
 	{
-		$text	= $lang['REPORTS_UPDATED'];
+		$text	= $lang['REPORTS_UPDATED'] . '<meta HTTP-EQUIV="REFRESH" content="0; url=./admin.php?cp=reports&amp;page=' . intval($_GET['page']). '">' ."\n";
 		$stylee	= "admin_info";
 	}
 ?>

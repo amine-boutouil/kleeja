@@ -4,8 +4,9 @@
 #
 # Filename : common.php 
 # purpose :  captcha
-# Author    :  Julien PACHET     email : julien@pachet.com 
 # copyright 2007-2008 Kleeja.com ..
+#license http://opensource.org/licenses/gpl-license.php GNU Public License
+# based on class of  :Julien PACHET ,email : julien@pachet.com  ,and he disterburted for free
 # last edit by : saanina
 ##################################################
 

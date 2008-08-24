@@ -16,7 +16,7 @@
 	so any problem , bugs or errors  you must tell us , 
 	even you are a cracker ;) . 
 
-	www.kleeja.com
+	http://www.kleeja.com/bugs/
 	
 	//wuts "kleeja" mean ? 
 	you have to go wikipedia , but you will not find any thing about this word, why ? 

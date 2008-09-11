@@ -390,7 +390,6 @@ switch ($_GET['go'])
 		
 	break; 
 
-	($hook = kleeja_run_hook('another_case_go_page')) ? eval($hook) : null; //run hook
 	
 	default:
 	($hook = kleeja_run_hook('default_go_page')) ? eval($hook) : null; //run hook	

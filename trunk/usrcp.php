@@ -575,8 +575,6 @@ switch ($_GET['go'])
 		
 		break; 
 		
-		($hook = kleeja_run_hook('another_case_usrcp_page')) ? eval($hook) : null; //run hook
-		
 		default:
 		
 		($hook = kleeja_run_hook('default_usrcp_page')) ? eval($hook) : null; //run hook

@@ -32,7 +32,7 @@ class ocr_captcha
 	
     function ocr_captcha($long=6,$lx=120,$ly=30,$nb_noise=20)
 	{
-      $this->key		=	md5("HI, WITH NEW LIFE1#! , SAANINA IS ME#! , NO PROBLEM!#! Kleeja is updated");
+      $this->key		=	md5("HI, WITH NEW LIFE1#! , SAANINA IS ME#! , NO PROBLEM!#! Kleeja is updated...");
       $this->long		=	$long;
 	   $this->lx		=	$lx;
       $this->ly			=	$ly;

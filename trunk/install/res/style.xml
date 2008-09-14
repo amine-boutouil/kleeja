@@ -618,7 +618,7 @@ document.getElementById("url").innerHTML = "<a href=\"{url_file}\" target=\"baln
 
 </form>
 
-<div id="loadbox"></div>
+<div id="loadbox"><img src="./images/loading.gif" alt="loading ..." /></div>
 <!---- END  FOR UPLOAD BOXES ---->
 
 <br/>
@@ -1079,8 +1079,8 @@ document.getElementById('mail_here').innerHTML= iee;
 		<select id="user_system" name="user_system">
 		<option <IF NAME="user_system_normal">selected="selected"</IF> value="1">{lang.NORMAL}</option>
 		<option <IF NAME="user_system_phpbb">selected="selected"</IF> value="2">{lang.W_PHPBB}</option>
-		<option <IF NAME="user_system_vb">selected="selected"</IF> value="3">{lang.W_MYSBB}</option>
-		<option <IF NAME="user_system_mysbb">selected="selected"</IF> value="4">{lang.W_VBB}</option>		
+		<option <IF NAME="user_system_vb">selected="selected"</IF> value="3">{lang.W_VBB}</option>
+		<option <IF NAME="user_system_mysbb">selected="selected"</IF> value="4">{lang.W_MYSBB}</option>		
 		</select>
 
 		</label></td>

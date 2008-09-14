@@ -45,7 +45,7 @@ class SSQL
                           $this->db_password = 'hidden';
 
 						  
-                        $this->connect_id	= mysql_connect($this->host,$this->db_username,$db_password) or die($this->error_msg("ERROR: CANT CONNECT"));
+                        $this->connect_id	= @mysql_connect($this->host,$this->db_username,$db_password) or die($this->error_msg("ERROR: CANT CONNECT"));
 						//version of mysql
 						$this->mysql_version = mysql_get_server_info($this->connect_id);
 						
@@ -53,7 +53,7 @@ class SSQL
 						{
 							if(!empty($db_name))
 							{
-								$dbselect = mysql_select_db($this->db_name);
+								$dbselect = @mysql_select_db($this->db_name);
 								
 								if ($dbselect)
 								{
@@ -204,7 +204,7 @@ class SSQL
 						if (isset($query['JOINS']))
 						{
 							foreach ($query['JOINS'] as $cur_join)
-								$sql .= ' '.key($cur_join).' '.current($cur_join).' ON '.$cur_join['ON'];
+								$sql .= ' '.key($cur_join).' '. @current($cur_join).' ON '.$cur_join['ON'];
 						}
 
 						if (!empty($query['WHERE']))
@@ -375,26 +375,18 @@ class SSQL
 				{
                           $error_no  = mysql_errno();
                           $error_msg = mysql_error();
-						  $error_sql = current($this->debugr[$this->query_num+1]);
+						  $error_sql = @current($this->debugr[$this->query_num+1]);
 
-                          echo "<style>BODY{FONT-FAMILY:tahoma;FONT-SIZE:12px;}
-								textarea {color: #FF0000;background-color: #FFECEC;border-width: 1px;
-								border-color: #000000;border-style: solid;}</style>";
+                          echo "<style>BODY{FONT-FAMILY:tahoma;FONT-SIZE:12px;}.error {}</style>";
                           echo "<html><head></head><title>ERROR IM MYSQL</title><body>";
-                          echo '<br /><div style="text-align:center;color:red;"><b>';
-                          echo '<textarea  readonly="readonly" style="width: 500px; height: 161px" dir="ltr">';
-						  echo "
-Sorry , There is an error in mysql , error : $msg
-
---[query]--------------------------
-$error_sql
-----------------------------------
-
-[$error_no : $error_msg]
-							
-Script: Kleeja
-www.kleeja.com
-</textarea>";
+                          echo '<br />';
+                          echo '<div class="error">';
+                          echo " <a href='#' onclick='window.location.reload( false );'>click to Refresh this page ...</a><Br/>";
+						  echo "<h2>Sorry , There is an error in mysql " . ($msg !='' ? ", error : $msg" : "") ."</h2>";
+						if($error_sql != '')
+							echo "<br/>--[query]-------------------------- <br/>$error_sql<br/>---------------------------------<br/><br/>";
+						  echo "[$error_no : $error_msg] <br/>";
+						  echo "<br/><br/><strong>Script: Kleeja <br/><a href='http://www.kleeja.com'>Kleeja Website</a></strong>";
                           echo '</b></div>';
                           echo '</body></html>';
 

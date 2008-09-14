@@ -26,6 +26,9 @@ class usrcp
 						
 						($hook = kleeja_run_hook('data_func_usr_class')) ? eval($hook) : null; //run hook
 						
+						//fix it 
+						if($config['user_system'] == '') $config['user_system'] = 1;
+						
 						if ($config['user_system'] == 1) //normal 
 						{
 							return $this->normal($name,$pass);
@@ -217,12 +220,12 @@ class usrcp
 					($hook = kleeja_run_hook('qr_select_usrdata_vb_usr_class')) ? eval($hook) : null; //run hook				
 					$result_salt = $SQLVB->build($query_salt);
 				
-					if ($SQLVB->num_rows($result_salt) != 0  ) 
+					if ($SQLVB->num_rows($result_salt) != 0) 
 					{
-						while($row1=$SQLVB->fetch_array($sql))
+						while($row1=$SQLVB->fetch_array($result_salt))
 						{
 							
-							$pass = md5($pass . $row1[salt]);  // without normal md5
+							$pass = md5($pass . $row1['salt']);  // without normal md5
 							
 							$query = array(
 										'SELECT'	=> '*',
@@ -233,9 +236,9 @@ class usrcp
 							$result = $SQLVB->build($query);
 							
 						
-							if ($SQLVB->num_rows($result) != 0  ) 
+							if ($SQLVB->num_rows($result) != 0) 
 							{
-								while($row=$SQLVB->fetch_array($sql2))
+								while($row=$SQLVB->fetch_array($result))
 								{
 									$_SESSION['USER_ID']	=	$row['userid'];
 									$_SESSION['USER_NAME']	=	$row['username'];

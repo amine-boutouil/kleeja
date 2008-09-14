@@ -1,12 +1,18 @@
 /*
  javascript for kleeja 
- by saanina@gmail.com
  www.kleeja.com
-
 */
+
 	var totalupload_num=number_of_uploads-1;
 	
-	function $(id) { return  document.getElementById(id);}
+	function $(id) {
+		if(document.all){
+         	return eval("document.all['" + id + "']");
+    	}
+		else{
+			return document.getElementById(id);
+		}
+	}
 	
 	function makeupload(type){
 		var value = (type==1) ?  $("upload_num").value : $("upload_f_num").value;
@@ -39,24 +45,22 @@
 		if (value.value != 1 )value.value--;
 	}
 	function form_submit() {
-		var load = document.getElementById('loadbox');
-		var uploader = document.getElementById("uploader");
-		load.style.display = 'block';
-		load.innerHTML = '<img src="images/loading.gif" id="loading">';	
-		
+		var load = $('loadbox');
+		var uploader = $("uploader");
+		load.style.display = "inline";
 		uploader.style.display = "none";
 		document.uploader.submit();
 	}
 	
 	function accept_terms (sub,ch){
-		var submit = document.getElementById(sub);
-		var checker = document.getElementById(ch);
+		var submit = $(sub);
+		var checker = $(ch);
 		if ( checker.checked ){submit.disabled = ""; }else{submit.disabled = "disabled"; }
 	}
 
 	function showhide() {
-		var txt = document.getElementById("texttype");
-		var fle = document.getElementById("filetype");
+		var txt = $("texttype");
+		var fle = $("filetype");
 
 		if (txt.style.display == 'none'){
 			txt.style.display = 'block';

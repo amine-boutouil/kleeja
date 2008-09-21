@@ -196,7 +196,7 @@ case 'data' :
 			exit();
 		}
 
-		 if (!eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$", trim($_POST['email'])))
+		 if (strpos($_POST['email'],'@') === false)
 		 {
 			print $lang['WRONG_EMAIL'];
 			print $footer_inst;

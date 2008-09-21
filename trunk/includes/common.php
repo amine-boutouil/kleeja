@@ -128,19 +128,19 @@
 	
 	//site close ..
 	$login_page = '';
-	if ($config['siteclose'] == 1 && !$usrcp->admin() &&  $_GET['go']!='login' && $_GET['go']!='logout' && !IN_ADMIN)
+	if ($config['siteclose'] == '1' && !$usrcp->admin() &&  $_GET['go']!='login' && $_GET['go']!='logout' && !defined('IN_ADMIN'))
 	{
-		kleeja_info($config['closemsg'],$lang['SITE_CLOSED']);
+		kleeja_info($config['closemsg'], $lang['SITE_CLOSED']);
 	}
 	
 	//exceed total size 
-	if (($stat_sizes >= ($config['total_size'] *(1048576))) && $_GET['go']!='login' && $_GET['go']!='logout' && !IN_ADMIN)// convert megabytes to bytes
+	if (($stat_sizes >= ($config['total_size'] *(1048576))) && $_GET['go']!='login' && $_GET['go']!='logout' && !defined('IN_ADMIN'))// convert megabytes to bytes
 	{ 
-		kleeja_info($lang['SIZES_EXCCEDED'],$lang['STOP_FOR_SIZE']);
+		kleeja_info($lang['SIZES_EXCCEDED'], $lang['STOP_FOR_SIZE']);
 	}
 	
 	//calculate  onlines ...  
-	if ($config['allow_online'] == 1)
+	if ($config['allow_online'] == '1')
 	{
 		KleejaOnline();
 	}

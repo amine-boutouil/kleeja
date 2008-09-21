@@ -31,8 +31,8 @@ switch ($_GET['sty_t'])
 
 		while($row=$SQL->fetch_array($result))
 		{
-				$arr[] = array( 'style_id'			=>$row['list_id'],
-										'style_name'	=>$row['list_name'],
+				$arr[] = array( 'style_id'		=> $row['list_id'],
+								'style_name'	=> $row['list_name'],
 							);
 
 		}
@@ -42,9 +42,9 @@ switch ($_GET['sty_t'])
 		//after submit
 		if(isset($_GET['style_choose']))
 		{
-			$_POST['submit']			= true;
-			$_POST['style_choose']	=	$_GET['style_choose'];
-			$_POST['method']			=	$_GET['method'];
+			$_POST['submit']		= true;
+			$_POST['style_choose']	= $_GET['style_choose'];
+			$_POST['method']		= $_GET['method'];
 		}
 		
 		if (isset($_POST['submit']))
@@ -91,14 +91,14 @@ switch ($_GET['sty_t'])
 											);
 
 											
-							if (!$SQL->build($query_del)) {die($lang['CANT_DELETE_SQL']);}	
+							if (!$SQL->build($query_del)) die($lang['CANT_DELETE_SQL']);
 											
 							$query_del2 = array(
 											'DELETE'	=> "{$dbprefix}templates",
 											'WHERE'		=> 'style_id='. $style_id
 											);		
 											
-							if (!$SQL->build($query_del2)) {die($lang['CANT_DELETE_SQL'].' 2');}	
+							if (!$SQL->build($query_del2)) die($lang['CANT_DELETE_SQL'].' 2');
 							
 							//show msg
 							$text	= $lang['STYLE_DELETED'] . '<meta HTTP-EQUIV="REFRESH" content="2; url=./admin.php?cp=styles">' ."\n";
@@ -262,7 +262,7 @@ switch ($_GET['sty_t'])
 										'WHERE'		=>	"style_id='$style_id' AND template_name='$tpl_name'"
 										);
 															
-						if (!$SQL->build($query_del)) {die($lang['CANT_DELETE_SQL']);}	
+						if (!$SQL->build($query_del)) die($lang['CANT_DELETE_SQL']);
 						
 						//show msg
 						$text	= $lang['TPL_DELETED'].'<meta HTTP-EQUIV="REFRESH" content="2; url=./admin.php?cp=styles&amp;style_choose=' . $style_id . '">' ."\n";
@@ -280,7 +280,7 @@ switch ($_GET['sty_t'])
 			//tpl name 
 			$tpl_name			=	$SQL->escape($_POST['tpl_choose']);				
 			//tpl contents 
-			$template_content	=	$_POST['template_content'];	
+			$template_content	=	$SQL->real_escape($_POST['template_content']);	
 		
 			//update
 			$update_query = array(

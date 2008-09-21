@@ -250,7 +250,7 @@ INSERT INTO `{$dbprefix}exts` (`id`, `group_id`, `ext`, `gust_size`, `gust_allow
 (66, 9, 0x6f6767, 0, 0, 0, 0),(67, 9, 0x6f676d, 0, 0, 0, 0);";
 
 
-$install_sqls['stats_insert'] = "INSERT INTO `{$dbprefix}stats`  VALUES (0,1,0,0,0,0,0,0,0,'',0,0,0,0,'','','')";
+$install_sqls['stats_insert'] = "INSERT INTO `{$dbprefix}stats`  VALUES (0,1,0,0," . time() . ",0,0,0,0,'',0,0,0,0,'','','')";
 
 $install_sqls['users_insert'] = "INSERT INTO `{$dbprefix}users` (`id`,`name` ,`password` ,`mail`,`admin`) VALUES ('1','$user_name', '$user_pass', '$user_mail','1')";
 

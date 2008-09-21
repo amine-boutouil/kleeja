@@ -49,7 +49,7 @@
 						//delete cache ..
 						if (file_exists('cache/data_config.php'))
 						{
-							@unlink('cache/data_config.php');
+							unlink('cache/data_config.php');
 						}
 					}
 					else

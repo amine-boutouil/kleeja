@@ -326,9 +326,9 @@ if(!defined('STOP_HOOKS'))
 // administarator sometime need some files and delete other .. we
 // do that for him .. becuase he has no time .. :)            last_down - $config[del_f_day]
 //
-if($config['del_f_day'] > 0)
+if(intval($config['del_f_day']) > 0)
 {
-	if(!$stat_last_f_del || empty($stat_last_f_del)) $stat_last_f_del = time();
+	if(!$stat_last_f_del || $stat_last_f_del == '') $stat_last_f_del = time();
 	
     if (gmdate( "j" ,$stat_last_f_del) < gmdate( "j" ,time()))
     {
@@ -347,12 +347,12 @@ if($config['del_f_day'] > 0)
 		{
 					$query_del = array(
 									'DELETE'	=> "{$dbprefix}files",
-									'WHERE'		=> "id='".intval($row['id'])."' AND last_down < $totaldays"
+									'WHERE'		=> "id='" . intval($row['id']) . "' AND last_down < $totaldays"
 									);
 									
-					($hook = kleeja_run_hook('qr_del_delfiles_cache')) ? eval($hook) : null; //run hook				
-					if (!$SQL->build($query_del)) {die($lang['CANT_DELETE_SQL']);}	
-
+					($hook = kleeja_run_hook('qr_del_delfiles_cache')) ? eval($hook) : null; //run hook	
+								
+					if (!$SQL->build($query_del)) die($lang['CANT_DELETE_SQL']);
 
 					//delete from folder ..
 					if (file_exists($row['folder'] . "/" . $row['name']))
@@ -374,7 +374,7 @@ if($config['del_f_day'] > 0)
 						);
 						
 		($hook = kleeja_run_hook('qr_update_delfiles_date_cache')) ? eval($hook) : null; //run hook
-		if (!$SQL->build($update_query)){ die($lang['CANT_UPDATE_SQL']);}
+		if (!$SQL->build($update_query)) die($lang['CANT_UPDATE_SQL']);
 
     } //stat_del
 }#no automated delete

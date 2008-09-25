@@ -122,10 +122,10 @@ function Saafooter()
 			$hksys			= (!defined('STOP_HOOKS'))?  "Enabled" : "Disabled";
 			$endtime		= get_microtime();
 			$loadtime		= number_format($endtime - $starttm , 4);
-			$queries_num= $SQL->query_num;
+			$queries_num	= $SQL->query_num;
 			$time_sql		= round($SQL->query_num / $loadtime) ;
 			$link_dbg		= (($usrcp->admin()) ? "[ <a href=" .  str_replace('debug','',kleeja_get_page()) . ((strpos(kleeja_get_page(), '?') === false) ? '?' : '&') . "debug>More Details ... </a> ]" : null);
-			$page_stats	= "<b>[</b> GZIP : $gzip - Generation Time: $loadtime Sec [SQL: $time_sql % ] - Queries: $queries_num - Hook System:  $hksys <b>]</b>  " . $link_dbg ;
+			$page_stats	= "<b>[</b> GZIP : $gzip - Generation Time: $loadtime Sec  - Queries: $queries_num - Hook System:  $hksys <b>]</b>  " . $link_dbg ;
 			$tpl->assign("page_stats",$page_stats);
 		}#end statfooter
 
@@ -352,7 +352,7 @@ function get_ban ()
 				//first .. replace all * with something good .
 				$replaceIt = str_replace("*", '[0-9]{1,3}', $ip2);
 				
-				if ($ip == $ip2 || eregi($replaceIt , $ip))
+				if ($ip == $ip2 || @eregi($replaceIt , $ip))
 				{
 					($hook = kleeja_run_hook('banned_get_ban_func')) ? eval($hook) : null; //run hook	
 					kleeja_info($lang['U_R_BANNED'],$lang['U_R_BANNED']);

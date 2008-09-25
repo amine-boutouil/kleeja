@@ -60,7 +60,7 @@ class usrcp
 					$query = array(
 								'SELECT'	=> '*',
 								'FROM'		=> "`{$dbprefix}users`",
-								'WHERE'		=> "name='$name' AND password='$pass'"
+								'WHERE'		=> "name='". $SQL->escape($name) . "' AND password='$pass'"
 								);
 								
 					($hook = kleeja_run_hook('qr_select_usrdata_n_usr_class')) ? eval($hook) : null; //run hook			
@@ -132,7 +132,7 @@ class usrcp
 						$query2 = array(
 											'SELECT'	=> '*',
 											'FROM'		=> "`{$forum_prefix}users`",
-											'WHERE'		=>"username_clean='" . strtolower($name) . "'"
+											'WHERE'		=>"username_clean='" . strtolower($SQLBB->escape($name)) . "'"
 											);
 											
 						$result2 = $SQLBB->build($query2);					
@@ -157,7 +157,7 @@ class usrcp
 						$query = array(
 											'SELECT'	=> '*',
 											'FROM'		=> "`{$forum_prefix}users`",
-											'WHERE'		=>"username='$name' AND user_password='$pass'"
+											'WHERE'		=>"username='". $SQLBB->escape($name) ."' AND user_password='$pass'"
 											);
 								
 					}
@@ -214,7 +214,7 @@ class usrcp
 					$query_salt = array(
 								'SELECT'	=> 'salt',
 								'FROM'		=> "`{$forum_prefix}user`",
-								'WHERE'		=> "username='$name'"
+								'WHERE'		=> "username='". $SQLVB->escape($name) ."'"
 								);
 								
 					($hook = kleeja_run_hook('qr_select_usrdata_vb_usr_class')) ? eval($hook) : null; //run hook				
@@ -230,7 +230,7 @@ class usrcp
 							$query = array(
 										'SELECT'	=> '*',
 										'FROM'		=> "`{$forum_prefix}user`",
-										'WHERE'		=> "username='$name' AND password='$pass'"
+										'WHERE'		=> "username='". $SQLVB->escape($name)."' AND password='$pass'"
 										);
 											
 							$result = $SQLVB->build($query);
@@ -289,7 +289,7 @@ class usrcp
 					$query = array(
 								'SELECT'	=> '*',
 								'FROM'		=> "`{$forum_prefix}member`",
-								'WHERE'		=> "username='$name' AND password='$pass'"
+								'WHERE'		=> "username='". $SQLMS->escape($name)."' AND password='$pass'"
 								);
 								
 					($hook = kleeja_run_hook('qr_select_usrdata_mysbb_usr_class')) ? eval($hook) : null; //run hook	

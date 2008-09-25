@@ -149,7 +149,7 @@ RC5:
 + add new feature for user privacy [can prevent other see his files folder ]
  - hook system now more stable , as styles , language systems.
 - fix update check service ..
-- new check technique for bad files !
++ new check technique for bad files !
 + support phpbb3
 - fix cache file and process
 - fix if extrension of file not small [download.php]
@@ -159,8 +159,13 @@ RC5:
 - fix hooks table 'hook_id' was not auto insertment
  + auto delete codes from style , new function related with plugins system 
 - fix unistall step in plugin 
-- fix clise site bug 
+- fix close site bug 
 - fix email validating in installing error ..
 - fix bug after editing template
+- fix ban system 
+- fix captcha [ rendreing error ]
+- remove SQL percentage in the footer stats 
 
 thank you for reading this file. 
+
+for more details http://kleeja.com/bugs

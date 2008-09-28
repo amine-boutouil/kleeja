@@ -285,7 +285,8 @@ function make_language($def)
 		$data	.= "\n\n\n";
 		$data	.= "//for integration with forums [ must change user systen from admin cp ] \n";
 		$data	.= '$forum_srv		= "localhost";'."// forum database server  \n";
-		$data	.= '$forum_user		= "root";'."// forum database user  \n";
+		$data	.= '$forum_db		= "";'."// forum database   \n";
+		$data	.= '$forum_user		= "";'."// forum database user  \n";
 		$data	.= '$forum_pass		= "";'."// forum database password  \n";
 		$data	.= '$forum_prefix	= "";'."//the perfix before name of forum tables  \n";
 		$data	.= '$forum_path		= "/forum";'."// path of forums  \n";

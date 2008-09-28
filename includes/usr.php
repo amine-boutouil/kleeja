@@ -114,7 +114,11 @@ class usrcp
 					//fix bug .. 
 					if(empty($forum_srv) || empty($forum_user) || empty($forum_db)) return;
 					
-					if(strpos($forum_path, '/') == 0)
+					//check for last / 
+					if($forum_path[strlen($forum_path)] == '/')
+						$forum_path = substr($forum_path, 0, strlen($forum_path));
+					
+					if($forum_path[0] == '/')
 							$forum_path = '..' . $forum_path;
 					else
 							$forum_path = '../'.$forum_path;
@@ -192,6 +196,7 @@ class usrcp
 					}
 					else
 					{
+						$SQLBB->close();
 						return false;
 					}
 				}
@@ -266,7 +271,8 @@ class usrcp
 					}
 					else
 					{
-					return false;
+						$SQLVB->close();
+						return false;
 					}
 				}
 				//mysmartbb
@@ -318,6 +324,7 @@ class usrcp
 					}
 					else
 					{
+						$SQLMS->close();
 						return false;
 					}
 				}

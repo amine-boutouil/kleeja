@@ -490,12 +490,13 @@ function createthumb($name, $ext, $filename, $new_w, $new_h)
 				$timeww	= (int)		time();
 				$user	= (int)		$this->id_user;
 				$code_del=(string)	md5(time());
-				
+				$ip		=  (getenv('HTTP_X_FORWARDED_FOR')) ? getenv('HTTP_X_FORWARDED_FOR') : getenv('REMOTE_ADDR');
+				$ip		= (string)	$SQL->escape($ip);	
 				
 				$insert_query = array(
-									'INSERT'	=> '`name` ,`size` ,`time` ,`folder` ,`type`,`user`,`code_del`',
+									'INSERT'	=> '`name` ,`size` ,`time` ,`folder` ,`type`,`user`,`code_del`,`user_ip`',
 									'INTO'		=> "`{$dbprefix}files`",
-									'VALUES'	=> "'$name', '$size', '$timeww', '$folder','$type', '$user', '$code_del'"
+									'VALUES'	=> "'$name', '$size', '$timeww', '$folder','$type', '$user', '$code_del','$ip'"
 									);
 									
 				($hook = kleeja_run_hook('qr_insert_new_file_kljuploader')) ? eval($hook) : null; //run hook

@@ -1,2 +1,4 @@
+
 RemoveType .php .php3 .phtml .pl .cgi .asp .htm .html 
 php_flag engine off
+

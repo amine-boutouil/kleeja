@@ -67,6 +67,7 @@
 							'tdnum2'	=>($tdnum==2) ? "</tr>" : "",
 						//	'tdnum3'		=>($all_tdnum >= $nums_rows) ? "</tr>" : "",
 							'name'		=>$row['name'],
+							'ip' 		=> $lang['IP'] . ':' . htmlspecialchars($row['user_ip']),
 							'href'		=>$row['folder']."/".$row['name'],
 							'size'		=>$lang['FILESIZE']. ':' . Customfile_size($row['size']),
 							'ups'		=> $lang['FILEUPS'] .' : '.$row['uploads'],

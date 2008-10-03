@@ -25,12 +25,13 @@
 			$rep_than	=  ($_POST['rep']!='') ? 'AND f.report '.(($_POST['rthan']==1) ? '>' : '<').intval($_POST['rep']).' ' : '';
 			$lstd_than	=  ($_POST['lastdown']!='') ? 'AND f.last_down ='.(time()-(intval($_POST['lastdown']) * (24 * 60 * 60))).' ' : '';
 			$exte		=  ($_POST['ext']!='') ? 'AND f.type LIKE \'%'.$SQL->escape($_POST['ext']).'%\' ' : '';
+			$ipp		=  ($_POST['user_ip']!='') ? 'AND f.user_ip LIKE \'%'.$SQL->escape($_POST['user_ip']).'%\' ' : '';
 		
 
 			$query = array(
 							'SELECT'	=> 'f.*',
 							'FROM'		=> "{$dbprefix}files f , {$dbprefix}users u",
-							'WHERE'		=> "$size_than $file_namee $ups_than $exte $rep_than $usernamee $lstd_than $exte",
+							'WHERE'		=> "$size_than $file_namee $ups_than $exte $rep_than $usernamee $lstd_than $exte $ipp",
 							'ORDER BY'	=> 'id DESC'
 						);				
 
@@ -86,15 +87,16 @@
 
 			$user_name = $SQL->fetch_array($SQL->build($query_name));
 			
-			$arr[] = array(id =>$row['id'],
-						name =>"<a href=\"./".$row['folder']."/".$row['name']."\" target=\"blank\">".$row['name']."</a>",
-						size =>Customfile_size($row['size']),
-						ups =>$row['uploads'],
-						time => date("d-m-Y H:a", $row['time']),
-						type =>$row['type'],
-						folder =>$row['folder'],
-						report =>($row['report'] > 4)? "<span style=\"color:red\"><big>".$row['report']."</big></span>":$row['report'],
-						user =>($row['user'] == '-1') ? $lang['GUST'] :  '<a href="'.$userfile.'" target="_blank">'. $user_name['name'] . '</a>',
+			$arr[] = array('id' =>$row['id'],
+						'name' =>"<a href=\"./".$row['folder']."/".$row['name']."\" target=\"blank\">".$row['name']."</a>",
+						'size' =>Customfile_size($row['size']),
+						'ups' =>$row['uploads'],
+						'time' => date("d-m-Y H:a", $row['time']),
+						'type' =>$row['type'],
+						'folder' =>$row['folder'],
+						'report' =>($row['report'] > 4)? "<span style=\"color:red\"><big>".$row['report']."</big></span>":$row['report'],
+						'user' =>($row['user'] == '-1') ? $lang['GUST'] :  '<a href="'.$userfile.'" target="_blank">'. $user_name['name'] . '</a>',
+						'ip' 	=> '<a href="http://www.ripe.net/whois?form_type=simple&full_query_string=&searchtext=' . $row['user_ip'] . '&do_search=Search" target="_new">' . $row['user_ip'] . '</a>',
 						);
 			//
 			$del[$row[id]] = ( isset($_POST["del_".$row['id']]) ) ? $_POST["del_".$row['id']] : "";

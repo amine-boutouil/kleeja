@@ -26,7 +26,7 @@ class ocr_captcha
     var $filename;  // file of captcha picture stored on disk
     var $imagetype="png"; // can also be "png";
     var $public_key;    // public key
-    var $font_file="arial.ttf";
+    var $font_file="./includes/arial.ttf";
    //var $font_file="./includes/DUNGEON.TTF"; for more complix
     var $font_file2="./includes/DUNGEON.GDF";
 	

@@ -93,6 +93,7 @@ CREATE TABLE `{$dbprefix}files` (
   `report` int(10) NOT NULL,
   `user` int(10) NOT NULL default '-1',
   `code_del` varchar(150) collate utf8_bin NOT NULL,
+  `user_ip` VARCHAR( 250 ) NOT NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 ";

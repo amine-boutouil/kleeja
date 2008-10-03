@@ -231,7 +231,7 @@ switch ($_GET['go'])
 			($hook = kleeja_run_hook('begin_fileuser')) ? eval($hook) : null; //run hook
 			
 			//fileuser is closed ?
-			if ($config['enable_userfile'] !=1 && $usrcp->admin()==false)
+			if ($config['enable_userfile'] ==0 && !$usrcp->admin())
 			{
 				kleeja_info($lang['USERFILE_CLOSED'],$lang['CLOSED_FEATURE']);
 			}
@@ -246,17 +246,17 @@ switch ($_GET['go'])
 			//te get userdata!!
 			$data_user = $usrcp->get_data('name, show_my_filecp', $user_id);
 			$user_name		=   (!$data_user['name']) ? false : $data_user['name'];
-			$show_my_filecp	=  $data_user['show_my_filecp'];
+			$show_my_filecp	=  ($config['user_system'] != 1) ? 1 : $data_user['show_my_filecp'];
 			
 			//new feature 1rc5
-			if($show_my_filecp == 1 && ($usrcp->id() != $user_id))
+			if($show_my_filecp == 1 && ($usrcp->id() != $user_id) && !$usrcp->admin())
 			{
-				kleeja_info($lang['USERFILE_CLOSED'],$lang['CLOSED_FEATURE']);		
+				kleeja_info($lang['USERFILE_CLOSED'], $lang['CLOSED_FEATURE']);		
 			}
 			
 			$query = array(
-								'SELECT'		=> 'f.id, f.name, f.folder, f.type',
-								'FROM'			=> "{$dbprefix}files f",
+								'SELECT'	=> 'f.id, f.name, f.folder, f.type',
+								'FROM'		=> "{$dbprefix}files f",
 								'WHERE'		=> "f.user='" . $user_id . "'",
 								'ORDER BY'	=>	'f.id DESC',
 								);

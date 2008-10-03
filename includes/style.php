@@ -147,7 +147,7 @@ class kleeja_style
 					big_error('No Template !', 'Requested "' . $template_name . '" template doesnt exists or an empty !! ');
 				}
 					
-				$this->HTML = $template_content['template_content'];
+				$this->HTML = stripslashes($template_content['template_content']);
 				$this->HTML = $this->_parse($this->HTML);
 				$filename = fopen($root_path . 'cache/' . $config['style'] . '_' . $template_name . '.php', 'w');
 				flock($filename, LOCK_EX); // exlusive look

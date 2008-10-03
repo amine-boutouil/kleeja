@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <kleeja>
 <info>
-	<style_name>default</style_name>
-	<style_author></style_author>
+        <style_name>default</style_name>
+        <style_author></style_author>
 </info>
 <templates>
-	<template name="header">
-	<![CDATA[<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+        <template name="header">
+        <![CDATA[<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" dir="{dir}">
 <head>
 <title>{title} &#9679; {config.sitename} (Powered by Kleeja)</title>
@@ -18,9 +18,9 @@
 </style>
 
 <script type="text/javascript">
-	var number_of_uploads={config.filesnum};
-	var LANG_PAST_URL_HERE ="{lang.PAST_URL_HERE}";
-	var LANG_MORE_F_FILES ="{lang.MORE_F_FILES}";
+        var number_of_uploads={config.filesnum};
+        var LANG_PAST_URL_HERE ="{lang.PAST_URL_HERE}";
+        var LANG_MORE_F_FILES ="{lang.MORE_F_FILES}";
 </script>
 
 <script type="text/javascript" src="./images/style/javascript.js"></script>
@@ -33,56 +33,56 @@
 
 <div id="content">
 
-	<div id="header">
-			<div class="roundedcornr_box_561672"><div class="roundedcornr_top_561671"><div></div></div><div class="roundedcornr_content_561671">
-					<a href="{config.siteurl}"><img src="./images/style/logo.gif" alt="{config.sitename}" style="border:0px" /></a>
-			</div><div class="roundedcornr_bottom_561671"><div></div></div></div>
-	</div>
+        <div id="header">
+                        <div class="roundedcornr_box_561672"><div class="roundedcornr_top_561671"><div></div></div><div class="roundedcornr_content_561671">
+                                        <a href="{config.siteurl}"><img src="./images/style/logo.gif" alt="{config.sitename}" style="border:0px" /></a>
+                        </div><div class="roundedcornr_bottom_561671"><div></div></div></div>
+        </div>
 
-	<div class="breadcrumbs">
-	<a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}
-	</div>
-
-
-	{extras.header}
+        <div class="breadcrumbs">
+        <a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}
+        </div>
 
 
-	<div class="right">
-		<div class="roundedcornr_box_561672"> <div class="roundedcornr_top_561671"><div></div></div><div class="roundedcornr_content_561671">
+        {extras.header}
 
-		<ul>
-			<li><img src="./images/style/index_button.gif" alt="{index_name}" />
-			<a href="{config.siteurl}">{index_name}</a></li>
-			<li><img src="./images/style/guide_button.gif" alt="{guide_name}" />
-			<a href="{guide_url}">{guide_name}</a></li>
-			<li><img src="./images/style/rules_button.gif" alt="{rules_name}" />
-			<a href="{rules_url}">{rules_name}</a></li>
-			<li><img src="./images/style/call_button.gif" alt="{call_name}" />
-			<a href="{call_url}">{call_name}</a></li>
-			<li><img src="./images/style/log_button.gif" alt="{login_name}" />
-			<a href="{login_url}">{login_name}</a></li>
-			<li><img src="./images/style/user_button.gif" alt="{usrcp_name}" />
-			<a href="{usrcp_url}">{usrcp_name}</a></li>
-			<IF NAME="user_is">
-				<IF NAME="config.enable_userfile">
-				<li><img src="./images/style/userfile_button.gif" alt="{usrfile_name}" />
-				<a href="{usrfile_url}">{usrfile_name}</a></li>
-				</IF>
-			<li><img src="./images/style/filecp_button.gif" alt="{filecp_name}" />
-			<a href="{filecp_url}">{filecp_name}</a></li>
-			</IF>
-			<IF NAME="config.allow_stat_pg">
-			<li><img src="./images/style/stats_button.gif" alt="{stats_name}" />
-			<a href="{stats_url}">{stats_name}</a></li>
-			</IF>
-			</ul>
-			
-		</div><div class="roundedcornr_bottom_561671"><div></div></div></div>
-	</div>
+
+        <div class="right">
+                <div class="roundedcornr_box_561672"> <div class="roundedcornr_top_561671"><div></div></div><div class="roundedcornr_content_561671">
+
+                <ul>
+                        <li><img src="./images/style/index_button.gif" alt="{index_name}" />
+                        <a href="{config.siteurl}">{index_name}</a></li>
+                        <li><img src="./images/style/guide_button.gif" alt="{guide_name}" />
+                        <a href="{guide_url}">{guide_name}</a></li>
+                        <li><img src="./images/style/rules_button.gif" alt="{rules_name}" />
+                        <a href="{rules_url}">{rules_name}</a></li>
+                        <li><img src="./images/style/call_button.gif" alt="{call_name}" />
+                        <a href="{call_url}">{call_name}</a></li>
+                        <li><img src="./images/style/log_button.gif" alt="{login_name}" />
+                        <a href="{login_url}">{login_name}</a></li>
+                        <li><img src="./images/style/user_button.gif" alt="{usrcp_name}" />
+                        <a href="{usrcp_url}">{usrcp_name}</a></li>
+                        <IF NAME="user_is">
+                                <IF NAME="config.enable_userfile">
+                                <li><img src="./images/style/userfile_button.gif" alt="{usrfile_name}" />
+                                <a href="{usrfile_url}">{usrfile_name}</a></li>
+                                </IF>
+                        <li><img src="./images/style/filecp_button.gif" alt="{filecp_name}" />
+                        <a href="{filecp_url}">{filecp_name}</a></li>
+                        </IF>
+                        <IF NAME="config.allow_stat_pg">
+                        <li><img src="./images/style/stats_button.gif" alt="{stats_name}" />
+                        <a href="{stats_url}">{stats_name}</a></li>
+                        </IF>
+                        </ul>
+                        
+                </div><div class="roundedcornr_bottom_561671"><div></div></div></div>
+        </div>
 ]]>
-	</template>
-	<template name="stylesheet">
-	<![CDATA[* {
+        </template>
+        <template name="stylesheet">
+        <![CDATA[* {
     padding: 0;
     margin: 0;
 } 
@@ -95,20 +95,20 @@ html {
 }
 
 body {
-	font-family: "Tahoma", arial, verdana, sans-serif;
-	color: #323D4F;
-	background-color: #CCCCCC;
+        font-family: "Tahoma", arial, verdana, sans-serif;
+        color: #323D4F;
+        background-color: #CCCCCC;
     font-size: 11px;
     margin: 0;
     padding: 12px 0;
-	
+        
  }
  
 a {
-	color: #306090;
+        color: #306090;
 }
 a:hover {
-	color: #F48A00;
+        color: #F48A00;
 }
 
 
@@ -117,121 +117,121 @@ img {
 }
 
 h2 { 
-	font-family: "Tahoma", Arial, Helvetica, sans-serif;
-	font-weight: normal;
-	color: #3B6EBF; 
+        font-family: "Tahoma", Arial, Helvetica, sans-serif;
+        font-weight: normal;
+        color: #3B6EBF; 
     font-size: 1.4em;
-	margin: 0.8em 0 0.2em 0;
-	
-	}
+        margin: 0.8em 0 0.2em 0;
+        
+        }
 
 
 
 #wrap {
-	margin: 20px auto;
-	width: 720px;
+        margin: 20px auto;
+        width: 720px;
 }
 
 
 #header {
-	width:50%;
-	margin-bottom:5px;
+        width:50%;
+        margin-bottom:5px;
 }
 
 
 #content {
-	padding: 0 40px 0 40px;
+        padding: 0 40px 0 40px;
 }
 
 
 
 
 #clear {
-	display: block;
-	clear: both;
-	width: 100%;
-	height:1px;
-	overflow:hidden;
+        display: block;
+        clear: both;
+        width: 100%;
+        height:1px;
+        overflow:hidden;
 }
 
 #footer {
-	text-align: center;
-	color: #666;
-	direction:ltr;
+        text-align: center;
+        color: #666;
+        direction:ltr;
 }
 
 
 .middle{
-	width: 60%;
-	margin: 0 auto;
-	padding: 1% 1%;
-	float:left;
+        width: 60%;
+        margin: 0 auto;
+        padding: 1% 1%;
+        float:left;
 }
 
 .breadcrumbs { 
     background: #F6F9FB url('images/style/bg1.gif');
-	border-bottom: 1px solid #E1E1E1; 
-	padding: 5px;
-	margin-bottom:9px;
-	
+        border-bottom: 1px solid #E1E1E1; 
+        padding: 5px;
+        margin-bottom:9px;
+        
 }
-	
+        
 
 .right {
-	float: right;
-	width: 29%;
-	margin: 0 1px;
-	padding: 1% 1%;
-	margin-left: 20px;
+        float: right;
+        width: 29%;
+        margin: 0 1px;
+        padding: 1% 1%;
+        margin-left: 20px;
 
 }
 
 .right ul {
-	padding: 20px 0 15px 20px;
-	margin:0;
+        padding: 20px 0 15px 20px;
+        margin:0;
 }
 
 .right li {
-	margin-bottom:5px;
-	list-style-type: none;
-	color: #3B6EBF;
+        margin-bottom:5px;
+        list-style-type: none;
+        color: #3B6EBF;
 }
 
 
 .err {
-	padding: 5px;
-	background-color: #FFEBE9;
-	border: 1.5px solid #DD3F0E;
-	margin: 10px 10px;
-	font-size: 13px;
-	font-family: "Tahoma", Times, serif;
+        padding: 5px;
+        background-color: #FFEBE9;
+        border: 1.5px solid #DD3F0E;
+        margin: 10px 10px;
+        font-size: 13px;
+        font-family: "Tahoma", Times, serif;
 }
 .info {
-	padding: 5px;
-	background-color: #FFFFE6;
-	border: 1.5px solid #E2EE0B;
-	margin: 10px 10px;
-	font-size: 13px;
-	font-family: "Tahoma", Times, serif;
+        padding: 5px;
+        background-color: #FFFFE6;
+        border: 1.5px solid #E2EE0B;
+        margin: 10px 10px;
+        font-size: 13px;
+        font-family: "Tahoma", Times, serif;
 }
 .result {
-	padding: 5px;
-	background-color: #FFFFE6;
-	border: 1.5px solid #E2EE0B;
-	margin: 10px 10px;
-	font-size: 13px;
-	font-family: "Tahoma", Times, serif;
+        padding: 5px;
+        background-color: #FFFFE6;
+        border: 1.5px solid #E2EE0B;
+        margin: 10px 10px;
+        font-size: 13px;
+        font-family: "Tahoma", Times, serif;
 }
 
 /* box for some info */
 .daaf {
-	background-color: #FFFFD7;
-	border: 2px solid #999999;
-	padding: 5px;
-	margin:0 auto;
-	line-height: 1.5em;
-	overflow: hidden;
-	width:60%
+        background-color: #FFFFD7;
+        border: 2px solid #999999;
+        padding: 5px;
+        margin:0 auto;
+        line-height: 1.5em;
+        overflow: hidden;
+        width:60%
 }
 
 /* rodded corners box  */
@@ -243,7 +243,7 @@ h2 {
 .roundedcornr_top_459680 div, .roundedcornr_top_459680, 
 .roundedcornr_bottom_459680 div, .roundedcornr_bottom_459680 { width: 100%; height: 30px;font-size: 1px;}
 .roundedcornr_content_459680 { margin: 0 2px; }
-.roundedcornr_box_561671 {background: #f5f5f5; min-height: 3em;	width: auto;}
+.roundedcornr_box_561671 {background: #f5f5f5; min-height: 3em;        width: auto;}
 .roundedcornr_box_561672 { background: #f5f5f5;width: 100%;}
 .roundedcornr_top_561671 div { background: url(images/style/roundedcornr_561671_tl.png) no-repeat top left;}
 .roundedcornr_top_561671 { background: url(images/style/roundedcornr_561671_tr.png) no-repeat top right;}
@@ -261,7 +261,7 @@ input {
         padding: 0 3px;
         font-size: 1.2em;
         font-family: Tahoma, Helvetica, Arial, sans-serif;
-		 border: 1px solid #BCBCBC;
+                 border: 1px solid #BCBCBC;
         background-position: 0 100%;
         color: #666666;
 }
@@ -286,36 +286,36 @@ textarea {
 }
 
 table{
-		width: 60%;
+                width: 60%;
 }
 
 .row1 {
-	background-color:#dadada;
+        background-color:#dadada;
 }
 
 .row2 {
-	background-color:#F5F5F5;
+        background-color:#F5F5F5;
 }
 
 .paging{
-		background-color: #F9F9F9;
-		border: 1px solid #666666;
-		font-size: 14px;
-		color: #666666;
-		padding: 0px 3px 0px 3px;
-		margin: 1px;
-		width: 4px;
-		height: 4px;
+                background-color: #F9F9F9;
+                border: 1px solid #666666;
+                font-size: 14px;
+                color: #666666;
+                padding: 0px 3px 0px 3px;
+                margin: 1px;
+                width: 4px;
+                height: 4px;
 }
 .here_psge{
-		background-color: #666666;
-		color: #FFFFFF;
-		font-size: 14px;
-		color: #FFFFFF;
-		padding: 0px 3px 0px 3px;
-		margin: 1px;
-		width: 4px;
-		height: 4px;
+                background-color: #666666;
+                color: #FFFFFF;
+                font-size: 14px;
+                color: #FFFFFF;
+                padding: 0px 3px 0px 3px;
+                margin: 1px;
+                width: 4px;
+                height: 4px;
 }
 
 
@@ -323,20 +323,20 @@ table{
 dont remove it  start
 */
 div#loadbox {
-	padding: 10px;
-	display: none;
+        padding: 10px;
+        display: none;
 }
 div#texttype {
-	display: none;
+        display: none;
 }
 
 /*
 dont remove it  end
 */
 ]]>
-	</template>
-	<template name="footer">
-	<![CDATA[
+        </template>
+        <template name="footer">
+        <![CDATA[
 <div id="clear"></div>
 <!-- begin extra footer -->
 {extras.footer}
@@ -345,60 +345,58 @@ dont remove it  end
 
 </div><div class="roundedcornr_bottom_459680"><div></div></div></div> </div>
 
-</div>
-
-	<div id="footer">
-	Copyrights © <a href="{config.siteurl}">{config.sitename}</a>
-	<br/>
-	<br/>
-	<!-- IF REMOVE: Pay for a license - see http://www.kleeja.com -->
-	Powered by <a href="http://www.kleeja.com/">Kleeja</a>
-	<!-- IF REMOVE: Pay for a license - see http://www.kleeja.com -->
-	<br />
-	{page_stats}
-	{admin_page}
-	</div>
-	
+        <div id="footer">
+        Copyrights © <a href="{config.siteurl}">{config.sitename}</a>
+        <br/>
+        <br/>
+        <!-- IF REMOVE: Pay for a license - see http://www.kleeja.com -->
+        Powered by <a href="http://www.kleeja.com/">Kleeja</a>
+        <!-- IF REMOVE: Pay for a license - see http://www.kleeja.com -->
+        <br />
+        {page_stats}
+        {admin_page}
+        </div>
+        
 {googleanalytics}
 </body>
 </html>]]>
-	</template>
-	<template name="call">
-	<![CDATA[<div class="middle">
+        </template>
+        <template name="call">
+        <![CDATA[<div class="middle">
 
 <form action="{action}" method="post">
 
 <table>
-	<tr>
-		<td class="row1">{lang.YOURNAME} : </td>
-		<td class="row2"><input type="text" name="cname" value="{_POST.cname}"  /></td>
-	</tr>
-	<tr>
-		<td class="row1">{lang.EMAIL} : </td>
-		<td class="row2"><input type="text" name="cmail" value="{_POST.cmail}"  /></td>
-	</tr>
-	<tr>
-		<td class="row1">{lang.TEXT} :</td>
-		<td class="row2"><textarea name="ctext" rows="3">{_POST.ctext}</textarea></td>
-	</tr>
-	<tr>
-		<td class="row1">{lang.VERTY_CODE}</td>
-		<td class="row2">
-			{code}<br/>
-			<input type="text" name="code_answer" style="direction:ltr" />
-		</td>
-	</tr>
-	<!-- call template before submit-->
-	<tr>
-		<td colspan="2" style="text-align:center"><input type="submit" name="submit" value="{lang.SEND}" /></td>
-	</tr>
+        <tr>
+                <td class="row1">{lang.YOURNAME} : </td>
+                <td class="row2"><input type="text" name="cname" value="{_POST.cname}"  /></td>
+        </tr>
+        <tr>
+                <td class="row1">{lang.EMAIL} : </td>
+                <td class="row2"><input type="text" name="cmail" value="{_POST.cmail}"  /></td>
+        </tr>
+        <tr>
+                <td class="row1">{lang.TEXT} :</td>
+                <td class="row2"><textarea name="ctext" rows="3">{_POST.ctext}</textarea></td>
+        </tr>
+        <tr>
+                <td class="row1">{lang.VERTY_CODE}</td>
+                <td class="row2">
+                        {code}<br/>
+                        <input type="text" name="code_answer" style="direction:ltr" />
+                </td>
+        </tr>
+        <!-- call template before submit-->
+        <tr>
+                <td colspan="2" style="text-align:center"><input type="submit" name="submit" value="{lang.SEND}" /></td>
+        </tr>
 </table>
 </form>
 
 </div>]]>
-	</template>
-	<template name="download">
-	<![CDATA[<div class="middle">
+        </template>
+        <template name="download">
+        <![CDATA[<div class="middle">
 
 {lang.FILE_FOUNDED} 
 <br />
@@ -431,21 +429,21 @@ document.getElementById("url").innerHTML = "<a href=\"{url_file}\" target=\"baln
 </script>
 
 </div>]]>
-	</template>
-	<template name="err">
-	<![CDATA[<div class="middle">
-	<!-- begin err template -->
-	<div class="err">
-	{text} 
-	<br/>
-	<a href="javascript:history.go(-1)">{go_back_browser}</a>
-	</div>
-	<!-- end err template -->
+        </template>
+        <template name="err">
+        <![CDATA[<div class="middle">
+        <!-- begin err template -->
+        <div class="err">
+        {text} 
+        <br/>
+        <a href="javascript:history.go(-1)">{go_back_browser}</a>
+        </div>
+        <!-- end err template -->
 
 </div>]]>
-	</template>
-	<template name="filecp">
-	<![CDATA[
+        </template>
+        <template name="filecp">
+        <![CDATA[
 <div class="middle">
 
 <h2>{lang.EDIT_U_FILES}</h2>
@@ -453,16 +451,16 @@ document.getElementById("url").innerHTML = "<a href=\"{url_file}\" target=\"baln
 <form action="{action}" method="post">
 
 <table>
-	<tr class="row1"><td>{lang.FILENAME}</td><td>{lang.DELETE}</td></tr>
+        <tr class="row1"><td>{lang.FILENAME}</td><td>{lang.DELETE}</td></tr>
 <IF NAME="no_results">
 <tr class="row2">
 <td colspan="2">...</td>
 </tr>
 <ELSE>
 <LOOP NAME="arr">
-	<tr class="row2">
-	<td>{{name}}</td><td><input type="checkbox" name="del_{{id}}" value="1"></td>
-	</tr>
+        <tr class="row2">
+        <td>{{name}}</td><td><input type="checkbox" name="del_{{id}}" value="1"></td>
+        </tr>
 </LOOP>
 </IF>
 </table>
@@ -474,58 +472,58 @@ document.getElementById("url").innerHTML = "<a href=\"{url_file}\" target=\"baln
 <div style="text-align:center"><b>{page_nums}</b></div>
 
 </div>]]>
-	</template>
-	<template name="fileuser">
-	<![CDATA[
+        </template>
+        <template name="fileuser">
+        <![CDATA[
 <div class="middle">
 
-	<IF NAME="user_name">
-	<h2>{lang.PUBLIC_USER_FILES} : {user_name}</h2>
-	</IF>
+        <IF NAME="user_name">
+        <h2>{lang.PUBLIC_USER_FILES} : {user_name}</h2>
+        </IF>
 
-	<table>
-		<tr class="row1"><td>{n_name}</td><td></td><td></td></tr>
-	<IF NAME="no_results">
-	<tr class="row2">
-	<td colspan="3">...</td>
-	</tr>
-	<ELSE>
-	<LOOP NAME="arr">
-		<tr class="row2">
-		<td><img src="{{icon_link}}" alt="{{file_type}}" /></td>
-		<td>{{name}}</td>
-		<td>{{file_type}}</td>
-		</tr>
-	</LOOP>
-	</IF>
-	</table>
+        <table>
+                <tr class="row1"><td>{n_name}</td><td></td><td></td></tr>
+        <IF NAME="no_results">
+        <tr class="row2">
+        <td colspan="3">...</td>
+        </tr>
+        <ELSE>
+        <LOOP NAME="arr">
+                <tr class="row2">
+                <td><img src="{{icon_link}}" alt="{{file_type}}" /></td>
+                <td>{{name}}</td>
+                <td>{{file_type}}</td>
+                </tr>
+        </LOOP>
+        </IF>
+        </table>
 
-	<div style="text-align:center"><b>{page_nums}</b></div>
+        <div style="text-align:center"><b>{page_nums}</b></div>
 
-	<br/>
-	<IF NAME="filecp_link">
-	<a href="{filecp_link}" title="{lang.GO_FILECP}">{lang.GO_FILECP}</a>
-	<br/>
-	<br/>
-	<div class="daaf">
-	{lang.COPY_AND_GET_DUD} : <br/>
-	{your_fileuser}
-	</div>
-	</IF>
-	
+        <br/>
+        <IF NAME="filecp_link">
+        <a href="{filecp_link}" title="{lang.GO_FILECP}">{lang.GO_FILECP}</a>
+        <br/>
+        <br/>
+        <div class="daaf">
+        {lang.COPY_AND_GET_DUD} : <br/>
+        {your_fileuser}
+        </div>
+        </IF>
+        
 </div>]]>
-	</template>
-	<template name="get_pass">
-	<![CDATA[<div class="middle">
+        </template>
+        <template name="get_pass">
+        <![CDATA[<div class="middle">
 {lang.E_GET_LOSTPASS}
 <form action="{action}" method="post">
 {lang.EMAIL} : <input type="text" name="rmail" value="{_POST.rmail}"  /><br />
 <input type="submit" name="submit" value="{lang.GET_LOSTPASS}" />
 </form>
 </div>]]>
-	</template>
-	<template name="guide">
-	<![CDATA[<div class="middle">
+        </template>
+        <template name="guide">
+        <![CDATA[<div class="middle">
 
 <h2>{lang.GUIDE_VISITORS} </h2>
 <br />
@@ -545,13 +543,13 @@ document.getElementById("url").innerHTML = "<a href=\"{url_file}\" target=\"baln
 
 
 </div>]]>
-	</template>
-	<template name="index_body">
-	<![CDATA[
+        </template>
+        <template name="index_body">
+        <![CDATA[
 <div class="middle">
 
 <!-- begin welcome index -->
-<h2>{lang.WELCOME}..</h2>	
+<h2>{lang.WELCOME}..</h2>        
 <br/>
 {welcome_msg}
 <br />
@@ -560,59 +558,59 @@ document.getElementById("url").innerHTML = "<a href=\"{url_file}\" target=\"baln
 
 
 <!---- START  FOR UPLOAD BOXES ---->
-<form name="uploader" id="uploader" action="{action}" method="post"  encType="multipart/form-data" onsubmit="form_submit();">
+<form name="uploader" id="uploader" action="{action}" method="post"  enctype="multipart/form-data" onsubmit="form_submit();">
 
-	
+        
 <IF NAME="config.www_url">
     <a href="#"  onclick="showhide();" title="{lang.CHANG_TO_URL_FILE}"><img src="images/urlORfile.gif" alt="{lang.CHANG_TO_URL_FILE}"  /></a>
-	<br /><br />
+        <br /><br />
 </IF>
 
 
-	
-	<div id="filetype">
-		<input type="file" name="file[]">
-		<br>
-		<div id="upload_forum"></div>
-		<br />
-		<input name="mraupload" onclick="javascript:plus(1);makeupload(1);" type="button" value="+" />
-		<input name="mreupload" onclick="javascript:minus(1);makeupload(1);" type="button" value="-" />
-		<br />
-		<br />
-	<IF NAME="config.safe_code">
-			{SAFE_CODE}
-			<br/>
-			<input type="text" name="answer_safe" style="direction:ltr;" />
-			<br/>
-	</IF>
-		<input id="checkr" type="checkbox" onclick="accept_terms('submitr','checkr');" />{lang.AGREE_RULES}
-		<br />
-		<input type="submit" id="submitr" name="submitr" value="{lang.DOWNLOAD_F}"  disabled="disabled" />
-		<input type="text" id="upload_num" value="1" size="1" readonly="readonly"/>
-	</div>
+        
+        <div id="filetype">
+                <input type="file" name="file[]" />
+                <br />
+                <div id="upload_forum"></div>
+                <br />
+                <input name="mraupload" onclick="javascript:plus(1);makeupload(1);" type="button" value="+" />
+                <input name="mreupload" onclick="javascript:minus(1);makeupload(1);" type="button" value="-" />
+                <br />
+                <br />
+        <IF NAME="config.safe_code">
+                        {SAFE_CODE}
+                        <br/>
+                        <input type="text" name="answer_safe" style="direction:ltr;" />
+                        <br/>
+        </IF>
+                <input id="checkr" type="checkbox" onclick="accept_terms('submitr','checkr');" />{lang.AGREE_RULES}
+                <br />
+                <input type="submit" id="submitr" name="submitr" value="{lang.DOWNLOAD_F}"  disabled="disabled" />
+                <input type="text" id="upload_num" value="1" size="1" readonly="readonly"/>
+        </div>
 
-	
+        
 <IF NAME="config.www_url">
-	<div id="texttype">
-		<input type="text" name="file[0]" size="50" value="{lang.PAST_URL_HERE}" onclick="this.value=''" style="color:silver;" dir="ltr">
-		<br>
-		<div id="upload_f_forum"></div>
-		<br />
-		<input name="mraupload" onclick="javascript:plus(2);makeupload(2);" type="button" value="+" />
-		<input name="mreupload" onclick="javascript:minus(2);makeupload(2);" type="button" value="-" />
-		<br />
-		<br />
-	<IF NAME="config.safe_code">
-			{SAFE_CODE2}
-			<br/>
-			<input type="text" name="answer_safe2" style="direction:ltr;" />
-			<br/>
-	</IF>
-		<input id="checkr2" type="checkbox" onclick="accept_terms('submittxt','checkr2');" />{lang.AGREE_RULES}
-		<br />
-		<input type="submit" id="submittxt" name="submittxt" value="{lang.DOWNLOAD_T}"   disabled="disabled" />
-		<input type="text" id="upload_f_num" value="1" size="1" readonly="readonly"/>
-	</div>
+        <div id="texttype">
+                <input type="text" name="file[0]" size="50" value="{lang.PAST_URL_HERE}" onclick="this.value=''" style="color:silver;" dir="ltr">
+                <br>
+                <div id="upload_f_forum"></div>
+                <br />
+                <input name="mraupload" onclick="javascript:plus(2);makeupload(2);" type="button" value="+" />
+                <input name="mreupload" onclick="javascript:minus(2);makeupload(2);" type="button" value="-" />
+                <br />
+                <br />
+        <IF NAME="config.safe_code">
+                        {SAFE_CODE2}
+                        <br/>
+                        <input type="text" name="answer_safe2" style="direction:ltr;" />
+                        <br/>
+        </IF>
+                <input id="checkr2" type="checkbox" onclick="accept_terms('submittxt','checkr2');" />{lang.AGREE_RULES}
+                <br />
+                <input type="submit" id="submittxt" name="submittxt" value="{lang.DOWNLOAD_T}"   disabled="disabled" />
+                <input type="text" id="upload_f_num" value="1" size="1" readonly="readonly"/>
+        </div>
 </IF>
 
 
@@ -625,11 +623,11 @@ document.getElementById("url").innerHTML = "<a href=\"{url_file}\" target=\"baln
 
 <!---- START  FOR INFORMATION ---->
 <IF NAME="info">
-	<div class="result">
-		<LOOP NAME="info">
-		<b>{lang.INFORMATION}:</b> {{i}}<br />
-		</LOOP>
-	</div>
+        <div class="result">
+                <LOOP NAME="info">
+                <b>{lang.INFORMATION}:</b> {{i}}<br />
+                </LOOP>
+        </div>
 </IF>
 <!---- END  FOR INFORMATION ---->
 
@@ -645,47 +643,47 @@ document.getElementById("url").innerHTML = "<a href=\"{url_file}\" target=\"baln
 <!---- END FOR ONLINE ---->
 
 </div>
-		
+                
 
 ]]>
-	</template>
-	<template name="info">
-	<![CDATA[<div class="middle">
+        </template>
+        <template name="info">
+        <![CDATA[<div class="middle">
 
-	<div class="info">
-	{text}
-	</div>
+        <div class="info">
+        {text}
+        </div>
 
 </div>]]>
-	</template>
-	<template name="login">
-	<![CDATA[
+        </template>
+        <template name="login">
+        <![CDATA[
 
 <div class="middle">
 
-	<form action="{action}" method="post">
+        <form action="{action}" method="post">
 
-	<table>
-		<tr>
-			<td class="row1">{lang.USERNAME} :</td>
-			<td class="row2"> <input type="text" name="lname" value="{_POST.lname}"  /></td>
-		</tr>	
-		<tr>
-			<td class="row1">{lang.PASSWORD} :</td>
-			<td class="row2"> <input type="password" name="lpass" value="{_POST.lpass}"  /></td>
-		</tr>
-		<tr>
-			<td colspan="2" style="text-align:center"><input type="submit" name="submit" value="{lang.LOGIN}" /></td>
-		</tr>
-	</table>
+        <table>
+                <tr>
+                        <td class="row1">{lang.USERNAME} :</td>
+                        <td class="row2"> <input type="text" name="lname" value="{_POST.lname}"  /></td>
+                </tr>        
+                <tr>
+                        <td class="row1">{lang.PASSWORD} :</td>
+                        <td class="row2"> <input type="password" name="lpass" value="{_POST.lpass}"  /></td>
+                </tr>
+                <tr>
+                        <td colspan="2" style="text-align:center"><input type="submit" name="submit" value="{lang.LOGIN}" /></td>
+                </tr>
+        </table>
 
-	</form>
-	<br />
-	<a href="{forget_pass_link}">{lang.LOSS_PASSWORD}</a>	
+        </form>
+        <br />
+        <a href="{forget_pass_link}">{lang.LOSS_PASSWORD}</a>        
 </div>]]>
-	</template>
-	<template name="profile">
-	<![CDATA[<div class="middle">
+        </template>
+        <template name="profile">
+        <![CDATA[<div class="middle">
 
 <h2>{lang.EDIT_U_DATA}</h2>
 
@@ -700,12 +698,12 @@ document.getElementById("url").innerHTML = "<a href=\"{url_file}\" target=\"baln
 <option value="0" <IF NAME="show_my_filecp=0">selected="selected"</IF> >{lang.NO}</option>
 </select>
 <br />
-	<fieldset>
-		<legend>{lang.PASS_ON_CHANGE}</legend>
+        <fieldset>
+                <legend>{lang.PASS_ON_CHANGE}</legend>
 {lang.OLD} :<input type="password" name="ppass_old" value="{_POST.ppass_old}"  /><br />
 {lang.NEW} :<input type="password" name="ppass_new" value="{_POST.ppass_new}"  /><br />
 {lang.NEW_AGAIN} :<input type="password" name="ppass_new2" value="{_POST.ppass_new2}"  /><br />
-		</fieldset>
+                </fieldset>
 <input type="submit" name="submit_data" value="{lang.EDIT_U_DATA}" />
 </form>
 <ELSE>
@@ -717,81 +715,81 @@ document.getElementById("url").innerHTML = "<a href=\"{url_file}\" target=\"baln
 
 
 </div>]]>
-	</template>
-	<template name="register">
-	<![CDATA[<div class="middle">
+        </template>
+        <template name="register">
+        <![CDATA[<div class="middle">
 
-	<form action="{action}" method="post">
+        <form action="{action}" method="post">
 
-		<table>
-			<tr>
-				<td class="row1">{lang.USERNAME} :</td>
-				<td class="row2"><input type="text" name="lname" value="{_POST.lname}"  /></td>
-			</tr>
-			<tr>
-				<td class="row1">{lang.PASSWORD} : </td>
-				<td class="row2"><input type="password" name="lpass" value="{_POST.lpass}"  /></td>
-			</tr>
-			<tr>
-				<td class="row1">{lang.EMAIL} :</td>
-				<td class="row2"> <input type="text" name="lmail" value="{_POST.lmail}"  /></td>
-			</tr>
-			<tr>
-				<td class="row1">{lang.VERTY_CODE}</td>
-				<td class="row2">
-					{code}<br/>
-					<input type="text" name="code_answer" style="direction:ltr" />
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2" style="text-align:center"><input type="submit" name="submit" value="{lang.REGISTER}" /></td>
-			</tr>
-		</table>
+                <table>
+                        <tr>
+                                <td class="row1">{lang.USERNAME} :</td>
+                                <td class="row2"><input type="text" name="lname" value="{_POST.lname}"  /></td>
+                        </tr>
+                        <tr>
+                                <td class="row1">{lang.PASSWORD} : </td>
+                                <td class="row2"><input type="password" name="lpass" value="{_POST.lpass}"  /></td>
+                        </tr>
+                        <tr>
+                                <td class="row1">{lang.EMAIL} :</td>
+                                <td class="row2"> <input type="text" name="lmail" value="{_POST.lmail}"  /></td>
+                        </tr>
+                        <tr>
+                                <td class="row1">{lang.VERTY_CODE}</td>
+                                <td class="row2">
+                                        {code}<br/>
+                                        <input type="text" name="code_answer" style="direction:ltr" />
+                                </td>
+                        </tr>
+                        <tr>
+                                <td colspan="2" style="text-align:center"><input type="submit" name="submit" value="{lang.REGISTER}" /></td>
+                        </tr>
+                </table>
 
-	</form>
+        </form>
 
 </div>]]>
-	</template>
-	<template name="report">
-	<![CDATA[<div class="middle">
+        </template>
+        <template name="report">
+        <![CDATA[<div class="middle">
 
 <form action="{action}" method="post">
 
 <table>
-	<tr>
-		<td class="row1">{lang.YOURNAME} : </td>
-		<td class="row2"><input type="text" name="rname" value="{_POST.rname}"  /></td>
-	</tr>
-	<tr>
-		<td class="row1">{lang.EMAIL} : </td>
-		<td class="row2"><input type="text" name="rmail" value="{_POST.rmail}"  /></td>
-	</tr>
-	<tr>
-		<td class="row1">{lang.URL} : </td>
-		<td class="row2"><input type="text" name="rurl" value="{url_id}"  readonly="readonly" /></td>
-	</tr>
-	<tr>
-		<td class="row1">{lang.REASON} : </td>
-		<td class="row2"><textarea name="rtext" rows="3">{_POST.rtext}</textarea></td>
-	</tr>
-	<tr>
-		<td class="row1">{lang.VERTY_CODE}</td>
-		<td class="row2">
-			{code}<br/>
-			<input type="text" name="code_answer" style="direction:ltr" />
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2" style="text-align:center"><input type="submit" name="submit" value="{lang.REPORT}" /></td>
-	</tr>
+        <tr>
+                <td class="row1">{lang.YOURNAME} : </td>
+                <td class="row2"><input type="text" name="rname" value="{_POST.rname}"  /></td>
+        </tr>
+        <tr>
+                <td class="row1">{lang.EMAIL} : </td>
+                <td class="row2"><input type="text" name="rmail" value="{_POST.rmail}"  /></td>
+        </tr>
+        <tr>
+                <td class="row1">{lang.URL} : </td>
+                <td class="row2"><input type="text" name="rurl" value="{url_id}"  readonly="readonly" /></td>
+        </tr>
+        <tr>
+                <td class="row1">{lang.REASON} : </td>
+                <td class="row2"><textarea name="rtext" rows="3">{_POST.rtext}</textarea></td>
+        </tr>
+        <tr>
+                <td class="row1">{lang.VERTY_CODE}</td>
+                <td class="row2">
+                        {code}<br/>
+                        <input type="text" name="code_answer" style="direction:ltr" />
+                </td>
+        </tr>
+        <tr>
+                <td colspan="2" style="text-align:center"><input type="submit" name="submit" value="{lang.REPORT}" /></td>
+        </tr>
 </table>
 
 </form>
 
 </div>]]>
-	</template>
-	<template name="rules">
-	<![CDATA[<div class="middle">
+        </template>
+        <template name="rules">
+        <![CDATA[<div class="middle">
 
 {lang.E_RULES} :
 
@@ -801,9 +799,9 @@ document.getElementById("url").innerHTML = "<a href=\"{url_file}\" target=\"baln
 {contents}
 
 </div>]]>
-	</template>
-	<template name="stats">
-	<![CDATA[<div class="middle">
+        </template>
+        <template name="stats">
+        <![CDATA[<div class="middle">
 
 <h2>{lang.STATS} :</h2> 
 <br />
@@ -826,150 +824,150 @@ document.getElementById("url").innerHTML = "<a href=\"{url_file}\" target=\"baln
 
 <b>{lang.LAST_1_H}</b>
 </div>]]>
-	</template>
-	<template name="admin_backup">
-	<![CDATA[<script language="JavaScript"> 
+        </template>
+        <template name="admin_backup">
+        <![CDATA[<script language="JavaScript"> 
 function checkall() {  
-	var check = document.getElementsByName("check[]"); 
+        var check = document.getElementsByName("check[]"); 
     for (var i=0;  i< check.length; i++)
-	{
-			if (check[i].checked == true ){check[i].checked = false;}
-			else{ check[i].checked = true; }
+        {
+                        if (check[i].checked == true ){check[i].checked = false;}
+                        else{ check[i].checked = true; }
     } 
 } 
 </script> 
 <div class="middle">
 <form  method="post" action="{action}">
-	<fieldset>
-		<legend>{lang.R_BCKUP}</legend>
-		
+        <fieldset>
+                <legend>{lang.R_BCKUP}</legend>
+                
 {lang.E_BACKUP}
 
 <table style="width: 100%">
-	<tr style="background-color:silver">
-		<td>{lang.NAME}</td>
-		<td>{lang.SIZE}</td>
-		<td><input type="checkbox" name="check_all" checked="checked" onClick="checkall();"/></td>
-	</tr>
-	<LOOP NAME="tables_sho">
-	<tr style="background-color:#F5F5F5">
-		<td>{{name}}</td><td>{{size}} kb</td><td><input type="checkbox" name="check[]" value="{{name}}" checked="checked" /></td>
-	</tr>	
-	</LOOP>
-	
+        <tr style="background-color:silver">
+                <td>{lang.NAME}</td>
+                <td>{lang.SIZE}</td>
+                <td><input type="checkbox" name="check_all" checked="checked" onClick="checkall();"/></td>
+        </tr>
+        <LOOP NAME="tables_sho">
+        <tr style="background-color:#F5F5F5">
+                <td>{{name}}</td><td>{{size}} kb</td><td><input type="checkbox" name="check[]" value="{{name}}" checked="checked" /></td>
+        </tr>        
+        </LOOP>
+        
 </table>
 
 </fieldset>
 <fieldset class="quick" style="text-align:center">
-		<input class="button2" name="submit" type="submit" value="{lang.TAKE_BK}" />
+                <input class="button2" name="submit" type="submit" value="{lang.TAKE_BK}" />
 </fieldset>
 </form>
 </div>]]>
-	</template>
-	<template name="admin_ban">
-	<![CDATA[<div class="middle">
+        </template>
+        <template name="admin_ban">
+        <![CDATA[<div class="middle">
 <form method="post" action="{action}">
-	<fieldset>
-		<legend>{lang.R_BAN}</legend>
+        <fieldset>
+                <legend>{lang.R_BAN}</legend>
 
 <table style="width: 90%">
-	<tr>
-		<td><label for="sitename">{lang.BAN_EXP1}</label></td>
-	</tr>
-	<tr>
-		<td>
-		<label>
-		<textarea name="ban_text" style="width: 490px; height: 100px;direction:ltr;" >{ban}</textarea>
-		</label>
-		</td>
-	</tr>
-	<tr>
-		<td><label for="sitename">{lang.BAN_EXP2}</label></td>
-	</tr>
+        <tr>
+                <td><label for="sitename">{lang.BAN_EXP1}</label></td>
+        </tr>
+        <tr>
+                <td>
+                <label>
+                <textarea name="ban_text" style="width: 490px; height: 100px;direction:ltr;" >{ban}</textarea>
+                </label>
+                </td>
+        </tr>
+        <tr>
+                <td><label for="sitename">{lang.BAN_EXP2}</label></td>
+        </tr>
 </table>
 </fieldset>
 <fieldset class="quick" style="text-align:center">
-		<input class="button2" name="submit" type="submit" value="{lang.UPDATE_BAN}" />
+                <input class="button2" name="submit" type="submit" value="{lang.UPDATE_BAN}" />
 </fieldset>
 </form>
 </div>
 ]]>
-	</template>
-	<template name="admin_rules">
-	<![CDATA[<div class="middle">
+        </template>
+        <template name="admin_rules">
+        <![CDATA[<div class="middle">
 <form method="post" action="{action}">
-	<fieldset>
-		<legend>{lang.R_RULES}</legend>
+        <fieldset>
+                <legend>{lang.R_RULES}</legend>
 
 <table style="width: 90%">
-	<tr>
-		<td><label for="sitename">{lang.RULES_EXP}</label></td>
-	</tr>
-	<tr>
-		<td>
-		<label>
-		<textarea name="rules_text" style="width: 490px; height: 260px;direction:ltr;" >{rules}</textarea>
-		</label>
-		</td>
-	</tr>
+        <tr>
+                <td><label for="sitename">{lang.RULES_EXP}</label></td>
+        </tr>
+        <tr>
+                <td>
+                <label>
+                <textarea name="rules_text" style="width: 490px; height: 260px;direction:ltr;" >{rules}</textarea>
+                </label>
+                </td>
+        </tr>
 </table>
 </fieldset>
 <fieldset class="quick" style="text-align:center">
-		<input class="button2" name="submit" type="submit" value="{lang.UPDATE_RULES}" />
+                <input class="button2" name="submit" type="submit" value="{lang.UPDATE_RULES}" />
 </fieldset>
 </form>
 </div>
 ]]>
-	</template>
-	<template name="admin_calls">
-	<![CDATA[<script language="javascript">
+        </template>
+        <template name="admin_calls">
+        <![CDATA[<script language="javascript">
 function show_msg (te, id)
 {
 var te = document.getElementById(te).value;
 var iee = te;
-	iee += "<br /><form method='post' action='{action}'><textarea name='v_" + id + "' cols='50' rows='4'></textarea>";
-	iee += "<input class='button2' name='reply_submit' type='submit' value='{lang.REPLY}' /></form>";	
+        iee += "<br /><form method='post' action='{action}'><textarea name='v_" + id + "' cols='50' rows='4'></textarea>";
+        iee += "<input class='button2' name='reply_submit' type='submit' value='{lang.REPLY}' /></form>";        
 document.getElementById('mail_here').innerHTML= iee;
 
 }
 </script>
 <div class="middle">
 
-	<fieldset>
-		<legend>{lang.TEXT}</legend>
+        <fieldset>
+                <legend>{lang.TEXT}</legend>
 <div id="mail_here">{lang.E_CLICK}</div>
-	</fieldset>
-	
+        </fieldset>
+        
 <form method="post" action="{action}">
-	<fieldset>
-		<legend>{lang.R_CALLS}</legend>
+        <fieldset>
+                <legend>{lang.R_CALLS}</legend>
 
 <table style="width: 100%">
-	<tr style="background-color:silver">
-		<td>{lang.NAME}</td>
-		<td>{lang.TIME}</td>
-		<td>{lang.IP}</td>
-		<td>{lang.DELETE}</td>
-	</tr>
+        <tr style="background-color:silver">
+                <td>{lang.NAME}</td>
+                <td>{lang.TIME}</td>
+                <td>{lang.IP}</td>
+                <td>{lang.DELETE}</td>
+        </tr>
 <IF NAME="no_results">
 ...
 <ELSE>
 <LOOP NAME="arr">
-	<tr style="background-color:#F5F5F5">
-		<td><a title="{n_mail}:{{mail}}" onclick="javascript:show_msg('textva_{{id}}',{{id}});">{{name}}</a>
-		<input type="hidden" value="{{mail}} :<br/> {{text}}" id="textva_{{id}}">
-		</td>
-		<td>{{time}}</td>
-		<td><a href="{{ip_finder}}" target="blank">{{ip}}</a></td>
-		<td><input type="checkbox" name="del_{{id}}" value="1"></td>
-	</tr>
+        <tr style="background-color:#F5F5F5">
+                <td><a title="{n_mail}:{{mail}}" onclick="javascript:show_msg('textva_{{id}}',{{id}});">{{name}}</a>
+                <input type="hidden" value="{{mail}} :<br/> {{text}}" id="textva_{{id}}">
+                </td>
+                <td>{{time}}</td>
+                <td><a href="{{ip_finder}}" target="blank">{{ip}}</a></td>
+                <td><input type="checkbox" name="del_{{id}}" value="1"></td>
+        </tr>
 </LOOP>
 </IF>
 </table>
 
 </fieldset>
 <fieldset class="quick" style="text-align:center">
-		<input class="button2" name="submit" type="submit" value="{lang.UPDATE_CALSS}" />
+                <input class="button2" name="submit" type="submit" value="{lang.UPDATE_CALSS}" />
 </fieldset>
 </form>
 <div style="text-align:center"><b>{page_nums}</b></div>
@@ -977,241 +975,241 @@ document.getElementById('mail_here').innerHTML= iee;
 
 
 ]]>
-	</template>
-	<template name="admin_configs">
-	<![CDATA[<div class="middle">
+        </template>
+        <template name="admin_configs">
+        <![CDATA[<div class="middle">
 <form method="post" action="{action}">
-	<fieldset>
-		<legend>{lang.R_CONFIGS}</legend>
+        <fieldset>
+                <legend>{lang.R_CONFIGS}</legend>
 
 <table style="width: 90%">
-	<tr>
-		<td><label for="sitename">{lang.SITENAME}</label></td>
-		<td><label><input type="text" id="sitename" name="sitename" value="{con.sitename}" size="40"></label></td>
-	</tr>
-	<tr>
-		<td><label for="siteurl">{lang.SITEURL}</label></td>
-		<td><label><input type="text" id="siteurl" name="siteurl" value="{con.siteurl}" size="40"></label></td>
-	</tr>
-	<tr>
-		<td><label for="sitemail">{lang.SITEMAIL}</label></td>
-		<td><label><input type="text" id="sitemail" name="sitemail" value="{con.sitemail}" size="40"></label></td>
-	</tr>
-	<tr>
-		<td><label for="total_size">{lang.MAX_SIZE_SITE}</label></td>
-		<td><label><input type="text" id="total_size" name="total_size" value="{con.total_size}" size="10"></label></td>
-	</tr>
-	<tr>
-		<td><label for="foldername">{lang.FOLDERNAME}</label></td>
-		<td><label><input type="text" id="foldername" name="foldername" value="{con.foldername}" size="20"></label></td>
-	</tr>
-	<tr>
-		<td><label for="prefixname">{lang.FILES_PREFIX}</label></td>
-		<td><label><input type="text" id="prefixname" name="prefixname" value="{con.prefixname}" size="10"></label></td>
-	</tr>
-	<tr>
-		<td><label for="filesnum">{lang.FILES_NUMB}</label></td>
-		<td><label><input type="text" id="filesnum" name="filesnum" value="{con.filesnum}" size="10"></label></td>
-	</tr>
-	<tr>
-		<td><label for="del_f_day">{lang.DEL_FDAY}</label></td>
-		<td><label><input type="text" id="del_f_day" name="del_f_day" value="{con.del_f_day}" size="10"></label></td>
-	</tr>	
-	<tr>
-		<td><label for="www_url">{lang.WWW_URL}</label></td>
-		<td>
-		<label>{lang.YES}<input type="radio" id="www_url" name="www_url" value="1"  <IF NAME="ywww_url"> checked="checked"</IF>></label>
-		<label>{lang.NO}<input type="radio" id="www_url" name="www_url" value="0"  <IF NAME="nwww_url"> checked="checked"</IF>></label>
-		</td>
-	</tr>	
-	<tr>
-		<td><label for="thumbs_imgs">{lang.ENAB_THMB}</label></td>
-		<td>
-		<label>{lang.YES}<input type="radio" id="thumbs_imgs" name="thumbs_imgs" value="1"  <IF NAME="ythumbs_imgs"> checked="checked"</IF>></label>
-		<label>{lang.NO}<input type="radio" id="thumbs_imgs" name="thumbs_imgs" value="0"  <IF NAME="nthumbs_imgs"> checked="checked"</IF>></label>
-		</td>
-	</tr>
-	<tr>
-		<td><label for="write_imgs">{lang.ENAB_STAMP}</label></td>
-		<td>
-		<label>{lang.YES}<input type="radio" id="write_imgs" name="write_imgs" value="1"  <IF NAME="ywrite_imgs"> checked="checked"</IF>></label>
-		<label>{lang.NO}<input type="radio" id="write_imgs" name="write_imgs" value="0"  <IF NAME="nwrite_imgs"> checked="checked"</IF>></label>
-		</td>
-	</tr>	
-	<tr>
-		<td><label for="siteclose">{lang.SITECLOSE}</label></td>
-		<td>
-		<label>{lang.YES}<input type="radio" id="siteclose" name="siteclose" value="1"  <IF NAME="yclose"> checked="checked"</IF>></label>
-		<label>{lang.NO}<input type="radio" id="siteclose" name="siteclose" value="0"  <IF NAME="nclose"> checked="checked"</IF>></label>
-		</td>
-	</tr>
-	<tr>
-		<td><label for="closemsg">{lang.CLOSE_MSG}</label></td>
-		<td><label><input type="text" id="closemsg" name="closemsg" value="{con.closemsg}" size="40"></label></td>
-	</tr>
-	<tr>
-		<td><label for="decode">{lang.FILENAME_CHNG}</label></td>
-		<td><label>
-		<select id="decode" name="decode">
-		<option <IF NAME="none_decode">selected="selected"</IF> value="0">{lang.NO_CHANGE}</option>
-		<option <IF NAME="md5_decode">selected="selected"</IF> value="2">{lang.CHANGE_MD5}</option>
-		<option <IF NAME="time_decode">selected="selected"</IF> value="1">{lang.CHANGE_TIME}</option>
-		</select>
-		</label></td>
-	</tr>
-	<tr>
-		<td><label for="del_url_file">{lang.ENAB_DELURL}</label></td>
-		<td>
-		<label>{lang.YES}<input type="radio" id="del_url_file" name="del_url_file" value="1"  <IF NAME="ydel_url_file"> checked="checked"</IF>></label>
-		<label>{lang.NO}<input type="radio" id="del_url_file" name="del_url_file" value="0"  <IF NAME="ndel_url_file"> checked="checked"</IF>></label>
-		</td>
-	</tr>
-	<tr>
-		<td><label for="enable_userfile">{lang.ENABLE_USER_FILE}</label></td>
-		<td>
-		<label>{lang.YES}<input type="radio" id="enable_userfile" name="enable_userfile" value="1"  <IF NAME="yenable_userfile"> checked="checked"</IF>></label>
-		<label>{lang.NO}<input type="radio" id="enable_userfile" name="enable_userfile" value="0"  <IF NAME="nenable_userfile"> checked="checked"</IF>></label>
-		</td>
-	</tr>
-	<tr>
-		<td><label for="user_system">{lang.USER_SYSTEM}</label></td>
-		<td><label>
-		<select id="user_system" name="user_system">
-		<option <IF NAME="user_system_normal">selected="selected"</IF> value="1">{lang.NORMAL}</option>
-		<option <IF NAME="user_system_phpbb">selected="selected"</IF> value="2">{lang.W_PHPBB}</option>
-		<option <IF NAME="user_system_vb">selected="selected"</IF> value="3">{lang.W_VBB}</option>
-		<option <IF NAME="user_system_mysbb">selected="selected"</IF> value="4">{lang.W_MYSBB}</option>		
-		</select>
+        <tr>
+                <td><label for="sitename">{lang.SITENAME}</label></td>
+                <td><label><input type="text" id="sitename" name="sitename" value="{con.sitename}" size="40"></label></td>
+        </tr>
+        <tr>
+                <td><label for="siteurl">{lang.SITEURL}</label></td>
+                <td><label><input type="text" id="siteurl" name="siteurl" value="{con.siteurl}" size="40"></label></td>
+        </tr>
+        <tr>
+                <td><label for="sitemail">{lang.SITEMAIL}</label></td>
+                <td><label><input type="text" id="sitemail" name="sitemail" value="{con.sitemail}" size="40"></label></td>
+        </tr>
+        <tr>
+                <td><label for="total_size">{lang.MAX_SIZE_SITE}</label></td>
+                <td><label><input type="text" id="total_size" name="total_size" value="{con.total_size}" size="10"></label></td>
+        </tr>
+        <tr>
+                <td><label for="foldername">{lang.FOLDERNAME}</label></td>
+                <td><label><input type="text" id="foldername" name="foldername" value="{con.foldername}" size="20"></label></td>
+        </tr>
+        <tr>
+                <td><label for="prefixname">{lang.FILES_PREFIX}</label></td>
+                <td><label><input type="text" id="prefixname" name="prefixname" value="{con.prefixname}" size="10"></label></td>
+        </tr>
+        <tr>
+                <td><label for="filesnum">{lang.FILES_NUMB}</label></td>
+                <td><label><input type="text" id="filesnum" name="filesnum" value="{con.filesnum}" size="10"></label></td>
+        </tr>
+        <tr>
+                <td><label for="del_f_day">{lang.DEL_FDAY}</label></td>
+                <td><label><input type="text" id="del_f_day" name="del_f_day" value="{con.del_f_day}" size="10"></label></td>
+        </tr>        
+        <tr>
+                <td><label for="www_url">{lang.WWW_URL}</label></td>
+                <td>
+                <label>{lang.YES}<input type="radio" id="www_url" name="www_url" value="1"  <IF NAME="ywww_url"> checked="checked"</IF>></label>
+                <label>{lang.NO}<input type="radio" id="www_url" name="www_url" value="0"  <IF NAME="nwww_url"> checked="checked"</IF>></label>
+                </td>
+        </tr>        
+        <tr>
+                <td><label for="thumbs_imgs">{lang.ENAB_THMB}</label></td>
+                <td>
+                <label>{lang.YES}<input type="radio" id="thumbs_imgs" name="thumbs_imgs" value="1"  <IF NAME="ythumbs_imgs"> checked="checked"</IF>></label>
+                <label>{lang.NO}<input type="radio" id="thumbs_imgs" name="thumbs_imgs" value="0"  <IF NAME="nthumbs_imgs"> checked="checked"</IF>></label>
+                </td>
+        </tr>
+        <tr>
+                <td><label for="write_imgs">{lang.ENAB_STAMP}</label></td>
+                <td>
+                <label>{lang.YES}<input type="radio" id="write_imgs" name="write_imgs" value="1"  <IF NAME="ywrite_imgs"> checked="checked"</IF>></label>
+                <label>{lang.NO}<input type="radio" id="write_imgs" name="write_imgs" value="0"  <IF NAME="nwrite_imgs"> checked="checked"</IF>></label>
+                </td>
+        </tr>        
+        <tr>
+                <td><label for="siteclose">{lang.SITECLOSE}</label></td>
+                <td>
+                <label>{lang.YES}<input type="radio" id="siteclose" name="siteclose" value="1"  <IF NAME="yclose"> checked="checked"</IF>></label>
+                <label>{lang.NO}<input type="radio" id="siteclose" name="siteclose" value="0"  <IF NAME="nclose"> checked="checked"</IF>></label>
+                </td>
+        </tr>
+        <tr>
+                <td><label for="closemsg">{lang.CLOSE_MSG}</label></td>
+                <td><label><input type="text" id="closemsg" name="closemsg" value="{con.closemsg}" size="40"></label></td>
+        </tr>
+        <tr>
+                <td><label for="decode">{lang.FILENAME_CHNG}</label></td>
+                <td><label>
+                <select id="decode" name="decode">
+                <option <IF NAME="none_decode">selected="selected"</IF> value="0">{lang.NO_CHANGE}</option>
+                <option <IF NAME="md5_decode">selected="selected"</IF> value="2">{lang.CHANGE_MD5}</option>
+                <option <IF NAME="time_decode">selected="selected"</IF> value="1">{lang.CHANGE_TIME}</option>
+                </select>
+                </label></td>
+        </tr>
+        <tr>
+                <td><label for="del_url_file">{lang.ENAB_DELURL}</label></td>
+                <td>
+                <label>{lang.YES}<input type="radio" id="del_url_file" name="del_url_file" value="1"  <IF NAME="ydel_url_file"> checked="checked"</IF>></label>
+                <label>{lang.NO}<input type="radio" id="del_url_file" name="del_url_file" value="0"  <IF NAME="ndel_url_file"> checked="checked"</IF>></label>
+                </td>
+        </tr>
+        <tr>
+                <td><label for="enable_userfile">{lang.ENABLE_USER_FILE}</label></td>
+                <td>
+                <label>{lang.YES}<input type="radio" id="enable_userfile" name="enable_userfile" value="1"  <IF NAME="yenable_userfile"> checked="checked"</IF>></label>
+                <label>{lang.NO}<input type="radio" id="enable_userfile" name="enable_userfile" value="0"  <IF NAME="nenable_userfile"> checked="checked"</IF>></label>
+                </td>
+        </tr>
+        <tr>
+                <td><label for="user_system">{lang.USER_SYSTEM}</label></td>
+                <td><label>
+                <select id="user_system" name="user_system">
+                <option <IF NAME="user_system_normal">selected="selected"</IF> value="1">{lang.NORMAL}</option>
+                <option <IF NAME="user_system_phpbb">selected="selected"</IF> value="2">{lang.W_PHPBB}</option>
+                <option <IF NAME="user_system_vb">selected="selected"</IF> value="3">{lang.W_VBB}</option>
+                <option <IF NAME="user_system_mysbb">selected="selected"</IF> value="4">{lang.W_MYSBB}</option>                
+                </select>
 
-		</label></td>
-	</tr>
-	<tr>
-		<td><label for="register">{lang.ENAB_REG}</label></td>
-		<td>
-		<label>{lang.YES}<input type="radio" id="register" name="register" value="1"  <IF NAME="yregister"> checked="checked"</IF>></label>
-		<label>{lang.NO}<input type="radio" id="register" name="register" value="0"  <IF NAME="nregister"> checked="checked"</IF>></label>
-		</td>	
-	</tr>
-	<tr>
-		<td><label for="style">{lang.STYLENAME}</label></td>
-		<td><label>
-		<select name="style" id="style">
-		{stylfiles}
-		</select>
-		</label></td>
-	</tr>
-	<tr>
-		<td><label for="language">{lang.LANGUAGE}</label></td>
-		<td><label>
-		<select name="language" id="language">
-		{lngfiles}
-		</select>
-		</label></td>
-	</tr>
-	<tr>
-		<td><label for="sec_down">{lang.SC_BEFOR_DOWM}</label></td>
-		<td><label><input type="text" id="sec_down" name="sec_down" value="{con.sec_down}" size="40"></label></td>
-	</tr>
-	<tr>
-		<td><label for="allow_online">{lang.ALLOW_ONLINE}</label></td>
-		<td>
-		<label>{lang.YES}<input type="radio" id="allow_online" name="allow_online" value="1"  <IF NAME="yallow_online"> checked="checked"</IF>></label>
-		<label>{lang.NO}<input type="radio" id="allow_online" name="allow_online" value="0"  <IF NAME="nallow_online"> checked="checked"</IF>></label>
-		</td>	
-	</tr>	
-	<tr>
-		<td><label for="allow_stat_pg">{lang.ALLOW_STAT_PG}</label></td>
-		<td>
-		<label>{lang.YES}<input type="radio" id="allow_stat_pg" name="allow_stat_pg" value="1"  <IF NAME="yallow_stat_pg"> checked="checked"</IF>></label>
-		<label>{lang.NO}<input type="radio" id="allow_stat_pg" name="allow_stat_pg" value="0"  <IF NAME="nallow_stat_pg"> checked="checked"</IF>></label>
-		</td>	
-	</tr>	
-	<tr>
-		<td><label for="statfooter">{lang.SHOW_PHSTAT}</label></td>
-		<td>
-		<label>{lang.YES}<input type="radio" id="statfooter" name="statfooter" value="1"  <IF NAME="ystatfooter"> checked="checked"</IF>></label>
-		<label>{lang.NO}<input type="radio" id="statfooter" name="statfooter" value="0"  <IF NAME="nstatfooter"> checked="checked"</IF>></label>
-		</td>	
-	</tr>	
-	<tr>
-		<td><label for="safe_code">{lang.SAFE_CODE_UPLOAD}</label></td>
-		<td>
-		<label>{lang.YES}<input type="radio" id="safe_code" name="safe_code" value="1"  <IF NAME="ysafe_code"> checked="checked"</IF>></label>
-		<label>{lang.NO}<input type="radio" id="safe_code" name="safe_code" value="0"  <IF NAME="nsafe_code"> checked="checked"</IF>></label>
-		</td>	
-	</tr>
-	<tr>
-		<td><label for="gzip">{lang.EN_GZIP}</label></td>
-		<td>
-		<label>{lang.YES}<input type="radio" id="gzip" name="gzip" value="1"  <IF NAME="ygzip"> checked="checked"</IF>></label>
-		<label>{lang.NO}<input type="radio" id="gzip" name="gzip" value="0"  <IF NAME="ngzip"> checked="checked"</IF>></label>
-		</td>	
-	</tr>
-	<tr>
-		<td><label for="welcome_msg">{lang.WELC_MSG}</label></td>
-		<td><label><input type="text" id="welcome_msg" name="welcome_msg" value="{con.welcome_msg}" size="40"></label></td>
-	</tr>
-	<tr>
-		<td><label for="googleanalytics"><a href="http://www.google.com/analytics" target="_kleeja"><span style="color:orange">Google</span> Analytics</a></label></td>
-		<td><label><input type="text" id="googleanalytics" name="googleanalytics" value="{con.googleanalytics}" size="10"></label></td>
-	</tr>
-	<tr>
-		<td><label for="mod_writer">{lang.MOD_WRITER}</label></td>
-		<td>
-		<label>{lang.YES}<input type="radio" id="mod_writer" name="mod_writer" value="1"  <IF NAME="ymod_writer"> checked="checked"</IF>></label>
-		<label>{lang.NO}<input type="radio" id="mod_writer" name="mod_writer" value="0"  <IF NAME="nmod_writer"> checked="checked"</IF>></label>
-		  [ {lang.MOD_WRITER_EX} ]
-		</td>	
-	</tr>	
-	<!-- admin configs tr extra -->
+                </label></td>
+        </tr>
+        <tr>
+                <td><label for="register">{lang.ENAB_REG}</label></td>
+                <td>
+                <label>{lang.YES}<input type="radio" id="register" name="register" value="1"  <IF NAME="yregister"> checked="checked"</IF>></label>
+                <label>{lang.NO}<input type="radio" id="register" name="register" value="0"  <IF NAME="nregister"> checked="checked"</IF>></label>
+                </td>        
+        </tr>
+        <tr>
+                <td><label for="style">{lang.STYLENAME}</label></td>
+                <td><label>
+                <select name="style" id="style">
+                {stylfiles}
+                </select>
+                </label></td>
+        </tr>
+        <tr>
+                <td><label for="language">{lang.LANGUAGE}</label></td>
+                <td><label>
+                <select name="language" id="language">
+                {lngfiles}
+                </select>
+                </label></td>
+        </tr>
+        <tr>
+                <td><label for="sec_down">{lang.SC_BEFOR_DOWM}</label></td>
+                <td><label><input type="text" id="sec_down" name="sec_down" value="{con.sec_down}" size="40"></label></td>
+        </tr>
+        <tr>
+                <td><label for="allow_online">{lang.ALLOW_ONLINE}</label></td>
+                <td>
+                <label>{lang.YES}<input type="radio" id="allow_online" name="allow_online" value="1"  <IF NAME="yallow_online"> checked="checked"</IF>></label>
+                <label>{lang.NO}<input type="radio" id="allow_online" name="allow_online" value="0"  <IF NAME="nallow_online"> checked="checked"</IF>></label>
+                </td>        
+        </tr>        
+        <tr>
+                <td><label for="allow_stat_pg">{lang.ALLOW_STAT_PG}</label></td>
+                <td>
+                <label>{lang.YES}<input type="radio" id="allow_stat_pg" name="allow_stat_pg" value="1"  <IF NAME="yallow_stat_pg"> checked="checked"</IF>></label>
+                <label>{lang.NO}<input type="radio" id="allow_stat_pg" name="allow_stat_pg" value="0"  <IF NAME="nallow_stat_pg"> checked="checked"</IF>></label>
+                </td>        
+        </tr>        
+        <tr>
+                <td><label for="statfooter">{lang.SHOW_PHSTAT}</label></td>
+                <td>
+                <label>{lang.YES}<input type="radio" id="statfooter" name="statfooter" value="1"  <IF NAME="ystatfooter"> checked="checked"</IF>></label>
+                <label>{lang.NO}<input type="radio" id="statfooter" name="statfooter" value="0"  <IF NAME="nstatfooter"> checked="checked"</IF>></label>
+                </td>        
+        </tr>        
+        <tr>
+                <td><label for="safe_code">{lang.SAFE_CODE_UPLOAD}</label></td>
+                <td>
+                <label>{lang.YES}<input type="radio" id="safe_code" name="safe_code" value="1"  <IF NAME="ysafe_code"> checked="checked"</IF>></label>
+                <label>{lang.NO}<input type="radio" id="safe_code" name="safe_code" value="0"  <IF NAME="nsafe_code"> checked="checked"</IF>></label>
+                </td>        
+        </tr>
+        <tr>
+                <td><label for="gzip">{lang.EN_GZIP}</label></td>
+                <td>
+                <label>{lang.YES}<input type="radio" id="gzip" name="gzip" value="1"  <IF NAME="ygzip"> checked="checked"</IF>></label>
+                <label>{lang.NO}<input type="radio" id="gzip" name="gzip" value="0"  <IF NAME="ngzip"> checked="checked"</IF>></label>
+                </td>        
+        </tr>
+        <tr>
+                <td><label for="welcome_msg">{lang.WELC_MSG}</label></td>
+                <td><label><input type="text" id="welcome_msg" name="welcome_msg" value="{con.welcome_msg}" size="40"></label></td>
+        </tr>
+        <tr>
+                <td><label for="googleanalytics"><a href="http://www.google.com/analytics" target="_kleeja"><span style="color:orange">Google</span> Analytics</a></label></td>
+                <td><label><input type="text" id="googleanalytics" name="googleanalytics" value="{con.googleanalytics}" size="10"></label></td>
+        </tr>
+        <tr>
+                <td><label for="mod_writer">{lang.MOD_WRITER}</label></td>
+                <td>
+                <label>{lang.YES}<input type="radio" id="mod_writer" name="mod_writer" value="1"  <IF NAME="ymod_writer"> checked="checked"</IF>></label>
+                <label>{lang.NO}<input type="radio" id="mod_writer" name="mod_writer" value="0"  <IF NAME="nmod_writer"> checked="checked"</IF>></label>
+                  [ {lang.MOD_WRITER_EX} ]
+                </td>        
+        </tr>        
+        <!-- admin configs tr extra -->
 </table>
 </fieldset>
 <fieldset class="quick" style="text-align:center">
-		<input class="button2" name="submit" type="submit" value="{n_submit}" />
+                <input class="button2" name="submit" type="submit" value="{n_submit}" />
 </fieldset>
 </form>
 </div>
 ]]>
-	</template>
-	<template name="admin_err">
-	<![CDATA[<div class="middle">
+        </template>
+        <template name="admin_err">
+        <![CDATA[<div class="middle">
 <br />
 <span style="color:red">
 <h3>{text}</h3>
 </span>
 <br />
 </div>]]>
-	</template>
-	<template name="admin_exts">
-	<![CDATA[
+        </template>
+        <template name="admin_exts">
+        <![CDATA[
 <div class="middle">
 <form method="post" action="{action}">
-	<fieldset>
-		<legend>{lang.R_EXTS}</legend>
+        <fieldset>
+                <legend>{lang.R_EXTS}</legend>
 
 <table style="width: 100%">
-	<tr style="background-color:silver">
-		<td>{lang.EXT}</td>
-		<td>{lang.GROUP}</td>
-		<td>{lang.SIZE_G}</td>
-		<td>{lang.ALLOW_G}</td>
-		<td>{lang.SIZE_U}</td>
-		<td>{lang.ALLOW_U}</td>
-		<!-- admin ext info tr extra -->
-	</tr>
+        <tr style="background-color:silver">
+                <td>{lang.EXT}</td>
+                <td>{lang.GROUP}</td>
+                <td>{lang.SIZE_G}</td>
+                <td>{lang.ALLOW_G}</td>
+                <td>{lang.SIZE_U}</td>
+                <td>{lang.ALLOW_U}</td>
+                <!-- admin ext info tr extra -->
+        </tr>
 <IF NAME="no_results">
 ...
 <ELSE>
 <LOOP NAME="arr">
-	<tr>
-		<td>{{name}}</td>
-		<td>{{group}}</td>
-		<td><input name="gsz[{{id}}]" type="text" value="{{g_size}}" size="7"/></td>
-		<td>{{g_allow}}</td>
-		<td><input name="usz[{{id}}]" type="text" value="{{u_size}}" size="7"/></td>
-		<td>{{u_allow}}</td>
-		<!-- admin ext data tr extra -->
-	</tr>
+        <tr>
+                <td>{{name}}</td>
+                <td>{{group}}</td>
+                <td><input name="gsz[{{id}}]" type="text" value="{{g_size}}" size="7"/></td>
+                <td>{{g_allow}}</td>
+                <td><input name="usz[{{id}}]" type="text" value="{{u_size}}" size="7"/></td>
+                <td>{{u_allow}}</td>
+                <!-- admin ext data tr extra -->
+        </tr>
 </LOOP>
 </IF>
 </table>
@@ -1219,9 +1217,9 @@ document.getElementById('mail_here').innerHTML= iee;
 </fieldset>
 <div style="text-align:center"><b>{arr_paging}</b></div>
 <fieldset class="quick" style="text-align:center">
-		<input class="button2" name="submit" type="submit" value="{lang.UPDATE_EXTS}" />
-		<br />
-		{lang.E_EXTS}
+                <input class="button2" name="submit" type="submit" value="{lang.UPDATE_EXTS}" />
+                <br />
+                {lang.E_EXTS}
 </fieldset>
 </form>
 
@@ -1229,50 +1227,52 @@ document.getElementById('mail_here').innerHTML= iee;
 
 
 ]]>
-	</template>
-	<template name="admin_files">
-	<![CDATA[
+        </template>
+        <template name="admin_files">
+        <![CDATA[
 <div class="middle">
 <form method="post" action="{action}">
-	<fieldset>
-		<legend>{lang.R_FILES}</legend>
+        <fieldset>
+                <legend>{lang.R_FILES}</legend>
 
 <table style="width: 100%">
-	<tr style="background-color:silver">
-		<td>{lang.FILENAME}</td>
-		<td>{lang.BY}</td>
-		<td>{lang.FILESIZE}</td>
-		<td>{lang.FILEUPS}</td>
-		<td>{lang.FILEDATE}</td>
-		<td>{lang.FILETYPE}</td>
-		<td>{lang.FILDER}</td>
-		<td>{lang.REPORT}</td>
-		<td>{lang.DELETE}</td>
-		<!-- admin files info tr extra -->
-	</tr>
+        <tr style="background-color:silver">
+                <td>{lang.FILENAME}</td>
+                <td>{lang.BY}</td>
+                <td>{lang.IP}</td>
+                <td>{lang.FILESIZE}</td>
+                <td>{lang.FILEUPS}</td>
+                <td>{lang.FILEDATE}</td>
+                <td>{lang.FILETYPE}</td>
+                <td>{lang.FILDER}</td>
+                <td>{lang.REPORT}</td>
+                <td>{lang.DELETE}</td>
+                <!-- admin files info tr extra -->
+        </tr>
 <IF NAME="no_results">
 ...
 <ELSE>
 <LOOP NAME="arr">
-	<tr style="background-color:#F5F5F5">
-		<td>{{name}}</td>
-		<td>{{user}}</td>
-		<td>{{size}}</td>
-		<td>{{ups}}</td>
-		<td>{{time}}</td>
-		<td>{{type}}</td>
-		<td>{{folder}}</td>
-		<td>{{report}}</td>
-		<td><input type="checkbox" name="del_{{id}}" value="1"></td>
-		<!-- admin files data tr extra -->
-	</tr>
+        <tr style="background-color:#F5F5F5">
+                <td>{{name}}</td>
+                <td>{{user}}</td>
+                <td>{{ip}}</td>
+                <td>{{size}}</td>
+                <td>{{ups}}</td>
+                <td>{{time}}</td>
+                <td>{{type}}</td>
+                <td>{{folder}}</td>
+                <td>{{report}}</td>
+                <td><input type="checkbox" name="del_{{id}}" value="1"></td>
+                <!-- admin files data tr extra -->
+        </tr>
 </LOOP>
 </IF>
 </table>
 
 </fieldset>
 <fieldset class="quick" style="text-align:center">
-		<input class="button2" name="submit" type="submit" value="{lang.UPDATE_FILES}" />
+                <input class="button2" name="submit" type="submit" value="{lang.UPDATE_FILES}" />
 </fieldset>
 </form>
 <div style="text-align:center">{page_nums}</div>
@@ -1280,9 +1280,9 @@ document.getElementById('mail_here').innerHTML= iee;
 
 
 ]]>
-	</template>
-	<template name="admin_footer">
-	<![CDATA[<div id="clear"></div>
+        </template>
+        <template name="admin_footer">
+        <![CDATA[<div id="clear"></div>
 </div>
 </div><div class="roundedcornr_bottom_459680"><div></div></div></div> </div>
 
@@ -1295,9 +1295,9 @@ Styles, Hacks in <a href="http://www.kleeja.com">Kleeja Official Website</a>
 
 </body>
 </html>]]>
-	</template>
-	<template name="admin_header">
-	<![CDATA[<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+        </template>
+        <template name="admin_header">
+        <![CDATA[<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" dir="{lang.DIR}">
 <head>
 <title>{lang.KLEEJA_CP} - {config.sitename}</title>
@@ -1326,7 +1326,7 @@ Styles, Hacks in <a href="http://www.kleeja.com">Kleeja Official Website</a>
 <div class="right">
 
 <IF NAME="SHOW_LIST">
-		<div class="roundedcornr_box_561672"> <div class="roundedcornr_top_561671"><div></div></div><div class="roundedcornr_content_561671">
+                <div class="roundedcornr_box_561672"> <div class="roundedcornr_top_561671"><div></div></div><div class="roundedcornr_content_561671">
 <!-- BEGIN ADMIN MENU -->
 <ul>
 <li><img src="./images/style/admin/index_button.gif" />
@@ -1340,78 +1340,78 @@ Styles, Hacks in <a href="http://www.kleeja.com">Kleeja Official Website</a>
 <!-- admin header menu extra -->
 </ul>
 <!-- END ADMIN MENU -->
-	</div><div class="roundedcornr_bottom_561671"><div></div></div></div>
+        </div><div class="roundedcornr_bottom_561671"><div></div></div></div>
 </IF>
 
 </div>
 
 <!-- END ADMIN HEADER -->
 ]]>
-	</template>
-	<template name="admin_info">
-	<![CDATA[<div class="middle">
+        </template>
+        <template name="admin_info">
+        <![CDATA[<div class="middle">
 <br />
 <span style="color:green">
 <h3>{text}</h3>
 </span>
 <br />
 </div>]]>
-	</template>
-	<template name="admin_reports">
-	<![CDATA[<script language="javascript">
+        </template>
+        <template name="admin_reports">
+        <![CDATA[<script language="javascript">
 function show_msg (te , id)
 {
 var te = document.getElementById(te).value;
 var iee = te;
-	iee += "<br /><form method='post' action='{action}'><textarea name='v_" + id + "' cols='50' rows='4'></textarea>";
-	iee += "<input class='button2' name='reply_submit' type='submit' value='{lang.REPLY}' /></form>";	
+        iee += "<br /><form method='post' action='{action}'><textarea name='v_" + id + "' cols='50' rows='4'></textarea>";
+        iee += "<input class='button2' name='reply_submit' type='submit' value='{lang.REPLY}' /></form>";        
 document.getElementById('mail_here').innerHTML = iee;
 
 }
 </script>
 <div class="middle">
-	<fieldset>
-		<legend>{lang.TEXT}</legend>
+        <fieldset>
+                <legend>{lang.TEXT}</legend>
 <div id="mail_here">{lang.E_CLICK}</div>
-	</fieldset>
+        </fieldset>
 <form method="post" action="{action}">
 
 
-	
+        
 <form method="post" action="{action}">
-	<fieldset>
-		<legend>{lang.R_REPORTS}</legend>
+        <fieldset>
+                <legend>{lang.R_REPORTS}</legend>
 
 <table style="width: 100%">
-	<tr style="background-color:silver">
-		<td>{lang.NAME}</td>
-		<td>{lang.EMAIL}</td>
-		<td>{lang.TIME}</td>
-		<td>{lang.IP}</td>
-		<td>{lang.DELETE}</td>
-		<!-- admin reports info tr extra -->
-	</tr>
+        <tr style="background-color:silver">
+                <td>{lang.NAME}</td>
+                <td>{lang.EMAIL}</td>
+                <td>{lang.TIME}</td>
+                <td>{lang.IP}</td>
+                <td>{lang.DELETE}</td>
+                <!-- admin reports info tr extra -->
+        </tr>
 <IF NAME="no_results">
 ...
 <ELSE>
 <LOOP NAME="arr">
-	<tr style="background-color:#F5F5F5">
-		<td><a title="{n_mail}:{{mail}}" onclick="javascript:show_msg('textva_{{id}}',{{id}});">{{name}}</a>
-		<input type="hidden" value="{{mail}} :<br/> {{text}}" id="textva_{{id}}">
-		</td>
-		<td><a href="{{url}}">{lang.CLICKHERE}<a/></td>
-		<td>{{time}}</td>
-		<td><a href="{{ip_finder}}" target="blank">{{ip}}</a></td>
-		<td><input type="checkbox" name="del_{{id}}" value="1"></td>
-			<!-- admin reports data tr extra -->
-	</tr>
+        <tr style="background-color:#F5F5F5">
+                <td><a title="{n_mail}:{{mail}}" onclick="javascript:show_msg('textva_{{id}}',{{id}});">{{name}}</a>
+                <input type="hidden" value="{{mail}} :<br/> {{text}}" id="textva_{{id}}">
+                </td>
+                <td><a href="{{url}}">{lang.CLICKHERE}<a/></td>
+                <td>{{time}}</td>
+                <td><a href="{{ip_finder}}" target="blank">{{ip}}</a></td>
+                <td><input type="checkbox" name="del_{{id}}" value="1"></td>
+                        <!-- admin reports data tr extra -->
+        </tr>
 </LOOP>
 </IF>
 </table>
 
 </fieldset>
 <fieldset class="quick" style="text-align:center">
-		<input class="button2" name="submit" type="submit" value="{lang.UPDATE_REPORTS}" />
+                <input class="button2" name="submit" type="submit" value="{lang.UPDATE_REPORTS}" />
 </fieldset>
 </form>
 <div style="text-align:center"><b>{page_nums}</b></div>
@@ -1419,18 +1419,18 @@ document.getElementById('mail_here').innerHTML = iee;
 
 
 ]]>
-	</template>
-	<template name="admin_start">
-	<![CDATA[
+        </template>
+        <template name="admin_start">
+        <![CDATA[
 <div class="middle">
-			
-<h2>{lang.KLEEJA_CP}..</h2>	
+                        
+<h2>{lang.KLEEJA_CP}..</h2>        
 {lang.KLEEJA_CP_W}
 <br />
 <br />
-	<fieldset>
-		<legend>{lang.GENERAL_STAT}</legend>
-		
+        <fieldset>
+                <legend>{lang.GENERAL_STAT}</legend>
+                
 <table width="80%">
 <tr>
 <td><b>{lang.AFILES_NUM} :</b>
@@ -1505,49 +1505,49 @@ document.getElementById('mail_here').innerHTML = iee;
 </td>
 </tr>
 <IF NAME="last_visit">
-	<tr>
-	<td><b>{lang.LAST_VISIT} :</b>
-	</td>
-	<td>
-	{last_visit}<br/>
-	<a href="{h_lst_files}">{lang.FLS_LST_VST_SEARCH}</a><br/>
-	<a href="{h_lst_imgs}">{lang.IMG_LST_VST_SEARCH}</a>
-	</td>
-	</tr>
+        <tr>
+        <td><b>{lang.LAST_VISIT} :</b>
+        </td>
+        <td>
+        {last_visit}<br/>
+        <a href="{h_lst_files}">{lang.FLS_LST_VST_SEARCH}</a><br/>
+        <a href="{h_lst_imgs}">{lang.IMG_LST_VST_SEARCH}</a>
+        </td>
+        </tr>
 </IF>
-	<!-- admin start info tr extra -->
+        <!-- admin start info tr extra -->
 </table>
 
-	</fieldset>
+        </fieldset>
 <br />
-	<fieldset>
-		<legend>{lang.SIZE_STAT}</legend>
-		
-	  <table width="100%" cellspacing="1" cellpadding="2" border="0" style=" background-color:#F0F0F0" dir="ltr">
-		<tr> 
-		  <td colspan="3" style="width:100%; text-align:right;" nowrap="nowrap">{lang.USING_SIZE}</td>
-		</tr>
-		<tr> 
-		  <td colspan="3" style="width:100%;">
-			<table cellspacing="0" cellpadding="1" border="0">
-			  <tr> 
-				<td style="background-color: olive"><img src="images/spacer.gif" width="{per1}" height="10" /></td>
-			  </tr>
-			</table>
-		  </td>
-		</tr>
-		<tr> 
-		  <td style="width:33%;background-color: #CCEECC;">0%</td>
-		  <td style="width:34%; background-color: #FFFFE8; text-align:center;">50%</td>
-		  <td style="width:33%;background-color: #FFD2D2; text-align:right;">100%</td>
-		</tr>
-	  </table>
+        <fieldset>
+                <legend>{lang.SIZE_STAT}</legend>
+                
+          <table width="100%" cellspacing="1" cellpadding="2" border="0" style=" background-color:#F0F0F0" dir="ltr">
+                <tr> 
+                  <td colspan="3" style="width:100%; text-align:right;" nowrap="nowrap">{lang.USING_SIZE}</td>
+                </tr>
+                <tr> 
+                  <td colspan="3" style="width:100%;">
+                        <table cellspacing="0" cellpadding="1" border="0">
+                          <tr> 
+                                <td style="background-color: olive"><img src="images/spacer.gif" width="{per1}" height="10" /></td>
+                          </tr>
+                        </table>
+                  </td>
+                </tr>
+                <tr> 
+                  <td style="width:33%;background-color: #CCEECC;">0%</td>
+                  <td style="width:34%; background-color: #FFFFE8; text-align:center;">50%</td>
+                  <td style="width:33%;background-color: #FFD2D2; text-align:right;">100%</td>
+                </tr>
+          </table>
 
-	</fieldset>
+        </fieldset>
 
 <br />
-	<fieldset>
-		<legend>{lang.OTHER_INFO}</legend>
+        <fieldset>
+                <legend>{lang.OTHER_INFO}</legend>
 <table width="100%">
 <tr>
 <td><b>{lang.KLEEJA_VERSION} :</b>
@@ -1587,16 +1587,16 @@ document.getElementById('mail_here').innerHTML = iee;
 </tr>
 <!-- admin start info2 tr extra -->
 </table>
-	</fieldset>
+        </fieldset>
 
 </table>
 </div>
-		
+                
 
 ]]>
-	</template>
-	<template name="admin_stylesheet">
-	<![CDATA[
+        </template>
+        <template name="admin_stylesheet">
+        <![CDATA[
 * {
     padding: 0;
     margin: 0;
@@ -1609,39 +1609,39 @@ html {
 }
 body {
     background-color: #CCCCCC;
-	font: .74em "Tahoma" Verdana, Arial, sans-serif;
-	line-height: 1.5em; 
+        font: .74em "Tahoma" Verdana, Arial, sans-serif;
+        line-height: 1.5em; 
     margin: 10px 15px;
     padding: 12px 0;
 }
 a {
-	color: #3B6EBF;
-	text-decoration: none;
+        color: #3B6EBF;
+        text-decoration: none;
 }
 
 a:hover {
-	text-decoration: underline;
+        text-decoration: underline;
 }
 
 
 #wrap {
-	margin: 20px auto;
-	width: 920px;
+        margin: 20px auto;
+        width: 920px;
 
 }
 
 
-	
+        
 
 
 #header {
-	width:50%;
-	margin-bottom:5px;
+        width:50%;
+        margin-bottom:5px;
 }
 
 
 #content {
-	padding: 0 40px 0 40px;
+        padding: 0 40px 0 40px;
 }
 
 
@@ -1656,7 +1656,7 @@ a:hover {
 .roundedcornr_top_459680 div, .roundedcornr_top_459680, 
 .roundedcornr_bottom_459680 div, .roundedcornr_bottom_459680 { width: 100%; height: 30px;font-size: 1px;}
 .roundedcornr_content_459680 { margin: 0 2px; }
-.roundedcornr_box_561671 {background: #f5f5f5; min-height: 3em;	width: auto;}
+.roundedcornr_box_561671 {background: #f5f5f5; min-height: 3em;        width: auto;}
 .roundedcornr_box_561672 { background: #f5f5f5;width: 100%;}
 .roundedcornr_top_561671 div { background: url(./images/style/admin/roundedcornr_561671_tl.png) no-repeat top left;}
 .roundedcornr_top_561671 { background: url(./images/style/admin/roundedcornr_561671_tr.png) no-repeat top right;}
@@ -1668,35 +1668,35 @@ a:hover {
 
 .breadcrumbs { 
     background: #F6F9FB; 
-	border-bottom: 1px solid #E1E1E1; 
-	padding: 5px;
+        border-bottom: 1px solid #E1E1E1; 
+        padding: 5px;
 }
-	
+        
 
 .middle{
-	width: 70%;
-	margin: 0 auto;
-	padding: 1% 1%;
-	float:left;
+        width: 70%;
+        margin: 0 auto;
+        padding: 1% 1%;
+        float:left;
 }
 
 .right {
-	float: right;
-	width: 25%;
-	margin: 0 1px;
-	padding: 1% 1%;
-	
+        float: right;
+        width: 25%;
+        margin: 0 1px;
+        padding: 1% 1%;
+        
 }
 
 .right ul {
-	padding: 20px 0 15px 20px;
-	margin:0;
+        padding: 20px 0 15px 20px;
+        margin:0;
 }
 
 .right li {
-	margin-bottom:5px;
-	list-style-type: none;
-	color: #3B6EBF;
+        margin-bottom:5px;
+        list-style-type: none;
+        color: #3B6EBF;
 }
 
 .middle h2 { color: #3B6EBF; font-size: 16px; margin-bottom: 10px; margin-top: 10px;}
@@ -1704,16 +1704,16 @@ a:hover {
 
 
 #clear {
-	display: block;
-	clear: both;
-	width: 100%;
-	height:1px;
-	overflow:hidden;
+        display: block;
+        clear: both;
+        width: 100%;
+        height:1px;
+        overflow:hidden;
 }
 
 #footer {
-	text-align: center;
-	color: #666;
+        text-align: center;
+        color: #666;
 }
 
 img { border:0px;}
@@ -1739,8 +1739,8 @@ fieldset {
         border-left: 1px solid #D7D7D7;
         background-color: #FFFFFF;
         position: relative;
-		/* rounded corners for firefox .. love u saanina ;) */
-		-moz-border-radius: 8px; border-radius:1px;
+                /* rounded corners for firefox .. love u saanina ;) */
+                -moz-border-radius: 8px; border-radius:1px;
 
 }
 * html fieldset {
@@ -1847,171 +1847,177 @@ a.button2, input.button2 {
 }
 
 .bg_img {
-	text-align:center;
-	width:112px;
-	height:112px;
-	padding: 20px 0;
-	cursor: pointer;
-	background-image: url('./images/style/admin/bg_img.gif');
-	background-repeat: no-repeat;
+        text-align:center;
+        width:112px;
+        height:112px;
+        padding: 20px 0;
+        cursor: pointer;
+        background-image: url('./images/style/admin/bg_img.gif');
+        background-repeat: no-repeat;
 }
 #toolTipBox {
-	display: none;
-	padding: 5;
-	font-size: 11px;
-	font-family: Tahoma;
-	position: fixed;
-	background-color: #FCFCCD;
-	border: 1px solid #FFFF00;
-	color: 000000;
+        display: none;
+        padding: 5;
+        font-size: 11px;
+        font-family: Tahoma;
+        position: fixed;
+        background-color: #FCFCCD;
+        border: 1px solid #FFFF00;
+        color: 000000;
 }
 .tipp {
 
 }
 ]]>
-	</template>
-	<template name="admin_users">
-	<![CDATA[
+        </template>
+        <template name="admin_users">
+        <![CDATA[
 <div class="middle">
 <form method="post" action="{action}">
-	<fieldset>
-		<legend>{lang.R_USERS}</legend>
+        <fieldset>
+                <legend>{lang.R_USERS}</legend>
 
 <table style="width: 100%">
-	<tr style="background-color:silver">
-		<td>{lang.USERNAME}</td>
-		<td>{lang.EMAIL}</td>
-		<td>{lang.PASSWORD}</td>
-		<td>{lang.IS_ADMIN}</td>
-		<td>{lang.DELETE}</td>
-		<!-- admin users info tr extra -->
-	</tr>
+        <tr style="background-color:silver">
+                <td>{lang.USERNAME}</td>
+                <td>{lang.EMAIL}</td>
+                <td>{lang.PASSWORD}</td>
+                <td>{lang.IS_ADMIN}</td>
+                <td>{lang.DELETE}</td>
+                <!-- admin users info tr extra -->
+        </tr>
 <IF NAME="no_results">
 ...
 <ELSE>
 <LOOP NAME="arr">
-	<tr style="background-color:#F5F5F5">
-		<td><label><input type="text" name="nm_{{id}}" value="{{name}}" size="20"></label></td>
-		<td><label><input type="text" name="ml_{{id}}" value="{{mail}}" size="20"></label></td>
-		<td><label><input type="password" name="ps_{{id}}" value="" size="10"></label></td>
-		<td>{{admin}}</td>
-		<td><input type="checkbox" name="del_{{id}}" value="1"></td>
-		<!-- admin users data tr extra -->
-	</tr>
+        <tr style="background-color:#F5F5F5">
+                <td><label><input type="text" name="nm_{{id}}" value="{{name}}" size="20"></label></td>
+                <td><label><input type="text" name="ml_{{id}}" value="{{mail}}" size="20"></label></td>
+                <td><label><input type="password" name="ps_{{id}}" value="" size="10"></label></td>
+                <td>{{admin}}</td>
+                <td><input type="checkbox" name="del_{{id}}" value="1"></td>
+                <!-- admin users data tr extra -->
+        </tr>
 </LOOP>
 </IF>
 </table>
 
 </fieldset>
 <fieldset class="quick" style="text-align:center">
-		<input class="button2" name="submit" type="submit" value="{lang.UPDATE_USERS}" />
+                <input class="button2" name="submit" type="submit" value="{lang.UPDATE_USERS}" />
 </fieldset>
 </form>
 <div style="text-align:center"><b>{page_nums}</b></div>
 </div>
 ]]>
-	</template>
-	<template name="admin_search">
-	<![CDATA[<div class="middle">
+        </template>
+        <template name="admin_search">
+        <![CDATA[<div class="middle">
 <form method="post" action="{action1}">
-	<fieldset>
-		<legend>{lang.SEARCH_FILES}</legend>
+        <fieldset>
+                <legend>{lang.SEARCH_FILES}</legend>
 
 <table style="width: 90%">
-	<tr>
-		<td><label for="filename">{lang.FILENAME}</label></td>
-		<td><label><input type="text" id="filename" name="filename" value="{_POST.filename}" size="40"></label></td>
-	</tr>	
-	<tr>
-		<td><label for="username">{lang.USERNAME}</label></td>
-		<td><label><input type="text" id="username" name="username" value="{_POST.username}" size="40"></label></td>
-	</tr>	
-	<tr>
-		<td><label for="ext">{lang.FILETYPE}</label></td>
-		<td><label><input type="text" id="ext" name="ext" value="{_POST.ext}" size="20"></label></td>
-	</tr>
-	<tr>
-		<td><label for="size">{lang.FILESIZE} </label></td>
-		<td><label><select name="than"><option value="1">&gt;</option><option value="2">&lt;</option></select> <input type="text" id="size" name="size" value="{_POST.size}" size="10"></label>{lang.BITE}</td>
-	</tr>
-	<tr>
-		<td><label for="ups">{lang.FILEUPS} </label></td>
-		<td><label><select name="uthan"><option value="1">&gt;</option><option value="2">&lt;</option></select> <input type="text" id="ups" name="ups" value="{_POST.ups}" size="10"></label></td>
-	</tr>
-	<tr>
-		<td><label for="rep">{lang.REPORT} </label></td>
-		<td><label><select name="rthan"><option value="1">&gt;</option><option value="2">&lt;</option></select> <input type="text" id="rep" name="rep" value="{_POST.rep}" size="10"></label></td>
-	</tr>
-	<tr>
-		<td><label for="lastdown">{lang.LAST_DOWN} </label></td>
-		<td>
-		{lang.WAS_B4}
-		<label><input type="text" id="lastdown" name="lastdown" value="{_POST.lastdown}" size="10"></label>
-		{lang.DAYS}
-		</td>
-	</tr>
-	<!-- admin search data tr extra -->
+        <tr>
+                <td><label for="filename">{lang.FILENAME}</label></td>
+                <td><label><input type="text" id="filename" name="filename" value="{_POST.filename}" size="40"></label></td>
+        </tr>        
+        <tr>
+                <td><label for="username">{lang.USERNAME}</label></td>
+                <td><label><input type="text" id="username" name="username" value="{_POST.username}" size="40"></label></td>
+        </tr>        
+        <tr>
+                <td><label for="ext">{lang.FILETYPE}</label></td>
+                <td><label><input type="text" id="ext" name="ext" value="{_POST.ext}" size="20"></label></td>
+        </tr>
+        <tr>
+                <td><label for="size">{lang.FILESIZE} </label></td>
+                <td><label><select name="than"><option value="1">&gt;</option><option value="2">&lt;</option></select> <input type="text" id="size" name="size" value="{_POST.size}" size="10"></label>{lang.BITE}</td>
+        </tr>
+        <tr>
+                <td><label for="ups">{lang.FILEUPS} </label></td>
+                <td><label><select name="uthan"><option value="1">&gt;</option><option value="2">&lt;</option></select> <input type="text" id="ups" name="ups" value="{_POST.ups}" size="10"></label></td>
+        </tr>
+        <tr>
+                <td><label for="rep">{lang.REPORT} </label></td>
+                <td><label><select name="rthan"><option value="1">&gt;</option><option value="2">&lt;</option></select> <input type="text" id="rep" name="rep" value="{_POST.rep}" size="10"></label></td>
+        </tr>
+        <tr>
+                <td><label for="lastdown">{lang.LAST_DOWN} </label></td>
+                <td>
+                {lang.WAS_B4}
+                <label><input type="text" id="lastdown" name="lastdown" value="{_POST.lastdown}" size="10"></label>
+                {lang.DAYS}
+                </td>
+        </tr>
+        <tr>
+                <td><label for="user_ip">{lang.IP}</label></td>
+                <td>
+                <label><input type="text" id="user_ip" name="user_ip" value="{_POST.user_ip}" size="20"></label>
+                </td>
+        </tr>
+        <!-- admin search data tr extra -->
 </table>
 </fieldset>
 <fieldset class="quick" style="text-align:center">
-		<input class="button2" name="search_file" type="submit" value="{lang.SEARCH_SUBMIT}" />
+                <input class="button2" name="search_file" type="submit" value="{lang.SEARCH_SUBMIT}" />
 </fieldset>
 </form>
 <br/>
 <br/>
 <IF NAME="default_user_system">
 <form method="post" action="{action2}">
-	<fieldset>
-		<legend>{lang.SEARCH_USERS}</legend>
+        <fieldset>
+                <legend>{lang.SEARCH_USERS}</legend>
 
 <table style="width: 90%">
-	<tr>
-		<td><label for="username">{lang.USERNAME}</label></td>
-		<td><label><input type="text" id="username" name="username" value="{_POST.username}" size="40"></label></td>
-	</tr>		
-	<tr>
-		<td><label for="usermail">{lang.EMAIL}</label></td>
-		<td><label><input type="text" id="usermail" name="usermail" value="{_POST.usermail}" size="40"></label></td>
-	</tr>	
-	<!-- admin search data2 tr extra -->
+        <tr>
+                <td><label for="username">{lang.USERNAME}</label></td>
+                <td><label><input type="text" id="username" name="username" value="{_POST.username}" size="40"></label></td>
+        </tr>                
+        <tr>
+                <td><label for="usermail">{lang.EMAIL}</label></td>
+                <td><label><input type="text" id="usermail" name="usermail" value="{_POST.usermail}" size="40"></label></td>
+        </tr>        
+        <!-- admin search data2 tr extra -->
 </table>
 </fieldset>
 <fieldset class="quick" style="text-align:center">
-		<input class="button2" name="search_user" type="submit" value="{lang.SEARCH_SUBMIT}" />
+                <input class="button2" name="search_user" type="submit" value="{lang.SEARCH_SUBMIT}" />
 </fieldset>
 </form>
 </IF>
 </div>]]>
-	</template>
-	<template name="admin_img">
-	<![CDATA[
+        </template>
+        <template name="admin_img">
+        <![CDATA[
 <div class="middle">
 <form method="post" action="{action}">
-	<fieldset>
-		<legend>{lang.R_IMG_CTRL}</legend>
+        <fieldset>
+                <legend>{lang.R_IMG_CTRL}</legend>
 
 <table style="width: 100%">
 
 
-	<IF NAME="no_results">
-	<td>...</td>
-	<ELSE>
-	
+        <IF NAME="no_results">
+        <td>...</td>
+        <ELSE>
+        
 
-		
-	<LOOP NAME="arr">
+                
+        <LOOP NAME="arr">
 {{tdnum}}
-		<td>
-			<div  class="bg_img">
-			<a href="{{href}}"><img src="{{thumb_link}}"  style="width:75px;height:75px"  onmouseover="toolTip('{{name}}<br/>{{ups}}<br/>{{size}}<br/>{{time}}<br/>{{user}}',this);"/></a>
-			<br/><input name="del_{{id}}" type="checkbox" style="float:right"/>
-			</div>
-		</td>
+                <td>
+                        <div  class="bg_img">
+                        <a href="{{href}}"><img src="{{thumb_link}}"  style="width:75px;height:75px"  onmouseover="toolTip('{{name}}<br />{{ups}}<br />{{size}}<br/>{{time}}<br />{{user}}<br />{{ip}}',this);"/></a>
+                        <br/><input name="del_{{id}}" type="checkbox" style="float:right"/>
+                        </div>
+                </td>
 {{tdnum2}}
-	</LOOP>
+        </LOOP>
 
-		
-	</IF>
+                
+        </IF>
 <tr>
 <td>
 <span id="toolTipBox" width="200"></span>
@@ -2021,7 +2027,7 @@ a.button2, input.button2 {
 
 </fieldset>
 <fieldset class="quick" style="text-align:center">
-		<input class="button2" name="submit" type="submit" value="{lang.DEL_SELECTED}" />
+                <input class="button2" name="submit" type="submit" value="{lang.DEL_SELECTED}" />
 </fieldset>
 </form>
 <div style="text-align:center">{page_nums}</div>
@@ -2029,76 +2035,76 @@ a.button2, input.button2 {
 
 
 ]]>
-	</template>
-	<template name="admin_extra">
-	<![CDATA[<div class="middle">
+        </template>
+        <template name="admin_extra">
+        <![CDATA[<div class="middle">
 <form method="post" action="{action}">
-	<fieldset>
-		<legend>{lang.R_EXTRA}</legend>
+        <fieldset>
+                <legend>{lang.R_EXTRA}</legend>
 
 <table style="width: 90%">
-	<tr>
-		<td><label for="ex_header">{lang.EX_HEADER_N}</label></td>
-	</tr>
-	<tr>
-		<td>
-		<label>
-		<textarea id="ex_header" name="ex_header" style="width: 490px; height: 210px;direction:ltr;" >{ex_header}</textarea>
-		</label>
-		</td>
-	</tr>	
-	<tr>
-		<td><label for="ex_footer">{lang.EX_FOOTER_N}</label></td>
-	</tr>
-	<tr>
-		<td>
-		<label>
-		<textarea id="ex_footer" name="ex_footer" style="width: 490px; height: 210px;direction:ltr;" >{ex_footer}</textarea>
-		</label>
-		</td>
-	</tr>
+        <tr>
+                <td><label for="ex_header">{lang.EX_HEADER_N}</label></td>
+        </tr>
+        <tr>
+                <td>
+                <label>
+                <textarea id="ex_header" name="ex_header" style="width: 490px; height: 210px;direction:ltr;" >{ex_header}</textarea>
+                </label>
+                </td>
+        </tr>        
+        <tr>
+                <td><label for="ex_footer">{lang.EX_FOOTER_N}</label></td>
+        </tr>
+        <tr>
+                <td>
+                <label>
+                <textarea id="ex_footer" name="ex_footer" style="width: 490px; height: 210px;direction:ltr;" >{ex_footer}</textarea>
+                </label>
+                </td>
+        </tr>
 </table>
 </fieldset>
 <fieldset class="quick" style="text-align:center">
-		<input class="button2" name="submit" type="submit" value="{lang.UPDATE_EXTRA}" />
+                <input class="button2" name="submit" type="submit" value="{lang.UPDATE_EXTRA}" />
 </fieldset>
 </form>
 </div>
 ]]>
-	</template>
-	<template name="admin_styles">
-	<![CDATA[
+        </template>
+        <template name="admin_styles">
+        <![CDATA[
 <div class="middle">
 <form method="post" action="{action}">
-	<fieldset>
-		<legend>{lang.R_STYLES}</legend>
+        <fieldset>
+                <legend>{lang.R_STYLES}</legend>
 
 <table style="width: 100%">
 <tr style="background-color:silver">
-	<td>{lang.STYLES_EXP}</td>
+        <td>{lang.STYLES_EXP}</td>
 </tr>
 <tr style="background-color:#F5F5F5">
-	<td>
-	<select name="style_choose">
-	<LOOP NAME="arr">
-	<option  value="{{style_id}}">{{style_name}}</option>
-	</LOOP>
-	</select>
+        <td>
+        <select name="style_choose">
+        <LOOP NAME="arr">
+        <option  value="{{style_id}}">{{style_name}}</option>
+        </LOOP>
+        </select>
 
-	<br/>
-	<input name="method" value="1" type="radio" checked="checked" /> {lang.SHOW_TPLS}
-	<br/>
-	<input name="method" value="2" type="radio" /> {lang.DELETE}
-	<br/>
-	<input name="method" value="3" type="radio" /> {lang.EXPORT_AS_XML}
+        <br/>
+        <input name="method" value="1" type="radio" checked="checked" /> {lang.SHOW_TPLS}
+        <br/>
+        <input name="method" value="2" type="radio" /> {lang.DELETE}
+        <br/>
+        <input name="method" value="3" type="radio" /> {lang.EXPORT_AS_XML}
 
-	</td>
+        </td>
 </tr>
 </table>
 
 </fieldset>
 <fieldset class="quick" style="text-align:center">
-		<input class="button2" name="submit" type="submit" value="{lang.SUBMIT}" />
+                <input class="button2" name="submit" type="submit" value="{lang.SUBMIT}" />
 </fieldset>
 </form>
 </div>
@@ -2108,37 +2114,37 @@ a.button2, input.button2 {
 
 <div class="middle">
 <form method="post" action="{action}" enctype="multipart/form-data">
-	<fieldset>
-		<legend>{lang.ADD_NEW_STYLE}</legend>
+        <fieldset>
+                <legend>{lang.ADD_NEW_STYLE}</legend>
 
 <table style="width: 100%">
 <tr style="background-color:silver">
-		<td>{lang.NEW_STYLES_EXP}</td>
+                <td>{lang.NEW_STYLES_EXP}</td>
 </tr>
 <tr style="background-color:#F5F5F5">
-	<td>
+        <td>
 
-	<input name="imp_file" type="file" />
+        <input name="imp_file" type="file" />
 
 
-	</td>
+        </td>
 </tr>
 </table>
 
 </fieldset>
 <fieldset class="quick" style="text-align:center">
-		<input class="button2" name="submit_new_style" type="submit" value="{lang.SUBMIT}" />
+                <input class="button2" name="submit_new_style" type="submit" value="{lang.SUBMIT}" />
 </fieldset>
 </form>
 
 </div>]]>
-	</template>
-	<template name="admin_show_tpls">
-	<![CDATA[
+        </template>
+        <template name="admin_show_tpls">
+        <![CDATA[
 <div class="middle">
 <form method="post" action="{action}">
-	<fieldset>
-		<legend>{lang.SHOW_TPLS}</legend>
+        <fieldset>
+                <legend>{lang.SHOW_TPLS}</legend>
 
 <table style="width: 100%">
 <tr style="background-color:#F5F5F5">
@@ -2158,12 +2164,12 @@ a.button2, input.button2 {
 <input type="hidden" name="style_id" value="{style_id}" />
 
 </td>
-	</tr>
+        </tr>
 </table>
 
 </fieldset>
 <fieldset class="quick" style="text-align:center">
-		<input class="button2" name="tpls_submit" type="submit" value="{lang.SUBMIT}" />
+                <input class="button2" name="tpls_submit" type="submit" value="{lang.SUBMIT}" />
 </fieldset>
 </form>
 
@@ -2174,14 +2180,14 @@ a.button2, input.button2 {
 
 <div class="middle">
 <form method="post" action="{action}" enctype="multipart/form-data">
-	<fieldset>
-		<legend>{lang.ADD_NEW_TPL}</legend>
+        <fieldset>
+                <legend>{lang.ADD_NEW_TPL}</legend>
 
 <table style="width: 100%">
-	<tr style="background-color:silver">
-		<td>{lang.ADD_NEW_TPL_EXP}</td>
+        <tr style="background-color:silver">
+                <td>{lang.ADD_NEW_TPL_EXP}</td>
 
-	</tr>
+        </tr>
 <tr style="background-color:#F5F5F5">
 <td>
 
@@ -2189,40 +2195,40 @@ a.button2, input.button2 {
 <input type="hidden" name="style_id" value="{style_id}" />
 
 </td>
-	</tr>
+        </tr>
 </table>
 
 </fieldset>
 <fieldset class="quick" style="text-align:center">
-		<input class="button2" name="submit_new_tpl" type="submit" value="{lang.SUBMIT}" />
+                <input class="button2" name="submit_new_tpl" type="submit" value="{lang.SUBMIT}" />
 </fieldset>
 </form>
 
 </div>
 
 ]]>
-	</template>
-	<template name="admin_edit_tpl">
-	<![CDATA[
+        </template>
+        <template name="admin_edit_tpl">
+        <![CDATA[
 <script type="text/javascript" defer="defer">
 
-			function change_editor_height(height, d)
-			{
+                        function change_editor_height(height, d)
+                        {
 
 
-				var editor 		= document.getElementById('template_content');
-				var od_height	= Number(editor.style.height.replace('px' ,''));
-				
-				if (d == '-') 
-				{
-					editor.style.height	=od_height - height + 'px';
-				}
-				else
-				{
-					editor.style.height	= od_height + height + 'px';	
-				}
-			}
-			
+                                var editor                 = document.getElementById('template_content');
+                                var od_height        = Number(editor.style.height.replace('px' ,''));
+                                
+                                if (d == '-') 
+                                {
+                                        editor.style.height        =od_height - height + 'px';
+                                }
+                                else
+                                {
+                                        editor.style.height        = od_height + height + 'px';        
+                                }
+                        }
+                        
 </script>
 
 <div class="middle">
@@ -2256,44 +2262,44 @@ a.button2, input.button2 {
 
 </div>
 ]]>
-	</template>
-	<template name="admin_plugins">
-	<![CDATA[
+        </template>
+        <template name="admin_plugins">
+        <![CDATA[
 <div class="middle">
 <form method="post" action="{action}">
-	<fieldset>
-		<legend>{lang.PLUGINS}</legend>
+        <fieldset>
+                <legend>{lang.PLUGINS}</legend>
 
 <table style="width: 100%">
-	<tr style="background-color:silver">
-		<td>{lang.PLUGINS_EX}</td>
+        <tr style="background-color:silver">
+                <td>{lang.PLUGINS_EX}</td>
 
-	</tr>
+        </tr>
 <tr style="background-color:#F5F5F5">
 <td>
 <IF NAME="no_plugins">
 {lang.NO_PLUGINS}
 <ELSE>
-	<select name="plg_choose" size="6" style="width: 200px; ">
-	<LOOP NAME="arr">
-	<option  value="{{plg_id}}">{{plg_name}}</option>
-	</LOOP>
-	</select>
-	<br/>
-	<input name="method" value="1" type="radio" checked="checked" /> {lang.DISABLE}  
-	<br/>
-	<input name="method" value="2" type="radio" /> {lang.ENABLE} 
-	<br/>
-	<input name="method" value="3" type="radio" /> {lang.DELETE}
+        <select name="plg_choose" size="6" style="width: 200px; ">
+        <LOOP NAME="arr">
+        <option  value="{{plg_id}}">{{plg_name}}</option>
+        </LOOP>
+        </select>
+        <br/>
+        <input name="method" value="1" type="radio" checked="checked" /> {lang.DISABLE}  
+        <br/>
+        <input name="method" value="2" type="radio" /> {lang.ENABLE} 
+        <br/>
+        <input name="method" value="3" type="radio" /> {lang.DELETE}
 </IF>
 
 </td>
-	</tr>
+        </tr>
 </table>
 
 </fieldset>
 <fieldset class="quick" style="text-align:center">
-		<input class="button2" name="submit" type="submit" value="{lang.SUBMIT}" />
+                <input class="button2" name="submit" type="submit" value="{lang.SUBMIT}" />
 </fieldset>
 </form>
 </div>
@@ -2304,14 +2310,14 @@ a.button2, input.button2 {
 
 <div class="middle">
 <form method="post" action="{action}" enctype="multipart/form-data">
-	<fieldset>
-		<legend>{lang.ADD_NEW_PLUGIN}</legend>
+        <fieldset>
+                <legend>{lang.ADD_NEW_PLUGIN}</legend>
 
 <table style="width: 100%">
-	<tr style="background-color:silver">
-		<td>{lang.ADD_NEW_PLUGIN_EXP}</td>
+        <tr style="background-color:silver">
+                <td>{lang.ADD_NEW_PLUGIN_EXP}</td>
 
-	</tr>
+        </tr>
 <tr style="background-color:#F5F5F5">
 <td>
 
@@ -2319,12 +2325,12 @@ a.button2, input.button2 {
 
 
 </td>
-	</tr>
+        </tr>
 </table>
 
 </fieldset>
 <fieldset class="quick" style="text-align:center">
-		<input class="button2" name="submit_new_plg" type="submit" value="{lang.SUBMIT}" />
+                <input class="button2" name="submit_new_plg" type="submit" value="{lang.SUBMIT}" />
 </fieldset>
 </form>
 
@@ -2332,19 +2338,19 @@ a.button2, input.button2 {
 
 
 ]]>
-	</template>
-	<template name="admin_show_words">
-	<![CDATA[
+        </template>
+        <template name="admin_show_words">
+        <![CDATA[
 <div class="middle">
 <form method="post" action="{action}">
-	<fieldset>
-		<legend>{lang.SHOW_WORDS}</legend>
+        <fieldset>
+                <legend>{lang.SHOW_WORDS}</legend>
 
 <table style="width: 100%">
-	<tr style="background-color:silver">
-		<td>{lang.SHOW_WORDS_EXP}</td>
+        <tr style="background-color:silver">
+                <td>{lang.SHOW_WORDS_EXP}</td>
 
-	</tr>
+        </tr>
 <tr style="background-color:#F5F5F5">
 <td>
 
@@ -2362,12 +2368,12 @@ a.button2, input.button2 {
 <input type="hidden" name="lang_id" value="{lang_id}" />
 
 </td>
-	</tr>
+        </tr>
 </table>
 
 </fieldset>
 <fieldset class="quick" style="text-align:center">
-		<input class="button2" name="words_submit" type="submit" value="{lang.SUBMIT}" />
+                <input class="button2" name="words_submit" type="submit" value="{lang.SUBMIT}" />
 </fieldset>
 </form>
 
@@ -2378,43 +2384,43 @@ a.button2, input.button2 {
 
 <div class="middle">
 <form method="post" action="{action}" enctype="multipart/form-data">
-	<fieldset>
-		<legend>{lang.ADD_NEW_WORD}</legend>
+        <fieldset>
+                <legend>{lang.ADD_NEW_WORD}</legend>
 
 <table style="width: 100%">
-	<tr style="background-color:silver">
-		<td>{lang.ADD_NEW_WORD_EXP}</td>
+        <tr style="background-color:silver">
+                <td>{lang.ADD_NEW_WORD_EXP}</td>
 
-	</tr>
+        </tr>
 <tr style="background-color:#F5F5F5">
 <td>
 
 <input name="new_word" type="text" value="_new_word_" />
-	=>
+        =>
 <input name="new_trans" type="text" value="_new_trans_" />
 
 <input type="hidden" name="lang_id" value="{lang_id}" />
 
 </td>
-	</tr>
+        </tr>
 </table>
 
 </fieldset>
 <fieldset class="quick" style="text-align:center">
-		<input class="button2" name="submit_new_word" type="submit" value="{lang.SUBMIT}" />
+                <input class="button2" name="submit_new_word" type="submit" value="{lang.SUBMIT}" />
 </fieldset>
 </form>
 
 </div>
 
 ]]>
-	</template>
-	<template name="admin_edit_word">
-	<![CDATA[
+        </template>
+        <template name="admin_edit_word">
+        <![CDATA[
 <div class="middle">
 <form method="post" action="{action}">
-	<fieldset>
-		<legend>{lang.EDIT} :: {get_lang.word}</legend>
+        <fieldset>
+                <legend>{lang.EDIT} :: {get_lang.word}</legend>
 
 <table style="width: 100%">
 
@@ -2436,29 +2442,29 @@ a.button2, input.button2 {
 <input type="hidden" name="word_choose" value="{lang_word}" />
 
 </td>
-	</tr>
+        </tr>
 </table>
 
 </fieldset>
 <fieldset class="quick" style="text-align:center">
-		<input class="button2" name="word_edit_submit" type="submit" value="{lang.SUBMIT}" />
+                <input class="button2" name="word_edit_submit" type="submit" value="{lang.SUBMIT}" />
 </fieldset>
 </form>
 
 </div>]]>
-	</template>
-	<template name="admin_langs">
-	<![CDATA[
+        </template>
+        <template name="admin_langs">
+        <![CDATA[
 <div class="middle">
 <form method="post" action="{action}">
-	<fieldset>
-		<legend>{lang.R_LANGS}</legend>
+        <fieldset>
+                <legend>{lang.R_LANGS}</legend>
 
 <table style="width: 100%">
-	<tr style="background-color:silver">
-		<td>{lang.LANGS_EXP}</td>
+        <tr style="background-color:silver">
+                <td>{lang.LANGS_EXP}</td>
 
-	</tr>
+        </tr>
 <tr style="background-color:#F5F5F5">
 <td>
 
@@ -2476,12 +2482,12 @@ a.button2, input.button2 {
 <input name="method" value="3" type="radio" /> {lang.EXPORT_AS_XML}
 
 </td>
-	</tr>
+        </tr>
 </table>
 
 </fieldset>
 <fieldset class="quick" style="text-align:center">
-		<input class="button2" name="submit" type="submit" value="{lang.SUBMIT}" />
+                <input class="button2" name="submit" type="submit" value="{lang.SUBMIT}" />
 </fieldset>
 </form>
 </div>
@@ -2492,14 +2498,14 @@ a.button2, input.button2 {
 
 <div class="middle">
 <form method="post" action="{action}" enctype="multipart/form-data">
-	<fieldset>
-		<legend>{lang.ADD_NEW_LANG}</legend>
+        <fieldset>
+                <legend>{lang.ADD_NEW_LANG}</legend>
 
 <table style="width: 100%">
-	<tr style="background-color:silver">
-		<td>{lang.ADD_NEW_WORD_EXP}</td>
+        <tr style="background-color:silver">
+                <td>{lang.ADD_NEW_WORD_EXP}</td>
 
-	</tr>
+        </tr>
 <tr style="background-color:#F5F5F5">
 <td>
 
@@ -2507,17 +2513,17 @@ a.button2, input.button2 {
 
 
 </td>
-	</tr>
+        </tr>
 </table>
 
 </fieldset>
 <fieldset class="quick" style="text-align:center">
-		<input class="button2" name="submit_new_lang" type="submit" value="{lang.SUBMIT}" />
+                <input class="button2" name="submit_new_lang" type="submit" value="{lang.SUBMIT}" />
 </fieldset>
 </form>
 
 </div>
 ]]>
-	</template>
+        </template>
 </templates>
 </kleeja>

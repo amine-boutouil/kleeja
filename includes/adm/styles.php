@@ -250,7 +250,7 @@ switch ($_GET['sty_t'])
 								);
 											
 					$template_content	= $SQL->fetch_array($SQL->build($query));
-					$template_content	= htmlspecialchars($template_content['template_content']);
+					$template_content	= htmlspecialchars(stripslashes($template_content['template_content']));
 					
 
 				break;

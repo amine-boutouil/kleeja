@@ -165,6 +165,9 @@ RC5:
 - fix ban system 
 - fix captcha [ rendreing error ]
 - remove SQL percentage in the footer stats 
++ user ip for uploaded files 
++ search now with ip in files
+- fix bug if user close his folder in other user systems [not with default]
 
 thank you for reading this file. 
 

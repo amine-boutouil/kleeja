@@ -87,12 +87,15 @@ switch ($_GET['go'])
 		case "register" : 
 		
 			//config register
-			if (!$config['register'] || $config['user_system'] !=1)
+			if ($config['register'] != '1' &&  $config['user_system'] ==1)
 			{
-				kleeja_info($lang['REGISTER_CLOSED'],$lang['PLACE_NO_YOU']);
+				kleeja_info($lang['REGISTER_CLOSED'], $lang['PLACE_NO_YOU']);
+			}
+			else if ($config['user_system'] !=1)
+			{
+				kleeja_info('<a href="' . $forum_path . '" title="' . $lang['REGISTER']. '">' . $lang['REGISTER']. '</a>', $lang['REGISTER']);
 			}
 			
-
 			//start check class
 			$ch = new ocr_captcha;
 
@@ -119,7 +122,7 @@ switch ($_GET['go'])
 			
 						($hook = kleeja_run_hook('register_submit')) ? eval($hook) : null; //run hook
 						
-						if (empty($_POST['lname']) || empty($_POST['lpass']) || empty($_POST['lmail']) )
+						if (trim($_POST['lname'])=='' || trim($_POST['lpass'])=='' || trim($_POST['lmail'])=='')
 						{
 							$ERRORS[]	=	$lang['EMPTY_FIELDS'];
 						}	
@@ -127,19 +130,19 @@ switch ($_GET['go'])
 						{
 							$ERRORS[]	=	$lang['WRONG_EMAIL'];
 						}
-						else if (strlen($_POST['lname']) < 4 || strlen($_POST['lname']) > 30)
+						else if (strlen(trim($_POST['lname'])) < 4 || strlen(trim($_POST['lname'])) > 30)
 						{
 							$ERRORS[]	=	$lang['WRONG_NAME'];
 						}
-						else if ( !$ch->check_captcha($_POST['public_key'],$_POST['code_answer']) )
+						else if (!$ch->check_captcha($_POST['public_key'],trim($_POST['code_answer'])))
 						{
 							$ERRORS[]	=	$lang['WRONG_VERTY_CODE'];
 						}
-						else if ($SQL->num_rows($SQL->query("select * from `{$dbprefix}users` where name='$_POST[lname]' ")) !=0 )
+						else if ($SQL->num_rows($SQL->query("select * from `{$dbprefix}users` where name='" .trim($SQL->escape($_POST["lname"]))."' ")) !=0 )
 						{
 							$ERRORS[]	=	$lang['EXIST_NAME'];
 						}
-						else if ($SQL->num_rows($SQL->query("select * from `{$dbprefix}users` where mail='$_POST[lmail]' ")) !=0 )
+						else if ($SQL->num_rows($SQL->query("select * from `{$dbprefix}users` where mail='" .trim($SQL->escape($_POST["lmail"]))."' ")) !=0 )
 						{
 							$ERRORS[]	=	$lang['EXIST_EMAIL'];
 						}
@@ -147,10 +150,10 @@ switch ($_GET['go'])
 						//no errors, lets do process
 						if(empty($ERRORS))	 
 						{
-							$name			= (string) $SQL->escape($_POST['lname']);
-							$pass			= (string) md5($SQL->escape($_POST['lpass']));
-							$mail			= (string) $_POST['lmail'];
-							$session_id	= (string)  session_id();
+							$name			= (string) $SQL->escape(trim($_POST['lname']));
+							$pass			= (string) md5($SQL->escape(trim($_POST['lpass'])));
+							$mail			= (string) trim($_POST['lmail']);
+							$session_id		= (string) session_id();
 							
 							$insert_query = array(
 													'INSERT'	=> 'name ,password ,mail,admin, session_id',

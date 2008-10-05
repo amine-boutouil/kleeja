@@ -13,7 +13,7 @@ beta..
 + first release .. 
 
 beta1 : 
- -  fix progress picture ..
+- fix progress picture ..
 + install file ..
 + more opitions in cp
 
@@ -168,6 +168,10 @@ RC5:
 + user ip for uploaded files 
 + search now with ip in files
 - fix bug if user close his folder in other user systems [not with default]
+- fix updating wizard SQLs rc4->rc5
+- fix login with phpbb system related with some letters.
+- fix register with empty data 
+- fix if register is not disabled and usr system is not default. [ linked to user system ]
 
 thank you for reading this file. 
 

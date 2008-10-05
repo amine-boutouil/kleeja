@@ -109,7 +109,7 @@ class usrcp
 				function phpbb ($name,$pass)
 				{
 					global $forum_srv,$forum_user,$forum_pass,$forum_db;
-					global $forum_prefix,$forum_path,$SQLBB;
+					global $forum_prefix,$forum_path,$SQLBB ,$phpEx,$phpbb_root_path;
 				
 					//fix bug .. 
 					if(empty($forum_srv) || empty($forum_user) || empty($forum_db)) return;
@@ -130,13 +130,20 @@ class usrcp
 					//phpbb3
 					if(file_exists($forum_path . '/includes/functions_transfer.php'))
 					{
+						
+						//get utf tools
+						define('IN_PHPBB',true);
+						$phpbb_root_path = $forum_path .'/';
+						$phpEx = 'php';
+						include_once($forum_path . '/includes/utf/utf_tools.'.$phpEx);
+						
 						$row_leve		=	'user_type';
 						$admin_level	=	3;
 						
 						$query2 = array(
 											'SELECT'	=> '*',
 											'FROM'		=> "`{$forum_prefix}users`",
-											'WHERE'		=>"username_clean='" . strtolower($SQLBB->escape($name)) . "'"
+											'WHERE'		=>"username_clean='" . utf8_clean_string($name) . "'"
 											);
 											
 						$result2 = $SQLBB->build($query2);					

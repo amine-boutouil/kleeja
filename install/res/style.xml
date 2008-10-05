@@ -5,8 +5,7 @@
         <style_author></style_author>
 </info>
 <templates>
-        <template name="header">
-        <![CDATA[<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+        <template name="header"><![CDATA[<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" dir="{dir}">
 <head>
 <title>{title} &#9679; {config.sitename} (Powered by Kleeja)</title>
@@ -82,7 +81,9 @@
 ]]>
         </template>
         <template name="stylesheet">
-        <![CDATA[* {
+        <![CDATA[
+/*startfile*/        
+* {
     padding: 0;
     margin: 0;
 } 
@@ -330,9 +331,7 @@ div#texttype {
         display: none;
 }
 
-/*
-dont remove it  end
-*/
+/*dont remove it  end*/
 ]]>
         </template>
         <template name="footer">

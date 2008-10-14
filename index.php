@@ -32,14 +32,14 @@
 	
 	//start class .. 
 	$kljup->decode		=	$decode;              
-	$kljup->linksite		=	$config['siteurl']; 
+	$kljup->linksite	=	$config['siteurl']; 
 	$kljup->folder		=	$config['foldername'];
 	$kljup->filename	=	$config['prefixname'];
 	$kljup->action		= 	$action = "index.php";
 	$kljup->filesnum	=	$config['filesnum'];
 	//--------------------- start user system part
 	$kljup->types		=	($usrcp->name()) ? $u_exts : $g_exts;
-	$kljup->sizes			=	($usrcp->name()) ? $u_sizes : $g_sizes ;	
+	$kljup->sizes		=	($usrcp->name()) ? $u_sizes : $g_sizes ;	
 	$kljup->id_user		=	($usrcp->name()) ? $usrcp->id() : '-1';
 	$kljup->safe_code	=	$config['safe_code'];
 	//--------------------- end user system part

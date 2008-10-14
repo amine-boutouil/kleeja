@@ -219,7 +219,7 @@ $path = "langs";
 		    if($file != "." && $file != ".."  && $file != "index.html")
 			{
 			$file = str_replace('.php','', $file);
-			  $header_inst .= '<option value="' . $file . '">' . $file . '</option>';
+			  $header_inst .= '<option value="' . $file . '" ' . ($file==$_GET['lang'] ? 'selected="selected"' : '') . '>' . $file . '</option>';
 		        $i++;
 		    }
 		}

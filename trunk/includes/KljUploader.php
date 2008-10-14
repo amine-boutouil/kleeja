@@ -222,7 +222,7 @@ function createthumb($name, $ext, $filename, $new_w, $new_h)
 			}
 			else
 			{
-				$this->errs[]= '"<font color=red><b>' . $lang['CANT_DIR_CRT'] . '<b></font>';
+				$this->errs[]= '<strong>' . $lang['CANT_DIR_CRT'] . '</strong>';
 			}
 		}
 
@@ -305,7 +305,12 @@ function createthumb($name, $ext, $filename, $new_w, $new_h)
 						}
 						elseif(!in_array(strtolower($this->typet),$this->types))
 						{
-							$this->errs[]= '[ ' . $_FILES['file']['name'][$i] . ' ] ' . $lang['FORBID_EXT'] . '['.$this->typet.']';
+							//guest
+							if($this->id_user == '-1')
+								$this->errs[]= '[ ' . $_FILES['file']['name'][$i] . ' ] ' . $lang['FORBID_EXT'] . '['.$this->typet.'] <br /> <a href="usrcp.php?go=register" title="' . htmlspecialchars($lang['REGISTER']) . '">' . $lang['REGISTER'] . '</a>';
+							//not guest
+							else
+								$this->errs[]= '[ ' . $_FILES['file']['name'][$i] . ' ] ' . $lang['FORBID_EXT'] . '['.$this->typet.']';
 						}
 						elseif($this->sizes[strtolower($this->typet)] > 0 && $this->sizet >= $this->sizes[strtolower($this->typet)])
 						{

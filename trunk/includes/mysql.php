@@ -45,7 +45,7 @@ class SSQL
                           $this->db_password = 'hidden';
 
 						  
-                        $this->connect_id	= @mysql_connect($this->host,$this->db_username,$db_password) or die($this->error_msg("ERROR: CANT CONNECT"));
+                        $this->connect_id	= @mysql_connect($this->host,$this->db_username,$db_password) or die($this->error_msg("ERROR: CAN NOT CONNECT TO SERVER [" . $this->db_username .  ':' . $this->host . "] ..."));
 						//version of mysql
 						$this->mysql_version = mysql_get_server_info($this->connect_id);
 						
@@ -53,7 +53,7 @@ class SSQL
 						{
 							if(!empty($db_name))
 							{
-								$dbselect = @mysql_select_db($this->db_name);
+								$dbselect = @mysql_select_db($this->db_name) or die($this->error_msg("ERROR: CAN NOT SELECT DATABASE [" . $this->db_name . "]..."));;
 								
 								if ($dbselect)
 								{

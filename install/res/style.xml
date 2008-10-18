@@ -400,9 +400,9 @@ div#texttype {
 {lang.FILE_FOUNDED} 
 <br />
 <div id="url"><h3>{lang.JS_MUST_ON}</h3></div>
-<br/>
+<br />
 {lang.FILE_INFO} : 
-<br/>
+<br />
 {lang.FILENAME} : {name} <br />
 {lang.FILETYPE} : {type} <br />
 {lang.FILESIZE} : {size} <br />
@@ -415,15 +415,20 @@ div#texttype {
 
 
 <script language="javascript">
-var timer = {seconds_w}; ti();
-function ti(){
-if(timer>0){
-document.getElementById("url").innerHTML = "<b><strong>{lang.WAIT} " + timer +' </strong></b>';
-timer = timer - 1;
-setTimeout("ti()", 1000)
-} else {
-document.getElementById("url").innerHTML = "<a href=\"{url_file}\" target=\"balnk\">»» {lang.CLICK_DOWN} ««</a><br><br></div>";
-}
+var timer = {seconds_w};
+ti();
+function ti()
+{
+    if(timer > 0)
+    {
+        document.getElementById("url").innerHTML = "<strong>{lang.WAIT} " + timer + " </strong>";
+        timer = timer - 1;
+        setTimeout("ti()", 1000)
+    }
+    else
+    {
+        document.getElementById("url").innerHTML = "<a href=\\"{url_file}\\" target=\\"balnk\\">»» {lang.CLICK_DOWN} ««</a><br \><br \>";
+    }
 }
 </script>
 
@@ -434,7 +439,7 @@ document.getElementById("url").innerHTML = "<a href=\"{url_file}\" target=\"baln
         <!-- begin err template -->
         <div class="err">
         {text} 
-        <br/>
+        <br />
         <a href="javascript:history.go(-1)">{go_back_browser}</a>
         </div>
         <!-- end err template -->

@@ -258,8 +258,8 @@ switch ($_GET['go'])
 	{
 		//for safe
 		$id	= intval($_GET['i']);
-
-		if (strpos($_SERVER['HTTP_REFERER'], 'download') === false)
+		$REFERER = !empty($_SERVER['HTTP_REFERER']) ? strtolower($_SERVER['HTTP_REFERER']) : strtolower(getenv('HTTP_REFERER'));
+		if ($REFERER != '' && strpos($_SERVER['HTTP_REFERER'], 'download') === false)
 		{
 			$linkoo	= ($config['mod_writer']) ?	'./download' . $id . '.html' : './download.php?id=' . $id;
 			header('Location: ' . $linkoo);

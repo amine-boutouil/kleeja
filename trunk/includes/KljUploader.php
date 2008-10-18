@@ -204,16 +204,16 @@ function createthumb($name, $ext, $filename, $new_w, $new_h)
 			{
 				$this->errs[]	=	$lang['NEW_DIR_CRT'];
 
-				$fo		=	fopen($this->folder . "/index.html","w");
-				$fo2	=	fopen($this->folder . "/thumbs/index.html","w");
-				$fw		=	fwrite($fo,'<a href="http://kleeja.com"><p>KLEEJA ..</p></a>');
-				$fw2	=	fwrite($fo2,'<a href="http://kleeja.com"><p>KLEEJA ..</p></a>');
-				$fi		=	fopen($this->folder . "/.htaccess", "w");
-				$fi2	=	fopen($this->folder . "/thumbs/.htaccess","w");
-				$fy		=	fwrite($fi,"RemoveType .php .php3 .phtml .pl .cgi .asp .htm .html \n php_flag engine off");
-				$fy2	=	fwrite($fi2,"RemoveType .php .php3 .phtml .pl .cgi .asp .htm .html \n php_flag engine off");
-				$chmod	=	chmod($this->folder, 0777);
-				$chmod2	=	chmod($this->folder . '/thumbs/', 0777);
+				$fo		=	@fopen($this->folder . "/index.html","w");
+				$fo2	=	@fopen($this->folder . "/thumbs/index.html","w");
+				$fw		=	@fwrite($fo,'<a href="http://kleeja.com"><p>KLEEJA ..</p></a>');
+				$fw2	=	@fwrite($fo2,'<a href="http://kleeja.com"><p>KLEEJA ..</p></a>');
+				$fi		=	@fopen($this->folder . "/.htaccess", "w");
+				$fi2	=	@fopen($this->folder . "/thumbs/.htaccess","w");
+				$fy		=	@fwrite($fi,"RemoveType .php .php3 .phtml .pl .cgi .asp .htm .html \n php_flag engine off");
+				$fy2	=	@fwrite($fi2,"RemoveType .php .php3 .phtml .pl .cgi .asp .htm .html \n php_flag engine off");
+				$chmod	=	@chmod($this->folder, 0777);
+				$chmod2	=	@chmod($this->folder . '/thumbs/', 0777);
 
 				if(!$chmod)
 				{
@@ -486,7 +486,7 @@ function createthumb($name, $ext, $filename, $new_w, $new_h)
 		global $SQL,$dbprefix,$config,$lang;
 
 				// sometime cant see file after uploading.. but ..
-				chmod($folderee . '/' . $filname , 0755); //0755
+				@chmod($folderee . '/' . $filname , 0755); //0755
 
 				$name 	= (string)	$SQL->escape($filname);
 				$size	= (int) 	$sizeee;

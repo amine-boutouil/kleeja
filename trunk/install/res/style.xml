@@ -2,13 +2,13 @@
 <kleeja>
 <info>
         <style_name>default</style_name>
-        <style_author></style_author>
+        <style_author>official</style_author>
 </info>
 <templates>
         <template name="header"><![CDATA[<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" dir="{dir}">
 <head>
-<title>{title} &#9679; {config.sitename} (Powered by Kleeja)</title>
+<title>{title} &#9679; {config.sitename}</title>
 <meta http-equiv="Content-Language" content="ar" />
 <meta name="copyrights" content="Powered by Kleeja :: kleeja.com" />
 
@@ -421,13 +421,13 @@ function ti()
 {
     if(timer > 0)
     {
-        document.getElementById("url").innerHTML = "<strong>{lang.WAIT} " + timer + " </strong>";
+        document.getElementById("url").innerHTML = '<strong>{lang.WAIT} ' + timer + ' </strong>';
         timer = timer - 1;
         setTimeout("ti()", 1000)
     }
     else
     {
-        document.getElementById("url").innerHTML = "<a href=\\"{url_file}\\" target=\\"balnk\\">»» {lang.CLICK_DOWN} ««</a><br \><br \>";
+        document.getElementById("url").innerHTML = '<a href="{url_file}" target="balnk">»» {lang.CLICK_DOWN} ««</a><br \><br \>';
     }
 }
 </script>
@@ -987,6 +987,7 @@ document.getElementById('mail_here').innerHTML= iee;
                 <legend>{lang.R_CONFIGS}</legend>
 
 <table style="width: 90%">
+ <!-- admin configs tr extra begin -->
         <tr>
                 <td><label for="sitename">{lang.SITENAME}</label></td>
                 <td><label><input type="text" id="sitename" name="sitename" value="{con.sitename}" size="40"></label></td>
@@ -1167,6 +1168,7 @@ document.getElementById('mail_here').innerHTML= iee;
         </tr>        
         <!-- admin configs tr extra -->
 </table>
+ <!-- admin configs table extra -->
 </fieldset>
 <fieldset class="quick" style="text-align:center">
                 <input class="button2" name="submit" type="submit" value="{n_submit}" />

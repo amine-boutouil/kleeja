@@ -464,9 +464,6 @@ function createthumb($name, $ext, $filename, $new_w, $new_h)
 											$this->saveit ($this->filename2, $this->folder, $this->sizet, $this->typet);
 										}
 
-											
-		
-
 									}#else
 							}//big else
 
@@ -525,9 +522,9 @@ function createthumb($name, $ext, $filename, $new_w, $new_h)
 					//show del code link
 					if ($config['del_url_file'])
 					{
-							$extra_del	= $lang['URL_F_DEL'] . ':<br /><textarea rows=2 cols=49 rows=1>';
+							$extra_del	= $lang['URL_F_DEL'] . ':<br /><textarea rows="2" cols="49" rows="1">';
 							$extra_del	.= $this->linksite.(($config[mod_writer]) ? "del" .$code_del. ".html" : 'go.php?go=del&amp;cd=' . $code_del );
-							$extra_del	.='</textarea><br/>';
+							$extra_del	.='</textarea><br />';
 					}
 
 
@@ -542,7 +539,7 @@ function createthumb($name, $ext, $filename, $new_w, $new_h)
 							$extra_thmb 	= $lang['URL_F_THMB'] . ':<br /><textarea rows="2" cols="49">';
 							$extra_thmb 	.= '[url='.$this->linksite . (($config['mod_writer']) ? "image" . $this->id_for_url . ".html" : "download.php?img=".$this->id_for_url ).'][img]'.$this->linksite.$folderee.'/thumbs/'.$filname.'[/img][/url]';
 							$extra_thmb 	.= '</textarea><br />';
-							$extra_show_img = '<div style="text-align:center"><img src="' . $this->linksite.(($config['mod_writer']) ? "thumb".$this->id_for_url.".html" : "download.php?thmb=".$this->id_for_url ).'" style="width:100px; height:100px" /></div></br>';
+							$extra_show_img = '<div style="text-align:center"><img src="' . $this->linksite.(($config['mod_writer']) ? "thumb".$this->id_for_url.".html" : "download.php?thmb=".$this->id_for_url ).'" style="width:100px; height:100px" /></div><br />';
 						}
 						
 						//write on image
@@ -552,18 +549,28 @@ function createthumb($name, $ext, $filename, $new_w, $new_h)
 						}
 
 						//then show
-						$this->errs[] = $lang['IMG_DOWNLAODED'] . '<br />' . $extra_show_img . '
+						$img_html_result = $lang['IMG_DOWNLAODED'] . '<br />' . $extra_show_img . '
 								' . $lang['URL_F_IMG'] . ':<br /><textarea rows="2" cols="49">'.$this->linksite.(($config[mod_writer]) ? "image".$this->id_for_url.".html" : "download.php?img=".$this->id_for_url ).'</textarea><br />
 								' . $lang['URL_F_BBC'] . ':<br /><textarea rows="2" cols="49">' .
 								'[url='.$config['siteurl'].(($config['mod_writer']) ? "image".$this->id_for_url.".html" : "download.php?img=".$this->id_for_url ).'][img]'.$this->linksite.$folderee . '/' . $filname .'[/img][/url]</textarea><br />
-								'.$extra_thmb.$extra_del;
+								' . $extra_thmb . $extra_del;
+						
+						($hook = kleeja_run_hook('saveit_func_img_res_kljuploader')) ? eval($hook) : null; //run hook
+						
+						$this->errs[] = $img_html_result;
 
-					}else {
+					}
+					else 
+					{
 						//then show other files
-						$this->errs[] = $lang['FILE_DOWNLAODED'] . '<br />
+						$else_html_result = $lang['FILE_DOWNLAODED'] . '<br />
 								' . $lang['URL_F_FILE'] . ':<br /><textarea cols="49" rows="1">' . $this->linksite.(($config['mod_writer']) ? "download".$this->id_for_url.".html" : "download.php?id=".$this->id_for_url ).'</textarea><br />
 								' . $lang['URL_F_BBC'] . ':<br /><textarea rows="2" cols="49">[url]' . $this->linksite.(($config['mod_writer']) ? "download".$this->id_for_url.".html" : "download.php?id=".$this->id_for_url ).'[/url]</textarea><br />
-								'.$extra_del;
+								' . $extra_del;
+									
+						($hook = kleeja_run_hook('saveit_func_else_res_kljuploader')) ? eval($hook) : null; //run hook
+						
+						$this->errs[] = $else_html_result;	
 					}
 
 					($hook = kleeja_run_hook('saveit_func_kljuploader')) ? eval($hook) : null; //run hook

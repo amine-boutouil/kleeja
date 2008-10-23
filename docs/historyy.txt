@@ -173,6 +173,14 @@ RC5:
 - fix register with empty data 
 - fix if register is not disabled and usr system is not default. [ linked to user system ]
 
+
+RC6:
+- fix install config section in url , not work with security model
+- fix bug with site link not end with slash /
+- remove powerd by kleeja in the header .. 
+- another fix for gzip
+
+
 thank you for reading this file. 
 
 for more details http://kleeja.com/bugs

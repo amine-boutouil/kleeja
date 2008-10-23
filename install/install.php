@@ -38,7 +38,7 @@ case 'gpl2':
 				$contentofgpl2 = "CANT FIND 'GPL2.TXT. FILE .. SEARCH ON THE INTERNET ABOUT GPL2";
 
 	print '
-	<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=config&'.get_lang(1).'">
+	<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=c&'.get_lang(1).'">
 	<textarea name="gpl2" rows=""   readonly="readonly" cols="" style="width: 456px; height: 365px;direction:ltr;">
 	' . $contentofgpl2 . '
 	</textarea>
@@ -51,7 +51,7 @@ case 'gpl2':
 
 
 break;
-case 'config':
+case 'c':
 	
 	
 	// SUBMIT
@@ -73,7 +73,7 @@ case 'config':
 	
 	if($xs== false)
 	{
-		 print '<br /><form method="post"  action="' . $_SERVER['PHP_SELF'] . '?step=config&'.get_lang(1).'"  onsubmit="javascript:return formCheck(this, Array(\'db_server\',\'db_user\' ,\'db_name\',\'db_prefix\' ));">
+		 print '<br /><form method="post"  action="' . $_SERVER['PHP_SELF'] . '?step=c&'.get_lang(1).'"  onsubmit="javascript:return formCheck(this, Array(\'db_server\',\'db_user\' ,\'db_name\',\'db_prefix\' ));">
 
 			<fieldset id="Group1" dir="' . $lang['DIR'] . '">
 			<b>' . $lang['DB_INFO'] . '</b>
@@ -115,7 +115,7 @@ case 'config':
 			<br />
 			<hr/>
 			<br />
-			<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=config&'.get_lang(1).'">
+			<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=c&'.get_lang(1).'">
 			<input  type="submit" value="' . $lang['INST_SUBMIT_CONFIGOK'] . '" />
 			</form>
 		';

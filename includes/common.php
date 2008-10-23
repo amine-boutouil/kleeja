@@ -71,7 +71,7 @@
 	//gd 
 	if(!function_exists('imagecreatetruecolor'))
 	{
-		big_error('No GD !', '<b>imagecreatetruecolor</b> function Doesnt exists , That mean GD is disabled or it\'s very very old. <br/> If you don\'t want this feature, then delete this error from file <i>'. __file__ . '</i> in line </i>' . __line__ .'</i>');
+		big_error('No GD Library!', '<b>imagecreatetruecolor</b> function Doesnt exists , That mean GD is disabled or it\'s very very old. <br/> If you don\'t want this feature, then delete this error from file <i>'. __file__ . '</i> in line </i>' . __line__ .'</i>');
 	}
      
 	// start classes ..
@@ -87,15 +87,19 @@
 	//then get
 	require ($path . 'cache.php');
 	
+	// ...header ..  i like it ;)
+	header('Content-type: text/html; charset=UTF-8');
+	header('Cache-Control: private, no-cache="set-cookie"');
+	header('Expires: 0');
+	header('Pragma: no-cache');	
 	
 	// for gzip : php.net
 	$do_gzip_compress = false; 
-	if ($config['gzip']) 
+	if ($config['gzip'] == '1') 
 	{ 
-	    function compress_output($output) {return gzencode($output);} 
+	    function compress_output($output) {return gzencode($output,5, FORCE_GZIP);}
 	    // Check if the browser supports gzip encoding, HTTP_ACCEPT_ENCODING
-	    if (strstr($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')
-			|| strstr($_SERVER['HTTP_ACCEPT_ENCODING'], 'x-gzip'))
+	    if (strstr($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') || strstr($_SERVER['HTTP_ACCEPT_ENCODING'], 'x-gzip'))
 		{
 			$do_gzip_compress = true; 
 	        // Start output buffering, and register compress_output()
@@ -104,15 +108,6 @@
 	        header("Content-Encoding: gzip");
 	    }
 	}
-
-	
-	
-	// ...header ..  i like it ;)
-	header('Content-type: text/html; charset=UTF-8');
-	header('Cache-Control: private, no-cache="set-cookie"');
-	header('Expires: 0');
-	header('Pragma: no-cache');	
-	
 
 	
 	//ban system 
@@ -149,12 +144,18 @@
 	 // of course , its not printable function , its just for calculating :)
 	visit_stats();
 	
-	//
+	//check for page numbr
 	if(!$perpage || intval($perpage)==0)
 	{
 		$perpage = 10;
 	}
-
+	
+	//site url must end with /
+	if($config['siteurl'])
+	{
+		$config['siteurl'] = ($config['siteurl'][strlen($config['siteurl'])-1] != '/') ? $config['siteurl'] . '/' : $config['siteurl'];
+	}
+	
 	($hook = kleeja_run_hook('end_common')) ? eval($hook) : null; //run hook
 
 ?>

@@ -213,7 +213,7 @@
 	<word name="SIZE_U"><![CDATA[الحجم م]]></word>
 	<word name="ALLOW_G"><![CDATA[سماح ز]]></word>
 	<word name="ALLOW_U"><![CDATA[سماح م]]></word>
-	<word name="E_EXTS"><![CDATA[<b>ز</b>:تعني الزوار <br/> <b>م</b>: تعني الأعضاء  <br/>الأحجام تظبط بالبايت.]]></word>
+	<word name="E_EXTS"><![CDATA[<b>ز</b>:تعني الزوار <br /> <b>م</b>: تعني الأعضاء  <br />الأحجام تظبط بالبايت.]]></word>
 	<word name="UPDATED_EXTS"><![CDATA[تم تحديث الإمتدادات بنجاح]]></word>
 	<word name="UPDATE_FILES"><![CDATA[تحديث الملفات]]></word>
 	<word name="BY"><![CDATA[من]]></word>

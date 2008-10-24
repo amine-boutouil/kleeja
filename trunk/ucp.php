@@ -2,7 +2,7 @@
 ##################################################
 #						Kleeja 
 #
-# Filename : usrcp.php 
+# Filename : ucp.php 
 # purpose :  every things for users.
 # copyright 2007-2008 Kleeja.com ..
 #license http://opensource.org/licenses/gpl-license.php GNU Public License
@@ -23,8 +23,8 @@ switch ($_GET['go'])
 	
 			$stylee					= "login";
 			$titlee					= $lang['LOGIN'];
-			$action					= "usrcp.php?go=login";
-			$forget_pass_link	= "usrcp.php?go=get_pass";
+			$action					= "ucp.php?go=login";
+			$forget_pass_link	= "ucp.php?go=get_pass";
 			
 			($hook = kleeja_run_hook('login_before_submit')) ? eval($hook) : null; //run hook
 			
@@ -33,7 +33,7 @@ switch ($_GET['go'])
 			{
 				($hook = kleeja_run_hook('login_logon_before')) ? eval($hook) : null; //run hook
 				
-				$text	= $lang['LOGINED_BEFORE'].' ..<br / > <a href="usrcp.php?go=logout">' . $lang['LOGOUT'] . '</a>';
+				$text	= $lang['LOGINED_BEFORE'].' ..<br / > <a href="ucp.php?go=logout">' . $lang['LOGOUT'] . '</a>';
 				kleeja_info($text);
 			}
 			elseif (isset($_POST['submit']))
@@ -75,7 +75,7 @@ switch ($_GET['go'])
 						$errs	=	'';
 						foreach($ERRORS as $r)
 						{
-								$errs	.= '- ' . $r . '. <br/>';
+								$errs	.= '- ' . $r . '. <br />';
 						}
 						kleeja_err($errs);
 					}
@@ -111,7 +111,7 @@ switch ($_GET['go'])
 			{
 					$stylee	= "register";
 					$titlee	= $lang['REGISTER'];
-					$action	= "usrcp.php?go=register";
+					$action	= "ucp.php?go=register";
 					$code	= $ch->display_captcha(true);
 				
 					($hook = kleeja_run_hook('register_no_submit')) ? eval($hook) : null; //run hook
@@ -169,7 +169,7 @@ switch ($_GET['go'])
 							}	
 							else
 							{
-								$text	= $lang['REGISTER_SUCCESFUL'] . '<a href="usrcp.php?go=login">' . $lang['LOGIN'] . '</a>';
+								$text	= $lang['REGISTER_SUCCESFUL'] . '<a href="ucp.php?go=login">' . $lang['LOGIN'] . '</a>';
 								kleeja_info($text);
 							}
 							
@@ -187,7 +187,7 @@ switch ($_GET['go'])
 							$errs	=	'';
 							foreach($ERRORS as $r)
 							{
-									$errs	.= '- ' . $r . '. <br/>';
+									$errs	.= '- ' . $r . '. <br />';
 							}
 							kleeja_err($errs);
 						}
@@ -271,10 +271,10 @@ switch ($_GET['go'])
 			$Pager				= new SimplePager($perpage,$nums_rows,$currentPage);
 			$start				= $Pager->getStartRow();
 			
-			$your_fileuser	=  $config['siteurl'].(($config['mod_writer'])? 'fileuser_'.$usrcp->id().'.html' : 'usrcp.php?go=fileuser&amp;id='.$usrcp->id() );
-			$filecp_link		= ($user_id==$usrcp->id()) ?  $config['siteurl'].(($config['mod_writer'])? 'filecp.html':'usrcp.php?go=filecp' ) : false;
+			$your_fileuser	=  $config['siteurl'].(($config['mod_writer'])? 'fileuser_'.$usrcp->id().'.html' : 'ucp.php?go=fileuser&amp;id='.$usrcp->id() );
+			$filecp_link		= ($user_id==$usrcp->id()) ?  $config['siteurl'].(($config['mod_writer'])? 'filecp.html':'ucp.php?go=filecp' ) : false;
 			$total_pages		= $Pager->getTotalPages(); 
-			$linkgoto			= ($config['mod_writer']) ? $config['siteurl'].'fileuser_'.$user_id.'.html' : $config['siteurl'].'usrcp.php?go=fileuser&amp;id='.$user_id;
+			$linkgoto			= ($config['mod_writer']) ? $config['siteurl'].'fileuser_'.$user_id.'.html' : $config['siteurl'].'ucp.php?go=fileuser&amp;id='.$user_id;
 			$page_nums		= $Pager->print_nums($linkgoto); 
 				
 			$no_results = false;
@@ -310,7 +310,7 @@ switch ($_GET['go'])
 			
 			$stylee		= "filecp";
 			$titlee		= $lang['FILECP'];
-			$action		= "usrcp.php?go=filecp";
+			$action		= "ucp.php?go=filecp";
 			
 
 			//te get files and update them !!
@@ -327,7 +327,7 @@ switch ($_GET['go'])
 			$currentPage	= (isset($_GET['page']))? intval($_GET['page']) : 1;
 			$Pager			= new SimplePager($perpage, $nums_rows, $currentPage);
 			$start			= $Pager->getStartRow();
-			$linkgoto 		= ($config['mod_writer']) ? $config['siteurl'].'filecp.html' : $config['siteurl'].'usrcp.php?go=filecp';
+			$linkgoto 		= ($config['mod_writer']) ? $config['siteurl'].'filecp.html' : $config['siteurl'].'ucp.php?go=filecp';
 			$page_nums	= $Pager->print_nums($linkgoto); 
 			$total_pages	= $Pager->getTotalPages(); 
 			
@@ -398,7 +398,7 @@ switch ($_GET['go'])
 
 			$stylee					= "profile";
 			$titlee					= $lang['PROFILE'];
-			$action					= "usrcp.php?go=profile";
+			$action					= "ucp.php?go=profile";
 			$name					= $usrcp->name();
 			$mail					= $usrcp->mail();
 			$show_my_filecp	= $usrcp->get_data('show_my_filecp');
@@ -456,7 +456,7 @@ switch ($_GET['go'])
 							$errs	=	'';
 							foreach($ERRORS as $r)
 							{
-									$errs	.= '- ' . $r . '. <br/>';
+									$errs	.= '- ' . $r . '. <br />';
 							}
 							kleeja_err($errs);
 				}
@@ -490,7 +490,7 @@ switch ($_GET['go'])
 			{
 				$stylee		= "get_pass";
 				$titlee		= $lang['GET_LOSTPASS'];
-				$action		= "usrcp.php?go=get_pass";
+				$action		= "ucp.php?go=get_pass";
 				
 				($hook = kleeja_run_hook('no_submit_get_pass')) ? eval($hook) : null; //run hook
 			}
@@ -556,7 +556,7 @@ switch ($_GET['go'])
 							}	
 							else
 							{
-								$text	= $lang['OK_SEND_NEWPASS'] . '<a href="usrcp.php?go=login">' . $lang['LOGIN'] . '</a>';
+								$text	= $lang['OK_SEND_NEWPASS'] . '<a href="ucp.php?go=login">' . $lang['LOGIN'] . '</a>';
 								kleeja_info($text);	
 							}
 							
@@ -568,7 +568,7 @@ switch ($_GET['go'])
 							$errs	=	'';
 							foreach($ERRORS as $r)
 							{
-									$errs	.= '- ' . $r . '. <br/>';
+									$errs	.= '- ' . $r . '. <br />';
 							}
 							kleeja_err($errs);
 					}

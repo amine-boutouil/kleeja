@@ -40,7 +40,7 @@ case 'check':
 	//config,php
 	if (!$dbname || !$dbuser)
 	{
-		print '<span style="color:red;">' . $lang['INST_CHANG_CONFIG'] . '</span><br/>';
+		print '<span style="color:red;">' . $lang['INST_CHANG_CONFIG'] . '</span><br />';
 		$submit_wh = 'disabled="disabled"';
 	}
 
@@ -48,15 +48,15 @@ case 'check':
 	$texterr = '';
 	$connect = @mysql_connect($dbserver,$dbuser,$dbpass);
 	if (!$connect) 
-		$texterr .= '<span style="color:red;">' . $lang['INST_CONNCET_ERR'] . '</span><br/>';
+		$texterr .= '<span style="color:red;">' . $lang['INST_CONNCET_ERR'] . '</span><br />';
 		
 	$select = @mysql_select_db($dbname);
 	if (!$select) 
-		$texterr .= '<span style="color:red;">' . $lang['INST_SELECT_ERR'] . '</span><br/>';
+		$texterr .= '<span style="color:red;">' . $lang['INST_SELECT_ERR'] . '</span><br />';
 		
-	if ( !is_writable('../cache') ) {$texterr .= '<span style="color:red;">[cache]: ' . $lang['INST_NO_WRTABLE'] . '</span><br/>';};
-	if ( !is_writable('../uploads') ) {$texterr .= '<span style="color:red;">[uploads]: ' . $lang['INST_NO_WRTABLE'] . '</span><br/>';};
-	if ( !is_writable('../uploads/thumbs') ) {$texterr .= '<span style="color:red;">[uploads/thumbs]: ' . $lang['INST_NO_WRTABLE'] . '</span><br/>';};
+	if ( !is_writable('../cache') ) {$texterr .= '<span style="color:red;">[cache]: ' . $lang['INST_NO_WRTABLE'] . '</span><br />';};
+	if ( !is_writable('../uploads') ) {$texterr .= '<span style="color:red;">[uploads]: ' . $lang['INST_NO_WRTABLE'] . '</span><br />';};
+	if ( !is_writable('../uploads/thumbs') ) {$texterr .= '<span style="color:red;">[uploads/thumbs]: ' . $lang['INST_NO_WRTABLE'] . '</span><br />';};
 	if ($texterr !='')
 	{
 		print $texterr;
@@ -65,7 +65,7 @@ case 'check':
 
 	if($submit_wh == '')
 	{
-		print '<br/><span style="color:green;"><b>[ ' . $lang['INST_GOOD_GO'] . ' ]</b></span><br/><br/>';
+		print '<br /><span style="color:green;"><b>[ ' . $lang['INST_GOOD_GO'] . ' ]</b></span><br /><br />';
 	}
 
 	print '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=action_file&'.get_lang(1).'">
@@ -110,7 +110,7 @@ case 'action_file':
 		<br />
 		<br /><form  action="' . $_SERVER['PHP_SELF'] . '?step=action_file&'.get_lang(1).'" method="post">
 		'.$lang['INST_CHOOSE_UPDATE_FILE'].' 
-		<br/>
+		<br />
 		<select name="action_file_do" style="width: 352px">
 		' . $lngfiles . '
 		</select>
@@ -135,7 +135,7 @@ case 'update_now':
 		$file_for_up	=	'update_files/'.htmlspecialchars($_GET['action_file_do']).'.php';
 		if(!file_exists($file_for_up))
 		{
-			print '<span style="color:red;">' . $lang['INST_ERR_NO_SELECTED_UPFILE_GOOD'] . ' [ '.$file_for_up.' ]</span><br/>';
+			print '<span style="color:red;">' . $lang['INST_ERR_NO_SELECTED_UPFILE_GOOD'] . ' [ '.$file_for_up.' ]</span><br />';
 		}
 		else
 		{	
@@ -154,7 +154,7 @@ case 'update_now':
 					$do_it	= $SQL->query($sql_content);
 					
 					if(!$do_it)
-						print '<span style="color:red;"> [' .$name .'] : ' . $lang['INST_SQL_ERR'] . '</span><br/>';
+						print '<span style="color:red;"> [' .$name .'] : ' . $lang['INST_SQL_ERR'] . '</span><br />';
 				}
 			}
 			
@@ -174,18 +174,18 @@ case 'update_now':
 			//
 			if(sizeof($update_notes) > 0)
 			{
-				print '<br/><span style="color:blue;"><b>' . $lang['INST_NOTES_UPDATE'] . ' :</b> </span><br/>';
+				print '<br /><span style="color:blue;"><b>' . $lang['INST_NOTES_UPDATE'] . ' :</b> </span><br />';
 				
 				$i=1;
 				foreach($update_notes as $n)
 				{
-					print '  [<b>' . $i .'</b>] <br/><span style="color:black;">' . $n. ' : </span><br/>';
+					print '  [<b>' . $i .'</b>] <br /><span style="color:black;">' . $n. ' : </span><br />';
 					++$i;
 				}
 
 			}
 			
-			print '<br/><br/><span style="color:green;">' . $lang['INST_UPDATE_IS_FINISH']. '</span><br/>';
+			print '<br /><br /><span style="color:green;">' . $lang['INST_UPDATE_IS_FINISH']. '</span><br />';
 		
 		}
 

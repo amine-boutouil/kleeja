@@ -27,8 +27,8 @@ switch ($_GET['go'])
 	$gusts_data = array();
 	foreach($g_exts as $s )
 	{
-		$gusts_data[]	=	array(	'ext'		=> $s,
-											'num'	=> Customfile_size($g_sizes[$s])
+		$gusts_data[]	=	array(	'ext'	=> $s,
+									'num'	=> Customfile_size($g_sizes[$s])
 									);
 	}
 
@@ -37,7 +37,7 @@ switch ($_GET['go'])
 	foreach($u_exts as $s )
 	{
 		$users_data[]	=	array(	'ext' => $s,
-											'num' => Customfile_size($u_sizes[$s])
+									'num' => Customfile_size($u_sizes[$s])
 									);
 	}
 	

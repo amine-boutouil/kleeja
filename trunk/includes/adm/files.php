@@ -76,7 +76,7 @@
 		{
 		
 			//make new lovely arrays !!
-			$userfile =  $config['siteurl'].(($config['mod_writer'])? 'fileuser_'.$row['user'].'.html' : 'usrcp.php?go=fileuser&amp;id='.$row['user'] );
+			$userfile =  $config['siteurl'].(($config['mod_writer'])? 'fileuser_'.$row['user'].'.html' : 'ucp.php?go=fileuser&amp;id='.$row['user'] );
 			
 			//get username
 			$query_name = array(

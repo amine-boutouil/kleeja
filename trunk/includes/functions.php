@@ -32,18 +32,18 @@ function Saaheader($title)
 		if (!$usrcp->name()) 
 		{
 			$login_name		= $lang['LOGIN']; 
-			$login_url			= "usrcp.php?go=login";
+			$login_url			= "ucp.php?go=login";
 			$usrcp_name		= $lang['REGISTER'];
-			$usrcp_url			= "usrcp.php?go=register";
+			$usrcp_url			= "ucp.php?go=register";
 		}
 		else
 		{
 			$login_name		= $lang['LOGOUT']."[".$usrcp->name()."]";
-			$login_url			= "usrcp.php?go=logout";
+			$login_url			= "ucp.php?go=logout";
 			$usrcp_name		= $lang['PROFILE'];
-			$usrcp_url			= "usrcp.php?go=profile";
+			$usrcp_url			= "ucp.php?go=profile";
 			$usrfile_name	=  $lang['YOUR_FILEUSER'];
-			$usrfile_url		= ($config['mod_writer']) ? "fileuser.html" : "usrcp.php?go=fileuser";
+			$usrfile_url		= ($config['mod_writer']) ? "fileuser.html" : "ucp.php?go=fileuser";
 		}
 
 		$vars = array (
@@ -84,7 +84,7 @@ function Saaheader($title)
 							6=>$lang['CALL'],7=>"go.php?go=call",
 							8=>$login_name,9=>$login_url,
 							10=>$usrcp_name,11=>$usrcp_url,
-							12=>$lang['FILECP'],13=>"usrcp.php?go=filecp",
+							12=>$lang['FILECP'],13=>"ucp.php?go=filecp",
 							14=>$lang['STATS'],15=>"go.php?go=stats",
 							16=>$usrfile_name,17=>$usrfile_url
 						);
@@ -597,7 +597,7 @@ function creat_lang_xml($contents, $def=false)
 					foreach($word_s as $wd)
 					{
 						$lang_word		= $wd['attributes']['name'];
-						$lang_trans		= addslashes(strip_tags($wd['value'], '<b><br><br/><i><u>')); //fixed
+						$lang_trans		= addslashes(strip_tags($wd['value'], '<b><br><br /><br/><i><u>')); //fixed
 						
 						$insert_query = array(
 											'INSERT'	=> 'lang_id, word, trans',
@@ -797,7 +797,7 @@ function creat_plugin_xml($contents)
 								foreach($plg_langs['lang'] as $ln)
 								{
 									$lang_word			=	$SQL->real_escape($ln['attributes']['word']);
-									$lang_trans			=	addslashes(strip_tags($ln['value'], '<b><br><br/><i><u>')); //fixed
+									$lang_trans			=	addslashes(strip_tags($ln['value'], '<b><br /><br><i><u>')); //fixed
 
 									$insert_query = array(
 															'INSERT'	=> 'word, trans, lang_id',
@@ -1051,7 +1051,7 @@ function kleeja_debug ()
 		}
 		
 		//thrn show it
-		echo '<br/>';
+		echo '<br />';
 		echo '<fieldset  dir="ltr" style="background:white"><legend style="font-family: Arial; color:red"><em>[Page Analysis]</em></legend>';
 		echo '<p>&nbsp;</p>';
 		echo '<p><h2><strong>General Information :</strong></h2></p>';
@@ -1072,7 +1072,7 @@ function kleeja_debug ()
 				echo '</textarea>	<br />';
 				echo 'Duration :' . $val[1] . ''; 
 				echo '</fieldset>';
-				echo '<br/><br/>';
+				echo '<br /><br />';
 			}
 		}
 		else
@@ -1090,7 +1090,7 @@ function kleeja_debug ()
 					
 					echo '<fieldset name="hook"  dir="ltr" style="background:white"><legend><em>Plugin  # [' . $p . ']</em></legend>';
 					echo '<textarea style="font-family:Courier New,monospace;width:99%; background:#F4F4F4" rows="5" cols="10">' . htmlspecialchars($c) . '</textarea><br />';
-					echo 'for hook_name :' . $k . '</fieldset><br/><br/>';
+					echo 'for hook_name :' . $k . '</fieldset><br /><br />';
 				}
 		}
 		else
@@ -1098,7 +1098,7 @@ function kleeja_debug ()
 			echo '<p><b>NO-HOOKS</b></p>';
 		}
 		
-		echo '<br/><br/><br/></fieldset>';
+		echo '<br /><br /><br /></fieldset>';
 }
 
 /*
@@ -1143,7 +1143,7 @@ function kj_lang($word, $trans, $language=false)
 	else
 	{
 		$lang_word		=	$SQL->real_escape($word);
-		$lang_trans		=	addslashes(strip_tags($trans, '<b><br><br/><i><u>')); //fixed
+		$lang_trans		=	addslashes(strip_tags($trans, '<b><br><br /><i><u>')); //fixed
 		$language			=	($language!==false) ?  $language : $config['language'];
 		$insert_query = array(
 										'INSERT'	=> 'word, trans, lang_id',

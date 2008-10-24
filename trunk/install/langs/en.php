@@ -54,7 +54,7 @@
 	$lang['DB_USER']								= 'Database Username';
 	$lang['DB_PASSWORD']							= 'Database Password';
 	$lang['DB_NAME']								= 'Database Name';
-	$lang['DB_PREFIX']								= 'Database prefix <br/>[a word you provide that is added to the beginning of all tables for this branch installations...]';
+	$lang['DB_PREFIX']								= 'Database prefix <br />[a word you provide that is added to the beginning of all tables for this branch installations...]';
 	$lang['VALIDATING_FORM_WRONG']					= 'A required field was left blank!';
 	$lang['CONFIG_EXISTS']							= 'Config.php was found, Continue...';
 	$lang['INST_SUBMIT_CONFIGOK']					= 'Upload the file in the main directory';
@@ -68,7 +68,7 @@
 	$lang['INST_NOTES_UPDATE']						= 'Update Notes';
 	$lang['INST_NOTE_RC2_TO_RC3']					= 'You need to replace all the script files and not just running this wizard  ...';
 	$lang['INST_NOTE_RC4_TO_RC5']					= 'You need to replace all new the script file with the old one !.';
-	$lang['INST_UPDATE_IS_FINISH']					= 'Installation completed! you can now delete the <br/><b>INSTALL</b><br/> directory...';
+	$lang['INST_UPDATE_IS_FINISH']					= 'Installation completed! you can now delete the <br /><b>INSTALL</b><br /> directory...';
 	
 	
 ?>

@@ -32,7 +32,7 @@
 	{
 			($hook = kleeja_run_hook('user_not_admin_admin_page')) ? eval($hook) : null; //run hook 
 			
-			$text = '<span style="color:red;">' . $lang['U_NOT_ADMIN'] . '</span><br/><a href="usrcp.php?go=login">' . $lang['LOGIN'] . '</a>';
+			$text = '<span style="color:red;">' . $lang['U_NOT_ADMIN'] . '</span><br /><a href="ucp.php?go=login">' . $lang['LOGIN'] . '</a>';
 			kleeja_err($text);
 	}
 

@@ -213,7 +213,7 @@
 	<word name="SIZE_U"><![CDATA[Size U]]></word>
 	<word name="ALLOW_G"><![CDATA[Allow G]]></word>
 	<word name="ALLOW_U"><![CDATA[Allow U]]></word>
-	<word name="E_EXTS"><![CDATA[<b>G</b> for guests. <br/> <b>U</b> for users<br/> Sizes are measured in bytes.]]></word>
+	<word name="E_EXTS"><![CDATA[<b>G</b> for guests. <br /> <b>U</b> for users<br /> Sizes are measured in bytes.]]></word>
 	<word name="UPDATED_EXTS"><![CDATA[Extensions updated successfully.]]></word>
 	<word name="UPDATE_FILES"><![CDATA[Update Files]]></word>
 	<word name="BY"><![CDATA[By]]></word>

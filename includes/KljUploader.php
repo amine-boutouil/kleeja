@@ -307,7 +307,7 @@ function createthumb($name, $ext, $filename, $new_w, $new_h)
 						{
 							//guest
 							if($this->id_user == '-1')
-								$this->errs[]= '[ ' . $_FILES['file']['name'][$i] . ' ] ' . $lang['FORBID_EXT'] . '['.$this->typet.'] <br /> <a href="usrcp.php?go=register" title="' . htmlspecialchars($lang['REGISTER']) . '">' . $lang['REGISTER'] . '</a>';
+								$this->errs[]= '[ ' . $_FILES['file']['name'][$i] . ' ] ' . $lang['FORBID_EXT'] . '['.$this->typet.'] <br /> <a href="ucp.php?go=register" title="' . htmlspecialchars($lang['REGISTER']) . '">' . $lang['REGISTER'] . '</a>';
 							//not guest
 							else
 								$this->errs[]= '[ ' . $_FILES['file']['name'][$i] . ' ] ' . $lang['FORBID_EXT'] . '['.$this->typet.']';

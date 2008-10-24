@@ -346,8 +346,8 @@ div#texttype {
 
         <div id="footer">
         Copyrights © <a href="{config.siteurl}">{config.sitename}</a>
-        <br/>
-        <br/>
+        <br />
+        <br />
         <!-- IF REMOVE: Pay for a license - see http://www.kleeja.com -->
         Powered by <a href="http://www.kleeja.com/">Kleeja</a>
         <!-- IF REMOVE: Pay for a license - see http://www.kleeja.com -->
@@ -381,7 +381,7 @@ div#texttype {
         <tr>
                 <td class="row1">{lang.VERTY_CODE}</td>
                 <td class="row2">
-                        {code}<br/>
+                        {code}<br />
                         <input type="text" name="code_answer" style="direction:ltr" />
                 </td>
         </tr>
@@ -468,11 +468,11 @@ function ti()
 </LOOP>
 </IF>
 </table>
-<br/>
+<br />
 <input type="submit" name="submit_files" value="{lang.DEL_SELECTED}" />
 
 </form>
-<br/>
+<br />
 <div style="text-align:center"><b>{page_nums}</b></div>
 
 </div>]]>
@@ -504,13 +504,13 @@ function ti()
 
         <div style="text-align:center"><b>{page_nums}</b></div>
 
-        <br/>
+        <br />
         <IF NAME="filecp_link">
         <a href="{filecp_link}" title="{lang.GO_FILECP}">{lang.GO_FILECP}</a>
-        <br/>
-        <br/>
+        <br />
+        <br />
         <div class="daaf">
-        {lang.COPY_AND_GET_DUD} : <br/>
+        {lang.COPY_AND_GET_DUD} : <br />
         {your_fileuser}
         </div>
         </IF>
@@ -536,7 +536,7 @@ function ti()
 </LOOP>
 
 <br />
-<br/>
+<br />
 
 <h2>{lang.GUIDE_USERS} </h2>
 <br />
@@ -554,7 +554,7 @@ function ti()
 
 <!-- begin welcome index -->
 <h2>{lang.WELCOME}..</h2>        
-<br/>
+<br />
 {welcome_msg}
 <br />
 <br />
@@ -583,9 +583,9 @@ function ti()
                 <br />
         <IF NAME="config.safe_code">
                         {SAFE_CODE}
-                        <br/>
+                        <br />
                         <input type="text" name="answer_safe" style="direction:ltr;" />
-                        <br/>
+                        <br />
         </IF>
                 <input id="checkr" type="checkbox" onclick="accept_terms('submitr','checkr');" />{lang.AGREE_RULES}
                 <br />
@@ -597,7 +597,7 @@ function ti()
 <IF NAME="config.www_url">
         <div id="texttype">
                 <input type="text" name="file[0]" size="50" value="{lang.PAST_URL_HERE}" onclick="this.value=''" style="color:silver;" dir="ltr">
-                <br>
+                <br />
                 <div id="upload_f_forum"></div>
                 <br />
                 <input name="mraupload" onclick="javascript:plus(2);makeupload(2);" type="button" value="+" />
@@ -606,9 +606,9 @@ function ti()
                 <br />
         <IF NAME="config.safe_code">
                         {SAFE_CODE2}
-                        <br/>
+                        <br />
                         <input type="text" name="answer_safe2" style="direction:ltr;" />
-                        <br/>
+                        <br />
         </IF>
                 <input id="checkr2" type="checkbox" onclick="accept_terms('submittxt','checkr2');" />{lang.AGREE_RULES}
                 <br />
@@ -623,7 +623,7 @@ function ti()
 <div id="loadbox"><img src="./images/loading.gif" alt="loading ..." /></div>
 <!---- END  FOR UPLOAD BOXES ---->
 
-<br/>
+<br />
 
 <!---- START  FOR INFORMATION ---->
 <IF NAME="info">
@@ -639,7 +639,7 @@ function ti()
 <!---- START FOR ONLINE ---->
 <IF NAME="show_online">
 <b>{lang.NUMBER_ONLINE} :</b>{allnumbers} ( {lang.NUMBER_UONLINE} : {usersnum} , {lang.NUMBER_VONLINE}: {visitornum} )
-<br/>
+<br />
 <LOOP NAME="shownames">
 {{name}} , 
 </LOOP>
@@ -741,7 +741,7 @@ function ti()
                         <tr>
                                 <td class="row1">{lang.VERTY_CODE}</td>
                                 <td class="row2">
-                                        {code}<br/>
+                                        {code}<br />
                                         <input type="text" name="code_answer" style="direction:ltr" />
                                 </td>
                         </tr>
@@ -779,7 +779,7 @@ function ti()
         <tr>
                 <td class="row1">{lang.VERTY_CODE}</td>
                 <td class="row2">
-                        {code}<br/>
+                        {code}<br />
                         <input type="text" name="code_answer" style="direction:ltr" />
                 </td>
         </tr>
@@ -959,7 +959,7 @@ document.getElementById('mail_here').innerHTML= iee;
 <LOOP NAME="arr">
         <tr style="background-color:#F5F5F5">
                 <td><a title="{n_mail}:{{mail}}" onclick="javascript:show_msg('textva_{{id}}',{{id}});">{{name}}</a>
-                <input type="hidden" value="{{mail}} :<br/> {{text}}" id="textva_{{id}}">
+                <input type="hidden" value="{{mail}} :<br /> {{text}}" id="textva_{{id}}">
                 </td>
                 <td>{{time}}</td>
                 <td><a href="{{ip_finder}}" target="blank">{{ip}}</a></td>
@@ -1295,7 +1295,7 @@ document.getElementById('mail_here').innerHTML= iee;
 </div>
 
 <div id="footer">
-Powered by <a href="http://www.kleeja.com">Kleeja</a> <br/>
+Powered by <a href="http://www.kleeja.com">Kleeja</a> <br />
 Styles, Hacks in <a href="http://www.kleeja.com">Kleeja Official Website</a>
 </div>
 
@@ -1403,7 +1403,7 @@ document.getElementById('mail_here').innerHTML = iee;
 <LOOP NAME="arr">
         <tr style="background-color:#F5F5F5">
                 <td><a title="{n_mail}:{{mail}}" onclick="javascript:show_msg('textva_{{id}}',{{id}});">{{name}}</a>
-                <input type="hidden" value="{{mail}} :<br/> {{text}}" id="textva_{{id}}">
+                <input type="hidden" value="{{mail}} :<br /> {{text}}" id="textva_{{id}}">
                 </td>
                 <td><a href="{{url}}">{lang.CLICKHERE}<a/></td>
                 <td>{{time}}</td>
@@ -1515,8 +1515,8 @@ document.getElementById('mail_here').innerHTML = iee;
         <td><b>{lang.LAST_VISIT} :</b>
         </td>
         <td>
-        {last_visit}<br/>
-        <a href="{h_lst_files}">{lang.FLS_LST_VST_SEARCH}</a><br/>
+        {last_visit}<br />
+        <a href="{h_lst_files}">{lang.FLS_LST_VST_SEARCH}</a><br />
         <a href="{h_lst_imgs}">{lang.IMG_LST_VST_SEARCH}</a>
         </td>
         </tr>
@@ -1969,8 +1969,8 @@ a.button2, input.button2 {
                 <input class="button2" name="search_file" type="submit" value="{lang.SEARCH_SUBMIT}" />
 </fieldset>
 </form>
-<br/>
-<br/>
+<br />
+<br />
 <IF NAME="default_user_system">
 <form method="post" action="{action2}">
         <fieldset>
@@ -2015,8 +2015,8 @@ a.button2, input.button2 {
 {{tdnum}}
                 <td>
                         <div  class="bg_img">
-                        <a href="{{href}}"><img src="{{thumb_link}}"  style="width:75px;height:75px"  onmouseover="toolTip('{{name}}<br />{{ups}}<br />{{size}}<br/>{{time}}<br />{{user}}<br />{{ip}}',this);"/></a>
-                        <br/><input name="del_{{id}}" type="checkbox" style="float:right"/>
+                        <a href="{{href}}"><img src="{{thumb_link}}"  style="width:75px;height:75px"  onmouseover="toolTip('{{name}}<br />{{ups}}<br />{{size}}<br />{{time}}<br />{{user}}<br />{{ip}}',this);"/></a>
+                        <br /><input name="del_{{id}}" type="checkbox" style="float:right"/>
                         </div>
                 </td>
 {{tdnum2}}
@@ -2097,11 +2097,11 @@ a.button2, input.button2 {
         </LOOP>
         </select>
 
-        <br/>
+        <br />
         <input name="method" value="1" type="radio" checked="checked" /> {lang.SHOW_TPLS}
-        <br/>
+        <br />
         <input name="method" value="2" type="radio" /> {lang.DELETE}
-        <br/>
+        <br />
         <input name="method" value="3" type="radio" /> {lang.EXPORT_AS_XML}
 
         </td>
@@ -2115,8 +2115,8 @@ a.button2, input.button2 {
 </form>
 </div>
 
-<br/>
-<br/>
+<br />
+<br />
 
 <div class="middle">
 <form method="post" action="{action}" enctype="multipart/form-data">
@@ -2163,9 +2163,9 @@ a.button2, input.button2 {
 </LOOP>
 </select>
 
-<br/>
+<br />
 <input name="method" value="1" type="radio" checked="checked" /> {lang.EDIT}
-<br/>
+<br />
 <input name="method" value="2" type="radio" /> {lang.DELETE}
 <input type="hidden" name="style_id" value="{style_id}" />
 
@@ -2180,9 +2180,9 @@ a.button2, input.button2 {
 </form>
 
 </div>
-<br/>
+<br />
 
-<br/>
+<br />
 
 <div class="middle">
 <form method="post" action="{action}" enctype="multipart/form-data">
@@ -2252,7 +2252,7 @@ a.button2, input.button2 {
 </textarea>
 <input class="button2" type="button"  onclick="javascript:change_editor_height(100, '+');" value="[+]" />
 <input class="button2" type="button"  onclick="javascript:change_editor_height(100, '-');" value="[-]" />
-<br/>
+<br />
 <input type="hidden" name="style_id" value="{style_id}" />
 <input type="hidden" name="tpl_choose" value="{tpl_name}" />
 
@@ -2291,11 +2291,11 @@ a.button2, input.button2 {
         <option  value="{{plg_id}}">{{plg_name}}</option>
         </LOOP>
         </select>
-        <br/>
+        <br />
         <input name="method" value="1" type="radio" checked="checked" /> {lang.DISABLE}  
-        <br/>
+        <br />
         <input name="method" value="2" type="radio" /> {lang.ENABLE} 
-        <br/>
+        <br />
         <input name="method" value="3" type="radio" /> {lang.DELETE}
 </IF>
 
@@ -2310,9 +2310,9 @@ a.button2, input.button2 {
 </form>
 </div>
 
-<br/>
+<br />
 
-<br/>
+<br />
 
 <div class="middle">
 <form method="post" action="{action}" enctype="multipart/form-data">
@@ -2367,9 +2367,9 @@ a.button2, input.button2 {
 </LOOP>
 </select>
 
-<br/>
+<br />
 <input name="method" value="1" type="radio" checked="checked" /> {lang.EDIT}
-<br/>
+<br />
 <input name="method" value="2" type="radio" /> {lang.DELETE}
 <input type="hidden" name="lang_id" value="{lang_id}" />
 
@@ -2384,9 +2384,9 @@ a.button2, input.button2 {
 </form>
 
 </div>
-<br/>
+<br />
 
-<br/>
+<br />
 
 <div class="middle">
 <form method="post" action="{action}" enctype="multipart/form-data">
@@ -2436,14 +2436,14 @@ a.button2, input.button2 {
 <textarea name="word"  style="width: 360px; height: 50px; direction:ltr;" >
 {get_lang.word}
 </textarea>
-<br/>
+<br />
 =>
-<br/>
+<br />
 <textarea name="trans"  style="width: 360px; height: 50px; direction:ltr;" >
 {get_lang.trans}
 </textarea>
 
-<br/>
+<br />
 <input type="hidden" name="lang_id" value="{lang_id}" />
 <input type="hidden" name="word_choose" value="{lang_word}" />
 
@@ -2480,11 +2480,11 @@ a.button2, input.button2 {
 </LOOP>
 </select>
 
-<br/>
+<br />
 <input name="method" value="1" type="radio" checked="checked" /> {lang.SHOW_WORDS}
-<br/>
+<br />
 <input name="method" value="2" type="radio" /> {lang.DELETE}
-<br/>
+<br />
 <input name="method" value="3" type="radio" /> {lang.EXPORT_AS_XML}
 
 </td>
@@ -2498,9 +2498,9 @@ a.button2, input.button2 {
 </form>
 </div>
 
-<br/>
+<br />
 
-<br/>
+<br />
 
 <div class="middle">
 <form method="post" action="{action}" enctype="multipart/form-data">

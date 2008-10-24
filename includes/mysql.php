@@ -381,12 +381,12 @@ class SSQL
                           echo "<html><head></head><title>ERROR IM MYSQL</title><body>";
                           echo '<br />';
                           echo '<div class="error">';
-                          echo " <a href='#' onclick='window.location.reload( false );'>click to Refresh this page ...</a><Br/>";
+                          echo " <a href='#' onclick='window.location.reload( false );'>click to Refresh this page ...</a><br />";
 						  echo "<h2>Sorry , There is an error in mysql " . ($msg !='' ? ", error : $msg" : "") ."</h2>";
 						if($error_sql != '')
-							echo "<br/>--[query]-------------------------- <br/>$error_sql<br/>---------------------------------<br/><br/>";
-						  echo "[$error_no : $error_msg] <br/>";
-						  echo "<br/><br/><strong>Script: Kleeja <br/><a href='http://www.kleeja.com'>Kleeja Website</a></strong>";
+							echo "<br />--[query]-------------------------- <br />$error_sql<br />---------------------------------<br /><br />";
+						  echo "[$error_no : $error_msg] <br />";
+						  echo "<br /><br /><strong>Script: Kleeja <br /><a href='http://www.kleeja.com'>Kleeja Website</a></strong>";
                           echo '</b></div>';
                           echo '</body></html>';
 

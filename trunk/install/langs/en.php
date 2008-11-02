@@ -33,7 +33,7 @@
 	$lang['INST_CRT_TPL']							= 'Templates table created';
 	$lang['INST_SQL_OK']							= 'SQL Executed Successfully ..';
 	$lang['INST_SQL_ERR']							= 'Error Executing SQL .. ';
-	$lang['INST_FINISH_SQL']						= 'Kleeja was installed successfully, Please remove install.php file';
+	$lang['INST_FINISH_SQL']						= 'Kleeja was installed successfully, Please remove install folder';
 	$lang['INST_FINISH_ERRSQL']						= 'OopS! there seems to be a problem, try again.';
 	$lang['INST_KLEEJADEVELOPERS']					= 'Thank you for using Kleeja and good luck from our development team.';
 	$lang['SITENAME']								= 'Website title';

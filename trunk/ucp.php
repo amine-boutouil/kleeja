@@ -33,7 +33,7 @@ switch ($_GET['go'])
 			{
 				($hook = kleeja_run_hook('login_logon_before')) ? eval($hook) : null; //run hook
 				
-				$text	= $lang['LOGINED_BEFORE'].' ..<br / > <a href="ucp.php?go=logout">' . $lang['LOGOUT'] . '</a>';
+				$text	= $lang['LOGINED_BEFORE'].' ..<br /> <a href="ucp.php?go=logout">' . $lang['LOGOUT'] . '</a>';
 				kleeja_info($text);
 			}
 			elseif (isset($_POST['submit']))
@@ -266,16 +266,16 @@ switch ($_GET['go'])
 						
 			/////////////pager 
 			$result_p			= $SQL->build($query);
-			$nums_rows		= $SQL->num_rows($result_p);
+			$nums_rows			= $SQL->num_rows($result_p);
 			$currentPage		= (isset($_GET['page']))? intval($_GET['page']) : 1;
 			$Pager				= new SimplePager($perpage,$nums_rows,$currentPage);
 			$start				= $Pager->getStartRow();
 			
-			$your_fileuser	=  $config['siteurl'].(($config['mod_writer'])? 'fileuser_'.$usrcp->id().'.html' : 'ucp.php?go=fileuser&amp;id='.$usrcp->id() );
+			$your_fileuser		= $config['siteurl'].(($config['mod_writer'])? 'fileuser_'.$usrcp->id().'.html' : 'ucp.php?go=fileuser&amp;id='.$usrcp->id() );
 			$filecp_link		= ($user_id==$usrcp->id()) ?  $config['siteurl'].(($config['mod_writer'])? 'filecp.html':'ucp.php?go=filecp' ) : false;
 			$total_pages		= $Pager->getTotalPages(); 
 			$linkgoto			= ($config['mod_writer']) ? $config['siteurl'].'fileuser_'.$user_id.'.html' : $config['siteurl'].'ucp.php?go=fileuser&amp;id='.$user_id;
-			$page_nums		= $Pager->print_nums($linkgoto); 
+			$page_nums			= $Pager->print_nums($linkgoto); 
 				
 			$no_results = false;
 			if($nums_rows != 0)
@@ -287,10 +287,10 @@ switch ($_GET['go'])
 				while($row=$SQL->fetch_array($result))
 				{
 					//make new lovely arrays !!
-					$arr[] = array(	'id'			=>$row['id'],
-											'name'		=>'<a href="'.(($config[mod_writer])?  $config[siteurl].'download'.$row['id'].'.html': $config[siteurl]."download.php?id=".$row['id']  ).'" target="blank">'.$row['name'].'</a>',
-											'icon_link'	=>(file_exists("images/filetypes/".$row['type'].".gif"))? "images/filetypes/".$row['type'].".gif" : 'images/filetypes/file.gif',
-											'file_type'	=> $row['type']
+					$arr[] = array(	'id'		=> $row['id'],
+									'name'		=>'<a href="'.(($config['mod_writer'])?  $config['siteurl'] . 'download'.$row['id'] . '.html': $config['siteurl'] . "download.php?id=" . $row['id']  ).'" target="blank">' . $row['name'] . '</a>',
+									'icon_link'	=>(file_exists("images/filetypes/".  $row['type'] . ".gif"))? "images/filetypes/" . $row['type'] . ".gif" : 'images/filetypes/file.gif',
+									'file_type'	=> $row['type']
 							);
 				}
 				$SQL->freeresult($result);
@@ -323,12 +323,12 @@ switch ($_GET['go'])
 						
 			/////////////pager 
 			$result_p		= $SQL->build($query);
-			$nums_rows	= $SQL->num_rows($result_p);
+			$nums_rows		= $SQL->num_rows($result_p);
 			$currentPage	= (isset($_GET['page']))? intval($_GET['page']) : 1;
 			$Pager			= new SimplePager($perpage, $nums_rows, $currentPage);
 			$start			= $Pager->getStartRow();
-			$linkgoto 		= ($config['mod_writer']) ? $config['siteurl'].'filecp.html' : $config['siteurl'].'ucp.php?go=filecp';
-			$page_nums	= $Pager->print_nums($linkgoto); 
+			$linkgoto 		= ($config['mod_writer']) ? $config['siteurl'].'filecp.html' : $config['siteurl'] . 'ucp.php?go=filecp';
+			$page_nums		= $Pager->print_nums($linkgoto); 
 			$total_pages	= $Pager->getTotalPages(); 
 			
 			//now, there is no result
@@ -342,11 +342,11 @@ switch ($_GET['go'])
 				$result	=	$SQL->build($query);
 				while($row=$SQL->fetch_array($result))
 				{
-					$del[$row['id']] = (isset($_POST["del_".$row['id']])) ? $_POST["del_".$row['id']] : "";
+					$del[$row['id']] = (isset($_POST["del_".$row['id']])) ? $_POST["del_" . $row['id']] : "";
 					
 					//make new lovely arrays !!
-					$arr[] = array(	'id'		=> $row['id'],
-											'name'	=> '<a href="' . (($config['mod_writer']) ?  $config['siteurl'] . 'download' . $row['id'] . '.html' : $config['siteurl']. "download.php?id=" . $row['id']  ) . '" target="blank">' . $row['name'] . '</a>'
+					$arr[] = array(	'id'	=> $row['id'],
+									'name'	=> '<a href="' . (($config['mod_writer']) ?  $config['siteurl'] . 'download' . $row['id'] . '.html' : $config['siteurl'] . "download.php?id=" . $row['id']) . '" target="blank">' . $row['name'] . '</a>'
 										);
 										
 						//when submit !!
@@ -357,7 +357,7 @@ switch ($_GET['go'])
 							if ($del[$row['id']])
 							{
 								$query_del = array(
-													'DELETE'		=> "{$dbprefix}files",
+													'DELETE'	=> "{$dbprefix}files",
 													'WHERE'		=> "id='".intval($row['id'])."'"
 												);
 												
@@ -402,7 +402,7 @@ switch ($_GET['go'])
 			$name					= $usrcp->name();
 			$mail					= $usrcp->mail();
 			$show_my_filecp	= $usrcp->get_data('show_my_filecp');
-			$data_forum			= ($config[user_system]==1) ? true : false ;
+			$data_forum			= ($config['user_system']==1) ? true : false ;
 			$goto_forum_link	= $forum_path;
 			
 			($hook = kleeja_run_hook('no_submit_profile')) ? eval($hook) : null; //run hook
@@ -418,31 +418,30 @@ switch ($_GET['go'])
 				
 				if(empty($_POST['pname']) || empty($_POST['pmail']))
 				{
-					$ERRORS[]	=	$lang['EMPTY_FIELDS'];
+					$ERRORS[]	= $lang['EMPTY_FIELDS'];
 				}	
 				elseif(!empty($_POST['ppass_new'])  && (($_POST['ppass_new'] !=  $_POST['ppass_new2']) 
 						||  empty($_POST['ppass_old']) || (!$usrcp->data($usrcp->name(), $_POST['ppass_old']))))
 				{
-					$ERRORS[]	=	$lang['PASS_O_PASS2'];
+					$ERRORS[]	= $lang['PASS_O_PASS2'];
 				}
 				else if (!eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$", trim($_POST['pmail'])))
 				{
-					$ERRORS[]	=	$lang['WRONG_EMAIL'];
+					$ERRORS[]	= $lang['WRONG_EMAIL'];
 				}
 				
 				//no errors , do it
 				if(empty($ERRORS))
 				{
-						$mail					= "mail='" . $SQL->escape($_POST['pmail']) . "',";
+						$mail			= "mail='" . $SQL->escape($_POST['pmail']) . "',";
 						$show_my_filecp	= "show_my_filecp='" . intval($_POST['show_my_filecp']) . "'";
-						$pass					= (!empty($_POST['ppass_new'])) ? "password='" . md5($SQL->escape($_POST['ppass_new'])) . "'" : "";
-						$comma				= (!empty($_POST['ppass_new']))? "," : "";
-						$id						= (int)		$usrcp->id();
+						$pass			= (!empty($_POST['ppass_new'])) ? "password='" . md5($SQL->escape($_POST['ppass_new'])) . "'" : "";
+						$comma			= (!empty($_POST['ppass_new']))? "," : "";
+						$id				= (int) $usrcp->id();
 						
-						$update_query = array(
-													'UPDATE'	=> "{$dbprefix}users",
-													'SET'			=> $mail.$show_my_filecp.$comma.$pass,
-													'WHERE'		=> "id='" . $id . "'",
+						$update_query = array(	'UPDATE'	=> "{$dbprefix}users",
+												'SET'		=> $mail . $show_my_filecp . $comma . $pass, //comma mean "," char
+												'WHERE'		=> "id='" . $id . "'",
 												);
 								
 						($hook = kleeja_run_hook('qr_update_data_in_profile')) ? eval($hook) : null; //run hook
@@ -502,24 +501,23 @@ switch ($_GET['go'])
 				
 				if (empty($_POST['rmail']))
 				{
-					$ERRORS[]	=	$lang['EMPTY_FIELDS'];
+					$ERRORS[]	= $lang['EMPTY_FIELDS'];
 				}	
 				else if (!eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$", trim($_POST['rmail'])))
 				{
-					$ERRORS[]	=	$lang['WRONG_EMAIL'];
+					$ERRORS[]	= $lang['WRONG_EMAIL'];
 				}
 				else if ($SQL->num_rows($SQL->query("select * from `{$dbprefix}users` where mail='$_POST[rmail]' ")) ==0 )
 				{
-					$ERRORS[]	=	$lang['WRONG_DB_EMAIL'];
+					$ERRORS[]	= $lang['WRONG_DB_EMAIL'];
 				}
 				
 				//no errors, lets do it
 				if(empty($ERRORS))
 				{
-							$query = array(
-												'SELECT'	=> 'u.*',
-												'FROM'		=> "{$dbprefix}users u",
-												'WHERE'	=> "u.mail='" . $_POST['rmail'] . "'"
+							$query = array(	'SELECT'=> 'u.*',
+											'FROM'	=> "{$dbprefix}users u",
+											'WHERE'	=> "u.mail='" . $_POST['rmail'] . "'"
 											);
 									
 							($hook = kleeja_run_hook('qr_select_mail_get_pass')) ? eval($hook) : null; //run hook

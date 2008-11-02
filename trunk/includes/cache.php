@@ -21,9 +21,9 @@ if (!defined('IN_COMMON'))
 //
 if(!defined('STOP_HOOKS'))
 {
-	if (file_exists($root_path.'cache/data_hooks.php'))
+	if (file_exists($root_path . 'cache/data_hooks.php'))
 	{
-		include ($root_path.'cache/data_hooks.php');
+		include ($root_path . 'cache/data_hooks.php');
 	}
 	
 	if (!$all_plg_hooks && !file_exists($root_path.'cache/data_hooks.php'))
@@ -73,9 +73,9 @@ if(!defined('STOP_HOOKS'))
 //
 //get config data from config table  ...
 //
-	if (file_exists($root_path.'cache/data_config.php'))
+	if (file_exists($root_path . 'cache/data_config.php'))
 	{
-		include ($root_path.'cache/data_config.php');
+		include ($root_path . 'cache/data_config.php');
 	}
 	
 	if (!$config or !file_exists($root_path.'cache/data_config.php'))
@@ -98,7 +98,7 @@ if(!defined('STOP_HOOKS'))
 				$config[$row['name']] =$row['value'];
 				$file_datac .= '\''.$row['name'].'\' => \'' . str_replace(array("'","\'"), "\'", $row['value']) . '\',' . "\n";
 		}
-				$file_datac .= ');'."\n\n";
+				$file_datac .= ');' . "\n\n";
 				$file_datac .= '?' . '>';
 				
 	 	$SQL->freeresult($result);
@@ -113,9 +113,9 @@ if(!defined('STOP_HOOKS'))
 //
 	if(!$lang || !is_array($lang))	$lang	=	array();
 	
-	if (file_exists($root_path.'cache/data_lang_'.$config['language'].'.php'))
+	if (file_exists($root_path.'cache/data_lang_' . $config['language'] . '.php'))
 	{
-		include ($root_path.'cache/data_lang_'.$config['language'].'.php');
+		include ($root_path.'cache/data_lang_' . $config['language'] . '.php');
 	}
 	
 	if (!$lang or !file_exists($root_path.'cache/data_lang_'.$config['language'].'.php'))
@@ -123,7 +123,7 @@ if(!defined('STOP_HOOKS'))
 		$query = array(
 					'SELECT'	=> 'l.*',
 					'FROM'		=> "{$dbprefix}lang l",
-					'WHERE'		=>	"l.lang_id='".$config['language']."'"
+					'WHERE'		=>	"l.lang_id='" . $config['language'] . "'"
 					);
 					
 		($hook = kleeja_run_hook('qr_select_lang_cache')) ? eval($hook) : null; //run hook						
@@ -137,14 +137,14 @@ if(!defined('STOP_HOOKS'))
 		while($row=$SQL->fetch_array($result))
 		{
 				$lang[$row['word']] =	$row['trans'];
-				$file_datac .= '\''.str_replace(array("'","\'"), "\'", $row['word']).'\' => \'' . str_replace(array("'","\'"), "\'", $row['trans']) . '\',' . "\n";
+				$file_datac .= '\''.str_replace(array("'","\'"), "\'", $row['word']) . '\' => \'' . str_replace(array("'","\'"), "\'", $row['trans']) . '\',' . "\n";
 		}
-				$file_datac .= ');'."\n\n";
+				$file_datac .= ');' . "\n\n";
 				$file_datac .= '?' . '>';
 				
 	 	$SQL->freeresult($result);
 
-		$filenumc = fopen($root_path.'cache/data_lang_'.$config['language'].'.php', 'w');
+		$filenumc = fopen($root_path.'cache/data_lang_' . $config['language'] . '.php', 'w');
 		flock($filenumc, LOCK_EX); // exlusive look
 		fwrite($filenumc, $file_datac);
 		fclose($filenumc);
@@ -153,9 +153,9 @@ if(!defined('STOP_HOOKS'))
 //
 //get data from types table ... 
 //
-	if (file_exists($root_path.'cache/data_exts.php'))
+	if (file_exists($root_path . 'cache/data_exts.php'))
 	{
-		include ($root_path.'cache/data_exts.php');
+		include ($root_path . 'cache/data_exts.php');
 	}
 	
 	if (!($g_exts || $u_exts) || !(file_exists($root_path.'cache/data_exts.php')))
@@ -179,7 +179,7 @@ if(!defined('STOP_HOOKS'))
 				if ($row['gust_allow'])
 				{
 					$g_exts[$row['id']] = $row['ext'];
-					$file_datat .= '$g_exts[\'' . $row['id'] . '\']  =   \'' . $row['ext'] . '\';' . "\n";
+					$file_datat	.= '$g_exts[\'' . $row['id'] . '\']  =   \'' . $row['ext'] . '\';' . "\n";
 				}
 				if ($row['user_allow'])
 				{
@@ -201,12 +201,12 @@ if(!defined('STOP_HOOKS'))
 //
 //get sizes data from types table ... 
 //
-	if (file_exists($root_path.'cache/data_sizes.php'))
+	if (file_exists($root_path . 'cache/data_sizes.php'))
 	{
-		include ($root_path.'cache/data_sizes.php');
+		include ($root_path . 'cache/data_sizes.php');
 	}
 	
-	if (!($g_sizes || $u_sizes) || !(file_exists($root_path.'cache/data_sizes.php')))
+	if (!($g_sizes || $u_sizes) || !(file_exists($root_path . 'cache/data_sizes.php')))
 	{
 		$query = array(
 					'SELECT'	=> 'e.*',
@@ -235,8 +235,8 @@ if(!defined('STOP_HOOKS'))
 					$file_datas .= '$u_sizes[\'' . $row['ext'] . '\']  =   \'' . $row['user_size'] . '\';' . "\n";
 				}
 		}
-			$file_datas .= "\n\n".'if (!is_array($g_sizes)){$g_sizes = array();}'."\n";
-			$file_datas .= 'if (!is_array($u_sizes)){$u_sizes = array();}'."\n\n";
+			$file_datas .= "\n\n".'if (!is_array($g_sizes)){$g_sizes = array();}' . "\n";
+			$file_datas .= 'if (!is_array($u_sizes)){$u_sizes = array();}' . "\n\n";
 			$file_datas .= '?' . '>';
 			
 	 	$SQL->freeresult($result);
@@ -253,18 +253,19 @@ if(!defined('STOP_HOOKS'))
 //
 	if(file_exists("cache/data_stats.php"))
 	{
-		//1
-		include ("cache/data_stats.php");
-		//2
-		$tfile		= filemtime("cache/data_stats.php");
+		$tfile = filemtime("cache/data_stats.php");
 		if((time()-$tfile) >= 3600)//after 1 hours
 		{    
 			unlink("cache/data_stats.php");
 		}
+		else
+		{
+			include ("cache/data_stats.php");
+		}
 	}
-	else
+	
+	if(!file_exists("cache/data_stats.php"))
 	{
-
 		$query = array(
 					'SELECT'	=> 's.*',
 					'FROM'		=> "{$dbprefix}stats s"
@@ -326,18 +327,19 @@ if(!defined('STOP_HOOKS'))
 // administarator sometime need some files and delete other .. we
 // do that for him .. becuase he has no time .. :)            last_down - $config[del_f_day]
 //
-if(intval($config['del_f_day']) > 0)
+if((int) $config['del_f_day'] > 0)
 {
 	if(!$stat_last_f_del || $stat_last_f_del == '') $stat_last_f_del = time();
 	
-    if (gmdate( "j" ,$stat_last_f_del) < gmdate( "j" ,time()))
+    if ((tim() - $stat_last_f_del) > 86400)
     {
-		$totaldays	= (time() - ($config['del_f_day']*86400));
+		$totaldays	= (time() - ((int) $config['del_f_day']*86400));
+		$not_today	= time() - (86400);
 		
 		$query = array(
-					'SELECT'	=> 'f.id, f.last_down, f.name, f.folder',
+					'SELECT'	=> 'f.id, f.last_down, f.name, f.folder, f.time',
 					'FROM'		=> "{$dbprefix}files f",
-					'WHERE'		=> "f.last_down < $totaldays"
+					'WHERE'		=> "f.last_down < $totaldays AND f.time > $not_today"
 					);
 					
 		($hook = kleeja_run_hook('qr_select_delfiles_cache')) ? eval($hook) : null; //run hook			

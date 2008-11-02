@@ -25,10 +25,10 @@ switch ($_GET['go'])
 
 	//make it loop
 	$gusts_data = array();
-	foreach($g_exts as $s )
+	foreach($g_exts as $s)
 	{
-		$gusts_data[]	=	array(	'ext'	=> $s,
-									'num'	=> Customfile_size($g_sizes[$s])
+		$gusts_data[]	= array(	'ext'	=> $s,
+									'num'	=> Customfile_size($g_sizes[$s])//format size as kb, mb,...
 									);
 	}
 
@@ -37,7 +37,7 @@ switch ($_GET['go'])
 	foreach($u_exts as $s )
 	{
 		$users_data[]	=	array(	'ext' => $s,
-									'num' => Customfile_size($u_sizes[$s])
+									'num' => Customfile_size($u_sizes[$s])//format size as kb, mb,...
 									);
 	}
 	
@@ -54,7 +54,7 @@ switch ($_GET['go'])
 	{
 			$stylee	= "report";
 			$titlee	= $lang['REPORT'];
-			$url_id	= ($config['mod_writer']) ? $config['siteurl']."download".intval($_GET['id']).".html" : $config['siteurl']."download.php?id=".intval($_GET['id']);
+			$url_id	= ($config['mod_writer']) ? $config['siteurl'] . "download" . intval($_GET['id']) . ".html" : $config['siteurl'] . "download.php?id=" . intval($_GET['id']);
 			$action	= "./go.php?go=report";
 			$code	= $ch->display_captcha(true);
 			$id_d	= intval($_GET['id']);
@@ -76,7 +76,7 @@ switch ($_GET['go'])
 		{
 			$ERRORS[]	=	$lang['EMPTY_FIELDS'];
 		}
-		else if (!eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$", trim($_POST['rmail'])))
+		else if (!eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$", trim(strtolower($_POST['rmail']))))
 		{
 			$ERRORS[]	=	$lang['WRONG_EMAIL'];
 		}
@@ -92,12 +92,12 @@ switch ($_GET['go'])
 		//no error , lets do process
 		if(empty($ERRORS))
 		{
-				$name	= (string)	$SQL->escape($_POST['rname']);
-				$text		= (string)	$SQL->escape($_POST['rtext']);
-				$mail	= (string)	$_POST['rmail'];
-				$url		= (string)	$_POST['rurl'];
-				$time 	= (int)		time();
-				$rid		= (int)		$_POST['rid'];
+				$name	= (string) $SQL->escape($_POST['rname']);
+				$text	= (string) $SQL->escape($_POST['rtext']);
+				$mail	= (string) strtolower($_POST['rmail']);
+				$url	= (string) $_POST['rurl'];
+				$time 	= (int) time();
+				$rid	= (int) $_POST['rid'];
 				$ip		=	(getenv('HTTP_X_FORWARDED_FOR')) ? getenv('HTTP_X_FORWARDED_FOR') : getenv('REMOTE_ADDR');
 
 
@@ -186,27 +186,27 @@ switch ($_GET['go'])
 		
 		if (empty($_POST['cname']) || empty($_POST['cmail']) || empty($_POST['ctext']) )
 		{
-			$ERRORS[]	=	$lang['EMPTY_FIELDS'];
+			$ERRORS[]	= $lang['EMPTY_FIELDS'];
 		}
-		else if (!eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$", trim($_POST['cmail'])))
+		else if (!eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$", trim(strtolower($_POST['cmail']))))
 		{
-			$ERRORS[]	=	$lang['WRONG_EMAIL'];
+			$ERRORS[]	= $lang['WRONG_EMAIL'];
 		}
 		else if (strlen($_POST['ctext']) > 300)
 		{
-			$ERRORS[]	=	$lang['NO_ME300TEXT'];
+			$ERRORS[]	= $lang['NO_ME300TEXT'];
 		}
 		else if (!$ch->check_captcha($_POST['public_key'], $_POST['code_answer']))
 		{
-			$ERRORS[]	=	$lang['WRONG_VERTY_CODE'];
+			$ERRORS[]	= $lang['WRONG_VERTY_CODE'];
 		}
 		
 		//no errors ,lets do process
 		if(empty($ERRORS))
 		{
 			$name	= (string) $SQL->escape($_POST['cname']);
-			$text		= (string) $SQL->escape($_POST['ctext']);
-			$mail	= (string) $_POST['cmail'];
+			$text	= (string) $SQL->escape($_POST['ctext']);
+			$mail	= (string) strtolower($_POST['cmail']);
 			$timee	= (int)	time();
 			$ip		= (int)	(getenv('HTTP_X_FORWARDED_FOR')) ? getenv('HTTP_X_FORWARDED_FOR') : getenv('REMOTE_ADDR');
 				
@@ -318,8 +318,8 @@ switch ($_GET['go'])
 	else
 	{
 		$query = array(
-							'SELECT'	=> 'f.name, f.folder',
-							'FROM'		=> "{$dbprefix}files f",
+							'SELECT'=> 'f.name, f.folder',
+							'FROM'	=> "{$dbprefix}files f",
 							'WHERE'	=> "f.code_del='" . $cd . "'"
 						);
 				
@@ -371,7 +371,7 @@ switch ($_GET['go'])
 		//stop .. check first ..
 		if (!$config['allow_stat_pg'])
 		{
-			kleeja_info($lang['STATS_CLOSED'],$lang['STATS_CLOSED']);
+			kleeja_info($lang['STATS_CLOSED'], $lang['STATS_CLOSED']);
 		}
 
 		//ok .. go on
@@ -379,7 +379,7 @@ switch ($_GET['go'])
 		$stylee		= "stats";
 		$files_st	= $stat_files;
 		$users_st	= $stat_users;
-		$sizes_st	= Customfile_size($stat_sizes);
+		$sizes_st	= Customfile_size($stat_sizes);	
 		//$lstfle_st	= $stat_last_file;
 		$lst_dl_st	= date("d-m-Y H:a", $stat_last_f_del);
 		$s_c_t		= $stat_counter_today;

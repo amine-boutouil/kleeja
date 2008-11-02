@@ -20,7 +20,7 @@ include ('includes/common.php');
 	{
 			
 			$query = array(
-						'SELECT'	=> 'f.*',
+						'SELECT'	=> 'f.id, f.name, f.folder, f.size, f.time, ',
 						'FROM'		=> "{$dbprefix}files f",
 					);		
 					
@@ -47,12 +47,12 @@ include ('includes/common.php');
 				$SQL->freeresult($result);
 
 				// some vars
-				$url_file		= ($config['mod_writer']) ? $config['siteurl'] . "down-" . $name . "-" . $folder . "-" . $id . ".html" : $config['siteurl'] . "go.php?go=down&amp;n=$name&amp;f=$folder&amp;i=$id";
+				$url_file	= ($config['mod_writer']) ? $config['siteurl'] . "down-" . $name . "-" . $folder . "-" . $id . ".html" : $config['siteurl'] . "go.php?go=down&amp;n=" . $name . "&amp;f=" . $folder . "&amp;i=" . $id;
 				$seconds_w	= $config['sec_down'];
-				$time			= date("d-m-Y H:a", $time);
-				$size				= Customfile_size($size);
-				$REPORT		= ($config['mod_writer']) ?  $config['siteurl'] . "report_" . $id.".html" :  $config['siteurl'] . "go.php?go=report&amp;id=$id";
-				$sty = 'download';
+				$time		= date("d-m-Y H:a", $time);
+				$size		= Customfile_size($size);
+				$REPORT		= ($config['mod_writer']) ?  $config['siteurl'] . "report_" . $id . ".html" :  $config['siteurl'] . "go.php?go=report&amp;id=" . $id;
+				$sty		= 'download';
 			}
 			else
 			{
@@ -65,7 +65,7 @@ include ('includes/common.php');
 			//header
 			Saaheader($lang['DOWNLAOD']);
 				//body
-				print $tpl->display($sty);
+				echo $tpl->display($sty);
 			//footer
 			Saafooter();
 	}
@@ -75,21 +75,21 @@ include ('includes/common.php');
 			$img = intval($_GET['img']);
 			
 			$query = array(
-									'SELECT'	=> 'f.name, f.folder, f.type',
-									'FROM'		=> "{$dbprefix}files f",
+									'SELECT'=> 'f.name, f.folder, f.type',
+									'FROM'	=> "{$dbprefix}files f",
 									'WHERE'	=> 'f.id=' . $img
 								);
 					
 			($hook = kleeja_run_hook('qr_download_img')) ? eval($hook) : null; //run hook
 			$result	=	$SQL->build($query);
 			
-			if ($SQL->num_rows($result) != 0  )
+			if ($SQL->num_rows($result) != 0)
 			{
 				while($row=$SQL->fetch_array($result))
 				{
 					$n	=  $row['name'];
-					$f		=  $row['folder'];
-					$t		=  $row['type'];
+					$f	=  $row['folder'];
+					$t	=  $row['type'];
 				}
 			}
 			else
@@ -102,8 +102,8 @@ include ('includes/common.php');
 
 			//update ups
 			$update_query = array(
-										'UPDATE'	=> "{$dbprefix}files",
-										'SET'			=> 'uploads=uploads+1,last_down='.time(),
+										'UPDATE'=> "{$dbprefix}files",
+										'SET'	=> 'uploads=uploads+1,last_down='.time(),
 										'WHERE'	=> 'id="' . $img . '"',
 									);
 
@@ -137,8 +137,8 @@ include ('includes/common.php');
 			$thmb = intval ($_GET['thmb']);
 			
 			$query = array(
-								'SELECT'	=> 'f.name, f.folder, f.type',
-								'FROM'		=> "{$dbprefix}files f",
+								'SELECT'=> 'f.name, f.folder, f.type',
+								'FROM'	=> "{$dbprefix}files f",
 								'WHERE'	=> "f.id='" . $thmb . "'"
 							);
 					
@@ -150,8 +150,8 @@ include ('includes/common.php');
 				while($row=$SQL->fetch_array($result))
 				{
 					$n	=  $row['name'];
-					$f		=  $row['folder'];
-					$t		=  $row['type'];
+					$f	=  $row['folder'];
+					$t	=  $row['type'];
 				}
 			}
 			else

@@ -156,6 +156,13 @@
 		$config['siteurl'] = ($config['siteurl'][strlen($config['siteurl'])-1] != '/') ? $config['siteurl'] . '/' : $config['siteurl'];
 	}
 	
+	//some language have copyrights !
+	$S_TRANSLATED_BY = false;
+	if(isset($lang['S_TRANSLATED_BY']) && strlen($lang['S_TRANSLATED_BY']) > 2)
+	{
+		$S_TRANSLATED_BY = true;
+	}
+	
 	($hook = kleeja_run_hook('end_common')) ? eval($hook) : null; //run hook
 
 ?>

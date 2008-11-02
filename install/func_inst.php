@@ -251,14 +251,22 @@ function make_style()
 
 function make_language($def)
 {
-	if(!$def || $def=='en') 
+	if($def=='en') 
 	{
 		$ar = false; 
 		$en = true; 
 	}
-	else
+	else if($def=='ar') 
 	{
 		$ar = true; 
+		$en = false;
+	}
+	
+	if($def != 'en' && $def != 'ar')
+	{
+		$contents_def	=	file_get_contents('res/lang_'.$def.'.xml');
+		creat_lang_xml($contents_def, true);
+		$ar = false; 
 		$en = false;
 	}
 	
@@ -316,7 +324,6 @@ function make_language($def)
 
 	
     if (phpversion() < '4.1.0') exit('Your php version is too old !');
-
 
 	
 

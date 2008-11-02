@@ -45,7 +45,12 @@
 	//--------------------- end user system part
 	$kljup->process();
 
-	
+	//fix
+	$FILES_NUM_LOOP = array();
+	foreach(range(0, $config['filesnum']) as $i)
+	{
+		$FILES_NUM_LOOP[] = array('i' => $i, 'show'=>($i == 0 ? '' : 'none'));
+	}
 
 	//show errors and info
 	$info = array();

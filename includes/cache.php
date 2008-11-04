@@ -331,7 +331,7 @@ if((int) $config['del_f_day'] > 0)
 {
 	if(!$stat_last_f_del || $stat_last_f_del == '') $stat_last_f_del = time();
 	
-    if ((tim() - $stat_last_f_del) > 86400)
+    if ((time() - $stat_last_f_del) > 86400)
     {
 		$totaldays	= (time() - ((int) $config['del_f_day']*86400));
 		$not_today	= time() - (86400);

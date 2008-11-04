@@ -198,8 +198,8 @@ function KleejaOnline ()
 		$timeout		= 600; //seconds
 		$time			= time();  
 		$timeout2		= $time-$timeout;  
-		#$username	= ( $usrcp->name() ) ?  (($usrcp->admin() )?  '<span style="color:blue;"><b>' .$usrcp->name(). '</b></span>' : $usrcp->name() ): '-1';
-		$username	= ($usrcp->name()) ? $usrcp->name(): '-1';
+		#$username	= ( $usrcp->name() ) ?  (($usrcp->admin() )?  '<span style="color:blue;"><strong>' .$usrcp->name(). '</strong></span>' : $usrcp->name() ): '-1';
+		$username		= ($usrcp->name()) ? $usrcp->name(): '-1';
 		
 		//
 		//for stats 
@@ -230,7 +230,7 @@ function KleejaOnline ()
 		$query_on_id = array(
 								'SELECT'	=> 'id',
 								'FROM'		=> "{$dbprefix}online",
-								'WHERE'	=> "ip='$ip'"
+								'WHERE'		=> "ip='". $SQL->escape($ip) . "'"
 							);
 		($hook = kleeja_run_hook('qr_select_ip_onlline_func')) ? eval($hook) : null; //run hook					
 		$result = $SQL->build($query_on_id);
@@ -250,9 +250,9 @@ function KleejaOnline ()
 		else
 		{
 			$update_query = array(
-								'UPDATE'	=> "{$dbprefix}online",
-								'SET'			=> "time='$time'",
-								'WHERE'	=> "ip='$ip'"
+								'UPDATE'=> "{$dbprefix}online",
+								'SET'	=> "time='$time'",
+								'WHERE'	=> "ip='". $SQL->escape($ip) . "'"
 							);
 			($hook = kleeja_run_hook('qr_update_ifis_onlline_func')) ? eval($hook) : null; //run hook
 			if (!$SQL->build($update_query)) die($lang['CANT_UPDATE_SQL']);			
@@ -261,7 +261,7 @@ function KleejaOnline ()
 		// i hate who online feature due to this step .. :( 
 		$query_del = array(
 						'DELETE'	=> "{$dbprefix}online",
-						'WHERE'		=> "time < '$timeout2'"
+						'WHERE'		=> "time < $timeout2"
 							);
 		($hook = kleeja_run_hook('qr_del_ifgo_onlline_func')) ? eval($hook) : null; //run hook									
 		if (!$SQL->build($query_del))	die($lang['CANT_DELETE_SQL']);
@@ -343,19 +343,19 @@ function get_ban ()
 		$ip	=  (getenv('HTTP_X_FORWARDED_FOR')) ? getenv('HTTP_X_FORWARDED_FOR') : getenv('REMOTE_ADDR');
 
 		//now .. loop for banned ips 
-		if (trim($banss) != '')
+		if (trim($banss) != '' && !empty($ip))
 		{
 			if (!is_array($banss))	$banss = array();
 			
 			foreach ($banss as $ip2)
 			{
 				//first .. replace all * with something good .
-				$replaceIt = str_replace("*", '[0-9]{1,3}', $ip2);
+				$replaceIt = str_replace("*", '([0-9]{1,3})', $ip2);
 				
 				if ($ip == $ip2 || @eregi($replaceIt , $ip))
 				{
 					($hook = kleeja_run_hook('banned_get_ban_func')) ? eval($hook) : null; //run hook	
-					kleeja_info($lang['U_R_BANNED'],$lang['U_R_BANNED']);
+					kleeja_info($lang['U_R_BANNED'], $lang['U_R_BANNED']);
 				}
 			}
 		}#empty	
@@ -472,7 +472,7 @@ function creat_style_xml($contents, $def=false)
 				
 				$gtree = xml_to_array($contents);
 					
-				$tree				=	$gtree['kleeja'];
+				$tree		 	=	$gtree['kleeja'];
 				$style_info		=	$tree['info'];
 				$templates		=	$tree['templates'];
 				$template_s	=	$tree['templates']['template'];		
@@ -502,7 +502,7 @@ function creat_style_xml($contents, $def=false)
 						$update_query = array(
 												'UPDATE'	=> "{$dbprefix}config",
 												'SET'		=> "value='". $new_style_id ."'",
-												'WHERE'		=>	"`name`='style'"
+												'WHERE'		=> "`name`='style'"
 											);
 										
 										($hook = kleeja_run_hook('qr_update_defsty_crtxmlstyle_func')) ? eval($hook) : null; //run hook
@@ -684,7 +684,15 @@ function creat_plugin_xml($contents)
 													'WHERE'		=>	"style_id='".intval($config['style'])."' AND template_name='". $template_name ."'"
 												);
 									($hook = kleeja_run_hook('qr_select_tplcntedit_crtplgxml_func')) ? eval($hook) : null; //run hook
-									$result	= $SQL->fetch_array($SQL->build($query));
+									
+									$resultu = $SQL->build($query);
+									if($SQL->num_rows($resultu) == 0)
+									{
+										$query['WHERE'] = "style_id='1' AND template_name='". $template_name ."'";
+										$resultu = $SQL->build($query);
+ 									}
+									
+									$result	= $SQL->fetch_array($resultu);
 							
 									if(!$result['template_content'])	continue;
 									

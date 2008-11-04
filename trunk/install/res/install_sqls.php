@@ -20,9 +20,9 @@ $install_sqls['call'] = "
 CREATE TABLE `{$dbprefix}call` (
   `id` int(10) NOT NULL auto_increment,
   `name` varchar(200) collate utf8_bin NOT NULL,
-  `text` varchar(300) collate utf8_bin NOT NULL,
-  `mail` varchar(200) collate utf8_bin NOT NULL,
-  `time` int(10) NOT NULL,
+  `text` varchar(350) collate utf8_bin NOT NULL,
+  `mail` varchar(350) collate utf8_bin NOT NULL,
+  `time` int(11) NOT NULL,
   `ip` varchar(40) collate utf8_bin NOT NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -31,11 +31,11 @@ CREATE TABLE `{$dbprefix}call` (
 $install_sqls['reports'] = "
 CREATE TABLE `{$dbprefix}reports` (
   `id` int(10) NOT NULL auto_increment,
-  `name` varchar(200) collate utf8_bin NOT NULL,
-  `mail` varchar(200) collate utf8_bin NOT NULL,
+  `name` varchar(350) collate utf8_bin NOT NULL,
+  `mail` varchar(350) collate utf8_bin NOT NULL,
   `url` varchar(250) collate utf8_bin NOT NULL,
-  `text` varchar(300) collate utf8_bin NOT NULL,
-  `time` int(10) NOT NULL,
+  `text` varchar(400) collate utf8_bin NOT NULL,
+  `time` int(11) NOT NULL,
   `ip` varchar(40) collate utf8_bin NOT NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -44,10 +44,10 @@ CREATE TABLE `{$dbprefix}reports` (
 
 $install_sqls['stats'] = "
 CREATE TABLE `{$dbprefix}stats` (
-  `files` int(10) NOT NULL default '0',
-  `users` int(10) NOT NULL default '0',
-  `sizes` int(10) NOT NULL default '0',
-  `last_file` varchar(200) collate utf8_bin NOT NULL,
+  `files` int(11) NOT NULL default '0',
+  `users` int(11) NOT NULL default '0',
+  `sizes` int(11) NOT NULL default '0',
+  `last_file` varchar(350) collate utf8_bin NOT NULL,
   `last_f_del` int(10) NOT NULL,
   `today` int(4) NOT NULL,
   `counter_today` int(12) NOT NULL,
@@ -69,9 +69,9 @@ CREATE TABLE `{$dbprefix}stats` (
 $install_sqls['users'] = "
 CREATE TABLE `{$dbprefix}users` (
   `id` int(10) NOT NULL auto_increment,
-  `name` varchar(200) collate utf8_bin NOT NULL,
+  `name` varchar(300) collate utf8_bin NOT NULL,
   `password` varchar(200) collate utf8_bin NOT NULL,
-  `mail` varchar(250) collate utf8_bin NOT NULL,
+  `mail` varchar(350) collate utf8_bin NOT NULL,
   `admin` tinyint(1) NOT NULL default '0',
   `session_id` char(32) collate utf8_bin NOT NULL,
   `last_visit` INT(11) NOT NULL,
@@ -84,7 +84,7 @@ $install_sqls['files'] = "
 CREATE TABLE `{$dbprefix}files` (
   `id` int(10) NOT NULL auto_increment,
   `last_down` int(11) NOT NULL,
-  `name` varchar(255) collate utf8_bin NOT NULL,
+  `name` varchar(350) collate utf8_bin NOT NULL,
   `size` int(10) NOT NULL,
   `uploads` int(10) NOT NULL,
   `time` int(11) NOT NULL,

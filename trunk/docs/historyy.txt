@@ -175,12 +175,17 @@ RC5:
 
 
 RC6:
-- fix install config section in url , not work with security model
+- fix install config section in url to prevent 406 errors [mod_security]
 - fix bug with site link not end with slash /
 - remove powerd by kleeja in the header .. 
 - another fix for gzip
-- rename usrcp.php file to ucp.php file to prevent 406 errors
+- rename usrcp.php file to ucp.php file to prevent 406 errors [mod_security]
 - fix bug when inserting user data in installation ..
+- fix ip check 
+- fix if template not found .. use default template instead of..
+- fix plugin template change .. 
+
+
 
 thank you for reading this file. 
 

@@ -32,7 +32,7 @@ switch ($_GET['sty_t'])
 		while($row=$SQL->fetch_array($result))
 		{
 				$arr[] = array( 'style_id'		=> $row['list_id'],
-								'style_name'	=> $row['list_name'],
+								'style_name'	=> ($config['style'] == $row['list_id'] ? '[' . $lang['STYLENAME'] . '] ' : '') . $row['list_name'],
 							);
 
 		}
@@ -227,12 +227,12 @@ switch ($_GET['sty_t'])
 			
 			if(!is_numeric($style_id))
 			{
-				exit('style_id is not exists!!');
+				big_error($lang['ERROR_NAVIGATATION'], 'style_id is not exists!!');
 			}
 			
 			if(empty($tpl_name))
 			{
-				exit($lang['NO_TPL_SHOOSED']);
+				big_error($lang['ERROR_NAVIGATATION'], $lang['NO_TPL_SHOOSED']);
 			}
 			
 			switch($_POST['method'])
@@ -265,7 +265,8 @@ switch ($_GET['sty_t'])
 						if (!$SQL->build($query_del)) die($lang['CANT_DELETE_SQL']);
 						
 						//show msg
-						$text	= $lang['TPL_DELETED'].'<meta HTTP-EQUIV="REFRESH" content="2; url=./admin.php?cp=styles&amp;style_choose=' . $style_id . '">' ."\n";
+						$link	= './admin.php?cp=styles&amp;style_choose=' . $style_id . '&amp;method=1';
+						$text	= $lang['TPL_DELETED']  . '<br /> <a href="' . $link . '">' . $lang['GO_BACK_BROWSER'] . '</a><meta HTTP-EQUIV="REFRESH" content="1; url=' . $link . '">' ."\n";
 						$stylee	= "admin_info";
 						
 				break;
@@ -298,13 +299,14 @@ switch ($_GET['sty_t'])
 					}
 					
 					//show msg
-					$text	= $lang['TPL_UPDATED'] . '<meta HTTP-EQUIV="REFRESH" content="2; url=./admin.php?cp=styles&amp;style_choose=' . $style_id . '">' ."\n";
+					$link	= './admin.php?cp=styles&amp;style_choose=' . $style_id . '&amp;method=1';
+					$text	= $lang['TPL_UPDATED'] . '<br /> <a href="' . $link . '">' . $lang['GO_BACK_BROWSER'] . '</a><meta HTTP-EQUIV="REFRESH" content="1; url=' . $link . '">' ."\n";
 					$stylee	= "admin_info";
 					
 			}
 			else
 			{
-					die($lang['CANT_UPDATE_SQL']);
+					big_error('', $lang['CANT_UPDATE_SQL']);
 			}	
 		
 		}
@@ -320,12 +322,12 @@ switch ($_GET['sty_t'])
 		
 			if(!is_numeric($style_id))
 			{
-				exit('style_id is not exists!!');
+				big_error($lang['ERROR_NAVIGATATION'], 'style_id is not exists!!');
 			}
 			
 			if(empty($tpl_name))
 			{
-				exit($lang['NO_TPL_NAME_WROTE']);
+				big_error($lang['ERROR_NAVIGATATION'], $lang['NO_TPL_NAME_WROTE']);
 			}
 			
 			$insert_query = array(
@@ -337,7 +339,8 @@ switch ($_GET['sty_t'])
 			
 			if($SQL->build($insert_query))
 			{
-					$text	= $lang['TPL_CREATED'] . '<meta HTTP-EQUIV="REFRESH" content="2; url=./admin.php?cp=styles&amp;style_choose=' . $style_id . '">' ."\n";
+					$link	= './admin.php?cp=styles&amp;style_choose=' . $style_id . '&amp;method=1';
+					$text	= $lang['TPL_CREATED']  . '<br /> <a href="' . $link . '">' . $lang['GO_BACK_BROWSER'] . '</a><meta HTTP-EQUIV="REFRESH" content="1; url=' . $link . '">' ."\n";
 					$stylee	= "admin_info";
 			}
 			else

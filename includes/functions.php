@@ -1124,8 +1124,8 @@ function big_error ($error_title,  $msg_text)
 		echo '<title>Error In Kleeja</title>';
 		echo '</head>';
 		echo '<body>';
-		echo '<p style="color: #FF0000;"><strong>Error In Kleeja : [<span  style="color: #800000;">&nbsp; '. $error_title .' </span>&nbsp;]</strong></p>';
-		echo '<div style="border: 1px dashed #808080;background-color: #FFF7F4; width: 70%;font-family:Arial">'. $msg_text .'</div>';
+		echo '<p style="color: #FF0000;"><strong>Error In Kleeja : [<span  style="color: #800000;">&nbsp; ' . $error_title . ' </span>&nbsp;]</strong></p>';
+		echo '<div style="border: 1px dashed #808080;background-color: #FFF7F4; width: 70%;font-family:Tahoma">' . $msg_text . '</div>';
 		echo '</body>';
 		echo '</html>';
 		exit();

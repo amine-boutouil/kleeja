@@ -10,7 +10,7 @@ if(isset($_GET['change_lang']))
 			{
 				//go to .. 2step
 			//	echo '<meta http-equiv="refresh" content="0;url=' . $_SERVER['PHP_SELF'].'?step=">';
-				@header("Location:".$_SERVER['PHP_SELF']."?step=" . $_POST['step_is'] . "&lang=".$_POST['lang'] ); /* Redirect browser */
+				@header("Location:".$_SERVER['PHP_SELF'] . "?step=" . $_POST['step_is'] . "&lang=".$_POST['lang'] ); /* Redirect browser */
 			}
 			
 }
@@ -36,7 +36,7 @@ function get_lang ($link=false)
 		$ln	=	'en';
 	}
 
-	return ($link != false) ? 'lang='.$ln : $ln;
+	return ($link != false) ? 'lang=' . $ln : $ln;
 }
 
 //for language //	fix for 1rc3
@@ -53,23 +53,52 @@ $header_inst = '<!-- Header Start -->
 <title>...Kleeja...</title><style type="text/css">
 * { padding: 0;margin: 0;}
 body {
-background: #FF9933;
+background: #ffda8c;
 font: 0.74em "Tahoma" Verdana, Arial, sans-serif;line-height: 1.5em;
 margin:0px auto; text-align: center
 }
 aligny {
-float : '.(($lang['DIR']=='ltr') ? 'left' : 'right') .'
+float : ' . (($lang['DIR']=='ltr') ? 'left' : 'right') .'
 }
-input { font-family:Tahoma; } 
+input {color: #333333;font-family: "Tahoma", Verdana, Helvetica, sans-serif;font-size: 1.1em;font-weight: normal;padding: 1px;
+border: 1px solid #A9B8C2;background-color: #FAFAFA;/* top right */-moz-border-radius-topright:10px;/* bottom left */-moz-border-radius-bottomleft:10px;}
+select {-moz-border-radius: 8px; border-radius:1px;color: #333333; background-color: #FAFAFA;font-family: "Tahoma", Verdana, Helvetica, sans-serif;font-size: 1.1em;font-weight: normal;border: 1px solid #A9B8C2;padding: 1px;}
+option { padding: 0 1em 0 0;}
 img { border:0px } 
+fieldset { margin: 15px 0;padding: 10px;border-top: 1px solid #D7D7D7; border-right: 1px solid #CCCCCC;border-bottom: 1px solid #CCCCCC;border-left: 1px solid #D7D7D7; background-color: #FFFFFF; position: relative;-moz-border-radius: 8px; border-radius:1px;}
+* html fieldset { padding: 0 10px 5px 10px;}
 a {color: #3B6EBF;text-decoration: none;}a:hover {text-decoration: underline;}
-.roundedcornr_box_283542 {background: #fff0d2;margin-left: 10%; margin:0 auto;width: 724px;}
-.roundedcornr_top_283542 div {background: url(img/roundedcornr_283542_tl.png) no-repeat top left;}
-.roundedcornr_top_283542 {background: url(img/roundedcornr_283542_tr.png) no-repeat top right;}
-.roundedcornr_bottom_283542 div {background: url(img/roundedcornr_283542_bl.png) no-repeat bottom left;}
-.roundedcornr_bottom_283542 {background: url(img/roundedcornr_283542_br.png) no-repeat bottom right;}
-.roundedcornr_top_283542 div, .roundedcornr_top_283542, .roundedcornr_bottom_283542 div, .roundedcornr_bottom_283542 {
-width: 100%;height: 30px;font-size: 1px;}.roundedcornr_content_283542 { margin: 0 30px; }
+/*ronded*/
+#wrap {
+margin-left: 10%; margin:0 auto;width: 724px;
+}
+.b1, .b2, .b3, .b4{font-size:1px; overflow:hidden; display:block;} 
+.b1 {height:1px; background:#fcb012; margin:0 5px;}
+.b2 {height:1px; background:#fff0d2; border-right:2px solid #fcb012; border-left:2px solid #fcb012; margin:0 3px;} 
+.b3 {
+ height: 1px;
+ background: #fff0d2;
+ border-right: 1px solid #fcb012;
+ border-left: 1px solid #fcb012;
+ margin: 0 2px;
+}
+.b4 {
+ height: 2px;
+ background: #fff0d2;
+ border-right: 1px solid #fcb012;
+ border-left: 1px solid #fcb012;
+ margin: 0 1px;
+ border-right-color: #fcb012;
+ border-left-color: #fcb012;
+}
+.contentb {
+ background: #fff0d2;
+ border-right: 1px solid #fcb012;
+ border-left: 1px solid #fcb012;
+ border-right-color: #fcb012;
+ border-left-color: #fcb012;
+}
+.contentb div {margin-left: 5px;margin-right: 5px;}
 </style>
 	<script type="text/javascript">
 	//<![CDATA[
@@ -153,43 +182,53 @@ function checkrequired(which)
 }
 
 // http://www.dynamicdrive.com/ 
-function formCheck(formobj, fieldRequired){
-
-
+function formCheck(formobj, fieldRequired)
+{
 	// dialog message
 	var alertMsg = "' . $lang['VALIDATING_FORM_WRONG'] . ':\n";
 	
 	var l_Msg = alertMsg.length;
 	
-	for (var i = 0; i < fieldRequired.length; i++){
+	for (var i = 0; i < fieldRequired.length; i++)
+	{
 		var obj = formobj.elements[fieldRequired[i]];
-		if (obj){
-			switch(obj.type){
-			case "text":
-			case "textarea":
-				if (obj.value == "" || obj.value == null){
-					alertMsg += " - " + fieldRequired[i] + "\n";
-				}
-				break;
-			default:
+		if (obj)
+		{
+			switch(obj.type)
+			{
+				case "text":
+				case "textarea":
+					if (obj.value == "" || obj.value == null){
+						alertMsg += " - " + fieldRequired[i] + "\n";
+					}
+					break;
+				default:
 			}
-			if (obj.type == undefined){
+			
+			if (obj.type == undefined)
+			{
 				var blnchecked = false;
 				for (var j = 0; j < obj.length; j++){
-					if (obj[j].checked){
+					if (obj[j].checked)
+					{
 						blnchecked = true;
 					}
 				}
-				if (!blnchecked){
+				
+				if (!blnchecked)
+				{
 					alertMsg += " - " + fieldRequired[i] + "\n";
 				}
 			}
 		}
 	}
 
-	if (alertMsg.length == l_Msg){
+	if (alertMsg.length == l_Msg)
+	{
 		return true;
-	}else{
+	}
+	else
+	{
 		alert(alertMsg);
 		return false;
 	}
@@ -200,8 +239,10 @@ function formCheck(formobj, fieldRequired){
 </script>
 </head>
 <body>
-<br/>
-<div class="roundedcornr_box_283542"><div class="roundedcornr_top_283542"><div></div></div><div class="roundedcornr_content_283542">
+<br />
+<div id="wrap">
+<cite class="b1"></cite><cite class="b2"></cite><cite class="b3"></cite><cite class="b4"></cite> <div class="contentb"><div>
+
 ';
 
 if (($_GET['step'] != 'language') && (strpos('index.php',$_SERVER['PHP_SELF'])=== false && isset($_GET['step'])))
@@ -211,34 +252,34 @@ $header_inst .= '<form action="?change_lang" method="post">
 <select name="lang" style="float:left" onchange="submit()">';
 
 $path = "langs";
-		$dh = opendir($path);
+		$dh = @opendir($path);
 		$lngfiles = '';
 		$i=1;
-		while (($file = readdir($dh)) !== false)
+		while (($file = @readdir($dh)) !== false)
 		{
 		    if($file != "." && $file != ".."  && $file != "index.html")
 			{
-			$file = str_replace('.php','', $file);
-			  $header_inst .= '<option value="' . $file . '" ' . ($file==$_GET['lang'] ? 'selected="selected"' : '') . '>' . $file . '</option>';
-		        $i++;
+				$file = str_replace('.php','', $file);
+				$header_inst .= '<option value="' . $file . '" ' . ($file==$_GET['lang'] ? 'selected="selected"' : '') . '>' . $file . '</option>';
+				$i++;
 		    }
 		}
-		closedir($dh);
+		@closedir($dh);
 $header_inst .= '</select>
 <input type="hidden" name="step_is" value="' . $_GET['step'] . '" />
 </form>';
 }
 $header_inst .= '
 <img src="img/logo.gif" style="border:0;" alt="kleeja" />
-<br/>
+<br />
 <!-- Header End -->
-<br/>
+<br />
 ';
 
 
-$footer_inst = '<br/>
+$footer_inst = '<br />
 <!-- Foterr Start -->
-</div><div class="roundedcornr_bottom_283542"><div></div></div></div></body></html>
+</div></div> <b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b></div></body></html>
 <!-- Foterr End -->';
 
 

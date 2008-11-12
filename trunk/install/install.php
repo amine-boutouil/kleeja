@@ -122,10 +122,10 @@ case 'c':
 	}
 	else
 	{
-		print ' <br /><span style="color:green;"><b>'. $lang['CONFIG_EXISTS'] . '</b><br />';
+		print ' <fieldset><br /><span style="color:green;"><strong>'. $lang['CONFIG_EXISTS'] . '</strong><br /><br />';
 		print '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=check&'.get_lang(1).'">
 		<input name="agres" type="submit" value="' . $lang['INST_SUBMIT'] . '" />
-		</form>';
+		</form></fieldset>';
 	}
 
 
@@ -165,6 +165,7 @@ case 'check':
 			$texterr .= '<span style="color:red;">[uploads/thumbs]: ' . $lang['INST_NO_WRTABLE'] . '</span><br />';
 	
 	
+	print '<fieldset>';
 	if ($texterr !='')
 	{
 		print '<br /><img src="img/bad.gif" alt="bad." /> <br />'.$texterr;
@@ -177,8 +178,8 @@ case 'check':
 	}
 
 	print '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=data&'.get_lang(1).'">
-	<input name="agres" type="submit" value="' . $lang['INST_SUBMIT'] . '" ' . $submit_wh . '/>
-	</form>';
+	<input name="agres" type="submit" value="' . $lang['INST_SUBMIT'] . '" ' . $submit_wh . ' />
+	</form></fieldset>';
 
 break;
 
@@ -243,7 +244,8 @@ case 'data' :
 				elseif ($name == 'plugins')		print '<span style="color:green;">' . $lang['INST_CRT_PLG'] . '</span><br />';
 				elseif ($name == 'templates')	print '<span style="color:green;">' . $lang['INST_CRT_TPL'] . '</span><br />';
 				else
-					print '<span style="color:green;"> [' .$name .'] : ' . $lang['INST_SQL_OK'] . '</span><br />';
+					print '.';
+					//print '<span style="color:green;"> [' .$name .'] : ' . $lang['INST_SQL_OK'] . '</span><br />';
 			}
 			else
 			{
@@ -260,13 +262,13 @@ case 'data' :
 			make_style();
 			make_language($_COOKIE['lang']);
 			
-			print '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=end&'.get_lang(1).'">
+			print '<fieldset><form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=end&'.get_lang(1).'">
 			<input name="agres" type="submit" value="' . $lang['INST_SUBMIT'] . '"/>
-			</form>';
+			</form></fieldset>';
 		}
 		else
 		{
-			print '<span style="color:red;">' . $lang['INST_FINISH_ERRSQL'] . '</span>';
+			print '<fieldset><span style="color:red;">' . $lang['INST_FINISH_ERRSQL'] . '</span></fieldset>';
 		}
 
 	}else{
@@ -276,7 +278,7 @@ case 'data' :
 
  print '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=data&'.get_lang(1).'"  onsubmit="javascript:return formCheck(this, Array(\'sitename\',\'siteurl\',\'sitemail\' ,\'username\',\'password\',\'email\' ));">
 	<fieldset id="Group1" dir="' . $lang['DIR'] . '">
-	<legend style="width: 73px"><b>' . $lang['INST_SITE_INFO'] . '</b></legend>
+	<legend style="width: 73px"> [ <strong>' . $lang['INST_SITE_INFO'] . '</strong> ]</legend>
 	<table style="width: 100%">
 		<tr>
 			<td>' . $lang['SITENAME'] . '</td>
@@ -296,19 +298,19 @@ case 'data' :
 	<br />
 
 	<fieldset id="Group2" dir="' . $lang['DIR'] . '">
-	<legend style="width: 73px"><b>' . $lang['INST_ADMIN_INFO'] . '</b></legend>
+	<legend style="width: 73px"> [ <strong>' . $lang['INST_ADMIN_INFO'] . '</strong> ]</legend>
 	<table style="width: 100%">
 		<tr>
 			<td>' . $lang['USERNAME'] . '</td>
 			<td><input name="username" type="text" style="width: 256px" /></td>
 		</tr>
 		<tr>
-			<td>' . $lang['PASSWORD'] . '</td>
-			<td><input name="password" id="password" type="text" style="width: 173px"  onkeyup="return passwordChanged();"/> <span id="strength"><img src="img/p1.gif" alt="! .." /></span></td>
+			<td><strong>' . $lang['EMAIL'] . '</strong></td>
+			<td><input name="email" id="email" type="text" style="width: 256px"  onchange="return w_email(this.name);" /></td>
 		</tr>
 		<tr>
-			<td>' . $lang['EMAIL'] . '</td>
-			<td><input name="email" id="email" type="text" style="width: 256px"  onchange="return w_email(this.name);" /></td>
+			<td>' . $lang['PASSWORD'] . '</td>
+			<td><input name="password" id="password" type="text" style="width: 173px"  onkeyup="return passwordChanged();"/> <span id="strength"><img src="img/p1.gif" alt="! .." /></span></td>
 		</tr>
 	</table>
 	</fieldset>
@@ -320,12 +322,12 @@ case 'data' :
 
 break;
 case 'end' :
-		print '<img src="img/wink.gif" alt="congratulation" /><br /><br />';
+		print '<fieldset><img src="img/wink.gif" alt="congratulation" /><br /><br />';
 		print '<span style="color:blue;">' . $lang['INST_FINISH_SQL'] . '</span><br /><br />';
 		print '<img src="img/home.gif" alt="home" />&nbsp;<a href="../index.php">' . $lang['INDEX'] . '</a><br /><br />';
 		print '<img src="img/adm.gif" alt="admin" />&nbsp;<a href="../admin.php">' . $lang['ADMINCP'] . '</a><br /><br />';
 		print '' . $lang['INST_KLEEJADEVELOPERS'] . '<br /><br />';
-		print '<a href="http://www.kleeja.com">www.kleeja.com</a><br /><br />';
+		print '<a href="http://www.kleeja.com">www.kleeja.com</a><br /><br /></fieldset>';
 		//for safe ..
 		//@rename("install.php", "install.lock");
 break;

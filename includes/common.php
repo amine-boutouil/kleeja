@@ -27,14 +27,11 @@
 
 	//time of start and end and wutever
 	function get_microtime(){	list($usec, $sec) = explode(' ', microtime());	return ((float)$usec + (float)$sec);	}
-	
-	$starttm	=	get_microtime();
+	$starttm = get_microtime();
 
-	
 	//php must be newer than this
 	 if (phpversion() < '4.1.0') exit('Your php version is too old !');
 	 
-	
 	// no config
 	if (!file_exists('config.php'))
 	{
@@ -125,12 +122,16 @@
 	$login_page = '';
 	if ($config['siteclose'] == '1' && !$usrcp->admin() &&  $_GET['go']!='login' && $_GET['go']!='logout' && !defined('IN_ADMIN'))
 	{
+		// Send a 503 HTTP response code to prevent search bots from indexing the maintenace message
+		header('HTTP/1.1 503 Service Temporarily Unavailable');
 		kleeja_info($config['closemsg'], $lang['SITE_CLOSED']);
 	}
 	
 	//exceed total size 
 	if (($stat_sizes >= ($config['total_size'] *(1048576))) && $_GET['go']!='login' && $_GET['go']!='logout' && !defined('IN_ADMIN'))// convert megabytes to bytes
 	{ 
+		// Send a 503 HTTP response code to prevent search bots from indexing the maintenace message
+		header('HTTP/1.1 503 Service Temporarily Unavailable');
 		kleeja_info($lang['SIZES_EXCCEDED'], $lang['STOP_FOR_SIZE']);
 	}
 	
@@ -156,7 +157,7 @@
 		$config['siteurl'] = ($config['siteurl'][strlen($config['siteurl'])-1] != '/') ? $config['siteurl'] . '/' : $config['siteurl'];
 	}
 	
-	//some language have copyrights !
+	//some languages have copyrights !
 	$S_TRANSLATED_BY = false;
 	if(isset($lang['S_TRANSLATED_BY']) && strlen($lang['S_TRANSLATED_BY']) > 2)
 	{

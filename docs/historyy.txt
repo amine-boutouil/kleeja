@@ -184,7 +184,7 @@ RC6:
 - fix ip check 
 - fix if template not found .. use default template instead of..
 - fix plugin template change .. 
-
+- fix mod-writer link of download 
 
 
 thank you for reading this file. 

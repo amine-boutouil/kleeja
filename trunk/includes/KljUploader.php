@@ -49,23 +49,23 @@ class KljUploader
 	
 	if (preg_match("/jpg|jpeg/",$ext))
 	{
-		$src_img=imagecreatefromjpeg($name);
+		$src_img = @imagecreatefromjpeg($name);
 	}
 	elseif (preg_match("/png/",$ext))
 	{
-		$src_img=imagecreatefrompng($name);
+		$src_img = @imagecreatefrompng($name);
 	}
 	elseif (preg_match("/gif/",$ext))
 	{
-		$src_img=imagecreatefromgif($name);
+		$src_img = @imagecreatefromgif($name);
 	}
 
 	$src_logo = imagecreatefrompng($logo);
 
-    $bwidth  = imageSX($src_img);
-    $bheight = imageSY($src_img);
-    $lwidth  = imageSX($src_logo);
-    $lheight = imageSY($src_logo);
+    $bwidth  = @imageSX($src_img);
+    $bheight = @imageSY($src_img);
+    $lwidth  = @imageSX($src_logo);
+    $lheight = @imageSY($src_logo);
 	
 	//fix bug for 1beta3
 	if ($bwidth > 160 &&  $bheight > 130)
@@ -73,20 +73,20 @@ class KljUploader
 	
 		    $src_x = $bwidth - ($lwidth + 5);
 		    $src_y = $bheight - ($lheight + 5);
-		    ImageAlphaBlending($src_img, true);
-		    ImageCopy($src_img,$src_logo,$src_x,$src_y,0,0,$lwidth,$lheight);
+		    @ImageAlphaBlending($src_img, true);
+		    @ImageCopy($src_img,$src_logo,$src_x,$src_y,0,0,$lwidth,$lheight);
 
 			if (preg_match("/jpg|jpeg/",$ext))
 			{
-				imagejpeg($src_img, $name);
+				@imagejpeg($src_img, $name);
 			}
 			elseif (preg_match("/png/",$ext))
 			{
-				imagepng($src_img, $name);
+				@imagepng($src_img, $name);
 			}
 			elseif (preg_match("/gif/",$ext))
 			{
-				imagegif($src_img, $name);
+				@imagegif($src_img, $name);
 			}
 	
 	}# < 150

@@ -125,6 +125,7 @@ class usrcp
 					
 					//conecting ...		
 					$SQLBB	= new SSQL($forum_srv,$forum_user,$forum_pass,$forum_db);
+					//$SQLBB	= new SSQL($forum_srv,$forum_user,$forum_pass,$forum_db, true);
 					unset($forum_pass); // We do not need this any longe
 					
 					//phpbb3
@@ -161,6 +162,8 @@ class usrcp
 					}
 					else//phpbb2
 					{
+						//header("Content-Type: text/html; charset=Windows-1256");
+						
 						$pass			= md5($pass);
 						$row_leve		=	'user_level';
 						$admin_level	=	1;
@@ -169,14 +172,12 @@ class usrcp
 											'SELECT'	=> '*',
 											'FROM'		=> "`{$forum_prefix}users`",
 											'WHERE'		=>"username='". $SQLBB->escape($name) ."' AND user_password='$pass'"
+											//'WHERE'		=> "username=CONVERT( _utf8 '". $SQLBB->escape($name)."' USING latin1 ) COLLATE latin1_swedish_ci  AND user_password=CONVERT( _utf8 '". $pass."' USING latin1 ) COLLATE latin1_swedish_ci "
+
 											);
 								
 					}
 					
-
-					
-
-								
 					($hook = kleeja_run_hook('qr_select_usrdata_php_usr_class')) ? eval($hook) : null; //run hook		
 					$result = $SQLBB->build($query);
 					
@@ -243,6 +244,7 @@ class usrcp
 										'SELECT'	=> '*',
 										'FROM'		=> "`{$forum_prefix}user`",
 										'WHERE'		=> "username='". $SQLVB->escape($name)."' AND password='$pass'"
+										//'WHERE'		=> "username=CONVERT( _utf8 '". $SQLVB->escape($name)."' USING latin1 ) COLLATE latin1_swedish_ci  AND password=CONVERT( _utf8 '". $pass."' USING latin1 ) COLLATE latin1_swedish_ci "
 										);
 											
 							$result = $SQLVB->build($query);

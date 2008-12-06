@@ -18,9 +18,9 @@
 	
 	//type of how will decoding name ..
 	switch($config['decode']):
-	case 1	:	$decode = "time";	break;
-	case 2	:	$decode = "md5";	break;
-	default  :	$decode = "";		break;
+		case 1	:	$decode = "time";	break;
+		case 2	:	$decode = "md5";	break;
+		default  :	$decode = "";		break;
 	endswitch;
 
 	//safe code
@@ -31,17 +31,17 @@
 	
 	
 	//start class .. 
-	$kljup->decode		=	$decode;              
-	$kljup->linksite	=	$config['siteurl']; 
-	$kljup->folder		=	$config['foldername'];
-	$kljup->filename	=	$config['prefixname'];
-	$kljup->action		= 	$action = "index.php";
-	$kljup->filesnum	=	$config['filesnum'];
+	$kljup->decode		= $decode;              
+	$kljup->linksite	= $config['siteurl']; 
+	$kljup->folder		= $config['foldername'];
+	$kljup->filename	= $config['prefixname'];
+	$kljup->action		= $action = "index.php";
+	$kljup->filesnum	= $config['filesnum'];
 	//--------------------- start user system part
-	$kljup->types		=	($usrcp->name()) ? $u_exts : $g_exts;
-	$kljup->sizes		=	($usrcp->name()) ? $u_sizes : $g_sizes ;	
-	$kljup->id_user		=	($usrcp->name()) ? $usrcp->id() : '-1';
-	$kljup->safe_code	=	$config['safe_code'];
+	$kljup->types		= ($usrcp->name()) ? $u_exts : $g_exts;
+	//$kljup->sizes		= ($usrcp->name()) ? $u_sizes : $g_sizes ;	
+	$kljup->id_user		= ($usrcp->name()) ? $usrcp->id() : '-1';
+	$kljup->safe_code	= $config['safe_code'];
 	//--------------------- end user system part
 	$kljup->process();
 

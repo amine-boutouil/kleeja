@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 //kurdish lannugae
 // KLEEJA 
 

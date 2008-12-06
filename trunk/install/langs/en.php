@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 //english language By:NK
 // Email: n.k@cityofangelz.com 
 

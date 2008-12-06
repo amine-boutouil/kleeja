@@ -178,13 +178,14 @@ if(!defined('STOP_HOOKS'))
 		{
 				if ($row['gust_allow'])
 				{
-					$g_exts[$row['id']] = $row['ext'];
-					$file_datat	.= '$g_exts[\'' . $row['id'] . '\']  =   \'' . $row['ext'] . '\';' . "\n";
+					$g_exts[$row['ext']] = array('id' => $row['id'], 'size' => $row['gust_size'], 'group_id' => $row['group_id']);
+					$file_datat	.= '$g_exts[\'' . $row['ext'] . '\']  =   array("id"=>\'' . $row['id'] . '\',"size"=>\'' . $row['gust_size'] . '\',,"group_id"=>\'' . $row['group_id'] . '\' );' . "\n";
 				}
+				
 				if ($row['user_allow'])
 				{
-					$u_exts[$row['id']] = $row['ext'];
-					$file_datat .= '$u_exts[\'' . $row['id'] . '\']  =   \'' . $row['ext'] . '\';' . "\n";
+					$u_exts[$row['ext']] = array('id' => $row['id'], 'size' => $row['user_size'], 'group_id' => $row['group_id']);
+					$file_datat	.= '$u_exts[\'' . $row['ext'] . '\']  =   array("id"=>\'' . $row['id'] . '\',"size"=>\'' . $row['user_size'] . '\',,"group_id"=>\'' . $row['group_id'] . '\' );' . "\n";
 				}
 		}
 				$file_datat .= "\n\n";
@@ -197,56 +198,6 @@ if(!defined('STOP_HOOKS'))
 		fwrite($filenumt, $file_datat);
 		fclose($filenumt);
 	}
-
-//
-//get sizes data from types table ... 
-//
-	if (file_exists($root_path . 'cache/data_sizes.php'))
-	{
-		include ($root_path . 'cache/data_sizes.php');
-	}
-	
-	if (!($g_sizes || $u_sizes) || !(file_exists($root_path . 'cache/data_sizes.php')))
-	{
-		$query = array(
-					'SELECT'	=> 'e.*',
-					'FROM'		=> "{$dbprefix}exts e"
-					);
-					
-		($hook = kleeja_run_hook('qr_select_exts_sizes_cache')) ? eval($hook) : null; //run hook				
-		$result = $SQL->build($query);
-
-				$file_datas = '<' . '?php' . "\n\n";
-				//$file_datas .= "if (!defined('IN_COMMON')) exit('no directly opening : ' . __file__);";
-				$file_datas .= "\n// auto-generated cache files\n//For: Kleeja \n\n";
-				$file_datas .= 'if (empty($g_sizes) || !is_array($g_sizes)){$g_sizes = array();}'."\n";
-				$file_datas .= 'if (empty($u_sizes) || !is_array($u_sizes)){$u_sizes = array();}'."\n\n";
-
-		while($row=$SQL->fetch_array($result))
-		{
-				if ( $row['gust_allow'])
-				{
-					$g_sizes[$row['id']] = $row['gust_size'];
-					$file_datas .= '$g_sizes[\'' . $row['ext'] . '\']  =   \'' . $row['gust_size'] . '\';' . "\n";
-				}
-				if ( $row['user_allow'])
-				{
-					$u_sizes[$row['id']] = $row['user_size'];
-					$file_datas .= '$u_sizes[\'' . $row['ext'] . '\']  =   \'' . $row['user_size'] . '\';' . "\n";
-				}
-		}
-			$file_datas .= "\n\n".'if (!is_array($g_sizes)){$g_sizes = array();}' . "\n";
-			$file_datas .= 'if (!is_array($u_sizes)){$u_sizes = array();}' . "\n\n";
-			$file_datas .= '?' . '>';
-			
-	 	$SQL->freeresult($result);
-
-		$filenums = fopen($root_path.'cache/data_sizes.php', 'w');
-		flock($filenums, LOCK_EX); // exlusive look
-		fwrite($filenums, $file_datas);
-		fclose($filenums);
-	}
-
 
 //
 //stats .. to cache

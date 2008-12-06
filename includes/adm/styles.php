@@ -31,8 +31,8 @@ switch ($_GET['sty_t'])
 
 		while($row=$SQL->fetch_array($result))
 		{
-				$arr[] = array( 'style_id'		=> $row['list_id'],
-								'style_name'	=> ($config['style'] == $row['list_id'] ? '[' . $lang['STYLENAME'] . '] ' : '') . $row['list_name'],
+				$arr[] = array( 'style_id'	=> $row['list_id'],
+								'style_name'=> ($config['style'] == $row['list_id'] ? '[' . $lang['STYLENAME'] . '] ' : '') . $row['list_name'],
 							);
 
 		}
@@ -333,7 +333,7 @@ switch ($_GET['sty_t'])
 			$insert_query = array(
 							'INSERT'	=> 'style_id, template_name',
 							'INTO'		=> "{$dbprefix}templates",
-							'VALUES'	=> "'$style_id','$tpl_name'"
+							'VALUES'	=> "'$style_id', '$tpl_name'"
 							);
 
 			

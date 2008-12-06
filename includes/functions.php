@@ -32,31 +32,31 @@ function Saaheader($title)
 		if (!$usrcp->name()) 
 		{
 			$login_name		= $lang['LOGIN']; 
-			$login_url			= "ucp.php?go=login";
+			$login_url		= ($config['mod_writer']) ? "login.html" : "ucp.php?go=login";
 			$usrcp_name		= $lang['REGISTER'];
-			$usrcp_url			= "ucp.php?go=register";
+			$usrcp_url		= ($config['mod_writer']) ? "register.html" : "ucp.php?go=register";
 		}
 		else
 		{
 			$login_name		= $lang['LOGOUT']."[".$usrcp->name()."]";
-			$login_url			= "ucp.php?go=logout";
+			$login_url		= ($config['mod_writer']) ? "logout.html" : "ucp.php?go=logout";
 			$usrcp_name		= $lang['PROFILE'];
-			$usrcp_url			= "ucp.php?go=profile";
-			$usrfile_name	=  $lang['YOUR_FILEUSER'];
-			$usrfile_url		= ($config['mod_writer']) ? "fileuser.html" : "ucp.php?go=fileuser";
+			$usrcp_url		= ($config['mod_writer']) ? "profile.html" : "ucp.php?go=profile";
+			$usrfile_name	= $lang['YOUR_FILEUSER'];
+			$usrfile_url	= ($config['mod_writer']) ? "fileuser.html" : "ucp.php?go=fileuser";
 		}
 
 		$vars = array (
 							0=>"navigation",
 							1=>"index_name",
-							2=>"guide_name",3=>"guide_url",
-							4=>"rules_name",5=>"rules_url",
-							6=>"call_name",7=>"call_url",
-							8=>"login_name",9=>"login_url",
-							10=>"usrcp_name",11=>"usrcp_url",
-							12=>"filecp_name",13=>"filecp_url",
-							14=>"stats_name",15=>"stats_url",
-							16=>"usrfile_name",17=>"usrfile_url"
+							2=>"guide_name", 3=>"guide_url",
+							4=>"rules_name", 5=>"rules_url",
+							6=>"call_name", 7=>"call_url",
+							8=>"login_name", 9=>"login_url",
+							10=>"usrcp_name", 11=>"usrcp_url",
+							12=>"filecp_name", 13=>"filecp_url",
+							14=>"stats_name", 15=>"stats_url",
+							16=>"usrfile_name", 17=>"usrfile_url"
 						);
 		
 		if($config['mod_writer'])
@@ -66,7 +66,7 @@ function Saaheader($title)
 							1=>$lang['INDEX'],
 							2=>$lang['GUIDE'],3=>"guide.html",
 							4=>$lang['RULES'],5=>"rules.html",
-							6=>$lang['CALL'],7=>"go.php?go=call",
+							6=>$lang['CALL'],7=>"call.html",
 							8=>$login_name,9=>$login_url,
 							10=>$usrcp_name,11=>$usrcp_url,
 							12=>$lang['FILECP'],13=>"filecp.html",
@@ -850,32 +850,7 @@ function kleeja_run_hook ($hook_name)
 	return implode("\n", $all_plg_hooks[$hook_name]);
 }
 
-/*
-*admin function for extensions types
-*parameters : id : type id
-*					def : default or not
-*/
-function ch_g ($id,$def)
-{
-		global $lang;
-		
-		$s =  array(0=>'',1=>$lang['N_IMGS'],2=>$lang['N_ZIPS'],3=>$lang['N_TXTS'],
-					4=>$lang['N_DOCS'],5=>$lang['N_RM'],6=>$lang['N_WM'],
-					7=>$lang['N_SWF'],8=>$lang['N_QT'],9=>$lang['N_OTHERFILE']
-					);
-		$show = "<select name=\"gr[{$id}]\">";
-		
-		for($i=1;$i<count($s);$i++)
-		{
-			$selected = ($def==$i)? "selected=\"selected\"" : "";
-			$show .= "<option $selected value=\"$i\">$s[$i]</option>";
-		}
-		
-		$show .="</select>";
-		
-		($hook = kleeja_run_hook('ch_g_func')) ? eval($hook) : null; //run hook
-		return $show;
-}  
+
 
 /*
 * print inforamtion message 
@@ -1261,7 +1236,7 @@ function delete_change_styles($array)
 		//no conents					
 		if(!$result['template_content']) continue;
 		
-		$finder->text	=	$result['template_content'];
+		$finder->text = $result['template_content'];
 		$finder->do_search(1);
 									
 		if($finder->text != $result['template_content'])
@@ -1287,6 +1262,86 @@ function delete_change_styles($array)
 }#end fun
 
 
+function kleeja_mime_groups($return_one = false)
+{
 
+		$s = array(
+					0 => array('name' => '', 'for_check' => ''),
+					1 => array('name' => $lang['N_IMGS'], 'for_check' => 'image:png:jpg:tif:tga:targa'),
+					2 => array('name' => $lang['N_ZIPS'], 'for_check' => 'zip:rar:tar:compress:octet:archive:ace:torrent:bz:stuffit:7z'),
+					3 => array('name' => $lang['N_TXTS'], 'for_check' => 'text:txt:internal:plain:x-c:csv:excel:ini:javascript:xml'),
+					4 => array('name' => $lang['N_DOCS'], 'for_check' => 'excel:xls:officedocument:openxmlformats:xlsm:word:doc:appl/text:msw6:dot:mswor:pdf:acrobat:postscript:ps:powerpoint:powerpnt:opendocument:rtf:richtext:soffice'),
+					5 => array('name' => $lang['N_RM'], 'for_check' => 'realmedia:audio:video:plain'),
+					6 => array('name' => $lang['N_WM'], 'for_check' => 'video:mpg:audio:ogg:ogm:avi:msvideo'),
+					7 => array('name' => $lang['N_SWF'], 'for_check' => 'flash:splash'),
+					8 => array('name' => $lang['N_QT'], 'for_check' => 'audio:video:plain:mov'),
+					9 => array('name' => $lang['N_OTHERFILE'], 'for_check' => 'octet'),
+			);
+		
+		($hook = kleeja_run_hook('kleeja_mime_groups_func')) ? eval($hook) : null; //run hook
+		
+		return ($return_one != false ? $s[$return_one] : $s);
+}
+
+/*
+*admin function for extensions types
+*parameters : id : type id, default : default or not
+*/
+function ch_g ($group_id, $default)
+{
+		global $lang;
+		
+		$s = kleeja_mime_groups();
+		
+		$show = "<select name=\"gr[{$group_id}]\">";
+		
+		for($i=1;$i<count($s);$i++)
+		{
+			$selected = ($default == $i)? "selected=\"selected\"" : "";
+			$show .= "<option $selected value=\"$i\">$s[$i]</option>";
+		}
+		
+		$show .="</select>";
+		
+		($hook = kleeja_run_hook('ch_g_func')) ? eval($hook) : null; //run hook
+		return $show;
+}  
+
+//1rc6+ for check file mime
+function kleeja_check_mime ($mime, $group_id, $temp)
+{
+	
+	if($mime == '') return false;
+
+	$s = kleeja_mime_groups($group_id);
+	
+	
+	$s_items = @explode(':', $s['for_check'])
+	
+	$return = false;
+	foreach($s_items as $r)
+	{
+		if(strpos($mime, $r) !== false)
+		{
+			$return = true;
+		}
+	}
+
+	//exception for images
+	if($group_id == 1)
+	{
+		$img_arr = getimagesize($temp);
+		if($img_arr !== false)
+		{
+			return true;
+		}
+		else
+		{
+			return false
+		}
+	}
+	
+	return $return;
+}
 
 ?>

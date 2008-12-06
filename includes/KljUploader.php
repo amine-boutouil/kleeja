@@ -24,7 +24,7 @@ class KljUploader
     var $types; 		 // filetypes
     var $ansaqimages;   // imagestypes
     var $filename;     // filename
-	var $sizes;
+	//var $sizes;
 	var $typet;
 	var $sizet;
 	var $id_for_url;
@@ -104,7 +104,7 @@ function ext_check_safe ($filename)
 {
 	$not_allowed =	array('php','php3' ,'php5', 'php4','asp' ,'shtml' , 'html' ,'htm' ,'xhtml' ,'phtml', 'pl', 'cgi');
 	$tmp	= explode(".", $filename);
-	$before_last_ext	= $tmp[sizeof($tmp)-2];
+	$before_last_ext = $tmp[sizeof($tmp)-2];
 
 	if (in_array(strtolower($before_last_ext), $not_allowed)) 
 	{
@@ -128,21 +128,21 @@ function createthumb($name, $ext, $filename, $new_w, $new_h)
 	
 	if(!file_exists($name)) return;
 	
-	if (preg_match("/jpg|jpeg/",$ext))
+	if (preg_match("/jpg|jpeg/", $ext))
 	{
-		$src_img	=	imagecreatefromjpeg($name);
+		$src_img = imagecreatefromjpeg($name);
 	}
-	elseif (preg_match("/png/",$ext))
+	elseif (preg_match("/png/", $ext))
 	{
-		$src_img	=	imagecreatefrompng($name);
+		$src_img = imagecreatefrompng($name);
 	}
-	elseif (preg_match("/gif/",$ext))
+	elseif (preg_match("/gif/", $ext))
 	{
-		$src_img	=	imagecreatefromgif($name);
+		$src_img = imagecreatefromgif($name);
 	}
 	
-	$old_x	=	imageSX($src_img);
-	$old_y	=	imageSY($src_img);
+	$old_x	= imageSX($src_img);
+	$old_y	= imageSY($src_img);
 	
 	if ($old_x > $old_y)
 	{
@@ -163,15 +163,15 @@ function createthumb($name, $ext, $filename, $new_w, $new_h)
 	$dst_img=ImageCreateTrueColor($thumb_w,$thumb_h);
 	imagecopyresampled($dst_img,$src_img,0,0,0,0,$thumb_w,$thumb_h,$old_x,$old_y);
 	
-	if (preg_match("/jpg|jpeg/",$ext))
+	if (preg_match("/jpg|jpeg/", $ext))
 	{
 		imagejpeg($dst_img, $filename);
 	}
-	elseif (preg_match("/png/",$ext))
+	elseif (preg_match("/png/", $ext))
 	{
 		imagepng($dst_img, $filename);
 	}
-	elseif (preg_match("/gif/",$ext))
+	elseif (preg_match("/gif/", $ext))
 	{
 		imagegif($dst_img, $filename);
 	}
@@ -187,8 +187,8 @@ function createthumb($name, $ext, $filename, $new_w, $new_h)
 //
 // prorcess
 //
-	function process () 
-	{
+function process () 
+{
 		global $SQL,$dbprefix,$config,$lang;
 		global $use_ftp,$ftp_server,$ftp_user,$ftp_pass,$ch;
 
@@ -203,17 +203,18 @@ function createthumb($name, $ext, $filename, $new_w, $new_h)
 			if($jadid)
 			{
 				$this->errs[]	=	$lang['NEW_DIR_CRT'];
-
-				$fo		=	@fopen($this->folder . "/index.html","w");
-				$fo2	=	@fopen($this->folder . "/thumbs/index.html","w");
-				$fw		=	@fwrite($fo,'<a href="http://kleeja.com"><p>KLEEJA ..</p></a>');
-				$fw2	=	@fwrite($fo2,'<a href="http://kleeja.com"><p>KLEEJA ..</p></a>');
-				$fi		=	@fopen($this->folder . "/.htaccess", "w");
-				$fi2	=	@fopen($this->folder . "/thumbs/.htaccess","w");
-				$fy		=	@fwrite($fi,"RemoveType .php .php3 .phtml .pl .cgi .asp .htm .html \n php_flag engine off");
-				$fy2	=	@fwrite($fi2,"RemoveType .php .php3 .phtml .pl .cgi .asp .htm .html \n php_flag engine off");
-				$chmod	=	@chmod($this->folder, 0777);
-				$chmod2	=	@chmod($this->folder . '/thumbs/', 0777);
+				
+				$htaccess_data = '<Files ~ "\.(php*|s?p?x?i?html|cgi|asp|php3|php4|pl|htm|sql)$">deny from all</Files>' . "\n" . 'php_flag engine off';
+				$fo		= @fopen($this->folder . "/index.html","w");
+				$fo2	= @fopen($this->folder . "/thumbs/index.html","w");
+				$fw		= @fwrite($fo,'<a href="http://kleeja.com"><p>KLEEJA ..</p></a>');
+				$fw2	= @fwrite($fo2,'<a href="http://kleeja.com"><p>KLEEJA ..</p></a>');
+				$fi		= @fopen($this->folder . "/.htaccess", "w");
+				$fi2	= @fopen($this->folder . "/thumbs/.htaccess","w");
+				$fy		= @fwrite($fi, $htaccess_data);
+				$fy2	= @fwrite($fi2, $htaccess_data);
+				$chmod	= @chmod($this->folder, 0777);
+				$chmod2	= @chmod($this->folder . '/thumbs/', 0777);
 
 				if(!$chmod)
 				{
@@ -229,11 +230,11 @@ function createthumb($name, $ext, $filename, $new_w, $new_h)
 			//then wut did u click
 			if (isset($_POST['submitr']))
 			{
-				$wut	=	1;
+				$wut	= 1;
 			}
 			elseif(isset($_POST['submittxt']))
 			{
-				$wut	=	2;
+				$wut	= 2;
 			}
 
 
@@ -243,7 +244,7 @@ function createthumb($name, $ext, $filename, $new_w, $new_h)
 				if(!$ch->check_captcha($_POST['public_key'], $_POST['answer_safe']))
 				{
 					($hook = kleeja_run_hook('wrong_captcha_kljuploader')) ? eval($hook) : null; //run hook	
-					 return $this->errs[]	= $lang['WRONG_VERTY_CODE'];
+					 return $this->errs[] = $lang['WRONG_VERTY_CODE'];
 				}
 			}
 			else if($this->safe_code && $wut==2)
@@ -251,7 +252,7 @@ function createthumb($name, $ext, $filename, $new_w, $new_h)
 				if(!$ch->check_captcha($_POST['public_key2'], $_POST['answer_safe2']))
 				{
 					($hook = kleeja_run_hook('wrong_captcha_kljuploader')) ? eval($hook) : null; //run hook	
-					 return $this->errs[]	= $lang['WRONG_VERTY_CODE'];
+					 return $this->errs[] = $lang['WRONG_VERTY_CODE'];
 				}
 			}
 			
@@ -278,12 +279,12 @@ function createthumb($name, $ext, $filename, $new_w, $new_h)
 						{
 							$zaid	=	md5(time());
 							$zaid	=	substr($zaid,0,10);
-							$this->filename2=$this->filename.$zaid.$i.".".$this->filename2;
+							$this->filename2 = $this->filename.$zaid.$i . "." . $this->filename2;
 						}  
 						else
 						{
 							//real name of file
-							$this->filename2=$_FILES['file']['name'][$i];
+							$this->filename2 = $_FILES['file']['name'][$i];
 						}
 						
 
@@ -303,18 +304,22 @@ function createthumb($name, $ext, $filename, $new_w, $new_h)
 						{
 							$this->errs[]= $lang['WRONG_F_NAME'] . '[' . $_FILES['file']['name'][$i] . ']';
 						}
-						elseif(!in_array(strtolower($this->typet),$this->types))
+						elseif(kleeja_check_mime($_FILES['file']['type'][$i], $this->types[strtolower($this->typet)]['group_id'], $_FILES['file']['tmp_name'][$i]) == false)
+						{
+							$this->errs[]= $lang['FORBID_EXT'] . '[' . $_FILES['file']['name'][$i] . ']';
+						}
+						elseif(!in_array(strtolower($this->typet), array_keys($this->types)))
 						{
 							//guest
 							if($this->id_user == '-1')
-								$this->errs[]= '[ ' . $_FILES['file']['name'][$i] . ' ] ' . $lang['FORBID_EXT'] . '['.$this->typet.'] <br /> <a href="ucp.php?go=register" title="' . htmlspecialchars($lang['REGISTER']) . '">' . $lang['REGISTER'] . '</a>';
+								$this->errs[]= '[ ' . $_FILES['file']['name'][$i] . ' ] ' . $lang['FORBID_EXT'] . '[' . $this->typet . '] <br /> <a href="' .  ($config['mod_writer'] ? "register.html" : "ucp.php?go=register") . 'ucp.php?go=register" title="' . htmlspecialchars($lang['REGISTER']) . '">' . $lang['REGISTER'] . '</a>';
 							//not guest
 							else
-								$this->errs[]= '[ ' . $_FILES['file']['name'][$i] . ' ] ' . $lang['FORBID_EXT'] . '['.$this->typet.']';
+								$this->errs[]= '[ ' . $_FILES['file']['name'][$i] . ' ] ' . $lang['FORBID_EXT'] . '[' . $this->typet . ']';
 						}
-						elseif($this->sizes[strtolower($this->typet)] > 0 && $this->sizet >= $this->sizes[strtolower($this->typet)])
+						elseif($this->types[strtolower($this->typet)]['size'] > 0 && $this->sizet >= $this->types[strtolower($this->typet)]['size'])
 						{
-							$this->errs[]=  '[ ' .$_FILES['file']['name'][$i] . ' ] ' . $lang['SIZE_F_BIG'] . ' ' . Customfile_size($this->sizes[$this->typet]);
+							$this->errs[]=  '[ ' .$_FILES['file']['name'][$i] . ' ] ' . $lang['SIZE_F_BIG'] . ' ' . Customfile_size($this->types[strtolower($this->typet)]['size']);
 						}
 						else
 						{
@@ -355,7 +360,7 @@ function createthumb($name, $ext, $filename, $new_w, $new_h)
 											}
 											
 											// Upload the file
-											$file = ftp_put($conn_id, $this->folder . "/" . $this->filename2,$_FILES['file']['tmp_name'][$i], $ftp_method);
+											$file = ftp_put($conn_id, $this->folder . "/" . $this->filename2, $_FILES['file']['tmp_name'][$i], $ftp_method);
 											ftp_close($conn_id);
 								}
 
@@ -425,13 +430,17 @@ function createthumb($name, $ext, $filename, $new_w, $new_h)
 									{
 										$this->errs[]= $lang['WRONG_F_NAME'] . '[' . $_FILES['file']['name'][$i] . ']';
 									}
-									elseif($this->ext_check_safe($_FILES['file']['name'][$i]) ===false)
+									elseif($this->ext_check_safe($_FILES['file']['name'][$i]) == false)
 									{
 										$this->errs[]= $lang['WRONG_F_NAME'] . '[' . $_FILES['file']['name'][$i] . ']';
 									}
-									elseif(!in_array(strtolower($this->typet),$this->types))
+									elseif(kleeja_check_mime($_FILES['file']['type'][$i], $this->types[strtolower($this->typet)]['group_id'], $_FILES['file']['tmp_name'][$i]) == false)
 									{
-										$this->errs[]= '[ ' . $_FILES['file']['name'][$i] . ' ] ' . $lang['FORBID_EXT'] . '['.$this->typet.']';
+										$this->errs[]= $lang['FORBID_EXT'] . '[' . $_FILES['file']['name'][$i] . ']';
+									}
+									elseif(!in_array(strtolower($this->typet),array_keys($this->types)))
+									{
+										$this->errs[]= '[ ' . $_FILES['file']['name'][$i] . ' ] ' . $lang['FORBID_EXT'] . '[' . $this->typet . ']';
 									}
 									else
 									{
@@ -449,9 +458,9 @@ function createthumb($name, $ext, $filename, $new_w, $new_h)
 										{
 											$this->sizet = strlen($data);
 
-											if($this->sizes[strtolower($this->typet)] > 0 && $this->sizet >= $this->sizes[strtolower($this->typet)])
+											if($this->types[strtolower($this->typet)]['size'] > 0 && $this->sizet >= $this->types[strtolower($this->typet)]['size'])
 											{
-												$this->errs[]=  $lang['SIZE_F_BIG'] . ' ' . Customfile_size($this->sizes[$this->typet]);
+												$this->errs[]=  $lang['SIZE_F_BIG'] . ' ' . Customfile_size($this->types[strtolower($this->typet)]['size']);
 											}
 											else
 											{
@@ -470,7 +479,7 @@ function createthumb($name, $ext, $filename, $new_w, $new_h)
 				}#end loop
 		}#end wut2
 
-	}#END process
+}#END process
 
 
 
@@ -478,8 +487,8 @@ function createthumb($name, $ext, $filename, $new_w, $new_h)
 //
 // save data and insert in the database
 //
-	function saveit ($filname, $folderee, $sizeee, $typeee)
-	{
+function saveit ($filname, $folderee, $sizeee, $typeee)
+{
 		global $SQL,$dbprefix,$config,$lang;
 
 				// sometime cant see file after uploading.. but ..
@@ -579,7 +588,7 @@ function createthumb($name, $ext, $filename, $new_w, $new_h)
 					
 				
 
-	}#save it
+}#save it
 
 }#end class
 

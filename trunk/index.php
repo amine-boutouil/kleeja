@@ -30,6 +30,17 @@
 	}
 	
 	
+	foreach(range(1, 67) as $i)
+	{
+		$i = 77-$i;
+		if($i >= 8)
+		{
+			$sql = "UPDATE `kleeja`.`exts` SET `id` = '".($i+1)."' WHERE `exts`.`id` ='$i' LIMIT 1 ;";
+			$SQL->query($sql);
+		}
+	
+	}
+	
 	//start class .. 
 	$kljup->decode		= $decode;              
 	$kljup->linksite	= $config['siteurl']; 

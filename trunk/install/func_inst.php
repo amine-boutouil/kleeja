@@ -292,6 +292,8 @@ function make_style()
 
 function make_language($def)
 {
+	if(empty($def)) $def = 'en';
+
 	if($def=='en') 
 	{
 		$ar = false; 
@@ -305,7 +307,7 @@ function make_language($def)
 	
 	if($def != 'en' && $def != 'ar')
 	{
-		$contents_def	=	file_get_contents('res/lang_'.$def.'.xml');
+		$contents_def	=	file_get_contents('res/lang_' . $def . '.xml');
 		creat_lang_xml($contents_def, true);
 		$ar = false; 
 		$en = false;
@@ -320,16 +322,16 @@ function make_language($def)
 
 
 
-	//export config 
-	function do_config_export($srv, $usr, $pass, $nm, $prf)
-	{
+//export config 
+function do_config_export($srv, $usr, $pass, $nm, $prf)
+{
 	
 		$data	= '<?php'."\n\n" . '' . "\n\n\n";
-		$data	.= '$dbserver		= \''.addslashes($srv)."';//database server \n";
-		$data	.= '$dbuser			= \''.addslashes($usr)."';// database user \n";
-		$data	.= '$dbpass			= \''.addslashes($pass)."';// database password \n";
-		$data	.= '$dbname			= \''.addslashes($nm)."';// database name \n";
-		$data	.= '$dbprefix		= \''.addslashes($prf)."';// if you use perfix for tables , fill it \n";
+		$data	.= '$dbserver		= \'' . str_replace("'","\'", $srv) . "';//database server \n";
+		$data	.= '$dbuser			= \''. str_replace("'","\'", $usr)."';// database user \n";
+		$data	.= '$dbpass			= \''. str_replace("'","\'", $pass)."';// database password \n";
+		$data	.= '$dbname			= \''. str_replace("'","\'", $nm)."';// database name \n";
+		$data	.= '$dbprefix		= \''. str_replace("'","\'", $prf)."';// if you use perfix for tables , fill it \n";
 		$data	.= '$perpage		= 10;'."// number of results in each page  \n";
 		$data	.= "\n\n\n";
 		$data	.= "//for integration with forums [ must change user systen from admin cp ] \n";
@@ -359,13 +361,27 @@ function make_language($def)
 		exit;
 }	
 
-	
-	
-	function get_microtime(){	list($usec, $sec) = explode(' ', microtime());	return ((float)$usec + (float)$sec);	}
 
+function empty_cache_of_kleeja()
+{
+		//clear cache
+		$path = "../cache";
+		$dh = opendir($path);
+		$i=1;
+		while (($file = readdir($dh)) !== false)
+		{
+		    if($file != "." && $file != ".." && $file != ".htaccess" && $file != "index.html")
+			{
+				$del =  @unlink ($path . "/" . $file);
+				$i++;
+		    }
+		}
+		closedir($dh);
+}
 	
-    if (phpversion() < '4.1.0') exit('Your php version is too old !');
+function get_microtime(){	list($usec, $sec) = explode(' ', microtime());	return ((float)$usec + (float)$sec);	}
 
-	
+if (phpversion() < '4.1.0') exit('Your php version is too old !');
+
 
 ?>

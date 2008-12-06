@@ -300,7 +300,7 @@ function process ()
 						{
 							$this->errs[]= $lang['WRONG_F_NAME'] . '[' . $_FILES['file']['name'][$i] . ']';
 						}
-						elseif($this->ext_check_safe($_FILES['file']['name'][$i]) ===false)
+						elseif($this->ext_check_safe($_FILES['file']['name'][$i]) == false)
 						{
 							$this->errs[]= $lang['WRONG_F_NAME'] . '[' . $_FILES['file']['name'][$i] . ']';
 						}

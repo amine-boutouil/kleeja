@@ -206,27 +206,33 @@ case 'data' :
 
 		$connect = @mysql_connect($dbserver,$dbuser,$dbpass);
 		$select = @mysql_select_db($dbname);
-		if ($select) {if (mysql_version>='4.1.0') mysql_query("SET NAMES 'utf8'"); }
+		mysql_query("SET NAMES 'utf8'"); 
 
 
 		$user_pass 			= md5($_POST['password']);
-		$user_name 			=	$_POST['username'];
-		$user_mail 			=	$_POST['email'];
-		$config_sitename	=	$_POST['sitename'];
-		$config_siteurl		=	$_POST['siteurl'];
-		$config_sitemail	=	$_POST['sitemail'];
+		$user_name 			= $_POST['username'];
+		$user_mail 			= $_POST['email'];
+		$config_sitename	= $_POST['sitename'];
+		$config_siteurl		= $_POST['siteurl'];
+		$config_sitemail	= $_POST['sitemail'];
 		
 		
 		 /// ok .. will get sqls now ..
 		include ('res/install_sqls.php');
 		 
 		$err = 0;
-
+		
+		//do important before
+		mysql_query($install_sqls['DROP_TABLES'], $connect);
+		mysql_query($install_sqls['ALTER_DATABASE_UTF'], $connect);
+		
 		foreach($install_sqls as $name=>$sql_content)
 		{
-
-			$do_it	= @mysql_query($sql_content, $connect);
 			
+			if($name == 'DROP_TABLES' || $name == 'ALTER_DATABASE_UTF') continue;
+			
+			$do_it	= @mysql_query($sql_content, $connect);
+		
 			if($do_it)
 			{
 				if ($name == 'call')			print '<span style="color:green;">' . $lang['INST_CRT_CALL'] . '</span><br />';
@@ -260,11 +266,14 @@ case 'data' :
 			// start classe..
 			$SQL	= new SSQL($dbserver,$dbuser,$dbpass,$dbname);
 			make_style();
-			make_language($_COOKIE['lang']);
+			make_language($_GET['lang']);
 			
 			print '<fieldset><form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=end&'.get_lang(1).'">
 			<input name="agres" type="submit" value="' . $lang['INST_SUBMIT'] . '"/>
 			</form></fieldset>';
+			
+			//clean cache
+			empty_cache_of_kleeja();
 		}
 		else
 		{
@@ -305,12 +314,12 @@ case 'data' :
 			<td><input name="username" type="text" style="width: 256px" /></td>
 		</tr>
 		<tr>
-			<td><strong>' . $lang['EMAIL'] . '</strong></td>
-			<td><input name="email" id="email" type="text" style="width: 256px"  onchange="return w_email(this.name);" /></td>
-		</tr>
-		<tr>
 			<td>' . $lang['PASSWORD'] . '</td>
 			<td><input name="password" id="password" type="text" style="width: 173px"  onkeyup="return passwordChanged();"/> <span id="strength"><img src="img/p1.gif" alt="! .." /></span></td>
+		</tr>
+		<tr>
+			<td><strong>' . $lang['EMAIL'] . '</strong></td>
+			<td><input name="email" id="email" type="text" style="width: 256px"  onchange="return w_email(this.name);" /></td>
 		</tr>
 	</table>
 	</fieldset>

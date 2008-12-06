@@ -1316,7 +1316,7 @@ function kleeja_check_mime ($mime, $group_id, $temp)
 	$s = kleeja_mime_groups($group_id);
 	
 	
-	$s_items = @explode(':', $s['for_check'])
+	$s_items = @explode(':', $s['for_check']);
 	
 	$return = false;
 	foreach($s_items as $r)
@@ -1337,7 +1337,7 @@ function kleeja_check_mime ($mime, $group_id, $temp)
 		}
 		else
 		{
-			return false
+			return false;
 		}
 	}
 	

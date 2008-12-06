@@ -179,13 +179,13 @@ if(!defined('STOP_HOOKS'))
 				if ($row['gust_allow'])
 				{
 					$g_exts[$row['ext']] = array('id' => $row['id'], 'size' => $row['gust_size'], 'group_id' => $row['group_id']);
-					$file_datat	.= '$g_exts[\'' . $row['ext'] . '\']  =   array("id"=>\'' . $row['id'] . '\',"size"=>\'' . $row['gust_size'] . '\',,"group_id"=>\'' . $row['group_id'] . '\' );' . "\n";
+					$file_datat	.= '$g_exts[\'' . $row['ext'] . '\']  =   array("id"=>\'' . $row['id'] . '\',"size"=>\'' . $row['gust_size'] . '\',"group_id"=>\'' . $row['group_id'] . '\' );' . "\n";
 				}
 				
 				if ($row['user_allow'])
 				{
 					$u_exts[$row['ext']] = array('id' => $row['id'], 'size' => $row['user_size'], 'group_id' => $row['group_id']);
-					$file_datat	.= '$u_exts[\'' . $row['ext'] . '\']  =   array("id"=>\'' . $row['id'] . '\',"size"=>\'' . $row['user_size'] . '\',,"group_id"=>\'' . $row['group_id'] . '\' );' . "\n";
+					$file_datat	.= '$u_exts[\'' . $row['ext'] . '\']  =   array("id"=>\'' . $row['id'] . '\',"size"=>\'' . $row['user_size'] . '\',"group_id"=>\'' . $row['group_id'] . '\' );' . "\n";
 				}
 		}
 				$file_datat .= "\n\n";

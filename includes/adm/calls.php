@@ -41,13 +41,13 @@
 			while($row=$SQL->fetch_array($result))
 			{
 				//make new lovely arrays !!
-				$arr[] = array( id 			=> $row['id'],
-								name 		=> $row['name'],
-								mail 		=> $row['mail'],
-								text 		=> $row['text'],
-								time 		=> date("d-m-Y H:a", $row['time']),
-								ip 			=> $row['ip'],
-								ip_finder	=> 'http://www.ripe.net/whois?form_type=simple&full_query_string=&searchtext=' . $row['ip'] . '&do_search=Search'
+				$arr[] = array( 'id' 		=> $row['id'],
+								'name' 		=> $row['name'],
+								'mail' 		=> $row['mail'],
+								'text' 		=> $row['text'],
+								'time' 		=> gmdate("d-m-Y H:a", $row['time']),
+								'ip' 		=> $row['ip'],
+								'ip_finder'	=> 'http://www.ripe.net/whois?form_type=simple&full_query_string=&searchtext=' . $row['ip'] . '&do_search=Search'
 								);
 
 				//
@@ -61,7 +61,7 @@
 						$query_del = array(
 										'DELETE'	=> "`{$dbprefix}call`",
 										'WHERE'		=> "id='" . intval($row['id'])."'"
-											);
+									);
 																
 						if (!$SQL->build($query_del)) {die($lang['CANT_DELETE_SQL']);}	
 					}
@@ -73,8 +73,8 @@
 					{
 						$to      = $row['mail'];
 						$subject = $lang['REPLY_CALL'] . ':'.$config['sitename'];
-						$message = "\n " . $lang['REPLY_CALL'] . " ".$row['name']."\r\n " . $lang['REPLIED_ON_CAL'] . " : ".$config['sitename']. "\r\n " . $lang['BY_EMAIL'] . ": ".$row['mail']."\r\n" . $lang['ADMIN_REPLIED'] . "\r\n".$sen[$row['id']]."\r\n\r\n Kleeja Script";
-						$headers =	'From: '. $config['sitename']. '<'. $config['sitemail']. '>' . "\r\n" .
+						$message = "\n " . $lang['REPLY_CALL'] . " " . $row['name'] . "\r\n " . $lang['REPLIED_ON_CAL'] . " : " . $config['sitename'] . "\r\n " . $lang['BY_EMAIL'] . ": " . $row['mail'] . "\r\n" . $lang['ADMIN_REPLIED'] . "\r\n" . $sen[$row['id']] . "\r\n\r\n Kleeja Script";
+						$headers =	'From: ' . $config['sitename'] . '<'. $config['sitemail']. '>' . "\r\n" .
 								    'MIME-Version: 1.0' . "\r\n" .
 								    'X-Mailer: PHP/' . phpversion();
 							
@@ -99,7 +99,7 @@
 		$no_results = true;
 	}
 	
-	$total_pages	= $Pager->getTotalPages(); 
+	$total_pages = $Pager->getTotalPages(); 
 	$page_nums	= $Pager->print_nums($config['siteurl'].'admin.php?cp=calls'); 
 		
 	//after submit

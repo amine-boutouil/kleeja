@@ -10,14 +10,11 @@
 		exit('no directly opening : ' . __file__);
 	}
 	
-
-
 		//for style ..
 		$stylee = "admin_exts";
 		//words
 		$action 	= "admin.php?cp=exts&amp;page=". intval($_GET['page']);
 		$n_submit 	= $lang['UPDATE_EXTS'];
-
 					
 		$query = array(
 						'SELECT'	=> '*',
@@ -25,7 +22,6 @@
 				);
 									
 		$result = $SQL->build($query);
-		
 		
 		/////////////pager 
 		$nums_rows		= $SQL->num_rows($result);
@@ -38,12 +34,10 @@
 		if ($nums_rows > 0)
 		{
 			$query['LIMIT']	=	"$start, $perpage";
-			
 			$result = $SQL->build($query);
 			
 			while($row=$SQL->fetch_array($result))
 			{
-
 				//make new lovely arrays !!
 				$gr[$row['id']] 	=	(isset($_POST["gr_".$row['id']])) ? $_POST["gr_".$row['id']]  : $row['group_id'];
 				$g_sz[$row['id']]	=	(isset($_POST["gsz_".$row['id']])) ? $_POST["gsz_".$row['id']] : $row['gust_size'];
@@ -71,7 +65,6 @@
 		$arr_paging 	= $Pager->print_nums($config['siteurl'] . 'admin.php?cp=exts'); 
 		
 
-	
 		//after submit ////////////////
 		if (isset($_POST['submit']))
 		{
@@ -95,12 +88,8 @@
 				
 				
 			//delete cache ..
-			if (file_exists('./cache/data_exts.php'))
-			{
-				unlink('./cache/data_exts.php');
-			}
-						
-			
+			delete_cache('data_exts');
+
 			$text	= $lang['UPDATED_EXTS']. '<meta HTTP-EQUIV="REFRESH" content="0; url=./admin.php?cp=exts&amp;page=' . intval($_GET['page']). '">' ."\n";
 			$stylee	= "admin_info";
 		}

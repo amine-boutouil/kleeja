@@ -39,10 +39,7 @@
 				if ($SQL->build($update_query))
 				{
 					//delete cache ..
-					if (file_exists('cache/data_ban.php'))
-					{
-						@unlink('cache/data_ban.php');
-					}
+					delete_cache('data_ban');
 				}
 				else
 				{

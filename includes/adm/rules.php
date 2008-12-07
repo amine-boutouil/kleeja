@@ -40,10 +40,7 @@
 				if ($SQL->build($update_query))
 				{
 					//delete cache ..
-					if (file_exists('cache/data_rules.php'))
-					{
-						@unlink('cache/data_rules.php');
-					}
+					delete_cache('data_rules');
 				}
 				else
 				{

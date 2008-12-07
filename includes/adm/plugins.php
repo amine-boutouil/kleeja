@@ -67,10 +67,7 @@
 					if ($SQL->build($update_query))
 					{
 							//delete cache ..
-							if (file_exists('cache/data_hooks.php'))
-							{
-								@unlink('cache/data_hooks.php');
-							}
+							delete_cache('data_hooks');
 							
 							//show msg
 							$text	= $lang['PLGUIN_DISABLED_ENABLED'];
@@ -116,11 +113,8 @@
 							if (!$SQL->build($query_del2)) {die($lang['CANT_DELETE_SQL'].'2');}	
 							
 							//delete cache ..
-							if (file_exists('cache/data_hooks.php'))
-							{
-								@unlink('cache/data_hooks.php');
-							}
-							
+							delete_cache('data_hooks');
+
 							//show msg
 							$text	= $lang['PLUGIN_DELETED'];
 							$stylee	= "admin_info";

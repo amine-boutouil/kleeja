@@ -170,7 +170,6 @@ switch ($_GET['sty_t'])
 		//new style from xml
 		if(isset($_POST['submit_new_style']))
 		{
-		
 			$text	=	'';
 			// oh , some errors
 			if($_FILES['imp_file']['error'])
@@ -204,14 +203,11 @@ switch ($_GET['sty_t'])
 					$text	= $lang['ERR_IN_UPLOAD_XML_FILE'];
 				}
 			}		
-						
-					
-					
+
 			$stylee	= "admin_info";
 		}
 		
 		break; 
-		
 		
 		case "style_orders" :
 		
@@ -292,33 +288,27 @@ switch ($_GET['sty_t'])
 
 			if ($SQL->build($update_query))
 			{
-					//delete cache ..
-					if (file_exists('cache/' . $style_id . '_' . $tpl_name . '.php'))
-					{
-						@unlink('cache/' . $style_id . '_' . $tpl_name . '.php');
-					}
-					
-					//show msg
-					$link	= './admin.php?cp=styles&amp;style_choose=' . $style_id . '&amp;method=1';
-					$text	= $lang['TPL_UPDATED'] . '<br /> <a href="' . $link . '">' . $lang['GO_BACK_BROWSER'] . '</a><meta HTTP-EQUIV="REFRESH" content="1; url=' . $link . '">' ."\n";
-					$stylee	= "admin_info";
+				//delete cache ..
+				delete_cache($style_id . '_' . $tpl_name);
+				//show msg
+				$link	= './admin.php?cp=styles&amp;style_choose=' . $style_id . '&amp;method=1';
+				$text	= $lang['TPL_UPDATED'] . '<br /> <a href="' . $link . '">' . $lang['GO_BACK_BROWSER'] . '</a><meta HTTP-EQUIV="REFRESH" content="1; url=' . $link . '">' ."\n";
+				$stylee	= "admin_info";
 					
 			}
 			else
 			{
-					big_error('', $lang['CANT_UPDATE_SQL']);
+				big_error('', $lang['CANT_UPDATE_SQL']);
 			}	
-		
 		}
 		
 		//new template file
 		if(isset($_POST['submit_new_tpl']))
 		{
-		
 			//style id 
-			$style_id	=	$_POST['style_id'];
+			$style_id	= $_POST['style_id'];
 			//tpl name 
-			$tpl_name	=	$SQL->escape($_POST['new_tpl']);
+			$tpl_name	= $SQL->escape($_POST['new_tpl']);
 		
 			if(!is_numeric($style_id))
 			{
@@ -351,11 +341,6 @@ switch ($_GET['sty_t'])
 		
 		}
 		
-		
-		
 		break;
-		
-
-
 }
 ?>

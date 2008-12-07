@@ -1308,17 +1308,15 @@ function ch_g ($group_id, $default)
 }  
 
 //1rc6+ for check file mime
+//this function is under TESTING !
+// you can share your experinces with us from our site kleeja.com...
 function kleeja_check_mime ($mime, $group_id, $temp)
 {
-	
-	
 	($hook = kleeja_run_hook('kleeja_check_mime_func')) ? eval($hook) : null; //run hook
 	
 	if($mime == '') return false;
 
 	$s = kleeja_mime_groups($group_id);
-	
-	
 	$s_items = @explode(':', $s['for_check']);
 	
 	$return = false;
@@ -1327,20 +1325,32 @@ function kleeja_check_mime ($mime, $group_id, $temp)
 		if(strpos($mime, $r) !== false)
 		{
 			$return = true;
+			break;
 		}
 	}
 
 	//exception for images
 	if($group_id == 1)
 	{
-		$img_arr = getimagesize($temp);
-		if($img_arr !== false)
+		$w = @getimagesize($temp);
+		$return =  ($w && (strpos($w['mime'], 'image') !== false)) ? true : false;
+	}
+	
+	//its true ! 
+	if($return == true)
+	{
+		//check for bad things inside files ... i hate those kids; sorry , i mean i dont like them
+		//what if the file size is big ! ! 
+		// we have make it more stable
+		$maybe_bad_codes_are = array('<?', '<%', '<script', 'zend');
+		$data = file_get_contents($temp);
+		foreach($maybe_bad_codes_are as $i)
 		{
-			return true;
-		}
-		else
-		{
-			return false;
+			if(strpos(strtolower($data), $i) !== false)
+			{
+				$return = false;
+				break;
+			}
 		}
 	}
 	

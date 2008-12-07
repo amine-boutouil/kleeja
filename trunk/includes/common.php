@@ -70,6 +70,8 @@
 	{
 		big_error('No GD Library!', '<b>imagecreatetruecolor</b> function Doesnt exists , That mean GD is disabled or it\'s very very old. <br/> If you don\'t want this feature, then delete this error from file <i>'. __file__ . '</i> in line </i>' . __line__ .'</i>');
 	}
+	
+
      
 	// start classes ..
 	$SQL	= new SSQL($dbserver, $dbuser, $dbpass, $dbname);

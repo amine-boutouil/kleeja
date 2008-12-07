@@ -213,7 +213,7 @@ $install_sqls['config_insert16'] = "INSERT INTO `{$dbprefix}config` (`name`, `va
 $install_sqls['config_insert17'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('del_url_file', '1')";
 $install_sqls['config_insert18'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('language', '" . ($_COOKIE['lang']=='ar' ? '2' : '3') . "')";
 $install_sqls['config_insert19'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('www_url', '0')";
-$install_sqls['config_insert20'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('del_f_day', '10')";
+$install_sqls['config_insert20'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('del_f_day', '0')";
 $install_sqls['config_insert21'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('allow_stat_pg', '1')";
 $install_sqls['config_insert22'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('allow_online', '0')";
 $install_sqls['config_insert23'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('googleanalytics', '')";

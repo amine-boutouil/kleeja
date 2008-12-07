@@ -43,12 +43,7 @@
 				if ($SQL->build($update_query))
 				{
 					//delete cache ..
-					if (file_exists('cache/data_extra.php'))
-					{
-						@unlink('cache/data_extra.php');
-						//@unlink('cache/' . $config['style'] . '_header.php');
-						//@unlink('cache/' . $config['style'] . '_footer.php');
-					}
+					delete_cache('data_extra');
 				}
 				else
 				{

@@ -18,9 +18,7 @@
 		$action 	= "admin.php?cp=bckup";
 
 
-
 		$query	=	"SHOW TABLE STATUS";
-		
 		$result	=	$SQL->query($query);
 		$i = 0;
 		while($row=$SQL->fetch_array($result))
@@ -33,19 +31,19 @@
 
 		// to output our tables only !!
 		$tables_sho		= array();
-		$tables_sho[]  	= array( name =>"{$dbprefix}config",	size =>$size["{$dbprefix}config"]);
-		$tables_sho[]  	= array( name =>"{$dbprefix}files",		size =>$size["{$dbprefix}files"]);
-		$tables_sho[]  	= array( name =>"{$dbprefix}stats",		size =>$size["{$dbprefix}stats"]);
-		$tables_sho[]  	= array( name =>"{$dbprefix}users",		size =>$size["{$dbprefix}users"]);
-		$tables_sho[]  	= array( name =>"{$dbprefix}call",		size =>$size["{$dbprefix}call"]);
-		$tables_sho[]  	= array( name =>"{$dbprefix}exts",		size =>$size["{$dbprefix}exts"]);
-		$tables_sho[]  	= array( name =>"{$dbprefix}online",	size =>$size["{$dbprefix}online"]);
-		$tables_sho[]  	= array( name =>"{$dbprefix}reports",	size =>$size["{$dbprefix}reports"]);
-		$tables_sho[]  	= array( name =>"{$dbprefix}lists",		size =>$size["{$dbprefix}lists"]);
-		$tables_sho[]  	= array( name =>"{$dbprefix}lang",		size =>$size["{$dbprefix}lang"]);
-		$tables_sho[]  	= array( name =>"{$dbprefix}templates",	size =>$size["{$dbprefix}templates"]);
-		$tables_sho[]  	= array( name =>"{$dbprefix}hooks",		size =>$size["{$dbprefix}hooks"]);
-		$tables_sho[]  	= array( name =>"{$dbprefix}plugins",	size =>$size["{$dbprefix}plugins"]);
+		$tables_sho[]  	= array( 'name' =>"{$dbprefix}config",	'size' =>$size["{$dbprefix}config"]);
+		$tables_sho[]  	= array( 'name' =>"{$dbprefix}files",		'size' =>$size["{$dbprefix}files"]);
+		$tables_sho[]  	= array( 'name' =>"{$dbprefix}stats",		'size' =>$size["{$dbprefix}stats"]);
+		$tables_sho[]  	= array( 'name' =>"{$dbprefix}users",		'size' =>$size["{$dbprefix}users"]);
+		$tables_sho[]  	= array( 'name' =>"{$dbprefix}call",		'size' =>$size["{$dbprefix}call"]);
+		$tables_sho[]  	= array( 'name' =>"{$dbprefix}exts",		'size' =>$size["{$dbprefix}exts"]);
+		$tables_sho[]  	= array( 'name' =>"{$dbprefix}online",	'size' =>$size["{$dbprefix}online"]);
+		$tables_sho[]  	= array( 'name' =>"{$dbprefix}reports",	'size' =>$size["{$dbprefix}reports"]);
+		$tables_sho[]  	= array( 'name' =>"{$dbprefix}lists",		'size' =>$size["{$dbprefix}lists"]);
+		$tables_sho[]  	= array( 'name' =>"{$dbprefix}lang",		'size' =>$size["{$dbprefix}lang"]);
+		$tables_sho[]  	= array( 'name' =>"{$dbprefix}templates",	'size' =>$size["{$dbprefix}templates"]);
+		$tables_sho[]  	= array( 'name' =>"{$dbprefix}hooks",		'size' =>$size["{$dbprefix}hooks"]);
+		$tables_sho[]  	= array( 'name' =>"{$dbprefix}plugins",	'size' =>$size["{$dbprefix}plugins"]);
 
 
 		//after submit ////////////////
@@ -58,7 +56,7 @@
 			//then
 			foreach($tables as $table)
 			{
-				$query	=	"SHOW CREATE TABLE `".$table."`";
+				$query	=	"SHOW CREATE TABLE `" . $table . "`";
 				
 			    $result = $SQL->query($query); //get code of tables ceation
 			    $que	= $SQL->fetch_array($result);
@@ -103,7 +101,6 @@
 			header("Content-Disposition: attachment; filename=$dbname.sql");
 			echo $sql_data . $outta;
 			exit;
-
 	}
 
 ?>

@@ -300,11 +300,7 @@ switch ($_GET['lan_t'])
 			if ($SQL->build($update_query))
 			{
 					//delete cache ..
-					if (file_exists('cache/langs_' . $lang_id . '.php'))
-					{
-						@unlink('cache/langs_' . $lang_id . '.php');
-					}
-					
+					delete_cache('langs_' . $lang_id);
 					//show msg
 					$text	= $lang['WORD_UPDATED'] . '<meta HTTP-EQUIV="REFRESH" content="2; url=./admin.php?cp=langs&amp;lang_choose=' . $lang_id . '">' ."\n";
 					$stylee	= "admin_info";
@@ -347,11 +343,8 @@ switch ($_GET['lan_t'])
 			{
 			
 					//delete cache ..
-					if (file_exists('cache/langs_' . $lang_id . '.php'))
-					{
-						@unlink('cache/langs_' . $lang_id . '.php');
-					}
-					
+					delete_cache('langs_' . $lang_id);
+					//show msg
 					$text		= $lang['WORD_CREATED']  . '<meta HTTP-EQUIV="REFRESH" content="2; url=./admin.php?cp=langs&amp;lang_choose=' . $lang_id . '">' ."\n";
 					$stylee	= "admin_info";
 			}
@@ -360,12 +353,10 @@ switch ($_GET['lan_t'])
 				die($lang['CANT_INSERT_SQL']);	
 			}
 		
-		
 		}
 		break;	
 		
 }	
-
 
 
 ?>

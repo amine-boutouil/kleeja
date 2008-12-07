@@ -9,7 +9,6 @@
 	{
 		exit('no directly opening : ' . __file__);
 	}
-	
 
 		//for style ..
 		$stylee 		= "admin_configs";
@@ -47,18 +46,15 @@
 					if ($SQL->build($update_query))
 					{
 						//delete cache ..
-						if (file_exists('cache/data_config.php'))
-						{
-							unlink('cache/data_config.php');
-						}
+						delete_cache('data_config');
 					}
 					else
 					{
 						die($lang['CANT_UPDATE_SQL']);
 					}
 				}
-
 		}
+		
 		$SQL->freeresult($result);
 
 		//for  choose
@@ -122,8 +118,5 @@
 			}
 
 		}#submit
-
-
-
 
 ?>

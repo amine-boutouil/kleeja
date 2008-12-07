@@ -1311,6 +1311,9 @@ function ch_g ($group_id, $default)
 function kleeja_check_mime ($mime, $group_id, $temp)
 {
 	
+	
+	($hook = kleeja_run_hook('kleeja_check_mime_func')) ? eval($hook) : null; //run hook
+	
 	if($mime == '') return false;
 
 	$s = kleeja_mime_groups($group_id);
@@ -1344,4 +1347,42 @@ function kleeja_check_mime ($mime, $group_id, $temp)
 	return $return;
 }
 
+//delete cache
+function delete_cache($name, $all=false)
+{
+	//we have delete it by any method !
+	
+	$path_to_cache = './cache';
+	
+	//unlink
+	if(!function_exists('unlink'))
+	{
+		big_error('No unlink function!', '<b>unlink</b> function Doesnt exists , That mean we can not delete any file and cache. <br/> You have enable this feature .');
+	}
+	
+	if($all)
+	{
+		$dh = opendir($path_to_cache);
+		while (($file = readdir($dh)) !== false)
+		{
+			if($file != "." && $file != ".." && $file != ".htaccess" && $file != "index.html")
+			{
+				$del = @unlink ($path_to_cache . "/" . $file);
+			}
+		}
+		closedir($dh);
+	}
+	else
+	{
+		$del = true;
+		$name = str_replace('.php', '', $name);
+		if (file_exists($path_to_cache . "/" . $name . '.php'))
+		{
+			$del = @unlink ($path_to_cache . "/" . $name . '.php');
+		}
+		
+	}
+	
+	return $del;
+}
 ?>

@@ -359,5 +359,6 @@
 	<word name="ERROR_CHECK_VER"><![CDATA[هه‌ڵه‌: زانیاری سه‌باره‌ت به‌ دوا وه‌شان له‌م کاته‌دا بوونی نییه‌ , دواتر هه‌وڵبده‌!.]]></word>
 	<word name="UPDATE_KLJ_NOW"><![CDATA[ده‌بێت وه‌شانی سکریپته‌که‌ت نوێ بکه‌یته‌وه‌ بۆ دوا وه‌شان, بڕۆ بۆ ماڵپه‌ڕی کلیجا یاخود پڵپشتی کوردی بۆ زانیاری زیاتر.]]></word>
 	<word name="U_LAST_VER_KLJ"><![CDATA[تۆ دوا وه‌شانی کلیجا به‌کارده‌به‌یت. سوپاس بۆ به‌دواداچوونت بۆ نوێکاریه‌کان.]]></word>
+	<word name="S_TRANSLATED_BY"><![CDATA[Translated By <a href="/www.kurdhome.net/">KurdHome</a>]]></word>
 </words>
 </kleeja>

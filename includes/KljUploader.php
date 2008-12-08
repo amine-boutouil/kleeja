@@ -272,13 +272,13 @@ function process ()
 						// decoding
 						if($this->decode == "time")
 						{
-							$zaid	=	time();
-							$this->filename2=$this->filename.$zaid.$i.".".$this->filename2;
+							$zaid = time();
+							$this->filename2 = $this->filename . $zaid . $i . "." . $this->filename2;
 						}
 						elseif($this->tashfir == "md5")
 						{
 							$zaid	=	md5(time());
-							$zaid	=	substr($zaid,0,10);
+							$zaid	=	substr($zaid, 0, 10);
 							$this->filename2 = $this->filename.$zaid.$i . "." . $this->filename2;
 						}  
 						else
@@ -507,7 +507,7 @@ function saveit ($filname, $folderee, $sizeee, $typeee)
 				$insert_query = array(
 									'INSERT'	=> '`name` ,`size` ,`time` ,`folder` ,`type`,`user`,`code_del`,`user_ip`',
 									'INTO'		=> "`{$dbprefix}files`",
-									'VALUES'	=> "'$name', '$size', '$timeww', '$folder','$type', '$user', '$code_del','$ip'"
+									'VALUES'	=> "'$name', '$size', '$timeww', '$folder','$type', '$user', '$code_del', '$ip'"
 									);
 									
 				($hook = kleeja_run_hook('qr_insert_new_file_kljuploader')) ? eval($hook) : null; //run hook
@@ -532,7 +532,7 @@ function saveit ($filname, $folderee, $sizeee, $typeee)
 					if ($config['del_url_file'])
 					{
 							$extra_del	= $lang['URL_F_DEL'] . ':<br /><textarea rows="2" cols="49" rows="1">';
-							$extra_del	.= $this->linksite.(($config[mod_writer]) ? "del" .$code_del. ".html" : 'go.php?go=del&amp;cd=' . $code_del );
+							$extra_del	.= $this->linksite . (($config[mod_writer]) ? "del" . $code_del . ".html" : 'go.php?go=del&amp;cd=' . $code_del);
 							$extra_del	.='</textarea><br />';
 					}
 
@@ -546,47 +546,43 @@ function saveit ($filname, $folderee, $sizeee, $typeee)
 						{
 							$this->createthumb($folderee . "/" . $filname, strtolower($this->typet), $folderee . '/thumbs/' . $filname, 100, 100);
 							$extra_thmb 	= $lang['URL_F_THMB'] . ':<br /><textarea rows="2" cols="49">';
-							$extra_thmb 	.= '[url='.$this->linksite . (($config['mod_writer']) ? "image" . $this->id_for_url . ".html" : "download.php?img=".$this->id_for_url ).'][img]'.$this->linksite.$folderee.'/thumbs/'.$filname.'[/img][/url]';
+							$extra_thmb 	.= '[url='.$this->linksite . (($config['mod_writer']) ? "image" . $this->id_for_url . ".html" : "download.php?img=" . $this->id_for_url ) . '][img]' . $this->linksite . $folderee . '/thumbs/' . $filname . '[/img][/url]';
 							$extra_thmb 	.= '</textarea><br />';
-							$extra_show_img = '<div style="text-align:center"><img src="' . $this->linksite.(($config['mod_writer']) ? "thumb".$this->id_for_url.".html" : "download.php?thmb=".$this->id_for_url ).'" style="width:100px; height:100px" /></div><br />';
+							$extra_show_img = '<div style="text-align:center"><img src="' . $this->linksite.(($config['mod_writer']) ? "thumb" . $this->id_for_url . ".html" : "download.php?thmb=" . $this->id_for_url ) . '" style="width:100px; height:100px" /></div><br />';
 						}
 						
 						//write on image
-						if( ($config['write_imgs']!=0) && in_array(strtolower($this->typet), array('png','jpg','jpeg','gif')))
+						if( ($config['write_imgs'] != 0) && in_array(strtolower($this->typet), array('png', 'jpg', 'jpeg', 'gif')))
 						{
 							$this->watermark($folderee . "/" . $filname,strtolower($this->typet), 'images/watermark.png');
 						}
 
 						//then show
-						$img_html_result = $lang['IMG_DOWNLAODED'] . '<br />' . $extra_show_img . '
-								' . $lang['URL_F_IMG'] . ':<br /><textarea rows="2" cols="49">'.$this->linksite.(($config[mod_writer]) ? "image".$this->id_for_url.".html" : "download.php?img=".$this->id_for_url ).'</textarea><br />
+						$img_html_result =  $extra_show_img . '
+								' . $lang['URL_F_IMG'] . ':<br /><textarea rows="2" cols="49">' . $this->linksite . (($config[mod_writer]) ? "image".$this->id_for_url . ".html" : "download.php?img=".$this->id_for_url ) . '</textarea><br />
 								' . $lang['URL_F_BBC'] . ':<br /><textarea rows="2" cols="49">' .
-								'[url='.$config['siteurl'].(($config['mod_writer']) ? "image".$this->id_for_url.".html" : "download.php?img=".$this->id_for_url ).'][img]'.$this->linksite.$folderee . '/' . $filname .'[/img][/url]</textarea><br />
+								'[url='  .$config['siteurl'] . (($config['mod_writer']) ? "image" . $this->id_for_url.".html" : "download.php?img=" . $this->id_for_url ) . '][img]'.$this->linksite.$folderee . '/' . $filname . '[/img][/url]</textarea><br />
 								' . $extra_thmb . $extra_del;
 						
 						($hook = kleeja_run_hook('saveit_func_img_res_kljuploader')) ? eval($hook) : null; //run hook
 						
-						$this->errs[] = $img_html_result;
-
+						$this->errs[] = $lang['IMG_DOWNLAODED'] . '<br />' . $img_html_result;
 					}
 					else 
 					{
 						//then show other files
-						$else_html_result = $lang['FILE_DOWNLAODED'] . '<br />
-								' . $lang['URL_F_FILE'] . ':<br /><textarea cols="49" rows="1">' . $this->linksite.(($config['mod_writer']) ? "download".$this->id_for_url.".html" : "download.php?id=".$this->id_for_url ).'</textarea><br />
-								' . $lang['URL_F_BBC'] . ':<br /><textarea rows="2" cols="49">[url]' . $this->linksite.(($config['mod_writer']) ? "download".$this->id_for_url.".html" : "download.php?id=".$this->id_for_url ).'[/url]</textarea><br />
-								' . $extra_del;
+						$else_html_result = $lang['URL_F_FILE'] . ':<br /><textarea cols="49" rows="1">' . $this->linksite . (($config['mod_writer']) ? "download" . $this->id_for_url . ".html" : "download.php?id=" . $this->id_for_url) . '</textarea><br />
+											' . $lang['URL_F_BBC'] . ':<br /><textarea rows="2" cols="49">[url]' . $this->linksite . (($config['mod_writer']) ? "download" . $this->id_for_url . ".html" : "download.php?id=" . $this->id_for_url) . '[/url]</textarea><br />
+											' . $extra_del;
 									
 						($hook = kleeja_run_hook('saveit_func_else_res_kljuploader')) ? eval($hook) : null; //run hook
 						
-						$this->errs[] = $else_html_result;	
+						$this->errs[] = $lang['FILE_DOWNLAODED'] . '<br />' . $else_html_result;	
 					}
 
 					($hook = kleeja_run_hook('saveit_func_kljuploader')) ? eval($hook) : null; //run hook
 						
-					unset ($filename,$folderee,$sizeee,$typeee);
-					
-				
+					unset ($filename, $folderee, $sizeee, $typeee);
 
 }#save it
 

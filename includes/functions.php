@@ -1264,18 +1264,17 @@ function delete_change_styles($array)
 
 function kleeja_mime_groups($return_one = false)
 {
-
 		$s = array(
-					0 => array('name' => '', 'for_check' => ''),
-					1 => array('name' => $lang['N_IMGS'], 'for_check' => 'image:png:jpg:tif:tga:targa'),
-					2 => array('name' => $lang['N_ZIPS'], 'for_check' => 'zip:rar:tar:compress:octet:archive:ace:torrent:bz:stuffit:7z'),
-					3 => array('name' => $lang['N_TXTS'], 'for_check' => 'text:txt:internal:plain:x-c:csv:excel:ini:javascript:xml'),
-					4 => array('name' => $lang['N_DOCS'], 'for_check' => 'excel:xls:officedocument:openxmlformats:xlsm:word:doc:appl/text:msw6:dot:mswor:pdf:acrobat:postscript:ps:powerpoint:powerpnt:opendocument:rtf:richtext:soffice'),
-					5 => array('name' => $lang['N_RM'], 'for_check' => 'realmedia:audio:video:plain'),
-					6 => array('name' => $lang['N_WM'], 'for_check' => 'video:mpg:audio:ogg:ogm:avi:msvideo'),
-					7 => array('name' => $lang['N_SWF'], 'for_check' => 'flash:splash'),
-					8 => array('name' => $lang['N_QT'], 'for_check' => 'audio:video:plain:mov'),
-					9 => array('name' => $lang['N_OTHERFILE'], 'for_check' => 'octet'),
+					0 => array('name' => ''),
+					1 => array('name' => $lang['N_IMGS']),
+					2 => array('name' => $lang['N_ZIPS']),
+					3 => array('name' => $lang['N_TXTS']),
+					4 => array('name' => $lang['N_DOCS']),
+					5 => array('name' => $lang['N_RM']),
+					6 => array('name' => $lang['N_WM']),
+					7 => array('name' => $lang['N_SWF']),
+					8 => array('name' => $lang['N_QT']),
+					9 => array('name' => $lang['N_OTHERFILE']),
 			);
 		
 		($hook = kleeja_run_hook('kleeja_mime_groups_func')) ? eval($hook) : null; //run hook
@@ -1314,11 +1313,10 @@ function kleeja_check_mime ($mime, $group_id, $temp)
 {
 	($hook = kleeja_run_hook('kleeja_check_mime_func')) ? eval($hook) : null; //run hook
 	
-	if($mime == '') return false;
-
-	$s = kleeja_mime_groups($group_id);
-	$s_items = @explode(':', $s['for_check']);
+	//this function work with images only 
+	if($group_id != 1) return true;
 	
+	$s_items = @explode(':', 'image:png:jpg:tif:tga:targa');
 	$return = false;
 	foreach($s_items as $r)
 	{
@@ -1328,20 +1326,16 @@ function kleeja_check_mime ($mime, $group_id, $temp)
 			break;
 		}
 	}
-
-	//exception for images
-	if($group_id == 1)
-	{
-		$w = @getimagesize($temp);
-		$return =  ($w && (strpos($w['mime'], 'image') !== false)) ? true : false;
-	}
 	
-	//its true ! 
+	//onther check
+	$w = @getimagesize($temp);
+	$return =  ($w && (strpos($w['mime'], 'image') !== false)) ? true : false;
+
+	//another check
 	if($return == true)
 	{
 		//check for bad things inside files ... i hate those kids; sorry , i mean i dont like them
-		//what if the file size is big ! ! 
-		// we have make it more stable
+		//what if the  size is big ! ! 
 		$maybe_bad_codes_are = array('<?', '<%', '<script', 'zend');
 		$data = file_get_contents($temp);
 		foreach($maybe_bad_codes_are as $i)
@@ -1394,5 +1388,223 @@ function delete_cache($name, $all=false)
 	}
 	
 	return $del;
+}
+
+
+//1rc6+ get mime header
+function get_mime_for_header($ext)
+{
+	$mime_types = array(
+		"323" => "text/h323",
+		"rar"=> "application/x-rar-compressed",
+		"acx" => "application/internet-property-stream",
+		"ai" => "application/postscript",
+		"aif" => "audio/x-aiff",
+		"aifc" => "audio/x-aiff",
+		"aiff" => "audio/x-aiff",
+		"asf" => "video/x-ms-asf",
+		"asr" => "video/x-ms-asf",
+		"asx" => "video/x-ms-asf",
+		"au" => "audio/basic",
+		"avi" => "video/x-msvideo",
+		"axs" => "application/olescript",
+		"bas" => "text/plain",
+		"bcpio" => "application/x-bcpio",
+		"bin" => "application/octet-stream",
+		"bmp" => "image/bmp",
+		"c" => "text/plain",
+		"cat" => "application/vnd.ms-pkiseccat",
+		"cdf" => "application/x-cdf",
+		"cer" => "application/x-x509-ca-cert",
+		"class" => "application/octet-stream",
+		"clp" => "application/x-msclip",
+		"cmx" => "image/x-cmx",
+		"cod" => "image/cis-cod",
+		"cpio" => "application/x-cpio",
+		"crd" => "application/x-mscardfile",
+		"crl" => "application/pkix-crl",
+		"crt" => "application/x-x509-ca-cert",
+		"csh" => "application/x-csh",
+		"css" => "text/css",
+		"dcr" => "application/x-director",
+		"der" => "application/x-x509-ca-cert",
+		"dir" => "application/x-director",
+		"dll" => "application/x-msdownload",
+		"dms" => "application/octet-stream",
+		"doc" => "application/msword",
+		"dot" => "application/msword",
+		"dvi" => "application/x-dvi",
+		"dxr" => "application/x-director",
+		"eps" => "application/postscript",
+		"etx" => "text/x-setext",
+		"evy" => "application/envoy",
+		"exe" => "application/octet-stream",
+		"fif" => "application/fractals",
+		"flr" => "x-world/x-vrml",
+		"gif" => "image/gif",
+		"gtar" => "application/x-gtar",
+		"gz" => "application/x-gzip",
+		"h" => "text/plain",
+		"hdf" => "application/x-hdf",
+		"hlp" => "application/winhlp",
+		"hqx" => "application/mac-binhex40",
+		"hta" => "application/hta",
+		"htc" => "text/x-component",
+		"htm" => "text/html",
+		"html" => "text/html",
+		"htt" => "text/webviewhtml",
+		"ico" => "image/x-icon",
+		"ief" => "image/ief",
+		"iii" => "application/x-iphone",
+		"ins" => "application/x-internet-signup",
+		"isp" => "application/x-internet-signup",
+		"jfif" => "image/pipeg",
+		"jpe" => "image/jpeg",
+		"jpeg" => "image/jpeg",
+		"jpg" => "image/jpeg",
+		"js" => "application/x-javascript",
+		"latex" => "application/x-latex",
+		"lha" => "application/octet-stream",
+		"lsf" => "video/x-la-asf",
+		"lsx" => "video/x-la-asf",
+		"lzh" => "application/octet-stream",
+		"m13" => "application/x-msmediaview",
+		"m14" => "application/x-msmediaview",
+		"m3u" => "audio/x-mpegurl",
+		"man" => "application/x-troff-man",
+		"mdb" => "application/x-msaccess",
+		"me" => "application/x-troff-me",
+		"mht" => "message/rfc822",
+		"mhtml" => "message/rfc822",
+		"mid" => "audio/mid",
+		"mny" => "application/x-msmoney",
+		"mov" => "video/quicktime",
+		"movie" => "video/x-sgi-movie",
+		"mp2" => "video/mpeg",
+		"mp3" => "audio/mpeg",
+		"mp4" => "video/mp4",
+		"m4a" => "audio/mp4",
+		"mpa" => "video/mpeg",
+		"mpe" => "video/mpeg",
+		"mpeg" => "video/mpeg",
+		"mpg" => "video/mpeg",
+		"amr" => "audio/3gpp",
+		"mpp" => "application/vnd.ms-project",
+		"mpv2" => "video/mpeg",
+		"ms" => "application/x-troff-ms",
+		"mvb" => "application/x-msmediaview",
+		"nws" => "message/rfc822",
+		"oda" => "application/oda",
+		"p10" => "application/pkcs10",
+		"p12" => "application/x-pkcs12",
+		"p7b" => "application/x-pkcs7-certificates",
+		"p7c" => "application/x-pkcs7-mime",
+		"p7m" => "application/x-pkcs7-mime",
+		"p7r" => "application/x-pkcs7-certreqresp",
+		"p7s" => "application/x-pkcs7-signature",
+		"pbm" => "image/x-portable-bitmap",
+		"pdf" => "application/pdf",
+		"pfx" => "application/x-pkcs12",
+		"pgm" => "image/x-portable-graymap",
+		"pko" => "application/ynd.ms-pkipko",
+		"pma" => "application/x-perfmon",
+		"pmc" => "application/x-perfmon",
+		"pml" => "application/x-perfmon",
+		"pmr" => "application/x-perfmon",
+		"pmw" => "application/x-perfmon",
+		"pnm" => "image/x-portable-anymap",
+		"pot" => "application/vnd.ms-powerpoint",
+		"ppm" => "image/x-portable-pixmap",
+		"pps" => "application/vnd.ms-powerpoint",
+		"ppt" => "application/vnd.ms-powerpoint",
+		"prf" => "application/pics-rules",
+		"ps" => "application/postscript",
+		"pub" => "application/x-mspublisher",
+		"qt" => "video/quicktime",
+		"ra" => "audio/x-pn-realaudio",
+		"ram" => "audio/x-pn-realaudio",
+		"ras" => "image/x-cmu-raster",
+		"rgb" => "image/x-rgb",
+		"rmi" => "audio/mid",
+		"roff" => "application/x-troff",
+		"rtf" => "application/rtf",
+		"rtx" => "text/richtext",
+		"scd" => "application/x-msschedule",
+		"sct" => "text/scriptlet",
+		"setpay" => "application/set-payment-initiation",
+		"setreg" => "application/set-registration-initiation",
+		"sh" => "application/x-sh",
+		"shar" => "application/x-shar",
+		"sit" => "application/x-stuffit",
+		"snd" => "audio/basic",
+		"spc" => "application/x-pkcs7-certificates",
+		"spl" => "application/futuresplash",
+		"src" => "application/x-wais-source",
+		"sst" => "application/vnd.ms-pkicertstore",
+		"stl" => "application/vnd.ms-pkistl",
+		"stm" => "text/html",
+		"svg" => "image/svg+xml",
+		"sv4cpio" => "application/x-sv4cpio",
+		"sv4crc" => "application/x-sv4crc",
+		"t" => "application/x-troff",
+		"tar" => "application/x-tar",
+		"tcl" => "application/x-tcl",
+		"tex" => "application/x-tex",
+		"texi" => "application/x-texinfo",
+		"texinfo" => "application/x-texinfo",
+		"tgz" => "application/x-compressed",
+		"tif" => "image/tiff",
+		"tiff" => "image/tiff",
+		"tr" => "application/x-troff",
+		"trm" => "application/x-msterminal",
+		"tsv" => "text/tab-separated-values",
+		"txt" => "text/plain",
+		"uls" => "text/iuls",
+		"ustar" => "application/x-ustar",
+		"vcf" => "text/x-vcard",
+		"vrml" => "x-world/x-vrml",
+		"wav" => "audio/x-wav",
+		"wcm" => "application/vnd.ms-works",
+		"wdb" => "application/vnd.ms-works",
+		"wks" => "application/vnd.ms-works",
+		"wmf" => "application/x-msmetafile",
+		"wps" => "application/vnd.ms-works",
+		"wri" => "application/x-mswrite",
+		"wrl" => "x-world/x-vrml",
+		"wrz" => "x-world/x-vrml",
+		"xaf" => "x-world/x-vrml",
+		"xbm" => "image/x-xbitmap",
+		"xla" => "application/vnd.ms-excel",
+		"xlc" => "application/vnd.ms-excel",
+		"xlm" => "application/vnd.ms-excel",
+		"xls" => "application/vnd.ms-excel",
+		"xlt" => "application/vnd.ms-excel",
+		"xlw" => "application/vnd.ms-excel",
+		"xof" => "x-world/x-vrml",
+		"xpm" => "image/x-xpixmap",
+		"xwd" => "image/x-xwindowdump",
+		"z" => "application/x-compress",
+		"zip" => "application/zip",
+		"3gpp"=> "video/3gpp",
+		"3gp" => "video/3gpp",
+		"3gpp2" => "video/3gpp2",
+		"3g2" => "video/3gpp2",
+		"midi" => "audio/midi",
+		"pmd" => "application/x-pmd",
+		"jar" => "application/java-archive",
+		"jad" => "text/vnd.sun.j2me.app-descriptor",
+		//add more mime here
+	);
+	
+	//return mime
+	$ext = strtolower($ext);
+    if(in_array($ext, array_keys($mime_types)))
+    {
+		return  $mime_types[$ext];
+	}
+	else
+	{
+    	return 'application/force-download';  
+	}	
 }
 ?>

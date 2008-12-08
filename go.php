@@ -281,11 +281,75 @@ switch ($_GET['go'])
 			//for safe !!!
 			$n	= saff($_GET['n']);
 			$f	= saff($_GET['f']);
-
-			($hook = kleeja_run_hook('down_go_page')) ? eval($hook) : null; //run hook	
+			$path_file = "./{$f}/{$n}";
+			$chunksize = 1*(1024*1024); //size will send to user every second
 			
+			($hook = kleeja_run_hook('down_go_page')) ? eval($hook) : null; //run hook	
+
 			//start download ,,
-			header("Location: ./$f/$n");
+			if(!is_readable($path_file)) die('Error, file not exists');
+			$size = filesize($path_file);
+			$name = rawurldecode($name);
+			/* Figure out the MIME type (if not specified) */
+			$ext = explode('.', $path_file);
+			$ext = array_pop($ext);
+			$mime_type = get_mime_for_header($ext);
+			@ob_end_clean(); //turn off output buffering to decrease cpu usage
+ 
+			// required for IE, otherwise Content-Disposition may be ignored
+			if(@ini_get('zlib.output_compression'))
+			{
+				@ini_set('zlib.output_compression', 'Off');
+			}
+			
+			header('Content-Type: ' . $mime_type);
+			header('Content-Disposition: attachment; filename="'  . $name . '"');
+			header("Content-Transfer-Encoding: binary");
+			header('Accept-Ranges: bytes');
+			// The three lines below basically make the  download non-cacheable 
+			header("Cache-control: private");
+			header('Pragma: private');
+			header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+			
+			// multipart-download and download resuming support
+			if(isset($_SERVER['HTTP_RANGE']))
+			{
+				list($a, $range) = explode("=", $_SERVER['HTTP_RANGE'],2);
+				list($range) = explode(",", $range, 2);
+				list($range, $range_end) = explode("-", $range);
+				$range = intval($range);
+				$range_end = (!$range_end) ? $size-1 : intval($range_end);
+				$new_length = $range_end-$range+1;
+				header("HTTP/1.1 206 Partial Content");
+				header("Content-Length: $new_length");
+				header("Content-Range: bytes $range-$range_end/$size");
+			}
+			else
+			{
+				$new_length = $size;
+				header("Content-Length: " . $size);
+			}
+	 
+			/* output the file itself */
+			$bytes_send = 0;
+			if ($file = fopen($file, 'r'))
+			{
+				if(isset($_SERVER['HTTP_RANGE']))
+				fseek($file, $range);
+			 
+				while(!feof($file) && (!connection_aborted()) && ($bytes_send < $new_length))
+				{
+					$buffer = fread($file, $chunksize);
+					print($buffer); 
+					flush();
+					$bytes_send += strlen($buffer);
+				}
+				fclose($file);
+			}
+			else
+			{
+				die('Error - can not open file.');
+			}
 
 		}//elser efer
 

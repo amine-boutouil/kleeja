@@ -20,14 +20,14 @@ include ('includes/common.php');
 	{
 			
 			$query = array(
-						'SELECT'	=> 'f.id, f.name, f.folder, f.size, f.time, ',
+						'SELECT'	=> 'f.id, f.name, f.folder, f.size, f.time, f.uploads, f.type',
 						'FROM'		=> "{$dbprefix}files f",
 					);		
 					
 			if(isset($_GET['id']))
 			{
 				$id = intval($_GET['id']);
-				$query['WHERE']	=	"id='" . $id . "'";
+				$query['WHERE']	=	"id=" . $id . "";
 			}
 			elseif (isset($_GET['filename']))
 			{
@@ -52,6 +52,7 @@ include ('includes/common.php');
 				$time		= date("d-m-Y H:a", $time);
 				$size		= Customfile_size($size);
 				$REPORT		= ($config['mod_writer']) ?  $config['siteurl'] . "report_" . $id . ".html" :  $config['siteurl'] . "go.php?go=report&amp;id=" . $id;
+				$file_ext_icon = file_exists('images/filetypes/' . $type . '.gif') ? 'images/filetypes/' . $type . '.gif' : 'images/filetypes/file.gif';
 				$sty		= 'download';
 			}
 			else

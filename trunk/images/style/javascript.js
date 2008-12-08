@@ -16,24 +16,6 @@
 		}
 	}
 	
-	//filds of upload 
-	function makeupload(type)
-	{
-		var value = (type==1) ?  $("upload_num").value : $("upload_f_num").value;
-		var upload_forum3 = (type==1) ? $("upload_forum") :  $("upload_f_forum");
-		var upload_show_num = "";
-		uploaded=1;
-		upload_num=(value-1);
-		if(upload_num>totalupload_num){	upload_num=totalupload_num;	}
-		
-		for(i=0;i<upload_num;i++)
-		{
-			thisuid = uploaded+i;
-			upload_show_num += (type==1) ?  '<input type="file" id="file[]" name="file[]" /><br />' : '<input type="text" size="50" id="file[]" name="file['+thisuid+']" value="' + LANG_PAST_URL_HERE + '" style="color:silver;" dir="ltr" /><br />';
-		}
-		upload_forum3.innerHTML  = upload_show_num;
-	
-	}
 	
 	//new field
 	function plus (type)
@@ -43,6 +25,8 @@
 		if (value.value < num )
 		{
 			value.value++;
+			eval('var s = "file[' + (value.value) + ']";');
+			$(s).style.display = '';
 		}
 		else
 		{
@@ -55,7 +39,13 @@
 	{
 		var value = (type==1) ?  $("upload_num") : $("upload_f_num");
 		var num = number_of_uploads;
-		if (value.value != 1 )value.value--;
+		var num_l = num-1;
+		if (value.value != 1 )
+		{
+			value.value--;
+			eval('var s = "file[' + (value.value) + ']";');
+			$(s).style.display = 'none';
+		}
 	}
 	
 	//submit

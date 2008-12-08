@@ -189,6 +189,7 @@ RC6:
 - fix install system and delete cache after install and delete drop tables if exists
 - add new check system depend on mime types 
 - add some links in html like register , login ... 
+- fix bug when you add fmore feilds then will delete filed value...
 
 thank you for reading this file. 
 

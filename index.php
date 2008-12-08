@@ -29,8 +29,6 @@
 		$ch = new ocr_captcha;
 	}
 	
-
-	
 	//start class .. 
 	$kljup->decode		= $decode;              
 	$kljup->linksite	= $config['siteurl']; 
@@ -40,17 +38,17 @@
 	$kljup->filesnum	= $config['filesnum'];
 	//--------------------- start user system part
 	$kljup->types		= ($usrcp->name()) ? $u_exts : $g_exts;
-	//$kljup->sizes		= ($usrcp->name()) ? $u_sizes : $g_sizes ;	
+	//$kljup->sizes		= ($usrcp->name()) ? $u_sizes : $g_sizes ;	//deprecated from 1rc6
 	$kljup->id_user		= ($usrcp->name()) ? $usrcp->id() : '-1';
 	$kljup->safe_code	= $config['safe_code'];
 	//--------------------- end user system part
 	$kljup->process();
 
-	//fix
+	//add from 1rc6
 	$FILES_NUM_LOOP = array();
-	foreach(range(0, $config['filesnum']) as $i)
+	foreach(range(1, $config['filesnum']) as $i)
 	{
-		$FILES_NUM_LOOP[] = array('i' => $i, 'show'=>($i == 0 ? '' : 'none'));
+		$FILES_NUM_LOOP[] = array('i' => $i, 'show'=>($i == 1 ? '' : 'none'));
 	}
 
 	//show errors and info

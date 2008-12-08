@@ -550,8 +550,7 @@ function ti()
 </div>]]>
         </template>
         <template name="index_body">
-        <![CDATA[
-<div class="middle">
+        <![CDATA[<div class="middle">
 
 <!-- begin welcome index -->
 <h2>{lang.WELCOME}..</h2>        
@@ -574,12 +573,14 @@ function ti()
 
         
         <div id="filetype">
-                <input type="file" name="file[]" />
+                <LOOP NAME=FILES_NUM_LOOP>
+				<input type="file" name="file[{{i}}]" id="file[{{i}}]" style="display:{{show}}" />
+				</LOOP>
                 <br />
                 <div id="upload_forum"></div>
                 <br />
-                <input name="mraupload" onclick="javascript:plus(1);makeupload(1);" type="button" value="+" />
-                <input name="mreupload" onclick="javascript:minus(1);makeupload(1);" type="button" value="-" />
+                <input name="mraupload" onclick="javascript:plus(1);" type="button" value="+" />
+                <input name="mreupload" onclick="javascript:minus(1);" type="button" value="-" />
                 <br />
                 <br />
         <IF NAME="config.safe_code">
@@ -597,12 +598,15 @@ function ti()
         
 <IF NAME="config.www_url">
         <div id="texttype">
-                <input type="text" name="file[0]" size="50" value="{lang.PAST_URL_HERE}" onclick="this.value=''" style="color:silver;" dir="ltr">
+		 <LOOP NAME=FILES_NUM_LOOP>
+		 <input type="text" name="file[{{i}}]" id="file[{{i}}]" size="50" value="{lang.PAST_URL_HERE}" onclick="this.value=''" style="color:silver;display{{show}}" dir="ltr">
+		 </LOOP>
+                
                 <br />
                 <div id="upload_f_forum"></div>
                 <br />
-                <input name="mraupload" onclick="javascript:plus(2);makeupload(2);" type="button" value="+" />
-                <input name="mreupload" onclick="javascript:minus(2);makeupload(2);" type="button" value="-" />
+                <input name="mraupload" onclick="javascript:plus(2);" type="button" value="+" />
+                <input name="mreupload" onclick="javascript:minus(2);" type="button" value="-" />
                 <br />
                 <br />
         <IF NAME="config.safe_code">
@@ -647,10 +651,7 @@ function ti()
 </IF>
 <!---- END FOR ONLINE ---->
 
-</div>
-                
-
-]]>
+</div>]]>
         </template>
         <template name="info">
         <![CDATA[<div class="middle">

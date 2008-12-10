@@ -25,19 +25,19 @@ switch ($_GET['go'])
 
 	//make it loop
 	$gusts_data = array();
-	foreach($g_exts as $s)
+	foreach($g_exts as $ext=>$data)
 	{
-		$gusts_data[]	= array(	'ext'	=> $s,
-									'num'	=> Customfile_size($g_sizes[$s])//format size as kb, mb,...
+		$gusts_data[]	= array(	'ext'	=> $ext,
+									'num'	=> Customfile_size($data['size'])//format size as kb, mb,...
 									);
 	}
 
 	//make it loop
 	$users_data = array();
-	foreach($u_exts as $s )
+	foreach($u_exts as $ext=>$data)
 	{
-		$users_data[]	=	array(	'ext' => $s,
-									'num' => Customfile_size($u_sizes[$s])//format size as kb, mb,...
+		$users_data[]	=	array(	'ext' => $ext,
+									'num' => Customfile_size($data['size'])//format size as kb, mb,...
 									);
 	}
 	

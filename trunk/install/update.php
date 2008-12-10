@@ -186,7 +186,10 @@ case 'update_now':
 			}
 			
 			print '<br /><br /><span style="color:green;">' . $lang['INST_UPDATE_IS_FINISH']. '</span><br />';
-		
+			print '<img src="img/home.gif" alt="home" />&nbsp;<a href="../index.php">' . $lang['INDEX'] . '</a><br /><br />';
+			print '<img src="img/adm.gif" alt="admin" />&nbsp;<a href="../admin.php">' . $lang['ADMINCP'] . '</a><br /><br />';
+			print '' . $lang['INST_KLEEJADEVELOPERS'] . '<br /><br />';
+			print '<a href="http://www.kleeja.com">www.kleeja.com</a><br /><br /></fieldset>';
 		}
 
 break;

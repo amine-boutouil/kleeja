@@ -80,12 +80,13 @@ class sa_srch
 		if($many)
 		{
 			if(!is_array($this->find_word)) return false;
-
-			$this->text	=	preg_replace('#'.$this->find_word[0].'(.*?)'.$this->find_word[1].'#si', $this->another_word, $this->text);
+		
+			$this->text	=	preg_replace('/' . preg_quote($this->find_word[0] . '(.*?)' . $this->find_word[1], '/') . '/', $this->another_word, $this->text);
 		}
 		else
 		{
-			$this->text	=	preg_replace('#'.$this->find_word.'#si', $this->another_word, $this->text);
+
+			$this->text	=	preg_replace('/' . preg_quote($this->find_word, '/') . '/', $this->another_word, $this->text);
 		}
 	
 	}
@@ -97,7 +98,7 @@ class sa_srch
 	{
 		if($this->another_word == '') return false;
 		
-		$this->text	=	preg_replace('#'.$this->find_word.'#si', $this->find_word . (($same_line) ? "\r\n" : "") . $this->another_word, $this->text);
+		$this->text	=	preg_replace('/' . preg_quote($this->find_word, '/')  . '/', $this->find_word . (($same_line) ? "\r\n" : "") . $this->another_word, $this->text);
 
 	}
 	
@@ -107,8 +108,8 @@ class sa_srch
 	function type_before($same_line=false)
 	{
 		if($this->another_word == '') return false;
-		
-		$this->text	=	preg_replace('#'.$this->find_word.'#si',   $this->another_word . (($same_line) ? "\r\n" : "")  .$this->find_word, $this->text);
+	
+		$this->text	=	preg_replace('/' . preg_quote($this->find_word, '/') . '/',   $this->another_word . (($same_line) ? "\r\n" : "")  .$this->find_word, $this->text);
 
 	}
 }

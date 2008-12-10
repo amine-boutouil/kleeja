@@ -301,7 +301,7 @@ function visit_stats ()
 			($hook = kleeja_run_hook('qr_update_counters_ststs_func')) ? eval($hook) : null; //run hook
 			if ($SQL->build($update_query))
 			{
-				@unlink("cache/data_stats.php");
+				delete_cache('data_stats');
 			}
 			else
 			{ 
@@ -509,10 +509,7 @@ function creat_style_xml($contents, $def=false)
 										if ($SQL->build($update_query))
 										{
 												//delete cache ..
-												if (file_exists('cache/data_config.php'))
-												{
-													unlink('cache/data_config.php');
-												}
+												delete_cache('data_config');
 										}
 					}
 					
@@ -586,10 +583,7 @@ function creat_lang_xml($contents, $def=false)
 										if ($SQL->build($update_query))
 										{
 												//delete cache ..
-												if (file_exists('cache/data_config.php'))
-												{
-													unlink('cache/data_config.php');
-												}
+												delete_cache('data_config');
 										}
 					}
 					
@@ -711,10 +705,7 @@ function creat_plugin_xml($contents)
 										if ($SQL->build($update_query))
 										{
 												//delete cache ..
-												if (file_exists('cache/' . $config['style'] . '_' .$template_name . '.php'))
-												{
-													unlink('cache/' . $config['style'] . '_' . $template_name . '.php');
-												}
+												delete_cache($config['style'] . '_' .$template_name);
 										}
 									}
 								}
@@ -786,10 +777,7 @@ function creat_plugin_xml($contents)
 									$SQL->build($insert_query);		
 								}
 								//delete cache ..
-								if (file_exists('cache/data_hooks.php'))
-								{
-										unlink('cache/data_hooks.php');
-								}
+								delete_cache('data_hooks');
 						}
 						
 						//langs
@@ -817,10 +805,7 @@ function creat_plugin_xml($contents)
 								}
 								
 								//delete cache ..
-								if (file_exists('cache/data_lang_' . $config['language'] . '.php'))
-								{
-										unlink('cache/data_lang_' . $config['language'] . '.php');
-								}
+								delete_cache('data_lang_' . $config['language']);
 						}	
 					
 					if(sizeof($plg_errors)<1) 
@@ -1137,10 +1122,7 @@ function kj_lang($word, $trans, $language=false)
 		$SQL->build($insert_query);		
 		
 		//delete cache ..
-		if (file_exists('cache/langs_' . $lang_id . '.php'))
-		{
-			unlink('cache/langs_' . $language . '.php');
-		}
+		delete_cache('langs_' . $lang_id);
 		
 		return $lang_trans;
 	}
@@ -1224,7 +1206,7 @@ function delete_change_styles($array)
 	foreach($array as $tplname=>$codes)
 	{
 		$finder->find_word		=	$codes;
-		$finder->another_word	=	'<!-- auto delete k l e e j a . c o m -->';
+		$finder->another_word	=	'<!-- auto delete kleeja.com -->';
 		//get template content and do wut we have to do , then updated .. 
 		$query = array(
 								'SELECT'	=> 'template_content',
@@ -1251,10 +1233,7 @@ function delete_change_styles($array)
 					if ($SQL->build($update_query))
 					{
 						//delete cache ..
-						if (file_exists('cache/' . $config['style'] . '_' .$tplname . '.php'))
-						{
-								unlink('cache/' . $config['style'] . '_' . $tplname . '.php');
-						}
+						delete_cache($config['style'] . '_' .$tplname);
 					}
 		}
 
@@ -1352,11 +1331,11 @@ function kleeja_check_mime ($mime, $group_id, $temp)
 }
 
 //delete cache
-function delete_cache($name, $all=false)
+function delete_cache($name, $all=false, $deep = false)
 {
 	//we have delete it by any method !
 	
-	$path_to_cache = './cache';
+	$path_to_cache = ($deep ? '.' : '') . './cache';
 	
 	//unlink
 	if(!function_exists('unlink'))

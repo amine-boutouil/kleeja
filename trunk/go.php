@@ -373,6 +373,7 @@ switch ($_GET['go'])
 	}
 
 	//ok .. go on
+	//it's must be more strong . saanina check it again !
 	$cd	= $SQL->escape($_GET['cd']); // may.. will protect
 
 	if (!$cd)
@@ -382,7 +383,7 @@ switch ($_GET['go'])
 	else
 	{
 		$query = array(
-							'SELECT'=> 'f.name, f.folder',
+							'SELECT'=> 'f.id, f.name, f.folder',
 							'FROM'	=> "{$dbprefix}files f",
 							'WHERE'	=> "f.code_del='" . $cd . "'"
 						);

@@ -522,11 +522,13 @@ function saveit ($filname, $folderee, $sizeee, $typeee)
 				//calculate stats ..s
 				$update_query = array(
 									'UPDATE'	=> "{$dbprefix}stats",
-									'SET'		=> "`files`=files+1,`sizes`=sizes+" . $size . ",`last_file`='" . $folder ."/". $name . "'"
+									'SET'		=> "`files`=files+1,`sizes`=sizes+" . $size . ",`last_file`='" . $folder . "/" . $name . "'"
 								);
 								
 				($hook = kleeja_run_hook('qr_update_no_files_kljuploader')) ? eval($hook) : null; //run hook
-				if (!$SQL->build($update_query)){ die($lang['CANT_UPDATE_SQL']);}	
+				if (!$SQL->build($update_query)) die($lang['CANT_UPDATE_SQL']);
+				//delete cache of stats !
+				delete_cache('data_stats');
 
 					//show del code link
 					if ($config['del_url_file'])

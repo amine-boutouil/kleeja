@@ -560,27 +560,21 @@ function ti()
 <br />
 <!-- end welcome index -->
 
-
 <!---- START  FOR UPLOAD BOXES ---->
 <form name="uploader" id="uploader" action="{action}" method="post"  enctype="multipart/form-data" onsubmit="form_submit();">
 
-        
-<IF NAME="config.www_url">
-    <a href="#"  onclick="showhide();" title="{lang.CHANG_TO_URL_FILE}"><img src="images/urlORfile.gif" alt="{lang.CHANG_TO_URL_FILE}"  /></a>
-        <br /><br />
-</IF>
-
-
-        
+		<IF NAME="config.www_url">
+		<a href="#"  onclick="showhide();" title="{lang.CHANG_TO_URL_FILE}"><img src="images/urlORfile.gif" alt="{lang.CHANG_TO_URL_FILE}"  /></a><br /><br />
+		</IF>
+		
         <div id="filetype">
                 <LOOP NAME=FILES_NUM_LOOP>
-				<input type="file" name="file[{{i}}]" id="file[{{i}}]" style="display:{{show}}" />
+					<input type="file" name="file[{{i}}]" id="file[{{i}}]" style="display:{{show}}" /><br id="br[{{i}}]" style="display:{{show}}" />
 				</LOOP>
                 <br />
                 <div id="upload_forum"></div>
                 <br />
-                <input name="mraupload" onclick="javascript:plus(1);" type="button" value="+" />
-                <input name="mreupload" onclick="javascript:minus(1);" type="button" value="-" />
+                <input name="mraupload" onclick="javascript:plus(1);" type="button" value="+" /> <input name="mreupload" onclick="javascript:minus(1);" type="button" value="-" />
                 <br />
                 <br />
         <IF NAME="config.safe_code">
@@ -589,7 +583,7 @@ function ti()
                         <input type="text" name="answer_safe" style="direction:ltr;" />
                         <br />
         </IF>
-                <input id="checkr" type="checkbox" onclick="accept_terms('submitr','checkr');" />{lang.AGREE_RULES}
+                <input id="checkr" type="checkbox" onclick="accept_terms('submitr','checkr');" /> {lang.AGREE_RULES}
                 <br />
                 <input type="submit" id="submitr" name="submitr" value="{lang.DOWNLOAD_F}"  disabled="disabled" />
                 <input type="text" id="upload_num" value="1" size="1" readonly="readonly"/>
@@ -598,9 +592,9 @@ function ti()
         
 <IF NAME="config.www_url">
         <div id="texttype">
-		 <LOOP NAME=FILES_NUM_LOOP>
-		 <input type="text" name="file[{{i}}]" id="file[{{i}}]" size="50" value="{lang.PAST_URL_HERE}" onclick="this.value=''" style="color:silver;display{{show}}" dir="ltr">
-		 </LOOP>
+			<LOOP NAME=FILES_NUM_LOOP>
+				<input type="text" name="file[{{i}}]" id="fileu[{{i}}]" size="50" value="{lang.PAST_URL_HERE}" onclick="this.value=''" style="color:silver;display:{{show}}" dir="ltr"><br id="bru[{{i}}]" style="display:{{show}}" />
+			</LOOP>
                 
                 <br />
                 <div id="upload_f_forum"></div>
@@ -654,13 +648,13 @@ function ti()
 </div>]]>
         </template>
         <template name="info">
-        <![CDATA[<div class="middle">
-
+        <![CDATA[<!-- begin info template -->
+		<div class="middle">
         <div class="info">
         {text}
         </div>
-
-</div>]]>
+</div>
+<!-- end info template -->]]>
         </template>
         <template name="login">
         <![CDATA[
@@ -954,18 +948,21 @@ document.getElementById('mail_here').innerHTML= iee;
                 <td>{lang.TIME}</td>
                 <td>{lang.IP}</td>
                 <td>{lang.DELETE}</td>
+				<!-- admin calls data td1 extra -->
         </tr>
 <IF NAME="no_results">
 ...
 <ELSE>
 <LOOP NAME="arr">
         <tr style="background-color:#F5F5F5">
-                <td><a title="{n_mail}:{{mail}}" onclick="javascript:show_msg('textva_{{id}}',{{id}});">{{name}}</a>
-                <input type="hidden" value="{{mail}} :<br /> {{text}}" id="textva_{{id}}">
+                <td>
+					<a title="{n_mail}:{{mail}}" onclick="javascript:show_msg('textva_{{id}}',{{id}});">{{name}}</a>
+					<input type="hidden" value="{{mail}} :<br /> {{text}}" id="textva_{{id}}">
                 </td>
                 <td>{{time}}</td>
                 <td><a href="{{ip_finder}}" target="blank">{{ip}}</a></td>
                 <td><input type="checkbox" name="del_{{id}}" value="1"></td>
+				<!-- admin calls data td2 extra -->
         </tr>
 </LOOP>
 </IF>
@@ -1393,25 +1390,26 @@ document.getElementById('mail_here').innerHTML = iee;
 <table style="width: 100%">
         <tr style="background-color:silver">
                 <td>{lang.NAME}</td>
-                <td>{lang.EMAIL}</td>
+                <td>{lang.URL}</td>
                 <td>{lang.TIME}</td>
                 <td>{lang.IP}</td>
                 <td>{lang.DELETE}</td>
-                <!-- admin reports info tr extra -->
+                <!-- admin reports info td1 extra -->
         </tr>
 <IF NAME="no_results">
 ...
 <ELSE>
 <LOOP NAME="arr">
         <tr style="background-color:#F5F5F5">
-                <td><a title="{n_mail}:{{mail}}" onclick="javascript:show_msg('textva_{{id}}',{{id}});">{{name}}</a>
-                <input type="hidden" value="{{mail}} :<br /> {{text}}" id="textva_{{id}}">
+                <td>
+					<a title="{n_mail}:{{mail}}" onclick="javascript:show_msg('textva_{{id}}',{{id}});">{{name}}</a>
+					<input type="hidden" value="{{mail}} :<br /> {{text}}" id="textva_{{id}}">
                 </td>
                 <td><a href="{{url}}">{lang.CLICKHERE}<a/></td>
                 <td>{{time}}</td>
                 <td><a href="{{ip_finder}}" target="blank">{{ip}}</a></td>
                 <td><input type="checkbox" name="del_{{id}}" value="1"></td>
-                        <!-- admin reports data tr extra -->
+				<!-- admin reports info td2 extra -->
         </tr>
 </LOOP>
 </IF>
@@ -2095,7 +2093,7 @@ a.button2, input.button2 {
         <td>
         <select name="style_choose">
         <LOOP NAME="arr">
-        <option  value="{{style_id}}">{{style_name}}</option>
+        <option  value="{{style_id}}" {{selected}}>{{style_name}}</option>
         </LOOP>
         </select>
 
@@ -2478,7 +2476,7 @@ a.button2, input.button2 {
 
 <select name="lang_choose">
 <LOOP NAME="arr">
-<option  value="{{lang_id}}">{{lang_name}}</option>
+<option  value="{{lang_id}}" {{selected}}>{{lang_name}}</option>
 </LOOP>
 </select>
 

@@ -65,7 +65,6 @@ function ti()
 KLEEJA;
 $style_changes_i = <<<KLEEJA
 <div class="middle">
-
 <!-- begin welcome index -->
 <h2>{lang.WELCOME}..</h2>        
 <br />
@@ -74,27 +73,21 @@ $style_changes_i = <<<KLEEJA
 <br />
 <!-- end welcome index -->
 
-
 <!---- START  FOR UPLOAD BOXES ---->
 <form name="uploader" id="uploader" action="{action}" method="post"  enctype="multipart/form-data" onsubmit="form_submit();">
 
-        
-<IF NAME="config.www_url">
-    <a href="#"  onclick="showhide();" title="{lang.CHANG_TO_URL_FILE}"><img src="images/urlORfile.gif" alt="{lang.CHANG_TO_URL_FILE}"  /></a>
-        <br /><br />
-</IF>
-
-
-        
+		<IF NAME="config.www_url">
+		<a href="#"  onclick="showhide();" title="{lang.CHANG_TO_URL_FILE}"><img src="images/urlORfile.gif" alt="{lang.CHANG_TO_URL_FILE}"  /></a><br /><br />
+		</IF>
+		
         <div id="filetype">
                 <LOOP NAME=FILES_NUM_LOOP>
-				<input type="file" name="file[{{i}}]" id="file[{{i}}]" style="display:{{show}}" />
+					<input type="file" name="file[{{i}}]" id="file[{{i}}]" style="display:{{show}}" /><br id="br[{{i}}]" style="display:{{show}}" />
 				</LOOP>
                 <br />
                 <div id="upload_forum"></div>
                 <br />
-                <input name="mraupload" onclick="javascript:plus(1);" type="button" value="+" />
-                <input name="mreupload" onclick="javascript:minus(1);" type="button" value="-" />
+                <input name="mraupload" onclick="javascript:plus(1);" type="button" value="+" /> <input name="mreupload" onclick="javascript:minus(1);" type="button" value="-" />
                 <br />
                 <br />
         <IF NAME="config.safe_code">
@@ -103,7 +96,7 @@ $style_changes_i = <<<KLEEJA
                         <input type="text" name="answer_safe" style="direction:ltr;" />
                         <br />
         </IF>
-                <input id="checkr" type="checkbox" onclick="accept_terms('submitr','checkr');" />{lang.AGREE_RULES}
+                <input id="checkr" type="checkbox" onclick="accept_terms('submitr','checkr');" /> {lang.AGREE_RULES}
                 <br />
                 <input type="submit" id="submitr" name="submitr" value="{lang.DOWNLOAD_F}"  disabled="disabled" />
                 <input type="text" id="upload_num" value="1" size="1" readonly="readonly"/>
@@ -112,9 +105,9 @@ $style_changes_i = <<<KLEEJA
         
 <IF NAME="config.www_url">
         <div id="texttype">
-		 <LOOP NAME=FILES_NUM_LOOP>
-		 <input type="text" name="file[{{i}}]" id="file[{{i}}]" size="50" value="{lang.PAST_URL_HERE}" onclick="this.value=''" style="color:silver;display{{show}}" dir="ltr">
-		 </LOOP>
+			<LOOP NAME=FILES_NUM_LOOP>
+				<input type="text" name="file[{{i}}]" id="fileu[{{i}}]" size="50" value="{lang.PAST_URL_HERE}" onclick="this.value=''" style="color:silver;display:{{show}}" dir="ltr"><br id="bru[{{i}}]" style="display:{{show}}" />
+			</LOOP>
                 
                 <br />
                 <div id="upload_f_forum"></div>

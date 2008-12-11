@@ -32,8 +32,9 @@ switch ($_GET['lan_t'])
 
 		while($row=$SQL->fetch_array($result))
 		{
-				$arr[] = array( lang_id =>$row['list_id'],
-								lang_name =>$row['list_name'],
+				$arr[] = array( 'lang_id'	=> $row['list_id'],
+								'lang_name'	=> $row['list_name'] . ($config['language'] == $row['list_id'] ? ' [' . $lang['STYLENAME'] . ']' : ''),
+								'selected'	=> ($config['language'] == $row['list_id'] ? 'selected="selected"' : ''),
 							);
 
 		}
@@ -44,8 +45,8 @@ switch ($_GET['lan_t'])
 		if(isset($_GET['style_choose']))
 		{
 			$_POST['submit']			= true;
-			$_POST['lang_choose']	=	$_GET['lang_choose'];
-			$_POST['method']			=	$_GET['method'];
+			$_POST['lang_choose']		= $_GET['lang_choose'];
+			$_POST['method']			= $_GET['method'];
 		}
 		if (isset($_POST['submit']))
 		{
@@ -300,7 +301,7 @@ switch ($_GET['lan_t'])
 			if ($SQL->build($update_query))
 			{
 					//delete cache ..
-					delete_cache('langs_' . $lang_id);
+					delete_cache('data_lang');
 					//show msg
 					$text	= $lang['WORD_UPDATED'] . '<meta HTTP-EQUIV="REFRESH" content="2; url=./admin.php?cp=langs&amp;lang_choose=' . $lang_id . '">' ."\n";
 					$stylee	= "admin_info";
@@ -343,7 +344,7 @@ switch ($_GET['lan_t'])
 			{
 			
 					//delete cache ..
-					delete_cache('langs_' . $lang_id);
+					delete_cache('data_lang');
 					//show msg
 					$text		= $lang['WORD_CREATED']  . '<meta HTTP-EQUIV="REFRESH" content="2; url=./admin.php?cp=langs&amp;lang_choose=' . $lang_id . '">' ."\n";
 					$stylee	= "admin_info";

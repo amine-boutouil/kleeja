@@ -21,12 +21,15 @@
 	function plus (type)
 	{
 		var value = (type==1) ?  $("upload_num") : $("upload_f_num");
+		var id = (type==1) ?  'file' : 'fileu';
+		var id2 = (type==1) ?  'br' : 'bru';
 		var num = number_of_uploads;
 		if (value.value < num )
 		{
 			value.value++;
-			eval('var s = "file[' + (value.value) + ']";');
+			eval('var s = "' + id +'[' + (value.value) + ']";var br = "' + id2 +'[' + (value.value) + ']";');
 			$(s).style.display = '';
+			$(br).style.display = '';
 		}
 		else
 		{
@@ -38,13 +41,16 @@
 	function minus (type)
 	{
 		var value = (type==1) ?  $("upload_num") : $("upload_f_num");
+		var id = (type==1) ?  'file' : 'fileu';
+		var id2 = (type==1) ?  'br' : 'bru';
 		var num = number_of_uploads;
 		var num_l = num-1;
 		if (value.value != 1 )
 		{
 			value.value--;
-			eval('var s = "file[' + (value.value) + ']";');
+			eval('var s = "' + id +'[' + (value.value) + ']";var br = "' + id2 +'[' + (value.value) + ']";');
 			$(s).style.display = 'none';
+			$(br).style.display = 'none';
 		}
 	}
 	

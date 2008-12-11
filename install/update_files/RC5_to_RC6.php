@@ -22,8 +22,48 @@ $update_notes[]	= $lang['INST_NOTE_RC5_TO_RC6'];
 //functions ////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//index changes
-$style_changes = <<<KLEEJA
+//index & download changes
+$style_changes_d = <<<KLEEJA
+<div class="middle">
+
+{lang.FILE_FOUNDED} 
+<br />
+<div id="url"><h3>{lang.JS_MUST_ON}</h3></div>
+<br />
+{lang.FILE_INFO} : 
+<br />
+{lang.FILENAME} : {name} <br />
+{lang.FILETYPE} : {type} <br />
+{lang.FILESIZE} : {size} <br />
+{lang.FILEDATE} : {time} <br />
+{lang.FILEUPS} : {uploads} <br />
+<!-- download template after info -->
+<br />
+<br />
+<a href="{REPORT}">{lang.FILEREPORT}</a>
+
+
+<script language="javascript">
+var timer = {seconds_w};
+ti();
+function ti()
+{
+    if(timer > 0)
+    {
+        document.getElementById("url").innerHTML = '<strong>{lang.WAIT} ' + timer + ' </strong>';
+        timer = timer - 1;
+        setTimeout("ti()", 1000)
+    }
+    else
+    {
+        document.getElementById("url").innerHTML = '<a href="{url_file}" target="balnk">»» {lang.CLICK_DOWN} ««</a><br \><br \>';
+    }
+}
+</script>
+
+</div>
+KLEEJA;
+$style_changes_i = <<<KLEEJA
 <div class="middle">
 
 <!-- begin welcome index -->
@@ -131,14 +171,36 @@ KLEEJA;
 
 function up_date_style()
 {
-	global $config, $dbprefix, $SQL, $style_changes;
+	global $dbprefix, $SQL, $style_changes_i, $style_changes_d;
 	
+	//get style id
+	$query = array(
+					'SELECT'	=> 'value',
+					'FROM'		=> "{$dbprefix}config",
+					'WHERE'		=>	"name='style'"
+					);
+					
+	$result = $SQL->build($query);
+	$row=$SQL->fetch_array($result);
+	
+	//index_body
 	$update_query = array(
 		'UPDATE'	=> "{$dbprefix}templates",
-		'SET'		=> "template_content = '". $SQL->real_escape($style_changes) ."'",
-		'WHERE'		=>	"style_id='". intval($config['style']) ."' AND template_name='index_body'"
+		'SET'		=> "template_content = '" . $SQL->real_escape($style_changes_i) . "'",
+		'WHERE'		=>	"style_id='". intval($row['value']) ."' AND template_name='index_body'"
 	);
+	
 	$SQL->build($update_query);
+	
+	//download
+	$update_query = array(
+		'UPDATE'	=> "{$dbprefix}templates",
+		'SET'		=> "template_content = '" . $SQL->real_escape($style_changes_d) . "'",
+		'WHERE'		=>	"style_id='". intval($row['value']) ."' AND template_name='download'"
+	);
+	
+	$SQL->build($update_query);	
+	
 	delete_cache('', true, true);
 }
 

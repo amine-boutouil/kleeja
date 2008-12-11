@@ -111,6 +111,10 @@
 				$text	= $lang['NUMFIELD_S'];
 				$stylee	= "admin_err";
 			}
+			elseif (($_POST['style'] != $config['style']) || ($_POST['language'] != $config['language']))
+			{
+				delete_cache('', true); //delete all cache to get new style and language cache
+			}
 			else
 			{
 				$text	= $lang['CONFIGS_UPDATED'];

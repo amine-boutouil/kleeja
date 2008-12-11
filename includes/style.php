@@ -135,18 +135,21 @@ class kleeja_style
 			if(empty($config['style'])) $config['style'] = 1;
 			
 					$query = array(
-								'SELECT'	=> 'template_content',
-								'FROM'		=> "{$dbprefix}templates",
-								'WHERE'		=>	"style_id='". (int) $config['style'] ."' AND template_name='" . (string) $template_name . "'"
+								'SELECT'	=> 't.template_content',
+								'FROM'		=> "{$dbprefix}templates t",
+								'WHERE'		=>	"t.style_id='". (int) $config['style'] ."' AND t.template_name='" . (string) $template_name . "'"
 								);
 				$result	=	$SQL->build($query);
 				$template_content = $SQL->fetch_array($result);
 
+				
 				if(!$template_content['template_content'] || empty($template_content['template_content'])) 
 				{
 					if($config['style'] != 1)
 					{
-						$query['WHERE'] = "style_id='1' AND template_name='" . (string) $template_name . "'";
+						$query['FROM'] .= ", {$dbprefix}lists l";
+						$query['WHERE'] = "(t.style_id='1' OR (l.list_name='default' AND t.style_id=l.list_id)) AND t.template_name='" . (string) $template_name . "'";
+
 						$result	=	$SQL->build($query);
 						$template_content = $SQL->fetch_array($result);
 					}
@@ -156,7 +159,7 @@ class kleeja_style
 					
 				$this->HTML = stripslashes($template_content['template_content']);
 				$this->HTML = $this->_parse($this->HTML);
-				$filename = fopen($root_path . 'cache/' . $config['style'] . '_' . $template_name . '.php', 'w');
+				$filename = fopen($root_path . 'cache/tpl_' . $this->re_name_tpl($template_name) . '.php', 'w');
 				flock($filename, LOCK_EX); // exlusive look
 				fwrite($filename, $this->HTML);
 				fclose($filename);
@@ -169,21 +172,28 @@ class kleeja_style
 			global $config, $SQL, $root_path;
 			
 			$this->vars  = &$GLOBALS;
-			//clean the name 
+			
+			//clean the name
 			$template_name	=	$SQL->escape($template_name);
-					
+			
 			//is there ?
-			if(!file_exists($root_path.'cache/' . $config['style'] . '_' . $template_name . '.php'))
+			if(!file_exists($root_path.'cache/tpl_' . $this->re_name_tpl($template_name) . '.php'))
 			{
 				$this->_load_template($template_name);
 			}
 
 			ob_start();
-			include($root_path.'cache/' . $config['style'] . '_' . $template_name . '.php');
+			include($root_path.'cache/tpl_' . $this->re_name_tpl($template_name) . '.php');
 			$page = ob_get_contents();
 			ob_end_clean();
 		
 			return $page;
+		}
+		
+		//change name of template to be valid 1rc6+
+		function re_name_tpl($name)
+		{
+			return preg_replace("/[^a-z0-9-_]/", "-", strtolower($name));
 		}
 
 }

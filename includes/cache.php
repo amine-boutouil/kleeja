@@ -113,12 +113,12 @@ if(!defined('STOP_HOOKS'))
 //
 	if(!$lang || !is_array($lang))	$lang	=	array();
 	
-	if (file_exists($root_path.'cache/data_lang_' . $config['language'] . '.php'))
+	if (file_exists($root_path.'cache/data_lang.php'))
 	{
-		include ($root_path.'cache/data_lang_' . $config['language'] . '.php');
+		include ($root_path.'cache/data_lang.php');
 	}
 	
-	if (!$lang or !file_exists($root_path.'cache/data_lang_'.$config['language'].'.php'))
+	if (!$lang or !file_exists($root_path.'cache/data_lang.php'))
 	{
 		$query = array(
 					'SELECT'	=> 'l.*',
@@ -144,7 +144,7 @@ if(!defined('STOP_HOOKS'))
 				
 	 	$SQL->freeresult($result);
 
-		$filenumc = fopen($root_path.'cache/data_lang_' . $config['language'] . '.php', 'w');
+		$filenumc = fopen($root_path.'cache/data_lang.php', 'w');
 		flock($filenumc, LOCK_EX); // exlusive look
 		fwrite($filenumc, $file_datac);
 		fclose($filenumc);

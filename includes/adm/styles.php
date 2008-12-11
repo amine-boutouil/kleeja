@@ -32,7 +32,8 @@ switch ($_GET['sty_t'])
 		while($row=$SQL->fetch_array($result))
 		{
 				$arr[] = array( 'style_id'	=> $row['list_id'],
-								'style_name'=> ($config['style'] == $row['list_id'] ? '[' . $lang['STYLENAME'] . '] ' : '') . $row['list_name'],
+								'style_name'=>  $row['list_name'] . ($config['style'] == $row['list_id'] ? ' [' . $lang['STYLENAME'] . ']' : ''),
+								'selected'	=>  ($config['style'] == $row['list_id'] ? 'selected="selected"' : ''),
 							);
 
 		}
@@ -73,7 +74,7 @@ switch ($_GET['sty_t'])
 					while($row=$SQL->fetch_array($result))
 					{
 							$arr[] = array(
-											'template_name' =>$row['template_name']
+											'template_name' => $row['template_name']
 							);
 					}
 					$SQL->freeresult($result);
@@ -87,7 +88,7 @@ switch ($_GET['sty_t'])
 						{
 							$query_del = array(
 											'DELETE'	=> "{$dbprefix}lists",
-											'WHERE'		=> "list_id='". $style_id ."' AND list_type=1"
+											'WHERE'		=> "list_id='" . $style_id . "' AND list_type=1"
 											);
 
 											
@@ -95,10 +96,10 @@ switch ($_GET['sty_t'])
 											
 							$query_del2 = array(
 											'DELETE'	=> "{$dbprefix}templates",
-											'WHERE'		=> 'style_id='. $style_id
+											'WHERE'		=> 'style_id=' . $style_id
 											);		
 											
-							if (!$SQL->build($query_del2)) die($lang['CANT_DELETE_SQL'].' 2');
+							if (!$SQL->build($query_del2)) die($lang['CANT_DELETE_SQL'] . ' 2');
 							
 							//show msg
 							$text	= $lang['STYLE_DELETED'] . '<meta HTTP-EQUIV="REFRESH" content="2; url=./admin.php?cp=styles">' ."\n";
@@ -119,7 +120,7 @@ switch ($_GET['sty_t'])
 					$query = array(
 								'SELECT'	=> '*',
 								'FROM'		=> "{$dbprefix}lists",
-								'WHERE'		=> "list_id='". $style_id ."' AND list_type=1"
+								'WHERE'		=> "list_id='" . $style_id . "' AND list_type=1"
 								);
 									
 					$result = $SQL->build($query);
@@ -289,7 +290,7 @@ switch ($_GET['sty_t'])
 			if ($SQL->build($update_query))
 			{
 				//delete cache ..
-				delete_cache($style_id . '_' . $tpl_name);
+				delete_cache('tpl_' . $tpl_name);
 				//show msg
 				$link	= './admin.php?cp=styles&amp;style_choose=' . $style_id . '&amp;method=1';
 				$text	= $lang['TPL_UPDATED'] . '<br /> <a href="' . $link . '">' . $lang['GO_BACK_BROWSER'] . '</a><meta HTTP-EQUIV="REFRESH" content="1; url=' . $link . '">' ."\n";

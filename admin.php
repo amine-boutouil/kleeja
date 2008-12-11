@@ -82,12 +82,16 @@
 	//make array for menu 
 	$adm_extensions_menu	=	array();
 	
+	//re oreder the items as alphapatic !
+	sort($adm_extensions);
+	$i = 0;
+	
 	foreach($adm_extensions as $m)
 	{
 		//some exceptions
 		if(@in_array($m, $ext_expt)) continue;
-		
-		$adm_extensions_menu[]	=	array(	'icon'	=> (file_exists('./images/style/admin/' . $m . '_button.gif'))	? './images/style/admin/' . $m . '_button.gif' : './images/style/admin/no_icon_button.gif',
+		++$i;
+		$adm_extensions_menu[$i] = array(	'icon'	=> (file_exists('./images/style/admin/' . $m . '_button.gif'))	? './images/style/admin/' . $m . '_button.gif' : './images/style/admin/no_icon_button.gif',
 											'lang'	=>	($lang['R_'. strtoupper($m)]) ? $lang['R_'. strtoupper($m)]: (($lang[strtoupper($m)]) ? $lang[strtoupper($m)] : strtoupper($m)),
 											'link'	=>	'admin.php?cp=' . $m,
 										);

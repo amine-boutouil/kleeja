@@ -28,7 +28,11 @@ switch ($_GET['sty_t'])
 					);
 						
 		$result = $SQL->build($query);
-
+		
+		//admin style
+		$arr = array();
+		$arr[] = array('style_id' => 0, 'style_name' => 'admin', 'selected'=>''); 
+		
 		while($row=$SQL->fetch_array($result))
 		{
 				$arr[] = array( 'style_id'	=> $row['list_id'],
@@ -37,6 +41,7 @@ switch ($_GET['sty_t'])
 							);
 
 		}
+		
 		$SQL->freeresult($result);
 	
 
@@ -50,7 +55,7 @@ switch ($_GET['sty_t'])
 		
 		if (isset($_POST['submit']))
 		{
-			$style_id 		= intval($_POST['style_choose']);
+			$style_id = intval($_POST['style_choose']);
 			
 			switch($_POST['method'])
 			{
@@ -58,7 +63,7 @@ switch ($_GET['sty_t'])
 					//for style ..
 					$stylee = "admin_show_tpls";
 					//words
-					$action 		= "admin.php?cp=styles&sty_t=style_orders";
+					$action = "admin.php?cp=styles&sty_t=style_orders";
 					
 					//get_tpls
 					$query = array(
@@ -83,8 +88,8 @@ switch ($_GET['sty_t'])
 			
 				case '2': // del the style
 				
-						//style number 1 not for deleting 
-						if($style_id != 1)
+						//style number 1, 0 not for deleting 
+						if($style_id != 1 && $style_id != 0)
 						{
 							$query_del = array(
 											'DELETE'	=> "{$dbprefix}lists",

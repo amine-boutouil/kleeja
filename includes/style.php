@@ -134,18 +134,27 @@ class kleeja_style
 			
 			if(empty($config['style'])) $config['style'] = 1;
 			
-					$query = array(
-								'SELECT'	=> 't.template_content',
-								'FROM'		=> "{$dbprefix}templates t",
-								'WHERE'		=>	"t.style_id='". (int) $config['style'] ."' AND t.template_name='" . (string) $template_name . "'"
-								);
-				$result	=	$SQL->build($query);
-				$template_content = $SQL->fetch_array($result);
+			$style_id = $config['style'];
+			
+			//admin style id is 0 
+			//so 
+			if(substr($template_name, 0, 6) == 'admin_')
+			{
+				$style_id = 0;
+			}
+			
+			$query = array(
+							'SELECT'	=> 't.template_content',
+							'FROM'		=> "{$dbprefix}templates t",
+							'WHERE'		=>	"t.style_id='". (int) $style_id ."' AND t.template_name='" . (string) $template_name . "'"
+						);
+			$result	=	$SQL->build($query);
+			$template_content = $SQL->fetch_array($result);
 
 				
 				if(!$template_content['template_content'] || empty($template_content['template_content'])) 
 				{
-					if($config['style'] != 1)
+					if($style_id != 1)
 					{
 						$query['FROM'] .= ", {$dbprefix}lists l";
 						$query['WHERE'] = "(t.style_id='1' OR (l.list_name='default' AND t.style_id=l.list_id)) AND t.template_name='" . (string) $template_name . "'";
@@ -163,7 +172,6 @@ class kleeja_style
 				flock($filename, LOCK_EX); // exlusive look
 				fwrite($filename, $this->HTML);
 				fclose($filename);
-
 		}
 		
 		//show it

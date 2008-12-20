@@ -72,13 +72,10 @@
 					if ($sen[$row[id]])
 					{
 							$to      = $row['mail'];
-							$subject = $lang['REPLY_REPORT'] . ':'.$config['sitename'];
+							$subject = $lang['REPLY_REPORT'] . ':' . $config['sitename'];
 							$message = "\n " . $lang['WELCOME'] . " ".$row['name']."\r\n " . $lang['U_REPORT_ON'] . " ".$config['sitename']. "\r\n " . $lang['BY_EMAIL'] . ": ".$row['mail']."\r\n" . $lang['ADMIN_REPLIED'] . ": \r\n".$sen[$row['id']]."\r\n\r\n Kleeja Script";
-							$headers =	'From: '. $config['sitename']. '<'. $config['sitemail']. '>' . "\r\n" .
-										'MIME-Version: 1.0' . "\r\n" .
-										'X-Mailer: PHP/' . phpversion();
-										
-							$send =  @mail($to, $subject, $message, $headers);
+							
+							$send =  send_mail($to, $message, $subject, $config['sitemail'], $config['sitename']);
 							
 							if (!$send)
 							{

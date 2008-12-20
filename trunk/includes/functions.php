@@ -488,7 +488,7 @@ function creat_style_xml($contents, $def=false)
 					$insert_query = array(
 											'INSERT'	=> 'list_name, list_author, list_type',
 											'INTO'		=> "{$dbprefix}lists",
-											'VALUES'	=> "'".$style_info['style_name']['value']."','".$style_info['style_author']['value']."', '1'"
+											'VALUES'	=> "'" . $style_info['style_name']['value'] . "','" . $style_info['style_author']['value'] . "', '1'"
 											);
 					($hook = kleeja_run_hook('qr_select_styleinfo_crtxmlstyle_func')) ? eval($hook) : null; //run hook	
 					$SQL->build($insert_query);
@@ -501,7 +501,7 @@ function creat_style_xml($contents, $def=false)
 						//update
 						$update_query = array(
 												'UPDATE'	=> "{$dbprefix}config",
-												'SET'		=> "value='". $new_style_id ."'",
+												'SET'		=> "value='" . $new_style_id . "'",
 												'WHERE'		=> "`name`='style'"
 											);
 										
@@ -516,13 +516,14 @@ function creat_style_xml($contents, $def=false)
 					//insert templates
 					foreach($template_s as $tpls)
 					{
-						$template_name		= $SQL->real_escape($tpls['attributes']['name']);
-						$template_content		= $SQL->real_escape($tpls['value']);
+						$style_id = (substr($template_name, 0, 6) == 'admin_') ? 0 : $new_style_id;
+						$template_name = $SQL->real_escape($tpls['attributes']['name']);
+						$template_content = $SQL->real_escape($tpls['value']);
 						
 						$insert_query = array(
 											'INSERT'	=> 'style_id, template_name, template_content',
 											'INTO'		=> "{$dbprefix}templates",
-											'VALUES'	=> "'$new_style_id','$template_name', '$template_content'"
+											'VALUES'	=> "'$style_id','$template_name', '$template_content'"
 											);
 						($hook = kleeja_run_hook('qr_insert_tpls_crtxmlstyle_func')) ? eval($hook) : null; //run hook	
 						$SQL->build($insert_query);
@@ -619,13 +620,13 @@ function creat_plugin_xml($contents)
 
 				$gtree = xml_to_array($contents);
 				
-				$tree					=	$gtree['kleeja'];
-				$plg_info			=	$tree['info'];
-				$plg_install		=	$tree['install'];
-				$plg_uninstall	=	$tree['uninstall'];
-				$plg_tpl			=	$tree['templates'];		
-				$plg_hooks		=	$tree['hooks'];		
-				$plg_langs			=	$tree['langs'];		
+				$tree				= $gtree['kleeja'];
+				$plg_info			= $tree['info'];
+				$plg_install		= $tree['install'];
+				$plg_uninstall		= $tree['uninstall'];
+				$plg_tpl			= $tree['templates'];		
+				$plg_hooks			= $tree['hooks'];		
+				$plg_langs			= $tree['langs'];		
 
 				//important tags not exists 
 				if(!isset($plg_info))
@@ -670,12 +671,14 @@ function creat_plugin_xml($contents)
 										case 'add_before_same_line': $action_type =6; break;
 										case 'replace_with': $action_type =1; break;
 									endswitch;
-
+									
+									$style_id = (substr($template_name, 0, 6) == 'admin_') ? 0 : $config['style'];
+									
 									//get template content and do wut we have to do , then updated .. 
 									$query = array(
 													'SELECT'	=> 'template_content',
 													'FROM'		=> "{$dbprefix}templates",
-													'WHERE'		=>	"style_id='".intval($config['style'])."' AND template_name='". $template_name ."'"
+													'WHERE'		=>	"style_id='".intval($style_id)."' AND template_name='". $template_name ."'"
 												);
 									($hook = kleeja_run_hook('qr_select_tplcntedit_crtplgxml_func')) ? eval($hook) : null; //run hook
 									
@@ -699,13 +702,13 @@ function creat_plugin_xml($contents)
 										$update_query = array(
 																'UPDATE'	=> "{$dbprefix}templates",
 																'SET'		=> "template_content = '". $SQL->real_escape($finder->text) ."'",
-																'WHERE'		=>	"style_id='". intval($config['style']) ."' AND template_name='". $template_name . "'"
+																'WHERE'		=>	"style_id='". intval($style_id) ."' AND template_name='". $template_name . "'"
 															);
 										($hook = kleeja_run_hook('qr_update_tplcntedit_crtplgxml_func')) ? eval($hook) : null; //run hook
 										if ($SQL->build($update_query))
 										{
 												//delete cache ..
-												delete_cache($config['style'] . '_' .$template_name);
+												delete_cache('tpl_' .$template_name);
 										}
 									}
 								}
@@ -725,13 +728,14 @@ function creat_plugin_xml($contents)
 							
 								foreach($plg_tpl['new']['template'] as $temp)
 								{
+									$style_id = (substr($template_name, 0, 6) == 'admin_') ? 0 : $config['style'];
 									$template_name		=	$SQL->real_escape($temp['attributes']['name']);
-									$template_content		=	$SQL->real_escape($temp['value']);
+									$template_content	=	$SQL->real_escape($temp['value']);
 
 									$insert_query = array(
 																'INSERT'	=> 'style_id, template_name, template_content',
 																'INTO'		=> "{$dbprefix}templates",
-																'VALUES'	=> "'". $config['style']."','$template_name', '$template_content'"
+																'VALUES'	=> "'" . $style_id . "','$template_name', '$template_content'"
 																);
 									($hook = kleeja_run_hook('qr_insert_newtpls_crtplgxml_func')) ? eval($hook) : null; //run hook
 									$SQL->build($insert_query);		
@@ -1128,6 +1132,36 @@ function kj_lang($word, $trans, $language=false)
 	}
 
 }
+
+/*
+* send email
+*/
+function send_mail($to, $body, $subject, $fromaddress, $fromname,$bcc='')
+{
+		$eol="\r\n";
+		$headers	='';
+		$headers .= 'From: ' . $fromname . ' <' . $fromaddress . '>' . $eol;
+		$headers .= 'Sender: ' . $fromname . ' <' . $fromaddress . '>' . $eol;
+		if (!empty($bcc)) $headers .= 'Bcc: ' . $bcc . $eol;
+		$headers .= 'Reply-To: ' . $fromaddress . $eol;
+		$headers .= 'Return-Path: <' . $fromaddress . '>' . $eol;
+		$headers .= 'MIME-Version: 1.0' . $eol;
+		$headers .= 'Message-ID: <' . md5(uniqid(time())) . '@' . $fromname . '>' . $eol;
+		$headers .= 'Date: ' . date('r', time()) . $eol;
+		$headers .= 'Content-Type: text/plain; charset=UTF-8' . $eol; // format=flowed
+		$headers .= 'Content-Transfer-Encoding: 8bit' . $eol; // 7bit
+		$headers .= 'X-Priority: 3' . $eol;
+		$headers .= 'X-MSMail-Priority: Normal' . $eol;
+		$headers .= 'X-Mailer: : PHP v' . phpversion() . $eol;
+		$headers .= 'X-MimeOLE: kleeja' . $eol;
+		
+		($hook = kleeja_run_hook('kleeja_send_mail')) ? eval($hook) : null; //run hook
+		
+		$mail_sent = @mail($to, $subject, preg_replace("#(?<!\r)\n#s", "\n", $body), $headers);
+  
+  return $mail_sent;
+}
+
 
 /*
 * get remote files

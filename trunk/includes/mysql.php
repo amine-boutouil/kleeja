@@ -59,11 +59,11 @@ class SSQL
 								{
 									if($bad_forum != false)
 									{
-										mysql_query("SET NAMES latin1_swedish_ci");
+										//mysql_query("SET NAMES latin1_swedish_ci");
 									}
 									else
 									{
-										if ($this->mysql_version>='4.1.0') mysql_query("SET NAMES 'utf8'");
+										mysql_query("SET NAMES 'utf8'");
 									}
 								}
 								else if(!$dbselect)

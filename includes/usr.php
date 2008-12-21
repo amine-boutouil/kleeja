@@ -19,7 +19,7 @@ class usrcp
 {
 
 
-				// this function like  traffic sign :)
+				// this function like a traffic sign :)
 				function data ($name, $pass)
 				{
 					global $config;
@@ -125,7 +125,8 @@ class usrcp
 					
 					//conecting ...		
 					$SQLBB	= new SSQL($forum_srv,$forum_user,$forum_pass,$forum_db);
-					//$SQLBB	= new SSQL($forum_srv,$forum_user,$forum_pass,$forum_db, true);
+					$charset_db = mysql_client_encoding($SQLBB);
+					
 					unset($forum_pass); // We do not need this any longe
 					
 					//phpbb3
@@ -162,18 +163,34 @@ class usrcp
 					}
 					else//phpbb2
 					{
-						//header("Content-Type: text/html; charset=Windows-1256");
-						
-						$pass			= md5($pass);
-						$row_leve		=	'user_level';
-						$admin_level	=	1;
 
+						$row_leve		= 'user_level';
+						$admin_level	= 1;
+						
+						//change it with iconv, i dont care if you enabled it or not 
+						if(strpos(strtolower($charset_db), 'utf8') === false)
+						{
+							//no iconv !
+							if(!function_exists('iconv'))
+							{
+								big_error('No support for ICONV', 'You must enable the ICONV library to integrate kleeja with your forum. You can solve your problem by changing your forum db charset to UTF8.');
+							}
+							else
+							{
+								$name_b = iconv(strtoupper($charset_db), "UTF-8", $name);
+								$pass_b = iconv(strtoupper($charset_db), "UTF-8", $pass);
+							}
+						}
+						else
+						{
+							$name_b = $name;
+							$pass_b = $pass;
+						}
+						
 						$query = array(
 											'SELECT'	=> '*',
 											'FROM'		=> "`{$forum_prefix}users`",
-											'WHERE'		=>"username='". $SQLBB->escape($name) ."' AND user_password='$pass'"
-											//'WHERE'		=> "username=CONVERT( _utf8 '". $SQLBB->escape($name)."' USING latin1 ) COLLATE latin1_swedish_ci  AND user_password=CONVERT( _utf8 '". $pass."' USING latin1 ) COLLATE latin1_swedish_ci "
-
+											'WHERE'		=>"username='". $SQLBB->escape($name_b) ."' AND user_password='" . md5($pass_b) . "'"
 											);
 								
 					}
@@ -208,26 +225,45 @@ class usrcp
 						return false;
 					}
 				}
-				function vb ($name,$pass)
+				
+				
+				function vb ($name, $pass)
 				{
-				// i hate vb .. i cant feel my self use it ... 
-				global $forum_srv,$forum_user,$forum_pass,$forum_db;
-				global $forum_prefix;
-
-					//header("Content-Type: text/html; charset=Windows-1256");
-					$pass = md5($pass);
+					// ok, i dont hate vb .. but i cant feel my self use it ... 
+					global $forum_srv,$forum_user,$forum_pass,$forum_db;
+					global $forum_prefi
 					
 					//fix bug .. 
 					if(empty($forum_srv) || empty($forum_user) || empty($forum_db)) return;
 					
-					//$SQLVB	= new SSQL($forum_srv,$forum_user,$forum_pass,$forum_db, true);
 					$SQLVB	= new SSQL($forum_srv,$forum_user,$forum_pass,$forum_db);
+					$charset_db = mysql_client_encoding($SQLVB);
 					unset($forum_pass); // We do not need this any longe
 					
+						//change it with iconv, i dont care if you enabled it or not 
+						if(strpos(strtolower($charset_db), 'utf8') === false)
+						{
+							//no iconv !
+							if(!function_exists('iconv'))
+							{
+								big_error('No support for ICONV', 'You must enable the ICONV library to integrate kleeja with your forum. You can solve your problem by changing your forum db charset to UTF8.');
+							}
+							else
+							{
+								$name_b = iconv(strtoupper($charset_db), "UTF-8", $name);
+								$pass_b = iconv(strtoupper($charset_db), "UTF-8", $pass);
+							}
+						}
+						else
+						{
+							$name_b = $name;
+							$pass_b = $pass;
+						}
+						
 					$query_salt = array(
 								'SELECT'	=> 'salt',
 								'FROM'		=> "`{$forum_prefix}user`",
-								'WHERE'		=> "username='". $SQLVB->escape($name) ."'"
+								'WHERE'		=> "username='". $SQLVB->escape($name_b) ."'"
 								);
 								
 					($hook = kleeja_run_hook('qr_select_usrdata_vb_usr_class')) ? eval($hook) : null; //run hook				
@@ -243,8 +279,7 @@ class usrcp
 							$query = array(
 										'SELECT'	=> '*',
 										'FROM'		=> "`{$forum_prefix}user`",
-										'WHERE'		=> "username='". $SQLVB->escape($name)."' AND password='$pass'"
-										//'WHERE'		=> "username=CONVERT( _utf8 '". $SQLVB->escape($name)."' USING latin1 ) COLLATE latin1_swedish_ci  AND password=CONVERT( _utf8 '". $pass."' USING latin1 ) COLLATE latin1_swedish_ci "
+										'WHERE'		=> "username='". $SQLVB->escape($name)."' AND password='" . md5($pass_b) ."'"
 										);
 											
 							$result = $SQLVB->build($query);
@@ -284,27 +319,47 @@ class usrcp
 						return false;
 					}
 				}
+				
+				
 				//mysmartbb
-				function mysmartbb ($name,$pass)
+				function mysmartbb ($name, $pass)
 				{
-				global $forum_srv,$forum_user,$forum_pass,$forum_db;
-				global $forum_prefix;
+					global $forum_srv,$forum_user,$forum_pass,$forum_db;
+					global $forum_prefix;
 				
-				
-					$pass = md5($pass);
 					
 					//fix bug .. 
 					if(empty($forum_srv) || empty($forum_user) || empty($forum_db)) return;
 					
 					
-					$SQLMS	= new SSQL($forum_srv,$forum_user,$forum_pass,$forum_db);
-
+					$SQLMS	= new SSQL($forum_srv, $forum_user, $forum_pass, $forum_db);
+					$charset_db = mysql_client_encoding($SQLMS);
 					unset($forum_pass); // We do not need this any longe
+					
+						//change it with iconv, i dont care if you enabled it or not 
+						if(strpos(strtolower($charset_db), 'utf8') === false)
+						{
+							//no iconv !
+							if(!function_exists('iconv'))
+							{
+								big_error('No support for ICONV', 'You must enable the ICONV library to integrate kleeja with your forum. You can solve your problem by changing your forum db charset to UTF8.');
+							}
+							else
+							{
+								$name_b = iconv(strtoupper($charset_db), "UTF-8", $name);
+								$pass_b = iconv(strtoupper($charset_db), "UTF-8", $pass);
+							}
+						}
+						else
+						{
+							$name_b = $name;
+							$pass_b = $pass;
+						}
 					
 					$query = array(
 								'SELECT'	=> '*',
 								'FROM'		=> "`{$forum_prefix}member`",
-								'WHERE'		=> "username='". $SQLMS->escape($name)."' AND password='$pass'"
+								'WHERE'		=> "username='" . $SQLMS->escape($name_b) . "' AND password='" . md5($pass_b) . "'"
 								);
 								
 					($hook = kleeja_run_hook('qr_select_usrdata_mysbb_usr_class')) ? eval($hook) : null; //run hook	
@@ -316,11 +371,11 @@ class usrcp
 					
 						while($row=$SQLMS->fetch_array($result))
 						{
-							$_SESSION['USER_ID']	=	$row['id'];
-							$_SESSION['USER_NAME']	=	$row['username'];
-							$_SESSION['USER_MAIL']	=	$row['email'];
-							$_SESSION['USER_ADMIN']	=	($row['usergroup'] == 1) ? 1 : 0;
-							$_SESSION['USER_SESS']	=	session_id();
+							$_SESSION['USER_ID']	= $row['id'];
+							$_SESSION['USER_NAME']	= $row['username'];
+							$_SESSION['USER_MAIL']	= $row['email'];
+							$_SESSION['USER_ADMIN']	= ($row['usergroup'] == 1) ? 1 : 0;
+							$_SESSION['USER_SESS']	= session_id();
 							($hook = kleeja_run_hook('qr_while_usrdata_mysbb_usr_class')) ? eval($hook) : null; //run hook
 							
 						}
@@ -346,7 +401,7 @@ class usrcp
 				{
 					global $dbprefix, $SQL;
 					
-					if(!$user_id) $user_id	=	$this->id();
+					if(!$user_id) $user_id	= $this->id();
 					
 					//te get files and update them !!
 					$query_name = array(
@@ -453,7 +508,7 @@ class usrcp
 						}
 						else
 						{
-						return false;
+							return false;
 						}
 				}
 

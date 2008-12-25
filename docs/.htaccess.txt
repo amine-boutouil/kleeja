@@ -2,7 +2,7 @@ Options +FollowSymLinks
 RewriteEngine on
 RewriteRule ^index.html$ index.php
 RewriteRule ^download([0-9]*).html$ download.php?id=$1
-RewriteRule ^down-([a-zA-Z0-9_-.]*)-([a-zA-Z0-9_-]*)-([0-9]*).html$ download.php?down=$3
+RewriteRule ^down-([0-9]*).html$ download.php?down=$3
 RewriteRule ^report_([0-9]*).html$ go.php?go=report&id=$1
 RewriteRule ^call.html$ go.php?go=call
 RewriteRule ^guide.html$ go.php?go=guide

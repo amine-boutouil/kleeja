@@ -231,12 +231,12 @@ class usrcp
 				{
 					// ok, i dont hate vb .. but i cant feel my self use it ... 
 					global $forum_srv,$forum_user,$forum_pass,$forum_db;
-					global $forum_prefi
+					global $forum_prefix;
 					
 					//fix bug .. 
 					if(empty($forum_srv) || empty($forum_user) || empty($forum_db)) return;
 					
-					$SQLVB	= new SSQL($forum_srv,$forum_user,$forum_pass,$forum_db);
+					$SQLVB	= new SSQL($forum_srv, $forum_user, $forum_pass, $forum_db);
 					$charset_db = mysql_client_encoding($SQLVB);
 					unset($forum_pass); // We do not need this any longe
 					

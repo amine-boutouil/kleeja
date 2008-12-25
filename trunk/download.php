@@ -22,6 +22,7 @@ include ('includes/common.php');
 if (isset($_GET['id']) || isset($_GET['filename']))
 {
 			
+			
 			$query = array(
 						'SELECT'	=> 'f.id, f.name, f.folder, f.size, f.time, f.uploads, f.type',
 						'FROM'		=> "{$dbprefix}files f",
@@ -29,13 +30,13 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 					
 			if(isset($_GET['id']))
 			{
-				$id = intval($_GET['id']);
-				$query['WHERE']	=	"id=" . $id . "";
+				$id_l = intval($_GET['id']);
+				$query['WHERE']	=	"id=" . $id_l . "";
 			}
 			elseif (isset($_GET['filename']))
 			{
-				$name 	= (string) $SQL->escape($_GET['filename']);
-				$query['WHERE']	=	"name='" . $name . "'";
+				$filename_l 	= (string) $SQL->escape($_GET['filename']);
+				$query['WHERE']	=	"name='" . $filename_l . "'";
 			}
 			
 			($hook = kleeja_run_hook('qr_download_id_filename')) ? eval($hook) : null; //run hook
@@ -45,12 +46,14 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 			{
 				while($row=$SQL->fetch_array($result))
 				{
-						@extract ($row);
+					 @extract ($row);
 				}
 				$SQL->freeresult($result);
 
+
+				
 				// some vars
-				$url_file	= ($config['mod_writer']) ? $config['siteurl'] . "down-" . $name . "-" . $folder . "-" . $id . ".html" : $config['siteurl'] . "download.php?down=" . $id;
+				$url_file	= ($config['mod_writer']) ? $config['siteurl'] . "down-" . $id . ".html" : $config['siteurl'] . "download.php?down=" . $id;
 				$seconds_w	= $config['sec_down'];
 				$time		= date("d-m-Y H:a", $time);
 				$size		= Customfile_size($size);
@@ -60,7 +63,9 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 			}
 			else
 			{
-				kleeja_err($lang['FILE_NO_FOUNDED']);
+					//file not exists
+					($hook = kleeja_run_hook('not_exists_qr_downlaod_file')) ? eval($hook) : null; //run hook
+					kleeja_err($lang['FILE_NO_FOUNDED']);
 			}
 			
 			($hook = kleeja_run_hook('b4_showsty_downlaod_id_filename')) ? eval($hook) : null; //run hook
@@ -75,149 +80,21 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 }
 
 //
-//page for update images vists and redirect  to it
-//
-else if(isset($_GET['img']))
-{
-			//for safe
-			$img = intval($_GET['img']);
-			
-			$query = array(
-									'SELECT'=> 'f.name, f.folder, f.type',
-									'FROM'	=> "{$dbprefix}files f",
-									'WHERE'	=> 'f.id=' . $img
-								);
-					
-			($hook = kleeja_run_hook('qr_download_img')) ? eval($hook) : null; //run hook
-			$result	=	$SQL->build($query);
-			
-			if ($SQL->num_rows($result) != 0)
-			{
-				while($row=$SQL->fetch_array($result))
-				{
-					$n	=  $row['name'];
-					$f	=  $row['folder'];
-					$t	=  $row['type'];
-				}
-			}
-			else
-			{
-				($hook = kleeja_run_hook('not_exists_qr_downlaod_img')) ? eval($hook) : null; //run hook
-				header("Location: ./images/not_exists.jpg");
-			}
-			
-			$SQL->freeresult($result);
-
-			//update ups
-			$update_query = array(
-										'UPDATE'=> "{$dbprefix}files",
-										'SET'	=> 'uploads=uploads+1,last_down='.time(),
-										'WHERE'	=> 'id="' . $img . '"',
-									);
-
-			($hook = kleeja_run_hook('qr_update_download_img')) ? eval($hook) : null; //run hook
-			if (!$SQL->build($update_query)){ die($lang['CANT_UPDATE_SQL']);}
-
-			//must be img
-			if (!in_array(strtolower($t), array('png', 'gif', 'jpg', 'jpeg', 'tif', 'tiff')))
-			{
-				$text = $lang['NOT_IMG'] . '<br /><a href="' . (($config['mod_writer']) ?  $config['siteurl'] . 'download' . $img . '.html': $config['siteurl'] . "download.php?id=$img") . '">' . $lang['CLICK_DOWN'] . '</a>';
-				kleeja_err($text);
-			}
-			else
-			{
-				// if there is images ... 				
-					if(file_exists("./$f/$n"))
-					{
-						($hook = kleeja_run_hook('y_exists_downlaod_img')) ? eval($hook) : null; //run hook
-						header("Location: ./$f/$n");
-					}
-					else
-					{ 
-						($hook = kleeja_run_hook('not_exists_fi_downlaod_img')) ? eval($hook) : null; //run hook
-						header("Location: ./images/not_exists.jpg");
-					}
-			}
-}
-
-//
-//get thumb of image
-//
-else if(isset($_GET['thmb']))
-{
-			//for safe
-			$thmb = intval ($_GET['thmb']);
-			
-			$query = array(
-								'SELECT'=> 'f.name, f.folder, f.type',
-								'FROM'	=> "{$dbprefix}files f",
-								'WHERE'	=> "f.id='" . $thmb . "'"
-							);
-					
-			($hook = kleeja_run_hook('qr_download_thmb')) ? eval($hook) : null; //run hook
-			$result	=	$SQL->build($query);
-			
-			if ($SQL->num_rows($result) != 0 )
-			{
-				while($row=$SQL->fetch_array($result))
-				{
-					$n	= $row['name'];
-					$f	= $row['folder'];
-					$t	= $row['type'];
-				}
-			}
-			else
-			{
-				($hook = kleeja_run_hook('not_exists_qr_downlaod_thmb')) ? eval($hook) : null; //run hook
-				header("Location: ./images/not_exists.jpg");
-			}
-			
-			$SQL->freeresult($result);
-			
-			//paths
-			$image_path = "./{$f}/{$n}";
-			$image_thumb_path = "./{$f}/thumbs/{$n}";
-			
-			//must be img
-			if (!in_array(strtolower($t), array('png', 'gif', 'jpg', 'jpeg', 'tif', 'tiff')))
-			{
-				// if there is images ... 
-					if(file_exists($image_path))
-					{
-						($hook = kleeja_run_hook('y_exists_downlaod_img_inth')) ? eval($hook) : null; //run hook
-						header("Location: {$image_path}");
-					}
-					else
-					{
-						($hook = kleeja_run_hook('not_exists_fi_downlaod_img_inth')) ? eval($hook) : null; //run hook
-						header("Location: ./images/not_exists.jpg");
-					}
-				
-				
-			}
-			else
-			{
-				($hook = kleeja_run_hook('y_exists_downlaod_thmb')) ? eval($hook) : null; //run hook
-				header("Location: {$image_thumb_path}");
-			}
-
-}
-
-//
 //download file 
 //
-else if (isset($_GET['down']))
+else if (isset($_GET['down']) || isset($_GET['img']) || isset($_GET['thmb']))
 {
 		($hook = kleeja_run_hook('begin_down_go_page')) ? eval($hook) : null; //run hook	
 		
-		//for safe
-			$id	= intval($_GET['down']);
+			//for safe
+			$id = isset($_GET['down']) ? intval($_GET['down']) : (isset($_GET['img']) ? intval($_GET['img']) : (isset($_GET['thmb']) ? intval($_GET['thmb']) : null));
+		
 			$REFERER = !empty($_SERVER['HTTP_REFERER']) ? strtolower($_SERVER['HTTP_REFERER']) : strtolower(getenv('HTTP_REFERER'));
-			if ($REFERER != '' && strpos($_SERVER['HTTP_REFERER'], 'download') === false)
+			if ($REFERER != '' && strpos($_SERVER['HTTP_REFERER'], 'download') === false && !(isset($_GET['thmb']) || isset($_GET['img'])))
 			{
 				$linkoo	= ($config['mod_writer']) ?	'./download' . $id . '.html' : './download.php?id=' . $id;
 				header('Location: ' . $linkoo);
-			
+				exit;
 			}
 			else
 			{
@@ -236,7 +113,7 @@ else if (isset($_GET['down']))
 				$query = array(
 							'SELECT'	=> 'f.id, f.name, f.folder',
 							'FROM'		=> "{$dbprefix}files f",
-							'WHERE'		=>	"id=" . $id . "";
+							'WHERE'		=>	"id=" . $id . ""
 						);		
 						
 				
@@ -247,19 +124,31 @@ else if (isset($_GET['down']))
 				{
 					while($row=$SQL->fetch_array($result))
 					{
-							$n = $row['name'];
-							$f = $row['folder'];
+						$n = $row['name'];
+						$f = $row['folder'];
 					}
 					$SQL->freeresult($result);
 				}
 				else
 				{
-					die('No requested file');
+					//not exists img or thumb
+					if(isset($_GET['img']) || isset($_GET['thmb']))
+					{
+						($hook = kleeja_run_hook('not_exists_qr_down_img')) ? eval($hook) : null; //run hook
+						header("Location: ./images/not_exists.jpg");
+						exit;
+					}
+					else
+					{
+						//not exists file
+						($hook = kleeja_run_hook('not_exists_qr_down_file')) ? eval($hook) : null; //run hook
+						kleeja_err($lang['FILE_NO_FOUNDED']);
+					}
 				}
 				
-				
+
 				//downalod porcess
-				$path_file = "./{$f}/{$n}";
+				$path_file = isset($_GET['thmb']) ? "./{$f}/thumbs/{$n}" : "./{$f}/{$n}";
 				$chunksize = 1*(1024*1024); //size that will send to user every second
 				
 				($hook = kleeja_run_hook('down_go_page')) ? eval($hook) : null; //run hook	
@@ -267,8 +156,8 @@ else if (isset($_GET['down']))
 				//start download ,,
 				if(!is_readable($path_file)) die('Error, file not exists');
 				$size = filesize($path_file);
-				$name = rawurldecode($name);
-				/* Figure out the MIME type (if not specified) */
+				$name = rawurldecode($n);
+				//Figure out the MIME type (if not specified) 
 				$ext = explode('.', $path_file);
 				$ext = array_pop($ext);
 				$mime_type = get_mime_for_header($ext);
@@ -336,7 +225,7 @@ else if (isset($_GET['down']))
 }
 
 //
-//no one of above are there, you can you hooks to get more actions here
+//no one of above are there, you can use this hook to get more actions here
 //
 else
 {

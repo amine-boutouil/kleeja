@@ -108,8 +108,8 @@ class usrcp
 				
 				function phpbb ($name,$pass)
 				{
-					global $forum_srv,$forum_user,$forum_pass,$forum_db;
-					global $forum_prefix,$forum_path,$SQLBB ,$phpEx,$phpbb_root_path;
+					global $forum_srv, $forum_user, $forum_pass, $forum_db, $forum_charset;
+					global $forum_prefix, $forum_path,$SQLBB, $phpEx, $phpbb_root_path;
 				
 					//fix bug .. 
 					if(empty($forum_srv) || empty($forum_user) || empty($forum_db)) return;
@@ -121,11 +121,11 @@ class usrcp
 					if($forum_path[0] == '/')
 							$forum_path = '..' . $forum_path;
 					else
-							$forum_path = '../'.$forum_path;
+							$forum_path = '../' . $forum_path;
 					
 					//conecting ...		
 					$SQLBB	= new SSQL($forum_srv,$forum_user,$forum_pass,$forum_db);
-					$charset_db = mysql_client_encoding($SQLBB);
+					$charset_db = empty($forum_charset) ? @mysql_client_encoding() : $forum_charset;
 					
 					unset($forum_pass); // We do not need this any longe
 					
@@ -135,7 +135,7 @@ class usrcp
 						
 						//get utf tools
 						define('IN_PHPBB',true);
-						$phpbb_root_path = $forum_path .'/';
+						$phpbb_root_path = $forum_path . '/';
 						$phpEx = 'php';
 						include_once($forum_path . '/includes/utf/utf_tools.'.$phpEx);
 						
@@ -168,7 +168,7 @@ class usrcp
 						$admin_level	= 1;
 						
 						//change it with iconv, i dont care if you enabled it or not 
-						if(strpos(strtolower($charset_db), 'utf8') === false)
+						if(strpos(substr(0, 3, strtolower($charset_db)), 'utf') === false)
 						{
 							//no iconv !
 							if(!function_exists('iconv'))
@@ -190,7 +190,7 @@ class usrcp
 						$query = array(
 											'SELECT'	=> '*',
 											'FROM'		=> "`{$forum_prefix}users`",
-											'WHERE'		=>"username='". $SQLBB->escape($name_b) ."' AND user_password='" . md5($pass_b) . "'"
+											'WHERE'		=>"username='" . $SQLBB->escape($name_b) . "' AND user_password='" . md5($pass_b) . "'"
 											);
 								
 					}
@@ -231,17 +231,18 @@ class usrcp
 				{
 					// ok, i dont hate vb .. but i cant feel my self use it ... 
 					global $forum_srv,$forum_user,$forum_pass,$forum_db;
-					global $forum_prefix;
+					global $forum_prefix, $forum_charset;
 					
 					//fix bug .. 
 					if(empty($forum_srv) || empty($forum_user) || empty($forum_db)) return;
 					
 					$SQLVB	= new SSQL($forum_srv, $forum_user, $forum_pass, $forum_db);
-					$charset_db = mysql_client_encoding($SQLVB);
+					$charset_db = empty($forum_charset) ? @mysql_client_encoding() : $forum_charset;
+					echo $charset_db;
 					unset($forum_pass); // We do not need this any longe
 					
 						//change it with iconv, i dont care if you enabled it or not 
-						if(strpos(strtolower($charset_db), 'utf8') === false)
+						if(strpos(substr(0, 3, strtolower($charset_db)), 'utf') === false)
 						{
 							//no iconv !
 							if(!function_exists('iconv'))
@@ -263,23 +264,25 @@ class usrcp
 					$query_salt = array(
 								'SELECT'	=> 'salt',
 								'FROM'		=> "`{$forum_prefix}user`",
-								'WHERE'		=> "username='". $SQLVB->escape($name_b) ."'"
+								'WHERE'		=> "username='" . $SQLVB->escape($name_b) . "'"
 								);
 								
 					($hook = kleeja_run_hook('qr_select_usrdata_vb_usr_class')) ? eval($hook) : null; //run hook				
 					$result_salt = $SQLVB->build($query_salt);
 				
-					if ($SQLVB->num_rows($result_salt) != 0) 
+					if ($SQLVB->num_rows($result_salt) > 0) 
 					{
+						echo 'ok1';//debug
 						while($row1=$SQLVB->fetch_array($result_salt))
 						{
-							
-							$pass = md5($pass . $row1['salt']);  // without normal md5
-							
+							echo 'ok2';//debug
+							echo $pass_b;//debug
+							$pass_b = md5(md5($pass_b) . $row1['salt']);  // without normal md5
+							echo '<br/>'.$pass_b;//debug
 							$query = array(
 										'SELECT'	=> '*',
 										'FROM'		=> "`{$forum_prefix}user`",
-										'WHERE'		=> "username='". $SQLVB->escape($name)."' AND password='" . md5($pass_b) ."'"
+										'WHERE'		=> "username='" . $SQLVB->escape($name_b) . "' AND password='" . $pass_b . "'"
 										);
 											
 							$result = $SQLVB->build($query);
@@ -325,7 +328,7 @@ class usrcp
 				function mysmartbb ($name, $pass)
 				{
 					global $forum_srv,$forum_user,$forum_pass,$forum_db;
-					global $forum_prefix;
+					global $forum_prefix, $forum_charset;
 				
 					
 					//fix bug .. 
@@ -333,11 +336,11 @@ class usrcp
 					
 					
 					$SQLMS	= new SSQL($forum_srv, $forum_user, $forum_pass, $forum_db);
-					$charset_db = mysql_client_encoding($SQLMS);
+					$charset_db = empty($forum_charset) ? @mysql_client_encoding() : $forum_charset;
 					unset($forum_pass); // We do not need this any longe
 					
 						//change it with iconv, i dont care if you enabled it or not 
-						if(strpos(strtolower($charset_db), 'utf8') === false)
+						if(strpos(substr(0, 3, strtolower($charset_db)), 'utf') === false)
 						{
 							//no iconv !
 							if(!function_exists('iconv'))

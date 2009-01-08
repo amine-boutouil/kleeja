@@ -341,6 +341,7 @@ function do_config_export($srv, $usr, $pass, $nm, $prf)
 		$data	.= '$forum_pass		= "";'."// forum database password  \n";
 		$data	.= '$forum_prefix	= "";'."//the perfix before name of forum tables  \n";
 		$data	.= '$forum_path		= "/forum";'."// path of forums  \n";
+		$data	.= '$forum_charset	= "";'."// charset of forums  \n";
 		$data	.= "\n\n\n";
 		$data	.= "//for use ftp account to uplaod [ Under Develpment ] \n";
 		$data	.= '$use_ftp		= 0;'."// 1 : yes  - 0 : no   \n";

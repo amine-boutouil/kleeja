@@ -328,7 +328,7 @@ switch ($_GET['go'])
 		$users_st	= $stat_users;
 		$sizes_st	= Customfile_size($stat_sizes);	
 		//$lstfle_st	= $stat_last_file;
-		$lst_dl_st	= date("d-m-Y H:a", $stat_last_f_del);
+		$lst_dl_st	= ((int)$config['del_f_day'] <= 0) ? ' [ ' . $lang['CLOSED_FEATURE'] . ' ] ' : gmdate("d-m-Y H:a", $stat_last_f_del);
 		$s_c_t		= $stat_counter_today;
 		$s_c_y		= $stat_counter_yesterday;
 		$s_c_a		= $stat_counter_all;

@@ -205,7 +205,7 @@ if(!defined('STOP_HOOKS'))
 	if(file_exists("cache/data_stats.php"))
 	{
 		$tfile = filemtime("cache/data_stats.php");
-		if((time()-$tfile) >= 3600)//after 1 hours
+		if((time()-$tfile) >= 3600)//after 1 hours exactly
 		{    
 			unlink("cache/data_stats.php");
 		}
@@ -276,21 +276,22 @@ if(!defined('STOP_HOOKS'))
 	
 //
 // administarator sometime need some files and delete other .. we
-// do that for him .. becuase he has no time .. :)            last_down - $config[del_f_day]
+// do that for him .. becuase he has no time .. :)   
+//last_down - $config[del_f_day]
 //
-if((int) $config['del_f_day'] > 0)
+if((int) $config['del_f_day'] >= 0)
 {
-	if(!$stat_last_f_del || $stat_last_f_del == '') $stat_last_f_del = time();
+	if(!$stat_last_f_del || empty($stat_last_f_del)) $stat_last_f_del = time();
 	
-    if ((time() - $stat_last_f_del) > 86400)
+    if ((time() - $stat_last_f_del) >= 86400)
     {
-		$totaldays	= (time() - ((int) $config['del_f_day']*86400));
-		$not_today	= time() - (86400);
+		$totaldays	= (time() - ($config['del_f_day']*86400));
+		$not_today	= time() - 86400;
 		
 		$query = array(
 					'SELECT'	=> 'f.id, f.last_down, f.name, f.folder, f.time',
 					'FROM'		=> "{$dbprefix}files f",
-					'WHERE'		=> "f.last_down < $totaldays AND f.time > $not_today"
+					'WHERE'		=> "f.last_down < $totaldays AND f.time < $not_today"
 					);
 					
 		($hook = kleeja_run_hook('qr_select_delfiles_cache')) ? eval($hook) : null; //run hook			
@@ -320,6 +321,7 @@ if((int) $config['del_f_day'] > 0)
 		
 	    }#END WHILE
 		
+		
 	    //update $stat_last_f_del !!
 		$update_query = array(
 						'UPDATE'	=> "{$dbprefix}stats",
@@ -327,7 +329,12 @@ if((int) $config['del_f_day'] > 0)
 						);
 						
 		($hook = kleeja_run_hook('qr_update_delfiles_date_cache')) ? eval($hook) : null; //run hook
+		
 		if (!$SQL->build($update_query)) die($lang['CANT_UPDATE_SQL']);
+		
+		//delete stats cache
+		unlink("cache/data_stats.php");
+		
 
     } //stat_del
 }#no automated delete
@@ -338,7 +345,7 @@ if((int) $config['del_f_day'] > 0)
 //
 	if (file_exists($root_path . 'cache/data_ban.php'))
 	{
-		include ($root_path.'cache/data_ban.php');
+		include ($root_path . 'cache/data_ban.php');
 	}
 	
 	if (!$banss or !file_exists($root_path.'cache/data_ban.php'))

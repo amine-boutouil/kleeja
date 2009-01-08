@@ -238,7 +238,7 @@ class usrcp
 					
 					$SQLVB	= new SSQL($forum_srv, $forum_user, $forum_pass, $forum_db);
 					$charset_db = empty($forum_charset) ? @mysql_client_encoding() : $forum_charset;
-					echo $charset_db;
+				
 					unset($forum_pass); // We do not need this any longe
 					
 						//change it with iconv, i dont care if you enabled it or not 
@@ -272,13 +272,12 @@ class usrcp
 				
 					if ($SQLVB->num_rows($result_salt) > 0) 
 					{
-						echo 'ok1';//debug
+	
 						while($row1=$SQLVB->fetch_array($result_salt))
 						{
-							echo 'ok2';//debug
-							echo $pass_b;//debug
+
 							$pass_b = md5(md5($pass_b) . $row1['salt']);  // without normal md5
-							echo '<br/>'.$pass_b;//debug
+
 							$query = array(
 										'SELECT'	=> '*',
 										'FROM'		=> "`{$forum_prefix}user`",

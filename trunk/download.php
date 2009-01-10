@@ -22,7 +22,6 @@ include ('includes/common.php');
 if (isset($_GET['id']) || isset($_GET['filename']))
 {
 			
-			
 			$query = array(
 						'SELECT'	=> 'f.id, f.name, f.folder, f.size, f.time, f.uploads, f.type',
 						'FROM'		=> "{$dbprefix}files f",
@@ -36,7 +35,7 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 			elseif (isset($_GET['filename']))
 			{
 				$filename_l 	= (string) $SQL->escape($_GET['filename']);
-				$query['WHERE']	=	"name='" . $filename_l . "'";
+				$query['WHERE']	= "name='" . $filename_l . "'";
 			}
 			
 			($hook = kleeja_run_hook('qr_download_id_filename')) ? eval($hook) : null; //run hook
@@ -50,8 +49,6 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 				}
 				$SQL->freeresult($result);
 
-
-				
 				// some vars
 				$url_file	= ($config['mod_writer']) ? $config['siteurl'] . "down-" . $id . ".html" : $config['siteurl'] . "download.php?down=" . $id;
 				$seconds_w	= $config['sec_down'];
@@ -86,65 +83,75 @@ else if (isset($_GET['down']) || isset($_GET['img']) || isset($_GET['thmb']))
 {
 		($hook = kleeja_run_hook('begin_down_go_page')) ? eval($hook) : null; //run hook	
 		
-			//for safe
-			$id = isset($_GET['down']) ? intval($_GET['down']) : (isset($_GET['img']) ? intval($_GET['img']) : (isset($_GET['thmb']) ? intval($_GET['thmb']) : null));
+		//for safe
+		$id = isset($_GET['down']) ? intval($_GET['down']) : (isset($_GET['img']) ? intval($_GET['img']) : (isset($_GET['thmb']) ? intval($_GET['thmb']) : null));
+		// worst case default
+		$browser = (!empty($_SERVER['HTTP_USER_AGENT'])) ? htmlspecialchars((string) $_SERVER['HTTP_USER_AGENT']) : 'msie 6.0';
 		
-			$REFERER = !empty($_SERVER['HTTP_REFERER']) ? strtolower($_SERVER['HTTP_REFERER']) : strtolower(getenv('HTTP_REFERER'));
-			if ($REFERER != '' && strpos($_SERVER['HTTP_REFERER'], 'download') === false && !(isset($_GET['thmb']) || isset($_GET['img'])))
-			{
-				$linkoo	= ($config['mod_writer']) ?	'./download' . $id . '.html' : './download.php?id=' . $id;
-				header('Location: ' . $linkoo);
-				exit;
-			}
-			else
-			{
-				//updates ups ..
-				$update_query = array(
-										'UPDATE'	=> "{$dbprefix}files",
-										'SET'		=> 'uploads=uploads+1, last_down=' . time(),
-										'WHERE'		=> "id='" . $id . "'",
-									);
+		//is internet explore 8 ?
+		$is_ie8 = strpos($browser, 'msie 8.0') !== false ? true : false;
+		//is internet explore 6 ?
+		$is_ie6 = strpos($browser, 'msie 6.0') !== false ? true : false;
+		
+		$REFERER = !empty($_SERVER['HTTP_REFERER']) ? strtolower($_SERVER['HTTP_REFERER']) : strtolower(getenv('HTTP_REFERER'));
+		if ($REFERER != '' && strpos($_SERVER['HTTP_REFERER'], 'download') === false && !(isset($_GET['thmb']) || isset($_GET['img'])))
+		{
+			$linkoo	= ($config['mod_writer']) ?	'./download' . $id . '.html' : './download.php?id=' . $id;
+			header('Location: ' . $linkoo);
+			exit;
+		}
+		else
+		{
+			//updates ups ..
+			$update_query = array(
+									'UPDATE'	=> "{$dbprefix}files",
+									'SET'		=> 'uploads=uploads+1, last_down=' . time(),
+									'WHERE'		=> "id='" . $id . "'",
+								);
 
-				($hook = kleeja_run_hook('qr_update_no_uploads_down')) ? eval($hook) : null; //run hook
+			($hook = kleeja_run_hook('qr_update_no_uploads_down')) ? eval($hook) : null; //run hook
 				
-				if (!$SQL->build($update_query)) die($lang['CANT_UPDATE_SQL']);
+			if (!$SQL->build($update_query)) die($lang['CANT_UPDATE_SQL']);
 			
-				//get info file
-				$query = array(
-							'SELECT'	=> 'f.id, f.name, f.folder',
+			//get info file
+			$query = array(
+							'SELECT'	=> 'f.id, f.name, f.folder, f.type',
 							'FROM'		=> "{$dbprefix}files f",
 							'WHERE'		=>	"id=" . $id . ""
 						);		
 						
 				
-				($hook = kleeja_run_hook('qr_down_go_page_filename')) ? eval($hook) : null; //run hook
-				$result	=	$SQL->build($query);
-				
-				if ($SQL->num_rows($result) != 0)
+			($hook = kleeja_run_hook('qr_down_go_page_filename')) ? eval($hook) : null; //run hook
+			$result	=	$SQL->build($query);
+			
+			if ($SQL->num_rows($result) != 0)
+			{
+				while($row=$SQL->fetch_array($result))
 				{
-					while($row=$SQL->fetch_array($result))
-					{
-						$n = $row['name'];
-						$f = $row['folder'];
-					}
-					$SQL->freeresult($result);
+					$n = $row['name'];
+					$f = $row['folder'];
+					//img ot not
+					$is_image = (in_array(trim($row['type']), array('gif', 'jpg', 'jpeg', 'bmp', 'png', 'tiff', 'tif')) ? true : false; 
 				}
-				else
+				
+				$SQL->freeresult($result);
+			}
+			else
+			{
+				//not exists img or thumb
+				if($is_image)
 				{
-					//not exists img or thumb
-					if(isset($_GET['img']) || isset($_GET['thmb']))
-					{
 						($hook = kleeja_run_hook('not_exists_qr_down_img')) ? eval($hook) : null; //run hook
 						header("Location: ./images/not_exists.jpg");
 						exit;
-					}
-					else
-					{
+				}
+				else
+				{
 						//not exists file
 						($hook = kleeja_run_hook('not_exists_qr_down_file')) ? eval($hook) : null; //run hook
 						kleeja_err($lang['FILE_NO_FOUNDED']);
-					}
 				}
+			}
 				
 
 				//downalod porcess
@@ -168,18 +175,29 @@ else if (isset($_GET['down']) || isset($_GET['img']) || isset($_GET['thmb']))
 				{
 					@ini_set('zlib.output_compression', 'Off');
 				}
-				
-				header('Content-Type: ' . $mime_type);
-				header('Content-Disposition: attachment; filename="'  . $name . '"');
-				header("Content-Transfer-Encoding: binary");
+
+				header('Content-Type: ' . $mime_type . (($is_ie8) ? '; authoritative=true;' : ''));
+				if(!$is_image && $is_ie8)
+				{
+					header('X-Download-Options: noopen');
+				}
+				header('Content-Disposition: ' . ($is_image ? 'inline' : 'attachment' ) . ' ; filename="'  . $name . '"');
+				header('Content-Transfer-Encoding: binary');
 				header('Accept-Ranges: bytes');
 				// The three lines below basically make the  download non-cacheable 
-				header("Cache-control: private");
+				header('Cache-control: private');
 				header('Pragma: private');
-				header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+				if($is_ie6)
+				{
+					header('Expires: -1');	
+				}
+				else
+				{
+					header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+				}
 				
 				// multipart-download and download resuming support
-				if(isset($_SERVER['HTTP_RANGE']))
+				if(isset($_SERVER['HTTP_RANGE']) && !$is_image)
 				{
 					list($a, $range) = explode("=", $_SERVER['HTTP_RANGE'], 2);
 					list($range) = explode(",", $range, 2);
@@ -194,20 +212,24 @@ else if (isset($_GET['down']) || isset($_GET['img']) || isset($_GET['thmb']))
 				else
 				{
 					$new_length = $size;
-					header("Content-Length: " . $size);
+					if($size)
+						header("Content-Length: " . $size);
 				}
-		 
+			
 				/* output the file itself */
+				//prevent some limits
+				@set_time_limit(0);
+
 				$bytes_send = 0;
-				if ($file = fopen($file, 'r'))
+				if ($file = fopen($path_file, 'r'))
 				{
-					if(isset($_SERVER['HTTP_RANGE']))
-					fseek($file, $range);
+					if(isset($_SERVER['HTTP_RANGE']) && !$is_image)
+						fseek($file, $range);
 				 
-					while(!feof($file) && (!connection_aborted()) && ($bytes_send < $new_length))
+					while(!feof($file) && (!connection_aborted()) && ($new_length && ($bytes_send < $new_length)))
 					{
 						$buffer = fread($file, $chunksize);
-						print($buffer); 
+						echo $buffer; 
 						flush();
 						$bytes_send += strlen($buffer);
 					}

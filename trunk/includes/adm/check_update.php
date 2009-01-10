@@ -11,7 +11,7 @@
 	}
 
 
-	$version_data			=	fetch_remote_file('http://www.kleeja.com/check_vers/ver_klj1.txt');
+	$version_data =	fetch_remote_file('http://www.kleeja.com/check_vers/ver_klj1.txt');
 	
 		
 	if ($version_data === false)
@@ -25,16 +25,21 @@
 		// there is a file that we brought it !
 		//
 		
-		$version_data	=	trim(htmlspecialchars($version_data));
+		$version_data = trim(htmlspecialchars($version_data));
 		
 		if (version_compare(strtolower(KLEEJA_VERSION),strtolower($version_data), '<'))
 		{
 			$text	= $lang['UPDATE_KLJ_NOW'];
 			$stylee	= "admin_err";
 		}
-		else if (version_compare(strtolower(KLEEJA_VERSION),strtolower($version_data), '>='))
+		else if (version_compare(strtolower(KLEEJA_VERSION),strtolower($version_data), '='))
 		{
 			$text	= $lang['U_LAST_VER_KLJ'];
+			$stylee	= "admin_info";
+		}
+		else if (version_compare(strtolower(KLEEJA_VERSION),strtolower($version_data), '>'))
+		{
+			$text	= 'Pre-release version , click <a href="http://www.kleeja.com/bugs/">here</a> to tell us about any bug you face it.';
 			$stylee	= "admin_info";
 		}
 	}

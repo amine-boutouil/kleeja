@@ -131,7 +131,7 @@ else if (isset($_GET['down']) || isset($_GET['img']) || isset($_GET['thmb']))
 					$n = $row['name'];
 					$f = $row['folder'];
 					//img ot not
-					$is_image = (in_array(trim($row['type']), array('gif', 'jpg', 'jpeg', 'bmp', 'png', 'tiff', 'tif')) ? true : false; 
+					$is_image = in_array(trim($row['type']), array('gif', 'jpg', 'jpeg', 'bmp', 'png', 'tiff', 'tif')) ? true : false; 
 				}
 				
 				$SQL->freeresult($result);

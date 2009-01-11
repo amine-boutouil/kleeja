@@ -4,7 +4,7 @@
 #
 # Filename : KljUplaoder.php
 # purpose :  skeleton of script
-# copyright 2007-2008 Kleeja.com ..
+# copyright 2007-2009 Kleeja.com ..
 #license http://opensource.org/licenses/gpl-license.php GNU Public License
 #class by :  based on class.AksidSars.php  of Nadorino [@msn.com] and he disterbuted for free
 # last edit by : saanina
@@ -198,11 +198,11 @@ function process ()
 			($hook = kleeja_run_hook('no_uploadfolder_kljuploader')) ? eval($hook) : null; //run hook	
 
 			$jadid	=	mkdir($this->folder);
-			$jadid2	=	mkdir($this->folder.'/thumbs');
+			$jadid2	=	mkdir($this->folder . '/thumbs');
 			
 			if($jadid)
 			{
-				$this->errs[]	=	$lang['NEW_DIR_CRT'];
+				$this->errs[] = $lang['NEW_DIR_CRT'];
 				
 				$htaccess_data = '<Files ~ "\.(php*|s?p?x?i?html|cgi|asp|php3|php4|pl|htm|sql)$">deny from all</Files>' . "\n" . 'php_flag engine off';
 				$fo		= @fopen($this->folder . "/index.html","w");
@@ -292,7 +292,7 @@ function process ()
 						{
 							//if no file ? natin to do ,, why ? becuase its multipl fields
 						}
-						elseif(file_exists($this->folder.'/'.$_FILES['file']['name'][$i]))
+						elseif(file_exists($this->folder . '/' . $_FILES['file']['name'][$i]))
 						{
 							$this->errs[]=  '[ ' . $_FILES['file']['name'][$i] . ' ] ' . $lang['SAME_FILE_EXIST'];
 						}
@@ -422,7 +422,7 @@ function process ()
 									{
 										$this->errs[]=  $lang['WRONG_LINK'].$filename ;
 									}
-									elseif(file_exists($this->folder.'/'.$filename))
+									elseif(file_exists($this->folder . '/' . $filename))
 									{
 										$this->errs[]=  '[ ' . $_FILES['file']['name'][$i] . ' ] ' . $lang['SAME_FILE_EXIST'];
 									}

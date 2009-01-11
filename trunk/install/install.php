@@ -34,8 +34,8 @@ case 'gpl2':
 
 	$contentofgpl2 = @file_get_contents('../docs/GPL2.txt');
 	
-	if (strlen($contentofgpl2) < 3 ) 
-				$contentofgpl2 = "CANT FIND 'GPL2.TXT. FILE .. SEARCH ON THE INTERNET ABOUT GPL2";
+	if (strlen($contentofgpl2) < 3) 
+				$contentofgpl2 = "Can't find 'gpl2.txt' file .. search on the web about GPL2";
 
 	print '
 	<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=c&'.get_lang(1).'">
@@ -135,7 +135,7 @@ case 'check':
 
 	$submit_wh = '';
 
-
+		
 	//config,php
 	if (!$dbname || !$dbuser)
 	{
@@ -152,6 +152,15 @@ case 'check':
 	$select = @mysql_select_db($dbname);
 	if (!$select) 
 		$texterr .= '<span style="color:red;">' . $lang['INST_SELECT_ERR'] . '</span><br />';
+		
+		
+	//try to chmod them
+	if(function_exists('chmod'))
+	{	
+		@chmod('../cache', 0777);
+		@chmod('../uploads', 0777);
+		@chmod('../uploads/thumbs', 0777);
+	}
 		
 	if ( !is_writable('../cache') ) 
 			$texterr .= '<span style="color:red;">[cache]: ' . $lang['INST_NO_WRTABLE'] . '</span><br />';

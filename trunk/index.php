@@ -55,13 +55,13 @@
 	$info = array();
 	foreach($kljup->errs as $s )	
 	{
-		$info[] 	= array( 'i' => $s);
+		$info[] = array( 'i' => $s);
 	}
 	
 	//some words for template
 	$welcome_msg	= $config['welcome_msg'];
 	$SAFE_CODE		= ($config['safe_code']) ? $ch->display_captcha(true) : false;
-	$SAFE_CODE2	= ($config['safe_code']) ? str_replace('public_key', 'public_key2',$ch->display_captcha(true)) : false;
+	$SAFE_CODE2		= ($config['safe_code']) ? str_replace('public_key', 'public_key2',$ch->display_captcha(true)) : false;
 
 	//
 	//for who online now..  

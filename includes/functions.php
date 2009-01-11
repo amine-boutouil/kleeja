@@ -3,8 +3,8 @@
 #						Kleeja
 #
 # Filename : functions.php
-# purpose :  cache for all script. the important feature of kleeja
-# copyright 2007-2008 Kleeja.com ..
+# purpose :  functions for all script. the important feature of kleeja
+# copyright 2007-2009 Kleeja.com ..
 #license http://opensource.org/licenses/gpl-license.php GNU Public License
 # last edit by : saanina
 #########################################

@@ -4,7 +4,7 @@
 #
 # Filename : go.php
 # purpose :  File for Navigataion .
-# copyright 2007-2008 Kleeja.com ..
+# copyright 2007-2009 Kleeja.com ..
 #license http://opensource.org/licenses/gpl-license.php GNU Public License
 # last edit by : saanina
 ##################################################
@@ -27,8 +27,8 @@ switch ($_GET['go'])
 		$gusts_data = array();
 		foreach($g_exts as $ext=>$data)
 		{
-			$gusts_data[]	= array(	'ext'	=> $ext,
-										'num'	=> Customfile_size($data['size'])//format size as kb, mb,...
+			$gusts_data[] = array('ext'	=> $ext,
+									'num'	=> Customfile_size($data['size'])//format size as kb, mb,...
 										);
 		}
 
@@ -36,8 +36,8 @@ switch ($_GET['go'])
 		$users_data = array();
 		foreach($u_exts as $ext=>$data)
 		{
-			$users_data[]	=	array(	'ext' => $ext,
-										'num' => Customfile_size($data['size'])//format size as kb, mb,...
+			$users_data[] = array('ext' => $ext,
+									'num' => Customfile_size($data['size'])//format size as kb, mb,...
 										);
 		}
 		
@@ -101,8 +101,7 @@ switch ($_GET['go'])
 					$ip		= (getenv('HTTP_X_FORWARDED_FOR')) ? getenv('HTTP_X_FORWARDED_FOR') : getenv('REMOTE_ADDR');
 
 
-					$insert_query = array(
-											'INSERT'	=> '`name` ,`mail` ,`url` ,`text` ,`time` ,`ip`',
+					$insert_query = array('INSERT'	=> '`name` ,`mail` ,`url` ,`text` ,`time` ,`ip`',
 											'INTO'		=> "`{$dbprefix}reports`",
 											'VALUES'	=> "'$name', '$mail', '$url', '$text', '$time', '$ip'"
 										);
@@ -119,10 +118,9 @@ switch ($_GET['go'])
 					}
 					
 					//update number of reports
-					$update_query = array(
-												'UPDATE'	=> "{$dbprefix}files",
-												'SET'			=> 'report=report+1',
-												'WHERE'	=> 'id=' . $rid,
+					$update_query = array('UPDATE'	=> "{$dbprefix}files",
+											'SET'			=> 'report=report+1',
+											'WHERE'	=> 'id=' . $rid,
 											);
 								
 					($hook = kleeja_run_hook('qr_update_no_file_report')) ? eval($hook) : null; //run hook
@@ -186,19 +184,19 @@ switch ($_GET['go'])
 			
 			if (empty($_POST['cname']) || empty($_POST['cmail']) || empty($_POST['ctext']) )
 			{
-				$ERRORS[]	= $lang['EMPTY_FIELDS'];
+				$ERRORS[] = $lang['EMPTY_FIELDS'];
 			}
 			else if (!eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$", trim(strtolower($_POST['cmail']))))
 			{
-				$ERRORS[]	= $lang['WRONG_EMAIL'];
+				$ERRORS[] = $lang['WRONG_EMAIL'];
 			}
 			else if (strlen($_POST['ctext']) > 300)
 			{
-				$ERRORS[]	= $lang['NO_ME300TEXT'];
+				$ERRORS[] = $lang['NO_ME300TEXT'];
 			}
 			else if (!$ch->check_captcha($_POST['public_key'], $_POST['code_answer']))
 			{
-				$ERRORS[]	= $lang['WRONG_VERTY_CODE'];
+				$ERRORS[] = $lang['WRONG_VERTY_CODE'];
 			}
 			
 			//no errors ,lets do process
@@ -211,8 +209,7 @@ switch ($_GET['go'])
 				$ip		= (int)	(getenv('HTTP_X_FORWARDED_FOR')) ? getenv('HTTP_X_FORWARDED_FOR') : getenv('REMOTE_ADDR');
 					
 
-				$insert_query = array(
-										'INSERT'	=> "`name` ,`text` ,`mail` ,`time` ,`ip`",
+				$insert_query = array('INSERT'	=> "`name` ,`text` ,`mail` ,`time` ,`ip`",
 										'INTO'		=> "`{$dbprefix}call`",
 										'VALUES'	=> "'$name', '$text', '$mail', '$timee', '$ip'"
 										);
@@ -251,7 +248,7 @@ switch ($_GET['go'])
 		//stop .. check first ..
 		if (!$config['del_url_file'])
 		{
-				kleeja_info($lang['NO_DEL_F'], $lang['E_DEL_F']);
+			kleeja_info($lang['NO_DEL_F'], $lang['E_DEL_F']);
 		}
 
 		//ok .. go on
@@ -264,10 +261,9 @@ switch ($_GET['go'])
 		}
 		else
 		{
-			$query = array(
-								'SELECT'=> 'f.id, f.name, f.folder',
-								'FROM'	=> "{$dbprefix}files f",
-								'WHERE'	=> "f.code_del='" . $cd . "'"
+			$query = array('SELECT'=> 'f.id, f.name, f.folder',
+							'FROM'	=> "{$dbprefix}files f",
+							'WHERE'	=> "f.code_del='" . $cd . "'"
 							);
 					
 			($hook = kleeja_run_hook('qr_select_file_with_code_del')) ? eval($hook) : null; //run hook	
@@ -286,7 +282,7 @@ switch ($_GET['go'])
 						//delete thumb
 						if (file_exists($row['folder'] . "/thumbs/" . $row['name']))
 						{
-							@unlink ( $row['folder'] . "/thumbs/" . $row['name'] );
+							@unlink ($row['folder'] . "/thumbs/" . $row['name']);
 						}
 						
 						$query_del = array(
@@ -305,7 +301,8 @@ switch ($_GET['go'])
 							die($lang['CANT_DELETE_SQL']);
 						}
 				}
-					$SQL->freeresult($result);
+				
+				$SQL->freeresult($result);
 			}
 
 		}#else
@@ -353,7 +350,7 @@ switch ($_GET['go'])
 	//header
 	Saaheader($titlee);
 		//tpl
-		print $tpl->display($stylee);
+		echo $tpl->display($stylee);
 	//footer
 	Saafooter();
 ?>

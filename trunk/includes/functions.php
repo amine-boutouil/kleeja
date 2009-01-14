@@ -1277,6 +1277,8 @@ function delete_change_styles($array)
 
 function kleeja_mime_groups($return_one = false)
 {
+	global $lang;
+	
 		$s = array(
 					0 => array('name' => ''),
 					1 => array('name' => $lang['N_IMGS']),
@@ -1303,14 +1305,15 @@ function ch_g ($group_id, $default)
 {
 		global $lang;
 		
+		
 		$s = kleeja_mime_groups();
 		
 		$show = "<select name=\"gr[{$group_id}]\">";
 		
-		for($i=1;$i<count($s);$i++)
+		for($i=1;$i<sizeof($s);$i++)
 		{
 			$selected = ($default == $i)? "selected=\"selected\"" : "";
-			$show .= "<option $selected value=\"$i\">$s[$i]</option>";
+			$show .= "<option $selected value=\"$i\">" . $s[$i]['name'] . "</option>";
 		}
 		
 		$show .="</select>";

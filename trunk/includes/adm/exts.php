@@ -39,17 +39,17 @@
 			while($row=$SQL->fetch_array($result))
 			{
 				//make new lovely arrays !!
-				$gr[$row['id']] 	=	(isset($_POST["gr_".$row['id']])) ? $_POST["gr_".$row['id']]  : $row['group_id'];
-				$g_sz[$row['id']]	=	(isset($_POST["gsz_".$row['id']])) ? $_POST["gsz_".$row['id']] : $row['gust_size'];
-				$u_sz[$row['id']]	=	(isset($_POST["usz_".$row['id']]) ) ? $_POST["usz_".$row['id']] : $row['user_size'];
+				$gr[$row['id']] 	=	(isset($_POST["gr_".$row['id']])) ? $_POST["gr_" . $row['id']]  : $row['group_id'];
+				$g_sz[$row['id']]	=	(isset($_POST["gsz_".$row['id']])) ? $_POST["gsz_" . $row['id']] : $row['gust_size'];
+				$u_sz[$row['id']]	=	(isset($_POST["usz_".$row['id']]) ) ? $_POST["usz_" . $row['id']] : $row['user_size'];
 
 				$arr[] = array( 'id' 		=>$row['id'],
 								'name' 		=>$row['ext'],
 								'group'		=>ch_g($row['id'], $gr[$row['id']]),
 								'g_size'	=>$g_sz[$row['id']],
-								'g_allow'	=>'<input name="gal['.$row['id'].']" type="checkbox" '.(($row['gust_allow'])? 'checked="checked"' : '').' />',
+								'g_allow'	=>'<input name="gal[' . $row['id'] . ']" type="checkbox" ' . (($row['gust_allow'])? 'checked="checked"' : '') . ' />',
 								'u_size'	=>$u_sz[$row['id']],
-								'u_allow'	=>'<input name="ual['.$row['id'].']" type="checkbox" '.(($row['user_allow'])? 'checked="checked"' : '').' />',
+								'u_allow'	=>'<input name="ual[' . $row['id'] . ']" type="checkbox" ' . (($row['user_allow'])? 'checked="checked"' : '') . ' />',
 	
 							);
 			}
@@ -80,7 +80,7 @@
 															gust_allow = '" . (isset($_POST['gal'][$n]) ? 1 : 0) . "',
 															user_size = '" . intval($_POST['usz'][$n]) . "',
 															user_allow = '" .  (isset($_POST['ual'][$n])? 1 : 0) . "'",
-											'WHERE'		=>	"id='" . intval($n) ."'"
+											'WHERE'		=>	"id='" . intval($n) . "'"
 											);
 	
 						$SQL->build($update_query);

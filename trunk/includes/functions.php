@@ -1301,14 +1301,20 @@ function kleeja_mime_groups($return_one = false)
 *admin function for extensions types
 *parameters : id : type id, default : default or not
 */
-function ch_g ($group_id, $default)
+function ch_g ($name_of_select, $g_id, $return_name = false)
 {
 		global $lang;
 		
 		
-		$s = kleeja_mime_groups();
+		$s = kleeja_mime_groups(($return_name ?  $g_id : false));
 		
-		$show = "<select name=\"gr[{$group_id}]\">";
+		//return name if he want
+		if($return_name != false) 
+		{
+			return $s['name'];
+		}
+		
+		$show = "<select name=\"{$name_of_select}\">";
 		
 		for($i=1;$i<sizeof($s);$i++)
 		{

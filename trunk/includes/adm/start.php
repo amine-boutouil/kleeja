@@ -38,9 +38,24 @@
 		//size board by percent
 		$per1 = @round($stat_sizes / ($config['total_size'] *1048576) ,2) *100;
 		//ppl must know about kleeja version!
-		//they never help and support kleeja
-		//shame on them..
+		//ok i forgive ...
 		$kleeja_version		= KLEEJA_VERSION;
+		
+		//updating
+		$v = unserialize($config['new_version']);
+		$update_now		= (version_compare(strtolower(KLEEJA_VERSION), strtolower($v['version_number']), '<') && !$v['pre_release']) ? true : false;
+		$pre_release	= (time() - $v['last_check']) < 36000 ) && $v['pre_release'] ? '<script type="text/javascript" src="http://www.kleeja.com/dev/msg_js.php"></script>' : false;
+		$old_version	= KLEEJA_VERSION;
+		$new_version	= $v['version_number'];
+		
+		//if 24 hours, lets chcek agian !
+		if((time() - $v['last_check']) > 86400 && !$v['msg_appeared'])
+		{
+			header('location: ./admin.php?cp=check_update&show_msg');
+		}	
+		
+		
+		
 		
 		($hook = kleeja_run_hook('default_admin_page')) ? eval($hook) : null; //run hook 
 		

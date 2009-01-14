@@ -23,7 +23,7 @@
 		//posts search ..
 		if (isset($_POST['search_file']))
 		{
-			$file_namee	= ($_POST['filename']!='') ? 'AND f.name LIKE \'%' . $SQL->escape($_POST['filename']) . '%\' ' : ''; 
+			$file_namee	= ($_POST['filename']!='') ? 'AND f.real_filename LIKE \'%' . $SQL->escape($_POST['filename']) . '%\' ' : ''; 
 			$usernamee	= ($_POST['username']!='') ? 'AND u.name LIKE \'%' . $SQL->escape($_POST['username']) . '%\' AND u.id=f.user' : ''; 
 			$size_than	=   ' `f.size` ' . (($_POST['than']==1) ? '>' : '<') . intval($_POST['size']) . ' ';
 			$ups_than	=  ($_POST['ups']!='') ? 'AND f.uploads ' . (($_POST['uthan']==1) ? '>' : '<') . intval($_POST['ups']) . ' ' : '';
@@ -80,7 +80,7 @@
 			$user_name = $SQL->fetch_array($SQL->build($query_name));
 			
 			$arr[] = array('id' =>$row['id'],
-						'name' =>"<a href=\"./" . $row['folder'] . "/" . $row['name'] . "\" target=\"blank\">" . $row['name'] . "</a>",
+						'name' =>"<a href=\"./" . $row['folder'] . "/" . $row['name'] . "\" target=\"blank\">" . ($row['real_filename'] == '' ? $row['name'] : $row['real_filename']) . "</a>",
 						'size' =>Customfile_size($row['size']),
 						'ups' =>$row['uploads'],
 						'time' => date("d-m-Y H:a", $row['time']),

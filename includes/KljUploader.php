@@ -36,150 +36,154 @@ class KljUploader
 	var $safe_code;	// captcha is on or off 
 
 
-/**
-// watermark
-// source : php.net
- */
- function watermark($name, $ext, $logo)
- {
- 
-	($hook = kleeja_run_hook('watermark_func_kljuploader')) ? eval($hook) : null; //run hook	
-	
-	if(!file_exists($name)) return;
-	
-	if (preg_match("/jpg|jpeg/",$ext))
-	{
-		$src_img = @imagecreatefromjpeg($name);
-	}
-	elseif (preg_match("/png/",$ext))
-	{
-		$src_img = @imagecreatefrompng($name);
-	}
-	elseif (preg_match("/gif/",$ext))
-	{
-		$src_img = @imagecreatefromgif($name);
+
+	/**
+	// watermark
+	// source : php.net
+	 */
+	 function watermark($name, $ext, $logo)
+	 {
+	 
+		($hook = kleeja_run_hook('watermark_func_kljuploader')) ? eval($hook) : null; //run hook	
+		
+		if(!file_exists($name)) return;
+		
+		if (preg_match("/jpg|jpeg/",$ext))
+		{
+			$src_img = @imagecreatefromjpeg($name);
+		}
+		elseif (preg_match("/png/",$ext))
+		{
+			$src_img = @imagecreatefrompng($name);
+		}
+		elseif (preg_match("/gif/",$ext))
+		{
+			$src_img = @imagecreatefromgif($name);
+		}
+
+		$src_logo = imagecreatefrompng($logo);
+
+		$bwidth  = @imageSX($src_img);
+		$bheight = @imageSY($src_img);
+		$lwidth  = @imageSX($src_logo);
+		$lheight = @imageSY($src_logo);
+		
+		//fix bug for 1beta3
+		if ($bwidth > 160 &&  $bheight > 130)
+		{
+		
+				$src_x = $bwidth - ($lwidth + 5);
+				$src_y = $bheight - ($lheight + 5);
+				@ImageAlphaBlending($src_img, true);
+				@ImageCopy($src_img,$src_logo,$src_x,$src_y,0,0,$lwidth,$lheight);
+
+				if (preg_match("/jpg|jpeg/",$ext))
+				{
+					@imagejpeg($src_img, $name);
+				}
+				elseif (preg_match("/png/",$ext))
+				{
+					@imagepng($src_img, $name);
+				}
+				elseif (preg_match("/gif/",$ext))
+				{
+					@imagegif($src_img, $name);
+				}
+		
+		}# < 150
+		else 
+		{
+			return false;
+		}
+		
 	}
 
-	$src_logo = imagecreatefrompng($logo);
+	//
+	//check exts inside file to be safe
+	//
+	function ext_check_safe ($filename)
+	{
+		$not_allowed =	array('php','php3' ,'php5', 'php4','asp' ,'shtml' , 'html' ,'htm' ,'xhtml' ,'phtml', 'pl', 'cgi');
+		$tmp	= explode(".", $filename);
+		$before_last_ext = $tmp[sizeof($tmp)-2];
 
-    $bwidth  = @imageSX($src_img);
-    $bheight = @imageSY($src_img);
-    $lwidth  = @imageSX($src_logo);
-    $lheight = @imageSY($src_logo);
-	
-	//fix bug for 1beta3
-	if ($bwidth > 160 &&  $bheight > 130)
-	{
-	
-		    $src_x = $bwidth - ($lwidth + 5);
-		    $src_y = $bheight - ($lheight + 5);
-		    @ImageAlphaBlending($src_img, true);
-		    @ImageCopy($src_img,$src_logo,$src_x,$src_y,0,0,$lwidth,$lheight);
+		if (in_array(strtolower($before_last_ext), $not_allowed)) 
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}	
+	}
 
-			if (preg_match("/jpg|jpeg/",$ext))
-			{
-				@imagejpeg($src_img, $name);
-			}
-			elseif (preg_match("/png/",$ext))
-			{
-				@imagepng($src_img, $name);
-			}
-			elseif (preg_match("/gif/",$ext))
-			{
-				@imagegif($src_img, $name);
-			}
-	
-	}# < 150
-	else 
+	/*
+		Function createthumb($name,$filename,$new_w,$new_h)
+		example : createthumb('pics/apple.jpg','thumbs/tn_apple.jpg',100,100);
+		creates a resized image
+		source :http://icant.co.uk/articles/phpthumbnails/
+	*/
+	function createthumb($name, $ext, $filename, $new_w, $new_h)
 	{
-		return false;
-	}
-	
-}
+		($hook = kleeja_run_hook('createthumb_func_kljuploader')) ? eval($hook) : null; //run hook	
+		
+		if(!file_exists($name))
+		{
+			return;
+		}
+		
+		if (preg_match("/jpg|jpeg/", $ext))
+		{
+			$src_img = imagecreatefromjpeg($name);
+		}
+		elseif (preg_match("/png/", $ext))
+		{
+			$src_img = imagecreatefrompng($name);
+		}
+		elseif (preg_match("/gif/", $ext))
+		{
+			$src_img = imagecreatefromgif($name);
+		}
+		
+		$old_x	= imageSX($src_img);
+		$old_y	= imageSY($src_img);
+		
+		if ($old_x > $old_y)
+		{
+			$thumb_w=$new_w;
+			$thumb_h=$old_y*($new_h/$old_x);
+		}
+		elseif ($old_x < $old_y)
+		{
+			$thumb_w=$old_x*($new_w/$old_y);
+			$thumb_h=$new_h;
+		}
+		elseif ($old_x == $old_y)
+		{
+			$thumb_w=$new_w;
+			$thumb_h=$new_h;
+		}
+		
+		$dst_img=ImageCreateTrueColor($thumb_w,$thumb_h);
+		imagecopyresampled($dst_img, $src_img, 0, 0, 0, 0, $thumb_w, $thumb_h, $old_x, $old_y);
+		
+		if (preg_match("/jpg|jpeg/", $ext))
+		{
+			imagejpeg($dst_img, $filename);
+		}
+		elseif (preg_match("/png/", $ext))
+		{
+			imagepng($dst_img, $filename);
+		}
+		elseif (preg_match("/gif/", $ext))
+		{
+			imagegif($dst_img, $filename);
+		}
+		
 
-//
-//check exts inside file to be safe
-//
-function ext_check_safe ($filename)
-{
-	$not_allowed =	array('php','php3' ,'php5', 'php4','asp' ,'shtml' , 'html' ,'htm' ,'xhtml' ,'phtml', 'pl', 'cgi');
-	$tmp	= explode(".", $filename);
-	$before_last_ext = $tmp[sizeof($tmp)-2];
-
-	if (in_array(strtolower($before_last_ext), $not_allowed)) 
-	{
-		return false;
+		imagedestroy($dst_img);
+		imagedestroy($src_img);
 	}
-	else
-	{
-		return true;
-	}	
-}
-
-/*
-	Function createthumb($name,$filename,$new_w,$new_h)
-	example : createthumb('pics/apple.jpg','thumbs/tn_apple.jpg',100,100);
-	creates a resized image
-	source :http://icant.co.uk/articles/phpthumbnails/
-*/
-function createthumb($name, $ext, $filename, $new_w, $new_h)
-{
-	($hook = kleeja_run_hook('createthumb_func_kljuploader')) ? eval($hook) : null; //run hook	
-	
-	if(!file_exists($name)) return;
-	
-	if (preg_match("/jpg|jpeg/", $ext))
-	{
-		$src_img = imagecreatefromjpeg($name);
-	}
-	elseif (preg_match("/png/", $ext))
-	{
-		$src_img = imagecreatefrompng($name);
-	}
-	elseif (preg_match("/gif/", $ext))
-	{
-		$src_img = imagecreatefromgif($name);
-	}
-	
-	$old_x	= imageSX($src_img);
-	$old_y	= imageSY($src_img);
-	
-	if ($old_x > $old_y)
-	{
-		$thumb_w=$new_w;
-		$thumb_h=$old_y*($new_h/$old_x);
-	}
-	elseif ($old_x < $old_y)
-	{
-		$thumb_w=$old_x*($new_w/$old_y);
-		$thumb_h=$new_h;
-	}
-	elseif ($old_x == $old_y)
-	{
-		$thumb_w=$new_w;
-		$thumb_h=$new_h;
-	}
-	
-	$dst_img=ImageCreateTrueColor($thumb_w,$thumb_h);
-	imagecopyresampled($dst_img,$src_img,0,0,0,0,$thumb_w,$thumb_h,$old_x,$old_y);
-	
-	if (preg_match("/jpg|jpeg/", $ext))
-	{
-		imagejpeg($dst_img, $filename);
-	}
-	elseif (preg_match("/png/", $ext))
-	{
-		imagepng($dst_img, $filename);
-	}
-	elseif (preg_match("/gif/", $ext))
-	{
-		imagegif($dst_img, $filename);
-	}
-	
-
-	imagedestroy($dst_img);
-	imagedestroy($src_img);
-}
 
 
 
@@ -230,11 +234,11 @@ function process ()
 			//then wut did u click
 			if (isset($_POST['submitr']))
 			{
-				$wut	= 1;
+				$wut = 1;
 			}
 			elseif(isset($_POST['submittxt']))
 			{
-				$wut	= 2;
+				$wut = 2;
 			}
 
 
@@ -264,10 +268,10 @@ function process ()
 				//
 				for($i=0;$i<$this->filesnum;$i++)
 				{
-					$this->filename2	=	explode(".",$_FILES['file']['name'][$i]);
-					$this->filename2	=	$this->filename2[count($this->filename2)-1];
-					$this->typet		=	$this->filename2;
-					$this->sizet		=	$_FILES['file']['size'][$i];
+					$this->filename2	= explode(".", $_FILES['file']['name'][$i]);
+					$this->filename2	= $this->filename2[count($this->filename2)-1];
+					$this->typet		= $this->filename2;
+					$this->sizet		= $_FILES['file']['size'][$i];
 					
 						// decoding
 						if($this->decode == "time")
@@ -277,9 +281,9 @@ function process ()
 						}
 						elseif($this->tashfir == "md5")
 						{
-							$zaid	=	md5(time());
-							$zaid	=	substr($zaid, 0, 10);
-							$this->filename2 = $this->filename.$zaid.$i . "." . $this->filename2;
+							$zaid	= md5(time());
+							$zaid	= substr($zaid, 0, 10);
+							$this->filename2 = $this->filename . $zaid . $i . "." . $this->filename2;
 						}  
 						else
 						{
@@ -371,7 +375,7 @@ function process ()
 								} 
 								else 
 								{
-									$this->errs[]	= '[ ' . $this->filename2 . ' ] ' . $lang['CANT_UPLAOD'];
+									$this->errs[] = '[ ' . $this->filename2 . ' ] ' . $lang['CANT_UPLAOD'];
 								}
 
 						}
@@ -484,11 +488,11 @@ function process ()
 
 
 
-//
-// save data and insert in the database
-//
-function saveit ($filname, $folderee, $sizeee, $typeee)
-{
+	//
+	// save data and insert in the database
+	//
+	function saveit ($filname, $folderee, $sizeee, $typeee, $real_filename)
+	{
 		global $SQL,$dbprefix,$config,$lang;
 
 				// sometime cant see file after uploading.. but ..
@@ -503,11 +507,12 @@ function saveit ($filname, $folderee, $sizeee, $typeee)
 				$code_del=(string)	md5(time());
 				$ip		=  (getenv('HTTP_X_FORWARDED_FOR')) ? getenv('HTTP_X_FORWARDED_FOR') : getenv('REMOTE_ADDR');
 				$ip		= (string)	$SQL->escape($ip);	
+				$realf	= (string)	$SQL->escape($real_filename);	
 				
 				$insert_query = array(
-									'INSERT'	=> '`name` ,`size` ,`time` ,`folder` ,`type`,`user`,`code_del`,`user_ip`',
+									'INSERT'	=> '`name` ,`size` ,`time` ,`folder` ,`type`,`user`,`code_del`,`user_ip`, real_filename`',
 									'INTO'		=> "`{$dbprefix}files`",
-									'VALUES'	=> "'$name', '$size', '$timeww', '$folder','$type', '$user', '$code_del', '$ip'"
+									'VALUES'	=> "'$name', '$size', '$timeww', '$folder','$type', '$user', '$code_del', '$ip', '$realf'"
 									);
 									
 				($hook = kleeja_run_hook('qr_insert_new_file_kljuploader')) ? eval($hook) : null; //run hook
@@ -586,7 +591,7 @@ function saveit ($filname, $folderee, $sizeee, $typeee)
 						
 					unset ($filename, $folderee, $sizeee, $typeee);
 
-}#save it
+	}#save it
 
 }#end class
 

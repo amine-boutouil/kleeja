@@ -44,7 +44,7 @@
 		//updating
 		$v = unserialize($config['new_version']);
 		$update_now		= (version_compare(strtolower(KLEEJA_VERSION), strtolower($v['version_number']), '<') && !$v['pre_release']) ? true : false;
-		$pre_release	= (time() - $v['last_check']) < 36000 ) && $v['pre_release'] ? '<script type="text/javascript" src="http://www.kleeja.com/dev/msg_js.php"></script>' : false;
+		$pre_release	= (time() - $v['last_check'] < 36000) && $v['pre_release'] ? '<script type="text/javascript" src="http://www.kleeja.com/dev/msg_js.php"></script>' : false;
 		$old_version	= KLEEJA_VERSION;
 		$new_version	= $v['version_number'];
 		

@@ -35,15 +35,6 @@
 		else if (version_compare(strtolower(KLEEJA_VERSION), strtolower($version_data), '='))
 		{
 			
-			//check if there is any pre-release
-			$pre_version_data =	fetch_remote_file('http://www.kleeja.com/check_vers/ver_pre.txt');
-			
-			if(trim($pre_version_data) != '')
-			{
-				$version_data = $pre_version_data;
-			}
-			
-			
 			$text	= $lang['U_LAST_VER_KLJ'];
 			$stylee	= "admin_info";
 			
@@ -62,7 +53,6 @@
 			$data	= array('version_number'	=> $version_data,
 							'last_check'		=> time(),
 							'msg_appeared'		=> isset($_GET['show_msg']) ? true : false, 
-							'pre_release'		=> (trim($pre_version_data) != '')? true : false
 						);
 			
 

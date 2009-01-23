@@ -39,9 +39,9 @@
 			while($row=$SQL->fetch_array($result))
 			{
 				//make new lovely arrays !!
-				$gr[$row['id']] 	=	(isset($_POST["gr_" . $row['id']])) ? $_POST["gr_" . $row['id']]  : $row['group_id'];
-				$g_sz[$row['id']]	=	(isset($_POST["gsz_" . $row['id']])) ? $_POST["gsz_" . $row['id']] : $row['gust_size'];
-				$u_sz[$row['id']]	=	(isset($_POST["usz_" . $row['id']]) ) ? $_POST["usz_" . $row['id']] : $row['user_size'];
+				$gr[$row['id']] 	= (isset($_POST["gr_" . $row['id']])) ? $_POST["gr_" . $row['id']]  : $row['group_id'];
+				$g_sz[$row['id']]	= (isset($_POST["gsz_" . $row['id']])) ? $_POST["gsz_" . $row['id']] : $row['gust_size'];
+				$u_sz[$row['id']]	= (isset($_POST["usz_" . $row['id']]) ) ? $_POST["usz_" . $row['id']] : $row['user_size'];
 
 				$arr[] = array( 'id' 		=>$row['id'],
 								'name' 		=>$row['ext'],

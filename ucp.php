@@ -24,7 +24,7 @@ switch ($_GET['go'])
 			$stylee					= "login";
 			$titlee					= $lang['LOGIN'];
 			$action					= "ucp.php?go=login";
-			$forget_pass_link	= "ucp.php?go=get_pass";
+			$forget_pass_link		= "ucp.php?go=get_pass";
 			
 			($hook = kleeja_run_hook('login_before_submit')) ? eval($hook) : null; //run hook
 			
@@ -33,7 +33,7 @@ switch ($_GET['go'])
 			{
 				($hook = kleeja_run_hook('login_logon_before')) ? eval($hook) : null; //run hook
 				
-				$text	= $lang['LOGINED_BEFORE'].' ..<br /> <a href="ucp.php?go=logout">' . $lang['LOGOUT'] . '</a>';
+				$text	= $lang['LOGINED_BEFORE'] . ' ..<br /> <a href="ucp.php?go=logout">' . $lang['LOGOUT'] . '</a>';
 				kleeja_info($text);
 			}
 			elseif (isset($_POST['submit']))
@@ -42,6 +42,7 @@ switch ($_GET['go'])
 					
 					//for onlines
 					$ip	=	(getenv('HTTP_X_FORWARDED_FOR')) ?  getenv('HTTP_X_FORWARDED_FOR') : getenv('REMOTE_ADDR');
+					
 					if ($config['allow_online'] == 1)
 					{
 						$query_del = array(
@@ -57,11 +58,11 @@ switch ($_GET['go'])
 					$ERRORS	=	'';
 					if (empty($_POST['lname']) || empty($_POST['lpass']))
 					{
-						$ERRORS[]	=	$lang['EMPTY_FIELDS'];
+						$ERRORS[] = $lang['EMPTY_FIELDS'];
 					}
-					elseif(!$usrcp->data($_POST['lname'],$_POST['lpass']))
+					elseif(!$usrcp->data($_POST['lname'], $_POST['lpass']))
 					{
-						$ERRORS[]	=	$lang['LOGIN_ERROR'];
+						$ERRORS[] = $lang['LOGIN_ERROR'];
 					}
 				
 				
@@ -75,7 +76,7 @@ switch ($_GET['go'])
 						$errs	=	'';
 						foreach($ERRORS as $r)
 						{
-								$errs	.= '- ' . $r . '. <br />';
+							$errs	.= '- ' . $r . '. <br />';
 						}
 						kleeja_err($errs);
 					}

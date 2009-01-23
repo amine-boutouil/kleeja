@@ -103,11 +103,11 @@
 	
 	//show style .
 	//header
-	print $tpl->display("admin_header");
+	echo $tpl->display("admin_header");
 		//body
-		print $tpl->display($stylee);
+		echo $tpl->display($stylee);
 	//footer
-	print $tpl->display("admin_footer");
+	echo $tpl->display("admin_footer");
 
 	$SQL->close();
 ?>

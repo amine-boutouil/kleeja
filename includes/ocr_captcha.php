@@ -10,6 +10,7 @@
 # last edit by : saanina
 ##################################################
 
+
 //no for directly open
 if (!defined('IN_COMMON'))
 {
@@ -24,37 +25,36 @@ class ocr_captcha
     var $ly;        // height of picture
     var $nb_noise;  // nb of background noisy characters
     var $filename;  // file of captcha picture stored on disk
-    var $imagetype="png"; // can also be "png";
+    var $imagetype = "png"; // can also be "png";
     var $public_key;    // public key
-    var $font_file="./includes/arial.ttf";
-   //var $font_file="./includes/DUNGEON.TTF"; for more complix
-    var $font_file2="./includes/DUNGEON.GDF";
+    var $font_file= "./includes/arial.ttf";
+    var $font_file2= "./includes/DUNGEON.GDF";
 	
 	
     function ocr_captcha($long=6,$lx=120,$ly=30,$nb_noise=20)
 	{
-      $this->key		=	md5("HI, WITH NEW LIFE1#! , SAANINA IS ME#! , NO PROBLEM!#! Kleeja is updated...");
-      $this->long		=	$long;
-	   $this->lx		=	$lx;
-      $this->ly			=	$ly;
-      $this->nb_noise	=	$nb_noise;
-      $this->public_key	=	'captcha_' .  substr(md5(uniqid(rand(),true)),0,$this->long); // generate public key with entropy
+      $this->key		= md5('Kleeja is great !');
+      $this->long		= $long;
+	   $this->lx		= $lx;
+      $this->ly			= $ly;
+      $this->nb_noise	= $nb_noise;
+      $this->public_key	= 'captcha_' .  substr(md5(uniqid(rand(), true)), 0, $this->long); // generate public key with entropy
     }
     
     function get_filename($public="")
 	{ 
 		if ($public=="")
 		{
-        $public=$this->public_key;
+			$public = $this->public_key;
 		}
 		
 		if (strpos($_SERVER['SystemRoot'], ":\\")===false) // so linux system
 		{
-			$rad="cache/"; // Document_root works nicely here  
+			$rad = "cache/"; // Document_root works nicely here  
 		}
 		else // windows system 
         {
-			$rad="cache/"; 
+			$rad = "cache/"; 
 		}
 		
 		return $rad . $public . "." . $this->imagetype;
@@ -74,7 +74,7 @@ class ocr_captcha
     }
     
     // check if the public text is link to the private text
-    function check_captcha($public,$private)
+    function check_captcha($public, $private)
 	{
 			//delete all captcha files 
 			if (is_dir('cache')) 
@@ -98,7 +98,7 @@ class ocr_captcha
     // display a captcha picture with private text and return the public text
     function make_captcha($noise=true)
 	{
-		$private_key	= $this->generate_private();
+		$private_key = $this->generate_private();
 		$image		= imagecreatetruecolor($this->lx,$this->ly);
 
       $back=ImageColorAllocate($image,intval(rand(224,255)),intval(rand(224,255)),intval(rand(224,255)));
@@ -165,9 +165,9 @@ class ocr_captcha
 		global $lang;
 		
 	      $this->make_captcha($noise);
-	      $res="<input type=\"hidden\" name=\"public_key\" value=\"".$this->public_key."\">\n";
-	      $alt= $lang['ENTER_CODE_IMG'];
-	      $res.="<img src='".$this->get_filename()."' alt='$alt' border='0'>\n";
+	      $res = "<input type=\"hidden\" name=\"public_key\" value=\"".$this->public_key."\">\n";
+	      $alt = $lang['ENTER_CODE_IMG'];
+	      $res .="<img src='" . $this->get_filename() . "' alt='$alt' border='0'>\n";
 	      return $res;
     }
 	

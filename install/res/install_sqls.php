@@ -92,6 +92,7 @@ CREATE TABLE `{$dbprefix}files` (
   `id` int(10) NOT NULL auto_increment,
   `last_down` int(11) NOT NULL,
   `name` varchar(350) collate utf8_bin NOT NULL,
+  `real_filename` VARCHAR( 350 ) collate utf8_bin NOT NULL,
   `size` int(10) NOT NULL,
   `uploads` int(10) NOT NULL,
   `time` int(11) NOT NULL,
@@ -223,6 +224,7 @@ $install_sqls['config_insert26'] = "INSERT INTO `{$dbprefix}config` (`name`, `va
 $install_sqls['config_insert27'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('sitename', '$config_sitename')";
 $install_sqls['config_insert28'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('siteurl', '$config_siteurl')";
 $install_sqls['config_insert29'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('sitemail', '$config_sitemail')";
+$install_sqls['config_insert30'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('new_version', '')";
 		
 		
 $install_sqls['exts_insert1'] = "

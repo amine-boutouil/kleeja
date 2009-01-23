@@ -50,6 +50,22 @@
 	
 		if(version_compare(strtolower($v['version_number']), strtolower($version_data), '<') || isset($_GET['show_msg']))
 		{
+			
+			//to prevent expected error [ infinit loop ]
+			if(isset($_GET['show_msg']))
+			{
+				$query_get = array(
+									'SELECT'	=> '*',
+									'FROM'		=> "{$dbprefix}config",
+									'WHERE'		=> "name = 'new_version'"
+									);
+				$result_get =  $SQL->build($query_get);
+				if(!$SQL->num_rows($result_get))
+				{
+					$SQL->query("INSERT INTO `{$dbprefix}config` (`name` ,`value`)VALUES ('new_version', '')");
+				}
+			}
+			
 			$data	= array('version_number'	=> $version_data,
 							'last_check'		=> time(),
 							'msg_appeared'		=> isset($_GET['show_msg']) ? true : false, 

@@ -15,8 +15,8 @@
 	define ( 'IN_ADMIN' , true);
 	
 	//include imprtant file ..
-	include ('includes/common.php');
-	include ('includes/version.php');
+	require ('includes/common.php');
+	include_once ('includes/version.php');
 
 	//path of admin extensions
 	$path_adm	= "includes/adm";
@@ -39,7 +39,7 @@
 	
 	$SHOW_LIST = true; //fix bug
 
-	$go_to	=	htmlspecialchars($_GET['cp']);
+	$go_to	= htmlspecialchars($_GET['cp']);
 	
 	//get adm extensions
 	$dh = @opendir($path_adm);
@@ -69,7 +69,7 @@
 	{
 		($hook = kleeja_run_hook("require_admin_page_begin_{$go_to}")) ? eval($hook) : null; //run hook 
 		
-		require ($path_adm . '/' . $go_to . '.php');
+		require_once ($path_adm . '/' . $go_to . '.php');
 		
 		($hook = kleeja_run_hook("require_admin_page_end_{$go_to}")) ? eval($hook) : null; //run hook 
 	}
@@ -91,10 +91,10 @@
 		//some exceptions
 		if(@in_array($m, $ext_expt)) continue;
 		++$i;
-		$adm_extensions_menu[$i] = array(	'icon'	=> (file_exists('./images/style/admin/' . $m . '_button.gif'))	? './images/style/admin/' . $m . '_button.gif' : './images/style/admin/no_icon_button.gif',
+		$adm_extensions_menu[$i]	= array('icon'	=> (file_exists('./images/style/admin/' . $m . '_button.gif'))	? './images/style/admin/' . $m . '_button.gif' : './images/style/admin/no_icon_button.gif',
 											'lang'	=>	($lang['R_'. strtoupper($m)]) ? $lang['R_'. strtoupper($m)]: (($lang[strtoupper($m)]) ? $lang[strtoupper($m)] : strtoupper($m)),
 											'link'	=>	'admin.php?cp=' . $m,
-										);
+											);
 	
 	}
 	
@@ -109,5 +109,7 @@
 	//footer
 	echo $tpl->display("admin_footer");
 
+	//close db
 	$SQL->close();
+	exit;
 ?>

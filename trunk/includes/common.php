@@ -9,8 +9,6 @@
 # last edit by : saanina
 ##################################################
 
-	// start session
-	session_start();
 		
 	// not for directly open
 	if (!defined('IN_INDEX'))
@@ -25,8 +23,18 @@
 	// Report all errors, except notices
 	error_reporting(E_ALL ^ E_NOTICE);
 
+	$expireTime = 60*60*24*7; // 7 days
+	session_set_cookie_params($expireTime);
+	// start session
+	session_start();
+
+
 	//time of start and end and wutever
-	function get_microtime(){	list($usec, $sec) = explode(' ', microtime());	return ((float)$usec + (float)$sec);	}
+	function get_microtime()
+	{
+		list($usec, $sec) = explode(' ', microtime());	return ((float)$usec + (float)$sec);
+	}
+	
 	$starttm = get_microtime();
 
 	//php must be newer than this

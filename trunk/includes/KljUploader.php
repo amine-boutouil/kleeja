@@ -327,9 +327,9 @@ function process ()
 						}
 						else
 						{
-						//
-						// no errors , so uploading
-						//
+							//
+							// no errors , so uploading
+							//
 						
 
 								if (!$use_ftp)
@@ -559,7 +559,7 @@ function process ()
 						}
 						
 						//write on image
-						if( ($config['write_imgs'] != 0) && in_array(strtolower($this->typet), array('png', 'jpg', 'jpeg', 'gif')))
+						if( ($config['write_imgs'] != 0) && in_array(strtolower($this->typet), array('png', 'jpg', 'jpeg')))
 						{
 							$this->watermark($folderee . "/" . $filname,strtolower($this->typet), 'images/watermark.png');
 						}

@@ -27,18 +27,18 @@ switch ($_GET['go'])
 		$gusts_data = array();
 		foreach($g_exts as $ext=>$data)
 		{
-			$gusts_data[] = array('ext'	=> $ext,
+			$gusts_data[]	= array('ext'	=> $ext,
 									'num'	=> Customfile_size($data['size'])//format size as kb, mb,...
-										);
+									);
 		}
 
 		//make it loop
 		$users_data = array();
 		foreach($u_exts as $ext=>$data)
 		{
-			$users_data[] = array('ext' => $ext,
+			$users_data[]	= array('ext' => $ext,
 									'num' => Customfile_size($data['size'])//format size as kb, mb,...
-										);
+									);
 		}
 		
 		($hook = kleeja_run_hook('guide_go_page')) ? eval($hook) : null; //run hook

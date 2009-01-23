@@ -97,7 +97,7 @@ class SSQL
 							mysql_query("COMMIT", $this->connect_id);
 						}
 
-						return mysql_close($this->connect_id);
+						return @mysql_close($this->connect_id);
 					}
 					else
 					{

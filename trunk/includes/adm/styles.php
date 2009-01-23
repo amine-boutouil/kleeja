@@ -31,7 +31,7 @@ switch ($_GET['sty_t'])
 		
 		//admin style
 		$arr = array();
-		$arr[] = array('style_id' => 0, 'style_name' => 'admin', 'selected'=>''); 
+		$arr[] = array('style_id' => 0, 'style_name' => $lang['KLEEJA_CP'], 'selected'=>''); 
 		
 		while($row=$SQL->fetch_array($result))
 		{

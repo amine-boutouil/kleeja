@@ -230,7 +230,7 @@ case 'data' :
 		include ('res/install_sqls.php');
 		 
 		$err = 0;
-		
+		$dots = 0;
 		//do important before
 		mysql_query($install_sqls['DROP_TABLES'], $connect);
 		mysql_query($install_sqls['ALTER_DATABASE_UTF'], $connect);
@@ -259,12 +259,23 @@ case 'data' :
 				elseif ($name == 'plugins')		print '<span style="color:green;">' . $lang['INST_CRT_PLG'] . '</span><br />';
 				elseif ($name == 'templates')	print '<span style="color:green;">' . $lang['INST_CRT_TPL'] . '</span><br />';
 				else
-					print '.';
+				{
+					
+					echo '.';
+					if($dots == 3)
+					{
+						$dots = 0;
+						echo '<br />';
+					}
+					else
+						$dots++;
+						
 					//print '<span style="color:green;"> [' .$name .'] : ' . $lang['INST_SQL_OK'] . '</span><br />';
+				}
 			}
 			else
 			{
-				print '<span style="color:red;"> [' .$name .'] : ' . $lang['INST_SQL_ERR'] . '</span><br />';
+				print '<span style="color:red;"> [' .$name . '] : ' . $lang['INST_SQL_ERR'] . '</span><br />';
 				$err++;
 			}
 

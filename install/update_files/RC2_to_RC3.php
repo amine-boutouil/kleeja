@@ -103,8 +103,8 @@ function up_make_language()
 
 }
 
-$update_functions[]	=	'up_make_style()';
-$update_functions[]	=	'up_make_language()';
+//$update_functions[]	=	'up_make_style()';
+//$update_functions[]	=	'up_make_language()';
 
 
 ?>

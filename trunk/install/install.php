@@ -9,20 +9,31 @@ include important files
 */
 
 
-	define ( 'IN_COMMON' , true);
-	$path = "../includes/";
-	(file_exists('../config.php')) ? include ('../config.php') : null;
-	include ($path.'functions.php');
-	include ($path.'mysql.php');
-	include ('func_inst.php');
+define ( 'IN_COMMON' , true);
+$_path = "../";
+(file_exists($_path . 'config.php')) ? include ($_path . 'config.php') : null;
+include ($_path . 'includes/functions.php');
+include ($_path.'includes/mysql.php');
+include ('func_inst.php');
 	
 
 /*
 //print header
 */
-if(!isset($_POST['dbsubmit']))
-	print $header_inst;	
+if(isset($_POST['dbsubmit']) && !is_writable($_path))
+{
 
+}
+else
+{
+	echo $header_inst;	
+}
+
+
+if(!isset($_GET['step']))
+{
+	$_GET['step'] = 'gpl2';
+}
 
 /*
 //nvigate ..
@@ -34,10 +45,12 @@ case 'gpl2':
 
 	$contentofgpl2 = @file_get_contents('../docs/GPL2.txt');
 	
-	if (strlen($contentofgpl2) < 3) 
-				$contentofgpl2 = "Can't find 'gpl2.txt' file .. search on the web about GPL2";
-
-	print '
+	if (strlen($contentofgpl2) < 3)
+	{
+	$contentofgpl2 = "Can't find 'gpl2.txt' file .. search on the web about GPL2";
+	}
+	
+	echo '
 	<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=c&'.get_lang(1).'">
 	<textarea name="gpl2" rows=""   readonly="readonly" cols="" style="width: 456px; height: 365px;direction:ltr;">
 	' . $contentofgpl2 . '
@@ -53,7 +66,6 @@ case 'gpl2':
 break;
 case 'c':
 	
-	
 	// SUBMIT
 	if(isset($_POST['dbsubmit']))
 	{
@@ -64,19 +76,19 @@ case 'c':
 						$_POST['db_pass'],
 						$_POST['db_name'],
 						$_POST['db_prefix']
-						);
+							);
 	
 	}
 	
 	$xs	=(!file_exists('../config.php')) ? false : true;
-	
+	$writeable_path = is_writable($_path) ? true : false;
 	
 	if($xs== false)
 	{
-		 print '<br /><form method="post"  action="' . $_SERVER['PHP_SELF'] . '?step=c&'.get_lang(1).'"  onsubmit="javascript:return formCheck(this, Array(\'db_server\',\'db_user\' ,\'db_name\',\'db_prefix\' ));">
+		 print '<br /><form method="post"  action="' . $_SERVER['PHP_SELF'] . '?step=c&' . get_lang(1) . '"  onsubmit="javascript:return formCheck(this, Array(\'db_server\',\'db_user\' ,\'db_name\',\'db_prefix\' ));">
 
 			<fieldset id="Group1" dir="' . $lang['DIR'] . '">
-			<b>' . $lang['DB_INFO'] . '</b>
+			<b>' . ($writeable_path ? $lang['DB_INFO'] : $lang['DB_INFO_NW']) . '</b>
 			<br />
 			<br />
 			<table style="width: 100%">
@@ -109,21 +121,25 @@ case 'c':
 			<br />
 			</fieldset>
 
-			<input name="dbsubmit" type="submit" value="' . $lang['INST_EXPORT'] . '" />
+			<input name="dbsubmit" type="submit" value="' . ($writeable_path ? $lang['INST_SUBMIT'] : $lang['INST_EXPORT']) . '" />
 			</form>
 			<br />
-			<br />
-			<hr/>
-			<br />
-			<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=c&'.get_lang(1).'">
-			<input  type="submit" value="' . $lang['INST_SUBMIT_CONFIGOK'] . '" />
-			</form>
-		';
+			';
+			
+			if(!$writeable_path) 
+			{
+				echo '<br />
+				<hr/>
+				<br />
+				<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=c&'.get_lang(1).'">
+				<input  type="submit" value="' . $lang['INST_SUBMIT_CONFIGOK'] . '" />
+				</form>';
+			}
 	}
 	else
 	{
-		print ' <fieldset><br /><span style="color:green;"><strong>'. $lang['CONFIG_EXISTS'] . '</strong><br /><br />';
-		print '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=check&'.get_lang(1).'">
+		echo  ' <fieldset><br /><span style="color:green;"><strong>'. $lang['CONFIG_EXISTS'] . '</strong><br /><br />';
+		echo  '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=check&'.get_lang(1).'">
 		<input name="agres" type="submit" value="' . $lang['INST_SUBMIT'] . '" />
 		</form></fieldset>';
 	}
@@ -139,20 +155,29 @@ case 'check':
 	//config,php
 	if (!$dbname || !$dbuser)
 	{
-		print '<span style="color:red;">' . $lang['INST_CHANG_CONFIG'] . '</span><br />';
+		echo '<span style="color:red;">' . $lang['INST_CHANG_CONFIG'] . '</span><br />';
 		$submit_wh = 'disabled="disabled"';
 	}
 
 	//connect .. for check
 	$texterr = '';
-	$connect = @mysql_connect($dbserver,$dbuser,$dbpass);
+	$connect = @mysql_connect($dbserver, $dbuser, $dbpass);
 	if (!$connect) 
 		$texterr .= '<span style="color:red;">' . $lang['INST_CONNCET_ERR'] . '</span><br />';
 		
 	$select = @mysql_select_db($dbname);
-	if (!$select) 
-		$texterr .= '<span style="color:red;">' . $lang['INST_SELECT_ERR'] . '</span><br />';
+	if (!$select)
+	{
+		//lets try to make the db 
+		$sql = 'CREATE DATABASE ' . $dbname ;
+		if (@mysql_query($sql, $connect))
+		{
+			$select = @mysql_select_db($dbname);
+		}
 		
+		if (!$select)
+		$texterr .= '<span style="color:red;">' . $lang['INST_SELECT_ERR'] . '</span><br />';
+	}	
 		
 	//try to chmod them
 	if(function_exists('chmod'))
@@ -262,7 +287,7 @@ case 'data' :
 				{
 					
 					echo '.';
-					if($dots == 3)
+					if($dots == 7)
 					{
 						$dots = 0;
 						echo '<br />';

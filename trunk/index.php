@@ -18,9 +18,12 @@
 	
 	//type of how will decoding name ..
 	switch($config['decode']):
-		case 1	:	$decode = "time";	break;
-		case 2	:	$decode = "md5";	break;
-		default  :	$decode = "";		break;
+		case 1:	$decode = "time";	break;
+		case 2:	$decode = "md5";	break;
+		default:	
+			($hook = kleeja_run_hook('decode_config_default')) ? eval($hook) : null; //run hook
+			$decode = "";
+		break;
 	endswitch;
 
 	//safe code
@@ -61,7 +64,7 @@
 	//some words for template
 	$welcome_msg	= $config['welcome_msg'];
 	$SAFE_CODE		= ($config['safe_code']) ? $ch->display_captcha(true) : false;
-	$SAFE_CODE2		= ($config['safe_code']) ? str_replace('public_key', 'public_key2',$ch->display_captcha(true)) : false;
+	$SAFE_CODE2		= ($config['safe_code']) ? str_replace('public_key', 'public_key2', $ch->display_captcha(true)) : false;
 
 	//
 	//for who online now..  
@@ -80,7 +83,7 @@
 				);
 				
 		($hook = kleeja_run_hook('qr_select_online_index_page')) ? eval($hook) : null; //run hook
-		$result	=	$SQL->build($query);  
+		$result	= $SQL->build($query);  
 		
 		while($row=$SQL->fetch_array($result))
 		{
@@ -90,13 +93,13 @@
 			if (strstr($row['agent'], 'Googlebot') || strstr($row['agent'], 'Google'))
 			{
 				$usersnum++; 
-				$OnlineNames[] = '<span style="color:orange;">[Googlebot]</span>';
+				$OnlineNames['Googlebot'] = '<span style="color:orange;">[Googlebot]</span>';
 			}
 			
 			if (strstr($row['agent'], 'Yahoo! Slurp') || strstr($row['agent'], 'Yahoo')) 
 			{
 				$usersnum++; 
-				$OnlineNames[] = '<span style="color:red;">[Yahoo!Slurp]</span>';
+				$OnlineNames['YahooSlurp'] = '<span style="color:red;">[Yahoo!Slurp]</span>';
 			}
 			
 			//put another bot name
@@ -105,7 +108,7 @@
 			if($row['username'] != "-1") 
 			{
 				$usersnum++; 
-				$OnlineNames[] =  $row['username'];
+				$OnlineNames[$row['username']] = $row['username'];
 			}
 			else
 			{
@@ -117,7 +120,10 @@
 	 	$SQL->freeresult($result);
 		
 		$shownames = array();
-		foreach ($OnlineNames as $k)	$shownames[] = array('name' => $k );
+		foreach ($OnlineNames as $k)
+		{
+			$shownames[] = array('name' => $k );
+		}
 		
 		/*
 		wanna increase your onlines counter ..you can from next line 
@@ -131,11 +137,11 @@
 	
 	($hook = kleeja_run_hook('end_index_page')) ? eval($hook) : null; //run hook	
 
-	//for show .. 
+		//for show .. 
 		//header
 		Saaheader($lang['HOME']);
 			//index
-			print $tpl->display("index_body");
+			echo $tpl->display("index_body");
 		//footer
 		
 		Saafooter();

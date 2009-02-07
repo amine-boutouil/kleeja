@@ -2,7 +2,7 @@
 //english language By:NK
 // Email: n.k@cityofangelz.com 
 
-	if(!$lang || !is_array($lang)) $lang = array();
+	if(!isset($lang) || !is_array($lang)) $lang = array();
 	
 	$lang['INST_INSTALL_CLEAN_VER']					= 'New Installation';
 	$lang['INST_UPDATE_P_VER']						= 'Update a previous version ';
@@ -49,7 +49,8 @@
 	$lang['WRONG_EMAIL']							= 'Incorrect Email Address!';
 	//
 	
-	$lang['DB_INFO']								= 'Config.php file is missing, fill in the fields below and kleeja will create the file for you, place it in kleeja\'s directory.';
+	$lang['DB_INFO_NW']								= 'Config.php file is missing, fill in the fields below and kleeja will create the file for you, place it in kleeja\'s directory.';
+	$lang['DB_INFO']								= 'Config.php file is missing, fill in the fields below and kleeja will create the file for you.';
 	$lang['DB_SERVER']								= 'Host';
 	$lang['DB_USER']								= 'Database Username';
 	$lang['DB_PASSWORD']							= 'Database Password';

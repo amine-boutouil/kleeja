@@ -1,6 +1,6 @@
 <?php
 # KLEEJA INSTALLER ...
-# updated  [7/2008]
+# updated  [2/2009]
 # this file hav many updates .. dont use previous ones
 # last edit by : saanina
 
@@ -9,11 +9,11 @@ include important files
 */
 
 	
-	define ( 'IN_COMMON' , true);
-	$path = "../includes/";
-	(file_exists('../config.php')) ? include ('../config.php') : null;
-	include ($path.'functions.php');
-	include ('func_inst.php');
+define ( 'IN_COMMON' , true);
+$_path = "../";
+(file_exists($_path . 'config.php')) ? include ($_path . 'config.php') : null;
+include ($_path . 'includes/functions.php');
+include ('func_inst.php');
 
 
 
@@ -24,9 +24,13 @@ include important files
 */
 if (!isset($_POST['lang']))
 {
-	print $header_inst;
+	echo $header_inst;
 }
 
+if(!isset($_GET['step']))
+{
+	$_GET['step'] = 'language';
+}
 
 /*
 //nvigate ..
@@ -64,7 +68,7 @@ case 'language':
 		closedir($dh);
 
 	// show  language list ..
-	print '<br />		
+	echo '<br />		
 	<div class="centery">
 	<fieldset>
 		<img src="img/map.gif" style="border:0" alt="al-Idrisi Map">
@@ -80,11 +84,11 @@ case 'language':
 
 break; // end case language
 case 'choose' :
-		print '<fieldset><span style="color:green;">' . $lang['INST_CHOOSE_INSTALLER'] . '</span><br /><br /><br />';
-		print '<a href="./install.php?'.get_lang(1).'"><img src="img/installer.gif" alt="installer" /><br />  ' . $lang['INST_INSTALL_CLEAN_VER'] . ' </a><br /><br />';
-		print '<a href="./update.php?'.get_lang(1).'"><img src="img/updater.gif" alt="updater" /> <br /> ' . $lang['INST_UPDATE_P_VER'] . ' </a><br /><br /><br />';
+		echo '<fieldset><span style="color:green;">' . $lang['INST_CHOOSE_INSTALLER'] . '</span><br /><br /><br />';
+		echo '<a href="./install.php?'.get_lang(1).'"><img src="img/installer.gif" alt="installer" /><br />  ' . $lang['INST_INSTALL_CLEAN_VER'] . ' </a><br /><br />';
+		echo '<a href="./update.php?'.get_lang(1).'"><img src="img/updater.gif" alt="updater" /> <br /> ' . $lang['INST_UPDATE_P_VER'] . ' </a><br /><br /><br />';
 
-		print '<a href="http://www.kleeja.com"><span style="color:black;">www.kleeja.com</span></a></fieldset><br /><br />';
+		echo '<a href="http://www.kleeja.com"><span style="color:black;">www.kleeja.com</span></a></fieldset><br /><br />';
 
 break;
 }#endOFswitch
@@ -94,7 +98,7 @@ break;
 /*
 //print footer
 */
-print $footer_inst;
+echo $footer_inst;
 
 
 ?>

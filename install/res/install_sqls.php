@@ -8,7 +8,7 @@
 // not for directly open
 if (!defined('IN_COMMON'))	exit();
 
-$install_sqls	=	array();
+$install_sqls = array();
 
 $install_sqls['DROP_TABLES'] = "
 DROP TABLE IF EXISTS `{$dbprefix}call`, `{$dbprefix}config`, `{$dbprefix}exts`, `{$dbprefix}files`, 
@@ -205,14 +205,14 @@ $install_sqls['config_insert7'] = "INSERT INTO `{$dbprefix}config` (`name`, `val
 $install_sqls['config_insert8'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('sec_down', '10')";
 $install_sqls['config_insert9'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('statfooter', '0')";
 $install_sqls['config_insert10'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('gzip', '0')";
-$install_sqls['config_insert11'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('welcome_msg', '".$lang['INST_MSGINS']."')";
+$install_sqls['config_insert11'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('welcome_msg', '" . $lang['INST_MSGINS'] . "')";
 $install_sqls['config_insert12'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('user_system', '1')";
 $install_sqls['config_insert13'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('register', '1')";
 $install_sqls['config_insert14'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('total_size', '1000')";
 $install_sqls['config_insert15'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('thumbs_imgs', '0')";
 $install_sqls['config_insert16'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('write_imgs', '0')";
 $install_sqls['config_insert17'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('del_url_file', '1')";
-$install_sqls['config_insert18'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('language', '" . ($_COOKIE['lang']=='ar' ? '2' : '3') . "')";
+$install_sqls['config_insert18'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('language', '" . (isset($_GET['lang']) && $_GET['lang'] == 'ar' ? '2' : '3') . "')";
 $install_sqls['config_insert19'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('www_url', '0')";
 $install_sqls['config_insert20'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('del_f_day', '0')";
 $install_sqls['config_insert21'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('allow_stat_pg', '1')";
@@ -316,7 +316,7 @@ INSERT INTO `{$dbprefix}exts` (`id`, `group_id`, `ext`, `gust_size`, `gust_allow
 
 $install_sqls['stats_insert'] = "INSERT INTO `{$dbprefix}stats`  VALUES (0,1,0,0," . time() . ",0,0,0,0,'',0,0,0,0,'','','')";
 
-$install_sqls['users_insert'] = "INSERT INTO `{$dbprefix}users` (`id`,`name` ,`password` ,`mail`,`admin`) VALUES ('1','". mysql_real_escape_string($user_name) ."', '" . mysql_real_escape_string($user_pass) ."', '" . mysql_real_escape_string($user_mail) ."','1')";
+$install_sqls['users_insert'] = "INSERT INTO `{$dbprefix}users` (`id`,`name` ,`password` ,`mail`,`admin`) VALUES ('1','" . mysql_real_escape_string($user_name) . "', '" . mysql_real_escape_string($user_pass) . "', '" . mysql_real_escape_string($user_mail) . "','1')";
 
 
 

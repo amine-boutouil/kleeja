@@ -516,8 +516,8 @@ function creat_style_xml($contents, $def=false)
 					//insert templates
 					foreach($template_s as $tpls)
 					{
-						$style_id = (substr($template_name, 0, 6) == 'admin_') ? 0 : $new_style_id;
 						$template_name = $SQL->real_escape($tpls['attributes']['name']);
+						$style_id = (substr($template_name, 0, 6) == 'admin_') ? 0 : $new_style_id;
 						$template_content = $SQL->real_escape($tpls['value']);
 						
 						$insert_query = array(

@@ -3,7 +3,7 @@
 // KLEEJA 
 
 
-	if(!$lang || !is_array($lang)) $lang = array();
+	if(!isset($lang) || !is_array($lang)) $lang = array();
 	
 	$lang['INST_INSTALL_CLEAN_VER']				=	"دامه‌زراندن بۆ یه‌که‌م جار ";
 	$lang['INST_UPDATE_P_VER']					=	"نوێکردنه‌وه‌ بۆ وه‌شانی نوێ ";

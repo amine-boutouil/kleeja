@@ -245,7 +245,7 @@ function formCheck(formobj, fieldRequired)
 
 ';
 
-if (($_GET['step'] != 'language') && (strpos('index.php',$_SERVER['PHP_SELF'])=== false && isset($_GET['step'])))
+if ((isset($_GET['step']) && $_GET['step'] != 'language') && (strpos('index.php',$_SERVER['PHP_SELF'])=== false && isset($_GET['step'])))
 {
 $header_inst .= '<form action="?change_lang" method="post">
 <img src="img/world.gif" alt="language" style="float:left" /> 
@@ -325,8 +325,9 @@ function make_language($def)
 //export config 
 function do_config_export($srv, $usr, $pass, $nm, $prf)
 {
-	
-		$data	= '<?php'."\n\n" . '' . "\n\n\n";
+		global $_path;
+		
+		$data	= '<?php'."\n\n" . '//fill those varaibles with your data' . "\n";
 		$data	.= '$dbserver		= \'' . str_replace("'","\'", $srv) . "';//database server \n";
 		$data	.= '$dbuser			= \''. str_replace("'","\'", $usr)."';// database user \n";
 		$data	.= '$dbpass			= \''. str_replace("'","\'", $pass)."';// database password \n";
@@ -355,11 +356,28 @@ function do_config_export($srv, $usr, $pass, $nm, $prf)
 		$data	.= "\n\n";
 		$data	.= '?'.'>';
 	
-			
-		header('Content-Type: text/x-delimtext; name="config.php"');
-		header('Content-disposition: attachment; filename=config.php');
-		echo $data;
-		exit;
+		$written = false;
+		if (is_writable($_path))
+		{
+			$fh = @fopen($_path . 'config.php', 'wb');
+			if ($fh)
+			{
+				fwrite($fh, $data);
+				fclose($fh);
+
+				$written = true;
+			}
+		}
+		
+		if(!$written)
+		{
+			header('Content-Type: text/x-delimtext; name="config.php"');
+			header('Content-disposition: attachment; filename=config.php');
+			echo $data;
+			exit;
+		}
+		
+		return true;
 }	
 
 

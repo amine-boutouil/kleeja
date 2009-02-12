@@ -592,7 +592,7 @@ function creat_lang_xml($contents, $def=false)
 					foreach($word_s as $wd)
 					{
 						$lang_word		= $wd['attributes']['name'];
-						$lang_trans		= addslashes(strip_tags($wd['value'], '<b><br><br /><br/><i><u>')); //fixed
+						$lang_trans		= addslashes(strip_tags($wd['value'], '<b><br><br /><br/><i><u><a>')); //fixed
 						
 						$insert_query = array(
 											'INSERT'	=> 'lang_id, word, trans',
@@ -797,7 +797,7 @@ function creat_plugin_xml($contents)
 								foreach($plg_langs['lang'] as $ln)
 								{
 									$lang_word			=	$SQL->real_escape($ln['attributes']['word']);
-									$lang_trans			=	addslashes(strip_tags($ln['value'], '<b><br /><br><i><u>')); //fixed
+									$lang_trans			=	addslashes(strip_tags($ln['value'], '<b><br /><br><i><u><a>')); //fixed
 
 									$insert_query = array(
 															'INSERT'	=> 'word, trans, lang_id',
@@ -1115,7 +1115,7 @@ function kj_lang($word, $trans, $language=false)
 	else
 	{
 		$lang_word		=	$SQL->real_escape($word);
-		$lang_trans		=	addslashes(strip_tags($trans, '<b><br><br /><i><u>')); //fixed
+		$lang_trans		=	addslashes(strip_tags($trans, '<b><br><br /><i><u><a>')); //fixed
 		$language			=	($language!==false) ?  $language : $config['language'];
 		$insert_query = array(
 										'INSERT'	=> 'word, trans, lang_id',

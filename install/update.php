@@ -6,31 +6,32 @@
 include important files
 */
 
-
-
+define ( 'IN_COMMON' , true);
+$path = "../includes/";
+(file_exists('../config.php')) ? include ('../config.php') : null;
+include ($path.'functions.php');
+include ($path.'mysql.php');
+include ('func_inst.php');
 	
-	define ( 'IN_COMMON' , true);
-	$path = "../includes/";
-	(file_exists('../config.php')) ? include ('../config.php') : null;
-	include ($path.'functions.php');
-	include ($path.'mysql.php');
-	include ('func_inst.php');
-	
-
-
 
 /*
 //print header
 */
 if (!isset($_POST['action_file_do']))
 {
-	print $header_inst;
+	echo $header_inst;
+}
+
+if(!isset($_GET['step']))
+{
+	$_GET['step'] = 'check';
 }
 
 /*
 //nvigate ..
 */
-switch ($_GET['step']) {
+switch ($_GET['step'])
+{
 default:
 case 'check':
 
@@ -59,16 +60,16 @@ case 'check':
 	if ( !is_writable('../uploads/thumbs') ) {$texterr .= '<span style="color:red;">[uploads/thumbs]: ' . $lang['INST_NO_WRTABLE'] . '</span><br />';};
 	if ($texterr !='')
 	{
-		print $texterr;
+		echo $texterr;
 		$submit_wh = 'disabled="disabled"';
 	}
 
 	if($submit_wh == '')
 	{
-		print '<br /><span style="color:green;"><b>[ ' . $lang['INST_GOOD_GO'] . ' ]</b></span><br /><br />';
+		echo '<br /><span style="color:green;"><b>[ ' . $lang['INST_GOOD_GO'] . ' ]</b></span><br /><br />';
 	}
 
-	print '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=action_file&'.get_lang(1).'">
+	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=action_file&'.get_lang(1).'">
 	<input name="agres" type="submit" value="' . $lang['INST_SUBMIT'] . '" ' . $submit_wh . '/>
 	</form>';
 
@@ -106,7 +107,7 @@ case 'action_file':
 			closedir($dh);
 
 		// show   list ..
-		print '
+		echo '
 		<br />
 		<br /><form  action="' . $_SERVER['PHP_SELF'] . '?step=action_file&'.get_lang(1).'" method="post">
 		'.$lang['INST_CHOOSE_UPDATE_FILE'].' 
@@ -135,7 +136,7 @@ case 'update_now':
 		$file_for_up	=	'update_files/'.htmlspecialchars($_GET['action_file_do']).'.php';
 		if(!file_exists($file_for_up))
 		{
-			print '<span style="color:red;">' . $lang['INST_ERR_NO_SELECTED_UPFILE_GOOD'] . ' [ '.$file_for_up.' ]</span><br />';
+			echo '<span style="color:red;">' . $lang['INST_ERR_NO_SELECTED_UPFILE_GOOD'] . ' [ '.$file_for_up.' ]</span><br />';
 		}
 		else
 		{	
@@ -154,7 +155,7 @@ case 'update_now':
 					$do_it	= $SQL->query($sql_content);
 					
 					if(!$do_it)
-						print '<span style="color:red;"> [' .$name .'] : ' . $lang['INST_SQL_ERR'] . '</span><br />';
+						echo '<span style="color:red;"> [' .$name .'] : ' . $lang['INST_SQL_ERR'] . '</span><br />';
 				}
 			}
 			
@@ -165,7 +166,7 @@ case 'update_now':
 			{
 				foreach($update_functions as $n)
 				{
-					eval('' . $n .'; ');
+					eval('' . $n . '; ');
 				}
 			}
 			
@@ -174,22 +175,22 @@ case 'update_now':
 			//
 			if(sizeof($update_notes) > 0)
 			{
-				print '<br /><span style="color:blue;"><b>' . $lang['INST_NOTES_UPDATE'] . ' :</b> </span><br />';
+				echo '<br /><span style="color:blue;"><b>' . $lang['INST_NOTES_UPDATE'] . ' :</b> </span><br />';
 				
 				$i=1;
 				foreach($update_notes as $n)
 				{
-					print '  [<b>' . $i .'</b>] <br /><span style="color:black;">' . $n. ' : </span><br />';
+					echo '  [<b>' . $i .'</b>] <br /><span style="color:black;">' . $n. ' : </span><br />';
 					++$i;
 				}
 
 			}
 			
-			print '<br /><br /><span style="color:green;">' . $lang['INST_UPDATE_IS_FINISH']. '</span><br />';
-			print '<img src="img/home.gif" alt="home" />&nbsp;<a href="../index.php">' . $lang['INDEX'] . '</a><br /><br />';
-			print '<img src="img/adm.gif" alt="admin" />&nbsp;<a href="../admin.php">' . $lang['ADMINCP'] . '</a><br /><br />';
-			print '' . $lang['INST_KLEEJADEVELOPERS'] . '<br /><br />';
-			print '<a href="http://www.kleeja.com">www.kleeja.com</a><br /><br /></fieldset>';
+			echo '<br /><br /><span style="color:green;">' . $lang['INST_UPDATE_IS_FINISH']. '</span><br />';
+			echo '<img src="img/home.gif" alt="home" />&nbsp;<a href="../index.php">' . $lang['INDEX'] . '</a><br /><br />';
+			echo '<img src="img/adm.gif" alt="admin" />&nbsp;<a href="../admin.php">' . $lang['ADMINCP'] . '</a><br /><br />';
+			echo '' . $lang['INST_KLEEJADEVELOPERS'] . '<br /><br />';
+			echo '<a href="http://www.kleeja.com">www.kleeja.com</a><br /><br /></fieldset>';
 		}
 
 break;
@@ -199,6 +200,6 @@ break;
 /*
 //print footer
 */
-print $footer_inst;
+echo $footer_inst;
 
 ?>

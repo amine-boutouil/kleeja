@@ -22,7 +22,7 @@ include ('func_inst.php');
 */
 if(isset($_POST['dbsubmit']) && !is_writable($_path))
 {
-
+// ...
 }
 else
 {
@@ -47,7 +47,7 @@ case 'gpl2':
 	
 	if (strlen($contentofgpl2) < 3)
 	{
-	$contentofgpl2 = "Can't find 'gpl2.txt' file .. search on the web about GPL2";
+		$contentofgpl2 = "Can't find 'gpl2.txt' file .. search on the web about GPL2";
 	}
 	
 	echo '
@@ -76,7 +76,7 @@ case 'c':
 						$_POST['db_pass'],
 						$_POST['db_name'],
 						$_POST['db_prefix']
-							);
+						);
 	
 	}
 	

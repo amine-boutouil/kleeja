@@ -58,7 +58,7 @@
 	}
 	
 	//include files .. & classes ..
-	$path		=	dirname(__FILE__) . DIRECTORY_SEPARATOR;
+	$path =	dirname(__FILE__) . DIRECTORY_SEPARATOR;
 	$root_path	=	'./';
 	require ($path . 'style.php');
 	require ($path . 'mysql.php');
@@ -117,6 +117,22 @@
 	    }
 	}
 
+	//check lang
+	if(!$config['language'] || empty($config['language']))
+	{
+		if(isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) && strlen($_SERVER['HTTP_ACCEPT_LANGUAGE']) > 2)
+		{
+			$config['language'] = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+			if(!file_exists($root_path . 'lang/' . $config['language'] . '/common.php'))
+			{
+				$config['language'] = 'en';
+			}
+		}
+	}
+	
+	//get languge of common
+	get_lang('common');
+	
 	
 	//ban system 
 	get_ban();

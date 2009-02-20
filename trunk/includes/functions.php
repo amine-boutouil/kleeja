@@ -535,79 +535,7 @@ function creat_style_xml($contents, $def=false)
 				return false;
 }
 
-/*
-* insert a new language from xml file
-* parameters : contents : xml file contents
-						def : true or false to be default style
-*/
-function creat_lang_xml($contents, $def=false) 
-{
-	global $dbprefix, $SQL;
 
-				($hook = kleeja_run_hook('creat_lang_xml_func')) ? eval($hook) : null; //run hook
-				
-				$gtree = xml_to_array($contents);
-						
-				$tree				=	$gtree['kleeja'];
-				$lang_info		=	$tree['info'];
-				$words			=	$tree['words'];
-				$word_s		=	$tree['words']['word'];		
-
-				//important tags not exists 
-				if(!is_array($lang_info) || !isset($words))
-				{
-					die($lang['ERR_XML_NO_G_TAGS']);
-				}
-				else
-				{
-					//insert in lists table 
-					$insert_query = array(
-												'INSERT'	=> 'list_name, list_author, list_type',
-												'INTO'		=> "{$dbprefix}lists",
-												'VALUES'	=> "'".$lang_info['lang_name']['value']."','".$lang_info['lang_author']['value']."', '2'"
-											);
-					($hook = kleeja_run_hook('qr_select_langinfo_crtlangxml_func')) ? eval($hook) : null; //run hook	
-					$SQL->build($insert_query);
-					
-					$new_lang_id	=	$SQL->insert_id();
-					//make as default 
-					if($def)
-					{
-						//update
-						$update_query = array(
-													'UPDATE'	=> "{$dbprefix}config",
-													'SET'		=> "value='". $new_lang_id ."'",
-													'WHERE'		=>	"`name`='language'"
-											);
-										
-										($hook = kleeja_run_hook('qr_update_deflang_crtlangxml_func')) ? eval($hook) : null; //run hook
-										if ($SQL->build($update_query))
-										{
-												//delete cache ..
-												delete_cache('data_config');
-										}
-					}
-					
-					//insert templates
-					foreach($word_s as $wd)
-					{
-						$lang_word		= $wd['attributes']['name'];
-						$lang_trans		= addslashes(strip_tags($wd['value'], '<b><br><br /><br/><i><u><a>')); //fixed
-						
-						$insert_query = array(
-											'INSERT'	=> 'lang_id, word, trans',
-											'INTO'		=> "{$dbprefix}lang",
-											'VALUES'	=> "'$new_lang_id','$lang_word', '$lang_trans'"
-											);
-						($hook = kleeja_run_hook('qr_insert_words_crtlangxml_func')) ? eval($hook) : null; //run hook	
-						$SQL->build($insert_query);
-					}
-					
-					return true;
-				}
-				
-				return false;
-}	  
 
 
 /*
@@ -784,33 +712,6 @@ function creat_plugin_xml($contents)
 								delete_cache('data_hooks');
 						}
 						
-						//langs
-						if(isset($plg_langs['lang']))
-						{
-							if(is_array($plg_langs['lang']))
-							{
-								if(array_key_exists("attributes",$plg_langs['lang']))
-								{
-									$plg_langs['lang'] = array($plg_langs['lang']);
-								}
-							}
-								foreach($plg_langs['lang'] as $ln)
-								{
-									$lang_word			=	$SQL->real_escape($ln['attributes']['word']);
-									$lang_trans			=	addslashes(strip_tags($ln['value'], '<b><br /><br><i><u><a>')); //fixed
-
-									$insert_query = array(
-															'INSERT'	=> 'word, trans, lang_id',
-															'INTO'		=> "{$dbprefix}lang",
-															'VALUES'	=> "'". $lang_word ."','".$lang_trans."', '".$config['language']."'"
-															);
-									($hook = kleeja_run_hook('qr_insert_langs_crtplgxml_func')) ? eval($hook) : null; //run hook
-									$SQL->build($insert_query);		
-								}
-								
-								//delete cache ..
-								delete_cache('data_lang_' . $config['language']);
-						}	
 					
 					if(sizeof($plg_errors)<1) 
 					{
@@ -1095,43 +996,8 @@ function big_error ($error_title,  $msg_text)
 		exit();
 }
 
-/*check for word in current language , if not add it
-*	parameters : word : language word as in $lang[word]
-						trans : translation of this word as in $lang[word] = trans;
-						language : witch languge will add to 
-*/
-function kj_lang($word, $trans, $language=false)
-{
-	global $lang, $SQL, $config, $dbprefix;
 
-	($hook = kleeja_run_hook('kleeja_kj_lang_func')) ? eval($hook) : null; //run hook
-			
-	if(!$word || $word == '') return false;
-	
-	if($lang[$word])
-	{
-		return $lang[$word];
-	}
-	else
-	{
-		$lang_word		=	$SQL->real_escape($word);
-		$lang_trans		=	addslashes(strip_tags($trans, '<b><br><br /><i><u><a>')); //fixed
-		$language			=	($language!==false) ?  $language : $config['language'];
-		$insert_query = array(
-										'INSERT'	=> 'word, trans, lang_id',
-										'INTO'		=> "{$dbprefix}lang",
-										'VALUES'	=> "'". $lang_word ."','".$lang_trans."', '".$language ."'"
-									);
-		($hook = kleeja_run_hook('qr_insert_lang_kj_lang_func')) ? eval($hook) : null; //run hook
-		$SQL->build($insert_query);		
-		
-		//delete cache ..
-		delete_cache('langs_' . $lang_id);
-		
-		return $lang_trans;
-	}
 
-}
 
 /*
 * send email
@@ -1629,4 +1495,36 @@ function get_mime_for_header($ext)
     	return 'application/force-download';  
 	}	
 }
+
+
+//
+//include lang
+//
+function get_lang($name, $folder = '')
+{
+	global $config, $root_path, $lang;
+	
+	
+	$name = str_replace('..', '', $name);
+	if($folder != '')
+	{
+		$folder = str_replace('..', '', $folder);
+		$name = $folder . '/' . $name;
+	}
+	
+	$path = $root_path . 'lang/' . $config['language'] . '/' . str_replace('.php', '', $name) . '.php';
+	
+	if(file_exists($path))
+	{
+		include_once($path);
+	}
+	else
+	{
+		big_error('There is no language file in the current path', '' . $path . ' not found');
+	}
+
+	return true;
+
+}
+
 ?>

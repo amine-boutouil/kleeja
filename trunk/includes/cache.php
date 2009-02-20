@@ -108,47 +108,6 @@ if(!defined('STOP_HOOKS'))
 		fwrite($filenumc, $file_datac);
 		fclose($filenumc);
 	}
-//
-//get lang data from lang table  ...
-//
-	if(!$lang || !is_array($lang))	$lang	=	array();
-	
-	if (file_exists($root_path.'cache/data_lang.php'))
-	{
-		include ($root_path.'cache/data_lang.php');
-	}
-	
-	if (!$lang or !file_exists($root_path.'cache/data_lang.php'))
-	{
-		$query = array(
-					'SELECT'	=> 'l.*',
-					'FROM'		=> "{$dbprefix}lang l",
-					'WHERE'		=>	"l.lang_id='" . $config['language'] . "'"
-					);
-					
-		($hook = kleeja_run_hook('qr_select_lang_cache')) ? eval($hook) : null; //run hook						
-		$result = $SQL->build($query);
-			
-				$file_datac = '<' . '?php' . "\n\n";
-				//$file_datac .= "if (!defined('IN_COMMON')) exit('no directly opening : ' . __file__);";
-				$file_datac .= "\n// auto-generated cache files\n//For: Kleeja \n\n";
-				$file_datac .= '$lang = array( ' . "\n";
-
-		while($row=$SQL->fetch_array($result))
-		{
-				$lang[$row['word']] =	$row['trans'];
-				$file_datac .= '\''.str_replace(array("'","\'"), "\'", $row['word']) . '\' => \'' . str_replace(array("'","\'"), "\'", $row['trans']) . '\',' . "\n";
-		}
-				$file_datac .= ');' . "\n\n";
-				$file_datac .= '?' . '>';
-				
-	 	$SQL->freeresult($result);
-
-		$filenumc = fopen($root_path.'cache/data_lang.php', 'w');
-		flock($filenumc, LOCK_EX); // exlusive look
-		fwrite($filenumc, $file_datac);
-		fclose($filenumc);
-	}
 
 //
 //get data from types table ... 

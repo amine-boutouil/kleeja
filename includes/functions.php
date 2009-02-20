@@ -467,7 +467,7 @@ function xml_get_children($vals, &$i)
 */
 function creat_plugin_xml($contents) 
 {
-	global $dbprefix, $SQL, $lang, $config;
+	global $dbprefix, $SQL, $lang, $config, $STYLE_PATH_ADMIN , $STYLE_PATH, $root_path;
 
 				$gtree = xml_to_array($contents);
 				
@@ -493,14 +493,18 @@ function creat_plugin_xml($contents)
 						eval($plg_install['value']);
 					}
 					
+					
+					//
+					$cached_instructions = array();
+					
 					//some actions with tpls
 					if(isset($plg_tpl))
 					{
 						//edit template
 						if(isset($plg_tpl['edit']))
 						{
-							require "s_strings.php";
-							$finder	=	new sa_srch;
+							include_once "s_strings.php";
+							$finder	= new sa_srch;
 							
 							if(is_array($plg_tpl['edit']['template']))
 							{
@@ -512,9 +516,9 @@ function creat_plugin_xml($contents)
 							
 							foreach($plg_tpl['edit']['template'] as $temp)
 							{
-									$template_name			=	$SQL->real_escape($temp['attributes']['name']);
-									$finder->find_word		=	$temp['find']['value'];
-									$finder->another_word	=	$temp['action']['value'];
+									$template_name			= $SQL->real_escape($temp['attributes']['name']);
+									$finder->find_word		= $temp['find']['value'];
+									$finder->another_word	= $temp['action']['value'];
 									switch($temp['action']['attributes']['type']):
 										case 'add_after': $action_type =3; break;
 										case 'add_after_same_line': $action_type =4; break;
@@ -523,44 +527,32 @@ function creat_plugin_xml($contents)
 										case 'replace_with': $action_type =1; break;
 									endswitch;
 									
-									$style_id = (substr($template_name, 0, 6) == 'admin_') ? 0 : $config['style'];
+									$style_path = (substr($template_name, 0, 6) == 'admin_') ? $STYLE_PATH_ADMIN : $STYLE_PATH;
 									
-									//get template content and do wut we have to do , then updated .. 
-									$query = array(
-													'SELECT'	=> 'template_content',
-													'FROM'		=> "{$dbprefix}templates",
-													'WHERE'		=>	"style_id='".intval($style_id)."' AND template_name='". $template_name ."'"
-												);
-									($hook = kleeja_run_hook('qr_select_tplcntedit_crtplgxml_func')) ? eval($hook) : null; //run hook
-									
-									$resultu = $SQL->build($query);
-									if($SQL->num_rows($resultu) == 0)
-									{
-										$query['WHERE'] = "style_id='1' AND template_name='". $template_name ."'";
-										$resultu = $SQL->build($query);
- 									}
-									
-									$result	= $SQL->fetch_array($resultu);
-							
-									if(!$result['template_content'])	continue;
-									
-									$finder->text		=	$result['template_content'];
+									$d_contents = file_get_contents($style_path . $template_name . '.html');
+									$finder->text = trim($d_contents);
 									$finder->do_search($action_type);
 									
-									if($finder->text != $result['template_content'])
+									if($finder->text != $d_contents && is_writable($style_path))
 									{
 										//update
-										$update_query = array(
-																'UPDATE'	=> "{$dbprefix}templates",
-																'SET'		=> "template_content = '". $SQL->real_escape($finder->text) ."'",
-																'WHERE'		=>	"style_id='". intval($style_id) ."' AND template_name='". $template_name . "'"
-															);
-										($hook = kleeja_run_hook('qr_update_tplcntedit_crtplgxml_func')) ? eval($hook) : null; //run hook
-										if ($SQL->build($update_query))
-										{
-												//delete cache ..
-												delete_cache('tpl_' .$template_name);
-										}
+										$filename = @fopen($style_path . $template_name . '.html', 'w');
+										fwrite($filename, $finder->text);
+										fclose($filename);
+															
+										($hook = kleeja_run_hook('op_update_tplcntedit_crtplgxml_func')) ? eval($hook) : null; //run hook
+	
+										//delete cache ..
+										delete_cache('tpl_' .$template_name);
+									}
+									else
+									{
+										$cached_instructions[$template_name] = array(
+																		'action'		=> $temp['action']['attributes']['type'], 
+																		'find'			=> $temp['find']['value'],
+																		'action_text'	=> $temp['action']['value'],
+																		);
+										
 									}
 								}
 						}#end edit
@@ -579,17 +571,27 @@ function creat_plugin_xml($contents)
 							
 								foreach($plg_tpl['new']['template'] as $temp)
 								{
-									$style_id = (substr($template_name, 0, 6) == 'admin_') ? 0 : $config['style'];
-									$template_name		=	$SQL->real_escape($temp['attributes']['name']);
-									$template_content	=	$SQL->real_escape($temp['value']);
-
-									$insert_query = array(
-																'INSERT'	=> 'style_id, template_name, template_content',
-																'INTO'		=> "{$dbprefix}templates",
-																'VALUES'	=> "'" . $style_id . "','$template_name', '$template_content'"
-																);
-									($hook = kleeja_run_hook('qr_insert_newtpls_crtplgxml_func')) ? eval($hook) : null; //run hook
-									$SQL->build($insert_query);		
+									$style_path = (substr($template_name, 0, 6) == 'admin_') ? $STYLE_PATH_ADMIN : $STYLE_PATH;
+									$template_name		= $temp['attributes']['name'];
+									$template_content	= trim($temp['value']);
+									
+									if(is_writable($style_path))
+									{
+										$filename = @fopen($style_path . $template_name . '.html', 'w');
+										fwrite($filename, $template_content);
+										fclose($filename);
+									}
+									else
+									{
+										$cached_instructions[$template_name] = array(
+																		'action'		=> 'new', 
+																		'find'			=> '',
+																		'action_text'	=> $template_content,
+																		);
+									}
+									
+									($hook = kleeja_run_hook('op_insert_newtpls_crtplgxml_func')) ? eval($hook) : null; //run hook
+									
 								}
 							
 							} #end new
@@ -620,13 +622,13 @@ function creat_plugin_xml($contents)
 								foreach($plg_hooks['hook'] as $hk)
 								{
 
-									$hook_for			=	$SQL->real_escape($hk['attributes']['name']);
-									$hk_value			=	$SQL->real_escape($hk['value']);
+									$hook_for =	$SQL->real_escape($hk['attributes']['name']);
+									$hk_value =	$SQL->real_escape($hk['value']);
 
 									$insert_query = array(
 														'INSERT'	=> 'plg_id, hook_name, hook_content',
 														'INTO'		=> "{$dbprefix}hooks",
-														'VALUES'	=> "'". $new_plg_id ."','".$hook_for."', '".$hk_value."'"
+														'VALUES'	=> "'" . $new_plg_id . "','" . $hook_for . "', '" . $hk_value . "'"
 														);
 									($hook = kleeja_run_hook('qr_insert_hooks_crtplgxml_func')) ? eval($hook) : null; //run hook
 									$SQL->build($insert_query);		
@@ -638,6 +640,14 @@ function creat_plugin_xml($contents)
 					
 					if(sizeof($plg_errors)<1) 
 					{
+						//add cached instuctions to cache if there
+						if(sizeof($cached_instructions) > 0)
+						{
+							$filename = @fopen($root_path . 'cache/styles_cached.php' , 'w');
+							fwrite($filename, base64_encode(serialize($cached_instructions)));
+							fclose($filename);
+						}
+						
 						return true;
 					}
 					else 
@@ -698,7 +708,7 @@ function kleeja_info($msg,$title='', $exit=true)
 					title : <title>title of page</title>
 					exit : stop script after showing msg 
 */
-function kleeja_err($msg,$title='', $exit=true)
+function kleeja_err($msg, $title='', $exit=true)
 {
 	global $text, $tpl;
 	
@@ -712,61 +722,6 @@ function kleeja_err($msg,$title='', $exit=true)
 				print $tpl->display('err');
 				//footer
 				Saafooter();
-				
-				if ($exit)
-				{
-					exit();
-				}
-}
-
-/*
-* print inforamtion message in admin panel
-* parameters : msg : text that will show as inforamtion
-					title : <title>title of page</title>
-					exit : stop script after showing msg 
-*/
-function kleeja_adm_info($msg,$title='', $exit=true)
-{
-	global $text, $tpl;
-	
-			($hook = kleeja_run_hook('kleeja_adm_info_func')) ? eval($hook) : null; //run hook
-				
-			// assign {text} in admin_info template	
-			$text	= $msg;
-				
-			//header
-			print $tpl->display("admin_header");
-				//info tpl
-				print $tpl->display('admin_info');
-			//footer
-			print $tpl->display("admin_footer");
-					
-			if ($exit)
-			{
-					exit();
-			}			
-}
-
-/*
-* print error message in admin panel
-* parameters : msg : text that will show as error message
-					title : <title>title of page</title>
-					exit : stop script after showing msg 
-*/
-function kleeja_adm_err($msg, $title='', $exit=true)
-{
-	global $text, $tpl;
-	
-				($hook = kleeja_run_hook('kleeja_adm_err_func')) ? eval($hook) : null; //run hook
-				
-				// assign {text} in admin_info template	
-				$text	= $msg;
-				//header
-				print $tpl->display("admin_header");
-					//err tpl
-					print $tpl->display('admin_err');
-				//footer
-				print $tpl->display("admin_footer");
 				
 				if ($exit)
 				{
@@ -1013,55 +968,6 @@ function fetch_remote_file($url)
 	}
 }
 
-/*
-* for delete changes in any template
-*paramters : array : this array will include name of template and code
-							will delete as name=>code
-*/
-function delete_change_styles($array)
-{
-	global $dbprefix, $SQL, $lang, $config;
-	
-	if(!is_array($array)) return false;
-	require "s_strings.php";
-	$finder	=	new sa_srch;
-
-	foreach($array as $tplname=>$codes)
-	{
-		$finder->find_word		=	$codes;
-		$finder->another_word	=	'<!-- auto delete kleeja.com -->';
-		//get template content and do wut we have to do , then updated .. 
-		$query = array(
-								'SELECT'	=> 'template_content',
-								'FROM'		=> "{$dbprefix}templates",
-								'WHERE'	=>	"style_id='".intval($config['style'])."' AND template_name='". $tplname ."'"
-							);
-		($hook = kleeja_run_hook('qr_select_delete_change_styles_func')) ? eval($hook) : null; //run hook
-		$result	= $SQL->fetch_array($SQL->build($query));
-		//no conents					
-		if(!$result['template_content']) continue;
-		
-		$finder->text = $result['template_content'];
-		$finder->do_search(1);
-									
-		if($finder->text != $result['template_content'])
-		{
-					//update
-					$update_query = array(
-												'UPDATE'	=> "{$dbprefix}templates",
-												'SET'		=> "template_content = '". $SQL->real_escape($finder->text) ."'",
-												'WHERE'		=>	"style_id='". intval($config['style']) ."' AND template_name='". $tplname . "'"
-											);
-					($hook = kleeja_run_hook('qr_update_delete_change_styles_func')) ? eval($hook) : null; //run hook
-					if ($SQL->build($update_query))
-					{
-						//delete cache ..
-						delete_cache($config['style'] . '_' .$tplname);
-					}
-		}
-
-	}
-}#end fun
 
 
 function kleeja_mime_groups($return_one = false)
@@ -1172,7 +1078,7 @@ function delete_cache($name, $all=false, $deep = false)
 	//unlink
 	if(!function_exists('unlink'))
 	{
-		big_error('No unlink function!', '<b>unlink</b> function Doesnt exists , That mean we can not delete any file and cache. <br/> You have enable this feature .');
+		big_error('No unlink function!', '<strong>unlink</strong> function Doesnt exists , That mean we can not delete any file and cache. <br /> You have enable this feature .');
 	}
 	
 	if($all)
@@ -1180,7 +1086,7 @@ function delete_cache($name, $all=false, $deep = false)
 		$dh = opendir($path_to_cache);
 		while (($file = readdir($dh)) !== false)
 		{
-			if($file != "." && $file != ".." && $file != ".htaccess" && $file != "index.html")
+			if($file != "." && $file != ".." && $file != ".htaccess" && $file != "index.html" && $file != 'styles_cached.php')
 			{
 				$del = @unlink ($path_to_cache . "/" . $file);
 			}
@@ -1449,5 +1355,7 @@ function get_lang($name, $folder = '')
 	return true;
 
 }
+
+
 
 ?>

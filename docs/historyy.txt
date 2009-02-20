@@ -190,6 +190,9 @@ RC6:
 - add new check system depend on mime types 
 - add some links in html like register , login ... 
 - fix bug when you add fmore feilds then will delete filed value...
++ styles now in files
++ languages now in files
+
 
 thank you for reading this file. 
 

@@ -96,7 +96,21 @@
         <!-- admin start info tr extra -->
 </table>
 
-        </fieldset>
+        </fieldset>   
+
+<IF NAME="update_now">
+<fieldset class="error">
+          <legend>{lang.R_CHECK_UPDATE}</legend>
+			{update_now_disc}
+</fieldset>   
+</IF>
+
+<IF NAME="there_is_cached">
+<fieldset class="info">
+          <legend>{lang.CACHED_STYLES}</legend>
+			{there_is_cached}
+</fieldset>   
+</IF>
 <br />
         <fieldset>
                 <legend>{lang.SIZE_STAT}</legend>
@@ -126,46 +140,46 @@
 <br />
         <fieldset>
                 <legend>{lang.OTHER_INFO}</legend>
-<table width="100%">
-<tr>
-<td><b>{lang.KLEEJA_VERSION} :</b>
-</td>
-<td>{kleeja_version}
-</td>
-</tr>
-<tr>
-<td><b>{lang.PHP_VER} :</b>
-</td>
-<td>{php_version}
-</td>
-</tr>
-<tr>
-<td><b>{lang.MYSQL_VER} :</b>
-</td>
-<td>{mysql_version}
-</td>
-</tr>
-<tr>
-<td><b>max_execution_time :</b>
-</td>
-<td>{max_execution_time}
-</td>
-</tr>
-<tr>
-<td><b>upload_max_filesize :</b>
-</td>
-<td>{upload_max_filesize}
-</td>
-</tr>
-<tr>
-<td><b>post_max_size:</b>
-</td>
-<td>{post_max_size}
-</td>
-</tr>
-<!-- admin start info2 tr extra -->
-</table>
-        </fieldset>
+		<table width="100%">
+		<tr>
+			<td><b>{lang.KLEEJA_VERSION} :</b>
+			</td>
+			<td>{kleeja_version}
+			</td>
+		</tr>
+		<tr>
+			<td><b>{lang.PHP_VER} :</b>
+			</td>
+			<td>{php_version}
+			</td>
+		</tr>
+		<tr>
+			<td><b>{lang.MYSQL_VER} :</b>
+			</td>
+			<td>{mysql_version}
+			</td>
+		</tr>
+		<tr>
+			<td><b>max_execution_time :</b>
+			</td>
+			<td>{max_execution_time}
+			</td>
+		</tr>
+		<tr>
+			<td><b>upload_max_filesize :</b>
+			</td>
+			<td>{upload_max_filesize}
+			</td>
+		</tr>
+		<tr>
+			<td><b>post_max_size:</b>
+			</td>
+			<td>{post_max_size}
+			</td>
+		</tr>
+		<!-- admin start info2 tr extra -->
+		</table>
+ </fieldset>
 
 </table>
 </div>

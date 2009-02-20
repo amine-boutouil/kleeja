@@ -44,8 +44,7 @@
 		//updating
 		$v = unserialize($config['new_version']);
 		$update_now		= (version_compare(strtolower(KLEEJA_VERSION), strtolower($v['version_number']), '<')) ? true : false;
-		$old_version	= KLEEJA_VERSION;
-		$new_version	= $v['version_number'];
+		$update_now_disc = sprintf($lang['UPDATE_NOW_S'] , KLEEJA_VERSION, $v['version_number']) . '<br />' . '<a href="http://www.kleeja.com/">www.kleeja.com</a>';
 		
 		//if 24 hours, lets chcek agian !
 		if((time() - $v['last_check']) > 86400 && !$v['msg_appeared'])
@@ -54,7 +53,13 @@
 		}	
 		
 		
-		
+		//cached
+		$there_is_cached = false;
+		$cached_file = $root_path . 'cache/styles_cached.php';
+		if(file_exists($cached_file))
+		{
+			$there_is_cached = sprintf($lang['CACHED_STYLES_DISC'] , '<a href="./admin.php?cp=styles&amp;sty_t=cached">' . $lang['CLICKHERE'] .'</a>');
+		}
 		
 		($hook = kleeja_run_hook('default_admin_page')) ? eval($hook) : null; //run hook 
 		

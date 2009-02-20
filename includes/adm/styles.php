@@ -242,5 +242,85 @@ switch ($_GET['sty_t'])
 		}
 		
 		break;
+		
+		
+		case 'cached':
+		
+			$cached_file = $root_path . 'cache/styles_cached.php';
+			
+			//delete cached styles
+			if(isset($_GET['del']))
+			{
+				delete_cache('styles_cached');
+				$text = $lang['CACHED_STYLES_DELETED'];
+				$stylee = 'admin_info';
+			}
+			elseif(!file_exists($cached_file))
+			{
+				$text = $lang['NO_CACHED_STYLES'];
+				$stylee = 'admin_info';
+			}
+			else
+			{
+				
+				$content = file_get_contents($cached_file);
+				$content = base64_decode($content);
+				$content = unserialize($content);
+				
+				ob_start();
+				foreach($content as $template_name=>$do)
+				{
+					
+					echo '<strong>' . $lang['OPEN'] . '</strong> : <br /> ' . (substr($template_name, 0, 6) == 'admin_' ? $STYLE_PATH_ADMIN : $STYLE_PATH) . $template_name . '<br />';
+					switch($do['action']):
+						case 'replace_with':
+							echo '<strong> ' . $lang['SEARCH_FOR'] . '<strong> : <br />';
+							echo '<textarea style="direction:ltr;width:90%">' . trim($do['find']) . '</textarea> <br />';
+							echo '<strong> ' . $lang['REPLACE_WITH'] . '<strong> : <br />';
+							echo '<textarea style="direction:ltr;width:90%">' . trim($do['action_text']) . '</textarea> <br />'; 
+						break;
+						case 'add_after':
+							echo '<strong> ' . $lang['SEARCH_FOR'] . '<strong> : <br />';
+							echo '<textarea style="direction:ltr;width:90%">' . trim($do['find']) . '</textarea> <br />';
+							echo '<strong> ' . $lang['ADD_AFTER'] . '<strong> : <br />';
+							echo '<textarea style="direction:ltr;width:90%">' . trim($do['action_text']) . '</textarea> <br />'; 
+						break;	
+						case 'add_after_same_line':
+							echo '<strong> ' . $lang['SEARCH_FOR'] . '<strong> : <br />';
+							echo '<textarea style="direction:ltr;width:90%">' . trim($do['find']) . '</textarea> <br />';
+							echo '<strong> ' . $lang['ADD_AFTER_SAME_LINE'] . '<strong> : <br />';
+							echo '<textarea style="direction:ltr;width:90%">' . trim($do['action_text']) . '</textarea> <br />'; 
+						break;
+						case 'add_before':
+							echo '<strong> ' . $lang['SEARCH_FOR'] . '<strong> : <br />';
+							echo '<textarea style="direction:ltr;width:90%">' . trim($do['find']) . '</textarea> <br />';
+							echo '<strong> ' . $lang['ADD_BEFORE'] . '<strong> : <br />';
+							echo '<textarea style="direction:ltr;width:90%">' . trim($do['action_text']) . '</textarea> <br />'; 
+						break;	
+						case 'add_before_same_line':
+							echo '<strong> ' . $lang['SEARCH_FOR'] . '<strong> : <br />';
+							echo '<textarea style="direction:ltr;width:90%">' . trim($do['find']) . '</textarea> <br />';
+							echo '<strong> ' . $lang['ADD_BEFORE_SAME_LINE'] . '<strong> : <br />';
+							echo '<textarea style="direction:ltr;width:90%">' . trim($do['action_text']) . '</textarea> <br />'; 
+						break;
+						case 'new':
+							echo '<strong> ' . $lang['ADD_IN'] . '<strong> : <br />';
+							echo '<textarea style="direction:ltr;width:90%">' . trim($do['action_text']) . '</textarea> <br />'; 
+						break;
+					endswitch;	
+				
+					
+					echo '<br /><hr /><br />';
+				}
+								
+				$text = ob_get_contents();
+				ob_end_clean();
+
+				$text .= '<br /><br /><a href="./admin.php?cp=styles&amp;sty_t=cached&amp;del=1">' . $lang['DELETE_CACHED_STYLES'] . '</a>';  
+						
+				$stylee = 'admin_info';
+			}
+		break;
+		
 }
 ?>

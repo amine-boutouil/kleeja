@@ -4,7 +4,7 @@
 #
 # Filename : cache.php
 # purpose :  cache for all script. the important feature of kleeja
-# copyright 2007-2008 Kleeja.com ..
+# copyright 2007-2009 Kleeja.com ..
 #license http://opensource.org/licenses/gpl-license.php GNU Public License
 # last edit by : saanina
 ##################################################
@@ -23,7 +23,7 @@ if(!defined('STOP_HOOKS'))
 {
 	if (file_exists($root_path . 'cache/data_hooks.php'))
 	{
-		include ($root_path . 'cache/data_hooks.php');
+		include_once ($root_path . 'cache/data_hooks.php');
 	}
 	
 	if (!$all_plg_hooks && !file_exists($root_path.'cache/data_hooks.php'))
@@ -75,7 +75,7 @@ if(!defined('STOP_HOOKS'))
 //
 	if (file_exists($root_path . 'cache/data_config.php'))
 	{
-		include ($root_path . 'cache/data_config.php');
+		include_once ($root_path . 'cache/data_config.php');
 	}
 	
 	if (!$config or !file_exists($root_path.'cache/data_config.php'))
@@ -114,7 +114,7 @@ if(!defined('STOP_HOOKS'))
 //
 	if (file_exists($root_path . 'cache/data_exts.php'))
 	{
-		include ($root_path . 'cache/data_exts.php');
+		include_once ($root_path . 'cache/data_exts.php');
 	}
 	
 	if (!($g_exts || $u_exts) || !(file_exists($root_path.'cache/data_exts.php')))
@@ -166,11 +166,11 @@ if(!defined('STOP_HOOKS'))
 		$tfile = filemtime("cache/data_stats.php");
 		if((time()-$tfile) >= 3600)//after 1 hours exactly
 		{    
-			unlink("cache/data_stats.php");
+			delete_cache("data_stats");
 		}
 		else
 		{
-			include ("cache/data_stats.php");
+			include_once ("cache/data_stats.php");
 		}
 	}
 	
@@ -265,8 +265,11 @@ if((int) $config['del_f_day'] >= 0)
 									
 					($hook = kleeja_run_hook('qr_del_delfiles_cache')) ? eval($hook) : null; //run hook	
 								
-					if (!$SQL->build($query_del)) die($lang['CANT_DELETE_SQL']);
-
+					if (!$SQL->build($query_del))
+					{
+						die($lang['CANT_DELETE_SQL']);
+					}
+					
 					//delete from folder ..
 					if (file_exists($row['folder'] . "/" . $row['name']))
 					{
@@ -283,8 +286,8 @@ if((int) $config['del_f_day'] >= 0)
 		
 	    //update $stat_last_f_del !!
 		$update_query = array(
-						'UPDATE'	=> "{$dbprefix}stats",
-						'SET'		=> "last_f_del ='" . time() . "'",
+							'UPDATE'	=> "{$dbprefix}stats",
+							'SET'		=> "last_f_del ='" . time() . "'",
 						);
 						
 		($hook = kleeja_run_hook('qr_update_delfiles_date_cache')) ? eval($hook) : null; //run hook
@@ -292,7 +295,7 @@ if((int) $config['del_f_day'] >= 0)
 		if (!$SQL->build($update_query)) die($lang['CANT_UPDATE_SQL']);
 		
 		//delete stats cache
-		unlink("cache/data_stats.php");
+		delete_cache("data_stats");
 		
 
     } //stat_del
@@ -304,7 +307,7 @@ if((int) $config['del_f_day'] >= 0)
 //
 	if (file_exists($root_path . 'cache/data_ban.php'))
 	{
-		include ($root_path . 'cache/data_ban.php');
+		include_once ($root_path . 'cache/data_ban.php');
 	}
 	
 	if (!$banss or !file_exists($root_path.'cache/data_ban.php'))
@@ -354,7 +357,7 @@ if((int) $config['del_f_day'] >= 0)
 //
 	if (file_exists($root_path.'cache/data_rules.php'))
 	{
-		include ($root_path.'cache/data_rules.php'); 
+		include_once ($root_path.'cache/data_rules.php'); 
 	}
 	
 	if (!isset($ruless) or !file_exists($root_path.'cache/data_rules.php'))
@@ -393,7 +396,7 @@ if((int) $config['del_f_day'] >= 0)
 //
 	if (file_exists($root_path.'cache/data_extra.php'))
 	{
-		include ($root_path.'cache/data_extra.php');
+		include_once ($root_path.'cache/data_extra.php');
 	}
 	
 	if (!isset($extras) or !file_exists($root_path.'cache/data_extra.php'))

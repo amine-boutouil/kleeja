@@ -80,21 +80,16 @@
 
 		//get styles
 		$stylfiles = $lngfiles	='';
-		$query_styles = array(
-							'SELECT'	=> '*',
-							'FROM'		=> "{$dbprefix}lists"
-							);
-						
-		$result_styles = $SQL->build($query_styles);
-
-		while($row=$SQL->fetch_array($result_styles))
-		{		
-			if($row['list_type']==1)
-				$stylfiles .=  '<option '.(($con['style']==$row['list_id']) ? 'selected="selected"' : ''). ' value="' . $row['list_id'] . '">' . $row['list_name'] . '</option>';
+		
+		if ($dh = @opendir($root_path . 'styles'))
+		{
+				while (($file = readdir($dh)) !== false)
+				{
+					if(strpos($file, '.') === false && $file != '..' && $file != '.')
+						$stylfiles .=  '<option '.(($con['style']==$file) ? 'selected="selected"' : ''). ' value="' . $file . '">' . $file . '</option>';
+				}
+				closedir($dh);
 		}
-		
-		$SQL->freeresult($result_styles);
-		
 		
 		//get languages
 		if ($dh = @opendir($root_path . 'lang'))
@@ -122,12 +117,13 @@
 				$text	= $lang['NUMFIELD_S'];
 				$stylee	= "admin_err";
 			}
-			elseif (($_POST['style'] != $config['style']) || ($_POST['language'] != $config['language']))
-			{
-				delete_cache('', true); //delete all cache to get new style and language cache
-			}
 			else
 			{
+				if(($_POST['style'] != $config['style']) || ($_POST['language'] != $config['language']))
+				{
+					delete_cache('', true); //delete all cache to get new style
+				}
+				
 				$text	= $lang['CONFIGS_UPDATED'];
 				$stylee	= "admin_info";
 			}

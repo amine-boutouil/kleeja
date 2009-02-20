@@ -69,7 +69,7 @@ case 'check':
 		echo '<br /><span style="color:green;"><b>[ ' . $lang['INST_GOOD_GO'] . ' ]</b></span><br /><br />';
 	}
 
-	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=action_file&'.get_lang(1).'">
+	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=action_file&'.getlang(1).'">
 	<input name="agres" type="submit" value="' . $lang['INST_SUBMIT'] . '" ' . $submit_wh . '/>
 	</form>';
 
@@ -82,7 +82,7 @@ case 'action_file':
 			if (!empty($_POST['action_file_do']))
 			{
 				//go to .. 2step
-				echo '<meta http-equiv="refresh" content="0;url=' . $_SERVER['PHP_SELF'].'?step=update_now&action_file_do='. htmlspecialchars($_POST['action_file_do']) .'&'.get_lang(1).'">';
+				echo '<meta http-equiv="refresh" content="0;url=' . $_SERVER['PHP_SELF'].'?step=update_now&action_file_do='. htmlspecialchars($_POST['action_file_do']) .'&'.getlang(1).'">';
 			//	@header("Location:".$_SERVER[PHP_SELF]."?step=check"); /* Redirect browser */
 			}
 
@@ -109,7 +109,7 @@ case 'action_file':
 		// show   list ..
 		echo '
 		<br />
-		<br /><form  action="' . $_SERVER['PHP_SELF'] . '?step=action_file&'.get_lang(1).'" method="post">
+		<br /><form  action="' . $_SERVER['PHP_SELF'] . '?step=action_file&'.getlang(1).'" method="post">
 		'.$lang['INST_CHOOSE_UPDATE_FILE'].' 
 		<br />
 		<select name="action_file_do" style="width: 352px">
@@ -129,7 +129,7 @@ case 'update_now':
 	
 		if(!isset($_GET['action_file_do']))
 		{
-			echo '<meta http-equiv="refresh" content="0;url=' . $_SERVER['PHP_SELF'].'?step=action_file&'.get_lang(1).'">';
+			echo '<meta http-equiv="refresh" content="0;url=' . $_SERVER['PHP_SELF'].'?step=action_file&'.getlang(1).'">';
 			exit();
 		}
 		

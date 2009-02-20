@@ -1,0 +1,78 @@
+
+        <div class="middle">
+<form method="post" action="{action1}">
+        <fieldset>
+                <legend>{lang.SEARCH_FILES}</legend>
+
+<table style="width: 90%">
+        <tr>
+                <td><label for="filename">{lang.FILENAME}</label></td>
+                <td><label><input type="text" id="filename" name="filename" value="{_POST.filename}" size="40"></label></td>
+        </tr>        
+        <tr>
+                <td><label for="username">{lang.USERNAME}</label></td>
+                <td><label><input type="text" id="username" name="username" value="{_POST.username}" size="40"></label></td>
+        </tr>        
+        <tr>
+                <td><label for="ext">{lang.FILETYPE}</label></td>
+                <td><label><input type="text" id="ext" name="ext" value="{_POST.ext}" size="20"></label></td>
+        </tr>
+        <tr>
+                <td><label for="size">{lang.FILESIZE} </label></td>
+                <td><label><select name="than"><option value="1">&gt;</option><option value="2">&lt;</option></select> <input type="text" id="size" name="size" value="{_POST.size}" size="10"></label>{lang.BITE}</td>
+        </tr>
+        <tr>
+                <td><label for="ups">{lang.FILEUPS} </label></td>
+                <td><label><select name="uthan"><option value="1">&gt;</option><option value="2">&lt;</option></select> <input type="text" id="ups" name="ups" value="{_POST.ups}" size="10"></label></td>
+        </tr>
+        <tr>
+                <td><label for="rep">{lang.REPORT} </label></td>
+                <td><label><select name="rthan"><option value="1">&gt;</option><option value="2">&lt;</option></select> <input type="text" id="rep" name="rep" value="{_POST.rep}" size="10"></label></td>
+        </tr>
+        <tr>
+                <td><label for="lastdown">{lang.LAST_DOWN} </label></td>
+                <td>
+                {lang.WAS_B4}
+                <label><input type="text" id="lastdown" name="lastdown" value="{_POST.lastdown}" size="10"></label>
+                {lang.DAYS}
+                </td>
+        </tr>
+        <tr>
+                <td><label for="user_ip">{lang.IP}</label></td>
+                <td>
+                <label><input type="text" id="user_ip" name="user_ip" value="{_POST.user_ip}" size="20"></label>
+                </td>
+        </tr>
+        <!-- admin search data tr extra -->
+</table>
+</fieldset>
+<fieldset class="quick" style="text-align:center">
+                <input class="button2" name="search_file" type="submit" value="{lang.SEARCH_SUBMIT}" />
+</fieldset>
+</form>
+<br />
+<br />
+<IF NAME="default_user_system">
+<form method="post" action="{action2}">
+        <fieldset>
+                <legend>{lang.SEARCH_USERS}</legend>
+
+<table style="width: 90%">
+        <tr>
+                <td><label for="username">{lang.USERNAME}</label></td>
+                <td><label><input type="text" id="username" name="username" value="{_POST.username}" size="40"></label></td>
+        </tr>                
+        <tr>
+                <td><label for="usermail">{lang.EMAIL}</label></td>
+                <td><label><input type="text" id="usermail" name="usermail" value="{_POST.usermail}" size="40"></label></td>
+        </tr>        
+        <!-- admin search data2 tr extra -->
+</table>
+</fieldset>
+<fieldset class="quick" style="text-align:center">
+                <input class="button2" name="search_user" type="submit" value="{lang.SEARCH_SUBMIT}" />
+</fieldset>
+</form>
+</IF>
+</div>
+        

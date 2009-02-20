@@ -15,39 +15,33 @@ if(isset($_GET['change_lang']))
 			
 }
 
-function get_lang ($link=false)
+function getlang ($link=false)
 {
 	if (isset($_GET['lang']))
 	{ 
-					if(empty($_GET['lang']))  $_GET['lang'] = 'en';
+		if(empty($_GET['lang']))  $_GET['lang'] = 'en';
 					
-					if(file_exists('langs/' . htmlspecialchars($_GET['lang']) . '.php'))
-					{
-						$ln	=  htmlspecialchars($_GET['lang']);
-					}
-					else
-					{
-						$ln = 'en';
-					}	
+		if(file_exists('../lang/' . htmlspecialchars($_GET['lang']) . '/install.php'))
+			$ln	=  htmlspecialchars($_GET['lang']);
+		else
+			$ln = 'en';
 
 	}
 	else
-	{
-		$ln	=	'en';
-	}
+		$ln	= 'en';
 
 	return ($link != false) ? 'lang=' . $ln : $ln;
 }
 
-//for language //	fix for 1rc3
-include ('langs/' .get_lang() . '.php');
+//for language //	
+include ('../lang/' .getlang() . '/install.php');
 
 /*
 style of installer
 */
 $header_inst = '<!-- Header Start -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="' . get_lang() . '" lang="' . get_lang() . '" dir="' . $lang['DIR'] . '">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="' . getlang() . '" lang="' . getlang() . '" dir="' . $lang['DIR'] . '">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>...Kleeja...</title><style type="text/css">
@@ -247,28 +241,28 @@ function formCheck(formobj, fieldRequired)
 
 if ((isset($_GET['step']) && $_GET['step'] != 'language') && (strpos('index.php',$_SERVER['PHP_SELF'])=== false && isset($_GET['step'])))
 {
-$header_inst .= '<form action="?change_lang" method="post">
-<img src="img/world.gif" alt="language" style="float:left" /> 
-<select name="lang" style="float:left" onchange="submit()">';
+	$header_inst .= '<form action="?change_lang" method="post">
+	<img src="img/world.gif" alt="language" style="float:left" /> 
+	<select name="lang" style="float:left" onchange="submit()">';
 
-$path = "langs";
-		$dh = @opendir($path);
-		$lngfiles = '';
-		$i=1;
-		while (($file = @readdir($dh)) !== false)
-		{
-		    if($file != "." && $file != ".."  && $file != "index.html")
-			{
-				$file = str_replace('.php','', $file);
-				$header_inst .= '<option value="' . $file . '" ' . ($file==$_GET['lang'] ? 'selected="selected"' : '') . '>' . $file . '</option>';
-				$i++;
-		    }
-		}
-		@closedir($dh);
-$header_inst .= '</select>
-<input type="hidden" name="step_is" value="' . $_GET['step'] . '" />
-</form>';
+	$path = "../lang";
+
+	if ($dh = @opendir($path))
+	{
+				while (($file = readdir($dh)) !== false)
+				{
+					if(strpos($file, '.') === false && $file != '..' && $file != '.')
+						$header_inst .= '<option value="' . $file . '" ' . ($file==$_GET['lang'] ? 'selected="selected"' : '') . '>' . $file . '</option>';
+				}
+				closedir($dh);
+	}
+
+
+	$header_inst .= '</select>
+	<input type="hidden" name="step_is" value="' . $_GET['step'] . '" />
+	</form>';
 }
+
 $header_inst .= '
 <img src="img/logo.gif" style="border:0;" alt="kleeja" />
 <br />

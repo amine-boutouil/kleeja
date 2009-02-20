@@ -1,11 +1,11 @@
 <?php
 # KLEEJA INSTALLER ...
-# updated  [14/10/2008]
+# updated  [20/3/2009]
 # this file have many updates .. dont use previous ones
 # last edit by : saanina
 
 /*
-include important files
+	include important files
 */
 
 
@@ -51,7 +51,7 @@ case 'gpl2':
 	}
 	
 	echo '
-	<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=c&'.get_lang(1).'">
+	<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=c&'.getlang(1).'">
 	<textarea name="gpl2" rows=""   readonly="readonly" cols="" style="width: 456px; height: 365px;direction:ltr;">
 	' . $contentofgpl2 . '
 	</textarea>
@@ -85,7 +85,7 @@ case 'c':
 	
 	if($xs== false)
 	{
-		 print '<br /><form method="post"  action="' . $_SERVER['PHP_SELF'] . '?step=c&' . get_lang(1) . '"  onsubmit="javascript:return formCheck(this, Array(\'db_server\',\'db_user\' ,\'db_name\',\'db_prefix\' ));">
+		 print '<br /><form method="post"  action="' . $_SERVER['PHP_SELF'] . '?step=c&' . getlang(1) . '"  onsubmit="javascript:return formCheck(this, Array(\'db_server\',\'db_user\' ,\'db_name\',\'db_prefix\' ));">
 
 			<fieldset id="Group1" dir="' . $lang['DIR'] . '">
 			<b>' . ($writeable_path ? $lang['DB_INFO'] : $lang['DB_INFO_NW']) . '</b>
@@ -131,7 +131,7 @@ case 'c':
 				echo '<br />
 				<hr/>
 				<br />
-				<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=c&'.get_lang(1).'">
+				<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=c&'.getlang(1).'">
 				<input  type="submit" value="' . $lang['INST_SUBMIT_CONFIGOK'] . '" />
 				</form>';
 			}
@@ -139,7 +139,7 @@ case 'c':
 	else
 	{
 		echo  ' <fieldset><br /><span style="color:green;"><strong>'. $lang['CONFIG_EXISTS'] . '</strong><br /><br />';
-		echo  '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=check&'.get_lang(1).'">
+		echo  '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=check&'.getlang(1).'">
 		<input name="agres" type="submit" value="' . $lang['INST_SUBMIT'] . '" />
 		</form></fieldset>';
 	}
@@ -202,7 +202,7 @@ case 'check':
 	print '<fieldset>';
 	if ($texterr !='')
 	{
-		print '<br /><img src="img/bad.gif" alt="bad." /> <br />'.$texterr;
+		print '<br /><img src="img/bad.gif" alt="bad." /> <br />' . $texterr;
 		$submit_wh = 'disabled="disabled"';
 	}
 
@@ -211,7 +211,7 @@ case 'check':
 		print '<br /><img src="img/good.gif" alt="good" /> <br /><span style="color:green;"><b>[ ' . $lang['INST_GOOD_GO'] . ' ]</b></span><br /><br />';
 	}
 
-	print '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=data&'.get_lang(1).'">
+	print '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=data&'.getlang(1).'">
 	<input name="agres" type="submit" value="' . $lang['INST_SUBMIT'] . '" ' . $submit_wh . ' />
 	</form></fieldset>';
 
@@ -279,10 +279,7 @@ case 'data' :
 				elseif ($name == 'exts')		print '<span style="color:green;">' . $lang['INST_CRT_EXT'] . '</span><br />';
 				elseif ($name == 'online')		print '<span style="color:green;">' . $lang['INST_CRT_ONL'] . '</span><br />';
 				elseif ($name == 'hooks')		print '<span style="color:green;">' . $lang['INST_CRT_HKS'] . '</span><br />';
-				elseif ($name == 'lang')		print '<span style="color:green;">' . $lang['INST_CRT_LNG'] . '</span><br />';
-				elseif ($name == 'lists')		print '<span style="color:green;">' . $lang['INST_CRT_LSTS'] . '</span><br />';
 				elseif ($name == 'plugins')		print '<span style="color:green;">' . $lang['INST_CRT_PLG'] . '</span><br />';
-				elseif ($name == 'templates')	print '<span style="color:green;">' . $lang['INST_CRT_TPL'] . '</span><br />';
 				else
 				{
 					
@@ -310,10 +307,8 @@ case 'data' :
 		{
 			// start classe..
 			$SQL	= new SSQL($dbserver,$dbuser,$dbpass,$dbname);
-			make_style();
-			make_language($_GET['lang']);
-			
-			print '<fieldset><form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=end&'.get_lang(1).'">
+
+			print '<fieldset><form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=end&' . getlang(1) . '">
 			<input name="agres" type="submit" value="' . $lang['INST_SUBMIT'] . '"/>
 			</form></fieldset>';
 			
@@ -330,7 +325,7 @@ case 'data' :
 	//$sitepath = $_SERVER['DOCUMENT_ROOT'].dirname($_SERVER['PHP_SELF']);
 	$urlsite =  "http://".$_SERVER['HTTP_HOST'] . str_replace('install','',dirname($_SERVER['PHP_SELF']));
 
- print '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=data&'.get_lang(1).'"  onsubmit="javascript:return formCheck(this, Array(\'sitename\',\'siteurl\',\'sitemail\' ,\'username\',\'password\',\'email\' ));">
+ print '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=data&'.getlang(1).'"  onsubmit="javascript:return formCheck(this, Array(\'sitename\',\'siteurl\',\'sitemail\' ,\'username\',\'password\',\'email\' ));">
 	<fieldset id="Group1" dir="' . $lang['DIR'] . '">
 	<legend style="width: 73px"> [ <strong>' . $lang['INST_SITE_INFO'] . '</strong> ]</legend>
 	<table style="width: 100%">

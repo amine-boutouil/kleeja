@@ -1,0 +1,76 @@
+
+        
+<div class="middle">
+<form method="post" action="{action}">
+        <fieldset>
+                <legend>{lang.PLUGINS}</legend>
+
+<table style="width: 100%">
+        <tr style="background-color:silver">
+                <td>{lang.PLUGINS_EX}</td>
+
+        </tr>
+<tr style="background-color:#F5F5F5">
+<td>
+<IF NAME="no_plugins">
+{lang.NO_PLUGINS}
+<ELSE>
+        <select name="plg_choose" size="6" style="width: 200px; ">
+        <LOOP NAME="arr">
+        <option  value="{{plg_id}}">{{plg_name}}</option>
+        </LOOP>
+        </select>
+        <br />
+        <input name="method" value="1" type="radio" checked="checked" /> {lang.DISABLE}  
+        <br />
+        <input name="method" value="2" type="radio" /> {lang.ENABLE} 
+        <br />
+        <input name="method" value="3" type="radio" /> {lang.DELETE}
+</IF>
+
+</td>
+        </tr>
+</table>
+
+</fieldset>
+<fieldset class="quick" style="text-align:center">
+                <input class="button2" name="submit" type="submit" value="{lang.SUBMIT}" />
+</fieldset>
+</form>
+</div>
+
+<br />
+
+<br />
+
+<div class="middle">
+<form method="post" action="{action}" enctype="multipart/form-data">
+        <fieldset>
+                <legend>{lang.ADD_NEW_PLUGIN}</legend>
+
+<table style="width: 100%">
+        <tr style="background-color:silver">
+                <td>{lang.ADD_NEW_PLUGIN_EXP}</td>
+
+        </tr>
+<tr style="background-color:#F5F5F5">
+<td>
+
+<input name="imp_file" type="file" />
+
+
+</td>
+        </tr>
+</table>
+
+</fieldset>
+<fieldset class="quick" style="text-align:center">
+                <input class="button2" name="submit_new_plg" type="submit" value="{lang.SUBMIT}" />
+</fieldset>
+</form>
+
+</div>
+
+
+
+        

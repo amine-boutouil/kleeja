@@ -1,0 +1,175 @@
+
+        
+<div class="middle">
+                        
+<h2>{lang.KLEEJA_CP}..</h2>        
+{lang.KLEEJA_CP_W}
+<br />
+<br />
+        <fieldset>
+                <legend>{lang.GENERAL_STAT}</legend>
+                
+<table width="80%">
+<tr>
+<td><b>{lang.AFILES_NUM} :</b>
+</td>
+<td>{files_number}
+</td>
+</tr>
+<tr>
+<td><b>{lang.AFILES_SIZE} :</b>
+</td>
+<td>{files_sizes}
+</td>
+</tr>
+<tr>
+<td><b>{lang.AUSERS_NUM} :</b>
+</td>
+<td>{users_number}
+</td>
+</tr>
+<tr>
+<td><b>{lang.LSTDELST} :</b>
+</td>
+<td>{last_del_fles}
+</td>
+</tr>
+<tr>
+<td><b>{lang.LSTFLE_ST} :</b>
+</td>
+<td><a href="{last_file_up}" target="blank">{last_file_up}</a>
+</td>
+</tr>
+<tr>
+<td><b>{lang.S_C_T} :</b>
+</td>
+<td>{s_c_t}
+</td>
+</tr>
+<tr>
+<td><b>{lang.S_C_Y} :</b>
+</td>
+<td>{s_c_y}
+</td>
+</tr>
+<tr>
+<td><b>{lang.S_C_A} :</b>
+</td>
+<td>{s_c_a}
+</td>
+</tr>
+<tr>
+<td><b>{lang.LAST_GOOGLE} :</b>
+</td>
+<td>{s_last_google}
+</td>
+</tr>
+<tr>
+<td><b>{lang.GOOGLE_NUM} :</b>
+</td>
+<td>{s_google_num}
+</td>
+</tr>
+<tr>
+<td><b>{lang.LAST_YAHOO} :</b>
+</td>
+<td>{s_last_yahoo}
+</td>
+</tr>
+<tr>
+<td><b>{lang.YAHOO_NUM} :</b>
+</td>
+<td>{s_yahoo_num}
+</td>
+</tr>
+<IF NAME="last_visit">
+        <tr>
+        <td><b>{lang.LAST_VISIT} :</b>
+        </td>
+        <td>
+        {last_visit}<br />
+        <a href="{h_lst_files}">{lang.FLS_LST_VST_SEARCH}</a><br />
+        <a href="{h_lst_imgs}">{lang.IMG_LST_VST_SEARCH}</a>
+        </td>
+        </tr>
+</IF>
+        <!-- admin start info tr extra -->
+</table>
+
+        </fieldset>
+<br />
+        <fieldset>
+                <legend>{lang.SIZE_STAT}</legend>
+                
+          <table width="100%" cellspacing="1" cellpadding="2" border="0" style=" background-color:#F0F0F0" dir="ltr">
+                <tr> 
+                  <td colspan="3" style="width:100%; text-align:right;" nowrap="nowrap">{lang.USING_SIZE}</td>
+                </tr>
+                <tr> 
+                  <td colspan="3" style="width:100%;">
+                        <table cellspacing="0" cellpadding="1" border="0">
+                          <tr> 
+                                <td style="background-color: olive"><img src="images/spacer.gif" width="{per1}" height="10" /></td>
+                          </tr>
+                        </table>
+                  </td>
+                </tr>
+                <tr> 
+                  <td style="width:33%;background-color: #CCEECC;">0%</td>
+                  <td style="width:34%; background-color: #FFFFE8; text-align:center;">50%</td>
+                  <td style="width:33%;background-color: #FFD2D2; text-align:right;">100%</td>
+                </tr>
+          </table>
+
+        </fieldset>
+
+<br />
+        <fieldset>
+                <legend>{lang.OTHER_INFO}</legend>
+<table width="100%">
+<tr>
+<td><b>{lang.KLEEJA_VERSION} :</b>
+</td>
+<td>{kleeja_version}
+</td>
+</tr>
+<tr>
+<td><b>{lang.PHP_VER} :</b>
+</td>
+<td>{php_version}
+</td>
+</tr>
+<tr>
+<td><b>{lang.MYSQL_VER} :</b>
+</td>
+<td>{mysql_version}
+</td>
+</tr>
+<tr>
+<td><b>max_execution_time :</b>
+</td>
+<td>{max_execution_time}
+</td>
+</tr>
+<tr>
+<td><b>upload_max_filesize :</b>
+</td>
+<td>{upload_max_filesize}
+</td>
+</tr>
+<tr>
+<td><b>post_max_size:</b>
+</td>
+<td>{post_max_size}
+</td>
+</tr>
+<!-- admin start info2 tr extra -->
+</table>
+        </fieldset>
+
+</table>
+</div>
+                
+
+
+        

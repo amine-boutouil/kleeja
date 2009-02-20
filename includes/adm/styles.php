@@ -21,251 +21,168 @@ switch ($_GET['sty_t'])
 		$action 	= "admin.php?cp=styles&amp;sty_t=st";
 
 		//get styles
-		$query = array(
-					'SELECT'	=> '*',
-					'FROM'		=> "{$dbprefix}lists",
-					'WHERE'		=> "list_type=1"
-					);
-						
-		$result = $SQL->build($query);
-		
-		//admin style
 		$arr = array();
-		$arr[] = array('style_id' => 0, 'style_name' => $lang['KLEEJA_CP'], 'selected'=>''); 
-		
-		while($row=$SQL->fetch_array($result))
+		if ($dh = @opendir($root_path . 'styles'))
 		{
-				$arr[] = array( 'style_id'	=> $row['list_id'],
-								'style_name'=>  $row['list_name'] . ($config['style'] == $row['list_id'] ? ' [' . $lang['STYLENAME'] . ']' : ''),
-								'selected'	=>  ($config['style'] == $row['list_id'] ? 'selected="selected"' : ''),
-							);
-
+				while (($file = readdir($dh)) !== false)
+				{
+					if(strpos($file, '.') === false && $file != '..' && $file != '.')
+					{
+						$arr[] = array(	'style_id' => $file,
+										'style_name'=>  $file . ($config['style'] == $file ? ' [' . $lang['STYLE_IS_DEFAULT'] . ']' : ''),
+										'selected'	=>  ($config['style'] == $file ? 'selected="selected"' : ''),
+									);
+					}
+				}
+				closedir($dh);
 		}
 		
-		$SQL->freeresult($result);
-	
+		//look is there any template changes for plugins
+		//bla bla bla
+		
+		
 
+		
+		
 		//after submit
-		if(isset($_GET['style_choose']))
+		if(isset($_REQUEST['style_choose']))
 		{
-			$_POST['submit']		= true;
-			$_POST['style_choose']	= $_GET['style_choose'];
-			$_POST['method']		= $_GET['method'];
-		}
-		
-		if (isset($_POST['submit']))
-		{
-			$style_id = intval($_POST['style_choose']);
+			$style_id = str_replace('..', '', $_REQUEST['style_choose']);
 			
-			switch($_POST['method'])
+			//is there any possiplity to write on files
+			$not_style_writeable = true;
+			$d_style_path = $root_path . 'styles/' . $style_id; 
+			if (!is_writable($d_style_path))
 			{
+				@chmod($d_style_path, 0777);
+				if (is_writable($d_style_path))
+				{
+					$not_style_writeable = false;
+				}
+			}
+			else
+			{
+				$not_style_writeable = false;
+			}
+			
+			$lang['STYLE_DIR_NOT_WR'] = sprintf($lang['STYLE_DIR_NOT_WR'], $d_style_path);
+			
+			
+			switch($_REQUEST['method'])
+			{
+				default:
 				case '1': //show templates
+				
 					//for style ..
 					$stylee = "admin_show_tpls";
-					//words
-					$action = "admin.php?cp=styles&sty_t=style_orders";
+					$action = "admin.php?cp=styles&amp;sty_t=style_orders";
+
 					
 					//get_tpls
-					$query = array(
-								'SELECT'	=> '*',
-								'FROM'		=> "{$dbprefix}templates",
-								'WHERE'		=> "style_id=" . $style_id
-								);
-									
-					$result = $SQL->build($query);
-					
-					$arr	=	array();
-					
-					while($row=$SQL->fetch_array($result))
+					$tpls_basic = array();
+					$tpls_msg = array();
+					$tpls_user = array();
+					$tpls_other = array();
+					if ($dh = @opendir($d_style_path))
 					{
-							$arr[] = array(
-											'template_name' => $row['template_name']
-							);
+							while (($file = readdir($dh)) !== false)
+							{
+								if($file != '..' && $file != '.' && !is_dir($file))
+								{
+									if(in_array($file, array('header.html', 'footer.html', 'index_body.html')))
+									{
+										$tpls_basic[] = array( 'template_name'=>  $file );
+									}
+									else if(in_array($file, array('info.html', 'err.html')))
+									{
+										$tpls_msg[]	= array( 'template_name'=>  $file );
+									}
+									else if(in_array($file, array('login.html', 'register.html', 'profile.html', 'get_pass.html', 'fileuser.html', 'filecp.html')))
+									{
+										$tpls_user[]	= array( 'template_name'=>  $file );
+									}
+									else
+									{
+										$tpls_other[] = array( 'template_name'=>  $file );
+									}
+								}
+							}
+							closedir($dh);
 					}
-					$SQL->freeresult($result);
+					
 					
 				break;
 			
-				case '2': // del the style
+				case '2': // make as default
 				
-						//style number 1, 0 not for deleting 
-						if($style_id != 1 && $style_id != 0)
-						{
-							$query_del = array(
-											'DELETE'	=> "{$dbprefix}lists",
-											'WHERE'		=> "list_id='" . $style_id . "' AND list_type=1"
-											);
-
+					$query_df = array(
+										'UPDATE'=> "{$dbprefix}config",
+										'SET'	=> "value='" . $SQL->escape($style_id) . "'",
+										'WHERE'	=> "name='style'"
+										);
 											
-							if (!$SQL->build($query_del)) die($lang['CANT_DELETE_SQL']);
-											
-							$query_del2 = array(
-											'DELETE'	=> "{$dbprefix}templates",
-											'WHERE'		=> 'style_id=' . $style_id
-											);		
-											
-							if (!$SQL->build($query_del2)) die($lang['CANT_DELETE_SQL'] . ' 2');
-							
-							//show msg
-							$text	= $lang['STYLE_DELETED'] . '<meta HTTP-EQUIV="REFRESH" content="2; url=./admin.php?cp=styles">' ."\n";
-						}
-						else
-						{
-							//show msg
-							$text	= $lang['STYLE_1_NOT_FOR_DEL'].'<meta HTTP-EQUIV="REFRESH" content="2; url=./admin.php?cp=styles">' ."\n";
-						}
-
-							$stylee	= "admin_info";
-						
-				break;
-				
-				case '3': //export as xml 
-				
-					//get_style information
-					$query = array(
-								'SELECT'	=> '*',
-								'FROM'		=> "{$dbprefix}lists",
-								'WHERE'		=> "list_id='" . $style_id . "' AND list_type=1"
-								);
-									
-					$result = $SQL->build($query);
-
-					$style_info	=	$SQL->fetch_array($result);
-					
-					//build the xml sheet
-					
-					$xml_data = "<?xml version=\"1.0\" encoding=\"utf-8\"?".">\r\n";
-					$xml_data .= "<kleeja>\r\n";
-					$xml_data .= "<info>\r\n";
-					$xml_data .= "\t<style_name>" . $style_info['list_name']  . "</style_name>\r\n";
-					$xml_data .= "\t<style_author>" . $style_info['list_author']  . "</style_author>\r\n";
-					$xml_data .= "</info>\r\n";
-					$xml_data .= "<templates>\r\n";
-					
-					//get tpls
-					$query2 = array(
-								'SELECT'	=> '*',
-								'FROM'		=> "{$dbprefix}templates",
-								'WHERE'		=> "style_id=" . $style_id
-								);
-									
-					$result2 = $SQL->build($query2);
-
-					while($row=$SQL->fetch_array($result2))
+					if (!$SQL->build($query_df))
 					{
-						$xml_data .= "\t<template name=\"" . $row['template_name'] . "\">\r\n";
-						$xml_data .= "\t<![CDATA[" . $row['template_content'] . "]]>\r\n";
-						$xml_data .= "\t</template>\r\n";
-					}
-					$SQL->freeresult($result);
-				
-					$xml_data .= "</templates>\r\n";
-					$xml_data .= "</kleeja>\r\n";
-				
-					//now , lets export
-					header('Pragma: no-cache');
-					header("Content-Type: application/xml; name=" . $style_info['list_name'] . ".xml");
-					header("Content-disposition: attachment; filename=" . $style_info['list_name'] . ".xml");
-					echo $xml_data;
-					exit;
+						die($lang['CANT_UPDATE_SQL']);
+					}				
 					
+					delete_cache('', true); //delete all cache to get new style
+					
+					//show msg
+					$text = $lang['STYLE_NOW_IS_DEFAULT'] . '<meta HTTP-EQUIV="REFRESH" content="2; url=./admin.php?cp=styles">' ."\n";
+					$stylee	= "admin_info";
+						
 				break;
 				
+				
 			}
 		}
-		//new style from xml
-		if(isset($_POST['submit_new_style']))
-		{
-			$text	=	'';
-			// oh , some errors
-			if($_FILES['imp_file']['error'])
-			{
-				$text	= $lang['ERR_IN_UPLOAD_XML_FILE'];
-			}
-			else if(!is_uploaded_file($_FILES['imp_file']['tmp_name']))
-			{
-				$text	= $lang['ERR_UPLOAD_XML_FILE_NO_TMP'];
-			}
 
-			//get content
-			$contents = @file_get_contents($_FILES['imp_file']['tmp_name']);
-			// Delete the temporary file if possible
-			
-			// Are there contents?
-			if(!trim($contents))
-			{
-				$text	= $lang['ERR_UPLOAD_XML_NO_CONTENT'];
-			}
-						
-						
-			if(empty($text))
-			{
-				if(creat_style_xml($contents))
-				{
-					$text	= $lang['NEW_STYLE_ADDED'].'<meta HTTP-EQUIV="REFRESH" content="2; url=./admin.php?cp=styles">' ."\n";	
-				}
-				else
-				{
-					$text	= $lang['ERR_IN_UPLOAD_XML_FILE'];
-				}
-			}		
-
-			$stylee	= "admin_info";
-		}
-		
 		break; 
 		
 		case "style_orders" :
 		
 		//edit or del tpl 
-		if(isset($_POST['tpls_submit']))
+		if(isset($_POST['tpl_choose']))
 		{
 			
 			//style id ..fix for zooz
-			$style_id	=	$_POST['style_id'];
-			
+			$style_id = str_replace('..', '', $_POST['style_id']);
 			//tpl name 
-			$tpl_name	=	$SQL->escape($_POST['tpl_choose']);
+			$tpl_name =	$SQL->escape($_POST['tpl_choose']);
+			$tpl_path = $root_path . 'styles/' . $style_id . '/' . $tpl_name;
+			$d_style_path = $root_path . 'styles/' . $style_id; 
 			
-			if(!is_numeric($style_id))
+			if(!file_exists($tpl_path))
 			{
-				big_error($lang['ERROR_NAVIGATATION'], 'style_id is not exists!!');
+				$text = sprintf($lang['TPL_PATH_NOT_FOUND'], $tpl_path);
+				$_POST['method'] = 0;
 			}
-			
-			if(empty($tpl_name))
+			else if (!is_writable($d_style_path))
 			{
-				big_error($lang['ERROR_NAVIGATATION'], $lang['NO_TPL_SHOOSED']);
+				$text = sprintf($lang['STYLE_DIR_NOT_WR'], $d_style_path);
+				$_POST['method'] = 0;
 			}
 			
 			switch($_POST['method'])
 			{	
+				case '0':
+					$stylee = "admin_info";
+				break;
 				case '1': //edit tpl
 					//for style ..
 					$stylee = "admin_edit_tpl";
 					$action = "admin.php?cp=styles&amp;sty_t=style_orders";
 
-					
-					$query = array(
-								'SELECT'	=> 'template_content',
-								'FROM'		=> "{$dbprefix}templates",
-								'WHERE'		=>	"style_id='$style_id' AND template_name='$tpl_name'"
-								);
-											
-					$template_content	= $SQL->fetch_array($SQL->build($query));
-					$template_content	= htmlspecialchars(stripslashes($template_content['template_content']));
-					
 
+					$template_content	= file_get_contents($tpl_path);
+					
 				break;
 				
 				case '2' : //delete tpl
 				
-						$query_del = array(
-										'DELETE'	=> "{$dbprefix}templates",
-										'WHERE'		=>	"style_id='$style_id' AND template_name='$tpl_name'"
-										);
-															
-						if (!$SQL->build($query_del)) die($lang['CANT_DELETE_SQL']);
-						
+						@unlink($tpl_path);
+							
 						//show msg
 						$link	= './admin.php?cp=styles&amp;style_choose=' . $style_id . '&amp;method=1';
 						$text	= $lang['TPL_DELETED']  . '<br /> <a href="' . $link . '">' . $lang['GO_BACK_BROWSER'] . '</a><meta HTTP-EQUIV="REFRESH" content="1; url=' . $link . '">' ."\n";
@@ -276,15 +193,18 @@ switch ($_GET['sty_t'])
 		}
 		
 		// submit edit of tpl
-		if(isset($_POST['tpl_edit_submit']))
+		if(isset($_POST['template_content']))
 		{
-			//style id 
-			$style_id			=	intval($_POST['style_id']);
+			$style_id = str_replace('..', '', $_POST['style_id']);
 			//tpl name 
-			$tpl_name			=	$SQL->escape($_POST['tpl_choose']);				
-			//tpl contents 
-			$template_content	=	$SQL->real_escape($_POST['template_content']);	
+			$tpl_name =	$SQL->escape($_POST['tpl_choose']);
+			$tpl_path = $root_path . 'styles/' . $style_id . '/' . $tpl_name;
 		
+			$tpl_content = $_POST['template_content'];
+			$filename = @fopen($tpl_path, 'w');
+			fwrite($filename, $tpl_content);
+			fclose($filename);
+			
 			//update
 			$update_query = array(
 									'UPDATE'	=> "{$dbprefix}templates",
@@ -292,59 +212,33 @@ switch ($_GET['sty_t'])
 									'WHERE'		=>	"style_id='$style_id' AND template_name='$tpl_name'"
 								);
 
-			if ($SQL->build($update_query))
-			{
-				//delete cache ..
-				delete_cache('tpl_' . $tpl_name);
-				//show msg
-				$link	= './admin.php?cp=styles&amp;style_choose=' . $style_id . '&amp;method=1';
-				$text	= $lang['TPL_UPDATED'] . '<br /> <a href="' . $link . '">' . $lang['GO_BACK_BROWSER'] . '</a><meta HTTP-EQUIV="REFRESH" content="1; url=' . $link . '">' ."\n";
-				$stylee	= "admin_info";
-					
-			}
-			else
-			{
-				big_error('', $lang['CANT_UPDATE_SQL']);
-			}	
+
+			//delete cache ..
+			delete_cache('tpl_' . $tpl_name);
+			//show msg
+			$link	= './admin.php?cp=styles&amp;style_choose=' . $style_id . '&amp;method=1';
+			$text	= $lang['TPL_UPDATED'] . '<br /> <a href="' . $link . '">' . $lang['GO_BACK_BROWSER'] . '</a><meta HTTP-EQUIV="REFRESH" content="1; url=' . $link . '">' ."\n";
+			$stylee	= "admin_info";
+
 		}
 		
 		//new template file
 		if(isset($_POST['submit_new_tpl']))
 		{
 			//style id 
-			$style_id	= $_POST['style_id'];
+			$style_id = str_replace('..', '', $_POST['style_id']);
 			//tpl name 
-			$tpl_name	= $SQL->escape($_POST['new_tpl']);
+			$tpl_name =	$SQL->escape($_POST['new_tpl']);
+			$tpl_path = $root_path . 'styles/' . $style_id . '/' . $tpl_name;
 		
-			if(!is_numeric($style_id))
-			{
-				big_error($lang['ERROR_NAVIGATATION'], 'style_id is not exists!!');
-			}
-			
-			if(empty($tpl_name))
-			{
-				big_error($lang['ERROR_NAVIGATATION'], $lang['NO_TPL_NAME_WROTE']);
-			}
-			
-			$insert_query = array(
-							'INSERT'	=> 'style_id, template_name',
-							'INTO'		=> "{$dbprefix}templates",
-							'VALUES'	=> "'$style_id', '$tpl_name'"
-							);
-
-			
-			if($SQL->build($insert_query))
-			{
-					$link	= './admin.php?cp=styles&amp;style_choose=' . $style_id . '&amp;method=1';
-					$text	= $lang['TPL_CREATED']  . '<br /> <a href="' . $link . '">' . $lang['GO_BACK_BROWSER'] . '</a><meta HTTP-EQUIV="REFRESH" content="1; url=' . $link . '">' ."\n";
-					$stylee	= "admin_info";
-			}
-			else
-			{
-				die($lang['CANT_INSERT_SQL']);	
-			}
-		
-		
+			$tpl_content = $_POST['template_content'];
+			$filename = @fopen($tpl_path, 'w');
+			fwrite($filename, $tpl_content);
+			fclose($filename);
+	
+			$link	= './admin.php?cp=styles&amp;style_choose=' . $style_id . '&amp;method=1';
+			$text	= $lang['TPL_CREATED']  . '<br /> <a href="' . $link . '">' . $lang['GO_BACK_BROWSER'] . '</a><meta HTTP-EQUIV="REFRESH" content="1; url=' . $link . '">' ."\n";
+			$stylee	= "admin_info";
 		}
 		
 		break;

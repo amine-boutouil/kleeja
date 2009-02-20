@@ -28,7 +28,39 @@
 	// start session
 	session_start();
 
+	function stripslashes_our(&$value)
+	{
+		return is_array($value) ? array_map('stripslashes_our', $value) : stripslashes($value);  
+	} 
+	//unsets all global variables set from a superglobal array
+	function unregister_globals() 
+	{ 
+		foreach (func_get_args() as $name)
+		{
+			foreach ($GLOBALS[$name] as $key=>$value)
+			{
+				if (isset($GLOBALS[$key]))
+				{
+					unset($GLOBALS[$key]);
+				}
+			}
+		}
+	}
 
+	if (@ini_get('register_globals'))
+	{
+		unregister_globals('_POST', '_GET', '_COOKIE', '_REQUEST', '_SERVER', '_ENV', '_FILES'); 
+	}
+	
+	if( (function_exists("get_magic_quotes_gpc") && get_magic_quotes_gpc()) || 
+		(@ini_get('magic_quotes_sybase') && (strtolower(@ini_get('magic_quotes_sybase')) != "off")) )
+	{ 
+		stripslashes_our($_GET); 
+		stripslashes_our($_POST); 
+		stripslashes_our($_COOKIE); 
+	}
+		
+	
 	//time of start and end and wutever
 	function get_microtime()
 	{
@@ -38,7 +70,10 @@
 	$starttm = get_microtime();
 
 	//php must be newer than this
-	 if (phpversion() < '4.1.0') exit('Your php version is too old !');
+	 if (phpversion() < '4.3.0') 
+	 {
+		exit('Your php version is too old !');
+	 }
 	 
 	// no config
 	if (!file_exists('config.php'))
@@ -130,20 +165,21 @@
 		}
 	}
 	
+	//check style
+	if(!$config['style'] || empty($config['style']))
+	{
+		$config['style'] = 'default';
+	}
+	
+	$STYLE_PATH = $root_path . 'styles/' . $config['style'] . '/';
+	$STYLE_PATH_ADMIN  =  $root_path  . 'includes/admin_style/';
+	
 	//get languge of common
 	get_lang('common');
-	
 	
 	//ban system 
 	get_ban();
 	
-	
-	//anti floods  system
-	// we will improve it in the future .. 
-	//if ( $usrcp->admin() === false )
-	//{
-		//antifloods(7, 700); // (number of floods, per seconds ) 
-	//}
 	
 	//site close ..
 	$login_page = '';
@@ -173,7 +209,7 @@
 	visit_stats();
 	
 	//check for page numbr
-	if(!$perpage || intval($perpage)==0)
+	if(!$perpage || intval($perpage) == 0)
 	{
 		$perpage = 10;
 	}

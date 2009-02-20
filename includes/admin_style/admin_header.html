@@ -1,0 +1,49 @@
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="{lang.DIR}">
+<head>
+<title>{lang.KLEEJA_CP} - {config.sitename}</title>
+<meta http-equiv="Content-Language" content="ar" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="{STYLE_PATH_ADMIN}admin_stylesheet.css" type="text/css" />
+
+
+<script type="text/javascript" src="{STYLE_PATH_ADMIN}images/tips.js"></script> 
+</head>
+<body>
+<div id="wrap">
+
+<div class="roundedcornr_box_459680"><div class="roundedcornr_top_459680"><div></div></div><div class="roundedcornr_content_459680">
+
+
+<div id="content">
+
+<div class="header">
+<a href="{config.siteurl}"><img src="{STYLE_PATH_ADMIN}images/logo.gif" alt="{config.sitename}" style="border:0px;float: left;" /></a>
+
+</div>
+
+<div class="right">
+
+<IF NAME="SHOW_LIST">
+                <div class="roundedcornr_box_561672"> <div class="roundedcornr_top_561671"><div></div></div><div class="roundedcornr_content_561671">
+<!-- BEGIN ADMIN MENU -->
+<ul>
+<li><img src="{STYLE_PATH_ADMIN}images/index_button.gif" />
+[<a href="{config.siteurl}">{lang.RETURN_HOME}</a>]</li>
+<li><img src="{STYLE_PATH_ADMIN}images/cp_button.gif" />
+[<a href="admin.php">{lang.R_CPINDEX}</a>]</li>
+<LOOP NAME="adm_extensions_menu">
+<li><img src="{{icon}}" />
+[<a href="{{link}}">{{lang}}</a>]</li>
+</LOOP>
+<!-- admin header menu extra -->
+</ul>
+<!-- END ADMIN MENU -->
+        </div><div class="roundedcornr_bottom_561671"><div></div></div></div>
+</IF>
+
+</div>
+
+<!-- END ADMIN HEADER -->
+
+        

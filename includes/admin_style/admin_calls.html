@@ -1,0 +1,60 @@
+
+        <script language="javascript">
+function show_msg (te, id)
+{
+var te = document.getElementById(te).value;
+var iee = te;
+        iee += "<br /><form method='post' action='{action}'><textarea name='v_" + id + "' cols='50' rows='4'></textarea>";
+        iee += "<input class='button2' name='reply_submit' type='submit' value='{lang.REPLY}' /></form>";        
+document.getElementById('mail_here').innerHTML= iee;
+
+}
+</script>
+<div class="middle">
+
+        <fieldset>
+                <legend>{lang.TEXT}</legend>
+<div id="mail_here">{lang.E_CLICK}</div>
+        </fieldset>
+        
+<form method="post" action="{action}">
+        <fieldset>
+                <legend>{lang.R_CALLS}</legend>
+
+<table style="width: 100%">
+        <tr style="background-color:silver">
+                <td>{lang.NAME}</td>
+                <td>{lang.TIME}</td>
+                <td>{lang.IP}</td>
+                <td>{lang.DELETE}</td>
+				<!-- admin calls data td1 extra -->
+        </tr>
+<IF NAME="no_results">
+...
+<ELSE>
+<LOOP NAME="arr">
+        <tr style="background-color:#F5F5F5">
+                <td>
+					<a title="{n_mail}:{{mail}}" onclick="javascript:show_msg('textva_{{id}}',{{id}});">{{name}}</a>
+					<input type="hidden" value="{{mail}} :<br /> {{text}}" id="textva_{{id}}">
+                </td>
+                <td>{{time}}</td>
+                <td><a href="{{ip_finder}}" target="blank">{{ip}}</a></td>
+                <td><input type="checkbox" name="del_{{id}}" value="1"></td>
+				<!-- admin calls data td2 extra -->
+        </tr>
+</LOOP>
+</IF>
+</table>
+
+</fieldset>
+<fieldset class="quick" style="text-align:center">
+                <input class="button2" name="submit" type="submit" value="{lang.UPDATE_CALSS}" />
+</fieldset>
+</form>
+<div style="text-align:center"><b>{page_nums}</b></div>
+</div>
+
+
+
+        

@@ -1,0 +1,38 @@
+
+        
+<div class="middle">
+<form method="get" action="{action}">
+        <fieldset>
+                <legend>{lang.R_STYLES}</legend>
+
+<table style="width: 100%">
+<tr style="background-color:silver">
+        <td>{lang.STYLES_EXP}</td>
+</tr>
+<tr style="background-color:#F5F5F5">
+ <td>
+		<input type="hidden" name="cp" value="styles" />
+        <select name="style_choose" style="direction:ltr;text-align:left">
+        <LOOP NAME="arr">
+			<option value="{{style_id}}" {{selected}}>{{style_name}}</option>
+        </LOOP>
+        </select>
+        <br />
+        <input name="method" value="1" type="radio" checked="checked" /> {lang.SHOW_TPLS}
+        <br />
+        <input name="method" value="2" type="radio" /> {lang.MAKE_AS_DEFAULT}
+		
+
+</td>
+</tr>
+</table>
+
+</fieldset>
+<fieldset class="quick" style="text-align:center">
+                <input class="button2"  type="submit" value="{lang.SUBMIT}" />
+</fieldset>
+</form>
+</div>
+
+
+        

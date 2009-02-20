@@ -1,0 +1,39 @@
+
+        <script language="JavaScript"> 
+function checkall() {  
+        var check = document.getElementsByName("check[]"); 
+    for (var i=0;  i< check.length; i++)
+        {
+                        if (check[i].checked == true ){check[i].checked = false;}
+                        else{ check[i].checked = true; }
+    } 
+} 
+</script> 
+<div class="middle">
+<form  method="post" action="{action}">
+        <fieldset>
+                <legend>{lang.R_BCKUP}</legend>
+                
+{lang.E_BACKUP}
+
+<table style="width: 100%">
+        <tr style="background-color:silver">
+                <td>{lang.NAME}</td>
+                <td>{lang.SIZE}</td>
+                <td><input type="checkbox" name="check_all" checked="checked" onClick="checkall();"/></td>
+        </tr>
+        <LOOP NAME="tables_sho">
+        <tr style="background-color:#F5F5F5">
+                <td>{{name}}</td><td>{{size}} kb</td><td><input type="checkbox" name="check[]" value="{{name}}" checked="checked" /></td>
+        </tr>        
+        </LOOP>
+        
+</table>
+
+</fieldset>
+<fieldset class="quick" style="text-align:center">
+                <input class="button2" name="submit" type="submit" value="{lang.TAKE_BK}" />
+</fieldset>
+</form>
+</div>
+        

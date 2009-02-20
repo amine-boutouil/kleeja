@@ -1,0 +1,48 @@
+
+        
+<div class="middle">
+<form method="post" action="{action}">
+        <fieldset>
+                <legend>{lang.R_EXTS}</legend>
+
+<table style="width: 100%">
+        <tr style="background-color:silver">
+                <td>{lang.EXT}</td>
+                <td>{lang.GROUP}</td>
+                <td>{lang.SIZE_G}</td>
+                <td>{lang.ALLOW_G}</td>
+                <td>{lang.SIZE_U}</td>
+                <td>{lang.ALLOW_U}</td>
+                <!-- admin ext info tr extra -->
+        </tr>
+<IF NAME="no_results">
+...
+<ELSE>
+<LOOP NAME="arr">
+        <tr>
+                <td>{{name}}</td>
+                <td>{{group}}</td>
+                <td><input name="gsz[{{id}}]" type="text" value="{{g_size}}" size="7"/></td>
+                <td>{{g_allow}}</td>
+                <td><input name="usz[{{id}}]" type="text" value="{{u_size}}" size="7"/></td>
+                <td>{{u_allow}}</td>
+                <!-- admin ext data tr extra -->
+        </tr>
+</LOOP>
+</IF>
+</table>
+
+</fieldset>
+<div style="text-align:center"><b>{arr_paging}</b></div>
+<fieldset class="quick" style="text-align:center">
+                <input class="button2" name="submit" type="submit" value="{lang.UPDATE_EXTS}" />
+                <br />
+                {lang.E_EXTS}
+</fieldset>
+</form>
+
+</div>
+
+
+
+        

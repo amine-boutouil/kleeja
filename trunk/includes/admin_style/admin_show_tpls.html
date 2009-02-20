@@ -1,0 +1,85 @@
+<div class="middle">
+	<form method="post" action="{action}">
+		<fieldset>
+				<legend>{lang.SHOW_TPLS} &gt; {style_id} </legend>
+
+	<table style="width: 100%">
+		<tr style="background-color:#F5F5F5">
+			<td>
+
+			<IF NAME="not_style_writeable">
+				<div class="info">
+					{lang.STYLE_DIR_NOT_WR}
+				</div>
+				<br />
+			</IF>
+
+			<select name="tpl_choose" size="8" style="width:200px;direction:ltr;font-size:13px;">
+				<OPTGROUP LABEL="{lang.TPLS_RE_BASIC}" style="direction:{lang.DIR}">
+					<LOOP NAME="tpls_basic">
+						<option name="{{template_name}}" style="">{{template_name}}</option>
+					</LOOP>
+				</OPTGROUP>
+				<OPTGROUP LABEL="{lang.TPLS_RE_MSG}" style="direction:{lang.DIR}">
+					<LOOP NAME="tpls_msg">
+						<option name="{{template_name}}" style="">{{template_name}}</option>
+					</LOOP>
+				</OPTGROUP>
+				<OPTGROUP LABEL="{lang.TPLS_RE_USER}" style="direction:{lang.DIR}">
+					<LOOP NAME="tpls_user">
+						<option name="{{template_name}}" style="">{{template_name}}</option>
+					</LOOP>
+				</OPTGROUP>
+				<OPTGROUP LABEL="{lang.TPLS_RE_OTHER}" style="direction:{lang.DIR}">
+					<LOOP NAME="tpls_other">
+						<option name="{{template_name}}" style="">{{template_name}}</option>
+					</LOOP>
+				</OPTGROUP>
+				
+			</select>
+
+			<br />
+			<input name="method" value="1" type="radio" checked="checked" /> {lang.EDIT}
+			<br />
+			<input name="method" value="2" type="radio" /> {lang.DELETE}
+			<input type="hidden" name="style_id" value="{style_id}" />
+
+			</td>
+		 </tr>
+	</table>
+
+	</fieldset>
+	<fieldset class="quick" style="text-align:center">
+					<input class="button2" name="tpls_submit" type="submit" value="{lang.SUBMIT}" />
+	</fieldset>
+	</form>
+</div>
+
+<br />
+<br />
+
+<div class="middle">
+	<form method="post" action="{action}" enctype="multipart/form-data">
+		<fieldset>
+		   <legend>{lang.ADD_NEW_TPL}</legend>
+
+			<table style="width: 100%">
+			<tr style="background-color:silver">
+				 <td>{lang.ADD_NEW_TPL_EXP}</td>
+			</tr>
+			<tr style="background-color:#F5F5F5">
+				<td>
+					<input name="new_tpl" type="text" value="new_template.html" />
+					<input type="hidden" name="style_id" value="{style_id}" />
+				</td>
+			 </tr>
+			</table>
+		</fieldset>
+		<fieldset class="quick" style="text-align:center">
+		<input class="button2" name="submit_new_tpl" type="submit" value="{lang.SUBMIT}" />
+		</fieldset>
+	</form>
+</div>
+
+
+        

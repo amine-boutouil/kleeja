@@ -25,7 +25,7 @@
 	{
 		$file_namee	= ($_POST['filename']!='') ? 'AND f.real_filename LIKE \'%' . $SQL->escape($_POST['filename']) . '%\' ' : ''; 
 		$usernamee	= ($_POST['username']!='') ? 'AND u.name LIKE \'%' . $SQL->escape($_POST['username']) . '%\' AND u.id=f.user' : ''; 
-		$size_than	=   ' `f.size` ' . (($_POST['than']==1) ? '>' : '<') . intval($_POST['size']) . ' ';
+		$size_than	=   ' f.size ' . (($_POST['than']==1) ? '>' : '<') . intval($_POST['size']) . ' ';
 		$ups_than	=  ($_POST['ups']!='') ? 'AND f.uploads ' . (($_POST['uthan']==1) ? '>' : '<') . intval($_POST['ups']) . ' ' : '';
 		$rep_than	=  ($_POST['rep']!='') ? 'AND f.report ' . (($_POST['rthan']==1) ? '>' : '<') . intval($_POST['rep']) . ' ' : '';
 		$lstd_than	=  ($_POST['lastdown']!='') ? 'AND f.last_down ='.(time()-(intval($_POST['lastdown']) * (24 * 60 * 60))) . ' ' : '';

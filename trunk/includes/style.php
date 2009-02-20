@@ -130,48 +130,43 @@ class kleeja_style
 		//get tpl
 		function _load_template($template_name)
 		{
-			global $config, $SQL,$dbprefix,$root_path;
+			global $config, $root_path, $STYLE_PATH, $STYLE_PATH_ADMIN;
 			
-			if(empty($config['style'])) $config['style'] = 1;
+			$is_admin_template = false;
+			$style_path = $STYLE_PATH;
 			
-			$style_id = $config['style'];
-			
-			//admin style id is 0 
-			//so 
+			//admin template always begin with admin_
 			if(substr($template_name, 0, 6) == 'admin_')
 			{
-				$style_id = 0;
+				$style_path =  $STYLE_PATH_ADMIN;
+				$is_admin_template = true;
 			}
 			
-			$query = array(
-							'SELECT'	=> 't.template_content',
-							'FROM'		=> "{$dbprefix}templates t",
-							'WHERE'		=>	"t.style_id='". (int) $style_id ."' AND t.template_name='" . (string) $template_name . "'"
-						);
-			$result	=	$SQL->build($query);
-			$template_content = $SQL->fetch_array($result);
+			$template_path = $style_path . $template_name . '.html';
 
-				
-				if(!$template_content['template_content'] || empty($template_content['template_content'])) 
+			//if template not found and default style is there and not admin tpl
+			if(!file_exists($template_path)) 
+			{
+				if($config['style'] != 'default' && !$is_admin_template)
 				{
-					if($style_id != 1)
+					$template_path_alternative = str_replace('/' . $config['style'] . '/', '/default/', $template_path);
+					if(file_exists($template_path_alternative))
 					{
-						$query['FROM'] .= ", {$dbprefix}lists l";
-						$query['WHERE'] = "(t.style_id='1' OR (l.list_name='default' AND t.style_id=l.list_id)) AND t.template_name='" . (string) $template_name . "'";
-
-						$result	=	$SQL->build($query);
-						$template_content = $SQL->fetch_array($result);
+						$template_path = $template_path_alternative;
 					}
-					else
-						big_error('No Template !', 'Requested "' . $template_name . '" template doesnt exists or an empty !! ');
 				}
+				else
+				{
+					big_error('No Template !', 'Requested "' . $template_path . '" template doesnt exists or an empty !! ');
+				}
+			}
 					
-				$this->HTML = stripslashes($template_content['template_content']);
-				$this->HTML = $this->_parse($this->HTML);
-				$filename = fopen($root_path . 'cache/tpl_' . $this->re_name_tpl($template_name) . '.php', 'w');
-				flock($filename, LOCK_EX); // exlusive look
-				fwrite($filename, $this->HTML);
-				fclose($filename);
+			$this->HTML = file_get_contents($template_path);
+			$this->HTML = $this->_parse($this->HTML);
+			$filename = fopen($root_path . 'cache/tpl_' . $this->re_name_tpl($template_name) . '.php', 'w');
+			flock($filename, LOCK_EX); // exlusive look
+			fwrite($filename, $this->HTML);
+			fclose($filename);
 		}
 		
 		//show it
@@ -181,14 +176,11 @@ class kleeja_style
 			
 			$this->vars  = &$GLOBALS;
 			
-			//clean the name
-			$template_name	=	$SQL->escape($template_name);
-			
 			//is there ?
-			if(!file_exists($root_path.'cache/tpl_' . $this->re_name_tpl($template_name) . '.php'))
-			{
+			//if(!file_exists($root_path.'cache/tpl_' . $this->re_name_tpl($template_name) . '.php'))
+			//{
 				$this->_load_template($template_name);
-			}
+			//}
 
 			ob_start();
 			include($root_path.'cache/tpl_' . $this->re_name_tpl($template_name) . '.php');

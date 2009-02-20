@@ -149,24 +149,9 @@ CREATE TABLE `{$dbprefix}hooks` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 ";
 
-$install_sqls['lang'] = "
-CREATE TABLE `{$dbprefix}lang` (
-  `word` varchar(255) collate utf8_bin NOT NULL,
-  `trans` varchar(255) collate utf8_bin NOT NULL,
-  `lang_id` int(11) unsigned NOT NULL,
-  KEY `lang` (`lang_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-";
 
-$install_sqls['lists'] = "
-CREATE TABLE `{$dbprefix}lists` (
-  `list_id` int(11) unsigned NOT NULL auto_increment,
-  `list_name` varchar(255) collate utf8_bin NOT NULL,
-  `list_author` varchar(255) collate utf8_bin NOT NULL,
-  `list_type` tinyint(1) unsigned NOT NULL default '1',
-  PRIMARY KEY  (`list_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-";
+
+
 
 $install_sqls['plugins'] = "
 CREATE TABLE `{$dbprefix}plugins` (
@@ -181,15 +166,6 @@ CREATE TABLE `{$dbprefix}plugins` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin ;
 ";
 
-$install_sqls['templates'] = "
-CREATE TABLE `{$dbprefix}templates` (
-  `style_id` int(11) unsigned NOT NULL,
-  `template_name` varchar(255) collate utf8_bin NOT NULL,
-  `template_content` mediumtext collate utf8_bin NOT NULL,
-  KEY `style_id` (`style_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
-";
 
 //
 // inserts sql
@@ -200,7 +176,7 @@ $install_sqls['config_insert2'] = "INSERT INTO `{$dbprefix}config` (`name`, `val
 $install_sqls['config_insert3'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('filesnum', '5')";
 $install_sqls['config_insert4'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('siteclose', '0')";
 $install_sqls['config_insert5'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('decode', '1')";
-$install_sqls['config_insert6'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('style', '1')";
+$install_sqls['config_insert6'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('style', 'default')";
 $install_sqls['config_insert7'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('closemsg', 'sits is closed now')";
 $install_sqls['config_insert8'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('sec_down', '10')";
 $install_sqls['config_insert9'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('statfooter', '0')";
@@ -212,7 +188,7 @@ $install_sqls['config_insert14'] = "INSERT INTO `{$dbprefix}config` (`name`, `va
 $install_sqls['config_insert15'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('thumbs_imgs', '0')";
 $install_sqls['config_insert16'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('write_imgs', '0')";
 $install_sqls['config_insert17'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('del_url_file', '1')";
-$install_sqls['config_insert18'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('language', '" . (isset($_GET['lang']) && $_GET['lang'] == 'ar' ? '2' : '3') . "')";
+$install_sqls['config_insert18'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('language', '" . getlang() . "')";
 $install_sqls['config_insert19'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('www_url', '0')";
 $install_sqls['config_insert20'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('del_f_day', '0')";
 $install_sqls['config_insert21'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('allow_stat_pg', '1')";
@@ -320,13 +296,5 @@ $install_sqls['users_insert'] = "INSERT INTO `{$dbprefix}users` (`id`,`name` ,`p
 
 
 
-/*
-$install_sqls['lists_insert'] = "
-INSERT INTO `{$dbprefix}lists` (`list_id`, `list_name`, `list_author`, `list_type`) VALUES
-(1, 'default', '', 1),
-(2, 'arabic(sa)', 'official language', 2),
-(3, 'english(NK)', 'By:NK, Email: n.k@cityofangelz.com', 2);
-";
-*/
 
 ?>

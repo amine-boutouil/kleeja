@@ -11,26 +11,25 @@
 		exit('no directly opening : ' . __file__);
 	}
 	
-
-		
-		//for style ..
-		$stylee 	= "admin_backup";
-		$action 	= "admin.php?cp=bckup";
+	//for style ..
+	$stylee 	= "admin_backup";
+	$action 	= "admin.php?cp=bckup";
 
 
-		$query	=	"SHOW TABLE STATUS";
-		$result	=	$SQL->query($query);
-		$i = 0;
-		while($row=$SQL->fetch_array($result))
-		{
-			//make new lovely arrays !!
-			$size[$row["Name"]]	= round($row['Data_length']/1024, 2);
-		}
-		$SQL->freeresult($result);
+	$query	=	"SHOW TABLE STATUS";
+	$result	=	$SQL->query($query);
+	$i = 0;
+	while($row=$SQL->fetch_array($result))
+	{
+		//make new lovely arrays !!
+		$size[$row["Name"]]	= round($row['Data_length']/1024, 2);
+	}
+	
+	$SQL->freeresult($result);
 
 
 		// to output our tables only !!
-		$tables_sho		= array();
+		$tables_sho		= (isset($tables_sho)  && is_array($tables_sho)) ? $tables_sho : array();
 		$tables_sho[]  	= array( 'name' =>"{$dbprefix}config",	'size' =>$size["{$dbprefix}config"]);
 		$tables_sho[]  	= array( 'name' =>"{$dbprefix}files",		'size' =>$size["{$dbprefix}files"]);
 		$tables_sho[]  	= array( 'name' =>"{$dbprefix}stats",		'size' =>$size["{$dbprefix}stats"]);
@@ -39,9 +38,6 @@
 		$tables_sho[]  	= array( 'name' =>"{$dbprefix}exts",		'size' =>$size["{$dbprefix}exts"]);
 		$tables_sho[]  	= array( 'name' =>"{$dbprefix}online",	'size' =>$size["{$dbprefix}online"]);
 		$tables_sho[]  	= array( 'name' =>"{$dbprefix}reports",	'size' =>$size["{$dbprefix}reports"]);
-		$tables_sho[]  	= array( 'name' =>"{$dbprefix}lists",		'size' =>$size["{$dbprefix}lists"]);
-		$tables_sho[]  	= array( 'name' =>"{$dbprefix}lang",		'size' =>$size["{$dbprefix}lang"]);
-		$tables_sho[]  	= array( 'name' =>"{$dbprefix}templates",	'size' =>$size["{$dbprefix}templates"]);
 		$tables_sho[]  	= array( 'name' =>"{$dbprefix}hooks",		'size' =>$size["{$dbprefix}hooks"]);
 		$tables_sho[]  	= array( 'name' =>"{$dbprefix}plugins",	'size' =>$size["{$dbprefix}plugins"]);
 
@@ -91,7 +87,7 @@
 			
 				//download now
 			$sql_data = "#\n";
-			$sql_data .= "# Kleeja Backup\n";
+			$sql_data .= "# Kleeja Backup kleeja.com version : " . KLEEJA_VERSION . " \n";
 			$sql_data .= "# DATE : " . gmdate("d-m-Y H:i:s", time()) . " GMT\n";
 			$sql_data .= "#\n\n\n";
 			

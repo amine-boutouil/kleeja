@@ -4,7 +4,7 @@
 #
 # Filename : admin.php
 # purpose :  control panel for administarator
-# copyright 2007-2008 Kleeja.com ..
+# copyright 2007-2009 Kleeja.com ..
 #license http://opensource.org/licenses/gpl-license.php GNU Public License
 # last edit by : saanina
 ##################################################
@@ -22,8 +22,8 @@
 	$path_adm	= "includes/adm";
 
 	//exception extentions
-	$ext_expt	=	array();
-	$ext_expt[]	=	'start';
+	$ext_expt	= array();
+	$ext_expt[]	= 'start';
 	
 	($hook = kleeja_run_hook('begin_admin_page')) ? eval($hook) : null; //run hook 
 
@@ -91,7 +91,7 @@
 		//some exceptions
 		if(@in_array($m, $ext_expt)) continue;
 		++$i;
-		$adm_extensions_menu[$i]	= array('icon'	=> (file_exists('./images/style/admin/' . $m . '_button.gif'))	? './images/style/admin/' . $m . '_button.gif' : './images/style/admin/no_icon_button.gif',
+		$adm_extensions_menu[$i]	= array('icon'	=> (file_exists($STYLE_PATH_ADMIN . 'images/' . $m . '_button.gif'))	? $STYLE_PATH_ADMIN . 'images/' . $m . '_button.gif' : $STYLE_PATH_ADMIN . 'images/no_icon_button.gif',
 											'lang'	=>	($lang['R_'. strtoupper($m)]) ? $lang['R_'. strtoupper($m)]: (($lang[strtoupper($m)]) ? $lang[strtoupper($m)] : strtoupper($m)),
 											'link'	=>	'admin.php?cp=' . $m,
 											);

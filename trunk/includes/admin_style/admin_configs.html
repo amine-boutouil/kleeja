@@ -1,0 +1,196 @@
+<div class="middle">
+<form method="post" action="{action}">
+        <fieldset>
+                <legend>{lang.R_CONFIGS}</legend>
+
+<table style="width: 90%">
+ <!-- admin configs tr extra begin -->
+        <tr>
+                <td><label for="sitename">{lang.SITENAME}</label></td>
+                <td><label><input type="text" id="sitename" name="sitename" value="{con.sitename}" size="40"></label></td>
+        </tr>
+        <tr>
+                <td><label for="siteurl">{lang.SITEURL}</label></td>
+                <td><label><input type="text" id="siteurl" name="siteurl" value="{con.siteurl}" size="40"></label></td>
+        </tr>
+        <tr>
+                <td><label for="sitemail">{lang.SITEMAIL}</label></td>
+                <td><label><input type="text" id="sitemail" name="sitemail" value="{con.sitemail}" size="40"></label></td>
+        </tr>
+        <tr>
+                <td><label for="total_size">{lang.MAX_SIZE_SITE}</label></td>
+                <td><label><input type="text" id="total_size" name="total_size" value="{con.total_size}" size="10"></label></td>
+        </tr>
+        <tr>
+                <td><label for="foldername">{lang.FOLDERNAME}</label></td>
+                <td><label><input type="text" id="foldername" name="foldername" value="{con.foldername}" size="20"></label></td>
+        </tr>
+        <tr>
+                <td><label for="prefixname">{lang.FILES_PREFIX}</label></td>
+                <td><label><input type="text" id="prefixname" name="prefixname" value="{con.prefixname}" size="10"></label></td>
+        </tr>
+        <tr>
+                <td><label for="filesnum">{lang.FILES_NUMB}</label></td>
+                <td><label><input type="text" id="filesnum" name="filesnum" value="{con.filesnum}" size="10"></label></td>
+        </tr>
+        <tr>
+                <td><label for="del_f_day">{lang.DEL_FDAY}</label></td>
+                <td><label><input type="text" id="del_f_day" name="del_f_day" value="{con.del_f_day}" size="10"></label></td>
+        </tr>        
+        <tr>
+                <td><label for="www_url">{lang.WWW_URL}</label></td>
+                <td>
+                <label>{lang.YES}<input type="radio" id="www_url" name="www_url" value="1"  <IF NAME="ywww_url"> checked="checked"</IF>></label>
+                <label>{lang.NO}<input type="radio" id="www_url" name="www_url" value="0"  <IF NAME="nwww_url"> checked="checked"</IF>></label>
+                </td>
+        </tr>        
+        <tr>
+                <td><label for="thumbs_imgs">{lang.ENAB_THMB}</label></td>
+                <td>
+                <label>{lang.YES}<input type="radio" id="thumbs_imgs" name="thumbs_imgs" value="1"  <IF NAME="ythumbs_imgs"> checked="checked"</IF>></label>
+                <label>{lang.NO}<input type="radio" id="thumbs_imgs" name="thumbs_imgs" value="0"  <IF NAME="nthumbs_imgs"> checked="checked"</IF>></label>
+                </td>
+        </tr>
+        <tr>
+                <td><label for="write_imgs">{lang.ENAB_STAMP}</label></td>
+                <td>
+                <label>{lang.YES}<input type="radio" id="write_imgs" name="write_imgs" value="1"  <IF NAME="ywrite_imgs"> checked="checked"</IF>></label>
+                <label>{lang.NO}<input type="radio" id="write_imgs" name="write_imgs" value="0"  <IF NAME="nwrite_imgs"> checked="checked"</IF>></label>
+                </td>
+        </tr>        
+        <tr>
+                <td><label for="siteclose">{lang.SITECLOSE}</label></td>
+                <td>
+                <label>{lang.YES}<input type="radio" id="siteclose" name="siteclose" value="1"  <IF NAME="yclose"> checked="checked"</IF>></label>
+                <label>{lang.NO}<input type="radio" id="siteclose" name="siteclose" value="0"  <IF NAME="nclose"> checked="checked"</IF>></label>
+                </td>
+        </tr>
+        <tr>
+                <td><label for="closemsg">{lang.CLOSE_MSG}</label></td>
+                <td><label><input type="text" id="closemsg" name="closemsg" value="{con.closemsg}" size="40"></label></td>
+        </tr>
+        <tr>
+                <td><label for="decode">{lang.FILENAME_CHNG}</label></td>
+                <td><label>
+                <select id="decode" name="decode">
+                <option <IF NAME="none_decode">selected="selected"</IF> value="0">{lang.NO_CHANGE}</option>
+                <option <IF NAME="md5_decode">selected="selected"</IF> value="2">{lang.CHANGE_MD5}</option>
+                <option <IF NAME="time_decode">selected="selected"</IF> value="1">{lang.CHANGE_TIME}</option>
+                </select>
+                </label></td>
+        </tr>
+        <tr>
+                <td><label for="del_url_file">{lang.ENAB_DELURL}</label></td>
+                <td>
+                <label>{lang.YES}<input type="radio" id="del_url_file" name="del_url_file" value="1"  <IF NAME="ydel_url_file"> checked="checked"</IF>></label>
+                <label>{lang.NO}<input type="radio" id="del_url_file" name="del_url_file" value="0"  <IF NAME="ndel_url_file"> checked="checked"</IF>></label>
+                </td>
+        </tr>
+        <tr>
+                <td><label for="enable_userfile">{lang.ENABLE_USER_FILE}</label></td>
+                <td>
+                <label>{lang.YES}<input type="radio" id="enable_userfile" name="enable_userfile" value="1"  <IF NAME="yenable_userfile"> checked="checked"</IF>></label>
+                <label>{lang.NO}<input type="radio" id="enable_userfile" name="enable_userfile" value="0"  <IF NAME="nenable_userfile"> checked="checked"</IF>></label>
+                </td>
+        </tr>
+        <tr>
+                <td><label for="user_system">{lang.USER_SYSTEM}</label></td>
+                <td><label>
+                <select id="user_system" name="user_system">
+                <option <IF NAME="user_system_normal">selected="selected"</IF> value="1">{lang.NORMAL}</option>
+                <option <IF NAME="user_system_phpbb">selected="selected"</IF> value="2">{lang.W_PHPBB}</option>
+                <option <IF NAME="user_system_vb">selected="selected"</IF> value="3">{lang.W_VBB}</option>
+                <option <IF NAME="user_system_mysbb">selected="selected"</IF> value="4">{lang.W_MYSBB}</option>                
+                </select>
+
+                </label></td>
+        </tr>
+        <tr>
+                <td><label for="register">{lang.ENAB_REG}</label></td>
+                <td>
+                <label>{lang.YES}<input type="radio" id="register" name="register" value="1"  <IF NAME="yregister"> checked="checked"</IF>></label>
+                <label>{lang.NO}<input type="radio" id="register" name="register" value="0"  <IF NAME="nregister"> checked="checked"</IF>></label>
+                </td>        
+        </tr>
+        <tr>
+                <td><label for="style">{lang.STYLENAME}</label></td>
+                <td><label>
+                <select name="style" id="style">
+                {stylfiles}
+                </select>
+                </label></td>
+        </tr>
+        <tr>
+                <td><label for="language">{lang.LANGUAGE}</label></td>
+                <td><label>
+                <select name="language" id="language">
+                {lngfiles}
+                </select>
+                </label></td>
+        </tr>
+        <tr>
+                <td><label for="sec_down">{lang.SC_BEFOR_DOWM}</label></td>
+                <td><label><input type="text" id="sec_down" name="sec_down" value="{con.sec_down}" size="40"></label></td>
+        </tr>
+        <tr>
+                <td><label for="allow_online">{lang.ALLOW_ONLINE}</label></td>
+                <td>
+                <label>{lang.YES}<input type="radio" id="allow_online" name="allow_online" value="1"  <IF NAME="yallow_online"> checked="checked"</IF>></label>
+                <label>{lang.NO}<input type="radio" id="allow_online" name="allow_online" value="0"  <IF NAME="nallow_online"> checked="checked"</IF>></label>
+                </td>        
+        </tr>        
+        <tr>
+                <td><label for="allow_stat_pg">{lang.ALLOW_STAT_PG}</label></td>
+                <td>
+                <label>{lang.YES}<input type="radio" id="allow_stat_pg" name="allow_stat_pg" value="1"  <IF NAME="yallow_stat_pg"> checked="checked"</IF>></label>
+                <label>{lang.NO}<input type="radio" id="allow_stat_pg" name="allow_stat_pg" value="0"  <IF NAME="nallow_stat_pg"> checked="checked"</IF>></label>
+                </td>        
+        </tr>        
+        <tr>
+                <td><label for="statfooter">{lang.SHOW_PHSTAT}</label></td>
+                <td>
+                <label>{lang.YES}<input type="radio" id="statfooter" name="statfooter" value="1"  <IF NAME="ystatfooter"> checked="checked"</IF>></label>
+                <label>{lang.NO}<input type="radio" id="statfooter" name="statfooter" value="0"  <IF NAME="nstatfooter"> checked="checked"</IF>></label>
+                </td>        
+        </tr>        
+        <tr>
+                <td><label for="safe_code">{lang.SAFE_CODE_UPLOAD}</label></td>
+                <td>
+                <label>{lang.YES}<input type="radio" id="safe_code" name="safe_code" value="1"  <IF NAME="ysafe_code"> checked="checked"</IF>></label>
+                <label>{lang.NO}<input type="radio" id="safe_code" name="safe_code" value="0"  <IF NAME="nsafe_code"> checked="checked"</IF>></label>
+                </td>        
+        </tr>
+        <tr>
+                <td><label for="gzip">{lang.EN_GZIP}</label></td>
+                <td>
+                <label>{lang.YES}<input type="radio" id="gzip" name="gzip" value="1"  <IF NAME="ygzip"> checked="checked"</IF>></label>
+                <label>{lang.NO}<input type="radio" id="gzip" name="gzip" value="0"  <IF NAME="ngzip"> checked="checked"</IF>></label>
+                </td>        
+        </tr>
+        <tr>
+                <td><label for="welcome_msg">{lang.WELC_MSG}</label></td>
+                <td><label><input type="text" id="welcome_msg" name="welcome_msg" value="{con.welcome_msg}" size="40"></label></td>
+        </tr>
+        <tr>
+                <td><label for="googleanalytics"><a href="http://www.google.com/analytics" target="_kleeja"><span style="color:orange">Google</span> Analytics</a></label></td>
+                <td><label><input type="text" id="googleanalytics" name="googleanalytics" value="{con.googleanalytics}" size="10"></label></td>
+        </tr>
+        <tr>
+                <td><label for="mod_writer">{lang.MOD_WRITER}</label></td>
+                <td>
+                <label>{lang.YES}<input type="radio" id="mod_writer" name="mod_writer" value="1"  <IF NAME="ymod_writer"> checked="checked"</IF>></label>
+                <label>{lang.NO}<input type="radio" id="mod_writer" name="mod_writer" value="0"  <IF NAME="nmod_writer"> checked="checked"</IF>></label>
+                  [ {lang.MOD_WRITER_EX} ]
+                </td>        
+        </tr>        
+        <!-- admin configs tr extra -->
+</table>
+ <!-- admin configs table extra -->
+</fieldset>
+<fieldset class="quick" style="text-align:center">
+                <input class="button2" name="submit" type="submit" value="{n_submit}" />
+</fieldset>
+</form>
+</div>
+
+        

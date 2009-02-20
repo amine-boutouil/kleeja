@@ -1,0 +1,293 @@
+
+        
+* {
+    padding: 0;
+    margin: 0;
+} 
+
+
+html {
+        font-size: 100%;
+
+}
+body {
+    background-color: #CCCCCC;
+        font: .74em "Tahoma" Verdana, Arial, sans-serif;
+        line-height: 1.5em; 
+    margin: 10px 15px;
+    padding: 12px 0;
+}
+a {
+        color: #3B6EBF;
+        text-decoration: none;
+}
+
+a:hover {
+        text-decoration: underline;
+}
+
+
+#wrap {
+        margin: 20px auto;
+        width: 920px;
+
+}
+
+
+        
+
+
+#header {
+        width:50%;
+        margin-bottom:5px;
+}
+
+
+#content {
+        padding: 0 40px 0 40px;
+}
+
+
+
+
+/* rodded corners box  */
+.roundedcornr_box_459680 { background: #ffffff;}
+.roundedcornr_top_459680 div { background: url(images/roundedcornr_459680_tl.png) no-repeat top left;}
+.roundedcornr_top_459680 { background: url(images/roundedcornr_459680_tr.png) no-repeat top right;}
+.roundedcornr_bottom_459680 div {  background: url(images/roundedcornr_459680_bl.png) no-repeat bottom left;}
+.roundedcornr_bottom_459680 { background: url(images/roundedcornr_459680_br.png) no-repeat bottom right;}
+.roundedcornr_top_459680 div, .roundedcornr_top_459680, 
+.roundedcornr_bottom_459680 div, .roundedcornr_bottom_459680 { width: 100%; height: 30px;font-size: 1px;}
+.roundedcornr_content_459680 { margin: 0 2px; }
+.roundedcornr_box_561671 {background: #f5f5f5; min-height: 3em;        width: auto;}
+.roundedcornr_box_561672 { background: #f5f5f5;width: 100%;}
+.roundedcornr_top_561671 div { background: url(images/roundedcornr_561671_tl.png) no-repeat top left;}
+.roundedcornr_top_561671 { background: url(images/roundedcornr_561671_tr.png) no-repeat top right;}
+.roundedcornr_bottom_561671 div { background: url(images/roundedcornr_561671_bl.png) no-repeat bottom left;}
+.roundedcornr_bottom_561671 {  background: url(images/roundedcornr_561671_br.png) no-repeat bottom right;}
+.roundedcornr_top_561671 div, .roundedcornr_top_561671, 
+.roundedcornr_bottom_561671 div, .roundedcornr_bottom_561671 { width: 100%; height: 15px; font-size: 1px;}
+.roundedcornr_content_561671 { margin: 0 15px; }
+
+.breadcrumbs { 
+    background: #F6F9FB; 
+        border-bottom: 1px solid #E1E1E1; 
+        padding: 5px;
+}
+        
+
+.middle{
+        width: 70%;
+        margin: 0 auto;
+        padding: 1% 1%;
+        float:left;
+}
+
+.right {
+        float: right;
+        width: 25%;
+        margin: 0 1px;
+        padding: 1% 1%;
+        
+}
+
+.right ul {
+        padding: 20px 0 15px 20px;
+        margin:0;
+}
+
+.right li {
+        margin-bottom:5px;
+        list-style-type: none;
+        color: #3B6EBF;
+}
+
+.middle h2 { color: #3B6EBF; font-size: 16px; margin-bottom: 10px; margin-top: 10px;}
+.right h2 { color: #3B6EBF; font-size: 14px; margin-top: 15px;}
+
+
+#clear {
+        display: block;
+        clear: both;
+        width: 100%;
+        height:1px;
+        overflow:hidden;
+}
+
+#footer {
+        text-align: center;
+        color: #666;
+}
+
+img { border:0px;}
+
+textarea {
+        font-family: Tahoma, Verdana, Helvetica, Arial, sans-serif;
+        font-size: 0.85em;
+        width: 60%;
+        padding: 2px;
+}
+
+label {
+        cursor: pointer;
+        font-size: 0.85em;
+        padding: 0 5px 0 0;
+}
+fieldset {
+        margin: 15px 0;
+        padding: 10px;
+        border-top: 1px solid #D7D7D7;
+        border-right: 1px solid #CCCCCC;
+        border-bottom: 1px solid #CCCCCC;
+        border-left: 1px solid #D7D7D7;
+        background-color: #FFFFFF;
+        position: relative;
+                /* rounded corners for firefox .. love u saanina ;) */
+                -moz-border-radius: 8px; border-radius:1px;
+
+}
+* html fieldset {
+        padding: 0 10px 5px 10px;
+}
+.rtl fieldset {
+        border-top: 1px solid #D7D7D7;
+        border-right: 1px solid #D7D7D7;
+        border-bottom: 1px solid #CCCCCC;
+        border-left: 1px solid #CCCCCC;
+}
+legend {
+        padding: 1px 0;
+        font-family: Tahoma,arial,Verdana,Sans-serif;
+        font-size: .9em;
+        font-weight: bold;
+        color: #115098;
+        margin-top: -.4em;
+        position: relative;
+        text-transform: none;
+        line-height: 1.2em;
+        top: 0;
+        vertical-align: middle;
+}
+/* Hide from macIE \*/
+legend { top: -1.2em; }
+/* end */
+
+* html legend {
+        margin: 0 0 -10px -7px;
+        line-height: 1em;
+        font-size: .85em;
+}
+/* Holly hack, .rtl comes after html */
+* html .rtl legend {
+        margin: 0;
+        margin-right: -7px;
+}
+
+input, textarea {
+        font-family: Tahoma, Verdana, Helvetica, Arial, sans-serif;
+        font-size: 0.90em;
+        font-weight: normal;
+        cursor: text;
+        vertical-align: middle;
+        padding: 2px;
+        color: #111111;
+        border-left: 1px solid #AFAEAA;
+        border-top: 1px solid #AFAEAA;
+        border-right: 1px solid #D5D5C8;
+        border-bottom: 1px solid #D5D5C8;
+        background-color: #E3DFD8;
+}
+.rtl input, .rtl textarea {
+        border-left: 1px solid #D5D5C8;
+        border-top: 1px solid #AFAEAA;
+        border-right: 1px solid #AFAEAA;
+        border-bottom: 1px solid #D5D5C8;
+}
+select {
+        font-family: Tahoma, Verdana, Helvetica, Arial, sans-serif;
+        font-size: 0.85em;
+        font-weight: normal;
+        font-style: normal;
+        cursor: pointer;
+        vertical-align: middle;
+        width: auto;
+        color: #000;
+}
+
+textarea {
+        font-family: Tahoma, Verdana, Helvetica, Arial, sans-serif;
+        font-size: 0.85em;
+        width: 60%;
+        padding: 2px;
+}
+
+label {
+        cursor: pointer;
+        font-size: 0.85em;
+        padding: 0 5px 0 0;
+}
+
+fieldset.quick, p.quick {
+        margin: 0 0 5px;
+        padding: 5px 0 0; 
+        border: none;
+        background-color: transparent;
+        text-align: right;
+}
+
+.rtl fieldset.quick, .rtl p.quick {
+        text-align: left;
+}
+a.button1, input.button1, input.button3,
+a.button2, input.button2 {
+        width: auto !important;
+        padding: 1px 3px 0 3px;
+        font-family: "Tahoma", Lucida Grande, Verdana, Helvetica, Arial, sans-serif;
+        color: #000;
+        font-size: 0.85em;
+        background: #EFEFEF url("images/button.gif") repeat-x top;
+        cursor: pointer;
+}
+
+.bg_img {
+        text-align:center;
+        width:112px;
+        height:112px;
+        padding: 20px 0;
+        cursor: pointer;
+        background-image: url('images/bg_img.gif');
+        background-repeat: no-repeat;
+}
+#toolTipBox {
+        display: none;
+        padding: 5;
+        font-size: 11px;
+        font-family: Tahoma;
+        position: fixed;
+        background-color: #FCFCCD;
+        border: 1px solid #FFFF00;
+        color: 000000;
+}
+.tipp {
+
+}
+
+/*
+info and error
+*/
+.info  {
+	color: #333;
+	background:#fff9d7;
+	border: 1px solid #e2c822;
+}
+.error {
+	color: #333;
+	background:#ffebe8;
+	border: 1px solid #dd3c10;
+}
+.info, .error {
+	padding: 10px;
+	font-family:"lucida grande", tahoma, verdana, arial, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+}

@@ -41,7 +41,7 @@
 		}
 		else if (version_compare(strtolower(KLEEJA_VERSION), strtolower($version_data), '>'))
 		{
-			$text	= 'You are using pre-release version , click <a href="http://www.kleeja.com/bugs/">here</a> to tell us about any bug you face it.';
+			$text	= $lang['U_USE_PRE_RE'];
 			$stylee	= "admin_info";
 		}
 		

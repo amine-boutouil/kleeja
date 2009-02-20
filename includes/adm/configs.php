@@ -78,7 +78,7 @@
 		if ($con['safe_code'] == "1" ) {$ysafe_code = true; }else {$nsafe_code = true;}
 
 
-		//get languag and get styles
+		//get styles
 		$stylfiles = $lngfiles	='';
 		$query_styles = array(
 							'SELECT'	=> '*',
@@ -91,11 +91,22 @@
 		{		
 			if($row['list_type']==1)
 				$stylfiles .=  '<option '.(($con['style']==$row['list_id']) ? 'selected="selected"' : ''). ' value="' . $row['list_id'] . '">' . $row['list_name'] . '</option>';
-			if($row['list_type']==2)
-				$lngfiles .=  '<option '.(($con['language']==$row['list_id']) ? 'selected="selected"' : ''). ' value="' . $row['list_id'] . '">' . $row['list_name'] . '</option>';
-
 		}
+		
 		$SQL->freeresult($result_styles);
+		
+		
+		//get languages
+		if ($dh = @opendir($root_path . 'lang'))
+		{
+				while (($file = readdir($dh)) !== false)
+				{
+					if(strpos($file, '.') === false && $file != '..' && $file != '.')
+						$lngfiles .=  '<option '.(($con['language']==$file) ? 'selected="selected"' : ''). ' value="' . $file . '">' . $file . '</option>';
+				}
+				closedir($dh);
+		}
+		
 		
 		//after submit ////////////////
 		if (isset($_POST['submit']))

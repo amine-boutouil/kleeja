@@ -96,13 +96,9 @@
         <tr>
                 <td><label for="user_system">{lang.USER_SYSTEM}</label></td>
                 <td><label>
-                <select id="user_system" name="user_system">
-                <option <IF NAME="user_system_normal">selected="selected"</IF> value="1">{lang.NORMAL}</option>
-                <option <IF NAME="user_system_phpbb">selected="selected"</IF> value="2">{lang.W_PHPBB}</option>
-                <option <IF NAME="user_system_vb">selected="selected"</IF> value="3">{lang.W_VBB}</option>
-                <option <IF NAME="user_system_mysbb">selected="selected"</IF> value="4">{lang.W_MYSBB}</option>                
-                </select>
-
+					<select id="user_system" name="user_system">
+						{authtypes}           
+					</select>
                 </label></td>
         </tr>
         <tr>

@@ -1,6 +1,13 @@
 
         
 <div class="middle">
+<br />
+<IF NAME="user_not_normal">
+	<div class="info"> 
+		{lang.USERS_NOT_NORMAL_SYS}
+	</div>
+</IF>
+
 <form method="post" action="{action}">
         <fieldset>
                 <legend>{lang.R_USERS}</legend>

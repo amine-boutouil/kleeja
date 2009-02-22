@@ -59,10 +59,7 @@
 
 		//for  choose
 		if ($con['siteclose'] == "1" ) {$yclose = true; }else {$nclose = true;}
-		if ($con['decode'] == "2" ) {$md5_decode = true; }elseif ($con['decode'] == "1" ) {$time_decode = true;}
-		else {$none_decode = true; }
-		if ($con['user_system'] == "1" ) {$user_system_normal = true; }elseif ($con['user_system'] == "2" ) {$user_system_phpbb = true;}
-		elseif($con['user_system'] == "3" ) {$user_system_vb = true; }elseif($con['user_system'] == "4" ) {$user_system_mysbb = true; }
+		if ($con['decode'] == "2" ) {$md5_decode = true; }elseif ($con['decode'] == "1" ) {$time_decode = true;} else {$none_decode = true; }
 		if ($con['statfooter'] == "1" ) {$ystatfooter = true; }else {$nstatfooter = true;}
 		if ($con['gzip'] == "1" ) {$ygzip = true; }else {$ngzip = true;}
 		if ($con['register'] == "1" ) {$yregister = true; }else {$nregister = true;}
@@ -78,15 +75,14 @@
 		if ($con['safe_code'] == "1" ) {$ysafe_code = true; }else {$nsafe_code = true;}
 
 
+		$stylfiles = $lngfiles	= $authtypes = '';
 		//get styles
-		$stylfiles = $lngfiles	='';
-		
 		if ($dh = @opendir($root_path . 'styles'))
 		{
 				while (($file = readdir($dh)) !== false)
 				{
 					if(strpos($file, '.') === false && $file != '..' && $file != '.')
-						$stylfiles .=  '<option '.(($con['style']==$file) ? 'selected="selected"' : ''). ' value="' . $file . '">' . $file . '</option>';
+						$stylfiles .=  '<option '.(($con['style']==$file) ? 'selected="selected"' : ''). ' value="' . $file . '">' . $file . '</option>' . "\n";
 				}
 				closedir($dh);
 		}
@@ -97,11 +93,31 @@
 				while (($file = readdir($dh)) !== false)
 				{
 					if(strpos($file, '.') === false && $file != '..' && $file != '.')
-						$lngfiles .=  '<option '.(($con['language']==$file) ? 'selected="selected"' : ''). ' value="' . $file . '">' . $file . '</option>';
+						$lngfiles .=  '<option ' . (($con['language']==$file) ? 'selected="selected"' : '') . ' value="' . $file . '">' . $file . '</option>' . "\n";
 				}
 				closedir($dh);
 		}
 		
+		//get auth types
+		//fix previus choice in old kleeja
+		if(in_array($con['user_system'], array('2', '3', '4')))
+		{
+			$con['user_system'] = str_replace(array('2', '3', '4'), array('phpbb', 'vb', 'mysmartbb'), $con['user_system']);
+		}
+		
+		$authtypes .= '<option value="1"' . (($con['user_system']=='1') ? ' selected="selected"' : '') . '>' . $lang['NORMAL'] . '</option>' . "\n";
+		if ($dh = @opendir($root_path . 'includes/auth_integration'))
+		{
+				while (($file = readdir($dh)) !== false)
+				{
+					if(strpos($file, '.php') !== false)
+					{
+						$file = trim(str_replace('.php', '', $file));
+						$authtypes .=  '<option value="' . $file . '"' . (($con['user_system']==$file) ? ' selected="selected"' : '') . '>' . $file . '</option>' . "\n";
+					}
+				}
+				closedir($dh);
+		}
 		
 		//after submit ////////////////
 		if (isset($_POST['submit']))

@@ -342,11 +342,14 @@ function get_ban ()
 	
 		//visitor ip now 
 		$ip	=  (getenv('HTTP_X_FORWARDED_FOR')) ? getenv('HTTP_X_FORWARDED_FOR') : getenv('REMOTE_ADDR');
-
+	
 		//now .. loop for banned ips 
 		if (trim($banss) != '' && !empty($ip))
 		{
-			if (!is_array($banss))	$banss = array();
+			if (!is_array($banss))
+			{
+				$banss = array();
+			}
 			
 			foreach ($banss as $ip2)
 			{

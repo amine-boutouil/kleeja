@@ -12,7 +12,7 @@
 	
 
 
-	//for style ..
+		//for style ..
 		$stylee 	= "admin_users";
 		$action 	= "admin.php?cp=users&amp;page=". intval($_GET['page']);
 
@@ -110,6 +110,8 @@
 	
 	$total_pages 	= $Pager->getTotalPages(); 
 	$page_nums 		= $Pager->print_nums($config['siteurl'].'admin.php?cp=users'); 
+	//if not noraml user system 
+	$user_not_normal =$config['user_system'] != 1 ?  true : false;
 		
 	//after submit 
 	if (isset($_POST['submit']))

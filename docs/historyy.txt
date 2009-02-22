@@ -198,10 +198,12 @@ RC6:
 - fix check mime and add many bad codes
 + add real_name of files to cp
 + add checking of safe premession of config.php 
++ users system integrations changed to easy way 
+- last visit not work always with admin 
 
 to do : 
-- last visit not ok of admin 
-- integrations must be change to easy way 
+- 
+- 
 
 Thank you for reading this file. 
 

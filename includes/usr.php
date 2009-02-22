@@ -25,33 +25,28 @@ class usrcp
 					global $config, $path;
 						
 						//fix it 
-						if($config['user_system'] == '')
+						if($config['user_system'] == '' || empty($config['user_system']))
 						{
-							$config['user_system'] = 1;
+							$config['user_system'] = '1';
 						}
 						
 						
 						($hook = kleeja_run_hook('data_func_usr_class')) ? eval($hook) : null; //run hook
 						
-						if ($config['user_system'] == 1) //normal 
+						
+						if($config['user_system'] != '1')
 						{
-							return $this->normal($name, $pass);
-						}
-						elseif ($config['user_system'] == 2)  // phpbb
-						{
-							include_once ($path . 'auth_integration/phpbb.php');
-						}
-						elseif ($config['user_system'] == 3)  // vb 
-						{
-							include_once ($path . 'auth_integration/vb.php');
-						}
-						elseif ($config['user_system'] == 4)  // mysmartbb
-						{
-							include_once ($path . 'auth_integration/mysmartbb.php');
+							if(file_exists($path . 'auth_integration/' . trim($config['user_system']) . '.php'))
+							{
+								include_once ($path . 'auth_integration/phpbb.php');
+								return kleeja_auth_login($name, $pass);
+							}
 						}
 						
-						return kleeja_auth_login($name, $pass);
-
+						
+						//normal 
+						return $this->normal($name, $pass);
+					
 				}
 				
 					
@@ -77,25 +72,28 @@ class usrcp
 					{
 						while($row=$SQL->fetch_array($result))
 						{
-							$_SESSION['USER_ID']	=	$row['id'];
-							$_SESSION['USER_NAME']	=	$row['name'];
-							$_SESSION['USER_MAIL']	=	$row['mail'];
-							$_SESSION['USER_ADMIN']	=	$row['admin'];
-							$_SESSION['USER_SESS']	=	session_id();
-							$_SESSION['LAST_VISIT']	=	$row['last_visit'];
+							$_SESSION['USER_ID']	= $row['id'];
+							$_SESSION['USER_NAME']	= $row['name'];
+							$_SESSION['USER_MAIL']	= $row['mail'];
+							$_SESSION['USER_ADMIN']	= $row['admin'];
+							$_SESSION['USER_SESS']	= session_id();
+							$_SESSION['LAST_VISIT']	= $row['last_visit'];
 							($hook = kleeja_run_hook('qr_while_usrdata_n_usr_class')) ? eval($hook) : null; //run hook	
 							
 							//update session_id
-							$id 		= (int) 	$row['id'];
-							$session_id = (string)  session_id();
+							$id 		= (int) $row['id'];
+							$session_id = (string) session_id();
 							
 							$update_query = array(
 												'UPDATE'	=> "`{$dbprefix}users`",
-												'SET'		=> "session_id='" . $SQL->escape($session_id) . "' ,last_visit='". time() ."'",
+												'SET'		=> "session_id='" . $SQL->escape($session_id) . "' ,last_visit='" . time() . "'",
 												'WHERE'		=>	"id='" . $id ."'"
 										);
 
-							if (!$SQL->build($update_query)){ die($lang['CANT_UPDATE_SQL']);}
+							if (!$SQL->build($update_query))
+							{
+								die($lang['CANT_UPDATE_SQL']);
+							}
 						
 						}
 						$SQL->freeresult($result);   
@@ -243,6 +241,7 @@ class usrcp
 					unset($_SESSION['USER_MAIL']);
 					unset($_SESSION['USER_ADMIN']);
 					unset($_SESSION['USER_SESS']);
+					unset($_SESSION['LAST_VISIT']);
 					return true;
 				}
 				
@@ -254,6 +253,7 @@ class usrcp
 					($hook = kleeja_run_hook('logout_cp_func_usr_class')) ? eval($hook) : null; //run hook
 					
 					unset($_SESSION['USER_ADMIN']);
+					unset($_SESSION['LAST_VISIT']);
 					return true;
 				}
 }#end class

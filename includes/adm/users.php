@@ -63,10 +63,10 @@
 				$admin[$row['id']]	= $row['admin'];
 				$del[$row['id']] 	= (isset($_POST["del_".$row['id']])) ? $_POST["del_".$row['id']] : "";
 
-				$arr[] = array( id =>$ids[$row['id']],
-								name =>$name[$row['id']],
-								mail =>$mail[$row['id']],
-								admin =>($admin[$row['id']])? "<input name=\"ad_{$row[id]}\" type=\"checkbox\" checked=\"checked\" />":"<input name=\"ad_{$row[id]}\" type=\"checkbox\"  />"
+				$arr[] = array( 'id' =>$ids[$row['id']],
+								'name' =>$name[$row['id']],
+								'mail' =>$mail[$row['id']],
+								'admin' =>($admin[$row['id']])? "<input name=\"ad_{$row[id]}\" type=\"checkbox\" checked=\"checked\" />":"<input name=\"ad_{$row[id]}\" type=\"checkbox\"  />"
 							);
 
 

@@ -61,7 +61,7 @@ class SimplePager
 		//if no page
 		if($this->totalPages <= 1) return;
 		
-		$re 	=	'';
+		$re 	= '<div class="pagination">';
 		
 		// Add a previous page link
 		if ($this->totalPages > 1 && $this->currentPage > 1)
@@ -78,7 +78,7 @@ class SimplePager
 			else if ($current != $this->currentPage)
 				$re .= '<a href="'. $link .'&amp;page='.($current).'" class="paging">'. $current .'</a>&nbsp;';
 			else
-				$re .= '<strong class="here_psge">'. $current .'</strong>&nbsp;';
+				$re .= '<strong class="here_page">'. $current .'</strong>&nbsp;';
 		}
 		
 		if ($this->currentPage <= ($this->totalPages-3))
@@ -93,6 +93,8 @@ class SimplePager
 		if ($this->totalPages > 1 && $this->currentPage < $this->totalPages)
 			$re .= '&nbsp;&nbsp;<a class="paging" href="' . $link . '&amp;page=' . ($this->currentPage+1) . '">'. $lang['NEXT'] .'</a>';
 			
+		$re .= '</div>'; 
+		
 		/*
 			if($this->totalPages < 2) return;
 			$re = ($this->currentPage>1) ? '<a href="'.$link.'&amp;page='.($this->currentPage-1).'" class=paging>'. $lang['PREV'] .'</a> ': '';

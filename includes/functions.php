@@ -125,7 +125,7 @@ function Saafooter()
 			$queries_num	= $SQL->query_num;
 			$time_sql		= round($SQL->query_num / $loadtime) ;
 			$link_dbg		= (($usrcp->admin()) ? "[ <a href=" .  str_replace('debug','',kleeja_get_page()) . ((strpos(kleeja_get_page(), '?') === false) ? '?' : '&') . "debug>More Details ... </a> ]" : null);
-			$page_stats	= "<b>[</b> GZIP : $gzip - Generation Time: $loadtime Sec  - Queries: $queries_num - Hook System:  $hksys <b>]</b>  " . $link_dbg ;
+			$page_stats	= "<strong>[</strong> GZIP : $gzip - Generation Time: $loadtime Sec  - Queries: $queries_num - Hook System:  $hksys <strong>]</strong>  " . $link_dbg ;
 			$tpl->assign("page_stats",$page_stats);
 		}#end statfooter
 
@@ -136,7 +136,8 @@ function Saafooter()
 			$tpl->assign("admin_page",$admin_page);
 		}
 		
-		// if google analytics .. 
+		// if google analytics .. //new version 
+		//http://www.google.com/support/googleanalytics/bin/answer.py?answer=55488&topic=11126
 		if (strlen($config['googleanalytics']) > 4)
 		{
 			$googleanalytics = '<script type="text/javascript">' . "\n";
@@ -148,7 +149,7 @@ function Saafooter()
 			$googleanalytics = 'pageTracker._initData();' . "\n";
 			$googleanalytics = 'pageTracker._trackPageview();' . "\n";
 			$googleanalytics = '</script>' . "\n";
-			$tpl->assign("googleanalytics",$googleanalytics);
+			$tpl->assign("googleanalytics", $googleanalytics);
 		}
 		
 		($hook = kleeja_run_hook('func_Saafooter')) ? eval($hook) : null; //run hook
@@ -828,7 +829,7 @@ function kleeja_debug ()
 		}
 		else
 		{
-			echo '<p><b>NO SQLs</b></p>';
+			echo '<p><strong>NO SQLs</strong></p>';
 		}
 		
 		echo '<p>&nbsp;</p><p><h2><strong><em>HOOK</em> Information :</strong></h2></p> ';
@@ -846,7 +847,7 @@ function kleeja_debug ()
 		}
 		else
 		{
-			echo '<p><b>NO-HOOKS</b></p>';
+			echo '<p><strong>NO-HOOKS</strong></p>';
 		}
 		
 		echo '<br /><br /><br /></fieldset>';
@@ -875,13 +876,22 @@ function big_error ($error_title,  $msg_text)
 }
 
 
-
+function imap8bit(&$item, $key)
+{
+	$item = imap_8bit($item);
+}
 
 /*
 * send email
 */
 function send_mail($to, $body, $subject, $fromaddress, $fromname,$bcc='')
 {
+		$subject = wordwrap($subject, 25, "\n", FALSE);
+		$subject = explode("\n", $subject);
+		array_walk($subject, imap8bit);
+		$subject = implode("\r\n ", $subject);
+		$subject = "=?UTF-8?Q?" . $subject . "?=";
+		
 		$eol="\r\n";
 		$headers	='';
 		$headers .= 'From: ' . $fromname . ' <' . $fromaddress . '>' . $eol;
@@ -898,6 +908,8 @@ function send_mail($to, $body, $subject, $fromaddress, $fromname,$bcc='')
 		$headers .= 'X-MSMail-Priority: Normal' . $eol;
 		$headers .= 'X-Mailer: : PHP v' . phpversion() . $eol;
 		$headers .= 'X-MimeOLE: kleeja' . $eol;
+		
+		$body = imap_8bit($body);
 		
 		($hook = kleeja_run_hook('kleeja_send_mail')) ? eval($hook) : null; //run hook
 		
@@ -930,13 +942,13 @@ function fetch_remote_file($url)
 	else if(function_exists("fsockopen"))
 	{
 	    $url_parsed = parse_url($url);
-	    $host = $url_parsed["host"];
-	    $port = ($url_parsed["port"] == 0) ? 80 : $url_parsed["port"];
-		$path = $url_parsed["path"];
+	    $host = $url_parsed['host'];
+	    $port = ($url_parsed['port'] == 0) ? 80 : $url_parsed['port'];
+		$path = $url_parsed['path'];
 	    
-		if ($url_parsed["query"] != "")
+		if ($url_parsed["query"] != '')
 		{
-			$path .= "?" . $url_parsed["query"];
+			$path .= '?' . $url_parsed['query'];
 		}
 	
 	    $out = "GET $path HTTP/1.0\r\nHost: $host\r\n\r\n";
@@ -964,7 +976,7 @@ function fetch_remote_file($url)
 	}
 	else
 	{
-		return implode("", file($url));
+		return implode('', file($url));
 	}
 }
 
@@ -994,7 +1006,7 @@ function kleeja_mime_groups($return_one = false)
 
 /*
 *admin function for extensions types
-*parameters : id : type id, default : default or not
+*parameters : $name_of_select, $g_id, $return_name
 */
 function ch_g ($name_of_select, $g_id, $return_name = false)
 {
@@ -1009,12 +1021,12 @@ function ch_g ($name_of_select, $g_id, $return_name = false)
 			return $s['name'];
 		}
 		
-		$show = "<select name=\"{$name_of_select}\">";
+		$show = "<select name=\"{$name_of_select}\">\n";
 		
-		for($i=1;$i<sizeof($s);$i++)
+		for($i=1; $i< sizeof($s); $i++)
 		{
-			$selected = ($default == $i)? "selected=\"selected\"" : "";
-			$show .= "<option $selected value=\"$i\">" . $s[$i]['name'] . "</option>";
+			$selected = ($g_id == $i)? "selected=\"selected\"" : "";
+			$show .= "<option $selected value=\"$i\">" . $s[$i]['name'] . "</option>\n";
 		}
 		
 		$show .="</select>";
@@ -1026,35 +1038,45 @@ function ch_g ($name_of_select, $g_id, $return_name = false)
 //1rc6+ for check file mime
 //this function is under TESTING !
 // you can share your experinces with us from our site kleeja.com...
-function kleeja_check_mime ($mime, $group_id, $temp)
+function kleeja_check_mime ($mime, $group_id, $file_path)
 {
 	($hook = kleeja_run_hook('kleeja_check_mime_func')) ? eval($hook) : null; //run hook
 	
-	//this function work with images only 
-	if($group_id != 1) return true;
+	$return = true;
 	
-	$s_items = @explode(':', 'image:png:jpg:tif:tga:targa');
-	$return = false;
-	foreach($s_items as $r)
+	//This code for images only 
+	if($group_id == 1)
 	{
-		if(strpos($mime, $r) !== false)
+		$return = false;
+		$s_items = @explode(':', 'image:png:jpg:tif:tga:targa');
+		foreach($s_items as $r)
 		{
-			$return = true;
-			break;
+			if(strpos($mime, $r) !== false)
+			{
+				$return = true;
+				break;
+			}
 		}
+		//onther check
+		//$w = @getimagesize($file_path);
+		//$return =  ($w && (strpos($w['mime'], 'image') !== false)) ? true : false;
 	}
 	
-	//onther check
-	$w = @getimagesize($temp);
-	$return =  ($w && (strpos($w['mime'], 'image') !== false)) ? true : false;
 
 	//another check
 	if($return == true)
 	{
-		//check for bad things inside files ... i hate those kids; sorry , i mean i dont like them
-		//what if the  size is big ! ! 
-		$maybe_bad_codes_are = array('<?', '<%', '<script', 'zend');
-		$data = file_get_contents($temp);
+		if(@filesize($file_path) > 10*(1000*1024))
+		{
+			return true;
+		}
+		
+		//check for bad things inside files ...
+		//eval without space and ( will catch alot of codes
+		//<.? i cant add it here cuz alot of files contain it 
+		$maybe_bad_codes_are = array('<script', 'zend', 'base64_decode', 'eval ', 'eval(', '<?php', 'echo', 'print', 'cgi');
+	
+		$data = @file_get_contents($file_path);
 		foreach($maybe_bad_codes_are as $i)
 		{
 			if(strpos(strtolower($data), $i) !== false)
@@ -1071,7 +1093,8 @@ function kleeja_check_mime ($mime, $group_id, $temp)
 //delete cache
 function delete_cache($name, $all=false, $deep = false)
 {
-	//we have delete it by any method !
+
+	($hook = kleeja_run_hook('delete_cache_func')) ? eval($hook) : null; //run hook
 	
 	$path_to_cache = ($deep ? '.' : '') . './cache';
 	
@@ -1313,6 +1336,8 @@ function get_mime_for_header($ext)
 		//add more mime here
 	);
 	
+	($hook = kleeja_run_hook('get_mime_for_header_func')) ? eval($hook) : null; //run hook
+	
 	//return mime
 	$ext = strtolower($ext);
     if(in_array($ext, array_keys($mime_types)))
@@ -1333,6 +1358,7 @@ function get_lang($name, $folder = '')
 {
 	global $config, $root_path, $lang;
 	
+	($hook = kleeja_run_hook('get_lang_func')) ? eval($hook) : null; //run hook
 	
 	$name = str_replace('..', '', $name);
 	if($folder != '')

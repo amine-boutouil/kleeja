@@ -62,9 +62,6 @@
 
   </templates>
   
-  <langs>
-    <lang word="var_lang"><![CDATA[trans lang]]></lang>
-  </langs>
   
   <hooks>
     <hook name="name_of_hook"><![CDATA[

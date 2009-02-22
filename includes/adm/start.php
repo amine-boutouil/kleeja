@@ -13,7 +13,7 @@
 		//style of
 		$stylee 				= "admin_start";
 		//last visit
-		$last_visit				= ($_SESSION['LAST_VISIT']) ?  gmdate("[d-m-Y], [h:i] a ", $_SESSION['LAST_VISIT']) : false;
+		$last_visit				= isset($_SESSION['LAST_VISIT']) ?  gmdate("[d-m-Y], [h:i a] ", $_SESSION['LAST_VISIT']) : false;
 		$h_lst_files			= './admin.php?cp=files&last_visit=' . $_SESSION['LAST_VISIT'];
 		$h_lst_imgs				= './admin.php?cp=img_ctrl&last_visit=' . $_SESSION['LAST_VISIT'];
 		
@@ -39,7 +39,7 @@
 		$per1 = @round($stat_sizes / ($config['total_size'] *1048576) ,2) *100;
 		//ppl must know about kleeja version!
 		//ok i forgive ...
-		$kleeja_version		= KLEEJA_VERSION;
+		$kleeja_version	 = KLEEJA_VERSION;
 		
 		//updating
 		$v = unserialize($config['new_version']);
@@ -53,13 +53,37 @@
 		}	
 		
 		
-		//cached
+		//cached templates
 		$there_is_cached = false;
 		$cached_file = $root_path . 'cache/styles_cached.php';
 		if(file_exists($cached_file))
 		{
 			$there_is_cached = sprintf($lang['CACHED_STYLES_DISC'] , '<a href="./admin.php?cp=styles&amp;sty_t=cached">' . $lang['CLICKHERE'] .'</a>');
 		}
+		
+		
+		//if config not safe
+		$is_config_writable = (bool) (@fileperms($root_path . 'config.php') & 0x0002);
+
+		
+		//check is there any copyright on footer.html if not show pretty msg with peace
+		$no_copyrights = false;
+		$no_copyrights_disc = sprintf($lang['NO_KLEEJA_COPYRIGHTS'], '<a href="http://kleeja.com/buy/">' . $lang['CLICKHERE'] .'</a>');
+		if(file_exists($STYLE_PATH . 'footer.html'))
+		{
+			$t_data = file_get_contents($STYLE_PATH . 'footer.html');
+
+			if(strpos($t_data, 'kleeja.com') === false)
+			{
+				//not guilty or not guilty! we love who use kleeja even witout copyrights 
+				//but we are human being, so we need some money to live as a normal people 
+				if($v['copyrights'] == false)
+				{
+					$no_copyrights = true;
+				}
+			}
+		}
+		
 		
 		($hook = kleeja_run_hook('default_admin_page')) ? eval($hook) : null; //run hook 
 		

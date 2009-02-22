@@ -1,42 +1,40 @@
 
         
 <div class="middle">
-<form method="post" action="{action}">
         <fieldset>
                 <legend>{lang.PLUGINS}</legend>
 
 <table style="width: 100%">
-        <tr style="background-color:silver">
-                <td>{lang.PLUGINS_EX}</td>
-
-        </tr>
-<tr style="background-color:#F5F5F5">
-<td>
+<tr style="background-color:silver">
+	<td>{lang.PLUGINS_EX}</td>
+</tr>
 <IF NAME="no_plugins">
-{lang.NO_PLUGINS}
+	<td>{lang.NO_PLUGINS}</td>
 <ELSE>
-        <select name="plg_choose" size="6" style="width: 200px; ">
-        <LOOP NAME="arr">
-        <option  value="{{plg_id}}">{{plg_name}}</option>
-        </LOOP>
-        </select>
-        <br />
-        <input name="method" value="1" type="radio" checked="checked" /> {lang.DISABLE}  
-        <br />
-        <input name="method" value="2" type="radio" /> {lang.ENABLE} 
-        <br />
-        <input name="method" value="3" type="radio" /> {lang.DELETE}
+	<LOOP NAME="arr">
+	<tr style="background-color:{{bg_random}}">
+		<td>
+			[ 
+				<IF LOOP="plg_disabled">
+				<a href="{action}&amp;do_plg={{plg_id}}&amp;m=2" title="{lang.DISABLE}"><img src="{STYLE_PATH_ADMIN}images/control_play.png" alt="{lang.ENABLE}" /></a>
+				<ELSE>
+				<a href="{action}&amp;do_plg={{plg_id}}&amp;m=1" title="{lang.DISABLE}"><img src="{STYLE_PATH_ADMIN}images/control_pause.png" alt="{lang.DISABLE}" /></a>
+				</IF>
+				<a href="{action}&amp;do_plg={{plg_id}}&amp;m=3" title="{lang.DELETE}"><img src="{STYLE_PATH_ADMIN}images/del.png" alt="{lang.DELETE}" /></a>
+			] 
+			<strong>{{plg_name}} {{plg_ver}}</strong> 
+			
+			<br />
+			{{plg_dsc}}
+			<br />
+			<em>{{plg_author}}</em>
+		</td>
+	</tr>
+	</LOOP>
 </IF>
 
-</td>
-        </tr>
 </table>
-
 </fieldset>
-<fieldset class="quick" style="text-align:center">
-                <input class="button2" name="submit" type="submit" value="{lang.SUBMIT}" />
-</fieldset>
-</form>
 </div>
 
 <br />

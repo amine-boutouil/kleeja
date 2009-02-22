@@ -11,7 +11,7 @@
 #3- to enter administration panel go to 
 # http://yoursite.com/kleeja/admin.php 
 #
-#4- thank you for using our script .. and dont remove copyrights ..
+#4- thank you for using our script .. and don NOt remove our copyrights ..
 
 
 ##################################### 

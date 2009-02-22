@@ -13,8 +13,17 @@
 
 	//for style ..
 	$stylee		= "admin_files";
-	$action		= "admin.php?cp=files&amp;page=" . intval($_GET['page']);
-
+	
+	$url_or		= (isset($_REQUEST['order_by']) ? '&amp;order_by='.$_REQUEST['order_by'] : '');
+	$url_lst	= (isset($_REQUEST['last_visit']) ? '&amp;last_visit=' . $_REQUEST['last_visit'] : '');
+	$url_pg		= (isset($_REQUEST['page']) ? '&amp;page=' . intval($_REQUEST['page']) : '');
+	$page_action = "admin.php?cp=files" . $url_or	. $url_lst;
+	$ord_action	= "admin.php?cp=files" . $url_pg	. $url_lst;
+	$action		= $page_action . $url_or;
+	
+	
+	
+	
 	$query	= array('SELECT'	=> 'f.*',
 					'FROM'		=> "{$dbprefix}files f",
 					'ORDER BY'	=> 'f.id DESC'
@@ -25,7 +34,7 @@
 	{
 		$file_namee	= ($_POST['filename']!='') ? 'AND f.real_filename LIKE \'%' . $SQL->escape($_POST['filename']) . '%\' ' : ''; 
 		$usernamee	= ($_POST['username']!='') ? 'AND u.name LIKE \'%' . $SQL->escape($_POST['username']) . '%\' AND u.id=f.user' : ''; 
-		$size_than	=   ' f.size ' . (($_POST['than']==1) ? '>' : '<') . intval($_POST['size']) . ' ';
+		$size_than	=   ' f.size ' . (($_POST['than']==1) ? '>=' : '<=') . (intval($_POST['size']) * 1024) . ' ';
 		$ups_than	=  ($_POST['ups']!='') ? 'AND f.uploads ' . (($_POST['uthan']==1) ? '>' : '<') . intval($_POST['ups']) . ' ' : '';
 		$rep_than	=  ($_POST['rep']!='') ? 'AND f.report ' . (($_POST['rthan']==1) ? '>' : '<') . intval($_POST['rep']) . ' ' : '';
 		$lstd_than	=  ($_POST['lastdown']!='') ? 'AND f.last_down ='.(time()-(intval($_POST['lastdown']) * (24 * 60 * 60))) . ' ' : '';
@@ -37,13 +46,13 @@
 		$query['WHERE'] = "$size_than $file_namee $ups_than $exte $rep_than $usernamee $lstd_than $exte $ipp";
 
 	}
-	else if(isset($_GET['last_visit']))
+	else if(isset($_REQUEST['last_visit']))
 	{
-		$query['WHERE']	= "f.time > '" . intval($_GET['last_visit']) . "'";
+		$query['WHERE']	= "f.time > '" . intval($_REQUEST['last_visit']) . "'";
 	}
-	else if(isset($_GET['order_by']))
+	else if(isset($_REQUEST['order_by']))
 	{
-		$query['ORDER BY'] = "f." . $SQL->escape($_GET['order_by']) . " DESC";
+		$query['ORDER BY'] = "f." . $SQL->escape($_REQUEST['order_by']) . " DESC";
 	}
 
 		
@@ -52,7 +61,7 @@
 	/////////////pager 
 	$nums_rows = $SQL->num_rows($result);
 	$currentPage = (isset($_GET['page']))? intval($_GET['page']) : 1;
-	$Pager = new SimplePager($perpage,$nums_rows,$currentPage);
+	$Pager = new SimplePager($perpage, $nums_rows, $currentPage);
 	$start = $Pager->getStartRow();
 
 	$no_results = false;
@@ -126,14 +135,14 @@
 	}
 		
 	//some vars
-	$total_pages 	= $Pager->getTotalPages(); 
-	$page_nums 		= $Pager->print_nums($config['siteurl'] . 'admin.php?cp=files'); 
-	$page_action	= './admin.php?cp=files&amp;page=' . intval($_GET['page']);
+	$total_pages= $Pager->getTotalPages(); 
+	$page_nums 	= $Pager->print_nums($page_action); 
+	
 		
 	//after submit 
 	if (isset($_POST['submit']))
 	{
-		$text	= $lang['FILES_UPDATED'] . '<meta HTTP-EQUIV="REFRESH" content="0; url=./admin.php?cp=files&amp;page=' . intval($_GET['page']). '">' ."\n";
+		$text	= $lang['FILES_UPDATED'] . '<meta HTTP-EQUIV="REFRESH" content="0; url=' . $action . '">' ."\n";
 		$stylee	= "admin_info";
 	}
 ?>

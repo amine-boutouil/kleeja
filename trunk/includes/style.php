@@ -64,7 +64,8 @@ class kleeja_style
 
 	
 	//Function to make limited Array, I wrote this function On Ramadan 3eed :)
-		function _limit($arr_name,$limit=10){
+		function _limit($arr_name,$limit=10)
+		{
 			$arr  = $this->vars[$arr_name];
 			$page = $this->vars[_GET][$arr_name.'_PS'];
 			$pagestart = ($page*$limit > count($arr))?0:$page*$limit;
@@ -77,40 +78,53 @@ class kleeja_style
 			$this->vars[$arr_name.'_paging'] .= ($page==$i)?"<b>$i</b> ":"<a href=".$prefix.$arr_name."_PS=$i class=paging>$i</a> ";
 		}
 	//Function to if.
-		function _if_callback($matches){
+		function _if_callback($matches)
+		{
 			$condition = str_replace('.','"]["',$matches[2]).'"]';
-			if($matches[4]){
+			if($matches[4])
+			{
 				$condition = "$matches[2]\"]==\"$matches[4]\"";
 			}
-			if(strtoupper($matches[1])=="LOOP"){
+			if(strtoupper($matches[1])=="LOOP")
+			{
 				return "<?php if(\$var[\"$condition){ ?>";
-			}else{
+			}
+			else
+			{
 				return "<?php if(\$this->vars[\"$condition){ ?>";
 			}
 		}
 		
 	//Function to Switch Color.
-		function _sw($index){
+		function _sw($index)
+		{
 			return $this->color["$index"] = ($this->color["$index"]) ? false:true;
 		}
 	//Function to Replace Array Variables
-		function _replace_callback($matches){
+		function _replace_callback($matches)
+		{
 			return str_replace('.','"]["',$matches[0]);
 		}
 	//Function to Replace Array Variables
-		function _color_callback($matches){
+		function _color_callback($matches)
+		{
 			$rand = rand();
 			return "=<?php print (\$this->_sw($rand)) ? \"$matches[1]\":\"$matches[2]\"?>";
 		}
 	//switch Tag
-		function _switch($var,$case,$value){
+		function _switch($var,$case,$value)
+		{
 			$case  = explode(',',$case);
 			$value = explode(',',$value);
 			foreach($case as $k=>$val)
-			if($var==$val) return $value[$k];
+			if($var==$val)
+			{
+				return $value[$k];
+			}
 		}
 	//include Tag
-		function _include($fn){
+		function _include($fn)
+		{
 			return($this->display($fn));
 		}		
 	//Function to Assign Veriables
@@ -119,7 +133,8 @@ class kleeja_style
 			$GLOBALS[$var] = $to;
 		}
 		
-		function _parse($code){
+		function _parse($code)
+		{
 			$code = preg_replace_callback("/<IF\s+(NAME|LOOP)\s*=\s*\"([A-Z0-9_\.\-]{1,})+(=(.*)|)\"\s*>/i",array('kleeja_style','_if_callback'),$code);
 			$code = preg_replace_callback("/({[A-Z0-9_\.\-]{1,}})/i",array('kleeja_style','_replace_callback'),$code);
 			$code = preg_replace_callback("/=\"([#0-9A-Z_\.\-\/]{1,})\|([#0-9A-Z_\.\-\/]{1,})\"/iU",array('kleeja_style','_color_callback'),$code);

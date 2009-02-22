@@ -294,7 +294,7 @@ function process ()
 
 						if(empty($_FILES['file']['tmp_name'][$i]))
 						{
-							//if no file ? natin to do ,, why ? becuase its multipl fields
+							//if no file ? natin to do ,, why ? becuase its multiple fields
 						}
 						elseif(file_exists($this->folder . '/' . $_FILES['file']['name'][$i]))
 						{
@@ -310,7 +310,7 @@ function process ()
 						}
 						elseif(kleeja_check_mime($_FILES['file']['type'][$i], $this->types[strtolower($this->typet)]['group_id'], $_FILES['file']['tmp_name'][$i]) == false)
 						{
-							$this->errs[]= $lang['FORBID_EXT'] . '[' . $_FILES['file']['name'][$i] . ']';
+							$this->errs[]= $lang['NOT_SAFE_FILE'] . '[' . $_FILES['file']['name'][$i] . ']';
 						}
 						elseif(!in_array(strtolower($this->typet), array_keys($this->types)))
 						{
@@ -368,10 +368,9 @@ function process ()
 											ftp_close($conn_id);
 								}
 
-
 								if ($file)
 								{
-									$this->saveit ($this->filename2, $this->folder, $this->sizet, $this->typet);
+									$this->saveit ($this->filename2, $this->folder, $this->sizet, $this->typet, $_FILES['file']['name'][$i]);
 								} 
 								else 
 								{
@@ -491,7 +490,7 @@ function process ()
 	//
 	// save data and insert in the database
 	//
-	function saveit ($filname, $folderee, $sizeee, $typeee, $real_filename)
+	function saveit ($filname, $folderee, $sizeee, $typeee, $real_filename = '')
 	{
 		global $SQL,$dbprefix,$config,$lang;
 
@@ -510,7 +509,7 @@ function process ()
 				$realf	= (string)	$SQL->escape($real_filename);	
 				
 				$insert_query = array(
-									'INSERT'	=> '`name` ,`size` ,`time` ,`folder` ,`type`,`user`,`code_del`,`user_ip`, real_filename`',
+									'INSERT'	=> '`name` ,`size` ,`time` ,`folder` ,`type`,`user`,`code_del`,`user_ip`, `real_filename`',
 									'INTO'		=> "`{$dbprefix}files`",
 									'VALUES'	=> "'$name', '$size', '$timeww', '$folder','$type', '$user', '$code_del', '$ip', '$realf'"
 									);

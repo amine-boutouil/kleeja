@@ -35,7 +35,7 @@ class usrcp
 						
 						if ($config['user_system'] == 1) //normal 
 						{
-							return $this->normal($name,$pass);
+							return $this->normal($name, $pass);
 						}
 						elseif ($config['user_system'] == 2)  // phpbb
 						{

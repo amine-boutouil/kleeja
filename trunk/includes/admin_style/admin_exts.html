@@ -20,7 +20,7 @@
 <ELSE>
 <LOOP NAME="arr">
         <tr>
-                <td>{{name}}</td>
+                <td><strong>{{name}}</strong></td>
                 <td>{{group}}</td>
                 <td><input name="gsz[{{id}}]" type="text" value="{{g_size}}" size="7"/></td>
                 <td>{{g_allow}}</td>
@@ -31,18 +31,37 @@
 </LOOP>
 </IF>
 </table>
-
 </fieldset>
-<div style="text-align:center"><b>{arr_paging}</b></div>
-<fieldset class="quick" style="text-align:center">
-                <input class="button2" name="submit" type="submit" value="{lang.UPDATE_EXTS}" />
-                <br />
-                {lang.E_EXTS}
-</fieldset>
+	<div style="text-align:center"><b>{arr_paging}</b></div>
+	<fieldset class="quick" style="text-align:center">
+					<input class="button2" name="submit" type="submit" value="{lang.UPDATE_EXTS}" />
+					<br />
+					{lang.E_EXTS}
+	</fieldset>
 </form>
 
 </div>
 
 
+<div class="middle">
+	<form method="post" action="{action_new_ext}">
+		<fieldset>
+		   <legend>{lang.ADD_NEW_EXT}</legend>
 
-        
+			<table style="width: 100%">
+			<tr style="background-color:silver">
+				 <td>{lang.ADD_NEW_EXT_EXP}</td>
+			</tr>
+			<tr style="background-color:#F5F5F5">
+				<td>
+					<input name="new_ext" type="text" value="" style="direction:ltr" />
+					{gr_exts_arr}
+				</td>
+			 </tr>
+			</table>
+		</fieldset>
+		<fieldset class="quick" style="text-align:center">
+		<input class="button2" name="submit_new_ext" type="submit" value="{lang.SUBMIT}" />
+		</fieldset>
+	</form>
+</div>

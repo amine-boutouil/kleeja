@@ -23,7 +23,8 @@
 	// Report all errors, except notices
 	error_reporting(E_ALL ^ E_NOTICE);
 
-	$expireTime = 60*60*24*7; // 7 days
+	$expireTime = 60*60*12*1; // 12 hours
+	
 	session_set_cookie_params($expireTime);
 	// start session
 	session_start();
@@ -127,7 +128,7 @@
 	unset($dbpass);
 
 
-	//then get
+	//then get caches
 	require ($path . 'cache.php');
 	
 	// ...header ..  i like it ;)

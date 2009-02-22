@@ -12,8 +12,8 @@ html {
 }
 body {
     background-color: #CCCCCC;
-        font: .74em "Tahoma" Verdana, Arial, sans-serif;
-        line-height: 1.5em; 
+    font: .74em "Tahoma" Verdana, Arial, sans-serif;
+    line-height: 1.5em; 
     margin: 10px 15px;
     padding: 12px 0;
 }
@@ -29,13 +29,9 @@ a:hover {
 
 #wrap {
         margin: 20px auto;
-        width: 920px;
+        width: 90%
 
 }
-
-
-        
-
 
 #header {
         width:50%;
@@ -46,8 +42,6 @@ a:hover {
 #content {
         padding: 0 40px 0 40px;
 }
-
-
 
 
 /* rodded corners box  */
@@ -290,4 +284,45 @@ info and error
 	font-family:"lucida grande", tahoma, verdana, arial, sans-serif;
 	font-size: 12px;
 	font-weight: bold;
+}
+
+/*
+pagination
+*/
+.here_page, .paging {
+		margin:2px;
+		border-style:solid;
+		border-width:1px;
+		font-family:tahoma,verdana,arial,sans-serif;
+		padding:2px 6px 2px 6px;
+		text-align:center;
+}
+
+.here_page{
+		background-color:#3B5998; 
+		color:#FFFFFF;
+		
+}
+
+.paging{
+		background-color:#fff; 
+		color:#3B5998;
+}
+
+.pagination {
+	padding:2px 6px 2px 6px;
+}
+
+
+.s_box {
+		margin:2 px;
+		border-style:solid;
+		border-width:1px;
+		font-family:tahoma,verdana,arial,sans-serif;
+		padding:2px 4px 2px 4px;
+		text-align:center;
+		background-color:#FFFCF9; 
+		color:#484848;
+		border-color:#FD8500;
+		font-weight: bold;
 }

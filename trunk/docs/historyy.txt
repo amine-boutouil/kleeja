@@ -192,8 +192,17 @@ RC6:
 - fix bug when you add fmore feilds then will delete filed value...
 + styles now in files
 + languages now in files
++ add ext from cp 
++ sizes now in kb in exts cp
+- fix updating exts
+- fix check mime and add many bad codes
++ add real_name of files to cp
++ add checking of safe premession of config.php 
 
+to do : 
+- last visit not ok of admin 
+- integrations must be change to easy way 
 
-thank you for reading this file. 
+Thank you for reading this file. 
 
 for more details http://kleeja.com/bugs

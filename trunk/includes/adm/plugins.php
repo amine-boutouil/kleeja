@@ -27,13 +27,20 @@
 		
 		if($SQL->num_rows($result)>0)
 		{
+			$ran = '#fff';
 			while($row=$SQL->fetch_array($result))
 			{
-					$arr[] = array( 'plg_id'			=>$row['plg_id'],
-											'plg_name'		=>$row['plg_name'].(($row['plg_disabled']==1)? ' [x]': ''),
-											'plg_disabled'	=>$row['plg_disabled']
+					$ran = ($ran == '#fff') ? '#F5F5F5' : '#fff';
+					
+					$arr[] = array( 'plg_id'		=> $row['plg_id'],
+									'plg_name'		=> $row['plg_name'].(($row['plg_disabled']==1)? ' [x]': ''),
+									'plg_disabled'	=> $row['plg_disabled'] == '1' ? true : false,
+									'plg_ver'		=> $row['plg_ver'],
+									'plg_author'	=> $row['plg_author'],
+									'plg_dsc'		=> $row['plg_dsc'],
+									//wow
+									'bg_random'		=> $ran,
 								);
-
 			}
 		}
 		else
@@ -45,23 +52,23 @@
 	
 
 		//after submit ////////////////
-		if (isset($_POST['submit']))
+		if (isset($_GET['do_plg']))
 		{
-			$plg_id 		= intval($_POST['plg_choose']);
+			$plg_id = intval($_GET['do_plg']);
 
 			
-			switch($_POST['method'])
+			switch($_GET['m'])
 			{
 				case '1': // disable the plguin		
 				case '2': //enable it
 				
-					$action	=	($_POST['method'] == 1) ? 1 : 0;
+					$action	=	($_GET['m'] == 1) ? 1 : 0;
 
 					//update
 					$update_query = array(
 											'UPDATE'	=> "{$dbprefix}plugins",
 											'SET'		=> "plg_disabled=$action",
-											'WHERE'		=> "plg_id='".$plg_id ."'"
+											'WHERE'		=> "plg_id='" . $plg_id . "'"
 										);
 
 					if ($SQL->build($update_query))
@@ -87,7 +94,7 @@
 							$query = array(
 										'SELECT'	=> 'plg_uninstall',
 										'FROM'		=> "{$dbprefix}plugins",
-										'WHERE'		=> "plg_id='". $plg_id ."'"
+										'WHERE'		=> "plg_id='" . $plg_id . "'"
 										);
 											
 							$result = $SQL->fetch_array($SQL->build($query));
@@ -99,18 +106,24 @@
 							
 							$query_del = array(
 											'DELETE'	=> "{$dbprefix}plugins",
-											'WHERE'		=> "plg_id='". $plg_id ."'"
+											'WHERE'		=> "plg_id='" . $plg_id . "'"
 											);
 
 											
-							if (!$SQL->build($query_del)) {die($lang['CANT_DELETE_SQL']);}	
+							if (!$SQL->build($query_del)) 
+							{
+								die($lang['CANT_DELETE_SQL']);
+							}	
 											
 							$query_del2 = array(
 											'DELETE'	=> "{$dbprefix}hooks",
-											'WHERE'		=> "plg_id='". $plg_id."'"
+											'WHERE'		=> "plg_id='" . $plg_id . "'"
 											);		
 											
-							if (!$SQL->build($query_del2)) {die($lang['CANT_DELETE_SQL'].'2');}	
+							if (!$SQL->build($query_del2))
+							{
+								die($lang['CANT_DELETE_SQL'] . '2');
+							}	
 							
 							//delete cache ..
 							delete_cache('data_hooks');

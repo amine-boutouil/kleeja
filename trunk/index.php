@@ -20,7 +20,8 @@
 	switch($config['decode']):
 		case 1:	$decode = "time";	break;
 		case 2:	$decode = "md5";	break;
-		default:	
+		default:
+			//add you own decode
 			($hook = kleeja_run_hook('decode_config_default')) ? eval($hook) : null; //run hook
 			$decode = "";
 		break;

@@ -10,14 +10,14 @@
 		exit('no directly opening : ' . __file__);
 	}
 
-
-	$version_data =	fetch_remote_file('http://www.kleeja.com/check_vers/ver_klj1.txt');
 	
-		
-	if ($version_data === false)
+	//get data from kleeja database
+	$b_data = fetch_remote_file('http://www.kleeja.com/check_vers/?i=' . urlencode($_SERVER['SERVER_NAME']) . '&v=' . KLEEJA_VERSION);
+
+	if ($b_data === false)
 	{
-			$text	= $lang['ERROR_CHECK_VER'];
-			$stylee	= "admin_err";
+		$text	= $lang['ERROR_CHECK_VER'];
+		$stylee	= "admin_err";
 	}
 	else
 	{
@@ -25,7 +25,9 @@
 		// there is a file that we brought it !
 		//
 		
-		$version_data = trim(htmlspecialchars($version_data));
+		$b_data = @explode('|', $b_data);
+		
+		$version_data = trim(htmlspecialchars($b_data[0]));
 		
 		if (version_compare(strtolower(KLEEJA_VERSION), strtolower($version_data), '<'))
 		{
@@ -48,8 +50,8 @@
 		//lets recore it
 		$v = unserialize($config['new_version']);
 	
-		if(version_compare(strtolower($v['version_number']), strtolower($version_data), '<') || isset($_GET['show_msg']))
-		{
+		//if(version_compare(strtolower($v['version_number']), strtolower($version_data), '<') || isset($_GET['show_msg']))
+		//{
 			
 			//to prevent expected error [ infinit loop ]
 			if(isset($_GET['show_msg']))
@@ -68,7 +70,8 @@
 			
 			$data	= array('version_number'	=> $version_data,
 							'last_check'		=> time(),
-							'msg_appeared'		=> isset($_GET['show_msg']) ? true : false, 
+							'msg_appeared'		=> isset($_GET['show_msg']) ? true : false,
+							'copyrights'		=> strpos($b_data[1], 'yes') !== false ? true : false,
 						);
 			
 
@@ -80,7 +83,10 @@
 									'WHERE'		=> "name='new_version'"
 									);
 
-			if (!$SQL->build($update_query)) die($lang['CANT_UPDATE_SQL']);
+			if (!$SQL->build($update_query))
+			{
+				die($lang['CANT_UPDATE_SQL']);
+			}
 			
 			//clean cache
 			delete_cache('data_config');
@@ -91,10 +97,7 @@
 			{
 				header('location: ./admin.php');
 			}
-		}	
+		//}	
 	}
-
-
-
 
 ?>

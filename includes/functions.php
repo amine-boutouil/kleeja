@@ -512,7 +512,7 @@ function creat_plugin_xml($contents)
 							
 							if(is_array($plg_tpl['edit']['template']))
 							{
-								if(array_key_exists("attributes",$plg_tpl['edit']['template']))
+								if(array_key_exists("attributes", $plg_tpl['edit']['template']))
 								{
 									$plg_tpl['edit']['template'] = array($plg_tpl['edit']['template']);
 								}
@@ -533,11 +533,29 @@ function creat_plugin_xml($contents)
 									
 									$style_path = (substr($template_name, 0, 6) == 'admin_') ? $STYLE_PATH_ADMIN : $STYLE_PATH;
 									
-									$d_contents = file_get_contents($style_path . $template_name . '.html');
+									//if template not found and default style is there and not admin tpl
+									$template_path = $style_path . $template_name . '.html';
+									if(!file_exists($template_path)) 
+									{
+										if($config['style'] != 'default' && !$is_admin_template)
+										{
+											$template_path_alternative = str_replace('/' . $config['style'] . '/', '/default/', $template_path);
+											if(file_exists($template_path_alternative))
+											{
+												$template_path = $template_path_alternative;
+											}
+										}
+									}
+									
+									if(file_exists($template_path))
+										$d_contents = file_get_contents($template_path);
+									else
+										$d_contents = '';
+									
 									$finder->text = trim($d_contents);
 									$finder->do_search($action_type);
 									
-									if($finder->text != $d_contents && is_writable($style_path))
+									if($d_contents  != '' && $finder->text != $d_contents && is_writable($style_path))
 									{
 										//update
 										$filename = @fopen($style_path . $template_name . '.html', 'w');

@@ -77,7 +77,7 @@ $lang = array_merge($lang, array(
 	'CLOSED_FEATURE' => 'خاصية مغلقه',
 	'USERFILE_CLOSED' => 'خاصية مجلدات المستخدمين مغلقه !',
 	
-	'PFILE_4_FORUM' => 'قم بالذهاب للمنتدى لتغيير بياناتك',
+	'PFILE_4_FORUM' => 'قم بالذهاب للمنطقة الأعضاء لتغيير بياناتك',
 	'USER_PLACE' => 'منطقة أعضاء',
 	
 	'PROFILE' => 'ملفك..',

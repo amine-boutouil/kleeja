@@ -390,7 +390,7 @@ function process ()
 				{
 
 								$filename 			=  basename($_POST['file'][$i]);
-								$this->filename2	= explode(".",$filename);
+								$this->filename2	= explode(".", $filename);
 								$this->filename2	= $this->filename2[count($this->filename2)-1];
 								$this->typet 		= $this->filename2;
 
@@ -415,35 +415,36 @@ function process ()
 								//end tashfer
 
 
-							if(empty($_POST['file'][$i]))
+							if(empty($_POST['file'][$i]) || trim($_POST['file'][$i]) == $lang['PAST_URL_HERE'])
 							{
 								//nathin
 							}
 							else//big else
 							{
-									if(!preg_match('#^http[s]?\\:\\/\\/[a-z0-9\-]+\.([a-z0-9\-]+\.)?[a-z]+#i', $_POST['file'][$i]))
+									if(!in_array(substr($_POST['file'][$i],0,4), array('http', 'ftp:')))
 									{
-										$this->errs[]=  $lang['WRONG_LINK'].$filename ;
+										$_POST['file'][$i] = 'http://' . $_POST['file'][$i];
+										//$this->errs[]=  $lang['WRONG_LINK'] . $_POST['file'][$i] ;
 									}
 									elseif(file_exists($this->folder . '/' . $filename))
 									{
-										$this->errs[]=  '[ ' . $_FILES['file']['name'][$i] . ' ] ' . $lang['SAME_FILE_EXIST'];
+										$this->errs[]=  '[ ' . $_POST['file'][$i] . ' ] ' . $lang['SAME_FILE_EXIST'];
 									}
-									elseif( preg_match ("#[\\\/\:\*\?\<\>\|\"]#", $this->filename2))
+									//elseif( preg_match ("#[\\\/\:\*\?\<\>\|\"]#", $this->filename2))
+									//{
+										//$this->errs[]= $lang['WRONG_F_NAME'] . '[' . $_POST['file'][$i] . ']';
+									//}
+									elseif($this->ext_check_safe($_POST['file'][$i]) == false)
 									{
-										$this->errs[]= $lang['WRONG_F_NAME'] . '[' . $_FILES['file']['name'][$i] . ']';
+										$this->errs[]= $lang['WRONG_F_NAME'] . '[' . $_POST['file'][$i] . ']';
 									}
-									elseif($this->ext_check_safe($_FILES['file']['name'][$i]) == false)
-									{
-										$this->errs[]= $lang['WRONG_F_NAME'] . '[' . $_FILES['file']['name'][$i] . ']';
-									}
-									elseif(kleeja_check_mime($_FILES['file']['type'][$i], $this->types[strtolower($this->typet)]['group_id'], $_FILES['file']['tmp_name'][$i]) == false)
-									{
-										$this->errs[]= $lang['FORBID_EXT'] . '[' . $_FILES['file']['name'][$i] . ']';
-									}
+									//elseif(kleeja_check_mime($_POST['file'][$i], $this->types[strtolower($this->typet)]['group_id'], $_FILES['file']['tmp_name'][$i]) == false)
+									//{
+										//$this->errs[]= $lang['FORBID_EXT'] . '[' . $_POST['file'][$i] . ']';
+									//}
 									elseif(!in_array(strtolower($this->typet),array_keys($this->types)))
 									{
-										$this->errs[]= '[ ' . $_FILES['file']['name'][$i] . ' ] ' . $lang['FORBID_EXT'] . '[' . $this->typet . ']';
+										$this->errs[]= '[ ' . $_POST['file'][$i] . ' ] ' . $lang['FORBID_EXT'] . '[' . $this->typet . ']';
 									}
 									else
 									{

@@ -20,7 +20,7 @@
 				<ELSE>
 				<a href="{action}&amp;do_plg={{plg_id}}&amp;m=1" title="{lang.DISABLE}"><img src="{STYLE_PATH_ADMIN}images/control_pause.png" alt="{lang.DISABLE}" /></a>
 				</IF>
-				<a href="{action}&amp;do_plg={{plg_id}}&amp;m=3" title="{lang.DELETE}"><img src="{STYLE_PATH_ADMIN}images/del.png" alt="{lang.DELETE}" /></a>
+				<a href="{action}&amp;do_plg={{plg_id}}&amp;m=3" title="{lang.DELETE}"><img src="{STYLE_PATH_ADMIN}images/del.png" alt="{lang.DELETE}" onclick="javascript:return confirm_from();" /></a>
 			] 
 			<strong>{{plg_name}} {{plg_ver}}</strong> 
 			

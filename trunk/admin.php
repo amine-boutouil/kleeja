@@ -24,6 +24,10 @@
 	//exception extentions
 	$ext_expt	= array();
 	$ext_expt[]	= 'start';
+	//confirm msgs
+	$ext_confirm	= array();
+	$ext_confirm[]	= 'repair';	
+	$ext_confirm[]	= 'lgoutcp';	
 	
 	($hook = kleeja_run_hook('begin_admin_page')) ? eval($hook) : null; //run hook 
 
@@ -92,8 +96,9 @@
 		if(@in_array($m, $ext_expt)) continue;
 		++$i;
 		$adm_extensions_menu[$i]	= array('icon'	=> (file_exists($STYLE_PATH_ADMIN . 'images/' . $m . '_button.gif'))	? $STYLE_PATH_ADMIN . 'images/' . $m . '_button.gif' : $STYLE_PATH_ADMIN . 'images/no_icon_button.gif',
-											'lang'	=>	($lang['R_'. strtoupper($m)]) ? $lang['R_'. strtoupper($m)]: (($lang[strtoupper($m)]) ? $lang[strtoupper($m)] : strtoupper($m)),
-											'link'	=>	'admin.php?cp=' . $m,
+											'lang'	=> ($lang['R_'. strtoupper($m)]) ? $lang['R_'. strtoupper($m)]: (($lang[strtoupper($m)]) ? $lang[strtoupper($m)] : strtoupper($m)),
+											'link'	=> 'admin.php?cp=' . $m,
+											'confirm'	=> (@in_array($m, $ext_confirm)) ? true : false,
 											);
 	
 	}

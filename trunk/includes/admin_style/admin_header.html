@@ -1,25 +1,32 @@
  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" dir="{lang.DIR}">
 <head>
-<title>{lang.KLEEJA_CP} - {config.sitename}</title>
-<meta http-equiv="Content-Language" content="ar" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" href="{STYLE_PATH_ADMIN}admin_stylesheet.css" type="text/css" />
+	<title>{lang.KLEEJA_CP} - {config.sitename}</title>
+	<meta http-equiv="Content-Language" content="ar" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="{STYLE_PATH_ADMIN}admin_stylesheet.css" type="text/css" />
 
-
-<script type="text/javascript" src="{STYLE_PATH_ADMIN}images/tips.js"></script> 
+	<script type="text/javascript">
+	function confirm_from()
+	{
+		if(confirm('{lang.ARE_YOU_SURE_DO_THIS}'))
+			return true;
+		else
+			return false;
+	}
+	
+	</script>
+	<script type="text/javascript" src="{STYLE_PATH_ADMIN}images/tips.js"></script> 
+	<!-- HEAD ADMIN HEADER -->
 </head>
 <body>
 <div id="wrap">
-
 <div class="roundedcornr_box_459680"><div class="roundedcornr_top_459680"><div></div></div><div class="roundedcornr_content_459680">
-
 
 <div id="content">
 
 <div class="header">
 <a href="{config.siteurl}"><img src="{STYLE_PATH_ADMIN}images/logo.gif" alt="{config.sitename}" style="border:0px;float: left;" /></a>
-
 </div>
 
 <div class="right">
@@ -34,7 +41,7 @@
 [<a href="admin.php">{lang.R_CPINDEX}</a>]</li>
 <LOOP NAME="adm_extensions_menu">
 <li><img src="{{icon}}" />
-[<a href="{{link}}">{{lang}}</a>]</li>
+[<a href="{{link}}"<IF LOOP="confirm"> onclick="javascript:return confirm_from();"</IF>>{{lang}}</a>]</li>
 </LOOP>
 <!-- admin header menu extra -->
 </ul>

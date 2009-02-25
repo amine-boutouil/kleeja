@@ -389,7 +389,7 @@ function process ()
 				for($i=0;$i<$this->filesnum;$i++)
 				{
 
-								$filename 			=  basename($_POST['file'][$i]);
+								$filename 			= basename($_POST['file'][$i]);
 								$this->filename2	= explode(".", $filename);
 								$this->filename2	= $this->filename2[count($this->filename2)-1];
 								$this->typet 		= $this->filename2;
@@ -505,7 +505,7 @@ function process ()
 				$timeww	= (int)		time();
 				$user	= (int)		$this->id_user;
 				$code_del=(string)	md5(time());
-				$ip		=  (getenv('HTTP_X_FORWARDED_FOR')) ? getenv('HTTP_X_FORWARDED_FOR') : getenv('REMOTE_ADDR');
+				$ip		=  (@getenv('HTTP_X_FORWARDED_FOR')) ? getenv('HTTP_X_FORWARDED_FOR') : $_SERVER['REMOTE_ADDR'];
 				$ip		= (string)	$SQL->escape($ip);	
 				$realf	= (string)	$SQL->escape($real_filename);	
 				
@@ -566,7 +566,7 @@ function process ()
 
 						//then show
 						$img_html_result =  $extra_show_img . '
-								' . $lang['URL_F_IMG'] . ':<br /><textarea rows="2" cols="49">' . $this->linksite . (($config[mod_writer]) ? "image".$this->id_for_url . ".html" : "download.php?img=".$this->id_for_url ) . '</textarea><br />
+								' . $lang['URL_F_IMG'] . ':<br /><textarea rows="2" cols="49">' . $this->linksite . (($config['mod_writer']) ? "image".$this->id_for_url . ".html" : "download.php?img=".$this->id_for_url ) . '</textarea><br />
 								' . $lang['URL_F_BBC'] . ':<br /><textarea rows="2" cols="49">' .
 								'[url='  .$config['siteurl'] . (($config['mod_writer']) ? "image" . $this->id_for_url.".html" : "download.php?img=" . $this->id_for_url ) . '][img]'.$this->linksite.$folderee . '/' . $filname . '[/img][/url]</textarea><br />
 								' . $extra_thmb . $extra_del;

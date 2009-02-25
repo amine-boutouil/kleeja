@@ -68,12 +68,12 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 			
 			($hook = kleeja_run_hook('b4_showsty_downlaod_id_filename')) ? eval($hook) : null; //run hook
 			
+			//add http reffer to session to prevent errors with some browsers ! 
+			$_SESSION['HTTP_REFERER'] = $config['siteurl'] . (($config['mod_writer']) ? "download" . $id . ".html" : "download.php?id=" . $id);
+			
 			 // show style ...
-			//header
 			Saaheader($lang['DOWNLAOD']);
-				//body
-				echo $tpl->display($sty);
-			//footer
+			echo $tpl->display($sty);
 			Saafooter();
 }
 
@@ -83,6 +83,47 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 else if (isset($_GET['down']) || isset($_GET['img']) || isset($_GET['thmb']))
 {
 		($hook = kleeja_run_hook('begin_down_go_page')) ? eval($hook) : null; //run hook	
+		
+		//must know from where he came ! and stop him if not image
+		if(isset($_GET['down']))
+		{
+			if(!isset($_SERVER['HTTP_REFERER']) || empty($_SERVER['HTTP_REFERER']))
+			{
+				if(function_exists('getenv'))
+				{
+					$_SERVER['HTTP_REFERER'] = getenv('HTTP_REFERER') ? getenv('HTTP_REFERER') : null;
+				}
+				
+				if(!isset($_SERVER['HTTP_REFERER'])|| empty($_SERVER['HTTP_REFERER']))
+				{
+					if(isset($_SESSION['HTTP_REFERER']))
+					{
+						$_SERVER['HTTP_REFERER'] = $_SESSION['HTTP_REFERER'];
+						unset($_SESSION['HTTP_REFERER']);
+					}
+				}
+			}
+			
+			//if not from our site and the waiting page
+			$not_reffer = true;
+			if(strpos($_SERVER['HTTP_REFERER'], 'download' . $_GET['down'] . '.html') !== false)
+			{
+				$not_reffer = false;
+			}
+			
+			if(strpos($_SERVER['HTTP_REFERER'], 'download.php?id=' . $_GET['down']) !== false)
+			{
+				$not_reffer = false;
+				
+			}
+			
+			if($not_reffer)
+			{
+				$go_to = $config['siteurl'] . (($config['mod_writer']) ? "download" . $_GET['down'] . ".html" : "download.php?id=" . $_GET['down']);
+				header('Location:' . $go_to);
+				exit;
+			}
+		}
 		
 		//for safe
 		$id = isset($_GET['down']) ? intval($_GET['down']) : (isset($_GET['img']) ? intval($_GET['img']) : (isset($_GET['thmb']) ? intval($_GET['thmb']) : null));
@@ -94,20 +135,12 @@ else if (isset($_GET['down']) || isset($_GET['img']) || isset($_GET['thmb']))
 		//is internet explore 6 ?
 		$is_ie6 = strpos($browser, 'msie 6.0') !== false ? true : false;
 		
-		$REFERER = !empty($_SERVER['HTTP_REFERER']) ? strtolower($_SERVER['HTTP_REFERER']) : strtolower(getenv('HTTP_REFERER'));
-		if ($REFERER != '' && strpos($_SERVER['HTTP_REFERER'], 'download') === false && !(isset($_GET['thmb']) || isset($_GET['img'])))
-		{
-			$linkoo	= ($config['mod_writer']) ?	'./download' . $id . '.html' : './download.php?id=' . $id;
-			header('Location: ' . $linkoo);
-			exit;
-		}
-		else
-		{
-			//updates ups ..
-			$update_query = array(
-									'UPDATE'	=> "{$dbprefix}files",
-									'SET'		=> 'uploads=uploads+1, last_down=' . time(),
-									'WHERE'		=> "id='" . $id . "'",
+
+		//updates ups ..
+		$update_query = array(
+								'UPDATE'	=> "{$dbprefix}files",
+								'SET'		=> 'uploads=uploads+1, last_down=' . time(),
+								'WHERE'		=> "id='" . $id . "'",
 								);
 
 			($hook = kleeja_run_hook('qr_update_no_uploads_down')) ? eval($hook) : null; //run hook
@@ -241,7 +274,6 @@ else if (isset($_GET['down']) || isset($_GET['img']) || isset($_GET['thmb']))
 					die('Error - can not open file.');
 				}
 
-			}//elser efer
 
 			exit; // we doesnt need style
 

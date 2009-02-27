@@ -70,11 +70,6 @@
 	
 	$starttm = get_microtime();
 
-	//php must be newer than this
-	 if (phpversion() < '4.3.0') 
-	 {
-		exit('Your php version is too old !');
-	 }
 	 
 	// no config
 	if (!file_exists('config.php'))
@@ -109,13 +104,6 @@
 	{
 		//big_error('install folder exists!', '<b>Install</b> folder detected! please delete it OR install <b>Kleeja</b> if you haven\'t done so yet...<br/><br/><a href="'.$root_path.'install">Click to Install</a><br/><br/>');
 	}
-
-	//gd 
-	if(!function_exists('imagecreatetruecolor'))
-	{
-		big_error('No GD Library!', '<b>imagecreatetruecolor</b> function Doesnt exists , That mean GD is disabled or it\'s very very old. <br/> If you don\'t want this feature, then delete this error from file <i>'. __file__ . '</i> in line </i>' . __line__ .'</i>');
-	}
-	
 
      
 	// start classes ..

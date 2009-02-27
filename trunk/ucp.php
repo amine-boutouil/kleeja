@@ -287,11 +287,22 @@ switch ($_GET['go'])
 				$result	=	$SQL->build($query);
 				while($row=$SQL->fetch_array($result))
 				{
+					$is_image = in_array(trim($row['type']), array('gif', 'jpg', 'jpeg', 'bmp', 'png', 'tiff', 'tif')) ? true : false;
+					if($is_image)
+					{
+						$url = ($config['mod_writer']) ? 'image'.$row['id'] . '.html' : 'download.php?img=' . $row['id'];
+					}
+					else
+					{
+						$url = ($config['mod_writer']) ? 'download'.$row['id'] . '.html' : 'download.php?id=' . $row['id'];
+					}
+					
 					//make new lovely arrays !!
 					$arr[] = array(	'id'		=> $row['id'],
-									'name'		=>'<a href="'.(($config['mod_writer'])?  $config['siteurl'] . 'download'.$row['id'] . '.html': $config['siteurl'] . "download.php?id=" . $row['id']  ).'" target="blank">' . $row['name'] . '</a>',
+									'name'		=> '<a href="' . $config['siteurl'] . $url . '" target="blank">' . $row['name'] . '</a>',
 									'icon_link'	=>(file_exists("images/filetypes/".  $row['type'] . ".gif"))? "images/filetypes/" . $row['type'] . ".gif" : 'images/filetypes/file.gif',
-									'file_type'	=> $row['type']
+									'file_type'	=> $row['type'],
+									'image_path'=> $is_image ? $url : '',
 							);
 				}
 				$SQL->freeresult($result);
@@ -347,8 +358,8 @@ switch ($_GET['go'])
 					
 					//make new lovely arrays !!
 					$arr[] = array(	'id'	=> $row['id'],
-									'name'	=> '<a href="' . (($config['mod_writer']) ?  $config['siteurl'] . 'download' . $row['id'] . '.html' : $config['siteurl'] . "download.php?id=" . $row['id']) . '" target="blank">' . $row['name'] . '</a>'
-										);
+									'name'	=> '<a href="' . (($config['mod_writer']) ?  $config['siteurl'] . 'download' . $row['id'] . '.html' : $config['siteurl'] . "download.php?id=" . $row['id']) . '" target="blank">' . $row['name'] . '</a>',
+								);
 										
 						//when submit !!
 						if (isset($_POST['submit_files']))
@@ -446,7 +457,10 @@ switch ($_GET['go'])
 												);
 								
 						($hook = kleeja_run_hook('qr_update_data_in_profile')) ? eval($hook) : null; //run hook
-						if (!$SQL->build($update_query))	die($lang['CANT_UPDATE_SQL']);
+						if (!$SQL->build($update_query))
+						{
+							die($lang['CANT_UPDATE_SQL']);
+						}
 						
 						//msg
 						kleeja_info($lang['DATA_CHANGED_O_LO']);

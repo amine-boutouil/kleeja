@@ -51,7 +51,7 @@ case 'gpl2':
 	}
 	
 	echo '
-	<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=c&'.getlang(1).'">
+	<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=f&'.getlang(1).'">
 	<textarea name="gpl2" rows=""   readonly="readonly" cols="" style="width: 456px; height: 365px;direction:ltr;">
 	' . $contentofgpl2 . '
 	</textarea>
@@ -63,6 +63,61 @@ case 'gpl2':
 	</form>';
 
 
+break;
+case 'f':
+	
+	$check_ok = true;
+	
+	echo '<fieldset id="Group1" dir="' . $lang['DIR'] . '">';
+	echo '<strong>' . $lang['FUNCTIONS_CHECK'] . '</strong> : <br /><br />';
+	echo '<ul>';
+	if(function_exists('unlink'))
+		echo '<li style="color:green">' . sprintf($lang['FUNCTION_IS_EXISTS'], 'unlink') . '</li>';
+	else
+	{
+		$check_ok = false;
+		echo '<li style="color:red">' . sprintf($lang['FUNCTION_IS_NOT_EXISTS'], 'unlink') . '</li>';
+	}
+	echo '[ ' . $lang['FUNCTION_DISC_UNLINK'] . ']<br /> ';
+	if(function_exists('imagecreatetruecolor'))
+
+		echo '<li style="color:green">' . sprintf($lang['FUNCTION_IS_EXISTS'], 'imagecreatetruecolor') . '</li>';
+	else
+	{
+		$check_ok = false;
+		echo '<li style="color:red">' . sprintf($lang['FUNCTION_IS_NOT_EXISTS'], 'imagecreatetruecolor') . '</li>';
+	}
+	echo ' [ ' . $lang['FUNCTION_DISC_GD'] . ']<br /> ';
+	if(function_exists('fopen'))
+		echo '<li style="color:green">' . sprintf($lang['FUNCTION_IS_EXISTS'], 'fopen') . '</li>';
+	else
+	{
+		$check_ok = false;
+		echo '<li style="color:red">' . sprintf($lang['FUNCTION_IS_NOT_EXISTS'], 'fopen') . '</li>';
+	}
+	echo ' [ ' . $lang['FUNCTION_DISC_FOPEN'] . ']<br /> ';
+	if(function_exists('move_uploaded_file'))
+		echo '<li style="color:green">' . sprintf($lang['FUNCTION_IS_EXISTS'], 'move_uploaded_file') . '</li>';
+	else
+	{
+		$check_ok = false;
+		echo '<li style="color:red">' . sprintf($lang['FUNCTION_IS_NOT_EXISTS'], 'move_uploaded_file') . '</li>';
+	}
+	echo ' [ ' . $lang['FUNCTION_DISC_MUF'] . ']<br /> ';
+	echo '</fieldset><br />';
+	
+	if($check_ok)
+	{
+		echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=c&'.getlang(1).'">
+		<input name="agres" type="submit" value="' . $lang['INST_SUBMIT'] . '"  />
+		</form>';
+	}
+	else
+	{
+		echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=f&'.getlang(1).'">
+		<input name="agres" type="submit" value="' . $lang['RE_CHECK'] . '"  />
+		</form>';
+	}
 break;
 case 'c':
 	

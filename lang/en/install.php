@@ -1,6 +1,7 @@
 <?php
-//english language By:NK
-// Email: n.k@cityofangelz.com 
+//English language
+//  By:NK , Email: n.k@cityofangelz.com 
+
 
 	if(!isset($lang) || !is_array($lang)) $lang = array();
 	
@@ -60,6 +61,15 @@
 	$lang['CONFIG_EXISTS']							= 'Config.php was found, Continue...';
 	$lang['INST_SUBMIT_CONFIGOK']					= 'Upload the file in the main directory';
 	$lang['INST_EXPORT']							= 'Export File';
+	//
+	$lang['FUNCTIONS_CHECK']						= 'فحص الدوال';
+	$lang['RE_CHECK']								= 'إعادة الفحص';
+	$lang['FUNCTION_IS_NOT_EXISTS']					= 'الدالة %s معطله لديك.';
+	$lang['FUNCTION_IS_EXISTS']						= 'الدالة %s مفعله لديك.';
+	$lang['FUNCTION_DISC_UNLINK']					= 'دالة unlink يتم استخدامها لحذف الملفات وأيضا لحذف ملفات الكاش وتحديثها.';
+	$lang['FUNCTION_DISC_GD']						= 'دالة imagecreatetruecolor هي من دوال مكتبة GD التي تستخدم لإنشاء المصغرات وأيضا التحكم بالصور.';
+	$lang['FUNCTION_DISC_FOPEN']					= 'دالة fopen تستخدم في التحكم بالستايل والملفات في كليجا.';
+	$lang['FUNCTION_DISC_MUF']						= 'دالة move_uploaded_file تستخدم لتحميل الملفات  وهي اهم دالة في السكربت.';
 	
 	
 	//UPDATOR

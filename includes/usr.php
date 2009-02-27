@@ -24,6 +24,13 @@ class usrcp
 				{
 					global $config, $path;
 						
+						//we need this in future 
+						if(defined('IGNORE_USER_SYSTEM'))
+						{
+							$config['user_system'] = '1';
+						}
+						
+						
 						//fix it 
 						if($config['user_system'] == '' || empty($config['user_system']))
 						{

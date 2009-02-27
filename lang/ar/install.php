@@ -1,14 +1,14 @@
 <?php
-//arabic langugae
+//Arabic langugae
 // KLEEJA 
 
 
 	if(!isset($lang) || !is_array($lang)) $lang = array();
 	
-	$lang['INST_INSTALL_CLEAN_VER']				=	"تثبيت نسخه جديده ";
-	$lang['INST_UPDATE_P_VER']					=	"تحديث نسخه سابقه ";
-	$lang['INST_CHOOSE_INSTALLER']				=	"... قم بإختيار ما يناسبك  من معالج تثبيت كليجا ...";
-	$lang['INST_AGR_GPL2']						=	'أوافق على هذه الشروط كلها';
+	$lang['INST_INSTALL_CLEAN_VER']				= "تثبيت نسخه جديده ";
+	$lang['INST_UPDATE_P_VER']					= "تحديث نسخه سابقه ";
+	$lang['INST_CHOOSE_INSTALLER']				= "... قم بإختيار ما يناسبك  من معالج تثبيت كليجا ...";
+	$lang['INST_AGR_GPL2']						= 'أوافق على هذه الشروط كلها';
 	$lang['INST_SUBMIT']						= '[  متابعه  ]';
 	$lang['INST_SITE_INFO']						= 'معلومات الموقع';
 	$lang['INST_ADMIN_INFO']					= 'معلومات المسؤول';
@@ -50,30 +50,38 @@
 	$lang['WRONG_EMAIL']						= 'البريد الإلكتروني خاطئ !';
 	//
 	
-	$lang['DB_INFO_NW']							=	'قم بإدخال معلومات قاعدة البيانات بشكل صحيح .. ثم سوف نصدرها لك كملف , تضعه في مجلد السكربت الرئيسي';
-	$lang['DB_INFO']							=	'قم بإدخال معلومات قاعدة البيانات بشكل صحيح .. ';
-	$lang['DB_SERVER']							=	'الخادم';
-	$lang['DB_USER']							=	'اسم المستخدم لقاعدة البيانات';
-	$lang['DB_PASSWORD']						=	'كلمة المرور لقاعدة البيانات';
-	$lang['DB_NAME']							=	'إسم قاعدة البيانات';
-	$lang['DB_PREFIX']							=	'بادئة الجداول <br />[كلمة توضع لتعريف جداول السكربت عن غيرها]';
-	$lang['VALIDATING_FORM_WRONG']				=	'يبدو أنك تركت أحد الحقول المطلوبه فارغاً ...';
-	$lang['CONFIG_EXISTS']						=	'تم إيجاد ملف config.php قم بالمتابعه ...';
-	$lang['INST_SUBMIT_CONFIGOK']				=	'قمت برفع الملف , بالمجلد الرئيسي , تابع التثبيت';
-	$lang['INST_EXPORT']						=	'تصدير الملف';
-	
+	$lang['DB_INFO_NW']							= 'قم بإدخال معلومات قاعدة البيانات بشكل صحيح .. ثم سوف نصدرها لك كملف , تضعه في مجلد السكربت الرئيسي';
+	$lang['DB_INFO']							= 'قم بإدخال معلومات قاعدة البيانات بشكل صحيح .. ';
+	$lang['DB_SERVER']							= 'الخادم';
+	$lang['DB_USER']							= 'اسم المستخدم لقاعدة البيانات';
+	$lang['DB_PASSWORD']						= 'كلمة المرور لقاعدة البيانات';
+	$lang['DB_NAME']							= 'إسم قاعدة البيانات';
+	$lang['DB_PREFIX']							= 'بادئة الجداول <br />[كلمة توضع لتعريف جداول السكربت عن غيرها]';
+	$lang['VALIDATING_FORM_WRONG']				= 'يبدو أنك تركت أحد الحقول المطلوبه فارغاً ...';
+	$lang['CONFIG_EXISTS']						= 'تم إيجاد ملف config.php قم بالمتابعه ...';
+	$lang['INST_SUBMIT_CONFIGOK']				= 'قمت برفع الملف , بالمجلد الرئيسي , تابع التثبيت';
+	$lang['INST_EXPORT']						= 'تصدير الملف';
+	//
+	$lang['FUNCTIONS_CHECK']					= 'فحص الدوال';
+	$lang['RE_CHECK']							= 'إعادة الفحص';
+	$lang['FUNCTION_IS_NOT_EXISTS']				= 'الدالة %s معطله لديك.';
+	$lang['FUNCTION_IS_EXISTS']					= 'الدالة %s مفعله لديك.';
+	$lang['FUNCTION_DISC_UNLINK']				= 'دالة unlink يتم استخدامها لحذف الملفات وأيضا لحذف ملفات الكاش وتحديثها.';
+	$lang['FUNCTION_DISC_GD']					= 'دالة imagecreatetruecolor هي من دوال مكتبة GD التي تستخدم لإنشاء المصغرات وأيضا التحكم بالصور.';
+	$lang['FUNCTION_DISC_FOPEN']				= 'دالة fopen تستخدم في التحكم بالستايل والملفات في كليجا.';
+	$lang['FUNCTION_DISC_MUF']					= 'دالة move_uploaded_file تستخدم لتحميل الملفات  وهي اهم دالة في السكربت.';
 	
 	
 	//UPDATOR
-	$lang['INST_CHOOSE_UPDATE_FILE']			=	'قم بإختيار التحديث المناسب لك ومن ثم تابع التحديث ..';
-	$lang['INST_ERR_NO_SELECTED_UPFILE_GOOD']	=	'ملف التحديث غير مناسب او انه غير موجود من الأساس ! ..';
+	$lang['INST_CHOOSE_UPDATE_FILE']			= 'قم بإختيار التحديث المناسب لك ومن ثم تابع التحديث ..';
+	$lang['INST_ERR_NO_SELECTED_UPFILE_GOOD']	= 'ملف التحديث غير مناسب او انه غير موجود من الأساس ! ..';
 	
-	$lang['INST_NOTES_UPDATE']					=	'ملاحظات التحديث';
-	$lang['INST_NOTE_RC2_TO_RC3']				=	'لا بد ان تقوم أيضا بإستبدال ملفات النسخه كلها بالجديده وليس فقط تشغيل هذا المعالج ...';
-	$lang['INST_NOTE_RC4_TO_RC5']				=	'لا بد ان تقوم أيضا بإستبدال الملفات الجديده المعدله لإستكمال الترقيه بشكل جيد !.';
-	$lang['INST_NOTE_RC5_TO_RC6']				=	'لا بد ان تقوم أيضا بإستبدال الملفات الجديده المعدله لإستكمال الترقيه بشكل جيد !.';
+	$lang['INST_NOTES_UPDATE']					= 'ملاحظات التحديث';
+	$lang['INST_NOTE_RC2_TO_RC3']				= 'لا بد ان تقوم أيضا بإستبدال الملفات الجديده المعدله لإستكمال الترقيه بشكل جيد !.';
+	$lang['INST_NOTE_RC4_TO_RC5']				= 'لا بد ان تقوم أيضا بإستبدال الملفات الجديده المعدله لإستكمال الترقيه بشكل جيد !.';
+	$lang['INST_NOTE_RC5_TO_RC6']				= 'لا بد ان تقوم أيضا بإستبدال الملفات الجديده المعدله لإستكمال الترقيه بشكل جيد !.';
 	
-	$lang['INST_UPDATE_IS_FINISH']				=	"معالج التحديث انتهى .. يجب الآن حذف مجلد <br /><b>INSTALL</b><br /> و متابعة عملك في كليجا ..";
+	$lang['INST_UPDATE_IS_FINISH']				= "معالج التحديث انتهى .. يجب الآن حذف مجلد <br /><b>INSTALL</b><br /> و متابعة عملك في كليجا ..";
 	
 
 ?>

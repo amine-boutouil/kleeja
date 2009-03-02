@@ -6,9 +6,9 @@
 	if(!isset($lang) || !is_array($lang)) $lang = array();
 	
 	$lang['INST_INSTALL_CLEAN_VER']					= 'New Installation';
-	$lang['INST_UPDATE_P_VER']						= 'Update a previous version ';
+	$lang['INST_UPDATE_P_VER']						= 'Update ';
 	$lang['INST_CHOOSE_INSTALLER']					= 'Choose what suits you best from the setup wizard';
-	$lang['INST_AGR_GPL2']							= 'I agree to all of these terms';
+	$lang['INST_AGR_GPL2']							= 'I Agree';
 	$lang['INST_SUBMIT']							= '[  Continue  ]';
 	$lang['INST_SITE_INFO']							= 'Site Info';
 	$lang['INST_ADMIN_INFO']						= 'Admin Info';
@@ -34,8 +34,8 @@
 	$lang['INST_CRT_TPL']							= 'Templates table created';
 	$lang['INST_SQL_OK']							= 'SQL Executed Successfully ..';
 	$lang['INST_SQL_ERR']							= 'Error Executing SQL .. ';
-	$lang['INST_FINISH_SQL']						= 'Kleeja was installed successfully, Please remove install folder';
-	$lang['INST_FINISH_ERRSQL']						= 'OopS! there seems to be a problem, try again.';
+	$lang['INST_FINISH_SQL']						= 'Kleeja was installed successfully, Please remove the INSTALL directory';
+	$lang['INST_FINISH_ERRSQL']						= 'Oops! there seems to be a problem, try again.';
 	$lang['INST_KLEEJADEVELOPERS']					= 'Thank you for using Kleeja and good luck from our development team.';
 	$lang['SITENAME']								= 'Website title';
 	$lang['SITEURL']								= 'Website URL';
@@ -56,20 +56,20 @@
 	$lang['DB_USER']								= 'Database Username';
 	$lang['DB_PASSWORD']							= 'Database Password';
 	$lang['DB_NAME']								= 'Database Name';
-	$lang['DB_PREFIX']								= 'Database prefix <br />[a word you provide that is added to the beginning of all tables for this branch installations...]';
+	$lang['DB_PREFIX']								= 'Database prefix <br />[a word you provide that is added to the beginning of all tables for this branch installation...]';
 	$lang['VALIDATING_FORM_WRONG']					= 'A required field was left blank!';
 	$lang['CONFIG_EXISTS']							= 'Config.php was found, Continue...';
 	$lang['INST_SUBMIT_CONFIGOK']					= 'Upload the file in the main directory';
 	$lang['INST_EXPORT']							= 'Export File';
 	//
-	$lang['FUNCTIONS_CHECK']						= 'فحص الدوال';
-	$lang['RE_CHECK']								= 'إعادة الفحص';
-	$lang['FUNCTION_IS_NOT_EXISTS']					= 'الدالة %s معطله لديك.';
-	$lang['FUNCTION_IS_EXISTS']						= 'الدالة %s مفعله لديك.';
-	$lang['FUNCTION_DISC_UNLINK']					= 'دالة unlink يتم استخدامها لحذف الملفات وأيضا لحذف ملفات الكاش وتحديثها.';
-	$lang['FUNCTION_DISC_GD']						= 'دالة imagecreatetruecolor هي من دوال مكتبة GD التي تستخدم لإنشاء المصغرات وأيضا التحكم بالصور.';
-	$lang['FUNCTION_DISC_FOPEN']					= 'دالة fopen تستخدم في التحكم بالستايل والملفات في كليجا.';
-	$lang['FUNCTION_DISC_MUF']						= 'دالة move_uploaded_file تستخدم لتحميل الملفات  وهي اهم دالة في السكربت.';
+	$lang['FUNCTIONS_CHECK']						= 'Functions Check';
+	$lang['RE_CHECK']								= 'ReCheck';
+	$lang['FUNCTION_IS_NOT_EXISTS']					= 'The function %s is disabled.';
+	$lang['FUNCTION_IS_EXISTS']						= 'The function %s is enabled.';
+	$lang['FUNCTION_DISC_UNLINK']					= 'The function Unlink is used to remove and update cache files.';
+	$lang['FUNCTION_DISC_GD']						= 'The function imagecreatetruecolor is a GD library that is used to create thumbnails & control photos.';
+	$lang['FUNCTION_DISC_FOPEN']					= 'The function fopen is used to control styles & files in kleeja.';
+	$lang['FUNCTION_DISC_MUF']						= 'The function move_uploaded_file is used to upload files and it\'s the most important function in the script.';
 	
 	
 	//UPDATOR
@@ -77,7 +77,7 @@
 	$lang['INST_ERR_NO_SELECTED_UPFILE_GOOD']		= 'Inappropriate update file, or it is missing!';
 	
 	$lang['INST_NOTES_UPDATE']						= 'Update Notes';
-	$lang['INST_NOTE_RC2_TO_RC3']					= 'You need to replace all the script files and not just running this wizard  ...';
+	$lang['INST_NOTE_RC2_TO_RC3']					= 'You need to replace all the script files and not just run this wizard  ...';
 	$lang['INST_NOTE_RC4_TO_RC5']					= 'You need to replace all new the script files with the old ones !.';
 	$lang['INST_NOTE_RC5_TO_RC6']					= 'You need to replace all new the script files with the old ones !.';
 	

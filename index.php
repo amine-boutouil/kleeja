@@ -16,6 +16,15 @@
 	
 	($hook = kleeja_run_hook('begin_index_page')) ? eval($hook) : null; //run hook
 	
+	//is kleeja only for memebers ! 
+	if(sizeof($g_exts) == 0 && !$usrcp->name())
+	{
+		// Send a 503 HTTP response code to prevent search bots from indexing this message
+		header('HTTP/1.1 503 Service Temporarily Unavailable');
+		kleeja_info($lang['SITE_FOR_MEMBER_ONLY'], $lang['HOME']);
+	}
+
+	
 	//type of how will decoding name ..
 	switch($config['decode']):
 		case 1:	$decode = "time";	break;

@@ -58,6 +58,8 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 				$REPORT		= ($config['mod_writer']) ?  $config['siteurl'] . "report_" . $id . ".html" :  $config['siteurl'] . "go.php?go=report&amp;id=" . $id;
 				$file_ext_icon = file_exists('images/filetypes/' . $type . '.gif') ? 'images/filetypes/' . $type . '.gif' : 'images/filetypes/file.gif';
 				$sty		= 'download';
+				
+				($hook = kleeja_run_hook('b4_download_id_filename')) ? eval($hook) : null; //run hook
 			}
 			else
 			{
@@ -191,6 +193,7 @@ else if (isset($_GET['down']) || isset($_GET['img']) || isset($_GET['thmb']))
 				//downalod porcess
 				$path_file = isset($_GET['thmb']) ? "./{$f}/thumbs/{$n}" : "./{$f}/{$n}";
 				$chunksize = 1*(1024*1024); //size that will send to user every second
+				$resuming_on = true;
 				
 				($hook = kleeja_run_hook('down_go_page')) ? eval($hook) : null; //run hook	
 
@@ -231,7 +234,7 @@ else if (isset($_GET['down']) || isset($_GET['img']) || isset($_GET['thmb']))
 				}
 				
 				// multipart-download and download resuming support
-				if(isset($_SERVER['HTTP_RANGE']) && !$is_image)
+				if(isset($_SERVER['HTTP_RANGE']) && !$is_image && $resuming_on)
 				{
 					list($a, $range) = explode("=", $_SERVER['HTTP_RANGE'], 2);
 					list($range) = explode(",", $range, 2);

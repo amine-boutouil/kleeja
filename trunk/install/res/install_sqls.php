@@ -11,9 +11,8 @@ if (!defined('IN_COMMON'))	exit();
 $install_sqls = array();
 
 $install_sqls['DROP_TABLES'] = "
-DROP TABLE IF EXISTS `{$dbprefix}call`, `{$dbprefix}config`, `{$dbprefix}exts`, `{$dbprefix}files`, 
-	`{$dbprefix}hooks`, `{$dbprefix}lang`, `{$dbprefix}online`, `{$dbprefix}plugins`, `{$dbprefix}reports`, `{$dbprefix}stats`,
-	`{$dbprefix}templates`, `{$dbprefix}users`, `{$dbprefix}lists`;
+DROP TABLE IF EXISTS `{$dbprefix}call`, `{$dbprefix}config`, `{$dbprefix}exts`, `{$dbprefix}files`, `{$dbprefix}hooks`, 
+				`{$dbprefix}online`, `{$dbprefix}plugins`, `{$dbprefix}reports`, `{$dbprefix}stats`,`{$dbprefix}users`;
 ";
 
 

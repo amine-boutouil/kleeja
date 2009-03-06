@@ -566,9 +566,9 @@ function process ()
 
 						//then show
 						$img_html_result =  $extra_show_img . '
-								' . $lang['URL_F_IMG'] . ':<br /><textarea rows="2" cols="49">' . $this->linksite . (($config['mod_writer']) ? "image".$this->id_for_url . ".html" : "download.php?img=".$this->id_for_url ) . '</textarea><br />
+								' . $lang['URL_F_IMG'] . ':<br /><textarea rows="2" cols="49">' . $this->linksite . (($config['mod_writer']) ? "image" . $this->id_for_url . ".html" : "download.php?img=".$this->id_for_url ) . '</textarea><br />
 								' . $lang['URL_F_BBC'] . ':<br /><textarea rows="2" cols="49">' .
-								'[url='  .$config['siteurl'] . (($config['mod_writer']) ? "image" . $this->id_for_url.".html" : "download.php?img=" . $this->id_for_url ) . '][img]'.$this->linksite.$folderee . '/' . $filname . '[/img][/url]</textarea><br />
+								'[url='  .$config['siteurl'] . (($config['mod_writer']) ? "image" . $this->id_for_url . ".html" : "download.php?img=" . $this->id_for_url ) . '][img]'.$this->linksite.$folderee . '/' . $filname . '[/img][/url]</textarea><br />
 								' . $extra_thmb . $extra_del;
 						
 						($hook = kleeja_run_hook('saveit_func_img_res_kljuploader')) ? eval($hook) : null; //run hook

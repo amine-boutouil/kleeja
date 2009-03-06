@@ -1095,7 +1095,7 @@ function kleeja_check_mime ($mime, $group_id, $file_path)
 		//check for bad things inside files ...
 		//eval without space and ( will catch alot of codes
 		//<.? i cant add it here cuz alot of files contain it 
-		$maybe_bad_codes_are = array('<script', 'zend', 'base64_decode', 'eval ', 'eval(', '<?php', 'echo', 'print', 'cgi');
+		$maybe_bad_codes_are = array('<script', 'zend', 'base64_decode', 'eval ', 'eval(', '<?php', 'echo', 'print');
 	
 		$data = @file_get_contents($file_path);
 		foreach($maybe_bad_codes_are as $i)

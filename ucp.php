@@ -259,7 +259,7 @@ switch ($_GET['go'])
 			}
 			
 			$query = array(
-								'SELECT'	=> 'f.id, f.name, f.folder, f.type',
+								'SELECT'	=> 'f.id, f.name,f.real_filename, f.folder, f.type',
 								'FROM'		=> "{$dbprefix}files f",
 								'WHERE'		=> "f.user='" . $user_id . "'",
 								'ORDER BY'	=>	'f.id DESC',
@@ -299,7 +299,7 @@ switch ($_GET['go'])
 					
 					//make new lovely arrays !!
 					$arr[] = array(	'id'		=> $row['id'],
-									'name'		=> '<a href="' . $config['siteurl'] . $url . '" target="blank">' . $row['name'] . '</a>',
+									'name'		=> '<a href="' . $config['siteurl'] . $url . '" target="blank">' . (empty($row['real_filename']) ? $row['name'] : $row['real_filename']) . '</a>',
 									'icon_link'	=>(file_exists("images/filetypes/".  $row['type'] . ".gif"))? "images/filetypes/" . $row['type'] . ".gif" : 'images/filetypes/file.gif',
 									'file_type'	=> $row['type'],
 									'image_path'=> $is_image ? $url : '',
@@ -327,12 +327,12 @@ switch ($_GET['go'])
 
 			//te get files and update them !!
 			$query = array(
-						'SELECT'		=> 'f.id ,f.name, f.folder',
+						'SELECT'		=> 'f.id ,f.name, f.real_filename, f.type, f.folder',
 						'FROM'			=> "{$dbprefix}files f",
 						'WHERE'		=> 'f.user='.$usrcp->id(),
 						'ORDER BY'	=> 'f.id DESC',
 						);
-						
+				
 			/////////////pager 
 			$result_p		= $SQL->build($query);
 			$nums_rows		= $SQL->num_rows($result_p);
@@ -356,9 +356,19 @@ switch ($_GET['go'])
 				{
 					$del[$row['id']] = (isset($_POST["del_".$row['id']])) ? $_POST["del_" . $row['id']] : "";
 					
+					$is_image = in_array(trim($row['type']), array('gif', 'jpg', 'jpeg', 'bmp', 'png', 'tiff', 'tif')) ? true : false;
+					if($is_image)
+					{
+						$url = ($config['mod_writer']) ? 'image'.$row['id'] . '.html' : 'download.php?img=' . $row['id'];
+					}
+					else
+					{
+						$url = ($config['mod_writer']) ? 'download'.$row['id'] . '.html' : 'download.php?id=' . $row['id'];
+					}
+					
 					//make new lovely arrays !!
 					$arr[] = array(	'id'	=> $row['id'],
-									'name'	=> '<a href="' . (($config['mod_writer']) ?  $config['siteurl'] . 'download' . $row['id'] . '.html' : $config['siteurl'] . "download.php?id=" . $row['id']) . '" target="blank">' . $row['name'] . '</a>',
+									'name'	=> '<a href="' .  $config['siteurl'] .  $url . '" target="blank">' . (empty($row['real_filename']) ? $row['name'] : $row['real_filename']) . '</a>',
 								);
 										
 						//when submit !!

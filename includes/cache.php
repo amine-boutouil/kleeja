@@ -310,7 +310,7 @@ if((int) $config['del_f_day'] >= 0)
 		include_once ($root_path . 'cache/data_ban.php');
 	}
 	
-	if (!$banss or !file_exists($root_path.'cache/data_ban.php'))
+	if (!$banss || !file_exists($root_path.'cache/data_ban.php'))
 	{
 		$query = array(
 					'SELECT'	=> 's.ban',

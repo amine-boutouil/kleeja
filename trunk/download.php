@@ -58,6 +58,8 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 				$REPORT		= ($config['mod_writer']) ?  $config['siteurl'] . "report_" . $id . ".html" :  $config['siteurl'] . "go.php?go=report&amp;id=" . $id;
 				$file_ext_icon = file_exists('images/filetypes/' . $type . '.gif') ? 'images/filetypes/' . $type . '.gif' : 'images/filetypes/file.gif';
 				$sty		= 'download';
+				$title =  $real_filename != '' ? str_replace('.' . $type, '', htmlspecialchars($real_filename)) : $name;
+				$title .= ' ' . $lang['DOWNLAOD'];
 				
 				($hook = kleeja_run_hook('b4_download_id_filename')) ? eval($hook) : null; //run hook
 			}
@@ -74,7 +76,7 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 			$_SESSION['HTTP_REFERER'] = $config['siteurl'] . (($config['mod_writer']) ? "download" . $id . ".html" : "download.php?id=" . $id);
 			
 			 // show style ...
-			Saaheader($lang['DOWNLAOD']);
+			Saaheader($title);
 			echo $tpl->display($sty);
 			Saafooter();
 }

@@ -341,22 +341,26 @@ function get_ban ()
 		global $banss, $lang, $tpl, $text;
 	
 		//visitor ip now 
-		$ip	=  (getenv('HTTP_X_FORWARDED_FOR')) ? getenv('HTTP_X_FORWARDED_FOR') : getenv('REMOTE_ADDR');
-	
+		$ip	= isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : getenv('REMOTE_ADDR');
+
+		
 		//now .. loop for banned ips 
-		if (trim($banss) != '' && !empty($ip))
+		if (is_array($banss) && !empty($ip))
 		{
-			if (!is_array($banss))
-			{
-				$banss = array();
-			}
-			
 			foreach ($banss as $ip2)
 			{
-				//first .. replace all * with something good .
-				$replaceIt = str_replace("*", '([0-9]{1,3})', $ip2);
+				$ip2 = trim($ip2);
 				
-				if ($ip == $ip2 || @eregi($replaceIt , $ip))
+				if(empty($ip2))
+				{
+					continue;
+				}
+				
+				//first .. replace all * with something good .
+				$replace_it = str_replace("*", '([0-9]{1,3})', $ip2);
+				$replace_it = str_replace(".", '\.', $replace_it);
+			
+				if ($ip == $ip2 || @eregi($replace_it , $ip))
 				{
 					($hook = kleeja_run_hook('banned_get_ban_func')) ? eval($hook) : null; //run hook	
 					kleeja_info($lang['U_R_BANNED'], $lang['U_R_BANNED']);

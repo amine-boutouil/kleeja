@@ -27,8 +27,8 @@ switch ($_GET['go'])
 		$gusts_data = array();
 		foreach($g_exts as $ext=>$data)
 		{
-			$gusts_data[]	= array('ext'	=> $ext,
-									'num'	=> Customfile_size($data['size'])//format size as kb, mb,...
+			$gusts_data[]	= array('ext' => $ext,
+									'num' => Customfile_size($data['size'])//format size as kb, mb,...
 									);
 		}
 
@@ -101,7 +101,7 @@ switch ($_GET['go'])
 					$ip		= (getenv('HTTP_X_FORWARDED_FOR')) ? getenv('HTTP_X_FORWARDED_FOR') : getenv('REMOTE_ADDR');
 
 
-					$insert_query = array('INSERT'	=> '`name` ,`mail` ,`url` ,`text` ,`time` ,`ip`',
+					$insert_query	= array('INSERT'	=> '`name` ,`mail` ,`url` ,`text` ,`time` ,`ip`',
 											'INTO'		=> "`{$dbprefix}reports`",
 											'VALUES'	=> "'$name', '$mail', '$url', '$text', '$time', '$ip'"
 										);
@@ -119,13 +119,16 @@ switch ($_GET['go'])
 					
 					//update number of reports
 					$update_query = array('UPDATE'	=> "{$dbprefix}files",
-											'SET'			=> 'report=report+1',
+											'SET'	=> 'report=report+1',
 											'WHERE'	=> 'id=' . $rid,
 											);
 								
 					($hook = kleeja_run_hook('qr_update_no_file_report')) ? eval($hook) : null; //run hook
 					
-					if (!$SQL->build($update_query)){ die($lang['CANT_UPDATE_SQL']);}
+					if (!$SQL->build($update_query))
+					{
+						die($lang['CANT_UPDATE_SQL']);
+					}
 			}
 			else
 			{
@@ -133,6 +136,7 @@ switch ($_GET['go'])
 					{
 						$errs	.= '- ' . $r . ' <br/>';
 					}			
+					
 					kleeja_err($errs);
 			}
 		}
@@ -209,7 +213,7 @@ switch ($_GET['go'])
 				$ip		= (int)	(getenv('HTTP_X_FORWARDED_FOR')) ? getenv('HTTP_X_FORWARDED_FOR') : getenv('REMOTE_ADDR');
 					
 
-				$insert_query = array('INSERT'	=> "`name` ,`text` ,`mail` ,`time` ,`ip`",
+				$insert_query	= array('INSERT'	=> "`name` ,`text` ,`mail` ,`time` ,`ip`",
 										'INTO'		=> "`{$dbprefix}call`",
 										'VALUES'	=> "'$name', '$text', '$mail', '$timee', '$ip'"
 										);
@@ -324,7 +328,6 @@ switch ($_GET['go'])
 		$files_st	= $stat_files;
 		$users_st	= $stat_users;
 		$sizes_st	= Customfile_size($stat_sizes);	
-		//$lstfle_st	= $stat_last_file;
 		$lst_dl_st	= ((int)$config['del_f_day'] <= 0) ? ' [ ' . $lang['CLOSED_FEATURE'] . ' ] ' : gmdate("d-m-Y H:a", $stat_last_f_del);
 		$s_c_t		= $stat_counter_today;
 		$s_c_y		= $stat_counter_yesterday;

@@ -30,7 +30,7 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 			if(isset($_GET['id']))
 			{
 				$id_l = intval($_GET['id']);
-				$query['WHERE']	=	"id=" . $id_l . "";
+				$query['WHERE']	= "id=" . $id_l . "";
 			}
 			elseif (isset($_GET['filename']))
 			{
@@ -45,7 +45,7 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 			{
 				while($row=$SQL->fetch_array($result))
 				{
-					 @extract ($row);
+					@extract ($row);
 				}
 				$SQL->freeresult($result);
 
@@ -65,9 +65,9 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 			}
 			else
 			{
-					//file not exists
-					($hook = kleeja_run_hook('not_exists_qr_downlaod_file')) ? eval($hook) : null; //run hook
-					kleeja_err($lang['FILE_NO_FOUNDED']);
+				//file not exists
+				($hook = kleeja_run_hook('not_exists_qr_downlaod_file')) ? eval($hook) : null; //run hook
+				kleeja_err($lang['FILE_NO_FOUNDED']);
 			}
 			
 			($hook = kleeja_run_hook('b4_showsty_downlaod_id_filename')) ? eval($hook) : null; //run hook
@@ -276,6 +276,7 @@ else if (isset($_GET['down']) || isset($_GET['img']) || isset($_GET['thmb']))
 				}
 				else
 				{
+					($hook = kleeja_run_hook('down_go_page_cant_op_file')) ? eval($hook) : null; //run hook
 					die('Error - can not open file.');
 				}
 
@@ -289,8 +290,8 @@ else if (isset($_GET['down']) || isset($_GET['img']) || isset($_GET['thmb']))
 //
 else
 {
-		($hook = kleeja_run_hook('err_navig_download_page')) ? eval($hook) : null; //run hook
-		kleeja_err($lang['ERROR_NAVIGATATION']);
+	($hook = kleeja_run_hook('err_navig_download_page')) ? eval($hook) : null; //run hook
+	kleeja_err($lang['ERROR_NAVIGATATION']);
 }
 
 ($hook = kleeja_run_hook('end_download_page')) ? eval($hook) : null; //run hook

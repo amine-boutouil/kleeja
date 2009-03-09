@@ -19,6 +19,9 @@ include ('includes/common.php');
 //now we will navigate ;)
 switch ($_GET['go'])
 { 	
+	//
+	//login page
+	//
 	case "login" : 
 	
 			$stylee					= "login";
@@ -45,10 +48,9 @@ switch ($_GET['go'])
 					
 					if ($config['allow_online'] == 1)
 					{
-						$query_del = array(
-													'DELETE'	=> "{$dbprefix}online",
-													'WHERE'		=> "ip='" . $ip . "'"
-													);
+						$query_del	= array('DELETE'	=> "{$dbprefix}online",
+											'WHERE'		=> "ip='" . $ip . "'"
+										);
 						($hook = kleeja_run_hook('qr_delete_onlines_in_login')) ? eval($hook) : null; //run hook
 						
 						if (!$SQL->build($query_del)) {die($lang['CANT_DELETE_SQL']);}
@@ -84,7 +86,9 @@ switch ($_GET['go'])
 	
 		break;
 		
-		
+		//
+		//register page
+		//
 		case "register" : 
 		
 			//config register
@@ -156,8 +160,7 @@ switch ($_GET['go'])
 							$mail			= (string) trim($_POST['lmail']);
 							$session_id		= (string) session_id();
 							
-							$insert_query = array(
-													'INSERT'	=> 'name ,password ,mail,admin, session_id',
+							$insert_query	= array('INSERT'	=> 'name ,password ,mail,admin, session_id',
 													'INTO'		=> "{$dbprefix}users",
 													'VALUES'	=> "'$name', '$pass', '$mail','0','$session_id'"
 												);
@@ -170,13 +173,13 @@ switch ($_GET['go'])
 							}	
 							else
 							{
+								($hook = kleeja_run_hook('ok_added_users_register')) ? eval($hook) : null; //run hook
 								$text	= $lang['REGISTER_SUCCESFUL'] . '<a href="ucp.php?go=login">' . $lang['LOGIN'] . '</a>';
 								kleeja_info($text);
 							}
 							
 							//update number of stats
-							$update_query = array(
-													'UPDATE'	=> "{$dbprefix}stats",
+							$update_query	= array('UPDATE'	=> "{$dbprefix}stats",
 													'SET'			=> 'users=users+1',
 												);
 							
@@ -188,15 +191,18 @@ switch ($_GET['go'])
 							$errs	=	'';
 							foreach($ERRORS as $r)
 							{
-									$errs	.= '- ' . $r . '. <br />';
+								$errs	.= '- ' . $r . '. <br />';
 							}
+							
 							kleeja_err($errs);
 						}
 			}
 		
 		break;
 		
-		
+		//
+		//logout action
+		//
 		case "logout" :
 	
 			($hook = kleeja_run_hook('begin_logout')) ? eval($hook) : null; //run hook
@@ -208,13 +214,16 @@ switch ($_GET['go'])
 					//for onlines
 					$ip	=	(getenv('HTTP_X_FORWARDED_FOR')) ?  getenv('HTTP_X_FORWARDED_FOR') : getenv('REMOTE_ADDR');
 					
-					$query_del = array(
-												'DELETE'	=> "{$dbprefix}online",
-												'WHERE'	=> "ip='" . $SQL->escape($ip) . "'"
-												);
+					$query_del	= array('DELETE'	=> "{$dbprefix}online",
+										'WHERE'	=> "ip='" . $SQL->escape($ip) . "'"
+									);
+									
 					($hook = kleeja_run_hook('qr_delete_onlines_in_logout')) ? eval($hook) : null; //run hook
 
-					if (!$SQL->build($query_del))	die($lang['CANT_DELETE_SQL']);
+					if (!$SQL->build($query_del))
+					{
+						die($lang['CANT_DELETE_SQL']);
+					}
 				}
 				
 				$text	= $lang['LOGOUT_SUCCESFUL'] . '<br /> <a href="index.php">' . $lang['HOME'] . '</a>';
@@ -229,7 +238,9 @@ switch ($_GET['go'])
 			
 		break;
 		
-		
+		//
+		//files user page
+		//
 		case "fileuser" : 
 		
 			($hook = kleeja_run_hook('begin_fileuser')) ? eval($hook) : null; //run hook
@@ -249,8 +260,8 @@ switch ($_GET['go'])
 			
 			//te get userdata!!
 			$data_user = $usrcp->get_data('name, show_my_filecp', $user_id);
-			$user_name		=   (!$data_user['name']) ? false : $data_user['name'];
-			$show_my_filecp	=  ($config['user_system'] != 1) ? 1 : $data_user['show_my_filecp'];
+			$user_name		= (!$data_user['name']) ? false : $data_user['name'];
+			$show_my_filecp	= ($config['user_system'] != 1) ? 1 : $data_user['show_my_filecp'];
 			
 			//new feature 1rc5
 			if($show_my_filecp == 1 && ($usrcp->id() != $user_id) && !$usrcp->admin())
@@ -258,12 +269,11 @@ switch ($_GET['go'])
 				kleeja_info($lang['USERFILE_CLOSED'], $lang['CLOSED_FEATURE']);		
 			}
 			
-			$query = array(
-								'SELECT'	=> 'f.id, f.name,f.real_filename, f.folder, f.type',
-								'FROM'		=> "{$dbprefix}files f",
-								'WHERE'		=> "f.user='" . $user_id . "'",
-								'ORDER BY'	=>	'f.id DESC',
-								);
+			$query	= array('SELECT'	=> 'f.id, f.name,f.real_filename, f.folder, f.type',
+							'FROM'		=> "{$dbprefix}files f",
+							'WHERE'		=> "f.user='" . $user_id . "'",
+							'ORDER BY'	=> 'f.id DESC',
+						);
 						
 			/////////////pager 
 			$result_p			= $SQL->build($query);
@@ -281,7 +291,7 @@ switch ($_GET['go'])
 			$no_results = false;
 			if($nums_rows != 0)
 			{			
-				$query['LIMIT']		=	 "$start, $perpage";
+				$query['LIMIT'] = "$start, $perpage";
 				($hook = kleeja_run_hook('qr_select_files_in_fileuser')) ? eval($hook) : null; //run hook
 				
 				$result	=	$SQL->build($query);
@@ -316,6 +326,9 @@ switch ($_GET['go'])
 		
 		break;
 		
+		//
+		//control files page
+		//
 		case "filecp" :
 		
 			($hook = kleeja_run_hook('begin_filecp')) ? eval($hook) : null; //run hook
@@ -348,10 +361,10 @@ switch ($_GET['go'])
 			
 			if($nums_rows != 0)
 			{
-				$query['LIMIT']		=	 "$start, $perpage";
+				$query['LIMIT']	 = "$start, $perpage";
 				($hook = kleeja_run_hook('qr_select_files_in_filecp')) ? eval($hook) : null; //run hook
 				
-				$result	=	$SQL->build($query);
+				$result	= $SQL->build($query);
 				while($row=$SQL->fetch_array($result))
 				{
 					$del[$row['id']] = (isset($_POST["del_".$row['id']])) ? $_POST["del_" . $row['id']] : "";
@@ -461,7 +474,7 @@ switch ($_GET['go'])
 						$comma			= (!empty($_POST['ppass_new']))? "," : "";
 						$id				= (int) $usrcp->id();
 						
-						$update_query = array(	'UPDATE'	=> "{$dbprefix}users",
+						$update_query	= array('UPDATE'	=> "{$dbprefix}users",
 												'SET'		=> $mail . $show_my_filecp . $comma . $pass, //comma mean "," char
 												'WHERE'		=> "id='" . $id . "'",
 												);
@@ -477,12 +490,13 @@ switch ($_GET['go'])
 				}
 				else
 				{
-							$errs	=	'';
-							foreach($ERRORS as $r)
-							{
-									$errs	.= '- ' . $r . '. <br />';
-							}
-							kleeja_err($errs);
+					$errs	=	'';
+					foreach($ERRORS as $r)
+					{
+						$errs	.= '- ' . $r . '. <br />';
+					}
+					
+					kleeja_err($errs);
 				}
 
 		}#else submit
@@ -491,7 +505,9 @@ switch ($_GET['go'])
 		
 		break; 
 		
-		
+		//
+		//reset password page
+		//
 		case "get_pass" : 
 		
 			//config register
@@ -553,12 +569,8 @@ switch ($_GET['go'])
 								$newpass	= substr(md5(time()),0,5);
 								$to			= $row['mail'];
 								$subject	= $lang['GET_LOSTPASS'] . ':' . $config['sitename'];
-								$message	= "\n " . $lang['WELCOME'] . " " . $row['name']."\r\n " . $lang['GET_LOSTPASS_MSG'] . "\r\n " . $lang['PASSWORD'] . " : " . $newpass . "\r\n\r\n kleeja Script";
-								$headers	=	'From: ' . $config['sitename']. '<' . $config['sitemail'] . '>' . "\r\n" .
-												'MIME-Version: 1.0' . "\r\n" .
-												'X-Mailer: PHP/' . phpversion();
-												
-								$id			= (int)		$row['id'];
+								$message	= "\n " . $lang['WELCOME'] . " " . $row['name']."\r\n " . $lang['GET_LOSTPASS_MSG'] . "\r\n " . $lang['PASSWORD'] . " : " . $newpass . "\r\n\r\n kleeja.com";
+								$id			= (int) $row['id'];
 								
 								$update_query = array(
 														'UPDATE'	=> "{$dbprefix}users",
@@ -567,11 +579,14 @@ switch ($_GET['go'])
 													);
 										
 								($hook = kleeja_run_hook('qr_update_newpass_get_pass')) ? eval($hook) : null; //run hook
-								if (!$SQL->build($update_query)){ die($lang['CANT_UPDATE_SQL']);}
+								if (!$SQL->build($update_query))
+								{
+									die($lang['CANT_UPDATE_SQL']);
+								}
 							}
 							
 							//send it
-							$send =  @mail($to, $subject, $message, $headers);
+							$send =  send_mail($to, $message, $subject, $config['sitemail'], $config['sitename']);
 							
 							if (!$send)
 							{
@@ -601,23 +616,32 @@ switch ($_GET['go'])
 		
 		break; 
 		
+		//
+		//add your own code here
+		//
 		default:
 		
-		($hook = kleeja_run_hook('default_usrcp_page')) ? eval($hook) : null; //run hook
+			($hook = kleeja_run_hook('default_usrcp_page')) ? eval($hook) : null; //run hook
 
-		kleeja_err($lang['ERROR_NAVIGATATION']);
+			kleeja_err($lang['ERROR_NAVIGATATION']);
 		
 		break;
 	}#end switch
 	
 	($hook = kleeja_run_hook('end_usrcp_page')) ? eval($hook) : null; //run hook
+	
+	
 	//show style ...
-	if (!$titlee) $titlee = $lang['USERS_SYSTEM'];
+	
+	if (!$titlee)
+	{
+		$titlee = $lang['USERS_SYSTEM'];
+	}
 	
 	//header
 	Saaheader($titlee);
 		//tpl
-		print $tpl->display($stylee);
+		echo $tpl->display($stylee);
 	//footer
 	Saafooter();
 ?>

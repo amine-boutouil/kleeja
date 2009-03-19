@@ -8,6 +8,7 @@ if (!defined('IN_COMMON'))	exit();
 
 $update_sqls['real_filename'] = "ALTER TABLE `{$dbprefix}files` ADD `real_filename` VARCHAR( 350 ) NOT NULL;";
 $update_sqls['new_version_config'] = "INSERT INTO `{$dbprefix}config` (`name` ,`value`)VALUES ('new_version', '');";
+$update_sqls['thmb_dims_config'] = "INSERT INTO `{$dbprefix}config` (`name` ,`value`)VALUES ('thmb_dims', '100*100');";
 $update_sqls['up_lang_config'] = "UPDATE `{$dbprefix}config` SET `value` = '" . getlang() . "' WHERE `name` = 'language'";
 $update_sqls['up_style_config'] = "UPDATE `{$dbprefix}config` SET `value` = 'default' WHERE `name` = 'style'";
 $update_sqls['drop_lang'] = "DROP TABLE `{$dbprefix}lang`";

@@ -200,6 +200,10 @@ RC6:
 + add checking of safe premession of config.php 
 + users system integrations changed to easy way 
 - last visit not work always with admin 
++ thumbs dimensions
+- fix searching for file in cp
+- fix mail send function .. [ utf8 issue ]
+- fix cookies issue
 
 to do : 
 - 

@@ -23,12 +23,19 @@
 	// Report all errors, except notices
 	error_reporting(E_ALL ^ E_NOTICE);
 
-	$expireTime = 60*60*12*1; // 12 hours
-	
-	session_set_cookie_params($expireTime);
+
 	// start session
+	$s_time = 60*60*12*2;
+	$s_key = (!empty($_SERVER['HTTP_HOST'])) ? strtolower($_SERVER['HTTP_HOST']) : ((!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : @getenv('SERVER_NAME'));
+	$s_sid = 'ksid' . substr('_' . md5($s_key), 0, 8);
+	session_set_cookie_params($s_time);
+	session_name($s_sid);
 	session_start();
 
+	if (isset($_COOKIE[$s_sid]))
+		setcookie($s_sid, $_COOKIE[$s_sid], time() + $s_time, "/");
+	
+	
 	function stripslashes_our(&$value)
 	{
 		return is_array($value) ? array_map('stripslashes_our', $value) : stripslashes($value);  

@@ -179,15 +179,15 @@ else if (isset($_GET['down']) || isset($_GET['img']) || isset($_GET['thmb']))
 				//not exists img or thumb
 				if($is_image)
 				{
-						($hook = kleeja_run_hook('not_exists_qr_down_img')) ? eval($hook) : null; //run hook
-						header("Location: ./images/not_exists.jpg");
-						exit;
+					($hook = kleeja_run_hook('not_exists_qr_down_img')) ? eval($hook) : null; //run hook
+					header("Location: ./images/not_exists.jpg");
+					exit;
 				}
 				else
 				{
-						//not exists file
-						($hook = kleeja_run_hook('not_exists_qr_down_file')) ? eval($hook) : null; //run hook
-						kleeja_err($lang['FILE_NO_FOUNDED']);
+					//not exists file
+					($hook = kleeja_run_hook('not_exists_qr_down_file')) ? eval($hook) : null; //run hook
+					kleeja_err($lang['FILE_NO_FOUNDED']);
 				}
 			}
 				

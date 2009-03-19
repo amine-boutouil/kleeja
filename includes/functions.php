@@ -901,46 +901,47 @@ function big_error ($error_title,  $msg_text)
 }
 
 
-function imap8bit(&$item, $key)
-{
-	$item = imap_8bit($item);
-}
+
 
 /*
 * send email
 */
+
+function _sm_mk_utf8($text)
+{
+	 return "=?UTF-8?B?" . base64_encode($text) . "?=";
+}
+
+
 function send_mail($to, $body, $subject, $fromaddress, $fromname,$bcc='')
 {
-		$subject = wordwrap($subject, 25, "\n", FALSE);
-		$subject = explode("\n", $subject);
-		array_walk($subject, imap8bit);
-		$subject = implode("\r\n ", $subject);
-		$subject = "=?UTF-8?Q?" . $subject . "?=";
+	$eol = "\r\n";
+	$headers = '';
+	$headers .= 'From: ' . _sm_mk_utf8($fromname) . ' <' . $fromaddress . '>' . $eol;
+	$headers .= 'Sender: ' . _sm_mk_utf8($fromname) . ' <' . $fromaddress . '>' . $eol;
+	if (!empty($bcc)) 
+	{
+		$headers .= 'Bcc: ' . $bcc . $eol;
+	}
+	$headers .= 'Reply-To: ' . $fromaddress . $eol;
+	$headers .= 'Return-Path: <' . $fromaddress . '>' . $eol;
+	$headers .= 'MIME-Version: 1.0' . $eol;
+	$headers .= 'Message-ID: <' . md5(uniqid(time())) . '@' . _sm_mk_utf8($fromname) . '>' . $eol;
+	$headers .= 'Date: ' . date('r') . $eol;
+	$headers .= 'Content-Type: text/plain; charset=UTF-8' . $eol; // format=flowed
+	$headers .= 'Content-Transfer-Encoding: 8bit' . $eol; // 7bit
+	$headers .= 'X-Priority: 3' . $eol;
+	$headers .= 'X-MSMail-Priority: Normal' . $eol;
+	$headers .= 'X-Mailer: : PHP v' . phpversion() . $eol;
+	$headers .= 'X-MimeOLE: kleeja' . $eol;
 		
-		$eol="\r\n";
-		$headers	='';
-		$headers .= 'From: ' . $fromname . ' <' . $fromaddress . '>' . $eol;
-		$headers .= 'Sender: ' . $fromname . ' <' . $fromaddress . '>' . $eol;
-		if (!empty($bcc)) $headers .= 'Bcc: ' . $bcc . $eol;
-		$headers .= 'Reply-To: ' . $fromaddress . $eol;
-		$headers .= 'Return-Path: <' . $fromaddress . '>' . $eol;
-		$headers .= 'MIME-Version: 1.0' . $eol;
-		$headers .= 'Message-ID: <' . md5(uniqid(time())) . '@' . $fromname . '>' . $eol;
-		$headers .= 'Date: ' . date('r', time()) . $eol;
-		$headers .= 'Content-Type: text/plain; charset=UTF-8' . $eol; // format=flowed
-		$headers .= 'Content-Transfer-Encoding: 8bit' . $eol; // 7bit
-		$headers .= 'X-Priority: 3' . $eol;
-		$headers .= 'X-MSMail-Priority: Normal' . $eol;
-		$headers .= 'X-Mailer: : PHP v' . phpversion() . $eol;
-		$headers .= 'X-MimeOLE: kleeja' . $eol;
+	$body = imap_8bit($body);
 		
-		$body = imap_8bit($body);
+	($hook = kleeja_run_hook('kleeja_send_mail')) ? eval($hook) : null; //run hook
 		
-		($hook = kleeja_run_hook('kleeja_send_mail')) ? eval($hook) : null; //run hook
-		
-		$mail_sent = @mail($to, $subject, preg_replace("#(?<!\r)\n#s", "\n", $body), $headers);
+	$mail_sent = @mail($to, _sm_mk_utf8($subject), preg_replace("#(?<!\r)\n#s", "\n", $body), $headers);
   
-  return $mail_sent;
+	return $mail_sent;
 }
 
 

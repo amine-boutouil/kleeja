@@ -377,8 +377,8 @@ class SSQL
                           $error_msg = mysql_error();
 						  $error_sql = @current($this->debugr[$this->query_num+1]);
 
-                          echo "<style>BODY{FONT-FAMILY:tahoma;FONT-SIZE:12px;}.error {}</style>";
-                          echo "<html><head></head><title>ERROR IM MYSQL</title><body>";
+                          echo "<html><head><title>ERROR IM MYSQL</title>";
+						  echo "<style>BODY{FONT-FAMILY:tahoma;FONT-SIZE:12px;}.error {}</style></head><body>";
                           echo '<br />';
                           echo '<div class="error">';
                           echo " <a href='#' onclick='window.location.reload( false );'>click to Refresh this page ...</a><br />";

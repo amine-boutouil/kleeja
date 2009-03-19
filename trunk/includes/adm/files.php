@@ -34,10 +34,10 @@
 	{
 		$file_namee	= ($_POST['filename']!='') ? 'AND f.real_filename LIKE \'%' . $SQL->escape($_POST['filename']) . '%\' ' : ''; 
 		$usernamee	= ($_POST['username']!='') ? 'AND u.name LIKE \'%' . $SQL->escape($_POST['username']) . '%\' AND u.id=f.user' : ''; 
-		$size_than	=   ' f.size ' . (($_POST['than']==1) ? '>=' : '<=') . (intval($_POST['size']) * 1024) . ' ';
-		$ups_than	=  ($_POST['ups']!='') ? 'AND f.uploads ' . (($_POST['uthan']==1) ? '>' : '<') . intval($_POST['ups']) . ' ' : '';
-		$rep_than	=  ($_POST['rep']!='') ? 'AND f.report ' . (($_POST['rthan']==1) ? '>' : '<') . intval($_POST['rep']) . ' ' : '';
-		$lstd_than	=  ($_POST['lastdown']!='') ? 'AND f.last_down ='.(time()-(intval($_POST['lastdown']) * (24 * 60 * 60))) . ' ' : '';
+		$size_than	=   ' f.size ' . ($_POST['than']!=1 ? '<=' : '>=') . (intval($_POST['size']) * 1024) . ' ';
+		$ups_than	=  ($_POST['ups']!='') ? 'AND f.uploads ' . ($_POST['uthan']!=1 ? '<' : '>') . intval($_POST['ups']) . ' ' : '';
+		$rep_than	=  ($_POST['rep']!='') ? 'AND f.report ' . ($_POST['rthan']!=1 ? '<' : '>') . intval($_POST['rep']) . ' ' : '';
+		$lstd_than	=  ($_POST['lastdown']!='') ? 'AND f.last_down =' . (time()-(intval($_POST['lastdown']) * (24 * 60 * 60))) . ' ' : '';
 		$exte		=  ($_POST['ext']!='') ? 'AND f.type LIKE \'%' . $SQL->escape($_POST['ext']) . '%\' ' : '';
 		$ipp		=  ($_POST['user_ip']!='') ? 'AND f.user_ip LIKE \'%' . $SQL->escape($_POST['user_ip']) . '%\' ' : '';
 		

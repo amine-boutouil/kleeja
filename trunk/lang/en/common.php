@@ -412,6 +412,7 @@ $lang = array_merge($lang, array(
 	'UPDATE_KLJ_NOW' => 'You Have to update your version now!. visit Kleeja.com for more inforamtion',
 	'U_LAST_VER_KLJ' => 'You are using the lastest version of Kleeja...',
 	'SITE_FOR_MEMBER_ONLY'	=> 'This center is only for members, register or login to upload your files.',
+	'DIMENSIONS_THMB'		=> 'Thumbs dimensions',
 	'S_TRANSLATED_BY' => 'Translated By <a href="http://www.fenix4web.com/">Fenix4Web</a>',
 ));
 

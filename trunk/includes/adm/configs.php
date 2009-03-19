@@ -33,7 +33,12 @@
 			$con[$row['name']]=$row['value'];
 			//-->
 			$new[$row['name']] = (isset($_POST[$row['name']])) ? $_POST[$row['name']] : $con[$row['name']];
-
+			//thmb_dims
+			if($row['name'] == 'thmb_dims')
+			{
+				$new['thmb_dims'] = intval($_POST['thmb_dim_w']) . '*' . intval($_POST['thmb_dim_h']);
+			}
+			
 				//when submit !!
 				if (isset($_POST['submit']))
 				{
@@ -71,9 +76,9 @@
 		if ($con['allow_online'] == "1" ) {$yallow_online = true; }else {$nallow_online = true;}
 		if ($con['mod_writer'] == "1" ) {$ymod_writer = true; }else {$nmod_writer = true;}
 		if ($con['enable_userfile'] == "1" ) {$yenable_userfile = true; }else {$nenable_userfile = true;}
-		if ($con['enable_userfile'] == "1" ) {$yenable_userfile = true; }else {$nenable_userfile = true;}
-		if ($con['safe_code'] == "1" ) {$ysafe_code = true; }else {$nsafe_code = true;}
-
+		if ($con['enable_userfile'] == "1") {$yenable_userfile = true; }else {$nenable_userfile = true;}
+		if ($con['safe_code'] == "1") {$ysafe_code = true; }else {$nsafe_code = true;}
+		list($thmb_dim_w, $thmb_dim_h) = @explode('*', $con['thmb_dims']);
 
 		$stylfiles = $lngfiles	= $authtypes = '';
 		//get styles

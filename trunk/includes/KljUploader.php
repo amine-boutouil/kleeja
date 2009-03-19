@@ -549,9 +549,10 @@ function process ()
 					{
 
 						//make thumbs
-						if( ($config['thumbs_imgs']!=0) && in_array(strtolower($this->typet), array('png','jpg','jpeg','gif')))
+						if( ($config['thumbs_imgs'] != 0) && in_array(strtolower($this->typet), array('png','jpg','jpeg','gif')))
 						{
-							$this->createthumb($folderee . "/" . $filname, strtolower($this->typet), $folderee . '/thumbs/' . $filname, 100, 100);
+							list($thmb_dim_w, $thmb_dim_h) = @explode('*', $config['thmb_dims']);
+							$this->createthumb($folderee . "/" . $filname, strtolower($this->typet), $folderee . '/thumbs/' . $filname, $thmb_dim_w, $thmb_dim_h);
 							$extra_thmb 	= $lang['URL_F_THMB'] . ':<br /><textarea rows="2" cols="49">';
 							$extra_thmb 	.= '[url='.$this->linksite . (($config['mod_writer']) ? "image" . $this->id_for_url . ".html" : "download.php?img=" . $this->id_for_url ) . '][img]' . $this->linksite . $folderee . '/thumbs/' . $filname . '[/img][/url]';
 							$extra_thmb 	.= '</textarea><br />';

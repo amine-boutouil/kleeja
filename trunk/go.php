@@ -243,8 +243,6 @@ switch ($_GET['go'])
 
 	break;
 	
-	//case "down" :  deprecated in 1rc6
-	
 	case "del" :
 
 		($hook = kleeja_run_hook('del_go_page')) ? eval($hook) : null; //run hook
@@ -336,7 +334,24 @@ switch ($_GET['go'])
 		($hook = kleeja_run_hook('stats_go_page')) ? eval($hook) : null; //run hook
 		
 	break; 
-
+	
+	case "down":
+	
+		#depreacted from 1rc6+, see download.php
+		//go.php?go=down&n=$1&f=$2&i=$3
+		if(isset($_GET['n']))
+		{
+			$url_file = ($config['mod_writer']) ? $config['siteurl'] . "downloadf" . htmlspecialchars($_GET['n']) . ".html" : $config['siteurl'] . "download.php?filename=" . htmlspecialchars($_GET['n']);
+		}
+		else
+		{
+			$url_file = $config['siteurl'];
+		}
+		
+		header('Location:' . $url_file);
+		exit;
+		
+	break;
 	
 	default:
 	

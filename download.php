@@ -55,7 +55,7 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 				$seconds_w	= $config['sec_down'];
 				$time		= date("d-m-Y H:i a", $time);
 				$size		= Customfile_size($size);
-				$REPORT		= ($config['mod_writer']) ?  $config['siteurl'] . "report_" . $id . ".html" :  $config['siteurl'] . "go.php?go=report&amp;id=" . $id;
+				$REPORT		= ($config['mod_writer']) ?  $config['siteurl'] . "report-" . $id . ".html" :  $config['siteurl'] . "go.php?go=report&amp;id=" . $id;
 				$file_ext_icon = file_exists('images/filetypes/' . $type . '.gif') ? 'images/filetypes/' . $type . '.gif' : 'images/filetypes/file.gif';
 				$sty		= 'download';
 				$title =  $real_filename != '' ? str_replace('.' . $type, '', htmlspecialchars($real_filename)) : $name;

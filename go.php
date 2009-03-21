@@ -341,7 +341,7 @@ switch ($_GET['go'])
 		//go.php?go=down&n=$1&f=$2&i=$3
 		if(isset($_GET['n']))
 		{
-			$url_file = ($config['mod_writer']) ? $config['siteurl'] . "downloadf" . htmlspecialchars($_GET['n']) . ".html" : $config['siteurl'] . "download.php?filename=" . htmlspecialchars($_GET['n']);
+			$url_file = ($config['mod_writer']) ? $config['siteurl'] . "download" . intval($_GET['i']) . ".html" : $config['siteurl'] . "download.php?id=" . intval($_GET['n']);
 		}
 		else
 		{

@@ -13,16 +13,10 @@ if (!defined('IN_COMMON'))
 
 function kleeja_auth_login ($name, $pass)
 {
-	global $forum_srv, $forum_user, $forum_pass, $forum_db, $forum_charset;
-	global $forum_prefix, $forum_path,$SQLBB, $phpEx, $phpbb_root_path;
+	//global $forum_srv, $forum_user, $forum_pass, $forum_db, $forum_charset;
+	global $forum_charset, $forum_path, $SQLBB, $phpEx, $phpbb_root_path;
 				
-	//if no variables of db
-	if(empty($forum_srv) || empty($forum_user) || empty($forum_db))
-	{
-		return;
-	}
-				
-	//check for last slash / 
+		//check for last slash / 
 	if($forum_path[strlen($forum_path)] == '/')
 	{
 			$forum_path = substr($forum_path, 0, strlen($forum_path));
@@ -35,8 +29,27 @@ function kleeja_auth_login ($name, $pass)
 	else
 	{
 		$forum_path = '../' . $forum_path;
+	}			
+	
+	//get some useful data from phbb config file
+	if(file_exists($forum_path . '/config.php')) {
+	require ($forum_path . '/config.php');
+	$forum_prefix = $table_prefix;
+	$forum_db = $dbname;
+	$forum_user = $dbuser;
+	$forum_pass = $dbpasswd;
+	$forum_srv = $dbhost;
+	} 
+	else
+	 {
+		big_error('Forum path is not correct', 'Please check your forum path correctly to integrate kleeja with your forum.');
 	}
-					
+	//if no variables of db
+	if(empty($forum_srv) || empty($forum_user) || empty($forum_db))
+	{
+		return;
+	}
+								
 	//conecting ...		
 	$SQLBB	= new SSQL($forum_srv,$forum_user,$forum_pass,$forum_db);
 	$charset_db = empty($forum_charset) ? @mysql_client_encoding() : $forum_charset;
@@ -46,7 +59,7 @@ function kleeja_auth_login ($name, $pass)
 	//phpbb3
 	if(file_exists($forum_path . '/includes/functions_transfer.php'))
 	{
-						
+				echo "dd";	
 		//get utf tools
 		define('IN_PHPBB', true);
 		$phpbb_root_path = $forum_path . '/';

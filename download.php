@@ -221,7 +221,15 @@ else if (isset($_GET['down']) || isset($_GET['img']) || isset($_GET['thmb']))
 				
 
 				//downalod porcess
+				if($config['id_form'] == 'id')
+			{
+				$path_file = isset($_GET['thmb']) ? "./{$f}/thumbs/{$n}" : "./{$f}/{$n}";
+			}
+			elseif ($config['id_form'] == 'filename')
+			{
 				$path_file = isset($_GET['thmb']) ? "./{$f}/thumbs/{$n}" : "./{$f}/{$n}.{$t}";
+			}	
+				
 				$chunksize = 1*(1024*1024); //size that will send to user every second
 				$resuming_on = true;
 				
@@ -230,7 +238,14 @@ else if (isset($_GET['down']) || isset($_GET['img']) || isset($_GET['thmb']))
 				//start download ,,
 				if(!is_readable($path_file)) die('Error, file not exists');
 				$size = filesize($path_file);
+				if($config['id_form'] == 'id')
+				{
+				$name = rawurldecode($n);
+				}
+				elseif ($config['id_form'] == 'filename')
+				{
 				$name = rawurldecode($n.'.'.$t);
+				}	
 				//Figure out the MIME type (if not specified) 
 				$ext = explode('.', $path_file);
 				$ext = array_pop($ext);

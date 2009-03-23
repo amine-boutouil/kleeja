@@ -79,8 +79,10 @@
 		if ($con['enable_userfile'] == "1") {$yenable_userfile = true; }else {$nenable_userfile = true;}
 		if ($con['safe_code'] == "1") {$ysafe_code = true; }else {$nsafe_code = true;}
 		list($thmb_dim_w, $thmb_dim_h) = @explode('*', $con['thmb_dims']);
-
+		$STAMP_IMG_URL = './images/watermark.png';
 		$stylfiles = $lngfiles	= $authtypes = '';
+		
+		
 		//get styles
 		if ($dh = @opendir($root_path . 'styles'))
 		{

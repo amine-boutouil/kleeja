@@ -59,13 +59,6 @@
                 </td>
         </tr>
         <tr>
-                <td><label for="write_imgs">{lang.ENAB_STAMP}</label></td>
-                <td>
-                <label>{lang.YES}<input type="radio" id="write_imgs" name="write_imgs" value="1"  <IF NAME="ywrite_imgs"> checked="checked"</IF>></label>
-                <label>{lang.NO}<input type="radio" id="write_imgs" name="write_imgs" value="0"  <IF NAME="nwrite_imgs"> checked="checked"</IF>></label>
-                </td>
-        </tr>        
-        <tr>
                 <td><label for="siteclose">{lang.SITECLOSE}</label></td>
                 <td>
                 <label>{lang.YES}<input type="radio" id="siteclose" name="siteclose" value="1"  <IF NAME="yclose"> checked="checked"</IF>></label>
@@ -186,6 +179,15 @@
                   [ {lang.MOD_WRITER_EX} ]
                 </td>        
         </tr>        
+        <tr>
+                <td><label for="write_imgs">{lang.ENAB_STAMP}</label></td>
+                <td style="border:1px outset" >
+				<img src="{STAMP_IMG_URL}" /> <br />
+                <label>{lang.YES}<input type="radio" id="write_imgs" name="write_imgs" value="1"  <IF NAME="ywrite_imgs"> checked="checked"</IF>></label>
+                <label>{lang.NO}<input type="radio" id="write_imgs" name="write_imgs" value="0"  <IF NAME="nwrite_imgs"> checked="checked"</IF>></label>
+                <br />
+				</td>
+        </tr>    
         <!-- admin configs tr extra -->
 				
 </table>

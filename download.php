@@ -27,14 +27,14 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 						'FROM'		=> "{$dbprefix}files f",
 					);		
 					
-			if(isset($_GET['id']))
+			if(isset($_GET['id']) && $config['id_form'] == 'id')
 			{
 				$id_l = intval($_GET['id']);
 				$query['WHERE']	= "id=" . $id_l . "";
 			}
-			elseif (isset($_GET['filename']))
+			elseif (isset($_GET['id']) && $config['id_form'] == 'filename')
 			{
-				$filename_l 	= (string) $SQL->escape($_GET['filename']);
+				$filename_l 	= (string) $SQL->escape($_GET['id']);
 				$query['WHERE']	= "name='" . $filename_l . "'";
 			}
 			
@@ -50,12 +50,19 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 				$SQL->freeresult($result);
 
 				// some vars
+				$fname 		= $name;
 				$name 		= $real_filename != '' ? str_replace('.' . $type, '', htmlspecialchars($real_filename)) : $name;
+				if($config['id_form'] == 'id') {
 				$url_file	= ($config['mod_writer']) ? $config['siteurl'] . "down-" . $id . ".html" : $config['siteurl'] . "download.php?down=" . $id;
+				}
+				elseif($config['id_form'] == 'filename') {
+				$url_file	= ($config['mod_writer']) ? $config['siteurl'] . "down-" . $fname . ".html" : $config['siteurl'] . "download.php?down=" . $fname;
+				}
+				$REPORT		= ($config['mod_writer']) ?  $config['siteurl'] . "report-" . $id . ".html" :  $config['siteurl'] . "go.php?go=report&amp;id=" . $id;
 				$seconds_w	= $config['sec_down'];
 				$time		= date("d-m-Y H:i a", $time);
 				$size		= Customfile_size($size);
-				$REPORT		= ($config['mod_writer']) ?  $config['siteurl'] . "report-" . $id . ".html" :  $config['siteurl'] . "go.php?go=report&amp;id=" . $id;
+				
 				$file_ext_icon = file_exists('images/filetypes/' . $type . '.gif') ? 'images/filetypes/' . $type . '.gif' : 'images/filetypes/file.gif';
 				$sty		= 'download';
 				$title =  $real_filename != '' ? str_replace('.' . $type, '', htmlspecialchars($real_filename)) : $name;
@@ -87,7 +94,7 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 else if (isset($_GET['down']) || isset($_GET['img']) || isset($_GET['thmb']))
 {
 		($hook = kleeja_run_hook('begin_down_go_page')) ? eval($hook) : null; //run hook	
-		
+	
 		//must know from where he came ! and stop him if not image
 		if(isset($_GET['down']))
 		{
@@ -127,10 +134,16 @@ else if (isset($_GET['down']) || isset($_GET['img']) || isset($_GET['thmb']))
 				header('Location:' . $go_to);
 				exit;
 			}
-		}
+			}
 		
+		
+		if($config['id_form'] == 'id') {
 		//for safe
 		$id = isset($_GET['down']) ? intval($_GET['down']) : (isset($_GET['img']) ? intval($_GET['img']) : (isset($_GET['thmb']) ? intval($_GET['thmb']) : null));
+		}
+		else if($config['id_form'] == 'filename') {
+		$filename = isset($_GET['down']) ? $SQL->escape($_GET['down']) : (isset($_GET['img']) ? $SQL->escape($_GET['img']) : (isset($_GET['thmb']) ? $SQL->escape($_GET['thmb']) : null));
+		}
 		// worst case default
 		$browser = (!empty($_SERVER['HTTP_USER_AGENT'])) ? htmlspecialchars((string) $_SERVER['HTTP_USER_AGENT']) : 'msie 6.0';
 		
@@ -144,9 +157,17 @@ else if (isset($_GET['down']) || isset($_GET['img']) || isset($_GET['thmb']))
 		$update_query = array(
 								'UPDATE'	=> "{$dbprefix}files",
 								'SET'		=> 'uploads=uploads+1, last_down=' . time(),
-								'WHERE'		=> "id='" . $id . "'",
 								);
 
+			if($config['id_form'] == 'id')
+			{
+				$update_query['WHERE'] = "id='" . $id . "'";
+			}
+			elseif ($config['id_form'] == 'filename')
+			{
+				$update_query['WHERE'] = "name='" . $filename . "'";
+			}
+			
 			($hook = kleeja_run_hook('qr_update_no_uploads_down')) ? eval($hook) : null; //run hook
 				
 			if (!$SQL->build($update_query)) die($lang['CANT_UPDATE_SQL']);
@@ -155,9 +176,15 @@ else if (isset($_GET['down']) || isset($_GET['img']) || isset($_GET['thmb']))
 			$query = array(
 							'SELECT'	=> 'f.id, f.name, f.folder, f.type',
 							'FROM'		=> "{$dbprefix}files f",
-							'WHERE'		=>	"id=" . $id . ""
 						);		
-						
+			if($config['id_form'] == 'id')
+			{
+				$query['WHERE']	= "id='" . $id . "'";
+			}
+			elseif ($config['id_form'] == 'filename')
+			{
+				$query['WHERE']	= "name='" . $filename . "'";
+			}			
 				
 			($hook = kleeja_run_hook('qr_down_go_page_filename')) ? eval($hook) : null; //run hook
 			$result	=	$SQL->build($query);
@@ -167,6 +194,7 @@ else if (isset($_GET['down']) || isset($_GET['img']) || isset($_GET['thmb']))
 				while($row=$SQL->fetch_array($result))
 				{
 					$n = $row['name'];
+					$t = $row['type'];
 					$f = $row['folder'];
 					//img ot not
 					$is_image = in_array(trim($row['type']), array('gif', 'jpg', 'jpeg', 'bmp', 'png', 'tiff', 'tif')) ? true : false; 
@@ -193,7 +221,7 @@ else if (isset($_GET['down']) || isset($_GET['img']) || isset($_GET['thmb']))
 				
 
 				//downalod porcess
-				$path_file = isset($_GET['thmb']) ? "./{$f}/thumbs/{$n}" : "./{$f}/{$n}";
+				$path_file = isset($_GET['thmb']) ? "./{$f}/thumbs/{$n}" : "./{$f}/{$n}.{$t}";
 				$chunksize = 1*(1024*1024); //size that will send to user every second
 				$resuming_on = true;
 				
@@ -202,7 +230,7 @@ else if (isset($_GET['down']) || isset($_GET['img']) || isset($_GET['thmb']))
 				//start download ,,
 				if(!is_readable($path_file)) die('Error, file not exists');
 				$size = filesize($path_file);
-				$name = rawurldecode($n);
+				$name = rawurldecode($n.'.'.$t);
 				//Figure out the MIME type (if not specified) 
 				$ext = explode('.', $path_file);
 				$ext = array_pop($ext);

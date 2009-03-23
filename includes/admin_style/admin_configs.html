@@ -1,4 +1,4 @@
-<div class="middle">
+﻿<div class="middle">
 <form method="post" action="{action}">
         <fieldset>
                 <legend>{lang.R_CONFIGS}</legend>
@@ -188,6 +188,16 @@
                 <br />
 				</td>
         </tr>    
+         <tr>
+                <td><label for="ID_FORM">{lang.ID_FORM}</label></td>
+                <td><label>
+                <select id="id_form" name="id_form">
+                <option <IF NAME="idf">selected="selected"</IF> value="id">{lang.IDF}</option>
+                <option <IF NAME="idff">selected="selected"</IF> value="filename">{lang.IDFF}</option>
+                </select>
+                </label></td>
+        </tr>
+
         <!-- admin configs tr extra -->
 				
 </table>

@@ -72,15 +72,21 @@ class sa_srch
 	/*
 	find and replace
 	*/
-	function type_replace($many=false)
+	function type_replace($many = false)
 	{	
 		
-		if($this->another_word == '') return false;
+		if($this->another_word == '')
+		{
+			return false;
+		}
 		
 		if($many)
 		{
-			if(!is_array($this->find_word)) return false;
-		
+			if(!is_array($this->find_word))
+			{
+				return false;
+			}
+			
 			$this->text	=	preg_replace('/' . preg_quote($this->find_word[0] . '(.*?)' . $this->find_word[1], '/') . '/', $this->another_word, $this->text);
 		}
 		else
@@ -96,7 +102,10 @@ class sa_srch
 	*/
 	function type_after($same_line=false)
 	{
-		if($this->another_word == '') return false;
+		if($this->another_word == '')
+		{
+			return false;
+		}
 		
 		$this->text	=	preg_replace('/' . preg_quote($this->find_word, '/')  . '/', $this->find_word . (($same_line) ? "\r\n" : "") . $this->another_word, $this->text);
 
@@ -107,29 +116,15 @@ class sa_srch
 	*/
 	function type_before($same_line=false)
 	{
-		if($this->another_word == '') return false;
-	
+		if($this->another_word == '')
+		{
+			return false;
+		}
+		
 		$this->text	=	preg_replace('/' . preg_quote($this->find_word, '/') . '/',   $this->another_word . (($same_line) ? "\r\n" : "")  .$this->find_word, $this->text);
 
 	}
 }
 
 
-/*
-$finder	=	new sa_srch;
-$finder->text= '
-<a>
-fwefwefwefwefwefwe
-swa ><
-wefwef 
->F 
-fe /fe,
-</a>
-';
-$finder->find_word= "fe /fe,";
-$finder->another_word='saaa';
-$finder->do_search(4);
-
-print $finder->text;
-*/
 ?>

@@ -669,6 +669,14 @@ function creat_plugin_xml($contents)
 						//add cached instuctions to cache if there
 						if(sizeof($cached_instructions) > 0)
 						{
+							//fix
+							if(file_exists($root_path . 'cache/styles_cached.php'))
+							{
+								$cached_content = file_get_contents($root_path . 'cache/styles_cached.php');
+								$cached_content = base64_decode($cached_content);
+								$cached_content = unserialize($cached_content);
+								$cached_instructions += $cached_content;
+							}
 							$filename = @fopen($root_path . 'cache/styles_cached.php' , 'w');
 							fwrite($filename, base64_encode(serialize($cached_instructions)));
 							fclose($filename);
@@ -1408,6 +1416,82 @@ function get_lang($name, $folder = '')
 
 }
 
-
+//
+//delete any content from any template , this will used in plugins
+//
+function delete_ch_tpl($template_name, $delete_txt = array())
+{
+	global $dbprefix, $lang, $config, $STYLE_PATH_ADMIN , $STYLE_PATH, $root_path;
+	
+	$style_path = (substr($template_name, 0, 6) == 'admin_') ? $STYLE_PATH_ADMIN : $STYLE_PATH;
+									
+	//if template not found and default style is there and not admin tpl
+	$template_path = $style_path . $template_name . '.html';
+	if(!file_exists($template_path)) 
+	{
+		if($config['style'] != 'default' && !$is_admin_template)
+		{
+			$template_path_alternative = str_replace('/' . $config['style'] . '/', '/default/', $template_path);
+			if(file_exists($template_path_alternative))
+			{
+				$template_path = $template_path_alternative;
+			}
+		}
+	}
+	
+	if(file_exists($template_path))
+		$d_contents = file_get_contents($template_path);
+	else
+		$d_contents = '';
+	
+	include_once "s_strings.php";
+	$finder	= new sa_srch;
+	$finder->find_word		= $delete_txt;
+	$finder->another_word	= '<!-- deleted -->';
+	$finder->text = trim($d_contents);
+	$finder->do_search(1);
+	$cached_instructions = array();
+	
+	if($d_contents  != '' && $finder->text != $d_contents && is_writable($style_path))
+	{
+		//update
+		$filename = @fopen($style_path . $template_name . '.html', 'w');
+		fwrite($filename, $finder->text);
+		fclose($filename);
+															
+		($hook = kleeja_run_hook('op_up_tplcntedit_dlchtpl_fuck')) ? eval($hook) : null; //run hook
+		
+		//delete cache ..
+		delete_cache('tpl_' .$template_name);
+	}
+	else
+	{
+		$cached_instructions[$template_name] = array(
+					'action'		=> 1, 
+					'find'			=> $finder->find_word,
+					'action_text'	=> $finder->another_word,
+					);
+										
+	}
+	
+	//add cached instuctions to cache if there
+	if(sizeof($cached_instructions) > 0)
+	{
+		//fix
+		if(file_exists($root_path . 'cache/styles_cached.php'))
+		{
+			$cached_content = file_get_contents($root_path . 'cache/styles_cached.php');
+			$cached_content = base64_decode($cached_content);
+			$cached_content = unserialize($cached_content);
+			$cached_instructions += $cached_content;
+		}
+		
+		$filename = @fopen($root_path . 'cache/styles_cached.php' , 'w');
+		fwrite($filename, base64_encode(serialize($cached_instructions)));
+		fclose($filename);
+	}
+	
+	return true;
+}
 
 ?>

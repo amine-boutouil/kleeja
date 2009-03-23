@@ -501,6 +501,7 @@ function process ()
 				$name 	= (string)	$SQL->escape($filname);
 				$size	= (int) 	$sizeee;
 				$type 	= (string)	$SQL->escape($typeee);
+				$namee 	= (string)  $name != '' ? str_replace('.' . $type, '', htmlspecialchars($name)) : $namee;
 				$folder	= (string)	$SQL->escape($folderee);
 				$timeww	= (int)		time();
 				$user	= (int)		$this->id_user;
@@ -512,7 +513,7 @@ function process ()
 				$insert_query = array(
 									'INSERT'	=> '`name` ,`size` ,`time` ,`folder` ,`type`,`user`,`code_del`,`user_ip`, `real_filename`',
 									'INTO'		=> "`{$dbprefix}files`",
-									'VALUES'	=> "'$name', '$size', '$timeww', '$folder','$type', '$user', '$code_del', '$ip', '$realf'"
+									'VALUES'	=> "'$namee', '$size', '$timeww', '$folder','$type', '$user', '$code_del', '$ip', '$realf'"
 									);
 									
 				($hook = kleeja_run_hook('qr_insert_new_file_kljuploader')) ? eval($hook) : null; //run hook
@@ -521,8 +522,13 @@ function process ()
 				{ 
 					$this->errs[]=  $lang['CANT_INSERT_SQL'];
 				}
-
+				
+				if($config['id_form'] == 'id') {
 				$this->id_for_url =  $SQL->insert_id();
+				}
+				else if($config['id_form'] == 'filename') {
+				$this->id_for_url =  $namee;	
+				}
 
 				//calculate stats ..s
 				$update_query = array(

@@ -42,9 +42,6 @@ function kleeja_auth_login ($name, $pass)
 	 {
 		big_error('Forum path is not correct', 'Please check your forum path correctly to integrate kleeja with your forum.');
 	}
-	//global $forum_srv,$forum_user,$forum_pass,$forum_db;
-	global $forum_path, $forum_charset;
-
 
 	if(empty($forum_srv) || empty($forum_user) || empty($forum_db))
 	{

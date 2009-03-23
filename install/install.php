@@ -130,7 +130,9 @@ case 'c':
 						$_POST['db_user'],
 						$_POST['db_pass'],
 						$_POST['db_name'],
-						$_POST['db_prefix']
+						$_POST['db_prefix'],
+						$_POST['fpath'],
+						$_POST['fcharset']
 						);
 	
 	}
@@ -172,6 +174,25 @@ case 'c':
 					<td><input name="db_prefix" type="text" value="klj_" style="width: 256px" />
 					</td>
 				</tr>       
+			</table>
+			<br />
+			</fieldset>
+			
+			<fieldset id="Group1" dir="' . $lang['DIR'] . '">
+			<b>' . $lang['IN_INFO'] . '</b>
+			<br />
+			<br />
+			<table style="width: 100%">
+				<tr>
+					<td>' . $lang['IN_PATH'] . '</td>
+					<td><input name="fpath" type="text" value="./forum" style="width: 256px" />
+					</td>
+				</tr>
+				<tr>
+					<td>' . $lang['IN_CHARSET'] . '</td>
+					<td><input name="fcharset" type="text" style="width: 256px" />
+					</td>
+				</tr> 
 			</table>
 			<br />
 			</fieldset>

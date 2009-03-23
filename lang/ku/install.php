@@ -82,6 +82,9 @@
 	$lang['INST_NOTE_RC5_TO_RC6']				=	'ده‌بێت هه‌ستیت به‌گۆڕینی په‌ڕگه‌ کۆنه‌کانی سکریپته‌که‌ به‌نوێیه‌که بۆ نوێکردنه‌وه‌ به‌شێوه‌یه‌کی دروست!.';
 	
 	$lang['INST_UPDATE_IS_FINISH']				=	"نوێکردنه‌وه‌ کۆتای هات.. ده‌توانیت ئێستا بوخچه‌ی <br/><b>INSTALL</b><br/> بسڕیته‌وه‌ و به‌رده‌وام بیت له‌کاره‌کانت به‌کلیجا ..";
+		$lang['IN_INFO']								= 'Fill in the fields below if you want to integrate kleeja with your forum . Ignore this step if you do not wish to do it<br /><span style="color:red;">you should change user system from admin cp after installing kleeja</span>';
+	$lang['IN_PATH']								= 'Path of forums';
+	$lang['IN_CHARSET']								= 'Charset of forums';
 	
 
 ?>

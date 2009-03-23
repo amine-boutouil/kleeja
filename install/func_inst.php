@@ -317,7 +317,7 @@ function make_language($def)
 
 
 //export config 
-function do_config_export($srv, $usr, $pass, $nm, $prf)
+function do_config_export($srv, $usr, $pass, $nm, $prf, $fpath, $fcharset)
 {
 		global $_path;
 		
@@ -330,13 +330,8 @@ function do_config_export($srv, $usr, $pass, $nm, $prf)
 		$data	.= '$perpage		= 10;'."// number of results in each page  \n";
 		$data	.= "\n\n\n";
 		$data	.= "//for integration with forums [ must change user systen from admin cp ] \n";
-		$data	.= '$forum_srv		= "localhost";'."// forum database server  \n";
-		$data	.= '$forum_db		= "";'."// forum database name   \n";
-		$data	.= '$forum_user		= "";'."// forum database user  \n";
-		$data	.= '$forum_pass		= "";'."// forum database password  \n";
-		$data	.= '$forum_prefix	= "";'."//the perfix before name of forum tables  \n";
-		$data	.= '$forum_path		= "/forum";'."// path of forums  \n";
-		$data	.= '$forum_charset	= "";'."// charset of forums  \n";
+		$data	.= '$forum_path		= \''. str_replace("'","\'", $fpath)."';// path of forums  \n";
+		$data	.= '$forum_charset	= \''. str_replace("'","\'", $fcharset)."';// charset of forums  \n";
 		$data	.= "\n\n\n";
 		$data	.= "//for use ftp account to uplaod [ Under Develpment ] \n";
 		$data	.= '$use_ftp		= 0;'."// 1 : yes  - 0 : no   \n";

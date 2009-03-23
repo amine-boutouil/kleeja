@@ -13,8 +13,37 @@ if (!defined('IN_COMMON'))
 
 function kleeja_auth_login ($name, $pass)
 {
-	global $forum_srv,$forum_user,$forum_pass,$forum_db;
-	global $forum_prefix, $forum_charset;
+	global $forum_path, $forum_charset;
+			//check for last slash / 
+	if($forum_path[strlen($forum_path)] == '/')
+	{
+			$forum_path = substr($forum_path, 0, strlen($forum_path));
+	}
+					
+	if($forum_path[0] == '/')
+	{
+		$forum_path = '..' . $forum_path;
+	}
+	else
+	{
+		$forum_path = '../' . $forum_path;
+	}			
+	
+	//get database data from mysmartbb config file
+	if(file_exists($forum_path . '/engine/config.php')) {
+	require ($forum_path . '/engine/config.php');
+	$forum_prefix = $config['db']['prefix'];
+	$forum_db = $config['db']['name'];
+	$forum_user = $config['db']['username'];
+	$forum_pass = $config['db']['password'];
+	$forum_srv = $config['db']['server'];
+	} 
+	else
+	 {
+		big_error('Forum path is not correct', 'Please check your forum path correctly to integrate kleeja with your forum.');
+	}
+	//global $forum_srv,$forum_user,$forum_pass,$forum_db;
+	global $forum_path, $forum_charset;
 
 
 	if(empty($forum_srv) || empty($forum_user) || empty($forum_db))

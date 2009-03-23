@@ -22,7 +22,7 @@ class usrcp
 				// this function like a traffic sign :)
 				function data ($name, $pass)
 				{
-					global $config, $path;
+					global $config, $path, $forum_path;
 						
 						//we need this in future 
 						if(defined('IGNORE_USER_SYSTEM'))
@@ -44,8 +44,8 @@ class usrcp
 						if($config['user_system'] != '1')
 						{
 							if(file_exists($path . 'auth_integration/' . trim($config['user_system']) . '.php'))
-							{
-								include_once ($path . 'auth_integration/phpbb.php');
+							{	
+								include_once ($path . 'auth_integration/' . trim($config['user_system']) . '.php');
 								return kleeja_auth_login($name, $pass);
 							}
 						}

@@ -39,7 +39,7 @@
 		$per1 = @round($stat_sizes / ($config['total_size'] *1048576) ,2) *100;
 		//ppl must know about kleeja version!
 		//ok i forgive ...
-		$kleeja_version	 = KLEEJA_VERSION;
+		$kleeja_version	 = '<a href="./admin.php?cp=check_update" title="' . $lang['R_CHECK_UPDATE'] . '">' . KLEEJA_VERSION . '</a>';
 		
 		//updating
 		$v = unserialize($config['new_version']);

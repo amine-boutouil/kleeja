@@ -30,7 +30,7 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 			if (isset($_GET['filename']))
 			{
 				$filename_l 	= (string) $SQL->escape($_GET['filename']);
-				$query['WHERE']	= "name='" . $filename_l . "'";=
+				$query['WHERE']	= "name='" . $filename_l . "'";
 			}
 			else
 			{
@@ -161,7 +161,7 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 		
 		if($is_id_filename)
 		{
-			$filename = $SQL->escape($_GET['downf']) ? $SQL->escape($_GET['downf']) : (isset($_GET['imgf']) ? $SQL->escape($_GET['imgf']) : (isset($_GET['thmbf']) ? intval($_GET['thmbf']) : null));
+			$filename = $SQL->escape($_GET['downf']) ? $SQL->escape($_GET['downf']) : (isset($_GET['imgf']) ? $SQL->escape($_GET['imgf']) : (isset($_GET['thmbf']) ? $SQL->escape($_GET['thmbf']) : null));
 		}
 		else
 		{

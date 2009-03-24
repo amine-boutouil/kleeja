@@ -27,20 +27,17 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 						'FROM'		=> "{$dbprefix}files f",
 					);		
 					
-			if(isset($_GET['id']) &&  $config['id_form'] != 'filename')
+			if (isset($_GET['filename']))
+			{
+				$filename_l 	= (string) $SQL->escape($_GET['filename']);
+				$query['WHERE']	= "name='" . $filename_l . "'";=
+			}
+			else
 			{
 				$id_l = intval($_GET['id']);
 				$query['WHERE']	= "id=" . $id_l . "";
 			}
-			elseif (isset($_GET['filename']))
-			{
-				$filename_l 	= (string) $SQL->escape($_GET['filename']);
-				$query['WHERE']	= "name='" . $filename_l . "'";
-			}
-			else {
-				kleeja_err($lang['ERROR_NAVIGATATION']);
-			}
-			
+
 			($hook = kleeja_run_hook('qr_download_id_filename')) ? eval($hook) : null; //run hook
 			$result	=	$SQL->build($query);
 			
@@ -56,7 +53,7 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 				$fname 		= $name;
 				$name 		= $real_filename != '' ? str_replace('.' . $type, '', htmlspecialchars($real_filename)) : $name;
 				
-				if($config['id_form'] == 'filename')
+				if (isset($_GET['filename']))
 				{
 					$url_file	= ($config['mod_writer']) ? $config['siteurl'] . "downf-" . $fname . ".html" : $config['siteurl'] . "download.php?downf=" . $fname;
 				}
@@ -87,7 +84,7 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 			($hook = kleeja_run_hook('b4_showsty_downlaod_id_filename')) ? eval($hook) : null; //run hook
 			
 			//add http reffer to session to prevent errors with some browsers ! 
-			if($config['id_form'] == 'filename')
+			if (isset($_GET['filename']))
 			{
 				$_SESSION['HTTP_REFERER'] = $config['siteurl'] . (($config['mod_writer']) ? "downloadf" . $fname . ".html" : "download.php?filename=" . $fname);
 			}

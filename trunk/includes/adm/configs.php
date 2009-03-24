@@ -65,7 +65,7 @@
 		//for  choose
 		if ($con['siteclose'] == "1" ) {$yclose = true; }else {$nclose = true;}
 		if ($con['decode'] == "2" ) {$md5_decode = true; }elseif ($con['decode'] == "1" ) {$time_decode = true;} else {$none_decode = true; }
-		if ($con['id_form'] == "id" ) {$idf = true;}elseif($con['id_form'] == "filename"){$idff = true;}else{$idf = true;}
+		if ($con['id_form'] == "id") {$idf = true;}elseif($con['id_form'] == "filename"){$idff = true;}else{$idf = true;}
 		if ($con['statfooter'] == "1" ) {$ystatfooter = true; }else {$nstatfooter = true;}
 		if ($con['gzip'] == "1" ) {$ygzip = true; }else {$ngzip = true;}
 		if ($con['register'] == "1" ) {$yregister = true; }else {$nregister = true;}

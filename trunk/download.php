@@ -27,7 +27,7 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 						'FROM'		=> "{$dbprefix}files f",
 					);		
 					
-			if(isset($_GET['id']))
+			if(isset($_GET['id']) &&  $config['id_form'] != 'filename')
 			{
 				$id_l = intval($_GET['id']);
 				$query['WHERE']	= "id=" . $id_l . "";
@@ -36,6 +36,9 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 			{
 				$filename_l 	= (string) $SQL->escape($_GET['filename']);
 				$query['WHERE']	= "name='" . $filename_l . "'";
+			}
+			else {
+				kleeja_err($lang['ERROR_NAVIGATATION']);
 			}
 			
 			($hook = kleeja_run_hook('qr_download_id_filename')) ? eval($hook) : null; //run hook
@@ -161,11 +164,11 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 		
 		if($is_id_filename)
 		{
-			$filename = isset($_GET['downf']) ? intval($_GET['downf']) : (isset($_GET['imgf']) ? intval($_GET['imgf']) : (isset($_GET['thmbf']) ? intval($_GET['thmbf']) : null));
+			$filename = $SQL->escape($_GET['downf']) ? $SQL->escape($_GET['downf']) : (isset($_GET['imgf']) ? $SQL->escape($_GET['imgf']) : (isset($_GET['thmbf']) ? intval($_GET['thmbf']) : null));
 		}
 		else
 		{
-			$id = isset($_GET['down']) ? $SQL->escape($_GET['down']) : (isset($_GET['img']) ? $SQL->escape($_GET['img']) : (isset($_GET['thmb']) ? $SQL->escape($_GET['thmb']) : null));
+			$id = intval($_GET['down']) ? intval($_GET['down']) : (isset($_GET['img']) ? intval($_GET['img']) : (isset($_GET['thmb']) ? intval($_GET['thmb']) : null));
 		}
 		
 		// worst case default

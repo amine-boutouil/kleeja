@@ -566,12 +566,12 @@ function process ()
 							$extra_thmb 	= $lang['URL_F_THMB'] . ':<br /><textarea rows="2" cols="49">';
 							if($config['id_form'] == "filename")
 							{
-								$thumb_link_o = $this->linksite . ($config['mod_writer']) ? "thumbf" . $this->filename2 . ".html" : "download.php?thmbf=" . $this->filename2);
+								$thumb_link_o = $this->linksite . (($config['mod_writer']) ? "thumbf" . $this->filename2 . ".html" : "download.php?thmbf=" . $this->filename2);
 								$extra_thmb .= '[url=' . $this->linksite . (($config['mod_writer']) ? "imagef" . $this->filename2 . ".html" : "download.php?imgf=" . $this->filename2) . '][img]' . $thumb_link_o . '[/img][/url]';
 							}
 							else
 							{
-								$thumb_link_o = $this->linksite . ($config['mod_writer']) ? "thumb" . $this->id_for_url . ".html" : "download.php?thmb=" . $this->id_for_url);
+								$thumb_link_o = $this->linksite . (($config['mod_writer']) ? "thumb" . $this->id_for_url . ".html" : "download.php?thmb=" . $this->id_for_url);
 								$extra_thmb .= '[url=' . $this->linksite . (($config['mod_writer']) ? "image" . $this->id_for_url . ".html" : "download.php?img=" . $this->id_for_url) . '][img]' . $thumb_link_o . '[/img][/url]';
 							}
 							

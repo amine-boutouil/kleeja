@@ -201,6 +201,7 @@ $install_sqls['config_insert28'] = "INSERT INTO `{$dbprefix}config` (`name`, `va
 $install_sqls['config_insert29'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('sitemail', '$config_sitemail')";
 $install_sqls['config_insert30'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('new_version', '')";
 $install_sqls['config_insert31'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('thmb_dims', '100*100')";
+$install_sqls['config_insert32'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('id_form', 'id')";
 		
 		
 $install_sqls['exts_insert1'] = "

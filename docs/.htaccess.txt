@@ -2,10 +2,12 @@ Options +FollowSymLinks
 RewriteEngine on
 RewriteRule ^index.html$ index.php
 RewriteRule ^download([0-9]*).html$ download.php?id=$1
-RewriteRule ^downloadf([a-zA-Z0-9_-]*).html$ download.php?filename=$1
+RewriteRule ^downloadf-([a-zA-Z0-9_-]*).html$ download.php?filename=$1
 RewriteRule ^down-([0-9]*).html$ download.php?down=$1
-RewriteRule ^down-([a-zA-Z0-9_-]*)-([a-zA-Z0-9_-]*)-([0-9]*).html$ download.php?id=$3
+RewriteRule ^downf-([0-9]*).html$ download.php?downf=$1
 RewriteRule ^thumb([0-9]*).html$ download.php?thmb=$1
+RewriteRule ^imagef-([0-9]*).html$ download.php?imgf=$1
+RewriteRule ^thumbf-([0-9]*).html$ download.php?thmbf=$1
 RewriteRule ^image([0-9]*).html$ download.php?img=$1
 RewriteRule ^report[_-]([0-9]*).html$ go.php?go=report&id=$1
 RewriteRule ^call.html$ go.php?go=call
@@ -20,3 +22,6 @@ RewriteRule ^login.html$ ucp.php?go=login
 RewriteRule ^logout.html$ ucp.php?go=logout
 RewriteRule ^stats.html$ go.php?go=stats
 RewriteRule ^del([0-9]*).html$ go.php?go=del&cd=$1
+#deprecated 
+RewriteRule ^down-([a-zA-Z0-9_-]*)-([a-zA-Z0-9_-]*)-([0-9]*).html$ download.php?id=$3
+

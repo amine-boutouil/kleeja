@@ -5,12 +5,12 @@
 # Filename : download.php
 # purpose :  when user  request file to  download it.
 # copyright 2007-2008 Kleeja.com ..
-#license http://opensource.org/licenses/gpl-license.php GNU Public License
+# license http://opensource.org/licenses/gpl-license.php GNU Public License
 # last edit by : saanina
 ##################################################
 
 // security ..
-define ( 'IN_INDEX' , true);
+define ('IN_INDEX' , true);
 //include imprtant file ..
 include ('includes/common.php');
 
@@ -161,11 +161,11 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 		
 		if($is_id_filename)
 		{
-			$filename = $SQL->escape($_GET['downf']) ? $SQL->escape($_GET['downf']) : (isset($_GET['imgf']) ? $SQL->escape($_GET['imgf']) : (isset($_GET['thmbf']) ? $SQL->escape($_GET['thmbf']) : null));
+			$filename = isset($_GET['downf']) ? $SQL->escape($_GET['downf']) : (isset($_GET['imgf']) ? $SQL->escape($_GET['imgf']) : (isset($_GET['thmbf']) ? $SQL->escape($_GET['thmbf']) : null));
 		}
 		else
 		{
-			$id = intval($_GET['down']) ? intval($_GET['down']) : (isset($_GET['img']) ? intval($_GET['img']) : (isset($_GET['thmb']) ? intval($_GET['thmb']) : null));
+			$id = isset($_GET['down']) ? intval($_GET['down']) : (isset($_GET['img']) ? intval($_GET['img']) : (isset($_GET['thmb']) ? intval($_GET['thmb']) : null));
 		}
 		
 		// worst case default

@@ -18,7 +18,7 @@ include ('func_inst.php');
 	
 
 /*
-//print header
+//echo header
 */
 if(isset($_POST['dbsubmit']) && !is_writable($_path))
 {
@@ -142,7 +142,7 @@ case 'c':
 	
 	if($xs== false)
 	{
-		 print '<br /><form method="post"  action="' . $_SERVER['PHP_SELF'] . '?step=c&' . getlang(1) . '"  onsubmit="javascript:return formCheck(this, Array(\'db_server\',\'db_user\' ,\'db_name\',\'db_prefix\' ));">
+		 echo '<br /><form method="post"  action="' . $_SERVER['PHP_SELF'] . '?step=c&' . getlang(1) . '"  onsubmit="javascript:return formCheck(this, Array(\'db_server\',\'db_user\' ,\'db_name\'));">
 
 			<fieldset id="Group1" dir="' . $lang['DIR'] . '">
 			<b>' . ($writeable_path ? $lang['DB_INFO'] : $lang['DB_INFO_NW']) . '</b>
@@ -185,12 +185,16 @@ case 'c':
 			<table style="width: 100%">
 				<tr>
 					<td>' . $lang['IN_PATH'] . '</td>
-					<td><input name="fpath" type="text" value="./forum" style="width: 256px" />
+					<td><input name="fpath" type="text" value="./forum" style="width: 256px;direction:ltr" />
 					</td>
 				</tr>
 				<tr>
 					<td>' . $lang['IN_CHARSET'] . '</td>
-					<td><input name="fcharset" type="text" style="width: 256px" />
+					<td>
+					<select name="fcharset"  style="width: 256px;direction:ltr" >
+					' . get_mysql_charsets ((isset($_POST['fcharset']) ? $_POST['fcharset'] : false)) . '
+					</select>
+
 					</td>
 				</tr> 
 			</table>
@@ -225,35 +229,35 @@ case 'c':
 break;
 case 'check':
 
-	$submit_wh = '';
+	$submit_wh = $texterr = '';
 
-		
 	//config,php
-	if (!$dbname || !$dbuser)
+	if (!isset($dbname) || !isset($dbuser))
 	{
-		echo '<span style="color:red;">' . $lang['INST_CHANG_CONFIG'] . '</span><br />';
+		$texterr = '<span style="color:red;">' . $lang['INST_CHANG_CONFIG'] . '</span><br />';
 		$submit_wh = 'disabled="disabled"';
 	}
-
-	//connect .. for check
-	$texterr = '';
-	$connect = @mysql_connect($dbserver, $dbuser, $dbpass);
-	if (!$connect) 
-		$texterr .= '<span style="color:red;">' . $lang['INST_CONNCET_ERR'] . '</span><br />';
-		
-	$select = @mysql_select_db($dbname);
-	if (!$select)
+	else
 	{
-		//lets try to make the db 
-		$sql = 'CREATE DATABASE ' . $dbname ;
-		if (@mysql_query($sql, $connect))
-		{
-			$select = @mysql_select_db($dbname);
-		}
-		
+		//connect .. for check
+		$connect = @mysql_connect($dbserver, $dbuser, $dbpass);
+		if (!$connect) 
+			$texterr .= '<span style="color:red;">' . $lang['INST_CONNCET_ERR'] . '</span><br />';
+			
+		$select = @mysql_select_db($dbname);
 		if (!$select)
-		$texterr .= '<span style="color:red;">' . $lang['INST_SELECT_ERR'] . '</span><br />';
-	}	
+		{
+			//lets try to make the db 
+			$sql = 'CREATE DATABASE ' . $dbname ;
+			if (@mysql_query($sql, $connect))
+			{
+				$select = @mysql_select_db($dbname);
+			}
+			
+			if (!$select)
+			$texterr .= '<span style="color:red;">' . $lang['INST_SELECT_ERR'] . '</span><br />';
+		}
+	}
 		
 	//try to chmod them
 	if(function_exists('chmod'))
@@ -263,31 +267,31 @@ case 'check':
 		@chmod('../uploads/thumbs', 0777);
 	}
 		
-	if ( !is_writable('../cache') ) 
+	if (!is_writable('../cache')) 
 			$texterr .= '<span style="color:red;">[cache]: ' . $lang['INST_NO_WRTABLE'] . '</span><br />';
 	
 	
-	if ( !is_writable('../uploads') )
+	if (!is_writable('../uploads'))
 			$texterr .= '<span style="color:red;">[uploads]: ' . $lang['INST_NO_WRTABLE'] . '</span><br />';
 	
 	
-	if ( !is_writable('../uploads/thumbs') )
+	if (!is_writable('../uploads/thumbs'))
 			$texterr .= '<span style="color:red;">[uploads/thumbs]: ' . $lang['INST_NO_WRTABLE'] . '</span><br />';
 	
 	
-	print '<fieldset>';
+	echo '<fieldset>';
 	if ($texterr !='')
 	{
-		print '<br /><img src="img/bad.gif" alt="bad." /> <br />' . $texterr;
+		echo '<br /><img src="img/bad.gif" alt="bad." /> <br />' . $texterr;
 		$submit_wh = 'disabled="disabled"';
 	}
 
 	if($submit_wh == '')
 	{
-		print '<br /><img src="img/good.gif" alt="good" /> <br /><span style="color:green;"><b>[ ' . $lang['INST_GOOD_GO'] . ' ]</b></span><br /><br />';
+		echo '<br /><img src="img/good.gif" alt="good" /> <br /><span style="color:green;"><b>[ ' . $lang['INST_GOOD_GO'] . ' ]</b></span><br /><br />';
 	}
 
-	print '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=data&'.getlang(1).'">
+	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=data&'.getlang(1).'">
 	<input name="agres" type="submit" value="' . $lang['INST_SUBMIT'] . '" ' . $submit_wh . ' />
 	</form></fieldset>';
 
@@ -302,15 +306,15 @@ case 'data' :
 		if (empty($_POST['sitename']) || empty($_POST['siteurl']) || empty($_POST['sitemail'])
 			 || empty($_POST['username']) || empty($_POST['password']) || empty($_POST['email']) )
 		{
-			print $lang['EMPTY_FIELDS'];
-			print $footer_inst;
+			echo $lang['EMPTY_FIELDS'];
+			echo $footer_inst;
 			exit();
 		}
 
 		 if (strpos($_POST['email'],'@') === false)
 		 {
-			print $lang['WRONG_EMAIL'];
-			print $footer_inst;
+			echo $lang['WRONG_EMAIL'];
+			echo $footer_inst;
 			exit();
 		}
 
@@ -345,17 +349,17 @@ case 'data' :
 		
 			if($do_it)
 			{
-				if ($name == 'call')			print '<span style="color:green;">' . $lang['INST_CRT_CALL'] . '</span><br />';
-				elseif ($name == 'reports')		print '<span style="color:green;">' . $lang['INST_CRT_REPRS'] . '</span><br />';
-				elseif ($name == 'stats')		print '<span style="color:green;">' . $lang['INST_CRT_STS'] . '</span><br />';
-				elseif ($name == 'users')		print '<span style="color:green;">' . $lang['INST_CRT_USRS'] . '</span><br />';
-				elseif ($name == 'users')		print '<span style="color:green;">' . $lang['INST_CRT_ADM'] . '</span><br />';
-				elseif ($name == 'files')		print '<span style="color:green;">' . $lang['INST_CRT_FLS'] . '</span><br />';
-				elseif ($name == 'config')		print '<span style="color:green;">' . $lang['INST_CRT_CNF'] . '</span><br />';
-				elseif ($name == 'exts')		print '<span style="color:green;">' . $lang['INST_CRT_EXT'] . '</span><br />';
-				elseif ($name == 'online')		print '<span style="color:green;">' . $lang['INST_CRT_ONL'] . '</span><br />';
-				elseif ($name == 'hooks')		print '<span style="color:green;">' . $lang['INST_CRT_HKS'] . '</span><br />';
-				elseif ($name == 'plugins')		print '<span style="color:green;">' . $lang['INST_CRT_PLG'] . '</span><br />';
+				if ($name == 'call')			echo '<span style="color:green;">' . $lang['INST_CRT_CALL'] . '</span><br />';
+				elseif ($name == 'reports')		echo '<span style="color:green;">' . $lang['INST_CRT_REPRS'] . '</span><br />';
+				elseif ($name == 'stats')		echo '<span style="color:green;">' . $lang['INST_CRT_STS'] . '</span><br />';
+				elseif ($name == 'users')		echo '<span style="color:green;">' . $lang['INST_CRT_USRS'] . '</span><br />';
+				elseif ($name == 'users')		echo '<span style="color:green;">' . $lang['INST_CRT_ADM'] . '</span><br />';
+				elseif ($name == 'files')		echo '<span style="color:green;">' . $lang['INST_CRT_FLS'] . '</span><br />';
+				elseif ($name == 'config')		echo '<span style="color:green;">' . $lang['INST_CRT_CNF'] . '</span><br />';
+				elseif ($name == 'exts')		echo '<span style="color:green;">' . $lang['INST_CRT_EXT'] . '</span><br />';
+				elseif ($name == 'online')		echo '<span style="color:green;">' . $lang['INST_CRT_ONL'] . '</span><br />';
+				elseif ($name == 'hooks')		echo '<span style="color:green;">' . $lang['INST_CRT_HKS'] . '</span><br />';
+				elseif ($name == 'plugins')		echo '<span style="color:green;">' . $lang['INST_CRT_PLG'] . '</span><br />';
 				else
 				{
 					
@@ -368,12 +372,12 @@ case 'data' :
 					else
 						$dots++;
 						
-					//print '<span style="color:green;"> [' .$name .'] : ' . $lang['INST_SQL_OK'] . '</span><br />';
+					//echo '<span style="color:green;"> [' .$name .'] : ' . $lang['INST_SQL_OK'] . '</span><br />';
 				}
 			}
 			else
 			{
-				print '<span style="color:red;"> [' .$name . '] : ' . $lang['INST_SQL_ERR'] . '</span><br />';
+				echo '<span style="color:red;"> [' .$name . '] : ' . $lang['INST_SQL_ERR'] . '</span><br />';
 				$err++;
 			}
 
@@ -384,7 +388,7 @@ case 'data' :
 			// start classe..
 			$SQL	= new SSQL($dbserver,$dbuser,$dbpass,$dbname);
 
-			print '<fieldset><form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=end&' . getlang(1) . '">
+			echo '<fieldset><form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=end&' . getlang(1) . '">
 			<input name="agres" type="submit" value="' . $lang['INST_SUBMIT'] . '"/>
 			</form></fieldset>';
 			
@@ -393,15 +397,17 @@ case 'data' :
 		}
 		else
 		{
-			print '<fieldset><span style="color:red;">' . $lang['INST_FINISH_ERRSQL'] . '</span></fieldset>';
+			echo '<fieldset><span style="color:red;">' . $lang['INST_FINISH_ERRSQL'] . '</span></fieldset>';
 		}
 
-	}else{
+	}
+	else
+	{
 
 	//$sitepath = $_SERVER['DOCUMENT_ROOT'].dirname($_SERVER['PHP_SELF']);
 	$urlsite =  "http://".$_SERVER['HTTP_HOST'] . str_replace('install','',dirname($_SERVER['PHP_SELF']));
 
- print '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=data&'.getlang(1).'"  onsubmit="javascript:return formCheck(this, Array(\'sitename\',\'siteurl\',\'sitemail\' ,\'username\',\'password\',\'email\' ));">
+ echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=data&'.getlang(1).'"  onsubmit="javascript:return formCheck(this, Array(\'sitename\',\'siteurl\',\'sitemail\' ,\'username\', \'password\',\'email\' ));">
 	<fieldset id="Group1" dir="' . $lang['DIR'] . '">
 	<legend style="width: 73px"> [ <strong>' . $lang['INST_SITE_INFO'] . '</strong> ]</legend>
 	<table style="width: 100%">
@@ -447,12 +453,12 @@ case 'data' :
 
 break;
 case 'end' :
-		print '<fieldset><img src="img/wink.gif" alt="congratulation" /><br /><br />';
-		print '<span style="color:blue;">' . $lang['INST_FINISH_SQL'] . '</span><br /><br />';
-		print '<img src="img/home.gif" alt="home" />&nbsp;<a href="../index.php">' . $lang['INDEX'] . '</a><br /><br />';
-		print '<img src="img/adm.gif" alt="admin" />&nbsp;<a href="../admin.php">' . $lang['ADMINCP'] . '</a><br /><br />';
-		print '' . $lang['INST_KLEEJADEVELOPERS'] . '<br /><br />';
-		print '<a href="http://www.kleeja.com">www.kleeja.com</a><br /><br /></fieldset>';
+		echo '<fieldset><img src="img/wink.gif" alt="congratulation" /><br /><br />';
+		echo '<span style="color:blue;">' . $lang['INST_FINISH_SQL'] . '</span><br /><br />';
+		echo '<img src="img/home.gif" alt="home" />&nbsp;<a href="../index.php">' . $lang['INDEX'] . '</a><br /><br />';
+		echo '<img src="img/adm.gif" alt="admin" />&nbsp;<a href="../admin.php">' . $lang['ADMINCP'] . '</a><br /><br />';
+		echo '' . $lang['INST_KLEEJADEVELOPERS'] . '<br /><br />';
+		echo '<a href="http://www.kleeja.com">www.kleeja.com</a><br /><br /></fieldset>';
 		//for safe ..
 		//@rename("install.php", "install.lock");
 break;
@@ -461,8 +467,8 @@ break;
 
 
 /*
-//print footer
+//echo footer
 */
-print $footer_inst;
+echo $footer_inst;
 
 

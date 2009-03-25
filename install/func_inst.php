@@ -19,7 +19,8 @@ function getlang ($link=false)
 {
 	if (isset($_GET['lang']))
 	{ 
-		if(empty($_GET['lang']))  $_GET['lang'] = 'en';
+		if(empty($_GET['lang'])) 
+			$_GET['lang'] = 'en';
 					
 		if(file_exists('../lang/' . htmlspecialchars($_GET['lang']) . '/install.php'))
 			$ln	=  htmlspecialchars($_GET['lang']);
@@ -180,8 +181,18 @@ function formCheck(formobj, fieldRequired)
 {
 	// dialog message
 	var alertMsg = "' . $lang['VALIDATING_FORM_WRONG'] . ':\n";
-	
 	var l_Msg = alertMsg.length;
+	//lang
+	var lang = new Array(3);
+	lang["db_server"] = "' . $lang['DB_SERVER'] . '";
+	lang["db_user"] = "' . $lang['DB_USER'] . '";
+	lang["db_name"] = "' . $lang['DB_NAME'] . '";
+	lang["sitename"] = "' . $lang['SITENAME'] . '";
+	lang["siteurl"] = "' . $lang['SITEURL'] . '";
+	lang["sitemail"] = "' . $lang['SITEMAIL'] . '";
+	lang["username"] = "' . $lang['USERNAME'] . '";
+	lang["password"] = "' . $lang['PASSWORD'] . '";
+	lang["email"] = "' . $lang['EMAIL'] . '";
 	
 	for (var i = 0; i < fieldRequired.length; i++)
 	{
@@ -192,9 +203,8 @@ function formCheck(formobj, fieldRequired)
 			{
 				case "text":
 				case "textarea":
-					if (obj.value == "" || obj.value == null){
-						alertMsg += " - " + fieldRequired[i] + "\n";
-					}
+					if (obj.value == "" || obj.value == null)
+						alertMsg += " - " + lang[fieldRequired[i]] + "\n";
 					break;
 				default:
 			}
@@ -202,25 +212,20 @@ function formCheck(formobj, fieldRequired)
 			if (obj.type == undefined)
 			{
 				var blnchecked = false;
-				for (var j = 0; j < obj.length; j++){
+				for (var j = 0; j < obj.length; j++)
+				{
 					if (obj[j].checked)
-					{
 						blnchecked = true;
-					}
 				}
 				
 				if (!blnchecked)
-				{
-					alertMsg += " - " + fieldRequired[i] + "\n";
-				}
+					alertMsg += " - " + lang[fieldRequired[i]] + "\n";
 			}
 		}
 	}
 
 	if (alertMsg.length == l_Msg)
-	{
 		return true;
-	}
 	else
 	{
 		alert(alertMsg);
@@ -275,44 +280,6 @@ $footer_inst = '<br />
 <!-- Foterr Start -->
 </div></div> <b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b></div></body></html>
 <!-- Foterr End -->';
-
-
-//functions
-function make_style()
-{
-	$contents	=	file_get_contents('res/style.xml');
-	creat_style_xml($contents, true);
-}
-
-function make_language($def)
-{
-	if(empty($def)) $def = 'en';
-
-	if($def=='en') 
-	{
-		$ar = false; 
-		$en = true; 
-	}
-	else if($def=='ar') 
-	{
-		$ar = true; 
-		$en = false;
-	}
-	
-	if($def != 'en' && $def != 'ar')
-	{
-		$contents_def	=	file_get_contents('res/lang_' . $def . '.xml');
-		creat_lang_xml($contents_def, true);
-		$ar = false; 
-		$en = false;
-	}
-	
-	$contents	=	file_get_contents('res/lang_ar.xml');
-	$contents1	=	file_get_contents('res/lang_en.xml');
-	creat_lang_xml($contents, $ar);
-	creat_lang_xml($contents1, $en);
-
-}
 
 
 
@@ -386,10 +353,63 @@ function empty_cache_of_kleeja()
 		}
 		closedir($dh);
 }
+
+
+function get_mysql_charsets($select = false)
+{
+
+//review later .. to see if these are exists in 
+$sets = array(
+'utf8',
+'cp1256',
+'latin1',
+'cp1251',
+'armscii8',
+'big5',
+'binary',
+'cp1250',
+'cp1257',
+'cp850',
+'cp852',
+'cp866',
+'cp932',
+'dec8',
+'eucjpms',
+'euckr',
+'gb2312',
+'gbk',
+'geostd8',
+'greek',
+'hebrew',
+'hp8',
+'keybcs2',
+'koi8r',
+'koi8u',
+'latin2',
+'latin5',
+'latin7',
+'macce',
+'macroman',
+'sjis',
+'swe7',
+'tis620',
+'ucs2',
+'ujis',
+);
+
+	$return = '';
+	foreach($sets as $m)
+	{
+		$return .= '<option value="' . $m . '"' . ($select == $m ? ' selected="selected"' : '') . '>' . $m . '</option>';
+	}
 	
+	return $return;
+}	
 function get_microtime(){	list($usec, $sec) = explode(' ', microtime());	return ((float)$usec + (float)$sec);	}
 
-if (phpversion() < '4.1.0') exit('Your php version is too old !');
-
+if (phpversion() < '4.1.0')
+{
+	exit('Your php version is too old !');
+}
 
 ?>

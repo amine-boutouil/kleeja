@@ -34,16 +34,18 @@ function kleeja_auth_login ($name, $pass)
 	}			
 	
 	//get some useful data from phbb config file
-	if(file_exists($forum_path . '/includes/config.php')) {
-	require ($forum_path . '/includes/config.php');
-	$forum_prefix = $config['Database']['tableprefix'];
-	$forum_db = $config['Database']['dbname'];
-	$forum_user = $config['MasterServer']['username'];
-	$forum_pass = $config['MasterServer']['password'];
-	$forum_srv = $config['MasterServer']['servername'];
+	if(file_exists($forum_path . '/includes/config.php'))
+	{
+		require ($forum_path . '/includes/config.php');
+		
+		$forum_srv = $config['MasterServer']['servername'];
+		$forum_db = $config['Database']['dbname'];
+		$forum_user = $config['MasterServer']['username'];
+		$forum_pass = $config['MasterServer']['password'];
+		$forum_prefix = $config['Database']['tableprefix'];
 	} 
 	else
-	 {
+	{
 		big_error('Forum path is not correct', 'Please check your forum path correctly to integrate kleeja with your forum.');
 	}
 	
@@ -136,16 +138,6 @@ function kleeja_auth_login ($name, $pass)
 		return false;
 	}
 }
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

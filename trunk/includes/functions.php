@@ -1449,7 +1449,7 @@ function delete_ch_tpl($template_name, $delete_txt = array())
 	$finder->find_word		= $delete_txt;
 	$finder->another_word	= '<!-- deleted -->';
 	$finder->text = trim($d_contents);
-	$finder->do_search(1);
+	$finder->do_search(2);
 	$cached_instructions = array();
 	
 	if($d_contents  != '' && $finder->text != $d_contents && is_writable($style_path))
@@ -1467,8 +1467,8 @@ function delete_ch_tpl($template_name, $delete_txt = array())
 	else
 	{
 		$cached_instructions[$template_name] = array(
-					'action'		=> 1, 
-					'find'			=> $finder->find_word,
+					'action'		=> 'replace_with', 
+					'find'			=> $finder->find_word[0] . '(.*?)' . $finder->find_word[1],
 					'action_text'	=> $finder->another_word,
 					);
 										

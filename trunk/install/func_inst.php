@@ -183,7 +183,7 @@ function formCheck(formobj, fieldRequired)
 	var alertMsg = "' . $lang['VALIDATING_FORM_WRONG'] . ':\n";
 	var l_Msg = alertMsg.length;
 	//lang
-	var lang = new Array(3);
+	var lang = new Array(9);
 	lang["db_server"] = "' . $lang['DB_SERVER'] . '";
 	lang["db_user"] = "' . $lang['DB_USER'] . '";
 	lang["db_name"] = "' . $lang['DB_NAME'] . '";

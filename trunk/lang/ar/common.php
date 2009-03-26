@@ -395,6 +395,7 @@ $lang = array_merge($lang, array(
 	'OPEN'	=> 'افتح',
 	'SEARCH_FOR'	=> 'أبحث عن',
 	'REPLACE_WITH'	=> 'استبدل بـ',
+	'REPLACE_TO_REACH'	=> 'حتى الكود تصل الكود التالي',
 	'ADD_AFTER'	=> 'أضف بعدها',
 	'ADD_AFTER_SAME_LINE'	=> 'أضف بعده في نفس السطر',
 	'ADD_BEFORE'	=> 'أضف قبله',

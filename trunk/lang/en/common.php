@@ -390,6 +390,7 @@ $lang = array_merge($lang, array(
 	'OPEN'	=> 'Open',
 	'SEARCH_FOR'	=> 'Look for',
 	'REPLACE_WITH'	=> 'Replace with',
+	'REPLACE_TO_REACH'	=> 'Until you reach the next code',
 	'ADD_AFTER'	=> 'Add after',
 	'ADD_AFTER_SAME_LINE'	=> 'Add after it in the same line',
 	'ADD_BEFORE'	=> 'Add before',

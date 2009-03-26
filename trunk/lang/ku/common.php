@@ -402,6 +402,7 @@ if (empty($lang) || !is_array($lang))
 	'OPEN'	=> 'بکه‌ره‌وه‌',
 	'SEARCH_FOR'	=> 'بگه‌ڕێ',
 	'REPLACE_WITH'	=> 'بگۆڕه‌ به‌',
+	'REPLACE_TO_REACH'	=> 'Until you reach the next code',
 	'ADD_AFTER'	=> 'له‌دوایه‌وه‌ زیادبکه‌',
 	'ADD_AFTER_SAME_LINE'	=> 'له‌دوایه‌وه‌ و له‌هه‌مان دێڕدا زیاد بکه‌',
 	'ADD_BEFORE'	=> 'له‌پێشیه‌وه‌ زیادبکه‌',

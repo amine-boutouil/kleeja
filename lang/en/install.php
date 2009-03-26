@@ -82,9 +82,9 @@
 	$lang['INST_NOTE_RC5_TO_RC6']					= 'You need to replace all new the script files with the old ones !.';
 	
 	$lang['INST_UPDATE_IS_FINISH']					= 'Installation completed! you can now delete the <br /><b>INSTALL</b><br /> directory...';
-	$lang['IN_INFO']								= 'Fill in the fields below if you want to integrate kleeja with your forum . Ignore this step if you do not wish to do it<br /><span style="color:red;">you should change user system from admin cp after installing kleeja</span>';
-	$lang['IN_PATH']								= 'Path of forums';
-	$lang['IN_CHARSET']								= 'Charset of forums';
+	$lang['IN_INFO']								= 'Fill in the fields below if you want to integrate kleeja with your script . Ignore this step if you do not wish to do it<br /><span style="color:red;">you should change user system from admin cp after installing kleeja</span>';
+	$lang['IN_PATH']								= 'Path of script';
+	$lang['IN_CHARSET']								= 'Charset of script';
 	
 	
 ?>

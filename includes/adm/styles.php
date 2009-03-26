@@ -274,8 +274,22 @@ switch ($_GET['sty_t'])
 					echo '<strong>' . $lang['OPEN'] . '</strong> : <br /> ' . (substr($template_name, 0, 6) == 'admin_' ? $STYLE_PATH_ADMIN : $STYLE_PATH) . $template_name . '<br />';
 					switch($do['action']):
 						case 'replace_with':
+						
+
+						
 							echo '<strong> ' . $lang['SEARCH_FOR'] . '<strong> : <br />';
-							echo '<textarea style="direction:ltr;width:90%">' . trim($do['find']) . '</textarea> <br />';
+							//if it's to code
+							if(strpos($do['find'], '(.*?)') !== false)
+							{
+								$do['find'] = explode('(.*?)', $do['find']);
+								echo '<textarea style="direction:ltr;width:90%">' . trim($do['find'][0]) . '</textarea> <br />';
+									echo '<strong> ' . $lang['REPLACE_TO_REACH'] . '<strong> : <br />';
+								echo '<textarea style="direction:ltr;width:90%">' . trim($do['find'][1]) . '</textarea> <br />';
+							}
+							else
+							{
+								echo '<textarea style="direction:ltr;width:90%">' . trim($do['find']) . '</textarea> <br />';
+							}
 							echo '<strong> ' . $lang['REPLACE_WITH'] . '<strong> : <br />';
 							echo '<textarea style="direction:ltr;width:90%">' . trim($do['action_text']) . '</textarea> <br />'; 
 						break;

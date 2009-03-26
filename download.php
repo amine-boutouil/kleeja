@@ -71,8 +71,6 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 				$sty		= 'download';
 				$title =  $real_filename != '' ? str_replace('.' . $type, '', htmlspecialchars($real_filename)) : $name;
 				$title .= ' ' . $lang['DOWNLAOD'];
-				
-				($hook = kleeja_run_hook('b4_download_id_filename')) ? eval($hook) : null; //run hook
 			}
 			else
 			{

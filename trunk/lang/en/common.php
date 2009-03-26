@@ -369,7 +369,7 @@ $lang = array_merge($lang, array(
 	'PLUGIN_DELETED' => 'Plugin deleted...',
 	'PLGUIN_DISABLED_ENABLED' => 'Plugin Enabled / Disabled',
 	'NO_PLUGINS' => 'No plugins found',
-	'NEW_PLUGIN_ADDED' => 'Plugin added ...',
+	'NEW_PLUGIN_ADDED' => 'Plugin added ... <br /> Note: some plugins come with extra files , you need to transfer them to root folder of Kleeja.',
 	'R_CHECK_UPDATE' => 'Check for updates',
 	'ERROR_CHECK_VER' => 'Error: cannot get any update information at this momoent , try again later !',
 

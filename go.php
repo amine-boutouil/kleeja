@@ -278,7 +278,7 @@ switch ($_GET['go'])
 			}
 			else
 			{
-				while($row=$SQL->fetch_array($sql))
+				while($row=$SQL->fetch_array($result))
 				{
 						@unlink ($row['folder'] . "/" . $row['name']);
 						//delete thumb

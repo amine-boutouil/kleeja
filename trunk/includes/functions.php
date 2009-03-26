@@ -265,7 +265,10 @@ function KleejaOnline ()
 						'WHERE'		=> "time < $timeout2"
 							);
 		($hook = kleeja_run_hook('qr_del_ifgo_onlline_func')) ? eval($hook) : null; //run hook									
-		if (!$SQL->build($query_del))	die($lang['CANT_DELETE_SQL']);
+		if (!$SQL->build($query_del))
+		{
+			die($lang['CANT_DELETE_SQL']);
+		}
 		
 		($hook = kleeja_run_hook('KleejaOnline_func')) ? eval($hook) : null; //run hook	
 

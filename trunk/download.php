@@ -21,6 +21,7 @@ include ('includes/common.php');
 //
 if (isset($_GET['id']) || isset($_GET['filename']))
 {
+			($hook = kleeja_run_hook('begin_download_id_filename')) ? eval($hook) : null; //run hook
 			
 			$query = array(
 						'SELECT'	=> 'f.id, f.real_filename, f.name, f.folder, f.size, f.time, f.uploads, f.type',

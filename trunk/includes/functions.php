@@ -1450,12 +1450,12 @@ function delete_ch_tpl($template_name, $delete_txt = array())
 	include_once "s_strings.php";
 	$finder	= new sa_srch;
 	$finder->find_word		= $delete_txt;
-	$finder->another_word	= '<!-- deleted -->';
+	$finder->another_word	= '<!-- deleted ' . md5(implode(null, $delete_txt)) . ' -->';
 	$finder->text = trim($d_contents);
 	$finder->do_search(2);
 	$cached_instructions = array();
 	
-	if($d_contents  != '' && $finder->text != $d_contents && is_writable($style_path))
+	if($d_contents  != '' && md5($finder->text) != md5($d_contents) && is_writable($style_path))
 	{
 		//update
 		$filename = @fopen($style_path . $template_name . '.html', 'w');

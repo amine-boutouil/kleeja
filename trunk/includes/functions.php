@@ -629,11 +629,15 @@ function creat_plugin_xml($contents)
 						//hooks
 						if(isset($plg_hooks['hook']))
 						{
+						
+							$plugin_name = preg_replace("/[^a-z0-9-_]/", "-", strtolower($plg_info['plugin_name']['value']));
+							$plugin_author = strip_tags($plg_info['plugin_author']['value'], '<a><span>');
+							$plugin_author = $SQL->real_escape($plugin_author);
 							//insert in plugin table 
 							$insert_query = array(
 											'INSERT'	=> 'plg_name, plg_ver, plg_author, plg_dsc, plg_uninstall',
 											'INTO'		=> "{$dbprefix}plugins",
-											'VALUES'	=> "'".$SQL->escape($plg_info['plugin_name']['value'])."','".$SQL->escape($plg_info['plugin_version']['value'])."','".$SQL->escape($plg_info['plugin_author']['value'])."','".$SQL->escape($plg_info['plugin_description']['value'])."','".$SQL->real_escape($plg_uninstall['value'])."'"
+											'VALUES'	=> "'" . $SQL->escape($plugin_name) . "','" . $SQL->escape($plg_info['plugin_version']['value'])."','" . $plugin_author . "','" . $SQL->escape($plg_info['plugin_description']['value']) . "','" . $SQL->real_escape($plg_uninstall['value']) . "'"
 											);
 							($hook = kleeja_run_hook('qr_insert_plugininfo_crtplgxml_func')) ? eval($hook) : null; //run hook
 							$SQL->build($insert_query);

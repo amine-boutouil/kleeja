@@ -87,12 +87,28 @@ class sa_srch
 				return false;
 			}
 			
-			$this->text	=	preg_replace('/' . preg_quote($this->find_word[0] . '(.*?)' . $this->find_word[1], '/') . '/', $this->another_word, $this->text);
+			$md5_f = md5($this->text);
+			$this->text	= preg_replace('#' . preg_quote($this->find_word[0] , '#') . '(.*?)' . preg_quote($this->find_word[1], '#') . '#', $this->another_word, $this->text);
+			
+			//lets do it with another idea
+			if($md5_f == md5($this->text))
+			{
+				$ex1 = explode($this->find_word[0], $this->text);
+				$ex2 = explode($this->find_word[1], $this->text);
+				$this->text = $ex1[0] . $this->another_word . $ex2[1];
+			}
 		}
 		else
 		{
-
-			$this->text	=	preg_replace('/' . preg_quote($this->find_word, '/') . '/', $this->another_word, $this->text);
+			$md5_f = md5($this->text);
+			$this->text	= preg_replace('#' . preg_quote($this->find_word, '#') . '#', $this->another_word, $this->text);
+			
+			//lets do it with another idea
+			if($md5_f == md5($this->text))
+			{
+				$ex = explode($this->find_word, $this->text, 2);
+				$this->text = $ex[0] . $this->another_word . $ex[1];
+			}
 		}
 	
 	}
@@ -107,8 +123,15 @@ class sa_srch
 			return false;
 		}
 		
-		$this->text	=	preg_replace('/' . preg_quote($this->find_word, '/')  . '/', $this->find_word . (($same_line) ? "\r\n" : "") . $this->another_word, $this->text);
+		$md5_f = md5($this->text);
+		$this->text	=	preg_replace('#' . preg_quote($this->find_word, '#')  . '#', $this->find_word . (!$same_line ? "\n" : "") . $this->another_word, $this->text);
 
+		//lets do it with another idea
+		if($md5_f == md5($this->text))
+		{
+			$ex = explode($this->find_word, $this->text, 2);
+			$this->text = $ex[0] . $this->find_word . (!$same_line ? "\n" : "") . $this->another_word . $ex[1];
+		}
 	}
 	
 	/*
@@ -121,10 +144,15 @@ class sa_srch
 			return false;
 		}
 		
-		$this->text	=	preg_replace('/' . preg_quote($this->find_word, '/') . '/',   $this->another_word . (($same_line) ? "\r\n" : "")  .$this->find_word, $this->text);
-
+		$md5_f = md5($this->text);
+		$this->text	=	preg_replace('#' . preg_quote($this->find_word, '#') . '#',   $this->another_word . (!$same_line ? "\n" : "")  . $this->find_word, $this->text);
+		
+		//lets do it with another idea
+		if($md5_f == md5($this->text))
+		{
+			$ex = explode($this->find_word, $this->text, 2);
+			$this->text = $ex[0] . $this->another_word . (!$same_line ? "\n" : "")  . $this->find_word . $ex[1];
+		}
 	}
 }
-
-
 ?>

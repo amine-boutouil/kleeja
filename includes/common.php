@@ -17,11 +17,11 @@
 	}
 		  
 	//we are in the common file 
-	define ('IN_COMMON' , true);
+	define ('IN_COMMON', true);
 		 
 		 
 	// Report all errors, except notices
-	error_reporting(E_ALL ^ E_NOTICE);
+	@error_reporting(E_ALL ^ E_NOTICE);
 
 
 	// start session
@@ -115,8 +115,8 @@
      
 	// start classes ..
 	$SQL	= new SSQL($dbserver, $dbuser, $dbpass, $dbname);
-	$tpl	= new kleeja_style;		# Depend on easytemplate::daif
-	$kljup	= new KljUploader;		#  Depend on Nadorino class
+	$tpl	= new kleeja_style;
+	$kljup	= new KljUploader;
 	$usrcp	= new usrcp;			
 	
 	//no need after now 
@@ -126,28 +126,44 @@
 	//then get caches
 	require ($path . 'cache.php');
 	
+
+	
+	// for gzip : php.net
+	//fix bug # 181
+	$do_gzip_compress = false; 
+	if ($config['gzip'] == '1') 
+	{
+	    function compress_output($output)
+		{
+			return gzencode($output, 5, FORCE_GZIP);
+		}
+		
+
+	    // Check if the browser supports gzip encoding, HTTP_ACCEPT_ENCODING
+	    if (strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') !== false && !headers_sent() && @extension_loaded('zlib'))
+		{
+			$do_gzip_compress = true; 
+	        // Start output buffering, and register compress_output()
+			if(function_exists('gzencode') )
+	        {
+				@ob_start("compress_output");
+	        }
+			else
+			{
+				@ob_start();
+			}
+			
+			// Tell the browser the content is compressed with gzip
+	        header("Content-Encoding: gzip");
+	    }
+	}
+
 	// ...header ..  i like it ;)
 	header('Content-type: text/html; charset=UTF-8');
 	header('Cache-Control: private, no-cache="set-cookie"');
 	header('Expires: 0');
 	header('Pragma: no-cache');	
 	
-	// for gzip : php.net
-	$do_gzip_compress = false; 
-	if ($config['gzip'] == '1') 
-	{ 
-	    function compress_output($output) {return gzencode($output,5, FORCE_GZIP);}
-	    // Check if the browser supports gzip encoding, HTTP_ACCEPT_ENCODING
-	    if (strstr($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') || strstr($_SERVER['HTTP_ACCEPT_ENCODING'], 'x-gzip'))
-		{
-			$do_gzip_compress = true; 
-	        // Start output buffering, and register compress_output()
-	        ob_start("compress_output");
-	        // Tell the browser the content is compressed with gzip
-	        header("Content-Encoding: gzip");
-	    }
-	}
-
 	//check lang
 	if(!$config['language'] || empty($config['language']))
 	{
@@ -175,7 +191,6 @@
 	
 	//ban system 
 	get_ban();
-	
 	
 	//site close ..
 	$login_page = '';

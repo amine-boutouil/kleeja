@@ -45,22 +45,13 @@
 					
 					($hook = kleeja_run_hook('after_submit_adm_config')) ? eval($hook) : null; //run hook
 					
-					//check if one of the config is not present in config table and insert it ..
-					//bla bla 
-					//
-					
 					$update_query = array(
 											'UPDATE'	=> "{$dbprefix}config",
 											'SET'		=> "value='" . $SQL->escape($new[$row['name']]) . "'",
 											'WHERE'		=> "name='" . $row['name'] . "'"
 										);
 
-					if ($SQL->build($update_query))
-					{
-						//delete cache ..
-						delete_cache('data_config');
-					}
-					else
+					if (!$SQL->build($update_query))
 					{
 						die($lang['CANT_UPDATE_SQL']);
 					}
@@ -144,6 +135,9 @@
 				$text	= $lang['CONFIGS_UPDATED'];
 				$stylee	= "admin_info";
 			}
+			
+			//delete cache ..
+			delete_cache('data_config');
 
 		}#submit
 

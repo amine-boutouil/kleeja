@@ -4,9 +4,9 @@
 #
 # Filename : style.php 
 # purpose :  Template engine ..:
-# copyright 2007-2008 Kleeja.com ..
-#license http://opensource.org/licenses/gpl-license.php GNU Public License
-#based on : easytemplate version  1.3 .. <http://daif.net/easy>
+# copyright 2007-2009 Kleeja.com ..
+# license http://opensource.org/licenses/gpl-license.php GNU Public License
+# based on : easy template  <http://daif.net/easy>
 ##################################################
 
 //no for directly open
@@ -14,136 +14,17 @@ if (!defined('IN_COMMON'))
 {
 	exit('no directly opening : ' . __file__);
 }
-
-class kleeja_style
-{
-		var $vars; //Reference to $GLOBALS 
-		var $HTML; //html page content
-		var $color = array();
+    class kleeja_style
+	{
+        var $vars; //Reference to $GLOBALS
+        var $HTML; //html page content
+        var $loop	= array();
+        var $reg	= array('var' => '/([{]{1,2})+([A-Z0-9_\.]+)[}]{1,2}/i');
 		
-		//patterns Array
-		var $pats = array(
-		//Foreach Variables
-		"/{{([A-Z0-9_\]\[\"]{1,})}}/i",
-		//Globals Variables
-		"/{([A-Z0-9_\]\[\"]{1,})}/i",
-		//Foreach Statement
-		"/<LOOP\s+NAME\s*=\s*(\"|)+([a-z0-9_]{1,})+(\"|)\s*>/i",
-		//Foreach Statement With Limited Value
-		"/<LOOP\s+NAME\s*=\s*(\"|)+([a-z0-9_]{1,})+(\"|)\s*LIMIT\s*=\s*(\"\\d+\"|\\d+)\s*>/i",
-		"/<\/LOOP>/i",
-		"/<ELSE>/i",
-		"/<\/IF>/i",
-		//Switch Statement
-		"/<SWITCH\s+NAME\s*=\s*\"([A-Z0-9_]{1,})\"\s*CASE\s*=\s*\"(.+)\"\s*VALUE\s*=\s*\"(.+)\"\s*>/i",
-		//Include Statement
-		"/<INCLUDE\s+NAME\s*=\s*\"(.+)\"\s*>/iU",
-		//----------------->++
-		'#<ODD="([a-zA-Z0-9\_\-\+\./]+)"\>(.*?)<\/ODD\>#is',
-		'#<EVEN="([a-zA-Z0-9\_\-\+\./]+)"\>(.*?)<\/EVEN\>#is',
-		'#<RAND=\"(.*?)\"[\s]{0,},[\s]{0,}\"(.*?)\"[\s]{0,}>#is',
-		//<-----------------
-		);
-		//Replacements Array
-		var $reps = array(
-		"<?php print \$var[\"\\1\"]?>",
-		"<?php print \$this->vars[\"\\1\"]?>",
-		"<?php foreach(\$this->vars[\"\\2\"] as \$key=>\$var){ ?>",
-		"<?php \$this->_limit(\"\\2\",\\4);foreach(\$this->vars[\"\\2\"] as \$key=>\$var){ ?>",
-		"<?php } ?>",
-		"<?php } else { ?>",
-		"<?php } ?>",
-		"<?php print \$this->_switch(\$this->vars[\"\\1\"],\"\\2\",\"\\3\")?>",
-		"<?php print kleeja_style::_include(\"\\1\"); ?>",
-		//<---------------- ++
-		"<?php if(intval(\$var['\\1'])%2){?> \\2 <?php } ?>",
-		"<?php if(intval(\$var['\\1'])% 2 == 0){?> \\2 <?php } ?>",
-		"<?php \$KLEEJA_tpl_rand_is=(\$KLEEJA_tpl_rand_is==0)?1:0; print((\$KLEEJA_tpl_rand_is==1) ?'\\1':'\\2'); ?>",
-		//<-----------
-		);
-
-	
-	//Function to make limited Array, I wrote this function On Ramadan 3eed :)
-		function _limit($arr_name,$limit=10)
-		{
-			$arr  = $this->vars[$arr_name];
-			$page = $this->vars[_GET][$arr_name.'_PS'];
-			$pagestart = ($page*$limit > count($arr))?0:$page*$limit;
-			$pageend   = ($page*$limit+$limit > count($arr))?count($arr):$page*$limit+$limit;//need some Optimization
-			for($i=$pagestart;$i<$pageend;$i++) $page_array[] = $arr[$i];
-			$this->vars[$arr_name] = $page_array;
-			$query = preg_replace("/(\&|)$arr_name+_PS=\\d+/i","",$_SERVER[QUERY_STRING]);
-			$prefix = ($query)?"?$query&":"?";
-			for($i=0;$i<count($arr)/$limit;$i++)
-			$this->vars[$arr_name.'_paging'] .= ($page==$i)?"<b>$i</b> ":"<a href=".$prefix.$arr_name."_PS=$i class=paging>$i</a> ";
-		}
-	//Function to if.
-		function _if_callback($matches)
-		{
-			$condition = str_replace('.','"]["',$matches[2]).'"]';
-			if($matches[4])
-			{
-				$condition = "$matches[2]\"]==\"$matches[4]\"";
-			}
-			if(strtoupper($matches[1])=="LOOP")
-			{
-				return "<?php if(\$var[\"$condition){ ?>";
-			}
-			else
-			{
-				return "<?php if(\$this->vars[\"$condition){ ?>";
-			}
-		}
 		
-	//Function to Switch Color.
-		function _sw($index)
-		{
-			return $this->color["$index"] = ($this->color["$index"]) ? false:true;
-		}
-	//Function to Replace Array Variables
-		function _replace_callback($matches)
-		{
-			return str_replace('.','"]["',$matches[0]);
-		}
-	//Function to Replace Array Variables
-		function _color_callback($matches)
-		{
-			$rand = rand();
-			return "=<?php print (\$this->_sw($rand)) ? \"$matches[1]\":\"$matches[2]\"?>";
-		}
-	//switch Tag
-		function _switch($var,$case,$value)
-		{
-			$case  = explode(',',$case);
-			$value = explode(',',$value);
-			foreach($case as $k=>$val)
-			if($var==$val)
-			{
-				return $value[$k];
-			}
-		}
-	//include Tag
-		function _include($fn)
-		{
-			return($this->display($fn));
-		}		
-	//Function to Assign Veriables
-		function assign($var,&$to)
-		{
-			$GLOBALS[$var] = $to;
-		}
-		
-		function _parse($code)
-		{
-			$code = preg_replace_callback("/<IF\s+(NAME|LOOP)\s*=\s*\"([A-Z0-9_\.\-]{1,})+(=(.*)|)\"\s*>/i",array('kleeja_style','_if_callback'),$code);
-			$code = preg_replace_callback("/({[A-Z0-9_\.\-]{1,}})/i",array('kleeja_style','_replace_callback'),$code);
-			$code = preg_replace_callback("/=\"([#0-9A-Z_\.\-\/]{1,})\|([#0-9A-Z_\.\-\/]{1,})\"/iU",array('kleeja_style','_color_callback'),$code);
-			$code = preg_replace($this->pats, $this->reps ,$code);
-			return $code;
-		}
 
-		//get tpl
-		function _load_template($template_name)
+        //Function to load a template file.
+        function _load_template($template_name)
 		{
 			global $config, $root_path, $STYLE_PATH, $STYLE_PATH_ADMIN;
 			
@@ -177,16 +58,222 @@ class kleeja_style
 			}
 					
 			$this->HTML = file_get_contents($template_path);
-			$this->HTML = $this->_parse($this->HTML);
+			$this->_parse($this->HTML);
 			$filename = fopen($root_path . 'cache/tpl_' . $this->re_name_tpl($template_name) . '.php', 'w');
 			flock($filename, LOCK_EX); // exlusive look
 			fwrite($filename, $this->HTML);
 			fclose($filename);
+        }
+		
+		
+        //Function to parse the Template Tags
+        function _parse()
+		{
+            $this->HTML = preg_replace_callback('/\(([{A-Z0-9_\.}\s!=<>]+)\?(.*):(.*)\)/iU',array('kleeja_style','_iif_callback'), $this->HTML);
+            $this->HTML = preg_replace_callback('/<(IF|ELSEIF) (.+)>/iU',array('kleeja_style','_if_callback'), $this->HTML);
+            $this->HTML = preg_replace_callback(kleeja_style::reg('var'),array('kleeja_style','_vars_callback'), $this->HTML);
+
+            $rep = array(
+						"/<LOOP\s+NAME\s*=\s*(\"|)+([a-z0-9_]{1,})+(\"|)\s*>/i" => "<?php foreach(\$this->vars[\"\\2\"] as \$key=>\$var){ ?>",
+						"/<LOOP\s+NAME\s*=\s*(\"|)+([a-z0-9_]{1,})+(\"|)\s*LIMIT\s*=\s*(\"\\d+\"|\\d+)\s*>/i" => "<?php \$this->_limit(\"\\2\",\\4);foreach(\$this->vars[\"\\2\"] as \$key=>\$var){ ?>",
+						"/<\/(LOOP|IF|END)>/i" => "<?php } ?>", 
+						'/<SWITCH\s+NAME\s*=\s*"([A-Z0-9_]{1,})"\s*CASE\s*=\s*"(.+)"\s*VALUE\s*=\s*"(.+)"\s*>/i' => '<?php echo  $this->_switch($this->vars["\\1"],"\\2","\\3")?>',
+						'/<INCLUDE\s+NAME\s*=\s*"(.+)"\s*>/iU' => '<?php echo  kleeja_style::_include("\\1"); ?>',
+						'/(<ELSE>|<ELSE \/>)/i' => '<?php }else{ ?>',
+						'#<ODD="([a-zA-Z0-9\_\-\+\./]+)"\>(.*?)<\/ODD\>#is' => "<?php if(intval(\$var['\\1'])%2){?> \\2 <?php } ?>",
+						'#<EVEN="([a-zA-Z0-9\_\-\+\./]+)"\>(.*?)<\/EVEN\>#is' => "<?php if(intval(\$var['\\1'])% 2 == 0){?> \\2 <?php } ?>",
+						'#<RAND=\"(.*?)\"[\s]{0,},[\s]{0,}\"(.*?)\"[\s]{0,}>#is' => "<?php \$KLEEJA_tpl_rand_is=(\$KLEEJA_tpl_rand_is==0)?1:0; print((\$KLEEJA_tpl_rand_is==1) ?'\\1':'\\2'); ?>",
+				);
+				
+            $this->HTML = preg_replace(array_keys($rep), array_values($rep), $this->HTML);
+        }
+		
+        //if tag
+        function _if_callback($matches)
+		{
+            $char  = array(' eq ',' lt ',' gt ',' lte ',' gte ', ' neq ', '==', '!=', '>=', '<=', '<', '>');
+            $reps  = array('==','<','>','<=','>=', '!=', '==', '!=', '>=', '<=', '<', '>');
+			
+            $atts = call_user_func(array('kleeja_style','_get_attributes'), $matches[0]);
+            $con = ($atts['NAME']) ? $atts['NAME'] : $atts['LOOP'];
+			
+            if(preg_match('/(.*)(' . implode('|', $char) . ')(.*)/i', $con, $arr))
+			{
+				if($arr[1]{0} != '$')
+				{
+					 $var1 = call_user_func(array('kleeja_style', '_var_callback'), ($atts['NAME'] ? '{' . $arr[1] . '}' : '{{' . $arr[1] . '}}'));
+				}
+				else
+				{
+					$var1 = $arr[1];
+				}
+
+                $opr = str_replace($char, $reps, $arr[2]);
+                $var2 = ($arr[3]{0}=='$')? $arr[3] : '"' . $arr[3] . '"';
+                $con = "$var1$opr$var2";
+            }
+			elseif($con{0} !== '$')
+			{
+                $con = ($atts['NAME']) ? '{' . $con . '}' : '{{' . $con . '}}';
+                $con = call_user_func(array('kleeja_style', '_var_callback'), $con);
+            }
+			
+            if(strtoupper($matches[1])=='IF')
+			{
+                return '<?php if(' . $con . '){ ?>';
+            }
+			else
+			{
+                return '<?php }elseif(' . $con . '){ ?>';
+            }
+        }
+		
+        //iif tag
+        function _iif_callback($matches)
+		{
+            $if = '<IF NAME="' . $matches[1] . '">';
+            $if .= $matches[2];
+            $if .= '<ELSE>';
+            $if .= $matches[3];
+            $if .= '</IF>';
+            return ($if);
+        }
+		
+		
+        //make variable printable
+        function _vars_callback($matches)
+		{
+            $var = call_user_func(array('kleeja_style', '_var_callback'), $matches);
+            return('<?php echo  ' . $var . '?>');
+        }
+		
+        //variable replace
+        function _var_callback($matches)
+		{
+            if(!is_array($matches))
+			{
+                preg_match(kleeja_style::reg('var'), $matches, $matches);
+            }
+			
+            $var = str_replace('.', '\'][\'', $matches[2]);
+			
+            if($matches[1]=='{{')
+			{
+                $var = '$var[\'' . $var . '\']';
+            }
+			else
+			{
+                $var = '$this->vars[\'' . $var . '\']';
+            }
+			
+            return($var);
+        }
+		
+        //att variable replace
+        function _var_callback_att($matches)
+		{
+            if($matches[1] == '{')
+			{
+                return($this->_var_callback($matches));
+            }
+			else
+			{
+                return('{' . $this->_var_callback($matches) . '}');
+            }
+        }
+		
+		
+        //get reg var
+        function reg($var)
+		{
+            $vars = get_class_vars(__CLASS__);
+            return($vars['reg'][$var]);
+        }
+		
+
+        //get tag  attributes
+        function _get_attributes($tag)
+		{
+            preg_match_all('/([a-z]+)="(.+)"/iU',$tag,$attribute);
+			
+            for($i=0;$i<count($attribute[1]);$i++)
+			{
+                $att = strtoupper($attribute[1][$i]);
+				
+                if(preg_match('/NAME|LOOP/',$att))
+				{
+                    $attributes[$att] = preg_replace_callback(kleeja_style::reg('var'), array('kleeja_style', '_var_callback'), $attribute[2][$i]);
+                }
+				else
+				{
+                    $attributes[$att] = preg_replace_callback(kleeja_style::reg('var'), array('kleeja_style', '_var_callback_att'), $attribute[2][$i]);
+                }
+            }
+            return($attributes);
+        }
+
+		
+        //switch Tag
+        function _switch($var,$case,$value)
+		{
+            $case  = explode(',',$case);
+            $value = explode(',',$value);
+			
+            foreach($case as $k=>$val)
+			{
+				if($var==$val)
+				{
+					return $value[$k];
+				}
+			}
 		}
 		
-		//show it
-		function display($template_name)
-		{	
+		
+        //include Tag
+        function _include($fn)
+		{
+            list(,, $ex,) = array_values(pathinfo($fn));
+			
+            if(strtoupper($ex) =='PHP')
+			{
+                include($fn);
+            }
+			else
+			{
+                return($this->display($fn));
+            }
+        }
+		
+        //Assign Veriables
+        function assign($var, $to)
+		{
+            $GLOBALS[$var] = $to;
+        }
+		
+		
+        //Function to make limited Array
+        function _limit($arr_name, $limit=10)
+		{
+            $count	= count($this->vars[$arr_name]);
+            $offset	= $_REQUEST[$arr_name . '_PS'];
+            $offset	= ($offset*$limit<$count)? $offset*$limit : 0;
+            $output	= array_slice($this->vars[$arr_name], $offset, $limit);
+            $query	= preg_replace("/(\&|){$arr_name}+_PS=\\d*/i", '', $_SERVER['QUERY_STRING']);
+            $prefix	= ($query) ? "?{$query}&" : '?';
+			
+            for($i=0;$i<ceil($count/$limit);$i++)
+			{
+				$this->vars[$arr_name . '_paging'] .= ($offset == $i*$limit)?' <strong>' . ($i+1) . '</strong> ' : ' <a href="' . $prefix . $arr_name . '_PS=' . $i . '" class="paging">' . ($i+1) . '</a> ';
+            }
+			
+			$this->vars[$arr_name.'_pages'] = @ceil($count/$limit);
+            $this->vars[$arr_name] = $output;
+        }
+		
+
+        //load parser and return page content
+        function display($template_name)
+		{
 			global $config, $SQL, $root_path;
 			
 			$this->vars  = &$GLOBALS;
@@ -198,7 +285,7 @@ class kleeja_style
 			//}
 
 			ob_start();
-			include($root_path.'cache/tpl_' . $this->re_name_tpl($template_name) . '.php');
+			include($root_path . 'cache/tpl_' . $this->re_name_tpl($template_name) . '.php');
 			$page = ob_get_contents();
 			ob_end_clean();
 		
@@ -210,7 +297,6 @@ class kleeja_style
 		{
 			return preg_replace("/[^a-z0-9-_]/", "-", strtolower($name));
 		}
-
-}
-
+   
+    }
 ?>

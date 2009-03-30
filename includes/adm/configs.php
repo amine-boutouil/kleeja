@@ -29,23 +29,30 @@
 
 		while($row=$SQL->fetch_array($result))
 		{
-			//make new lovely array !!
-			$con[$row['name']]=$row['value'];
-			//-->
-			$new[$row['name']] = (isset($_POST[$row['name']])) ? $_POST[$row['name']] : $con[$row['name']];
-			//thmb_dims
-			if($row['name'] == 'thmb_dims')
-			{
-				$new['thmb_dims'] = intval($_POST['thmb_dim_w']) . '*' . intval($_POST['thmb_dim_h']);
-			}
-			
+				//make new lovely array !!
+				$con[$row['name']] = $row['value'];
+
 				//when submit !!
 				if (isset($_POST['submit']))
 				{
+					//-->
+					$new[$row['name']] = (isset($_POST[$row['name']])) ? $_POST[$row['name']] : $con[$row['name']];
+					//thmb_dims
+					if($row['name'] == 'thmb_dims')
+					{
+						$new['thmb_dims'] = intval($_POST['thmb_dim_w']) . '*' . intval($_POST['thmb_dim_h']);
+					}
+					
+					($hook = kleeja_run_hook('after_submit_adm_config')) ? eval($hook) : null; //run hook
+					
+					//check if one of the config is not present in config table and insert it ..
+					//bla bla 
+					//
+					
 					$update_query = array(
-												'UPDATE'	=> "{$dbprefix}config",
-												'SET'		=> "value='" . $SQL->escape($new[$row['name']]) . "'",
-												'WHERE'		=> "name='" . $row['name'] . "'"
+											'UPDATE'	=> "{$dbprefix}config",
+											'SET'		=> "value='" . $SQL->escape($new[$row['name']]) . "'",
+											'WHERE'		=> "name='" . $row['name'] . "'"
 										);
 
 					if ($SQL->build($update_query))
@@ -62,23 +69,7 @@
 		
 		$SQL->freeresult($result);
 
-		//for  choose
-		if ($con['siteclose'] == "1" ) {$yclose = true; }else {$nclose = true;}
-		if ($con['decode'] == "2" ) {$md5_decode = true; }elseif ($con['decode'] == "1" ) {$time_decode = true;} else {$none_decode = true; }
-		if ($con['id_form'] == "id") {$idf = true;}elseif($con['id_form'] == "filename"){$idff = true;}else{$idf = true;}
-		if ($con['statfooter'] == "1" ) {$ystatfooter = true; }else {$nstatfooter = true;}
-		if ($con['gzip'] == "1" ) {$ygzip = true; }else {$ngzip = true;}
-		if ($con['register'] == "1" ) {$yregister = true; }else {$nregister = true;}
-		if ($con['thumbs_imgs'] == "1" ) {$ythumbs_imgs = true; }else {$nthumbs_imgs = true;}
-		if ($con['write_imgs'] == "1" ) {$ywrite_imgs = true; }else {$nwrite_imgs = true;}
-		if ($con['del_url_file'] == "1" ) {$ydel_url_file = true; }else {$ndel_url_file = true;}
-		if ($con['www_url'] == "1" ) {$ywww_url = true; }else {$nwww_url = true;}
-		if ($con['allow_stat_pg'] == "1" ) {$yallow_stat_pg = true; }else {$nallow_stat_pg = true;}
-		if ($con['allow_online'] == "1" ) {$yallow_online = true; }else {$nallow_online = true;}
-		if ($con['mod_writer'] == "1" ) {$ymod_writer = true; }else {$nmod_writer = true;}
-		if ($con['enable_userfile'] == "1" ) {$yenable_userfile = true; }else {$nenable_userfile = true;}
-		if ($con['enable_userfile'] == "1") {$yenable_userfile = true; }else {$nenable_userfile = true;}
-		if ($con['safe_code'] == "1") {$ysafe_code = true; }else {$nsafe_code = true;}
+		//general
 		list($thmb_dim_w, $thmb_dim_h) = @explode('*', $con['thmb_dims']);
 		$STAMP_IMG_URL = './images/watermark.png';
 		$stylfiles = $lngfiles	= $authtypes = '';
@@ -90,7 +81,7 @@
 				while (($file = readdir($dh)) !== false)
 				{
 					if(strpos($file, '.') === false && $file != '..' && $file != '.')
-						$stylfiles .=  '<option '.(($con['style']==$file) ? 'selected="selected"' : ''). ' value="' . $file . '">' . $file . '</option>' . "\n";
+						$stylfiles .=  '<option ' . (($con['style']==$file) ? 'selected="selected"' : '') . ' value="' . $file . '">' . $file . '</option>' . "\n";
 				}
 				closedir($dh);
 		}
@@ -101,7 +92,9 @@
 				while (($file = readdir($dh)) !== false)
 				{
 					if(strpos($file, '.') === false && $file != '..' && $file != '.')
+					{
 						$lngfiles .=  '<option ' . (($con['language']==$file) ? 'selected="selected"' : '') . ' value="' . $file . '">' . $file . '</option>' . "\n";
+					}
 				}
 				closedir($dh);
 		}
@@ -127,7 +120,7 @@
 				closedir($dh);
 		}
 		
-		//after submit ////////////////
+		//after submit
 		if (isset($_POST['submit']))
 		{
 			//empty ..

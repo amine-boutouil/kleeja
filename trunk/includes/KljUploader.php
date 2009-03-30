@@ -289,6 +289,9 @@ function process ()
 						{
 							//real name of file
 							$this->filename2 = $_FILES['file']['name'][$i];
+							
+							($hook = kleeja_run_hook('another_decode_type_kljuploader')) ? eval($hook) : null; //run hook
+							
 						}
 						
 
@@ -316,10 +319,14 @@ function process ()
 						{
 							//guest
 							if($this->id_user == '-1')
+							{
 								$this->errs[]= '[ ' . $_FILES['file']['name'][$i] . ' ] ' . $lang['FORBID_EXT'] . '[' . $this->typet . '] <br /> <a href="' .  ($config['mod_writer'] ? "register.html" : "ucp.php?go=register") . 'ucp.php?go=register" title="' . htmlspecialchars($lang['REGISTER']) . '">' . $lang['REGISTER'] . '</a>';
+							}
 							//not guest
 							else
+							{
 								$this->errs[]= '[ ' . $_FILES['file']['name'][$i] . ' ] ' . $lang['FORBID_EXT'] . '[' . $this->typet . ']';
+							}
 						}
 						elseif($this->types[strtolower($this->typet)]['size'] > 0 && $this->sizet >= $this->types[strtolower($this->typet)]['size'])
 						{
@@ -330,8 +337,6 @@ function process ()
 							//
 							// no errors , so uploading
 							//
-						
-
 								if (!$use_ftp)
 								{
 											($hook = kleeja_run_hook('move_uploaded_file_kljuploader')) ? eval($hook) : null; //run hook	

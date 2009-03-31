@@ -180,11 +180,14 @@ switch ($_GET['go'])
 							
 							//update number of stats
 							$update_query	= array('UPDATE'	=> "{$dbprefix}stats",
-													'SET'			=> 'users=users+1',
+													'SET'		=> 'users=users+1',
 												);
 							
 							($hook = kleeja_run_hook('qr_update_no_users_register')) ? eval($hook) : null; //run hook
-							if (!$SQL->build($update_query))	die($lang['CANT_UPDATE_SQL']);
+							if (!$SQL->build($update_query))
+							{
+								die($lang['CANT_UPDATE_SQL']);
+							}
 						}
 						else
 						{
@@ -215,7 +218,7 @@ switch ($_GET['go'])
 					$ip	=	(getenv('HTTP_X_FORWARDED_FOR')) ?  getenv('HTTP_X_FORWARDED_FOR') : getenv('REMOTE_ADDR');
 					
 					$query_del	= array('DELETE'	=> "{$dbprefix}online",
-										'WHERE'	=> "ip='" . $SQL->escape($ip) . "'"
+										'WHERE'		=> "ip='" . $SQL->escape($ip) . "'"
 									);
 									
 					($hook = kleeja_run_hook('qr_delete_onlines_in_logout')) ? eval($hook) : null; //run hook

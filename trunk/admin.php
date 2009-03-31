@@ -5,7 +5,7 @@
 # Filename : admin.php
 # purpose :  control panel for administarator
 # copyright 2007-2009 Kleeja.com ..
-#license http://opensource.org/licenses/gpl-license.php GNU Public License
+# license http://opensource.org/licenses/gpl-license.php GNU Public License
 # last edit by : saanina
 ##################################################
 
@@ -15,7 +15,7 @@
 	define ('IN_ADMIN' , true);
 	
 	//include imprtant file ..
-	require ('includes/common.php');
+	include ('includes/common.php');
 	include_once ('includes/version.php');
 
 	//path of admin extensions
@@ -73,7 +73,7 @@
 	if (file_exists($path_adm . '/' . $go_to . '.php'))	
 	{
 		($hook = kleeja_run_hook("require_admin_page_begin_{$go_to}")) ? eval($hook) : null; //run hook 
-		require_once ($path_adm . '/' . $go_to . '.php');
+		include_once ($path_adm . '/' . $go_to . '.php');
 		($hook = kleeja_run_hook("require_admin_page_end_{$go_to}")) ? eval($hook) : null; //run hook 
 	}
 	else

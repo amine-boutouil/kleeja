@@ -5,7 +5,7 @@
 # Filename : go.php
 # purpose :  File for Navigataion .
 # copyright 2007-2009 Kleeja.com ..
-#license http://opensource.org/licenses/gpl-license.php GNU Public License
+# license http://opensource.org/licenses/gpl-license.php GNU Public License
 # last edit by : saanina
 ##################################################
 
@@ -118,9 +118,9 @@ switch ($_GET['go'])
 					}
 					
 					//update number of reports
-					$update_query = array('UPDATE'	=> "{$dbprefix}files",
-											'SET'	=> 'report=report+1',
-											'WHERE'	=> 'id=' . $rid,
+					$update_query	= array('UPDATE'	=> "{$dbprefix}files",
+											'SET'		=> 'report=report+1',
+											'WHERE'		=> 'id=' . $rid,
 											);
 								
 					($hook = kleeja_run_hook('qr_update_no_file_report')) ? eval($hook) : null; //run hook
@@ -354,7 +354,7 @@ switch ($_GET['go'])
 	break;
 	
 	default:
-	
+		
 		($hook = kleeja_run_hook('default_go_page')) ? eval($hook) : null; //run hook	
 	
 		kleeja_err($lang['ERROR_NAVIGATATION']);

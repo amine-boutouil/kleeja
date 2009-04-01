@@ -14,7 +14,7 @@ if (!defined('IN_COMMON'))
 function kleeja_auth_login ($name, $pass)
 {
 	//global $forum_srv, $forum_user, $forum_pass, $forum_db, $forum_charset;
-	global $forum_charset, $forum_path, $SQLBB, $phpEx, $phpbb_root_path;
+	global $forum_path, $SQLBB, $phpEx, $phpbb_root_path;
 				
 		//check for last slash / 
 	if($forum_path[strlen($forum_path)] == '/')
@@ -22,23 +22,17 @@ function kleeja_auth_login ($name, $pass)
 			$forum_path = substr($forum_path, 0, strlen($forum_path));
 	}
 					
-	if($forum_path[0] == '/')
-	{
-		$forum_path = '..' . $forum_path;
-	}
-	else
-	{
-		$forum_path = '../' . $forum_path;
-	}			
-	
+	$forum_path = ($forum_path[0] == '/' ? '..' : '../') . $forum_path;
+
 	//get some useful data from phbb config file
 	if(file_exists($forum_path . '/config.php'))
 	{
 		require ($forum_path . '/config.php');
-		$forum_srv = $dbhost;
-		$forum_db = $dbname;
-		$forum_user = $dbuser;
-		$forum_pass = $dbpasswd;
+		
+		$forum_srv	= $dbhost;
+		$forum_db	= $dbname;
+		$forum_user	= $dbuser;
+		$forum_pass	= $dbpasswd;
 		$forum_prefix = $table_prefix;
 	} 
 	else
@@ -54,14 +48,13 @@ function kleeja_auth_login ($name, $pass)
 								
 	//conecting ...		
 	$SQLBB	= new SSQL($forum_srv,$forum_user,$forum_pass,$forum_db);
-	$charset_db = empty($forum_charset) ? @mysql_client_encoding() : $forum_charset;
+	$charset_db = @mysql_client_encoding($SQLBB->connect_id);
 					
 	unset($forum_pass); // We do not need this any longe
 					
 	//phpbb3
 	if(file_exists($forum_path . '/includes/functions_transfer.php'))
 	{
-				echo "dd";	
 		//get utf tools
 		define('IN_PHPBB', true);
 		$phpbb_root_path = $forum_path . '/';
@@ -91,32 +84,19 @@ function kleeja_auth_login ($name, $pass)
 	}
 	else//phpbb2
 	{
+	
+		//must be utf8 !
+		if(strpos(strtolower($charset_db), 'utf') === false)
+		{
+			big_error('Your phpBB2 is not utf-8', 'Your phpBB2 database must be utf-8 to be integrated with Kleeja.');
+		}
+	
 		$row_leve = 'user_level';
 		$admin_level = 1;
 	
-		//change it with iconv, i dont care if you enabled it or not 
-		if(strpos(substr(0, 3, strtolower($charset_db)), 'utf') === false)
-		{
-			//no iconv !
-			if(!function_exists('iconv'))
-			{
-				big_error('No support for ICONV', 'You must enable the ICONV library to integrate kleeja with your forum. You can solve your problem by changing your forum db charset to UTF8.');
-			}
-			else
-			{
-				$name_b = iconv(strtoupper($charset_db), "UTF-8", $name);
-				$pass_b = iconv(strtoupper($charset_db), "UTF-8", $pass);
-			}
-		}
-		else
-		{
-			$name_b = $name;
-			$pass_b = $pass;
-		}
-						
 		$query = array('SELECT'	=> '*',
 						'FROM'		=> "`{$forum_prefix}users`",
-						'WHERE'		=>"username='" . $SQLBB->escape($name_b) . "' AND user_password='" . md5($pass_b) . "'"
+						'WHERE'		=>"username='" . $SQLBB->escape($name) . "' AND user_password='" . md5($pass) . "'"
 					);
 								
 	}

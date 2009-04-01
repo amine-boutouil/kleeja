@@ -131,8 +131,7 @@ case 'c':
 						$_POST['db_pass'],
 						$_POST['db_name'],
 						$_POST['db_prefix'],
-						$_POST['fpath'],
-						$_POST['fcharset']
+						$_POST['fpath']
 						);
 	
 	}
@@ -188,15 +187,6 @@ case 'c':
 					<td><input name="fpath" type="text" value="./forum" style="width: 256px;direction:ltr" />
 					</td>
 				</tr>
-				<tr>
-					<td>' . $lang['IN_CHARSET'] . '</td>
-					<td>
-					<select name="fcharset"  style="width: 256px;direction:ltr" >
-					' . get_mysql_charsets ((isset($_POST['fcharset']) ? $_POST['fcharset'] : false)) . '
-					</select>
-
-					</td>
-				</tr> 
 			</table>
 			<br />
 			</fieldset>
@@ -393,7 +383,7 @@ case 'data' :
 			</form></fieldset>';
 			
 			//clean cache
-			empty_cache_of_kleeja();
+			delete_cache(null, true, true);
 		}
 		else
 		{
@@ -438,6 +428,10 @@ case 'data' :
 		<tr>
 			<td>' . $lang['PASSWORD'] . '</td>
 			<td><input name="password" id="password" type="text" style="width: 173px"  onkeyup="return passwordChanged();"/> <span id="strength"><img src="img/p1.gif" alt="! .." /></span></td>
+		</tr>
+		<tr>
+			<td>' . $lang['PASSWORD2'] . '</td>
+			<td><input name="password2" id="password2" type="text" style="width: 253px" /></td>
 		</tr>
 		<tr>
 			<td><strong>' . $lang['EMAIL'] . '</strong></td>

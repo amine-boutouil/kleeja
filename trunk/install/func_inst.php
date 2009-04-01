@@ -3,34 +3,44 @@
 /// supporting install process
 //
 
+
+if (phpversion() < '4.3')
+{
+	exit('Your php version is too old !');
+}
+
 //for lang 
 if(isset($_GET['change_lang']))
 {
-			if (!empty($_POST['lang']))
-			{
-				//go to .. 2step
-			//	echo '<meta http-equiv="refresh" content="0;url=' . $_SERVER['PHP_SELF'].'?step=">';
-				@header("Location:".$_SERVER['PHP_SELF'] . "?step=" . $_POST['step_is'] . "&lang=".$_POST['lang'] ); /* Redirect browser */
-			}
-			
+	if (!empty($_POST['lang']))
+	{
+		//Redirect browser
+		@header("Location:".$_SERVER['PHP_SELF'] . "?step=" . $_POST['step_is'] . "&lang=" . $_POST['lang']); 
+	}
 }
 
 function getlang ($link=false)
 {
 	if (isset($_GET['lang']))
 	{ 
-		if(empty($_GET['lang'])) 
+		if(empty($_GET['lang']))
+		{
 			$_GET['lang'] = 'en';
-					
+		}			
 		if(file_exists('../lang/' . htmlspecialchars($_GET['lang']) . '/install.php'))
+		{
 			$ln	=  htmlspecialchars($_GET['lang']);
+		}
 		else
+		{
 			$ln = 'en';
-
+		}
 	}
 	else
+	{
 		$ln	= 'en';
-
+	}
+	
 	return ($link != false) ? 'lang=' . $ln : $ln;
 }
 
@@ -141,7 +151,7 @@ function w_email(l)
 		var m = document.getElementById(l);
 		if (m.value.indexOf("@") == -1 ||m.value.indexOf(".") == -1 || m.value.length < 7 ) 
 		{
-			alert("'.$lang['WRONG_EMAIL'].'");
+			alert("' . $lang['WRONG_EMAIL'] . '");
 			m.focus();
 		}
 }
@@ -192,6 +202,7 @@ function formCheck(formobj, fieldRequired)
 	lang["sitemail"] = "' . $lang['SITEMAIL'] . '";
 	lang["username"] = "' . $lang['USERNAME'] . '";
 	lang["password"] = "' . $lang['PASSWORD'] . '";
+	lang["password2"] = "' . $lang['PASSWORD2'] . '";
 	lang["email"] = "' . $lang['EMAIL'] . '";
 	
 	for (var i = 0; i < fieldRequired.length; i++)
@@ -254,12 +265,15 @@ if ((isset($_GET['step']) && $_GET['step'] != 'language') && (strpos('index.php'
 
 	if ($dh = @opendir($path))
 	{
-				while (($file = readdir($dh)) !== false)
-				{
-					if(strpos($file, '.') === false && $file != '..' && $file != '.')
-						$header_inst .= '<option value="' . $file . '" ' . ($file==$_GET['lang'] ? 'selected="selected"' : '') . '>' . $file . '</option>';
-				}
-				closedir($dh);
+		while (($file = readdir($dh)) !== false)
+		{
+			if(strpos($file, '.') === false && $file != '..' && $file != '.')
+			{
+				$header_inst .= '<option value="' . $file . '" ' . ($file == $_GET['lang'] ? 'selected="selected"' : '') . '>' . $file . '</option>';
+			}
+		}
+		
+		closedir($dh);
 	}
 
 
@@ -284,7 +298,7 @@ $footer_inst = '<br />
 
 
 //export config 
-function do_config_export($srv, $usr, $pass, $nm, $prf, $fpath, $fcharset)
+function do_config_export($srv, $usr, $pass, $nm, $prf, $fpath)
 {
 		global $_path;
 		
@@ -294,11 +308,9 @@ function do_config_export($srv, $usr, $pass, $nm, $prf, $fpath, $fcharset)
 		$data	.= '$dbpass			= \''. str_replace("'","\'", $pass)."';// database password \n";
 		$data	.= '$dbname			= \''. str_replace("'","\'", $nm)."';// database name \n";
 		$data	.= '$dbprefix		= \''. str_replace("'","\'", $prf)."';// if you use perfix for tables , fill it \n";
-		$data	.= '$perpage		= 10;'."// number of results in each page  \n";
 		$data	.= "\n\n\n";
 		$data	.= "//for integration with forums [ must change user systen from admin cp ] \n";
 		$data	.= '$forum_path		= \''. str_replace("'","\'", $fpath)."';// path of forums  \n";
-		$data	.= '$forum_charset	= \''. str_replace("'","\'", $fcharset)."';// charset of forums  \n";
 		$data	.= "\n\n\n";
 		$data	.= "//for use ftp account to uplaod [ Under Develpment ] \n";
 		$data	.= '$use_ftp		= 0;'."// 1 : yes  - 0 : no   \n";
@@ -337,79 +349,12 @@ function do_config_export($srv, $usr, $pass, $nm, $prf, $fpath, $fcharset)
 }	
 
 
-function empty_cache_of_kleeja()
+
+function get_microtime()
 {
-		//clear cache
-		$path = "../cache";
-		$dh = opendir($path);
-		$i=1;
-		while (($file = readdir($dh)) !== false)
-		{
-		    if($file != "." && $file != ".." && $file != ".htaccess" && $file != "index.html")
-			{
-				$del =  @unlink ($path . "/" . $file);
-				$i++;
-		    }
-		}
-		closedir($dh);
+	list($usec, $sec) = explode(' ', microtime());
+	return ((float) $usec + (float) $sec);
 }
 
-
-function get_mysql_charsets($select = false)
-{
-
-//review later .. to see if these are exists in 
-$sets = array(
-'utf8',
-'cp1256',
-'latin1',
-'cp1251',
-'armscii8',
-'big5',
-'binary',
-'cp1250',
-'cp1257',
-'cp850',
-'cp852',
-'cp866',
-'cp932',
-'dec8',
-'eucjpms',
-'euckr',
-'gb2312',
-'gbk',
-'geostd8',
-'greek',
-'hebrew',
-'hp8',
-'keybcs2',
-'koi8r',
-'koi8u',
-'latin2',
-'latin5',
-'latin7',
-'macce',
-'macroman',
-'sjis',
-'swe7',
-'tis620',
-'ucs2',
-'ujis',
-);
-
-	$return = '';
-	foreach($sets as $m)
-	{
-		$return .= '<option value="' . $m . '"' . ($select == $m ? ' selected="selected"' : '') . '>' . $m . '</option>';
-	}
-	
-	return $return;
-}	
-function get_microtime(){	list($usec, $sec) = explode(' ', microtime());	return ((float)$usec + (float)$sec);	}
-
-if (phpversion() < '4.1.0')
-{
-	exit('Your php version is too old !');
-}
 
 ?>

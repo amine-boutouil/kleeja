@@ -42,6 +42,7 @@
 	$lang['SITEMAIL']							= 'ئیمه‌یڵی ماڵپه‌ڕ';
 	$lang['USERNAME']							= 'ناوی به‌کارهێنه‌ر';
 	$lang['PASSWORD']							= 'ووشه‌ی نهێنی';
+	$lang['PASSWORD2']							= 'Password Again';
 	$lang['EMAIL']								= 'ئیمه‌یڵ';
 	$lang['INDEX']								= 'سه‌ره‌تا';
 	$lang['ADMINCP']							= 'کۆنترۆڵ په‌نێڵ';
@@ -73,18 +74,17 @@
 	
 	
 	//UPDATOR
-	$lang['INST_CHOOSE_UPDATE_FILE']			=	'هه‌سته‌ به‌دیاریکردنی نوێکردنه‌وه‌ی گونجاو به‌خۆت و پاشان به‌رده‌وام به‌ له‌دامه‌زراندن ..';
-	$lang['INST_ERR_NO_SELECTED_UPFILE_GOOD']	=	'په‌ڕگه‌ی نوێکردنه‌وه‌ گونجاو نییه‌ یاخود بوونی نییه‌ ! ..';
+	$lang['INST_CHOOSE_UPDATE_FILE']			= 'هه‌سته‌ به‌دیاریکردنی نوێکردنه‌وه‌ی گونجاو به‌خۆت و پاشان به‌رده‌وام به‌ له‌دامه‌زراندن ..';
+	$lang['INST_ERR_NO_SELECTED_UPFILE_GOOD']	= 'په‌ڕگه‌ی نوێکردنه‌وه‌ گونجاو نییه‌ یاخود بوونی نییه‌ ! ..';
 	
-	$lang['INST_NOTES_UPDATE']					=	'تێبینیه‌کانی نوێکردنه‌وه‌';
-	$lang['INST_NOTE_RC2_TO_RC3']				=	'ده‌بێت هه‌ستیت به‌ گۆڕینی په‌ڕگه‌ کۆنه‌کانی سکریپته‌که‌ به‌نوێیه‌که‌ نه‌ک ته‌نها به‌کارهێنانی ئه‌م کرداره‌...';
-	$lang['INST_NOTE_RC4_TO_RC5']				=	'ده‌بێت هه‌ستیت به‌گۆڕینی په‌ڕگه‌ کۆنه‌کانی سکریپته‌که‌ به‌نوێیه‌که بۆ نوێکردنه‌وه‌ به‌شێوه‌یه‌کی دروست!.';
-	$lang['INST_NOTE_RC5_TO_RC6']				=	'ده‌بێت هه‌ستیت به‌گۆڕینی په‌ڕگه‌ کۆنه‌کانی سکریپته‌که‌ به‌نوێیه‌که بۆ نوێکردنه‌وه‌ به‌شێوه‌یه‌کی دروست!.';
+	$lang['INST_NOTES_UPDATE']					= 'تێبینیه‌کانی نوێکردنه‌وه‌';
+	$lang['INST_NOTE_RC2_TO_RC3']				= 'ده‌بێت هه‌ستیت به‌ گۆڕینی په‌ڕگه‌ کۆنه‌کانی سکریپته‌که‌ به‌نوێیه‌که‌ نه‌ک ته‌نها به‌کارهێنانی ئه‌م کرداره‌...';
+	$lang['INST_NOTE_RC4_TO_RC5']				= 'ده‌بێت هه‌ستیت به‌گۆڕینی په‌ڕگه‌ کۆنه‌کانی سکریپته‌که‌ به‌نوێیه‌که بۆ نوێکردنه‌وه‌ به‌شێوه‌یه‌کی دروست!.';
+	$lang['INST_NOTE_RC5_TO_RC6']				= 'ده‌بێت هه‌ستیت به‌گۆڕینی په‌ڕگه‌ کۆنه‌کانی سکریپته‌که‌ به‌نوێیه‌که بۆ نوێکردنه‌وه‌ به‌شێوه‌یه‌کی دروست!.';
 	
-	$lang['INST_UPDATE_IS_FINISH']				=	"نوێکردنه‌وه‌ کۆتای هات.. ده‌توانیت ئێستا بوخچه‌ی <br/><b>INSTALL</b><br/> بسڕیته‌وه‌ و به‌رده‌وام بیت له‌کاره‌کانت به‌کلیجا ..";
+	$lang['INST_UPDATE_IS_FINISH']				= "نوێکردنه‌وه‌ کۆتای هات.. ده‌توانیت ئێستا بوخچه‌ی <br/><b>INSTALL</b><br/> بسڕیته‌وه‌ و به‌رده‌وام بیت له‌کاره‌کانت به‌کلیجا ..";
 	$lang['IN_INFO']							= 'Fill in the fields below if you want to integrate kleeja with your script . Ignore this step if you do not wish to do it<br /><span style="color:red;">you should change user system from admin cp after installing kleeja</span>';
 	$lang['IN_PATH']							= 'Path of script';
-	$lang['IN_CHARSET']							= 'Charset of script';
 	
 
 ?>

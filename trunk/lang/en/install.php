@@ -42,6 +42,7 @@
 	$lang['SITEMAIL']								= 'Website Email';
 	$lang['USERNAME']								= 'Username';
 	$lang['PASSWORD']								= 'Password';
+	$lang['PASSWORD2']								= 'Password Again';
 	$lang['EMAIL']									= 'Email';
 	$lang['INDEX']									= 'Home';
 	$lang['ADMINCP']								= 'Control Panel';
@@ -84,7 +85,6 @@
 	$lang['INST_UPDATE_IS_FINISH']					= 'Installation completed! you can now delete the <br /><b>INSTALL</b><br /> directory...';
 	$lang['IN_INFO']								= 'Fill in the fields below if you want to integrate kleeja with your script . Ignore this step if you do not wish to do it<br /><span style="color:red;">you should change user system from admin cp after installing kleeja</span>';
 	$lang['IN_PATH']								= 'Path of script';
-	$lang['IN_CHARSET']								= 'Charset of script';
 	
 	
 ?>

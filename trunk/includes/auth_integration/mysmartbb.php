@@ -13,31 +13,25 @@ if (!defined('IN_COMMON'))
 
 function kleeja_auth_login ($name, $pass)
 {
-	global $forum_path, $forum_charset;
-			//check for last slash / 
+	global $forum_path;
+	
+	//check for last slash / 
 	if($forum_path[strlen($forum_path)] == '/')
 	{
 		$forum_path = substr($forum_path, 0, strlen($forum_path));
 	}
 
+	$forum_path = ($forum_path[0] == '/' ? '..' : '../') .  $forum_path;
 	
-	if($forum_path[0] == '/')
-	{
-		$forum_path = '..' . $forum_path;
-	}
-	else
-	{
-		$forum_path = '../' . $forum_path;
-	}			
 	
 	//get database data from mysmartbb config file
 	if(file_exists($forum_path . '/engine/config.php')) 
 	{
 		require ($forum_path . '/engine/config.php');
-		$forum_srv = $config['db']['server'];
-		$forum_db = $config['db']['name'];
-		$forum_user = $config['db']['username'];
-		$forum_pass = $config['db']['password'];
+		$forum_srv	= $config['db']['server'];
+		$forum_db	= $config['db']['name'];
+		$forum_user	= $config['db']['username'];
+		$forum_pass	= $config['db']['password'];
 		$forum_prefix = $config['db']['prefix'];
 	} 
 	else
@@ -51,32 +45,18 @@ function kleeja_auth_login ($name, $pass)
 	}
 	
 	$SQLMS	= new SSQL($forum_srv, $forum_user, $forum_pass, $forum_db);
-	$charset_db = empty($forum_charset) ? @mysql_client_encoding() : $forum_charset;
+	$charset_db = @mysql_client_encoding($SQLMS->connect_id);
 	unset($forum_pass); // We do not need this any longe
 	
-		//change it with iconv, i dont care if you enabled it or not 
-		if(strpos(substr(0, 3, strtolower($charset_db)), 'utf') === false)
-		{
-			//no iconv !
-			if(!function_exists('iconv'))
-			{
-				big_error('No support for ICONV', 'You must enable the ICONV library to integrate kleeja with your forum. You can solve your problem by changing your forum db charset to UTF8.');
-			}
-			else
-			{
-				$name_b = iconv(strtoupper($charset_db), "UTF-8", $name);
-				$pass_b = iconv(strtoupper($charset_db), "UTF-8", $pass);
-			}
-		}
-		else
-		{
-			$name_b = $name;
-			$pass_b = $pass;
-		}
+	//must be utf8 !
+	if(strpos(strtolower($charset_db), 'utf') === false)
+	{
+		big_error('Your MySmartBB is not utf-8', 'Your MySmartBB database must be utf-8 to be integrated with Kleeja.');
+	}
 	
 	$query = array('SELECT'	=> '*',
 					'FROM'	=> "`{$forum_prefix}member`",
-					'WHERE'	=> "username='" . $SQLMS->escape($name_b) . "' AND password='" . md5($pass_b) . "'"
+					'WHERE'	=> "username='" . $SQLMS->escape($name) . "' AND password='" . md5($pass) . "'"
 					);
 
 	($hook = kleeja_run_hook('qr_select_usrdata_mysbb_usr_class')) ? eval($hook) : null; //run hook	

@@ -14,7 +14,7 @@ if (!defined('IN_COMMON'))
 function kleeja_auth_login ($name, $pass)
 {
 	// ok, i dont hate vb .. but i cant feel my self use it ... 
-	global $forum_path;
+	global $forum_path, $lang;
 	
 					
 	//check for last slash
@@ -38,7 +38,7 @@ function kleeja_auth_login ($name, $pass)
 	} 
 	else
 	{
-		big_error('Forum path is not correct', 'Please check your forum path correctly to integrate kleeja with your forum.');
+		big_error('Forum path is not correct', sprintf($lang['SCRIPT_AUTH_PATH_WRONG'], 'Vbulletin'));
 	}
 	
 	if(empty($forum_srv) || empty($forum_user) || empty($forum_db))
@@ -54,7 +54,7 @@ function kleeja_auth_login ($name, $pass)
 	//must be utf8 !
 	if(strpos(strtolower($charset_db), 'utf') === false)
 	{
-		big_error('Your Vbulletin is not utf-8', 'Your Vbulletin database must be utf-8 to be integrated with Kleeja.');
+		big_error(sprintf($lang['AUTH_INTEGRATION_N_UTF8_T'], 'Vbulletin'), sprintf($lang['AUTH_INTEGRATION_N_UTF8'], 'Vbulletin'));
 	}
 
 	$query_salt = array(

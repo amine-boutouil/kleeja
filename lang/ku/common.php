@@ -426,6 +426,9 @@ if (empty($lang) || !is_array($lang))
 	'USERS_NOT_NORMAL_SYS'	=> 'سیسته‌می ئه‌ندامێتی ئێستا سیسته‌مێکی ئاسای نییه‌ , یاخود بڵێین ئه‌ندامه‌کانی ئێستا ناتوانرێت ده‌ستکاری بکرێن له‌م جێگه‌یه‌وه‌ به‌ڵکو ده‌بێت له‌ڕێگه‌ی ئه‌و سکریپته‌وه‌ بکرێن که‌ به‌ستراون به‌ کلیجاوه‌.',
 	'ARE_YOU_SURE_DO_THIS'	=> 'دڵنیایت له‌ ئه‌نجامدانی ئه‌م کاره‌؟',
 	'DIMENSIONS_THMB'		=> 'Thumbs dimensions',
+	'AUTH_INTEGRATION_N_UTF8_T'	=> '%s is not utf8',
+	'AUTH_INTEGRATION_N_UTF8' => '%s database must be utf8 to be integrated with Kleeja !.',
+	'SCRIPT_AUTH_PATH_WRONG'	=> 'Path of %s is not valid, change it now.',
 	'S_TRANSLATED_BY' => 'Translated By <a href="http://www.kurdhome.net/">KurdHome</a>',
 ));
 

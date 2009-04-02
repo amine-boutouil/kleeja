@@ -950,7 +950,6 @@ function send_mail($to, $body, $subject, $fromaddress, $fromname,$bcc='')
 	$headers .= 'X-Mailer: : PHP v' . phpversion() . $eol;
 	$headers .= 'X-MimeOLE: kleeja' . $eol;
 		
-	$body = imap_8bit($body);
 		
 	($hook = kleeja_run_hook('kleeja_send_mail')) ? eval($hook) : null; //run hook
 		

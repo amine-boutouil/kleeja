@@ -420,6 +420,9 @@ $lang = array_merge($lang, array(
 	'ARE_YOU_SURE_DO_THIS'	=> 'هل انت متأكد من القيام بهذه العمليه؟',
 	'SITE_FOR_MEMBER_ONLY'	=> 'المركز للأعضاء فقط , قم بالتسجيل أو بالدخول لتستطيع التحميل.',
 	'DIMENSIONS_THMB'		=> 'ابعاد المصغرات',
+	'AUTH_INTEGRATION_N_UTF8_T'	=> '%s ليست utf8',
+	'AUTH_INTEGRATION_N_UTF8' => '%s يجب أن يكون ترميز قاعدة البيانات الخاصه به utf8 لكي يتم الربط مع كليجا !.',
+	'SCRIPT_AUTH_PATH_WRONG'	=> 'مسار السكربت %s الذي تم ربط عضويات كليجا معه خاطئ ,قم بظبطه',
 ));
 
 ?>

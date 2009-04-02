@@ -417,6 +417,9 @@ $lang = array_merge($lang, array(
 	'U_LAST_VER_KLJ' => 'You are using the lastest version of Kleeja...',
 	'SITE_FOR_MEMBER_ONLY'	=> 'This center is only for members, register or login to upload your files.',
 	'DIMENSIONS_THMB'		=> 'Thumbs dimensions',
+	'AUTH_INTEGRATION_N_UTF8_T'	=> '%s is not utf8',
+	'AUTH_INTEGRATION_N_UTF8' => '%s database must be utf8 to be integrated with Kleeja !.',
+	'SCRIPT_AUTH_PATH_WRONG'	=> 'Path of %s is not valid, change it now.',
 	'S_TRANSLATED_BY' => 'Translated By <a href="http://www.fenix4web.com/">Fenix4Web</a>',
 ));
 

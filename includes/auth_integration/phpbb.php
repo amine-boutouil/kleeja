@@ -14,7 +14,7 @@ if (!defined('IN_COMMON'))
 function kleeja_auth_login ($name, $pass)
 {
 	//global $forum_srv, $forum_user, $forum_pass, $forum_db, $forum_charset;
-	global $forum_path, $SQLBB, $phpEx, $phpbb_root_path;
+	global $forum_path, $SQLBB, $phpEx, $phpbb_root_path, $lang;
 				
 		//check for last slash / 
 	if($forum_path[strlen($forum_path)] == '/')
@@ -36,8 +36,8 @@ function kleeja_auth_login ($name, $pass)
 		$forum_prefix = $table_prefix;
 	} 
 	else
-	 {
-		big_error('Forum path is not correct', 'Please check your forum path correctly to integrate kleeja with your forum.');
+	{
+		big_error('Forum path is not correct', sprintf($lang['SCRIPT_AUTH_PATH_WRONG'], 'phpBB'));
 	}
 	
 	//if no variables of db
@@ -88,7 +88,7 @@ function kleeja_auth_login ($name, $pass)
 		//must be utf8 !
 		if(strpos(strtolower($charset_db), 'utf') === false)
 		{
-			big_error('Your phpBB2 is not utf-8', 'Your phpBB2 database must be utf-8 to be integrated with Kleeja.');
+			big_error(sprintf($lang['AUTH_INTEGRATION_N_UTF8_T'], 'phpBB2'), sprintf($lang['AUTH_INTEGRATION_N_UTF8'], 'phpBB2'));
 		}
 	
 		$row_leve = 'user_level';

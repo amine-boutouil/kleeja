@@ -292,6 +292,23 @@ if (!defined('IN_COMMON'))
 			return $page;
 		}
 		
+		function admindisplayoption($html)
+		{
+			global $config, $SQL, $root_path;
+			
+			$this->vars  = &$GLOBALS;
+			$this->HTML = $html;
+			$this->_parse($this->HTML);
+
+ 			ob_start();
+ 			$page = str_replace('<'.'?php','<'.'?',$this->HTML);
+			eval('?'.'>'.trim($page).'<'.'?');
+			$page = ob_get_contents();
+			ob_end_clean();
+		
+			return $page;
+		}
+		
 		//change name of template to be valid 1rc6+
 		function re_name_tpl($name)
 		{

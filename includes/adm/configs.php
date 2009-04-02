@@ -9,7 +9,6 @@
 	{
 		exit('no directly opening : ' . __file__);
 	}
-
 		//for style ..
 		$stylee 		= "admin_configs";
 		//words
@@ -18,11 +17,14 @@
 
 
 		$n_googleanalytics = '<a href="http://www.google.com/analytics">Google Analytics</a>';
-
+		//general
+		$STAMP_IMG_URL = './images/watermark.png';
+		$stylfiles = $lngfiles	= $authtypes = '';
 					
 		$query = array(
 						'SELECT'	=> '*',
-						'FROM'		=> "{$dbprefix}config"
+						'FROM'		=> "{$dbprefix}config",
+						'ORDER BY'	=> 'display_order'
 					);
 									
 		$result = $SQL->build($query);
@@ -31,7 +33,69 @@
 		{
 				//make new lovely array !!
 				$con[$row['name']] = $row['value'];
-
+				
+				if($row['name'] == 'thmb_dims') 
+				{
+					list($thmb_dim_w, $thmb_dim_h) = @explode('*', $con['thmb_dims']);
+				}
+				if($row['name'] == 'style') 
+				{
+						//get styles
+		if ($dh = @opendir($root_path . 'styles'))
+		{
+				while (($file = readdir($dh)) !== false)
+				{
+					if(strpos($file, '.') === false && $file != '..' && $file != '.')
+						$stylfiles .=  '<option ' . (($con['style']==$file) ? 'selected="selected"' : '') . ' value="' . $file . '">' . $file . '</option>' . "\n";
+				}
+				closedir($dh);
+		}
+		}
+		if($row['name'] == 'language') 
+				{
+		//get languages
+		if ($dh = @opendir($root_path . 'lang'))
+		{
+				while (($file = readdir($dh)) !== false)
+				{
+					if(strpos($file, '.') === false && $file != '..' && $file != '.')
+					{
+						$lngfiles .=  '<option ' . (($con['language']==$file) ? 'selected="selected"' : '') . ' value="' . $file . '">' . $file . '</option>' . "\n";
+					}
+				}
+				closedir($dh);
+		}
+		}
+		if($row['name'] == 'user_system') 
+		{
+		//get auth types
+		//fix previus choice in old kleeja
+		if(in_array($con['user_system'], array('2', '3', '4')))
+		{
+			$con['user_system'] = str_replace(array('2', '3', '4'), array('phpbb', 'vb', 'mysmartbb'), $con['user_system']);
+		}
+		
+		$authtypes .= '<option value="1"' . (($con['user_system']=='1') ? ' selected="selected"' : '') . '>' . $lang['NORMAL'] . '</option>' . "\n";
+		if ($dh = @opendir($root_path . 'includes/auth_integration'))
+		{
+				while (($file = readdir($dh)) !== false)
+				{
+					if(strpos($file, '.php') !== false)
+					{
+						$file = trim(str_replace('.php', '', $file));
+						$authtypes .=  '<option value="' . $file . '"' . (($con['user_system']==$file) ? ' selected="selected"' : '') . '>' . $file . '</option>' . "\n";
+					}
+				}
+				closedir($dh);
+		}
+		}
+				//options from database [UNDER TEST]
+				if(!empty($row['option'])) 
+				{
+				$options .= '<tr>
+                <td><label for="'.$row['name'].'">'.$lang[strtoupper($row['name'])].'</label></td>
+				<td><label>'.$tpl->admindisplayoption($row['option']).'</label></td></tr>';
+				}
 				//when submit !!
 				if (isset($_POST['submit']))
 				{
@@ -59,57 +123,6 @@
 		}
 		
 		$SQL->freeresult($result);
-
-		//general
-		list($thmb_dim_w, $thmb_dim_h) = @explode('*', $con['thmb_dims']);
-		$STAMP_IMG_URL = './images/watermark.png';
-		$stylfiles = $lngfiles	= $authtypes = '';
-		
-		
-		//get styles
-		if ($dh = @opendir($root_path . 'styles'))
-		{
-				while (($file = readdir($dh)) !== false)
-				{
-					if(strpos($file, '.') === false && $file != '..' && $file != '.')
-						$stylfiles .=  '<option ' . (($con['style']==$file) ? 'selected="selected"' : '') . ' value="' . $file . '">' . $file . '</option>' . "\n";
-				}
-				closedir($dh);
-		}
-		
-		//get languages
-		if ($dh = @opendir($root_path . 'lang'))
-		{
-				while (($file = readdir($dh)) !== false)
-				{
-					if(strpos($file, '.') === false && $file != '..' && $file != '.')
-					{
-						$lngfiles .=  '<option ' . (($con['language']==$file) ? 'selected="selected"' : '') . ' value="' . $file . '">' . $file . '</option>' . "\n";
-					}
-				}
-				closedir($dh);
-		}
-		
-		//get auth types
-		//fix previus choice in old kleeja
-		if(in_array($con['user_system'], array('2', '3', '4')))
-		{
-			$con['user_system'] = str_replace(array('2', '3', '4'), array('phpbb', 'vb', 'mysmartbb'), $con['user_system']);
-		}
-		
-		$authtypes .= '<option value="1"' . (($con['user_system']=='1') ? ' selected="selected"' : '') . '>' . $lang['NORMAL'] . '</option>' . "\n";
-		if ($dh = @opendir($root_path . 'includes/auth_integration'))
-		{
-				while (($file = readdir($dh)) !== false)
-				{
-					if(strpos($file, '.php') !== false)
-					{
-						$file = trim(str_replace('.php', '', $file));
-						$authtypes .=  '<option value="' . $file . '"' . (($con['user_system']==$file) ? ' selected="selected"' : '') . '>' . $file . '</option>' . "\n";
-					}
-				}
-				closedir($dh);
-		}
 		
 		//after submit
 		if (isset($_POST['submit']))

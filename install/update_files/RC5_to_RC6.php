@@ -78,6 +78,8 @@ $update_sqls['configs27'] = "UPDATE `{$dbprefix}config` SET `option` = '<input t
 $update_sqls['configs28'] = "UPDATE `{$dbprefix}config` SET `option` = '<select id=\"id_form\" name=\"id_form\">\r\n                <option <IF NAME=\"con.id_form==id\">selected=\"selected\"</IF> value=\"id\">{lang.IDF}</option>\r\n                <option <IF NAME=\"con.id_form==filename\">selected=\"selected\"</IF> value=\"filename\">{lang.IDFF}</option>\r\n                </select>',`display_order` = 29 WHERE  `name` = 'id_form';";
 
 $update_sqls['configs29'] = "UPDATE `{$dbprefix}config` SET `option` = '<select id=\"user_system\" name=\"user_system\">{authtypes}</select>',`display_order` = '15' WHERE  `name` = 'user_system';";
+
+$update_sqls['configs30'] = "UPDATE `{$dbprefix}config` SET `option` = '<label>{lang.YES}<input type=\"radio\" id=\"statfooter\" name=\"statfooter\" value=\"1\"  <IF NAME=\"con.statfooter==1\"> checked=\"checked\"</IF>></label><label>{lang.NO}<input type=\"radio\" id=\"statfooter\" name=\"statfooter\" value=\"0\"  <IF NAME=\"con.statfooter==0\"> checked=\"checked\"</IF>></label>',`display_order` = '23' WHERE  `name` = 'statfooter';";
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 //notes ////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////

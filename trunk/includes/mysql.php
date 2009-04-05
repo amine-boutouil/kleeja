@@ -31,6 +31,7 @@ class SSQL
 	var $row						= array();
 	var $rowset						= array();
 	var $debugr						= false;
+	var $show_errors 				= true;
 
 
 				/*
@@ -373,29 +374,40 @@ class SSQL
 				*/
 				function error_msg($msg)
 				{
-                          $error_no  = mysql_errno();
-                          $error_msg = mysql_error();
-						  $error_sql = @current($this->debugr[$this->query_num+1]);
+					if(!$this->show_errors)
+					{
+						return;
+					}
+					
+					$error_no  = mysql_errno();
+					$error_msg = mysql_error();
+					$error_sql = @current($this->debugr[$this->query_num+1]);
 
-                          echo "<html><head><title>ERROR IM MYSQL</title>";
-						  echo "<style>BODY{FONT-FAMILY:tahoma;FONT-SIZE:12px;}.error {}</style></head><body>";
-                          echo '<br />';
-                          echo '<div class="error">';
-                          echo " <a href='#' onclick='window.location.reload( false );'>click to Refresh this page ...</a><br />";
-						  echo "<h2>Sorry , There is an error in mysql " . ($msg !='' ? ", error : $msg" : "") ."</h2>";
-						if($error_sql != '')
-							echo "<br />--[query]-------------------------- <br />$error_sql<br />---------------------------------<br /><br />";
-						  echo "[$error_no : $error_msg] <br />";
-						  echo "<br /><br /><strong>Script: Kleeja <br /><a href='http://www.kleeja.com'>Kleeja Website</a></strong>";
-                          echo '</b></div>';
-                          echo '</body></html>';
-
-						exit();
+					echo "<html><head><title>ERROR IM MYSQL</title>";
+					echo "<style>BODY{FONT-FAMILY:tahoma;FONT-SIZE:12px;}.error {}</style></head><body>";
+					echo '<br />';
+					echo '<div class="error">';
+					echo " <a href='#' onclick='window.location.reload( false );'>click to Refresh this page ...</a><br />";
+					echo "<h2>Sorry , There is an error in mysql " . ($msg !='' ? ", error : $msg" : "") ."</h2>";
+					if($error_sql != '')
+					{
+						echo "<br />--[query]-------------------------- <br />$error_sql<br />---------------------------------<br /><br />";
+					}
+					echo "[$error_no : $error_msg] <br />";
+					echo "<br /><br /><strong>Script: Kleeja <br /><a href='http://www.kleeja.com'>Kleeja Website</a></strong>";
+					echo '</b></div>';
+					echo '</body></html>';
+					exit();
 				}
 				
+				/*
+				return last error
+				*/
+				function get_error()
+				{
+					return array(mysql_errno(), mysql_error()); 
+				}
 			
-
-
 }#end of class
 }#if
 ?>

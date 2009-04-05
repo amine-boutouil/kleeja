@@ -1,18 +1,20 @@
 <?php
 # KLEEJA UPDATOR ...
-# last edit by : saanina
+
+
+// Report all errors, except notices
+@error_reporting(E_ALL ^ E_NOTICE);
+
 
 /*
 include important files
 */
-
 define ( 'IN_COMMON' , true);
 $path = "../includes/";
 (file_exists('../config.php')) ? include ('../config.php') : null;
-include ($path.'functions.php');
-include ($path.'mysql.php');
+include ($path . 'functions.php');
+include ($path . 'mysql.php');
 include ('func_inst.php');
-	
 
 /*
 //print header
@@ -41,7 +43,7 @@ case 'check':
 	//config,php
 	if (!$dbname || !$dbuser)
 	{
-		print '<span style="color:red;">' . $lang['INST_CHANG_CONFIG'] . '</span><br />';
+		echo '<span style="color:red;">' . $lang['INST_CHANG_CONFIG'] . '</span><br />';
 		$submit_wh = 'disabled="disabled"';
 	}
 
@@ -69,7 +71,7 @@ case 'check':
 		echo '<br /><span style="color:green;"><b>[ ' . $lang['INST_GOOD_GO'] . ' ]</b></span><br /><br />';
 	}
 
-	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=action_file&'.getlang(1).'">
+	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=action_file&' . getlang(1) . '">
 	<input name="agres" type="submit" value="' . $lang['INST_SUBMIT'] . '" ' . $submit_wh . '/>
 	</form>';
 
@@ -109,7 +111,7 @@ case 'action_file':
 		// show   list ..
 		echo '
 		<br />
-		<br /><form  action="' . $_SERVER['PHP_SELF'] . '?step=action_file&'.getlang(1).'" method="post">
+		<br /><form  action="' . $_SERVER['PHP_SELF'] . '?step=action_file&' . getlang(1) . '" method="post">
 		'.$lang['INST_CHOOSE_UPDATE_FILE'].' 
 		<br />
 		<select name="action_file_do" style="width: 352px">
@@ -117,7 +119,7 @@ case 'action_file':
 		</select>
 		<br />
 		<br />
-		<input name="submitlfile" type="submit" value="'.$lang['INST_SUBMIT'].'" /><br /><br /><br /></form>';
+		<input name="submitlfile" type="submit" value="' . $lang['INST_SUBMIT'] . '" /><br /><br /><br /></form>';
 
 	}//no  else
 
@@ -129,68 +131,121 @@ case 'update_now':
 	
 		if(!isset($_GET['action_file_do']))
 		{
-			echo '<meta http-equiv="refresh" content="0;url=' . $_SERVER['PHP_SELF'].'?step=action_file&'.getlang(1).'">';
+			echo '<meta http-equiv="refresh" content="0;url=' . $_SERVER['PHP_SELF'].'?step=action_file&' . getlang(1) . '">';
 			exit();
 		}
 		
-		$file_for_up	=	'update_files/'.htmlspecialchars($_GET['action_file_do']).'.php';
+		$file_for_up	=	'update_files/'.htmlspecialchars($_GET['action_file_do']) . '.php';
 		if(!file_exists($file_for_up))
 		{
-			echo '<span style="color:red;">' . $lang['INST_ERR_NO_SELECTED_UPFILE_GOOD'] . ' [ '.$file_for_up.' ]</span><br />';
+			echo '<span style="color:red;">' . $lang['INST_ERR_NO_SELECTED_UPFILE_GOOD'] . ' [ ' . $file_for_up . ' ]</span><br />';
 		}
 		else
 		{	
 			//get it
 			require $file_for_up;
-
-			$SQL	= new SSQL($dbserver,$dbuser,$dbpass,$dbname);
+			$complete_upate = true;
+			
+			$SQL	= new SSQL($dbserver, $dbuser, $dbpass, $dbname);
+			
+			
+			//
+			//is current db is up-to-date !
+			//
+			$sql = "SELECT value FROM `{$dbprefix}config` WHERE `name` = 'db_version'";
+			$result	= $SQL->query($sql);
+			if($SQL->num_rows($result) == 0)
+			{
+				$SQL->query("INSERT INTO `{$dbprefix}config` (`name` ,`value`)VALUES ('db_version', '')");
+			}
+			else
+			{
+				$current_ver  = $SQL->fetch_array($result);
+				$current_ver  = $current_ver['value'];
+				
+				if($current_ver >= DB_VERSION)
+				{
+					echo '<br /><br /><span style="color:green;">' . $lang['INST_UPDATE_CUR_VER_IS_UP']. '</span><br />';
+					$complete_upate = false;
+				}
+			}
 			
 			//
 			//is there any sqls 
 			//
-			if(sizeof($update_sqls) > 0)
+			if($complete_upate)
 			{
-				foreach($update_sqls as $name=>$sql_content)
+				$SQL->show_errors = false;
+				if(isset($update_sqls) && sizeof($update_sqls) > 0)
 				{
-					$do_it	= $SQL->query($sql_content);
-					
-					if(!$do_it)
-						echo '<span style="color:red;"> [' .$name .'] : ' . $lang['INST_SQL_ERR'] . '</span><br />';
+					$err = '';
+					foreach($update_sqls as $name=>$sql_content)
+					{
+						$err = '';
+						$SQL->query($sql_content);
+						$err = $SQL->get_error();
+						
+						if(strpos($err[1], 'Duplicate') !== false || $err[0] == '1062' || $err[0] == '1060')
+						{
+							$sql = "UPDATE `{$dbprefix}config` SET `value` = '" . DB_VERSION . "' WHERE `name` = 'db_version'";
+							$SQL->query($sql);
+							echo '<br /><br /><span style="color:green;">' . $lang['INST_UPDATE_CUR_VER_IS_UP']. '</span><br />';
+							$complete_upate = false;
+						}
+					}
 				}
 			}
 			
 			//
 			//is there any functions 
 			//
-			if(sizeof($update_functions) > 0)
+			if($complete_upate)
 			{
-				foreach($update_functions as $n)
+				if(isset($update_functions) && sizeof($update_functions) > 0)
 				{
-					eval('' . $n . '; ');
+					foreach($update_functions as $n)
+					{
+						eval('' . $n . '; ');
+					}
 				}
 			}
 			
 			//
 			//is there any notes 
 			//
-			if(sizeof($update_notes) > 0)
+			if($complete_upate)
 			{
-				echo '<br /><span style="color:blue;"><b>' . $lang['INST_NOTES_UPDATE'] . ' :</b> </span><br />';
-				
-				$i=1;
-				foreach($update_notes as $n)
+				if(isset($update_notes) && sizeof($update_notes) > 0)
 				{
-					echo '  [<b>' . $i .'</b>] <br /><span style="color:black;">' . $n. ' : </span><br />';
-					++$i;
-				}
+					echo '<br /><span style="color:blue;"><b>' . $lang['INST_NOTES_UPDATE'] . ' :</b> </span><br />';
+					
+					$i=1;
+					foreach($update_notes as $n)
+					{
+						echo '  [<b>' . $i . '</b>] <br /><span style="color:black;">' . $n. ' : </span><br />';
+						++$i;
+					}
 
+				}
 			}
 			
-			echo '<br /><br /><span style="color:green;">' . $lang['INST_UPDATE_IS_FINISH']. '</span><br />';
-			echo '<img src="img/home.gif" alt="home" />&nbsp;<a href="../index.php">' . $lang['INDEX'] . '</a><br /><br />';
-			echo '<img src="img/adm.gif" alt="admin" />&nbsp;<a href="../admin.php">' . $lang['ADMINCP'] . '</a><br /><br />';
-			echo '' . $lang['INST_KLEEJADEVELOPERS'] . '<br /><br />';
-			echo '<a href="http://www.kleeja.com">www.kleeja.com</a><br /><br /></fieldset>';
+			
+			if($complete_upate)
+			{
+				echo '<br /><br /><span style="color:green;">' . $lang['INST_UPDATE_IS_FINISH']. '</span><br />';
+				echo '<img src="img/home.gif" alt="home" />&nbsp;<a href="../index.php">' . $lang['INDEX'] . '</a><br /><br />';
+				echo '<img src="img/adm.gif" alt="admin" />&nbsp;<a href="../admin.php">' . $lang['ADMINCP'] . '</a><br /><br />';
+				echo '' . $lang['INST_KLEEJADEVELOPERS'] . '<br /><br />';
+				echo '<a href="http://www.kleeja.com">www.kleeja.com</a><br /><br /></fieldset>';
+			}
+			else
+			{
+				echo '<br /><br /><span style="color:orange;"><a href="./update.php?step=action_file&' . getlang(1) . '">' . $lang['INST_UPDATE_SELECT_ONTHER_UPDATES']. '</span><br />';
+				echo '<br /><br /><img src="img/home.gif" alt="home" />&nbsp;<a href="../index.php">' . $lang['INDEX'] . '</a><br />';
+				echo '<img src="img/adm.gif" alt="admin" />&nbsp;<a href="../admin.php">' . $lang['ADMINCP'] . '</a><br /><br />';
+				echo '<br /><a href="http://www.kleeja.com">www.kleeja.com</a><br /><br /></fieldset>';	
+			}
+			
 		}
 
 break;

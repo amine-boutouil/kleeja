@@ -1503,13 +1503,13 @@ function delete_ch_tpl($template_name, $delete_txt = array())
 /*
 * Add new option
 */
-function add_config ($name,$value,$order,$html) 
+function add_config ($name,$value,$order="0",$html="") 
 {
 	global $dbprefix, $SQL;
 	
 	$insert_query = array(	'INSERT'	=> '`name` ,`value` ,`option` ,`display_order`',
 							'INTO'		=> "{$dbprefix}config",
-							'VALUES'	=> "'".$SQL->escape($name)."','".$SQL->escape($value)."', '".addslashes($html)."','".intval($order)."'");
+							'VALUES'	=> "'". $SQL->escape($name) ."','". $SQL->escape($value) ."', '". addslashes($html) ."','". intval($order). "'");
 	$SQL->build($insert_query);						
 }
 
@@ -1521,7 +1521,7 @@ function delete_config ($name)
 	global $dbprefix, $SQL;
 	
 	$delete_query = array(	'DELETE'	=> "{$dbprefix}config",
-							'WHERE'		=> "name = '".$SQL->escape($name)."'");
+							'WHERE'		=> "name = '". $SQL->escape($name). "'");
 	$SQL->build($delete_query);						
 }
 

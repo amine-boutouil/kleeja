@@ -76,6 +76,8 @@
 	//UPDATOR
 	$lang['INST_CHOOSE_UPDATE_FILE']			= 'قم بإختيار التحديث المناسب لك ومن ثم تابع التحديث ..';
 	$lang['INST_ERR_NO_SELECTED_UPFILE_GOOD']	= 'ملف التحديث غير مناسب او انه غير موجود من الأساس ! ..';
+	$lang['INST_UPDATE_CUR_VER_IS_UP']			= 'النسخه الحاليه محدثه لهذا التحديث المحدد.';
+	$lang['INST_UPDATE_SELECT_ONTHER_UPDATES']	= 'رجوع وإختيار تحديث آخر.';
 	
 	$lang['INST_NOTES_UPDATE']					= 'ملاحظات التحديث';
 	$lang['INST_NOTE_RC2_TO_RC3']				= 'لا بد ان تقوم أيضا بإستبدال الملفات الجديده المعدله لإستكمال الترقيه بشكل جيد !.';

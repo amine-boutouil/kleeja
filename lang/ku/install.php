@@ -76,6 +76,8 @@
 	//UPDATOR
 	$lang['INST_CHOOSE_UPDATE_FILE']			= 'هه‌سته‌ به‌دیاریکردنی نوێکردنه‌وه‌ی گونجاو به‌خۆت و پاشان به‌رده‌وام به‌ له‌دامه‌زراندن ..';
 	$lang['INST_ERR_NO_SELECTED_UPFILE_GOOD']	= 'په‌ڕگه‌ی نوێکردنه‌وه‌ گونجاو نییه‌ یاخود بوونی نییه‌ ! ..';
+	$lang['INST_UPDATE_CUR_VER_IS_UP']			= 'Your current version is newer than this update.';
+	$lang['INST_UPDATE_SELECT_ONTHER_UPDATES']	= 'Return back and select another update.';
 	
 	$lang['INST_NOTES_UPDATE']					= 'تێبینیه‌کانی نوێکردنه‌وه‌';
 	$lang['INST_NOTE_RC2_TO_RC3']				= 'ده‌بێت هه‌ستیت به‌ گۆڕینی په‌ڕگه‌ کۆنه‌کانی سکریپته‌که‌ به‌نوێیه‌که‌ نه‌ک ته‌نها به‌کارهێنانی ئه‌م کرداره‌...';

@@ -230,13 +230,16 @@ $install_sqls['config_insert28'] = "INSERT INTO `{$dbprefix}config` (`name`, `va
 
 $install_sqls['config_insert29'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('sitemail', '$config_sitemail', '<input type=\"text\" id=\"sitemail\" name=\"sitemail\" value=\"{con.sitemail}\" size=\"40\">', 3)";
 
-$install_sqls['config_insert30'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('new_version', '', '', 0)";
 
-$install_sqls['config_insert31'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('thmb_dims', '100*100', '', 0)";
+$install_sqls['config_insert30'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('thmb_dims', '100*100', '', 0)";
 
-$install_sqls['config_insert32'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('id_form', 'id', '<select id=\"id_form\" name=\"id_form\">\r\n                <option <IF NAME=\"con.id_form==id\">selected=\"selected\"</IF> value=\"id\">{lang.IDF}</option>\r\n                <option <IF NAME=\"con.id_form==filename\">selected=\"selected\"</IF> value=\"filename\">{lang.IDFF}</option>\r\n                </select>', 29)";
+$install_sqls['config_insert31'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('id_form', 'id', '<select id=\"id_form\" name=\"id_form\">\r\n                <option <IF NAME=\"con.id_form==id\">selected=\"selected\"</IF> value=\"id\">{lang.IDF}</option>\r\n                <option <IF NAME=\"con.id_form==filename\">selected=\"selected\"</IF> value=\"filename\">{lang.IDFF}</option>\r\n                </select>', 29)";
 		
-		
+//system config
+$install_sqls['config_insert32'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('new_version', '', '', 0)";
+$install_sqls['config_insert33'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('db_version', '" .  DB_VERSION . "', '', 0)";
+
+	
 $install_sqls['exts_insert1'] = "
 INSERT INTO `{$dbprefix}exts` (`id`, `group_id`, `ext`, `gust_size`, `gust_allow`, `user_size`, `user_allow`) VALUES
 (1, 1, 'gif', 100000, 1, 10000, 1),
@@ -244,25 +247,25 @@ INSERT INTO `{$dbprefix}exts` (`id`, `group_id`, `ext`, `gust_size`, `gust_allow
 (3, 1, 'jpeg', 10000, 1, 10000, 1),
 (4, 1, 'jpg', 10000, 1, 10000, 1),
 (5, 1, 'bmp', 1, 10000, 1, 10000),
-(6, 1, 'tif', 0, 0, 0, 0),
-(7, 1, 'tiff', 0, 1, 0, 0),
-(8, 1, 'tga', 0, 0, 0, 0),
-(9, 2, 'gtar', 0, 0, 0, 0),
-(10, 2, 'gz', 0, 0, 0, 0),
-(11, 2, 'tar', 0, 0, 0, 0),
-(12, 2, 'zip', 10000, 1, 10000, 1),
-(13, 2, 'rar', 0, 0, 0, 0);";
+(6, 1, 'psd', 0, 0, 0, 0),
+(7, 1, 'tif', 0, 0, 0, 0),
+(8, 1, 'tiff', 0, 1, 0, 0),
+(9, 1, 'tga', 0, 0, 0, 0),
+(10, 2, 'gtar', 0, 0, 0, 0),
+(11, 2, 'gz', 0, 0, 0, 0),
+(12, 2, 'tar', 0, 0, 0, 0),
+(13, 2, 'zip', 10000, 1, 10000, 1),
+(14, 2, 'rar', 0, 0, 0, 0);";
 
 $install_sqls['exts_insert2'] = "
 INSERT INTO `{$dbprefix}exts` (`id`, `group_id`, `ext`, `gust_size`, `gust_allow`, `user_size`, `user_allow`) VALUES
-(14, 2, 'ace', 0, 0, 0, 0),
-(15, 2, 'torrent', 0, 0, 0, 0),
-(16, 2, 'tgz', 0, 0, 0, 0),
-(17, 2, 'bz2', 0, 0, 0, 0),
-(18, 2, '7z', 0, 0, 0, 0),
-(19, 3, 'txt', 0, 0, 0, 0),
-(20, 3, 'c', 0, 0, 0, 0),
-(21, 3, 'h', 0, 0, 0, 0),
+(15, 2, 'ace', 0, 0, 0, 0),
+(16, 2, 'torrent', 0, 0, 0, 0),
+(17, 2, 'tgz', 0, 0, 0, 0),
+(18, 2, 'bz2', 0, 0, 0, 0),
+(19, 2, '7z', 0, 0, 0, 0),
+(20, 3, 'txt', 0, 0, 0, 0),
+(21, 3, 'c', 0, 0, 0, 0),
 (22, 3, 'cpp', 0, 0, 0, 0),
 (23, 3, 'hpp', 0, 0, 0, 0),
 (24, 3, 'diz', 0, 0, 0, 0);";

@@ -1,21 +1,28 @@
 <?php
 # KLEEJA INSTALLER ...
-# updated  [20/3/2009]
+# updated  [4/2009]
 # this file have many updates .. dont use previous ones
-# last edit by : saanina
+
+// Report all errors, except notices
+@error_reporting(E_ALL ^ E_NOTICE);
+
 
 /*
-	include important files
+include important files
 */
-
 
 define ( 'IN_COMMON' , true);
 $_path = "../";
 (file_exists($_path . 'config.php')) ? include ($_path . 'config.php') : null;
 include ($_path . 'includes/functions.php');
-include ($_path.'includes/mysql.php');
+include ($_path . 'includes/mysql.php');
 include ('func_inst.php');
-	
+
+//
+//version of latest changes at db
+//
+define ('DB_VERSION' , '6');
+
 
 /*
 //echo header
@@ -51,7 +58,7 @@ case 'gpl2':
 	}
 	
 	echo '
-	<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=f&'.getlang(1).'">
+	<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=f&' . getlang(1) . '">
 	<textarea name="gpl2" rows=""   readonly="readonly" cols="" style="width: 456px; height: 365px;direction:ltr;">
 	' . $contentofgpl2 . '
 	</textarea>
@@ -108,13 +115,13 @@ case 'f':
 	
 	if($check_ok)
 	{
-		echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=c&'.getlang(1).'">
+		echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=c&' . getlang(1) . '">
 		<input name="agres" type="submit" value="' . $lang['INST_SUBMIT'] . '"  />
 		</form>';
 	}
 	else
 	{
-		echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=f&'.getlang(1).'">
+		echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=f&' . getlang(1) . '">
 		<input name="agres" type="submit" value="' . $lang['RE_CHECK'] . '"  />
 		</form>';
 	}
@@ -201,15 +208,15 @@ case 'c':
 				echo '<br />
 				<hr/>
 				<br />
-				<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=c&'.getlang(1).'">
+				<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=c&' . getlang(1) . '">
 				<input  type="submit" value="' . $lang['INST_SUBMIT_CONFIGOK'] . '" />
 				</form>';
 			}
 	}
 	else
 	{
-		echo  ' <fieldset><br /><span style="color:green;"><strong>'. $lang['CONFIG_EXISTS'] . '</strong><br /><br />';
-		echo  '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=check&'.getlang(1).'">
+		echo  ' <fieldset><br /><span style="color:green;"><strong>' .  $lang['CONFIG_EXISTS'] . '</strong><br /><br />';
+		echo  '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=check&' . getlang(1) . '">
 		<input name="agres" type="submit" value="' . $lang['INST_SUBMIT'] . '" />
 		</form></fieldset>';
 	}
@@ -281,7 +288,7 @@ case 'check':
 		echo '<br /><img src="img/good.gif" alt="good" /> <br /><span style="color:green;"><b>[ ' . $lang['INST_GOOD_GO'] . ' ]</b></span><br /><br />';
 	}
 
-	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=data&'.getlang(1).'">
+	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=data&'.getlang(1) . '">
 	<input name="agres" type="submit" value="' . $lang['INST_SUBMIT'] . '" ' . $submit_wh . ' />
 	</form></fieldset>';
 
@@ -353,7 +360,7 @@ case 'data' :
 				else
 				{
 					
-					echo '.';
+					echo ' . ';
 					if($dots == 7)
 					{
 						$dots = 0;
@@ -362,7 +369,7 @@ case 'data' :
 					else
 						$dots++;
 						
-					//echo '<span style="color:green;"> [' .$name .'] : ' . $lang['INST_SQL_OK'] . '</span><br />';
+					//echo '<span style="color:green;"> [' .$name  . '] : ' . $lang['INST_SQL_OK'] . '</span><br />';
 				}
 			}
 			else
@@ -397,7 +404,7 @@ case 'data' :
 	//$sitepath = $_SERVER['DOCUMENT_ROOT'].dirname($_SERVER['PHP_SELF']);
 	$urlsite =  "http://".$_SERVER['HTTP_HOST'] . str_replace('install','',dirname($_SERVER['PHP_SELF']));
 
- echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=data&'.getlang(1).'"  onsubmit="javascript:return formCheck(this, Array(\'sitename\',\'siteurl\',\'sitemail\' ,\'username\', \'password\',\'email\' ));">
+ echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=data&' . getlang(1) . '"  onsubmit="javascript:return formCheck(this, Array(\'sitename\',\'siteurl\',\'sitemail\' ,\'username\', \'password\',\'email\' ));">
 	<fieldset id="Group1" dir="' . $lang['DIR'] . '">
 	<legend style="width: 73px"> [ <strong>' . $lang['INST_SITE_INFO'] . '</strong> ]</legend>
 	<table style="width: 100%">

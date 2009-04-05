@@ -2,10 +2,17 @@
 // not for directly open
 if (!defined('IN_COMMON'))	exit();
 
+
+//
+//db version when this update was released
+//
+define ('DB_VERSION' , '5');
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 // sqls /////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
+$update_sqls['up_dbv_config'] = "UPDATE `{$dbprefix}config` SET `value` = '" . DB_VERSION . "' WHERE `name` = 'db_version'";
 
 $update_sqls['show_my_filecp'] = "ALTER TABLE `{$dbprefix}users` ADD `show_my_filecp` TINYINT( 1 ) UNSIGNED NOT NULL DEFAULT '1';";
 $update_sqls['hook_id_change'] = "ALTER TABLE `{$dbprefix}hooks` CHANGE `hook_id` `hook_id` INT( 11 ) UNSIGNED NOT NULL AUTO_INCREMENT;";

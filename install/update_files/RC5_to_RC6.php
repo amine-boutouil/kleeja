@@ -2,6 +2,12 @@
 // not for directly open
 if (!defined('IN_COMMON'))	exit();
 
+
+//
+//db version when this update was released
+//
+define ('DB_VERSION' , '6');
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 // sqls /////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -10,10 +16,15 @@ $update_sqls['real_filename'] = "ALTER TABLE `{$dbprefix}files` ADD `real_filena
 $update_sqls['new_version_config'] = "INSERT INTO `{$dbprefix}config` (`name` ,`value`)VALUES ('new_version', '');";
 $update_sqls['thmb_dims_config'] = "INSERT INTO `{$dbprefix}config` (`name` ,`value`)VALUES ('thmb_dims', '100*100');";
 $update_sqls['form_id_config'] = "INSERT INTO `{$dbprefix}config` (`name` ,`value`)VALUES ('id_form', 'id');";
+$update_sqls['up_dbv_config'] = "UPDATE `{$dbprefix}config` SET `value` = '" . DB_VERSION . "' WHERE `name` = 'db_version'";
 $update_sqls['up_lang_config'] = "UPDATE `{$dbprefix}config` SET `value` = '" . getlang() . "' WHERE `name` = 'language'";
 $update_sqls['up_style_config'] = "UPDATE `{$dbprefix}config` SET `value` = 'default' WHERE `name` = 'style'";
 $update_sqls['drop_lang'] = "DROP TABLE `{$dbprefix}lang`";
 $update_sqls['option'] = "ALTER TABLE `{$dbprefix}config` ADD `option` mediumtext NOT NULL;";
+
+//
+//is this 
+//
 
 $update_sqls['display_order'] = "ALTER TABLE `{$dbprefix}config` ADD `display_order` int(10) NOT NULL;";
 

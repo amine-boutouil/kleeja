@@ -76,6 +76,8 @@
 	//UPDATOR
 	$lang['INST_CHOOSE_UPDATE_FILE']				= 'Choose the appropriate update file';
 	$lang['INST_ERR_NO_SELECTED_UPFILE_GOOD']		= 'Inappropriate update file, or it is missing!';
+	$lang['INST_UPDATE_CUR_VER_IS_UP']				= 'Your current version is newer than this update.';
+	$lang['INST_UPDATE_SELECT_ONTHER_UPDATES']		= 'Return back and select another update.';
 	
 	$lang['INST_NOTES_UPDATE']						= 'Update Notes';
 	$lang['INST_NOTE_RC2_TO_RC3']					= 'You need to replace all the script files and not just run this wizard  ...';

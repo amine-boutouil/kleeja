@@ -1,0 +1,40 @@
+
+        
+<div class="middle">
+
+        <IF NAME="user_name">
+        <h2>{lang.PUBLIC_USER_FILES} : {user_name}</h2>
+        </IF>
+
+        <table>
+                <tr class="row1"><td>{n_name}</td><td></td><td></td></tr>
+        <IF NAME="no_results">
+        <tr class="row2">
+        <td colspan="3">...</td>
+        </tr>
+        <ELSE>
+        <LOOP NAME="arr">
+                <tr class="row2">
+                <td><img src="{{icon_link}}" alt="{{file_type}}" /></td>
+                <td>{{name}}</td>
+                <td>{{file_type}}</td>
+                </tr>
+        </LOOP>
+        </IF>
+        </table>
+
+        <div style="text-align:center"><b>{page_nums}</b></div>
+
+        <br />
+        <IF NAME="filecp_link">
+        <a href="{filecp_link}" title="{lang.GO_FILECP}">{lang.GO_FILECP}</a>
+        <br />
+        <br />
+        <div class="daaf">
+        {lang.COPY_AND_GET_DUD} : <br />
+        {your_fileuser}
+        </div>
+        </IF>
+        
+</div>
+        

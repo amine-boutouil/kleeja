@@ -1,0 +1,40 @@
+<div class="middle">
+<br />
+{lang.FILE_FOUNDED} 
+<br />
+<div id="url"><h3>{lang.JS_MUST_ON}</h3></div>
+<br />
+
+<h2>{lang.FILE_INFO} :</h2> 
+
+{lang.FILENAME} : {name} <br />
+{lang.FILETYPE} : <img src="{file_ext_icon}" /> {type} <br />
+{lang.FILESIZE} : {size} <br />
+{lang.FILEDATE} : {time} <br />
+{lang.FILEUPS} : {uploads} <br />
+<!-- download template after info -->
+<br />
+<br />
+<a href="{REPORT}">{lang.FILEREPORT}</a>
+
+
+<script language="javascript">
+var timer = {seconds_w};
+ti();
+function ti()
+{
+    if(timer > 0)
+    {
+        document.getElementById("url").innerHTML = '<strong>{lang.WAIT} ' + timer + ' </strong>';
+        timer = timer - 1;
+        setTimeout("ti()", 1000)
+    }
+    else
+    {
+        document.getElementById("url").innerHTML = '<a href="{url_file}" target="balnk">»» {lang.CLICK_DOWN} ««</a><br \><br \>';
+    }
+}
+</script>
+
+</div>
+        

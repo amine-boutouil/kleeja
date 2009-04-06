@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" dir="{dir}">
 <head>
 <title>{title} ● {config.sitename}</title>
@@ -13,29 +13,25 @@ var LANG_MORE_F_FILES ="{lang.MORE_F_FILES}";
 <script type="text/javascript" src="{STYLE_PATH}javascript.js"></script>
 </head>
 <body>
-<div id="wrap">
 
-<div class="roundedcornr_box_459680"><div class="roundedcornr_top_459680"><div></div></div><div class="roundedcornr_content_459680">
-
-<div id="content">
-
-        <div id="header">
-                        <div class="roundedcornr_box_561672"><div class="roundedcornr_top_561671"><div></div></div><div class="roundedcornr_content_561671">
-                                        <a href="{config.siteurl}"><img src="{STYLE_PATH}images/logo.gif" alt="{config.sitename}" style="border:0px" /></a>
-                        </div><div class="roundedcornr_bottom_561671"><div></div></div></div>
-        </div>
-
-        <div class="breadcrumbs">
-        <a href="{config.siteurl}">{config.sitename}</a> ● {title}
-        </div>
-
-
-        {extras.header}
-
-
-        <div class="right">
-                <div class="roundedcornr_box_561672"> <div class="roundedcornr_top_561671"><div></div></div><div class="roundedcornr_content_561671">
-
+<div id="wrapper">
+<!-- start header -->
+<div id="logo" style="height: 112px">
+	<h1> <a href="{config.siteurl}"><img src="{STYLE_PATH}images/logo.gif" alt="{config.sitename}" style="border:0px" /></a></h1>
+</div>
+<div id="header" style="height: 22px">
+	<div id="menu" style="height: 25px">
+	<a href="{config.siteurl}">{config.sitename}</a> ● {title}
+	</div>
+	
+	{extras.header}
+	
+</div>
+<!-- end header -->
+</div>
+<!-- start page -->
+<div id="page">
+<div id="sidebar">
                 <ul>
                         <li><img src="{STYLE_PATH}images/index_button.gif" alt="{index_name}" />
                         <a href="{config.siteurl}">{index_name}</a></li>
@@ -63,5 +59,4 @@ var LANG_MORE_F_FILES ="{lang.MORE_F_FILES}";
                         </IF>
                         </ul>
                         
-                </div><div class="roundedcornr_bottom_561671"><div></div></div></div>
-        </div>
+                 </div>

@@ -1,0 +1,38 @@
+
+        <div class="middle">
+
+<form action="{action}" method="post">
+
+<table>
+        <tr>
+                <td class="row1">{lang.YOURNAME} : </td>
+                <td class="row2"><input type="text" name="rname" value="{_POST.rname}"  /></td>
+        </tr>
+        <tr>
+                <td class="row1">{lang.EMAIL} : </td>
+                <td class="row2"><input type="text" name="rmail" value="{_POST.rmail}"  /></td>
+        </tr>
+        <tr>
+                <td class="row1">{lang.URL} : </td>
+                <td class="row2"><input type="text" name="rurl" value="{url_id}"  readonly="readonly" /></td>
+        </tr>
+        <tr>
+                <td class="row1">{lang.REASON} : </td>
+                <td class="row2"><textarea name="rtext" rows="3">{_POST.rtext}</textarea></td>
+        </tr>
+        <tr>
+                <td class="row1">{lang.VERTY_CODE}</td>
+                <td class="row2">
+                        {code}<br />
+                        <input type="text" name="code_answer" style="direction:ltr" />
+                </td>
+        </tr>
+        <tr>
+                <td colspan="2" style="text-align:center"><input type="submit" name="submit" value="{lang.REPORT}" /></td>
+        </tr>
+</table>
+
+</form>
+
+</div>
+        

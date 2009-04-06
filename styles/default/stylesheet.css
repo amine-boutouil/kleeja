@@ -1,147 +1,249 @@
-
-        
-/*startfile*/        
-* {
-    padding: 0;
-    margin: 0;
-} 
-
-html {
-        font-size: 100%;
-        /* Always show a scrollbar for short pages - stops the jump when the scrollbar appears. non-IE browsers */
-        height: 100%;
-        margin-bottom: 1px;
-}
+﻿/*
+Design by Free CSS Templates
+http://www.freecsstemplates.org
+Released for free under a Creative Commons Attribution 2.5 License
+*/
 
 body {
-        font-family: "Tahoma", arial, verdana, sans-serif;
-        color: #323D4F;
-        background-color: #CCCCCC;
-    font-size: 11px;
-    margin: 0;
-    padding: 12px 0;
-        
- }
- 
-a {
-        color: #306090;
-}
-a:hover {
-        color: #F48A00;
+	margin: 0;
+	padding: 12;
+	background: #FFFFFF url(images/img01.jpg) repeat-x left
+top;
+	font-size: 11px;
+	font-family: "Tahoma", arial, verdana, sans-serif;
+	text-align: justify;
+	color: #5C5C5C;
 }
 
+h1, h2, h3 {
+	margin: 0;
+	text-transform: lowercase;
+	font-weight: normal;
+	color: #FFFFFF;
+}
+
+h1 {
+	letter-spacing: -1px;
+	font-size: 32px;
+}
+
+h2 {
+	font-size: 23px;
+}
+
+p, ul, ol {
+	margin: 0 0 2em 0;
+	text-align: justify;
+	line-height: 26px;
+}
+
+a {
+	color: #1B75A9;
+}
+
+a:hover, a:active {
+	text-decoration: none;
+	color: #1B75A9;
+}
+
+a:visited {
+	color: #1B75A9;
+}
 
 img {
-     border: none;
+	border: none;
 }
 
-h2 { 
-        font-family: "Tahoma", Arial, Helvetica, sans-serif;
-        font-weight: normal;
-        color: #3B6EBF; 
-    font-size: 1.4em;
-        margin: 0.8em 0 0.2em 0;
-        
-        }
-
-
-
-#wrap {
-        margin: 20px auto;
-        width: 720px;
+img.left {
+	float: left;
+	margin-right: 15px;
 }
 
+img.right {
+	float: right;
+	margin-left: 15px;
+}
+
+/* Form */
+
+form {
+	margin: 0;
+	padding: 0;
+}
+
+fieldset {
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+
+legend {
+	display: none;
+}
+
+input, textarea, select {
+	font-size: 13px;
+	color: #333333;
+}
+
+#wrapper {
+	margin: 0;
+	padding: 0;
+}
+
+/* Header */
 
 #header {
-        width:50%;
-        margin-bottom:5px;
+	width: 880px;
+	margin: 0 auto;
+	height: 60px;
+	border: 10px #FFFFFF solid;
 }
 
+/* Menu */
+
+#menu {
+	float: left;
+	width: 880px;
+	background: url(images/img02.jpg) repeat-x left top;
+	color: #FFFFFF;
+	  border-bottom: 1px solid #E1E1E1; 
+        padding: 5px;
+        margin-bottom:9px;
+}
+
+#menu a {
+	text-decoration: underline;
+	font-size: 11px;
+	color: #FFFFFF;
+}
+
+#menu a:hover { 
+	text-decoration: none;
+	color: #FFFFFF;
+}
+
+#menu .current_page_item a {
+	color: #FFFFFF;
+}
+
+/** LOGO */
+
+#logo {
+	width: 880px;
+	height: 130px;
+	margin: 0 auto;
+}
+
+#logo h1, #logo h2 {
+	float: left;
+	margin: 0;
+	padding: 50px 0 0 0px;
+	line-height: normal;
+}
+
+#logo h1 { 
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size:40px;
+}
+
+#logo h1 a {
+	text-decoration: none;
+	color: #28313A; 
+}
+
+#logo h1 a:hover { text-decoration: underline; }
+
+#logo h2 {
+	float: left;
+	padding: 65px 0 0 18px;
+	font: 18px Georgia, "Times New Roman", Times, serif;
+	color: #28313A; 
+}
+
+#logo p a {
+	text-decoration: none;
+	color: #28313A;
+}
+
+#logo p a:hover { text-decoration: underline; }
+
+
+
+/* Page */
+
+#page {
+	width: 880px;
+	margin: 0 auto;
+	background: #FFFFFF;
+	border: 10px #FFFFFF solid;
+}
+
+/* Content */
 
 #content {
-        padding: 0 40px 0 40px;
+	float: left;
+	width: 620px;
+	border-right: 1px dashed #DFE1E0;
 }
 
 
 
+/* Sidebar */
 
-#clear {
-        display: block;
-        clear: both;
-        width: 100%;
-        height:1px;
-        overflow:hidden;
+#sidebar {
+	float: right;
+	width: 230px;
+	margin: 0;
+	padding: 0;
+}
+
+#sidebar li {
+	margin-bottom: 0px;
+}
+#sidebar ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#sidebar li ul {
+}
+
+#sidebar li li {
+	margin: 0;
+}
+
+#sidebar h2 {
+	width: 250px;
+	padding: 8px 0 0 0px;
+	margin-bottom: 10px;
+	background: url(images/img07.jpg) no-repeat left top;
+	font-size: 20px;
+	color: #28313A; 
+}
+
+
+/* Footer */
+#footer-wrap {
 }
 
 #footer {
-        text-align: center;
-        color: #666;
-        direction:ltr;
+	padding: 4px;
+	width: 880px;
+	margin: 0 auto;
+	background: #E5E5E5;
+	border: 10px #FFFFFF solid;
+	text-align: center;
 }
 
-
-.middle{
-        width: 60%;
-        margin: 0 auto;
-        padding: 1% 1%;
-        float:left;
+html>body #footer {
+	height: auto;
 }
 
-.breadcrumbs { 
-    background: #F6F9FB url('images/bg1.gif');
-        border-bottom: 1px solid #E1E1E1; 
-        padding: 5px;
-        margin-bottom:9px;
-        
+#footer p {
+	font-size: 12px;
 }
-        
-
-.right {
-        float: right;
-        width: 29%;
-        margin: 0 1px;
-        padding: 1% 1%;
-        margin-left: 20px;
-
-}
-
-.right ul {
-        padding: 20px 0 15px 20px;
-        margin:0;
-}
-
-.right li {
-        margin-bottom:5px;
-        list-style-type: none;
-        color: #3B6EBF;
-}
-
-
-.err {
-        padding: 5px;
-        background-color: #FFEBE9;
-        border: 1.5px solid #DD3F0E;
-        margin: 10px 10px;
-        font-size: 13px;
-        font-family: "Tahoma", Times, serif;
-}
-.info {
-        padding: 5px;
-        background-color: #FFFFE6;
-        border: 1.5px solid #E2EE0B;
-        margin: 10px 10px;
-        font-size: 13px;
-        font-family: "Tahoma", Times, serif;
-}
-.result {
-        padding: 5px;
-        background-color: #FFFFE6;
-        border: 1.5px solid #E2EE0B;
-        margin: 10px 10px;
-        font-size: 13px;
-        font-family: "Tahoma", Times, serif;
-}
-
 /* box for some info */
 .daaf {
         background-color: #FFFFD7;
@@ -153,26 +255,6 @@ h2 {
         width:60%
 }
 
-/* rodded corners box  */
-.roundedcornr_box_459680 { background: #ffffff;}
-.roundedcornr_top_459680 div { background: url(images/roundedcornr_459680_tl.png) no-repeat top left;}
-.roundedcornr_top_459680 { background: url(images/roundedcornr_459680_tr.png) no-repeat top right;}
-.roundedcornr_bottom_459680 div {  background: url(images/roundedcornr_459680_bl.png) no-repeat bottom left;}
-.roundedcornr_bottom_459680 { background: url(images/roundedcornr_459680_br.png) no-repeat bottom right;}
-.roundedcornr_top_459680 div, .roundedcornr_top_459680, 
-.roundedcornr_bottom_459680 div, .roundedcornr_bottom_459680 { width: 100%; height: 30px;font-size: 1px;}
-.roundedcornr_content_459680 { margin: 0 2px; }
-.roundedcornr_box_561671 {background: #f5f5f5; min-height: 3em;        width: auto;}
-.roundedcornr_box_561672 { background: #f5f5f5;width: 100%;}
-.roundedcornr_top_561671 div { background: url(images/roundedcornr_561671_tl.png) no-repeat top left;}
-.roundedcornr_top_561671 { background: url(images/roundedcornr_561671_tr.png) no-repeat top right;}
-.roundedcornr_bottom_561671 div { background: url(images/roundedcornr_561671_bl.png) no-repeat bottom left;}
-.roundedcornr_bottom_561671 {  background: url(images/roundedcornr_561671_br.png) no-repeat bottom right;}
-.roundedcornr_top_561671 div, .roundedcornr_top_561671, 
-.roundedcornr_bottom_561671 div, .roundedcornr_bottom_561671 { width: 100%; height: 15px; font-size: 1px;}
-.roundedcornr_content_561671 { margin: 0 15px; }
-
-/* forms */
 input {
         font-weight: normal;
         cursor: pointer;
@@ -203,41 +285,6 @@ textarea {
         font-size: 1em;
         line-height: 1.4em;
 }
-
-table{
-                width: 60%;
-}
-
-.row1 {
-        background-color:#dadada;
-}
-
-.row2 {
-        background-color:#F5F5F5;
-}
-
-.paging{
-                background-color: #F9F9F9;
-                border: 1px solid #666666;
-                font-size: 14px;
-                color: #666666;
-                padding: 0px 3px 0px 3px;
-                margin: 1px;
-                width: 4px;
-                height: 4px;
-}
-.here_page{
-                background-color: #666666;
-                color: #FFFFFF;
-                font-size: 14px;
-                color: #FFFFFF;
-                padding: 0px 3px 0px 3px;
-                margin: 1px;
-                width: 4px;
-                height: 4px;
-}
-
-
 /*
 dont remove it  start
 */
@@ -249,6 +296,11 @@ div#texttype {
         display: none;
 }
 
-/*dont remove it  end*/
-
+h2 { 
+        font-family: "Tahoma", Arial, Helvetica, sans-serif;
+        font-weight: normal;
+        color: #3B6EBF; 
+    font-size: 1.4em;
+        margin: 0.8em 0 0.2em 0;
         
+        }

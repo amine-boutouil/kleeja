@@ -50,17 +50,18 @@ function kleeja_auth_login ($name, $pass)
 	$charset_db = @mysql_client_encoding($SQLVB->connect_id);
 				
 	unset($forum_pass); // We do not need this any longe
-
+/*
 	//must be utf8 !
 	if(strpos(strtolower($charset_db), 'utf') === false)
 	{
 		big_error(sprintf($lang['AUTH_INTEGRATION_N_UTF8_T'], 'Vbulletin'), sprintf($lang['AUTH_INTEGRATION_N_UTF8'], 'Vbulletin'));
 	}
-
+	*/
+	//header("Content-Type: text/html; charset=iso-8859-1"); 
 	$query_salt = array(
 					'SELECT'	=> 'salt',
 					'FROM'		=> "`{$forum_prefix}user`",
-					'WHERE'		=> "username='" . $SQLVB->escape($name) . "'"
+					'WHERE'		=> "username='" . $SQLVB->real_escape($name) . "'"
 				);
 			
 	($hook = kleeja_run_hook('qr_select_usrdata_vb_usr_class')) ? eval($hook) : null; //run hook				
@@ -68,7 +69,6 @@ function kleeja_auth_login ($name, $pass)
 				
 	if ($SQLVB->num_rows($result_salt) > 0) 
 	{
-		
 		while($row1=$SQLVB->fetch_array($result_salt))
 		{
 
@@ -76,7 +76,7 @@ function kleeja_auth_login ($name, $pass)
 
 			$query = array('SELECT'	=> '*',
 							'FROM'	=> "`{$forum_prefix}user`",
-							'WHERE'	=> "username='" . $SQLVB->escape($name) . "' AND password='" . $pass . "'"
+							'WHERE'	=> "username='" . $SQLVB->real_escape($name) . "' AND password='" . $pass . "'"
 							);
 		
 			$result = $SQLVB->build($query);

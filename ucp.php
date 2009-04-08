@@ -394,7 +394,7 @@ switch ($_GET['go'])
 					$arr[] = array(	'id'	=> $row['id'],
 									'name'	=> '<a href="' .  $config['siteurl'] .  $url . '" target="blank">' . (empty($row['real_filename']) ? $row['name'] : $row['real_filename']) . '</a>',
 								);
-										
+							
 						//when submit !!
 						if (isset($_POST['submit_files']))
 						{
@@ -408,7 +408,10 @@ switch ($_GET['go'])
 												);
 												
 								($hook = kleeja_run_hook('qr_del_files_in_filecp')) ? eval($hook) : null; //run hook	
-								if (!$SQL->build($query_del)) {die($lang['CANT_DELETE_SQL']);}		
+								if (!$SQL->build($query_del)) 
+								{
+									die($lang['CANT_DELETE_SQL']);
+								}		
 								
 								//delete from folder .. 
 								@unlink ($row['folder'] . "/" . $row['name'] );
@@ -419,8 +422,6 @@ switch ($_GET['go'])
 								}
 								
 							}
-							//show msg
-							kleeja_info($lang['FILES_UPDATED']);
 						}
 				}
 				$SQL->freeresult($result);
@@ -430,6 +431,13 @@ switch ($_GET['go'])
 		else #nums_rows
 		{
 			$no_results = true;
+		}
+		
+		//after submit 
+		if (isset($_POST['submit_files']))
+		{
+			//show msg
+			kleeja_info($lang['FILES_UPDATED']);
 		}
 				
 		break;

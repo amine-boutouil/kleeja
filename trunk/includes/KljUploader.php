@@ -527,12 +527,8 @@ function process ()
 					$this->errs[]=  $lang['CANT_INSERT_SQL'];
 				}
 				
-				if($config['id_form'] == 'id') {
-				$this->id_for_url =  $SQL->insert_id();
-				}
-				else if($config['id_form'] == 'filename') {
-				$this->id_for_url =  $namee;	
-				}
+				$this->id_for_url  = ($config['id_form'] == 'filename') ?   $namee : $SQL->insert_id();
+
 
 				//calculate stats ..s
 				$update_query = array(

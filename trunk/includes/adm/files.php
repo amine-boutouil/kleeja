@@ -24,7 +24,7 @@
 	
 	
 	
-	$query	= array('SELECT'	=> 'f.*',
+	$query	= array('SELECT'	=> 'COUNT(f.id) AS total_files',
 					'FROM'		=> "{$dbprefix}files f",
 					'ORDER BY'	=> 'f.id DESC'
 					);
@@ -33,7 +33,7 @@
 	if (isset($_POST['search_file']))
 	{
 		$file_namee	= ($_POST['filename']!='') ? 'AND f.real_filename LIKE \'%' . $SQL->escape($_POST['filename']) . '%\' ' : ''; 
-		$usernamee	= ($_POST['username']!='') ? 'AND u.name LIKE \'%' . $SQL->escape($_POST['username']) . '%\' AND u.id=f.user' : ''; 
+		$usernamee	= ($_POST['username']!='') ? 'AND u.name LIKE \'%' . $SQL->escape($_POST['username']) . '%\'' : ''; 
 		$size_than	=   ' f.size ' . ($_POST['than']!=1 ? '<=' : '>=') . (intval($_POST['size']) * 1024) . ' ';
 		$ups_than	=  ($_POST['ups']!='') ? 'AND f.uploads ' . ($_POST['uthan']!=1 ? '<' : '>') . intval($_POST['ups']) . ' ' : '';
 		$rep_than	=  ($_POST['rep']!='') ? 'AND f.report ' . ($_POST['rthan']!=1 ? '<' : '>') . intval($_POST['rep']) . ' ' : '';
@@ -41,8 +41,13 @@
 		$exte		=  ($_POST['ext']!='') ? 'AND f.type LIKE \'%' . $SQL->escape($_POST['ext']) . '%\' ' : '';
 		$ipp		=  ($_POST['user_ip']!='') ? 'AND f.user_ip LIKE \'%' . $SQL->escape($_POST['user_ip']) . '%\' ' : '';
 		
+		$query['JOINS']	= array(
+			array(
+				'LEFT JOIN'	=> "{$dbprefix}users u",
+				'ON'			=> 'u.id=f.user'
+			)
+		);
 
-		$query['FROM'] .= ", {$dbprefix}users u";
 		$query['WHERE'] = "$size_than $file_namee $ups_than $exte $rep_than $usernamee $lstd_than $exte $ipp";
 
 	}
@@ -55,20 +60,22 @@
 		$query['ORDER BY'] = "f." . $SQL->escape($_REQUEST['order_by']) . " DESC";
 	}
 
-		
 	$result = $SQL->build($query);
-		
+	
+	$nums_rows = 0;
+	$n_fetch = $SQL->fetch_array($result);
+	$nums_rows = $n_fetch['total_files'];
+
 	/////////////pager 
-	$nums_rows = $SQL->num_rows($result);
+	//$nums_rows = $SQL->num_rows($result);
 	$currentPage = (isset($_GET['page']))? intval($_GET['page']) : 1;
 	$Pager = new SimplePager($perpage, $nums_rows, $currentPage);
 	$start = $Pager->getStartRow();
 
 	$no_results = false;
-		
-
 	if ($nums_rows > 0)
 	{
+		$query['SELECT'] = 'f.*';
 		$query['LIMIT']	= "$start, $perpage";
 		$result = $SQL->build($query);
 

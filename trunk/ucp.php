@@ -30,10 +30,6 @@ switch ($_GET['go'])
 			$forget_pass_link		= "ucp.php?go=get_pass";
 			
 			($hook = kleeja_run_hook('login_before_submit')) ? eval($hook) : null; //run hook
-			if($config['user_system'] == 'vb' or $config['user_system'] == 'mysmartbb')
-			{
-				header("Content-Type: text/html; charset=iso-8859-1"); 
-			}
 			//logon before !
 			if ($usrcp->name())
 			{

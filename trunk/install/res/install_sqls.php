@@ -206,7 +206,7 @@ $install_sqls['config_insert16'] = "INSERT INTO `{$dbprefix}config` (`name`, `va
 
 $install_sqls['config_insert17'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('del_url_file', '1', '<label>{lang.YES}<input type=\"radio\" id=\"del_url_file\" name=\"del_url_file\" value=\"1\"  <IF NAME=\"con.del_url_file==1\"> checked=\"checked\"</IF>></label>\r\n                <label>{lang.NO}<input type=\"radio\" id=\"del_url_file\" name=\"del_url_file\" value=\"0\"  <IF NAME=\"con.del_url_file==0\"> checked=\"checked\"</IF>></label>', 13)";
 
-$install_sqls['config_insert18'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`) VALUES ('language', '" . getlang() . "', '<select name=\"language\" id=\"language\">\r\n                {lngfiles}\r\n                </select>', 19)";
+$install_sqls['config_insert18'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('language', '" . getlang() . "', '<select name=\"language\" id=\"language\">\r\n                {lngfiles}\r\n                </select>', 19)";
 
 $install_sqls['config_insert19'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('www_url', '0', '<label>{lang.YES}<input type=\"radio\" id=\"www_url\" name=\"www_url\" value=\"1\"  <IF NAME=\"con.www_url==1\"> checked=\"checked\"</IF>></label>\r\n                <label>{lang.NO}<input type=\"radio\" id=\"www_url\" name=\"www_url\" value=\"0\"  <IF NAME=\"con.www_url==0\"> checked=\"checked\"</IF>></label>', 8)";
 

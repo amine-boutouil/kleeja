@@ -35,7 +35,7 @@
 		
 		if ($nums_rows > 0)
 		{
-			$query['LIMIT']	=	"$start,$perpage";
+			$query['LIMIT']	=	"$start, $perpage";
 			$result = $SQL->build($query);
 			
 			while($row=$SQL->fetch_array($result))
@@ -63,7 +63,10 @@
 											'WHERE'		=> "id='" . intval($row['id'])."'"
 											);
 																
-							if (!$SQL->build($query_del)) {die($lang['CANT_DELETE_SQL']);}	
+							if (!$SQL->build($query_del))
+							{
+								die($lang['CANT_DELETE_SQL']);
+							}	
 						}
 				}
 				
@@ -99,7 +102,7 @@
 	}
 	
 	$total_pages 	= $Pager->getTotalPages(); 
-	$page_nums 		= $Pager->print_nums($config['siteurl'].'admin.php?cp=report'); 
+	$page_nums 		= $Pager->print_nums($config['siteurl'] . 'admin.php?cp=reports'); 
 		
 		//after submit 
 	if (isset($_POST['submit']))

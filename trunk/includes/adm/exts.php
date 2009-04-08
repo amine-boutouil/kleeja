@@ -125,6 +125,7 @@
 					);
 										
 			$result = $SQL->build($query);
+			
 			if ($SQL->num_rows($result) > 0)
 			{
 				$text = sprintf($lang['NEW_EXT_EXISTS_B4'], $new_ext_i);
@@ -139,12 +140,9 @@
 										'VALUES'	=> "'$ext_gr_i', '$new_ext_i', '$gust_size', '1', '$user_size', '1'"
 									);
 						
-						($hook = kleeja_run_hook('qr_insert_new_report')) ? eval($hook) : null; //run hook
-				
-						if (!$SQL->build($insert_query))
-		
-				$SQL->build($update_query);
-			
+
+				$SQL->build($insert_query);
+
 				$text	= $lang['NEW_EXT_ADD']. '<meta HTTP-EQUIV="REFRESH" content="2; url=./admin.php?cp=exts">' ."\n";
 				$stylee	= "admin_info";
 			}

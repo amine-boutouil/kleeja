@@ -30,7 +30,10 @@ switch ($_GET['go'])
 			$forget_pass_link		= "ucp.php?go=get_pass";
 			
 			($hook = kleeja_run_hook('login_before_submit')) ? eval($hook) : null; //run hook
-			
+			if($config['user_system'] == 'vb' or $config['user_system'] == 'mysmartbb')
+			{
+				header("Content-Type: text/html; charset=iso-8859-1"); 
+			}
 			//logon before !
 			if ($usrcp->name())
 			{
@@ -104,6 +107,7 @@ switch ($_GET['go'])
 			else if ($config['user_system'] != '1')
 			{
 				($hook = kleeja_run_hook('register_not_default_sys')) ? eval($hook) : null; //run hook
+				$forum_path = ($forum_path[0] == '/' ? '..' : '../') .  $forum_path;
 				kleeja_info('<a href="' . $forum_path . '" title="' . $lang['REGISTER'] . '">' . $lang['REGISTER']. '</a>', $lang['REGISTER']);
 			}
 			
@@ -404,7 +408,7 @@ switch ($_GET['go'])
 							{
 								$query_del = array(
 													'DELETE'	=> "{$dbprefix}files",
-													'WHERE'		=> "id='".intval($row['id'])."'"
+													'WHERE'		=> "id='".intval($row['id'])."' AND user='".$usrcp->id()."'"
 												);
 												
 								($hook = kleeja_run_hook('qr_del_files_in_filecp')) ? eval($hook) : null; //run hook	

@@ -301,8 +301,7 @@ if (!defined('IN_COMMON'))
 			$this->_parse($this->HTML);
 
  			ob_start();
- 			$page = str_replace('<'.'?php','<'.'?',$this->HTML);
-			eval('?'.'>'.trim($page).'<'.'?');
+			eval('?' . '>' . trim($this->HTML) . '<' . '?');
 			$page = ob_get_contents();
 			ob_end_clean();
 		

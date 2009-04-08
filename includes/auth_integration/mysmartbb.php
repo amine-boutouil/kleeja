@@ -47,17 +47,17 @@ function kleeja_auth_login ($name, $pass)
 	$SQLMS	= new SSQL($forum_srv, $forum_user, $forum_pass, $forum_db);
 	$charset_db = @mysql_client_encoding($SQLMS->connect_id);
 	unset($forum_pass); // We do not need this any longe
-	/*
+	
 	//must be utf8 !
 	if(strpos(strtolower($charset_db), 'utf') === false)
 	{
 		big_error(sprintf($lang['AUTH_INTEGRATION_N_UTF8_T'], 'MySmartBB'), sprintf($lang['AUTH_INTEGRATION_N_UTF8'], 'MySmartBB'));
 	}
-	*/
+	
 	
 	$query = array('SELECT'	=> '*',
 					'FROM'	=> "`{$forum_prefix}member`",
-					'WHERE'	=> "username='" . $SQLMS->real_escape($name) . "' AND password='" . md5($pass) . "'"
+					'WHERE'	=> "username='" . $SQLMS->escape($name) . "' AND password='" . md5($pass) . "'"
 					);
 
 	($hook = kleeja_run_hook('qr_select_usrdata_mysbb_usr_class')) ? eval($hook) : null; //run hook	

@@ -50,14 +50,13 @@ function kleeja_auth_login ($name, $pass)
 	$charset_db = @mysql_client_encoding($SQLVB->connect_id);
 				
 	unset($forum_pass); // We do not need this any longe
-/*
+
 	//must be utf8 !
 	if(strpos(strtolower($charset_db), 'utf') === false)
 	{
 		big_error(sprintf($lang['AUTH_INTEGRATION_N_UTF8_T'], 'Vbulletin'), sprintf($lang['AUTH_INTEGRATION_N_UTF8'], 'Vbulletin'));
 	}
-	*/
-	//header("Content-Type: text/html; charset=iso-8859-1"); 
+	
 	$query_salt = array(
 					'SELECT'	=> 'salt',
 					'FROM'		=> "`{$forum_prefix}user`",

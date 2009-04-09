@@ -60,7 +60,7 @@ function kleeja_auth_login ($name, $pass)
 	$query_salt = array(
 					'SELECT'	=> 'salt',
 					'FROM'		=> "`{$forum_prefix}user`",
-					'WHERE'		=> "username='" . $SQLVB->real_escape($name) . "'"
+					'WHERE'		=> "username='" . $SQLVB->escape($name) . "'"
 				);
 			
 	($hook = kleeja_run_hook('qr_select_usrdata_vb_usr_class')) ? eval($hook) : null; //run hook				
@@ -75,7 +75,7 @@ function kleeja_auth_login ($name, $pass)
 
 			$query = array('SELECT'	=> '*',
 							'FROM'	=> "`{$forum_prefix}user`",
-							'WHERE'	=> "username='" . $SQLVB->real_escape($name) . "' AND password='" . $pass . "'"
+							'WHERE'	=> "username='" . $SQLVB->escape($name) . "' AND password='" . $pass . "'"
 							);
 		
 			$result = $SQLVB->build($query);

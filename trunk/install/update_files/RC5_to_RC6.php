@@ -21,6 +21,8 @@ $update_sqls['up_lang_config'] = "UPDATE `{$dbprefix}config` SET `value` = '" . 
 $update_sqls['up_style_config'] = "UPDATE `{$dbprefix}config` SET `value` = 'default' WHERE `name` = 'style'";
 $update_sqls['drop_lang'] = "DROP TABLE `{$dbprefix}lang`";
 $update_sqls['option'] = "ALTER TABLE `{$dbprefix}config` ADD `option` mediumtext NOT NULL;";
+$update_sqls['size_in_stats'] = "ALTER TABLE `{$dbprefix}_stats` CHANGE `sizes` `sizes` INT( 25 ) NOT NULL DEFAULT '0';";
+
 
 //
 //is this 

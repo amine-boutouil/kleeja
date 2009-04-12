@@ -52,7 +52,7 @@ $install_sqls['stats'] = "
 CREATE TABLE `{$dbprefix}stats` (
   `files` int(11) NOT NULL default '0',
   `users` int(11) NOT NULL default '0',
-  `sizes` int(11) NOT NULL default '0',
+  `sizes` bigint(20) NOT NULL default '0',
   `last_file` varchar(350) collate utf8_bin NOT NULL,
   `last_f_del` int(10) NOT NULL,
   `today` int(4) NOT NULL,

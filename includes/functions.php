@@ -24,7 +24,7 @@ if (!defined('IN_COMMON'))
 */	
 function Saaheader($title)
 {
-		global $tpl,$usrcp,$lang,$user_is,$config,$extras;
+		global $tpl,$usrcp,$lang,$user_is,$config,$extras,$script_encoding,$errorpage;
 
 		$user_is = ($usrcp->name()) ? true: false;
 		
@@ -101,8 +101,17 @@ function Saaheader($title)
 		//$tpl->assign("ex_header",$extras['header']);
 
 		($hook = kleeja_run_hook('func_Saaheader')) ? eval($hook) : null; //run hook
+	
+		if($config['user_system'] != '1' && isset($script_encoding) && $_GET['go'] == 'login' && function_exists('iconv') && strpos(strtolower($script_encoding), 'utf') === false && !$errorpage) 
+		{
+			$header = iconv("UTF-8",strtoupper($script_encoding) . "//IGNORE",$tpl->display("header"));
+		}
+		else 
+		{
+			$header = $tpl->display("header");
+		}
 		
-		print $tpl->display("header");
+		print $header;
 	}
 
 
@@ -113,7 +122,7 @@ function Saaheader($title)
 */
 function Saafooter()
 {
-		global $tpl,$SQL,$starttm,$config,$usrcp,$lang,$do_gzip_compress;
+		global $tpl,$SQL,$starttm,$config,$usrcp,$lang,$do_gzip_compress,$script_encoding,$errorpage;
 		
 		//show stats ..
 		if ($config['statfooter'] !=0) 
@@ -155,7 +164,18 @@ function Saafooter()
 		($hook = kleeja_run_hook('func_Saafooter')) ? eval($hook) : null; //run hook
 		
 		//show footer
-		print $tpl->display("footer");
+		if($config['user_system'] != '1' && isset($script_encoding) && $_GET['go'] == 'login' && function_exists('iconv')  && strpos(strtolower($script_encoding), 'utf') === false && !$errorpage)
+		{
+			$footer = iconv("UTF-8",strtoupper($script_encoding) . "//IGNORE",$tpl->display("footer"));
+		}
+		else 
+		{
+			$footer = $tpl->display("footer");
+		}
+		
+		
+		print $footer;
+		//print $footer;
 		
 		//page analysis 
 		if (isset($_GET['debug']) && $usrcp->admin())

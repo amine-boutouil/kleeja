@@ -14,22 +14,21 @@ if (!defined('IN_COMMON'))
 function kleeja_auth_login ($name, $pass)
 {
 	// ok, i dont hate vb .. but i cant feel my self use it ... 
-	global $forum_path, $lang;
+	global $script_path, $lang;
 	
 					
 	//check for last slash
-	if($forum_path[strlen($forum_path)] == '/')
+	if($script_path[strlen($script_path)] == '/')
 	{
-		$forum_path = substr($forum_path, 0, strlen($forum_path));
+		$script_path = substr($script_path, 0, strlen($script_path));
 	}
 					
-	$forum_path = ($forum_path[0] == '/' ? '..' : '../') . $forum_path;
+	$script_path = ($script_path[0] == '/' ? '..' : '../') . $script_path;
 	
 	//get some useful data from phbb config file
-	if(file_exists($forum_path . '/includes/config.php'))
+	if(file_exists($script_path . '/includes/config.php'))
 	{
-		require ($forum_path . '/includes/config.php');
-		
+		require ($script_path . '/includes/config.php');
 		$forum_srv	= $config['MasterServer']['servername'];
 		$forum_db	= $config['Database']['dbname'];
 		$forum_user	= $config['MasterServer']['username'];
@@ -48,19 +47,26 @@ function kleeja_auth_login ($name, $pass)
 				
 	$SQLVB	= new SSQL($forum_srv, $forum_user, $forum_pass, $forum_db);
 	$charset_db = @mysql_client_encoding($SQLVB->connect_id);
+	$mysql_version = @mysql_get_server_info($SQLVB->connect_id);
 				
 	unset($forum_pass); // We do not need this any longe
 
-	//must be utf8 !
-	if(strpos(strtolower($charset_db), 'utf') === false)
+	// it must be utf If mysql version isn't 5.x and database charset not utf
+	if(strpos(strtolower($charset_db), 'utf') === false && version_compare($mysql_version, '5.0.0', '<'))
 	{
+		//must be utf
 		big_error(sprintf($lang['AUTH_INTEGRATION_N_UTF8_T'], 'Vbulletin'), sprintf($lang['AUTH_INTEGRATION_N_UTF8'], 'Vbulletin'));
 	}
-	
+	if(!function_exists('iconv'))
+ 	{
+ 		big_error('No support for ICONV', 'You must enable the ICONV library to integrate kleeja with your forum. You can solve your problem by changing your forum db charset to UTF8.'); 
+ 	}
+ 			
+	$name_b = $name;
 	$query_salt = array(
 					'SELECT'	=> 'salt',
 					'FROM'		=> "`{$forum_prefix}user`",
-					'WHERE'		=> "username='" . $SQLVB->escape($name) . "'"
+					'WHERE'		=> "username='" . $SQLVB->real_escape($name) . "'"
 				);
 			
 	($hook = kleeja_run_hook('qr_select_usrdata_vb_usr_class')) ? eval($hook) : null; //run hook				
@@ -75,7 +81,7 @@ function kleeja_auth_login ($name, $pass)
 
 			$query = array('SELECT'	=> '*',
 							'FROM'	=> "`{$forum_prefix}user`",
-							'WHERE'	=> "username='" . $SQLVB->escape($name) . "' AND password='" . $pass . "'"
+							'WHERE'	=> "username='" . $SQLVB->real_escape($name) . "' AND password='" . $pass . "'"
 							);
 		
 			$result = $SQLVB->build($query);
@@ -86,7 +92,7 @@ function kleeja_auth_login ($name, $pass)
 				while($row=$SQLVB->fetch_array($result))
 				{
 					$_SESSION['USER_ID']	= $row['userid'];
-					$_SESSION['USER_NAME']	= $row['username'];
+					$_SESSION['USER_NAME']	= iconv("","UTF-8//IGNORE",$row['username']);
 					$_SESSION['USER_MAIL']	= $row['email'];
 					$_SESSION['USER_ADMIN']	= ($row['usergroupid'] == 6) ? 1 : 0;
 					$_SESSION['USER_SESS']	= session_id();

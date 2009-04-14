@@ -13,21 +13,21 @@ if (!defined('IN_COMMON'))
 
 function kleeja_auth_login ($name, $pass)
 {
-	global $forum_path, $lang;
+	global $script_path, $lang;
 	
 	//check for last slash / 
-	if($forum_path[strlen($forum_path)] == '/')
+	if($script_path[strlen($script_path)] == '/')
 	{
-		$forum_path = substr($forum_path, 0, strlen($forum_path));
+		$script_path = substr($script_path, 0, strlen($script_path));
 	}
 
-	$forum_path = ($forum_path[0] == '/' ? '..' : '../') .  $forum_path;
+	$script_path = ($script_path[0] == '/' ? '..' : '../') .  $script_path;
 	
 	
 	//get database data from mysmartbb config file
-	if(file_exists($forum_path . '/engine/config.php')) 
+	if(file_exists($script_path . '/engine/config.php')) 
 	{
-		require ($forum_path . '/engine/config.php');
+		require ($script_path . '/engine/config.php');
 		$forum_srv	= $config['db']['server'];
 		$forum_db	= $config['db']['name'];
 		$forum_user	= $config['db']['username'];
@@ -48,16 +48,20 @@ function kleeja_auth_login ($name, $pass)
 	$charset_db = @mysql_client_encoding($SQLMS->connect_id);
 	unset($forum_pass); // We do not need this any longe
 	
-	//must be utf8 !
-	if(strpos(strtolower($charset_db), 'utf') === false)
+	// it must be utf If mysql version isn't 5.x and database charset not utf
+	if(strpos(strtolower($charset_db), 'utf') === false && version_compare($mysql_version, '5.0.0', '<'))
 	{
+		//must be utf8 !
 		big_error(sprintf($lang['AUTH_INTEGRATION_N_UTF8_T'], 'MySmartBB'), sprintf($lang['AUTH_INTEGRATION_N_UTF8'], 'MySmartBB'));
 	}
-	
-	
+	if(!function_exists('iconv'))
+ 	{
+ 		big_error('No support for ICONV', 'You must enable the ICONV library to integrate kleeja with your forum. You can solve your problem by changing your forum db charset to UTF8.'); 
+ 	}
+ 	
 	$query = array('SELECT'	=> '*',
 					'FROM'	=> "`{$forum_prefix}member`",
-					'WHERE'	=> "username='" . $SQLMS->escape($name) . "' AND password='" . md5($pass) . "'"
+					'WHERE'	=> "username='" . $SQLMS->real_escape($name) . "' AND password='" . md5($pass) . "'"
 					);
 
 	($hook = kleeja_run_hook('qr_select_usrdata_mysbb_usr_class')) ? eval($hook) : null; //run hook	
@@ -70,7 +74,7 @@ function kleeja_auth_login ($name, $pass)
 		while($row=$SQLMS->fetch_array($result))
 		{
 			$_SESSION['USER_ID']	= $row['id'];
-			$_SESSION['USER_NAME']	= $row['username'];
+			$_SESSION['USER_NAME']	= iconv("","UTF-8//IGNORE",$row['username']);
 			$_SESSION['USER_MAIL']	= $row['email'];
 			$_SESSION['USER_ADMIN']	= ($row['usergroup'] == 1) ? 1 : 0;
 			$_SESSION['USER_SESS']	= session_id();

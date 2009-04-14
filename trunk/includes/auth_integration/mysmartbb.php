@@ -13,8 +13,9 @@ if (!defined('IN_COMMON'))
 
 function kleeja_auth_login ($name, $pass)
 {
-	global $script_path, $lang, $script_encoding;
+	global $script_path, $lang, $script_encoding, $script_srv, $script_db, $script_user, $script_pass, $script_prefix;
 	
+	if(isset($script_path)) {
 	//check for last slash / 
 	if($script_path[strlen($script_path)] == '/')
 	{
@@ -38,7 +39,16 @@ function kleeja_auth_login ($name, $pass)
 	{
 		big_error('Forum path is not correct', sprintf($lang['SCRIPT_AUTH_PATH_WRONG'], 'MySmartBB'));
 	}
-
+	}
+	else
+	{
+		$forum_srv	= $script_srv;
+		$forum_db	= $script_db;
+		$forum_user	= $script_user;
+		$forum_pass	= $script_pass;
+		$forum_prefix = $script_prefix;
+	}
+	
 	if(empty($forum_srv) || empty($forum_user) || empty($forum_db))
 	{
 		return;

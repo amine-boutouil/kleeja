@@ -660,13 +660,17 @@ switch ($_GET['go'])
 	{
 		$titlee = $lang['USERS_SYSTEM'];
 	}
+	if($config['user_system'] != '1' && isset($script_encoding) && $_GET['go'] == 'login' && function_exists('iconv') && strpos(strtolower($script_encoding), 'utf') === false)
+		{
+			//send header
+			header("Content-type: text/html; charset={$script_encoding}");	
+		}
 	//header
 	Saaheader($titlee);
 		//tpl	
 		if($config['user_system'] != '1' && isset($script_encoding) && $_GET['go'] == 'login' && function_exists('iconv') && strpos(strtolower($script_encoding), 'utf') === false)
 		{
 			//change login page encoding if kleeja is integrated with other script
-			header("Content-type: text/html; charset={$script_encoding}");	
 			 echo iconv("UTF-8",strtoupper($script_encoding) . "//IGNORE",$tpl->display($stylee));	
 			 $errorpage = false;	
 		}

@@ -38,7 +38,7 @@ class SSQL
 				initiate the class
 				wirth basic data
 				*/
-                function SSQL($host,$db_username,$db_password,$db_name, $bad_forum = false)
+                function SSQL($host,$db_username,$db_password,$db_name, $integrated_script = false)
 				{
                           $this->host        = $host;
                           $this->db_username = $db_username;
@@ -56,7 +56,14 @@ class SSQL
 							{
 								$dbselect = @mysql_select_db($this->db_name) or die($this->error_msg("ERROR: CAN NOT SELECT DATABASE [" . $this->db_name . "]..."));;
 								
-								 if(!$dbselect)
+								if ($dbselect)
+								{
+									if(!$integrated_script)
+									{
+										mysql_query("SET NAMES 'utf8'");
+									}
+								}
+								else if(!$dbselect)
 								{
 									mysql_close($this->connect_id);
 									$this->connect_id = $dbselect;

@@ -44,7 +44,7 @@ function kleeja_auth_login ($name, $pass)
 		return;
 	}
 	
-	$SQLMS	= new SSQL($forum_srv, $forum_user, $forum_pass, $forum_db);
+	$SQLMS	= new SSQL($forum_srv, $forum_user, $forum_pass, $forum_db, TRUE);
 	$charset_db = @mysql_client_encoding($SQLMS->connect_id);
 	unset($forum_pass); // We do not need this any longe
 	

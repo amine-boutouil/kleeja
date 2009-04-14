@@ -23,18 +23,19 @@ switch ($_GET['go'])
 	//login page
 	//
 	case "login" : 
-	
 			$stylee					= "login";
 			$titlee					= $lang['LOGIN'];
 			$action					= "ucp.php?go=login";
 			$forget_pass_link		= "ucp.php?go=get_pass";
 			
 			($hook = kleeja_run_hook('login_before_submit')) ? eval($hook) : null; //run hook
+			
 			//logon before !
 			if ($usrcp->name())
 			{
 				($hook = kleeja_run_hook('login_logon_before')) ? eval($hook) : null; //run hook
 				
+				$errorpage = true;
 				$text	= $lang['LOGINED_BEFORE'] . ' ..<br /> <a href="ucp.php?go=logout">' . $lang['LOGOUT'] . '</a>';
 				kleeja_info($text);
 			}
@@ -73,12 +74,14 @@ switch ($_GET['go'])
 				
 					if(empty($ERRORS))
 					{
+						$errorpage = true;
 						($hook = kleeja_run_hook('login_data_no_error')) ? eval($hook) : null; //run hook
 						$text	= $lang['LOGIN_SUCCESFUL'] . ' <br /> <a href="./index.php">' . $lang['HOME'] . '</a>';
 						kleeja_info($text);
 					}
 					else
 					{
+						$errorpage = true;
 						$errs	=	'';
 						foreach($ERRORS as $r)
 						{
@@ -87,6 +90,7 @@ switch ($_GET['go'])
 						kleeja_err($errs);
 					}
 			}
+			
 	
 		break;
 		
@@ -656,11 +660,20 @@ switch ($_GET['go'])
 	{
 		$titlee = $lang['USERS_SYSTEM'];
 	}
-	
 	//header
 	Saaheader($titlee);
-		//tpl
+		//tpl	
+		if($config['user_system'] != '1' && isset($script_encoding) && $_GET['go'] == 'login' && function_exists('iconv') && strpos(strtolower($script_encoding), 'utf') === false)
+		{
+			//change login page encoding if kleeja is integrated with other script
+			header("Content-type: text/html; charset={$script_encoding}");	
+			 echo iconv("UTF-8",strtoupper($script_encoding) . "//IGNORE",$tpl->display($stylee));	
+			 $errorpage = false;	
+		}
+		else 
+		{			
 		echo $tpl->display($stylee);
+		}
 	//footer
 	Saafooter();
 ?>

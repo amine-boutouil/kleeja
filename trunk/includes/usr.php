@@ -22,7 +22,7 @@ class usrcp
 				// this function like a traffic sign :)
 				function data ($name, $pass)
 				{
-					global $config, $path, $forum_path;
+					global $config, $path;
 						
 						//we need this in future 
 						if(defined('IGNORE_USER_SYSTEM'))

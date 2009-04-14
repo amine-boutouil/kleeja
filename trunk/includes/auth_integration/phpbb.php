@@ -14,20 +14,20 @@ if (!defined('IN_COMMON'))
 function kleeja_auth_login ($name, $pass)
 {
 	//global $forum_srv, $forum_user, $forum_pass, $forum_db, $forum_charset;
-	global $forum_path, $SQLBB, $phpEx, $phpbb_root_path, $lang;
+	global $script_path, $SQLBB, $phpEx, $phpbb_root_path, $lang;
 				
 		//check for last slash / 
-	if($forum_path[strlen($forum_path)] == '/')
+	if($script_path[strlen($script_path)] == '/')
 	{
-			$forum_path = substr($forum_path, 0, strlen($forum_path));
+			$script_path = substr($script_path, 0, strlen($script_path));
 	}
 					
-	$forum_path = ($forum_path[0] == '/' ? '..' : '../') . $forum_path;
+	$script_path = ($script_path[0] == '/' ? '..' : '../') . $script_path;
 
 	//get some useful data from phbb config file
-	if(file_exists($forum_path . '/config.php'))
+	if(file_exists($script_path . '/config.php'))
 	{
-		require ($forum_path . '/config.php');
+		require ($script_path . '/config.php');
 		
 		$forum_srv	= $dbhost;
 		$forum_db	= $dbname;
@@ -53,13 +53,13 @@ function kleeja_auth_login ($name, $pass)
 	unset($forum_pass); // We do not need this any longe
 					
 	//phpbb3
-	if(file_exists($forum_path . '/includes/functions_transfer.php'))
+	if(file_exists($script_path . '/includes/functions_transfer.php'))
 	{
 		//get utf tools
 		define('IN_PHPBB', true);
-		$phpbb_root_path = $forum_path . '/';
+		$phpbb_root_path = $script_path . '/';
 		$phpEx = 'php';
-		include_once($forum_path . '/includes/utf/utf_tools.' . $phpEx);
+		include_once($script_path . '/includes/utf/utf_tools.' . $phpEx);
 							
 		$row_leve = 'user_type';
 		$admin_level = 3;					

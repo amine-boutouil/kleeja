@@ -58,14 +58,14 @@ class SSQL
 								
 								if ($dbselect)
 								{
-									if($bad_forum != false)
+								/*	if($bad_forum != false)
 									{
 										//mysql_query("SET NAMES latin1_swedish_ci");
 									}
 									else
 									{
 										mysql_query("SET NAMES 'utf8'");
-									}
+									}*/
 								}
 								else if(!$dbselect)
 								{

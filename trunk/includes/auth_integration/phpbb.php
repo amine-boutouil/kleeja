@@ -14,7 +14,7 @@ if (!defined('IN_COMMON'))
 function kleeja_auth_login ($name, $pass)
 {
 	//global $forum_srv, $forum_user, $forum_pass, $forum_db, $forum_charset;
-	global $script_path, $SQLBB, $phpEx, $phpbb_root_path, $lang;
+	global $script_path, $SQLBB, $phpEx, $phpbb_root_path, $lang, $script_encoding;
 				
 		//check for last slash / 
 	if($script_path[strlen($script_path)] == '/')
@@ -47,7 +47,7 @@ function kleeja_auth_login ($name, $pass)
 	}
 								
 	//conecting ...		
-	$SQLBB	= new SSQL($forum_srv,$forum_user,$forum_pass,$forum_db);
+	$SQLBB	= new SSQL($forum_srv,$forum_user,$forum_pass,$forum_db,TRUE);
 	$charset_db = @mysql_client_encoding($SQLBB->connect_id);
 					
 	unset($forum_pass); // We do not need this any longe
@@ -85,18 +85,17 @@ function kleeja_auth_login ($name, $pass)
 	else//phpbb2
 	{
 	
-		//must be utf8 !
-		if(strpos(strtolower($charset_db), 'utf') === false)
-		{
-			big_error(sprintf($lang['AUTH_INTEGRATION_N_UTF8_T'], 'phpBB2'), sprintf($lang['AUTH_INTEGRATION_N_UTF8'], 'phpBB2'));
-		}
+		if(!function_exists('iconv'))
+ 		{
+ 			big_error('No support for ICONV', 'You must enable the ICONV library to integrate kleeja with your forum. You can solve your problem by changing your forum db charset to UTF8.'); 
+ 		}
 	
 		$row_leve = 'user_level';
 		$admin_level = 1;
 	
 		$query = array('SELECT'	=> '*',
 						'FROM'		=> "`{$forum_prefix}users`",
-						'WHERE'		=>"username='" . $SQLBB->escape($name) . "' AND user_password='" . md5($pass) . "'"
+						'WHERE'		=>"username='" . $SQLBB->real_escape($name) . "' AND user_password='" . md5($pass) . "'"
 					);
 								
 	}
@@ -110,7 +109,7 @@ function kleeja_auth_login ($name, $pass)
 		while($row=$SQLBB->fetch_array($result))
 		{
 			$_SESSION['USER_ID']	=	$row['user_id'];
-			$_SESSION['USER_NAME']	=	$row['username'];
+			$_SESSION['USER_NAME']	=	iconv(strtoupper($script_encoding),"UTF-8//IGNORE",$row['username']);
 			$_SESSION['USER_MAIL']	=	$row['user_email'];
 			$_SESSION['USER_ADMIN']	=	($row[$row_leve] == $admin_level) ? 1 : 0;
 			$_SESSION['USER_SESS']	=	session_id();

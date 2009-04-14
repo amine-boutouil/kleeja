@@ -14,9 +14,10 @@ if (!defined('IN_COMMON'))
 function kleeja_auth_login ($name, $pass)
 {
 	//global $forum_srv, $forum_user, $forum_pass, $forum_db, $forum_charset;
-	global $script_path, $SQLBB, $phpEx, $phpbb_root_path, $lang, $script_encoding;
+	global $script_path, $SQLBB, $phpEx, $phpbb_root_path, $lang, $script_encoding, $script_srv, $script_db, $script_user, $script_pass, $script_prefix;
 				
-		//check for last slash / 
+	//check for last slash / 
+	if(isset($script_path)) {
 	if($script_path[strlen($script_path)] == '/')
 	{
 			$script_path = substr($script_path, 0, strlen($script_path));
@@ -38,6 +39,15 @@ function kleeja_auth_login ($name, $pass)
 	else
 	{
 		big_error('Forum path is not correct', sprintf($lang['SCRIPT_AUTH_PATH_WRONG'], 'phpBB'));
+	}
+	}
+	else 
+	{
+		$forum_srv	= $script_srv;
+		$forum_db	= $script_db;
+		$forum_user	= $script_user;
+		$forum_pass	= $script_pass;
+		$forum_prefix = $script_prefix;
 	}
 	
 	//if no variables of db

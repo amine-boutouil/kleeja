@@ -14,7 +14,7 @@ if (!defined('IN_COMMON'))
 function kleeja_auth_login ($name, $pass)
 {
 	// ok, i dont hate vb .. but i cant feel my self use it ... 
-	global $script_path, $lang;
+	global $script_path, $lang, $script_encoding;
 	
 					
 	//check for last slash
@@ -51,12 +51,6 @@ function kleeja_auth_login ($name, $pass)
 				
 	unset($forum_pass); // We do not need this any longe
 
-	// it must be utf If mysql version isn't 5.x and database charset not utf
-	if(strpos(strtolower($charset_db), 'utf') === false && version_compare($mysql_version, '5.0.0', '<'))
-	{
-		//must be utf
-		big_error(sprintf($lang['AUTH_INTEGRATION_N_UTF8_T'], 'Vbulletin'), sprintf($lang['AUTH_INTEGRATION_N_UTF8'], 'Vbulletin'));
-	}
 	if(!function_exists('iconv'))
  	{
  		big_error('No support for ICONV', 'You must enable the ICONV library to integrate kleeja with your forum. You can solve your problem by changing your forum db charset to UTF8.'); 
@@ -92,7 +86,7 @@ function kleeja_auth_login ($name, $pass)
 				while($row=$SQLVB->fetch_array($result))
 				{
 					$_SESSION['USER_ID']	= $row['userid'];
-					$_SESSION['USER_NAME']	= iconv("","UTF-8//IGNORE",$row['username']);
+					$_SESSION['USER_NAME']	= iconv(strtoupper($script_encoding),"UTF-8//IGNORE",$row['username']);
 					$_SESSION['USER_MAIL']	= $row['email'];
 					$_SESSION['USER_ADMIN']	= ($row['usergroupid'] == 6) ? 1 : 0;
 					$_SESSION['USER_SESS']	= session_id();

@@ -95,10 +95,10 @@ function kleeja_auth_login ($name, $pass)
 	else//phpbb2
 	{
 	
-		if(!function_exists('iconv'))
- 		{
- 			big_error('No support for ICONV', 'You must enable the ICONV library to integrate kleeja with your forum. You can solve your problem by changing your forum db charset to UTF8.'); 
- 		}
+	if(!function_exists('iconv') && strpos(strtolower($script_encoding), 'utf') === false)
+ 	{
+ 		big_error('No support for ICONV', 'You must enable the ICONV library to integrate kleeja with your forum. You can solve your problem by changing your forum db charset to UTF8.'); 
+ 	}
 	
 		$row_leve = 'user_level';
 		$admin_level = 1;
@@ -119,7 +119,7 @@ function kleeja_auth_login ($name, $pass)
 		while($row=$SQLBB->fetch_array($result))
 		{
 			$_SESSION['USER_ID']	=	$row['user_id'];
-			$_SESSION['USER_NAME']	=	iconv(strtoupper($script_encoding),"UTF-8//IGNORE",$row['username']);
+			$_SESSION['USER_NAME']	=	(strpos(strtolower($script_encoding), 'utf') == true) ? $row['username'] : iconv(strtoupper($script_encoding),"UTF-8//IGNORE",$row['username']);
 			$_SESSION['USER_MAIL']	=	$row['user_email'];
 			$_SESSION['USER_ADMIN']	=	($row[$row_leve] == $admin_level) ? 1 : 0;
 			$_SESSION['USER_SESS']	=	session_id();

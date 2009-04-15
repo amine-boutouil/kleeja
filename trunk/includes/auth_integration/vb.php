@@ -60,12 +60,11 @@ function kleeja_auth_login ($name, $pass)
 				
 	unset($forum_pass); // We do not need this any longe
 
-	if(!function_exists('iconv'))
+	if(!function_exists('iconv') && strpos(strtolower($script_encoding), 'utf') === false)
  	{
  		big_error('No support for ICONV', 'You must enable the ICONV library to integrate kleeja with your forum. You can solve your problem by changing your forum db charset to UTF8.'); 
  	}
- 			
-	$name_b = $name;
+
 	$query_salt = array(
 					'SELECT'	=> 'salt',
 					'FROM'		=> "`{$forum_prefix}user`",
@@ -95,7 +94,7 @@ function kleeja_auth_login ($name, $pass)
 				while($row=$SQLVB->fetch_array($result))
 				{
 					$_SESSION['USER_ID']	= $row['userid'];
-					$_SESSION['USER_NAME']	= iconv(strtoupper($script_encoding),"UTF-8//IGNORE",$row['username']);
+					$_SESSION['USER_NAME']	= (strpos(strtolower($script_encoding), 'utf') == true) ? $row['username'] : iconv(strtoupper($script_encoding),"UTF-8//IGNORE",$row['username']);
 					$_SESSION['USER_MAIL']	= $row['email'];
 					$_SESSION['USER_ADMIN']	= ($row['usergroupid'] == 6) ? 1 : 0;
 					$_SESSION['USER_SESS']	= session_id();

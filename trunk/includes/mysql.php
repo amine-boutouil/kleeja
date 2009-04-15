@@ -58,7 +58,7 @@ class SSQL
 								
 								if ($dbselect)
 								{
-									if(!$integrated_script)
+									if(!$integrated_script && !defined('IN_LOGIN'))
 									{
 										mysql_query("SET NAMES 'utf8'");
 									}

@@ -6,11 +6,13 @@
 # purpose :  File for Navigataion .
 # copyright 2007-2009 Kleeja.com ..
 # license http://opensource.org/licenses/gpl-license.php GNU Public License
-# last edit by : saanina
+# last edit by : Phpfalcon
 ##################################################
 
 // security ..
 define ('IN_INDEX' , true);
+define ('IN_GO' , true);
+
 //include imprtant file ..
 include ('includes/common.php');
 

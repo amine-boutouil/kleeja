@@ -4,13 +4,14 @@
 #
 # Filename : download.php
 # purpose :  when user  request file to  download it.
-# copyright 2007-2008 Kleeja.com ..
+# copyright 2008-2009 Kleeja.com ..
 # license http://opensource.org/licenses/gpl-license.php GNU Public License
-# last edit by : saanina
+# last edit by : PhpFalcon
 ##################################################
 
 // security ..
 define ('IN_INDEX' , true);
+define ('IN_DOWNLOAD', true);
 //include imprtant file ..
 include ('includes/common.php');
 

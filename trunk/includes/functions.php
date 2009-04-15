@@ -22,7 +22,7 @@ if (!defined('IN_COMMON'))
 * to show header in any page you want .. 
 *  parameter : title : title of page as in <titl></titl>
 */	
-function Saaheader($title)
+function Saaheader($title,$outscript=false)
 {
 		global $tpl,$usrcp,$lang,$user_is,$config,$extras,$script_encoding,$errorpage;
 
@@ -102,7 +102,7 @@ function Saaheader($title)
 
 		($hook = kleeja_run_hook('func_Saaheader')) ? eval($hook) : null; //run hook
 	
-		if($config['user_system'] != '1' && isset($script_encoding) && $_GET['go'] == 'login' && function_exists('iconv') && strpos(strtolower($script_encoding), 'utf') === false && !$errorpage) 
+		if($config['user_system'] != '1' && isset($script_encoding) && function_exists('iconv') && strpos(strtolower($script_encoding), 'utf') === false && !$errorpage && $outscript) 
 		{
 			$header = iconv("UTF-8",strtoupper($script_encoding) . "//IGNORE",$tpl->display("header"));
 		}
@@ -120,7 +120,7 @@ function Saaheader($title)
 * to show footer of any page you want 
 * paramenters : none
 */
-function Saafooter()
+function Saafooter($outscript=false)
 {
 		global $tpl,$SQL,$starttm,$config,$usrcp,$lang,$do_gzip_compress,$script_encoding,$errorpage;
 		
@@ -164,7 +164,7 @@ function Saafooter()
 		($hook = kleeja_run_hook('func_Saafooter')) ? eval($hook) : null; //run hook
 		
 		//show footer
-		if($config['user_system'] != '1' && isset($script_encoding) && $_GET['go'] == 'login' && function_exists('iconv')  && strpos(strtolower($script_encoding), 'utf') === false && !$errorpage)
+		if($config['user_system'] != '1' && isset($script_encoding) && function_exists('iconv')  && strpos(strtolower($script_encoding), 'utf') === false && !$errorpage && $outscript)
 		{
 			$footer = iconv("UTF-8",strtoupper($script_encoding) . "//IGNORE",$tpl->display("footer"));
 		}

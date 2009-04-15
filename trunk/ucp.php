@@ -11,6 +11,17 @@
 
 // security .. 
 define ( 'IN_INDEX' , true);
+
+if($_GET['go'] == 'login' || $_GET['go'] == 'logout' || $_GET['go'] == 'get_pass') 
+{
+	define ('IN_LOGIN' , true);
+}
+
+if($_GET['go'] == 'register') 
+{
+	define ('IN_REGISTER' , true);
+}
+
 //include imprtant file .. 
 include ('includes/common.php');
 
@@ -98,7 +109,6 @@ switch ($_GET['go'])
 		//register page
 		//
 		case "register" : 
-		
 			//config register
 			if ($config['register'] != '1' &&  $config['user_system'] == '1')
 			{
@@ -219,7 +229,6 @@ switch ($_GET['go'])
 		//logout action
 		//
 		case "logout" :
-	
 			($hook = kleeja_run_hook('begin_logout')) ? eval($hook) : null; //run hook
 			
 			if ($usrcp->logout())
@@ -257,7 +266,7 @@ switch ($_GET['go'])
 		//files user page
 		//
 		case "fileuser" : 
-		
+			
 			($hook = kleeja_run_hook('begin_fileuser')) ? eval($hook) : null; //run hook
 			
 			//fileuser is closed ?
@@ -532,7 +541,7 @@ switch ($_GET['go'])
 		//reset password page
 		//
 		case "get_pass" : 
-		
+
 			//config register
 			if ($config['user_system'] !=1)
 			{
@@ -665,19 +674,23 @@ switch ($_GET['go'])
 			//send header
 			header("Content-type: text/html; charset={$script_encoding}");	
 		}
-	//header
-	Saaheader($titlee);
 		//tpl	
 		if($config['user_system'] != '1' && isset($script_encoding) && $_GET['go'] == 'login' && function_exists('iconv') && strpos(strtolower($script_encoding), 'utf') === false)
 		{
+			//header
+			Saaheader($titlee,TRUE);
 			//change login page encoding if kleeja is integrated with other script
 			 echo iconv("UTF-8",strtoupper($script_encoding) . "//IGNORE",$tpl->display($stylee));	
-			 $errorpage = false;	
+			 $errorpage = false;
+			 //footer
+			Saafooter(TRUE);	
 		}
 		else 
 		{			
-		echo $tpl->display($stylee);
+			//header
+			Saaheader($titlee);
+			echo $tpl->display($stylee);
+			//footer
+			Saafooter();
 		}
-	//footer
-	Saafooter();
 ?>

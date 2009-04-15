@@ -4,9 +4,9 @@
 #
 # Filename : common.php 
 # purpose :  all things came from here ..:
-# copyright 2007-2008 Kleeja.com ..
-#license http://opensource.org/licenses/gpl-license.php GNU Public License
-# last edit by : saanina
+# copyright 2008-2009 Kleeja.com ..
+# license http://opensource.org/licenses/gpl-license.php GNU Public License
+# last edit by : phpfalcon
 ##################################################
 
 		
@@ -194,7 +194,7 @@
 	
 	//site close ..
 	$login_page = '';
-	if ($config['siteclose'] == '1' && !$usrcp->admin() &&  $_GET['go']!='login' && $_GET['go']!='logout' && !defined('IN_ADMIN'))
+	if ($config['siteclose'] == '1' && !$usrcp->admin() && !defined('IN_LOGIN') && !defined('IN_ADMIN'))
 	{
 		// Send a 503 HTTP response code to prevent search bots from indexing the maintenace message
 		header('HTTP/1.1 503 Service Temporarily Unavailable');
@@ -202,7 +202,7 @@
 	}
 	
 	//exceed total size 
-	if (($stat_sizes >= ($config['total_size'] *(1048576))) && $_GET['go']!='login' && $_GET['go']!='logout' && !defined('IN_ADMIN'))// convert megabytes to bytes
+	if (($stat_sizes >= ($config['total_size'] *(1048576))) && !defined('IN_LOGIN') && !defined('IN_ADMIN'))// convert megabytes to bytes
 	{ 
 		// Send a 503 HTTP response code to prevent search bots from indexing the maintenace message
 		header('HTTP/1.1 503 Service Temporarily Unavailable');

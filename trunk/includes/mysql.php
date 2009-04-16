@@ -2,8 +2,8 @@
 ##################################################
 # Filename : mysql.php
 # purpose :  controll  mysql database.:
-# copyright 2007-2008 Kleeja.com ..
-#license http://opensource.org/licenses/gpl-license.php GNU Public License
+# copyright 2007-2009 Kleeja.com ..
+# license http://opensource.org/licenses/gpl-license.php GNU Public License
 # last edit by : saanina
 ##################################################
 
@@ -370,6 +370,8 @@ class SSQL
 				*/
 				function error_msg($msg)
 				{
+					global $dbprefix;
+					
 					if(!$this->show_errors)
 					{
 						return;
@@ -378,7 +380,14 @@ class SSQL
 					$error_no  = mysql_errno();
 					$error_msg = mysql_error();
 					$error_sql = @current($this->debugr[$this->query_num+1]);
-
+					
+					//some ppl want hide their table names
+					$error_sql = preg_replace("#\s{1,3}{$dbprefix}([a-z0-9]+)\s{1,3}#e", "' <span style=\"color:blue\">' . substr('$1', 0, 1) . '</span> '", $error_sql);
+					$error_msg = preg_replace("#\s{1,3}{$dbprefix}([a-z0-9]+)\s{1,3}#e", "' <span style=\"color:blue\">' . substr('$1', 0, 1) . '</span> '", $error_msg);
+					$error_sql = preg_replace("#\s{1,3}(from|update|into)\s{1,3}([a-z0-9]+)\s{1,3}#ie", "' $1 <span style=\"color:blue\">' . substr('$2', 0, 1) . '</span> '", $error_sql);
+					$error_msg = preg_replace("#\s{1,3}(from|update|into)\s{1,3}([a-z0-9]+)\s{1,3}#ie", "' $1 <span style=\"color:blue\">' . substr('$2', 0, 1) . '</span> '", $error_msg);
+					
+					
 					echo "<html><head><title>ERROR IM MYSQL</title>";
 					echo "<style>BODY{FONT-FAMILY:tahoma;FONT-SIZE:12px;}.error {}</style></head><body>";
 					echo '<br />';

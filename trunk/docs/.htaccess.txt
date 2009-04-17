@@ -2,21 +2,23 @@ Options +FollowSymLinks
 RewriteEngine on
 RewriteRule ^index.html$ index.php
 RewriteRule ^download([0-9]*).html$ download.php?id=$1
-RewriteRule ^downloadf-([a-zA-Z0-9_-]*).html$ download.php?filename=$1
+RewriteRule ^downloadf-([a-zA-Z0-9_-]*)-([a-zA-Z0-9_-]*).html$ download.php?filename=$1&x=$2
 RewriteRule ^down-([0-9]*).html$ download.php?down=$1
-RewriteRule ^downf-([0-9]*).html$ download.php?downf=$1
+RewriteRule ^downf-([a-zA-Z0-9_-]*)-([a-zA-Z0-9_-]*).html$ download.php?downf=$1&x=$2
 RewriteRule ^thumb([0-9]*).html$ download.php?thmb=$1
-RewriteRule ^imagef-([0-9]*).html$ download.php?imgf=$1
-RewriteRule ^thumbf-([0-9]*).html$ download.php?thmbf=$1
+RewriteRule ^imagef-([a-zA-Z0-9_-]*)-([a-zA-Z0-9_-]*).html$ download.php?imgf=$1&x=$2
+RewriteRule ^thumbf-([a-zA-Z0-9_-]*)-([a-zA-Z0-9_-]*).html$ download.php?thmbf=$1&x=$2
 RewriteRule ^image([0-9]*).html$ download.php?img=$1
 RewriteRule ^report[_-]([0-9]*).html$ go.php?go=report&id=$1
 RewriteRule ^call.html$ go.php?go=call
 RewriteRule ^guide.html$ go.php?go=guide
 RewriteRule ^rules.html$ go.php?go=rules
 RewriteRule ^filecp.html$ ucp.php?go=filecp
+RewriteRule ^filecp-([0-9]*).html$ ucp.php?go=filecp&page=$1
 RewriteRule ^profile.html$ ucp.php?go=profile
 RewriteRule ^fileuser.html$ ucp.php?go=fileuser
 RewriteRule ^fileuser_([0-9]*).html$ ucp.php?go=fileuser&id=$1
+RewriteRule ^fileuser_([0-9]*)-([0-9*]).html$ ucp.php?go=fileuser&id=$1&page=$2
 RewriteRule ^register.html$ ucp.php?go=register
 RewriteRule ^login.html$ ucp.php?go=login
 RewriteRule ^logout.html$ ucp.php?go=logout
@@ -24,4 +26,3 @@ RewriteRule ^stats.html$ go.php?go=stats
 RewriteRule ^del([0-9]*).html$ go.php?go=del&cd=$1
 #deprecated 
 RewriteRule ^down-([a-zA-Z0-9_-]*)-([a-zA-Z0-9_-]*)-([0-9]*).html$ download.php?id=$3
-

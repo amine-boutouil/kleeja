@@ -55,8 +55,8 @@ function kleeja_auth_login ($name, $pass)
 	}
 				
 	$SQLVB	= new SSQL($forum_srv, $forum_user, $forum_pass, $forum_db, TRUE);
-	$charset_db = @mysql_client_encoding($SQLVB->connect_id);
-	$mysql_version = @mysql_get_server_info($SQLVB->connect_id);
+	//$charset_db = @mysql_client_encoding($SQLVB->connect_id);
+	//$mysql_version = @mysql_get_server_info($SQLVB->connect_id);
 				
 	unset($forum_pass); // We do not need this any longe
 
@@ -123,7 +123,82 @@ function kleeja_auth_login ($name, $pass)
 		return false;
 	}
 }
+
+function kleeja_auth_username ($user_id)
+{
+	// ok, i dont hate vb .. but i cant feel my self use it ... 
+	global $script_path, $lang, $script_encoding, $script_srv, $script_db, $script_user, $script_pass, $script_prefix;
 	
+	if(isset($script_path)) {				
+	//check for last slash
+	if($script_path[strlen($script_path)] == '/')
+	{
+		$script_path = substr($script_path, 0, strlen($script_path));
+	}
+					
+	$script_path = ($script_path[0] == '/' ? '..' : '../') . $script_path;
 	
+	//get some useful data from phbb config file
+	if(file_exists($script_path . '/includes/config.php'))
+	{
+		require ($script_path . '/includes/config.php');
+		$forum_srv	= $config['MasterServer']['servername'];
+		$forum_db	= $config['Database']['dbname'];
+		$forum_user	= $config['MasterServer']['username'];
+		$forum_pass	= $config['MasterServer']['password'];
+		$forum_prefix= $config['Database']['tableprefix'];
+	} 
+	else
+	{
+		big_error('Forum path is not correct', sprintf($lang['SCRIPT_AUTH_PATH_WRONG'], 'Vbulletin'));
+	}
+	}
+	else
+	{
+		$forum_srv	= $script_srv;
+		$forum_db	= $script_db;
+		$forum_user	= $script_user;
+		$forum_pass	= $script_pass;
+		$forum_prefix = $script_prefix;
+	}
 	
+	if(empty($forum_srv) || empty($forum_user) || empty($forum_db))
+	{
+		return;
+	}
+				
+	$SQLVB	= new SSQL($forum_srv, $forum_user, $forum_pass, $forum_db, TRUE);
+	unset($forum_pass); // We do not need this any longe
+
+	if(!function_exists('iconv') && strpos(strtolower($script_encoding), 'utf') === false)
+ 	{
+ 		big_error('No support for ICONV', 'You must enable the ICONV library to integrate kleeja with your forum. You can solve your problem by changing your forum db charset to UTF8.'); 
+ 	}
+
+	$query_name = array(
+					'SELECT'	=> 'username',
+					'FROM'		=> "`{$forum_prefix}user`",
+					'WHERE'		=> "userid='" . intval($user_id) . "'"
+				);
+			
+	($hook = kleeja_run_hook('qr_select_usrname_vb_usr_class')) ? eval($hook) : null; //run hook				
+	$result_name = $SQLVB->build($query_name);
+				
+	if ($SQLVB->num_rows($result_name) > 0) 
+	{
+		while($row = $SQLVB->fetch_array($result_name))
+		{
+			$returnname = (strpos(strtolower($script_encoding), 'utf') == true) ? $row['username'] : iconv(strtoupper($script_encoding),"UTF-8//IGNORE",$row['username']);
+
+		}#whil1
+		$SQLVB->freeresult($result_name); 
+		$SQLVB->close();
+		return $returnname;
+	}
+	else
+	{
+		$SQLVB->close();
+		return false;
+	}
+}	
 ?>

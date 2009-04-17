@@ -56,6 +56,21 @@ class usrcp
 					
 				}
 				
+				//get username by id
+				function usernamebyid ($user_id) 
+				{
+					global $config, $path;
+					if($config['user_system'] != '1')
+					{
+						if(file_exists($path . 'auth_integration/' . trim($config['user_system']) . '.php'))
+						{	
+							include_once ($path . 'auth_integration/' . trim($config['user_system']) . '.php');
+							$username = kleeja_auth_username($user_id);
+						}
+					}
+					return $username;	
+				}
+				
 					
 				//now ..  .. our table
 				function normal ($name,$pass)

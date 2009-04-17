@@ -131,7 +131,7 @@
 	// for gzip : php.net
 	//fix bug # 181
 	$do_gzip_compress = false; 
-	if ($config['gzip'] == '1') 
+	if ($config['gzip'] == '1' && !defined('IN_DOWNLOAD')) 
 	{
 	    function compress_output($output)
 		{

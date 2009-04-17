@@ -290,7 +290,7 @@ switch ($_GET['go'])
 			}
 			
 			//to get userdata!!
-			$data_user = ($config['user_system'] == 1) ? $usrcp->get_data('name, show_my_filecp', $user_id) : array('show_my_filecp' => '0');
+			$data_user = ($config['user_system'] == 1) ? $usrcp->get_data('name, show_my_filecp', $user_id) : array('name' => $usrcp->name(), 'show_my_filecp' => '0');
 
 			if($data_user['show_my_filecp'] && ($usrcp->id() != $user_id) && !$usrcp->admin())
 			{

@@ -270,33 +270,37 @@ switch ($_GET['go'])
 			($hook = kleeja_run_hook('begin_fileuser')) ? eval($hook) : null; //run hook
 			
 			//fileuser is closed ?
-			if ($config['enable_userfile'] ==0 && !$usrcp->admin())
+			if ($config['enable_userfile'] != '1' && !$usrcp->admin())
 			{
 				kleeja_info($lang['USERFILE_CLOSED'],$lang['CLOSED_FEATURE']);
 			}
+			
 			
 			//some vars
 			$stylee	= "fileuser";
 			$titlee	= $lang['FILEUSER'];
 			
-			$user_id	= intval($_GET['id']);
-			$user_id	= (!$user_id && $usrcp->id()!==false) ? $usrcp->id() : $user_id;
+			$user_id_get	= intval($_GET['id']);
+			$user_id		= (!$user_id_get && $usrcp->id()) ? $usrcp->id() : $user_id_get;
 			
-			//te get userdata!!
-			$data_user = $usrcp->get_data('name, show_my_filecp', $user_id);
-			$user_name		= (!$data_user['name']) ? false : $data_user['name'];
-			$show_my_filecp	= ($config['user_system'] != 1) ? 1 : $data_user['show_my_filecp'];
-			
-			//new feature 1rc5
-			if($show_my_filecp == 1 && ($usrcp->id() != $user_id) && !$usrcp->admin())
+			//no logon before 
+			if (!$usrcp->name() && !$_GET['id'])
 			{
-				kleeja_info($lang['USERFILE_CLOSED'], $lang['CLOSED_FEATURE']);		
+				kleeja_info($lang['USER_PLACE'],$lang['PLACE_NO_YOU']);
 			}
 			
-			$query	= array('SELECT'	=> 'f.id, f.name,f.real_filename, f.folder, f.type',
+			//to get userdata!!
+			$data_user = ($config['user_system'] == 1) ? $usrcp->get_data('name, show_my_filecp', $user_id) : array('show_my_filecp' => '0');
+
+			if($data_user['show_my_filecp'] && ($usrcp->id() != $user_id) && !$usrcp->admin())
+			{
+				kleeja_info($lang['USERFILE_CLOSED'], $lang['CLOSED_FEATURE']);
+			}
+			
+			$query	= array('SELECT'	=> 'f.id, f.name, f.real_filename, f.folder, f.type',
 							'FROM'		=> "{$dbprefix}files f",
 							'WHERE'		=> "f.user='" . $user_id . "'",
-							'ORDER BY'	=> 'f.id DESC',
+							'ORDER BY'	=> 'f.id DESC'
 						);
 						
 			/////////////pager 
@@ -313,12 +317,25 @@ switch ($_GET['go'])
 			$page_nums			= $Pager->print_nums($linkgoto); 
 				
 			$no_results = false;
+			if($nums_rows == 0) 
+			{
+				if($config['user_system'] != '1' && ($usrcp->id() != $user_id))
+				{
+					$data_user['name'] = $usrcp->usernamebyid($user_id);
+				}
+				$user_name = (!$data_user['name']) ? false : $data_user['name'];
+			}
 			if($nums_rows != 0)
 			{			
 				$query['LIMIT'] = "$start, $perpage";
 				($hook = kleeja_run_hook('qr_select_files_in_fileuser')) ? eval($hook) : null; //run hook
 				
 				$result	=	$SQL->build($query);
+				if($config['user_system'] != '1' && ($usrcp->id() != $user_id))
+				{
+					$data_user['name'] = $usrcp->usernamebyid($user_id);
+				}
+				$user_name = (!$data_user['name']) ? false : $data_user['name'];
 				while($row=$SQL->fetch_array($result))
 				{
 					$is_image = in_array(trim($row['type']), array('gif', 'jpg', 'jpeg', 'bmp', 'png', 'tiff', 'tif')) ? true : false;
@@ -361,6 +378,11 @@ switch ($_GET['go'])
 			$titlee		= $lang['FILECP'];
 			$action		= "ucp.php?go=filecp";
 			
+			//no logon before
+			if (!$usrcp->name())
+			{
+				kleeja_info($lang['PLACE_NO_YOU'],$lang['USER_PLACE']);
+			}
 
 			//te get files and update them !!
 			$query = array(

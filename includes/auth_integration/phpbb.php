@@ -141,6 +141,87 @@ function kleeja_auth_login ($name, $pass)
 	}
 }
 
+function kleeja_auth_username ($user_id)
+{
+		global $script_path, $SQLBB, $phpEx, $phpbb_root_path, $lang, $script_encoding, $script_srv, $script_db, $script_user, $script_pass, $script_prefix;
+				
+	//check for last slash / 
+	if(isset($script_path)) {
+	if($script_path[strlen($script_path)] == '/')
+	{
+			$script_path = substr($script_path, 0, strlen($script_path));
+	}
+					
+	$script_path = ($script_path[0] == '/' ? '..' : '../') . $script_path;
+
+	//get some useful data from phbb config file
+	if(file_exists($script_path . '/config.php'))
+	{
+		require ($script_path . '/config.php');
+		
+		$forum_srv	= $dbhost;
+		$forum_db	= $dbname;
+		$forum_user	= $dbuser;
+		$forum_pass	= $dbpasswd;
+		$forum_prefix = $table_prefix;
+	} 
+	else
+	{
+		big_error('Forum path is not correct', sprintf($lang['SCRIPT_AUTH_PATH_WRONG'], 'phpBB'));
+	}
+	}
+	else 
+	{
+		$forum_srv	= $script_srv;
+		$forum_db	= $script_db;
+		$forum_user	= $script_user;
+		$forum_pass	= $script_pass;
+		$forum_prefix = $script_prefix;
+	}
+	
+	//if no variables of db
+	if(empty($forum_srv) || empty($forum_user) || empty($forum_db))
+	{
+		return;
+	}
+								
+	//conecting ...		
+	$SQLBB	= new SSQL($forum_srv,$forum_user,$forum_pass,$forum_db,TRUE);
+	//$charset_db = @mysql_client_encoding($SQLBB->connect_id);
+	unset($forum_pass); // We do not need this any longe
+
+	if(!function_exists('iconv') && strpos(strtolower($script_encoding), 'utf') === false)
+ 	{
+ 		big_error('No support for ICONV', 'You must enable the ICONV library to integrate kleeja with your forum. You can solve your problem by changing your forum db charset to UTF8.'); 
+ 	}
+
+	$query_name = array(
+					'SELECT'	=> 'username',
+					'FROM'		=> "`{$forum_prefix}users`",
+					'WHERE'		=> "user_id='" . intval($user_id) . "'"
+				);
+			
+	($hook = kleeja_run_hook('qr_select_usrname_phpbb_usr_class')) ? eval($hook) : null; //run hook				
+	$result_name = $SQLBB->build($query_name);
+				
+	if ($SQLBB->num_rows($result_name) > 0) 
+	{
+		while($row = $SQLBB->fetch_array($result_name))
+		{
+			$returnname = (strpos(strtolower($script_encoding), 'utf') == true) ? $row['username'] : iconv(strtoupper($script_encoding),"UTF-8//IGNORE",$row['username']);
+
+		}#whil1
+		$SQLBB->freeresult($result_name); 
+		$SQLBB->close();
+		return $returnname;
+	}
+	else
+	{
+		$SQLBB->close();
+		return false;
+	}
+}
+
 
 /*
 important function to integrration btw kleeja and phpbb3 !

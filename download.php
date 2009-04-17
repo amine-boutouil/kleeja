@@ -32,7 +32,14 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 			if (isset($_GET['filename']))
 			{
 				$filename_l 	= (string) $SQL->escape($_GET['filename']);
-				$query['WHERE']	= "name='" . $filename_l . "'";
+				if(isset($_GET['x']))
+				{
+					$query['WHERE']	= "name='" . $filename_l . '.' . $SQL->escape($_GET['x']) . "'";
+				}
+				else 
+				{
+					$query['WHERE']	= "name='" . $filename_l . "'";
+				}
 			}
 			else
 			{
@@ -52,7 +59,7 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 				$SQL->freeresult($result);
 
 				// some vars
-				$fname 		= $name;
+				$fname 		= str_replace('.' . $type, '', htmlspecialchars($name)) . '-' . $type;
 				$name 		= $real_filename != '' ? str_replace('.' . $type, '', htmlspecialchars($real_filename)) : $name;
 				
 				if (isset($_GET['filename']))
@@ -127,14 +134,14 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 			}
 			
 			//if not from our site and the waiting page
-			$isset_down_h = isset($_GET['downf']) ? 'downloadf-' . $_GET['downf'] . '.html' : 'download' . $_GET['down'] . '.html';
+			$isset_down_h = (isset($_GET['downf']) && isset($_GET['x'])) ? 'downloadf-' . $_GET['downf'] . '-' . $_GET['x'] . '.html' : 'download' . $_GET['down'] . '.html';
 			$not_reffer = true;
 			if(strpos($_SERVER['HTTP_REFERER'], $isset_down_h) !== false)
 			{
 				$not_reffer = false;
 			}
 			
-			$isset_down = isset($_GET['downf']) ? 'download.php?filename=' . $_GET['down'] : 'download.php?id=' . $_GET['down'];
+			$isset_down = (isset($_GET['downf']) && isset($_GET['x'])) ? 'download.php?filename=' . $_GET['downf'] : 'download.php?id=' . $_GET['down'];
 			if(strpos($_SERVER['HTTP_REFERER'], $isset_down) !== false)
 			{
 				$not_reffer = false;
@@ -142,9 +149,9 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 			
 			if($not_reffer)
 			{
-				if(isset($_GET['downf']))
+				if(isset($_GET['downf']) && isset($_GET['x']))
 				{
-					$go_to = $config['siteurl'] . (($config['mod_writer']) ? "downloadf-" . $_GET['downf'] . ".html" : "download.php?filename=" . $_GET['downf']);
+					$go_to = $config['siteurl'] . (($config['mod_writer']) ? "downloadf-" . $_GET['downf'] . '-' . $_GET['x'] . ".html" : "download.php?filename=" . $_GET['downf']);
 				}
 				else
 				{
@@ -161,7 +168,7 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 		
 		if($is_id_filename)
 		{
-			$filename = isset($_GET['downf']) ? $SQL->escape($_GET['downf']) : (isset($_GET['imgf']) ? $SQL->escape($_GET['imgf']) : (isset($_GET['thmbf']) ? $SQL->escape($_GET['thmbf']) : null));
+			$filename = (isset($_GET['downf']) && isset($_GET['x'])) ? $SQL->escape($_GET['downf']) . '.' . $SQL->escape($_GET['x']) : ((isset($_GET['imgf']) && isset($_GET['x'])) ? $SQL->escape($_GET['imgf']) . '.' . $SQL->escape($_GET['x']) : ((isset($_GET['thmbf']) && isset($_GET['x'])) ? $SQL->escape($_GET['thmbf']) . '.' . $SQL->escape($_GET['x']) : null));
 		}
 		else
 		{

@@ -527,7 +527,14 @@ function process ()
 					$this->errs[]=  $lang['CANT_INSERT_SQL'];
 				}
 				
-				$this->id_for_url  = ($config['id_form'] == 'filename') ?   $namee : $SQL->insert_id();
+				if ($config['mod_writer'] == '1') 
+				{
+					$this->id_for_url  = ($config['id_form'] == 'filename') ?  str_replace('.', '-', $name) : $SQL->insert_id();
+				}
+				else
+				{
+					$this->id_for_url  = ($config['id_form'] == 'filename') ?  $name : $SQL->insert_id();
+				}
 
 
 				//calculate stats ..s
@@ -567,8 +574,8 @@ function process ()
 							$extra_thmb 	= $lang['URL_F_THMB'] . ':<br /><textarea rows="2" cols="49">';
 							if($config['id_form'] == "filename")
 							{
-								$thumb_link_o = $this->linksite . (($config['mod_writer']) ? "thumbf" . $this->filename2 . ".html" : "download.php?thmbf=" . $this->filename2);
-								$extra_thmb .= '[url=' . $this->linksite . (($config['mod_writer']) ? "imagef" . $this->filename2 . ".html" : "download.php?imgf=" . $this->filename2) . '][img]' . $thumb_link_o . '[/img][/url]';
+								$thumb_link_o = $this->linksite . (($config['mod_writer']) ? "thumbf-" . $this->id_for_url . ".html" : "download.php?thmbf=" . $this->id_for_url);
+								$extra_thmb .= '[url=' . $this->linksite . (($config['mod_writer']) ? "imagef-" . $this->id_for_url . ".html" : "download.php?imgf=" . $this->id_for_url) . '][img]' . $thumb_link_o . '[/img][/url]';
 							}
 							else
 							{
@@ -591,15 +598,15 @@ function process ()
 						
 						if($config['id_form'] == "filename")
 						{
-							$img_html_result .= $lang['URL_F_IMG'] . ':<br /><textarea rows="2" cols="49">' . $this->linksite . (($config['mod_writer']) ? "imagef-" . $this->filename2 . ".html" : "download.php?imgf=" . $this->filename2) . '</textarea><br />
+							$img_html_result .= $lang['URL_F_IMG'] . ':<br /><textarea rows="2" cols="49">' . $this->linksite . (($config['mod_writer']) ? "imagef-" . $this->id_for_url . ".html" : "download.php?imgf=" . $this->id_for_url) . '</textarea><br />
 								' . $lang['URL_F_BBC'] . ':<br /><textarea rows="2" cols="49">' .
-								'[url=' . $this->linksite . (($config['mod_writer']) ? "imagef-" . $this->filename2 . ".html" : "download.php?imgf=" . $this->filename2) . '][img]' . $this->linksite . "download.php?imgf=" . $this->filename2 . '[/img][/url]</textarea><br />';
+								'[url=' . $this->linksite . (($config['mod_writer']) ? "imagef-" . $this->id_for_url . ".html" : "download.php?imgf=" . $this->id_for_url) . '][img]' . $this->linksite . (($config['mod_writer']) ? "imagef-" . $this->id_for_url . ".html" : "download.php?imgf=" . $this->id_for_url) . '[/img][/url]</textarea><br />';
 						}
 						else
 						{
 							$img_html_result .= $lang['URL_F_IMG'] . ':<br /><textarea rows="2" cols="49">' . $this->linksite . (($config['mod_writer']) ? "image" . $this->id_for_url . ".html" : "download.php?img=" . $this->id_for_url) . '</textarea><br />
 								' . $lang['URL_F_BBC'] . ':<br /><textarea rows="2" cols="49">' .
-								'[url=' . $this->linksite . (($config['mod_writer']) ? "image" . $this->id_for_url . ".html" : "download.php?img=" . $this->id_for_url) . '][img]' . $this->linksite . "download.php?img=" . $this->id_for_url . '[/img][/url]</textarea><br />';
+								'[url=' . $this->linksite . (($config['mod_writer']) ? "image" . $this->id_for_url . ".html" : "download.php?img=" . $this->id_for_url) . '][img]' . $this->linksite . "download.php?img=" . $this->linksite . (($config['mod_writer']) ? "image" . $this->id_for_url . ".html" : "download.php?img=" . $this->id_for_url) . '[/img][/url]</textarea><br />';
 						}
 	
 						$img_html_result .= $extra_thmb . $extra_del;
@@ -614,8 +621,8 @@ function process ()
 						
 						if($config['id_form'] == "filename")
 						{
-							$else_html_result = $lang['URL_F_FILE'] . ':<br /><textarea cols="49" rows="1">' . $this->linksite . (($config['mod_writer']) ? "downloadf-" . $this->filename2 . ".html" : "download.php?filename=" . $this->filename2) . '</textarea><br />
-												' . $lang['URL_F_BBC'] . ':<br /><textarea rows="2" cols="49">[url]' . $this->linksite . (($config['mod_writer']) ? "downloadf-" . $this->filename2 . ".html" : "download.php?filename=" . $this->filename2) . '[/url]</textarea><br />
+							$else_html_result = $lang['URL_F_FILE'] . ':<br /><textarea cols="49" rows="1">' . $this->linksite . (($config['mod_writer']) ? "downloadf-" . $this->id_for_url . ".html" : "download.php?filename=" . $this->id_for_url) . '</textarea><br />
+												' . $lang['URL_F_BBC'] . ':<br /><textarea rows="2" cols="49">[url]' . $this->linksite . (($config['mod_writer']) ? "downloadf-" . $this->id_for_url . ".html" : "download.php?filename=" . $this->id_for_url) . '[/url]</textarea><br />
 												' . $extra_del;
 						}
 						else

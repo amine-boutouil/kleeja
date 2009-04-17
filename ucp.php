@@ -313,8 +313,8 @@ switch ($_GET['go'])
 			$your_fileuser		= $config['siteurl'] . ($config['mod_writer'] ? 'fileuser_' . $usrcp->id() . '.html' : 'ucp.php?go=fileuser&amp;id=' . $usrcp->id());
 			$filecp_link		= $user_id == $usrcp->id() ?  $config['siteurl'] . ($config['mod_writer'] ? 'filecp.html' : 'ucp.php?go=filecp') : false;
 			$total_pages		= $Pager->getTotalPages(); 
-			$linkgoto			= $config['mod_writer'] ? $config['siteurl'] . 'fileuser_' . $user_id . '.html' : $config['siteurl'] . 'ucp.php?go=fileuser&amp;id=' . $user_id;
-			$page_nums			= $Pager->print_nums($linkgoto); 
+			$linkgoto			= $config['mod_writer'] ? $config['siteurl'] . 'fileuser_' . $user_id : $config['siteurl'] . 'ucp.php?go=fileuser&amp;id=' . $user_id;
+			$page_nums			= $config['mod_writer'] ? $Pager->print_nums($linkgoto) : $Pager->print_nums($linkgoto); 
 				
 			$no_results = false;
 			if($nums_rows == 0) 
@@ -398,8 +398,9 @@ switch ($_GET['go'])
 			$currentPage	= (isset($_GET['page']))? intval($_GET['page']) : 1;
 			$Pager			= new SimplePager($perpage, $nums_rows, $currentPage);
 			$start			= $Pager->getStartRow();
-			$linkgoto 		= $config['mod_writer'] ? $config['siteurl'] . 'filecp.html' : $config['siteurl'] . 'ucp.php?go=filecp';
-			$page_nums		= $Pager->print_nums($linkgoto); 
+			$linkgoto			= $config['mod_writer'] ? $config['siteurl'] . 'filecp' : $config['siteurl'] . 'ucp.php?go=filecp' . $user_id;
+			$page_nums			= $config['mod_writer'] ? $Pager->print_nums($linkgoto) : $Pager->print_nums($linkgoto); 
+				
 			$total_pages	= $Pager->getTotalPages(); 
 			
 			//now, there is no result

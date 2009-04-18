@@ -388,7 +388,7 @@ switch ($_GET['go'])
 			$query = array(
 						'SELECT'	=> 'f.id ,f.name, f.real_filename, f.type, f.folder',
 						'FROM'		=> "{$dbprefix}files f",
-						'WHERE'		=> 'f.user='.$usrcp->id(),
+						'WHERE'		=> 'f.user=' . $usrcp->id(),
 						'ORDER BY'	=> 'f.id DESC',
 						);
 				
@@ -419,11 +419,11 @@ switch ($_GET['go'])
 					$is_image = in_array(trim($row['type']), array('gif', 'jpg', 'jpeg', 'bmp', 'png', 'tiff', 'tif')) ? true : false;
 					if($is_image)
 					{
-						$url = ($config['mod_writer']) ? 'image'.$row['id'] . '.html' : 'download.php?img=' . $row['id'];
+						$url = ($config['mod_writer']) ? 'image' . $row['id'] . '.html' : 'download.php?img=' . $row['id'];
 					}
 					else
 					{
-						$url = ($config['mod_writer']) ? 'download'.$row['id'] . '.html' : 'download.php?id=' . $row['id'];
+						$url = ($config['mod_writer']) ? 'download' . $row['id'] . '.html' : 'download.php?id=' . $row['id'];
 					}
 					
 					//make new lovely arrays !!
@@ -563,6 +563,8 @@ switch ($_GET['go'])
 		//
 		//reset password page
 		//
+		//note: must be improved in 1.0.? to fix bug[!]
+		//
 		case "get_pass" : 
 
 			//config register
@@ -621,10 +623,17 @@ switch ($_GET['go'])
 							
 							while($row=$SQL->fetch_array($result))
 							{
-								$newpass	= substr(md5(time()),0,5);
+								//generate password
+								$chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+								$newpass = '';
+								for ($i = 0; $i < 7; ++$i)
+								{
+									$newpass .= substr($chars, (mt_rand() % strlen($chars)), 1);
+								}
+								
 								$to			= $row['mail'];
 								$subject	= $lang['GET_LOSTPASS'] . ':' . $config['sitename'];
-								$message	= "\n " . $lang['WELCOME'] . " " . $row['name']."\r\n " . $lang['GET_LOSTPASS_MSG'] . "\r\n " . $lang['PASSWORD'] . " : " . $newpass . "\r\n\r\n kleeja.com";
+								$message	= "\n " . $lang['WELCOME'] . " " . $row['name'] . "\r\n " . $lang['GET_LOSTPASS_MSG'] . "\r\n " . $lang['PASSWORD'] . " : " . $newpass . "\r\n\r\n kleeja.com";
 								$id			= (int) $row['id'];
 								
 								$update_query = array(
@@ -686,34 +695,34 @@ switch ($_GET['go'])
 	($hook = kleeja_run_hook('end_usrcp_page')) ? eval($hook) : null; //run hook
 	
 	
+	//
 	//show style ...
+	//
 	
-	if (!$titlee)
-	{
-		$titlee = $lang['USERS_SYSTEM'];
-	}
+	$titlee = (!$titlee) ? $lang['USERS_SYSTEM'] : $titlee;
+
+	//
+	//if it's not a default user system let's send custom charset and look for iconv 
+	//
 	if($config['user_system'] != '1' && isset($script_encoding) && $_GET['go'] == 'login' && function_exists('iconv') && strpos(strtolower($script_encoding), 'utf') === false)
-		{
-			//send header
-			header("Content-type: text/html; charset={$script_encoding}");	
-		}
-		//tpl	
-		if($config['user_system'] != '1' && isset($script_encoding) && $_GET['go'] == 'login' && function_exists('iconv') && strpos(strtolower($script_encoding), 'utf') === false)
-		{
-			//header
-			Saaheader($titlee,TRUE);
-			//change login page encoding if kleeja is integrated with other script
-			 echo iconv("UTF-8",strtoupper($script_encoding) . "//IGNORE",$tpl->display($stylee));	
-			 $errorpage = false;
-			 //footer
-			Saafooter(TRUE);	
-		}
-		else 
-		{			
-			//header
-			Saaheader($titlee);
-			echo $tpl->display($stylee);
-			//footer
-			Saafooter();
-		}
+	{
+		//send custom chaeset header
+		header("Content-type: text/html; charset={$script_encoding}");	
+
+		//header
+		Saaheader($titlee, true);
+		//change login page encoding if kleeja is integrated with other script
+		 echo iconv("UTF-8", strtoupper($script_encoding) . "//IGNORE", $tpl->display($stylee));	
+		 $errorpage = false;
+		 //footer
+		Saafooter(true);	
+	}
+	else 
+	{			
+		//header
+		Saaheader($titlee);
+		echo $tpl->display($stylee);
+		//footer
+		Saafooter();
+	}
 ?>

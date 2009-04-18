@@ -205,9 +205,13 @@ RC6:
 - fix mail send function .. [ utf8 issue ]
 - fix cookies issue
 
-to do : 
-- 
-- 
+
+
+to do 1.0.1 - 1.0.5 : 
+- imrove reset passwords.
+- imrove captcha
+- change passwords hashing to something else not md5
+
 
 Thank you for reading this file. 
 

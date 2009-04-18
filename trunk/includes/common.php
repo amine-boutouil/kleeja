@@ -155,7 +155,7 @@
 	}
 
 	// ...header ..  i like it ;)
-	if (defined('IN_LOGINPAGE') && strpos(strtolower($script_encoding), 'utf') == false && $config['user_system'] != '1')
+	if (defined('IN_LOGINPAGE') && isset($script_encoding) && strpos(strtolower($script_encoding), 'utf') == false && $config['user_system'] != '1')
 	{
 		//send custom chaeset header
 		header("Content-type: text/html; charset={$script_encoding}");	

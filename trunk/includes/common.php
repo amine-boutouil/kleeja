@@ -155,7 +155,16 @@
 	}
 
 	// ...header ..  i like it ;)
-	header('Content-type: text/html; charset=UTF-8');
+	if (defined('IN_LOGINPAGE') && strpos(strtolower($script_encoding), 'utf') == false && $config['user_system'] != '1')
+	{
+		//send custom chaeset header
+		header("Content-type: text/html; charset={$script_encoding}");	
+	}
+	else 
+	{
+		header('Content-type: text/html; charset=UTF-8');
+	}
+	
 	header('Cache-Control: private, no-cache="set-cookie"');
 	header('Expires: 0');
 	header('Pragma: no-cache');	

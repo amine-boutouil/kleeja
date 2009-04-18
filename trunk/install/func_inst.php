@@ -311,7 +311,6 @@ function do_config_export($srv, $usr, $pass, $nm, $prf, $fpath)
 		$data	.= "\n\n\n";
 		$data	.= "//for integration with script [ must change user systen from admin cp ] \n";
 		$data	.= '$script_path		= \''. str_replace("'","\'", $fpath)."';// path of script (./forums)  \n";
-		$data	.= '$script_encoding	= "windows-1256";'."//login page encoding of your script  \n";
 		$data	.= "\n\n\n";
 		$data	.= "//for use ftp account to uplaod [ Under Develpment ] \n";
 		$data	.= '$use_ftp		= 0;'."// 1 : yes  - 0 : no   \n";

@@ -38,8 +38,9 @@ class SSQL
 				initiate the class
 				wirth basic data
 				*/
-                function SSQL($host,$db_username,$db_password,$db_name, $integrated_script = false)
+                function SSQL($host,$db_username,$db_password,$db_name)
 				{
+					global $script_encoding;
                           $this->host        = $host;
                           $this->db_username = $db_username;
                           $this->db_name     = $db_name;
@@ -58,10 +59,15 @@ class SSQL
 								
 								if ($dbselect)
 								{
-									if(!$integrated_script && !defined('IN_LOGIN'))
+									if (strpos(strtolower($script_encoding), 'utf') == false && !defined('IN_LOGINPAGE'))
 									{
 										mysql_query("SET NAMES 'utf8'");
 									}
+									else if (empty($script_encoding) || strpos(strtolower($script_encoding), 'utf')) 
+									{
+										mysql_query("SET NAMES 'utf8'");
+									}
+									
 								}
 								else if(!$dbselect)
 								{

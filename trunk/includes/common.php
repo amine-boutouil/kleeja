@@ -122,11 +122,8 @@
 	//no need after now 
 	unset($dbpass);
 
-
 	//then get caches
 	require ($path . 'cache.php');
-	
-
 	
 	// for gzip : php.net
 	//fix bug # 181
@@ -138,7 +135,6 @@
 			return gzencode($output, 5, FORCE_GZIP);
 		}
 		
-
 	    // Check if the browser supports gzip encoding, HTTP_ACCEPT_ENCODING
 	    if (strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') !== false && !headers_sent() && @extension_loaded('zlib'))
 		{

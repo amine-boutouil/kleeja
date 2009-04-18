@@ -17,6 +17,11 @@ if($_GET['go'] == 'login' || $_GET['go'] == 'logout' || $_GET['go'] == 'get_pass
 	define ('IN_LOGIN' , true);
 }
 
+if($_GET['go'] == 'login') 
+{
+	define ('IN_LOGINPAGE' , true);
+}
+
 if($_GET['go'] == 'register') 
 {
 	define ('IN_REGISTER' , true);

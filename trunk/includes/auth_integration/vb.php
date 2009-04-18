@@ -54,7 +54,7 @@ function kleeja_auth_login ($name, $pass)
 		return;
 	}
 				
-	$SQLVB	= new SSQL($forum_srv, $forum_user, $forum_pass, $forum_db, TRUE);
+	$SQLVB	= new SSQL($forum_srv, $forum_user, $forum_pass, $forum_db);
 	//$charset_db = @mysql_client_encoding($SQLVB->connect_id);
 	//$mysql_version = @mysql_get_server_info($SQLVB->connect_id);
 				

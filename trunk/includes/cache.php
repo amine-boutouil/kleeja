@@ -273,12 +273,12 @@ if((int) $config['del_f_day'] >= 0)
 					//delete from folder ..
 					if (file_exists($row['folder'] . "/" . $row['name']))
 					{
-						@unlink ($row['folder'] . "/" . $row['name']);
+						@kleeja_unlink ($row['folder'] . "/" . $row['name']);
 					}
 					//delete thumb
 					if (file_exists($row['folder'] . "/thumbs/" . $row['name'] ))
 					{
-						@unlink ($row['folder'] . "/thumbs/" . $row['name'] );
+						@kleeja_unlink ($row['folder'] . "/thumbs/" . $row['name'] );
 					}
 		
 	    }#END WHILE

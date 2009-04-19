@@ -6,7 +6,8 @@
 # purpose :  home page  .
 # copyright 2007-2008 Kleeja.com ..
 #license http://opensource.org/licenses/gpl-license.php GNU Public License
-# last edit by : saanina
+# last edit by : saanina 
+# $Rev$ $LastChangedDate$ $Author$ $Date$
 ##################################################
 
 	// security .. 

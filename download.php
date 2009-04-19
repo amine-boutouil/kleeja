@@ -6,7 +6,7 @@
 # purpose :  when user  request file to  download it.
 # copyright 2008-2009 Kleeja.com ..
 # license http://opensource.org/licenses/gpl-license.php GNU Public License
-# last edit by : PhpFalcon
+# $Author$ , $Rev$,  $Date::                           $
 ##################################################
 
 // security ..

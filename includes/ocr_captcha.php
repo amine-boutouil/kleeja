@@ -85,7 +85,7 @@ class ocr_captcha
 					{
 			            if(strpos($file, 'captcha_') !== false)
 						{
-							unlink('cache/'.$file);
+							delete_cache($file);
 						}
 			        }
 			        closedir($dh);

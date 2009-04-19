@@ -181,7 +181,7 @@ switch ($_GET['sty_t'])
 				
 				case '2' : //delete tpl
 				
-						@unlink($tpl_path);
+						@kleeja_unlink($tpl_path);
 							
 						//show msg
 						$link	= './admin.php?cp=styles&amp;style_choose=' . $style_id . '&amp;method=1';

@@ -114,12 +114,12 @@
 						}	
 
 						//delete from folder ..
-						@unlink ($row['folder'] . "/" . $row['name']);
+						@kleeja_unlink ($row['folder'] . "/" . $row['name']);
 						
 						//delete thumb
 						if (is_file($row['folder'] . "/thumbs/" . $row['name'] ))
 						{
-							@unlink ($row['folder'] . "/thumbs/" . $row['name'] );
+							@kleeja_unlink ($row['folder'] . "/thumbs/" . $row['name'] );
 						}
 							
 					}

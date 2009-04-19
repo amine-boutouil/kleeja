@@ -5,7 +5,7 @@
 # Filename : functions.php
 # purpose :  functions for all script. the important feature of kleeja
 # copyright 2007-2009 Kleeja.com ..
-#license http://opensource.org/licenses/gpl-license.php GNU Public License
+# license http://opensource.org/licenses/gpl-license.php GNU Public License
 # last edit by : saanina
 #########################################
 
@@ -22,7 +22,7 @@ if (!defined('IN_COMMON'))
 * to show header in any page you want .. 
 *  parameter : title : title of page as in <titl></titl>
 */	
-function Saaheader($title,$outscript=false)
+function Saaheader($title, $outscript=false)
 {
 		global $tpl,$usrcp,$lang,$user_is,$config,$extras,$script_encoding,$errorpage;
 
@@ -38,7 +38,7 @@ function Saaheader($title,$outscript=false)
 		}
 		else
 		{
-			$login_name		= $lang['LOGOUT']."[".$usrcp->name()."]";
+			$login_name		= $lang['LOGOUT'] . "[" . $usrcp->name() . "]";
 			$login_url		= ($config['mod_writer']) ? "logout.html" : "ucp.php?go=logout";
 			$usrcp_name		= $lang['PROFILE'];
 			$usrcp_url		= ($config['mod_writer']) ? "profile.html" : "ucp.php?go=profile";
@@ -111,7 +111,7 @@ function Saaheader($title,$outscript=false)
 			$header = $tpl->display("header");
 		}
 		
-		print $header;
+		echo $header;
 	}
 
 
@@ -166,7 +166,7 @@ function Saafooter($outscript=false)
 		//show footer
 		if($config['user_system'] != '1' && isset($script_encoding) && function_exists('iconv')  && strpos(strtolower($script_encoding), 'utf') === false && !$errorpage && $outscript)
 		{
-			$footer = iconv("UTF-8",strtoupper($script_encoding) . "//IGNORE",$tpl->display("footer"));
+			$footer = iconv("UTF-8", strtoupper($script_encoding) . "//IGNORE", $tpl->display("footer"));
 		}
 		else 
 		{
@@ -174,7 +174,7 @@ function Saafooter($outscript=false)
 		}
 		
 		
-		print $footer;
+		echo $footer;
 		//print $footer;
 		
 		//page analysis 
@@ -232,7 +232,10 @@ function KleejaOnline ()
 									'SET'		=> "last_google='$time', google_num=google_num+1"
 									);
 				($hook = kleeja_run_hook('qr_update_google_lst_num')) ? eval($hook) : null; //run hook
-				if (!$SQL->build($update_query)) die($lang['CANT_UPDATE_SQL']);
+				if (!$SQL->build($update_query))
+				{
+					die($lang['CANT_UPDATE_SQL']);
+				}
 		}
 		elseif (strstr($agent, 'Yahoo'))
 		{
@@ -241,7 +244,10 @@ function KleejaOnline ()
 									'SET'		=> "last_yahoo='$time', yahoo_num=yahoo_num+1"
 									);
 				($hook = kleeja_run_hook('qr_update_yahoo_lst_num')) ? eval($hook) : null; //run hook	
-				if (!$SQL->build($update_query))	die($lang['CANT_UPDATE_SQL']);
+				if (!$SQL->build($update_query))
+				{
+					die($lang['CANT_UPDATE_SQL']);
+				}
 		}
 		
 		//put another bots as a hook if you want !
@@ -276,7 +282,10 @@ function KleejaOnline ()
 								'WHERE'	=> "ip='". $SQL->escape($ip) . "'"
 							);
 			($hook = kleeja_run_hook('qr_update_ifis_onlline_func')) ? eval($hook) : null; //run hook
-			if (!$SQL->build($update_query)) die($lang['CANT_UPDATE_SQL']);			
+			if (!$SQL->build($update_query))
+			{
+				die($lang['CANT_UPDATE_SQL']);			
+			}
 		}
 
 		// i hate who online feature due to this step .. :( 
@@ -746,21 +755,21 @@ function kleeja_info($msg,$title='', $exit=true)
 {
 	global $text, $tpl;
 	
-				($hook = kleeja_run_hook('kleeja_info_func')) ? eval($hook) : null; //run hook
+	($hook = kleeja_run_hook('kleeja_info_func')) ? eval($hook) : null; //run hook
 				
-				// assign {text} in info template
-				$text	= $msg;
-				//header
-				Saaheader($title);
-				//show tpl
-				print $tpl->display('info');
-				//footer
-				Saafooter();
+	// assign {text} in info template
+	$text	= $msg;
+	//header
+	Saaheader($title);
+	//show tpl
+	echo $tpl->display('info');
+	//footer
+	Saafooter();
 				
-				if ($exit)
-				{
-					exit();
-				}
+	if ($exit)
+	{
+		exit();
+	}
 }
 
 /*
@@ -773,21 +782,21 @@ function kleeja_err($msg, $title='', $exit=true)
 {
 	global $text, $tpl;
 	
-				($hook = kleeja_run_hook('kleeja_err_func')) ? eval($hook) : null; //run hook
+	($hook = kleeja_run_hook('kleeja_err_func')) ? eval($hook) : null; //run hook
 				
-				// assign {text} in err template
-				$text	= $msg;
-				//header
-				Saaheader($title);
-				//show tpl
-				print $tpl->display('err');
-				//footer
-				Saafooter();
+	// assign {text} in err template
+	$text	= $msg;
+	//header
+	Saaheader($title);
+	//show tpl
+	echo $tpl->display('err');
+	//footer
+	Saafooter();
 				
-				if ($exit)
-				{
-					exit();
-				}
+	if ($exit)
+	{
+		exit();
+	}
 }
 
 /*
@@ -858,7 +867,7 @@ function kleeja_debug ()
 					$base_memory_usage	=	0;
 					$memory_usage -= $base_memory_usage;
 					$memory_usage = ($memory_usage >= 1048576) ? round((round($memory_usage / 1048576 * 100) / 100), 2) . ' MB' : (($memory_usage >= 1024) ? round((round($memory_usage / 1024 * 100) / 100), 2) . ' KB' : $memory_usage . ' BYTES');
-					$debug_output = 'Memory Usage : <i>' . $memory_usage . '</i>';
+					$debug_output = 'Memory Usage : <em>' . $memory_usage . '</em>';
 				}
 		}
 		
@@ -867,10 +876,10 @@ function kleeja_debug ()
 		echo '<fieldset  dir="ltr" style="background:white"><legend style="font-family: Arial; color:red"><em>[Page Analysis]</em></legend>';
 		echo '<p>&nbsp;</p>';
 		echo '<p><h2><strong>General Information :</strong></h2></p>';
-		echo '<p>Gzip : <i>' . (($do_gzip_compress !=0 )?  "Enabled" : "Disabled") . '</i></p>';
-		echo '<p>Queries Number :<i> ' .  $SQL->query_num . ' </i></p>';
-		echo '<p>Hook System :<i> ' .  ((!defined('STOP_HOOKS'))?  "Enabled" : "Disabled"). ' </i></p>';
-		echo '<p>Active Hooks :<i> ' .  sizeof($all_plg_hooks). ' </i></p>';
+		echo '<p>Gzip : <em>' . (($do_gzip_compress !=0 )?  "Enabled" : "Disabled") . '</em></p>';
+		echo '<p>Queries Number :<em> ' .  $SQL->query_num . ' </i></p>';
+		echo '<p>Hook System :<em> ' .  ((!defined('STOP_HOOKS'))?  "Enabled" : "Disabled"). ' </em></p>';
+		echo '<p>Active Hooks :<em> ' .  sizeof($all_plg_hooks). ' </em></p>';
 		echo '<p>' . $debug_output . '</p>';
 		echo '<p>&nbsp;</p>';
 		echo '<p><h2><strong><em>SQL</em> Information :</strong></h2></p> ';
@@ -879,7 +888,7 @@ function kleeja_debug ()
 		{ 
 			foreach($SQL->debugr as $key=>$val)
 			{
-				echo '<fieldset name="sql"  dir="ltr" style="background:white"><legend><em>query # [' . ($key+1) . '</em>]</legend> ';
+				echo '<fieldset name="sql"  dir="ltr" style="background:white"><legend><em>Query # [' . ($key+1) . '</em>]</legend> ';
 				echo '<textarea style="font-family:Courier New,monospace;width:99%; background:#F4F4F4" rows="5" cols="10">' . $val[0] . '';
 				echo '</textarea>	<br />';
 				echo 'Duration :' . $val[1] . ''; 
@@ -892,7 +901,7 @@ function kleeja_debug ()
 			echo '<p><strong>NO SQLs</strong></p>';
 		}
 		
-		echo '<p>&nbsp;</p><p><h2><strong><em>HOOK</em> Information :</strong></h2></p> ';
+		echo '<p>&nbsp;</p><p><h2><strong><em>HOOKS</em> Information :</strong></h2></p> ';
 		
 		if(sizeof($all_plg_hooks) > 0)
 		{ 
@@ -1134,7 +1143,7 @@ function kleeja_check_mime ($mime, $group_id, $file_path)
 		//check for bad things inside files ...
 		//eval without space and ( will catch alot of codes
 		//<.? i cant add it here cuz alot of files contain it 
-		$maybe_bad_codes_are = array('<script', 'zend', 'base64_decode', 'eval ', 'eval(', '<?php', 'echo', 'print');
+		$maybe_bad_codes_are = array('<script', 'zend', 'base64_decode', 'eval (', 'eval(');
 	
 		$data = @file_get_contents($file_path);
 		foreach($maybe_bad_codes_are as $i)
@@ -1158,12 +1167,6 @@ function delete_cache($name, $all=false, $deep = false)
 	
 	$path_to_cache = ($deep ? '.' : '') . './cache';
 	
-	//unlink
-	if(!function_exists('unlink'))
-	{
-		big_error('No unlink function!', '<strong>unlink</strong> function Doesnt exists , That mean we can not delete any file and cache. <br /> You have enable this feature .');
-	}
-	
 	if($all)
 	{
 		$dh = opendir($path_to_cache);
@@ -1171,7 +1174,7 @@ function delete_cache($name, $all=false, $deep = false)
 		{
 			if($file != "." && $file != ".." && $file != ".htaccess" && $file != "index.html" && $file != 'styles_cached.php')
 			{
-				$del = @unlink ($path_to_cache . "/" . $file);
+				$del = kleeja_unlink($path_to_cache . '/' . $file, true);
 			}
 		}
 		closedir($dh);
@@ -1179,15 +1182,52 @@ function delete_cache($name, $all=false, $deep = false)
 	else
 	{
 		$del = true;
-		$name = str_replace('.php', '', $name);
-		if (file_exists($path_to_cache . "/" . $name . '.php'))
+		$name = (strpos($name , 'captcha_') === false)  ? str_replace('.php', '', $name) . '.php' : $name;
+		if (file_exists($path_to_cache . '/' . $name))
 		{
-			$del = @unlink ($path_to_cache . "/" . $name . '.php');
+			$del = kleeja_unlink ($path_to_cache . "/" . $name, true);
 		}
 		
 	}
 	
 	return $del;
+}
+
+//
+//try delete files or at least change its name.
+//for those who have dirty hosting 
+//
+function kleeja_unlink($filepath, $cache_file = false)
+{
+	//99.9% who use this
+	if(function_exists('unlink'))
+	{
+		return @unlink($filepath);
+	}
+	//5% only who use this
+	else if (function_exists('exec'))
+	{
+		$out = array();
+		$return = null;
+		exec('del ' . escapeshellarg(realpath($filepath)) . ' /q', $out, $return);
+		return $return;
+	}
+	//5% only who use this
+	else if (function_exists('system'))
+	{
+		$return = null;
+		system ('del ' . escapeshellarg(realpath($filepath)) . ' /q', $return);
+		return $return;
+	}
+	//just rename cache file if there is new thing
+	else if (function_exists('rename') && $cache_file)
+	{
+		$new_name = substr($filepath, 0, strrpos($filepath, '/') + 1) . 'old_' . md5($filepath . time()) . '.php'; 
+		return rename($filepath, $new_name);
+	}
+
+	return false;
+
 }
 
 

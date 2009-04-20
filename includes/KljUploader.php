@@ -606,7 +606,7 @@ function process ()
 						{
 							$img_html_result .= $lang['URL_F_IMG'] . ':<br /><textarea rows="2" cols="49">' . $this->linksite . (($config['mod_writer']) ? "image" . $this->id_for_url . ".html" : "download.php?img=" . $this->id_for_url) . '</textarea><br />
 								' . $lang['URL_F_BBC'] . ':<br /><textarea rows="2" cols="49">' .
-								'[url=' . $this->linksite . (($config['mod_writer']) ? "image" . $this->id_for_url . ".html" : "download.php?img=" . $this->id_for_url) . '][img]' . $this->linksite . "download.php?img=" . $this->linksite . (($config['mod_writer']) ? "image" . $this->id_for_url . ".html" : "download.php?img=" . $this->id_for_url) . '[/img][/url]</textarea><br />';
+								'[url=' . $this->linksite . (($config['mod_writer']) ? "image" . $this->id_for_url . ".html" : "download.php?img=" . $this->id_for_url) . '][img]' . $this->linksite . (($config['mod_writer']) ? "image" . $this->id_for_url . ".html" : "download.php?img=" . $this->id_for_url) . '[/img][/url]</textarea><br />';
 						}
 	
 						$img_html_result .= $extra_thmb . $extra_del;

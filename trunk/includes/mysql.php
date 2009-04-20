@@ -59,11 +59,11 @@ class SSQL
 								
 								if ($dbselect)
 								{
-									if (strpos(strtolower($script_encoding), 'utf') == false && !defined('IN_LOGINPAGE'))
+									if (!eregi('utf',strtolower($script_encoding)) && !defined('IN_LOGINPAGE'))
 									{
 										mysql_query("SET NAMES 'utf8'");
 									}
-									else if (empty($script_encoding) || strpos(strtolower($script_encoding), 'utf')) 
+									else if (empty($script_encoding) || eregi('utf',strtolower($script_encoding))) 
 									{
 										mysql_query("SET NAMES 'utf8'");
 									}

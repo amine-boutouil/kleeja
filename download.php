@@ -8,7 +8,6 @@
 # license http://opensource.org/licenses/gpl-license.php GNU Public License
 # $Author$ , $Rev$,  $Date::                           $
 ##################################################
-
 // security ..
 define ('IN_INDEX' , true);
 define ('IN_DOWNLOAD', true);
@@ -220,8 +219,8 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 				$n = $row['name'];
 				$t = $row['type'];
 				$f = $row['folder'];
-				//img ot not
-				$is_image = in_array(trim($row['type']), array('gif', 'jpg', 'jpeg', 'bmp', 'png', 'tiff', 'tif')) ? true : false; 
+				//img or not
+				$is_image = in_array(strtolower(trim($row['type'])), array('gif', 'jpg', 'jpeg', 'bmp', 'png', 'tiff', 'tif')) ? true : false; 
 			}
 				
 			$SQL->freeresult($result);

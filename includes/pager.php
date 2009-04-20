@@ -7,7 +7,7 @@
 # copyright 2007-2008 Kleeja.com ..
 #license http://opensource.org/licenses/gpl-license.php GNU Public License
 # Author : Based on class from phpclasses.org, i forgot who was.
-# last edit by : saanina
+# $Author$ , $Rev$,  $Date::                           $
 ##################################################
 
 //no for directly open
@@ -65,10 +65,10 @@ class SimplePager
 		
 		// Add a previous page link
 		if ($this->totalPages > 1 && $this->currentPage > 1)
-			($config['mod_writer']) ? $re .= '<a class="paging" href="' . $link . '-' . ($this->currentPage-1) . '.html">'. $lang['PREV'] .'</a>&nbsp;&nbsp;' : $re .= '<a class="paging" href="' . $link . '&amp;page=' . ($this->currentPage-1) . '">'. $lang['PREV'] .'</a>&nbsp;&nbsp;';
+			($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '<a class="paging" href="' . $link . '-' . ($this->currentPage-1) . '.html">'. $lang['PREV'] .'</a>&nbsp;&nbsp;' : $re .= '<a class="paging" href="' . $link . '&amp;page=' . ($this->currentPage-1) . '">'. $lang['PREV'] .'</a>&nbsp;&nbsp;';
 
 		if ($this->currentPage > 3)		
-			($config['mod_writer']) ? $re .= '<a class="paging" href="' . $link . '-1.html">1</a>' . (($this->currentPage > 5) ? '...' : '') : $re .= '<a class="paging" href="' . $link . '&amp;page=1">1</a>' . (($this->currentPage > 5) ? '...' : '');
+			($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '<a class="paging" href="' . $link . '-1.html">1</a>' . (($this->currentPage > 5) ? '...' : '') : $re .= '<a class="paging" href="' . $link . '&amp;page=1">1</a>' . (($this->currentPage > 5) ? '...' : '');
 
 		// Don't ask me how the following works. It just does, OK? :-)
 		for ($current = ($this->currentPage == 5) ? $this->currentPage - 3 : $this->currentPage - 2, $stop = ($this->currentPage + 4 == $this->totalPages) ? $this->currentPage + 4 : $this->currentPage + 3; $current < $stop; ++$current)
@@ -76,7 +76,7 @@ class SimplePager
 			if ($current < 1 || $current > $this->totalPages)
 				continue;
 			else if ($current != $this->currentPage)
-				($config['mod_writer']) ? $re .= '<a href="'. $link .'-'.($current).'.html" class="paging">'. $current .'</a>&nbsp;' : $re .= '<a href="'. $link .'&amp;page='.($current).'" class="paging">'. $current .'</a>&nbsp;';
+				($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '<a href="'. $link .'-'.($current).'.html" class="paging">'. $current .'</a>&nbsp;' : $re .= '<a href="'. $link .'&amp;page='.($current).'" class="paging">'. $current .'</a>&nbsp;';
 			else
 				$re .= '<strong class="here_page">'. $current .'</strong>&nbsp;';
 		}
@@ -86,12 +86,12 @@ class SimplePager
 			if ($this->currentPage != ($this->totalPages-3) && $this->currentPage != ($this->totalPages-4))
 				$re .= '...';
 
-			($config['mod_writer']) ? $re .= '<a href="' . $link . '-' . ($this->totalPages) . '.html"  class="paging">'. $this->totalPages .'</a>' : $re .= '<a href="' . $link . '&amp;page=' . ($this->totalPages) . '"  class="paging">'. $this->totalPages .'</a>';
+			($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '<a href="' . $link . '-' . ($this->totalPages) . '.html"  class="paging">'. $this->totalPages .'</a>' : $re .= '<a href="' . $link . '&amp;page=' . ($this->totalPages) . '"  class="paging">'. $this->totalPages .'</a>';
 		}
 		
 		// Add a next page link
 		if ($this->totalPages > 1 && $this->currentPage < $this->totalPages)
-			($config['mod_writer']) ? $re .= '&nbsp;&nbsp;<a class="paging" href="' . $link . '-' . ($this->currentPage+1) . '.html">'. $lang['NEXT'] .'</a>' :  $re .= '&nbsp;&nbsp;<a class="paging" href="' . $link . '&amp;page=' . ($this->currentPage+1) . '">'. $lang['NEXT'] .'</a>';
+			($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '&nbsp;&nbsp;<a class="paging" href="' . $link . '-' . ($this->currentPage+1) . '.html">'. $lang['NEXT'] .'</a>' :  $re .= '&nbsp;&nbsp;<a class="paging" href="' . $link . '&amp;page=' . ($this->currentPage+1) . '">'. $lang['NEXT'] .'</a>';
 			
 		$re .= '</div>'; 
 		

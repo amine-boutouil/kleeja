@@ -709,8 +709,10 @@ switch ($_GET['go'])
 	//
 	//if it's not a default user system let's send custom charset and look for iconv 
 	//
-	if($config['user_system'] != '1' && isset($script_encoding) && $_GET['go'] == 'login' && function_exists('iconv') && strpos(strtolower($script_encoding), 'utf') === false)
+	if($config['user_system'] != '1' && isset($script_encoding) && $_GET['go'] == 'login' && function_exists('iconv') && !eregi('utf',strtolower($script_encoding)))
 	{
+		//send custom chaeset header
+		header("Content-type: text/html; charset={$script_encoding}");
 		//header
 		Saaheader($titlee, true);
 		//change login page encoding if kleeja is integrated with other script

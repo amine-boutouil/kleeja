@@ -6,7 +6,7 @@
 # purpose :  functions for all script. the important feature of kleeja
 # copyright 2007-2009 Kleeja.com ..
 # license http://opensource.org/licenses/gpl-license.php GNU Public License
-# last edit by : saanina
+# $Author$ , $Rev$,  $Date::                           $
 #########################################
 
 //no for directly open
@@ -24,7 +24,8 @@ if (!defined('IN_COMMON'))
 */	
 function Saaheader($title, $outscript=false)
 {
-		global $tpl,$usrcp,$lang,$user_is,$config,$extras,$script_encoding,$errorpage;
+		global $tpl, $usrcp, $lang, $user_is, $config;
+		global $extras, $script_encoding, $errorpage;
 
 		$user_is = ($usrcp->name()) ? true: false;
 		
@@ -104,7 +105,7 @@ function Saaheader($title, $outscript=false)
 	
 		if($config['user_system'] != '1' && isset($script_encoding) && function_exists('iconv') && !eregi('utf',strtolower($script_encoding)) && !$errorpage && $outscript) 
 		{
-			$header = iconv("UTF-8",strtoupper($script_encoding) . "//IGNORE",$tpl->display("header"));
+			$header = iconv("UTF-8", strtoupper($script_encoding) . "//IGNORE", $tpl->display("header"));
 		}
 		else 
 		{
@@ -122,7 +123,8 @@ function Saaheader($title, $outscript=false)
 */
 function Saafooter($outscript=false)
 {
-		global $tpl,$SQL,$starttm,$config,$usrcp,$lang,$do_gzip_compress,$script_encoding,$errorpage;
+		global $tpl, $SQL, $starttm, $config, $usrcp, $lang;
+		global $do_gzip_compress, $script_encoding, $errorpage;
 		
 		//show stats ..
 		if ($config['statfooter'] !=0) 
@@ -738,8 +740,10 @@ function kleeja_run_hook ($hook_name)
 {
 	global $all_plg_hooks;
 
-	if(defined('STOP_HOOKS') || !isset($all_plg_hooks[$hook_name])) return false;
-
+	if(defined('STOP_HOOKS') || !isset($all_plg_hooks[$hook_name]))
+	{
+		return false;
+	}
 	return implode("\n", $all_plg_hooks[$hook_name]);
 }
 
@@ -1126,6 +1130,7 @@ function kleeja_check_mime ($mime, $group_id, $file_path)
 				break;
 			}
 		}
+		
 		//onther check
 		//$w = @getimagesize($file_path);
 		//$return =  ($w && (strpos($w['mime'], 'image') !== false)) ? true : false;
@@ -1135,17 +1140,20 @@ function kleeja_check_mime ($mime, $group_id, $file_path)
 	//another check
 	if($return == true)
 	{
-		if(@filesize($file_path) > 10*(1000*1024))
+		if(@filesize($file_path) > 4*(1000*1024))
 		{
 			return true;
 		}
 		
 		//check for bad things inside files ...
-		//eval without space and ( will catch alot of codes
 		//<.? i cant add it here cuz alot of files contain it 
-		$maybe_bad_codes_are = array('<script', 'zend', 'base64_decode', 'eval (', 'eval(');
-	
-		$data = @file_get_contents($file_path);
+		$maybe_bad_codes_are = array('<script', 'zend', 'base64_decode');
+		
+		if(!($data = @file_get_contents($file_path)))
+		{
+			return true;
+		}
+		
 		foreach($maybe_bad_codes_are as $i)
 		{
 			if(strpos(strtolower($data), $i) !== false)
@@ -1561,16 +1569,21 @@ function delete_ch_tpl($template_name, $delete_txt = array())
 }
 
 /*
-* Add new option
+* Add new config option
 */
-function add_config ($name,$value,$order="0",$html="") 
+function add_config ($name, $value, $order="0", $html="") 
 {
-	global $dbprefix, $SQL;
+	global $dbprefix, $SQL, $config;
+	
+	if(isset($config[$name]))
+	{
+		return true;
+	}
 	
 	$insert_query = array(	'INSERT'	=> '`name` ,`value` ,`option` ,`display_order`',
 							'INTO'		=> "{$dbprefix}config",
-							'VALUES'	=> "'". $SQL->escape($name) ."','". $SQL->escape($value) ."', '". addslashes($html) ."','". intval($order). "'");
-	$SQL->build($insert_query);						
+							'VALUES'	=> "'" . $SQL->escape($name) . "','" . $SQL->escape($value) . "', '" . addslashes($html) . "','" . intval($order) . "'");
+	return $SQL->build($insert_query);						
 }
 
 /*
@@ -1581,8 +1594,8 @@ function delete_config ($name)
 	global $dbprefix, $SQL;
 	
 	$delete_query = array(	'DELETE'	=> "{$dbprefix}config",
-							'WHERE'		=> "name = '". $SQL->escape($name). "'");
-	$SQL->build($delete_query);						
+							'WHERE'		=> "name = '" . $SQL->escape($name) . "'");
+	return $SQL->build($delete_query);						
 }
 
 ?>

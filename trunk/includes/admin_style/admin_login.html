@@ -1,0 +1,71 @@
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="{lang.DIR}">
+<head>
+	<title>{lang.LOGIN} - {lang.KLEEJA_CP} - {config.sitename}</title>
+	<meta http-equiv="Content-Language" content="ar" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="{STYLE_PATH_ADMIN}admin_stylesheet.css" type="text/css" />
+	<script type="text/javascript">
+	function confirm_from()
+	{
+		if(confirm('{lang.ARE_YOU_SURE_DO_THIS}'))
+			return true;
+		else
+			return false;
+	}
+	
+	</script>
+	<script type="text/javascript" src="{STYLE_PATH_ADMIN}images/tips.js"></script> 
+	<!-- HEAD ADMIN HEADER -->
+</head>
+<body>
+<div id="wrap">
+<div class="roundedcornr_box_459680"><div class="roundedcornr_top_459680"><div></div></div><div class="roundedcornr_content_459680">
+
+<div id="content">
+
+<div class="header">
+<a href="{config.siteurl}"><img src="{STYLE_PATH_ADMIN}images/logo.gif" alt="{config.sitename}" style="border:0px;float: left;" /></a>
+</div>
+
+<!-- END ADMIN HEADER -->
+
+        <div class="middle">
+        <h1>{lang.LOGIN}</h1>
+<form action="{action}" method="post">
+
+        <table>
+                <tr>
+                        <td class="row1">{lang.USERNAME} :</td>
+                        <td class="row2"> <input type="text" name="lname" value="{username}"  /></td>
+                </tr>        
+                <tr>
+                        <td class="row1">{lang.PASSWORD} :</td>
+                        <td class="row2"> <input type="password" name="lpass" value=""  /></td>
+                </tr>
+                <tr>
+                        <td colspan="2" style="text-align:center"><input type="submit" name="submit" value="{lang.LOGIN}" /></td>
+                </tr>
+        </table>
+
+        </form>
+        <br />
+        </div>
+        
+        
+<div id="clear"></div>
+</div>
+</div><div class="roundedcornr_bottom_459680"><div></div></div></div> </div>
+
+</div>
+
+<div id="footer">
+Powered by <a href="http://www.kleeja.com">Kleeja</a> <br />
+Styles, Hacks in <a href="http://www.kleeja.com" target="_blank">Kleeja Official Website</a>
+</div>
+
+</body>
+</html>
+        
+
+        

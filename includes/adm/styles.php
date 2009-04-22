@@ -244,7 +244,7 @@ switch ($_GET['sty_t'])
 				//style id 
 				$style_id = str_replace('..', '', $_POST['style_id']);
 				//tpl name 
-				$tpl_name =	$SQL->escape($_POST['new_tpl']);
+				$tpl_name =	htmlspecialchars_decode($_POST['new_tpl']);
 				$tpl_path = $root_path . 'styles/' . $style_id . '/' . $tpl_name;
 			
 				$tpl_content = $_POST['template_content'];

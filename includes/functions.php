@@ -1598,4 +1598,17 @@ function delete_config ($name)
 	return $SQL->build($delete_query);						
 }
 
+
+if(!function_exists('htmlspecialchars_decode'))
+{
+	function htmlspecialchars_decode($string, $style=ENT_COMPAT)
+	{
+		$translation = array_flip(get_html_translation_table(HTML_SPECIALCHARS, $style));
+		if($style === ENT_QUOTES)
+		{
+			$translation['&#039;'] = '\'';
+		}
+		return strtr($string, $translation);
+	}
+}
 ?>

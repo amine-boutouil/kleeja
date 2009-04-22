@@ -2,8 +2,8 @@
         
 <div class="middle">
 <form method="get" action="{action}">
-        <fieldset>
-                <legend>{lang.R_STYLES}</legend>
+ <fieldset>
+      <legend>{lang.R_STYLES}</legend>
 
 <table style="width: 100%">
 <tr style="background-color:silver">
@@ -21,8 +21,6 @@
         <input name="method" value="1" type="radio" checked="checked" /> {lang.SHOW_TPLS}
         <br />
         <input name="method" value="2" type="radio" /> {lang.MAKE_AS_DEFAULT}
-		
-
 </td>
 </tr>
 </table>
@@ -32,7 +30,25 @@
                 <input class="button2"  type="submit" value="{lang.SUBMIT}" />
 </fieldset>
 </form>
+
+
+<br />
+<br />
+ <fieldset>
+       <legend>{lang.TPLS_RE_BASIC} : </legend>
+		
+		<table style="width:100%">
+			<tr><td class="s_box_tpls">header.html</td><td class="s_box_tpls_d" onclick="javascript:location.href='{edit_tpl_action}header.html'">{lang.EDIT}</td></tr>
+			<tr><td class="s_box_tpls">footer.html</td><td class="s_box_tpls_d" onclick="javascript:location.href='{edit_tpl_action}footer.html'">{lang.EDIT}</td></tr>
+			<tr><td class="s_box_tpls">stylesheet.css</td><td class="s_box_tpls_d" onclick="javascript:location.href='{edit_tpl_action}stylesheet.css'">{lang.EDIT}</td></tr>
+		</table>
+		<a href="{show_all_tpls_action}">{lang.SHOW_TPLS}...</a>
+</fieldset>
+
+
 </div>
+
+
 
 
         

@@ -248,10 +248,12 @@ switch ($_GET['sty_t'])
 				$tpl_path = $root_path . 'styles/' . $style_id . '/' . $tpl_name;
 			
 				$tpl_content = $_POST['template_content'];
-				$filename = @fopen($tpl_path, 'w');
-				fwrite($filename, $tpl_content);
-				fclose($filename);
-		
+				if($filename = @fopen($tpl_path, 'w'))
+				{
+					@fwrite($filename, $tpl_content);
+					@fclose($filename);
+				}
+				
 				$link	= './admin.php?cp=styles&amp;style_choose=' . $style_id . '&amp;method=1';
 				$text	= $lang['TPL_CREATED']  . '<br /> <a href="' . $link . '">' . $lang['GO_BACK_BROWSER'] . '</a><meta HTTP-EQUIV="REFRESH" content="1; url=' . $link . '">' ."\n";
 				$stylee	= "admin_info";

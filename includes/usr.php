@@ -264,6 +264,7 @@ class usrcp
 					unset($_SESSION['USER_ADMIN']);
 					unset($_SESSION['USER_SESS']);
 					unset($_SESSION['LAST_VISIT']);
+					unset($_SESSION['ADMINLOGIN']);
 					return true;
 				}
 				

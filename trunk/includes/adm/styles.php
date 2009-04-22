@@ -192,6 +192,7 @@ switch ($_GET['sty_t'])
 						}
 
 						$template_content	= file_get_contents($tpl_path);
+						$template_content	= htmlspecialchars($template_content);
 						
 						
 					break;
@@ -214,9 +215,8 @@ switch ($_GET['sty_t'])
 			{
 				$style_id = str_replace('..', '', $_POST['style_id']);
 				//tpl name 
-				$tpl_name =	$SQL->escape($_POST['tpl_choose']);
+				$tpl_name =	htmlspecialchars_decode($_POST['tpl_choose']);
 				$tpl_path = $root_path . 'styles/' . $style_id . '/' . $tpl_name;
-			
 				$tpl_content = $_POST['template_content'];
 				$filename = @fopen($tpl_path, 'w');
 				fwrite($filename, $tpl_content);

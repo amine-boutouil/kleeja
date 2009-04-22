@@ -17,6 +17,8 @@
 </script>
 
 <div class="middle">
+<a href="{action_return}">&lt; {lang.GO_BACK_BROWSER} : {style_id}</a>
+
 <form method="post" action="{action}">
     <fieldset>
         <legend>{lang.EDIT} :: {tpl_name}</legend>
@@ -26,7 +28,7 @@
 <tr style="background-color:#F5F5F5">
 <td>
 
-<textarea name="template_content" id="template_content"  rows="" style="width: 490px; height: 260px;direction:ltr;" >
+<textarea name="template_content" id="template_content"  rows="" style="width:99%; height: 260px;direction:ltr;" >
 {template_content}
 </textarea>
 <input class="button2" type="button"  onclick="javascript:change_editor_height(100, '+');" value="[+]" />
@@ -41,7 +43,11 @@
 
 </fieldset>
 <fieldset class="quick" style="text-align:center">
+	<IF NAME="not_style_writeable">
+		<div class="info">{lang.STYLE_DIR_NOT_WR}</div>
+	<ELSE>
         <input class="button2" name="tpl_edit_submit" type="submit" value="{lang.SUBMIT}" />
+	</IF>
 </fieldset>
 </form>
 

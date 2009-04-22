@@ -192,7 +192,7 @@ switch ($_GET['sty_t'])
 						}
 
 						$template_content	= file_get_contents($tpl_path);
-						$template_content	= htmlspecialchars($template_content);
+						$template_content	= htmlspecialchars(stripslashes($template_content));
 						
 						
 					break;

@@ -1606,7 +1606,7 @@ function delete_config ($name)
 	global $dbprefix, $SQL;
 	
 	//if array
-	$name = is_array($name) ? 'name IN (' . implode(', ', $name) ')' : 'name =' $name;
+	$name = is_array($name) ? 'name IN (' . implode(', ', $name) . ')' : 'name =' . $name;
 	
 	$delete_query = array(	'DELETE'	=> "{$dbprefix}config",
 							'WHERE'		=>  $SQL->escape($name)
@@ -1641,7 +1641,7 @@ function delete_olang ($words, $lang='en')
 	global $dbprefix, $SQL;
 	
 	//if array
-	$words = is_array($words) ? 'word IN (' . implode(', ', $words) ')' : 'word =' $words;
+	$words = is_array($words) ? 'word IN (' . implode(', ', $words) . ')' : 'word =' . $words;
 	
 	$delete_query = array(	'DELETE'	=> "{$dbprefix}config",
 							'WHERE'		=>  $SQL->escape($name) . ' AND lang_id="' . $SQL->escape($lang) . '"'

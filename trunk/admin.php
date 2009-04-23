@@ -6,7 +6,7 @@
 # purpose :  control panel for administarator
 # copyright 2007-2009 Kleeja.com ..
 # license http://opensource.org/licenses/gpl-license.php GNU Public License
-# last edit by : saanina
+# $Author$ , $Rev$,  $Date::                           $
 ##################################################
 
 
@@ -119,80 +119,83 @@
 			if (isset($_POST['submit']))
 			{
 					
-					//for onlines
-					$ip	=	(getenv('HTTP_X_FORWARDED_FOR')) ?  getenv('HTTP_X_FORWARDED_FOR') : getenv('REMOTE_ADDR');
+				//for onlines
+				$ip	=	(getenv('HTTP_X_FORWARDED_FOR')) ?  getenv('HTTP_X_FORWARDED_FOR') : getenv('REMOTE_ADDR');
 					
-					if ($config['allow_online'] == 1)
-					{
-						$query_del	= array('DELETE'	=> "{$dbprefix}online",
+				if ($config['allow_online'] == 1)
+				{
+					$query_del	= array('DELETE'	=> "{$dbprefix}online",
 											'WHERE'		=> "ip='" . $ip . "'"
 										);
 						
-						if (!$SQL->build($query_del))
-						{
-							die($lang['CANT_DELETE_SQL']);
-						}
+					if (!$SQL->build($query_del))
+					{
+						die($lang['CANT_DELETE_SQL']);
 					}
+				}
 
-					//login
-					$ERRORS	=	'';
-					if (empty($_POST['lname']) || empty($_POST['lpass']))
-					{
-						$ERRORS[] = $lang['EMPTY_FIELDS'];
-					}
-					elseif(!$usrcp->data($_POST['lname'], $_POST['lpass']))
-					{
-						$ERRORS[] = $lang['LOGIN_ERROR'];
-					}
+				//login
+				$ERRORS	=	'';
+				if (empty($_POST['lname']) || empty($_POST['lpass']))
+				{
+					$ERRORS[] = $lang['EMPTY_FIELDS'];
+				}
+				elseif(!$usrcp->data($_POST['lname'], $_POST['lpass']))
+				{
+					$ERRORS[] = $lang['LOGIN_ERROR'];
+				}
 					
 				
-					if(empty($ERRORS))
-					{						
-						session_start();
-						$_SESSION['ADMINLOGIN'] = '1';
-						header('Location: admin.php');
-					}
-					else
+				if(empty($ERRORS))
+				{
+					$_SESSION['ADMINLOGIN'] = '1';
+					header('Location: admin.php');
+				}
+				else
+				{
+					$errs	=	'';
+					foreach($ERRORS as $r)
 					{
-						$errs	=	'';
-						foreach($ERRORS as $r)
-						{
-							$errs	.= '- ' . $r . '. <br />';
-						}
-						kleeja_err($errs);
+						$errs	.= '- ' . $r . '. <br />';
 					}
+					kleeja_err($errs);
+				}
 			}
 		}
 		else 
 		{
-		//show template login .
-		//body
-		$action	= "admin.php?go=login";
-		$username = $usrcp->name();
-		
-		
-		if($config['user_system'] != '1' && isset($script_encoding) && function_exists('iconv') && !eregi('utf',strtolower($script_encoding)))
-	{
-		//send custom chaeset header
-		header("Content-type: text/html; charset={$script_encoding}");
-		//change login page encoding if kleeja is integrated with other script
-		 echo iconv("UTF-8", strtoupper($script_encoding) . "//IGNORE", $tpl->display("admin_login"));	
+			//show template login .
+			//body
+			$action	= "admin.php?go=login";
+			$username = $usrcp->name();
+			
+			
+			if($config['user_system'] != '1' && isset($script_encoding) && function_exists('iconv') && !eregi('utf',strtolower($script_encoding)))
+			{
+				//send custom chaeset header
+				header("Content-type: text/html; charset={$script_encoding}");
+				//change login page encoding if kleeja is integrated with other script
+				echo iconv("UTF-8", strtoupper($script_encoding) . "//IGNORE", $tpl->display("admin_login"));	
 
-	}
-	else {
-			echo $tpl->display("admin_login");
-		}
+			}
+			else
+			{
+				echo $tpl->display("admin_login");
+			}
 		}	
 	}
-	else {
-	//show style .
-	//header
-	echo $tpl->display("admin_header");
-		//body
-		echo $tpl->display($stylee);
-	//footer
-	echo $tpl->display("admin_footer");
+	else 
+	{
+		//show style .
+		//header
+		echo $tpl->display("admin_header");
+			//body
+			echo $tpl->display($stylee);
+		//footer
+		echo $tpl->display("admin_footer");
 	}
+	
+	
 	//close db
 	$SQL->close();
 	exit;

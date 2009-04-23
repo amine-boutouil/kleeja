@@ -6,7 +6,7 @@
 # purpose :  every things for users.
 # copyright 2007-2009 Kleeja.com ..
 # license http://opensource.org/licenses/gpl-license.php GNU Public License
-# last edit by : saanina
+# $Author$ , $Rev$,  $Date::                           $
 ##################################################
 
 // security .. 

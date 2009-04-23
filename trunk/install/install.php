@@ -1,7 +1,9 @@
 <?php
-# KLEEJA INSTALLER ...
-# updated  [4/2009]
-# this file have many updates .. dont use previous ones
+//
+// kleeja installer ...
+// $Author$ , $Rev$,  $Date::                           $
+//
+
 
 // Report all errors, except notices
 @error_reporting(E_ALL ^ E_NOTICE);
@@ -13,10 +15,10 @@ include important files
 
 define ( 'IN_COMMON' , true);
 $_path = "../";
-(file_exists($_path . 'config.php')) ? include ($_path . 'config.php') : null;
-include ($_path . 'includes/functions.php');
-include ($_path . 'includes/mysql.php');
-include ('func_inst.php');
+(file_exists($_path . 'config.php')) ? include_once ($_path . 'config.php') : null;
+include_once ($_path . 'includes/functions.php');
+include_once ($_path . 'includes/mysql.php');
+include_once ('func_inst.php');
 
 //
 //version of latest changes at db
@@ -29,7 +31,7 @@ define ('DB_VERSION' , '6');
 */
 if(isset($_POST['dbsubmit']) && !is_writable($_path))
 {
-// ...
+	// ...
 }
 else
 {
@@ -357,6 +359,7 @@ case 'data' :
 				elseif ($name == 'online')		echo '<span style="color:green;">' . $lang['INST_CRT_ONL'] . '</span><br />';
 				elseif ($name == 'hooks')		echo '<span style="color:green;">' . $lang['INST_CRT_HKS'] . '</span><br />';
 				elseif ($name == 'plugins')		echo '<span style="color:green;">' . $lang['INST_CRT_PLG'] . '</span><br />';
+				elseif ($name == 'lang')		echo '<span style="color:green;">' . $lang['INST_CRT_LNG'] . '</span><br />';
 				else
 				{
 					

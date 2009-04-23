@@ -344,8 +344,10 @@ $lang = array_merge($lang, array(
 	'ADD_NEW_TPL_EXP' => 'Enter a name for the new template',
 	'TPL_CREATED' => 'New template successfully created...',
 	
-	/* //deprecated, removed from rc6+
 	'R_LANGS' => 'words and phrases',
+	'WORDS_UPDATED' => 'Words successfully updated...',
+	
+	/* //deprecated, removed from rc6+
 	'LANGS_EXP' => 'To delete or update a language, select it from below',
 	'SHOW_WORDS' => 'Show words and phrases',
 	'ADD_NEW_LANG' => 'Add new language',
@@ -358,7 +360,6 @@ $lang = array_merge($lang, array(
 	'NEW_LANG_ADDED' => 'New language added...',
 	'NO_WORD_SHOOSED' => 'You did not select a word !',
 	'WORD_DELETED' => 'Word successfully deleted...',
-	'WORD_UPDATED' => 'Word successfully updated...',
 	'WORD_CREATED' => 'Word successfully added...',
 	*/
 	'PLUGINS' => 'Plugins',

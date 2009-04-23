@@ -1,0 +1,41 @@
+
+<div class="middle">
+<br />
+
+<form action="{action2}" method="post">
+	<select name="lang">
+		{lngfiles}
+	</select>
+	  <input class="button2"  type="submit" value="{lang.UPDATE}" />
+</form>
+
+<form method="post" action="{action}">
+        <fieldset>
+                <legend>{lang.R_LANGS}</legend>
+
+<table style="width: 100%">
+<IF NAME="no_results">
+...
+<ELSE>
+<LOOP NAME="arr">
+        <tr style="background-color:<RAND="#D8EBFD","#fff">" class="">
+               <td>#<em>{{lang_id}}</em></td>
+                <td class="s_box_tpls">{{word}}</td>
+				<td style="text-align:center"> <strong>=</strong> </td>
+                 <td><label><input type="text" name="t_{{word}}" value="{{trans}}" size="60" ></label></td>
+                <td><input type="checkbox" name="del_{{word}}" value="1"> {lang.DELETE}</td>
+                <!-- admin lang data tr extra -->
+        </tr>
+</LOOP>
+</IF>
+</table>
+
+</fieldset>
+<fieldset class="quick" style="text-align:center">
+                <input class="button2" name="submit" type="submit" value="{lang.UPDATE}" />
+</fieldset>
+</form>
+<div style="text-align:center"><b>{page_nums}</b></div>
+</div>
+
+        

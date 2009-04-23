@@ -23,7 +23,6 @@
 					'ORDER BY'	=> 'id DESC'
 					);
 						
-		$result = $SQL->build($query);
 		
 		//posts search ..
 		if (isset($_POST['search_user']))
@@ -32,7 +31,6 @@
 			$usermailee	= ($_POST['usermail']!='') ? 'AND mail  LIKE \'%'.$SQL->escape($_POST['usermail']).'%\' ' : ''; 
 
 			$query['WHERE']	=	"name != '' $usernamee $usermailee";
-			
 		}
 		
 		$result = $SQL->build($query);

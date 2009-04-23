@@ -31,70 +31,70 @@
 
 		while($row=$SQL->fetch_array($result))
 		{
-				//make new lovely array !!
-				$con[$row['name']] = $row['value'];
+			//make new lovely array !!
+			$con[$row['name']] = $row['value'];
 				
-				if($row['name'] == 'thmb_dims') 
+			if($row['name'] == 'thmb_dims') 
+			{
+				list($thmb_dim_w, $thmb_dim_h) = @explode('*', $con['thmb_dims']);
+			}
+			else if($row['name'] == 'style') 
+			{
+				//get styles
+				if ($dh = @opendir($root_path . 'styles'))
 				{
-					list($thmb_dim_w, $thmb_dim_h) = @explode('*', $con['thmb_dims']);
+						while (($file = readdir($dh)) !== false)
+						{
+							if(strpos($file, '.') === false && $file != '..' && $file != '.')
+								$stylfiles .=  '<option ' . (($con['style']==$file) ? 'selected="selected"' : '') . ' value="' . $file . '">' . $file . '</option>' . "\n";
+						}
+						closedir($dh);
 				}
-				if($row['name'] == 'style') 
+			}
+			else if($row['name'] == 'language') 
+			{
+				//get languages
+				if ($dh = @opendir($root_path . 'lang'))
 				{
-						//get styles
-		if ($dh = @opendir($root_path . 'styles'))
-		{
-				while (($file = readdir($dh)) !== false)
-				{
-					if(strpos($file, '.') === false && $file != '..' && $file != '.')
-						$stylfiles .=  '<option ' . (($con['style']==$file) ? 'selected="selected"' : '') . ' value="' . $file . '">' . $file . '</option>' . "\n";
+						while (($file = readdir($dh)) !== false)
+						{
+							if(strpos($file, '.') === false && $file != '..' && $file != '.')
+							{
+								$lngfiles .=  '<option ' . (($con['language']==$file) ? 'selected="selected"' : '') . ' value="' . $file . '">' . $file . '</option>' . "\n";
+							}
+						}
+						closedir($dh);
 				}
-				closedir($dh);
-		}
-		}
-		if($row['name'] == 'language') 
+			}
+			else if($row['name'] == 'user_system') 
+			{
+				//get auth types
+				//fix previus choice in old kleeja
+				if(in_array($con['user_system'], array('2', '3', '4')))
 				{
-		//get languages
-		if ($dh = @opendir($root_path . 'lang'))
-		{
-				while (($file = readdir($dh)) !== false)
-				{
-					if(strpos($file, '.') === false && $file != '..' && $file != '.')
-					{
-						$lngfiles .=  '<option ' . (($con['language']==$file) ? 'selected="selected"' : '') . ' value="' . $file . '">' . $file . '</option>' . "\n";
-					}
+					$con['user_system'] = str_replace(array('2', '3', '4'), array('phpbb', 'vb', 'mysmartbb'), $con['user_system']);
 				}
-				closedir($dh);
-		}
-		}
-		if($row['name'] == 'user_system') 
-		{
-		//get auth types
-		//fix previus choice in old kleeja
-		if(in_array($con['user_system'], array('2', '3', '4')))
-		{
-			$con['user_system'] = str_replace(array('2', '3', '4'), array('phpbb', 'vb', 'mysmartbb'), $con['user_system']);
-		}
-		
-		$authtypes .= '<option value="1"' . (($con['user_system']=='1') ? ' selected="selected"' : '') . '>' . $lang['NORMAL'] . '</option>' . "\n";
-		if ($dh = @opendir($root_path . 'includes/auth_integration'))
-		{
-				while (($file = readdir($dh)) !== false)
+			
+				$authtypes .= '<option value="1"' . (($con['user_system']=='1') ? ' selected="selected"' : '') . '>' . $lang['NORMAL'] . '</option>' . "\n";
+				if ($dh = @opendir($root_path . 'includes/auth_integration'))
 				{
-					if(strpos($file, '.php') !== false)
-					{
-						$file = trim(str_replace('.php', '', $file));
-						$authtypes .=  '<option value="' . $file . '"' . (($con['user_system']==$file) ? ' selected="selected"' : '') . '>' . $file . '</option>' . "\n";
-					}
+						while (($file = readdir($dh)) !== false)
+						{
+							if(strpos($file, '.php') !== false)
+							{
+								$file = trim(str_replace('.php', '', $file));
+								$authtypes .=  '<option value="' . $file . '"' . (($con['user_system']==$file) ? ' selected="selected"' : '') . '>' . $file . '</option>' . "\n";
+							}
+						}
+						closedir($dh);
 				}
-				closedir($dh);
-		}
-		}
+			}
 				//options from database [UNDER TEST]
 				if(!empty($row['option'])) 
 				{
-				$options .= '<tr>
-                <td><label for="'.$row['name'].'">'.$lang[strtoupper($row['name'])].'</label></td>
-				<td><label>'.$tpl->admindisplayoption($row['option']).'</label></td></tr>';
+					$options .= '<tr>
+					<td><label for="' . $row['name'] . '">' . $lang[strtoupper($row['name'])] . '</label></td>
+					<td><label>' . $tpl->admindisplayoption($row['option']) . '</label></td></tr>';
 				}
 				//when submit !!
 				if (isset($_POST['submit']))

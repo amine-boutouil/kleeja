@@ -123,7 +123,7 @@ function Saaheader($title, $outscript=false)
 */
 function Saafooter($outscript=false)
 {
-		global $tpl, $SQL, $starttm, $config, $usrcp, $lang;
+		global $tpl, $SQL, $starttm, $config, $usrcp, $lang, $olang;
 		global $do_gzip_compress, $script_encoding, $errorpage;
 		
 		//show stats ..
@@ -509,7 +509,7 @@ function xml_get_children($vals, &$i)
 */
 function creat_plugin_xml($contents) 
 {
-	global $dbprefix, $SQL, $lang, $config, $STYLE_PATH_ADMIN , $STYLE_PATH, $root_path;
+	global $dbprefix, $SQL, $lang, $config, $STYLE_PATH_ADMIN , $STYLE_PATH, $root_path, $olang;
 
 				$gtree = xml_to_array($contents);
 				
@@ -1487,7 +1487,6 @@ function get_lang($name, $folder = '')
 	}
 
 	return true;
-
 }
 
 //
@@ -1586,6 +1585,19 @@ function add_config ($name, $value, $order="0", $html="")
 	return $SQL->build($insert_query);						
 }
 
+function add_config_r($configs)
+{
+	if(!is_array($configs))
+	{
+		return false;
+	}
+	//array(name=>array(value=>,order=>,html=>),...);
+	foreach($configs as $n=>$m)
+	{
+		add_config($n, $m['value'], $m['order'], $m['html']);
+	}
+}
+
 /*
 * Delete config
 */
@@ -1593,12 +1605,51 @@ function delete_config ($name)
 {
 	global $dbprefix, $SQL;
 	
+	//if array
+	$name = is_array($name) ? 'name IN (' . implode(', ', $name) ')' : 'name =' $name;
+	
 	$delete_query = array(	'DELETE'	=> "{$dbprefix}config",
-							'WHERE'		=> "name = '" . $SQL->escape($name) . "'");
-	return $SQL->build($delete_query);						
+							'WHERE'		=>  $SQL->escape($name)
+						);
+	return $SQL->build($delete_query);
 }
 
 
+//
+//add words to lang
+//
+function add_olang($words = array(), $lang='en')
+{
+	global $dbprefix, $SQL;
+	
+	foreach($words as $w=>$t)
+	{
+		$insert_query = array(	'INSERT'	=> '`word` ,`trans` ,`lang_id`',
+								'INTO'		=> "{$dbprefix}lang",
+								'VALUES'	=> "'" . $SQL->escape($w) . "','" . $SQL->escape($t) . "', '" . $SQL->escape($lang) . "'");
+		$SQL->build($insert_query);
+	}
+	
+	return;
+}
+
+//
+//delete words from lang
+//
+function delete_olang ($words, $lang='en') 
+{
+	global $dbprefix, $SQL;
+	
+	//if array
+	$words = is_array($words) ? 'word IN (' . implode(', ', $words) ')' : 'word =' $words;
+	
+	$delete_query = array(	'DELETE'	=> "{$dbprefix}config",
+							'WHERE'		=>  $SQL->escape($name) . ' AND lang_id="' . $SQL->escape($lang) . '"'
+						);
+	return $SQL->build($delete_query);
+}
+
+//when php less than 5 !
 if(!function_exists('htmlspecialchars_decode'))
 {
 	function htmlspecialchars_decode($string, $style=ENT_COMPAT)
@@ -1611,4 +1662,5 @@ if(!function_exists('htmlspecialchars_decode'))
 		return strtr($string, $translation);
 	}
 }
+
 ?>

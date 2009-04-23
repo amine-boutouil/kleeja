@@ -1,8 +1,8 @@
 <?php
-# KLEEJA INSTALLER ...
-# updated  [2/2009]
-# this file hav many updates .. dont use previous ones
-# last edit by : saanina
+//
+// kleeja installer wizard ...
+// $Author$ , $Rev$,  $Date::                           $
+//
 
 /*
 include important files
@@ -11,11 +11,9 @@ include important files
 	
 define ( 'IN_COMMON' , true);
 $_path = "../";
-(file_exists($_path . 'config.php')) ? include ($_path . 'config.php') : null;
-include ($_path . 'includes/functions.php');
-include ('func_inst.php');
-
-
+(file_exists($_path . 'config.php')) ? include_once ($_path . 'config.php') : null;
+include_once ($_path . 'includes/functions.php');
+include_once ('func_inst.php');
 
 
 
@@ -44,8 +42,7 @@ case 'language':
 			if (!empty($_POST['lang']))
 			{
 				//go to .. 2step
-				echo '<meta http-equiv="refresh" content="0;url=' . $_SERVER['PHP_SELF'].'?step=choose&lang='.$_POST['lang'].'">';
-			//	@header("Location:".$_SERVER[PHP_SELF]."?step=check"); /* Redirect browser */
+				echo '<meta http-equiv="refresh" content="0;url=' . $_SERVER['PHP_SELF'] . '?step=choose&lang=' . $_POST['lang'] . '">';
 			}
 		}
 		else //no language
@@ -56,25 +53,30 @@ case 'language':
 	$lngfiles = '';
 	if ($dh = @opendir($path))
 	{
-				while (($file = readdir($dh)) !== false)
-				{
-					if(strpos($file, '.') === false && $file != '..' && $file != '.')
-						$lngfiles .= '<option value="' . $file . '">' . $file . '</option>';
-				}
-				closedir($dh);
+		while (($file = readdir($dh)) !== false)
+		{
+			if(strpos($file, '.') === false && $file != '..' && $file != '.')
+			{
+				$lngfiles .= '<option value="' . $file . '">' . $file . '</option>';
+			}
+		}
+		
+		@closedir($dh);
 	}
 
 
 	// show  language list ..
 	echo '<br />		
 	<div class="centery">
-	<fieldset>
-		<img src="img/map.gif" style="border:0" alt="al-Idrisi Map">
-	<br /><form  action="' . $_SERVER['PHP_SELF'] . '?step=language&'.getlang(1).'" method="post">
-	<select name="lang" style="width: 352px">
-	' . $lngfiles . '
-	</select>
-	<br /><input name="submitlang" type="submit" value=" [  Next  ] " /><br /><br /><br /></form></fieldset></div>';
+		<fieldset>
+			<img src="img/map.gif" style="border:0" alt="al-Idrisi Map">
+			<br />
+			<form  action="' . $_SERVER['PHP_SELF'] . '?step=language&' . getlang(1) . '" method="post">
+				<select name="lang" style="width: 352px">' . $lngfiles . '</select>
+				<br /><input name="submitlang" type="submit" value=" [  Next >>  ] " /><br /><br /><br />
+			</form>
+		</fieldset>
+	</div>';
 
 		}//no language else
 
@@ -83,12 +85,13 @@ case 'language':
 break; // end case language
 case 'choose' :
 		echo '<fieldset><span style="color:green;">' . $lang['INST_CHOOSE_INSTALLER'] . '</span><br /><br /><br />';
-		echo '<a href="./install.php?'.getlang(1).'"><img src="img/installer.gif" alt="installer" /><br />  ' . $lang['INST_INSTALL_CLEAN_VER'] . ' </a><br /><br />';
-		echo '<a href="./update.php?'.getlang(1).'"><img src="img/updater.gif" alt="updater" /> <br /> ' . $lang['INST_UPDATE_P_VER'] . ' </a><br /><br /><br />';
+		echo '<a href="./install.php?' . getlang(1) . '"><img src="img/installer.gif" alt="installer" /><br />  ' . $lang['INST_INSTALL_CLEAN_VER'] . ' </a><br /><br />';
+		echo '<a href="./update.php?' . getlang(1) . '"><img src="img/updater.gif" alt="updater" /> <br /> ' . $lang['INST_UPDATE_P_VER'] . ' </a><br /><br /><br />';
 
 		echo '<a href="http://www.kleeja.com"><span style="color:black;">www.kleeja.com</span></a></fieldset><br /><br />';
 
 break;
+
 }#endOFswitch
 
 

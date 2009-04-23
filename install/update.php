@@ -1,6 +1,8 @@
 <?php
-# KLEEJA UPDATOR ...
-
+//
+// kleeja updater ...
+// $Author$ , $Rev$,  $Date::                           $
+//
 
 // Report all errors, except notices
 @error_reporting(E_ALL ^ E_NOTICE);
@@ -11,10 +13,10 @@ include important files
 */
 define ( 'IN_COMMON' , true);
 $path = "../includes/";
-(file_exists('../config.php')) ? include ('../config.php') : null;
-include ($path . 'functions.php');
-include ($path . 'mysql.php');
-include ('func_inst.php');
+(file_exists('../config.php')) ? include_once ('../config.php') : null;
+include_once ($path . 'functions.php');
+include_once ($path . 'mysql.php');
+include_once ('func_inst.php');
 
 /*
 //print header

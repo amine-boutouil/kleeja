@@ -6,7 +6,7 @@
 # purpose :  all things came from here ..:
 # copyright 2008-2009 Kleeja.com ..
 # license http://opensource.org/licenses/gpl-license.php GNU Public License
-# last edit by : phpfalcon
+# $Author$ , $Rev$,  $Date::                           $
 ##################################################
 
 		
@@ -25,7 +25,7 @@
 
 
 	// start session
-	$s_time = 60*60*12*2;
+	$s_time = 86400 * 2; // 2 : two days 
 	$s_key = (!empty($_SERVER['HTTP_HOST'])) ? strtolower($_SERVER['HTTP_HOST']) : ((!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : @getenv('SERVER_NAME'));
 	$s_sid = 'ksid' . substr('_' . md5($s_key), 0, 8);
 	session_set_cookie_params($s_time);

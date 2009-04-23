@@ -5,8 +5,8 @@
 # Filename : cache.php
 # purpose :  cache for all script. the important feature of kleeja
 # copyright 2007-2009 Kleeja.com ..
-#license http://opensource.org/licenses/gpl-license.php GNU Public License
-# last edit by : saanina
+# license http://opensource.org/licenses/gpl-license.php GNU Public License
+# $Author$ , $Rev$,  $Date::                           $
 ##################################################
 
 //no for directly open
@@ -26,7 +26,7 @@ if(!defined('STOP_HOOKS'))
 		include_once ($root_path . 'cache/data_hooks.php');
 	}
 	
-	if (!$all_plg_hooks && !file_exists($root_path.'cache/data_hooks.php'))
+	if (!$all_plg_hooks && !file_exists($root_path . 'cache/data_hooks.php'))
 	{
 		//get all hooks
 		$query = array(
@@ -54,19 +54,21 @@ if(!defined('STOP_HOOKS'))
 		while($row=$SQL->fetch_array($result))
 		{
 				$all_plg_hooks[$row['hook_name']][$row['plg_name']] =	$row['hook_content'];
-				$file_datac .= '$all_plg_hooks[\''.$row['hook_name'].'\'][\''.$row['plg_name'].'\'] = \'' . str_replace(array("'","\'"), "\'",  $row['hook_content']) . '\';' . "\n";
+				$file_datac .= '$all_plg_hooks[\'' . $row['hook_name'] . '\'][\'' . $row['plg_name'] . '\'] = \'' . str_replace(array("'", "\'"), "\'",  $row['hook_content']) . '\';' . "\n";
 		}
-				$file_datac .= ''."\n\n";
+				$file_datac .= '' . "\n\n";
 				$file_datac .= '?' . '>';
 				
 	 	$SQL->freeresult($result);
 
-		$filenumc = fopen($root_path.'cache/data_hooks.php', 'w');
+		$filenumc = fopen($root_path . 'cache/data_hooks.php', 'w');
 		flock($filenumc, LOCK_EX); // exlusive look
 		fwrite($filenumc, $file_datac);
 		fclose($filenumc);
 	}
 }#plugins is on
+
+
 
 
 
@@ -78,7 +80,7 @@ if(!defined('STOP_HOOKS'))
 		include_once ($root_path . 'cache/data_config.php');
 	}
 	
-	if (!$config or !file_exists($root_path.'cache/data_config.php'))
+	if (!$config or !file_exists($root_path . 'cache/data_config.php'))
 	{
 		$query = array(
 					'SELECT'	=> 'c.*',
@@ -96,19 +98,60 @@ if(!defined('STOP_HOOKS'))
 		while($row=$SQL->fetch_array($result))
 		{
 				$config[$row['name']] =$row['value'];
-				$file_datac .= '\''.$row['name'].'\' => \'' . str_replace(array("'","\'"), "\'", $row['value']) . '\',' . "\n";
+				$file_datac .= '\'' . $row['name'] . '\' => \'' . str_replace(array("'","\'"), "\'", $row['value']) . '\',' . "\n";
 		}
 				$file_datac .= ');' . "\n\n";
 				$file_datac .= '?' . '>';
 				
 	 	$SQL->freeresult($result);
 
-		$filenumc = fopen($root_path.'cache/data_config.php', 'w');
+		$filenumc = fopen($root_path . 'cache/data_config.php', 'w');
 		flock($filenumc, LOCK_EX); // exlusive look
 		fwrite($filenumc, $file_datac);
 		fclose($filenumc);
 	}
 
+//
+//get language terms from lang table  ...
+//
+	if (file_exists($root_path . 'cache/data_lang.php'))
+	{
+		include_once ($root_path . 'cache/data_lang.php');
+	}
+	
+	if (!$olang or !file_exists($root_path . 'cache/data_lang.php'))
+	{
+		$query = array(
+					'SELECT'	=> 'l.*',
+					'FROM'		=> "{$dbprefix}lang l",
+					'WHERE'		=> "l.lang_id='" . $SQL->escape($config['language']) . "'",
+					);
+					
+		($hook = kleeja_run_hook('qr_select_lang_cache')) ? eval($hook) : null; //run hook		
+		
+		$result = $SQL->build($query);
+			
+				$file_datac = '<' . '?php' . "\n\n";
+				//$file_datac .= "if (!defined('IN_COMMON')) exit('no directly opening : ' . __file__);";
+				$file_datac .= "\n// auto-generated cache files\n//For: Kleeja \n\n";
+				$file_datac .= '$olang = array( ' . "\n";
+
+		while($row=$SQL->fetch_array($result))
+		{
+				$olang[$row['word']] = $row['trans'];
+				$file_datac .= '\'' . $row['word'] . '\' => \'' . str_replace(array("'","\'"), "\'", $row['trans']) . '\',' . "\n";
+		}
+				$file_datac .= ');' . "\n\n";
+				$file_datac .= '?' . '>';
+				
+	 	$SQL->freeresult($result);
+
+		$filenumc = fopen($root_path . 'cache/data_lang.php', 'w');
+		flock($filenumc, LOCK_EX); // exlusive look
+		fwrite($filenumc, $file_datac);
+		fclose($filenumc);
+	}
+	
 //
 //get data from types table ... 
 //
@@ -117,7 +160,7 @@ if(!defined('STOP_HOOKS'))
 		include_once ($root_path . 'cache/data_exts.php');
 	}
 	
-	if (!($g_exts || $u_exts) || !(file_exists($root_path.'cache/data_exts.php')))
+	if (!($g_exts || $u_exts) || !(file_exists($root_path . 'cache/data_exts.php')))
 	{
 		$query = array(
 					'SELECT'	=> 'e.*',
@@ -130,8 +173,8 @@ if(!defined('STOP_HOOKS'))
 				$file_datat = '<' . '?php' . "\n\n";
 				//$file_datat .= "if (!defined('IN_COMMON')) exit('no directly opening : ' . __file__);";
 				$file_datat .= "\n// auto-generated cache files\n//For: Kleeja \n\n";
-				$file_datat .= 'if (empty($g_exts) || !is_array($g_exts)){$g_exts = array();}'."\n";
-				$file_datat .= 'if (empty($u_exts) || !is_array($u_exts)){$u_exts = array();}'."\n\n";
+				$file_datat .= 'if (empty($g_exts) || !is_array($g_exts)){$g_exts = array();}' . "\n";
+				$file_datat .= 'if (empty($u_exts) || !is_array($u_exts)){$u_exts = array();}' . "\n\n";
 				
 		while($row=$SQL->fetch_array($result))
 		{
@@ -152,7 +195,7 @@ if(!defined('STOP_HOOKS'))
 				
 	 	$SQL->freeresult($result);
 
-		$filenumt = fopen($root_path.'cache/data_exts.php', 'w');
+		$filenumt = fopen($root_path . 'cache/data_exts.php', 'w');
 		flock($filenumt, LOCK_EX); // exlusive look
 		fwrite($filenumt, $file_datat);
 		fclose($filenumt);
@@ -226,7 +269,7 @@ if(!defined('STOP_HOOKS'))
 		
 		$SQL->freeresult($result);
 		
-		$filenumw = fopen($root_path.'cache/data_stats.php', 'w');
+		$filenumw = fopen($root_path . 'cache/data_stats.php', 'w');
 		flock($filenumw, LOCK_EX); // exlusive look
 		fwrite($filenumw, $file_dataw);
 		fclose($filenumw);
@@ -310,7 +353,7 @@ if((int) $config['del_f_day'] >= 0)
 		include_once ($root_path . 'cache/data_ban.php');
 	}
 	
-	if (!$banss || !file_exists($root_path.'cache/data_ban.php'))
+	if (!$banss || !file_exists($root_path . 'cache/data_ban.php'))
 	{
 		$query = array(
 					'SELECT'	=> 's.ban',
@@ -342,11 +385,11 @@ if((int) $config['del_f_day'] >= 0)
 				$file_datab .= '\'' . trim($ban2[$i]) . '\',' . "\n";
 			}#for
 		
-			$file_datab .= ');'."\n\n";
+			$file_datab .= ');' . "\n\n";
 			$file_datab .= '?' . '>';
 	 	}
 
-		$filenumb = fopen($root_path.'cache/data_ban.php', 'w');
+		$filenumb = fopen($root_path . 'cache/data_ban.php', 'w');
 		flock($filenumb, LOCK_EX); // exlusive look
 		fwrite($filenumb, $file_datab);
 		fclose($filenumb);
@@ -355,12 +398,12 @@ if((int) $config['del_f_day'] >= 0)
 //	
 //get rules data from stats table  ...
 //
-	if (file_exists($root_path.'cache/data_rules.php'))
+	if (file_exists($root_path . 'cache/data_rules.php'))
 	{
-		include_once ($root_path.'cache/data_rules.php'); 
+		include_once ($root_path . 'cache/data_rules.php'); 
 	}
 	
-	if (!isset($ruless) or !file_exists($root_path.'cache/data_rules.php'))
+	if (!isset($ruless) or !file_exists($root_path . 'cache/data_rules.php'))
 	{
 		$query = array(
 					'SELECT'	=> 's.rules',
@@ -382,10 +425,10 @@ if((int) $config['del_f_day'] >= 0)
 		$SQL->freeresult($result);
 		
 			$ruless = $rules1;
-			$file_datar .= '$ruless = \'' .str_replace(array("'","\'"), "\'", $rules1) .'\';'."\n\n"; // its took 2 hours ..
+			$file_datar .= '$ruless = \'' . str_replace(array("'","\'"), "\'", $rules1) . '\';' . "\n\n"; // its took 2 hours ..
 			
 		$file_datar .= '?' . '>';
-		$filenumr = fopen($root_path.'cache/data_rules.php', 'w');
+		$filenumr = fopen($root_path . 'cache/data_rules.php', 'w');
 		flock($filenumr, LOCK_EX); // exlusive look
 		fwrite($filenumr, $file_datar);
 		fclose($filenumr);
@@ -394,12 +437,12 @@ if((int) $config['del_f_day'] >= 0)
 //	
 //get ex-header-footer data from stats table  ... 
 //
-	if (file_exists($root_path.'cache/data_extra.php'))
+	if (file_exists($root_path . 'cache/data_extra.php'))
 	{
-		include_once ($root_path.'cache/data_extra.php');
+		include_once ($root_path . 'cache/data_extra.php');
 	}
 	
-	if (!isset($extras) or !file_exists($root_path.'cache/data_extra.php'))
+	if (!isset($extras) or !file_exists($root_path . 'cache/data_extra.php'))
 	{
 		$query = array(
 					'SELECT'	=> 's.ex_header, s.ex_footer',
@@ -424,14 +467,14 @@ if((int) $config['del_f_day'] >= 0)
 		
 
 		$extras['header'] = $headerr;
-		$file_datae .= '$extras[\'header\'] = \'' .str_replace(array("'","\'"), "\'", $headerr) .'\';'."\n\n";
+		$file_datae .= '$extras[\'header\'] = \'' . str_replace(array("'","\'"), "\'", $headerr) . '\';' . "\n\n";
 
 		$extras['footer'] = $footerr;
-		$file_datae .= '$extras[\'footer\'] = \'' .str_replace(array("'","\'"), "\'", $footerr) .'\';'."\n\n";
+		$file_datae .= '$extras[\'footer\'] = \'' . str_replace(array("'","\'"), "\'", $footerr) . '\';' . "\n\n";
 	 
 		
 		$file_datae .= '?' . '>';
-		$filenume = fopen($root_path.'cache/data_extra.php', 'w');
+		$filenume = fopen($root_path . 'cache/data_extra.php', 'w');
 		flock($filenume, LOCK_EX); // exlusive look
 		fwrite($filenume, $file_datae);
 		fclose($filenume);

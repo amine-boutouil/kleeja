@@ -19,13 +19,13 @@ $update_sqls['form_id_config'] = "INSERT INTO `{$dbprefix}config` (`name` ,`valu
 $update_sqls['up_dbv_config'] = "UPDATE `{$dbprefix}config` SET `value` = '" . DB_VERSION . "' WHERE `name` = 'db_version'";
 $update_sqls['up_lang_config'] = "UPDATE `{$dbprefix}config` SET `value` = '" . getlang() . "' WHERE `name` = 'language'";
 $update_sqls['up_style_config'] = "UPDATE `{$dbprefix}config` SET `value` = 'default' WHERE `name` = 'style'";
-$update_sqls['drop_lang'] = "DROP TABLE `{$dbprefix}lang`";
 $update_sqls['option'] = "ALTER TABLE `{$dbprefix}config` ADD `option` mediumtext NOT NULL;";
 $update_sqls['size_in_stats'] = "ALTER TABLE `{$dbprefix}stats` CHANGE `sizes` `sizes` bigint( 20 ) NOT NULL DEFAULT '0';";
+$update_sqls['m_lang'] = "ALTER TABLE `{$dbprefix}lang` CHANGE `lang_id` `lang_id` VARCHAR( 100 ) NOT NULL ";
 
 
 //
-//is this 
+//config changes
 //
 
 $update_sqls['display_order'] = "ALTER TABLE `{$dbprefix}config` ADD `display_order` int(10) NOT NULL;";

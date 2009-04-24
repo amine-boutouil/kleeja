@@ -527,13 +527,14 @@ function creat_plugin_xml($contents)
 				{
 					die($lang['ERR_XML_NO_G_TA GS']);
 				}
-				else
-				{
+
 					$plg_errors	=	array();
 					$plg_new = true;
 					
-					//is this plugin exists before ! 
+					
 					$plugin_name = preg_replace("/[^a-z0-9-_]/", "-", strtolower($plg_info['plugin_name']['value']));
+					
+					//is this plugin exists before ! 
 					$is_query = array(
 										'SELECT'	=> 'plg_id, plg_name, plg_ver',
 										'FROM'		=> "{$dbprefix}plugins",
@@ -564,6 +565,14 @@ function creat_plugin_xml($contents)
 											
 							$SQL->build($query_del);
 							
+							if(is_array($plg_updates['update']))
+							{
+								if(array_key_exists("attributes", $plg_updates['update']))
+								{
+										$plg_updates['update'] = array($plg_updates['update']);
+								}
+							}
+								
 							foreach($plg_updates['update'] as $up)
 							{
 								if (version_compare(strtolower($cur_ver), strtolower($up['attributes']['to']), '<'))
@@ -716,8 +725,6 @@ function creat_plugin_xml($contents)
 						//hooks
 						if(isset($plg_hooks['hook']))
 						{
-						
-							$plugin_name = preg_replace("/[^a-z0-9-_]/", "-", strtolower($plg_info['plugin_name']['value']));
 							$plugin_author = strip_tags($plg_info['plugin_author']['value'], '<a><span>');
 							$plugin_author = $SQL->real_escape($plugin_author);
 							if($plg_new)
@@ -795,7 +802,7 @@ function creat_plugin_xml($contents)
 					{
 						return $plg_errors;
 					}
-				}
+				
 					
 				($hook = kleeja_run_hook('creat_plugin_xml_func')) ? eval($hook) : null; //run hook
 				return false;

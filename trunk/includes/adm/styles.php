@@ -217,7 +217,7 @@ switch ($_GET['sty_t'])
 				//tpl name 
 				$tpl_name =	htmlspecialchars_decode($_POST['tpl_choose']);
 				$tpl_path = $root_path . 'styles/' . $style_id . '/' . $tpl_name;
-				$tpl_content = $_POST['template_content'];
+				$tpl_content = stripslashes($_POST['template_content']);
 				$filename = @fopen($tpl_path, 'w');
 				fwrite($filename, $tpl_content);
 				fclose($filename);

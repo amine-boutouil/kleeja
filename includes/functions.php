@@ -1607,12 +1607,24 @@ function delete_config ($name)
 	global $dbprefix, $SQL;
 	
 	//if array
-	$name = is_array($name) ? 'name IN (' . implode(', ', $name) . ')' : 'name =' . $name;
-	
-	$delete_query = array(	'DELETE'	=> "{$dbprefix}config",
-							'WHERE'		=>  $SQL->escape($name)
+	if(is_array($name)) {
+		foreach($name as $n)
+		{
+			$delete_query = array(	'DELETE'	=> "{$dbprefix}config",
+							'WHERE'		=>  'name = "' . $SQL->escape($n) . '"'
 						);
-	return $SQL->build($delete_query);
+		 	$SQL->build($delete_query);
+		}
+	}
+	else 
+	{
+		$delete_query = array(	'DELETE'	=> "{$dbprefix}config",
+							'WHERE'		=>  'name = "' . $SQL->escape($name) . '"'
+						);
+		$SQL->build($delete_query);
+	}
+	
+	return;
 }
 
 
@@ -1643,12 +1655,24 @@ function delete_olang ($words, $lang='en')
 	global $dbprefix, $SQL;
 	
 	//if array
-	$words = is_array($words) ? 'word IN (' . implode(', ', $words) . ')' : 'word =' . $words;
-	
-	$delete_query = array(	'DELETE'	=> "{$dbprefix}config",
-							'WHERE'		=>  $SQL->escape($name) . ' AND lang_id="' . $SQL->escape($lang) . '"'
+	if(is_array($words)) {
+		foreach($words as $w)
+		{
+			$delete_query = array(	'DELETE'	=> "{$dbprefix}lang",
+							'WHERE'		=>  'word = "' . $SQL->escape($w) . '" AND lang_id="' . $SQL->escape($lang) . '"'
 						);
-	return $SQL->build($delete_query);
+		 	$SQL->build($delete_query);
+		}
+	}
+	else 
+	{
+		$delete_query = array(	'DELETE'	=> "{$dbprefix}lang",
+							'WHERE'		=>  'word = "' . $SQL->escape($words) . '" AND lang_id="' . $SQL->escape($lang) . '"'
+						);
+		$SQL->build($delete_query);
+	}
+	
+	return;
 }
 
 //when php less than 5 !

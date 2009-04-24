@@ -93,7 +93,7 @@
 				if(!empty($row['option'])) 
 				{
 					$options .= '<tr>
-					<td><label for="' . $row['name'] . '">' . $lang[strtoupper($row['name'])] . '</label></td>
+					<td><label for="' . $row['name'] . '">' . (isset($lang[strtoupper($row['name'])]) ? $lang[strtoupper($row['name'])] : $olang[strtoupper($row['name'])]) . '</label></td>
 					<td><label>' . $tpl->admindisplayoption($row['option']) . '</label></td></tr>';
 				}
 				//when submit !!

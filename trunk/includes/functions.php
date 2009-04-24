@@ -1582,6 +1582,7 @@ function add_config ($name, $value, $order="0", $html="")
 	$insert_query = array(	'INSERT'	=> '`name` ,`value` ,`option` ,`display_order`',
 							'INTO'		=> "{$dbprefix}config",
 							'VALUES'	=> "'" . $SQL->escape($name) . "','" . $SQL->escape($value) . "', '" . addslashes($html) . "','" . intval($order) . "'");
+	delete_cache('data_config');
 	return $SQL->build($insert_query);						
 }
 
@@ -1630,6 +1631,7 @@ function add_olang($words = array(), $lang='en')
 		$SQL->build($insert_query);
 	}
 	
+	delete_cache("data_lang");
 	return;
 }
 

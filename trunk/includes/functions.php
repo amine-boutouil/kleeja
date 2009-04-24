@@ -541,7 +541,7 @@ function creat_plugin_xml($contents)
 										);
 					($hook = kleeja_run_hook('qr_chk_plginfo_crtplgxml_func')) ? eval($hook) : null; //run hook
 					$res = $SQL->build($is_query);
-					if($SQL->nums($res))
+					if($SQL->num_rows($res))
 					{
 						//omg, it's not new one ! 
 						//let's see if it same version

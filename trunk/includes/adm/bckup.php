@@ -40,6 +40,7 @@
 		$tables_sho[]  	= array( 'name' =>"{$dbprefix}reports",	'size' =>$size["{$dbprefix}reports"]);
 		$tables_sho[]  	= array( 'name' =>"{$dbprefix}hooks",		'size' =>$size["{$dbprefix}hooks"]);
 		$tables_sho[]  	= array( 'name' =>"{$dbprefix}plugins",	'size' =>$size["{$dbprefix}plugins"]);
+		$tables_sho[]  	= array( 'name' =>"{$dbprefix}lang",	'size' =>$size["{$dbprefix}lang"]);
 
 
 		//after submit ////////////////
@@ -87,14 +88,15 @@
 			
 				//download now
 			$sql_data = "#\n";
-			$sql_data .= "# Kleeja Backup kleeja.com version : " . KLEEJA_VERSION . " \n";
+			$sql_data .= "# Kleeja Backup kleeja.com  kleeja version : " . KLEEJA_VERSION . ", DB version:" . $config['db_version'] . "\n";
 			$sql_data .= "# DATE : " . gmdate("d-m-Y H:i:s", time()) . " GMT\n";
 			$sql_data .= "#\n\n\n";
 			
+			$db_name_save = $dbname . '_kleeja.sql';
 			@set_time_limit(0);
 			header("Content-length: " . strlen($outta));
 			header("Content-type: text/plain");
-			header("Content-Disposition: attachment; filename=$dbname.sql");
+			header("Content-Disposition: attachment; filename=$db_name_save");
 			echo $sql_data . $outta;
 			exit;
 	}

@@ -27,19 +27,14 @@
 		
 		if($SQL->num_rows($result)>0)
 		{
-			$ran = '#fff';
 			while($row=$SQL->fetch_array($result))
 			{
-					$ran = ($ran == '#fff') ? '#F5F5F5' : '#fff';
-					
 					$arr[] = array( 'plg_id'		=> $row['plg_id'],
 									'plg_name'		=> $row['plg_name'].(($row['plg_disabled']==1)? ' [x]': ''),
 									'plg_disabled'	=> $row['plg_disabled'] == '1' ? true : false,
 									'plg_ver'		=> $row['plg_ver'],
 									'plg_author'	=> $row['plg_author'],
 									'plg_dsc'		=> $row['plg_dsc'],
-									//wow
-									'bg_random'		=> $ran,
 								);
 			}
 		}

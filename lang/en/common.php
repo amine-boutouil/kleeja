@@ -422,6 +422,8 @@ $lang = array_merge($lang, array(
 	'AUTH_INTEGRATION_N_UTF8_T'	=> '%s is not utf8',
 	'AUTH_INTEGRATION_N_UTF8' => '%s database must be utf8 to be integrated with Kleeja !.',
 	'SCRIPT_AUTH_PATH_WRONG'	=> 'Path of %s is not valid, change it now.',
+	'SHOW_MY_FILECP'		=> 'Show my files',
+	'PASS_ON_CHANGE'		=> 'Change password',
 	'S_TRANSLATED_BY' => 'Translated By <a href="http://www.fenix4web.com/">Fenix4Web</a>',
 ));
 

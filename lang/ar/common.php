@@ -426,6 +426,8 @@ $lang = array_merge($lang, array(
 	'AUTH_INTEGRATION_N_UTF8_T'	=> '%s ليست utf8',
 	'AUTH_INTEGRATION_N_UTF8' => '%s يجب أن يكون ترميز قاعدة البيانات الخاصه به utf8 لكي يتم الربط مع كليجا !.',
 	'SCRIPT_AUTH_PATH_WRONG'	=> 'مسار السكربت %s الذي تم ربط عضويات كليجا معه خاطئ ,قم بظبطه',
+	'SHOW_MY_FILECP'		=> 'السماح بعرض ملفاتي',
+	'PASS_ON_CHANGE'		=> 'تغيير كلمة المرور',
 ));
 
 ?>

@@ -265,23 +265,26 @@ switch ($_GET['go'])
 		}
 		else
 		{
-			$query = array('SELECT'=> 'f.id, f.name, f.folder',
+			//to check
+			if($_GET['sure'] == 'ok')
+			{
+				$query = array('SELECT'=> 'f.id, f.name, f.folder',
 							'FROM'	=> "{$dbprefix}files f",
 							'WHERE'	=> "f.code_del='" . $cd . "'"
 							);
 					
-			($hook = kleeja_run_hook('qr_select_file_with_code_del')) ? eval($hook) : null; //run hook	
+				($hook = kleeja_run_hook('qr_select_file_with_code_del')) ? eval($hook) : null; //run hook	
 				
-			$result	=	$SQL->build($query);
+				$result	=	$SQL->build($query);
 
-			if ($SQL->num_rows($result) == 0)
-			{
-				kleeja_err($lang['CANT_DEL_F']);
-			}
-			else
-			{
-				while($row=$SQL->fetch_array($result))
+				if ($SQL->num_rows($result) == 0)
 				{
+					kleeja_err($lang['CANT_DEL_F']);
+				}
+				else
+				{
+					while($row=$SQL->fetch_array($result))
+					{
 						@unlink ($row['folder'] . "/" . $row['name']);
 						//delete thumb
 						if (file_exists($row['folder'] . "/thumbs/" . $row['name']))
@@ -304,11 +307,24 @@ switch ($_GET['go'])
 						{
 							die($lang['CANT_DELETE_SQL']);
 						}
-				}
+					}
 				
-				$SQL->freeresult($result);
+					$SQL->freeresult($result);
+				}
 			}
-
+			else
+			{
+				kleeja_info('<script type="text/javascript">
+						function confirm_from()
+						{
+						if(confirm(\'' . $lang['ARE_YOU_SURE_DO_THIS'] . '\'))
+							window.location = "go.php?go=del&sure=ok&cd='.$cd.'";
+						else
+							window.location = "index.php";
+						}
+					</script>
+				<body onload="javascript:confirm_from()">');
+			}
 		}#else
 
 	break;

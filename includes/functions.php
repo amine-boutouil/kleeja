@@ -519,18 +519,65 @@ function creat_plugin_xml($contents)
 				$plg_uninstall		= $tree['uninstall'];
 				$plg_tpl			= $tree['templates'];		
 				$plg_hooks			= $tree['hooks'];		
-				$plg_langs			= $tree['langs'];		
+				$plg_langs			= $tree['langs'];
+				$plg_updates		= $tree['updates'];
 
 				//important tags not exists 
 				if(!isset($plg_info))
 				{
-					die($lang['ERR_XML_NO_G_TAGS']);
+					die($lang['ERR_XML_NO_G_TA GS']);
 				}
 				else
 				{
 					$plg_errors	=	array();
+					$plg_new = true;
+					
+					//is this plugin exists before ! 
+					$plugin_name = preg_replace("/[^a-z0-9-_]/", "-", strtolower($plg_info['plugin_name']['value']));
+					$is_query = array(
+										'SELECT'	=> 'plg_id, plg_name, plg_ver',
+										'FROM'		=> "{$dbprefix}plugins",
+										'WHERE'		=> 'plg_name="' . $plugin_name . '"' 
+										);
+					($hook = kleeja_run_hook('qr_chk_plginfo_crtplgxml_func')) ? eval($hook) : null; //run hook
+					$res = $SQL->build($is_query);
+					if($SQL->nums($res))
+					{
+						//omg, it's not new one ! 
+						//let's see if it same version
+						$plg_new = false;
+						$cur_ver = $SQL->fetch_array($res);
+						$plg_id = $cur_ver['plg_id'];
+						$cur_ver = $cur_ver['plg_ver'];
+						$new_ver = $SQL->escape($plg_info['plugin_version']['value']);
+						if (version_compare(strtolower($cur_ver), strtolower($new_ver), '>='))
+						{
+							return;
+						}
+						else if (isset($plg_updates))
+						{
+							//delete hooks !
+							$query_del = array(
+											'DELETE'	=> "{$dbprefix}hooks",
+											'WHERE'		=> "plg_id='" . $plg_id . "'"
+											);		
+											
+							$SQL->build($query_del);
+							
+							foreach($plg_updates['update'] as $up)
+							{
+								if (version_compare(strtolower($cur_ver), strtolower($up['attributes']['to']), '<'))
+								{
+									eval($up['value']);
+								}
+							}
+						}
+					}
+					
+					
+					
 					//eval install code
-					if (isset($plg_install) && trim($plg_install['value']) != '')
+					if (isset($plg_install) && trim($plg_install['value']) != '' && $plg_new)
 					{
 						eval($plg_install['value']);
 					}
@@ -575,7 +622,16 @@ function creat_plugin_xml($contents)
 									$template_path = $style_path . $template_name . '.html';
 									if(!file_exists($template_path)) 
 									{
-										if($config['style'] != 'default' && !$is_admin_template)
+										if(file_exists($style_path . 'depend_on.txt'))
+										{
+											$depend_on = file_get_contents($style_path . 'depend_on.txt');
+											$template_path_alternative = str_replace('/' . $config['style'] . '/', '/' . trim($depend_on) . '/', $template_path);
+											if(file_exists($template_path_alternative))
+											{
+												$template_path = $template_path_alternative;
+											}
+										}
+										else if($config['style'] != 'default' && !$is_admin_template)
 										{
 											$template_path_alternative = str_replace('/' . $config['style'] . '/', '/default/', $template_path);
 											if(file_exists($template_path_alternative))
@@ -664,17 +720,30 @@ function creat_plugin_xml($contents)
 							$plugin_name = preg_replace("/[^a-z0-9-_]/", "-", strtolower($plg_info['plugin_name']['value']));
 							$plugin_author = strip_tags($plg_info['plugin_author']['value'], '<a><span>');
 							$plugin_author = $SQL->real_escape($plugin_author);
-							//insert in plugin table 
-							$insert_query = array(
-											'INSERT'	=> 'plg_name, plg_ver, plg_author, plg_dsc, plg_uninstall',
-											'INTO'		=> "{$dbprefix}plugins",
-											'VALUES'	=> "'" . $SQL->escape($plugin_name) . "','" . $SQL->escape($plg_info['plugin_version']['value'])."','" . $plugin_author . "','" . $SQL->escape($plg_info['plugin_description']['value']) . "','" . $SQL->real_escape($plg_uninstall['value']) . "'"
+							if($plg_new)
+							{
+								//insert in plugin table 
+								$insert_query = array(
+												'INSERT'	=> 'plg_name, plg_ver, plg_author, plg_dsc, plg_uninstall',
+												'INTO'		=> "{$dbprefix}plugins",
+												'VALUES'	=> "'" . $SQL->escape($plugin_name) . "','" . $SQL->escape($plg_info['plugin_version']['value']) . "','" . $plugin_author . "','" . $SQL->escape($plg_info['plugin_description']['value']) . "','" . $SQL->real_escape($plg_uninstall['value']) . "'"
+												);
+								($hook = kleeja_run_hook('qr_insert_plugininfo_crtplgxml_func')) ? eval($hook) : null; //run hook
+								$SQL->build($insert_query);
+			
+								$new_plg_id	=	$SQL->insert_id();
+							}
+							else 
+							{
+								$update_query = array(
+												'UPDATE'	=> "{$dbprefix}plugins",
+												'SET'		=> 'plg_ver="' . $new_ver . '", plg_author="' . $plugin_author . '", plg_dsc="' . $SQL->escape($plg_info['plugin_description']['value']) . '", plg_uninstall="' . $SQL->real_escape($plg_uninstall['value']) . '"',
+												'WHERE'		=> "plg_id='" . $plg_id . "'"
 											);
-							($hook = kleeja_run_hook('qr_insert_plugininfo_crtplgxml_func')) ? eval($hook) : null; //run hook
-							$SQL->build($insert_query);
-		
-							$new_plg_id	=	$SQL->insert_id();
-							
+								$SQL->build($update_query);
+								
+								$new_plg_id	=	$plg_id;
+							}
 							//then
 								if(is_array($plg_hooks['hook']))
 								{

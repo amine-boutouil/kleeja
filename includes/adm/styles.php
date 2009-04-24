@@ -218,16 +218,32 @@ switch ($_GET['sty_t'])
 				$tpl_name =	htmlspecialchars_decode($_POST['tpl_choose']);
 				$tpl_path = $root_path . 'styles/' . $style_id . '/' . $tpl_name;
 				$tpl_content = stripslashes($_POST['template_content']);
-				$filename = @fopen($tpl_path, 'w');
-				fwrite($filename, $tpl_content);
-				fclose($filename);
 				
+				//try to make template writable
+				if (!is_writable($tpl_path)) 
+				{
+					@chmod($tpl_path, 0777);
+				}
+				
+				//edit template
+				if (is_writable($tpl_path)) 
+				{
+					$filename = @fopen($tpl_path, 'w');
+					fwrite($filename, $tpl_content);
+					fclose($filename);
+				}
+				else
+				{
+					big_error('Template is unwriteable','Cannot edit' . $tpl_name . 'template parameters (Unwriteable)');
+				}
+				/*
 				//update
 				$update_query = array(
 										'UPDATE'	=> "{$dbprefix}templates",
 										'SET'		=> "template_content = '". $template_content ."'",
 										'WHERE'		=>	"style_id='$style_id' AND template_name='$tpl_name'"
 									);
+				*/
 
 
 				//delete cache ..

@@ -3,10 +3,10 @@
 #						Kleeja 
 #
 # Filename : style.php 
-# purpose :  Template engine ..:
+# purpose :  Template engine, based on : easy template  <http://daif.net/easy>
 # copyright 2007-2009 Kleeja.com ..
 # license http://opensource.org/licenses/gpl-license.php GNU Public License
-# based on : easy template  <http://daif.net/easy>
+# $Author$ , $Rev$,  $Date::                           $
 ##################################################
 
 //no for directly open
@@ -42,8 +42,17 @@ if (!defined('IN_COMMON'))
 
 			//if template not found and default style is there and not admin tpl
 			if(!file_exists($template_path)) 
-			{
-				if($config['style'] != 'default' && !$is_admin_template)
+			{	
+				if(file_exists($style_path . 'depend_on.txt'))
+				{
+					$depend_on = file_get_contents($style_path . 'depend_on.txt');
+					$template_path_alternative = str_replace('/' . $config['style'] . '/', '/' . trim($depend_on) . '/', $template_path);
+					if(file_exists($template_path_alternative))
+					{
+						$template_path = $template_path_alternative;
+					}
+				}
+				else if($config['style'] != 'default' && !$is_admin_template)
 				{
 					$template_path_alternative = str_replace('/' . $config['style'] . '/', '/default/', $template_path);
 					if(file_exists($template_path_alternative))
@@ -56,7 +65,7 @@ if (!defined('IN_COMMON'))
 					big_error('No Template !', 'Requested "' . $template_path . '" template doesnt exists or an empty !! ');
 				}
 			}
-					
+			
 			$this->HTML = file_get_contents($template_path);
 			$this->_parse($this->HTML);
 			$filename = fopen($root_path . 'cache/tpl_' . $this->re_name_tpl($template_name) . '.php', 'w');

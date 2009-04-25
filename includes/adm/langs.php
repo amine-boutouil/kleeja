@@ -10,13 +10,20 @@
 		exit('no directly opening : ' . __file__);
 	}
 	
+		
 
-
+		if(!isset($_REQUEST['lang']))
+		{
+			$_REQUEST['lang'] = 'en';
+		}
+		
+		
 		//for style ..
 		$stylee 	= "admin_langs";
-		$action 	= "admin.php?cp=langs&amp;page=". intval($_GET['page']) . (isset($_REQUEST['lang']) ? '&amp;lang=' . $_REQUEST['lang'] : '');
+		$action 	= "admin.php?cp=langs&amp;page=". intval($_GET['page']) . '&amp;lang=' . $SQL->escape($_REQUEST['lang']);
 		$action2 	= "admin.php?cp=langs";
 
+		
 		//get languages
 		$lngfiles = '';
 		if ($dh = @opendir($root_path . 'lang'))
@@ -35,13 +42,9 @@
 		$query = array(
 					'SELECT'	=> '*',
 					'FROM'		=> "{$dbprefix}lang",
+					'WHERE'	=> 'lang_id="' .  $SQL->escape($_REQUEST['lang']) . '"',
 					'ORDER BY'	=> 'word DESC'
 					);
-		
-		if(isset($_REQUEST['lang']))
-		{
-			$query['WHERE'] = 'lang_id="' . $SQL->escape($_REQUEST['lang']) . '"';
-		}
 		
 		$result = $SQL->build($query);
 
@@ -64,7 +67,6 @@
 			{
 		
 				//make new lovely arrays !!
-				$idd[$row['word']]	= (isset($_POST["l_" . $row['word']])) ? $_POST["l_" . $row['word']] : $row['lang_id'];
 				$transs[$row['word']]	= (isset($_POST["t_" . $row['word']])) ? $_POST["t_" . $row['word']] : $row['trans'];
 				$del[$row['word']] 	= (isset($_POST["del_" . $row['word']])) ? $_POST["del_" . $row['word']] : "";
 				
@@ -82,7 +84,7 @@
 					{
 						$query_del = array(
 											'DELETE'	=> "{$dbprefix}lang",
-											'WHERE'		=>	"word='" . $SQL->escape($row['word']) . "' AND lang_id='" . $SQL->escape($idd[$row['word']]) . "'"
+											'WHERE'		=>	"word='" . $SQL->escape($row['word']) . "' AND lang_id='" .  $SQL->escape($_REQUEST['lang']) . "'"
 										);
 																
 						if (!$SQL->build($query_del))
@@ -96,7 +98,7 @@
 					$update_query = array(
 										'UPDATE'	=> "{$dbprefix}lang",
 										'SET'		=> 	"trans = '" . $SQL->escape($transs[$row['word']]) . "'",
-										'WHERE'		=>	"word='" . $SQL->escape($row['word']) . "' AND lang_id='" . $SQL->escape($idd[$row['word']]) . "'"
+										'WHERE'		=>	"word='" . $SQL->escape($row['word']) . "' AND lang_id='" .  $SQL->escape($_REQUEST['lang']) . "'"
 									);
 
 					if (!$SQL->build($update_query))
@@ -119,7 +121,7 @@
 	//after submit 
 	if (isset($_POST['submit']))
 	{
-			$text	= $lang['WORDS_UPDATED'] . '<meta HTTP-EQUIV="REFRESH" content="0; url=./admin.php?cp=langs&amp;page=' . intval($_GET['page']). '">' ."\n";
+			$text	= $lang['WORDS_UPDATED'] . '<meta HTTP-EQUIV="REFRESH" content="0; url=./admin.php?cp=langs&amp;page=' . intval($_GET['page']) . '&amp;lang=' . $SQL->escape($_REQUEST['lang']) . '">' . "\n";
 			$stylee	= "admin_info";
 	}
 ?>

@@ -19,7 +19,7 @@
 <ELSE>
 <LOOP NAME="arr">
         <tr style="background-color:<RAND="#D8EBFD","#fff">" class="">
-               <td>#<em>{{lang_id}}</em></td>
+               <td>#<em>{{lang_id}}</em><input type="hidden" name="l_{{word}}" value="{{lang_id}}" /></td>
                 <td class="s_box_tpls">{{word}}</td>
 				<td style="text-align:center"> <strong>=</strong> </td>
                  <td><label><input type="text" name="t_{{word}}" value="{{trans}}" size="60" ></label></td>

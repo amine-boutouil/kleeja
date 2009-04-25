@@ -78,8 +78,20 @@
 										'DELETE'	=> "{$dbprefix}users",
 										'WHERE'		=> "id='" . intval($ids[$row['id']])."'"
 											);
+						//update number of stats
+						$update_query	= array('UPDATE'	=> "{$dbprefix}stats",
+												'SET'		=> 'users=users-1',
+										);
+							
+						if (!$SQL->build($update_query))
+						{
+							die($lang['CANT_UPDATE_SQL']);
+						}
 																
-						if (!$SQL->build($query_del)) {die($lang['CANT_DELETE_SQL']);}	
+						if (!$SQL->build($query_del))
+						{
+							die($lang['CANT_DELETE_SQL']);
+						}	
 					}
 
 					//update

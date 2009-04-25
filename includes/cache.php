@@ -263,6 +263,8 @@ if(!defined('STOP_HOOKS'))
 			$file_dataw .= '$stat_last_yahoo 		=	\'' . $row['last_yahoo'] . '\';' . "\n";
 			$file_dataw .= '$stat_yahoo_num 		=	\'' . $row['yahoo_num'] . '\';' . "\n";
 			//$file_dataw .= '$stat_rules				=	\'' . $row['rules'] . '\';' . "\n";
+			
+			($hook = kleeja_run_hook('while_fetch_stats_in_cache')) ? eval($hook) : null; //run hook
 		
 		}
 		$file_dataw .= '?' . '>';

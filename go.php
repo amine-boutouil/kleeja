@@ -268,7 +268,7 @@ switch ($_GET['go'])
 			//to check
 			if($_GET['sure'] == 'ok')
 			{
-				$query = array('SELECT'=> 'f.id, f.name, f.folder',
+				$query = array('SELECT'=> 'f.id, f.name, f.folder, f.size',
 							'FROM'	=> "{$dbprefix}files f",
 							'WHERE'	=> "f.code_del='" . $cd . "'"
 							);
@@ -285,11 +285,11 @@ switch ($_GET['go'])
 				{
 					while($row=$SQL->fetch_array($result))
 					{
-						@unlink ($row['folder'] . "/" . $row['name']);
+						@kleeja_unlink ($row['folder'] . "/" . $row['name']);
 						//delete thumb
 						if (file_exists($row['folder'] . "/thumbs/" . $row['name']))
 						{
-							@unlink ($row['folder'] . "/thumbs/" . $row['name']);
+							@kleeja_unlink ($row['folder'] . "/thumbs/" . $row['name']);
 						}
 						
 						$query_del = array(
@@ -301,6 +301,16 @@ switch ($_GET['go'])
 						
 						if ($SQL->build($query_del))
 						{
+							//update number of stats
+							$update_query	= array('UPDATE'	=> "{$dbprefix}stats",
+													'SET'		=> 'files=files-1,sizes=sizes-' . $row['size'],
+												);
+							
+							if (!$SQL->build($update_query))
+							{
+								die($lang['CANT_UPDATE_SQL']);
+							}
+							
 							kleeja_info($lang['DELETE_SUCCESFUL']);
 						}
 						else

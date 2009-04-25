@@ -64,25 +64,25 @@
 			{
 		
 				//make new lovely arrays !!
-				$lang_ids[$row['word']]	= $row['lang_id'];
+				$idd[$row['word']]	= (isset($_POST["l_" . $row['word']])) ? $_POST["l_" . $row['word']] : $row['lang_id'];
 				$transs[$row['word']]	= (isset($_POST["t_" . $row['word']])) ? $_POST["t_" . $row['word']] : $row['trans'];
 				$del[$row['word']] 	= (isset($_POST["del_" . $row['word']])) ? $_POST["del_" . $row['word']] : "";
 				
 				
-				$arr[] = array( 'lang_id' => $lang_ids[$row['word']],
+				$arr[] = array( 'lang_id' => $row['lang_id'],
 								'word' => $row['word'],
 								'trans' => $transs[$row['word']],
 							);
 
 			
-					//when submit !!
+				//when submit !!
 				if (isset($_POST['submit']))
 				{
 					if ($del[$row['word']])
 					{
 						$query_del = array(
 											'DELETE'	=> "{$dbprefix}lang",
-											'WHERE'		=> "id='" . intval($row['word']) . "'"
+											'WHERE'		=>	"word='" . $SQL->escape($row['word']) . "' AND lang_id='" . $SQL->escape($idd[$row['word']]) . "'"
 										);
 																
 						if (!$SQL->build($query_del))
@@ -96,7 +96,7 @@
 					$update_query = array(
 										'UPDATE'	=> "{$dbprefix}lang",
 										'SET'		=> 	"trans = '" . $SQL->escape($transs[$row['word']]) . "'",
-										'WHERE'		=>	"word='" . $SQL->escape($row['word']) . "' AND lang_id='" . $SQL->escape($lang_ids[$row['word']]) . "'"
+										'WHERE'		=>	"word='" . $SQL->escape($row['word']) . "' AND lang_id='" . $SQL->escape($idd[$row['word']]) . "'"
 									);
 
 					if (!$SQL->build($update_query))

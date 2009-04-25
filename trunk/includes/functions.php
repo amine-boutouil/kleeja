@@ -525,12 +525,11 @@ function creat_plugin_xml($contents)
 				//important tags not exists 
 				if(!isset($plg_info))
 				{
-					die($lang['ERR_XML_NO_G_TA GS']);
+					die($lang['ERR_XML_NO_G_TAGS']);
 				}
 
 					$plg_errors	=	array();
 					$plg_new = true;
-					
 					
 					$plugin_name = preg_replace("/[^a-z0-9-_]/", "-", strtolower($plg_info['plugin_name']['value']));
 					
@@ -1672,6 +1671,30 @@ function add_config_r($configs)
 	foreach($configs as $n=>$m)
 	{
 		add_config($n, $m['value'], $m['order'], $m['html']);
+	}
+}
+
+function update_config($name, $value, $escape = true)
+{
+	global $SQL;
+	
+
+	$value = ($escape) ? $SQL->escape($value) : $value;
+	
+	$update_query = array(
+						'UPDATE'	=> "{$dbprefix}config",
+						'SET'		=> "value='" . ($escape ? $SQL->escape($value) : $value) . "'",
+						'WHERE'		=>  'name = "' . $SQL->escape($name) . '"'
+				);
+
+	if ($SQL->build($update_query))
+	{
+		delete_cache('data_config');
+		return true;
+	}
+	else
+	{
+		return false;
 	}
 }
 

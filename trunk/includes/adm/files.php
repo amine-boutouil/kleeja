@@ -120,6 +120,15 @@
 						if (is_file($row['folder'] . "/thumbs/" . $row['name'] ))
 						{
 							@kleeja_unlink ($row['folder'] . "/thumbs/" . $row['name'] );
+							//update number of stats
+							$update_query	= array('UPDATE'	=> "{$dbprefix}stats",
+													'SET'		=> 'files=files-1,sizes=sizes-' . $row['size'],
+												   );
+							
+							if (!$SQL->build($update_query))
+							{
+								die($lang['CANT_UPDATE_SQL']);
+							}
 						}
 							
 					}

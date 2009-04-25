@@ -391,7 +391,7 @@ switch ($_GET['go'])
 
 			//te get files and update them !!
 			$query = array(
-						'SELECT'	=> 'f.id ,f.name, f.real_filename, f.type, f.folder',
+						'SELECT'	=> 'f.id ,f.name, f.real_filename, f.type, f.folder, f.size',
 						'FROM'		=> "{$dbprefix}files f",
 						'WHERE'		=> 'f.user=' . $usrcp->id(),
 						'ORDER BY'	=> 'f.id DESC',
@@ -455,11 +455,21 @@ switch ($_GET['go'])
 								}		
 								
 								//delete from folder .. 
-								@unlink ($row['folder'] . "/" . $row['name'] );
+								@kleeja_unlink ($row['folder'] . "/" . $row['name'] );
+								//update number of stats
+								$update_query	= array('UPDATE'	=> "{$dbprefix}stats",
+													'SET'		=> 'files=files-1,sizes=sizes-' . $row['size'],
+												);
+							
+								if (!$SQL->build($update_query))
+								{
+									die($lang['CANT_UPDATE_SQL']);
+								}
+								
 								//delete thumb
 								if (file_exists($row['folder'] . "/thumbs/" . $row['name'] ))
 								{
-									@unlink ($row['folder'] . "/thumbs/" . $row['name'] );
+									@kleeja_unlink ($row['folder'] . "/thumbs/" . $row['name'] );
 								}
 								
 							}

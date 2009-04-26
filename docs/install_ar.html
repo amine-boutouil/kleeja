@@ -18,6 +18,10 @@ width: 100%;height: 30px;font-size: 1px;}.roundedcornr_content_283542 { margin: 
 	direction:ltr;
 }
 
+.style1 {
+	background-color: #F2F1EE;
+}
+
 </style></head><body><br />
 <div class="roundedcornr_box_283542"><div class="roundedcornr_top_283542"><div></div></div><div class="roundedcornr_content_283542">
 <img src="../images/inst/logo.gif" style="border:0;">
@@ -91,7 +95,7 @@ kleeja  : مجلد سكربت كليجا
 
 <a href="#top">إلى إعلى</a> <br />
 <a name="forum"></a>
-<B># : طريقة الربط بالمنتديات</B><br /><br />
+<B># : طريقة الربط بالمنتديات او بالسكربتات</B><br /><br />
 
 1- بعد تثبيت السكربت كما هو موضح بالنقطه السابقه . 
 <br />
@@ -101,14 +105,31 @@ kleeja  : مجلد سكربت كليجا
 <br />
 4- قم بتعديل ملف includes/config.php الجزء الثاني منه
 <br />
-كالتالي <br />
+اضف
+كالتالي <span lang="en-us">[</span>كمثال<span lang="en-us">]</span><br />
 <div class="code">
-	//for integration with forums [ must change user systen from admin cp ] <br />
-	$forum_path ="/vb"; 					// مجلد المنتدى ..<br />
+	//for integration with other scripts [ must change user systen from admin cp 
+	] <br />
+	$script_path = &#39;./vb&#39;;// مجلد السكربت كمثال <span lang="en-us">v<span class="style1">b</span></span><br />
+	$script_encoding = &#39;windows-1256&#39;;// ترميز الصفحات السكربت <br />
 </div>
+<br />
+او الربط من قاعدة البيانات مباشرة كتالي<br />
+<span lang="en-us">[</span>كمثال<span lang="en-us">]</span><div class="code">
+	//for integration with other scripts [ must change user systen from admin cp 
+	] <br />
+	$script_encoding = &#39;windows-1256&#39;;// ترميز الصفحات السكربت <br />
+	$script_srv = &#39;localhost&#39;;<br />
+	$script_db = &#39;vb&#39;;<br />
+	$script_user = &#39;root&#39;;<br />
+	$script_pass = &#39;pass&#39;;<br />
+</div>
+<br />
+<span lang="en-us">&nbsp; </span>&nbsp;<strong>لايمكنك استخدام الطريقه الثانية</strong><span lang="en-us"><strong> 
+phbb3 </strong></span><strong>ملاحظة : اذا كنت تسخدم منتدى </strong>
 <br>
 
-احفظ الملف واذهب للدخول , اذا كنت مديرا بالمنتدى سوف يتعرف عليك كمدير للسكربت .. 
+احفظ الملف واذهب للدخول , اذا كنت مديرا بالسكربت سوف يتعرف عليك كمدير للسكربت .. 
 
 <br />
 <br />

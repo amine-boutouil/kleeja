@@ -675,30 +675,42 @@ function process ()
    {
         $url = parse_url($url);
         $fp = @fsockopen ($url['host'], (!empty($url['port']) ? (int)$url['port'] : 80), $errno, $errstr, 30);
-        if ($fp) {
+        if ($fp) 
+		{
             $path = (!empty($url['path']) ? $url['path'] : "/").(!empty($url['query']) ? "?" . $url['query'] : "");
             $header = "\r\nHost: ".$url['host'];
-            if("post" == strtolower($method)) $header .= "\r\nContent-Length: " . strlen($data);
-            fputs ($fp, $method." ".$path." HTTP/1.0" . $header . "\r\n\r\n". ("post" == strtolower($method) ? $data : ""));
-            if(!feof($fp)) {
+            if("post" == strtolower($method))
+			{
+				$header .= "\r\nContent-Length: " . strlen($data);
+            }
+			fputs ($fp, $method." ".$path." HTTP/1.0" . $header . "\r\n\r\n". ("post" == strtolower($method) ? $data : ""));
+            if(!feof($fp))
+			{
                 $scheme = fgets($fp);
                 list(, $code ) = explode(" ", $scheme);
                 $headers = array("Scheme" => $scheme);
             }
-            while ( !feof($fp) ) {
+            while ( !feof($fp) )
+			{
                 $h = fgets($fp);
                 if($h == "\r\n" OR $h == "\n") break;
                 list($key, $value) = explode(":", $h, 2);
                 $headers[$key] = trim($value);
                 if($code >= 300 AND $code < 400 AND strtolower($key) == "location" AND $redirect > 0)
+				{
                     return $this->get_remote_file_size($headers[$key], $method, $data, --$redirect);
+				}
             }
             $body = "";
             /*while ( !feof($fp) ) $body .= fgets($fp);*/
             fclose($fp);
         }
-        else return (array("error" => array("errno" => $errno, "errstr" => $errstr)));
-        return (string)$headers["Content-Length"];
+        else
+		{
+			return (array("error" => array("errno" => $errno, "errstr" => $errstr)));
+        }
+		
+		return (string)$headers["Content-Length"];
     }
 }#end class
 

@@ -57,7 +57,7 @@ case 'language':
 		{
 			if(strpos($file, '.') === false && $file != '..' && $file != '.')
 			{
-				$lngfiles .= '<option value="' . $file . '">' . $file . '</option>';
+				$lngfiles .= '<option value="' . $file . '"' . ($file == 'en' ? ' selected="selected"' : '') . '>' . $file . '</option>';
 			}
 		}
 		

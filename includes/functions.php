@@ -1071,7 +1071,7 @@ function send_mail($to, $body, $subject, $fromaddress, $fromname,$bcc='')
 * get remote files
 * parameters : url : link of file
 */
-function fetch_remote_file($url)
+function fetch_remote_file($url, $save_in)
 {
 
 	($hook = kleeja_run_hook('kleeja_fetch_remote_file_func')) ? eval($hook) : null; //run hook
@@ -1105,22 +1105,40 @@ function fetch_remote_file($url)
 
 	    fwrite($fp, $out);
 	    $body = false;
-	    while (!feof($fp))
+		if($save_in)
+		{
+			$fp2 = fopen($save_in, "w");
+		}
+		
+		while (!feof($fp))
 		{
 	        $s = fgets($fp, 1024);
 	        if ($body)
 			{
-	            $in .= $s;
-	        }
+				if($save_in)
+				{
+					fwrite($fp2, $s);
+				}
+				else
+				{
+					$in .= $s;
+				}
+			}
 			
 			if ($s == "\r\n")
 			{
 				$body = true;
 			}
 	    }
-	   
 	    fclose($fp);
-	    return $in;
+		
+		if($save_in)
+		{
+			@fclose($fp2);
+			return true;
+		}
+		
+		return $in;
 	}
 	else
 	{

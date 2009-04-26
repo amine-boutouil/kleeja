@@ -3,11 +3,10 @@
 #						Kleeja
 #
 # Filename : KljUplaoder.php
-# purpose :  skeleton of script
+# purpose :  skeleton of script, based on class of Nadorino [@msn.com]
 # copyright 2007-2009 Kleeja.com ..
-#license http://opensource.org/licenses/gpl-license.php GNU Public License
-#class by :  based on class.AksidSars.php  of Nadorino [@msn.com] and he disterbuted for free
-# last edit by : saanina
+# license http://opensource.org/licenses/gpl-license.php GNU Public License
+# $Author$ , $Rev$,  $Date::                           $
 ##################################################
 
 //no for directly open
@@ -247,7 +246,7 @@ function process ()
 			{
 				if(!$ch->check_captcha($_POST['public_key'], $_POST['answer_safe']))
 				{
-					($hook = kleeja_run_hook('wrong_captcha_kljuploader')) ? eval($hook) : null; //run hook	
+					($hook = kleeja_run_hook('wrong_captcha_kljuploader_w1')) ? eval($hook) : null; //run hook	
 					 return $this->errs[] = $lang['WRONG_VERTY_CODE'];
 				}
 			}
@@ -255,7 +254,7 @@ function process ()
 			{
 				if(!$ch->check_captcha($_POST['public_key2'], $_POST['answer_safe2']))
 				{
-					($hook = kleeja_run_hook('wrong_captcha_kljuploader')) ? eval($hook) : null; //run hook	
+					($hook = kleeja_run_hook('wrong_captcha_kljuploader_w2')) ? eval($hook) : null; //run hook	
 					 return $this->errs[] = $lang['WRONG_VERTY_CODE'];
 				}
 			}
@@ -291,7 +290,6 @@ function process ()
 							$this->filename2 = $_FILES['file']['name'][$i];
 							
 							($hook = kleeja_run_hook('another_decode_type_kljuploader')) ? eval($hook) : null; //run hook
-							
 						}
 						
 
@@ -396,26 +394,34 @@ function process ()
 
 								$filename 			= basename($_POST['file'][$i]);
 								$this->filename2	= explode(".", $filename);
-								$this->filename2	= $this->filename2[count($this->filename2)-1];
-								$this->typet 		= $this->filename2;
-
+								
+								
+								if(in_array($this->filename2[count($this->filename2)-1], array('html', 'php', 'html')))
+								{
+									$this->filename2 = $this->typet  = $this->filename2[count($this->filename2)-2];
+								}
+								else
+								{
+									$this->filename2 = $this->typet  = $this->filename2[count($this->filename2)-1];
+								}
 								
 								//tashfer [decode]
 								if($this->decode == "time")
 								{
-									$zaid=time();
-									$this->filename2 = $this->filename . $zaid.$i . "." . $this->filename2;
+									$zaid = time();
+									$this->filename2 = $this->filename . $zaid . $i . "." . $this->filename2;
 								}
 								elseif($this->tashfir == "md5")
 								{
 									$zaid=md5(time());
-									$zaid=substr($zaid,0,10);
-									$this->filename2 = $this->filename.$zaid.$i . "." . $this->filename2;
+									$zaid=substr($zaid, 0, 10);
+									$this->filename2 = $this->filename . $zaid . $i . "." . $this->filename2;
 								}
 								else
 								{
-								// real name of file
+									// real name of file
 									$this->filename2 = $filename;
+									($hook = kleeja_run_hook('another_decode_type_kljuploader')) ? eval($hook) : null; //run hook
 								}
 								//end tashfer
 
@@ -426,26 +432,21 @@ function process ()
 							}
 							else//big else
 							{
-									if(!in_array(substr($_POST['file'][$i],0,4), array('http', 'ftp:')))
-									{
-										$_POST['file'][$i] = 'http://' . $_POST['file'][$i];
-										//$this->errs[]=  $lang['WRONG_LINK'] . $_POST['file'][$i] ;
-									}
-									elseif(file_exists($this->folder . '/' . $filename))
+									if(file_exists($this->folder . '/' . $filename))
 									{
 										$this->errs[]=  '[ ' . $_POST['file'][$i] . ' ] ' . $lang['SAME_FILE_EXIST'];
 									}
 									//elseif( preg_match ("#[\\\/\:\*\?\<\>\|\"]#", $this->filename2))
 									//{
-										//$this->errs[]= $lang['WRONG_F_NAME'] . '[' . $_POST['file'][$i] . ']';
+									//	$this->errs[]= $lang['WRONG_F_NAME'] . '[' . $_POST['file'][$i] . ']';
 									//}
-									elseif($this->ext_check_safe($_POST['file'][$i]) == false)
-									{
-										$this->errs[]= $lang['WRONG_F_NAME'] . '[' . $_POST['file'][$i] . ']';
-									}
+									//elseif($this->ext_check_safe($_POST['file'][$i]) == false)
+									//{
+									//	$this->errs[]= $lang['WRONG_F_NAME'] . '[' . $_POST['file'][$i] . ']';
+									//}
 									//elseif(kleeja_check_mime($_POST['file'][$i], $this->types[strtolower($this->typet)]['group_id'], $_FILES['file']['tmp_name'][$i]) == false)
 									//{
-										//$this->errs[]= $lang['FORBID_EXT'] . '[' . $_POST['file'][$i] . ']';
+									// $this->errs[]= $lang['FORBID_EXT'] . '[' . $_POST['file'][$i] . ']';
 									//}
 									elseif(!in_array(strtolower($this->typet),array_keys($this->types)))
 									{
@@ -457,28 +458,51 @@ function process ()
 										//
 										//end err .. start upload from url
 										//
-										$data = fetch_remote_file($_POST['file'][$i]);
-
-										if($data === false)
+										if(!in_array(substr($_POST['file'][$i], 0, 4), array('http', 'ftp:')))
 										{
-											$this->errs[]	= $lang['URL_CANT_GET'];		
+											$_POST['file'][$i] = 'http://' . $_POST['file'][$i];
 										}
-										else
+										
+										if(function_exists("fsockopen"))
 										{
-											$this->sizet = strlen($data);
-
+											$this->sizet = $this->get_remote_file_size($_POST['file'][$i]);
+		
 											if($this->types[strtolower($this->typet)]['size'] > 0 && $this->sizet >= $this->types[strtolower($this->typet)]['size'])
 											{
 												$this->errs[]=  $lang['SIZE_F_BIG'] . ' ' . Customfile_size($this->types[strtolower($this->typet)]['size']);
 											}
 											else
 											{
-												//then ..write new file
-												$fp2 = fopen($this->folder . "/".$this->filename2,"w");
-												fwrite($fp2, $data);
-												fclose($fp2);
+												$data = fetch_remote_file($_POST['file'][$i], $this->folder . "/" . $this->filename2);
 											}
-
+										}
+										else
+										{
+											$data = fetch_remote_file($_POST['file'][$i]);
+											if($data != false)
+											{
+												$this->sizet = strlen($data);
+												if($this->types[strtolower($this->typet)]['size'] > 0 && $this->sizet >= $this->types[strtolower($this->typet)]['size'])
+												{
+													$this->errs[]=  $lang['SIZE_F_BIG'] . ' ' . Customfile_size($this->types[strtolower($this->typet)]['size']);
+												}
+												else
+												{
+													//then ..write new file
+													$fp2 = fopen($this->folder . "/" . $this->filename2, "w");
+													fwrite($fp2, $data);
+													fclose($fp2);
+												}
+											}
+										}
+										
+										if($data === false)
+										{
+											$this->errs[]	= $lang['URL_CANT_GET'];		
+										}
+										
+										if(!sizeof($this->errs))
+										{
 											$this->saveit ($this->filename2, $this->folder, $this->sizet, $this->typet);
 										}
 
@@ -644,6 +668,38 @@ function process ()
 
 	}#save it
 
+	//
+	//get file size 
+	//source : http://nopaste.planerd.net/1139
+   function get_remote_file_size($url, $method = "GET", $data = "", $redirect = 10)
+   {
+        $url = parse_url($url);
+        $fp = @fsockopen ($url['host'], (!empty($url['port']) ? (int)$url['port'] : 80), $errno, $errstr, 30);
+        if ($fp) {
+            $path = (!empty($url['path']) ? $url['path'] : "/").(!empty($url['query']) ? "?" . $url['query'] : "");
+            $header = "\r\nHost: ".$url['host'];
+            if("post" == strtolower($method)) $header .= "\r\nContent-Length: " . strlen($data);
+            fputs ($fp, $method." ".$path." HTTP/1.0" . $header . "\r\n\r\n". ("post" == strtolower($method) ? $data : ""));
+            if(!feof($fp)) {
+                $scheme = fgets($fp);
+                list(, $code ) = explode(" ", $scheme);
+                $headers = array("Scheme" => $scheme);
+            }
+            while ( !feof($fp) ) {
+                $h = fgets($fp);
+                if($h == "\r\n" OR $h == "\n") break;
+                list($key, $value) = explode(":", $h, 2);
+                $headers[$key] = trim($value);
+                if($code >= 300 AND $code < 400 AND strtolower($key) == "location" AND $redirect > 0)
+                    return $this->get_remote_file_size($headers[$key], $method, $data, --$redirect);
+            }
+            $body = "";
+            /*while ( !feof($fp) ) $body .= fgets($fp);*/
+            fclose($fp);
+        }
+        else return (array("error" => array("errno" => $errno, "errstr" => $errstr)));
+        return (string)$headers["Content-Length"];
+    }
 }#end class
 
 ?>

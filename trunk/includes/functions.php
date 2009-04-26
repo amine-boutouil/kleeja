@@ -1071,7 +1071,7 @@ function send_mail($to, $body, $subject, $fromaddress, $fromname,$bcc='')
 * get remote files
 * parameters : url : link of file
 */
-function fetch_remote_file($url, $save_in)
+function fetch_remote_file($url, $save_in = false)
 {
 
 	($hook = kleeja_run_hook('kleeja_fetch_remote_file_func')) ? eval($hook) : null; //run hook

@@ -23,7 +23,7 @@ include_once ('func_inst.php');
 //
 //version of latest changes at db
 //
-define ('DB_VERSION' , '6');
+define ('DB_VERSION' , '7');
 
 
 /*

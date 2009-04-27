@@ -6,7 +6,11 @@
 //
 
 // not for directly open
-if (!defined('IN_COMMON'))	exit();
+if (!defined('IN_COMMON'))
+{
+	exit();
+}
+
 
 $install_sqls = array();
 

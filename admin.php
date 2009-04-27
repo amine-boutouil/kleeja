@@ -62,11 +62,20 @@
 		big_error('No Extensions', 'ERROR IN LOADING ADMIN EXTENSIONS !');
 	}
 	
+	
+	//exception of 406 ! dirty hosting
+	if($go_to == 'options')
+	{
+		$go_to = 'configs';
+	}
+	
 	//no requst or wrong !
 	if(!$go_to || empty($go_to) ||  !in_array($go_to, $adm_extensions))
 	{
 		$go_to = 'start';
 	}
+	
+
 	
 	//get it 
 	if (file_exists($path_adm . '/' . $go_to . '.php'))	
@@ -99,7 +108,7 @@
 		++$i;
 		$adm_extensions_menu[$i]	= array('icon'	=> (file_exists($STYLE_PATH_ADMIN . 'images/' . $m . '_button.gif'))	? $STYLE_PATH_ADMIN . 'images/' . $m . '_button.gif' : $STYLE_PATH_ADMIN . 'images/no_icon_button.gif',
 											'lang'	=> ($lang['R_'. strtoupper($m)]) ? $lang['R_'. strtoupper($m)]: (($lang[strtoupper($m)]) ? $lang[strtoupper($m)] :  (($olang[strtoupper($m)]) ? $olang[strtoupper($m)] : strtoupper($m))),
-											'link'	=> 'admin.php?cp=' . $m,
+											'link'	=> 'admin.php?cp=' . ($m == 'configs' ? 'options' : $m),
 											'confirm'	=> (@in_array($m, $ext_confirm)) ? true : false,
 											);
 											

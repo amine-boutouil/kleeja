@@ -12,7 +12,7 @@
 		//for style ..
 		$stylee 		= "admin_configs";
 		//words
-		$action 		= "admin.php?cp=configs";
+		$action 		= "admin.php?cp=options";
 		$n_submit 		= $lang['UPDATE_CONFIG'];
 
 

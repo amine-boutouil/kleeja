@@ -22,6 +22,7 @@ $update_sqls['up_style_config'] = "UPDATE `{$dbprefix}config` SET `value` = 'def
 $update_sqls['option'] = "ALTER TABLE `{$dbprefix}config` ADD `option` mediumtext NOT NULL;";
 $update_sqls['size_in_stats'] = "ALTER TABLE `{$dbprefix}stats` CHANGE `sizes` `sizes` bigint( 20 ) NOT NULL DEFAULT '0';";
 $update_sqls['m_lang'] = "ALTER TABLE `{$dbprefix}lang` CHANGE `lang_id` `lang_id` VARCHAR( 100 ) NOT NULL ";
+$update_sqls['m_lang_t'] = "ATRUNCATE TABLE `{$dbprefix}lang`";
 
 
 //

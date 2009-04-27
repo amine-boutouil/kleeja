@@ -651,7 +651,7 @@ function process ()
 						}
 						else
 						{
-							$else_html_result = $lang['URL_F_FILE'] . ':<br /><textarea cols="49" rows="1">' . $this->linksite . (($config['mod_writer']) ? "download-" . $this->id_for_url . ".html" : "download.php?id=" . $this->id_for_url) . '</textarea><br />
+							$else_html_result = $lang['URL_F_FILE'] . ':<br /><textarea cols="49" rows="1">' . $this->linksite . (($config['mod_writer']) ? "download" . $this->id_for_url . ".html" : "download.php?id=" . $this->id_for_url) . '</textarea><br />
 												' . $lang['URL_F_BBC'] . ':<br /><textarea rows="2" cols="49">[url]' . $this->linksite . (($config['mod_writer']) ? "download" . $this->id_for_url . ".html" : "download.php?id=" . $this->id_for_url) . '[/url]</textarea><br />
 												' . $extra_del;
 						}

@@ -288,10 +288,10 @@ if (!defined('IN_COMMON'))
 			$this->vars  = &$GLOBALS;
 			
 			//is there ?
-			//if(!file_exists($root_path.'cache/tpl_' . $this->re_name_tpl($template_name) . '.php'))
-			//{
+			if(!file_exists($root_path.'cache/tpl_' . $this->re_name_tpl($template_name) . '.php'))
+			{
 				$this->_load_template($template_name);
-			//}
+			}
 
 			ob_start();
 			include($root_path . 'cache/tpl_' . $this->re_name_tpl($template_name) . '.php');

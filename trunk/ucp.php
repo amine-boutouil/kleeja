@@ -202,19 +202,20 @@ switch ($_GET['go'])
 								
 								($hook = kleeja_run_hook('ok_added_users_register')) ? eval($hook) : null; //run hook
 								$text	= $lang['REGISTER_SUCCESFUL'] . '<a href="ucp.php?go=login">' . $lang['LOGIN'] . '</a>';
-								kleeja_info($text);
-							}
-							
-							//update number of stats
-							$update_query	= array('UPDATE'	=> "{$dbprefix}stats",
+								//update number of stats
+								$update_query	= array('UPDATE'	=> "{$dbprefix}stats",
 													'SET'		=> 'users=users+1',
 												);
 							
-							($hook = kleeja_run_hook('qr_update_no_users_register')) ? eval($hook) : null; //run hook
-							if (!$SQL->build($update_query))
-							{
-								die($lang['CANT_UPDATE_SQL']);
+								($hook = kleeja_run_hook('qr_update_no_users_register')) ? eval($hook) : null; //run hook
+								if (!$SQL->build($update_query))
+								{
+									die($lang['CANT_UPDATE_SQL']);
+								}
+								kleeja_info($text);
 							}
+							
+							
 						}
 						else
 						{

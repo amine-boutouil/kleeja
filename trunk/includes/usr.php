@@ -4,9 +4,9 @@
 #
 # Filename : usr.php
 # purpose :  get user data ..even from board database, its complicated ...: support many types of forums ..
-# copyright 2007-2008 Kleeja.com ..
-#license http://opensource.org/licenses/gpl-license.php GNU Public License
-# last edit by : saanina
+# copyright 2007-2009 Kleeja.com ..
+# license http://opensource.org/licenses/gpl-license.php GNU Public License
+# $Author$ , $Rev$,  $Date::                           $
 ##################################################
 
 //no for directly open

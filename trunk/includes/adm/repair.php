@@ -20,7 +20,7 @@
 	while($row=$SQL->fetch_array($result))
 	{
 		//fix
-		$queryf	=	"REPAIR TABLE `".$row[Name]."`";
+		$queryf	=	"REPAIR TABLE `" . $row['Name'] . "`";
 		$resultf = $SQL->query($queryf);
 		if ($resultf)
 		{

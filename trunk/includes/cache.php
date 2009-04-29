@@ -283,9 +283,12 @@ if(!defined('STOP_HOOKS'))
 // do that for him .. becuase he has no time .. :)   
 //last_down - $config[del_f_day]
 //
-if((int) $config['del_f_day'] >= 0)
+if((int) $config['del_f_day'] > 0)
 {
-	if(!$stat_last_f_del || empty($stat_last_f_del)) $stat_last_f_del = time();
+	if(!$stat_last_f_del || empty($stat_last_f_del))
+	{
+		$stat_last_f_del = time();
+	}
 	
     if ((time() - $stat_last_f_del) >= 86400)
     {

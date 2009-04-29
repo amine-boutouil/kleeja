@@ -1306,20 +1306,20 @@ function kleeja_unlink($filepath, $cache_file = false)
 		return @unlink($filepath);
 	}
 	//5% only who use this
-	else if (function_exists('exec'))
-	{
-		$out = array();
-		$return = null;
-		exec('del ' . escapeshellarg(realpath($filepath)) . ' /q', $out, $return);
-		return $return;
-	}
+	//else if (function_exists('exec'))
+	//{
+	//	$out = array();
+	//	$return = null;
+	//	exec('del ' . escapeshellarg(realpath($filepath)) . ' /q', $out, $return);
+	//	return $return;
+	//}
 	//5% only who use this
-	else if (function_exists('system'))
-	{
-		$return = null;
-		system ('del ' . escapeshellarg(realpath($filepath)) . ' /q', $return);
-		return $return;
-	}
+	//else if (function_exists('system'))
+	//{
+	//	$return = null;
+	//	system ('del ' . escapeshellarg(realpath($filepath)) . ' /q', $return);
+	//	return $return;
+	//}
 	//just rename cache file if there is new thing
 	else if (function_exists('rename') && $cache_file)
 	{

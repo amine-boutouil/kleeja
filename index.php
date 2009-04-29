@@ -4,7 +4,7 @@
 #
 # Filename : index.php 
 # purpose :  home page  .
-# copyright 2007-2008 Kleeja.com ..
+# copyright 2007-2009 Kleeja.com ..
 # license http://opensource.org/licenses/gpl-license.php GNU Public License
 # $Author$ , $Rev$,  $Date::                           $
 ##################################################
@@ -100,16 +100,16 @@
 			($hook = kleeja_run_hook('while_qr_select_online_index_page')) ? eval($hook) : null; //run hook	
 			
 			//bots
-			if (strstr($row['agent'], 'Googlebot') || strstr($row['agent'], 'Google'))
+			if (strstr($row['agent'], 'Googlebot') || strstr($row['agent'], 'Google') && !$OnlineNames['Googlebot'])
 			{
 				$usersnum++; 
-				$OnlineNames['Googlebot'] = '<span style="color:orange;">[Googlebot]</span>';
+				$OnlineNames['Googlebot'] = '<span style="color:orange;">GoogleBot</span>';
 			}
 			
-			if (strstr($row['agent'], 'Yahoo! Slurp') || strstr($row['agent'], 'Yahoo')) 
+			if (strstr($row['agent'], 'Yahoo! Slurp') || strstr($row['agent'], 'Yahoo') && !$OnlineNames['YahooSlurp'])
 			{
 				$usersnum++; 
-				$OnlineNames['YahooSlurp'] = '<span style="color:red;">[Yahoo!Slurp]</span>';
+				$OnlineNames['YahooSlurp'] = '<span style="color:red;">Yahoo!Slurp</span>';
 			}
 			
 			//put another bot name

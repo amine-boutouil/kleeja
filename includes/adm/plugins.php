@@ -122,6 +122,7 @@
 							
 							//delete cache ..
 							delete_cache('data_hooks');
+							delete_cache('data_config');
 
 							//show msg
 							$text	= $lang['PLUGIN_DELETED'];

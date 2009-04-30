@@ -86,10 +86,14 @@
 		$visitornum		= $usersnum	=	0;
 		$show_online	= true;
 		$OnlineNames	= array();
+		$timeout		= 200; //seconds
+		$time			= time();  
+		$timeout2		= $time-$timeout;  
 		
 		$query = array(
 						'SELECT'	=> 'DISTINCT(n.ip), n.username, n.agent',
 						'FROM'		=> "{$dbprefix}online n",
+						'WHERE'		=> "n.time > $timeout2"
 				);
 				
 		($hook = kleeja_run_hook('qr_select_online_index_page')) ? eval($hook) : null; //run hook

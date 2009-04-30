@@ -1609,14 +1609,7 @@ function delete_ch_tpl($template_name, $delete_txt = array())
 		($hook = kleeja_run_hook('op_up_tplcntedit_dlchtpl_fuck')) ? eval($hook) : null; //run hook
 		
 		//delete cache ..
-		if(!$is_admin_template) 
-		{
-			delete_cache('tpl_' .$template_name);
-		}
-		else
-		{
-			delete_cache($template_name);	
-		}
+		delete_cache('tpl_' .$template_name);
 	}
 	else
 	{

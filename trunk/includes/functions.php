@@ -250,7 +250,6 @@ function KleejaOnline ()
 		($hook = kleeja_run_hook('anotherbots_onlline_func')) ? eval($hook) : null; //run hook
 		
 		//---
-		if($username == '-1') $ip ='1.2.42.42.4';
 		$rep_query = array(
 								'REPLACE'	=> 'ip, username, agent, time',
 								'INTO'		=> "{$dbprefix}online",

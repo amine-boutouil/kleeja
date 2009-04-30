@@ -107,7 +107,7 @@
 	require ($path . 'functions.php');
 
 	//. install.php exists
-	if (file_exists($root_path . 'install')) 
+	if (file_exists($root_path . 'install') && !defined('IN_ADMIN'))
 	{
 		//big_error('install folder exists!', '<b>Install</b> folder detected! please delete it OR install <b>Kleeja</b> if you haven\'t done so yet...<br/><br/><a href="'.$root_path.'install">Click to Install</a><br/><br/>');
 	}

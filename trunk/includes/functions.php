@@ -213,15 +213,14 @@ function Customfile_size($size)
 */
 function KleejaOnline ()
 {
-		global $SQL,$usrcp,$dbprefix;
+		global $SQL, $usrcp, $dbprefix, $config;
 		
 		// get information .. 
 		$ip				= (getenv('HTTP_X_FORWARDED_FOR')) ? getenv('HTTP_X_FORWARDED_FOR') : getenv('REMOTE_ADDR');
 		$agent			= $_SERVER['HTTP_USER_AGENT'];
-		$timeout		= 600; //seconds
+		$timeout		= 100; //seconds
 		$time			= time();  
 		$timeout2		= $time-$timeout;  
-		#$username	= ( $usrcp->name() ) ?  (($usrcp->admin() )?  '<span style="color:blue;"><strong>' .$usrcp->name(). '</strong></span>' : $usrcp->name() ): '-1';
 		$username		= ($usrcp->name()) ? $usrcp->name(): '-1';
 		
 		//
@@ -234,10 +233,8 @@ function KleejaOnline ()
 									'SET'		=> "last_google='$time', google_num=google_num+1"
 									);
 				($hook = kleeja_run_hook('qr_update_google_lst_num')) ? eval($hook) : null; //run hook
-				if (!$SQL->build($update_query))
-				{
-					die($lang['CANT_UPDATE_SQL']);
-				}
+				$SQL->build($update_query);
+
 		}
 		elseif (strstr($agent, 'Yahoo'))
 		{
@@ -246,59 +243,36 @@ function KleejaOnline ()
 									'SET'		=> "last_yahoo='$time', yahoo_num=yahoo_num+1"
 									);
 				($hook = kleeja_run_hook('qr_update_yahoo_lst_num')) ? eval($hook) : null; //run hook	
-				if (!$SQL->build($update_query))
-				{
-					die($lang['CANT_UPDATE_SQL']);
-				}
+				$SQL->build($update_query);
 		}
 		
 		//put another bots as a hook if you want !
 		($hook = kleeja_run_hook('anotherbots_onlline_func')) ? eval($hook) : null; //run hook
 		
 		//---
-		$query_on_id = array(
-								'SELECT'	=> 'id',
-								'FROM'		=> "{$dbprefix}online",
-								'WHERE'		=> "ip='". $SQL->escape($ip) . "'"
-							);
-		($hook = kleeja_run_hook('qr_select_ip_onlline_func')) ? eval($hook) : null; //run hook					
-		$result = $SQL->build($query_on_id);
-			
-		$who_here	= $SQL->num_rows($result);  
-		
-		if(!$who_here)
-		{
-			$insert_query = array(
-								'INSERT'	=> 'ip, username, agent, time',
+		if($username == '-1') $ip ='1.2.42.42.4';
+		$rep_query = array(
+								'REPLACE'	=> 'ip, username, agent, time',
 								'INTO'		=> "{$dbprefix}online",
-								'VALUES'	=> "'$ip','$username','$agent','$time'"
-								);
-			($hook = kleeja_run_hook('qr_insert_ifnot_onlline_func')) ? eval($hook) : null; //run hook
-			$SQL->build($insert_query);
-		}
-		else
-		{
-			$update_query = array(
-								'UPDATE'=> "{$dbprefix}online",
-								'SET'	=> "time='$time'",
-								'WHERE'	=> "ip='". $SQL->escape($ip) . "'"
+								'VALUES'	=> "'$ip','$username','$agent','$time'",
+								'UNIQUE'	=>  "ip='$ip'"
 							);
-			($hook = kleeja_run_hook('qr_update_ifis_onlline_func')) ? eval($hook) : null; //run hook
-			if (!$SQL->build($update_query))
-			{
-				die($lang['CANT_UPDATE_SQL']);			
-			}
-		}
+		($hook = kleeja_run_hook('qr_rep_ifnot_onlline_func')) ? eval($hook) : null; //run hook
+		$SQL->build($rep_query);
 
-		// i hate who online feature due to this step .. :( 
-		$query_del = array(
-						'DELETE'	=> "{$dbprefix}online",
-						'WHERE'		=> "time < $timeout2"
-							);
-		($hook = kleeja_run_hook('qr_del_ifgo_onlline_func')) ? eval($hook) : null; //run hook									
-		if (!$SQL->build($query_del))
+
+		//every 1 hour this will clean online table
+		if((time() - $config['last_online_time_update']) >= 3600)
 		{
-			die($lang['CANT_DELETE_SQL']);
+			$query_del = array(
+							'DELETE'	=> "{$dbprefix}online",
+							'WHERE'		=> "time < $timeout2"
+						);
+			($hook = kleeja_run_hook('qr_del_ifgo_onlline_func')) ? eval($hook) : null; //run hook									
+			$SQL->build($query_del);
+			
+			//update last_online_time_update 
+			update_config('last_online_time_update', time());
 		}
 		
 		($hook = kleeja_run_hook('KleejaOnline_func')) ? eval($hook) : null; //run hook	
@@ -1018,6 +992,7 @@ function big_error ($error_title,  $msg_text)
 		echo '<body>';
 		echo '<p style="color: #FF0000;"><strong>Error In Kleeja : [<span  style="color: #800000;">&nbsp; ' . $error_title . ' </span>&nbsp;]</strong></p>';
 		echo '<div style="border: 1px dashed #808080;background-color: #FFF7F4; width: 70%;font-family:Tahoma">' . $msg_text . '</div>';
+		echo '<br /><a href="http://www.kleeja.com/">Kleeja Website</a>';
 		echo '</body>';
 		echo '</html>';
 		exit();
@@ -1207,27 +1182,29 @@ function ch_g ($name_of_select, $g_id, $return_name = false)
 function kleeja_check_mime ($mime, $group_id, $file_path)
 {
 	($hook = kleeja_run_hook('kleeja_check_mime_func')) ? eval($hook) : null; //run hook
-	
-	$return = true;
-	
-	//This code for images only 
-	if($group_id == 1)
+
+	//This code for images only
+	//it's must be improved for all files in future !
+	if($group_id != 1)
 	{
-		$return = false;
-		$s_items = @explode(':', 'image:png:jpg:tif:tga:targa');
-		foreach($s_items as $r)
-		{
-			if(strpos($mime, $r) !== false)
-			{
-				$return = true;
-				break;
-			}
-		}
-		
-		//onther check
-		//$w = @getimagesize($file_path);
-		//$return =  ($w && (strpos($w['mime'], 'image') !== false)) ? true : false;
+		return true;
 	}
+	
+	$return = false;
+	$s_items = @explode(':', 'image:png:jpg:tif:tga:targa');
+	foreach($s_items as $r)
+	{
+		if(strpos($mime, $r) !== false)
+		{
+			$return = true;
+			break;
+		}
+	}
+		
+	//onther check
+	//$w = @getimagesize($file_path);
+	//$return =  ($w && (strpos($w['mime'], 'image') !== false)) ? true : false;
+	
 	
 
 	//another check
@@ -1694,7 +1671,7 @@ function add_config_r($configs)
 
 function update_config($name, $value, $escape = true)
 {
-	global $SQL;
+	global $SQL, $dbprefix;
 	
 
 	$value = ($escape) ? $SQL->escape($value) : $value;

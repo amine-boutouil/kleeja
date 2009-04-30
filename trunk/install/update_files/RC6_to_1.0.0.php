@@ -15,6 +15,9 @@ define ('DB_VERSION' , '7');
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
 $update_sqls['up_dbv_config'] = "UPDATE `{$dbprefix}config` SET `value` = '" . DB_VERSION . "' WHERE `name` = 'db_version'";
+$update_sqls['online_i'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('last_online_time_update', '" .  time() . "', '', 0)";
+$update_sqls['online_t'] = "TRUNCATE TABLE `{$dbprefix}online`";
+$update_sqls['online_a'] = "ALTER TABLE `{$dbprefix}online` ADD UNIQUE (`ip`)";
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 //notes ////////////////////////////////////////////////////////////////////////////////////////////////

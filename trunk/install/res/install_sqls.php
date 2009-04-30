@@ -140,7 +140,8 @@ CREATE TABLE `{$dbprefix}online` (
   `username` varchar(100) collate utf8_bin NOT NULL,
   `agent` varchar(100) collate utf8_bin NOT NULL,
   `time` int(10) NOT NULL,
-  PRIMARY KEY  (`id`)
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `ip` (`ip`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 ";
 
@@ -250,6 +251,7 @@ $install_sqls['config_insert31'] = "INSERT INTO `{$dbprefix}config` (`name`, `va
 //system config
 $install_sqls['config_insert32'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('new_version', '', '', 0)";
 $install_sqls['config_insert33'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('db_version', '" .  DB_VERSION . "', '', 0)";
+$install_sqls['config_insert34'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('last_online_time_update', '" .  time() . "', '', 0)";
 
 	
 $install_sqls['exts_insert1'] = "

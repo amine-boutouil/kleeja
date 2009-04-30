@@ -39,7 +39,7 @@
 	}
 	else
 	{
-		$query['WHERE']	= "type IN ('gif','jpg','png','bmp','jpeg','tif','tiff')";
+		$query['WHERE']	= "type IN ('gif','jpg','png','bmp','jpeg','tif','tiff','GIF','JPG','PNG','BMP','JPEG','TIF','TIFF')";
 	}
 		
 	$result = $SQL->build($query);

@@ -1566,6 +1566,7 @@ function delete_ch_tpl($template_name, $delete_txt = array())
 	global $dbprefix, $lang, $config, $STYLE_PATH_ADMIN , $STYLE_PATH, $root_path;
 	
 	$style_path = (substr($template_name, 0, 6) == 'admin_') ? $STYLE_PATH_ADMIN : $STYLE_PATH;
+	$is_admin_template = (substr($template_name, 0, 6) == 'admin_') ? true : false;
 									
 	//if template not found and default style is there and not admin tpl
 	$template_path = $style_path . $template_name . '.html';
@@ -1582,9 +1583,13 @@ function delete_ch_tpl($template_name, $delete_txt = array())
 	}
 	
 	if(file_exists($template_path))
+	{
 		$d_contents = file_get_contents($template_path);
-	else
+	}
+	else 
+	{
 		$d_contents = '';
+	}
 	
 	include_once "s_strings.php";
 	$finder	= new sa_srch;
@@ -1604,7 +1609,14 @@ function delete_ch_tpl($template_name, $delete_txt = array())
 		($hook = kleeja_run_hook('op_up_tplcntedit_dlchtpl_fuck')) ? eval($hook) : null; //run hook
 		
 		//delete cache ..
-		delete_cache('tpl_' .$template_name);
+		if(!$is_admin_template) 
+		{
+			delete_cache('tpl_' .$template_name);
+		}
+		else
+		{
+			delete_cache($template_name);	
+		}
 	}
 	else
 	{

@@ -104,6 +104,8 @@ margin-left: 10%; margin:0 auto;width: 724px;
  border-left-color: #fcb012;
 }
 .contentb div {margin-left: 5px;margin-right: 5px;}
+
+.wz{-moz-border-radius: 8px; border-radius:1px;color: #333333; background-color: #FAFAFA;font-family: "Tahoma", Verdana, Helvetica, sans-serif;font-size: 1.1em;font-weight: normal;border: 1px solid #A9B8C2;padding: 1px;}
 </style>
 	<script type="text/javascript">
 	//<![CDATA[

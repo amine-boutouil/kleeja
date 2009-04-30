@@ -459,6 +459,7 @@ break;
 case 'end' :
 		echo '<fieldset><img src="img/wink.gif" alt="congratulation" /><br /><br />';
 		echo '<span style="color:blue;">' . $lang['INST_FINISH_SQL'] . '</span><br /><br />';
+		echo '<img src="img/wz.gif" alt="home" />&nbsp;<a href="./wizard.php">' . $lang['WZ_TITLE'] . '</a><br /><br />';
 		echo '<img src="img/home.gif" alt="home" />&nbsp;<a href="../index.php">' . $lang['INDEX'] . '</a><br /><br />';
 		echo '<img src="img/adm.gif" alt="admin" />&nbsp;<a href="../admin.php">' . $lang['ADMINCP'] . '</a><br /><br />';
 		echo '' . $lang['INST_KLEEJADEVELOPERS'] . '<br /><br />';

@@ -88,5 +88,11 @@
 	$lang['IN_INFO']							= 'Fill in the fields below if you want to integrate kleeja with your script . Ignore this step if you do not wish to do it<br /><span style="color:red;">you should change user system from admin cp after installing kleeja</span>';
 	$lang['IN_PATH']							= 'Path of script';
 	
-
+	
+	//wizard
+	$lang['WZ_TITLE'] = 'معالج مابعد تثبيت كليجا';
+	$lang['WZ_TXT_W1'] = 'قم بتغيير كل ماتريد في كليجا لما تحب , من خلال الاعدادت في لوحة التحكم';
+	$lang['WZ_TXT_W2'] = 'قم بالتحكم بالامتدادات \ الملفات التي تريد ان يقوم مستخدمينك بتحميلها والتحكم بإحجامها .';
+	$lang['WZ_TXT_W3'] = 'قم بالتحكم بالستايلات و اختيار مايناسبك , ايضا التعديل على الشكل ككل  ..';
+	$lang['WZ_TXT_W4'] = 'لوضع قوانين للمركز او شروط خاصه تحددها انت ...';
 ?>

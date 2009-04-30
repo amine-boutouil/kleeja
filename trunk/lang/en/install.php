@@ -90,9 +90,10 @@
 	
 	
 	//wizard
-	$lang['WZ_TITLE'] = 'معالج مابعد تثبيت كليجا';
-	$lang['WZ_TXT_W1'] = 'قم بتغيير كل ماتريد في كليجا لما تحب , من خلال الاعدادت في لوحة التحكم';
-	$lang['WZ_TXT_W2'] = 'قم بالتحكم بالامتدادات \ الملفات التي تريد ان يقوم مستخدمينك بتحميلها والتحكم بإحجامها .';
-	$lang['WZ_TXT_W3'] = 'قم بالتحكم بالستايلات و اختيار مايناسبك , ايضا التعديل على الشكل ككل  ..';
-	$lang['WZ_TXT_W4'] = 'لوضع قوانين للمركز او شروط خاصه تحددها انت ...';
+	$lang['DIR']	=	'ltr';
+	$lang['WZ_TITLE'] = 'Kleeja wizard';
+	$lang['WZ_TXT_W1'] = 'Change all your Kleeja settings into what you need trough Kleeja control panel in general settings';
+	$lang['WZ_TXT_W2'] = 'Control all extensions and sizes you want allow to be uploaded';
+	$lang['WZ_TXT_W3'] = 'Select , control and edit all your styles  ..';
+	$lang['WZ_TXT_W4'] = 'Set your terms or the the rules you want  ...';
 ?>

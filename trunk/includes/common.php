@@ -213,7 +213,7 @@
 	
 	// claculate for counter ..
 	 // of course , its not printable function , its just for calculating :)
-	visit_stats();
+	//visit_stats();
 	
 	//check for page numbr
 	if(!$perpage || intval($perpage) == 0)

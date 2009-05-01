@@ -278,10 +278,12 @@ function KleejaOnline ()
 
 }#End function
 	
+	
 /*
 * visitors calculator
 * parameters : none
 */
+/*
 function visit_stats ()
 {
 		global $SQL,$usrcp,$dbprefix,$stat_today;
@@ -338,7 +340,7 @@ function visit_stats ()
 			
 			($hook = kleeja_run_hook('visit_stats_func')) ? eval($hook) : null; //run hook	
 }#end func
-	
+*/	
 /*
 *for ban ips .. 
 *parameters : none

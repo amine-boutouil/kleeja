@@ -140,8 +140,9 @@ CREATE TABLE `{$dbprefix}online` (
   `username` varchar(100) collate utf8_bin NOT NULL,
   `agent` varchar(100) collate utf8_bin NOT NULL,
   `time` int(10) NOT NULL,
+  `session` varchar(100) NOT NULL,
   PRIMARY KEY  (`id`),
-  UNIQUE KEY `ip` (`ip`)
+  UNIQUE KEY `session` (`session`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 ";
 

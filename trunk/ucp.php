@@ -522,16 +522,13 @@ switch ($_GET['go'])
 				
 				($hook = kleeja_run_hook('submit_profile')) ? eval($hook) : null; //run hook
 				
-				if(empty($_POST['pname']) || empty($_POST['pmail']))
-				{
-					$ERRORS[] = $lang['EMPTY_FIELDS'];
-				}	
-				elseif(!empty($_POST['ppass_new'])  && (($_POST['ppass_new'] !=  $_POST['ppass_new2']) 
+				
+				if(!empty($_POST['ppass_new'])  && (($_POST['ppass_new'] !=  $_POST['ppass_new2']) 
 						||  empty($_POST['ppass_old']) || (!$usrcp->data($usrcp->name(), $_POST['ppass_old']))))
 				{
 					$ERRORS[] = $lang['PASS_O_PASS2'];
 				}
-				else if (!eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$", trim($_POST['pmail'])))
+				else if (!empty($_POST['pppass_old'])  && (!eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$", trim($_POST['pmail'])) || empty($_POST['pmail']) || (!$usrcp->data($usrcp->name(), $_POST['pppass_old']))))
 				{
 					$ERRORS[] = $lang['WRONG_EMAIL'];
 				}
@@ -539,7 +536,7 @@ switch ($_GET['go'])
 				//no errors , do it
 				if(empty($ERRORS))
 				{
-						$mail			= "mail='" . $SQL->escape($_POST['pmail']) . "',";
+						$mail			= (!empty($_POST['pppass_old'])) ? "mail='" . $SQL->escape($_POST['pmail']) . "'," : '';
 						$show_my_filecp	= "show_my_filecp='" . intval($_POST['show_my_filecp']) . "'";
 						$pass			= (!empty($_POST['ppass_new'])) ? "password='" . md5($SQL->escape($_POST['ppass_new'])) . "'" : "";
 						$comma			= (!empty($_POST['ppass_new']))? "," : "";

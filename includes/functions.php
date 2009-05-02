@@ -222,6 +222,7 @@ function KleejaOnline ()
 		$time			= time();  
 		$timeout2		= $time-$timeout;  
 		$username		= ($usrcp->name()) ? $usrcp->name(): '-1';
+		$session		= session_id();
 		
 		//
 		//for stats 
@@ -250,19 +251,20 @@ function KleejaOnline ()
 		($hook = kleeja_run_hook('anotherbots_onlline_func')) ? eval($hook) : null; //run hook
 		
 		//---
+		
 		$rep_query = array(
-								'REPLACE'	=> 'ip, username, agent, time',
+								'REPLACE'	=> 'ip, username, agent, time, session',
 								'INTO'		=> "{$dbprefix}online",
-								'VALUES'	=> "'$ip','$username','$agent','$time'",
-								'UNIQUE'	=>  "ip='$ip'"
+								'VALUES'	=> "'$ip','$username','$agent','$time','$session'",
+								'UNIQUE'	=>  "session='$session'"
 							);
 		($hook = kleeja_run_hook('qr_rep_ifnot_onlline_func')) ? eval($hook) : null; //run hook
 		$SQL->build($rep_query);
 
 
-		//every 1 hour this will clean online table
-		if((time() - $config['last_online_time_update']) >= 3600)
-		{
+		//clean online table
+		//if((time() - $config['last_online_time_update']) >= 200)
+		//{
 			$query_del = array(
 							'DELETE'	=> "{$dbprefix}online",
 							'WHERE'		=> "time < $timeout2"
@@ -271,8 +273,8 @@ function KleejaOnline ()
 			$SQL->build($query_del);
 			
 			//update last_online_time_update 
-			update_config('last_online_time_update', time());
-		}
+			//update_config('last_online_time_update', time());
+	//	}
 		
 		($hook = kleeja_run_hook('KleejaOnline_func')) ? eval($hook) : null; //run hook	
 

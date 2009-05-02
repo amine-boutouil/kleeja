@@ -313,16 +313,6 @@ function do_config_export($srv, $usr, $pass, $nm, $prf, $fpath)
 		$data	.= "\n\n\n";
 		$data	.= "//for integration with script [ must change user systen from admin cp ] \n";
 		$data	.= '$script_path		= \''. str_replace("'","\'", $fpath)."';// path of script (./forums)  \n";
-		$data	.= "\n\n\n";
-		$data	.= "//for use ftp account to uplaod [ Under Develpment ] \n";
-		$data	.= '$use_ftp		= 0;'."// 1 : yes  - 0 : no   \n";
-		$data	.= '$ftp_server		= "ftp.example.com";'."// ...   \n";
-		$data	.= '$ftp_user		= "";'."//    \n";
-		$data	.= '$ftp_pass		= "";'."//    \n";
-		$data	.= "\n\n\n";
-		$data	.= "// stop hook system if you need, to stop remove the \\ from the next line  \n";
-		$data	.= "//define('STOP_HOOKS', true); \n";
-		$data	.= "// \n";
 		$data	.= "\n\n";
 		$data	.= '?'.'>';
 	

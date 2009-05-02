@@ -474,10 +474,6 @@ function process ()
 											else
 											{
 												$data = fetch_remote_file($_POST['file'][$i], $this->folder . "/" . $this->filename2);
-												//then ..write new file
-												$fp2 = fopen($this->folder . "/" . $this->filename2, "w");
-												fwrite($fp2, $data);
-												fclose($fp2);
 											}
 										}
 										else

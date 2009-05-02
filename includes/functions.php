@@ -1052,18 +1052,8 @@ function fetch_remote_file($url, $save_in = false)
 
 	($hook = kleeja_run_hook('kleeja_fetch_remote_file_func')) ? eval($hook) : null; //run hook
 
-	if(function_exists("curl_init"))
-	{
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, $url);
-		curl_setopt($ch, CURLOPT_HEADER, 0);
-		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
-		$data = curl_exec($ch);
-		curl_close($ch);
-		return $data;
-	}
-	else if(function_exists("fsockopen"))
+
+	if(function_exists("fsockopen"))
 	{
 	    $url_parsed = parse_url($url);
 	    $host = $url_parsed['host'];
@@ -1115,6 +1105,17 @@ function fetch_remote_file($url, $save_in = false)
 		}
 		
 		return $in;
+	}
+	else if(function_exists("curl_init"))
+	{
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_HEADER, 0);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+		$data = curl_exec($ch);
+		curl_close($ch);
+		return $data;
 	}
 	else
 	{

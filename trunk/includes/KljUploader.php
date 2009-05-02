@@ -335,11 +335,11 @@ function process ()
 							//
 							// no errors , so uploading
 							//
-								if (!$use_ftp)
-								{
-											($hook = kleeja_run_hook('move_uploaded_file_kljuploader')) ? eval($hook) : null; //run hook	
-											$file = move_uploaded_file($_FILES['file']['tmp_name'][$i], $this->folder . "/" . $this->filename2);
-								}
+								//if (!$use_ftp)
+								//{
+										($hook = kleeja_run_hook('move_uploaded_file_kljuploader')) ? eval($hook) : null; //run hook	
+										$file = move_uploaded_file($_FILES['file']['tmp_name'][$i], $this->folder . "/" . $this->filename2);
+								/*}
 								else // use ftp account
 								{
 											($hook = kleeja_run_hook('ftp_connect_kljuploader')) ? eval($hook) : null; //run hook
@@ -369,7 +369,7 @@ function process ()
 											// Upload the file
 											$file = ftp_put($conn_id, $this->folder . "/" . $this->filename2, $_FILES['file']['tmp_name'][$i], $ftp_method);
 											ftp_close($conn_id);
-								}
+								}*/
 
 								if ($file)
 								{

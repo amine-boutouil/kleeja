@@ -86,9 +86,8 @@
 		$visitornum		= $usersnum	=	0;
 		$show_online	= true;
 		$OnlineNames	= array();
-		$timeout		= 200; //seconds
-		$time			= time();  
-		$timeout2		= $time-$timeout;  
+		$timeout		= 100; //second  
+		$timeout2		= time()-$timeout;  
 		
 		$query = array(
 						'SELECT'	=> 'DISTINCT(n.ip), n.username, n.agent',

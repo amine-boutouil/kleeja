@@ -92,7 +92,7 @@
 		$query = array(
 						'SELECT'	=> 'DISTINCT(n.ip), n.username, n.agent',
 						'FROM'		=> "{$dbprefix}online n",
-						'WHERE'		=> "n.time > $timeout2"
+						'WHERE'		=> "n.time > '$timeout2'"
 				);
 				
 		($hook = kleeja_run_hook('qr_select_online_index_page')) ? eval($hook) : null; //run hook

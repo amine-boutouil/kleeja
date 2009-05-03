@@ -263,18 +263,18 @@ function KleejaOnline ()
 
 
 		//clean online table
-		//if((time() - $config['last_online_time_update']) >= 200)
-		//{
+		if((time() - $config['last_online_time_update']) >= 3600)
+		{
 			$query_del = array(
 							'DELETE'	=> "{$dbprefix}online",
-							'WHERE'		=> "time < $timeout2"
+							'WHERE'		=> "time < '$timeout2'"
 						);
 			($hook = kleeja_run_hook('qr_del_ifgo_onlline_func')) ? eval($hook) : null; //run hook									
 			$SQL->build($query_del);
 			
 			//update last_online_time_update 
-			//update_config('last_online_time_update', time());
-	//	}
+			update_config('last_online_time_update', time());
+		}
 		
 		($hook = kleeja_run_hook('KleejaOnline_func')) ? eval($hook) : null; //run hook	
 

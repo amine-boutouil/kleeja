@@ -1,4 +1,4 @@
-
+﻿
         
 <div class="middle">
 <br />
@@ -42,6 +42,33 @@
                 <input class="button2" name="submit" type="submit" value="{lang.UPDATE_USERS}" />
 </fieldset>
 </form>
+
+
+<form method="post" action="">
+        <fieldset>
+                <legend>{lang.NEW_USER}</legend>
+
+<table style="width: 100%">
+        <tr style="background-color:silver">
+                <td>{lang.USERNAME}</td>
+                <td>{lang.EMAIL}</td>
+                <td>{lang.PASSWORD}</td>
+                <!-- admin users info tr extra -->
+        </tr>
+        <tr style="background-color:#F5F5F5">
+                <td><label><input type="text" name="lname" value="" size="20"></label></td>
+                <td><label><input type="text" name="lmail" value="" size="20"></label></td>
+                <td><label><input type="password" name="lpass" value="" size="10"></label></td>
+                <!-- admin users data tr extra -->
+</table>
+
+</fieldset>
+<fieldset class="quick" style="text-align:center">
+                <input class="button2" name="newuser" type="submit" value="{lang.UPDATE_USERS}" />
+</fieldset>
+</form>
+
+
 <div style="text-align:center"><b>{page_nums}</b></div>
 </div>
 

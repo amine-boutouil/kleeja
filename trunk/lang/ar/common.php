@@ -430,7 +430,8 @@ $lang = array_merge($lang, array(
 	'PASS_ON_CHANGE'		=> 'تغيير كلمة المرور',
 	'MOST_EVER_ONLINE'		=> 'اكثر عدد تواجد بالمركز كان',
 	'ON'					=> 'في',
-	'LAST_REG'				=> 'اخر عضو مسجل هو'
+	'LAST_REG'				=> 'اخر عضو مسجل هو',
+	'NEW_USER'				=> 'عضو جديد',
 ));
 
 ?>

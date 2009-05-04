@@ -23,7 +23,72 @@
 					'ORDER BY'	=> 'id DESC'
 					);
 						
-		
+		if (isset($_POST['newuser']))
+		{
+			($hook = kleeja_run_hook('register_submit')) ? eval($hook) : null; //run hook
+						
+						if (trim($_POST['lname'])=='' || trim($_POST['lpass'])=='' || trim($_POST['lmail'])=='')
+						{
+							$ERRORS[] = $lang['EMPTY_FIELDS'];
+						}	
+						else if (!eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$", trim($_POST['lmail'])))
+						{
+							$ERRORS[] = $lang['WRONG_EMAIL'];
+						}
+						else if (strlen(trim($_POST['lname'])) < 4 || strlen(trim($_POST['lname'])) > 30)
+						{
+							$ERRORS[] = $lang['WRONG_NAME'];
+						}
+						else if ($SQL->num_rows($SQL->query("SELECT * FROM `{$dbprefix}users` WHERE name='" . trim($SQL->escape($_POST["lname"])) . "'")) !=0 )
+						{
+							$ERRORS[] = $lang['EXIST_NAME'];
+						}
+						else if ($SQL->num_rows($SQL->query("SELECT * FROM `{$dbprefix}users` WHERE mail='" . trim($SQL->escape($_POST["lmail"])) . "'")) !=0 )
+						{
+							$ERRORS[] = $lang['EXIST_EMAIL'];
+						}
+						
+						//no errors, lets do process
+						if(empty($ERRORS))	 
+						{
+							$name			= (string) $SQL->escape(trim($_POST['lname']));
+							$pass			= (string) md5($SQL->escape(trim($_POST['lpass'])));
+							$mail			= (string) trim($_POST['lmail']);
+							
+							$insert_query	= array('INSERT'	=> 'name ,password ,mail,admin, session_id',
+													'INTO'		=> "{$dbprefix}users",
+													'VALUES'	=> "'$name', '$pass', '$mail','0',''"
+												);
+							if (!$SQL->build($insert_query))
+							{
+								die($lang['CANT_INSERT_SQL']);	
+							}	
+							else
+							{
+								$last_user_id = $SQL->insert_id();
+
+								//update number of stats
+								$update_query	= array('UPDATE'	=> "{$dbprefix}stats",
+													'SET'		=> "users=users+1,lastuser='$name'",
+												);
+								if (!$SQL->build($update_query))
+								{
+									die($lang['CANT_UPDATE_SQL']);
+								}
+							}
+						}
+						else
+						{
+							$errs	=	'';
+							foreach($ERRORS as $r)
+							{
+								$errs .= '- ' . $r . '. <br />';
+							}
+							
+							die($errs);
+						}
+		}
+		else {
 		//posts search ..
 		if (isset($_POST['search_user']))
 		{
@@ -122,9 +187,9 @@
 	$page_nums 		= $Pager->print_nums($config['siteurl'].'admin.php?cp=users'); 
 	//if not noraml user system 
 	$user_not_normal =$config['user_system'] != 1 ?  true : false;
-		
+	}
 	//after submit 
-	if (isset($_POST['submit']))
+	if (isset($_POST['submit']) || isset($_POST['newuser']))
 	{
 			$text	= $lang['USERS_UPDATED'] . '<meta HTTP-EQUIV="REFRESH" content="0; url=./admin.php?cp=users&amp;page=' . intval($_GET['page']). '">' ."\n";
 			$stylee	= "admin_info";

@@ -427,6 +427,7 @@ $lang = array_merge($lang, array(
 	'MOST_EVER_ONLINE'		=> 'Most users ever online was',
 	'ON'					=> 'ON',
 	'LAST_REG'				=> 'newest member',
+	'NEW_USER'				=> 'New user',
 	'S_TRANSLATED_BY' => 'Translated By <a href="http://www.fenix4web.com/">Fenix4Web</a>',
 ));
 

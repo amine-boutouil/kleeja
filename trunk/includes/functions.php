@@ -1792,4 +1792,92 @@ if(!function_exists('htmlspecialchars_decode'))
 	}
 }
 
+//
+// administarator sometime need some files and delete other .. we
+// do that for him .. becuase he has no time .. :)   
+//last_down - $config[del_f_day]
+//
+function klj_clean_old_files($from = 0)
+{
+	global $config, $SQL;
+
+	if((int) $config['del_f_day'] <= 0)
+	{
+		return;
+	}
+
+	if(!$stat_last_f_del || empty($stat_last_f_del))
+	{
+		$stat_last_f_del = time();
+	}
+	
+	if ((time() - $stat_last_f_del) >= 86400)
+	{
+		$totaldays	= (time() - ($config['del_f_day']*86400));
+		$not_today	= time() - 86400;
+		
+		$query = array(
+					'SELECT'	=> 'f.id, f.last_down, f.name, f.folder, f.time',
+					'FROM'		=> "{$dbprefix}files f",
+					'WHERE'		=> "f.last_down < $totaldays AND f.time < $not_today AND f.id > $from",
+					'ORDER BY'	=> 'f.id  ASC',
+					'LIMIT'		=> '20',
+					);
+					
+		($hook = kleeja_run_hook('qr_select_delfiles_cache')) ? eval($hook) : null; //run hook					
+
+		if($SQL->num_rows($result) == 0)
+		{
+		   	 //update $stat_last_f_del !!
+			$update_query = array(
+						'UPDATE'	=> "{$dbprefix}stats",
+						'SET'		=> "last_f_del ='" . time() . "'",
+						);
+						
+			($hook = kleeja_run_hook('qr_update_delfiles_date_cache')) ? eval($hook) : null; //run hook
+		
+			$SQL->build($update_query);		
+			//delete stats cache
+			delete_cache("data_stats");
+			update_config('klj_clean_files_from', '0');	
+		}
+		
+		$last_id_from = 0;
+		while($row=$SQL->fetch_array($result))
+		{
+
+					$query_del = array(
+							'DELETE'	=> "{$dbprefix}files",
+							'WHERE'		=> "id='" . intval($row['id']) . "' AND last_down < $totaldays"
+							);
+									
+					($hook = kleeja_run_hook('qr_del_delfiles_cache')) ? eval($hook) : null; //run hook	
+								
+					if (!$SQL->build($query_del))
+					{
+						die($lang['CANT_DELETE_SQL']);
+					}
+					
+					//delete from folder ..
+					if (file_exists($row['folder'] . "/" . $row['name']))
+					{
+						@kleeja_unlink ($row['folder'] . "/" . $row['name']);
+					}
+					//delete thumb
+					if (file_exists($row['folder'] . "/thumbs/" . $row['name'] ))
+					{
+						@kleeja_unlink ($row['folder'] . "/thumbs/" . $row['name'] );
+					}
+
+		$last_id_from = $row['id'];
+	    }#END WHILE
+		
+		
+		update_config('klj_clean_files_from', $last_id_from);
+		
+
+    } //stat_del
+
+}
+
 ?>

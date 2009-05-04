@@ -428,6 +428,9 @@ $lang = array_merge($lang, array(
 	'SCRIPT_AUTH_PATH_WRONG'	=> 'مسار السكربت %s الذي تم ربط عضويات كليجا معه خاطئ ,قم بظبطه',
 	'SHOW_MY_FILECP'		=> 'السماح بعرض ملفاتي',
 	'PASS_ON_CHANGE'		=> 'تغيير كلمة المرور',
+	'MOST_EVER_ONLINE'		=> 'اكثر عدد تواجد بالمركز كان',
+	'ON'					=> 'في',
+	'LAST_REG'				=> 'اخر عضو مسجل هو'
 ));
 
 ?>

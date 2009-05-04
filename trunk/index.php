@@ -143,7 +143,23 @@
 		 but you must know this is illegial method ... 
 		*/
 		$allnumbers = $usersnum + $visitornum;
-
+		
+		//check & update most ever users and vistors was online 
+		if($stat_most_user_online_ever < $allnumbers)
+		{
+			
+			$stat_most_user_online_ever = $allnumbers;
+			
+			if (!$SQL->build(array('UPDATE'	=> "{$dbprefix}stats",'SET'	=> "most_user_online_ever='" . intval($allnumbers) . "',last_muoe='" . time() . "'")))
+			{
+				die($lang['CANT_UPDATE_SQL']);
+			}
+			
+			delete_cache('data_stats');
+		}
+		
+		$most_online = $stat_most_user_online_ever; 
+		$on_muoe	 = gmdate("d-m-Y H:a", $stat_last_muoe);
 		($hook = kleeja_run_hook('if_online_index_page')) ? eval($hook) : null; //run hook	
 	
 	}#allow_online

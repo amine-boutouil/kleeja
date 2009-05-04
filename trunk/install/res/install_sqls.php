@@ -68,9 +68,12 @@ CREATE TABLE `{$dbprefix}stats` (
   `google_num` INT(11) UNSIGNED NOT NULL,
   `last_yahoo` INT(11) UNSIGNED NOT NULL,
   `yahoo_num` INT(11) UNSIGNED NOT NULL,
-   `rules` text collate utf8_bin NOT NULL,
-   `ex_header` text collate utf8_bin NOT NULL,
-   `ex_footer` text collate utf8_bin NOT NULL
+  `rules` text collate utf8_bin NOT NULL,
+  `ex_header` text collate utf8_bin NOT NULL,
+  `ex_footer` text collate utf8_bin NOT NULL,
+  `most_user_online_ever` int(11) NOT NULL,
+  `lastuser` varchar(300) collate utf8_bin NOT NULL,
+  `last_muoe` int(10) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 ";
 

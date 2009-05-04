@@ -424,6 +424,9 @@ $lang = array_merge($lang, array(
 	'SCRIPT_AUTH_PATH_WRONG'	=> 'Path of %s is not valid, change it now.',
 	'SHOW_MY_FILECP'		=> 'Show my files',
 	'PASS_ON_CHANGE'		=> 'Change password',
+	'MOST_EVER_ONLINE'		=> 'Most users ever online was',
+	'ON'					=> 'ON',
+	'LAST_REG'				=> 'newest member',
 	'S_TRANSLATED_BY' => 'Translated By <a href="http://www.fenix4web.com/">Fenix4Web</a>',
 ));
 

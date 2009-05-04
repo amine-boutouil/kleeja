@@ -204,9 +204,9 @@ switch ($_GET['go'])
 								$text	= $lang['REGISTER_SUCCESFUL'] . '<a href="ucp.php?go=login">' . $lang['LOGIN'] . '</a>';
 								//update number of stats
 								$update_query	= array('UPDATE'	=> "{$dbprefix}stats",
-													'SET'		=> 'users=users+1',
+													'SET'		=> "users=users+1,lastuser='$name'",
 												);
-							
+												
 								($hook = kleeja_run_hook('qr_update_no_users_register')) ? eval($hook) : null; //run hook
 								if (!$SQL->build($update_query))
 								{

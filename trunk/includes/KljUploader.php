@@ -265,7 +265,7 @@ function process ()
 				($hook = kleeja_run_hook('submit_filesupload_kljuploader')) ? eval($hook) : null; //run hook	
 			
 				//
-				for($i=0;$i<$this->filesnum;$i++)
+				for($i=0;$i<=$this->filesnum;$i++)
 				{
 					$this->filename2	= explode(".", $_FILES['file']['name'][$i]);
 					$this->filename2	= $this->filename2[count($this->filename2)-1];

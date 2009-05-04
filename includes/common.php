@@ -234,6 +234,12 @@
 		$S_TRANSLATED_BY = true;
 	}
 	
+	//clean files
+	if((int) $config['del_f_day'] > 0)
+	{
+		klj_clean_old_files($config['klj_clean_files_from']);
+	}
+
 	($hook = kleeja_run_hook('end_common')) ? eval($hook) : null; //run hook
 
 ?>

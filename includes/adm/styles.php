@@ -247,7 +247,7 @@ switch ($_GET['sty_t'])
 
 
 				//delete cache ..
-				delete_cache('tpl_' . $tpl_name);
+				delete_cache('tpl_' . str_replace('html','php',$tpl_name));
 				//show msg
 				$link	= './admin.php?cp=styles&amp;sty_t=style_orders&amp;style_id=' . $style_id . '&amp;tpl_choose=' . $tpl_name . '&amp;method=1';
 				$text	= $lang['TPL_UPDATED'] . '<br /> <a href="' . $link . '">' . $lang['GO_BACK_BROWSER'] . '</a><meta HTTP-EQUIV="REFRESH" content="3; url=' . $link . '">' ."\n";

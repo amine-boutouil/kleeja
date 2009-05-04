@@ -358,6 +358,7 @@ switch ($_GET['go'])
 		$s_c_t		= $stat_counter_today;
 		$s_c_y		= $stat_counter_yesterday;
 		$s_c_a		= $stat_counter_all;
+		$lst_reg	= $stat_last_user;
 		
 		($hook = kleeja_run_hook('stats_go_page')) ? eval($hook) : null; //run hook
 		

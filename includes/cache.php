@@ -246,6 +246,9 @@ if(!defined('STOP_HOOKS'))
 			$stat_last_yahoo		=  $row['last_yahoo'];
 			$stat_google_num		=  $row['google_num'];
 			$stat_yahoo_num			=  $row['yahoo_num'];
+			$stat_last_user			=  $row['lastuser'];
+			$stat_most_user_online_ever		=  $row['most_user_online_ever'];
+			$stat_last_muoe		=  $row['last_muoe'];
 			//$stat_rules				=  $row[rules];
 			
 			//write
@@ -262,6 +265,9 @@ if(!defined('STOP_HOOKS'))
 			$file_dataw .= '$stat_google_num 		=	\'' . $row['google_num'] . '\';' . "\n";
 			$file_dataw .= '$stat_last_yahoo 		=	\'' . $row['last_yahoo'] . '\';' . "\n";
 			$file_dataw .= '$stat_yahoo_num 		=	\'' . $row['yahoo_num'] . '\';' . "\n";
+			$file_dataw .= '$stat_last_user	 		=	\'' . $row['lastuser'] . '\';' . "\n";
+			$file_dataw .= '$stat_most_user_online_ever	 		=	\'' . $row['most_user_online_ever'] . '\';' . "\n";
+			$file_dataw .= '$stat_last_muoe	 		=	\'' . $row['last_muoe'] . '\';' . "\n";
 			//$file_dataw .= '$stat_rules				=	\'' . $row['rules'] . '\';' . "\n";
 			
 			($hook = kleeja_run_hook('while_fetch_stats_in_cache')) ? eval($hook) : null; //run hook

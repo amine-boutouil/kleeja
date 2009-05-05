@@ -149,6 +149,7 @@
 		{
 			
 			$stat_most_user_online_ever = $allnumbers;
+			$stat_last_muoe				= time();
 			
 			if (!$SQL->build(array('UPDATE'	=> "{$dbprefix}stats",'SET'	=> "most_user_online_ever='" . intval($allnumbers) . "',last_muoe='" . time() . "'")))
 			{
@@ -159,7 +160,7 @@
 		}
 		
 		$most_online = $stat_most_user_online_ever; 
-		$on_muoe	 = (!empty($stat_last_muoe)) ? gmdate("d-m-Y H:a", $stat_last_muoe) : '';
+		$on_muoe	 = gmdate("d-m-Y H:a", $stat_last_muoe);
 		($hook = kleeja_run_hook('if_online_index_page')) ? eval($hook) : null; //run hook	
 	
 	}#allow_online

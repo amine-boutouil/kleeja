@@ -425,7 +425,7 @@ $lang = array_merge($lang, array(
 	'SHOW_MY_FILECP'		=> 'Show my files',
 	'PASS_ON_CHANGE'		=> 'Change password',
 	'MOST_EVER_ONLINE'		=> 'Most users ever online was',
-	'ON'					=> 'ON',
+	'ON'					=> 'on',
 	'LAST_REG'				=> 'newest member',
 	'NEW_USER'				=> 'New user',
 	'S_TRANSLATED_BY' => 'Translated By <a href="http://www.fenix4web.com/">Fenix4Web</a>',

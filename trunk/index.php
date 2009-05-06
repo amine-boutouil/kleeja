@@ -156,7 +156,7 @@
 				die($lang['CANT_UPDATE_SQL']);
 			}
 			
-			delete_cache('data_stats');
+			//delete_cache('data_stats'); we don't use it any more [for best performance]
 		}
 		
 		$most_online = $stat_most_user_online_ever; 

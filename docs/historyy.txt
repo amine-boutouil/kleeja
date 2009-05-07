@@ -208,9 +208,13 @@ RC6:
 
 
 to do 1.0.1 - 1.0.5 : 
-- imrove reset passwords.
-- imrove captcha
+- improve reset passwords.
+- improve captcha
 - change passwords hashing to something else not md5
+- organize menus in general settings (options)
+- improve user system and add groups
+- add live download url option in id form featrue
+
 
 
 Thank you for reading this file. 

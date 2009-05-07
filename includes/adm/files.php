@@ -57,6 +57,16 @@
 	{
 		$query['ORDER BY'] = "f." . $SQL->escape($_REQUEST['order_by']) . " DESC";
 	}
+	
+	//display files or display pics and files only in search
+	if(empty($query['WHERE']))
+	{
+		$query['WHERE'] = "f.type NOT IN ('gif','jpg','png','bmp','jpeg','tif','tiff','GIF','JPG','PNG','BMP','JPEG','TIF','TIFF')";
+	}
+	else if (isset($_REQUEST['last_visit']))
+	{
+		$query['WHERE'] .= "AND f.type NOT IN ('gif','jpg','png','bmp','jpeg','tif','tiff','GIF','JPG','PNG','BMP','JPEG','TIF','TIFF')";
+	}
 
 	$result = $SQL->build($query);
 	

@@ -35,7 +35,7 @@
 						
 	if(isset($_GET['last_visit']))
 	{
-		$query['WHERE']	= "time > '". intval($_GET['last_visit']) . "' AND type IN ('gif','jpg','png','bmp','jpeg','tif','tiff')";
+		$query['WHERE']	= "time > '". intval($_GET['last_visit']) . "' AND type IN ('gif','jpg','png','bmp','jpeg','tif','tiff','GIF','JPG','PNG','BMP','JPEG','TIF','TIFF')";
 	}
 	else
 	{
@@ -72,7 +72,7 @@
 			$arr[]		= array('id'		=> $row['id'],
 								'tdnum'		=> ($tdnum==0) ? '<tr>': '',
 								'tdnum2'	=> ($tdnum==2) ? '</tr>' : '',
-								'name'		=> $row['name'],
+								'name'		=> ($row['real_filename'] == '' ? $row['name'] : $row['real_filename']),
 								'ip' 		=> $lang['IP'] . ':' . htmlspecialchars($row['user_ip']),
 								'href'		=> $row['folder'] . '/' . $row['name'],
 								'size'		=> $lang['FILESIZE']. ':' . Customfile_size($row['size']),

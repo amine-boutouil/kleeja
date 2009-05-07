@@ -428,6 +428,7 @@ $lang = array_merge($lang, array(
 	'ON'					=> 'on',
 	'LAST_REG'				=> 'newest member',
 	'NEW_USER'				=> 'New user',
+	'LIVEXTS'				=> 'Live extensions (separate by comma)',
 	'S_TRANSLATED_BY' => 'Translated By <a href="http://www.fenix4web.com/">Fenix4Web</a>',
 ));
 

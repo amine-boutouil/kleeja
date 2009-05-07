@@ -56,7 +56,7 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 					@extract ($row);
 				}
 				$SQL->freeresult($result);
-
+				
 				// some vars
 				$fname	 	= $name;
 				$fname2 	= str_replace('.', '-', htmlspecialchars($name));
@@ -69,6 +69,24 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 				else
 				{
 					$url_file	= ($config['mod_writer']) ? $config['siteurl'] . "down-" . $id . ".html" : $config['siteurl'] . "download.php?down=" . $id;
+				}
+				
+				if(!empty($config['livexts']))
+				{
+					$livexts = explode(',',$config['livexts']);
+					if(in_array($type,$livexts))
+					{
+						if (isset($_GET['filename']))
+						{
+							$url_filex	= ($config['mod_writer']) ? $config['siteurl'] . "downexf-" . $fname2 . ".html" : $config['siteurl'] . "download.php?downexf=" . $fname;
+						}
+						else
+						{
+							$url_filex	= ($config['mod_writer']) ? $config['siteurl'] . "downex-" . $id . ".html" : $config['siteurl'] . "download.php?downex=" . $id;
+						}
+					
+						header('Location:' . $url_filex);
+					}
 				}
 				
 				$REPORT		= ($config['mod_writer']) ?  $config['siteurl'] . "report-" . $id . ".html" :  $config['siteurl'] . "go.php?go=report&amp;id=" . $id;
@@ -109,7 +127,7 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 //
 //download file 
 //
-else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) || isset($_GET['thmb']) ||  isset($_GET['imgf']) || isset($_GET['thmbf']))
+else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) || isset($_GET['thmb']) ||  isset($_GET['imgf']) || isset($_GET['thmbf']) || isset($_GET['downex']) || isset($_GET['downexf']))
 {
 		($hook = kleeja_run_hook('begin_down_go_page')) ? eval($hook) : null; //run hook	
 	
@@ -164,15 +182,15 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 		}
 		
 		//download by id or filename
-		$is_id_filename = (isset($_GET['downf']) || isset($_GET['imgf']) || isset($_GET['thmbf'])) ? true : false;
+		$is_id_filename = (isset($_GET['downf']) || isset($_GET['imgf']) || isset($_GET['thmbf']) || isset($_GET['downexf'])) ? true : false;
 		
 		if($is_id_filename)
 		{
-			($config['mod_writer']) ? $filename = (isset($_GET['downf']) && isset($_GET['x'])) ? $SQL->escape($_GET['downf']) . '.' . $SQL->escape($_GET['x']) : ((isset($_GET['imgf']) && isset($_GET['x'])) ? $SQL->escape($_GET['imgf']) . '.' . $SQL->escape($_GET['x']) : ((isset($_GET['thmbf']) && isset($_GET['x'])) ? $SQL->escape($_GET['thmbf']) . '.' . $SQL->escape($_GET['x']) : null)) : $filename = (isset($_GET['downf'])) ? $SQL->escape($_GET['downf']) : ((isset($_GET['imgf'])) ? $SQL->escape($_GET['imgf']) : ((isset($_GET['thmbf'])) ? $SQL->escape($_GET['thmbf']) : null));
+			($config['mod_writer']) ? $filename = (isset($_GET['downf']) && isset($_GET['x'])) ? $SQL->escape($_GET['downf']) . '.' . $SQL->escape($_GET['x']) : ((isset($_GET['imgf']) && isset($_GET['x'])) ? $SQL->escape($_GET['imgf']) . '.' . $SQL->escape($_GET['x']) : ((isset($_GET['thmbf']) && isset($_GET['x'])) ? $SQL->escape($_GET['thmbf']) . '.' . $SQL->escape($_GET['x']) : ((isset($_GET['downex']) && isset($_GET['x'])) ? $SQL->escape($_GET['downexf']) . '.' . $SQL->escape($_GET['x']) : null))) : $filename = (isset($_GET['downf'])) ? $SQL->escape($_GET['downf']) : ((isset($_GET['imgf'])) ? $SQL->escape($_GET['imgf']) : ((isset($_GET['thmbf'])) ? $SQL->escape($_GET['thmbf']) : ((isset($_GET['downexf'])) ? $SQL->escape($_GET['downexf']) : null)));
 		}
 		else
 		{
-			$id = isset($_GET['down']) ? intval($_GET['down']) : (isset($_GET['img']) ? intval($_GET['img']) : (isset($_GET['thmb']) ? intval($_GET['thmb']) : null));
+			$id = isset($_GET['down']) ? intval($_GET['down']) : (isset($_GET['img']) ? intval($_GET['img']) : (isset($_GET['thmb']) ? intval($_GET['thmb']) : (isset($_GET['downex']) ? intval($_GET['downex']) : null)));
 		}
 		
 		// worst case default
@@ -199,11 +217,12 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 			die($lang['CANT_UPDATE_SQL']);
 		}
 			
+		$livexts = explode(",",$config['livexts']);
 		//get info file
 		$query = array(
 						'SELECT'	=> 'f.id, f.name, f.folder, f.type',
 						'FROM'		=> "{$dbprefix}files f",
-						'WHERE'		=> ($is_id_filename) ? "name='" . $filename . "'" : "id='" . $id . "'",
+						'WHERE'		=> ($is_id_filename) ? "name='" . $filename . "'" . ((isset($_GET['downexf'])) ? "AND f.type IN ('" . implode("', '", $livexts) . "')" : '') : "id='" . $id . "'" . ((isset($_GET['downex'])) ? "AND f.type IN ('" . implode("', '", $livexts) . "')" : ''),
 					);
 						
 				

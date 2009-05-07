@@ -5,6 +5,8 @@ RewriteRule ^download([0-9]*).html$ download.php?id=$1
 RewriteRule ^downloadf-([a-zA-Z0-9_-]*)-([a-zA-Z0-9_-]*).html$ download.php?filename=$1&x=$2
 RewriteRule ^down-([0-9]*).html$ download.php?down=$1
 RewriteRule ^downf-([a-zA-Z0-9_-]*)-([a-zA-Z0-9_-]*).html$ download.php?downf=$1&x=$2
+RewriteRule ^downex-([0-9]*).html$ download.php?down=$1
+RewriteRule ^downexf-([a-zA-Z0-9_-]*)-([a-zA-Z0-9_-]*).html$ download.php?downexf=$1&x=$2
 RewriteRule ^thumb([0-9]*).html$ download.php?thmb=$1
 RewriteRule ^imagef-([a-zA-Z0-9_-]*)-([a-zA-Z0-9_-]*).html$ download.php?imgf=$1&x=$2
 RewriteRule ^thumbf-([a-zA-Z0-9_-]*)-([a-zA-Z0-9_-]*).html$ download.php?thmbf=$1&x=$2

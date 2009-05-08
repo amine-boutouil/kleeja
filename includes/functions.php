@@ -892,15 +892,15 @@ function kleeja_get_page ()
 		}
 		if(isset($_SERVER['QUERY_STRING']))
 		{
-			$location .= "?".$_SERVER['QUERY_STRING'];
+			$location .= "?" . $_SERVER['QUERY_STRING'];
 		}
 		elseif(isset($_ENV['QUERY_STRING']))
 		{
-			$location = "?".$_ENV['QUERY_STRING'];
+			$location = "?" . $_ENV['QUERY_STRING'];
 		}
 	}
 
-	return $location;
+	return basename($location);
 }
 
 

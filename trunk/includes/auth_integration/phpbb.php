@@ -434,14 +434,14 @@ function _hash_crypt_private($password, $setting, &$itoa64)
 */
 function unique_id($extra = 'c')
 {
-	global $forum_prefix;
-	global $forum_srv,$forum_user,$forum_pass,$forum_db;
+	global $script_prefix;
+	global $script_srv,$script_user,$script_pass,$script_db;
 	
-	$SQLBB	= new SSQL($forum_srv,$forum_user,$forum_pass,$forum_db);
-	unset($forum_pass); // We do not need this any longe
+	$SQLBB	= new SSQL($script_srv,$script_user,$script_pass,$script_db);
+	unset($script_pass); // We do not need this any longe
 	$query = array(
 							'SELECT'	=> 'config_value',
-							'FROM'		=> "`{$forum_prefix}config`",
+							'FROM'		=> "`{$script_prefix}config`",
 							'WHERE'		=>"config_name='rand_seed'"	
 					);
 								

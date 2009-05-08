@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" dir="rtl"/><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>...Kleeja...</title><style type="text/css">
 * { padding: 0;margin: 0;}
@@ -110,23 +110,25 @@ kleeja  : مجلد سكربت كليجا
 <div class="code">
 	//for integration with other scripts [ must change user systen from admin cp 
 	] <br />
-	$script_path = &#39;./vb&#39;;// مجلد السكربت كمثال <span lang="en-us">v<span class="style1">b</span></span><br />
-	$script_encoding = &#39;windows-1256&#39;;// ترميز الصفحات السكربت <br />
-</div>
+	$script_path = &#39;./phpbb&#39;;// مجلد السكربت كمثال <span lang="en-us">v<span class="style1">b</span></span><br />
+	$script_encoding = &#39;utf-8&#39;;// ترميز الصفحات السكربت <br />
 <br />
-او الربط من قاعدة البيانات مباشرة كتالي<br />
-<span lang="en-us">[</span>كمثال<span lang="en-us">]</span><div class="code">
-	//for integration with other scripts [ must change user systen from admin cp 
-	] <br />
-	$script_encoding = &#39;windows-1256&#39;;// ترميز الصفحات السكربت <br />
+
 	$script_srv = &#39;localhost&#39;;<br />
-	$script_db = &#39;vb&#39;;<br />
-	$script_user = &#39;root&#39;;<br />
-	$script_pass = &#39;pass&#39;;<br />
+	$script_db = &#39;&#39;;<br />
+	$script_user = &#39;&#39;;<br />
+	$script_pass = &#39;&#39;;<br />
+	$script_prefix		= '';
 </div>
 <br />
-<span lang="en-us">&nbsp; </span>&nbsp;<strong>لايمكنك استخدام الطريقه الثانية</strong><span lang="en-us"><strong> 
-phbb3 </strong></span><strong>ملاحظة : اذا كنت تسخدم منتدى </strong>
+<strong>اذا كنت تستخدم منتدى غير phpbb3</strong>
+يمكنك ان تتجاهل :<br />
+<div class="code">
+$script_path = &#39;./phpbb&#39;;// مجلد السكربت كمثال 
+</div>
+
+<br />
+
 <br>
 
 احفظ الملف واذهب للدخول , اذا كنت مديرا بالسكربت سوف يتعرف عليك كمدير للسكربت .. 

@@ -1384,6 +1384,7 @@ function get_mime_for_header($ext)
 		"jpe" => "image/jpeg",
 		"jpeg" => "image/jpeg",
 		"jpg" => "image/jpeg",
+		"png" => "image/png",
 		"js" => "application/x-javascript",
 		"latex" => "application/x-latex",
 		"lha" => "application/octet-stream",

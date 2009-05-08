@@ -166,16 +166,18 @@
 					{
 						$errs	.= '- ' . $r . '. <br />';
 					}
-					kleeja_admin_err($errs,false);
+					//kleeja_admin_err($errs,false);
 				}
 			}
-		}
-		else 
-		{
+		
 			//show template login .
 			//body
 			$action	= "admin.php?go=login&amp;cp=" . $go_to;
-						
+			if(!empty($errs))
+			{
+				$err = true;
+			}
+			
 			if($config['user_system'] != '1' && isset($script_encoding) && function_exists('iconv') && !eregi('utf',strtolower($script_encoding)) && !defined('DISABLE_INTR'))
 			{
 				//send custom chaeset header

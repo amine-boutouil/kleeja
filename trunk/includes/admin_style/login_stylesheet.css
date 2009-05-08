@@ -1,4 +1,4 @@
-/*
+﻿/*
 Design by tar3q
 http://www.tar3q.com
 */
@@ -131,6 +131,11 @@ input:focus,select:focus,textarea:focus {
 	background: url(images/login/logo.png) no-repeat top left;
 	width: 480px;
 	height: 57px;
+}
+.error {
+	color: #333;
+	background:#ffebe8;
+	border: 1px solid #dd3c10;
 }
 
 #section-box  { 

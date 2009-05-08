@@ -41,7 +41,7 @@ switch ($_GET['go'])
 	case "login" : 
 			$stylee					= "login";
 			$titlee					= $lang['LOGIN'];
-			$action					= "ucp.php?go=login";
+			$action					= "ucp.php?go=login" . (isset($_GET['return']) ? '&amp;return=' . htmlspecialchars($_GET['return']) : '');
 			$forget_pass_link		= "ucp.php?go=get_pass";
 			
 			($hook = kleeja_run_hook('login_before_submit')) ? eval($hook) : null; //run hook
@@ -92,7 +92,7 @@ switch ($_GET['go'])
 					{
 						if(isset($_GET['return']))
 						{
-							header('Location: ' . urlencode($_GET['return']));
+							header('Location: ./' . str_replace(array('ooklj1oo', 'ooklj2oo', 'ooklj3oo'), array('?', '/', '='), urlencode($_GET['return'])));
 							exit;
 						}
 						

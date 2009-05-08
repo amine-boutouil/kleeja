@@ -25,9 +25,7 @@
 		</div>
 	</div>
 </div>
-<IF NAME="err">
-<div class="error">{errs}</div>
-</IF>
+
 <div id="content-box">
 	<div class="padding">
 		<div id="element-box" class="login">
@@ -39,6 +37,16 @@
 			<div class="m">
 				<div class="klogo"></div>
 					<h1>{lang.LOGIN} {lang.KLEEJA_CP}</h1>
+					
+<IF NAME="err">	
+<dl id="system-message">
+<dd class="error">
+<ul>
+<li>{errs}</li>
+</ul>
+</dd>
+</dl>
+</IF>
 						<div id="section-box">
 							<div class="t">
 								<div class="t">

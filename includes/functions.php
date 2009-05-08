@@ -1451,6 +1451,7 @@ function get_mime_for_header($ext)
 		"roff" => "application/x-troff",
 		"rtf" => "application/rtf",
 		"rtx" => "text/richtext",
+		"swf" => "application/x-shockwave-flash",
 		"scd" => "application/x-msschedule",
 		"sct" => "text/scriptlet",
 		"setpay" => "application/set-payment-initiation",

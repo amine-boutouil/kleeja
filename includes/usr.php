@@ -41,7 +41,7 @@ class usrcp
 						($hook = kleeja_run_hook('data_func_usr_class')) ? eval($hook) : null; //run hook
 						
 						
-						if($config['user_system'] != '1')
+						if($config['user_system'] != '1' && !defined('DISABLE_INTR'))
 						{
 							if(file_exists($path . 'auth_integration/' . trim($config['user_system']) . '.php'))
 							{	
@@ -60,7 +60,7 @@ class usrcp
 				function usernamebyid ($user_id) 
 				{
 					global $config, $path;
-					if($config['user_system'] != '1')
+					if($config['user_system'] != '1' && !defined('DISABLE_INTR'))
 					{
 						if(file_exists($path . 'auth_integration/' . trim($config['user_system']) . '.php'))
 						{	

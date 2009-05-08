@@ -91,6 +91,19 @@ input:focus,select:focus,textarea:focus {
 	background: #BCBCBC url(images/login/hoverblue.gif) repeat left top;
 	color: #fff;
 }
+.backhome a {
+    font: bold 16px Tahoma, Helvetica, Arial, sans-serif;
+  	color: #0B55C4;
+	background-color: #E7F0FE;
+	padding: 3px 30px 3px 30px;
+	   
+}
+.backhome a:hover {
+
+	background-color: #FFF;
+
+	   
+}
 #footer .copyright { 
 	width: 500px;
 	background-color: #FFF; 
@@ -138,7 +151,7 @@ div#element-box {
 	background: #fff;
 }
 div#element-box  div.m {
-	background: #fbfbfb;
+	background: #FFF;
 }
 div.t, div.b {
 	height: 6px;
@@ -154,9 +167,7 @@ div.m {
 div#element-box div.m {
 	padding: 5px 10px;
 }
-div#element-box {
-	background: #fbfbfb;
-}
+
 div#element-box div.t {
 	background: url(images/login/j_border.png) 0 0 repeat-x;
 }

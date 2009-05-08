@@ -169,7 +169,7 @@
 					//kleeja_admin_err($errs,false);
 				}
 			}
-		
+		}
 			//show template login .
 			//body
 			$action	= "admin.php?go=login&amp;cp=" . $go_to;
@@ -190,7 +190,7 @@
 			{
 				echo $tpl->display("admin_login");
 			}
-		}	
+			
 	}
 	else 
 	{

@@ -28,7 +28,7 @@
 	$ext_confirm	= array();
 	$ext_confirm[]	= 'repair';	
 	$ext_confirm[]	= 'lgoutcp';	
-	
+	$username = $usrcp->name();
 	($hook = kleeja_run_hook('begin_admin_page')) ? eval($hook) : null; //run hook 
 
 	//for security
@@ -175,9 +175,7 @@
 			//show template login .
 			//body
 			$action	= "admin.php?go=login&amp;cp=" . $go_to;
-			$username = $usrcp->name();
-			
-			
+						
 			if($config['user_system'] != '1' && isset($script_encoding) && function_exists('iconv') && !eregi('utf',strtolower($script_encoding)) && !defined('DISABLE_INTR'))
 			{
 				//send custom chaeset header

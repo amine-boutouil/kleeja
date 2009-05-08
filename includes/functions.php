@@ -856,6 +856,32 @@ function kleeja_err($msg, $title='', $exit=true)
 }
 
 /*
+	cp error function handler
+*/
+function kleeja_admin_err($msg, $navigation=true, $title='', $exit=true)
+{
+	global $text, $tpl, $SHOW_LIST;
+	
+	($hook = kleeja_run_hook('kleeja_admin_err_func')) ? eval($hook) : null; //run hook
+				
+	// assign {text} in err template
+	$text	= $msg;
+	$SHOW_LIST	= $navigation;
+	
+	//header
+	echo $tpl->display("admin_header");
+	//show tpl
+	echo $tpl->display('admin_err');
+	//footer
+	echo $tpl->display("admin_footer");
+	
+	if ($exit)
+	{
+		exit();
+	}
+}
+
+/*
 * return current page 
 * parameters : none
 */

@@ -166,7 +166,7 @@
 					{
 						$errs	.= '- ' . $r . '. <br />';
 					}
-					kleeja_err($errs);
+					kleeja_admin_err($errs,false);
 				}
 			}
 		}

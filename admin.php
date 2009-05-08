@@ -36,7 +36,7 @@
 	{
 		($hook = kleeja_run_hook('user_not_admin_admin_page')) ? eval($hook) : null; //run hook 
 			
-		$text = '<span style="color:red;">' . $lang['U_NOT_ADMIN'] . '</span><br /><a href="ucp.php?go=login">' . $lang['LOGIN'] . '</a>';
+		$text = '<span style="color:red;">' . $lang['U_NOT_ADMIN'] . '</span><br /><a href="ucp.php?go=login&amp;return=' . urldecode(kleeja_get_page()) . '">' . $lang['LOGIN'] . '</a>';
 		kleeja_err($text);
 	}
 	
@@ -127,13 +127,12 @@
 			
 			if (isset($_POST['submit']))
 			{
-					
 				//for onlines
 				$ip	=	(getenv('HTTP_X_FORWARDED_FOR')) ?  getenv('HTTP_X_FORWARDED_FOR') : getenv('REMOTE_ADDR');
 					
 				if ($config['allow_online'] == 1)
 				{
-					$query_del	= array('DELETE'	=> "{$dbprefix}online",
+					$query_del	= array(	'DELETE'	=> "{$dbprefix}online",
 											'WHERE'		=> "ip='" . $ip . "'"
 										);
 						
@@ -158,7 +157,7 @@
 				if(empty($ERRORS))
 				{
 					$_SESSION['ADMINLOGIN'] = '1';
-					header('Location: admin.php');
+					header('Location: admin.php?cp=' . $go_to);
 				}
 				else
 				{
@@ -175,7 +174,7 @@
 		{
 			//show template login .
 			//body
-			$action	= "admin.php?go=login";
+			$action	= "admin.php?go=login&amp;cp=" . $go_to;
 			$username = $usrcp->name();
 			
 			

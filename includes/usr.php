@@ -275,7 +275,7 @@ class usrcp
 				{
 					($hook = kleeja_run_hook('logout_cp_func_usr_class')) ? eval($hook) : null; //run hook
 					
-					unset($_SESSION['USER_ADMIN']);
+					unset($_SESSION['ADMINLOGIN']);
 					unset($_SESSION['LAST_VISIT']);
 					return true;
 				}

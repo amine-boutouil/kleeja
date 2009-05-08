@@ -90,6 +90,12 @@ switch ($_GET['go'])
 				
 					if(empty($ERRORS))
 					{
+						if(isset($_GET['return']))
+						{
+							header('Location: ' . urlencode($_GET['return']));
+							exit;
+						}
+						
 						$errorpage = true;
 						($hook = kleeja_run_hook('login_data_no_error')) ? eval($hook) : null; //run hook
 						$text	= $lang['LOGIN_SUCCESFUL'] . ' <br /> <a href="./index.php">' . $lang['HOME'] . '</a>';
@@ -103,6 +109,7 @@ switch ($_GET['go'])
 						{
 							$errs	.= '- ' . $r . '. <br />';
 						}
+						
 						kleeja_err($errs);
 					}
 			}
@@ -278,7 +285,7 @@ switch ($_GET['go'])
 			//fileuser is closed ?
 			if ($config['enable_userfile'] != '1' && !$usrcp->admin())
 			{
-				kleeja_info($lang['USERFILE_CLOSED'],$lang['CLOSED_FEATURE']);
+				kleeja_info($lang['USERFILE_CLOSED'], $lang['CLOSED_FEATURE']);
 			}
 			
 			
@@ -292,7 +299,7 @@ switch ($_GET['go'])
 			//no logon before 
 			if (!$usrcp->name() && !$_GET['id'])
 			{
-				kleeja_info($lang['USER_PLACE'],$lang['PLACE_NO_YOU']);
+				kleeja_info($lang['USER_PLACE'], $lang['PLACE_NO_YOU']);
 			}
 			
 			//to get userdata!!
@@ -387,7 +394,7 @@ switch ($_GET['go'])
 			//no logon before
 			if (!$usrcp->name())
 			{
-				kleeja_info($lang['PLACE_NO_YOU'],$lang['USER_PLACE']);
+				kleeja_info($lang['PLACE_NO_YOU'], $lang['USER_PLACE']);
 			}
 
 			//te get files and update them !!
@@ -499,7 +506,7 @@ switch ($_GET['go'])
 			//no logon before 
 			if (!$usrcp->name())
 			{
-				kleeja_info($lang['USER_PLACE'],$lang['PLACE_NO_YOU']);
+				kleeja_info($lang['USER_PLACE'], $lang['PLACE_NO_YOU']);
 			}
 
 			$stylee		= "profile";

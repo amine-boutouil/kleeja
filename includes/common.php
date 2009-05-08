@@ -26,15 +26,17 @@
 
 	// start session
 	$s_time = 86400 * 2; // 2 : two days 
-	$s_key = (!empty($_SERVER['HTTP_HOST'])) ? strtolower($_SERVER['HTTP_HOST']) : ((!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : @getenv('SERVER_NAME'));
-	$s_sid = 'ksid' . substr('_' . md5($s_key), 0, 8);
+	$s_key = (!empty($_SERVER['REMOTE_ADDR'])) ? strtolower($_SERVER['REMOTE_ADDR']) : ((!empty($_SERVER['SERVER_ADDR'])) ? $_SERVER['SERVER_ADDR'] : @getenv('SERVER_NAME'));
+	$s_key .= (!empty($_SERVER['HTTP_USER_AGENT'])) ? strtolower($_SERVER['HTTP_USER_AGENT']) : ((!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : @getenv('SERVER_NAME'));
+	$s_sid = 'klj_' . substr('_' . md5($s_key), 0, 8);
 	session_set_cookie_params($s_time);
 	session_name($s_sid);
 	session_start();
 
 	if (isset($_COOKIE[$s_sid]))
+	{
 		setcookie($s_sid, $_COOKIE[$s_sid], time() + $s_time, "/");
-	
+	}
 	
 	function stripslashes_our(&$value)
 	{

@@ -11,11 +11,10 @@
 	}
 	
 
-		//remove just .. .administator session 
-		if ($usrcp->logout_cp())
-		{
-			$text	= $lang['LOGOUT_CP_OK'];
-			$stylee	= "admin_info";
-		}
+	//remove just .. .administator session 
+	if ($usrcp->logout_cp())
+	{
+		header('Location:./');
+	}
 
 ?>

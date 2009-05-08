@@ -24,6 +24,11 @@ p {
 	padding: 0;
 	margin-bottom: 10px;
 }
+ul{
+	margin: 0 0 4px 0;
+	text-align: justify;
+	line-height: 26px;
+}
 a:link    { 
 	color: #0B55C4; 
 	text-decoration: none; 
@@ -98,12 +103,25 @@ input:focus,select:focus,textarea:focus {
 	padding: 3px 30px 3px 30px;
 	   
 }
-.backhome a:hover {
+.backhome a:hover {background-color: #FFF;}
 
-	background-color: #FFF;
+/* System Messages body */
+#system-message    { margin: 2px 0px 10px 0px; padding: 0;}
+#system-message dd { margin: 0; font-weight: bold; text-indent: 35px; }
 
-	   
+/* System Messages  error*/
+#system-message dd.error ul { 
+list-style: none; 
+padding: 5px 10px 5px 10px; 
+background-color: #E6C0C0; 
+border-top: 3px solid #DE7A7B; 
+border-bottom: 3px solid #DE7A7B;
+ }
+#system-message dd.error ul li{ 
+color: #c00; 
+background: url(images/error.png) no-repeat right center ;
 }
+
 #footer .copyright { 
 	width: 500px;
 	background-color: #FFF; 
@@ -131,11 +149,6 @@ input:focus,select:focus,textarea:focus {
 	background: url(images/login/logo.png) no-repeat top left;
 	width: 480px;
 	height: 57px;
-}
-.error {
-	color: #333;
-	background:#ffebe8;
-	border: 1px solid #dd3c10;
 }
 
 #section-box  { 

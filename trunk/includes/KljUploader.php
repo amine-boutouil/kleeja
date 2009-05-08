@@ -529,7 +529,7 @@ function process ()
 
 				$name 	= (string)	$SQL->escape($filname);
 				$size	= (int) 	$sizeee;
-				$type 	= (string)	$SQL->escape($typeee);
+				$type 	= (string)	strtolower($SQL->escape($typeee));
 				$folder	= (string)	$SQL->escape($folderee);
 				$timeww	= (int)		time();
 				$user	= (int)		$this->id_user;

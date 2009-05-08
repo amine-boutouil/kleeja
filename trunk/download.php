@@ -240,6 +240,8 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 				$f = $row['folder'];
 				//img or not
 				$is_image = in_array(strtolower(trim($row['type'])), array('gif', 'jpg', 'jpeg', 'bmp', 'png', 'tiff', 'tif')) ? true : false; 
+				//live url
+				$is_live = in_array(strtolower(trim($row['type'])), $livexts) ? true : false; 
 			}
 				
 			$SQL->freeresult($result);
@@ -294,11 +296,11 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 		}
 
 		header('Content-Type: ' . $mime_type . (($is_ie8) ? '; authoritative=true;' : ''));
-		if(!$is_image && $is_ie8)
+		if(!$is_image && !$is_live && $is_ie8)
 		{
 			header('X-Download-Options: noopen');
 		}
-		header('Content-Disposition: ' . ($is_image ? 'inline' : 'attachment' ) . ' ; filename="'  . $name . '"');
+		header('Content-Disposition: ' . (($is_image || $is_live) ? 'inline' : 'attachment') . ' ; filename="'  . $name . '"');
 		header('Content-Transfer-Encoding: binary');
 		header('Accept-Ranges: bytes');
 		// The three lines below basically make the  download non-cacheable 
@@ -314,7 +316,7 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 		}
 				
 		// multipart-download and download resuming support
-		if(isset($_SERVER['HTTP_RANGE']) && !$is_image && $resuming_on)
+		if(isset($_SERVER['HTTP_RANGE']) && !$is_image && !$is_live && $resuming_on)
 		{
 			list($a, $range) = explode("=", $_SERVER['HTTP_RANGE'], 2);
 			list($range) = explode(",", $range, 2);
@@ -342,7 +344,7 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 		$bytes_send = 0;
 		if ($file = fopen($path_file, 'r'))
 		{
-			if(isset($_SERVER['HTTP_RANGE']) && !$is_image)
+			if(isset($_SERVER['HTTP_RANGE']) && !$is_image && !$is_live)
 			{
 				fseek($file, $range);
 			}	 

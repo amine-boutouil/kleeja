@@ -1,0 +1,177 @@
+/*
+Design by tar3q
+http://www.tar3q.com
+*/
+body {
+	background: #FFFFFF url(images/login/bg.jpg) repeat ;
+	font: normal small Tahoma, Arial, Helvetica, sans-serif;
+	color: #3D3D3D;
+	margin: 0 ;
+	padding: 0;
+}
+form { 
+	margin: 0; 
+	padding: 0; 
+}
+h1 {
+	margin: 15px 0; 
+	padding-bottom: 8px;
+	color: #0B55C4;
+	font: bold 18 Tahoma, Arial, Helvetica, sans-serif;	
+}
+p {
+	margin: 0;
+	padding: 0;
+	margin-bottom: 10px;
+}
+a:link    { 
+	color: #0B55C4; 
+	text-decoration: none; 
+}
+a:visited { 
+	color: #0B55C4; 
+	text-decoration: none; 
+}
+a:hover   { 
+	text-decoration: underline; 
+}
+input:focus,select:focus,textarea:focus { 
+	background-color: #ffd ;
+}
+
+.h_header { 
+	height: 54px; 
+	background: url(images/login/header_middle.png) repeat-x; 
+}
+ .title {
+	font-size: 22px; 
+	font-weight: bold; 
+	color: #fff; 
+	line-height: 44px;
+	padding-right: 30px;
+	padding-left: 30px;
+}
+.boxed  {
+	padding: 9px;
+}
+.boxed  form {
+	margin-left: 10px;
+}
+.boxed  fieldset {
+	border: none;
+}
+ .boxed  legend {
+	display: none;
+}
+.boxed  label {
+	display: block;
+	font-size: xx-small;
+	font-weight: normal;
+}
+.textfield {
+	width: 148px;
+	margin: 2px 0 5px 0;
+	padding: 3px 5px;
+	border: 1px solid #C8C8C8;
+	font: normal x-small Verdana, Arial, Helvetica, sans-serif;
+	color: #464646;
+}
+.button {
+	width: 100px;
+    cursor: pointer;
+    vertical-align: middle;
+    padding: 2px;
+    font: normal 12px Tahoma, Helvetica, Arial, sans-serif;
+    border: 1px solid #BCBCBC;
+    background: #549CBF url(images/login/btn.gif) repeat left top;
+  	color: #444;
+}
+.button:hover { 
+	border: 1px solid #aaa; 
+	background: #BCBCBC url(images/login/hoverblue.gif) repeat left top;
+	color: #fff;
+}
+#footer .copyright { 
+	width: 500px;
+	background-color: #FFF; 
+	margin: 5px auto; 
+	text-align: center; 
+}
+#lock  {
+	background: url(images/login/lock.png) no-repeat;
+	width: 128px;
+	height: 140px;
+	float: left;
+	margin-left: 55px ;
+}
+#content-box .padding  { 
+	padding: 20px; 
+}
+#content-box .m {
+	padding: 10px;
+}
+.login {
+	margin: 10px auto 10px auto;
+	width: 500px; 
+}
+.klogo {   
+	background: url(images/login/logo.png) no-repeat top left;
+	width: 480px;
+	height: 57px;
+}
+
+#section-box  { 
+	float: right; 
+	width: 240px; 
+	margin-left: 10px;
+}
+.clr { 
+	clear: both; 
+	overflow:hidden; 
+	height: 0; 
+}
+#section-box .m {
+	padding: 5px;
+}
+
+div#element-box {
+	background: #fff;
+}
+div#element-box  div.m {
+	background: #fbfbfb;
+}
+div.t, div.b {
+	height: 6px;
+	padding: 0;
+	margin: 0;
+	overflow: hidden;
+}
+div.m {
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	padding: 0 8px;
+}
+div#element-box div.m {
+	padding: 5px 10px;
+}
+div#element-box {
+	background: #fbfbfb;
+}
+div#element-box div.t {
+	background: url(images/login/j_border.png) 0 0 repeat-x;
+}
+div#element-box div.t div.t {
+   background: url(images/login/j_crn_tr_light.png) 100% 0 no-repeat;
+}
+div#element-box div.t div.t div.t {
+   background: url(images/login/j_crn_tl_light.png) 0 0 no-repeat;
+}
+div#element-box div.b {
+  background: url(images/login/j_border.png) 0 100% repeat-x;
+}
+div#element-box div.b div.b {
+   background: url(images/login/j_crn_br_light.png) 100% 0 no-repeat;
+}
+div#element-box div.b div.b div.b {
+   background: url(images/login/j_crn_bl_light.png) 0 0 no-repeat;
+}

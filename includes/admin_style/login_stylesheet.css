@@ -48,7 +48,8 @@ input:focus {
 
 .h_header { 
 	height: 52px; 
-	background: url(images/login/headerbg.gif) repeat-x; 
+	background: url(images/login/headerbg.gif) repeat-x;
+	border-top: 5px #FC9113 solid;
 }
  .title {
 	font-size: 22px; 
@@ -126,7 +127,7 @@ background: url(images/error.png) no-repeat right center ;
 }
 
 #footer {
-	position:relative; margin:0 auto; height:80px; clear:both;
+	position:relative; margin:0 auto; height:90px; clear:both;
 	background: #F4F4F4 url(images/login/footerbg.gif) repeat-x top; 
 }
 

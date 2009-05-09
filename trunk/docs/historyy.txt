@@ -213,8 +213,11 @@ to do 1.0.1 - 1.0.5 :
 - change passwords hashing to something else not md5
 - organize menus in general settings (options)
 - improve user system and add groups
-- add live download url option in id form featrue
-
+- add moderator panel
+- add feature to allow admin to delete all specific user files
+- improve callus
+- show user total number of files which he uploaded in admin area 
+- file description
 
 
 Thank you for reading this file. 

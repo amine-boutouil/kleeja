@@ -40,6 +40,7 @@
 		kleeja_err($text);
 	}
 	
+	$usernamelang = sprintf($lang['KLEEJA_CP_W'], $username);
 	$SHOW_LIST = true; //fix bug
 
 	$go_to	= htmlspecialchars($_GET['cp']);

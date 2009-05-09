@@ -1,6 +1,7 @@
 ﻿/*
-Design by tar3q
-http://www.tar3q.com
+# Powered by Kleeja .... Kleeja.com
+# Designed by Tar3q .... Tar3q.com
+# copyright 2007-2009  ..
 */
 body {
 	background: #FFFFFF url(images/login/bg.jpg) repeat ;
@@ -22,7 +23,7 @@ h1 {
 p {
 	margin: 0;
 	padding: 0;
-	margin-bottom: 10px;
+	margin-bottom: 5px;
 }
 ul{
 	margin: 0 0 4px 0;
@@ -40,40 +41,41 @@ a:visited {
 a:hover   { 
 	text-decoration: underline; 
 }
-input:focus,select:focus,textarea:focus { 
+
+input:focus { 
 	background-color: #ffd ;
 }
 
 .h_header { 
-	height: 54px; 
-	background: url(images/login/header_middle.png) repeat-x; 
+	height: 52px; 
+	background: url(images/login/headerbg.gif) repeat-x; 
 }
  .title {
 	font-size: 22px; 
 	font-weight: bold; 
-	color: #fff; 
+	color: #999; 
 	line-height: 44px;
 	padding-right: 30px;
 	padding-left: 30px;
 }
-.boxed  {
+#section-box .boxed  {
 	padding: 9px;
 }
-.boxed  form {
+#section-box .boxed  form {
 	margin-left: 10px;
 }
-.boxed  fieldset {
+#section-box .boxed  fieldset {
 	border: none;
 }
- .boxed  legend {
+#section-box .boxed  legend {
 	display: none;
 }
-.boxed  label {
+#section-box .boxed  label {
 	display: block;
 	font-size: xx-small;
 	font-weight: normal;
 }
-.textfield {
+#section-box .textfield {
 	width: 148px;
 	margin: 2px 0 5px 0;
 	padding: 3px 5px;
@@ -81,7 +83,7 @@ input:focus,select:focus,textarea:focus {
 	font: normal x-small Verdana, Arial, Helvetica, sans-serif;
 	color: #464646;
 }
-.button {
+#section-box .button {
 	width: 100px;
     cursor: pointer;
     vertical-align: middle;
@@ -91,42 +93,47 @@ input:focus,select:focus,textarea:focus {
     background: #549CBF url(images/login/btn.gif) repeat left top;
   	color: #444;
 }
-.button:hover { 
+#section-box .button:hover { 
 	border: 1px solid #aaa; 
 	background: #BCBCBC url(images/login/hoverblue.gif) repeat left top;
 	color: #fff;
 }
 .backhome a {
-    font: bold 16px Tahoma, Helvetica, Arial, sans-serif;
+    font: bold 11px Tahoma, Helvetica, Arial, sans-serif;
   	color: #0B55C4;
 	background-color: #E7F0FE;
-	padding: 3px 30px 3px 30px;
-	   
+	padding: 3px 10px 3px 10px;
+	border-top: 1px dotted #0B55C4;
+	border-bottom: 1px dotted #0B55C4;	
 }
-.backhome a:hover {background-color: #FFF;}
+.backhome a:hover {background-color: #FFF; border: 1px solid #0B55C4; text-decoration: none; }
 
 /* System Messages body */
 #system-message    { margin: 2px 0px 10px 0px; padding: 0;}
-#system-message dd { margin: 0; font-weight: bold; text-indent: 35px; }
+#system-message div { margin: 0; font-weight: bold; text-indent: 35px; }
 
 /* System Messages  error*/
-#system-message dd.error ul { 
+#system-message div.error ul { 
 list-style: none; 
 padding: 5px 10px 5px 10px; 
 background-color: #E6C0C0; 
 border-top: 3px solid #DE7A7B; 
 border-bottom: 3px solid #DE7A7B;
  }
-#system-message dd.error ul li{ 
+#system-message div.error ul li{ 
 color: #c00; 
 background: url(images/error.png) no-repeat right center ;
 }
 
+#footer {
+	position:relative; margin:0 auto; height:80px; clear:both;
+	background: #F4F4F4 url(images/login/footerbg.gif) repeat-x top; 
+}
+
 #footer .copyright { 
-	width: 500px;
-	background-color: #FFF; 
-	margin: 5px auto; 
+	margin: 5px auto 0px auto; 
 	text-align: center; 
+	padding: 10px; 
 }
 #lock  {
 	background: url(images/login/lock.png) no-repeat;
@@ -136,16 +143,16 @@ background: url(images/error.png) no-repeat right center ;
 	margin-left: 55px ;
 }
 #content-box .padding  { 
-	padding: 20px; 
+	padding: 10px; 
 }
 #content-box .m {
 	padding: 10px;
 }
-.login {
+#content-box .login {
 	margin: 10px auto 10px auto;
 	width: 500px; 
 }
-.klogo {   
+#content-box .klogo {   
 	background: url(images/login/logo.png) no-repeat top left;
 	width: 480px;
 	height: 57px;
@@ -171,13 +178,13 @@ div#element-box {
 div#element-box  div.m {
 	background: #FFF;
 }
-div.t, div.b {
+div#element-box div.t, div.b {
 	height: 6px;
 	padding: 0;
 	margin: 0;
 	overflow: hidden;
 }
-div.m {
+div#element-box div.m {
 	border-left: 1px solid #ccc;
 	border-right: 1px solid #ccc;
 	padding: 0 8px;

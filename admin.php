@@ -14,6 +14,11 @@
 	define ('IN_INDEX' , true);
 	define ('IN_ADMIN' , true);
 	
+	if($_GET['go'] == 'login')
+	{
+		define('IN_ADMIN_LOGIN', true);
+	}
+	
 	//include imprtant file ..
 	include ('includes/common.php');
 	include_once ('includes/version.php');

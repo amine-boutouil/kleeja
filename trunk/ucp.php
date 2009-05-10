@@ -129,7 +129,7 @@ switch ($_GET['go'])
 			else if ($config['user_system'] != '1')
 			{
 				($hook = kleeja_run_hook('register_not_default_sys')) ? eval($hook) : null; //run hook
-				$forum_path = ($forum_path[0] == '/' ? '..' : '../') .  $forum_path;
+				$forum_path = (empty($script_register_url)) ? ($script_path[0] == '/' ? '..' : '../') .  $script_path : $script_register_url;
 				kleeja_info('<a href="' . $forum_path . '" title="' . $lang['REGISTER'] . '">' . $lang['REGISTER']. '</a>', $lang['REGISTER']);
 			}
 			

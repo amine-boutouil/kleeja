@@ -1,97 +1,33 @@
-﻿<div class="middle">
+﻿<div id="divmiddle">
                         
-<h2>{lang.KLEEJA_CP}..</h2>        
-<img src="{STYLE_PATH_ADMIN}images/heart.png" alt="Kleeja love you ..," /> {lang.KLEEJA_CP_W} ...
-<br />
-<br />
-
 <!-- admin start first -->
+<h1 class="title">{lang.GENERAL_STAT}</h1>
 
-<fieldset name="begin_d">
-   <legend>{lang.GENERAL_STAT}</legend>
-                
-<table width="80%">
-<tr>
-	<td><b>{lang.AFILES_NUM} :</b>
-	</td>
-	<td>
-		<div class="s_box">{files_number}</div>
-	</td>
-</tr>
-<tr>
-	<td><b>{lang.AFILES_SIZE} :</b>
-	</td>
-	<td>
-		<div class="s_box">{files_sizes}</div>
-	</td>
-</tr>
-<tr>
-	<td><b>{lang.AUSERS_NUM} :</b>
-	</td>
-	<td>
-		<div class="s_box">{users_number}</div>
-	</td>
-</tr>
-<!-- admin boxstat end -->
-<tr>
-	<td><b>{lang.LSTFLE_ST} :</b>
-	</td>
-	<td><a href="{last_file_up}" target="blank">{last_file_up}</a>
-	</td>
-</tr>
-<tr>
-	<td><b>{lang.LAST_GOOGLE} :</b>
-	</td>
-	<td>{s_last_google}
-	</td>
-</tr>
-<tr>
-	<td><b>{lang.GOOGLE_NUM} :</b>
-	</td>
-	<td>{s_google_num}
-	</td>
-</tr>
-<tr>
-	<td><b>{lang.LAST_YAHOO} :</b>
-	</td>
-	<td>{s_last_yahoo}
-	</td>
-</tr>
-<tr>
-	<td><b>{lang.YAHOO_NUM} :</b>
-	</td>
-	<td>{s_yahoo_num}
-	</td>
-</tr>
-<tr>
-	<td><b>{lang.LSTDELST} :</b>
-	</td>
-	<td>{last_del_fles}
-	</td>
-</tr>
-<IF NAME="last_visit">
-<tr>
-    <td><b>{lang.LAST_VISIT} :</b>
-   </td>
-    <td>
-        {last_visit}
-		<br />
-        <a href="{h_lst_files}">{lang.FLS_LST_VST_SEARCH}</a><br />
-        <a href="{h_lst_imgs}">{lang.IMG_LST_VST_SEARCH}</a>
-    </td>
-</tr>
-</IF>
-<IF NAME="config.user_system==1">
-<tr>
-	<td><b>{lang.LAST_REG} :</b>
-	</td>
-	<td>{stat_last_user}
-	</td>
-</tr>
-</IF>
-<!-- admin start info tr extra -->
-</table>
-</fieldset>   
+	<div id="menu">
+			<ul>
+			<li><a>{lang.AFILES_NUM} : <input class="s_box" type="text" value="{files_number}" /></a></li>
+			<li><a>{lang.AFILES_SIZE} : <input class="s_box" type="text" value="{files_sizes}" /></a></li>
+			<li><a>{lang.AUSERS_NUM} : <input class="s_box" type="text" value="{users_number}" /></a></li>
+			<li><a href="{last_file_up}" target="blank">{lang.LSTFLE_ST} : {last_file_up}</a></li>
+			<li><a>{lang.LAST_GOOGLE} : {s_last_google}</a></li>
+			<li><a>{lang.GOOGLE_NUM} : {s_google_num}</a></li>
+			<li><a>{lang.LAST_YAHOO} : {s_last_yahoo}</a></li>
+			<li><a>{lang.YAHOO_NUM} : {s_yahoo_num}</a></li>
+			<li><a>{lang.LSTDELST} : {last_del_fles}</a></li>
+		<IF NAME="last_visit">
+			<li><a>{lang.LAST_VISIT} : {last_visit}</a></li>
+			<li><a href="{h_lst_files}">{lang.FLS_LST_VST_SEARCH}</a></li>
+			<li><a href="{h_lst_imgs}">{lang.IMG_LST_VST_SEARCH}</a></li>   
+		
+		</IF>
+		<IF NAME="config.user_system==1">
+			<li><a>{lang.LAST_REG} : {stat_last_user}</a></li>
+		</IF>
+			<li><a></a></li>
+			</ul> 
+		</div>
+<br />
+ 
 
 <IF NAME="update_now">
 <fieldset class="error">

@@ -1,10 +1,16 @@
- <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" dir="{lang.DIR}">
+<!--  
+# Powered by Kleeja .... Kleeja.com
+# Designed by Tar3Q .... Tar3q.com
+# copyright 2007-2009  ..
+-->
 <head>
 	<title>{lang.KLEEJA_CP} - {config.sitename}</title>
 	<meta http-equiv="Content-Language" content="ar" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link rel="stylesheet" href="{STYLE_PATH_ADMIN}admin_stylesheet.css" type="text/css" />
+	<link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
 	<script type="text/javascript">
 	function confirm_from()
 	{
@@ -16,40 +22,43 @@
 	
 	</script>
 	<script type="text/javascript" src="{STYLE_PATH_ADMIN}images/tips.js"></script> 
-	<!-- HEAD ADMIN HEADER -->
 </head>
 <body>
-<div id="wrap">
-<div class="roundedcornr_box_459680"><div class="roundedcornr_top_459680"><div></div></div><div class="roundedcornr_content_459680">
+<!-- start cpanel 1 -->
+	<div id="divbody">
+		<div id="header">
+		<a href="{config.siteurl}"><img src="{STYLE_PATH_ADMIN}images/logo.png" alt="{config.sitename}" style="border:0px;float: left;" /></a>
+			<h2><img src="{STYLE_PATH_ADMIN}images/adminopen.gif" align="absmiddle" />&nbsp;&nbsp;{lang.KLEEJA_CP}..</h2>        
+			<p><img src="{STYLE_PATH_ADMIN}images/heart.gif" align="absmiddle" alt="Kleeja love you ..," />&nbsp;{usernamelang}</p>
+		</div>
+	<div class="clr"></div>
+	</div>
+<!-- end cpanel 1 -->
 
-<div id="content">
+<!-- start cpanel box 2 -->
+<div id="divbody">
+	
+<div id="rightmenu">	
 
-<div class="header">
-<a href="{config.siteurl}"><img src="{STYLE_PATH_ADMIN}images/logo.gif" alt="{config.sitename}" style="border:0px;float: left;" /></a>
-</div>
-
-<div class="right">
-
+<div class="body-menu">
 <IF NAME="SHOW_LIST">
-                <div class="roundedcornr_box_561672"> <div class="roundedcornr_top_561671"><div></div></div><div class="roundedcornr_content_561671">
 <!-- BEGIN ADMIN MENU -->
-<ul>
-<li><img src="{STYLE_PATH_ADMIN}images/index_button.gif" />
-[<a href="{config.siteurl}">{lang.RETURN_HOME}</a>]</li>
-<li><img src="{STYLE_PATH_ADMIN}images/cp_button.gif" />
-[<a href="admin.php">{lang.R_CPINDEX}</a>]</li>
-<LOOP NAME="adm_extensions_menu">
-<li><img src="{{icon}}" />
-[<a href="{{link}}"<IF LOOP="confirm"> onclick="javascript:return confirm_from();"</IF>>{{lang}}</a>]</li>
-</LOOP>
-<!-- admin header menu extra -->
-</ul>
-<!-- END ADMIN MENU -->
-        </div><div class="roundedcornr_bottom_561671"><div></div></div></div>
+		<div class="link-menu">
+			<div><a href="{config.siteurl}">
+			<img src="{STYLE_PATH_ADMIN}images/index_button.gif" /><br />{lang.RETURN_HOME}</a></div>
+		</div>
+		
+		<div class="link-menu">
+			<div><a href="admin.php">
+			<img src="{STYLE_PATH_ADMIN}images/cp_button.gif" /><br />{lang.R_CPINDEX}</a></div>
+		</div>
+	<LOOP NAME="adm_extensions_menu">	
+		<div class="link-menu">
+			<div><a href="{{link}}"<IF LOOP="confirm"> onclick="javascript:return confirm_from();"</IF>>
+			<img src="{{icon}}" /><br />{{lang}}</a></div>
+		</div>
+	</LOOP>	
 </IF>
-
+<!-- END ADMIN MENU -->
+</div>		
 </div>
-
-<!-- END ADMIN HEADER -->
-
-        

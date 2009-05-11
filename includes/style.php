@@ -20,7 +20,7 @@ if (!defined('IN_COMMON'))
         var $HTML; //html page content
         var $loop	= array();
         var $reg	= array('var' => '/([{]{1,2})+([A-Z0-9_\.]+)[}]{1,2}/i');
-		
+		var $caching = true;//save templates as caches to not compliled alot of times
 		
 
         //Function to load a template file.
@@ -288,7 +288,7 @@ if (!defined('IN_COMMON'))
 			$this->vars  = &$GLOBALS;
 			
 			//is there ?
-			if(!file_exists($root_path.'cache/tpl_' . $this->re_name_tpl($template_name) . '.php'))
+			if(!file_exists($root_path.'cache/tpl_' . $this->re_name_tpl($template_name) . '.php') or !$this->caching)
 			{
 				$this->_load_template($template_name);
 			}

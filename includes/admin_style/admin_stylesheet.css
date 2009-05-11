@@ -5,24 +5,20 @@
 */
 body {
 	background: #FFFFFF url(images/adm-body.jpg) repeat-x ;
-	font: normal small Tahoma, Arial, Helvetica, sans-serif;
+	font: normal 11px Tahoma, Arial, Helvetica, sans-serif;
 	color: #3D3D3D;
 	margin: 0 ;
 	padding: 0;
 	border-top: 5px #FC9113 solid;
 }
-        
 * {
     padding: 0;
     margin: 0;
 } 
-
-
 html {
         font-size: 100%;
 
 }
-
 form { 
 	margin: 0; 
 	padding: 0; 
@@ -52,30 +48,32 @@ a:visited {
 a:hover   { 
 	text-decoration: underline; 
 }
-
-input:focus { 
-	background-color: #ffd ;
-}
-
-
-
+input:focus,
+select:focus,
+textarea:focus { background-color: #ffd }
 
 #header {
 	width: 100%;
+	height: 60px;
 	padding: 0;
     margin:0;
+
 }
-#header h2 {
-	padding-bottom: 5px;
-	color:#A60000;
- }
-#header p {
-	padding: 2px 8px 2px 8px;
-	width: 420px;
-	background: #FFDDDD; 
+#header .logo1 {
+    float:left;
+	width: 370px;
+	padding: 0;
+    margin:0;
  }
 
-
+#header .logo2{
+    float:right;
+	width: 400px;
+	padding: 15px 10px 0 10px;
+    margin:0;
+	color: #CD3232;
+	font: bold 20px Tahoma, Arial, Helvetica, sans-serif;
+}
 /* rodded corners box  */
 
 
@@ -219,17 +217,29 @@ fieldset.quick, p.quick {
 .rtl fieldset.quick, .rtl p.quick {
         text-align: left;
 }
-a.button1, input.button1, input.button3,
-a.button2, input.button2 {
+input.button1, input.button3,input.button2 {
         width: auto !important;
-        padding: 1px 3px 0 3px;
-        font-family: "Tahoma", Lucida Grande, Verdana, Helvetica, Arial, sans-serif;
+        padding: 3px 4px 3px 4px;
+		font: normal 12px Tahoma, Helvetica, Arial, sans-serif;
         color: #000;
         font-size: 0.85em;
-        background: #EFEFEF url("images/button.gif") repeat-x top;
+		background: #549CBF url(images/login/btn.gif) repeat left top;
         cursor: pointer;
 }
-
+.button1 ,.button2 {
+    cursor: pointer;
+    vertical-align: middle;
+    padding: 3px 4px 3px 4px;
+    font: normal 12px Tahoma, Helvetica, Arial, sans-serif;
+    border: 1px solid #BCBCBC;
+    background: #549CBF url(images/login/btn.gif) repeat left top;
+  	color: #444;
+}
+.button1:hover ,.button2:hover{ 
+	border: 1px solid #aaa; 
+	background: #BCBCBC url(images/login/hoverblue.gif) repeat left top;
+	color: #fff;
+}
 .bg_img {
         text-align:center;
         width:112px;
@@ -253,25 +263,6 @@ a.button2, input.button2 {
 
 }
 
-/*
-info and error
-*/
-.info  {
-	color: #333;
-	background:#fff9d7;
-	border: 1px solid #e2c822;
-}
-.error {
-	color: #333;
-	background:#ffebe8;
-	border: 1px solid #dd3c10;
-}
-.info, .error {
-	padding: 10px;
-	font-family:"lucida grande", tahoma, verdana, arial, sans-serif;
-	font-size: 12px;
-	font-weight: bold;
-}
 
 /*
 pagination
@@ -337,7 +328,20 @@ pagination
 	color:#fff;
 	background-color:#185A97; 
 }
+#divheader   { 
+	margin: 8px auto 0px auto;
+	width: 94%; 
+    padding: 10px;
+    border-top: 1px solid #D7D7D7;
+    border-right: 1px solid #CCCCCC;
+    border-bottom: 1px solid #CCCCCC;
+    border-left: 1px solid #D7D7D7;
+    background-color: #F9F9F9;
+    position: relative;
+        /* rounded corners for firefox .. love u saanina ;) */
+            -moz-border-radius: 8px; border-radius:1px;
 
+}
 #divbody   { 
 	margin: 5px auto 5px auto;
 	width: 94%; 
@@ -355,7 +359,7 @@ pagination
 
 #divmiddle   { 
     width: 69%;
-    float:left;
+	float: left; 
 	margin: 5px auto 5px auto;
     padding: 10px;
     border-top: 1px solid #D7D7D7;
@@ -377,7 +381,7 @@ pagination
 }
 
 #rightmenu{
-    float: right;
+	float: right; 
     width: 25%;
     margin: 5px 5px 0 0;
     padding: 10px;
@@ -399,12 +403,12 @@ pagination
 	padding: 0px; 
 	text-align: center; 
 }
-#rightmenu .link-menu{ 
-	height: 54px; 
+#rightmenu .link-menu{
+float: right;  
+	height: 60px; 
 	width: 113px; 
 	padding: 0; 
 	margin: 1px ; 
-	float: right; 
 	border-top: 1px solid #ccc;
 	border-left: 1px solid #ccc;
 	border-right: 1px solid #FFF;
@@ -427,75 +431,136 @@ pagination
 #rightmenu .link-menu a:hover {
 	padding-bottom:5px;
 	text-decoration: none; 
-	background: #FFCD00;
+	background: #F0E6BE;
 	color:#000;
-	border-top: #FF0000 1px solid;
-	border-bottom: #FF0000 1px solid;
-	filter: Alpha(Opacity=50);opacity:.50;-moz-opacity:.50; 
+	border-top: #FFAD22 3px solid;
+	border-bottom: #FFAD22 3px solid;
+
 }
+
+.welcome {
+	padding: 4px 8px 4px 8px;
+	margin: 5px 2px 5px 6px;
+	background: #FFDDDD;
+	border-top: #EE7171 1px dotted;
+	border-bottom: #EE7171 1px dotted;
+ }
 
 .title {
-	margin-bottom: 20px;
+	margin-bottom: 2px;
 	padding-bottom: 5px;
-	border-bottom: 3px #999999 solid;
-
-}
-h1{
+	border-bottom: 1px dotted #E1E1E1;
+	font: normal 22px tahoma,verdana,arial,sans-serif;
 	letter-spacing: -1px;
-	font-size: 22px;
 	color:#8A8A8A;
+	margin: 5px 2px 5px 6px;
+}
+#adm-info
+{ text-align: center;
+  width: 136px;
+  float: right;
+	margin: 5px 2px 5px 2px;
+  border: 1px dotted #E1E1E1;
+  padding: 10px ;
+  background: #F9F9F9;
 }
 
-#menu {
-    text-align: center;
-	font-size: 12px; 
-	text-transform: uppercase;
-	font-weight: normal;
-	text-decoration: none;
-	width: 100%;
+#adm-info h2
+{ margin: 0px; 
+  font: 11px tahoma,verdana,arial,sans-serif;
+  font-weight: bold;
+  padding: 0px 0px 16px 0px;
+  text-transform: uppercase;
+  color: #57696F;
 }
 
-#menu a {
-	
-	color: #B60400;
-
-	padding: 0 0 0 10px;
-	background-color: #fff;
+#adm-info p
+{ line-height: 16px; 
+  padding: 0px 0px 5px 0px;
 }
 
-#menu a:hover {
-	color: #B60400;
-	padding: 0 0 0 0px;
+#adm-info:hover{ background: #EFEFEF ;} 
+
+#adm-info .info_box {
+	width: 120px; 
+	margin:2 px;
+	font-family:tahoma,verdana,arial,sans-serif;
+	padding:4px;
+	text-align:center;
+	color:#484848;
+	border: 1px solid #F8F834;
+	font-weight: bold;
+	background: #FFFFF3;
 }
 
-#menu ul
-{
-	padding: 0px ;
-	list-style-type: none ;
-	text-align: right;
+#info-posts {
+	float: right;
+	width: 320px;
+	margin: 5px 2px 5px 2px;
+	background: #F9F9F9;
+	  font: 11px tahoma,verdana,arial,sans-serif;
 }
 
-#menu li
-{
-	margin: 0px 0 0 0 ;
-	padding: 0 ;
-	border-bottom: 1px #EAEAEA dotted;
+#info-posts ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
 }
 
-#menu a
-{
-	display: block ; 
-	line-height: 29px ;
-	color: #999;
-	text-indent: +30px ; 
-	text-decoration: none ;
-	background: url(images/li.gif) no-repeat right center; 
+#info-posts li {
+	padding: 5px 10px;
+	border-bottom: 1px dotted #aaa;
+	border-top: 1px dotted #aaa;
 }
 
+#info-posts li:hover {
+	background: #EFEFEF;
+}
 
-#menu ul li a:hover
-{
-	text-indent: +40px ;
-	line-height: 29px ;    
-	background: #FFFFC6 url(images/lihover.gif) no-repeat right center; 
+/* System Messages body */
+#system-message    { margin: 4px 2px 4px 6px; padding: 0;}
+#system-message div { margin: 0; font-weight: bold; text-indent: 35px; }
+/* System Messages  info*/
+#system-message div.info ul { 
+list-style: none; 
+padding: 15px 10px 15px 10px; 
+border-top: 3px solid #FFAD22; 
+border-bottom: 3px solid #FFAD22;
+background-color: #F0E6BE; 
+}
+#system-message div.info  ul li { 
+color: #333; 
+background: url(images/info.png) no-repeat right center ;
+}
+/* System Messages  error*/
+#system-message div.error ul { 
+list-style: none; 
+padding: 6px 10px 6px 5px; 
+background-color: #E6C0C0; 
+border-top: 3px solid #DE7A7B; 
+border-bottom: 3px solid #DE7A7B;
+ }
+#system-message div.error ul li{ 
+color: #c00; 
+background: url(images/error.png) no-repeat right center ;
+}
+ /* System Messages  size stat  template */
+#system-message div.stat ul { 
+list-style: none; 
+padding: 6px 10px 6px 5px; 
+background-color: #F9F9F9; 
+border-top: 3px solid #AAAAAA; 
+border-bottom: 3px solid #AAAAAA;
+ }
+#system-message div.stat ul li{ 
+color: #222; 
+background: url(images/stat.png) no-repeat right top ;
+}
+tr {
+background-color: #F9F9F9; 
+}
+td {
+font: bold 10px Tahoma, Arial, Helvetica, sans-serif;
+padding: 2px 5px 2px 5px; 
+border-top: 1px solid #DBDBDB; 
 }

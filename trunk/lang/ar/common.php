@@ -276,7 +276,7 @@ $lang = array_merge($lang, array(
 	'LAST_YAHOO' => 'آخر زيارة للياهو',
 	'YAHOO_NUM' => 'زيارات الياهو',
 	'KLEEJA_CP_W' => 'أهلا وسهلاً بك عزيزي <b style="color:#FF0000">[ %s ]</b> في لوحة التحكم لمركز التحميل <b>كليجا</b> ..!',
-	'USING_SIZE' => 'الحجم المستخدم',
+	'USING_SIZE' => 'الحجم المستخدم حتى الآن',
 	'PHP_VER' => 'إصدار php',
 	'MYSQL_VER' => 'إصدار mysql',
 	'N_IMGS' => 'الصور',

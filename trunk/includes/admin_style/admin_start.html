@@ -1,76 +1,149 @@
 ﻿<div id="divmiddle">
-                        
-<!-- admin start first -->
-<h1 class="title">{lang.GENERAL_STAT}</h1>
+<!-- start welcome user admin -->
+	<p class="welcome"><img src="{STYLE_PATH_ADMIN}images/heart.gif" align="absmiddle" alt="Kleeja love you ..," />&nbsp;{usernamelang}</p>
 
-	<div id="menu">
-			<ul>
-			<li><a>{lang.AFILES_NUM} : <input class="s_box" type="text" value="{files_number}" /></a></li>
-			<li><a>{lang.AFILES_SIZE} : <input class="s_box" type="text" value="{files_sizes}" /></a></li>
-			<li><a>{lang.AUSERS_NUM} : <input class="s_box" type="text" value="{users_number}" /></a></li>
-			<li><a href="{last_file_up}" target="blank">{lang.LSTFLE_ST} : {last_file_up}</a></li>
-			<li><a>{lang.LAST_GOOGLE} : {s_last_google}</a></li>
-			<li><a>{lang.GOOGLE_NUM} : {s_google_num}</a></li>
-			<li><a>{lang.LAST_YAHOO} : {s_last_yahoo}</a></li>
-			<li><a>{lang.YAHOO_NUM} : {s_yahoo_num}</a></li>
-			<li><a>{lang.LSTDELST} : {last_del_fles}</a></li>
-		<IF NAME="last_visit">
-			<li><a>{lang.LAST_VISIT} : {last_visit}</a></li>
-			<li><a href="{h_lst_files}">{lang.FLS_LST_VST_SEARCH}</a></li>
-			<li><a href="{h_lst_imgs}">{lang.IMG_LST_VST_SEARCH}</a></li>   
+<div class="clr"></div>
+
+<!-- info user admin -->
+	<div id="info-posts">
+		<ul>
+			<li>
+			<IF NAME="last_visit">
+			<strong>{lang.LAST_VISIT} : {last_visit}</strong><br />
+				<small><a href="{h_lst_files}">{lang.FLS_LST_VST_SEARCH}</a> | 
+					<a href="{h_lst_imgs}">{lang.IMG_LST_VST_SEARCH}</a>
+				</small>
+			</IF>
+			</li>
+		</ul>
+	</div>
+	<div id="info-posts">
+		<ul>
+			<li>
+			<strong>{lang.LSTFLE_ST} : <a href="{last_file_up}" target="blank">{last_file_up}</a></strong><br />
+				<small>{lang.LSTDELST}
+					<a>{last_del_fles}</a> 
+				</small>
+			</li>
+		</ul>
+	</div>
+
+<div class="clr"></div>
 		
-		</IF>
+	<div id="adm-info">
+	    <h2>{lang.AFILES_NUM}</h2>
+		<input class="info_box" type="text" value="{files_number}" />
+	    <p></p>
+	</div> 
+
+	<div id="adm-info">
+	    <h2>{lang.AFILES_SIZE}</h2>
+		<input class="info_box" type="text" value="{files_sizes}" />
+	    <p></p>
+	</div> 
+
+	<div id="adm-info">
+	    <h2>{lang.AUSERS_NUM}</h2>
+		<input class="info_box" type="text" value="{users_number}" />
+	    <p></p>
+	</div> 
+
+	<div id="adm-info">
 		<IF NAME="config.user_system==1">
-			<li><a>{lang.LAST_REG} : {stat_last_user}</a></li>
+	        <h2>{lang.LAST_REG}</h2>
+			<input class="info_box" type="text" value="{stat_last_user}" />
+	        <p></p>
 		</IF>
-			<li><a></a></li>
-			</ul> 
+	</div> 
+
+<div class="clr"></div>
+
+	<div id="info-posts">
+		<ul>
+			<li>
+				<strong>{lang.LAST_GOOGLE} : {s_last_google}
+				<br />{lang.GOOGLE_NUM} : {s_google_num}
+				</strong>
+			</li>
+		</ul>
+	</div>
+		
+	<div id="info-posts">
+		<ul>
+			<li>
+				<strong>{lang.LAST_YAHOO} : {s_last_yahoo}
+				<br />{lang.YAHOO_NUM} : {s_yahoo_num}
+				</strong>
+			</li>
+		</ul>
+	</div>
+
+<div class="clr"></div>
+<br />
+<!-- start error System Messages -->
+	<IF NAME="update_now">
+	<div id="system-message">
+		<div class="error">
+			<ul>
+				<li>{lang.R_CHECK_UPDATE} ! {update_now_disc}</li>
+			</ul>
 		</div>
+	</div>
+	</IF>
+<!-- end error System Messages -->
+  
+<div class="clr"></div>
+
+<!-- start error System Messages -->
+	<IF NAME="no_copyrights">
+	<div id="system-message">
+		<div class="error">
+			<ul>
+				<li>{lang.NOTE} ! {no_copyrights_disc}</li>
+			</ul>
+		</div>
+	</div>
+	</IF>
+<!-- end error System Messages -->  
+
+<div class="clr"></div>
+<!-- start info System Messages -->
+	<IF NAME="is_config_writable">
+	<div id="system-message">
+		<div class="info">
+			<ul>
+				<li>{lang.NOTE} ! {lang.CONFIG_WRITEABLE}</li>
+			</ul>
+		</div>
+	</div>
+	</IF>
+<!-- end info System Messages --> 
+
+<div class="clr"></div>
+
+<!-- start info System Messages -->
+	<IF NAME="there_is_cached">
+	<div id="system-message">
+		<div class="info">
+			<ul>
+				<li>{lang.CACHED_STYLES} ! {there_is_cached}</li>
+			</ul>
+		</div>
+	</div>
+	</IF>
+<!-- end info System Messages --> 
+
+<div class="clr"></div>
 <br />
- 
+<!-- start size stat -->
 
-<IF NAME="update_now">
-<fieldset class="error">
-          <legend>{lang.R_CHECK_UPDATE}</legend>
-			{update_now_disc}
-</fieldset>   
-</IF>
-<IF NAME="no_copyrights">
-<fieldset class="error">
-          <legend>{lang.NOTE}</legend>
-			{no_copyrights_disc}
-</fieldset>   
-</IF>
-<IF NAME="is_config_writable">
-<fieldset class="info">
-          <legend>{lang.NOTE}</legend>
-			{lang.CONFIG_WRITEABLE}
-</fieldset>   
-</IF>
-
-<IF NAME="there_is_cached">
-<fieldset class="info">
-          <legend>{lang.CACHED_STYLES}</legend>
-			{there_is_cached}
-</fieldset>   
-</IF>
-
-<br />
-<fieldset>
-      <legend>{lang.SIZE_STAT}</legend>
-                
-          <table width="100%" cellspacing="1" cellpadding="2" border="0" style=" background-color:#F0F0F0" dir="ltr">
+	<div id="system-message">
+		<div class="stat">
+			<ul>
+				<li><strong>{lang.SIZE_STAT} !</strong><br />
+				<table width="100%" cellspacing="1" cellpadding="2" border="0" dir="ltr">
                 <tr> 
-                  <td colspan="3" style="width:100%; text-align:right;" nowrap="nowrap">{lang.USING_SIZE}</td>
-                </tr>
-                <tr> 
-                  <td colspan="3" style="width:100%;">
-                        <table cellspacing="0" cellpadding="1" border="0">
-                          <tr> 
-                                <td style="background-color: olive"><img src="images/spacer.gif" width="{per1}" height="10" /></td>
-                          </tr>
-                        </table>
-                  </td>
+                  <td colspan="3" style="width:100%; text-align:center;" nowrap="nowrap">{lang.USING_SIZE}</td>
                 </tr>
                 <tr> 
                   <td style="width:33%;background-color: #CCEECC;">0%</td>
@@ -78,9 +151,15 @@
                   <td style="width:33%;background-color: #FFD2D2; text-align:right;">100%</td>
                 </tr>
           </table>
-</fieldset>
+				</li>
+			</ul>
+		</div>
+	</div>
+<!-- end size stat --> 
 
+<div class="clr"></div>
 <br />
+
  <fieldset>
        <legend>{lang.OTHER_INFO}</legend>
 		<table width="100%">
@@ -123,4 +202,5 @@
 		<!-- admin start info2 tr extra -->
 		</table>
  </fieldset>
+ <br />
 </div>

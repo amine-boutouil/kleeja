@@ -35,7 +35,12 @@
 		$usernamelang = sprintf($lang['KLEEJA_CP_W'], $username);
 		
 		//size board by percent
-		$per1 = @round($stat_sizes / ($config['total_size'] * 1048576) ,2) * 100;
+		$per =  $stat_sizes / ($config['total_size'] * 1048576);
+		$per1 =  round($per*100, 2);
+		$per1 =  $per1 >= 100 ? 100 : $per1;
+
+
+		
 		//ppl must know about kleeja version!
 		//ok i forgive ...
 		$kleeja_version	 = '<a href="./admin.php?cp=check_update" title="' . $lang['R_CHECK_UPDATE'] . '">' . KLEEJA_VERSION . '</a>';

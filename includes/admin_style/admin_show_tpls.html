@@ -6,13 +6,17 @@
 	<table style="width: 100%">
 		<tr style="background-color:#F5F5F5">
 			<td>
-
+		<!-- start info System Messages -->
 			<IF NAME="not_style_writeable">
-				<div class="info">
-					{lang.STYLE_DIR_NOT_WR}
+				<div id="system-message">
+					<div class="info">
+						<ul>
+							<li>{lang.STYLE_DIR_NOT_WR} !</li>
+						</ul>
+					</div>
 				</div>
-				<br />
 			</IF>
+		<!-- end info System Messages -->
 
 			<select name="tpl_choose" size="8" style="width:200px;direction:ltr;font-size:13px;">
 				<OPTGROUP LABEL="{lang.TPLS_RE_BASIC}" style="direction:{lang.DIR}">

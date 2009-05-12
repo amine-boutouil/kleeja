@@ -10,6 +10,9 @@
 	<meta http-equiv="Content-Language" content="ar" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link rel="stylesheet" href="{STYLE_PATH_ADMIN}admin_stylesheet.css" type="text/css" />
+	<IF NAME="{lang.DIR}==ltr">
+	<link rel="stylesheet" href="{STYLE_PATH_ADMIN}admin_stylesheet_ltr.css" type="text/css" />
+	</IF>	
 	<link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
 	<script type="text/javascript">
 	function confirm_from()
@@ -24,42 +27,40 @@
 	<script type="text/javascript" src="{STYLE_PATH_ADMIN}images/tips.js"></script> 
 </head>
 <body>
-<!-- start cpanel 1 -->
+<!-- start top div header  -->
 	<div id="divheader">
 		<div id="header">
+		<br />
 			<div class="logo1"><a href="{config.siteurl}"><img src="{STYLE_PATH_ADMIN}images/logo.png" alt="{config.sitename}" /></a></div>
 			<div class="logo2"><img src="{STYLE_PATH_ADMIN}images/adminopen.gif" align="absmiddle" />&nbsp;{lang.KLEEJA_CP}</div>
 		</div>
 	</div>
 <div class="clr"></div>
-<!-- end cpanel 1 -->
+<!-- end top div header  -->
 
-<!-- start cpanel box 2 -->
+<!-- start  div body  -->
 <div id="divbody">
-
-
+<div class="clr"></div>
+<!-- start admin menu right  -->
 <div id="rightmenu">	
-
-<div class="body-menu">
-<IF NAME="SHOW_LIST">
-<!-- BEGIN ADMIN MENU -->
-		<div class="link-menu">
-			<div><a href="{config.siteurl}">
-			<img src="{STYLE_PATH_ADMIN}images/index_button.gif" /><br />{lang.RETURN_HOME}</a></div>
-		</div>
-		
-		<div class="link-menu">
-			<div><a href="admin.php">
-			<img src="{STYLE_PATH_ADMIN}images/cp_button.gif" /><br />{lang.R_CPINDEX}</a></div>
-		</div>
-	<LOOP NAME="adm_extensions_menu">	
-		<div class="link-menu">
-			<div><a href="{{link}}"<IF LOOP="confirm"> onclick="javascript:return confirm_from();"</IF>>
-			<img src="{{icon}}" /><br />{{lang}}</a></div>
-		</div>
-	</LOOP>	
-</IF>
-<!-- END ADMIN MENU -->
-		
+	<div class="body-menu">
+	<IF NAME="SHOW_LIST">
+			<div class="link-menu">
+				<div><p><a href="{config.siteurl}">
+				<img src="{STYLE_PATH_ADMIN}images/index_button.gif" /><br />{lang.RETURN_HOME}</a></p></div>
+			</div>
+			
+			<div class="link-menu">
+				<div><p><a href="admin.php">
+				<img src="{STYLE_PATH_ADMIN}images/cp_button.gif" /><br />{lang.R_CPINDEX}</a></p></div>
+			</div>
+		<LOOP NAME="adm_extensions_menu">	
+			<div class="link-menu">
+				<div><p><a href="{{link}}"<IF LOOP="confirm"> onclick="javascript:return confirm_from();"</IF>>
+				<img src="{{icon}}" /><br />{{lang}}</a></p></div>
+			</div>
+		</LOOP>	
+	</IF>
+	</div>
 </div>
-</div>
+<!-- end admin menu right -->

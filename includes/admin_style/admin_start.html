@@ -1,11 +1,20 @@
-﻿<div id="divmiddle">
-<!-- start welcome user admin -->
-	<p class="welcome"><img src="{STYLE_PATH_ADMIN}images/heart.gif" align="absmiddle" alt="Kleeja love you ..," />&nbsp;{usernamelang}</p>
+﻿<!-- start body panel  -->
+<div id="divmiddle">
 
+<!-- start general stat panel admin -->
+	<p class="title">{lang.GENERAL_STAT}</p>
+<!-- end h1 general stat panel admin -->
+	
 <div class="clr"></div>
 
-<!-- info user admin -->
-	<div id="info-posts">
+	<!-- start welcome user admin -->
+	<p class="welcome"><img src="{STYLE_PATH_ADMIN}images/heart.gif" align="absmiddle" alt="Kleeja love you ..," />&nbsp;{usernamelang}</p>
+	<!-- end  welcome user admin -->
+	
+<div class="clr"></div>
+
+<!-- start last visit  -->
+	<div id="info-last-visit">
 		<ul>
 			<li>
 			<IF NAME="last_visit">
@@ -17,7 +26,7 @@
 			</li>
 		</ul>
 	</div>
-	<div id="info-posts">
+	<div id="info-last-visit">
 		<ul>
 			<li>
 			<strong>{lang.LSTFLE_ST} : <a href="{last_file_up}" target="blank">{last_file_up}</a></strong><br />
@@ -27,65 +36,67 @@
 			</li>
 		</ul>
 	</div>
+<!-- end last visit  -->
 
-<div class="clr"></div>
-		
-	<div id="adm-info">
-	    <h2>{lang.AFILES_NUM}</h2>
-		<input class="info_box" type="text" value="{files_number}" />
-	    <p></p>
+<!-- start users  -->
+	<div id="info-last-visit">
+		<ul>
+			<li>
+				<strong>{lang.AUSERS_NUM} : [{users_number}]
+				<br />
+				<IF NAME="config.user_system==1">
+					{lang.LAST_REG} : [{stat_last_user}]
+				</IF>
+				</strong>
+			</li>
+		</ul>
 	</div> 
+<!-- end  stat last user  -->
 
-	<div id="adm-info">
-	    <h2>{lang.AFILES_SIZE}</h2>
-		<input class="info_box" type="text" value="{files_sizes}" />
-	    <p></p>
+<!-- start files number  -->		
+	<div id="info-last-visit">
+		<ul>
+			<li>
+				<strong>{lang.AFILES_NUM} : [{files_number}]
+				<br /> {lang.AFILES_SIZE} : [{files_sizes}]
+				</strong>
+			</li>
+		</ul>
 	</div> 
+<!-- end files number  -->
 
-	<div id="adm-info">
-	    <h2>{lang.AUSERS_NUM}</h2>
-		<input class="info_box" type="text" value="{users_number}" />
-	    <p></p>
-	</div> 
-
-	<div id="adm-info">
-		<IF NAME="config.user_system==1">
-	        <h2>{lang.LAST_REG}</h2>
-			<input class="info_box" type="text" value="{stat_last_user}" />
-	        <p></p>
-		</IF>
-	</div> 
-
-<div class="clr"></div>
-
-	<div id="info-posts">
+<!-- start  last google -->
+	<div id="info-last-visit">
 		<ul>
 			<li>
 				<strong>{lang.LAST_GOOGLE} : {s_last_google}
-				<br />{lang.GOOGLE_NUM} : {s_google_num}
+				<br />{lang.GOOGLE_NUM} : [{s_google_num}]
 				</strong>
 			</li>
 		</ul>
 	</div>
-		
-	<div id="info-posts">
+<!-- end  last google -->
+
+<!-- start  last yahoo -->		
+	<div id="info-last-visit">
 		<ul>
 			<li>
 				<strong>{lang.LAST_YAHOO} : {s_last_yahoo}
-				<br />{lang.YAHOO_NUM} : {s_yahoo_num}
+				<br />{lang.YAHOO_NUM} : [{s_yahoo_num}]
 				</strong>
 			</li>
 		</ul>
 	</div>
+<!-- end  last yahoo -->	
 
-<div class="clr"></div>
+<div class="clr"></div>	
 <br />
 <!-- start error System Messages -->
 	<IF NAME="update_now">
 	<div id="system-message">
 		<div class="error">
 			<ul>
-				<li>{lang.R_CHECK_UPDATE} ! {update_now_disc}</li>
+				<li><u>{lang.R_CHECK_UPDATE} !</u><p>{update_now_disc}</p></li>
 			</ul>
 		</div>
 	</div>
@@ -94,30 +105,31 @@
   
 <div class="clr"></div>
 
-<!-- start error System Messages -->
+<!-- start error copyrights disc System Messages -->
 	<IF NAME="no_copyrights">
 	<div id="system-message">
 		<div class="error">
 			<ul>
-				<li>{lang.NOTE} ! {no_copyrights_disc}</li>
+				<li><u>{lang.NOTE} !</u><p>{no_copyrights_disc}</p></li>
 			</ul>
 		</div>
 	</div>
 	</IF>
-<!-- end error System Messages -->  
+<!-- end error copyrights disc System Messages -->
 
 <div class="clr"></div>
-<!-- start info System Messages -->
+
+<!-- start config writable System Messages -->
 	<IF NAME="is_config_writable">
 	<div id="system-message">
 		<div class="info">
 			<ul>
-				<li>{lang.NOTE} ! {lang.CONFIG_WRITEABLE}</li>
+				<li><u>{lang.NOTE} !</u><p>{lang.CONFIG_WRITEABLE}</p></li>
 			</ul>
 		</div>
 	</div>
 	</IF>
-<!-- end info System Messages --> 
+<!-- end config writable System Messages -->
 
 <div class="clr"></div>
 
@@ -126,7 +138,7 @@
 	<div id="system-message">
 		<div class="info">
 			<ul>
-				<li>{lang.CACHED_STYLES} ! {there_is_cached}</li>
+				<li><u>{lang.CACHED_STYLES} !</u><p>{there_is_cached}</p></li>
 			</ul>
 		</div>
 	</div>
@@ -135,72 +147,63 @@
 
 <div class="clr"></div>
 <br />
-<!-- start size stat -->
-
-	<div id="system-message">
-		<div class="stat">
-			<ul>
-				<li><strong>{lang.SIZE_STAT} !</strong><br />
-				<table width="100%" cellspacing="1" cellpadding="2" border="0" dir="ltr">
-                <tr> 
-                  <td colspan="3" style="width:100%; text-align:center;" nowrap="nowrap">{lang.USING_SIZE}</td>
-                </tr>
-                <tr> 
-                  <td style="width:33%;background-color: #CCEECC;">0%</td>
-                  <td style="width:34%; background-color: #FFFFE8; text-align:center;">50%</td>
-                  <td style="width:33%;background-color: #FFD2D2; text-align:right;">100%</td>
-                </tr>
-          </table>
-				</li>
-			</ul>
-		</div>
-	</div>
-<!-- end size stat --> 
+<!-- start stat  disk size -->
+<div id="info-size-stat">
+	<ul>
+		<li>
+		<strong>{lang.SIZE_STAT} &gt;&gt; {lang.USING_SIZE}</strong>
+		<br />	
+			<table cellspacing="1" cellpadding="0" dir="ltr">
+			<tr> 
+				<td style="width:33%;background-color: #CCEECC;text-align:left;">0%</td>
+				<td style="width:34%; background-color: #FFFFE8; text-align:center;">50%</td>
+				<td style="width:33%;background-color: #FFD2D2; text-align:right;">100%</td>
+			</tr>
+			</table>
+		</li>
+	</ul>
+</div>
+<!-- end stat  disk size  --> 
 
 <div class="clr"></div>
 <br />
 
- <fieldset>
-       <legend>{lang.OTHER_INFO}</legend>
-		<table width="100%">
-		<tr>
-			<td><b>{lang.KLEEJA_VERSION} :</b>
-			</td>
-			<td>{kleeja_version}
-			</td>
-		</tr>
-		<tr>
-			<td><b>{lang.PHP_VER} :</b>
-			</td>
-			<td>{php_version}
-			</td>
-		</tr>
-		<tr>
-			<td><b>{lang.MYSQL_VER} :</b>
-			</td>
-			<td>{mysql_version}
-			</td>
-		</tr>
-		<tr>
-			<td><b>max_execution_time :</b>
-			</td>
-			<td>{max_execution_time}
-			</td>
-		</tr>
-		<tr>
-			<td><b>upload_max_filesize :</b>
-			</td>
-			<td>{upload_max_filesize}
-			</td>
-		</tr>
-		<tr>
-			<td><b>post_max_size:</b>
-			</td>
-			<td>{post_max_size}
-			</td>
-		</tr>
-		<!-- admin start info2 tr extra -->
-		</table>
- </fieldset>
- <br />
+<div id="system-message">
+	<div class="OTHER_INFO">
+	<ul>
+		<li>{lang.OTHER_INFO} !</li>
+		<li>
+		<table>
+			<tr>
+				<td>{lang.KLEEJA_VERSION} :</td>
+				<td>{kleeja_version}</td>
+			</tr>
+			<tr>
+				<td>{lang.PHP_VER} :</td>
+				<td>{php_version}</td>
+			</tr>
+			<tr>
+				<td>{lang.MYSQL_VER} :</td>
+				<td>{mysql_version}</td>
+			</tr>
+			<tr>
+				<td>max_execution_time :</td>
+				<td>{max_execution_time}</td>
+			</tr>
+			<tr>
+				<td>upload_max_filesize :</td>
+				<td>{upload_max_filesize}</td>
+			</tr>
+			<tr>
+				<td>post_max_size:</td>
+				<td>{post_max_size}</td>
+			</tr>
+		</table>					
+		</li>
+	</ul>
 </div>
+</div>
+<br />
+</div>
+<div class="clr"></div>
+<!-- end body panel  -->

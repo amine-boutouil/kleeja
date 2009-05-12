@@ -44,7 +44,16 @@
 </fieldset>
 <fieldset class="quick" style="text-align:center">
 	<IF NAME="not_style_writeable">
-		<div class="info">{lang.STYLE_DIR_NOT_WR}</div>
+		<!-- start info System Messages -->
+			<div id="system-message">
+				<div class="info">
+					<ul>
+						<li>{lang.STYLE_DIR_NOT_WR} !</li>
+					</ul>
+				</div>
+			</div>
+		<!-- end info System Messages -->
+
 	<ELSE>
         <input class="button2" name="tpl_edit_submit" type="submit" value="{lang.SUBMIT}" />
 	</IF>

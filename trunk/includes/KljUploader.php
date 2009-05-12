@@ -239,6 +239,10 @@ function process ()
 			{
 				$wut = 2;
 			}
+			else
+			{
+				$wut = null;	
+			}
 
 
 			//safe_code .. captcha is on
@@ -267,10 +271,10 @@ function process ()
 				//
 				for($i=0;$i<=$this->filesnum;$i++)
 				{
-					$this->filename2	= explode(".", $_FILES['file']['name'][$i]);
-					$this->filename2	= $this->filename2[count($this->filename2)-1];
+					$this->filename2	= @explode(".", $_FILES['file']['name'][$i]);
+					$this->filename2	= $this->filename2[sizeof($this->filename2)-1];
 					$this->typet		= $this->filename2;
-					$this->sizet		= $_FILES['file']['size'][$i];
+					$this->sizet		= !empty($_FILES['file']['size'][$i]) ?  $_FILES['file']['size'][$i] : null;
 					
 						// decoding
 						if($this->decode == "time")
@@ -568,28 +572,27 @@ function process ()
 								);
 								
 				($hook = kleeja_run_hook('qr_update_no_files_kljuploader')) ? eval($hook) : null; //run hook
-				if (!$SQL->build($update_query))
-				{
-					die($lang['CANT_UPDATE_SQL']);
-				}
+				
+				$SQL->build($update_query);
 				
 				//delete cache of stats !
 				delete_cache('data_stats');
 
 					//show del code link
+					$extra_del = '';
 					if ($config['del_url_file'])
 					{
-							$extra_del	= $lang['URL_F_DEL'] . ':<br /><textarea rows="2" cols="49" rows="1">';
-							$extra_del	.= $this->linksite . (($config['mod_writer']) ? "del" . $code_del . ".html" : 'go.php?go=del&amp;cd=' . $code_del);
-							$extra_del	.='</textarea><br />';
+						$extra_del	= $lang['URL_F_DEL'] . ':<br /><textarea rows="2" cols="49" rows="1">';
+						$extra_del	.= $this->linksite . (($config['mod_writer']) ? "del" . $code_del . ".html" : 'go.php?go=del&amp;cd=' . $code_del);
+						$extra_del	.='</textarea><br />';
 					}
 
 
 					//show imgs
 					if (in_array(strtolower($this->typet), array('png','gif','jpg','jpeg','tif','tiff')))
 					{
-
 						//make thumbs
+						$extra_show_img = $extra_thmb = '';
 						if( ($config['thumbs_imgs'] != 0) && in_array(strtolower($this->typet), array('png','jpg','jpeg','gif')))
 						{
 							list($thmb_dim_w, $thmb_dim_h) = @explode('*', $config['thmb_dims']);

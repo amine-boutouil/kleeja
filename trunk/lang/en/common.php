@@ -372,9 +372,13 @@ $lang = array_merge($lang, array(
 	'PLGUIN_DISABLED_ENABLED' => 'Plugin Enabled / Disabled',
 	'NO_PLUGINS' => 'No plugins found',
 	'NEW_PLUGIN_ADDED' => 'Plugin added ... <br /> Note: some plugins come with extra files , you need to transfer them to root folder of Kleeja.',
+	'PLUGIN_EXISTS_BEFORE' => 'This plugin exists before with same version or above, so no need to update it!.',
+	'PLUGIN_UPDATED_SUCCESS' => 'This plugin is updated successfully...',
+	
 	'R_CHECK_UPDATE' => 'Check for updates',
 	'ERROR_CHECK_VER' => 'Error: cannot get any update information at this momoent , try again later !',
-
+	'UPDATE_KLJ_NOW' => 'You Have to update your version now!. visit Kleeja.com for more inforamtion',
+	'U_LAST_VER_KLJ' => 'You are using the lastest version of Kleeja...',
 	
 	
 	//rc6
@@ -415,8 +419,6 @@ $lang = array_merge($lang, array(
 	'NO_KLEEJA_COPYRIGHTS'	=> 'you seem to have accidentally removed the copyrights from the footer, please put it back on so we can continue to develop Kleeja free of charge, you can buy a copyright removal license %s .',
 	'USERS_NOT_NORMAL_SYS'	=> 'The current users system is not the normal one, which means that the current users cannot be edited from here but from the script that was integrated with Kleeja, those users use the normal membership system.',
 	'ARE_YOU_SURE_DO_THIS'	=> 'Are you sure you want to do this?',
-	'UPDATE_KLJ_NOW' => 'You Have to update your version now!. visit Kleeja.com for more inforamtion',
-	'U_LAST_VER_KLJ' => 'You are using the lastest version of Kleeja...',
 	'SITE_FOR_MEMBER_ONLY'	=> 'This center is only for members, register or login to upload your files.',
 	'DIMENSIONS_THMB'		=> 'Thumbs dimensions',
 	'AUTH_INTEGRATION_N_UTF8_T'	=> '%s is not utf8',

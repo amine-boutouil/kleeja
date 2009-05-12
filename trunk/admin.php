@@ -23,6 +23,84 @@
 	include ('includes/common.php');
 	include_once ('includes/version.php');
 
+	//go to ..
+	$go_to	= isset($_GET['cp']) ? htmlspecialchars($_GET['cp']) : 'start';
+	$username = $usrcp->name();
+	
+	//need to login again
+	if(empty($_SESSION['ADMINLOGIN']) or $_SESSION['ADMINLOGIN'] != '1') 
+	{
+		if(isset($_GET['go']) && $_GET['go'] == 'login') 
+		{			
+			
+			if (isset($_POST['submit']))
+			{
+				//for onlines
+				$ip	=	(getenv('HTTP_X_FORWARDED_FOR')) ?  getenv('HTTP_X_FORWARDED_FOR') : getenv('REMOTE_ADDR');
+					
+				if ($config['allow_online'] == 1)
+				{
+					$query_del	= array(	'DELETE'	=> "{$dbprefix}online",
+											'WHERE'		=> "ip='" . $ip . "'"
+										);
+						
+					$SQL->build($query_del);
+				}
+
+				//login
+				$ERRORS	=	'';
+				if (empty($_POST['lname']) || empty($_POST['lpass']))
+				{
+					$ERRORS[] = $lang['EMPTY_FIELDS'];
+				}
+				elseif(!$usrcp->data($_POST['lname'], $_POST['lpass']))
+				{
+					$ERRORS[] = $lang['LOGIN_ERROR'];
+				}
+					
+				
+				if(empty($ERRORS))
+				{
+					$_SESSION['ADMINLOGIN'] = '1';
+					header('Location: admin.php?cp=' . $go_to);
+				}
+				else
+				{
+					$errs =	'';
+					foreach($ERRORS as $r)
+					{
+						$errs .= '- ' . $r . '. <br />';
+					}
+					//kleeja_admin_err($errs,false);
+				}
+			}
+		}
+			//show template login .
+			//body
+			$action	= "admin.php?go=login&amp;cp=" . $go_to;
+			$err = false;
+			if(!empty($errs))
+			{
+				$err = true;
+			}
+			
+			if($config['user_system'] != '1' && isset($script_encoding) && function_exists('iconv') && !eregi('utf',strtolower($script_encoding)) && !defined('DISABLE_INTR'))
+			{
+				//send custom chaeset header
+				header("Content-type: text/html; charset={$script_encoding}");
+				//change login page encoding if kleeja is integrated with other script
+				echo iconv("UTF-8", strtoupper($script_encoding) . "//IGNORE", $tpl->display("admin_login"));	
+
+			}
+			else
+			{
+				echo $tpl->display("admin_login");
+			}
+			
+		exit;	//stop	
+	}
+
+
 	//path of admin extensions
 	$path_adm	= "includes/adm";
 
@@ -33,7 +111,7 @@
 	$ext_confirm	= array();
 	$ext_confirm[]	= 'repair';	
 	$ext_confirm[]	= 'lgoutcp';	
-	$username = $usrcp->name();
+	
 	($hook = kleeja_run_hook('begin_admin_page')) ? eval($hook) : null; //run hook 
 
 	//for security
@@ -45,10 +123,9 @@
 		kleeja_err($text);
 	}
 	
-	$usernamelang = sprintf($lang['KLEEJA_CP_W'], $username);
+	
 	$SHOW_LIST = true; //fix bug
 
-	$go_to	= htmlspecialchars($_GET['cp']);
 	
 	//get adm extensions
 	$dh = @opendir($path_adm);
@@ -113,7 +190,7 @@
 		
 		++$i;
 		$adm_extensions_menu[$i]	= array('icon'	=> (file_exists($STYLE_PATH_ADMIN . 'images/' . ($m == 'configs' ? 'options' : $m) . '_button.gif'))	? $STYLE_PATH_ADMIN . 'images/' . ($m == 'configs' ? 'options' : $m) . '_button.gif' : $STYLE_PATH_ADMIN . 'images/no_icon_button.gif',
-											'lang'	=> ($lang['R_'. strtoupper($m)]) ? $lang['R_'. strtoupper($m)]: (($lang[strtoupper($m)]) ? $lang[strtoupper($m)] :  (($olang[strtoupper($m)]) ? $olang[strtoupper($m)] : strtoupper($m))),
+											'lang'	=> !empty($lang['R_'. strtoupper($m)]) ? $lang['R_'. strtoupper($m)]: (!empty($lang[strtoupper($m)]) ? $lang[strtoupper($m)] :  (!empty($olang[strtoupper($m)]) ? $olang[strtoupper($m)] : strtoupper($m))),
 											'link'	=> 'admin.php?cp=' . ($m == 'configs' ? 'options' : $m),
 											'confirm'	=> (@in_array($m, $ext_confirm)) ? true : false,
 											);
@@ -125,89 +202,15 @@
 	
 	($hook = kleeja_run_hook('end_admin_page')) ? eval($hook) : null; //run hook 
 	
-	//need to login again
-	if($_SESSION['ADMINLOGIN'] != '1') 
-	{
-		if($_GET['go'] == 'login') 
-		{			
-			
-			if (isset($_POST['submit']))
-			{
-				//for onlines
-				$ip	=	(getenv('HTTP_X_FORWARDED_FOR')) ?  getenv('HTTP_X_FORWARDED_FOR') : getenv('REMOTE_ADDR');
-					
-				if ($config['allow_online'] == 1)
-				{
-					$query_del	= array(	'DELETE'	=> "{$dbprefix}online",
-											'WHERE'		=> "ip='" . $ip . "'"
-										);
-						
-					if (!$SQL->build($query_del))
-					{
-						die($lang['CANT_DELETE_SQL']);
-					}
-				}
 
-				//login
-				$ERRORS	=	'';
-				if (empty($_POST['lname']) || empty($_POST['lpass']))
-				{
-					$ERRORS[] = $lang['EMPTY_FIELDS'];
-				}
-				elseif(!$usrcp->data($_POST['lname'], $_POST['lpass']))
-				{
-					$ERRORS[] = $lang['LOGIN_ERROR'];
-				}
-					
-				
-				if(empty($ERRORS))
-				{
-					$_SESSION['ADMINLOGIN'] = '1';
-					header('Location: admin.php?cp=' . $go_to);
-				}
-				else
-				{
-					$errs	=	'';
-					foreach($ERRORS as $r)
-					{
-						$errs	.= '- ' . $r . '. <br />';
-					}
-					//kleeja_admin_err($errs,false);
-				}
-			}
-		}
-			//show template login .
-			//body
-			$action	= "admin.php?go=login&amp;cp=" . $go_to;
-			if(!empty($errs))
-			{
-				$err = true;
-			}
-			
-			if($config['user_system'] != '1' && isset($script_encoding) && function_exists('iconv') && !eregi('utf',strtolower($script_encoding)) && !defined('DISABLE_INTR'))
-			{
-				//send custom chaeset header
-				header("Content-type: text/html; charset={$script_encoding}");
-				//change login page encoding if kleeja is integrated with other script
-				echo iconv("UTF-8", strtoupper($script_encoding) . "//IGNORE", $tpl->display("admin_login"));	
-
-			}
-			else
-			{
-				echo $tpl->display("admin_login");
-			}
-			
-	}
-	else 
-	{
-		//show style .
-		//header
-		echo $tpl->display("admin_header");
-			//body
-			echo $tpl->display($stylee);
-		//footer
-		echo $tpl->display("admin_footer");
-	}
+	//show style .
+	//header
+	echo $tpl->display("admin_header");
+		//body
+		echo $tpl->display($stylee);
+	//footer
+	echo $tpl->display("admin_footer");
+	
 	
 	
 	//close db

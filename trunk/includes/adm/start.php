@@ -13,9 +13,9 @@
 		//style of
 		$stylee 				= "admin_start";
 		//last visit
-		$last_visit				= isset($_SESSION['LAST_VISIT']) && $config['user_system'] == 1 ?  date("[d-m-Y], [h:i a] ", $_SESSION['LAST_VISIT']) : false;
-		$h_lst_files			= './admin.php?cp=files&amp;last_visit=' . $_SESSION['LAST_VISIT'];
-		$h_lst_imgs				= './admin.php?cp=img_ctrl&amp;last_visit=' . $_SESSION['LAST_VISIT'];
+		$last_visit				= (!empty($_SESSION['LAST_VISIT']) && $config['user_system'] == 1) ?  date("[d-m-Y], [h:i a] ", $_SESSION['LAST_VISIT']) : false;
+		$h_lst_files			= './admin.php?cp=files&amp;last_visit=' . (!empty($_SESSION['LAST_VISIT']) ? $_SESSION['LAST_VISIT'] : time() - 3600*12);
+		$h_lst_imgs				= './admin.php?cp=img_ctrl&amp;last_visit=' . (!empty($_SESSION['LAST_VISIT']) ? $_SESSION['LAST_VISIT'] : time() - 3600*12);
 		
 		//data
 		$files_number 		= $stat_files ;
@@ -23,9 +23,6 @@
 		$users_number 		= $stat_users;
 		$last_file_up		= $stat_last_file;
 		$last_del_fles 		= date("d-m-Y h:i a", $stat_last_f_del);
-		$s_c_t				= $stat_counter_today;
-		$s_c_y				= $stat_counter_yesterday;
-		$s_c_a				= $stat_counter_all;
 		$php_version 		= 'php ' . phpversion();
 		$mysql_version 		= 'MYSQL ' . $SQL->mysql_version;
 		$max_execution_time = @ini_get('max_execution_time');
@@ -35,14 +32,16 @@
 		$s_google_num		= $stat_google_num;
 		$s_last_yahoo		= ($stat_last_yahoo == 0) ? '[ ? ]' : date("d-m-Y h:i a", $stat_last_yahoo);
 		$s_yahoo_num		= $stat_yahoo_num;
+		$usernamelang = sprintf($lang['KLEEJA_CP_W'], $username);
+		
 		//size board by percent
-		$per1 = @round($stat_sizes / ($config['total_size'] *1048576) ,2) *100;
+		$per1 = @round($stat_sizes / ($config['total_size'] * 1048576) ,2) * 100;
 		//ppl must know about kleeja version!
 		//ok i forgive ...
 		$kleeja_version	 = '<a href="./admin.php?cp=check_update" title="' . $lang['R_CHECK_UPDATE'] . '">' . KLEEJA_VERSION . '</a>';
 		
 		//updating
-		$v = unserialize($config['new_version']);
+		$v = @unserialize($config['new_version']);
 		$update_now		= (version_compare(strtolower(KLEEJA_VERSION), strtolower($v['version_number']), '<')) ? true : false;
 		$update_now_disc = sprintf($lang['UPDATE_NOW_S'] , KLEEJA_VERSION, $v['version_number']) . '<br />' . '<a href="http://www.kleeja.com/">www.kleeja.com</a>';
 		

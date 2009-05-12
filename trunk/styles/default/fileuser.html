@@ -6,19 +6,19 @@
         <h2>{lang.PUBLIC_USER_FILES} : {user_name}</h2>
         </IF>
 
-        <table>
-                <tr class="row1"><td>{n_name}</td><td></td><td></td></tr>
+        <table style="width:100%">
+                <tr class="row1"><td>#</td><td>{lang.FILENAME}</td><td>{lang.FILETYPE}</td></tr>
         <IF NAME="no_results">
         <tr class="row2">
         <td colspan="3">...</td>
         </tr>
         <ELSE>
         <LOOP NAME="arr">
-                <tr class="row2">
-                <td><img src="{{icon_link}}" alt="{{file_type}}" /></td>
-                <td>{{name}}</td>
-                <td>{{file_type}}</td>
-                </tr>
+       	 <tr class="row2">
+           <td><img src="{{icon_link}}" alt="{{file_type}}" /></td>
+          	<td>{{name}}</td>
+            <td>{{file_type}}</td>
+          </tr>
         </LOOP>
         </IF>
         </table>

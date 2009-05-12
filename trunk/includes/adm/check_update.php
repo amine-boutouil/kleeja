@@ -48,7 +48,7 @@
 		}
 		
 		//lets recore it
-		$v = unserialize($config['new_version']);
+		$v = @unserialize($config['new_version']);
 	
 		//if(version_compare(strtolower($v['version_number']), strtolower($version_data), '<') || isset($_GET['show_msg']))
 		//{
@@ -71,7 +71,7 @@
 			$data	= array('version_number'	=> $version_data,
 							'last_check'		=> time(),
 							'msg_appeared'		=> isset($_GET['show_msg']) ? true : false,
-							'copyrights'		=> strpos($b_data[1], 'yes') !== false ? true : false,
+							'copyrights'		=> !empty($b_data[1]) && strpos($b_data[1], 'yes') !== false ? true : false,
 						);
 			
 

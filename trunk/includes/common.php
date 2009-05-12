@@ -15,13 +15,18 @@
 	{
 		exit('no directly opening : ' . __file__);
 	}
-		  
+
 	//we are in the common file 
 	define ('IN_COMMON', true);
+	
+	//
+	//development stage;  developers stage
+	//
+	define('DEV_STAGE', true);
 		 
-		 
+		
 	// Report all errors, except notices
-	@error_reporting(E_ALL ^ E_NOTICE);
+	defined('DEV_STAGE') ? @error_reporting(E_ALL) : @error_reporting(E_ALL ^ E_NOTICE);
 
 
 	// start session
@@ -109,10 +114,11 @@
 	require ($path . 'functions.php');
 
 	//. install.php exists
-	if (file_exists($root_path . 'install') && !defined('IN_ADMIN') && !defined('IN_LOGIN'))
+	if (file_exists($root_path . 'install') && !defined('IN_ADMIN') && !defined('IN_LOGIN') && !defined('DEV_STAGE'))
 	{
-		//big_error('install folder exists!', '<b>Install</b> folder detected! please delete it OR install <b>Kleeja</b> if you haven\'t done so yet...<br/><br/><a href="'.$root_path.'install">Click to Install</a><br/><br/>');
+		big_error('install folder exists!', '<b>Install</b> folder detected! please delete it OR install <b>Kleeja</b> if you haven\'t done so yet...<br/><br/><a href="'.$root_path.'install">Click to Install</a><br/><br/>');
 	}
+	
 
      
 	// start classes ..
@@ -126,6 +132,12 @@
 
 	//then get caches
 	require ($path . 'cache.php');
+	
+	//no tpl caching in dev stage  
+	if(defined('DEV_STAGE'))
+	{
+		$tpl->caching = false;
+	}
 	
 	// for gzip : php.net
 	//fix bug # 181
@@ -218,7 +230,7 @@
 	//visit_stats();
 	
 	//check for page numbr
-	if(!$perpage || intval($perpage) == 0)
+	if(empty($perpage) || intval($perpage) == 0)
 	{
 		$perpage = 10;
 	}

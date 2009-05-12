@@ -30,7 +30,7 @@
 			while($row=$SQL->fetch_array($result))
 			{
 					$arr[] = array( 'plg_id'		=> $row['plg_id'],
-									'plg_name'		=> $row['plg_name'].(($row['plg_disabled']==1)? ' [x]': ''),
+									'plg_name'		=> $row['plg_name'] . ($row['plg_disabled'] == 1 ? ' [x]': ''),
 									'plg_disabled'	=> $row['plg_disabled'] == '1' ? true : false,
 									'plg_ver'		=> $row['plg_ver'],
 									'plg_author'	=> $row['plg_author'],
@@ -46,12 +46,11 @@
 		$SQL->freeresult($result);
 	
 
-		//after submit ////////////////
+		//after submit 
 		if (isset($_GET['do_plg']))
 		{
 			$plg_id = intval($_GET['do_plg']);
 
-			
 			switch($_GET['m'])
 			{
 				case '1': // disable the plguin		
@@ -66,19 +65,15 @@
 											'WHERE'		=> "plg_id='" . $plg_id . "'"
 										);
 
-					if ($SQL->build($update_query))
-					{
-							//delete cache ..
-							delete_cache('data_hooks');
+					$SQL->build($update_query);
+					//delete cache ..
+					delete_cache('data_hooks');
 							
-							//show msg
-							$text	= $lang['PLGUIN_DISABLED_ENABLED'];
-							$stylee	= "admin_info";
-					}
-					else
-					{
-							die($lang['CANT_UPDATE_SQL']);
-					}	
+					//show msg
+					$text = $lang['PLGUIN_DISABLED_ENABLED'];
+					$text .= '<meta HTTP-EQUIV="REFRESH" content="1; url=./admin.php?cp=plugins">' . "\n";
+					$stylee	= "admin_info";
+		
 					
 				break;
 				
@@ -104,21 +99,14 @@
 											'WHERE'		=> "plg_id='" . $plg_id . "'"
 											);
 
-											
-							if (!$SQL->build($query_del)) 
-							{
-								die($lang['CANT_DELETE_SQL']);
-							}	
+							$SQL->build($query_del);
 											
 							$query_del2 = array(
 											'DELETE'	=> "{$dbprefix}hooks",
 											'WHERE'		=> "plg_id='" . $plg_id . "'"
 											);		
 											
-							if (!$SQL->build($query_del2))
-							{
-								die($lang['CANT_DELETE_SQL'] . '2');
-							}	
+							$SQL->build($query_del2);
 							
 							//delete cache ..
 							delete_cache('data_hooks');
@@ -126,6 +114,7 @@
 
 							//show msg
 							$text	= $lang['PLUGIN_DELETED'];
+							$text .= '<meta HTTP-EQUIV="REFRESH" content="1; url=./admin.php?cp=plugins">' . "\n";
 							$stylee	= "admin_info";
 						
 				break;
@@ -140,11 +129,11 @@
 			// oh , some errors
 			if($_FILES['imp_file']['error'])
 			{
-				$text	= $lang['ERR_IN_UPLOAD_XML_FILE'];
+				$text = $lang['ERR_IN_UPLOAD_XML_FILE'];
 			}
 			else if(!is_uploaded_file($_FILES['imp_file']['tmp_name']))
 			{
-				$text	= $lang['ERR_UPLOAD_XML_FILE_NO_TMP'];
+				$text = $lang['ERR_UPLOAD_XML_FILE_NO_TMP'];
 			}
 
 			//get content
@@ -154,24 +143,35 @@
 			// Are there contents?
 			if(!trim($contents))
 			{
-				$text	= $lang['ERR_UPLOAD_XML_NO_CONTENT'];
+				$text = $lang['ERR_UPLOAD_XML_NO_CONTENT'];
 			}
 						
 						
 			if(empty($text))
 			{
-				if(creat_plugin_xml($contents))
+				$return = creat_plugin_xml($contents);
+				
+				if($return === true)
 				{
-					$text	= $lang['NEW_PLUGIN_ADDED'];	
+					$text = $lang['NEW_PLUGIN_ADDED'];
+					$text .= '<meta HTTP-EQUIV="REFRESH" content="3; url=./admin.php?cp=plugins">' . "\n";
+				}
+				else if ($return === 'xyz')//exists before
+				{
+					$text = $lang['PLUGIN_EXISTS_BEFORE'];
+					$text .= '<meta HTTP-EQUIV="REFRESH" content="3; url=./admin.php?cp=plugins">' . "\n";					
+				}
+				else if ($return === 'upd') // updated success
+				{
+					$text = $lang['PLUGIN_UPDATED_SUCCESS'];
+					$text .= '<meta HTTP-EQUIV="REFRESH" content="3; url=./admin.php?cp=plugins">' . "\n";			
 				}
 				else
 				{
-					$text	= $lang['ERR_IN_UPLOAD_XML_FILE'];
+					$text = $lang['ERR_IN_UPLOAD_XML_FILE'];
 				}
 			}		
 						
-					
-					
 			$stylee	= "admin_info";
 		}
 ?>

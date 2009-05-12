@@ -104,7 +104,7 @@ if (!defined('IN_COMMON'))
             $reps  = array('==','<','>','<=','>=', '!=', '==', '!=', '>=', '<=', '<', '>');
 			
             $atts = call_user_func(array('kleeja_style','_get_attributes'), $matches[0]);
-            $con = ($atts['NAME']) ? $atts['NAME'] : $atts['LOOP'];
+            $con = !empty($atts['NAME']) ? $atts['NAME'] : $atts['LOOP'];
 			
             if(preg_match('/(.*)(' . implode('|', $char) . ')(.*)/i', $con, $arr))
 			{
@@ -123,7 +123,7 @@ if (!defined('IN_COMMON'))
             }
 			elseif($con{0} !== '$')
 			{
-                $con = ($atts['NAME']) ? '{' . $con . '}' : '{{' . $con . '}}';
+                $con = !empty($atts['NAME']) ? '{' . $con . '}' : '{{' . $con . '}}';
                 $con = call_user_func(array('kleeja_style', '_var_callback'), $con);
             }
 			

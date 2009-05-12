@@ -48,14 +48,7 @@ class ocr_captcha
 			$public = $this->public_key;
 		}
 		
-		if (strpos($_SERVER['SystemRoot'], ":\\")===false) // so linux system
-		{
-			$rad = "cache/"; // Document_root works nicely here  
-		}
-		else // windows system 
-        {
-			$rad = "cache/"; 
-		}
+		$rad = "cache/";
 		
 		return $rad . $public . "." . $this->imagetype;
     }

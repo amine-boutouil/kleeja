@@ -36,6 +36,7 @@ function Saaheader($title, $outscript=false)
 			$login_url		= ($config['mod_writer']) ? "login.html" : "ucp.php?go=login";
 			$usrcp_name		= $lang['REGISTER'];
 			$usrcp_url		= ($config['mod_writer']) ? "register.html" : "ucp.php?go=register";
+			$usrfile_url = $usrfile_name = null;
 		}
 		else
 		{
@@ -127,6 +128,7 @@ function Saafooter($outscript=false)
 		global $do_gzip_compress, $script_encoding, $errorpage;
 		
 		//show stats ..
+		$page_stats = '';
 		if ($config['statfooter'] !=0) 
 		{
 			$gzip			= ($do_gzip_compress !=0 )?  "Enabled" : "Disabled";
@@ -137,32 +139,31 @@ function Saafooter($outscript=false)
 			$time_sql		= round($SQL->query_num / $loadtime) ;
 			$link_dbg		= (($usrcp->admin()) ? "[ <a href=" .  str_replace('debug','',kleeja_get_page()) . ((strpos(kleeja_get_page(), '?') === false) ? '?' : '&') . "debug>More Details ... </a> ]" : null);
 			$page_stats	= "<strong>[</strong> GZIP : $gzip - Generation Time: $loadtime Sec  - Queries: $queries_num - Hook System:  $hksys <strong>]</strong>  " . $link_dbg ;
-			$tpl->assign("page_stats",$page_stats);
 		}#end statfooter
-
+		
+		$tpl->assign("page_stats", $page_stats);
+		
 		//if admin, show admin in the bottom of all page
-		if ($usrcp->admin())
-		{
-			$admin_page = '<br /><a href="./admin.php">' . $lang['ADMINCP'] .  '</a><br />';
-			$tpl->assign("admin_page",$admin_page);
-		}
+		$tpl->assign("admin_page", ($usrcp->admin() ?'<br /><a href="./admin.php">' . $lang['ADMINCP'] .  '</a><br />' : ''));
 		
 		// if google analytics .. //new version 
 		//http://www.google.com/support/googleanalytics/bin/answer.py?answer=55488&topic=11126
+		$googleanalytics = '';
 		if (strlen($config['googleanalytics']) > 4)
 		{
-			$googleanalytics = '<script type="text/javascript">' . "\n";
-			$googleanalytics = 'var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");' . "\n";
-			$googleanalytics = 'document.write("\<script src=\'" + gaJsHost + "google-analytics.com/ga.js\' type=\'text/javascript\'>\<\/script>" );' . "\n";
-			$googleanalytics = '</script>' . "\n";
-			$googleanalytics = '<script type="text/javascript">' . "\n";
-			$googleanalytics = 'var pageTracker = _gat._getTracker("' . $config['googleanalytics'] . '");' . "\n";
-			$googleanalytics = 'pageTracker._initData();' . "\n";
-			$googleanalytics = 'pageTracker._trackPageview();' . "\n";
-			$googleanalytics = '</script>' . "\n";
-			$tpl->assign("googleanalytics", $googleanalytics);
+			$googleanalytics .= '<script type="text/javascript">' . "\n";
+			$googleanalytics .= 'var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");' . "\n";
+			$googleanalytics .= 'document.write("\<script src=\'" + gaJsHost + "google-analytics.com/ga.js\' type=\'text/javascript\'>\<\/script>" );' . "\n";
+			$googleanalytics .= '</script>' . "\n";
+			$googleanalytics .= '<script type="text/javascript">' . "\n";
+			$googleanalytics .= 'var pageTracker = _gat._getTracker("' . $config['googleanalytics'] . '");' . "\n";
+			$googleanalytics .= 'pageTracker._initData();' . "\n";
+			$googleanalytics .= 'pageTracker._trackPageview();' . "\n";
+			$googleanalytics .= '</script>' . "\n";
 		}
-		
+
+		$tpl->assign("googleanalytics", $googleanalytics);	
+
 		($hook = kleeja_run_hook('func_Saafooter')) ? eval($hook) : null; //run hook
 		
 		//show footer
@@ -490,17 +491,17 @@ function creat_plugin_xml($contents)
 
 				$gtree = xml_to_array($contents);
 				
-				$tree				= $gtree['kleeja'];
-				$plg_info			= $tree['info'];
-				$plg_install		= $tree['install'];
-				$plg_uninstall		= $tree['uninstall'];
-				$plg_tpl			= $tree['templates'];		
-				$plg_hooks			= $tree['hooks'];		
-				$plg_langs			= $tree['langs'];
-				$plg_updates		= $tree['updates'];
+				$tree				= empty($gtree['kleeja']) ? null : $gtree['kleeja'];
+				$plg_info			= empty($tree['info']) ? null : $tree['info'];
+				$plg_install		= empty($tree['install']) ? null : $tree['install'];
+				$plg_uninstall		= empty($tree['uninstall']) ? null : $tree['uninstall'];
+				$plg_tpl			= empty($tree['templates']) ? null : $tree['templates'];		
+				$plg_hooks			= empty($tree['hooks']) ? null : $tree['hooks'];		
+				$plg_langs			= empty($tree['langs']) ? null : $tree['langs'];
+				$plg_updates		= empty($tree['updates']) ? null : $tree['updates'];
 
 				//important tags not exists 
-				if(!isset($plg_info))
+				if(empty($plg_info))
 				{
 					die($lang['ERR_XML_NO_G_TAGS']);
 				}
@@ -529,9 +530,9 @@ function creat_plugin_xml($contents)
 						$new_ver = $SQL->escape($plg_info['plugin_version']['value']);
 						if (version_compare(strtolower($cur_ver), strtolower($new_ver), '>='))
 						{
-							return;
+							return 'xyz';
 						}
-						else if (isset($plg_updates))
+						else if (!empty($plg_updates))
 						{
 							//delete hooks !
 							$query_del = array(
@@ -772,7 +773,7 @@ function creat_plugin_xml($contents)
 							fclose($filename);
 						}
 						
-						return true;
+						return $plg_new ? true : 'upd';
 					}
 					else 
 					{
@@ -1085,7 +1086,7 @@ function fetch_remote_file($url, $save_in = false)
 	{
 	    $url_parsed = parse_url($url);
 	    $host = $url_parsed['host'];
-	    $port = ($url_parsed['port'] == 0) ? 80 : $url_parsed['port'];
+	    $port = empty($url_parsed['port']) or $url_parsed['port'] == 0 ? 80 : $url_parsed['port'];
 		$path = $url_parsed['path'];
 	    
 		if ($url_parsed["query"] != '')
@@ -1095,23 +1096,24 @@ function fetch_remote_file($url, $save_in = false)
 	
 	    $out = "GET $path HTTP/1.0\r\nHost: $host\r\n\r\n";
 
-	    $fp = fsockopen($host, $port, $errno, $errstr, 30);
+	    $fp = @fsockopen($host, $port, $errno, $errstr, 30);
 
-	    fwrite($fp, $out);
+		@fwrite($fp, $out);
 	    $body = false;
 		if($save_in)
 		{
-			$fp2 = fopen($save_in, "w");
+			$fp2 = @fopen($save_in, "w");
 		}
 		
-		while (!feof($fp))
+		$in = '';
+		while (!@feof($fp))
 		{
-	        $s = fgets($fp, 1024);
+	        $s = @fgets($fp, 1024);
 	        if ($body)
 			{
 				if($save_in)
 				{
-					fwrite($fp2, $s);
+					@fwrite($fp2, $s);
 				}
 				else
 				{
@@ -1124,7 +1126,7 @@ function fetch_remote_file($url, $save_in = false)
 				$body = true;
 			}
 	    }
-	    fclose($fp);
+	    @fclose($fp);
 		
 		if($save_in)
 		{
@@ -1136,18 +1138,18 @@ function fetch_remote_file($url, $save_in = false)
 	}
 	else if(function_exists("curl_init"))
 	{
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, $url);
-		curl_setopt($ch, CURLOPT_HEADER, 0);
-		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
-		$data = curl_exec($ch);
-		curl_close($ch);
+		$ch = @curl_init();
+		@curl_setopt($ch, CURLOPT_URL, $url);
+		@curl_setopt($ch, CURLOPT_HEADER, 0);
+		@curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+		@curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+		$data = @curl_exec($ch);
+		@curl_close($ch);
 		return $data;
 	}
 	else
 	{
-		return implode('', file($url));
+		return implode('', @file($url));
 	}
 }
 

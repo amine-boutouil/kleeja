@@ -18,6 +18,11 @@ include ('includes/common.php');
 
 ($hook = kleeja_run_hook('begin_go_page')) ? eval($hook) : null; //run hook
 
+if(!isset($_GET['go']))
+{
+	$_GET['go'] = null;	
+}
+
 switch ($_GET['go'])
 {
 	case "guide" : 
@@ -51,7 +56,12 @@ switch ($_GET['go'])
 
 		//start captcha class
 		$ch = new ocr_captcha;
-
+		
+		//_post
+		$t_rname = isset($_POST['rname']) ? htmlspecialchars($_POST['rname']) : ''; 
+		$t_rmail = isset($_POST['rmail']) ? htmlspecialchars($_POST['rmail']) : ''; 
+		$t_rtext = isset($_POST['rtext']) ? htmlspecialchars($_POST['rtext']) : ''; 
+		
 		if (!isset($_POST['submit']))
 		{
 				$stylee	= "report";
@@ -110,14 +120,9 @@ switch ($_GET['go'])
 					
 					($hook = kleeja_run_hook('qr_insert_new_report')) ? eval($hook) : null; //run hook
 			
-					if (!$SQL->build($insert_query))
-					{
-						kleeja_err($lang['CANT_INSERT_SQL']);
-					}
-					else
-					{
-						kleeja_info($lang['THNX_REPORTED']);
-					}
+					$SQL->build($insert_query);
+					
+					kleeja_info($lang['THNX_REPORTED']);
 					
 					//update number of reports
 					$update_query	= array('UPDATE'	=> "{$dbprefix}files",
@@ -127,19 +132,17 @@ switch ($_GET['go'])
 								
 					($hook = kleeja_run_hook('qr_update_no_file_report')) ? eval($hook) : null; //run hook
 					
-					if (!$SQL->build($update_query))
-					{
-						die($lang['CANT_UPDATE_SQL']);
-					}
+					$SQL->build($update_query);
 			}
 			else
 			{
-					foreach($ERRORS as $r)
-					{
-						$errs	.= '- ' . $r . ' <br/>';
-					}			
-					
-					kleeja_err($errs);
+				$errs = '';
+				foreach($ERRORS as $r)
+				{
+					$errs .= '- ' . $r . ' <br/>';
+				}			
+	
+				kleeja_err($errs);
 			}
 		}
 		
@@ -172,7 +175,12 @@ switch ($_GET['go'])
 	
 		//start  captcha class
 		$ch = new ocr_captcha;
-
+		
+		//_post
+		$t_cname = isset($_POST['cname']) ? htmlspecialchars($_POST['cname']) : ''; 
+		$t_cmail = isset($_POST['cmail']) ? htmlspecialchars($_POST['cmail']) : ''; 
+		$t_ctext = isset($_POST['ctext']) ? htmlspecialchars($_POST['ctext']) : ''; 
+		
 		if (!isset($_POST['submit']))
 		{
 			$stylee	= "call";
@@ -233,9 +241,10 @@ switch ($_GET['go'])
 			}
 			else
 			{
+				$errs = '';
 				foreach($ERRORS as $r)
 				{
-					$errs	.= '- ' . $r . '. <br/>';
+					$errs .= '- ' . $r . '. <br/>';
 				}				
 				kleeja_err($errs);
 			}
@@ -355,9 +364,6 @@ switch ($_GET['go'])
 		$users_st	= $stat_users;
 		$sizes_st	= Customfile_size($stat_sizes);	
 		$lst_dl_st	= ((int)$config['del_f_day'] <= 0) ? ' [ ' . $lang['CLOSED_FEATURE'] . ' ] ' : gmdate("d-m-Y H:a", $stat_last_f_del);
-		$s_c_t		= $stat_counter_today;
-		$s_c_y		= $stat_counter_yesterday;
-		$s_c_a		= $stat_counter_all;
 		$lst_reg	= $stat_last_user;
 		
 		($hook = kleeja_run_hook('stats_go_page')) ? eval($hook) : null; //run hook

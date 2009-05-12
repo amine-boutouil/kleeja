@@ -14,7 +14,7 @@
 	
 		//for style ..
 		$stylee 		= "admin_reports";
-		$action 		= "admin.php?cp=reports&amp;page=" .  intval($GET['page']);
+		$action 		= "admin.php?cp=reports&amp;page=" . (isset($GET['page'])  ? intval($GET['page']) : 1);
 
 		$query = array(
 					'SELECT'	=> '*',

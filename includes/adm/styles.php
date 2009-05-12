@@ -10,7 +10,13 @@
 		exit('no directly opening : ' . __file__);
 	}
 
-	
+
+
+if(!isset($_GET['sty_t']))
+{
+	$_GET['sty_t'] = null;
+}
+
 switch ($_GET['sty_t']) 
 {
 		default:

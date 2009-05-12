@@ -18,6 +18,6 @@
 		//search users
 		$action2 			= "admin.php?cp=users";	
 		//wut the default user system
-		$default_user_system= ($config['user_system']==1) ? true : false;
+		$default_user_system = $config['user_system'] == 1 ? true : false;
 		
 ?>

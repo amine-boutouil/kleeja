@@ -39,10 +39,15 @@ switch ($_GET['go'])
 	//login page
 	//
 	case "login" : 
+	
 			$stylee					= "login";
 			$titlee					= $lang['LOGIN'];
 			$action					= "ucp.php?go=login" . (isset($_GET['return']) ? '&amp;return=' . htmlspecialchars($_GET['return']) : '');
 			$forget_pass_link		= "ucp.php?go=get_pass";
+			
+			//_post
+			$t_lname = isset($_POST['lname']) ? htmlspecialchars($_POST['lname']) : ''; 
+			$t_lpass = isset($_POST['lpass']) ? htmlspecialchars($_POST['lpass']) : ''; 
 			
 			($hook = kleeja_run_hook('login_before_submit')) ? eval($hook) : null; //run hook
 			
@@ -293,7 +298,7 @@ switch ($_GET['go'])
 			$stylee	= "fileuser";
 			$titlee	= $lang['FILEUSER'];
 			
-			$user_id_get	= intval($_GET['id']);
+			$user_id_get	= isset($_GET['id']) ? intval($_GET['id']) : null;
 			$user_id		= (!$user_id_get && $usrcp->id()) ? $usrcp->id() : $user_id_get;
 			
 			//no logon before 
@@ -411,8 +416,8 @@ switch ($_GET['go'])
 			$currentPage	= (isset($_GET['page']))? intval($_GET['page']) : 1;
 			$Pager			= new SimplePager($perpage, $nums_rows, $currentPage);
 			$start			= $Pager->getStartRow();
-			$linkgoto			= $config['mod_writer'] ? $config['siteurl'] . 'filecp' : $config['siteurl'] . 'ucp.php?go=filecp' . $user_id;
-			$page_nums			= $config['mod_writer'] ? $Pager->print_nums($linkgoto) : $Pager->print_nums($linkgoto); 
+			$linkgoto		= $config['mod_writer'] ? $config['siteurl'] . 'filecp' : $config['siteurl'] . 'ucp.php?go=filecp';
+			$page_nums		= $config['mod_writer'] ? $Pager->print_nums($linkgoto) : $Pager->print_nums($linkgoto); 
 				
 			$total_pages	= $Pager->getTotalPages(); 
 			
@@ -516,7 +521,14 @@ switch ($_GET['go'])
 			$mail		= $usrcp->mail();
 			$show_my_filecp	= $usrcp->get_data('show_my_filecp');
 			$data_forum		= ($config['user_system']==1) ? true : false ;
-			$goto_forum_link= $forum_path;
+			$goto_forum_link= !empty($forum_path) ? $forum_path : '';
+			
+			
+			//_post
+			$t_pppass_old = isset($_POST['pppass_old']) ? htmlspecialchars($_POST['pppass_old']) : ''; 
+			$t_ppass_old = isset($_POST['ppass_old']) ? htmlspecialchars($_POST['ppass_old']) : ''; 
+			$t_ppass_new = isset($_POST['ppass_new']) ? htmlspecialchars($_POST['ppass_new']) : ''; 
+			$t_ppass_new2 = isset($_POST['ppass_new2']) ? htmlspecialchars($_POST['ppass_new2']) : ''; 
 			
 			($hook = kleeja_run_hook('no_submit_profile')) ? eval($hook) : null; //run hook
 			

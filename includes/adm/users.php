@@ -14,7 +14,7 @@
 
 		//for style ..
 		$stylee 	= "admin_users";
-		$action 	= "admin.php?cp=users&amp;page=". intval($_GET['page']);
+		$action 	= "admin.php?cp=users&amp;page=" . (isset($GET['page'])  ? intval($GET['page']) : 1);
 
 		
 		$query = array(
@@ -117,24 +117,21 @@
 			
 			while($row=$SQL->fetch_array($result))
 			{
-		
 				//make new lovely arrays !!
 				$ids[$row['id']]	= $row['id'];
-				$name[$row['id']] 	= (isset($_POST["nm_".$row['id']])) ? $_POST["nm_".$row['id']] : $row['name'];
-				$mail[$row['id']]	= (isset($_POST["ml_".$row['id']])) ? $_POST["ml_".$row['id']] : $row['mail'];
-				$pass[$row['id']]	= (isset($_POST["ps_".$row['id']])) ? $_POST["ps_".$row['id']] : "";
+				$name[$row['id']] 	= (isset($_POST["nm_" . $row['id']])) ? $_POST["nm_" . $row['id']] : $row['name'];
+				$mail[$row['id']]	= (isset($_POST["ml_" . $row['id']])) ? $_POST["ml_" . $row['id']] : $row['mail'];
+				$pass[$row['id']]	= (isset($_POST["ps_" . $row['id']])) ? $_POST["ps_" . $row['id']] : "";
 				$admin[$row['id']]	= $row['admin'];
-				$del[$row['id']] 	= (isset($_POST["del_".$row['id']])) ? $_POST["del_".$row['id']] : "";
+				$del[$row['id']] 	= (isset($_POST["del_" . $row['id']])) ? $_POST["del_" . $row['id']] : "";
 
-				$arr[] = array( 'id' =>$ids[$row['id']],
-								'name' =>$name[$row['id']],
-								'mail' =>$mail[$row['id']],
-								'admin' =>($admin[$row['id']])? "<input name=\"ad_{$row[id]}\" type=\"checkbox\" checked=\"checked\" />":"<input name=\"ad_{$row[id]}\" type=\"checkbox\"  />"
+				$arr[] = array( 'id'	=> $ids[$row['id']],
+								'name'	=> $name[$row['id']],
+								'mail'	=> $mail[$row['id']],
+								'admin'	=> !empty($admin[$row['id']]) ? '<input name="ad_' . $row['id'] . '" type="checkbox" checked="checked" />' : '<input name="ad_' . $row['id'] . '" type="checkbox" />'
 							);
 
-
-			
-					//when submit !!
+				//when submit !!
 				if (isset($_POST['submit']))
 				{
 					if ($del[$row['id']])
@@ -167,12 +164,12 @@
 										'UPDATE'	=> "{$dbprefix}users",
 										'SET'		=> 	"name = '" . $SQL->escape($name[$row['id']]) . "',
 														mail = '" . $SQL->escape($mail[$row['id']]) . "',
-														".$pass[$row['id']]."
+														" . $pass[$row['id']] . "
 														admin = '" . intval($admin[$row['id']]) . "'",
-										'WHERE'		=>	"id=".$row['id']
+										'WHERE'		=>	"id=" . $row['id']
 									);
 
-					if (!$SQL->build($update_query)){ die($lang['CANT_UPDATE_SQL']);}	
+					$SQL->build($update_query);
 				}
 			}
 			$SQL->freeresult($result);
@@ -184,14 +181,14 @@
 	}
 	
 	$total_pages 	= $Pager->getTotalPages(); 
-	$page_nums 		= $Pager->print_nums($config['siteurl'].'admin.php?cp=users'); 
+	$page_nums 		= $Pager->print_nums($config['siteurl'] . 'admin.php?cp=users'); 
 	//if not noraml user system 
 	$user_not_normal =$config['user_system'] != 1 ?  true : false;
 	}
 	//after submit 
 	if (isset($_POST['submit']) || isset($_POST['newuser']))
 	{
-			$text	= $lang['USERS_UPDATED'] . '<meta HTTP-EQUIV="REFRESH" content="0; url=./admin.php?cp=users&amp;page=' . intval($_GET['page']). '">' ."\n";
+			$text	= $lang['USERS_UPDATED'] . '<meta HTTP-EQUIV="REFRESH" content="0; url=./admin.php?cp=users&amp;page=' . (isset($GET['page'])  ? intval($GET['page']) : 1) . '">' . "\n";
 			$stylee	= "admin_info";
 	}
 ?>

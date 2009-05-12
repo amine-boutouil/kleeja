@@ -186,9 +186,9 @@ class usrcp
 				{
 					($hook = kleeja_run_hook('name_func_usr_class')) ? eval($hook) : null; //run hook
 					
-					if ($_SESSION['USER_SESS'] == session_id())
+					if (!empty($_SESSION['USER_SESS']) && $_SESSION['USER_SESS'] == session_id())
 					{
-						if ($_SESSION['USER_NAME'])
+						if (!empty($_SESSION['USER_NAME']))
 						{
 							return $_SESSION['USER_NAME'];
 						}
@@ -210,9 +210,9 @@ class usrcp
 				{
 					($hook = kleeja_run_hook('mail_func_usr_class')) ? eval($hook) : null; //run hook
 					
-					if ($_SESSION['USER_SESS'] == session_id() )
+					if (!empty($_SESSION['USER_SESS']) && $_SESSION['USER_SESS'] == session_id() )
 					{
-						if ($_SESSION['USER_MAIL'])
+						if (!empty($_SESSION['USER_MAIL']))
 						{
 							return $_SESSION['USER_MAIL'];
 						}
@@ -234,9 +234,9 @@ class usrcp
 				{
 					($hook = kleeja_run_hook('admin_func_usr_class')) ? eval($hook) : null; //run hook
 					
-					if ($_SESSION['USER_SESS'] == session_id())
+					if (!empty($_SESSION['USER_SESS']) && $_SESSION['USER_SESS'] == session_id())
 						{
-							if ($_SESSION['USER_ADMIN'])
+							if (!empty($_SESSION['USER_ADMIN']))
 							{
 								return $_SESSION['USER_ADMIN'];
 							}

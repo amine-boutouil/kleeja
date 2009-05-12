@@ -80,11 +80,12 @@
 	//for who online now..  
 	// i dont like this feature and i prefer disable it
 	//
+	$show_online = ($config['allow_online']==1) ? true : false ;
 	if ($config['allow_online'] == 1)
 	{
 	
 		$visitornum		= $usersnum	=	0;
-		$show_online	= true;
+		//$show_online	= true;
 		$OnlineNames	= array();
 		$timeout		= 100; //second  
 		$timeout2		= time()-$timeout;  

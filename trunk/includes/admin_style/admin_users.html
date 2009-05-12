@@ -1,19 +1,25 @@
 ﻿
         
 <div id="divmiddle">
-<br />
-<IF NAME="user_not_normal">
-	<div class="info"> 
-		{lang.USERS_NOT_NORMAL_SYS}
-	</div>
-</IF>
+
+	<!-- start info System Messages -->
+		<IF NAME="user_not_normal">
+			<div id="system-message">
+				<div class="info">
+					<ul>
+						<li>{lang.USERS_NOT_NORMAL_SYS} !</li>
+					</ul>
+				</div>
+			</div>
+		</IF>
+	<!-- end info System Messages -->
 
 <form method="post" action="{action}">
         <fieldset>
                 <legend>{lang.R_USERS}</legend>
 
-<table style="width: 100%">
-        <tr style="background-color:silver">
+<table style="width: 100%;text-align:center">
+        <tr style="background-color:#C0D2E8">
                 <td>{lang.USERNAME}</td>
                 <td>{lang.EMAIL}</td>
                 <td>{lang.PASSWORD}</td>
@@ -48,8 +54,8 @@
         <fieldset>
                 <legend>{lang.NEW_USER}</legend>
 
-<table style="width: 100%">
-        <tr style="background-color:silver">
+<table style="width: 100%;text-align:center">
+        <tr style="background-color:#C0D2E8">
                 <td>{lang.USERNAME}</td>
                 <td>{lang.EMAIL}</td>
                 <td>{lang.PASSWORD}</td>

@@ -2,7 +2,10 @@
 	//img
 	//part of admin extensions
 	//conrtoll imgs
-	//kleeja.com
+	
+	//copyright 2007-2009 Kleeja.com ..
+	//license http://opensource.org/licenses/gpl-license.php GNU Public License
+	//$Author$ , $Rev$,  $Date::                           $
 	
 	// not for directly open
 	if (!defined('IN_ADMIN'))
@@ -20,7 +23,7 @@
 	
 	//for style ..
 	$stylee		= "admin_img";
-	$action 	= "admin.php?cp=img_ctrl&amp;page=" . intval($_GET['page']) ;
+	$action 	= "admin.php?cp=img_ctrl&amp;page=" . (isset($_GET['page']) ? intval($_GET['page']) : '1');
 
 	$query	= array('SELECT'	=> 'COUNT(f.id) AS total_files',
 					'FROM'		=> "{$dbprefix}files f",
@@ -35,7 +38,7 @@
 						
 	if(isset($_GET['last_visit']))
 	{
-		$query['WHERE']	= "time > '". intval($_GET['last_visit']) . "' AND type IN ('gif','jpg','png','bmp','jpeg','tif','tiff','GIF','JPG','PNG','BMP','JPEG','TIF','TIFF')";
+		$query['WHERE']	= "time > '" . intval($_GET['last_visit']) . "' AND type IN ('gif','jpg','png','bmp','jpeg','tif','tiff','GIF','JPG','PNG','BMP','JPEG','TIF','TIFF')";
 	}
 	else
 	{
@@ -49,11 +52,11 @@
 	$n_fetch = $SQL->fetch_array($result);
 	$nums_rows = $n_fetch['total_files'];
 
-	/////////////pager
+	//pager
 	$currentPage = isset($_GET['page']) ? intval($_GET['page']) : 1;
 	$Pager = new SimplePager($images_cp_perpage, $nums_rows, $currentPage);
 	$start = $Pager->getStartRow();
-	////////////////
+
 		
 	$no_results = false;
 		
@@ -83,7 +86,7 @@
 						);
 			
 			//fix ... 
-			$tdnum = ($tdnum==2) ? 0 : $tdnum+1; 
+			$tdnum = ($tdnum == 2) ? 0 : $tdnum+1; 
 			//$all_tdnum++;
 			//
 			$del[$row['id']] = (isset($_POST['del_' . $row['id']])) ? $_POST['del_' . $row['id']] : '';
@@ -121,12 +124,12 @@
 		$no_results = true;
 	}
 		$total_pages 	= $Pager->getTotalPages(); 
-		$page_nums 		= $Pager->print_nums($config['siteurl'].'admin.php?cp=img_ctrl'); 
+		$page_nums 		= $Pager->print_nums($config['siteurl'] . 'admin.php?cp=img_ctrl'); 
 		
 	//after submit 
 	if(isset($_POST['submit']))
 	{
-		$text	= $lang['FILES_UPDATED']. '<meta HTTP-EQUIV="REFRESH" content="0; url=./admin.php?cp=img_ctrl&amp;page=' . intval($_GET['page']). '">' ."\n";
+		$text	= $lang['FILES_UPDATED'] . '<meta HTTP-EQUIV="REFRESH" content="0; url=./admin.php?cp=img_ctrl&amp;page=' . (isset($_GET['page']) ? intval($_GET['page']) : '1') . '">' ."\n";
 		$stylee	= "admin_info";
 	}
 ?>

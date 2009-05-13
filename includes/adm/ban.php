@@ -2,7 +2,10 @@
 	//ban
 	//part of admin extensions
 	//conrtoll bans
-	//kleeja.com
+	
+	//copyright 2007-2009 Kleeja.com ..
+	//license http://opensource.org/licenses/gpl-license.php GNU Public License
+	//$Author$ , $Rev$,  $Date::                           $
 	
 	// not for directly open
 	if (!defined('IN_ADMIN'))
@@ -25,7 +28,7 @@
 		while($row=$SQL->fetch_array($result))
 		{
 
-			$ban = ( isset($_POST["ban_text"]) ) ? $_POST["ban_text"] : $row['ban'];
+			$ban = ( isset($_POST["ban_text"]) ) ? $_POST['ban_text'] : $row['ban'];
 			
 			//when submit !!
 			if (isset($_POST['submit']))
@@ -41,13 +44,9 @@
 					//delete cache ..
 					delete_cache('data_ban');
 				}
-				else
-				{
-					die($lang['CANT_UPDATE_SQL']);
-				}	
-
 			}
 		}
+		
 		$SQL->freeresult($result);
 
 

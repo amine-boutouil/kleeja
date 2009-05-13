@@ -90,6 +90,15 @@
 		$timeout		= 100; //second  
 		$timeout2		= time()-$timeout;  
 		
+		$search_engines = array(
+								'Google' => '<span style="color:orange;">GoogleBot</span>',
+								'Yahoo' => '<span style="color:red;">Yahoo!Slurp</span>',
+								//add more ..
+								);
+		
+		//put another bot name
+		($hook = kleeja_run_hook('anotherbots_online_index_page')) ? eval($hook) : null; //run hook
+			
 		$query = array(
 						'SELECT'	=> 'DISTINCT(n.ip), n.username, n.agent',
 						'FROM'		=> "{$dbprefix}online n",
@@ -97,27 +106,26 @@
 				);
 				
 		($hook = kleeja_run_hook('qr_select_online_index_page')) ? eval($hook) : null; //run hook
-		$result	= $SQL->build($query);  
+		
+		$result	= $SQL->build($query); 
 		
 		while($row=$SQL->fetch_array($result))
 		{
 			($hook = kleeja_run_hook('while_qr_select_online_index_page')) ? eval($hook) : null; //run hook	
 			
 			//bots
-			if (strstr($row['agent'], 'Googlebot') || strstr($row['agent'], 'Google') && !$OnlineNames['Googlebot'])
+			if(!empty($row['agent']))
 			{
-				$usersnum++; 
-				$OnlineNames['Googlebot'] = '<span style="color:orange;">GoogleBot</span>';
+				foreach($search_engines as $c=>$s)
+				{
+					if (strstr($row['agent'], $c) && empty($OnlineNames[$c]))
+					{
+						$usersnum++; 
+						$OnlineNames[$c] = $s;
+						break;
+					}
+				}
 			}
-			
-			if (strstr($row['agent'], 'Yahoo! Slurp') || strstr($row['agent'], 'Yahoo') && !$OnlineNames['YahooSlurp'])
-			{
-				$usersnum++; 
-				$OnlineNames['YahooSlurp'] = '<span style="color:red;">Yahoo!Slurp</span>';
-			}
-			
-			//put another bot name
-			($hook = kleeja_run_hook('anotherbots_online_index_page')) ? eval($hook) : null; //run hook
 			
 			if($row['username'] != "-1") 
 			{
@@ -126,7 +134,7 @@
 			}
 			else
 			{
-				$visitornum++; 
+				$visitornum++;
 			}
 		
 		} #while

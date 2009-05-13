@@ -2,7 +2,10 @@
 	//configs
 	//part of admin extensions
 	//conrtoll all configuarations of the script 
-	//kleeja.com
+	
+	//copyright 2007-2009 Kleeja.com ..
+	//license http://opensource.org/licenses/gpl-license.php GNU Public License
+	//$Author$ , $Rev$,  $Date::                           $
 	
 	// not for directly open
 	if (!defined('IN_ADMIN'))
@@ -14,7 +17,7 @@
 		//words
 		$action 		= "admin.php?cp=options";
 		$n_submit 		= $lang['UPDATE_CONFIG'];
-
+		$options		= '';
 
 		$n_googleanalytics = '<a href="http://www.google.com/analytics">Google Analytics</a>';
 		//general
@@ -46,7 +49,9 @@
 						while (($file = readdir($dh)) !== false)
 						{
 							if(strpos($file, '.') === false && $file != '..' && $file != '.')
-								$stylfiles .=  '<option ' . (($con['style']==$file) ? 'selected="selected"' : '') . ' value="' . $file . '">' . $file . '</option>' . "\n";
+							{
+								$stylfiles .= '<option ' . ($con['style'] == $file ? 'selected="selected"' : '') . ' value="' . $file . '">' . $file . '</option>' . "\n";
+							}
 						}
 						closedir($dh);
 				}
@@ -60,7 +65,7 @@
 						{
 							if(strpos($file, '.') === false && $file != '..' && $file != '.')
 							{
-								$lngfiles .=  '<option ' . (($con['language']==$file) ? 'selected="selected"' : '') . ' value="' . $file . '">' . $file . '</option>' . "\n";
+								$lngfiles .=  '<option ' . ($con['language'] == $file ? 'selected="selected"' : '') . ' value="' . $file . '">' . $file . '</option>' . "\n";
 							}
 						}
 						closedir($dh);
@@ -83,7 +88,7 @@
 							if(strpos($file, '.php') !== false)
 							{
 								$file = trim(str_replace('.php', '', $file));
-								$authtypes .=  '<option value="' . $file . '"' . (($con['user_system']==$file) ? ' selected="selected"' : '') . '>' . $file . '</option>' . "\n";
+								$authtypes .=  '<option value="' . $file . '"' . ($con['user_system'] == $file ? ' selected="selected"' : '') . '>' . $file . '</option>' . "\n";
 							}
 						}
 						closedir($dh);
@@ -92,9 +97,11 @@
 				//options from database [UNDER TEST]
 				if(!empty($row['option'])) 
 				{
-					$options .= '<tr>
-					<td><label for="' . $row['name'] . '">' . (isset($lang[strtoupper($row['name'])]) ? $lang[strtoupper($row['name'])] : $olang[strtoupper($row['name'])]) . '</label></td>
-					<td><label>' . $tpl->admindisplayoption($row['option']) . '</label></td></tr>';
+					$options .= 
+					'<tr>' . "\n" .  
+					'<td><label for="' . $row['name'] . '">' . (!empty($lang[strtoupper($row['name'])]) ? $lang[strtoupper($row['name'])] : $olang[strtoupper($row['name'])]) . '</label></td>' . "\n" .
+					'<td><label>' . (empty($row['option']) ? '' : $tpl->admindisplayoption($row['option'])) . '</label></td>' . "\n" .
+					'</tr>' . "\n";
 				}
 				//when submit !!
 				if (isset($_POST['submit']))
@@ -115,10 +122,7 @@
 											'WHERE'		=> "name='" . $row['name'] . "'"
 										);
 
-					if (!$SQL->build($update_query))
-					{
-						die($lang['CANT_UPDATE_SQL']);
-					}
+					$SQL->build($update_query);
 				}
 		}
 		

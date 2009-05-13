@@ -2,7 +2,11 @@
 	//lang
 	//part of admin extensions
 	//conrtoll lang terms
-	//kleeja.com
+	
+	//copyright 2007-2009 Kleeja.com ..
+	//license http://opensource.org/licenses/gpl-license.php GNU Public License
+	//$Author: saanina $ , $Rev: 362 $,  $Date:: 2009-05-12 16:12:58 +0300#$
+	
 	
 	// not for directly open
 	if (!defined('IN_ADMIN'))
@@ -20,7 +24,7 @@
 		
 		//for style ..
 		$stylee 	= "admin_langs";
-		$action 	= "admin.php?cp=langs&amp;page=". intval($_GET['page']) . '&amp;lang=' . $SQL->escape($_REQUEST['lang']);
+		$action 	= "admin.php?cp=langs&amp;page=" .  (isset($_GET['page']) ? intval($_GET['page']) : '1') . '&amp;lang=' . $SQL->escape($_REQUEST['lang']);
 		$action2 	= "admin.php?cp=langs";
 
 		
@@ -32,7 +36,7 @@
 			{
 				if(strpos($file, '.') === false && $file != '..' && $file != '.')
 				{
-					$lngfiles .=  '<option ' . (($_REQUEST['lang']==$file) ? 'selected="selected"' : '') . ' value="' . $file . '">' . $file . '</option>' . "\n";
+					$lngfiles .=  '<option ' . ($_REQUEST['lang'] == $file ? 'selected="selected"' : '') . ' value="' . $file . '">' . $file . '</option>' . "\n";
 				}
 			}
 			closedir($dh);
@@ -49,7 +53,7 @@
 		$result = $SQL->build($query);
 
 		
-		/////////////pager 
+		//pager 
 		$nums_rows = $SQL->num_rows($result);
 		$currentPage = (isset($_GET['page']))? intval($_GET['page']) : 1;
 		$Pager = new SimplePager($perpage, $nums_rows, $currentPage);
@@ -87,10 +91,7 @@
 											'WHERE'		=>	"word='" . $SQL->escape($row['word']) . "' AND lang_id='" .  $SQL->escape($_REQUEST['lang']) . "'"
 										);
 																
-						if (!$SQL->build($query_del))
-						{
-							die($lang['CANT_DELETE_SQL']);
-						}	
+						$SQL->build($query_del);
 					}
 
 					//update
@@ -101,10 +102,7 @@
 										'WHERE'		=>	"word='" . $SQL->escape($row['word']) . "' AND lang_id='" .  $SQL->escape($_REQUEST['lang']) . "'"
 									);
 
-					if (!$SQL->build($update_query))
-					{
-						die($lang['CANT_UPDATE_SQL']);
-					}	
+					$SQL->build($update_query);
 				}
 			}
 			$SQL->freeresult($result);
@@ -121,7 +119,7 @@
 	//after submit 
 	if (isset($_POST['submit']))
 	{
-			$text	= $lang['WORDS_UPDATED'] . '<meta HTTP-EQUIV="REFRESH" content="0; url=./admin.php?cp=langs&amp;page=' . intval($_GET['page']) . '&amp;lang=' . $SQL->escape($_REQUEST['lang']) . '">' . "\n";
+			$text	= $lang['WORDS_UPDATED'] . '<meta HTTP-EQUIV="REFRESH" content="0; url=./admin.php?cp=langs&amp;page=' . (isset($_GET['page']) ? intval($_GET['page']) : '1') . '&amp;lang=' . $SQL->escape($_REQUEST['lang']) . '">' . "\n";
 			$stylee	= "admin_info";
 	}
 ?>

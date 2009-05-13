@@ -2,7 +2,10 @@
 	//calls
 	//part of admin extensions
 	//conrtoll calls
-	//kleeja.com
+	
+	//copyright 2007-2009 Kleeja.com ..
+	//license http://opensource.org/licenses/gpl-license.php GNU Public License
+	//$Author$ , $Rev$,  $Date::                           $
 	
 	// not for directly open
 	if (!defined('IN_ADMIN'))
@@ -14,7 +17,7 @@
 	
 		//for style ..
 		$stylee 	= "admin_calls";
-		$action 	= "admin.php?cp=calls&amp;page=". intval($_GET['page']);
+		$action 	= "admin.php?cp=calls&amp;page=" . (isset($_GET['page']) ? intval($_GET['page']) : '1');
 		
 		$query = array(
 					'SELECT'	=> '*',
@@ -24,7 +27,7 @@
 						
 		$result = $SQL->build($query);
 		
-		/////////////pager 
+		//pager 
 		$nums_rows = $SQL->num_rows($result);
 		$currentPage = (isset($_GET['page']))? intval($_GET['page']) : 1;
 		$Pager = new SimplePager($perpage,$nums_rows,$currentPage);
@@ -53,6 +56,7 @@
 				//
 				$del[$row['id']] = ( isset($_POST["del_".$row['id']]) ) ? $_POST["del_".$row['id']] : "";
 				$sen[$row['id']] = ( isset($_POST["v_".$row['id']]) ) ? $_POST["v_".$row['id']] : "";
+				
 				//when submit !!
 				if (isset($_POST['submit']))
 				{
@@ -63,7 +67,7 @@
 										'WHERE'		=> "id='" . intval($row['id'])."'"
 									);
 																
-						if (!$SQL->build($query_del)) {die($lang['CANT_DELETE_SQL']);}	
+						$SQL->build($query_del);
 					}
 				}
 				
@@ -92,17 +96,19 @@
 		}
 		$SQL->freeresult($result);
 
-	}else{ #num rows
+	}
+	else
+	{ #num rows
 		$no_results = true;
 	}
 	
 	$total_pages = $Pager->getTotalPages(); 
-	$page_nums	= $Pager->print_nums($config['siteurl'].'admin.php?cp=calls'); 
+	$page_nums	= $Pager->print_nums($config['siteurl'] . 'admin.php?cp=calls'); 
 		
 	//after submit
 	if (isset($_POST['submit']))
 	{
-			$text	= $lang['CALLS_UPDATED'] . '<meta HTTP-EQUIV="REFRESH" content="0; url=./admin.php?cp=calls&amp;page=' . intval($_GET['page']). '">' ."\n";
+			$text	= $lang['CALLS_UPDATED'] . '<meta HTTP-EQUIV="REFRESH" content="0; url=./admin.php?cp=calls&amp;page=' . (isset($_GET['page']) ? intval($_GET['page']) : '1') . '">' ."\n";
 			$stylee	= "admin_info";
 	}
 

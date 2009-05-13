@@ -2,7 +2,11 @@
 	//rules
 	//part of admin extensions
 	//conrtoll rules
-	//kleeja.com
+	
+	//copyright 2007-2009 Kleeja.com ..
+	//license http://opensource.org/licenses/gpl-license.php GNU Public License
+	//$Author$ , $Rev$,  $Date::                           $
+	
 	
 	// not for directly open
 	if (!defined('IN_ADMIN'))
@@ -25,7 +29,7 @@
 
 		while($row=$SQL->fetch_array($result))
 		{
-			$rulesw = ( isset($_POST["rules_text"]) ) ? $_POST["rules_text"] : $row['rules'];
+			$rulesw = isset($_POST['rules_text']) ? $_POST['rules_text'] : $row['rules'];
 			$rules = htmlspecialchars($rulesw);
 			
 			//when submit !!
@@ -42,10 +46,6 @@
 					//delete cache ..
 					delete_cache('data_rules');
 				}
-				else
-				{
-					die($lang['CANT_UPDATE_SQL']);
-				}	
 			}
 		}
 		$SQL->freeresult($result);

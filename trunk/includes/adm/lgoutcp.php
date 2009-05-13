@@ -2,7 +2,10 @@
 	//lgoutcp
 	//part of admin extensions
 	//delete admin session
-	//kleeja.com
+	
+	//copyright 2007-2009 Kleeja.com ..
+	//license http://opensource.org/licenses/gpl-license.php GNU Public License
+	//$Author$ , $Rev$,  $Date::                           $
 	
 	// not for directly open
 	if (!defined('IN_ADMIN'))
@@ -11,7 +14,7 @@
 	}
 	
 
-	//remove just .. .administator session 
+	//remove just the administator session 
 	if ($usrcp->logout_cp())
 	{
 		header('Location:./');

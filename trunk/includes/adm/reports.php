@@ -2,7 +2,10 @@
 	//reports
 	//part of admin extensions
 	//conrtoll reports
-	//kleeja.com
+	
+	//copyright 2007-2009 Kleeja.com ..
+	//license http://opensource.org/licenses/gpl-license.php GNU Public License
+	//$Author$ , $Rev$,  $Date::                           $
 	
 	// not for directly open
 	if (!defined('IN_ADMIN'))
@@ -24,7 +27,7 @@
 						
 		$result = $SQL->build($query);
 		
-		/////////////pagination
+		//pagination
 		$nums_rows		= $SQL->num_rows($result);
 		$currentPage	= (isset($_GET['page']))? intval($_GET['page']) : 1;
 		$Pager			= new SimplePager($perpage,$nums_rows,$currentPage);
@@ -60,19 +63,16 @@
 						{
 							$query_del = array(
 											'DELETE'	=> "{$dbprefix}reports",
-											'WHERE'		=> "id='" . intval($row['id'])."'"
+											'WHERE'		=> "id='" . intval($row['id']) . "'"
 											);
 																
-							if (!$SQL->build($query_del))
-							{
-								die($lang['CANT_DELETE_SQL']);
-							}	
+							$SQL->build($query_del);
 						}
 				}
 				
 				if (isset($_POST['reply_submit']))
 				{
-					if ($sen[$row[id]])
+					if ($sen[$row['id']])
 					{
 							$to      = $row['mail'];
 							$subject = $lang['REPLY_REPORT'] . ':' . $config['sitename'];
@@ -80,11 +80,7 @@
 							
 							$send =  send_mail($to, $message, $subject, $config['sitemail'], $config['sitename']);
 							
-							if (!$send)
-							{
-								die($lang['CANT_SEND_MAIL']);
-							}
-							else
+							if ($send)
 							{
 								$text	= $lang['IS_SEND_MAIL'];
 								$stylee	= "admin_info";
@@ -104,10 +100,10 @@
 	$total_pages 	= $Pager->getTotalPages(); 
 	$page_nums 		= $Pager->print_nums($config['siteurl'] . 'admin.php?cp=reports'); 
 		
-		//after submit 
+	//after submit 
 	if (isset($_POST['submit']))
 	{
-		$text	= $lang['REPORTS_UPDATED'] . '<meta HTTP-EQUIV="REFRESH" content="0; url=./admin.php?cp=reports&amp;page=' . intval($_GET['page']). '">' ."\n";
+		$text	= $lang['REPORTS_UPDATED'] . '<meta HTTP-EQUIV="REFRESH" content="0; url=./admin.php?cp=reports&amp;page=' . (isset($_GET['page']) ? intval($_GET['page']) : '1') . '">' ."\n";
 		$stylee	= "admin_info";
 	}
 ?>

@@ -2,7 +2,10 @@
 	//styles
 	//part of admin extensions
 	//conrtoll styles and templates 
-	//kleeja.com
+	
+	//copyright 2007-2009 Kleeja.com ..
+	//license http://opensource.org/licenses/gpl-license.php GNU Public License
+	//$Author$ , $Rev$,  $Date::                           $
 	
 	// not for directly open
 	if (!defined('IN_ADMIN'))

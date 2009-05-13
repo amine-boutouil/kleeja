@@ -2,7 +2,10 @@
 	//exts
 	//part of admin extensions
 	//conrtoll extensions of files
-	//kleeja.com
+	
+	//copyright 2007-2009 Kleeja.com ..
+	//license http://opensource.org/licenses/gpl-license.php GNU Public License
+	//$Author$ , $Rev$,  $Date::                           $
 	
 	// not for directly open
 	if (!defined('IN_ADMIN'))
@@ -13,7 +16,7 @@
 		//for style ..
 		$stylee = "admin_exts";
 		//words
-		$action 		= "admin.php?cp=exts&amp;page=". intval($_GET['page']);
+		$action 		= "admin.php?cp=exts&amp;page=" . (isset($_GET['page']) ? intval($_GET['page']) : '1');
 		$action_new_ext = "admin.php?cp=exts&amp;add_new_ext=1";
 		$n_submit 	= $lang['UPDATE_EXTS'];
 		
@@ -55,6 +58,7 @@
 	
 							);
 			}
+			
 			$SQL->freeresult($result);
 		
 		}
@@ -91,7 +95,7 @@
 			//delete cache ..
 			delete_cache('data_exts');
 
-			$text	= $lang['UPDATED_EXTS']. '<meta HTTP-EQUIV="REFRESH" content="0; url=./admin.php?cp=exts&amp;page=' . intval($_GET['page']). '">' ."\n";
+			$text	= $lang['UPDATED_EXTS']. '<meta HTTP-EQUIV="REFRESH" content="0; url=./admin.php?cp=exts&amp;page=' .  (isset($_GET['page']) ? intval($_GET['page']) : '1') . '">' . "\n";
 			$stylee	= "admin_info";
 		}
 		else if(isset($_GET['add_new_ext']))
@@ -143,7 +147,7 @@
 
 				$SQL->build($insert_query);
 
-				$text	= $lang['NEW_EXT_ADD']. '<meta HTTP-EQUIV="REFRESH" content="2; url=./admin.php?cp=exts">' ."\n";
+				$text	= $lang['NEW_EXT_ADD']. '<meta HTTP-EQUIV="REFRESH" content="2; url=./admin.php?cp=exts">' . "\n";
 				$stylee	= "admin_info";
 			}
 		}

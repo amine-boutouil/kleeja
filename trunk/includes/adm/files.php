@@ -2,7 +2,10 @@
 	//files
 	//part of admin extensions
 	//conrtoll files
-	//kleeja.com
+	
+	//copyright 2007-2009 Kleeja.com ..
+	//license http://opensource.org/licenses/gpl-license.php GNU Public License
+	//$Author$ , $Rev$,  $Date::                           $
 	
 	// not for directly open
 	if (!defined('IN_ADMIN'))
@@ -74,12 +77,13 @@
 	$n_fetch = $SQL->fetch_array($result);
 	$nums_rows = $n_fetch['total_files'];
 
-	/////////////pager 
+	//pager 
 	$currentPage = (isset($_GET['page']))? intval($_GET['page']) : 1;
 	$Pager = new SimplePager($perpage, $nums_rows, $currentPage);
 	$start = $Pager->getStartRow();
 
 	$no_results = false;
+	
 	if ($nums_rows > 0)
 	{
 		$query['SELECT'] = 'f.*, u.name AS username';
@@ -118,10 +122,7 @@
 										'WHERE'		=> "id='" . intval($row['id']) . "'"
 										);
 															
-						if (!$SQL->build($query_del))
-						{
-							die($lang['CANT_DELETE_SQL']);
-						}	
+						$SQL->build($query_del);
 
 						//delete from folder ..
 						@kleeja_unlink ($row['folder'] . "/" . $row['name']);
@@ -135,10 +136,7 @@
 													'SET'		=> 'files=files-1,sizes=sizes-' . $row['size'],
 												   );
 							
-							if (!$SQL->build($update_query))
-							{
-								die($lang['CANT_UPDATE_SQL']);
-							}
+							$SQL->build($update_query);
 						}
 							
 					}

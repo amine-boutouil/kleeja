@@ -2,7 +2,10 @@
 	//extra
 	//part of admin extensions
 	//conrtoll extra heaer and footer
-	//kleeja.com
+	
+	//copyright 2007-2009 Kleeja.com ..
+	//license http://opensource.org/licenses/gpl-license.php GNU Public License
+	//$Author$ , $Rev$,  $Date::                           $
 	
 	// not for directly open
 	if (!defined('IN_ADMIN'))
@@ -25,8 +28,8 @@
 		
 		while($row=$SQL->fetch_array($result))
 		{
-			$ex_headere = ( isset($_POST["ex_header"]) ) ? $_POST["ex_header"] : $row['ex_header'];
-			$ex_footere = ( isset($_POST["ex_footer"]) ) ? $_POST["ex_footer"] : $row['ex_footer'];
+			$ex_headere = ( isset($_POST["ex_header"]) ) ? $_POST['ex_header'] : $row['ex_header'];
+			$ex_footere = ( isset($_POST["ex_footer"]) ) ? $_POST['ex_footer'] : $row['ex_footer'];
 			
 			$ex_header = htmlspecialchars($ex_headere);
 			$ex_footer = htmlspecialchars($ex_footere);
@@ -37,7 +40,7 @@
 				//update
 				$update_query = array(
 									'UPDATE'	=> "{$dbprefix}stats",
-									'SET'		=> "ex_header = '". $ex_headere ."', ex_footer = '". $ex_footere ."'"
+									'SET'		=> "ex_header = '" . $ex_headere . "', ex_footer = '" . $ex_footere . "'"
 								);
 
 				if ($SQL->build($update_query))
@@ -45,10 +48,6 @@
 					//delete cache ..
 					delete_cache('data_extra');
 				}
-				else
-				{
-					die($lang['CANT_UPDATE_SQL']);
-				}	
 			}
 		}
 		$SQL->freeresult($result);

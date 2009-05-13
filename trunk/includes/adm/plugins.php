@@ -2,7 +2,10 @@
 	//plugins
 	//part of admin extensions
 	//conrtoll plugins 
-	//kleeja.com
+	
+	//copyright 2007-2009 Kleeja.com ..
+	//license http://opensource.org/licenses/gpl-license.php GNU Public License
+	//$Author$ , $Rev$,  $Date::                           $
 	
 	// not for directly open
 	if (!defined('IN_ADMIN'))
@@ -15,7 +18,7 @@
 	//for style ..
 		$stylee = "admin_plugins";
 		$action = "admin.php?cp=plugins";
-		$no_plugins	=	false;
+		$no_plugins	= false;
 		
 		//get styles
 		$query = array(

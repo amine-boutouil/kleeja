@@ -2,7 +2,11 @@
 	//search
 	//part of admin extensions
 	//search about files or users
-	//kleeja.com
+	
+	//copyright 2007-2009 Kleeja.com ..
+	//license http://opensource.org/licenses/gpl-license.php GNU Public License
+	//$Author$ , $Rev$,  $Date::                           $
+	
 	
 	// not for directly open
 	if (!defined('IN_ADMIN'))
@@ -11,13 +15,13 @@
 	}
 	
 
-		//for style ..
-		$stylee = "admin_search";
-		//search files
-		$action1 			= "admin.php?cp=files";
-		//search users
-		$action2 			= "admin.php?cp=users";	
-		//wut the default user system
-		$default_user_system = $config['user_system'] == 1 ? true : false;
+	//for style ..
+	$stylee = "admin_search";
+	//search files
+	$action1 			= "admin.php?cp=files";
+	//search users
+	$action2 			= "admin.php?cp=users";	
+	//wut the default user system
+	$default_user_system = $config['user_system'] == 1 ? true : false;
 		
 ?>

@@ -2,7 +2,10 @@
 	//check_update
 	//part of admin extensions
 	//is there any new update !
-	//kleeja.com
+	
+	//copyright 2007-2009 Kleeja.com ..
+	//license http://opensource.org/licenses/gpl-license.php GNU Public License
+	//$Author$ , $Rev$,  $Date::                           $
 	
 	// not for directly open
 	if (!defined('IN_ADMIN'))
@@ -61,7 +64,9 @@
 									'FROM'		=> "{$dbprefix}config",
 									'WHERE'		=> "name = 'new_version'"
 									);
+									
 				$result_get =  $SQL->build($query_get);
+				
 				if(!$SQL->num_rows($result_get))
 				{
 					$SQL->query("INSERT INTO `{$dbprefix}config` (`name` ,`value`)VALUES ('new_version', '')");
@@ -83,10 +88,7 @@
 									'WHERE'		=> "name='new_version'"
 									);
 
-			if (!$SQL->build($update_query))
-			{
-				die($lang['CANT_UPDATE_SQL']);
-			}
+			$SQL->build($update_query);
 			
 			//clean cache
 			delete_cache('data_config');

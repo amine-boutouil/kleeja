@@ -2,7 +2,10 @@
 	//users
 	//part of admin extensions
 	//conrtoll users
-	//kleeja.com
+	
+	//copyright 2007-2009 Kleeja.com ..
+	//license http://opensource.org/licenses/gpl-license.php GNU Public License
+	//$Author$ , $Rev$,  $Date::                           $
 	
 	// not for directly open
 	if (!defined('IN_ADMIN'))
@@ -59,22 +62,15 @@
 													'INTO'		=> "{$dbprefix}users",
 													'VALUES'	=> "'$name', '$pass', '$mail','0',''"
 												);
-							if (!$SQL->build($insert_query))
-							{
-								die($lang['CANT_INSERT_SQL']);	
-							}	
-							else
+							if ($SQL->build($insert_query))
 							{
 								$last_user_id = $SQL->insert_id();
 
 								//update number of stats
 								$update_query	= array('UPDATE'	=> "{$dbprefix}stats",
-													'SET'		=> "users=users+1,lastuser='$name'",
-												);
-								if (!$SQL->build($update_query))
-								{
-									die($lang['CANT_UPDATE_SQL']);
-								}
+														'SET'		=> "users=users+1,lastuser='$name'",
+													);
+								$SQL->build($update_query);
 							}
 						}
 						else
@@ -100,7 +96,7 @@
 		
 		$result = $SQL->build($query);
 		
-		/////////////pager 
+		//pager 
 		$nums_rows = $SQL->num_rows($result);
 		$currentPage = (isset($_GET['page']))? intval($_GET['page']) : 1;
 		$Pager = new SimplePager($perpage,$nums_rows,$currentPage);
@@ -136,28 +132,26 @@
 				{
 					if ($del[$row['id']])
 					{
+						//delete  user
 						$query_del = array(
 										'DELETE'	=> "{$dbprefix}users",
 										'WHERE'		=> "id='" . intval($ids[$row['id']])."'"
 											);
+											
+						$SQL->build($query_del);
+						
 						//update number of stats
 						$update_query	= array('UPDATE'	=> "{$dbprefix}stats",
 												'SET'		=> 'users=users-1',
 										);
 							
-						if (!$SQL->build($update_query))
-						{
-							die($lang['CANT_UPDATE_SQL']);
-						}
+						$SQL->build($update_query);
 																
-						if (!$SQL->build($query_del))
-						{
-							die($lang['CANT_DELETE_SQL']);
-						}	
+						
 					}
 
 					//update
-					$admin[$row['id']] = isset($_POST["ad_".$row['id']])  ? 1 : 0 ;
+					$admin[$row['id']] = isset($_POST['ad_' . $row['id']])  ? 1 : 0 ;
 					$pass[$row['id']] = ($pass[$row['id']] != '') ? "password = '" . md5($SQL->escape($pass[$row['id']])) . "'," : "";
 				
 					$update_query = array(
@@ -182,6 +176,7 @@
 	
 	$total_pages 	= $Pager->getTotalPages(); 
 	$page_nums 		= $Pager->print_nums($config['siteurl'] . 'admin.php?cp=users'); 
+	
 	//if not noraml user system 
 	$user_not_normal =$config['user_system'] != 1 ?  true : false;
 	}

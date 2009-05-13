@@ -2,8 +2,11 @@
 	//bckup
 	//part of admin extensions
 	//get backup of tables
-	//thanks for [coder] from montadaphp.net  
-	//kleeja.com
+	//thanks for [b]coder[/b] from montadaphp.net  
+	
+	//copyright 2007-2009 Kleeja.com ..
+	//license http://opensource.org/licenses/gpl-license.php GNU Public License
+	//$Author$ , $Rev$,  $Date::                           $
 	
 	// not for directly open
 	if (!defined('IN_ADMIN'))
@@ -22,7 +25,7 @@
 	while($row=$SQL->fetch_array($result))
 	{
 		//make new lovely arrays !!
-		$size[$row["Name"]]	= round($row['Data_length']/1024, 2);
+		$size[$row['Name']]	= round($row['Data_length']/1024, 2);
 	}
 	
 	$SQL->freeresult($result);

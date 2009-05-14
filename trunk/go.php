@@ -275,7 +275,7 @@ switch ($_GET['go'])
 		else
 		{
 			//to check
-			if($_GET['sure'] == 'ok')
+			if(isset($_GET['sure']) && $_GET['sure'] == 'ok')
 			{
 				$query = array('SELECT'=> 'f.id, f.name, f.folder, f.size',
 							'FROM'	=> "{$dbprefix}files f",

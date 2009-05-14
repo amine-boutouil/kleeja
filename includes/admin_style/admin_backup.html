@@ -1,5 +1,4 @@
-
-        <script language="JavaScript"> 
+<script type="text/javascript"> 
 function checkall() {  
         var check = document.getElementsByName("check[]"); 
     for (var i=0;  i< check.length; i++)
@@ -9,33 +8,58 @@ function checkall() {
     } 
 } 
 </script> 
+
+<!-- start backup temlate  -->
 <div id="divmiddle">
 
+<!-- start form  -->
 <form  method="post" action="{action}">
-        <fieldset>
-                <legend>{lang.R_BCKUP}</legend>
-                
-{lang.E_BACKUP}
+
+<fieldset>
+
+<!-- title backup  -->
+<b>{lang.R_BCKUP} :</b> 
+<!-- title backup  -->
+
 <br /><br />
-<table style="width: 100%">
-        <tr style="background-color:silver">
-                <td>{lang.NAME}</td>
-                <td>{lang.SIZE}</td>
-                <td><input type="checkbox" name="check_all" checked="checked" onClick="checkall();"/></td>
-        </tr>
+<!-- notice backup  -->
+{lang.E_BACKUP}
+<!-- notice backup  -->
+
+<!-- border line Vertical  -->
+<hr id="hr-border" />
+<!-- border line Vertical  -->
+
+<!-- start div border table  -->
+<div id="border-table">
+
+<table style="text-align:center">
+    <tr style="background-color:#FFF">
+        <td>{lang.NAME}</td>
+        <td>{lang.SIZE}</td>
+		<td><input type="checkbox" name="check_all" checked="checked" onClick="checkall();"/></td>
+    </tr>
         <LOOP NAME="tables_sho">
-        <tr style="background-color:#F5F5F5">
-                <td>{{name}}</td><td>{{size}} kb</td><td><input type="checkbox" name="check[]" value="{{name}}" checked="checked" /></td>
-        </tr>        
-        </LOOP>
-        
+        <tr>
+        <td>{{name}}</td><td>{{size}} kb</td><td><input type="checkbox" name="check[]" value="{{name}}" checked="checked" /></td>
+    </tr>        
+        </LOOP>       
 </table>
 
+</div>
+<!-- end div border table  -->
+
 </fieldset>
+
+<!-- start button  -->
 <fieldset class="quick" style="text-align:center">
-                <input class="button2" name="submit" type="submit" value="{lang.TAKE_BK}" />
+    <input class="button2" name="submit" type="submit" value="{lang.TAKE_BK}" />
 </fieldset>
+<!-- end  button  -->
+
 </form>
+<!-- end form  -->
 
 </div>
-        
+ <!-- end  backup temlate  -->
+ 

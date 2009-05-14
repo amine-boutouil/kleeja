@@ -1,18 +1,28 @@
-
-        
+<!-- start view plugins temlate  -->
 <div id="divmiddle">
-        <fieldset>
-                <legend>{lang.PLUGINS}</legend>
+<fieldset>
 
+<!-- title  -->
+<b>{lang.PLUGINS} :</b>
+<!-- title  -->
+
+<!-- border line Vertical  -->
+<hr id="hr-border" />
+<!-- border line Vertical  -->
+
+<!-- start div border table  -->
+<div id="border-table">
+
+<!-- start table no hover  -->
 <table class="tab-no-hover">
-<tr style="background-color:#C0D2E8">
+<tr style="background-color:#FFF">
 	<td>{lang.PLUGINS_EX}</td>
-</tr>
+	</tr>
 <IF NAME="no_plugins">
 	<td>{lang.NO_PLUGINS}</td>
 <ELSE>
 	<LOOP NAME="arr">
-	<tr style="background-color:<RAND="#F5F5F5","#fff">">
+	<tr>
 		<td>
 			[ 
 				<IF LOOP="plg_disabled">
@@ -32,43 +42,65 @@
 	</tr>
 	</LOOP>
 </IF>
-
 </table>
+<!-- end table no hover  -->
+
+</div>
+<!-- end div border table  -->
+
 </fieldset>
 </div>
+<!-- end view plugins temlate  -->
 
 <br />
 
+<!-- start dot  -->
+<p class="dot" />
+<!-- end dot  -->
+
 <br />
 
+<!-- start add new plugins temlate  -->
 <div id="divmiddle">
 <form method="post" action="{action}" enctype="multipart/form-data">
-        <fieldset>
-                <legend>{lang.ADD_NEW_PLUGIN}</legend>
+<fieldset>
 
+<!-- title  -->
+<b>{lang.ADD_NEW_PLUGIN} :</b>
+<!-- title  -->
+
+<!-- border line Vertical  -->
+<hr id="hr-border" />
+<!-- border line Vertical  -->
+
+<!-- start div border table  -->
+<div id="border-table">
+
+<!-- start table no hover  -->
 <table class="tab-no-hover">
-<tr style="background-color:#C0D2E8">
-                <td>{lang.ADD_NEW_PLUGIN_EXP}</td>
+<tr style="background-color:#FFF">
+    <td>{lang.ADD_NEW_PLUGIN_EXP}</td>
 
-        </tr>
+</tr>
 <tr>
-<td>
-
-<input name="imp_file" type="file" />
-
-
-</td>
-        </tr>
+	<td>
+	<input name="imp_file" type="file" />
+	</td>
+</tr>
 </table>
-
+<!-- end #table no hover  -->
+</div>
 </fieldset>
+
+<!--  button  -->
 <fieldset class="quick" style="text-align:center">
                 <input class="button2" name="submit_new_plg" type="submit" value="{lang.SUBMIT}" />
 </fieldset>
+<!--  button  -->
 </form>
 
 </div>
-
+<!-- end  add new plugins temlate  -->
 
 
         

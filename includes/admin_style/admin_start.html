@@ -2,211 +2,229 @@
 <div id="divmiddle">
 
 <!-- start general stat panel admin -->
-	<p class="title">{lang.GENERAL_STAT}</p>
+<p class="title">{lang.GENERAL_STAT} : [ {config.sitename} ]</p>
 <!-- end h1 general stat panel admin -->
-	
-<div class="clr"></div>
 
-	<!-- start welcome user admin -->
-	<p class="welcome"><img src="{STYLE_PATH_ADMIN}images/heart.gif" align="absmiddle" alt="Kleeja love you ..," />&nbsp;{usernamelang}</p>
-	<!-- end  welcome user admin -->
-	
+<!-- start dot  -->
+<p class="dot" />
+<!-- end dot  -->
+
+<!-- start clear  -->
 <div class="clr"></div>
+<!-- end clear  -->
+
+<!-- start welcome user admin -->
+<div class="welcome"><p><img src="{STYLE_PATH_ADMIN}images/heart.gif" alt="Kleeja love you ..," />&nbsp;{usernamelang}</p></div>
+<!-- end  welcome user admin -->
+	
+<!-- start clear  -->
+<div class="clr"></div>
+<!-- end clear  -->
 
 <!-- start last visit  -->
-	<div id="info-last-visit">
-		<ul>
-			<li>
-			<IF NAME="last_visit">
-			<strong>{lang.LAST_VISIT} : {last_visit}</strong><br />
-				<small><a href="{h_lst_files}">{lang.FLS_LST_VST_SEARCH}</a> | 
-					<a href="{h_lst_imgs}">{lang.IMG_LST_VST_SEARCH}</a>
-				</small>
-			</IF>
-			</li>
-		</ul>
-	</div>
-	<div id="info-last-visit">
-		<ul>
-			<li>
-			<strong>{lang.LSTFLE_ST} : <a href="{last_file_up}" target="blank">{last_file_up}</a></strong><br />
-				<small>{lang.LSTDELST}
-					<a>{last_del_fles}</a> 
-				</small>
-			</li>
-		</ul>
-	</div>
+<div id="info-last-visit">
+	<ul>
+	<li>
+	<IF NAME="last_visit">
+	<strong>{lang.LAST_VISIT} : {last_visit}</strong><br />
+	<small><a href="{h_lst_files}">{lang.FLS_LST_VST_SEARCH}</a> | 
+	<a href="{h_lst_imgs}">{lang.IMG_LST_VST_SEARCH}</a>
+	</small>
+	</IF>
+	</li>
+	</ul>
+</div>
 <!-- end last visit  -->
 
-<!-- start users  -->
-	<div id="info-last-visit">
-		<ul>
-			<li>
-				<strong>{lang.AUSERS_NUM} : [{users_number}]
-				<br />
-				<IF NAME="config.user_system==1">
-					{lang.LAST_REG} : [{stat_last_user}]
-				</IF>
-				</strong>
-			</li>
-		</ul>
-	</div> 
-<!-- end  stat last user  -->
+<!-- start last file  -->	
+<div id="info-last-visit">
+	<ul>
+	<li>
+	<strong>{lang.LSTFLE_ST} : <a href="{last_file_up}" target="blank">{last_file_up}</a></strong>
+	<br /><small>{lang.LSTDELST}<a>{last_del_fles}</a></small>
+	</li>
+	</ul>
+</div>
+<!-- end last file  -->
 
-<!-- start files number  -->		
-	<div id="info-last-visit">
-		<ul>
-			<li>
-				<strong>{lang.AFILES_NUM} : [{files_number}]
-				<br /> {lang.AFILES_SIZE} : [{files_sizes}]
-				</strong>
-			</li>
-		</ul>
-	</div> 
+<!-- start users  number -->
+<div id="info-last-visit">
+	<ul>
+	<li>
+	<strong>{lang.AUSERS_NUM} : [{users_number}]
+	<br />
+	<IF NAME="config.user_system==1">
+	{lang.LAST_REG} : [{stat_last_user}]
+	</IF>
+	</strong>
+	</li>
+	</ul>
+</div>
+<!-- end  users number  -->
+
+<!-- start files number  -->
+<div id="info-last-visit">
+	<ul>
+	<li>
+	<strong>{lang.AFILES_NUM} : [{files_number}]
+	<br /> {lang.AFILES_SIZE} : [{files_sizes}]
+	</strong>
+	</li>
+	</ul>
+</div>
 <!-- end files number  -->
 
 <!-- start  last google -->
-	<div id="info-last-visit">
-		<ul>
-			<li>
-				<strong>{lang.LAST_GOOGLE} : {s_last_google}
-				<br />{lang.GOOGLE_NUM} : [{s_google_num}]
-				</strong>
-			</li>
-		</ul>
-	</div>
+<div id="info-last-visit">
+	<ul>
+	<li>
+	<strong>{lang.LAST_GOOGLE} : {s_last_google}
+	<br />{lang.GOOGLE_NUM} : [{s_google_num}]
+	</strong>
+	</li>
+	</ul>
+</div>
 <!-- end  last google -->
 
 <!-- start  last yahoo -->		
-	<div id="info-last-visit">
-		<ul>
-			<li>
-				<strong>{lang.LAST_YAHOO} : {s_last_yahoo}
-				<br />{lang.YAHOO_NUM} : [{s_yahoo_num}]
-				</strong>
-			</li>
-		</ul>
-	</div>
+<div id="info-last-visit">
+	<ul>
+	<li>
+	<strong>{lang.LAST_YAHOO} : {s_last_yahoo}
+	<br />{lang.YAHOO_NUM} : [{s_yahoo_num}]
+	</strong>
+	</li>
+	</ul>
+</div>
 <!-- end  last yahoo -->	
 
-<div class="clr"></div>	
+<!-- start dot  -->
+<p class="dot" />
+<!-- end dot  -->
+
+<!-- start clear  -->
+<div class="clr"></div>
+<!-- end clear  -->
+
 <br />
-<!-- start error System Messages -->
-	<IF NAME="update_now">
-	<div id="system-message">
-		<div class="error">
-			<ul>
-				<li><u>{lang.R_CHECK_UPDATE} !</u><p>{update_now_disc}</p></li>
-			</ul>
-		</div>
+
+<!-- start >> update now disc >>  error System Messages -->
+<IF NAME="update_now">
+<div id="system-message">
+	<div class="error">
+		<ul>
+		<li><u>{lang.R_CHECK_UPDATE} !</u><p>{update_now_disc}</p></li>
+		</ul>
 	</div>
-	</IF>
-<!-- end error System Messages -->
-  
-<div class="clr"></div>
+</div>
+</IF>
+<!-- end >> update now disc >>  error System Messages -->
 
-<!-- start error copyrights disc System Messages -->
-	<IF NAME="no_copyrights">
-	<div id="system-message">
-		<div class="error">
-			<ul>
-				<li><u>{lang.NOTE} !</u><p>{no_copyrights_disc}</p></li>
-			</ul>
-		</div>
+<!-- start clear  -->
+<div class="clr"></div>
+<!-- end clear  -->
+
+<!-- start >> no copyrights disc  >>  error System Messages -->
+<IF NAME="no_copyrights">
+<div id="system-message">
+	<div class="error">
+		<ul>
+		<li><u>{lang.NOTE} !</u><p>{no_copyrights_disc}</p></li>
+		</ul>
 	</div>
-	</IF>
-<!-- end error copyrights disc System Messages -->
+</div>
+</IF>
+<!-- end >> no copyrights disc  >>  error System Messages -->
 
+<!-- start clear  -->
 <div class="clr"></div>
+<!-- end clear  -->
 
-<!-- start config writable System Messages -->
-	<IF NAME="is_config_writable">
-	<div id="system-message">
-		<div class="info">
-			<ul>
-				<li><u>{lang.NOTE} !</u><p>{lang.CONFIG_WRITEABLE}</p></li>
-			</ul>
-		</div>
+<!-- start >> config writable  >>  error System Messages -->
+<IF NAME="is_config_writable">
+<div id="system-message">
+	<div class="info">
+		<ul>
+		<li><u>{lang.NOTE} !</u><p>{lang.CONFIG_WRITEABLE}</p></li>
+		</ul>
 	</div>
-	</IF>
-<!-- end config writable System Messages -->
+</div>
+</IF>
+<!-- end >> config writable  >>  error System Messages -->
 
+<!-- start clear  -->
 <div class="clr"></div>
+<!-- end clear  -->
 
-<!-- start info System Messages -->
-	<IF NAME="there_is_cached">
-	<div id="system-message">
-		<div class="info">
-			<ul>
-				<li><u>{lang.CACHED_STYLES} !</u><p>{there_is_cached}</p></li>
-			</ul>
-		</div>
+<!-- start >> there is cached  >>  error System Messages -->
+<IF NAME="there_is_cached">
+<div id="system-message">
+	<div class="info">
+		<ul>
+			<li><u>{lang.CACHED_STYLES} !</u><p>{there_is_cached}</p></li>
+		</ul>
 	</div>
-	</IF>
-<!-- end info System Messages --> 
+</div>
+</IF>
+<!-- end >> there is cached  >>  error System Messages -->
 
+<!-- start dot  -->
+<p class="dot" />
+<!-- end dot  -->	
+
+<!-- start clear  -->
 <div class="clr"></div>
-<br />
+<!-- end clear  -->
+
 <!-- start stat  disk size -->
-<div id="info-size-stat">
+<div id="disk_size">
 	<ul>
-		<li>
-		<strong>{lang.SIZE_STAT} &gt;&gt; {lang.USING_SIZE}</strong>
-		<br />	
-			<table cellspacing="1" cellpadding="0" dir="ltr">
-			<tr> 
-				<td style="width:33%;background-color: #CCEECC;text-align:left;">0%</td>
-				<td style="width:34%; background-color: #FFFFE8; text-align:center;">50%</td>
-				<td style="width:33%;background-color: #FFD2D2; text-align:right;">100%</td>
-			</tr>
-			<tr>
-				<td colspan="3"><img src="./images/spacer.gif" style="background-color: blue; width:{per1}%; height:10px" /></td>
-			</tr>
-			</table>
-		</li>
+	<li>
+	<strong>{lang.SIZE_STAT} &gt;&gt; {lang.USING_SIZE}</strong>
+		<table class="tab-size" border="0" cellspacing="1" cellpadding="0" dir="ltr">
+		<tr><td style="width:33%;background-color: #CCEECC;text-align:left;">0%</td>
+		<td style="width:34%; background-color: #FFFFE8; text-align:center;">50%</td>
+		<td style="width:33%;background-color: #FFD2D2; text-align:right;">100%</td></tr>
+		<tr><td colspan="3"><img src="./images/spacer.gif" style="width:{per1}%; height:10px" /></td></tr>
+		</table>
+	</li>
 	</ul>
 </div>
 <!-- end stat  disk size  --> 
 
+<!-- start clear  -->
 <div class="clr"></div>
+<!-- end clear  -->
+
 <br />
 
-<div id="system-message">
-	<div class="OTHER_INFO">
-	<ul>
-		<li>{lang.OTHER_INFO} !</li>
-		<li>
-		<table>
-			<tr>
-				<td>{lang.KLEEJA_VERSION} :</td>
-				<td>{kleeja_version}</td>
-			</tr>
-			<tr>
-				<td>{lang.PHP_VER} :</td>
-				<td>{php_version}</td>
-			</tr>
-			<tr>
-				<td>{lang.MYSQL_VER} :</td>
-				<td>{mysql_version}</td>
-			</tr>
-			<tr>
-				<td>max_execution_time :</td>
-				<td>{max_execution_time}</td>
-			</tr>
-			<tr>
-				<td>upload_max_filesize :</td>
-				<td>{upload_max_filesize}</td>
-			</tr>
-			<tr>
-				<td>post_max_size:</td>
-				<td>{post_max_size}</td>
-			</tr>
-		</table>					
-		</li>
-	</ul>
-</div>
+<!-- start dot  -->
+<p class="dot" />
+<!-- end dot  -->
+
+<!-- start other info -->
+<div id="other-info">
+<ul>
+<li>{lang.OTHER_INFO} !</li>
+<li>
+<table>
+<tr><td>{lang.KLEEJA_VERSION} :</td>
+	<td>{kleeja_version}</td></tr>
+<tr><td>{lang.PHP_VER} :</td>
+	<td>{php_version}</td></tr>
+<tr><td>{lang.MYSQL_VER} :</td>
+	<td>{mysql_version}</td></tr>
+<tr><td>max_execution_time :</td>
+	<td>{max_execution_time}</td></tr>
+<tr><td>upload_max_filesize :</td>
+	<td>{upload_max_filesize}</td></tr>
+<tr><td>post_max_size:</td>
+	<td>{post_max_size}</td></tr>
+</table>	
+</li>
+</ul>
 </div>
 <br />
+<!-- end other info -->
 </div>
-<div class="clr"></div>
 <!-- end body panel  -->

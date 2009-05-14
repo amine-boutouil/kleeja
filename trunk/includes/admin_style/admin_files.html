@@ -1,53 +1,64 @@
-
-        
+<!-- start view files temlate  -->
 <div id="divmiddle">
-<form method="post" action="{action}" onsubmit="javascript:return confirm_from();">
-        <fieldset>
-                <legend>{lang.R_FILES}</legend>
 
-<table style="width: 100%;text-align:center"">
-        <tr style="background-color:#C0D2E8">
-                <td><a href="{ord_action}&amp;order_by=real_filename">{lang.FILENAME}</a></td>
-                <td><a href="{ord_action}&amp;order_by=user">{lang.BY}</a></td>
-                <td><a href="{ord_action}&amp;order_by=user_ip">{lang.IP}</a></td>
-                <td><a href="{ord_action}&amp;order_by=size">{lang.FILESIZE}</a></td>
-                <td><a href="{ord_action}&amp;order_by=uploads">{lang.FILEUPS}</a></td>
-                <td><a href="{ord_action}&amp;order_by=time">{lang.FILEDATE}</a></td>
-                <td><a href="{ord_action}&amp;order_by=type">{lang.FILETYPE}</a></td>
-                <td><a href="{ord_action}&amp;order_by=folder">{lang.FILDER}</a></td>
-                <td><a href="{ord_action}&amp;order_by=report">{lang.REPORT}</a></td>
-                <td>{lang.DELETE}</td>
-                <!-- admin files info tr extra -->
-        </tr>
+<form method="post" action="{action}" onsubmit="javascript:return confirm_from();">
+<fieldset>
+
+<!-- title  -->
+<b>{lang.R_FILES}</b>
+<!-- title  -->
+
+<!-- border line Vertical  -->
+<hr id="hr-border" />
+<!-- border line Vertical  -->
+
+<!-- start div border table  -->
+<div id="border-table">
+
+<table style="text-align:center">
+    <tr style="background-color:#FFF">
+        <td><a href="{ord_action}&amp;order_by=real_filename">{lang.FILENAME}</a></td>
+        <td><a href="{ord_action}&amp;order_by=user">{lang.BY}</a></td>
+        <td><a href="{ord_action}&amp;order_by=user_ip">{lang.IP}</a></td>
+        <td><a href="{ord_action}&amp;order_by=size">{lang.FILESIZE}</a></td>
+        <td><a href="{ord_action}&amp;order_by=uploads">{lang.FILEUPS}</a></td>
+        <td><a href="{ord_action}&amp;order_by=time">{lang.FILEDATE}</a></td>
+        <td><a href="{ord_action}&amp;order_by=type">{lang.FILETYPE}</a></td>
+        <td><a href="{ord_action}&amp;order_by=folder">{lang.FILDER}</a></td>
+        <td><a href="{ord_action}&amp;order_by=report">{lang.REPORT}</a></td>
+        <td>{lang.DELETE}</td>
+    </tr>
 <IF NAME="no_results">
 ...
 <ELSE>
 <LOOP NAME="arr">
-        <tr style="background-color:#F5F5F5">
-                <td>{{name}}</td>
-                <td>{{user}}</td>
-                <td>{{ip}}</td>
-                <td>{{size}}</td>
-                <td>{{ups}}</td>
-                <td>{{time}}</td>
-                <td>{{type}}</td>
-                <td>{{folder}}</td>
-                <td>{{report}}</td>
-                <td><input type="checkbox" name="del_{{id}}" value="1"></td>
-                <!-- admin files data tr extra -->
-        </tr>
+    <tr>
+		<td>{{name}}</td>
+        <td>{{user}}</td>
+        <td>{{ip}}</td>
+        <td>{{size}}</td>
+        <td>{{ups}}</td>
+        <td>{{time}}</td>
+        <td>{{type}}</td>
+        <td>{{folder}}</td>
+        <td>{{report}}</td>
+        <td><input type="checkbox" name="del_{{id}}" value="1"></td>
+    </tr>
 </LOOP>
 </IF>
 </table>
 
-</fieldset>
-<fieldset class="quick" style="text-align:center">
-                <input class="button2" name="submit" type="submit" value="{lang.UPDATE_FILES}" />
-</fieldset>
-</form>
-<div style="text-align:center">{page_nums}</div>
 </div>
+<!-- end div border table  -->
 
+</fieldset>
 
+<!-- start pagination  -->
+<div style="text-align:center">{page_nums}
+<fieldset class="quick"><input class="button2" name="submit" type="submit" value="{lang.UPDATE_FILES}" /></fieldset>
+</div>
+<!-- end pagination  -->
 
-        
+</form>
+</div>
+<!-- end view files temlate  -->

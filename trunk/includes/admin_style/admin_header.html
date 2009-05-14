@@ -3,18 +3,18 @@
 <!--  
 # Powered by Kleeja .... Kleeja.com
 # Designed by Tar3Q .... Tar3q.com
-# copyright 2007-2009  ..
+# copyright 2007-2009  .. Kleeja 
 -->
 <head>
-	<title>{lang.KLEEJA_CP} - {config.sitename}</title>
-	<meta http-equiv="Content-Language" content="ar" />
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<link rel="stylesheet" href="{STYLE_PATH_ADMIN}admin_stylesheet.css" type="text/css" />
-	<IF NAME="{lang.DIR}==ltr">
-	<link rel="stylesheet" href="{STYLE_PATH_ADMIN}admin_stylesheet_ltr.css" type="text/css" />
-	</IF>	
-	<link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
-	<script type="text/javascript">
+<title>{lang.KLEEJA_CP} - {config.sitename}</title>
+<meta http-equiv="Content-Language" content="ar" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="{STYLE_PATH_ADMIN}admin_stylesheet.css" type="text/css" />
+<IF NAME="{lang.DIR}==ltr">
+<link rel="stylesheet" href="{STYLE_PATH_ADMIN}admin_stylesheet_ltr.css" type="text/css" />
+</IF>	
+<link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
+<script type="text/javascript">
 	function confirm_from()
 	{
 		if(confirm('{lang.ARE_YOU_SURE_DO_THIS}'))
@@ -23,44 +23,36 @@
 			return false;
 	}
 	
-	</script>
-	<script type="text/javascript" src="{STYLE_PATH_ADMIN}images/tips.js"></script> 
+</script>
+<script type="text/javascript" src="{STYLE_PATH_ADMIN}images/tips.js"></script> 
 </head>
 <body>
 <!-- start top div header  -->
-	<div id="divheader">
-		<div id="header">
-		<br />
-			<div class="logo1"><a href="{config.siteurl}"><img src="{STYLE_PATH_ADMIN}images/logo.png" alt="{config.sitename}" /></a></div>
-			<div class="logo2"><img src="{STYLE_PATH_ADMIN}images/adminopen.gif" align="absmiddle" />&nbsp;{lang.KLEEJA_CP}</div>
-		</div>
+<div id="divheader">
+	<div id="header">
+	<div class="logo1"><a href="{config.siteurl}"><img src="{STYLE_PATH_ADMIN}images/logo.png" alt="{config.sitename}" /></a></div>
+	<div class="logo2"><img src="{STYLE_PATH_ADMIN}images/adminopen.gif" />&nbsp;{lang.KLEEJA_CP}</div>
 	</div>
-<div class="clr"></div>
+</div>
 <!-- end top div header  -->
+
+<!-- start clear  -->
+<div class="clr"></div>
+<!-- end clear  -->
 
 <!-- start  div body  -->
 <div id="divbody">
-<div class="clr"></div>
+
 <!-- start admin menu right  -->
 <div id="rightmenu">	
 	<div class="body-menu">
-	<IF NAME="SHOW_LIST">
-			<div class="link-menu">
-				<div><p><a href="{config.siteurl}">
-				<img src="{STYLE_PATH_ADMIN}images/index_button.gif" /><br />{lang.RETURN_HOME}</a></p></div>
-			</div>
-			
-			<div class="link-menu">
-				<div><p><a href="admin.php">
-				<img src="{STYLE_PATH_ADMIN}images/cp_button.gif" /><br />{lang.R_CPINDEX}</a></p></div>
-			</div>
-		<LOOP NAME="adm_extensions_menu">	
-			<div class="link-menu">
-				<div><p><a href="{{link}}"<IF LOOP="confirm"> onclick="javascript:return confirm_from();"</IF>>
-				<img src="{{icon}}" /><br />{{lang}}</a></p></div>
-			</div>
-		</LOOP>	
-	</IF>
+<IF NAME="SHOW_LIST">
+	<div class="link-menu"><div><p><a title="{lang.RETURN_HOME}" href="{config.siteurl}"><img src="{STYLE_PATH_ADMIN}images/index_button.gif" /><br />{lang.RETURN_HOME}</a></p></div></div>
+	<div class="link-menu"><div><p><a title="{lang.R_CPINDEX}" href="admin.php"><img src="{STYLE_PATH_ADMIN}images/cp_button.gif" /><br />{lang.R_CPINDEX}</a></p></div></div>
+<LOOP NAME="adm_extensions_menu">	
+	<div class="link-menu"><div><p><a title="{{lang}}" href="{{link}}"<IF LOOP="confirm"> onclick="javascript:return confirm_from();"</IF>><img src="{{icon}}" /><br />{{lang}}</a></p></div></div>
+</LOOP>	
+</IF>
 	</div>
 </div>
 <!-- end admin menu right -->

@@ -1,36 +1,58 @@
-
+<!-- start Extra temlate  -->
 <div id="divmiddle">
-<form method="post" action="{action}">
-        <fieldset>
-                <legend>{lang.R_EXTRA}</legend>
 
+<form method="post" action="{action}">
+
+<fieldset>
+
+<!-- title  -->
+<b>{lang.R_EXTRA} :</b>
+<!-- title  -->
+
+<!-- border line Vertical  -->
+<hr id="hr-border" />
+<!-- border line Vertical  -->
+
+<!-- start div border table  -->
+<div id="border-table">
+
+<!-- start table no hover -->
 <table class="tab-no-hover">
-        <tr>
-                <td><label for="ex_header">{lang.EX_HEADER_N}</label></td>
-        </tr>
-        <tr>
-                <td>
-                <label>
-                <textarea id="ex_header" name="ex_header" style="width: 98%; height: 210px;direction:ltr;" >{ex_header}</textarea>
-                </label>
-                </td>
-        </tr>        
-        <tr>
-                <td><label for="ex_footer">{lang.EX_FOOTER_N}</label></td>
-        </tr>
-        <tr>
-                <td>
-                <label>
-                <textarea id="ex_footer" name="ex_footer" style="width: 98%; height: 210px;direction:ltr;" >{ex_footer}</textarea>
-                </label>
-                </td>
-        </tr>
+    <tr>
+        <td><label for="ex_header">{lang.EX_HEADER_N}</label></td>
+    </tr>
+    <tr>
+        <td>
+        <label>
+        <textarea id="ex_header" name="ex_header" style="width: 98%; height: 210px;direction:ltr;" >{ex_header}</textarea>
+        </label>
+        </td>
+    </tr>        
+    <tr>
+        <td><label for="ex_footer">{lang.EX_FOOTER_N}</label></td>
+    </tr>
+    <tr>
+        <td>
+        <label>
+        <textarea id="ex_footer" name="ex_footer" style="width: 98%; height: 210px;direction:ltr;" >{ex_footer}</textarea>
+        </label>
+        </td>
+    </tr>
 </table>
+<!-- end table no hover -->
+
+</div>
+<!-- end div border table  -->
+
 </fieldset>
+
+<!-- start button  -->
 <fieldset class="quick" style="text-align:center">
                 <input class="button2" name="submit" type="submit" value="{lang.UPDATE_EXTRA}" />
 </fieldset>
+<!-- end button  -->
+
 </form>
 </div>
-
-        
+<!-- end Extra temlate  -->
+ 

@@ -1,19 +1,39 @@
-﻿<div id="divmiddle">
-<form method="post" action="{action}">
-        <fieldset>
-                <legend>{lang.R_CONFIGS}</legend>
+﻿<!-- start setting temlate  -->
+<div id="divmiddle">
 
-<table style="width: 100%">
+<form method="post" action="{action}">
+
+<fieldset>
+
+<!-- title   -->
+<b>{lang.R_CONFIGS}</b>
+<!-- title   -->
+
+<!-- border line Vertical  -->
+<hr id="hr-border" />
+<!-- border line Vertical  -->
+
+<!-- start div border table  -->
+<div id="border-table">
+<table>
+
  <!-- admin configs tr extra begin -->
  {options}
 <!-- admin configs tr extra -->
+
 </table>
- <!-- admin configs table extra -->
+</div>
+<!-- end div border table  -->
+
 </fieldset>
+
+<!-- start button  -->
 <fieldset class="quick" style="text-align:center">
                 <input class="button2" name="submit" type="submit" value="{n_submit}" />
 </fieldset>
+<!-- end button  -->
+
 </form>
 </div>
-
-     
+<!-- end setting temlate  -->
+  

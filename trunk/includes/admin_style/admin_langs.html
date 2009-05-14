@@ -1,6 +1,18 @@
-
+<!-- start language temlate  -->
 <div id="divmiddle">
-<br />
+<form method="post" action="{action}">
+<fieldset>
+
+<!-- title  -->
+<b>{lang.R_LANGS} :</b>
+<!-- title  -->
+
+<!-- border line Vertical  -->
+<hr id="hr-border" />
+<!-- border line Vertical  -->
+
+<!-- start div border table  -->
+<div id="border-table">
 
 <form action="{action2}" method="post">
 	<select name="lang">
@@ -9,33 +21,42 @@
 	  <input class="button2"  type="submit" value="{lang.UPDATE}" />
 </form>
 
-<form method="post" action="{action}">
-        <fieldset>
-                <legend>{lang.R_LANGS}</legend>
+<!-- start clear  -->
+<div class="clr"></div>
+<!-- end clear  -->
 
 <table style="width: 100%">
 <IF NAME="no_results">
 ...
 <ELSE>
 <LOOP NAME="arr">
-        <tr style="background-color:<RAND="#D8EBFD","#fff">" class="">
-               <td>#<em>{{lang_id}}</em></td>
-                <td class="s_box_tpls">{{word}}</td>
-				<td style="text-align:center"> <strong>=</strong> </td>
-                 <td><label><input type="text" name="t_{{word}}" value="{{trans}}" size="60" ></label></td>
-                <td><input type="checkbox" name="del_{{word}}" value="1"> {lang.DELETE}</td>
-                <!-- admin lang data tr extra -->
-        </tr>
+    <tr style="background-color:<RAND="#D8EBFD","#fff">" class="">
+        <td>#<em>{{lang_id}}</em></td>
+        <td class="s_box_tpls">{{word}}</td>
+		<td style="text-align:center"> <strong>=</strong> </td>
+        <td><label><input type="text" name="t_{{word}}" value="{{trans}}" size="60" ></label></td>
+        <td><input type="checkbox" name="del_{{word}}" value="1"> {lang.DELETE}</td>
+    </tr>
 </LOOP>
 </IF>
 </table>
 
+<!-- start button  -->
 </fieldset>
 <fieldset class="quick" style="text-align:center">
                 <input class="button2" name="submit" type="submit" value="{lang.UPDATE}" />
 </fieldset>
-</form>
-<div style="text-align:center"><b>{page_nums}</b></div>
-</div>
+<!-- end button  -->
 
+</div>
+<!-- end div border table  -->
+
+</form>
+
+<!-- start pagination  -->
+<div style="text-align:center"><b>{page_nums}</b></div>
+<!-- end pagination  -->
+
+</div>
+<!--  end language temlate  -->
         

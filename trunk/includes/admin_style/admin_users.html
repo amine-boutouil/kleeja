@@ -16,10 +16,13 @@
 
 <form method="post" action="{action}">
         <fieldset>
-                <legend>{lang.R_USERS}</legend>
+<b>{lang.R_USERS} :</b>
 
-<table style="width: 100%;text-align:center">
-        <tr style="background-color:#C0D2E8">
+<hr id="hr-border" />
+
+<div id="border-table">
+<table style="text-align:center">
+        <tr style="background-color:#FFF">
                 <td>{lang.USERNAME}</td>
                 <td>{lang.EMAIL}</td>
                 <td>{lang.PASSWORD}</td>
@@ -42,7 +45,7 @@
 </LOOP>
 </IF>
 </table>
-
+</div>
 </fieldset>
 <fieldset class="quick" style="text-align:center">
                 <input class="button2" name="submit" type="submit" value="{lang.UPDATE_USERS}" />
@@ -52,10 +55,12 @@
 
 <form method="post" action="">
         <fieldset>
-                <legend>{lang.NEW_USER}</legend>
+                <b>{lang.NEW_USER} :</b>
+<hr id="hr-border" />
 
-<table style="width: 100%;text-align:center">
-        <tr style="background-color:#C0D2E8">
+<div id="border-table">
+<table style="text-align:center">
+        <tr style="background-color:#FFF">
                 <td>{lang.USERNAME}</td>
                 <td>{lang.EMAIL}</td>
                 <td>{lang.PASSWORD}</td>
@@ -67,7 +72,7 @@
                 <td><label><input type="password" name="lpass" value="" size="10"></label></td>
                 <!-- admin users data tr extra -->
 </table>
-
+</div>
 </fieldset>
 <fieldset class="quick" style="text-align:center">
                 <input class="button2" name="newuser" type="submit" value="{lang.UPDATE_USERS}" />

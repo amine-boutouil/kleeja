@@ -1,78 +1,121 @@
-
+<!-- start search temlate  -->
 <div id="divmiddle">
 <form method="post" action="{action1}">
-        <fieldset>
-                <legend>{lang.SEARCH_FILES}</legend>
+<fieldset>
 
+<!-- title  -->
+<b>{lang.SEARCH_FILES} :</b>
+<!-- title  -->
+
+<!-- border line Vertical  -->
+<hr id="hr-border" />
+<!-- border line Vertical  -->
+
+<!-- start div border table  -->
+<div id="border-table">
+
+<!-- start table no hover  -->
 <table class="tab-no-hover">
-        <tr>
-                <td><label for="filename">{lang.FILENAME}</label></td>
-                <td><label><input type="text" id="filename" name="filename" size="40"></label></td>
-        </tr>        
-        <tr>
-                <td><label for="username">{lang.USERNAME}</label></td>
-                <td><label><input type="text" id="username" name="username" size="40"></label></td>
-        </tr>        
-        <tr>
-                <td><label for="ext">{lang.FILETYPE}</label></td>
-                <td><label><input type="text" id="ext" name="ext" size="20"></label></td>
+    <tr>
+        <td><label for="filename">{lang.FILENAME}</label></td>
+        <td><label><input type="text" id="filename" name="filename" size="40"></label></td>
+    </tr>        
+    <tr>
+        <td><label for="username">{lang.USERNAME}</label></td>
+        <td><label><input type="text" id="username" name="username" size="40"></label></td>
+    </tr>        
+    <tr>
+        <td><label for="ext">{lang.FILETYPE}</label></td>
+        <td><label><input type="text" id="ext" name="ext" size="20"></label></td>
         </tr>
-        <tr>
-                <td><label for="size">{lang.FILESIZE} </label></td>
-                <td><select name="than"><option value="1">&gt;</option><option value="2">&lt;</option></select><label><input type="text" id="size" name="size" size="10"></label> {lang.KILOBYTE}</td>
-        </tr>
-        <tr>
-                <td><label for="ups">{lang.FILEUPS} </label></td>
-                <td><select name="uthan"><option value="1">&gt;</option><option value="2">&lt;</option></select><label> <input type="text" id="ups" name="ups" size="10"></label></td>
-        </tr>
-        <tr>
-                <td><label for="rep">{lang.REPORT} </label></td>
-                <td><select name="rthan"><option value="1">&gt;</option><option value="2">&lt;</option></select><label> <input type="text" id="rep" name="rep" size="10"></label></td>
-        </tr>
-        <tr>
-                <td><label for="lastdown">{lang.LAST_DOWN} </label></td>
-                <td>
-                {lang.WAS_B4}
-                <label><input type="text" id="lastdown" name="lastdown" size="10"></label>
-                {lang.DAYS}
-                </td>
-        </tr>
-        <tr>
-                <td><label for="user_ip">{lang.IP}</label></td>
-                <td>
-                <label><input type="text" id="user_ip" name="user_ip"  size="20"></label>
-                </td>
-        </tr>
-        <!-- admin search data tr extra -->
+    <tr>
+        <td><label for="size">{lang.FILESIZE} </label></td>
+        <td><select name="than"><option value="1">&gt;</option><option value="2">&lt;</option></select><label><input type="text" id="size" name="size" size="10"></label> {lang.KILOBYTE}</td>
+    </tr>
+    <tr>
+        <td><label for="ups">{lang.FILEUPS} </label></td>
+        <td><select name="uthan"><option value="1">&gt;</option><option value="2">&lt;</option></select><label> <input type="text" id="ups" name="ups" size="10"></label></td>
+    </tr>
+    <tr>
+        <td><label for="rep">{lang.REPORT} </label></td>
+        <td><select name="rthan"><option value="1">&gt;</option><option value="2">&lt;</option></select><label> <input type="text" id="rep" name="rep" size="10"></label></td>
+    </tr>
+    <tr>
+        <td><label for="lastdown">{lang.LAST_DOWN} </label></td>
+        <td>{lang.WAS_B4}<label><input type="text" id="lastdown" name="lastdown" size="10"></label>{lang.DAYS}</td>
+    </tr>
+    <tr>
+        <td><label for="user_ip">{lang.IP}</label></td>
+        <td><label><input type="text" id="user_ip" name="user_ip"  size="20"></label>
+        </td>
+    </tr>
+    <!-- admin search data tr extra -->
 </table>
+<!-- end table no hover  -->
+
+</div>
+<!-- end div border table  -->
+
 </fieldset>
+
+<!-- button  -->
 <fieldset class="quick" style="text-align:center">
                 <input class="button2" name="search_file" type="submit" value="{lang.SEARCH_SUBMIT}" />
 </fieldset>
+<!-- button  -->
+
 </form>
+<!-- end search temlate  -->
+
+
 <br />
+<!-- start dot  -->
+<p class="dot" />
+<!-- end dot  -->
 <br />
+
+
+
+
+<!-- start users search temlate  -->
 <IF NAME="default_user_system">
 <form method="post" action="{action2}">
-        <fieldset>
-                <legend>{lang.SEARCH_USERS}</legend>
+<fieldset>
 
+<!-- title  -->
+<b>{lang.SEARCH_USERS} :</b>
+<!-- title  -->
+
+<!-- border line Vertical  -->
+<hr id="hr-border" />
+<!-- border line Vertical  -->
+
+<!-- start div border table  -->
+<div id="border-table">
+
+<!-- start table no hover  -->
 <table class="tab-no-hover">
-        <tr>
-                <td><label for="username">{lang.USERNAME}</label></td>
-                <td><label><input type="text" id="username" name="username" size="40"></label></td>
-        </tr>                
-        <tr>
-                <td><label for="usermail">{lang.EMAIL}</label></td>
-                <td><label><input type="text" id="usermail" name="usermail" size="40"></label></td>
-        </tr>        
-        <!-- admin search data2 tr extra -->
+    <tr>
+        <td><label for="username">{lang.USERNAME}</label></td>
+        <td><label><input type="text" id="username" name="username" size="40"></label></td>
+    </tr>                
+    <tr>
+        <td><label for="usermail">{lang.EMAIL}</label></td>
+        <td><label><input type="text" id="usermail" name="usermail" size="40"></label></td>
+    </tr>        
 </table>
+<!-- end table no hover  -->
+
+</div>
+<!-- end div border table  -->
+
+<!-- button  -->
 </fieldset>
 <fieldset class="quick" style="text-align:center">
                 <input class="button2" name="search_user" type="submit" value="{lang.SEARCH_SUBMIT}" />
 </fieldset>
+<!-- button  -->
 </form>
 </IF>
 </div>
-        
+<!-- end users search temlate  -->     

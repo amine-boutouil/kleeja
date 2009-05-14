@@ -1,25 +1,50 @@
+<!-- start ban  temlate  -->
 <div id="divmiddle">
-<form method="post" action="{action}">
-        <fieldset>
-                <legend>{lang.R_BAN}</legend>
 
+<!-- start form  -->
+<form method="post" action="{action}">
+
+<fieldset>
+
+<!-- title and notice  -->	
+<b>{lang.R_BAN} :</b><label for="sitename">{lang.BAN_EXP1}</label>
+<!-- title and notice  -->	
+
+<!-- border line Vertical  -->
+<hr id="hr-border" />
+<!-- border line Vertical  -->
+
+<!-- start div border table  -->
+<div  id="border-table">
+
+<!-- start table no hover  -->
 <table class="tab-no-hover">
-    <tr>
-        <td><label for="sitename">{lang.BAN_EXP1}</label></td>
-    </tr>
     <tr>
     <td><label>
 			<textarea name="ban_text" style="width: 97%; height: 100px;direction:ltr;" >{ban}</textarea>
 	</label></td>
     </tr>
-    <tr>
-    <td><label for="sitename">{lang.BAN_EXP2}</label></td>
-   </tr>
 </table>
-</fieldset>
+<!-- end table no hover  -->
 
+</div>
+<!-- end div border table  -->
+
+<br />
+
+<!--  notice  -->	
+<label for="sitename">{lang.BAN_EXP2}</label>
+<!--  notice  -->	
+
+<!--  button  -->	
+</fieldset>
 <fieldset class="quick" style="text-align:center">
         <input class="button2" name="submit" type="submit" value="{lang.UPDATE_BAN}" />
 </fieldset>
+<!--  button  -->	
+
 </form>
+<!-- end form  -->
+
 </div>
+<!-- end  ban  temlate  -->

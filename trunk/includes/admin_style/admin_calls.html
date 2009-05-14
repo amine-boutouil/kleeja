@@ -1,5 +1,4 @@
-
-        <script language="javascript">
+<script type="text/javascript">
 function show_msg (te, id)
 {
 var te = document.getElementById(te).value;
@@ -10,19 +9,45 @@ document.getElementById('mail_here').innerHTML= iee;
 
 }
 </script>
+
+<!-- start calls temlate  -->
 <div id="divmiddle">
 
-        <fieldset>
-                <legend>{lang.TEXT}</legend>
-<div id="mail_here">{lang.E_CLICK}</div>
-        </fieldset>
-        
-<form method="post" action="{action}">
-        <fieldset>
-                <legend>{lang.R_CALLS}</legend>
+<fieldset>
 
-<table style="width: 100%">
-        <tr style="background-color:silver">
+<!-- title  -->
+<b>{lang.TEXT} :</b>
+<!-- title  -->
+
+<!-- border line Vertical  -->
+<hr id="hr-border" />
+<!-- border line Vertical  -->
+
+<!-- mail here  -->
+<div id="mail_here">{lang.E_CLICK}</div>
+<!-- mail here  -->
+
+</fieldset>
+ 
+<!-- start form  --> 
+<form method="post" action="{action}">
+
+<fieldset>
+
+<!-- title  -->
+<b>{lang.R_CALLS}</b>
+<!-- title  -->
+
+
+<!-- border line Vertical  -->
+<hr id="hr-border" />
+<!-- border line Vertical  -->
+
+<!-- start div border table  -->
+<div id="border-table">
+
+<table style="text-align:center">
+        <tr style="background-color:#FFF">
                 <td>{lang.NAME}</td>
                 <td>{lang.TIME}</td>
                 <td>{lang.IP}</td>
@@ -33,28 +58,38 @@ document.getElementById('mail_here').innerHTML= iee;
 ...
 <ELSE>
 <LOOP NAME="arr">
-        <tr style="background-color:#F5F5F5">
-                <td>
-					<a title="{n_mail}:{{mail}}" onclick="javascript:show_msg('textva_{{id}}',{{id}});">{{name}}</a>
-					<input type="hidden" value="{{mail}} :<br /> {{text}}" id="textva_{{id}}">
-                </td>
-                <td>{{time}}</td>
-                <td><a href="{{ip_finder}}" target="blank">{{ip}}</a></td>
-                <td><input type="checkbox" name="del_{{id}}" value="1"></td>
-				<!-- admin calls data td2 extra -->
+        <tr>
+            <td>
+			<a title="{n_mail}:{{mail}}" onclick="javascript:show_msg('textva_{{id}}',{{id}});">{{name}}</a>
+			<input type="hidden" value="{{mail}} :<br /> {{text}}" id="textva_{{id}}">
+            </td>
+            <td>{{time}}</td>
+            <td><a href="{{ip_finder}}" target="blank">{{ip}}</a></td>
+            <td><input type="checkbox" name="del_{{id}}" value="1"></td>
+			<!-- admin calls data td2 extra -->
         </tr>
 </LOOP>
 </IF>
 </table>
 
+</div>
+<!-- end div border table  -->
+
 </fieldset>
+
+<!-- start button  -->
 <fieldset class="quick" style="text-align:center">
                 <input class="button2" name="submit" type="submit" value="{lang.UPDATE_CALSS}" />
 </fieldset>
+<!-- end button  -->
+
 </form>
+<!-- end form  -->
+
+<!-- start pagination  -->
 <div style="text-align:center"><b>{page_nums}</b></div>
+<!-- end pagination  -->
+
 </div>
-
-
-
-        
+<!-- end calls temlate  -->
+   

@@ -14,7 +14,7 @@
 	define ('IN_INDEX' , true);
 	define ('IN_ADMIN' , true);
 	
-	if($_GET['go'] == 'login')
+	if(isset($_GET['go']) && $_GET['go'] == 'login')
 	{
 		define('IN_ADMIN_LOGIN', true);
 	}

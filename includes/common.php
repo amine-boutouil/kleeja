@@ -142,7 +142,7 @@
 	// for gzip : php.net
 	//fix bug # 181
 	$do_gzip_compress = false; 
-	if ($config['gzip'] == '1' && !defined('IN_DOWNLOAD')) 
+	if ($config['gzip'] == '1' && !defined('IN_DOWNLOAD') && !defined('IN_ADMIN')) 
 	{
 	    function compress_output($output)
 		{

@@ -15,11 +15,11 @@
 	}
 	
 		//style of
-		$stylee 				= "admin_start";
+		$stylee			= "admin_start";
 		//last visit
-		$last_visit				= (!empty($_SESSION['LAST_VISIT']) && $config['user_system'] == 1) ?  date("[d-m-Y], [h:i a] ", $_SESSION['LAST_VISIT']) : false;
-		$h_lst_files			= './admin.php?cp=files&amp;last_visit=' . (!empty($_SESSION['LAST_VISIT']) ? $_SESSION['LAST_VISIT'] : time() - 3600*12);
-		$h_lst_imgs				= './admin.php?cp=img_ctrl&amp;last_visit=' . (!empty($_SESSION['LAST_VISIT']) ? $_SESSION['LAST_VISIT'] : time() - 3600*12);
+		$last_visit		= (!empty($_SESSION['LAST_VISIT']) && $config['user_system'] == 1) ?  date("[d-m-Y], [h:i a] ", $_SESSION['LAST_VISIT']) : false;
+		$h_lst_files	= './admin.php?cp=files&amp;last_visit=' . (!empty($_SESSION['LAST_VISIT']) ? $_SESSION['LAST_VISIT'] : time() - 3600*12);
+		$h_lst_imgs		= './admin.php?cp=img_ctrl&amp;last_visit=' . (!empty($_SESSION['LAST_VISIT']) ? $_SESSION['LAST_VISIT'] : time() - 3600*12);
 		
 		//data
 		$files_number 		= $stat_files ;
@@ -36,15 +36,14 @@
 		$s_google_num		= $stat_google_num;
 		$s_last_yahoo		= ($stat_last_yahoo == 0) ? '[ ? ]' : date("d-m-Y h:i a", $stat_last_yahoo);
 		$s_yahoo_num		= $stat_yahoo_num;
-		$usernamelang = sprintf($lang['KLEEJA_CP_W'], $username);
+		$usernamelang		= sprintf($lang['KLEEJA_CP_W'], $username);
 		
 		//size board by percent
-		$per =  $stat_sizes / ($config['total_size'] * 1048576);
-		$per1 =  round($per*100, 2);
-		$per1 =  $per1 >= 100 ? 100 : $per1;
+		$per	= $stat_sizes / ($config['total_size'] * 1048576);
+		$per1	= round($per*100, 2);
+		$per1	= $per1 >= 100 ? 100 : $per1;
 
 
-		
 		//ppl must know about kleeja version!
 		//ok i forgive ...
 		$kleeja_version	 = '<a href="./admin.php?cp=check_update" title="' . $lang['R_CHECK_UPDATE'] . '">' . KLEEJA_VERSION . '</a>';

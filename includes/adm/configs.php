@@ -149,7 +149,7 @@
 					delete_cache('', true); //delete all cache to get new style
 				}
 				
-				$text	= $lang['CONFIGS_UPDATED'];
+				$text	= $lang['CONFIGS_UPDATED'] . '<meta HTTP-EQUIV="REFRESH" content="2; url=./admin.php">' . "\n";
 				$stylee	= "admin_info";
 			}
 			

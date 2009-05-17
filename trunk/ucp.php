@@ -332,7 +332,7 @@ switch ($_GET['go'])
 			$filecp_link		= $user_id == $usrcp->id() ?  $config['siteurl'] . ($config['mod_writer'] ? 'filecp.html' : 'ucp.php?go=filecp') : false;
 			$total_pages		= $Pager->getTotalPages(); 
 			$linkgoto			= $config['mod_writer'] ? $config['siteurl'] . 'fileuser_' . $user_id : $config['siteurl'] . 'ucp.php?go=fileuser&amp;id=' . $user_id;
-			$page_nums			= $config['mod_writer'] ? $Pager->print_nums($linkgoto) : $Pager->print_nums($linkgoto); 
+			$page_nums			= $Pager->print_nums($linkgoto); 
 				
 			$no_results = false;
 			if($nums_rows == 0) 

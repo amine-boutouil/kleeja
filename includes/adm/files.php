@@ -19,11 +19,13 @@
 	
 	$url_or		= (isset($_REQUEST['order_by']) ? '&amp;order_by=' . $_REQUEST['order_by'] : '');
 	$url_lst	= (isset($_REQUEST['last_visit']) ? '&amp;last_visit=' . $_REQUEST['last_visit'] : '');
+	$url_sea	= (isset($_GET['search']) ? '&amp;search=' . $_GET['search'] : '');
 	$url_pg		= (isset($_REQUEST['page']) ? '&amp;page=' . intval($_REQUEST['page']) : '');
-	$page_action = "admin.php?cp=files" . $url_or	. $url_lst;
+	$page_action = "admin.php?cp=files" . $url_or . $url_sea . $url_lst;
 	$ord_action	= "admin.php?cp=files" . $url_pg	. $url_lst;
 	$action		= $page_action . $url_or;
-
+	
+	
 	$query	= array('SELECT'	=> 'COUNT(f.id) AS total_files',
 					'FROM'		=> "{$dbprefix}files f",
 					'JOINS'		=> array(
@@ -38,18 +40,22 @@
 	//posts search ..
 	if (isset($_POST['search_file']))
 	{
-		$file_namee	= ($_POST['filename']!='') ? 'AND f.real_filename LIKE \'%' . $SQL->escape($_POST['filename']) . '%\' ' : ''; 
-		$usernamee	= ($_POST['username']!='') ? 'AND u.name LIKE \'%' . $SQL->escape($_POST['username']) . '%\'' : ''; 
-		$size_than	=   ' f.size ' . ($_POST['than']!=1 ? '<=' : '>=') . (intval($_POST['size']) * 1024) . ' ';
-		$ups_than	=  ($_POST['ups']!='') ? 'AND f.uploads ' . ($_POST['uthan']!=1 ? '<' : '>') . intval($_POST['ups']) . ' ' : '';
-		$rep_than	=  ($_POST['rep']!='') ? 'AND f.report ' . ($_POST['rthan']!=1 ? '<' : '>') . intval($_POST['rep']) . ' ' : '';
-		$lstd_than	=  ($_POST['lastdown']!='') ? 'AND f.last_down =' . (time()-(intval($_POST['lastdown']) * (24 * 60 * 60))) . ' ' : '';
-		$exte		=  ($_POST['ext']!='') ? 'AND f.type LIKE \'%' . $SQL->escape($_POST['ext']) . '%\' ' : '';
-		$ipp		=  ($_POST['user_ip']!='') ? 'AND f.user_ip LIKE \'%' . $SQL->escape($_POST['user_ip']) . '%\' ' : '';
+		header('Location: admin.php?cp=files&search=' . base64_encode(serialize($_POST)));
+	}
+	else if(isset($_GET['search']))
+	{
+		$search = base64_decode($_GET['search']);
+		$search	= unserialize($search);
+		$file_namee	= ($search['filename']!='') ? 'AND f.real_filename LIKE \'%' . $SQL->escape($search['filename']) . '%\' ' : ''; 
+		$usernamee	= ($search['username']!='') ? 'AND u.name LIKE \'%' . $SQL->escape($search['username']) . '%\'' : ''; 
+		$size_than	=   ' f.size ' . ($search['than']!=1 ? '<=' : '>=') . (intval($search['size']) * 1024) . ' ';
+		$ups_than	=  ($search['ups']!='') ? 'AND f.uploads ' . ($search['uthan']!=1 ? '<' : '>') . intval($search['ups']) . ' ' : '';
+		$rep_than	=  ($search['rep']!='') ? 'AND f.report ' . ($search['rthan']!=1 ? '<' : '>') . intval($search['rep']) . ' ' : '';
+		$lstd_than	=  ($search['lastdown']!='') ? 'AND f.last_down =' . (time()-(intval($search['lastdown']) * (24 * 60 * 60))) . ' ' : '';
+		$exte		=  ($search['ext']!='') ? 'AND f.type LIKE \'%' . $SQL->escape($search['ext']) . '%\' ' : '';
+		$ipp		=  ($search['user_ip']!='') ? 'AND f.user_ip LIKE \'%' . $SQL->escape($search['user_ip']) . '%\' ' : '';
 		
-
 		$query['WHERE'] = "$size_than $file_namee $ups_than $exte $rep_than $usernamee $lstd_than $exte $ipp";
-
 	}
 	else if(isset($_REQUEST['last_visit']))
 	{

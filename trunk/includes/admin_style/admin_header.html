@@ -23,6 +23,51 @@
 			return false;
 	}
 	
+	function change_color(obj, id, c, c2)
+	{
+		c = (c == null) ? 'ored' : c;
+		c2 = (c == null) ? 'osilver' : c2;
+		var ii = document.getElementById(id);
+		if(obj.checked)
+		{
+			ii.setAttribute("class", c);
+			ii.setAttribute("className", c);
+		}
+		else
+		{
+			ii.setAttribute("class", c2);
+			ii.setAttribute("className", c2);	
+		}
+	}
+	
+	
+	function checkAll(form, id)
+	{
+		for (var i=0;i<form.elements.length;i++)
+		{
+			if(form.elements[i].getAttribute("rel") != id)
+				continue;
+				
+			if(form.elements[i].checked)
+			{
+				uncheckAll(form, id);
+				break;
+			}
+	
+			form.elements[i].checked = true ;
+		}
+	}
+
+	function uncheckAll(form, id)
+	{
+		for (var i=0;i<form.elements.length;i++)
+		{
+			if(form.elements[i].getAttribute("rel") != id)
+				continue;
+			form.elements[i].checked = false ;
+		}
+	}
+
 </script>
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}images/tips.js"></script> 
 </head>

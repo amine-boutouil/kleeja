@@ -26,13 +26,13 @@
         <td><a href="{ord_action}&amp;order_by=type">{lang.FILETYPE}</a></td>
         <td><a href="{ord_action}&amp;order_by=folder">{lang.FILDER}</a></td>
         <td><a href="{ord_action}&amp;order_by=report">{lang.REPORT}</a></td>
-		<td><a href="javascript:void(0);" onclick="checkAll(document.fileform, '_del');">{lang.DELETE}</a></td>
+		<td><a href="javascript:void(0);" onclick="checkAll(document.fileform, '_del', 'su');">{lang.DELETE}</a></td>
     </tr>
 <IF NAME="no_results">
 ...
 <ELSE>
 <LOOP NAME="arr">
-    <tr id="su_{{id}}" class="osilver">
+    <tr id="su[{{id}}]" class="osilver">
 		<td>{{name}}</td>
         <td>{{user}}</td>
         <td>{{ip}}</td>
@@ -42,7 +42,7 @@
         <td>{{type}}</td>
         <td>{{folder}}</td>
         <td>{{report}}</td>
-        <td><input type="checkbox" name="del_{{id}}" value="1" onclick="change_color(this,'su_{{id}}');" rel="_del"></td>
+        <td><input type="checkbox" name="del_{{id}}" value="{{id}}" onclick="change_color(this,'su[{{id}}]');" rel="_del"></td>
     </tr>
 </LOOP>
 </IF>

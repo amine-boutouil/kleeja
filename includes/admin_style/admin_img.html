@@ -5,7 +5,7 @@
 
 <!-- title  -->
 <b>{lang.R_IMG_CTRL}</b>
-[ <a href="javascript:void(0);" onclick="checkAll(document.imgform, '_del');">{lang.CHECK_ALL}</a> ]
+[ <a href="javascript:void(0);" onclick="checkAll(document.imgform, '_del', 'su', 'ored bg_img', 'bg_img');">{lang.CHECK_ALL}</a> ]
 <!-- title  -->
 
 <!-- border line Vertical  -->
@@ -25,10 +25,10 @@
 <LOOP NAME="arr">
 {{tdnum}}
     <td>
-<div class="bg_img"  id="su_{{id}}">
+<div class="bg_img"  id="su[{{id}}]">
     <a href="{{href}}"><img src="{{thumb_link}}"  style="width:75px;height:75px"  onmouseover="toolTip('{{name}}<br />{{ups}}<br />{{size}}<br />{{time}}<br />{{user}}<br />{{ip}}',this);"/></a>
     <br />
-	<input name="del_{{id}}" type="checkbox"  style="float:right" onclick="change_color(this,'su_{{id}}', 'ored bg_img', 'bg_img');" rel="_del"/>
+	<input name="del_{{id}}" type="checkbox" value="{{id}}"  style="float:right" onclick="change_color(this,'su[{{id}}]', 'ored bg_img', 'bg_img');" rel="_del"/>
 </div>
     </td>
 {{tdnum2}}

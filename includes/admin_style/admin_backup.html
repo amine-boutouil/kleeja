@@ -27,11 +27,11 @@
     <tr style="background-color:#FFF">
         <td>{lang.NAME}</td>
         <td>{lang.SIZE}</td>
-		<td><a href="javascript:void(0);" onclick="checkAll(document.bkupfrom, '_bkup');">{lang.CHECK_ALL}</a></td>
+		<td><a href="javascript:void(0);" onclick="checkAll(document.bkupfrom, '_bkup', 'su',  'osilver', 'ored');">{lang.CHECK_ALL}</a></td>
     </tr>
     <LOOP NAME="tables_sho">
-	<tr id="su_{{name}}" class="osilver">
-		<td>{{name}}</td><td>{{size}} kb</td><td><input type="checkbox" name="check[]" value="{{name}}" checked="checked" onclick="change_color(this,'su_{{name}}', 'osilver', 'ored');" rel="_bkup" /></td>
+	<tr id="su[{{name}}]" class="osilver">
+		<td>{{name}}</td><td>{{size}} kb</td><td><input type="checkbox" name="check[]" value="{{name}}" checked="checked" onclick="change_color(this,'su[{{name}}]', 'osilver', 'ored');" rel="_bkup" /></td>
 	</tr>        
         </LOOP>       
 </table>

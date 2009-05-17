@@ -205,19 +205,31 @@ RC6:
 - fix mail send function .. [ utf8 issue ]
 - fix cookies issue
 
+1.0 : 
+- completely re-designing kleeja
+- fix many bugs related with url uploading 
+- fix percentage stat. in admin stat.
+- fix integration with phpbb
 
 
-to do 1.0.1 - 1.0.5 : 
+
+-----------------------------------
+-----------------------------------
+
+To Do 1.0.1 -> 1.* : 
+ 
 - improve reset passwords.
 - improve captcha
 - change passwords hashing to something else not md5
 - organize menus in general settings (options)
 - improve user system and add groups
-- add moderator panel
+- add simple moderator panel
 - add feature to allow admin to delete all specific user files
-- improve callus
+- make callus to methods -> to admin email directly or to admin panel
 - show user total number of files which he uploaded in admin area 
-- file description
+- add file description
+- add number of new calls 
+- add number of new reports 
 
 
 Thank you for reading this file. 

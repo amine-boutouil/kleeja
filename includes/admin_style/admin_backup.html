@@ -1,19 +1,9 @@
-<script type="text/javascript"> 
-function checkall() {  
-        var check = document.getElementsByName("check[]"); 
-    for (var i=0;  i< check.length; i++)
-        {
-                        if (check[i].checked == true ){check[i].checked = false;}
-                        else{ check[i].checked = true; }
-    } 
-} 
-</script> 
 
 <!-- start backup temlate  -->
 <div id="divmiddle">
 
 <!-- start form  -->
-<form  method="post" action="{action}">
+<form  method="post" name="bkupfrom" action="{action}">
 
 <fieldset>
 
@@ -37,12 +27,12 @@ function checkall() {
     <tr style="background-color:#FFF">
         <td>{lang.NAME}</td>
         <td>{lang.SIZE}</td>
-		<td><input type="checkbox" name="check_all" checked="checked" onClick="checkall();"/></td>
+		<td><a href="javascript:void(0);" onclick="checkAll(document.bkupfrom, '_bkup');">{lang.CHECK_ALL}</a></td>
     </tr>
-        <LOOP NAME="tables_sho">
-        <tr>
-        <td>{{name}}</td><td>{{size}} kb</td><td><input type="checkbox" name="check[]" value="{{name}}" checked="checked" /></td>
-    </tr>        
+    <LOOP NAME="tables_sho">
+	<tr id="su_{{name}}" class="osilver">
+		<td>{{name}}</td><td>{{size}} kb</td><td><input type="checkbox" name="check[]" value="{{name}}" checked="checked" onclick="change_color(this,'su_{{name}}', 'osilver', 'ored');" rel="_bkup" /></td>
+	</tr>        
         </LOOP>       
 </table>
 

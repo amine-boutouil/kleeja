@@ -26,7 +26,7 @@ document.getElementById('mail_here').innerHTML = iee;
 
 </fieldset>
      
-<form method="post" action="{action}">
+<form method="post" name="reportform" action="{action}">
 <fieldset>
 
 <!-- title  -->
@@ -46,14 +46,14 @@ document.getElementById('mail_here').innerHTML = iee;
         <td>{lang.URL}</td>
         <td>{lang.TIME}</td>
         <td>{lang.IP}</td>
-        <td>{lang.DELETE}</td>
+        <td><a href="javascript:void(0);" onclick="checkAll(document.reportform, '_del');">{lang.DELETE}</a></td>
         <!-- admin reports info td1 extra -->
     </tr>
 <IF NAME="no_results">
 ...
 <ELSE>
 <LOOP NAME="arr">
-	<tr>
+	<tr id="su_{{id}}" class="osilver">
         <td>
 		<a title="{n_mail}:{{mail}}" onclick="javascript:show_msg('textva_{{id}}',{{id}});">{{name}}</a>
 		<input type="hidden" value="{{mail}} :<br /> {{text}}" id="textva_{{id}}">
@@ -61,7 +61,7 @@ document.getElementById('mail_here').innerHTML = iee;
         <td><a href="{{url}}">{lang.CLICKHERE}<a/></td>
         <td>{{time}}</td>
         <td><a href="{{ip_finder}}" target="blank">{{ip}}</a></td>
-        <td><input type="checkbox" name="del_{{id}}" value="1"></td>
+        <td><input type="checkbox" name="del_{{id}}" value="1" onclick="change_color(this,'su_{{id}}');" rel="_del"></td>
 		<!-- admin reports info td2 extra -->
     </tr>
 </LOOP>

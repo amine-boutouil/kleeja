@@ -20,6 +20,9 @@
 		$action = "admin.php?cp=plugins";
 		$no_plugins	= false;
 		
+		//kleeja depend on its users .. and kleeja love them .. so let's tell them about that ..
+		$klj_d_s = $lang['KLJ_MORE_PLUGINS'][rand(0, sizeof($lang['KLJ_MORE_PLUGINS'])-1)];
+		
 		//get styles
 		$query = array(
 					'SELECT'	=> '*',

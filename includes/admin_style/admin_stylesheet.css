@@ -278,3 +278,7 @@ tr { 	height: 24px; background-color:#EEEEEE;}
 td {	padding: 3px 5px 3px 5px; border: solid 1px #E4E4E4;}
 tr:hover {background-color:#FFFFDD;}
 /* all tables */
+
+/* usefull colors */
+.ored {background-color:#FFE3FB;}
+.osilver {background-color:#F5F5F5;}

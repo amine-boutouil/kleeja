@@ -14,7 +14,7 @@
 		</IF>
 	<!-- end info System Messages -->
 
-<form method="post" action="{action}">
+<form method="post" name="userform" action="{action}">
         <fieldset>
 <b>{lang.R_USERS} :</b>
 
@@ -27,19 +27,19 @@
                 <td>{lang.EMAIL}</td>
                 <td>{lang.PASSWORD}</td>
                 <td>{lang.IS_ADMIN}</td>
-                <td>{lang.DELETE}</td>
+                <td><a href="javascript:void(0);" onclick="checkAll(document.userform, '_del');">{lang.DELETE}</a></td>
                 <!-- admin users info tr extra -->
         </tr>
 <IF NAME="no_results">
-...
+...		
 <ELSE>
 <LOOP NAME="arr">
-        <tr style="background-color:#F5F5F5">
+        <tr id="su_{{id}}" class="osilver">
                 <td><label><input type="text" name="nm_{{id}}" value="{{name}}" size="20"></label></td>
                 <td><label><input type="text" name="ml_{{id}}" value="{{mail}}" size="20"></label></td>
                 <td><label><input type="password" name="ps_{{id}}" value="" size="10"></label></td>
                 <td>{{admin}}</td>
-                <td><input type="checkbox" name="del_{{id}}" value="1"></td>
+                <td><input type="checkbox"  name="del_{{id}}" value="1" onclick="change_color(this,'su_{{id}}');" rel="_del"></td>
                 <!-- admin users data tr extra -->
         </tr>
 </LOOP>

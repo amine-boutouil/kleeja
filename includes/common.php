@@ -202,6 +202,13 @@
 	//ban system 
 	get_ban();
 	
+	//some languages have copyrights !
+	$S_TRANSLATED_BY = false;
+	if(isset($lang['S_TRANSLATED_BY']) && strlen($lang['S_TRANSLATED_BY']) > 2)
+	{
+		$S_TRANSLATED_BY = true;
+	}
+	
 	//site close ..
 	$login_page = '';
 	if ($config['siteclose'] == '1' && !$usrcp->admin() && !defined('IN_LOGIN') && !defined('IN_ADMIN'))
@@ -241,12 +248,6 @@
 		$config['siteurl'] = ($config['siteurl'][strlen($config['siteurl'])-1] != '/') ? $config['siteurl'] . '/' : $config['siteurl'];
 	}
 	
-	//some languages have copyrights !
-	$S_TRANSLATED_BY = false;
-	if(isset($lang['S_TRANSLATED_BY']) && strlen($lang['S_TRANSLATED_BY']) > 2)
-	{
-		$S_TRANSLATED_BY = true;
-	}
 	
 	//clean files
 	if((int) $config['del_f_day'] > 0)

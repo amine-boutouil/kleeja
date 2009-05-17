@@ -415,7 +415,7 @@ $lang = array_merge($lang, array(
 	'KILOBYTE'	=>	'Kilobyte',
 	'NOT_SAFE_FILE'	=> 'The file does not look safe !',
 	'CONFIG_WRITEABLE' => 'The file config.php is currently writeable, We strongly recommend that it be changed to 640 or at least 644.',
-	'NOTE'	=>	'لاحظ',
+	'NOTE'	=>	'Note',
 	'NO_KLEEJA_COPYRIGHTS'	=> 'you seem to have accidentally removed the copyrights from the footer, please put it back on so we can continue to develop Kleeja free of charge, you can buy a copyright removal license %s .',
 	'USERS_NOT_NORMAL_SYS'	=> 'The current users system is not the normal one, which means that the current users cannot be edited from here but from the script that was integrated with Kleeja, those users use the normal membership system.',
 	'ARE_YOU_SURE_DO_THIS'	=> 'Are you sure you want to do this?',
@@ -432,6 +432,17 @@ $lang = array_merge($lang, array(
 	'NEW_USER'				=> 'New user',
 	'LIVEXTS'				=> 'Live extensions (separate by comma)',
 	'MUST_LOGIN'			=> 'You must login with correct username and password .',
+	
+	'KLJ_MORE_PLUGINS'	=> array('قم بالحصول على الكثير من الاضافات من مركز الاضافات في موقع كليجا ,<a href="http://www.kleeja.com/plugins/">إظغط هنا للذهاب لهناك</a> .',
+								'هل أنت مطور ؟ هل قمت بتطوير اضافات لكليجا وتريد عرضها للأخرين أو تريد بيعها في مركز كليجا للاضافات ؟ اذن <a href="http://www.kleeja.com/plugins/">إظغط هنا للذهاب لهناك</a>. ',
+								),
+	'KLJ_MORE_STYLES'	=> array('قم بالحصول على الكثير من الستايلات من معرض الستايلات في موقع كليجا ,<a href="http://www.kleeja.com/styles/">إظغط هنا للذهاب لهناك</a> .',
+							 'هل أنت مصمم ؟ هل تريد عرض ستايلاتك في في معرض كليجا للجميع مجانا او بمقابل ؟  إذن <a href="http://www.kleeja.com/styles/">إظغط هنا للذهاب لهناك</a> .',
+							 ),
+							 
+	'CHECK_ALL'	 => 'Check all',
+	
+	//last line of this file ...					 
 	'S_TRANSLATED_BY' => 'Translated By <a href="http://www.fenix4web.com/">Fenix4Web</a>',
 ));
 

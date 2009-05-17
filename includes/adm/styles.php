@@ -31,6 +31,9 @@ switch ($_GET['sty_t'])
 		$edit_tpl_action = './admin.php?cp=styles&amp;sty_t=style_orders&amp;style_id=' . $config['style'] . '&amp;method=1&amp;tpl_choose=';
 		$show_all_tpls_action = './admin.php?cp=styles&amp;style_choose=' . $config['style'] . '&amp;method=1';
 		
+		//kleeja depend on its users .. and kleeja love them .. so let's tell them about that ..
+		$klj_d_s = $lang['KLJ_MORE_STYLES'][rand(0, sizeof($lang['KLJ_MORE_STYLES'])-1)];
+		
 		//get styles
 		$arr = array();
 		if ($dh = @opendir($root_path . 'styles'))

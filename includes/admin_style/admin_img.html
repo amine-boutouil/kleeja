@@ -1,10 +1,11 @@
 <!-- start view images temlate  -->
 <div id="divmiddle">
-<form method="post" action="{action}" onsubmit="javascript:return confirm_from();">
+<form method="post" action="{action}" name="imgform" onsubmit="javascript:return confirm_from();">
 <fieldset>
 
 <!-- title  -->
 <b>{lang.R_IMG_CTRL}</b>
+[ <a href="javascript:void(0);" onclick="checkAll(document.imgform, '_del');">{lang.CHECK_ALL}</a> ]
 <!-- title  -->
 
 <!-- border line Vertical  -->
@@ -24,10 +25,10 @@
 <LOOP NAME="arr">
 {{tdnum}}
     <td>
-<div  class="bg_img">
+<div class="bg_img"  id="su_{{id}}">
     <a href="{{href}}"><img src="{{thumb_link}}"  style="width:75px;height:75px"  onmouseover="toolTip('{{name}}<br />{{ups}}<br />{{size}}<br />{{time}}<br />{{user}}<br />{{ip}}',this);"/></a>
     <br />
-	<input name="del_{{id}}" type="checkbox" style="float:right"/>
+	<input name="del_{{id}}" type="checkbox"  style="float:right" onclick="change_color(this,'su_{{id}}', 'ored bg_img', 'bg_img');" rel="_del"/>
 </div>
     </td>
 {{tdnum2}}

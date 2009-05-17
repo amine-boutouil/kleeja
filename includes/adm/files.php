@@ -23,7 +23,7 @@
 	$url_pg		= (isset($_REQUEST['page']) ? '&amp;page=' . intval($_REQUEST['page']) : '');
 	$page_action = "admin.php?cp=files" . $url_or . $url_sea . $url_lst;
 	$ord_action	= "admin.php?cp=files" . $url_pg	. $url_lst;
-	$action		= $page_action . $url_or;
+	$action		= $page_action . $url_sea . $url_or;
 	
 	
 	$query	= array('SELECT'	=> 'COUNT(f.id) AS total_files',

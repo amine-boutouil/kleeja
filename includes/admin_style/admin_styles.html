@@ -1,50 +1,95 @@
-
-        
 <div id="divmiddle">
+
 <form method="get" action="{action}">
  <fieldset>
-      <legend>{lang.R_STYLES}</legend>
+ 
+ <!-- title  -->
+<b>{lang.R_STYLES}</b>
+ <!-- title  -->
+ 
+ <!-- border line Vertical  -->
+<hr id="hr-border" />
+<!-- border line Vertical  -->
 
-<table style="width: 100%">
-<tr style="background-color:#FFF">
-        <td>{lang.STYLES_EXP}</td>
-</tr>
+<!-- start div border table  -->
+<div  id="border-table">
+
+<table class="tab-no-hover">
 <tr style="background-color:#F5F5F5">
+    <td>{lang.STYLES_EXP}</td>
+</tr>
+<tr>
  <td>
-		<input type="hidden" name="cp" value="styles" />
-        <select name="style_choose" style="direction:ltr;text-align:left">
-        <LOOP NAME="arr">
-			<option value="{{style_id}}" {{selected}}>{{style_name}}</option>
-        </LOOP>
-        </select>
-        <br />
-        <input name="method" value="1" type="radio" checked="checked" /> {lang.SHOW_TPLS}
-        <br />
-        <input name="method" value="2" type="radio" /> {lang.MAKE_AS_DEFAULT}
+	<input type="hidden" name="cp" value="styles" />
+    <select name="style_choose" style="direction:ltr;text-align:left">
+    <LOOP NAME="arr">
+		<option value="{{style_id}}" {{selected}}>{{style_name}}</option>
+    </LOOP>
+    </select>
+    <br />
+    <input name="method" value="1" type="radio" checked="checked" /> {lang.SHOW_TPLS}
+    <br />
+    <input name="method" value="2" type="radio" /> {lang.MAKE_AS_DEFAULT}
 </td>
 </tr>
 </table>
+</div>
+<!-- end div border table  -->
 
 </fieldset>
+
+<!--  button  -->
 <fieldset class="quick" style="text-align:center">
                 <input class="button2"  type="submit" value="{lang.SUBMIT}" />
 </fieldset>
+<!--  button  -->
 </form>
 
+<br />
+<!-- start dot  -->
+<p class="dot" />
+<!-- end dot  -->
+<br />
 
-<br />
-<br />
- <fieldset>
-       <legend>{lang.TPLS_RE_BASIC} : </legend>
-		
-		<table style="width:100%">
-			<tr><td class="s_box_tpls">header.html</td><td class="s_box_tpls_d" onclick="javascript:location.href='{edit_tpl_action}header.html'">{lang.EDIT}</td></tr>
-			<tr><td class="s_box_tpls">footer.html</td><td class="s_box_tpls_d" onclick="javascript:location.href='{edit_tpl_action}footer.html'">{lang.EDIT}</td></tr>
-			<tr><td class="s_box_tpls">stylesheet.css</td><td class="s_box_tpls_d" onclick="javascript:location.href='{edit_tpl_action}stylesheet.css'">{lang.EDIT}</td></tr>
-		</table>
-		<a href="{show_all_tpls_action}">{lang.SHOW_TPLS}...</a>
+<fieldset>
+
+<b>{lang.TPLS_RE_BASIC} : </b>
+
+<!-- border line Vertical  -->
+<hr id="hr-border" />
+<!-- border line Vertical  -->
+
+<!-- start div border table  -->
+<div  id="border-table">
+	
+<table>
+<tr>
+	<td>header.html</td>
+	<td class="s_box_tpls_d" onclick="javascript:location.href='{edit_tpl_action}header.html'">{lang.EDIT}</td>
+</tr>
+<tr>
+	<td>footer.html</td>
+	<td class="s_box_tpls_d" onclick="javascript:location.href='{edit_tpl_action}footer.html'">{lang.EDIT}</td>
+</tr>
+<tr>
+	<td>stylesheet.css</td>
+	<td class="s_box_tpls_d" onclick="javascript:location.href='{edit_tpl_action}stylesheet.css'">{lang.EDIT}</td>
+</tr>
+</table>
+</div>
+<!-- end div border table  -->
+
 </fieldset>
+<br />
+<!--  button  -->
+<p style="text-align:center">
+<a class="button2" href="{show_all_tpls_action}">{lang.SHOW_TPLS}</a></p>
+<!--  button  -->
 
+<br />
+<!-- start dot  -->
+<p class="dot" />
+<!-- end dot  -->
 <br />
 
 <!-- text for user ... -->
@@ -58,8 +103,3 @@
 <!-- text for user ... -->
 
 </div>
-
-
-
-
-        

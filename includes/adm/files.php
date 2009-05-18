@@ -24,6 +24,7 @@
 	$page_action = "admin.php?cp=files" . $url_or . $url_sea . $url_lst;
 	$ord_action	= "admin.php?cp=files" . $url_pg . $url_sea . $url_lst;
 	$action		= $page_action . $url_sea . $url_or;
+	$is_search	= false;
 	
 	$query	= array('SELECT'	=> 'COUNT(f.id) AS total_files',
 					'FROM'		=> "{$dbprefix}files f",
@@ -53,7 +54,7 @@
 		$lstd_than	=  ($search['lastdown']!='') ? 'AND f.last_down =' . (time()-(intval($search['lastdown']) * (24 * 60 * 60))) . ' ' : '';
 		$exte		=  ($search['ext']!='') ? 'AND f.type LIKE \'%' . $SQL->escape($search['ext']) . '%\' ' : '';
 		$ipp		=  ($search['user_ip']!='') ? 'AND f.user_ip LIKE \'%' . $SQL->escape($search['user_ip']) . '%\' ' : '';
-		
+		$is_search	= true;
 		$query['WHERE'] = "$size_than $file_namee $ups_than $exte $rep_than $usernamee $lstd_than $exte $ipp";
 	}
 	else if(isset($_REQUEST['last_visit']))

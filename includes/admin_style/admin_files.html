@@ -1,20 +1,22 @@
 <!-- start view files temlate  -->
 <div id="divmiddle">
 
-<form method="post" name="fileform" action="{action}" onsubmit="javascript:return confirm_from();">
+<form method="post" action="{action}" onsubmit="javascript:return confirm_from();">
 <fieldset>
 
+<IF NAME="is_search">
+<img src="includes/admin_style/images/search_button.gif" ><strong> {lang.SEARCH_FILES}</strong>
+<ELSE>
 <!-- title  -->
 <b>{lang.R_FILES}</b>
 <!-- title  -->
-
+</IF>
 <!-- border line Vertical  -->
 <hr id="hr-border" />
 <!-- border line Vertical  -->
 
 <!-- start div border table  -->
 <div id="border-table">
-
 <table style="text-align:center">
     <tr style="background-color:#FFF">
         <td><a href="{ord_action}&amp;order_by=real_filename">{lang.FILENAME}</a></td>
@@ -26,13 +28,13 @@
         <td><a href="{ord_action}&amp;order_by=type">{lang.FILETYPE}</a></td>
         <td><a href="{ord_action}&amp;order_by=folder">{lang.FILDER}</a></td>
         <td><a href="{ord_action}&amp;order_by=report">{lang.REPORT}</a></td>
-		<td><a href="javascript:void(0);" onclick="checkAll(document.fileform, '_del', 'su');">{lang.DELETE}</a></td>
+        <td>{lang.DELETE}</td>
     </tr>
 <IF NAME="no_results">
 ...
 <ELSE>
 <LOOP NAME="arr">
-    <tr id="su[{{id}}]" class="osilver">
+    <tr>
 		<td>{{name}}</td>
         <td>{{user}}</td>
         <td>{{ip}}</td>
@@ -42,7 +44,7 @@
         <td>{{type}}</td>
         <td>{{folder}}</td>
         <td>{{report}}</td>
-        <td><input type="checkbox" name="del_{{id}}" value="{{id}}" onclick="change_color(this,'su[{{id}}]');" rel="_del"></td>
+        <td><input type="checkbox" name="del_{{id}}" value="1"></td>
     </tr>
 </LOOP>
 </IF>

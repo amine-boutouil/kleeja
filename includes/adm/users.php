@@ -18,10 +18,10 @@
 		//for style ..
 		$stylee 	= "admin_users";
 		$action 	= "admin.php?cp=users&amp;page=" . (isset($GET['page'])  ? intval($GET['page']) : 1);
-
+		$is_search	= false;
 		
 		$query = array(
-					'SELECT'	=> '*',
+					'SELECT'	=> 'COUNT(id) AS total_users',
 					'FROM'		=> "{$dbprefix}users",
 					'ORDER BY'	=> 'id DESC'
 					);
@@ -81,23 +81,33 @@
 								$errs .= '- ' . $r . '. <br />';
 							}
 							
-							die($errs);
+							kleeja_admin_err($errs);
+							
 						}
 		}
 		else {
 		//posts search ..
 		if (isset($_POST['search_user']))
 		{
-			$usernamee	= ($_POST['username']!='') ? 'AND name  LIKE \'%'.$SQL->escape($_POST['username']).'%\' ' : ''; 
-			$usermailee	= ($_POST['usermail']!='') ? 'AND mail  LIKE \'%'.$SQL->escape($_POST['usermail']).'%\' ' : ''; 
-
+			header('Location: admin.php?cp=users&search=' . base64_encode(serialize($_POST)));
+		}
+		else if(isset($_GET['search']))
+		{
+			$search = base64_decode($_GET['search']);
+			$search	= unserialize($search);
+			$usernamee	= ($search['username']!='') ? 'AND name  LIKE \'%'.$SQL->escape($search['username']).'%\' ' : ''; 
+			$usermailee	= ($search['usermail']!='') ? 'AND mail  LIKE \'%'.$SQL->escape($search['usermail']).'%\' ' : ''; 
+			$is_search	= true;
 			$query['WHERE']	=	"name != '' $usernamee $usermailee";
 		}
 		
 		$result = $SQL->build($query);
+	
+		$nums_rows = 0;
+		$n_fetch = $SQL->fetch_array($result);
+		$nums_rows = $n_fetch['total_users'];
 		
 		//pager 
-		$nums_rows = $SQL->num_rows($result);
 		$currentPage = (isset($_GET['page']))? intval($_GET['page']) : 1;
 		$Pager = new SimplePager($perpage,$nums_rows,$currentPage);
 		$start = $Pager->getStartRow();
@@ -106,7 +116,7 @@
 		
 		if ($nums_rows > 0)
 		{
-		
+			$query['SELECT'] =	'*';
 			$query['LIMIT']	=	"$start,$perpage";
 			
 			$result = $SQL->build($query);
@@ -175,7 +185,7 @@
 	}
 	
 	$total_pages 	= $Pager->getTotalPages(); 
-	$page_nums 		= $Pager->print_nums($config['siteurl'] . 'admin.php?cp=users'); 
+	$page_nums 		= $Pager->print_nums($config['siteurl'] . 'admin.php?cp=users' . ((isset($_GET['search'])) ? '&search=' . $_GET['search'] : '')); 
 	
 	//if not noraml user system 
 	$user_not_normal =$config['user_system'] != 1 ?  true : false;

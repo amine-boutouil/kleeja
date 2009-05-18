@@ -16,7 +16,15 @@
 
 <form method="post" name="userform" action="{action}">
         <fieldset>
+        
+<IF NAME="is_search">
+<img src="includes/admin_style/images/search_button.gif" ><strong> {lang.SEARCH_USERS}</strong>
+<ELSE>
+<!-- title  -->
 <b>{lang.R_USERS} :</b>
+<!-- title  -->
+</IF>
+
 
 <hr id="hr-border" />
 
@@ -48,9 +56,12 @@
 </div>
 </fieldset>
 <fieldset class="quick" style="text-align:center">
+<div style="text-align:center">{page_nums}
                 <input class="button2" name="submit" type="submit" value="{lang.UPDATE_USERS}" />
+</div>
 </fieldset>
 </form>
+
 
 
 <form method="post" action="">
@@ -80,7 +91,7 @@
 </form>
 
 
-<div style="text-align:center"><b>{page_nums}</b></div>
+
 </div>
 
         

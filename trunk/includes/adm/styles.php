@@ -167,12 +167,17 @@ switch ($_GET['sty_t'])
 				if(!file_exists($tpl_path))
 				{
 					$text = sprintf($lang['TPL_PATH_NOT_FOUND'], $tpl_path);
-					$_REQUEST['method'] = 0;
+					$_REQUEST['method'] = '0';
 				}
 				else if (!is_writable($d_style_path))
 				{
 					$text = sprintf($lang['STYLE_DIR_NOT_WR'], $d_style_path);
-					$_REQUEST['method'] = 0;
+					$_REQUEST['method'] = '0';
+				}
+				
+				if(!isset($_REQUEST['method']))
+				{
+					$_REQUEST['method'] = '0';
 				}
 				
 				switch($_REQUEST['method'])
@@ -246,7 +251,7 @@ switch ($_GET['sty_t'])
 				}
 				else
 				{
-					big_error('Template is unwriteable','Cannot edit' . $tpl_name . 'template parameters (Unwriteable)');
+					big_error('Template is not writeable','Cannot edit <strong>' . $tpl_name . '</strong> template. (Unwriteable)');
 				}
 				/*
 				//update

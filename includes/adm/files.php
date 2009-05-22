@@ -52,7 +52,8 @@
 		$ups_than	=  ($search['ups']!='') ? 'AND f.uploads ' . ($search['uthan']!=1 ? '<' : '>') . intval($search['ups']) . ' ' : '';
 		$rep_than	=  ($search['rep']!='') ? 'AND f.report ' . ($search['rthan']!=1 ? '<' : '>') . intval($search['rep']) . ' ' : '';
 		$lstd_than	=  ($search['lastdown']!='') ? 'AND f.last_down =' . (time()-(intval($search['lastdown']) * (24 * 60 * 60))) . ' ' : '';
-		$exte		=  ($search['ext']!='') ? 'AND f.type LIKE \'%' . $SQL->escape($search['ext']) . '%\' ' : '';
+		$s_exts 	= 	explode(",",$SQL->escape($search['ext']));
+		$exte		=  ($search['ext']!='') ? "AND f.type IN ('" . implode("', '", $s_exts) . "')" : '';
 		$ipp		=  ($search['user_ip']!='') ? 'AND f.user_ip LIKE \'%' . $SQL->escape($search['user_ip']) . '%\' ' : '';
 		$is_search	= true;
 		$query['WHERE'] = "$size_than $file_namee $ups_than $exte $rep_than $usernamee $lstd_than $exte $ipp";
@@ -137,14 +138,14 @@
 						if (is_file($row['folder'] . "/thumbs/" . $row['name'] ))
 						{
 							@kleeja_unlink ($row['folder'] . "/thumbs/" . $row['name'] );
-							//update number of stats
-							$update_query	= array('UPDATE'	=> "{$dbprefix}stats",
+						}
+						
+						//update number of stats
+						$update_query	= array('UPDATE'	=> "{$dbprefix}stats",
 													'SET'		=> 'files=files-1,sizes=sizes-' . $row['size'],
 												   );
 							
-							$SQL->build($update_query);
-						}
-							
+						$SQL->build($update_query);
 					}
 			}
 		}

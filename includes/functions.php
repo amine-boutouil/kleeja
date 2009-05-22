@@ -935,6 +935,89 @@ function kleeja_admin_err($msg, $navigation=true, $title='', $exit=true)
 	}
 }
 
+
+/*
+* print inforamtion message 
+* parameters : msg : text that will show as inforamtion
+					title : <title>title of page</title>
+					exit : stop script after showing msg 
+*/
+function kleeja_admin_info($msg, $navigation=true,$title='', $exit=true)
+{
+	global $text, $tpl, $SHOW_LIST, $path_adm, $adm_extensions, $adm_extensions_menu, $STYLE_PATH_ADMIN, $lang;
+	
+	($hook = kleeja_run_hook('kleeja_admin_info_func')) ? eval($hook) : null; //run hook
+				
+// assign {text} in err template
+	$text	= $msg;
+	$SHOW_LIST	= $navigation;
+	
+	//get adm extensions
+	if($SHOW_LIST)
+	{
+		//path of admin extensions
+		$path_adm	= "includes/adm";
+
+		//exception extentions
+		$ext_expt	= array();
+		$ext_expt[]	= 'start';
+		//confirm msgs
+		$ext_confirm	= array();
+		$ext_confirm[]	= 'repair';	
+		$ext_confirm[]	= 'lgoutcp';	
+		$dh = @opendir($path_adm);
+		while (($file = @readdir($dh)) !== false)
+		{
+			if(strpos($file, '.php') !== false) // fixed
+			{
+				$adm_extensions[] = str_replace('.php', '', $file);
+			}
+		}
+	
+		@closedir($dh);
+
+		//no extensions ?
+		if(!$adm_extensions || !is_array($adm_extensions))
+		{
+			big_error('No Extensions', 'ERROR IN LOADING ADMIN EXTENSIONS !');
+		}
+	
+		//make array for menu 
+		$adm_extensions_menu	=	array();
+	
+		//re oreder the items as alphapatic !
+		sort($adm_extensions);
+		$i = 0;
+	
+		foreach($adm_extensions as $m)
+		{
+			//some exceptions
+			if(@in_array($m, $ext_expt))
+			{
+				continue;
+			}
+		
+			++$i;
+			$adm_extensions_menu[$i]	= array('icon'	=> (file_exists($STYLE_PATH_ADMIN . 'images/' . ($m == 'configs' ? 'options' : $m) . '_button.gif'))	? $STYLE_PATH_ADMIN . 'images/' . ($m == 'configs' ? 'options' : $m) . '_button.gif' : $STYLE_PATH_ADMIN . 'images/no_icon_button.gif',
+											'lang'	=> !empty($lang['R_'. strtoupper($m)]) ? $lang['R_'. strtoupper($m)]: (!empty($lang[strtoupper($m)]) ? $lang[strtoupper($m)] :  (!empty($olang[strtoupper($m)]) ? $olang[strtoupper($m)] : strtoupper($m))),
+											'link'	=> 'admin.php?cp=' . ($m == 'configs' ? 'options' : $m),
+											'confirm'	=> (@in_array($m, $ext_confirm)) ? true : false,
+											);
+		}
+	}
+	//header
+	echo $tpl->display("admin_header");
+	//show tpl
+	echo $tpl->display('admin_info');
+	//footer
+	echo $tpl->display("admin_footer");
+	
+	if ($exit)
+	{
+		exit();
+	}
+}
+
 /*
 * return current page 
 * parameters : none

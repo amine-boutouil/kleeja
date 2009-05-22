@@ -432,6 +432,9 @@ $lang = array_merge($lang, array(
 	'NEW_USER'				=> 'New user',
 	'LIVEXTS'				=> 'Live extensions (separate by comma)',
 	'MUST_LOGIN'			=> 'You must login with correct username and password .',
+	'ADMIN_DELETE_FILE_ERR'	=> 'User have no files or there is error occurred while trying to delete user files . ',
+	'ADMIN_DELETE_FILE_OK'	=> 'Done ! ',
+	'ADMIN_DELETE_FILES'	=> 'Delete all user files',
 	
 	'KLJ_MORE_PLUGINS'	=> array('قم بالحصول على الكثير من الاضافات من مركز الاضافات في موقع كليجا ,<a target="_blank" href="http://www.kleeja.com/plugins/">إظغط هنا للذهاب لهناك</a> .',
 								'هل أنت مطور ؟ هل قمت بتطوير اضافات لكليجا وتريد عرضها للأخرين أو تريد بيعها في مركز كليجا للاضافات ؟ اذن <a target="_blank" href="http://www.kleeja.com/plugins/">إظغط هنا للذهاب لهناك</a>. ',

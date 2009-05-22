@@ -18,7 +18,7 @@
         <fieldset>
         
 <IF NAME="is_search">
-<img src="includes/admin_style/images/search_button.gif" ><strong> {lang.SEARCH_USERS}</strong>
+<img src="includes/admin_style/images/search_button.gif" ><strong> {lang.SEARCH_USERS} ( {nums_rows} )</strong>
 <ELSE>
 <!-- title  -->
 <b>{lang.R_USERS} :</b>
@@ -36,6 +36,7 @@
                 <td>{lang.PASSWORD}</td>
                 <td>{lang.IS_ADMIN}</td>
                 <td><a href="javascript:void(0);" onclick="checkAll(document.userform, '_del', 'su');">{lang.DELETE}</a></td>
+                <td>{lang.ADMIN_DELETE_FILES}</td>
                 <!-- admin users info tr extra -->
         </tr>
 <IF NAME="no_results">
@@ -48,6 +49,7 @@
                 <td><label><input type="password" name="ps_{{id}}" value="" size="10"></label></td>
                 <td>{{admin}}</td>
                 <td><input type="checkbox"  name="del_{{id}}" value="{{id}}" onclick="change_color(this,'su[{{id}}]');" rel="_del"></td>
+                <td><label><a href="admin.php?cp=users&deleteuserfile={{id}}" onclick="javascript:return confirm_from();">{lang.ADMIN_DELETE_FILES}</a></label></td>
                 <!-- admin users data tr extra -->
         </tr>
 </LOOP>
@@ -63,7 +65,7 @@
 </form>
 
 
-
+<IF NAME="isn_search">
 <form method="post" action="">
         <fieldset>
                 <b>{lang.NEW_USER} :</b>
@@ -89,7 +91,7 @@
                 <input class="button2" name="newuser" type="submit" value="{lang.SUBMIT}" />
 </fieldset>
 </form>
-
+</IF>
 
 
 </div>

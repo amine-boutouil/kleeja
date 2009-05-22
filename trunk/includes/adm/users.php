@@ -19,152 +19,205 @@
 		$stylee 	= "admin_users";
 		$action 	= "admin.php?cp=users&amp;page=" . (isset($GET['page'])  ? intval($GET['page']) : 1);
 		$is_search	= false;
+		$isn_search	= true;
 		
 		$query = array(
 					'SELECT'	=> 'COUNT(id) AS total_users',
 					'FROM'		=> "{$dbprefix}users",
 					'ORDER BY'	=> 'id DESC'
 					);
-						
-		if (isset($_POST['newuser']))
+					
+		//new feature delete all user files [only one user]			
+		if(isset($_GET['deleteuserfile']) && $SQL->num_rows($SQL->query("SELECT * FROM `{$dbprefix}users` WHERE id='" . intval($_GET['deleteuserfile']) . "'")) != 0)
 		{
-			($hook = kleeja_run_hook('register_submit')) ? eval($hook) : null; //run hook
+			$query = array(
+				'SELECT'	=> 'size,name,folder',
+				'FROM'		=> "{$dbprefix}files",
+				'WHERE'		=>	'user=' . intval($_GET['deleteuserfile']),
+				);
+			
+			$result = $SQL->build($query);
+			$sizes = false;
+			$num = 0;
+			while($row=$SQL->fetch_array($result))
+			{
+				//delete from folder ..
+				@kleeja_unlink ($row['folder'] . "/" . $row['name']);
 						
-						if (trim($_POST['lname'])=='' || trim($_POST['lpass'])=='' || trim($_POST['lmail'])=='')
-						{
-							$ERRORS[] = $lang['EMPTY_FIELDS'];
-						}	
-						else if (!eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$", trim($_POST['lmail'])))
-						{
-							$ERRORS[] = $lang['WRONG_EMAIL'];
-						}
-						else if (strlen(trim($_POST['lname'])) < 4 || strlen(trim($_POST['lname'])) > 30)
-						{
-							$ERRORS[] = $lang['WRONG_NAME'];
-						}
-						else if ($SQL->num_rows($SQL->query("SELECT * FROM `{$dbprefix}users` WHERE name='" . trim($SQL->escape($_POST["lname"])) . "'")) !=0 )
-						{
-							$ERRORS[] = $lang['EXIST_NAME'];
-						}
-						else if ($SQL->num_rows($SQL->query("SELECT * FROM `{$dbprefix}users` WHERE mail='" . trim($SQL->escape($_POST["lmail"])) . "'")) !=0 )
-						{
-							$ERRORS[] = $lang['EXIST_EMAIL'];
-						}
+				//delete thumb
+				if (is_file($row['folder'] . "/thumbs/" . $row['name'] ))
+				{
+					@kleeja_unlink ($row['folder'] . "/thumbs/" . $row['name'] );
+				}
+				
+				$num++;		
+				$sizes += $row['size'];
+			}
+			
+			if($sizes)
+			{
+				//update number of stats
+				$update_query	= array('UPDATE'	=> "{$dbprefix}stats",
+									'SET'		=> "sizes=sizes-$sizes,files=files-$num",
+									);
+									
+				$SQL->build($update_query);
+			
+				//delete all files in just one query
+				$d_query	= array('DELETE'	=> "{$dbprefix}files",
+								'WHERE'		=> "user='".intval($_GET['deleteuserfile'])."'",
+									);
+									
+				$SQL->build($d_query);
+				
+				kleeja_admin_info($lang['ADMIN_DELETE_FILE_OK']);
+			}
+			else
+			{
+				$errs = $lang['ADMIN_DELETE_FILE_ERR'];
+				kleeja_admin_err($errs);
+			}
+			
+		}				
+		else if (isset($_POST['newuser']))
+		{						
+			if (trim($_POST['lname'])=='' || trim($_POST['lpass'])=='' || trim($_POST['lmail'])=='')
+			{						
+				$ERRORS[] = $lang['EMPTY_FIELDS'];
+			}	
+			else if (!eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$", trim($_POST['lmail'])))
+			{
+				$ERRORS[] = $lang['WRONG_EMAIL'];
+			}
+			else if (strlen(trim($_POST['lname'])) < 4 || strlen(trim($_POST['lname'])) > 30)
+			{
+				$ERRORS[] = $lang['WRONG_NAME'];
+			}
+			else if ($SQL->num_rows($SQL->query("SELECT * FROM `{$dbprefix}users` WHERE name='" . trim($SQL->escape($_POST["lname"])) . "'")) !=0 )
+			{
+				$ERRORS[] = $lang['EXIST_NAME'];
+			}
+			else if ($SQL->num_rows($SQL->query("SELECT * FROM `{$dbprefix}users` WHERE mail='" . trim($SQL->escape($_POST["lmail"])) . "'")) !=0 )
+			{
+				$ERRORS[] = $lang['EXIST_EMAIL'];
+			}
 						
-						//no errors, lets do process
-						if(empty($ERRORS))	 
-						{
-							$name			= (string) $SQL->escape(trim($_POST['lname']));
-							$pass			= (string) md5($SQL->escape(trim($_POST['lpass'])));
-							$mail			= (string) trim($_POST['lmail']);
-							
-							$insert_query	= array('INSERT'	=> 'name ,password ,mail,admin, session_id',
+			//no errors, lets do process
+			if(empty($ERRORS))	 
+			{
+				$name			= (string) $SQL->escape(trim($_POST['lname']));
+				$pass			= (string) md5($SQL->escape(trim($_POST['lpass'])));
+				$mail			= (string) trim($_POST['lmail']);
+										
+				$insert_query	= array('INSERT'	=> 'name ,password ,mail,admin, session_id',
 													'INTO'		=> "{$dbprefix}users",
 													'VALUES'	=> "'$name', '$pass', '$mail','0',''"
 												);
-							if ($SQL->build($insert_query))
-							{
-								$last_user_id = $SQL->insert_id();
-
-								//update number of stats
-								$update_query	= array('UPDATE'	=> "{$dbprefix}stats",
-														'SET'		=> "users=users+1,lastuser='$name'",
-													);
-								$SQL->build($update_query);
-							}
-						}
-						else
-						{
-							$errs	=	'';
-							foreach($ERRORS as $r)
-							{
-								$errs .= '- ' . $r . '. <br />';
-							}
-							
-							kleeja_admin_err($errs);
-							
-						}
-		}
-		else {
-		//posts search ..
-		if (isset($_POST['search_user']))
-		{
-			header('Location: admin.php?cp=users&search=' . base64_encode(serialize($_POST)));
-		}
-		else if(isset($_GET['search']))
-		{
-			$search = base64_decode($_GET['search']);
-			$search	= unserialize($search);
-			$usernamee	= ($search['username']!='') ? 'AND name  LIKE \'%'.$SQL->escape($search['username']).'%\' ' : ''; 
-			$usermailee	= ($search['usermail']!='') ? 'AND mail  LIKE \'%'.$SQL->escape($search['usermail']).'%\' ' : ''; 
-			$is_search	= true;
-			$query['WHERE']	=	"name != '' $usernamee $usermailee";
-		}
-		
-		$result = $SQL->build($query);
-	
-		$nums_rows = 0;
-		$n_fetch = $SQL->fetch_array($result);
-		$nums_rows = $n_fetch['total_users'];
-		
-		//pager 
-		$currentPage = (isset($_GET['page']))? intval($_GET['page']) : 1;
-		$Pager = new SimplePager($perpage,$nums_rows,$currentPage);
-		$start = $Pager->getStartRow();
-
-		$no_results = false;
-		
-		if ($nums_rows > 0)
-		{
-			$query['SELECT'] =	'*';
-			$query['LIMIT']	=	"$start,$perpage";
-			
-			$result = $SQL->build($query);
-			
-			while($row=$SQL->fetch_array($result))
-			{
-				//make new lovely arrays !!
-				$ids[$row['id']]	= $row['id'];
-				$name[$row['id']] 	= (isset($_POST["nm_" . $row['id']])) ? $_POST["nm_" . $row['id']] : $row['name'];
-				$mail[$row['id']]	= (isset($_POST["ml_" . $row['id']])) ? $_POST["ml_" . $row['id']] : $row['mail'];
-				$pass[$row['id']]	= (isset($_POST["ps_" . $row['id']])) ? $_POST["ps_" . $row['id']] : "";
-				$admin[$row['id']]	= $row['admin'];
-				$del[$row['id']] 	= (isset($_POST["del_" . $row['id']])) ? $_POST["del_" . $row['id']] : "";
-
-				$arr[] = array( 'id'	=> $ids[$row['id']],
-								'name'	=> $name[$row['id']],
-								'mail'	=> $mail[$row['id']],
-								'admin'	=> !empty($admin[$row['id']]) ? '<input name="ad_' . $row['id'] . '" type="checkbox" checked="checked" />' : '<input name="ad_' . $row['id'] . '" type="checkbox" />'
-							);
-
-				//when submit !!
-				if (isset($_POST['submit']))
+				if ($SQL->build($insert_query))
 				{
-					if ($del[$row['id']])
+					$last_user_id = $SQL->insert_id();
+
+					//update number of stats
+					$update_query	= array('UPDATE'	=> "{$dbprefix}stats",
+											'SET'		=> "users=users+1,lastuser='$name'",
+													);
+					$SQL->build($update_query);
+				}
+			}
+			else
+			{
+				$errs	=	'';
+				foreach($ERRORS as $r)
+				{
+					$errs .= '- ' . $r . '. <br />';
+				}
+				
+				kleeja_admin_err($errs);
+							
+			}
+		}
+		else
+		{
+		//posts search ..
+			if (isset($_POST['search_user']))
+			{
+				header('Location: admin.php?cp=users&search=' . base64_encode(serialize($_POST)));
+			}
+			else if(isset($_GET['search']))
+			{
+				$search = base64_decode($_GET['search']);
+				$search	= unserialize($search);
+				$usernamee	= ($search['username']!='') ? 'AND name  LIKE \'%'.$SQL->escape($search['username']).'%\' ' : ''; 
+				$usermailee	= ($search['usermail']!='') ? 'AND mail  LIKE \'%'.$SQL->escape($search['usermail']).'%\' ' : ''; 
+				$is_search	= true;
+				$isn_search	= false;
+				$query['WHERE']	=	"name != '' $usernamee $usermailee";
+			}
+		
+			$result = $SQL->build($query);
+	
+			$nums_rows = 0;
+			$n_fetch = $SQL->fetch_array($result);
+			$nums_rows = $n_fetch['total_users'];
+		
+			//pager 
+			$currentPage = (isset($_GET['page']))? intval($_GET['page']) : 1;
+			$Pager = new SimplePager($perpage,$nums_rows,$currentPage);
+			$start = $Pager->getStartRow();
+
+			$no_results = false;
+		
+			if ($nums_rows > 0)
+			{
+				$query['SELECT'] =	'*';
+				$query['LIMIT']	=	"$start,$perpage";
+			
+				$result = $SQL->build($query);
+			
+				while($row=$SQL->fetch_array($result))
+				{
+					//make new lovely arrays !!
+					$ids[$row['id']]	= $row['id'];
+					$name[$row['id']] 	= (isset($_POST["nm_" . $row['id']])) ? $_POST["nm_" . $row['id']] : $row['name'];
+					$mail[$row['id']]	= (isset($_POST["ml_" . $row['id']])) ? $_POST["ml_" . $row['id']] : $row['mail'];
+					$pass[$row['id']]	= (isset($_POST["ps_" . $row['id']])) ? $_POST["ps_" . $row['id']] : "";
+					$admin[$row['id']]	= $row['admin'];
+					$del[$row['id']] 	= (isset($_POST["del_" . $row['id']])) ? $_POST["del_" . $row['id']] : "";
+
+					$arr[] = array( 'id'	=> $ids[$row['id']],
+									'name'	=> $name[$row['id']],
+									'mail'	=> $mail[$row['id']],
+									'admin'	=> !empty($admin[$row['id']]) ? '<input name="ad_' . $row['id'] . '" type="checkbox" checked="checked" />' : '<input name="ad_' . $row['id'] . '" type="checkbox" />'
+								);
+
+					//when submit !!
+					if (isset($_POST['submit']))
 					{
-						//delete  user
-						$query_del = array(
+						if ($del[$row['id']])
+						{
+							//delete  user
+							$query_del = array(
 										'DELETE'	=> "{$dbprefix}users",
 										'WHERE'		=> "id='" . intval($ids[$row['id']])."'"
 											);
 											
-						$SQL->build($query_del);
+							$SQL->build($query_del);
 						
-						//update number of stats
-						$update_query	= array('UPDATE'	=> "{$dbprefix}stats",
+							//update number of stats
+							$update_query	= array('UPDATE'	=> "{$dbprefix}stats",
 												'SET'		=> 'users=users-1',
 										);
 							
-						$SQL->build($update_query);
+							$SQL->build($update_query);
 																
 						
-					}
+						}
 
-					//update
-					$admin[$row['id']] = isset($_POST['ad_' . $row['id']])  ? 1 : 0 ;
-					$pass[$row['id']] = ($pass[$row['id']] != '') ? "password = '" . md5($SQL->escape($pass[$row['id']])) . "'," : "";
+						//update
+						$admin[$row['id']] = isset($_POST['ad_' . $row['id']])  ? 1 : 0 ;
+						$pass[$row['id']] = ($pass[$row['id']] != '') ? "password = '" . md5($SQL->escape($pass[$row['id']])) . "'," : "";
 				
-					$update_query = array(
+						$update_query = array(
 										'UPDATE'	=> "{$dbprefix}users",
 										'SET'		=> 	"name = '" . $SQL->escape($name[$row['id']]) . "',
 														mail = '" . $SQL->escape($mail[$row['id']]) . "',
@@ -173,16 +226,16 @@
 										'WHERE'		=>	"id=" . $row['id']
 									);
 
-					$SQL->build($update_query);
+						$SQL->build($update_query);
+					}
 				}
-			}
-			$SQL->freeresult($result);
+				$SQL->freeresult($result);
 
-	}
-	else #num rows
-	{ 
-		$no_results = true;
-	}
+		}
+		else #num rows
+		{ 
+			$no_results = true;
+		}
 	
 	$total_pages 	= $Pager->getTotalPages(); 
 	$page_nums 		= $Pager->print_nums($config['siteurl'] . 'admin.php?cp=users' . ((isset($_GET['search'])) ? '&search=' . $_GET['search'] : '')); 

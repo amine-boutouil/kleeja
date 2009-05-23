@@ -1965,7 +1965,7 @@ if(!function_exists('htmlspecialchars_decode'))
 //
 function klj_clean_old_files($from = 0)
 {
-	global $config, $SQL;
+	global $config, $SQL, $stat_last_f_del, $dbprefix;
 
 	if((int) $config['del_f_day'] <= 0)
 	{
@@ -1990,6 +1990,8 @@ function klj_clean_old_files($from = 0)
 					'LIMIT'		=> '20',
 					);
 					
+		$result	= $SQL->build($query);
+		
 		($hook = kleeja_run_hook('qr_select_delfiles_cache')) ? eval($hook) : null; //run hook					
 
 		if($SQL->num_rows($result) == 0)

@@ -69,6 +69,7 @@
 									);
 									
 				$SQL->build($d_query);
+				$SQL->freeresult($result);
 				
 				kleeja_admin_info($lang['ADMIN_DELETE_FILE_OK']);
 			}

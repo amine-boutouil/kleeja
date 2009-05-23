@@ -18,7 +18,7 @@ function kleeja_auth_login ($name, $pass)
 				
 	//check for last slash / 
 	if(isset($script_path)) {
-	if($script_path[strlen($script_path)] == '/')
+	if(isset($script_path[strlen($script_path)]) && $script_path[strlen($script_path)] == '/')
 	{
 			$script_path = substr($script_path, 0, strlen($script_path));
 	}
@@ -118,12 +118,22 @@ function kleeja_auth_login ($name, $pass)
 	{	
 		while($row=$SQLBB->fetch_array($result))
 		{
+			if($SQLBB->num_rows($SQLBB->query("SELECT ban_userid FROM `{$forum_prefix}banlist` WHERE ban_userid='" . intval($row['user_id']) . "'")) == 0)
+			{
 			$_SESSION['USER_ID']	=	$row['user_id'];
 			$_SESSION['USER_NAME']	=	(eregi('utf',strtolower($script_encoding))) ? $row['username'] : iconv(strtoupper($script_encoding),"UTF-8//IGNORE",$row['username']);
 			$_SESSION['USER_MAIL']	=	$row['user_email'];
 			$_SESSION['USER_ADMIN']	=	($row[$row_leve] == $admin_level) ? 1 : 0;
 			$_SESSION['USER_SESS']	=	session_id();
 			($hook = kleeja_run_hook('qr_while_usrdata_phpbb_usr_class')) ? eval($hook) : null; //run hook
+			}
+			else
+			{
+				$SQLBB->freeresult($result);   
+				unset($pass);
+				$SQLBB->close();
+				return false;
+			}
 
 		}
 		

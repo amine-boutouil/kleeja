@@ -25,7 +25,7 @@ function kleeja_auth_login ($name, $pass)
 					
 	$script_path = ($script_path[0] == '/' ? '..' : '../') . $script_path;
 	
-	//get some useful data from phbb config file
+	//get some useful data from vb config file
 	if(file_exists($script_path . '/includes/config.php'))
 	{
 		require ($script_path . '/includes/config.php');
@@ -83,7 +83,7 @@ function kleeja_auth_login ($name, $pass)
 
 			$query = array('SELECT'	=> '*',
 							'FROM'	=> "`{$forum_prefix}user`",
-							'WHERE'	=> "username='" . $SQLVB->real_escape($name) . "' AND password='" . $pass . "'"
+							'WHERE'	=> "username='" . $SQLVB->real_escape($name) . "' AND password='" . $pass . "' AND usergroupid != '8'"
 							);
 		
 			$result = $SQLVB->build($query);
@@ -138,7 +138,7 @@ function kleeja_auth_username ($user_id)
 					
 	$script_path = ($script_path[0] == '/' ? '..' : '../') . $script_path;
 	
-	//get some useful data from phbb config file
+	//get some useful data from vb config file
 	if(file_exists($script_path . '/includes/config.php'))
 	{
 		require ($script_path . '/includes/config.php');

@@ -861,7 +861,7 @@ function kleeja_err($msg, $title='', $exit=true)
 */
 function kleeja_admin_err($msg, $navigation=true, $title='', $exit=true)
 {
-	global $text, $tpl, $SHOW_LIST, $path_adm, $adm_extensions, $adm_extensions_menu, $STYLE_PATH_ADMIN, $lang;
+	global $text, $tpl, $SHOW_LIST, $adm_extensions, $adm_extensions_menu, $STYLE_PATH_ADMIN, $lang;
 	
 	($hook = kleeja_run_hook('kleeja_admin_err_func')) ? eval($hook) : null; //run hook
 				
@@ -872,9 +872,6 @@ function kleeja_admin_err($msg, $navigation=true, $title='', $exit=true)
 	//get adm extensions
 	if($SHOW_LIST)
 	{
-		//path of admin extensions
-		$path_adm	= "includes/adm";
-
 		//exception extentions
 		$ext_expt	= array();
 		$ext_expt[]	= 'start';
@@ -882,17 +879,7 @@ function kleeja_admin_err($msg, $navigation=true, $title='', $exit=true)
 		$ext_confirm	= array();
 		$ext_confirm[]	= 'repair';	
 		$ext_confirm[]	= 'lgoutcp';	
-		$dh = @opendir($path_adm);
-		while (($file = @readdir($dh)) !== false)
-		{
-			if(strpos($file, '.php') !== false) // fixed
-			{
-				$adm_extensions[] = str_replace('.php', '', $file);
-			}
-		}
-	
-		@closedir($dh);
-
+		
 		//no extensions ?
 		if(!$adm_extensions || !is_array($adm_extensions))
 		{
@@ -905,7 +892,7 @@ function kleeja_admin_err($msg, $navigation=true, $title='', $exit=true)
 		//re oreder the items as alphapatic !
 		sort($adm_extensions);
 		$i = 0;
-	
+
 		foreach($adm_extensions as $m)
 		{
 			//some exceptions
@@ -937,20 +924,21 @@ function kleeja_admin_err($msg, $navigation=true, $title='', $exit=true)
 
 
 /*
-* print inforamtion message 
+* print inforamtion message on admin panel
 * parameters : msg : text that will show as inforamtion
 					title : <title>title of page</title>
 					exit : stop script after showing msg 
 */
-function kleeja_admin_info($msg, $navigation=true,$title='', $exit=true)
+function kleeja_admin_info($msg, $navigation=true, $title='', $exit=true)
 {
-	global $text, $tpl, $SHOW_LIST, $path_adm, $adm_extensions, $adm_extensions_menu, $STYLE_PATH_ADMIN, $lang;
+	global $text, $tpl, $SHOW_LIST, $adm_extensions, $adm_extensions_menu, $STYLE_PATH_ADMIN, $lang;
 	
 	($hook = kleeja_run_hook('kleeja_admin_info_func')) ? eval($hook) : null; //run hook
 				
 // assign {text} in err template
 	$text	= $msg;
 	$SHOW_LIST	= $navigation;
+	
 	
 	//get adm extensions
 	if($SHOW_LIST)
@@ -965,16 +953,6 @@ function kleeja_admin_info($msg, $navigation=true,$title='', $exit=true)
 		$ext_confirm	= array();
 		$ext_confirm[]	= 'repair';	
 		$ext_confirm[]	= 'lgoutcp';	
-		$dh = @opendir($path_adm);
-		while (($file = @readdir($dh)) !== false)
-		{
-			if(strpos($file, '.php') !== false) // fixed
-			{
-				$adm_extensions[] = str_replace('.php', '', $file);
-			}
-		}
-	
-		@closedir($dh);
 
 		//no extensions ?
 		if(!$adm_extensions || !is_array($adm_extensions))
@@ -1005,6 +983,7 @@ function kleeja_admin_info($msg, $navigation=true,$title='', $exit=true)
 											);
 		}
 	}
+	
 	//header
 	echo $tpl->display("admin_header");
 	//show tpl
@@ -1017,6 +996,7 @@ function kleeja_admin_info($msg, $navigation=true,$title='', $exit=true)
 		exit();
 	}
 }
+
 
 /*
 * return current page 

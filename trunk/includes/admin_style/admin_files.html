@@ -1,7 +1,7 @@
-<!-- start view files temlate  -->
+﻿<!-- start view files temlate  -->
 <div id="divmiddle">
 
-<form method="post" action="{action}" onsubmit="javascript:return confirm_from();">
+<form method="post" name="filesform" action="{action}" onsubmit="javascript:return confirm_from();">
 <fieldset>
 
 <IF NAME="is_search">
@@ -28,13 +28,13 @@
         <td><a href="{ord_action}&amp;order_by=type">{lang.FILETYPE}</a></td>
         <td><a href="{ord_action}&amp;order_by=folder">{lang.FILDER}</a></td>
         <td><a href="{ord_action}&amp;order_by=report">{lang.REPORT}</a></td>
-        <td>{lang.DELETE}</td>
+        <td><a href="javascript:void(0);" onclick="checkAll(document.filesform, '_del', 'su');">{lang.DELETE}</a></td>
     </tr>
 <IF NAME="no_results">
 ...
 <ELSE>
 <LOOP NAME="arr">
-    <tr>
+    <tr id="su[{{id}}]" class="osilver">
 		<td>{{name}}</td>
         <td>{{user}}</td>
         <td>{{ip}}</td>
@@ -44,7 +44,7 @@
         <td>{{type}}</td>
         <td>{{folder}}</td>
         <td>{{report}}</td>
-        <td><input type="checkbox" name="del_{{id}}" value="1"></td>
+        <td><input type="checkbox" name="del_{{id}}" value="{{id}}" onclick="change_color(this,'su[{{id}}]');" rel="_del"></td>
     </tr>
 </LOOP>
 </IF>

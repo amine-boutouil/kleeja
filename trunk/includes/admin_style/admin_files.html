@@ -17,6 +17,9 @@
 
 <!-- start div border table  -->
 <div id="border-table">
+<IF NAME="no_results">
+...
+<ELSE>
 <table style="text-align:center">
     <tr style="background-color:#FFF">
         <td><a href="{ord_action}&amp;order_by=real_filename">{lang.FILENAME}</a></td>
@@ -30,9 +33,6 @@
         <td><a href="{ord_action}&amp;order_by=report">{lang.REPORT}</a></td>
         <td><a href="javascript:void(0);" onclick="checkAll(document.filesform, '_del', 'su');">{lang.DELETE}</a></td>
     </tr>
-<IF NAME="no_results">
-...
-<ELSE>
 <LOOP NAME="arr">
     <tr id="su[{{id}}]" class="osilver">
 		<td>{{name}}</td>

@@ -356,7 +356,7 @@ switch ($_GET['go'])
 				$user_name = (!$data_user['name']) ? false : $data_user['name'];
 				while($row=$SQL->fetch_array($result))
 				{
-					$is_image = in_array(trim($row['type']), array('gif', 'jpg', 'jpeg', 'bmp', 'png', 'tiff', 'tif')) ? true : false;
+					$is_image = in_array(strtolower(trim($row['type'])), array('gif', 'jpg', 'jpeg', 'bmp', 'png', 'tiff', 'tif')) ? true : false;
 					if($is_image)
 					{
 						$url = ($config['mod_writer']) ? 'image' . $row['id'] . '.html' : 'download.php?img=' . $row['id'];

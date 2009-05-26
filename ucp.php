@@ -434,7 +434,7 @@ switch ($_GET['go'])
 				{
 					$del[$row['id']] = (isset($_POST["del_".$row['id']])) ? $_POST["del_" . $row['id']] : "";
 					
-					$is_image = in_array(trim($row['type']), array('gif', 'jpg', 'jpeg', 'bmp', 'png', 'tiff', 'tif')) ? true : false;
+					$is_image = in_array(strtolower(trim($row['type'])), array('gif', 'jpg', 'jpeg', 'bmp', 'png', 'tiff', 'tif')) ? true : false;
 					if($is_image)
 					{
 						$url = ($config['mod_writer']) ? 'image' . $row['id'] . '.html' : 'download.php?img=' . $row['id'];

@@ -2028,4 +2028,27 @@ function klj_clean_old_files($from = 0)
 
 }
 
+//Redirect... Try PHP header redirect, then Java redirect, then try http redirect. [php.net]:
+function redirect($url,$header=true){
+    if (!headers_sent() && $header)
+	{    
+		//If headers not sent yet... then do php redirect
+        header('Location: ' . $url); 
+        /* Make sure that code below does not get executed when we redirect. */
+		exit;
+    }
+	else{                   
+		 //If headers are sent... do java redirect... if java disabled, do html redirect.
+        echo '<script type="text/javascript">';
+        echo 'window.location.href="' . $url . '";';
+        echo '</script>';
+        echo '<noscript>';
+        echo '<meta http-equiv="refresh" content="0;url=' . $url . '" />';
+        echo '</noscript>'; 
+        /* Make sure that code below does not get executed when we redirect. */
+		exit;
+    }
+}
+//End Redirect
+
 ?>

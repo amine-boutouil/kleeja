@@ -11,6 +11,7 @@
 // security ..
 define ('IN_INDEX' , true);
 define ('IN_DOWNLOAD', true);
+
 //include imprtant file ..
 include ('includes/common.php');
 
@@ -84,8 +85,8 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 						{
 							$url_filex	= ($config['mod_writer']) ? $config['siteurl'] . "downex-" . $id . ".html" : $config['siteurl'] . "download.php?downex=" . $id;
 						}
-					
-						header('Location:' . $url_filex);
+						
+						redirect($url_filex,false);
 					}
 				}
 				

@@ -193,6 +193,7 @@
 											'lang'	=> !empty($lang['R_'. strtoupper($m)]) ? $lang['R_'. strtoupper($m)]: (!empty($lang[strtoupper($m)]) ? $lang[strtoupper($m)] :  (!empty($olang[strtoupper($m)]) ? $olang[strtoupper($m)] : strtoupper($m))),
 											'link'	=> 'admin.php?cp=' . ($m == 'configs' ? 'options' : $m),
 											'confirm'	=> (@in_array($m, $ext_confirm)) ? true : false,
+											'current'	=> ($m == $go_to) ? true : false
 											);
 											
 		($hook = kleeja_run_hook('foreach_ext_admin_page')) ? eval($hook) : null; //run hook 

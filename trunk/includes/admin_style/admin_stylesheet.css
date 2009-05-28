@@ -96,6 +96,7 @@ select ,option{	font: 11px tahoma,verdana,arial,sans-serif; font-weight: normal;
 	border-top: 1px solid #ccc;	border-left: 1px solid #ccc;
 	border-right: 1.5px solid #999;	border-bottom: 1.5px solid #999;
 	background: #E2E1DD url(images/bg-right-menu.jpg) repeat;}
+#rightmenu  .link-menu-current {background: #E2E1DD url(images/heart.gif) repeat;} /*must be re writing bt Abu tarq !*/
 #rightmenu .link-menu a { 
 	display: block;	overflow: hidden; font-family:tahoma,verdana,arial,sans-serif;
 	font-size: xx-small;font-weight: bold;padding:5px;}

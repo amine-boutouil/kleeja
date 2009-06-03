@@ -18,6 +18,34 @@ include_once ($path . 'functions.php');
 include_once ($path . 'mysql.php');
 include_once ('func_inst.php');
 
+
+$order_update_files = array(
+'RC2_to_RC3' => 3,
+'RC4_to_RC5' => 5,
+'RC5_to_RC6' => 6,
+'RC6_to_1.0.0'=>7,
+); 
+
+$SQL	= new SSQL($dbserver, $dbuser, $dbpass, $dbname);
+			
+			
+//
+//is current db is up-to-date !
+//
+$sql = "SELECT value FROM `{$dbprefix}config` WHERE `name` = 'db_version'";
+$result	= $SQL->query($sql);
+if($SQL->num_rows($result) == 0)
+{
+	$SQL->query("INSERT INTO `{$dbprefix}config` (`name` ,`value`)VALUES ('db_version', '')");
+}
+else
+{
+	$current_ver  = $SQL->fetch_array($result);
+	$config['db_version']  = $current_ver['value'];
+}
+			
+
+
 /*
 //print header
 */
@@ -92,37 +120,46 @@ case 'action_file':
 
 	}
 	else
-	{ //no 
-
-		//get fles
+	{
+			//get fles
 			$path = "update_files";
 			$dh = opendir($path);
-			$lngfiles = '';
-			$i=1;
+			$lngfiles = array();
 			while (($file = readdir($dh)) !== false)
 			{
 			    if($file != "." && $file != ".."  && $file != "index.html")
 				{
 					$file = str_replace('.php','', $file);
-					$lngfiles .= '<option value="' . $file . '">' . $file . '</option>';
-			        $i++;
+					$db_ver = $order_update_files[$file];
+
+					if(empty($config['db_version']) or $db_ver > $config['db_version'])
+					{
+						$lngfiles[$db_ver] = '<option value="' . $file . '">' . $file . '</option>';
+					}
 			    }
 			}
 			closedir($dh);
+			
+			ksort($lngfiles);
 
 		// show   list ..
 		echo '
 		<br />
 		<br /><form  action="' . $_SERVER['PHP_SELF'] . '?step=action_file&' . getlang(1) . '" method="post">
 		'.$lang['INST_CHOOSE_UPDATE_FILE'].' 
-		<br />
-		<select name="action_file_do" style="width: 352px">
-		' . $lngfiles . '
-		</select>
-		<br />
-		<br />
-		<input name="submitlfile" type="submit" value="' . $lang['INST_SUBMIT'] . '" /><br /><br /><br /></form>';
-
+		<br />';
+		if (sizeof($lngfiles)):
+			echo '
+			<select name="action_file_do" style="width: 352px">
+			' . implode("\n", $lngfiles) . '
+			</select>
+			<br />
+			<br />
+			<input name="submitlfile" type="submit" value="' . $lang['INST_SUBMIT'] . '" /><br /><br /><br /></form>';
+		else :
+			echo '<br /><br /><span style="color:green;"><strong>' . $lang['INST_UPDATE_CUR_VER_IS_UP'] . '<br /> [ ' . array_search($config['db_version'], $order_update_files) . ' :: ' . $config['db_version'] . ' ]</strong></span><br /><br /><br />';
+		endif;
+		
 	}//no  else
 
 
@@ -148,28 +185,10 @@ case 'update_now':
 			require $file_for_up;
 			$complete_upate = true;
 			
-			$SQL	= new SSQL($dbserver, $dbuser, $dbpass, $dbname);
-			
-			
-			//
-			//is current db is up-to-date !
-			//
-			$sql = "SELECT value FROM `{$dbprefix}config` WHERE `name` = 'db_version'";
-			$result	= $SQL->query($sql);
-			if($SQL->num_rows($result) == 0)
+			if($config['db_version'] >= DB_VERSION)
 			{
-				$SQL->query("INSERT INTO `{$dbprefix}config` (`name` ,`value`)VALUES ('db_version', '')");
-			}
-			else
-			{
-				$current_ver  = $SQL->fetch_array($result);
-				$current_ver  = $current_ver['value'];
-				
-				if($current_ver >= DB_VERSION)
-				{
-					echo '<br /><br /><span style="color:green;">' . $lang['INST_UPDATE_CUR_VER_IS_UP']. '</span><br />';
-					$complete_upate = false;
-				}
+				echo '<br /><br /><span style="color:green;">' . $lang['INST_UPDATE_CUR_VER_IS_UP']. '</span><br />';
+				$complete_upate = false;
 			}
 			
 			//

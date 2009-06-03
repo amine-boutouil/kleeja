@@ -318,3 +318,43 @@ h2 {
         margin: 0.8em 0 0.2em 0;
         
         }
+
+/*boxes after uploading : see kljuploder.php for more details*/
+/*all boxes will take this class*/
+.all_boxes{
+	width: 400px;
+	height: 50px;
+}
+/* delete code box */
+.del_box {
+
+}
+/* thumb box */
+.thumb_box {
+
+}
+/* image link box */
+.img_box {
+
+}
+/* image bbcode box */
+.img_bbc_box {
+
+}
+/* file link box */
+.file_box {
+
+}
+/* file bbcode box */
+.file_bbc_box {
+
+}
+
+/*thumb after uploading <img>, and <div> tags*/
+.thumb_img_tag{
+	width:100px; 
+	height:100px
+}
+.thumb_div_tag {
+	text-align:center;
+}

@@ -100,10 +100,14 @@ function Saaheader($title, $outscript=false)
 		$tpl->assign("dir", $lang['DIR']);
 		$tpl->assign("title", $title);
 		$tpl->assign("go_back_browser", $lang['GO_BACK_BROWSER']);
+		$extra = '';
+		
 		//$tpl->assign("ex_header",$extras['header']);
 
 		($hook = kleeja_run_hook('func_Saaheader')) ? eval($hook) : null; //run hook
-	
+		
+		$tpl->assign("EXTRA_CODE_META", $extra);
+		
 		if($config['user_system'] != '1' && isset($script_encoding) && function_exists('iconv') && !eregi('utf',strtolower($script_encoding)) && !$errorpage && $outscript && !defined('DISABLE_INTR')) 
 		{
 			$header = iconv("UTF-8", strtoupper($script_encoding) . "//IGNORE", $tpl->display("header"));

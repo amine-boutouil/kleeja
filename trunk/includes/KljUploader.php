@@ -550,20 +550,9 @@ function process ()
 									
 				($hook = kleeja_run_hook('qr_insert_new_file_kljuploader')) ? eval($hook) : null; //run hook
 				
-				if (!$SQL->build($insert_query)) 
-				{ 
-					$this->errs[]=  $lang['CANT_INSERT_SQL'];
-				}
+				$SQL->build($insert_query);
 				
-				if ($config['mod_writer'] == '1') 
-				{
-					$this->id_for_url  = ($config['id_form'] == 'filename') ?  str_replace('.', '-', $name) : $SQL->insert_id();
-				}
-				else
-				{
-					$this->id_for_url  = ($config['id_form'] == 'filename') ?  $name : $SQL->insert_id();
-				}
-
+				$this->id_for_url  = ($config['id_form'] == 'filename') ?  ($config['mod_writer'] == '1' ? str_replace('.', '-', $name) : $name) : $SQL->insert_id();
 
 				//calculate stats ..s
 				$update_query = array(
@@ -582,11 +571,8 @@ function process ()
 					$extra_del = '';
 					if ($config['del_url_file'])
 					{
-						$extra_del	= $lang['URL_F_DEL'] . ':<br /><textarea rows="2" cols="49" rows="1">';
-						$extra_del	.= $this->linksite . (($config['mod_writer']) ? "del" . $code_del . ".html" : 'go.php?go=del&amp;cd=' . $code_del);
-						$extra_del	.='</textarea><br />';
+						$extra_del	= $lang['URL_F_DEL'] . ':<br /><textarea  class="del_box all_boxes">' .  kleeja_get_link('del', array('::CODE::'=>$code_del)) . '</textarea><br />';
 					}
-
 
 					//show imgs
 					if (in_array(strtolower($this->typet), array('png','gif','jpg','jpeg','tif','tiff')))
@@ -598,20 +584,11 @@ function process ()
 							list($thmb_dim_w, $thmb_dim_h) = @explode('*', $config['thmb_dims']);
 							$this->createthumb($folderee . "/" . $filname, strtolower($this->typet), $folderee . '/thumbs/' . $filname, $thmb_dim_w, $thmb_dim_h);
 							
-							$extra_thmb 	= $lang['URL_F_THMB'] . ':<br /><textarea rows="2" cols="49">';
-							if($config['id_form'] == "filename")
-							{
-								$thumb_link_o = $this->linksite . (($config['mod_writer']) ? "thumbf-" . $this->id_for_url . ".html" : "download.php?thmbf=" . $this->id_for_url);
-								$extra_thmb .= '[url=' . $this->linksite . (($config['mod_writer']) ? "imagef-" . $this->id_for_url . ".html" : "download.php?imgf=" . $this->id_for_url) . '][img]' . $thumb_link_o . '[/img][/url]';
-							}
-							else
-							{
-								$thumb_link_o = $this->linksite . (($config['mod_writer']) ? "thumb" . $this->id_for_url . ".html" : "download.php?thmb=" . $this->id_for_url);
-								$extra_thmb .= '[url=' . $this->linksite . (($config['mod_writer']) ? "image" . $this->id_for_url . ".html" : "download.php?img=" . $this->id_for_url) . '][img]' . $thumb_link_o . '[/img][/url]';
-							}
-							
+							$thumb_link_o = kleeja_get_link('thumb', array('::ID::'=>$this->id_for_url));
+							$extra_thmb 	= $lang['URL_F_THMB'] . ':<br /><textarea class="thumb_box all_boxes">';
+							$extra_thmb .= '[url=' . kleeja_get_link('image', array('::ID::'=>$this->id_for_url)) . '][img]' . $thumb_link_o . '[/img][/url]';
 							$extra_thmb 	.= '</textarea><br />';
-							$extra_show_img = '<div style="text-align:center"><img src="' . $thumb_link_o . '" style="width:100px; height:100px" /></div><br />';
+							$extra_show_img = '<div class="thumb_div_tag"><img src="' . $thumb_link_o . '" class="thumb_img_tag" /></div><br />';
 						}
 						
 						//write on image
@@ -623,18 +600,10 @@ function process ()
 						//then show
 						$img_html_result = $extra_show_img;
 						
-						if($config['id_form'] == "filename")
-						{
-							$img_html_result .= $lang['URL_F_IMG'] . ':<br /><textarea rows="2" cols="49">' . $this->linksite . (($config['mod_writer']) ? "imagef-" . $this->id_for_url . ".html" : "download.php?imgf=" . $this->id_for_url) . '</textarea><br />
-								' . $lang['URL_F_BBC'] . ':<br /><textarea rows="2" cols="49">' .
-								'[url=' . $this->linksite . (($config['mod_writer']) ? "imagef-" . $this->id_for_url . ".html" : "download.php?imgf=" . $this->id_for_url) . '][img]' . $this->linksite . (($config['mod_writer']) ? "imagef-" . $this->id_for_url . ".html" : "download.php?imgf=" . $this->id_for_url) . '[/img][/url]</textarea><br />';
-						}
-						else
-						{
-							$img_html_result .= $lang['URL_F_IMG'] . ':<br /><textarea rows="2" cols="49">' . $this->linksite . (($config['mod_writer']) ? "image" . $this->id_for_url . ".html" : "download.php?img=" . $this->id_for_url) . '</textarea><br />
-								' . $lang['URL_F_BBC'] . ':<br /><textarea rows="2" cols="49">' .
-								'[url=' . $this->linksite . (($config['mod_writer']) ? "image" . $this->id_for_url . ".html" : "download.php?img=" . $this->id_for_url) . '][img]' . $this->linksite . (($config['mod_writer']) ? "image" . $this->id_for_url . ".html" : "download.php?img=" . $this->id_for_url) . '[/img][/url]</textarea><br />';
-						}
+						$img_link_o = kleeja_get_link('image', array('::ID::'=>$this->id_for_url));
+						$img_html_result .= $lang['URL_F_IMG'] . ':<br /><textarea class="img_box all_boxes">' . $img_link_o . '</textarea><br />' 
+							. $lang['URL_F_BBC'] . ':<br /><textarea class="img_bbc_box all_boxes">[url=' . $img_link_o . '[/img][/url]</textarea><br />';
+
 	
 						$img_html_result .= $extra_thmb . $extra_del;
 						
@@ -645,20 +614,11 @@ function process ()
 					else 
 					{
 						//then show other files
-						
-						if($config['id_form'] == "filename")
-						{
-							$else_html_result = $lang['URL_F_FILE'] . ':<br /><textarea cols="49" rows="1">' . $this->linksite . (($config['mod_writer']) ? "downloadf-" . $this->id_for_url . ".html" : "download.php?filename=" . $this->id_for_url) . '</textarea><br />
-												' . $lang['URL_F_BBC'] . ':<br /><textarea rows="2" cols="49">[url]' . $this->linksite . (($config['mod_writer']) ? "downloadf-" . $this->id_for_url . ".html" : "download.php?filename=" . $this->id_for_url) . '[/url]</textarea><br />
-												' . $extra_del;
-						}
-						else
-						{
-							$else_html_result = $lang['URL_F_FILE'] . ':<br /><textarea cols="49" rows="1">' . $this->linksite . (($config['mod_writer']) ? "download" . $this->id_for_url . ".html" : "download.php?id=" . $this->id_for_url) . '</textarea><br />
-												' . $lang['URL_F_BBC'] . ':<br /><textarea rows="2" cols="49">[url]' . $this->linksite . (($config['mod_writer']) ? "download" . $this->id_for_url . ".html" : "download.php?id=" . $this->id_for_url) . '[/url]</textarea><br />
-												' . $extra_del;
-						}
-						
+
+						$file_link_o = kleeja_get_link('file', array('::ID::'=>$this->id_for_url));
+						$else_html_result = $lang['URL_F_FILE'] . ':<br /><textarea class="file_box all_boxes">' . $file_link_o . '</textarea><br />'
+							. $lang['URL_F_BBC'] . ':<br /><textarea class="file_bbc_box all_boxes">[url]' . $file_link_o . '[/url]</textarea><br />
+							' . $extra_del;
 
 						($hook = kleeja_run_hook('saveit_func_else_res_kljuploader')) ? eval($hook) : null; //run hook
 						

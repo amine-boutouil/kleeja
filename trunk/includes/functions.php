@@ -2028,33 +2028,86 @@ function klj_clean_old_files($from = 0)
 
 }
 
-//Redirect... Try PHP header redirect, then Java redirect, then try http redirect. [php.net]:
-function redirect($url,$header=true,$exit=false){
+//redirect [php.net]
+function redirect($url,$header=true,$exit=false)
+{
     if (!headers_sent() && $header)
-	{    
-		//If headers not sent yet... then do php redirect
+	{
         header('Location: ' . $url); 
-        /* Make sure that code below does not get executed when we redirect. */
-        if($exit)
-        {
-			exit;
-		}
     }
-	else{                   
-		 //If headers are sent... do java redirect... if java disabled, do html redirect.
-        echo '<script type="text/javascript">';
-        echo 'window.location.href="' . $url . '";';
-        echo '</script>';
-        echo '<noscript>';
-        echo '<meta http-equiv="refresh" content="0;url=' . $url . '" />';
-        echo '</noscript>'; 
-        /* Make sure that code below does not get executed when we redirect. */
-		if($exit)
-        {
-			exit;
-		}
-    }
+	else
+	{
+        echo '<script type="text/javascript">window.location.href="' . $url . '";</script>';
+        echo '<noscript><meta http-equiv="refresh" content="0;url=' . $url . '" /></noscript>'; 
+	}
+	
+	if($exit)
+	{
+		exit;
+	}
 }
-//End Redirect
 
+//
+//link generator 
+//
+function kleeja_get_link ($pid, $extra = array())
+{
+	global $config;
+	
+	$links = array();
+	
+	//to avoid problems
+	$config['id_form'] = empty($config['id_form']) ? 'id' : $config['id_form'];
+	
+	switch($config['id_form'])
+	{
+		case 'id':
+			if($config['mod_writer'])
+			{
+				$links += array(
+							'thumb' => 'thumb::ID::.html',
+							'image' => 'image::ID::.html',
+							'del'	=> 'del::CODE::.html',
+							'file'	=> 'download::ID::.html',
+						);
+			}
+			else
+			{
+				$links += array(
+							'thumb' => 'download.php?thmb=::ID::',
+							'image' => 'download.php?img=::ID::',
+							'del'	=> 'go.php?go=del&amp;cd=::CODE::',
+							'file'	=> '"download.php?id=::ID::',
+						);
+			}
+		break;
+		case 'filename':
+			if($config['mod_writer'])
+			{
+				$links += array(
+							'thumb' => 'thumbf-::ID::.html',
+							'image' => 'imagef-::ID::.html',
+							'del'	=> 'del::CODE::.html',
+							'file'	=> 'downloadf-::ID::.html',
+						);
+			}
+			else
+			{
+				$links += array(
+							'thumb' => 'download.php?thmbf=::ID::',
+							'image' => 'download.php?imgf=::ID::',
+							'del'	=> 'go.php?go=del&amp;cd=::CODE::',
+							'file'	=> 'download.php?filename=::ID::',
+						);
+			}
+		break;
+		default:
+			//add another type of links 
+			//if $config['id_form']  == 'another things' : do another things .. 
+			($hook = kleeja_run_hook('kleeja_get_link_func')) ? eval($hook) : null; //run hook
+		break;
+	}
+	
+	return $config['siteurl'] . str_replace(array_keys($extra), array_values($extra), $links[$pid]);
+}
 ?>

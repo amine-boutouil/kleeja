@@ -27,6 +27,7 @@ class KljUploader
 	var $typet;
 	var $sizet;
 	var $id_for_url;
+	var $name_for_url;
     var $filename2;  //alternative file name
     var $linksite;    //site link
     var $decode;     // decoding name with md5 or time or no
@@ -552,7 +553,8 @@ function process ()
 				
 				$SQL->build($insert_query);
 				
-				$this->id_for_url  = ($config['id_form'] == 'filename') ?  ($config['mod_writer'] == '1' ? str_replace('.', '-', $name) : $name) : $SQL->insert_id();
+				$this->name_for_url  = $config['mod_writer'] == '1' ? str_replace('.', '-', $name) : $name;
+				$this->id_for_url  = $SQL->insert_id();
 
 				//calculate stats ..s
 				$update_query = array(
@@ -567,12 +569,17 @@ function process ()
 				//delete cache of stats !
 				delete_cache('data_stats');
 
-					//show del code link
-					$extra_del = '';
-					if ($config['del_url_file'])
-					{
-						$extra_del	= $lang['URL_F_DEL'] . ':<br /><textarea  class="del_box all_boxes">' .  kleeja_get_link('del', array('::CODE::'=>$code_del)) . '</textarea><br />';
-					}
+				//inforantion of file 
+				$file_info = array('::ID::'=>$this->id_for_url, '::NAME::'=>$this->name_for_url, '::DIR::'=> $folderee, '::FNAME::'=>$filname);
+					
+				//show del code link
+				$extra_del = '';
+				if ($config['del_url_file'])
+				{
+					$extra_del	= $lang['URL_F_DEL'] . ':<br /><textarea  class="del_box all_boxes">' .  kleeja_get_link('del', array('::CODE::'=>$code_del)) . '</textarea><br />';
+				}
+					
+
 
 					//show imgs
 					if (in_array(strtolower($this->typet), array('png','gif','jpg','jpeg','tif','tiff')))
@@ -584,9 +591,9 @@ function process ()
 							list($thmb_dim_w, $thmb_dim_h) = @explode('*', $config['thmb_dims']);
 							$this->createthumb($folderee . "/" . $filname, strtolower($this->typet), $folderee . '/thumbs/' . $filname, $thmb_dim_w, $thmb_dim_h);
 							
-							$thumb_link_o = kleeja_get_link('thumb', array('::ID::'=>$this->id_for_url));
+							$thumb_link_o = kleeja_get_link('thumb', $file_info);
 							$extra_thmb 	= $lang['URL_F_THMB'] . ':<br /><textarea class="thumb_box all_boxes">';
-							$extra_thmb .= '[url=' . kleeja_get_link('image', array('::ID::'=>$this->id_for_url)) . '][img]' . $thumb_link_o . '[/img][/url]';
+							$extra_thmb .= '[url=' . kleeja_get_link('image', $file_info) . '][img]' . $thumb_link_o . '[/img][/url]';
 							$extra_thmb 	.= '</textarea><br />';
 							$extra_show_img = '<div class="thumb_div_tag"><img src="' . $thumb_link_o . '" class="thumb_img_tag" /></div><br />';
 						}
@@ -600,7 +607,7 @@ function process ()
 						//then show
 						$img_html_result = $extra_show_img;
 						
-						$img_link_o = kleeja_get_link('image', array('::ID::'=>$this->id_for_url));
+						$img_link_o = kleeja_get_link('image', $file_info);
 						$img_html_result .= $lang['URL_F_IMG'] . ':<br /><textarea class="img_box all_boxes">' . $img_link_o . '</textarea><br />' 
 							. $lang['URL_F_BBC'] . ':<br /><textarea class="img_bbc_box all_boxes">[url=' . $img_link_o . '[/img][/url]</textarea><br />';
 
@@ -615,7 +622,7 @@ function process ()
 					{
 						//then show other files
 
-						$file_link_o = kleeja_get_link('file', array('::ID::'=>$this->id_for_url));
+						$file_link_o = kleeja_get_link('file', $file_info);
 						$else_html_result = $lang['URL_F_FILE'] . ':<br /><textarea class="file_box all_boxes">' . $file_link_o . '</textarea><br />'
 							. $lang['URL_F_BBC'] . ':<br /><textarea class="file_bbc_box all_boxes">[url]' . $file_link_o . '[/url]</textarea><br />
 							' . $extra_del;

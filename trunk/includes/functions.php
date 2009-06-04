@@ -2089,29 +2089,50 @@ function kleeja_get_link ($pid, $extra = array())
 			if($config['mod_writer'])
 			{
 				$links += array(
-							'thumb' => 'thumbf-::ID::.html',
-							'image' => 'imagef-::ID::.html',
+							'thumb' => 'thumbf-::NAME::.html',
+							'image' => 'imagef-::NAME::.html',
 							'del'	=> 'del::CODE::.html',
-							'file'	=> 'downloadf-::ID::.html',
+							'file'	=> 'downloadf-::NAME::.html',
 						);
 			}
 			else
 			{
 				$links += array(
-							'thumb' => 'download.php?thmbf=::ID::',
-							'image' => 'download.php?imgf=::ID::',
+							'thumb' => 'download.php?thmbf=::NAME::',
+							'image' => 'download.php?imgf=::NAME::',
 							'del'	=> 'go.php?go=del&amp;cd=::CODE::',
-							'file'	=> 'download.php?filename=::ID::',
+							'file'	=> 'download.php?filename=::NAME::',
 						);
 			}
+		break;
+		case 'direct':
+			if($config['mod_writer'])
+			{
+				$links += array(
+							'del'	=> 'del::CODE::.html',
+						);
+			}
+			else
+			{
+				$links += array(
+							'del'	=> 'go.php?go=del&amp;cd=::CODE::',
+						);
+			}
+			
+			$links += array(
+						'thumb' => '::DIR:/thumbs/::FNAME::',
+						'image' => '::DIR:/::FNAME::',
+						'file'	=> '::DIR:/::FNAME::',
+						);
 		break;
 		default:
 			//add another type of links 
 			//if $config['id_form']  == 'another things' : do another things .. 
-			($hook = kleeja_run_hook('kleeja_get_link_func')) ? eval($hook) : null; //run hook
+			($hook = kleeja_run_hook('kleeja_get_link_d_func')) ? eval($hook) : null; //run hook
 		break;
 	}
 	
+	($hook = kleeja_run_hook('kleeja_get_link_func')) ? eval($hook) : null; //run hook
 	return $config['siteurl'] . str_replace(array_keys($extra), array_values($extra), $links[$pid]);
 }
 ?>

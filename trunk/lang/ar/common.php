@@ -1,4 +1,4 @@
-<?php
+IDFD<?php
 //
 // kleeja language
 // Arabic
@@ -215,6 +215,7 @@ $lang = array_merge($lang, array(
 	'ID_FORM' => 'شكل الـ ID',
 	'IDF' => 'الاساسي',
 	'IDFF' => 'اسم الملف',
+	'IDFD' => 'مباشر',
 	'DEL_URL_FILE' => 'تفعيل رابط الحذف المباشر',
 	'WWW_URL' => 'تفعيل التحميل من رابط',
 	'ALLOW_STAT_PG' => 'تفعيل صفحة الإحصائيات',

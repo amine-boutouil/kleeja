@@ -211,6 +211,7 @@ $lang = array_merge($lang, array(
 	'ID_FORM' => 'Id form',
 	'IDF' => 'File id in database',
 	'IDFF' => 'File name',
+	'IDFD' => 'Directly',
 	'DEL_URL_FILE' => 'Enable file deletion URL feature',
 	'WWW_URL' => 'Enable uploading from URL',
 	'ALLOW_STAT_PG' => 'Enable statistics page',

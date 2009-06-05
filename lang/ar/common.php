@@ -1,4 +1,4 @@
-IDFD<?php
+<?php
 //
 // kleeja language
 // Arabic

@@ -210,8 +210,12 @@ RC6:
 - fix many bugs related with url uploading 
 - fix percentage stat. in admin stat.
 - fix integration with phpbb
-
-
+- fix search in admincp 
++ files links are flexible now
+- fix many bugs related with integration system
++ new methods to (id_form) feature.
++ live extensions feature 
++ admin now can delete all specific user files
 
 -----------------------------------
 -----------------------------------

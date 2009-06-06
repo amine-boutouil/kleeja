@@ -356,19 +356,14 @@ switch ($_GET['go'])
 				$user_name = (!$data_user['name']) ? false : $data_user['name'];
 				while($row=$SQL->fetch_array($result))
 				{
+					$file_info = array('::ID::' => $row['id'], '::NAME::' => $row['real_filename'], '::DIR::' => $row['folder'], '::FNAME::' => $row['name']);
+					
 					$is_image = in_array(strtolower(trim($row['type'])), array('gif', 'jpg', 'jpeg', 'bmp', 'png', 'tiff', 'tif')) ? true : false;
-					if($is_image)
-					{
-						$url = ($config['mod_writer']) ? 'image' . $row['id'] . '.html' : 'download.php?img=' . $row['id'];
-					}
-					else
-					{
-						$url = ($config['mod_writer']) ? 'download' . $row['id'] . '.html' : 'download.php?id=' . $row['id'];
-					}
+					$url = ($is_image) ? kleeja_get_link('image', $file_info) : kleeja_get_link('file', $file_info);
 					
 					//make new lovely arrays !!
 					$arr[] = array(	'id'		=> $row['id'],
-									'name'		=> '<a href="' . $config['siteurl'] . $url . '" target="blank">' . (empty($row['real_filename']) ? $row['name'] : $row['real_filename']) . '</a>',
+									'name'		=> '<a href="' . $url . '" target="blank">' . (empty($row['real_filename']) ? $row['name'] : $row['real_filename']) . '</a>',
 									'icon_link'	=>(file_exists("images/filetypes/".  $row['type'] . ".gif"))? "images/filetypes/" . $row['type'] . ".gif" : 'images/filetypes/file.gif',
 									'file_type'	=> $row['type'],
 									'image_path'=> $is_image ? $url : '',
@@ -434,19 +429,14 @@ switch ($_GET['go'])
 				{
 					$del[$row['id']] = (isset($_POST["del_".$row['id']])) ? $_POST["del_" . $row['id']] : "";
 					
-					$is_image = in_array(strtolower(trim($row['type'])), array('gif', 'jpg', 'jpeg', 'bmp', 'png', 'tiff', 'tif')) ? true : false;
-					if($is_image)
-					{
-						$url = ($config['mod_writer']) ? 'image' . $row['id'] . '.html' : 'download.php?img=' . $row['id'];
-					}
-					else
-					{
-						$url = ($config['mod_writer']) ? 'download' . $row['id'] . '.html' : 'download.php?id=' . $row['id'];
-					}
+					$file_info = array('::ID::' => $row['id'], '::NAME::' => $row['real_filename'], '::DIR::' => $row['folder'], '::FNAME::' => $row['name']);
 					
+					$is_image = in_array(strtolower(trim($row['type'])), array('gif', 'jpg', 'jpeg', 'bmp', 'png', 'tiff', 'tif')) ? true : false;
+					
+					$url = ($is_image) ? kleeja_get_link('image', $file_info) : kleeja_get_link('file', $file_info);
 					//make new lovely arrays !!
 					$arr[] = array(	'id'	=> $row['id'],
-									'name'	=> '<a href="' .  $config['siteurl'] .  $url . '" target="blank">' . (empty($row['real_filename']) ? $row['name'] : $row['real_filename']) . '</a>',
+									'name'	=> '<a href="' .  $url . '" target="blank">' . (empty($row['real_filename']) ? $row['name'] : $row['real_filename']) . '</a>',
 								);
 							
 						//when submit !!

@@ -15,9 +15,9 @@
 
 	
 	//get data from kleeja database
-	$b_data = fetch_remote_file('http://www.kleeja.com/check_vers/?i=' . urlencode($_SERVER['SERVER_NAME']) . '&v=' . KLEEJA_VERSION);
+	$b_data = fetch_remote_file('http://www.kleeja.com/check_vers/?i=' . urlencode($_SERVER['SERVER_NAME']) . '&v=' . KLEEJA_VERSION, false, 5);
 
-	if ($b_data === false)
+	if ($b_data === false && !isset($_GET['show_msg']))
 	{
 		$text	= $lang['ERROR_CHECK_VER'];
 		$stylee	= "admin_err";
@@ -93,13 +93,13 @@
 			//clean cache
 			delete_cache('data_config');
 			
-			
-			//then go back  to start
-			if(isset($_GET['show_msg']))
-			{
-				header('location: ./admin.php');
-			}
 		//}	
+	}
+	
+	//then go back  to start
+	if(isset($_GET['show_msg']))
+	{
+		header('location: ./admin.php');
 	}
 
 ?>

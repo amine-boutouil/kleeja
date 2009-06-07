@@ -1196,11 +1196,9 @@ function send_mail($to, $body, $subject, $fromaddress, $fromname,$bcc='')
 * get remote files
 * parameters : url : link of file
 */
-function fetch_remote_file($url, $save_in = false)
+function fetch_remote_file($url, $save_in = false, $timeout = 20)
 {
-
 	($hook = kleeja_run_hook('kleeja_fetch_remote_file_func')) ? eval($hook) : null; //run hook
-
 
 	if(function_exists("fsockopen"))
 	{
@@ -1214,10 +1212,14 @@ function fetch_remote_file($url, $save_in = false)
 			$path .= '?' . $url_parsed['query'];
 		}
 	
-	    $out = "GET $path HTTP/1.0\r\nHost: $host\r\n\r\n";
+	    $out = "GET $path HTTP/1.0\r\nHost: $host\r\nConnection: Close\r\n\r\n";
 
-	    $fp = @fsockopen($host, $port, $errno, $errstr, 30);
-
+	    if(!$fp = @fsockopen($host, $port, $errno, $errstr, $timeout))
+		{
+			return false;
+		}
+		
+		@stream_set_timeout($fp, $timeout, 0);	
 		@fwrite($fp, $out);
 	    $body = false;
 		if($save_in)
@@ -1261,16 +1263,16 @@ function fetch_remote_file($url, $save_in = false)
 		$ch = @curl_init();
 		@curl_setopt($ch, CURLOPT_URL, $url);
 		@curl_setopt($ch, CURLOPT_HEADER, 0);
-		@curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+		@curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
 		@curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
 		$data = @curl_exec($ch);
 		@curl_close($ch);
 		return $data;
 	}
-	else
-	{
-		return implode('', @file($url));
-	}
+	
+	//there is known issue here with check update ..
+	return implode('', @file($url));
+	
 }
 
 

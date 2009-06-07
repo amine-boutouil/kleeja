@@ -58,7 +58,7 @@ $header_inst = '<!-- Header Start -->
 <title>...Kleeja...</title><style type="text/css">
 * { padding: 0;margin: 0;}
 body {
-background: #ffda8c;
+background: #ffda8c url(\'img/bg.gif\');
 font: 0.74em "Tahoma" Verdana, Arial, sans-serif;line-height: 1.5em;
 margin:0px auto; text-align: center
 }
@@ -285,7 +285,7 @@ if ((isset($_GET['step']) && $_GET['step'] != 'language') && (strpos('index.php'
 }
 
 $header_inst .= '
-<img src="img/logo.gif" style="border:0;" alt="kleeja" />
+<img src="img/logo.png" style="border:0;" alt="kleeja" />
 <br />
 <!-- Header End -->
 <br />

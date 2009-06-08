@@ -283,7 +283,7 @@ function process ()
 							$zaid = time();
 							$this->filename2 = $this->filename . $zaid . $i . "." . $this->filename2;
 						}
-						elseif($this->tashfir == "md5")
+						elseif($this->decode == "md5")
 						{
 							$zaid	= md5(time());
 							$zaid	= substr($zaid, 0, 10);
@@ -292,7 +292,7 @@ function process ()
 						else
 						{
 							//real name of file
-							$this->filename2 = $_FILES['file']['name'][$i];
+							$this->filename2 = $this->filename . str_replace(' ', '-', $_FILES['file']['name'][$i]);
 							
 							($hook = kleeja_run_hook('another_decode_type_kljuploader')) ? eval($hook) : null; //run hook
 						}
@@ -302,7 +302,7 @@ function process ()
 						{
 							//if no file ? natin to do ,, why ? becuase its multiple fields
 						}
-						elseif(file_exists($this->folder . '/' . $_FILES['file']['name'][$i]))
+						elseif(file_exists($this->folder . '/' . $this->filename2))
 						{
 							$this->errs[]=  '[ ' . $_FILES['file']['name'][$i] . ' ] ' . $lang['SAME_FILE_EXIST'];
 						}
@@ -416,7 +416,7 @@ function process ()
 									$zaid = time();
 									$this->filename2 = $this->filename . $zaid . $i . "." . $this->filename2;
 								}
-								elseif($this->tashfir == "md5")
+								elseif($this->decode == "md5")
 								{
 									$zaid=md5(time());
 									$zaid=substr($zaid, 0, 10);
@@ -425,7 +425,7 @@ function process ()
 								else
 								{
 									// real name of file
-									$this->filename2 = $filename;
+									$this->filename2 = $this->filename . str_replace(' ', '-', $filename);
 									($hook = kleeja_run_hook('another_decode_type_kljuploader')) ? eval($hook) : null; //run hook
 								}
 								//end tashfer

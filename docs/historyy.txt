@@ -234,6 +234,7 @@ To Do 1.0.1 -> 1.* :
 - add file description
 - add number of new calls 
 - add number of new reports 
+- add filter system
 
 
 Thank you for reading this file. 

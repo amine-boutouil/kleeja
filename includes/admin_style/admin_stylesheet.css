@@ -96,12 +96,12 @@ select ,option{	font: 11px tahoma,verdana,arial,sans-serif; font-weight: normal;
 	border-top: 1px solid #ccc;	border-left: 1px solid #ccc;
 	border-right: 1.5px solid #999;	border-bottom: 1.5px solid #999;
 	background: #E2E1DD url(images/bg-right-menu.jpg) repeat;}
-#rightmenu  .link-menu-current {background: #E2E1DD url(images/heart.gif) repeat;} /*must be re writing bt Abu tarq !*/
+#rightmenu  .link-menu-current {	height: 60px; width: 113px;padding:0px;margin:1px;background:#FFFF80;border: #FD6812 1px solid;} 
+#rightmenu .link-menu-current  a {color:#000;}
 #rightmenu .link-menu a { 
 	display: block;	overflow: hidden; font-family:tahoma,verdana,arial,sans-serif;
 	font-size: xx-small;font-weight: bold;padding:5px;}
-#rightmenu .link-menu img { 
-	padding-bottom: 7px ; }
+#rightmenu .link-menu img {padding-bottom: 7px ;}
 #rightmenu .link-menu a:hover {
 	padding-bottom:5px;	text-decoration: none; background: #fff;	color:#000;
 	border-top: #FE6914 3px solid; border-bottom: #FE6914 3px solid; }

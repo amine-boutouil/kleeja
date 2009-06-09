@@ -96,7 +96,7 @@ select ,option{	font: 11px tahoma,verdana,arial,sans-serif; font-weight: normal;
 	border-top: 1px solid #ccc;	border-left: 1px solid #ccc;
 	border-right: 1.5px solid #999;	border-bottom: 1.5px solid #999;
 	background: #E2E1DD url(images/bg-right-menu.jpg) repeat;}
-#rightmenu  .link-menu-current {	height: 60px; width: 113px;padding:0px;margin:1px;background:#FFFF80;border: #FD6812 1px solid;} 
+#rightmenu  .link-menu-current {	height: 60px; width: 113px;padding:0px;margin:1px;background:#FFF;border: #FD6812 1px solid;} 
 #rightmenu .link-menu-current  a {color:#000;}
 #rightmenu .link-menu a { 
 	display: block;	overflow: hidden; font-family:tahoma,verdana,arial,sans-serif;
@@ -281,5 +281,6 @@ tr:hover {background-color:#FFFFDD;}
 /* all tables */
 
 /* usefull colors */
-.ored {background-color:#FFD5D6;}
+.ored, .ored:hover {background-color:#FFD5D6;}
+
 .osilver {background-color:#F5F5F5;}

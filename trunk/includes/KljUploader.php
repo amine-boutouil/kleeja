@@ -468,20 +468,7 @@ function process ()
 											$_POST['file'][$i] = 'http://' . $_POST['file'][$i];
 										}
 										
-										if(function_exists("fsockopen"))
-										{
-											$this->sizet = $this->get_remote_file_size($_POST['file'][$i]);
-		
-											if($this->types[strtolower($this->typet)]['size'] > 0 && $this->sizet >= $this->types[strtolower($this->typet)]['size'])
-											{
-												$this->errs[]=  $lang['SIZE_F_BIG'] . ' ' . Customfile_size($this->types[strtolower($this->typet)]['size']);
-											}
-											else
-											{
-												$data = fetch_remote_file($_POST['file'][$i], $this->folder . "/" . $this->filename2);
-											}
-										}
-										else
+										if(function_exists("curl_init"))
 										{
 											$data = fetch_remote_file($_POST['file'][$i]);
 											if($data != false)
@@ -500,6 +487,20 @@ function process ()
 												}
 											}
 										}
+										else
+										{
+											$this->sizet = $this->get_remote_file_size($_POST['file'][$i]);
+		
+											if($this->types[strtolower($this->typet)]['size'] > 0 && $this->sizet >= $this->types[strtolower($this->typet)]['size'])
+											{
+												$this->errs[]=  $lang['SIZE_F_BIG'] . ' ' . Customfile_size($this->types[strtolower($this->typet)]['size']);
+											}
+											else
+											{
+												$data = fetch_remote_file($_POST['file'][$i], $this->folder . "/" . $this->filename2);
+											}
+										}
+										
 										
 										if($data === false)
 										{

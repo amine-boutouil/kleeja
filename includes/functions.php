@@ -1219,12 +1219,12 @@ function fetch_remote_file($url, $save_in = false, $timeout = 20)
 	    $port = empty($url_parsed['port']) or $url_parsed['port'] == 0 ? 80 : $url_parsed['port'];
 		$path = $url_parsed['path'];
 	    
-		if ($url_parsed["query"] != '')
+		if (isset($url_parsed["query"]) && $url_parsed["query"] != '')
 		{
 			$path .= '?' . $url_parsed['query'];
 		}
 	
-	    $out = "GET $path HTTP/1.0\r\nHost: $host\r\nConnection: Close\r\n\r\n";
+	    $out = "GET $path HTTP/1.1\r\nHost: $host\r\nConnection: Close\r\n\r\n";
 
 	    if(!$fp = @fsockopen($host, $port, $errno, $errstr, $timeout))
 		{
@@ -1243,6 +1243,7 @@ function fetch_remote_file($url, $save_in = false, $timeout = 20)
 		while (!@feof($fp))
 		{
 	        $s = @fgets($fp, 1024);
+	        echo $s;
 	        if ($body)
 			{
 				if($save_in)

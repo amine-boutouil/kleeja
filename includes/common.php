@@ -141,6 +141,9 @@
 		$tpl->caching = false;
 	}
 	
+	//check if admin (true/false)
+	$is_admin = $usrcp->admin();
+	
 	// for gzip : php.net
 	//fix bug # 181
 	$do_gzip_compress = false; 

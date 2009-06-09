@@ -1,17 +1,14 @@
 ﻿/*
-Kleeja style
+# Powered by Kleeja .... Kleeja.com
+# Designed by Tar3q .... Tar3q.com
+# copyright 2007-2009  ..
 */
-
+* {padding: 0; margin: 0;} 
 body {
-	margin: 0;
-	padding: 12;
-	background: #FFFFFF url(images/img01.jpg) repeat-x left
-top;
-	font-size: 11px;
-	font-family: "Tahoma", arial, verdana, sans-serif;
-	text-align: justify;
-	color: #5C5C5C;
-}
+	margin: 0;	padding: 5px;
+	background: #FFFFFF url(images/background.jpg) top left no-repeat fixed;
+	font: bold 11px Tahoma, Arial, Helvetica, sans-serif; 
+	text-align: justify;color: #5C5C5C;border-top: 4px solid #355572;}
 
 h1, h2, h3 {
 	margin: 0;
@@ -35,18 +32,23 @@ p, ul, ol {
 	line-height: 26px;
 }
 
-a {
-	color: #1B75A9;
-}
-
-a:hover, a:active {
+a:link, body_alink
+{
+	color: #004080;
 	text-decoration: none;
-	color: #1B75A9;
 }
-
-a:visited {
-	color: #1B75A9;
+a:visited, body_avisited
+{
+	color: #004080;
+	text-decoration: none;
 }
+a:hover, a:active, body_ahover
+{
+	color: #FFFFFF;
+	text-decoration: none;
+	background: #004080;
+}
+input:focus, textarea:focus {background-color: #ffd ;border: 1px solid #666;}
 
 img {
 	border: none;
@@ -75,7 +77,9 @@ input, textarea, select {
 }
 
 #wrapper {
-	margin: 0;
+	width: 85%;
+	height: 100%;
+	margin: 0 auto;
 	padding: 0;
 }
 
@@ -85,7 +89,6 @@ input, textarea, select {
 	width: 880px;
 	margin: 0 auto;
 	height: 60px;
-	border: 10px #FFFFFF solid;
 }
 
 /* Menu */
@@ -93,9 +96,8 @@ input, textarea, select {
 #menu {
 	float: left;
 	width: 880px;
-	background: url(images/img02.jpg) repeat-x left top;
+
 	color: #FFFFFF;
-	  border-bottom: 1px solid #E1E1E1; 
         padding: 5px;
         margin-bottom:9px;
 }
@@ -118,15 +120,24 @@ input, textarea, select {
 /** LOGO */
 
 #logo {
-	width: 880px;
-	height: 130px;
-	margin: 0 auto;
+ width: 370px; 
+height: 60px;
+float: right;
+ margin: 20px ; 
+ padding: 10px ;
+    border: 1px solid #355572; 
+
+	background: #F3F3F3 url(images/div-header.jpg) repeat-x; 
+	/* Generation CSS3 Only  Firefox and Safari :(  Tar3q   */
+		-moz-border-radius-topleft: 10px; 
+		-webkit-border-top-left-radius: 10px;
+		-moz-border-radius-bottomright: 10px; 
+		-webkit-border-bottom-right-radius: 10px;
 }
 
-#logo h1, #logo h2 {
-	float: left;
+#logo a {
 	margin: 0;
-	padding: 50px 0 0 0px;
+	padding: 0px;
 	line-height: normal;
 }
 
@@ -140,7 +151,7 @@ input, textarea, select {
 	color: #28313A; 
 }
 
-#logo h1 a:hover { text-decoration: underline; }
+#logo a:hover { background: transparent; text-decoration: underline; }
 
 #logo h2 {
 	float: left;
@@ -163,8 +174,6 @@ input, textarea, select {
 #page {
 	width: 880px;
 	margin: 0 auto;
-	background: #FFFFFF;
-	border: 10px #FFFFFF solid;
 }
 
 /* Content */
@@ -220,8 +229,6 @@ input, textarea, select {
 	padding: 4px;
 	width: 880px;
 	margin: 0 auto;
-	background: #E5E5E5;
-	border: 10px #FFFFFF solid;
 	text-align: center;
 }
 
@@ -232,6 +239,16 @@ html>body #footer {
 #footer p {
 	font-size: 12px;
 }
+
+/* Option to control panel */
+#adminPan{float:left;width:250px; height:60px;  position:absolute; left:15px; top:0px; margin:0 auto; padding:0;}
+#adminlink{ float:left; width:237px; height:62px; position:relative; margin:13px 0 0 0; background:url(images/icon2-nor.gif) 0 0 no-repeat;}
+#adminlink h2{width:90px; height:10px; display:block; position:absolute; left:114px; top:0px; margin:14px 0 5px 0px; font:bold 16px/14px arial, "Times New Roman", Times, serif; color:#666; z-index:1; text-transform:uppercase;}
+#adminlink p{width:130px; height:10px; display:block; position:absolute; font: bold 11px tahoma,verdana,arial,sans-serif; color:#2E5000; margin:34px 41px 0 0px; z-index:1; }
+#adminlink a{border: 1px solid #999999;text-decoration:none; display:block; width:237px; height:62px;}
+#adminlink a:hover{ border: 1px solid #999999;cursor: pointer;text-decoration:none; background:url(images/icon2-hover.gif) no-repeat 0 0;}
+
+
 /* box for some info */
 input {
         font-weight: normal;
@@ -240,7 +257,7 @@ input {
         padding: 0 3px;
         font-size: 1.2em;
         font-family: Tahoma, Helvetica, Arial, sans-serif;
-                 border: 1px solid #BCBCBC;
+        border: 1px solid #BCBCBC;
         background-position: 0 100%;
         color: #666666;
 }
@@ -358,3 +375,4 @@ h2 {
 .thumb_div_tag {
 	text-align:center;
 }
+

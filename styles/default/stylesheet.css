@@ -241,7 +241,7 @@ html>body #footer {
 }
 
 /* Option to control panel */
-#adminPan{float:left;width:250px; height:60px;  position:absolute; left:15px; top:0px; margin:0 auto; padding:0;}
+#adminPan{float:left;width:250px; height:60px;  position:absolute; left:15px; bottom:30px; margin:0 auto; padding:0;}
 #adminlink{ float:left; width:237px; height:62px; position:relative; margin:13px 0 0 0; background:url(images/icon2-nor.gif) 0 0 no-repeat;}
 #adminlink h2{width:90px; height:10px; display:block; position:absolute; left:114px; top:0px; margin:14px 0 5px 0px; font:bold 16px/14px arial, "Times New Roman", Times, serif; color:#666; z-index:1; text-transform:uppercase;}
 #adminlink p{width:130px; height:10px; display:block; position:absolute; font: bold 11px tahoma,verdana,arial,sans-serif; color:#2E5000; margin:34px 41px 0 0px; z-index:1; }

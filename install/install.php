@@ -61,7 +61,7 @@ case 'gpl2':
 	
 	echo '
 	<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=f&' . getlang(1) . '">
-	<textarea name="gpl2" rows=""   readonly="readonly" cols="" style="width: 456px; height: 365px;direction:ltr;">
+	<textarea class="home" name="gpl2" rows=""   readonly="readonly" cols="" style="width: 456px; height: 365px;direction:ltr;">
 	' . $contentofgpl2 . '
 	</textarea>
 
@@ -77,7 +77,7 @@ case 'f':
 	
 	$check_ok = true;
 	
-	echo '<fieldset id="Group1" dir="' . $lang['DIR'] . '">';
+	echo '<fieldset class="home" id="Group1" dir="' . $lang['DIR'] . '">';
 	echo '<strong>' . $lang['FUNCTIONS_CHECK'] . '</strong> : <br /><br />';
 	echo '<ul>';
 	if(function_exists('unlink'))
@@ -152,7 +152,7 @@ case 'c':
 	{
 		 echo '<br /><form method="post"  action="' . $_SERVER['PHP_SELF'] . '?step=c&' . getlang(1) . '"  onsubmit="javascript:return formCheck(this, Array(\'db_server\',\'db_user\' ,\'db_name\'));">
 
-			<fieldset id="Group1" dir="' . $lang['DIR'] . '">
+			<fieldset class="home" id="Group1" dir="' . $lang['DIR'] . '">
 			<b>' . ($writeable_path ? $lang['DB_INFO'] : $lang['DB_INFO_NW']) . '</b>
 			<br />
 			<br />
@@ -186,7 +186,7 @@ case 'c':
 			<br />
 			</fieldset>
 			
-			<fieldset id="Group1" dir="' . $lang['DIR'] . '">
+			<fieldset class="home" id="Group1" dir="' . $lang['DIR'] . '">
 			<b>' . $lang['IN_INFO'] . '</b>
 			<br />
 			<br />
@@ -217,7 +217,7 @@ case 'c':
 	}
 	else
 	{
-		echo  ' <fieldset><br /><span style="color:green;"><strong>' .  $lang['CONFIG_EXISTS'] . '</strong><br /><br />';
+		echo  ' <fieldset class="home"><br /><span style="color:green;"><strong>' .  $lang['CONFIG_EXISTS'] . '</strong><br /><br />';
 		echo  '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=check&' . getlang(1) . '">
 		<input name="agres" type="submit" value="' . $lang['INST_SUBMIT'] . '" />
 		</form></fieldset>';
@@ -278,7 +278,7 @@ case 'check':
 			$texterr .= '<span style="color:red;">[uploads/thumbs]: ' . $lang['INST_NO_WRTABLE'] . '</span><br />';
 	
 	
-	echo '<fieldset>';
+	echo '<fieldset class="home">';
 	if ($texterr !='')
 	{
 		echo '<br /><img src="img/bad.gif" alt="bad." /> <br />' . $texterr;
@@ -388,7 +388,7 @@ case 'data' :
 			// start classe..
 			$SQL	= new SSQL($dbserver,$dbuser,$dbpass,$dbname);
 
-			echo '<fieldset><form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=end&' . getlang(1) . '">
+			echo '<fieldset class="home"><form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=end&' . getlang(1) . '">
 			<input name="agres" type="submit" value="' . $lang['INST_SUBMIT'] . '"/>
 			</form></fieldset>';
 			
@@ -397,7 +397,7 @@ case 'data' :
 		}
 		else
 		{
-			echo '<fieldset><span style="color:red;">' . $lang['INST_FINISH_ERRSQL'] . '</span></fieldset>';
+			echo '<fieldset class="home"><span style="color:red;">' . $lang['INST_FINISH_ERRSQL'] . '</span></fieldset>';
 		}
 
 	}
@@ -408,7 +408,7 @@ case 'data' :
 	$urlsite =  "http://".$_SERVER['HTTP_HOST'] . str_replace('install','',dirname($_SERVER['PHP_SELF']));
 
  echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=data&' . getlang(1) . '"  onsubmit="javascript:return formCheck(this, Array(\'sitename\',\'siteurl\',\'sitemail\' ,\'username\', \'password\',\'email\' ));">
-	<fieldset id="Group1" dir="' . $lang['DIR'] . '">
+	<fieldset class="home" id="Group1" dir="' . $lang['DIR'] . '">
 	<legend style="width: 73px"> [ <strong>' . $lang['INST_SITE_INFO'] . '</strong> ]</legend>
 	<table style="width: 100%">
 		<tr>
@@ -428,7 +428,7 @@ case 'data' :
 
 	<br />
 
-	<fieldset id="Group2" dir="' . $lang['DIR'] . '">
+	<fieldset class="home" id="Group2" dir="' . $lang['DIR'] . '">
 	<legend style="width: 73px"> [ <strong>' . $lang['INST_ADMIN_INFO'] . '</strong> ]</legend>
 	<table style="width: 100%">
 		<tr>
@@ -457,7 +457,7 @@ case 'data' :
 
 break;
 case 'end' :
-		echo '<fieldset><img src="img/wink.gif" alt="congratulation" /><br /><br />';
+		echo '<fieldset class="home"><img src="img/wink.gif" alt="congratulation" /><br /><br />';
 		echo '<span style="color:blue;">' . $lang['INST_FINISH_SQL'] . '</span><br /><br />';
 		echo '<img src="img/wz.gif" alt="home" />&nbsp;<a href="./wizard.php">' . $lang['WZ_TITLE'] . '</a><br /><br />';
 		echo '<img src="img/home.gif" alt="home" />&nbsp;<a href="../index.php">' . $lang['INDEX'] . '</a><br /><br />';

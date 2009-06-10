@@ -44,9 +44,8 @@ $right_left = $lang['DIR']=='ltr' ? 'left' : 'right';
 echo $header_inst;
 
 
-
+echo '<legend>' . $lang['WZ_TITLE'] . ' :</legend>';
 echo '<div style="text-align:' . $right_left . '">';
-echo '<h2>' . $lang['WZ_TITLE'] . ' :</h2><br /><br />';
 //w1
 echo '<div class="wz"><a href="' . $w1_link . '" target="_blank"><img src="img/w1.png"></a>&nbsp;&nbsp;' . $lang['WZ_TXT_W1'] . '';
 echo '<a href="' . $w1_link . '" target="_blank"><img src="img/action_go.gif"></a></div><br />';
@@ -62,7 +61,7 @@ echo '<a href="' . $w4_link . '" target="_blank"><img src="img/action_go.gif"></
 
 echo '</div>';
 
-echo '<fieldset><img src="img/home.gif" alt="home" />&nbsp;<a href="../index.php">' . $lang['INDEX'] . '</a><br /> ';
+echo '<fieldset class="home"><img src="img/home.gif" alt="home" />&nbsp;<a href="../index.php">' . $lang['INDEX'] . '</a><br /> ';
 echo '<img src="img/adm.gif" alt="admin" />&nbsp;<a href="../admin.php">' . $lang['ADMINCP'] . '</a></fieldset>';
 /*
 //echo footer

@@ -63,7 +63,7 @@ class SSQL
 									{
 										mysql_query("SET NAMES 'utf8'");
 									}
-									else if (empty($script_encoding) || eregi('utf',strtolower($script_encoding))) 
+									else if (empty($script_encoding) || eregi('utf',strtolower($script_encoding)) || defined('DISABLE_INTR')) 
 									{
 										mysql_query("SET NAMES 'utf8'");
 									}

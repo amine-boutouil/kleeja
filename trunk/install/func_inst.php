@@ -70,41 +70,19 @@ border: 1px solid #A9B8C2;background-color: #FAFAFA;/* top right */-moz-border-r
 select {-moz-border-radius: 8px; border-radius:1px;color: #333333; background-color: #FAFAFA;font-family: "Tahoma", Verdana, Helvetica, sans-serif;font-size: 1.1em;font-weight: normal;border: 1px solid #A9B8C2;padding: 1px;}
 option { padding: 0 1em 0 0;}
 img { border:0px } 
-fieldset { margin: 15px 0;padding: 10px;border-top: 1px solid #D7D7D7; border-right: 1px solid #CCCCCC;border-bottom: 1px solid #CCCCCC;border-left: 1px solid #D7D7D7; background-color: #FFFFFF; position: relative;-moz-border-radius: 8px; border-radius:1px;}
+
+.home { margin: 15px 0;padding: 10px;border-top: 1px solid #D7D7D7; border-right: 1px solid #CCCCCC;border-bottom: 1px solid #CCCCCC;border-left: 1px solid #D7D7D7; background-color: #FFFFFF; position: relative;-moz-border-radius: 8px; border-radius:1px;}
+
 * html fieldset { padding: 0 10px 5px 10px;}
 a {color: #3B6EBF;text-decoration: none;}a:hover {text-decoration: underline;}
-/*ronded*/
-#wrap {
-margin-left: 10%; margin:0 auto;width: 724px;
-}
-.b1, .b2, .b3, .b4{font-size:1px; overflow:hidden; display:block;} 
-.b1 {height:1px; background:#fcb012; margin:0 5px;}
-.b2 {height:1px; background:#fff0d2; border-right:2px solid #fcb012; border-left:2px solid #fcb012; margin:0 3px;} 
-.b3 {
- height: 1px;
- background: #fff0d2;
- border-right: 1px solid #fcb012;
- border-left: 1px solid #fcb012;
- margin: 0 2px;
-}
-.b4 {
- height: 2px;
- background: #fff0d2;
- border-right: 1px solid #fcb012;
- border-left: 1px solid #fcb012;
- margin: 0 1px;
- border-right-color: #fcb012;
- border-left-color: #fcb012;
-}
-.contentb {
- background: #fff0d2;
- border-right: 1px solid #fcb012;
- border-left: 1px solid #fcb012;
- border-right-color: #fcb012;
- border-left-color: #fcb012;
-}
-.contentb div {margin-left: 5px;margin-right: 5px;}
-
+legend
+{
+font-size: 2.5em;
+color: #000;
+background-color: #fff0d2;
+padding: 13px 15px;
+-moz-border-radius: 8px; border-radius:1px;
+} 
 .wz{-moz-border-radius: 8px; border-radius:1px;color: #333333; background-color: #FAFAFA;font-family: "Tahoma", Verdana, Helvetica, sans-serif;font-size: 1.1em;font-weight: normal;border: 1px solid #A9B8C2;padding: 1px;}
 </style>
 	<script type="text/javascript">
@@ -252,8 +230,7 @@ function formCheck(formobj, fieldRequired)
 </head>
 <body>
 <br />
-<div id="wrap">
-<cite class="b1"></cite><cite class="b2"></cite><cite class="b3"></cite><cite class="b4"></cite> <div class="contentb"><div>
+
 
 ';
 
@@ -289,12 +266,14 @@ $header_inst .= '
 <br />
 <!-- Header End -->
 <br />
+<fieldset style="margin-left: 10%;margin: 0 auto;width: 724px;border: 1px solid #FCB012;background-color: #fff0d2;position: relative;-moz-border-radius: 8px;border-radius: 1px;">
 ';
 
 
 $footer_inst = '<br />
 <!-- Foterr Start -->
-</div></div> <b class="b4"></b><b class="b3"></b><b class="b2"></b><b class="b1"></b></div></body></html>
+</fieldset>
+</body></html>
 <!-- Foterr End -->';
 
 

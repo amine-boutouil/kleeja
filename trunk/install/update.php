@@ -258,14 +258,14 @@ case 'update_now':
 				echo '<img src="img/home.gif" alt="home" />&nbsp;<a href="../index.php">' . $lang['INDEX'] . '</a><br /><br />';
 				echo '<img src="img/adm.gif" alt="admin" />&nbsp;<a href="../admin.php">' . $lang['ADMINCP'] . '</a><br /><br />';
 				echo '' . $lang['INST_KLEEJADEVELOPERS'] . '<br /><br />';
-				echo '<a href="http://www.kleeja.com">www.kleeja.com</a><br /><br /></fieldset>';
+				echo '<a href="http://www.kleeja.com">www.kleeja.com</a><br /><br />';
 			}
 			else
 			{
 				echo '<br /><br /><span style="color:orange;"><a href="./update.php?step=action_file&' . getlang(1) . '">' . $lang['INST_UPDATE_SELECT_ONTHER_UPDATES']. '</span><br />';
 				echo '<br /><br /><img src="img/home.gif" alt="home" />&nbsp;<a href="../index.php">' . $lang['INDEX'] . '</a><br />';
 				echo '<img src="img/adm.gif" alt="admin" />&nbsp;<a href="../admin.php">' . $lang['ADMINCP'] . '</a><br /><br />';
-				echo '<br /><a href="http://www.kleeja.com">www.kleeja.com</a><br /><br /></fieldset>';	
+				echo '<br /><a href="http://www.kleeja.com">www.kleeja.com</a><br /><br />';	
 			}
 			
 		}

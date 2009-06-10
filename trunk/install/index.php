@@ -68,7 +68,7 @@ case 'language':
 	// show  language list ..
 	echo '<br />		
 	<div class="centery">
-		<fieldset>
+		<fieldset class="home">
 			<img src="img/map.gif" style="border:0" alt="al-Idrisi Map">
 			<br />
 			<form  action="' . $_SERVER['PHP_SELF'] . '?step=language&' . getlang(1) . '" method="post">
@@ -84,11 +84,11 @@ case 'language':
 
 break; // end case language
 case 'choose' :
-		echo '<fieldset><span style="color:green;">' . $lang['INST_CHOOSE_INSTALLER'] . '</span><br /><br /><br />';
+		echo '<fieldset class="home"><span style="color:green;">' . $lang['INST_CHOOSE_INSTALLER'] . '</span><br /><br /><br />';
 		echo '<a href="./install.php?' . getlang(1) . '"><img src="img/installer.gif" alt="installer" /><br />  ' . $lang['INST_INSTALL_CLEAN_VER'] . ' </a><br /><br />';
 		echo '<a href="./update.php?' . getlang(1) . '"><img src="img/updater.gif" alt="updater" /> <br /> ' . $lang['INST_UPDATE_P_VER'] . ' </a><br /><br /><br />';
 
-		echo '<a href="http://www.kleeja.com"><span style="color:black;">www.kleeja.com</span></a></fieldset><br /><br />';
+		echo '<a href="http://www.kleeja.com"><span style="color:black;">www.kleeja.com</span></a></fieldset>';
 
 break;
 

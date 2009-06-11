@@ -3,212 +3,51 @@
 # Designed by Tar3q .... Tar3q.com
 # copyright 2007-2009  ..
 */
-body {
-	background: #FFFFFF url(images/login/bg.jpg) repeat ;
-	font: normal small Tahoma, Arial, Helvetica, sans-serif;
-	color: #3D3D3D;
-	margin: 0 ;
-	padding: 0;
-}
-form { 
-	margin: 0; 
-	padding: 0; 
-}
-h1 {
-	margin: 15px 0; 
-	padding-bottom: 8px;
-	color: #0B55C4;
-	font: bold 18 Tahoma, Arial, Helvetica, sans-serif;	
-}
-p {
-	margin: 0;
-	padding: 0;
-	margin-bottom: 5px;
-}
-ul{
-	margin: 0 0 4px 0;
-	text-align: justify;
-	line-height: 26px;
-}
-a:link    { 
-	color: #0B55C4; 
-	text-decoration: none; 
-}
-a:visited { 
-	color: #0B55C4; 
-	text-decoration: none; 
-}
-a:hover   { 
-	text-decoration: underline; 
-}
-
-input:focus { 
-	background-color: #ffd ;
-}
-
-.h_header { 
-	height: 52px; 
-	background: url(images/login/headerbg.gif) repeat-x;
-	border-top: 5px #FC9113 solid;
-}
- .title {
-	font-size: 22px; 
-	font-weight: bold; 
-	color: #999; 
-	line-height: 44px;
-	padding-right: 30px;
-	padding-left: 30px;
-}
-#section-box .boxed  {
-	padding: 9px;
-}
-#section-box .boxed  form {
-	margin-left: 10px;
-}
-#section-box .boxed  fieldset {
-	border: none;
-}
-#section-box .boxed  legend {
-	display: none;
-}
-#section-box .boxed  label {
-	display: block;
-	font-size: xx-small;
-	font-weight: normal;
-}
-#section-box .textfield {
-	width: 148px;
-	margin: 2px 0 5px 0;
-	padding: 3px 5px;
-	border: 1px solid #C8C8C8;
-	font: normal x-small Verdana, Arial, Helvetica, sans-serif;
-	color: #464646;
-}
-#section-box .button {
-	width: 100px;
-    cursor: pointer;
-    vertical-align: middle;
-    padding: 2px;
-    font: normal 12px Tahoma, Helvetica, Arial, sans-serif;
-    border: 1px solid #BCBCBC;
-    background: #549CBF url(images/login/btn.gif) repeat left top;
-  	color: #444;
-}
-#section-box .button:hover { 
-	border: 1px solid #aaa; 
-	background: #BCBCBC url(images/login/hoverblue.gif) repeat left top;
-	color: #fff;
-}
-.backhome a {
-    font: bold 11px Tahoma, Helvetica, Arial, sans-serif;
-  	color: #0B55C4;
-	background-color: #E7F0FE;
-	padding: 3px 10px 3px 10px;
-	border-top: 1px dotted #0B55C4;
-	border-bottom: 1px dotted #0B55C4;	
-}
-.backhome a:hover {background-color: #FFF; border: 1px solid #0B55C4; text-decoration: none; }
-
-/* System Messages body */
+body {background: #FFFFFF ;font: normal small Tahoma, Arial, Helvetica, sans-serif;color: #3D3D3D;margin: 0 ;padding: 0;}
+form { margin: 0; padding: 0;}
+p {	padding: 0;margin-bottom: 5px;}
+ul{	margin: 0 0 4px 0;text-align: justify;line-height: 26px;}
+a:link { color: #0B55C4;text-decoration: none; }
+a:visited {color: #0B55C4;text-decoration: none;}
+a:hover   {text-decoration: underline;}
+input:focus {background-color: #ffd;}
+.h_header {height: 58px;	background: url(images/adm-body.jpg) repeat-x bottom;border-top: 5px #FC9113 solid;}
+.title {	font-size: 20px; font-weight: bold;color: #111;	padding: 3px 5px 7px 5px;border-bottom: 1px #CCCCCC dotted;}
+.backhome a {font: bold 11px Tahoma, Helvetica, Arial, sans-serif;color: #0B55C4;background-color: #E7F0FE;padding: 3px 10px 3px 10px;border-top: 1px dotted #0B55C4;border-bottom: 1px dotted #0B55C4;}
+.backhome a:hover {background-color: #FFF; border: 1px solid #0B55C4; text-decoration: none;}
+.clr {clear: both;overflow:hidden;height:0;}
+#section-box .boxed  {padding: 9px;background: #fff;}
+#section-box .boxed  form {margin-left: 10px;}
+#section-box .boxed  fieldset {border: none;}
+#section-box .boxed  legend {display: none;}
+#section-box .boxed  label {display: block;	font-size: xx-small;font-weight: normal;}
+#section-box .textfield {width: 148px;margin: 2px 0 5px 0;padding: 3px 5px;border: 1px solid #C8C8C8;font: normal x-small Verdana, Arial, Helvetica, sans-serif;color: #464646;}
+#section-box .button {width: 100px;cursor: pointer;vertical-align: middle;padding: 2px;font: normal 12px Tahoma, Helvetica, Arial, sans-serif;border: 1px solid #BCBCBC;background: #549CBF url(images/login/btn.gif) repeat left top;color: #444;}
+#section-box .button:hover {border: 1px solid #aaa;background: #BCBCBC url(images/login/hoverblue.gif) repeat left top;color: #fff;}
 #system-message    { margin: 2px 0px 10px 0px; padding: 0;}
 #system-message div { margin: 0; font-weight: bold; text-indent: 35px; }
-
-/* System Messages  error*/
-#system-message div.error ul { 
-list-style: none; 
-padding: 5px 10px 5px 10px; 
-background-color: #E6C0C0; 
-border-top: 3px solid #DE7A7B; 
-border-bottom: 3px solid #DE7A7B;
- }
-#system-message div.error ul li{ 
-color: #c00; 
-background: url(images/error.png) no-repeat right center ;
-}
-
-#footer {
-	position:relative; margin:0 auto; height:90px; clear:both;
-	background: #F4F4F4 url(images/login/footerbg.gif) repeat-x top; 
-}
-
-#footer .copyright { 
-	margin: 5px auto 0px auto; 
-	text-align: center; 
-	padding: 10px; 
-}
-#lock  {
-	background: url(images/login/lock.png) no-repeat;
-	width: 128px;
-	height: 140px;
-	float: left;
-	margin-left: 55px ;
-}
-#content-box .padding  { 
-	padding: 10px; 
-}
-#content-box .m {
-	padding: 10px;
-}
-#content-box .login {
-	margin: 10px auto 10px auto;
-	width: 500px; 
-}
-#content-box .klogo {   
-	background: url(images/login/logo.png) no-repeat top left;
-	width: 480px;
-	height: 57px;
-}
-
-#section-box  { 
-	float: right; 
-	width: 240px; 
-	margin-left: 10px;
-}
-.clr { 
-	clear: both; 
-	overflow:hidden; 
-	height: 0; 
-}
-#section-box .m {
-	padding: 5px;
-}
-
-div#element-box {
-	background: #fff;
-}
-div#element-box  div.m {
-	background: #FFF;
-}
-div#element-box div.t, div.b {
-	height: 6px;
-	padding: 0;
-	margin: 0;
-	overflow: hidden;
-}
-div#element-box div.m {
-	border-left: 1px solid #ccc;
-	border-right: 1px solid #ccc;
-	padding: 0 8px;
-}
-div#element-box div.m {
-	padding: 5px 10px;
-}
-
-div#element-box div.t {
-	background: url(images/login/j_border.png) 0 0 repeat-x;
-}
-div#element-box div.t div.t {
-   background: url(images/login/j_crn_tr_light.png) 100% 0 no-repeat;
-}
-div#element-box div.t div.t div.t {
-   background: url(images/login/j_crn_tl_light.png) 0 0 no-repeat;
-}
-div#element-box div.b {
-  background: url(images/login/j_border.png) 0 100% repeat-x;
-}
-div#element-box div.b div.b {
-   background: url(images/login/j_crn_br_light.png) 100% 0 no-repeat;
-}
-div#element-box div.b div.b div.b {
-   background: url(images/login/j_crn_bl_light.png) 0 0 no-repeat;
-}
+#system-message div.error ul {list-style: none;padding: 5px 10px 5px 10px;background-color: #E6C0C0; border-top: 3px solid #DE7A7B; border-bottom: 3px solid #DE7A7B; }
+#system-message div.error ul li{color: #c00;background: url(images/error.png) no-repeat right center;}
+#lock {background: url(images/login/lock.png) no-repeat;	width: 128px;height: 140px;float: left;margin-left: 40px;}
+#content-box  {margin: 15px 0 0 0}
+#content-box .padding  {padding: 10px;}
+#content-box .m {padding: 10px;}
+#content-box .m h1 {margin: 15px 0 0 0;padding-bottom: 8px;color: #0B55C4;font-size: 20px;font-weight: normal;}
+#content-box .login {margin: 22px auto 7px auto;width: 500px;}
+#klogo {	background: url(images/login/logo.png) no-repeat top left;width: 480px;	height: 57px;position:absolute; left:5px; top:35px;}
+#section-box  {float: right; width: 240px;margin-left: 10px;}
+#section-box .m {padding: 5px;}
+div#element-box {	background: #fff;}
+div#element-box  div.m {background: #fff url(images/login/bg.jpg) repeat;}
+div#element-box div.t, div.b {height: 6px;padding: 0;margin: 0;overflow: hidden;}
+div#element-box div.m {border-left: 1px solid #ccc;border-right: 1px solid #ccc;padding: 0 8px;}
+div#element-box div.m {padding: 5px 10px;}
+div#element-box div.t {background: url(images/login/j_border.png) 0 0 repeat-x;}
+div#element-box div.t div.t {background: url(images/login/j_crn_tr_light.png) 100% 0 no-repeat;}
+div#element-box div.t div.t div.t {background: url(images/login/j_crn_tl_light.png) 0 0 no-repeat;}
+div#element-box div.b {background: url(images/login/j_border.png) 0 100% repeat-x;}
+div#element-box div.b div.b {background: url(images/login/j_crn_br_light.png) 100% 0 no-repeat;}
+div#element-box div.b div.b div.b {background: url(images/login/j_crn_bl_light.png) 0 0 no-repeat;}
+#footer {position:relative; margin:0 auto; width: 500px;height:120%; clear:both; border: 1px solid #ccc;	background: #F4F4F4 ; -moz-border-radius: 10px; -webkit-border-radius: 10px;}
+#footer .copyright {	margin: 5px auto 0px auto;text-align: center;padding: 10px;}
+/* Powered by Kleeja .... Kleeja.com # Designed by Tar3q .... Tar3q.com  */

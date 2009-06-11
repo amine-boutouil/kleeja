@@ -191,15 +191,15 @@ input.button1, input.button3,input.button2 {
 
 /* body #System Messages  */
 #system-message { margin: 10px 0 5px 0 ; padding: 0;}
-#system-message div { margin: 0; font-weight: bold; text-indent: 35px; }
+#system-message div { margin: 0; font-weight: bold; text-indent: 2px; }
 /* body #System Messages  */
 
 /* System Messages  #info*/
 #system-message div.info ul { 
 	list-style: none; padding: 15px 8px 15px 8px; border-top: 3px solid #FEA53D; 
-	border-bottom: 3px solid #FEA53D; background-color: #EFE7B8;}
+	border-bottom: 3px solid #FEA53D; background-color: #EFE7B8}
 #system-message div.info  ul li { 
-	color:000; background: url(images/info.png) no-repeat right top ;}
+	color:000; background: url(images/info.png) no-repeat right top ;padding-right: 35px; }
 /* System Messages  #info*/
 
 /* System Messages  #error*/

@@ -292,8 +292,9 @@ function process ()
 						else
 						{
 							//real name of file
-							$this->filename2 = $this->filename . str_replace(' ', '-', $_FILES['file']['name'][$i]);
-							
+							$filename = substr(@$_FILES['file']['name'][$i], 0, -strlen($this->typet)-1);
+							$this->filename2 = $this->filename . preg_replace('/[,.?\/*&^\\\$%#@()_!|"\~\'><=+}{; ]/', '-', $filename) . '.' . $this->typet;
+							$this->filename2 = preg_replace('/-+/', '-', $this->filename2);
 							($hook = kleeja_run_hook('another_decode_type_kljuploader')) ? eval($hook) : null; //run hook
 						}
 						
@@ -425,7 +426,8 @@ function process ()
 								else
 								{
 									// real name of file
-									$this->filename2 = $this->filename . str_replace(' ', '-', $filename);
+									$this->filename2 = $this->filename . preg_replace('/[,.?\/*&^\\\$%#@()_!|"\~\'><=+}{; ]/', '-', $filename);
+									$this->filename2 = preg_replace('/-+/', '-', $this->filename2);
 									($hook = kleeja_run_hook('another_decode_type_kljuploader')) ? eval($hook) : null; //run hook
 								}
 								//end tashfer
@@ -532,7 +534,7 @@ function process ()
 
 				// sometime cant see file after uploading.. but ..
 				@chmod($folderee . '/' . $filname , 0755); //0755
-
+				
 				$name 	= (string)	$SQL->escape($filname);
 				$size	= (int) 	$sizeee;
 				$type 	= (string)	strtolower($SQL->escape($typeee));
@@ -554,7 +556,7 @@ function process ()
 				
 				$SQL->build($insert_query);
 				
-				$this->name_for_url  = $config['mod_writer'] == '1' ? str_replace('.', '-', $name) : $name;
+				$this->name_for_url  = ($config['mod_writer']) ? str_replace('.', '-', $name) : $name;
 				$this->id_for_url  = $SQL->insert_id();
 
 				//calculate stats ..s

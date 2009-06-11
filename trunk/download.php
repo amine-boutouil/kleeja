@@ -209,12 +209,11 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 						'SELECT'	=> 'f.id, f.name, f.folder, f.type',
 						'FROM'		=> "{$dbprefix}files f",
 						'WHERE'		=> ($is_id_filename) ? "f.name='" . $filename . "'" . 
-										(isset($_GET['downexf']) ? " AND f.type IN ('" . $config['livexts'] . "')" : '') : "f.id='" . $id . "'" . 
-										(isset($_GET['downex']) ? " AND f.type IN ('" . $config['livexts'] . "')" : ''),
+										(isset($_GET['downexf']) ? " AND f.type IN ('" . implode("', '", $livexts) . "')" : '') : "f.id='" . $id . "'" . 
+										(isset($_GET['downex']) ? " AND f.type IN ('" . implode("', '", $livexts) . "')" : ''),
 					);
 					
 		($hook = kleeja_run_hook('qr_down_go_page_filename')) ? eval($hook) : null; //run hook
-		
 		$result	= $SQL->build($query);
 		
 		$is_live = false;
@@ -282,7 +281,6 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 		if(!is_readable($path_file))
 		{
 			($hook = kleeja_run_hook('down_file_not_exists')) ? eval($hook) : null; //run hook
-			
 			big_error('----', 'Error - can not open file.');
 		}
 		
@@ -290,8 +288,7 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 		$name = rawurldecode($n);
 
 		//Figure out the MIME type (if not specified) 
-		$ext = explode('.', $path_file);
-		$ext = array_pop($ext);
+		$ext = array_pop(explode('.', $path_file));
 		$mime_type = get_mime_for_header($ext);
 		//turn off output buffering to decrease cpu usage
 		@ob_end_clean(); 

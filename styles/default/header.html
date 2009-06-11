@@ -18,29 +18,36 @@ var LANG_MORE_F_FILES ="{lang.MORE_F_FILES}";
 <div id="wrapper">
 <!-- start header -->
 <div id="logo"><a href="{config.siteurl}"><img src="{STYLE_PATH}images/logo.png" alt="{config.sitename}" style="border:0px" /></a></div>
+<div id="topnav_box">
+	<div id="topnav">
+		<ul>
+			<li class="current"><a href="{config.siteurl}">{index_name}</a></li>
+			<li><a href="{rules_url}">{rules_name}</a></li>
+			<li><a href="{guide_url}">{guide_name}</a></li>
+			<li><a href="{call_url}">{call_name}</a></li>
+		<IF NAME="config.allow_stat_pg">
+            <li><a alt="{stats_name}" href="{stats_url}">{stats_name}</a></li>
+        </IF>
+		</ul>					
+		<div class="clear"></div>		
+	</div>
+</div>
 
 <div id="header">
+
+
 	<div id="menu">
-	<a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}
-	</div>
-	
 	{extras.header}
-	
+	</div>
 </div>
+
+
 <!-- end header -->
-</div>
+
 <!-- start page -->
 <div id="page">
 <div id="sidebar">
                 <ul>
-                        <li><img src="{STYLE_PATH}images/index_button.gif" alt="{index_name}" />
-                        <a href="{config.siteurl}">{index_name}</a></li>
-                        <li><img src="{STYLE_PATH}images/guide_button.gif" alt="{guide_name}" />
-                        <a href="{guide_url}">{guide_name}</a></li>
-                        <li><img src="{STYLE_PATH}images/rules_button.gif" alt="{rules_name}" />
-                        <a href="{rules_url}">{rules_name}</a></li>
-                        <li><img src="{STYLE_PATH}images/call_button.gif" alt="{call_name}" />
-                        <a href="{call_url}">{call_name}</a></li>
                         <li><img src="{STYLE_PATH}images/log_button.gif" alt="{login_name}" />
                         <a href="{login_url}">{login_name}</a></li>
                         <li><img src="{STYLE_PATH}images/user_button.gif" alt="{usrcp_name}" />
@@ -52,10 +59,6 @@ var LANG_MORE_F_FILES ="{lang.MORE_F_FILES}";
                                 </IF>
                         <li><img src="{STYLE_PATH}images/filecp_button.gif" alt="{filecp_name}" />
                         <a href="{filecp_url}">{filecp_name}</a></li>
-                        </IF>
-                        <IF NAME="config.allow_stat_pg">
-                        <li><img src="{STYLE_PATH}images/stats_button.gif" alt="{stats_name}" />
-                        <a href="{stats_url}">{stats_name}</a></li>
                         </IF>
                         </ul>
                         

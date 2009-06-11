@@ -5,10 +5,9 @@
 */
 * {padding: 0; margin: 0;} 
 body {
-	margin: 0;	padding: 5px;
 	background: #FFFFFF url(images/background.jpg) top left no-repeat fixed;
 	font: bold 11px Tahoma, Arial, Helvetica, sans-serif; 
-	text-align: justify;color: #5C5C5C;border-top: 4px solid #355572;}
+	text-align: justify;color: #5C5C5C;border-top: 4px solid #D86800;}
 
 h1, h2, h3 {
 	margin: 0;
@@ -27,7 +26,7 @@ h2 {
 }
 
 p, ul, ol {
-	margin: 0 0 2em 0;
+	margin: 0;
 	text-align: justify;
 	line-height: 26px;
 }
@@ -64,6 +63,8 @@ img.right {
 	margin-left: 15px;
 }
 
+.clear {clear: both !important}
+
 /* Form */
 
 form {
@@ -77,16 +78,16 @@ input, textarea, select {
 }
 
 #wrapper {
-	width: 85%;
+	width: 100%;
 	height: 100%;
-	margin: 0 auto;
+margin: 0; 
 	padding: 0;
 }
 
 /* Header */
 
 #header {
-	width: 880px;
+	width: 850px;
 	margin: 0 auto;
 	height: 60px;
 }
@@ -94,12 +95,11 @@ input, textarea, select {
 /* Menu */
 
 #menu {
-	float: left;
-	width: 880px;
-
+	float: right;
+	width: 850px;
 	color: #FFFFFF;
-        padding: 5px;
-        margin-bottom:9px;
+    padding: 5px;
+    margin-bottom:9px;
 }
 
 #menu a {
@@ -120,59 +120,42 @@ input, textarea, select {
 /** LOGO */
 
 #logo {
- width: 370px; 
-height: 60px;
-float: right;
- margin: 20px ; 
- padding: 10px ;
-    border: 1px solid #355572; 
-
-	background: #F3F3F3 url(images/div-header.jpg) repeat-x; 
-	/* Generation CSS3 Only  Firefox and Safari :(  Tar3q   */
-		-moz-border-radius-topleft: 10px; 
-		-webkit-border-top-left-radius: 10px;
-		-moz-border-radius-bottomright: 10px; 
-		-webkit-border-bottom-right-radius: 10px;
-}
+	width: 430px; float: right; margin:0; padding: 10px 40px 10px 10px;
+    background: #F3F3F3 url(images/div-header.jpg) repeat-x; 
+	-moz-border-radius-topleft: 50px;-webkit-border-top-left-radius: 50px;
+	}
 
 #logo a {
-	margin: 0;
-	padding: 0px;
-	line-height: normal;
-}
+	margin: 0;padding: 0px;	line-height: normal;
+	text-decoration: none;color: #28313A; }
 
-#logo h1 { 
-	font-family: Georgia, "Times New Roman", Times, serif;
-	font-size:40px;
-}
+#logo a:hover { 
+	background: transparent; text-decoration: underline; }
 
-#logo h1 a {
-	text-decoration: none;
-	color: #28313A; 
-}
+.clr {clear: both;overflow:hidden;height:0;}
+	
+#topnav_box {width: 100%;height: 33px;margin:0;background: #FFA63C;text-align: center;float: left;padding:5px 0 5px 0;border-top:1px solid #FF7B00;border-bottom:1px solid #FF7B00;}
+#topnav {width: 850px;font-size: 11px;text-align: right;margin: auto}
+#topnav ul li {display: block;list-style-type: none;font-size: 11px;float: right;margin: 2px 0 2px 20px;text-align: center}
+#topnav ul li a {display: block; color: #363636;padding:2px 15px;text-align: center; -moz-border-radius: 5px;-webkit-border-radius:5px}
+#topnav ul li.special a {background-color:#848282; color:#fff}
+#topnav ul li.special a:hover {background-color: #444;color: white}
+#topnav ul li.special a:active {background: #fff; color:#547DA3}
+#topnav ul li a:hover {background-color: #FFF1E6; color: #B15500; text-decoration: none}
+#topnav ul li a:active {background: #fff}
 
-#logo a:hover { background: transparent; text-decoration: underline; }
 
-#logo h2 {
-	float: left;
-	padding: 65px 0 0 18px;
-	font: 18px Georgia, "Times New Roman", Times, serif;
-	color: #28313A; 
-}
 
-#logo p a {
-	text-decoration: none;
-	color: #28313A;
-}
-
-#logo p a:hover { text-decoration: underline; }
-
+#sidebar {float: right;width: 240px; margin:0;padding:10px;}
+#sidebar li {margin-bottom: 0px;}
+#sidebar ul {	margin: 0;padding: 0;list-style: none;}
+#sidebar li li {margin: 0;}
+#sidebar h2 {width: 250px;padding: 8px 0 0 0px;margin-bottom: 10px;background: url(images/img07.jpg) no-repeat left top;	font-size: 20px;color: #28313A; }
 
 
 /* Page */
-
 #page {
-	width: 880px;
+	width: 850px;
 	margin: 0 auto;
 }
 
@@ -180,45 +163,11 @@ float: right;
 
 #content {
 	float: left;
-	width: 620px;
+	width: 580px;
 	border-right: 1px dashed #DFE1E0;
 }
 
 
-
-/* Sidebar */
-
-#sidebar {
-	float: right;
-	width: 230px;
-	margin: 0;
-	padding: 0;
-}
-
-#sidebar li {
-	margin-bottom: 0px;
-}
-#sidebar ul {
-	margin: 0;
-	padding: 0;
-	list-style: none;
-}
-
-#sidebar li ul {
-}
-
-#sidebar li li {
-	margin: 0;
-}
-
-#sidebar h2 {
-	width: 250px;
-	padding: 8px 0 0 0px;
-	margin-bottom: 10px;
-	background: url(images/img07.jpg) no-repeat left top;
-	font-size: 20px;
-	color: #28313A; 
-}
 
 
 /* Footer */
@@ -227,7 +176,7 @@ float: right;
 
 #footer {
 	padding: 4px;
-	width: 880px;
+	width: 850px;
 	margin: 0 auto;
 	text-align: center;
 }
@@ -245,14 +194,13 @@ html>body #footer {
 #adminlink{ float:left; width:237px; height:62px; position:relative; margin:13px 0 0 0; background:url(images/icon2-nor.gif) 0 0 no-repeat;}
 #adminlink h2{width:90px; height:10px; display:block; position:absolute; left:114px; top:0px; margin:14px 0 5px 0px; font:bold 16px/14px arial, "Times New Roman", Times, serif; color:#666; z-index:1; text-transform:uppercase;}
 #adminlink p{width:130px; height:10px; display:block; position:absolute; font: bold 11px tahoma,verdana,arial,sans-serif; color:#2E5000; margin:34px 41px 0 0px; z-index:1; }
-#adminlink a{border: 1px solid #999999;text-decoration:none; display:block; width:237px; height:62px;}
+#adminlink a{text-decoration:none; display:block; width:237px; height:62px;}
 #adminlink a:hover{ border: 1px solid #999999;cursor: pointer;text-decoration:none; background:url(images/icon2-hover.gif) no-repeat 0 0;}
 
 
 /* box for some info */
 input {
         font-weight: normal;
-        cursor: pointer;
         vertical-align: middle;
         padding: 0 3px;
         font-size: 1.2em;

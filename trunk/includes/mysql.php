@@ -89,7 +89,6 @@ class SSQL
 				*/
                 function close()
 				{		
-				
 					if( $this->connect_id )
 					{
 						//
@@ -408,6 +407,7 @@ class SSQL
 					echo "<br /><br /><strong>Script: Kleeja <br /><a href='http://www.kleeja.com'>Kleeja Website</a></strong>";
 					echo '</b></div>';
 					echo '</body></html>';
+					@$this->close();
 					exit();
 				}
 				

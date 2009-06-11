@@ -100,18 +100,18 @@
 		while($row=$SQL->fetch_array($result))
 		{
 			//make new lovely arrays !!
-			$userfile =  $config['siteurl'] . ($config['mod_writer'] ? 'fileuser_' . $row['user'] . '.html' : 'ucp.php?go=fileuser&amp;id=' . $row['user']);
+			$userfile =  $config['siteurl'] . ($config['mod_writer'] ? 'fileuser-' . $row['user'] . '.html' : 'ucp.php?go=fileuser&amp;id=' . $row['user']);
 			
 			
-			$arr[]	= array('id' =>$row['id'],
-							'name' =>"<a href=\"./" . $row['folder'] . "/" . $row['name'] . "\" target=\"blank\">" . ($row['real_filename'] == '' ? $row['name'] : $row['real_filename']) . "</a>",
-							'size' =>Customfile_size($row['size']),
-							'ups' =>$row['uploads'],
+			$arr[]	= array('id' => $row['id'],
+							'name' => "<a href=\"./" . $row['folder'] . "/" . $row['name'] . "\" target=\"blank\">" . ($row['real_filename'] == '' ? $row['name'] : $row['real_filename']) . "</a>",
+							'size' => Customfile_size($row['size']),
+							'ups' => $row['uploads'],
 							'time' => date("d-m-Y H:a", $row['time']),
-							'type' =>$row['type'],
-							'folder' =>$row['folder'],
-							'report' =>($row['report'] > 4)? "<span style=\"color:red\"><big>" . $row['report'] . "</big></span>":$row['report'],
-							'user' =>($row['user'] == '-1') ? $lang['GUST'] :  '<a href="' . $userfile . '" target="_blank">' . $row['username'] . '</a>',
+							'type' => $row['type'],
+							'folder' => $row['folder'],
+							'report' => ($row['report'] > 4) ? "<span style=\"color:red\"><big>" . $row['report'] . "</big></span>":$row['report'],
+							'user' => ($row['user'] == '-1') ? $lang['GUST'] :  '<a href="' . $userfile . '" target="_blank">' . $row['username'] . '</a>',
 							'ip' 	=> '<a href="http://www.ripe.net/whois?form_type=simple&amp;full_query_string=&amp;searchtext=' . $row['user_ip'] . '&amp;do_search=Search" target="_new">' . $row['user_ip'] . '</a>',
 						);
 			//

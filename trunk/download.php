@@ -31,7 +31,7 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 					
 			if (isset($_GET['filename']))
 			{
-				$filename_l 	= (string) $SQL->escape($_GET['filename']);
+				$filename_l  = (string) $SQL->escape($_GET['filename']);
 				if(isset($_GET['x']))
 				{
 					$query['WHERE']	= "name='" . $filename_l . '.' . $SQL->escape($_GET['x']) . "'";
@@ -48,7 +48,7 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 			}
 
 			($hook = kleeja_run_hook('qr_download_id_filename')) ? eval($hook) : null; //run hook
-			$result	=	$SQL->build($query);
+			$result	= $SQL->build($query);
 			
 			if ($SQL->num_rows($result) != 0)
 			{
@@ -86,7 +86,7 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 							$url_filex	= ($config['mod_writer']) ? $config['siteurl'] . "downex-" . $id . ".html" : $config['siteurl'] . "download.php?downex=" . $id;
 						}
 						
-						redirect($url_filex,false);
+						redirect($url_filex, false);
 					}
 				}
 				
@@ -187,7 +187,7 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 		
 		if($is_id_filename)
 		{
-			($config['mod_writer']) ? $filename = (isset($_GET['downf']) && isset($_GET['x'])) ? $SQL->escape($_GET['downf']) . '.' . $SQL->escape($_GET['x']) : ((isset($_GET['imgf']) && isset($_GET['x'])) ? $SQL->escape($_GET['imgf']) . '.' . $SQL->escape($_GET['x']) : ((isset($_GET['thmbf']) && isset($_GET['x'])) ? $SQL->escape($_GET['thmbf']) . '.' . $SQL->escape($_GET['x']) : ((isset($_GET['downex']) && isset($_GET['x'])) ? $SQL->escape($_GET['downexf']) . '.' . $SQL->escape($_GET['x']) : null))) : $filename = (isset($_GET['downf'])) ? $SQL->escape($_GET['downf']) : ((isset($_GET['imgf'])) ? $SQL->escape($_GET['imgf']) : ((isset($_GET['thmbf'])) ? $SQL->escape($_GET['thmbf']) : ((isset($_GET['downexf'])) ? $SQL->escape($_GET['downexf']) : null)));
+			$filename = ($config['mod_writer']) ? (isset($_GET['downf']) && isset($_GET['x'])) ? $SQL->escape($_GET['downf']) . '.' . $SQL->escape($_GET['x']) : ((isset($_GET['imgf']) && isset($_GET['x'])) ? $SQL->escape($_GET['imgf']) . '.' . $SQL->escape($_GET['x']) : ((isset($_GET['thmbf']) && isset($_GET['x'])) ? $SQL->escape($_GET['thmbf']) . '.' . $SQL->escape($_GET['x']) : ((isset($_GET['downex']) && isset($_GET['x'])) ? $SQL->escape($_GET['downexf']) . '.' . $SQL->escape($_GET['x']) : null))) : $filename = (isset($_GET['downf'])) ? $SQL->escape($_GET['downf']) : ((isset($_GET['imgf'])) ? $SQL->escape($_GET['imgf']) : ((isset($_GET['thmbf'])) ? $SQL->escape($_GET['thmbf']) : ((isset($_GET['downexf'])) ? $SQL->escape($_GET['downexf']) : null)));
 		}
 		else
 		{
@@ -201,38 +201,29 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 		$is_ie8 = strpos($browser, 'msie 8.0') !== false ? true : false;
 		//is internet explore 6 ?
 		$is_ie6 = strpos($browser, 'msie 6.0') !== false ? true : false;
-		
-
-		//updates ups ..
-		$update_query = array(
-								'UPDATE'=> "{$dbprefix}files",
-								'SET'	=> 'uploads=uploads+1, last_down=' . time(),
-								'WHERE'	=> ($is_id_filename) ? "name='" . $filename . "'" : "id='" . $id . "'",
-							);
-
-
-		($hook = kleeja_run_hook('qr_update_no_uploads_down')) ? eval($hook) : null; //run hook
-				
-		if (!$SQL->build($update_query))
-		{
-			die($lang['CANT_UPDATE_SQL']);
-		}
 			
-		$livexts = explode(",",$config['livexts']);
+		$livexts = explode(",", $config['livexts']);
+		
 		//get info file
 		$query = array(
 						'SELECT'	=> 'f.id, f.name, f.folder, f.type',
 						'FROM'		=> "{$dbprefix}files f",
-						'WHERE'		=> ($is_id_filename) ? "name='" . $filename . "'" . ((isset($_GET['downexf'])) ? "AND f.type IN ('" . implode("', '", $livexts) . "')" : '') : "id='" . $id . "'" . ((isset($_GET['downex'])) ? "AND f.type IN ('" . implode("', '", $livexts) . "')" : ''),
+						'WHERE'		=> ($is_id_filename) ? "f.name='" . $filename . "'" . 
+										(isset($_GET['downexf']) ? " AND f.type IN ('" . $config['livexts'] . "')" : '') : "f.id='" . $id . "'" . 
+										(isset($_GET['downex']) ? " AND f.type IN ('" . $config['livexts'] . "')" : ''),
 					);
-						
-				
+					
 		($hook = kleeja_run_hook('qr_down_go_page_filename')) ? eval($hook) : null; //run hook
 		
 		$result	= $SQL->build($query);
-			
+		
+		$is_live = false;
+		$pre_ext = array_pop(@explode('.', $filename));
+		$is_image = in_array(strtolower(trim($pre_ext)), array('gif', 'jpg', 'jpeg', 'bmp', 'png', 'tiff', 'tif')) ? true : false; 
+
 		if ($SQL->num_rows($result) != 0)
 		{
+		
 			while($row=$SQL->fetch_array($result))
 			{
 				$ii = $row['id'];
@@ -246,6 +237,15 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 			}
 				
 			$SQL->freeresult($result);
+			
+			//updates ups ..
+			$update_query = array(
+									'UPDATE'=> "{$dbprefix}files",
+									'SET'	=> 'uploads=uploads+1, last_down=' . time(),
+									'WHERE'	=> ($is_id_filename) ? "name='" . $filename . "'" : "id='" . $id . "'",
+								);
+			($hook = kleeja_run_hook('qr_update_no_uploads_down')) ? eval($hook) : null; //run hook
+			$SQL->build($update_query);
 		}
 		else
 		{
@@ -253,14 +253,19 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 			if($is_image)
 			{
 				($hook = kleeja_run_hook('not_exists_qr_down_img')) ? eval($hook) : null; //run hook
-				header("Location: ./images/not_exists.jpg");
-				exit;
+				
+				$f = 'images';
+				$n = 'not_exists.jpg';
+				if(isset($_GET['thmb']) || isset($_GET['thmbf']))
+				{
+					unset($_GET['thmb'], $_GET['thmbf']);
+				}
 			}
 			else
 			{
-					//not exists file
-					($hook = kleeja_run_hook('not_exists_qr_down_file')) ? eval($hook) : null; //run hook
-					kleeja_err($lang['FILE_NO_FOUNDED']);
+				//not exists file
+				($hook = kleeja_run_hook('not_exists_qr_down_file')) ? eval($hook) : null; //run hook
+				kleeja_err($lang['FILE_NO_FOUNDED']);
 			}
 		}
 				
@@ -276,8 +281,9 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 		//start download ,,
 		if(!is_readable($path_file))
 		{
-			($hook = kleeja_run_hook('down_file_not_exists')) ? eval($hook) : null; //run hook	
-			die('Error, file not exists');
+			($hook = kleeja_run_hook('down_file_not_exists')) ? eval($hook) : null; //run hook
+			
+			big_error('----', 'Error - can not open file.');
 		}
 		
 		$size = filesize($path_file);
@@ -362,10 +368,10 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 		else
 		{
 			($hook = kleeja_run_hook('down_go_page_cant_op_file')) ? eval($hook) : null; //run hook
-			die('Error - can not open file.');
+			big_error('----', 'Error - can not open file.');
 		}
 
-
+		$SQL->close();
 		exit; // we doesnt need style
 }
 

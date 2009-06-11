@@ -12,20 +12,22 @@
 // security .. 
 define ( 'IN_INDEX' , true);
 
-if($_GET['go'] == 'login' || $_GET['go'] == 'logout' || $_GET['go'] == 'get_pass') 
+if(isset($_GET['go']))
 {
-	define ('IN_LOGIN' , true);
+	switch($_GET['go'])
+	{
+		case 'login': 
+			define ('IN_LOGINPAGE' , true);
+		case 'logout': case 'get_pass':
+			define ('IN_LOGIN' , true);
+		break;
+		case 'register':
+			define ('IN_REGISTER' , true);
+		break;
+	}
 }
 
-if($_GET['go'] == 'login') 
-{
-	define ('IN_LOGINPAGE' , true);
-}
 
-if($_GET['go'] == 'register') 
-{
-	define ('IN_REGISTER' , true);
-}
 
 //include imprtant file .. 
 include ('includes/common.php');
@@ -33,6 +35,11 @@ include ('includes/common.php');
 ($hook = kleeja_run_hook('begin_usrcp_page')) ? eval($hook) : null; //run hook
 
 //now we will navigate ;)
+if(!isset($_GET['go']))
+{
+	$_GET['go'] = null;	
+}
+
 switch ($_GET['go'])
 { 	
 	//
@@ -333,10 +340,10 @@ switch ($_GET['go'])
 			$Pager				= new SimplePager($perpage,$nums_rows,$currentPage);
 			$start				= $Pager->getStartRow();
 			
-			$your_fileuser		= $config['siteurl'] . ($config['mod_writer'] ? 'fileuser_' . $usrcp->id() . '.html' : 'ucp.php?go=fileuser&amp;id=' . $usrcp->id());
+			$your_fileuser		= $config['siteurl'] . ($config['mod_writer'] ? 'fileuser-' . $usrcp->id() . '.html' : 'ucp.php?go=fileuser&amp;id=' . $usrcp->id());
 			$filecp_link		= $user_id == $usrcp->id() ?  $config['siteurl'] . ($config['mod_writer'] ? 'filecp.html' : 'ucp.php?go=filecp') : false;
 			$total_pages		= $Pager->getTotalPages(); 
-			$linkgoto			= $config['mod_writer'] ? $config['siteurl'] . 'fileuser_' . $user_id : $config['siteurl'] . 'ucp.php?go=fileuser&amp;id=' . $user_id;
+			$linkgoto			= $config['mod_writer'] ? $config['siteurl'] . 'fileuser-' . $user_id : $config['siteurl'] . 'ucp.php?go=fileuser&amp;id=' . $user_id;
 			$page_nums			= $Pager->print_nums($linkgoto); 
 				
 			$no_results = false;

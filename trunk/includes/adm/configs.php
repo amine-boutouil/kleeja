@@ -80,7 +80,7 @@
 					$con['user_system'] = str_replace(array('2', '3', '4'), array('phpbb', 'vb', 'mysmartbb'), $con['user_system']);
 				}
 			
-				$authtypes .= '<option value="1"' . (($con['user_system']=='1') ? ' selected="selected"' : '') . '>' . $lang['NORMAL'] . '</option>' . "\n";
+				$authtypes .= '<option value="1"' . ($con['user_system']=='1' ? ' selected="selected"' : '') . '>' . $lang['NORMAL'] . '</option>' . "\n";
 				if ($dh = @opendir($root_path . 'includes/auth_integration'))
 				{
 						while (($file = readdir($dh)) !== false)
@@ -108,10 +108,15 @@
 				{
 					//-->
 					$new[$row['name']] = (isset($_POST[$row['name']])) ? $_POST[$row['name']] : $con[$row['name']];
-					//thmb_dims
+					
+					//save them as you want ..
 					if($row['name'] == 'thmb_dims')
 					{
 						$new['thmb_dims'] = intval($_POST['thmb_dim_w']) . '*' . intval($_POST['thmb_dim_h']);
+					}
+					else if($row['name'] == 'livexts')
+					{
+						$new['livexts'] = implode(',', array_map('trim', explode(',', $_POST['livexts'])));
 					}
 					
 					($hook = kleeja_run_hook('after_submit_adm_config')) ? eval($hook) : null; //run hook

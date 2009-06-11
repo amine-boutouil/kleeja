@@ -1132,20 +1132,22 @@ function kleeja_debug ()
 */
 function big_error ($error_title,  $msg_text)
 {
-		echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">';
-		echo '<html xmlns="http://www.w3.org/1999/xhtml">';
-		echo '<head>';
-		echo '<meta http-equiv="Content-Language" content="en-us" />';
-		echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />';
-		echo '<title>Error In Kleeja</title>';
-		echo '</head>';
-		echo '<body>';
-		echo '<p style="color: #FF0000;"><strong>Error In Kleeja : [<span  style="color: #800000;">&nbsp; ' . $error_title . ' </span>&nbsp;]</strong></p>';
-		echo '<div style="border: 1px dashed #808080;background-color: #FFF7F4; width: 70%;font-family:Tahoma">' . $msg_text . '</div>';
-		echo '<br /><a href="http://www.kleeja.com/">Kleeja Website</a>';
-		echo '</body>';
-		echo '</html>';
-		exit();
+	global $SQL; 
+	echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">';
+	echo '<html xmlns="http://www.w3.org/1999/xhtml">';
+	echo '<head>';
+	echo '<meta http-equiv="Content-Language" content="en-us" />';
+	echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />';
+	echo '<title>Error In Kleeja</title>';
+	echo '</head>';
+	echo '<body>';
+	echo '<p style="color: #FF0000;"><strong>Error In Kleeja : [<span  style="color: #800000;">&nbsp; ' . $error_title . ' </span>&nbsp;]</strong></p>';
+	echo '<div style="border: 1px dashed #808080;background-color: #FFF7F4; width: 70%;font-family:Tahoma">' . $msg_text . '</div>';
+	echo '<br /><a href="http://www.kleeja.com/">Kleeja Website</a>';
+	echo '</body>';
+	echo '</html>';
+	@$SQL->close();
+	exit();
 }
 
 

@@ -148,6 +148,11 @@ switch ($_GET['go'])
 				kleeja_info($lang['REGISTERED_BEFORE']);
 			}
 
+			//_post
+			$t_lname = isset($_POST['lname']) ? htmlspecialchars($_POST['lname']) : ''; 
+			$t_lpass = isset($_POST['lpass']) ? htmlspecialchars($_POST['lpass']) : ''; 
+			$t_lmail = isset($_POST['lmail']) ? htmlspecialchars($_POST['lmail']) : ''; 
+			
 			//no submit ! lets show form of register
 			if (!isset($_POST['submit']))
 			{
@@ -603,6 +608,9 @@ switch ($_GET['go'])
 				
 				kleeja_info($lang['LOGINED_BEFORE']);
 			}
+			
+			//_post
+			$t_rmail = isset($_POST['rmail']) ? htmlspecialchars($_POST['rmail']) : ''; 
 			
 			//no submit
 			if (!isset($_POST['submit']))

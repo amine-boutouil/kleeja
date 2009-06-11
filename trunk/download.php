@@ -153,14 +153,14 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 			}
 			
 			//if not from our site and the waiting page
-			$isset_down_h = (isset($_GET['downf']) && isset($_GET['x'])) ? 'downloadf-' . $_GET['downf'] . '-' . $_GET['x'] . '.html' : 'download' . $_GET['down'] . '.html';
+			$isset_down_h = (isset($_GET['downf']) && isset($_GET['x'])) ? 'downloadf-' . $_GET['downf'] . '-' . $_GET['x'] . '.html' : (isset($_GET['down']) ? 'download' . $_GET['down'] . '.html' : '');
 			$not_reffer = true;
 			if(strpos($_SERVER['HTTP_REFERER'], $isset_down_h) !== false)
 			{
 				$not_reffer = false;
 			}
 			
-			$isset_down = (isset($_GET['downf'])) ? 'download.php?filename=' . $_GET['downf'] : 'download.php?id=' . $_GET['down'];
+			$isset_down = (isset($_GET['downf'])) ? 'download.php?filename=' . $_GET['downf'] : (isset($_GET['down']) ? 'download.php?id=' . $_GET['down'] : '');
 			if(strpos($_SERVER['HTTP_REFERER'], $isset_down) !== false)
 			{
 				$not_reffer = false;

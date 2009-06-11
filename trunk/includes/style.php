@@ -41,7 +41,8 @@ if (!defined('IN_COMMON'))
 			$template_path = $style_path . $template_name . '.html';
 
 			//if template not found and default style is there and not admin tpl
-			if(!file_exists($template_path)) 
+			$is_tpl_exist = file_exists($template_path);
+			if(!$is_tpl_exist) 
 			{	
 				if(file_exists($style_path . 'depend_on.txt'))
 				{
@@ -50,6 +51,7 @@ if (!defined('IN_COMMON'))
 					if(file_exists($template_path_alternative))
 					{
 						$template_path = $template_path_alternative;
+						$is_tpl_exist = true;
 					}
 				}
 				else if($config['style'] != 'default' && !$is_admin_template)
@@ -58,12 +60,14 @@ if (!defined('IN_COMMON'))
 					if(file_exists($template_path_alternative))
 					{
 						$template_path = $template_path_alternative;
+						$is_tpl_exist = true;
 					}
 				}
-				else
-				{
-					big_error('No Template !', 'Requested "' . $template_path . '" template doesnt exists or an empty !! ');
-				}
+			}
+			
+			if(!$is_tpl_exist)
+			{
+				big_error('No Template !', 'Requested "' . $template_path . '" template doesnt exists or an empty !! ');
 			}
 			
 			$this->HTML = file_get_contents($template_path);

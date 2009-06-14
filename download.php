@@ -62,7 +62,7 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 				$fname	 	= $name;
 				$fname2 	= str_replace('.', '-', htmlspecialchars($name));
 				$name 		= $real_filename != '' ? str_replace('.' . $type, '', htmlspecialchars($real_filename)) : $name;
-				$filename	= (strlen($name) > 320) ? substr($name, 0, 320) . '...' : $name;
+				$filename	= (strlen($name) > 70) ? substr($name, 0, 70) . '...' : $name;
 				
 				if (isset($_GET['filename']))
 				{

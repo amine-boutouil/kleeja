@@ -398,7 +398,7 @@ function process ()
 				for($i=0;$i<$this->filesnum;$i++)
 				{
 
-								$filename 			= basename($_POST['file'][$i]);
+								$filename 			= (isset($_POST['file'][$i])) ? basename($_POST['file'][$i]) : '';
 								$this->filename2	= explode(".", $filename);
 								
 								

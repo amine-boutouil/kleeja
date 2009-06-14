@@ -125,19 +125,15 @@ margin: 0;
 	-moz-border-radius-topleft: 50px;-webkit-border-top-left-radius: 50px;
 	}
 
-#logo a {
-	margin: 0;padding: 0px;	line-height: normal;
-	text-decoration: none;color: #28313A; }
 
-#logo a:hover { 
-	background: transparent; text-decoration: underline; }
 
 .clr {clear: both;overflow:hidden;height:0;}
-	
+
+/**  start The main menu at the top */	
 #topnav_box {width: 100%;height: 33px;margin:0;background: #FFA63C;text-align: center;float: left;padding:5px 0 5px 0;border-top:1px solid #FF7B00;border-bottom:1px solid #FF7B00;}
 #topnav {width: 850px;font-size: 11px;text-align: right;margin: auto}
 #topnav ul li {display: block;list-style-type: none;font-size: 11px;float: right;margin: 2px 0 2px 20px;text-align: center}
-#topnav ul li a {display: block; color: #363636;padding:2px 15px;text-align: center; -moz-border-radius: 5px;-webkit-border-radius:5px}
+#topnav ul li a {border:1px solid #FF7B00;display: block; color: #363636;padding:2px 15px;text-align: center; -moz-border-radius: 5px;-webkit-border-radius:5px}
 #topnav ul li.special a {background-color:#848282; color:#fff}
 #topnav ul li.special a:hover {background-color: #444;color: white}
 #topnav ul li.special a:active {background: #fff; color:#547DA3}
@@ -146,17 +142,15 @@ margin: 0;
 
 
 
-#sidebar {float: right;width: 240px; margin:0;padding:10px;}
-#sidebar li {margin-bottom: 0px;}
-#sidebar ul {	margin: 0;padding: 0;list-style: none;}
-#sidebar li li {margin: 0;}
+#sidebar {width: 240px; margin:0;padding:10px;}
+#sidebar ul {float: right; margin: 0;padding: 0;list-style: none;}
+#sidebar li {margin: 0;}
 #sidebar h2 {width: 250px;padding: 8px 0 0 0px;margin-bottom: 10px;background: url(images/img07.jpg) no-repeat left top;	font-size: 20px;color: #28313A; }
 
 
 /* Page */
 #page {
 	width: 850px;
-	margin: 0 auto;
 }
 
 /* Content */
@@ -190,7 +184,7 @@ html>body #footer {
 }
 
 /* Option to control panel */
-#adminPan{float:left;width:250px; height:60px;  position:absolute; left:15px; bottom:30px; margin:0 auto; padding:0;}
+#adminPan{float:left;width:250px; height:60px;  position:absolute; left:15px; top:0px; margin:0 auto; padding:0;}
 #adminlink{ float:left; width:237px; height:62px; position:relative; margin:13px 0 0 0; background:url(images/icon2-nor.gif) 0 0 no-repeat;}
 #adminlink h2{width:90px; height:10px; display:block; position:absolute; left:114px; top:0px; margin:14px 0 5px 0px; font:bold 16px/14px arial, "Times New Roman", Times, serif; color:#666; z-index:1; text-transform:uppercase;}
 #adminlink p{width:130px; height:10px; display:block; position:absolute; font: bold 11px tahoma,verdana,arial,sans-serif; color:#2E5000; margin:34px 41px 0 0px; z-index:1; }

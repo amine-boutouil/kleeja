@@ -157,22 +157,7 @@
 	{
 		$go_to = 'start';
 	}
-	
-
-	
-	//get it 
-	if (file_exists($path_adm . '/' . $go_to . '.php'))	
-	{
-		($hook = kleeja_run_hook("require_admin_page_begin_{$go_to}")) ? eval($hook) : null; //run hook 
-		include_once ($path_adm . '/' . $go_to . '.php');
-		($hook = kleeja_run_hook("require_admin_page_end_{$go_to}")) ? eval($hook) : null; //run hook 
-	}
-	else
-	{
-		big_error('In Loading !', 'ERROR IN LOADING ADMIN EXTENSION ! -> [' . $go_to . ']');
-	}
-	
-	
+		
 	//make array for menu 
 	$adm_extensions_menu	=	array();
 	
@@ -200,6 +185,19 @@
 	
 	}
 	
+	
+	
+	//get it 
+	if (file_exists($path_adm . '/' . $go_to . '.php'))	
+	{
+		($hook = kleeja_run_hook("require_admin_page_begin_{$go_to}")) ? eval($hook) : null; //run hook 
+		include_once ($path_adm . '/' . $go_to . '.php');
+		($hook = kleeja_run_hook("require_admin_page_end_{$go_to}")) ? eval($hook) : null; //run hook 
+	}
+	else
+	{
+		big_error('In Loading !', 'ERROR IN LOADING ADMIN EXTENSION ! -> [' . $go_to . ']');
+	}
 	
 	($hook = kleeja_run_hook('end_admin_page')) ? eval($hook) : null; //run hook 
 	

@@ -375,7 +375,7 @@ switch ($_GET['go'])
 					
 					//make new lovely arrays !!
 					$arr[] = array(	'id'		=> $row['id'],
-									'name'		=> '<a href="' . $url . '" target="blank">' . (empty($row['real_filename']) ? $row['name'] : $row['real_filename']) . '</a>',
+									'name'		=> '<a title="' . ($row['real_filename'] == '' ? $row['name'] : $row['real_filename']) . '"  href="' . $url . '" target="blank">' . ($row['real_filename'] == '' ? ((strlen($row['name']) > 40) ? substr($row['name'], 0, 40) . '...' : $row['name']) : ((strlen($row['real_filename']) > 40) ? substr($row['real_filename'], 0, 40) . '...' : $row['real_filename'])) . '</a>',
 									'icon_link'	=>(file_exists("images/filetypes/".  $row['type'] . ".gif"))? "images/filetypes/" . $row['type'] . ".gif" : 'images/filetypes/file.gif',
 									'file_type'	=> $row['type'],
 									'image_path'=> $is_image ? $url : '',
@@ -448,7 +448,7 @@ switch ($_GET['go'])
 					$url = ($is_image) ? kleeja_get_link('image', $file_info) : kleeja_get_link('file', $file_info);
 					//make new lovely arrays !!
 					$arr[] = array(	'id'	=> $row['id'],
-									'name'	=> '<a href="' .  $url . '" target="blank">' . (empty($row['real_filename']) ? $row['name'] : $row['real_filename']) . '</a>',
+									'name'	=> '<a title="' . ($row['real_filename'] == '' ? $row['name'] : $row['real_filename']) . '" href="' .  $url . '" target="blank">' . ($row['real_filename'] == '' ? ((strlen($row['name']) > 40) ? substr($row['name'], 0, 40) . '...' : $row['name']) : ((strlen($row['real_filename']) > 40) ? substr($row['real_filename'], 0, 40) . '...' : $row['real_filename'])) . '</a>',
 								);
 							
 						//when submit !!

@@ -104,7 +104,7 @@
 			
 			
 			$arr[]	= array('id' => $row['id'],
-							'name' => "<a href=\"./" . $row['folder'] . "/" . $row['name'] . "\" target=\"blank\">" . ($row['real_filename'] == '' ? $row['name'] : $row['real_filename']) . "</a>",
+							'name' => "<a title=\" " . ($row['real_filename'] == '' ? $row['name'] : $row['real_filename']) . "\" href=\"./" . $row['folder'] . "/" . $row['name'] . "\" target=\"blank\">" . ($row['real_filename'] == '' ? ((strlen($row['name']) > 40) ? substr($row['name'], 0, 40) . '...' : $row['name']) : ((strlen($row['real_filename']) > 40) ? substr($row['real_filename'], 0, 40) . '...' : $row['real_filename'])) . "</a>",
 							'size' => Customfile_size($row['size']),
 							'ups' => $row['uploads'],
 							'time' => date("d-m-Y H:a", $row['time']),

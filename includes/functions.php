@@ -865,14 +865,15 @@ function kleeja_err($msg, $title='', $exit=true)
 */
 function kleeja_admin_err($msg, $navigation=true, $title='', $exit=true)
 {
-	global $text, $tpl, $SHOW_LIST, $adm_extensions, $adm_extensions_menu, $STYLE_PATH_ADMIN, $lang;
+	global $text, $tpl, $SHOW_LIST, $adm_extensions, $adm_extensions_menu, $STYLE_PATH_ADMIN, $lang, $olang;
 	
 	($hook = kleeja_run_hook('kleeja_admin_err_func')) ? eval($hook) : null; //run hook
 				
 	// assign {text} in err template
 	$text	= $msg;
 	$SHOW_LIST	= $navigation;
-	
+	$adm_extensions_menu = $adm_extensions_menu;
+	/*
 	//get adm extensions
 	if($SHOW_LIST)
 	{
@@ -912,7 +913,7 @@ function kleeja_admin_err($msg, $navigation=true, $title='', $exit=true)
 											'confirm'	=> (@in_array($m, $ext_confirm)) ? true : false,
 											);
 		}
-	}
+	}*/
 	//header
 	echo $tpl->display("admin_header");
 	//show tpl

@@ -25,7 +25,7 @@
 		$files_number 		= $stat_files ;
 		$files_sizes 		= Customfile_size($stat_sizes);
 		$users_number 		= $stat_users;
-		$last_file_up		= $stat_last_file;
+		$last_file_up		= (strlen($stat_last_file) > 25) ? substr($stat_last_file, 0, 25) . '...' : $stat_last_file;
 		$last_del_fles 		= date("d-m-Y h:i a", $stat_last_f_del);
 		$php_version 		= 'php ' . phpversion();
 		$mysql_version 		= 'MYSQL ' . $SQL->mysql_version;

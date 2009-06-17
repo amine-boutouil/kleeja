@@ -1,0 +1,240 @@
+﻿/*
+# Powered by Kleeja .... Kleeja.com
+# Designed by Tar3q .... Tar3q.com
+# copyright 2007-2009  ..
+*/
+
+img.left {float: left;margin-right: 15px;}
+img.right {float: right;margin-left: 15px;}
+
+.clear {clear: both !important}
+
+/* Form */
+
+
+
+#wrapper {width: 100%;height: 100%;margin: 0;padding: 0;}
+
+/* Header */
+
+#extras_header { margin: 0 auto; padding: 5px;}
+
+/* Menu */
+
+
+
+/** LOGO */
+
+#logobody {float: right;width: 100%;margin:0; padding:0;background: #FFF;}
+#logobody .logo{width: 50%;  margin:0; padding: 10px 40px 10px 10px;	}
+#logobody .logo a:link ,.logo a:visited ,.logo a:hover ,.logo a:active{background-color: transparent;}
+
+.clr {clear: both;overflow:hidden;height:0;}
+
+/**  start The main menu at the top **/	
+#topnav_box {width: 100%;height: 43px;margin:0;line-height:43px;  
+background: #FF8901 url(../images/bg_topnav.jpg) repeat-x left top;
+text-align: center;float: left;	padding:0;}
+#topnav_box .topnav_right {width: 86px;float:right;margin: auto}
+#topnav {width: 850px;font-size: 11px;text-align: right;margin: auto}
+#topnav ul li {display: block;list-style-type: none;font-size: 11px;float: right;
+			margin: 7px 0 2px 20px;text-align: center}
+#topnav ul li a {background: url(../images/topnav.png) repeat-x left top;display: block; color: #fff;padding:2px 15px;
+			text-align: center;-moz-border-radius: 5px;-webkit-border-radius:5px}
+#topnav ul li.special a {background-color:#848282; color:#fff}
+#topnav ul li.special a:hover {background-color: #444;color: white}
+#topnav ul li.special a:active {background: #fff; color:#547DA3}
+#topnav ul li a:hover {background-color: #FFF1E6; color: #B15500; text-decoration: none}
+#topnav ul li a:active {background: #fff}
+/**  # Eend  **/	
+
+
+
+
+
+/* Page */
+#page {	width: 100%;margin: 0 auto;}
+
+/* Content */
+
+#content {float: left;width: 70%;}
+
+
+/* Footer */
+
+#footer {width: 100%;margin: 0 auto; position:fixed; left:0px; bottom:0px;padding: 4px; text-align: center;
+		color:#666;}
+#footer a {color:#666;}
+#footer a:link{color:#666;}
+#footer a:hover{color:#fff;background:#000}
+
+html>body #footer {height: auto;}
+
+#footer p {font-size: 12px;}
+
+
+/*start Option to control panel */
+#adminPan{float:right;width:250px; height:60px;  position:absolute; right:10px; bottom:100px; 
+			margin:0 auto; padding:0;}
+#adminlink{ float:left; width:237px; height:62px; position:relative; margin:13px 0 0 0; 
+			background:url(../images/icon2-nor.gif) 0 0 no-repeat;}
+#adminlink h2{width:90px; height:10px; display:block; position:absolute; left:114px; top:0px; 
+			margin:14px 0 5px 0px; font:bold 16px/14px arial, "Times New Roman", Times, serif; 
+			color:#666; z-index:1; text-transform:uppercase;}
+#adminlink p{width:130px; height:10px; display:block; position:absolute; z-index:1;
+			font: bold 11px tahoma,verdana,arial,sans-serif; color:#2E5000; margin:34px 41px 0 0px;}
+#adminlink a{text-decoration:none; display:block; width:237px; height:62px;}
+#adminlink a:hover{ border: 1px solid #999999;cursor: pointer;text-decoration:none; 
+			background:url(../images/icon2-hover.gif) no-repeat 0 0;}
+
+
+/* box for some info */
+
+
+.err {padding: 5px;background-color: #FFEBE9;border: 1.5px solid #DD3F0E;margin: 10px 10px;
+        font-size: 13px;font-family: "Tahoma", Times, serif;}
+.info {padding: 5px;background-color: #FFFFE6;border: 1.5px solid #E2EE0B;margin: 10px 10px;
+		font-size: 13px;font-family: "Tahoma", Times, serif;
+}
+.result {padding: 5px;background-color: #FFFFE6; border: 1.5px solid #E2EE0B;
+        margin: 10px 10px;font-size: 13px; font-family: "Tahoma", Times, serif;
+}
+
+/* box for some info */
+.daaf {background-color: #FFFFD7;border: 2px solid #999999; padding: 5px; margin:0 auto;
+        line-height: 1.5em;overflow: hidden;width:60%}
+		
+
+/*
+dont remove it  start
+*/
+div#loadbox {padding: 10px;display: none;}
+
+div#texttype {display: none;}
+
+
+/*boxes after uploading : see kljuploder.php for more details*/
+/*all boxes will take this class*/
+.all_boxes{width: 500px;height: 50px;}
+/* delete code box */
+.del_box {
+
+}
+/* thumb box */
+.thumb_box {
+
+}
+/* image link box */
+.img_box {
+
+}
+/* image bbcode box */
+.img_bbc_box {
+
+}
+/* file link box */
+.file_box {
+
+}
+/* file bbcode box */
+.file_bbc_box {
+
+}
+
+/*thumb after uploading <img>, and <div> tags*/
+.thumb_img_tag{	width:100px; height:100px}
+.thumb_div_tag {	text-align:center;}
+
+
+#right_menu{ width:20%;
+height:auto;
+float:right;
+padding:5px 0px 5px 10px;
+margin: 5px 30px 0px 0px;
+}
+#right_menu .list{ margin-left:16px;
+width: 180px;
+}
+#right_menu .list ul{ padding: 0;
+margin: 0;
+list-style-type: none;
+}
+
+#right_menu .list span{background:url(../images/menu_right_top.png) no-repeat;
+height:36px;
+width:160px;
+display:block;
+padding:0px 10px;
+line-height:35px;
+font-weight:bold;
+text-align:left;
+color: #000;border-bottom: 1px solid #666;
+}
+#right_menu .list b{background:url(../images/menu_right_bottom.png) no-repeat;
+height:37px;
+width:160px;
+display:block;
+padding:0px 10px;
+font-weight:bold;
+color: #F1F7E1;
+}
+#right_menu .list img{
+padding:0px 0px 0px 5px;
+}
+#right_menu .list a{background-color:#767676;
+font: bold 11px tahoma;
+padding: 5px 10px;
+display: block;
+width: 160px;
+color: #fff;
+text-decoration: none;
+border-bottom: 1px solid #666;
+}
+
+#right_menu .list a:hover{ color: #111;background-color:#FFA63C;
+}
+#right_menu .list a:active {background: #fff}
+
+#title-x {
+	float:left;
+	width: 100%;
+	height: 20px;
+
+	color: #000;
+	padding: 0 ;
+    margin:5px ;
+
+}
+#title-x b {
+   	padding: 5px 20px;
+font-size: 20px;
+}
+#title-x a {
+	color:#D86800;
+
+}
+
+#title-x a:hover { 
+		color: #000;background-color: transparent;
+}
+
+#title-x .current_page_item a {
+	color: #785;
+}
+.row1, td.row1 , tr.row1 , b.row1{ 
+ width: 25%;
+	background:#FBF3E6;
+	color: #333;
+font: bold 11px tahoma,Verdana, Helvetica, sans-serif;
+	padding: 5px;
+	border: 1px solid#F5D0A1;
+
+}
+.row2, td.row2, tr.row2 , b.row2{ 
+    width: 50%;
+	background:#FBF3E6;
+	color: #333;
+	padding: 5px;
+font: bold 11px tahoma,Verdana, Helvetica, sans-serif;
+	border: 1px solid#F5D0A1;
+}

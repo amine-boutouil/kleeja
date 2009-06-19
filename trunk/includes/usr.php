@@ -82,7 +82,7 @@ class usrcp
 					$query = array(
 								'SELECT'	=> '*',
 								'FROM'		=> "`{$dbprefix}users`",
-								'WHERE'		=> "name='". $SQL->escape($name) . "' AND password='$pass'"
+								'WHERE'		=> "clean_name='". $SQL->escape($this->cleanusername($name)) . "' AND password='$pass'"
 								);
 								
 					($hook = kleeja_run_hook('qr_select_usrdata_n_usr_class')) ? eval($hook) : null; //run hook			
@@ -278,6 +278,76 @@ class usrcp
 					unset($_SESSION['ADMINLOGIN']);
 					unset($_SESSION['LAST_VISIT']);
 					return true;
+				}
+				
+				//clean nicknames
+				function cleanusername ($uname) 
+				{
+					$clean_chars = array(
+					'أ' => 'ا',
+					'إ' => 'ا',
+					'ؤ' => 'و',
+					'ـ' => '',
+					'ً' => '',
+					'ٌ' => '',
+					'ُ' => '',
+					'َ' => '',
+					'ِ' => '',
+					'ْ' => '',
+					'آ' => 'ا',
+					'á'=> 'a',
+					'à'=> 'a',
+					'â'=> 'a',
+					'ã'=> 'a',
+					'ª'=> 'a',
+					'Á'=> 'a',
+					'À'=> 'a',
+					'Â'=> 'a',
+					'Ã'=> 'a',
+					'é'=> 'e',
+					'è'=> 'e',
+					'ê'=> 'e',
+					'É'=> 'e',
+					'È'=> 'e',
+					'Ê'=> 'e',
+					'í'=> 'i',
+					'ì'=> 'i',
+					'î'=> 'i',
+					'Í'=> 'i', 
+					'Ì'=> 'i',
+					'Î'=> 'i',
+					'ò'=> 'o',
+					'ó'=> 'o',
+					'ô'=> 'o',
+					'õ'=> 'o',
+					'º'=> 'o',
+					'Ó'=> 'o',
+					'Ò'=> 'o',
+					'Ô'=> 'o',
+					'Õ'=> 'o',
+					'ú'=> 'u',
+					'ù'=> 'u',
+					'û'=> 'u',
+					'Ú'=> 'u',
+					'Ù'=> 'u',
+					'Û'=> 'u',
+					'ç'=> 'c',
+					'Ç'=> 'c',
+					'Ñ'=> 'n',
+					'ñ'=> 'n',
+					'ÿ' => 'y',
+					'Ë' => 'e',
+					'Ø' => 'o',
+					'Å' => 'a',
+					'å' => 'a',
+					'ï' => 'i',
+					'Ï' => 'i',
+					'ø' => 'o',
+					'ë' => 'e',
+					);
+    				$uname = str_replace(array_keys($clean_chars), array_values($clean_chars), $uname);
+    				$uname = strtolower($uname);
+    				return $uname;
 				}
 }#end class
 

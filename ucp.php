@@ -192,7 +192,7 @@ switch ($_GET['go'])
 						{
 							$ERRORS[] = $lang['WRONG_VERTY_CODE'];
 						}
-						else if ($SQL->num_rows($SQL->query("SELECT * FROM `{$dbprefix}users` WHERE name='" . trim($SQL->escape($_POST["lname"])) . "'")) !=0 )
+						else if ($SQL->num_rows($SQL->query("SELECT * FROM `{$dbprefix}users` WHERE clean_name='" . trim($SQL->escape($usrcp->cleanusername($_POST["lname"]))) . "'")) !=0 )
 						{
 							$ERRORS[] = $lang['EXIST_NAME'];
 						}
@@ -208,10 +208,11 @@ switch ($_GET['go'])
 							$pass			= (string) md5($SQL->escape(trim($_POST['lpass'])));
 							$mail			= (string) trim($_POST['lmail']);
 							$session_id		= (string) session_id();
+							$clean_name		= $usrcp->cleanusername($name);
 							
-							$insert_query	= array('INSERT'	=> 'name ,password ,mail,admin, session_id',
+							$insert_query	= array('INSERT'	=> 'name ,password ,mail,admin, session_id, clean_name',
 													'INTO'		=> "{$dbprefix}users",
-													'VALUES'	=> "'$name', '$pass', '$mail','0','$session_id'"
+													'VALUES'	=> "'$name', '$pass', '$mail','0','$session_id','$clean_name'"
 												);
 							
 							($hook = kleeja_run_hook('qr_insert_new_user_register')) ? eval($hook) : null; //run hook

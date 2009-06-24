@@ -94,7 +94,7 @@
 			{
 				$ERRORS[] = $lang['WRONG_NAME'];
 			}
-			else if ($SQL->num_rows($SQL->query("SELECT * FROM `{$dbprefix}users` WHERE name='" . trim($SQL->escape($_POST["lname"])) . "'")) !=0 )
+			else if ($SQL->num_rows($SQL->query("SELECT * FROM `{$dbprefix}users` WHERE clean_name='" . trim($SQL->escape($usrcp->cleanusername($_POST["lname"]))) . "'")) !=0 )
 			{
 				$ERRORS[] = $lang['EXIST_NAME'];
 			}
@@ -109,10 +109,11 @@
 				$name			= (string) $SQL->escape(trim($_POST['lname']));
 				$pass			= (string) md5($SQL->escape(trim($_POST['lpass'])));
 				$mail			= (string) trim($_POST['lmail']);
+				$clean_name		= $usrcp->cleanusername($name);
 										
-				$insert_query	= array('INSERT'	=> 'name ,password ,mail,admin, session_id',
+				$insert_query	= array('INSERT'	=> 'name ,password ,mail,admin, session_id, clean_name',
 													'INTO'		=> "{$dbprefix}users",
-													'VALUES'	=> "'$name', '$pass', '$mail','0',''"
+													'VALUES'	=> "'$name', '$pass', '$mail','0','','$clean_name'"
 												);
 				if ($SQL->build($insert_query))
 				{
@@ -223,7 +224,8 @@
 										'SET'		=> 	"name = '" . $SQL->escape($name[$row['id']]) . "',
 														mail = '" . $SQL->escape($mail[$row['id']]) . "',
 														" . $pass[$row['id']] . "
-														admin = '" . intval($admin[$row['id']]) . "'",
+														admin = '" . intval($admin[$row['id']]) . "',
+														clean_name = '" . $SQL->escape($usrcp->cleanusername($name[$row['id']])) . "'",
 										'WHERE'		=>	"id=" . $row['id']
 									);
 

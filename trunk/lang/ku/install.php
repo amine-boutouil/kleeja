@@ -83,7 +83,8 @@
 	$lang['INST_NOTE_RC2_TO_RC3']				= 'ده‌بێت هه‌ستیت به‌ گۆڕینی په‌ڕگه‌ کۆنه‌کانی سکریپته‌که‌ به‌نوێیه‌که‌ نه‌ک ته‌نها به‌کارهێنانی ئه‌م کرداره‌...';
 	$lang['INST_NOTE_RC4_TO_RC5']				= 'ده‌بێت هه‌ستیت به‌گۆڕینی په‌ڕگه‌ کۆنه‌کانی سکریپته‌که‌ به‌نوێیه‌که بۆ نوێکردنه‌وه‌ به‌شێوه‌یه‌کی دروست!.';
 	$lang['INST_NOTE_RC5_TO_RC6']				= 'ده‌بێت هه‌ستیت به‌گۆڕینی په‌ڕگه‌ کۆنه‌کانی سکریپته‌که‌ به‌نوێیه‌که بۆ نوێکردنه‌وه‌ به‌شێوه‌یه‌کی دروست!.';
-	
+	$lang['INST_NOTE_RC6_TO_1.0.0']				= 'ده‌بێت هه‌ستیت به‌گۆڕینی په‌ڕگه‌ کۆنه‌کانی سکریپته‌که‌ به‌نوێیه‌که بۆ نوێکردنه‌وه‌ به‌شێوه‌یه‌کی دروست!.';
+	$lang['RC6_1_CNV_CLEAN_NAMES']					= 'Cleaning every username ...';
 	$lang['INST_UPDATE_IS_FINISH']				= "نوێکردنه‌وه‌ کۆتای هات.. ده‌توانیت ئێستا بوخچه‌ی <br/><b>INSTALL</b><br/> بسڕیته‌وه‌ و به‌رده‌وام بیت له‌کاره‌کانت به‌کلیجا ..";
 	$lang['IN_INFO']							= 'Fill in the fields below if you want to integrate kleeja with your script . Ignore this step if you do not wish to do it<br /><span style="color:red;">you should change user system from admin cp after installing kleeja</span>';
 	$lang['IN_PATH']							= 'Path of script';

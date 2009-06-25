@@ -42,7 +42,68 @@ $update_notes[]	= $lang['INST_NOTE_RC6_TO_1.0.0'];
 //functions ////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
+function update_clean_name()
+{
+	global $SQL, $dbprefix, $path, $lang;
+	
+	include_once $path . 'usr.php';
+	$usrcp = new usrcp;
+	$last_id_was = 0;
+	$user_per_refresh = 100;
+	$is = isset($_GET['is_us']) ? intval($_GET['is_us']) : 0;
+	$num_users = isset($_GET['num_users']) ? intval($_GET['num_users']) : 0;
+	$loop = isset($_GET['loop']) ? intval($_GET['loop'])+1 : 1;
 
-//$update_functions[]	=	'name()';
+	$query = array(
+					'SELECT'	=> 'COUNT(id) AS total_users',
+					'FROM'		=> "{$dbprefix}users",
+				);
+	
+	$result = $SQL->build($query);			
+	
+	if($is == 0)
+	{
+		$result = $SQL->build($query);	
+		$num_users = 0;
+		$n_fetch = $SQL->fetch_array($result);
+		$num_users = $n_fetch['total_users'];
+	}
+
+	$query = array(
+				'SELECT'	=> 'id, clean_name, name',
+				'FROM'		=> "{$dbprefix}users",
+				'WHERE'		=> 'id > ' . $is,
+				'ORDER BY'	=> 'id ASC',
+				'LIMIT'		=> $user_per_refresh,
+				);
+				
+	$result = $SQL->build($query);	
+	
+	while($row=$SQL->fetch_array($result))
+	{
+		$last_id_was = $row['id'];
+		
+		if($row['clean_name'] == '')
+		{
+			$update_query = array(
+				'UPDATE'	=> "{$dbprefix}users",
+				'SET'		=> "clean_name = '" . $SQL->escape($usrcp->cleanusername($row['name'])) . "'",
+				'WHERE'		=> "id=" . $row['id']
+				);
+			$SQL->build($update_query);
+		}
+	}
+		
+	$SQL->freeresult($result);
+	
+	echo '<br /><span style="color:green;">' . $lang['RC6_1_CNV_CLEAN_NAMES'] . ' [ <strong>'  . $loop . ' -> ' . ceil($num_users/$user_per_refresh) . '</strong> ] </span>';
+	if($num_users > $last_id_was)
+	{	
+		$url = 'update.php?step=update_now&amp;action_file_do=' . htmlspecialchars($_GET['action_file_do']) .'&amp;is_us=' . $last_id_was . '&amp;num_users=' . $num_users . '&amp;loop=' . $loop . '&amp;lang=' . htmlspecialchars($_GET['lang']);
+		echo '<meta http-equiv="refresh" content="4; url=' . $url . '" />';
+	}
+}
+
+$update_functions[]	=	'update_clean_name()';
 
 ?>

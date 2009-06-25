@@ -18,6 +18,11 @@ include_once ($path . 'functions.php');
 include_once ($path . 'mysql.php');
 include_once ('func_inst.php');
 
+//exception for development
+if(file_exists('.svn/entries'))
+{
+	define('DEV_STAGE', true);
+}
 
 $order_update_files = array(
 'RC2_to_RC3' => 3,
@@ -26,26 +31,17 @@ $order_update_files = array(
 'RC6_to_1.0.0'=>7,
 ); 
 
-$SQL	= new SSQL($dbserver, $dbuser, $dbpass, $dbname);
-			
+$SQL = new SSQL($dbserver, $dbuser, $dbpass, $dbname);
 			
 //
 //is current db is up-to-date !
 //
-$sql = "SELECT value FROM `{$dbprefix}config` WHERE `name` = 'db_version'";
-$result	= $SQL->query($sql);
-if($SQL->num_rows($result) == 0)
+$config['db_version'] = inst_get_config('db_version');
+if($config['db_version'] == false)
 {
 	$SQL->query("INSERT INTO `{$dbprefix}config` (`name` ,`value`)VALUES ('db_version', '')");
 }
-else
-{
-	$current_ver  = $SQL->fetch_array($result);
-	$config['db_version']  = $current_ver['value'];
-}
 			
-
-
 /*
 //print header
 */
@@ -79,7 +75,7 @@ case 'check':
 
 	//connect .. for check
 	$texterr = '';
-	$connect = @mysql_connect($dbserver,$dbuser,$dbpass);
+	$connect = @mysql_connect($dbserver, $dbuser, $dbpass);
 	if (!$connect) 
 		$texterr .= '<span style="color:red;">' . $lang['INST_CONNCET_ERR'] . '</span><br />';
 		
@@ -122,17 +118,17 @@ case 'action_file':
 	else
 	{
 			//get fles
-			$path = "update_files";
-			$dh = opendir($path);
+			$s_path = "update_files";
+			$dh = opendir($s_path);
 			$lngfiles = array();
 			while (($file = readdir($dh)) !== false)
 			{
-			    if($file != "." && $file != ".."  && $file != "index.html")
+			    if($file != "." && $file != ".."  && $file != "index.html" && $file != ".svn")
 				{
 					$file = str_replace('.php','', $file);
 					$db_ver = $order_update_files[$file];
 
-					if(empty($config['db_version']) or $db_ver > $config['db_version'])
+					if((empty($config['db_version']) or $db_ver > $config['db_version']) or defined('DEV_STAGE'))
 					{
 						$lngfiles[$db_ver] = '<option value="' . $file . '">' . $file . '</option>';
 					}
@@ -146,7 +142,7 @@ case 'action_file':
 		echo '
 		<br />
 		<br /><form  action="' . $_SERVER['PHP_SELF'] . '?step=action_file&' . getlang(1) . '" method="post">
-		'.$lang['INST_CHOOSE_UPDATE_FILE'].' 
+		' . $lang['INST_CHOOSE_UPDATE_FILE'] . ' 
 		<br />';
 		if (sizeof($lngfiles)):
 			echo '
@@ -174,7 +170,12 @@ case 'update_now':
 			exit();
 		}
 		
-		$file_for_up	=	'update_files/'.htmlspecialchars($_GET['action_file_do']) . '.php';
+		if(isset($_GET['complet_up_func']))
+		{
+			define('C_U_F', true);
+		}
+		
+		$file_for_up	=	'update_files/' . htmlspecialchars($_GET['action_file_do']) . '.php';
 		if(!file_exists($file_for_up))
 		{
 			echo '<span style="color:red;">' . $lang['INST_ERR_NO_SELECTED_UPFILE_GOOD'] . ' [ ' . $file_for_up . ' ]</span><br />';
@@ -185,7 +186,7 @@ case 'update_now':
 			require $file_for_up;
 			$complete_upate = true;
 			
-			if($config['db_version'] >= DB_VERSION)
+			if($config['db_version'] >= DB_VERSION && !defined('DEV_STAGE'))
 			{
 				echo '<br /><br /><span style="color:green;">' . $lang['INST_UPDATE_CUR_VER_IS_UP']. '</span><br />';
 				$complete_upate = false;
@@ -194,7 +195,7 @@ case 'update_now':
 			//
 			//is there any sqls 
 			//
-			if($complete_upate)
+			if($complete_upate or defined('DEV_STAGE'))
 			{
 				$SQL->show_errors = false;
 				if(isset($update_sqls) && sizeof($update_sqls) > 0)
@@ -220,7 +221,7 @@ case 'update_now':
 			//
 			//is there any functions 
 			//
-			if($complete_upate)
+			if($complete_upate or defined('DEV_STAGE') or defined('C_U_F'))
 			{
 				if(isset($update_functions) && sizeof($update_functions) > 0)
 				{
@@ -234,7 +235,7 @@ case 'update_now':
 			//
 			//is there any notes 
 			//
-			if($complete_upate)
+			if($complete_upate or defined('DEV_STAGE'))
 			{
 				if(isset($update_notes) && sizeof($update_notes) > 0)
 				{
@@ -243,7 +244,7 @@ case 'update_now':
 					$i=1;
 					foreach($update_notes as $n)
 					{
-						echo '  [<b>' . $i . '</b>] <br /><span style="color:black;">' . $n. ' : </span><br />';
+						echo '  [<b>' . $i . '</b>] <br /><span style="color:black;">' . $n. ' </span><br />';
 						++$i;
 					}
 

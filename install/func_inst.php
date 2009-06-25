@@ -234,15 +234,15 @@ function formCheck(formobj, fieldRequired)
 
 ';
 
-if ((isset($_GET['step']) && $_GET['step'] != 'language') && (strpos('index.php',$_SERVER['PHP_SELF'])=== false && isset($_GET['step'])))
+if ((isset($_GET['step']) && $_GET['step'] != 'language') && (strpos('index.php', $_SERVER['PHP_SELF'])=== false && isset($_GET['step'])))
 {
 	$header_inst .= '<form action="?change_lang" method="post">
 	<img src="img/world.gif" alt="language" style="float:left" /> 
 	<select name="lang" style="float:left" onchange="submit()">';
 
-	$path = "../lang";
+	$s_path = "../lang";
 
-	if ($dh = @opendir($path))
+	if ($dh = @opendir($s_path))
 	{
 		while (($file = readdir($dh)) !== false)
 		{
@@ -327,5 +327,30 @@ function get_microtime()
 	return ((float) $usec + (float) $sec);
 }
 
-
+function inst_get_config($name)
+{
+	global $SQL, $dbprefix;
+	
+	if(!is_resource($SQL))
+	{
+		global $dbserver, $dbuser, $dbpass, $dbname;
+		if(!isset($dbserver))
+		{
+			return false;
+		}
+		$SQL = new SSQL($dbserver, $dbuser, $dbpass, $dbname);
+	}
+	
+	$sql = "SELECT value FROM `{$dbprefix}config` WHERE `name` = '" . $name . "'";
+	$result	= $SQL->query($sql);
+	if($SQL->num_rows($result) == 0)
+	{
+		return false;
+	}
+	else
+	{
+		$current_ver  = $SQL->fetch_array($result);
+		return $current_ver['value'];
+	}
+}
 ?>

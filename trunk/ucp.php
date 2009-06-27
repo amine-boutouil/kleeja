@@ -438,6 +438,8 @@ switch ($_GET['go'])
 				($hook = kleeja_run_hook('qr_select_files_in_filecp')) ? eval($hook) : null; //run hook
 				
 				$result	= $SQL->build($query);
+				$sizes = false;
+				$num = 0;
 				while($row=$SQL->fetch_array($result))
 				{
 					$del[$row['id']] = (isset($_POST["del_".$row['id']])) ? $_POST["del_" . $row['id']] : "";
@@ -459,28 +461,8 @@ switch ($_GET['go'])
 								
 							if ($del[$row['id']])
 							{
-								$query_del = array(
-													'DELETE'	=> "{$dbprefix}files",
-													'WHERE'		=> "id='".intval($row['id'])."' AND user='".$usrcp->id()."'"
-												);
-												
-								($hook = kleeja_run_hook('qr_del_files_in_filecp')) ? eval($hook) : null; //run hook	
-								if (!$SQL->build($query_del)) 
-								{
-									die($lang['CANT_DELETE_SQL']);
-								}		
-								
 								//delete from folder .. 
 								@kleeja_unlink ($row['folder'] . "/" . $row['name'] );
-								//update number of stats
-								$update_query	= array('UPDATE'	=> "{$dbprefix}stats",
-													'SET'		=> 'files=files-1,sizes=sizes-' . $row['size'],
-												);
-							
-								if (!$SQL->build($update_query))
-								{
-									die($lang['CANT_UPDATE_SQL']);
-								}
 								
 								//delete thumb
 								if (file_exists($row['folder'] . "/thumbs/" . $row['name'] ))
@@ -488,9 +470,38 @@ switch ($_GET['go'])
 									@kleeja_unlink ($row['folder'] . "/thumbs/" . $row['name'] );
 								}
 								
+								$ids[] = $row['id'];
+								$num++;		
+								$sizes += $row['size'];
+								
 							}
 						}
 				}
+				if (isset($_POST['submit_files']))
+				{
+					//no files to delete
+					if(isset($ids) && !empty($ids))
+					{
+						$query_del = array('DELETE'	=> "{$dbprefix}files",
+									'WHERE'	=> "id IN (" . implode(',', $ids) . ")",);
+												
+						($hook = kleeja_run_hook('qr_del_files_in_filecp')) ? eval($hook) : null; //run hook	
+						if (!$SQL->build($query_del)) 
+						{
+							die($lang['CANT_DELETE_SQL']);
+						}		
+								
+						//update number of stats
+						$update_query	= array('UPDATE'	=> "{$dbprefix}stats",
+									'SET'		=> "sizes=sizes-$sizes,files=files-$num",
+									);
+							
+						if (!$SQL->build($update_query))
+						{
+							die($lang['CANT_UPDATE_SQL']);
+						}
+					}
+				}			
 				$SQL->freeresult($result);
 				
 				($hook = kleeja_run_hook('end_filecp')) ? eval($hook) : null; //run hook

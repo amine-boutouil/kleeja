@@ -96,7 +96,8 @@
 		$query['SELECT'] = 'f.*, u.name AS username';
 		$query['LIMIT']	= "$start, $perpage";
 		$result = $SQL->build($query);
-
+		$sizes = false;
+		$num = 0;
 		while($row=$SQL->fetch_array($result))
 		{
 			//make new lovely arrays !!
@@ -123,14 +124,6 @@
 				{
 					if ($del[$row['id']])
 					{
-						//we have imprvove this and use implode with In statment in future
-						$query_del = array(
-										'DELETE'	=> "{$dbprefix}files",
-										'WHERE'		=> "id='" . intval($row['id']) . "'"
-										);
-															
-						$SQL->build($query_del);
-
 						//delete from folder ..
 						@kleeja_unlink ($row['folder'] . "/" . $row['name']);
 						
@@ -139,14 +132,32 @@
 						{
 							@kleeja_unlink ($row['folder'] . "/thumbs/" . $row['name'] );
 						}
+						$ids[] = $row['id'];
+						$num++;		
+						$sizes += $row['size'];
 						
-						//update number of stats
-						$update_query	= array('UPDATE'	=> "{$dbprefix}stats",
-													'SET'		=> 'files=files-1,sizes=sizes-' . $row['size'],
-												   );
-							
-						$SQL->build($update_query);
 					}
+			}
+		}
+			
+		if (isset($_POST['submit']))
+		{
+			//no files to delete
+			if(isset($ids) && !empty($ids))
+			{
+				//$imp =  implode(',', $ids);
+				//we have imprvove this and use implode with In statment in future [WE DID :D]
+				$query_del = array('DELETE'	=> "{$dbprefix}files",
+									'WHERE'	=> "id IN (" . implode(',', $ids) . ")",);
+			
+				$SQL->build($query_del);
+
+				//update number of stats
+				$update_query	= array('UPDATE'	=> "{$dbprefix}stats",
+									'SET'		=> "sizes=sizes-$sizes,files=files-$num",
+									);
+				//echo $sizes;
+				$SQL->build($update_query);
 			}
 		}
 		

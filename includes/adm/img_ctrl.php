@@ -68,6 +68,8 @@
 		
 		$tdnum = 0;
 		//$all_tdnum = 0;
+		$sizes = false;
+		$num = 0;
 		while($row=$SQL->fetch_array($result))
 		{
 		
@@ -91,32 +93,49 @@
 			//
 			$del[$row['id']] = (isset($_POST['del_' . $row['id']])) ? $_POST['del_' . $row['id']] : '';
 
-				//when submit  !! !!
+		
+				//when submit !!
 				if (isset($_POST['submit']))
 				{
 					if ($del[$row['id']])
 					{
-						//we have imprvove this and use implode with In statment in future
-						$query_del = array(
-										'DELETE'	=> "{$dbprefix}files",
-										'WHERE'		=> "id='" . intval($row['id']) . "'"
-										);
-															
-						if (!$SQL->build($query_del))
-						{
-							die($lang['CANT_DELETE_SQL']);
-						}	
-
 						//delete from folder ..
 						@kleeja_unlink ($row['folder'] . "/" . $row['name']);
+						
 						//delete thumb
-						if (is_file($row['folder'] . "/thumbs/" . $row['name']))
+						if (is_file($row['folder'] . "/thumbs/" . $row['name'] ))
 						{
-							@kleeja_unlink ($row['folder'] . "/thumbs/" . $row['name']);
+							@kleeja_unlink ($row['folder'] . "/thumbs/" . $row['name'] );
 						}
+						$ids[] = $row['id'];
+						$num++;		
+						$sizes += $row['size'];
+						
 					}
 			}
 		}
+			
+		if (isset($_POST['submit']))
+		{
+			//no files to delete
+			if(isset($ids) && !empty($ids))
+			{
+				//$imp =  implode(',', $ids);
+				//we have imprvove this and use implode with In statment in future [WE DID :D]
+				$query_del = array('DELETE'	=> "{$dbprefix}files",
+									'WHERE'	=> "id IN (" . implode(',', $ids) . ")",);
+			
+				$SQL->build($query_del);
+
+				//update number of stats
+				$update_query	= array('UPDATE'	=> "{$dbprefix}stats",
+									'SET'		=> "sizes=sizes-$sizes,files=files-$num",
+									);
+				//echo $sizes;
+				$SQL->build($update_query);
+			}
+		}
+		
 		$SQL->freeresult($result);
 	}
 	else #num_rows

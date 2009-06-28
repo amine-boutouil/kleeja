@@ -1916,35 +1916,51 @@ function klj_clean_old_files($from = 0)
 		}
 		
 		$last_id_from = 0;
+		$sizes = false;
+		$num = 0;
+		
+		//delete files 
 		while($row=$SQL->fetch_array($result))
-		{
-
-					$query_del = array(
-							'DELETE'	=> "{$dbprefix}files",
-							'WHERE'		=> "id='" . intval($row['id']) . "' AND last_down < $totaldays"
-							);
-									
-					($hook = kleeja_run_hook('qr_del_delfiles_cache')) ? eval($hook) : null; //run hook	
-								
-					if (!$SQL->build($query_del))
-					{
-						die($lang['CANT_DELETE_SQL']);
-					}
+		{					
+			//delete from folder ..
+			if (file_exists($row['folder'] . "/" . $row['name']))
+			{
+				@kleeja_unlink ($row['folder'] . "/" . $row['name']);
+			}
+			//delete thumb
+			if (file_exists($row['folder'] . "/thumbs/" . $row['name'] ))
+			{
+				@kleeja_unlink ($row['folder'] . "/thumbs/" . $row['name'] );
+			}
 					
-					//delete from folder ..
-					if (file_exists($row['folder'] . "/" . $row['name']))
-					{
-						@kleeja_unlink ($row['folder'] . "/" . $row['name']);
-					}
-					//delete thumb
-					if (file_exists($row['folder'] . "/thumbs/" . $row['name'] ))
-					{
-						@kleeja_unlink ($row['folder'] . "/thumbs/" . $row['name'] );
-					}
-
-		$last_id_from = $row['id'];
+			$ids[] = $row['id'];
+			$num++;		
+			$sizes += $row['size'];
+			$last_id_from = $row['id'];
 	    }#END WHILE
 		
+		if(isset($ids) && !empty($ids))
+		{
+			$query_del = array('DELETE'	=> "{$dbprefix}files",
+								'WHERE'	=> "id IN (" . implode(',', $ids) . ")",);
+								
+			($hook = kleeja_run_hook('qr_del_delf_old_files')) ? eval($hook) : null; //run hook
+			
+			if (!$SQL->build($query_del))
+			{
+				die($lang['CANT_DELETE_SQL']);
+			}	
+
+			//update number of stats
+			$update_query	= array('UPDATE'	=> "{$dbprefix}stats",
+									'SET'		=> "sizes=sizes-$sizes,files=files-$num",
+									);
+									
+			if (!$SQL->build($query_del))
+			{
+				die($lang['CANT_UPDATE_SQL']);
+			}
+		}
 		
 		update_config('klj_clean_files_from', $last_id_from);
 		

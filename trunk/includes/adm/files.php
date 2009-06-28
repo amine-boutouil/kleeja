@@ -17,12 +17,14 @@
 	//for style ..
 	$stylee		= "admin_files";
 	
-	$url_or		= (isset($_REQUEST['order_by']) ? '&amp;order_by=' . $_REQUEST['order_by'] : '');
+	$url_or		= (isset($_REQUEST['order_by']) ? '&amp;order_by=' . $_REQUEST['order_by'] . ((isset($_REQUEST['order_way'])) ? '&amp;order_by=1' : '') : '');
+	$url_or2		= (isset($_REQUEST['order_by']) ? '&amp;order_by=' . $_REQUEST['order_by']  : '');
 	$url_lst	= (isset($_REQUEST['last_visit']) ? '&amp;last_visit=' . $_REQUEST['last_visit'] : '');
 	$url_sea	= (isset($_GET['search']) ? '&amp;search=' . $_GET['search'] : '');
 	$url_pg		= (isset($_REQUEST['page']) ? '&amp;page=' . intval($_REQUEST['page']) : '');
 	$page_action = "admin.php?cp=files" . $url_or . $url_sea . $url_lst;
 	$ord_action	= "admin.php?cp=files" . $url_pg . $url_sea . $url_lst;
+	$page2_action	= "admin.php?cp=files" . $url_or2 . $url_sea . $url_lst;
 	$action		= $page_action . $url_sea . $url_or;
 	$is_search	= false;
 	
@@ -63,9 +65,17 @@
 		$query['WHERE']	= "f.time > '" . intval($_REQUEST['last_visit']) . "'";
 	}
 	
-	if(isset($_REQUEST['order_by']))
+	if(isset($_REQUEST['order_by']) && ($_REQUEST['order_by'] == 'real_filename' OR $_REQUEST['order_by'] == 'size' OR $_REQUEST['order_by'] == 'user' OR $_REQUEST['order_by'] == 'user_ip' OR $_REQUEST['order_by'] == 'uploads' OR $_REQUEST['order_by'] == 'time' OR $_REQUEST['order_by'] == 'type' OR $_REQUEST['order_by'] == 'folder' OR $_REQUEST['order_by'] == 'report'))
 	{
-		$query['ORDER BY'] = "f." . $SQL->escape($_REQUEST['order_by']) . " DESC";
+		$query['ORDER BY'] = "f." . $SQL->escape($_REQUEST['order_by']);
+		if(isset($_REQUEST['order_way']) && $_REQUEST['order_way'] == '1')
+		{
+			$query['ORDER BY'] .= ' ASC';
+		}
+		else
+		{
+			$query['ORDER BY'] .= ' DESC';
+		}
 	}
 	
 	//display files or display pics and files only in search

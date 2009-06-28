@@ -36,7 +36,7 @@
 								'ON'		=> 'u.id=f.user'
 							)
 						),
-					'ORDER BY'	=> 'f.id DESC'
+					'ORDER BY'	=> 'f.id '
 					);
 						
 	//posts search ..
@@ -68,14 +68,15 @@
 	if(isset($_REQUEST['order_by']) && ($_REQUEST['order_by'] == 'real_filename' OR $_REQUEST['order_by'] == 'size' OR $_REQUEST['order_by'] == 'user' OR $_REQUEST['order_by'] == 'user_ip' OR $_REQUEST['order_by'] == 'uploads' OR $_REQUEST['order_by'] == 'time' OR $_REQUEST['order_by'] == 'type' OR $_REQUEST['order_by'] == 'folder' OR $_REQUEST['order_by'] == 'report'))
 	{
 		$query['ORDER BY'] = "f." . $SQL->escape($_REQUEST['order_by']);
-		if(isset($_REQUEST['order_way']) && $_REQUEST['order_way'] == '1')
-		{
-			$query['ORDER BY'] .= ' ASC';
-		}
-		else
-		{
-			$query['ORDER BY'] .= ' DESC';
-		}
+	}
+	
+	if(isset($_REQUEST['order_way']) && $_REQUEST['order_way'] == '1')
+	{
+		$query['ORDER BY'] .= ' ASC';
+	}
+	else
+	{
+		$query['ORDER BY'] .= ' DESC';
 	}
 	
 	//display files or display pics and files only in search

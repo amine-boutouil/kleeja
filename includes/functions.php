@@ -841,7 +841,7 @@ function kleeja_info($msg,$title='', $exit=true)
 */
 function kleeja_err($msg, $title='', $exit=true)
 {
-	global $text, $tpl;
+	global $text, $tpl, $SQL;
 	
 	($hook = kleeja_run_hook('kleeja_err_func')) ? eval($hook) : null; //run hook
 				
@@ -853,9 +853,11 @@ function kleeja_err($msg, $title='', $exit=true)
 	echo $tpl->display('err');
 	//footer
 	Saafooter();
-				
+
 	if ($exit)
 	{
+		//close mysql connection
+		$SQL->close();
 		exit();
 	}
 }
@@ -865,7 +867,7 @@ function kleeja_err($msg, $title='', $exit=true)
 */
 function kleeja_admin_err($msg, $navigation=true, $title='', $exit=true)
 {
-	global $text, $tpl, $SHOW_LIST, $adm_extensions, $adm_extensions_menu, $STYLE_PATH_ADMIN, $lang, $olang;
+	global $text, $tpl, $SHOW_LIST, $adm_extensions, $adm_extensions_menu, $STYLE_PATH_ADMIN, $lang, $olang, $SQL;
 	
 	($hook = kleeja_run_hook('kleeja_admin_err_func')) ? eval($hook) : null; //run hook
 				
@@ -879,9 +881,11 @@ function kleeja_admin_err($msg, $navigation=true, $title='', $exit=true)
 	echo $tpl->display('admin_err');
 	//footer
 	echo $tpl->display("admin_footer");
-	
+		
 	if ($exit)
 	{
+		//close mysql connection
+		$SQL->close();
 		exit();
 	}
 }

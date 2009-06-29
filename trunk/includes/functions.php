@@ -1974,7 +1974,7 @@ function klj_clean_old_files($from = 0)
 }
 
 //redirect [php.net]
-function redirect($url,$header=true,$exit=false)
+function redirect($url, $header=true, $exit=false)
 {
     if (!headers_sent() && $header)
 	{
@@ -1985,6 +1985,8 @@ function redirect($url,$header=true,$exit=false)
         echo '<script type="text/javascript">window.location.href="' . $url . '";</script>';
         echo '<noscript><meta http-equiv="refresh" content="0;url=' . $url . '" /></noscript>'; 
 	}
+	
+	$SQL->close();
 	
 	if($exit)
 	{

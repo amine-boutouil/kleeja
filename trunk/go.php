@@ -384,6 +384,7 @@ switch ($_GET['go'])
 		}
 		
 		header('Location:' . $url_file);
+		$SQL->close();
 		exit;
 		
 	break;

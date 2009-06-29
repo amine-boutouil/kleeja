@@ -2022,7 +2022,7 @@ function kleeja_get_link ($pid, $extra = array())
 							'thumb' => 'download.php?thmb=::ID::',
 							'image' => 'download.php?img=::ID::',
 							'del'	=> 'go.php?go=del&amp;cd=::CODE::',
-							'file'	=> '"download.php?id=::ID::',
+							'file'	=> 'download.php?id=::ID::',
 						);
 			}
 		break;

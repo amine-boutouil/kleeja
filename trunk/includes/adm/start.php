@@ -57,6 +57,8 @@
 		if((time() - $v['last_check']) > 86400 && !$v['msg_appeared'])
 		{
 			header('location: ./admin.php?cp=check_update&show_msg');
+			$SQL->close();
+			exit;
 		}	
 		
 		

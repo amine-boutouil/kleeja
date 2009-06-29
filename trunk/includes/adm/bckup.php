@@ -101,6 +101,7 @@
 			header("Content-type: text/plain");
 			header("Content-Disposition: attachment; filename=$db_name_save");
 			echo $sql_data . $outta;
+			$SQL->close();
 			exit;
 	}
 

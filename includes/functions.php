@@ -1976,6 +1976,8 @@ function klj_clean_old_files($from = 0)
 //redirect [php.net]
 function redirect($url, $header=true, $exit=false)
 {
+	global $SQL;
+	
     if (!headers_sent() && $header)
 	{
         header('Location: ' . $url); 

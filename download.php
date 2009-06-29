@@ -179,6 +179,7 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 				}
 				
 				header('Location:' . $go_to);
+				$SQL->close();
 				exit;
 			}
 		}
@@ -370,7 +371,7 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 		}
 
 		$SQL->close();
-		exit; // we doesnt need style
+		exit; // we dont need style
 }
 
 //

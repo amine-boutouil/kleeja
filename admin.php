@@ -63,6 +63,8 @@
 				{
 					$_SESSION['ADMINLOGIN'] = '1';
 					header('Location: admin.php?cp=' . $go_to);
+					$SQL->close();
+					exit;
 				}
 				else
 				{
@@ -97,6 +99,7 @@
 				echo $tpl->display("admin_login");
 			}
 			
+		$SQL->close();
 		exit;	//stop	
 	}
 

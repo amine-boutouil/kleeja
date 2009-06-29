@@ -114,6 +114,7 @@
 	require ($path . 'pager.php');
 	require ($path . 'ocr_captcha.php');
 	require ($path . 'functions.php');
+	require ($path . 'functions_display.php');
 
 	//. install.php exists
 	if (file_exists($root_path . 'install') && !defined('IN_ADMIN') && !defined('IN_LOGIN') && !defined('DEV_STAGE'))

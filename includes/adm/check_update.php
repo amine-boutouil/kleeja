@@ -100,6 +100,8 @@
 	if(isset($_GET['show_msg']))
 	{
 		header('location: ./admin.php');
+		$SQL->close();
+		exit;
 	}
 
 ?>

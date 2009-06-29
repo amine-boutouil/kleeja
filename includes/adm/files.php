@@ -43,6 +43,8 @@
 	if (isset($_POST['search_file']))
 	{
 		header('Location: admin.php?cp=files&search=' . base64_encode(serialize($_POST)));
+		$SQL->close();
+		exit;
 	}
 	else if(isset($_GET['search']))
 	{

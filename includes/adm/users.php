@@ -144,6 +144,8 @@
 			if (isset($_POST['search_user']))
 			{
 				header('Location: admin.php?cp=users&search=' . base64_encode(serialize($_POST)));
+				$SQL->close();
+				exit;
 			}
 			else if(isset($_GET['search']))
 			{

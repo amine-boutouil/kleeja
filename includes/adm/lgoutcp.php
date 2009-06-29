@@ -18,6 +18,8 @@
 	if ($usrcp->logout_cp())
 	{
 		header('Location:./');
+		$SQL->close();
+		exit;
 	}
 
 ?>

@@ -44,7 +44,7 @@ function KleejaOnline ()
 		
 		// get information .. 
 		$ip				= (getenv('HTTP_X_FORWARDED_FOR')) ? getenv('HTTP_X_FORWARDED_FOR') : getenv('REMOTE_ADDR');
-		$agent			= $_SERVER['HTTP_USER_AGENT'];
+		$agent			= mysql_real_escape_string($_SERVER['HTTP_USER_AGENT']);
 		$timeout		= 100; //seconds
 		$time			= time();  
 		$timeout2		= $time-$timeout;  

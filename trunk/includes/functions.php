@@ -78,16 +78,17 @@ function KleejaOnline ()
 		($hook = kleeja_run_hook('anotherbots_onlline_func')) ? eval($hook) : null; //run hook
 		
 		//---
-		
-		$rep_query = array(
+		if(!empty($ip) && !empty($agent) && !empty($session))
+		{
+			$rep_query = array(
 								'REPLACE'	=> 'ip, username, agent, time, session',
 								'INTO'		=> "{$dbprefix}online",
 								'VALUES'	=> "'$ip','$username','$agent','$time','$session'",
 								'UNIQUE'	=>  "session='$session'"
 							);
-		($hook = kleeja_run_hook('qr_rep_ifnot_onlline_func')) ? eval($hook) : null; //run hook
-		$SQL->build($rep_query);
-
+			($hook = kleeja_run_hook('qr_rep_ifnot_onlline_func')) ? eval($hook) : null; //run hook
+			$SQL->build($rep_query);
+		}
 
 		//clean online table
 		if((time() - $config['last_online_time_update']) >= 3600)

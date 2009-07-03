@@ -61,10 +61,10 @@ if(!defined('STOP_HOOKS'))
 				
 	 	$SQL->freeresult($result);
 
-		$filenumc = fopen($root_path . 'cache/data_hooks.php', 'w');
-		flock($filenumc, LOCK_EX); // exlusive look
-		fwrite($filenumc, $file_datac);
-		fclose($filenumc);
+		$filenumc = @fopen($root_path . 'cache/data_hooks.php', 'w');
+		@flock($filenumc, LOCK_EX); // exlusive look
+		@fwrite($filenumc, $file_datac);
+		@fclose($filenumc);
 	}
 }#plugins is on
 
@@ -105,10 +105,10 @@ if(!defined('STOP_HOOKS'))
 				
 	 	$SQL->freeresult($result);
 
-		$filenumc = fopen($root_path . 'cache/data_config.php', 'w');
-		flock($filenumc, LOCK_EX); // exlusive look
-		fwrite($filenumc, $file_datac);
-		fclose($filenumc);
+		$filenumc = @fopen($root_path . 'cache/data_config.php', 'w');
+		@flock($filenumc, LOCK_EX); // exlusive look
+		@fwrite($filenumc, $file_datac);
+		@fclose($filenumc);
 	}
 
 //
@@ -146,10 +146,10 @@ if(!defined('STOP_HOOKS'))
 				
 	 	$SQL->freeresult($result);
 
-		$filenumc = fopen($root_path . 'cache/data_lang.php', 'w');
-		flock($filenumc, LOCK_EX); // exlusive look
-		fwrite($filenumc, $file_datac);
-		fclose($filenumc);
+		$filenumc = @fopen($root_path . 'cache/data_lang.php', 'w');
+		@flock($filenumc, LOCK_EX); // exlusive look
+		@fwrite($filenumc, $file_datac);
+		@fclose($filenumc);
 	}
 	
 //
@@ -195,10 +195,10 @@ if(!defined('STOP_HOOKS'))
 				
 	 	$SQL->freeresult($result);
 
-		$filenumt = fopen($root_path . 'cache/data_exts.php', 'w');
-		flock($filenumt, LOCK_EX); // exlusive look
-		fwrite($filenumt, $file_datat);
-		fclose($filenumt);
+		$filenumt = @fopen($root_path . 'cache/data_exts.php', 'w');
+		@flock($filenumt, LOCK_EX); // exlusive look
+		@fwrite($filenumt, $file_datat);
+		@fclose($filenumt);
 	}
 
 //
@@ -277,10 +277,10 @@ if(!defined('STOP_HOOKS'))
 		
 		$SQL->freeresult($result);
 		
-		$filenumw = fopen($root_path . 'cache/data_stats.php', 'w');
-		flock($filenumw, LOCK_EX); // exlusive look
-		fwrite($filenumw, $file_dataw);
-		fclose($filenumw);
+		$filenumw = @fopen($root_path . 'cache/data_stats.php', 'w');
+		@flock($filenumw, LOCK_EX); // exlusive look
+		@fwrite($filenumw, $file_dataw);
+		@fclose($filenumw);
 	}//end else
 
 	
@@ -330,10 +330,10 @@ if(!defined('STOP_HOOKS'))
 			$file_datab .= '?' . '>';
 	 	}
 
-		$filenumb = fopen($root_path . 'cache/data_ban.php', 'w');
-		flock($filenumb, LOCK_EX); // exlusive look
-		fwrite($filenumb, $file_datab);
-		fclose($filenumb);
+		$filenumb = @fopen($root_path . 'cache/data_ban.php', 'w');
+		@flock($filenumb, LOCK_EX); // exlusive look
+		@fwrite($filenumb, $file_datab);
+		@fclose($filenumb);
 	}
 	
 //	
@@ -369,10 +369,10 @@ if(!defined('STOP_HOOKS'))
 			$file_datar .= '$ruless = \'' . str_replace(array("'","\'"), "\'", $rules1) . '\';' . "\n\n"; // its took 2 hours ..
 			
 		$file_datar .= '?' . '>';
-		$filenumr = fopen($root_path . 'cache/data_rules.php', 'w');
-		flock($filenumr, LOCK_EX); // exlusive look
-		fwrite($filenumr, $file_datar);
-		fclose($filenumr);
+		$filenumr = @fopen($root_path . 'cache/data_rules.php', 'w');
+		@flock($filenumr, LOCK_EX); // exlusive look
+		@fwrite($filenumr, $file_datar);
+		@fclose($filenumr);
 	}	
 	
 //	
@@ -415,10 +415,10 @@ if(!defined('STOP_HOOKS'))
 	 
 		
 		$file_datae .= '?' . '>';
-		$filenume = fopen($root_path . 'cache/data_extra.php', 'w');
-		flock($filenume, LOCK_EX); // exlusive look
-		fwrite($filenume, $file_datae);
-		fclose($filenume);
+		$filenume = @fopen($root_path . 'cache/data_extra.php', 'w');
+		@flock($filenume, LOCK_EX); // exlusive look
+		@fwrite($filenume, $file_datae);
+		@fclose($filenume);
 	}
 	
 

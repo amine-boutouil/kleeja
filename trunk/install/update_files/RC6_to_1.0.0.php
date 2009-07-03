@@ -21,7 +21,7 @@ $update_sqls['online_t'] = "TRUNCATE TABLE `{$dbprefix}online`";
 $update_sqls['online_c'] = "ALTER TABLE `{$dbprefix}online` ADD `session` VARCHAR( 100 ) NOT NULL";
 $update_sqls['online_a'] = "ALTER TABLE `{$dbprefix}online` ADD UNIQUE (`session`)";
 $update_sqls['online_moue1'] = "ALTER TABLE `{$dbprefix}stats` ADD `most_user_online_ever` INT( 11 ) NOT NULL";
-$update_sqls['online_moue2'] = "ALTER TABLE `{$dbprefix}stats` ADD `lastuser` VARCHAR( 300 ) NOT NULL ";
+//$update_sqls['online_moue2'] = "ALTER TABLE `{$dbprefix}stats` ADD `lastuser` VARCHAR( 300 ) NOT NULL ";
 $update_sqls['online_moue3'] = "ALTER TABLE `{$dbprefix}stats` ADD `last_muoe` INT( 10 ) NOT NULL";
 
 $update_sqls['livexts_feature'] = "INSERT INTO `{$dbprefix}config` (`name` ,`value` ,`option` ,`display_order`)VALUES ('livexts', 'swf', '<input type=\"text\" id=\"livexts\" name=\"livexts\" value=\"{con.livexts}\" size=\"20\">', '70')";
@@ -101,6 +101,10 @@ function update_clean_name()
 	{	
 		$url = 'update.php?step=update_now&amp;action_file_do=' . htmlspecialchars($_GET['action_file_do']) .'&amp;is_us=' . $last_id_was . '&amp;num_users=' . $num_users . '&amp;loop=' . $loop . '&amp;lang=' . htmlspecialchars($_GET['lang']);
 		echo '<meta http-equiv="refresh" content="4; url=' . $url . '" />';
+	}
+	if($loop == ($num_users/$user_per_refresh))
+	{
+		mysql_query("ALTER TABLE `{$dbprefix}stats` ADD `lastuser` VARCHAR( 300 ) NOT NULL");
 	}
 }
 

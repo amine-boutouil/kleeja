@@ -107,7 +107,7 @@ switch ($_GET['go'])
 					$name	= (string) $SQL->escape($_POST['rname']);
 					$text	= (string) $SQL->escape($_POST['rtext']);
 					$mail	= (string) strtolower($_POST['rmail']);
-					$url	= (string) $_POST['rurl'];
+					$url	= (string) $SQL->real_escape($_POST['rurl']);
 					$time 	= (int) time();
 					$rid	= (int) intval($_POST['rid']);
 					$ip		= (getenv('HTTP_X_FORWARDED_FOR')) ? getenv('HTTP_X_FORWARDED_FOR') : getenv('REMOTE_ADDR');
@@ -134,7 +134,7 @@ switch ($_GET['go'])
 					
 					$SQL->build($update_query);
 					
-					send_mail($config['sitemail'],$lang['REPORT'],$text,$mail,$name);
+					send_mail($config['sitemail2'],$lang['REPORT'],$text . ' - URL :' . $url . ' - TIME : ' . $time . ' - IP:' . $ip,$mail,$name);
 			}
 			else
 			{
@@ -238,7 +238,7 @@ switch ($_GET['go'])
 				}
 				else
 				{
-					send_mail($config['sitemail'],$lang['CALL'],$text,$mail,$name);
+					send_mail($config['sitemail2'],$lang['CALL'] . ' - TIME : ' . $timee . ' - IP:' . $ip,$text,$mail,$name);
 					kleeja_info($lang['THNX_CALLED']);
 				}
 			}

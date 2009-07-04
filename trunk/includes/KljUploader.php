@@ -134,19 +134,19 @@ class KljUploader
 		
 		if (preg_match("/jpg|jpeg/", $ext))
 		{
-			$src_img = imagecreatefromjpeg($name);
+			$src_img = @imagecreatefromjpeg($name);
 		}
 		elseif (preg_match("/png/", $ext))
 		{
-			$src_img = imagecreatefrompng($name);
+			$src_img = @imagecreatefrompng($name);
 		}
 		elseif (preg_match("/gif/", $ext))
 		{
-			$src_img = imagecreatefromgif($name);
+			$src_img = @imagecreatefromgif($name);
 		}
 		
-		$old_x	= imageSX($src_img);
-		$old_y	= imageSY($src_img);
+		$old_x	= @imageSX($src_img);
+		$old_y	= @imageSY($src_img);
 		
 		if ($old_x > $old_y)
 		{
@@ -164,25 +164,25 @@ class KljUploader
 			$thumb_h=$new_h;
 		}
 		
-		$dst_img=ImageCreateTrueColor($thumb_w,$thumb_h);
-		imagecopyresampled($dst_img, $src_img, 0, 0, 0, 0, $thumb_w, $thumb_h, $old_x, $old_y);
+		$dst_img = @ImageCreateTrueColor($thumb_w,$thumb_h);
+		@imagecopyresampled($dst_img, $src_img, 0, 0, 0, 0, $thumb_w, $thumb_h, $old_x, $old_y);
 		
 		if (preg_match("/jpg|jpeg/", $ext))
 		{
-			imagejpeg($dst_img, $filename);
+			@imagejpeg($dst_img, $filename);
 		}
 		elseif (preg_match("/png/", $ext))
 		{
-			imagepng($dst_img, $filename);
+			@imagepng($dst_img, $filename);
 		}
 		elseif (preg_match("/gif/", $ext))
 		{
-			imagegif($dst_img, $filename);
+			@imagegif($dst_img, $filename);
 		}
 		
 
-		imagedestroy($dst_img);
-		imagedestroy($src_img);
+		@imagedestroy($dst_img);
+		@imagedestroy($src_img);
 	}
 
 
@@ -411,7 +411,7 @@ function process ()
 									$this->filename2 = $this->typet  = $this->filename2[count($this->filename2)-1];
 								}
 								
-								//tashfer [decode]
+								//transfer [decode]
 								if($this->decode == "time")
 								{
 									$zaid = time();
@@ -483,35 +483,37 @@ function process ()
 												else
 												{
 													//then ..write new file
-													$fp2 = fopen($this->folder . "/" . $this->filename2, "w");
-													fwrite($fp2, $data);
-													fclose($fp2);
+													$fp2 = @fopen($this->folder . "/" . $this->filename2, "w");
+													@fwrite($fp2, $data);
+													@fclose($fp2);
+													$this->saveit ($this->filename2, $this->folder, $this->sizet, $this->typet);
 												}
 											}
+											else
+											{
+												$this->errs[]	= $lang['URL_CANT_GET'];
+											}
 										}
-										else
+										else //OTHER FUNCTION
 										{
 											$this->sizet = $this->get_remote_file_size($_POST['file'][$i]);
 		
 											if($this->types[strtolower($this->typet)]['size'] > 0 && $this->sizet >= $this->types[strtolower($this->typet)]['size'])
 											{
-												$this->errs[]=  $lang['SIZE_F_BIG'] . ' ' . Customfile_size($this->types[strtolower($this->typet)]['size']);
+												$this->errs[] =  $lang['SIZE_F_BIG'] . ' ' . Customfile_size($this->types[strtolower($this->typet)]['size']);
 											}
 											else
 											{
 												$data = fetch_remote_file($_POST['file'][$i], $this->folder . "/" . $this->filename2);
+												if($data === false)
+												{
+													$this->errs[]	= $lang['URL_CANT_GET'];		
+												}
+												else
+												{
+													$this->saveit ($this->filename2, $this->folder, $this->sizet, $this->typet);
+												}
 											}
-										}
-										
-										
-										if($data === false)
-										{
-											$this->errs[]	= $lang['URL_CANT_GET'];		
-										}
-										
-										if(!sizeof($this->errs))
-										{
-											$this->saveit ($this->filename2, $this->folder, $this->sizet, $this->typet);
 										}
 
 									}#else

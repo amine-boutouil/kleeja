@@ -133,6 +133,8 @@ switch ($_GET['go'])
 					($hook = kleeja_run_hook('qr_update_no_file_report')) ? eval($hook) : null; //run hook
 					
 					$SQL->build($update_query);
+					
+					send_mail($config['sitemail'],$lang['REPORT'],$text,$mail,$name);
 			}
 			else
 			{
@@ -236,6 +238,7 @@ switch ($_GET['go'])
 				}
 				else
 				{
+					send_mail($config['sitemail'],$lang['CALL'],$text,$mail,$name);
 					kleeja_info($lang['THNX_CALLED']);
 				}
 			}

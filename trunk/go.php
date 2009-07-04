@@ -84,7 +84,7 @@ switch ($_GET['go'])
 			$ERRORS	=	'';
 			($hook = kleeja_run_hook('submit_report_go_page')) ? eval($hook) : null; //run hook
 
-			if (empty($_POST['rname']) || empty($_POST['rmail']) || empty($_POST['rurl']) )
+			if (empty($_POST['rname']) || empty($_POST['rmail']) || empty($_POST['rurl']) || empty($_POST['rid']))
 			{
 				$ERRORS[]	= $lang['EMPTY_FIELDS'];
 			}
@@ -109,7 +109,7 @@ switch ($_GET['go'])
 					$mail	= (string) strtolower($_POST['rmail']);
 					$url	= (string) $_POST['rurl'];
 					$time 	= (int) time();
-					$rid	= (int) $_POST['rid'];
+					$rid	= (int) intval($_POST['rid']);
 					$ip		= (getenv('HTTP_X_FORWARDED_FOR')) ? getenv('HTTP_X_FORWARDED_FOR') : getenv('REMOTE_ADDR');
 
 

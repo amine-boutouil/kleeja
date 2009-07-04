@@ -317,14 +317,14 @@ switch ($_GET['go'])
 							
 							if (!$SQL->build($update_query))
 							{
-								die($lang['CANT_UPDATE_SQL']);
+								big_error('Error',$lang['CANT_UPDATE_SQL']);
 							}
 							
 							kleeja_info($lang['DELETE_SUCCESFUL']);
 						}
 						else
 						{
-							die($lang['CANT_DELETE_SQL']);
+							big_error('Error',$lang['CANT_DELETE_SQL']);
 						}
 					}
 				

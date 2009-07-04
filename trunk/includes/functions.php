@@ -330,7 +330,7 @@ function creat_plugin_xml($contents)
 				//important tags not exists 
 				if(empty($plg_info))
 				{
-					die($lang['ERR_XML_NO_G_TAGS']);
+					big_error('Error',$lang['ERR_XML_NO_G_TAGS']);
 				}
 
 					$plg_errors	=	array();
@@ -1555,7 +1555,7 @@ function klj_clean_old_files($from = 0)
 			
 			if (!$SQL->build($query_del))
 			{
-				die($lang['CANT_DELETE_SQL']);
+				big_error('Error',$lang['CANT_DELETE_SQL']);
 			}	
 
 			//update number of stats
@@ -1565,7 +1565,7 @@ function klj_clean_old_files($from = 0)
 									
 			if (!$SQL->build($query_del))
 			{
-				die($lang['CANT_UPDATE_SQL']);
+				big_error('Error',$lang['CANT_UPDATE_SQL']);
 			}
 		}
 		

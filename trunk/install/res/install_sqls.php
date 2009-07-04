@@ -259,6 +259,8 @@ $install_sqls['config_insert33'] = "INSERT INTO `{$dbprefix}config` (`name`, `va
 $install_sqls['config_insert34'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('last_online_time_update', '" .  time() . "', '', 0)";
 $install_sqls['config_insert35'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('klj_clean_files_from', '0', '', 0)";
 $install_sqls['config_insert36'] = "INSERT INTO `{$dbprefix}config` (`name` ,`value` ,`option` ,`display_order`)VALUES ('livexts', 'swf', '<input type=\"text\" id=\"livexts\" name=\"livexts\" value=\"{con.livexts}\" size=\"20\">', '70')";
+$install_sqls['config_insert37'] = "INSERT INTO `{$dbprefix}config` (`name` ,`value` ,`option` ,`display_order`)
+VALUES ('sitemail2', '" . $config_sitemail . "', '<input type=\"text\" id=\"sitemail2\" name=\"sitemail2\" value=\"{con.sitemail2}\" size=\"40\">', '3');";
 	
 $install_sqls['exts_insert1'] = "
 INSERT INTO `{$dbprefix}exts` (`id`, `group_id`, `ext`, `gust_size`, `gust_allow`, `user_size`, `user_allow`) VALUES

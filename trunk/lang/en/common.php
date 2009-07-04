@@ -185,6 +185,7 @@ $lang = array_merge($lang, array(
 	'CHANGE_TIME' => 'Change using TIME',
 	'SITENAME' => 'Service name',
 	'SITEMAIL' => 'Email address',
+	'SITEMAIL2' => 'Email address of reports',
 	'SITEURL' => 'Service URL with / at the end',
 	'FOLDERNAME' => 'Folder name for uploaded files',
 	'PREFIXNAME' => 'Files prefix',

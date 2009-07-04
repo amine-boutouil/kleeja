@@ -189,6 +189,7 @@ $lang = array_merge($lang, array(
 	'CHANGE_TIME' => 'تغيير مع دالة TIME',
 	'SITENAME' => 'إسم المركز',
 	'SITEMAIL' => 'بريد المركز',
+	'SITEMAIL2' => 'بريد التبليغات , المراسلات',
 	'SITEURL' => 'رابط المركز(مع /)',
 	'FOLDERNAME' => 'إسم مجلد التحميل',
 	'PREFIXNAME' => 'بادئة اسماء الملفات',

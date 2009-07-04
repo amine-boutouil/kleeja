@@ -27,8 +27,8 @@ $update_sqls['online_moue3'] = "ALTER TABLE `{$dbprefix}stats` ADD `last_muoe` I
 $update_sqls['livexts_feature'] = "INSERT INTO `{$dbprefix}config` (`name` ,`value` ,`option` ,`display_order`)VALUES ('livexts', 'swf', '<input type=\"text\" id=\"livexts\" name=\"livexts\" value=\"{con.livexts}\" size=\"20\">', '70')";
 $update_sqls['configs_id_form'] = "UPDATE `{$dbprefix}config` SET `option` = '<select id=\"id_form\" name=\"id_form\">\r\n  <option <IF NAME=\"con.id_form==id\">selected=\"selected\"</IF> value=\"id\">{lang.IDF}</option>\r\n   <option <IF NAME=\"con.id_form==filename\">selected=\"selected\"</IF> value=\"filename\">{lang.IDFF}</option>\r\n <option <IF NAME=\"con.id_form==direct\">selected=\"selected\"</IF> value=\"direct\">{lang.IDFD}</option>\r\n</select>',`display_order` = 29 WHERE  `name` = 'id_form'";
 $update_sqls['clean_name'] = "ALTER TABLE `{$dbprefix}users` ADD `clean_name` VARCHAR( 300 ) NOT NULL AFTER `session_id`";
-
- 
+$update_sqls['sitemail2'] = "INSERT INTO `{$dbprefix}config` (`name` ,`value` ,`option` ,`display_order`)
+VALUES ('sitemail2', '" . $config['sitemail'] . "', '<input type=\"text\" id=\"sitemail2\" name=\"sitemail2\" value=\"{con.sitemail2}\" size=\"40\">', '3');";
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 //notes ////////////////////////////////////////////////////////////////////////////////////////////////

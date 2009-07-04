@@ -135,7 +135,7 @@ switch ($_GET['sty_t'])
 											
 					if (!$SQL->build($query_df))
 					{
-						die($lang['CANT_UPDATE_SQL']);
+						big_error('Error',$lang['CANT_UPDATE_SQL']);
 					}				
 					
 					delete_cache('', true); //delete all cache to get new style

@@ -83,7 +83,7 @@
 						
 						if (!$send)
 						{
-							die($lang['CANT_SEND_MAIL']);
+							big_error('Error',$lang['CANT_SEND_MAIL']);
 						}
 						else
 						{

@@ -114,7 +114,7 @@ class usrcp
 
 							if (!$SQL->build($update_query))
 							{
-								die($lang['CANT_UPDATE_SQL']);
+								big_error('Error',$lang['CANT_UPDATE_SQL']);
 							}
 						
 						}

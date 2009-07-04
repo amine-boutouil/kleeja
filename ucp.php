@@ -84,7 +84,7 @@ switch ($_GET['go'])
 						
 						if (!$SQL->build($query_del))
 						{
-							die($lang['CANT_DELETE_SQL']);
+							big_error('Error',$lang['CANT_DELETE_SQL']);
 						}
 					}
 
@@ -236,7 +236,7 @@ switch ($_GET['go'])
 								($hook = kleeja_run_hook('qr_update_no_users_register')) ? eval($hook) : null; //run hook
 								if (!$SQL->build($update_query))
 								{
-									die($lang['CANT_UPDATE_SQL']);
+									big_error('Error',$lang['CANT_UPDATE_SQL']);
 								}
 								kleeja_info($text);
 							}
@@ -278,7 +278,7 @@ switch ($_GET['go'])
 
 					if (!$SQL->build($query_del))
 					{
-						die($lang['CANT_DELETE_SQL']);
+						big_error('Error',$lang['CANT_DELETE_SQL']);
 					}
 				}
 				
@@ -489,7 +489,7 @@ switch ($_GET['go'])
 						($hook = kleeja_run_hook('qr_del_files_in_filecp')) ? eval($hook) : null; //run hook	
 						if (!$SQL->build($query_del)) 
 						{
-							die($lang['CANT_DELETE_SQL']);
+							big_error('Error',$lang['CANT_DELETE_SQL']);
 						}		
 								
 						//update number of stats
@@ -499,7 +499,7 @@ switch ($_GET['go'])
 							
 						if (!$SQL->build($update_query))
 						{
-							die($lang['CANT_UPDATE_SQL']);
+							big_error('Error',$lang['CANT_UPDATE_SQL']);
 						}
 					}
 				}			
@@ -584,7 +584,7 @@ switch ($_GET['go'])
 						($hook = kleeja_run_hook('qr_update_data_in_profile')) ? eval($hook) : null; //run hook
 						if (!$SQL->build($update_query))
 						{
-							die($lang['CANT_UPDATE_SQL']);
+							big_error('Error',$lang['CANT_UPDATE_SQL']);
 						}
 						
 						//msg
@@ -695,7 +695,7 @@ switch ($_GET['go'])
 								($hook = kleeja_run_hook('qr_update_newpass_get_pass')) ? eval($hook) : null; //run hook
 								if (!$SQL->build($update_query))
 								{
-									die($lang['CANT_UPDATE_SQL']);
+									big_error('Error',$lang['CANT_UPDATE_SQL']);
 								}
 							}
 							

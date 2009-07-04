@@ -162,7 +162,7 @@
 			
 			if (!$SQL->build(array('UPDATE'	=> "{$dbprefix}stats",'SET'	=> "most_user_online_ever='" . intval($allnumbers) . "',last_muoe='" . time() . "'")))
 			{
-				die($lang['CANT_UPDATE_SQL']);
+				big_error('Error',$lang['CANT_UPDATE_SQL']);
 			}
 			
 			delete_cache('data_stats');

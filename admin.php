@@ -168,6 +168,22 @@
 	sort($adm_extensions);
 	$i = 0;
 	
+	//New calls notice
+	$query = array('SELECT'	=> 'id',
+					'FROM'		=> "{$dbprefix}call",
+					'WHERE'		=> 'time > "' . (!empty($_SESSION['LAST_VISIT']) ? $_SESSION['LAST_VISIT'] : time() - 3600*12) . '"' 
+					);
+		$newcall = $SQL->num_rows($SQL->build($query));
+		($newcall == 0) ? $newcall = '(0)' : $newcall = '(' . $newcall . ')'; 
+	
+	//New reports notice
+	$query = array('SELECT'	=> 'id',
+					'FROM'		=> "{$dbprefix}reports",
+					'WHERE'		=> 'time > "' . (!empty($_SESSION['LAST_VISIT']) ? $_SESSION['LAST_VISIT'] : time() - 3600*12) . '"' 
+					);
+	$newreport = $SQL->num_rows($SQL->build($query));
+	($newreport == 0) ? $newreport = '(0)' : $newreport = '(' . $newreport . ')'; 
+		
 	foreach($adm_extensions as $m)
 	{
 		//some exceptions
@@ -178,7 +194,7 @@
 		
 		++$i;
 		$adm_extensions_menu[$i]	= array('icon'	=> (file_exists($STYLE_PATH_ADMIN . 'images/' . ($m == 'configs' ? 'options' : $m) . '_button.gif'))	? $STYLE_PATH_ADMIN . 'images/' . ($m == 'configs' ? 'options' : $m) . '_button.gif' : $STYLE_PATH_ADMIN . 'images/no_icon_button.gif',
-											'lang'	=> !empty($lang['R_'. strtoupper($m)]) ? $lang['R_'. strtoupper($m)]: (!empty($lang[strtoupper($m)]) ? $lang[strtoupper($m)] :  (!empty($olang[strtoupper($m)]) ? $olang[strtoupper($m)] : strtoupper($m))),
+											'lang'	=> !empty($lang['R_'. strtoupper($m)]) ? $lang['R_'. strtoupper($m)] . (($m == 'calls') ? $newcall : '') . (($m == 'reports') ? $newreport : '') : (!empty($lang[strtoupper($m)]) ? $lang[strtoupper($m)] :  (!empty($olang[strtoupper($m)]) ? $olang[strtoupper($m)] : strtoupper($m))),
 											'link'	=> 'admin.php?cp=' . ($m == 'configs' ? 'options' : $m),
 											'confirm'	=> (@in_array($m, $ext_confirm)) ? true : false,
 											'current'	=> ($m == $go_to) ? true : false
@@ -187,7 +203,6 @@
 		($hook = kleeja_run_hook('foreach_ext_admin_page')) ? eval($hook) : null; //run hook 
 	
 	}
-	
 	
 	
 	//get it 

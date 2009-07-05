@@ -134,7 +134,7 @@ switch ($_GET['go'])
 					
 					$SQL->build($update_query);
 					
-					send_mail($config['sitemail2'], $text . ' - URL :' . $url . ' - TIME : ' . $time . ' - IP:' . $ip, $lang['REPORT'], $mail, $name);
+					send_mail($config['sitemail2'], $text . "\n\n\n\n" . 'URL :' . $url . ' - TIME : ' . date("d-m-Y h:i a", $time) . ' - IP:' . $ip, $lang['REPORT'], $mail, $name);
 			}
 			else
 			{
@@ -238,7 +238,7 @@ switch ($_GET['go'])
 				}
 				else
 				{
-					send_mail($config['sitemail2'], $text  . ' - TIME : ' . $timee . ' - IP:' . $ip, $lang['CALL'], $mail, $name);
+					send_mail($config['sitemail2'], $text  . "\n\n\n\n" . 'TIME : ' . date("d-m-Y h:i a", $timee) . ' - IP:' . $ip, $lang['CALL'], $mail, $name);
 					kleeja_info($lang['THNX_CALLED']);
 				}
 			}

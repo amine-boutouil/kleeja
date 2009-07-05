@@ -544,7 +544,7 @@ function process ()
 				$timeww	= (int)		time();
 				$user	= (int)		$this->id_user;
 				$code_del=(string)	md5(time());
-				$ip		=  (@getenv('HTTP_X_FORWARDED_FOR')) ? getenv('HTTP_X_FORWARDED_FOR') : $_SERVER['REMOTE_ADDR'];
+				$ip		=  $SQL->escape($_SERVER['REMOTE_ADDR']);
 				$ip		= (string)	$SQL->escape($ip);	
 				$realf	= (string)	$SQL->escape($real_filename);	
 				

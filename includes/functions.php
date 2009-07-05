@@ -43,8 +43,8 @@ function KleejaOnline ()
 		global $SQL, $usrcp, $dbprefix, $config;
 		
 		// get information .. 
-		$ip				= (getenv('HTTP_X_FORWARDED_FOR')) ? getenv('HTTP_X_FORWARDED_FOR') : getenv('REMOTE_ADDR');
-		$agent			= $SQL->real_escape($_SERVER['HTTP_USER_AGENT']);
+		$ip				= (getenv('HTTP_X_FORWARDED_FOR')) ? $SQL->escape(getenv('HTTP_X_FORWARDED_FOR')) : $SQL->escape((getenv('REMOTE_ADDR')));
+		$agent			= $SQL->escape($_SERVER['HTTP_USER_AGENT']);
 		$timeout		= 100; //seconds
 		$time			= time();  
 		$timeout2		= $time-$timeout;  

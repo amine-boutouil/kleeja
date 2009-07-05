@@ -36,7 +36,7 @@
 			if (isset($_POST['submit']))
 			{
 				//for onlines
-				$ip	=	(getenv('HTTP_X_FORWARDED_FOR')) ?  getenv('HTTP_X_FORWARDED_FOR') : getenv('REMOTE_ADDR');
+				$ip		=  $SQL->escape($_SERVER['REMOTE_ADDR']);
 					
 				if ($config['allow_online'] == 1)
 				{

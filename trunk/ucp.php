@@ -72,7 +72,7 @@ switch ($_GET['go'])
 					($hook = kleeja_run_hook('login_after_submit')) ? eval($hook) : null; //run hook
 					
 					//for onlines
-					$ip	=	(getenv('HTTP_X_FORWARDED_FOR')) ?  getenv('HTTP_X_FORWARDED_FOR') : getenv('REMOTE_ADDR');
+					$ip		=  $SQL->escape($_SERVER['REMOTE_ADDR']);
 					
 					if ($config['allow_online'] == 1)
 					{

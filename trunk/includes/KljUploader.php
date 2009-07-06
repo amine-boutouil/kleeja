@@ -195,7 +195,13 @@ function process ()
 {
 		global $SQL,$dbprefix,$config,$lang;
 		global $use_ftp,$ftp_server,$ftp_user,$ftp_pass,$ch;
-
+		
+		//check prefix 
+		if (preg_match("/{rand:([0-9]+)}/i", $this->filename, $m))
+		{
+			$this->filename = substr(md5(time()), 0, $m[1]);
+		}
+		
 		// check folder
 		if(!file_exists($this->folder)) 
 		{

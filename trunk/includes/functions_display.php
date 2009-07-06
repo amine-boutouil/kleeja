@@ -140,7 +140,8 @@ function Saafooter($outscript=false)
 		$tpl->assign("page_stats", $page_stats);
 		
 		//if admin, show admin in the bottom of all page
-		$tpl->assign("admin_page", ($usrcp->admin() ?'<br /><a href="./admin.php">' . $lang['ADMINCP'] .  '</a><br />' : ''));
+			$tpl->assign("admin_page", ($usrcp->admin() ?'<a href="./admin.php"><span>' . $lang['ADMINCP'] .  '</span></a><br />' : ''));
+
 		
 		// if google analytics .. //new version 
 		//http://www.google.com/support/googleanalytics/bin/answer.py?answer=55488&topic=11126

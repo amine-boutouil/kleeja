@@ -451,6 +451,7 @@ $lang = array_merge($lang, array(
 							 'هل أنت مصمم ؟ هل تريد عرض ستايلاتك في في معرض كليجا للجميع مجانا او بمقابل ؟  إذن <a target="_blank" href="http://www.kleeja.com/styles/">إظغط هنا للذهاب لهناك</a> .',
 							 ),
 	'CHECK_ALL'	 => 'تحديد الكل',
+	'BCONVERTER' => 'تحويل الاحجام',
 
 ));
 

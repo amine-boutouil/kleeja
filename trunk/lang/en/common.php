@@ -446,6 +446,7 @@ $lang = array_merge($lang, array(
 							 ),
 							 
 	'CHECK_ALL'	 => 'Check all',
+	'BCONVERTER' => 'Byte Converter',
 	
 	//last line of this file ...					 
 	'S_TRANSLATED_BY' => 'Translated By <a href="http://www.fenix4web.com/">Fenix4Web</a>',

@@ -111,5 +111,48 @@
 <!-- end  button  -->
 
 </form>
+<script type="text/javascript" src="includes/admin_style/byte.js"></script>
+
+
+<!-- start dot  -->
+<p class="dot" />
+<!-- end dot  -->
+<h3>{lang.BCONVERTER}</h3>
+<!-- start dot  -->
+<p class="dot" />
+<!-- end dot  -->
+<!-- Start Calc  -->
+<form>
+<table cellpadding="3" cellspacing="3">
+<tr> 
+<td align="center">Byte</td>
+<td align="center">Kilobyte</td>
+<td align="center">Megabyte</td>
+<td align="center">Gigabyte</td>
+</tr>
+<tr> 
+
+<td align="center"> 
+<input type="text" size="10" name="byte" value="0"></td>
+<td align="center"><input type="text" size="10" name="kb" value="0"></td>
+<td align="center"><input type="text" size="10" name="mb" value="0"></td>
+<td align="center"><input type="text" size="10" name="gb" value="0"></td>
+</tr>
+<tr> 
+<td align="center"><input type="button" name="B2" value="   >   "
+        onClick="convert(this.form)"></td>
+<td align="center"><input type="button" name="B22" value="   < >   "
+        onClick="convertkb(this.form)"></td>
+<td align="center"><input type="button" name="B23" value="   < >   "
+        onClick="convertmb(this.form)"></td>
+<td align="center"><input type="button" name="B24" value="   <   "
+        onClick="convertgb(this.form)"></td>
+</tr>
+</table>
+</form>
+<!-- End Calc  -->
+<!-- start dot  -->
+<p class="dot" />
+<!-- end dot  -->
 </div>
 <!-- end Exts temlate  -->

@@ -174,7 +174,7 @@
 					'WHERE'		=> 'time > "' . (!empty($_SESSION['LAST_VISIT']) ? $_SESSION['LAST_VISIT'] : time() - 3600*12) . '"' 
 					);
 		$newcall = $SQL->num_rows($SQL->build($query));
-		($newcall == 0) ? $newcall = '[0]' : $newcall = '[' . $newcall . ']'; 
+		($newcall == 0) ? $newcall = ' [0]' : $newcall = ' [' . $newcall . ']'; 
 	
 	//New reports notice
 	$query = array('SELECT'	=> 'id',
@@ -182,7 +182,7 @@
 					'WHERE'		=> 'time > "' . (!empty($_SESSION['LAST_VISIT']) ? $_SESSION['LAST_VISIT'] : time() - 3600*12) . '"' 
 					);
 	$newreport = $SQL->num_rows($SQL->build($query));
-	($newreport == 0) ? $newreport = '[0]' : $newreport = '[' . $newreport . ']'; 
+	($newreport == 0) ? $newreport = ' [0]' : $newreport = ' [' . $newreport . ']'; 
 		
 	foreach($adm_extensions as $m)
 	{

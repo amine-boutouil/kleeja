@@ -14,7 +14,7 @@ var LANG_MORE_F_FILES ="{lang.MORE_F_FILES}";
 <script type="text/javascript" src="{STYLE_PATH}javascript.js"></script>
 </head>
 <body>
-<!-- start wrapper --> 
+<!-- start wrapper -->
 <div id="wrapper">
 
 <!-- start logo -->
@@ -44,6 +44,10 @@ var LANG_MORE_F_FILES ="{lang.MORE_F_FILES}";
 </div>
 <!--  # End  top nav bar -->
 
+
+<!-- start page -->
+<div id="page">
+
 <!-- start site name and title  -->
 <div id="title-x"><b><a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}</b></div>
 <!--  # End  site name and title  -->
@@ -52,14 +56,13 @@ var LANG_MORE_F_FILES ="{lang.MORE_F_FILES}";
 <div id="extras_header">{extras.header}</div>
 <!--  # End  extras header -->
 
-<!-- start page -->
-<div id="page">
+<div id="Powered"><!-- IF REMOVE: Pay for a license --><a href="http://www.kleeja.com/" target="_blank">Powered by Kleeja</a><!-- IF REMOVE: Pay for a license --><IF NAME="S_TRANSLATED_BY">{lang.S_TRANSLATED_BY}</IF></div>
 
 <!-- start  menu right -->         
 <div id="right_menu">
 	<div class="list">
 		<ul>
-			<span>منطقة أعضاء</span>
+			<span>&nbsp;</span>
 			<li><a href="{login_url}"><img src="{STYLE_PATH}images/Go-Out.png" alt="{login_name}" style="vertical-align:middle;" />{login_name}</a></li>
 			<li><a href="{usrcp_url}"><img src="{STYLE_PATH}images/User.png" alt="{usrcp_name}" style="vertical-align:middle;" />{usrcp_name}</a></li>
 			<IF NAME="user_is">

@@ -1,37 +1,42 @@
-﻿<div style="clear: both;"></div>
-</div>
+﻿
+<div style="clear: both;"></div>
 
 <!-- begin extra footer -->
 {extras.footer}
 <!-- end extra footer -->
 
 <br /><br />
+
 <div id="footer">
-    Copyrights &copy; <a href="{config.siteurl}">{config.sitename}</a> | 
-     
-	{page_stats}
-     
-     <!-- IF REMOVE: Pay for a license -->
-			Powered by <a href="http://www.kleeja.com/" target="_blank">Kleeja</a>
-	<!-- IF REMOVE: Pay for a license -->
-	<IF NAME="S_TRANSLATED_BY">  {lang.S_TRANSLATED_BY}</IF>
-    
-     
+Copyrights &copy; <a href="{config.siteurl}">{config.sitename}</a>    
+   
 </div>
 
+
+
+	{page_stats}
+	
 <!-- start Option to control panel -->
 <IF NAME="is_admin">
-	 <div id="adminPan">
-		<div id="adminlink">
-		<a href="admin.php"><h2>لوحة التحكم</h2><p>تسجيل الدخول للادارة</p>&nbsp;</a>
-		</div>
-	</div>
+<div id="adminPan">
+  <ul>
+    <li>{admin_page}</li>
+  </ul>
+</div>
 </IF>
-<!-- end  Option to control panel -->
+<!-- ## end  Option to control panel -->
 
 {googleanalytics}
 
-</div> 
+
+
+</div>
+<!-- ### end page -->
+ 
+</div>
+<!-- ## end  wrapper -->
+
+
 </body>
 </html>
         

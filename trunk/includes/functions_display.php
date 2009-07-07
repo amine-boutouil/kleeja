@@ -127,13 +127,13 @@ function Saafooter($outscript=false)
 		$page_stats = '';
 		if ($config['statfooter'] !=0) 
 		{
-			$gzip			= ($do_gzip_compress !=0 )?  "Enabled" : "Disabled";
-			$hksys			= (!defined('STOP_HOOKS'))?  "Enabled" : "Disabled";
+			$gzip			= $do_gzip_compress !=0 ?  "Enabled" : "Disabled";
+			$hksys			= !defined('STOP_HOOKS') ? "Enabled" : "Disabled";
 			$endtime		= get_microtime();
 			$loadtime		= number_format($endtime - $starttm , 4);
 			$queries_num	= $SQL->query_num;
 			$time_sql		= round($SQL->query_num / $loadtime) ;
-			$link_dbg		= (($usrcp->admin()) ? "[ <a href=" .  str_replace('debug','',kleeja_get_page()) . ((strpos(kleeja_get_page(), '?') === false) ? '?' : '&') . "debug>More Details ... </a> ]" : null);
+			$link_dbg		= $usrcp->admin() ? '[ <a href="' .  str_replace('debug','', kleeja_get_page()) . (strpos(kleeja_get_page(), '?') === false ? '?' : '&') . 'debug">More Details ... </a> ]' : null;
 			$page_stats	= "<strong>[</strong> GZIP : $gzip - Generation Time: $loadtime Sec  - Queries: $queries_num - Hook System:  $hksys <strong>]</strong>  " . $link_dbg ;
 		}#end statfooter
 		

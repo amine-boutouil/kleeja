@@ -28,11 +28,10 @@
 	$username = $usrcp->name();
 	
 	//need to login again
-	if(empty($_SESSION['ADMINLOGIN']) or $_SESSION['ADMINLOGIN'] != '1') 
+	if(empty($_SESSION['ADMINLOGIN']) || $_SESSION['ADMINLOGIN'] != md5($usrcp->name() . $config['siteurl'])) 
 	{
 		if(isset($_GET['go']) && $_GET['go'] == 'login') 
 		{			
-			
 			if (isset($_POST['submit']))
 			{
 				//for onlines
@@ -61,7 +60,7 @@
 				
 				if(empty($ERRORS))
 				{
-					$_SESSION['ADMINLOGIN'] = '1';
+					$_SESSION['ADMINLOGIN'] = md5($usrcp->name() . $config['siteurl']);
 					header('Location: admin.php?cp=' . $go_to);
 					$SQL->close();
 					exit;

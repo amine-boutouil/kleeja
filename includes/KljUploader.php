@@ -199,8 +199,14 @@ function process ()
 		//check prefix 
 		if (preg_match("/{rand:([0-9]+)}/i", $this->filename, $m))
 		{
-			$this->filename = substr(md5(time()), 0, $m[1]);
+			$this->filename = preg_replace("/{rand:([0-9]+)}/i", substr(md5(time()), 0, $m[1]), $this->filename);
 		}
+		
+		if (preg_match("/{date:([a-zA-Z-_]+)}/i", $this->filename, $m))
+		{
+			$this->filename = preg_replace("/{date:([a-zA-Z-_]+)}/i", date($m[1]), $this->filename);
+		}
+		
 		
 		// check folder
 		if(!file_exists($this->folder)) 

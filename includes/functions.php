@@ -672,7 +672,7 @@ function kleeja_get_page ()
 		}
 	}
 
-	return basename($location);
+	return str_replace(array('&amp;'), array('&'), htmlspecialchars($location));
 }
 
 /*

@@ -43,7 +43,7 @@ function KleejaOnline ()
 		global $SQL, $usrcp, $dbprefix, $config;
 		
 		// get information .. 
-		$ip				= (getenv('HTTP_X_FORWARDED_FOR')) ? $SQL->escape(getenv('HTTP_X_FORWARDED_FOR')) : $SQL->escape((getenv('REMOTE_ADDR')));
+		$ip				= get_ip();
 		$agent			= $SQL->escape($_SERVER['HTTP_USER_AGENT']);
 		$timeout		= 100; //seconds
 		$time			= time();  
@@ -180,7 +180,7 @@ function get_ban ()
 		global $banss, $lang, $tpl, $text;
 	
 		//visitor ip now 
-		$ip	= isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : getenv('REMOTE_ADDR');
+		$ip	= get_ip();
 
 		
 		//now .. loop for banned ips 

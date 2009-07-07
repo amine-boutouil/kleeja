@@ -110,7 +110,7 @@ switch ($_GET['go'])
 					$url	= (string) $SQL->real_escape($_POST['rurl']);
 					$time 	= (int) time();
 					$rid	= (int) intval($_POST['rid']);
-					$ip		=  $SQL->escape($_SERVER['REMOTE_ADDR']);
+					$ip		=  get_ip();
 
 
 					$insert_query	= array('INSERT'	=> '`name` ,`mail` ,`url` ,`text` ,`time` ,`ip`',
@@ -222,7 +222,7 @@ switch ($_GET['go'])
 				$text	= (string) $SQL->escape($_POST['ctext']);
 				$mail	= (string) strtolower($_POST['cmail']);
 				$timee	= (int)	time();
-				$ip		=  $SQL->escape($_SERVER['REMOTE_ADDR']);
+				$ip		=  get_ip();
 					
 
 				$insert_query	= array('INSERT'	=> "`name` ,`text` ,`mail` ,`time` ,`ip`",

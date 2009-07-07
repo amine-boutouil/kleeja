@@ -81,6 +81,7 @@
 		if(file_exists($STYLE_PATH . 'footer.html'))
 		{
 			$t_data = file_get_contents($STYLE_PATH . 'footer.html');
+			$t_data .= file_get_contents($STYLE_PATH . 'header.html');
 
 			if(strpos($t_data, 'kleeja.com') === false)
 			{

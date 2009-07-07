@@ -72,7 +72,7 @@ switch ($_GET['go'])
 					($hook = kleeja_run_hook('login_after_submit')) ? eval($hook) : null; //run hook
 					
 					//for onlines
-					$ip		=  $SQL->escape($_SERVER['REMOTE_ADDR']);
+					$ip	= get_ip();
 					
 					if ($config['allow_online'] == 1)
 					{
@@ -268,7 +268,7 @@ switch ($_GET['go'])
 				if ($config['allow_online'] == 1)
 				{
 					//for onlines
-					$ip	=	(getenv('HTTP_X_FORWARDED_FOR')) ?  getenv('HTTP_X_FORWARDED_FOR') : getenv('REMOTE_ADDR');
+					$ip	= get_ip();
 					
 					$query_del	= array('DELETE'	=> "{$dbprefix}online",
 										'WHERE'		=> "ip='" . $SQL->escape($ip) . "'"

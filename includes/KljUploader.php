@@ -550,8 +550,7 @@ function process ()
 				$timeww	= (int)		time();
 				$user	= (int)		$this->id_user;
 				$code_del=(string)	md5(time());
-				$ip		=  $SQL->escape($_SERVER['REMOTE_ADDR']);
-				$ip		= (string)	$SQL->escape($ip);	
+				$ip		= get_ip();
 				$realf	= (string)	$SQL->escape($real_filename);	
 				
 				$insert_query = array(

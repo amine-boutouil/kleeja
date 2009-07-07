@@ -36,7 +36,7 @@
 			if (isset($_POST['submit']))
 			{
 				//for onlines
-				$ip		=  $SQL->escape($_SERVER['REMOTE_ADDR']);
+				$ip	= get_ip();
 					
 				if ($config['allow_online'] == 1)
 				{

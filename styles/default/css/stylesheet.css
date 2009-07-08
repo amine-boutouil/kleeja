@@ -172,6 +172,7 @@ img.right {
 
 
 #title-x b{
+width: 90%;
 	float:right;
 	color: #000;
 	padding:0 0 6px 0;
@@ -190,9 +191,6 @@ img.right {
 	color: #000;background:transparent;
 }
 
-#title-x .current_page_item a {
-	color: #785;
-}
 
 /* Footer */
 .Copyrights {
@@ -216,8 +214,8 @@ color: rgb(89, 89, 89); text-shadow: 0px 1px rgb(247, 247, 247)
 /*start Option to control panel */
 
 #adminPan{
-  position:absolute; right:8%; bottom:130px; 
-			margin:0 auto; padding:0;}
+width: 90%;
+margin:2px}
 #adminPan ul {
 	margin:0;
 	padding:0;
@@ -229,14 +227,14 @@ color: rgb(89, 89, 89); text-shadow: 0px 1px rgb(247, 247, 247)
 	padding:0;
 	}
 #adminPan a {
-	float:left;
+	float:right;
 	background:url(../images/tableftF.png) no-repeat left top;
 	margin:0;
 	padding:0 0 0 4px;
 	text-decoration:none;
 	}
 #adminPan a span {
-	float:right;
+	float:left;
 	display:block;
 	background:url(../images/tabrightF.png) no-repeat right top;
 	padding:9px 25px 8px 25px;
@@ -312,20 +310,20 @@ div#texttype {display: none;}
 
 .row1, td.row1 , tr.row1 , b.row1{ 
  width: 25%;
-	background:#FBF3E6;
+	
 	color: #333;
 font: bold 11px tahoma,Verdana, Helvetica, sans-serif;
 	padding: 5px;
-	border: 1px solid#F5D0A1;
+
 
 }
 .row2, td.row2, tr.row2 , b.row2{ 
     width: 50%;
-	background:#FBF3E6;
+
 	color: #333;
 	padding: 5px;
 font: bold 11px tahoma,Verdana, Helvetica, sans-serif;
-	border: 1px solid#F5D0A1;
+
 }
 
 

@@ -1495,7 +1495,7 @@ function klj_clean_old_files($from = 0)
 		$not_today	= time() - 86400;
 		
 		$query = array(
-					'SELECT'	=> 'f.id, f.last_down, f.name, f.folder, f.time',
+					'SELECT'	=> 'f.id, f.last_down, f.name, f.folder, f.time, f.size',
 					'FROM'		=> "{$dbprefix}files f",
 					'WHERE'		=> "f.last_down < $totaldays AND f.time < $not_today AND f.id > $from",
 					'ORDER BY'	=> 'f.id  ASC',
@@ -1522,10 +1522,8 @@ function klj_clean_old_files($from = 0)
 			update_config('klj_clean_files_from', '0');	
 		}
 		
-		$last_id_from = 0;
-		$sizes = false;
-		$num = 0;
-		
+		$last_id_from = $num = $sizes = 0;
+
 		//delete files 
 		while($row=$SQL->fetch_array($result))
 		{					
@@ -1553,24 +1551,17 @@ function klj_clean_old_files($from = 0)
 								
 			($hook = kleeja_run_hook('qr_del_delf_old_files')) ? eval($hook) : null; //run hook
 			
-			if (!$SQL->build($query_del))
-			{
-				big_error('Error',$lang['CANT_DELETE_SQL']);
-			}	
+			$SQL->build($query_del);
 
 			//update number of stats
 			$update_query	= array('UPDATE'	=> "{$dbprefix}stats",
 									'SET'		=> "sizes=sizes-$sizes,files=files-$num",
 									);
 									
-			if (!$SQL->build($query_del))
-			{
-				big_error('Error',$lang['CANT_UPDATE_SQL']);
-			}
+			$SQL->build($query_del);
 		}
 		
 		update_config('klj_clean_files_from', $last_id_from);
-		
 
     } //stat_del
 

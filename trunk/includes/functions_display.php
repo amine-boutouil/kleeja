@@ -383,18 +383,24 @@ function kleeja_debug ()
 function big_error ($error_title,  $msg_text)
 {
 	global $SQL; 
-	echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">';
-	echo '<html xmlns="http://www.w3.org/1999/xhtml">';
-	echo '<head>';
-	echo '<meta http-equiv="Content-Language" content="en-us" />';
-	echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />';
-	echo '<title>Error In Kleeja</title>';
-	echo '</head>';
-	echo '<body>';
-	echo '<p style="color: #FF0000;"><strong>Error In Kleeja : [<span  style="color: #800000;">&nbsp; ' . $error_title . ' </span>&nbsp;]</strong></p>';
-	echo '<div style="border: 1px dashed #808080;background-color: #FFF7F4; width: 70%;font-family:Tahoma">' . $msg_text . '</div>';
-	echo '<br /><a href="http://www.kleeja.com/">Kleeja Website</a>';
-	echo '</body>';
+	echo '<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">' . "\n";
+	echo '<head>' . "\n";
+	echo '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />' . "\n";
+	echo '<title>' . htmlspecialchars($error_title) . '</title>' . "\n";
+	echo '<style type="text/css">' . "\n\t";
+	echo '* { margin: 0; padding: 0; }' . "\n\t";
+	echo 'body { background: #fff;color: #444;font-family:tahoma, verdana, arial, sans-serif;font-size: 11px;margin: 0 auto;padding: 50px;width: 767px;}' . "\n\t";
+	echo '.error {color: #333;background:#ffebe8;border: 1px solid #dd3c10;}' . "\n\t";
+	echo '.error {padding: 10px;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size: 12px;}' . "\n";
+	echo '</style>' . "\n";
+	echo '</head>' . "\n";
+	echo '<body>' . "\n\t";
+	echo '<div class="error">' . "\n";
+	echo "\n\t\t<h2>Kleeja Error : </h2><br />" . "\n";
+	echo "\n\t\t<strong> [ " . $error_title . ' ] </strong><br /><br />' . "\n\t\t" . $msg_text . "\n\t";
+	echo "\n\t\t" . '<br /><br /><small>Visit <a href="http://www.kleeja.com/">Kleeja Website</a> for more details.</small>' . "\n\t";
+	echo '</div>' . "\n";
+	echo '</body>' . "\n";
 	echo '</html>';
 	@$SQL->close();
 	exit();

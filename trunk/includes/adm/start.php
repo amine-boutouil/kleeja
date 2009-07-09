@@ -22,9 +22,10 @@
 		$h_lst_imgs		= './admin.php?cp=img_ctrl&amp;last_visit=' . (!empty($_SESSION['LAST_VISIT']) ? $_SESSION['LAST_VISIT'] : time() - 3600*12);
 		
 		//data
-		$files_number 		= $stat_files ;
+		$files_number 		= $stat_files;
 		$files_sizes 		= Customfile_size($stat_sizes);
 		$users_number 		= $stat_users;
+		$last_file_up_url	= $stat_last_file;
 		$last_file_up		= (strlen($stat_last_file) > 25) ? substr($stat_last_file, 0, 25) . '...' : $stat_last_file;
 		$last_del_fles 		= date("d-m-Y h:i a", $stat_last_f_del);
 		$php_version 		= 'php ' . phpversion();

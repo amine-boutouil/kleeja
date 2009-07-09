@@ -84,8 +84,21 @@ padding: 13px 15px;
 -moz-border-radius: 8px; border-radius:1px;
 } 
 .wz{-moz-border-radius: 8px; border-radius:1px;color: #333333; background-color: #FAFAFA;font-family: "Tahoma", Verdana, Helvetica, sans-serif;font-size: 1.1em;font-weight: normal;border: 1px solid #A9B8C2;padding: 1px;}
+
+.ul_check,.ul_check2 { 
+padding: 10px;
+}
+.ul_check li {
+font-size: 1.2em;
+line-height: 2.3em
+}
+.ul_check2 li {
+font-size: 0.9em;
+line-height: 2em
+}
+
 </style>
-	<script type="text/javascript">
+<script type="text/javascript">
 	//<![CDATA[
 	function agree ()
 	{

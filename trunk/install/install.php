@@ -74,9 +74,10 @@ case 'gpl2':
 	
 	echo '
 	<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=f&' . getlang(1) . '">
-	<textarea class="home" name="gpl2" rows=""   readonly="readonly" cols="" style="width: 456px; height: 365px;direction:ltr;">
-	' . $contentofgpl2 . '
-	</textarea>
+	<br />
+	<div class="home" name="gpl2" style="width: 456px; height: 320px;direction:ltr;overflow: auto;margin:0 auto">
+	' . nl2br($contentofgpl2) . '
+	</div>
 
 	<br />
 	' . $lang['INST_AGR_GPL2'] . ' <input name="agrec" id="agrec" type="checkbox" onclick="javascript:agree();"  /><br />
@@ -90,9 +91,9 @@ case 'f':
 	
 	$check_ok = true;
 	
-	echo '<fieldset class="home" id="Group1" dir="' . $lang['DIR'] . '">';
-	echo '<strong>' . $lang['FUNCTIONS_CHECK'] . '</strong> : <br /><br />';
-	echo '<ul>';
+	echo '<fieldset class="home" dir="' . $lang['DIR'] . '" style="text-align:' . ($lang['DIR'] == 'rtl' ? 'right' : 'left') . ';margin: 8px;">';
+	echo '<strong>' . $lang['FUNCTIONS_CHECK'] . '</strong> : <br />';
+	echo '<ul class="ul_check">';
 	if(function_exists('unlink'))
 		echo '<li style="color:green">' . sprintf($lang['FUNCTION_IS_EXISTS'], 'unlink') . '</li>';
 	else
@@ -126,7 +127,30 @@ case 'f':
 		echo '<li style="color:red">' . sprintf($lang['FUNCTION_IS_NOT_EXISTS'], 'move_uploaded_file') . '</li>';
 	}
 	echo ' [ ' . $lang['FUNCTION_DISC_MUF'] . ']<br /> ';
-	echo '</fieldset><br />';
+	
+	//advies
+	$advices = ''; 
+	if (@ini_get('register_globals') == '1' || strtolower(@ini_get('register_globals')) == 'on')
+	{
+		$advices .= '<li>' . $lang['ADVICES_REGISTER_GLOBALS'] . '</li>'; 
+	}
+	if( (function_exists("get_magic_quotes_gpc") && get_magic_quotes_gpc()) || 
+	(@ini_get('magic_quotes_sybase') && (strtolower(@ini_get('magic_quotes_sybase')) != "off")) )
+	{
+		$advices .= '<li>' . $lang['ADVICES_MAGIC_QUOTES'] . '</li>'; 
+	}
+	if (!function_exists('iconv'))
+	{
+		$advices .= '<li>' . $lang['ADVICES_ICONV'] . '</li>'; 
+	}
+
+	
+	if($advices != '')
+	{
+		echo '</ul><br /> <strong>' . $lang['ADVICES_CHECK'] . '</strong> : <br /> <ul  class="ul_check2">' . $advices;
+	}
+	
+	echo '</ul></fieldset><br />';
 	
 	if($check_ok)
 	{
@@ -140,6 +164,7 @@ case 'f':
 		<input name="agres" type="submit" value="' . $lang['RE_CHECK'] . '"  />
 		</form>';
 	}
+	
 break;
 case 'c':
 	
@@ -158,10 +183,10 @@ case 'c':
 	
 	}
 	
-	$xs	=(!file_exists('../config.php')) ? false : true;
+	$xs	=!file_exists('../config.php') ? false : true;
 	$writeable_path = is_writable($_path) ? true : false;
 	
-	if($xs== false)
+	if(!$xs)
 	{
 		 echo '<br /><form method="post"  action="' . $_SERVER['PHP_SELF'] . '?step=c&' . getlang(1) . '"  onsubmit="javascript:return formCheck(this, Array(\'db_server\',\'db_user\' ,\'db_name\'));">
 

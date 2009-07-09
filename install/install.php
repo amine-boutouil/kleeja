@@ -26,6 +26,19 @@ include_once ('func_inst.php');
 define ('DB_VERSION' , '7');
 
 
+//
+//kleeja must be safe ..
+//
+if(!empty($dbuser) && !empty($dbname))
+{
+	$d = inst_get_config('language');
+	if(!empty($d))
+	{
+		exit('Sorry, but Kleeja already installed ... ');
+	}
+}
+
+
 /*
 //echo header
 */

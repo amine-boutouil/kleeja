@@ -11,7 +11,7 @@
 /*
 include important files
 */
-define ( 'IN_COMMON' , true);
+define ('IN_COMMON' , true);
 $path = "../includes/";
 (file_exists('../config.php')) ? include_once ('../config.php') : null;
 include_once ($path . 'functions.php');

@@ -13,6 +13,7 @@ define ( 'IN_COMMON' , true);
 $_path = "../";
 (file_exists($_path . 'config.php')) ? include_once ($_path . 'config.php') : null;
 include_once ($_path . 'includes/functions.php');
+include_once ($_path . 'includes/mysql.php');
 include_once ('func_inst.php');
 
 
@@ -84,8 +85,29 @@ case 'language':
 
 break; // end case language
 case 'choose' :
+
 		echo '<fieldset class="home"><span style="color:green;">' . $lang['INST_CHOOSE_INSTALLER'] . '</span><br /><br /><br />';
-		echo '<a href="./install.php?' . getlang(1) . '"><img src="img/installer.gif" alt="installer" /><br />  ' . $lang['INST_INSTALL_CLEAN_VER'] . ' </a><br /><br />';
+		
+		$install_or_no = true;
+		if(file_exists($_path . 'config.php'))
+		{
+			include_once $_path . 'config.php';
+			if(!empty($dbuser) && !empty($dbname))
+			{
+				$d = inst_get_config('language');
+				if(!empty($d))
+				{
+					$install_or_no = false;
+				}
+			}
+		}
+		
+		
+		if($install_or_no)
+		{
+			echo '<a href="./install.php?' . getlang(1) . '"><img src="img/installer.gif" alt="installer" /><br />  ' . $lang['INST_INSTALL_CLEAN_VER'] . ' </a><br /><br />';
+		}
+		
 		echo '<a href="./update.php?' . getlang(1) . '"><img src="img/updater.gif" alt="updater" /> <br /> ' . $lang['INST_UPDATE_P_VER'] . ' </a><br /><br /><br />';
 
 		echo '<a href="http://www.kleeja.com"><span style="color:black;">www.kleeja.com</span></a></fieldset>';

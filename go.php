@@ -82,11 +82,17 @@ switch ($_GET['go'])
 		else
 		{
 			$ERRORS	=	'';
+			
 			($hook = kleeja_run_hook('submit_report_go_page')) ? eval($hook) : null; //run hook
-
-			if (empty($_POST['rname']) || empty($_POST['rmail']) || empty($_POST['rurl']) || empty($_POST['rid']))
+			
+			
+			if (empty($_POST['rname']) || empty($_POST['rurl']))
 			{
-				$ERRORS[]	= $lang['EMPTY_FIELDS'];
+				$ERRORS[]	= $lang['EMPTY_FIELDS'] . ' : ' . (empty($_POST['rname']) ? ' [ ' . $lang['YOURNAME'] . ' ] ' : '')  . (empty($_POST['rurl']) ? '  [ ' . $lang['URL']  . ' ] ': '');
+			}
+			if(empty($_POST['rid']))
+			{
+				$ERRORS[]	= $lang['NO_ID'];
 			}
 			else if (!eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$", trim(strtolower($_POST['rmail']))))
 			{
@@ -157,16 +163,7 @@ switch ($_GET['go'])
 	
 		$stylee	= "rules";
 		$titlee	= $lang['RULES'];
-		
-		//prevent empty !!
-		if (strlen($ruless) > 3)
-		{
-			$contents = stripslashes($ruless);
-		}
-		else
-		{
-			$contents	= $lang['NO_RULES_NOW'];
-		}
+		$contents = (strlen($ruless) > 3) ? stripslashes($ruless) : $lang['NO_RULES_NOW'];
 		
 		($hook = kleeja_run_hook('rules_go_page')) ? eval($hook) : null; //run hook
 	
@@ -198,9 +195,9 @@ switch ($_GET['go'])
 			$ERRORS	=	'';
 			($hook = kleeja_run_hook('submit_call_go_page')) ? eval($hook) : null; //run hook
 			
-			if (empty($_POST['cname']) || empty($_POST['cmail']) || empty($_POST['ctext']) )
+			if (empty($_POST['cname'])  || empty($_POST['ctext']) )
 			{
-				$ERRORS[] = $lang['EMPTY_FIELDS'];
+				$ERRORS[]	= $lang['EMPTY_FIELDS'] . ' : ' . (empty($_POST['cname']) ? ' [ ' . $lang['YOURNAME'] . ' ] ' : '')  . (empty($_POST['ctext']) ? '  [ ' . $lang['TEXT']  . ' ] ': '');
 			}
 			else if (!eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$", trim(strtolower($_POST['cmail']))))
 			{
@@ -318,10 +315,7 @@ switch ($_GET['go'])
 													'SET'		=> 'files=files-1,sizes=sizes-' . $row['size'],
 												);
 							
-							if (!$SQL->build($update_query))
-							{
-								big_error('Error',$lang['CANT_UPDATE_SQL']);
-							}
+							$SQL->build($update_query);
 							
 							kleeja_info($lang['DELETE_SUCCESFUL']);
 						}

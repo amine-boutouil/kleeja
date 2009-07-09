@@ -71,7 +71,11 @@
 	$lang['FUNCTION_DISC_GD']						= 'The function imagecreatetruecolor is a GD library that is used to create thumbnails & control photos.';
 	$lang['FUNCTION_DISC_FOPEN']					= 'The function fopen is used to control styles & files in kleeja.';
 	$lang['FUNCTION_DISC_MUF']						= 'The function move_uploaded_file is used to upload files and it\'s the most important function in the script.';
-	
+	//
+	$lang['ADVICES_CHECK']							= 'ЁЌ’ г ёѕг (нгяд  Ћ»н  ябнћ« »ѕжд  Ќёё е–« «бЁЌ’ , бяде гћ—ѕ гЏбжг«  бя)';
+	$lang['ADVICES_REGISTER_GLOBALS']				= 'ќ«’н… register_globals гЁЏбе , е–е «бќ«’не џн— гЌ»»  ЁЏнбе« жнЁ÷б  ЏЎнбе« , жгЏ е–« Ёябнћ«  Ќ«жб  ЏЎнб «Ћ«—е« »—гћн«р .';
+	$lang['ADVICES_ICONV']							= 'ѕж«б iconv џн— гЁЏбе бѕня , бяд е–« б«нгдЏ  Ћ»н  ябнћ« , ЁёЎ ” ж«ће г‘«яб Џдѕ «б—»Ў гЏ ”я—» «  «ќ—м џн— г ж«Ёёе гЏ дў«г «б —гн“ «бЏ«бгн UTF8.';
+	$lang['ADVICES_MAGIC_QUOTES']					= 'ќ«’н… magic_quotes гЁЏбе , е–е «бќ«’не џн— гЌ»»  ЁЏнбе« жнЁ÷б  ЏЎнбе« , жгЏ е–« Ёябнћ«  Ќ«жб  ЏЎнб «Ћ«—е« »—гћн«р ..';
 	
 	//UPDATOR
 	$lang['INST_CHOOSE_UPDATE_FILE']				= 'Choose the appropriate update file';

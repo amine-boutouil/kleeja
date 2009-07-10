@@ -229,11 +229,7 @@ switch ($_GET['go'])
 					
 				($hook = kleeja_run_hook('qr_insert_new_call')) ? eval($hook) : null; //run hook
 			
-				if (!$SQL->build($insert_query))
-				{
-					kleeja_err($lang['CANT_INSERT_SQL']);
-				}
-				else
+				if ($SQL->build($insert_query))
 				{
 					send_mail($config['sitemail2'], $text  . "\n\n\n\n" . 'TIME : ' . date("d-m-Y h:i a", $timee) . ' - IP:' . $ip, $lang['CALL'], $mail, $name);
 					kleeja_info($lang['THNX_CALLED']);
@@ -278,19 +274,15 @@ switch ($_GET['go'])
 			if(isset($_GET['sure']) && $_GET['sure'] == 'ok')
 			{
 				$query = array('SELECT'=> 'f.id, f.name, f.folder, f.size',
-							'FROM'	=> "{$dbprefix}files f",
-							'WHERE'	=> "f.code_del='" . $cd . "'"
+								'FROM'	=> "{$dbprefix}files f",
+								'WHERE'	=> "f.code_del='" . $cd . "'"
 							);
 					
 				($hook = kleeja_run_hook('qr_select_file_with_code_del')) ? eval($hook) : null; //run hook	
 				
 				$result	=	$SQL->build($query);
 
-				if ($SQL->num_rows($result) == 0)
-				{
-					kleeja_err($lang['CANT_DEL_F']);
-				}
-				else
+				if ($SQL->num_rows($result) != 0)
 				{
 					while($row=$SQL->fetch_array($result))
 					{
@@ -316,12 +308,7 @@ switch ($_GET['go'])
 												);
 							
 							$SQL->build($update_query);
-							
 							kleeja_info($lang['DELETE_SUCCESFUL']);
-						}
-						else
-						{
-							big_error('Error',$lang['CANT_DELETE_SQL']);
 						}
 					}
 				

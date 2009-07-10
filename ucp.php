@@ -105,7 +105,7 @@ switch ($_GET['go'])
 						
 						$errorpage = true;
 						($hook = kleeja_run_hook('login_data_no_error')) ? eval($hook) : null; //run hook
-						$text	= $lang['LOGIN_SUCCESFUL'] . ' <br /> <a href="./index.php">' . $lang['HOME'] . '</a>';
+						$text	= $lang['LOGIN_SUCCESFUL'] . ' <br /> <a href="' . $config['siteurl'] . '">' . $lang['HOME'] . '</a>';
 						kleeja_info($text);
 					}
 					else
@@ -217,7 +217,7 @@ switch ($_GET['go'])
 								$last_user_id = $SQL->insert_id();
 								
 								($hook = kleeja_run_hook('ok_added_users_register')) ? eval($hook) : null; //run hook
-								$text	= $lang['REGISTER_SUCCESFUL'] . '<a href="ucp.php?go=login">' . $lang['LOGIN'] . '</a>';
+								$text	= $lang['REGISTER_SUCCESFUL'] . '<a href="' .  $config['siteurl']  . ($config['mod_writer'] ?  'login.html' : 'ucp.php?go=login') . '">' . $lang['LOGIN'] . '</a>';
 								//update number of stats
 								$update_query	= array('UPDATE'	=> "{$dbprefix}stats",
 														'SET'		=> "users=users+1,lastuser='$name'",
@@ -261,7 +261,7 @@ switch ($_GET['go'])
 					$SQL->build($query_del);
 				}
 				
-				$text	= $lang['LOGOUT_SUCCESFUL'] . '<br /> <a href="index.php">' . $lang['HOME'] . '</a>';
+				$text	= $lang['LOGOUT_SUCCESFUL'] . '<br /> <a href="' .  $config['siteurl']  . '">' . $lang['HOME'] . '</a>';
 				kleeja_info($text, '', 1);
 			}
 			else
@@ -321,9 +321,9 @@ switch ($_GET['go'])
 			$start				= $Pager->getStartRow();
 			
 			$your_fileuser		= $config['siteurl'] . ($config['mod_writer'] ? 'fileuser-' . $usrcp->id() . '.html' : 'ucp.php?go=fileuser&amp;id=' . $usrcp->id());
-			$filecp_link		= $user_id == $usrcp->id() ?  $config['siteurl'] . ($config['mod_writer'] ? 'filecp.html' : 'ucp.php?go=filecp') : false;
+			$filecp_link		= $user_id == $usrcp->id() ? $config['siteurl'] . ($config['mod_writer'] ? 'filecp.html' : 'ucp.php?go=filecp') : false;
 			$total_pages		= $Pager->getTotalPages(); 
-			$linkgoto			= $config['mod_writer'] ? $config['siteurl'] . 'fileuser-' . $user_id : $config['siteurl'] . 'ucp.php?go=fileuser&amp;id=' . $user_id;
+			$linkgoto			= $config['siteurl'] . ($config['mod_writer'] ?  'fileuser-' . $user_id : 'ucp.php?go=fileuser&amp;id=' . $user_id);
 			$page_nums			= $Pager->print_nums($linkgoto); 
 				
 			$no_results = false;
@@ -403,8 +403,8 @@ switch ($_GET['go'])
 			$currentPage	= (isset($_GET['page']))? intval($_GET['page']) : 1;
 			$Pager			= new SimplePager($perpage, $nums_rows, $currentPage);
 			$start			= $Pager->getStartRow();
-			$linkgoto		= $config['mod_writer'] ? $config['siteurl'] . 'filecp' : $config['siteurl'] . 'ucp.php?go=filecp';
-			$page_nums		= $config['mod_writer'] ? $Pager->print_nums($linkgoto) : $Pager->print_nums($linkgoto); 
+			$linkgoto		= $config['siteurl'] . ($config['mod_writer'] ? 'filecp' : 'ucp.php?go=filecp');
+			$page_nums		= $Pager->print_nums($linkgoto); 
 				
 			$total_pages	= $Pager->getTotalPages(); 
 			
@@ -417,8 +417,8 @@ switch ($_GET['go'])
 				($hook = kleeja_run_hook('qr_select_files_in_filecp')) ? eval($hook) : null; //run hook
 				
 				$result	= $SQL->build($query);
-				$sizes = false;
-				$num = 0;
+				
+				$sizes = $num = 0;
 				while($row=$SQL->fetch_array($result))
 				{
 					$del[$row['id']] = (isset($_POST["del_".$row['id']])) ? $_POST["del_" . $row['id']] : "";
@@ -452,7 +452,6 @@ switch ($_GET['go'])
 								$ids[] = $row['id'];
 								$num++;		
 								$sizes += $row['size'];
-								
 							}
 						}
 				}
@@ -470,7 +469,7 @@ switch ($_GET['go'])
 						//update number of stats
 						$update_query	= array('UPDATE'	=> "{$dbprefix}stats",
 												'SET'		=> "sizes=sizes-$sizes,files=files-$num",
-									);
+												);
 							
 						$SQL->build($update_query);
 					}
@@ -507,7 +506,7 @@ switch ($_GET['go'])
 			$name		= $usrcp->name();
 			$mail		= $usrcp->mail();
 			$show_my_filecp	= $usrcp->get_data('show_my_filecp');
-			$data_forum		= ($config['user_system']==1) ? true : false ;
+			$data_forum		= ($config['user_system'] == 1) ? true : false ;
 			$goto_forum_link= !empty($forum_path) ? $forum_path : '';
 			
 			
@@ -578,22 +577,53 @@ switch ($_GET['go'])
 		//
 		//reset password page
 		//
-		//note: must be improved in 1.0.? to fix bug[!]
-		//
 		case "get_pass" : 
 
 			//config register
-			if ($config['user_system'] !=1)
+			if ($config['user_system'] != 1)
 			{
 				$text = '<a href="' . $forum_path . '">' . $lang['LOST_PASS_FORUM'] . '</a>';
-				kleeja_info($text,$lang['PLACE_NO_YOU']);
+				kleeja_info($text, $lang['PLACE_NO_YOU']);
+			}
+			
+			//after sent mail .. come here 
+			if(isset($_GET['activation_key']) && isset($_GET['uid']))
+			{
+				($hook = kleeja_run_hook('get_pass_activation_key')) ? eval($hook) : null; //run hook
+				
+				$h_key = htmlspecialchars($_GET['activation_key']);
+				$u_id = intval($_GET['uid']);
+				
+				$result = $SQL->query("SELECT new_password FROM `{$dbprefix}users` WHERE hash_key='" . $SQL->escape($h_key) . "' AND id='" . $u_id . "'");
+				if($SQL->num_rows($result))
+				{
+					$npass = $SQL->fetch_array($result);
+					$npass = $npass['new_password'];
+					//password now will be same as new password
+					$update_query = array(
+											'UPDATE'=> "{$dbprefix}users",
+											'SET'	=> "password = '" . $npass . "', new_password = '', hash_key = ''",
+											'WHERE'	=> 'id=' . $u_id,
+										);
+										
+					($hook = kleeja_run_hook('qr_update_newpass_activation')) ? eval($hook) : null; //run hook
+					$SQL->build($update_query);
+					
+					$text = $lang['OK_APPLY_NEWPASS'] . '<br /><a href="' . $config['siteurl']  . ($config['mod_writer'] ?  'login.html' : 'ucp.php?go=login') . '">' . $lang['LOGIN'] . '</a>';
+					kleeja_info($text);
+					exit;
+				}
+				
+				//no else .. just do nothing cuz it's wrong and wrong mean spams !
+				redirect($config['siteurl'], true, true);
+				exit;//i dont trust functions :)
+				
 			}
 			
 			//logon before ?
 			if ($usrcp->name())
 			{
 				($hook = kleeja_run_hook('get_pass_logon_before')) ? eval($hook) : null; //run hook
-				
 				kleeja_info($lang['LOGINED_BEFORE']);
 			}
 			
@@ -619,11 +649,11 @@ switch ($_GET['go'])
 				{
 					$ERRORS[] = $lang['EMPTY_FIELDS'];
 				}	
-				else if (!eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$", trim($_POST['rmail'])))
+				else if (!eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$", trim(strtolower($_POST['rmail']))))
 				{
 					$ERRORS[] = $lang['WRONG_EMAIL'];
 				}
-				else if ($SQL->num_rows($SQL->query("select * from `{$dbprefix}users` where mail='" . $SQL->escape($_POST['rmail']) . "'")) ==0 )
+				else if ($SQL->num_rows($SQL->query("SELECT name FROM `{$dbprefix}users` WHERE mail='" . $SQL->escape(strtolower($_POST['rmail'])) . "'")) ==0)
 				{
 					$ERRORS[] = $lang['WRONG_DB_EMAIL'];
 				}
@@ -633,7 +663,7 @@ switch ($_GET['go'])
 				{
 							$query = array(	'SELECT'=> 'u.*',
 											'FROM'	=> "{$dbprefix}users u",
-											'WHERE'	=> "u.mail='" . $_POST['rmail'] . "'"
+											'WHERE'	=> "u.mail='" .  $SQL->escape(strtolower($_POST['rmail'])) . "'"
 											);
 									
 							($hook = kleeja_run_hook('qr_select_mail_get_pass')) ? eval($hook) : null; //run hook
@@ -648,16 +678,17 @@ switch ($_GET['go'])
 								{
 									$newpass .= substr($chars, (mt_rand() % strlen($chars)), 1);
 								}
+								$hash_key = md5($newpass . time());
 								
 								$to			= $row['mail'];
 								$subject	= $lang['GET_LOSTPASS'] . ':' . $config['sitename'];
-								$message	= "\n " . $lang['WELCOME'] . " " . $row['name'] . "\r\n " . $lang['GET_LOSTPASS_MSG'] . "\r\n " . $lang['PASSWORD'] . " : " . $newpass . "\r\n\r\n kleeja.com";
-								$id			= (int) $row['id'];
-								
+								$activation_link = $config['siteurl'] . 'ucp.php?go=get_pass&activation_key=' . urlencode($hash_key) . '&uid=' . $row['id'];
+								$message	= "\n " . $lang['WELCOME'] . " " . $row['name'] . "\r\n " . sprintf($lang['GET_LOSTPASS_MSG'], $activation_link, $newpass)  . "\r\n\r\n kleeja.com";
+
 								$update_query = array(
 														'UPDATE'=> "{$dbprefix}users",
-														'SET'	=> "password = '" . md5($SQL->escape($newpass)) . "'",
-														'WHERE'	=> 'id=' . $id,
+														'SET'	=> "new_password = '" . md5($SQL->escape($newpass)) . "', hash_key = '" . $hash_key . "'",
+														'WHERE'	=> 'id=' . $row['id'],
 													);
 										
 								($hook = kleeja_run_hook('qr_update_newpass_get_pass')) ? eval($hook) : null; //run hook
@@ -673,7 +704,7 @@ switch ($_GET['go'])
 							}	
 							else
 							{
-								$text	= $lang['OK_SEND_NEWPASS'] . '<a href="ucp.php?go=login">' . $lang['LOGIN'] . '</a>';
+								$text	= $lang['OK_SEND_NEWPASS'] . '<br /><a href="' . $config['siteurl']  . ($config['mod_writer'] ?  'login.html' : 'ucp.php?go=login') . '">' . $lang['LOGIN'] . '</a>';
 								kleeja_info($text);	
 							}
 							

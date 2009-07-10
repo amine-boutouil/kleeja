@@ -15,6 +15,16 @@
 <br />
 <!-- end welcome index -->
 
+<!---- START  FOR INFORMATION ---->
+<IF NAME="info">
+        <div class="result">
+                <LOOP NAME="info">
+                <strong>{lang.INFORMATION}:</strong> {{i}}<br />
+                </LOOP>
+        </div>
+</IF>
+<!---- END  FOR INFORMATION ---->
+
 <!---- START  FOR UPLOAD BOXES ---->
 <form name="uploader" id="uploader" action="{action}" method="post"  enctype="multipart/form-data" onsubmit="form_submit();">
 
@@ -79,16 +89,6 @@
 <!---- END  FOR UPLOAD BOXES ---->
 
 <br />
-
-<!---- START  FOR INFORMATION ---->
-<IF NAME="info">
-        <div class="result">
-                <LOOP NAME="info">
-                <strong>{lang.INFORMATION}:</strong> {{i}}<br />
-                </LOOP>
-        </div>
-</IF>
-<!---- END  FOR INFORMATION ---->
 
 
 <!---- START FOR ONLINE ---->

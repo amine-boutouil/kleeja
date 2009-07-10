@@ -5,20 +5,29 @@
 
 <!-- start site name and title  -->
 <div id="title-x"><b><a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}</b></div>
-<!--  # End  site name and title  -->
+<!--  ## End  site name and title  -->
 
 <div class="clr"></div><div class="line"></div><div class="clr"></div>
 
+<!-- start file report  -->
+<div class="fileReport" onclick="window.location.href='{REPORT}';">
+<a href="{REPORT}"><img src="{STYLE_PATH}images/filereport.png" style="vertical-align:middle;" />&nbsp;{lang.FILEREPORT}</a>
+</div>
+<!-- ## End file report  -->
 
-<div class="fileReport"><a href="{REPORT}">{lang.FILEREPORT}</a></div>
+<div class="clr"></div>
 
-<br />
-{lang.FILE_FOUNDED} 
-<br />
-<div id="url"><h3>{lang.JS_MUST_ON}</h3></div>
-<br />
-
-<h2>{lang.FILE_INFO} :</h2> 
+<!-- start div download  -->
+<div id="featured">
+<div id="ftdtop"></div>
+<div class="ftdcontent">
+<img src="{STYLE_PATH}images/Stock.png" />
+ 
+<h2>{lang.FILE_FOUNDED}</h2>
+ <p>
+ <br />
+ <div id="url"><h3>{lang.JS_MUST_ON}</h3></div>
+ <h2>{lang.FILE_INFO} :</h2> 
 
 {lang.FILENAME} : {name} <br />
 {lang.FILETYPE} : <img src="{file_ext_icon}" /> {type} <br />
@@ -26,15 +35,13 @@
 {lang.FILEDATE} : {time} <br />
 {lang.FILEUPS} : {uploads} <br />
 <!-- download template after info -->
-
-								
-
-				
-<br />
-<br />
-
-
-
+ 
+ </p>
+ </div>
+ <div id="ftdbtm"></div>
+</div>
+<!-- ## End div download  -->
+		
 <script language="javascript">
 var timer = {seconds_w};
 ti();
@@ -42,15 +49,16 @@ function ti()
 {
     if(timer > 0)
     {
-        document.getElementById("url").innerHTML = '<strong>{lang.WAIT} ' + timer + ' </strong>';
+        document.getElementById("url").innerHTML = '<strong class="wait">{lang.WAIT} ' + timer + ' </strong>';
         timer = timer - 1;
         setTimeout("ti()", 1000)
     }
     else
     {
-        document.getElementById("url").innerHTML = '<a href="{url_file}" target="balnk">»» {lang.CLICK_DOWN} ««</a><br \><br \>';
+        document.getElementById("url").innerHTML = '<div id="download"><ul><li><a href="{url_file}" target="balnk"><span>{lang.CLICK_DOWN}</span></a></li></ul></div><div class="clr"></div>';
     }
 }
 </script>
+
 
 </div>

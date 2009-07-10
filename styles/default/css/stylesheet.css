@@ -249,6 +249,22 @@ margin:2px}
 
 /* box for some info */
 
+.fileReport {
+	margin:0 auto 2px auto; 
+	padding:6px; 
+	text-align: center;
+
+}
+.fileReport  a{
+	color:#F68618;
+	font-size: 18px; 
+	font-weight: normal; 
+}
+
+.fileReport a:hover{
+	color:#F68618;
+background-color: #FFF;
+}
 
 .err {padding: 5px;background-color: #FFEBE9;border: 1.5px solid #DD3F0E;margin: 10px 10px;
         font-size: 13px;font-family: "Tahoma", Times, serif;}

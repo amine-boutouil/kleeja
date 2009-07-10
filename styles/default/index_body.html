@@ -17,6 +17,9 @@
 
 <!---- START  FOR INFORMATION ---->
 <IF NAME="info">
+		<IF NAME="filecp_link">
+		<a href="{filecp_link}">{usrfile_name}</a>
+		</IF>
         <div class="result">
                 <LOOP NAME="info">
                 <strong>{lang.INFORMATION}:</strong> {{i}}<br />

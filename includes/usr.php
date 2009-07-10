@@ -162,7 +162,7 @@ class usrcp
 				{
 					($hook = kleeja_run_hook('id_func_usr_class')) ? eval($hook) : null; //run hook
 					
-					if ($_SESSION['USER_SESS'] == session_id())
+					if (isset($_SESSION['USER_SESS']) && $_SESSION['USER_SESS'] == session_id())
 					{
 						if ($_SESSION['USER_ID'])
 						{

@@ -71,21 +71,15 @@ switch ($_GET['go'])
 			{
 					($hook = kleeja_run_hook('login_after_submit')) ? eval($hook) : null; //run hook
 					
-					//for onlines
-					$ip	= get_ip();
-					
 					if ($config['allow_online'] == 1)
 					{
 						$query_del	= array('DELETE'	=> "{$dbprefix}online",
-											'WHERE'		=> "ip='" . $ip . "'"
+											'WHERE'		=> "ip='" . get_ip() . "'"
 										);
 										
 						($hook = kleeja_run_hook('qr_delete_onlines_in_login')) ? eval($hook) : null; //run hook
 						
-						if (!$SQL->build($query_del))
-						{
-							big_error('Error',$lang['CANT_DELETE_SQL']);
-						}
+						$SQL->build($query_del);
 					}
 
 					//login
@@ -218,11 +212,7 @@ switch ($_GET['go'])
 							
 							($hook = kleeja_run_hook('qr_insert_new_user_register')) ? eval($hook) : null; //run hook
 
-							if (!$SQL->build($insert_query))
-							{
-								kleeja_err($lang['CANT_INSERT_SQL']);	
-							}	
-							else
+							if ($SQL->build($insert_query))
 							{
 								$last_user_id = $SQL->insert_id();
 								
@@ -230,18 +220,13 @@ switch ($_GET['go'])
 								$text	= $lang['REGISTER_SUCCESFUL'] . '<a href="ucp.php?go=login">' . $lang['LOGIN'] . '</a>';
 								//update number of stats
 								$update_query	= array('UPDATE'	=> "{$dbprefix}stats",
-													'SET'		=> "users=users+1,lastuser='$name'",
+														'SET'		=> "users=users+1,lastuser='$name'",
 												);
 												
 								($hook = kleeja_run_hook('qr_update_no_users_register')) ? eval($hook) : null; //run hook
-								if (!$SQL->build($update_query))
-								{
-									big_error('Error',$lang['CANT_UPDATE_SQL']);
-								}
+								$SQL->build($update_query);
 								kleeja_info($text);
 							}
-							
-							
 						}
 						else
 						{
@@ -267,19 +252,13 @@ switch ($_GET['go'])
 			{
 				if ($config['allow_online'] == 1)
 				{
-					//for onlines
-					$ip	= get_ip();
-					
 					$query_del	= array('DELETE'	=> "{$dbprefix}online",
-										'WHERE'		=> "ip='" . $SQL->escape($ip) . "'"
+										'WHERE'		=> "ip='" .  get_ip() . "'"
 									);
 									
 					($hook = kleeja_run_hook('qr_delete_onlines_in_logout')) ? eval($hook) : null; //run hook
 
-					if (!$SQL->build($query_del))
-					{
-						big_error('Error',$lang['CANT_DELETE_SQL']);
-					}
+					$SQL->build($query_del);
 				}
 				
 				$text	= $lang['LOGOUT_SUCCESFUL'] . '<br /> <a href="index.php">' . $lang['HOME'] . '</a>';
@@ -306,7 +285,6 @@ switch ($_GET['go'])
 			{
 				kleeja_info($lang['USERFILE_CLOSED'], $lang['CLOSED_FEATURE']);
 			}
-			
 			
 			//some vars
 			$stylee	= "fileuser";
@@ -487,20 +465,14 @@ switch ($_GET['go'])
 									'WHERE'	=> "id IN (" . implode(',', $ids) . ")",);
 												
 						($hook = kleeja_run_hook('qr_del_files_in_filecp')) ? eval($hook) : null; //run hook	
-						if (!$SQL->build($query_del)) 
-						{
-							big_error('Error',$lang['CANT_DELETE_SQL']);
-						}		
+						$SQL->build($query_del);
 								
 						//update number of stats
 						$update_query	= array('UPDATE'	=> "{$dbprefix}stats",
-									'SET'		=> "sizes=sizes-$sizes,files=files-$num",
+												'SET'		=> "sizes=sizes-$sizes,files=files-$num",
 									);
 							
-						if (!$SQL->build($update_query))
-						{
-							big_error('Error',$lang['CANT_UPDATE_SQL']);
-						}
+						$SQL->build($update_query);
 					}
 				}			
 				$SQL->freeresult($result);
@@ -582,12 +554,8 @@ switch ($_GET['go'])
 												);
 								
 						($hook = kleeja_run_hook('qr_update_data_in_profile')) ? eval($hook) : null; //run hook
-						if (!$SQL->build($update_query))
-						{
-							big_error('Error',$lang['CANT_UPDATE_SQL']);
-						}
 						
-						//msg
+						$SQL->build($update_query);
 						kleeja_info($lang['DATA_CHANGED_O_LO']);
 				}
 				else
@@ -693,10 +661,7 @@ switch ($_GET['go'])
 													);
 										
 								($hook = kleeja_run_hook('qr_update_newpass_get_pass')) ? eval($hook) : null; //run hook
-								if (!$SQL->build($update_query))
-								{
-									big_error('Error',$lang['CANT_UPDATE_SQL']);
-								}
+								$SQL->build($update_query);
 							}
 							
 							//send it

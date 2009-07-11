@@ -5,9 +5,8 @@
 <meta http-equiv="Content-Language" content="ar-sa"/>
 <meta name="copyrights" content="Powered by Kleeja :: kleeja.com" />
 {EXTRA_CODE_META}
-   <link rel="shortcut icon" href="{STYLE_PATH}images/favicon.ico" >
-   <link rel="icon" type="image/gif" href="{STYLE_PATH}images/animated_favicon1.gif" >
-   
+<link rel="shortcut icon" href="favicon.ico" >
+<link rel="icon" type="image/gif" href="images/animated_favicon1.gif" >
 <link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH}css/screen.css" />
 <script type="text/javascript">
  var number_of_uploads={config.filesnum};
@@ -16,6 +15,7 @@ var LANG_MORE_F_FILES ="{lang.MORE_F_FILES}";
 </script>
 <script type="text/javascript" src="{STYLE_PATH}javascript.js"></script>
 </head>
+
 <body>
 
 <!-- start logo -->
@@ -34,11 +34,11 @@ var LANG_MORE_F_FILES ="{lang.MORE_F_FILES}";
 <div id="top_menu">
 	<ul class="m3nu">
 		<li><a href="{config.siteurl}" title="{index_name}" class="current"><img src="{STYLE_PATH}images/home.png" style="vertical-align:middle;" />&nbsp;&nbsp;{index_name}</a></li>
-		<li><a href="{rules_url}" title="{rules_name}"><img src="{STYLE_PATH}images/rules.gif" style="vertical-align:middle;" />&nbsp;{rules_name}</a></li>
-		<li><a href="{guide_url}" title="{guide_name}"><img src="{STYLE_PATH}images/guide.gif" style="vertical-align:middle;" />&nbsp;{guide_name}</a></li>
-		<li><a href="{call_url}" title="{call_name}"><img src="{STYLE_PATH}images/Contact.gif" style="vertical-align:middle;" />&nbsp;{call_name}</a></li>
+		<li><a href="{rules_url}" title="{rules_name}">{rules_name}</a></li>
+		<li><a href="{guide_url}" title="{guide_name}">{guide_name}</a></li>
+		<li><a href="{call_url}" title="{call_name}">{call_name}</a></li>
 		<IF NAME="config.allow_stat_pg">
-		<li><a href="{stats_url}" title="{stats_name}"><img src="{STYLE_PATH}images/Stats.gif" style="vertical-align:middle;" />&nbsp;{stats_name}</a></li>
+		<li><a href="{stats_url}" title="{stats_name}">{stats_name}</a></li>
 		</IF>
 	</ul>
 </div>

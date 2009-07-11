@@ -221,7 +221,7 @@ switch ($_GET['go'])
 			{
 				$name	= (string) $SQL->escape($_POST['cname']);
 				$text	= (string) $SQL->escape($_POST['ctext']);
-				$mail	= (string) strtolower($_POST['cmail']);
+				$mail	= (string) strtolower(trim($SQL->escape($_POST['cmail'])));
 				$timee	= (int)	time();
 				$ip		=  get_ip();
 					

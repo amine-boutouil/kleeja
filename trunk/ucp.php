@@ -191,7 +191,7 @@ switch ($_GET['go'])
 						{
 							$ERRORS[] = $lang['EXIST_NAME'];
 						}
-						else if ($SQL->num_rows($SQL->query("SELECT * FROM `{$dbprefix}users` WHERE mail='" . trim($SQL->escape($_POST["lmail"])) . "'")) !=0 )
+						else if ($SQL->num_rows($SQL->query("SELECT * FROM `{$dbprefix}users` WHERE mail='" . strtolower(trim($SQL->escape($_POST["lmail"]))) . "'")) !=0 )
 						{
 							$ERRORS[] = $lang['EXIST_EMAIL'];
 						}
@@ -201,7 +201,7 @@ switch ($_GET['go'])
 						{
 							$name			= (string) $SQL->escape(trim($_POST['lname']));
 							$pass			= (string) md5($SQL->escape(trim($_POST['lpass'])));
-							$mail			= (string) trim($_POST['lmail']);
+							$mail			= (string) strtolower(trim($SQL->escape($_POST['lmail']))); // security ;)
 							$session_id		= (string) session_id();
 							$clean_name		= $usrcp->cleanusername($name);
 							

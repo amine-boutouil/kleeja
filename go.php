@@ -112,7 +112,7 @@ switch ($_GET['go'])
 			{
 					$name	= (string) $SQL->escape($_POST['rname']);
 					$text	= (string) $SQL->escape($_POST['rtext']);
-					$mail	= (string) strtolower($_POST['rmail']);
+					$mail	= (string) strtolower(trim($SQL->escape($_POST['rmail'])));
 					$url	= (string) $SQL->real_escape($_POST['rurl']);
 					$time 	= (int) time();
 					$rid	= (int) intval($_POST['rid']);
@@ -128,8 +128,6 @@ switch ($_GET['go'])
 			
 					$SQL->build($insert_query);
 					
-					kleeja_info($lang['THNX_REPORTED']);
-					
 					//update number of reports
 					$update_query	= array('UPDATE'	=> "{$dbprefix}files",
 											'SET'		=> 'report=report+1',
@@ -140,7 +138,13 @@ switch ($_GET['go'])
 					
 					$SQL->build($update_query);
 					
-					send_mail($config['sitemail2'], $text . "\n\n\n\n" . 'URL :' . $url . ' - TIME : ' . date("d-m-Y h:i a", $time) . ' - IP:' . $ip, $lang['REPORT'], $mail, $name);
+					$to = $config['sitemail2']; //administrator e-mail
+					$message = $text . "\n\n\n\n" . 'URL :' . $url . ' - TIME : ' . date("d-m-Y h:i a", $time) . ' - IP:' . $ip;
+					$subject = $lang['REPORT'];
+					send_mail($to, $message, $subject, $mail, $name);
+					
+					kleeja_info($lang['THNX_REPORTED']);
+					
 			}
 			else
 			{

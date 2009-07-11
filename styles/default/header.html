@@ -8,6 +8,9 @@
 <link rel="shortcut icon" href="favicon.ico" >
 <link rel="icon" type="image/gif" href="images/animated_favicon1.gif" >
 <link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH}css/screen.css" />
+<IF NAME="{lang.DIR}==ltr">
+<link rel="stylesheet" type="text/css" href="{STYLE_PATH}css/stylesheet_ltr.css"  />
+</IF>
 <script type="text/javascript">
  var number_of_uploads={config.filesnum};
  var LANG_PAST_URL_HERE ="{lang.PAST_URL_HERE}";
@@ -62,8 +65,8 @@ var LANG_MORE_F_FILES ="{lang.MORE_F_FILES}";
 			<li><a href="{usrcp_url}"><img src="{STYLE_PATH}images/User.png" alt="{usrcp_name}" style="vertical-align:middle;" />{usrcp_name}</a></li>
 			<IF NAME="user_is">
 			    <IF NAME="config.enable_userfile">
-			<li><a href="{usrfile_url}"><img src="{STYLE_PATH}images/user-folder.png" alt="{usrfile_name}" style="vertical-align:middle;" />{usrfile_name}</a></li>
-			</IF>
+				<li><a href="{usrfile_url}"><img src="{STYLE_PATH}images/user-folder.png" alt="{usrfile_name}" style="vertical-align:middle;" />{usrfile_name}</a></li>
+				</IF>
 			<li><a href="{filecp_url}"><img src="{STYLE_PATH}images/filecp.png" alt="{filecp_name}" style="vertical-align:middle;" />{filecp_name}</a></li>
 			</IF>
 			<b></b>

@@ -432,36 +432,48 @@ font: bold 11px tahoma,Verdana, Helvetica, sans-serif;
 
 .page_stats{float:left;}
 
-.roundedcornr_box_899064 {
-   background: #d8d8d8;
+
+#footerPan ul{
+width:320px; 
+float:left;
 }
-.roundedcornr_top_899064 div {
-   background: url(../images/roundedcornr_899064_tl.png) no-repeat top left;
+#footerPan li{
+float:left;  
+font-size:11px/15px ; 
+font-weight:normal;
 }
-.roundedcornr_top_899064 {
-   background: url(../images/roundedcornr_899064_tr.png) no-repeat top right;
+#footerPan ul li a{
+padding:0 5px 0; 
+color:#5C5C5C;  
 }
-.roundedcornr_bottom_899064 div {
-   background: url(../images/roundedcornr_899064_bl.png) no-repeat bottom left;
-}
-.roundedcornr_bottom_899064 {
-   background: url(../images/roundedcornr_899064_br.png) no-repeat bottom right;
+#footerPan ul li a:hover{
+text-decoration:underline;
+background:#fff;
 }
 
-.roundedcornr_top_899064 div, .roundedcornr_top_899064, 
-.roundedcornr_bottom_899064 div, .roundedcornr_bottom_899064 {
-   width: 100%;
-   height: 15px;
-   font-size: 1px;
+
+
+
+.call form {
+	margin:10px; padding: 0;
 }
-.roundedcornr_content_899064 { margin: 0 15px; }
-
-
-
-
-
-#footerPan ul{width:320px; float:left;}
-#footerPan li{float:left;  font-size:11px/15px ; font-weight:normal;}
-#footerPan ul li a{padding:0 5px 0; color:#5C5C5C;  text-decoration:none;}
-#footerPan ul li a:hover{text-decoration:underline;background:#fff;}
-
+.call label {
+	display:block;
+	font-weight:bold;
+	margin:5px 0;
+}
+.call input {
+	padding: 2px;
+	border:1px solid #999;
+	font: bold 12px tahoma, Verdana, sans-serif;
+	color:#666;
+}
+.call textarea {
+	width:300px;
+	padding:2px;
+	font: bold 12px tahoma, Verdana, sans-serif;
+	border:1px solid #999;
+	height:100px;
+	display:block;
+	color:#666;
+}

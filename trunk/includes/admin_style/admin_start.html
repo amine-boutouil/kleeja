@@ -108,65 +108,20 @@
 
 <br />
 
-<!-- start >> update now disc >>  error System Messages -->
-<IF NAME="update_now">
+<!-- start >> error System Messages -->
+<LOOP NAME="ADM_NOTIFICATIONS">
 <div id="system-message">
-	<div class="error">
+	<div class="{{msg_type}}">
 		<ul>
-		<li><u>{lang.R_CHECK_UPDATE} !</u><p>{update_now_disc}</p></li>
+		<li><u>{{title}} !</u><p>{{msg}}</p></li>
 		</ul>
 	</div>
 </div>
-</IF>
-<!-- end >> update now disc >>  error System Messages -->
-
 <!-- start clear  -->
 <div class="clr"></div>
 <!-- end clear  -->
-
-<!-- start >> no copyrights disc  >>  error System Messages -->
-<IF NAME="no_copyrights">
-<div id="system-message">
-	<div class="error">
-		<ul>
-		<li><u>{lang.NOTE} !</u><p>{no_copyrights_disc}</p></li>
-		</ul>
-	</div>
-</div>
-</IF>
-<!-- end >> no copyrights disc  >>  error System Messages -->
-
-<!-- start clear  -->
-<div class="clr"></div>
-<!-- end clear  -->
-
-<!-- start >> config writable  >>  error System Messages -->
-<IF NAME="is_config_writable">
-<div id="system-message">
-	<div class="info">
-		<ul>
-		<li><u>{lang.NOTE} !</u><p>{lang.CONFIG_WRITEABLE}</p></li>
-		</ul>
-	</div>
-</div>
-</IF>
-<!-- end >> config writable  >>  error System Messages -->
-
-<!-- start clear  -->
-<div class="clr"></div>
-<!-- end clear  -->
-
-<!-- start >> there is cached  >>  error System Messages -->
-<IF NAME="there_is_cached">
-<div id="system-message">
-	<div class="info">
-		<ul>
-			<li><u>{lang.CACHED_STYLES} !</u><p>{there_is_cached}</p></li>
-		</ul>
-	</div>
-</div>
-</IF>
-<!-- end >> there is cached  >>  error System Messages -->
+</LOOP>
+<!-- end >> error System Messages -->
 
 <!-- start dot  -->
 <p class="dot" />

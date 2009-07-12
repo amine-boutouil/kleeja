@@ -419,6 +419,7 @@ $lang = array_merge($lang, array(
 	'NOT_SAFE_FILE'	=> 'The file does not look safe !',
 	'CONFIG_WRITEABLE' => 'The file config.php is currently writeable, We strongly recommend that it be changed to 640 or at least 644.',
 	'NOTE'	=>	'Note',
+	'WARN'	=>	'انتبه',
 	'NO_KLEEJA_COPYRIGHTS'	=> 'you seem to have accidentally removed the copyrights from the footer, please put it back on so we can continue to develop Kleeja free of charge, you can buy a copyright removal license %s .',
 	'USERS_NOT_NORMAL_SYS'	=> 'The current users system is not the normal one, which means that the current users cannot be edited from here but from the script that was integrated with Kleeja, those users use the normal membership system.',
 	'ARE_YOU_SURE_DO_THIS'	=> 'Are you sure you want to do this?',
@@ -435,6 +436,8 @@ $lang = array_merge($lang, array(
 	'NEW_USER'				=> 'New user',
 	'LIVEXTS'				=> 'Live extensions (separate by comma)',
 	'MUST_LOGIN'			=> 'You must login with correct username and password .',
+	
+	'COPYRIGHTS_X'			=> 'جميع الحقوق محفوظة',
 	'ADMIN_DELETE_FILE_ERR'	=> 'User have no files or there is error occurred while trying to delete user files . ',
 	'ADMIN_DELETE_FILE_OK'	=> 'Done ! ',
 	'ADMIN_DELETE_FILES'	=> 'Delete all user files',
@@ -448,6 +451,9 @@ $lang = array_merge($lang, array(
 							 
 	'CHECK_ALL'	 => 'Check all',
 	'BCONVERTER' => 'Byte Converter',
+	'NO_HTACCESS_DIR_UP'		=> 'لايوجد ملف .htaccess في مجلد التحميل  "%s", هذا يعني انه لو تم رفع اكواد خبيثه فسيتمكن المخترق  من تشغيلها وقد يحدث امور لاتحمد عقباها !',
+	'NO_HTACCESS_DIR_UP_THUMB'	=> 'لايوجد ملف .htaccess في مجلد المصغرات داخل مجلد التحميل "%s", هذا يعني انه لو تم رفع اكواد خبيثه فسيتمكن المخترق المخترق  من تشغيلها وقد يحدث امور لاتحمد عقباها  !',
+
 	
 	//last line of this file ...					 
 	'S_TRANSLATED_BY' => 'Translated By <a href="http://www.fenix4web.com/">Fenix4Web</a>',

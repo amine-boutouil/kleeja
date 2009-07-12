@@ -44,15 +44,22 @@
 		$per1	= round($per*100, 2);
 		$per1	= $per1 >= 100 ? 100 : $per1;
 
-
 		//ppl must know about kleeja version!
-		//ok i forgive ...
 		$kleeja_version	 = '<a href="./admin.php?cp=check_update" title="' . $lang['R_CHECK_UPDATE'] . '">' . KLEEJA_VERSION . '</a>';
+		
+		//admin messages system
+		$ADM_NOTIFICATIONS = array();
 		
 		//updating
 		$v = @unserialize($config['new_version']);
-		$update_now		= (version_compare(strtolower(KLEEJA_VERSION), strtolower($v['version_number']), '<')) ? true : false;
-		$update_now_disc = sprintf($lang['UPDATE_NOW_S'] , KLEEJA_VERSION, $v['version_number']) . '<br />' . '<a href="http://www.kleeja.com/">www.kleeja.com</a>';
+		if(version_compare(strtolower(KLEEJA_VERSION), strtolower($v['version_number']), '<'))
+		{
+			$ADM_NOTIFICATIONS[]  = array(
+									'msg_type'=> 'error', 'title'=> $lang['R_CHECK_UPDATE'], 
+									'msg'=> sprintf($lang['UPDATE_NOW_S'] , KLEEJA_VERSION, $v['version_number']) . '<br />' . '<a href="http://www.kleeja.com/">www.kleeja.com</a>'
+									);
+		}
+		
 		
 		//if 24 hours, lets chcek agian !
 		if((time() - $v['last_check']) > 86400 && !$v['msg_appeared'])
@@ -68,17 +75,32 @@
 		$cached_file = $root_path . 'cache/styles_cached.php';
 		if(file_exists($cached_file))
 		{
-			$there_is_cached = sprintf($lang['CACHED_STYLES_DISC'] , '<a href="./admin.php?cp=styles&amp;sty_t=cached">' . $lang['CLICKHERE'] .'</a>');
+			$ADM_NOTIFICATIONS[]  = array(
+								'msg_type'=> 'info', 'title'=> $lang['CACHED_STYLES'],
+								'msg'=> sprintf($lang['CACHED_STYLES_DISC'] , '<a href="./admin.php?cp=styles&amp;sty_t=cached">' . $lang['CLICKHERE'] .'</a>')
+							);
 		}
 		
-		
 		//if config not safe
-		$is_config_writable = (bool) (@fileperms($root_path . 'config.php') & 0x0002);
+		if((bool) (@fileperms($root_path . 'config.php') & 0x0002))
+		{
+			$ADM_NOTIFICATIONS[]  = array('msg_type'=> 'info', 'title'=> $lang['NOTE'], 'msg'=> $lang['CONFIG_WRITEABLE']);
+		}
+		
+		//no htaccess
+		if(!file_exists($config['foldername'] . '/.htaccess'))
+		{
+			$ADM_NOTIFICATIONS[]  = array('msg_type'=> 'error', 'title'=> $lang['WARN'], 'msg'=> sprintf($lang['NO_HTACCESS_DIR_UP'], $config['foldername']));
+		}
+		
+		if(!file_exists($config['foldername'] . '/thumbs/.htaccess'))
+		{
+			$ADM_NOTIFICATIONS[]  = array('msg_type'=> 'error', 'title'=> $lang['WARN'], 'msg'=> sprintf($lang['NO_HTACCESS_DIR_UP_THUMB'], $config['foldername'] . '/thumbs'));
+		}
+		
 
 		
 		//check is there any copyright on footer.html if not show pretty msg with peace
-		$no_copyrights = false;
-		$no_copyrights_disc = sprintf($lang['NO_KLEEJA_COPYRIGHTS'], '<a href="http://kleeja.com/buy/">' . $lang['CLICKHERE'] .'</a>');
 		if(file_exists($STYLE_PATH . 'footer.html'))
 		{
 			$t_data = file_get_contents($STYLE_PATH . 'footer.html');
@@ -90,7 +112,8 @@
 				//but we are human being, so we need some money to live as a normal people 
 				if($v['copyrights'] == false)
 				{
-					$no_copyrights = true;
+					$copy_msg = sprintf($lang['NO_KLEEJA_COPYRIGHTS'], '<a href="http://www.kleeja.com/buy/">' . $lang['CLICKHERE'] .'</a>');
+					$ADM_NOTIFICATIONS[]  = array('msg_type'=> 'error', 'title'=> $lang['NOTE'], 'msg'=> $copy_msg);
 				}
 			}
 		}

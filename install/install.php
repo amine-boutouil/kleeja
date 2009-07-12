@@ -29,7 +29,7 @@ define ('DB_VERSION' , '7');
 //
 //kleeja must be safe ..
 //
-if(!empty($dbuser) && !empty($dbname))
+if(!empty($dbuser) && !empty($dbname) && !(isset($_GET['step']) && $_GET['step'] == 'end'))
 {
 	$d = inst_get_config('language');
 	if(!empty($d))

@@ -354,6 +354,7 @@ function inst_get_config($name)
 		$SQL = new SSQL($dbserver, $dbuser, $dbpass, $dbname);
 	}
 	
+	$SQL->show_errors = false;
 	$sql = "SELECT value FROM `{$dbprefix}config` WHERE `name` = '" . $name . "'";
 	$result	= $SQL->query($sql);
 	if($SQL->num_rows($result) == 0)

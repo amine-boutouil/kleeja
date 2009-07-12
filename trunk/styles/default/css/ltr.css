@@ -1,0 +1,168 @@
+/*
+# Powered by Kleeja .... Kleeja.com
+# Designed by Tar3q .... Tar3q.com
+# copyright 2007-2009  ..
+*/
+
+img.left {
+        float: right;
+        margin-left:15px;
+}
+img.right {
+        float: left;
+        margin-right:15px;
+}
+
+.line {
+        background-position:left top;
+}
+
+/** LOGO */
+#logobody .logo {
+        padding: 10px 10px 10px 40px;
+}
+
+
+/**  start The main menu at the top **/
+#top_menu {
+        background-position: top right;  
+}
+
+#top_menu  ul.m3nu li {
+        float: left;
+        margin: 0 0 0 5px;
+}
+#top_menu  ul.m3nu li a {
+        float: right;
+        padding: 8px 0 0 15px;
+}
+#top_menu  ul.m3nu li a:hover {
+        background-position: top right;
+}
+#top_menu  ul.m3nu li a.current{
+        background-position: top right;
+        padding:5px 0 0 15px;
+}
+
+
+/** # End The main menu at the top **/  
+
+
+
+#right_menu{
+        float:left;
+
+}
+#right_menu .list{
+        margin-right:16px;
+}
+
+#right_menu .list span{
+        padding:0px 0 0 10px;
+        text-align:right;
+}
+#right_menu .list b{
+        padding:0px 0 0 10px;
+}
+#right_menu .list img{
+        padding:0px 5px 0px 0px;
+}
+#right_menu .list a{
+        padding: 5px 0 0 10px;
+}
+
+
+/* Content */
+
+#content {
+        float: right;
+}
+
+#title-x b{
+        float:left;
+}
+
+
+/* Footer */
+
+#fixed {
+right:2px; text-align: right;
+}
+
+/*start Option to control panel */
+
+#adminPan{
+left:80px;
+}
+
+
+#adminPan a {
+        float:left;
+        background-position:right top;
+        padding:0 4px 0 0;
+        }
+#adminPan a span {
+        float:right;
+        background-position:left top;
+}
+       
+
+#adminPan a:hover {background-position:0% 43px;}
+#adminPan a:hover span {background-position:100% 43px;}
+
+
+
+/* box */
+.box {
+        background-position: top right;
+}
+.box_top {
+        background-position: top left;
+}
+.box_bottom {
+        background-position:  bottom right;
+}
+.box_bottom div {
+        background-position: bottom left;
+}
+.box_content {
+        background-position: top left;
+}
+
+
+.box_content{ padding: 0 0 0 15px; }
+/* ##  box */
+
+/* file report */
+.fileReport {
+        padding:6px 0 0 30px;
+}
+/* ##  file report */
+
+
+.info-down {
+        float:left;
+}
+
+
+#download  {
+        margin:50px 30px 0 0;
+
+        }
+#download a {
+        padding:15px 0 0 30px;
+}
+
+
+.wait{
+        margin:30px 0 0 30px;
+        padding:5px 0 0 20px;
+}
+
+.err {margin: 10px 0 0 10px;}
+.info {margin: 10px 0 0 10px;}
+.result { margin: 10px 0 0 10px;}
+
+
+.page_stats{float:right;}
+

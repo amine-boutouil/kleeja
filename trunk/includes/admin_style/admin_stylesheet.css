@@ -49,7 +49,8 @@ select ,option{	font: 11px tahoma,verdana,arial,sans-serif; font-weight: normal;
 #header { width: 100%; height: 68px; padding: 0; margin:0;  }
 #header .logo1 { float:left; width: 370px; padding: 8px 0 0 0; margin:0; }
 #header .logo2{
-	float:right; width: 400px; padding: 15px 10px 0 10px; margin:0; 
+	float:right; width: 270px; padding: 30px 10px 0 5px; margin:0; 
+	background: url(images/adminopen.gif) no-repeat right ; padding-right: 60px;
 	display: inline-block;
 	color: #000000; font: bold 20px Tahoma, Arial, Helvetica, sans-serif;}
 /* header */

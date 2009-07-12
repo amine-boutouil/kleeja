@@ -5,6 +5,10 @@
 # copyright 2007-2009  ..
 */
 
+/* header logo */
+#header .logo2 { padding-right: 40px; }
+/* header logo */
+
  /* middle */
  #divmiddle { float: left;}
  #divmiddle .title { padding: 4px 8px 4px 25px; background-position:left;}
@@ -24,10 +28,12 @@
  /* last visit */	
 
 /* System Messages  #info*/
+#system-message div.info  ul li { padding-left: 35px; }
  #system-message div.info  ul li { background-position: left top;}
 /* System Messages  #info*/
  
  /* System Messages  #error*/
+ #system-message div.error  ul li { padding-left: 35px; }
  #system-message div.error ul li{ background-position: left top ;}
  /* System Messages  #error*/
  	

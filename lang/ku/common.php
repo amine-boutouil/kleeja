@@ -422,6 +422,7 @@ if (empty($lang) || !is_array($lang))
 	'NOT_SAFE_FILE'	=> 'سیسته‌مه‌که‌مان ده‌ڵێت ئه‌م په‌ڕگه‌یه‌ مه‌ترسیداره‌ !',
 	'CONFIG_WRITEABLE' => 'په‌ڕگه‌ی config.php ڕێگای تێدانوسین ده‌دات ئامۆژگاریتان ده‌که‌ین به‌گۆڕینی ڕێدانه‌که‌ی به‌ ‌640 یاخود لایه‌نی که‌م به‌ 644.',
 	'NOTE'	=>	'ئاگادارکردنه‌وه‌',
+	'WARN'	=>	'انتبه',
 	'NO_KLEEJA_COPYRIGHTS'	=> 'وادیاره‌ به‌هه‌ڵه‌ مافه‌کانی کلیجات سڕیوه‌ته‌وه‌ له‌فووته‌ردا‌ , بیگێڕه‌ره‌وه‌ تاوه‌کو بتوانین هه‌میشه‌ خزمه‌تت بکه‌ین و سکریپته‌که‌ پێشبخه‌ین , یاخود مافه‌کانی سڕینه‌وه‌ بکڕه‌ %s .',
 	'USERS_NOT_NORMAL_SYS'	=> 'سیسته‌می ئه‌ندامێتی ئێستا سیسته‌مێکی ئاسای نییه‌ , یاخود بڵێین ئه‌ندامه‌کانی ئێستا ناتوانرێت ده‌ستکاری بکرێن له‌م جێگه‌یه‌وه‌ به‌ڵکو ده‌بێت له‌ڕێگه‌ی ئه‌و سکریپته‌وه‌ بکرێن که‌ به‌ستراون به‌ کلیجاوه‌.',
 	'ARE_YOU_SURE_DO_THIS'	=> 'دڵنیایت له‌ ئه‌نجامدانی ئه‌م کاره‌؟',
@@ -429,6 +430,34 @@ if (empty($lang) || !is_array($lang))
 	'AUTH_INTEGRATION_N_UTF8_T'	=> '%s is not utf8',
 	'AUTH_INTEGRATION_N_UTF8' => '%s database must be utf8 to be integrated with Kleeja !.',
 	'SCRIPT_AUTH_PATH_WRONG'	=> 'Path of %s is not valid, change it now.',
+	'SHOW_MY_FILECP'		=> 'Show my files',
+	'PASS_ON_CHANGE'		=> 'Change password',
+	'MOST_EVER_ONLINE'		=> 'Most users ever online was',
+	'ON'					=> 'on',
+	'LAST_REG'				=> 'newest member',
+	'NEW_USER'				=> 'New user',
+	'LIVEXTS'				=> 'Live extensions (separate by comma)',
+	'MUST_LOGIN'			=> 'You must login with correct username and password .',
+	
+	'COPYRIGHTS_X'			=> 'جميع الحقوق محفوظة',
+	'ADMIN_DELETE_FILE_ERR'	=> 'User have no files or there is error occurred while trying to delete user files . ',
+	'ADMIN_DELETE_FILE_OK'	=> 'Done ! ',
+	'ADMIN_DELETE_FILES'	=> 'Delete all user files',
+	
+	'KLJ_MORE_PLUGINS'	=> array('قم بالحصول على الكثير من الاضافات من مركز الاضافات في موقع كليجا ,<a target="_blank" href="http://www.kleeja.com/plugins/">إظغط هنا للذهاب لهناك</a> .',
+								'هل أنت مطور ؟ هل قمت بتطوير اضافات لكليجا وتريد عرضها للأخرين أو تريد بيعها في مركز كليجا للاضافات ؟ اذن <a target="_blank" href="http://www.kleeja.com/plugins/">إظغط هنا للذهاب لهناك</a>. ',
+								),
+	'KLJ_MORE_STYLES'	=> array('قم بالحصول على الكثير من الستايلات من معرض الستايلات في موقع كليجا ,<a target="_blank" href="http://www.kleeja.com/styles/">إظغط هنا للذهاب لهناك</a> .',
+							 'هل أنت مصمم ؟ هل تريد عرض ستايلاتك في في معرض كليجا للجميع مجانا او بمقابل ؟  إذن <a target="_blank" href="http://www.kleeja.com/styles/">إظغط هنا للذهاب لهناك</a> .',
+							 ),
+							 
+	'CHECK_ALL'	 => 'Check all',
+	'BCONVERTER' => 'Byte Converter',
+	'NO_HTACCESS_DIR_UP'		=> 'لايوجد ملف .htaccess في مجلد التحميل  "%s", هذا يعني انه لو تم رفع اكواد خبيثه فسيتمكن المخترق  من تشغيلها وقد يحدث امور لاتحمد عقباها !',
+	'NO_HTACCESS_DIR_UP_THUMB'	=> 'لايوجد ملف .htaccess في مجلد المصغرات داخل مجلد التحميل "%s", هذا يعني انه لو تم رفع اكواد خبيثه فسيتمكن المخترق المخترق  من تشغيلها وقد يحدث امور لاتحمد عقباها  !',
+
+	
+	//last line of this file ...
 	'S_TRANSLATED_BY' => 'Translated By <a href="http://www.kurdhome.net/">KurdHome</a>',
 ));
 

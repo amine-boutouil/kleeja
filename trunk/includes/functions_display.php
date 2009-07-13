@@ -58,7 +58,7 @@ function Saaheader($title, $outscript=false)
 			$vars2 = array(
 							0=>$lang['JUMPTO'],
 							1=>$lang['INDEX'],
-							2=>$lang['GUIDE'],3=>"guide.html",
+							2=>$lang['GUIDE'],3=>"extsg.html",
 							4=>$lang['RULES'],5=>"rules.html",
 							6=>$lang['CALL'],7=>"call.html",
 							8=>$login_name,9=>$login_url,
@@ -73,7 +73,7 @@ function Saaheader($title, $outscript=false)
 			$vars2 = array(
 							0=>$lang['JUMPTO'],
 							1=>$lang['INDEX'],
-							2=>$lang['GUIDE'],3=>"go.php?go=guide",
+							2=>$lang['GUIDE'],3=>"go.php?go=extsg",
 							4=>$lang['RULES'],5=>"go.php?go=rules",
 							6=>$lang['CALL'],7=>"go.php?go=call",
 							8=>$login_name,9=>$login_url,

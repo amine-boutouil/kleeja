@@ -261,7 +261,7 @@ function process ()
 			//safe_code .. captcha is on
 			if($this->safe_code && $wut==1)
 			{
-				if(!$ch->check_captcha($_POST['public_key'], $_POST['answer_safe']))
+				if(isset($_POST['public_key']) && isset($_POST['answer_safe']) && !$ch->check_captcha($_POST['public_key'], $_POST['answer_safe']))
 				{
 					($hook = kleeja_run_hook('wrong_captcha_kljuploader_w1')) ? eval($hook) : null; //run hook	
 					 return $this->errs[] = $lang['WRONG_VERTY_CODE'];

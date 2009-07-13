@@ -13,7 +13,7 @@ RewriteRule ^thumbf-(.*)-([a-zA-Z0-9_-]*).html$ download.php?thmbf=$1&x=$2
 RewriteRule ^image([0-9]*).html$ download.php?img=$1
 RewriteRule ^report[_-]([0-9]*).html$ go.php?go=report&id=$1
 RewriteRule ^call.html$ go.php?go=call
-RewriteRule ^extsg.html$ go.php?go=extsg
+RewriteRule ^guide.html$ go.php?go=guide
 RewriteRule ^rules.html$ go.php?go=rules
 RewriteRule ^filecp.html$ ucp.php?go=filecp
 RewriteRule ^filecp-([0-9]*).html$ ucp.php?go=filecp&page=$1
@@ -27,5 +27,4 @@ RewriteRule ^logout.html$ ucp.php?go=logout
 RewriteRule ^stats.html$ go.php?go=stats
 RewriteRule ^del([a-zA-Z0-9_-]*).html$ go.php?go=del&cd=$1
 #deprecated 
-RewriteRule ^guide.html$ go.php?go=extsg
 RewriteRule ^down-([a-zA-Z0-9_-]*)-([a-zA-Z0-9_-]*)-([0-9]*).html$ download.php?id=$3

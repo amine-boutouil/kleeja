@@ -27,4 +27,5 @@ RewriteRule ^logout.html$ ucp.php?go=logout
 RewriteRule ^stats.html$ go.php?go=stats
 RewriteRule ^del([a-zA-Z0-9_-]*).html$ go.php?go=del&cd=$1
 #deprecated 
+RewriteRule ^guide.html$ go.php?go=extsg
 RewriteRule ^down-([a-zA-Z0-9_-]*)-([a-zA-Z0-9_-]*)-([0-9]*).html$ download.php?id=$3

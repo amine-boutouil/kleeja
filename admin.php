@@ -113,7 +113,8 @@
 		$SQL->close();
 		exit;	//stop	
 	}
-
+	
+	(!defined('LAST_VISIT')) ? define('LAST_VISIT',time() - 3600*12) : '';
 
 	//path of admin extensions
 	$path_adm	= "includes/adm";
@@ -178,19 +179,20 @@
 	//re oreder the items as alphapatic !
 	sort($adm_extensions);
 	$i = 0;
-	
+
 	//New calls notice
 	$query = array('SELECT'	=> 'id',
 					'FROM'		=> "{$dbprefix}call",
-					'WHERE'		=> 'time > "' . (defined('LAST_VISIT') ? LAST_VISIT : time() - 3600*12) . '"' 
+					'WHERE'		=> "time > '" . (defined('LAST_VISIT') ? LAST_VISIT : time() - 3600*12) . "'" 
 					);
+
 		$newcall = $SQL->num_rows($SQL->build($query));
 		($newcall == 0) ? $newcall = ' [0]' : $newcall = ' [' . $newcall . ']'; 
 	
 	//New reports notice
 	$query = array('SELECT'	=> 'id',
 					'FROM'		=> "{$dbprefix}reports",
-					'WHERE'		=> 'time > "' . (defined('LAST_VISIT') ? LAST_VISIT : time() - 3600*12) . '"' 
+					'WHERE'		=> "time > '" . (defined('LAST_VISIT') ? LAST_VISIT : time() - 3600*12) . "'" 
 					);
 	$newreport = $SQL->num_rows($SQL->build($query));
 	($newreport == 0) ? $newreport = ' [0]' : $newreport = ' [' . $newreport . ']'; 

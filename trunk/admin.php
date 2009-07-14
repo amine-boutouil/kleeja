@@ -37,9 +37,9 @@
 	//go to ..
 	$go_to	= isset($_GET['cp']) ? htmlspecialchars($_GET['cp']) : 'start';
 	$username = $usrcp->name();
-	
+			
 	//need to login again
-	if(empty($_SESSION['ADMINLOGIN']) || $_SESSION['ADMINLOGIN'] != md5($usrcp->name() . $config['siteurl'])) 
+	if((empty($_SESSION['ADMINLOGIN']) || $_SESSION['ADMINLOGIN'] != md5($usrcp->name() . $config['siteurl'])) || (empty($_SESSION['USER_SESS']) || $_SESSION['USER_SESS'] != session_id()))
 	{
 		if(isset($_GET['go']) && $_GET['go'] == 'login') 
 		{			
@@ -63,7 +63,7 @@
 				{
 					$ERRORS[] = $lang['EMPTY_FIELDS'];
 				}
-				elseif(!$usrcp->data($_POST['lname'], $_POST['lpass'], false, 3600))
+				elseif(!$usrcp->data($_POST['lname'], $_POST['lpass'], false, 7600))
 				{
 					$ERRORS[] = $lang['LOGIN_ERROR'];
 				}
@@ -71,6 +71,7 @@
 				
 				if(empty($ERRORS))
 				{
+					$_SESSION['USER_SESS'] = session_id();
 					$_SESSION['ADMINLOGIN'] = md5($usrcp->name() . $config['siteurl']);
 					header('Location: admin.php?cp=' . $go_to);
 					$SQL->close();

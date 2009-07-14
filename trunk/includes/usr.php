@@ -84,7 +84,7 @@ class usrcp
 						$query = array(
 								'SELECT'	=> '*',
 								'FROM'		=> "`{$dbprefix}users`",
-								'WHERE'		=> "id='". $SQL->escape(intval($name)) . "'"
+								'WHERE'		=> "id='". $SQL->escape(intval($name)) . "' and password='" . $SQL->escape($pass) . "'",
 								);
 					}
 					else
@@ -152,7 +152,7 @@ class usrcp
 							define('USER_ADMIN',$row['admin']);
 							define('LAST_VISIT',$row['last_visit']);
 							
-							if(!$hashed && !defined('IN_ADMIN_LOGIN'))
+							if(!$hashed)
 							{
 								$hash_key_expire = sha1(md5($config['h_key']) .  $expire);
 								$this->kleeja_set_cookie('ulogu', base64_encode(base64_encode(base64_encode($row['id'] . '|' . $row['password'] . '|' . $expire . '|' . $hash_key_expire))), $expire);

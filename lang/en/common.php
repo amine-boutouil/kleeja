@@ -451,6 +451,9 @@ $lang = array_merge($lang, array(
 							 
 	'CHECK_ALL'	 => 'Check all',
 	'BCONVERTER' => 'Byte Converter',
+	'COOKIE_DOMAIN' 			=> 'Cookie domain',
+	'COOKIE_NAME' 				=> 'Cookie prefix',
+	'COOKIE_PATH' 				=> 'Cookie path',
 	'NO_HTACCESS_DIR_UP'		=> 'لايوجد ملف .htaccess في مجلد التحميل  "%s", هذا يعني انه لو تم رفع اكواد خبيثه فسيتمكن المخترق  من تشغيلها وقد يحدث امور لاتحمد عقباها !',
 	'NO_HTACCESS_DIR_UP_THUMB'	=> 'لايوجد ملف .htaccess في مجلد المصغرات داخل مجلد التحميل "%s", هذا يعني انه لو تم رفع اكواد خبيثه فسيتمكن المخترق المخترق  من تشغيلها وقد يحدث امور لاتحمد عقباها  !',
 

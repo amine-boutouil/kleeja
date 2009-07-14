@@ -262,7 +262,36 @@ $install_sqls['config_insert35'] = "INSERT INTO `{$dbprefix}config` (`name`, `va
 $install_sqls['config_insert36'] = "INSERT INTO `{$dbprefix}config` (`name` ,`value` ,`option` ,`display_order`)VALUES ('livexts', 'swf', '<input type=\"text\" id=\"livexts\" name=\"livexts\" value=\"{con.livexts}\" size=\"20\">', '70')";
 $install_sqls['config_insert37'] = "INSERT INTO `{$dbprefix}config` (`name` ,`value` ,`option` ,`display_order`)
 VALUES ('sitemail2', '" . $config_sitemail . "', '<input type=\"text\" id=\"sitemail2\" name=\"sitemail2\" value=\"{con.sitemail2}\" size=\"40\">', '3');";
-	
+
+$install_sqls['config_insert38'] = "INSERT INTO `{$dbprefix}config` (
+`name` ,
+`value` ,
+`option` ,
+`display_order`
+)
+VALUES (
+'cookie_name', 'klj', '<input type=\"text\" id=\"cookie_name\" name=\"cookie_name\" value=\"{con.cookie_name}\" size=\"30\">', '70'
+);";
+$install_sqls['config_insert39'] = "INSERT INTO `{$dbprefix}config` (
+`name` ,
+`value` ,
+`option` ,
+`display_order`
+)
+VALUES (
+'cookie_path', '/', '<input type=\"text\" id=\"cookie_path\" name=\"cookie_path\" value=\"{con.cookie_path}\" size=\"30\">', '70'
+);";
+$install_sqls['config_insert40'] = "INSERT INTO `{$dbprefix}config` (
+`name` ,
+`value` ,
+`option` ,
+`display_order`
+)
+VALUES (
+'cookie_domain', '', '<input type=\"text\" id=\"cookie_domain\" name=\"cookie_domain\" value=\"{con.cookie_domain}\" size=\"30\">', '70'
+);";
+
+
 $install_sqls['exts_insert1'] = "
 INSERT INTO `{$dbprefix}exts` (`id`, `group_id`, `ext`, `gust_size`, `gust_allow`, `user_size`, `user_allow`) VALUES
 (1, 1, 'gif', 100000, 1, 10000, 1),
@@ -352,10 +381,8 @@ INSERT INTO `{$dbprefix}exts` (`id`, `group_id`, `ext`, `gust_size`, `gust_allow
 
 $install_sqls['stats_insert'] = "INSERT INTO `{$dbprefix}stats`  VALUES (0,1,0,0," . time() . ",0,0,0,0,'',0,0,0,0,'','','','','','')";
 
-include_once  '../includes/usr.php';
-$usrcp = new usrcp;
 
-$install_sqls['users_insert'] = "INSERT INTO `{$dbprefix}users` (`id`,`name` ,`password` ,`mail`,`admin`,`clean_name`) VALUES ('1','" . mysql_real_escape_string($user_name) . "', '" . mysql_real_escape_string($user_pass) . "', '" . mysql_real_escape_string($user_mail) . "','1','" . $usrcp->cleanusername($user_name) . "')";
+$install_sqls['users_insert'] = "INSERT INTO `{$dbprefix}users` (`id`,`name`,`password`,`password_salt`,`mail`,`admin`,`clean_name`) VALUES ('1','" . mysql_real_escape_string($user_name) . "', '" . mysql_real_escape_string($user_pass) . "','" . mysql_real_escape_string($user_salt) . "', '" . mysql_real_escape_string($user_mail) . "','1','" . $clean_name . "')";
 
 
 

@@ -76,7 +76,7 @@ class usrcp
 				function normal ($name,$pass)
 				{
 					global $SQL,$dbprefix;
-										
+					
 					$query = array(
 								'SELECT'	=> '*',
 								'FROM'		=> "`{$dbprefix}users`",
@@ -92,6 +92,11 @@ class usrcp
 					{
 						while($row=$SQL->fetch_array($result))
 						{
+							if(empty($row['password'])) //more security
+							{
+								return false;
+							}
+							
 							//CHECK IF IT'S MD5 PASSWORD
 							if(strlen($row['password']) == '32' && empty($row['password_salt']))   
 							{
@@ -314,72 +319,73 @@ class usrcp
 				function cleanusername ($uname) 
 				{
 					$clean_chars = array(
-					'أ' => 'ا',
-					'إ' => 'ا',
-					'ؤ' => 'و',
-					'ـ' => '',
-					'ً' => '',
-					'ٌ' => '',
-					'ُ' => '',
-					'َ' => '',
-					'ِ' => '',
-					'ْ' => '',
-					'آ' => 'ا',
-					'á'=> 'a',
-					'à'=> 'a',
-					'â'=> 'a',
-					'ã'=> 'a',
-					'ª'=> 'a',
-					'Á'=> 'a',
-					'À'=> 'a',
-					'Â'=> 'a',
-					'Ã'=> 'a',
-					'é'=> 'e',
-					'è'=> 'e',
-					'ê'=> 'e',
-					'É'=> 'e',
-					'È'=> 'e',
-					'Ê'=> 'e',
-					'í'=> 'i',
-					'ì'=> 'i',
-					'î'=> 'i',
-					'Í'=> 'i', 
-					'Ì'=> 'i',
-					'Î'=> 'i',
-					'ò'=> 'o',
-					'ó'=> 'o',
-					'ô'=> 'o',
-					'õ'=> 'o',
-					'º'=> 'o',
-					'Ó'=> 'o',
-					'Ò'=> 'o',
-					'Ô'=> 'o',
-					'Õ'=> 'o',
-					'ú'=> 'u',
-					'ù'=> 'u',
-					'û'=> 'u',
-					'Ú'=> 'u',
-					'Ù'=> 'u',
-					'Û'=> 'u',
-					'ç'=> 'c',
-					'Ç'=> 'c',
-					'Ñ'=> 'n',
-					'ñ'=> 'n',
-					'ÿ' => 'y',
-					'Ë' => 'e',
-					'Ø' => 'o',
-					'Å' => 'a',
-					'å' => 'a',
-					'ï' => 'i',
-					'Ï' => 'i',
-					'ø' => 'o',
-					'ë' => 'e',
+					'ط£' => 'ط§',
+					'ط¥' => 'ط§',
+					'ط¤' => 'ظˆ',
+					'ظ€' => '',
+					'ظ‹' => '',
+					'ظŒ' => '',
+					'ظڈ' => '',
+					'ظژ' => '',
+					'ظگ' => '',
+					'ظ’' => '',
+					'ط¢' => 'ط§',
+					'أ،'=> 'a',
+					'أ '=> 'a',
+					'أ¢'=> 'a',
+					'أ£'=> 'a',
+					'آھ'=> 'a',
+					'أپ'=> 'a',
+					'أ€'=> 'a',
+					'أ‚'=> 'a',
+					'أƒ'=> 'a',
+					'أ©'=> 'e',
+					'أ¨'=> 'e',
+					'أھ'=> 'e',
+					'أ‰'=> 'e',
+					'أˆ'=> 'e',
+					'أٹ'=> 'e',
+					'أ­'=> 'i',
+					'أ¬'=> 'i',
+					'أ®'=> 'i',
+					'أچ'=> 'i', 
+					'أŒ'=> 'i',
+					'أژ'=> 'i',
+					'أ²'=> 'o',
+					'أ³'=> 'o',
+					'أ´'=> 'o',
+					'أµ'=> 'o',
+					'آ؛'=> 'o',
+					'أ“'=> 'o',
+					'أ’'=> 'o',
+					'أ”'=> 'o',
+					'أ•'=> 'o',
+					'أ؛'=> 'u',
+					'أ¹'=> 'u',
+					'أ»'=> 'u',
+					'أڑ'=> 'u',
+					'أ™'=> 'u',
+					'أ›'=> 'u',
+					'أ§'=> 'c',
+					'أ‡'=> 'c',
+					'أ‘'=> 'n',
+					'أ±'=> 'n',
+					'أ؟' => 'y',
+					'أ‹' => 'e',
+					'أک' => 'o',
+					'أ…' => 'a',
+					'أ¥' => 'a',
+					'أ¯' => 'i',
+					'أڈ' => 'i',
+					'أ¸' => 'o',
+					'أ«' => 'e',
 					);
     				$uname = str_replace(array_keys($clean_chars), array_values($clean_chars), $uname);
     				$uname = strtolower($uname);
     				return $uname;
 				}
 				
+				//depand on phpass class
 				function kleeja_hash_password($password, $check_pass = false)
 				{
 					include_once('phpass.php');
@@ -395,7 +401,57 @@ class usrcp
 					}
 			
 					return $return;
-			}
+				}
+				
+				//kleeja cookie
+				function kleeja_set_cookie($name, $value, $expire)
+				{
+					global $config;
+	
+	
+					if ($config['cookie_domain'] == '')
+					{
+						$config['cookie_domain'] = (!empty($_SERVER['HTTP_HOST'])) ? strtolower($_SERVER['HTTP_HOST']) : ((!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : getenv('SERVER_NAME'));
+					}
+					
+					if(strpos($config['cookie_domain'], 'localhost') !== false)
+					{
+						$config['cookie_domain'] = '';
+					}
+		
+					if($config['cookie_domain'] != '')
+					{
+						// Fix the domain to accept domains with and without 'www.'.
+						if (strtolower(substr($config['cookie_domain'], 0, 4) ) == 'www.')
+						{
+							$config['cookie_domain'] = substr($config['cookie_domain'], 4);
+						}
+						// Add the dot prefix to ensure compatibility with subdomains
+						if (substr($config['cookie_domain'], 0, 1) != '.' )
+						{
+							$config['cookie_domain'] = '.' . $config['cookie_domain'];
+						}
+						// Remove port information.
+						$port = strpos($config['cookie_domain'], ':');
+						
+						if ($port !== false)
+						{
+							$config['cookie_domain'] = substr($config['cookie_domain'], 0, $port);
+						}
+					}
+		
+					// Enable sending of a P3P header
+					header('P3P: CP="CUR ADM"');
+	
+					if (version_compare(PHP_VERSION, '5.2.0', '>='))
+					{
+						setcookie($config['cookie_name'] . '_' . $name, $value, $expire, $config['cookie_path'], $config['cookie_domain'], $config['cookie_secure'], true);
+					}
+					else
+					{
+						setcookie($config['cookie_name'] . '_' . $name, $value, $expire, $config['cookie_path'] . '; HttpOnly', $config['cookie_domain'], $config['cookie_secure']);
+					}
+				}
 }#end class
 
 ?>

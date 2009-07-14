@@ -200,14 +200,15 @@ switch ($_GET['go'])
 						if(empty($ERRORS))	 
 						{
 							$name			= (string) $SQL->escape(trim($_POST['lname']));
-							$pass			= (string) md5($SQL->escape(trim($_POST['lpass'])));
+							$user_salt		= (string) substr(base64_encode(pack("H*", sha1(mt_rand()))), 0, 7);
+							$pass			= (string) $usrcp->kleeja_hash_password($SQL->escape(trim($_POST['lpass'])) . $user_salt);
 							$mail			= (string) strtolower(trim($SQL->escape($_POST['lmail']))); // security ;)
 							$session_id		= (string) session_id();
-							$clean_name		= $usrcp->cleanusername($name);
+							$clean_name		= (string) $usrcp->cleanusername($name);
 							
-							$insert_query	= array('INSERT'	=> 'name ,password ,mail,admin, session_id, clean_name',
+							$insert_query	= array('INSERT'	=> 'name ,password, password_salt ,mail,admin, session_id, clean_name',
 													'INTO'		=> "{$dbprefix}users",
-													'VALUES'	=> "'$name', '$pass', '$mail','0','$session_id','$clean_name'"
+													'VALUES'	=> "'$name', '$pass', '$user_salt', '$mail','0','$session_id','$clean_name'"
 												);
 							
 							($hook = kleeja_run_hook('qr_insert_new_user_register')) ? eval($hook) : null; //run hook
@@ -541,9 +542,10 @@ switch ($_GET['go'])
 				//no errors , do it
 				if(empty($ERRORS))
 				{
+						$user_salt 		= substr(base64_encode(pack("H*", sha1(mt_rand()))), 0, 7);
 						$mail			= (!empty($_POST['pppass_old'])) ? "mail='" . $SQL->escape($_POST['pmail']) . "'," : '';
 						$show_my_filecp	= "show_my_filecp='" . intval($_POST['show_my_filecp']) . "'";
-						$pass			= (!empty($_POST['ppass_new'])) ? "password='" . md5($SQL->escape($_POST['ppass_new'])) . "'" : "";
+						$pass			= (!empty($_POST['ppass_new'])) ? "password='" . $usrcp->kleeja_hash_password($SQL->escape($_POST['ppass_new']) . $user_salt) . "', password_salt='" . $user_salt . "'" : "";
 						$comma			= (!empty($_POST['ppass_new']))? "," : "";
 						$id				= (int) $usrcp->id();
 						

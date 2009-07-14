@@ -357,15 +357,19 @@ case 'data' :
 
 		$connect = @mysql_connect($dbserver,$dbuser,$dbpass);
 		$select = @mysql_select_db($dbname);
-		mysql_query("SET NAMES 'utf8'"); 
+		mysql_query("SET NAMES 'utf8'");
+		 
+		include_once  '../includes/usr.php';
+		$usrcp = new usrcp;
 
-
-		$user_pass 			= md5($_POST['password']);
+		$user_salt			= substr(base64_encode(pack("H*", sha1(mt_rand()))), 0, 7);
+		$user_pass 			= $usrcp->kleeja_hash_password($_POST['password'] . $user_salt);
 		$user_name 			= $_POST['username'];
 		$user_mail 			= $_POST['email'];
 		$config_sitename	= $_POST['sitename'];
 		$config_siteurl		= $_POST['siteurl'];
 		$config_sitemail	= $_POST['sitemail'];
+		$clean_name			= $usrcp->cleanusername(mysql_real_escape_string($user_name));
 		
 		
 		 /// ok .. will get sqls now ..

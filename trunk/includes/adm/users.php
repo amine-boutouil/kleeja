@@ -107,13 +107,14 @@
 			if(empty($ERRORS))	 
 			{
 				$name			= (string) $SQL->escape(trim($_POST['lname']));
-				$pass			= (string) md5($SQL->escape(trim($_POST['lpass'])));
+				$user_salt		= (string) substr(base64_encode(pack("H*", sha1(mt_rand()))), 0, 7);
+				$pass			= (string) $usrcp->kleeja_hash_password($SQL->escape(trim($_POST['lpass'])) . $user_salt);
 				$mail			= (string) trim($_POST['lmail']);
 				$clean_name		= $usrcp->cleanusername($name);
 										
-				$insert_query	= array('INSERT'	=> 'name ,password ,mail,admin, session_id, clean_name',
+				$insert_query	= array('INSERT'	=> 'name ,password, password_salt ,mail,admin, session_id, clean_name',
 													'INTO'		=> "{$dbprefix}users",
-													'VALUES'	=> "'$name', '$pass', '$mail','0','','$clean_name'"
+													'VALUES'	=> "'$name', '$pass', '$user_salt', '$mail','0','','$clean_name'"
 												);
 				if ($SQL->build($insert_query))
 				{
@@ -219,7 +220,8 @@
 
 						//update
 						$admin[$row['id']] = isset($_POST['ad_' . $row['id']])  ? 1 : 0 ;
-						$pass[$row['id']] = ($pass[$row['id']] != '') ? "password = '" . md5($SQL->escape($pass[$row['id']])) . "'," : "";
+						$user_salt		   = substr(base64_encode(pack("H*", sha1(mt_rand()))), 0, 7);
+						$pass[$row['id']]  = ($pass[$row['id']] != '') ? "password = '" . $usrcp->kleeja_hash_password($SQL->escape($pass[$row['id']]) . $user_salt) . "',password_salt='" . $user_salt . "'," : "";
 				
 						$update_query = array(
 										'UPDATE'	=> "{$dbprefix}users",

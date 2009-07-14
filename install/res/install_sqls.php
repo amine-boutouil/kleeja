@@ -14,11 +14,12 @@ if (!defined('IN_COMMON'))
 
 $install_sqls = array();
 
+/* droping process is not a good idea !
 $install_sqls['DROP_TABLES'] = "
 DROP TABLE IF EXISTS `{$dbprefix}call`, `{$dbprefix}config`, `{$dbprefix}exts`, `{$dbprefix}files`, `{$dbprefix}hooks`, 
 				`{$dbprefix}online`, `{$dbprefix}plugins`, `{$dbprefix}reports`, `{$dbprefix}stats`,`{$dbprefix}users`, `{$dbprefix}lang`;
 ";
-
+*/
 
 $install_sqls['ALTER_DATABASE_UTF'] = "
 ALTER DATABASE `{$dbname}` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin
@@ -263,6 +264,19 @@ $install_sqls['config_insert36'] = "INSERT INTO `{$dbprefix}config` (`name` ,`va
 $install_sqls['config_insert37'] = "INSERT INTO `{$dbprefix}config` (`name` ,`value` ,`option` ,`display_order`)
 VALUES ('sitemail2', '" . $config_sitemail . "', '<input type=\"text\" id=\"sitemail2\" name=\"sitemail2\" value=\"{con.sitemail2}\" size=\"40\">', '3');";
 
+//randome cookie name
+$cookie_name = 'klj_' . substr(md5(time()), 0, 6);
+// rey to extract cookie domain
+$cookie_domain = (!empty($_SERVER['HTTP_HOST'])) ? strtolower($_SERVER['HTTP_HOST']) : ((!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : getenv('SERVER_NAME'));
+if (strtolower(substr($cookie_domain, 0, 4) ) == 'www.')
+	$cookie_domain = substr($cookie_domain, 4);
+if (substr($cookie_domain, 0, 1) != '.' && $cookie_domain != 'localhost')
+	$cookie_domain = '.' . $cookie_domain;
+$port = strpos($cookie_domain, ':');
+if ($port !== false)
+	$cookie_domain = substr($cookie_domain, 0, $port);
+	
+
 $install_sqls['config_insert38'] = "INSERT INTO `{$dbprefix}config` (
 `name` ,
 `value` ,
@@ -270,7 +284,7 @@ $install_sqls['config_insert38'] = "INSERT INTO `{$dbprefix}config` (
 `display_order`
 )
 VALUES (
-'cookie_name', 'klj', '<input type=\"text\" id=\"cookie_name\" name=\"cookie_name\" value=\"{con.cookie_name}\" size=\"30\">', '70'
+'cookie_name', '" . $cookie_name . "', '<input type=\"text\" id=\"cookie_name\" name=\"cookie_name\" value=\"{con.cookie_name}\" size=\"30\">', '70'
 );";
 $install_sqls['config_insert39'] = "INSERT INTO `{$dbprefix}config` (
 `name` ,
@@ -288,7 +302,7 @@ $install_sqls['config_insert40'] = "INSERT INTO `{$dbprefix}config` (
 `display_order`
 )
 VALUES (
-'cookie_domain', '', '<input type=\"text\" id=\"cookie_domain\" name=\"cookie_domain\" value=\"{con.cookie_domain}\" size=\"30\">', '70'
+'cookie_domain', '" . $cookie_domain . "', '<input type=\"text\" id=\"cookie_domain\" name=\"cookie_domain\" value=\"{con.cookie_domain}\" size=\"30\">', '70'
 );";
 
 $install_sqls['config_insert41'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('cookie_secure', '0', '<label>{lang.YES}<input type=\"radio\" id=\"cookie_secure\" name=\"cookie_secure\" value=\"1\"  <IF NAME=\"con.cookie_secure==1\"> checked=\"checked\"</IF>></label>\r\n <label>{lang.NO}<input type=\"radio\" id=\"cookie_secure\" name=\"cookie_secure\" value=\"0\"  <IF NAME=\"con.cookie_secure==0\"> checked=\"checked\"</IF>></label>', '70')";

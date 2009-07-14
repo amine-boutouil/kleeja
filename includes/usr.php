@@ -17,8 +17,6 @@ if (!defined('IN_COMMON'))
   
 class usrcp
 {
-
-
 				// this function like a traffic sign :)
 				function data ($name, $pass, $hashed = false, $expire)
 				{
@@ -29,7 +27,6 @@ class usrcp
 						{
 							$config['user_system'] = '1';
 						}
-						
 						
 						//fix it 
 						if($config['user_system'] == '' || empty($config['user_system']))
@@ -79,26 +76,22 @@ class usrcp
 				{
 					global $SQL, $dbprefix, $config;
 					
-					if($hashed)
-					{
-						$query = array(
+					$query = array(
 								'SELECT'	=> '*',
 								'FROM'		=> "`{$dbprefix}users`",
-								'WHERE'		=> "id='". $SQL->escape(intval($name)) . "' and password='" . $SQL->escape($pass) . "'",
 								);
+								
+					if($hashed)
+					{
+						$query['WHERE'] = "id='" . $SQL->escape(intval($name)) . "' and password='" . $SQL->escape($pass) . "'";
 					}
 					else
 					{
-						$query = array(
-								'SELECT'	=> '*',
-								'FROM'		=> "`{$dbprefix}users`",
-								'WHERE'		=> "clean_name='". $SQL->escape($this->cleanusername($name)) . "'"
-								);
+						$query['WHERE'] = "clean_name='". $SQL->escape($this->cleanusername($name)) . "'";
 					}
+					
 					($hook = kleeja_run_hook('qr_select_usrdata_n_usr_class')) ? eval($hook) : null; //run hook			
 					$result = $SQL->build($query);
-					
-
 					
 					if ($SQL->num_rows($result) != 0 ) 
 					{
@@ -146,11 +139,11 @@ class usrcp
 								return false;
 							}
 							
-							define('USER_ID',$row['id']);
-							define('USER_NAME',$row['name']);
-							define('USER_MAIL',$row['mail']);
-							define('USER_ADMIN',$row['admin']);
-							define('LAST_VISIT',$row['last_visit']);
+							define('USER_ID', $row['id']);
+							define('USER_NAME', $row['name']);
+							define('USER_MAIL', $row['mail']);
+							define('USER_ADMIN', $row['admin']);
+							define('LAST_VISIT', $row['last_visit']);
 							
 							if(!$hashed)
 							{
@@ -158,20 +151,7 @@ class usrcp
 								$this->kleeja_set_cookie('ulogu', base64_encode(base64_encode(base64_encode($row['id'] . '|' . $row['password'] . '|' . $expire . '|' . $hash_key_expire))), $expire);
 							}
 					
-							($hook = kleeja_run_hook('qr_while_usrdata_n_usr_class')) ? eval($hook) : null; //run hook	
-							
-							//update session_id
-							$id 		= (int) $row['id'];
-							$session_id = (string) session_id();
-							
-							$update_query = array(
-												'UPDATE'	=> "`{$dbprefix}users`",
-												'SET'		=> "session_id='" . $SQL->escape($session_id) . "' ,last_visit='" . time() . "'",
-												'WHERE'		=>	"id='" . $id ."'"
-										);
-										
-							$SQL->build($update_query);
-						
+							($hook = kleeja_run_hook('qr_while_usrdata_n_usr_class')) ? eval($hook) : null; //run hook
 						}
 						$SQL->freeresult($result);   
 						unset($pass);
@@ -290,11 +270,11 @@ class usrcp
 					($hook = kleeja_run_hook('logout_func_usr_class')) ? eval($hook) : null; //run hook
 					
 					//is ther any cookies	
-					$is_logon = $this->kleeja_get_cookie('ulogu') ? true : false;
-					if($is_logon)
-					{
-						$this->kleeja_get_cookie('ulogu', '', time() - 31536000);//31536000 = year
-					}
+					$this->kleeja_set_cookie('ulogu', '', time() - 31536000);//31536000 = year
+
+					//adm 
+					if(!empty($_SESSION['ADMINLOGIN']))
+						unset($_SESSION['ADMINLOGIN']);
 					
 					return true;
 				}

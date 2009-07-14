@@ -14,6 +14,19 @@ define ('DB_VERSION' , '7');
 // sqls /////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
+//randome cookie name
+$cookie_name = 'klj_' . substr(md5(time()), 0, 6);
+// rey to extract cookie domain
+$cookie_domain = (!empty($_SERVER['HTTP_HOST'])) ? strtolower($_SERVER['HTTP_HOST']) : ((!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : getenv('SERVER_NAME'));
+if (strtolower(substr($cookie_domain, 0, 4) ) == 'www.')
+	$cookie_domain = substr($cookie_domain, 4);
+if (substr($cookie_domain, 0, 1) != '.' && $cookie_domain != 'localhost')
+	$cookie_domain = '.' . $cookie_domain;
+$port = strpos($cookie_domain, ':');
+if ($port !== false)
+	$cookie_domain = substr($cookie_domain, 0, $port);
+
+
 $update_sqls['up_dbv_config'] = "UPDATE `{$dbprefix}config` SET `value` = '" . DB_VERSION . "' WHERE `name` = 'db_version'";
 $update_sqls['online_i'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('last_online_time_update', '" .  time() . "', '', 0)";
 $update_sqls['files_del_c'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('klj_clean_files_from', '0', '', 0)";
@@ -30,8 +43,8 @@ $update_sqls['clean_name'] = "ALTER TABLE `{$dbprefix}users` ADD `clean_name` VA
 $update_sqls['new_password'] = "ALTER TABLE `{$dbprefix}users` ADD `new_password` VARCHAR( 200 ) NOT NULL DEFAULT ''";
 $update_sqls['hash_key'] = "ALTER TABLE `{$dbprefix}users` ADD `hash_key` VARCHAR( 200 ) NOT NULL DEFAULT ''";
 $update_sqls['sitemail2'] = "INSERT INTO `{$dbprefix}config` (`name` ,`value` ,`option` ,`display_order`)
-VALUES ('sitemail2', '" . $config['sitemail'] . "', '<input type=\"text\" id=\"sitemail2\" name=\"sitemail2\" value=\"{con.sitemail2}\" size=\"40\">', '3');";
-$update_sqls['sitemail2'] = "ALTER TABLE `{$dbprefix}users` ADD `password_salt` VARCHAR( 250 ) NOT NULL AFTER `password`";
+VALUES ('sitemail2', '" . inst_get_config('sitemail') . "', '<input type=\"text\" id=\"sitemail2\" name=\"sitemail2\" value=\"{con.sitemail2}\" size=\"40\">', '3');";
+$update_sqls['password_salt'] = "ALTER TABLE `{$dbprefix}users` ADD `password_salt` VARCHAR( 250 ) NOT NULL AFTER `password`";
 $update_sqls['unique_sesion'] = "ALTER TABLE `{$dbprefix}online` ADD UNIQUE (`session`)";
 $update_sqls['cookie_1'] = "INSERT INTO `{$dbprefix}config` (
 `name` ,
@@ -40,7 +53,7 @@ $update_sqls['cookie_1'] = "INSERT INTO `{$dbprefix}config` (
 `display_order`
 )
 VALUES (
-'cookie_name', 'klj', '<input type=\"text\" id=\"cookie_name\" name=\"cookie_name\" value=\"{con.cookie_name}\" size=\"30\">', '70'
+'cookie_name', '" . $cookie_name  . "', '<input type=\"text\" id=\"cookie_name\" name=\"cookie_name\" value=\"{con.cookie_name}\" size=\"30\">', '70'
 );";
 $update_sqls['cookie_2'] = "INSERT INTO `{$dbprefix}config` (
 `name` ,
@@ -58,7 +71,7 @@ $update_sqls['cookie_3'] = "INSERT INTO `{$dbprefix}config` (
 `display_order`
 )
 VALUES (
-'cookie_domain', '', '<input type=\"text\" id=\"cookie_domain\" name=\"cookie_domain\" value=\"{con.cookie_domain}\" size=\"30\">', '70'
+'cookie_domain', '" . $cookie_domain . "', '<input type=\"text\" id=\"cookie_domain\" name=\"cookie_domain\" value=\"{con.cookie_domain}\" size=\"30\">', '70'
 );";
 
 $update_sqls['cookie_4'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('cookie_secure', '0', '<label>{lang.YES}<input type=\"radio\" id=\"cookie_secure\" name=\"cookie_secure\" value=\"1\"  <IF NAME=\"con.cookie_secure==1\"> checked=\"checked\"</IF>></label>\r\n <label>{lang.NO}<input type=\"radio\" id=\"cookie_secure\" name=\"cookie_secure\" value=\"0\"  <IF NAME=\"con.cookie_secure==0\"> checked=\"checked\"</IF>></label>', '70')";

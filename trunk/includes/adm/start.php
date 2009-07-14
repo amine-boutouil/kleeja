@@ -17,9 +17,9 @@
 		//style of
 		$stylee			= "admin_start";
 		//last visit
-		$last_visit		= (!empty($_SESSION['LAST_VISIT']) && $config['user_system'] == 1) ?  date("[d-m-Y], [h:i a] ", $_SESSION['LAST_VISIT']) : false;
-		$h_lst_files	= './admin.php?cp=files&amp;last_visit=' . (!empty($_SESSION['LAST_VISIT']) ? $_SESSION['LAST_VISIT'] : time() - 3600*12);
-		$h_lst_imgs		= './admin.php?cp=img_ctrl&amp;last_visit=' . (!empty($_SESSION['LAST_VISIT']) ? $_SESSION['LAST_VISIT'] : time() - 3600*12);
+		$last_visit		= (defined('LAST_VISIT') && $config['user_system'] == 1) ?  date("[d-m-Y], [h:i a] ", LAST_VISIT) : false;
+		$h_lst_files	= './admin.php?cp=files&amp;last_visit=' . (defined('LAST_VISIT') ? LAST_VISIT : time() - 3600*12);
+		$h_lst_imgs		= './admin.php?cp=img_ctrl&amp;last_visit=' . (defined('LAST_VISIT') ? LAST_VISIT : time() - 3600*12);
 		
 		//data
 		$files_number 		= $stat_files;

@@ -28,7 +28,8 @@
 	// Report all errors, except notices
 	defined('DEV_STAGE') ? @error_reporting(E_ALL) : @error_reporting(E_ALL ^ E_NOTICE);
 
-
+/*
+	
 	// start session
 	$s_time = 86400 * 2; // 2 : two days 
 	$s_key = (!empty($_SERVER['REMOTE_ADDR'])) ? strtolower($_SERVER['REMOTE_ADDR']) : ((!empty($_SERVER['SERVER_ADDR'])) ? $_SERVER['SERVER_ADDR'] : @getenv('SERVER_NAME'));
@@ -39,11 +40,17 @@
 	//session_save_path('./cache/');
 	session_name($s_sid);
 	session_start();
-
+*/
+	
+	
+	/*
+	
 	if (isset($_COOKIE[$s_sid]))
 	{
 		setcookie($s_sid, $_COOKIE[$s_sid], time() + $s_time, "/");
 	}
+	
+	*/
 	
 	function stripslashes_our(&$value)
 	{
@@ -128,13 +135,16 @@
 	$SQL	= new SSQL($dbserver, $dbuser, $dbpass, $dbname);
 	$tpl	= new kleeja_style;
 	$kljup	= new KljUploader;
-	$usrcp	= new usrcp;			
-	
+	$usrcp	= new usrcp;
+		
 	//no need after now 
 	unset($dbpass);
 
 	//then get caches
 	require ($path . 'cache.php');
+	
+	//check user or guest
+	$usrcp->kleeja_check_user();
 	
 	//no tpl caching in dev stage  
 	if(defined('DEV_STAGE'))

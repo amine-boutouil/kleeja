@@ -17,7 +17,7 @@
 
 		//for style ..
 		$stylee 	= "admin_users";
-		$action 	= "admin.php?cp=users&amp;page=" . (isset($GET['page'])  ? intval($GET['page']) : 1);
+		$action 	= "admin.php?cp=users&amp;page=" . (isset($_GET['page'])  ? intval($_GET['page']) : 1) . (isset($_GET['search']) ? '&search=' . $_GET['search'] : '');
 		$is_search	= false;
 		$isn_search	= true;
 		
@@ -248,12 +248,12 @@
 	$page_nums 		= $Pager->print_nums($config['siteurl'] . 'admin.php?cp=users' . ((isset($_GET['search'])) ? '&search=' . $_GET['search'] : '')); 
 	
 	//if not noraml user system 
-	$user_not_normal =$config['user_system'] != 1 ?  true : false;
+	$user_not_normal = $config['user_system'] != 1 ?  true : false;
 	}
 	//after submit 
 	if (isset($_POST['submit']) || isset($_POST['newuser']))
 	{
-			$text	= $lang['USERS_UPDATED'] . '<meta HTTP-EQUIV="REFRESH" content="0; url=./admin.php?cp=users&amp;page=' . (isset($GET['page'])  ? intval($GET['page']) : 1) . '">' . "\n";
+			$text	= $lang['USERS_UPDATED'] . '<meta HTTP-EQUIV="REFRESH" content="0; url=./admin.php?cp=users&amp;page=' . (isset($_GET['page'])  ? intval($_GET['page']) : 1) . (isset($_GET['search']) ? '&search=' . $_GET['search'] : '') . '">' . "\n";
 			$stylee	= "admin_info";
 	}
 ?>

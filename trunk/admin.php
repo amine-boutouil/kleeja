@@ -19,6 +19,17 @@
 		define('IN_ADMIN_LOGIN', true);
 	}
 	
+	// start session
+	$s_time = 86400 * 2; // 2 : two days 
+	$s_key = (!empty($_SERVER['REMOTE_ADDR'])) ? strtolower($_SERVER['REMOTE_ADDR']) : ((!empty($_SERVER['SERVER_ADDR'])) ? $_SERVER['SERVER_ADDR'] : @getenv('SERVER_NAME'));
+	$s_key .= (!empty($_SERVER['HTTP_USER_AGENT'])) ? strtolower($_SERVER['HTTP_USER_AGENT']) : ((!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : @getenv('SERVER_NAME'));
+	$s_sid = 'klj_' . substr('_' . md5($s_key), 0, 8);
+	session_set_cookie_params($s_time);
+	//this will help people with some problem with their sessions path
+	//session_save_path('./cache/');
+	session_name($s_sid);
+	session_start();
+	
 	//include imprtant file ..
 	include ('includes/common.php');
 	include_once ('includes/version.php');
@@ -52,7 +63,7 @@
 				{
 					$ERRORS[] = $lang['EMPTY_FIELDS'];
 				}
-				elseif(!$usrcp->data($_POST['lname'], $_POST['lpass']))
+				elseif(!$usrcp->data($_POST['lname'], $_POST['lpass'], false, 3600))
 				{
 					$ERRORS[] = $lang['LOGIN_ERROR'];
 				}
@@ -170,7 +181,7 @@
 	//New calls notice
 	$query = array('SELECT'	=> 'id',
 					'FROM'		=> "{$dbprefix}call",
-					'WHERE'		=> 'time > "' . (!empty($_SESSION['LAST_VISIT']) ? $_SESSION['LAST_VISIT'] : time() - 3600*12) . '"' 
+					'WHERE'		=> 'time > "' . (defined('LAST_VISIT') ? LAST_VISIT : time() - 3600*12) . '"' 
 					);
 		$newcall = $SQL->num_rows($SQL->build($query));
 		($newcall == 0) ? $newcall = ' [0]' : $newcall = ' [' . $newcall . ']'; 
@@ -178,7 +189,7 @@
 	//New reports notice
 	$query = array('SELECT'	=> 'id',
 					'FROM'		=> "{$dbprefix}reports",
-					'WHERE'		=> 'time > "' . (!empty($_SESSION['LAST_VISIT']) ? $_SESSION['LAST_VISIT'] : time() - 3600*12) . '"' 
+					'WHERE'		=> 'time > "' . (defined('LAST_VISIT') ? LAST_VISIT : time() - 3600*12) . '"' 
 					);
 	$newreport = $SQL->num_rows($SQL->build($query));
 	($newreport == 0) ? $newreport = ' [0]' : $newreport = ' [' . $newreport . ']'; 

@@ -21,11 +21,11 @@
 	$url_or2		= (isset($_REQUEST['order_by']) ? '&amp;order_by=' . $_REQUEST['order_by']  : '');
 	$url_lst	= (isset($_REQUEST['last_visit']) ? '&amp;last_visit=' . $_REQUEST['last_visit'] : '');
 	$url_sea	= (isset($_GET['search']) ? '&amp;search=' . $_GET['search'] : '');
-	$url_pg		= (isset($_REQUEST['page']) ? '&amp;page=' . intval($_REQUEST['page']) : '');
-	$page_action = "admin.php?cp=files" . $url_or . $url_sea . $url_lst;
+	$url_pg		= (isset($_GET['page']) ? '&amp;page=' . intval($_GET['page']) : '');
+	$page_action = 'admin.php?cp=files' . $url_pg . $url_or . $url_sea . $url_lst;
 	$ord_action	= "admin.php?cp=files" . $url_pg . $url_sea . $url_lst;
 	$page2_action	= "admin.php?cp=files" . $url_or2 . $url_sea . $url_lst;
-	$action		= $page_action . $url_sea . $url_or;
+	$action		= $page_action;
 	$is_search	= false;
 	
 	$query	= array('SELECT'	=> 'COUNT(f.id) AS total_files',

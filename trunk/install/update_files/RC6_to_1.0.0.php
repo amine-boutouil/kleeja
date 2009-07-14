@@ -32,7 +32,36 @@ $update_sqls['hash_key'] = "ALTER TABLE `{$dbprefix}users` ADD `hash_key` VARCHA
 $update_sqls['sitemail2'] = "INSERT INTO `{$dbprefix}config` (`name` ,`value` ,`option` ,`display_order`)
 VALUES ('sitemail2', '" . $config['sitemail'] . "', '<input type=\"text\" id=\"sitemail2\" name=\"sitemail2\" value=\"{con.sitemail2}\" size=\"40\">', '3');";
 $update_sqls['sitemail2'] = "ALTER TABLE `{$dbprefix}users` ADD `password_salt` VARCHAR( 250 ) NOT NULL AFTER `password`";
+$update_sqls['unique_sesion'] = "ALTER TABLE `{$dbprefix}online` ADD UNIQUE (`session`)";
+$update_sqls['cookie_1'] = "INSERT INTO `{$dbprefix}config` (
+`name` ,
+`value` ,
+`option` ,
+`display_order`
+)
+VALUES (
+'cookie_name', 'klj', '<input type=\"text\" id=\"cookie_name\" name=\"cookie_name\" value=\"{con.cookie_name}\" size=\"30\">', '70'
+);";
+$update_sqls['cookie_2'] = "INSERT INTO `{$dbprefix}config` (
+`name` ,
+`value` ,
+`option` ,
+`display_order`
+)
+VALUES (
+'cookie_path', '/', '<input type=\"text\" id=\"cookie_path\" name=\"cookie_path\" value=\"{con.cookie_path}\" size=\"30\">', '70'
+);";
+$update_sqls['cookie_3'] = "INSERT INTO `{$dbprefix}config` (
+`name` ,
+`value` ,
+`option` ,
+`display_order`
+)
+VALUES (
+'cookie_domain', '', '<input type=\"text\" id=\"cookie_domain\" name=\"cookie_domain\" value=\"{con.cookie_domain}\" size=\"30\">', '70'
+);";
 
+$update_sqls['cookie_4'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('cookie_secure', '0', '<label>{lang.YES}<input type=\"radio\" id=\"cookie_secure\" name=\"cookie_secure\" value=\"1\"  <IF NAME=\"con.cookie_secure==1\"> checked=\"checked\"</IF>></label>\r\n <label>{lang.NO}<input type=\"radio\" id=\"cookie_secure\" name=\"cookie_secure\" value=\"0\"  <IF NAME=\"con.cookie_secure==0\"> checked=\"checked\"</IF>></label>', '70')";
  
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -106,10 +135,6 @@ function update_clean_name()
 	{	
 		$url = 'update.php?step=update_now&amp;action_file_do=' . htmlspecialchars($_GET['action_file_do']) .'&amp;is_us=' . $last_id_was . '&amp;num_users=' . $num_users . '&amp;loop=' . $loop . '&amp;lang=' . htmlspecialchars($_GET['lang']);
 		echo '<meta http-equiv="refresh" content="4; url=' . $url . '" />';
-	}
-	if($loop == ($num_users/$user_per_refresh))
-	{
-		mysql_query("ALTER TABLE `{$dbprefix}online` ADD UNIQUE (`session`)");
 	}
 }
 

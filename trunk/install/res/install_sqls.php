@@ -84,6 +84,7 @@ CREATE TABLE `{$dbprefix}users` (
   `id` int(10) NOT NULL auto_increment,
   `name` varchar(300) collate utf8_bin NOT NULL,
   `password` varchar(200) collate utf8_bin NOT NULL,
+  `password_salt` varchar(250) collate utf8_bin NOT NULL,
   `mail` varchar(350) collate utf8_bin NOT NULL,
   `admin` tinyint(1) NOT NULL default '0',
   `session_id` char(32) collate utf8_bin NOT NULL,

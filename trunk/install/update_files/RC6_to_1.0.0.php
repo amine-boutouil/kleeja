@@ -31,6 +31,9 @@ $update_sqls['new_password'] = "ALTER TABLE `{$dbprefix}users` ADD `new_password
 $update_sqls['hash_key'] = "ALTER TABLE `{$dbprefix}users` ADD `hash_key` VARCHAR( 200 ) NOT NULL DEFAULT ''";
 $update_sqls['sitemail2'] = "INSERT INTO `{$dbprefix}config` (`name` ,`value` ,`option` ,`display_order`)
 VALUES ('sitemail2', '" . $config['sitemail'] . "', '<input type=\"text\" id=\"sitemail2\" name=\"sitemail2\" value=\"{con.sitemail2}\" size=\"40\">', '3');";
+$update_sqls['sitemail2'] = "ALTER TABLE `{$dbprefix}users` ADD `password_salt` VARCHAR( 250 ) NOT NULL AFTER `password`";
+
+ 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 //notes ////////////////////////////////////////////////////////////////////////////////////////////////

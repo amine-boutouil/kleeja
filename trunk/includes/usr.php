@@ -76,13 +76,11 @@ class usrcp
 				function normal ($name,$pass)
 				{
 					global $SQL,$dbprefix;
-					
-					$pass = md5($pass);
-					
+										
 					$query = array(
 								'SELECT'	=> '*',
 								'FROM'		=> "`{$dbprefix}users`",
-								'WHERE'		=> "clean_name='". $SQL->escape($this->cleanusername($name)) . "' AND password='$pass'"
+								'WHERE'		=> "clean_name='". $SQL->escape($this->cleanusername($name)) . "'"
 								);
 								
 					($hook = kleeja_run_hook('qr_select_usrdata_n_usr_class')) ? eval($hook) : null; //run hook			
@@ -94,6 +92,41 @@ class usrcp
 					{
 						while($row=$SQL->fetch_array($result))
 						{
+							//CHECK IF IT'S MD5 PASSWORD
+							if(strlen($row['password']) == '32' && empty($row['password_salt']))   
+							{
+								$passmd5 = md5($pass);
+								
+								//update old md5 hash to phpass hash
+								if($row['password'] == $passmd5)
+								{
+									//new salt
+									$new_salt = substr(base64_encode(pack("H*", sha1(mt_rand()))), 0, 7);
+									//new password hash
+									$new_password = $this->kleeja_hash_password(trim($pass) . $new_salt);
+									
+								
+									($hook = kleeja_run_hook('qr_update_usrdata_md5_n_usr_class')) ? eval($hook) : null; //run hook	
+									
+									//update now !!
+									$update_query = array(
+												'UPDATE'	=> "`{$dbprefix}users`",
+												'SET'		=> "password='" . $new_password . "' ,password_salt='" . $new_salt . "'",
+												'WHERE'		=>	"id='" . intval($row['id']) ."'"
+										);
+										
+									$SQL->build($update_query);
+								}
+								else //if the password is wrong
+								{
+									return false;
+								}
+							}
+							else if($this->kleeja_hash_password($pass . $row['password_salt'], $row['password']) != true)
+							{
+								return false;
+							}
+							
 							$_SESSION['USER_ID']	= $row['id'];
 							$_SESSION['USER_NAME']	= $row['name'];
 							$_SESSION['USER_MAIL']	= $row['mail'];
@@ -111,11 +144,8 @@ class usrcp
 												'SET'		=> "session_id='" . $SQL->escape($session_id) . "' ,last_visit='" . time() . "'",
 												'WHERE'		=>	"id='" . $id ."'"
 										);
-
-							if (!$SQL->build($update_query))
-							{
-								big_error('Error',$lang['CANT_UPDATE_SQL']);
-							}
+										
+							$SQL->build($update_query);
 						
 						}
 						$SQL->freeresult($result);   
@@ -349,6 +379,23 @@ class usrcp
     				$uname = strtolower($uname);
     				return $uname;
 				}
+				
+				function kleeja_hash_password($password, $check_pass = false)
+				{
+					include_once('phpass.php');
+	
+					$return = false;
+					$hasher = new PasswordHash(8, true);
+					$return = $hasher->HashPassword($password);
+	
+					//check
+					if($check_pass != false)
+					{
+						$return = $hasher->CheckPassword($password, $check_pass);
+					}
+			
+					return $return;
+			}
 }#end class
 
 ?>

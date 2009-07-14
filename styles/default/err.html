@@ -1,22 +1,25 @@
+<!-- start err template -->
 <div id="content">
 		
-<div class="clr"></div>
-
 <!-- start site name and title  -->
+<div class="clr"></div>
 <div id="title-x"><b><a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}</b></div>
+<div class="clr"></div>
 <!--  # End  site name and title  -->
 
-<div class="clr"></div><div class="line"></div><div class="clr"></div>
+<div class="line"></div>
 
+<div class="clr"></div>
 
-	
-        <!-- begin err template -->
-        <div class="err">
-        {text} 
-        <br />
-        <a href="javascript:history.go(-1)">{go_back_browser}</a>
-        </div>
-        <!-- end err template -->
+<!-- start error  System Messages -->
+<dl id="system-message">
+<dd class="error">
+<ul>
+<li>{text}&nbsp;<a href="javascript:history.go(-1)">{go_back_browser}</a></li>
+</ul>
+</dd>
+</dl>	
+<!-- ## end error  System Messages -->   
 
 </div>
-        
+<!-- ## end err template -->

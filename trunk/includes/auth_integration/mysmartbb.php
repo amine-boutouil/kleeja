@@ -11,9 +11,9 @@ if (!defined('IN_COMMON'))
 }
   
 
-function kleeja_auth_login ($name, $pass)
+function kleeja_auth_login ($name, $pass, $hashed = false, $expire)
 {
-	global $script_path, $lang, $script_encoding, $script_srv, $script_db, $script_user, $script_pass, $script_prefix;
+	global $script_path, $lang, $script_encoding, $script_srv, $script_db, $script_user, $script_pass, $script_prefix, $config, $usrcp;
 	
 	if(isset($script_path)) {
 	//check for last slash / 
@@ -65,8 +65,10 @@ function kleeja_auth_login ($name, $pass)
  	
 	$query = array('SELECT'	=> '*',
 					'FROM'	=> "`{$forum_prefix}member`",
-					'WHERE'	=> "username='" . $SQLMS->real_escape($name) . "' AND password='" . md5($pass) . "'"
 					);
+	
+		($hashed) ? $query['WHERE'] = "id='" . intval($name) . "'  AND password='" . $SQLMS->real_escape($pass) . "'" : $query['WHERE'] = "username='" . $SQLMS->real_escape($name) . "' AND password='" . md5($pass) . "'";
+			
 
 	($hook = kleeja_run_hook('qr_select_usrdata_mysbb_usr_class')) ? eval($hook) : null; //run hook	
 	$result = $SQLMS->build($query);
@@ -77,11 +79,17 @@ function kleeja_auth_login ($name, $pass)
 	
 		while($row=$SQLMS->fetch_array($result))
 		{
-			$_SESSION['USER_ID']	= $row['id'];
-			$_SESSION['USER_NAME']	= (eregi('utf',strtolower($script_encoding))) ? $row['username'] : iconv(strtoupper($script_encoding),"UTF-8//IGNORE",$row['username']);
-			$_SESSION['USER_MAIL']	= $row['email'];
-			$_SESSION['USER_ADMIN']	= ($row['usergroup'] == 1) ? 1 : 0;
-			$_SESSION['USER_SESS']	= session_id();
+			define('USER_ID',$row['id']);
+			define('USER_NAME',(eregi('utf',strtolower($script_encoding))) ? $row['username'] : iconv(strtoupper($script_encoding),"UTF-8//IGNORE",$row['username']));
+			define('USER_MAIL',$row['email']);
+			define('USER_ADMIN',($row['usergroup'] == 1) ? 1 : 0);
+							
+			if(!$hashed)
+			{	
+				$hash_key_expire = sha1(md5($config['h_key']) .  $expire);
+				$usrcp->kleeja_set_cookie('ulogu', base64_encode(base64_encode(base64_encode($row['id'] . '|' . $row['password'] . '|' . $expire . '|' . $hash_key_expire))), $expire);
+			}
+			
 			($hook = kleeja_run_hook('qr_while_usrdata_mysbb_usr_class')) ? eval($hook) : null; //run hook
 			
 		}

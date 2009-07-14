@@ -11,10 +11,10 @@ if (!defined('IN_COMMON'))
 }
   
 
-function kleeja_auth_login ($name, $pass)
+function kleeja_auth_login ($name, $pass, $hashed = false, $expire)
 {
 	//global $forum_srv, $forum_user, $forum_pass, $forum_db, $forum_charset;
-	global $script_path, $SQLBB, $phpEx, $phpbb_root_path, $lang, $script_encoding, $script_srv, $script_db, $script_user, $script_pass, $script_prefix;
+	global $script_path, $SQLBB, $phpEx, $phpbb_root_path, $lang, $script_encoding, $script_srv, $script_db, $script_user, $script_pass, $script_prefix, $config, $usrcp;
 				
 	//check for last slash / 
 	if(isset($script_path)) {
@@ -75,22 +75,28 @@ function kleeja_auth_login ($name, $pass)
 		$admin_level = 3;					
 		$query2 = array('SELECT'	=> '*',
 						'FROM'		=> "`{$forum_prefix}users`",
-						'WHERE'		=>"username_clean='" . utf8_clean_string($name) . "'"
 						);
-												
-		$result2 = $SQLBB->build($query2);					
-		
-		while($row=$SQLBB->fetch_array($result2))
-		{
-			if(phpbb_check_hash($pass, $row['user_password']))
+		($hashed) ? $query2['WHERE'] = "user_id='" . intval($name) . "'  AND user_password='" . $SQLBB->real_escape($pass) . "' " : $query2['WHERE'] = "username_clean='" . utf8_clean_string($name) . "'";
+	
+		if(!$hashed)
+		{										
+			$result2 = $SQLBB->build($query2);					
+			while($row=$SQLBB->fetch_array($result2))
 			{
-				$query = $query2;
-			}
-			else
-			{
-				$query = "";
+				if(phpbb_check_hash($pass, $row['user_password']))
+				{
+					$query = $query2;
+				}
+				else
+				{
+					$query = "";
+				}
 			}
 		}
+		else
+		{
+			$query = $query2;
+		}	
 	}
 	else//phpbb2
 	{
@@ -107,6 +113,8 @@ function kleeja_auth_login ($name, $pass)
 						'FROM'		=> "`{$forum_prefix}users`",
 						'WHERE'		=>"username='" . $SQLBB->real_escape($name) . "' AND user_password='" . md5($pass) . "'"
 					);
+					
+		($hashed) ? $query['WHERE'] = "user_id='" . intval($name) . "'  AND user_password='" . $SQLBB->real_escape($pass) . "' " : $query['WHERE'] = "username='" . $SQLBB->real_escape($name) . "' AND user_password='" . md5($pass) . "'";
 								
 	}
 					
@@ -120,12 +128,19 @@ function kleeja_auth_login ($name, $pass)
 		{
 			if($SQLBB->num_rows($SQLBB->query("SELECT ban_userid FROM `{$forum_prefix}banlist` WHERE ban_userid='" . intval($row['user_id']) . "'")) == 0)
 			{
-			$_SESSION['USER_ID']	=	$row['user_id'];
-			$_SESSION['USER_NAME']	=	(eregi('utf',strtolower($script_encoding))) ? $row['username'] : iconv(strtoupper($script_encoding),"UTF-8//IGNORE",$row['username']);
-			$_SESSION['USER_MAIL']	=	$row['user_email'];
-			$_SESSION['USER_ADMIN']	=	($row[$row_leve] == $admin_level) ? 1 : 0;
-			$_SESSION['USER_SESS']	=	session_id();
-			($hook = kleeja_run_hook('qr_while_usrdata_phpbb_usr_class')) ? eval($hook) : null; //run hook
+				define('USER_ID',$row['user_id']);
+				define('USER_NAME',(eregi('utf',strtolower($script_encoding))) ? $row['username'] : iconv(strtoupper($script_encoding),"UTF-8//IGNORE",$row['username']));
+				define('USER_MAIL',$row['user_email']);
+				define('USER_ADMIN',($row[$row_leve] == $admin_level) ? 1 : 0);
+					//define('LAST_VISIT',$row['last_visit']);
+							
+				if(!$hashed)
+				{	
+					$hash_key_expire = sha1(md5($config['h_key']) .  $expire);
+					$usrcp->kleeja_set_cookie('ulogu', base64_encode(base64_encode(base64_encode($row['user_id'] . '|' . $row['user_password'] . '|' . $expire . '|' . $hash_key_expire))), $expire);
+				}
+
+				($hook = kleeja_run_hook('qr_while_usrdata_phpbb_usr_class')) ? eval($hook) : null; //run hook
 			}
 			else
 			{

@@ -441,7 +441,15 @@ $lang = array_merge($lang, array(
 	'COOKIE_DOMAIN' 			=> 'نطاق السكاكر',
 	'COOKIE_NAME' 				=> 'بادئة السكاكر',
 	'COOKIE_PATH' 				=> 'مسار السكاكر',
-
+	'COOKIE_SECURE'				=> 'تفعيل السكاكر الآمانة',
+	'BROSWERF'					=> 'استعرض ملفات العضو',
+	'REMME'						=> 'تذكرني',
+	'HOUR'						=> 'ساعة',
+	'5HOURS'					=> '5 ساعات',
+	'DAY'						=> 'يوم',
+	'WEEK'						=> 'اسبوع',
+	'MONTH'						=> 'شهر',
+	'YEAR'						=> 'سنه',
 	
 ));
 

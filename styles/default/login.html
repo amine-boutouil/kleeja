@@ -20,6 +20,20 @@
                         <td class="row2"> <input type="password" name="lpass" value="{t_lpass}"  /></td>
                 </tr>
                 <tr>
+                <td class="row1">{lang.REMME} :</td>
+                <td class="row2">
+					<select name="remme">
+							<option value="3600">{lang.HOUR}</option>
+							<option value="18000">{lang.5HOURS}</option>
+							<option value="864000">{lang.DAY}</option>
+							<option value="6048000">{lang.WEEK}</option>
+							<option value="25920000">{lang.MONTH}</option>
+							<option value="31536000">{lang.YEAR}</option>
+						</select>
+				</td>
+                </td>
+				</tr>
+                <tr>
                         <td colspan="2" style="text-align:center"><input type="submit" name="submit" value="{lang.LOGIN}" /></td>
                 </tr>
         </table>

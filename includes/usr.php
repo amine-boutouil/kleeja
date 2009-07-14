@@ -20,7 +20,7 @@ class usrcp
 
 
 				// this function like a traffic sign :)
-				function data ($name, $pass)
+				function data ($name, $pass, $hashed = false, $expire)
 				{
 					global $config, $path;
 						
@@ -37,7 +37,9 @@ class usrcp
 							$config['user_system'] = '1';
 						}
 						
-						
+						//expire
+						$expire = time() + intval($expire);
+							
 						($hook = kleeja_run_hook('data_func_usr_class')) ? eval($hook) : null; //run hook
 						
 						
@@ -46,13 +48,13 @@ class usrcp
 							if(file_exists($path . 'auth_integration/' . trim($config['user_system']) . '.php'))
 							{	
 								include_once ($path . 'auth_integration/' . trim($config['user_system']) . '.php');
-								return kleeja_auth_login($name, $pass);
+								return kleeja_auth_login($name, $pass, $hashed, $expire);
 							}
 						}
 						
 						
 						//normal 
-						return $this->normal($name, $pass);
+						return $this->normal($name, $pass, $hashed, $expire);
 					
 				}
 				
@@ -73,16 +75,26 @@ class usrcp
 				
 					
 				//now ..  .. our table
-				function normal ($name,$pass)
+				function normal ($name, $pass, $hashed = false, $expire)
 				{
-					global $SQL,$dbprefix;
+					global $SQL, $dbprefix, $config;
 					
-					$query = array(
+					if($hashed)
+					{
+						$query = array(
+								'SELECT'	=> '*',
+								'FROM'		=> "`{$dbprefix}users`",
+								'WHERE'		=> "id='". $SQL->escape(intval($name)) . "'"
+								);
+					}
+					else
+					{
+						$query = array(
 								'SELECT'	=> '*',
 								'FROM'		=> "`{$dbprefix}users`",
 								'WHERE'		=> "clean_name='". $SQL->escape($this->cleanusername($name)) . "'"
 								);
-								
+					}
 					($hook = kleeja_run_hook('qr_select_usrdata_n_usr_class')) ? eval($hook) : null; //run hook			
 					$result = $SQL->build($query);
 					
@@ -96,6 +108,8 @@ class usrcp
 							{
 								return false;
 							}
+						
+							$phppass = ($hashed) ?  $pass : $pass . $row['password_salt'];
 							
 							//CHECK IF IT'S MD5 PASSWORD
 							if(strlen($row['password']) == '32' && empty($row['password_salt']))   
@@ -127,17 +141,23 @@ class usrcp
 									return false;
 								}
 							}
-							else if($this->kleeja_hash_password($pass . $row['password_salt'], $row['password']) != true)
+							else if(($phppass != $row['password'] && $hashed) || ($this->kleeja_hash_password($phppass, $row['password']) != true && $hashed == false))
 							{
 								return false;
 							}
 							
-							$_SESSION['USER_ID']	= $row['id'];
-							$_SESSION['USER_NAME']	= $row['name'];
-							$_SESSION['USER_MAIL']	= $row['mail'];
-							$_SESSION['USER_ADMIN']	= $row['admin'];
-							$_SESSION['USER_SESS']	= session_id();
-							$_SESSION['LAST_VISIT']	= $row['last_visit'];
+							define('USER_ID',$row['id']);
+							define('USER_NAME',$row['name']);
+							define('USER_MAIL',$row['mail']);
+							define('USER_ADMIN',$row['admin']);
+							define('LAST_VISIT',$row['last_visit']);
+							
+							if(!$hashed && !defined('IN_ADMIN_LOGIN'))
+							{
+								$hash_key_expire = sha1(md5($config['h_key']) .  $expire);
+								$this->kleeja_set_cookie('ulogu', base64_encode(base64_encode(base64_encode($row['id'] . '|' . $row['password'] . '|' . $expire . '|' . $hash_key_expire))), $expire);
+							}
+					
 							($hook = kleeja_run_hook('qr_while_usrdata_n_usr_class')) ? eval($hook) : null; //run hook	
 							
 							//update session_id
@@ -197,21 +217,16 @@ class usrcp
 				{
 					($hook = kleeja_run_hook('id_func_usr_class')) ? eval($hook) : null; //run hook
 					
-					if (isset($_SESSION['USER_SESS']) && $_SESSION['USER_SESS'] == session_id())
-					{
-						if ($_SESSION['USER_ID'])
+					
+						if (defined('USER_ID'))
 						{
-							return $_SESSION['USER_ID'];
+							return USER_ID;
 						}
 						else
 						{
 							return false;
 						}
-					}
-					else
-					{
-						return false;
-					}
+				
 				}
 				
 				/*
@@ -221,21 +236,15 @@ class usrcp
 				{
 					($hook = kleeja_run_hook('name_func_usr_class')) ? eval($hook) : null; //run hook
 					
-					if (!empty($_SESSION['USER_SESS']) && $_SESSION['USER_SESS'] == session_id())
-					{
-						if (!empty($_SESSION['USER_NAME']))
+						if (defined('USER_NAME'))
 						{
-							return $_SESSION['USER_NAME'];
+							return USER_NAME;
 						}
 						else
 						{
 							return false;
 						}
-					}
-					else
-					{
-					return false;
-					}
+					
 				}
 				
 				/*
@@ -245,21 +254,15 @@ class usrcp
 				{
 					($hook = kleeja_run_hook('mail_func_usr_class')) ? eval($hook) : null; //run hook
 					
-					if (!empty($_SESSION['USER_SESS']) && $_SESSION['USER_SESS'] == session_id() )
-					{
-						if (!empty($_SESSION['USER_MAIL']))
+						if (defined('USER_MAIL'))
 						{
-							return $_SESSION['USER_MAIL'];
+							return USER_MAIL;
 						}
 						else
 						{
 							return false;
 						}
-					}
-					else
-					{
-						return false;
-					}
+				
 				}
 				
 				/*
@@ -269,16 +272,9 @@ class usrcp
 				{
 					($hook = kleeja_run_hook('admin_func_usr_class')) ? eval($hook) : null; //run hook
 					
-					if (!empty($_SESSION['USER_SESS']) && $_SESSION['USER_SESS'] == session_id())
+						if (defined('USER_ADMIN'))
 						{
-							if (!empty($_SESSION['USER_ADMIN']))
-							{
-								return $_SESSION['USER_ADMIN'];
-							}
-							else
-							{
-								return false;
-							}
+							return USER_ADMIN;
 						}
 						else
 						{
@@ -293,13 +289,13 @@ class usrcp
 				{
 					($hook = kleeja_run_hook('logout_func_usr_class')) ? eval($hook) : null; //run hook
 					
-					unset($_SESSION['USER_ID']);
-					unset($_SESSION['USER_NAME']);
-					unset($_SESSION['USER_MAIL']);
-					unset($_SESSION['USER_ADMIN']);
-					unset($_SESSION['USER_SESS']);
-					unset($_SESSION['LAST_VISIT']);
-					unset($_SESSION['ADMINLOGIN']);
+					//is ther any cookies	
+					$is_logon = $this->kleeja_get_cookie('ulogu') ? true : false;
+					if($is_logon)
+					{
+						$this->kleeja_get_cookie('ulogu', '', time() - 31536000);//31536000 = year
+					}
+					
 					return true;
 				}
 				
@@ -319,66 +315,66 @@ class usrcp
 				function cleanusername ($uname) 
 				{
 					$clean_chars = array(
-					'ط£' => 'ط§',
-					'ط¥' => 'ط§',
-					'ط¤' => 'ظˆ',
-					'ظ€' => '',
-					'ظ‹' => '',
-					'ظŒ' => '',
-					'ظڈ' => '',
-					'ظژ' => '',
-					'ظگ' => '',
-					'ظ’' => '',
-					'ط¢' => 'ط§',
-					'أ،'=> 'a',
-					'أ '=> 'a',
-					'أ¢'=> 'a',
-					'أ£'=> 'a',
-					'آھ'=> 'a',
-					'أپ'=> 'a',
-					'أ€'=> 'a',
-					'أ‚'=> 'a',
-					'أƒ'=> 'a',
-					'أ©'=> 'e',
-					'أ¨'=> 'e',
-					'أھ'=> 'e',
-					'أ‰'=> 'e',
-					'أˆ'=> 'e',
-					'أٹ'=> 'e',
-					'أ­'=> 'i',
-					'أ¬'=> 'i',
-					'أ®'=> 'i',
-					'أچ'=> 'i', 
-					'أŒ'=> 'i',
-					'أژ'=> 'i',
-					'أ²'=> 'o',
-					'أ³'=> 'o',
-					'أ´'=> 'o',
-					'أµ'=> 'o',
-					'آ؛'=> 'o',
-					'أ“'=> 'o',
-					'أ’'=> 'o',
-					'أ”'=> 'o',
-					'أ•'=> 'o',
-					'أ؛'=> 'u',
-					'أ¹'=> 'u',
-					'أ»'=> 'u',
-					'أڑ'=> 'u',
-					'أ™'=> 'u',
-					'أ›'=> 'u',
-					'أ§'=> 'c',
-					'أ‡'=> 'c',
-					'أ‘'=> 'n',
-					'أ±'=> 'n',
-					'أ؟' => 'y',
-					'أ‹' => 'e',
-					'أک' => 'o',
-					'أ…' => 'a',
-					'أ¥' => 'a',
-					'أ¯' => 'i',
-					'أڈ' => 'i',
-					'أ¸' => 'o',
-					'أ«' => 'e',
+ 										'أ' => 'ا',
+                                        'إ' => 'ا',
+                                        'ؤ' => 'و',
+                                        'ـ' => '',
+                                        'ً' => '',
+                                        'ٌ' => '',
+                                        'ُ' => '',
+                                        'َ' => '',
+                                        'ِ' => '',
+                                        'ْ' => '',
+                                        'آ' => 'ا',
+                                        'á'=> 'a',
+                                        'à'=> 'a',
+                                        'â'=> 'a',
+                                        'ã'=> 'a',
+                                        'ª'=> 'a',
+                                        'Á'=> 'a',
+                                        'À'=> 'a',
+                                        'Â'=> 'a',
+                                        'Ã'=> 'a',
+                                        'é'=> 'e',
+                                        'è'=> 'e',
+                                        'ê'=> 'e',
+                                        'É'=> 'e',
+                                        'È'=> 'e',
+                                        'Ê'=> 'e',
+                                        'í'=> 'i',
+                                        'ì'=> 'i',
+                                        'î'=> 'i',
+                                        'Í'=> 'i', 
+                                        'Ì'=> 'i',
+                                        'Î'=> 'i',
+                                        'ò'=> 'o',
+                                        'ó'=> 'o',
+                                        'ô'=> 'o',
+                                        'õ'=> 'o',
+                                        'º'=> 'o',
+                                        'Ó'=> 'o',
+                                        'Ò'=> 'o',
+                                        'Ô'=> 'o',
+                                        'Õ'=> 'o',
+                                        'ú'=> 'u',
+                                        'ù'=> 'u',
+                                        'û'=> 'u',
+                                        'Ú'=> 'u',
+                                        'Ù'=> 'u',
+                                        'Û'=> 'u',
+                                        'ç'=> 'c',
+                                        'Ç'=> 'c',
+                                        'Ñ'=> 'n',
+                                        'ñ'=> 'n',
+                                        'ÿ' => 'y',
+                                        'Ë' => 'e',
+                                        'Ø' => 'o',
+                                        'Å' => 'a',
+                                        'å' => 'a',
+                                        'ï' => 'i',
+                                        'Ï' => 'i',
+                                        'ø' => 'o',
+                                        'ë' => 'e',
 					);
     				$uname = str_replace(array_keys($clean_chars), array_values($clean_chars), $uname);
     				$uname = strtolower($uname);
@@ -452,6 +448,69 @@ class usrcp
 						setcookie($config['cookie_name'] . '_' . $name, $value, $expire, $config['cookie_path'] . '; HttpOnly', $config['cookie_domain'], $config['cookie_secure']);
 					}
 				}
+				
+				//
+				//get cookie
+				//
+				function kleeja_get_cookie($name)
+				{
+					global $config;
+	
+					if(isset($_COOKIE[$config['cookie_name'] . '_' . $name]))
+					{
+						return $_COOKIE[$config['cookie_name'] . '_' . $name];
+					}
+					
+					return false;
+				}
+				
+				//check if user is admin or not 
+				//return : mean return true or false, but if return is false will show msg
+				function kleeja_check_user()
+				{
+					global $config, $SQL, $dbprefix;
+					
+					//create h_key unique key [saanina idia ;_)]
+					if(empty($config['h_key']))
+					{
+						$config['h_key'] = sha1(microtime() . rand(1000,9999));
+						$insert_query	= array('INSERT'	=> 'name ,value',
+												'INTO'		=> "{$dbprefix}config",
+												'VALUES'	=> "'h_key', '" . $config['h_key'] . "'"
+											);
+						
+						$SQL->build($insert_query);
+							
+						delete_cache('data_config');
+					}
+						
+					//if login up
+					if($this->kleeja_get_cookie('ulogu'))
+					{
+						$user_data = false;
+
+						list($user_id, $hashed_password, $expire_at, $hashed_expire) =  @explode('|', base64_decode(base64_decode(base64_decode($this->kleeja_get_cookie('ulogu')))));
+
+						//if not expire 
+						if(($hashed_expire == sha1(md5($config['h_key']) . $expire_at)) && ($expire_at > time()))
+						{
+							$user_data = $this->data($user_id, $hashed_password, true, $expire_at);
+						}
+						
+						if($user_data == false)
+						{
+							$this->kleeja_set_cookie('ulogu', '', time() - 31536000);
+						}
+						else
+						{
+							return $user_data;
+						}
+					}
+					else
+					{
+						return false;//nothing
+					}
+}
 }#end class
 
 ?>

@@ -11,34 +11,35 @@ if (!defined('IN_COMMON'))
 }
   
 
-function kleeja_auth_login ($name, $pass)
+function kleeja_auth_login ($name, $pass, $hashed = false)
 {
 	// ok, i dont hate vb .. but i cant feel my self use it ... 
-	global $script_path, $lang, $script_encoding, $script_srv, $script_db, $script_user, $script_pass, $script_prefix;
+	global $script_path, $lang, $script_encoding, $script_srv, $script_db, $script_user, $script_pass, $script_prefix, $config, $usrcp;
 	
-	if(isset($script_path)) {				
-	//check for last slash
-	if($script_path[strlen($script_path)] == '/')
-	{
-		$script_path = substr($script_path, 0, strlen($script_path));
-	}
+	if(isset($script_path))
+	{				
+		//check for last slash
+		if($script_path[strlen($script_path)] == '/')
+		{
+			$script_path = substr($script_path, 0, strlen($script_path));
+		}
 					
-	$script_path = ($script_path[0] == '/' ? '..' : '../') . $script_path;
+		$script_path = ($script_path[0] == '/' ? '..' : '../') . $script_path;
 	
-	//get some useful data from vb config file
-	if(file_exists($script_path . '/includes/config.php'))
-	{
-		require ($script_path . '/includes/config.php');
-		$forum_srv	= $config['MasterServer']['servername'];
-		$forum_db	= $config['Database']['dbname'];
-		$forum_user	= $config['MasterServer']['username'];
-		$forum_pass	= $config['MasterServer']['password'];
-		$forum_prefix= $config['Database']['tableprefix'];
-	} 
-	else
-	{
-		big_error('Forum path is not correct', sprintf($lang['SCRIPT_AUTH_PATH_WRONG'], 'Vbulletin'));
-	}
+		//get some useful data from vb config file
+		if(file_exists($script_path . '/includes/config.php'))
+		{
+			require ($script_path . '/includes/config.php');
+			$forum_srv	= $config['MasterServer']['servername'];
+			$forum_db	= $config['Database']['dbname'];
+			$forum_user	= $config['MasterServer']['username'];
+			$forum_pass	= $config['MasterServer']['password'];
+			$forum_prefix= $config['Database']['tableprefix'];
+		} 
+		else
+		{
+			big_error('Forum path is not correct', sprintf($lang['SCRIPT_AUTH_PATH_WRONG'], 'Vbulletin'));
+		}
 	}
 	else
 	{
@@ -79,11 +80,11 @@ function kleeja_auth_login ($name, $pass)
 		while($row1=$SQLVB->fetch_array($result_salt))
 		{
 
-			$pass = md5(md5($pass) . $row1['salt']);  // without normal md5
+			$pass = ($hashed) ? $pass : md5(md5($pass) . $row1['salt']);  // without normal md5
 
 			$query = array('SELECT'	=> '*',
 							'FROM'	=> "`{$forum_prefix}user`",
-							'WHERE'	=> "username='" . $SQLVB->real_escape($name) . "' AND password='" . $pass . "' AND usergroupid != '8'"
+							'WHERE'	=> "username='" . $SQLVB->real_escape($name) . "' AND password='" . $SQLVB->real_escape($pass) . "' AND usergroupid != '8'"
 							);
 		
 			$result = $SQLVB->build($query);
@@ -98,6 +99,8 @@ function kleeja_auth_login ($name, $pass)
 					$_SESSION['USER_MAIL']	= $row['email'];
 					$_SESSION['USER_ADMIN']	= ($row['usergroupid'] == 6) ? 1 : 0;
 					$_SESSION['USER_SESS']	= session_id();
+					$hash_key_expire = sha1(md5($config['h_key']) .  $expire_at);
+					$usrcp->kleeja_set_cookie('ulogu', base64_encode(base64_encode(base64_encode($row['userid'] . '|' . $row['password'] . '|' . $expire_at . '|' . $hash_key_expire))), $expire_at);
 					($hook = kleeja_run_hook('qr_while_usrdata_vb_usr_class')) ? eval($hook) : null; //run hook
 				}
 				$SQLVB->freeresult($result);   

@@ -11,7 +11,7 @@ if (!defined('IN_COMMON'))
 }
   
 
-function kleeja_auth_login ($name, $pass, $hashed = false)
+function kleeja_auth_login ($name, $pass, $hashed = false, $expire)
 {
 	// ok, i dont hate vb .. but i cant feel my self use it ... 
 	global $script_path, $lang, $script_encoding, $script_srv, $script_db, $script_user, $script_pass, $script_prefix, $config, $usrcp;
@@ -67,10 +67,10 @@ function kleeja_auth_login ($name, $pass, $hashed = false)
  	}
 
 	$query_salt = array(
-					'SELECT'	=> 'salt',
+						'SELECT'		=> (($hashed) ? '*' : 'salt'), 
 					'FROM'		=> "`{$forum_prefix}user`",
-					'WHERE'		=> "username='" . $SQLVB->real_escape($name) . "'"
 				);
+	($hashed) ? $query_salt['WHERE'] = "userid='" . intval($name) . "'  AND password='" . $SQLVB->real_escape($pass) . "' AND usergroupid != '8'" : $query_salt['WHERE'] = "username='" . $SQLVB->real_escape($name) . "' AND usergroupid != '8'";
 			
 	($hook = kleeja_run_hook('qr_select_usrdata_vb_usr_class')) ? eval($hook) : null; //run hook				
 	$result_salt = $SQLVB->build($query_salt);
@@ -79,28 +79,34 @@ function kleeja_auth_login ($name, $pass, $hashed = false)
 	{
 		while($row1=$SQLVB->fetch_array($result_salt))
 		{
-
-			$pass = ($hashed) ? $pass : md5(md5($pass) . $row1['salt']);  // without normal md5
-
-			$query = array('SELECT'	=> '*',
+			if(!$hashed)
+			{
+				$pass = md5(md5($pass) . $row1['salt']);  // without normal md5
+			
+				$query = array('SELECT'	=> '*',
 							'FROM'	=> "`{$forum_prefix}user`",
 							'WHERE'	=> "username='" . $SQLVB->real_escape($name) . "' AND password='" . $SQLVB->real_escape($pass) . "' AND usergroupid != '8'"
 							);
 		
-			$result = $SQLVB->build($query);
+				$result = $SQLVB->build($query);
 			
-		
-			if ($SQLVB->num_rows($result) != 0) 
-			{
-				while($row=$SQLVB->fetch_array($result))
+			
+				if ($SQLVB->num_rows($result) != 0) 
 				{
-					$_SESSION['USER_ID']	= $row['userid'];
-					$_SESSION['USER_NAME']	= (eregi('utf',strtolower($script_encoding))) ? $row['username'] : iconv(strtoupper($script_encoding),"UTF-8//IGNORE",$row['username']);
-					$_SESSION['USER_MAIL']	= $row['email'];
-					$_SESSION['USER_ADMIN']	= ($row['usergroupid'] == 6) ? 1 : 0;
-					$_SESSION['USER_SESS']	= session_id();
-					$hash_key_expire = sha1(md5($config['h_key']) .  $expire_at);
-					$usrcp->kleeja_set_cookie('ulogu', base64_encode(base64_encode(base64_encode($row['userid'] . '|' . $row['password'] . '|' . $expire_at . '|' . $hash_key_expire))), $expire_at);
+					
+					while($row=$SQLVB->fetch_array($result))
+					{		
+						define('USER_ID',$row['userid']);
+						define('USER_NAME',(eregi('utf',strtolower($script_encoding))) ? $row['username'] : iconv(strtoupper($script_encoding),"UTF-8//IGNORE",$row['username']));
+						define('USER_MAIL',$row['email']);
+						define('USER_ADMIN',($row['usergroupid'] == 6) ? 1 : 0);
+					//define('LAST_VISIT',$row['last_visit']);
+							
+					
+						$hash_key_expire = sha1(md5($config['h_key']) .  $expire);
+						$usrcp->kleeja_set_cookie('ulogu', base64_encode(base64_encode(base64_encode($row['userid'] . '|' . $row['password'] . '|' . $expire . '|' . $hash_key_expire))), $expire);
+					
+					
 					($hook = kleeja_run_hook('qr_while_usrdata_vb_usr_class')) ? eval($hook) : null; //run hook
 				}
 				$SQLVB->freeresult($result);   
@@ -109,6 +115,14 @@ function kleeja_auth_login ($name, $pass, $hashed = false)
 			else
 			{
 				return false;
+			}
+			}
+			else
+			{
+					define('USER_ID',$row1['userid']);
+					define('USER_NAME',(eregi('utf',strtolower($script_encoding))) ? $row1['username'] : iconv(strtoupper($script_encoding),"UTF-8//IGNORE",$row1['username']));
+					define('USER_MAIL',$row1['email']);
+					define('USER_ADMIN',($row1['usergroupid'] == 6) ? 1 : 0);
 			}
 		}#whil1
 

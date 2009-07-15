@@ -40,7 +40,7 @@ function Customfile_size($size)
 */
 function KleejaOnline ()
 {
-		global $SQL, $usrcp, $dbprefix, $config;
+		global $SQL, $usrcp, $dbprefix, $config, $klj_session;
 		
 		// get information .. 
 		$ip				= get_ip();
@@ -49,7 +49,7 @@ function KleejaOnline ()
 		$time			= time();  
 		$timeout2		= $time-$timeout;  
 		$username		= ($usrcp->name()) ? $usrcp->name(): '-1';
-		$session		= session_id();
+		$session		= $klj_session;
 		
 		//
 		//for stats 

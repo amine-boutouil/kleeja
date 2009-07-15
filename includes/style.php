@@ -84,10 +84,11 @@ if (!defined('IN_COMMON'))
 		{
             $this->HTML = preg_replace_callback('/\(([{A-Z0-9_\.}\s!=<>]+)\?(.*):(.*)\)/iU',array('kleeja_style','_iif_callback'), $this->HTML);
             $this->HTML = preg_replace_callback('/<(IF|ELSEIF) (.+)>/iU',array('kleeja_style','_if_callback'), $this->HTML);
+            $this->HTML = preg_replace_callback('/<LOOP\s+NAME\s*=\s*(\"|)+([a-z0-9_.]{1,})+(\"|)\s*>/i',array('kleeja_style','_loop_callback'), $this->HTML);
             $this->HTML = preg_replace_callback(kleeja_style::reg('var'),array('kleeja_style','_vars_callback'), $this->HTML);
 
             $rep = array(
-						"/<LOOP\s+NAME\s*=\s*(\"|)+([a-z0-9_]{1,})+(\"|)\s*>/i" => "<?php foreach(\$this->vars[\"\\2\"] as \$key=>\$var){ ?>",
+						//"/<LOOP\s+NAME\s*=\s*(\"|)+([a-z0-9_]{1,})+(\"|)\s*>/i" => "<" . "? php foreach(\$this->vars[\"\\2\"] as \$key=>\$var){ ?" . ">",
 						"/<LOOP\s+NAME\s*=\s*(\"|)+([a-z0-9_]{1,})+(\"|)\s*LIMIT\s*=\s*(\"\\d+\"|\\d+)\s*>/i" => "<?php \$this->_limit(\"\\2\",\\4);foreach(\$this->vars[\"\\2\"] as \$key=>\$var){ ?>",
 						"/<\/(LOOP|IF|END)>/i" => "<?php } ?>", 
 						'/<SWITCH\s+NAME\s*=\s*"([A-Z0-9_]{1,})"\s*CASE\s*=\s*"(.+)"\s*VALUE\s*=\s*"(.+)"\s*>/i' => '<?php echo  $this->_switch($this->vars["\\1"],"\\2","\\3")?>',
@@ -100,6 +101,13 @@ if (!defined('IN_COMMON'))
 				
             $this->HTML = preg_replace(array_keys($rep), array_values($rep), $this->HTML);
         }
+		
+		//loop tag
+		function _loop_callback($matches)
+		{
+			$var = (strpos($matches[2], '.') !== false) ?  str_replace('.', '"]["', $matches[2]) : $matches[2];
+			return '<?php foreach($this->vars["' . $var . '"] as $key=>$var){ ?>';
+		}
 		
         //if tag
         function _if_callback($matches)

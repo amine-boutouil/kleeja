@@ -29,23 +29,45 @@ switch ($_GET['go'])
 
 		$stylee	= "guide";
 		$titlee	= $lang['GUIDE'];
+		
+		//re oreder exts by group_id 
+		function group_id_order($a, $b) { return ($a['group_id'] == $b['group_id']) ? 0 : ($a['group_id'] < $b['group_id'] ? -1 : 1); }
+		uasort($g_exts, "group_id_order");
+		uasort($u_exts, "group_id_order");
 
+		
 		//make it loop
 		$gusts_data = array();
+		$last_gg_id_was = 0;
 		foreach($g_exts as $ext=>$data)
 		{
-			$gusts_data[]	= array('ext' => $ext,
-									'num' => Customfile_size($data['size'])//format size as kb, mb,...
+			$group_d = kleeja_mime_groups($data['group_id']);
+			
+			$gusts_data[]	= array('ext'	=> $ext,
+									'num'	=> Customfile_size($data['size']), //format size as kb, mb,...
+									'group'	=> $data['group_id'],
+									'group_name'	=> $group_d['name'],
+									'realy_first_row'		=> $last_gg_id_was == 0 ? true : false,
+									'is_first_row'	=> $last_gg_id_was != $data['group_id'] ? true :false,
 									);
+			$last_gg_id_was = $data['group_id'];
 		}
 
 		//make it loop
 		$users_data = array();
+		$last_gu_id_was = 0;
 		foreach($u_exts as $ext=>$data)
 		{
-			$users_data[]	= array('ext' => $ext,
-									'num' => Customfile_size($data['size'])//format size as kb, mb,...
+			$group_d = kleeja_mime_groups($data['group_id']);
+			
+			$users_data[]	= array('ext'	=> $ext,
+									'num'	=> Customfile_size($data['size']), //format size as kb, mb,...
+									'group'	=> $data['group_id'],
+									'group_name'	=> $group_d['name'],
+									'realy_first_row'	=> $last_gu_id_was == 0 ? true : false,
+									'is_first_row'	=> $last_gu_id_was != $data['group_id'] ? true :false,
 									);
+			$last_gu_id_was = $data['group_id'];		
 		}
 		
 		($hook = kleeja_run_hook('guide_go_page')) ? eval($hook) : null; //run hook

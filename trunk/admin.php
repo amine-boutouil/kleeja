@@ -20,7 +20,7 @@
 	}
 	
 	// start session
-	$s_time = 86400 * 2; // 2 : two days 
+	$s_time = 18000; // 5 hour
 	$s_key = (!empty($_SERVER['REMOTE_ADDR'])) ? strtolower($_SERVER['REMOTE_ADDR']) : ((!empty($_SERVER['SERVER_ADDR'])) ? $_SERVER['SERVER_ADDR'] : @getenv('SERVER_NAME'));
 	$s_key .= (!empty($_SERVER['HTTP_USER_AGENT'])) ? strtolower($_SERVER['HTTP_USER_AGENT']) : ((!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : @getenv('SERVER_NAME'));
 	$s_sid = 'klj_' . substr('_' . md5($s_key), 0, 8);
@@ -39,7 +39,7 @@
 	$username = $usrcp->name();
 			
 	//need to login again
-	if((empty($_SESSION['ADMINLOGIN']) || $_SESSION['ADMINLOGIN'] != md5($usrcp->name() . $config['siteurl'])) || (empty($_SESSION['USER_SESS']) || $_SESSION['USER_SESS'] != session_id()))
+	if((!$username) || (empty($_SESSION['ADMINLOGIN']) || $_SESSION['ADMINLOGIN'] != md5($usrcp->name() . $config['siteurl'])) || (empty($_SESSION['USER_SESS']) || $_SESSION['USER_SESS'] != session_id()))
 	{
 		if(isset($_GET['go']) && $_GET['go'] == 'login') 
 		{			
@@ -69,7 +69,7 @@
 				}
 					
 				
-				if(empty($ERRORS))
+				if(empty($ERRORS) && USER_ADMIN == 1)
 				{
 					$_SESSION['USER_SESS'] = session_id();
 					$_SESSION['ADMINLOGIN'] = md5($usrcp->name() . $config['siteurl']);

@@ -20,7 +20,6 @@ function Saaheader($title, $outscript=false)
 		global $extras, $script_encoding, $errorpage;
 
 		$user_is = ($usrcp->name()) ? true: false;
-		$extras['header'] = ($extras['header']) ? $extras['header'] : false;
 		
 		//login - logout-profile... etc ..
 		if (!$usrcp->name()) 
@@ -124,7 +123,6 @@ function Saafooter($outscript=false)
 		global $tpl, $SQL, $starttm, $config, $usrcp, $lang, $olang;
 		global $do_gzip_compress, $script_encoding, $errorpage;
 		
-		$extras['footer'] = ($extras['footer']) ? $extras['footer'] : false;
 		//show stats ..
 		$page_stats = '';
 		if ($config['statfooter'] !=0) 

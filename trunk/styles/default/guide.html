@@ -11,9 +11,20 @@
 <br />
 <h2>{lang.GUIDE_VISITORS} </h2>
 <br />
+
 <LOOP NAME="gusts_data">
-{lang.EXT} <b>{{ext}} : </b>{lang.SIZE} {{num}}<br />
+
+	<IF LOOP="is_first_row">
+		<IF LOOP="realy_first_row"><ELSE></div></IF>
+		<div class="...">
+		<br />
+		مجموعه : {{group_name}}
+		<br />
+	</IF>
+	
+	{lang.EXT} <b>{{ext}} : </b>{lang.SIZE} {{num}}<br />
 </LOOP>
+</div> <!-- this for the end class ... -->
 
 <br />
 <br />
@@ -22,8 +33,17 @@
 <br />
 
 <LOOP NAME="users_data">
-{lang.EXT} <b>{{ext}} : </b>{lang.SIZE} {{num}}<br />
+	<IF LOOP="is_first_row">
+		<IF LOOP="realy_first_row"><ELSE></div></IF>
+		<div class="...">
+		<br />
+		مجموعه : {{group_name}}
+		<br />
+	</IF>
+	
+	{lang.EXT} <b>{{ext}} : </b>{lang.SIZE} {{num}}<br />
 </LOOP>
+</div> <!-- this for the end class ... -->
 
 
 </div>

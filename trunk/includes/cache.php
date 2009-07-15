@@ -26,7 +26,7 @@ if(!defined('STOP_HOOKS'))
 		include_once ($root_path . 'cache/data_hooks.php');
 	}
 	
-	if (empty($all_plg_hooks) && !file_exists($root_path . 'cache/data_hooks.php'))
+	if (!isset($all_plg_hooks) && !file_exists($root_path . 'cache/data_hooks.php'))
 	{
 		//get all hooks
 		$query = array(
@@ -119,7 +119,7 @@ if(!defined('STOP_HOOKS'))
 		include_once ($root_path . 'cache/data_lang.php');
 	}
 	
-	if (empty($olang) or !file_exists($root_path . 'cache/data_lang.php'))
+	if (!isset($olang) or !file_exists($root_path . 'cache/data_lang.php'))
 	{
 		$query = array(
 					'SELECT'	=> 'l.*',
@@ -294,7 +294,7 @@ if(!defined('STOP_HOOKS'))
 		include_once ($root_path . 'cache/data_ban.php');
 	}
 	
-	if (empty($banss) || !file_exists($root_path . 'cache/data_ban.php'))
+	if (!isset($banss) || !file_exists($root_path . 'cache/data_ban.php'))
 	{
 		$query = array(
 					'SELECT'	=> 's.ban',
@@ -344,7 +344,7 @@ if(!defined('STOP_HOOKS'))
 		include_once ($root_path . 'cache/data_rules.php'); 
 	}
 	
-	if (empty($ruless) or !file_exists($root_path . 'cache/data_rules.php'))
+	if (!isset($ruless) or !file_exists($root_path . 'cache/data_rules.php'))
 	{
 		$query = array(
 					'SELECT'	=> 's.rules',
@@ -383,7 +383,7 @@ if(!defined('STOP_HOOKS'))
 		include_once ($root_path . 'cache/data_extra.php');
 	}
 	
-	if (empty($extras) or !file_exists($root_path . 'cache/data_extra.php'))
+	if (!isset($extras) or !file_exists($root_path . 'cache/data_extra.php'))
 	{
 		$query = array(
 					'SELECT'	=> 's.ex_header, s.ex_footer',

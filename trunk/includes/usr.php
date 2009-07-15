@@ -269,12 +269,14 @@ class usrcp
 				{
 					($hook = kleeja_run_hook('logout_func_usr_class')) ? eval($hook) : null; //run hook
 					
+					//adm
+					if(defined('USER_ADMIN') && USER_ADMIN == 1)
+					{ 
+						redirect('./admin.php?cp=lgoutcp');
+					}
+										
 					//is ther any cookies	
 					$this->kleeja_set_cookie('ulogu', '', time() - 31536000);//31536000 = year
-
-					//adm 
-					if(!empty($_SESSION['ADMINLOGIN']))
-						unset($_SESSION['ADMINLOGIN']);
 					
 					return true;
 				}
@@ -286,8 +288,13 @@ class usrcp
 				{
 					($hook = kleeja_run_hook('logout_cp_func_usr_class')) ? eval($hook) : null; //run hook
 					
-					unset($_SESSION['ADMINLOGIN']);
-					unset($_SESSION['LAST_VISIT']);
+					if(!empty($_SESSION['ADMINLOGIN']))
+					{
+						unset($_SESSION['ADMINLOGIN']);
+						unset($_SESSION['USER_SESS']);
+						//unset($_SESSION['LAST_VISIT']);
+					}
+					
 					return true;
 				}
 				

@@ -317,7 +317,7 @@ switch ($_GET['go'])
 			/////////////pager 
 			$result_p			= $SQL->build($query);
 			$nums_rows			= $SQL->num_rows($result_p);
-			$currentPage		= (isset($_GET['page']))? intval($_GET['page']) : 1;
+			$currentPage		= (isset($_GET['page'])) ? intval($_GET['page']) : 1;
 			$Pager				= new SimplePager($perpage,$nums_rows,$currentPage);
 			$start				= $Pager->getStartRow();
 			
@@ -382,7 +382,6 @@ switch ($_GET['go'])
 			
 			$stylee		= "filecp";
 			$titlee		= $lang['FILECP'];
-			$action		= "ucp.php?go=filecp";
 			
 			//no logon before
 			if (!$usrcp->name())
@@ -406,7 +405,7 @@ switch ($_GET['go'])
 			$start			= $Pager->getStartRow();
 			$linkgoto		= $config['siteurl'] . ($config['mod_writer'] ? 'filecp' : 'ucp.php?go=filecp');
 			$page_nums		= $Pager->print_nums($linkgoto); 
-				
+			$action			= "ucp.php?go=filecp&page={$currentPage}";
 			$total_pages	= $Pager->getTotalPages(); 
 			
 			//now, there is no result
@@ -488,7 +487,7 @@ switch ($_GET['go'])
 		if (isset($_POST['submit_files']))
 		{
 			//show msg
-			kleeja_info($lang['FILES_UPDATED']);
+			redirect($action, true, true);
 		}
 				
 		break;

@@ -84,11 +84,11 @@ if (!defined('IN_COMMON'))
 		{
             $this->HTML = preg_replace_callback('/\(([{A-Z0-9_\.}\s!=<>]+)\?(.*):(.*)\)/iU',array('kleeja_style','_iif_callback'), $this->HTML);
             $this->HTML = preg_replace_callback('/<(IF|ELSEIF) (.+)>/iU',array('kleeja_style','_if_callback'), $this->HTML);
-            $this->HTML = preg_replace_callback('/<LOOP\s+NAME\s*=\s*(\"|)+([a-z0-9_.]{1,})+(\"|)\s*>/i',array('kleeja_style','_loop_callback'), $this->HTML);
+            $this->HTML = preg_replace_callback('/<LOOP\s+NAME\s*=\s*(\"|)+([a-z0-9_\.]{1,})+(\"|)\s*>/i',array('kleeja_style','_loop_callback'), $this->HTML);
             $this->HTML = preg_replace_callback(kleeja_style::reg('var'),array('kleeja_style','_vars_callback'), $this->HTML);
 
             $rep = array(
-						//"/<LOOP\s+NAME\s*=\s*(\"|)+([a-z0-9_]{1,})+(\"|)\s*>/i" => "<" . "? php foreach(\$this->vars[\"\\2\"] as \$key=>\$var){ ?" . ">",
+						//"/<LOOP\s+NAME\s*=\s*(\"|)+([a-z0-9_]{1,})+(\"|)\s*>/i" => "< ? php foreach(\$this->vars[\"\\2\"] as \$key=>\$var){ ? >",
 						"/<LOOP\s+NAME\s*=\s*(\"|)+([a-z0-9_]{1,})+(\"|)\s*LIMIT\s*=\s*(\"\\d+\"|\\d+)\s*>/i" => "<?php \$this->_limit(\"\\2\",\\4);foreach(\$this->vars[\"\\2\"] as \$key=>\$var){ ?>",
 						"/<\/(LOOP|IF|END)>/i" => "<?php } ?>", 
 						'/<SWITCH\s+NAME\s*=\s*"([A-Z0-9_]{1,})"\s*CASE\s*=\s*"(.+)"\s*VALUE\s*=\s*"(.+)"\s*>/i' => '<?php echo  $this->_switch($this->vars["\\1"],"\\2","\\3")?>',
@@ -116,7 +116,8 @@ if (!defined('IN_COMMON'))
             $reps  = array('==','<','>','<=','>=', '!=', '==', '!=', '>=', '<=', '<', '>');
 			
             $atts = call_user_func(array('kleeja_style','_get_attributes'), $matches[0]);
-            $con = !empty($atts['NAME']) ? $atts['NAME'] : $atts['LOOP'];
+
+            $con = !empty($atts['NAME']) ? $atts['NAME'] : (empty($atts['LOOP']) ? null : $atts['LOOP']);
 			
             if(preg_match('/(.*)(' . implode('|', $char) . ')(.*)/i', $con, $arr))
 			{
@@ -176,9 +177,13 @@ if (!defined('IN_COMMON'))
                 preg_match(kleeja_style::reg('var'), $matches, $matches);
             }
 			
-            $var = str_replace('.', '\'][\'', $matches[2]);
+			$var = '';
+			if(!empty($matches[2]))
+			{
+				$var = str_replace('.', '\'][\'', $matches[2]);
+			}
 			
-            if($matches[1]=='{{')
+            if(!empty($matches[1]) && $matches[1] == '{{')
 			{
                 $var = '$var[\'' . $var . '\']';
             }
@@ -215,7 +220,9 @@ if (!defined('IN_COMMON'))
         //get tag  attributes
         function _get_attributes($tag)
 		{
-            preg_match_all('/([a-z]+)="(.+)"/iU',$tag,$attribute);
+            preg_match_all('/([a-z]+)="(.+)"/iU',$tag, $attribute);
+			
+			$attributes = array();
 			
             for($i=0;$i<count($attribute[1]);$i++)
 			{
@@ -230,7 +237,7 @@ if (!defined('IN_COMMON'))
                     $attributes[$att] = preg_replace_callback(kleeja_style::reg('var'), array('kleeja_style', '_var_callback_att'), $attribute[2][$i]);
                 }
             }
-            return($attributes);
+            return $attributes;
         }
 
 		

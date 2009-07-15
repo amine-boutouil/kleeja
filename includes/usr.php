@@ -479,7 +479,7 @@ class usrcp
 						
 						if($user_data == false)
 						{
-							$this->kleeja_set_cookie('ulogu', '', time() - 31536000);
+							$this->logout();
 						}
 						else
 						{

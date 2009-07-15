@@ -16,7 +16,7 @@
 */	
 function Saaheader($title, $outscript=false)
 {
-		global $tpl, $usrcp, $lang, $user_is, $config;
+		global $tpl, $usrcp, $lang, $olang, $user_is, $config;
 		global $extras, $script_encoding, $errorpage;
 
 		$user_is = ($usrcp->name()) ? true: false;
@@ -126,7 +126,7 @@ function Saaheader($title, $outscript=false)
 function Saafooter($outscript=false)
 {
 		global $tpl, $SQL, $starttm, $config, $usrcp, $lang, $olang;
-		global $do_gzip_compress, $script_encoding, $errorpage, $footer;
+		global $do_gzip_compress, $script_encoding, $errorpage, $extras;
 		
 		//show stats ..
 		$page_stats = '';

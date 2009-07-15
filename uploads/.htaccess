@@ -1,4 +1,5 @@
-<Files ~ "\.(php*|s?p?x?i?html|cgi|asp|php3|php4|pl|htm|sql)$">
-deny from all
+<Files ~ "^.*\.(php|php*|cgi|pl|php3|php4|php5|php6|phtml|shtml|sql)">
+    Order allow,deny
+    Deny from all
 </Files>
 php_flag engine off

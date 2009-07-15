@@ -37,9 +37,9 @@
 	//go to ..
 	$go_to	= isset($_GET['cp']) ? htmlspecialchars($_GET['cp']) : 'start';
 	$username = $usrcp->name();
-			
+		
 	//need to login again
-	if((!$username) || (empty($_SESSION['ADMINLOGIN']) || $_SESSION['ADMINLOGIN'] != md5($usrcp->name() . $config['siteurl'])) || (empty($_SESSION['USER_SESS']) || $_SESSION['USER_SESS'] != session_id()))
+	if((empty($_SESSION['ADMINLOGIN']) || $_SESSION['ADMINLOGIN'] != md5($usrcp->name() . $config['siteurl'])) || (empty($_SESSION['USER_SESS']) || $_SESSION['USER_SESS'] != session_id()))
 	{
 		if(isset($_GET['go']) && $_GET['go'] == 'login') 
 		{			
@@ -63,7 +63,7 @@
 				{
 					$ERRORS[] = $lang['EMPTY_FIELDS'];
 				}
-				elseif(!$usrcp->data($_POST['lname'], $_POST['lpass'], false, 7600))
+				elseif((!$username && !$usrcp->data($_POST['lname'], $_POST['lpass'], false, 7600)) || (USER_ADMIN != 1))
 				{
 					$ERRORS[] = $lang['LOGIN_ERROR'];
 				}
@@ -84,6 +84,9 @@
 					{
 						$errs .= '- ' . $r . '. <br />';
 					}
+					
+					$usrcp->logout();
+					
 					//kleeja_admin_err($errs,false);
 				}
 			}

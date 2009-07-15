@@ -151,16 +151,11 @@ img.right {
 
 /* extras  header */
 #extras_header {
-	width: 90%;
-	margin: 0 auto;
-
+	width: 100%;
+	margin:0 auto;
+	padding:5px;
 }
-
-/* extras  footer */
-#extras_footer {
-	width: 90%;
-	margin: 0 auto;
-}
+/* # extras  header */
 
 
 /* Content */
@@ -394,10 +389,6 @@ div#loadbox {padding: 10px;display: none;}
 div#texttype {display: none;}
 
 
-
-
-
-
 .row1, td.row1 , tr.row1 , b.row1{ 
  width: 25%;
  color: #333;
@@ -417,6 +408,18 @@ font: bold 11px tahoma,Verdana, Helvetica, sans-serif;
 
 .page_stats{float:left;}
 
+/* extras  footer */
+#extras_footer {
+	width: 100%;
+	margin: 0 auto;
+}
+/*# extras  footer */
+
+/* footer */
+#footer{
+	margin: 0 auto;
+	padding: 5px;
+}
 
 #footerPan ul{
 width:320px; 

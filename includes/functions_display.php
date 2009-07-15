@@ -94,7 +94,12 @@ function Saaheader($title, $outscript=false)
 		$tpl->assign("go_back_browser", $lang['GO_BACK_BROWSER']);
 		$extra = '';
 		
-		//$tpl->assign("ex_header",$extras['header']);
+		//check for extra header 
+		if(empty($extras['header']))
+		{
+			$extras['header'] = false;
+		}
+
 
 		($hook = kleeja_run_hook('func_Saaheader')) ? eval($hook) : null; //run hook
 		
@@ -121,7 +126,7 @@ function Saaheader($title, $outscript=false)
 function Saafooter($outscript=false)
 {
 		global $tpl, $SQL, $starttm, $config, $usrcp, $lang, $olang;
-		global $do_gzip_compress, $script_encoding, $errorpage;
+		global $do_gzip_compress, $script_encoding, $errorpage, $footer;
 		
 		//show stats ..
 		$page_stats = '';
@@ -161,6 +166,12 @@ function Saafooter($outscript=false)
 
 		$tpl->assign("googleanalytics", $googleanalytics);	
 
+		//check for extra header 
+		if(empty($extras['footer']))
+		{
+			$extras['footer'] = false;
+		}
+		
 		($hook = kleeja_run_hook('func_Saafooter')) ? eval($hook) : null; //run hook
 		
 		//show footer

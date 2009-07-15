@@ -163,15 +163,18 @@
 	//check if admin (true/false)
 	$is_admin = $usrcp->admin();
 	
-	$klj_session = $SQL->escape($_COOKIE['klj_session']);
 	
 	if(!isset($_COOKIE['klj_session']))
 	{
 		$s_time = 900; 
 		$s_sid = 'klj_session';
-		$session_id = sha1(microtime());
+		$session_id = sha1(microtime() . rand(1000,9999));
 		$klj_session = $session_id;
 		setcookie($s_sid, $session_id, time() + $s_time, "/");
+	}
+	else
+	{
+		$klj_session = $SQL->escape($_COOKIE['klj_session']);
 	}
 		
 	// for gzip : php.net

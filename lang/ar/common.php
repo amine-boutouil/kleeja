@@ -68,7 +68,7 @@ $lang = array_merge($lang, array(
 	
 	'FILECP' => 'إدارة الملفات',
 	'DEL_SELECTED' => 'حذف المحدد',
-	'EDIT_U_FILES' => 'تحديث ملفاتك',
+	'EDIT_U_FILES' => 'إدارة ملفاتك',
 	'FILES_UPDATED' => 'تم تحديث الملفات بنجاح',
 	'PUBLIC_USER_FILES' => 'مجلد ملفات العضو ',
 	'FILEUSER' => 'مجلد ملفات عضو',
@@ -81,7 +81,7 @@ $lang = array_merge($lang, array(
 	'PFILE_4_FORUM' => 'قم بالذهاب للمنطقة الأعضاء لتغيير بياناتك',
 	'USER_PLACE' => 'منطقة أعضاء',
 	
-	'PROFILE' => 'ملفك..',
+	'PROFILE' => 'ملفك الشخصي',
 	'EDIT_U_DATA' => 'تحديث بياناتك',
 	'PASS_ON_CHANGE' => 'كلمة المرور.. عند التغيير فقط',
 	'OLD' => 'القديمة',

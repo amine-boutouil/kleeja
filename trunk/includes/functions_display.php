@@ -337,7 +337,7 @@ function kleeja_debug ()
 		
 		//thrn show it
 		echo '<br />';
-		echo '<fieldset  dir="ltr" style="background:white"><legend style="font-family: Arial; color:red"><em>[Page Analysis]</em></legend>';
+		echo '<fieldset  dir="ltr" style="background:white;margin:15px;padding:10px"><legend><br /><br /><em style="font-family: Tahoma; color:red">[Page Analysis]</em></legend>';
 		echo '<p>&nbsp;</p>';
 		echo '<p><h2><strong>General Information :</strong></h2></p>';
 		echo '<p>Gzip : <em>' . (($do_gzip_compress !=0 )?  "Enabled" : "Disabled") . '</em></p>';

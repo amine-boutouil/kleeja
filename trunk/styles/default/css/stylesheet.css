@@ -467,46 +467,32 @@ background:#fff;
 }
 
 
-.pagination {
-        margin: 8px 0px 8px 0px;
-		float:right; 
-}
-.pagination  a{
-        padding:3px 6px;
-		color: #333;
-}
-.paging {
-        background:#F68618 url(../images/paging.png) repeat-x right top;
-        border: 1px solid #C46B0A;
-        font-size: 10px;
-		text-align:center;
-		}
-.paging:hover {
-	color:#121621;
-        background:#EAAF2F url(../images/paging_hover.png) repeat-x right top;
-        border: 1px solid #FFFF00;
-
-}
-.here_page {
-        padding:3px 6px;
-        background: #A88F70 url(../images/here_page.png) repeat-x right top;
-        border: 1px solid #816543;
-        font-size: 10px;
-		text-align:center;
-		color:#121621;
-}
+.pagination {margin: 8px 0px 8px 0px;float:right;}
+.pagination  a{padding:3px 6px;color: #333;}
+.paging {background:#F68618 url(../images/paging.png) repeat-x right top;
+        border: 1px solid #C46B0A;font-size: 10px;text-align:center;}
+.paging:hover {color:#121621;border: 1px solid #FFFF00;
+        background:#EAAF2F url(../images/paging_hover.png) repeat-x right top;}
+.here_page {padding:3px 6px;border: 1px solid #816543; font-size: 10px;color:#121621;
+        background: #A88F70 url(../images/here_page.png) repeat-x right top;text-align:center;}
 
 
-#buttons,.buttons {
-        cursor: pointer;
-        padding:5px 20px;
-		margin-top:10px;
+/* ALL buttons */
+#buttons,.buttons {cursor: pointer;padding:5px 20px;	margin-top:10px;
         font: normal 12px Tahoma, Helvetica, Arial, sans-serif;
         background:url(../images/buttons-bg.gif) repeat-x left top;
-        color: #555;
-		border:1px solid #999;
+        color: #555;border:1px solid #999;
 }
-#buttons:hover ,.buttons:hover { 
-background:#555;
-color: #fff;
-}
+#buttons:hover ,.buttons:hover { background:#555;color: #fff;}
+/* ## ALL buttons */
+
+
+/* form login*/
+#login {	float: right;width: 220px;}
+#login label {display: block;margin-bottom: 5px;}
+#login a {color:#000;font-size: 12px;padding: 3px 6px;}
+#login .inputtext1, #login .inputtext2 {
+	width: 180px;margin-bottom: 5px;color: #000;
+	padding: 2px 5px;border: 1px solid #CCCCCC;
+    font: normal 12px Tahoma, Helvetica, Arial, sans-serif;}
+/* # form login*/

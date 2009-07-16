@@ -362,6 +362,14 @@ class SSQL
 					}
 
 				}
+				
+				/*
+				get affected records
+				*/
+				function affected()
+				{
+					return ( $this->connect_id ) ? mysql_affected_rows($this->connect_id) : false;
+				}
 				/*
 				get the information of mysql server
 				*/

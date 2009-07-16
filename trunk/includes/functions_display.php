@@ -440,4 +440,40 @@ function redirect($url, $header=true, $exit=false)
 	}
 }
 
+//prevent CSRF, this will generate hidden fields for kleeja forms
+function kleeja_add_form_key($form_name)
+{
+	global $config;
+	
+	$now = time();
+	$key = sha1($config['h_key'] . $form_name . $now);
+	return '<input type="hidden" name="k_form_key" value="' . $key . '" /><input type="hidden" name="k_form_time" value="' . $now . '" />';
+}
+
+//prevent CSRF, this will check hidden fields that came from kleeja forms
+function kleeja_check_form_key($form_name, $require_time = 60)
+{
+	global $config;
+	
+	if (isset($_POST['k_form_key']) && isset($_POST['k_form_time']))
+	{
+		$key_was = htmlspecialchars($_POST['k_form_key']);
+		$time_was = intval($_POST['k_form_time']);
+		
+		$different = time - $time_was;
+		
+		//check time that user spent in the form 
+		if($different && (!$require_time || $require_time >= $different))
+		{
+			if(sha1($config['h_key'] . $form_name . $time_was) === $key_was)
+			{
+				return true;
+			}
+		}
+	}
+	
+	return false;
+}
+
+
 ?>

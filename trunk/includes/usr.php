@@ -456,20 +456,7 @@ class usrcp
 				function kleeja_check_user()
 				{
 					global $config, $SQL, $dbprefix;
-					
-					//create h_key unique key [saanina idia ;_)]
-					if(empty($config['h_key']))
-					{
-						$config['h_key'] = sha1(microtime() . rand(1000,9999));
-						$insert_query	= array('INSERT'	=> 'name ,value',
-												'INTO'		=> "{$dbprefix}config",
-												'VALUES'	=> "'h_key', '" . $config['h_key'] . "'"
-											);
-						
-						$SQL->build($insert_query);
-							
-						delete_cache('data_config');
-					}
+				
 						
 					//if login up
 					if($this->kleeja_get_cookie('ulogu'))

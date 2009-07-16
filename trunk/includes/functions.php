@@ -1327,7 +1327,7 @@ function delete_ch_tpl($template_name, $delete_txt = array())
 /*
 * Add new config option
 */
-function add_config ($name, $value, $order="0", $html="") 
+function add_config ($name, $value, $order = '0', $html = '') 
 {
 	global $dbprefix, $SQL, $config;
 	
@@ -1368,8 +1368,8 @@ function update_config($name, $value, $escape = true)
 						'SET'		=> "value='" . ($escape ? $SQL->escape($value) : $value) . "'",
 						'WHERE'		=>  'name = "' . $SQL->escape($name) . '"'
 				);
-
-	if ($SQL->build($update_query))
+	$SQL->build($update_query);
+	if($SQL->affected())
 	{
 		delete_cache('data_config');
 		return true;
@@ -1388,7 +1388,8 @@ function delete_config ($name)
 	global $dbprefix, $SQL;
 	
 	//if array
-	if(is_array($name)) {
+	if(is_array($name))
+	{
 		foreach($name as $n)
 		{
 			$delete_query = array(	'DELETE'	=> "{$dbprefix}config",

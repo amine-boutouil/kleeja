@@ -18,10 +18,16 @@
         <fieldset>
         
 <IF NAME="is_search">
-<img src="includes/admin_style/images/search_button.gif" ><strong> {lang.SEARCH_USERS} ( {nums_rows} )</strong>
+<img src="includes/admin_style/images/search_button.gif" ><strong> 
+<IF NAME="is_asearch">
+Kleeja {lang.ADMINISTRATORS}
+<ELSE>
+{lang.SEARCH_USERS}
+</IF>
+ ( {nums_rows} )</strong>
 <ELSE>
 <!-- title  -->
-<b>{lang.R_USERS} :</b>
+<b>{lang.R_USERS} :</b> <a href="{action}&admin=1">( {lang.ADMINISTRATORS} )</a>
 <!-- title  -->
 </IF>
 

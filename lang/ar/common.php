@@ -450,6 +450,7 @@ $lang = array_merge($lang, array(
 	'WEEK'						=> 'اسبوع',
 	'MONTH'						=> 'شهر',
 	'YEAR'						=> 'سنه',
+	'ADMINISTRATORS'			=> 'مدراء',
 	
 ));
 

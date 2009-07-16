@@ -1,5 +1,7 @@
 <div id="content">
 
+<div id="index_body">
+
 <div class="clr"></div>
 
 <!-- start site name and title  -->
@@ -28,33 +30,39 @@
 </IF>
 <!---- END  FOR INFORMATION ---->
 
+
 <!---- START  FOR UPLOAD BOXES ---->
 <form name="uploader" id="uploader" action="{action}" method="post"  enctype="multipart/form-data" onsubmit="form_submit();">
 
+
 		<IF NAME="config.www_url">
-			<a href="#"  onclick="showhide();" title="{lang.CHANG_TO_URL_FILE}"><img src="{STYLE_PATH}images/urlORfile.gif" alt="{lang.CHANG_TO_URL_FILE}"  /></a><br /><br />
+			<a href="#"  onclick="showhide();" title="{lang.CHANG_TO_URL_FILE}">
+			<img src="{STYLE_PATH}images/urlORfile.gif" alt="{lang.CHANG_TO_URL_FILE}"  /></a>
+			<br /><br />
 		</IF>
 		
         <div id="filetype">
                 <LOOP NAME=FILES_NUM_LOOP>
-					<input type="file" name="file[{{i}}]" id="file[{{i}}]" style="display:{{show}}" /><br id="br[{{i}}]" style="display:{{show}}" />
+					<input type="file" name="file[{{i}}]" id="file[{{i}}]" style="display:{{show}}" size="50" /><br id="br[{{i}}]" style="display:{{show}}" />
 				</LOOP>
-                <br />
+                
                 <div id="upload_forum"></div>
                 <br />
-                <input name="mraupload" onclick="javascript:plus(1);" type="button" value="+" /> <input name="mreupload" onclick="javascript:minus(1);" type="button" value="-" />
+                <input class="buttons" name="mraupload" onclick="javascript:plus(1);" type="button" value="+" />
+				<input class="buttons" name="mreupload" onclick="javascript:minus(1);" type="button" value="-" />
+				<br /><br />
                 <input id="checkr" type="checkbox" onclick="accept_terms('submitr','checkr');" /> {lang.AGREE_RULES}
                 <br />
                 <br />
         <IF NAME="config.safe_code">
                         {SAFE_CODE}
                         <br />
-                        <input type="text" name="answer_safe" style="direction:ltr;" />
+                        <input type="text" name="answer_safe" style="direction:ltr;" size="15" />
                         <br />
         </IF>
                 
                 <br />
-                <input type="submit" id="submitr" name="submitr" value="{lang.DOWNLOAD_F}"  disabled="disabled" />
+                <input class="buttons" type="submit" id="submitr" name="submitr" value="{lang.DOWNLOAD_F}"  disabled="disabled" />
                 <input type="text" id="upload_num" value="1" size="1" readonly="readonly"/>
         </div>
 
@@ -68,19 +76,19 @@
                 <br />
                 <div id="upload_f_forum"></div>
                 <br />
-                <input name="mraupload" onclick="javascript:plus(2);" type="button" value="+" />
-                <input name="mreupload" onclick="javascript:minus(2);" type="button" value="-" />
+                <input class="buttons" name="mraupload" onclick="javascript:plus(2);" type="button" value="+" />
+                <input class="buttons" name="mreupload" onclick="javascript:minus(2);" type="button" value="-" />
                 <br />
                 <br />
         <IF NAME="config.safe_code">
                         {SAFE_CODE2}
                         <br />
-                        <input type="text" name="answer_safe2" style="direction:ltr;" />
+                        <input type="text" name="answer_safe2" style="direction:ltr;" size="15" />
                         <br />
         </IF>
                 <input id="checkr2" type="checkbox" onclick="accept_terms('submittxt','checkr2');" />{lang.AGREE_RULES}
                 <br />
-                <input type="submit" id="submittxt" name="submittxt" value="{lang.DOWNLOAD_T}"   disabled="disabled" />
+                <input class="buttons" type="submit" id="submittxt" name="submittxt" value="{lang.DOWNLOAD_T}"   disabled="disabled" />
                 <input type="text" id="upload_f_num" value="1" size="1" readonly="readonly"/>
         </div>
 </IF>
@@ -96,17 +104,24 @@
 
 <!---- START FOR ONLINE ---->
 <IF NAME="show_online">
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+<tr>
+<td>
 <strong>{lang.NUMBER_ONLINE} :</strong>{allnumbers} ( {lang.NUMBER_UONLINE} : {usersnum} , {lang.NUMBER_VONLINE}: {visitornum} )
-<br />
-{lang.MOST_EVER_ONLINE} <strong>{most_online}</strong> {lang.ON} <strong>{on_muoe}</strong><br />
+</td>
+<td>{lang.MOST_EVER_ONLINE} <strong>{most_online}</strong> {lang.ON} <strong>{on_muoe}</strong>
 <LOOP NAME="shownames">
 {{name}} , 
 </LOOP>
+</td>
+</tr>
+</table>
 </IF>
 <!---- END FOR ONLINE ---->
 
 <br /><br />
 
+</div>
 
 </div>
     

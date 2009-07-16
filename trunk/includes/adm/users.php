@@ -17,7 +17,7 @@
 
 		//for style ..
 		$stylee 	= "admin_users";
-		$action 	= "admin.php?cp=users&amp;page=" . (isset($_GET['page'])  ? intval($_GET['page']) : 1) . (isset($_GET['search']) ? '&search=' . $_GET['search'] : '');
+		$action 	= "admin.php?cp=users&amp;page=" . (isset($_GET['page'])  ? intval($_GET['page']) : 1) . (isset($_GET['search']) ? '&search=' . $SQL->escape($_GET['search']) : '') . ((isset($_GET['admin']) && $_GET['admin'] == '1') ? '&admin=1' : '');
 		$is_search	= false;
 		$isn_search	= true;
 		
@@ -65,7 +65,7 @@
 			
 				//delete all files in just one query
 				$d_query	= array('DELETE'	=> "{$dbprefix}files",
-								'WHERE'		=> "user='".intval($_GET['deleteuserfile'])."'",
+								'WHERE'		=> "user='" . intval($_GET['deleteuserfile']) . "'",
 									);
 									
 				$SQL->build($d_query);
@@ -158,6 +158,16 @@
 				$isn_search	= false;
 				$query['WHERE']	=	"name != '' $usernamee $usermailee";
 			}
+			else if(isset($_GET['admin']))
+			{
+
+				$admin	= ($_GET['admin'] == '1') ? 'AND admin = \'1\' ' : ''; 
+			
+				$is_search	= true;
+				$isn_search	= false;
+				$is_asearch = true;
+				$query['WHERE']	=	"name != '' $admin";
+			}
 		
 			$result = $SQL->build($query);
 	
@@ -203,7 +213,7 @@
 							//delete  user
 							$query_del = array(
 										'DELETE'	=> "{$dbprefix}users",
-										'WHERE'		=> "id='" . intval($ids[$row['id']])."'"
+										'WHERE'		=> "id='" . intval($ids[$row['id']]) . "'"
 											);
 											
 							$SQL->build($query_del);
@@ -253,7 +263,7 @@
 	//after submit 
 	if (isset($_POST['submit']) || isset($_POST['newuser']))
 	{
-			$text	= $lang['USERS_UPDATED'] . '<meta HTTP-EQUIV="REFRESH" content="0; url=./admin.php?cp=users&amp;page=' . (isset($_GET['page'])  ? intval($_GET['page']) : 1) . (isset($_GET['search']) ? '&search=' . $_GET['search'] : '') . '">' . "\n";
+			$text	= $lang['USERS_UPDATED'] . '<meta HTTP-EQUIV="REFRESH" content="0; url=./admin.php?cp=users&amp;page=' . (isset($_GET['page'])  ? intval($_GET['page']) : 1) . (isset($_GET['search']) ? '&search=' . $_GET['search'] : '') . ((isset($_GET['admin']) && $_GET['admin'] == '1') ? '&admin=1' : '') . '">' . "\n";
 			$stylee	= "admin_info";
 	}
 ?>

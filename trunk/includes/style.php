@@ -123,7 +123,7 @@ if (!defined('IN_COMMON'))
 			{
 				if($arr[1]{0} != '$')
 				{
-					 $var1 = call_user_func(array('kleeja_style', '_var_callback'), ($atts['NAME'] ? '{' . $arr[1] . '}' : '{{' . $arr[1] . '}}'));
+					 $var1 = call_user_func(array('kleeja_style', '_var_callback'), (!empty($atts['NAME']) ? '{' . $arr[1] . '}' : '{{' . $arr[1] . '}}'));
 				}
 				else
 				{

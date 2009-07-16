@@ -1,7 +1,5 @@
 <div id="content">
 
-<div id="index_body">
-
 <div class="clr"></div>
 
 <!-- start site name and title  -->
@@ -10,6 +8,8 @@
 
 <div class="clr"></div><div class="line"></div><div class="clr"></div>
 
+
+<div id="index_body">
 
 <!-- begin welcome index -->
 <h2>{lang.WELCOME}..</h2>  {welcome_msg}
@@ -50,20 +50,22 @@
                 <br />
                 <input class="buttons" name="mraupload" onclick="javascript:plus(1);" type="button" value="+" />
 				<input class="buttons" name="mreupload" onclick="javascript:minus(1);" type="button" value="-" />
+				<input class="buttons" type="text" id="upload_num" value="1" size="1" readonly="readonly"/>
 				<br /><br />
-                <input id="checkr" type="checkbox" onclick="accept_terms('submitr','checkr');" /> {lang.AGREE_RULES}
-                <br />
-                <br />
-        <IF NAME="config.safe_code">
+				        <IF NAME="config.safe_code">
                         {SAFE_CODE}
                         <br />
                         <input type="text" name="answer_safe" style="direction:ltr;" size="15" />
-                        <br />
+                        <br /><br />
         </IF>
+                <input id="checkr" type="checkbox" onclick="accept_terms('submitr','checkr');" /> {lang.AGREE_RULES}
+                
+                <br />
+
                 
                 <br />
                 <input class="buttons" type="submit" id="submitr" name="submitr" value="{lang.DOWNLOAD_F}"  disabled="disabled" />
-                <input type="text" id="upload_num" value="1" size="1" readonly="readonly"/>
+                
         </div>
 
         
@@ -78,6 +80,7 @@
                 <br />
                 <input class="buttons" name="mraupload" onclick="javascript:plus(2);" type="button" value="+" />
                 <input class="buttons" name="mreupload" onclick="javascript:minus(2);" type="button" value="-" />
+				<input class="buttons" type="text" id="upload_f_num" value="1" size="1" readonly="readonly"/>
                 <br />
                 <br />
         <IF NAME="config.safe_code">
@@ -89,7 +92,7 @@
                 <input id="checkr2" type="checkbox" onclick="accept_terms('submittxt','checkr2');" />{lang.AGREE_RULES}
                 <br />
                 <input class="buttons" type="submit" id="submittxt" name="submittxt" value="{lang.DOWNLOAD_T}"   disabled="disabled" />
-                <input type="text" id="upload_f_num" value="1" size="1" readonly="readonly"/>
+                
         </div>
 </IF>
 

@@ -90,15 +90,15 @@
 		}
 		
 		//no htaccess
-		//if(!file_exists($config['foldername'] . '/.htaccess'))
-	//	{
+		if(!file_exists($config['foldername'] . '/.htaccess'))
+		{
 			$ADM_NOTIFICATIONS[]  = array('id' => 'htaccess_u', 'msg_type'=> 'error', 'title'=> $lang['WARN'], 'msg'=> sprintf($lang['NO_HTACCESS_DIR_UP'], $config['foldername']));
-		//}
+		}
 		
-		//if(!file_exists($config['foldername'] . '/thumbs/.htaccess'))
-		//{
+		if(!file_exists($config['foldername'] . '/thumbs/.htaccess'))
+		{
 			$ADM_NOTIFICATIONS[]  = array('id' => 'htaccess_t', 'msg_type'=> 'error', 'title'=> $lang['WARN'], 'msg'=> sprintf($lang['NO_HTACCESS_DIR_UP_THUMB'], $config['foldername'] . '/thumbs'));
-		//}
+		}
 		
 
 		

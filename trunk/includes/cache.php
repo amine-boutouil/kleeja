@@ -358,7 +358,7 @@ if(!defined('STOP_HOOKS'))
 		$file_datar = '<' . '?php' . "\n\n";
 		//$file_datar .= "if (!defined('IN_COMMON')) exit('no directly opening : ' . __file__);";
 		$file_datar .= "\n// auto-generated cache files\n//For: Kleeja \n\n";
-
+		$rules1 = '';
 		while($row=$SQL->fetch_array($result))
 		{
 			$rules1 = $row['rules'];

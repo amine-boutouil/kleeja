@@ -625,7 +625,7 @@ function process ()
 						
 						$img_link_o = kleeja_get_link('image', $file_info);
 						$img_html_result .= $lang['URL_F_IMG'] . ':<br /><textarea class="img_box all_boxes">' . $img_link_o . '</textarea><br />' 
-							. $lang['URL_F_BBC'] . ':<br /><textarea class="img_bbc_box all_boxes">[url=' . $img_link_o . '[/img][/url]</textarea><br />';
+							. $lang['URL_F_BBC'] . ':<br /><textarea class="img_bbc_box all_boxes">[url=' . $img_link_o . '][img]' . $thumb_link_o . '[/img][/url]</textarea><br />';
 
 	
 						$img_html_result .= $extra_thmb . $extra_del;

@@ -232,14 +232,13 @@
 	}
 	
 	//check h_kay, important for kleeja
-	if(!isset($config['h_kay']) || empty($config['h_kay']))
+	if(empty($config['h_kay']))
 	{
 		$h_k = sha1(microtime() . rand(1000,9999));
 		if(!update_config('h_key', $h_k))
 		{
 			add_config('h_key', $h_k);
 		}
-		delete_cache('data_config');
 	}
 	
 	$STYLE_PATH = $root_path . 'styles/' . $config['style'] . '/';

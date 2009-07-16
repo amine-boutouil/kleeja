@@ -443,15 +443,15 @@ function redirect($url, $header=true, $exit=false)
 //prevent CSRF, this will generate hidden fields for kleeja forms
 function kleeja_add_form_key($form_name)
 {
-	global $config;
+	global $config, $klj_session;
 	$now = time();
-	return '<input type="hidden" name="k_form_key" value="' . sha1($config['h_key'] . $form_name . $now) . '" /><input type="hidden" name="k_form_time" value="' . $now . '" />' . "\n";
+	return '<input type="hidden" name="k_form_key" value="' . sha1($config['h_key'] . $form_name . $now . $klj_session) . '" /><input type="hidden" name="k_form_time" value="' . $now . '" />' . "\n";
 }
 
 //prevent CSRF, this will check hidden fields that came from kleeja forms
 function kleeja_check_form_key($form_name, $require_time = 150 /*seconds*/ )
 {
-	global $config;
+	global $config, $klj_session;
 	
 	if (isset($_POST['k_form_key']) && isset($_POST['k_form_time']))
 	{
@@ -462,7 +462,7 @@ function kleeja_check_form_key($form_name, $require_time = 150 /*seconds*/ )
 		//check time that user spent in the form 
 		if($different && (!$require_time || $require_time >= $different))
 		{
-			if(sha1($config['h_key'] . $form_name . $time_was) === $key_was)
+			if(sha1($config['h_key'] . $form_name . $time_was . $klj_session) === $key_was)
 			{
 				return true;
 			}

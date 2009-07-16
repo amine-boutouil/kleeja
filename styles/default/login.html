@@ -1,45 +1,43 @@
+<!-- start login template  -->
 <div id="content">
+
 <div class="clr"></div>
 
 <!-- start site name and title  -->
 <div id="title-x"><b><a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}</b></div>
 <!--  # End  site name and title  -->
 
-<div class="clr"></div><div class="line"></div><div class="clr"></div>
+<div class="clr"></div>
 
+<div class="line"></div>
 
-        <form action="{action}" method="post">
+<div class="clr"></div>
 
-        <table>
-                <tr>
-                        <td class="row1">{lang.USERNAME} :</td>
-                        <td class="row2"> <input type="text" name="lname" value="{t_lname}"  /></td>
-                </tr>        
-                <tr>
-                        <td class="row1">{lang.PASSWORD} :</td>
-                        <td class="row2"> <input type="password" name="lpass" value="{t_lpass}"  /></td>
-                </tr>
-                <tr>
-                <td class="row1">{lang.REMME} :</td>
-                <td class="row2">
-					<select name="remme">
-							<option value="3600">{lang.HOUR}</option>
-							<option value="18000">{lang.5HOURS}</option>
-							<option value="864000">{lang.DAY}</option>
-							<option value="6048000">{lang.WEEK}</option>
-							<option value="25920000">{lang.MONTH}</option>
-							<option value="31536000">{lang.YEAR}</option>
-						</select>
-				</td>
-                </td>
-				</tr>
-                <tr>
-                        <td colspan="2" style="text-align:center"><input type="submit" name="submit" value="{lang.LOGIN}" /></td>
-                </tr>
-        </table>
-
-        </form>
-        <br />
-        <a href="{forget_pass_link}">{lang.LOSS_PASSWORD}</a>        
+<!-- start form login  -->
+<div id="login">
+    <form action="{action}" method="post">
+		<fieldset>
+			<label for="inputtext1">{lang.USERNAME} :</label>
+			<input class="inputtext1" type="text" name="lname" value="{t_lname}"  />
+			<label for="inputtext2">{lang.PASSWORD} :</label>
+			<input class="inputtext2" type="password" name="lpass" value="{t_lpass}"  />
+			<label for="inputtext1">{lang.REMME} :</label>
+				<select name="remme">
+					<option value="3600">{lang.HOUR}</option>
+					<option value="18000">{lang.5HOURS}</option>
+					<option value="864000">{lang.DAY}</option>
+					<option value="6048000">{lang.WEEK}</option>
+					<option value="25920000">{lang.MONTH}</option>
+					<option value="31536000">{lang.YEAR}</option>
+				</select>
+			<br />
+			<input class="buttons" type="submit" name="submit" value="{lang.LOGIN}" />
+			<br /><br />
+			<a href="{forget_pass_link}"><img src="{STYLE_PATH}images/forget_pass_link.gif" style="vertical-align:middle;" />&nbsp;&nbsp;{lang.LOSS_PASSWORD}</a></p>
+		</fieldset>
+	</form>
 </div>
-        
+<!-- ## End form login  -->
+   
+</div>
+<!-- ## End login template  -->        

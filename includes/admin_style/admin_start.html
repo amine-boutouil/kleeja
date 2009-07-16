@@ -111,16 +111,23 @@
 <!-- start >> error System Messages -->
 <LOOP NAME="ADM_NOTIFICATIONS">
 <div id="system-message">
-	<div class="{{msg_type}}">
+	<div class="{{msg_type}}" id="{{id}}">
 		<ul>
 		<li><u>{{title}} !</u><p>{{msg}}</p></li>
 		</ul>
 	</div>
 </div>
+<IF LOOP="msg_type==error">
+<script type="text/javascript">
+Effect.Pulsate('{{id}}', { pulses: 4.5, duration: 5 });
+</script>
+</IF>
 <!-- start clear  -->
 <div class="clr"></div>
 <!-- end clear  -->
 </LOOP>
+
+
 <!-- end >> error System Messages -->
 
 <!-- start dot  -->

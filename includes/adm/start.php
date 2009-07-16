@@ -55,6 +55,7 @@
 		if(version_compare(strtolower(KLEEJA_VERSION), strtolower($v['version_number']), '<'))
 		{
 			$ADM_NOTIFICATIONS[]  = array(
+									'id' => 'up_ver_klj',//this not so important row 
 									'msg_type'=> 'error', 'title'=> $lang['R_CHECK_UPDATE'], 
 									'msg'=> sprintf($lang['UPDATE_NOW_S'] , KLEEJA_VERSION, $v['version_number']) . '<br />' . '<a href="http://www.kleeja.com/">www.kleeja.com</a>'
 									);
@@ -76,6 +77,7 @@
 		if(file_exists($cached_file))
 		{
 			$ADM_NOTIFICATIONS[]  = array(
+								'id' => 'cached_tpl',
 								'msg_type'=> 'info', 'title'=> $lang['CACHED_STYLES'],
 								'msg'=> sprintf($lang['CACHED_STYLES_DISC'] , '<a href="./admin.php?cp=styles&amp;sty_t=cached">' . $lang['CLICKHERE'] .'</a>')
 							);
@@ -84,19 +86,19 @@
 		//if config not safe
 		if((bool) (@fileperms($root_path . 'config.php') & 0x0002))
 		{
-			$ADM_NOTIFICATIONS[]  = array('msg_type'=> 'info', 'title'=> $lang['NOTE'], 'msg'=> $lang['CONFIG_WRITEABLE']);
+			$ADM_NOTIFICATIONS[]  = array('id' => 'config_perm', 'msg_type'=> 'info', 'title'=> $lang['NOTE'], 'msg'=> $lang['CONFIG_WRITEABLE']);
 		}
 		
 		//no htaccess
-		if(!file_exists($config['foldername'] . '/.htaccess'))
-		{
-			$ADM_NOTIFICATIONS[]  = array('msg_type'=> 'error', 'title'=> $lang['WARN'], 'msg'=> sprintf($lang['NO_HTACCESS_DIR_UP'], $config['foldername']));
-		}
+		//if(!file_exists($config['foldername'] . '/.htaccess'))
+	//	{
+			$ADM_NOTIFICATIONS[]  = array('id' => 'htaccess_u', 'msg_type'=> 'error', 'title'=> $lang['WARN'], 'msg'=> sprintf($lang['NO_HTACCESS_DIR_UP'], $config['foldername']));
+		//}
 		
-		if(!file_exists($config['foldername'] . '/thumbs/.htaccess'))
-		{
-			$ADM_NOTIFICATIONS[]  = array('msg_type'=> 'error', 'title'=> $lang['WARN'], 'msg'=> sprintf($lang['NO_HTACCESS_DIR_UP_THUMB'], $config['foldername'] . '/thumbs'));
-		}
+		//if(!file_exists($config['foldername'] . '/thumbs/.htaccess'))
+		//{
+			$ADM_NOTIFICATIONS[]  = array('id' => 'htaccess_t', 'msg_type'=> 'error', 'title'=> $lang['WARN'], 'msg'=> sprintf($lang['NO_HTACCESS_DIR_UP_THUMB'], $config['foldername'] . '/thumbs'));
+		//}
 		
 
 		
@@ -113,7 +115,7 @@
 				if($v['copyrights'] == false)
 				{
 					$copy_msg = sprintf($lang['NO_KLEEJA_COPYRIGHTS'], '<a href="http://www.kleeja.com/buy/">' . $lang['CLICKHERE'] .'</a>');
-					$ADM_NOTIFICATIONS[]  = array('msg_type'=> 'error', 'title'=> $lang['NOTE'], 'msg'=> $copy_msg);
+					$ADM_NOTIFICATIONS[]  = array('id' => 'copyrights_t', 'msg_type'=> 'error', 'title'=> $lang['NOTE'], 'msg'=> $copy_msg);
 				}
 			}
 		}

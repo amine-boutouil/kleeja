@@ -51,6 +51,7 @@ switch ($_GET['go'])
 			$titlee					= $lang['LOGIN'];
 			$action					= "ucp.php?go=login" . (isset($_GET['return']) ? '&amp;return=' . htmlspecialchars($_GET['return']) : '');
 			$forget_pass_link		= "ucp.php?go=get_pass";
+			$H_FORM_KEYS			= kleeja_add_form_key('login');
 			
 			//_post
 			$t_lname = isset($_POST['lname']) ? htmlspecialchars($_POST['lname']) : ''; 
@@ -64,14 +65,20 @@ switch ($_GET['go'])
 				($hook = kleeja_run_hook('login_logon_before')) ? eval($hook) : null; //run hook
 				
 				$errorpage = true;
-				$text	= $lang['LOGINED_BEFORE'] . ' ..<br /> <a href="ucp.php?go=logout">' . $lang['LOGOUT'] . '</a>';
+				$text	= $lang['LOGINED_BEFORE'] . ' ..<br /> <a href="' . $config['siteurl']  . ($config['mod_writer'] ?  'logout.html' : 'ucp.php?go=logout') . '">' . $lang['LOGOUT'] . '</a>';
 				kleeja_info($text);
 			}
 			elseif (isset($_POST['submit']))
 			{
+					//check for form key
+					if(!kleeja_check_form_key('login'))
+					{
+						kleeja_info(sprintf($lang['INVALID_FORM_KEY'], '<a href="' . $config['siteurl']  . ($config['mod_writer'] ?  'login.html' : 'ucp.php?go=login') . '">' . $lang['CLICKHERE'] . '</a>'));
+					}
+					
 					($hook = kleeja_run_hook('login_after_submit')) ? eval($hook) : null; //run hook
 					
-					if ($config['allow_online'] == 1)
+					if ($config['allow_online'] == '1')
 					{
 						$query_del	= array('DELETE'	=> "{$dbprefix}online",
 											'WHERE'		=> "ip='" . get_ip() . "'"

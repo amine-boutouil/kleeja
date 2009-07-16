@@ -451,6 +451,7 @@ $lang = array_merge($lang, array(
 	'MONTH'						=> 'شهر',
 	'YEAR'						=> 'سنه',
 	'ADMINISTRATORS'			=> 'مدراء',
+	'INVALID_FORM_KEY'			=> 'نموذج خاطئ , او انك تعديت الوقت المسموح فيه لملأ النموذج , %s لإعادة المحاولة.',
 	
 ));
 

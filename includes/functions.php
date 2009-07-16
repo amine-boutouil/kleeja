@@ -1340,6 +1340,9 @@ function add_config ($name, $value, $order = '0', $html = '')
 							'INTO'		=> "{$dbprefix}config",
 							'VALUES'	=> "'" . $SQL->escape($name) . "','" . $SQL->escape($value) . "', '" . addslashes($html) . "','" . intval($order) . "'");
 	delete_cache('data_config');
+	//make it globally ..
+	$config[$name] = $value;
+	
 	return $SQL->build($insert_query);						
 }
 
@@ -1360,7 +1363,6 @@ function update_config($name, $value, $escape = true)
 {
 	global $SQL, $dbprefix;
 	
-
 	$value = ($escape) ? $SQL->escape($value) : $value;
 	
 	$update_query = array(
@@ -1371,6 +1373,7 @@ function update_config($name, $value, $escape = true)
 	$SQL->build($update_query);
 	if($SQL->affected())
 	{
+		$config[$name] = $value;
 		delete_cache('data_config');
 		return true;
 	}

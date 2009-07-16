@@ -7,11 +7,10 @@
 <div id="title-x"><b><a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}</b></div>
 <!--  # End  site name and title  -->
 
-<div class="clr"></div>
+<div class="clr"></div><div class="line"></div><div class="clr"></div>
 
-<div class="line"></div>
-
-<div class="clr"></div>
+<!-- start body connection  -->
+<div id="connection">
 
 <!-- start form call  -->
 <div class="call">
@@ -23,7 +22,7 @@
 	<label>{lang.TEXT} :</label>
 	<textarea name="ctext" cols="5" rows="5">{t_ctext}</textarea>
 	<label>{lang.VERTY_CODE}</label>
-	{code}<br /><br />
+	{code}<br />
 	<input type="text" name="code_answer" size="15" style="direction:ltr" />
 	<div class="clr"></div>
 	<input id="buttons" type="submit" name="submit" value="{lang.SEND}" />
@@ -31,5 +30,9 @@
 </div>
 <!-- ## End form call  -->
 
+</div>
+<!-- ## End body connection  -->
+
+<br />
 </div>
 <!-- ## End connection template  -->

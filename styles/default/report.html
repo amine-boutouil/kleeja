@@ -31,8 +31,9 @@
         <tr>
                 <td class="row1">{lang.VERTY_CODE}</td>
                 <td class="row2">
-                        {code}<br />
-                        <input type="text" name="code_answer" style="direction:ltr" />
+                   <img id="kleeja_img_captcha" src="{captcha_file_path}" alt="{lang.REFRESH_CAPTCHA}" title="{lang.REFRESH_CAPTCHA}" onclick="javascript:update_kleeja_captcha('{captcha_file_path}', 'kleeja_code_answer');" />
+				   <br />
+					<input type="text" name="kleeja_code_answer" id="kleeja_code_answer" style="direction:ltr" />
                 </td>
         </tr>
         <tr>

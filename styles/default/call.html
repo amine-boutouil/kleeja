@@ -22,8 +22,10 @@
 	<label>{lang.TEXT} :</label>
 	<textarea name="ctext" cols="5" rows="5">{t_ctext}</textarea>
 	<label>{lang.VERTY_CODE}</label>
-	{code}<br />
-	<input type="text" name="code_answer" size="15" style="direction:ltr" />
+       <img id="kleeja_img_captcha" src="{captcha_file_path}" alt="{lang.REFRESH_CAPTCHA}" title="{lang.REFRESH_CAPTCHA}" onclick="javascript:update_kleeja_captcha('{captcha_file_path}', 'kleeja_code_answer');" />
+	   <br />
+		<input type="text" name="kleeja_code_answer" id="kleeja_code_answer" style="direction:ltr" />
+		<br />
 	<div class="clr"></div>
 	<input id="buttons" type="submit" name="submit" value="{lang.SEND}" />
 </form>

@@ -40,6 +40,15 @@
 			<img src="{STYLE_PATH}images/urlORfile.gif" alt="{lang.CHANG_TO_URL_FILE}"  /></a>
 			<br /><br />
 		</IF>
+        <IF NAME="config.safe_code">
+				<label>{lang.VERTY_CODE}</label>
+				<br />
+				<img id="kleeja_img_captcha" src="{captcha_file_path}" alt="{lang.REFRESH_CAPTCHA}" title="{lang.REFRESH_CAPTCHA}" onclick="javascript:update_kleeja_captcha('{captcha_file_path}', 'kleeja_code_answer');" />
+				<br />
+				<input type="text" name="kleeja_code_answer" id="kleeja_code_answer" style="direction:ltr" />
+        </IF>
+		<br />
+		<br />
 		
         <div id="filetype">
                 <LOOP NAME=FILES_NUM_LOOP>
@@ -52,12 +61,7 @@
 				<input class="buttons" name="mreupload" onclick="javascript:minus(1);" type="button" value="-" />
 				<input class="buttons" type="text" id="upload_num" value="1" size="1" readonly="readonly"/>
 				<br /><br />
-				        <IF NAME="config.safe_code">
-                        {SAFE_CODE}
-                        <br />
-                        <input type="text" name="answer_safe" style="direction:ltr;" size="15" />
-                        <br /><br />
-        </IF>
+
                 <input id="checkr" type="checkbox" onclick="accept_terms('submitr','checkr');" /> {lang.AGREE_RULES}
                 
                 <br />
@@ -82,13 +86,6 @@
                 <input class="buttons" name="mreupload" onclick="javascript:minus(2);" type="button" value="-" />
 				<input class="buttons" type="text" id="upload_f_num" value="1" size="1" readonly="readonly"/>
                 <br />
-                <br />
-        <IF NAME="config.safe_code">
-                        {SAFE_CODE2}
-                        <br />
-                        <input type="text" name="answer_safe2" style="direction:ltr;" size="15" />
-                        <br />
-        </IF>
                 <input id="checkr2" type="checkbox" onclick="accept_terms('submittxt','checkr2');" />{lang.AGREE_RULES}
                 <br />
                 <input class="buttons" type="submit" id="submittxt" name="submittxt" value="{lang.DOWNLOAD_T}"   disabled="disabled" />

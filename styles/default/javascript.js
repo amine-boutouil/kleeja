@@ -83,3 +83,16 @@
 			txt.style.display = 'none';
 		}
 	}
+	
+	//
+	//javascript for captcha
+	//
+	function update_kleeja_captcha(captcha_file, input_id)
+	{
+		document.getElementById(input_id).value = '';
+		//Get a reference to CAPTCHA image
+		img = document.getElementById('kleeja_img_captcha'); 
+		 //Change the image
+		img.src = captcha_file + '?' + Math.random();
+	}
+	

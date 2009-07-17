@@ -19,17 +19,7 @@
 		define('IN_ADMIN_LOGIN', true);
 	}
 	
-	// start session
-	$s_time = 18000; // 5 hour
-	$s_key = (!empty($_SERVER['REMOTE_ADDR'])) ? strtolower($_SERVER['REMOTE_ADDR']) : ((!empty($_SERVER['SERVER_ADDR'])) ? $_SERVER['SERVER_ADDR'] : @getenv('SERVER_NAME'));
-	$s_key .= (!empty($_SERVER['HTTP_USER_AGENT'])) ? strtolower($_SERVER['HTTP_USER_AGENT']) : ((!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : @getenv('SERVER_NAME'));
-	$s_sid = 'klj_' . substr('_' . md5($s_key), 0, 8);
-	session_set_cookie_params($s_time);
-	//this will help people with some problem with their sessions path
-	//session_save_path('./cache/');
-	session_name($s_sid);
-	session_start();
-	
+
 	//include imprtant file ..
 	include ('includes/common.php');
 	include_once ('includes/version.php');

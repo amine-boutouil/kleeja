@@ -452,6 +452,7 @@ $lang = array_merge($lang, array(
 	'YEAR'						=> 'سنه',
 	'ADMINISTRATORS'			=> 'مدراء',
 	'INVALID_FORM_KEY'			=> 'نموذج خاطئ , او انك تعديت الوقت المسموح فيه لملأ النموذج , %s لإعادة المحاولة.',
+	'REFRESH_CAPTCHA'			=> 'اظغط لتحديث الصوره بواحده جديده',
 	
 ));
 

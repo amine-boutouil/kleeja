@@ -259,19 +259,11 @@ function process ()
 
 
 			//safe_code .. captcha is on
-			if($this->safe_code && $wut==1)
+			if($this->safe_code && $wut)
 			{
-				if(isset($_POST['public_key']) && isset($_POST['answer_safe']) && !$ch->check_captcha($_POST['public_key'], $_POST['answer_safe']))
+				if(!kleeja_check_captcha())
 				{
 					($hook = kleeja_run_hook('wrong_captcha_kljuploader_w1')) ? eval($hook) : null; //run hook	
-					 return $this->errs[] = $lang['WRONG_VERTY_CODE'];
-				}
-			}
-			else if($this->safe_code && $wut==2)
-			{
-				if(!$ch->check_captcha($_POST['public_key2'], $_POST['answer_safe2']))
-				{
-					($hook = kleeja_run_hook('wrong_captcha_kljuploader_w2')) ? eval($hook) : null; //run hook	
 					 return $this->errs[] = $lang['WRONG_VERTY_CODE'];
 				}
 			}

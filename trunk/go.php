@@ -76,9 +76,6 @@ switch ($_GET['go'])
 	
 	case "report" :
 
-		//start captcha class
-		$ch = new ocr_captcha;
-		
 		//_post
 		$t_rname = isset($_POST['rname']) ? htmlspecialchars($_POST['rname']) : ''; 
 		$t_rmail = isset($_POST['rmail']) ? htmlspecialchars($_POST['rmail']) : ''; 
@@ -90,7 +87,6 @@ switch ($_GET['go'])
 				$titlee	= $lang['REPORT'];
 				$url_id	= ($config['mod_writer']) ? $config['siteurl'] . "download" . intval($_GET['id']) . ".html" : $config['siteurl'] . "download.php?id=" . intval($_GET['id']);
 				$action	= "./go.php?go=report";
-				$code	= $ch->display_captcha(true);
 				$id_d	= intval($_GET['id']);
 				
 				// first
@@ -107,8 +103,11 @@ switch ($_GET['go'])
 			
 			($hook = kleeja_run_hook('submit_report_go_page')) ? eval($hook) : null; //run hook
 			
-			
-			if (empty($_POST['rname']) || empty($_POST['rurl']))
+			if(!kleeja_check_captcha())
+			{
+				$ERRORS[]	= $lang['WRONG_VERTY_CODE'];
+			}
+			else if (empty($_POST['rname']) || empty($_POST['rurl']))
 			{
 				$ERRORS[]	= $lang['EMPTY_FIELDS'] . ' : ' . (empty($_POST['rname']) ? ' [ ' . $lang['YOURNAME'] . ' ] ' : '')  . (empty($_POST['rurl']) ? '  [ ' . $lang['URL']  . ' ] ': '');
 			}
@@ -123,10 +122,6 @@ switch ($_GET['go'])
 			else if (strlen($_POST['rtext']) > 300)
 			{
 				$ERRORS[]	= $lang['NO_ME300RES'];
-			}
-			else if (!$ch->check_captcha($_POST['public_key'], $_POST['code_answer']))
-			{
-				$ERRORS[]	= $lang['WRONG_VERTY_CODE'];
 			}
 			
 			//no error , lets do process
@@ -198,9 +193,6 @@ switch ($_GET['go'])
 	
 	case "call" : 
 	
-		//start  captcha class
-		$ch = new ocr_captcha;
-		
 		//_post
 		$t_cname = isset($_POST['cname']) ? htmlspecialchars($_POST['cname']) : ''; 
 		$t_cmail = isset($_POST['cmail']) ? htmlspecialchars($_POST['cmail']) : ''; 
@@ -211,7 +203,6 @@ switch ($_GET['go'])
 			$stylee	= "call";
 			$titlee	= $lang['CALL'];
 			$action	= "./go.php?go=call";
-			$code	= $ch->display_captcha(true);
 			
 			($hook = kleeja_run_hook('no_submit_call_go_page')) ? eval($hook) : null; //run hook
 		}
@@ -220,8 +211,11 @@ switch ($_GET['go'])
 			//after sumit
 			$ERRORS	=	'';
 			($hook = kleeja_run_hook('submit_call_go_page')) ? eval($hook) : null; //run hook
-			
-			if (empty($_POST['cname'])  || empty($_POST['ctext']) )
+			if(!kleeja_check_captcha())
+			{
+				$ERRORS[] = $lang['WRONG_VERTY_CODE'];
+			}
+			else if (empty($_POST['cname'])  || empty($_POST['ctext']) )
 			{
 				$ERRORS[]	= $lang['EMPTY_FIELDS'] . ' : ' . (empty($_POST['cname']) ? ' [ ' . $lang['YOURNAME'] . ' ] ' : '')  . (empty($_POST['ctext']) ? '  [ ' . $lang['TEXT']  . ' ] ': '');
 			}
@@ -232,10 +226,6 @@ switch ($_GET['go'])
 			else if (strlen($_POST['ctext']) > 300)
 			{
 				$ERRORS[] = $lang['NO_ME300TEXT'];
-			}
-			else if (!$ch->check_captcha($_POST['public_key'], $_POST['code_answer']))
-			{
-				$ERRORS[] = $lang['WRONG_VERTY_CODE'];
 			}
 			
 			//no errors ,lets do process

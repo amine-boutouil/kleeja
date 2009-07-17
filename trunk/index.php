@@ -36,11 +36,6 @@
 		break;
 	endswitch;
 
-	//safe code
-	if ($config['safe_code'])
-	{
-		$ch = new ocr_captcha;
-	}
 	
 	//start class .. 
 	$kljup->decode		= $decode;              
@@ -73,8 +68,6 @@
 	
 	//some words for template
 	$welcome_msg	= $config['welcome_msg'];
-	$SAFE_CODE		= ($config['safe_code']) ? $ch->display_captcha(true) : false;
-	$SAFE_CODE2		= ($config['safe_code']) ? str_replace('public_key', 'public_key2', $ch->display_captcha(true)) : false;
 	$filecp_link	= $usrcp->id() ?  $config['siteurl'] . ($config['mod_writer'] ? 'filecp.html' : 'ucp.php?go=filecp') : false;
 
 	//

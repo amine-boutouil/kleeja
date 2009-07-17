@@ -147,9 +147,6 @@ switch ($_GET['go'])
 				kleeja_info('<a href="' . $forum_path . '" title="' . $lang['REGISTER'] . '">' . $lang['REGISTER']. '</a>', $lang['REGISTER']);
 			}
 			
-			//start check class
-			$ch = new ocr_captcha;
-
 			//logon before !
 			if ($usrcp->name())
 			{
@@ -168,7 +165,6 @@ switch ($_GET['go'])
 					$stylee	= "register";
 					$titlee	= $lang['REGISTER'];
 					$action	= "ucp.php?go=register";
-					$code	= $ch->display_captcha(true);
 				
 					($hook = kleeja_run_hook('register_no_submit')) ? eval($hook) : null; //run hook
 			}
@@ -178,7 +174,11 @@ switch ($_GET['go'])
 			
 						($hook = kleeja_run_hook('register_submit')) ? eval($hook) : null; //run hook
 						
-						if (trim($_POST['lname'])=='' || trim($_POST['lpass'])=='' || trim($_POST['lmail'])=='')
+						if(!kleeja_check_captcha())
+						{
+							$ERRORS[] = $lang['WRONG_VERTY_CODE'];
+						}
+						else if (trim($_POST['lname'])=='' || trim($_POST['lpass'])=='' || trim($_POST['lmail'])=='')
 						{
 							$ERRORS[] = $lang['EMPTY_FIELDS'];
 						}	
@@ -189,10 +189,6 @@ switch ($_GET['go'])
 						else if (strlen(trim($_POST['lname'])) < 4 || strlen(trim($_POST['lname'])) > 30)
 						{
 							$ERRORS[] = $lang['WRONG_NAME'];
-						}
-						else if (!$ch->check_captcha($_POST['public_key'],trim($_POST['code_answer'])))
-						{
-							$ERRORS[] = $lang['WRONG_VERTY_CODE'];
 						}
 						else if ($SQL->num_rows($SQL->query("SELECT * FROM `{$dbprefix}users` WHERE clean_name='" . trim($SQL->escape($usrcp->cleanusername($_POST["lname"]))) . "'")) !=0 )
 						{

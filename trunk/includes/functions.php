@@ -940,12 +940,11 @@ function delete_cache($name, $all=false, $deep = false)
 	else
 	{
 		$del = true;
-		$name = (strpos($name , 'captcha_') === false)  ? str_replace('.php', '', $name) . '.php' : $name;
+		$name = str_replace('.php', '', $name) . '.php';
 		if (file_exists($path_to_cache . '/' . $name))
 		{
 			$del = kleeja_unlink ($path_to_cache . "/" . $name, true);
 		}
-		
 	}
 	
 	return $del;
@@ -1664,4 +1663,20 @@ function get_ip()
 	global $SQL;
 	return $SQL->escape($_SERVER['REMOTE_ADDR']);
 }
+
+//check captcha field after submit
+function kleeja_check_captcha()
+{
+	if(!empty($_SESSION['klj_sec_code']) && !empty($_POST['kleeja_code_answer']))
+	{
+		if($_SESSION['klj_sec_code'] == $_POST['kleeja_code_answer'])
+		{
+			$_SESSION['klj_sec_code'] = '';
+			return true;
+		}
+	}
+	
+	return false;
+}
+
 ?>

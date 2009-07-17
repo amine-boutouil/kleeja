@@ -431,3 +431,60 @@ ul.tabbernav li.tabberactive a:hover
 }
 
 /* #tabs */
+
+#guide { 
+width:100%;
+padding: 5px;
+margin: 10px;
+}
+
+#guide .visitor ,#guide .visitor_x,#guide .users,#guide .users_x{ 
+width:50%;
+}
+
+#guide .visitor { 
+background: #767676;
+font: bold 13px tahoma, sans-serif;
+color:#fff;
+text-align: center;	
+padding: 5px
+}
+
+#guide .visitor_x { 
+background: #CECECE;
+font: bold 11px tahoma, sans-serif;
+color:#555;
+padding:5px;
+}
+#guide .visitor_xx {
+font: bold 12px tahoma, sans-serif;
+color:#005900;
+padding:5px;
+border-bottom: 1px dashed #555;
+margin:5px auto;
+text-align: right;
+}
+#guide .visitor_ext{
+color:#111;
+padding:5px;
+margin:5px auto;
+}
+#guide .visitor_ext1{
+color:#E10000;
+padding:5px;
+margin:5px 0;
+}
+
+#guide .users { 
+background:#CF6600;
+font: bold 13px tahoma, sans-serif;
+color:#fff;
+text-align: center;	
+padding: 5px;
+}
+#guide .users_x {
+background: #C8C8C8;
+font: bold 11px tahoma, sans-serif;
+color:#005900;
+padding:5px 25px 10px 0;
+}

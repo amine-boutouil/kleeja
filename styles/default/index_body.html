@@ -33,13 +33,8 @@
 
 <!---- START  FOR UPLOAD BOXES ---->
 <form name="uploader" id="uploader" action="{action}" method="post"  enctype="multipart/form-data" onsubmit="form_submit();">
+<div class="tabber">
 
-
-		<IF NAME="config.www_url">
-			<a href="#"  onclick="showhide();" title="{lang.CHANG_TO_URL_FILE}">
-			<img src="{STYLE_PATH}images/urlORfile.gif" alt="{lang.CHANG_TO_URL_FILE}"  /></a>
-			<br /><br />
-		</IF>
         <IF NAME="config.safe_code">
 				<label>{lang.VERTY_CODE}</label>
 				<br />
@@ -47,10 +42,9 @@
 				<br />
 				<input type="text" name="kleeja_code_answer" id="kleeja_code_answer" style="direction:ltr" />
         </IF>
-		<br />
-		<br />
+
 		
-        <div id="filetype">
+        <div class="tabbertab tabbertabdefault" title="{lang.DOWNLOAD_F}" id="filetype">
                 <LOOP NAME=FILES_NUM_LOOP>
 					<input type="file" name="file[{{i}}]" id="file[{{i}}]" style="display:{{show}}" size="50" /><br id="br[{{i}}]" style="display:{{show}}" />
 				</LOOP>
@@ -74,7 +68,7 @@
 
         
 <IF NAME="config.www_url">
-        <div id="texttype">
+        <div class="tabbertab" title="{lang.DOWNLOAD_T}" id="texttype">
 			<LOOP NAME=FILES_NUM_LOOP>
 				<input type="text" name="file[{{i}}]" id="fileu[{{i}}]" size="50" value="{lang.PAST_URL_HERE}" onclick="this.value=''" style="color:silver;display:{{show}}" dir="ltr"><br id="bru[{{i}}]" style="display:{{show}}" />
 			</LOOP>
@@ -92,7 +86,7 @@
                 
         </div>
 </IF>
-
+</div>
 
 </form>
 

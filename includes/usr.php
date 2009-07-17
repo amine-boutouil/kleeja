@@ -272,7 +272,7 @@ class usrcp
 					//adm
 					if(defined('USER_ADMIN') && USER_ADMIN == 1)
 					{ 
-						redirect('./admin.php?cp=lgoutcp');
+						session_destroy();
 					}
 										
 					//is ther any cookies	

@@ -272,10 +272,12 @@ function process ()
 			if ($wut == 1)
 			{
 				($hook = kleeja_run_hook('submit_filesupload_kljuploader')) ? eval($hook) : null; //run hook	
-			
-				//
+				
+				$check = false;
+
 				for($i=0;$i<=$this->filesnum;$i++)
 				{
+					$check .= isset($_FILES['file']['name'][$i]) ? $_FILES['file']['name'][$i] : '';
 					$this->filename2	= @explode(".", $_FILES['file']['name'][$i]);
 					$this->filename2	= $this->filename2[sizeof($this->filename2)-1];
 					$this->typet		= $this->filename2;
@@ -392,7 +394,12 @@ function process ()
 
 						}
 				}#for ... lmean loop
-
+				
+				
+				if(!isset($check) || empty($check))
+				{
+						$this->errs[] = $lang['CHOSE_F'];
+				}
 
 			}#wut=1
 			elseif ($wut == 2 && $config['www_url'] == '1')
@@ -401,129 +408,135 @@ function process ()
 				//looop text inputs
 				for($i=0;$i<$this->filesnum;$i++)
 				{
-
-								$filename 			= (isset($_POST['file'][$i])) ? basename($_POST['file'][$i]) : '';
-								$this->filename2	= explode(".", $filename);
+					$check .= isset($_POST['file'][$i]) ? $_POST['file'][$i] : '';
+					$filename 			= (isset($_POST['file'][$i])) ? basename($_POST['file'][$i]) : '';
+					$this->filename2	= explode(".", $filename);
 								
 								
-								if(in_array($this->filename2[count($this->filename2)-1], array('html', 'php', 'html')))
-								{
-									$this->filename2 = $this->typet  = $this->filename2[count($this->filename2)-2];
-								}
-								else
-								{
-									$this->filename2 = $this->typet  = $this->filename2[count($this->filename2)-1];
-								}
+					if(in_array($this->filename2[count($this->filename2)-1], array('html', 'php', 'html')))
+					{
+						$this->filename2 = $this->typet  = $this->filename2[count($this->filename2)-2];
+					}
+					else
+					{
+						$this->filename2 = $this->typet  = $this->filename2[count($this->filename2)-1];
+					}
 								
-								//transfer [decode]
-								if($this->decode == "time")
-								{
-									$zaid = time();
-									$this->filename2 = $this->filename . $zaid . $i . "." . $this->filename2;
-								}
-								elseif($this->decode == "md5")
-								{
-									$zaid=md5(time());
-									$zaid=substr($zaid, 0, 10);
-									$this->filename2 = $this->filename . $zaid . $i . "." . $this->filename2;
-								}
-								else
-								{
-									// real name of file
-									$this->filename2 = $this->filename . preg_replace('/[,.?\/*&^\\\$%#@()_!|"\~\'><=+}{; ]/', '-', $filename);
-									$this->filename2 = preg_replace('/-+/', '-', $this->filename2);
-									($hook = kleeja_run_hook('another_decode_type_kljuploader')) ? eval($hook) : null; //run hook
-								}
-								//end tashfer
+					//transfer [decode]
+					if($this->decode == "time")
+					{
+						$zaid = time();
+						$this->filename2 = $this->filename . $zaid . $i . "." . $this->filename2;
+					}
+					elseif($this->decode == "md5")
+					{
+						$zaid=md5(time());
+						$zaid=substr($zaid, 0, 10);
+						$this->filename2 = $this->filename . $zaid . $i . "." . $this->filename2;
+					}
+					else
+					{
+						// real name of file
+						$this->filename2 = $this->filename . preg_replace('/[,.?\/*&^\\\$%#@()_!|"\~\'><=+}{; ]/', '-', $filename);
+						$this->filename2 = preg_replace('/-+/', '-', $this->filename2);
+						($hook = kleeja_run_hook('another_decode_type_kljuploader')) ? eval($hook) : null; //run hook
+					}
+					//end tashfer
 
 
-							if(empty($_POST['file'][$i]) || trim($_POST['file'][$i]) == $lang['PAST_URL_HERE'])
+					if(empty($_POST['file'][$i]) || trim($_POST['file'][$i]) == $lang['PAST_URL_HERE'])
+					{
+						//nathin
+					}
+					else//big else
+					{
+						if(file_exists($this->folder . '/' . $filename))
+						{
+							$this->errs[]=  '[ ' . $_POST['file'][$i] . ' ] ' . $lang['SAME_FILE_EXIST'];
+						}
+						//elseif( preg_match ("#[\\\/\:\*\?\<\>\|\"]#", $this->filename2))
+						//{
+						//	$this->errs[]= $lang['WRONG_F_NAME'] . '[' . $_POST['file'][$i] . ']';
+						//}
+						//elseif($this->ext_check_safe($_POST['file'][$i]) == false)
+						//{
+						//	$this->errs[]= $lang['WRONG_F_NAME'] . '[' . $_POST['file'][$i] . ']';
+						//}
+						//elseif(kleeja_check_mime($_POST['file'][$i], $this->types[strtolower($this->typet)]['group_id'], $_FILES['file']['tmp_name'][$i]) == false)
+						//{
+						// $this->errs[]= $lang['FORBID_EXT'] . '[' . $_POST['file'][$i] . ']';
+						//}
+						elseif(!in_array(strtolower($this->typet),array_keys($this->types)))
+						{
+							$this->errs[]= '[ ' . $_POST['file'][$i] . ' ] ' . $lang['FORBID_EXT'] . '[' . $this->typet . ']';
+						}
+						else
+						{
+						
+							//
+							//end err .. start upload from url
+							//
+							if(!in_array(substr($_POST['file'][$i], 0, 4), array('http', 'ftp:')))
 							{
-								//nathin
+								$_POST['file'][$i] = 'http://' . $_POST['file'][$i];
 							}
-							else//big else
+										
+							if(function_exists("curl_init"))
 							{
-									if(file_exists($this->folder . '/' . $filename))
+								$data = fetch_remote_file($_POST['file'][$i]);
+								if($data != false)
+								{
+									$this->sizet = strlen($data);
+									if($this->types[strtolower($this->typet)]['size'] > 0 && $this->sizet >= $this->types[strtolower($this->typet)]['size'])
 									{
-										$this->errs[]=  '[ ' . $_POST['file'][$i] . ' ] ' . $lang['SAME_FILE_EXIST'];
-									}
-									//elseif( preg_match ("#[\\\/\:\*\?\<\>\|\"]#", $this->filename2))
-									//{
-									//	$this->errs[]= $lang['WRONG_F_NAME'] . '[' . $_POST['file'][$i] . ']';
-									//}
-									//elseif($this->ext_check_safe($_POST['file'][$i]) == false)
-									//{
-									//	$this->errs[]= $lang['WRONG_F_NAME'] . '[' . $_POST['file'][$i] . ']';
-									//}
-									//elseif(kleeja_check_mime($_POST['file'][$i], $this->types[strtolower($this->typet)]['group_id'], $_FILES['file']['tmp_name'][$i]) == false)
-									//{
-									// $this->errs[]= $lang['FORBID_EXT'] . '[' . $_POST['file'][$i] . ']';
-									//}
-									elseif(!in_array(strtolower($this->typet),array_keys($this->types)))
-									{
-										$this->errs[]= '[ ' . $_POST['file'][$i] . ' ] ' . $lang['FORBID_EXT'] . '[' . $this->typet . ']';
+										$this->errs[]=  $lang['SIZE_F_BIG'] . ' ' . Customfile_size($this->types[strtolower($this->typet)]['size']);
 									}
 									else
 									{
-									
-										//
-										//end err .. start upload from url
-										//
-										if(!in_array(substr($_POST['file'][$i], 0, 4), array('http', 'ftp:')))
-										{
-											$_POST['file'][$i] = 'http://' . $_POST['file'][$i];
-										}
-										
-										if(function_exists("curl_init"))
-										{
-											$data = fetch_remote_file($_POST['file'][$i]);
-											if($data != false)
-											{
-												$this->sizet = strlen($data);
-												if($this->types[strtolower($this->typet)]['size'] > 0 && $this->sizet >= $this->types[strtolower($this->typet)]['size'])
-												{
-													$this->errs[]=  $lang['SIZE_F_BIG'] . ' ' . Customfile_size($this->types[strtolower($this->typet)]['size']);
-												}
-												else
-												{
-													//then ..write new file
-													$fp2 = @fopen($this->folder . "/" . $this->filename2, "w");
-													@fwrite($fp2, $data);
-													@fclose($fp2);
-													$this->saveit ($this->filename2, $this->folder, $this->sizet, $this->typet);
-												}
-											}
-											else
-											{
-												$this->errs[]	= $lang['URL_CANT_GET'];
-											}
-										}
-										else //OTHER FUNCTION
-										{
-											$this->sizet = $this->get_remote_file_size($_POST['file'][$i]);
+										//then ..write new file
+										$fp2 = @fopen($this->folder . "/" . $this->filename2, "w");
+										@fwrite($fp2, $data);
+										@fclose($fp2);
+										$this->saveit ($this->filename2, $this->folder, $this->sizet, $this->typet);
+									}
+								}
+								else
+								{
+									$this->errs[]	= $lang['URL_CANT_GET'];
+								}
+							}
+							else //OTHER FUNCTION
+							{
+								$this->sizet = $this->get_remote_file_size($_POST['file'][$i]);
 		
-											if($this->types[strtolower($this->typet)]['size'] > 0 && $this->sizet >= $this->types[strtolower($this->typet)]['size'])
-											{
-												$this->errs[] =  $lang['SIZE_F_BIG'] . ' ' . Customfile_size($this->types[strtolower($this->typet)]['size']);
-											}
-											else
-											{
-												$data = fetch_remote_file($_POST['file'][$i], $this->folder . "/" . $this->filename2);
-												if($data === false)
-												{
-													$this->errs[]	= $lang['URL_CANT_GET'];		
-												}
-												else
-												{
-													$this->saveit ($this->filename2, $this->folder, $this->sizet, $this->typet);
-												}
-											}
-										}
+								if($this->types[strtolower($this->typet)]['size'] > 0 && $this->sizet >= $this->types[strtolower($this->typet)]['size'])
+								{
+									$this->errs[] =  $lang['SIZE_F_BIG'] . ' ' . Customfile_size($this->types[strtolower($this->typet)]['size']);
+								}
+								else
+								{
+									$data = fetch_remote_file($_POST['file'][$i], $this->folder . "/" . $this->filename2);
+									if($data === false)
+									{
+										$this->errs[]	= $lang['URL_CANT_GET'];		
+									}
+									else
+									{
+										$this->saveit ($this->filename2, $this->folder, $this->sizet, $this->typet);
+									}
+								}
+							}
 
-									}#else
-							}//big else
+						}#else
+					}//big else
 
 				}#end loop
+				
+			if(!isset($check) || empty($check))
+			{
+				$this->errs[] = $lang['CHOSE_F'];
+			}
+			
 		}#end wut2
 
 }#END process

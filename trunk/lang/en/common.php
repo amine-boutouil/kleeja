@@ -468,6 +468,7 @@ $lang = array_merge($lang, array(
 	'ADMINISTRATORS'			=> 'Administrators',
 	'INVALID_FORM_KEY'			=> 'نموذج خاطئ , او انك تعديت الوقت المسموح فيه لملأ النموذج , %s لإعادة المحاولة.',
 	'REFRESH_CAPTCHA'			=> 'اظغط لتحديث الصوره بواحده جديده',
+	'CHOSE_F'					=> 'please select the file you want be uploaded',
 	
 	//last line of this file ...					 
 	'S_TRANSLATED_BY' => 'Translated By <a href="http://www.fenix4web.com/">Fenix4Web</a>',

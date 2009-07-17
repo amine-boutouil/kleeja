@@ -27,7 +27,12 @@
 		
 	// Report all errors, except notices
 	defined('DEV_STAGE') ? @error_reporting(E_ALL) : @error_reporting(E_ALL ^ E_NOTICE);
-
+	
+	//fix intregation problems
+	if(empty($script_encoding))
+	{
+		define('DISABLE_INTR', true);
+	}
 
 	// start session
 	$s_time = 86400 * 2; // 2 : two days 
@@ -150,20 +155,9 @@
 	//check if admin (true/false)
 	$is_admin = $usrcp->admin();
 	
-	
-	if(!isset($_COOKIE['klj_session']))
-	{
-		$s_time = 900; 
-		$s_sid = 'klj_session';
-		$session_id = sha1(microtime() . rand(1000,9999));
-		$klj_session = $session_id;
-		setcookie($s_sid, $session_id, time() + $s_time, "/");
-	}
-	else
-	{
-		$klj_session = $SQL->escape($_COOKIE['klj_session']);
-	}
-		
+	//kleeja session id
+	$klj_session = $SQL->escape(session_id());
+
 	// for gzip : php.net
 	//fix bug # 181
 	$do_gzip_compress = false; 

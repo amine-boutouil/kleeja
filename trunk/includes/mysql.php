@@ -59,15 +59,10 @@ class SSQL
 								
 								if ($dbselect)
 								{
-									if (!eregi('utf',strtolower($script_encoding)) && !defined('IN_LOGINPAGE') && !defined('IN_ADMIN_LOGIN') && !defined('DISABLE_INTR'))
+									if ((!eregi('utf',strtolower($script_encoding)) && !defined('IN_LOGINPAGE') && !defined('IN_ADMIN_LOGIN') && !defined('DISABLE_INTR')) || (empty($script_encoding) || eregi('utf',strtolower($script_encoding)) || defined('DISABLE_INTR')))
 									{
 										mysql_query("SET NAMES 'utf8'");
 									}
-									else if (empty($script_encoding) || eregi('utf',strtolower($script_encoding)) || defined('DISABLE_INTR')) 
-									{
-										mysql_query("SET NAMES 'utf8'");
-									}
-									
 								}
 								else if(!$dbselect)
 								{

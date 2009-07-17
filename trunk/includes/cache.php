@@ -15,7 +15,10 @@ if (!defined('IN_COMMON'))
 	exit;
 }
 
-	
+define('IN_CACHE', true);
+
+mysql_query("SET NAMES 'utf8'");	
+
 //	
 //get hooks data from hooks table  ... 
 //
@@ -421,7 +424,7 @@ if(!defined('STOP_HOOKS'))
 		@fclose($filenume);
 	}
 	
-
+//mysql_query("SET NAMES 'latin1'");	
  
 ($hook = kleeja_run_hook('in_cache_page')) ? eval($hook) : null; //run hook
 ?>

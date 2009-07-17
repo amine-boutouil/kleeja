@@ -55,7 +55,7 @@ img.right {float: right;	margin-left:15px;}
 /* Content */
 #content {float: left;width: 77%;}
 
-#index_body{background:url(../images/index_body.png) no-repeat left top;}
+
 
 /* title */
 #title-x b{width: 90%;float:right;color: #000;padding:0 0 6px 0;margin:3px ;font-size: 18px; 
@@ -301,17 +301,54 @@ font: bold 11px tahoma,Verdana, Helvetica, sans-serif;
     font: normal 12px Tahoma, Helvetica, Arial, sans-serif;}
 /* # form login*/
 
+
 /* captcha stuff*/
 #kleeja_img_captcha {cursor: pointer;}
 /* # captcha stuff*/
 
-/* tabs */
-.tabber {
+
+
+#index_body{background:url(../images/index_body.png) no-repeat left top;}
+
+.safe_code { margin:10px 0;}
+.safe_code  td span{color:#800000;font: bold 12px Tahoma, Helvetica, Arial, sans-serif;	text-align: center;}
+.explain {
+	font-size: 0.90em;
+	font-style: italic;
 }
-.tabberlive {
- margin-top:1em;
+.table_footer { 
+
+	height: 15px;
+	padding: 5px;
+	text-align: center;
 }
 
+.input_field { 
+	background: #FFFFFF url(../images/input_bg.gif) repeat-x;
+	border: 1px solid #B3B9C4;
+	color: #000000;
+}
+
+
+.input_field:focus, .input_field:hover {
+	border: 1px solid #7E8993;background-color: #ffd ;
+}
+
+/* tabs */
+.tabber {  
+width:70%
+}
+.tabberlive {
+ margin-top:2px;
+ margin-bottom:2px;
+
+}
+.tabberlive .tabbertab {
+ padding:3px;
+ border:1px solid #aaa;
+background:#E6E6E6;width:70%;
+
+}
 /*--------------------------------------------------
   ul.tabbernav = the tab navigation list
   li.tabberactive = the active tab
@@ -320,28 +357,29 @@ ul.tabbernav
 {
  margin:0;
  padding: 3px 0;
- border-bottom: 1px solid #778;
- font: bold 12px Verdana, sans-serif;
+
+ font: bold 11px tahoma, sans-serif;
+
 }
 
 ul.tabbernav li
 {
  list-style: none;
  margin: 0;
- display: inline;
+ display: inline;  
 }
 
 ul.tabbernav li a
 {
- padding: 3px 0.5em;
+ padding: 3px 8px;
  margin-left: 3px;
- border: 1px solid #778;
+ border: 1px solid #aaa;
  border-bottom: none;
- background: #DDE;
+ background: #FFFFA6;
  text-decoration: none;
 }
 
-ul.tabbernav li a:link { color: #448; }
+ul.tabbernav li a:link { color: #444; }
 ul.tabbernav li a:visited { color: #667; }
 
 ul.tabbernav li a:hover
@@ -353,8 +391,8 @@ ul.tabbernav li a:hover
 
 ul.tabbernav li.tabberactive a
 {
- background-color: #fff;
- border-bottom: 1px solid #fff;
+ background-color: #E6E6E6;
+ border-bottom: 1px solid #E6E6E6;
 }
 
 ul.tabbernav li.tabberactive a:hover
@@ -368,21 +406,7 @@ ul.tabbernav li.tabberactive a:hover
   .tabbertab = the tab content
   Add style only after the tabber interface is set up (.tabberlive)
   --------------------------------------------------*/
-.tabberlive .tabbertab {
- padding:5px;
- border:1px solid #aaa;
- border-top:0;
 
- /* If you don't want the tab size changing whenever a tab is changed
-    you can set a fixed height */
-
- /* height:200px; */
-
- /* If you set a fix height set overflow to auto and you will get a
-    scrollbar when necessary */
-
- /* overflow:auto; */
-}
 
 /* If desired, hide the heading since a heading is provided by the tab */
 .tabberlive .tabbertab h2 {

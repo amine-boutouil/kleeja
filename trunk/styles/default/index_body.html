@@ -1,21 +1,20 @@
 <div id="content">
 
-<div class="clr"></div>
-
 <!-- start site name and title  -->
-<div id="title-x"><b><a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}</b></div>
+<div class="clr"></div><div id="title-x"><b><a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}</b></div>
 <!--  # End  site name and title  -->
 
 <div class="clr"></div><div class="line"></div><div class="clr"></div>
 
-
+<!-- start index template  -->
 <div id="index_body">
 
-<!-- begin welcome index -->
-<h2>{lang.WELCOME}..</h2>  {welcome_msg}
-<br />
-<br />
-<!-- end welcome index -->
+<!-- start welcome -->
+<h2><img src="{STYLE_PATH}images/Smile.png" style="vertical-align:middle;" /> {lang.WELCOME} .. </h2>  {welcome_msg}
+<!-- ## End welcome -->
+
+<div class="clr"></div><br />
+
 
 <!---- START  FOR INFORMATION ---->
 <IF NAME="info">
@@ -33,42 +32,70 @@
 
 <!---- START  FOR UPLOAD BOXES ---->
 <form name="uploader" id="uploader" action="{action}" method="post"  enctype="multipart/form-data" onsubmit="form_submit();">
+
+
 <div class="tabber">
 
-        <IF NAME="config.safe_code">
-				<label>{lang.VERTY_CODE}</label>
-				<br />
-				<img id="kleeja_img_captcha" src="{captcha_file_path}" alt="{lang.REFRESH_CAPTCHA}" title="{lang.REFRESH_CAPTCHA}" onclick="javascript:update_kleeja_captcha('{captcha_file_path}', 'kleeja_code_answer');" />
-				<br />
-				<input type="text" name="kleeja_code_answer" id="kleeja_code_answer" style="direction:ltr" />
-        </IF>
 
-		
-        <div class="tabbertab tabbertabdefault" title="{lang.DOWNLOAD_F}" id="filetype">
+        <div class="tabbertab" title="{lang.DOWNLOAD_F}" id="filetype">
+		<br />
                 <LOOP NAME=FILES_NUM_LOOP>
-					<input type="file" name="file[{{i}}]" id="file[{{i}}]" style="display:{{show}}" size="50" /><br id="br[{{i}}]" style="display:{{show}}" />
+					<input class="input_field" type="file" name="file[{{i}}]" id="file[{{i}}]" style="display:{{show}}" size="50" /><br id="br[{{i}}]" style="display:{{show}}" />
 				</LOOP>
                 
                 <div id="upload_forum"></div>
                 <br />
                 <input class="buttons" name="mraupload" onclick="javascript:plus(1);" type="button" value="+" />
 				<input class="buttons" name="mreupload" onclick="javascript:minus(1);" type="button" value="-" />
-				<input class="buttons" type="text" id="upload_num" value="1" size="1" readonly="readonly"/>
+				<input class="input_field" type="text" id="upload_num" value="1" size="1" readonly="readonly"/>
 				<br /><br />
 
-                <input id="checkr" type="checkbox" onclick="accept_terms('submitr','checkr');" /> {lang.AGREE_RULES}
+             
                 
                 <br />
 
-                
-                <br />
-                <input class="buttons" type="submit" id="submitr" name="submitr" value="{lang.DOWNLOAD_F}"  disabled="disabled" />
+				
+<!---- star  safe code  ---->				
+<IF NAME="config.safe_code">
+<table class="safe_code" cellpadding="0" cellspacing="0" border="0" width="100%">
+	<tr>
+		<td style="width: 38%;">	<br /> 
+		<span>{lang.VERTY_CODE}</span>
+		<div class="explain">{lang.NOTE_CODE}</div>
+		</td>
+		
+		<td>
+			<br /> 
+		<img id="kleeja_img_captcha" src="{captcha_file_path}" alt="{lang.REFRESH_CAPTCHA}" title="{lang.REFRESH_CAPTCHA}" onclick="javascript:update_kleeja_captcha('{captcha_file_path}', 'kleeja_code_answer');" />
+
+		<br /> 
+		
+		<input type="text" name="kleeja_code_answer" id="kleeja_code_answer" style="direction:ltr" />
+		
+		</td>
+	</tr>
+
+</table>		
+</IF>
+<!---- ## End  safe code  ---->	               
+
+		
+		   <input id="checkr" type="checkbox" onclick="accept_terms('submitr','checkr');" /> {lang.AGREE_RULES}
+	<br /> 	<br /> 
+		
+		 <input class="buttons" type="submit" id="submitr" name="submitr" value="{lang.DOWNLOAD_F}"  disabled="disabled" />
+		
+
+				
+   
+               
                 
         </div>
 
         
 <IF NAME="config.www_url">
         <div class="tabbertab" title="{lang.DOWNLOAD_T}" id="texttype">
+		<br />
 			<LOOP NAME=FILES_NUM_LOOP>
 				<input type="text" name="file[{{i}}]" id="fileu[{{i}}]" size="50" value="{lang.PAST_URL_HERE}" onclick="this.value=''" style="color:silver;display:{{show}}" dir="ltr"><br id="bru[{{i}}]" style="display:{{show}}" />
 			</LOOP>
@@ -113,10 +140,12 @@
 </IF>
 <!---- END FOR ONLINE ---->
 
-<br /><br />
+<br />
 
 </div>
+<!-- ## End index template  -->
 
+<br />
 </div>
     
    

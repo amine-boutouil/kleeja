@@ -8,43 +8,46 @@
 
 <div class="clr"></div><div class="line"></div><div class="clr"></div>
 
-<br />
-<h2>{lang.GUIDE_VISITORS} </h2>
-<br />
 
-<LOOP NAME="gusts_data">
+<table id="guide" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<td class="visitor">{lang.GUIDE_VISITORS}</td>
+		<td class="users">{lang.GUIDE_USERS}</td>
+	</tr>
+	<tr>
+		<td class="visitor_x">
+			<LOOP NAME="gusts_data">
+				<IF LOOP="is_first_row">
+					<IF LOOP="realy_first_row"><ELSE></div></IF>
+					<div class="visitor_xx">مجموعه : {{group_name}}</div> 
+				</IF>
+				<table border="0" width="90%">
+					<tr>
+						<td width="50%"><b class="visitor_ext">{lang.EXT}</b> | <b class="visitor_ext1">{{ext}}</b></td>
+						<td width="50%"><b class="visitor_ext">{lang.SIZE}</b> | <b class="visitor_ext1">{{num}}</b></td>
+					</tr>
+				</table>
+			</LOOP>
+		</td>
+		
+		<td class="users_x">
+			<LOOP NAME="users_data">
+				<IF LOOP="is_first_row">
+					<IF LOOP="realy_first_row"><ELSE></div></IF>
+					<div class="visitor_xx">مجموعه : {{group_name}}</div> 
+				</IF>
+				<table border="0" width="90%">
+					<tr>
+						<td width="50%"><b class="visitor_ext">{lang.EXT}</b> | <b class="visitor_ext1">{{ext}}</b></td>
+						<td width="50%"><b class="visitor_ext">{lang.SIZE}</b> | <b class="visitor_ext1">{{num}}</b></td>
+					</tr>
+				</table>
+			</LOOP>
+		</td>
+	</tr>
+</table>
 
-	<IF LOOP="is_first_row">
-		<IF LOOP="realy_first_row"><ELSE></div></IF>
-		<div class="...">
-		<br />
-		مجموعه : {{group_name}}
-		<br />
-	</IF>
-	
-	{lang.EXT} <b>{{ext}} : </b>{lang.SIZE} {{num}}<br />
-</LOOP>
-</div> <!-- this for the end class ... -->
-
-<br />
-<br />
-
-<h2>{lang.GUIDE_USERS} </h2>
-<br />
-
-<LOOP NAME="users_data">
-	<IF LOOP="is_first_row">
-		<IF LOOP="realy_first_row"><ELSE></div></IF>
-		<div class="...">
-		<br />
-		مجموعه : {{group_name}}
-		<br />
-	</IF>
-	
-	{lang.EXT} <b>{{ext}} : </b>{lang.SIZE} {{num}}<br />
-</LOOP>
-</div> <!-- this for the end class ... -->
-
+<div class="clr"></div><div class="clr"></div>
 
 </div>
         

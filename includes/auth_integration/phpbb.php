@@ -102,7 +102,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire)
 	else//phpbb2
 	{
 	
-	if(!function_exists('iconv') && !eregi('utf',strtolower($script_encoding)))
+	if(!function_exists('iconv') && !preg_match('/utf/i',strtolower($script_encoding)))
  	{
  		big_error('No support for ICONV', 'You must enable the ICONV library to integrate kleeja with your forum. You can solve your problem by changing your forum db charset to UTF8.'); 
  	}
@@ -130,7 +130,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire)
 			if($SQLBB->num_rows($SQLBB->query("SELECT ban_userid FROM `{$forum_prefix}banlist` WHERE ban_userid='" . intval($row['user_id']) . "'")) == 0)
 			{
 				define('USER_ID',$row['user_id']);
-				define('USER_NAME',(eregi('utf',strtolower($script_encoding))) ? $row['username'] : iconv(strtoupper($script_encoding),"UTF-8//IGNORE",$row['username']));
+				define('USER_NAME',(preg_match('/utf/i',strtolower($script_encoding))) ? $row['username'] : iconv(strtoupper($script_encoding),"UTF-8//IGNORE",$row['username']));
 				define('USER_MAIL',$row['user_email']);
 				define('USER_ADMIN',($row[$row_leve] == $admin_level) ? 1 : 0);
 					//define('LAST_VISIT',$row['last_visit']);
@@ -216,7 +216,7 @@ function kleeja_auth_username ($user_id)
 	//$charset_db = @mysql_client_encoding($SQLBB->connect_id);
 	unset($forum_pass); // We do not need this any longe
 
-	if(!function_exists('iconv') && !eregi('utf',strtolower($script_encoding)))
+	if(!function_exists('iconv') && !preg_match('/utf/i',strtolower($script_encoding)))
  	{
  		big_error('No support for ICONV', 'You must enable the ICONV library to integrate kleeja with your forum. You can solve your problem by changing your forum db charset to UTF8.'); 
  	}
@@ -234,7 +234,7 @@ function kleeja_auth_username ($user_id)
 	{
 		while($row = $SQLBB->fetch_array($result_name))
 		{
-			$returnname = (eregi('utf',strtolower($script_encoding))) ? $row['username'] : iconv(strtoupper($script_encoding),"UTF-8//IGNORE",$row['username']);
+			$returnname = (preg_match('/utf/i',strtolower($script_encoding))) ? $row['username'] : iconv(strtoupper($script_encoding),"UTF-8//IGNORE",$row['username']);
 
 		}#whil1
 		$SQLBB->freeresult($result_name); 

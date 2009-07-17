@@ -754,7 +754,7 @@ switch ($_GET['go'])
 	//
 	//if it's not a default user system let's send custom charset and look for iconv 
 	//
-	if($config['user_system'] != '1' && isset($script_encoding) && $_GET['go'] == 'login' && function_exists('iconv') && !eregi('utf',strtolower($script_encoding)) && !defined('DISABLE_INTR'))
+	if($config['user_system'] != '1' && isset($script_encoding) && $_GET['go'] == 'login' && function_exists('iconv') && !preg_match('/utf/i',strtolower($script_encoding)) && !defined('DISABLE_INTR'))
 	{
 		//send custom chaeset header
 		header("Content-type: text/html; charset={$script_encoding}");

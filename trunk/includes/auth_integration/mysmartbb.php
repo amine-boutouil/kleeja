@@ -59,7 +59,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire)
 	mysql_query("SET NAMES '" . $charset_db . "'");
 	unset($forum_pass); // We do not need this any longe
 	
-	if(!function_exists('iconv') && !eregi('utf',strtolower($script_encoding)))
+	if(!function_exists('iconv') && !preg_match('/utf/i',strtolower($script_encoding)))
  	{
  		big_error('No support for ICONV', 'You must enable the ICONV library to integrate kleeja with your forum. You can solve your problem by changing your forum db charset to UTF8.'); 
  	}
@@ -81,7 +81,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire)
 		while($row=$SQLMS->fetch_array($result))
 		{
 			define('USER_ID',$row['id']);
-			define('USER_NAME',(eregi('utf',strtolower($script_encoding))) ? $row['username'] : iconv(strtoupper($script_encoding),"UTF-8//IGNORE",$row['username']));
+			define('USER_NAME',(preg_match('/utf/i',strtolower($script_encoding))) ? $row['username'] : iconv(strtoupper($script_encoding),"UTF-8//IGNORE",$row['username']));
 			define('USER_MAIL',$row['email']);
 			define('USER_ADMIN',($row['usergroup'] == 1) ? 1 : 0);
 							
@@ -156,7 +156,7 @@ function kleeja_auth_username ($user_id)
 	//$charset_db = @mysql_client_encoding($SQLMS->connect_id);
 	unset($forum_pass); // We do not need this any longe
 
-	if(!function_exists('iconv') && !eregi('utf',strtolower($script_encoding)))
+	if(!function_exists('iconv') && !preg_match('/utf/i',strtolower($script_encoding)))
  	{
  		big_error('No support for ICONV', 'You must enable the ICONV library to integrate kleeja with your forum. You can solve your problem by changing your forum db charset to UTF8.'); 
  	}
@@ -174,7 +174,7 @@ function kleeja_auth_username ($user_id)
 	{
 		while($row = $SQLMS->fetch_array($result_name))
 		{
-			$returnname = (eregi('utf',strtolower($script_encoding))) ? $row['username'] : iconv(strtoupper($script_encoding),"UTF-8//IGNORE",$row['username']);
+			$returnname = (preg_match('/utf/i',strtolower($script_encoding))) ? $row['username'] : iconv(strtoupper($script_encoding),"UTF-8//IGNORE",$row['username']);
 
 		}#whil1
 		$SQLMS->freeresult($result_name); 

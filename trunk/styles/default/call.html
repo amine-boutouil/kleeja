@@ -9,6 +9,16 @@
 
 <div class="clr"></div><div class="line"></div><div class="clr"></div>
 
+<!-- start error msg  -->
+<IF NAME="ERRORS">
+	<div class="error_f">
+		<ul>
+			<LOOP NAME="ERRORS"><li>{%value%}</li></LOOP>
+		</ul>
+	</div>
+</IF>
+<!-- # end error msg  -->
+
 <!-- start body connection  -->
 <div id="connection">
 
@@ -27,6 +37,7 @@
 		<input type="text" name="kleeja_code_answer" id="kleeja_code_answer" style="direction:ltr" />
 		<br />
 	<div class="clr"></div>
+	{H_FORM_KEYS}
 	<input id="buttons" type="submit" name="submit" value="{lang.SEND}" />
 </form>
 </div>

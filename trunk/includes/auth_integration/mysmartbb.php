@@ -13,7 +13,7 @@ if (!defined('IN_COMMON'))
 
 function kleeja_auth_login ($name, $pass, $hashed = false, $expire)
 {
-	global $script_path, $lang, $script_encoding, $script_srv, $script_db, $script_user, $script_pass, $script_prefix, $config, $usrcp;
+	global $script_path, $lang, $script_encoding, $script_srv, $script_db, $script_user, $script_pass, $script_prefix, $config, $usrcp, $userinfo;
 	
 	if(isset($script_path)) {
 	//check for last slash / 
@@ -84,6 +84,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire)
 			define('USER_NAME',(preg_match('/utf/i',strtolower($script_encoding))) ? $row['username'] : iconv(strtoupper($script_encoding),"UTF-8//IGNORE",$row['username']));
 			define('USER_MAIL',$row['email']);
 			define('USER_ADMIN',($row['usergroup'] == 1) ? 1 : 0);
+			$userinfo = $row;
 							
 			if(!$hashed)
 			{	

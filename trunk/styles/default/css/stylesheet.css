@@ -18,8 +18,11 @@ img.right {float: right;	margin-left:15px;}
 
 /** LOGO */
 #logobody {width: 90%;margin:0 auto;	padding:0;}
-#logobody .logo {width: 50%;padding: 10px 40px 10px 10px;}
+#logobody .logo {width: 340px;height: 97px;float: right;}
 #logobody .logo a:link ,.logo a:visited ,.logo a:hover ,.logo a:active {	background-color: transparent;}
+#logobody .logo_l {
+background: url(../images/logo_l.png) top left no-repeat;
+width: 340px;height: 97px;float: left;	}
 /* #  LOGO */
 
 /**  start The main menu at the top **/	
@@ -237,8 +240,12 @@ font: bold 11px tahoma,Verdana, Helvetica, sans-serif;
 #footer .googleanalytics { margin:5px ;padding:10px; text-align:center;}
 
 /*start Option to control panel */
-#adminPan{width: 200px;margin: 0 auto; padding:5px; }
-#adminPan a:hover  {color:#FFFFFF;}
+#adminPan{width: 150px;margin:5px auto;}
+#adminPan ul{float:right;width: 178x;height:45px;}
+#adminPan li{margin-bottom:8px;padding:10px 20px;background:url(../images/adminPan.gif) no-repeat center;
+font-size:12px; font-weight:bold;}
+#adminPan a {color:#000;}
+#adminPan a:hover  {color:#FFFFFF;background-color:transparent;}
 /* # footer template */
 
 

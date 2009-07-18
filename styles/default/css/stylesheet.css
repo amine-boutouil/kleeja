@@ -20,9 +20,6 @@ img.right {float: right;	margin-left:15px;}
 #logobody {width: 90%;margin:0 auto;	padding:0;}
 #logobody .logo {width: 340px;height: 97px;float: right;}
 #logobody .logo a:link ,.logo a:visited ,.logo a:hover ,.logo a:active {	background-color: transparent;}
-#logobody .logo_l {
-background: url(../images/logo_l.png) top left no-repeat;
-width: 340px;height: 97px;float: left;	}
 /* #  LOGO */
 
 /**  start The main menu at the top **/	

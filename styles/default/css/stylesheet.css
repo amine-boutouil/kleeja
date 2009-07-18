@@ -492,3 +492,23 @@ font: bold 11px tahoma, sans-serif;
 color:#005900;
 padding:5px 25px 10px 0;
 }
+
+/*errors msg for forms*/
+.error_f, .info_f {
+	padding: 1em;
+	padding-right: 2em;
+	margin-bottom: 1.5em;
+	text-indent: 14px;
+	border-width:1px 0
+}
+.error_f {
+    color:#B28600;
+	background: #FFFCDB url(../images/error_f.gif) no-repeat 99% 50%;
+	border: 1px solid #FFE085;
+}
+.info_f {
+	background: #DAF0F6 url(../images/info_f.gif) no-repeat 99% 50%;
+	color:#499DCC;
+	border: 1px solid #3DB2D0;
+}
+/* # errors msg for forms*/

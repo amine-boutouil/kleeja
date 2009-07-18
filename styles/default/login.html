@@ -9,6 +9,16 @@
 
 <div class="clr"></div><div class="line"></div><div class="clr"></div>
 
+<!-- start error msg  -->
+<IF NAME="ERRORS">
+	<div class="error_f">
+		<ul>
+			<LOOP NAME="ERRORS"><li>{%value%}</li></LOOP>
+		</ul>
+	</div>
+</IF>
+<!-- # end error msg  -->
+
 <!-- start form login  -->
 <div id="login">
     <form action="{action}" method="post">

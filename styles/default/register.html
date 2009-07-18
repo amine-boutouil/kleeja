@@ -1,4 +1,6 @@
+<!-- start register template  -->
 <div id="content">
+
 <div class="clr"></div>
 
 <!-- start site name and title  -->
@@ -7,7 +9,18 @@
 
 <div class="clr"></div><div class="line"></div><div class="clr"></div>
 
-    <form action="{action}" method="post">
+<!-- start error msg  -->
+<IF NAME="ERRORS">
+	<div class="error_f">
+		<ul>
+			<LOOP NAME="ERRORS"><li>{%value%}</li></LOOP>
+		</ul>
+	</div>
+</IF>
+<!-- # end error msg  -->
+
+<!-- start form register  -->
+<form action="{action}" method="post">
 		<table>
             <tr>
 				<td class="row1">{lang.USERNAME} :</td>
@@ -30,9 +43,14 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="2" style="text-align:center"><input type="submit" name="submit" value="{lang.REGISTER}" /></td>
+                <td colspan="2" style="text-align:center">
+					{H_FORM_KEYS}
+					<input type="submit" name="submit" value="{lang.REGISTER}" /><
+				/td>
             </tr>
         </table>
-	</form>
+</form>
+<!-- ## End form register  -->
+
 </div>
-        
+<!-- ## End register template  --> 

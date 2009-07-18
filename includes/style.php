@@ -88,15 +88,16 @@ if (!defined('IN_COMMON'))
             $this->HTML = preg_replace_callback(kleeja_style::reg('var'),array('kleeja_style','_vars_callback'), $this->HTML);
 
             $rep = array(
-						//"/<LOOP\s+NAME\s*=\s*(\"|)+([a-z0-9_]{1,})+(\"|)\s*>/i" => "< ? php foreach(\$this->vars[\"\\2\"] as \$key=>\$var){ ? >",
-						"/<LOOP\s+NAME\s*=\s*(\"|)+([a-z0-9_]{1,})+(\"|)\s*LIMIT\s*=\s*(\"\\d+\"|\\d+)\s*>/i" => "<?php \$this->_limit(\"\\2\",\\4);foreach(\$this->vars[\"\\2\"] as \$key=>\$var){ ?>",
+						//"/<LOOP\s+NAME\s*=\s*(\"|)+([a-z0-9_]{1,})+(\"|)\s*>/i" => "< ? php foreach(\$this->vars[\"\\2\"] as \$key=>\$value){ ? >",
+						"/<LOOP\s+NAME\s*=\s*(\"|)+([a-z0-9_]{1,})+(\"|)\s*LIMIT\s*=\s*(\"\\d+\"|\\d+)\s*>/i" => "<?php \$this->_limit(\"\\2\",\\4);foreach(\$this->vars[\"\\2\"] as \$key=>\$value){ ?>",
 						"/<\/(LOOP|IF|END)>/i" => "<?php } ?>", 
 						'/<SWITCH\s+NAME\s*=\s*"([A-Z0-9_]{1,})"\s*CASE\s*=\s*"(.+)"\s*VALUE\s*=\s*"(.+)"\s*>/i' => '<?php echo  $this->_switch($this->vars["\\1"],"\\2","\\3")?>',
 						'/<INCLUDE\s+NAME\s*=\s*"(.+)"\s*>/iU' => '<?php echo  kleeja_style::_include("\\1"); ?>',
 						'/(<ELSE>|<ELSE \/>)/i' => '<?php }else{ ?>',
-						'#<ODD="([a-zA-Z0-9\_\-\+\./]+)"\>(.*?)<\/ODD\>#is' => "<?php if(intval(\$var['\\1'])%2){?> \\2 <?php } ?>",
-						'#<EVEN="([a-zA-Z0-9\_\-\+\./]+)"\>(.*?)<\/EVEN\>#is' => "<?php if(intval(\$var['\\1'])% 2 == 0){?> \\2 <?php } ?>",
+						'#<ODD="([a-zA-Z0-9\_\-\+\./]+)"\>(.*?)<\/ODD\>#is' => "<?php if(intval(\$value['\\1'])%2){?> \\2 <?php } ?>",
+						'#<EVEN="([a-zA-Z0-9\_\-\+\./]+)"\>(.*?)<\/EVEN\>#is' => "<?php if(intval(\$value['\\1'])% 2 == 0){?> \\2 <?php } ?>",
 						'#<RAND=\"(.*?)\"[\s]{0,},[\s]{0,}\"(.*?)\"[\s]{0,}>#is' => "<?php \$KLEEJA_tpl_rand_is=(\$KLEEJA_tpl_rand_is==0)?1:0; print((\$KLEEJA_tpl_rand_is==1) ?'\\1':'\\2'); ?>",
+						'/{%(key|value)%}/i' => '<?php echo $\\1; ?>',
 				);
 				
             $this->HTML = preg_replace(array_keys($rep), array_values($rep), $this->HTML);
@@ -106,7 +107,7 @@ if (!defined('IN_COMMON'))
 		function _loop_callback($matches)
 		{
 			$var = (strpos($matches[2], '.') !== false) ?  str_replace('.', '"]["', $matches[2]) : $matches[2];
-			return '<?php foreach($this->vars["' . $var . '"] as $key=>$var){ ?>';
+			return '<?php foreach($this->vars["' . $var . '"] as $key=>$value){ ?>';
 		}
 		
         //if tag
@@ -185,7 +186,7 @@ if (!defined('IN_COMMON'))
 			
             if(!empty($matches[1]) && $matches[1] == '{{')
 			{
-                $var = '$var[\'' . $var . '\']';
+                $var = '$value[\'' . $var . '\']';
             }
 			else
 			{

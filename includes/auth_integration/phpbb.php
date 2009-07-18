@@ -14,7 +14,7 @@ if (!defined('IN_COMMON'))
 function kleeja_auth_login ($name, $pass, $hashed = false, $expire)
 {
 	//global $forum_srv, $forum_user, $forum_pass, $forum_db, $forum_charset;
-	global $script_path, $SQLBB, $phpEx, $phpbb_root_path, $lang, $script_encoding, $script_srv, $script_db, $script_user, $script_pass, $script_prefix, $config, $usrcp;
+	global $script_path, $SQLBB, $phpEx, $phpbb_root_path, $lang, $script_encoding, $script_srv, $script_db, $script_user, $script_pass, $script_prefix, $config, $usrcp, $userinfo;
 				
 	//check for last slash / 
 	if(isset($script_path)) {
@@ -134,6 +134,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire)
 				define('USER_MAIL',$row['user_email']);
 				define('USER_ADMIN',($row[$row_leve] == $admin_level) ? 1 : 0);
 					//define('LAST_VISIT',$row['last_visit']);
+				$userinfo = $row;
 							
 				if(!$hashed)
 				{	

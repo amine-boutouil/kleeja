@@ -14,7 +14,7 @@ if (!defined('IN_COMMON'))
 function kleeja_auth_login ($name, $pass, $hashed = false, $expire)
 {
 	// ok, i dont hate vb .. but i cant feel my self use it ... 
-	global $script_path, $lang, $script_encoding, $script_srv, $script_db, $script_user, $script_pass, $script_prefix, $config, $usrcp;
+	global $script_path, $lang, $script_encoding, $script_srv, $script_db, $script_user, $script_pass, $script_prefix, $config, $usrcp, $userinfo;
 	
 	if(isset($script_path))
 	{				
@@ -102,7 +102,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire)
 						define('USER_MAIL',$row['email']);
 						define('USER_ADMIN',($row['usergroupid'] == 6) ? 1 : 0);
 					//define('LAST_VISIT',$row['last_visit']);
-							
+						$userinfo = $row;
 					
 						$hash_key_expire = sha1(md5($config['h_key']) .  $expire);
 						$usrcp->kleeja_set_cookie('ulogu', base64_encode(base64_encode(base64_encode($row['userid'] . '|' . $row['password'] . '|' . $expire . '|' . $hash_key_expire))), $expire);
@@ -124,6 +124,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire)
 					define('USER_NAME',(preg_match('/utf/i',strtolower($script_encoding))) ? $row1['username'] : iconv(strtoupper($script_encoding),"UTF-8//IGNORE",$row1['username']));
 					define('USER_MAIL',$row1['email']);
 					define('USER_ADMIN',($row1['usergroupid'] == 6) ? 1 : 0);
+					$userinfo = $row1;
 			}
 		}#whil1
 

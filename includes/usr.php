@@ -21,7 +21,7 @@ class usrcp
 				function data ($name, $pass, $hashed = false, $expire)
 				{
 					global $config, $path;
-						
+									
 						//we need this in future 
 						if(defined('IGNORE_USER_SYSTEM'))
 						{
@@ -74,7 +74,7 @@ class usrcp
 				//now ..  .. our table
 				function normal ($name, $pass, $hashed = false, $expire)
 				{
-					global $SQL, $dbprefix, $config;
+					global $SQL, $dbprefix, $config, $userinfo;
 					
 					$query = array(
 								'SELECT'	=> '*',
@@ -144,6 +144,9 @@ class usrcp
 							define('USER_MAIL', $row['mail']);
 							define('USER_ADMIN', $row['admin']);
 							define('LAST_VISIT', $row['last_visit']);
+							
+							//all user fileds info
+							$userinfo = $row;
 							
 							if(!$hashed)
 							{

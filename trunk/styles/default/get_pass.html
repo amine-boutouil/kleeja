@@ -1,4 +1,6 @@
+<!-- start get_pass template  -->
 <div id="content">
+
 <div class="clr"></div>
 
 <!-- start site name and title  -->
@@ -7,11 +9,37 @@
 
 <div class="clr"></div><div class="line"></div><div class="clr"></div>
 
-<br />
+<!-- start error msg  -->
+<IF NAME="ERRORS">
+	<div class="error_f">
+		<ul>
+			<LOOP NAME="ERRORS"><li>{%value%}</li></LOOP>
+		</ul>
+	</div>
+</IF>
+<!-- # end error msg  -->
+
+<!-- start form get_pass  -->
+<form action="{action}" method="post">
+	<br />
 	{lang.E_GET_LOSTPASS}
-	<form action="{action}" method="post">
-		{lang.EMAIL} : <input type="text" name="rmail" value="{t_rmail}"  /><br />
+	<br />
+	<br />
+		{lang.EMAIL} : <input type="text" name="rmail" value="{t_rmail}"  />
+		<br />
+		<br />
+        {lang.VERTY_CODE}
+		<br />
+        <img id="kleeja_img_captcha" src="{captcha_file_path}" alt="{lang.REFRESH_CAPTCHA}" title="{lang.REFRESH_CAPTCHA}" onclick="javascript:update_kleeja_captcha('{captcha_file_path}', 'kleeja_code_answer');" />
+		 <br />
+		<input type="text" name="kleeja_code_answer" id="kleeja_code_answer" style="direction:ltr" />
+		<br />
+		<br />
+		{H_FORM_KEYS}
 		<input type="submit" name="submit" value="{lang.GET_LOSTPASS}" />
 	</form>
+<!-- ## End form get_pass  -->
+
 </div>
+<!-- ## End get_pass template  --> 
         

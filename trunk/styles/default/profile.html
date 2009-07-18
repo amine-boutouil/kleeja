@@ -7,12 +7,17 @@
 <div id="title-x"><b><a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}</b></div>
 <!--  # End  site name and title  -->
 
-<div class="clr"></div>
+<div class="clr"></div><div class="line"></div><div class="clr"></div>
 
-<div class="line"></div>
-
-<div class="clr"></div>
-
+<!-- start error msg  -->
+<IF NAME="ERRORS">
+	<div class="error_f">
+		<ul>
+			<LOOP NAME="ERRORS"><li>{%value%}</li></LOOP>
+		</ul>
+	</div>
+</IF>
+<!-- # end error msg  -->
 
 <h2>{lang.EDIT_U_DATA}</h2>
 
@@ -33,6 +38,8 @@
 		{lang.OLD} :<input type="password" name="ppass_old" value="{t_ppass_old}"  /><br />
 		{lang.NEW} :<input type="password" name="ppass_new" value="{t_ppass_new}"  /><br />
 		{lang.NEW_AGAIN} :<input type="password" name="ppass_new2" value="{t_ppass_new2}"  /><br />
+		<br />
+		{H_FORM_KEYS}
 		<input type="submit" name="submit_data" value="{lang.EDIT_U_DATA}" />
 		</form>
 	<ELSE>

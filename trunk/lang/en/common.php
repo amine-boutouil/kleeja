@@ -466,7 +466,7 @@ $lang = array_merge($lang, array(
 	'MONTH'						=> 'a month',
 	'YEAR'						=> 'a year',
 	'ADMINISTRATORS'			=> 'Administrators',
-	'INVALID_FORM_KEY'			=> 'نموذج خاطئ , او انك تعديت الوقت المسموح فيه لملأ النموذج , %s لإعادة المحاولة.',
+	'INVALID_FORM_KEY'			=> 'نموذج خاطئ , او انك تعديت الوقت المسموح فيه لملأ النموذج.',
 	'REFRESH_CAPTCHA'			=> 'اظغط لتحديث الصوره بواحده جديده',
 	'CHOSE_F'					=> 'please select the file you want be uploaded',
 	

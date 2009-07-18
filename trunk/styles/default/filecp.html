@@ -7,11 +7,8 @@
 <div id="title-x"><b><a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}</b></div>
 <!--  # End  site name and title  -->
 
-<div class="clr"></div>
+<div class="clr"></div><div class="line"></div><div class="clr"></div>
 
-<div class="line"></div>
-
-<div class="clr"></div>
 
 <br />
 <h2>{lang.EDIT_U_FILES}</h2>
@@ -19,20 +16,21 @@
 <form action="{action}" method="post">
 
 <table>
-        <tr class="row1"><td>{lang.FILENAME}</td><td>{lang.DELETE}</td></tr>
-<IF NAME="no_results">
-<tr class="row2">
-<td colspan="2">...</td>
-</tr>
-<ELSE>
-<LOOP NAME="arr">
-        <tr class="row2">
-        <td>{{name}}</td><td><input type="checkbox" name="del_{{id}}" value="1"></td>
-        </tr>
-</LOOP>
-</IF>
+    <tr class="row1"><td>{lang.FILENAME}</td><td>{lang.DELETE}</td></tr>
+	<IF NAME="no_results">
+	<tr class="row2">
+		<td colspan="2">...</td>
+	</tr>
+	<ELSE>
+		<LOOP NAME="arr">
+				<tr class="row2">
+					<td>{{name}}</td><td><input type="checkbox" name="del_{{id}}" value="1" /></td>
+				</tr>
+		</LOOP>
+	</IF>
 </table>
 <br />
+{H_FORM_KEYS}
 <input class="buttons" type="submit" name="submit_files" value="{lang.DEL_SELECTED}" />
 
 </form>

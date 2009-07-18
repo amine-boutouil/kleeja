@@ -75,7 +75,17 @@ switch ($_GET['go'])
 	break;
 	
 	case "report" :
-
+		
+		//page info
+		$stylee	= "report";
+		$titlee	= $lang['REPORT'];
+		$url_id	= ($config['mod_writer']) ? $config['siteurl'] . "download" . intval($_GET['id']) . ".html" : $config['siteurl'] . "download.php?id=" . intval($_GET['id']);
+		$action	= "./go.php?go=report";
+		$id_d	= intval($_GET['id']);
+		$H_FORM_KEYS = kleeja_add_form_key('report');
+		//no error yet 
+		$ERRORS = false;
+		
 		//_post
 		$t_rname = isset($_POST['rname']) ? htmlspecialchars($_POST['rname']) : ''; 
 		$t_rmail = isset($_POST['rmail']) ? htmlspecialchars($_POST['rmail']) : ''; 
@@ -83,12 +93,6 @@ switch ($_GET['go'])
 		
 		if (!isset($_POST['submit']))
 		{
-				$stylee	= "report";
-				$titlee	= $lang['REPORT'];
-				$url_id	= ($config['mod_writer']) ? $config['siteurl'] . "download" . intval($_GET['id']) . ".html" : $config['siteurl'] . "download.php?id=" . intval($_GET['id']);
-				$action	= "./go.php?go=report";
-				$id_d	= intval($_GET['id']);
-				
 				// first
 				if (!$_GET['id'])
 				{
@@ -99,15 +103,20 @@ switch ($_GET['go'])
 		}
 		else
 		{
-			$ERRORS	=	'';
+			$ERRORS	= array();
 			
 			($hook = kleeja_run_hook('submit_report_go_page')) ? eval($hook) : null; //run hook
 			
+			//check for form key
+			if(!kleeja_check_form_key('report'))
+			{
+				$ERRORS[] = $lang['INVALID_FORM_KEY'];
+			}
 			if(!kleeja_check_captcha())
 			{
 				$ERRORS[]	= $lang['WRONG_VERTY_CODE'];
 			}
-			else if (empty($_POST['rname']) || empty($_POST['rurl']))
+			if (empty($_POST['rname']) || empty($_POST['rurl']))
 			{
 				$ERRORS[]	= $lang['EMPTY_FIELDS'] . ' : ' . (empty($_POST['rname']) ? ' [ ' . $lang['YOURNAME'] . ' ] ' : '')  . (empty($_POST['rurl']) ? '  [ ' . $lang['URL']  . ' ] ': '');
 			}
@@ -115,11 +124,11 @@ switch ($_GET['go'])
 			{
 				$ERRORS[]	= $lang['NO_ID'];
 			}
-			else if (!eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$", trim(strtolower($_POST['rmail']))))
+			if (!eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$", trim(strtolower($_POST['rmail']))))
 			{
 				$ERRORS[]	= $lang['WRONG_EMAIL'];
 			}
-			else if (strlen($_POST['rtext']) > 300)
+			if (strlen($_POST['rtext']) > 300)
 			{
 				$ERRORS[]	= $lang['NO_ME300RES'];
 			}
@@ -163,16 +172,6 @@ switch ($_GET['go'])
 					kleeja_info($lang['THNX_REPORTED']);
 					
 			}
-			else
-			{
-				$errs = '';
-				foreach($ERRORS as $r)
-				{
-					$errs .= '- ' . $r . ' <br/>';
-				}			
-	
-				kleeja_err($errs);
-			}
 		}
 		
 		($hook = kleeja_run_hook('report_go_page')) ? eval($hook) : null; //run hook
@@ -192,38 +191,47 @@ switch ($_GET['go'])
 	
 	
 	case "call" : 
-	
+		
+		//page info
+		$stylee	= "call";
+		$titlee	= $lang['CALL'];
+		$action	= "./go.php?go=call";
+		$H_FORM_KEYS = kleeja_add_form_key('call');
+		//no error yet 
+		$ERRORS = false;
+			
 		//_post
 		$t_cname = isset($_POST['cname']) ? htmlspecialchars($_POST['cname']) : ''; 
 		$t_cmail = isset($_POST['cmail']) ? htmlspecialchars($_POST['cmail']) : ''; 
 		$t_ctext = isset($_POST['ctext']) ? htmlspecialchars($_POST['ctext']) : ''; 
 		
-		if (!isset($_POST['submit']))
-		{
-			$stylee	= "call";
-			$titlee	= $lang['CALL'];
-			$action	= "./go.php?go=call";
-			
-			($hook = kleeja_run_hook('no_submit_call_go_page')) ? eval($hook) : null; //run hook
-		}
-		else
+		($hook = kleeja_run_hook('no_submit_call_go_page')) ? eval($hook) : null; //run hook
+		
+		if (isset($_POST['submit']))
 		{
 			//after sumit
-			$ERRORS	=	'';
+			$ERRORS	= array();
+			
 			($hook = kleeja_run_hook('submit_call_go_page')) ? eval($hook) : null; //run hook
+			
+			//check for form key
+			if(!kleeja_check_form_key('call'))
+			{
+				$ERRORS[] = $lang['INVALID_FORM_KEY'];
+			}
 			if(!kleeja_check_captcha())
 			{
 				$ERRORS[] = $lang['WRONG_VERTY_CODE'];
 			}
-			else if (empty($_POST['cname'])  || empty($_POST['ctext']) )
+			if (empty($_POST['cname'])  || empty($_POST['ctext']) )
 			{
 				$ERRORS[]	= $lang['EMPTY_FIELDS'] . ' : ' . (empty($_POST['cname']) ? ' [ ' . $lang['YOURNAME'] . ' ] ' : '')  . (empty($_POST['ctext']) ? '  [ ' . $lang['TEXT']  . ' ] ': '');
 			}
-			else if (!eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$", trim(strtolower($_POST['cmail']))))
+			if (!eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$", trim(strtolower($_POST['cmail']))))
 			{
 				$ERRORS[] = $lang['WRONG_EMAIL'];
 			}
-			else if (strlen($_POST['ctext']) > 300)
+			if (strlen($_POST['ctext']) > 300)
 			{
 				$ERRORS[] = $lang['NO_ME300TEXT'];
 			}
@@ -250,15 +258,6 @@ switch ($_GET['go'])
 					send_mail($config['sitemail2'], $text  . "\n\n\n\n" . 'TIME : ' . date("d-m-Y h:i a", $timee) . ' - IP:' . $ip, $lang['CALL'], $mail, $name);
 					kleeja_info($lang['THNX_CALLED']);
 				}
-			}
-			else
-			{
-				$errs = '';
-				foreach($ERRORS as $r)
-				{
-					$errs .= '- ' . $r . '. <br/>';
-				}				
-				kleeja_err($errs);
 			}
 		}
 		

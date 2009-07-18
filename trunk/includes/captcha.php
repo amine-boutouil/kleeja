@@ -9,6 +9,14 @@
 # $Author: saanina $ , $Rev: 550 $,  $Date:: 2009-07-17 02:48:55 +0300#$
 ##################################################
 
+// start session
+$s_time = 86400; // 2 : two days 
+$s_key = (!empty($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '') . (!empty($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : null);
+$s_sid = 'klj_' . substr('_' . md5($s_key), 0, 8);
+@ini_set('session.use_only_cookies', false);
+//this will help people with some problem with their sessions path
+//session_save_path('./cache/');
+session_name($s_sid);
 session_start();
 
 /*

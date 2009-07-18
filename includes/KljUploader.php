@@ -254,7 +254,16 @@ function process ()
 			}
 			else
 			{
-				$wut = null;	
+				$wut = null;
+				//no uploading yet
+				$_SESSION['NO_UPLOADING_YET'] = true;
+			}
+			
+			//if submit 
+			if($wut)
+			{	
+				//for plugins
+				($hook = kleeja_run_hook('if_wut_kljuploader_w1')) ? eval($hook) : null; //run hook	
 			}
 
 
@@ -266,6 +275,11 @@ function process ()
 					($hook = kleeja_run_hook('wrong_captcha_kljuploader_w1')) ? eval($hook) : null; //run hook	
 					 return $this->errs[] = $lang['WRONG_VERTY_CODE'];
 				}
+			}
+			
+			if($wut && empty($_SESSION['NO_UPLOADING_YET']))
+			{
+				 return $this->errs[] = $lang['NO_REPEATING_UPLOADING'];
 			}
 			
 			// uploading process 
@@ -630,7 +644,7 @@ function process ()
 						
 						$img_link_o = kleeja_get_link('image', $file_info);
 						$img_html_result .= $lang['URL_F_IMG'] . ':<br /><textarea class="img_box all_boxes">' . $img_link_o . '</textarea><br />' 
-							. $lang['URL_F_BBC'] . ':<br /><textarea class="img_bbc_box all_boxes">[url=' . $img_link_o . '][img]' . $thumb_link_o . '[/img][/url]</textarea><br />';
+							. $lang['URL_F_BBC'] . ':<br /><textarea class="img_bbc_box all_boxes">[url=' . $img_link_o . '][img]' . $img_link_o . '[/img][/url]</textarea><br />';
 
 	
 						$img_html_result .= $extra_thmb . $extra_del;
@@ -655,7 +669,7 @@ function process ()
 
 					($hook = kleeja_run_hook('saveit_func_kljuploader')) ? eval($hook) : null; //run hook
 						
-					unset ($filename, $folderee, $sizeee, $typeee);
+					unset ($filename, $folderee, $sizeee, $typeee, $_SESSION['NO_UPLOADING_YET']);
 
 	}#save it
 

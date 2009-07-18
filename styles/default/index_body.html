@@ -34,27 +34,6 @@
 <form name="uploader" id="uploader" action="{action}" method="post"  enctype="multipart/form-data" onsubmit="form_submit();">
 
 
-<div class="tabber">
-
-
-        <div class="tabbertab" title="{lang.DOWNLOAD_F}" id="filetype">
-		<br />
-                <LOOP NAME=FILES_NUM_LOOP>
-					<input class="input_field" type="file" name="file[{{i}}]" id="file[{{i}}]" style="display:{{show}}" size="50" /><br id="br[{{i}}]" style="display:{{show}}" />
-				</LOOP>
-                
-                <div id="upload_forum"></div>
-                <br />
-                <input class="buttons" name="mraupload" onclick="javascript:plus(1);" type="button" value="+" />
-				<input class="buttons" name="mreupload" onclick="javascript:minus(1);" type="button" value="-" />
-				<input class="input_field" type="text" id="upload_num" value="1" size="1" readonly="readonly"/>
-				<br /><br />
-
-             
-                
-                <br />
-
-				
 <!---- star  safe code  ---->				
 <IF NAME="config.safe_code">
 <table class="safe_code" cellpadding="0" cellspacing="0" border="0" width="100%">
@@ -77,9 +56,28 @@
 
 </table>		
 </IF>
-<!---- ## End  safe code  ---->	               
+<!---- ## End  safe code  ---->	      
 
-		
+<div class="tabber">
+
+
+        <div class="tabbertab" title="{lang.DOWNLOAD_F}" id="filetype">
+		<br />
+                <LOOP NAME=FILES_NUM_LOOP>
+					<input class="input_field" type="file" name="file[{{i}}]" id="file[{{i}}]" style="display:{{show}}" size="50" /><br id="br[{{i}}]" style="display:{{show}}" />
+				</LOOP>
+                
+                <div id="upload_forum"></div>
+                <br />
+                <input class="buttons" name="mraupload" onclick="javascript:plus(1);" type="button" value="+" />
+				<input class="buttons" name="mreupload" onclick="javascript:minus(1);" type="button" value="-" />
+				<input class="input_field" type="text" id="upload_num" value="1" size="1" readonly="readonly"/>
+				<br /><br />
+
+             
+                
+                <br />
+
 		   <input id="checkr" type="checkbox" onclick="accept_terms('submitr','checkr');" /> {lang.AGREE_RULES}
 	<br /> 	<br /> 
 		

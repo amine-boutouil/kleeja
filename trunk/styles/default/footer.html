@@ -25,16 +25,21 @@
   </ul>
 </div>
 <!-- ## End links left -->
- 
+
 <div class="Copyrights">{lang.COPYRIGHTS_X} &copy; <a href="{config.siteurl}">{config.sitename}</a></div>
 
-<div class="clr"></div>	  
-
+<div class="clr"></div>	 
+ 
+ <IF NAME="page_stats">
 <div dir="ltr" class="page_stats">{page_stats}</div>
+</IF>
+ 
+<IF NAME="googleanalytics">
+<div class="clr"></div>	
+<div class="googleanalytics">{googleanalytics}</div>
+<div class="clr"></div>		
+</IF>
 
-<div class="clr"></div>	  
-
-<div class="googleanalytics">{googleanalytics}</div>	
 
 <!-- start control panel -->
 <IF NAME="is_admin">

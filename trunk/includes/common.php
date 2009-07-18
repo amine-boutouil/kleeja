@@ -28,12 +28,6 @@
 	// Report all errors, except notices
 	defined('DEV_STAGE') ? @error_reporting(E_ALL) : @error_reporting(E_ALL ^ E_NOTICE);
 	
-	//fix intregation problems
-	if(empty($script_encoding))
-	{
-		define('DISABLE_INTR', true);
-	}
-
 	// start session
 	$s_time = 86400 * 2; // 2 : two days 
 	$s_key = (!empty($_SERVER['REMOTE_ADDR'])) ? strtolower($_SERVER['REMOTE_ADDR']) : ((!empty($_SERVER['SERVER_ADDR'])) ? $_SERVER['SERVER_ADDR'] : @getenv('SERVER_NAME'));
@@ -122,6 +116,11 @@
 		big_error('install folder exists!', '<b>Install</b> folder detected! please delete it OR install <b>Kleeja</b> if you haven\'t done so yet...<br/><br/><a href="'.$root_path.'install">Click to Install</a><br/><br/>');
 	}
 	
+	//fix intregation problems
+	if(empty($script_encoding))
+	{
+		define('DISABLE_INTR', true);
+	}
 	
 	// start classes ..
 	$SQL	= new SSQL($dbserver, $dbuser, $dbpass, $dbname);

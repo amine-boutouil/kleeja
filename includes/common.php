@@ -30,10 +30,9 @@
 	
 	// start session
 	$s_time = 86400 * 2; // 2 : two days 
-	$s_key = (!empty($_SERVER['REMOTE_ADDR'])) ? strtolower($_SERVER['REMOTE_ADDR']) : ((!empty($_SERVER['SERVER_ADDR'])) ? $_SERVER['SERVER_ADDR'] : @getenv('SERVER_NAME'));
-	$s_key .= (!empty($_SERVER['HTTP_USER_AGENT'])) ? strtolower($_SERVER['HTTP_USER_AGENT']) : ((!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : @getenv('SERVER_NAME'));
+	$s_key = (!empty($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '') . (!empty($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : null);
 	$s_sid = 'klj_' . substr('_' . md5($s_key), 0, 8);
-	session_set_cookie_params($s_time);
+	@ini_set('session.use_only_cookies', false);
 	//this will help people with some problem with their sessions path
 	//session_save_path('./cache/');
 	session_name($s_sid);

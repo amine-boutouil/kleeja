@@ -21,14 +21,20 @@
 
 <!-- start form login  -->
 <div id="login">
+    <div class="title_login"><img src="{STYLE_PATH}images/infoo.png" style="vertical-align:middle;">&nbsp;{lang.USER_LOGIN}</div>
+	<br />
     <form action="{action}" method="post">
 		<fieldset>
-			<label for="inputtext1">{lang.USERNAME} :</label>
-			<input class="inputtext1" type="text" name="lname" value="{t_lname}"  />
-			<label for="inputtext2">{lang.PASSWORD} :</label>
-			<input class="inputtext2" type="password" name="lpass" value="{t_lpass}"  />
-			<label for="inputtext1">{lang.REMME} :</label>
-				<select name="remme">
+			<label for="username">{lang.USERNAME} :</label>
+			<input  class="username"  type="text" name="lname" value="{t_lname}"  />
+			<label for="password">{lang.PASSWORD} :</label>
+			<input class="password" type="password" name="lpass" value="{t_lpass}"  />
+			<div class="forget_pass"><a href="{forget_pass_link}"><img src="{STYLE_PATH}images/warning.gif" style="vertical-align:middle;">&nbsp;{lang.LOSS_PASSWORD}</a></div>
+			<div class="clr"></div><br />			
+			<input class="buttons" type="submit" name="submit" value="{lang.LOGIN}" />
+			<br /><br />
+			<label for="remme">{lang.REMME} :</label>
+				<select class="remme" name="remme">
 					<option value="3600">{lang.HOUR}</option>
 					<option value="18000">{lang.5HOURS}</option>
 					<option value="864000">{lang.DAY}</option>
@@ -38,14 +44,15 @@
 				</select>
 			<br />
 			{H_FORM_KEYS}
-			<input class="buttons" type="submit" name="submit" value="{lang.LOGIN}" />
+			
 			<br /><br />
-			<a href="{forget_pass_link}"><img src="{STYLE_PATH}images/forget_pass_link.gif" style="vertical-align:middle;" />&nbsp;&nbsp;{lang.LOSS_PASSWORD}</a></p>
 		</fieldset>
 	</form>
 <br />
 </div>
 <!-- ## End form login  -->
+
+ <div class="clr"></div>
  
 </div>
 <!-- ## End login template  -->        

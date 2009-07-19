@@ -58,7 +58,7 @@ $header_inst = '<!-- Header Start -->
 <title>...Kleeja...</title><style type="text/css">
 * { padding: 0;margin: 0;}
 body {
-background: #ffda8c url(\'img/bg.gif\');
+background: #C8C8C8 url(\'img/body.png\') top center no-repeat fixed;;
 font: 0.74em "Tahoma" Verdana, Arial, sans-serif;line-height: 1.5em;
 margin:0px auto; text-align: center
 }
@@ -71,7 +71,7 @@ select {-moz-border-radius: 8px; border-radius:1px;color: #333333; background-co
 option { padding: 0 1em 0 0;}
 img { border:0px } 
 
-.home { margin: 15px 0;padding: 10px;border-top: 1px solid #D7D7D7; border-right: 1px solid #CCCCCC;border-bottom: 1px solid #CCCCCC;border-left: 1px solid #D7D7D7; background-color: #FFFFFF; position: relative;-moz-border-radius: 8px; border-radius:1px;}
+.home { margin: 15px 0;padding: 10px;border:0px ; position: relative;font: bold 12px tahoma, sans-serif;}
 
 * html fieldset { padding: 0 10px 5px 10px;}
 a {color: #3B6EBF;text-decoration: none;}a:hover {text-decoration: underline;}
@@ -250,7 +250,7 @@ function formCheck(formobj, fieldRequired)
 if ((isset($_GET['step']) && $_GET['step'] != 'language') && (strpos('index.php', $_SERVER['PHP_SELF'])=== false && isset($_GET['step'])))
 {
 	$header_inst .= '<form action="?change_lang" method="post">
-	<img src="img/world.gif" alt="language" style="float:left" /> 
+	<img src="img/world.png" alt="language" style="float:left;margin:5px 10px;" /> 
 	<select name="lang" style="float:left" onchange="submit()">';
 
 	$s_path = "../lang";
@@ -279,7 +279,7 @@ $header_inst .= '
 <br />
 <!-- Header End -->
 <br />
-<fieldset style="margin-left: 10%;margin: 0 auto;width: 724px;border: 1px solid #FCB012;background-color: #fff0d2;position: relative;-moz-border-radius: 8px;border-radius: 1px;">
+<fieldset style="margin-left: 10%;margin: 0 auto;width: 724px;position: relative;-moz-border-radius: 8px;border-radius: 1px;">
 ';
 
 

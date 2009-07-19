@@ -70,11 +70,11 @@ case 'language':
 	echo '<br />		
 	<div class="centery">
 		<fieldset class="home">
-			<img src="img/map.gif" style="border:0" alt="al-Idrisi Map">
+			<img src="img/map.png" style="border:0" alt="al-Idrisi Map">
 			<br />
 			<form  action="' . $_SERVER['PHP_SELF'] . '?step=language&' . getlang(1) . '" method="post">
 				<select name="lang" style="width: 352px">' . $lngfiles . '</select>
-				<br /><input name="submitlang" type="submit" value=" [  Next >>  ] " /><br /><br /><br />
+				<br /><br /><br /><input name="submitlang" type="submit" value=" [  Next >>  ] " /><br /><br /><br />
 			</form>
 		</fieldset>
 	</div>';
@@ -105,10 +105,10 @@ case 'choose' :
 		
 		if($install_or_no)
 		{
-			echo '<a href="./install.php?' . getlang(1) . '"><img src="img/installer.gif" alt="installer" /><br />  ' . $lang['INST_INSTALL_CLEAN_VER'] . ' </a><br /><br />';
+			echo '<a href="./install.php?' . getlang(1) . '"><img src="img/Installer.png" alt="installer" /><br />  ' . $lang['INST_INSTALL_CLEAN_VER'] . ' </a><br /><br />';
 		}
 		
-		echo '<a href="./update.php?' . getlang(1) . '"><img src="img/updater.gif" alt="updater" /> <br /> ' . $lang['INST_UPDATE_P_VER'] . ' </a><br /><br /><br />';
+		echo '<a href="./update.php?' . getlang(1) . '"><img src="img/updater.png" alt="updater" /> <br /> ' . $lang['INST_UPDATE_P_VER'] . ' </a><br /><br /><br />';
 
 		echo '<a href="http://www.kleeja.com"><span style="color:black;">www.kleeja.com</span></a></fieldset>';
 

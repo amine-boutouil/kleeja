@@ -38,7 +38,7 @@ class SSQL
 				initiate the class
 				wirth basic data
 				*/
-                function SSQL($host,$db_username,$db_password,$db_name)
+                function SSQL($host, $db_username, $db_password, $db_name, $new_link=false)
 				{
 					global $script_encoding;
                           $this->host        = $host;
@@ -46,8 +46,8 @@ class SSQL
                           $this->db_name     = $db_name;
                           $this->db_password = 'hidden';
 
-						  
-                        $this->connect_id	= @mysql_connect($this->host,$this->db_username,$db_password) or die($this->error_msg("we can not connect to the server ..."));
+
+                        $this->connect_id	= @mysql_connect($this->host, $this->db_username, $db_password, $new_link) or die($this->error_msg("we can not connect to the server ..."));
 						//version of mysql
 						$this->mysql_version = mysql_get_server_info($this->connect_id);
 						

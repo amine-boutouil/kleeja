@@ -54,7 +54,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire)
 		return;
 	}
 	
-	$SQLMS	= new SSQL($forum_srv, $forum_user, $forum_pass, $forum_db);
+	$SQLMS	= new SSQL($forum_srv, $forum_user, $forum_pass, $forum_db, true);
 	$charset_db = @mysql_client_encoding($SQLMS->connect_id);
 	mysql_query("SET NAMES '" . $charset_db . "'");
 	unset($forum_pass); // We do not need this any longe

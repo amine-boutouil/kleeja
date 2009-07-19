@@ -237,12 +237,12 @@ font: bold 11px tahoma,Verdana, Helvetica, sans-serif;
 #footer .googleanalytics { margin:5px ;padding:10px; text-align:center;}
 
 /*start Option to control panel */
-#adminPan{width: 150px;margin:5px auto;}
-#adminPan ul{float:right;width: 178x;height:45px;}
-#adminPan li{margin-bottom:8px;padding:10px 20px;background:url(../images/adminPan.gif) no-repeat center;
-font-size:12px; font-weight:bold;}
-#adminPan a {color:#000;}
-#adminPan a:hover  {color:#FFFFFF;background-color:transparent;}
+#adminPan{margin:5px 15px 10px 15px;}
+#adminPan ul{float:right;width: 178x;height:45px;margin-bottom:8px;}
+#adminPan li {background:url(../images/adminPan.gif) no-repeat center left;padding:6px 20px;
+font-size:12px; font-weight:bold; border:1px solid #858585;}
+#adminPan a {color:#2B2B2B;}
+#adminPan a:hover  {color:#000;background-color:transparent;}
 /* # footer template */
 
 
@@ -271,14 +271,16 @@ font-size:12px; font-weight:bold;}
 }
 
 /* pagination */
-.pagination {margin: 8px 0px 8px 0px;float:right;}
-.pagination  a{padding:3px 6px;color: #333;}
-.paging {background:#F68618 url(../images/paging.png) repeat-x right top;
-        border: 1px solid #C46B0A;font-size: 10px;text-align:center;}
-.paging:hover {color:#121621;border: 1px solid #FFFF00;
-        background:#EAAF2F url(../images/paging_hover.png) repeat-x right top;}
-.here_page {padding:3px 6px;border: 1px solid #816543; font-size: 10px;color:#121621;
-        background: #A88F70 url(../images/here_page.png) repeat-x right top;text-align:center;}
+.pagination {margin:8px 0;float:right;}
+.pagination  a{padding:3px 9px;color: #2B2B2B;}
+.paging {background:#EAEAEA;	
+		-moz-border-radius-topleft: 10px; 
+		-webkit-border-top-left-radius: 10px;
+		-moz-border-radius-bottomright: 10px; 
+		-webkit-border-bottom-right-radius: 10px;
+        border: 1px solid #2B2B2B;font-size: 10px;text-align:center;}
+.here_page ,.paging:hover{padding:3px 9px;border: 1px solid #2B2B2B; font-size: 10px;color:#2B2B2B;
+        background:#FFBA00;text-align:center;}
 /* ## pagination */
 
 /* ALL buttons */

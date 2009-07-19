@@ -319,13 +319,13 @@ case 'check':
 	echo '<fieldset class="home">';
 	if ($texterr !='')
 	{
-		echo '<br /><img src="img/bad.gif" alt="bad." /> <br />' . $texterr;
+		echo '<br /><img src="img/bad.png" alt="bad." /> <br />' . $texterr;
 		$submit_wh = 'disabled="disabled"';
 	}
 
 	if($submit_wh == '')
 	{
-		echo '<br /><img src="img/good.gif" alt="good" /> <br /><span style="color:green;"><b>[ ' . $lang['INST_GOOD_GO'] . ' ]</b></span><br /><br />';
+		echo '<br /><img src="img/good.png" alt="good" /> <br /><span style="color:green;"><b>[ ' . $lang['INST_GOOD_GO'] . ' ]</b></span><br /><br />';
 	}
 
 	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=data&'.getlang(1) . '">
@@ -499,7 +499,7 @@ case 'data' :
 
 break;
 case 'end' :
-		echo '<fieldset class="home"><img src="img/wink.gif" alt="congratulation" /><br /><br />';
+		echo '<fieldset class="home"><img src="img/wink.png" alt="congratulation" /><br /><br />';
 		echo '<span style="color:blue;">' . $lang['INST_FINISH_SQL'] . '</span><br /><br />';
 		echo '<img src="img/wz.gif" alt="home" />&nbsp;<a href="./wizard.php">' . $lang['WZ_TITLE'] . '</a><br /><br />';
 		echo '<img src="img/home.gif" alt="home" />&nbsp;<a href="../index.php">' . $lang['INDEX'] . '</a><br /><br />';

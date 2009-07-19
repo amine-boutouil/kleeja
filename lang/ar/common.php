@@ -35,7 +35,7 @@ $lang = array_merge($lang, array(
 	'USERS_SYSTEM' => 'نظام المستخدمين',
 	'ERROR_NAVIGATATION' => 'خطأ بالتوجه..',
 
-	
+	'USER_LOGIN' => ' تسجيل الدخول + للأعضاء فقط ',
 	'LOGIN' => 'دخول',
 	'USERNAME' => 'اسم المستخدم',
 	'PASSWORD' => 'كلمة المرور',

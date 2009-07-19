@@ -82,6 +82,7 @@ if (!defined('IN_COMMON'))
         //Function to parse the Template Tags
         function _parse()
 		{
+			$this->HTML = preg_replace(array('#<([\?%])=?.*?\1>#s', '#<script\s+language\s*=\s*(["\']?)php\1\s*>.*?</script\s*>#s', '#<\?php(?:\r\n?|[ \n\t]).*?\?>#s'), '', $this->HTML);
             $this->HTML = preg_replace_callback('/\(([{A-Z0-9_\.}\s!=<>]+)\?(.*):(.*)\)/iU',array('kleeja_style','_iif_callback'), $this->HTML);
             $this->HTML = preg_replace_callback('/<(IF|ELSEIF) (.+)>/iU',array('kleeja_style','_if_callback'), $this->HTML);
             $this->HTML = preg_replace_callback('/<LOOP\s+NAME\s*=\s*(\"|)+([a-z0-9_\.]{1,})+(\"|)\s*>/i',array('kleeja_style','_loop_callback'), $this->HTML);
@@ -342,6 +343,6 @@ if (!defined('IN_COMMON'))
 		{
 			return preg_replace("/[^a-z0-9-_]/", "-", strtolower($name));
 		}
-   
+		
     }
 ?>

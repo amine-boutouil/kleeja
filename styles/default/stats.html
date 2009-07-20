@@ -10,17 +10,19 @@
 
 <!-- start stats template  -->
 <div id="stats">
-<h2><i>{lang.LAST_1_H}</i></h2> 
+<br />
 <div class="stats-x">
 <ul>
 <li>{lang.FILES_ST} : <b>[ {files_st} {lang.FILE} ] </b> .</li>
 <li>{lang.USERS_ST} : <b>[ {users_st} {lang.USER} ] </b> .</li>
+<li><IF NAME="config.user_system==1">{lang.LAST_REG} : <b>[ {lst_reg} ]  </b> .</IF></li>
 <li>{lang.SIZES_ST} : <b>[ {sizes_st} ] </b> .</li>
 <li>{lang.LSTDELST} : <b>{lst_dl_st} </b> .</li>
-<li><IF NAME="config.user_system==1">{lang.LAST_REG} : <b>[ {lst_reg} ]  </b> .</IF></li>
 </ul>
 </div>
-<br />
+<br /><br />
+<h2><i>{lang.LAST_1_H}</i></h2> 
+<br /><br />
 </div>
 <!-- ## End stats template  -->
 

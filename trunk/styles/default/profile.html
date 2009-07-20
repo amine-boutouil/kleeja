@@ -19,16 +19,20 @@
 </IF>
 <!-- # end error msg  -->
 
+<div class="subheader">
+
 <h2>{lang.EDIT_U_DATA}</h2>
 
 	<IF NAME="data_forum">
 		<form action="{action}" method="post">
 		{lang.USERNAME} : {name}<br />
-		{lang.SHOW_MY_FILECP} :
+		<label>{lang.SHOW_MY_FILECP} :</label>
 		<select name="show_my_filecp">
 		<option value="1" <IF NAME="show_my_filecp.show_my_filecp==1">selected="selected"</IF> >{lang.YES}</option>
 		<option value="0" <IF NAME="show_my_filecp.show_my_filecp==0">selected="selected"</IF> >{lang.NO}</option>
 		</select>
+
+
 		<br />
 		<h2>{lang.EMAIL} :</h2>
 		{lang.PASSWORD} :<input type="password" name="pppass_old" value="{t_pppass_old}"  /><br />
@@ -46,6 +50,7 @@
 		<a href="{goto_forum_link}">{lang.PFILE_4_FORUM}</a>
 
 	</IF>
+</div>
 
 </div>
 <!-- ## End Profile template  -->

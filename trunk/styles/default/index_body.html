@@ -100,17 +100,17 @@
         <div class="tabbertab" title="{lang.DOWNLOAD_T}" id="texttype">
 		<br />
 			<LOOP NAME=FILES_NUM_LOOP>
-				<input type="text" name="file[{{i}}]" id="fileu[{{i}}]" size="50" value="{lang.PAST_URL_HERE}" onclick="this.value=''" style="color:silver;display:{{show}}" dir="ltr"><br id="bru[{{i}}]" style="display:{{show}}" />
+				<input class="input_field" type="text" name="file[{{i}}]" id="fileu[{{i}}]" size="50" value="{lang.PAST_URL_HERE}" onclick="this.value=''" style="color:silver;display:{{show}}" dir="ltr"><br id="bru[{{i}}]" style="display:{{show}}" />
 			</LOOP>
                 
                 <br />
                 <div id="upload_f_forum"></div>
-				<input class="input_field" type="text" id="upload_f_num" value="1" size="1" readonly="readonly"/>
+				<input class="input_field" type="text" id="upload_f_num" value="1" size="1" readonly="readonly" style="text-align:center;color:#999"/>
 				<span class="zx"><a name="mraupload" onclick="javascript:plus(2);"><img src="{STYLE_PATH}images/zx.png" style="vertical-align:middle;" /></a></span>
 				<span class="zl"><a name="mreupload" onclick="javascript:minus(2);"><img src="{STYLE_PATH}images/zl.png" style="vertical-align:middle;" /></a></span>
                 <br /><br />
                 <input id="checkr2" type="checkbox" onclick="accept_terms('submittxt','checkr2');" />{lang.AGREE_RULES}
-                <br />
+                <br /> <br />
                 <input class="buttons" type="submit" id="submittxt" name="submittxt" value="{lang.DOWNLOAD_T}"   disabled="disabled" />
                 
         </div>

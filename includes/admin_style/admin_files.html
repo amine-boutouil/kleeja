@@ -1,6 +1,6 @@
 ﻿<!-- start view files temlate  -->
 <div id="divmiddle">
-
+<div class="file_cp1">
 <form method="post" name="filesform" action="{action}" onsubmit="javascript:return confirm_from();">
 
 <fieldset>
@@ -23,7 +23,7 @@
 <IF NAME="no_results">
 ...
 <ELSE>
-<div class="file_cp1">
+
 <table style="text-align:center;">
     <tr style="background-color:#E4E4E4">
         <td><a href="{ord_action}&amp;order_by=real_filename">{lang.FILENAME}</a></td>
@@ -62,10 +62,11 @@
 <!-- end pagination  -->
 
 
-</div>
-<!-- end div border table  -->
+
 
 </fieldset>
 </form>
+</div>
+<!-- end div border table  -->
 </div>
 <!-- end view files temlate  -->

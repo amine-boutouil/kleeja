@@ -270,7 +270,7 @@ input.button1, input.button3,input.button2 {
 #hr-border {	margin:10px 0 10px 0; padding:0;border-top: 1px dotted #60B7DE;}
 
 /* border table */
-#border-table { border: 2px solid #6496C3;padding: 10px; background-color: #fff;	position: relative; -moz-border-radius: 8px; border-radius:1px;}
+#border-table { border: 2px solid #6496C3;padding: 10px; background-color:#DFE3E3;	position: relative; -moz-border-radius: 8px; border-radius:1px;}
 
 /* all tables */
 table {

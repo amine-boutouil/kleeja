@@ -36,13 +36,12 @@ Kleeja {lang.ADMINISTRATORS}
 
 <div id="border-table">
 <table style="text-align:center">
-        <tr style="background-color:#FFF">
+        <tr style="background-color:#E4E4E4">
                 <td>{lang.USERNAME}</td>
                 <td>{lang.EMAIL}</td>
                 <td>{lang.PASSWORD}</td>
                 <td>{lang.IS_ADMIN}</td>
                 <td><a href="javascript:void(0);" onclick="checkAll(document.userform, '_del', 'su');">{lang.DELETE}</a></td>
-                <td>{lang.ADMIN_DELETE_FILES}</td>
                 <!-- admin users info tr extra -->
         </tr>
 <IF NAME="no_results">
@@ -50,22 +49,26 @@ Kleeja {lang.ADMINISTRATORS}
 <ELSE>
 <LOOP NAME="arr">
         <tr id="su[{{id}}]" class="osilver">
-                <td><label><input type="text" name="nm_{{id}}" value="{{name}}" size="20"></label> <a target="_blank" href="ucp.php?go=fileuser&id={{id}}">{lang.BROSWERF}</a></td>
+                <td><label><input type="text" name="nm_{{id}}" value="{{name}}" size="20"></label> <br />
+				<small><a class="category" href="admin.php?cp=users&deleteuserfile={{id}}" onclick="javascript:return confirm_from();">{lang.ADMIN_DELETE_FILES}</a> | <a class="comment" target="_blank" href="ucp.php?go=fileuser&id={{id}}">{lang.BROSWERF}</a></small>
+
+				</td>
                 <td><label><input type="text" name="ml_{{id}}" value="{{mail}}" size="20"></label></td>
                 <td><label><input type="password" name="ps_{{id}}" value="" size="10"></label></td>
                 <td>{{admin}}</td>
                 <td><input type="checkbox"  name="del_{{id}}" value="{{id}}" onclick="change_color(this,'su[{{id}}]');" rel="_del"></td>
-                <td><label><a href="admin.php?cp=users&deleteuserfile={{id}}" onclick="javascript:return confirm_from();">{lang.ADMIN_DELETE_FILES}</a></label></td>
                 <!-- admin users data tr extra -->
         </tr>
 </LOOP>
 </IF>
 </table>
-</div>
-</fieldset>
+
 <fieldset class="quick" style="text-align:center">
 <div style="text-align:center">{page_nums}
                 <input class="button2" name="submit" type="submit" value="{lang.UPDATE_USERS}" />
+</div>
+</fieldset>
+
 </div>
 </fieldset>
 </form>
@@ -79,7 +82,7 @@ Kleeja {lang.ADMINISTRATORS}
 
 <div id="border-table">
 <table style="text-align:center">
-        <tr style="background-color:#FFF">
+        <tr style="background-color:#E4E4E4">
                 <td>{lang.USERNAME}</td>
                 <td>{lang.EMAIL}</td>
                 <td>{lang.PASSWORD}</td>
@@ -91,11 +94,12 @@ Kleeja {lang.ADMINISTRATORS}
                 <td><label><input type="password" name="lpass" value="" size="10"></label></td>
                 <!-- admin users data tr extra -->
 </table>
-</div>
-</fieldset>
+
 <fieldset class="quick" style="text-align:center">
                 <input class="button2" name="newuser" type="submit" value="{lang.SUBMIT}" />
 </fieldset>
+
+</div>
 </form>
 </IF>
 

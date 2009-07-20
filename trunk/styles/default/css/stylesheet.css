@@ -300,8 +300,9 @@ font-size:12px; font-weight:bold; border:1px solid #858585;}
 
 #index_body{background:url(../images/index_body.png) no-repeat left top;}
 
-.safe_code { margin:10px 0;}
-.safe_code  td span{color:#800000;font: bold 12px Tahoma, Helvetica, Arial, sans-serif;	text-align: center;}
+.safe_code { background:#FFFFCC url(../images/saf3_code01.png) no-repeat 25px 8px ;
+margin:5px 0;padding:10px;border:1px solid #FFE600;}
+.safe_code  td span{color:#111;font: bold 12px Tahoma, Helvetica, Arial, sans-serif;	text-align: center;}
 .explain {
 	font-size: 0.90em;
 	font-style: italic;

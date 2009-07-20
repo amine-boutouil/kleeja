@@ -37,7 +37,7 @@
 
 <!---- star  safe code  ---->				
 <IF NAME="config.safe_code">
-<table class="safe_code" cellpadding="0" cellspacing="0" border="0" width="100%">
+<table class="safe_code" cellpadding="0" cellspacing="0" border="0" width="71%">
 	<tr>
 		<td style="width: 38%;">	<br /> 
 		<span>{lang.VERTY_CODE}</span>
@@ -105,11 +105,10 @@
                 
                 <br />
                 <div id="upload_f_forum"></div>
-                <br />
-                <input class="buttons" name="mraupload" onclick="javascript:plus(2);" type="button" value="+" />
-                <input class="buttons" name="mreupload" onclick="javascript:minus(2);" type="button" value="-" />
-				<input class="buttons" type="text" id="upload_f_num" value="1" size="1" readonly="readonly"/>
-                <br />
+				<input class="input_field" type="text" id="upload_f_num" value="1" size="1" readonly="readonly"/>
+				<span class="zx"><a name="mraupload" onclick="javascript:plus(2);"><img src="{STYLE_PATH}images/zx.png" style="vertical-align:middle;" /></a></span>
+				<span class="zl"><a name="mreupload" onclick="javascript:minus(2);"><img src="{STYLE_PATH}images/zl.png" style="vertical-align:middle;" /></a></span>
+                <br /><br />
                 <input id="checkr2" type="checkbox" onclick="accept_terms('submittxt','checkr2');" />{lang.AGREE_RULES}
                 <br />
                 <input class="buttons" type="submit" id="submittxt" name="submittxt" value="{lang.DOWNLOAD_T}"   disabled="disabled" />

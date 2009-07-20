@@ -514,5 +514,7 @@ padding:5px 25px 10px 0;
 }
 /* # errors msg for forms*/
 
-.zx,.zl {width:30px; height:30px;cursor: pointer;margin:2px 5px;}
-.zx img,.zl img {cursor: pointer;padding:4px 5px;}
+.zx,.zl {width:35px; height:30px;cursor: pointer;margin:2px 3px;padding-right:2px;}
+.zx,.zl a{margin:2px 5px;padding:0}
+.zx,.zl img{margin:2px 5px;	padding:0;}
+.zx a:hover ,.zl a:hover{background-color:transparent;padding-right:2px;}

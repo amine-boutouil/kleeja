@@ -72,7 +72,7 @@ select ,option{font: 11px tahoma,verdana,arial,sans-serif; font-weight: normal;
 
 /* middle */
 #divmiddle { 
-    width: 70%; float: left; margin: 0 0 0 5px; padding: 0;}
+    width: 70%; float: left; position:relative;}
 #divmiddle .welcome {
 	padding: 4px 8px 4px 8px; margin: 10px 2px 10px 2px; color:#000;
 	vertical-align: absmiddle;display: inline-block;
@@ -86,18 +86,18 @@ select ,option{font: 11px tahoma,verdana,arial,sans-serif; font-weight: normal;
 				
 /* right  menu */	
 #rightmenu{ 
-	float: right; width: 236px; margin: 5px ; padding: 10px; background: #EFE7B8;
+	float: right; width:25%; margin: 5px ; padding: 10px; background: #EFE7B8;
     border: 4px solid #FEA53D; 
 	position: relative;
         /* rounded corners for firefox .. love u saanina ;) */
 			-moz-border-radius: 8px; border-radius:1px;}
 #rightmenu .body-menu { padding: 0px; text-align: center;}
 #rightmenu .link-menu{ 
-	float: right; height: 60px; width: 113px; padding: 0; margin: 1px ; 
+	float: right; height: 60px; width:48%; padding: 0; margin: 1px ; 
 	border-top: 1px solid #ccc;	border-left: 1px solid #ccc;
 	border-right: 1.5px solid #999;	border-bottom: 1.5px solid #999;
 	background: #E2E1DD url(../images/bg-right-menu.jpg) repeat;}
-#rightmenu  .link-menu-current {	height: 60px; width: 113px;padding:0px;margin:1px;background:#fff;} 
+#rightmenu  .link-menu-current {	height: 60px; width:48%;padding:0px;margin:1px;background:#fff;} 
 #rightmenu .link-menu-current  a {color:#000;}
 #rightmenu .link-menu a { 
 	display: block;	overflow: hidden; font-family:tahoma,verdana,arial,sans-serif;
@@ -270,7 +270,8 @@ input.button1, input.button3,input.button2 {
 #hr-border {	margin:10px 0 10px 0; padding:0;border-top: 1px dotted #60B7DE;}
 
 /* border table */
-#border-table { border: 2px solid #6496C3;padding: 10px; background-color:#FBFFFD;	position: relative; -moz-border-radius: 8px; border-radius:1px;}
+#border-table {border: 2px solid #6496C3;padding: 10px; background-color:#FBFFFD;
+position: relative; -moz-border-radius: 8px; border-radius:1px;}
 
 /* all tables */
 table {
@@ -286,8 +287,7 @@ tr:hover {background-color:#FFFFDD;}
 
 .osilver {background-color:#F5F5F5;}
 
-.file_cp1 { margin: 5px 0; background-color: #B0D2F6; position: relative;
-text-align:center;width:580px; overflow:scroll;}
+.file_cp1 {width:98%; margin: 5px 0; position: relative;text-align:center; overflow:scroll;}
 
 .small_font {padding: 5px;font:bold 10px Tahoma, Arial, Helvetica, sans-serif;color:#0A54C3}
 

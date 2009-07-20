@@ -428,7 +428,7 @@ $lang = array_merge($lang, array(
 	'ADMIN_DELETE_FILE_ERR'	=> 'حدث خطا غير متوقع اثناء محاولة حذف الملفات .. !',
 	'ADMIN_DELETE_NO_FILE'	=> 'لا يوجد أي ملفات في حساب العضوية حتى الآن .. !',
 	'ADMIN_DELETE_FILE_OK'	=> 'تم حذف كافة ملفات العضو',
-	'ADMIN_DELETE_FILES'	=> 'حذف كافة ملفات العضو',
+	'ADMIN_DELETE_FILES'	=> 'حذف كل ملفات العضوية',
 	
 	'KLJ_MORE_PLUGINS'	=> array('قم بالحصول على الكثير من الاضافات من مركز الاضافات في موقع كليجا ,<a target="_blank" href="http://www.kleeja.com/plugins/">إظغط هنا للذهاب لهناك</a> .',
 								'هل أنت مطور ؟ هل قمت بتطوير اضافات لكليجا وتريد عرضها للأخرين أو تريد بيعها في مركز كليجا للاضافات ؟ اذن <a target="_blank" href="http://www.kleeja.com/plugins/">إظغط هنا للذهاب لهناك</a>. ',
@@ -444,7 +444,7 @@ $lang = array_merge($lang, array(
 	'COOKIE_NAME' 				=> 'بادئة السكاكر',
 	'COOKIE_PATH' 				=> 'مسار السكاكر',
 	'COOKIE_SECURE'				=> 'تفعيل السكاكر الآمانة',
-	'BROSWERF'					=> 'استعرض ملفات العضو',
+	'BROSWERF'					=> 'استعراض الملفات',
 	'REMME'						=> 'تذكرني',
 	'HOUR'						=> 'ساعة',
 	'5HOURS'					=> '5 ساعات',

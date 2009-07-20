@@ -10,7 +10,7 @@ body {
 	font: normal 11px Tahoma, Arial, Helvetica, sans-serif; }
 
 /* all root */
-form { margin: 0;	padding: 0; }
+form { margin: 0;padding: 0; }
 h2 {	padding-bottom: 4px; color: #0B55C4; font: bold 18 Tahoma, Arial, Helvetica, sans-serif;	}
 p {margin: 0; padding: 0;}
 li {list-style: none;}
@@ -287,7 +287,7 @@ tr:hover {background-color:#FFFFDD;}
 
 .osilver {background-color:#F5F5F5;}
 
-.file_cp1 {width:98%; margin: 5px 0; position: relative;text-align:center; overflow:scroll;}
+.file_cp1 {width:100%; margin: 5px 0; position: relative;text-align:center; overflow:scroll;}
 
 .small_font {padding: 5px;font:bold 10px Tahoma, Arial, Helvetica, sans-serif;color:#0A54C3}
 

@@ -31,22 +31,12 @@
 	<input type="text" name="cmail" value="{t_cmail}" size="30" />
 	<label>{lang.TEXT} :</label>
 	<textarea name="ctext" cols="5" rows="5">{t_ctext}</textarea>
-	<div class="clr"></div><br />
-		<table class="safe_code" cellpadding="0" cellspacing="0" border="0" width="55%">
-			<tr>
-				<td style="width: 30%;">	<br /> 
-				<span>{lang.VERTY_CODE}</span>
-				<div class="explain">{lang.NOTE_CODE}</div>
-				</td>
-				<td>
-				<br /> 
-				<img id="kleeja_img_captcha" src="{captcha_file_path}" alt="{lang.REFRESH_CAPTCHA}" title="{lang.REFRESH_CAPTCHA}" onclick="javascript:update_kleeja_captcha('{captcha_file_path}', 'kleeja_code_answer');" />
-				<br /> 
-				<input type="text" name="kleeja_code_answer" id="kleeja_code_answer" style="direction:ltr" />
-				</td>
-			</tr>
-		</table>
-
+	<div class="clr"></div>
+	<label>{lang.VERTY_CODE}</label>
+	<img id="kleeja_img_captcha" src="{captcha_file_path}" alt="{lang.REFRESH_CAPTCHA}" title="{lang.REFRESH_CAPTCHA}" onclick="javascript:update_kleeja_captcha('{captcha_file_path}', 'kleeja_code_answer');" />
+	<br /> 
+	<input type="text" name="kleeja_code_answer" id="kleeja_code_answer" style="direction:ltr" />
+	<br /><br /> 
 	<div class="clr"></div>
 	{H_FORM_KEYS}
 	<input class="buttons" type="submit" name="submit" value="{lang.SEND}" />

@@ -6,7 +6,10 @@
 */
 
 /* header logo */
-#header .logo2 { padding-right: 40px; }
+#header .logo2{
+padding-left: 60px;width: 300px;
+	background: url(../images/adminopen.png) no-repeat left center; 
+}
 /* header logo */
 
  /* middle */

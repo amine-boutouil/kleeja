@@ -2,6 +2,7 @@
 <div id="divmiddle">
 
 <form method="post" name="filesform" action="{action}" onsubmit="javascript:return confirm_from();">
+
 <fieldset>
 
 <IF NAME="is_search">
@@ -22,8 +23,9 @@
 <IF NAME="no_results">
 ...
 <ELSE>
-<table style="text-align:center">
-    <tr style="background-color:#FFF">
+<div class="file_cp1">
+<table style="text-align:center;">
+    <tr style="background-color:#DAE8FC">
         <td><a href="{ord_action}&amp;order_by=real_filename">{lang.FILENAME}</a></td>
         <td><a href="{ord_action}&amp;order_by=user">{lang.BY}</a></td>
         <td><a href="{ord_action}&amp;order_by=user_ip">{lang.IP}</a></td>
@@ -51,6 +53,7 @@
 </LOOP>
 </IF>
 </table>
+</div>
 
 </div>
 <!-- end div border table  -->

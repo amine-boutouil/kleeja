@@ -17,7 +17,7 @@
 
 <!-- start admin ext info tr extra -->
 <table style="text-align:center">
-    <tr style="background-color:#FFF">
+    <tr style="background-color:#E4E4E4">
         <td>{lang.EXT}</td>
         <td>{lang.GROUP}</td>
         <td>{lang.SIZE_G}</td>
@@ -32,9 +32,9 @@
     <tr>
         <td><strong>{{name}}</strong></td>
         <td>{{group}}</td>
-        <td><input name="gsz[{{id}}]" type="text" value="{{g_size}}" size="7"/></td>
+        <td><input name="gsz[{{id}}]" type="text" value="{{g_size}}" size="7" style="text-align:center;" /></td>
         <td>{{g_allow}}</td>
-        <td><input name="usz[{{id}}]" type="text" value="{{u_size}}" size="7"/></td>
+        <td><input name="usz[{{id}}]" type="text" value="{{u_size}}" size="7" style="text-align:center;" /></td>
         <td>{{u_allow}}</td>     
     </tr>
 </LOOP>
@@ -42,11 +42,7 @@
 </table>
  <!-- end admin ext data tr extra -->
  
-</div>
-<!-- end div border table  -->
-</fieldset>
-
-<!-- start pagination  -->
+ <!-- start pagination  -->
 <div>
 <b>{arr_paging}</b>
 <fieldset class="quick" style="text-align:center"><input class="button2" name="submit" type="submit" value="{lang.UPDATE_EXTS}" /></fieldset>
@@ -64,13 +60,16 @@
 <!-- start dot  -->
 <p class="dot" />
 <!-- end dot  -->
-
+ 
+</div>
+<!-- end div border table  -->
+</fieldset>
 </form>
 
 </div>
 <!-- end Exts temlate  -->
 
-<!-- end add Exts  -->
+<!-- start add Exts  -->
 <div id="divmiddle">
 <form method="post" action="{action_new_ext}">
 
@@ -100,19 +99,19 @@
 </table>
 <!-- end table no hover  -->
 
-</div>
-<!-- end div border table  -->
-</fieldset>
-
 <!-- start button  -->
 <fieldset class="quick" style="text-align:center">
 	<input class="button2" name="submit_new_ext" type="submit" value="{lang.SUBMIT}" />
 </fieldset>
 <!-- end  button  -->
 
-</form>
-<script type="text/javascript" src="includes/admin_style/byte.js"></script>
+</div>
+<!-- end div border table  -->
+</fieldset>
 
+</form>
+
+<script type="text/javascript" src="includes/admin_style/byte.js"></script>
 
 <!-- start dot  -->
 <p class="dot" />

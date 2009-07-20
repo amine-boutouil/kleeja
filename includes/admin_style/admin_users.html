@@ -49,12 +49,12 @@ Kleeja {lang.ADMINISTRATORS}
 <ELSE>
 <LOOP NAME="arr">
         <tr id="su[{{id}}]" class="osilver">
-                <td><label><input type="text" name="nm_{{id}}" value="{{name}}" size="20"></label> <br />
-				<small><a class="category" href="admin.php?cp=users&deleteuserfile={{id}}" onclick="javascript:return confirm_from();">{lang.ADMIN_DELETE_FILES}</a> | <a class="comment" target="_blank" href="ucp.php?go=fileuser&id={{id}}">{lang.BROSWERF}</a></small>
+                <td><label><input type="text" name="nm_{{id}}" value="{{name}}" size="32"></label> <br />
+				<small><a href="admin.php?cp=users&deleteuserfile={{id}}" onclick="javascript:return confirm_from();">{lang.ADMIN_DELETE_FILES}</a> | <a target="_blank" href="ucp.php?go=fileuser&id={{id}}">{lang.BROSWERF}</a></small>
 
 				</td>
-                <td><label><input type="text" name="ml_{{id}}" value="{{mail}}" size="20"></label></td>
-                <td><label><input type="password" name="ps_{{id}}" value="" size="10"></label></td>
+                <td><label><input type="text" name="ml_{{id}}" value="{{mail}}" size="20" style="direction:ltr"></label></td>
+                <td><label><input type="password" name="ps_{{id}}" value="" size="10" style="text-align:center;"></label></td>
                 <td>{{admin}}</td>
                 <td><input type="checkbox"  name="del_{{id}}" value="{{id}}" onclick="change_color(this,'su[{{id}}]');" rel="_del"></td>
                 <!-- admin users data tr extra -->

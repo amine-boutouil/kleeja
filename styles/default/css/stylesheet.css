@@ -170,7 +170,7 @@ img.right {float: right;	margin-left:15px;}
 
 /* stats template */
 #stats{background:url(../images/Stats.png) no-repeat top left;}
-#stats .stats-x {margin:6px 15px;padding: 10px 0 0 10px;text-transform:uppercase;font-size:17px;font-weight:700;}
+#stats .stats-x {margin:6px 15px;padding: 10px 0 0 10px;text-transform:uppercase;font-size:14px;font-weight:700;}
 #stats .stats-x ul {list-style: square;}
 #stats .stats-x ul li b{color: #222;}
 /* #  stats template */
@@ -198,6 +198,30 @@ font: bold 11px tahoma,Verdana, Helvetica, sans-serif;
 
 }
 
+#usercp {background:url(../images/bg_usercp.png) repeat-x bottom right;padding:10px;border:1px solid #B5B5B5;}
+#usercp  .imguser{background:url(../images/imguser.png) no-repeat top right;width:50%}
+#usercp  .imguser b{padding-right:80px;}
+#usercp .daaf{background:#EAEAEA;padding:10px;border:1px solid #777;width:50%;
+		-moz-border-radius-topleft: 10px; 
+		-webkit-border-top-left-radius: 10px;
+		-moz-border-radius-topright: 10px; 
+		-webkit-border-top-right-radius: 10px;
+}
+#usercp .uname{ color:#F67900;padding-right:80px;padding-left:10px;padding-top:10px;
+  font: bold 22px tahoma,Verdana, Helvetica, sans-serif;text-shadow: 0px 1px rgb(247, 247, 247);}
+ #usercp  .copylink{  font: bold 12px tahoma,Verdana, Helvetica, sans-serif;color:#006CD8;}
+.input_link { 
+	background: #FFFFFF url(../css/images/input_bg.gif) repeat-x;
+	border: 1px solid #B3B9C4;
+	font-family: tahoma, Helvetica,  sans-serif;
+	font-size: 12px;
+	padding: 5px;
+	color: #222;
+}
+.input_link:focus, .input_link:hover {
+	border: 1px solid #444;
+	background: #FFFFA6;
+}
 
 
 /* extras  footer template */
@@ -213,12 +237,12 @@ font: bold 11px tahoma,Verdana, Helvetica, sans-serif;
 /* Copyrights */
 #footer .Copyrights {float:right;padding:6px;color:#666;}
 /* footr stats */
-#footer .page_stats { margin-top:15px;text-align:center}
+#footer .page_stats { margin:15px 0 0 5px;float:left;color:#999;}
 /* googleanalytics */
 #footer .googleanalytics { margin:5px ;padding:10px; text-align:center;}
 
 /*start Option to control panel */
-#adminPan{margin:5px 15px 10px 15px;}
+#adminPan{margin:25px}
 #adminPan ul{float:right;width: 178x;height:45px;margin-bottom:8px;}
 #adminPan li {background:url(../images/adminPan.gif) no-repeat center left;padding:6px 20px;
 font-size:12px; font-weight:bold; border:1px solid #858585;}
@@ -288,7 +312,7 @@ font-size:12px; font-weight:bold; border:1px solid #858585;}
 #login  .password{background:#fff url(../images/password.gif) no-repeat 1px 2px;}
 #login  .forget_pass  { background:#E0E0E0;float:left;margin:5px 0 0 10px; color:#C03C2D;}
 #login  .forget_pass a:hover {color:#FF2020;background-color:transparent;}	
-#login  .remme{background: #FFBA00;color: #000000;border: 1px solid #999;font: normal 9px Tahoma, Helvetica, Arial, sans-serif;}
+#login  .remme{background:#FFBA00;color: #000000;border: 1px solid #999;font: normal 9px Tahoma, Helvetica, Arial, sans-serif;}
 #login .remme option{background: #FFBA00;color: #000000;}
 /* # form login*/
 
@@ -300,7 +324,7 @@ font-size:12px; font-weight:bold; border:1px solid #858585;}
 
 #index_body{background:url(../images/index_body.png) no-repeat left top;}
 
-.safe_code { background:#FFFFCC url(../images/saf3_code01.png) no-repeat 25px 8px ;
+.safe_code { background:#FFE6E6 url(../images/saf3_code01.png) no-repeat 25px 8px ;
 margin:5px 0;padding:10px;border:1px solid #FFE600;}
 .safe_code  td span{color:#111;font: bold 12px Tahoma, Helvetica, Arial, sans-serif;	text-align: center;}
 .explain {
@@ -435,8 +459,8 @@ width:50%;
 
 #guide .visitor { 
 background: #767676;
-font: bold 13px tahoma, sans-serif;
-color:#fff;
+font: bold 12px tahoma, sans-serif;
+color:#eee;
 text-align: center;	
 padding: 5px
 }
@@ -467,9 +491,9 @@ margin:5px 0;
 }
 
 #guide .users { 
-background:#CF6600;
-font: bold 13px tahoma, sans-serif;
-color:#fff;
+background:url(../images/bar_bg.gif) repeat-x bottom right;
+font: bold 12px tahoma, sans-serif;
+color:#111;
 text-align: center;	
 padding: 5px;
 }
@@ -481,18 +505,6 @@ padding:5px 25px 10px 0;
 }
 
 
-.input_link { 
-	background: #FFFFFF url(../css/images/input_bg.gif) repeat-x;
-	border: 1px solid #B3B9C4;
-	font-family: tahoma, Helvetica,  sans-serif;
-	font-size: 12px;
-	padding: 5px;
-	color: #222;
-}
-.input_link:focus, .input_link:hover {
-	border: 1px solid #20B4E2;
-	background: #DEF0F8;
-}
 
 
 /*errors msg for forms*/
@@ -519,3 +531,22 @@ padding:5px 25px 10px 0;
 .zx,.zl a{margin:2px 5px;padding:0}
 .zx,.zl img{margin:2px 5px;	padding:0;}
 .zx a:hover ,.zl a:hover{background-color:transparent;padding-right:2px;}
+
+.subheader {
+		padding: 15px;
+		background: #F1F8ED;
+		color: #444;
+		border: 2px solid #D1EAC3;
+}
+.subheader h2{
+		background:#D1EAC3;
+		padding:4px 6px;
+		margin:9px 5px;
+		font: bold 12px tahoma, sans-serif;
+		color: #444;
+		border: 1px solid #fff;
+}
+.subheader select,.subheader option{
+background:#CBFFAE;color: #000000;border: 1px solid #999;font: normal 9px Tahoma, Helvetica, Arial, sans-serif;
+
+}

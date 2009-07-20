@@ -61,62 +61,9 @@
 <p class="dot" />
 <!-- end dot  -->
  
-</div>
-<!-- end div border table  -->
-</fieldset>
-</form>
 
-</div>
-<!-- end Exts temlate  -->
-
-<!-- start add Exts  -->
-<div id="divmiddle">
-<form method="post" action="{action_new_ext}">
-
-<fieldset>
-
-<!-- title  -->
-<b>{lang.ADD_NEW_EXT} :</b>
-<!-- title  -->
-
-<!-- border line Vertical  -->
-<hr id="hr-border" />
-<!-- border line Vertical  -->
-
-<!-- start div border table  -->
-<div id="border-table">
-
-<!-- start table no hover  -->
-<table class="tab-no-hover">
-	<tr style="background-color:#FFF">
-		<td>{lang.ADD_NEW_EXT_EXP}</td>
-	</tr>
-	<tr>
-		<td>
-		<input name="new_ext" type="text" value="" style="direction:ltr" />{gr_exts_arr}
-		</td>
-	</tr>
-</table>
-<!-- end table no hover  -->
-
-<!-- start button  -->
-<fieldset class="quick" style="text-align:center">
-	<input class="button2" name="submit_new_ext" type="submit" value="{lang.SUBMIT}" />
-</fieldset>
-<!-- end  button  -->
-
-</div>
-<!-- end div border table  -->
-</fieldset>
-
-</form>
 
 <script type="text/javascript" src="includes/admin_style/byte.js"></script>
-
-<!-- start dot  -->
-<p class="dot" />
-<!-- end dot  -->
-</div>
 <script type="text/javascript">
 /* This script and many more are available free online at
 The JavaScript Source :: http://javascript.internet.com
@@ -150,11 +97,13 @@ function convertgb(f)
   f.mb.value=Math.round(f.gb.value*1024*100000)/100000
 }
 </script>
-<div id="divmiddle">
-<form>
 
 
-<fieldset>
+
+<!-- border line Vertical  -->
+<hr id="hr-border" />
+<!-- border line Vertical  -->
+
 
 <!-- title  -->
 <b>{lang.BCONVERTER} :</b>
@@ -164,19 +113,16 @@ function convertgb(f)
 <hr id="hr-border" />
 <!-- border line Vertical  -->
 
-<!-- start div border table  -->
-<div id="border-table">
-
 <!-- start table no hover  -->
-<table class="tab-no-hover" cellpadding="3" cellspacing="3">
-<tr style="background-color:#FFF"> 
+<table cellpadding="3" cellspacing="3">
+<tr style="background-color:#E4E4E4"> 
 <td align="center">Byte</td>
 <td align="center">Kilobyte</td>
 <td align="center">Megabyte</td>
 <td align="center">Gigabyte</td>
 </tr>
-<tr style="background-color:#FFF"> 
 
+<tr style="background-color:#FFF"> 
 <td align="center"> 
 <input type="text" size="10" name="byte" value="0"></td>
 <td align="center"><input type="text" size="10" name="kb" value="0"></td>
@@ -196,14 +142,57 @@ function convertgb(f)
 </table>
 <!-- end table no hover  -->
 
-
+</div>
 <!-- end div border table  -->
 </fieldset>
-
-<!-- Start Calc  -->
-
 </form>
-<!-- End Calc  -->
 
 </div>
 <!-- end Exts temlate  -->
+
+
+
+<!-- start add Exts  -->
+<div id="divmiddle">
+<form method="post" action="{action_new_ext}">
+
+<fieldset>
+
+<!-- title  -->
+<b>{lang.ADD_NEW_EXT} :</b>
+<!-- title  -->
+
+<!-- border line Vertical  -->
+<hr id="hr-border" />
+<!-- border line Vertical  -->
+
+<!-- start div border table  -->
+<div id="border-table">
+
+<!-- start table no hover  -->
+<table class="tab-no-hover">
+	<tr style="background-color:#E4E4E4">
+		<td>{lang.ADD_NEW_EXT_EXP}</td>
+	</tr>
+	<tr>
+		<td>
+		<input name="new_ext" type="text" value="" style="direction:ltr" />{gr_exts_arr}
+		</td>
+	</tr>
+</table>
+<!-- end table no hover  -->
+
+<!-- start button  -->
+<fieldset class="quick" style="text-align:center">
+	<input class="button2" name="submit_new_ext" type="submit" value="{lang.SUBMIT}" />
+</fieldset>
+<!-- end  button  -->
+
+</div>
+<!-- end div border table  -->
+</fieldset>
+
+</form>
+
+</div>
+

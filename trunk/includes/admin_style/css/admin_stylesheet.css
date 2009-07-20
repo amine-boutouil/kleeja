@@ -289,6 +289,6 @@ tr:hover {background-color:#FFFFDD;}
 .file_cp1 { margin: 5px 0; background-color: #B0D2F6; position: relative;
 text-align:center;width:600px; overflow: scroll;}
 
-.small_font {padding: 5px;font:bold 11px Tahoma, Arial, Helvetica, sans-serif;color:#0A54C3}
+.small_font {padding: 5px;font:bold 10px Tahoma, Arial, Helvetica, sans-serif;color:#0A54C3}
 
 #dot {margin: 0;	padding:3px;background: url(../images/dot.gif) repeat-x;}

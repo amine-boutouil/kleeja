@@ -326,7 +326,7 @@ font-size:12px; font-weight:bold; border:1px solid #858585;}
 
 #index_body{background:url(../images/index_body.png) no-repeat left top;}
 
-.safe_code {	border: 2px solid #D1EAC3;background:#F1F8ED url(../images/saf3_code01.png) no-repeat 25px 8px ;
+.safe_code {	border: 2px solid #EADBC3;background:#F8F4ED url(../images/saf3_code01.png) no-repeat 25px 8px ;
 margin:5px 0;padding:10px;}
 .safe_code  td span{color:#444;font: bold 12px Tahoma, Helvetica, Arial, sans-serif;	text-align: center;}
 .explain {

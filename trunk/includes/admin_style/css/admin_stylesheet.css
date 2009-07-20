@@ -6,7 +6,7 @@
 * {padding: 0; margin: 0;} 
 
 body {
-	background: #FFFFFF url(images/adm-body.jpg) repeat-x ;	color: #3D3D3D; margin: 0 ;	padding: 0;
+	background: #FFFFFF url(../images/adm-body.jpg) repeat-x ;	color: #3D3D3D; margin: 0 ;	padding: 0;
 	font: normal 11px Tahoma, Arial, Helvetica, sans-serif; }
 
 /* all root */
@@ -40,7 +40,7 @@ select ,option{	font: 11px tahoma,verdana,arial,sans-serif; font-weight: normal;
 #divheader { width: 94%; margin: 20px auto 0px auto ; padding: 10px;
     border-top: 1px solid #D7D7D7; border-right: 1px solid #CCCCCC;
     border-bottom: 1px solid #CCCCCC; border-left: 1px solid #D7D7D7;
-	background: #F3F3F3 url(images/div-header.jpg) repeat-x; 
+	background: #F3F3F3 url(../images/div-header.jpg) repeat-x; 
 	/* Generation CSS3 Only  Firefox and Safari :(  Tar3q   */
 		-moz-border-radius-topleft: 10px; 
 		-webkit-border-top-left-radius: 10px;
@@ -50,7 +50,7 @@ select ,option{	font: 11px tahoma,verdana,arial,sans-serif; font-weight: normal;
 #header .logo1 { float:left; width: 370px; padding: 8px 0 0 0; margin:0; }
 #header .logo2{
 	float:right; width: 270px; padding: 30px 10px 0 5px; margin:0; 
-	background: url(images/adminopen.gif) no-repeat right ; padding-right: 60px;
+	background: url(../images/adminopen.gif) no-repeat right ; padding-right: 60px;
 	display: inline-block;
 	color: #000000; font: bold 20px Tahoma, Arial, Helvetica, sans-serif;}
 /* header */
@@ -61,7 +61,7 @@ select ,option{	font: 11px tahoma,verdana,arial,sans-serif; font-weight: normal;
 	margin: 5px auto 5px auto; 	width: 94%;  padding: 10px;
     border-top: 1px solid #D7D7D7; border-right: 1px solid #CCCCCC;
     border-bottom: 1px solid #CCCCCC; border-left: 1px solid #D7D7D7;
- 	background: #FFFFFF url(images/div-body.jpg) repeat-x;  position: relative;
+ 	background: #FFFFFF url(../images/div-body.jpg) repeat-x;  position: relative;
         /* Generation CSS3 Only Firefox and Safari :(  Tar3q   */
 		-moz-border-radius-topright: 10px;
 		-webkit-border-top-right-radius: 10px;
@@ -80,7 +80,7 @@ select ,option{	font: 11px tahoma,verdana,arial,sans-serif; font-weight: normal;
 #divmiddle .title {
 	width: 94%; font: bold 14px tahoma,verdana,arial,sans-serif; letter-spacing: -1px;
 	color:#FE7C00; margin: 2px 2px 5px 2px; padding: 4px 25px 4px 8px;
-	background: url(images/Note.gif) no-repeat right;}
+	background: url(../images/Note.gif) no-repeat right;}
 /* middle */	
 
 				
@@ -96,7 +96,7 @@ select ,option{	font: 11px tahoma,verdana,arial,sans-serif; font-weight: normal;
 	float: right; height: 60px; width: 113px; padding: 0; margin: 1px ; 
 	border-top: 1px solid #ccc;	border-left: 1px solid #ccc;
 	border-right: 1.5px solid #999;	border-bottom: 1.5px solid #999;
-	background: #E2E1DD url(images/bg-right-menu.jpg) repeat;}
+	background: #E2E1DD url(../images/bg-right-menu.jpg) repeat;}
 #rightmenu  .link-menu-current {	height: 60px; width: 113px;padding:0px;margin:1px;background:#FFF;border: #FD6812 1px solid;} 
 #rightmenu .link-menu-current  a {color:#000;}
 #rightmenu .link-menu a { 
@@ -112,11 +112,11 @@ select ,option{	font: 11px tahoma,verdana,arial,sans-serif; font-weight: normal;
 .button1 ,.button2 {
     cursor: pointer; vertical-align: middle; padding: 3px 4px 3px 4px;  margin: 5px 5px 2px 0px;
     font: normal 12px Tahoma, Helvetica, Arial, sans-serif; color: #444;
-    background: #549CBF url(images/login/btn.gif) repeat left top;
+    background: #549CBF url(../images/login/btn.gif) repeat left top;
   	border: 1px solid #BCBCBC;}
 .button1:hover ,.button2:hover{ 
 	border: 1px solid #aaa; color: #fff;
-	background: #BCBCBC url(images/login/hoverblue.gif) repeat left top;}
+	background: #BCBCBC url(../images/login/hoverblue.gif) repeat left top;}
 /*  buttons */
 
 
@@ -126,14 +126,14 @@ fieldset.quick, p.quick {  margin: 0 0 5px; padding: 5px 0 0; border: none; back
 input.button1, input.button3,input.button2 {
 	width: auto !important; padding: 3px 4px 3px 4px; color: #000; cursor: pointer;
 	font: normal 12px Tahoma, Helvetica, Arial, sans-serif;
-	background: #549CBF url(images/login/btn.gif) repeat left top;}
+	background: #549CBF url(../images/login/btn.gif) repeat left top;}
 .clr { clear: both; overflow:hidden; height: 0;}
-.dot {margin: 0;	padding: 3px 0;	background: url(images/dot.gif) repeat-x;}
+.dot {margin: 0;	padding: 3px 0;	background: url(../images/dot.gif) repeat-x;}
 .exts {	margin: 0;	padding: 5px;font: bold 11px Tahoma, Helvetica, Arial, sans-serif; color: #0B55C4; }
 .s_box {	width: 150px; margin:2 px; border-style:solid; border-width:1px;
 	font-family:tahoma,verdana,arial,sans-serif; padding:2px 4px 4px 4px;
 	text-align:center; color:#484848; border-color:#F8F834; font-weight: bold;
-	background: #FFFFF3 url(images/i2.gif) no-repeat top right;}
+	background: #FFFFF3 url(../images/i2.gif) no-repeat top right;}
 .s_box_tpls{margin:2 px; border:1px solid #4186C5; color:#484848;
 	padding:2px 4px 2px 4px; background-color:#FFFCF9;}
 .s_box_tpls_d{margin:2 px; text-align:center;
@@ -200,7 +200,7 @@ input.button1, input.button3,input.button2 {
 	list-style: none; padding: 15px 8px 15px 8px; border-top: 3px solid #FEA53D; 
 	border-bottom: 3px solid #FEA53D; background-color: #EFE7B8}
 #system-message div.info  ul li { 
-	color:000; background: url(images/info.png) no-repeat right top ;padding-right: 35px; }
+	color:000; background: url(../images/info.png) no-repeat right top ;padding-right: 35px; }
 /* System Messages  #info*/
 
 /* System Messages  #error*/
@@ -208,15 +208,15 @@ input.button1, input.button3,input.button2 {
 	list-style: none; padding: 15px 8px 15px 8px; background-color: #E6C0C0; 
 	border-top: 3px solid #DE7A7B; border-bottom: 3px solid #DE7A7B;}
 #system-message div.error ul li{ 
-	color: #c00; background: url(images/error.png) no-repeat right top ; padding-right: 35px; }
+	color: #c00; background: url(../images/error.png) no-repeat right top ; padding-right: 35px; }
 /* System Messages  #error*/
 	
 	
-/* view images */
+/* view ../images */
 .bg_img {
     text-align:center; width:112px; height:112px; padding: 20px 0; cursor: pointer;
-    background-image: url('images/bg_img.gif');	background-repeat: no-repeat;}
-/* view images */
+    background-image: url('../images/bg_img.gif');	background-repeat: no-repeat;}
+/* view ../images */
 
 
 /*  toolTipBox */	

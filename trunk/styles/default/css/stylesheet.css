@@ -169,8 +169,8 @@ img.right {float: right;	margin-left:15px;}
 .wait{color:#666;font-size: 30px;font-weight:700;margin:30px 30px;padding:5px 20px;}
 
 /* stats template */
-#stats{background:url(../images/Stats.png) no-repeat left top;}
-#stats .stats-x {margin:6px 15px;padding: 5px 0 0 5px;text-transform:uppercase;font-size:12px;font-weight: bold;}
+#stats{background:url(../images/Stats.png) no-repeat top left;}
+#stats .stats-x {margin:6px 15px;padding: 10px 0 0 10px;text-transform:uppercase;font-size:17px;font-weight:700;}
 #stats .stats-x ul {list-style: square;}
 #stats .stats-x ul li b{color: #222;}
 /* #  stats template */
@@ -479,6 +479,21 @@ color:#005900;
 padding:5px 25px 10px 0;
 }
 
+
+.input_link { 
+	background: #FFFFFF url(../css/images/input_bg.gif) repeat-x;
+	border: 1px solid #B3B9C4;
+	font-family: tahoma, Helvetica,  sans-serif;
+	font-size: 12px;
+	padding: 5px;
+	color: #222;
+}
+.input_link:focus, .input_link:hover {
+	border: 1px solid #20B4E2;
+	background: #DEF0F8;
+}
+
+
 /*errors msg for forms*/
 .error_f, .info_f {
 	padding: 1em;
@@ -498,3 +513,6 @@ padding:5px 25px 10px 0;
 	border: 1px solid #3DB2D0;
 }
 /* # errors msg for forms*/
+
+.zx,.zl {width:30px; height:30px;cursor: pointer;margin:2px 5px;}
+.zx img,.zl img {cursor: pointer;padding:4px 5px;}

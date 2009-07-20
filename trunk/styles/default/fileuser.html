@@ -5,42 +5,60 @@
 <div id="title-x"><b><a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}</b></div>
 <!--  # End  site name and title  -->
 
-<div class="clr"></div><div class="line"></div><div class="clr"></div>
+<div class="clr"></div>
+<div class="line"></div>
+<div class="clr"></div>
+
+<table id="filecp" cellpadding="5" cellspacing="4" border="0" style="width:100%">
+	<tr>
+		<td>    
+			<IF NAME="user_name">
+				<h2>{lang.PUBLIC_USER_FILES} : {user_name}</h2>
+			</IF>
+		</td>
+		<td style="text-align:center">
+			<IF NAME="filecp_link">
+				<div class="daaf">{lang.COPY_AND_GET_DUD} <br /><br />
+				
+
+	<input readonly="readonly" class="input_link" onclick="javascript:highlight(this);" type="text" style="width: 340px" name="option1" value="{your_fileuser}" size="20" dir="ltr" /></td>
 
 
-        <IF NAME="user_name">
-        <h2>{lang.PUBLIC_USER_FILES} : {user_name}</h2>
-        </IF>
+				
+						</div>
+					</IF>
+				</td>
+			</tr>
+</table>
 
-        <table style="width:100%">
-                <tr class="row1"><td>#</td><td>{lang.FILENAME}</td><td>{lang.FILETYPE}</td></tr>
+<div class="clr"></div><br />
+
+
+<table id="filecp" cellpadding="5" cellspacing="4" border="0" style="width:100%">
+                <tr><td>{lang.FILENAME}</td><td style="text-align:center">{lang.FILETYPE}</td><td style="text-align:center">#</td></tr>
         <IF NAME="no_results">
-        <tr class="row2">
+        <tr>
         <td colspan="3">...</td>
         </tr>
         <ELSE>
         <LOOP NAME="arr">
-       	 <tr class="row2">
-           <td><img src="{{icon_link}}" alt="{{file_type}}" /></td>
-          	<td>{{name}}</td>
-            <td>{{file_type}}</td>
+       	 <tr>
+           	<td>{{name}}</td>
+            <td style="text-align:center">{{file_type}}</td>
+			<td style="text-align:center"><img src="{{icon_link}}" alt="{{file_type}}" /></td>
           </tr>
         </LOOP>
         </IF>
         </table>
-
-        <div style="text-align:center"><b>{page_nums}</b></div>
-
-        <br />
-        <IF NAME="filecp_link">
-        <a href="{filecp_link}" title="{lang.GO_FILECP}">{lang.GO_FILECP}</a>
-        <br />
-        <br />
-        <div class="daaf">
-        {lang.COPY_AND_GET_DUD} : <br />
-        {your_fileuser}
-        </div>
-        </IF>
+		
+		
+	<div class="clr"></div><br />
+		<div style="text-align:center"><b>{page_nums}</b>
+		<span style="float:left" class="pagination">
+			<a class="paging" href="{filecp_link}" title="{lang.GO_FILECP}">{lang.GO_FILECP}</a>
+		</span></div>
+	<div class="clr"></div><br />
+        
         
 </div>
         

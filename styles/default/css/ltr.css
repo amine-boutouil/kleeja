@@ -16,12 +16,10 @@ img.right {
 .line {
         background-position:left top;
 }
+h2 {font-size: 22px; font-weight: bold; color:#BE1111; text-shadow: 0px 1px rgb(247, 247, 247);margin: 5px 0}
 
 /** LOGO */
-#logobody .logo {
-        padding: 10px 10px 10px 40px;
-}
-
+#logobody .logo {width: 340px;height: 97px;float: left;}
 
 /**  start The main menu at the top **/
 #top_menu {
@@ -34,19 +32,20 @@ img.right {
 }
 #top_menu  ul.m3nu li a {
         float: right;
-        padding: 8px 0 0 15px;
+        padding: 8px 15px;
 }
 #top_menu  ul.m3nu li a:hover {
         background-position: top right;
 }
 #top_menu  ul.m3nu li a.current{
         background-position: top right;
-        padding:5px 0 0 15px;
+        padding:5px 15px;
 }
 
 
 /** # End The main menu at the top **/  
 
+#index_body{background-position:right top;}
 
 
 #right_menu{
@@ -166,3 +165,41 @@ left:80px;
 
 .page_stats{float:right;}
 
+
+/* footer template */
+#footerlinksleft ul{float:right;}
+#footerlinksleft li{float:right}
+
+/* Copyrights */
+#footer .Copyrights {float:left;}
+/* footr stats */
+#footer .page_stats { float:left;}
+/* googleanalytics */
+#footer .googleanalytics {text-align:left;}
+/*start Option to control panel */
+
+#adminPan{margin:5px 25px 5px 10px;width:94%;height:45px;float:left;}
+#adminPan ul{float:left;margin-bottom:8px;padding:10px}
+/* # footer template */
+
+.safe_code {margin:5px 0;padding:10px; background-position: top right; }
+.safe_code  td span{text-align: center;}
+
+caption, th, td {
+	text-align: left;
+}
+
+option {padding-left: 1em;}
+
+/* pagination */
+.pagination {margin:8px 0;float:left;}
+
+#stats{
+        background-position: top right;  
+}
+
+
+#usercp  .imguser{background-position: top left;}
+#usercp  .imguser b{padding-left:80px;}
+#usercp .uname{padding-left:80px;padding-right:10px;}
+#usercp  .copylink{padding:4px 40px;}

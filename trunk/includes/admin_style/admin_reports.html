@@ -3,7 +3,7 @@ function show_msg (te , id)
 {
 var te = document.getElementById(te).value;
 var iee = te;
-        iee += "<br /><form method='post' action='{action}'><textarea name='v_" + id + "' cols='50' rows='4'></textarea>";
+        iee += "<br /><br /><form method='post' action='{action}'><textarea name='v_" + id + "' cols='50' rows='4'></textarea>";
         iee += "<input class='button2' name='reply_submit' type='submit' value='{lang.REPLY}' /></form>";        
 document.getElementById('mail_here').innerHTML = iee;
 
@@ -41,7 +41,7 @@ document.getElementById('mail_here').innerHTML = iee;
 <div id="border-table">
 
 <table style="text-align:center">
-    <tr style="background-color:#FFF">
+    <tr style="background-color:#E4E4E4">
         <td>{lang.NAME}</td>
         <td>{lang.URL}</td>
         <td>{lang.TIME}</td>
@@ -68,10 +68,9 @@ document.getElementById('mail_here').innerHTML = iee;
 </IF>
 </table>
 
-</div>
-<!-- end div border table  -->
-
-</fieldset>
+<!--  pagination  -->
+<div style="text-align:center"><b>{page_nums}</b></div>
+<!--  pagination  -->
 
 <!--  button  -->
 <fieldset class="quick" style="text-align:center">
@@ -79,11 +78,11 @@ document.getElementById('mail_here').innerHTML = iee;
 </fieldset>
 <!--  button  -->
 
-</form>
+</div>
+<!-- end div border table  -->
 
-<!--  pagination  -->
-<div style="text-align:center"><b>{page_nums}</b></div>
-<!--  pagination  -->
+</fieldset>
+</form>
 
 </div>
 <!-- end view reborts  -->

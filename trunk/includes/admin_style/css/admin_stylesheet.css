@@ -147,7 +147,7 @@ input.button1, input.button3,input.button2 {
 .tab-no-hover {
 	border-collapse: collapse; margin: 0px;	width:100%; padding: 5px; }
 .tab-no-hover tr { 	
-	height: 24px; background-color: #FFF;}
+	height: 24px; background-color:#DFE3E3}
 .tab-no-hover td {	
 	padding: 3px 5px 3px 5px; border: 0;}
 .tab-no-hover tr:hover {

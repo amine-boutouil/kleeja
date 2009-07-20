@@ -25,32 +25,39 @@
 
 	<IF NAME="data_forum">
 		<form action="{action}" method="post">
-		{lang.USERNAME} : {name}<br />
+		{lang.USERNAME} : {name}
+		<div class="clr"></div><br />
 		<label>{lang.SHOW_MY_FILECP} :</label>
 		<select name="show_my_filecp">
 		<option value="1" <IF NAME="show_my_filecp.show_my_filecp==1">selected="selected"</IF> >{lang.YES}</option>
 		<option value="0" <IF NAME="show_my_filecp.show_my_filecp==0">selected="selected"</IF> >{lang.NO}</option>
 		</select>
 
-
 		<br />
 		<h2>{lang.EMAIL} :</h2>
-		{lang.PASSWORD} :<input type="password" name="pppass_old" value="{t_pppass_old}"  /><br />
-		{lang.EMAIL} :<input type="text" name="pmail" value="{mail}"  /><br />
+		
+		{lang.PASSWORD} : <input type="password" name="pppass_old" value="{t_pppass_old}"  />
+		<div class="clr"></div><br />
+		{lang.EMAIL} : <input type="text" name="pmail" value="{mail}"  />
+		<br />
 		<br />
 		<h2>{lang.PASS_ON_CHANGE} :</h2>
-		{lang.OLD} :<input type="password" name="ppass_old" value="{t_ppass_old}"  /><br />
-		{lang.NEW} :<input type="password" name="ppass_new" value="{t_ppass_new}"  /><br />
-		{lang.NEW_AGAIN} :<input type="password" name="ppass_new2" value="{t_ppass_new2}"  /><br />
+		{lang.OLD} : <input type="password" name="ppass_old" value="{t_ppass_old}"  />
+		<div class="clr"></div><br />
+		{lang.NEW} : <input type="password" name="ppass_new" value="{t_ppass_new}"  />
+		<div class="clr"></div><br />
+		{lang.NEW_AGAIN} : <input type="password" name="ppass_new2" value="{t_ppass_new2}"  />
+		<br />
 		<br />
 		{H_FORM_KEYS}
 		<input type="submit" name="submit_data" value="{lang.EDIT_U_DATA}" />
 		</form>
 	<ELSE>
-		<a href="{goto_forum_link}">{lang.PFILE_4_FORUM}</a>
+	 <div class="clr"></div><br />
+	<a href="{goto_forum_link}">{lang.PFILE_4_FORUM}</a>
 
 	</IF>
 </div>
-
+	 <div class="clr"></div><br /><br />
 </div>
 <!-- ## End Profile template  -->

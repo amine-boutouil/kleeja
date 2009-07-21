@@ -1,4 +1,5 @@
-﻿<!-- start Profile template  -->
+﻿
+<!-- start Profile template  -->
 <div id="content">
 
 <div class="clr"></div>
@@ -7,8 +8,23 @@
 <div id="title-x"><b><a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}</b></div>
 <!--  # End  site name and title  -->
 
-<div class="clr"></div><div class="line"></div><div class="clr"></div>
+<!-- start line top  -->
+<div class="clr"></div>
+<div class="line"></div>
+<div class="clr"></div>
+<!-- # End line top  -->
 
+<br />
+
+<!-- start box  -->
+<div class="box">
+   <div class="box_top"><div></div></div>
+      <div class="box_content">
+			<div class="box_body">
+
+			
+<div class="clr"></div>		
+	
 <!-- start error msg  -->
 <IF NAME="ERRORS">
 	<div class="error_f">
@@ -19,37 +35,47 @@
 </IF>
 <!-- # end error msg  -->
 
-<div class="subheader">
+<!-- start box profile  -->
+<div id="profile">
 
-<h2>{lang.EDIT_U_DATA}</h2>
-
-	<IF NAME="data_forum">
-		<form action="{action}" method="post">
-		{lang.USERNAME} : {name}
-		<div class="clr"></div><br />
-		<label>{lang.SHOW_MY_FILECP} :</label>
-		<select name="show_my_filecp">
-		<option value="1" <IF NAME="show_my_filecp.show_my_filecp==1">selected="selected"</IF> >{lang.YES}</option>
-		<option value="0" <IF NAME="show_my_filecp.show_my_filecp==0">selected="selected"</IF> >{lang.NO}</option>
-		</select>
-
-		<br />
-		<h2>{lang.EMAIL} :</h2>
+<IF NAME="data_forum">
+<form action="{action}" method="post">
+	
+<div id="userdata">
+	<div class="userdata">
+		<h2 class="tit">{lang.EDIT_U_DATA} :</h2>
+			<p class="qoute">{lang.USERNAME} :</p>
+			<p class="biguser">{name}</p>
+			<p class="qoute">{lang.SHOW_MY_FILECP} :</p>
+			<select name="show_my_filecp">
+				<option value="1" <IF NAME="show_my_filecp.show_my_filecp==1">selected="selected"</IF> >{lang.YES}</option>
+				<option value="0" <IF NAME="show_my_filecp.show_my_filecp==0">selected="selected"</IF> >{lang.NO}</option>
+			</select>
 		
-		{lang.PASSWORD} : <input type="password" name="pppass_old" value="{t_pppass_old}"  />
-		<div class="clr"></div><br />
-		{lang.EMAIL} : <input type="text" name="pmail" value="{mail}"  />
-		<br />
-		<br />
-		<h2>{lang.PASS_ON_CHANGE} :</h2>
-		{lang.OLD} : <input type="password" name="ppass_old" value="{t_ppass_old}"  />
-		<div class="clr"></div><br />
-		{lang.NEW} : <input type="password" name="ppass_new" value="{t_ppass_new}"  />
-		<div class="clr"></div><br />
-		{lang.NEW_AGAIN} : <input type="password" name="ppass_new2" value="{t_ppass_new2}"  />
-		<br />
-		<br />
-		{H_FORM_KEYS}
+        </div>
+		
+        <div class="userdata">
+			<h2 class="tit">{lang.EMAIL} :</h2>
+            <p class="qoute">{lang.PASSWORD} : </p>
+				<input type="password" name="pppass_old" value="{t_pppass_old}"  />
+            <p class="qoute">{lang.EMAIL} :</p>
+				<input type="text" name="pmail" value="{mail}"  />
+        </div>
+	
+		<div class="userdata">
+			<h2 class="tit">{lang.PASS_ON_CHANGE} :</h2>
+			<p class="qoute">{lang.OLD} :</p>
+				<input type="password" name="ppass_old" value="{t_ppass_old}"  />
+			<p class="qoute">{lang.NEW} : </p>
+				<input type="password" name="ppass_new" value="{t_ppass_new}"  />
+			<p class="qoute">{lang.NEW_AGAIN} :</p>
+				<input type="password" name="ppass_new2" value="{t_ppass_new2}"  />	 
+			<p>{H_FORM_KEYS}</p>		
+		</div>
+	</div>	
+
+ <div class="clr"></div><br />
+	
 		<input type="submit" name="submit_data" value="{lang.EDIT_U_DATA}" />
 		</form>
 	<ELSE>
@@ -58,6 +84,15 @@
 
 	</IF>
 </div>
-	 <div class="clr"></div><br /><br />
+<!-- # End box profile  -->
+
+
+
+</div></div><div class="clr"></div></div>
+<div class="box_bottom"><div></div></div>
+<!-- # End box  -->
+ 
+<div class="clr"></div><br /><br />
+   
 </div>
 <!-- ## End Profile template  -->

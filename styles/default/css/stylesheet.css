@@ -229,7 +229,7 @@ font: bold 11px tahoma,Verdana, Helvetica, sans-serif;
 .input_field { 
 	background: #FFFFFF url(../images/input_bg.gif) repeat-x;
 	border: 1px solid #B3B9C4;
-	color: #000000;
+	color: #000;
 }
 
 
@@ -325,8 +325,8 @@ font-size:12px; font-weight:bold; border:1px solid #858585;}
 #login  .password{background:#fff url(../images/password.gif) no-repeat 1px 2px;}
 #login  .forget_pass  { background:#E0E0E0;float:left;margin:5px 0 0 10px; color:#C03C2D;}
 #login  .forget_pass a:hover {color:#FF2020;background-color:transparent;}	
-#login  .remme{background:#FFBA00;color: #000000;border: 1px solid #999;font: normal 9px Tahoma, Helvetica, Arial, sans-serif;}
-#login .remme option{background: #FFBA00;color: #000000;}
+#login  .remme{background:#FFBA00;color: #000;border: 1px solid #999;font: normal 9px Tahoma, Helvetica, Arial, sans-serif;}
+#login .remme option{background: #FFBA00;color: #000;}
 /* # form login*/
 
 /* captcha stuff*/
@@ -531,27 +531,85 @@ padding:5px 25px 10px 0;
 }
 /* # errors msg for forms*/
 
-.zx,.zl {width:35px; height:30px;cursor: pointer;margin:2px 3px;padding-right:2px;}
-.zx,.zl a{margin:2px 5px;padding:0}
-.zx,.zl img{margin:2px 5px;	padding:0;}
-.zx a:hover ,.zl a:hover{background-color:transparent;padding-right:2px;}
+.zx,.zl {
+width:35px;
+height:30px;
+cursor:pointer;
+margin:2px 3px;
+padding-right:2px;
+}
+.zx,.zl a{
+margin:2px 5px;
+padding:0
+}
+.zx,.zl img{
+margin:2px 5px;
+padding:0
+}
+.zx a:hover ,.zl a:hover{
+background-color:transparent;
+padding-right:2px;
+}
 
 
-
-#profile {padding:5px 15px;color: #444;}
+/*  profile.html */
+#profile {
+padding:5px 15px;
+color: #444;
+}
 #profile select,#profile option{
-background:#CBFFAE;color: #000000;border: 1px solid #999;
-font: bold 12px Tahoma, Helvetica, Arial, sans-serif;}
-#userdata {height:226px;	padding:10px;}
-#userdata .userdata {float:right;width:182px;height:200px;
-	border:1px solid #D6D6D6;
-	margin:0 10px;}
-#userdata p  {padding:3px;text-align:center;}
-#userdata .tit{background:url(../images/bar_bg.gif) repeat-x bottom right;
-		padding:5px;margin:1px;font: bold 12px tahoma, sans-serif;
-		color: #444;text-align:center;}
-#userdata p.bq {	background:url(../images/quote.gif) no-repeat;
-	color:#111;line-height:26px;padding:0 5px;}
-#userdata .in{color:#111;line-height:26px;padding:2px 5px;margin-right:12px;}
-#userdata p.biguser {color:#D61B1B;line-height:30px;padding:5px;
-font: bold 18px tahoma, sans-serif;text-align:center;margin:4px 0;}
+background:#FED300;
+color: #000;
+font: bold 12px Tahoma, Helvetica, Arial, sans-serif;
+}
+#userdata {
+height:226px;
+padding:10px;
+}
+#userdata .userdata {
+float:right;
+width:182px;
+height:200px;
+border:1px solid #D6D6D6;
+margin:0 10px;
+}
+#userdata p  {
+padding:3px;
+text-align:center;
+}
+#userdata .tit{
+background:url(../images/bar_bg.gif) repeat-x bottom right;
+padding:5px;
+margin:1px;
+font: bold 12px tahoma, sans-serif;
+color: #444;
+text-align:center;
+}
+#userdata p.bq {
+background:url(../images/quote.gif) no-repeat;
+color:#111;
+line-height:26px;
+padding:0 5px;
+}
+#userdata .in{
+color:#111;
+line-height:26px;
+padding:2px 5px;
+margin-right:12px;
+}
+#userdata p.biguser {
+color:#D61B1B;
+line-height:30px;
+padding:5px;
+margin:4px 0;
+font: bold 18px tahoma, sans-serif;
+text-align:center;
+}
+#userdata .buttons_center {
+line-height:40px;
+padding:5px;
+text-align:center;
+margin:6px auto;
+}
+/* # profile.html */
+

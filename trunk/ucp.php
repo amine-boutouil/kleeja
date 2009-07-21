@@ -116,7 +116,7 @@ switch ($_GET['go'])
 						$errorpage = true;
 						($hook = kleeja_run_hook('login_data_no_error')) ? eval($hook) : null; //run hook
 						$text	= $lang['LOGIN_SUCCESFUL'] . ' <br /> <a href="' . $config['siteurl'] . '">' . $lang['HOME'] . '</a>';
-						kleeja_info($text);
+						kleeja_info($text, '', true, 'index.php');
 					}
 			}
 			
@@ -494,7 +494,7 @@ switch ($_GET['go'])
 		if (isset($_POST['submit_files']))
 		{
 			//show msg
-			redirect($action, true, true);
+			kleeja_info($lang['FILES_DELETED'], '', true, $action);
 		}
 				
 		break;

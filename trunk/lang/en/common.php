@@ -472,7 +472,8 @@ $lang = array_merge($lang, array(
 	'CHOSE_F'					=> 'فضلا قم بإختيار ملف واحد على الاقل',
 	'NO_REPEATING_UPLOADING'	=> 'لايجب تحديث الصفحة بعد رفع الملفات !.',
 	'NOTE_CODE' 				=> 'ادخل الأحرف الموجود في الصورة بالشكل الصحيح مرتبة بشكل دقيق.',
-	'USER_LOGIN'				 => ' تسجيل الدخول + للأعضاء فقط ',
+	'USER_LOGIN'				=> ' تسجيل الدخول + للأعضاء فقط ',
+	'FILES_DELETED' 			=> 'تم حذف الملفات المحدده بنجاح !',
 	//last line of this file ...					 
 	'S_TRANSLATED_BY' => 'Translated By <a href="http://www.fenix4web.com/">Fenix4Web</a>',
 ));

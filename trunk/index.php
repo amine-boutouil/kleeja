@@ -154,10 +154,7 @@
 			$stat_most_user_online_ever = $allnumbers;
 			$stat_last_muoe				= time();
 			
-			if (!$SQL->build(array('UPDATE'	=> "{$dbprefix}stats",'SET'	=> "most_user_online_ever='" . intval($allnumbers) . "',last_muoe='" . time() . "'")))
-			{
-				big_error('Error',$lang['CANT_UPDATE_SQL']);
-			}
+			$SQL->build(array('UPDATE'	=> "{$dbprefix}stats",'SET'	=> "most_user_online_ever='" . intval($allnumbers) . "',last_muoe='" . time() . "'"));
 			
 			delete_cache('data_stats');
 		}

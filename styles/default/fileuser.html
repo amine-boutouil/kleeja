@@ -39,14 +39,13 @@
 
 <div class="clr"></div><br />
 
-
 <div class="usercp">
 
 <table id="filecp" cellpadding="5" cellspacing="4" border="0" style="width:100%">
     <tr>
-		<td>{lang.FILENAME}</td>
-		<td style="text-align:center">{lang.FILETYPE}</td>
 		<td style="text-align:center">#</td>
+		<td style="text-align:center">{lang.FILETYPE}</td>
+		<td>{lang.FILENAME}</td>
 	</tr>
     <IF NAME="no_results">
     <tr>
@@ -55,9 +54,9 @@
     <ELSE>
 		<LOOP NAME="arr">
     <tr>
-        <td>{{name}}</td>
-        <td style="text-align:center">{{file_type}}</td>
-		<td style="text-align:center"><img src="{{icon_link}}" alt="{{file_type}}" /></td>
+        <td style="text-align:center"><img src="{{icon_link}}" alt="{{file_type}}" /></td>
+		<td style="text-align:center">{{file_type}}</td>
+		<td>{{name}}</td>
     </tr>
     </LOOP>
     </IF>
@@ -78,7 +77,6 @@
 
 </div>
 <!-- # End  box  pro  -->
-
  
 <div class="clr"></div><br />
    

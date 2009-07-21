@@ -537,17 +537,18 @@ padding:5px 25px 10px 0;
 
 .subheader {
 		padding: 15px;
-		background: #F1F8ED;
+		background: #F2F2F2;
 		color: #444;
-		border: 2px solid #D1EAC3;
+		border: 2px solid #FFFFD3;
 }
 .subheader h2{
-		background:#D1EAC3;
-		padding:4px 6px;
+		background:#C1C3C0;
+		padding:5px 9px;
 		margin:9px 5px;
 		font: bold 12px tahoma, sans-serif;
 		color: #444;
 		border: 1px solid #fff;
+		width:50%;
 }
 .subheader select,.subheader option{
 background:#CBFFAE;color: #000000;border: 1px solid #999;font: normal 9px Tahoma, Helvetica, Arial, sans-serif;

@@ -355,7 +355,9 @@ switch ($_GET['go'])
 		{
 			kleeja_info($lang['STATS_CLOSED'], $lang['STATS_CLOSED']);
 		}
-
+		
+		$most_online = $stat_most_user_online_ever; 
+		$on_muoe	 = gmdate("d-m-Y H:a", $stat_last_muoe);
 		//ok .. go on
 		$titlee		= $lang['STATS'];
 		$stylee		= "stats";

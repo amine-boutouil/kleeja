@@ -63,14 +63,6 @@ img.right {float: right;	margin-left:15px;}
 #title-x a {color:#D86800;}
 #title-x a:hover {color: #000;background:transparent;}
 
-/* connection template */
-#connection{background:url(../images/messages.png) no-repeat left top;}
-#connection .call form {margin:10px; padding: 0;}
-#connection .call label {display:block;font-weight:bold;margin:5px 0;}
-#connection .call input {padding: 2px;border:1px solid #999;font: bold 12px tahoma, Verdana, sans-serif;color:#666;}
-#connection .call textarea {width:300px;padding:2px;font: bold 12px tahoma, Verdana, sans-serif;border:1px solid #999;
-	height:100px;display:block;color:#666;}
-/*# connection template */
 	
 /* pagination */
 .pagination {margin: 8px 0px 8px 0px;float:right;}
@@ -264,29 +256,15 @@ font-size:12px; font-weight:bold; border:1px solid #858585;}
 /* # footer template */
 
 
-.call form {
-	margin:10px; padding: 0;
-}
-.call label {
-	display:block;
-	font-weight:bold;
-	margin:5px 0;
-}
-.call input {
-	padding: 2px;
-	border:1px solid #999;
-	font: bold 12px tahoma, Verdana, sans-serif;
-	color:#666;
-}
-.call textarea {
-	width:300px;
-	padding:2px;
-	font: bold 12px tahoma, Verdana, sans-serif;
-	border:1px solid #999;
-	height:100px;
-	display:block;
-	color:#666;
-}
+/* connection template */
+#connection{background:url(../images/messages.png) no-repeat left top;}
+#connection .call form {margin:10px; padding: 0;}
+#connection .call label {display:block;font-weight:bold;margin:5px 0;}
+#connection .call input {padding: 2px;border:1px solid #999;font: bold 12px tahoma, Verdana, sans-serif;color:#666;}
+#connection .call textarea {width:300px;padding:2px;font: bold 12px tahoma, Verdana, sans-serif;border:1px solid #999;
+	height:100px;display:block;color:#666;}
+/*# connection template */
+
 
 /* pagination */
 .pagination {margin:8px 0;float:right;}
@@ -553,28 +531,25 @@ padding-right:2px;
 
 
 /*  profile.html */
-#profile {
-padding:5px 15px;
+#profile,#userdata  {
+padding:10px;
 color: #444;
+margin:1px auto;
 }
 #profile select,#profile option{
 background:#FED300;
 color: #000;
 font: bold 12px Tahoma, Helvetica, Arial, sans-serif;
 }
-#userdata {
-height:226px;
-padding:10px;
-}
 #userdata .userdata {
 float:right;
-width:182px;
+width:30%;
 height:200px;
 border:1px solid #D6D6D6;
-margin:0 10px;
+margin:0 5px;
 }
 #userdata p  {
-padding:3px;
+padding:2px;
 text-align:center;
 }
 #userdata .tit{
@@ -586,11 +561,11 @@ color: #444;
 text-align:center;
 }
 #userdata p.bq {
-background:url(../images/quote.gif) no-repeat;
 color:#111;
 line-height:26px;
 padding:0 5px;
 }
+
 #userdata .in{
 color:#111;
 line-height:26px;
@@ -601,7 +576,6 @@ margin-right:12px;
 color:#D61B1B;
 line-height:30px;
 padding:5px;
-margin:4px 0;
 font: bold 18px tahoma, sans-serif;
 text-align:center;
 }

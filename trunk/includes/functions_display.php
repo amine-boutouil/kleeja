@@ -204,7 +204,7 @@ function Saafooter($outscript=false)
 					title : <title>title of page</title>
 					exit : stop script after showing msg 
 */
-function kleeja_info($msg,$title='', $exit=true)
+function kleeja_info($msg,$title='', $exit=true, $redirect=false)
 {
 	global $text, $tpl;
 	
@@ -218,7 +218,13 @@ function kleeja_info($msg,$title='', $exit=true)
 	echo $tpl->display('info');
 	//footer
 	Saafooter();
-				
+	
+	//redirect
+	if($redirect)
+	{
+        echo '<meta http-equiv="refresh" content="2;url=' . $redirect . '" />'; 
+	}
+	
 	if ($exit)
 	{
 		exit();
@@ -231,7 +237,7 @@ function kleeja_info($msg,$title='', $exit=true)
 					title : <title>title of page</title>
 					exit : stop script after showing msg 
 */
-function kleeja_err($msg, $title='', $exit=true)
+function kleeja_err($msg, $title='', $exit=true, $redirect=false)
 {
 	global $text, $tpl, $SQL;
 	
@@ -245,6 +251,12 @@ function kleeja_err($msg, $title='', $exit=true)
 	echo $tpl->display('err');
 	//footer
 	Saafooter();
+
+	//redirect
+	if($redirect)
+	{
+        echo '<meta http-equiv="refresh" content="2;url=' . $redirect . '" />'; 
+	}
 
 	if ($exit)
 	{

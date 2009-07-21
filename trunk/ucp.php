@@ -569,7 +569,7 @@ switch ($_GET['go'])
 						($hook = kleeja_run_hook('qr_update_data_in_profile')) ? eval($hook) : null; //run hook
 						
 						$SQL->build($update_query);
-						kleeja_info($lang['DATA_CHANGED_O_LO']);
+						kleeja_info($lang['DATA_CHANGED_O_LO'], '', true, $action);
 				}
 
 		}#else submit

@@ -542,11 +542,11 @@ switch ($_GET['go'])
 					$ERRORS[] = $lang['INVALID_FORM_KEY'];
 				}
 				if(!empty($_POST['ppass_new'])  && (($_POST['ppass_new'] !=  $_POST['ppass_new2']) 
-						||  empty($_POST['ppass_old']) || (!$usrcp->data($usrcp->name(), $_POST['ppass_old']))))
+						||  empty($_POST['ppass_old']) || (!$usrcp->data($usrcp->name(), $_POST['ppass_old'], false, 900))))
 				{
 					$ERRORS[] = $lang['PASS_O_PASS2'];
 				}
-				if (!empty($_POST['pppass_old'])  && (!eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$", trim($_POST['pmail'])) || empty($_POST['pmail']) || (!$usrcp->data($usrcp->name(), $_POST['pppass_old']))))
+				if (!empty($_POST['pppass_old'])  && (!eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$", trim($_POST['pmail'])) || empty($_POST['pmail']) || (!$usrcp->data($usrcp->name(), $_POST['pppass_old'], false, 900))))
 				{
 					$ERRORS[] = $lang['WRONG_EMAIL'];
 				}

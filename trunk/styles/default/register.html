@@ -7,8 +7,14 @@
 <div id="title-x"><b><a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}</b></div>
 <!--  # End  site name and title  -->
 
-<div class="clr"></div><div class="line"></div><div class="clr"></div>
+<!-- start line top  -->
+<div class="clr"></div>
+<div class="line"></div>
+<div class="clr"></div>
+<!-- # End line top  -->
 
+<!-- start box  pro  -->
+<div id="propox">
 <!-- start error msg  -->
 <IF NAME="ERRORS">
 	<div class="error_f">
@@ -32,7 +38,7 @@
             </tr>
             <tr>
                 <td class="row1">{lang.EMAIL} :</td>
-                <td class="row2"> <input type="text" name="lmail" value="{t_lmail}"  /></td>
+                <td class="row2"> <input type="text" name="lmail" value="{t_lmail}" style="direction:ltr" /></td>
              </tr>
             <tr>
                 <td class="row1">{lang.VERTY_CODE}</td>
@@ -45,12 +51,16 @@
             <tr>
                 <td colspan="2" style="text-align:center">
 					{H_FORM_KEYS}
-					<input type="submit" name="submit" value="{lang.REGISTER}" /><
-				/td>
+					<input class="buttons" type="submit" name="submit" value="{lang.REGISTER}" /></td>
             </tr>
         </table>
 </form>
 <!-- ## End form register  -->
 
+</div>
+<!-- # End  box  pro  -->
+ 
+<div class="clr"></div><br />
+   
 </div>
 <!-- ## End register template  --> 

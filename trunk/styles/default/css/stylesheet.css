@@ -176,20 +176,14 @@ dont remove it  start
 div#loadbox {padding: 10px;display: none;}
 
 
-
-.row1, td.row1 , tr.row1 , b.row1{ 
- width: 25%;
+.row1, td.row1 , tr.row1 , b.row1{ width: 25%;}
+.row2, td.row2, tr.row2 , b.row2{width: 55%;}
+.row1, td.row1 , tr.row1 , b.row1,.row2, td.row2, tr.row2 , b.row2{ 
  color: #333;
   font: bold 11px tahoma,Verdana, Helvetica, sans-serif;
   padding: 5px;
 }
-.row2, td.row2, tr.row2 , b.row2{ 
-    width: 50%;
-	color: #333;
-	padding: 5px;
-font: bold 11px tahoma,Verdana, Helvetica, sans-serif;
 
-}
 
 #usercp {padding:10px;}
 #usercp  .imguser{background:url(../images/imguser.png) no-repeat top right;width:50%}
@@ -202,7 +196,7 @@ font: bold 11px tahoma,Verdana, Helvetica, sans-serif;
 }
 #usercp .uname{color:#006CD8;padding-right:80px;padding-left:10px;padding-top:10px;
   font: bold 22px tahoma,Verdana, Helvetica, sans-serif;text-shadow: 0px 1px rgb(247, 247, 247);}
-#usercp  .copylink{background:#F4EDF8;font: bold 11px tahoma,Verdana, Helvetica, sans-serif;color:#D1165A;padding:4px 40px;}
+#usercp  .copylink{background:#EDF0F8;font: bold 11px tahoma,Verdana, Helvetica, sans-serif;color:#1A6AF8;padding:4px 40px;}
 
 .usercp {background:#F8F4ED;padding:10px;border:1px solid #FFECCD}
  

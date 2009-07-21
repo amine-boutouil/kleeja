@@ -438,7 +438,8 @@ $lang = array_merge($lang, array(
 	'MUST_LOGIN'			=> 'You must login with correct username and password .',
 	
 	'COPYRIGHTS_X'			=> 'جميع الحقوق محفوظة',
-	'ADMIN_DELETE_FILE_ERR'	=> 'User have no files or there is error occurred while trying to delete user files . ',
+	'ADMIN_DELETE_FILE_ERR'	=> 'There is error occurred while trying to delete user files . ',
+	'ADMIN_DELETE_NO_FILE'	=> 'لا يوجد أي ملفات في حساب العضوية حتى الآن .. !',
 	'ADMIN_DELETE_FILE_OK'	=> 'Done ! ',
 	'ADMIN_DELETE_FILES'	=> 'Delete all user files',
 	
@@ -470,7 +471,8 @@ $lang = array_merge($lang, array(
 	'REFRESH_CAPTCHA'			=> 'اظغط لتحديث الصوره بواحده جديده',
 	'CHOSE_F'					=> 'فضلا قم بإختيار ملف واحد على الاقل',
 	'NO_REPEATING_UPLOADING'	=> 'لايجب تحديث الصفحة بعد رفع الملفات !.',
-	
+	'NOTE_CODE' 				=> 'ادخل الأحرف الموجود في الصورة بالشكل الصحيح مرتبة بشكل دقيق.',
+	'USER_LOGIN'				 => ' تسجيل الدخول + للأعضاء فقط ',
 	//last line of this file ...					 
 	'S_TRANSLATED_BY' => 'Translated By <a href="http://www.fenix4web.com/">Fenix4Web</a>',
 ));

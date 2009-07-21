@@ -54,6 +54,11 @@
 				$sizes += $row['size'];
 			}
 			
+			if($num == 0)
+			{
+				kleeja_admin_err($lang['ADMIN_DELETE_NO_FILE']);
+			}
+			
 			if($sizes)
 			{
 				//update number of stats

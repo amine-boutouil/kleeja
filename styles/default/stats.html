@@ -1,4 +1,5 @@
-﻿<div id="content">
+﻿<!-- start stats template  -->
+<div id="content">
 
 <div class="clr"></div>
 
@@ -6,26 +7,35 @@
 <div id="title-x"><b><a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}</b></div>
 <!--  # End  site name and title  -->
 
-<div class="clr"></div><div class="line"></div><div class="clr"></div>
+<!-- start line top  -->
+<div class="clr"></div>
+<div class="line"></div>
+<div class="clr"></div>
+<!-- # End line top  -->
 
-<!-- start stats template  -->
+<!-- start box  pro  -->
+<div id="propox">
+
+<!-- start stats  -->
 <div id="stats">
-<br />
-<div class="stats-x">
 <ul>
-<li>{lang.FILES_ST} : <b>[ {files_st} {lang.FILE} ] </b> .</li>
-<li>{lang.USERS_ST} : <b>[ {users_st} {lang.USER} ] </b> .</li>
-<li><IF NAME="config.user_system==1">{lang.LAST_REG} : <b>[ {lst_reg} ]  </b> .</IF></li>
-<li>{lang.SIZES_ST} : <b>[ {sizes_st} ] </b> .</li>
-<li>{lang.LSTDELST} : <b>{lst_dl_st} </b> .</li>
+<li>{lang.FILES_ST} : <b>[ {files_st} {lang.FILE} ] </b></li>
+<li>{lang.USERS_ST} : <b>[ {users_st} {lang.USER} ] </b></li>
+<li><IF NAME="config.user_system==1">{lang.LAST_REG} : <b>[ {lst_reg} ]  </b></IF></li>
+<li>{lang.SIZES_ST} : <b>[ {sizes_st} ] </b></li>
+<li>{lang.LSTDELST} : <b>{lst_dl_st} </b></li>
 <li>{lang.MOST_EVER_ONLINE} : <b>[ {most_online} ]</b> {lang.ON} <b>[ {on_muoe} ]</b></li>
 </ul>
-</div>
-<br /><br />
-<h2><i>{lang.LAST_1_H}</i></h2> 
-<br /><br />
-</div>
-<!-- ## End stats template  -->
-
+<br />
+<h2 class="st"><i>{lang.LAST_1_H}</i></h2> 
 <br />
 </div>
+<!-- ## End stats  -->
+
+</div>
+<!-- # End  box  pro  -->
+ 
+<div class="clr"></div><br />
+   
+</div>
+<!-- ## End stats template  -->

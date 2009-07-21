@@ -530,60 +530,19 @@ padding-right:2px;
 }
 
 
-/*  profile.html */
-#profile,#userdata  {
-padding:10px;
-color: #444;
-margin:1px auto;
-}
-#profile select,#profile option{
-background:#FED300;
-color: #000;
-font: bold 12px Tahoma, Helvetica, Arial, sans-serif;
-}
-#userdata .userdata {
-float:right;
-width:30%;
-height:200px;
-border:1px solid #D6D6D6;
-margin:0 5px;
-}
-#userdata p  {
-padding:2px;
-text-align:center;
-}
-#userdata .tit{
-background:url(../images/bar_bg.gif) repeat-x bottom right;
-padding:5px;
-margin:1px;
-font: bold 12px tahoma, sans-serif;
-color: #444;
-text-align:center;
-}
-#userdata p.bq {
-color:#111;
-line-height:26px;
-padding:0 5px;
-}
+/* box  pro  */
+#propox  {color:#444;background-color:#E8E8E8;border:1px solid #F5F5F5;
+		-moz-border-radius: 8px; border-radius:1px;padding:20px 30px;margin:1px auto;}
+/* box  pro  */
 
-#userdata .in{
-color:#111;
-line-height:26px;
-padding:2px 5px;
-margin-right:12px;
-}
-#userdata p.biguser {
-color:#D61B1B;
-line-height:30px;
-padding:5px;
-font: bold 18px tahoma, sans-serif;
-text-align:center;
-}
-#userdata .buttons_center {
-line-height:40px;
-padding:5px;
-text-align:center;
-margin:6px auto;
-}
-/* # profile.html */
+/*-- start Profile template  */
+#userdata  select,#userdata  option{background:#FED300;color: #000;font: bold 12px Tahoma, Helvetica, Arial, sans-serif;}
+#userdata .userdata {float:right;width:30%;height:200px;border:1px solid #D6D6D6;background-color:#DDD;margin:0 5px;}
+#userdata p  {padding:2px;text-align:center;}
+#userdata .tit{background:url(../images/bar_bg.gif) repeat-x bottom right;padding:5px;margin:1px;font: bold 12px tahoma, sans-serif;color: #444;text-align:center;}
+#userdata p.bq {color:#111;line-height:26px;padding:0 5px;}
+#userdata .in{color:#111;line-height:26px;padding:2px 5px;margin-right:12px;}
+#userdata p.biguser {color:#D61B1B;line-height:30px;padding:5px;font: bold 18px tahoma, sans-serif;text-align:center;}
+#userdata .buttons_center {line-height:40px;padding:5px;text-align:center;margin:6px auto;}
+/*-- End Profile template  */
 

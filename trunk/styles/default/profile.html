@@ -40,49 +40,49 @@
 
 <IF NAME="data_forum">
 <form action="{action}" method="post">
-	
+
+<!-- start user data  -->
 <div id="userdata">
 	<div class="userdata">
-		<h2 class="tit">{lang.EDIT_U_DATA} :</h2>
-			<p class="qoute">{lang.USERNAME} :</p>
+		<p class="tit">{lang.EDIT_U_DATA}</p>
+			<p class="pq">{lang.USERNAME}</p>
 			<p class="biguser">{name}</p>
-			<p class="qoute">{lang.SHOW_MY_FILECP} :</p>
-			<select name="show_my_filecp">
+			<p class="pq">{lang.SHOW_MY_FILECP}</p>
+			<p><select name="show_my_filecp">
 				<option value="1" <IF NAME="show_my_filecp.show_my_filecp==1">selected="selected"</IF> >{lang.YES}</option>
 				<option value="0" <IF NAME="show_my_filecp.show_my_filecp==0">selected="selected"</IF> >{lang.NO}</option>
-			</select>
-		
+			</select></p>
         </div>
 		
         <div class="userdata">
-			<h2 class="tit">{lang.EMAIL} :</h2>
-            <p class="qoute">{lang.PASSWORD} : </p>
-				<input type="password" name="pppass_old" value="{t_pppass_old}"  />
-            <p class="qoute">{lang.EMAIL} :</p>
-				<input type="text" name="pmail" value="{mail}"  />
+			<p class="tit">{lang.EMAIL}</p>
+            <p class="pq">{lang.PASSWORD}</p>
+				<input class="in" type="password" name="pppass_old" value="{t_pppass_old}" />
+            <p class="pq">{lang.EMAIL}</p>
+				<input class="in" type="text" name="pmail" value="{mail}" style="direction:ltr" />
         </div>
 	
 		<div class="userdata">
-			<h2 class="tit">{lang.PASS_ON_CHANGE} :</h2>
-			<p class="qoute">{lang.OLD} :</p>
-				<input type="password" name="ppass_old" value="{t_ppass_old}"  />
-			<p class="qoute">{lang.NEW} : </p>
-				<input type="password" name="ppass_new" value="{t_ppass_new}"  />
-			<p class="qoute">{lang.NEW_AGAIN} :</p>
-				<input type="password" name="ppass_new2" value="{t_ppass_new2}"  />	 
+			<p class="tit">{lang.PASS_ON_CHANGE}</p>
+			<p class="pq">{lang.OLD}</p>
+				<input class="in" type="password" name="ppass_old" value="{t_ppass_old}" />
+			<p class="pq">{lang.NEW}</p>
+				<input class="in" type="password" name="ppass_new" value="{t_ppass_new}" />
+			<p class="pq">{lang.NEW_AGAIN}</p>
+				<input class="in" type="password" name="ppass_new2" value="{t_ppass_new2}" />	 
 			<p>{H_FORM_KEYS}</p>		
 		</div>
-	</div>	
+</div>	
+<!-- # End user data  -->
 
- <div class="clr"></div><br />
+<div class="clr"></div>
 	
-		<input type="submit" name="submit_data" value="{lang.EDIT_U_DATA}" />
-		</form>
-	<ELSE>
-	 <div class="clr"></div><br />
-	<a href="{goto_forum_link}">{lang.PFILE_4_FORUM}</a>
-
-	</IF>
+<input class="buttons" type="submit" name="submit_data" value="{lang.EDIT_U_DATA}" />
+</form>
+<ELSE>
+<div class="clr"></div><br />
+<a href="{goto_forum_link}">{lang.PFILE_4_FORUM}</a>
+</IF>
 </div>
 <!-- # End box profile  -->
 

@@ -155,7 +155,7 @@ img.right {float: right;	margin-left:15px;}
 #stats .st i{font-size:14px;font-weight:700;padding:4px 8px;color: #222;border-bottom:1px solid #222;}
 /* #  stats template */
 
-#filecp td{padding:5px;}
+#filecp td{padding:5px;border-bottom:1px solid #ddd;}
 
 /*
 dont remove it  start

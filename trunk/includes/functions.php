@@ -925,6 +925,11 @@ function delete_cache($name, $all=false, $deep = false)
 	
 	$path_to_cache = ($deep ? '.' : '') . './cache';
 	
+	if(defined('IN_ADMIN'))
+	{
+		$path_to_cache = '../' . $path_to_cache;
+	}
+	
 	if($all)
 	{
 		$dh = opendir($path_to_cache);

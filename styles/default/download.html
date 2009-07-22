@@ -9,43 +9,39 @@
 <div class="clr"></div><div class="line"></div>
 <!-- # End line top  -->
 
-<!-- start file report  -->
-<div class="fileReport" onclick="window.location.href='{REPORT}';">
-<a href="{REPORT}"><img src="{STYLE_PATH}images/filereport.png" style="vertical-align:middle;" />&nbsp;{lang.FILEREPORT}</a>
-</div>
-<!-- ## End file report  -->
-			
-			<div class="clr"></div>
-			
-			
-		<div id="file-info-down">
-			<div class="info-down">
-				<h2>{lang.FILE_INFO}</h2>
-				<ul>
-					<li>{lang.FILENAME} : {name}</li>	
-					<li>{lang.FILETYPE} : {type}  <img src="{file_ext_icon}" /></li>
-					<li>{lang.FILESIZE} : {size}</li>
-					<li>{lang.FILEDATE} : {time}</li>
-					<li>{lang.FILEUPS} : {uploads}</li>
-					<!-- download template after info -->
-				</ul>	
-			</div>
-			
-		        <div class="info-down">
-					<p><img src="{STYLE_PATH}images/find_file.png" style="vertical-align:middle;"/>&nbsp;&nbsp;{lang.FILE_FOUNDED}</p>
-			
-					<div id="url"><h3>{lang.JS_MUST_ON}</h3></div>
+<!-- start Information File   -->			
+<div id="file-info">
 
-				</div>	
+	<div id="data_file">
+		<p class="t">{lang.FILE_INFO}</p>
+		<ul class="data_menu">
+			<li>{lang.FILENAME} :&nbsp;&nbsp; <b>{name}</b></li>	
+			<li>{lang.FILETYPE} :&nbsp;&nbsp; <b>{type}</b></li>
+			<li>{lang.FILESIZE} :&nbsp;&nbsp; <b>{size}</b></li>
+			<li>{lang.FILEDATE} :&nbsp;&nbsp; <b>{time}</b></li>
+			<li>{lang.FILEUPS} :&nbsp;&nbsp;  <b class="nup">{uploads}</b></li>				
+      	</ul>
+	</div>	
 			
-			
+	<div id="data_file_down">
+		<p class="find_image"><img src="{STYLE_PATH}images/find_file.png" width="50" height="58" alt="Find File the image" style="vertical-align:middle;" /></p>
+		<br />
+		<p class="find_x">{lang.FILE_FOUNDED}</p>
+		<br /><br />
+		<div id="url"><h3>{lang.JS_MUST_ON}</h3></div>
+	</div>	
+		
 </div>
-<!-- ## End box  download  -->
+<!-- ## End Information File   -->	
+
 
 <div class="clr"></div>
 
+<!-- start button file report  -->
+<div class="fileReport" onclick="window.location.href='{REPORT}';"><img src="{STYLE_PATH}images/filereport.png" width="24" height="23" style="vertical-align:middle;" />&nbsp;<a href="{REPORT}">{lang.FILEREPORT}</a></div>
+<!-- ## End button file report  -->
 
- <script language="javascript">
+<script language="javascript">
 var timer = {seconds_w};
 ti();
 function ti()

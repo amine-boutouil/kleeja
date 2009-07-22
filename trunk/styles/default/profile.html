@@ -18,11 +18,15 @@
 
 <!-- start error msg  -->
 <IF NAME="ERRORS">
-	<div class="error_f">
-		<ul>
-			<LOOP NAME="ERRORS"><li>{%value%}</li></LOOP>
-		</ul>
-	</div>
+<dl id="system-message">
+<dd class="error">
+<ul><li>
+<LOOP NAME="ERRORS">
+<strong>{lang.INFORMATION} : </strong>{%value%}<br />
+</LOOP>
+</li></ul>
+</dd>
+</dl>
 </IF>
 <!-- # end error msg  -->
 

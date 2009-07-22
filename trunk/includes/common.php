@@ -98,8 +98,11 @@
 		exit;
 	}
 	
+	//get admin path from config.php
+	$adminpath = isset($adminpath) ? $adminpath : 'admin.php';
+	
 	//admin path
-	define('ADMIN_PATH', 'admin.php');
+	define('ADMIN_PATH', $adminpath);
 	
 	//include files .. & classes ..
 	$path =	dirname(__FILE__) . DIRECTORY_SEPARATOR;

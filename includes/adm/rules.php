@@ -18,7 +18,7 @@
 		
 		//for style ..
 		$stylee 		= "admin_rules";
-		$action 		= ADMIN_PATH . "?cp=rules";
+		$action 		= basename(ADMIN_PATH) . "?cp=rules";
 
 		$query = array(
 					'SELECT'	=> 'rules',

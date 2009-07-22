@@ -16,7 +16,7 @@
 	
 	//for style ..
 	$stylee 	= "admin_backup";
-	$action 	= ADMIN_PATH . "?cp=bckup";
+	$action 	= basename(ADMIN_PATH) . "?cp=bckup";
 
 
 	$query	=	"SHOW TABLE STATUS";

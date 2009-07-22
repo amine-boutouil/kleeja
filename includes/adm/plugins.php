@@ -17,7 +17,7 @@
 
 	//for style ..
 		$stylee = "admin_plugins";
-		$action = ADMIN_PATH . "?cp=plugins";
+		$action = basename(ADMIN_PATH) . "?cp=plugins";
 		$no_plugins	= false;
 		
 		//kleeja depend on its users .. and kleeja love them .. so let's tell them about that ..
@@ -77,7 +77,7 @@
 							
 					//show msg
 					$text = $lang['PLGUIN_DISABLED_ENABLED'];
-					$text .= '<meta HTTP-EQUIV="REFRESH" content="1; url=' . ADMIN_PATH . '?cp=plugins">' . "\n";
+					$text .= '<meta HTTP-EQUIV="REFRESH" content="1; url=' . basename(ADMIN_PATH) . '?cp=plugins">' . "\n";
 					$stylee	= "admin_info";
 		
 					
@@ -120,7 +120,7 @@
 
 							//show msg
 							$text	= $lang['PLUGIN_DELETED'];
-							$text .= '<meta HTTP-EQUIV="REFRESH" content="1; url=' . ADMIN_PATH . '?cp=plugins">' . "\n";
+							$text .= '<meta HTTP-EQUIV="REFRESH" content="1; url=' . basename(ADMIN_PATH) . '?cp=plugins">' . "\n";
 							$stylee	= "admin_info";
 						
 				break;
@@ -160,17 +160,17 @@
 				if($return === true)
 				{
 					$text = $lang['NEW_PLUGIN_ADDED'];
-					$text .= '<meta HTTP-EQUIV="REFRESH" content="3; url=' . ADMIN_PATH . '?cp=plugins">' . "\n";
+					$text .= '<meta HTTP-EQUIV="REFRESH" content="3; url=' . basename(ADMIN_PATH) . '?cp=plugins">' . "\n";
 				}
 				else if ($return === 'xyz')//exists before
 				{
 					$text = $lang['PLUGIN_EXISTS_BEFORE'];
-					$text .= '<meta HTTP-EQUIV="REFRESH" content="3; url=' . ADMIN_PATH . '?cp=plugins">' . "\n";					
+					$text .= '<meta HTTP-EQUIV="REFRESH" content="3; url=' . basename(ADMIN_PATH) . '?cp=plugins">' . "\n";					
 				}
 				else if ($return === 'upd') // updated success
 				{
 					$text = $lang['PLUGIN_UPDATED_SUCCESS'];
-					$text .= '<meta HTTP-EQUIV="REFRESH" content="3; url=' . ADMIN_PATH . '?cp=plugins">' . "\n";			
+					$text .= '<meta HTTP-EQUIV="REFRESH" content="3; url=' . basename(ADMIN_PATH) . '?cp=plugins">' . "\n";			
 				}
 				else
 				{

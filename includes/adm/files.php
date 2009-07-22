@@ -22,9 +22,9 @@
 	$url_lst	= (isset($_REQUEST['last_visit']) ? '&amp;last_visit=' . $_REQUEST['last_visit'] : '');
 	$url_sea	= (isset($_GET['search']) ? '&amp;search=' . $_GET['search'] : '');
 	$url_pg		= (isset($_GET['page']) ? '&amp;page=' . intval($_GET['page']) : '');
-	$page_action = ADMIN_PATH . '?cp=files' . $url_pg . $url_or . $url_sea . $url_lst;
-	$ord_action	= ADMIN_PATH . "?cp=files" . $url_pg . $url_sea . $url_lst;
-	$page2_action	= ADMIN_PATH . "?cp=files" . $url_or2 . $url_sea . $url_lst;
+	$page_action = basename(ADMIN_PATH) . '?cp=files' . $url_pg . $url_or . $url_sea . $url_lst;
+	$ord_action	= basename(ADMIN_PATH) . "?cp=files" . $url_pg . $url_sea . $url_lst;
+	$page2_action	= basename(ADMIN_PATH) . "?cp=files" . $url_or2 . $url_sea . $url_lst;
 	$action		= $page_action;
 	$is_search	= false;
 	
@@ -42,7 +42,7 @@
 	//posts search ..
 	if (isset($_POST['search_file']))
 	{
-		header('Location: ' . ADMIN_PATH . '?cp=files&search=' . base64_encode(serialize($_POST)));
+		header('Location: ' . basename(ADMIN_PATH) . '?cp=files&search=' . base64_encode(serialize($_POST)));
 		$SQL->close();
 		exit;
 	}

@@ -16,8 +16,8 @@
 		//for style ..
 		$stylee = "admin_exts";
 		//words
-		$action 		= ADMIN_PATH . "?cp=exts&amp;page=" . (isset($_GET['page']) ? intval($_GET['page']) : '1');
-		$action_new_ext = ADMIN_PATH . "?cp=exts&amp;add_new_ext=1";
+		$action 		= basename(ADMIN_PATH) . "?cp=exts&amp;page=" . (isset($_GET['page']) ? intval($_GET['page']) : '1');
+		$action_new_ext = basename(ADMIN_PATH) . "?cp=exts&amp;add_new_ext=1";
 		$n_submit 	= $lang['UPDATE_EXTS'];
 		
 
@@ -68,7 +68,7 @@
 		}
 		
 		$total_pages 	= $Pager->getTotalPages(); 
-		$arr_paging 	= $Pager->print_nums($config['siteurl'] . ADMIN_PATH . '?cp=exts'); 
+		$arr_paging 	= $Pager->print_nums($config['siteurl'] . basename(ADMIN_PATH) . '?cp=exts'); 
 		$gr_exts_arr	= ch_g('new_ext_group', 9);
 
 		//after submit ////////////////
@@ -95,7 +95,7 @@
 			//delete cache ..
 			delete_cache('data_exts');
 
-			$text	= $lang['UPDATED_EXTS']. '<meta HTTP-EQUIV="REFRESH" content="0; url=' . ADMIN_PATH . '?cp=exts&amp;page=' .  (isset($_GET['page']) ? intval($_GET['page']) : '1') . '">' . "\n";
+			$text	= $lang['UPDATED_EXTS']. '<meta HTTP-EQUIV="REFRESH" content="0; url=' . basename(ADMIN_PATH) . '?cp=exts&amp;page=' .  (isset($_GET['page']) ? intval($_GET['page']) : '1') . '">' . "\n";
 			$stylee	= "admin_info";
 		}
 		else if(isset($_GET['add_new_ext']))
@@ -133,7 +133,7 @@
 			if ($SQL->num_rows($result) > 0)
 			{
 				$text = sprintf($lang['NEW_EXT_EXISTS_B4'], $new_ext_i);
-				$text .= '<meta HTTP-EQUIV="REFRESH" content="2; url=' . ADMIN_PATH . '?cp=exts">' ."\n";
+				$text .= '<meta HTTP-EQUIV="REFRESH" content="2; url=' . basename(ADMIN_PATH) . '?cp=exts">' ."\n";
 				$stylee	= "admin_err";
 			}
 			else
@@ -147,7 +147,7 @@
 
 				$SQL->build($insert_query);
 
-				$text	= $lang['NEW_EXT_ADD']. '<meta HTTP-EQUIV="REFRESH" content="2; url=' . ADMIN_PATH . '?cp=exts">' . "\n";
+				$text	= $lang['NEW_EXT_ADD']. '<meta HTTP-EQUIV="REFRESH" content="2; url=' . basename(ADMIN_PATH) . '?cp=exts">' . "\n";
 				$stylee	= "admin_info";
 			}
 		}

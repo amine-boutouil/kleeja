@@ -23,7 +23,7 @@
 	
 	//for style ..
 	$stylee		= "admin_img";
-	$action 	= ADMIN_PATH . "?cp=img_ctrl&amp;page=" . (isset($_GET['page']) ? intval($_GET['page']) : '1');
+	$action 	= basename(ADMIN_PATH) . "?cp=img_ctrl&amp;page=" . (isset($_GET['page']) ? intval($_GET['page']) : '1');
 
 	$query	= array('SELECT'	=> 'COUNT(f.id) AS total_files',
 					'FROM'		=> "{$dbprefix}files f",
@@ -143,12 +143,12 @@
 		$no_results = true;
 	}
 		$total_pages 	= $Pager->getTotalPages(); 
-		$page_nums 		= $Pager->print_nums($config['siteurl'] . ADMIN_PATH . '?cp=img_ctrl'); 
+		$page_nums 		= $Pager->print_nums($config['siteurl'] . basename(ADMIN_PATH) . '?cp=img_ctrl'); 
 		
 	//after submit 
 	if(isset($_POST['submit']))
 	{
-		$text	= $lang['FILES_UPDATED'] . '<meta HTTP-EQUIV="REFRESH" content="0; url=' . ADMIN_PATH . '?cp=img_ctrl&amp;page=' . (isset($_GET['page']) ? intval($_GET['page']) : '1') . '">' ."\n";
+		$text	= $lang['FILES_UPDATED'] . '<meta HTTP-EQUIV="REFRESH" content="0; url=' . basename(ADMIN_PATH) . '?cp=img_ctrl&amp;page=' . (isset($_GET['page']) ? intval($_GET['page']) : '1') . '">' ."\n";
 		$stylee	= "admin_info";
 	}
 ?>

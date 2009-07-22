@@ -16,7 +16,7 @@
 
 		//for style ..
 		$stylee 	= "admin_ban";
-		$action 	= ADMIN_PATH . "?cp=ban";
+		$action 	= basename(ADMIN_PATH) . "?cp=ban";
 
 		$query = array(
 					'SELECT'	=> 'ban',

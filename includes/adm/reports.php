@@ -17,7 +17,7 @@
 	
 		//for style ..
 		$stylee 		= "admin_reports";
-		$action 		= ADMIN_PATH . "?cp=reports&amp;page=" . (isset($GET['page'])  ? intval($GET['page']) : 1);
+		$action 		= basename(ADMIN_PATH) . "?cp=reports&amp;page=" . (isset($GET['page'])  ? intval($GET['page']) : 1);
 
 		$query = array(
 					'SELECT'	=> '*',
@@ -103,7 +103,7 @@
 	//after submit 
 	if (isset($_POST['submit']))
 	{
-		$text	= $lang['REPORTS_UPDATED'] . '<meta HTTP-EQUIV="REFRESH" content="0; url=' . ADMIN_PATH . '?cp=reports&amp;page=' . (isset($_GET['page']) ? intval($_GET['page']) : '1') . '">' ."\n";
+		$text	= $lang['REPORTS_UPDATED'] . '<meta HTTP-EQUIV="REFRESH" content="0; url=' . basename(ADMIN_PATH) . '?cp=reports&amp;page=' . (isset($_GET['page']) ? intval($_GET['page']) : '1') . '">' ."\n";
 		$stylee	= "admin_info";
 	}
 ?>

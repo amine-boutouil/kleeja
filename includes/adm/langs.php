@@ -24,8 +24,8 @@
 		
 		//for style ..
 		$stylee 	= "admin_langs";
-		$action 	= ADMIN_PATH . "?cp=langs&amp;page=" .  (isset($_GET['page']) ? intval($_GET['page']) : '1') . '&amp;lang=' . $SQL->escape($_REQUEST['lang']);
-		$action2 	= ADMIN_PATH . "?cp=langs";
+		$action 	= basename(ADMIN_PATH) . "?cp=langs&amp;page=" .  (isset($_GET['page']) ? intval($_GET['page']) : '1') . '&amp;lang=' . $SQL->escape($_REQUEST['lang']);
+		$action2 	= basename(ADMIN_PATH) . "?cp=langs";
 
 		
 		//get languages
@@ -114,12 +114,12 @@
 	}
 	
 	$total_pages 	= $Pager->getTotalPages(); 
-	$page_nums 		= $Pager->print_nums($config['siteurl'] . ADMIN_PATH . '?cp=langs'); 
+	$page_nums 		= $Pager->print_nums($config['siteurl'] . basename(ADMIN_PATH) . '?cp=langs'); 
 
 	//after submit 
 	if (isset($_POST['submit']))
 	{
-			$text	= $lang['WORDS_UPDATED'] . '<meta HTTP-EQUIV="REFRESH" content="0; url=' . ADMIN_PATH . '?cp=langs&amp;page=' . (isset($_GET['page']) ? intval($_GET['page']) : '1') . '&amp;lang=' . $SQL->escape($_REQUEST['lang']) . '">' . "\n";
+			$text	= $lang['WORDS_UPDATED'] . '<meta HTTP-EQUIV="REFRESH" content="0; url=' . basename(ADMIN_PATH) . '?cp=langs&amp;page=' . (isset($_GET['page']) ? intval($_GET['page']) : '1') . '&amp;lang=' . $SQL->escape($_REQUEST['lang']) . '">' . "\n";
 			$stylee	= "admin_info";
 	}
 ?>

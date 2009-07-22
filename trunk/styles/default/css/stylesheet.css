@@ -52,16 +52,11 @@ img.right {float: right;	margin-left:15px;}
 /* extras  header */
 #extras_header {	width: 100%;margin:0 auto;padding:5px;}
 
-/* Content */
-#content {float: left;width: 77%;}
 
 
 
-/* title */
-#title-x b{width: 90%;float:right;color: #000;padding:0 0 6px 0;margin:3px ;font-size: 18px; 
-	font-weight: normal;color: rgb(89, 89, 89);text-shadow: 0px 1px rgb(247, 247, 247);}
-#title-x a {color:#D86800;}
-#title-x a:hover {color: #000;background:transparent;}
+
+
 
 	
 /* pagination */
@@ -524,10 +519,34 @@ padding-right:2px;
 }
 
 
-/* box  pro  */
-#propox  {color:#444;background-color:#E8E8E8;border:1px solid #F5F5F5;
-		-moz-border-radius: 8px; border-radius:1px;padding:20px 30px;margin:1px auto;}
-/* box  pro  */
+/* index body   */
+#content_index_body  {
+float: left;
+width: 70%;
+padding:15px 30px;
+}
+/* index body  */
+
+
+
+/* Content */
+#content {
+float: left;
+width: 70%;
+padding:15px 30px;
+margin:10px auto 20px auto;
+color:#444;
+background-color:#E8E8E8;
+border:1px solid #F5F5F5;
+-moz-border-radius: 8px;
+border-radius:1px;
+}
+
+/* title */
+.title-x b{width: 90%;float:right;color: #000;padding:0 0 6px 0;margin:3px ;font-size: 18px; 
+	font-weight: normal;color: rgb(89, 89, 89);text-shadow: 0px 1px rgb(247, 247, 247);}
+.title-x a {color:#D86800;}
+.title-x a:hover {color: #000;background:transparent;}
 
 /*-- start Profile template  */
 #userdata  select,#userdata  option{background:#FED300;color: #000;font: bold 12px Tahoma, Helvetica, Arial, sans-serif;}

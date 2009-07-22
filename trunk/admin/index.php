@@ -6,11 +6,12 @@
 # purpose :  control panel for administarator
 # copyright 2007-2009 Kleeja.com ..
 # license http://opensource.org/licenses/gpl-license.php GNU Public License
-# $Author$ , $Rev$,  $Date::                           $
+# $Author: saanina $ , $Rev: 615 $,  $Date:: 2009-07-22 05:54:08 +0300#$
 ##################################################
 
 
 	// security ..
+	define ('PATH' , '../');
 	define ('IN_INDEX' , true);
 	define ('IN_ADMIN' , true);
 	
@@ -21,8 +22,8 @@
 	
 
 	//include imprtant file ..
-	include ('includes/common.php');
-	include_once ('includes/version.php');
+	include (PATH . 'includes/common.php');
+	include_once (PATH . 'includes/version.php');
 
 	//go to ..
 	$go_to	= isset($_GET['cp']) ? htmlspecialchars($_GET['cp']) : 'start';
@@ -63,7 +64,7 @@
 				{
 					$_SESSION['USER_SESS'] = session_id();
 					$_SESSION['ADMINLOGIN'] = md5($usrcp->name() . $config['siteurl']);
-					header('Location: ' . ADMIN_PATH . '?cp=' . $go_to);
+					header('Location: ' . basename(__file__) . '?cp=' . $go_to);
 					$SQL->close();
 					exit;
 				}
@@ -83,7 +84,7 @@
 		}
 			//show template login .
 			//body
-			$action	= ADMIN_PATH . "?go=login&amp;cp=" . $go_to;
+			$action	= basename(__file__) . "?go=login&amp;cp=" . $go_to;
 			$err = false;
 			if(!empty($errs))
 			{
@@ -110,7 +111,7 @@
 	(!defined('LAST_VISIT')) ? define('LAST_VISIT',time() - 3600*12) : '';
 
 	//path of admin extensions
-	$path_adm	= "includes/adm";
+	$path_adm	= PATH . "includes/adm";
 
 	//exception extentions
 	$ext_expt	= array();
@@ -201,7 +202,7 @@
 		++$i;
 		$adm_extensions_menu[$i]	= array('icon'	=> (file_exists($STYLE_PATH_ADMIN . 'images/' . ($m == 'configs' ? 'options' : $m) . '_button.gif'))	? $STYLE_PATH_ADMIN . 'images/' . ($m == 'configs' ? 'options' : $m) . '_button.gif' : $STYLE_PATH_ADMIN . 'images/no_icon_button.gif',
 											'lang'	=> !empty($lang['R_'. strtoupper($m)]) ? $lang['R_'. strtoupper($m)] . (($m == 'calls') ? $newcall : '') . (($m == 'reports') ? $newreport : '') : (!empty($lang[strtoupper($m)]) ? $lang[strtoupper($m)] :  (!empty($olang[strtoupper($m)]) ? $olang[strtoupper($m)] : strtoupper($m))),
-											'link'	=> ADMIN_PATH . '?cp=' . ($m == 'configs' ? 'options' : $m),
+											'link'	=> basename(__file__) . '?cp=' . ($m == 'configs' ? 'options' : $m),
 											'confirm'	=> (@in_array($m, $ext_confirm)) ? true : false,
 											'current'	=> ($m == $go_to) ? true : false
 											);

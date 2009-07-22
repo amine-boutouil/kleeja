@@ -17,7 +17,7 @@
 	
 		//for style ..
 		$stylee 		= "admin_reports";
-		$action 		= "admin.php?cp=reports&amp;page=" . (isset($GET['page'])  ? intval($GET['page']) : 1);
+		$action 		= ADMIN_PATH . "?cp=reports&amp;page=" . (isset($GET['page'])  ? intval($GET['page']) : 1);
 
 		$query = array(
 					'SELECT'	=> '*',
@@ -98,12 +98,12 @@
 	}
 	
 	$total_pages 	= $Pager->getTotalPages(); 
-	$page_nums 		= $Pager->print_nums($config['siteurl'] . 'admin.php?cp=reports'); 
+	$page_nums 		= $Pager->print_nums($config['siteurl'] . ADMIN_PATH  . '?cp=reports'); 
 		
 	//after submit 
 	if (isset($_POST['submit']))
 	{
-		$text	= $lang['REPORTS_UPDATED'] . '<meta HTTP-EQUIV="REFRESH" content="0; url=./admin.php?cp=reports&amp;page=' . (isset($_GET['page']) ? intval($_GET['page']) : '1') . '">' ."\n";
+		$text	= $lang['REPORTS_UPDATED'] . '<meta HTTP-EQUIV="REFRESH" content="0; url=' . ADMIN_PATH . '?cp=reports&amp;page=' . (isset($_GET['page']) ? intval($_GET['page']) : '1') . '">' ."\n";
 		$stylee	= "admin_info";
 	}
 ?>

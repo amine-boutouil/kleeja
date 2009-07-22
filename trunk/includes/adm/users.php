@@ -17,7 +17,7 @@
 
 		//for style ..
 		$stylee 	= "admin_users";
-		$action 	= "admin.php?cp=users&amp;page=" . (isset($_GET['page'])  ? intval($_GET['page']) : 1) . (isset($_GET['search']) ? '&search=' . $SQL->escape($_GET['search']) : '') . ((isset($_GET['admin']) && $_GET['admin'] == '1') ? '&admin=1' : '');
+		$action 	= ADMIN_PATH . "?cp=users&amp;page=" . (isset($_GET['page'])  ? intval($_GET['page']) : 1) . (isset($_GET['search']) ? '&search=' . $SQL->escape($_GET['search']) : '') . ((isset($_GET['admin']) && $_GET['admin'] == '1') ? '&admin=1' : '');
 		$is_search	= false;
 		$isn_search	= true;
 		
@@ -149,7 +149,7 @@
 		//posts search ..
 			if (isset($_POST['search_user']))
 			{
-				header('Location: admin.php?cp=users&search=' . base64_encode(serialize($_POST)));
+				header('Location: ' . ADMIN_PATH . '?cp=users&search=' . base64_encode(serialize($_POST)));
 				$SQL->close();
 				exit;
 			}
@@ -260,7 +260,7 @@
 		}
 	
 	$total_pages 	= $Pager->getTotalPages(); 
-	$page_nums 		= $Pager->print_nums($config['siteurl'] . 'admin.php?cp=users' . ((isset($_GET['search'])) ? '&search=' . $_GET['search'] : '')); 
+	$page_nums 		= $Pager->print_nums($config['siteurl'] . ADMIN_PATH . '?cp=users' . ((isset($_GET['search'])) ? '&search=' . $_GET['search'] : '')); 
 	
 	//if not noraml user system 
 	$user_not_normal = $config['user_system'] != 1 ?  true : false;
@@ -268,7 +268,7 @@
 	//after submit 
 	if (isset($_POST['submit']) || isset($_POST['newuser']))
 	{
-			$text	= $lang['USERS_UPDATED'] . '<meta HTTP-EQUIV="REFRESH" content="0; url=./admin.php?cp=users&amp;page=' . (isset($_GET['page'])  ? intval($_GET['page']) : 1) . (isset($_GET['search']) ? '&search=' . $_GET['search'] : '') . ((isset($_GET['admin']) && $_GET['admin'] == '1') ? '&admin=1' : '') . '">' . "\n";
+			$text	= $lang['USERS_UPDATED'] . '<meta HTTP-EQUIV="REFRESH" content="0; url=' . ADMIN_PATH . '?cp=users&amp;page=' . (isset($_GET['page'])  ? intval($_GET['page']) : 1) . (isset($_GET['search']) ? '&search=' . $_GET['search'] : '') . ((isset($_GET['admin']) && $_GET['admin'] == '1') ? '&admin=1' : '') . '">' . "\n";
 			$stylee	= "admin_info";
 	}
 ?>

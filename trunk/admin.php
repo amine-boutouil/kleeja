@@ -63,7 +63,7 @@
 				{
 					$_SESSION['USER_SESS'] = session_id();
 					$_SESSION['ADMINLOGIN'] = md5($usrcp->name() . $config['siteurl']);
-					header('Location: admin.php?cp=' . $go_to);
+					header('Location: ' . ADMIN_PATH . '?cp=' . $go_to);
 					$SQL->close();
 					exit;
 				}
@@ -83,7 +83,7 @@
 		}
 			//show template login .
 			//body
-			$action	= "admin.php?go=login&amp;cp=" . $go_to;
+			$action	= ADMIN_PATH . "?go=login&amp;cp=" . $go_to;
 			$err = false;
 			if(!empty($errs))
 			{
@@ -201,7 +201,7 @@
 		++$i;
 		$adm_extensions_menu[$i]	= array('icon'	=> (file_exists($STYLE_PATH_ADMIN . 'images/' . ($m == 'configs' ? 'options' : $m) . '_button.gif'))	? $STYLE_PATH_ADMIN . 'images/' . ($m == 'configs' ? 'options' : $m) . '_button.gif' : $STYLE_PATH_ADMIN . 'images/no_icon_button.gif',
 											'lang'	=> !empty($lang['R_'. strtoupper($m)]) ? $lang['R_'. strtoupper($m)] . (($m == 'calls') ? $newcall : '') . (($m == 'reports') ? $newreport : '') : (!empty($lang[strtoupper($m)]) ? $lang[strtoupper($m)] :  (!empty($olang[strtoupper($m)]) ? $olang[strtoupper($m)] : strtoupper($m))),
-											'link'	=> 'admin.php?cp=' . ($m == 'configs' ? 'options' : $m),
+											'link'	=> ADMIN_PATH . '?cp=' . ($m == 'configs' ? 'options' : $m),
 											'confirm'	=> (@in_array($m, $ext_confirm)) ? true : false,
 											'current'	=> ($m == $go_to) ? true : false
 											);

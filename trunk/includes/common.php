@@ -98,6 +98,9 @@
 		exit;
 	}
 	
+	//admin path
+	define('ADMIN_PATH', 'admin.php');
+	
 	//include files .. & classes ..
 	$path =	dirname(__FILE__) . DIRECTORY_SEPARATOR;
 	$root_path	=	'./';

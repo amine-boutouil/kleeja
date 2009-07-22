@@ -18,8 +18,8 @@
 		$stylee			= "admin_start";
 		//last visit
 		$last_visit		= (defined('LAST_VISIT')) ?  date("[d-m-Y], [h:i a] ", LAST_VISIT) : false;
-		$h_lst_files	= './admin.php?cp=files&amp;last_visit=' . (defined('LAST_VISIT') ? LAST_VISIT : time() - 3600*12);
-		$h_lst_imgs		= './admin.php?cp=img_ctrl&amp;last_visit=' . (defined('LAST_VISIT') ? LAST_VISIT : time() - 3600*12);
+		$h_lst_files	= ADMIN_PATH . '?cp=files&amp;last_visit=' . (defined('LAST_VISIT') ? LAST_VISIT : time() - 3600*12);
+		$h_lst_imgs		= ADMIN_PATH . '?cp=img_ctrl&amp;last_visit=' . (defined('LAST_VISIT') ? LAST_VISIT : time() - 3600*12);
 		
 		//data
 		$files_number 		= $stat_files;
@@ -45,7 +45,7 @@
 		$per1	= $per1 >= 100 ? 100 : $per1;
 
 		//ppl must know about kleeja version!
-		$kleeja_version	 = '<a href="./admin.php?cp=check_update" title="' . $lang['R_CHECK_UPDATE'] . '">' . KLEEJA_VERSION . '</a>';
+		$kleeja_version	 = '<a href="' . ADMIN_PATH . '?cp=check_update" title="' . $lang['R_CHECK_UPDATE'] . '">' . KLEEJA_VERSION . '</a>';
 		
 		//admin messages system
 		$ADM_NOTIFICATIONS = array();
@@ -65,7 +65,7 @@
 		//if 24 hours, lets chcek agian !
 		if((time() - $v['last_check']) > 86400 && !$v['msg_appeared'])
 		{
-			header('location: ./admin.php?cp=check_update&show_msg');
+			header('location: ' . ADMIN_PATH . '?cp=check_update&show_msg');
 			$SQL->close();
 			exit;
 		}	
@@ -79,7 +79,7 @@
 			$ADM_NOTIFICATIONS[]  = array(
 								'id' => 'cached_tpl',
 								'msg_type'=> 'info', 'title'=> $lang['CACHED_STYLES'],
-								'msg'=> sprintf($lang['CACHED_STYLES_DISC'] , '<a href="./admin.php?cp=styles&amp;sty_t=cached">' . $lang['CLICKHERE'] .'</a>')
+								'msg'=> sprintf($lang['CACHED_STYLES_DISC'] , '<a href="' . ADMIN_PATH . '?cp=styles&amp;sty_t=cached">' . $lang['CLICKHERE'] .'</a>')
 							);
 		}
 		

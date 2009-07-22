@@ -22,9 +22,9 @@
 	$url_lst	= (isset($_REQUEST['last_visit']) ? '&amp;last_visit=' . $_REQUEST['last_visit'] : '');
 	$url_sea	= (isset($_GET['search']) ? '&amp;search=' . $_GET['search'] : '');
 	$url_pg		= (isset($_GET['page']) ? '&amp;page=' . intval($_GET['page']) : '');
-	$page_action = 'admin.php?cp=files' . $url_pg . $url_or . $url_sea . $url_lst;
-	$ord_action	= "admin.php?cp=files" . $url_pg . $url_sea . $url_lst;
-	$page2_action	= "admin.php?cp=files" . $url_or2 . $url_sea . $url_lst;
+	$page_action = ADMIN_PATH . '?cp=files' . $url_pg . $url_or . $url_sea . $url_lst;
+	$ord_action	= ADMIN_PATH . "?cp=files" . $url_pg . $url_sea . $url_lst;
+	$page2_action	= ADMIN_PATH . "?cp=files" . $url_or2 . $url_sea . $url_lst;
 	$action		= $page_action;
 	$is_search	= false;
 	
@@ -42,7 +42,7 @@
 	//posts search ..
 	if (isset($_POST['search_file']))
 	{
-		header('Location: admin.php?cp=files&search=' . base64_encode(serialize($_POST)));
+		header('Location: ' . ADMIN_PATH . '?cp=files&search=' . base64_encode(serialize($_POST)));
 		$SQL->close();
 		exit;
 	}
@@ -50,15 +50,15 @@
 	{
 		$search = base64_decode($_GET['search']);
 		$search	= unserialize($search);
-		$file_namee	= ($search['filename']!='') ? 'AND f.real_filename LIKE \'%' . $SQL->escape($search['filename']) . '%\' ' : ''; 
-		$usernamee	= ($search['username']!='') ? 'AND u.name LIKE \'%' . $SQL->escape($search['username']) . '%\'' : ''; 
+		$file_namee	= ($search['filename'] != '') ? 'AND f.real_filename LIKE \'%' . $SQL->escape($search['filename']) . '%\' ' : ''; 
+		$usernamee	= ($search['username'] != '') ? 'AND u.name LIKE \'%' . $SQL->escape($search['username']) . '%\'' : ''; 
 		$size_than	=   ' f.size ' . ($search['than']!=1 ? '<=' : '>=') . (intval($search['size']) * 1024) . ' ';
-		$ups_than	=  ($search['ups']!='') ? 'AND f.uploads ' . ($search['uthan']!=1 ? '<' : '>') . intval($search['ups']) . ' ' : '';
-		$rep_than	=  ($search['rep']!='') ? 'AND f.report ' . ($search['rthan']!=1 ? '<' : '>') . intval($search['rep']) . ' ' : '';
-		$lstd_than	=  ($search['lastdown']!='') ? 'AND f.last_down =' . (time()-(intval($search['lastdown']) * (24 * 60 * 60))) . ' ' : '';
+		$ups_than	=  ($search['ups'] != '') ? 'AND f.uploads ' . ($search['uthan']!=1 ? '<' : '>') . intval($search['ups']) . ' ' : '';
+		$rep_than	=  ($search['rep'] != '') ? 'AND f.report ' . ($search['rthan']!=1 ? '<' : '>') . intval($search['rep']) . ' ' : '';
+		$lstd_than	=  ($search['lastdown'] != '') ? 'AND f.last_down =' . (time()-(intval($search['lastdown']) * (24 * 60 * 60))) . ' ' : '';
 		$s_exts 	= 	explode(",",$SQL->escape($search['ext']));
-		$exte		=  ($search['ext']!='') ? "AND f.type IN ('" . implode("', '", $s_exts) . "')" : '';
-		$ipp		=  ($search['user_ip']!='') ? 'AND f.user_ip LIKE \'%' . $SQL->escape($search['user_ip']) . '%\' ' : '';
+		$exte		=  ($search['ext'] != '') ? "AND f.type IN ('" . implode("', '", $s_exts) . "')" : '';
+		$ipp		=  ($search['user_ip'] != '') ? 'AND f.user_ip LIKE \'%' . $SQL->escape($search['user_ip']) . '%\' ' : '';
 		$is_search	= true;
 		$query['WHERE'] = "$size_than $file_namee $ups_than $exte $rep_than $usernamee $lstd_than $exte $ipp";
 	}

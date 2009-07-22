@@ -18,9 +18,9 @@
 	//for style ..
 	$stylee = "admin_search";
 	//search files
-	$action1 			= "admin.php?cp=files";
+	$action1 			= ADMIN_PATH . "?cp=files";
 	//search users
-	$action2 			= "admin.php?cp=users";	
+	$action2 			= ADMIN_PATH . "?cp=users";	
 	//wut the default user system
 	$default_user_system = $config['user_system'] == 1 ? true : false;
 		

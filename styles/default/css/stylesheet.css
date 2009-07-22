@@ -265,7 +265,11 @@ font-size:12px; font-weight:bold; border:1px solid #858585;}
 
 
 /* connection template */
-#connection{background:url(../images/messages.png) no-repeat left top;}
+#connection{
+border:1px solid #444;
+-moz-border-radius: 8px;
+border-radius:1px;}
+
 .call form {margin:10px; padding: 0;}
 .call label {display:block;font-weight:bold;margin:5px 0;}
 .call input {padding: 2px;border:1px solid #999;font: bold 12px tahoma, Verdana, sans-serif;color:#666;}

@@ -17,7 +17,7 @@
 	
 		//for style ..
 		$stylee 	= "admin_calls";
-		$action 	= ADMIN_PATH . "?cp=calls&amp;page=" . (isset($_GET['page']) ? intval($_GET['page']) : '1');
+		$action 	= basename(ADMIN_PATH) . "?cp=calls&amp;page=" . (isset($_GET['page']) ? intval($_GET['page']) : '1');
 		
 		$query = array(
 					'SELECT'	=> '*',
@@ -103,12 +103,12 @@
 	}
 	
 	$total_pages = $Pager->getTotalPages(); 
-	$page_nums	= $Pager->print_nums($config['siteurl'] . ADMIN_PATH . '?cp=calls'); 
+	$page_nums	= $Pager->print_nums($config['siteurl'] . basename(ADMIN_PATH) . '?cp=calls'); 
 		
 	//after submit
 	if (isset($_POST['submit']))
 	{
-			$text	= $lang['CALLS_UPDATED'] . '<meta HTTP-EQUIV="REFRESH" content="0; url=' . ADMIN_PATH . '?cp=calls&amp;page=' . (isset($_GET['page']) ? intval($_GET['page']) : '1') . '">' ."\n";
+			$text	= $lang['CALLS_UPDATED'] . '<meta HTTP-EQUIV="REFRESH" content="0; url=' . basename(ADMIN_PATH) . '?cp=calls&amp;page=' . (isset($_GET['page']) ? intval($_GET['page']) : '1') . '">' ."\n";
 			$stylee	= "admin_info";
 	}
 

@@ -2,7 +2,7 @@
 ##################################################
 #						Kleeja
 #
-# Filename : admin.php
+# Filename : admin/index.php
 # purpose :  control panel for administarator
 # copyright 2007-2009 Kleeja.com ..
 # license http://opensource.org/licenses/gpl-license.php GNU Public License

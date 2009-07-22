@@ -21,7 +21,7 @@
 
 		$n_googleanalytics = '<a href="http://www.google.com/analytics">Google Analytics</a>';
 		//general
-		$STAMP_IMG_URL = './images/watermark.png';
+		$STAMP_IMG_URL = '../images/watermark.png';
 		$stylfiles = $lngfiles	= $authtypes = '';
 					
 		$query = array(

@@ -154,7 +154,7 @@
 					delete_cache('', true); //delete all cache to get new style
 				}
 				
-				$text	= $lang['CONFIGS_UPDATED'] . '<meta HTTP-EQUIV="REFRESH" content="2; url=' . basename(ADMIN_PATH) . '">' . "\n";
+				$text	= $lang['CONFIGS_UPDATED'] . '<meta HTTP-EQUIV="REFRESH" content="2; url=index.php?cp=options">' . "\n";
 				$stylee	= "admin_info";
 			}
 			

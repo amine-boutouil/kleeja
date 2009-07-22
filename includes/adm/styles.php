@@ -27,9 +27,9 @@ switch ($_GET['sty_t'])
 		
 		//for style ..
 		$stylee 	= "admin_styles";
-		$action 	= "admin.php?cp=styles&amp;sty_t=st";
-		$edit_tpl_action = './admin.php?cp=styles&amp;sty_t=style_orders&amp;style_id=' . $config['style'] . '&amp;method=1&amp;tpl_choose=';
-		$show_all_tpls_action = './admin.php?cp=styles&amp;style_choose=' . $config['style'] . '&amp;method=1';
+		$action 	= ADMIN_PATH . "?cp=styles&amp;sty_t=st";
+		$edit_tpl_action = ADMIN_PATH . '?cp=styles&amp;sty_t=style_orders&amp;style_id=' . $config['style'] . '&amp;method=1&amp;tpl_choose=';
+		$show_all_tpls_action = ADMIN_PATH . '?cp=styles&amp;style_choose=' . $config['style'] . '&amp;method=1';
 		
 		//kleeja depend on its users .. and kleeja love them .. so let's tell them about that ..
 		$klj_d_s = $lang['KLJ_MORE_STYLES'][rand(0, sizeof($lang['KLJ_MORE_STYLES'])-1)];
@@ -87,7 +87,7 @@ switch ($_GET['sty_t'])
 				
 					//for style ..
 					$stylee = "admin_show_tpls";
-					$action = "admin.php?cp=styles&amp;sty_t=style_orders";
+					$action = ADMIN_PATH . "?cp=styles&amp;sty_t=style_orders";
 
 					
 					//get_tpls
@@ -141,7 +141,7 @@ switch ($_GET['sty_t'])
 					delete_cache('', true); //delete all cache to get new style
 					
 					//show msg
-					$text = $lang['STYLE_NOW_IS_DEFAULT'] . '<meta HTTP-EQUIV="REFRESH" content="2; url=./admin.php?cp=styles">' ."\n";
+					$text = $lang['STYLE_NOW_IS_DEFAULT'] . '<meta HTTP-EQUIV="REFRESH" content="2; url=.' . ADMIN_PATH . '?cp=styles">' ."\n";
 					$stylee	= "admin_info";
 						
 				break;
@@ -188,8 +188,8 @@ switch ($_GET['sty_t'])
 					case '1': //edit tpl
 						//for style ..
 						$stylee = "admin_edit_tpl";
-						$action = "./admin.php?cp=styles&amp;sty_t=style_orders";
-						$action_return = './admin.php?cp=styles&amp;style_choose=' . $style_id . '&amp;method=1';
+						$action = ADMIN_PATH . "?cp=styles&amp;sty_t=style_orders";
+						$action_return = ADMIN_PATH . '?cp=styles&amp;style_choose=' . $style_id . '&amp;method=1';
 						
 						//is there any possiplity to write on files
 						$not_style_writeable = true;
@@ -219,7 +219,7 @@ switch ($_GET['sty_t'])
 							@kleeja_unlink($tpl_path);
 								
 							//show msg
-							$link	= './admin.php?cp=styles&amp;style_choose=' . $style_id . '&amp;method=1';
+							$link	= ADMIN_PATH . '?cp=styles&amp;style_choose=' . $style_id . '&amp;method=1';
 							$text	= $lang['TPL_DELETED']  . '<br /> <a href="' . $link . '">' . $lang['GO_BACK_BROWSER'] . '</a><meta HTTP-EQUIV="REFRESH" content="1; url=' . $link . '">' ."\n";
 							$stylee	= "admin_info";
 							
@@ -266,7 +266,7 @@ switch ($_GET['sty_t'])
 				//delete cache ..
 				delete_cache('tpl_' . str_replace('html','php',$tpl_name));
 				//show msg
-				$link	= './admin.php?cp=styles&amp;sty_t=style_orders&amp;style_id=' . $style_id . '&amp;tpl_choose=' . $tpl_name . '&amp;method=1';
+				$link	= ADMIN_PATH . '?cp=styles&amp;sty_t=style_orders&amp;style_id=' . $style_id . '&amp;tpl_choose=' . $tpl_name . '&amp;method=1';
 				$text	= $lang['TPL_UPDATED'] . '<br /> <a href="' . $link . '">' . $lang['GO_BACK_BROWSER'] . '</a><meta HTTP-EQUIV="REFRESH" content="3; url=' . $link . '">' ."\n";
 				$stylee	= "admin_info";
 			}
@@ -287,7 +287,7 @@ switch ($_GET['sty_t'])
 					@fclose($filename);
 				}
 				
-				$link	= './admin.php?cp=styles&amp;style_choose=' . $style_id . '&amp;method=1';
+				$link	= ADMIN_PATH . '?cp=styles&amp;style_choose=' . $style_id . '&amp;method=1';
 				$text	= $lang['TPL_CREATED']  . '<br /> <a href="' . $link . '">' . $lang['GO_BACK_BROWSER'] . '</a><meta HTTP-EQUIV="REFRESH" content="1; url=' . $link . '">' ."\n";
 				$stylee	= "admin_info";
 			}
@@ -381,7 +381,7 @@ switch ($_GET['sty_t'])
 				$text = ob_get_contents();
 				ob_end_clean();
 
-				$text .= '<br /><br /><a href="./admin.php?cp=styles&amp;sty_t=cached&amp;del=1">' . $lang['DELETE_CACHED_STYLES'] . '</a>';  
+				$text .= '<br /><br /><a href="' . ADMIN_PATH . '?cp=styles&amp;sty_t=cached&amp;del=1">' . $lang['DELETE_CACHED_STYLES'] . '</a>';  
 						
 				$stylee = 'admin_info';
 			}

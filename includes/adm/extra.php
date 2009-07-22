@@ -17,7 +17,7 @@
 
 		//for style ..
 		$stylee 	= "admin_extra";
-		$action 	= "admin.php?cp=extra";
+		$action 	= ADMIN_PATH . "?cp=extra";
 		
 		$query = array(
 					'SELECT'	=> 'ex_header,ex_footer',

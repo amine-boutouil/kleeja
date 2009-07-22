@@ -15,7 +15,7 @@
 		//for style ..
 		$stylee 		= "admin_configs";
 		//words
-		$action 		= "admin.php?cp=options";
+		$action 		= ADMIN_PATH . "?cp=options";
 		$n_submit 		= $lang['UPDATE_CONFIG'];
 		$options		= '';
 
@@ -154,7 +154,7 @@
 					delete_cache('', true); //delete all cache to get new style
 				}
 				
-				$text	= $lang['CONFIGS_UPDATED'] . '<meta HTTP-EQUIV="REFRESH" content="2; url=./admin.php">' . "\n";
+				$text	= $lang['CONFIGS_UPDATED'] . '<meta HTTP-EQUIV="REFRESH" content="2; url=' . ADMIN_PATH . '">' . "\n";
 				$stylee	= "admin_info";
 			}
 			

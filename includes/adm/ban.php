@@ -16,7 +16,7 @@
 
 		//for style ..
 		$stylee 	= "admin_ban";
-		$action 	= "admin.php?cp=ban";
+		$action 	= ADMIN_PATH . "?cp=ban";
 
 		$query = array(
 					'SELECT'	=> 'ban',

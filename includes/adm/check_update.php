@@ -99,7 +99,7 @@
 	//then go back  to start
 	if(isset($_GET['show_msg']))
 	{
-		header('location: ./admin.php');
+		header('location: ' . ADMIN_PATH);
 		$SQL->close();
 		exit;
 	}

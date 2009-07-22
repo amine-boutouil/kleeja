@@ -79,34 +79,39 @@
 	}
 	
 	$starttm = get_microtime();
-
+	
+	//path 
+	if(!defined('PATH'))
+	{
+		define('PATH', './');
+	}
 	 
 	// no config
-	if (!file_exists('config.php'))
+	if (!file_exists(PATH . 'config.php'))
 	{
-		header('Location: ./install/index.php');
+		header('Location: ' . PATH . 'install/index.php');
 		exit;
 	}
 	
 	// there is a config
-	require ('config.php');
+	require (PATH . 'config.php');
 	
 	//no enough data
 	if (!$dbname || !$dbuser)
 	{
-		header('Location: ./install/index.php');
+		header('Location: ' . PATH . 'install/index.php');
 		exit;
 	}
 	
 	//get admin path from config.php
-	$adminpath = isset($adminpath) ? $adminpath : 'admin.php';
+	$adminpath = isset($adminpath) ? $adminpath : './admin/index.php';
 	
 	//admin path
 	define('ADMIN_PATH', $adminpath);
 	
 	//include files .. & classes ..
-	$path =	dirname(__FILE__) . DIRECTORY_SEPARATOR;
-	$root_path	=	'./';
+	$path = dirname(__file__) . '/';
+	$root_path = PATH;
 	require ($path . 'style.php');
 	require ($path . 'mysql.php');
 	require ($path . 'KljUploader.php');
@@ -118,7 +123,7 @@
 	//. install.php exists
 	if (file_exists($root_path . 'install') && !defined('IN_ADMIN') && !defined('IN_LOGIN') && !defined('DEV_STAGE'))
 	{
-		big_error('install folder exists!', '<b>Install</b> folder detected! please delete it OR install <b>Kleeja</b> if you haven\'t done so yet...<br/><br/><a href="'.$root_path.'install">Click to Install</a><br/><br/>');
+		big_error('install folder exists!', '<b>Install</b> folder detected! please delete it OR install <b>Kleeja</b> if you haven\'t done so yet...<br/><br/><a href="' . $root_path . 'install">Click to Install</a><br/><br/>');
 	}
 	
 	//fix intregation problems

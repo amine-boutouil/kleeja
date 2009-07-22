@@ -302,7 +302,7 @@ function do_config_export($srv, $usr, $pass, $nm, $prf, $fpath)
 		$data	.= '$dbpass			= \''. str_replace("'","\'", $pass)."';// database password \n";
 		$data	.= '$dbname			= \''. str_replace("'","\'", $nm)."';// database name \n";
 		$data	.= '$dbprefix		= \''. str_replace("'","\'", $prf)."';// if you use perfix for tables , fill it \n";
-		$data	.= '$adminpath		= \'admin.php\';// if you renamed your acp file , please fill the new name here \n';
+		//$data	.= '$adminpath		= \'admin.php\';// if you renamed your acp file , please fill the new name here \n';
 		$data	.= "\n\n\n";
 		$data	.= "//for integration with script [ must change user systen from admin cp ] \n";
 		$data	.= '$script_path		= \''. str_replace("'","\'", $fpath)."';// path of script (./forums)  \n";

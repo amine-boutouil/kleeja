@@ -18,7 +18,7 @@ img.right {float: right;	margin-left:15px;}
 
 /** LOGO */
 #logobody {width: 90%;margin:0 auto;	padding:0;}
-#logobody .logo {width: 402px;height:85px;float: right;}
+#logobody .logo {width: 400px;height:84px;float: right;padding-top:10px;}
 #logobody .logo a:link ,.logo a:visited ,.logo a:hover ,.logo a:active {	background-color: transparent;}
 /* #  LOGO */
 
@@ -345,20 +345,17 @@ margin:5px 0;padding:10px;}
 
 
 /* tabs */
-.tabber {  
-width:70%
-}
-.tabberlive {
- margin-top:2px;
- margin-bottom:2px;
+.tabber {width:100%}
+.tabberlive { margin-top:2px; margin-bottom:2px;}
 
-}
 .tabberlive .tabbertab {
- padding:3px;
- border:1px solid #aaa;
-background:#E6E6E6;width:70%;
-
+padding:20px;
+border:1px solid #aaa;
+background:#E8E8E8;
+width:70%;
+height:150px;
 }
+
 /*--------------------------------------------------
   ul.tabbernav = the tab navigation list
   li.tabberactive = the active tab
@@ -367,9 +364,7 @@ ul.tabbernav
 {
  margin:0;
  padding: 3px 0;
-
  font: bold 11px tahoma, sans-serif;
-
 }
 
 ul.tabbernav li
@@ -381,8 +376,8 @@ ul.tabbernav li
 
 ul.tabbernav li a
 {
- padding: 3px 8px;
- margin-left: 3px;
+ padding: 6px 14px;
+ margin-left: 5px;
  border: 1px solid #aaa;
  border-bottom: none;
  background: #FFFFA6;
@@ -395,20 +390,20 @@ ul.tabbernav li a:visited { color: #667; }
 ul.tabbernav li a:hover
 {
  color: #000;
- background: #AAE;
- border-color: #227;
+ background: #ffe;
+ border-color: #777;
 }
 
 ul.tabbernav li.tabberactive a
 {
- background-color: #E6E6E6;
+ background-color: #E8E8E8;
  border-bottom: 1px solid #E6E6E6;
 }
 
 ul.tabbernav li.tabberactive a:hover
 {
  color: #000;
- background: white;
+ background:#ffe;
  border-bottom: 1px solid white;
 }
 

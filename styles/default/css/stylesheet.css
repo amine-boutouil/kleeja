@@ -154,8 +154,8 @@ padding:5px
 
 #data_file {
 	float: right;
-	width:40%;
-	margin-left:20px;
+	width:50%;
+	margin-left:10px;
 }
 #data_file .data_file p {color:#F0502E;font-size:26px;}
 
@@ -192,7 +192,7 @@ padding:5px
 #data_file ul.data_menu li b{color:#008000;}
 
 
-#data_file_down {width:56%;float: left;}
+#data_file_down {width:45%;float: left;}
 #data_file_down .find_x,#data_file_down .find_image  {
 color:#F04C2D;
 font-size:22px;
@@ -200,15 +200,15 @@ text-align:center;
 }
 
 /* file report */
-.fileReport {margin:5px 15px 0 5px;padding:6px 30px;text-align: center;border-top:3px solid #CFCFCF;
+.fileReport {margin:10px 5px ;padding:6px 10px;text-align: center;border-top:3px solid #CFCFCF;
 border-bottom:3px solid #CFCFCF;cursor:pointer;background-color:#E2E2E2;}
 .fileReport a{color:#444;font-size: 110%;}
-.fileReport a:hover,.fileReport:hover{background-color:#fff;}
+.fileReport a:hover,.fileReport:hover{background-color:#C7C7C7;}
 .fileReport:hover{border-top:3px solid #AAA;border-bottom:3px solid #AAA;}
 /* #  file report */
 
 .wait{
-color:#0080FF;
+color:#333;
 font-size:34px;
 font-weight:700;
 padding:5px 20px;
@@ -217,19 +217,20 @@ padding:5px 20px;
 #download  {
 margin:20px auto;
 text-align:center;
-height:58px;
+height:50px;
 }
 #download a {
-
-padding:30px;
-background:#FDBF06 url(../images/bg_download.png) repeat-x top right;
-border-top:3px solid #111;
-border-bottom:3px solid #111;
-color:#555;
+padding:20px 40px;
+background:#FEC008 url(../images/bg_download.png) repeat-x top right;
+border-top:3px solid #878D59;
+border-bottom:3px solid #878D59;
+color:#333;
+font-size:120%;
+font-weight:700;
 }
 #download a:hover  {
-background:#B4D8AB;
-color:#269226
+background:#FFD65D;
+color:#000
 }
 
 

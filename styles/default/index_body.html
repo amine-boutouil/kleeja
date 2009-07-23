@@ -73,7 +73,6 @@
 	</span>
 	<br />
 	<br />
-	<br />
 		<input id="checkr" type="checkbox" onclick="accept_terms('submitr','checkr');" /> {lang.AGREE_RULES}
 	<br />
 	<br /> 
@@ -83,7 +82,7 @@
 
 <!---- start uplaod URL ---->    
 	<IF NAME="config.www_url">
-    <div class="tabbertab" title="{lang.DOWNLOAD_T}" id="texttype">
+    <div class="t tabbertab" title="{lang.DOWNLOAD_T}" id="texttype">
 		<br />
 		<LOOP NAME=FILES_NUM_LOOP>
 			<input class="input_field" type="text" name="file[{{i}}]" id="fileu[{{i}}]" size="50" value="{lang.PAST_URL_HERE}" onclick="this.value=''" style="color:silver;display:{{show}}" dir="ltr"><br id="bru[{{i}}]" style="display:{{show}}" />

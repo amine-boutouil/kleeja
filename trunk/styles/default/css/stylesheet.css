@@ -128,7 +128,7 @@ background: url(../images/error.png) no-repeat right top;
 padding:5px
 }
 #system-message dd.info_f ul {
-width:70%;
+width:74%;
 list-style: none;
 padding:5px 10px;
 border-top: 3px solid #4277B7;
@@ -346,9 +346,15 @@ margin:5px 0;padding:10px;}
 
 /* tabs */
 .tabber {width:100%}
-.tabberlive { margin-top:2px; margin-bottom:2px;}
 
-.tabberlive .tabbertab {
+.tabberlive { 
+margin-top:2px; 
+margin-bottom:2px;
+
+}
+
+
+.tabbertab {
 padding:20px;
 border:1px solid #aaa;
 background:#E8E8E8;
@@ -356,13 +362,14 @@ width:70%;
 height:150px;
 }
 
-/*--------------------------------------------------
-  ul.tabbernav = the tab navigation list
-  li.tabberactive = the active tab
-  --------------------------------------------------*/
+.t {
+
+background:#FDE4CC;
+
+}
+
 ul.tabbernav
 {
- margin:0;
  padding: 3px 0;
  font: bold 11px tahoma, sans-serif;
 }
@@ -370,27 +377,24 @@ ul.tabbernav
 ul.tabbernav li
 {
  list-style: none;
- margin: 0;
  display: inline;  
 }
 
 ul.tabbernav li a
 {
- padding: 6px 14px;
+ padding: 3px 14px;
  margin-left: 5px;
  border: 1px solid #aaa;
- border-bottom: none;
- background: #FFFFA6;
+ background:#FDE4CC;
  text-decoration: none;
 }
 
 ul.tabbernav li a:link { color: #444; }
-ul.tabbernav li a:visited { color: #667; }
 
 ul.tabbernav li a:hover
 {
  color: #000;
- background: #ffe;
+ background:#FFD2A7;
  border-color: #777;
 }
 
@@ -403,23 +407,13 @@ ul.tabbernav li.tabberactive a
 ul.tabbernav li.tabberactive a:hover
 {
  color: #000;
- background:#ffe;
- border-bottom: 1px solid white;
+ border-bottom: 1px solid #E8E8E8;
 }
 
 /*--------------------------------------------------
   .tabbertab = the tab content
   Add style only after the tabber interface is set up (.tabberlive)
   --------------------------------------------------*/
-
-
-/* If desired, hide the heading since a heading is provided by the tab */
-.tabberlive .tabbertab h2 {
- display:none;
-}
-.tabberlive .tabbertab h3 {
- display:none;
-}
 
 .tabberlive .tabbertabhide {
  display:none;

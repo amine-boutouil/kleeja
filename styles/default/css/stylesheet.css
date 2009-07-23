@@ -147,93 +147,36 @@ padding:5px
 
 
 
-
-#file-info{height:180px;margin:5px auto;}
-
-
-
-#data_file {
-	float: right;
-	width:50%;
-	margin-left:10px;
-}
+/* Downlod template */
+#file-info {height:180px;margin:5px auto;}
+#data_file {float:right;width:50%;margin-left:10px;}
 #data_file .data_file p {color:#F0502E;font-size:26px;}
-
-
-#data_file .t {
-	margin:10px 15px 0 15px;
-	color:#555;
-	background: #ccc;	
-	font-size:12px;
-	text-align:center;
-	border: 1px solid #f2f2f2;
-	padding: 2px 5px 2px 10px;
-	border-right: 5px solid #CCC;	
-}
+#data_file .t {color:#555;background:#ccc;font-size:12px;text-align:center;
+			border:1px solid #f2f2f2;border-right:5px solid #CCC;border-left:5px solid #CCC;
+			margin:10px 15px 0;padding:2px 5px 2px 10px;}
 #data_file .nup {font-size:18px;}
-
-#data_file ul.data_menu {
-	list-style:none;
-	margin:4px 15px;
-	padding:0;		
-}
-#data_file ul.data_menu li {
-	margin-bottom:1px;
-	border: 1px solid #f2f2f2;
-	display: block;
-	font-weight: bold;
-	color:#333;
-	text-decoration:none;	
-	padding: 2px 5px 2px 10px;
-	background: #f2f2f2;
-	border-right: 5px solid #CCC;	
-	min-height: 18px;	
-}
-#data_file ul.data_menu li b{color:#008000;}
-
-
-#data_file_down {width:45%;float: left;}
-#data_file_down .find_x,#data_file_down .find_image  {
-color:#F04C2D;
-font-size:22px;
-text-align:center;
-}
+#data_file ul.data_menu {list-style:none;margin:4px 15px;}
+#data_file ul.data_menu li {margin-bottom:1px;border:1px solid #f2f2f2;display:block;font-weight:700;color:#333;
+			text-decoration:none;background:#f2f2f2;border-right:5px solid #CCC;padding:2px 5px 2px 10px;}
+#data_file ul.data_menu li b {color:#040476;}
+#data_file_down {width:45%;float:left;}
+#data_file_down .find_x,#data_file_down .find_image {color:#2B8800;font-size:22px;text-align:center;}
 
 /* file report */
-.fileReport {margin:10px 5px ;padding:6px 10px;text-align: center;border-top:3px solid #CFCFCF;
-border-bottom:3px solid #CFCFCF;cursor:pointer;background-color:#E2E2E2;}
-.fileReport a{color:#444;font-size: 110%;}
-.fileReport a:hover,.fileReport:hover{background-color:#C7C7C7;}
-.fileReport:hover{border-top:3px solid #AAA;border-bottom:3px solid #AAA;}
-/* #  file report */
+.fileReport {text-align:center;border-top:2px solid #CFCFCF;border-bottom:2px solid #CFCFCF;
+			cursor:pointer;background-color:#E2E2E2;margin:10px 5px;padding:6px 10px;}
+.fileReport a {color:red;font-size:110%;}
+.fileReport a:hover,.fileReport:hover {background-color:#C7C7C7;color:#222;}
+.fileReport:hover {border-top:2px solid #999;border-bottom:2px solid #999;}
 
-.wait{
-color:#333;
-font-size:34px;
-font-weight:700;
-padding:5px 20px;
-}
+.wait {color:#F04C2D;font-size:300%;font-weight:700;padding:5px 10px;}
 
-#download  {
-margin:20px auto;
-text-align:center;
-height:50px;
-}
-#download a {
-padding:20px 40px;
-background:#FEC008 url(../images/bg_download.png) repeat-x top right;
-border-top:3px solid #878D59;
-border-bottom:3px solid #878D59;
-color:#333;
-font-size:120%;
-font-weight:700;
-}
-#download a:hover  {
-background:#FFD65D;
-color:#000
-}
-
-
+/* button Downlod */
+#download {text-align:center;height:50px;margin:12px auto;}
+#download a {background:#FEC008 url(../images/bg_download.png) repeat-x top right;border-top:3px solid #878D59;
+			border-bottom:3px solid #878D59;color:#777;font-size:130%;font-weight:700;padding:20px;}
+#download a:hover {background:#FFD65D;color:#000;}
+/* # End Downlod template */
 
 
 /* stats template */
@@ -242,6 +185,8 @@ color:#000
 #stats  ul li b{color:#A24000;padding:1px}
 #stats .st i{font-size:12px;font-weight:700;padding:4px 8px;color: #222;border-bottom:1px solid #222;}
 /* #  stats template */
+
+
 
 #filecp td{padding:5px;border-bottom:1px solid #ddd;}
 

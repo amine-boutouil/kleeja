@@ -1,6 +1,8 @@
+<!-- start index template  -->
+
 <div id="content_index_body">
 
-<!-- start index template  -->
+
 <div id="index_body">
 
 <!-- start welcome -->
@@ -29,92 +31,94 @@
 <form name="uploader" id="uploader" action="{action}" method="post"  enctype="multipart/form-data" onsubmit="form_submit();">
 
 
-<!---- star  safe code  ---->				
+<!---- start  safe code  ---->				
 <IF NAME="config.safe_code">
 <table class="safe_code" cellpadding="0" cellspacing="0" border="0" width="71%">
 	<tr>
-		<td style="width: 38%;">	<br /> 
+		<td style="width:38%;"><br /> 
 		<span>{lang.VERTY_CODE}</span>
 		<div class="explain">{lang.NOTE_CODE}</div>
 		</td>
-		
-		<td>
-			<br /> 
+		<td><br />
 		<img id="kleeja_img_captcha" src="{captcha_file_path}" alt="{lang.REFRESH_CAPTCHA}" title="{lang.REFRESH_CAPTCHA}" onclick="javascript:update_kleeja_captcha('{captcha_file_path}', 'kleeja_code_answer');" />
-
 		<br /> 
-		
 		<input type="text" name="kleeja_code_answer" id="kleeja_code_answer" style="direction:ltr" />
-		
 		</td>
 	</tr>
-
 </table>		
 </IF>
 <!---- ## End  safe code  ---->	      
 
+<!---- start uplaod boxs  ---->
 <div class="tabber">
 
-
-        <div class="tabbertab" title="{lang.DOWNLOAD_F}" id="filetype">
-		<br />
-                <LOOP NAME=FILES_NUM_LOOP>
-					<input class="input_field" type="file" name="file[{{i}}]" id="file[{{i}}]" style="display:{{show}}" size="50" /><br id="br[{{i}}]" style="display:{{show}}" />
-				</LOOP>
-                
-                <div id="upload_forum"></div>
-                <br />
-				
-				<input class="input_field" type="text" id="upload_num" value="1" size="1" readonly="readonly" style="text-align:center;color:#999"/>
-
-				<span class="zx"><a name="mraupload" onclick="javascript:plus(1);"><img src="{STYLE_PATH}images/zx.png" style="vertical-align:middle;" /></a></span>
-				
-				<span class="zl"><a name="mreupload" onclick="javascript:minus(1);"><img src="{STYLE_PATH}images/zl.png" style="vertical-align:middle;" /></a></span>
-
-				<br /><br />
-
-             
-                
-                <br />
-
-		   <input id="checkr" type="checkbox" onclick="accept_terms('submitr','checkr');" /> {lang.AGREE_RULES}
-	<br /> 	<br /> 
-		
+<!---- start uplaod normal  ---->
+<div class="tabbertab" title="{lang.DOWNLOAD_F}" id="filetype">
+	<br />
+	<LOOP NAME=FILES_NUM_LOOP>
+		<input class="input_field" type="file" name="file[{{i}}]" id="file[{{i}}]" style="display:{{show}}" size="50" /><br id="br[{{i}}]" style="display:{{show}}" />
+	</LOOP>
+    <div id="upload_forum"></div>
+    <br />
+		<input class="input_field" type="text" id="upload_num" value="1" size="1" readonly="readonly" style="text-align:center;color:#999"/>
+	<span class="zx">
+		<a name="mraupload" onclick="javascript:plus(1);">
+			<img src="{STYLE_PATH}images/zx.png" style="vertical-align:middle;" />
+		</a>
+	</span>
+	<span class="zl">
+		<a name="mreupload" onclick="javascript:minus(1);">
+			<img src="{STYLE_PATH}images/zl.png" style="vertical-align:middle;" />
+		</a>
+	</span>
+	<br />
+	<br />
+	<br />
+		<input id="checkr" type="checkbox" onclick="accept_terms('submitr','checkr');" /> {lang.AGREE_RULES}
+	<br />
+	<br /> 
 		 <input class="buttons" type="submit" id="submitr" name="submitr" value="{lang.DOWNLOAD_F}"  disabled="disabled" />
-		
-
-				
-   
-               
-                
-        </div>
-
-        
-<IF NAME="config.www_url">
-        <div class="tabbertab" title="{lang.DOWNLOAD_T}" id="texttype">
-		<br />
-			<LOOP NAME=FILES_NUM_LOOP>
-				<input class="input_field" type="text" name="file[{{i}}]" id="fileu[{{i}}]" size="50" value="{lang.PAST_URL_HERE}" onclick="this.value=''" style="color:silver;display:{{show}}" dir="ltr"><br id="bru[{{i}}]" style="display:{{show}}" />
-			</LOOP>
-                
-                <br />
-                <div id="upload_f_forum"></div>
-				<input class="input_field" type="text" id="upload_f_num" value="1" size="1" readonly="readonly" style="text-align:center;color:#999"/>
-				<span class="zx"><a name="mraupload" onclick="javascript:plus(2);"><img src="{STYLE_PATH}images/zx.png" style="vertical-align:middle;" /></a></span>
-				<span class="zl"><a name="mreupload" onclick="javascript:minus(2);"><img src="{STYLE_PATH}images/zl.png" style="vertical-align:middle;" /></a></span>
-                <br /><br />
-                <input id="checkr2" type="checkbox" onclick="accept_terms('submittxt','checkr2');" />{lang.AGREE_RULES}
-                <br /> <br />
-                <input class="buttons" type="submit" id="submittxt" name="submittxt" value="{lang.DOWNLOAD_T}"   disabled="disabled" />
-                
-        </div>
-</IF>
 </div>
+<!---- # end uplaod normal  ---->
+
+<!---- start uplaod URL ---->    
+	<IF NAME="config.www_url">
+    <div class="tabbertab" title="{lang.DOWNLOAD_T}" id="texttype">
+		<br />
+		<LOOP NAME=FILES_NUM_LOOP>
+			<input class="input_field" type="text" name="file[{{i}}]" id="fileu[{{i}}]" size="50" value="{lang.PAST_URL_HERE}" onclick="this.value=''" style="color:silver;display:{{show}}" dir="ltr"><br id="bru[{{i}}]" style="display:{{show}}" />
+		</LOOP>
+        <br />
+    <div id="upload_f_forum"></div>
+		<input class="input_field" type="text" id="upload_f_num" value="1" size="1" readonly="readonly" style="text-align:center;color:#999"/>
+			<span class="zx">
+				<a name="mraupload" onclick="javascript:plus(2);">
+				<img src="{STYLE_PATH}images/zx.png" style="vertical-align:middle;" />
+				</a>
+			</span>
+			<span class="zl">
+				<a name="mreupload" onclick="javascript:minus(2);">
+					<img src="{STYLE_PATH}images/zl.png" style="vertical-align:middle;" />
+				</a>
+			</span>
+            <br />
+			<br />
+        <input id="checkr2" type="checkbox" onclick="accept_terms('submittxt','checkr2');" />{lang.AGREE_RULES}
+            <br />
+			<br />
+        <input class="buttons" type="submit" id="submittxt" name="submittxt" value="{lang.DOWNLOAD_T}"   disabled="disabled" />
+    </div>
+	</IF>
+<!---- # END uplaod URL ---->  	
+
+</div>
+<!---- # end uplaod boxs  ---->
 
 </form>
+<!---- # END  FOR UPLOAD BOXES ---->
+
 
 <div id="loadbox"><img src="{STYLE_PATH}images/loading.gif" alt="loading ..." /></div>
-<!---- END  FOR UPLOAD BOXES ---->
 
 <br />
 
@@ -138,9 +142,9 @@
 <br />
 
 </div>
-<!-- ## End index template  -->
+
 
 <br />
 </div>
-    
+<!-- ## End index template  -->   
    

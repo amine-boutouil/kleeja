@@ -17,13 +17,13 @@ img.right {float: right;	margin-left:15px;}
 .line {background:url(../images/line.png) repeat-x right top;height:6px;	margin:3px auto;}
 
 /** LOGO */
-#logobody {width: 90%;margin:0 auto;	padding:0;}
-#logobody .logo {width: 400px;height:84px;float: right;padding-top:10px;}
+#logobody {width:90%;margin:0 auto;	padding:0;}
+#logobody .logo {width:500px;height:84px;margin:2px auto;}
 #logobody .logo a:link ,.logo a:visited ,.logo a:hover ,.logo a:active {	background-color: transparent;}
 /* #  LOGO */
 
 /**  start The main menu at the top **/	
-#top_menu {width: 100%;height: 43px;	background: url(../images/menu-bg.gif) top left repeat-x;}
+#top_menu {width: 100%;height: 43px;	background: url(../images/menu-bg.gif) top left repeat-x;margin-top:5px}
 #top_menu  .m3nu {width: 80%;height: 43px;font-size: 12px;font-weight: bold;list-style-type: none;margin: 0 auto;}
 #top_menu  ul.m3nu li {display: block;float: right;margin: 0 5px 0 0 ;padding:0;}
 #top_menu  ul.m3nu li a {height: 43px;color: #777;text-decoration: none;display: block;float: left;padding: 8px 15px 0;}
@@ -288,19 +288,10 @@ background:url(../images/buttons-bg.gif) repeat-x left top;color: #555;border:1p
 /* ## ALL buttons */
 
 /* form login*/
-#lognxx {
-float: right;
-width:220px;
-padding:7px 15px;
-margin:0 150px 10px 0;
-background:#FFF2F2;
-border:2px solid #FFB8B8;
-}
-
 #login {	float: right;width: 220px;}
 #login label {display: block;margin-bottom: 2px;}
 #login a {color:#C03C2D;font-size: 12px;padding: 3px 6px;}
-#login  .title_login {background:#FFDFDF;color:#D80505;width: 200px;	padding: 5px;}
+#login  .title_login {border: 1px solid #999;color:#D80505;width: 200px;	padding: 5px;}
 #login .username,#login .password{padding-left:20px;padding-top:2px;height:18px;width:180px;font-size: 12px;}
 #login  .username{background:#fff url(../images/username.gif) no-repeat 1px 2px;}
 #login  .password{background:#fff url(../images/password.gif) no-repeat 1px 2px;}

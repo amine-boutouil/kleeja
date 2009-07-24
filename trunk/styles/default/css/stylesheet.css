@@ -220,28 +220,19 @@ div#loadbox {padding: 10px;display: none;}
 
 .usercp {background:#F8F4ED;padding:10px;border:1px solid #FFECCD}
  
-.input_link { 
+ 
+ 
+ 
+ .input_link,.input_field,.input_num   { 
 	background: #FFFFFF url(../css/images/input_bg.gif) repeat-x;
 	border: 1px solid #B3B9C4;
-	font-family: tahoma, Helvetica,  sans-serif;
-	font-size: 12px;
-	padding:2px 4px;
-	color: #222;
-}
-.input_link:focus, .input_link:hover {
-	border: 1px solid #B73E3E;
-	background:#F8F4ED;
-}
-.input_field { 
-	background: #FFFFFF url(../images/input_bg.gif) repeat-x;
-	border: 1px solid #B3B9C4;
-	color: #000;
-}
+	font:normal 12px tahoma, Helvetica,  sans-serif;}
+.input_link {padding:2px 4px;}
+.input_field {height:18px;padding:4px 2px 0 2px;}
+.input_num {	padding:2px;}
+.input_field:focus, .input_field:hover ,
+.input_link:focus, .input_link:hover{border: 1px solid #7E8993;background-color:#ffd;}
 
-
-.input_field:focus, .input_field:hover {
-	border: 1px solid #7E8993;background-color: #ffd ;
-}
 
 /* extras  footer template */
 #extras_footer {	width: 100%;margin: 0 auto; padding:5px;}
@@ -346,90 +337,36 @@ margin:5px 0;padding:10px;}
 
 /* tabs */
 .tabber {width:100%}
+.tabberlive {margin-top:2px;margin-bottom:2px;}
+.tabberlive .tabbertabhide {display:none;}
+.tabbertab {width:70%;height:100%;padding:20px;
+		border:1px solid #aaa;
+		background:#DAE3F5 url(../images/bg_tabbertab.png) repeat-x top left;
+		-moz-border-radius-bottomleft: 10px;
+		-webkit-border-bottom-left-radius: 10px;
+		-moz-border-radius-bottomright: 10px; 
+		-webkit-border-bottom-right-radius: 10px;}
+.bg {background:#F5E8DA url(../images/bg_tabbertab_1.png) repeat-x top left;}
 
-.tabberlive { 
-margin-top:2px; 
-margin-bottom:2px;
+ul.tabbernav{ padding:5px 0; font: bold 11px tahoma, sans-serif;}
+ul.tabbernav li{ list-style: none; display: inline;}
+ul.tabbernav li a{ padding:5px 14px; margin-left: 5px; border: 1px solid #aaa;
+		background:#DCFFBC;text-decoration: none;
+ 		-moz-border-radius-topleft: 10px; 
+		-webkit-border-top-left-radius: 10px;
+		-moz-border-radius-topright: 10px; 
+		-webkit-border-top-right-radius: 10px;}
 
-}
+ul.tabbernav li a:link {color: #777;}
+ul.tabbernav li a:hover{color:#222;}
 
-
-.tabbertab {
-padding:20px;
-border:1px solid #aaa;
-background:#E8E8E8;
-width:70%;
-height:150px;
-}
-
-.t {
-
-background:#FDE4CC;
-
-}
-
-ul.tabbernav
-{
- padding: 3px 0;
- font: bold 11px tahoma, sans-serif;
-}
-
-ul.tabbernav li
-{
- list-style: none;
- display: inline;  
-}
-
-ul.tabbernav li a
-{
- padding: 3px 14px;
- margin-left: 5px;
- border: 1px solid #aaa;
- background:#FDE4CC;
- text-decoration: none;
-}
-
-ul.tabbernav li a:link { color: #444; }
-
-ul.tabbernav li a:hover
-{
- color: #000;
- background:#FFD2A7;
- border-color: #777;
-}
-
-ul.tabbernav li.tabberactive a
-{
- background-color: #E8E8E8;
- border-bottom: 1px solid #E6E6E6;
-}
-
-ul.tabbernav li.tabberactive a:hover
-{
- color: #000;
- border-bottom: 1px solid #E8E8E8;
-}
-
-/*--------------------------------------------------
-  .tabbertab = the tab content
-  Add style only after the tabber interface is set up (.tabberlive)
-  --------------------------------------------------*/
-
-.tabberlive .tabbertabhide {
- display:none;
-}
-
-/* Example of using an ID to set different styles for the tabs on the page */
-.tabberlive#tab1 {
-}
-.tabberlive#tab2 {
-}
-.tabberlive#tab2 .tabbertab {
- height:200px;
- overflow:auto;
-}
+ul.tabbernav li.tabberactive a{ padding:5px 14px;border-bottom: 1px solid #E8E8E8;background-color:#E8E8E8;}
+ul.tabbernav li.tabberactive a:link{color: #222;}
+ul.tabbernav li.tabberactive a:hover{color: #999;}
 
 /* #tabs */
+
+
 
 #guide { 
 width:100%;
@@ -491,27 +428,16 @@ padding:5px 25px 10px 0;
 
 
 
+.agree{font-size:xx-small;padding:3px 6px;}
+.zx,.zl {cursor:pointer;padding:4px;}
 
-.zx,.zl {
-width:35px;
-height:30px;
-cursor:pointer;
-margin:2px 3px;
-padding-right:2px;
-}
-.zx,.zl a{
-margin:2px 5px;
-padding:0
-}
-.zx,.zl img{
-margin:2px 5px;
-padding:0
-}
-.zx a:hover ,.zl a:hover{
+
+
+.zx a:hover,.zl a:hover {
 background-color:transparent;
-padding-right:2px;
+border-right:1px solid #F5F5F5;
+border-left:1px solid #F5F5F5;
 }
-
 
 /* index body   */
 #content_index_body  {

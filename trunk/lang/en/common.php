@@ -437,6 +437,8 @@ $lang = array_merge($lang, array(
 	'LIVEXTS'				=> 'Live extensions (separate by comma)',
 	'MUST_LOGIN'			=> 'You must login with correct username and password .',
 	
+	'ADD_UPLAD_A'			=> 'إضافة المزيد من الحقول',
+	'ADD_UPLAD_B'			=> 'حذف الحقول',
 	'COPYRIGHTS_X'			=> 'جميع الحقوق محفوظة',
 	'ADMIN_DELETE_FILE_ERR'	=> 'There is error occurred while trying to delete user files . ',
 	'ADMIN_DELETE_NO_FILE'	=> 'لا يوجد أي ملفات في حساب العضوية حتى الآن .. !',

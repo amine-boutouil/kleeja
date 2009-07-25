@@ -77,15 +77,6 @@ img.right {float: right;	margin-left:15px;}
 .buttons:hover { background:#555;color: #fff;}
 /* ## ALL buttons */
 
-/* login template */
-#login {	float: right;width: 220px;}
-#login label {display: block;margin-bottom: 5px;}
-#login a {color:#000;font-size: 12px;padding: 3px 6px;}
-#login .inputtext1, #login .inputtext2 {
-	width: 180px;margin-bottom: 5px;color: #000;
-	padding: 2px 5px;border: 1px solid #CCCCCC;
-    font: normal 12px Tahoma, Helvetica, Arial, sans-serif;}
-/* # login template */
 
 
 /* fixed */
@@ -287,11 +278,27 @@ background:url(../images/buttons-bg.gif) repeat-x left top;color: #555;border:1p
 #buttons:hover ,.buttons:hover{background:#B0B1B1;color: #111;border:1px solid #666;}
 /* ## ALL buttons */
 
-/* form login*/
+#register{background:url(../images/register.png) no-repeat 10% 24%;}
+.reg_table{
+border: 2px solid #D1C2A8;
+margin:5px 0;
+padding:10px;
+width:60%;
+background:#F8F4ED;
+}
+.reg_table td{
+width:130px;
+padding-bottom:5px;
+}
+.reg_table td input {
+width:180px;
+}
+/* login template */
+#bg_log1n{background:url(../images/login.png) no-repeat 30% 30%;float:left;width:70%;}
 #login {	float: right;width: 220px;}
 #login label {display: block;margin-bottom: 2px;}
 #login a {color:#C03C2D;font-size: 12px;padding: 3px 6px;}
-#login  .title_login {border: 1px solid #999;color:#D80505;width: 200px;	padding: 5px;}
+#login .title_login {border-bottom:1px solid #999;color:#D80505;width: 200px;padding:2px 5px;}
 #login .username,#login .password{padding-left:20px;padding-top:2px;height:18px;width:180px;font-size: 12px;}
 #login  .username{background:#fff url(../images/username.gif) no-repeat 1px 2px;}
 #login  .password{background:#fff url(../images/password.gif) no-repeat 1px 2px;}
@@ -299,7 +306,7 @@ background:url(../images/buttons-bg.gif) repeat-x left top;color: #555;border:1p
 #login  .forget_pass a:hover {color:#FF2020;background-color:transparent;}	
 #login  .remme{background:#FFBA00;color: #000;border: 1px solid #999;font:normal 9px Tahoma, Helvetica, Arial, sans-serif;}
 #login .remme option{background: #FFBA00;color: #000;}
-/* # form login*/
+/* # login template */
 
 /* captcha stuff*/
 #kleeja_img_captcha {cursor: pointer;}
@@ -311,10 +318,10 @@ background:url(../images/buttons-bg.gif) repeat-x left top;color: #555;border:1p
 
 .safe_code {	
 border: 2px solid #B7D1A8;
-background:#F1F8ED url(../images/saf3_code01.png) no-repeat 40px 15px ;
+background:#F1F8ED url(../images/saf3_code01.png) no-repeat 20px 15px ;
 margin:5px 0;
 padding:10px;
-width:75%;
+width:60%;
 }
 .safe_code b  {padding-right:4px;color:#408000}
 .safe_code input  {padding:2px;height:18px;}
@@ -436,11 +443,12 @@ padding:5px 30px;
 
 #index_body{background:url(../images/index_body.png) no-repeat left top;}
 
+
 /* Content */
 #content {
 float: left;
 width: 70%;
-padding:15px 30px;
+padding:10px 30px;
 margin:10px auto 20px auto;
 color:#444;
 background-color:#E8E8E8;

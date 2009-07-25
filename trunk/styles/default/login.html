@@ -1,16 +1,11 @@
 <!-- start login template  -->
 <div id="content">
 
+<!-- start background login  -->
+<div id="bg_log1n">
+
 <!-- start error msg  -->
-<IF NAME="ERRORS">
-<dl id="system-message">
-<dd class="error">
-<ul>
-	<LOOP NAME="ERRORS"><li>{%value%}</li></LOOP>
-</ul>
-</dd>
-</dl>	
-</IF>
+<IF NAME="ERRORS"><dl id="system-message"><dd class="error"><ul><LOOP NAME="ERRORS"><li>{%value%}</li></LOOP></ul></dd></dl></IF>
 <!-- # end error msg  -->
 
 <!-- start form login  -->
@@ -42,9 +37,11 @@
 	</form>
 </div>
 <!-- ## End form login  -->
+
+</div>  
+<!-- # End background login  -->
  
 <div class="clr"></div><br />
-   
+
 </div>
- 
-<!-- ## End login template  -->        
+ <!-- ## End login template  -->        

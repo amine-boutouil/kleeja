@@ -11,46 +11,51 @@
 
 <!-- start error msg  -->
 <IF NAME="ERRORS">
-	<div class="error_f">
-		<ul>
-			<LOOP NAME="ERRORS"><li>{%value%}</li></LOOP>
-		</ul>
-	</div>
+<dl id="system-message"><dd class="error"><ul><LOOP NAME="ERRORS"><li>{%value%}</li></LOOP></ul></dd></dl>	
 </IF>
 <!-- # end error msg  -->
 
 <!-- start form register  -->
 <form action="{action}" method="post">
-		<table>
-            <tr>
-				<td class="row1">{lang.USERNAME} :</td>
-				<td class="row2"><input type="text" name="lname" value="{t_lname}"  /></td>
-            </tr>
-            <tr>
-                <td class="row1">{lang.PASSWORD} : </td>
-                <td class="row2"><input type="password" name="lpass" value="{t_lpass}"  /></td>
-            </tr>
-            <tr>
-                <td class="row1">{lang.EMAIL} :</td>
-                <td class="row2"> <input type="text" name="lmail" value="{t_lmail}" style="direction:ltr" /></td>
-             </tr>
-            <tr>
-                <td class="row1">{lang.VERTY_CODE}</td>
-                <td class="row2">
-                   <img id="kleeja_img_captcha" src="{captcha_file_path}" alt="{lang.REFRESH_CAPTCHA}" title="{lang.REFRESH_CAPTCHA}" onclick="javascript:update_kleeja_captcha('{captcha_file_path}', 'kleeja_code_answer');" />
-				   <br />
-					<input type="text" name="kleeja_code_answer" id="kleeja_code_answer" style="direction:ltr" />
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" style="text-align:center">
-					{H_FORM_KEYS}
-					<input class="buttons" type="submit" name="submit" value="{lang.REGISTER}" /></td>
-            </tr>
-        </table>
+
+<div id="register">
+
+<div class="reg_table">
+<table>
+	<tr>
+		<td><b>{lang.USERNAME} :</b></td>
+		<td><input type="text" name="lname" value="{t_lname}"  /></td>
+	</tr>
+	<tr>
+		<td><b>{lang.PASSWORD} :</b></td>
+		<td><input type="password" name="lpass" value="{t_lpass}"  /></td>
+	</tr>
+	<tr>
+		<td><b>{lang.EMAIL} :</b></td>
+		<td><input type="text" name="lmail" value="{t_lmail}" style="direction:ltr" /></td>
+	</tr>
+</table>
+</div>
+
+<!---- start  safe code  ---->				
+<div class="safe_code">
+<b>{lang.VERTY_CODE}</b>
+<br /><br />
+<img style="vertical-align:middle;" id="kleeja_img_captcha" src="{captcha_file_path}" alt="{lang.REFRESH_CAPTCHA}" title="{lang.REFRESH_CAPTCHA}" onclick="javascript:update_kleeja_captcha('{captcha_file_path}', 'kleeja_code_answer');" />
+<input type="text" name="kleeja_code_answer" id="kleeja_code_answer" style="direction:ltr" />
+<br /><br />
+<span class="explain">{lang.NOTE_CODE}</span>
+<br />
+</div>
+<!---- ## End  safe code  ---->	
+
+{H_FORM_KEYS}
+<input class="buttons" type="submit" name="submit" value="{lang.REGISTER}" />
+</div>
 </form>
 <!-- ## End form register  -->
-
+ 
+  
 <div class="clr"></div><br />
    
 </div>

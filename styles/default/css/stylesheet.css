@@ -18,7 +18,7 @@ img.right {float: right;	margin-left:15px;}
 
 /** LOGO */
 #logobody {width:90%;margin:0 auto;	padding:0;}
-#logobody .logo {width:500px;height:84px;margin:2px auto;}
+#logobody .logo {width:500px;height:84px;margin:2px 0;}
 #logobody .logo a:link ,.logo a:visited ,.logo a:hover ,.logo a:active {	background-color: transparent;}
 /* #  LOGO */
 
@@ -216,7 +216,7 @@ font-size:12px; font-weight:bold; border:1px solid #858585;}
 
 
 /* connection template */
-.call form {margin:10px; background:url(../images/icontexto.png) no-repeat 40% 0%;}
+.call form {margin:10px; background:url(../images/call.png) no-repeat 20% 50%;}
 .call label {display:block;font-weight:bold;margin:5px 0;}
 .call input {padding: 2px;border:1px solid #999;font: bold 12px tahoma, Verdana, sans-serif;color:#666;}
 .call textarea {width:300px;padding:2px;font: bold 12px tahoma, Verdana, sans-serif;border:1px solid #999;
@@ -252,11 +252,20 @@ background:url(../images/buttons-bg.gif) repeat-x left top;color: #555;border:1p
 
 
 /* login template */
-#bg_log1n{background:url(../images/get_password.png) no-repeat 20% 40%;float:left;width:70%;}
+
+#bg_log1n{
+float:right;
+width: 40%;
+padding:10px 30px;
+margin:1% 12% 2% 2%;
+color:#444;
+background:#E8E8E8 url(../images/get_password.png) no-repeat 10% 34%;
+border:1px solid #F5F5F5;-moz-border-radius: 8px;border-radius:1px;}
+
 #login {	float: right;width: 220px;}
 #login label {display: block;margin-bottom: 2px;}
 #login a {color:#C03C2D;font-size: 12px;padding: 3px 6px;}
-#login .title_login {border-bottom:1px solid #999;color:#D80505;width: 200px;padding:2px 5px;}
+#login .title_login {background:#fff;color:#D80505;width: 200px;padding:2px 5px;}
 #login .username,#login .password{padding-left:20px;padding-top:2px;height:18px;width:180px;font-size: 12px;}
 #login  .username{background:#fff url(../images/username.gif) no-repeat 1px 2px;}
 #login  .password{background:#fff url(../images/password.gif) no-repeat 1px 2px;}
@@ -387,8 +396,8 @@ padding:5px 25px 10px 0;
 background-color:#E8E8E8;border:1px solid #F5F5F5;-moz-border-radius: 8px;border-radius:1px;}
 
 /* title */
-.title-x b{float:right;color: #000;padding:3px;margin:3px ;font-size: 14px; 
-	font-weight: bold;color: rgb(89, 89, 89);text-shadow: 0px 1px rgb(247, 247, 247);}
+.title-x strong{float:right;padding:2px 4px;margin:1px 0;font-size:12px; 
+color:#418300;text-shadow: 0px 1px rgb(247, 247, 247);}
 .title-x a {color:#C95A12;}
 .title-x a:hover {color: #000;background:transparent;}
 

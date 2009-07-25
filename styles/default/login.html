@@ -1,11 +1,21 @@
 <!-- start login template  -->
-<div id="content">
-
-<!-- start background login  -->
 <div id="bg_log1n">
 
+<!-- start site name and title  -->
+<div class="title-x"><strong><a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}</strong></div>
+<!--  # End  site name and title  -->
+
+<!-- start line top  -->
+<div class="clr"></div><div class="line"></div>
+<!-- # End line top  -->
+
 <!-- start error msg  -->
-<IF NAME="ERRORS"><dl id="system-message"><dd class="error"><ul><LOOP NAME="ERRORS"><li>{%value%}</li></LOOP></ul></dd></dl></IF>
+<IF NAME="ERRORS">
+<dl id="system-message">
+<dd class="error"><ul>
+<LOOP NAME="ERRORS"><li>{%value%}</li></LOOP>
+</ul></dd></dl>
+</IF>
 <!-- # end error msg  -->
 
 <!-- start form login  -->
@@ -38,7 +48,7 @@
 </div>
 <!-- ## End form login  -->
 
-</div>  
+
 <!-- # End background login  -->
  
 <div class="clr"></div><br />

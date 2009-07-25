@@ -11,17 +11,17 @@
 
 <table id="usercp" cellpadding="5" cellspacing="4" border="0" style="width:100%">
 	<tr>
-		<td class="imguser">
+		<td><img src="{STYLE_PATH}images/imguser.png" style="vertical-align:middle;"><br /><br />
 		<IF NAME="user_name">
-				<b>{lang.PUBLIC_USER_FILES} :</b>
+				<strong>{lang.PUBLIC_USER_FILES} :</strong>
 				<br />
-				<p class="uname">{user_name}</p>
+				<strong class="uname">{user_name}</strong>
 			</IF>
 		</td>
 		<td class="daaf" style="text-align:center">
 		<br />	
 		<IF NAME="filecp_link">
-			<b class="copylink">{lang.COPY_AND_GET_DUD}</b>
+			<strong class="copylink">{lang.COPY_AND_GET_DUD}</strong>
 			<br />
 			<br />
 			<input class="input_link" readonly="readonly" onclick="javascript:highlight(this);" type="text" style="width: 340px" name="option" value="{your_fileuser}" size="20" dir="ltr" />

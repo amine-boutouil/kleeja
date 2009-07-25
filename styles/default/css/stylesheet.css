@@ -18,8 +18,8 @@ img.right {float: right;	margin-left:15px;}
 
 /** LOGO */
 #logobody {width:90%;margin:0 auto;	padding:0;}
-#logobody .logo {width:500px;height:84px;margin:2px 0;}
-#logobody .logo a:link ,.logo a:visited ,.logo a:hover ,.logo a:active {	background-color: transparent;}
+.logo {width:500px;height:84px;margin:2px 0;}
+.logo a:link ,.logo a:visited ,.logo a:hover ,.logo a:active {background-color: transparent;}
 /* #  LOGO */
 
 /**  start The main menu at the top **/	
@@ -145,10 +145,10 @@ padding:5px
 
 
 /* stats template */
-#stats  {margin:10px 20px;font-size:11px;font-weight:700;background:url(../images/stats.png) no-repeat 1% 2%;}
+#stats  {margin:10px 20px;font-size:11px;font-weight:700;background:url(../images/stats.png) no-repeat 1% 1%;}
 #stats ul {list-style:circle;list-style-position:outside}
 #stats  ul li b{color:#A24000;padding:1px}
-#stats .st i{font-size:12px;font-weight:700;padding:4px 8px;color: #222;border-bottom:1px solid #222;}
+#stats .st i{font-size:12px;font-weight:700;padding:4px 8px;color: #999;border-bottom:1px solid #999;}
 /* #  stats template */
 
 
@@ -161,9 +161,8 @@ div#loadbox {padding: 10px;display: none;}
 
 
 #usercp {padding:10px;}
-#usercp  .imguser{background:url(../images/imguser.png) no-repeat top right;width:50%}
-#usercp  .imguser b{padding-right:80px;}
-#usercp .daaf{background:#EDF8F4;padding:10px;border:2px solid #CDDFFF;width:50%;
+
+#usercp .daaf{background:#EDF8F4;padding:10px;border:2px solid #CDDFFF;width:50%;height:45px;
 		-moz-border-radius-topleft: 10px; 
 		-webkit-border-top-left-radius: 10px;
 		-moz-border-radius-topright: 10px; 
@@ -215,14 +214,24 @@ font-size:12px; font-weight:bold; border:1px solid #858585;}
 /* # footer template */
 
 
-/* connection template */
-.call form {margin:10px; background:url(../images/call.png) no-repeat 20% 50%;}
-.call label {display:block;font-weight:bold;margin:5px 0;}
-.call input {padding: 2px;border:1px solid #999;font: bold 12px tahoma, Verdana, sans-serif;color:#666;}
-.call textarea {width:300px;padding:2px;font: bold 12px tahoma, Verdana, sans-serif;border:1px solid #999;
+/* call and file report templates */
+.call {margin:10px; background:url(../images/call.png) no-repeat 10% 10%;}
+.call label ,.rebort label {display:block;font-weight:bold;margin:5px 0;}
+.call input ,.rebort input {padding: 2px;border:1px solid #999;font: bold 12px tahoma, Verdana, sans-serif;color:#666;}
+.call textarea,.rebort textarea {width:300px;padding:2px;font: bold 12px tahoma, Verdana, sans-serif;border:1px solid #999;
 	height:100px;display:block;color:#666;}
-/*# connection template */
+.rebort  {margin:10px; background:url(../images/file_rebort.png) no-repeat 10% 10%;}	
+.box_rebort{background:#EDF1F8;border:2px solid #CDDFFF;margin:5px 0;padding:10px;width:60%;}
+.urlcolor{background:#FFCDCD}
 
+/* # call and file report templates */
+
+#register{background:url(../images/register.png) no-repeat 10% 24%;}
+.reg_table{border: 2px solid #ECCDFF;margin:5px 0;padding:10px;width:60%;background:#F4EDF8;}
+.reg_table td,.box_rebort td{width:130px;padding-bottom:5px;}
+.reg_table td input,.box_rebort td input  {width:180px;}
+#bg_get_password{background:url(../images/get_password.png) no-repeat 10% 24%;}
+.get_pass{color:#BF0000;margin-bottom:10px;}
 
 /* pagination */
 .pagination {margin:8px 0;float:right;}
@@ -242,13 +251,6 @@ background:url(../images/buttons-bg.gif) repeat-x left top;color: #555;border:1p
 #buttons:hover ,.buttons:hover{background:#B0B1B1;color: #111;border:1px solid #666;}
 /* ## ALL buttons */
 
-
-#register{background:url(../images/register.png) no-repeat 10% 24%;}
-.reg_table{border: 2px solid #D1C2A8;margin:5px 0;padding:10px;width:60%;background:#F8F4ED;}
-.reg_table td{width:130px;padding-bottom:5px;}
-.reg_table td input {width:180px;}
-#bg_get_password{background:url(../images/get_password.png) no-repeat 10% 24%;}
-.get_pass{color:#BF0000;margin-bottom:10px;}
 
 
 /* login template */
@@ -283,7 +285,7 @@ border:1px solid #F5F5F5;-moz-border-radius: 8px;border-radius:1px;}
 
 .safe_code {	
 border: 2px solid #B7D1A8;
-background:#F1F8ED url(../images/saf3_code01.png) no-repeat 20px 15px ;
+background:#F1F8ED url(../images/saf3_code01.png) no-repeat 8px 12px ;
 margin:5px 0;
 padding:10px;
 width:60%;

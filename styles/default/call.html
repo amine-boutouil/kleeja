@@ -11,19 +11,18 @@
 
 <!-- start error msg  -->
 <IF NAME="ERRORS">
-	<div class="error_f">
-		<ul>
-			<LOOP NAME="ERRORS"><li>{%value%}</li></LOOP>
-		</ul>
-	</div>
+<dl id="system-message">
+<dd class="error"><ul>
+<LOOP NAME="ERRORS"><li>{%value%}</li></LOOP>
+</ul></dd></dl>
 </IF>
 <!-- # end error msg  -->
-
-
 
 <!-- start form call  -->
 <div class="call">
 <form action="{action}" method="post">
+
+<div class="reg_table">
 	<label>{lang.YOURNAME} :</label>
 	<input type="text" name="cname" value="{t_cname}" size="30" />
 	<label>{lang.EMAIL} :</label>
@@ -31,14 +30,23 @@
 	<label>{lang.TEXT} :</label>
 	<textarea name="ctext" cols="5" rows="5">{t_ctext}</textarea>
 	<div class="clr"></div>
-	<label>{lang.VERTY_CODE}</label>
-	<img id="kleeja_img_captcha" src="{captcha_file_path}" alt="{lang.REFRESH_CAPTCHA}" title="{lang.REFRESH_CAPTCHA}" onclick="javascript:update_kleeja_captcha('{captcha_file_path}', 'kleeja_code_answer');" />
-	<br /> 
+</div>	
+
+<!---- start  safe code  ---->				
+<div class="safe_code">
+	<b>{lang.VERTY_CODE}</b>
+	<br /><br />
+	<img style="vertical-align:middle;" id="kleeja_img_captcha" src="{captcha_file_path}" alt="{lang.REFRESH_CAPTCHA}" title="{lang.REFRESH_CAPTCHA}" onclick="javascript:update_kleeja_captcha('{captcha_file_path}', 'kleeja_code_answer');" />
 	<input type="text" name="kleeja_code_answer" id="kleeja_code_answer" style="direction:ltr" />
-	<br /><br /> 
-	<div class="clr"></div>
-	{H_FORM_KEYS}
-	<input class="buttons" type="submit" name="submit" value="{lang.SEND}" />
+	<br /><br />
+	<span class="explain">{lang.NOTE_CODE}</span>
+	<br />
+</div>
+<!---- ## End  safe code  ---->	
+	
+<div class="clr"></div>
+{H_FORM_KEYS}
+<input class="buttons" type="submit" name="submit" value="{lang.SEND}" />
 </form>
 </div>
 <!-- ## End form call  -->

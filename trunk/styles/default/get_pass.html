@@ -10,49 +10,42 @@
 <!-- # End line top  -->
 
 <!-- start error msg  -->
-<IF NAME="ERRORS">
-	<div class="error_f">
-		<ul>
-			<LOOP NAME="ERRORS"><li>{%value%}</li></LOOP>
-		</ul>
-	</div>
-</IF>
+<IF NAME="ERRORS"><dl id="system-message"><dd class="error"><ul><LOOP NAME="ERRORS"><li>{%value%}</li></LOOP></ul></dd></dl></IF>
 <!-- # end error msg  -->
 
 <!-- start form get_pass  -->
 <form action="{action}" method="post">
-	
-<table id="filecp" border="0" width="70%" cellspacing="0" cellpadding="0">
+
+<div id="bg_get_password">
+
+<div class="reg_table">
+
+<p class="get_pass">{lang.E_GET_LOSTPASS}</p>
+<table>
 	<tr>
-		<td colspan="2"><h2>{lang.E_GET_LOSTPASS}</h2></td>
-	</tr>
-	<tr>
-		<td>{lang.EMAIL} : </td>
+		<td><b>{lang.EMAIL} :</b></td>
 		<td><input type="text" name="rmail" value="{t_rmail}" size="30" /></td>
 	</tr>
-	<tr>
-	<!---- star  safe code  ---->	
-		<td><span>{lang.VERTY_CODE}</span>
-		<div class="explain">{lang.NOTE_CODE}</div></td>
-		<td><br /> 
-		<img id="kleeja_img_captcha" src="{captcha_file_path}" alt="{lang.REFRESH_CAPTCHA}" title="{lang.REFRESH_CAPTCHA}" onclick="javascript:update_kleeja_captcha('{captcha_file_path}', 'kleeja_code_answer');" />
-		<br /> 
-		<input type="text" name="kleeja_code_answer" id="kleeja_code_answer" style="direction:ltr" />
-	<!---- ## End  safe code  ---->	 
-		</td>
-	</tr>
-	
-	<tr>
-		<td colspan="2">{H_FORM_KEYS}
-				<input class="buttons" type="submit" name="submit" value="{lang.GET_LOSTPASS}" />
-		</td>
-	</tr>
 </table>
+</div>
 
+<!---- start  safe code  ---->				
+<div class="safe_code">
+<b>{lang.VERTY_CODE}</b>
+<br /><br />
+<img style="vertical-align:middle;" id="kleeja_img_captcha" src="{captcha_file_path}" alt="{lang.REFRESH_CAPTCHA}" title="{lang.REFRESH_CAPTCHA}" onclick="javascript:update_kleeja_captcha('{captcha_file_path}', 'kleeja_code_answer');" />
+<input type="text" name="kleeja_code_answer" id="kleeja_code_answer" style="direction:ltr" />
+<br /><br />
+<span class="explain">{lang.NOTE_CODE}</span>
 <br />
+</div>
+<!---- ## End  safe code  ---->	
+{H_FORM_KEYS}
+<input class="buttons" type="submit" name="submit" value="{lang.GET_LOSTPASS}" />
+</div>
 </form>
 <!-- ## End form get_pass  -->	
- 
+
 <div class="clr"></div><br />
    
 </div>

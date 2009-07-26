@@ -460,6 +460,7 @@ $lang = array_merge($lang, array(
 	'CHOSE_F'					=> 'فضلا قم بإختيار ملف واحد على الاقل',
 	'NO_REPEATING_UPLOADING'	=> 'لايجب تحديث الصفحة بعد رفع الملفات !.',
 	'FILES_DELETED' 			=> 'تم حذف الملفات المحدده بنجاح !',
+	'GUIDE_GROUPS' 			    => 'مجموعة',
 ));
 
 ?>

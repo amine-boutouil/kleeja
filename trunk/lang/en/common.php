@@ -476,6 +476,7 @@ $lang = array_merge($lang, array(
 	'NOTE_CODE' 				=> 'ادخل الأحرف الموجود في الصورة بالشكل الصحيح مرتبة بشكل دقيق.',
 	'USER_LOGIN'				=> ' تسجيل الدخول + للأعضاء فقط ',
 	'FILES_DELETED' 			=> 'تم حذف الملفات المحدده بنجاح !',
+	'GUIDE_GROUPS' 			    => 'مجموعة',
 	//last line of this file ...					 
 	'S_TRANSLATED_BY' => 'Translated By <a href="http://www.fenix4web.com/">Fenix4Web</a>',
 ));

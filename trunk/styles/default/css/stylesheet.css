@@ -324,67 +324,31 @@ ul.tabbernav li a:hover{color:#222;}
 ul.tabbernav li.tabberactive a{ padding:5px 14px;border-bottom: 1px solid #E8E8E8;background-color:#E8E8E8;}
 ul.tabbernav li.tabberactive a:link{color: #222;}
 ul.tabbernav li.tabberactive a:hover{color: #999;}
-
-/* #tabs */
-
+/* # tabs  */
 
 
-#guide { 
-width:100%;
-padding: 5px;
-margin: 10px;
-}
 
-#guide .visitor ,#guide .visitor_x,#guide .users,#guide .users_x{ 
-width:50%;
-}
+/* template list of files allowed > guide.html */
+table.guide_user {width:49%;margin-left:10px;float:right;background-color:#CECECE;border:1px solid #767676;}
+table.guide_user th ,table.guide_visitor th{padding:10px 15px;font-size:13px;font-weight:700;text-align:center;color:#eee;}
+table.guide_user th {background-color:#767676;}
+table.guide_user td,table.guide_visitor td {padding:10px;}
+table.guide_visitor {width:49%;background-color:#E2BABB;border: 1px double #800000;}
+table.guide_visitor th {background-color:#A71515;}
+.user_box{padding:10px;margin:4px;background-color:#DDD;border:1px double gray;-moz-border-radius:9px;}
+.user_img{font-size:12px;font-weight:700;color:#111;padding:5px 20px;margin-bottom:5px;border-bottom:1px solid gray;}
+.user_img img{padding-left:10px}
+.user_ext{padding:4px 8px;background:#E8E8E8;margin:2px 0;
+			border-top:1px dotted gray;border-bottom: 1px dotted gray;}
+.user_ext_color{font:bold 14px tahoma, sans-serif;color:#004000;margin:2px;}
+.user_ext_lang{font:normal 12px tahoma, sans-serif;color:#000;margin:2px;}
+.visitor_box{background-color:#FDEEEF}
+.visitor_img{color:#8C0000;border-bottom: 1px solid #660F0F;}
+.visitor_ext{background:#fff;}
+.visitor_ext_color{color:#E10000;}
+.visitor_ext_lang{color:#000;}
+/* #  template list of files allowed > guide.html */
 
-#guide .visitor { 
-background: #767676;
-font: bold 12px tahoma, sans-serif;
-color:#eee;
-text-align: center;	
-padding: 5px
-}
-
-#guide .visitor_x { 
-background: #CECECE;
-font: bold 11px tahoma, sans-serif;
-color:#555;
-padding:5px;
-}
-#guide .visitor_xx {
-font: bold 12px tahoma, sans-serif;
-color:#005900;
-padding:5px;
-border-bottom: 1px dashed #555;
-margin:5px auto;
-text-align: right;
-}
-#guide .visitor_ext{
-color:#111;
-padding:5px;
-margin:5px auto;
-}
-#guide .visitor_ext1{
-color:#E10000;
-padding:5px;
-margin:5px 0;
-}
-
-#guide .users { 
-background:url(../images/bar_bg.gif) repeat-x bottom right;
-font: bold 12px tahoma, sans-serif;
-color:#111;
-text-align: center;	
-padding: 5px;
-}
-#guide .users_x {
-background: #C8C8C8;
-font: bold 11px tahoma, sans-serif;
-color:#005900;
-padding:5px 25px 10px 0;
-}
 
 
 /* content index body   */

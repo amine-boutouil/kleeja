@@ -220,11 +220,13 @@ font-size:12px; font-weight:bold; border:1px solid #858585;}
 .call input ,.rebort input {padding: 2px;border:1px solid #999;font: bold 12px tahoma, Verdana, sans-serif;color:#666;}
 .call textarea,.rebort textarea {width:300px;padding:2px;font: bold 12px tahoma, Verdana, sans-serif;border:1px solid #999;
 	height:100px;display:block;color:#666;}
+/* # call and file report templates */	
+
 .rebort  {margin:10px; background:url(../images/file_rebort.png) no-repeat 10% 10%;}	
 .box_rebort{background:#EDF1F8;border:2px solid #CDDFFF;margin:5px 0;padding:10px;width:60%;}
 .urlcolor{background:#FFCDCD}
 
-/* # call and file report templates */
+
 
 #register{background:url(../images/register.png) no-repeat 10% 24%;}
 .reg_table{border: 2px solid #ECCDFF;margin:5px 0;padding:10px;width:60%;background:#F4EDF8;}
@@ -367,7 +369,20 @@ color:#418300;text-shadow: 0px 1px rgb(247, 247, 247);}
 .title-x a {color:#C95A12;}
 .title-x a:hover {color: #000;background:transparent;}
 
+
 /*-- start Profile template  */
+#userdata  select,#userdata  option{background:#FED300;color: #000;font: bold 12px Tahoma, Helvetica, Arial, sans-serif;}
+#userdata .userdata {float:right;width:30%;height:200px;border:1px solid #D6D6D6;background-color:#DDD;margin:0 5px;}
+#userdata p  {padding:2px;text-align:center;}
+#userdata .tit{background:url(../images/bar_bg.gif) repeat-x bottom right;padding:5px;margin:1px;font: bold 12px tahoma, sans-serif;color: #444;text-align:center;}
+#userdata p.bq {color:#111;line-height:26px;padding:0 5px;}
+#userdata .in{color:#111;line-height:26px;padding:2px 5px;margin-right:12px;}
+#userdata p.biguser {color:#D61B1B;line-height:30px;padding:5px;font: bold 18px tahoma, sans-serif;text-align:center;}
+#userdata .buttons_center {line-height:40px;padding:5px;text-align:center;margin:6px auto;}
+/*-- End Profile template  */
+
+
+
 
 .userdata {width:70%;border-top:1px solid #e5eff8;border-right:1px solid #e5eff8;border-collapse:collapse;}
 .userdata  tr.odd td{background:#f7fbff}
@@ -394,4 +409,3 @@ color:#418300;text-shadow: 0px 1px rgb(247, 247, 247);}
 	color:#66a3d3
 	}	
 .userdata tfoot th {background:#f4f9fe}	
-/*-- End Profile template  */

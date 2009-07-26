@@ -13,18 +13,15 @@ img.right {
         margin-right:15px;
 }
 
-.line {
-        background-position:left top;
-}
+.line {background-position:left top;}
+
 h2 {font-size: 22px; font-weight: bold; color:#BE1111; text-shadow: 0px 1px rgb(247, 247, 247);margin: 5px 0}
 
 /** LOGO */
-#logobody .logo {width: 340px;height: 97px;float: left;}
+#logobody .logo {width:500px;height:84px;float: left;}
 
 /**  start The main menu at the top **/
-#top_menu {
-        background-position: top right;  
-}
+#top_menu {background-position: top right;}
 
 #top_menu  ul.m3nu li {
         float: left;
@@ -41,12 +38,14 @@ h2 {font-size: 22px; font-weight: bold; color:#BE1111; text-shadow: 0px 1px rgb(
         background-position: top right;
         padding:5px 15px;
 }
-
-
 /** # End The main menu at the top **/  
 
 #index_body{background-position:right top;}
 
+#content_index_body  {float:right;}
+
+/* title */
+.title-x strong{float:left}
 
 #right_menu{
         float:left;
@@ -73,13 +72,7 @@ h2 {font-size: 22px; font-weight: bold; color:#BE1111; text-shadow: 0px 1px rgb(
 
 /* Content */
 
-#content {
-        float: right;
-}
-
-#title-x b{
-        float:left;
-}
+#content {float: right;}
 
 
 /* Footer */
@@ -182,7 +175,7 @@ left:80px;
 #adminPan ul{float:left;margin-bottom:8px;padding:10px}
 /* # footer template */
 
-.safe_code {margin:5px 0;padding:10px; background-position: top right; }
+.safe_code {margin:5px 0;padding:10px; background-position:98% 50%; }
 .safe_code  td span{text-align: center;}
 
 caption, th, td {
@@ -194,12 +187,70 @@ option {padding-left: 1em;}
 /* pagination */
 .pagination {margin:8px 0;float:left;}
 
-#stats{
-        background-position: top right;  
-}
+#stats{background-position: top right;}
 
 
 #usercp  .imguser{background-position: top left;}
 #usercp  .imguser b{padding-left:80px;}
 #usercp .uname{padding-left:80px;padding-right:10px;}
 #usercp  .copylink{padding:4px 40px;}
+
+
+
+
+
+
+
+
+
+
+.call { background-position:95% 10%}
+
+/* System Messages */
+#system-message dd.info  ul li {
+background-position:1% 10%
+}
+#system-message dd.error ul li{
+background-position:1% 10%
+}
+#system-message dd.info_f ul li {
+background-position:1% 10%
+}
+/* ##  End  System Messages */
+
+#bg_log1n{
+float:left;
+margin:1% 2% 2% 12%;
+background-position:98% 50%;
+}
+#login {	float:left;}
+#login .username,#login .password{padding-right:20px;padding-left:2px;}
+#login  .username{background-position:100% 50%}
+#login  .password{background-position:100% 50%}
+#login  .forget_pass  {float:right;margin:5px 10px 0 0;}
+
+
+#register{background-position:92% 40%;}
+#bg_get_password{background-position:90% 40%}
+
+
+/*-- start Profile template  */
+.userdata td {border-right:1px solid #e5eff8;text-align:left;	}				
+.userdata th {border-right:1px solid #e5eff8;}							
+.userdata thead th {text-align:left;}	
+/*-- End Profile template  */
+
+/*-- start Profile template  */
+#userdata .userdata {float:left}
+#userdata .in{margin-left:12px;}
+/*-- End Profile template  */
+
+/* Downlod template */
+#data_file {float:left;margin-right:10px;}
+#data_file ul.data_menu li {border-left:5px solid #CCC;padding:2px 10px 2px 5px;}
+#data_file_down {float:right;}
+#data_file_down .find_x,#data_file_down .find_image {font-size:22px;text-align:center;}
+.wait {font-size:200%;}
+/* # End Downlod template */
+
+.rebort  {background-position:95% 20%;}	

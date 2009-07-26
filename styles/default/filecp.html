@@ -12,24 +12,39 @@
 	
 <form action="{action}" method="post">
 
-<table id="filecp" cellpadding="5" cellspacing="4" border="0" style="width:50%">
-    <tr>
-		<td>{lang.FILENAME}</td>
-		<td>{lang.DELETE}</td>
-	</tr>
-	<IF NAME="no_results">
-	<tr>
-		<td colspan="2">{lang.DELETE_NO_FILE}</td>
-	</tr>
+<table class="userdata">
+<IF NAME="no_results">
+	
+<tr><td>{lang.DELETE_NO_FILE}</td></tr>
+
 	<ELSE>
-		<LOOP NAME="arr">
-				<tr>
-					<td>{{name}}</td>
-					<td style="text-align:center"><input type="checkbox" name="del_{{id}}" value="1" /></td>
-				</tr>
+	
+	<thead>
+		<tr class="odd">
+			<th scope="col" abbr="{lang.FILENAME}">{lang.FILENAME}</th>	
+			<th scope="col" abbr="{lang.DELETE}">{lang.DELETE}</th>
+		</tr>	
+	</thead>
+	
+	<tbody>
+		<LOOP NAME="arr">	
+		<tr>
+			<td>{{name}}</td>
+			<td style="text-align:center"><input type="checkbox" name="del_{{id}}" value="1" /></td>
+		</tr>
 		</LOOP>
-	</IF>
+	</tbody>
+	
+    <tfoot>	
+	<tr class="odd">
+		<th scope="col">&nbsp;</th>
+		<th scope="col">&nbsp;</th>
+	</tr>
+	</tfoot>
+</IF>	
 </table>
+
+
 
 <div class="clr"></div><br />
 <div style="text-align:center"><b>{page_nums}</b></div>

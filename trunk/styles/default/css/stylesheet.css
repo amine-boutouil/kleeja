@@ -368,13 +368,30 @@ color:#418300;text-shadow: 0px 1px rgb(247, 247, 247);}
 .title-x a:hover {color: #000;background:transparent;}
 
 /*-- start Profile template  */
-#userdata  select,#userdata  option{background:#FED300;color: #000;font: bold 12px Tahoma, Helvetica, Arial, sans-serif;}
-#userdata .userdata {float:right;width:30%;height:200px;border:1px solid #D6D6D6;background-color:#DDD;margin:0 5px;}
-#userdata p  {padding:2px;text-align:center;}
-#userdata .tit{background:url(../images/bar_bg.gif) repeat-x bottom right;padding:5px;margin:1px;font: bold 12px tahoma, sans-serif;color: #444;text-align:center;}
-#userdata p.bq {color:#111;line-height:26px;padding:0 5px;}
-#userdata .in{color:#111;line-height:26px;padding:2px 5px;margin-right:12px;}
-#userdata p.biguser {color:#D61B1B;line-height:30px;padding:5px;font: bold 18px tahoma, sans-serif;text-align:center;}
-#userdata .buttons_center {line-height:40px;padding:5px;text-align:center;margin:6px auto;}
-/*-- End Profile template  */
 
+.userdata {width:70%;border-top:1px solid #e5eff8;border-right:1px solid #e5eff8;border-collapse:collapse;}
+.userdata  tr.odd td{background:#f7fbff}
+.userdata  tr.odd .column1	{background:#f4f9fe}	
+.userdata td {
+	background:#f9fcfe;
+	font:bold 12px Tahoma,Arial,sans-serif;
+	color:#CEE6FF;
+	border-bottom:1px solid #e5eff8;
+	border-left:1px solid #e5eff8;
+	padding:5px 9px;
+	text-align:right;
+	}				
+.userdata th {
+	font:bold 15px Tahoma,Arial,sans-serif;
+	color: #678197;
+	border-bottom: 1px solid #e5eff8;
+	border-left:1px solid #e5eff8;
+	padding:.3em 1em;
+	}							
+.userdata thead th {
+	background:#f4f9fe;
+	text-align:right;
+	color:#66a3d3
+	}	
+.userdata tfoot th {background:#f4f9fe}	
+/*-- End Profile template  */

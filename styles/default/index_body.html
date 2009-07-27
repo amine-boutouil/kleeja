@@ -6,7 +6,9 @@
 <!--  # End  site name and title  -->
 
 <!-- start line top  -->
-<div class="clr"></div><div class="line"></div>
+<div class="clr"></div>
+<div class="line"></div>
+<div class="clr"></div>
 <!-- # End line top  -->
 
 <!-- start background  body  -->
@@ -19,8 +21,8 @@
 
 <div class="clr"></div><br />
 
-<!---- START  FOR INFORMATION ---->
 <IF NAME="info">
+<!---- START  FOR INFORMATION ---->
 <dl id="system-message">
 	<dd class="info_f">
 		<ul>
@@ -28,8 +30,9 @@
 		</ul>
 	</dd>
 </dl>
-</IF>
 <!---- END  FOR INFORMATION ---->
+</IF>
+
 
 <!---- START  FOR UPLOAD BOXES ---->
 <form name="uploader" id="uploader" action="{action}" method="post"  enctype="multipart/form-data" onsubmit="form_submit();">
@@ -80,8 +83,8 @@
 </div>
 <!---- # end uplaod boxs  ---->
 
-<!---- start  safe code  ---->				
 <IF NAME="config.safe_code">
+<!---- start  safe code  ---->
 <div class="safe_code">
 	<b>{lang.VERTY_CODE}</b>
 	<br /><br />
@@ -91,8 +94,9 @@
 	<span class="explain">{lang.NOTE_CODE}</span>
 	<br />
 </div>
+<!---- # End  safe code  ---->	  
 </IF>
-<!---- # End  safe code  ---->	   
+ 
 
 </form>
 <!---- # END  FOR UPLOAD BOXES ---->
@@ -101,16 +105,18 @@
 
 <div class="clr"></div><br />
 
-<!---- START FOR ONLINE ---->
+
 <IF NAME="show_online">
+<!---- START FOR ONLINE ---->
 <div class="online">
 	<span class="number_online_all">{lang.NUMBER_ONLINE} : 	<strong>{allnumbers}</strong></span>
 	<span class="online_visitor">{lang.NUMBER_VONLINE} : <strong>{visitornum}</strong></span>
 	<span class="online_users">{lang.NUMBER_UONLINE} : <strong>{usersnum}</strong></span>
 	<LOOP NAME="shownames"><span class="name_users">{{name}} , </span></LOOP>
 </div>
-</IF>
 <!---- # END FOR ONLINE ---->
+</IF>
+
 
 </div>
 <!-- # End background body  -->

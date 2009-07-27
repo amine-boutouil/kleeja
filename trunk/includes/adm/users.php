@@ -196,6 +196,7 @@
 			
 				while($row=$SQL->fetch_array($result))
 				{
+					
 					//make new lovely arrays !!
 					$ids[$row['id']]	= $row['id'];
 					$name[$row['id']] 	= (isset($_POST["nm_" . $row['id']])) ? $_POST["nm_" . $row['id']] : $row['name'];
@@ -204,9 +205,13 @@
 					$admin[$row['id']]	= $row['admin'];
 					$del[$row['id']] 	= (isset($_POST["del_" . $row['id']])) ? $_POST["del_" . $row['id']] : "";
 
+					$userfile =  $config['siteurl'] . ($config['mod_writer'] ? 'fileuser-' . $row['id'] . '.html' : 'ucp.php?go=fileuser&amp;id=' . $row['id']);
+					
 					$arr[] = array( 'id'	=> $ids[$row['id']],
 									'name'	=> $name[$row['id']],
 									'mail'	=> $mail[$row['id']],
+									'userfile_link' => $userfile,
+									'delusrfile_link' => basename(ADMIN_PATH) .'?cp=users&deleteuserfile='. $row['id'],
 									'admin'	=> !empty($admin[$row['id']]) ? '<input name="ad_' . $row['id'] . '" type="checkbox" checked="checked" />' : '<input name="ad_' . $row['id'] . '" type="checkbox" />'
 								);
 

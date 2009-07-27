@@ -279,16 +279,16 @@ function process ()
 			
 			if($wut && empty($_SESSION['NO_UPLOADING_YET']))
 			{
+				$_SESSION['NO_UPLOADING_YET'] = true;
 				 return $this->errs[] = $lang['NO_REPEATING_UPLOADING'];
 			}
 			
 			// uploading process 
+			$check = false;
 			if ($wut == 1)
 			{
 				($hook = kleeja_run_hook('submit_filesupload_kljuploader')) ? eval($hook) : null; //run hook	
 				
-				$check = false;
-
 				for($i=0;$i<=$this->filesnum;$i++)
 				{
 					$check .= isset($_FILES['file']['name'][$i]) ? $_FILES['file']['name'][$i] : '';
@@ -412,7 +412,7 @@ function process ()
 				
 				if(!isset($check) || empty($check))
 				{
-						$this->errs[] = $lang['CHOSE_F'];
+					$this->errs[] = $lang['CHOSE_F'];
 				}
 
 			}#wut=1

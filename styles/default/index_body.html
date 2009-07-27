@@ -13,7 +13,8 @@
 <div id="index_body">
 
 <!-- start welcome -->
-<h2><img src="{STYLE_PATH}images/Smile.png" style="vertical-align:middle;" /> {lang.WELCOME} .. </h2>  {welcome_msg}
+<h2><img src="{STYLE_PATH}images/Smile.png" style="vertical-align:middle;" /> {lang.WELCOME} .. </h2>
+<span class="wolcome_msg">{welcome_msg}</span>
 <!-- ## End welcome -->
 
 <div class="clr"></div><br />
@@ -21,17 +22,14 @@
 <!---- START  FOR INFORMATION ---->
 <IF NAME="info">
 <dl id="system-message">
-<dd class="info_f">
-<ul><li>
-<LOOP NAME="info">
-<strong>{lang.INFORMATION} : </strong> {{i}}<br />
-</LOOP>
-</li></ul>
-</dd>
+	<dd class="info_f">
+		<ul>
+			<li><LOOP NAME="info"><strong>{lang.INFORMATION} : </strong> {{i}}<br /></LOOP></li>
+		</ul>
+	</dd>
 </dl>
 </IF>
 <!---- END  FOR INFORMATION ---->
-
 
 <!---- START  FOR UPLOAD BOXES ---->
 <form name="uploader" id="uploader" action="{action}" method="post"  enctype="multipart/form-data" onsubmit="form_submit();">
@@ -85,46 +83,37 @@
 <!---- start  safe code  ---->				
 <IF NAME="config.safe_code">
 <div class="safe_code">
-<b>{lang.VERTY_CODE}</b>
-<br /><br />
-<img style="vertical-align:middle;" id="kleeja_img_captcha" src="{captcha_file_path}" alt="{lang.REFRESH_CAPTCHA}" title="{lang.REFRESH_CAPTCHA}" onclick="javascript:update_kleeja_captcha('{captcha_file_path}', 'kleeja_code_answer');" />
-<input type="text" name="kleeja_code_answer" id="kleeja_code_answer" style="direction:ltr" />
-<br /><br />
-<span class="explain">{lang.NOTE_CODE}</span>
-<br />
+	<b>{lang.VERTY_CODE}</b>
+	<br /><br />
+	<img style="vertical-align:middle;" id="kleeja_img_captcha" src="{captcha_file_path}" alt="{lang.REFRESH_CAPTCHA}" title="{lang.REFRESH_CAPTCHA}" onclick="javascript:update_kleeja_captcha('{captcha_file_path}', 'kleeja_code_answer');" />
+	<input type="text" name="kleeja_code_answer" id="kleeja_code_answer" style="direction:ltr" />
+	<br /><br />
+	<span class="explain">{lang.NOTE_CODE}</span>
+	<br />
 </div>
 </IF>
-<!---- ## End  safe code  ---->	   
+<!---- # End  safe code  ---->	   
 
 </form>
 <!---- # END  FOR UPLOAD BOXES ---->
 
-
 <div id="loadbox"><img src="{STYLE_PATH}images/loading.gif" alt="loading ..." /></div>
 
-<br />
-
+<div class="clr"></div><br />
 
 <!---- START FOR ONLINE ---->
 <IF NAME="show_online">
-
-<strong>{lang.NUMBER_ONLINE} :</strong>
-
-{allnumbers} ( {lang.NUMBER_UONLINE} : {usersnum} , {lang.NUMBER_VONLINE}: {visitornum} )
-
-<LOOP NAME="shownames">
-{{name}} , 
-</LOOP>
-
-
+<div class="online">
+	<span class="number_online_all">{lang.NUMBER_ONLINE} : 	<strong>{allnumbers}</strong></span>
+	<span class="online_visitor">{lang.NUMBER_VONLINE} : <strong>{visitornum}</strong></span>
+	<span class="online_users">{lang.NUMBER_UONLINE} : <strong>{usersnum}</strong></span>
+	<LOOP NAME="shownames"><span class="name_users">{{name}} , </span></LOOP>
+</div>
 </IF>
-<!---- END FOR ONLINE ---->
-
+<!---- # END FOR ONLINE ---->
 
 </div>
 <!-- # End background body  -->
 
-
 </div>
-<!-- ## End index template  -->   
- 
+<!-- ## End index template  -->

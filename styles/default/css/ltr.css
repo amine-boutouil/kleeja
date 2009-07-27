@@ -254,3 +254,10 @@ background-position:98% 50%;
 /* # End Downlod template */
 
 .rebort  {background-position:95% 20%;}	
+
+/* button Downlod */
+#download {text-align:center;height:50px;margin:12px auto;}
+#download a {background:#FEC008 url(../images/bg_download.png) repeat-x top right;border-top:3px solid #9B7500;
+			border-bottom:3px solid #9B7500;color:#9B7500;font-size:100%;font-weight:700;padding:20px;}
+#download a:hover {background:#FFD65D;color:#000;}
+/* # End Downlod template */

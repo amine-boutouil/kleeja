@@ -345,7 +345,7 @@ switch ($_GET['go'])
 					$data_user['name'] = $usrcp->usernamebyid($user_id);
 				}
 				$user_name = (!$data_user['name']) ? false : $data_user['name'];
-				$i = 0;
+				$i = ($currentPage * $perpage) - $perpage;
 				while($row=$SQL->fetch_array($result))
 				{
 					++$i;
@@ -422,7 +422,8 @@ switch ($_GET['go'])
 				
 				$result	= $SQL->build($query);
 				
-				$sizes = $num = $i = 0;
+				$sizes = $num = 0;
+				$i = ($currentPage * $perpage) - $perpage;
 				while($row=$SQL->fetch_array($result))
 				{
 					$del[$row['id']] = (isset($_POST['del_' . $row['id']])) ? $_POST['del_' . $row['id']] : '';

@@ -134,7 +134,7 @@ img.right {float: right;margin-left:15px;}
 .number_online_all  {background:#D2534B url(../images/number_online_all.gif) no-repeat right center;}
 .online_visitor{background:#958853 url(../images/online_visitor.gif) no-repeat right center;}
 .online_users{background:#92A5C4 url(../images/online_users.gif) no-repeat right center;}
-.name_users{margin-bottom:7px;display:block;background:#B092C3;float: right;color:#fff;padding:3px 12px;border:1px solid #E2E2E2;-moz-border-radius:6px;}
+.name_users{margin-bottom:7px;display:block;background:#92A5C4;float: right;color:#fff;padding:3px 12px;border:1px solid #E2E2E2;-moz-border-radius:6px;}
 /*  #  END FOR ONLINE */
 
 /* tabs */
@@ -156,7 +156,7 @@ ul.tabbernav li.tabberactive a:hover{color: #222;}
 /*  ALL inputs */
 .input_link,.input_field,.input_num   {background: #FFFFFF url(../css/images/input_bg.gif) repeat-x;border: 1px solid #B3B9C4;font:normal 12px tahoma, Helvetica,  sans-serif;}
 .input_link {padding:2px 4px;}
-.input_field {height:18px;padding:4px 2px 0 2px;}
+.input_field {height:18px;padding:4px 2px 0 2px;outline:1px solid #bbb;}
 .input_num {	padding:2px;}
 .input_field:focus, .input_field:hover ,
 .input_link:focus, .input_link:hover{border: 1px solid #7E8993;background-color:#ffd;}
@@ -267,7 +267,70 @@ table.guide_visitor th {background:#A71515 url(../images/headline_bg.png) repeat
 .buttons_center {line-height:24px;padding:5px;text-align:center;margin:3px auto;}
 /*-- End Profile template >> profile.html   */
 
+.left_button{float:left;margin:2px 0}
 
+.userdata {
+	border: 1px solid #999; 
+	background-color: #D4D0C8; 
+	color: #000;width:100%;
+}
+ 
+.userdata td,.userdata th { 
+padding:5px 8px;
+white-space: pre-wrap
+}
+
+.userdata caption {
+	text-transform: uppercase;
+	text-align:center;  
+	font: bold 12pt Verdana;
+	color: #4F4F4F;
+	margin: 3px 0;
+}
+
+/* =links
+----------------------------------------------- */
+.userdata table a { color:maroon; text-decoration: none;}
+.userdata table a:link {color:maroon;}
+.userdata table a:visited { color: maroon;}
+.userdata table a:hover {color:chocolate;}
+
+/* thead tbody tfoot
+----------------------------------------------- */
+
+.userdata thead th,
+.userdata tfoot th,
+.userdata tfoot td ,
+.userdata tbody th,
+.userdata tbody td {
+	color: #000; 
+	font: 8pt Verdana; 
+	border-right: 1px solid #aaa; 
+	border-top: 1px solid #eee; 
+	border-left:1px solid #eee; 
+	border-bottom: 1px solid #aaa; 
+	text-align:center 
+}
+
+.userdata thead th,
+.userdata tfoot th,
+.userdata tfoot td { background-color: #ccc; font-weight: bold; text-align:center; }
+.userdata tfoot td { text-align:center }
+.userdata tbody th { white-space: nowrap; font-weight: bold; text-align:left; }
+
+
+/* Visual and hover effects */
+.userdata tbody {background:url(../images/file_rebort.png) no-repeat 10% 10%; text-align:right}
+.userdata tbody  .odd  {text-align:right}
+
+.userdata tbody tr:hover td{
+	background-color: silver;
+	border-right: 1px solid #eee; 
+	border-top: 1px solid #999; 
+	border-left: 1px solid #999; 
+	border-bottom: 1px solid #eee; 
+	background-color: #e4e0d8;
+}
 
 
 
@@ -287,33 +350,6 @@ div#loadbox {padding:10px;display: none;}
 
 
 
-
-
-.userdata {width:70%;border-top:1px solid #e5eff8;border-right:1px solid #e5eff8;border-collapse:collapse;}
-.userdata  tr.odd td{background:#f7fbff}
-.userdata  tr.odd .column1	{background:#f4f9fe}	
-.userdata td {
-	background:#f9fcfe;
-	font:bold 12px Tahoma,Arial,sans-serif;
-	color:#CEE6FF;
-	border-bottom:1px solid #e5eff8;
-	border-left:1px solid #e5eff8;
-	padding:5px 9px;
-	text-align:right;
-	}				
-.userdata th {
-	font:bold 15px Tahoma,Arial,sans-serif;
-	color: #678197;
-	border-bottom: 1px solid #e5eff8;
-	border-left:1px solid #e5eff8;
-	padding:.3em 1em;
-	}							
-.userdata thead th {
-	background:#f4f9fe;
-	text-align:right;
-	color:#66a3d3
-	}	
-.userdata tfoot th {background:#f4f9fe}	
 
 
 

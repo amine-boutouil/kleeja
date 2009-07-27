@@ -18,9 +18,10 @@
 <tr><td>{lang.DELETE_NO_FILE}</td></tr>
 
 	<ELSE>
-	
+	 {nums_rows}
 	<thead>
 		<tr class="odd">
+			<th scope="col">#</th>	
 			<th scope="col" abbr="{lang.FILENAME}">{lang.FILENAME}</th>	
 			<th scope="col" abbr="{lang.DELETE}">{lang.DELETE}</th>
 		</tr>	
@@ -29,6 +30,7 @@
 	<tbody>
 		<LOOP NAME="arr">	
 		<tr>
+			<td>{{i}}</td>
 			<td>{{name}}</td>
 			<td style="text-align:center"><input type="checkbox" name="del_{{id}}" value="1" /></td>
 		</tr>
@@ -37,6 +39,7 @@
 	
     <tfoot>	
 	<tr class="odd">
+		<th scope="col">&nbsp;</th>
 		<th scope="col">&nbsp;</th>
 		<th scope="col">&nbsp;</th>
 	</tr>

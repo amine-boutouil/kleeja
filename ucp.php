@@ -306,7 +306,7 @@ switch ($_GET['go'])
 			}
 			
 			$query	= array(
-							'SELECT'	=> 'f.id, f.name, f.real_filename, f.folder, f.type',
+							'SELECT'	=> 'f.id, f.name, f.real_filename, f.folder, f.type, f.uploads, f.last_down',
 							'FROM'		=> "{$dbprefix}files f",
 							'WHERE'		=> "f.user='" . $user_id . "'",
 							'ORDER BY'	=> 'f.id DESC'
@@ -339,14 +339,16 @@ switch ($_GET['go'])
 				$query['LIMIT'] = "$start, $perpage";
 				($hook = kleeja_run_hook('qr_select_files_in_fileuser')) ? eval($hook) : null; //run hook
 				
-				$result	=	$SQL->build($query);
+				$result	= $SQL->build($query);
 				if($config['user_system'] != '1' && ($usrcp->id() != $user_id))
 				{
 					$data_user['name'] = $usrcp->usernamebyid($user_id);
 				}
 				$user_name = (!$data_user['name']) ? false : $data_user['name'];
+				$i = 0;
 				while($row=$SQL->fetch_array($result))
 				{
+					++$i;
 					$file_info = array('::ID::' => $row['id'], '::NAME::' => $row['real_filename'], '::DIR::' => $row['folder'], '::FNAME::' => $row['name']);
 					
 					$is_image = in_array(strtolower(trim($row['type'])), array('gif', 'jpg', 'jpeg', 'bmp', 'png', 'tiff', 'tif')) ? true : false;
@@ -358,6 +360,9 @@ switch ($_GET['go'])
 									'icon_link'	=>(file_exists("images/filetypes/".  $row['type'] . ".gif"))? "images/filetypes/" . $row['type'] . ".gif" : 'images/filetypes/file.gif',
 									'file_type'	=> $row['type'],
 									'image_path'=> $is_image ? $url : '',
+									'uploads'	=> $row['uploads'],
+									'last_down'	=> !empty($row['last_down']) ? date("d-m-Y h:i a", $row['last_down']) : '...',
+									'i'=> $i,
 							);
 				}
 				$SQL->freeresult($result);
@@ -417,19 +422,20 @@ switch ($_GET['go'])
 				
 				$result	= $SQL->build($query);
 				
-				$sizes = $num = 0;
+				$sizes = $num = $i = 0;
 				while($row=$SQL->fetch_array($result))
 				{
-					$del[$row['id']] = (isset($_POST["del_".$row['id']])) ? $_POST["del_" . $row['id']] : "";
-					
+					$del[$row['id']] = (isset($_POST['del_' . $row['id']])) ? $_POST['del_' . $row['id']] : '';
+				
 					$file_info = array('::ID::' => $row['id'], '::NAME::' => $row['real_filename'], '::DIR::' => $row['folder'], '::FNAME::' => $row['name']);
 					
 					$is_image = in_array(strtolower(trim($row['type'])), array('gif', 'jpg', 'jpeg', 'bmp', 'png', 'tiff', 'tif')) ? true : false;
-					
 					$url = ($is_image) ? kleeja_get_link('image', $file_info) : kleeja_get_link('file', $file_info);
+					++$i;
 					//make new lovely arrays !!
 					$arr[] = array(	'id'	=> $row['id'],
 									'name'	=> '<a title="' . ($row['real_filename'] == '' ? $row['name'] : $row['real_filename']) . '" href="' .  $url . '" target="blank">' . ($row['real_filename'] == '' ? ((strlen($row['name']) > 40) ? substr($row['name'], 0, 40) . '...' : $row['name']) : ((strlen($row['real_filename']) > 40) ? substr($row['real_filename'], 0, 40) . '...' : $row['real_filename'])) . '</a>',
+									'i'		=> $i,
 								);
 							
 						//when submit !!

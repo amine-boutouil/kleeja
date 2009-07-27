@@ -96,7 +96,7 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 				$time		= date("d-m-Y H:i a", $time);
 				$size		= Customfile_size($size);
 				
-				$file_ext_icon = file_exists('images/filetypes/' . $type . '.gif') ? 'images/filetypes/' . $type . '.gif' : 'images/filetypes/file.gif';
+				$file_ext_icon = file_exists('images/filetypes/' . $type . '.png') ? 'images/filetypes/' . $type . '.png' : 'images/filetypes/file.png';
 				$sty		= 'download';
 				$title =  $real_filename != '' ? str_replace('.' . $type, '', htmlspecialchars($real_filename)) : $name;
 				$title .= ' ' . $lang['DOWNLAOD'];

@@ -441,7 +441,6 @@ $lang = array_merge($lang, array(
 	'ADD_UPLAD_B'			=> 'حذف الحقول',
 	'COPYRIGHTS_X'			=> 'جميع الحقوق محفوظة',
 	'ADMIN_DELETE_FILE_ERR'	=> 'There is error occurred while trying to delete user files . ',
-	'ADMIN_DELETE_NO_FILE'	=> 'لا يوجد أي ملفات في حساب العضوية حتى الآن .. !',
 	'ADMIN_DELETE_FILE_OK'	=> 'Done ! ',
 	'ADMIN_DELETE_FILES'	=> 'Delete all user files',
 	
@@ -477,6 +476,8 @@ $lang = array_merge($lang, array(
 	'USER_LOGIN'				=> ' تسجيل الدخول + للأعضاء فقط ',
 	'FILES_DELETED' 			=> 'تم حذف الملفات المحدده بنجاح !',
 	'GUIDE_GROUPS' 			    => 'مجموعة',
+	'ALL_FILES' 			    => 'عدد الملفات الموجودة في حسابك',
+	'NO_FILE_USER'				=> 'لا يوجد أي ملفات في حساب العضوية حتى الآن .. !',
 	//last line of this file ...					 
 	'S_TRANSLATED_BY' => 'Translated By <a href="http://www.fenix4web.com/">Fenix4Web</a>',
 ));

@@ -267,42 +267,45 @@ table.guide_visitor th {background:#A71515 url(../images/headline_bg.png) repeat
 .buttons_center {line-height:24px;padding:5px;text-align:center;margin:3px auto;}
 /*-- End Profile template >> profile.html   */
 
-.left_button{float:left;margin:2px 0}
 
-.userdata {
-	border: 1px solid #999; 
-	background-color: #D4D0C8; 
-	color: #000;width:100%;
+.left_button{float:left;margin:2px 0}
+.file_cp tbody  .odd  {text-align:right}
+
+.file_cp {
+	background-color:#D7D7D7; 
+	color: #000;
+	width:100%;
+font: bold 12px tahoma, sans-serif;	
 }
  
-.userdata td,.userdata th { 
+.file_cp td,.file_cp th { 
 padding:5px 8px;
 white-space: pre-wrap
 }
 
-.userdata caption {
-	text-transform: uppercase;
-	text-align:center;  
-	font: bold 12pt Verdana;
-	color: #4F4F4F;
-	margin: 3px 0;
+.file_cp caption {
+background:url(../images/file_cp.png) no-repeat 100% 50%;
+font: bold 12px tahoma, sans-serif;	
+color:#2A7400;
+margin-bottom:7px;
+padding:1px 20px;
 }
 
 /* =links
 ----------------------------------------------- */
-.userdata table a { color:maroon; text-decoration: none;}
-.userdata table a:link {color:maroon;}
-.userdata table a:visited { color: maroon;}
-.userdata table a:hover {color:chocolate;}
+.file_cp table a { color:maroon; text-decoration: none;}
+.file_cp table a:link {color:maroon;}
+.file_cp table a:visited { color: maroon;}
+.file_cp table a:hover {color:chocolate;}
 
 /* thead tbody tfoot
 ----------------------------------------------- */
 
-.userdata thead th,
-.userdata tfoot th,
-.userdata tfoot td ,
-.userdata tbody th,
-.userdata tbody td {
+.file_cp thead th,
+.file_cp tfoot th,
+.file_cp tfoot td ,
+.file_cp tbody th,
+.file_cp tbody td {
 	color: #000; 
 	font: 8pt Verdana; 
 	border-right: 1px solid #aaa; 
@@ -312,18 +315,20 @@ white-space: pre-wrap
 	text-align:center 
 }
 
-.userdata thead th,
-.userdata tfoot th,
-.userdata tfoot td { background-color: #ccc; font-weight: bold; text-align:center; }
-.userdata tfoot td { text-align:center }
-.userdata tbody th { white-space: nowrap; font-weight: bold; text-align:left; }
+.file_cp thead th,
+.file_cp tfoot th,
+.file_cp tfoot td { background-color: #ccc; font-weight: bold; text-align:center; }
+.file_cp tfoot td { text-align:center }
+.file_cp tbody th { white-space: nowrap; font-weight: bold; text-align:left; }
 
 
 /* Visual and hover effects */
-.userdata tbody {background:url(../images/file_rebort.png) no-repeat 10% 10%; text-align:right}
-.userdata tbody  .odd  {text-align:right}
+.file_cp tbody {background:url(../images/1211766300.png) no-repeat 20% 50%; text-align:right;
 
-.userdata tbody tr:hover td{
+}
+
+
+.file_cp tbody tr:hover td{
 	background-color: silver;
 	border-right: 1px solid #eee; 
 	border-top: 1px solid #999; 

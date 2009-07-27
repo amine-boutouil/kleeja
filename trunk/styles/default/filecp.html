@@ -12,40 +12,40 @@
 	
 <form action="{action}" method="post">
 
-<table class="userdata">
 <IF NAME="no_results">
-	
-<tr><td>{lang.DELETE_NO_FILE}</td></tr>
 
-	<ELSE>
-	   <caption>{nums_rows}</caption>
+<h2>{lang.NO_FILE_USER}</h2>
+
+<ELSE>
+	
+<table class="file_cp">
+	<caption>{lang.ALL_FILES} [ {nums_rows} ] {lang.FILE}</caption>
 	
 	<thead>
 		<tr>
 			<th>#</th>	
-			<th abbr="{lang.FILENAME}">{lang.FILENAME}</th>	
-			<th abbr="{lang.DELETE}">{lang.DELETE}</th>
+			<th style="text-align:right">{lang.FILENAME}</th>	
+			<th>{lang.DELETE}</th>
 		</tr>	
 	</thead>
+	
+	<tfoot>	
+		<tr>
+			<th colspan="3">&nbsp;</th>
+		</tr>
+	</tfoot>
 	
 	<tbody>
 		<LOOP NAME="arr">	
 		<tr>
 			<td>{{i}}</td>
 			<td class="odd">{{name}}</td>
-			<td style="text-align:center"><input type="checkbox" name="del_{{id}}" value="1" /></td>
+			<td><input type="checkbox" name="del_{{id}}" value="1" /></td>
 		</tr>
 		</LOOP>
 	</tbody>
 	
-    <tfoot>	
-	<tr>
-		<th>&nbsp;</th>
-		<th>&nbsp;</th>
-		<th>&nbsp;</th>
-	</tr>
-	</tfoot>
-</IF>	
+	
 </table>
 
 
@@ -58,7 +58,10 @@
 
 <div class="left_button"><input class="buttons" type="submit" name="submit_files" value="{lang.DEL_SELECTED}" /></div>
 
-<br />
+
+
+</IF>
+
 </form>
 
 <div class="clr"></div><br />

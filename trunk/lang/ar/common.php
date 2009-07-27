@@ -428,7 +428,7 @@ $lang = array_merge($lang, array(
 	'ADD_UPLAD_B'			=> 'حذف الحقول',
 	'COPYRIGHTS_X'			=> 'جميع الحقوق محفوظة',
 	'ADMIN_DELETE_FILE_ERR'	=> 'حدث خطا غير متوقع اثناء محاولة حذف الملفات .. !',
-	'ADMIN_DELETE_NO_FILE'	=> 'لا يوجد أي ملفات في حساب العضوية حتى الآن .. !',
+	'NO_FILE_USER'			=> 'لا يوجد أي ملفات في حساب العضوية حتى الآن .. !',
 	'ADMIN_DELETE_FILE_OK'	=> 'تم حذف كافة ملفات العضو',
 	'ADMIN_DELETE_FILES'	=> 'حذف كل ملفات العضوية',
 	
@@ -461,6 +461,7 @@ $lang = array_merge($lang, array(
 	'NO_REPEATING_UPLOADING'	=> 'لايجب تحديث الصفحة بعد رفع الملفات !.',
 	'FILES_DELETED' 			=> 'تم حذف الملفات المحدده بنجاح !',
 	'GUIDE_GROUPS' 			    => 'مجموعة',
+	'ALL_FILES' 			    => 'عدد الملفات الموجودة في حسابك',
 ));
 
 ?>

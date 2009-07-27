@@ -13,7 +13,7 @@
 	<tr>
 		<td><img src="{STYLE_PATH}images/imguser.png" style="vertical-align:middle;"><br /><br />
 		<IF NAME="user_name">
-				<strong>{lang.PUBLIC_USER_FILES} :</strong>
+				<strong>{lang.PUBLIC_USER_FILES} ( {nums_rows} ) :</strong>
 				<br />
 				<strong class="uname">{user_name}</strong>
 			</IF>
@@ -38,8 +38,11 @@
 <table id="filecp" cellpadding="5" cellspacing="4" border="0" style="width:100%">
     <tr>
 		<td style="text-align:center">#</td>
+		<td style="text-align:center">..</td>
 		<td style="text-align:center">{lang.FILETYPE}</td>
 		<td>{lang.FILENAME}</td>
+		<td>{lang.FILEUPS}</td>
+		<td>{lang.LAST_DOWN}</td>
 	</tr>
     <IF NAME="no_results">
     <tr>
@@ -48,9 +51,12 @@
     <ELSE>
 		<LOOP NAME="arr">
     <tr>
+        <td style="text-align:center">{{i}}</td>
         <td style="text-align:center"><img src="{{icon_link}}" alt="{{file_type}}" /></td>
 		<td style="text-align:center">{{file_type}}</td>
 		<td>{{name}}</td>
+		<td>{{uploads}}</td>
+		<td>{{last_down}}</td>
     </tr>
     </LOOP>
     </IF>

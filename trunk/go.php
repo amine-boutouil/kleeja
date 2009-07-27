@@ -357,14 +357,14 @@ switch ($_GET['go'])
 		}
 		
 		$most_online = $stat_most_user_online_ever; 
-		$on_muoe	 = gmdate("d-m-Y H:a", $stat_last_muoe);
+		$on_muoe	 = gmdate("d-m-Y H:i a", $stat_last_muoe);
 		//ok .. go on
 		$titlee		= $lang['STATS'];
 		$stylee		= "stats";
 		$files_st	= $stat_files;
 		$users_st	= $stat_users;
 		$sizes_st	= Customfile_size($stat_sizes);	
-		$lst_dl_st	= ((int)$config['del_f_day'] <= 0) ? ' [ ' . $lang['CLOSED_FEATURE'] . ' ] ' : gmdate("d-m-Y H:a", $stat_last_f_del);
+		$lst_dl_st	= ((int)$config['del_f_day'] <= 0) ? ' [ ' . $lang['CLOSED_FEATURE'] . ' ] ' : gmdate("d-m-Y H:i a", $stat_last_f_del);
 		$lst_reg	= $stat_last_user;
 		
 		($hook = kleeja_run_hook('stats_go_page')) ? eval($hook) : null; //run hook

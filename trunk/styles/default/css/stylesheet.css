@@ -14,12 +14,13 @@ img.right {float: right;margin-left:15px;}
 .dot {padding:5px 0;background: url(../images/dot.gif) repeat-x;}
 
 /* line */
-.line {background:url(../images/line.png) repeat-x right top;height:6px;margin:3px auto;}
+.line {background:url(../images/line.png) repeat-x right top;height:6px;margin:1px 1px 7px 1px}
 
 /* start site name and titles all */
-.title-x strong{float:right;padding:2px 4px;margin:1px 0;font-size:12px;color:#418300;text-shadow: 0px 1px rgb(247, 247, 247);}
+.title-x {float:right;width:98%;background:url(../images/headline_bg.png) repeat-x top right;padding:10px 6px;}
+.title-x strong{padding:10px 6px;font-size:12px;color:#333;text-shadow: 0px 1px rgb(247, 247, 247);}
 .title-x a {color:#C95A12;}
-.title-x a:hover {color: #000;background:transparent;}
+.title-x a:hover {color:#000;background:transparent;}
 /* # END site name and titles all */
 
 /* safe code all box */
@@ -109,7 +110,7 @@ img.right {float: right;margin-left:15px;}
 /* # End Downlod template >> download.html */
 
 /* stats template >> stats.html */
-#stats  {margin:10px 20px;font-size:11px;font-weight:700;background:url(../images/stats.png) no-repeat 1% 1%;}
+#stats  {margin:10px 20px;font-size:11px;font-weight:700;background:url(../images/stats.png) no-repeat 1% 20%;}
 #stats ul {list-style:circle;list-style-position:outside}
 #stats  ul li b{color:#A24000;padding:1px}
 #stats .st i{font-size:12px;font-weight:700;padding:4px 8px;color: #999;border-bottom:1px solid #999;}
@@ -140,8 +141,8 @@ img.right {float: right;margin-left:15px;}
 .tabber {width:100%}
 .tabberlive {margin-top:2px;margin-bottom:2px;}
 .tabberlive .tabbertabhide {display:none;}
-.tabbertab {width:70%;height:100%;padding:20px;border:1px solid #aaa;background:#DAE3F5 url(../images/bg_tabbertab.png) repeat-x top left;-moz-border-radius-bottomleft: 10px;-webkit-border-bottom-left-radius: 10px;-moz-border-radius-bottomright: 10px;-webkit-border-bottom-right-radius: 10px;}
-.bg {background:#F5E8DA url(../images/bg_tabbertab_1.png) repeat-x top left;}
+.tabbertab {width:70%;height:100%;padding:20px;background:#DBE3F5 url(../images/bg_tabbertab_1.png) repeat-x top left;border:1px solid #aaa;-moz-border-radius-bottomleft: 10px;-webkit-border-bottom-left-radius: 10px;-moz-border-radius-bottomright: 10px;-webkit-border-bottom-right-radius: 10px;}
+.bg {background:#fff url(../images/bg_tabbertab.png) repeat-x top left;}
 ul.tabbernav{ padding:5px 0; font: bold 11px tahoma, sans-serif;}
 ul.tabbernav li{ list-style: none; display: inline;}
 ul.tabbernav li a{ padding:5px 14px; margin-left: 5px; border: 1px solid #aaa;background:#999;text-decoration: none;-moz-border-radius-topleft: 10px;-webkit-border-top-left-radius: 10px;	-moz-border-radius-topright: 10px;-webkit-border-top-right-radius: 10px;}
@@ -162,7 +163,7 @@ ul.tabbernav li.tabberactive a:hover{color: #222;}
 /* ALL inputs */
 
 /* ALL buttons */
-#buttons ,.buttons{cursor: pointer;padding:4px 20px;font: normal 12px Tahoma, Helvetica, Arial, sans-serif;background:url(../images/buttons-bg.gif) repeat-x left top;color: #555;border:1px solid #999;}
+#buttons ,.buttons{cursor: pointer;padding:4px 20px;font: normal 12px Tahoma, Helvetica, Arial, sans-serif;background:#E5E5E5 url(../images/headline_bg.png) repeat-x top right;color:#111;border:1px solid #999;-moz-border-radius:10px;}
 #buttons{margin-top:10px;}.buttons {margin-top:2px;}
 #buttons:hover ,.buttons:hover{background:#B0B1B1;color: #111;border:1px solid #666;}
 /* ## ALL buttons */
@@ -193,7 +194,7 @@ ul.tabbernav li.tabberactive a:hover{color: #222;}
 /* # footer template */
 
 /* login template >> login.html */
-#bg_log1n{float:right;width: 40%;padding:10px 30px;margin:1% 12% 2% 2%;color:#444;background:#E8E8E8 url(../images/get_password.png) no-repeat 10% 34%;border:1px solid #F5F5F5;-moz-border-radius: 8px;border-radius:1px;}
+#bg_log1n{float:right;width: 40%;padding:10px 30px;margin:1% 12% 2% 2%;color:#444;background:#E8E8E8 url(../images/get_password.png) no-repeat 10% 50%;border:1px solid #F5F5F5;-moz-border-radius: 8px;border-radius:1px;}
 #login {	float: right;width: 220px;}
 #login label {display: block;margin-bottom: 2px;}
 #login a {color:#C03C2D;font-size: 12px;padding: 3px 6px;}
@@ -213,31 +214,31 @@ ul.tabbernav li.tabberactive a:hover{color: #222;}
 
 /* register template >> register.html */
 #register{background:url(../images/register.png) no-repeat 10% 24%;}
-.reg_table{border: 2px solid #ECCDFF;margin:5px 0;padding:10px;width:60%;background:#F4EDF8;}
+.reg_table{background:#EDF0F8;border:2px solid #CDDFFF;margin:5px 0;padding:10px;width:60%;}
 .reg_table td,.box_rebort td{width:130px;padding-bottom:5px;}
 .reg_table td input,.box_rebort td input  {width:180px;}
 /*#  register template >> register.html */
 
 /* back password template >> get_pass.html */
-#bg_get_password{background:url(../images/get_password.png) no-repeat 10% 24%;}
+#bg_get_password{background:url(../images/get_password.png) no-repeat 10% 50%;}
 .get_pass{color:#BF0000;margin-bottom:10px;}
 /* # back password template >> get_pass.html */
 
 /* template list of files allowed > guide.html */
 table.guide_user {width:49%;margin-left:10px;float:right;background-color:#CECECE;border:1px solid #767676;}
 table.guide_user th ,table.guide_visitor th{padding:10px 15px;font-size:13px;font-weight:700;text-align:center;color:#eee;}
-table.guide_user th {background-color:#767676;}
+table.guide_user th {background:#767676 url(../images/headline_bg.png) repeat-x top right}
 table.guide_user td,table.guide_visitor td {padding:10px;}
 table.guide_visitor {width:49%;background-color:#E2BABB;border: 1px double #800000;}
-table.guide_visitor th {background-color:#A71515;}
+table.guide_visitor th {background:#A71515 url(../images/headline_bg.png) repeat-x top right}
 .user_box{padding:10px;margin:4px;background-color:#DDD;border:1px double gray;-moz-border-radius:9px;}
-.user_img{font-size:12px;font-weight:700;color:#111;padding:5px 20px;margin-bottom:5px;border-bottom:1px solid gray;}
-.user_img img{padding-left:10px}
+.user_img{font-size:12px;font-weight:700;color:#111;padding:5px 25px;margin-bottom:5px;border-bottom:1px solid #BBB;background:url(../images/headline_bg.png) repeat-x top right}
+.user_img img{padding-left:5px}
 .user_ext{padding:4px 8px;background:#E8E8E8;margin:2px 0;border-top:1px dotted gray;border-bottom: 1px dotted gray;}
 .user_ext_color{font:bold 14px tahoma, sans-serif;color:#004000;margin:2px;}
 .user_ext_lang{font:normal 12px tahoma, sans-serif;color:#000;margin:2px;}
 .visitor_box{background-color:#FDEEEF}
-.visitor_img{color:#8C0000;border-bottom: 1px solid #660F0F;}
+.visitor_img{color:#8C0000;border-bottom: 1px solid #BBB;}
 .visitor_ext{background:#fff;}
 .visitor_ext_color{color:#E10000;}
 .visitor_ext_lang{color:#000;}
@@ -257,7 +258,7 @@ table.guide_visitor th {background-color:#A71515;}
 #profile  select,#profile  option{background:#FED300;color: #000;font: bold 12px Tahoma, Helvetica, Arial, sans-serif;}
 #profile .boxdata{float:right;width:31%;height:200px;border:1px solid #D6D6D6;background-color:#DDD;margin:2px 10px 2px 0}
 #profile p  {padding:2px;text-align:center;}
-#profile .tit{background:url(../images/bar_bg.gif) repeat-x bottom right;padding:5px;margin:1px;font: bold 12px tahoma, sans-serif;color: #444;text-align:center;}
+#profile .tit{background:#F68618 url(../images/headline_bg.png) repeat-x top right;padding:10px;margin:1px;font: bold 12px tahoma, sans-serif;color:#111;text-align:center;}
 #profile p.bq {color:#111;line-height:26px;padding:0 5px;}
 #profile .in{color:#111;line-height:26px;padding:2px 5px;margin-right:12px;}
 #profile p.biguser {color:#D61B1B;line-height:30px;padding:5px;font: bold 18px tahoma, sans-serif;text-align:center;}

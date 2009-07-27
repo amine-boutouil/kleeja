@@ -18,12 +18,13 @@
 <tr><td>{lang.DELETE_NO_FILE}</td></tr>
 
 	<ELSE>
-	 {nums_rows}
+	   <caption>{nums_rows}</caption>
+	
 	<thead>
-		<tr class="odd">
-			<th scope="col">#</th>	
-			<th scope="col" abbr="{lang.FILENAME}">{lang.FILENAME}</th>	
-			<th scope="col" abbr="{lang.DELETE}">{lang.DELETE}</th>
+		<tr>
+			<th>#</th>	
+			<th abbr="{lang.FILENAME}">{lang.FILENAME}</th>	
+			<th abbr="{lang.DELETE}">{lang.DELETE}</th>
 		</tr>	
 	</thead>
 	
@@ -31,17 +32,17 @@
 		<LOOP NAME="arr">	
 		<tr>
 			<td>{{i}}</td>
-			<td>{{name}}</td>
+			<td class="odd">{{name}}</td>
 			<td style="text-align:center"><input type="checkbox" name="del_{{id}}" value="1" /></td>
 		</tr>
 		</LOOP>
 	</tbody>
 	
     <tfoot>	
-	<tr class="odd">
-		<th scope="col">&nbsp;</th>
-		<th scope="col">&nbsp;</th>
-		<th scope="col">&nbsp;</th>
+	<tr>
+		<th>&nbsp;</th>
+		<th>&nbsp;</th>
+		<th>&nbsp;</th>
 	</tr>
 	</tfoot>
 </IF>	
@@ -50,12 +51,12 @@
 
 
 <div class="clr"></div><br />
-<div style="text-align:center"><b>{page_nums}</b></div>
-<div class="clr"></div><br />
+<div style="text-align:center"><span>{page_nums}</span></div>
+
 
 {H_FORM_KEYS}
 
-<input class="buttons" type="submit" name="submit_files" value="{lang.DEL_SELECTED}" />
+<div class="left_button"><input class="buttons" type="submit" name="submit_files" value="{lang.DEL_SELECTED}" /></div>
 
 <br />
 </form>

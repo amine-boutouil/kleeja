@@ -79,9 +79,9 @@ switch ($_GET['go'])
 		//page info
 		$stylee	= "report";
 		$titlee	= $lang['REPORT'];
-		$url_id	= ($config['mod_writer']) ? $config['siteurl'] . "download" . intval($_GET['id']) . ".html" : $config['siteurl'] . "download.php?id=" . intval($_GET['id']);
-		$action	= "./go.php?go=report";
-		$id_d	= intval($_GET['id']);
+		$id_d	= isset($_GET['id']) ? intval($_GET['id']) : 0;
+		$url_id	= ($config['mod_writer']) ? $config['siteurl'] . 'download' . $id_d . '.html' : $config['siteurl'] . 'download.php?id=' . $id_d;
+		$action	= './go.php?go=report';
 		$H_FORM_KEYS = kleeja_add_form_key('report');
 		//no error yet 
 		$ERRORS = false;
@@ -93,13 +93,13 @@ switch ($_GET['go'])
 		
 		if (!isset($_POST['submit']))
 		{
-				// first
-				if (!$_GET['id'])
-				{
-					kleeja_err($lang['NO_ID']);
-				}
+			// first
+			if (!isset($_GET['id']) || intval($_GET['id']) == 0)
+			{
+				kleeja_err($lang['NO_ID']);
+			}
 				
-				($hook = kleeja_run_hook('no_submit_report_go_page')) ? eval($hook) : null; //run hook
+			($hook = kleeja_run_hook('no_submit_report_go_page')) ? eval($hook) : null; //run hook
 		}
 		else
 		{

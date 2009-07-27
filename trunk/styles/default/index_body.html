@@ -1,22 +1,12 @@
 <!-- start index template  -->
 <div id="content_index_body">
 
-<!-- start site name and title  -->
-<div class="title-x"><strong><a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}</strong></div>
-<!--  # End  site name and title  -->
-
-<!-- start line top  -->
-<div class="clr"></div>
-<div class="line"></div>
-<div class="clr"></div>
-<!-- # End line top  -->
-
 <!-- start background  body  -->
 <div id="index_body">
 
 <!-- start welcome -->
-<h2><img src="{STYLE_PATH}images/Smile.png" style="vertical-align:middle;" /> {lang.WELCOME} .. </h2>
-<span class="wolcome_msg">{welcome_msg}</span>
+<h2><span class="siten4me">{config.sitename}</span><img src="{STYLE_PATH}images/Smile.png" style="vertical-align:middle;" /> {lang.WELCOME} .. </h2>
+<div class="wolcome_msg">{welcome_msg}</div>
 <!-- ## End welcome -->
 
 <div class="clr"></div><br />
@@ -109,11 +99,11 @@
 <IF NAME="show_online">
 <!---- START FOR ONLINE ---->
 <div class="online">
-	<span class="number_online_all">{lang.NUMBER_ONLINE} : 	<strong>{allnumbers}</strong></span>
-	<span class="online_visitor">{lang.NUMBER_VONLINE} : <strong>{visitornum}</strong></span>
-	<span class="online_users">{lang.NUMBER_UONLINE} : <strong>{usersnum}</strong></span>
-	<LOOP NAME="shownames"><span class="name_users">{{name}} , </span></LOOP>
+	<div class="number_online_all">{lang.NUMBER_ONLINE} = <span>{allnumbers}</span></div>
+	<div class="online_visitor">{lang.NUMBER_VONLINE} = <span>{visitornum}</span></div>
+	<div class="online_users">{lang.NUMBER_UONLINE} = <span>{usersnum}</span></div>
 </div>
+<LOOP NAME="shownames"><div class="name_users">{{name}}</div></LOOP>
 <!---- # END FOR ONLINE ---->
 </IF>
 

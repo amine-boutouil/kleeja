@@ -349,7 +349,7 @@ switch ($_GET['go'])
 				while($row=$SQL->fetch_array($result))
 				{
 					++$i;
-					$file_info = array('::ID::' => $row['id'], '::NAME::' => $row['real_filename'], '::DIR::' => $row['folder'], '::FNAME::' => $row['name']);
+					$file_info = array('::ID::' => $row['id'], '::NAME::' => $row['name'], '::DIR::' => $row['folder'], '::FNAME::' => $row['real_filename']);
 					
 					$is_image = in_array(strtolower(trim($row['type'])), array('gif', 'jpg', 'jpeg', 'bmp', 'png', 'tiff', 'tif')) ? true : false;
 					$url = ($is_image) ? kleeja_get_link('image', $file_info) : kleeja_get_link('file', $file_info);
@@ -428,7 +428,7 @@ switch ($_GET['go'])
 				{
 					$del[$row['id']] = (isset($_POST['del_' . $row['id']])) ? $_POST['del_' . $row['id']] : '';
 				
-					$file_info = array('::ID::' => $row['id'], '::NAME::' => $row['real_filename'], '::DIR::' => $row['folder'], '::FNAME::' => $row['name']);
+					$file_info = array('::ID::' => $row['id'], '::NAME::' => $row['name'], '::DIR::' => $row['folder'], '::FNAME::' => $row['real_filename']);
 					
 					$is_image = in_array(strtolower(trim($row['type'])), array('gif', 'jpg', 'jpeg', 'bmp', 'png', 'tiff', 'tif')) ? true : false;
 					$url = ($is_image) ? kleeja_get_link('image', $file_info) : kleeja_get_link('file', $file_info);

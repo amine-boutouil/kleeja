@@ -1587,6 +1587,12 @@ function kleeja_get_link ($pid, $extra = array())
 	//to avoid problems
 	$config['id_form'] = empty($config['id_form']) ? 'id' : $config['id_form'];
 	
+	//for prevent bug with rewrite
+	if($config['mod_writer'])
+	{
+		$extra['::NAME::'] = str_replace('.', '-', $extra['::NAME::']);
+	}
+	
 	switch($config['id_form'])
 	{
 		case 'id':

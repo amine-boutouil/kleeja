@@ -335,10 +335,6 @@ function process ()
 						{
 							$this->errs[]= $lang['WRONG_F_NAME'] . '[' . $_FILES['file']['name'][$i] . ']';
 						}
-						elseif(kleeja_check_mime($_FILES['file']['type'][$i], $this->types[strtolower($this->typet)]['group_id'], $_FILES['file']['tmp_name'][$i]) == false)
-						{
-							$this->errs[]= $lang['NOT_SAFE_FILE'] . '[' . $_FILES['file']['name'][$i] . ']';
-						}
 						elseif(!in_array(strtolower($this->typet), array_keys($this->types)))
 						{
 							//guest
@@ -351,6 +347,10 @@ function process ()
 							{
 								$this->errs[]= '[ ' . $_FILES['file']['name'][$i] . ' ] ' . $lang['FORBID_EXT'] . '[' . $this->typet . ']';
 							}
+						}
+						elseif(kleeja_check_mime($_FILES['file']['type'][$i], $this->types[strtolower($this->typet)]['group_id'], $_FILES['file']['tmp_name'][$i]) == false)
+						{
+							$this->errs[]= $lang['NOT_SAFE_FILE'] . '[' . $_FILES['file']['name'][$i] . ']';
 						}
 						elseif($this->types[strtolower($this->typet)]['size'] > 0 && $this->sizet >= $this->types[strtolower($this->typet)]['size'])
 						{
@@ -588,7 +588,7 @@ function process ()
 				
 				$SQL->build($insert_query);
 				
-				$this->name_for_url  = ($config['mod_writer']) ? str_replace('.', '-', $name) : $name;
+				$this->name_for_url  = $name;
 				$this->id_for_url  = $SQL->insert_id();
 
 				//calculate stats ..s

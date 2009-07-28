@@ -485,4 +485,151 @@ function kleeja_check_form_key($form_name, $require_time = 150 /*seconds*/ )
 }
 
 
+//link generator 
+function kleeja_get_link ($pid, $extra = array())
+{
+	global $config;
+	
+	$links = array();
+	
+	//to avoid problems
+	$config['id_form'] = empty($config['id_form']) ? 'id' : $config['id_form'];
+	
+	//for prevent bug with rewrite
+	if($config['mod_writer'] && !empty($extra['::NAME::']))
+	{
+		$extra['::NAME::'] = str_replace('.', '-', $extra['::NAME::']);
+	}
+	
+	switch($config['id_form'])
+	{
+		case 'id':
+			if($config['mod_writer'])
+			{
+				$links += array(
+							'thumb' => 'thumb::ID::.html',
+							'image' => 'image::ID::.html',
+							'del'	=> 'del::CODE::.html',
+							'file'	=> 'download::ID::.html',
+						);
+			}
+			else
+			{
+				$links += array(
+							'thumb' => 'download.php?thmb=::ID::',
+							'image' => 'download.php?img=::ID::',
+							'del'	=> 'go.php?go=del&amp;cd=::CODE::',
+							'file'	=> 'download.php?id=::ID::',
+						);
+			}
+		break;
+		case 'filename':
+			if($config['mod_writer'])
+			{
+				$links += array(
+							'thumb' => 'thumbf-::NAME::.html',
+							'image' => 'imagef-::NAME::.html',
+							'del'	=> 'del::CODE::.html',
+							'file'	=> 'downloadf-::NAME::.html',
+						);
+			}
+			else
+			{
+				$links += array(
+							'thumb' => 'download.php?thmbf=::NAME::',
+							'image' => 'download.php?imgf=::NAME::',
+							'del'	=> 'go.php?go=del&amp;cd=::CODE::',
+							'file'	=> 'download.php?filename=::NAME::',
+						);
+			}
+		break;
+		case 'direct':
+			if($config['mod_writer'])
+			{
+				$links += array(
+							'del'	=> 'del::CODE::.html',
+						);
+			}
+			else
+			{
+				$links += array(
+							'del'	=> 'go.php?go=del&amp;cd=::CODE::',
+						);
+			}
+			
+			$links += array(
+						'thumb' => '::DIR::/thumbs/::FNAME::',
+						'image' => '::DIR::/::FNAME::',
+						'file'	=> '::DIR::/::FNAME::',
+						);
+		break;
+		default:
+			//add another type of links 
+			//if $config['id_form']  == 'another things' : do another things .. 
+			($hook = kleeja_run_hook('kleeja_get_link_d_func')) ? eval($hook) : null; //run hook
+		break;
+	}
+	
+	($hook = kleeja_run_hook('kleeja_get_link_func')) ? eval($hook) : null; //run hook
+	return $config['siteurl'] . str_replace(array_keys($extra), array_values($extra), $links[$pid]);
+}
+
+//for uploading boxes 
+function get_up_tpl_box($box_name, $extra = array())
+{
+	global $STYLE_PATH, $config;
+	static $boxes = false;
+	
+	//prevent loads
+	//also this must be cached in future
+	if($boxes !== true)
+	{
+		$tpl_path = $STYLE_PATH . 'up_boxes.html';
+		if(!file_exists($tpl_path))
+		{
+			$depend_on = false;
+			if(file_exists($STYLE_PATH . 'depend_on.txt'))
+			{
+				$depend_on = file_get_contents($STYLE_PATH . 'depend_on.txt');
+			}
+			else
+			{
+				$depend_on = 'default';
+			}
+			
+			$tpl_path = str_replace('/' . $config['style'] . '/', '/' . trim($depend_on) . '/', $tpl_path);
+		}
+	
+
+		$tpl_code = file_get_contents($tpl_path);
+		$tpl_code = preg_replace("/\n[\n\r\s\t]*/", '', $tpl_code);//remove extra spaces
+		$matches = preg_match_all('#<!-- BEGIN (.*?) -->(.*?)<!-- END (?:.*?) -->#', $tpl_code, $match);
+		
+		$boxes = array();
+		for ($i = 0; $i < $matches; $i++)
+		{
+			if (empty($match[1][$i]))
+			{
+				continue;//it's empty , let's leave it
+			}
+
+			$boxes[$match[1][$i]] = $match[2][$i];
+		}
+	}
+	
+	//extra value 
+	$extra += array(
+				'siteurl' => $config['siteurl'],
+				'sitename' => $config['sitename'],
+			);
+	
+	//return compiled value
+	$return = $boxes[$box_name];
+	foreach($extra as $var=>$val)
+	{
+		$return = preg_replace('/{' . $var . '}/', $val, $return);
+	}
+	return $return;
+}
+
 ?>

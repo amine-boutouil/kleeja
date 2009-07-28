@@ -611,7 +611,7 @@ function process ()
 				$extra_del = '';
 				if ($config['del_url_file'])
 				{
-					$extra_del	= $lang['URL_F_DEL'] . ':<br /><textarea  class="del_box all_boxes">' .  kleeja_get_link('del', array('::CODE::'=>$code_del)) . '</textarea><br />';
+					$extra_del	= get_up_tpl_box('del_file_code', array('b_title'=> $lang['URL_F_DEL'], 'b_code_link'=> kleeja_get_link('del', array('::CODE::'=>$code_del))));
 				}
 					
 
@@ -620,17 +620,18 @@ function process ()
 					if (in_array(strtolower($this->typet), array('png','gif','jpg','jpeg','tif','tiff')))
 					{
 						//make thumbs
-						$extra_show_img = $extra_thmb = '';
+						$img_html_result = '';
 						if( ($config['thumbs_imgs'] != 0) && in_array(strtolower($this->typet), array('png','jpg','jpeg','gif')))
 						{
 							list($thmb_dim_w, $thmb_dim_h) = @explode('*', $config['thmb_dims']);
-							$this->createthumb($folderee . "/" . $filname, strtolower($this->typet), $folderee . '/thumbs/' . $filname, $thmb_dim_w, $thmb_dim_h);
+							$this->createthumb($folderee . '/' . $filname, strtolower($this->typet), $folderee . '/thumbs/' . $filname, $thmb_dim_w, $thmb_dim_h);
 							
-							$thumb_link_o = kleeja_get_link('thumb', $file_info);
-							$extra_thmb 	= $lang['URL_F_THMB'] . ':<br /><textarea class="thumb_box all_boxes">';
-							$extra_thmb .= '[url=' . kleeja_get_link('image', $file_info) . '][img]' . $thumb_link_o . '[/img][/url]';
-							$extra_thmb 	.= '</textarea><br />';
-							$extra_show_img = '<div class="thumb_div_tag"><img src="' . $thumb_link_o . '" class="thumb_img_tag" /></div><br />';
+							$img_html_result .= get_up_tpl_box('image_thumb', array(
+																				'b_title'	=> $lang['URL_F_THMB'], 
+																				'b_url_link'=> kleeja_get_link('image', $file_info), 
+																				'b_img_link'=> kleeja_get_link('thumb', $file_info)
+																				));
+
 						}
 						
 						//write on image
@@ -640,14 +641,13 @@ function process ()
 						}
 
 						//then show
-						$img_html_result = $extra_show_img;
-						
-						$img_link_o = kleeja_get_link('image', $file_info);
-						$img_html_result .= $lang['URL_F_IMG'] . ':<br /><textarea class="img_box all_boxes">' . $img_link_o . '</textarea><br />' 
-							. $lang['URL_F_BBC'] . ':<br /><textarea class="img_bbc_box all_boxes">[url=' . $img_link_o . '][img]' . $img_link_o . '[/img][/url]</textarea><br />';
-
+						$img_html_result .= get_up_tpl_box('image', array(
+																			'b_title'	=> $lang['URL_F_IMG'], 
+																			'b_bbc_title'=> $lang['URL_F_BBC'], 
+																			'b_url_link'=> kleeja_get_link('image', $file_info),
+																			));
 	
-						$img_html_result .= $extra_thmb . $extra_del;
+						$img_html_result .= $extra_del;
 						
 						($hook = kleeja_run_hook('saveit_func_img_res_kljuploader')) ? eval($hook) : null; //run hook
 						
@@ -656,11 +656,13 @@ function process ()
 					else 
 					{
 						//then show other files
+						$else_html_result = get_up_tpl_box('file', array(
+																			'b_title'	=> $lang['URL_F_FILE'], 
+																			'b_bbc_title'=> $lang['URL_F_BBC'], 
+																			'b_url_link'=> kleeja_get_link('file', $file_info),
+																			));
 
-						$file_link_o = kleeja_get_link('file', $file_info);
-						$else_html_result = $lang['URL_F_FILE'] . ':<br /><textarea class="file_box all_boxes">' . $file_link_o . '</textarea><br />'
-							. $lang['URL_F_BBC'] . ':<br /><textarea class="file_bbc_box all_boxes">[url]' . $file_link_o . '[/url]</textarea><br />
-							' . $extra_del;
+						$else_html_result .= $extra_del;
 
 						($hook = kleeja_run_hook('saveit_func_else_res_kljuploader')) ? eval($hook) : null; //run hook
 						

@@ -9,33 +9,41 @@
 <!-- # End line top  -->
 
 
-<table id="usercp" cellpadding="5" cellspacing="4" border="0" style="width:100%">
-	<tr>
-		<td><img src="{STYLE_PATH}images/imguser.png" style="vertical-align:middle;"><br /><br />
-		<IF NAME="user_name">
-				<strong>{lang.PUBLIC_USER_FILES} ( {nums_rows} ) :</strong>
-				<br />
-				<strong class="uname">{user_name}</strong>
-			</IF>
-		</td>
-		<td class="daaf" style="text-align:center">
-		<br />	
-		<IF NAME="filecp_link">
-			<strong class="copylink">{lang.COPY_AND_GET_DUD}</strong>
-			<br />
-			<br />
-			<input class="input_link" readonly="readonly" onclick="javascript:highlight(this);" type="text" style="width: 340px" name="option" value="{your_fileuser}" size="20" dir="ltr" />
-			</td>
-		</IF>
-		</td>
-	</tr>
-</table>
+<!--  top  -->
+<div id="boxfileuser">
 
-<div class="clr"></div><br />
+<div class="box_user">
+<div class="public">{lang.PUBLIC_USER_FILES} : </div>
+<IF NAME="user_name"><div class="uname">{user_name}</div></IF>
+</div>
 
-<div class="usercp">
+<IF NAME="user_name">
+<div class="us3r_n4me">
+	<div class="allfiles">{lang.ALL_FILES} : </div>
+	<div class="nums">{nums_rows}</div> 
+</div>
+</IF>
 
-<table id="filecp" cellpadding="5" cellspacing="4" border="0" style="width:100%">
+<div class="clr"></div>
+</div>
+<!-- # top  -->
+
+<!--  top  -->
+<IF NAME="filecp_link">
+<div id="boxfileuser">
+<div class="copylink">{lang.COPY_AND_GET_DUD}</div>
+<div class="link_user"><input class="input_field" readonly="readonly" onclick="javascript:highlight(this);" type="text" style="width:300px" name="option" value="{your_fileuser}" dir="ltr" />
+</div>
+<div class="clr"></div>
+</div>
+</IF>
+<!-- # top  -->
+
+
+
+
+
+<table class="file_cp">
     <tr>
 		<td style="text-align:center">#</td>
 		<td style="text-align:center">..</td>
@@ -61,17 +69,17 @@
     </LOOP>
     </IF>
 </table>
-<br />  		
-</div>
+		
+
+	
 
 <div class="clr"></div><br />
 
 <div style="text-align:center">
-	<b>{page_nums}</b>
-	<span style="float:left" class="pagination">
-		<a class="paging" href="{filecp_link}" title="{lang.GO_FILECP}">{lang.GO_FILECP}</a>
-	</span>
+	<span>{page_nums}</span>
 </div>
+
+ <div class="left_button"><a id="buttons" href="{filecp_link}" title="{lang.GO_FILECP}">{lang.GO_FILECP}</a></div>
  
 <div class="clr"></div><br />
    

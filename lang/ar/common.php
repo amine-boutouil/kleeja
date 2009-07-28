@@ -71,7 +71,7 @@ $lang = array_merge($lang, array(
 	'DEL_SELECTED' => 'حذف المحدد',
 	'EDIT_U_FILES' => 'إدارة ملفاتك',
 	'FILES_UPDATED' => 'تم تحديث الملفات بنجاح',
-	'PUBLIC_USER_FILES' => 'مجلد ملفات العضو ',
+	'PUBLIC_USER_FILES' => 'مجلد ملفات العضو',
 	'FILEUSER' => 'مجلد ملفات عضو',
 	'GO_FILECP' => 'اضغط هنا لإدارة ملفاتك هذه',
 	'YOUR_FILEUSER' => 'مجلدك',
@@ -270,8 +270,8 @@ $lang = array_merge($lang, array(
 	'GENERAL_STAT' => 'إحصائيات عامة',
 	'SIZE_STAT' => 'إحصائيات الحجم',
 	'OTHER_INFO' => 'معلومات أخرى',
-	'AFILES_NUM' => 'عدد الملفات كلها',
-	'AFILES_SIZE' => 'أحجام الملفات كلها',
+	'AFILES_NUM' => 'عدد جميع الملفات',
+	'AFILES_SIZE' => 'الحجم الإجمالي لجميع الملفات',
 	'AUSERS_NUM' => 'عدد الأعضاء',
 	'LAST_GOOGLE' => 'آخر زيارة لجوجل',
 	'GOOGLE_NUM' => 'زيارات جوجل',
@@ -461,7 +461,7 @@ $lang = array_merge($lang, array(
 	'NO_REPEATING_UPLOADING'	=> 'لايجب تحديث الصفحة بعد رفع الملفات !.',
 	'FILES_DELETED' 			=> 'تم حذف الملفات المحدده بنجاح !',
 	'GUIDE_GROUPS' 			    => 'مجموعة',
-	'ALL_FILES' 			    => 'عدد الملفات الموجودة في حسابك',
+	'ALL_FILES' 			    => 'عدد جميع الملفات',
 ));
 
 ?>

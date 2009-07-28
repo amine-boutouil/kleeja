@@ -25,11 +25,11 @@
 
 <div class="reg_table">
 	<label>{lang.YOURNAME} :</label>
-	<input type="text" name="cname" value="{t_cname}" size="30" />
+	<input class="input_field" type="text" name="cname" value="{t_cname}" size="30" />
 	<label>{lang.EMAIL} :</label>
-	<input type="text" name="cmail" value="{t_cmail}" size="30" />
+	<input class="input_field" type="text" name="cmail" value="{t_cmail}" size="30" />
 	<label>{lang.TEXT} :</label>
-	<textarea name="ctext" cols="5" rows="5">{t_ctext}</textarea>
+	<textarea class="input_field" name="ctext" cols="5" rows="5">{t_ctext}</textarea>
 	<div class="clr"></div>
 </div>	
 
@@ -47,7 +47,7 @@
 	
 <div class="clr"></div>
 {H_FORM_KEYS}
-<input class="buttons" type="submit" name="submit" value="{lang.SEND}" />
+<input id="buttons" type="submit" name="submit" value="{lang.SEND}" />
 </form>
 </div>
 <!-- ## End form call  -->

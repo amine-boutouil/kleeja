@@ -119,11 +119,11 @@ img.right {float: right;margin-left:15px;}
 /* start index body  >> index_body.html  */
 #content_index_body  {float: left;width: 70%;padding:5px 30px;}
 #index_body{background:url(../images/index_body.png) no-repeat left top;}
-.wolcome_msg {width:70%;font-size:10px;}
-.siten4me{font-size:13px;padding:3px;color:#999}
+.wolcome_msg {width:70%;font-size:10px;color:#777;text-shadow: 0px 1px rgb(247, 247, 247);}
+.siten4me{font-size:13px;padding:3px;color:#BE1111}
 .agree{font-size:xx-small;padding:3px 6px;}
 .zx,.zl {cursor:pointer;padding:4px;}
-.zx a:hover,.zl a:hover {background-color:transparent;border-right:1px solid #F5F5F5;border-left:1px solid #F5F5F5;}
+.zx a:hover,.zl a:hover {background-color:transparent;border-right:1px solid #FEEA00;border-left:1px solid #FEEA00;}
 .url {margin-top:3px;height:15px;direction:ltr;color:#3F7F00}
 .inum {text-align:center;color:#888;}
 /*  START FOR ONLINE */
@@ -150,7 +150,7 @@ ul.tabbernav li a{ padding:5px 14px; margin-left: 5px; border: 1px solid #aaa;ba
 ul.tabbernav li a:link {color:#555;}
 ul.tabbernav li a:hover{color:#111;background:#bbb;}
 ul.tabbernav li.tabberactive a{ padding:5px 14px;border-bottom: 1px solid #E8E8E8;background-color:#E8E8E8;}
-ul.tabbernav li.tabberactive a:link{color: #999;}
+ul.tabbernav li.tabberactive a:link{color: #EF5E00;}
 ul.tabbernav li.tabberactive a:hover{color: #222;}
 /* # tabs  */
 
@@ -189,11 +189,11 @@ ul.tabbernav li.tabberactive a:hover{color: #222;}
 /* # footer template */
 
 /* login template >> login.html */
-#bg_log1n{float:right;width: 40%;padding:10px 30px;margin:1% 12% 2% 2%;color:#444;background:#E8E8E8 url(../images/get_password.png) no-repeat 10% 50%;border:1px solid #F5F5F5;-moz-border-radius: 8px;border-radius:1px;}
+#bg_log1n{float:right;width: 40%;padding:10px 30px;margin:1% 12% 2% 2%;color:#444;background:url(../images/get_password.png) no-repeat 10% 0%;}
 #login {	float: right;width: 220px;}
 #login label {display: block;margin-bottom: 2px;}
 #login a {color:#C03C2D;font-size: 12px;padding: 3px 6px;}
-#login .title_login {background:#fff;color:#D80505;width: 200px;padding:2px 5px;}
+#login .title_login {background:#fff;color:#D80505;width: 200px;padding:2px 5px;-moz-border-radius:8px;}
 #login .username,#login .password{padding-left:20px;padding-top:2px;height:18px;width:180px;font-size: 12px;}
 #login  .username{background:#fff url(../images/username.gif) no-repeat 1px 2px;}
 #login  .password{background:#fff url(../images/password.gif) no-repeat 1px 2px;}
@@ -256,7 +256,7 @@ table.guide_visitor th {background:#A71515 url(../images/headline_bg.png) repeat
 #profile  select,#profile  option{background:#FFD;color: #000;font: bold 11px Tahoma, Helvetica, Arial, sans-serif;}
 #profile .boxdata{float:right;width:31%;height:200px;border:1px solid #bbb;background-color:#DDD;margin:2px 10px 2px 0;}
 #profile p  {padding:2px;text-align:center;}
-#profile .tit{background:#FFD2A6 url(../images/headline_bg.png) repeat-x top right;padding:10px;margin:1px;font:bold 12px tahoma, sans-serif;color:#111;text-align:center;}
+#profile .tit{background:#F89E46 url(../images/headline_bg.png) repeat-x top right;padding:10px;margin:1px;font:bold 12px tahoma, sans-serif;color:#111;text-align:center;}
 #profile p.bq {color:#111;line-height:26px;padding:0 5px;}
 #profile .in{color:#111;line-height:26px;padding:2px 5px;margin-right:8%;}
 #profile p.biguser {color:#D61B1B;line-height:30px;padding:5px;font: bold 14px tahoma, sans-serif;text-align:center;}
@@ -264,13 +264,14 @@ table.guide_visitor th {background:#A71515 url(../images/headline_bg.png) repeat
 /*-- End Profile template >> profile.html   */
 
 
-.file_cp {background:#DADADA url(../images/table_file_cp.png) no-repeat 10% 40%;color:#000;width:100%;border:1px solid #C2C2C2}
+
+.file_cp {background:#DADADA url(../images/table_file_cp.png) no-repeat 15% 45%;color:#000;width:100%;border:1px solid #C2C2C2}
 .file_cp td {padding:6px 8px;white-space: pre-wrap}
-.file_cp th {padding:8px;white-space: pre-wrap}
+.file_cp th {padding:8px;white-space:pre-wrap;}
 .left_button{float:left;margin:2px 0}
-.file_cp  .odd  {text-align:right;width:80%;}
+.file_cp  .odd  {text-align:right;}
 .file_cp  .nbr  {font-size:11px;text-align:right;}
-.file_cp thead th,.file_cp tfoot th,.file_cp tbody th,.file_cp tbody td {border-right: 1px solid #aaa;border-top: 1px solid #eee;border-left:1px solid #eee;border-bottom: 1px solid #aaa;text-align:center}
+.file_cp thead th,.file_cp tfoot th,.file_cp tbody th,.file_cp tbody td {border-right: 1px solid #aaa;border-top: 1px solid #eee;border-left:1px solid #eee;border-bottom: 1px solid #aaa;font-weight:bold;text-align:center}
 .file_cp thead th,.file_cp tfoot th{background:#bbb url(../images/headline_bg.png) repeat-x center right;font-weight: bold;}
 .file_cp tbody tr:hover td{border-top:1px solid #aaa;border-bottom:1px solid #eee;}
 .file_cp  a { color:#444; }
@@ -342,13 +343,34 @@ padding:5px 10px;color:#555;
 #boxfileuser .link_user{float:left;padding:5px 2px;}
 
 
+/* GENERAL*/
+.tabledata a { color:#f60;text-decoration:none; }
+.tabledata a:hover {text-decoration:underline; }
+.tabledata a:visited { color:#000;text-decoration:line-through; }
+.tabledata { width:100%; border-collapse:collapse; border:4px solid #f60;}
+.tabledata td,th { padding:5px; }
+/* THEAD*/
+.tabledata thead th { font-size:15px; font-weight:normal; font-variant:small-caps;
+	color:#fff2ea;	background-color:#f60; }
+/* TFOOT */
+.tabledata tfoot th,.tabledata tfoot td { font-size:15px; font-weight:bold; 
+	color:#fff2ea;	background-color:#f60; padding:10px; }
+.tabledata tfoot td { font-size:30px;	font-weight:normal; }
+/* TBODY */
+.tabledata tbody td,.tabledata tbody th { line-height:140%; color:#666; background-color:#E8E8E8;	border-bottom: 2px solid #B7925E;border-top: 3px solid #BF9C9C;	padding: 9px;}
+.tabledata tbody tr .odd td,.tabledata tbody tr .odd th { background-color:#fff2ea;	border:1px solid #f60; border-width:1px 0; }
+.tabledata tbody th a { font-size:13px; font-weight:normal; font-variant:small-caps; }
 
-
-
-
-
-
-
+/* GENERAL */
+.tabledata tbody td+td+td+td {text-align:center; }
+.tabledata tbody tr th:before { content:"\2588\00A0\00A0"; color:#f60;}
+.tabledata tbody td+td+td+td:before { content:"\21E9"; color:#f60; }
+/* HOVER */
+.tabledata tbody tr:hover td,.tabledata tbody tr:hover th:before { color:#000; }
+.tabledata tbody tr:hover td a,.tabledata tbody tr:hover th a { color:#000; text-decoration:underline; }
+.tabledata tbody tr:hover td a:visited,.tabledata tbody tr:hover th a:visited { color:#FF9800; }
+.tabledata tbody tr:hover td+td+td+td a { font-weight:bold; }
+.tabledata tbody tr:hover td+td+td+td:before { color:#000; }
 
 
 

@@ -68,7 +68,7 @@
 		}
 		
 		$total_pages 	= $Pager->getTotalPages(); 
-		$arr_paging 	= $Pager->print_nums($config['siteurl'] . basename(ADMIN_PATH) . '?cp=exts'); 
+		$arr_paging 	= $Pager->print_nums(basename(ADMIN_PATH) . '?cp=exts'); 
 		$gr_exts_arr	= ch_g('new_ext_group', 9);
 
 		//after submit ////////////////

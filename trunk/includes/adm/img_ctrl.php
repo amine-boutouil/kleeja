@@ -143,7 +143,7 @@
 		$no_results = true;
 	}
 		$total_pages 	= $Pager->getTotalPages(); 
-		$page_nums 		= $Pager->print_nums($config['siteurl'] . basename(ADMIN_PATH) . '?cp=img_ctrl'); 
+		$page_nums 		= $Pager->print_nums($config['siteurl'] . ADMIN_PATH . '?cp=img_ctrl'); 
 		
 	//after submit 
 	if(isset($_POST['submit']))

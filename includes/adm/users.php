@@ -265,7 +265,7 @@
 		}
 	
 	$total_pages 	= $Pager->getTotalPages(); 
-	$page_nums 		= $Pager->print_nums($config['siteurl'] . basename(ADMIN_PATH) . '?cp=users' . ((isset($_GET['search'])) ? '&search=' . $_GET['search'] : '')); 
+	$page_nums 		= $Pager->print_nums(basename(ADMIN_PATH) . '?cp=users' . ((isset($_GET['search'])) ? '&search=' . $_GET['search'] : '')); 
 	
 	//if not noraml user system 
 	$user_not_normal = $config['user_system'] != 1 ?  true : false;

@@ -98,7 +98,7 @@
 	}
 	
 	$total_pages 	= $Pager->getTotalPages(); 
-	$page_nums 		= $Pager->print_nums($config['siteurl'] . ADMIN_PATH  . '?cp=reports'); 
+	$page_nums 		= $Pager->print_nums(basename(ADMIN_PATH)  . '?cp=reports'); 
 		
 	//after submit 
 	if (isset($_POST['submit']))

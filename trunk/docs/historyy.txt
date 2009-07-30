@@ -216,24 +216,41 @@ RC6:
 + new methods to (id_form) feature.
 + live extensions feature 
 + admin now can delete all specific user files
++ new login system with cookies to make 'remmeber me' feature possible .
++ new captcha system, replaced old one [ old one made alot of loads ]
++ new passwords system [ completly new and strong ] replaced MD5 hashs
++ new anti-CSRF system to prevent witch called 'one-click attacks'
++ moved admin cp to seperated folder.
++ added reset password email confirm.
++ admin now can delete all files of any user with one click.
++ admin now can add user from admin cp.
+- fix dublicate uploading when refreshing.
++ new admin notification system.
++ new livext system which make direct downloading of some files possible.
++ new system for uploading files links, one-click change how links look like.
++ now uploading boxes seperated to thier own template.
++ now admin can now the new numbers of reports without entering the reports page.
++ now admin can now the new numbers of calls without entering the calls page.
++ new language system for plugins and developer, using $olang variable.
++ add quick sizes calcualtor in admin ext page.
+- imporved alot of codes to prevent loads, and to avoid sleepy mysql connections.
++ improved image preview in admin using javascript.
++ admin now can show admins only with one click. 
+- improved user files page, now show more data of files.
++ added captcha to reset pasword page.
+
 
 -----------------------------------
 -----------------------------------
 
-To Do 1.0.1 -> 1.* : 
- 
-- improve reset passwords.
-- improve captcha
-- change passwords hashing to something else not md5
+To Do 1.X: 
+
 - organize menus in general settings (options)
 - improve user system and add groups
 - add simple moderator panel
-- add feature to allow admin to delete all specific user files
 - make callus to methods -> to admin email directly or to admin panel
 - show user total number of files which he uploaded in admin area 
 - add file description
-- add number of new calls 
-- add number of new reports 
 - add filter system
 
 

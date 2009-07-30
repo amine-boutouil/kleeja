@@ -42,12 +42,12 @@
 			while($row=$SQL->fetch_array($result))
 			{
 				//delete from folder ..
-				@kleeja_unlink ($row['folder'] . "/" . $row['name']);
+				@kleeja_unlink ($root_path . $row['folder'] . "/" . $row['name']);
 						
 				//delete thumb
-				if (is_file($row['folder'] . "/thumbs/" . $row['name'] ))
+				if (file_exists($root_path . $row['folder'] . "/thumbs/" . $row['name']))
 				{
-					@kleeja_unlink ($row['folder'] . "/thumbs/" . $row['name'] );
+					@kleeja_unlink ($root_path . $row['folder'] . "/thumbs/" . $row['name']);
 				}
 				
 				$num++;		
@@ -118,9 +118,9 @@
 				$clean_name		= $usrcp->cleanusername($name);
 										
 				$insert_query	= array('INSERT'	=> 'name ,password, password_salt ,mail,admin, session_id, clean_name',
-													'INTO'		=> "{$dbprefix}users",
-													'VALUES'	=> "'$name', '$pass', '$user_salt', '$mail','0','','$clean_name'"
-												);
+										'INTO'		=> "{$dbprefix}users",
+										'VALUES'	=> "'$name', '$pass', '$user_salt', '$mail','0','','$clean_name'"
+									);
 				if ($SQL->build($insert_query))
 				{
 					$last_user_id = $SQL->insert_id();
@@ -128,7 +128,7 @@
 					//update number of stats
 					$update_query	= array('UPDATE'	=> "{$dbprefix}stats",
 											'SET'		=> "users=users+1,lastuser='$name'",
-													);
+										);
 					$SQL->build($update_query);
 				}
 			}
@@ -265,7 +265,7 @@
 		}
 	
 	$total_pages 	= $Pager->getTotalPages(); 
-	$page_nums 		= $Pager->print_nums(basename(ADMIN_PATH) . '?cp=users' . ((isset($_GET['search'])) ? '&search=' . $_GET['search'] : '')); 
+	$page_nums 		= $Pager->print_nums(basename(ADMIN_PATH) . '?cp=users' . (isset($_GET['search']) ? '&search=' . strip_tags($_GET['search']) : '')); 
 	
 	//if not noraml user system 
 	$user_not_normal = $config['user_system'] != 1 ?  true : false;
@@ -273,7 +273,7 @@
 	//after submit 
 	if (isset($_POST['submit']) || isset($_POST['newuser']))
 	{
-			$text	= $lang['USERS_UPDATED'] . '<meta HTTP-EQUIV="REFRESH" content="0; url=' . basename(ADMIN_PATH) . '?cp=users&amp;page=' . (isset($_GET['page'])  ? intval($_GET['page']) : 1) . (isset($_GET['search']) ? '&search=' . $_GET['search'] : '') . ((isset($_GET['admin']) && $_GET['admin'] == '1') ? '&admin=1' : '') . '">' . "\n";
+			$text	= $lang['USERS_UPDATED'] . '<meta HTTP-EQUIV="REFRESH" content="0; url=' . basename(ADMIN_PATH) . '?cp=users&amp;page=' . (isset($_GET['page'])  ? intval($_GET['page']) : 1) . (isset($_GET['search']) ? '&search=' . strip_tags($_GET['search']) : '') . ((isset($_GET['admin']) && $_GET['admin'] == '1') ? '&admin=1' : '') . '">' . "\n";
 			$stylee	= "admin_info";
 	}
 ?>

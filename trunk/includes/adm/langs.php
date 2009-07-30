@@ -114,7 +114,7 @@
 	}
 	
 	$total_pages 	= $Pager->getTotalPages(); 
-	$page_nums 		= $Pager->print_nums($config['siteurl'] . ADMIN_PATH . '?cp=langs'); 
+	$page_nums 		= $Pager->print_nums(basename(ADMIN_PATH) . '?cp=langs'); 
 
 	//after submit 
 	if (isset($_POST['submit']))

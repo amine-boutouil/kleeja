@@ -138,12 +138,12 @@
 					if ($del[$row['id']])
 					{
 						//delete from folder ..
-						@kleeja_unlink ($row['folder'] . "/" . $row['name']);
+						@kleeja_unlink ($root_path . $row['folder'] . "/" . $row['name']);
 						
 						//delete thumb
 						if (is_file($row['folder'] . "/thumbs/" . $row['name'] ))
 						{
-							@kleeja_unlink ($row['folder'] . "/thumbs/" . $row['name'] );
+							@kleeja_unlink ($root_path . $row['folder'] . "/thumbs/" . $row['name'] );
 						}
 						$ids[] = $row['id'];
 						$num++;		
@@ -167,7 +167,7 @@
 
 				//update number of stats
 				$update_query	= array('UPDATE'	=> "{$dbprefix}stats",
-									'SET'		=> "sizes=sizes-$sizes,files=files-$num",
+										'SET'		=> "sizes=sizes-$sizes,files=files-$num",
 									);
 				//echo $sizes;
 				$SQL->build($update_query);

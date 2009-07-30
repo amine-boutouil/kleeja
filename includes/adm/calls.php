@@ -103,7 +103,7 @@
 	}
 	
 	$total_pages = $Pager->getTotalPages(); 
-	$page_nums	= $Pager->print_nums($config['siteurl'] . basename(ADMIN_PATH) . '?cp=calls'); 
+	$page_nums	= $Pager->print_nums(basename(ADMIN_PATH) . '?cp=calls'); 
 		
 	//after submit
 	if (isset($_POST['submit']))

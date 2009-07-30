@@ -54,7 +54,7 @@
 				{
 					$ERRORS[] = $lang['EMPTY_FIELDS'];
 				}
-				elseif((!$username && !$usrcp->data($_POST['lname'], $_POST['lpass'], false, 18000)) || (USER_ADMIN != 1))
+				elseif((!$username && !$usrcp->data($_POST['lname'], $_POST['lpass'], false, 18000)) || (USER_ADMIN != 1 || !$usrcp->data($_POST['lname'], $_POST['lpass'], false, 18000)))
 				{
 					$ERRORS[] = $lang['LOGIN_ERROR'];
 				}

@@ -437,6 +437,8 @@ switch ($_GET['go'])
 					$arr[] = array(	'id'	=> $row['id'],
 									'name'	=> '<a title="' . ($row['real_filename'] == '' ? $row['name'] : $row['real_filename']) . '" href="' .  $url . '" target="blank">' . ($row['real_filename'] == '' ? ((strlen($row['name']) > 40) ? substr($row['name'], 0, 40) . '...' : $row['name']) : ((strlen($row['real_filename']) > 40) ? substr($row['real_filename'], 0, 40) . '...' : $row['real_filename'])) . '</a>',
 									'i'		=> $i,
+									'icon_link'	=>(file_exists("images/filetypes/".  $row['type'] . ".png"))? "images/filetypes/" . $row['type'] . ".png" : 'images/filetypes/file.png',
+									'file_type'	=> $row['type'],
 								);
 							
 						//when submit !!

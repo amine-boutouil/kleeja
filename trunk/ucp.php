@@ -288,11 +288,11 @@ switch ($_GET['go'])
 			$stylee	= "fileuser";
 			$titlee	= $lang['FILEUSER'];
 			
-			$user_id_get	= isset($_GET['id']) ? intval($_GET['id']) : null;
+			$user_id_get	= (isset($_GET['id'])) ? intval($_GET['id']) : null;
 			$user_id		= (!$user_id_get && $usrcp->id()) ? $usrcp->id() : $user_id_get;
 			
 			//no logon before 
-			if (!$usrcp->name() && !isset($_GET['id']))
+			if (!$usrcp->name() && !$user_id_get)
 			{
 				kleeja_info($lang['USER_PLACE'], $lang['PLACE_NO_YOU']);
 			}
@@ -369,6 +369,7 @@ switch ($_GET['go'])
 			}
 			else #nums_rows
 			{ 
+				kleeja_err($lang['USER_NOT_EXIST'], '', true, 'index.php');
 				$no_results = true;
 			}
 		

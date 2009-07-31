@@ -294,7 +294,7 @@ switch ($_GET['go'])
 			//no logon before 
 			if (!$usrcp->name() && !$user_id_get)
 			{
-				kleeja_info($lang['USER_PLACE'], $lang['PLACE_NO_YOU']);
+				kleeja_err($lang['USER_PLACE'], $lang['PLACE_NO_YOU'], '', true, 'index.php');
 			}
 			
 			//to get userdata!!
@@ -369,7 +369,7 @@ switch ($_GET['go'])
 			}
 			else #nums_rows
 			{ 
-				kleeja_err($lang['USER_NOT_EXIST'], '', true, 'index.php');
+				kleeja_err($lang['USER_PLACE'], $lang['PLACE_NO_YOU'], '', true, 'index.php');
 				$no_results = true;
 			}
 		

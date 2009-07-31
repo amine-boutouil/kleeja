@@ -482,6 +482,7 @@ $lang = array_merge($lang, array(
 	'DELETEALLRES'				=> 'حذف كل النتائج',
 	'ADMIN_DELETE_FILES_OK'     => 'تم حذف %s ملف بنجاح',
 	'ADMIN_DELETE_FILES_NOF'	=> 'لاتوجد نتائج للقيام بعملية الحذف',
+	'NOT_EXSIT_USER'			=> 'عفواً العضو الذي تبحث عنه غير موجود في قاعدة البيانات .. ربما أنك تحاول الوصول لعضوية محذوفة !!!!',
 	//last line of this file ...					 
 	'S_TRANSLATED_BY' => 'Translated By <a href="http://www.fenix4web.com/">Fenix4Web</a>',
 ));

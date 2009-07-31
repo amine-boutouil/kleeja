@@ -302,7 +302,7 @@ switch ($_GET['go'])
 			
 			if(!$data_user['name'])
 			{
-				kleeja_err($lang['NOT_EXSIT_USER'], $lang['PLACE_NO_YOU'], true, 'index.php', '5');
+				kleeja_err($lang['NOT_EXSIT_USER'], $lang['PLACE_NO_YOU']);
 			}
 			
 			if(!$data_user['show_my_filecp'] && ($usrcp->id() != $user_id) && !$usrcp->admin())

@@ -478,6 +478,8 @@ $lang = array_merge($lang, array(
 	'GUIDE_GROUPS' 			    => 'مجموعة',
 	'ALL_FILES' 			    => 'عدد الملفات الموجودة في حسابك',
 	'NO_FILE_USER'				=> 'لا يوجد أي ملفات في حساب العضوية حتى الآن .. !',
+	'SHOWFILESBYIP'				=> 'عرض الملفات لهذا الـ IP', 
+	'DELETEALLRES'				=> 'حذف كل النتائج',
 	//last line of this file ...					 
 	'S_TRANSLATED_BY' => 'Translated By <a href="http://www.fenix4web.com/">Fenix4Web</a>',
 ));

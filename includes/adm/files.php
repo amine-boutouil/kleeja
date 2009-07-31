@@ -38,6 +38,89 @@
 						),
 					'ORDER BY'	=> 'f.id '
 					);
+					
+	//new feature delete all user files [only one user]			
+	if(isset($_GET['deletefiles']))
+	{
+		$query = array(
+				'SELECT'	=> 'id,size,name,folder',
+				'FROM'		=> "{$dbprefix}files AS f",
+				);
+				
+		$search = base64_decode($_GET['deletefiles']);
+		$search	= unserialize($search);
+		$search['filename'] = (!isset($search['filename'])) ? '' : $search['filename']; 
+		$search['username'] = (!isset($search['username'])) ? '' : $search['username'];
+		$search['than'] = (!isset($search['than'])) ? '1' : $search['than'];
+		$search['size'] = (!isset($search['size'])) ? '' : $search['size'];
+		$search['ups'] = (!isset($search['ups'])) ? '' : $search['ups'];
+		$search['uthan'] = (!isset($search['uthan'])) ? '1' : $search['uthan'];
+		$search['rep'] = (!isset($search['rep'])) ? '' : $search['rep'];
+		$search['rthan'] = (!isset($search['rthan'])) ? '1' : $search['rthan'];
+		$search['lastdown'] = (!isset($search['lastdown'])) ? '' : $search['lastdown'];
+		$search['ext'] = (!isset($search['ext'])) ? '' : $search['ext'];
+		$search['user_ip'] = (!isset($search['user_ip'])) ? '' : $search['user_ip'];
+
+		$file_namee	= ($search['filename'] != '') ? 'AND f.real_filename LIKE \'%' . $SQL->escape($search['filename']) . '%\' ' : ''; 
+		$usernamee	= ($search['username'] != '') ? 'AND u.name LIKE \'%' . $SQL->escape($search['username']) . '%\'' : ''; 
+		$size_than	=   ' f.size ' . ($search['than']!=1 ? '<=' : '>=') . (intval($search['size']) * 1024) . ' ';
+		$ups_than	=  ($search['ups'] != '') ? 'AND f.uploads ' . ($search['uthan']!=1 ? '<' : '>') . intval($search['ups']) . ' ' : '';
+		$rep_than	=  ($search['rep'] != '') ? 'AND f.report ' . ($search['rthan']!=1 ? '<' : '>') . intval($search['rep']) . ' ' : '';
+		$lstd_than	=  ($search['lastdown'] != '') ? 'AND f.last_down =' . (time()-(intval($search['lastdown']) * (24 * 60 * 60))) . ' ' : '';
+		$s_exts 	= 	explode(",",$SQL->escape($search['ext']));
+		$exte		=  ($search['ext'] != '') ? "AND f.type IN ('" . implode("', '", $s_exts) . "')" : '';
+		$ipp		=  ($search['user_ip'] != '') ? 'AND f.user_ip LIKE \'%' . $SQL->escape($search['user_ip']) . '%\' ' : '';
+		$query['WHERE'] = "$size_than $file_namee $ups_than $exte $rep_than $usernamee $lstd_than $exte $ipp";
+			
+		$result = $SQL->build($query);
+		$sizes = false;
+		$num = 0;
+		while($row=$SQL->fetch_array($result))
+		{
+			//delete from folder ..
+			@kleeja_unlink ($root_path . $row['folder'] . "/" . $row['name']);
+						
+			//delete thumb
+			if (file_exists($root_path . $row['folder'] . "/thumbs/" . $row['name']))
+			{
+				@kleeja_unlink ($root_path . $row['folder'] . "/thumbs/" . $row['name']);
+			}
+			
+			$ids[] = $row['id'];
+			$num++;		
+			$sizes += $row['size'];
+		}
+			
+		if($num == 0)
+		{
+			kleeja_admin_err($lang['ADMIN_DELETE_NO_FILE']);
+		}
+			
+		if($sizes)
+		{
+			//update number of stats
+			$update_query	= array('UPDATE'	=> "{$dbprefix}stats",
+									'SET'		=> "sizes=sizes-$sizes,files=files-$num",
+									);
+									
+			$SQL->build($update_query);
+			
+			//delete all files in just one query
+			$query_del = array('DELETE'	=> "{$dbprefix}files",
+									'WHERE'	=> "id IN (" . implode(',', $ids) . ")",);
+									
+			$SQL->build($query_del);
+			$SQL->freeresult($result);
+				
+			kleeja_admin_info($lang['ADMIN_DELETE_FILE_OK']);
+		}
+		else
+		{
+			$errs = $lang['ADMIN_DELETE_FILE_ERR'];
+			kleeja_admin_err($errs);
+		}
+			
+	}
 						
 	//posts search ..
 	if (isset($_POST['search_file']))
@@ -48,8 +131,21 @@
 	}
 	else if(isset($_GET['search']))
 	{
+		$deletelink = basename(ADMIN_PATH) . "?cp=files" . '&deletefiles=' . $SQL->escape($_GET['search']);
 		$search = base64_decode($_GET['search']);
 		$search	= unserialize($search);
+		$search['filename'] = (!isset($search['filename'])) ? '' : $search['filename']; 
+		$search['username'] = (!isset($search['username'])) ? '' : $search['username'];
+		$search['than'] = (!isset($search['than'])) ? '1' : $search['than'];
+		$search['size'] = (!isset($search['size'])) ? '' : $search['size'];
+		$search['ups'] = (!isset($search['ups'])) ? '' : $search['ups'];
+		$search['uthan'] = (!isset($search['uthan'])) ? '1' : $search['uthan'];
+		$search['rep'] = (!isset($search['rep'])) ? '' : $search['rep'];
+		$search['rthan'] = (!isset($search['rthan'])) ? '1' : $search['rthan'];
+		$search['lastdown'] = (!isset($search['lastdown'])) ? '' : $search['lastdown'];
+		$search['ext'] = (!isset($search['ext'])) ? '' : $search['ext'];
+		$search['user_ip'] = (!isset($search['user_ip'])) ? '' : $search['user_ip'];
+
 		$file_namee	= ($search['filename'] != '') ? 'AND f.real_filename LIKE \'%' . $SQL->escape($search['filename']) . '%\' ' : ''; 
 		$usernamee	= ($search['username'] != '') ? 'AND u.name LIKE \'%' . $SQL->escape($search['username']) . '%\'' : ''; 
 		$size_than	=   ' f.size ' . ($search['than']!=1 ? '<=' : '>=') . (intval($search['size']) * 1024) . ' ';
@@ -127,6 +223,7 @@
 							'report' => ($row['report'] > 4) ? "<span style=\"color:red\"><big>" . $row['report'] . "</big></span>":$row['report'],
 							'user' => ($row['user'] == '-1') ? $lang['GUST'] :  '<a href="' . $userfile . '" target="_blank">' . $row['username'] . '</a>',
 							'ip' 	=> '<a href="http://www.ripe.net/whois?form_type=simple&amp;full_query_string=&amp;searchtext=' . $row['user_ip'] . '&amp;do_search=Search" target="_new">' . $row['user_ip'] . '</a>',
+							'showfilesbyip' => '<br /><a href="'. basename(ADMIN_PATH) . "?cp=files" . '&deletefiles=' . base64_encode(serialize(array('user_ip' => $row['user_ip']))) . '">' . $lang['SHOWFILESBYIP'] . '</a>',
 						);
 			//
 			$del[$row['id']] = (isset($_POST['del_' . $row['id']]) ) ? $_POST["del_" . $row['id']] : '';

@@ -462,6 +462,8 @@ $lang = array_merge($lang, array(
 	'FILES_DELETED' 			=> 'تم حذف الملفات المحدده بنجاح !',
 	'GUIDE_GROUPS' 			    => 'مجموعة',
 	'ALL_FILES' 			    => 'عدد جميع الملفات',
+	'SHOWFILESBYIP'				=> 'عرض الملفات لهذا الـ IP', 
+	'DELETEALLRES'				=> 'حذف كل النتائج',
 ));
 
 ?>

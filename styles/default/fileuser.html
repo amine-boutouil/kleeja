@@ -44,41 +44,30 @@
 <h2>{lang.NO_FILE_USER}</h2>
 </div>	
 <ELSE>
-<div id="boxfileuser">
 <table class="tabledata">
 	<thead>
 		<tr>
 			<th>#</th>
-			<th>#</th>
-			<th class="odd">{lang.FILENAME}</th>	
-			<th>{lang.FILETYPE}</th>
+			<th colspan="2">{lang.FILETYPE}</th>
+			<th>{lang.FILENAME}</th>
 			<th>{lang.FILEUPS}</th>
 			<th>{lang.LAST_DOWN}</th>
 		</tr>	
 	</thead>
 	
-	<tfoot>	
-		<tr>
-			<th colspan="6"></th>
-		</tr>
-	</tfoot>
-	
 	<tbody>
 		<LOOP NAME="arr">	
 		<tr>
 			<td>{{i}}</td>
+			<td>{{file_type}}</td>
 			<td><img src="{{icon_link}}" alt="{{file_type}}" /></td>
 			<td class="odd">{{name}}</td>
-			<td>{{file_type}}</td>
 			<td><span class="fcolor">{{uploads}}</span></td>
 			<td>{{last_down}}</td>
 		</tr>
 		</LOOP>
 	</tbody>	
 </table>
-
-
-</div>		
 </IF>
 	
 

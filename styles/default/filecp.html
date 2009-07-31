@@ -22,7 +22,7 @@
 	<thead>
 		<tr>
 			<th>#</th>	
-			<th colspan="2">{lang.FILETYPE}</th>
+			<th>{lang.FILETYPE}</th>
 			<th class="odd">{lang.FILENAME}</th>	
 			<th>{lang.DELETE}</th>
 		</tr>	
@@ -30,7 +30,7 @@
 	
 	<tfoot>	
 		<tr>
-			<th colspan="5" class="nbr">{lang.ALL_FILES} [ {nums_rows} ] {lang.FILE}</th>
+			<th colspan="4" class="nbr">{lang.ALL_FILES} [ {nums_rows} ] {lang.FILE}</th>
 		</tr>
 	</tfoot>
 	
@@ -38,7 +38,6 @@
 		<LOOP NAME="arr">	
 		<tr>
 			<td>{{i}}</td>
-			<td>{{file_type}}</td>
 			<td><img src="{{icon_link}}" alt="{{file_type}}" /></td>
 			<td class="odd">{{name}}</td>
 			<td><input type="checkbox" name="del_{{id}}" value="1" /></td>

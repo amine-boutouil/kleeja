@@ -66,7 +66,7 @@
 				{
 					$_SESSION['USER_SESS'] = session_id();
 					$_SESSION['ADMINLOGIN'] = md5($usrcp->name() . $config['siteurl']);
-					header('Location: ' .  basename(ADMIN_PATH) . '?cp=' . $go_to);
+					header('Location: ./' . basename(ADMIN_PATH) . '?cp=' . $go_to);
 					$SQL->close();
 					exit;
 				}

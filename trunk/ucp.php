@@ -292,7 +292,7 @@ switch ($_GET['go'])
 			$user_id		= (!$user_id_get && $usrcp->id()) ? $usrcp->id() : $user_id_get;
 			
 			//no logon before 
-			if (!$usrcp->name() && !$_GET['id'])
+			if (!$usrcp->name() && !isset($_GET['id']))
 			{
 				kleeja_info($lang['USER_PLACE'], $lang['PLACE_NO_YOU']);
 			}

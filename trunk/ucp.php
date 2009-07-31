@@ -292,13 +292,18 @@ switch ($_GET['go'])
 			$user_id		= (!$user_id_get && $usrcp->id()) ? $usrcp->id() : $user_id_get;
 			
 			//no logon before 
-			if (!$usrcp->name() && !$user_id_get)
+			if (!$usrcp->name() && !isset($_GET['id']))
 			{
-				kleeja_err($lang['USER_PLACE'], $lang['PLACE_NO_YOU'], '', true, 'index.php');
+				kleeja_err($lang['USER_PLACE'], $lang['PLACE_NO_YOU'], true, 'index.php');
 			}
 			
 			//to get userdata!!
 			$data_user = ($config['user_system'] == 1) ? $usrcp->get_data('name, show_my_filecp', $user_id) : array('name' => $usrcp->name(), 'show_my_filecp' => '1');
+			
+			if(!$data_user['name'])
+			{
+				kleeja_err($lang['NOT_EXSIT_USER'], $lang['PLACE_NO_YOU'], true, 'index.php');
+			}
 			
 			if(!$data_user['show_my_filecp'] && ($usrcp->id() != $user_id) && !$usrcp->admin())
 			{
@@ -369,7 +374,6 @@ switch ($_GET['go'])
 			}
 			else #nums_rows
 			{ 
-				kleeja_err($lang['USER_PLACE'], $lang['PLACE_NO_YOU'], '', true, 'index.php');
 				$no_results = true;
 			}
 		

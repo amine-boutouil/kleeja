@@ -9,7 +9,7 @@
 
 <IF NAME="is_search">
 <img src="../includes/admin_style/images/search_button.gif" ><strong> {lang.SEARCH_FILES} ( {nums_rows} )</strong>
- | <a href="{deletelink}">{lang.DELETEALLRES}</a>
+ | <a href="{deletelink}" onclick="javascript:return confirm_from();">{lang.DELETEALLRES}</a>
 <ELSE>
 <!-- title  -->
 <b>{lang.R_FILES}</b>

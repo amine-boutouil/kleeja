@@ -26,13 +26,13 @@
 
 <div class="box_rebort">
 	<label>{lang.YOURNAME} :</label>
-	<input type="text" name="rname" value="{t_rname}" size="30" />
+	<input class="input_field" type="text" name="rname" value="{t_rname}" size="30" />
 	<label>{lang.EMAIL} : </label>
-	<input type="text" name="rmail" value="{t_rmail}" size="30" style="direction:ltr" />
+	<input class="input_field" type="text" name="rmail" value="{t_rmail}" size="30" style="direction:ltr" />
 	<label>{lang.URL} : </label>
 	<input class="urlcolor" type="text" name="rurl" value="{url_id}"  readonly="readonly" size="46" style="direction:ltr" />
 	<label>{lang.REASON} : </label>
-	<textarea name="rtext" cols="5" rows="5">{t_rtext}</textarea>
+	<textarea class="input_field" name="rtext" cols="5" rows="5">{t_rtext}</textarea>
 </div>
 
 <!---- start  safe code  ---->				
@@ -51,7 +51,7 @@
 
 <input name="rid" value="{id_d}" type="hidden" />
 {H_FORM_KEYS}
-<input class="buttons" type="submit" name="submit" value="{lang.REPORT}" />
+<input id="buttons" type="submit" name="submit" value="{lang.REPORT}" />
 </form>
 </div>
 <!-- ## End form call  -->

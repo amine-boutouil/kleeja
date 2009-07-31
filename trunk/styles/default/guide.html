@@ -9,8 +9,9 @@
 <div class="clr"></div><div class="line"></div>
 <!-- # End line top  -->
 
-<!-- start user list of files allowed -->
+
 <IF NAME="users_data">
+<!-- start user list of files allowed -->
 <table class="guide_user">
 <tr><th>{lang.GUIDE_USERS}</th></tr>
 <tr>
@@ -36,12 +37,12 @@
 </td>
 </tr>
 </table>
-</IF>
 <!-- # END user list of files allowed -->
+</IF>
 
 
-<!-- start visitor list files  -->
 <IF NAME="gusts_data">
+<!-- start visitor list files  -->
 <table class="guide_visitor" border="0" cellspacing="0" cellpadding="0">
 <tr><th>{lang.GUIDE_VISITORS}</th></tr>
 <tr>
@@ -53,7 +54,9 @@
 			</div>
 		</IF>
 	<div class="visitor_box user_box">
-		<strong class="visitor_img user_img"><img src="{STYLE_PATH}images/filegroups/{{group}}.png" style="vertical-align:middle;" />{lang.GUIDE_GROUPS} : {{group_name}}</strong>
+		<div class="visitor_img user_img"><img src="{STYLE_PATH}images/filegroups/{{group}}.png" style="vertical-align:middle;" />
+		<div class="visitor_n4me user_n4me">{lang.GUIDE_GROUPS} : {{group_name}}</div>
+		</div>
 		<br />
 	</IF>
 		<div class="visitor_ext user_ext">
@@ -65,10 +68,9 @@
 </td>
 </tr>
 </table>
-</IF>
 <!-- # END visitor list files  -->
+</IF>
 
-		 
 <div class="clr"></div><br />
    
 </div>

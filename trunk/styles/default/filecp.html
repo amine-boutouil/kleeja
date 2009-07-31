@@ -9,21 +9,26 @@
 <div class="clr"></div><div class="line"></div>
 <!-- # End line top  -->
 	
-	
+<!--  start form user control panel  Files  -->	
 <form action="{action}" method="post">
-
 <IF NAME="no_results">
 
+<!--  start no files user -->
+<div id="boxfileuser" style="text-align:center">
+<img src="{STYLE_PATH}images/warning_nofile.png" /><br />
 <h2>{lang.NO_FILE_USER}</h2>
+</div>
+<!--  # end  no files user -->
 
 <ELSE>
-	
+
+<!--  start table files  -->	
 <table class="file_cp">
 	<thead>
 		<tr>
 			<th>#</th>	
-			<th>{lang.FILETYPE}</th>
-			<th class="odd">{lang.FILENAME}</th>	
+			<th>/</th>
+			<th class="odd">{lang.FILENAME}</th>
 			<th>{lang.DELETE}</th>
 		</tr>	
 	</thead>
@@ -45,26 +50,28 @@
 		</LOOP>
 	</tbody>
 	
-	
 </table>
-
+<!--  # end table files  -->	
 
 
 <div class="clr"></div><br />
-<div style="text-align:center"><span>{page_nums}</span></div>
+
+<!--  start pagination   -->
+<div>{page_nums}</div>
+<!--  # end pagination  -->
 
 
 {H_FORM_KEYS}
 
+<!--  start button filecp   -->
 <div class="left_button"><input id="buttons" type="submit" name="submit_files" value="{lang.DEL_SELECTED}" /></div>
-
-
+<!--  # end button filecp   -->
 
 </IF>
-
 </form>
+<!--  end form user control panel  Files  -->	
 
 <div class="clr"></div><br />
    
 </div>
- <!-- ## End  control files user template  -->       
+ <!-- # End  control files user template  -->       

@@ -93,7 +93,7 @@
 			
 		if($num == 0)
 		{
-			kleeja_admin_err($lang['ADMIN_DELETE_NO_FILE']);
+			kleeja_admin_err($lang['ADMIN_DELETE_FILES_NOF']);
 		}
 			
 		if($sizes)
@@ -111,12 +111,13 @@
 									
 			$SQL->build($query_del);
 			$SQL->freeresult($result);
-				
-			kleeja_admin_info($lang['ADMIN_DELETE_FILE_OK']);
+			
+			$langdeleted = sprintf($lang['ADMIN_DELETE_FILES_OK'], $num);
+			kleeja_admin_info($langdeleted);
 		}
 		else
 		{
-			$errs = $lang['ADMIN_DELETE_FILE_ERR'];
+			$errs = $lang['ADMIN_DELETE_FILES_NOF'];
 			kleeja_admin_err($errs);
 		}
 			

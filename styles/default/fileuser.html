@@ -8,41 +8,43 @@
 <div class="clr"></div><div class="line"></div>
 <!-- # End line top  -->
 
-
-<!--  top  -->
-<div id="boxfileuser">
-
-<div class="box_user">
-<div class="public">{lang.PUBLIC_USER_FILES} : </div>
-<IF NAME="user_name"><div class="uname">{user_name}</div></IF>
-</div>
-
 <IF NAME="user_name">
-<div class="us3r_n4me">
-	<div class="allfiles">{lang.ALL_FILES} : </div>
-	<div class="nums">{nums_rows}</div> 
-</div>
-</IF>
-
-<div class="clr"></div>
-</div>
-<!-- # top  -->
-
-<!--  top  -->
-<IF NAME="filecp_link">
+<!--  start box user name and all files  -->
 <div id="boxfileuser">
-<div class="copylink">{lang.COPY_AND_GET_DUD}</div>
-<div class="link_user"><input class="input_field" readonly="readonly" onclick="javascript:highlight(this);" type="text" style="width:300px" name="option" value="{your_fileuser}" dir="ltr" />
+	<div class="box_user">
+		<div class="public">{lang.PUBLIC_USER_FILES} : </div>
+		<div class="uname">{user_name}</div>
+	</div>
+	<div class="us3r_n4me">
+		<div class="public">{lang.ALL_FILES} : </div>
+		<div class="nums">{nums_rows}</div> 
+	</div>
+	<div class="clr"></div>
 </div>
+<!--  # end  box user name and all files  -->
+</IF>
+
+
+<IF NAME="filecp_link">
+<!--  start link user  -->
+<div id="filecplink">
+<div class="copylink">{lang.COPY_AND_GET_DUD}</div>
+<input class="link_user" readonly="readonly" onclick="javascript:highlight(this);" type="text" name="option" value="{your_fileuser}" />
 <div class="clr"></div>
 </div>
+<!--  # end link user -->
 </IF>
-<!-- # top  -->
+
 
 <IF NAME="no_results">
-<div id="boxfileuser">
+<!--  start no files user -->
+<div id="boxfileuser" style="text-align:center">
+<img src="{STYLE_PATH}images/warning_nofile.png" /><br />
 <h2>{lang.NO_FILE_USER}</h2>
-</div>	
+</div>
+<!--  # end  no files user -->
+
+<!--  start table all files -->
 <ELSE>
 <table class="tabledata">
 	<thead>
@@ -68,15 +70,20 @@
 		</LOOP>
 	</tbody>	
 </table>
+<!--  # end table all files  -->
 </IF>
 	
 
 <div class="clr"></div><br />
 
-<div><span>{page_nums}</span></div>
+<!--  start pagination   -->
+<div>{page_nums}</div>
+<!--  # end pagination  -->
 
 <IF NAME="filecp_link">
+<!--  start go button filecp   -->
 <div class="left_button"><a id="buttons" href="{filecp_link}" title="{lang.GO_FILECP}">{lang.GO_FILECP}</a></div>
+<!--  # end go button filecp  -->
 </IF>
  
 <div class="clr"></div><br />

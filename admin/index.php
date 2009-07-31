@@ -28,6 +28,8 @@
 	//go to ..
 	$go_to	= isset($_GET['cp']) ? htmlspecialchars($_GET['cp']) : 'start';
 	$username = $usrcp->name();
+	//admin session timeout
+	$admintime = isset($admintime) ? $admintime : 18000;
 		
 	//need to login again
 	if((empty($_SESSION['ADMINLOGIN']) || $_SESSION['ADMINLOGIN'] != md5($usrcp->name() . $config['siteurl'])) || (empty($_SESSION['USER_SESS']) || $_SESSION['USER_SESS'] != session_id()))
@@ -54,7 +56,7 @@
 				{
 					$ERRORS[] = $lang['EMPTY_FIELDS'];
 				}
-				elseif((!$username && !$usrcp->data($_POST['lname'], $_POST['lpass'], false, 18000)) || (USER_ADMIN != 1 || !$usrcp->data($_POST['lname'], $_POST['lpass'], false, 18000)))
+				elseif((!$username && !$usrcp->data($_POST['lname'], $_POST['lpass'], false, $admintime)) || (USER_ADMIN != 1 || !$usrcp->data($_POST['lname'], $_POST['lpass'], false, $admintime)))
 				{
 					$ERRORS[] = $lang['LOGIN_ERROR'];
 				}

@@ -204,7 +204,7 @@ function Saafooter($outscript=false)
 					title : <title>title of page</title>
 					exit : stop script after showing msg 
 */
-function kleeja_info($msg,$title='', $exit=true, $redirect=false)
+function kleeja_info($msg,$title='', $exit=true, $redirect=false, $rs='2')
 {
 	global $text, $tpl;
 	
@@ -222,7 +222,7 @@ function kleeja_info($msg,$title='', $exit=true, $redirect=false)
 	//redirect
 	if($redirect)
 	{
-        echo '<meta http-equiv="refresh" content="2;url=' . $redirect . '" />'; 
+        echo '<meta http-equiv="refresh" content="' . $rs . ';url=' . $redirect . '" />'; 
 	}
 	
 	if ($exit)
@@ -237,7 +237,7 @@ function kleeja_info($msg,$title='', $exit=true, $redirect=false)
 					title : <title>title of page</title>
 					exit : stop script after showing msg 
 */
-function kleeja_err($msg, $title='', $exit=true, $redirect=false)
+function kleeja_err($msg, $title='', $exit=true, $redirect=false, $rs='2')
 {
 	global $text, $tpl, $SQL;
 	
@@ -255,7 +255,7 @@ function kleeja_err($msg, $title='', $exit=true, $redirect=false)
 	//redirect
 	if($redirect)
 	{
-        echo '<meta http-equiv="refresh" content="2;url=' . $redirect . '" />'; 
+        echo '<meta http-equiv="refresh" content="' . $rs . ';url=' . $redirect . '" />'; 
 	}
 
 	if ($exit)

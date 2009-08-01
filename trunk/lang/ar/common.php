@@ -35,7 +35,7 @@ $lang = array_merge($lang, array(
 	'USERS_SYSTEM' => 'نظام المستخدمين',
 	'ERROR_NAVIGATATION' => 'خطأ بالتوجه..',
 
-	'USER_LOGIN' => ' تسجيل الدخول + للأعضاء فقط ',
+	'USER_LOGIN' => 'تسجيل الدخول',
 	'LOGIN' => 'دخول',
 	'USERNAME' => 'اسم المستخدم',
 	'PASSWORD' => 'كلمة المرور',
@@ -458,7 +458,7 @@ $lang = array_merge($lang, array(
 	'INVALID_FORM_KEY'			=> 'نموذج خاطئ , او انك تعديت الوقت المسموح فيه لملأ النموذج.',
 	'REFRESH_CAPTCHA'			=> 'اظغط لتحديث الصوره بواحده جديده',
 	'CHOSE_F'					=> 'فضلا قم بإختيار ملف واحد على الاقل',
-	'NO_REPEATING_UPLOADING'	=> 'لايجب تحديث الصفحة بعد رفع الملفات !.',
+	'NO_REPEATING_UPLOADING'	=> 'لايمكنك رفع نفس الملفات على التوالي !.',
 	'FILES_DELETED' 			=> 'تم حذف الملفات المحدده بنجاح !',
 	'GUIDE_GROUPS' 			    => 'مجموعة',
 	'ALL_FILES' 			    => 'عدد جميع الملفات',

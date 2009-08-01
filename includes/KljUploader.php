@@ -256,7 +256,7 @@ function process ()
 			{
 				$wut = null;
 				//no uploading yet
-				//$_SESSION['NO_UPLOADING_YET'] = true;
+				$_SESSION['NO_UPLOADING_YET'] = true;
 			}
 			
 			//if submit 
@@ -288,13 +288,13 @@ function process ()
 				}
 			}
 			
-			/* need to be improved in near fucture
-			if($wut && empty($_SESSION['NO_UPLOADING_YET']))
+
+			if($wut == 2 && empty($_SESSION['NO_UPLOADING_YET']))
 			{
 				$_SESSION['NO_UPLOADING_YET'] = true;
 				 return $this->errs[] = $lang['NO_REPEATING_UPLOADING'];
 			}
-			*/
+			
 			
 			// uploading process 
 			$check = false;
@@ -692,7 +692,7 @@ function process ()
 					$_SESSION['FIILES_NOT_DUPLI'] = $_FILES;
 						
 					unset ($filename, $folderee, $sizeee, $typeee);
-					//unset ($_SESSION['NO_UPLOADING_YET']);
+					unset ($_SESSION['NO_UPLOADING_YET']);
 
 	}#save it
 

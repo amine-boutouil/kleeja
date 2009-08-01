@@ -232,7 +232,7 @@
 	}
 	
 	$STYLE_PATH = $root_path . 'styles/' . $config['style'] . '/';
-	$STYLE_PATH_ADMIN  =  $root_path  . 'includes/admin_style/';
+	$STYLE_PATH_ADMIN  =  $root_path  . 'admin/admin_style/';
 	
 	//get languge of common
 	get_lang('common');

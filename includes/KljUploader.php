@@ -277,6 +277,17 @@ function process ()
 				}
 			}
 			
+			if ($wut && isset($_SESSION['FIILES_NOT_DUPLI']))
+			{
+				for($i=0;$i<=$this->filesnum;$i++)
+				{
+					if((!empty($_SESSION['FIILES_NOT_DUPLI']['file']['name'][$i]) && !empty($_FILES['file']['name'][$i])) && ($_SESSION['FIILES_NOT_DUPLI']['file']['name'][$i]) == ($_FILES['file']['name'][$i]))
+					{
+						return $this->errs[] = $lang['NO_REPEATING_UPLOADING'];
+					}
+				}
+			}
+			
 			/* need to be improved in near fucture
 			if($wut && empty($_SESSION['NO_UPLOADING_YET']))
 			{
@@ -672,6 +683,13 @@ function process ()
 					}
 
 					($hook = kleeja_run_hook('saveit_func_kljuploader')) ? eval($hook) : null; //run hook
+					
+					if(isset($_SESSION['FIILES_NOT_DUPLI']))
+					{
+						unset($_SESSION['FIILES_NOT_DUPLI']);
+					}
+					
+					$_SESSION['FIILES_NOT_DUPLI'] = $_FILES;
 						
 					unset ($filename, $folderee, $sizeee, $typeee);
 					//unset ($_SESSION['NO_UPLOADING_YET']);

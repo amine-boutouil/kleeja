@@ -86,7 +86,7 @@
 		}
 			//show template login .
 			//body
-			$action	= basename(ADMIN_PATH) . "?go=login&amp;cp=" . $go_to;
+			$action	= './' . basename(ADMIN_PATH) . "?go=login&amp;cp=" . $go_to;
 			$err = false;
 			if(!empty($errs))
 			{

@@ -256,7 +256,7 @@ function process ()
 			{
 				$wut = null;
 				//no uploading yet
-				$_SESSION['NO_UPLOADING_YET'] = true;
+				//$_SESSION['NO_UPLOADING_YET'] = true;
 			}
 			
 			//if submit 
@@ -277,7 +277,7 @@ function process ()
 				}
 			}
 			
-			if ($wut && isset($_SESSION['FIILES_NOT_DUPLI']))
+			if ($wut == 1 && isset($_SESSION['FIILES_NOT_DUPLI']))
 			{
 				for($i=0;$i<=$this->filesnum;$i++)
 				{
@@ -287,13 +287,23 @@ function process ()
 					}
 				}
 			}
-			
-
+			if ($wut == 2 && isset($_SESSION['FIILES_NOT_DUPLI_LINKS']))
+			{
+				for($i=0;$i<=$this->filesnum;$i++)
+				{
+					if((!empty($_SESSION['FIILES_NOT_DUPLI_LINKS']['file'][$i]) && !empty($_POST['file'][$i]) && trim($_POST['file'][$i]) != $lang['PAST_URL_HERE'] && trim($_SESSION['FIILES_NOT_DUPLI_LINKS']['file'][$i]) != $lang['PAST_URL_HERE']) && ($_SESSION['FIILES_NOT_DUPLI_LINKS']['file'][$i]) == ($_POST['file'][$i]))
+					{
+						return $this->errs[] = $lang['NO_REPEATING_UPLOADING'];
+					}
+				}
+			}
+			/*
 			if($wut == 2 && empty($_SESSION['NO_UPLOADING_YET']))
 			{
 				$_SESSION['NO_UPLOADING_YET'] = true;
 				 return $this->errs[] = $lang['NO_REPEATING_UPLOADING'];
 			}
+			*/
 			
 			
 			// uploading process 
@@ -684,15 +694,27 @@ function process ()
 
 					($hook = kleeja_run_hook('saveit_func_kljuploader')) ? eval($hook) : null; //run hook
 					
-					if(isset($_SESSION['FIILES_NOT_DUPLI']))
+					if (isset($_POST['submitr']))
 					{
-						unset($_SESSION['FIILES_NOT_DUPLI']);
-					}
+						if(isset($_SESSION['FIILES_NOT_DUPLI']))
+						{
+							unset($_SESSION['FIILES_NOT_DUPLI']);
+						}
 					
-					$_SESSION['FIILES_NOT_DUPLI'] = $_FILES;
+						$_SESSION['FIILES_NOT_DUPLI'] = $_FILES;
+					}
+					elseif(isset($_POST['submittxt']))
+					{
+						if(isset($_SESSION['FIILES_NOT_DUPLI_LINKS']))
+						{
+							unset($_SESSION['FIILES_NOT_DUPLI_LINKS']);
+						}
+					
+						$_SESSION['FIILES_NOT_DUPLI_LINKS'] = $_POST;
+					}
 						
 					unset ($filename, $folderee, $sizeee, $typeee);
-					unset ($_SESSION['NO_UPLOADING_YET']);
+					//unset ($_SESSION['NO_UPLOADING_YET']);
 
 	}#save it
 

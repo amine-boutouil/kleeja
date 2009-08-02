@@ -56,7 +56,7 @@ img.right {float: right;margin-left:15px;}
 /* System Messages body */
 #system-message  { margin: 10px 0;}
 #system-message dd {font-weight: bold; text-indent: 35px; }
-#system-message dd.info ul ,#system-message dd.error ul,#system-message dd.info_f ul {list-style: none;padding:5px 10px;}
+#system-message dd.info ul ,#system-message dd.error ul{list-style:square;padding:5px 10px;list-style-position:inside}
 #system-message dd.info ul {border-top: 3px solid #FEA53D;border-bottom: 3px solid #FEA53D;background-color: #EFE7B8;}
 #system-message dd.info  ul li {color: #444;background: url(../images/info.png) no-repeat right top;padding:5px}
 #system-message dd.error ul {background-color: #E6C0C0;border-top: 3px solid #DE7A7B;border-bottom: 3px solid #DE7A7B;}
@@ -306,8 +306,31 @@ table.guide_visitor th {background:#A71515 url(../images/headline_bg.png) repeat
 .thumb_div_tag {margin:2px auto;}
 .thumb_div_tag img{background:#FFF;border:1px solid #D20000;padding:5px}
 
-#system-message dd.info_f ul {width:74%;border-top: 3px solid #95AD4B;border-bottom: 3px solid #95AD4B;background-color:#DEE6C5;}
-#system-message dd.info_f ul li {color:#235300;background:url(../images/info_f.png) no-repeat 99% 1%;padding:5px}
 
-.all_boxes{width:98%;color:#235300;border:1px solid #F8F800;outline:1px solid #ccc;direction:ltr}
-.all_boxes:focus {background-color: #ffd ;border: 1px solid #D26900;}
+
+.info {
+display:block;
+width:73%;
+border-top: 3px solid #95AD4B;
+border-bottom: 3px solid #95AD4B;
+color:#647922;
+background:#DEE6C5 url(../images/info_f.png) no-repeat 99% 2%;
+padding:10px
+}
+.err {
+display:block;
+width:75%;
+border-top: 3px solid #DE7A7B;
+border-bottom: 3px solid #DE7A7B;
+color:#c00;
+background:#E6C0C0 url(../images/err.png) no-repeat 99% 20%;
+padding:5px
+}
+.err strong,.info  strong {
+padding-right:30px;
+vertical-align:middle;
+line-height:25px
+}
+
+.all_boxes{width:98%;color:#235300;border:1px solid #F8F800;outline:1px solid #95AD4B;direction:ltr}
+.all_boxes:focus {background-color:#FFE1C6;border: 1px solid #C9FF0F;color:#111}

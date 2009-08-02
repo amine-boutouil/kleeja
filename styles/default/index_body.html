@@ -13,13 +13,9 @@
 
 <IF NAME="info">
 <!---- START  FOR INFORMATION ---->
-<dl id="system-message">
-	<dd class="info_f">
-		<ul>
-			<LOOP NAME="info"><li class="{{t}}"><strong>{lang.INFORMATION} : </strong> {{i}}</li></LOOP>
-		</ul>
-	</dd>
-</dl>
+<div id="system-message">
+<LOOP NAME="info"><div class="{{t}}"><strong>{lang.INFORMATION} : {{i}}</strong></div></LOOP>
+</div>
 <!---- END  FOR INFORMATION ---->
 </IF>
 

@@ -55,12 +55,12 @@ img.right {float: right;margin-left:15px;}
 
 /* System Messages body */
 #system-message  { margin: 10px 0;}
-#system-message dd {font-weight: bold; text-indent: 35px; }
-#system-message dd.info ul ,#system-message dd.error ul{list-style:square;padding:5px 10px;list-style-position:inside}
+#system-message dd {font-weight: bold; text-indent: 30px; }
+#system-message dd.info ul ,#system-message dd.error ul{list-style:square;padding:5px 10px;list-style-position:inside;}
 #system-message dd.info ul {border-top: 3px solid #FEA53D;border-bottom: 3px solid #FEA53D;background-color: #EFE7B8;}
-#system-message dd.info  ul li {color: #444;background: url(../images/info.png) no-repeat right top;padding:5px}
+#system-message dd.info  ul li {color: #444;background: url(../images/info.png) no-repeat right top;padding:3px;}
 #system-message dd.error ul {background-color: #E6C0C0;border-top: 3px solid #DE7A7B;border-bottom: 3px solid #DE7A7B;}
-#system-message dd.error ul li{color:#c00;background: url(../images/error.png) no-repeat right top;padding:5px}
+#system-message dd.error ul li{color:#c00;background: url(../images/error.png) no-repeat right top;padding:3px}
 /* ##  End  System Messages */
 
 /*  right menu */
@@ -303,31 +303,34 @@ table.guide_visitor th {background:#A71515 url(../images/headline_bg.png) repeat
 /* #  template list of files allowed > guide.html */
 
 
+
+
 .thumb_div_tag {margin:2px auto;}
 .thumb_div_tag img{background:#FFF;border:1px solid #D20000;padding:5px}
 
 
 
-.info {
+.index_info {
 display:block;
 width:73%;
 border-top: 3px solid #95AD4B;
 border-bottom: 3px solid #95AD4B;
-color:#647922;
+color:#41520A;
 background:#DEE6C5 url(../images/info_f.png) no-repeat 99% 2%;
-padding:10px
+padding:10px;
+text-indent:30px;
 }
-.err {
+.index_err {
 display:block;
 width:75%;
 border-top: 3px solid #DE7A7B;
 border-bottom: 3px solid #DE7A7B;
 color:#c00;
 background:#E6C0C0 url(../images/err.png) no-repeat 99% 20%;
-padding:5px
+padding:5px;
+text-indent:30px;
 }
-.err strong,.info  strong {
-padding-right:30px;
+.index_err strong,.index_info  strong {
 vertical-align:middle;
 line-height:25px
 }

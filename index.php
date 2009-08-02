@@ -61,9 +61,9 @@
 
 	//show errors and info
 	$info = array();
-	foreach($kljup->errs as $s )	
+	foreach($kljup->errs as $t=>$s)	
 	{
-		$info[] = array( 'i' => $s);
+		$info[] = array('t'=>$t, 'i' => $s);
 	}
 	
 	//some words for template

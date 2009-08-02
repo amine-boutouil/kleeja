@@ -218,7 +218,7 @@ function process ()
 			
 			if($jadid)
 			{
-				$this->errs[] = $lang['NEW_DIR_CRT'];
+				$this->errs['info'] = $lang['NEW_DIR_CRT'];
 				
 				$htaccess_data = '<Files ~ "\.(php*|s?p?x?i?html|cgi|asp|php3|php4|pl|htm|sql)$">deny from all</Files>' . "\n" . 'php_flag engine off';
 				$fo		= @fopen($this->folder . "/index.html","w");
@@ -234,12 +234,12 @@ function process ()
 
 				if(!$chmod)
 				{
-					$this->errs[]=   $lang['PR_DIR_CRT'];
+					$this->errs['err'] = $lang['PR_DIR_CRT'];
 				} 
 			}
 			else
 			{
-				$this->errs[]= '<strong>' . $lang['CANT_DIR_CRT'] . '</strong>';
+				$this->errs['err']= '<strong>' . $lang['CANT_DIR_CRT'] . '</strong>';
 			}
 		}
 
@@ -273,7 +273,7 @@ function process ()
 				if(!kleeja_check_captcha())
 				{
 					($hook = kleeja_run_hook('wrong_captcha_kljuploader_w1')) ? eval($hook) : null; //run hook	
-					 return $this->errs[] = $lang['WRONG_VERTY_CODE'];
+					 return $this->errs['err'] = $lang['WRONG_VERTY_CODE'];
 				}
 			}
 			
@@ -283,7 +283,7 @@ function process ()
 				{
 					if((!empty($_SESSION['FIILES_NOT_DUPLI']['file']['name'][$i]) && !empty($_FILES['file']['name'][$i])) && ($_SESSION['FIILES_NOT_DUPLI']['file']['name'][$i]) == ($_FILES['file']['name'][$i]))
 					{
-						return $this->errs[] = $lang['NO_REPEATING_UPLOADING'];
+						return $this->errs['err'] = $lang['NO_REPEATING_UPLOADING'];
 					}
 				}
 			}
@@ -293,7 +293,7 @@ function process ()
 				{
 					if((!empty($_SESSION['FIILES_NOT_DUPLI_LINKS']['file'][$i]) && !empty($_POST['file'][$i]) && trim($_POST['file'][$i]) != $lang['PAST_URL_HERE'] && trim($_SESSION['FIILES_NOT_DUPLI_LINKS']['file'][$i]) != $lang['PAST_URL_HERE']) && ($_SESSION['FIILES_NOT_DUPLI_LINKS']['file'][$i]) == ($_POST['file'][$i]))
 					{
-						return $this->errs[] = $lang['NO_REPEATING_UPLOADING'];
+						return $this->errs['err'] = $lang['NO_REPEATING_UPLOADING'];
 					}
 				}
 			}
@@ -301,7 +301,7 @@ function process ()
 			if($wut == 2 && empty($_SESSION['NO_UPLOADING_YET']))
 			{
 				$_SESSION['NO_UPLOADING_YET'] = true;
-				 return $this->errs[] = $lang['NO_REPEATING_UPLOADING'];
+				 return $this->errs['err'] = $lang['NO_REPEATING_UPLOADING'];
 			}
 			*/
 			
@@ -348,36 +348,36 @@ function process ()
 						}
 						elseif(file_exists($this->folder . '/' . $this->filename2))
 						{
-							$this->errs[]=  '[ ' . $_FILES['file']['name'][$i] . ' ] ' . $lang['SAME_FILE_EXIST'];
+							$this->errs['err'] =  '[ ' . $_FILES['file']['name'][$i] . ' ] ' . $lang['SAME_FILE_EXIST'];
 						}
 						elseif(preg_match ("#[\\\/\:\*\?\<\>\|\"]#", $this->filename2))
 						{
-							$this->errs[]= $lang['WRONG_F_NAME'] . '[' . $_FILES['file']['name'][$i] . ']';
+							$this->errs['err'] = $lang['WRONG_F_NAME'] . '[' . $_FILES['file']['name'][$i] . ']';
 						}
 						elseif($this->ext_check_safe($_FILES['file']['name'][$i]) == false)
 						{
-							$this->errs[]= $lang['WRONG_F_NAME'] . '[' . $_FILES['file']['name'][$i] . ']';
+							$this->errs['err'] = $lang['WRONG_F_NAME'] . '[' . $_FILES['file']['name'][$i] . ']';
 						}
 						elseif(!in_array(strtolower($this->typet), array_keys($this->types)))
 						{
 							//guest
 							if($this->id_user == '-1')
 							{
-								$this->errs[]= '[ ' . $_FILES['file']['name'][$i] . ' ] ' . $lang['FORBID_EXT'] . '[' . $this->typet . '] <br /> <a href="' .  ($config['mod_writer'] ? "register.html" : "ucp.php?go=register") . '" title="' . htmlspecialchars($lang['REGISTER']) . '">' . $lang['REGISTER'] . '</a>';
+								$this->errs['err'] = '[ ' . $_FILES['file']['name'][$i] . ' ] ' . $lang['FORBID_EXT'] . '[' . $this->typet . '] <br /> <a href="' .  ($config['mod_writer'] ? "register.html" : "ucp.php?go=register") . '" title="' . htmlspecialchars($lang['REGISTER']) . '">' . $lang['REGISTER'] . '</a>';
 							}
 							//not guest
 							else
 							{
-								$this->errs[]= '[ ' . $_FILES['file']['name'][$i] . ' ] ' . $lang['FORBID_EXT'] . '[' . $this->typet . ']';
+								$this->errs['err'] = '[ ' . $_FILES['file']['name'][$i] . ' ] ' . $lang['FORBID_EXT'] . '[' . $this->typet . ']';
 							}
 						}
 						elseif(kleeja_check_mime($_FILES['file']['type'][$i], $this->types[strtolower($this->typet)]['group_id'], $_FILES['file']['tmp_name'][$i]) == false)
 						{
-							$this->errs[]= $lang['NOT_SAFE_FILE'] . '[' . $_FILES['file']['name'][$i] . ']';
+							$this->errs['err']= $lang['NOT_SAFE_FILE'] . '[' . $_FILES['file']['name'][$i] . ']';
 						}
 						elseif($this->types[strtolower($this->typet)]['size'] > 0 && $this->sizet >= $this->types[strtolower($this->typet)]['size'])
 						{
-							$this->errs[]=  '[ ' .$_FILES['file']['name'][$i] . ' ] ' . $lang['SIZE_F_BIG'] . ' ' . Customfile_size($this->types[strtolower($this->typet)]['size']);
+							$this->errs['err'] = '[ ' .$_FILES['file']['name'][$i] . ' ] ' . $lang['SIZE_F_BIG'] . ' ' . Customfile_size($this->types[strtolower($this->typet)]['size']);
 						}
 						else
 						{
@@ -402,7 +402,7 @@ function process ()
 											// Check the connection
 											if ((!$conn_id) || (!$login_result)) 
 											{
-												  $this->errs[]= $lang['CANT_CON_FTP'] . $ftp_server;
+												  $this->errs['err']= $lang['CANT_CON_FTP'] . $ftp_server;
 											}
 											
 											//ftp method
@@ -426,7 +426,7 @@ function process ()
 								} 
 								else 
 								{
-									$this->errs[] = '[ ' . $this->filename2 . ' ] ' . $lang['CANT_UPLAOD'];
+									$this->errs['err'] = '[ ' . $this->filename2 . ' ] ' . $lang['CANT_UPLAOD'];
 								}
 
 						}
@@ -435,7 +435,7 @@ function process ()
 				
 				if(!isset($check) || empty($check))
 				{
-					$this->errs[] = $lang['CHOSE_F'];
+					$this->errs['err'] = $lang['CHOSE_F'];
 				}
 
 			}#wut=1
@@ -489,23 +489,23 @@ function process ()
 					{
 						if(file_exists($this->folder . '/' . $filename))
 						{
-							$this->errs[]=  '[ ' . $_POST['file'][$i] . ' ] ' . $lang['SAME_FILE_EXIST'];
+							$this->errs['err']=  '[ ' . $_POST['file'][$i] . ' ] ' . $lang['SAME_FILE_EXIST'];
 						}
 						//elseif( preg_match ("#[\\\/\:\*\?\<\>\|\"]#", $this->filename2))
 						//{
-						//	$this->errs[]= $lang['WRONG_F_NAME'] . '[' . $_POST['file'][$i] . ']';
+						//	$this->errs['err']= $lang['WRONG_F_NAME'] . '[' . $_POST['file'][$i] . ']';
 						//}
 						//elseif($this->ext_check_safe($_POST['file'][$i]) == false)
 						//{
-						//	$this->errs[]= $lang['WRONG_F_NAME'] . '[' . $_POST['file'][$i] . ']';
+						//	$this->errs['err']= $lang['WRONG_F_NAME'] . '[' . $_POST['file'][$i] . ']';
 						//}
 						//elseif(kleeja_check_mime($_POST['file'][$i], $this->types[strtolower($this->typet)]['group_id'], $_FILES['file']['tmp_name'][$i]) == false)
 						//{
-						// $this->errs[]= $lang['FORBID_EXT'] . '[' . $_POST['file'][$i] . ']';
+						// $this->errs['err']= $lang['FORBID_EXT'] . '[' . $_POST['file'][$i] . ']';
 						//}
 						elseif(!in_array(strtolower($this->typet),array_keys($this->types)))
 						{
-							$this->errs[]= '[ ' . $_POST['file'][$i] . ' ] ' . $lang['FORBID_EXT'] . '[' . $this->typet . ']';
+							$this->errs['err']= '[ ' . $_POST['file'][$i] . ' ] ' . $lang['FORBID_EXT'] . '[' . $this->typet . ']';
 						}
 						else
 						{
@@ -526,7 +526,7 @@ function process ()
 									$this->sizet = strlen($data);
 									if($this->types[strtolower($this->typet)]['size'] > 0 && $this->sizet >= $this->types[strtolower($this->typet)]['size'])
 									{
-										$this->errs[]=  $lang['SIZE_F_BIG'] . ' ' . Customfile_size($this->types[strtolower($this->typet)]['size']);
+										$this->errs['err']=  $lang['SIZE_F_BIG'] . ' ' . Customfile_size($this->types[strtolower($this->typet)]['size']);
 									}
 									else
 									{
@@ -539,7 +539,7 @@ function process ()
 								}
 								else
 								{
-									$this->errs[]	= $lang['URL_CANT_GET'];
+									$this->errs['err']	= $lang['URL_CANT_GET'];
 								}
 							}
 							else //OTHER FUNCTION
@@ -548,14 +548,14 @@ function process ()
 		
 								if($this->types[strtolower($this->typet)]['size'] > 0 && $this->sizet >= $this->types[strtolower($this->typet)]['size'])
 								{
-									$this->errs[] =  $lang['SIZE_F_BIG'] . ' ' . Customfile_size($this->types[strtolower($this->typet)]['size']);
+									$this->errs['err'] =  $lang['SIZE_F_BIG'] . ' ' . Customfile_size($this->types[strtolower($this->typet)]['size']);
 								}
 								else
 								{
 									$data = fetch_remote_file($_POST['file'][$i], $this->folder . "/" . $this->filename2);
 									if($data === false)
 									{
-										$this->errs[]	= $lang['URL_CANT_GET'];		
+										$this->errs['err']	= $lang['URL_CANT_GET'];		
 									}
 									else
 									{
@@ -571,7 +571,7 @@ function process ()
 				
 			if(!isset($check) || empty($check))
 			{
-				$this->errs[] = $lang['CHOSE_F'];
+				$this->errs['err'] = $lang['CHOSE_F'];
 			}
 			
 		}#end wut2
@@ -674,7 +674,7 @@ function process ()
 						
 						($hook = kleeja_run_hook('saveit_func_img_res_kljuploader')) ? eval($hook) : null; //run hook
 						
-						$this->errs[] = $lang['IMG_DOWNLAODED'] . '<br />' . $img_html_result;
+						$this->errs['info'] = $lang['IMG_DOWNLAODED'] . '<br />' . $img_html_result;
 					}
 					else 
 					{
@@ -689,7 +689,7 @@ function process ()
 
 						($hook = kleeja_run_hook('saveit_func_else_res_kljuploader')) ? eval($hook) : null; //run hook
 						
-						$this->errs[] = $lang['FILE_DOWNLAODED'] . '<br />' . $else_html_result;	
+						$this->errs['info'] = $lang['FILE_DOWNLAODED'] . '<br />' . $else_html_result;	
 					}
 
 					($hook = kleeja_run_hook('saveit_func_kljuploader')) ? eval($hook) : null; //run hook

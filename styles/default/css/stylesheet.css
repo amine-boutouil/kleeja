@@ -20,7 +20,7 @@ img.right {float: right;margin-left:15px;}
 .title-x {float:right;width:98%;background:#DFDFDF url(../images/headline_bg.png) repeat-x top right;padding:10px 6px;}
 .title-x strong{padding:10px 6px;font-size:12px;color:#333;text-shadow: 0px 1px rgb(247, 247, 247);}
 .title-x a {color:#C95A12;}
-.title-x a:hover {color:#000;background:transparent;}
+.title-x a:hover {color:#000;}
 /* # END site name and titles all */
 
 /* safe code all box */
@@ -33,7 +33,6 @@ img.right {float: right;margin-left:15px;}
 /** LOGO */
 #logobody {width:90%;margin:0 auto;}
 .logo {width:500px;height:84px;margin:2px 0;}
-.logo a:link ,.logo a:visited ,.logo a:hover ,.logo a:active {background-color: transparent;}
 /* #  LOGO */
 
 /**  start The main menu at the top **/	
@@ -82,7 +81,7 @@ img.right {float: right;margin-left:15px;}
 /* fixed */
 #fixed {background:#C8C8C8;padding:1px 0 2px 0;position:fixed;left:2px;bottom:2px;text-align: left;color:#898989);text-shadow: 0px 1px rgb(247, 247, 247)}
 #fixed a,#fixed a:link{color:#CF6600;}
-#fixed a:hover{color:#000;background:transparent;}
+#fixed a:hover{color:#000;}
 /* #  fixed */
 
 /* start Downlod template >> download.html */
@@ -120,7 +119,7 @@ img.right {float: right;margin-left:15px;}
 .siten4me{font-size:13px;padding:3px;color:#BE1111}
 .agree{font-size:xx-small;padding:3px 6px;}
 .zx,.zl {cursor:pointer;padding:4px;}
-.zx a:hover,.zl a:hover {background-color:transparent;border-right:1px solid #FEEA00;border-left:1px solid #FEEA00;}
+.zx a:hover,.zl a:hover {border-right:1px solid #FEEA00;border-left:1px solid #FEEA00;}
 .url {margin-top:3px;height:15px;direction:ltr;color:#3F7F00}
 .inum {text-align:center;color:#888;}
 #loadbox {padding:10px;display:none;}
@@ -181,10 +180,10 @@ ul.tabbernav li.tabberactive a:hover{color:#AE4600;}
 #footer .page_stats { margin-top:10px;margin-bottom:24px;float:left;color:#999;}
 #footer .googleanalytics {margin-top:10px;margin-bottom:24px;padding:10px; text-align:center;}
 /*start Option to control panel */
-#adminPan{margin:10px 0;float:right;cursor:pointer;}
-#adminPan p {background:url(../images/adminPan.gif) no-repeat center left;padding:2px 50px;-moz-border-radius:8px;font-size:12px; font-weight:bold; border:1px solid #858585;}
+#adminPan{margin:10px 0;float:right;}
+#adminPan p {background:url(../images/adminPan.gif) no-repeat center left;padding:2px 50px;font-weight:bold; border:1px solid #858585;-moz-border-radius:8px;}
 #adminPan a {color:#2B2B2B;}
-#adminPan a:hover  {color:#A80000;background-color:transparent;}
+#adminPan a:hover  {color:#fff;}
 /* # footer template */
 
 /* login template >> login.html */
@@ -197,7 +196,7 @@ ul.tabbernav li.tabberactive a:hover{color:#AE4600;}
 #login  .username{background:#fff url(../images/username.gif) no-repeat 1px 2px;}
 #login  .password{background:#fff url(../images/password.gif) no-repeat 1px 2px;}
 #login  .forget_pass  { background:#E0E0E0;float:left;margin:5px 0 0 10px; color:#C03C2D;}
-#login  .forget_pass a:hover {color:#FF2020;background-color:transparent;}	
+#login  .forget_pass a:hover {color:#FF2020;}	
 #login  .remme{background:#FFBA00;color: #000;border: 1px solid #999;font:normal 9px Tahoma, Helvetica, Arial, sans-serif;}
 #login .remme option{background: #FFBA00;color: #000;}
 /* # login template >> login.html  */

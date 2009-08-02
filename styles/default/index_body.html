@@ -9,8 +9,7 @@
 <div class="wolcome_msg">{welcome_msg}</div>
 <!-- ## End welcome -->
 
-<div class="clr"></div>
-<br />
+<div class="clr"></div><br />
 
 <IF NAME="info">
 <!---- START  FOR INFORMATION ---->
@@ -23,7 +22,6 @@
 </dl>
 <!---- END  FOR INFORMATION ---->
 </IF>
-
 
 <!---- START  FOR UPLOAD BOXES ---->
 <form name="uploader" id="uploader" action="{action}" method="post"  enctype="multipart/form-data" onsubmit="form_submit();">
@@ -88,14 +86,18 @@
 <!---- # End  safe code  ---->	  
 </IF>
  
-
 </form>
 <!---- # END  FOR UPLOAD BOXES ---->
 
-<div id="loadbox"><img src="{STYLE_PATH}images/loading.gif" alt="loading ..." /></div>
+<!---- START BOX LOADING ---->
+<div id="loadbox">
+	<div class="waitloading">{lang.WAIT_LOADING}</div><div class="clr"></div><br />
+		<img src="{STYLE_PATH}images/loading.gif" alt="loading ..." />
+	<div class="clr"></div><br /><br /><br /><br />
+</div>
+<!---- # END BOX LOADING ---->
 
 <div class="clr"></div><br />
-
 
 <IF NAME="show_online">
 <!---- START FOR ONLINE ---->

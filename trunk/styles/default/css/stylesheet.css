@@ -61,9 +61,6 @@ img.right {float: right;margin-left:15px;}
 #system-message dd.info  ul li {color: #444;background: url(../images/info.png) no-repeat right top;padding:5px}
 #system-message dd.error ul {background-color: #E6C0C0;border-top: 3px solid #DE7A7B;border-bottom: 3px solid #DE7A7B;}
 #system-message dd.error ul li{color:#c00;background: url(../images/error.png) no-repeat right top;padding:5px}
-#system-message dd.info_f ul {width:74%;border-top: 3px solid #4277B7;border-bottom: 3px solid #4277B7;background-color:#C0D2E8;}
-#system-message dd.info_f ul li {color:#07387A;background:url(../images/info_f.png) no-repeat top right;padding:5px}
-#system-message dd.error ul li a:hover,#system-message dd.info ul li a:hover,#system-message dd.info_f ul li a:hover{color:#000;background:transparent;text-decoration:underline;}
 /* ##  End  System Messages */
 
 /*  right menu */
@@ -126,6 +123,9 @@ img.right {float: right;margin-left:15px;}
 .zx a:hover,.zl a:hover {background-color:transparent;border-right:1px solid #FEEA00;border-left:1px solid #FEEA00;}
 .url {margin-top:3px;height:15px;direction:ltr;color:#3F7F00}
 .inum {text-align:center;color:#888;}
+#loadbox {padding:10px;display:none;}
+.waitloading{color:#004DAA;margin:5px}
+
 /*  START FOR ONLINE */
 .online{width:100%;float: right;padding:4px 0;margin-bottom:3px;}
 .number_online_all ,.online_visitor ,.online_users {display:inline;color:#F9F9F9;padding:5px 12px;border:1px solid #E2E2E2;-moz-border-radius:6px;}
@@ -142,7 +142,7 @@ img.right {float: right;margin-left:15px;}
 .tabber {width:100%}
 .tabberlive {margin-top:2px;margin-bottom:2px;}
 .tabberlive .tabbertabhide {display:none;}
-.tabbertab {width:70%;height:100%;padding:20px;background:#D5DFF4 url(../images/bg_tabbertab_1.png) repeat-x top left;border:1px solid #aaa;-moz-border-radius-bottomleft: 10px;-webkit-border-bottom-left-radius: 10px;-moz-border-radius-bottomright: 10px;-webkit-border-bottom-right-radius: 10px;}
+.tabbertab {width:70%;height:100%;padding:20px;background:#F8EFE4 url(../images/bg_tabbertab_1.png) repeat-x top left;border:1px solid #aaa;-moz-border-radius-bottomleft: 10px;-webkit-border-bottom-left-radius: 10px;-moz-border-radius-bottomright: 10px;-webkit-border-bottom-right-radius: 10px;}
 .bg {background:#F5F5F5 url(../images/bg_tabbertab.png) repeat-x top left;}
 ul.tabbernav{ padding:5px 0; font: bold 11px tahoma, sans-serif;}
 ul.tabbernav li{ list-style: none; display: inline;}
@@ -214,7 +214,7 @@ ul.tabbernav li.tabberactive a:hover{color:#AE4600;}
 #boxfileuser  .public {width:60%;margin:5px auto 5px 15px;background:#DFDFDF;padding:5px 10px;color:#555;border:1px dashed #EDF1F8;font-weight:normal;}
 #boxfileuser .uname{color:#006CD8;font: bold 18px tahoma,Verdana, Helvetica, sans-serif;text-align:center}
 #boxfileuser .nums{font-size:32px;text-align:center}
-#filecplink  .copylink {float:right;padding:3px 6px;color:#D84E00;font: bold 12px tahoma,sans-serif;}
+#filecplink  .copylink {float:right;padding:3px 6px;color:#D20000;font: bold 12px tahoma,sans-serif;}
 #filecplink .link_user{float:left;width:290px;padding:2px;direction:ltr;}
 .tabledata {width:100%;background-color:#CECECE;color:#111;font-size:11px;border:2px ridge #eee;}
 .tabledata th ,.tabledata td {padding:5px;border-right:1px solid #aaa;border-top: 1px solid #eee;border-left:1px solid #eee;border-bottom: 1px solid #aaa; text-align:center; }
@@ -303,12 +303,11 @@ table.guide_visitor th {background:#A71515 url(../images/headline_bg.png) repeat
 /* #  template list of files allowed > guide.html */
 
 
+.thumb_div_tag {margin:2px auto;}
+.thumb_div_tag img{background:#FFF;border:1px solid #D20000;padding:5px}
 
+#system-message dd.info_f ul {width:74%;border-top: 3px solid #95AD4B;border-bottom: 3px solid #95AD4B;background-color:#DEE6C5;}
+#system-message dd.info_f ul li {color:#235300;background:url(../images/info_f.png) no-repeat 99% 1%;padding:5px}
 
-
-div#loadbox {padding:10px;display: none;}
-
-
-
-
-
+.all_boxes{width:98%;color:#235300;border:1px solid #F8F800;outline:1px solid #ccc;direction:ltr}
+.all_boxes:focus {background-color: #ffd ;border: 1px solid #D26900;}

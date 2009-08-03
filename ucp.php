@@ -508,7 +508,14 @@ switch ($_GET['go'])
 		if (isset($_POST['submit_files']))
 		{
 			//show msg
-			kleeja_info($lang['FILES_DELETED'], '', true, $action);
+			if(isset($ids) && !empty($ids))
+			{
+				kleeja_info($lang['FILES_DELETED'], '', true, $action);
+			}
+			else
+			{
+				redirect($action);
+			}
 		}
 				
 		break;

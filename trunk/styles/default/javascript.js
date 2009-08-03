@@ -1,9 +1,10 @@
 /*
- javascript for kleeja 
+ javascript for Kleeja 
  www.kleeja.com
+ 2007-2009
 */
 
-	var totalupload_num=number_of_uploads-1;
+	var totalupload_num = number_of_uploads-1;
 	
 	//get element by id name
 	function $(id)
@@ -20,10 +21,15 @@
 		var num = number_of_uploads;
 		if (value.value < num )
 		{
-			value.value++;
-			eval('var s = "' + id +'[' + (value.value) + ']";var br = "' + id2 +'[' + (value.value) + ']";');
-			$(s).style.display = '';
-			$(br).style.display = '';
+			var do_count = false;
+			var num_to = eval(value.value) + 1;
+			eval('var s = "' + id +'[' + num_to + ']";var br = "' + id2 +'[' + num_to + ']";do_count = true;');
+			if(do_count)
+			{
+				$(s).style.display = '';
+				$(br).style.display = '';
+				value.value++;
+			}
 		}
 		else
 		{
@@ -41,10 +47,15 @@
 		var num_l = num-1;
 		if (value.value != 1 )
 		{
-			value.value--;
-			eval('var s = "' + id +'[' + (value.value) + ']";var br = "' + id2 +'[' + (value.value) + ']";');
-			$(s).style.display = 'none';
-			$(br).style.display = 'none';
+			var do_count = false;
+			eval('var s = "' + id +'[' + (value.value) + ']";var br = "' + id2 +'[' + (value.value) + ']"; do_count = true;');
+			if(do_count)
+			{
+				$(s).style.display = 'none';
+				$(br).style.display = 'none';
+				value.value--;
+			}
+
 		}
 	}
 	

@@ -119,6 +119,17 @@ select ,option{font: 11px tahoma,verdana,arial,sans-serif; font-weight: normal;
 	background: #BCBCBC url(../images/login/hoverblue.gif) repeat left top;}
 /*  buttons */
 
+/* for php_info  */
+.row1 {
+overflow:scroll;
+text-align:left;
+width:50px !important;
+}
+.row2{
+width:50px !important;
+overflow:scroll;text-align:left
+}
+/* / for php_info */
 
 	
 /* class */

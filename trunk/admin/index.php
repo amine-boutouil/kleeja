@@ -118,6 +118,7 @@
 	//exception extentions
 	$ext_expt	= array();
 	$ext_expt[]	= 'start';
+	$ext_expt[]	= 'php_info';
 	//confirm msgs
 	$ext_confirm	= array();
 	$ext_confirm[]	= 'repair';	

@@ -138,14 +138,15 @@ function Saafooter($outscript=false)
 			$loadtime		= number_format($endtime - $starttm , 4);
 			$queries_num	= $SQL->query_num;
 			$time_sql		= round($SQL->query_num / $loadtime) ;
-			$link_dbg		= $usrcp->admin() ? '[ <a href="' .  str_replace('debug','', kleeja_get_page()) . (strpos(kleeja_get_page(), '?') === false ? '?' : '&') . 'debug">More Details ... </a> ]' : null;
-			$page_stats	= "<strong>[</strong> GZIP : $gzip - Generation Time: $loadtime Sec  - Queries: $queries_num - Hook System:  $hksys <strong>]</strong>  " . $link_dbg ;
+			$page_url		= preg_replace('/([\&\?]+)debug/i','', kleeja_get_page());
+			$link_dbg		= $usrcp->admin() &&  $config['mod_writer'] != '1' ? '[ <a href="' .  $page_url . (strpos($page_url, '?') === false ? '?' : '&') . 'debug">More Details ... </a> ]' : null;
+			$page_stats		= "<strong>[</strong> GZIP : $gzip - Generation Time: $loadtime Sec  - Queries: $queries_num - Hook System:  $hksys <strong>]</strong>  " . $link_dbg ;
 		}#end statfooter
 		
 		$tpl->assign("page_stats", $page_stats);
 		
 		//if admin, show admin in the bottom of all page
-			$tpl->assign("admin_page", ($usrcp->admin() ? '<a href="' . ADMIN_PATH . '" class="admin_cp_link"><span>' . $lang['ADMINCP'] .  '</span></a><br />' : ''));
+		$tpl->assign("admin_page", ($usrcp->admin() ? '<a href="' . ADMIN_PATH . '" class="admin_cp_link"><span>' . $lang['ADMINCP'] .  '</span></a>' : ''));
 
 		
 		// if google analytics .. //new version 

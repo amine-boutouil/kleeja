@@ -35,6 +35,13 @@
 	@ini_set('session.use_only_cookies', false);
 	//this will help people with some problem with their sessions path
 	//session_save_path('./cache/');
+	if(defined('IN_ADMIN'))
+	{
+		//admin session timeout
+		$admintime = isset($admintime) ? $admintime : 18000;
+		session_set_cookie_params($admintime);
+	}
+	
 	session_name($s_sid);
 	session_start();
 

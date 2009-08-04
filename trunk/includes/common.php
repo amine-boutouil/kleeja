@@ -28,6 +28,13 @@
 	// Report all errors, except notices
 	defined('DEV_STAGE') ? @error_reporting(E_ALL) : @error_reporting(E_ALL ^ E_NOTICE);
 	
+		
+	//get admin path from config.php
+	$adminpath = isset($adminpath) ? $adminpath : './admin/index.php';
+	
+	//admin path
+	define('ADMIN_PATH', $adminpath);
+	
 	// start session
 	$s_time = 86400 * 2; // 2 : two days 
 	$s_key = (!empty($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '') . (!empty($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : null);
@@ -39,7 +46,18 @@
 	{
 		//admin session timeout
 		$admintime = isset($admintime) ? $admintime : 18000;
-		session_set_cookie_params($admintime);
+		//session_set_cookie_params($admintime);
+		if (function_exists('session_set_cookie_params'))
+		{
+    		session_set_cookie_params($admintime, basename(ADMIN_PATH));
+  		} 
+		elseif (function_exists('ini_set'))
+		{
+    		ini_set('session.cookie_lifetime', $admintime);
+    		ini_set('session.cookie_path', basename(ADMIN_PATH));
+  		}
+
+
 	}
 	
 	session_name($s_sid);
@@ -109,12 +127,6 @@
 		header('Location: ' . PATH . 'install/index.php');
 		exit;
 	}
-	
-	//get admin path from config.php
-	$adminpath = isset($adminpath) ? $adminpath : './admin/index.php';
-	
-	//admin path
-	define('ADMIN_PATH', $adminpath);
 	
 	//include files .. & classes ..
 	$path = dirname(__file__) . '/';

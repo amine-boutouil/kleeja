@@ -99,17 +99,17 @@
 
 <IF NAME="show_online">
 <!---- START FOR ONLINE ---->
-<div class="online"> 
-<strong class="number_online_all">{lang.NUMBER_ONLINE} : <span>{allnumbers}</span><strong>
-<strong class="online_visitor">{lang.NUMBER_VONLINE} : <span>{visitornum}</span><strong>
-<strong class="online_users">{lang.NUMBER_UONLINE} : <span>{usersnum}</span><strong>
+<div id="online"> 
+<strong class="number_online_all">{lang.NUMBER_ONLINE} : {allnumbers}<strong>
+<strong class="online_visitor">{lang.NUMBER_VONLINE} : {visitornum}<strong>
+<strong class="online_users">{lang.NUMBER_UONLINE} : {usersnum}<strong>
 </div>
-
+<div class="clr"></div>
 <LOOP NAME="shownames"><div class="name_users">{{name}}</div></LOOP>
 <!---- # END FOR ONLINE ---->
 </IF>
 
-<div class="clr"></div>	 
+
 </div>
 <!-- # End background body  -->
 

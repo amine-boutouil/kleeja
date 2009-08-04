@@ -21,15 +21,43 @@ img.right {float: right;margin-left:15px;}
 
 #logo {float:right;padding:5px 76px 0 0;}
 
-#menu {float: right;}
 
-#menu ul {margin: 0;padding:30px 70px 0 0;list-style: none;line-height: normal;}
+#menu {float: right;padding:5px 76px 0 0;}
 
-#menu li {display: inline;}
+#menu ul {
+	margin: 0;
+	padding: 5px 0 0 10px;
+	list-style: none;
+}
 
-#menu a {padding-left: 12px;text-decoration: none;font-size: 11px;font-weight: bold;color: #FFFFFF;}
+#menu li {
+	display: inline;
+}
 
-#menu a:hover {text-decoration: underline;}
+#menu a {
+	display: block;
+	float: right;
+	background: #D86C00;
+	margin-left: 5px;
+	padding: 6px 12px;
+	text-decoration: none;
+	font: bold 11px tahoma, sans-serif,arial;
+	color: #fff;
+	border-top: 2px solid #FF8000;
+	border-bottom: 2px solid #FF8000;
+}
+
+#menu a:hover {
+	border-top: 5px solid #FF8000;
+	border-bottom: 5px solid #FF8000;
+}
+#menu .active a  {
+	border-top: 5px solid #C2C2C2;
+	border-bottom: 5px solid #C2C2C2;
+	background: #7C7C7C;
+	color: #fff;
+}
+
 
 #page {background: url(../images/page.jpg) no-repeat;}
 
@@ -47,7 +75,7 @@ img.right {float: right;margin-left:15px;}
 #footer .googleanalytics {margin-top:10px;margin-bottom:24px;padding:10px; text-align:center;}
 /*start Option to control panel */
 .admin_cp_link span{margin:10px 0;float:right;padding:7px 50px; background:url(../images/adminPan.gif) no-repeat center left;font-weight:bold; border:1px solid #858585;-moz-border-radius:8px;-webkit-border-radius:8px;-khtml-border-radius:8px;border-radius:8px;}
-.admin_cp_link {color:#111; cursor:pointer;text-decoration:none;}
+.admin_cp_link {cursor:pointer;}
 .admin_cp_link:hover  {color:#fff;text-decoration:none;}
 /* # footer template */
 
@@ -98,7 +126,8 @@ img.right {float: right;margin-left:15px;}
 /*# END extras  header and  footer template */
 
 /* fixed */
-#fixed {padding:1px 0 2px 0;position:fixed;left:65px;bottom:2px;text-align: left;color:#000;text-shadow: 0px 1px rgb(247, 247, 247)}
+#fixed {width:115px;padding:1px 0 2px 0;position:fixed;left:65px;bottom:0px;background:#ccc;border-left:4px solid #000;text-align:center;
+color:#000;text-shadow: 0px 1px rgb(247, 247, 247)}
 #fixed a,#fixed a:link{color:#FF7127;}
 #fixed a:hover{color:#898989;}
 /* #  fixed */
@@ -144,28 +173,34 @@ img.right {float: right;margin-left:15px;}
 .waitloading{color:#004DAA;margin:5px}
 
 /*  START FOR ONLINE */
-.online {
-	height: 16px;width:98%;
-	margin: 0;
-	padding: 10px;
+#online {
+	height: 16px;
+	width:98%;
+	padding:5px;
 	background: url(../images/bgonline.jpg) repeat-x left bottom;
 	line-height: normal;	float: right;
+	font:bold 11px Tahoma,Arial, sans-serif;color:#FF5A00;
 }
-.online .number_online_all {
-	padding:2px 16px 2px 30px;
+#online .number_online_all {
+	padding:2px 12px;
 	background: url(../images/img09.gif) no-repeat right center;
 }
-.online .online_visitor {
-	padding:2px 16px 2px 30px;
+#online .online_visitor {
+	padding:2px 12px ;margin:0 30px;
 	background: url(../images/img09.gif) no-repeat right center;
 }
-.online .online_users {
-	padding:2px 16px 2px 30px;
+#online .online_users {
+	padding:2px 12px;margin:0 30px;
 	background: url(../images/img09.gif) no-repeat right center;
 }
-.online .number_online_all span,
-.online .online_users span,
-.online .online_visitor span {font:bold 12px sans-serif,Helvetica,Tahoma,  Arial, sans-serif;color:#FF5A00;padding-left:40px;}	
+.name_users {
+	height: 16px;
+	width:98%;
+	padding:4px 8px;
+	line-height: normal;	
+	color:#00367C;
+
+}
 /*  #  END FOR ONLINE */
 
 /* tabs */

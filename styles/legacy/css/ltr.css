@@ -1,0 +1,273 @@
+﻿/*
+# Powered by Kleeja .... Kleeja.com
+# Designed by Tar3q .... Tar3q.com
+# copyright 2007-2009  ..
+*/
+
+img.left {
+        float: right;
+        margin-left:15px;
+}
+img.right {
+        float: left;
+        margin-right:15px;
+}
+
+.line {background-position:left top;}
+
+h2 {font-size: 22px; font-weight: bold; color:#BE1111; text-shadow: 0px 1px rgb(247, 247, 247);margin: 5px 0}
+
+/** LOGO */
+#logobody .logo {width:500px;height:84px;float: left;}
+
+/**  start The main menu at the top **/
+#top_menu {background-position: top right;}
+
+#top_menu  ul.m3nu li {
+        float: left;
+        margin: 0 0 0 5px;
+}
+#top_menu  ul.m3nu li a {
+        float: right;
+        padding: 8px 15px;
+}
+#top_menu  ul.m3nu li a:hover {
+        background-position: top right;
+}
+#top_menu  ul.m3nu li a.current{
+        background-position: top right;
+        padding:5px 15px;
+}
+/** # End The main menu at the top **/  
+
+#index_body{background-position:right top;}
+
+#content_index_body  {float:right;}
+
+/* title */
+.title-x strong{float:left}
+
+#right_menu{
+        float:left;
+
+}
+#right_menu .list{
+        margin-right:16px;
+}
+
+#right_menu .list span{
+        padding:0px 0 0 10px;
+        text-align:right;
+}
+#right_menu .list b{
+        padding:0px 0 0 10px;
+}
+#right_menu .list img{
+        padding:0px 5px 0px 0px;
+}
+#right_menu .list a{
+        padding: 5px 0 0 10px;
+}
+
+
+/* Content */
+
+#content {float: right;}
+
+
+/* Footer */
+
+#fixed {
+right:2px; text-align: right;
+}
+
+/*start Option to control panel */
+
+#adminPan{
+left:80px;
+}
+
+
+#adminPan a {
+        float:left;
+        background-position:right top;
+        padding:0 4px 0 0;
+        }
+#adminPan a span {
+        float:right;
+        background-position:left top;
+}
+       
+
+#adminPan a:hover {background-position:0% 43px;}
+#adminPan a:hover span {background-position:100% 43px;}
+
+
+
+/* box */
+.box {
+        background-position: top right;
+}
+.box_top {
+        background-position: top left;
+}
+.box_bottom {
+        background-position:  bottom right;
+}
+.box_bottom div {
+        background-position: bottom left;
+}
+.box_content {
+        background-position: top left;
+}
+
+
+.box_content{ padding: 0 0 0 15px; }
+/* ##  box */
+
+/* file report */
+.fileReport {
+        padding:6px 0 0 30px;
+}
+/* ##  file report */
+
+
+.info-down {
+        float:left;
+}
+
+
+#download  {
+        margin:50px 30px 0 0;
+
+        }
+#download a {
+        padding:15px 0 0 30px;
+}
+
+
+.wait{
+        margin:30px 0 0 30px;
+        padding:5px 0 0 20px;
+}
+
+.err {margin: 10px 0 0 10px;}
+.info {margin: 10px 0 0 10px;}
+.result { margin: 10px 0 0 10px;}
+
+
+.page_stats{float:right;}
+
+
+/* footer template */
+#footerlinksleft ul{float:right;}
+#footerlinksleft li{float:right}
+
+/* Copyrights */
+#footer .Copyrights {float:left;}
+/* footr stats */
+#footer .page_stats { float:left;}
+/* googleanalytics */
+#footer .googleanalytics {text-align:left;}
+/*start Option to control panel */
+
+#adminPan{margin:5px 25px 5px 10px;width:94%;height:45px;float:left;}
+#adminPan ul{float:left;margin-bottom:8px;padding:10px}
+/* # footer template */
+
+.safe_code {margin:5px 0;padding:10px; background-position:98% 50%; }
+.safe_code  td span{text-align: center;}
+
+caption, th, td {
+	text-align: left;
+}
+
+option {padding-left: 1em;}
+
+/* pagination */
+.pagination {margin:8px 0;float:left;}
+
+#stats{background-position: top right;}
+
+
+#usercp  .imguser{background-position: top left;}
+#usercp  .imguser b{padding-left:80px;}
+#usercp .uname{padding-left:80px;padding-right:10px;}
+#usercp  .copylink{padding:4px 40px;}
+
+
+
+
+
+
+
+
+
+
+.call { background-position:95% 10%}
+
+/* System Messages */
+#system-message dd.info  ul li {
+background-position:1% 10%
+}
+#system-message dd.error ul li{
+background-position:1% 10%
+}
+#system-message dd.info_f ul li {
+background-position:1% 10%
+}
+/* ##  End  System Messages */
+
+#bg_log1n{
+float:left;
+margin:1% 2% 2% 12%;
+background-position:98% 50%;
+}
+#login {	float:left;}
+#login .username,#login .password{padding-right:20px;padding-left:2px;}
+#login  .username{background-position:100% 50%}
+#login  .password{background-position:100% 50%}
+#login  .forget_pass  {float:right;margin:5px 10px 0 0;}
+
+
+#register{background-position:92% 40%;}
+#bg_get_password{background-position:90% 40%}
+
+
+/*-- start Profile template  */
+.userdata td {border-right:1px solid #e5eff8;text-align:left;	}				
+.userdata th {border-right:1px solid #e5eff8;}							
+.userdata thead th {text-align:left;}	
+/*-- End Profile template  */
+
+/*-- start Profile template  */
+#userdata .userdata {float:left}
+#userdata .in{margin-left:12px;}
+/*-- End Profile template  */
+
+/* Downlod template */
+#data_file {float:left;margin-right:10px;}
+#data_file ul.data_menu li {border-left:5px solid #CCC;padding:2px 10px 2px 5px;}
+#data_file_down {float:right;}
+#data_file_down .find_x,#data_file_down .find_image {font-size:22px;text-align:center;}
+.wait {font-size:200%;}
+/* # End Downlod template */
+
+.rebort  {background-position:95% 20%;}	
+
+/* button Downlod */
+#download {text-align:center;height:50px;margin:12px auto;}
+#download a {background:#FEC008 url(../images/bg_download.png) repeat-x top right;border-top:3px solid #9B7500;
+			border-bottom:3px solid #9B7500;color:#9B7500;font-size:100%;font-weight:700;padding:20px;}
+#download a:hover {background:#FFD65D;color:#000;}
+/* # End Downlod template */
+
+/* online */
+.name_users {float:left;}
+
+/*start Option to control panel */
+#adminPan{float:left;}
+#adminPan p {float:left;}
+
+
+.left_button{float:right;}

@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="{dir}">
+<head>
+<title>{title} &#9679; {config.sitename}</title>
+<meta http-equiv="Content-Language" content="ar-sa"/>
+<meta name="copyrights" content="Powered by Kleeja :: kleeja.com" />
+{EXTRA_CODE_META}
+<link rel="shortcut icon" href="favicon.ico" >
+<link rel="icon" type="image/gif" href="images/animated_favicon1.gif" >
+<link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH}css/screen.css" />
+<IF NAME="{lang.DIR}==ltr">
+<link rel="stylesheet" type="text/css" href="{STYLE_PATH}css/ltr.css"  />
+</IF>
+<!--[if IE]>
+<link rel="stylesheet" type="text/css" href="{STYLE_PATH}css/ie.css" />
+<![endif]-->
+<script type="text/javascript">
+ var number_of_uploads={config.filesnum};
+ var LANG_PAST_URL_HERE ="{lang.PAST_URL_HERE}";
+var LANG_MORE_F_FILES ="{lang.MORE_F_FILES}";
+</script>
+<script type="text/javascript" src="{STYLE_PATH}javascript.js"></script>
+</head>
+
+<body>
+<!-- start wrapper -->
+<div id="wrapper">
+	<div id="wrapper2">
+		<div id="header">
+			<div id="logo">
+						<a href="{config.siteurl}">
+			<img src="{STYLE_PATH}images/logo.png" alt="{config.sitename}" style="border:0px" />
+		</a>
+			</div>
+			<div id="menu">
+				<ul>
+					<li><a href="{config.siteurl}" title="{index_name}">{index_name}</a></li>
+					<li><a href="{rules_url}" title="{rules_name}">{rules_name}</a></li>
+					<li><a href="{guide_url}" title="{guide_name}">{guide_name}</a></li>
+					<li><a href="{call_url}" title="{call_name}">{call_name}</a></li>
+					<IF NAME="config.allow_stat_pg">
+					<li><a href="{stats_url}" title="{stats_name}">{stats_name}</a></li>
+					</IF>
+				</ul>
+			</div>
+		</div>
+<!--  # End  logo -->
+
+
+<div id="page">
+<div class="clr"></div>
+
+
+
+<!-- start extras header  -->
+<IF NAME="extras.header">
+<div class="clr"></div>
+<div id="extras_header">{extras.header}</div>
+<div class="clr"></div>
+</IF>                                                                                                                                                                                                                                                                                                                                                      <!--  Do not remove this notice   --><div id="fixed"><!-- IF REMOVE: Pay for a license -->Powered by <a href="http://www.kleeja.com/" target="_blank">Kleeja</a><IF NAME="S_TRANSLATED_BY">{lang.S_TRANSLATED_BY}</IF></div>
+<!--  # End  extras header -->
+
+
+<!-- start  menu right -->         
+<div id="right_menu">
+	<div class="list">
+		<ul>
+
+			<li><a href="{login_url}"><img src="{STYLE_PATH}images/Go-Out.png" alt="{login_name}" style="vertical-align:middle;" />{login_name}</a></li>
+			<li><a href="{usrcp_url}"><img src="{STYLE_PATH}images/User.png" alt="{usrcp_name}" style="vertical-align:middle;" />{usrcp_name}</a></li>
+			<IF NAME="user_is">
+			    <IF NAME="config.enable_userfile">
+				<li><a href="{usrfile_url}"><img src="{STYLE_PATH}images/user-folder.png" alt="{usrfile_name}" style="vertical-align:middle;" />{usrfile_name}</a></li>
+				</IF>
+			<li><a href="{filecp_url}"><img src="{STYLE_PATH}images/filecp.png" alt="{filecp_name}" style="vertical-align:middle;" />{filecp_name}</a></li>
+			</IF>
+		</ul>
+	</div>
+	<p>&nbsp;</p>
+</div>
+<!--  # End  menu right -->
+

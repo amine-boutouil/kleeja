@@ -1,0 +1,62 @@
+﻿<div class="clr"></div>
+
+<!-- Start links left -->
+<div id="footerlinks">
+<IF NAME="is_admin">
+<!-- start control panel -->
+{admin_page}
+<!-- # end control panel -->
+</IF>
+  	<ul class="ul">
+	<li><a title="مركز التبليغ عن الأخطاء" target="_blank" href="http://www.kleeja.com/bugs/ar/">Bugs</a></li>
+	<li><a title="الاضافات" target="_blank" href="http://www.kleeja.com/plugins/">Plugins</a> |</li>
+	<li><a title="الستايلات" target="_blank" href="http://www.kleeja.com/styles/">Styles</a> | </li>
+	<li><a title="xhtml" target="_blank" href="http://validator.w3.org/check?uri=referer">xhtml</a> | </li>
+  	<li><a title="xhtml" target="_blank" href="http://jigsaw.w3.org/css-validator/check/referer">css</a> | </li>
+  </ul>
+</div>
+<!-- # End links left -->
+
+<div class="clr"></div>
+
+</div>
+<!-- end #page -->
+</div>
+<!-- end #wrapper2 -->
+		
+<!-- begin extra footer -->
+<IF NAME="extras.footer">
+<div class="clr"></div><br />	 
+<div id="extras_footer">{extras.footer}</div>
+<div class="clr"></div><br />
+</IF>
+<!-- # end extra footer -->
+
+
+
+<!-- Start footer template -->
+<div id="footer">
+
+
+<div class="Copyrights">{lang.COPYRIGHTS_X} &copy; <a href="{config.siteurl}">{config.sitename}</a></div>
+
+<div class="clr"></div>	 
+ 
+ <IF NAME="page_stats">
+<div dir="ltr" class="page_stats">{page_stats}</div>
+</IF>
+ 
+<IF NAME="googleanalytics">
+<div class="clr"></div>	
+<div class="googleanalytics">{googleanalytics}</div>
+<div class="clr"></div>		
+</IF>
+
+</div>
+<!-- # end  footer template -->
+
+</div>
+<!-- # end  wrapper -->
+
+</body>
+</html> 

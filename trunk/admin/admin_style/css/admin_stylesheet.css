@@ -227,6 +227,7 @@ input.button1, input.button3,input.button2 {
 .bg_img {
     text-align:center; width:112px; height:112px; padding: 20px 0; cursor: pointer;
     background-image: url('../images/bg_img.gif');	background-repeat: no-repeat;}
+.bg_img img:hover {border:solid 1px #000}
 /* view ../images */
 
 

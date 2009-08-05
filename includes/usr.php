@@ -138,15 +138,9 @@ class usrcp
 							{
 								return false;
 							}
-							
-							if(!defined('USER_ID'))
-							{
-								define('USER_ID', $row['id']);
-							}
-							if(!defined('USER_NAME'))
-							{
-								define('USER_NAME', $row['name']);
-							}
+	
+							define('USER_ID', $row['id']);
+							define('USER_NAME', $row['name']);
 							define('USER_MAIL', $row['mail']);
 							define('USER_ADMIN', $row['admin']);
 							define('LAST_VISIT', $row['last_visit']);
@@ -157,7 +151,7 @@ class usrcp
 							if(!$hashed)
 							{
 								$hash_key_expire = sha1(md5($config['h_key']) .  $expire);
-								$this->kleeja_set_cookie('ulogu', base64_encode(base64_encode(base64_encode($row['id'] . '|' . $row['password'] . '|' . $expire . '|' . $hash_key_expire))), $expire);
+								$this->kleeja_set_cookie('ulogu', $this->en_de_crypt($row['id'] . '|' . $row['password'] . '|' . $expire . '|' . $hash_key_expire), $expire);
 							}
 					
 							($hook = kleeja_run_hook('qr_while_usrdata_n_usr_class')) ? eval($hook) : null; //run hook
@@ -321,6 +315,7 @@ class usrcp
                                         'ِ' => '',
                                         'ْ' => '',
                                         'آ' => 'ا',
+                                        'ئ' => 'ى',
                                         'á'=> 'a',
                                         'à'=> 'a',
                                         'â'=> 'a',
@@ -445,6 +440,48 @@ class usrcp
 					}
 				}
 				
+				//encrypt and decrypt any data with our function
+				function en_de_crypt($data, $type = 1)
+				{
+					global $config;
+					static $txt;
+					
+					if(empty($txt))
+					{
+						if(empty($config['h_key']))
+						{
+							$config['h_key'] = '2^#@qr39)]k%$_-(';//default !
+						}
+						$chars = str_split($config['h_key']);
+						$txt = array();
+						foreach(range('a', 'z') as $k=>$v)
+						{
+							if(!isset($chars[$k]))
+							{
+								break;
+							}
+							$txt[$v] = $chars[$k] . $k . '/'; 
+						}
+					}
+					
+					switch($type)
+					{
+						case 1:
+							$data = base64_encode($data);
+							$data = strtr($data, $txt);
+						break;
+						case 2:
+							$txtx = array_flip($txt); 
+							$txtx = array_reverse($txtx, true);
+							$data = strtr($data, $txtx);
+							$data = base64_decode($data);
+						break;
+					}
+					
+					return $data;
+				}
+				
+				
 				//
 				//get cookie
 				//
@@ -472,7 +509,7 @@ class usrcp
 					{
 						$user_data = false;
 
-						list($user_id, $hashed_password, $expire_at, $hashed_expire) =  @explode('|', base64_decode(base64_decode(base64_decode($this->kleeja_get_cookie('ulogu')))));
+						list($user_id, $hashed_password, $expire_at, $hashed_expire) =  @explode('|', $this->en_de_crypt($this->kleeja_get_cookie('ulogu'), 2));
 
 						//if not expire 
 						if(($hashed_expire == sha1(md5($config['h_key']) . $expire_at)) && ($expire_at > time()))

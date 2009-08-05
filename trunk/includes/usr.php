@@ -139,8 +139,14 @@ class usrcp
 								return false;
 							}
 							
-							define('USER_ID', $row['id']);
-							define('USER_NAME', $row['name']);
+							if(!defined('USER_ID'))
+							{
+								define('USER_ID', $row['id']);
+							}
+							if(!defined('USER_NAME'))
+							{
+								define('USER_NAME', $row['name']);
+							}
 							define('USER_MAIL', $row['mail']);
 							define('USER_ADMIN', $row['admin']);
 							define('LAST_VISIT', $row['last_visit']);

@@ -2,6 +2,10 @@
 //
 //auth integration phpbb with kleeja
 //
+//copyright 2007-2009 Kleeja.com ..
+//license http://opensource.org/licenses/gpl-license.php GNU Public License
+//$Author$ , $Rev$,  $Date::                           $
+//
 
 
 //no for directly open
@@ -17,29 +21,30 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire)
 	global $script_path, $SQLBB, $phpEx, $phpbb_root_path, $lang, $script_encoding, $script_srv, $script_db, $script_user, $script_pass, $script_prefix, $config, $usrcp, $userinfo;
 				
 	//check for last slash / 
-	if(isset($script_path)) {
-	if(isset($script_path[strlen($script_path)]) && $script_path[strlen($script_path)] == '/')
+	if(isset($script_path))
 	{
-			$script_path = substr($script_path, 0, strlen($script_path));
-	}
-					
-	$script_path = ($script_path[0] == '/' ? '..' : '../') . $script_path;
+		if(isset($script_path[strlen($script_path)]) && $script_path[strlen($script_path)] == '/')
+		{
+				$script_path = substr($script_path, 0, strlen($script_path));
+		}
+						
+		$script_path = ($script_path[0] == '/' ? '..' : '../') . $script_path;
 
-	//get some useful data from phbb config file
-	if(file_exists($script_path . '/config.php'))
-	{
-		require ($script_path . '/config.php');
-		
-		$forum_srv	= $dbhost;
-		$forum_db	= $dbname;
-		$forum_user	= $dbuser;
-		$forum_pass	= $dbpasswd;
-		$forum_prefix = $table_prefix;
-	} 
-	else
-	{
-		big_error('Forum path is not correct', sprintf($lang['SCRIPT_AUTH_PATH_WRONG'], 'phpBB'));
-	}
+		//get some useful data from phbb config file
+		if(file_exists($script_path . '/config.php'))
+		{
+			require ($script_path . '/config.php');
+			
+			$forum_srv	= $dbhost;
+			$forum_db	= $dbname;
+			$forum_user	= $dbuser;
+			$forum_pass	= $dbpasswd;
+			$forum_prefix = $table_prefix;
+		} 
+		else
+		{
+			big_error('Forum path is not correct', sprintf($lang['SCRIPT_AUTH_PATH_WRONG'], 'phpBB'));
+		}
 	}
 	else 
 	{
@@ -139,7 +144,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire)
 				if(!$hashed)
 				{	
 					$hash_key_expire = sha1(md5($config['h_key']) .  $expire);
-					$usrcp->kleeja_set_cookie('ulogu', base64_encode(base64_encode(base64_encode($row['user_id'] . '|' . $row['user_password'] . '|' . $expire . '|' . $hash_key_expire))), $expire);
+					$usrcp->kleeja_set_cookie('ulogu', $usrcp->en_de_crypt($row['user_id'] . '|' . $row['user_password'] . '|' . $expire . '|' . $hash_key_expire), $expire);
 				}
 
 				($hook = kleeja_run_hook('qr_while_usrdata_phpbb_usr_class')) ? eval($hook) : null; //run hook
@@ -173,29 +178,30 @@ function kleeja_auth_username ($user_id)
 		global $script_path, $SQLBB, $phpEx, $phpbb_root_path, $lang, $script_encoding, $script_srv, $script_db, $script_user, $script_pass, $script_prefix;
 				
 	//check for last slash / 
-	if(isset($script_path)) {
-	if($script_path[strlen($script_path)] == '/')
+	if(isset($script_path))
 	{
-			$script_path = substr($script_path, 0, strlen($script_path));
-	}
-					
-	$script_path = ($script_path[0] == '/' ? '..' : '../') . $script_path;
+		if($script_path[strlen($script_path)] == '/')
+		{
+				$script_path = substr($script_path, 0, strlen($script_path));
+		}
+						
+		$script_path = ($script_path[0] == '/' ? '..' : '../') . $script_path;
 
-	//get some useful data from phbb config file
-	if(file_exists($script_path . '/config.php'))
-	{
-		require ($script_path . '/config.php');
-		
-		$forum_srv	= $dbhost;
-		$forum_db	= $dbname;
-		$forum_user	= $dbuser;
-		$forum_pass	= $dbpasswd;
-		$forum_prefix = $table_prefix;
-	} 
-	else
-	{
-		big_error('Forum path is not correct', sprintf($lang['SCRIPT_AUTH_PATH_WRONG'], 'phpBB'));
-	}
+		//get some useful data from phbb config file
+		if(file_exists($script_path . '/config.php'))
+		{
+			require ($script_path . '/config.php');
+			
+			$forum_srv	= $dbhost;
+			$forum_db	= $dbname;
+			$forum_user	= $dbuser;
+			$forum_pass	= $dbpasswd;
+			$forum_prefix = $table_prefix;
+		} 
+		else
+		{
+			big_error('Forum path is not correct', sprintf($lang['SCRIPT_AUTH_PATH_WRONG'], 'phpBB'));
+		}
 	}
 	else 
 	{
@@ -485,4 +491,3 @@ function unique_id($extra = 'c')
 	return substr($val, 4, 16);
 }
 
-?>

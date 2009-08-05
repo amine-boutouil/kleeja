@@ -2,6 +2,10 @@
 //
 //auth integration mysmbb with kleeja
 //
+//copyright 2007-2009 Kleeja.com ..
+//license http://opensource.org/licenses/gpl-license.php GNU Public License
+//$Author$ , $Rev$,  $Date::                           $
+//
 
 
 //no for directly open
@@ -15,30 +19,30 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire)
 {
 	global $script_path, $lang, $script_encoding, $script_srv, $script_db, $script_user, $script_pass, $script_prefix, $config, $usrcp, $userinfo;
 	
-	if(isset($script_path)) {
-	//check for last slash / 
-	if($script_path[strlen($script_path)] == '/')
+	if(isset($script_path))
 	{
-		$script_path = substr($script_path, 0, strlen($script_path));
-	}
+		//check for last slash / 
+		if($script_path[strlen($script_path)] == '/')
+		{
+			$script_path = substr($script_path, 0, strlen($script_path));
+		}
 
-	$script_path = ($script_path[0] == '/' ? '..' : '../') .  $script_path;
-	
-	
-	//get database data from mysmartbb config file
-	if(file_exists($script_path . '/engine/config.php')) 
-	{
-		require ($script_path . '/engine/config.php');
-		$forum_srv	= $config['db']['server'];
-		$forum_db	= $config['db']['name'];
-		$forum_user	= $config['db']['username'];
-		$forum_pass	= $config['db']['password'];
-		$forum_prefix = $config['db']['prefix'];
-	} 
-	else
-	{
-		big_error('Forum path is not correct', sprintf($lang['SCRIPT_AUTH_PATH_WRONG'], 'MySmartBB'));
-	}
+		$script_path = ($script_path[0] == '/' ? '..' : '../') .  $script_path;
+		
+		//get database data from mysmartbb config file
+		if(file_exists($script_path . '/engine/config.php')) 
+		{
+			require ($script_path . '/engine/config.php');
+			$forum_srv	= $config['db']['server'];
+			$forum_db	= $config['db']['name'];
+			$forum_user	= $config['db']['username'];
+			$forum_pass	= $config['db']['password'];
+			$forum_prefix = $config['db']['prefix'];
+		} 
+		else
+		{
+			big_error('Forum path is not correct', sprintf($lang['SCRIPT_AUTH_PATH_WRONG'], 'MySmartBB'));
+		}
 	}
 	else
 	{
@@ -81,15 +85,15 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire)
 		while($row=$SQLMS->fetch_array($result))
 		{
 			define('USER_ID',$row['id']);
-			define('USER_NAME',(preg_match('/utf/i',strtolower($script_encoding))) ? $row['username'] : iconv(strtoupper($script_encoding),"UTF-8//IGNORE",$row['username']));
+			define('USER_NAME',(preg_match('/utf/i', strtolower($script_encoding))) ? $row['username'] : iconv(strtoupper($script_encoding),"UTF-8//IGNORE",$row['username']));
 			define('USER_MAIL',$row['email']);
 			define('USER_ADMIN',($row['usergroup'] == 1) ? 1 : 0);
 			$userinfo = $row;
-							
+
 			if(!$hashed)
 			{	
 				$hash_key_expire = sha1(md5($config['h_key']) .  $expire);
-				$usrcp->kleeja_set_cookie('ulogu', base64_encode(base64_encode(base64_encode($row['id'] . '|' . $row['password'] . '|' . $expire . '|' . $hash_key_expire))), $expire);
+				$usrcp->kleeja_set_cookie('ulogu', $usrcp->en_de_crypt($row['id'] . '|' . $row['password'] . '|' . $expire . '|' . $hash_key_expire), $expire);
 			}
 			
 			($hook = kleeja_run_hook('qr_while_usrdata_mysbb_usr_class')) ? eval($hook) : null; //run hook
@@ -114,30 +118,31 @@ function kleeja_auth_username ($user_id)
 {
 	global $script_path, $lang, $script_encoding, $script_srv, $script_db, $script_user, $script_pass, $script_prefix;
 	
-	if(isset($script_path)) {
-	//check for last slash / 
-	if($script_path[strlen($script_path)] == '/')
+	if(isset($script_path))
 	{
-		$script_path = substr($script_path, 0, strlen($script_path));
-	}
+		//check for last slash / 
+		if($script_path[strlen($script_path)] == '/')
+		{
+			$script_path = substr($script_path, 0, strlen($script_path));
+		}
 
-	$script_path = ($script_path[0] == '/' ? '..' : '../') .  $script_path;
-	
-	
-	//get database data from mysmartbb config file
-	if(file_exists($script_path . '/engine/config.php')) 
-	{
-		require ($script_path . '/engine/config.php');
-		$forum_srv	= $config['db']['server'];
-		$forum_db	= $config['db']['name'];
-		$forum_user	= $config['db']['username'];
-		$forum_pass	= $config['db']['password'];
-		$forum_prefix = $config['db']['prefix'];
-	} 
-	else
-	{
-		big_error('Forum path is not correct', sprintf($lang['SCRIPT_AUTH_PATH_WRONG'], 'MySmartBB'));
-	}
+		$script_path = ($script_path[0] == '/' ? '..' : '../') .  $script_path;
+		
+		
+		//get database data from mysmartbb config file
+		if(file_exists($script_path . '/engine/config.php')) 
+		{
+			require ($script_path . '/engine/config.php');
+			$forum_srv	= $config['db']['server'];
+			$forum_db	= $config['db']['name'];
+			$forum_user	= $config['db']['username'];
+			$forum_pass	= $config['db']['password'];
+			$forum_prefix = $config['db']['prefix'];
+		} 
+		else
+		{
+			big_error('Forum path is not correct', sprintf($lang['SCRIPT_AUTH_PATH_WRONG'], 'MySmartBB'));
+		}
 	}
 	else
 	{
@@ -189,4 +194,3 @@ function kleeja_auth_username ($user_id)
 	}
 }	
 	
-?>

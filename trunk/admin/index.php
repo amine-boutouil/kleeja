@@ -20,9 +20,8 @@
 		define('IN_ADMIN_LOGIN', true);
 	}
 	
-
 	//include imprtant file ..
-	include (PATH . 'includes/common.php');
+	require_once (PATH . 'includes/common.php');
 	include_once (PATH . 'includes/version.php');
 
 	//go to ..
@@ -30,7 +29,7 @@
 	$username = $usrcp->name();
 	//admin session timeout
 	$admintime = isset($admintime) ? $admintime : 18000;
-		
+	
 	//need to login again
 	if((empty($_SESSION['ADMINLOGIN']) || $_SESSION['ADMINLOGIN'] != md5($usrcp->name() . $config['siteurl'])) || (empty($_SESSION['USER_SESS']) || $_SESSION['USER_SESS'] != session_id()))
 	{

@@ -317,7 +317,7 @@ function process ()
 					$check .= isset($_FILES['file']['name'][$i]) ? $_FILES['file']['name'][$i] : '';
 					$this->filename2	= @explode(".", $_FILES['file']['name'][$i]);
 					$this->filename2	= $this->filename2[sizeof($this->filename2)-1];
-					$this->typet		= $this->filename2;
+					$this->typet		= strtolower($this->filename2);
 					$this->sizet		= !empty($_FILES['file']['size'][$i]) ?  $_FILES['file']['size'][$i] : null;
 					
 						// decoding
@@ -452,11 +452,11 @@ function process ()
 								
 					if(in_array($this->filename2[count($this->filename2)-1], array('html', 'php', 'html')))
 					{
-						$this->filename2 = $this->typet  = $this->filename2[count($this->filename2)-2];
+						$this->filename2 = $this->typet  = strtolower($this->filename2[count($this->filename2)-2]);
 					}
 					else
 					{
-						$this->filename2 = $this->typet  = $this->filename2[count($this->filename2)-1];
+						$this->filename2 = $this->typet  = strtolower($this->filename2[count($this->filename2)-1]);
 					}
 								
 					//transfer [decode]

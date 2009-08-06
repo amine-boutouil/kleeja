@@ -30,6 +30,15 @@
 	//admin session timeout
 	$admintime = isset($admintime) ? $admintime : 18000;
 	
+	//for security
+	if ($username && !$usrcp->admin())
+	{
+		($hook = kleeja_run_hook('user_not_admin_admin_page')) ? eval($hook) : null; //run hook 
+			
+		$text = '<span style="color:red;">' . $lang['U_NOT_ADMIN'] . '</span><br /><a href="' . PATH . 'ucp.php?go=login&amp;return=' . str_replace(array('?', '/', '='), array('ooklj1oo', 'ooklj2oo', 'ooklj3oo'), kleeja_get_page()) . '">' . $lang['LOGIN'] . '</a>';
+		kleeja_admin_err($text, false);
+	}
+	
 	//need to login again
 	if((empty($_SESSION['ADMINLOGIN']) || $_SESSION['ADMINLOGIN'] != md5($usrcp->name() . $config['siteurl'])) || (empty($_SESSION['USER_SESS']) || $_SESSION['USER_SESS'] != session_id()))
 	{
@@ -58,6 +67,10 @@
 				elseif((!$username && !$usrcp->data($_POST['lname'], $_POST['lpass'], false, $admintime)) || ($username && !$usrcp->data($_POST['lname'], $_POST['lpass'], false, $admintime, true)))
 				{
 					$ERRORS[] = $lang['LOGIN_ERROR'];
+				}
+				elseif(USER_ADMIN != 1)
+				{
+					$ERRORS[] = $lang['U_NOT_ADMIN'];
 				}
 					
 				
@@ -124,15 +137,6 @@
 	$ext_confirm[]	= 'lgoutcp';	
 	
 	($hook = kleeja_run_hook('begin_admin_page')) ? eval($hook) : null; //run hook 
-
-	//for security
-	if (!$usrcp->admin())
-	{
-		($hook = kleeja_run_hook('user_not_admin_admin_page')) ? eval($hook) : null; //run hook 
-			
-		$text = '<span style="color:red;">' . $lang['U_NOT_ADMIN'] . '</span><br /><a href="./' . basename(ADMIN_PATH) . 'ucp.php?go=login&amp;return=' . str_replace(array('?', '/', '='), array('ooklj1oo', 'ooklj2oo', 'ooklj3oo'), kleeja_get_page()) . '">' . $lang['LOGIN'] . '</a>';
-		kleeja_err($text);
-	}
 	
 	
 	$SHOW_LIST = true; //fix bug

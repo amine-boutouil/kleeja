@@ -99,7 +99,7 @@ $lang = array_merge($lang, array(
 	'GET_LOSTPASS_MSG' => "لقد قمت بطلب  إستعادة كلمة مرورك , لكن لتجنب السبام قم بالظغط على الرابط التالي لتأكيدها : \r\n %1\$s \r\n كلمة المرور الجديده : %2\$s",
 	'CANT_SEND_NEWPASS' => 'خطأ.. لم يتم إرسال كلمة المرور الجديدة!',
 	'OK_SEND_NEWPASS' => 'تم إرسال كلمة المرور الجديدة..',
-	'OK_APPLY_NEWPASS' => 'تم ظبط كلمة المرور الجديده , يمكنك الآن الدخول بها .',
+	'OK_APPLY_NEWPASS' => 'تم ضبط كلمة المرور الجديده , يمكنك الآن الدخول بها .',
 	'GUIDE' => 'الملفات المسموحة',
 	'GUIDE_VISITORS' => 'الملفات المسموحة للزوار وامتداداتها :',
 	'GUIDE_USERS' => 'الملفات المسموحة للأعضاء وامتداداتها :',
@@ -232,7 +232,7 @@ $lang = array_merge($lang, array(
 	'SIZE_U' => 'الحجم [م]',
 	'ALLOW_G' => 'سماح [ز]',
 	'ALLOW_U' => 'سماح [م]',
-	'E_EXTS' => '<b><font color="#008000">[&nbsp;ز&nbsp;]&nbsp;:&nbsp;  تعني الزوار</font></b>&nbsp;/&nbsp;<b><font color="#D80000">[&nbsp;م&nbsp;]&nbsp;:&nbsp; تعني الأعضاء </font></b>&nbsp;/&nbsp;<i>الأحجام تظبط بالكليوبايت</i>',
+	'E_EXTS' => '<b><font color="#008000">[&nbsp;ز&nbsp;]&nbsp;:&nbsp;  تعني الزوار</font></b>&nbsp;/&nbsp;<b><font color="#D80000">[&nbsp;م&nbsp;]&nbsp;:&nbsp; تعني الأعضاء </font></b>&nbsp;/&nbsp;<i>الأحجام تضبط بالكليوبايت</i>',
 	'UPDATED_EXTS' => 'تم تحديث الإمتدادات بنجاح',
 	'UPDATE_FILES' => 'تحديث الملفات',
 	'BY' => 'من',
@@ -432,11 +432,11 @@ $lang = array_merge($lang, array(
 	'ADMIN_DELETE_FILE_OK'	=> 'تم حذف كافة ملفات العضو',
 	'ADMIN_DELETE_FILES'	=> 'حذف كل ملفات العضوية',
 	
-	'KLJ_MORE_PLUGINS'	=> array('قم بالحصول على الكثير من الاضافات من مركز الاضافات في موقع كليجا ,<a target="_blank" href="http://www.kleeja.com/plugins/">إظغط هنا للذهاب لهناك</a> .',
-								'هل أنت مطور ؟ هل قمت بتطوير اضافات لكليجا وتريد عرضها للأخرين أو تريد بيعها في مركز كليجا للاضافات ؟ اذن <a target="_blank" href="http://www.kleeja.com/plugins/">إظغط هنا للذهاب لهناك</a>. ',
+	'KLJ_MORE_PLUGINS'	=> array('قم بالحصول على الكثير من الاضافات من مركز الاضافات في موقع كليجا ,<a target="_blank" href="http://www.kleeja.com/plugins/">إضغط هنا للذهاب لهناك</a> .',
+								'هل أنت مطور ؟ هل قمت بتطوير اضافات لكليجا وتريد عرضها للأخرين أو تريد بيعها في مركز كليجا للاضافات ؟ اذن <a target="_blank" href="http://www.kleeja.com/plugins/">إضغط هنا للذهاب لهناك</a>. ',
 								),
-	'KLJ_MORE_STYLES'	=> array('قم بالحصول على الكثير من الستايلات من معرض الستايلات في موقع كليجا ,<a target="_blank" href="http://www.kleeja.com/styles/">إظغط هنا للذهاب لهناك</a> .',
-							 'هل أنت مصمم ؟ هل تريد عرض ستايلاتك في في معرض كليجا للجميع مجانا او بمقابل ؟  إذن <a target="_blank" href="http://www.kleeja.com/styles/">إظغط هنا للذهاب لهناك</a> .',
+	'KLJ_MORE_STYLES'	=> array('قم بالحصول على الكثير من الستايلات من معرض الستايلات في موقع كليجا ,<a target="_blank" href="http://www.kleeja.com/styles/">إضغط هنا للذهاب لهناك</a> .',
+							 'هل أنت مصمم ؟ هل تريد عرض ستايلاتك في في معرض كليجا للجميع مجانا او بمقابل ؟  إذن <a target="_blank" href="http://www.kleeja.com/styles/">إضغط هنا للذهاب لهناك</a> .',
 							 ),
 	'CHECK_ALL'	 => 'تحديد الكل',
 	'BCONVERTER' => 'آلة حاسبة لتحويل الأحجام',
@@ -456,7 +456,7 @@ $lang = array_merge($lang, array(
 	'YEAR'						=> 'سنه',
 	'ADMINISTRATORS'			=> 'استعراض جميع العضويات التي تملك صلاحيات دخول لوحة التحكم .. !',
 	'INVALID_FORM_KEY'			=> 'نموذج خاطئ , او انك تعديت الوقت المسموح فيه لملأ النموذج.',
-	'REFRESH_CAPTCHA'			=> 'اظغط لتحديث الصوره بواحده جديده',
+	'REFRESH_CAPTCHA'			=> 'إضغط لتحديث الصوره بواحده جديده',
 	'CHOSE_F'					=> 'فضلا قم بإختيار ملف واحد على الاقل',
 	'NO_REPEATING_UPLOADING'	=> 'لايمكنك رفع نفس الملفات على التوالي !.',
 	'FILES_DELETED' 			=> 'تم حذف الملفات المحدده بنجاح !',
@@ -471,5 +471,3 @@ $lang = array_merge($lang, array(
 	'WAIT_LOADING'				=> 'فضلاً انتظر ... جاري رفع الملفات على السيرفر ..',
 	'NOTICECLOSED'				=> 'تنبيه : المركز مغلق',
 ));
-
-?>

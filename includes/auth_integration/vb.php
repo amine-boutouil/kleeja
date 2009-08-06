@@ -101,7 +101,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 					
 					while($row=$SQLVB->fetch_array($result))
 					{
-						if($loginadm)
+						if(!$loginadm)
 						{
 							define('USER_ID',$row['userid']);
 							define('USER_NAME',(preg_match('/utf/i',strtolower($script_encoding))) ? $row['username'] : iconv(strtoupper($script_encoding),"UTF-8//IGNORE",$row['username']));
@@ -127,11 +127,14 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 			}
 			else
 			{
+				if(!$loginadm)
+				{
 					define('USER_ID',$row1['userid']);
 					define('USER_NAME',(preg_match('/utf/i',strtolower($script_encoding))) ? $row1['username'] : iconv(strtoupper($script_encoding),"UTF-8//IGNORE",$row1['username']));
 					define('USER_MAIL',$row1['email']);
 					define('USER_ADMIN',($row1['usergroupid'] == 6) ? 1 : 0);
 					$userinfo = $row1;
+				}
 			}
 		}#whil1
 

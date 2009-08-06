@@ -445,7 +445,7 @@ function process ()
 				//looop text inputs
 				for($i=0;$i<$this->filesnum;$i++)
 				{
-					$check .= isset($_POST['file'][$i]) ? $_POST['file'][$i] : '';
+					$check 				.= (isset($_POST['file'][$i]) && trim($_POST['file'][$i]) != $lang['PAST_URL_HERE']) ? $_POST['file'][$i] : '';
 					$filename 			= (isset($_POST['file'][$i])) ? basename($_POST['file'][$i]) : '';
 					$this->filename2	= explode(".", $filename);
 								

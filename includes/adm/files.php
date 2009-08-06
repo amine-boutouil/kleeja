@@ -107,7 +107,7 @@
 			
 			//delete all files in just one query
 			$query_del = array('DELETE'	=> "{$dbprefix}files",
-									'WHERE'	=> "id IN (" . implode(',', $ids) . ")",);
+								'WHERE'	=> "id IN (" . implode(',', $ids) . ")",);
 									
 			$SQL->build($query_del);
 			$SQL->freeresult($result);
@@ -132,7 +132,7 @@
 	}
 	else if(isset($_GET['search']))
 	{
-		$deletelink = basename(ADMIN_PATH) . "?cp=files" . '&deletefiles=' . $SQL->escape($_GET['search']);
+		$deletelink = basename(ADMIN_PATH) . '?cp=files&deletefiles=' . $SQL->escape($_GET['search']);
 		$search = base64_decode($_GET['search']);
 		$search	= unserialize($search);
 		$search['filename'] = (!isset($search['filename'])) ? '' : $search['filename']; 
@@ -215,7 +215,7 @@
 			
 			
 			$arr[]	= array('id' => $row['id'],
-							'name' => "<a title=\" " . ($row['real_filename'] == '' ? $row['name'] : $row['real_filename']) . "\" href=\"./" . PATH . $row['folder'] . "/" . $row['name'] . "\" target=\"blank\">" . ($row['real_filename'] == '' ? ((strlen($row['name']) > 40) ? substr($row['name'], 0, 40) . '...' : $row['name']) : ((strlen($row['real_filename']) > 40) ? substr($row['real_filename'], 0, 40) . '...' : $row['real_filename'])) . "</a>",
+							'name' => "<a title=\" " . ($row['real_filename'] == '' ? $row['name'] : $row['real_filename']) . "\" href=\"./" . $root_path . $row['folder'] . "/" . $row['name'] . "\" target=\"blank\">" . ($row['real_filename'] == '' ? ((strlen($row['name']) > 40) ? substr($row['name'], 0, 40) . '...' : $row['name']) : ((strlen($row['real_filename']) > 40) ? substr($row['real_filename'], 0, 40) . '...' : $row['real_filename'])) . "</a>",
 							'size' => Customfile_size($row['size']),
 							'ups' => $row['uploads'],
 							'time' => date("d-m-Y H:a", $row['time']),

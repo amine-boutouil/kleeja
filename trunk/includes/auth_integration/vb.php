@@ -14,7 +14,7 @@ if (!defined('IN_COMMON'))
 }
   
 
-function kleeja_auth_login ($name, $pass, $hashed = false, $expire)
+function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = false)
 {
 	// ok, i dont hate vb .. but i cant feel my self use it ... 
 	global $script_path, $lang, $script_encoding, $script_srv, $script_db, $script_user, $script_pass, $script_prefix, $config, $usrcp, $userinfo;
@@ -100,11 +100,14 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire)
 				{
 					
 					while($row=$SQLVB->fetch_array($result))
-					{		
-						define('USER_ID',$row['userid']);
-						define('USER_NAME',(preg_match('/utf/i',strtolower($script_encoding))) ? $row['username'] : iconv(strtoupper($script_encoding),"UTF-8//IGNORE",$row['username']));
-						define('USER_MAIL',$row['email']);
-						define('USER_ADMIN',($row['usergroupid'] == 6) ? 1 : 0);
+					{
+						if($loginadm)
+						{
+							define('USER_ID',$row['userid']);
+							define('USER_NAME',(preg_match('/utf/i',strtolower($script_encoding))) ? $row['username'] : iconv(strtoupper($script_encoding),"UTF-8//IGNORE",$row['username']));
+							define('USER_MAIL',$row['email']);
+							define('USER_ADMIN',($row['usergroupid'] == 6) ? 1 : 0);
+						}
 					//define('LAST_VISIT',$row['last_visit']);
 						$userinfo = $row;
 					

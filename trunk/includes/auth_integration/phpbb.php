@@ -15,7 +15,7 @@ if (!defined('IN_COMMON'))
 }
   
 
-function kleeja_auth_login ($name, $pass, $hashed = false, $expire)
+function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = false)
 {
 	//global $forum_srv, $forum_user, $forum_pass, $forum_db, $forum_charset;
 	global $script_path, $SQLBB, $phpEx, $phpbb_root_path, $lang, $script_encoding, $script_srv, $script_db, $script_user, $script_pass, $script_prefix, $config, $usrcp, $userinfo;
@@ -134,10 +134,13 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire)
 		{
 			if($SQLBB->num_rows($SQLBB->query("SELECT ban_userid FROM `{$forum_prefix}banlist` WHERE ban_userid='" . intval($row['user_id']) . "'")) == 0)
 			{
-				define('USER_ID',$row['user_id']);
-				define('USER_NAME',(preg_match('/utf/i',strtolower($script_encoding))) ? $row['username'] : iconv(strtoupper($script_encoding),"UTF-8//IGNORE",$row['username']));
-				define('USER_MAIL',$row['user_email']);
-				define('USER_ADMIN',($row[$row_leve] == $admin_level) ? 1 : 0);
+				if(!$loginadm)
+				{
+					define('USER_ID',$row['user_id']);
+					define('USER_NAME',(preg_match('/utf/i',strtolower($script_encoding))) ? $row['username'] : iconv(strtoupper($script_encoding),"UTF-8//IGNORE",$row['username']));
+					define('USER_MAIL',$row['user_email']);
+					define('USER_ADMIN',($row[$row_leve] == $admin_level) ? 1 : 0);
+				}
 					//define('LAST_VISIT',$row['last_visit']);
 				$userinfo = $row;
 							

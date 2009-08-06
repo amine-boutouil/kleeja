@@ -18,7 +18,7 @@ if (!defined('IN_COMMON'))
 class usrcp
 {
 				// this function like a traffic sign :)
-				function data ($name, $pass, $hashed = false, $expire)
+				function data ($name, $pass, $hashed = false, $expire, $loginadm = false)
 				{
 					global $config, $path;
 									
@@ -45,13 +45,12 @@ class usrcp
 							if(file_exists($path . 'auth_integration/' . trim($config['user_system']) . '.php'))
 							{	
 								include_once ($path . 'auth_integration/' . trim($config['user_system']) . '.php');
-								return kleeja_auth_login($name, $pass, $hashed, $expire);
+								return kleeja_auth_login($name, $pass, $hashed, $expire, $loginadm);
 							}
 						}
 						
-						
 						//normal 
-						return $this->normal($name, $pass, $hashed, $expire);
+						return $this->normal($name, $pass, $hashed, $expire, $loginadm);
 					
 				}
 				
@@ -72,7 +71,7 @@ class usrcp
 				
 					
 				//now ..  .. our table
-				function normal ($name, $pass, $hashed = false, $expire)
+				function normal ($name, $pass, $hashed = false, $expire, $loginadm = false)
 				{
 					global $SQL, $dbprefix, $config, $userinfo;
 					
@@ -138,12 +137,16 @@ class usrcp
 							{
 								return false;
 							}
-	
-							define('USER_ID', $row['id']);
-							define('USER_NAME', $row['name']);
-							define('USER_MAIL', $row['mail']);
-							define('USER_ADMIN', $row['admin']);
-							define('LAST_VISIT', $row['last_visit']);
+							
+							//Avoid dfining constants again
+							if(!$loginadm)
+							{
+								define('USER_ID', $row['id']);
+								define('USER_NAME', $row['name']);
+								define('USER_MAIL', $row['mail']);
+								define('USER_ADMIN', $row['admin']);
+								define('LAST_VISIT', $row['last_visit']);
+							}
 							
 							//all user fileds info
 							$userinfo = $row;

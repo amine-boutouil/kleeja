@@ -97,7 +97,10 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 			if(!$hashed)
 			{	
 				$hash_key_expire = sha1(md5($config['h_key']) .  $expire);
-				$usrcp->kleeja_set_cookie('ulogu', $usrcp->en_de_crypt($row['id'] . '|' . $row['password'] . '|' . $expire . '|' . $hash_key_expire), $expire);
+				if(!$loginadm)
+				{
+					$usrcp->kleeja_set_cookie('ulogu', $usrcp->en_de_crypt($row['id'] . '|' . $row['password'] . '|' . $expire . '|' . $hash_key_expire), $expire);
+				}
 			}
 			
 			($hook = kleeja_run_hook('qr_while_usrdata_mysbb_usr_class')) ? eval($hook) : null; //run hook

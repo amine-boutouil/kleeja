@@ -30,9 +30,9 @@
 		$last_del_fles 		= date("d-m-Y h:i a", $stat_last_f_del);
 		$php_version 		= 'php ' . phpversion();
 		$mysql_version 		= 'MYSQL ' . $SQL->mysql_version;
-		$max_execution_time = @ini_get('max_execution_time');
-		$upload_max_filesize= @ini_get('upload_max_filesize');
-		$post_max_size 		= @ini_get('post_max_size');
+		$max_execution_time = function_exists('ini_get') ?  @ini_get('max_execution_time') : @get_cfg_var('max_execution_time');
+		$upload_max_filesize= function_exists('ini_get') ?  @ini_get('upload_max_filesize') : @get_cfg_var('upload_max_filesize');
+		$post_max_size 		= function_exists('ini_get') ?  @ini_get('post_max_size') : @get_cfg_var('post_max_size');
 		$s_last_google		= ($stat_last_google == 0) ? '[ ? ]' : date("d-m-Y h:i a", $stat_last_google);
 		$s_google_num		= $stat_google_num;
 		$s_last_yahoo		= ($stat_last_yahoo == 0) ? '[ ? ]' : date("d-m-Y h:i a", $stat_last_yahoo);

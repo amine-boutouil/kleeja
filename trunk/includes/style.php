@@ -22,12 +22,11 @@ if (!defined('IN_COMMON'))
         var $reg	= array('var' => '/([{]{1,2})+([A-Z0-9_\.]+)[}]{1,2}/i');
 		var $caching = true;//save templates as caches to not compliled alot of times
 		
-
         //Function to load a template file.
         function _load_template($template_name)
 		{
 			global $config, $root_path, $STYLE_PATH, $STYLE_PATH_ADMIN;
-			
+
 			$is_admin_template = false;
 			$style_path = $STYLE_PATH;
 			
@@ -70,12 +69,19 @@ if (!defined('IN_COMMON'))
 				big_error('No Template !', 'Requested "' . $template_path . '" template doesnt exists or an empty !! ');
 			}
 			
+			/*
+			if(!is_writable($root_path . 'cache'))
+			{
+				big_error('No Template !', '"Cache" folder is not writable!! ');
+			}
+			*/
+			
 			$this->HTML = file_get_contents($template_path);
 			$this->_parse($this->HTML);
-			$filename = fopen($root_path . 'cache/tpl_' . $this->re_name_tpl($template_name) . '.php', 'w');
-			flock($filename, LOCK_EX); // exlusive look
-			fwrite($filename, $this->HTML);
-			fclose($filename);
+			$filename = @fopen($root_path . 'cache/tpl_' . $this->re_name_tpl($template_name) . '.php', 'w');
+			@flock($filename, LOCK_EX); // exlusive look
+			@fwrite($filename, $this->HTML);
+			@fclose($filename);
         }
 		
 		

@@ -114,6 +114,12 @@ function Saaheader($title, $outscript=false)
 			$header = $tpl->display("header");
 		}
 		
+		if($config['siteclose'] == '1' && $usrcp->admin() && !defined('IN_ADMIN'))
+		{
+			echo '<div style="width: 100%; text-align:center; background:#FFFFA6; color:black; border:thin; border-color:orange">' . $lang['NOTICECLOSED'] . '</div>
+';
+		}
+		
 		echo $header;
 	}
 

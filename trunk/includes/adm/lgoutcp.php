@@ -17,7 +17,7 @@
 	//remove just the administator session 
 	if ($usrcp->logout_cp())
 	{
-		header('Location:./');
+		redirect('./');
 		$SQL->close();
 		exit;
 	}

@@ -108,7 +108,7 @@ switch ($_GET['go'])
 						
 						if(isset($_GET['return']))
 						{
-							header('Location: ./' . str_replace(array('ooklj1oo', 'ooklj2oo', 'ooklj3oo'), array('?', '/', '='), urlencode($_GET['return'])));
+							redirect('./' . str_replace(array('ooklj1oo', 'ooklj2oo', 'ooklj3oo'), array('?', '/', '='), urlencode($_GET['return'])));
 							$SQL->close();
 							exit;
 						}

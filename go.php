@@ -384,7 +384,7 @@ switch ($_GET['go'])
 			$url_file = $config['siteurl'];
 		}
 		
-		header('Location:' . $url_file);
+		redirect($url_file);
 		$SQL->close();
 		exit;
 		

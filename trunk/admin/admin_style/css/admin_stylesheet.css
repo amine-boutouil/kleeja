@@ -304,3 +304,23 @@ tr:hover {background-color:#FFFFDD;}
 .small_font {padding: 5px;font:bold 10px Tahoma, Arial, Helvetica, sans-serif;color:#0A54C3}
 
 #dot {margin: 0;	padding:3px;background: url(../images/dot.gif) repeat-x;}
+
+/*tpl*/
+.s_tpl_x, .s_tpl_x:focus{
+width:100%;direction:ltr;font-size:13px;background-color:#fff;
+border:1px #ccc solid;
+}
+
+.s_tpl_x OPTGROUP {
+	padding: 4px;font:bold 13px Tahoma, Arial, Helvetica, sans-serif;color:#666
+}
+.s_tpl_x option {
+direction:ltr;
+border: 1px solid #6496C3;padding: 3px; margin:2px; background-color:#FBFFFD;
+position: relative; -moz-border-radius:7px;-webkit-border-radius:7px;-khtml-border-radius:7px;border-radius:7px;
+color:#0A54C3
+}
+.s_tpl_x option:hover {
+border:1px #ccc solid; background-color:#6496C3;color:#fff;
+}
+/* / tpl */

@@ -154,8 +154,8 @@ ul.tabbernav li.tabberactive a:hover{color:#AE4600;}
 /* # tabs  */
 
 /*  ALL inputs */
-.input_link,.input_field,.input_num {background: #FFFFFF url(../css/images/input_bg.gif) repeat-x;border: 1px solid #B3B9C4;font:normal 12px tahoma,Arial,sans-serif;outline:1px solid #ccc;padding:2px;}
-.input_field:focus, .input_field:hover ,.safe_code input:hover,.safe_code input:focus,.input_link:focus, .input_link:hover{border: 1px solid #D26900;background-color:#ffd;}
+.input_link,.input_field,.input_num {background: #FFFFFF;border: 1px solid #B3B9C4;font:normal 12px tahoma,Arial,sans-serif;outline:1px solid #ccc;padding:2px;}
+.input_field:focus, .input_field:hover ,.safe_code input:hover,.safe_code input:focus,.input_link:focus, .input_link:hover{border: 1px solid #D26900;background:#fff url(../images/input_bg.gif) repeat-x;}
 /* ALL inputs */
 
 /* ALL buttons */

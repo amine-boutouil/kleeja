@@ -27,28 +27,10 @@ var LANG_MORE_F_FILES ="{lang.MORE_F_FILES}";
 <div id="wrapper">
 	<div id="wrapper2">
 		<div id="header">
-			<div id="logo">
-						<a href="{config.siteurl}">
-			<img src="{STYLE_PATH}images/logo.png" alt="{config.sitename}" style="border:0px" />
-		</a>
-			</div>
-			
-<div class="clr"></div>
-
-			<div id="menu">
-				<ul>
-					<li class="active"><a href="{config.siteurl}" title="{index_name}">{index_name}</a></li>
-					<li><a href="{rules_url}" title="{rules_name}">{rules_name}</a></li>
-					<li><a href="{guide_url}" title="{guide_name}">{guide_name}</a></li>
-					<li><a href="{call_url}" title="{call_name}">{call_name}</a></li>
-					<IF NAME="config.allow_stat_pg">
-					<li><a href="{stats_url}" title="{stats_name}">{stats_name}</a></li>
-					</IF>
-				</ul>
-			</div>
+			<div id="logo"><a href="{config.siteurl}">{config.sitename}</a></div>
 		</div>
 <!--  # End  logo -->
-
+<div class="clr"></div>
 <div id="page">
 <div class="clr"></div>
 
@@ -63,19 +45,25 @@ var LANG_MORE_F_FILES ="{lang.MORE_F_FILES}";
 <!--  # End  extras header -->
 
 
-<!-- start  menu right -->         
+<!-- start  menu right --> 
 <div id="right_menu">
 	<div class="list">
 		<ul>
-
-			<li><a href="{login_url}"><img src="{STYLE_PATH}images/Go-Out.png" alt="{login_name}" style="vertical-align:middle;" />{login_name}</a></li>
-			<li><a href="{usrcp_url}"><img src="{STYLE_PATH}images/User.png" alt="{usrcp_name}" style="vertical-align:middle;" />{usrcp_name}</a></li>
+			<li><a href="{config.siteurl}"><img src="{STYLE_PATH}images/home.gif" style="vertical-align:middle;" />{index_name}</a></li>
+			<li><a href="{rules_url}"><img src="{STYLE_PATH}images/rules_name.gif" style="vertical-align:middle;" />{rules_name}</a></li>
+			<li><a href="{guide_url}"><img src="{STYLE_PATH}images/gu1de.gif" style="vertical-align:middle;" />{guide_name}</a></li>
+			<li><a href="{login_url}"><img src="{STYLE_PATH}images/Go-Out.gif" style="vertical-align:middle;" />{login_name}</a></li>
+			<li><a href="{usrcp_url}"><img src="{STYLE_PATH}images/User.gif" style="vertical-align:middle;" />{usrcp_name}</a></li>
 			<IF NAME="user_is">
 			    <IF NAME="config.enable_userfile">
-				<li><a href="{usrfile_url}"><img src="{STYLE_PATH}images/user-folder.png" alt="{usrfile_name}" style="vertical-align:middle;" />{usrfile_name}</a></li>
+			<li><a href="{usrfile_url}"><img src="{STYLE_PATH}images/folder.gif" style="vertical-align:middle;" />{usrfile_name}</a></li>
 				</IF>
-			<li><a href="{filecp_url}"><img src="{STYLE_PATH}images/filecp.png" alt="{filecp_name}" style="vertical-align:middle;" />{filecp_name}</a></li>
+			<li><a href="{filecp_url}"><img src="{STYLE_PATH}images/filecp.gif" style="vertical-align:middle;" />{filecp_name}</a></li>
 			</IF>
+			<IF NAME="config.allow_stat_pg">
+			<li><a href="{stats_url}"><img src="{STYLE_PATH}images/stats.gif" style="vertical-align:middle;" />{stats_name}</a></li>
+			</IF>
+			<li><a href="{call_url}"><img src="{STYLE_PATH}images/mail.gif" style="vertical-align:middle;" />{call_name}</a></li>
 		</ul>
 	</div>
 </div>

@@ -15,7 +15,7 @@ p, ul, ol { text-align: justify; list-style: none;margin:0;line-height: 170%;}
 a:link, body_alink {color: #FF5A00;text-decoration: none;padding:2px;}
 a:visited, body_avisited {color: #666;	text-decoration: none;padding:2px;}
 a:hover, a:active, body_ahover {color:#D2691E;text-decoration:underline;padding:2px;}
-input:focus, textarea:focus {background-color: #ffd ;border: 1px solid #D26900;}
+input:focus, textarea:focus {border: 1px solid #111;background:#FFFFFF url(../images/input_bg.gif) repeat-x}
 option {padding-right: 1em;}
 textarea { width:60%;border: 1px solid #EBEBEB;padding: 2px 5px;font-size:12px;line-height: 1.4em;color: #6B6B6B;}
 input {font-weight: normal; vertical-align: middle; padding: 2px 5px;font-size:12px;outline:1px solid #ccc;

@@ -99,7 +99,7 @@ switch ($_GET['sty_t'])
 					{
 							while (($file = readdir($dh)) !== false)
 							{
-								if($file != '..' && $file != '.' && !is_dir($file))
+								if($file != '..' && $file != '.' && $file != '.svn' && !is_dir($d_style_path . '/' . $file))
 								{
 									if(in_array($file, array('header.html', 'footer.html', 'index_body.html')))
 									{

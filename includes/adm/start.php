@@ -65,7 +65,7 @@
 		//if 24 hours, lets chcek agian !
 		if((time() - $v['last_check']) > 86400 && !$v['msg_appeared'])
 		{
-			header('location: ' . basename(ADMIN_PATH) . '?cp=check_update&show_msg');
+			redirect(basename(ADMIN_PATH) . '?cp=check_update&show_msg');
 			$SQL->close();
 			exit;
 		}	

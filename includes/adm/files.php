@@ -126,7 +126,7 @@
 	//posts search ..
 	if (isset($_POST['search_file']))
 	{
-		header('Location: ' . basename(ADMIN_PATH) . '?cp=files&search=' . base64_encode(serialize($_POST)));
+		redirect(basename(ADMIN_PATH) . '?cp=files&search=' . base64_encode(serialize($_POST)));
 		$SQL->close();
 		exit;
 	}

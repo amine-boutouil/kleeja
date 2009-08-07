@@ -77,7 +77,7 @@
 				{
 					$_SESSION['USER_SESS'] = session_id();
 					$_SESSION['ADMINLOGIN'] = md5($usrcp->name() . $config['siteurl']);
-					redirect(basename(ADMIN_PATH) . '?cp=' . $go_to);
+					redirect('./' . basename(ADMIN_PATH) . '?cp=' . $go_to);
 					$SQL->close();
 					exit;
 				}

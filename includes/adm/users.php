@@ -149,7 +149,7 @@
 		//posts search ..
 			if (isset($_POST['search_user']))
 			{
-				header('Location: ' . basename(ADMIN_PATH) . '?cp=users&search=' . base64_encode(serialize($_POST)));
+				 redirect(basename(ADMIN_PATH) . '?cp=users&search=' . base64_encode(serialize($_POST)));
 				$SQL->close();
 				exit;
 			}

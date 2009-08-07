@@ -30,13 +30,12 @@
 	//admin session timeout
 	$admintime = isset($admintime) ? $admintime : 18000;
 	
+
 	//for security
-	if ($username && !$usrcp->admin())
+	if (!$usrcp->name())
 	{
 		($hook = kleeja_run_hook('user_not_admin_admin_page')) ? eval($hook) : null; //run hook 
-			
-		$text = '<span style="color:red;">' . $lang['U_NOT_ADMIN'] . '</span><br /><a href="' . PATH . 'ucp.php?go=login&amp;return=' . str_replace(array('?', '/', '='), array('ooklj1oo', 'ooklj2oo', 'ooklj3oo'), kleeja_get_page()) . '">' . $lang['LOGIN'] . '</a>';
-		kleeja_admin_err($text, false);
+		redirect(PATH . 'ucp.php?go=login&return=' . str_replace(array('?', '/', '='), array('ooklj1oo', 'ooklj2oo', 'ooklj3oo'), ADMIN_PATH . '?cp=' . $go_to));
 	}
 	
 	//need to login again

@@ -195,7 +195,7 @@ case 'update_now':
 			//
 			//is there any sqls 
 			//
-			if($complete_upate or defined('DEV_STAGE') && !defined('C_U_F'))
+			if(($complete_upate or defined('DEV_STAGE')) && !defined('C_U_F'))
 			{
 				$SQL->show_errors = false;
 				if(isset($update_sqls) && sizeof($update_sqls) > 0)

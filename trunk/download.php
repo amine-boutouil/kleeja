@@ -178,7 +178,7 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 					$go_to = $config['siteurl'] . (($config['mod_writer']) ? "download" . $_GET['down'] . ".html" : "download.php?id=" . $_GET['down']);
 				}
 				
-				header('Location:' . $go_to);
+				redirect($go_to);
 				$SQL->close();
 				exit;
 			}

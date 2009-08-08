@@ -28,8 +28,9 @@ if ($port !== false)
 
 
 $update_sqls['up_dbv_config'] = "UPDATE `{$dbprefix}config` SET `value` = '" . DB_VERSION . "' WHERE `name` = 'db_version'";
-$update_sqls['online_i'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('last_online_time_update', '" .  time() . "', '', 0)";
+$update_sqls['config_online'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('last_online_time_update', '" .  time() . "', '', 0)";
 $update_sqls['files_del_c'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('klj_clean_files_from', '0', '', 0)";
+$update_sqls['online_i'] = "ALTER TABLE `{$dbprefix}online` DROP `id`";
 $update_sqls['online_t'] = "TRUNCATE TABLE `{$dbprefix}online`";
 $update_sqls['online_c'] = "ALTER TABLE `{$dbprefix}online` ADD `session` VARCHAR( 100 ) NOT NULL";
 $update_sqls['runique_sesion'] = "ALTER TABLE {$dbprefix}online DROP INDEX session";//to prevent dublicate

@@ -21,16 +21,15 @@
 <p class="dot" />
 <!-- end dot  -->
 
-<form action="{action}" method="post">
-<select name="type" size="8" style="width:400px">
-	<option value="all" selected="selected">{lang.CONFIG_KLJ_MENUS_ALL}</option>
-<LOOP NAME="typesnavi">
-	<option value="{{typename}}">{{typetitle}}</option>
-</LOOP>
-</select>
-<br />
-<input name="Submit" type="submit" value="{lang.SUBMIT}" />
-</form>
+<div class="config_types_list">
+	<LOOP NAME="typesnavi">
+		<div>
+			<img src="{{typeicon}}" alt="{{typetitle}}" />
+			<a href="{{typelink}}" title="{{typetitle}}">{{typetitle}}</a>
+		</div>
+	</LOOP>
+</div>
+
 
 <!-- start clear  -->
 <div class="clr"></div>

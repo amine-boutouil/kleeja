@@ -489,6 +489,8 @@ $lang = array_merge($lang, array(
 	'CONFIG_KLJ_MENUS_OTHER'	=> 'خيارات اخرى',
 	'CONFIG_KLJ_MENUS_GENERAL'	=> 'خيارات عامة',
 	'CONFIG_KLJ_MENUS_ALL'		=> 'عرض كل الخيارات',
+	'CONFIG_KLJ_MENUS_UPLOAD'	=> 'اعدادات التحميل',
+	'CONFIG_KLJ_MENUS_INTERFACE'=> 'خيارات الواجهه والتصميم',
 	//last line of this file ...					 
 	'S_TRANSLATED_BY' => 'Translated By <a href="http://www.fenix4web.com/">Fenix4Web</a>',
 ));

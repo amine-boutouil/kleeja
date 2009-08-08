@@ -142,13 +142,11 @@ CREATE TABLE `{$dbprefix}exts` (
 
 $install_sqls['online'] = "
 CREATE TABLE `{$dbprefix}online` (
-  `id` int(12) NOT NULL auto_increment,
   `ip` varchar(30) collate utf8_bin NOT NULL,
   `username` varchar(100) collate utf8_bin NOT NULL,
   `agent` varchar(100) collate utf8_bin NOT NULL,
   `time` int(10) NOT NULL,
   `session` varchar(100) NOT NULL,
-  PRIMARY KEY  (`id`),
   UNIQUE KEY `session` (`session`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 ";

@@ -7,6 +7,6 @@
 /* theme screen stylesheets */
 
 /* import stylesheets and hide from ie/mac \*/
-@import url("reset.css");
-@import url("stylesheet.css");
+@import url("legacy_reset.css");
+@import url("legacy_stylesheet.css");
 /* end import/hide */

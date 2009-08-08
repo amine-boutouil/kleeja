@@ -472,4 +472,5 @@ $lang = array_merge($lang, array(
 	'NOTICECLOSED'				=> 'تنبيه : المركز مغلق',
 	'CONFIG_KLJ_MENUS_OTHER'	=> 'خيارات اخرى',
 	'CONFIG_KLJ_MENUS_GENERAL'	=> 'خيارات عامة',
+	'CONFIG_KLJ_MENUS_ALL'		=> 'عرض كل الخيارات',
 ));

@@ -71,7 +71,10 @@
 			
 			if(!$SHOW_CH_STAGE)
 			{
-				$query['WHERE'] = "type = '" . $SQL->escape($_POST['type']) . "'";
+				if($_POST['type'] != 'all')
+				{
+					$query['WHERE'] = "type = '" . $SQL->escape($_POST['type']) . "'";
+				}
 			}
 										
 			$result = $SQL->build($query);

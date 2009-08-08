@@ -324,3 +324,29 @@ color:#0A54C3
 border:1px #ccc solid; background-color:#6496C3;color:#fff;
 }
 /* / tpl */
+
+/* config page */
+.config_types_list{
+width:100%;
+height:300px;
+margin: 8px 0;
+padding: 2px 5px;
+overflow:auto;
+overflow-x:hidden;
+border-bottom:2px #ccc solid;
+}
+.config_types_list div {
+font-size:14px;
+border: 1px solid #6496C3;
+padding: 5px;
+margin:2px; 
+background-color:#FBFFFD;
+ -moz-border-radius:7px;-webkit-border-radius:7px;-khtml-border-radius:7px;border-radius:7px;
+
+}
+.config_types_list div a {
+	text-decoration:none;
+	color:#0A54C3;
+	padding:5px;
+}
+/* / config page */

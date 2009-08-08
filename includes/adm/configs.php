@@ -20,8 +20,7 @@
 	$action 		= basename(ADMIN_PATH) . '?cp=options';
 	$n_submit 		= $lang['UPDATE_CONFIG'];
 	$options		= '';
-	$SHOW_CH_STAGE	= isset($_POST['type']) ? false : true;
-	$type_is		= isset($_POST['type']) ? htmlspecialchars($_POST['type']) : '';
+	$SHOW_CH_STAGE	= isset($_GET['type']) ? false : true;
 
 	switch($SHOW_CH_STAGE):
 		
@@ -36,13 +35,26 @@
 							'ORDER BY'	=> 'display_order'
 					);
 					
-			$typesnavi = array();
+			
 			$result = $SQL->build($query);
+			
+			$icons_path = $STYLE_PATH_ADMIN . 'images/config_icons/';
+			$default_icon = $icons_path . 'default.png';
+			$typesnavi = array();
+			//default
+			$typesnavi[] = array(
+									'typename'	=> 'all',
+									'typelink'	=> $action  . '&amp;type=all',
+									'typeicon'	=> $icons_path . 'all.png',
+									'typetitle'	=> $lang['CONFIG_KLJ_MENUS_ALL']
+									);
 
 			while($row = $SQL->fetch_array($result))
 			{
 				$typesnavi[] = array(
 								'typename'	=> $row['type'],
+								'typelink'	=> $action  . '&amp;type=' . $row['type'],
+								'typeicon'	=> file_exists($icons_path . $row['type'] . '.png') ?  $icons_path . $row['type'] . '.png' : $default_icon,
 								'typetitle'	=> !empty($lang['CONFIG_KLJ_MENUS_' . strtoupper($row['type'])]) ? $lang['CONFIG_KLJ_MENUS_' . strtoupper($row['type'])] : (!empty($olang['CONFIG_KLJ_MENUS_' . strtoupper($row['type'])]) ? $olang['CONFIG_KLJ_MENUS_' . strtoupper($row['type'])] : $lang['CONFIG_KLJ_MENUS_OTHER']),
 							 );
 			}
@@ -57,11 +69,11 @@
 		case false:
 			
 			//general varaibles
-			$n_googleanalytics = '<a href="http://www.google.com/analytics">Google Analytics</a>';
-			//general
+			$action		= basename(ADMIN_PATH) . '?cp=options&amp;' . htmlspecialchars($_GET['type']);
 			$STAMP_IMG_URL = '../images/watermark.png';
-			$stylfiles = $lngfiles	= $authtypes = '';
-			$optionss  = array();
+			$stylfiles	= $lngfiles	= $authtypes = '';
+			$optionss	= array();
+			$n_googleanalytics = '<a href="http://www.google.com/analytics">Google Analytics</a>';
 			
 			$query = array(
 							'SELECT'	=> '*',
@@ -71,9 +83,9 @@
 			
 			if(!$SHOW_CH_STAGE)
 			{
-				if($_POST['type'] != 'all')
+				if($_GET['type'] != 'all')
 				{
-					$query['WHERE'] = "type = '" . $SQL->escape($_POST['type']) . "'";
+					$query['WHERE'] = "type = '" . $SQL->escape($_GET['type']) . "'";
 				}
 			}
 										

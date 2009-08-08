@@ -14,29 +14,36 @@
 <div class="clr"></div><br />
 <!-- end clear  -->
 
+<!--- START CHOOSING STAGE -->
+<IF NAME="SHOW_CH_STAGE">
+
 <!-- start dot  -->
 <p class="dot" />
 <!-- end dot  -->
-<form action="{action}" method="get">
-<select name="type">
+
+<form action="{action}" method="post">
+<select name="type" size="8" style="width:400px">
 <LOOP NAME="typesnavi">
-<option value="{{typename}}">{{typetitle}}</option>
+	<option value="{{typename}}">{{typetitle}}</option>
 </LOOP>
 </select>
-<input name="cp" value="options" type="hidden" />
+<br />
 <input name="Submit" type="submit" value="{lang.SUBMIT}" />
 </form>
+
 <!-- start clear  -->
 <div class="clr"></div>
 <!-- end clear  -->
 
-<!-- start clear  -->
-<div class="clr"></div><br />
-<!-- end clear  -->
-
 <!-- start dot  -->
 <p class="dot" />
 <!-- end dot  -->
+
+
+<!--- / END CHOOSING STAGE -->
+<ELSE>
+<!--- START EDIT STAGE -->
+
 
 <!-- start clear  -->
 <div class="clr"></div>
@@ -53,7 +60,8 @@
 <br />
 <!-- start button  -->
 <fieldset class="quick" style="text-align:center">
-                <input class="button2" name="submit" type="submit" value="{n_submit}" />
+    <input name="type" type="hidden" value="{type_is}" />
+    <input class="button2" name="submit" type="submit" value="{n_submit}" />
 </fieldset>
 <!-- end button  -->
 
@@ -61,8 +69,11 @@
 <!-- end div border table  -->
 
 </fieldset>
-
 </form>
+
+</IF>
+<!--- / END EDIT STAGE -->
+
 </div>
 <!-- end setting temlate  -->
   

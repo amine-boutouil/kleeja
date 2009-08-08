@@ -488,6 +488,7 @@ $lang = array_merge($lang, array(
 	'NOTICECLOSED'				=> 'تنبيه : المركز مغلق',
 	'CONFIG_KLJ_MENUS_OTHER'	=> 'خيارات اخرى',
 	'CONFIG_KLJ_MENUS_GENERAL'	=> 'خيارات عامة',
+	'CONFIG_KLJ_MENUS_ALL'		=> 'عرض كل الخيارات',
 	//last line of this file ...					 
 	'S_TRANSLATED_BY' => 'Translated By <a href="http://www.fenix4web.com/">Fenix4Web</a>',
 ));

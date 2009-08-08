@@ -33,6 +33,7 @@
 			$query = array(
 							'SELECT'	=> 'DISTINCT(type)',
 							'FROM'		=> "{$dbprefix}config",
+							'WHERE'		=> '`option` != \'\'',
 							'ORDER BY'	=> 'display_order'
 					);
 					
@@ -52,13 +53,38 @@
 
 			while($row = $SQL->fetch_array($result))
 			{
-				$typesnavi[] = array(
+					if($row['type'] == 'general')
+					{
+						//kleeja general options
+						$typesnavi[] = array(
+									'typename'	=> 'general',
+									'typelink'	=> $action  . '&amp;type=general',
+									'typeicon'	=> $icons_path . 'general.png',
+									'typetitle'	=> $lang['CONFIG_KLJ_MENUS_GENERAL']
+									);
+					}
+					elseif($row['type'] != 'other' && $row['type'] != 'general')
+					{
+						$typesnavi[] = array(
 								'typename'	=> $row['type'],
 								'typelink'	=> $action  . '&amp;type=' . $row['type'],
 								'typeicon'	=> file_exists($icons_path . $row['type'] . '.png') ?  $icons_path . $row['type'] . '.png' : $default_icon,
 								'typetitle'	=> !empty($lang['CONFIG_KLJ_MENUS_' . strtoupper($row['type'])]) ? $lang['CONFIG_KLJ_MENUS_' . strtoupper($row['type'])] : (!empty($olang['CONFIG_KLJ_MENUS_' . strtoupper($row['type'])]) ? $olang['CONFIG_KLJ_MENUS_' . strtoupper($row['type'])] : $lang['CONFIG_KLJ_MENUS_OTHER']),
 							 );
+					}
+					elseif($row['type'] == 'other')
+					{
+						//kleeja other options
+						$typesnavi[] = array(
+									'typename'	=> 'other',
+									'typelink'	=> $action  . '&amp;type=other',
+									'typeicon'	=> $icons_path . 'default.png',
+									'typetitle'	=> $lang['CONFIG_KLJ_MENUS_OTHER']
+									);
+					}
 			}
+			
+			
 			
 			$SQL->freeresult($result);
 			
@@ -201,17 +227,25 @@
 					}
 			}
 			$types = array();
-			$types['general'] = '<tr style="background:white;"><td colspan="2"><strong><em><h3>' . (!empty($lang['CONFIG_KLJ_MENUS_GENERAL']) ? $lang['CONFIG_KLJ_MENUS_GENERAL'] : ((!empty($olang['CONFIG_KLJ_MENUS_GENERAL'])) ? $olang['CONFIG_KLJ_MENUS_GENERAL'] : $lang['CONFIG_KLJ_MENUS_OTHER'])) . '</h3></em></strong></td></tr>';
 			
 			foreach($optionss as $key => $option)
 			{
-				if(empty($types[$option['type']]) && $option['type'] != 'general' && $option['type'] != 'other')
-				{
-					$types[$option['type']] = '<tr style="background:white;"><td colspan="2"><strong><em><h3>' . (!empty($lang['CONFIG_KLJ_MENUS_' . strtoupper($option['type'])]) ? $lang['CONFIG_KLJ_MENUS_' . strtoupper($option['type'])] : ((!empty($olang['CONFIG_KLJ_MENUS_' . strtoupper($option['type'])])) ? $olang['CONFIG_KLJ_MENUS_' . strtoupper($option['type'])] : $lang['CONFIG_KLJ_MENUS_OTHER'])) . '</h3></em></strong></td></tr>';
+				if(empty($types[$option['type']]))
+				{ 
+					if($option['type'] == 'general')
+					{
+						$types['general'] = '<tr style="background:white;"><td colspan="2"><strong><em><h3>' . (!empty($lang['CONFIG_KLJ_MENUS_GENERAL']) ? $lang['CONFIG_KLJ_MENUS_GENERAL'] : ((!empty($olang['CONFIG_KLJ_MENUS_GENERAL'])) ? $olang['CONFIG_KLJ_MENUS_GENERAL'] : $lang['CONFIG_KLJ_MENUS_OTHER'])) . '</h3></em></strong></td></tr>';
+					}
+					else if($option['type'] != 'general' && $option['type'] != 'other')
+					{
+						$types[$option['type']] = '<tr style="background:white;"><td colspan="2"><strong><em><h3>' . (!empty($lang['CONFIG_KLJ_MENUS_' . strtoupper($option['type'])]) ? $lang['CONFIG_KLJ_MENUS_' . strtoupper($option['type'])] : ((!empty($olang['CONFIG_KLJ_MENUS_' . strtoupper($option['type'])])) ? $olang['CONFIG_KLJ_MENUS_' . strtoupper($option['type'])] : $lang['CONFIG_KLJ_MENUS_OTHER'])) . '</h3></em></strong></td></tr>';
+					}
+					else if($option['type'] == 'other')
+					{
+						$types['other'] = '<tr style="background:white;"><td colspan="2"><strong><em><h3>' . $lang['CONFIG_KLJ_MENUS_OTHER'] . '</h3></em></strong></td></tr>';
+					}
 				}
 			}
-			
-			$types['other'] = '<tr style="background:white;"><td colspan="2"><strong><em><h3>' . $lang['CONFIG_KLJ_MENUS_OTHER'] . '</h3></em></strong></td></tr>';
 			
 			foreach($types as $typekey => $type)
 			{

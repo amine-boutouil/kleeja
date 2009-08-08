@@ -337,16 +337,20 @@ border-bottom:2px #ccc solid;
 }
 .config_types_list div {
 font-size:14px;
-border: 1px solid #6496C3;
-padding: 5px;
-margin:2px; 
-background-color:#FBFFFD;
- -moz-border-radius:7px;-webkit-border-radius:7px;-khtml-border-radius:7px;border-radius:7px;
+margin:3px;
+padding: 5px 8px 4px 5px; 
+border: 2px solid #FEA53D;
+border-width:2px 0; 
+background-color: #EFE7B8;
+vertical-align:center;
 
 }
 .config_types_list div a {
 	text-decoration:none;
 	color:#0A54C3;
 	padding:5px;
+	padding-bottom:10px;
+	font-size:10px;
+	font-weight:bold;
 }
 /* / config page */

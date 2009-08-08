@@ -257,7 +257,7 @@ case 'update_now':
 				delete_cache(null, true, true);
 				echo '<br /><br /><span style="color:green;">' . $lang['INST_UPDATE_IS_FINISH']. '</span><br />';
 				echo '<img src="img/home.gif" alt="home" />&nbsp;<a href="../index.php">' . $lang['INDEX'] . '</a><br /><br />';
-				echo '<img src="img/adm.gif" alt="admin" />&nbsp;<a href="../admin.php">' . $lang['ADMINCP'] . '</a><br /><br />';
+				echo '<img src="img/adm.gif" alt="admin" />&nbsp;<a href="../admin/">' . $lang['ADMINCP'] . '</a><br /><br />';
 				echo '' . $lang['INST_KLEEJADEVELOPERS'] . '<br /><br />';
 				echo '<a href="http://www.kleeja.com">www.kleeja.com</a><br /><br />';
 			}

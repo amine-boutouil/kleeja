@@ -21,6 +21,7 @@
 	$n_submit 		= $lang['UPDATE_CONFIG'];
 	$options		= '';
 	$SHOW_CH_STAGE	= isset($_GET['type']) ? false : true;
+	$CONFIGEXTEND	= false;
 
 	switch($SHOW_CH_STAGE):
 		
@@ -83,6 +84,8 @@
 			
 			if(!$SHOW_CH_STAGE)
 			{
+				$CONFIGEXTEND	  = $SQL->escape($_GET['type']);
+				$CONFIGEXTENDLANG = (!empty($lang['CONFIG_KLJ_MENUS_' . strtoupper($SQL->escape($_GET['type']))]) ? $lang['CONFIG_KLJ_MENUS_' . strtoupper($SQL->escape($_GET['type']))] : ((!empty($olang['CONFIG_KLJ_MENUS_' . strtoupper($SQL->escape($_GET['type']))])) ? $olang['CONFIG_KLJ_MENUS_' . strtoupper($SQL->escape($_GET['type']))] : $lang['CONFIG_KLJ_MENUS_OTHER']));
 				if($_GET['type'] != 'all')
 				{
 					$query['WHERE'] = "type = '" . $SQL->escape($_GET['type']) . "'";

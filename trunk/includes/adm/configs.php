@@ -78,7 +78,7 @@
 						$typesnavi[] = array(
 									'typename'	=> 'other',
 									'typelink'	=> $action  . '&amp;type=other',
-									'typeicon'	=> $icons_path . 'default.png',
+									'typeicon'	=> $icons_path . 'other.png',
 									'typetitle'	=> $lang['CONFIG_KLJ_MENUS_OTHER']
 									);
 					}
@@ -125,7 +125,8 @@
 				$i++;
 				//make new lovely array !!
 				$con[$row['name']] = $row['value'];
-					
+				
+				$thmb_dim_w =  $thmb_dim_h = 0;
 				if($row['name'] == 'thmb_dims') 
 				{
 					list($thmb_dim_w, $thmb_dim_h) = @explode('*', $con['thmb_dims']);

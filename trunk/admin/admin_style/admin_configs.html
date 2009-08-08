@@ -7,7 +7,7 @@
 <!-- start div border table  -->
 <div id="border-table">
 <!-- title   -->
-<b style="font-size:18px;color:#6496C3">{lang.R_CONFIGS}</b>
+<b style="font-size:18px;color:#6496C3"><a href="index.php?cp=options">{lang.R_CONFIGS}</a></b><IF NAME="CONFIGEXTEND"> » {CONFIGEXTENDLANG} </IF>
 <!-- title   -->
 
 <!-- start clear  -->
@@ -42,15 +42,8 @@
 
 <!--- / END CHOOSING STAGE -->
 <ELSE>
-<!-- start dot  -->
-<p class="dot" />
-<!-- end dot  -->
 <!--- START EDIT STAGE -->
-<a href="index.php?cp=options">{lang.R_CONFIGS}</a> 
-<IF NAME="CONFIGEXTEND">
->>
-{CONFIGEXTENDLANG}
-</IF>
+
 <!-- start dot  -->
 <p class="dot" />
 <!-- end dot  -->
@@ -70,7 +63,6 @@
 <br />
 <!-- start button  -->
 <fieldset class="quick" style="text-align:center">
-    <input name="type" type="hidden" value="{type_is}" />
     <input class="button2" name="submit" type="submit" value="{n_submit}" />
 </fieldset>
 <!-- end button  -->

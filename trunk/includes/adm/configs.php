@@ -71,7 +71,7 @@
 			
 			//general varaibles
 			$action		= basename(ADMIN_PATH) . '?cp=options&amp;' . htmlspecialchars($_GET['type']);
-			$STAMP_IMG_URL = '../images/watermark.png';
+			$STAMP_IMG_URL = PATH . 'images/watermark.png';
 			$stylfiles	= $lngfiles	= $authtypes = '';
 			$optionss	= array();
 			$n_googleanalytics = '<a href="http://www.google.com/analytics">Google Analytics</a>';
@@ -201,14 +201,17 @@
 					}
 			}
 			$types = array();
+			$types['general'] = '<tr style="background:white;"><td colspan="2"><strong><em><h3>' . (!empty($lang['CONFIG_KLJ_MENUS_GENERAL']) ? $lang['CONFIG_KLJ_MENUS_GENERAL'] : ((!empty($olang['CONFIG_KLJ_MENUS_GENERAL'])) ? $olang['CONFIG_KLJ_MENUS_GENERAL'] : $lang['CONFIG_KLJ_MENUS_OTHER'])) . '</h3></em></strong></td></tr>';
 			
 			foreach($optionss as $key => $option)
 			{
-				if(empty($types[$option['type']]))
+				if(empty($types[$option['type']]) && $option['type'] != 'general' && $option['type'] != 'other')
 				{
 					$types[$option['type']] = '<tr style="background:white;"><td colspan="2"><strong><em><h3>' . (!empty($lang['CONFIG_KLJ_MENUS_' . strtoupper($option['type'])]) ? $lang['CONFIG_KLJ_MENUS_' . strtoupper($option['type'])] : ((!empty($olang['CONFIG_KLJ_MENUS_' . strtoupper($option['type'])])) ? $olang['CONFIG_KLJ_MENUS_' . strtoupper($option['type'])] : $lang['CONFIG_KLJ_MENUS_OTHER'])) . '</h3></em></strong></td></tr>';
 				}
 			}
+			
+			$types['other'] = '<tr style="background:white;"><td colspan="2"><strong><em><h3>' . $lang['CONFIG_KLJ_MENUS_OTHER'] . '</h3></em></strong></td></tr>';
 			
 			foreach($types as $typekey => $type)
 			{

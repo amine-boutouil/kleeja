@@ -342,7 +342,7 @@ padding: 5px 8px 4px 5px;
 border: 2px solid #FEA53D;
 border-width:2px 0; 
 background-color: #EFE7B8;
-vertical-align:center;
+cursor:pointer;
 
 }
 .config_types_list div a {

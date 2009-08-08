@@ -486,6 +486,8 @@ $lang = array_merge($lang, array(
 	'ADMIN_DELETE_NO_FILE'		=> 'هذا المستخدم لا يملك ملفات لحذفها ! .',
 	'WAIT_LOADING'				=> 'فضلاً انتظر ... جاري رفع الملفات على السيرفر ..',
 	'NOTICECLOSED'				=> 'تنبيه : المركز مغلق',
+	'CONFIG_KLJ_MENUS_OTHER'	=> 'خيارات اخرى',
+	'CONFIG_KLJ_MENUS_GENERAL'	=> 'خيارات عامة',
 	//last line of this file ...					 
 	'S_TRANSLATED_BY' => 'Translated By <a href="http://www.fenix4web.com/">Fenix4Web</a>',
 ));

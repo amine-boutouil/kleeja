@@ -23,17 +23,24 @@
 		//general
 		$STAMP_IMG_URL = '../images/watermark.png';
 		$stylfiles = $lngfiles	= $authtypes = '';
-					
+		$optionss  = array();
+
 		$query = array(
 						'SELECT'	=> '*',
 						'FROM'		=> "{$dbprefix}config",
 						'ORDER BY'	=> 'display_order'
 					);
+		
+		if(isset($_GET['type']))
+		{
+			$query['WHERE'] = "type = '" . $SQL->escape($_GET['type']) . "'";
+		}
 									
 		$result = $SQL->build($query);
 
 		while($row=$SQL->fetch_array($result))
 		{
+			$i++;
 			//make new lovely array !!
 			$con[$row['name']] = $row['value'];
 				
@@ -94,14 +101,21 @@
 						closedir($dh);
 				}
 			}
+			
+			($hook = kleeja_run_hook('while_fetch_adm_config')) ? eval($hook) : null; //run hook
+			
 				//options from database [UNDER TEST]
 				if(!empty($row['option'])) 
 				{
-					$options .= 
-					'<tr>' . "\n" .  
-					'<td><label for="' . $row['name'] . '">' . (!empty($lang[strtoupper($row['name'])]) ? $lang[strtoupper($row['name'])] : $olang[strtoupper($row['name'])]) . '</label></td>' . "\n" .
-					'<td><label>' . (empty($row['option']) ? '' : $tpl->admindisplayoption($row['option'])) . '</label></td>' . "\n" .
-					'</tr>' . "\n";
+					$optionss[$row['name']] = array(
+					'option'		 => '<tr>' . "\n" .  
+										'<td><label for="' . $row['name'] . '">' . (!empty($lang[strtoupper($row['name'])]) ? $lang[strtoupper($row['name'])] : $olang[strtoupper($row['name'])]) . '</label></td>' . "\n" .
+										'<td><label>' . (empty($row['option']) ? '' : $tpl->admindisplayoption($row['option'])) . '</label></td>' . "\n" .
+										'</tr>' . "\n",
+					'type'			=> $row['type'],
+					'display_order' => $row['display_order'],
+					);
+					
 				}
 				//when submit !!
 				if (isset($_POST['submit']))
@@ -130,6 +144,42 @@
 					$SQL->build($update_query);
 				}
 		}
+		$types = array();
+		$typesnavi = array();
+		
+		foreach($optionss as $key => $option)
+		{
+			if(empty($types[$option['type']]))
+			{
+				$types[$option['type']] = '<tr style="background:white;"><td colspan="2"><strong><em><h3>' . (!empty($lang['CONFIG_KLJ_MENUS_' . strtoupper($option['type'])]) ? $lang['CONFIG_KLJ_MENUS_' . strtoupper($option['type'])] : ((!empty($olang['CONFIG_KLJ_MENUS_' . strtoupper($option['type'])])) ? $olang['CONFIG_KLJ_MENUS_' . strtoupper($option['type'])] : $lang['CONFIG_KLJ_MENUS_OTHER'])) . '</h3></em></strong></td></tr>';
+				
+				$typesnavi[] = array(
+									'typename' => $option['type'],
+									'typetitle' => (!empty($lang['CONFIG_KLJ_MENUS_' . strtoupper($option['type'])]) ? $lang['CONFIG_KLJ_MENUS_' . strtoupper($option['type'])] : ((!empty($olang['CONFIG_KLJ_MENUS_' . strtoupper($option['type'])])) ? $olang['CONFIG_KLJ_MENUS_' . strtoupper($option['type'])] : $lang['CONFIG_KLJ_MENUS_OTHER'])),
+								 );
+			}
+			
+						
+			//if($option['type'] == 'general')
+			//{
+			//$kljoptions[$option['type']] = $option['option'];
+			//}
+	
+		}
+		
+		foreach($types as $typekey => $type)
+		{
+			$options .= $type;
+			foreach($optionss as $key => $option)
+			{
+				if($option['type'] == $typekey)
+				{
+					
+					$options .= $option['option'];
+				}
+			}
+		}
+
 		
 		$SQL->freeresult($result);
 		

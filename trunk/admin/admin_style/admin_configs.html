@@ -1,7 +1,6 @@
 ﻿<!-- start setting temlate  -->
 <div id="divmiddle">
 
-<form method="post" action="{action}">
 
 <fieldset>
 
@@ -18,11 +17,31 @@
 <!-- start dot  -->
 <p class="dot" />
 <!-- end dot  -->
-
+<form action="{action}" method="get">
+<select name="type">
+<LOOP NAME="typesnavi">
+<option value="{{typename}}">{{typetitle}}</option>
+</LOOP>
+</select>
+<input name="cp" value="options" type="hidden" />
+<input name="Submit" type="submit" value="{lang.SUBMIT}" />
+</form>
 <!-- start clear  -->
 <div class="clr"></div>
 <!-- end clear  -->
 
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
+
+<!-- start dot  -->
+<p class="dot" />
+<!-- end dot  -->
+
+<!-- start clear  -->
+<div class="clr"></div>
+<!-- end clear  -->
+<form method="post" action="{action}">
 <table>
 
  <!-- admin configs tr extra begin -->

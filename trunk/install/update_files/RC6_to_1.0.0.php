@@ -48,36 +48,27 @@ VALUES ('sitemail2', '" . inst_get_config('sitemail') . "', '<input type=\"text\
 $update_sqls['password_salt'] = "ALTER TABLE `{$dbprefix}users` ADD `password_salt` VARCHAR( 250 ) NOT NULL AFTER `password`";
 
 $update_sqls['type_config'] = "ALTER TABLE `{$dbprefix}config` ADD `type` VARCHAR( 20 ) NOT NULL DEFAULT 'other'";
-$update_sqls['type_config_general'] = "UPDATE `{$dbprefix}config` SET `type` = 'general' WHERE `name` IN ('siteclose','closemsg', 'style', 'welcome_msg', 'language', 'siteurl', 'sitemail', 'sitemail2');";
-$update_sqls['cookie_1'] = "INSERT INTO `{$dbprefix}config` (
-`name` ,
-`value` ,
-`option` ,
-`display_order`
-)
-VALUES (
-'cookie_name', '" . $cookie_name  . "', '<input type=\"text\" id=\"cookie_name\" name=\"cookie_name\" value=\"{con.cookie_name}\" size=\"30\">', '70'
-);";
-$update_sqls['cookie_2'] = "INSERT INTO `{$dbprefix}config` (
-`name` ,
-`value` ,
-`option` ,
-`display_order`
-)
-VALUES (
-'cookie_path', '/', '<input type=\"text\" id=\"cookie_path\" name=\"cookie_path\" value=\"{con.cookie_path}\" size=\"30\">', '70'
-);";
-$update_sqls['cookie_3'] = "INSERT INTO `{$dbprefix}config` (
-`name` ,
-`value` ,
-`option` ,
-`display_order`
-)
-VALUES (
-'cookie_domain', '" . $cookie_domain . "', '<input type=\"text\" id=\"cookie_domain\" name=\"cookie_domain\" value=\"{con.cookie_domain}\" size=\"30\">', '70'
+
+$update_sqls['type_config_general'] = "UPDATE `{$dbprefix}config` SET `type` = 'general' WHERE `name` IN ('sitename','siteclose','closemsg', 'style', 'welcome_msg', 'language', 'siteurl', 'sitemail', 'sitemail2','user_system','register','del_f_day','mod_writer','enable_userfile','id_form','cookie_name','cookie_path','cookie_domain','cookie_secure','livexts'
+
 );";
 
-$update_sqls['cookie_4'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('cookie_secure', '0', '<label>{lang.YES}<input type=\"radio\" id=\"cookie_secure\" name=\"cookie_secure\" value=\"1\"  <IF NAME=\"con.cookie_secure==1\"> checked=\"checked\"</IF>></label>\r\n <label>{lang.NO}<input type=\"radio\" id=\"cookie_secure\" name=\"cookie_secure\" value=\"0\"  <IF NAME=\"con.cookie_secure==0\"> checked=\"checked\"</IF>></label>', '70')";
+$update_sqls['type_config_upload'] = "UPDATE `{$dbprefix}config` SET `type` = 'upload' WHERE `name` IN ('foldername','prefixname','filesnum','decode','total_size','thumbs_imgs','write_imgs','del_url_file','safe_code');";
+
+
+$update_sqls['type_config_interface'] = "UPDATE `{$dbprefix}config` SET `type` = 'interface' WHERE `name` IN ('style','sec_down','statfooter','gzip','welcome_msg','www_url','allow_stat_pg','allow_online','googleanalytics');";
+
+$update_sqls['cookie_1'] = "INSERT INTO `{$dbprefix}config` (`name` ,`value` ,`option` ,`display_order`,`type`)
+VALUES ('cookie_name', '" . $cookie_name . "', '<input type=\"text\" id=\"cookie_name\" name=\"cookie_name\" value=\"{con.cookie_name}\" size=\"30\">', '70', 'general');";
+
+$update_sqls['cookie_2'] = "INSERT INTO `{$dbprefix}config` (`name` ,`value` ,`option` ,`display_order`,`type`) VALUES ('cookie_path', '/', '<input type=\"text\" id=\"cookie_path\" name=\"cookie_path\" value=\"{con.cookie_path}\" size=\"30\">', '70', 'general');";
+
+$update_sqls['cookie_3'] = "INSERT INTO `{$dbprefix}config` (`name` ,`value` ,`option` ,`display_order`, `type`)
+VALUES ('cookie_domain', '" . $cookie_domain . "', '<input type=\"text\" id=\"cookie_domain\" name=\"cookie_domain\" value=\"{con.cookie_domain}\" size=\"30\">', '70', 'general');";
+
+$update_sqls['cookie_4'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`, `type`) VALUES ('cookie_secure', '0', '<label>{lang.YES}<input type=\"radio\" id=\"cookie_secure\" name=\"cookie_secure\" value=\"1\"  <IF NAME=\"con.cookie_secure==1\"> checked=\"checked\"</IF>></label>\r\n <label>{lang.NO}<input type=\"radio\" id=\"cookie_secure\" name=\"cookie_secure\" value=\"0\"  <IF NAME=\"con.cookie_secure==0\"> checked=\"checked\"</IF>></label>', '70', 'general')";
+
+
  
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////

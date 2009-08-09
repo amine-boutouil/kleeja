@@ -96,7 +96,7 @@
 		case false:
 			
 			//general varaibles
-			$action		= basename(ADMIN_PATH) . '?cp=options&amp;' . htmlspecialchars($_GET['type']);
+			$action		= basename(ADMIN_PATH) . '?cp=options&amp;type=' . htmlspecialchars($_GET['type']);
 			$STAMP_IMG_URL = PATH . 'images/watermark.png';
 			$stylfiles	= $lngfiles	= $authtypes = '';
 			$optionss	= array();

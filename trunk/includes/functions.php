@@ -1572,6 +1572,7 @@ function klj_clean_old_files($from = 0)
 		}
 		
 		update_config('klj_clean_files_from', $last_id_from);
+		return;
 
     } //stat_del
 

@@ -20,7 +20,7 @@ RewriteRule ^filecp-([0-9]*).html$ ucp.php?go=filecp&page=$1
 RewriteRule ^profile.html$ ucp.php?go=profile
 RewriteRule ^fileuser.html$ ucp.php?go=fileuser
 RewriteRule ^fileuser[_-]([0-9]*).html$ ucp.php?go=fileuser&id=$1
-RewriteRule ^fileuser[_-]([0-9]*)-([0-9*]).html$ ucp.php?go=fileuser&id=$1&page=$2
+RewriteRule ^fileuser[_-]([0-9]*)-([0-9]*).html$ ucp.php?go=fileuser&id=$1&page=$2
 RewriteRule ^register.html$ ucp.php?go=register
 RewriteRule ^login.html$ ucp.php?go=login
 RewriteRule ^logout.html$ ucp.php?go=logout

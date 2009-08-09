@@ -7,7 +7,7 @@
 <!-- start div border table  -->
 <div id="border-table">
 <!-- title   -->
-<b style="font-size:18px;color:#6496C3"><a href="index.php?cp=options">{lang.R_CONFIGS}</a></b><IF NAME="CONFIGEXTEND"> » {CONFIGEXTENDLANG} </IF>
+<span style="font-size:18px;color:#6496C3"><a href="index.php?cp=options">{lang.R_CONFIGS}</a></span><IF NAME="CONFIGEXTEND"> » {CONFIGEXTENDLANG} </IF>
 <!-- title   -->
 
 <!-- start clear  -->
@@ -24,7 +24,7 @@
 <div class="config_types_list">
 	<LOOP NAME="typesnavi">
 		<div onclick="location.href='{{typelink}}'">
-			<img src="{{typeicon}}" alt="{{typetitle}}" />
+			<img src="{{typeicon}}" alt="{{typetitle}}" /><br />
 			<a href="{{typelink}}" title="{{typetitle}}">{{typetitle}}</a>
 		</div>
 	</LOOP>

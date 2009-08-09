@@ -1487,6 +1487,8 @@ function klj_clean_old_files($from = 0)
 {
 	global $config, $SQL, $stat_last_f_del, $dbprefix;
 
+	$ids = array();
+	
 	if((int) $config['del_f_day'] <= 0)
 	{
 		return;
@@ -1552,7 +1554,7 @@ function klj_clean_old_files($from = 0)
 			$last_id_from = $row['id'];
 	    }#END WHILE
 		
-		if(isset($ids) && !empty($ids))
+		if(sizeof($ids))
 		{
 			$query_del = array('DELETE'	=> "{$dbprefix}files",
 								'WHERE'	=> "id IN (" . implode(',', $ids) . ")",);

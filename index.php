@@ -63,7 +63,7 @@
 	$info = array();
 	foreach($kljup->errs as $t=>$s)	
 	{
-		$info[] = array('t'=>$t, 'i' => $s);
+		$info[] = array('t'=>$s[1], 'i' => $s[0]);
 	}
 	
 	//some words for template

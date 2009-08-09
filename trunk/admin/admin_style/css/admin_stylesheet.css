@@ -290,7 +290,7 @@ table {
 	border-collapse: collapse; margin: 0px;	width:100%; padding: 5px; 
 	font: 12px Tahoma, Arial, Helvetica, sans-serif;}
 tr { 	height: 24px; background-color:#EEEEEE;}
-td {	padding: 3px 5px 3px 5px; border: solid 1px #E4E4E4;}
+td {	padding: 6px 5px 6px 5px; border: solid 1px #E4E4E4;}
 tr:hover {background-color:#FFFFDD;}
 /* all tables */
 
@@ -326,31 +326,46 @@ border:1px #ccc solid; background-color:#6496C3;color:#fff;
 /* / tpl */
 
 /* config page */
+
 .config_types_list{
 width:100%;
-height:300px;
-margin: 8px 0;
+display:inline;
+margin: 20px 0;
 padding: 2px 5px;
-overflow:auto;
-overflow-x:hidden;
-border-bottom:2px #ccc solid;
 }
 .config_types_list div {
+float: right;
+width:46%;
+display:inline;
 font-size:14px;
 margin:3px;
 padding: 5px 8px 4px 5px; 
-border: 2px solid #FEA53D;
-border-width:2px 0; 
-background-color: #EFE7B8;
+border-top:2px solid #A6D8D1;
+border-bottom:2px solid #A6D8D1;
+border-left:2px solid #FBFFFD;
+border-right:2px solid #FBFFFD;
+background-color: #EAFFFC;
 cursor:pointer;
-
+height: 100px;
+text-align:center;
 }
-.config_types_list div a {
+.config_types_list div a{
 	text-decoration:none;
-	color:#0A54C3;
-	padding:5px;
-	padding-bottom:10px;
-	font-size:10px;
-	font-weight:bold;
+	color:#003F9D;
+	margin: 45% auto 20% auto;
+	padding:10px;
+	font-size:14px;
+	font-weight:normal;
+	text-align:center;
+}
+.config_types_list div img {
+	margin:1% auto 1% auto;
+	padding:3px;
+	text-align:center;
+}
+
+.config_types_list div:hover {
+	background-color: #FFFEEA;
+	border:2px solid #A6D8D1;
 }
 /* / config page */

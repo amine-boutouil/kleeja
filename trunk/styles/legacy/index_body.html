@@ -11,6 +11,22 @@
 
 <div class="clr"></div><br />
 
+<IF NAME="config.safe_code">
+<!---- start  safe code  ---->
+<div class="safe_code">
+	<p>{lang.VERTY_CODE}</p>
+	<br /><br />
+	<img style="vertical-align:middle;" id="kleeja_img_captcha" src="{captcha_file_path}" alt="{lang.REFRESH_CAPTCHA}" title="{lang.REFRESH_CAPTCHA}" onclick="javascript:update_kleeja_captcha('{captcha_file_path}', 'kleeja_code_answer');" />
+	<input type="text" name="kleeja_code_answer" id="kleeja_code_answer" style="direction:ltr" />
+	<br /><br />
+	<span class="explain">{lang.NOTE_CODE}</span>
+	<br />
+</div>
+<!---- # End  safe code  ---->	  
+</IF>
+
+<div class="clr"></div><br />
+
 <IF NAME="info">
 <!---- START  FOR INFORMATION ---->
 <div id="system-message">
@@ -69,20 +85,6 @@
 
 </div>
 <!---- # end uplaod boxs  ---->
-
-<IF NAME="config.safe_code">
-<!---- start  safe code  ---->
-<div class="safe_code">
-	<b>{lang.VERTY_CODE}</b>
-	<br /><br />
-	<img style="vertical-align:middle;" id="kleeja_img_captcha" src="{captcha_file_path}" alt="{lang.REFRESH_CAPTCHA}" title="{lang.REFRESH_CAPTCHA}" onclick="javascript:update_kleeja_captcha('{captcha_file_path}', 'kleeja_code_answer');" />
-	<input type="text" name="kleeja_code_answer" id="kleeja_code_answer" style="direction:ltr" />
-	<br /><br />
-	<span class="explain">{lang.NOTE_CODE}</span>
-	<br />
-</div>
-<!---- # End  safe code  ---->	  
-</IF>
  
 </form>
 <!---- # END  FOR UPLOAD BOXES ---->

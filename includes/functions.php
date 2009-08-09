@@ -1487,8 +1487,7 @@ function klj_clean_old_files($from = 0)
 {
 	global $config, $SQL, $stat_last_f_del, $dbprefix;
 
-	$ids = array();
-	
+
 	if((int) $config['del_f_day'] <= 0)
 	{
 		return;
@@ -1504,39 +1503,55 @@ function klj_clean_old_files($from = 0)
 		$totaldays	= (time() - ($config['del_f_day']*86400));
 		$not_today	= time() - 86400;
 		
+		
 		$query = array(
-					'SELECT'	=> 'f.id, f.last_down, f.name, f.folder, f.time, f.size',
+					'SELECT'	=> 'f.id, f.last_down, f.name, f.type, f.folder, f.time, f.size',
 					'FROM'		=> "{$dbprefix}files f",
 					'WHERE'		=> "f.last_down < $totaldays AND f.time < $not_today AND f.id > $from",
-					'ORDER BY'	=> 'f.id  ASC',
+					'ORDER BY'	=> 'f.id ASC',
 					'LIMIT'		=> '20',
 					);
-					
-		$result	= $SQL->build($query);
 		
-		($hook = kleeja_run_hook('qr_select_delfiles_cache')) ? eval($hook) : null; //run hook					
+		($hook = kleeja_run_hook('qr_select_klj_clean_old_files_func')) ? eval($hook) : null; //run hook
+		
+		$result	= $SQL->build($query);					
 
 		if($SQL->num_rows($result) == 0)
 		{
 		   	 //update $stat_last_f_del !!
 			$update_query = array(
-						'UPDATE'	=> "{$dbprefix}stats",
-						'SET'		=> "last_f_del ='" . time() . "'",
-						);
+								'UPDATE'	=> "{$dbprefix}stats",
+								'SET'		=> "last_f_del ='" . time() . "'",
+							);
 						
-			($hook = kleeja_run_hook('qr_update_delfiles_date_cache')) ? eval($hook) : null; //run hook
+			($hook = kleeja_run_hook('qr_update_lstf_del_date_kcof')) ? eval($hook) : null; //run hook
 		
 			$SQL->build($update_query);		
 			//delete stats cache
 			delete_cache("data_stats");
-			update_config('klj_clean_files_from', '0');	
+			update_config('klj_clean_files_from', '0');
+			return;
 		}
 		
 		$last_id_from = $num = $sizes = 0;
+		$ids = $ex_ids =  array();
+		$ex_types = explode(',', $config['livexts']);
 
 		//delete files 
 		while($row=$SQL->fetch_array($result))
-		{					
+		{
+			$last_id_from = $row['id'];
+			
+			//excpetions
+			if(in_array($row['type'], $ex_types) || $config['id_form'] == 'direct')
+			{
+				$ex_ids[] = $row['id'];
+				continue;
+			}
+			
+			//your exepctions
+			($hook = kleeja_run_hook('while_klj_clean_old_files_func')) ? eval($hook) : null; //run hook
+			
 			//delete from folder ..
 			if (file_exists($row['folder'] . "/" . $row['name']))
 			{
@@ -1551,29 +1566,40 @@ function klj_clean_old_files($from = 0)
 			$ids[] = $row['id'];
 			$num++;		
 			$sizes += $row['size'];
-			$last_id_from = $row['id'];
+			
 	    }#END WHILE
+		
+		if(sizeof($ex_ids))
+		{
+				$update_query	= array(
+										'UPDATE'	=> "{$dbprefix}files",
+										'SET'		=> "last_down = '" . (time() + 2*86400) . "'",
+										'WHERE'		=> "id IN (" . implode(',', $ids) . ")"
+										);
+				($hook = kleeja_run_hook('qr_update_lstdown_old_files')) ? eval($hook) : null; //run hook						
+				$SQL->build($update_query);
+		}
 		
 		if(sizeof($ids))
 		{
-			$query_del = array('DELETE'	=> "{$dbprefix}files",
-								'WHERE'	=> "id IN (" . implode(',', $ids) . ")",);
-								
-			($hook = kleeja_run_hook('qr_del_delf_old_files')) ? eval($hook) : null; //run hook
-			
-			$SQL->build($query_del);
-
-			//update number of stats
-			$update_query	= array('UPDATE'	=> "{$dbprefix}stats",
-									'SET'		=> "sizes=sizes-$sizes,files=files-$num",
+				$query_del	= array(
+									'DELETE'	=> "{$dbprefix}files",
+									'WHERE'	=> "id IN (" . implode(',', $ids) . ")"
 									);
 									
-			$SQL->build($update_query);
+				//update number of stats
+				$update_query	= array(
+										'UPDATE'	=> "{$dbprefix}stats",
+										'SET'		=> "sizes=sizes-$sizes,files=files-$num",
+										);
+										
+				($hook = kleeja_run_hook('qr_del_delf_old_files')) ? eval($hook) : null; //run hook
+				
+				$SQL->build($query_del);
+				$SQL->build($update_query);
 		}
 		
 		update_config('klj_clean_files_from', $last_id_from);
-		return;
-
     } //stat_del
 
 }

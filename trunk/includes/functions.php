@@ -1566,7 +1566,7 @@ function klj_clean_old_files($from = 0)
 									'SET'		=> "sizes=sizes-$sizes,files=files-$num",
 									);
 									
-			$SQL->build($query_del);
+			$SQL->build($update_query);
 		}
 		
 		update_config('klj_clean_files_from', $last_id_from);

@@ -282,7 +282,8 @@
 				else
 				{
 				*/
-					if(($_POST['style'] != $config['style']) || ($_POST['language'] != $config['language']))
+					if(isset($_POST['style']) && ($_POST['style'] != $config['style']) || isset($_POST['language']) && ($_POST['language'] != $config['language']))
+
 					{
 						delete_cache('', true); //delete all cache to get new style
 					}

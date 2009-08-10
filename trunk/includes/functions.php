@@ -1336,7 +1336,7 @@ function delete_ch_tpl($template_name, $delete_txt = array())
 /*
 * Add new config option
 */
-function add_config ($name, $value, $order = '0', $html = '') 
+function add_config ($name, $value, $order = '0', $html = '', $type = 'other') 
 {
 	global $dbprefix, $SQL, $config;
 	
@@ -1345,9 +1345,9 @@ function add_config ($name, $value, $order = '0', $html = '')
 		return true;
 	}
 	
-	$insert_query = array(	'INSERT'	=> '`name` ,`value` ,`option` ,`display_order`',
+	$insert_query = array(	'INSERT'	=> '`name` ,`value` ,`option` ,`display_order`, `type`',
 							'INTO'		=> "{$dbprefix}config",
-							'VALUES'	=> "'" . $SQL->escape($name) . "','" . $SQL->escape($value) . "', '" . addslashes($html) . "','" . intval($order) . "'");
+							'VALUES'	=> "'" . $SQL->escape($name) . "','" . $SQL->escape($value) . "', '" . addslashes($html) . "','" . intval($order) . "','" . $SQL->escape($type) . "'");
 	delete_cache('data_config');
 	//make it globally ..
 	$config[$name] = $value;
@@ -1364,7 +1364,7 @@ function add_config_r($configs)
 	//array(name=>array(value=>,order=>,html=>),...);
 	foreach($configs as $n=>$m)
 	{
-		add_config($n, $m['value'], $m['order'], $m['html']);
+		add_config($n, $m['value'], $m['order'], $m['html'], $m['type']);
 	}
 }
 

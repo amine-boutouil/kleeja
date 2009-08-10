@@ -131,6 +131,7 @@
 	//include files .. & classes ..
 	$path = dirname(__file__) . '/';
 	$root_path = PATH;
+	include_once ($path . 'version.php');
 	require ($path . 'style.php');
 	require ($path . 'mysql.php');
 	require ($path . 'KljUploader.php');
@@ -318,4 +319,4 @@
 
 	($hook = kleeja_run_hook('end_common')) ? eval($hook) : null; //run hook
 
-?>
+#<-- EOF

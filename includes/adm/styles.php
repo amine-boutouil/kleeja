@@ -153,9 +153,14 @@ switch ($_GET['sty_t'])
 		break; 
 		
 		case "style_orders" :
-		
+			
+			if(empty($_REQUEST['tpl_choose']))
+			{
+				redirect('./');
+			}
+			
 			//edit or del tpl 
-			if(isset($_REQUEST['tpl_choose']))
+			if(isset($_REQUEST['tpl_choose']) && !empty($_REQUEST['tpl_choose']) && isset($_REQUEST['style_id']))
 			{
 				//style id ..fix for zooz
 				$style_id = str_replace('..', '', $_REQUEST['style_id']);

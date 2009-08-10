@@ -28,7 +28,9 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 		}
 					
 		$script_path = ($script_path[0] == '/' ? '..' : '../') . $script_path;
-	
+		
+		$script_path = PATH .  $script_path;
+
 		//get some useful data from vb config file
 		if(file_exists($script_path . '/includes/config.php'))
 		{
@@ -174,6 +176,8 @@ function kleeja_auth_username ($user_id)
 		}
 						
 		$script_path = ($script_path[0] == '/' ? '..' : '../') . $script_path;
+		
+		$script_path = PATH .  $script_path;
 		
 		//get some useful data from vb config file
 		if(file_exists($script_path . '/includes/config.php'))

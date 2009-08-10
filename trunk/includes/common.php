@@ -164,8 +164,11 @@
 	//then get caches
 	require ($path . 'cache.php');
 	
-	//check user or guest
-	$usrcp->kleeja_check_user();
+	if(!defined('IN_LOGIN') && !defined('IN_ADMIN_LOGIN'))
+	{
+		//check user or guest
+		$usrcp->kleeja_check_user();
+	}
 				
 	//no tpl caching in dev stage  
 	if(defined('DEV_STAGE'))

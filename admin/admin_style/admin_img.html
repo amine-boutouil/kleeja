@@ -1,7 +1,6 @@
 <!-- start view images temlate  -->
 <div id="divmiddle">
 <form method="post" action="{action}" name="imgform" onsubmit="javascript:return confirm_from();">
-<fieldset>
 
 <!-- title  -->
 <b>{lang.R_IMG_CTRL}</b>
@@ -26,7 +25,7 @@
 {{tdnum}}
     <td>
 <div class="bg_img"  id="su[{{id}}]">
-    <a href="{{href}}" rel="lightbox"><img src="{{thumb_link}}"  style="width:75px;height:75px"  onmouseover="toolTip('{{name}}<br />{{ups}}<br />{{size}}<br />{{time}}<br />{{user}}<br />{{ip}}',this);"/></a>
+    <a href="{{href}}" class="lightbox" title="{{name}}"><img src="{{thumb_link}}"  style="width:75px;height:75px"  onmouseover="toolTip('{{name}}<br />{{ups}}<br />{{size}}<br />{{time}}<br />{{user}}<br />{{ip}}',this);"/></a>
     <br />
 	<input name="del_{{id}}" type="checkbox" value="{{id}}"  style="float:right" onclick="change_color(this,'su[{{id}}]', 'ored bg_img', 'bg_img');" rel="_del"/>
 </div>
@@ -61,3 +60,17 @@
 
 </div>
 <!-- start view images temlate  -->  
+<script type="text/javascript">
+$(function() {
+	$('a.lightbox').lightBox({
+		overlayBgColor: '#666',
+		overlayOpacity: 0.6,
+		imageLoading: STYLE_PATH_ADMIN+'images/loading.gif',
+		imageBtnClose: STYLE_PATH_ADMIN+'images/close.gif',
+		imageBtnPrev: STYLE_PATH_ADMIN+'images/prevlabel.gif',
+		imageBtnNext: STYLE_PATH_ADMIN+'images/nextlabel.gif',
+		containerResizeSpeed: 350
+	}); 
+
+});
+</script>

@@ -42,9 +42,11 @@ switch ($_GET['sty_t'])
 				{
 					if(strpos($file, '.') === false && $file != '..' && $file != '.')
 					{
-						$arr[] = array(	'style_id' => $file,
-										'style_name'=>  $file . ($config['style'] == $file ? ' [' . $lang['STYLE_IS_DEFAULT'] . ']' : ''),
-										'selected'	=>  ($config['style'] == $file ? 'selected="selected"' : ''),
+						$arr[] = array(	
+										'style_name'	=> $file,
+										'is_default'	=> $config['style'] == $file ? true : false,
+										'link_show_tpls'	=> basename(ADMIN_PATH) . "?cp=styles&amp;sty_t=st&amp;style_choose=" . $file . "&amp;method=1",
+										'link_mk_default'	=> basename(ADMIN_PATH) . "?cp=styles&amp;sty_t=st&amp;style_choose=" . $file . "&amp;method=2",
 									);
 					}
 				}
@@ -141,7 +143,7 @@ switch ($_GET['sty_t'])
 					delete_cache('', true); //delete all cache to get new style
 					
 					//show msg
-					$text = $lang['STYLE_NOW_IS_DEFAULT'] . '<meta HTTP-EQUIV="REFRESH" content="2; url=.' . basename(ADMIN_PATH) . '?cp=styles">' ."\n";
+					$text = sprintf($lang['STYLE_NOW_IS_DEFAULT'], htmlspecialchars($style_id)) . '<meta HTTP-EQUIV="REFRESH" content="2; url=' . basename(ADMIN_PATH) . '?cp=styles">' ."\n";
 					$stylee	= "admin_info";
 						
 				break;

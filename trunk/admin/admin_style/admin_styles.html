@@ -1,6 +1,5 @@
 <div id="divmiddle">
 
-<form method="get" action="{action}">
  <fieldset>
  
  <!-- title  -->
@@ -16,36 +15,37 @@
 
 <table>
 <tr style="background-color:#F5F5F5">
-    <td><b class="small_font">{lang.STYLES_EXP}</b></td>
+    <td>
+		<b class="small_font">{lang.STYLES_EXP}</b>
+	</td>
+	<td>
+	
+	</td>
 </tr>
-<tr>
- <td>
-	<input type="hidden" name="cp" value="styles" />
-    <select name="style_choose" style="direction:ltr;text-align:left">
-    <LOOP NAME="arr">
-		<option value="{{style_id}}" {{selected}}>{{style_name}}</option>
-    </LOOP>
-    </select>
-    <br />
-    <input name="method" value="1" type="radio" checked="checked" /> {lang.SHOW_TPLS}
-    <br />
-    <input name="method" value="2" type="radio" /> {lang.MAKE_AS_DEFAULT}
-</td>
-</tr>
+<LOOP NAME="arr">
+ <tr class="<IF LOOP="is_default">oblue</IF>">
+	 <td>
+		{{style_name}}
+	 </td>
+	 <td>
+	 <a href="{{link_show_tpls}}" title="{lang.SHOW_TPLS}">{lang.SHOW_TPLS}</a> |
+	 <IF LOOP="is_default">
+		 {lang.STYLE_IS_DEFAULT}
+	 <ELSE>
+		<a href="{{link_mk_default}}" title="{lang.MAKE_AS_DEFAULT}">{lang.MAKE_AS_DEFAULT}</a>
+		
+	 </IF>
+	 </td>
+ </tr>
+</LOOP>
 </table>
 
-<!--  button  -->
-<fieldset class="quick" style="text-align:center">
-                <input class="button2"  type="submit" value="{lang.SUBMIT}" />
-</fieldset>
-<!--  button  -->
 
 </div>
 <!-- end div border table  -->
 
 </fieldset>
 
-</form>
 
 <br />
 <!-- start dot  -->

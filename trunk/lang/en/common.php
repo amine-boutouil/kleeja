@@ -492,8 +492,9 @@ $lang = array_merge($lang, array(
 	'CONFIG_KLJ_MENUS_UPLOAD'	=> 'اعدادات التحميل',
 	'CONFIG_KLJ_MENUS_INTERFACE'=> 'خيارات الواجهه والتصميم',
 	'DELF_CAUTION'				=> '<p style="color:red;">تحذير : هذه الخاصيه قد تكون خطره عند وضع ارقام صغيره .</p>',
+	'PLUGIN_N_CMPT_KLJ'			=> 'هذه الاضافه غيره متوافقه مع إصدار كليجا الذي تستخدمه ! .',
 	//last line of this file ...					 
 	'S_TRANSLATED_BY' 			=> 'Translated By <a href="http://www.fenix4web.com/">Fenix4Web</a>',
 ));
 
-?>
+#<-- EOF

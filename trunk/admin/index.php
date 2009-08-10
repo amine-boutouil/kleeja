@@ -22,7 +22,6 @@
 	
 	//include imprtant file ..
 	require_once (PATH . 'includes/common.php');
-	include_once (PATH . 'includes/version.php');
 
 	//go to ..
 	$go_to	= isset($_GET['cp']) ? htmlspecialchars($_GET['cp']) : 'start';
@@ -245,4 +244,5 @@
 	//close db
 	$SQL->close();
 	exit;
-?>
+
+#<-- EOF

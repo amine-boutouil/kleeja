@@ -332,6 +332,11 @@ function creat_plugin_xml($contents)
 				{
 					big_error('Error',$lang['ERR_XML_NO_G_TAGS']);
 				}
+				
+				if(!empty($plg_info['plugin_kleeja_version']['value']) && version_compare(strtolower($plg_info['plugin_kleeja_version']['value']), strtolower(KLEEJA_VERSION), '<='))
+				{
+					big_error('Error', $lang['PLUGIN_N_CMPT_KLJ']);
+				}
 
 					$plg_errors	=	array();
 					$plg_new = true;
@@ -1653,3 +1658,5 @@ if(!function_exists('str_split'))
         return $parts;
     }
 }
+
+#<-- EOF

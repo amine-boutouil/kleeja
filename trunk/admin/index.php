@@ -38,7 +38,7 @@
 	
 
 	//for security
-	if (!$usrcp->name() && !defined('IN_ADMIN_LOGIN_POST'))
+	if (!$usrcp->name() && !$usrcp->admin() && !defined('IN_ADMIN_LOGIN_POST'))
 	{
 		($hook = kleeja_run_hook('user_not_admin_admin_page')) ? eval($hook) : null; //run hook 
 		redirect(PATH . 'ucp.php?go=login&return=' . str_replace(array('?', '/', '='), array('ooklj1oo', 'ooklj2oo', 'ooklj3oo'), ADMIN_PATH . '?cp=' . $go_to));
@@ -78,8 +78,11 @@
 				{
 					$ERRORS[] = $lang['U_NOT_ADMIN'];
 				}
+				elseif(!kleeja_check_form_key('admin_login'))
+				{
+					$ERRORS[] = $lang['INVALID_FORM_KEY'];
+				}
 					
-				
 				if(empty($ERRORS) && USER_ADMIN == 1)
 				{
 					$_SESSION['USER_SESS'] = session_id();
@@ -105,6 +108,7 @@
 			//show template login .
 			//body
 			$action	= './' . basename(ADMIN_PATH) . "?go=login&amp;cp=" . $go_to;
+			$H_FORM_KEYS = kleeja_add_form_key('admin_login');
 			$err = false;
 			if(!empty($errs))
 			{

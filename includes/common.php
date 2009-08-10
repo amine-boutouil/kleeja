@@ -34,7 +34,7 @@
 	
 	//admin path
 	define('ADMIN_PATH', $adminpath);
-	
+		
 	// start session
 	$s_time = 86400 * 2; // 2 : two days 
 	$s_key = (!empty($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '') . (!empty($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : null);
@@ -120,6 +120,12 @@
 	
 	// there is a config
 	require (PATH . 'config.php');
+	
+	//if in acp and integraded
+	if(defined('IN_ADMIN') && isset($script_path))
+	{
+		$script_path = PATH . $script_path;
+	}
 	
 	//no enough data
 	if (!$dbname || !$dbuser)

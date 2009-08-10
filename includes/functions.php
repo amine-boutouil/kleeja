@@ -1539,16 +1539,27 @@ function klj_clean_old_files($from = 0)
 		}
 		
 		$last_id_from = $num = $sizes = 0;
-		$ids = $ex_ids =  array();
-		$ex_types = explode(',', $config['livexts']);
-
+		$ids = array();
+		$ex_ids =  array();
+		//$ex_types = explode(',', $config['livexts']);
+		
+		($hook = kleeja_run_hook('beforewhile_klj_clean_old_files_func')) ? eval($hook) : null; //run hook
+		
 		//delete files 
 		while($row=$SQL->fetch_array($result))
 		{
 			$last_id_from = $row['id'];
 			
+			/*
 			//excpetions
 			if(in_array($row['type'], $ex_types) || $config['id_form'] == 'direct')
+			{
+				$ex_ids[] = $row['id'];
+				continue;
+			}
+			*/
+			
+			if($config['id_form'] == 'direct')
 			{
 				$ex_ids[] = $row['id'];
 				continue;
@@ -1579,7 +1590,7 @@ function klj_clean_old_files($from = 0)
 				$update_query	= array(
 										'UPDATE'	=> "{$dbprefix}files",
 										'SET'		=> "last_down = '" . (time() + 2*86400) . "'",
-										'WHERE'		=> "id IN (" . implode(',', $ids) . ")"
+										'WHERE'		=> "id IN (" . implode(',', $ex_ids) . ")"
 										);
 				($hook = kleeja_run_hook('qr_update_lstdown_old_files')) ? eval($hook) : null; //run hook						
 				$SQL->build($update_query);

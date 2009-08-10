@@ -1,3 +1,16 @@
+
+<!-- markItUp! -->
+<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/markitup/jquery.markitup.pack.js"></script>
+<link rel="stylesheet" type="text/css" href="{STYLE_PATH_ADMIN}js/markitup/skins/markitup/style.css" />
+<link rel="stylesheet" type="text/css" href="{STYLE_PATH_ADMIN}js/markitup/sets/html/style.css" />
+<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/markitup/sets/html/set.js"></script>
+<script type="text/javascript">
+<!--
+$(document).ready(function() { $('#rules_text').markItUp(mySettings); });
+-->
+</script>
+<!-- / markItUp! -->
+
 <!-- start rules temlate  -->
 <div id="divmiddle">
 <form method="post" action="{action}">
@@ -22,7 +35,7 @@
         <tr>
                 <td>
                 <label>
-                <textarea name="rules_text" style="width: 98%; height: 260px;direction:ltr;" >{rules}</textarea>
+                <textarea name="rules_text" id="rules_text" style="height: 260px;" >{rules}</textarea>
                 </label>
                 </td>
         </tr>

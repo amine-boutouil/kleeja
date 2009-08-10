@@ -28,7 +28,7 @@
 		while($row=$SQL->fetch_array($result))
 		{
 
-			$ban = ( isset($_POST["ban_text"]) ) ? $_POST['ban_text'] : $row['ban'];
+			$ban = isset($_POST["ban_text"]) ? htmlspecialchars($_POST['ban_text']) : $row['ban'];
 			
 			//when submit !!
 			if (isset($_POST['submit']))
@@ -57,4 +57,4 @@
 			$stylee	= "admin_info";
 		}
 
-?>
+#<-- EOF

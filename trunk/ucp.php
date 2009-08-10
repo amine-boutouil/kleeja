@@ -27,7 +27,10 @@ if(isset($_GET['go']))
 	}
 }
 
-
+if(isset($_GET['go']) && $_GET['go'] == 'login' && isset($_POST['submit']))
+{
+	define('IN_LOGIN_POST', true);
+}
 
 //include imprtant file .. 
 include ('includes/common.php');

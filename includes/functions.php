@@ -1683,7 +1683,7 @@ function kleeja_log($text, $reset = false)
 	}
 
 	$fp = @fopen(PATH . 'cache/kleeja_log.log', 'a');
-	@fwrite($fp, $text . "\r\n");
+	@fwrite($fp, $text . " [time : " . date('H:i a, d-m-Y') . "] \r\n");
 	@fclose($fp);
 	return;
 }

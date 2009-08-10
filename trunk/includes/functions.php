@@ -928,12 +928,7 @@ function delete_cache($name, $all=false, $deep = false)
 
 	($hook = kleeja_run_hook('delete_cache_func')) ? eval($hook) : null; //run hook
 	
-	$path_to_cache = ($deep ? '.' : '') . './cache';
-	
-	if(defined('IN_ADMIN'))
-	{
-		$path_to_cache = '../' . $path_to_cache;
-	}
+	$path_to_cache = PATH . ($deep ? '.' : '') . './cache';
 	
 	if($all)
 	{
@@ -1675,6 +1670,22 @@ if(!function_exists('str_split'))
         }
         return $parts;
     }
+}
+
+//
+//for logging
+//
+function kleeja_log($text, $reset = false)
+{
+	if(!defined('DEV_STAGE'))
+	{
+		return;
+	}
+
+	$fp = @fopen(PATH . 'cache/kleeja_log.log', 'a');
+	@fwrite($fp, $text . "\r\n");
+	@fclose($fp);
+	return;
 }
 
 #<-- EOF

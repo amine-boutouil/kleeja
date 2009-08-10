@@ -86,7 +86,9 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 						'FROM'		=> "`{$forum_prefix}users`",
 						);
 		($hashed) ? $query2['WHERE'] = "user_id='" . intval($name) . "'  AND user_password='" . $SQLBB->real_escape($pass) . "' " : $query2['WHERE'] = "username_clean='" . utf8_clean_string($name) . "'";
-	
+		
+		$query = "";
+		
 		if(!$hashed)
 		{										
 			$result2 = $SQLBB->build($query2);					
@@ -95,10 +97,6 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 				if(phpbb_check_hash($pass, $row['user_password']))
 				{
 					$query = $query2;
-				}
-				else
-				{
-					$query = "";
 				}
 			}
 		}
@@ -125,6 +123,11 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 					
 		($hashed) ? $query['WHERE'] = "user_id='" . intval($name) . "'  AND user_password='" . $SQLBB->real_escape($pass) . "' " : $query['WHERE'] = "username='" . $SQLBB->real_escape($name) . "' AND user_password='" . md5($pass) . "'";
 								
+	}
+	
+	if(empty($query))
+	{
+		return false;
 	}
 					
 	($hook = kleeja_run_hook('qr_select_usrdata_phpbb_usr_class')) ? eval($hook) : null; //run hook		

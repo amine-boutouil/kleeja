@@ -119,7 +119,12 @@
 </div>
 <IF LOOP="msg_type==error">
 <script type="text/javascript">
-Effect.Pulsate('{{id}}', { pulses: 4.5, duration: 5 });
+$('div#{{id}}').pulse({
+    speed: 500,
+    opacityRange: [0.4,0.9],
+	duration: 7000 // i.e. 7 seconds
+});
+
 </script>
 </IF>
 <!-- start clear  -->

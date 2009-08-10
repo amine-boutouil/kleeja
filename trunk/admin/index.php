@@ -22,7 +22,13 @@
 	
 	//include imprtant file ..
 	require_once (PATH . 'includes/common.php');
-
+	
+	//if in acp and integraded
+	if(isset($script_path))
+	{
+		$script_path = str_replace('.././', './', $script_path);
+	}
+	
 	//go to ..
 	$go_to	= isset($_GET['cp']) ? htmlspecialchars($_GET['cp']) : 'start';
 	$username = $usrcp->name();

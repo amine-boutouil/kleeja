@@ -27,7 +27,8 @@
 		
 	// Report all errors, except notices
 	defined('DEV_STAGE') ? @error_reporting(E_ALL) : @error_reporting(E_ALL ^ E_NOTICE);
-	
+	//Just to check
+	define('IN_PHP6', (version_compare(PHP_VERSION, '6.0.0-dev', '>=') ? true : false));
 		
 	//get admin path from config.php
 	$adminpath = isset($adminpath) ? $adminpath : './admin/index.php';

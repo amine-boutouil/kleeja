@@ -1,7 +1,9 @@
 <?php
 ##################################################
+#						Kleeja 
+#
 # Filename : mysql.php
-# purpose :  controll  mysql database.:
+# purpose :  controll  mysql database.
 # copyright 2007-2009 Kleeja.com ..
 # license http://opensource.org/licenses/gpl-license.php GNU Public License
 # $Author$ , $Rev$,  $Date::                           $
@@ -15,11 +17,10 @@ if (!defined('IN_COMMON'))
 }  
 
 	
-if(!defined("SQL_LAYER")){
+if(!defined("SQL_LAYER")):
 
 define("SQL_LAYER","mysql4");
 
-  
 class SSQL 
 {
 
@@ -423,5 +424,8 @@ class SSQL
 				}
 			
 }#end of class
-}#if
-?>
+
+endif;
+
+#<-- EOF
+

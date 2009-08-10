@@ -103,7 +103,7 @@ if (!defined('IN_COMMON'))
 						'/(<ELSE>|<ELSE \/>)/i' => '<?php }else{ ?>',
 						'#<ODD="([a-zA-Z0-9\_\-\+\./]+)"\>(.*?)<\/ODD\>#is' => "<?php if(intval(\$value['\\1'])%2){?> \\2 <?php } ?>",
 						'#<EVEN="([a-zA-Z0-9\_\-\+\./]+)"\>(.*?)<\/EVEN\>#is' => "<?php if(intval(\$value['\\1'])% 2 == 0){?> \\2 <?php } ?>",
-						'#<RAND=\"(.*?)\"[\s]{0,},[\s]{0,}\"(.*?)\"[\s]{0,}>#is' => "<?php \$KLEEJA_tpl_rand_is=(\$KLEEJA_tpl_rand_is==0)?1:0; print((\$KLEEJA_tpl_rand_is==1) ?'\\1':'\\2'); ?>",
+						'#<RAND=\"(.*?)\"[\s]{0,},[\s]{0,}\"(.*?)\"[\s]{0,}>#is' => "<?php \$KLEEJA_tpl_rand_is=(!isset(\$KLEEJA_tpl_rand_is) || \$KLEEJA_tpl_rand_is==0)?1:0; print((\$KLEEJA_tpl_rand_is==1) ?'\\1':'\\2'); ?>",
 						'/{%(key|value)%}/i' => '<?php echo $\\1; ?>',
 				);
 				

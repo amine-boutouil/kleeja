@@ -19,6 +19,7 @@
 	{
 		define('IN_ADMIN_LOGIN', true);
 	}
+
 	
 	//include imprtant file ..
 	require_once (PATH . 'includes/common.php');
@@ -32,11 +33,13 @@
 	
 
 	//for security
+	/*
 	if (!$usrcp->name())
 	{
 		($hook = kleeja_run_hook('user_not_admin_admin_page')) ? eval($hook) : null; //run hook 
 		redirect(PATH . 'ucp.php?go=login&return=' . str_replace(array('?', '/', '='), array('ooklj1oo', 'ooklj2oo', 'ooklj3oo'), ADMIN_PATH . '?cp=' . $go_to));
 	}
+	*/
 	
 	//need to login again
 	if((empty($_SESSION['ADMINLOGIN']) || $_SESSION['ADMINLOGIN'] != md5($usrcp->name() . $config['siteurl'])) || (empty($_SESSION['USER_SESS']) || $_SESSION['USER_SESS'] != session_id()))
@@ -63,7 +66,7 @@
 				{
 					$ERRORS[] = $lang['EMPTY_FIELDS'];
 				}
-				elseif((!$username && !$usrcp->data($_POST['lname'], $_POST['lpass'], false, $admintime)) || ($username && !$usrcp->data($_POST['lname'], $_POST['lpass'], false, $admintime, true)))
+				elseif((!$username && !$usrcp->data($_POST['lname'], $_POST['lpass'], false, $admintime)) || ($username && !$usrcp->data($_POST['lname'], $_POST['lpass'], false, $admintime)))
 				{
 					$ERRORS[] = $lang['LOGIN_ERROR'];
 				}

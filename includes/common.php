@@ -121,13 +121,7 @@
 	
 	// there is a config
 	require (PATH . 'config.php');
-	
-	//if in acp and integraded
-	if(defined('IN_ADMIN') && isset($script_path))
-	{
-		$script_path = PATH . $script_path;
-	}
-	
+
 	//no enough data
 	if (!$dbname || !$dbuser)
 	{
@@ -148,9 +142,9 @@
 	require ($path . 'functions_display.php');
 
 	//. install.php exists
-	if (file_exists($root_path . 'install') && !defined('IN_ADMIN') && !defined('IN_LOGIN') && !defined('DEV_STAGE'))
+	if (file_exists(PATH . 'install') && !defined('IN_ADMIN') && !defined('IN_LOGIN') && !defined('DEV_STAGE'))
 	{
-		big_error('install folder exists!', '<b>Install</b> folder detected! please delete it OR install <b>Kleeja</b> if you haven\'t done so yet...<br/><br/><a href="' . $root_path . 'install">Click to Install</a><br/><br/>');
+		big_error('install folder exists!', '<b>Install</b> folder detected! please delete it OR install <b>Kleeja</b> if you haven\'t done so yet...<br/><br/><a href="' . PATH . 'install">Click to Install</a><br/><br/>');
 	}
 	
 	//fix intregation problems
@@ -226,7 +220,7 @@
 		if(isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) && strlen($_SERVER['HTTP_ACCEPT_LANGUAGE']) > 2)
 		{
 			$config['language'] = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
-			if(!file_exists($root_path . 'lang/' . $config['language'] . '/common.php'))
+			if(!file_exists(PATH . 'lang/' . $config['language'] . '/common.php'))
 			{
 				$config['language'] = 'en';
 			}
@@ -249,8 +243,8 @@
 		}
 	}
 	
-	$STYLE_PATH = $root_path . 'styles/' . $config['style'] . '/';
-	$STYLE_PATH_ADMIN  =  $root_path  . 'admin/admin_style/';
+	$STYLE_PATH = PATH . 'styles/' . $config['style'] . '/';
+	$STYLE_PATH_ADMIN  = PATH . 'admin/admin_style/';
 	
 	//get languge of common
 	get_lang('common');

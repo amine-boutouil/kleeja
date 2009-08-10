@@ -48,25 +48,38 @@ class SSQL
                           $this->db_password = 'hidden';
 
 
-                        $this->connect_id	= @mysql_connect($this->host, $this->db_username, $db_password, $new_link) or die($this->error_msg("we can not connect to the server ..."));
+                        $this->connect_id = @mysql_connect($this->host, $this->db_username, $db_password, $new_link) or die($this->error_msg("we can not connect to the server ..."));
 						//version of mysql
 						$this->mysql_version = mysql_get_server_info($this->connect_id);
 						
 						if($this->connect_id)
 						{
+							#loggin -> connecting 
+							kleeja_log('[Connected] : ' . $this->connect_id);
+							
 							if(!empty($db_name))
 							{
 								$dbselect = @mysql_select_db($this->db_name) or die($this->error_msg("we can not select database"));
 								
 								if ($dbselect)
 								{
-									if ((!preg_match('/utf/i',strtolower($script_encoding)) && !defined('IN_LOGINPAGE') && !defined('IN_ADMIN_LOGIN') && !defined('DISABLE_INTR')) || (empty($script_encoding) || preg_match('/utf/i',strtolower($script_encoding)) || defined('DISABLE_INTR')))
+									#loggin -> selecting database 
+									kleeja_log('[Selected Database] :' . $this->connect_id);
+									
+									if ((!preg_match('/utf/i', strtolower($script_encoding)) && !defined('IN_LOGINPAGE') && !defined('IN_ADMIN_LOGIN') && !defined('DISABLE_INTR')) || (empty($script_encoding) || preg_match('/utf/i', strtolower($script_encoding)) || defined('DISABLE_INTR')))
 									{
-										mysql_query("SET NAMES 'utf8'");
+										if(mysql_query("SET NAMES 'utf8'"))
+										{
+											#loggin -> set utf8 
+											kleeja_log('[Set to UTF8] :' . $this->connect_id);
+										}
 									}
 								}
 								else if(!$dbselect)
 								{
+									#loggin -> no database -> close connection
+									kleeja_log('[No database, Closing connection] :' . $this->connect_id);
+									
 									mysql_close($this->connect_id);
 									$this->connect_id = $dbselect;
 								}
@@ -94,7 +107,10 @@ class SSQL
 						{
 							mysql_query("COMMIT", $this->connect_id);
 						}
-
+						
+						#loggin -> close connection
+						kleeja_log('[Closing connection] :' . $this->connect_id);
+						
 						return @mysql_close($this->connect_id);
 					}
 					else
@@ -411,6 +427,10 @@ class SSQL
 					echo "<br /><br /><strong>Script: Kleeja <br /><a href='http://www.kleeja.com'>Kleeja Website</a></strong>";
 					echo '</b></div>';
 					echo '</body></html>';
+					
+					#loggin -> error
+					kleeja_log('[SQL ERROR] : "' . $error_no . ' : ' . $error_msg  . '" ' . $this->connect_id);
+					
 					@$this->close();
 					exit();
 				}

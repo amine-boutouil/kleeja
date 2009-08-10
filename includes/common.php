@@ -161,27 +161,18 @@
 	
 	// start classes ..
 	$SQL	= new SSQL($dbserver, $dbuser, $dbpass, $dbname);
+	//no need after now 
+	unset($dbpass);
 	$tpl	= new kleeja_style;
 	$kljup	= new KljUploader;
 	$usrcp	= new usrcp;
-		
-	//no need after now 
-	//unset($dbpass);
 
 	//then get caches
 	require ($path . 'cache.php');
 	
 	//check user or guest
 	$usrcp->kleeja_check_user();
-	// Connect again if kleeja is intergated ..
-	if($config['user_system'] != '1' && !defined('DISABLE_INTR'))
-	{
-		$SQL = new SSQL($dbserver, $dbuser, $dbpass, $dbname);	
-	}
-		
-	//no need after now 
-	unset($dbpass);
-	
+				
 	//no tpl caching in dev stage  
 	if(defined('DEV_STAGE'))
 	{

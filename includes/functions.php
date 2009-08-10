@@ -1336,13 +1336,18 @@ function delete_ch_tpl($template_name, $delete_txt = array())
 /*
 * Add new config option
 */
-function add_config ($name, $value, $order = '0', $html = '', $type = 'other') 
+function add_config ($name, $value, $order = '0', $html = '', $type = 'other', $pharse = '') 
 {
-	global $dbprefix, $SQL, $config;
+	global $dbprefix, $SQL, $config, $lang, $olang;
 	
 	if(isset($config[$name]))
 	{
 		return true;
+	}
+	
+	if(!isset($olang['CONFIG_KLJ_MENUS_' . strtoupper($type)]) || !isset($lang['CONFIG_KLJ_MENUS_' . strtoupper($type)]))
+	{
+		add_olang(array('CONFIG_KLJ_MENUS_' . strtoupper($type) => $pharse));
 	}
 	
 	$insert_query = array(	'INSERT'	=> '`name` ,`value` ,`option` ,`display_order`, `type`',
@@ -1364,7 +1369,7 @@ function add_config_r($configs)
 	//array(name=>array(value=>,order=>,html=>),...);
 	foreach($configs as $n=>$m)
 	{
-		add_config($n, $m['value'], $m['order'], $m['html'], $m['type']);
+		add_config($n, $m['value'], $m['order'], $m['html'], $m['type'], $m['pharse']);
 	}
 }
 

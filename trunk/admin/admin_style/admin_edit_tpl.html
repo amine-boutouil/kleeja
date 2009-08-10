@@ -1,20 +1,15 @@
-<script type="text/javascript" defer="defer">
- function change_editor_height(height, d)
-{
-	var editor  = document.getElementById('template_content');
-	var od_height  = Number(editor.style.height.replace('px' ,''));
-                                
-	if (d == '-') 
-    {
-         editor.style.height  = od_height - height + 'px';
-    }
-    else
-    {
-        editor.style.height  = od_height + height + 'px';        
-    }
-}
-                        
+
+<!-- markItUp! -->
+<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/markitup/jquery.markitup.pack.js"></script>
+<link rel="stylesheet" type="text/css" href="{STYLE_PATH_ADMIN}js/markitup/skins/markitup/style.css" />
+<link rel="stylesheet" type="text/css" href="{STYLE_PATH_ADMIN}js/markitup/sets/html/style.css" />
+<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/markitup/sets/html/set.js"></script>
+<script type="text/javascript">
+<!--
+$(document).ready(function() { $('#template_content').markItUp(mySettings); });
+-->
 </script>
+<!-- / markItUp! -->
 
 <!-- start temlate Extra header and footer  -->
 <div id="divmiddle">
@@ -35,23 +30,16 @@
 
 <!-- start table no hover  -->
 <table class="tab-no-hover">
-
 <tr>
-<td>
-
-<textarea name="template_content" id="template_content"  rows="" style="width:99%; height: 260px;direction:ltr;" >
-{template_content}
-</textarea>
-</td>
+	<td>
+		<textarea name="template_content" id="template_content"  rows="" style="direction:ltr;" >{template_content}</textarea>
+	</td>
 </tr>
 </table>
-<p style="text-align:center">
-<input class="button2" type="button"  onclick="javascript:change_editor_height(100, '+');" value="[+]" />
-<input class="button2" type="button"  onclick="javascript:change_editor_height(100, '-');" value="[-]" />
-<br />
+
 <input type="hidden" name="style_id" value="{style_id}" />
 <input type="hidden" name="tpl_choose" value="{tpl_name}" />
-</p>
+
 
 <!-- go back home -->
 <br />

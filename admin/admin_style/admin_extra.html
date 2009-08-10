@@ -1,3 +1,16 @@
+
+<!-- markItUp! -->
+<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/markitup/jquery.markitup.pack.js"></script>
+<link rel="stylesheet" type="text/css" href="{STYLE_PATH_ADMIN}js/markitup/skins/markitup/style.css" />
+<link rel="stylesheet" type="text/css" href="{STYLE_PATH_ADMIN}js/markitup/sets/html/style.css" />
+<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/markitup/sets/html/set.js"></script>
+<script type="text/javascript">
+<!--
+$(document).ready(function() { $('#ex_header').markItUp(mySettings);$('#ex_footer').markItUp(mySettings); });
+-->
+</script>
+<!-- / markItUp! -->
+
 <!-- start Extra temlate  -->
 <div id="divmiddle">
 
@@ -24,7 +37,7 @@
     <tr>
         <td>
         <label>
-        <textarea id="ex_header" name="ex_header" style="width: 98%; height: 210px;direction:ltr;" >{ex_header}</textarea>
+        <textarea id="ex_header" name="ex_header" style="height: 210px;direction:ltr;" >{ex_header}</textarea>
         </label>
         </td>
     </tr>        
@@ -34,7 +47,7 @@
     <tr>
         <td>
         <label>
-        <textarea id="ex_footer" name="ex_footer" style="width: 98%; height: 210px;direction:ltr;" >{ex_footer}</textarea>
+        <textarea id="ex_footer" name="ex_footer" style="height: 210px;direction:ltr;" >{ex_footer}</textarea>
         </label>
         </td>
     </tr>

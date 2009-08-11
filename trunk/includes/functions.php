@@ -1622,15 +1622,34 @@ function klj_clean_old_files($from = 0)
 
 }
 
-
-
 /*
-	 get_ip() function help security in kleeja
+*	 get_ip() for the user
 */
 function get_ip()
 {
-	global $SQL;
-	return $SQL->escape($_SERVER['REMOTE_ADDR']);
+	$ip = '';
+	if(!empty($_SERVER['REMOTE_ADDR']))
+	{
+		$ip = $_SERVER['REMOTE_ADDR'];
+	}
+	else if (!empty($_SERVER['HTTP_CLIENT_IP']))
+	{
+		$ip = $_SERVER['HTTP_CLIENT_IP'];
+	}
+	else 
+	{
+		$ip = getenv('REMOTE_ADDR');
+		if(getenv('HTTP_X_FORWARDED_FOR'))
+		{
+			if(preg_match("/^([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)/", getenv('HTTP_X_FORWARDED_FOR'), $ip3))
+			{
+				$ip2 = array('/^0\./', '/^127\.0\.0\.1/', '/^192\.168\..*/', '/^172\.16\..*/', '/^10..*/', '/^224..*/', '/^240..*/');
+				$ip = preg_replace($ip2, $ip, $ip3[1]);
+			}
+		}
+	}
+	
+	return preg_replace('/[^0-9a-z.]/i', '', $ip);
 }
 
 //check captcha field after submit

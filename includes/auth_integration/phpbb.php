@@ -129,6 +129,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 	
 	if(empty($query))
 	{
+		$SQLBB->close();
 		return false;
 	}
 					

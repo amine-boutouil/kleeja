@@ -196,6 +196,8 @@ function process ()
 		global $SQL,$dbprefix,$config,$lang;
 		global $use_ftp,$ftp_server,$ftp_user,$ftp_pass,$ch;
 		
+		($hook = kleeja_run_hook('start_process_kljuploader')) ? eval($hook) : null; //run hook	
+		
 		//check prefix 
 		if (preg_match("/{rand:([0-9]+)}/i", $this->filename, $m))
 		{
@@ -314,6 +316,8 @@ function process ()
 					$this->filename2	= $this->filename2[sizeof($this->filename2)-1];
 					$this->typet		= strtolower($this->filename2);
 					$this->sizet		= !empty($_FILES['file']['size'][$i]) ?  $_FILES['file']['size'][$i] : null;
+					
+					($hook = kleeja_run_hook('for_wut1_filesupload_kljuploader')) ? eval($hook) : null; //run hook
 					
 						// decoding
 						if($this->decode == "time")
@@ -443,8 +447,9 @@ function process ()
 					$check 				.= (isset($_POST['file'][$i]) && trim($_POST['file'][$i]) != $lang['PAST_URL_HERE']) ? $_POST['file'][$i] : '';
 					$filename 			= (isset($_POST['file'][$i])) ? basename($_POST['file'][$i]) : '';
 					$this->filename2	= explode(".", $filename);
-								
-								
+					
+					($hook = kleeja_run_hook('for_wut2_filesupload_kljuploader')) ? eval($hook) : null; //run hook			
+					
 					if(in_array($this->filename2[count($this->filename2)-1], array('html', 'php', 'html')))
 					{
 						$this->filename2 = $this->typet = strtolower($this->filename2[count($this->filename2)-2]);
@@ -504,7 +509,9 @@ function process ()
 						}
 						else
 						{
-						
+							
+							($hook = kleeja_run_hook('start_upload_wut2_kljuploader')) ? eval($hook) : null; //run hook
+							
 							//
 							//end err .. start upload from url
 							//

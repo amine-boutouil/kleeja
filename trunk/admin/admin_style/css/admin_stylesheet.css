@@ -341,11 +341,11 @@ display:inline;
 font-size:14px;
 margin:3px;
 padding: 5px 8px 4px 5px; 
-border-top:2px solid #A6D8D1;
-border-bottom:2px solid #A6D8D1;
+border-top:2px solid #FEA53D;
+border-bottom:2px solid #FEA53D;
 border-left:2px solid #FBFFFD;
 border-right:2px solid #FBFFFD;
-background-color: #EAFFFC;
+background-color:#EFE7B8;
 cursor:pointer;
 height: 100px;
 text-align:center;
@@ -366,7 +366,7 @@ text-align:center;
 }
 
 .config_types_list div:hover {
-	background-color: #FFFEEA;
-	border:2px solid #A6D8D1;
+	background-color:#FEFEFE;
+	border:2px solid #FD6813;
 }
 /* / config page */

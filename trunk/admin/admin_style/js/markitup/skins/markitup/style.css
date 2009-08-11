@@ -28,8 +28,7 @@
 	border:3px solid #3C769D;
 	width:643px;
 	height:320px;
-	background-image:url(images/bg-editor.png);
-	background-repeat:no-repeat;
+	background:#FFF url(images/bg-editor.png) no-repeat top left;
 	clear:both; display:block;
 	line-height:18px;
 	overflow:auto;
@@ -131,18 +130,18 @@
 }
 /***************************************************************************************/
 .html .markItUpEditor {
-	background-image:url(images/bg-editor-html.png);
+	background:#FFF url(images/bg-editor-html.png) no-rebort top left;
 }
 .markdown .markItUpEditor {
-	background-image:url(images/bg-editor-markdown.png);
+	background:#FFF url(images/bg-editor-markdown.png) no-rebort top left;
 }
 .textile .markItUpEditor {
-	background-image:url(images/bg-editor-textile.png);
+	background:#FFF url(images/bg-editor-textile.png) no-rebort top left;
 }
 .bbcode .markItUpEditor {
-	background-image:url(images/bg-editor-bbcode.png);
+	background:#FFF url(images/bg-editor-bbcode.png) no-rebort top left;
 }
 .wiki .markItUpEditor,
 .dotclear .markItUpEditor {
-	background-image:url(images/bg-editor-wiki.png);
+	background:#FFF url(images/bg-editor-wiki.png) no-rebort top left;
 }

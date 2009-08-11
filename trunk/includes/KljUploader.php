@@ -313,8 +313,8 @@ function process ()
 				{
 					$check .= isset($_FILES['file']['name'][$i]) ? $_FILES['file']['name'][$i] : '';
 					$this->filename2	= @explode(".", $_FILES['file']['name'][$i]);
-					$this->filename2	= $this->filename2[sizeof($this->filename2)-1];
-					$this->typet		= strtolower($this->filename2);
+					$this->filename2	= strtolower($this->filename2[sizeof($this->filename2)-1]);
+					$this->typet		= $this->filename2;
 					$this->sizet		= !empty($_FILES['file']['size'][$i]) ?  $_FILES['file']['size'][$i] : null;
 					
 					($hook = kleeja_run_hook('for_wut1_filesupload_kljuploader')) ? eval($hook) : null; //run hook

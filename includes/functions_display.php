@@ -428,7 +428,7 @@ function big_error ($error_title,  $msg_text)
 	echo '<div class="error">' . "\n";
 	echo "\n\t\t<h2>Kleeja Error : </h2><br />" . "\n";
 	echo "\n\t\t<strong> [ " . $error_title . ' ] </strong><br /><br />' . "\n\t\t" . $msg_text . "\n\t";
-	echo "\n\t\t" . '<br /><br /><small>Visit <a href="http://www.kleeja.com/">Kleeja Website</a> for more details.</small>' . "\n\t";
+	echo "\n\t\t" . '<br /><br /><small>Visit <a href="http://www.kleeja.com/" title="kleeja">Kleeja</a> Website for more details.</small>' . "\n\t";
 	echo '</div>' . "\n";
 	echo '</body>' . "\n";
 	echo '</html>';
@@ -639,4 +639,4 @@ function get_up_tpl_box($box_name, $extra = array())
 	return $return;
 }
 
-?>
+#<-- EOF

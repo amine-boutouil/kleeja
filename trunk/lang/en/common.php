@@ -493,6 +493,7 @@ $lang = array_merge($lang, array(
 	'CONFIG_KLJ_MENUS_INTERFACE'=> 'خيارات الواجهه والتصميم',
 	'DELF_CAUTION'				=> '<p style="color:red;">تحذير : هذه الخاصيه قد تكون خطره عند وضع ارقام صغيره .</p>',
 	'PLUGIN_N_CMPT_KLJ'			=> 'هذه الاضافه غيره متوافقه مع إصدار كليجا الذي تستخدمه ! .',
+	'PHPINI_FILESIZE_SMALL'		=> 'اعلى حجم يستطيع المستخدمين تحميله لديك "%1$s" بينما إعدادات الـ PHP لديك فيما يتعلق بـ upload_max_filesize هي فقط "%2$s" , قم برفعها ليستطيع المستخدمين رفع الحجم الذي وضعته.',
 	//last line of this file ...					 
 	'S_TRANSLATED_BY' 			=> 'Translated By <a href="http://www.fenix4web.com/">Fenix4Web</a>',
 ));

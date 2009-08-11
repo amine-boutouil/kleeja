@@ -33,6 +33,7 @@
 		$max_execution_time = function_exists('ini_get') ?  @ini_get('max_execution_time') : @get_cfg_var('max_execution_time');
 		$upload_max_filesize= function_exists('ini_get') ?  @ini_get('upload_max_filesize') : @get_cfg_var('upload_max_filesize');
 		$post_max_size 		= function_exists('ini_get') ?  @ini_get('post_max_size') : @get_cfg_var('post_max_size');
+		$memory_limit 		= function_exists('ini_get') ?  @ini_get('memory_limit') : @get_cfg_var('memory_limit');
 		$s_last_google		= ($stat_last_google == 0) ? '[ ? ]' : date("d-m-Y h:i a", $stat_last_google);
 		$s_google_num		= $stat_google_num;
 		$s_last_yahoo		= ($stat_last_yahoo == 0) ? '[ ? ]' : date("d-m-Y h:i a", $stat_last_yahoo);
@@ -62,8 +63,33 @@
 		}
 		
 		
+		//check upload_max_filesize
+		$u_e_s = array_values($u_exts);
+		$g_e_s = array_values($g_exts);
+		asort($u_e_s);
+		asort($g_e_s);
+		if(strpos($upload_max_filesize, 'M') !== false)
+		{
+			$upload_max_filesize_s = ((int) trim(str_replace('M', '', $upload_max_filesize))) * 1048576;
+		}
+		else if(strpos($upload_max_filesize, 'G') !== false)
+		{
+			$upload_max_filesize_s = ((int) trim(str_replace('G', '', $upload_max_filesize))) * 1073741824;
+		}
+		
+		$big_size_is = $u_e_s[0]['size'] > $g_e_s[0]['size'] ? $u_e_s[0]['size'] : $g_e_s[0]['size'];
+		if(!empty($upload_max_filesize) && $upload_max_filesize_s < $big_size_is)
+		{
+			$ADM_NOTIFICATIONS[]  = array(
+									'id' => 'file_size_ini_low',
+									'msg_type'=> 'info', 'title'=> $lang['NOTE'], 
+									'msg'=> sprintf($lang['PHPINI_FILESIZE_SMALL'] , Customfile_size($big_size_is), Customfile_size($upload_max_filesize_s))
+									);
+		}
+	
+		
 		//if 24 hours, lets chcek agian !
-		if((time() - $v['last_check']) > 86400 && !$v['msg_appeared'])
+		if((time() - $v['last_check']) > 86400 && !$v['msg_appeared'] && $_SERVER['SERVER_NAME'] != 'localhost')
 		{
 			redirect(basename(ADMIN_PATH) . '?cp=check_update&show_msg');
 			$SQL->close();
@@ -123,5 +149,4 @@
 		
 		($hook = kleeja_run_hook('default_admin_page')) ? eval($hook) : null; //run hook 
 		
-
-?>
+#<--- EOF

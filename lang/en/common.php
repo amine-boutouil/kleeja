@@ -494,6 +494,7 @@ $lang = array_merge($lang, array(
 	'DELF_CAUTION'				=> '<p style="color:red;">تحذير : هذه الخاصيه قد تكون خطره عند وضع ارقام صغيره .</p>',
 	'PLUGIN_N_CMPT_KLJ'			=> 'هذه الاضافه غيره متوافقه مع إصدار كليجا الذي تستخدمه ! .',
 	'PHPINI_FILESIZE_SMALL'		=> 'اعلى حجم يستطيع المستخدمين تحميله لديك "%1$s" بينما إعدادات الـ PHP لديك فيما يتعلق بـ upload_max_filesize هي فقط "%2$s" , قم برفعها ليستطيع المستخدمين رفع الحجم الذي وضعته.',
+	'PHPINI_MPOSTSIZE_SMALL'	=> 'بما أنك سمحت بتحميل "%1$s" ملفات دفعه واحده , فيجب ان ترفع قيمه post_max_size من اعدادات ال PHP بالخادم لما يقارب "%2$s" لتضمن لكليجا عمل أفضل.',
 	//last line of this file ...					 
 	'S_TRANSLATED_BY' 			=> 'Translated By <a href="http://www.fenix4web.com/">Fenix4Web</a>',
 ));

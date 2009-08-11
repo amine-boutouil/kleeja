@@ -86,8 +86,28 @@
 									'msg'=> sprintf($lang['PHPINI_FILESIZE_SMALL'] , Customfile_size($big_size_is), Customfile_size($upload_max_filesize_s))
 									);
 		}
-	
 		
+		//check post_max_size
+		if(strpos($post_max_size, 'M') !== false)
+		{
+			$post_max_size_s = ((int) trim(str_replace('M', '', $post_max_size))) * 1048576;
+		}
+		else if(strpos($post_max_size, 'G') !== false)
+		{
+			$post_max_size_s = ((int) trim(str_replace('G', '', $post_max_size))) * 1073741824;
+		}
+		
+		$post_max_size_s_must_be = ($config['filesnum'] * $big_size_is) + 5242880;//+ 5 mega to make sure it's ok
+		
+		if(!empty($post_max_size) && $post_max_size_s < $post_max_size_s_must_be)
+		{
+			$ADM_NOTIFICATIONS[]  = array(
+									'id' => 'post_m_size_ini_low',
+									'msg_type'=> 'info', 'title'=> $lang['NOTE'], 
+									'msg'=> sprintf($lang['PHPINI_MPOSTSIZE_SMALL'] , $config['filesnum'], Customfile_size($post_max_size_s_must_be))
+									);		
+		}
+	
 		//if 24 hours, lets chcek agian !
 		if((time() - $v['last_check']) > 86400 && !$v['msg_appeared'] && $_SERVER['SERVER_NAME'] != 'localhost')
 		{

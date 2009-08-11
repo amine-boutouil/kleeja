@@ -24,10 +24,12 @@
 <form action="{action}" method="post">
 
 <div class="reg_table">
+	<IF NAME="NOT_USER">
 	<label>{lang.YOURNAME} :</label>
 	<input class="input_field" type="text" name="cname" value="{t_cname}" size="30" />
 	<label>{lang.EMAIL} :</label>
 	<input class="input_field" type="text" name="cmail" value="{t_cmail}" size="30" />
+	</IF>
 	<label>{lang.TEXT} :</label>
 	<textarea class="input_field" name="ctext" cols="5" rows="5">{t_ctext}</textarea>
 	<div class="clr"></div>

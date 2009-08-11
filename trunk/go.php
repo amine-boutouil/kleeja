@@ -83,6 +83,7 @@ switch ($_GET['go'])
 		$url_id	= ($config['mod_writer']) ? $config['siteurl'] . 'download' . $id_d . '.html' : $config['siteurl'] . 'download.php?id=' . $id_d;
 		$action	= './go.php?go=report';
 		$H_FORM_KEYS = kleeja_add_form_key('report');
+		$NOT_USER = !$usrcp->name() ? true : false; 
 		//no error yet 
 		$ERRORS = false;
 		
@@ -116,15 +117,16 @@ switch ($_GET['go'])
 			{
 				$ERRORS[]	= $lang['WRONG_VERTY_CODE'];
 			}
-			if (empty($_POST['rname']) || empty($_POST['rurl']))
+			if ((empty($_POST['rname']) && $NOT_USER) || empty($_POST['rurl']))
 			{
-				$ERRORS[]	= $lang['EMPTY_FIELDS'] . ' : ' . (empty($_POST['rname']) ? ' [ ' . $lang['YOURNAME'] . ' ] ' : '')  . (empty($_POST['rurl']) ? '  [ ' . $lang['URL']  . ' ] ': '');
+				$ERRORS[]	= $lang['EMPTY_FIELDS'] . ' : ' . (empty($_POST['rname']) && $NOT_USER ? ' [ ' . $lang['YOURNAME'] . ' ] ' : '')  
+									. (empty($_POST['rurl']) ? '  [ ' . $lang['URL']  . ' ] ': '');
 			}
 			if(empty($_POST['rid']))
 			{
 				$ERRORS[]	= $lang['NO_ID'];
 			}
-			if (!eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$", trim(strtolower($_POST['rmail']))))
+			if (isset($_POST['rmail']) &&  !preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/i", trim(strtolower($_POST['rmail']))) && $NOT_USER)
 			{
 				$ERRORS[]	= $lang['WRONG_EMAIL'];
 			}
@@ -136,9 +138,9 @@ switch ($_GET['go'])
 			//no error , lets do process
 			if(empty($ERRORS))
 			{
-					$name	= (string) $SQL->escape($_POST['rname']);
+					$name	= $NOT_USER ? (string) $SQL->escape($_POST['rname']) : $usrcp->name();
 					$text	= (string) $SQL->escape($_POST['rtext']);
-					$mail	= (string) strtolower(trim($SQL->escape($_POST['rmail'])));
+					$mail	= $NOT_USER ? (string) strtolower(trim($SQL->escape($_POST['rmail']))) : $usrcp->mail();
 					$url	= (string) $SQL->real_escape($_POST['rurl']);
 					$time 	= (int) time();
 					$rid	= (int) intval($_POST['rid']);
@@ -197,6 +199,7 @@ switch ($_GET['go'])
 		$titlee	= $lang['CALL'];
 		$action	= "./go.php?go=call";
 		$H_FORM_KEYS = kleeja_add_form_key('call');
+		$NOT_USER = !$usrcp->name() ? true : false; 
 		//no error yet 
 		$ERRORS = false;
 			
@@ -223,11 +226,12 @@ switch ($_GET['go'])
 			{
 				$ERRORS[] = $lang['WRONG_VERTY_CODE'];
 			}
-			if (empty($_POST['cname'])  || empty($_POST['ctext']) )
+			if ((empty($_POST['cname']) && $NOT_USER)  || empty($_POST['ctext']) )
 			{
-				$ERRORS[]	= $lang['EMPTY_FIELDS'] . ' : ' . (empty($_POST['cname']) ? ' [ ' . $lang['YOURNAME'] . ' ] ' : '')  . (empty($_POST['ctext']) ? '  [ ' . $lang['TEXT']  . ' ] ': '');
+				$ERRORS[]	= $lang['EMPTY_FIELDS'] . ' : ' . (empty($_POST['cname']) && $NOT_USER ? ' [ ' . $lang['YOURNAME'] . ' ] ' : '') 
+								. (empty($_POST['ctext']) ? '  [ ' . $lang['TEXT']  . ' ] ': '');
 			}
-			if (!eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$", trim(strtolower($_POST['cmail']))))
+			if (isset($_POST['cmail']) && !preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/i", trim(strtolower($_POST['cmail']))) && $NOT_USER)
 			{
 				$ERRORS[] = $lang['WRONG_EMAIL'];
 			}
@@ -239,9 +243,9 @@ switch ($_GET['go'])
 			//no errors ,lets do process
 			if(empty($ERRORS))
 			{
-				$name	= (string) $SQL->escape($_POST['cname']);
+				$name	= $NOT_USER ? (string) $SQL->escape($_POST['cname']) : $usrcp->name();
 				$text	= (string) $SQL->escape($_POST['ctext']);
-				$mail	= (string) strtolower(trim($SQL->escape($_POST['cmail'])));
+				$mail	= $NOT_USER ? (string) strtolower(trim($SQL->escape($_POST['cmail']))) : $usrcp->mail();
 				$timee	= (int)	time();
 				$ip		=  get_ip();
 					
@@ -275,11 +279,13 @@ switch ($_GET['go'])
 			kleeja_info($lang['NO_DEL_F'], $lang['E_DEL_F']);
 		}
 
-		//ok .. go on
-		//it's must be more strong . saanina check it again !
-		$cd	= $SQL->escape($_GET['cd']); // may.. will protect
+		//examples : 
+		//f2b3a82060a22a80283ed961d080b79f
+		//aa92468375a456de21d7ca05ef945212
+		//
+		$cd	= preg_replace('/[^0-9a-z]/i', '', $SQL->escape($_GET['cd'])); // may.. will protect
 
-		if (!$cd)
+		if (empty($cd))
 		{
 			kleeja_err($lang['WRONG_URL']);
 		}
@@ -295,7 +301,7 @@ switch ($_GET['go'])
 					
 				($hook = kleeja_run_hook('qr_select_file_with_code_del')) ? eval($hook) : null; //run hook	
 				
-				$result	=	$SQL->build($query);
+				$result	= $SQL->build($query);
 
 				if ($SQL->num_rows($result) != 0)
 				{
@@ -325,6 +331,8 @@ switch ($_GET['go'])
 							$SQL->build($update_query);
 							kleeja_info($lang['DELETE_SUCCESFUL']);
 						}
+						
+						break;//to prevent divel actions
 					}
 				
 					$SQL->freeresult($result);
@@ -336,7 +344,7 @@ switch ($_GET['go'])
 						function confirm_from()
 						{
 						if(confirm(\'' . $lang['ARE_YOU_SURE_DO_THIS'] . '\'))
-							window.location = "go.php?go=del&sure=ok&cd='.$cd.'";
+							window.location = "go.php?go=del&sure=ok&cd=' . $cd . '";
 						else
 							window.location = "index.php";
 						}
@@ -408,4 +416,5 @@ switch ($_GET['go'])
 		echo $tpl->display($stylee);
 	//footer
 	Saafooter();
-?>
+
+#<-- EOF

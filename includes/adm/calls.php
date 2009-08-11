@@ -47,7 +47,7 @@
 				$arr[] = array( 'id' 		=> $row['id'],
 								'name' 		=> $row['name'],
 								'mail' 		=> $row['mail'],
-								'text' 		=> $row['text'],
+								'text' 		=> htmlspecialchars($row['text']),
 								'time' 		=> gmdate("d-m-Y H:a", $row['time']),
 								'ip' 		=> $row['ip'],
 								'ip_finder'	=> 'http://www.ripe.net/whois?form_type=simple&full_query_string=&searchtext=' . $row['ip'] . '&do_search=Search'
@@ -112,4 +112,4 @@
 			$stylee	= "admin_info";
 	}
 
-?>
+#<-- EOF

@@ -131,6 +131,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 			}#nums_sql2
 			else
 			{
+				$SQLVB->close();
 				return false;
 			}
 			}

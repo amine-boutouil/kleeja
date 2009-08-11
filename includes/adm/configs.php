@@ -119,14 +119,13 @@
 			}
 										
 			$result = $SQL->build($query);
-
+			$thmb_dim_w =  $thmb_dim_h = 0;
 			while($row=$SQL->fetch_array($result))
 			{
-				$i++;
+				//$i++;
 				//make new lovely array !!
 				$con[$row['name']] = $row['value'];
 				
-				$thmb_dim_w =  $thmb_dim_h = 0;
 				if($row['name'] == 'thmb_dims') 
 				{
 					list($thmb_dim_w, $thmb_dim_h) = @explode('*', $con['thmb_dims']);
@@ -223,6 +222,11 @@
 												'SET'		=> "value='" . $SQL->escape($new[$row['name']]) . "'",
 												'WHERE'		=> "name='" . $row['name'] . "'"
 											);
+											
+						if(isset($_GET['type']) && $_GET['type'] != 'all')
+						{
+							$query['WHERE'] .= " AND type = '" . $SQL->escape($_GET['type']) . "'";
+						}
 
 						$SQL->build($update_query);
 					}

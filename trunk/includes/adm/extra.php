@@ -28,8 +28,8 @@
 		
 		while($row=$SQL->fetch_array($result))
 		{
-			$ex_headere = ( isset($_POST["ex_header"]) ) ? $_POST['ex_header'] : $row['ex_header'];
-			$ex_footere = ( isset($_POST["ex_footer"]) ) ? $_POST['ex_footer'] : $row['ex_footer'];
+			$ex_headere = isset($_POST["ex_header"]) ? $_POST['ex_header'] : $row['ex_header'];
+			$ex_footere = isset($_POST["ex_footer"]) ? $_POST['ex_footer'] : $row['ex_footer'];
 			
 			$ex_header = htmlspecialchars($ex_headere);
 			$ex_footer = htmlspecialchars($ex_footere);
@@ -40,7 +40,7 @@
 				//update
 				$update_query = array(
 									'UPDATE'	=> "{$dbprefix}stats",
-									'SET'		=> "ex_header = '" . $ex_headere . "', ex_footer = '" . $ex_footere . "'"
+									'SET'		=> "ex_header = '" . $SQL->escape($ex_headere) . "', ex_footer = '" . $SQL->escape($ex_footere) . "'"
 								);
 
 				if ($SQL->build($update_query))
@@ -60,4 +60,4 @@
 			$stylee	= "admin_info";
 		}
 		
-?>
+#<--- EOF

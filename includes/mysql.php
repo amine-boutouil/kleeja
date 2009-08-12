@@ -116,6 +116,11 @@ class SSQL
 						return false;
 					}
 				}
+				
+				function set_utf8()
+				{
+					@mysql_query("SET NAMES 'utf8'", $this->connect_id)
+				}
 
 				/*
 				the query func . its so important to do 

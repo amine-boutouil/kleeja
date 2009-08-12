@@ -2,11 +2,11 @@
 ##################################################
 #						Kleeja 
 #
-# Filename : mysql.php
-# purpose :  controll  mysql database.
+# Filename : mysqli.php
+# purpose :  controll mysql database by mysqli extension.
 # copyright 2007-2009 Kleeja.com ..
 # license http://opensource.org/licenses/gpl-license.php GNU Public License
-# $Author$ , $Rev$,  $Date::                           $
+# $Author: saanina $ , $Rev: 782 $,  $Date:: 2009-08-11 01:23:06 +0300#$
 ##################################################
 
 
@@ -19,7 +19,7 @@ if (!defined('IN_COMMON'))
 	
 if(!defined("SQL_LAYER")):
 
-define("SQL_LAYER","mysql4");
+define("SQL_LAYER","mysqli");
 
 class SSQL 
 {
@@ -35,60 +35,45 @@ class SSQL
 
 				/*
 				initiate the class
-				wirth basic data
+				with basic data
 				*/
-                function SSQL($host, $db_username, $db_password, $db_name, $new_link=false)
+                function SSQL($host, $db_username, $db_password, $db_name, $new_link = false)
 				{
 					global $script_encoding;
-                          $this->host        = $host;
-                          $this->db_username = $db_username;
-                          $this->db_name     = $db_name;
-                          $this->db_password = 'hidden';
+					
+					$this->host        = $host;
+					$this->db_username = $db_username;
+					$this->db_name     = $db_name;
+					$this->db_password = 'hidden';
 
 
-                        $this->connect_id = @mysql_connect($this->host, $this->db_username, $db_password, $new_link) or die($this->error_msg("we can not connect to the server ..."));
-						//version of mysql
-						$this->mysql_version = mysql_get_server_info($this->connect_id);
+					$this->connect_id = @mysqli_connect($this->host, $this->db_username, $db_password, $this->db_name);
+					
+					if(!$this->connect_id)
+					{
+						#loggin -> no database -> close connection
+						kleeja_log('[No connection, Closing connection] : -->');
+						$this->close();
+						$this->error_msg("we can not connect to the server ...");
+						return;
+					}
+					//version of mysql
+					$this->mysql_version = mysqli_get_server_info($this->connect_id);
 						
-						if($this->connect_id)
-						{
-							#loggin -> connecting 
-							kleeja_log('[Connected] : ' . $this->connect_id);
-							
-							if(!empty($db_name))
-							{
-								$dbselect = @mysql_select_db($this->db_name) or die($this->error_msg("we can not select database"));
-								
-								if ($dbselect)
-								{
-									#loggin -> selecting database 
-									kleeja_log('[Selected Database] :' . $this->connect_id);
-									
-									if ((!preg_match('/utf/i', strtolower($script_encoding)) && !defined('IN_LOGINPAGE') && !defined('IN_ADMIN_LOGIN') && !defined('DISABLE_INTR')) || (empty($script_encoding) || preg_match('/utf/i', strtolower($script_encoding)) || defined('DISABLE_INTR')))
-									{
-										if(mysql_query("SET NAMES 'utf8'"))
-										{
-											#loggin -> set utf8 
-											kleeja_log('[Set to UTF8] :' . $this->connect_id);
-										}
-									}
-								}
-								else if(!$dbselect)
-								{
-									#loggin -> no database -> close connection
-									kleeja_log('[No database, Closing connection] :' . $this->connect_id);
-									
-									mysql_close($this->connect_id);
-									$this->connect_id = $dbselect;
-								}
-							}
+					#loggin -> connecting 
+					kleeja_log('[Connected] : --> ');
 
-							return $this->connect_id;
-						}
-						else
+	
+					if ((!preg_match('/utf/i', strtolower($script_encoding)) && !defined('IN_LOGINPAGE') && !defined('IN_ADMIN_LOGIN') && !defined('DISABLE_INTR')) || (empty($script_encoding) || preg_match('/utf/i', strtolower($script_encoding)) || defined('DISABLE_INTR')))
+					{
+						if(mysqli_set_charset($this->connect_id, 'utf8'))
 						{
-							return false;
+							#loggin -> set utf8 
+							kleeja_log('[Set to UTF8] : --> ');
 						}
+					}
+
+					return $this->connect_id;
 				}
 
 				/*
@@ -96,20 +81,20 @@ class SSQL
 				*/
                 function close()
 				{		
-					if( $this->connect_id )
+					if($this->connect_id)
 					{
 						//
 						// Commit any remaining transactions
 						//
-						if( $this->in_transaction )
+						if($this->in_transaction)
 						{
-							mysql_query("COMMIT", $this->connect_id);
+							mysqli_commit($this->connect_id);
 						}
 						
 						#loggin -> close connection
-						kleeja_log('[Closing connection] :' . $this->connect_id);
+						kleeja_log('[Closing connection] : -->');
 						
-						return @mysql_close($this->connect_id);
+						return @mysqli_close($this->connect_id);
 					}
 					else
 					{
@@ -121,25 +106,22 @@ class SSQL
 				the query func . its so important to do 
 				the quries and give results
 				*/
-                function query($query, $transaction = FALSE)
+                function query($query, $transaction = false)
 				{
 					//
 					// Remove any pre-existing queries
 					//
 					unset($this->result);
 
-
-					
 					if(!empty($query))
 					{
 						//debug .. //////////////
-						$srartum_sql	=	get_microtime();
+						$srartum_sql = get_microtime();
 						////////////////
 						
-						if( $transaction == 1 && !$this->in_transaction )
+						if($transaction == 1 && !$this->in_transaction)
 						{
-							$result = mysql_query("BEGIN", $this->connect_id);
-							if(!$result)
+							if(!mysqli_autocommit($this->connect_id, false))
 							{
 								return false;
 							}
@@ -147,7 +129,7 @@ class SSQL
 							$this->in_transaction = TRUE;
 						}
 
-						$this->result = mysql_query($query, $this->connect_id);
+						$this->result = mysqli_query($this->connect_id, $query);
 						
 						//debug .. //////////////
 						$this->debugr[$this->query_num+1] = array($query, sprintf('%.5f', get_microtime() - $srartum_sql));
@@ -162,7 +144,7 @@ class SSQL
 					{
 						if( $transaction == 2 && $this->in_transaction )
 						{
-							$this->result = mysql_query("COMMIT", $this->connect_id);
+							$this->result = mysqli_commit($this->connect_id);
 						}
 					}
 					
@@ -171,26 +153,24 @@ class SSQL
 					{
 						if($transaction == 2 && $this->in_transaction)
 						{
-							$this->in_transaction = FALSE;
+							$this->in_transaction = false;
 
-							if (!mysql_query("COMMIT", $this->connect_id))
+							if (!mysqli_commit($this->connect_id))
 							{
-								mysql_query("ROLLBACK", $this->connect_id);
+								mysqli_rollback($this->connect_id);
 								return false;
 							}
 						}
 						
 						$this->query_num++;
-		
-						
 						return $this->result;
 					}
 					else
 					{
-						if( $this->in_transaction )
+						if($this->in_transaction)
 						{
-							mysql_query("ROLLBACK", $this->connect_id);
-							$this->in_transaction = FALSE;
+							mysqli_rollback($this->connect_id);
+							$this->in_transaction = false;
 						}
 						return false;
 					}
@@ -268,22 +248,23 @@ class SSQL
 				}
 
 					/*
-					free the memmory from the last results
+						free the memmory from the last results
 					*/
 					function free($query_id = 0)
 					{
 						return $this->freeresult($query_id);
 					}
+					
 					function freeresult($query_id = 0)
 					{
-						if( !$query_id )
+						if(!$query_id)
 						{
 							$query_id = $this->result;
 						}
 
-						if ( $query_id )
+						if ($query_id)
 						{
-							mysql_free_result($query_id);
+							mysqli_free_result($query_id);
 
 							return true;
 						}
@@ -304,14 +285,14 @@ class SSQL
 				
                 function fetch_array($query_id = 0)
 				{
-                 	if( !$query_id )
+                 	if(!$query_id)
 					{
 						$query_id = $this->result;
 					}
 
-					if( $query_id )
+					if($query_id)
 					{
-						return mysql_fetch_array($query_id, MYSQL_ASSOC);
+						return mysqli_fetch_array($query_id, MYSQLI_ASSOC);
 					}
 					else
 					{
@@ -325,12 +306,12 @@ class SSQL
 				*/
                 function num_rows($query_id = 0)
 				{
-					if( !$query_id )
+					if(!$query_id)
 					{
 						$query_id = $this->result;
 					}
 
-					return ( $query_id ) ? mysql_num_rows($query_id) : false;
+					return $query_id ? mysqli_num_rows($query_id) : false;
                 }
 
 				
@@ -339,7 +320,7 @@ class SSQL
 				*/
                 function insert_id()
 				{
-					return ( $this->connect_id ) ? mysql_insert_id($this->connect_id) : false;
+					return $this->connect_id ? mysqli_insert_id($this->connect_id) : false;
                 }
 
 				/*
@@ -347,7 +328,6 @@ class SSQL
 				*/
 				function escape($msg)
 				{
-
 					$msg = htmlspecialchars($msg , ENT_QUOTES);
 					$msg = (!get_magic_quotes_gpc()) ? addslashes ($msg) : $msg;
 					return $msg;
@@ -358,20 +338,12 @@ class SSQL
 				*/
 				function real_escape($msg)
 				{
-					if (is_array($msg))
+					if (is_array($msg) && !$this->connect_id)
 					{
-						return '';
-					}
-					else if (function_exists('mysql_real_escape_string'))
-					{
-						return mysql_real_escape_string($msg, $this->connect_id);
-					}
-					else
-					{
-						// because mysql_escape_string doesnt escape % & _[php.net/mysql_escape_string]
-						return addcslashes(mysql_escape_string($msg),'%_');
+						return $msg;
 					}
 
+					return addcslashes(mysqli_real_escape_string($this->connect_id, $msg),'%_');
 				}
 				
 				/*
@@ -379,14 +351,14 @@ class SSQL
 				*/
 				function affected()
 				{
-					return ( $this->connect_id ) ? mysql_affected_rows($this->connect_id) : false;
+					return $this->connect_id ? mysqli_affected_rows($this->connect_id) : false;
 				}
 				/*
 				get the information of mysql server
 				*/
 				function server_info()
 				{
-					return 'MySQL ' . $this->mysql_version;
+					return 'MySQLi ' . $this->mysql_version;
 				}
 
 				/*
@@ -401,8 +373,8 @@ class SSQL
 						return;
 					}
 					
-					$error_no  = mysql_errno();
-					$error_msg = mysql_error();
+					$error_no  = mysqli_errno($this->connect_id);
+					$error_msg = mysqli_error($this->connect_id);
 					$error_sql = @current($this->debugr[$this->query_num+1]);
 					
 					//some ppl want hide their table names
@@ -428,7 +400,7 @@ class SSQL
 					echo '</body></html>';
 					
 					#loggin -> error
-					kleeja_log('[SQL ERROR] : "' . $error_no . ' : ' . $error_msg  . '" ' . $this->connect_id);
+					kleeja_log('[SQL ERROR] : "' . $error_no . ' : ' . $error_msg  . '" -->');
 					
 					@$this->close();
 					exit();
@@ -439,7 +411,7 @@ class SSQL
 				*/
 				function get_error()
 				{
-					return array(mysql_errno(), mysql_error()); 
+					return array(mysqli_errno($this->connect_id), mysqli_error($this->connect_id)); 
 				}
 			
 }#end of class

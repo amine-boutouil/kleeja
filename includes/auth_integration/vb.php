@@ -61,10 +61,11 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 	}
 				
 	$SQLVB	= new SSQL($forum_srv, $forum_user, $forum_pass, $forum_db, true);
+	
 	if(!preg_match('/utf/i',strtolower($script_encoding)))
 	{
-		$charset_db = @mysql_client_encoding($SQLVB->connect_id);
-		mysql_query("SET NAMES '" . $charset_db . "'");
+		$charset_db = $SQLVB->client_encoding();
+		$SQLVB->set_names($charset_db);
 	}
 	//$mysql_version = @mysql_get_server_info($SQLVB->connect_id);
 				
@@ -84,6 +85,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 			
 	($hook = kleeja_run_hook('qr_select_usrdata_vb_usr_class')) ? eval($hook) : null; //run hook				
 	$result_salt = $SQLVB->build($query_salt);
+	$SQLVB->freeresult($result_salt); 
 				
 	if ($SQLVB->num_rows($result_salt) > 0) 
 	{

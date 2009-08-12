@@ -102,9 +102,22 @@ class SSQL
 					}
 				}
 				
+				/*
+					encoding functions
+				*/
 				function set_utf8()
 				{
-					@mysqli_set_charset($this->connect_id, 'utf8');
+					return $this->set_names('utf8');
+				}
+				
+				function set_names($charset)
+				{
+					@mysqli_set_charset($this->connect_id, $charset);
+				}
+				
+				function client_encoding()
+				{
+					return mysqli_client_encoding($this->connect_id);
 				}
 				
 				/*

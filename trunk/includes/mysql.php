@@ -64,7 +64,7 @@ class SSQL
 									#loggin -> selecting database 
 									kleeja_log('[Selected Database] :' . $this->connect_id);
 									
-									if ((!preg_match('/utf/i', strtolower($script_encoding)) && !defined('IN_LOGINPAGE') && !defined('IN_ADMIN_LOGIN') && !defined('DISABLE_INTR')) || (empty($script_encoding) || preg_match('/utf/i', strtolower($script_encoding)) || defined('DISABLE_INTR')))
+									if ((!preg_match('/utf/i', strtolower($script_encoding)) && !defined('IN_LOGINPAGE') && !defined('IN_ADMIN_LOGIN') && !defined('DISABLE_INTR')) || ((empty($script_encoding) || preg_match('/utf/i', strtolower($script_encoding)) || defined('DISABLE_INTR'))))
 									{
 										if(mysql_query("SET NAMES 'utf8'"))
 										{
@@ -122,6 +122,7 @@ class SSQL
 				*/
 				function set_utf8()
 				{
+					echo $this->connect_id;
 					return $this->set_names('utf8');
 				}
 				

@@ -327,14 +327,8 @@ class SSQL
 						$query_id = $this->result;
 					}
 
-					if( $query_id )
-					{
-						return mysql_fetch_array($query_id, MYSQL_ASSOC);
-					}
-					else
-					{
-						return false;
-					}
+					return is_resource($query_id) ?  mysql_fetch_array($query_id, MYSQL_ASSOC) : false;
+		
                 }
 
 				/*
@@ -348,7 +342,7 @@ class SSQL
 						$query_id = $this->result;
 					}
 
-					return ( $query_id ) ? mysql_num_rows($query_id) : false;
+					return is_resource($query_id) ? mysql_num_rows($query_id) : false;
                 }
 
 				
@@ -357,7 +351,7 @@ class SSQL
 				*/
                 function insert_id()
 				{
-					return ( $this->connect_id ) ? mysql_insert_id($this->connect_id) : false;
+					return ($this->connect_id) ? mysql_insert_id($this->connect_id) : false;
                 }
 
 				/*

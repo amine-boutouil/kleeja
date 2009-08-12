@@ -119,7 +119,7 @@ class SSQL
 				
 				function set_utf8()
 				{
-					@mysql_query("SET NAMES 'utf8'", $this->connect_id)
+					@mysql_query("SET NAMES 'utf8'", $this->connect_id);
 				}
 
 				/*

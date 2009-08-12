@@ -104,7 +104,7 @@ class SSQL
 				
 				function set_utf8()
 				{
-					@mysqli_set_charset($this->connect_id, 'utf8')
+					@mysqli_set_charset($this->connect_id, 'utf8');
 				}
 				
 				/*

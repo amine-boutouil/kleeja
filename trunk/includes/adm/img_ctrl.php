@@ -45,12 +45,13 @@
 		$query['WHERE']	= "type IN ('gif','jpg','png','bmp','jpeg','tif','tiff','GIF','JPG','PNG','BMP','JPEG','TIF','TIFF')";
 	}
 		
-	$result = $SQL->build($query);
+	$result_p = $SQL->build($query);
 	
 	
 	$nums_rows = 0;
-	$n_fetch = $SQL->fetch_array($result);
+	$n_fetch = $SQL->fetch_array($result_p);
 	$nums_rows = $n_fetch['total_files'];
+	$SQL->freeresult($result_p);
 
 	//pager
 	$currentPage = isset($_GET['page']) ? intval($_GET['page']) : 1;

@@ -90,6 +90,8 @@
 			$num++;		
 			$sizes += $row['size'];
 		}
+		
+		$SQL->freeresult($result);
 			
 		if($num == 0)
 		{
@@ -110,7 +112,7 @@
 								'WHERE'	=> "id IN (" . implode(',', $ids) . ")",);
 									
 			$SQL->build($query_del);
-			$SQL->freeresult($result);
+			//$SQL->freeresult($result);
 			
 			$langdeleted = sprintf($lang['ADMIN_DELETE_FILES_OK'], $num);
 			kleeja_admin_info($langdeleted);
@@ -188,11 +190,12 @@
 		$query['WHERE'] .= "AND f.type NOT IN ('gif','jpg','png','bmp','jpeg','tif','tiff','GIF','JPG','PNG','BMP','JPEG','TIF','TIFF')";
 	}
 
-	$result = $SQL->build($query);
+	$result_p = $SQL->build($query);
 	
 	$nums_rows = 0;
-	$n_fetch = $SQL->fetch_array($result);
+	$n_fetch = $SQL->fetch_array($result_p);
 	$nums_rows = $n_fetch['total_files'];
+	$SQL->freeresult($result_p);
 
 	//pager 
 	$currentPage = (isset($_GET['page']))? intval($_GET['page']) : 1;

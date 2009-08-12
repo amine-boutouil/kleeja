@@ -373,6 +373,8 @@ switch ($_GET['go'])
 									'i'=> $i,
 							);
 				}
+				
+				$SQL->freeresult($result_p);
 				$SQL->freeresult($result);
 			}
 			else #nums_rows
@@ -497,7 +499,9 @@ switch ($_GET['go'])
 							
 						$SQL->build($update_query);
 					}
-				}			
+				}
+				
+				$SQL->freeresult($result_p);
 				$SQL->freeresult($result);
 				
 				($hook = kleeja_run_hook('end_filecp')) ? eval($hook) : null; //run hook
@@ -737,6 +741,8 @@ switch ($_GET['go'])
 								($hook = kleeja_run_hook('qr_update_newpass_get_pass')) ? eval($hook) : null; //run hook
 								$SQL->build($update_query);
 							}
+							
+							$SQL->freeresult($result);
 							
 							//send it
 							$send =  send_mail($to, $message, $subject, $config['sitemail'], $config['sitename']);

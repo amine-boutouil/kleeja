@@ -1537,6 +1537,7 @@ function klj_clean_old_files($from = 0)
 			//delete stats cache
 			delete_cache("data_stats");
 			update_config('klj_clean_files_from', '0');
+			$SQL->freeresult($result);
 			return;
 		}
 		
@@ -1586,6 +1587,8 @@ function klj_clean_old_files($from = 0)
 			$sizes += $row['size'];
 			
 	    }#END WHILE
+		
+		$SQL->freeresult($result);
 		
 		if(sizeof($ex_ids))
 		{

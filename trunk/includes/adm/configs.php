@@ -231,6 +231,8 @@
 						$SQL->build($update_query);
 					}
 			}
+			
+			$SQL->freeresult($result);
 			$types = array();
 			
 			foreach($optionss as $key => $option)
@@ -266,7 +268,7 @@
 			}
 
 			
-			$SQL->freeresult($result);
+			//$SQL->freeresult($result);
 			
 			//after submit
 			if (isset($_POST['submit']))

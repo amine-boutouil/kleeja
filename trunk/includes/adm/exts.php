@@ -27,10 +27,10 @@
 						'FROM'		=> "{$dbprefix}exts",
 				);
 									
-		$result = $SQL->build($query);
+		$result_p = $SQL->build($query);
 		
 		/////////////pager 
-		$nums_rows		= $SQL->num_rows($result);
+		$nums_rows		= $SQL->num_rows($result_p);
 		$currentPage	= (isset($_GET['page']))? intval($_GET['page']) : 1;
 		$Pager			= new SimplePager($perpage, $nums_rows, $currentPage);
 		$start			= $Pager->getStartRow();
@@ -58,7 +58,7 @@
 	
 							);
 			}
-			
+			$SQL->freeresult($result_p);
 			$SQL->freeresult($result);
 		
 		}
@@ -135,6 +135,7 @@
 				$text = sprintf($lang['NEW_EXT_EXISTS_B4'], $new_ext_i);
 				$text .= '<meta HTTP-EQUIV="REFRESH" content="2; url=' . basename(ADMIN_PATH) . '?cp=exts">' ."\n";
 				$stylee	= "admin_err";
+				$SQL->freeresult($result);
 			}
 			else
 			{

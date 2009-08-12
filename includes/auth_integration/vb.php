@@ -85,7 +85,6 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 			
 	($hook = kleeja_run_hook('qr_select_usrdata_vb_usr_class')) ? eval($hook) : null; //run hook				
 	$result_salt = $SQLVB->build($query_salt);
-	$SQLVB->freeresult($result_salt); 
 				
 	if ($SQLVB->num_rows($result_salt) > 0) 
 	{

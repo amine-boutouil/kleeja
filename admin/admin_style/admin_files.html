@@ -6,28 +6,40 @@
 <form method="post" name="filesform" action="{action}" onsubmit="javascript:return confirm_from();">
 
 <fieldset>
+<!-- start div border table  -->
+<div id="border-table">
+<!-- title  -->
+<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/files_button.gif" />{lang.R_FILES}</h2>
+<!-- title  -->
 
 <IF NAME="is_search">
 <img src="{STYLE_PATH_ADMIN}images/search_button.gif" ><strong> {lang.SEARCH_FILES} ( {nums_rows} )</strong>
  | <a href="{deletelink}" onclick="javascript:return confirm_from();">{lang.DELETEALLRES}</a>
 <ELSE>
-<!-- title  -->
-<b>{lang.R_FILES}</b>
-<!-- title  -->
+
 </IF>
+
 <a href="{page2_action}&amp;order_way=1"><img src="{STYLE_PATH_ADMIN}images/arrow_up.png"></a>
 <a href="{page2_action}"><img src="{STYLE_PATH_ADMIN}images/arrow_down.png"></a>
-<!-- border line Vertical  -->
-<hr id="hr-border" />
-<!-- border line Vertical  -->
 
-<!-- start div border table  -->
-<div id="border-table">
+
+<!-- start clear  -->
+<div class="clr"></div>
+<!-- end clear  -->
+
+<!-- start dot  -->
+<p class="dot" />
+<!-- end dot  -->
+
+<!-- start clear  -->
+<div class="clr"></div>
+<!-- end clear  -->
+
 <IF NAME="no_results">
 ...
 <ELSE>
 
-<table style="text-align:center;">
+<table class="allfile_table">
     <tr style="background-color:#E4E4E4">
         <td><a href="{ord_action}&amp;order_by=real_filename">{lang.FILENAME}</a></td>
         <td><a href="{ord_action}&amp;order_by=user">{lang.BY}</a></td>
@@ -37,14 +49,14 @@
         <td><a href="{ord_action}&amp;order_by=time">{lang.FILEDATE}</a></td>
         <td><a href="{ord_action}&amp;order_by=type">{lang.FILETYPE}</a></td>
         <td><a href="{ord_action}&amp;order_by=folder">{lang.FILDER}</a></td>
-        <td><a href="{ord_action}&amp;order_by=report">{lang.REPORT}</a></td>
+        <td><a href="{ord_action}&amp;order_by=report">{lang.NUMPER_REPORT}</a></td>
         <td><a href="javascript:void(0);" onclick="checkAll(document.filesform, '_del', 'su');">{lang.DELETE}</a></td>
     </tr>
 <LOOP NAME="arr">
     <tr id="su[{{id}}]" class="osilver">
 		<td>{{name}}</td>
         <td>{{user}}</td>
-        <td>{{ip}} {{showfilesbyip}}</td>
+        <td>{{ip}}<small>{{showfilesbyip}}</small></td>
         <td>{{size}}</td>
         <td>{{ups}}</td>
         <td>{{time}}</td>
@@ -56,16 +68,25 @@
 </LOOP>
 </IF>
 </table>
-</div>
+
+<!-- start clear  -->
+<div class="clr"></div>
+<!-- end clear  -->
+
+<!-- start dot  -->
+<p class="dot" />
+<!-- end dot  -->
+
+<!-- start clear  -->
+<div class="clr"></div>
+<!-- end clear  -->
 
 <!-- start pagination  -->
-<div style="text-align:center">{page_nums}
+<strong style="text-align:center">{page_nums}</strong>
 <fieldset class="quick"><input class="button2" name="submit" type="submit" value="{lang.UPDATE_FILES}" /></fieldset>
-</div>
 <!-- end pagination  -->
 
-
-
+</div>
 
 </fieldset>
 </form>

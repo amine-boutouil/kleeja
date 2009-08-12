@@ -15,18 +15,21 @@ $(document).ready(function() { $('#template_content').markItUp(mySettings); });
 <div id="divmiddle">
 
 <form method="post" action="{action}">
-    <fieldset>
 
-<!-- title   -->
-<b>{lang.EDIT} :: {tpl_name} :</b>
-<!-- title   -->
-
-<!-- border line Vertical  -->
-<hr id="hr-border" />
-<!-- border line Vertical  -->
+<fieldset>
 
 <!-- start div border table  -->
 <div  id="border-table">
+
+<!-- title   -->
+<h2>{lang.EDIT} :: {tpl_name} :</h2>
+<!-- title   -->
+
+<!-- border line Vertical  -->
+<p class="dot" />
+<!-- border line Vertical  -->
+
+
 
 <!-- start table no hover  -->
 <table class="tab-no-hover">
@@ -40,6 +43,9 @@ $(document).ready(function() { $('#template_content').markItUp(mySettings); });
 <input type="hidden" name="style_id" value="{style_id}" />
 <input type="hidden" name="tpl_choose" value="{tpl_name}" />
 
+<!-- border line Vertical  -->
+<p class="dot" />
+<!-- border line Vertical  -->
 
 <!-- go back home -->
 <br />

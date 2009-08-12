@@ -18,45 +18,57 @@ $(document).ready(function() { $('#ex_header').markItUp(mySettings);$('#ex_foote
 
 <fieldset>
 
+<!-- start div border table  -->
+<div id="border-table">
+
 <!-- title  -->
-<b>{lang.R_EXTRA} :</b>
+<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/extra_button.gif" />{lang.R_EXTRA} :</h2>
 <!-- title  -->
 
 <!-- border line Vertical  -->
-<hr id="hr-border" />
+<p class="dot" />
 <!-- border line Vertical  -->
+
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
+
+<label class="small_font" for="ex_header">{lang.EX_HEADER_N}</label>
+<br />
+<textarea id="ex_header" name="ex_header" style="height:210px;direction:ltr;" >{ex_header}</textarea>
+
+<!-- start button  -->
+<fieldset class="quick" style="text-align:center">
+<input class="button2" name="submit" type="submit" value="{lang.UPDATE_EXTRA}" />
+</fieldset>
+<!-- end button  -->
+
+</div>
+<!-- end div border table  -->
+
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
 
 <!-- start div border table  -->
 <div id="border-table">
 
-<!-- start table no hover -->
-<table class="tab-no-hover">
-    <tr>
-        <td><label class="small_font" for="ex_header">{lang.EX_HEADER_N}</label></td>
-    </tr>
-    <tr>
-        <td>
-        <label>
-        <textarea id="ex_header" name="ex_header" style="height: 210px;direction:ltr;" >{ex_header}</textarea>
-        </label>
-        </td>
-    </tr>        
-    <tr>
-        <td><label class="small_font" for="ex_footer">{lang.EX_FOOTER_N}</label></td>
-    </tr>
-    <tr>
-        <td>
-        <label>
-        <textarea id="ex_footer" name="ex_footer" style="height: 210px;direction:ltr;" >{ex_footer}</textarea>
-        </label>
-        </td>
-    </tr>
-</table>
-<!-- end table no hover -->
+<!-- title  -->
+<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/extra_button.gif" />{lang.R_EXTRA} :</h2>
+<!-- title  -->
+
+<!-- border line Vertical  -->
+<p class="dot" />
+<!-- border line Vertical  -->
+
+<br />
+<label class="small_font" for="ex_footer">{lang.EX_FOOTER_N}</label>
+<br />
+<textarea id="ex_footer" name="ex_footer" style="height: 210px;direction:ltr;" >{ex_footer}</textarea>
 
 <!-- start button  -->
 <fieldset class="quick" style="text-align:center">
-                <input class="button2" name="submit" type="submit" value="{lang.UPDATE_EXTRA}" />
+<input class="button2" name="submit" type="submit" value="{lang.UPDATE_EXTRA}" />
 </fieldset>
 <!-- end button  -->
 

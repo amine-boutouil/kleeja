@@ -6,12 +6,17 @@
 
 <!-- start div border table  -->
 <div id="border-table">
+
 <!-- title   -->
-<span style="font-size:18px;color:#6496C3"><a href="index.php?cp=options">{lang.R_CONFIGS}</a></span><IF NAME="CONFIGEXTEND"> » {CONFIGEXTENDLANG} </IF>
+<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/options_button.gif" />{lang.R_CONFIGS}
+<IF NAME="CONFIGEXTEND">
+<span class="small_font"> » {CONFIGEXTENDLANG}</span>
+</IF>
+</h2>
 <!-- title   -->
 
 <!-- start clear  -->
-<div class="clr"></div><br />
+<div class="clr"></div>
 <!-- end clear  -->
 
 <!--- START CHOOSING STAGE -->
@@ -67,14 +72,14 @@
 </fieldset>
 <!-- end button  -->
 
-</div>
-<!-- end div border table  -->
-
-</fieldset>
 </form>
 
 </IF>
 <!--- / END EDIT STAGE -->
+
+</div>
+<!-- end div border table  -->
+</fieldset>
 
 </div>
 <!-- end setting temlate  -->

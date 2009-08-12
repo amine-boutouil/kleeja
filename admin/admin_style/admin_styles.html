@@ -2,35 +2,39 @@
 
  <fieldset>
  
- <!-- title  -->
-<b>{lang.R_STYLES}</b>
- <!-- title  -->
- 
- <!-- border line Vertical  -->
-<hr id="hr-border" />
-<!-- border line Vertical  -->
-
 <!-- start div border table  -->
 <div  id="border-table">
 
-<table>
-<tr style="background-color:#F5F5F5">
-    <td>
-		<b class="small_font">{lang.STYLES_EXP}</b>
-	</td>
-	<td>
+ <!-- title  -->
+<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/styles_button.gif" />{lang.R_STYLES}</h2>
+ <!-- title  -->
+ 
+<!-- start dot  -->
+<p class="dot" />
+<!-- end dot  -->
+
+<!-- start clear  -->
+<div class="clr"></div>
+<!-- end clear  -->
 	
-	</td>
-</tr>
+<div class="small_font">{lang.STYLES_EXP}</div>
+
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
+
+<table>
+
 <LOOP NAME="arr">
- <tr class="<IF LOOP="is_default">oblue</IF>">
+ <tr class="<IF LOOP="is_default" >oblue</IF>">
 	 <td>
-		{{style_name}}
+		<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/style_name.png" />{{style_name}}
 	 </td>
 	 <td>
-	 <a href="{{link_show_tpls}}" title="{lang.SHOW_TPLS}">{lang.SHOW_TPLS}</a> |
+	 <a href="{{link_show_tpls}}" title="{lang.SHOW_TPLS}">
+	 <img class="imgtitle" src="{STYLE_PATH_ADMIN}images/show_tpls.gif" />{lang.SHOW_TPLS}</a> |
 	 <IF LOOP="is_default">
-		 {lang.STYLE_IS_DEFAULT}
+		{lang.STYLE_IS_DEFAULT} <img class="imgtitle" src="{STYLE_PATH_ADMIN}images/default_style.png" />
 	 <ELSE>
 		<a href="{{link_mk_default}}" title="{lang.MAKE_AS_DEFAULT}">{lang.MAKE_AS_DEFAULT}</a>
 		
@@ -40,30 +44,30 @@
 </LOOP>
 </table>
 
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
 
 </div>
 <!-- end div border table  -->
 
-</fieldset>
-
-
-<br />
-<!-- start dot  -->
-<p class="dot" />
-<!-- end dot  -->
-<br />
-
-<fieldset>
-
-<b>{lang.TPLS_RE_BASIC} : </b>
-
-<!-- border line Vertical  -->
-<hr id="hr-border" />
-<!-- border line Vertical  -->
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
 
 <!-- start div border table  -->
 <div  id="border-table">
-	
+
+<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/styles_button.gif" />{lang.TPLS_RE_BASIC} : </h2>
+
+<!-- start dot  -->
+<p class="dot" />
+<!-- end dot  -->
+
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
+
 <table>
 <tr>
 	<td>header.html</td>
@@ -81,15 +85,20 @@
 
 <br />
 <!--  button  -->
-<p style="text-align:center">
-<a class="button2" href="{show_all_tpls_action}">{lang.SHOW_TPLS}</a></p>
+<div style="text-align:center"><a class="button2" href="{show_all_tpls_action}">{lang.SHOW_TPLS}</a></div>
 <!--  button  -->
 
-<br />
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
+
 <!-- start dot  -->
 <p class="dot" />
 <!-- end dot  -->
-<br />
+
+<!-- start clear  -->
+<div class="clr"></div>
+<!-- end clear  -->
 
 <!-- text for user ... -->
 <div id="system-message">
@@ -101,9 +110,12 @@
 </div>
 <!-- text for user ... -->
 
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
+
 </div>
 <!-- end div border table  -->
 
 </fieldset>
-
 </div>

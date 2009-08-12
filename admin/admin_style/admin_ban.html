@@ -6,25 +6,26 @@
 
 <fieldset>
 
-<!-- title and notice  -->	
-<b class="small_font">{lang.R_BAN} :</b><label for="sitename">{lang.BAN_EXP1}</label>
-<!-- title and notice  -->	
-
-<!-- border line Vertical  -->
-<hr id="hr-border" />
-<!-- border line Vertical  -->
-
 <!-- start div border table  -->
 <div  id="border-table">
 
+<!-- title and notice  -->	
+<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/ban_button.gif" />{lang.R_BAN} :</h2>
+<!-- title and notice  -->	
+
+<!-- border line Vertical  -->
+<p class="dot" />
+<!-- border line Vertical  -->
+
+<br />
+
+<label for="sitename">{lang.BAN_EXP1}</label>
+
+<br /><br />
+
 <!-- start table no hover  -->
-<table class="tab-no-hover">
-    <tr>
-    <td><label>
-			<textarea name="ban_text" style="width: 97%; height: 100px;direction:ltr;" >{ban}</textarea>
-	</label></td>
-    </tr>
-</table>
+<textarea name="ban_text" style="width:99%; height: 100px;direction:ltr;" >{ban}</textarea>
+
 <!-- end table no hover  -->
 <br />
 <!--  notice  -->	

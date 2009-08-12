@@ -1,18 +1,24 @@
 <!-- start search temlate  -->
 <div id="divmiddle">
-<form method="post" action="{action1}">
 <fieldset>
 
-<!-- title  -->
-<b>{lang.SEARCH_FILES} :</b>
-<!-- title  -->
-
-<!-- border line Vertical  -->
-<hr id="hr-border" />
-<!-- border line Vertical  -->
+<form method="post" action="{action1}">
 
 <!-- start div border table  -->
 <div id="border-table">
+
+<!-- title  -->
+<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/search_button.gif" />{lang.SEARCH_FILES} :</h2>
+<!-- title  -->
+
+<!-- start dot  -->
+<p class="dot" />
+<!-- end dot  -->
+
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
+
 
 <!-- start table no hover  -->
 <table>
@@ -62,34 +68,33 @@
 </div>
 <!-- end div border table  -->
 
-</fieldset>
-
 </form>
 <!-- end search temlate  -->
 
 
-<br />
-<!-- start dot  -->
-<p class="dot" />
-<!-- end dot  -->
-<br />
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
 
 
 <!-- start users search temlate  -->
 <IF NAME="default_user_system">
 <form method="post" action="{action2}">
-<fieldset>
-
-<!-- title  -->
-<b>{lang.SEARCH_USERS} :</b>
-<!-- title  -->
-
-<!-- border line Vertical  -->
-<hr id="hr-border" />
-<!-- border line Vertical  -->
 
 <!-- start div border table  -->
 <div id="border-table">
+
+<!-- title  -->
+<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/search_button.gif" />{lang.SEARCH_USERS} :</h2>
+<!-- title  -->
+
+<!-- start dot  -->
+<p class="dot" />
+<!-- end dot  -->
+
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
 
 <!-- start table no hover  -->
 <table>
@@ -113,9 +118,9 @@
 </div>
 <!-- end div border table  -->
 
-</fieldset>
-
 </form>
 </IF>
+
+</fieldset>
 </div>
 <!-- end users search temlate  -->     

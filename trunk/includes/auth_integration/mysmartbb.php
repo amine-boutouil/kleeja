@@ -64,8 +64,9 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 
 	if(!preg_match('/utf/i',strtolower($script_encoding)))
 	{
-		$charset_db = @mysql_client_encoding($SQLMS->connect_id);
-		mysql_query("SET NAMES '" . $charset_db . "'");
+		$charset_db = $SQLMS->client_encoding();
+		$SQLMS->set_names($charset_db);
+
 	}
 	
 	if(!function_exists('iconv') && !preg_match('/utf/i',strtolower($script_encoding)))

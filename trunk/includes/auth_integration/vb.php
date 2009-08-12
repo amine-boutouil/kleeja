@@ -22,7 +22,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 	if(isset($script_path))
 	{				
 		//check for last slash
-		if($script_path[strlen($script_path)] == '/')
+		if(isset($script_path[strlen($script_path)]) && $script_path[strlen($script_path)] == '/')
 		{
 			$script_path = substr($script_path, 0, strlen($script_path));
 		}

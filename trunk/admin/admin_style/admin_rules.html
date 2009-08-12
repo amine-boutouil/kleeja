@@ -16,35 +16,31 @@ $(document).ready(function() { $('#rules_text').markItUp(mySettings); });
 <form method="post" action="{action}">
 <fieldset>
 
-<!-- title  -->
-<b>{lang.R_RULES} :</b>
-<!-- title  -->
-
-<!-- border line Vertical  -->
-<hr id="hr-border" />
-<!-- border line Vertical  -->
-
 <!-- start div border table  -->
 <div id="border-table">
 
+<!-- title  -->
+<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/rules_button.gif" />{lang.R_RULES} :</h2>
+<!-- title  -->
+
+<!-- start dot  -->
+<p class="dot" />
+<!-- end dot  -->
+
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
+
 <!-- start table no hover  -->
-<table class="tab-no-hover">
-        <tr>
-                <td><label for="sitename">{lang.RULES_EXP}</label></td>
-        </tr>
-        <tr>
-                <td>
-                <label>
-                <textarea name="rules_text" id="rules_text" style="height: 260px;" >{rules}</textarea>
-                </label>
-                </td>
-        </tr>
-</table>
-<!-- end table no hover  -->
+<label class="small_font">{lang.RULES_EXP}</label>
+<!-- start clear  -->
+<div class="clr"></div>
+<!-- end clear  -->
+<textarea name="rules_text" id="rules_text" style="direction:ltr;height: 260px;" >{rules}</textarea>
 
 <!-- button  -->
 <fieldset class="quick" style="text-align:center">
-                <input class="button2" name="submit" type="submit" value="{lang.UPDATE_RULES}" />
+ <input class="button2" name="submit" type="submit" value="{lang.UPDATE_RULES}" />
 </fieldset>
 <!-- button  -->
 

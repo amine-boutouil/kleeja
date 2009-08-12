@@ -432,11 +432,11 @@ $lang = array_merge($lang, array(
 	'ADMIN_DELETE_FILE_OK'	=> 'تم حذف كافة ملفات العضو',
 	'ADMIN_DELETE_FILES'	=> 'حذف كل ملفات العضوية',
 	
-	'KLJ_MORE_PLUGINS'	=> array('قم بالحصول على الكثير من الاضافات من مركز الاضافات في موقع كليجا ,<a target="_blank" href="http://www.kleeja.com/plugins/">إضغط هنا للذهاب لهناك</a> .',
-								'هل أنت مطور ؟ هل قمت بتطوير اضافات لكليجا وتريد عرضها للأخرين أو تريد بيعها في مركز كليجا للاضافات ؟ اذن <a target="_blank" href="http://www.kleeja.com/plugins/">إضغط هنا للذهاب لهناك</a>. ',
+	'KLJ_MORE_PLUGINS'	=> array('قم بالحصول على الكثير من الاضافات من مركز الاضافات في موقع كليجا ,<a target="_blank" href="http://www.kleeja.com/plugins/">إضغط هنا ..! </a> .',
+								'هل أنت مطور ؟ هل قمت بتطوير اضافات لكليجا وتريد عرضها للأخرين أو تريد بيعها في مركز كليجا للاضافات ؟ اذن <a target="_blank" href="http://www.kleeja.com/plugins/">إضغط هنا ..! </a>. ',
 								),
-	'KLJ_MORE_STYLES'	=> array('قم بالحصول على الكثير من الستايلات من معرض الستايلات في موقع كليجا ,<a target="_blank" href="http://www.kleeja.com/styles/">إضغط هنا للذهاب لهناك</a> .',
-							 'هل أنت مصمم ؟ هل تريد عرض ستايلاتك في في معرض كليجا للجميع مجانا او بمقابل ؟  إذن <a target="_blank" href="http://www.kleeja.com/styles/">إضغط هنا للذهاب لهناك</a> .',
+	'KLJ_MORE_STYLES'	=> array('قم بالحصول على الكثير من الستايلات من معرض الستايلات في موقع كليجا ,<a target="_blank" href="http://www.kleeja.com/styles/">إضغط هنا ..! </a> .',
+							 'هل أنت مصمم ؟ هل تريد عرض ستايلاتك في في معرض كليجا للجميع مجانا او بمقابل ؟  إذن <a target="_blank" href="http://www.kleeja.com/styles/">إضغط هنا ..! </a> .',
 							 ),
 	'CHECK_ALL'	 => 'تحديد الكل',
 	'BCONVERTER' => 'آلة حاسبة لتحويل الأحجام',
@@ -462,7 +462,7 @@ $lang = array_merge($lang, array(
 	'FILES_DELETED' 			=> 'تم حذف الملفات المحدده بنجاح !',
 	'GUIDE_GROUPS' 			    => 'مجموعة',
 	'ALL_FILES' 			    => 'عدد جميع الملفات',
-	'SHOWFILESBYIP'				=> 'عرض الملفات لهذا الـ IP', 
+	'SHOWFILESBYIP'				=> 'عرض  ملفات الـ IP', 
 	'DELETEALLRES'				=> 'حذف كل النتائج',
 	'ADMIN_DELETE_FILES_OK'     => 'تم حذف %s ملف بنجاح',
 	'ADMIN_DELETE_FILES_NOF'	=> 'لاتوجد نتائج للقيام بعملية الحذف',
@@ -479,6 +479,7 @@ $lang = array_merge($lang, array(
 	'PLUGIN_N_CMPT_KLJ'			=> 'هذه الاضافه غيره متوافقه مع إصدار كليجا الذي تستخدمه ! .',
 	'PHPINI_FILESIZE_SMALL'		=> 'اعلى حجم يستطيع المستخدمين تحميله لديك "%1$s" بينما إعدادات الـ PHP لديك فيما يتعلق بـ upload_max_filesize هي فقط "%2$s" , قم برفعها ليستطيع المستخدمين رفع الحجم الذي وضعته.',
 	'PHPINI_MPOSTSIZE_SMALL'	=> 'بما أنك سمحت بتحميل "%1$s" ملفات دفعه واحده , فيجب ان ترفع قيمه post_max_size من اعدادات ال PHP بالخادم لما يقارب "%2$s" لتضمن لكليجا عمل أفضل.',
+	'NUMPER_REPORT' 			=> 'عدد البلاغات',
 	));
 
 #<-- EOF

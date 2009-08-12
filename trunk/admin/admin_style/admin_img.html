@@ -2,25 +2,38 @@
 <div id="divmiddle">
 <form method="post" action="{action}" name="imgform" onsubmit="javascript:return confirm_from();">
 
-<!-- title  -->
-<b>{lang.R_IMG_CTRL}</b>
-[ <a href="javascript:void(0);" onclick="checkAll(document.imgform, '_del', 'su', 'ored bg_img', 'bg_img');">{lang.CHECK_ALL}</a> ]
-<!-- title  -->
-
-<!-- border line Vertical  -->
-<hr id="hr-border" />
-<!-- border line Vertical  -->
+<fieldset>
 
 <!-- start div border table  -->
 <div id="border-table">
 
+<!-- title  -->
+<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/img_ctrl_button.gif" />{lang.R_IMG_CTRL}</h2>
+
+<!-- border line Vertical  -->
+<p class="dot" />
+<!-- border line Vertical  -->
+
+<br /><br />
+
+[ <a href="javascript:void(0);" onclick="checkAll(document.imgform, '_del', 'su', 'ored bg_img', 'bg_img');">{lang.CHECK_ALL}</a> ]
+<!-- title  -->
+
+<!-- start dot  -->
+<p class="dot" />
+<!-- end dot  -->
+
+<!-- start clear  -->
+<div class="clr"></div>
+<!-- end clear  -->
+
 <!-- start table no hover  -->
 <table class="tab-no-hover" style="text-align:center">
 <IF NAME="no_results">
-    <td>...</td>
+    <tr><td>...</td></tr>
 <ELSE>
    
-   
+   <tr style="text-align:center;">   
 <LOOP NAME="arr">
 {{tdnum}}
     <td>
@@ -32,7 +45,7 @@
     </td>
 {{tdnum2}}
 </LOOP>
-    
+    </tr>   
 </IF>
 <tr>
 <td>
@@ -41,6 +54,15 @@
 </tr>
 </table>
 <!-- end table no hover  -->
+
+<!-- start dot  -->
+<p class="dot" />
+<!-- end dot  -->
+
+<!-- start clear  -->
+<div class="clr"></div>
+<!-- end clear  -->
+
 
 <!-- start pagination  -->
 <div style="text-align:center">{page_nums}</div>
@@ -55,6 +77,7 @@
 </div>
 <!-- end div border table  -->
 </fieldset>
+
 
 </form>
 

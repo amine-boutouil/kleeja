@@ -4,7 +4,7 @@ function show_msg (te , id)
 var te = document.getElementById(te).value;
 var iee = te;
         iee += "<br /><br /><form method='post' action='{action}'><textarea name='v_" + id + "' cols='50' rows='4'></textarea>";
-        iee += "<input class='button2' name='reply_submit' type='submit' value='{lang.REPLY}' /></form>";        
+        iee += "<br /><br /><input class='button2' name='reply_submit' type='submit' value='{lang.REPLY}' /></form>";        
 document.getElementById('mail_here').innerHTML = iee;
 
 }
@@ -12,33 +12,51 @@ document.getElementById('mail_here').innerHTML = iee;
 
 <!-- start view reborts  -->
 <div id="divmiddle">
+
 <fieldset>
-
-<!-- title  -->
-<b>{lang.TEXT} :</b>
-<!-- title  -->
-
-<!-- border line Vertical  -->
-<hr id="hr-border" />
-<!-- border line Vertical  -->
-
-<div id="mail_here">{lang.E_CLICK}</div>
-
-</fieldset>
-     
-<form method="post" name="reportform" action="{action}">
-<fieldset>
-
-<!-- title  -->
-<b>{lang.R_REPORTS}</b>
-<!-- title  -->
-
-<!-- border line Vertical  -->
-<hr id="hr-border" />
-<!-- border line Vertical  -->
 
 <!-- start div border table  -->
 <div id="border-table">
+
+<!-- title  -->
+<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/reports_button.gif" />{lang.TEXT} :</h2>
+<!-- title  -->
+
+<!-- start dot  -->
+<p class="dot" />
+<!-- end dot  -->
+
+<!-- start clear  -->
+<div class="clr"></div>
+<!-- end clear  -->
+
+<div id="mail_here">{lang.E_CLICK}</div>
+
+</div>
+<!-- end div border table  -->
+     
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->	 
+	 
+	 
+<form method="post" name="reportform" action="{action}">
+
+<!-- start div border table  -->
+<div id="border-table">
+
+<!-- title  -->
+<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/reports_button.gif" />{lang.R_REPORTS}</h2>
+<!-- title  -->
+
+<!-- start dot  -->
+<p class="dot" />
+<!-- end dot  -->
+
+<!-- start clear  -->
+<div class="clr"></div>
+<!-- end clear  -->
+
 
 <table style="text-align:center">
     <tr style="background-color:#E4E4E4">
@@ -69,7 +87,7 @@ document.getElementById('mail_here').innerHTML = iee;
 </table>
 
 <!--  pagination  -->
-<div style="text-align:center"><b>{page_nums}</b></div>
+<div style="text-align:center"><p>{page_nums}</p></div>
 <!--  pagination  -->
 
 <!--  button  -->
@@ -80,9 +98,7 @@ document.getElementById('mail_here').innerHTML = iee;
 
 </div>
 <!-- end div border table  -->
-
-</fieldset>
 </form>
-
+</fieldset>
 </div>
 <!-- end view reborts  -->

@@ -3,40 +3,52 @@
 
 <fieldset>
 
-<!-- title  -->
-<b>{lang.R_LANGS} :</b>
-<!-- title  -->
-
-<!-- border line Vertical  -->
-<hr id="hr-border" />
-<!-- border line Vertical  -->
-
 <!-- start div border table  -->
 <div id="border-table">
 
-<form action="{action2}" method="post">
-	<select name="lang">
-		{lngfiles}
-	</select>
-	  <input class="button2"  type="submit" value="{lang.UPDATE}" />
-</form>
+<!-- title  -->
+<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/langs_button.gif" />{lang.R_LANGS} :</h2>
+<!-- title  -->
 
-<form method="post" action="{action}">
+<!-- start dot  -->
+<p class="dot" />
+<!-- end dot  -->
 
 <!-- start clear  -->
 <div class="clr"></div>
 <!-- end clear  -->
 
-<table style="width: 100%">
+
+<form action="{action2}" method="post">
+	<select name="lang">
+		{lngfiles}
+	</select>
+	  &nbsp;&nbsp;<input class="button2"  type="submit" value="{lang.UPDATE}" />
+</form>
+
+<!-- start clear  -->
+<div class="clr"></div><br />
+
+<!-- start dot  -->
+<p class="dot" />
+<!-- end dot  -->
+
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
+
+<form method="post" action="{action}">
+
+<table style="width:90%;text-align:center">
 <IF NAME="no_results">
 ...
 <ELSE>
 <LOOP NAME="arr">
     <tr style="background-color:<RAND="#D8EBFD","#fff">" class="">
         <td>#<em>{{lang_id}}</em></td>
-        <td class="s_box_tpls">{{word}}</td>
-		<td style="text-align:center"> <strong>=</strong> </td>
-        <td><label><input type="text" name="t_{{word}}" value="{{trans}}" size="60" ></label></td>
+        <td><span class="s_box_tpls">{{word}}</span></td>
+		<td> <strong>=</strong> </td>
+        <td><label><input type="text" name="t_{{word}}" value="{{trans}}" size="56" ></label></td>
         <td><input type="checkbox" name="del_{{word}}" value="1"> {lang.DELETE}</td>
     </tr>
 </LOOP>

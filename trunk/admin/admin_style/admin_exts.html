@@ -4,16 +4,18 @@
 <form method="post" action="{action}">
 <fieldset>
 
-<!-- title  -->
-<b>{lang.R_EXTS} :</b>
-<!-- title  -->
-
-<!-- border line Vertical  -->
-<hr id="hr-border" />
-<!-- border line Vertical  -->
-
 <!-- start div border table  -->
 <div id="border-table">
+
+<!-- title  -->
+<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/exts_button.gif" />{lang.R_EXTS} :</h2>
+<!-- title  -->
+
+<!-- border line Vertical  -->
+<p class="dot" />
+<!-- border line Vertical  -->
+
+<br />
 
 <!-- start admin ext info tr extra -->
 <table style="text-align:center">
@@ -44,7 +46,7 @@
  
  <!-- start pagination  -->
 <div>
-<b>{arr_paging}</b>
+<span>{arr_paging}</span>
 <fieldset class="quick" style="text-align:center"><input class="button2" name="submit" type="submit" value="{lang.UPDATE_EXTS}" /></fieldset>
 </div>
 <!-- end pagination  -->
@@ -61,7 +63,15 @@
 <p class="dot" />
 <!-- end dot  -->
  
+</div>
+<!-- end div border table  -->
 
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
+
+<!-- start div border table  -->
+<div id="border-table">
 
 <script type="text/javascript" src="includes/admin_style/byte.js"></script>
 <script type="text/javascript">
@@ -99,22 +109,16 @@ function convertgb(f)
 </script>
 
 
-
-<!-- border line Vertical  -->
-<hr id="hr-border" />
-<!-- border line Vertical  -->
-
-
 <!-- title  -->
-<b>{lang.BCONVERTER} :</b>
+<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/exts_button.gif" />{lang.BCONVERTER} :</h2>
 <!-- title  -->
 
 <!-- border line Vertical  -->
-<hr id="hr-border" />
+<p class="dot" />
 <!-- border line Vertical  -->
 
 <!-- start table no hover  -->
-<table cellpadding="3" cellspacing="3" style="direction:ltr">
+<table cellpadding="0" cellspacing="0" style="direction:ltr">
 <tr style="background-color:#E4E4E4"> 
 <td align="center">Byte</td>
 <td align="center">Kilobyte</td>
@@ -122,7 +126,7 @@ function convertgb(f)
 <td align="center">Gigabyte</td>
 </tr>
 
-<tr style="background-color:#FFF"> 
+<tr> 
 <td align="center"><input type="text" size="10" name="byte" value="0"></td>
 <td align="center"><input type="text" size="10" name="kb" value="0"></td>
 <td align="center"><input type="text" size="10" name="mb" value="0"></td>
@@ -139,30 +143,29 @@ function convertgb(f)
 
 </div>
 <!-- end div border table  -->
-</fieldset>
+
 </form>
 
-</div>
-<!-- end Exts temlate  -->
+
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
 
 
-
-<!-- start add Exts  -->
-<div id="divmiddle">
 <form method="post" action="{action_new_ext}">
-
-<fieldset>
-
-<!-- title  -->
-<b>{lang.ADD_NEW_EXT} :</b>
-<!-- title  -->
-
-<!-- border line Vertical  -->
-<hr id="hr-border" />
-<!-- border line Vertical  -->
 
 <!-- start div border table  -->
 <div id="border-table">
+
+<!-- title  -->
+<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/exts_button.gif" />{lang.ADD_NEW_EXT} :</h2>
+<!-- title  -->
+
+<!-- border line Vertical  -->
+<p class="dot" />
+<!-- border line Vertical  -->
+
+<br />
 
 <!-- start table no hover  -->
 <table class="tab-no-hover">

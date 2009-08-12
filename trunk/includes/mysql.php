@@ -117,11 +117,24 @@ class SSQL
 					}
 				}
 				
+				/*
+					encoding functions
+				*/
 				function set_utf8()
 				{
-					@mysql_query("SET NAMES 'utf8'", $this->connect_id);
+					return $this->set_names('utf8');
 				}
-
+				
+				function set_names($charset)
+				{
+					@mysql_query("SET NAMES '" . $chaeset . "'", $this->connect_id);
+				}
+				
+				function client_encoding()
+				{
+					return mysql_client_encoding($this->connect_id);
+				}
+				
 				/*
 				the query func . its so important to do 
 				the quries and give results

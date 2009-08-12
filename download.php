@@ -8,6 +8,8 @@
 # license http://opensource.org/licenses/gpl-license.php GNU Public License
 # $Author$ , $Rev$,  $Date::                           $
 ##################################################
+
+
 // security ..
 define ('IN_INDEX' , true);
 define ('IN_DOWNLOAD', true);
@@ -371,6 +373,7 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 		}
 
 		$SQL->close();
+		unset($bytes_send); 
 		exit; // we dont need style
 }
 
@@ -386,4 +389,4 @@ else
 ($hook = kleeja_run_hook('end_download_page')) ? eval($hook) : null; //run hook
 
 
-?>
+#<-- EOF

@@ -108,69 +108,7 @@ function KleejaOnline ()
 
 }#End function
 	
-	
-/*
-* visitors calculator
-* parameters : none
-*/
-/*
-function visit_stats ()
-{
-		global $SQL,$usrcp,$dbprefix,$stat_today;
-		
-		$today = date("j");
 
-		if ($today !=  $stat_today)
-		{
-			//counter yesterday .. and make today counter as 0 , then get date of today .. 
-			$query = array(
-						'SELECT'	=> 'counter_today',
-						'FROM'		=> "{$dbprefix}stats"
-						);
-			($hook = kleeja_run_hook('qr_select_counters_ststs_func')) ? eval($hook) : null; //run hook					
-			$result = $SQL->build($query);
-			while($row=$SQL->fetch_array($result))
-			{
-				$yesterday_cout = $row['counter_today']; 
-			}
-			
-			$update_query = array(
-							'UPDATE'	=> "{$dbprefix}stats",
-							'SET'		=> "counter_yesterday='$yesterday_cout', counter_today='0', today='$today' "
-						);
-			($hook = kleeja_run_hook('qr_update_counters_ststs_func')) ? eval($hook) : null; //run hook
-			if ($SQL->build($update_query))
-			{
-				delete_cache('data_stats');
-			}
-			else
-			{ 
-				die($lang['CANT_UPDATE_SQL']);
-			}	
-			
-		}
-		
-			//not registered as visitor yet ,, becuase visist mean one visit !  
-			if (!$_SESSION['visitor'])
-			{
-					$update_query = array(
-												'UPDATE'	=> "{$dbprefix}stats",
-												'SET'		=> "counter_today=counter_today+1, counter_all=counter_all+1"
-												);
-					($hook = kleeja_run_hook('qr_update_countersall_ststs_func')) ? eval($hook) : null; //run hook	
-					if ($SQL->build($update_query))
-					{
-						$_SESSION['visitor'] = true;
-					}
-					else
-					{ 
-						die($lang['CANT_UPDATE_SQL']);
-					}	
-			}
-			
-			($hook = kleeja_run_hook('visit_stats_func')) ? eval($hook) : null; //run hook	
-}#end func
-*/	
 /*
 *for ban ips .. 
 *parameters : none
@@ -199,7 +137,7 @@ function get_ban ()
 				$replace_it = str_replace("*", '([0-9]{1,3})', $ip2);
 				$replace_it = str_replace(".", '\.', $replace_it);
 			
-				if ($ip == $ip2 || @eregi($replace_it , $ip))
+				if ($ip == $ip2 || @preg_match('/' . preg_quote($replace_it, '/') . '/i', $ip))
 				{
 					($hook = kleeja_run_hook('banned_get_ban_func')) ? eval($hook) : null; //run hook	
 					kleeja_info($lang['U_R_BANNED'], $lang['U_R_BANNED']);
@@ -1301,10 +1239,10 @@ function delete_ch_tpl($template_name, $delete_txt = array())
 	else
 	{
 		$cached_instructions[$template_name] = array(
-					'action'		=> 'replace_with', 
-					'find'			=> $finder->find_word[0] . '(.*?)' . $finder->find_word[1],
-					'action_text'	=> $finder->another_word,
-					);
+													'action'		=> 'replace_with', 
+													'find'			=> $finder->find_word[0] . '(.*?)' . $finder->find_word[1],
+													'action_text'	=> $finder->another_word,
+												);
 										
 	}
 	
@@ -1339,17 +1277,12 @@ function add_config ($name, $value, $order = '0', $html = '', $type = 'other')
 	{
 		return true;
 	}
-	
-	/*
-	if(!isset($olang['CONFIG_KLJ_MENUS_' . strtoupper($type)]) || !isset($lang['CONFIG_KLJ_MENUS_' . strtoupper($type)]))
-	{
-		add_olang(array('CONFIG_KLJ_MENUS_' . strtoupper($type) => $pharse));
-	}
-	*/
-	
+
 	$insert_query = array(	'INSERT'	=> '`name` ,`value` ,`option` ,`display_order`, `type`',
 							'INTO'		=> "{$dbprefix}config",
-							'VALUES'	=> "'" . $SQL->escape($name) . "','" . $SQL->escape($value) . "', '" . addslashes($html) . "','" . intval($order) . "','" . $SQL->escape($type) . "'");
+							'VALUES'	=> "'" . $SQL->escape($name) . "','" . $SQL->escape($value) . "', '" . addslashes($html) . "','" . intval($order) . "','" . $SQL->escape($type) . "'"
+							);
+							
 	delete_cache('data_config');
 	//make it globally ..
 	$config[$name] = $value;
@@ -1363,11 +1296,14 @@ function add_config_r($configs)
 	{
 		return false;
 	}
+	
 	//array(name=>array(value=>,order=>,html=>),...);
 	foreach($configs as $n=>$m)
 	{
 		add_config($n, $m['value'], $m['order'], $m['html'], $m['type']);
 	}
+	
+	return;
 }
 
 function update_config($name, $value, $escape = true)
@@ -1379,7 +1315,7 @@ function update_config($name, $value, $escape = true)
 	$update_query = array(
 						'UPDATE'	=> "{$dbprefix}config",
 						'SET'		=> "value='" . ($escape ? $SQL->escape($value) : $value) . "'",
-						'WHERE'		=>  'name = "' . $SQL->escape($name) . '"'
+						'WHERE'		=> 'name = "' . $SQL->escape($name) . '"'
 				);
 	$SQL->build($update_query);
 	if($SQL->affected())
@@ -1406,17 +1342,17 @@ function delete_config ($name)
 	{
 		foreach($name as $n)
 		{
-			$delete_query = array(	'DELETE'	=> "{$dbprefix}config",
-							'WHERE'		=>  'name = "' . $SQL->escape($n) . '"'
-						);
+			$delete_query	= array('DELETE'	=> "{$dbprefix}config",
+									'WHERE'		=>  'name = "' . $SQL->escape($n) . '"'
+									);
 		 	$SQL->build($delete_query);
 		}
 	}
 	else 
 	{
-		$delete_query = array(	'DELETE'	=> "{$dbprefix}config",
-							'WHERE'		=>  'name = "' . $SQL->escape($name) . '"'
-						);
+		$delete_query	= array('DELETE'	=> "{$dbprefix}config",
+								'WHERE'		=>  'name = "' . $SQL->escape($name) . '"'
+								);
 		$SQL->build($delete_query);
 	}
 	
@@ -1435,7 +1371,8 @@ function add_olang($words = array(), $lang='en')
 	{
 		$insert_query = array(	'INSERT'	=> '`word` ,`trans` ,`lang_id`',
 								'INTO'		=> "{$dbprefix}lang",
-								'VALUES'	=> "'" . $SQL->escape($w) . "','" . $SQL->escape($t) . "', '" . $SQL->escape($lang) . "'");
+								'VALUES'	=> "'" . $SQL->escape($w) . "','" . $SQL->escape($t) . "', '" . $SQL->escape($lang) . "'"
+								);
 		$SQL->build($insert_query);
 	}
 	
@@ -1451,20 +1388,21 @@ function delete_olang ($words, $lang='en')
 	global $dbprefix, $SQL;
 	
 	//if array
-	if(is_array($words)) {
+	if(is_array($words))
+	{
 		foreach($words as $w)
 		{
-			$delete_query = array(	'DELETE'	=> "{$dbprefix}lang",
-							'WHERE'		=>  'word = "' . $SQL->escape($w) . '" AND lang_id="' . $SQL->escape($lang) . '"'
-						);
+			$delete_query	= array('DELETE'	=> "{$dbprefix}lang",
+									'WHERE'		=>  'word = "' . $SQL->escape($w) . '" AND lang_id="' . $SQL->escape($lang) . '"'
+									);
 		 	$SQL->build($delete_query);
 		}
 	}
 	else 
 	{
-		$delete_query = array(	'DELETE'	=> "{$dbprefix}lang",
-							'WHERE'		=>  'word = "' . $SQL->escape($words) . '" AND lang_id="' . $SQL->escape($lang) . '"'
-						);
+		$delete_query	= array('DELETE'	=> "{$dbprefix}lang",
+								'WHERE'		=>  'word = "' . $SQL->escape($words) . '" AND lang_id="' . $SQL->escape($lang) . '"'
+								);
 		$SQL->build($delete_query);
 	}
 	

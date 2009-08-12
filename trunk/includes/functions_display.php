@@ -213,7 +213,7 @@ function Saafooter($outscript=false)
 */
 function kleeja_info($msg,$title='', $exit=true, $redirect=false, $rs='2')
 {
-	global $text, $tpl;
+	global $text, $tpl, $SQL;
 	
 	($hook = kleeja_run_hook('kleeja_info_func')) ? eval($hook) : null; //run hook
 				
@@ -234,6 +234,7 @@ function kleeja_info($msg,$title='', $exit=true, $redirect=false, $rs='2')
 	
 	if ($exit)
 	{
+		$SQL->close();
 		exit();
 	}
 }
@@ -267,6 +268,7 @@ function kleeja_err($msg, $title='', $exit=true, $redirect=false, $rs='2')
 
 	if ($exit)
 	{
+		$SQL->close();
 		exit();
 	}
 }

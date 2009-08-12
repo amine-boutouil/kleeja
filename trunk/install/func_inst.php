@@ -311,7 +311,7 @@ function do_config_export($srv, $usr, $pass, $nm, $prf, $fpath)
 		}
 		
 		$data	= '<?php'."\n\n" . '//fill those varaibles with your data' . "\n";
-		$data	.= '$dbtype			= \'' . $db_type . "';//mysqli or mysql \n";
+		$data	.= '$db_type			= \'' . $db_type . "';//mysqli or mysql \n";
 		$data	.= '$dbserver		= \'' . str_replace("'","\'", $srv) . "';//database server \n";
 		$data	.= '$dbuser			= \''. str_replace("'","\'", $usr)."';// database user \n";
 		$data	.= '$dbpass			= \''. str_replace("'","\'", $pass)."';// database password \n";

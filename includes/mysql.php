@@ -122,7 +122,6 @@ class SSQL
 				*/
 				function set_utf8()
 				{
-					echo $this->connect_id;
 					return $this->set_names('utf8');
 				}
 				

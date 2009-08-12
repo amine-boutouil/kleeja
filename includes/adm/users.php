@@ -54,6 +54,8 @@
 				$sizes += $row['size'];
 			}
 			
+			$SQL->freeresult($result);
+			
 			if($num == 0)
 			{
 				kleeja_admin_err($lang['ADMIN_DELETE_NO_FILE']);
@@ -74,7 +76,6 @@
 									);
 									
 				$SQL->build($d_query);
-				$SQL->freeresult($result);
 				
 				kleeja_admin_info($lang['ADMIN_DELETE_FILE_OK']);
 			}

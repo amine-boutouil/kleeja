@@ -127,7 +127,7 @@ class SSQL
 				
 				function set_names($charset)
 				{
-					@mysql_query("SET NAMES '" . $chaeset . "'", $this->connect_id);
+					@mysql_query("SET NAMES '" . $charset . "'", $this->connect_id);
 				}
 				
 				function client_encoding()

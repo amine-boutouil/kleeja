@@ -17,14 +17,11 @@ define ('DB_VERSION' , '7');
 //randome cookie name
 $cookie_name = 'klj_' . substr(md5(time()), 0, 6);
 // rey to extract cookie domain
-$cookie_domain = (!empty($_SERVER['HTTP_HOST'])) ? strtolower($_SERVER['HTTP_HOST']) : ((!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : getenv('SERVER_NAME'));
-if (strtolower(substr($cookie_domain, 0, 4) ) == 'www.')
-	$cookie_domain = substr($cookie_domain, 4);
-if (substr($cookie_domain, 0, 1) != '.' && $cookie_domain != 'localhost')
-	$cookie_domain = '.' . $cookie_domain;
-$port = strpos($cookie_domain, ':');
-if ($port !== false)
-	$cookie_domain = substr($cookie_domain, 0, $port);
+$cookie_domain = !empty($_SERVER['HTTP_HOST']) ? strtolower($_SERVER['HTTP_HOST']) : (!empty($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : getenv('SERVER_NAME'));
+if (strpos($cookie_domain, ':') !== false)
+	$cookie_domain = substr($cookie_domain, 0, strpos($cookie_domain, ':'));
+if (strpos($cookie_domain, 'www.') === 0)
+	$cookie_domain = str_replace('www.', '.', $cookie_domain);
 
 
 $update_sqls['up_dbv_config'] = "UPDATE `{$dbprefix}config` SET `value` = '" . DB_VERSION . "' WHERE `name` = 'db_version'";

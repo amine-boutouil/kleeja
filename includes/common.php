@@ -41,6 +41,7 @@
 	$s_key = (!empty($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '') . (!empty($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : null);
 	$s_sid = 'klj_' . substr('_' . md5($s_key), 0, 8);
 	@ini_set('session.use_only_cookies', false);
+	@ini_set('session.auto_start', false);
 	//this will help people with some problem with their sessions path
 	//session_save_path('./cache/');
 	if(defined('IN_ADMIN'))
@@ -62,7 +63,7 @@
 	}
 	
 	session_name($s_sid);
-	session_start();
+	@session_start();
 
 
 	function stripslashes_our(&$value)

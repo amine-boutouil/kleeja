@@ -45,7 +45,7 @@ function KleejaOnline ()
 		// get information .. 
 		$ip				= get_ip();
 		$agent			= $SQL->escape($_SERVER['HTTP_USER_AGENT']);
-		$timeout		= 100; //seconds
+		$timeout		= 600; //seconds //10 min
 		$time			= time();  
 		$timeout2		= $time-$timeout;  
 		$username		= ($usrcp->name()) ? $usrcp->name(): '-1';

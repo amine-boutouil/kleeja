@@ -134,8 +134,15 @@
 	$path = dirname(__file__) . '/';
 	$root_path = PATH;
 	include_once ($path . 'version.php');
+	switch (isset($db_type) && $db_type)
+	{
+		case 'mysqli':
+			require ($path . 'mysqli.php');
+		break;
+		default:
+			require ($path . 'mysql.php');
+	}
 	require ($path . 'style.php');
-	require ($path . 'mysql.php');
 	require ($path . 'KljUploader.php');
 	require ($path . 'usr.php');
 	require ($path . 'pager.php');
@@ -186,7 +193,7 @@
 	// for gzip : php.net
 	//fix bug # 181
 	$do_gzip_compress = false; 
-	if ($config['gzip'] == '1' && !defined('IN_DOWNLOAD') && !defined('IN_ADMIN')) 
+	if ($config['gzip'] == '2' && !defined('IN_DOWNLOAD') && !defined('IN_ADMIN')) 
 	{
 	    function compress_output($output)
 		{

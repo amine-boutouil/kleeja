@@ -308,7 +308,7 @@ class SSQL
 						$query_id = $this->result;
 					}
 					
-					return is_resource($query_id)  ? mysqli_fetch_array($query_id, MYSQLI_ASSOC) : false;
+					return $query_id  ? mysqli_fetch_array($query_id, MYSQLI_ASSOC) : false;
                 }
 
 				/*
@@ -322,7 +322,7 @@ class SSQL
 						$query_id = $this->result;
 					}
 
-					return is_resource($query_id) ? mysqli_num_rows($query_id) : false;
+					return $query_id ? mysqli_num_rows($query_id) : false;
                 }
 
 				

@@ -192,8 +192,9 @@
 
 	// for gzip : php.net
 	//fix bug # 181
+	//we stopped this in development stage cuz it's will hide notices
 	$do_gzip_compress = false; 
-	if ($config['gzip'] == '2' && !defined('IN_DOWNLOAD') && !defined('IN_ADMIN')) 
+	if ($config['gzip'] == '1' && !defined('IN_DOWNLOAD') && !defined('IN_ADMIN') && !defined('DEV_STAGE')) 
 	{
 	    function compress_output($output)
 		{

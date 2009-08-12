@@ -15,7 +15,12 @@ if (!defined('IN_COMMON'))
 	exit;
 }
 
+//we are in cache now ..
 define('IN_CACHE', true);
+
+
+//make sure it's utf8 data
+$SQL->set_utf8();
 
 //	
 //get hooks data from hooks table  ... 

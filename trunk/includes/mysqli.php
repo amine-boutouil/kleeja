@@ -101,7 +101,12 @@ class SSQL
 						return false;
 					}
 				}
-
+				
+				function set_utf8()
+				{
+					@mysqli_set_charset($this->connect_id, 'utf8')
+				}
+				
 				/*
 				the query func . its so important to do 
 				the quries and give results

@@ -76,9 +76,9 @@ document.getElementById('mail_here').innerHTML = iee;
 		<a title="{n_mail}:{{mail}}" onclick="javascript:show_msg('textva_{{id}}',{{id}});">{{name}}</a>
 		<input type="hidden" value="{{mail}} :<br /> {{text}}" id="textva_{{id}}">
         </td>
-        <td><a href="{{url}}">{lang.CLICKHERE}<a/></td>
+        <td><a target="_blank" href="{{url}}">{lang.CLICKHERE}<a/></td>
         <td>{{time}}</td>
-        <td><a href="{{ip_finder}}" target="blank">{{ip}}</a></td>
+        <td><a target="_blank" href="{{ip_finder}}" target="blank">{{ip}}</a></td>
         <td><input type="checkbox" name="del_{{id}}" value="{{id}}" onclick="change_color(this,'su[{{id}}]');" rel="_del"></td>
 		<!-- admin reports info td2 extra -->
     </tr>

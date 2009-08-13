@@ -110,12 +110,12 @@ select ,option{font: 11px tahoma,verdana,arial,sans-serif; font-weight: normal;
 	
 /*  buttons */
 .button1 ,.button2 {
-    cursor: pointer; vertical-align: middle; padding: 3px 4px 3px 4px;  margin: 5px 5px 2px 0px;
-    font: normal 12px Tahoma, Helvetica, Arial, sans-serif; color: #444;
+    cursor: pointer; padding: 3px 9px;  margin:5px;
+    font: normal 12px Tahoma, Helvetica, Arial, sans-serif;
     background: #549CBF url(../images/login/btn.gif) repeat left top;
   	border: 1px solid #BCBCBC;}
 .button1:hover ,.button2:hover{ 
-	border: 1px solid #aaa; color: #fff;
+	border: 1px solid #aaa; color: #fff;text-decoration: none;
 	background: #BCBCBC url(../images/login/hoverblue.gif) repeat left top;}
 /*  buttons */
 
@@ -135,9 +135,9 @@ input.button1, input.button3,input.button2 {
 	background: #FFFFF3 url(../images/i2.gif) no-repeat top right;}
 .s_box_tpls{margin:2px 0; border:1px solid #6496C3; color:#000;padding:2px 4px 2px 4px; background-color:#FFFDD7;}
 .s_box_tpls_d{margin:2 px; text-align:center;
-	padding:2px 4px 2px 4px; background-color:#D8EBFD; 
-	color:#185A97; width:10%; cursor: pointer;}
-.s_box_tpls_d:hover{color:#fff;	background-color:#185A97; }
+	padding:2px 4px 2px 4px; background:#C5C5C5 url(../images/s_box_tpls_d.png) no-repeat 96% 50%; 
+	color:#000; width:20%; cursor: pointer;}
+.s_box_tpls_d:hover{color:#fff;	background-color:#FD6812; }
 /* class */
 
 	
@@ -273,16 +273,17 @@ position: relative; -moz-border-radius: 8px; border-radius:1px;}
 /* all tables */
 table {border-collapse: collapse;width:100%; padding: 5px;font: 12px Tahoma, Arial, Helvetica, sans-serif;}
 tr { 	height: 24px; background-color:#EEEEEE;}
-td {	padding: 6px 5px 6px 5px; border-top: solid 1px #D2D2D2;border-bottom: solid 1px #E4E4E4;border-left: solid 1px #D2D2D2;border-right: solid 1px #E4E4E4;}
+td {	padding: 6px 5px 6px 5px; border-top: solid 1px #D2D2D2;border-bottom: solid 1px #E4E4E4;border-left: solid 1px #D2D2D2;border-right: solid 1px #D2D2D2;}
 tr:hover {background-color:#FFFFDD;}
 /* all tables */
 
 /* usefull colors */
 .ored, .ored:hover {background-color:#FFCACA;}
 
-.oblue{background-color:#C0EFB8;}
-.oblue td{border-top:3px solid #6DD713;border-bottom:3px solid #6DD713;}
-.oblue:hover {background-color:#C0EFB8;}
+.oblue{background-color:#EFB8C0;}
+.oblue td{border-top:2px solid #C87C87;border-bottom:2px solid #C87C87;}
+.oblue:hover {background-color:#EFB8C0;}
+.styles_exp{padding: 10px;font-size:12px;font-weight: bold;color:#000;}
 
 .osilver {background-color:#F5F5F5;}
 
@@ -302,16 +303,29 @@ border:1px #ccc solid;
 }
 
 .s_tpl_x OPTGROUP {
-	padding: 4px;font:bold 13px Tahoma, Arial, Helvetica, sans-serif;color:#666
+margin:5px 0;
+background-color:#EFE7B8;
+border-top:1px solid #FEA53D;
+border-bottom:1px solid #FEA53D;
+padding:10px;
+font:bold 12px Tahoma, Arial, Helvetica, sans-serif;
+color:#003F9D
 }
 .s_tpl_x option {
+padding: 2px 4px;
 direction:ltr;
-border: 1px solid #6496C3;padding: 3px; margin:2px; background-color:#FBFFFD;
-position: relative; -moz-border-radius:7px;-webkit-border-radius:7px;-khtml-border-radius:7px;border-radius:7px;
-color:#0A54C3
+border-top: 1px solid #999;
+border-bottom: 1px solid #999;
+padding:4px 8px; margin:1px 0 2px 0; background:#F5F5F5;
+position: relative; 
+color:#FD6812;
+font-size:12px;font-weight: bold;
 }
 .s_tpl_x option:hover {
-border:1px #ccc solid; background-color:#6496C3;color:#fff;
+border-top: 1px solid #111;
+border-bottom: 1px solid #111;
+ background-color:#FD6812;
+ color:#fff;
 }
 /* / tpl */
 
@@ -373,7 +387,6 @@ font:bold 12px Tahoma, Arial, Helvetica, sans-serif;
 }
 .adminstrators a{color:red}
 
-
 /* for php_info  */
 .php1{font:bold 10px Tahoma, Arial, Helvetica, sans-serif;width:100%;direction:ltr;}
 .php1 table{width:100%;text-align:left;table-layout:fixed;empty-cells:hide;margin:5px auto;}
@@ -381,3 +394,10 @@ font:bold 12px Tahoma, Arial, Helvetica, sans-serif;
 .row1 {overflow:auto;}
 .row2{overflow:auto;}
 /* / for php_info */
+
+.goback{ background:#EEE6B7;
+margin:2px auto;
+padding:5px 10px;
+font:bold 12px Tahoma, Arial, Helvetica, sans-serif;
+}
+.goback:hover{background:#fff;color:#FF8000}

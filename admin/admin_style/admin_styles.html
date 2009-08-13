@@ -14,17 +14,11 @@
 <!-- end dot  -->
 
 <!-- start clear  -->
-<div class="clr"></div>
-<!-- end clear  -->
-	
-<div class="small_font">{lang.STYLES_EXP}</div>
-
-<!-- start clear  -->
 <div class="clr"></div><br />
 <!-- end clear  -->
 
 <table>
-
+<tr><td colspan="2"><div class="styles_exp">{lang.STYLES_EXP}</div></td></tr>
 <LOOP NAME="arr">
  <tr class="<IF LOOP="is_default" >oblue</IF>">
 	 <td>
@@ -32,7 +26,7 @@
 	 </td>
 	 <td>
 	 <a href="{{link_show_tpls}}" title="{lang.SHOW_TPLS}">
-	 <img class="imgtitle" src="{STYLE_PATH_ADMIN}images/show_tpls.gif" />{lang.SHOW_TPLS}</a> |
+	 <img class="imgtitle" src="{STYLE_PATH_ADMIN}images/show_tpls.png" />{lang.SHOW_TPLS}</a> |
 	 <IF LOOP="is_default">
 		{lang.STYLE_IS_DEFAULT} <img class="imgtitle" src="{STYLE_PATH_ADMIN}images/default_style.png" />
 	 <ELSE>

@@ -22,38 +22,44 @@ $(document).ready(function() { $('#template_content').markItUp(mySettings); });
 <div  id="border-table">
 
 <!-- title   -->
-<h2>{lang.EDIT} :: {tpl_name} :</h2>
+<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/styles_button.gif" />{lang.EDIT} :: {tpl_name} :</h2>
 <!-- title   -->
 
 <!-- border line Vertical  -->
 <p class="dot" />
 <!-- border line Vertical  -->
 
+<!-- start clear  -->
+<div class="clr"></div>
+<!-- end clear  -->
 
+<textarea name="template_content" id="template_content"  rows="" style="direction:ltr;" >{template_content}</textarea>
 
-<!-- start table no hover  -->
-<table class="tab-no-hover">
-<tr>
-	<td>
-		<textarea name="template_content" id="template_content"  rows="" style="direction:ltr;" >{template_content}</textarea>
-	</td>
-</tr>
-</table>
 
 <input type="hidden" name="style_id" value="{style_id}" />
 <input type="hidden" name="tpl_choose" value="{tpl_name}" />
+
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
 
 <!-- border line Vertical  -->
 <p class="dot" />
 <!-- border line Vertical  -->
 
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
+
 <!-- go back home -->
-<br />
-<a href="{action_return}">&lt; {lang.GO_BACK_BROWSER} : {style_id}</a>
-<br />
+<a class="goback"href="{action_return}">&lt; {lang.GO_BACK_BROWSER} : {style_id}</a>
 <!-- go back home -->
 
-<fieldset class="quick" style="text-align:center">
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
+
+<fieldset class="quick">
 
 <IF NAME="not_style_writeable">
 <!-- start info System Messages -->

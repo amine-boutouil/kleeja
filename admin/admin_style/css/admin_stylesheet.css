@@ -278,15 +278,12 @@ input.button1, input.button3,input.button2 {
 	display:block; text-align:center; text-decoration:none; float:left;}
 /* footer */
 
-/* border line Vertical */
-#hr-border {	margin:10px 0 10px 0; padding:0;border-top: 1px dotted #D8D8D8;}
-
 /* border table */
 #border-table {border: 2px solid #6496C3;padding: 10px; background-color:#FBFFFD;
 position: relative; -moz-border-radius: 8px; border-radius:1px;}
 
 /* all tables */
-table {border-collapse: collapse;text-align:center;width:100%; padding: 5px;font: 12px Tahoma, Arial, Helvetica, sans-serif;}
+table {border-collapse: collapse;width:100%; padding: 5px;font: 12px Tahoma, Arial, Helvetica, sans-serif;}
 tr { 	height: 24px; background-color:#EEEEEE;}
 td {	padding: 6px 5px 6px 5px; border-top: solid 1px #D2D2D2;border-bottom: solid 1px #E4E4E4;border-left: solid 1px #D2D2D2;border-right: solid 1px #E4E4E4;}
 tr:hover {background-color:#FFFFDD;}

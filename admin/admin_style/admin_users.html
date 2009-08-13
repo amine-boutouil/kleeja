@@ -1,41 +1,65 @@
-﻿
-        
-<div id="divmiddle">
+﻿<div id="divmiddle">
 
+<fieldset>
+
+<div id="border-table">
+	
+<IF NAME="user_not_normal">
 	<!-- start info System Messages -->
-		<IF NAME="user_not_normal">
-			<div id="system-message">
-				<div class="info">
-					<ul>
-						<li>{lang.USERS_NOT_NORMAL_SYS} !</li>
-					</ul>
-				</div>
-			</div>
-		</IF>
+	<div id="system-message">
+		<div class="info">
+		<ul>
+		<li>{lang.USERS_NOT_NORMAL_SYS} !</li>
+		</ul>
+		</div>
+	</div>	
 	<!-- end info System Messages -->
+</IF>
 
 <form method="post" name="userform" action="{action}">
-        <fieldset>
-        
+         
 <IF NAME="is_search">
-<img src="{STYLE_PATH_ADMIN}images/search_button.gif" ><strong> 
+<strong> 
 <IF NAME="is_asearch">
-Kleeja {lang.ADMINISTRATORS}
+<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/search_button.gif" >{lang.ADMINISTRATORS}</h2>
+<!-- start dot  -->
+<p class="dot" />
+<!-- end dot  -->
+
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
 <ELSE>
 {lang.SEARCH_USERS}
 </IF>
- ( {nums_rows} )</strong>
+ {lang.AUSERS_NUM} : ( {nums_rows} )
+</strong>
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
 <ELSE>
+
 <!-- title  -->
-<b>{lang.R_USERS} :</b> <a href="{action}&admin=1">( {lang.ADMINISTRATORS} )</a>
+<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/users_button.gif" />{lang.R_USERS} :</h2>
 <!-- title  -->
+
+<!-- start dot  -->
+<p class="dot" />
+<!-- end dot  -->
+
+<!-- start clear  -->
+<div class="clr"></div>
+<!-- end clear  -->
+
+<div class="adminstrators"><a href="{action}&admin=1">( {lang.ADMINISTRATORS} )</a></div>
+
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
+
 </IF>
 
-
-<hr id="hr-border" />
-
-<div id="border-table">
-<table style="text-align:center">
+<table>
         <tr style="background-color:#E4E4E4">
                 <td>{lang.USERNAME}</td>
                 <td>{lang.EMAIL}</td>
@@ -69,22 +93,30 @@ Kleeja {lang.ADMINISTRATORS}
 </div>
 </fieldset>
 
-</div>
-</fieldset>
 </form>
+</div>
 
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
 
 <IF NAME="isn_search">
 <form method="post" action="">
-<fieldset>
-
-<b>{lang.NEW_USER} :</b>
-
-<hr id="hr-border" />
 
 <div id="border-table">
 
-<table style="text-align:center">
+<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/users_button.gif" />{lang.NEW_USER} :</h2>
+
+<!-- start dot  -->
+<p class="dot" />
+<!-- end dot  -->
+
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
+
+
+<table>
         <tr style="background-color:#E4E4E4">
                 <td>{lang.USERNAME}</td>
                 <td>{lang.EMAIL}</td>
@@ -98,15 +130,14 @@ Kleeja {lang.ADMINISTRATORS}
                 <!-- admin users data tr extra -->
 </table>
 
-<fieldset class="quick" style="text-align:center">
-    <input class="button2" name="newuser" type="submit" value="{lang.SUBMIT}" />
-</fieldset>
+<fieldset class="quick" style="text-align:center"><input class="button2" name="newuser" type="submit" value="{lang.SUBMIT}" /></fieldset>
 
 </div>
-</fieldset>
+
 </form>
 </IF>
 
+</fieldset>
 
 </div>
 

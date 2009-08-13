@@ -119,18 +119,6 @@ select ,option{font: 11px tahoma,verdana,arial,sans-serif; font-weight: normal;
 	background: #BCBCBC url(../images/login/hoverblue.gif) repeat left top;}
 /*  buttons */
 
-/* for php_info  */
-.row1 {
-overflow:visible;
-text-align:left;
-width:50px !important;
-}
-.row2{
-width:50px !important;
-overflow:visible;text-align:left
-}
-/* / for php_info */
-
 	
 /* class */
 fieldset.quick, p.quick {  margin: 0 0 5px; padding: 5px 0 0; border: none; background-color: transparent; text-align: center;}
@@ -174,29 +162,31 @@ input.button1, input.button3,input.button2 {
 /* last visit */	
 
 /* other info  */
-#other-info{ margin: 10px 0 0 0 ; padding: 10px; font-weight: bold;
-	background: #DBE9EE; border: 1px solid #5C9AB1;	position: relative;	
-	-moz-border-radius: 8px; border-radius:1px;}
+#other-info{ margin:6px 0 0 0 ; padding: 10px; font-weight: bold;background:#eee; border: 1px solid #999;position: relative;-moz-border-radius: 8px; border-radius:1px;}
 #other-info ul { padding: 6px; }
 #other-info li {color: #333;}
+#other-info .t_info{ padding:2px 30px; font-weight: bold;font-size:14px;background:url(../images/t_info.png) no-repeat 100% 50%;margin-bottom:6px;color:#F46320}
+#other-info table tr{ background:#DBE9EE;cursor:help}
+#other-info table td{border: 1px dashed #D2D6FF}
+#other-info table tr:hover { background:#fff; }
+#other-info:hover{background: #F6F6F6;}
 /* other info  */
 
 /* other info  */
-#disk_size{ margin: 10px 0 0 0 ; padding: 10px 10px 0px 10px; font-weight: bold;
-	background: #DBE9EE; border: 1px solid #5C9AB1;	position: relative;	
-	-moz-border-radius: 8px; border-radius:1px;}
+#disk_size{ margin: 10px 0 0 0 ; padding: 10px 10px 0px 10px; font-weight: bold;background:#eee; border: 1px solid #999;position: relative;-moz-border-radius: 8px; border-radius:1px;}
 #disk_size ul { padding: 6px; }
 #disk_size li {color: #333;}
+#disk_size .t_disk_size{ padding:2px 28px 2px 10px; font-weight: bold;font-size:14px;background:url(../images/disk_size.png) no-repeat 100% 50%;color:#F46320}
 /* other info  */
 
 /*  table no hover */
 #disk_size .tab-size {
-	border-collapse: collapse; margin: 0px;	width:100%; padding: 5px 5px 0px 5px; 
+	border-collapse: collapse; margin-top:10px;	width:100%; padding: 5px 5px 0px 5px; 
 	font: 12px Tahoma, Arial, Helvetica, sans-serif; cursor: pointer; }
 #disk_size .tab-size tr { 	
-	height: 24px; background-color: #DBE9EE; padding: 0;}
+	height: 24px; background-color: #eee; padding: 0;}
 #disk_size .tab-size td {	
-	padding: 3px 5px 3px 5px; border-left: 1px solid #DBE9EE; border-bottom: solid 1px #DBE9EE;}
+	padding: 3px 5px 3px 5px; border: 1px solid #eee;}
 /*  table no hover */
 
 
@@ -223,8 +213,7 @@ input.button1, input.button3,input.button2 {
 	
 	
 /* view ../images */
-.bg_img {
-    width:100px; height:100px; padding:5px; cursor: pointer;border: 1px solid #999;}
+.bg_img { width:100px; height:100px; padding:5px; cursor: pointer;border: 1px solid #999;}
 .bg_img img{border:solid 1px #ccc}
 .bg_img:hover {border:solid 1px #FD6812}
 /* view ../images */
@@ -297,7 +286,7 @@ tr:hover {background-color:#FFFFDD;}
 
 .osilver {background-color:#F5F5F5;}
 
-.file_cp1 {width:100%; margin: 5px 0; position: relative;overflow:visible;}
+.file_cp1 {width:100%; margin: 5px 0; position: relative;overflow:auto;}
 
 .allfile_table {text-align:center;overflow:auto;font-size:x-small;font-weight: bold;white-space:pre-wrap;table-layout:static;border-collapse:collapse;}
 
@@ -382,6 +371,13 @@ width:70%;
 padding:5px 25px;
 font:bold 12px Tahoma, Arial, Helvetica, sans-serif;
 }
-.adminstrators a{ 
-color:red
-}
+.adminstrators a{color:red}
+
+
+/* for php_info  */
+.php1{font:bold 10px Tahoma, Arial, Helvetica, sans-serif;width:100%;direction:ltr;}
+.php1 table{width:100%;text-align:left;table-layout:fixed;empty-cells:hide;margin:5px auto;}
+.php1 h1,.php1 h2{text-align:left;}
+.row1 {overflow:auto;}
+.row2{overflow:auto;}
+/* / for php_info */

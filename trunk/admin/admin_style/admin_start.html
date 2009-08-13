@@ -103,7 +103,7 @@
 <!-- end  last yahoo -->	
 
 <!-- start clear  -->
-<div class="clr"></div><br />
+<div class="clr"></div>
 <!-- end clear  -->
 
 
@@ -142,12 +142,12 @@ $('div#{{id}}').pulse({
 <div id="disk_size">
 	<ul>
 	<li>
-	<strong>{lang.SIZE_STAT} &gt;&gt; {lang.USING_SIZE}</strong>
+	<span class="t_disk_size">{lang.SIZE_STAT}</span> <strong>&gt;&gt; {lang.USING_SIZE}</strong>
 		<table class="tab-size" border="0" cellspacing="1" cellpadding="0" dir="ltr">
 		<tr><td style="width:33%;background-color: #CCEECC;text-align:left;">0%</td>
 		<td style="width:34%; background-color: #FFFFE8; text-align:center;">50%</td>
 		<td style="width:33%;background-color: #FFD2D2; text-align:right;">100%</td></tr>
-		<tr><td colspan="3"><img src="{STYLE_PATH_ADMIN}images/spacer.gif" style="width:{per1}%; height:10px; background-color: #5770DF;" /></td></tr>
+		<tr><td colspan="3"><img src="{STYLE_PATH_ADMIN}images/spacer.gif" style="width:{per1}%; height:10px; background-color:red;" /></td></tr>
 		</table>
 	</li>
 	</ul>
@@ -161,28 +161,44 @@ $('div#{{id}}').pulse({
 <!-- start other info -->
 <div id="other-info">
 <ul>
-<li>{lang.OTHER_INFO} !</li>
+<li class="t_info">{lang.OTHER_INFO} !</li>
 <li>
 <table>
-<tr><td>{lang.KLEEJA_VERSION} :</td>
-	<td>{kleeja_version}</td></tr>
-<tr><td>{lang.PHP_VER} :</td>
-	<td>{php_version}</td></tr>
-<tr><td>{lang.MYSQL_VER} :</td>
-	<td>{mysql_version}</td></tr>
-<tr><td>max_execution_time :</td>
-	<td>{max_execution_time}</td></tr>
-<tr><td>upload_max_filesize :</td>
-	<td>{upload_max_filesize}</td></tr>
-<tr><td>post_max_size :</td>
-	<td>{post_max_size}</td></tr>
-	<tr><td>memory_limit :</td>
-	<td>{memory_limit}</td></tr>
+<tr>
+	<td width="30%">{lang.KLEEJA_VERSION}</td>
+	<td>{kleeja_version}</td>
+</tr>
+<tr>
+	<td>{lang.PHP_VER}</td>
+	<td>{php_version}</td>
+</tr>
+<tr>
+	<td>{lang.MYSQL_VER}</td>
+	<td>{mysql_version}</td>
+</tr>
+<tr>
+	<td>max_execution_time</td>
+	<td>{max_execution_time}</td>
+</tr>
+<tr>
+	<td>upload_max_filesize</td>
+	<td>{upload_max_filesize}</td>
+</tr>
+<tr>
+	<td>post_max_size</td>
+	<td>{post_max_size}</td>
+</tr>
+<tr>
+	<td>memory_limit</td>
+	<td>{memory_limit}</td>
+</tr>
 </table>	
 </li>
 </ul>
 </div>
 <!-- end other info -->
+
+<div class="clr"></div><br />
 
 </div>
 

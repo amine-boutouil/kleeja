@@ -116,7 +116,7 @@ $update_sqls['type_config_general'] = "UPDATE `{$dbprefix}config` SET `type` = '
 
 );";
 
-$update_sqls['type_config_upload'] = "UPDATE `{$dbprefix}config` SET `type` = 'upload' WHERE `name` IN ('foldername','prefixname','filesnum','decode','total_size','thumbs_imgs','write_imgs','del_url_file','safe_code');";
+$update_sqls['type_config_upload'] = "UPDATE `{$dbprefix}config` SET `type` = 'upload' WHERE `name` IN ('foldername','prefixname','filesnum','decode','total_size','thumbs_imgs','thmb_dims',write_imgs','del_url_file','safe_code');";
 
 
 $update_sqls['type_config_interface'] = "UPDATE `{$dbprefix}config` SET `type` = 'interface' WHERE `name` IN ('style','sec_down','statfooter','gzip','welcome_msg','www_url','allow_stat_pg','allow_online','googleanalytics');";

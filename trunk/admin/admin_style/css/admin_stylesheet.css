@@ -224,10 +224,9 @@ input.button1, input.button3,input.button2 {
 	
 /* view ../images */
 .bg_img {
-    width:112px; height:112px; padding:10px 0; cursor: pointer;
-    background: url('../images/bg_img.gif') no-repeat;}
+    width:100px; height:100px; padding:5px; cursor: pointer;border: 1px solid #999;}
 .bg_img img{border:solid 1px #ccc}
-.bg_img img:hover {border:solid 1px #FD6812}
+.bg_img:hover {border:solid 1px #FD6812}
 /* view ../images */
 
 
@@ -377,10 +376,10 @@ text-align:center;
 	vertical-align:middle;
 }
 
-.adminstrators { 
+.adminstrators { background: url(../images/adminstrators.gif) no-repeat 100% 70%;
 margin:0 auto;
 width:70%;
-padding:5px;
+padding:5px 25px;
 font:bold 12px Tahoma, Arial, Helvetica, sans-serif;
 }
 .adminstrators a{ 

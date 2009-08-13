@@ -35,6 +35,8 @@ $update_sqls['unique_sesion'] = "ALTER TABLE `{$dbprefix}online` ADD UNIQUE (`se
 $update_sqls['online_moue1'] = "ALTER TABLE `{$dbprefix}stats` ADD `most_user_online_ever` INT( 11 ) NOT NULL";
 $update_sqls['online_moue2'] = "ALTER TABLE `{$dbprefix}stats` ADD `lastuser` VARCHAR( 300 ) NOT NULL ";
 $update_sqls['online_moue3'] = "ALTER TABLE `{$dbprefix}stats` ADD `last_muoe` INT( 10 ) NOT NULL";
+$update_sqls['delete_exts_f'] = "DELETE FROM `{$dbprefix}exts` WHERE `ext` IN('ini');";
+
 $update_sqls['configs1'] = "UPDATE `{$dbprefix}config` SET `option` = '<input type=\"text\" id=\"foldername\" name=\"foldername\" value=\"{con.foldername}\" size=\"20\">',`display_order` = 4 WHERE  `name` = 'foldername';";
 
 $update_sqls['configs2'] = "UPDATE `{$dbprefix}config` SET `option` = '<input type=\"text\" id=\"prefixname\" name=\"prefixname\" value=\"{con.prefixname}\" size=\"10\">',`display_order` = 5 WHERE  `name` = 'prefixname';";

@@ -43,6 +43,18 @@
 			$icons_path = $STYLE_PATH_ADMIN . 'images/config_icons/';
 			$default_icon = $icons_path . 'default.png';
 			$typesnavi = array();
+
+			while($row = $SQL->fetch_array($result))
+			{
+				$typesnavi[] = array(
+								'typename'	=> $row['type'],
+								'typelink'	=> $action  . '&amp;type=' . $row['type'],
+								'typeicon'	=> file_exists($icons_path . $row['type'] . '.png') ?  $icons_path . $row['type'] . '.png' : $default_icon,
+								'typetitle'	=> !empty($lang['CONFIG_KLJ_MENUS_' . strtoupper($row['type'])]) ? $lang['CONFIG_KLJ_MENUS_' . strtoupper($row['type'])] : (!empty($olang['CONFIG_KLJ_MENUS_' . strtoupper($row['type'])]) ? $olang['CONFIG_KLJ_MENUS_' . strtoupper($row['type'])] : $lang['CONFIG_KLJ_MENUS_OTHER']),
+					 );
+			}
+			
+			
 			//default
 			$typesnavi[] = array(
 									'typename'	=> 'all',
@@ -50,42 +62,7 @@
 									'typeicon'	=> $icons_path . 'all.png',
 									'typetitle'	=> $lang['CONFIG_KLJ_MENUS_ALL']
 									);
-
-			while($row = $SQL->fetch_array($result))
-			{
-					if($row['type'] == 'general')
-					{
-						//kleeja general options
-						$typesnavi[] = array(
-									'typename'	=> 'general',
-									'typelink'	=> $action  . '&amp;type=general',
-									'typeicon'	=> $icons_path . 'general.png',
-									'typetitle'	=> $lang['CONFIG_KLJ_MENUS_GENERAL']
-									);
-					}
-					elseif($row['type'] != 'other' && $row['type'] != 'general')
-					{
-						$typesnavi[] = array(
-								'typename'	=> $row['type'],
-								'typelink'	=> $action  . '&amp;type=' . $row['type'],
-								'typeicon'	=> file_exists($icons_path . $row['type'] . '.png') ?  $icons_path . $row['type'] . '.png' : $default_icon,
-								'typetitle'	=> !empty($lang['CONFIG_KLJ_MENUS_' . strtoupper($row['type'])]) ? $lang['CONFIG_KLJ_MENUS_' . strtoupper($row['type'])] : (!empty($olang['CONFIG_KLJ_MENUS_' . strtoupper($row['type'])]) ? $olang['CONFIG_KLJ_MENUS_' . strtoupper($row['type'])] : $lang['CONFIG_KLJ_MENUS_OTHER']),
-							 );
-					}
-					elseif($row['type'] == 'other')
-					{
-						//kleeja other options
-						$typesnavi[] = array(
-									'typename'	=> 'other',
-									'typelink'	=> $action  . '&amp;type=other',
-									'typeicon'	=> $icons_path . 'other.png',
-									'typetitle'	=> $lang['CONFIG_KLJ_MENUS_OTHER']
-									);
-					}
-			}
-			
-			
-			
+									
 			$SQL->freeresult($result);
 			
 		break; //end true

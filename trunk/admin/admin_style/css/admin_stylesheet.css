@@ -134,13 +134,12 @@ input.button1, input.button3,input.button2 {
 	font-family:tahoma,verdana,arial,sans-serif; padding:2px 4px 4px 4px;
 	text-align:center; color:#484848; border-color:#F8F834; font-weight: bold;
 	background: #FFFFF3 url(../images/i2.gif) no-repeat top right;}
-.s_box_tpls{margin:2px 0; border:1px solid #6496C3; color:#000;padding:2px 4px 2px 4px; background-color:#FFFDD7;}
+.s_box_tpls{width:99%;margin:2px 0; border:1px solid #6496C3; color:#000;padding:2px 4px 2px 4px; background-color:#FFFDD7;}
 .s_box_tpls_d{margin:2 px; text-align:center;
 	padding:2px 4px 2px 4px; background:#C5C5C5 url(../images/s_box_tpls_d.png) no-repeat 96% 50%; 
 	color:#000; width:20%; cursor: pointer;}
 .s_box_tpls_d:hover{color:#fff;	background-color:#FD6812; }
 /* class */
-
 	
 /*  table no hover */
 .tab-no-hover {
@@ -152,7 +151,6 @@ input.button1, input.button3,input.button2 {
 .tab-no-hover tr:hover {
 	background-color:transparent;}
 /*  table no hover */
-	
 	
 /* last visit */					
 #info-last-visit { background: #EEE; float: right; width: 48%; margin:1px 3px; padding: 1px ;
@@ -180,7 +178,7 @@ input.button1, input.button3,input.button2 {
 #disk_size .t_disk_size{ padding:2px 28px 2px 10px; font-weight: bold;font-size:14px;background:url(../images/disk_size.png) no-repeat 100% 50%;color:#F46320}
 /* other info  */
 
-/*  table no hover */
+/*  disk_size */
 #disk_size .tab-size {
 	border-collapse: collapse; margin-top:10px;	width:100%; padding: 5px 5px 0px 5px; 
 	font: 12px Tahoma, Arial, Helvetica, sans-serif; cursor: pointer; }
@@ -188,8 +186,7 @@ input.button1, input.button3,input.button2 {
 	height: 24px; background-color: #eee; padding: 0;}
 #disk_size .tab-size td {	
 	padding: 3px 5px 3px 5px; border: 1px solid #eee;}
-/*  table no hover */
-
+/*  disk_size */
 
 /* body #System Messages  */
 #system-message { margin: 10px 0 5px 0 ; padding: 0;}
@@ -212,13 +209,11 @@ input.button1, input.button3,input.button2 {
 	color: #c00; background: url(../images/error.png) no-repeat right top ; padding-right: 35px; }
 /* System Messages  #error*/
 	
-	
 /* view ../images */
 .bg_img { width:100px; height:100px; padding:5px; cursor: pointer;border: 1px solid #999;}
 .bg_img img{border:solid 1px #ccc}
 .bg_img:hover {border:solid 1px #FD6812}
 /* view ../images */
-
 
 /*  toolTipBox */	
 #toolTipBox {
@@ -226,8 +221,6 @@ input.button1, input.button3,input.button2 {
 	text-align:right; position: fixed;  color: 000000;background: #EFE7B8;
     border: 3px solid #FEA53D;  -moz-border-radius: 8px; border-radius:1px;	}
 /* toolTipBox */
-
-	
 
 /* pagination */
 .pagination {float:right; padding: 3px 6px;  margin: 8px 0px;}
@@ -237,8 +230,6 @@ input.button1, input.button3,input.button2 {
 .here_page { margin-right: 5px; padding:3px 6px;  background-color: #6496c3;	color: #fff;
         border: 1.5px solid #6496c3; -moz-border-radius:10px; font-weight: normal;}
 /* pagination */
-
-
 
 /* footer */
 #footer {
@@ -272,9 +263,10 @@ input.button1, input.button3,input.button2 {
 position: relative; -moz-border-radius: 8px; border-radius:1px;}
 
 /* all tables */
-table {border-collapse: collapse;width:100%; padding: 5px;font: 12px Tahoma, Arial, Helvetica, sans-serif;}
-tr { 	height: 24px; background-color:#EEEEEE;}
-td {	padding: 6px 5px 6px 5px; border-top: solid 1px #D2D2D2;border-bottom: solid 1px #E4E4E4;border-left: solid 1px #D2D2D2;border-right: solid 1px #D2D2D2;}
+table {overflow:auto;table-layout:static;border-collapse: collapse;width:100%; outline:#FD6812 solid 3px;
+padding: 5px;font: 12px Tahoma, Arial, Helvetica, sans-serif;border-style:groove solid;border-color:#AAAAAA;border-width:1px;}
+tr {height: 24px; background-color:#EEEEEE;border-bottom:groove 2px #E0E0E0;}
+td {padding: 6px 5px 6px 5px;border-left:inset 1px #E0E0E0;}
 tr:hover {background-color:#FFFFDD;}
 /* all tables */
 
@@ -289,9 +281,6 @@ tr:hover {background-color:#FFFFDD;}
 .osilver {background-color:#F5F5F5;}
 
 .file_cp1 {width:100%; margin: 5px 0; position: relative;overflow:auto;}
-
-.allfile_table {text-align:center;overflow:auto;font-size:x-small;font-weight: bold;white-space:pre-wrap;table-layout:static;border-collapse:collapse;}
-
 
 .small_font {padding: 5px;font:bold 10px Tahoma, Arial, Helvetica, sans-serif;color:#0E3D89}
 
@@ -342,14 +331,14 @@ border-bottom: 1px solid #111;
 
 
 .title_general_conf1gs,.title_other_conf1gs {
-height:35px;margin-top:5px;margin-bottom:2px;margin-left:auto;margin-right:auto;
+height:35px;margin-top:10px;margin-bottom:1px;
 padding-top:10px;font:bold 18px Tahoma, Arial, Helvetica, sans-serif;text-indent:45px;}
 
-.title_general_conf1gs{background:#CBE2F3 url(../images/general_conf1gs.png) no-repeat 98% 50%;
-border-top:2px solid #7CA7C8;border-bottom:2px solid #7CA7C8;color:#35A2D8;}
+.title_general_conf1gs {background:#CBE2F3 url(../images/general_conf1gs.png) no-repeat 98% 50%;color:#35A2D8;
+border-top:2px solid #7CA7C8;border-bottom:2px solid #7CA7C8;border-left:2px dotted #fff;border-right:2px dotted #fff;}
 
-.title_other_conf1gs{background:#F3D1C9 url(../images/other_conf1gs.png) no-repeat 98% 50%;
-border-top:2px solid #A66758;border-bottom:2px solid #A66758;color:#BB0000;}
+.title_other_conf1gs{background:#F3D1C9 url(../images/other_conf1gs.png) no-repeat 98% 50%;color:#BB0000;
+border-top:2px solid #A66758;border-bottom:2px solid #A66758;border-left:2px dotted #fff;border-right:2px dotted #fff;}
 
 /* / config page */
 

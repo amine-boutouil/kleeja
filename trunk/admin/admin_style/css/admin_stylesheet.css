@@ -78,9 +78,9 @@ select ,option{font: 11px tahoma,verdana,arial,sans-serif; font-weight: normal;
 	vertical-align: absmiddle;display: inline-block;
 	font: normal 14px tahoma,verdana,arial,sans-serif; }
 #divmiddle .title {
-	width: 94%; font: bold 14px tahoma,verdana,arial,sans-serif; letter-spacing: -1px;
-	color:#FE7C00; margin: 2px 2px 5px 2px; padding: 4px 25px 4px 8px;
-	background: url(../images/Note.gif) no-repeat right;}
+	width: 94%; font: bold 18px tahoma,verdana,arial,sans-serif; letter-spacing: -1px;
+	color:#FE7C00; margin: 2px 2px 5px 2px; padding: 4px 35px 4px 8px;
+	background: url(../images/generalstat.png) no-repeat right;}
 /* middle */	
 
 				
@@ -166,7 +166,7 @@ input.button1, input.button3,input.button2 {
 	
 	
 /* last visit */					
-#info-last-visit { background: #EEE; float: right; width: 49%; margin: 1px; padding: 1px ;
+#info-last-visit { background: #EEE; float: right; width: 48%; margin:1px 3px; padding: 1px ;
 					font: 11px tahoma,verdana,arial,sans-serif; border: 1px solid #999; }
 #info-last-visit ul { margin: 0; padding:0; list-style: none;}
 #info-last-visit li {	text-align: right;padding: 5px 10px;}
@@ -286,9 +286,7 @@ input.button1, input.button3,input.button2 {
 position: relative; -moz-border-radius: 8px; border-radius:1px;}
 
 /* all tables */
-table {
-	border-collapse: collapse; margin: 0px;	width:100%; padding: 5px; 
-	font: 12px Tahoma, Arial, Helvetica, sans-serif;}
+table {border-collapse: collapse;text-align:center;width:100%; padding: 5px;font: 12px Tahoma, Arial, Helvetica, sans-serif;}
 tr { 	height: 24px; background-color:#EEEEEE;}
 td {	padding: 6px 5px 6px 5px; border-top: solid 1px #D2D2D2;border-bottom: solid 1px #E4E4E4;border-left: solid 1px #D2D2D2;border-right: solid 1px #E4E4E4;}
 tr:hover {background-color:#FFFFDD;}
@@ -380,4 +378,14 @@ text-align:center;
 .imgtitle {
 	margin:0 6px;
 	vertical-align:middle;
+}
+
+.adminstrators { 
+margin:0 auto;
+width:70%;
+padding:5px;
+font:bold 12px Tahoma, Arial, Helvetica, sans-serif;
+}
+.adminstrators a{ 
+color:red
 }

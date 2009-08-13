@@ -222,7 +222,7 @@
 					}
 					else if($option['type'] != 'general' && $option['type'] != 'other')
 					{
-						$types[$option['type']] = '<div class="title_conf1gs"><em><h3>' . (!empty($lang['CONFIG_KLJ_MENUS_' . strtoupper($option['type'])]) ? $lang['CONFIG_KLJ_MENUS_' . strtoupper($option['type'])] : ((!empty($olang['CONFIG_KLJ_MENUS_' . strtoupper($option['type'])])) ? $olang['CONFIG_KLJ_MENUS_' . strtoupper($option['type'])] : $lang['CONFIG_KLJ_MENUS_OTHER'])) . '</h3></em></div>';
+						$types[$option['type']] = '<div class="title_general_conf1gs"><em><h3>' . (!empty($lang['CONFIG_KLJ_MENUS_' . strtoupper($option['type'])]) ? $lang['CONFIG_KLJ_MENUS_' . strtoupper($option['type'])] : ((!empty($olang['CONFIG_KLJ_MENUS_' . strtoupper($option['type'])])) ? $olang['CONFIG_KLJ_MENUS_' . strtoupper($option['type'])] : $lang['CONFIG_KLJ_MENUS_OTHER'])) . '</h3></em></div>';
 					}
 					else if($option['type'] == 'other')
 					{

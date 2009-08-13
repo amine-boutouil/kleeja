@@ -28,7 +28,8 @@
 <div class="tabber">
 
 <!---- start uplaod normal  ---->
-<div class="tabbertab" title="{lang.DOWNLOAD_F}" id="filetype">
+<!---- start uplaod URL ---->    
+<IF NAME="config.www_url"><div class="tabbertab" title="{lang.DOWNLOAD_F}" id="filetype"></IF>
 <LOOP NAME=FILES_NUM_LOOP>
 	<input type="file" name="file[{{i}}]" id="file[{{i}}]" style="display:{{show}}" size="50" /><br id="br[{{i}}]" style="display:{{show}}" />
 </LOOP>
@@ -43,7 +44,7 @@
 	<br />
 	<br /> 
 	<input class="buttons" type="submit" id="submitr" name="submitr" value="{lang.DOWNLOAD_F}"  disabled="disabled" />
-</div>
+<IF NAME="config.www_url"></div></IF>
 <!---- # end uplaod normal  ---->
 
 <!---- start uplaod URL ---->    

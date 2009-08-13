@@ -26,6 +26,9 @@
 						
 		$result = $SQL->build($query);
 		
+		//is there any change !
+		$AFFECTED = false;
+		
 		while($row=$SQL->fetch_array($result))
 		{
 			$ex_headere = isset($_POST["ex_header"]) ? $_POST['ex_header'] : $row['ex_header'];
@@ -43,8 +46,11 @@
 									'SET'		=> "ex_header = '" . $SQL->escape($ex_headere) . "', ex_footer = '" . $SQL->escape($ex_footere) . "'"
 								);
 
-				if ($SQL->build($update_query))
+				$SQL->build($update_query);
+				
+				if($SQL->affected())
 				{
+					$AFFECTED = true;
 					//delete cache ..
 					delete_cache('data_extra');
 				}
@@ -56,7 +62,7 @@
 		//after submit 
 		if (isset($_POST['submit']))
 		{
-			$text	= $lang['EXTRA_UPDATED'];
+			$text	= $AFFECTED ? $lang['EXTRA_UPDATED'] : $lang['NO_UP_CHANGE_S'];
 			$stylee	= "admin_info";
 		}
 		

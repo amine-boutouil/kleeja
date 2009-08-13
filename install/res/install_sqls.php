@@ -1,8 +1,7 @@
 <?php
-
 //
-// sql of installing a clean version of Kleeja ..
-// kleeja.com
+// kleeja SQLs ...
+// $Author$ , $Rev$,  $Date::                           $
 //
 
 // not for directly open
@@ -318,7 +317,6 @@ INSERT INTO `{$dbprefix}exts` (`id`, `group_id`, `ext`, `gust_size`, `gust_allow
 $install_sqls['exts_insert3'] = "
 INSERT INTO `{$dbprefix}exts` (`id`, `group_id`, `ext`, `gust_size`, `gust_allow`, `user_size`, `user_allow`) VALUES
 (25, 3, 'csv', 0, 0, 0, 0),
-(26, 3, 'ini', 0, 0, 0, 0),
 (27, 3, 'log', 0, 0, 0, 0),
 (28, 3, 'js', 0, 0, 0, 0),
 (29, 3, 'xml', 0, 0, 0, 0),
@@ -377,7 +375,3 @@ $install_sqls['stats_insert'] = "INSERT INTO `{$dbprefix}stats`  VALUES (0,1,0,0
 
 $install_sqls['users_insert'] = "INSERT INTO `{$dbprefix}users` (`id`,`name`,`password`,`password_salt`,`mail`,`admin`,`clean_name`) VALUES ('1','" . mysql_real_escape_string($user_name) . "', '" . mysql_real_escape_string($user_pass) . "','" . mysql_real_escape_string($user_salt) . "', '" . mysql_real_escape_string($user_mail) . "','1','" . $clean_name . "')";
 
-
-
-
-?>

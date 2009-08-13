@@ -165,7 +165,8 @@ input.button1, input.button3,input.button2 {
 #other-info ul { padding: 6px; }
 #other-info li {color: #333;}
 #other-info .t_info{ padding:2px 30px; font-weight: bold;font-size:14px;background:url(../images/t_info.png) no-repeat 100% 50%;margin-bottom:6px;color:#F46320}
-#other-info table tr{ background:#DBE9EE;cursor:help}
+#other-info table {border: 1px dashed #D2D6FF}
+#other-info table tr{ background:#DBE9EE;cursor:help;border: 1px dashed #D2D6FF}
 #other-info table td{border: 1px dashed #D2D6FF}
 #other-info table tr:hover { background:#fff; }
 #other-info:hover{background: #F6F6F6;}
@@ -183,7 +184,7 @@ input.button1, input.button3,input.button2 {
 	border-collapse: collapse; margin-top:10px;	width:100%; padding: 5px 5px 0px 5px; 
 	font: 12px Tahoma, Arial, Helvetica, sans-serif; cursor: pointer; }
 #disk_size .tab-size tr { 	
-	height: 24px; background-color: #eee; padding: 0;}
+	height: 24px; background-color: #eee; padding:0;border-width:0px;}
 #disk_size .tab-size td {	
 	padding: 3px 5px 3px 5px; border: 1px solid #eee;}
 /*  disk_size */
@@ -263,8 +264,8 @@ input.button1, input.button3,input.button2 {
 position: relative; -moz-border-radius: 8px; border-radius:1px;}
 
 /* all tables */
-table {overflow:auto;table-layout:static;border-collapse: collapse;width:100%; outline:#FD6812 solid 3px;
-padding: 5px;font: 12px Tahoma, Arial, Helvetica, sans-serif;border-style:groove solid;border-color:#AAAAAA;border-width:1px;}
+table {overflow:auto;table-layout:static;border-collapse: collapse;width:100%; 
+padding: 5px;font: 12px Tahoma, Arial, Helvetica, sans-serif;border-style:groove solid;border-color:#AAA;border-width:1px;}
 tr {height: 24px; background-color:#EEEEEE;border-bottom:groove 2px #E0E0E0;}
 td {padding: 6px 5px 6px 5px;border-left:inset 1px #E0E0E0;}
 tr:hover {background-color:#FFFFDD;}

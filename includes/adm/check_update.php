@@ -99,7 +99,6 @@
 	//then go back  to start
 	if(isset($_GET['show_msg']))
 	{
-		$SQL->freeresult($resul_get);
 		redirect(basename(ADMIN_PATH));
 		$SQL->close();
 		exit;

@@ -16,14 +16,15 @@
 <!-- end dot  -->
 
 <!-- start clear  -->
-<div class="clr"></div>
+<div class="clr"></div><br />
 <!-- end clear  -->
 
 <table>
-	<tr style="background-color:#F5F5F5">
+	<tr style="background:#F5F5F5">
 		<td>
-		<!-- start info System Messages -->
-			<IF NAME="not_style_writeable">
+		<IF NAME="not_style_writeable">
+		<div class="clr"></div><br />
+			<!-- start info System Messages -->
 				<div id="system-message">
 					<div class="info">
 						<ul>
@@ -31,11 +32,12 @@
 						</ul>
 					</div>
 				</div>
-			</IF>
-		<!-- end info System Messages -->
+			<!-- end info System Messages -->
+		<div class="clr"></div><br />			
+		</IF>
 
-		<select name="tpl_choose" size="8" class="s_tpl_x">
-		<OPTGROUP LABEL="{lang.TPLS_RE_BASIC}" style="direction:{lang.DIR}">
+		<select name="tpl_choose" size="11" class="s_tpl_x">
+		<OPTGROUP class="TPLS_RE_BASIC" LABEL="{lang.TPLS_RE_BASIC}" style="direction:{lang.DIR}">
 		<LOOP NAME="tpls_basic">
 		<option name="{{template_name}}">{{template_name}}</option>
 		</LOOP>
@@ -69,7 +71,7 @@
 	</table>
 
 <!--  button  -->
-<fieldset class="quick" style="text-align:center"><input class="button2" name="tpls_submit" type="submit" value="{lang.SUBMIT}" /></fieldset>
+<fieldset class="quick"><input class="button2" name="tpls_submit" type="submit" value="{lang.SUBMIT}" /></fieldset>
 <!--  button  -->
 
 </div>
@@ -95,12 +97,12 @@
 <!-- end dot  -->
 
 <!-- start clear  -->
-<div class="clr"></div>
+<div class="clr"></div><br />
 <!-- end clear  -->
 
 <table>
-	<tr style="background-color:#FFF">
-		<td>{lang.ADD_NEW_TPL_EXP}</td>
+	<tr style="background-color:#EFE7B8">
+		<td style="border-top:1px solid #FEA53D;border-bottom:1px solid #FEA53D;">{lang.ADD_NEW_TPL_EXP}</td>
 	</tr>
 	<tr style="background-color:#F5F5F5">
 		<td>

@@ -330,61 +330,35 @@ border-bottom: 1px solid #111;
 /* / tpl */
 
 /* config page */
+.config_types_list{width:100%;display:inline;margin: 20px 0;padding: 2px 5px;}
+.config_types_list div {float: right;width:46%;display:inline;font-size:14px;margin:3px;padding: 5px 8px 4px 5px; 
+					border-top:2px solid #FEA53D;border-bottom:2px solid #FEA53D;border-left:2px solid #FBFFFD;
+					border-right:2px solid #FBFFFD;background-color:#EFE7B8;cursor:pointer;height: 100px;text-align:center;}
+.config_types_list div a{text-decoration:none;color:#003F9D;margin: 45% auto 20% auto;padding:10px;font-size:14px;
+					font-weight:normal;text-align:center;}
+.config_types_list div img {margin:1% auto 1% auto;padding:3px;text-align:center;}
+.config_types_list div:hover {background-color:#FEFEFE;border:2px solid #FBFFFD;}
 
-.config_types_list{
-width:100%;
-display:inline;
-margin: 20px 0;
-padding: 2px 5px;
-}
-.config_types_list div {
-float: right;
-width:46%;
-display:inline;
-font-size:14px;
-margin:3px;
-padding: 5px 8px 4px 5px; 
-border-top:2px solid #FEA53D;
-border-bottom:2px solid #FEA53D;
-border-left:2px solid #FBFFFD;
-border-right:2px solid #FBFFFD;
-background-color:#EFE7B8;
-cursor:pointer;
-height: 100px;
-text-align:center;
-}
-.config_types_list div a{
-	text-decoration:none;
-	color:#003F9D;
-	margin: 45% auto 20% auto;
-	padding:10px;
-	font-size:14px;
-	font-weight:normal;
-	text-align:center;
-}
-.config_types_list div img {
-	margin:1% auto 1% auto;
-	padding:3px;
-	text-align:center;
-}
 
-.config_types_list div:hover {
-	background-color:#FEFEFE;
-	border:2px solid #FBFFFD;
-}
+.title_general_conf1gs,.title_conf1gs,.title_other_conf1gs {
+height:35px;margin-top:5px;margin-bottom:2px;margin-left:auto;margin-right:auto;
+padding-top:10px;font:bold 18px Tahoma, Arial, Helvetica, sans-serif;text-indent:45px;}
+
+.title_conf1gs {margin-top:15px;background:#F3DBCB url(../images/title_conf1gs2.png) no-repeat 98% 50%;
+border-top:2px solid #E0AE78;border-bottom:2px solid #E0AE78;color:#FF8234;}
+
+.title_general_conf1gs{background:#CBE2F3 url(../images/general_conf1gs.png) no-repeat 98% 50%;
+border-top:2px solid #7CA7C8;border-bottom:2px solid #7CA7C8;color:#35A2D8;}
+
+.title_other_conf1gs{background:#F3D1C9 url(../images/other_conf1gs.png) no-repeat 98% 50%;
+border-top:2px solid #A66758;border-bottom:2px solid #A66758;color:#BB0000;}
+
 /* / config page */
 
-.imgtitle {
-	margin:0 6px;
-	vertical-align:middle;
-}
+.imgtitle {margin:0 6px;vertical-align:middle;}
 
-.adminstrators { background: url(../images/adminstrators.gif) no-repeat 100% 70%;
-margin:0 auto;
-width:70%;
-padding:5px 25px;
-font:bold 12px Tahoma, Arial, Helvetica, sans-serif;
-}
+.adminstrators { background: url(../images/adminstrators.gif) no-repeat 100% 70%;margin:0 auto;
+width:70%;padding:5px 25px;font:bold 12px Tahoma, Arial, Helvetica, sans-serif;}
 .adminstrators a{color:red}
 
 /* for php_info  */
@@ -395,9 +369,5 @@ font:bold 12px Tahoma, Arial, Helvetica, sans-serif;
 .row2{overflow:auto;}
 /* / for php_info */
 
-.goback{ background:#EEE6B7;
-margin:2px auto;
-padding:5px 10px;
-font:bold 12px Tahoma, Arial, Helvetica, sans-serif;
-}
+.goback{ background:#EEE6B7;margin:2px auto;padding:5px 10px;font:bold 12px Tahoma, Arial, Helvetica, sans-serif;}
 .goback:hover{background:#fff;color:#FF8000}

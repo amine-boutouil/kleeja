@@ -73,19 +73,22 @@
 		$num = 0;
 		while($row=$SQL->fetch_array($result))
 		{
-		
+			//thumb ?
+			$is_there_thumb = file_exists(PATH . $row['folder'] . '/thumbs/' . $row['name']) ? true : false;
+			
 			//make new lovely arrays !!
 			$arr[]		= array('id'		=> $row['id'],
 								'tdnum'		=> ($tdnum==0) ? '<tr>': '',
 								'tdnum2'	=> ($tdnum==2) ? '</tr>' : '',
 								'name'		=> ($row['real_filename'] == '' ? $row['name'] : $row['real_filename']),
 								'ip' 		=> $lang['IP'] . ':' . htmlspecialchars($row['user_ip']),
-								'href'		=> '../' . $row['folder'] . '/' . $row['name'],
+								'href'		=> PATH . $row['folder'] . '/' . $row['name'],
 								'size'		=> $lang['FILESIZE']. ':' . Customfile_size($row['size']),
 								'ups'		=> $lang['FILEUPS'] .' : ' . $row['uploads'],
 								'time'		=> $lang['FILEDATE']. ':' . date('d-m-Y H:a', $row['time']),
 								'user'		=> $lang['BY'] . ':' . ($row['user'] == '-1' ? $lang['GUST'] :  $row['username']),
-								'thumb_link'=> (is_file($row['folder'] . '/thumbs/' . $row['name'])) ? '../' . $row['folder'] . '/thumbs/' . $row['name'] :  '../' . $row['folder'] . '/' . $row['name'],
+								'is_thumb'	=> $is_there_thumb,
+								'thumb_link'=>  $is_there_thumb ? PATH . $row['folder'] . '/thumbs/' . $row['name'] :  PATH . $row['folder'] . '/' . $row['name'],
 						);
 			
 			//fix ... 

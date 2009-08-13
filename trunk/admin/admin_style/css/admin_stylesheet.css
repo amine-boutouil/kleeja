@@ -121,13 +121,13 @@ select ,option{font: 11px tahoma,verdana,arial,sans-serif; font-weight: normal;
 
 /* for php_info  */
 .row1 {
-overflow:scroll;
+overflow:visible;
 text-align:left;
 width:50px !important;
 }
 .row2{
 width:50px !important;
-overflow:scroll;text-align:left
+overflow:visible;text-align:left
 }
 /* / for php_info */
 
@@ -298,9 +298,9 @@ tr:hover {background-color:#FFFFDD;}
 
 .osilver {background-color:#F5F5F5;}
 
-.file_cp1 {width:100%; margin: 5px 0; position: relative;overflow:scroll;}
+.file_cp1 {width:100%; margin: 5px 0; position: relative;overflow:visible;}
 
-.allfile_table {text-align:center;overflow:auto;font-size:x-small;font-weight: bold;white-space:nowrap;}
+.allfile_table {text-align:center;overflow:auto;font-size:x-small;font-weight: bold;white-space:pre-wrap;table-layout:static;border-collapse:collapse;}
 
 
 .small_font {padding: 5px;font:bold 10px Tahoma, Arial, Helvetica, sans-serif;color:#0E3D89}

@@ -497,6 +497,8 @@ $lang = array_merge($lang, array(
 	'PHPINI_MPOSTSIZE_SMALL'	=> 'بما أنك سمحت بتحميل "%1$s" ملفات دفعه واحده , فيجب ان ترفع قيمه post_max_size من اعدادات ال PHP بالخادم لما يقارب "%2$s" لتضمن لكليجا عمل أفضل.',
 	'NUMPER_REPORT' 			=> 'عدد البلاغات',
 	'NO_UP_CHANGE_S'			=> 'لم تم بتغيير شيء , وبالتالي لم يتم تحديث البيانات !.',
+	'ADD_HEADER_EXTRA' 			=> 'هيدر إضافي',
+	'ADD_FOOTER_EXTRA' 			=> 'فوتر إضافي',
 	
 	//last line of this file ...					 
 	'S_TRANSLATED_BY' 			=> 'Translated By <a href="http://www.fenix4web.com/">Fenix4Web</a>',

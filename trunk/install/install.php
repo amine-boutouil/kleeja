@@ -34,7 +34,8 @@ if(!empty($dbuser) && !empty($dbname) && !(isset($_GET['step']) && $_GET['step']
 	$d = inst_get_config('language');
 	if(!empty($d))
 	{
-		exit('Sorry, but Kleeja already installed ... ');
+		header('Location: ../');
+		exit;
 	}
 }
 
@@ -435,7 +436,7 @@ case 'data' :
 			</form></fieldset>';
 			
 			//clean cache
-			delete_cache(null, true, true);
+			delete_cache(null, true);
 		}
 		else
 		{

@@ -58,4 +58,6 @@ padding-left: 60px;width: 300px;
 /* config page */
 .config_types_list div {float:left}
 
+.title_general_conf1gs,.title_other_conf1gs {background-position:2% 50%;}
+
 .adminstrators { background-position:0% 60%;}

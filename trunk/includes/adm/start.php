@@ -51,6 +51,12 @@
 		//admin messages system
 		$ADM_NOTIFICATIONS = array();
 		
+		//useing IE6 ! and he is admin ?  omg !
+		if(strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE 6') !==false)
+		{
+			$ADM_NOTIFICATIONS[]  = array('id' => 'IE6', 'msg_type'=> 'error', 'title'=> $lang['NOTE'], 'msg'=> $lang['ADMIN_USING_IE6']);
+		}
+		
 		//updating
 		$v = @unserialize($config['new_version']);
 		if(version_compare(strtolower(KLEEJA_VERSION), strtolower($v['version_number']), '<'))
@@ -166,7 +172,7 @@
 			}
 		}
 		
-		
+
 		($hook = kleeja_run_hook('default_admin_page')) ? eval($hook) : null; //run hook 
 		
 #<--- EOF

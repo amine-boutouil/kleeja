@@ -39,7 +39,7 @@
 		<select name="tpl_choose" size="11" class="s_tpl_x">
 		<OPTGROUP class="TPLS_RE_BASIC" LABEL="{lang.TPLS_RE_BASIC}" style="direction:{lang.DIR}">
 		<LOOP NAME="tpls_basic">
-		<option name="{{template_name}}">{{template_name}}</option>
+		<option name="{{template_name}}"<IF LOOP="template_name==header.html"> selected="selected"</IF>>{{template_name}}</option>
 		</LOOP>
 		</OPTGROUP>
 		<OPTGROUP LABEL="{lang.TPLS_RE_MSG}" style="direction:{lang.DIR}">

@@ -156,16 +156,17 @@ switch ($_GET['sty_t'])
 		
 		case "style_orders" :
 			
+			//style id ..fix for zooz
+			$style_id = str_replace('..', '', $_REQUEST['style_id']);
+			
 			if(empty($_REQUEST['tpl_choose']))
 			{
-				redirect('./');
+				redirect(basename(ADMIN_PATH) . '?cp=styles&style_choose=' . $style_id . '&method=1');
 			}
 			
 			//edit or del tpl 
 			if(isset($_REQUEST['tpl_choose']) && !empty($_REQUEST['tpl_choose']) && isset($_REQUEST['style_id']))
 			{
-				//style id ..fix for zooz
-				$style_id = str_replace('..', '', $_REQUEST['style_id']);
 				//tpl name 
 				$tpl_name =	$SQL->escape($_REQUEST['tpl_choose']);
 				$tpl_path = $root_path . 'styles/' . $style_id . '/' . $tpl_name;

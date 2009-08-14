@@ -12,6 +12,12 @@
 	{
 		exit('no directly opening : ' . __file__);
 	}
+
+	//if not enabled !
+	if(isset($NO_PHPINFO) || !function_exists('phpinfo'))
+	{
+		redirect('./');
+	}
 	
 	//for style ..
 	$stylee 		= "admin_php_info";

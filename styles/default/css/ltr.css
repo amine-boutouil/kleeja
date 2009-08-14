@@ -1,4 +1,4 @@
-﻿/*
+/*
 # Powered by Kleeja .... Kleeja.com
 # Designed by Tar3q .... Tar3q.com
 # copyright 2007-2009  ..
@@ -179,7 +179,7 @@ left:80px;
 .safe_code  td span{text-align: center;}
 
 caption, th, td {
-	text-align: left;
+        text-align: left;
 }
 
 option {padding-left: 1em;}
@@ -223,7 +223,7 @@ float:left;
 margin:1% 2% 2% 12%;
 background-position:98% 50%;
 }
-#login {	float:left;}
+#login {        float:left;}
 #login .username,#login .password{padding-right:20px;padding-left:2px;}
 #login  .username{background-position:100% 50%}
 #login  .password{background-position:100% 50%}
@@ -235,9 +235,9 @@ background-position:98% 50%;
 
 
 /*-- start Profile template  */
-.userdata td {border-right:1px solid #e5eff8;text-align:left;	}				
-.userdata th {border-right:1px solid #e5eff8;}							
-.userdata thead th {text-align:left;}	
+.userdata td {border-right:1px solid #e5eff8;text-align:left;        }                                
+.userdata th {border-right:1px solid #e5eff8;}                                                        
+.userdata thead th {text-align:left;}        
 /*-- End Profile template  */
 
 /*-- start Profile template  */
@@ -253,12 +253,12 @@ background-position:98% 50%;
 .wait {font-size:200%;}
 /* # End Downlod template */
 
-.rebort  {background-position:95% 20%;}	
+.rebort  {background-position:95% 20%;}        
 
 /* button Downlod */
 #download {text-align:center;height:50px;margin:12px auto;}
 #download a {background:#FEC008 url(../images/bg_download.png) repeat-x top right;border-top:3px solid #9B7500;
-			border-bottom:3px solid #9B7500;color:#9B7500;font-size:100%;font-weight:700;padding:20px;}
+                        border-bottom:3px solid #9B7500;color:#9B7500;font-size:100%;font-weight:700;padding:20px;}
 #download a:hover {background:#FFD65D;color:#000;}
 /* # End Downlod template */
 

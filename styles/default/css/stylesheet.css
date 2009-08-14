@@ -1,4 +1,4 @@
-﻿/*
+/*
 # Powered by Kleeja .... Kleeja.com
 # Designed by Tar3q .... Tar3q.com
 # copyright 2007-2009  ..
@@ -35,14 +35,14 @@ img.right {float: right;margin-left:15px;}
 .logo {width:500px;height:84px;margin:2px 0;}
 /* #  LOGO */
 
-/**  start The main menu at the top **/	
+/**  start The main menu at the top **/        
 #top_menu {width: 100%;height: 43px;background: url(../images/menu-bg.gif) repeat-x top left;margin-top:5px}
 #top_menu  .m3nu {width: 80%;height: 43px;font-size: 12px;font-weight: bold;list-style-type: none;margin: 0 auto;}
 #top_menu  ul.m3nu li {display: block;float: right;margin:0 5px 0 0;}
-#top_menu  ul.m3nu li a {height: 43px;color: #777;text-decoration: none;	display: block;float: left;padding: 8px 15px 0;}
+#top_menu  ul.m3nu li a {height: 43px;color: #777;text-decoration: none;        display: block;float: left;padding: 8px 15px 0;}
 #top_menu  ul.m3nu li a:hover {color: #333;background: url(../images/current-bg.gif) top left repeat-x;}
 #top_menu  ul.m3nu li a.current{color: #FFF;background: url(../images/current-bg.gif) top left repeat-x;padding:5px 15px;}
-/** # End The main menu at the top **/	
+/** # End The main menu at the top **/        
 
 /*  wrapper body */
 #wrapper {width:90%;height:100%;margin:10px auto 4px auto;}
@@ -130,7 +130,7 @@ img.right {float: right;margin-left:15px;}
 .number_online_all ,.online_visitor ,.online_users {display:inline;color:#F9F9F9;padding:5px 12px;border:1px solid #E2E2E2;-moz-border-radius:6px;-webkit-border-radius:6px;-khtml-border-radius:6px;border-radius:6px;}
 .number_online_all span,
 .online_users span,
-.online_visitor span {font:bold 12px sans-serif,Helvetica,Tahoma,  Arial, sans-serif;color:#eee;}	
+.online_visitor span {font:bold 12px sans-serif,Helvetica,Tahoma,  Arial, sans-serif;color:#eee;}        
 .number_online_all  {background:#D2534B url(../images/number_online_all.gif) no-repeat right center;}
 .online_visitor{background:#958853 url(../images/online_visitor.gif) no-repeat right center;}
 .online_users{background:#92A5C4 url(../images/online_users.gif) no-repeat right center;}
@@ -145,7 +145,7 @@ img.right {float: right;margin-left:15px;}
 .bg {background:#F5F5F5 url(../images/bg_tabbertab.png) repeat-x top left;}
 ul.tabbernav{ padding:5px 0; font: bold 11px tahoma, sans-serif;}
 ul.tabbernav li{ list-style: none; display: inline;}
-ul.tabbernav li a{ padding:5px 14px; margin-left: 5px; border: 1px solid #aaa;background:#bbb;text-decoration: none;-moz-border-radius-topleft: 10px;-webkit-border-top-left-radius: 10px;	-moz-border-radius-topright: 10px;-webkit-border-top-right-radius: 10px;}
+ul.tabbernav li a{ padding:5px 14px; margin-left: 5px; border: 1px solid #aaa;background:#bbb;text-decoration: none;-moz-border-radius-topleft: 10px;-webkit-border-top-left-radius: 10px;        -moz-border-radius-topright: 10px;-webkit-border-top-right-radius: 10px;}
 ul.tabbernav li a:link {color:#555;}
 ul.tabbernav li a:hover{color:#111;background:#ccc;}
 ul.tabbernav li.tabberactive a{ padding:5px 14px;border-bottom: 1px solid #E8E8E8;background-color:#E8E8E8;}
@@ -187,7 +187,7 @@ ul.tabbernav li.tabberactive a:hover{color:#AE4600;}
 
 /* login template >> login.html */
 #bg_log1n{float:right;width: 40%;padding:10px 30px;margin:1% 12% 2% 2%;color:#444;background:url(../images/get_password.png) no-repeat 10% 0%;}
-#login {	float: right;width: 220px;}
+#login {        float: right;width: 220px;}
 #login label {display: block;margin-bottom: 2px;}
 #login a {color:#C03C2D;font-size: 12px;padding: 3px 6px;}
 #login .title_login {color:#D80505;width: 200px;padding:2px 5px;}
@@ -195,7 +195,7 @@ ul.tabbernav li.tabberactive a:hover{color:#AE4600;}
 #login  .username{background:#fff url(../images/username.gif) no-repeat 1px 2px;}
 #login  .password{background:#fff url(../images/password.gif) no-repeat 1px 2px;}
 #login  .forget_pass  { background:#E0E0E0;float:left;margin:5px 0 0 10px; color:#C03C2D;}
-#login  .forget_pass a:hover {color:#FF2020;}	
+#login  .forget_pass a:hover {color:#FF2020;}        
 #login  .remme{background:#FFBA00;color: #000;border: 1px solid #999;font:normal 9px Tahoma, Helvetica, Arial, sans-serif;}
 #login .remme option{background: #FFBA00;color: #000;}
 /* # login template >> login.html  */
@@ -245,10 +245,10 @@ ul.tabbernav li.tabberactive a:hover{color:#AE4600;}
 .call label ,.rebort label {display:block;font-weight:bold;margin:5px 0;}
 .call input ,.rebort input {padding: 2px;border:1px solid #999;font: bold 12px tahoma, Verdana, sans-serif;color:#666;}
 .call textarea,.rebort textarea {width:300px;padding:2px;font: bold 12px tahoma, Verdana, sans-serif;border:1px solid #999;height:100px;display:block;color:#666;}
-.rebort  {margin:10px; background:url(../images/file_rebort.png) no-repeat 10% 10%;}	
+.rebort  {margin:10px; background:url(../images/file_rebort.png) no-repeat 10% 10%;}        
 .box_rebort{background:#EDF1F8;border:2px solid #CDDFFF;margin:5px 0;padding:10px;width:60%;}
 .urlcolor{background:#FFCDCD}
-/* # call and file report templates */	
+/* # call and file report templates */        
 
 /*-- start Profile template >> profile.html  */
 #profile  select,#profile  option{background:#FFD;color: #000;font: bold 11px Tahoma, Helvetica, Arial, sans-serif;}

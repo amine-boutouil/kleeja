@@ -14,7 +14,8 @@ padding-left: 60px;width: 300px;
 
  /* middle */
  #divmiddle { float: left;}
- #divmiddle .title { padding: 4px 8px 4px 25px; background-position:left;}
+ #divmiddle .title { padding: 4px 5px 4px 35px; background-position:left;}
+ #divmiddle .welcome span{padding-left:5px;}
  /* middle */	
  
  				
@@ -50,3 +51,11 @@ padding-left: 60px;width: 300px;
 -.here_page { margin-left: 5px;}
  /* pagination */
  
+#disk_size .t_disk_size{padding:2px 10px 2px 35px;background-position:0% 40%;}
+
+#other-info .t_info{background-position:0% 40%;}
+
+/* config page */
+.config_types_list div {float:left}
+
+.adminstrators { background-position:0% 60%;}

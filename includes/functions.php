@@ -861,12 +861,12 @@ function kleeja_check_mime ($mime, $group_id, $file_path)
 }
 
 //delete cache
-function delete_cache($name, $all=false, $deep = false)
+function delete_cache($name, $all=false)
 {
 
 	($hook = kleeja_run_hook('delete_cache_func')) ? eval($hook) : null; //run hook
 	
-	$path_to_cache = PATH . ($deep ? '.' : '') . './cache';
+	$path_to_cache = PATH . './cache';
 	
 	if($all)
 	{

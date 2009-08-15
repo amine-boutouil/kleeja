@@ -137,40 +137,40 @@ switch ($_GET['go'])
 			//no error , lets do process
 			if(empty($ERRORS))
 			{
-					$name	= $NOT_USER ? (string) $SQL->escape($_POST['rname']) : $usrcp->name();
-					$text	= (string) $SQL->escape($_POST['rtext']);
-					$mail	= $NOT_USER ? (string) strtolower(trim($SQL->escape($_POST['rmail']))) : $usrcp->mail();
-					$url	= (string) $SQL->real_escape($_POST['rurl']);
-					$time 	= (int) time();
-					$rid	= (int) intval($_POST['rid']);
-					$ip		=  get_ip();
+				$name	= $NOT_USER ? (string) $SQL->escape($_POST['rname']) : $usrcp->name();
+				$text	= (string) $SQL->escape($_POST['rtext']);
+				$mail	= $NOT_USER ? (string) strtolower(trim($SQL->escape($_POST['rmail']))) : $usrcp->mail();
+				$url	= (string) $SQL->real_escape($_POST['rurl']);
+				$time 	= (int) time();
+				$rid	= (int) intval($_POST['rid']);
+				$ip		=  get_ip();
 
 
-					$insert_query	= array('INSERT'	=> '`name` ,`mail` ,`url` ,`text` ,`time` ,`ip`',
-											'INTO'		=> "`{$dbprefix}reports`",
-											'VALUES'	=> "'$name', '$mail', '$url', '$text', '$time', '$ip'"
+				$insert_query	= array('INSERT'	=> '`name` ,`mail` ,`url` ,`text` ,`time` ,`ip`',
+										'INTO'		=> "`{$dbprefix}reports`",
+										'VALUES'	=> "'$name', '$mail', '$url', '$text', '$time', '$ip'"
 										);
 					
-					($hook = kleeja_run_hook('qr_insert_new_report')) ? eval($hook) : null; //run hook
+				($hook = kleeja_run_hook('qr_insert_new_report')) ? eval($hook) : null; //run hook
 			
-					$SQL->build($insert_query);
+				$SQL->build($insert_query);
 					
-					//update number of reports
-					$update_query	= array('UPDATE'	=> "{$dbprefix}files",
-											'SET'		=> 'report=report+1',
-											'WHERE'		=> 'id=' . $rid,
+				//update number of reports
+				$update_query	= array('UPDATE'	=> "{$dbprefix}files",
+										'SET'		=> 'report=report+1',
+										'WHERE'		=> 'id=' . $rid,
 											);
 								
-					($hook = kleeja_run_hook('qr_update_no_file_report')) ? eval($hook) : null; //run hook
+				($hook = kleeja_run_hook('qr_update_no_file_report')) ? eval($hook) : null; //run hook
 					
-					$SQL->build($update_query);
+				$SQL->build($update_query);
 					
-					$to = $config['sitemail2']; //administrator e-mail
-					$message = $text . "\n\n\n\n" . 'URL :' . $url . ' - TIME : ' . date("d-m-Y h:i a", $time) . ' - IP:' . $ip;
-					$subject = $lang['REPORT'];
-					send_mail($to, $message, $subject, $mail, $name);
+				$to = $config['sitemail2']; //administrator e-mail
+				$message = $text . "\n\n\n\n" . 'URL :' . $url . ' - TIME : ' . date("d-m-Y h:i a", $time) . ' - IP:' . $ip;
+				$subject = $lang['REPORT'];
+				send_mail($to, $message, $subject, $mail, $name);
 					
-					kleeja_info($lang['THNX_REPORTED']);
+				kleeja_info($lang['THNX_REPORTED']);
 					
 			}
 		}

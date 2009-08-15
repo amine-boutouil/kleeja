@@ -641,4 +641,9 @@ function get_up_tpl_box($box_name, $extra = array())
 	return $return;
 }
 
+function group_id_order($a, $b) 
+{ 
+	return ($a['group_id'] == $b['group_id']) ? 0 : ($a['group_id'] < $b['group_id'] ? -1 : 1); 
+}
+
 #<-- EOF

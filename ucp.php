@@ -76,51 +76,51 @@ switch ($_GET['go'])
 			}
 			elseif (isset($_POST['submit']))
 			{
-					$ERRORS	= array();
+				$ERRORS	= array();
 					
-					($hook = kleeja_run_hook('login_after_submit')) ? eval($hook) : null; //run hook
+				($hook = kleeja_run_hook('login_after_submit')) ? eval($hook) : null; //run hook
 
-					//check for form key
-					if(!kleeja_check_form_key('login'))
-					{
-						$ERRORS[] = $lang['INVALID_FORM_KEY'];
-					}
-					if (empty($_POST['lname']) || empty($_POST['lpass']))
-					{
-						$ERRORS[] = $lang['EMPTY_FIELDS'];
-					}
-					elseif(!$usrcp->data($_POST['lname'], $_POST['lpass'], false, $_POST['remme']))
-					{
-						$ERRORS[] = $lang['LOGIN_ERROR'];
-					}
+				//check for form key
+				if(!kleeja_check_form_key('login'))
+				{
+					$ERRORS[] = $lang['INVALID_FORM_KEY'];
+				}
+				if (empty($_POST['lname']) || empty($_POST['lpass']))
+				{
+					$ERRORS[] = $lang['EMPTY_FIELDS'];
+				}
+				elseif(!$usrcp->data($_POST['lname'], $_POST['lpass'], false, $_POST['remme']))
+				{
+					$ERRORS[] = $lang['LOGIN_ERROR'];
+				}
 					
 				
-					if(empty($ERRORS))
+				if(empty($ERRORS))
+				{
+					//delete him from online as guest
+					if ($config['allow_online'] == '1')
 					{
-						//delete him from online as guest
-						if ($config['allow_online'] == '1')
-						{
-							$query_del	= array('DELETE'	=> "{$dbprefix}online",
-												'WHERE'		=> "ip='" . get_ip() . "'"
+						$query_del	= array('DELETE'	=> "{$dbprefix}online",
+											'WHERE'		=> "ip='" . get_ip() . "'"
 											);
 											
-							($hook = kleeja_run_hook('qr_delete_onlines_in_login')) ? eval($hook) : null; //run hook
+						($hook = kleeja_run_hook('qr_delete_onlines_in_login')) ? eval($hook) : null; //run hook
 							
-							$SQL->build($query_del);
-						}
-						
-						if(isset($_GET['return']))
-						{
-							redirect('./' . str_replace(array('ooklj1oo', 'ooklj2oo', 'ooklj3oo'), array('?', '/', '='), urlencode($_GET['return'])));
-							$SQL->close();
-							exit;
-						}
-						
-						$errorpage = true;
-						($hook = kleeja_run_hook('login_data_no_error')) ? eval($hook) : null; //run hook
-						$text	= $lang['LOGIN_SUCCESFUL'] . ' <br /> <a href="' . $config['siteurl'] . '">' . $lang['HOME'] . '</a>';
-						kleeja_info($text, '', true, 'index.php');
+						$SQL->build($query_del);
 					}
+						
+					if(isset($_GET['return']))
+					{
+						redirect('./' . str_replace(array('ooklj1oo', 'ooklj2oo', 'ooklj3oo'), array('?', '/', '='), urlencode($_GET['return'])));
+						$SQL->close();
+						exit;
+					}
+						
+					$errorpage = true;
+					($hook = kleeja_run_hook('login_data_no_error')) ? eval($hook) : null; //run hook
+					$text	= $lang['LOGIN_SUCCESFUL'] . ' <br /> <a href="' . $config['siteurl'] . '">' . $lang['HOME'] . '</a>';
+					kleeja_info($text, '', true, 'index.php');
+				}
 			}
 			
 	
@@ -171,73 +171,73 @@ switch ($_GET['go'])
 			}
 			else // submit
 			{			
-						$ERRORS = array();
+				$ERRORS = array();
 			
-						($hook = kleeja_run_hook('register_submit')) ? eval($hook) : null; //run hook
+				($hook = kleeja_run_hook('register_submit')) ? eval($hook) : null; //run hook
 						
-						//check for form key
-						if(!kleeja_check_form_key('register'))
-						{
-							$ERRORS[] = $lang['INVALID_FORM_KEY'];
-						}
-						if(!kleeja_check_captcha())
-						{
-							$ERRORS[] = $lang['WRONG_VERTY_CODE'];
-						}
-						if (trim($_POST['lname'])=='' || trim($_POST['lpass'])=='' || trim($_POST['lmail'])=='')
-						{
-							$ERRORS[] = $lang['EMPTY_FIELDS'];
-						}	
-						if (!eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$", trim($_POST['lmail'])))
-						{
-							$ERRORS[] = $lang['WRONG_EMAIL'];
-						}
-						if (strlen(trim($_POST['lname'])) < 4 || strlen(trim($_POST['lname'])) > 20)
-						{
-							$ERRORS[] = $lang['WRONG_NAME'];
-						}
-						else if ($SQL->num_rows($SQL->query("SELECT * FROM `{$dbprefix}users` WHERE clean_name='" . trim($SQL->escape($usrcp->cleanusername($_POST["lname"]))) . "'")) !=0 )
-						{
-							$ERRORS[] = $lang['EXIST_NAME'];
-						}
-						else if ($SQL->num_rows($SQL->query("SELECT * FROM `{$dbprefix}users` WHERE mail='" . strtolower(trim($SQL->escape($_POST["lmail"]))) . "'")) !=0 )
-						{
-							$ERRORS[] = $lang['EXIST_EMAIL'];
-						}
+				//check for form key
+				if(!kleeja_check_form_key('register'))
+				{
+					$ERRORS[] = $lang['INVALID_FORM_KEY'];
+				}
+				if(!kleeja_check_captcha())
+				{
+					$ERRORS[] = $lang['WRONG_VERTY_CODE'];
+				}
+				if (trim($_POST['lname'])=='' || trim($_POST['lpass'])=='' || trim($_POST['lmail'])=='')
+				{
+					$ERRORS[] = $lang['EMPTY_FIELDS'];
+				}	
+				if (!eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$", trim($_POST['lmail'])))
+				{
+					$ERRORS[] = $lang['WRONG_EMAIL'];
+				}
+				if (strlen(trim($_POST['lname'])) < 4 || strlen(trim($_POST['lname'])) > 20)
+				{
+					$ERRORS[] = $lang['WRONG_NAME'];
+				}
+				else if ($SQL->num_rows($SQL->query("SELECT * FROM `{$dbprefix}users` WHERE clean_name='" . trim($SQL->escape($usrcp->cleanusername($_POST["lname"]))) . "'")) !=0 )
+				{
+					$ERRORS[] = $lang['EXIST_NAME'];
+				}
+				else if ($SQL->num_rows($SQL->query("SELECT * FROM `{$dbprefix}users` WHERE mail='" . strtolower(trim($SQL->escape($_POST["lmail"]))) . "'")) !=0 )
+				{
+					$ERRORS[] = $lang['EXIST_EMAIL'];
+				}
 						
-						//no errors, lets do process
-						if(empty($ERRORS))	 
-						{
-							$name			= (string) $SQL->escape(trim($_POST['lname']));
-							$user_salt		= (string) substr(base64_encode(pack("H*", sha1(mt_rand()))), 0, 7);
-							$pass			= (string) $usrcp->kleeja_hash_password($SQL->escape(trim($_POST['lpass'])) . $user_salt);
-							$mail			= (string) strtolower(trim($SQL->escape($_POST['lmail']))); // security ;)
-							$session_id		= (string) session_id();
-							$clean_name		= (string) $usrcp->cleanusername($name);
+				//no errors, lets do process
+				if(empty($ERRORS))	 
+				{
+					$name			= (string) $SQL->escape(trim($_POST['lname']));
+					$user_salt		= (string) substr(base64_encode(pack("H*", sha1(mt_rand()))), 0, 7);
+					$pass			= (string) $usrcp->kleeja_hash_password($SQL->escape(trim($_POST['lpass'])) . $user_salt);
+					$mail			= (string) strtolower(trim($SQL->escape($_POST['lmail']))); // security ;)
+					$session_id		= (string) session_id();
+					$clean_name		= (string) $usrcp->cleanusername($name);
 							
-							$insert_query	= array('INSERT'	=> 'name ,password, password_salt ,mail,admin, session_id, clean_name',
-													'INTO'		=> "{$dbprefix}users",
-													'VALUES'	=> "'$name', '$pass', '$user_salt', '$mail','0','$session_id','$clean_name'"
+					$insert_query	= array('INSERT'	=> 'name ,password, password_salt ,mail,admin, session_id, clean_name',
+											'INTO'		=> "{$dbprefix}users",
+											'VALUES'	=> "'$name', '$pass', '$user_salt', '$mail','0','$session_id','$clean_name'"
 												);
 							
-							($hook = kleeja_run_hook('qr_insert_new_user_register')) ? eval($hook) : null; //run hook
+					($hook = kleeja_run_hook('qr_insert_new_user_register')) ? eval($hook) : null; //run hook
 
-							if ($SQL->build($insert_query))
-							{
-								$last_user_id = $SQL->insert_id();
+					if ($SQL->build($insert_query))
+					{
+						$last_user_id = $SQL->insert_id();
 								
-								($hook = kleeja_run_hook('ok_added_users_register')) ? eval($hook) : null; //run hook
-								$text	= $lang['REGISTER_SUCCESFUL'] . '<a href="' .  $config['siteurl']  . ($config['mod_writer'] ?  'login.html' : 'ucp.php?go=login') . '">' . $lang['LOGIN'] . '</a>';
-								//update number of stats
-								$update_query	= array('UPDATE'	=> "{$dbprefix}stats",
-														'SET'		=> "users=users+1,lastuser='$name'",
+						($hook = kleeja_run_hook('ok_added_users_register')) ? eval($hook) : null; //run hook
+						$text	= $lang['REGISTER_SUCCESFUL'] . '<a href="' .  $config['siteurl']  . ($config['mod_writer'] ?  'login.html' : 'ucp.php?go=login') . '">' . $lang['LOGIN'] . '</a>';
+						//update number of stats
+						$update_query	= array('UPDATE'	=> "{$dbprefix}stats",
+												'SET'		=> "users=users+1,lastuser='$name'",
 												);
 												
-								($hook = kleeja_run_hook('qr_update_no_users_register')) ? eval($hook) : null; //run hook
-								$SQL->build($update_query);
-								kleeja_info($text);
-							}
-						}
+						($hook = kleeja_run_hook('qr_update_no_users_register')) ? eval($hook) : null; //run hook
+						$SQL->build($update_query);
+						kleeja_info($text);
+					}
+				}
 			}
 		
 		break;

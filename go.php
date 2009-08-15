@@ -31,7 +31,6 @@ switch ($_GET['go'])
 		$titlee	= $lang['GUIDE'];
 		
 		//re oreder exts by group_id 
-		function group_id_order($a, $b) { return ($a['group_id'] == $b['group_id']) ? 0 : ($a['group_id'] < $b['group_id'] ? -1 : 1); }
 		uasort($g_exts, "group_id_order");
 		uasort($u_exts, "group_id_order");
 
@@ -296,7 +295,8 @@ switch ($_GET['go'])
 			{
 				$query = array('SELECT'=> 'f.id, f.name, f.folder, f.size',
 								'FROM'	=> "{$dbprefix}files f",
-								'WHERE'	=> "f.code_del='" . $cd . "'"
+								'WHERE'	=> "f.code_del='" . $cd . "'",
+								'LIMIT'	=> '1',
 							);
 					
 				($hook = kleeja_run_hook('qr_select_file_with_code_del')) ? eval($hook) : null; //run hook	
@@ -340,7 +340,7 @@ switch ($_GET['go'])
 			}
 			else
 			{
-				kleeja_info('<script type="text/javascript">
+				kleeja_info($lang['ARE_YOU_SURE_DO_THIS'] . '<script type="text/javascript">
 						function confirm_from()
 						{
 						if(confirm(\'' . $lang['ARE_YOU_SURE_DO_THIS'] . '\'))

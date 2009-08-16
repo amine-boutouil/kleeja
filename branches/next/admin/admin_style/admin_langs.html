@@ -1,0 +1,75 @@
+<!-- start language temlate  -->
+<div id="divmiddle">
+
+<fieldset>
+
+<!-- start div border table  -->
+<div id="border-table">
+
+<!-- title  -->
+<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/langs_button.gif" />{lang.R_LANGS} :</h2>
+<!-- title  -->
+
+<!-- start dot  -->
+<p class="dot" />
+<!-- end dot  -->
+
+<!-- start clear  -->
+<div class="clr"></div>
+<!-- end clear  -->
+
+
+<form action="{action2}" method="post">
+	<select name="lang">
+		{lngfiles}
+	</select>
+	  &nbsp;&nbsp;<input class="button2"  type="submit" value="{lang.UPDATE}" />
+</form>
+
+<!-- start clear  -->
+<div class="clr"></div><br />
+
+<!-- start dot  -->
+<p class="dot" />
+<!-- end dot  -->
+
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
+
+<form method="post" action="{action}">
+
+<table style="width:90%;text-align:center">
+<IF NAME="no_results">
+...
+<ELSE>
+<LOOP NAME="arr">
+    <tr style="background-color:<RAND="#D8EBFD","#fff">" class="">
+        <td>#<em>{{lang_id}}</em></td>
+        <td><span class="s_box_tpls">{{word}}</span></td>
+		<td> <strong>=</strong> </td>
+        <td><label><input type="text" name="t_{{word}}" value="{{trans}}" size="56" ></label></td>
+        <td><input type="checkbox" name="del_{{word}}" value="1"> {lang.DELETE}</td>
+    </tr>
+</LOOP>
+</IF>
+</table>
+
+<!-- start button  -->
+<fieldset class="quick" style="text-align:center">
+                <input class="button2" name="submit" type="submit" value="{lang.UPDATE}" />
+</fieldset>
+<!-- end button  -->
+
+<!-- start pagination  -->
+<div style="text-align:center"><b>{page_nums}</b></div>
+<!-- end pagination  -->
+
+</div>
+<!-- end div border table  -->
+</fieldset>
+
+</form>
+</div>
+<!--  end language temlate  -->
+        

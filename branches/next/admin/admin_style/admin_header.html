@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="{lang.DIR}">
+<!--  
+# Powered by Kleeja .... Kleeja.com
+# Designed by Tar3Q .... Tar3q.com
+# copyright 2007-2009  .. Kleeja 
+-->
+<head>
+<title>{lang.KLEEJA_CP} - {config.sitename}</title>
+<meta http-equiv="Content-Language" content="ar" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="{STYLE_PATH_ADMIN}css/admin_stylesheet.css" type="text/css" />
+<link rel="stylesheet" href="{STYLE_PATH_ADMIN}css/jquery.lightbox.css" type="text/css" />
+<IF NAME="{lang.DIR}==ltr">
+<link rel="stylesheet" href="{STYLE_PATH_ADMIN}css/admin_stylesheet_ltr.css" type="text/css" />
+</IF>	
+<link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
+<script type="text/javascript">
+	var STYLE_PATH_ADMIN = '{STYLE_PATH_ADMIN}';
+
+	function confirm_from()
+	{
+		if(confirm('{lang.ARE_YOU_SURE_DO_THIS}'))
+			return true;
+		else
+			return false;
+	}
+
+	function change_color(obj, id, c, c2)
+	{
+		c = (c == null) ? 'ored' : c;
+		c2 = (c == null) ? 'osilver' : c2;
+		var ii = document.getElementById(id);
+		
+		if(obj.checked)
+		{
+			ii.setAttribute("class", c);
+			ii.setAttribute("className", c);
+		}
+		else
+		{
+			ii.setAttribute("class", c2);
+			ii.setAttribute("className", c2);	
+		}
+	}
+	
+	
+	function checkAll(form, id, _do_c_, c, c2)
+	{
+		for (var i=0;i<form.elements.length;i++)
+		{
+			if(form.elements[i].getAttribute("rel") != id)
+				continue;
+			
+			if(form.elements[i].checked)
+			{
+				
+				uncheckAll(form, id, _do_c_, c, c2);
+				break;
+			}
+	
+			form.elements[i].checked = true ;
+			change_color(form.elements[i], _do_c_+'['+form.elements[i].value+']', c, c2);
+		}
+	}
+
+	function uncheckAll(form, id, _do_c_, c, c2)
+	{
+		for (var i=0;i<form.elements.length;i++)
+		{
+			if(form.elements[i].getAttribute("rel") != id)
+				continue;
+			form.elements[i].checked = false ;
+			change_color(form.elements[i], _do_c_+'['+form.elements[i].value+']', c, c2);
+		}
+	}
+
+</script>
+<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/tips.js"></script> 
+<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.js"></script> 
+<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.lightbox.js"></script> 
+<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.pulse.js"></script> 
+</head>
+<body>
+<!-- start top div header  -->
+<div id="divheader">
+	<div id="header">
+	<div class="logo1"><a href="{config.siteurl}"><img src="{STYLE_PATH_ADMIN}images/logo.png" alt="{config.sitename}" /></a></div>
+	<div class="logo2"><br /><b>{lang.KLEEJA_CP}</b></div>
+	</div>
+</div>
+<!-- end top div header  -->
+
+<!-- start clear  -->
+<div class="clr"></div>
+<!-- end clear  -->
+
+<!-- start  div body  -->
+<div id="divbody">
+
+<!-- start admin menu right  -->
+<IF NAME="SHOW_LIST">
+<div id="rightmenu">	
+	<div class="body-menu">
+<IF NAME="SHOW_LIST">
+	<div class="link-menu"><div><p><a title="{lang.RETURN_HOME}" href="{config.siteurl}"><img src="{STYLE_PATH_ADMIN}images/index_button.gif" /><br />{lang.RETURN_HOME}</a></p></div></div>
+	<div class="link-menu"><div><p><a title="{lang.R_CPINDEX}" href="./"><img src="{STYLE_PATH_ADMIN}images/cp_button.gif" /><br />{lang.R_CPINDEX}</a></p></div></div>
+<LOOP NAME="adm_extensions_menu">	
+	<div class="link-menu<IF LOOP="current"> link-menu-current</IF>"><div><p><a title="{{lang}}" href="{{link}}"<IF LOOP="confirm"> onclick="javascript:return confirm_from();"</IF>><img src="{{icon}}" /><br />{{lang}}</a></p></div></div>
+</LOOP>	
+</IF>
+	</div>
+</div>
+<!-- end admin menu right -->
+</IF>

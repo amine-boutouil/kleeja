@@ -1,0 +1,99 @@
+<!-- start view images temlate  -->
+<div id="divmiddle">
+<form method="post" action="{action}" name="imgform" onsubmit="javascript:return confirm_from();">
+
+<fieldset>
+
+<!-- start div border table  -->
+<div id="border-table">
+
+<!-- title  -->
+<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/img_ctrl_button.gif" />{lang.R_IMG_CTRL}</h2>
+
+<!-- border line Vertical  -->
+<p class="dot" />
+<!-- border line Vertical  -->
+
+<br /><br />
+
+[ <a href="javascript:void(0);" onclick="checkAll(document.imgform, '_del', 'su', 'ored bg_img', 'bg_img');">{lang.CHECK_ALL}</a> ]
+<!-- title  -->
+
+<!-- start dot  -->
+<p class="dot" />
+<!-- end dot  -->
+
+<!-- start clear  -->
+<div class="clr"></div>
+<!-- end clear  -->
+
+<!-- start table no hover  -->
+<table class="tab-no-hover" style="text-align:center">
+<IF NAME="no_results">
+    <tr><td>...</td></tr>
+<ELSE>
+   
+   <tr style="text-align:center;">   
+<LOOP NAME="arr">
+{{tdnum}}
+    <td>
+<div class="bg_img"  id="su[{{id}}]">
+    <a href="{{href}}" class="lightbox" title="{{name}}"><img src="{{thumb_link}}"  <IF LOOP="is_thumb"><ELSE>style="width:100px;height:100px"</IF>  onmouseover="toolTip('{{name}}<br />{{ups}}<br />{{size}}<br />{{time}}<br />{{user}}<br />{{ip}}',this);"/></a>
+    <br />
+	<input name="del_{{id}}" type="checkbox" value="{{id}}"  style="float:right" onclick="change_color(this,'su[{{id}}]', 'ored bg_img', 'bg_img');" rel="_del"/>
+</div>
+    </td>
+{{tdnum2}}
+</LOOP>
+    </tr>   
+</IF>
+<tr>
+<td>
+<span id="toolTipBox" width="200"></span>
+</td>
+</tr>
+</table>
+<!-- end table no hover  -->
+
+<!-- start dot  -->
+<p class="dot" />
+<!-- end dot  -->
+
+<!-- start clear  -->
+<div class="clr"></div>
+<!-- end clear  -->
+
+
+<!-- start pagination  -->
+<div style="text-align:center">{page_nums}</div>
+<!-- end pagination  -->
+
+<!-- start #button  -->
+<fieldset class="quick" style="text-align:center">
+                <input class="button2" name="submit" type="submit" value="{lang.DEL_SELECTED}" />
+</fieldset>
+<!-- end # button  -->
+
+</div>
+<!-- end div border table  -->
+</fieldset>
+
+
+</form>
+
+</div>
+<!-- start view images temlate  -->  
+<script type="text/javascript">
+$(function() {
+	$('a.lightbox').lightBox({
+		overlayBgColor: '#666',
+		overlayOpacity: 0.6,
+		imageLoading: STYLE_PATH_ADMIN+'images/loading.gif',
+		imageBtnClose: STYLE_PATH_ADMIN+'images/close.gif',
+		imageBtnPrev: STYLE_PATH_ADMIN+'images/prevlabel.gif',
+		imageBtnNext: STYLE_PATH_ADMIN+'images/nextlabel.gif',
+		containerResizeSpeed: 350
+	}); 
+
+});
+</script>

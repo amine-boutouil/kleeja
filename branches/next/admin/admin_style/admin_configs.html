@@ -1,0 +1,84 @@
+﻿<!-- start setting temlate  -->
+<div id="divmiddle">
+
+
+<fieldset>
+
+<!-- start div border table  -->
+<div id="border-table">
+
+<!-- title   -->
+<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/options_button.gif" />{lang.R_CONFIGS}
+<IF NAME="CONFIGEXTEND">
+<span class="small_font"> » {CONFIGEXTENDLANG}</span>
+</IF>
+</h2>
+<!-- title   -->
+
+<!-- start clear  -->
+<div class="clr"></div>
+<!-- end clear  -->
+
+<!--- START CHOOSING STAGE -->
+<IF NAME="SHOW_CH_STAGE">
+
+<!-- start dot  -->
+<p class="dot" />
+<!-- end dot  -->
+
+<div class="config_types_list">
+	<LOOP NAME="typesnavi">
+		<div onclick="location.href='{{typelink}}'">
+			<img src="{{typeicon}}" alt="{{typetitle}}" /><br />
+			<a href="{{typelink}}" title="{{typetitle}}">{{typetitle}}</a>
+		</div>
+	</LOOP>
+</div>
+
+
+<!-- start clear  -->
+<div class="clr"></div>
+<!-- end clear  -->
+
+<!-- start dot  -->
+<p class="dot" />
+<!-- end dot  -->
+
+
+<!--- / END CHOOSING STAGE -->
+<ELSE>
+<!--- START EDIT STAGE -->
+
+<!-- start dot  -->
+<p class="dot" />
+<!-- end dot  -->
+
+<!-- start clear  -->
+<div class="clr"></div>
+<!-- end clear  -->
+
+<form method="post" action="{action}">
+ <!-- admin configs tr extra begin -->
+{options}
+<!-- admin configs tr extra -->
+
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
+
+<!-- start button  -->
+<fieldset class="quick"><input class="button2" name="submit" type="submit" value="{n_submit}" /></fieldset>
+<!-- end button  -->
+
+</form>
+
+</IF>
+<!--- / END EDIT STAGE -->
+
+</div>
+<!-- end div border table  -->
+</fieldset>
+
+</div>
+<!-- end setting temlate  -->
+  

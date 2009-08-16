@@ -1,0 +1,16 @@
+##################################
+# Kleeja ... the best uploader ...
+#-----------------------------------------------------------------
+# kleeja.com
+#-----------------------------------------------------------------
+#
+#1- upload Kleeja folder to your host by FTP
+#2- run Installer from your browser 
+#  http://yoursite.com/kleeja/install
+# and go on with steps .. 
+#3- to enter administration panel go to 
+# http://yoursite.com/kleeja/admin.php 
+#
+#4- thank you for using our script .. and don NOt remove our copyrights ..
+
+##################################### 

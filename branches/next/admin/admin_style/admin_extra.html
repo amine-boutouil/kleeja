@@ -1,0 +1,82 @@
+
+<!-- markItUp! -->
+<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/markitup/jquery.markitup.pack.js"></script>
+<link rel="stylesheet" type="text/css" href="{STYLE_PATH_ADMIN}js/markitup/skins/markitup/style.css" />
+<link rel="stylesheet" type="text/css" href="{STYLE_PATH_ADMIN}js/markitup/sets/html/style.css" />
+<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/markitup/sets/html/set.js"></script>
+<script type="text/javascript">
+<!--
+$(document).ready(function() { $('#ex_header').markItUp(mySettings);$('#ex_footer').markItUp(mySettings); });
+-->
+</script>
+<!-- / markItUp! -->
+
+<!-- start Extra temlate  -->
+<div id="divmiddle">
+
+<form method="post" action="{action}">
+
+<fieldset>
+
+<!-- start div border table  -->
+<div id="border-table">
+
+<!-- title  -->
+<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/extra_button.gif" />{lang.ADD_HEADER_EXTRA} :</h2>
+<!-- title  -->
+
+<!-- border line Vertical  -->
+<p class="dot" />
+<!-- border line Vertical  -->
+
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
+
+<label class="small_font" for="ex_header">{lang.EX_HEADER_N}</label>
+<br />
+<textarea id="ex_header" name="ex_header" style="height:210px;direction:ltr;" >{ex_header}</textarea>
+
+<!-- start button  -->
+<fieldset class="quick" style="text-align:center">
+<input class="button2" name="submit" type="submit" value="{lang.UPDATE_EXTRA}" />
+</fieldset>
+<!-- end button  -->
+
+</div>
+<!-- end div border table  -->
+
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
+
+<!-- start div border table  -->
+<div id="border-table">
+
+<!-- title  -->
+<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/extra_button.gif" />{lang.ADD_FOOTER_EXTRA} :</h2>
+<!-- title  -->
+
+<!-- border line Vertical  -->
+<p class="dot" />
+<!-- border line Vertical  -->
+
+<br />
+<label class="small_font" for="ex_footer">{lang.EX_FOOTER_N}</label>
+<br />
+<textarea id="ex_footer" name="ex_footer" style="height: 210px;direction:ltr;" >{ex_footer}</textarea>
+
+<!-- start button  -->
+<fieldset class="quick" style="text-align:center">
+<input class="button2" name="submit" type="submit" value="{lang.UPDATE_EXTRA}" />
+</fieldset>
+<!-- end button  -->
+
+</div>
+<!-- end div border table  -->
+
+</fieldset>
+</form>
+</div>
+<!-- end Extra temlate  -->
+ 

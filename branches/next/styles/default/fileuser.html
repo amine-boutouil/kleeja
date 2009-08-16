@@ -1,0 +1,91 @@
+<div id="content">
+
+<!-- start site name and title  -->
+<div class="title-x"><strong><a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}</strong></div>
+<!--  # End  site name and title  -->
+
+<!-- start line top  -->
+<div class="clr"></div><div class="line"></div>
+<!-- # End line top  -->
+
+<IF NAME="user_name">
+<!--  start box user name and all files  -->
+<div id="boxfileuser">
+	<div class="box_user">
+		<div class="public">{lang.PUBLIC_USER_FILES} : </div>
+		<div class="uname">{user_name}</div>
+	</div>
+	<div class="us3r_n4me">
+		<div class="public">{lang.ALL_FILES} : </div>
+		<div class="nums">{nums_rows}</div> 
+	</div>
+	<div class="clr"></div>
+</div>
+<!--  # end  box user name and all files  -->
+</IF>
+
+
+<IF NAME="filecp_link">
+<!--  start link user  -->
+<div id="filecplink">
+<div class="copylink">{lang.COPY_AND_GET_DUD}</div>
+<input class="link_user" readonly="readonly" onclick="javascript:highlight(this);" type="text" name="option" value="{your_fileuser}" />
+<div class="clr"></div>
+</div>
+<!--  # end link user -->
+</IF>
+
+
+<IF NAME="no_results">
+<!--  start no files user -->
+<div id="boxfileuser" style="text-align:center">
+<img src="{STYLE_PATH}images/warning_nofile.png" /><br />
+<h2>{lang.NO_FILE_USER}</h2>
+</div>
+<!--  # end  no files user -->
+
+<!--  start table all files -->
+<ELSE>
+<table class="tabledata">
+	<thead>
+		<tr>
+			<th>#</th>
+			<th colspan="2">{lang.FILETYPE}</th>
+			<th>{lang.FILENAME}</th>
+			<th>{lang.FILEUPS}</th>
+			<th>{lang.LAST_DOWN}</th>
+		</tr>	
+	</thead>
+	
+	<tbody>
+		<LOOP NAME="arr">	
+		<tr>
+			<td>{{i}}</td>
+			<td>{{file_type}}</td>
+			<td><img src="{{icon_link}}" alt="{{file_type}}" /></td>
+			<td class="odd">{{name}}</td>
+			<td><span class="fcolor">{{uploads}}</span></td>
+			<td>{{last_down}}</td>
+		</tr>
+		</LOOP>
+	</tbody>	
+</table>
+<!--  # end table all files  -->
+</IF>
+	
+
+<div class="clr"></div><br />
+
+<!--  start pagination   -->
+<div>{page_nums}</div>
+<!--  # end pagination  -->
+
+<IF NAME="filecp_link">
+<!--  start go button filecp   -->
+<div class="left_button"><a id="buttons" href="{filecp_link}" title="{lang.GO_FILECP}">{lang.GO_FILECP}</a></div>
+<!--  # end go button filecp  -->
+</IF>
+ 
+<div class="clr"></div><br />
+   
+</div>

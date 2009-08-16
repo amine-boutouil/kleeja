@@ -1,0 +1,66 @@
+<!-- start register template  -->
+<div id="content">
+
+<!-- start site name and title  -->
+<div class="title-x"><strong><a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}</strong></div>
+<!--  # End  site name and title  -->
+
+<!-- start line top  -->
+<div class="clr"></div><div class="line"></div>
+<!-- # End line top  -->
+
+<!-- start error msg  -->
+<IF NAME="ERRORS">
+<dl id="system-message">
+	<dd class="error">
+	<ul><LOOP NAME="ERRORS"><li>{%value%}</li></LOOP></ul>
+	</dd>
+</dl>
+</IF>
+<!-- # end error msg  -->
+
+<!-- start form register  -->
+<form action="{action}" method="post">
+
+<div id="register">
+
+<div class="reg_table">
+<table>
+	<tr>
+		<td><b>{lang.USERNAME} :</b></td>
+		<td><input type="text" name="lname" value="{t_lname}"  /></td>
+	</tr>
+	<tr>
+		<td><b>{lang.PASSWORD} :</b></td>
+		<td><input type="password" name="lpass" value="{t_lpass}"  /></td>
+	</tr>
+	<tr>
+		<td><b>{lang.EMAIL} :</b></td>
+		<td><input type="text" name="lmail" value="{t_lmail}" style="direction:ltr" /></td>
+	</tr>
+</table>
+</div>
+
+<!---- start  safe code  ---->				
+<div class="safe_code">
+<b>{lang.VERTY_CODE}</b>
+<br /><br />
+<img style="vertical-align:middle;" id="kleeja_img_captcha" src="{captcha_file_path}" alt="{lang.REFRESH_CAPTCHA}" title="{lang.REFRESH_CAPTCHA}" onclick="javascript:update_kleeja_captcha('{captcha_file_path}', 'kleeja_code_answer');" />
+<input type="text" name="kleeja_code_answer" id="kleeja_code_answer" style="direction:ltr" />
+<br /><br />
+<span class="explain">{lang.NOTE_CODE}</span>
+<br />
+</div>
+<!---- ## End  safe code  ---->	
+
+{H_FORM_KEYS}
+<input class="buttons" type="submit" name="submit" value="{lang.REGISTER}" />
+</div>
+</form>
+<!-- ## End form register  -->
+ 
+  
+<div class="clr"></div><br />
+   
+</div>
+<!-- ## End register template  --> 

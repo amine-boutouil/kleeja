@@ -1,0 +1,115 @@
+<div id="divmiddle">
+
+ <fieldset>
+ 
+<!-- start div border table  -->
+<div  id="border-table">
+
+ <!-- title  -->
+<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/styles_button.gif" />{lang.R_STYLES}</h2>
+ <!-- title  -->
+ 
+<!-- start dot  -->
+<p class="dot" />
+<!-- end dot  -->
+
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
+
+<table>
+<tr><td colspan="2"><div class="styles_exp">{lang.STYLES_EXP}</div></td></tr>
+<LOOP NAME="arr">
+ <tr class="<IF LOOP="is_default" >oblue</IF>">
+	 <td>
+		<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/style_name.png" />{{style_name}}
+	 </td>
+	 <td>
+	 <a href="{{link_show_tpls}}" title="{lang.SHOW_TPLS}">
+	 <img class="imgtitle" src="{STYLE_PATH_ADMIN}images/show_tpls.png" />{lang.SHOW_TPLS}</a> |
+	 <IF LOOP="is_default">
+		{lang.STYLE_IS_DEFAULT} <img class="imgtitle" src="{STYLE_PATH_ADMIN}images/default_style.png" />
+	 <ELSE>
+		<a href="{{link_mk_default}}" title="{lang.MAKE_AS_DEFAULT}">{lang.MAKE_AS_DEFAULT}</a>
+		
+	 </IF>
+	 </td>
+ </tr>
+</LOOP>
+</table>
+
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
+
+</div>
+<!-- end div border table  -->
+
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
+
+<!-- start div border table  -->
+<div  id="border-table">
+
+<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/styles_button.gif" />{lang.TPLS_RE_BASIC} : </h2>
+
+<!-- start dot  -->
+<p class="dot" />
+<!-- end dot  -->
+
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
+
+<table>
+<tr>
+	<td>header.html</td>
+	<td class="s_box_tpls_d" onclick="javascript:location.href='{edit_tpl_action}header.html'">{lang.EDIT}</td>
+</tr>
+<tr>
+	<td>index_body.html</td>
+	<td class="s_box_tpls_d" onclick="javascript:location.href='{edit_tpl_action}index_body.html'">{lang.EDIT}</td>
+</tr>
+<tr>
+	<td>footer.html</td>
+	<td class="s_box_tpls_d" onclick="javascript:location.href='{edit_tpl_action}footer.html'">{lang.EDIT}</td>
+</tr>
+</table>
+
+<br />
+<!--  button  -->
+<div style="text-align:center"><a class="button2" href="{show_all_tpls_action}">{lang.SHOW_TPLS}</a></div>
+<!--  button  -->
+
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
+
+<!-- start dot  -->
+<p class="dot" />
+<!-- end dot  -->
+
+<!-- start clear  -->
+<div class="clr"></div>
+<!-- end clear  -->
+
+<!-- text for user ... -->
+<div id="system-message">
+	<div class="info">
+		<ul>
+		<li><u>{lang.NOTE} !</u><p>{klj_d_s}</p></li>
+		</ul>
+	</div>
+</div>
+<!-- text for user ... -->
+
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
+
+</div>
+<!-- end div border table  -->
+
+</fieldset>
+</div>

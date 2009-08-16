@@ -1,0 +1,58 @@
+
+<!-- start backup temlate  -->
+<div id="divmiddle">
+
+<!-- start form  -->
+<form  method="post" name="bkupfrom" action="{action}">
+
+<fieldset>
+
+<!-- start div border table  -->
+<div id="border-table">
+
+<!-- title backup  -->
+<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/bckup_button.gif" />{lang.R_BCKUP} :</h2> 
+<!-- title backup  -->
+
+<!-- border line Vertical  -->
+<p class="dot" />
+<!-- border line Vertical  -->
+
+<br />
+
+<!-- notice backup  -->
+<p class="small_font">{lang.E_BACKUP}</p>
+<!-- notice backup  -->
+
+<br />
+
+<table style="text-align:center">
+    <tr style="background-color:#E4E4E4">
+        <td>{lang.NAME}</td>
+        <td>{lang.SIZE}</td>
+		<td><a href="javascript:void(0);" onclick="checkAll(document.bkupfrom, '_bkup', 'su',  'osilver', 'ored');">{lang.CHECK_ALL}</a></td>
+    </tr>
+    <LOOP NAME="tables_sho">
+	<tr id="su[{{name}}]" class="osilver">
+		<td>{{name}}</td><td>{{size}} kb</td><td><input type="checkbox" name="check[]" value="{{name}}" checked="checked" onclick="change_color(this,'su[{{name}}]', 'osilver', 'ored');" rel="_bkup" /></td>
+	</tr>        
+        </LOOP>       
+</table>
+
+<!-- start button  -->
+<fieldset class="quick" style="text-align:center">
+    <input class="button2" name="submit" type="submit" value="{lang.TAKE_BK}" />
+</fieldset>
+<!-- end  button  -->
+
+</div>
+<!-- end div border table  -->
+
+</fieldset>
+
+</form>
+<!-- end form  -->
+
+</div>
+ <!-- end  backup temlate  -->
+ 

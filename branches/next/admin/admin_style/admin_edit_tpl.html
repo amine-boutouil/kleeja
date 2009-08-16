@@ -1,0 +1,90 @@
+
+<!-- markItUp! -->
+<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/markitup/jquery.markitup.pack.js"></script>
+<link rel="stylesheet" type="text/css" href="{STYLE_PATH_ADMIN}js/markitup/skins/markitup/style.css" />
+<link rel="stylesheet" type="text/css" href="{STYLE_PATH_ADMIN}js/markitup/sets/html/style.css" />
+<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/markitup/sets/html/set.js"></script>
+<script type="text/javascript">
+<!--
+$(document).ready(function() { $('#template_content').markItUp(mySettings); });
+-->
+</script>
+<!-- / markItUp! -->
+
+<!-- start temlate Extra header and footer  -->
+<div id="divmiddle">
+
+<form method="post" action="{action}">
+
+<fieldset>
+
+<!-- start div border table  -->
+<div  id="border-table">
+
+<!-- title   -->
+<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/styles_button.gif" />{lang.EDIT} :: {tpl_name} :</h2>
+<!-- title   -->
+
+<!-- border line Vertical  -->
+<p class="dot" />
+<!-- border line Vertical  -->
+
+<!-- start clear  -->
+<div class="clr"></div>
+<!-- end clear  -->
+
+<textarea name="template_content" id="template_content"  rows="" style="direction:ltr;" >{template_content}</textarea>
+
+
+<input type="hidden" name="style_id" value="{style_id}" />
+<input type="hidden" name="tpl_choose" value="{tpl_name}" />
+
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
+
+<!-- border line Vertical  -->
+<p class="dot" />
+<!-- border line Vertical  -->
+
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
+
+<!-- go back home -->
+<a class="goback"href="{action_return}">&lt; {lang.GO_BACK_BROWSER} : {style_id}</a>
+<!-- go back home -->
+
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
+
+<fieldset class="quick">
+
+<IF NAME="not_style_writeable">
+<!-- start info System Messages -->
+	<div id="system-message">
+		<div class="info">
+		<ul>
+		<li>{lang.STYLE_DIR_NOT_WR} !</li>
+		</ul>
+		</div>
+	</div>
+<!-- end info System Messages -->
+
+<ELSE>
+        <input class="button2" name="tpl_edit_submit" type="submit" value="{lang.SUBMIT}" />
+</IF>
+
+</fieldset>
+
+</div>
+<!-- end div border table  -->
+
+</fieldset>
+
+</form>
+
+</div>
+<!-- end temlate Extra header and footer  -->
+        

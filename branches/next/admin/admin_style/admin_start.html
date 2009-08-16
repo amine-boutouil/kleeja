@@ -1,0 +1,208 @@
+﻿<!-- start body panel  -->
+<div id="divmiddle">
+
+<fieldset>
+
+<div id="border-table">
+
+<!-- start general stat panel admin -->
+<div class="title">{lang.GENERAL_STAT} : [ {config.sitename} ]</div>
+<!-- end h1 general stat panel admin -->
+
+<!-- start dot  -->
+<p class="dot" />
+<!-- end dot  -->
+
+<!-- start clear  -->
+<div class="clr"></div>
+<!-- end clear  -->
+
+<!-- start welcome user admin -->
+<div class="welcome"><img src="{STYLE_PATH_ADMIN}images/heart.png" alt="Kleeja love you ..," /><span>&nbsp;{usernamelang}</span></div>
+<!-- end  welcome user admin -->
+	
+<!-- start clear  -->
+<div class="clr"></div>
+<!-- end clear  -->
+
+<!-- start last visit  -->
+<div id="info-last-visit">
+	<ul>
+	<li>
+	<IF NAME="last_visit">
+	<strong>{lang.LAST_VISIT} : {last_visit}</strong><br />
+	<small><a href="{h_lst_files}">{lang.FLS_LST_VST_SEARCH}</a> | 
+	<a href="{h_lst_imgs}">{lang.IMG_LST_VST_SEARCH}</a>
+	</small>
+	</IF>
+	</li>
+	</ul>
+</div>
+<!-- end last visit  -->
+
+<!-- start last file  -->	
+<div id="info-last-visit">
+	<ul>
+	<li>
+	<strong>{lang.LSTFLE_ST} : <a href="{last_file_up_url}" target="blank">{last_file_up}</a></strong>
+	<br /><small>{lang.LSTDELST}<a>{last_del_fles}</a></small>
+	</li>
+	</ul>
+</div>
+<!-- end last file  -->
+
+<!-- start users  number -->
+<div id="info-last-visit">
+	<ul>
+	<li>
+	<strong>{lang.AUSERS_NUM} : [{users_number}]
+	<br />
+	<IF NAME="config.user_system==1">
+	{lang.LAST_REG} : [{stat_last_user}]
+	</IF>
+	</strong>
+	</li>
+	</ul>
+</div>
+<!-- end  users number  -->
+
+<!-- start files number  -->
+<div id="info-last-visit">
+	<ul>
+	<li>
+	<strong>{lang.AFILES_NUM} : [{files_number}]
+	<br /> {lang.AFILES_SIZE} : [{files_sizes}]
+	</strong>
+	</li>
+	</ul>
+</div>
+<!-- end files number  -->
+
+<!-- start  last google -->
+<div id="info-last-visit">
+	<ul>
+	<li>
+	<strong>{lang.LAST_GOOGLE} : {s_last_google}
+	<br />{lang.GOOGLE_NUM} : [{s_google_num}]
+	</strong>
+	</li>
+	</ul>
+</div>
+<!-- end  last google -->
+
+<!-- start  last yahoo -->		
+<div id="info-last-visit">
+	<ul>
+	<li>
+	<strong>{lang.LAST_YAHOO} : {s_last_yahoo}
+	<br />{lang.YAHOO_NUM} : [{s_yahoo_num}]
+	</strong>
+	</li>
+	</ul>
+</div>
+<!-- end  last yahoo -->	
+
+<!-- start clear  -->
+<div class="clr"></div>
+<!-- end clear  -->
+
+
+<LOOP NAME="ADM_NOTIFICATIONS">
+<!-- start >> error System Messages -->
+<div id="system-message">
+	<div class="{{msg_type}}" id="{{id}}">
+		<ul>
+		<li><u>{{title}} !</u><p>{{msg}}</p></li>
+		</ul>
+	</div>
+</div>
+<IF LOOP="msg_type==error">
+<script type="text/javascript">
+$('div#{{id}}').pulse({
+    speed: 500,
+    opacityRange: [0.4,0.9],
+	duration: 7000 // i.e. 7 seconds
+});
+
+</script>
+</IF>
+<!-- start clear  -->
+<div class="clr"></div>
+<!-- end clear  -->
+
+<!-- end >> error System Messages -->
+</LOOP>
+
+
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
+
+<!-- start stat  disk size -->
+<div id="disk_size">
+	<ul>
+	<li>
+	<span class="t_disk_size">{lang.SIZE_STAT}</span> <strong>&gt;&gt; {lang.USING_SIZE}</strong>
+		<table class="tab-size" border="0" cellspacing="1" cellpadding="0" dir="ltr">
+		<tr><td style="width:33%;background-color: #CCEECC;text-align:left;">0%</td>
+		<td style="width:34%; background-color: #FFFFE8; text-align:center;">50%</td>
+		<td style="width:33%;background-color: #FFD2D2; text-align:right;">100%</td></tr>
+		<tr><td colspan="3"><img src="{STYLE_PATH_ADMIN}images/spacer.gif" style="width:{per1}%; height:10px; background-color:red;" /></td></tr>
+		</table>
+	</li>
+	</ul>
+</div>
+<!-- end stat  disk size  --> 
+
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
+
+<!-- start other info -->
+<div id="other-info">
+<ul>
+<li class="t_info">{lang.OTHER_INFO} !</li>
+<li>
+<table>
+<tr>
+	<td width="30%">{lang.KLEEJA_VERSION}</td>
+	<td>{kleeja_version}</td>
+</tr>
+<tr>
+	<td>{lang.PHP_VER}</td>
+	<td>{php_version}</td>
+</tr>
+<tr>
+	<td>{lang.MYSQL_VER}</td>
+	<td>{mysql_version}</td>
+</tr>
+<tr>
+	<td>max_execution_time</td>
+	<td>{max_execution_time}</td>
+</tr>
+<tr>
+	<td>upload_max_filesize</td>
+	<td>{upload_max_filesize}</td>
+</tr>
+<tr>
+	<td>post_max_size</td>
+	<td>{post_max_size}</td>
+</tr>
+<tr>
+	<td>memory_limit</td>
+	<td>{memory_limit}</td>
+</tr>
+</table>	
+</li>
+</ul>
+</div>
+<!-- end other info -->
+
+<div class="clr"></div><br />
+
+</div>
+
+</fieldset>
+
+</div>
+<!-- end body panel  -->

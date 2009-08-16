@@ -1,0 +1,97 @@
+﻿<!-- start view files temlate  -->
+<div id="divmiddle">
+
+<div class="file_cp1">
+
+<form method="post" name="filesform" action="{action}" onsubmit="javascript:return confirm_from();">
+
+<fieldset>
+<!-- start div border table  -->
+<div id="border-table">
+<!-- title  -->
+<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/files_button.gif" />{lang.R_FILES}</h2>
+<!-- title  -->
+
+<IF NAME="is_search">
+<img src="{STYLE_PATH_ADMIN}images/search_button.gif" ><strong> {lang.SEARCH_FILES} ( {nums_rows} )</strong>
+ | <a href="{deletelink}" onclick="javascript:return confirm_from();">{lang.DELETEALLRES}</a>
+<ELSE>
+
+</IF>
+
+<a href="{page2_action}&amp;order_way=1"><img src="{STYLE_PATH_ADMIN}images/arrow_up.png"></a>
+<a href="{page2_action}"><img src="{STYLE_PATH_ADMIN}images/arrow_down.png"></a>
+
+
+<!-- start clear  -->
+<div class="clr"></div>
+<!-- end clear  -->
+
+<!-- start dot  -->
+<p class="dot" />
+<!-- end dot  -->
+
+<!-- start clear  -->
+<div class="clr"></div>
+<!-- end clear  -->
+
+<IF NAME="no_results">
+...
+<ELSE>
+
+<table style="text-align:center;font-size:11px;">
+    <tr style="background-color:#D2D2D2;height:40px;font-weight: bold;">
+        <td><a href="{ord_action}&amp;order_by=real_filename">{lang.FILENAME}</a></td>
+        <td><a href="{ord_action}&amp;order_by=user">{lang.BY}</a></td>
+        <td><a href="{ord_action}&amp;order_by=user_ip">{lang.IP}</a></td>
+        <td><a href="{ord_action}&amp;order_by=size">{lang.FILESIZE}</a></td>
+        <td><a href="{ord_action}&amp;order_by=uploads">{lang.FILEUPS}</a></td>
+        <td><a href="{ord_action}&amp;order_by=time">{lang.FILEDATE}</a></td>
+        <td><a href="{ord_action}&amp;order_by=type">{lang.FILETYPE}</a></td>
+        <td><a href="{ord_action}&amp;order_by=folder">{lang.FILDER}</a></td>
+        <td><a href="{ord_action}&amp;order_by=report">{lang.NUMPER_REPORT}</a></td>
+        <td><a href="javascript:void(0);" onclick="checkAll(document.filesform, '_del', 'su');">{lang.DELETE}</a></td>
+    </tr>
+<LOOP NAME="arr">
+    <tr id="su[{{id}}]" class="osilver">
+		<td>{{name}}</td>
+        <td>{{user}}</td>
+        <td style="font-size:x-small">{{ip}}<small>{{showfilesbyip}}</small></td>
+        <td>{{size}}</td>
+        <td>{{ups}}</td>
+        <td>{{time}}</td>
+        <td>{{type}}</td>
+        <td>{{folder}}</td>
+        <td>{{report}}</td>
+        <td><input type="checkbox" name="del_{{id}}" value="{{id}}" onclick="change_color(this,'su[{{id}}]');" rel="_del"></td>
+    </tr>
+</LOOP>
+</IF>
+<tr style="background-color:#D2D2D2;height:6px;"><td colspan="10"></td></tr>
+</table>
+
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
+
+<!-- start dot  -->
+<p class="dot" />
+<!-- end dot  -->
+
+<!-- start clear  -->
+<div class="clr"></div>
+<!-- end clear  -->
+
+<!-- start pagination  -->
+<strong style="text-align:center">{page_nums}</strong>
+<fieldset class="quick"><input class="button2" name="submit" type="submit" value="{lang.UPDATE_FILES}" /></fieldset>
+<!-- end pagination  -->
+
+</div>
+
+</fieldset>
+</form>
+</div>
+<!-- end div border table  -->
+</div>
+<!-- end view files temlate  -->

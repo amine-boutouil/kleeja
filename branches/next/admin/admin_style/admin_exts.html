@@ -1,0 +1,196 @@
+<!-- start Exts temlate  -->
+<div id="divmiddle">
+
+<form method="post" action="{action}">
+<fieldset>
+
+<!-- start div border table  -->
+<div id="border-table">
+
+<!-- title  -->
+<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/exts_button.gif" />{lang.R_EXTS} :</h2>
+<!-- title  -->
+
+<!-- border line Vertical  -->
+<p class="dot" />
+<!-- border line Vertical  -->
+
+<br />
+
+<!-- start admin ext info tr extra -->
+<table style="text-align:center">
+    <tr style="background-color:#E4E4E4">
+        <td>{lang.EXT}</td>
+        <td>{lang.GROUP}</td>
+        <td>{lang.SIZE_G}</td>
+        <td>{lang.ALLOW_G}</td>
+        <td>{lang.SIZE_U}</td>
+        <td>{lang.ALLOW_U}</td>
+    </tr>
+<IF NAME="no_results">
+...
+<ELSE>
+<LOOP NAME="arr">
+    <tr>
+        <td><strong>{{name}}</strong></td>
+        <td>{{group}}</td>
+        <td><input name="gsz[{{id}}]" type="text" value="{{g_size}}" size="7" style="text-align:center;" /></td>
+        <td>{{g_allow}}</td>
+        <td><input name="usz[{{id}}]" type="text" value="{{u_size}}" size="7" style="text-align:center;" /></td>
+        <td>{{u_allow}}</td>     
+    </tr>
+</LOOP>
+</IF>
+</table>
+ <!-- end admin ext data tr extra -->
+ 
+ <!-- start pagination  -->
+<div>
+<span>{arr_paging}</span>
+<fieldset class="quick" style="text-align:center"><input class="button2" name="submit" type="submit" value="{lang.UPDATE_EXTS}" /></fieldset>
+</div>
+<!-- end pagination  -->
+
+<!-- start dot  -->
+<p class="dot" />
+<!-- end dot  -->
+
+<!-- notice   -->
+<p class="exts">{lang.E_EXTS}</p>
+<!-- notice   -->
+
+<!-- start dot  -->
+<p class="dot" />
+<!-- end dot  -->
+ 
+</div>
+<!-- end div border table  -->
+
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
+
+<!-- start div border table  -->
+<div id="border-table">
+
+<script type="text/javascript" src="includes/admin_style/byte.js"></script>
+<script type="text/javascript">
+/* This script and many more are available free online at
+The JavaScript Source :: http://javascript.internet.com
+Created by: Uncle Jim :: http://jdstiles.com/javamain.html */
+
+function convert(f) 
+{
+  f.kb.value=Math.round(f.byte.value/1024*100000)/100000
+  f.mb.value=Math.round(f.byte.value/1048576*100000)/100000
+  f.gb.value=Math.round(f.byte.value/1073741824*100000)/100000
+}
+
+function convertkb(f) 
+{
+  f.byte.value=Math.round(f.kb.value*1024*100000)/100000
+  f.mb.value=Math.round(f.kb.value/1024*100000)/100000
+  f.gb.value=Math.round(f.kb.value/1048576*100000)/100000
+}
+
+function convertmb(f)
+{
+  f.byte.value=Math.round(f.mb.value*1048576*100000)/100000
+  f.kb.value=Math.round(f.mb.value*1024*100000)/100000
+  f.gb.value=Math.round(f.mb.value/1024*100000)/100000
+}
+
+function convertgb(f) 
+{
+  f.byte.value=Math.round(f.gb.value*1073741824*100000)/100000
+  f.kb.value=Math.round(f.gb.value*1048576*100000)/100000
+  f.mb.value=Math.round(f.gb.value*1024*100000)/100000
+}
+</script>
+
+
+<!-- title  -->
+<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/exts_button.gif" />{lang.BCONVERTER} :</h2>
+<!-- title  -->
+
+<!-- border line Vertical  -->
+<p class="dot" />
+<!-- border line Vertical  -->
+
+<!-- start table no hover  -->
+<table cellpadding="0" cellspacing="0" style="direction:ltr">
+<tr style="background-color:#E4E4E4"> 
+<td align="center">Byte</td>
+<td align="center">Kilobyte</td>
+<td align="center">Megabyte</td>
+<td align="center">Gigabyte</td>
+</tr>
+
+<tr> 
+<td align="center"><input type="text" size="10" name="byte" value="0"></td>
+<td align="center"><input type="text" size="10" name="kb" value="0"></td>
+<td align="center"><input type="text" size="10" name="mb" value="0"></td>
+<td align="center"><input type="text" size="10" name="gb" value="0"></td>
+</tr>
+<tr style="background-color:#FFF"> 
+<td align="center"><input class="button2" type="button" name="B2" value="   >   " onClick="convert(this.form)"></td>
+<td align="center"><input class="button2" type="button" name="B22" value="   < >   " onClick="convertkb(this.form)"></td>
+<td align="center"><input class="button2" type="button" name="B23" value="   < >   " onClick="convertmb(this.form)"></td>
+<td align="center"><input class="button2" type="button" name="B24" value="   <   " onClick="convertgb(this.form)"></td>
+</tr>
+</table>
+<!-- end table no hover  -->
+
+</div>
+<!-- end div border table  -->
+
+</form>
+
+
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
+
+
+<form method="post" action="{action_new_ext}">
+
+<!-- start div border table  -->
+<div id="border-table">
+
+<!-- title  -->
+<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/exts_button.gif" />{lang.ADD_NEW_EXT} :</h2>
+<!-- title  -->
+
+<!-- border line Vertical  -->
+<p class="dot" />
+<!-- border line Vertical  -->
+
+<br />
+
+<!-- start table no hover  -->
+<table class="tab-no-hover">
+	<tr style="background-color:#E4E4E4">
+		<td>{lang.ADD_NEW_EXT_EXP}</td>
+	</tr>
+	<tr>
+		<td>
+		<input name="new_ext" type="text" value="" style="direction:ltr" />{gr_exts_arr}
+		</td>
+	</tr>
+</table>
+<!-- end table no hover  -->
+
+<!-- start button  -->
+<fieldset class="quick" style="text-align:center">
+	<input class="button2" name="submit_new_ext" type="submit" value="{lang.SUBMIT}" />
+</fieldset>
+<!-- end  button  -->
+
+</div>
+<!-- end div border table  -->
+</fieldset>
+
+</form>
+
+</div>
+

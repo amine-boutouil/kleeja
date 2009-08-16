@@ -1,0 +1,115 @@
+<!-- start view plugins temlate  -->
+<div id="divmiddle">
+<fieldset>
+
+<!-- start div border table  -->
+<div id="border-table">
+
+<!-- title  -->
+<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/plugins_button.gif" />{lang.PLUGINS} :</h2>
+<!-- title  -->
+
+<!-- border line Vertical  -->
+<p class="dot" />
+<!-- border line Vertical  -->
+<br />
+
+<!-- start table no hover  -->
+<table class="tab-no-hover">
+<tr style="background-color:#EFE7B8">
+	<td style="border-top:1px solid #FEA53D;border-bottom:1px solid #FEA53D;">{lang.PLUGINS_EX}</td>
+	</tr>
+<IF NAME="no_plugins">
+	<td class="small_font"><br />{lang.NO_PLUGINS}<br /><br /></td>
+<ELSE>
+	<LOOP NAME="arr">
+	<tr>
+		<td>
+			[ 
+				<IF LOOP="plg_disabled">
+				<a href="{action}&amp;do_plg={{plg_id}}&amp;m=2" title="{lang.ENABLE}"><img src="{STYLE_PATH_ADMIN}images/control_play.png" alt="{lang.ENABLE}" /></a>
+				<ELSE>
+				<a href="{action}&amp;do_plg={{plg_id}}&amp;m=1" title="{lang.DISABLE}"><img src="{STYLE_PATH_ADMIN}images/control_pause.png" alt="{lang.DISABLE}" /></a>
+				</IF>
+				<a href="{action}&amp;do_plg={{plg_id}}&amp;m=3" title="{lang.DELETE}"><img src="{STYLE_PATH_ADMIN}images/del.png" alt="{lang.DELETE}" onclick="javascript:return confirm_from();" /></a>
+			] 
+			<strong>{{plg_name}} {{plg_ver}}</strong> 
+			
+			<br />
+			{{plg_dsc}}
+			<br />
+			<em>{{plg_author}}</em>
+		</td>
+	</tr>
+	</LOOP>
+</IF>
+</table>
+<!-- end table no hover  -->
+
+<br />
+</div>
+
+<br />
+
+<!-- start div border table  -->
+<div id="border-table">
+
+<form method="post" action="{action}" enctype="multipart/form-data">
+
+<!-- title  -->
+<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/plugins_button.gif" />{lang.ADD_NEW_PLUGIN} :</h2>
+<!-- title  -->
+
+<p class="dot" />
+
+<br />
+<!-- start table no hover  -->
+<table class="tab-no-hover">
+<tr style="background-color:#EFE7B8">
+    <td style="border-top:1px solid #FEA53D;border-bottom:1px solid #FEA53D;">{lang.ADD_NEW_PLUGIN_EXP}</td>
+
+</tr>
+<tr>
+	<td><br />
+	<input name="imp_file" type="file" />
+	<br /><br />
+	</td>
+</tr>
+</table>
+<!-- end #table no hover  -->
+
+<!--  button  -->
+<fieldset class="quick" style="text-align:center">
+                <input class="button2" name="submit_new_plg" type="submit" value="{lang.SUBMIT}" />
+</fieldset>
+<!--  button  -->
+
+<!-- start dot  -->
+<p class="dot" />
+<!-- end dot  -->
+
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
+
+<!-- text for user ... -->
+<div id="system-message">
+	<div class="info">
+		<ul>
+		<li><u>{lang.NOTE} !</u><p>{klj_d_s}</p></li>
+		</ul>
+	</div>
+</div>
+<!-- text for user ... -->
+<br />
+</div>
+
+</fieldset>
+
+</form>
+
+</div>
+<!-- end  add new plugins temlate  -->
+
+
+        

@@ -1,0 +1,100 @@
+<script type="text/javascript">
+function show_msg (te, id)
+{
+var te = document.getElementById(te).value;
+var iee = te;
+        iee += "<br /><br /><form method='post' action='{action}'><textarea name='v_" + id + "' cols='50' rows='4'></textarea>";
+        iee += "<br /><br /><input class='button2' name='reply_submit' type='submit' value='{lang.REPLY}' /></form>";        
+document.getElementById('mail_here').innerHTML= iee;
+
+}
+</script>
+
+<!-- start calls temlate  -->
+<div id="divmiddle">
+
+<fieldset>
+
+<div id="border-table">
+
+<!-- title  -->
+<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/calls_button.gif" />{lang.TEXT} :</h2>
+<!-- title  -->
+
+<!-- border line Vertical  -->
+<p class="dot" />
+<!-- border line Vertical  -->
+<br />
+<!-- mail here  -->
+<div id="mail_here">{lang.E_CLICK}</div>
+<!-- mail here  -->
+
+</div>
+
+<br />
+ 
+<!-- start form  --> 
+<form method="post" name="callform" action="{action}">
+
+<!-- start div border table  -->
+<div id="border-table">
+
+<!-- title  -->
+<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/calls_button.gif" />{lang.R_CALLS}</h2>
+<!-- title  -->
+
+
+<!-- border line Vertical  -->
+<p class="dot" />
+<!-- border line Vertical  -->
+
+
+
+<table style="text-align:center">
+        <tr style="background-color:#E4E4E4">
+                <td>{lang.NAME}</td>
+                <td>{lang.TIME}</td>
+                <td>{lang.IP}</td>
+                 <td><a href="javascript:void(0);" onclick="checkAll(document.callform, '_del', 'su');">{lang.DELETE}</a></td>
+				<!-- admin calls data td1 extra -->
+        </tr>
+<IF NAME="no_results">
+...
+<ELSE>
+<LOOP NAME="arr">
+       <tr id="su[{{id}}]" class="osilver">
+            <td>
+			<a title="{n_mail}:{{mail}}" onclick="javascript:show_msg('textva_{{id}}',{{id}});">{{name}}</a>
+			<input type="hidden" value="{{mail}} :<br /> {{text}}" id="textva_{{id}}">
+            </td>
+            <td>{{time}}</td>
+            <td><a href="{{ip_finder}}" target="blank">{{ip}}</a></td>
+            <td><input type="checkbox" name="del_{{id}}" value="{{id}}" onclick="change_color(this,'su[{{id}}]');" rel="_del"></td>
+			<!-- admin calls data td2 extra -->
+        </tr>
+</LOOP>
+</IF>
+</table>
+
+<!-- start pagination  -->
+<div style="text-align:center"><b>{page_nums}</b></div>
+<!-- end pagination  -->
+
+
+<!-- start button  -->
+<fieldset class="quick" style="text-align:center">
+                <input class="button2" name="submit" type="submit" value="{lang.UPDATE_CALSS}" />
+</fieldset>
+<!-- end button  -->
+
+</div>
+<!-- end div border table  -->
+
+</fieldset>
+
+</form>
+<!-- end form  -->
+
+</div>
+<!-- end calls temlate  -->
+   

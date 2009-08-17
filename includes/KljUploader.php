@@ -474,7 +474,7 @@ function process ()
 					else
 					{
 						// real name of file
-						$this->filename2 = $this->filename . preg_replace('/[,.?\/*&^\\\$%#@()_!|"\~\'><=+}{; ]/', '-', $filename);
+						$this->filename2 = $this->filename . preg_replace('/[,.?\/*&^\\\$%#@()_!|"\~\'><=+}{; ]/', '-', $filename) . '.' . $this->typet;
 						$this->filename2 = preg_replace('/-+/', '-', $this->filename2);
 						($hook = kleeja_run_hook('another_decode_type_kljuploader')) ? eval($hook) : null; //run hook
 					}
@@ -766,4 +766,5 @@ function process ()
     }
 }#end class
 
-?>
+
+//<-- EOF

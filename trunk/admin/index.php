@@ -191,21 +191,21 @@
 	$i = 0;
 
 	//New calls notice
-	$query = array('SELECT'	=> 'id',
-					'FROM'		=> "{$dbprefix}call",
-					'WHERE'		=> "time > '" . (defined('LAST_VISIT') ? LAST_VISIT : time() - 3600*12) . "'" 
+	$query = array('SELECT'	=> 'c.id',
+					'FROM'		=> "{$dbprefix}call c",
+					'WHERE'		=> "c.time > '" . (defined('LAST_VISIT') ? LAST_VISIT : time() - 3600*12) . "'" 
 					);
 
 		$newcall = $SQL->num_rows($SQL->build($query));
-		($newcall == 0) ? $newcall = ' [0]' : $newcall = ' [' . $newcall . ']'; 
+		$newcall =  $newcall == 0  ?  ' [0]' : ' [' . $newcall . ']'; 
 	
 	//New reports notice
-	$query = array('SELECT'	=> 'id',
-					'FROM'		=> "{$dbprefix}reports",
-					'WHERE'		=> "time > '" . (defined('LAST_VISIT') ? LAST_VISIT : time() - 3600*12) . "'" 
+	$query = array('SELECT'	=> 'r.id',
+					'FROM'		=> "{$dbprefix}reports r",
+					'WHERE'		=> "r.time > '" . (defined('LAST_VISIT') ? LAST_VISIT : time() - 3600*12) . "'" 
 					);
 	$newreport = $SQL->num_rows($SQL->build($query));
-	($newreport == 0) ? $newreport = ' [0]' : $newreport = ' [' . $newreport . ']'; 
+	$newreport = $newreport == 0 ?  ' [0]' : ' [' . $newreport . ']'; 
 		
 	foreach($adm_extensions as $m)
 	{

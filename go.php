@@ -27,7 +27,7 @@ switch ($_GET['go'])
 {
 	case 'guide' : 
 
-		$stylee	= "guide";
+		$stylee	= 'guide';
 		$titlee	= $lang['GUIDE'];
 		
 		//re oreder exts by group_id 

@@ -25,7 +25,7 @@ if(!isset($_GET['go']))
 
 switch ($_GET['go'])
 {
-	case "guide" : 
+	case 'guide' : 
 
 		$stylee	= "guide";
 		$titlee	= $lang['GUIDE'];

@@ -501,6 +501,7 @@ $lang = array_merge($lang, array(
 	'ADD_FOOTER_EXTRA' 			=> 'فوتر إضافي',
 	'ADMIN_USING_IE6'			=> 'أنت تستخدم متصفح "انترنت اكسبلور 6" هذا رغم انك صاحب موقع وتعرف اكثر ممايعرفه المستخدمون العاديون ! قم بترقيه متصفحك او استخدم فيرفوكس الآن.',
 	'FOOTER_TXTS'				=> array('PLUGINS'=> 'الاضافات', 'STYLES'=>'الستايلات', 'BUGS'=>'مركز التبليغ عن الأخطاء'),
+	'T_ISNT_WRITEABLE'			=> 'Cannot edit <strong>%s</strong> template. (Unwriteable)',
 	
 	//last line of this file ...					 
 	'S_TRANSLATED_BY' 			=> 'Translated By <a href="http://www.fenix4web.com/">Fenix4Web</a>',

@@ -135,10 +135,8 @@ switch ($_GET['sty_t'])
 										'WHERE'	=> "name='style'"
 										);
 											
-					if (!$SQL->build($query_df))
-					{
-						big_error('Error',$lang['CANT_UPDATE_SQL']);
-					}				
+					$SQL->build($query_df);
+									
 					
 					delete_cache('', true); //delete all cache to get new style
 					
@@ -259,7 +257,7 @@ switch ($_GET['sty_t'])
 				}
 				else
 				{
-					big_error('Template is not writeable','Cannot edit <strong>' . $tpl_name . '</strong> template. (Unwriteable)');
+					kleeja_admin_err(sprintf($lang['T_ISNT_WRITEABLE'], $tpl_name));
 				}
 				/*
 				//update

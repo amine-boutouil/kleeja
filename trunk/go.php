@@ -73,10 +73,10 @@ switch ($_GET['go'])
 	
 	break;
 	
-	case "report" :
+	case 'report' :
 		
 		//page info
-		$stylee	= "report";
+		$stylee	= 'report';
 		$titlee	= $lang['REPORT'];
 		$id_d	= isset($_GET['id']) ? intval($_GET['id']) : 0;
 		$url_id	= ($config['mod_writer']) ? $config['siteurl'] . 'download' . $id_d . '.html' : $config['siteurl'] . 'download.php?id=' . $id_d;
@@ -180,9 +180,9 @@ switch ($_GET['go'])
 	break; 
 	
 	
-	case "rules" :
+	case 'rules' :
 	
-		$stylee	= "rules";
+		$stylee	= 'rules';
 		$titlee	= $lang['RULES'];
 		$contents = (strlen($ruless) > 3) ? stripslashes($ruless) : $lang['NO_RULES_NOW'];
 		
@@ -191,12 +191,12 @@ switch ($_GET['go'])
 	break;
 	
 	
-	case "call" : 
+	case 'call' : 
 		
 		//page info
-		$stylee	= "call";
+		$stylee	= 'call';
 		$titlee	= $lang['CALL'];
-		$action	= "./go.php?go=call";
+		$action	= './go.php?go=call';
 		$H_FORM_KEYS = kleeja_add_form_key('call');
 		$NOT_USER = !$usrcp->name() ? true : false; 
 		//no error yet 
@@ -268,7 +268,7 @@ switch ($_GET['go'])
 
 	break;
 	
-	case "del" :
+	case 'del' :
 
 		($hook = kleeja_run_hook('del_go_page')) ? eval($hook) : null; //run hook
 		
@@ -356,7 +356,7 @@ switch ($_GET['go'])
 	break;
 	
 	
-	case "stats" :
+	case 'stats' :
 
 		//stop .. check first ..
 		if (!$config['allow_stat_pg'])
@@ -368,7 +368,7 @@ switch ($_GET['go'])
 		$on_muoe	 = gmdate("d-m-Y H:i a", $stat_last_muoe);
 		//ok .. go on
 		$titlee		= $lang['STATS'];
-		$stylee		= "stats";
+		$stylee		= 'stats';
 		$files_st	= $stat_files;
 		$users_st	= $stat_users;
 		$sizes_st	= Customfile_size($stat_sizes);	
@@ -379,7 +379,7 @@ switch ($_GET['go'])
 		
 	break; 
 	
-	case "down":
+	case 'down':
 	
 		#depreacted from 1rc6+, see download.php
 		//go.php?go=down&n=$1&f=$2&i=$3

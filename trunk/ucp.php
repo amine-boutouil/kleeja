@@ -48,13 +48,13 @@ switch ($_GET['go'])
 	//
 	//login page
 	//
-	case "login" : 
+	case 'login' : 
 			
 			//page info
-			$stylee					= "login";
+			$stylee					= 'login';
 			$titlee					= $lang['LOGIN'];
-			$action					= "ucp.php?go=login" . (isset($_GET['return']) ? '&amp;return=' . htmlspecialchars($_GET['return']) : '');
-			$forget_pass_link		= "ucp.php?go=get_pass";
+			$action					= 'ucp.php?go=login' . (isset($_GET['return']) ? '&amp;return=' . htmlspecialchars($_GET['return']) : '');
+			$forget_pass_link		= 'ucp.php?go=get_pass';
 			$H_FORM_KEYS			= kleeja_add_form_key('login');
 			//no error yet 
 			$ERRORS = false;
@@ -129,12 +129,12 @@ switch ($_GET['go'])
 		//
 		//register page
 		//
-		case "register" : 
+		case 'register' : 
 		
 			//page info
-			$stylee	= "register";
+			$stylee	= 'register';
 			$titlee	= $lang['REGISTER'];
-			$action	= "ucp.php?go=register";
+			$action	= 'ucp.php?go=register';
 			$H_FORM_KEYS = kleeja_add_form_key('register');
 			//no error yet 
 			$ERRORS = false;
@@ -245,7 +245,7 @@ switch ($_GET['go'])
 		//
 		//logout action
 		//
-		case "logout" :
+		case 'logout' :
 		
 			($hook = kleeja_run_hook('begin_logout')) ? eval($hook) : null; //run hook
 			
@@ -277,7 +277,7 @@ switch ($_GET['go'])
 		//
 		//files user page
 		//
-		case "fileuser" : 
+		case 'fileuser' : 
 			
 			($hook = kleeja_run_hook('begin_fileuser')) ? eval($hook) : null; //run hook
 			
@@ -288,7 +288,7 @@ switch ($_GET['go'])
 			}
 			
 			//some vars
-			$stylee	= "fileuser";
+			$stylee	= 'fileuser';
 			$titlee	= $lang['FILEUSER'];
 			
 			$user_id_get	= (isset($_GET['id'])) ? intval($_GET['id']) : null;
@@ -389,11 +389,11 @@ switch ($_GET['go'])
 		//
 		//control files page
 		//
-		case "filecp" :
+		case 'filecp' :
 		
 			($hook = kleeja_run_hook('begin_filecp')) ? eval($hook) : null; //run hook
 			
-			$stylee		= "filecp";
+			$stylee		= 'filecp';
 			$titlee		= $lang['FILECP'];
 			$H_FORM_KEYS = kleeja_add_form_key('filecp');
 			
@@ -447,7 +447,7 @@ switch ($_GET['go'])
 					$arr[] = array(	'id'	=> $row['id'],
 									'name'	=> '<a title="' . ($row['real_filename'] == '' ? $row['name'] : $row['real_filename']) . '" href="' .  $url . '" target="blank">' . ($row['real_filename'] == '' ? ((strlen($row['name']) > 40) ? substr($row['name'], 0, 40) . '...' : $row['name']) : ((strlen($row['real_filename']) > 40) ? substr($row['real_filename'], 0, 40) . '...' : $row['real_filename'])) . '</a>',
 									'i'		=> $i,
-									'icon_link'	=>(file_exists("images/filetypes/".  $row['type'] . ".png"))? "images/filetypes/" . $row['type'] . ".png" : 'images/filetypes/file.png',
+									'icon_link'	=>(file_exists('images/filetypes/' . $row['type'] . '.png'))? 'images/filetypes/' . $row['type'] . '.png' : 'images/filetypes/file.png',
 									'file_type'	=> $row['type'],
 								);
 							
@@ -527,7 +527,7 @@ switch ($_GET['go'])
 				
 		break;
 		
-		case "profile" : 
+		case 'profile' : 
 		
 			//no logon before 
 			if (!$usrcp->name())
@@ -535,9 +535,9 @@ switch ($_GET['go'])
 				kleeja_info($lang['USER_PLACE'], $lang['PLACE_NO_YOU']);
 			}
 
-			$stylee		= "profile";
+			$stylee		= 'profile';
 			$titlee		= $lang['PROFILE'];
-			$action		= "ucp.php?go=profile";
+			$action		= 'ucp.php?go=profile';
 			$name		= $usrcp->name();
 			$mail		= $usrcp->mail();
 			$show_my_filecp	= $usrcp->get_data('show_my_filecp');
@@ -609,7 +609,7 @@ switch ($_GET['go'])
 		//
 		//reset password page
 		//
-		case "get_pass" : 
+		case 'get_pass' : 
 
 			//if not default system, let's give him a link for integrated script
 			if ($config['user_system'] != '1')
@@ -619,9 +619,9 @@ switch ($_GET['go'])
 			}
 			
 			//page info
-			$stylee		= "get_pass";
+			$stylee		= 'get_pass';
 			$titlee		= $lang['GET_LOSTPASS'];
-			$action		= "ucp.php?go=get_pass";
+			$action		= 'ucp.php?go=get_pass';
 			$H_FORM_KEYS = kleeja_add_form_key('get_pass');
 			//no error yet 
 			$ERRORS = false;
@@ -810,4 +810,5 @@ switch ($_GET['go'])
 		//footer
 		Saafooter();
 	}
-?>
+	
+#<-- EOF

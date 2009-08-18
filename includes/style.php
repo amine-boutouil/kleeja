@@ -127,11 +127,12 @@ if (!defined('IN_COMMON'))
 
             $con = !empty($atts['NAME']) ? $atts['NAME'] : (empty($atts['LOOP']) ? null : $atts['LOOP']);
 			
-            if(preg_match('/(.*)(' . implode('|', $char) . ')(.*)/i', $con, $arr))
+            if(preg_match('/(.*)(' . implode('|', $char) . ')(.*)/i', trim($con), $arr))
 			{
-				if($arr[1]{0} != '$')
+				$arr[1] = trim($arr[1]);
+				if($arr[1][0] != '$')
 				{
-					 $var1 = call_user_func(array('kleeja_style', '_var_callback'), (!empty($atts['NAME']) ? '{' . $arr[1] . '}' : '{{' . $arr[1] . '}}'));
+					$var1 = call_user_func(array('kleeja_style', '_var_callback'), (!empty($atts['NAME']) ? '{' . $arr[1] . '}' : '{{' . $arr[1] . '}}'));
 				}
 				else
 				{
@@ -139,10 +140,17 @@ if (!defined('IN_COMMON'))
 				}
 
                 $opr = str_replace($char, $reps, $arr[2]);
-                $var2 = ($arr[3]{0}=='$')? $arr[3] : '"' . $arr[3] . '"';
+                $var2 = trim($arr[3]);
+				
+				//check for type 
+				if($var2[0] != '$' && !preg_match('/[0-9]/', $var2))
+				{
+					$var2 = '"' . $var2 . '"';
+				}
+				
                 $con = "$var1$opr$var2";
             }
-			elseif($con{0} !== '$')
+			elseif($con[0] !== '$')
 			{
                 $con = !empty($atts['NAME']) ? '{' . $con . '}' : '{{' . $con . '}}';
                 $con = call_user_func(array('kleeja_style', '_var_callback'), $con);
@@ -161,12 +169,7 @@ if (!defined('IN_COMMON'))
         //iif tag
         function _iif_callback($matches)
 		{
-            $if = '<IF NAME="' . $matches[1] . '">';
-            $if .= $matches[2];
-            $if .= '<ELSE>';
-            $if .= $matches[3];
-            $if .= '</IF>';
-            return ($if);
+            return '<IF NAME="' . $matches[1] . '">' . $matches[2] . '<ELSE>' . $matches[3] . '</IF>';
         }
 		
 		
@@ -184,14 +187,14 @@ if (!defined('IN_COMMON'))
 			{
                 preg_match(kleeja_style::reg('var'), $matches, $matches);
             }
-			
+
 			$var = '';
 			if(!empty($matches[2]))
 			{
 				$var = str_replace('.', '\'][\'', $matches[2]);
 			}
 			
-            if(!empty($matches[1]) && $matches[1] == '{{')
+            if(!empty($matches[1]) && trim($matches[1]) == '{{')
 			{
                 $var = '$value[\'' . $var . '\']';
             }
@@ -206,7 +209,7 @@ if (!defined('IN_COMMON'))
         //att variable replace
         function _var_callback_att($matches)
 		{
-            if($matches[1] == '{')
+            if(trim($matches[1]) == '{')
 			{
                 return($this->_var_callback($matches));
             }
@@ -272,7 +275,10 @@ if (!defined('IN_COMMON'))
 			
             if(strtoupper($ex) =='PHP')
 			{
-                include($fn);
+				//
+				//disabled for security !
+				//
+                #include($fn);
             }
 			else
 			{
@@ -351,4 +357,5 @@ if (!defined('IN_COMMON'))
 		}
 		
     }
-?>
+
+//<-- EOF

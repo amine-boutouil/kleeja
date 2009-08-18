@@ -80,8 +80,7 @@ input[type="text"]:focus{background-color:#CCFFFF ;border: 1px solid #6699FF;}
 	font: normal 14px tahoma,verdana,arial,sans-serif; }
 #divmiddle .title {
 	width: 94%; font: bold 18px tahoma,verdana,arial,sans-serif; letter-spacing: -1px;
-	color:#FE7C00; margin: 2px 2px 5px 2px; padding: 4px 35px 4px 8px;
-	background: url(../images/generalstat.png) no-repeat right;}
+	color:#FE7C00; margin: 2px 2px 5px 2px; padding: 4px 8px;}
 /* middle */	
 
 				
@@ -130,7 +129,7 @@ input.button1, input.button3,input.button2 {
 .clr { clear: both; overflow:hidden; height: 0;}
 .dot {margin: 0;	padding: 3px 0;	background: url(../images/dot.gif) repeat-x;}
 .exts {	margin: 0;	padding: 5px;font: bold 11px Tahoma, Helvetica, Arial, sans-serif; color: #0B55C4; }
-.s_box {	width: 150px; margin:2 px; border-style:solid; border-width:1px;
+.s_box {	width: 150px; margin:2px; border-style:solid; border-width:1px;
 	font-family:tahoma,verdana,arial,sans-serif; padding:2px 4px 4px 4px;
 	text-align:center; color:#484848; border-color:#F8F834; font-weight: bold;
 	background: #FFFFF3 url(../images/i2.gif) no-repeat top right;}
@@ -176,7 +175,7 @@ input.button1, input.button3,input.button2 {
 #disk_size{ margin:10px 0 0 0 ; padding: 10px 10px 0px 10px; font-weight: bold;background:#eee; border: 1px solid #999;position: relative;-moz-border-radius: 8px; border-radius:1px;}
 #disk_size ul { padding: 6px; }
 #disk_size li {color: #333;}
-#disk_size .t_disk_size{ padding:2px 28px 2px 10px; font-weight: bold;font-size:14px;background:url(../images/disk_size.png) no-repeat 100% 50%;color:#F46320}
+#disk_size .t_disk_size{ padding:2px 0px 2px 10px; font-weight: bold;font-size:14px;color:#F46320}
 /* other info  */
 
 /*  disk_size */
@@ -226,10 +225,10 @@ input.button1, input.button3,input.button2 {
 /* pagination */
 .pagination {float:right; padding: 3px 6px;  margin: 8px 0px;}
 .paging { margin-right: 5px; padding:3px 6px; -moz-border-radius:10px;
-        background-color: #E6F2FF; border: 1.5px solid #6496C3; text-align:center;}
+        background-color: #E6F2FF; border: 1px solid #6496C3; text-align:center;}
 .paging:hover {	color: #fff; background-color: #6496c3;	text-decoration: none;}
 .here_page { margin-right: 5px; padding:3px 6px;  background-color: #6496c3;	color: #fff;
-        border: 1.5px solid #6496c3; -moz-border-radius:10px; font-weight: normal;}
+        border: 1px solid #6496c3; -moz-border-radius:10px; font-weight: normal;}
 /* pagination */
 
 /* footer */
@@ -303,7 +302,6 @@ font:bold 12px Tahoma, Arial, Helvetica, sans-serif;
 color:#003F9D
 }
 .s_tpl_x option {
-padding: 2px 4px;
 direction:ltr;
 border-top: 1px solid #999;
 border-bottom: 1px solid #999;

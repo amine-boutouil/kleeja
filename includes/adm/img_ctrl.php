@@ -85,7 +85,7 @@
 								'href'		=> PATH . $row['folder'] . '/' . $row['name'],
 								'size'		=> $lang['FILESIZE']. ':' . Customfile_size($row['size']),
 								'ups'		=> $lang['FILEUPS'] .' : ' . $row['uploads'],
-								'time'		=> $lang['FILEDATE']. ':' . date('d-m-Y H:a', $row['time']),
+								'time'		=> $lang['FILEDATE']. ':' . date('d-m-Y H:i a', $row['time']),
 								'user'		=> $lang['BY'] . ':' . ($row['user'] == '-1' ? $lang['GUST'] :  $row['username']),
 								'is_thumb'	=> $is_there_thumb,
 								'thumb_link'=>  $is_there_thumb ? PATH . $row['folder'] . '/thumbs/' . $row['name'] :  PATH . $row['folder'] . '/' . $row['name'],

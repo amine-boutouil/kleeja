@@ -373,7 +373,7 @@ switch ($_GET['go'])
 		$users_st	= $stat_users;
 		$sizes_st	= Customfile_size($stat_sizes);	
 		$lst_dl_st	= ((int)$config['del_f_day'] <= 0) ? ' [ ' . $lang['CLOSED_FEATURE'] . ' ] ' : gmdate("d-m-Y H:i a", $stat_last_f_del);
-		$lst_reg	= $stat_last_user;
+		$lst_reg	= (empty($stat_last_user)) ? $lang['UNKNOWN'] : $stat_last_user;
 		
 		($hook = kleeja_run_hook('stats_go_page')) ? eval($hook) : null; //run hook
 		

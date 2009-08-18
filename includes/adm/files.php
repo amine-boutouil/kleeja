@@ -221,7 +221,7 @@
 							'name' => "<a title=\" " . ($row['real_filename'] == '' ? $row['name'] : $row['real_filename']) . "\" href=\"./" . $root_path . $row['folder'] . "/" . $row['name'] . "\" target=\"blank\">" . ($row['real_filename'] == '' ? ((strlen($row['name']) > 20) ? substr($row['name'], 0, 20) . '...' : $row['name']) : ((strlen($row['real_filename']) > 20) ? substr($row['real_filename'], 0, 20) . '...' : $row['real_filename'])) . "</a>",
 							'size' => Customfile_size($row['size']),
 							'ups' => $row['uploads'],
-							'time' => date("d-m-Y H:a", $row['time']),
+							'time' => date("d-m-Y H:i a", $row['time']),
 							'type' => $row['type'],
 							'folder' => $row['folder'],
 							'report' => ($row['report'] > 4) ? "<span style=\"color:red\"><big>" . $row['report'] . "</big></span>":$row['report'],

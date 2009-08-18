@@ -644,7 +644,7 @@ switch ($_GET['go'])
 					$update_query = array(
 											'UPDATE'=> "{$dbprefix}users",
 											'SET'	=> "password = '" . $npass . "', new_password = '', hash_key = ''",
-											'WHERE'	=> 'id=' . $u_id,
+											'WHERE'	=> "id='" . $u_id . "'",
 										);
 										
 					($hook = kleeja_run_hook('qr_update_newpass_activation')) ? eval($hook) : null; //run hook

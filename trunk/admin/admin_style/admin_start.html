@@ -44,7 +44,7 @@
 <div id="info-last-visit">
 	<ul>
 	<li>
-	<strong>{lang.LSTFLE_ST} : <a href="{last_file_up_url}" target="blank">{last_file_up}</a></strong>
+	<strong>{lang.LSTFLE_ST} : <IF NAME="stat_last_file!=0"><a href="{last_file_up_url}" target="blank">{last_file_up}</a><ELSE>{lang.UNKNOWN}</IF></strong>
 	<br /><small>{lang.LSTDELST}<a>{last_del_fles}</a></small>
 	</li>
 	</ul>
@@ -58,7 +58,7 @@
 	<strong>{lang.AUSERS_NUM} : [{users_number}]
 	<br />
 	<IF NAME="config.user_system==1">
-	{lang.LAST_REG} : [{stat_last_user}]
+	{lang.LAST_REG} : [{lst_reg}]
 	</IF>
 	</strong>
 	</li>

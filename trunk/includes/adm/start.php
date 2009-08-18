@@ -22,6 +22,7 @@
 		$h_lst_imgs		= basename(ADMIN_PATH) . '?cp=img_ctrl&amp;last_visit=' . (defined('LAST_VISIT') ? LAST_VISIT : time() - 3600*12);
 		
 		//data
+		$lst_reg			= (empty($stat_last_user)) ? $lang['UNKNOWN'] : $stat_last_user;
 		$files_number 		= $stat_files;
 		$files_sizes 		= Customfile_size($stat_sizes);
 		$users_number 		= $stat_users;

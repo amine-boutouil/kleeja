@@ -15,6 +15,7 @@ include important files
 
 define ( 'IN_COMMON' , true);
 $_path = "../";
+define('PATH', '../');
 (file_exists($_path . 'config.php')) ? include_once ($_path . 'config.php') : null;
 include_once ($_path . 'includes/functions.php');
 include_once ($_path . 'includes/mysql.php');
@@ -379,7 +380,7 @@ case 'data' :
 		$err = 0;
 		$dots = 0;
 		//do important before
-		mysql_query($install_sqls['DROP_TABLES'], $connect);
+		//mysql_query($install_sqls['DROP_TABLES'], $connect);
 		mysql_query($install_sqls['ALTER_DATABASE_UTF'], $connect);
 		
 		foreach($install_sqls as $name=>$sql_content)

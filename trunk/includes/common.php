@@ -133,8 +133,9 @@
 	//include files .. & classes ..
 	$path = dirname(__file__) . '/';
 	$root_path = PATH;
+	$db_type = isset($db_type) ? $db_type : 'mysql';
 	include_once ($path . 'version.php');
-	switch (isset($db_type) && $db_type)
+	switch ($db_type)
 	{
 		case 'mysqli':
 			require ($path . 'mysqli.php');

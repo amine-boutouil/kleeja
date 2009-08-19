@@ -13,6 +13,7 @@ include important files
 */
 define ('IN_COMMON' , true);
 $path = "../includes/";
+define('PATH', '../');
 (file_exists('../config.php')) ? include_once ('../config.php') : null;
 include_once ($path . 'functions.php');
 include_once ($path . 'mysql.php');
@@ -254,7 +255,7 @@ case 'update_now':
 			
 			if($complete_upate)
 			{
-				delete_cache(null, true, true);
+				delete_cache(null, true);
 				echo '<br /><br /><span style="color:green;">' . $lang['INST_UPDATE_IS_FINISH']. '</span><br />';
 				echo '<img src="img/home.gif" alt="home" />&nbsp;<a href="../index.php">' . $lang['INDEX'] . '</a><br /><br />';
 				echo '<img src="img/adm.gif" alt="admin" />&nbsp;<a href="../admin/">' . $lang['ADMINCP'] . '</a><br /><br />';

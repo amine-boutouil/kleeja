@@ -19,11 +19,11 @@
 		$stylee 	= "admin_calls";
 		$action 	= basename(ADMIN_PATH) . "?cp=calls&amp;page=" . (isset($_GET['page']) ? intval($_GET['page']) : '1');
 		
-		$query = array(
-					'SELECT'	=> '*',
-					'FROM'		=> "`{$dbprefix}call`",
-					'ORDER BY'	=> 'id DESC'
-					);
+		$query	= array(
+						'SELECT'	=> '*',
+						'FROM'		=> "`{$dbprefix}call`",
+						'ORDER BY'	=> 'id DESC'
+						);
 						
 		$result = $SQL->build($query);
 		
@@ -98,7 +98,7 @@
 
 	}
 	else
-	{ #num rows
+	{
 		$no_results = true;
 	}
 	
@@ -108,7 +108,7 @@
 	//after submit
 	if (isset($_POST['submit']))
 	{
-			$text	= $lang['CALLS_UPDATED'] . '<meta HTTP-EQUIV="REFRESH" content="0; url=' . basename(ADMIN_PATH) . '?cp=calls&amp;page=' . (isset($_GET['page']) ? intval($_GET['page']) : '1') . '">' ."\n";
+			$text	= ($SQL->affected() ? $lang['CALLS_UPDATED'] : $lang['NO_UP_CHANGE_S']) . '<meta HTTP-EQUIV="REFRESH" content="0; url=' . basename(ADMIN_PATH) . '?cp=calls&amp;page=' . (isset($_GET['page']) ? intval($_GET['page']) : '1') . '">' ."\n";
 			$stylee	= "admin_info";
 	}
 

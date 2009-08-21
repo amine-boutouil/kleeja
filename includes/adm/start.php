@@ -67,6 +67,8 @@
 									'msg_type'=> 'error', 'title'=> $lang['R_CHECK_UPDATE'], 
 									'msg'=> sprintf($lang['UPDATE_NOW_S'] , KLEEJA_VERSION, $v['version_number']) . '<br />' . '<a href="http://www.kleeja.com/">www.kleeja.com</a>'
 									);
+									
+			($hook = kleeja_run_hook('admin_update_now')) ? eval($hook) : null; //run hook 
 		}
 		
 		

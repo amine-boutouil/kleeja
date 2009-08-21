@@ -191,20 +191,25 @@
 	$i = 0;
 
 	//New calls notice
-	$query = array('SELECT'	=> 'c.id',
-					'FROM'		=> "{$dbprefix}call c",
-					'WHERE'		=> "c.time > '" . (defined('LAST_VISIT') ? LAST_VISIT : time() - 3600*12) . "'" 
-					);
+	$cr_time = defined('LAST_VISIT') || LAST_VISIT == 0 ? LAST_VISIT : time() - 3600*12;
+	
+	$c_query	= array('SELECT'	=> 'c.id',
+						'FROM'		=> "{$dbprefix}call c",
+						'WHERE'		=> "c.time > " . $cr_time . "" 
+						);
 
-		$newcall = $SQL->num_rows($SQL->build($query));
+		$newcall = $SQL->num_rows($SQL->build($c_query));
+		$SQL->freeresult();
 		$newcall =  $newcall == 0  ?  ' [0]' : ' [' . $newcall . ']'; 
 	
 	//New reports notice
-	$query = array('SELECT'	=> 'r.id',
-					'FROM'		=> "{$dbprefix}reports r",
-					'WHERE'		=> "r.time > '" . (defined('LAST_VISIT') ? LAST_VISIT : time() - 3600*12) . "'" 
-					);
-	$newreport = $SQL->num_rows($SQL->build($query));
+	$r_query	= array('SELECT'	=> 'r.id',
+						'FROM'		=> "{$dbprefix}reports r",
+						'WHERE'		=> "r.time > " . $cr_time . "" 
+						);
+					
+	$newreport = $SQL->num_rows($SQL->build($r_query));
+	$SQL->freeresult();
 	$newreport = $newreport == 0 ?  ' [0]' : ' [' . $newreport . ']'; 
 		
 	foreach($adm_extensions as $m)

@@ -24,7 +24,7 @@ textarea {	font: 11px tahoma,verdana,arial,sans-serif; width: 60%; padding: 2px;
 label { cursor: pointer;padding: 0 5px 0 0;}
 fieldset { margin: 5px 0; padding:20px; border: 4px solid #6496C3;
 	background-color: #B0D2F6; position: relative; -moz-border-radius: 8px; border-radius:1px;}
-legend { padding: 1px 0; font: 11px tahoma,verdana,arial,sans-serif; font-weight: bold;
+legend { padding: 1px 0; font:bold 11px tahoma,verdana,arial,sans-serif;
     color: #115098; margin-top: -.4em; position: relative; text-transform: none;
     line-height: 1.2em; top: 0; vertical-align: middle;}
 input, textarea { font: 11px tahoma,verdana,arial,sans-serif; font-weight: normal;

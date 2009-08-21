@@ -141,6 +141,7 @@
 	$ext_expt	= array();
 	$ext_expt[]	= 'start';
 	$ext_expt[]	= 'php_info';
+	$ext_expt[]	= 'aupdate';
 	//confirm msgs
 	$ext_confirm	= array();
 	$ext_confirm[]	= 'repair';	

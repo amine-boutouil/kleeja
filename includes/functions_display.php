@@ -310,7 +310,7 @@ function kleeja_admin_err($msg, $navigation=true, $title='', $exit=true)
 */
 function kleeja_admin_info($msg, $navigation=true, $title='', $exit=true)
 {
-	global $text, $tpl, $SHOW_LIST, $adm_extensions, $adm_extensions_menu, $STYLE_PATH_ADMIN, $lang;
+	global $text, $tpl, $SHOW_LIST, $adm_extensions, $adm_extensions_menu, $STYLE_PATH_ADMIN, $lang, $SQL;
 	
 	($hook = kleeja_run_hook('kleeja_admin_info_func')) ? eval($hook) : null; //run hook
 				

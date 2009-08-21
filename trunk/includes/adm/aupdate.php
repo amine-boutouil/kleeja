@@ -1,10 +1,13 @@
 <?php
-
-	require(PATH . 'includes/extract.php');
 	
   	$v = @unserialize($config['new_version']);
 	if(version_compare(strtolower(KLEEJA_VERSION), strtolower($v['version_number']), '<'))
 	{
+		$data 		= fetch_remote_file('http://www.kleeja.com/check_vers/kleeja_versions.txt', false);
+		$dataa 		= explode(strtolower(KLEEJA_VERSION), $data);
+		$dataa 		= explode('|', $dataa[2]);
+		$new_ver 	= $dataa[1];
+		
 		if(!isset($_GET['astep']))
 		{
 			$_GET['astep'] = null;	
@@ -17,7 +20,7 @@
 				if(function_exists("curl_init"))
 				{
 					// www.kleeja.com/aupdatekleeja.zip
-					$data = fetch_remote_file('http://www.kleeja.com/aupdatekleeja' . $v['version_number'] . '.zip');
+					$data = fetch_remote_file('http://www.kleeja.com/aupdatekleeja' . $new_ver . '.zip');
 					if($data != false)
 					{
 						//then ..write new file
@@ -34,7 +37,7 @@
 				}
 				else //OTHER FUNCTION
 				{
-					$data = fetch_remote_file('http://www.kleeja.com/aupdatekleeja' . $v['version_number'] . '.zip' , PATH . $config['foldername'] . '/' . 'aupdatekleeja.zip');
+					$data = fetch_remote_file('http://www.kleeja.com/aupdatekleeja' . $new_ver . '.zip' , PATH . $config['foldername'] . '/' . 'aupdatekleeja.zip');
 						
 					if($data === false)
 					{
@@ -49,6 +52,8 @@
 			break;
 			
 			case '2' : //extract
+			
+				include(PATH . 'includes/extract.php');
 				
 				$zip = new PclZip(PATH . $config['foldername'] . '/' . 'aupdatekleeja.zip');
 				$extractedFileList = $zip->extract($p_path = PATH);
@@ -77,7 +82,7 @@
 			case '3' :
 				
 				//get data from kleeja database
-				$data = fetch_remote_file('http://www.kleeja.com/check_vers/update' . $v['version_number'] . '.txt', false);
+				$data = fetch_remote_file('http://www.kleeja.com/check_vers/update-sqls-' . $new_ver . '.txt', false);
 
 				if ($data === false)
 				{
@@ -172,14 +177,6 @@
 			break;
 			
 			default :
-					
-					$data = fetch_remote_file('http://localhost/kleeja_versions.txt', false);
-					
-					$data = explode(strtolower(KLEEJA_VERSION), $data);
-					
-					$data = explode('|', $data[0]);
-					
-					echo $data[0];
 					
 					kleeja_admin_info("ok");
 				

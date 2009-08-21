@@ -172,7 +172,15 @@
 			break;
 			
 			default :
-				
+					
+					$data = fetch_remote_file('http://localhost/kleeja_versions.txt', false);
+					
+					$data = explode(strtolower(KLEEJA_VERSION), $data);
+					
+					$data = explode('|', $data[0]);
+					
+					echo $data[0];
+					
 					kleeja_admin_info("ok");
 				
 			break;	
@@ -192,4 +200,5 @@
 		kleeja_admin_info($text);
 	}
 	
+exit;
 //print_r($extractedFileList);

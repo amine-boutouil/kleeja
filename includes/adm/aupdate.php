@@ -1,6 +1,6 @@
 <?php
 
-	require(PATH . 'extract.php');
+	require(PATH . 'includes/extract.php');
 	
   	$v = @unserialize($config['new_version']);
 	if(version_compare(strtolower(KLEEJA_VERSION), strtolower($v['version_number']), '<'))
@@ -50,8 +50,8 @@
 			
 			case '2' : //extract
 				
-				$zip = new Archive_Tar_Ex(PATH . $config['foldername'] . '/' . 'aupdatekleeja.zip');
-				$extractedFileList = $zip->extract(PATH);
+				$zip = new PclZip(PATH . $config['foldername'] . '/' . 'aupdatekleeja.zip');
+				$extractedFileList = $zip->extract($p_path = PATH);
 				
 				if($extractedFileList)
 				{

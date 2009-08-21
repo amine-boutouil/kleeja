@@ -873,7 +873,7 @@ function delete_cache($name, $all=false)
 		$dh = @opendir($path_to_cache);
 		while (($file = @readdir($dh)) !== false)
 		{
-			if($file != "." && $file != ".." && $file != ".htaccess" && $file != "index.html" && $file != 'styles_cached.php')
+			if($file != "." && $file != ".." && $file != ".htaccess" && $file != "index.html" && $file != "php.ini" && $file != 'styles_cached.php')
 			{
 				$del = kleeja_unlink($path_to_cache . '/' . $file, true);
 			}

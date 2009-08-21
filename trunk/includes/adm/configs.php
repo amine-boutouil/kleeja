@@ -167,9 +167,9 @@
 					if(!empty($row['option'])) 
 					{
 						$optionss[$row['name']] = array(
-						'option'		 => '<table style="border-style:ridge dotted;border-color:#FFF;border-width:2px;"><tr>' . "\n" .  
-											'<td style="width:40%"><label for="' . $row['name'] . '">' . (!empty($lang[strtoupper($row['name'])]) ? $lang[strtoupper($row['name'])] : $olang[strtoupper($row['name'])]) . '</label></td>' . "\n" .
-											'<td style="width:60%"><label>' . (empty($row['option']) ? '' : $tpl->admindisplayoption($row['option'])) . '</label></td>' . "\n" .
+						'option'		 => '<table><tr>' . "\n" .  
+											'<td style="width:40%;border-style:ridge dotted;border-color:#aaa;border-width:1px;"><label for="' . $row['name'] . '">' . (!empty($lang[strtoupper($row['name'])]) ? $lang[strtoupper($row['name'])] : $olang[strtoupper($row['name'])]) . '</label></td>' . "\n" .
+											'<td style="width:60%;border-style:ridge dotted;border-color:#aaa;border-width:1px;"><label>' . (empty($row['option']) ? '' : $tpl->admindisplayoption($row['option'])) . '</label></td>' . "\n" .
 											'</tr></table>' . "\n",
 						'type'			=> $row['type'],
 						'display_order' => $row['display_order'],

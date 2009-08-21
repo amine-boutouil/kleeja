@@ -132,7 +132,7 @@
 		exit;	//stop	
 	}
 	
-	(!defined('LAST_VISIT')) ? define('LAST_VISIT',time() - 3600*12) : '';
+	(!defined('LAST_VISIT')) ? define('LAST_VISIT', time() - 3600*12) : '';
 
 	//path of admin extensions
 	$path_adm	= PATH . "includes/adm";
@@ -191,7 +191,7 @@
 	$i = 0;
 
 	//New calls notice
-	$cr_time = defined('LAST_VISIT') || LAST_VISIT == 0 ? LAST_VISIT : time() - 3600*12;
+	$cr_time = LAST_VISIT > 0 ? LAST_VISIT : time() - 3600*12;
 	
 	$c_query	= array('SELECT'	=> 'c.id',
 						'FROM'		=> "{$dbprefix}call c",

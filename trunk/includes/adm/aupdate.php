@@ -20,7 +20,7 @@
 				if(function_exists("curl_init"))
 				{
 					// www.kleeja.com/aupdatekleeja.zip
-					$data = fetch_remote_file('http://www.kleeja.com/aupdatekleeja' . $new_ver . '.zip');
+					$data = fetch_remote_file('http://www.kleeja.com/check_vers/aupdatekleeja' . $new_ver . '.zip');
 					if($data != false)
 					{
 						//then ..write new file
@@ -37,7 +37,7 @@
 				}
 				else //OTHER FUNCTION
 				{
-					$data = fetch_remote_file('http://www.kleeja.com/aupdatekleeja' . $new_ver . '.zip' , PATH . $config['foldername'] . '/' . 'aupdatekleeja.zip');
+					$data = fetch_remote_file('http://www.kleeja.com/check_vers/aupdatekleeja' . $new_ver . '.zip' , PATH . $config['foldername'] . '/' . 'aupdatekleeja.zip');
 						
 					if($data === false)
 					{
@@ -92,12 +92,12 @@
 				
 				eval($data);
 				
-				$complete_upate = true;
+				//$complete_upate = true;
 			
 				if($config['db_version'] >= DB_VERSION && !defined('DEV_STAGE'))
 				{
 					kleeja_admin_info('<br /><br /><span style="color:green;">' . $lang['INST_UPDATE_CUR_VER_IS_UP']. '</span><br />');
-					$complete_upate = false;
+					//$complete_upate = false;
 				}
 				
 				$msg = '';
@@ -105,8 +105,10 @@
 				//
 				//is there any sqls 
 				//
+				/*
 				if(($complete_upate or defined('DEV_STAGE')) && !defined('C_U_F'))
 				{
+				*/
 					$SQL->show_errors = false;
 					if(isset($update_sqls) && sizeof($update_sqls) > 0)
 					{
@@ -121,18 +123,20 @@
 							{
 								$sql = "UPDATE `{$dbprefix}config` SET `value` = '" . DB_VERSION . "' WHERE `name` = 'db_version'";
 								$SQL->query($sql);
-								$msg .= '<br /><br /><span style="color:green;">' . $lang['INST_UPDATE_CUR_VER_IS_UP']. '</span><br />';
-								$complete_upate = false;
+								kleeja_admin_info('<br /><br /><span style="color:green;">' . $lang['INST_UPDATE_CUR_VER_IS_UP']. '</span><br />');
+								//$complete_upate = false;
 							}
 						}
 					}
-				}
+				//}
 			
 				//
 				//is there any functions 
 				//
+				/*
 				if($complete_upate or defined('DEV_STAGE') or defined('C_U_F'))
 				{
+				*/
 					if(isset($update_functions) && sizeof($update_functions) > 0)
 					{
 						foreach($update_functions as $n)
@@ -140,13 +144,15 @@
 							eval('' . $n . '; ');
 						}
 					}
-				}
+				//}
 			
 				//
 				//is there any notes 
 				//
+				/*
 				if($complete_upate or defined('DEV_STAGE'))
 				{
+				*/
 					if(isset($update_notes) && sizeof($update_notes) > 0)
 					{
 						$msg .= '<br /><span style="color:blue;"><b>' . $lang['INST_NOTES_UPDATE'] . ' :</b> </span><br />';
@@ -159,18 +165,13 @@
 						}
 
 					}
-				}
+				//}
 				
 				
 				if($complete_upate)
 				{
 					delete_cache(null, true);
 					$msg .= '<br /><br /><span style="color:green;">' . $lang['INST_UPDATE_IS_FINISH']. '</span><br />';
-					$msg .= '<img src="img/home.gif" alt="home" />&nbsp;<a href="../index.php">' . $lang['INDEX'] . '</a><br /><br />';	
-					$msg .= '<img src="img/adm.gif" alt="admin" />&nbsp;<a href="../admin/">' . $lang['ADMINCP'] . '</a><br /><br />';
-					$msg .= '' . $lang['INST_KLEEJADEVELOPERS'] . '<br /><br />';
-					$msg .= '<a href="http://www.kleeja.com">www.kleeja.com</a><br /><br />';
-					
 					kleeja_admin_info($msg);
 				}
 					

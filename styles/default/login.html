@@ -1,30 +1,50 @@
 <!-- start login template  -->
-<div id="bg_log1n">
 
-<!-- start error msg  -->
+<div id="content">
+
+
+
+<!-- start site name and title  -->
+<div class="title-x"><strong><a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}</strong></div>
+<!--  # End  site name and title  -->
+
+<!-- start line top  -->
+<div class="clr"></div><div class="line"></div>
+<!-- # End line top  -->
+
+
+
+
 <IF NAME="ERRORS">
+<!-- start error msg  -->
 <dl id="system-message">
 <dd class="error"><ul>
 <LOOP NAME="ERRORS"><li>{%value%}</li></LOOP>
 </ul></dd></dl>
-</IF>
 <!-- # end error msg  -->
+</IF>
+
+
+<div id="bg_log1n">
 
 <!-- start form login  -->
 <div id="login">
     <div class="title_login"><img src="{STYLE_PATH}images/infoo.png" style="vertical-align:middle;">&nbsp;{lang.USER_LOGIN}</div>
-	<br />
     <form action="{action}" method="post">
-		<fieldset>
-			<label for="username">{lang.USERNAME} :</label>
-			<input  class="username"  type="text" name="lname" value="{t_lname}"  />
-			<label for="password">{lang.PASSWORD} :</label>
-			<input class="password" type="password" name="lpass" value="{t_lpass}"  />
-			<div class="forget_pass"><a href="{forget_pass_link}"><img src="{STYLE_PATH}images/warning.gif" style="vertical-align:middle;">&nbsp;{lang.LOSS_PASSWORD}</a></div>
-			<div class="clr"></div><br />			
-			<input class="buttons" type="submit" name="submit" value="{lang.LOGIN}" />
-			<br /><br />
-			<label for="remme">{lang.REMME} :</label>
+<table class="login">
+	<tr>
+		<td style="width: 220px;"><b>{lang.USERNAME} :</b></td>
+		<td><input  class="username"  type="text" name="lname" value="{t_lname}"  /></td>
+	</tr>
+	
+	<tr>
+		<td><b>{lang.PASSWORD} :</b></td>
+		<td><input class="password" type="password" name="lpass" value="{t_lpass}"  /></td>
+	</tr>
+	
+	<tr>
+		<td><b>{lang.REMME} :</b></td>
+		<td>
 				<select class="remme" name="remme">
 					<option value="3600">{lang.HOUR}</option>
 					<option value="18000">{lang.5HOURS}</option>
@@ -33,14 +53,25 @@
 					<option value="25920000">{lang.MONTH}</option>
 					<option value="31536000">{lang.YEAR}</option>
 				</select>
-			<br />
-			{H_FORM_KEYS}
-		</fieldset>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2"><div class="forget_pass"><a href="{forget_pass_link}"><img src="{STYLE_PATH}images/warning.gif" style="vertical-align:middle;">&nbsp;{lang.LOSS_PASSWORD}</a></div></td>
+	</tr>	
+</table>
+
+<div class="clr"></div>			
+			<input class="buttons" type="submit" name="submit" value="{lang.LOGIN}" />	
 	</form>
 </div>
+<div class="clr"></div>
+</div>
+
 <!-- ## End form login  -->
 
-
+<br />
+			
+			{H_FORM_KEYS}
 <!-- # End background login  -->
  
 <div class="clr"></div><br />

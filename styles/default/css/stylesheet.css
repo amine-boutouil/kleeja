@@ -24,10 +24,10 @@ img.right {float: right;margin-left:15px;}
 /* # END site name and titles all */
 
 /* safe code all box */
-.safe_code {width:60%;margin:5px 0;padding:10px;border: 2px solid #B7D1A8;background:#F1F8ED url(../images/saf3_code01.png) no-repeat 8px 12px ;}
-.safe_code b  {padding-right:4px;color:#408000}
-.safe_code input  {padding:3px;height:16px;border:1px solid #999;outline:1px solid #B7D1A8;}
-.explain {font-size:xx-small;font-style:italic;}
+.safe_code {margin:5px 0;padding:10px;border:1px solid #ECCEBB;background:#F9F5F0 url(../images/saf3_code01.gif) no-repeat 0% 50%;}
+.safe_code span {padding-right:4px;color:#FF5A00}
+.safe_code input[type="text"]:focus {background-color: #ffd ;border: 1px solid #D26900;direction:ltr}
+.explain {font-size:xx-small;font-style:italic;color:#858585}
 /* # end safe code all box */
 
 /** LOGO */
@@ -159,8 +159,9 @@ ul.tabbernav li.tabberactive a:hover{color:#AE4600;}
 /* ALL inputs */
 
 /* ALL buttons */
-#buttons ,.buttons{margin-top:2px;outline:0;cursor: pointer;padding:4px 20px;font: normal 12px Tahoma, Arial, sans-serif;background:#D7D7D7 url(../images/headline_bg.png) repeat-x top right;color:#111;border:1px solid #999;-moz-border-radius:10px;-webkit-border-radius:10px;-khtml-border-radius:10px;border-radius:10px;}
-#buttons:hover ,.buttons:hover{background:#B0B1B1;color: #111;border:1px solid #666;text-decoration:none;}
+#buttons ,.buttons{margin-top:2px;outline:0;cursor: pointer;padding:4px 20px;font: normal 12px Tahoma, Arial, sans-serif;
+background:#F68618 url(../images/headline_bg.png) repeat-x top right;color:#111;border:1px solid #999;-moz-border-radius:10px;-webkit-border-radius:10px;-khtml-border-radius:10px;border-radius:10px;}
+#buttons:hover ,.buttons:hover{background:#D7D7D7;color: #111;border:1px solid #666;text-decoration:none;}
 /* ## ALL buttons */
 
 /* pagination */
@@ -186,18 +187,23 @@ ul.tabbernav li.tabberactive a:hover{color:#AE4600;}
 /* # footer template */
 
 /* login template >> login.html */
-#bg_log1n{float:right;width: 40%;padding:10px 30px;margin:1% 12% 2% 2%;color:#444;background:url(../images/get_password.png) no-repeat 10% 0%;}
-#login {        float: right;width: 220px;}
-#login label {display: block;margin-bottom: 2px;}
+
+#bg_log1n{margin:5px 0;padding:15px 10px;color:#444;background:#F8EDED url(../images/get_password.png) no-repeat 10% 50%;
+border:1px solid #FFCDCD;}
+#login .login {width:280px}
+#login .login td{padding-bottom:5px;}
+
 #login a {color:#C03C2D;font-size: 12px;padding: 3px 6px;}
-#login .title_login {color:#D80505;width: 200px;padding:2px 5px;}
+#login .title_login {color:#D80505;padding-bottom:5px}
+
 #login .username,#login .password{padding-left:20px;padding:2px;width:180px;font-size: 12px;}
 #login  .username{background:#fff url(../images/username.gif) no-repeat 1px 2px;}
 #login  .password{background:#fff url(../images/password.gif) no-repeat 1px 2px;}
-#login  .forget_pass  { background:#E0E0E0;float:left;margin:5px 0 0 10px; color:#C03C2D;}
+#login  .forget_pass  {display:inline;margin:1px; color:#C03C2D;}
 #login  .forget_pass a:hover {color:#FF2020;}        
-#login  .remme{background:#FFBA00;color: #000;border: 1px solid #999;font:normal 9px Tahoma, Helvetica, Arial, sans-serif;}
-#login .remme option{background: #FFBA00;color: #000;}
+#login  .remme{color: #000;border: 1px solid #999;font:normal 9px Tahoma, Helvetica, Arial, sans-serif;}
+
+
 /* # login template >> login.html  */
 
 /* captcha stuff*/
@@ -229,8 +235,8 @@ ul.tabbernav li.tabberactive a:hover{color:#AE4600;}
 /*-- #  end box user name and all files  >> fileuser.html  */
 
 /* register template >> register.html */
-#register{background:url(../images/register.png) no-repeat 10% 24%;}
-.reg_table{background:#EDF0F8;border:2px solid #CDDFFF;margin:5px 0;padding:10px;width:60%;}
+.reg_table{background:#F3F9F0 url(../images/register.png) no-repeat 15% 50%;border:1px solid #D9ECBB;
+margin:5px 0;padding:15px 10px;}
 .reg_table td,.box_rebort td{width:130px;padding-bottom:5px;}
 .reg_table td input,.box_rebort td input  {width:180px;}
 /*#  register template >> register.html */

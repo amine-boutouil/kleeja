@@ -18,8 +18,8 @@ a:hover, a:active, body_ahover {color:#D2691E;text-decoration:underline;padding:
 input:focus, textarea:focus {background-color: #ffd ;border: 1px solid #D26900;}
 option {padding-right: 1em;}
 textarea { width:60%;padding:2px;font-size:12px;line-height: 1.4em;}
-input {font-weight: normal; vertical-align: middle; padding:3px 3px;font-size: 1.2em;outline:1px solid #ccc;
-        border: 1px solid #BCBCBC;  background-position: 0 100%;color: #111;}
+input {font-weight: normal; vertical-align: middle; padding:3px 3px;font-size:12px;
+        border: 1px solid #BCBCBC; background-position: 0 100%;color: #111;}
 select {font-weight: normal;cursor: pointer;
         vertical-align: middle;border: 1px solid #666666;padding: 1px;background-color: #FAFAFA;}
 img {border: none;}

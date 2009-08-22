@@ -357,8 +357,8 @@ function kleeja_debug ()
 		}
 		
 		//thrn show it
-		echo '<br />';
-		echo '<fieldset  dir="ltr" style="background:white;margin:15px;padding:10px"><legend><br /><br /><em style="font-family: Tahoma; color:red">[Page Analysis]</em></legend>';
+		echo '<div class="debug_kleeja">';
+		echo '<fieldset  dir="ltr"><legend><br /><br /><em style="font-family: Tahoma; color:red">[Page Analysis]</em></legend>';
 		echo '<p>&nbsp;</p>';
 		echo '<p><h2><strong>General Information :</strong></h2></p>';
 		echo '<p>Gzip : <em>' . (($do_gzip_compress !=0 )?  "Enabled" : "Disabled") . '</em></p>';
@@ -387,6 +387,7 @@ function kleeja_debug ()
 		}
 		
 		echo '<p>&nbsp;</p><p><h2><strong><em>HOOKS</em> Information :</strong></h2></p> ';
+		echo '<ul>';
 		
 		if(sizeof($all_plg_hooks) > 0)
 		{ 
@@ -394,9 +395,9 @@ function kleeja_debug ()
 				{
 					foreach($v as $p=>$c) $p=$p; $c=$c; // exactly 
 					
-					echo '<fieldset name="hook"  dir="ltr" style="background:white"><legend><em>Plugin  # [' . $p . ']</em></legend>';
-					echo '<textarea style="font-family:Courier New,monospace;width:99%; background:#F4F4F4" rows="5" cols="10">' . htmlspecialchars($c) . '</textarea><br />';
-					echo 'for hook_name :' . $k . '</fieldset><br /><br />';
+					echo '<li><em>Plugin  # [' . $p . ']</em>';
+					//echo '<textarea style="font-family:Courier New,monospace;width:99%; background:#F4F4F4" rows="5" cols="10">' . htmlspecialchars($c) . '</textarea><br />';
+					echo ' : hook_name :' . $k . '</li>';
 				}
 		}
 		else
@@ -404,7 +405,8 @@ function kleeja_debug ()
 			echo '<p><strong>NO-HOOKS</strong></p>';
 		}
 		
-		echo '<br /><br /><br /></fieldset>';
+		echo '</ul>';
+		echo '</div>';
 }
 
 /*

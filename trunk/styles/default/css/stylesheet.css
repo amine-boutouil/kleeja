@@ -341,3 +341,16 @@ line-height:25px
 
 .all_boxes{width:98%;color:#235300;border:1px solid #F8F800;outline:1px solid #95AD4B;direction:ltr}
 .all_boxes:focus {background-color:#FFE1C6;border: 1px solid #C9FF0F;color:#111}
+
+.debug_kleeja{
+width:80%;
+margin:0 auto;
+background-color:#fff;
+border:1px #666 solid;
+margin-top:20px;
+margin-bottom:20px;
+}
+.debug_kleeja fieldset{
+margin:0 auto;
+width:80%;
+}

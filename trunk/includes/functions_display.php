@@ -12,99 +12,47 @@
 /*
 * header of kleeja
 * to show header in any page you want .. 
-*  parameter : title : title of page as in <titl></titl>
+*  parameter : title : title of page as in <title></title>
 */	
 function Saaheader($title, $outscript=false)
 {
-		global $tpl, $usrcp, $lang, $olang, $user_is, $config;
+		global $tpl, $usrcp, $lang, $olang, $user_is, $username, $config;
 		global $extras, $script_encoding, $errorpage, $userinfo;
-
+		
+		//is user ? and username
 		$user_is = ($usrcp->name()) ? true: false;
+		$username = ($usrcp->name()) ? $usrcp->name() : $lang['GUST'];
 		
-		//login - logout-profile... etc ..
-		if (!$usrcp->name()) 
-		{
-			$login_name		= $lang['LOGIN']; 
-			$login_url		= ($config['mod_writer']) ? "login.html" : "ucp.php?go=login";
-			$usrcp_name		= $lang['REGISTER'];
-			$usrcp_url		= ($config['mod_writer']) ? "register.html" : "ucp.php?go=register";
-			$usrfile_url = $usrfile_name = null;
-		}
-		else
-		{
-			$login_name		= $lang['LOGOUT'] . "[" . $usrcp->name() . "]";
-			$login_url		= ($config['mod_writer']) ? "logout.html" : "ucp.php?go=logout";
-			$usrcp_name		= $lang['PROFILE'];
-			$usrcp_url		= ($config['mod_writer']) ? "profile.html" : "ucp.php?go=profile";
-			$usrfile_name	= $lang['YOUR_FILEUSER'];
-			$usrfile_url	= ($config['mod_writer']) ? "fileuser.html" : "ucp.php?go=fileuser";
-		}
+		//links for header
+		$_LINKS = array(
+				//user related
+				'login'		=> $config['mod_writer'] ? 'login.html' : 'ucp.php?go=login',
+				'logout'	=> $config['mod_writer'] ? 'logout.html' : 'ucp.php?go=logout',
+				'register'	=> $config['mod_writer'] ? 'register.html' : 'ucp.php?go=register',
+				'profile'	=> $config['mod_writer'] ? 'profile.html' : 'ucp.php?go=profile',
+				'fileuser'	=> $config['mod_writer'] ? 'fileuser.html' : 'ucp.php?go=fileuser',
+				'filecp'	=> $config['mod_writer'] ? 'filecp.html' : 'ucp.php?go=filecp',
+				//another
+				'guide'	=> $config['mod_writer'] ? 'guide.html' : 'go.php?go=guide',
+				'rules'	=> $config['mod_writer'] ? 'rules.html' : 'go.php?go=rules',
+				'call'	=> $config['mod_writer'] ? 'call.html' : 'go.php?go=call',
+				'stats'	=> $config['mod_writer'] ? 'stats.html' : 'go.php?go=stats',
+			);
 
-		$vars = array (
-							0=>"navigation",
-							1=>"index_name",
-							2=>"guide_name", 3=>"guide_url",
-							4=>"rules_name", 5=>"rules_url",
-							6=>"call_name", 7=>"call_url",
-							8=>"login_name", 9=>"login_url",
-							10=>"usrcp_name", 11=>"usrcp_url",
-							12=>"filecp_name", 13=>"filecp_url",
-							14=>"stats_name", 15=>"stats_url",
-							16=>"usrfile_name", 17=>"usrfile_url"
-						);
-		
-		if($config['mod_writer'])
-		{
-			$vars2 = array(
-							0=>$lang['JUMPTO'],
-							1=>$lang['INDEX'],
-							2=>$lang['GUIDE'],3=>"guide.html",
-							4=>$lang['RULES'],5=>"rules.html",
-							6=>$lang['CALL'],7=>"call.html",
-							8=>$login_name,9=>$login_url,
-							10=>$usrcp_name,11=>$usrcp_url,
-							12=>$lang['FILECP'],13=>"filecp.html",
-							14=>$lang['STATS'],15=>"stats.html",
-							16=>$usrfile_name,17=>$usrfile_url
-						);
-		}
-		else
-		{
-			$vars2 = array(
-							0=>$lang['JUMPTO'],
-							1=>$lang['INDEX'],
-							2=>$lang['GUIDE'],3=>"go.php?go=guide",
-							4=>$lang['RULES'],5=>"go.php?go=rules",
-							6=>$lang['CALL'],7=>"go.php?go=call",
-							8=>$login_name,9=>$login_url,
-							10=>$usrcp_name,11=>$usrcp_url,
-							12=>$lang['FILECP'],13=>"ucp.php?go=filecp",
-							14=>$lang['STATS'],15=>"go.php?go=stats",
-							16=>$usrfile_name,17=>$usrfile_url
-						);
-		}
-
-		//assign variables
-		for($i=0;$i<count($vars);$i++)
-		{
-			$tpl->assign($vars[$i],$vars2[$i]);
-		}
+		//assign some variables
 		$tpl->assign("dir", $lang['DIR']);
 		$tpl->assign("title", $title);
+		$tpl->assign("_LINKS", $_LINKS);
 		$tpl->assign("go_back_browser", $lang['GO_BACK_BROWSER']);
 		$extra = '';
-		
-		//check for extra header 
-		if(empty($extras['header']))
-		{
-			$extras['header'] = false;
-		}
 
+		//check for extra header 
+		$extras['header'] = empty($extras['header']) ? false : $extras['header'];
 
 		($hook = kleeja_run_hook('func_Saaheader')) ? eval($hook) : null; //run hook
-		
+
 		$tpl->assign("EXTRA_CODE_META", $extra);
-		
+
 		if($config['user_system'] != '1' && isset($script_encoding) && function_exists('iconv') && !preg_match('/utf/i',strtolower($script_encoding)) && !$errorpage && $outscript && !defined('DISABLE_INTR')) 
 		{
 			$header = iconv("UTF-8", strtoupper($script_encoding) . "//IGNORE", $tpl->display("header"));
@@ -116,12 +64,11 @@ function Saaheader($title, $outscript=false)
 		
 		if($config['siteclose'] == '1' && $usrcp->admin() && !defined('IN_ADMIN'))
 		{
-			echo '<div style="width: 100%; text-align:center; background:#FFFFA6; color:black; border:thin; border-color:orange">' . $lang['NOTICECLOSED'] . '</div>
-';
+			echo '<div style="width: 100%; text-align:center; background:#FFFFA6; color:black; border:thin; border-color:orange">' . $lang['NOTICECLOSED'] . '</div>';
 		}
-		
+
 		echo $header;
-	}
+}
 
 
 /*

@@ -39,12 +39,12 @@ var LANG_MORE_F_FILES ="{lang.MORE_F_FILES}";
 <!-- start top menu  -->
 <div id="top_menu">
 	<ul class="m3nu">
-		<li><a href="{config.siteurl}" title="{index_name}" class="current"><img src="{STYLE_PATH}images/home.png" style="vertical-align:middle;" />&nbsp;&nbsp;{index_name}</a></li>
-		<li><a href="{rules_url}" title="{rules_name}">{rules_name}</a></li>
-		<li><a href="{guide_url}" title="{guide_name}">{guide_name}</a></li>
-		<li><a href="{call_url}" title="{call_name}">{call_name}</a></li>
+		<li><a href="{config.siteurl}" title="{lang.INDEX}" class="current"><img src="{STYLE_PATH}images/home.png" style="vertical-align:middle;" />&nbsp;&nbsp;{lang.INDEX}</a></li>
+		<li><a href="{_LINKS.rules}" title="{lang.RULES}">{lang.RULES}</a></li>
+		<li><a href="{_LINKS.guide}" title="{lang.GUIDE}">{lang.GUIDE}</a></li>
+		<li><a href="{_LINKS.call}" title="{lang.CALL}">{lang.CALL}</a></li>
 		<IF NAME="config.allow_stat_pg">
-		<li><a href="{stats_url}" title="{stats_name}">{stats_name}</a></li>
+		<li><a href="{_LINKS.stats}" title="{lang.STATS}">{lang.STATS}</a></li>
 		</IF>
 	</ul>
 </div>
@@ -70,13 +70,17 @@ var LANG_MORE_F_FILES ="{lang.MORE_F_FILES}";
 	<div class="list">
 		<ul>
 			<span>&nbsp;</span>
-			<li><a href="{login_url}"><img src="{STYLE_PATH}images/Go-Out.png" alt="{login_name}" style="vertical-align:middle;" />{login_name}</a></li>
-			<li><a href="{usrcp_url}"><img src="{STYLE_PATH}images/User.png" alt="{usrcp_name}" style="vertical-align:middle;" />{usrcp_name}</a></li>
 			<IF NAME="user_is">
 			    <IF NAME="config.enable_userfile">
-				<li><a href="{usrfile_url}"><img src="{STYLE_PATH}images/user-folder.png" alt="{usrfile_name}" style="vertical-align:middle;" />{usrfile_name}</a></li>
+				<li><a href="{_LINKS.fileuser}"><img src="{STYLE_PATH}images/user-folder.png" alt="{lang.YOUR_FILEUSER}" style="vertical-align:middle;" />{lang.YOUR_FILEUSER}</a></li>
 				</IF>
-			<li><a href="{filecp_url}"><img src="{STYLE_PATH}images/filecp.png" alt="{filecp_name}" style="vertical-align:middle;" />{filecp_name}</a></li>
+			<li><a href="{_LINKS.filecp}"><img src="{STYLE_PATH}images/filecp.png" alt="{lang.FILECP}" style="vertical-align:middle;" />{lang.FILECP}</a></li>
+			<li><a href="{_LINKS.profile}"><img src="{STYLE_PATH}images/User.png" alt="{lang.PROFILE}" style="vertical-align:middle;" />{lang.PROFILE}</a></li>
+			<li><a href="{_LINKS.logout}"><img src="{STYLE_PATH}images/Go-Out.png" alt="{lang.LOGOUT}" style="vertical-align:middle;" />{lang.LOGOUT} [ {username} ]</a></li>
+			
+			<ELSE>
+			<li><a href="{_LINKS.register}"><img src="{STYLE_PATH}images/User.png" alt="{lang.REGISTER}" style="vertical-align:middle;" />{lang.REGISTER}</a></li>
+			<li><a href="{_LINKS.login}"><img src="{STYLE_PATH}images/Go-Out.png" alt="{lang.LOGIN}" style="vertical-align:middle;" />{lang.LOGIN}</a></li>
 			</IF>
 			<b></b>
 		</ul>

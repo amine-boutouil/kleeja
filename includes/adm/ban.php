@@ -2,59 +2,57 @@
 	//ban
 	//part of admin extensions
 	//conrtoll bans
-	
+
 	//copyright 2007-2009 Kleeja.com ..
 	//license http://opensource.org/licenses/gpl-license.php GNU Public License
 	//$Author$ , $Rev$,  $Date::                           $
-	
+
 	// not for directly open
 	if (!defined('IN_ADMIN'))
 	{
 		exit('no directly opening : ' . __file__);
 	}
-	
 
-		//for style ..
-		$stylee 	= "admin_ban";
-		$action 	= basename(ADMIN_PATH) . "?cp=ban";
+	//for style ..
+	$stylee 	= "admin_ban";
+	$action 	= basename(ADMIN_PATH) . "?cp=ban";
 
-		$query = array(
+	$query	= array(
 					'SELECT'	=> 'ban',
 					'FROM'		=> "{$dbprefix}stats"
 					);
-						
-		$result = $SQL->build($query);
 
-		while($row=$SQL->fetch_array($result))
-		{
+	$result = $SQL->build($query);
 
-			$ban = isset($_POST["ban_text"]) ? htmlspecialchars($_POST['ban_text']) : $row['ban'];
-			
-			//when submit !!
-			if (isset($_POST['submit']))
-			{
-				//update
-				$update_query = array(
-									'UPDATE'	=> "{$dbprefix}stats",
-									'SET'		=> "ban='" . $SQL->escape($ban) . "'"
-								);
+	while($row=$SQL->fetch_array($result))
+	{
+		$ban = isset($_POST["ban_text"]) ? htmlspecialchars($_POST['ban_text']) : $row['ban'];
 
-				if ($SQL->build($update_query))
-				{
-					//delete cache ..
-					delete_cache('data_ban');
-				}
-			}
-		}
-		
-		$SQL->freeresult($result);
-
-
-		//after submit 
+		//when submit !!
 		if (isset($_POST['submit']))
 		{
-			$text	= $lang['BAN_UPDATED'];
-			$stylee	= "admin_info";
+			//update
+			$update_query = array(
+								'UPDATE'	=> "{$dbprefix}stats",
+								'SET'		=> "ban='" . $SQL->escape($ban) . "'"
+							);
+
+			if ($SQL->build($update_query))
+			{
+				//delete cache ..
+				delete_cache('data_ban');
+			}
 		}
+	}
+
+	$SQL->freeresult($result);
+
+
+	//after submit 
+	if (isset($_POST['submit']))
+	{
+		$text	= $SQL->affected() ? $lang['BAN_UPDATED'] : $lang['NO_UP_CHANGE_S'];
+		$stylee	= "admin_info";
+	}
 
 #<-- EOF

@@ -6,7 +6,7 @@
 
 
 /* header */
-#divheader { width: 94%; margin: 20px auto 0px auto ; padding: 10px;
+#divheader { width: 94%; margin: 10px auto 0px auto ; padding: 10px;
     border-top: 1px solid #D7D7D7; border-right: 1px solid #CCCCCC;
     border-bottom: 1px solid #CCCCCC; border-left: 1px solid #D7D7D7;
 	background: #F3F3F3 url(../images/div-header.jpg) repeat-x; 
@@ -15,8 +15,8 @@
 		-webkit-border-top-left-radius: 10px;
 		-moz-border-radius-bottomright: 10px; 
 		-webkit-border-bottom-right-radius: 10px;}
-#header { width: 100%; height: 68px; padding: 0; margin:0;  }
-#header .logo1 { float:left; width: 370px; padding: 8px 0 0 0; margin:0; }
+#header { width: 100%; height: 78px; padding: 0; margin:0;  }
+#header .logo1 { float:left; width: 370px; padding:0; margin:0; }
 #header .logo2{
 	float:right; width: 370px; padding: 20px 10px; margin:0; 
 	background: url(../images/adminopen.png) no-repeat right center; padding-right: 50px;

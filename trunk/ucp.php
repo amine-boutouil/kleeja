@@ -85,7 +85,7 @@ switch ($_GET['go'])
 				{
 					$ERRORS[] = $lang['INVALID_FORM_KEY'];
 				}
-				if (empty($_POST['lname']) || empty($_POST['lpass']))
+				elseif (empty($_POST['lname']) || empty($_POST['lpass']))
 				{
 					$ERRORS[] = $lang['EMPTY_FIELDS'];
 				}

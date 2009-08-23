@@ -20,11 +20,11 @@
 				if(function_exists("curl_init"))
 				{
 					// www.kleeja.com/aupdatekleeja.zip
-					$data = fetch_remote_file('http://www.kleeja.com/check_vers/aupdatekleeja' . $new_ver . '.zip');
+					$data = fetch_remote_file('http://www.kleeja.com/check_vers/aupdatekleeja' . $new_ver . '.tar');
 					if($data != false)
 					{
 						//then ..write new file
-						$fp2 = @fopen(PATH . $config['foldername'] . '/' . 'aupdatekleeja.zip', 'w');
+						$fp2 = @fopen(PATH . $config['foldername'] . '/' . 'aupdatekleeja.tar', 'w');
 						@fwrite($fp2, $data);
 						@fclose($fp2);
 						kleeja_admin_info('OK');
@@ -37,7 +37,7 @@
 				}
 				else //OTHER FUNCTION
 				{
-					$data = fetch_remote_file('http://www.kleeja.com/check_vers/aupdatekleeja' . $new_ver . '.zip' , PATH . $config['foldername'] . '/' . 'aupdatekleeja.zip');
+					$data = fetch_remote_file('http://www.kleeja.com/check_vers/aupdatekleeja' . $new_ver . '.tar' , PATH . $config['foldername'] . '/' . 'aupdatekleeja.tar');
 						
 					if($data === false)
 					{
@@ -55,11 +55,12 @@
 			
 				include(PATH . 'includes/extract.php');
 				
-				$zip = new PclZip(PATH . $config['foldername'] . '/' . 'aupdatekleeja.zip');
-				$extractedFileList = $zip->extract($p_path = PATH);
+				$zip = new Archive_Tar_Ex(PATH . $config['foldername'] . '/' . 'aupdatekleeja.tar');
+				$extractedFileList = $zip->extract(PATH);
 				
 				if($extractedFileList)
 				{
+					/*
 					$filesextracted = '<div style="text-align: left;">Replaced Files:<br />';
 					
 					//print_r($extractedFileList);
@@ -69,8 +70,9 @@
 					}
 					
 					$filesextracted .= '</div>';
+					*/
 					
-					kleeja_admin_info($filesextracted);
+					kleeja_admin_info(/**$filesextracted**/'OK');
 				}
 				else
 				{

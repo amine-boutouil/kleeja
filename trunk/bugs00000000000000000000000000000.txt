@@ -1,0 +1,44 @@
+
+1. ÎÊã ÇáÕæÑ áÇ íÚãá ..
+
+-------------------------------------------------
+
+2. ÚÑÖ ÇáÕæÑ ãä ÎáÇá ÇáãÕÛÑÇÊ áÇ íÚãá
+http://localhost/kleeja/admin/index.php?cp=img_ctrl
+ßÇäÊ ÈÇáãÑÉ ÇáÓÇÈŞÉ ÊÕÛÑ ÚÈÑ ÇÌÈÇÑåÇ ÈßæÏ ÇáåæÊãíá æÇŞÊÑÍÊ ÊİÚíá ãÕÛÑÇÊ ÇáÕæÑ æÊã Úãá ÔÑØ ãä ŞÈá ÚÈÏÇáÑÍãä İí ÍÇáÉ ÚÏã æÌæÏ ãÕÛÑÉ íÊã ÊÕÛíÑåÇ ÈßæÏ ÇáåÊãá áßä ÇáÂä áÇ ÊÚãá åÇáØÑíŞÉ æÇáÊÌÑÈÉ ÎíÑ ÈÑåÇä .. Şã ÈÊÌÑÈÊåÇ Úáì ÓíÑİÑ ãÊÕá ÈÇáÔÈßÉ æáÇ ÊŞã ÈÊÕÑíÍ ÇáãÌáÏ ÊÈÚ ãÕÛÑÇÊ ÇáÕæÑ thumbs áÇ ÊÚØíå ÇáÊÕÑíÍ 777 æÔÇåÏ ãä ÎáÇá áæÍÉ ÇáÊÍßã ÚÑÖ ÇáÕæÑ ÊØáÚ ÇßÓÇÊ xx æĞáß íÚäí Çä ßæÏ HTML ÇáãÓÆæá Úä ÊÕÛíÑ ÇáÕæÑÉ áÇ íÚãá .
+
+-------------------------------------------------
+3. ÎØÃ ÚäÏ ÃÎĞ äÓÎÉ ÇÍÊíÇØÉ áŞÇÚÏÉ ÇáÈíÇäÇÊ .
+
+http://localhost/kleeja/admin/index.php?cp=bckup
+
+Notice: Use of undefined constant Table - assumed 'Table' in c:\appserv\www\kleeja\includes\adm\bckup.php on line 82
+
+------------------------------------------------
+
+4. ÇáÑÌÇÁ ãÑÇÌÚÉ åĞå ÇáÑæÇÈØ æÚãá ÑÓÇÆá ÊÍŞŞ ãä ÇÏÎÇá ÈíÇäÇÊ äÙÇã .. ßÇáÑÓÇáÉ ÇáãæÌæÏ ÈŞæÇáÈ ÇáåíÏÑ æÇáİæÊÑ ÇáÇÖÇİí .. æÚãá META ááÑÌæÚ áäİÓ ÇáÕİÍÉ .
+
+http://localhost/kleeja/admin/index.php?cp=ban
+
+http://localhost/kleeja/admin/index.php?cp=exts
+
+http://localhost/kleeja/admin/index.php?cp=langs
+
+http://localhost/kleeja/admin/index.php?cp=users
+
+http://localhost/kleeja/admin/index.php?cp=plugins
+
+http://localhost/kleeja/admin/index.php?cp=reports
+
+http://localhost/kleeja/admin/index.php?cp=rules
+
+
+http://localhost/kleeja/admin/index.php?cp=styles&sty_t=style_orders&style_id=default&method=1&tpl_choose=index_body.html
+
+åäÇ ÇÖÛØ ÊÍÏíË .. ÊÙåÑ ÇáÑÓÇáÉ Êã ÊÍÏíË ÇáŞÇáÈ íæÌÏ ÒÑ ãßÊæÈ ÑÌæÚ ááÎáİ .. ¿¿¿
+
+----------------------------------------------
+
+5. İíå ÔíÁ áÇÍÙÊå ÈãÑßÒ ãáİ äÊ æåæ ÑÓÇÆá ÇáÈáÇÛÇÊ Úä ÇáãáİÇÊ ÇáãÎÇáİÉ æÇáÑÓÇÆá ÇáÚÇÏíÉ ÚÈÑ ÇáãæŞÚ .. 
+íÊã ãÓÍåÇ ÈÚÏ ãÖí ÔåÑ Úáì ãÇ ÇÚÊŞÏ .. æÇÑì Çä åĞÇ ÎØÃ ÇáãİÑæÖ ÊÑß ÇáÍÑíÉ ááãÓÊÎÏã ÈÈŞÇÁ ÇáÑÓÇÆá ..
+

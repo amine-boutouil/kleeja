@@ -34,7 +34,7 @@ input:focus {background-color: #ffd;}
 #content-box .m {padding: 10px;}
 #content-box .m h1 {margin: 15px 0 0 0;padding-bottom: 8px;color: #0B55C4;font-size: 20px;font-weight: normal;}
 #content-box .login {margin: 22px auto 7px auto;width: 500px;}
-#klogo {	background: url(../images/login/logo.png) no-repeat top left;width: 480px;	height: 57px;position:absolute; left:5px; top:35px;}
+#klogo {	background: url(../images/login/logo.png) no-repeat top left;width:370px;	height:78px;position:absolute; left:5px; top:20px;}
 #section-box  {float: right; width: 240px;margin-left: 10px;}
 #section-box .m {padding: 5px;}
 div#element-box {	background: #fff;}

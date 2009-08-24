@@ -25,11 +25,13 @@
 		
 		
 	<div id="data_file_down">
-		<p class="find_image"><img src="{STYLE_PATH}images/find_file.png" width="84" height="84" alt="Find File the image" style="vertical-align:middle;" /></p>
+		<p class="find_image"><img src="{STYLE_PATH}images/find_file.png" width="48" height="48" alt="Find File the image" style="vertical-align:middle;" /></p>
 		<br />
 		<p class="find_x">{lang.FILE_FOUNDED}</p>
 		<br /><br />
 		<div id="url"><h3>{lang.JS_MUST_ON}</h3></div>
+		
+	
 	</div>	
 	
 </div>
@@ -54,7 +56,7 @@ function ti()
     }
     else
     {
-        document.getElementById("url").innerHTML = '<div id="download"><a href="{url_file}" target="balnk"><img src="{STYLE_PATH}images/download.png" style="vertical-align:middle;"/>&nbsp;&nbsp;{lang.CLICK_DOWN}</a></div><div class="clr"></div>';
+        document.getElementById("url").innerHTML = '<div style="text-align:center"><img src="{STYLE_PATH}images/download.gif" style="vertical-align:middle;"/></div><br /><div id="download"><a href="{url_file}" target="balnk">{lang.CLICK_DOWN}</a></div><div class="clr"></div>';
     }
 }
 </script>

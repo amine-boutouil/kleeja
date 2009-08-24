@@ -26,7 +26,8 @@ img.right {float: right;margin-left:15px;}
 /* safe code all box */
 .safe_code {margin:5px 0;padding:10px;border:1px solid #ECCEBB;background:#F9F5F0 url(../images/saf3_code01.gif) no-repeat 0% 50%;}
 .safe_code span {padding-right:4px;color:#FF5A00}
-.safe_code input[type="text"]:focus {background-color: #ffd ;border: 1px solid #D26900;direction:ltr}
+.safe_code input[type="text"]{padding:3px 3px;font-size:12px;}
+.safe_code input[type="text"]:focus {background-color: #ffd ;border: 1px solid #D26900;direction:ltr;padding:3px 3px;font-size:12px;}
 .explain {font-size:xx-small;font-style:italic;color:#858585}
 /* # end safe code all box */
 
@@ -85,24 +86,24 @@ img.right {float: right;margin-left:15px;}
 /* #  fixed */
 
 /* start Downlod template >> download.html */
-#file-info {height:220px;margin:5px auto;}
-#data_file {float:right;width:50%;margin-left:10px;}
+#file-info {height:230px;margin:5px auto;}
+#data_file {float:right;width:46%;height:220px;margin-left:10px;background:#FAF8EA;padding:10px;-moz-border-radius:6px;-webkit-border-radius:6px;-khtml-border-radius:6px;border-radius:6px;}
 #data_file .data_file p {color:#F0502E;font-size:26px;}
 #data_file .t {color:#555;background:#ccc;font-size:12px;text-align:center;border:1px solid #f2f2f2;border-right:5px solid #CCC;border-left:5px solid #CCC;margin-top:10px;padding:2px 5px;}
 #data_file .nup {font-size:18px}
 #data_file ul.data_menu {list-style:none;margin:0;}
 #data_file ul.data_menu li {display:block;background:#f2f2f2;padding:2px 5px 2px 10px;margin-bottom:1px;border-right:5px solid #CCC;border:1px solid #f2f2f2;font-weight:700;color:#333;text-decoration:none;}
 #data_file ul.data_menu li b {color:#040476;}
-#data_file_down {width:45%;float:left;}
+#data_file_down {width:45%;height:220px;float:left;background:#FAF8EA;padding:10px;-moz-border-radius:6px;-webkit-border-radius:6px;-khtml-border-radius:6px;border-radius:6px;}
 #data_file_down .find_x,#data_file_down .find_image {color:#2B8800;font-size:22px;text-align:center;}
-.fileReport {text-align:center;border-top:2px solid #CFCFCF;border-bottom:2px solid #CFCFCF;cursor:pointer;background-color:#E2E2E2;margin:10px auto;padding:3px 10px;}
+.fileReport {text-align:center;border-top:2px solid #FFBFBF;border-bottom:2px solid #FFBFBF;cursor:pointer;background-color:#FFE6E6;margin:10px auto;padding:3px 10px;}
 .fileReport a {color:#111;font-size:110%;}
-.fileReport a:hover,.fileReport:hover {background-color:#C7C7C7;color:#111;}
-.fileReport:hover {border-top:2px solid #999;border-bottom:2px solid #999;}
+.fileReport a:hover,.fileReport:hover {background-color:#FFAAAA;color:#111;}
+
 .wait {color:#F04C2D;font-size:300%;font-weight:700;padding:5px 10px;}
-#download {text-align:center;height:50px;margin:12px auto;}
-#download a {background:#FEC008 url(../images/bg_download.png) repeat-x top right;border-top:3px solid #9B7500;border-bottom:3px solid #9B7500;color:#9B7500;font-size:100%;font-weight:700;padding:20px;}
-#download a:hover {background:#FFD65D;color:#000;}
+#download {text-align:center;height:24px;margin:12px auto;}
+#download a {background:#A2C900;border-top:3px solid #6C9F01;border-bottom:3px solid #6C9F01;color:#fff;font-size:100%;font-weight:700;padding:10px 30px;}
+#download a:hover {background:#77AA02;}
 /* # End Downlod template >> download.html */
 
 /* stats template >> stats.html */
@@ -155,7 +156,7 @@ ul.tabbernav li.tabberactive a:hover{color:#AE4600;}
 
 /*  ALL inputs */
 .input_link,.input_field,.input_num {background: #FFFFFF;border: 1px solid #B3B9C4;font:normal 12px tahoma,Arial,sans-serif;outline:1px solid #ccc;padding:2px;}
-.input_field:focus, .input_field:hover ,.safe_code input:hover,.safe_code input:focus,.input_link:focus, .input_link:hover{border: 1px solid #D26900;background:#fff url(../images/input_bg.gif) repeat-x;}
+.input_field:focus, .input_field:hover ,.safe_code input:hover,.safe_code input:focus,.input_link:focus, .input_link:hover{border: 1px solid #D26900;background:#ffd}
 /* ALL inputs */
 
 /* ALL buttons */
@@ -188,7 +189,7 @@ background:#F68618 url(../images/headline_bg.png) repeat-x top right;color:#111;
 
 /* login template >> login.html */
 
-#bg_log1n{margin:5px 0;padding:15px 10px;color:#444;background:#F8EDED url(../images/get_password.png) no-repeat 10% 50%;
+#bg_log1n{margin:5px 0;padding:15px 10px;color:#444;background:#F8EDED url(../images/log1n.png) no-repeat 10% 50%;
 border:1px solid #FFCDCD;}
 #login .login {width:280px}
 #login .login td{padding-bottom:5px;}
@@ -235,7 +236,7 @@ border:1px solid #FFCDCD;}
 /*-- #  end box user name and all files  >> fileuser.html  */
 
 /* register template >> register.html */
-.reg_table{background:#F3F9F0 url(../images/register.png) no-repeat 15% 50%;border:1px solid #D9ECBB;
+.reg_table{background:#F0F3F9 url(../images/register.png) no-repeat 15% 50%;border:1px solid #CFDFFF;
 margin:5px 0;padding:15px 10px;}
 .reg_table td,.box_rebort td{width:130px;padding-bottom:5px;}
 .reg_table td input,.box_rebort td input  {width:180px;}

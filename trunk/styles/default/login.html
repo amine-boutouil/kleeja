@@ -2,8 +2,6 @@
 
 <div id="content">
 
-
-
 <!-- start site name and title  -->
 <div class="title-x"><strong><a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}</strong></div>
 <!--  # End  site name and title  -->
@@ -11,9 +9,6 @@
 <!-- start line top  -->
 <div class="clr"></div><div class="line"></div>
 <!-- # End line top  -->
-
-
-
 
 <IF NAME="ERRORS">
 <!-- start error msg  -->
@@ -24,7 +19,6 @@
 <!-- # end error msg  -->
 </IF>
 
-
 <div id="bg_log1n">
 
 <!-- start form login  -->
@@ -34,18 +28,18 @@
 <table class="login">
 	<tr>
 		<td style="width: 220px;"><b>{lang.USERNAME} :</b></td>
-		<td><input  class="username"  type="text" name="lname" value="{t_lname}"  /></td>
+		<td><input class="username input_field"  type="text" name="lname" value="{t_lname}"  /></td>
 	</tr>
 	
 	<tr>
-		<td><b>{lang.PASSWORD} :</b></td>
-		<td><input class="password" type="password" name="lpass" value="{t_lpass}"  /></td>
+		<td style="width: 220px;"><b>{lang.PASSWORD} :</b></td>
+		<td><input class="password input_field" type="password" name="lpass" value="{t_lpass}"  /></td>
 	</tr>
 	
 	<tr>
-		<td><b>{lang.REMME} :</b></td>
+		<td style="width: 220px;"><b>{lang.REMME} :</b></td>
 		<td>
-				<select class="remme" name="remme">
+				<select class="remme input_field" name="remme">
 					<option value="3600">{lang.HOUR}</option>
 					<option value="18000">{lang.5HOURS}</option>
 					<option value="864000">{lang.DAY}</option>
@@ -55,14 +49,16 @@
 				</select>
 		</td>
 	</tr>
-	<tr>
-		<td colspan="2"><div class="forget_pass"><a href="{forget_pass_link}"><img src="{STYLE_PATH}images/warning.gif" style="vertical-align:middle;">&nbsp;{lang.LOSS_PASSWORD}</a></div></td>
-	</tr>	
 </table>
 
-<div class="clr"></div>			
-			<input class="buttons" type="submit" name="submit" value="{lang.LOGIN}" />
-			{H_FORM_KEYS}	
+<div class="clr"></div><br />
+	<div class="forget_pass">
+	<a href="{forget_pass_link}">
+	<img src="{STYLE_PATH}images/warning.gif" style="vertical-align:middle;">&nbsp;{lang.LOSS_PASSWORD}</a>
+	</div>
+		
+		<input class="buttons" type="submit" name="submit" value="{lang.LOGIN}" />
+	{H_FORM_KEYS}	
 	</form>
 </div>
 <div class="clr"></div>

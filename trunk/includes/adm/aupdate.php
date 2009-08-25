@@ -1,4 +1,17 @@
 <?php
+	//auto update wizard
+	//part of admin extensions [beta !]
+	//helpls kleeja to be up to date!
+	
+	//copyright 2007-2009 Kleeja.com ..
+	//license http://opensource.org/licenses/gpl-license.php GNU Public License
+	//$Author: $ , $Rev: $,  $Date:: $
+	
+	// not for directly open
+	if (!defined('IN_ADMIN'))
+	{
+		exit('no directly opening : ' . __file__);
+	}
 	
   	$v = @unserialize($config['new_version']);
 	if(version_compare(strtolower(KLEEJA_VERSION), strtolower($v['version_number']), '<'))
@@ -168,7 +181,6 @@
 
 					}
 				//}
-				
 				
 				if($complete_upate)
 				{

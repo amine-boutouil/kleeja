@@ -297,17 +297,21 @@ function do_config_export($srv, $usr, $pass, $nm, $prf, $fpath)
 		global $_path;
 		
 		$db_type = 'mysql';
-		ob_start();
-		phpinfo(INFO_MODULES);
-		$info = ob_get_contents();
-		ob_end_clean();
-		$info = stristr($info, 'Client API version');
-		preg_match('/[1-9].[0-9].[1-9][0-9]/', $info, $match);
-		$mysqlver = trim($match[0]);
 		
-		if (function_exists('mysqli_connect') && version_compare($mysqlver, '4.1.2', '>'))
+		if(function_exists('phpinfo'))
 		{
-			$db_type = 'mysqli';
+			ob_start();
+			phpinfo(INFO_MODULES);
+			$info = ob_get_contents();
+			ob_end_clean();
+			$info = stristr($info, 'Client API version');
+			preg_match('/[1-9].[0-9].[1-9][0-9]/', $info, $match);
+			$mysqlver = trim($match[0]);
+		
+			if (function_exists('mysqli_connect') && version_compare($mysqlver, '4.1.2', '>'))
+			{
+				$db_type = 'mysqli';
+			}
 		}
 		
 		$data	= '<?php'."\n\n" . '//fill those varaibles with your data' . "\n";

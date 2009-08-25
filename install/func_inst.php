@@ -298,6 +298,7 @@ function do_config_export($srv, $usr, $pass, $nm, $prf, $fpath)
 		
 		$db_type = 'mysql';
 		
+		/*
 		if(function_exists('phpinfo'))
 		{
 			ob_start();
@@ -313,6 +314,7 @@ function do_config_export($srv, $usr, $pass, $nm, $prf, $fpath)
 				$db_type = 'mysqli';
 			}
 		}
+		*/
 		
 		$data	= '<?php'."\n\n" . '//fill those varaibles with your data' . "\n";
 		$data	.= '$db_type			= \'' . $db_type . "';//mysqli or mysql \n";

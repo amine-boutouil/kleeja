@@ -146,16 +146,7 @@ class SSQL
 	
 							$this->in_transaction = TRUE;
 						}
-						
-						//
-						// experince, still in development stag
-						// try to figure unescaped value and escape it ... 
-						//
-						if(defined('DEV_STAGE'))
-						{
-							$query = preg_replace("/\s{0,}=\s{0,}'([^\\\]*)'([^\\\]*)'/e", "'=\'' . \$this->real_escape('\\1\'\\2') . '\''", $query);
-						}
-						
+
 						$this->result = mysqli_query($this->connect_id, $query);
 						
 						//debug .. //////////////

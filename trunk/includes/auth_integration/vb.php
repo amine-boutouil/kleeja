@@ -62,11 +62,11 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 				
 	$SQLVB	= new SSQL($forum_srv, $forum_user, $forum_pass, $forum_db, true);
 	
-	if(!preg_match('/utf/i',strtolower($script_encoding)))
-	{
-		$charset_db = $SQLVB->client_encoding();
-		$SQLVB->set_names($charset_db);
-	}
+	//if(!preg_match('/utf/i',strtolower($script_encoding)))
+	//{
+	$charset_db = $SQLVB->client_encoding();
+	$SQLVB->set_names($charset_db);
+	//}
 	//$mysql_version = @mysql_get_server_info($SQLVB->connect_id);
 				
 	unset($forum_pass); // We do not need this any longe

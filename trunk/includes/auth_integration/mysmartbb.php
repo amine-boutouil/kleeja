@@ -62,12 +62,12 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 	
 	$SQLMS	= new SSQL($forum_srv, $forum_user, $forum_pass, $forum_db, true);
 
-	if(!preg_match('/utf/i',strtolower($script_encoding)))
-	{
-		$charset_db = $SQLMS->client_encoding();
-		$SQLMS->set_names($charset_db);
+	//if(!preg_match('/utf/i',strtolower($script_encoding)))
+	//{
+	$charset_db = $SQLMS->client_encoding();
+	$SQLMS->set_names($charset_db);
 
-	}
+	//}
 	
 	if(!function_exists('iconv') && !preg_match('/utf/i',strtolower($script_encoding)))
  	{

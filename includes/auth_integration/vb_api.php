@@ -44,38 +44,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 	}
 
 	/*
-		@content of file : kleeja_api.php
-		
-		if(!isset($_GET['api_key']) || (isset($_GET['api_key']) &&  $_GET['api_key'] != sha1('123456')))
-		{
-			return false;
-		}
-		
-		//if return_username, no password just userid , and reutnr username
-		if(isset($_GET['return_username']))
-		{
-			//1:ok
-			//0:error
-			echo base64_encode('1|username'));
-			exit;
-		}
-		
-		if(isset($_GET['userid']))
-		{
-			//hased query
-		}
-		else
-		{
-			//$_GET['username'];
-		}
-		
-		//bla bla bla
-		
-		//1 : ok
-		//0 : error
-		echo base64_encode('1|userid|username|email|password|usergroup|...|...'));
-		exit;
-		
+		@see file : docs/kleeja_api.txt
 	*/
 	
 	$api_http_query = 'api_key=' . urlencode($script_api_key) . '&' . ($hashed ? 'userid' : 'username') . '=' . urlencode($name) . '&pass=' . urlencode($pass);

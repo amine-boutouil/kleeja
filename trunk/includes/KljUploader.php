@@ -46,19 +46,26 @@ class KljUploader
 	 
 		($hook = kleeja_run_hook('watermark_func_kljuploader')) ? eval($hook) : null; //run hook	
 		
-		if(!file_exists($name)) return;
+		if(!file_exists($name))
+		{
+			return;
+		}
 		
-		if (preg_match("/jpg|jpeg/",$ext))
+		if (preg_match("/jpg|jpeg/",$ext) && function_exists('imagecreatefromjpeg'))
 		{
 			$src_img = @imagecreatefromjpeg($name);
 		}
-		elseif (preg_match("/png/",$ext))
+		elseif (preg_match("/png/",$ext) && function_exists('imagecreatefrompng'))
 		{
 			$src_img = @imagecreatefrompng($name);
 		}
-		elseif (preg_match("/gif/",$ext))
+		elseif (preg_match("/gif/", $ext) && !$this->is_ani($name)&& function_exists('imagecreatefromgif'))
 		{
 			$src_img = @imagecreatefromgif($name);
+		}
+		else
+		{
+			return;
 		}
 
 		$src_logo = imagecreatefrompng($logo);
@@ -83,7 +90,7 @@ class KljUploader
 				}
 				elseif (preg_match("/png/",$ext))
 				{
-					@imagepng($src_img, $name);
+					imagepng($src_img, $name);
 				}
 				elseif (preg_match("/gif/",$ext))
 				{
@@ -97,7 +104,16 @@ class KljUploader
 		}
 		
 	}
-
+	
+	//
+	//check for gif image is animated or not ! 
+	//(c) http://us2.php.net/manual/en/function.imagecreatefromgif.php#88005
+	//
+	function is_ani($filename)
+	{
+		return (bool)preg_match('#(\x00\x21\xF9\x04.{4}\x00\x2C.*){2,}#s', file_get_contents($filename));
+	}
+	
 	//
 	//check exts inside file to be safe
 	//
@@ -132,17 +148,21 @@ class KljUploader
 			return;
 		}
 		
-		if (preg_match("/jpg|jpeg/", $ext))
+		if (preg_match("/jpg|jpeg/",$ext) && function_exists('imagecreatefromjpeg'))
 		{
 			$src_img = @imagecreatefromjpeg($name);
 		}
-		elseif (preg_match("/png/", $ext))
+		elseif (preg_match("/png/",$ext) && function_exists('imagecreatefrompng'))
 		{
 			$src_img = @imagecreatefrompng($name);
 		}
-		elseif (preg_match("/gif/", $ext))
+		elseif (preg_match("/gif/", $ext) && !$this->is_ani($name)&& function_exists('imagecreatefromgif'))
 		{
 			$src_img = @imagecreatefromgif($name);
+		}
+		else
+		{
+			return;
 		}
 		
 		$old_x	= @imageSX($src_img);
@@ -257,8 +277,8 @@ function process ()
 			else
 			{
 				$wut = null;
-				//no uploading yet
-				//$_SESSION['NO_UPLOADING_YET'] = true;
+				//no uploading yet, or just go to index.php, so we have make a new session
+				unset($_SESSION['FIILES_NOT_DUPLI'], $_SESSION['FIILES_NOT_DUPLI_LINKS']);
 			}
 			
 			//if submit 
@@ -283,7 +303,7 @@ function process ()
 			{
 				for($i=0;$i<=$this->filesnum;$i++)
 				{
-					if((!empty($_SESSION['FIILES_NOT_DUPLI']['file']['name'][$i]) && !empty($_FILES['file']['name'][$i])) && ($_SESSION['FIILES_NOT_DUPLI']['file']['name'][$i]) == ($_FILES['file']['name'][$i]))
+					if((!empty($_SESSION['FIILES_NOT_DUPLI']['file']['name'][$i]) && !empty($_FILES['file']['name'][$i])) && ($_SESSION['FIILES_NOT_DUPLI']['file']['name'][$i] == $_FILES['file']['name'][$i]))
 					{
 						redirect('./');
 						//return $this->errs[] = array($lang['NO_REPEATING_UPLOADING'], 'index_err');
@@ -660,7 +680,7 @@ function process ()
 						}
 						
 						//write on image
-						if( ($config['write_imgs'] != 0) && in_array(strtolower($this->typet), array('png', 'jpg', 'jpeg')))
+						if( ($config['write_imgs'] != 0) && in_array(strtolower($this->typet), array('gif', 'png', 'jpg', 'jpeg')))
 						{
 							$this->watermark($folderee . "/" . $filname,strtolower($this->typet), 'images/watermark.png');
 						}

@@ -48,9 +48,9 @@ $c = array(
 );
 
 
-$q_where = $hashed ? "userid='" . $c['userid'] . "'  AND password='" . mysql_escape_string($c['userid']) . "' AND usergroupid != '8'" :  "username='" . mysql_escape_string($c['username']) . "' AND usergroupid != '8'";
+$q_where = $hashed ? "userid='" . $c['userid'] . "' AND password='" . mysql_escape_string($c['pass']) . "' AND usergroupid != '8'" :  "username='" . mysql_escape_string($c['username']) . "' AND usergroupid != '8'";
 
-$rqr = mysql_query("SELECT " . (!$hashed ? '*' : 'salt') . " FROM " . $config['Database']['tableprefix'] . "user WHERE " . $q_where, $link);
+$rqr = mysql_query("SELECT " . ($hashed ? '*' : 'salt') . " FROM " . $config['Database']['tableprefix'] . "user WHERE " . $q_where, $link);
 
 if (mysql_num_rows($rqr))
 {
@@ -64,7 +64,7 @@ if (mysql_num_rows($rqr))
 				exit;
 			}
 
-			if(!$hashed)
+			if($hashed)
 			{
 				echo base64_encode('1%|%' . $user['userid'] . '%|%' . $user['username'] . '%|%' . $user['email'] . '%|%' . $user['password'] . '%|%' . $user['usergroupid']);
 				 mysql_close($link);
@@ -72,13 +72,12 @@ if (mysql_num_rows($rqr))
 			}
 			else
 			{
-
 				$pass = md5(md5($c['pass']) . $user['salt']);  // without normal md5
 
 				$rqr2 = mysql_query("
 						SELECT *
 						FROM " . $config['Database']['tableprefix'] . "user
-						WHERE username='" . mysql_escape_string($c['username']) . "' AND password='" . mysql_escape_string($c['pass']) . "' AND usergroupid != '8'
+						WHERE username='" . mysql_escape_string($c['username']) . "' AND password='" . mysql_escape_string($pass) . "' AND usergroupid != '8'
 					", $link);
 				if (!mysql_num_rows($rqr))
 				{
@@ -90,10 +89,15 @@ if (mysql_num_rows($rqr))
 				{
 					while ($user2 = mysql_fetch_array($rqr2))
 					{
-						echo base64_encode('1%|%' . $user['userid'] . '%|%' . $user['username'] . '%|%' . $user['email'] . '%|%' . $user['password'] . '%|%' . $user['usergroupid']);
+						echo base64_encode('1%|%' . $user2['userid'] . '%|%' . $user2['username'] . '%|%' . $user2['email'] . '%|%' . $user2['password'] . '%|%' . $user2['usergroupid']);
 						 mysql_close($link);
 						exit;
 					}
+					
+					//it's bad situation
+					echo '0';
+					 mysql_close($link);
+					exit;
 				}
 			}
 			
@@ -109,3 +113,5 @@ else
 }
 
 mysql_close($link);
+
+//<--- EOF

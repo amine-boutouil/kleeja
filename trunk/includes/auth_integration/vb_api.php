@@ -46,10 +46,10 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 	/*
 		@see file : docs/kleeja_api.txt
 	*/
-	
+
 	$api_http_query = 'api_key=' . urlencode($script_api_key) . '&' . ($hashed ? 'userid' : 'username') . '=' . urlencode($name) . '&pass=' . urlencode($pass);
 	//if only username, let tell him in the query
-	$api_http_query . = $return_username ? '&return_username=1';
+	$api_http_query .= $return_username ? '&return_username=1' : '';
 	
 	//get it
 	$remote_data = fetch_remote_file($script_path . '/kleeja_api.php?' . $api_http_query);
@@ -60,12 +60,14 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 	{
 		return false;
 	}
+	
+
 			
 	//see kleeja_api.php file
 	//split the data , the first one is always 0 or 1 
 	//0 : error
 	//1: ok
-	$user_info = explode('|', base64_decode($remote_data);
+	$user_info = explode('%|%', base64_decode($remote_data));
 	
 	//omg, it's 0 , 0 : error, lets die here
 	if((int)$user_info[0] == 0)
@@ -78,7 +80,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 	//
 	if($return_username)
 	{
-		return preg_match('/utf/i', strtolower($script_encoding)) ? $user_info[1] : iconv(strtoupper($script_encoding), "UTF-8//IGNORE", $user_info[1]));
+		return preg_match('/utf/i', strtolower($script_encoding)) ? $user_info[1] : iconv(strtoupper($script_encoding), "UTF-8//IGNORE", $user_info[1]);
 	}
 	
 	//

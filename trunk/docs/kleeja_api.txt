@@ -1,0 +1,41 @@
+<?php
+//
+//File for remote vb
+//This file must be exists in VB  folder script. 
+//copyright 2007-2009 Kleeja.com ..
+//license http://opensource.org/licenses/gpl-license.php GNU Public License
+//$Author: phpfalcon $ , $Rev: 817 $,  $Date:: 2009-08-12 14:43:06 +0300#$
+//
+
+
+if(!isset($_GET['api_key']) || (isset($_GET['api_key']) &&  $_GET['api_key'] != sha1('123456')) || (!isset($_GET['userid']) && isset($_GET['username'])))
+{
+	echo '0';
+	exit;
+}
+		
+//if return_username, no password just userid , and reutnr username
+if(isset($_GET['return_username']))
+{
+	//1:ok
+	//0:error
+	echo base64_encode('1|username'));
+	exit;
+}
+		
+if(isset($_GET['userid']))
+{
+	//hased query
+}
+else
+{
+	//$_GET['username'];
+}
+		
+//bla bla bla
+		
+
+//1 : ok
+//0 : error
+echo base64_encode('1|userid|username|email|password|usergroup|...|...'));
+exit;

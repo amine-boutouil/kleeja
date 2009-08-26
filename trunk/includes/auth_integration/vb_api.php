@@ -51,8 +51,10 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 	//if only username, let tell him in the query
 	$api_http_query .= $return_username ? '&return_username=1' : '';
 	
+
 	//get it
 	$remote_data = fetch_remote_file($script_path . '/kleeja_api.php?' . $api_http_query);
+
 
 	//no responde
 	//empty or can not connect
@@ -61,8 +63,6 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 		return false;
 	}
 	
-
-			
 	//see kleeja_api.php file
 	//split the data , the first one is always 0 or 1 
 	//0 : error
@@ -99,12 +99,12 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 	$userinfo = array();
 	
 	
-	//for cookirs
-	$hash_key_expire = sha1(md5($config['h_key']) .  $expire);
 	
 	//add cookies
 	if(!$loginadm)
 	{
+		//for cookies
+		$hash_key_expire = sha1(md5($config['h_key']) .  $expire);
 		$usrcp->kleeja_set_cookie('ulogu', $usrcp->en_de_crypt($user_info[1] . '|' . $user_info[4] . '|' . $expire . '|' . $hash_key_expire), $expire);
 	}
 

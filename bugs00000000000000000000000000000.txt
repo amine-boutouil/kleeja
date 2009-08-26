@@ -1,44 +1,17 @@
 
 1. ЮЪу Чсецб сЧ экус ..
-
+X> Ъу ЧсЭс  ШЧсфгШх сэ ЧсТф ЧсЮЪу экус , нои ШЧоэ Ькс ецбЩ ЧсЮЪу ац Юснэх днЧнх
 -------------------------------------------------
 
-2. кбж Чсецб уф ЮсЧс ЧсуелбЧЪ сЧ экус
-http://localhost/kleeja/admin/index.php?cp=img_ctrl
-пЧфЪ ШЧсубЩ ЧсгЧШоЩ Ъелб кШб ЧЬШЧбхЧ ШпцЯ ЧсхцЪуэс цЧоЪбЭЪ Ънкэс уелбЧЪ Чсецб цЪу кус дби уф оШс кШЯЧсбЭуф нэ ЭЧсЩ кЯу цЬцЯ уелбЩ эЪу ЪелэбхЧ ШпцЯ ЧсхЪус спф ЧсТф сЧ Ъкус хЧсибэоЩ цЧсЪЬбШЩ Юэб ШбхЧф .. оу ШЪЬбШЪхЧ ксь гэбнб уЪес ШЧсдШпЩ цсЧ Ъоу ШЪебэЭ ЧсуЬсЯ ЪШк уелбЧЪ Чсецб thumbs сЧ Ъкиэх ЧсЪебэЭ 777 цдЧхЯ уф ЮсЧс сцЭЩ ЧсЪЭпу кбж Чсецб Ъиск ЧпгЧЪ xx цасп экфэ Чф пцЯ HTML ЧсугЦцс кф Ъелэб ЧсецбЩ сЧ экус .
-
--------------------------------------------------
-3. ЮиУ кфЯ УЮа фгЮЩ ЧЭЪэЧиЩ соЧкЯЩ ЧсШэЧфЧЪ .
-
-http://localhost/kleeja/admin/index.php?cp=bckup
-
-Notice: Use of undefined constant Table - assumed 'Table' in c:\appserv\www\kleeja\includes\adm\bckup.php on line 82
-
-------------------------------------------------
-
-4. ЧсбЬЧС убЧЬкЩ хах ЧсбцЧШи цкус бгЧЦс ЪЭоо уф ЧЯЮЧс ШэЧфЧЪ фйЧу .. пЧсбгЧсЩ ЧсуцЬцЯ ШоцЧсШ ЧсхэЯб цЧснцЪб ЧсЧжЧнэ .. цкус META ссбЬцк сфнг ЧсенЭЩ .
-
-http://localhost/kleeja/admin/index.php?cp=ban
-
-http://localhost/kleeja/admin/index.php?cp=exts
-
-http://localhost/kleeja/admin/index.php?cp=langs
-
-http://localhost/kleeja/admin/index.php?cp=users
-
-http://localhost/kleeja/admin/index.php?cp=plugins
-
-http://localhost/kleeja/admin/index.php?cp=reports
-
-http://localhost/kleeja/admin/index.php?cp=rules
 
 
 http://localhost/kleeja/admin/index.php?cp=styles&sty_t=style_orders&style_id=default&method=1&tpl_choose=index_body.html
 
 хфЧ Чжли ЪЭЯэЫ .. Ъйхб ЧсбгЧсЩ Ъу ЪЭЯэЫ ЧсоЧсШ эцЬЯ вб упЪцШ бЬцк ссЮсн .. ППП
-
+X> су Чнху уЧсуоецЯ спф оуЪ ШЭан ЧсбЬцк ссЮсн цЬксЪ ЧсЪцЬэх скбж оцЧсШ ЧсгЪЧэс фнгх
 ----------------------------------------------
 
 5. нэх дэС сЧЭйЪх Шубпв усн фЪ цхц бгЧЦс ЧсШсЧлЧЪ кф ЧсуснЧЪ ЧсуЮЧснЩ цЧсбгЧЦс ЧскЧЯэЩ кШб Чсуцок .. 
 эЪу угЭхЧ ШкЯ ужэ дхб ксь уЧ ЧкЪоЯ .. цЧбь Чф хаЧ ЮиУ Чсунбцж Ъбп ЧсЭбэЩ ссугЪЮЯу ШШоЧС ЧсбгЧЦс ..
 
+X> сЧ ЧкЪоЯ Чф хаЧ еЭэЭЧ№ !

@@ -259,21 +259,13 @@ switch ($_GET['sty_t'])
 				{
 					kleeja_admin_err(sprintf($lang['T_ISNT_WRITEABLE'], $tpl_name));
 				}
-				/*
-				//update
-				$update_query = array(
-										'UPDATE'	=> "{$dbprefix}templates",
-										'SET'		=> "template_content = '". $template_content ."'",
-										'WHERE'		=>	"style_id='$style_id' AND template_name='$tpl_name'"
-									);
-				*/
 
 
 				//delete cache ..
 				delete_cache('tpl_' . str_replace('html','php',$tpl_name));
 				//show msg
-				$link	= basename(ADMIN_PATH) . '?cp=styles&amp;sty_t=style_orders&amp;style_id=' . $style_id . '&amp;tpl_choose=' . $tpl_name . '&amp;method=1';
-				$text	= $lang['TPL_UPDATED'] . '<br /> <a href="' . $link . '">' . $lang['GO_BACK_BROWSER'] . '</a><meta HTTP-EQUIV="REFRESH" content="3; url=' . $link . '">' ."\n";
+				$link	= basename(ADMIN_PATH) . '?cp=styles&amp;sty_t=style_orders&amp;style_id=' . $style_id . '';
+				$text	= $lang['TPL_UPDATED'] . '<br /><meta HTTP-EQUIV="REFRESH" content="3; url=' . $link . '">' ."\n";
 				$stylee	= "admin_info";
 			}
 			
@@ -394,4 +386,5 @@ switch ($_GET['sty_t'])
 		break;
 		
 }
-?>
+
+//<--- EOF

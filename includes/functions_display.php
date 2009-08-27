@@ -17,7 +17,7 @@
 function Saaheader($title, $outscript=false)
 {
 		global $tpl, $usrcp, $lang, $olang, $user_is, $username, $config;
-		global $extras, $script_encoding, $errorpage, $userinfo;
+		global $extras, $script_encoding, $errorpage, $userinfo, $is_opera;
 		
 		//is user ? and username
 		$user_is = ($usrcp->name()) ? true: false;

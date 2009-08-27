@@ -80,7 +80,7 @@ img.right {float: right;margin-left:15px;}
 /*# END extras  header and  footer template */
 
 /* divx */
-#divx {text-transform:capitalize; width:15%;background:#C8C8C8;padding:1px 0 2px 0;position:fixed;left:5%;bottom:0px;text-align: left;color:#111;text-shadow: 0px 1px rgb(247, 247, 247)}
+#divx {padding:1px 0 2px 0;position:fixed;left:5%;bottom:0%;text-align:center;color:#555;text-shadow: 0px 1px rgb(247, 247, 247)}
 #divx a,#divx a:link{color:#CF6600;font-emphasize-style:disc;}
 #divx a:hover{color:#000;}
 /* #  divx */
@@ -132,9 +132,9 @@ img.right {float: right;margin-left:15px;}
 .online{width:100%;float:right;padding:4px 0;margin-bottom:3px;}
 .number_online_all ,.online_visitor ,.online_users {display:inline;padding:5px 10px;border:1px outset #E2E2E2;-moz-border-radius:6px;-webkit-border-radius:6px;-khtml-border-radius:6px;border-radius:6px;}
 .number_online_all  {background:url(../images/number_online_all.gif) no-repeat 98% 50%;padding-right:20px;color:#CC3300}
-.online_visitor{color:#0066FF}
-.online_users{color:#000}
-.name_users{margin-bottom:7px;margin-top:4px;display:block;float: right;color:#444;padding:5px 14px;border:1px inset #444;-moz-border-radius:6px;-webkit-border-radius:6px;-khtml-border-radius:6px;border-radius:6px;}
+.online_visitor{color:#000}
+.online_users{color:#555}
+.name_users{margin-bottom:7px;margin-top:4px;display:block;float: right;color:#555;padding:5px 14px;border:1px inset #444;-moz-border-radius:6px;-webkit-border-radius:6px;-khtml-border-radius:6px;border-radius:6px;}
 /*  #  END FOR ONLINE */
 
 /* tabs */
@@ -161,8 +161,8 @@ ul.tabbernav li.tabberactive a:hover{color:#AE4600;}
 
 /* ALL buttons */
 #buttons ,.buttons{margin-top:2px;outline:0;cursor: pointer;padding:4px 20px;font: normal 12px Tahoma, Arial, sans-serif;
-background:#99CCFF url(../images/headline_bg.png) repeat-x top right;color:#111;border:1px solid #999;-moz-border-radius:10px;-webkit-border-radius:10px;-khtml-border-radius:10px;border-radius:10px;}
-#buttons:hover ,.buttons:hover{background:#33CCFF;color: #111;border:1px solid #666;text-decoration:none;}
+background:#FFA500 url(../images/headline_bg.png) repeat-x top right;color:#111;border:1px solid #999;-moz-border-radius:10px;-webkit-border-radius:10px;-khtml-border-radius:10px;border-radius:10px;}
+#buttons:hover ,.buttons:hover{background:#FFD700;color: #111;border:1px solid #666;text-decoration:none;}
 /* ## ALL buttons */
 
 /* pagination */
@@ -281,16 +281,16 @@ background:#99CCFF url(../images/headline_bg.png) repeat-x top right;color:#111;
 /* template list of files allowed > guide.html */
 #guide {width:100%;}
 .guide_user_th ,.guide_visitor_th{line-height:14px;padding:10px 15px;font-size:13px;font-weight:700;text-align:center;color:#fff;}
-.guide_user_th  {background:#7BADE6 url(../images/headline_bg.png) repeat-x top right}
+.guide_user_th  {background:#669933 url(../images/headline_bg.png) repeat-x top right;}
 .guide_visitor_th {background:#A71515 url(../images/headline_bg.png) repeat-x top right}
 .user_box,.guide_user_th ,.guide_visitor_th,.user_img,.visitor_img {-moz-border-radius:9px;-webkit-border-radius:9px;-khtml-border-radius:9px;border-radius:9px;}
-.user_box{padding:10px;margin:3px 0px;background-color:#E1EBFF;border:1px #CADBFF double;}
-.user_img,.user_n4me,.visitor_img {display:block;font-size:14px;font-weight:700;color:#0068CF;padding:5px 8px;}
-.user_img {background-color:#EEEEFD;border:1px #CADBFF double;}
+.user_box{padding:10px;margin:3px 0px;background-color:#E7F2DB;border:1px #B3CB99 double;}
+.user_img,.user_n4me,.visitor_img {display:block;font-size:14px;font-weight:700;color:#006600;padding:5px 8px;}
+.user_img {background-color:#EFFDEE;border:1px #CCFFC9 double;}
 .user_n4me{display:inline;}
 .user_img img{padding-left:5px}
-.user_ext{line-height:18px;padding:4px 8px;background:#E6E6FF url(../images/headline_bg.png) repeat-x top right;margin:2px 0;border-bottom: 1px solid #B7CEFF;border-top: 1px solid #B7CEFF;}
-.user_ext_color{font:bold 12px tahoma, sans-serif;color:#003399;margin:2px;}
+.user_ext{line-height:18px;padding:4px 8px;background:#F2F9F0 url(../images/headline_bg.png) repeat-x top right;margin:2px 0;border-bottom: 1px solid #B9E1B9;border-top: 1px solid #B9E1B9;}
+.user_ext_color{font:bold 12px tahoma, sans-serif;color:#006600;margin:2px;}
 .user_ext_lang{font:normal 12px tahoma, sans-serif;color:#000;margin:2px;}
 .visitor_box{background-color:#FFE6E7;border:1px #EDC3C3 double;}
 .visitor_img {background-color:#FDEEEF;border:1px #FFC9CD double;}

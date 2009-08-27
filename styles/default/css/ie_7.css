@@ -1,0 +1,42 @@
+/*
+# Powered by Kleeja .... Kleeja.com
+# Designed by Tar3q .... Tar3q.com
+# copyright 2007-2009  ..
+*/
+
+*{margin:0;padding:0;}
+
+
+/*  START FOR ONLINE */
+.onlineall ,.onlinevisitor ,.onlineusers {float:right;margin-left:4px;margin-right:4px;}
+/*  #  END FOR ONLINE */
+
+/* tabs */
+.tabbertab {border:0px solid #aaa;}
+ul.tabbernav li a{padding-top:5px;padding-bottom:5px;padding-right:14px;padding-left:14px; margin-left:5px;border:0px}
+ul.tabbernav li a:hover{padding-top:5px;padding-bottom:5px;padding-right:14px;padding-left:14px;text-decoration:none;}
+ul.tabbernav li.tabberactive a{padding-top:5px;padding-bottom:5px;padding-right:14px;padding-left:14px;}
+ul.tabbernav li.tabberactive a:hover{text-decoration:none;}
+/* # tabs  */
+
+/* divx */
+#divx {background-color:#C8C8C8;}
+/* #  divx */
+
+/* pagination */
+.pagination {padding:6px;}
+.paging {background:#C8C8C8 url(../images/headlinebg.png) repeat-x center right;margin:0 2px;padding:3px 6px;}
+.here_page {background:#FFF8C6 url(../images/headlinebg.png) repeat-x center right;margin:0 2px;padding:3px 6px; }
+.here_page ,.paging:hover{background:#FFF8C6 url(../images/headlinebg.png) repeat-x center right;}
+/* pagination */
+
+.left_button{padding:5px;}
+
+/*-- start Profile template >> profile.html  */
+#profile .boxdata .bq {line-height:16px;padding:1px 5px;}
+#profile .boxdata .in{line-height:16px;padding:1px 5px;margin-right:10px;}
+/*-- End Profile template >> profile.html   */
+
+/* ALL buttons */
+#buttons ,.buttons{padding:4px 10px;}
+/* ## ALL buttons */

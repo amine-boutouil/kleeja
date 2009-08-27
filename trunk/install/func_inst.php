@@ -292,43 +292,28 @@ $footer_inst = '<br />
 
 
 //export config 
-function do_config_export($srv, $usr, $pass, $nm, $prf, $fpath)
+function do_config_export($type, $srv, $usr, $pass, $nm, $prf, $fpath)
 {
 		global $_path;
 		
-		$db_type = 'mysql';
-		
-		/*
-		if(function_exists('phpinfo'))
+		if(!in_array($type, array('mysql', 'mysqli')))
 		{
-			ob_start();
-			phpinfo(INFO_MODULES);
-			$info = ob_get_contents();
-			ob_end_clean();
-			$info = stristr($info, 'Client API version');
-			preg_match('/[1-9].[0-9].[1-9][0-9]/', $info, $match);
-			$mysqlver = trim($match[0]);
-		
-			if (function_exists('mysqli_connect') && version_compare($mysqlver, '4.1.2', '>'))
-			{
-				$db_type = 'mysqli';
-			}
+			$type = 'mysql';
 		}
-		*/
 		
 		$data	= '<?php'."\n\n" . '//fill those varaibles with your data' . "\n";
-		$data	.= '$db_type			= \'' . $db_type . "';//mysqli or mysql \n";
-		$data	.= '$dbserver		= \'' . str_replace("'","\'", $srv) . "';//database server \n";
-		$data	.= '$dbuser			= \''. str_replace("'","\'", $usr)."';// database user \n";
-		$data	.= '$dbpass			= \''. str_replace("'","\'", $pass)."';// database password \n";
-		$data	.= '$dbname			= \''. str_replace("'","\'", $nm)."';// database name \n";
-		$data	.= '$dbprefix		= \''. str_replace("'","\'", $prf)."';// if you use perfix for tables , fill it \n";
+		$data	.= '$db_type		= \'' . $type . "'; //mysqli or mysql \n";
+		$data	.= '$dbserver		= \'' . str_replace("'","\'", $srv) . "'; //database server \n";
+		$data	.= '$dbuser			= \''. str_replace("'","\'", $usr)."' ; // database user \n";
+		$data	.= '$dbpass			= \''. str_replace("'","\'", $pass)."'; // database password \n";
+		$data	.= '$dbname			= \''. str_replace("'","\'", $nm)."'; // database name \n";
+		$data	.= '$dbprefix		= \''. str_replace("'","\'", $prf)."'; // if you use perfix for tables , fill it \n";
 		//$data	.= '$adminpath		= \'admin.php\';// if you renamed your acp file , please fill the new name here \n';
 		$data	.= "\n\n\n";
-		$data	.= "//for integration with script [ must change user systen from admin cp ] \n";
-		$data	.= '$script_path		= \''. str_replace("'","\'", $fpath)."';// path of script (./forums)  \n";
+		$data	.= "//for integration with script  must change user systen from admin cp  \n";
+		$data	.= '$script_path	= \''. str_replace("'","\'", $fpath)."'; // path of script (./forums)  \n";
 		$data	.= "\n\n";
-		$data	.= '?'.'>';
+		//$data	.= '?'.'>';
 	
 		$written = false;
 		if (is_writable($_path))

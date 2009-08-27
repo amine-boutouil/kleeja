@@ -175,6 +175,7 @@ case 'c':
 	{
 		//lets do it
 		do_config_export(
+						$_POST['db_type'],
 						$_POST['db_server'],
 						$_POST['db_user'],
 						$_POST['db_pass'],
@@ -197,6 +198,15 @@ case 'c':
 			<br />
 			<br />
 			<table style="width: 100%">
+				<tr>
+					<td>' . $lang['DB_TYPE'] . '</td>
+					<td>
+					<select name="db_type">
+						' . (function_exists('mysqli_connect') ? '<option value="mysqli">' . $lang['DB_TYPE_MYSQLI'] . '</option>' : '') . '
+						<option value="mysql">' . $lang['DB_TYPE_MYSQL'] . '</option>
+					</select>
+					</td>
+				</tr>
 				<tr>
 					<td>' . $lang['DB_SERVER'] . '</td>
 					<td><input name="db_server" type="text" value="localhost" style="width: 256px" />
@@ -371,6 +381,7 @@ case 'data' :
 		$config_sitename	= $_POST['sitename'];
 		$config_siteurl		= $_POST['siteurl'];
 		$config_sitemail	= $_POST['sitemail'];
+		$config_style		= $_POST['style'];
 		$clean_name			= $usrcp->cleanusername(mysql_real_escape_string($user_name));
 		
 		
@@ -490,6 +501,17 @@ case 'data' :
 		<tr>
 			<td><strong>' . $lang['EMAIL'] . '</strong></td>
 			<td><input name="email" id="email" type="text" style="width: 256px"  onchange="return w_email(this.name);" /></td>
+		</tr>
+	</table>
+	</fieldset>
+	
+	
+	<fieldset class="home" id="Group2" dir="' . $lang['DIR'] . '">
+	<legend style="width: 73px"> [ <strong>' . $lang['INST_STYLE_INFO'] . '</strong> ]</legend>
+	<table style="width: 100%">
+		<tr>
+			<td><img src="img/style1.png" /> <br /><small>' . $lang['INST_STYLE1_INFO'] . '</small><br /> <input type="radio" name="style" value="default" checked="checked" /> Default</td>
+			<td><img src="img/style2.png" /> <br /><small>' . $lang['INST_STYLE2_INFO'] . '</small><br /> <input type="radio" name="style" value="legacy" />  Legacy </td>
 		</tr>
 	</table>
 	</fieldset>

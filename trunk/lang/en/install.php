@@ -54,6 +54,9 @@
 	$lang['DB_INFO_NW']								= 'Config.php file is missing, fill in the fields below and kleeja will create the file for you, place it in kleeja\'s directory.';
 	$lang['DB_INFO']								= 'Config.php file is missing, fill in the fields below and kleeja will create the file for you.';
 	$lang['DB_SERVER']								= 'Host';
+	$lang['DB_TYPE']								= 'äæÚ ÞÇÚÏå ÇáÈíÇäÇÊ';
+	$lang['DB_TYPE_MYSQL']							= 'MySQL Standard';
+	$lang['DB_TYPE_MYSQLI']							= 'MySQL Improved';
 	$lang['DB_USER']								= 'Database Username';
 	$lang['DB_PASSWORD']							= 'Database Password';
 	$lang['DB_NAME']								= 'Database Name';
@@ -62,6 +65,9 @@
 	$lang['CONFIG_EXISTS']							= 'Config.php was found, Continue...';
 	$lang['INST_SUBMIT_CONFIGOK']					= 'Upload the file in the main directory';
 	$lang['INST_EXPORT']							= 'Export File';
+	$lang['INST_STYLE_INFO']						= 'ÇáÇÓÊÇíá';
+	$lang['INST_STYLE1_INFO']					= 'ÇáÇÓÊÇíá ÇáÇÝÊÑÇÖí , ÑÇÆÚ æÌãíá , Ýíå ÇáæÇä æÕæÑ ßËíÑå';
+	$lang['INST_STYLE2_INFO']					= 'ÓÊÇíá íÚÊãÏ Úáì ÇáÇÝÊÑÇÖí , ÇáÇ Çäå ÇÈÓØ æÇÎÝ';
 	//
 	$lang['FUNCTIONS_CHECK']						= 'Functions Check';
 	$lang['RE_CHECK']								= 'ReCheck';
@@ -101,4 +107,5 @@
 	$lang['WZ_TXT_W2'] = 'Control all extensions and sizes you want allow to be uploaded';
 	$lang['WZ_TXT_W3'] = 'Select , control and edit all your styles  ..';
 	$lang['WZ_TXT_W4'] = 'Set your terms or the the rules you want  ...';
-?>
+
+//<-- EOF

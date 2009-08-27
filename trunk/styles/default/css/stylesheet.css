@@ -67,7 +67,7 @@ img.right {float: right;margin-left:15px;}
 #right_menu{width:10%;float:right;padding:5px;}
 #right_menu .list{margin-left:16px;width: 180px;}
 #right_menu .list ul{list-style-type: none;}
-#right_menu .list span{background:url(../images/menu-right-top.png) no-repeat;height:36px;width:160px;display:block;color:#000;padding:0px 10px;line-height:35px;font-weight:bold;text-align:left;border-bottom: 1px solid #666;}
+#right_menu .list span{background:url(../images/menu-right-top.png) no-repeat;height:36px;width:160px;display:block;color:#000;padding:0px 10px;font-weight:bold;text-align:left;border-bottom: 1px solid #666;}
 #right_menu .list b{background:url(../images/menu_right_bottom.png) no-repeat;height:37px;width:160px;display:block;padding:0px 10px;font-weight:bold;color: #F1F7E1;}
 #right_menu .list img{padding:0px 0px 0px 5px;}
 #right_menu .list a{background-color:#767676;font: bold 11px tahoma;padding: 5px 10px;display: block;width:160px;color:#fff;text-decoration:none;border-bottom: 1px solid #666;}
@@ -97,11 +97,10 @@ img.right {float: right;margin-left:15px;}
 #data_file_down {width:45%;height:220px;float:left;background:#FAF8EA;padding:10px;-moz-border-radius:6px;-webkit-border-radius:6px;-khtml-border-radius:6px;border-radius:6px;}
 #data_file_down .find_x,#data_file_down .find_image {color:#2B8800;font-size:22px;text-align:center;}
 .fileReport {text-align:center;border-top:2px solid #FFBFBF;border-bottom:2px solid #FFBFBF;cursor:pointer;background-color:#FFE6E6;margin:10px auto;padding:3px 10px;}
-.fileReport a {color:#111;font-size:110%;}
+.fileReport a {color:#D88181;font-size:110%;}
 .fileReport a:hover,.fileReport:hover {background-color:#FFAAAA;color:#111;}
-
 .wait {color:#F04C2D;font-size:300%;font-weight:700;padding:5px 10px;}
-#download {text-align:center;height:24px;margin:12px auto;}
+#download {text-align:center;margin:8px auto;}
 #download a {background:#A2C900;border-top:3px solid #6C9F01;border-bottom:3px solid #6C9F01;color:#fff;font-size:100%;font-weight:700;padding:10px 30px;}
 #download a:hover {background:#77AA02;}
 /* # End Downlod template >> download.html */
@@ -130,10 +129,10 @@ img.right {float: right;margin-left:15px;}
 
 /*  START FOR ONLINE */
 .online{width:100%;float:right;padding:4px 0;margin-bottom:3px;}
-.number_online_all ,.online_visitor ,.online_users {display:inline;padding:5px 10px;border:1px outset #E2E2E2;-moz-border-radius:6px;-webkit-border-radius:6px;-khtml-border-radius:6px;border-radius:6px;}
-.number_online_all  {background:url(../images/number_online_all.gif) no-repeat 98% 50%;padding-right:20px;color:#CC3300}
-.online_visitor{color:#000}
-.online_users{color:#555}
+.onlineall ,.onlinevisitor ,.onlineusers {display:inline;padding:5px 10px;border:1px outset #E2E2E2;-moz-border-radius:6px;-webkit-border-radius:6px;-khtml-border-radius:6px;border-radius:6px;}
+.onlineall  {background:url(../images/number_online_all.gif) no-repeat 98% 50%;padding-right:20px;color:#CC3300}
+.onlinevisitor{color:#000}
+.onlineusers{color:#555}
 .name_users{margin-bottom:7px;margin-top:4px;display:block;float: right;color:#555;padding:5px 14px;border:1px inset #444;-moz-border-radius:6px;-webkit-border-radius:6px;-khtml-border-radius:6px;border-radius:6px;}
 /*  #  END FOR ONLINE */
 

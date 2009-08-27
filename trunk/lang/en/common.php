@@ -503,7 +503,8 @@ $lang = array_merge($lang, array(
 	'FOOTER_TXTS'				=> array('PLUGINS'=> 'الاضافات', 'STYLES'=>'الستايلات', 'BUGS'=>'مركز التبليغ عن الأخطاء'),
 	'T_ISNT_WRITEABLE'			=> 'Cannot edit <strong>%s</strong> template. (Unwriteable)',
 	'UNKNOWN'					=> 'Unknown',
-	
+	'T_CLEANING_FILES_NOW'		=> 'جاري تنفيذ عمليه حذف الملفات الخامله حالياً على دفعات تفادياً للظغط ,وقت العمليه يعتمد على عدد الملفات وحجمها ...',
+
 	//last line of this file ...					 
 	'S_TRANSLATED_BY' 			=> 'Translated By <a href="http://www.fenix4web.com/">Fenix4Web</a>',
 ));

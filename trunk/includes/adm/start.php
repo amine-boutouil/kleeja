@@ -175,7 +175,12 @@
 			}
 		}
 		
-
+		//there is cleaning files process now
+		if((int)$config['klj_clean_files_from'] > 0)
+		{
+			$ADM_NOTIFICATIONS[]  = array('id' => 'klj_clean_files', 'msg_type'=> 'info', 'title'=> '', 'msg'=> $lang['T_CLEANING_FILES_NOW']);
+		}
+		
 		($hook = kleeja_run_hook('default_admin_page')) ? eval($hook) : null; //run hook 
 		
 #<--- EOF

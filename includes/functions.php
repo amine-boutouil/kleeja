@@ -1778,25 +1778,27 @@ function kleeja_log($text, $reset = false)
 function is_browser($b)
 {
     $u_agent = strtolower($_SERVER['HTTP_USER_AGENT']);
-	switch($b)
+	$t = trim(preg_replace('/[0-9.]/', '', $b));
+	$r = trim(preg_replace('/[a-z]/', '', $b));
+	switch($t)
 	{
-		case 'ie':	case 'ie5': case 'ie6': case 'ie7': case 'ie8':
-			return strpos($u_agent, trim('msie ' . str_replace('ie', '', $b))) !== false ? true : false;
+		case 'ie':
+			return strpos($u_agent, trim('msie ' . $r)) !== false ? true : false;
 		break;
-		case 'firefox': case 'firefox2': case 'firefox3':
-			return strpos(str_replace('/', ' ', $u_agent), trim('firefox ' . str_replace('firefox', '', $b))) !== false ? true : false;
+		case 'firefox':
+			return strpos(str_replace('/', ' ', $u_agent), trim('firefox ' . $r)) !== false ? true : false;
 		break;
 		case 'safari':
-			return strpos($u_agent, trim('safari ' . str_replace('safari', '', $b))) !== false ? true : false;
+			return strpos($u_agent, trim('safari ' . $r)) !== false ? true : false;
 		break;
 		case 'chrome':
-			return strpos($u_agent, trim('chrome ' . str_replace('chrome', '', $b))) !== false ? true : false;
+			return strpos($u_agent, trim('chrome ' . $r)) !== false ? true : false;
 		break;
-		case 'Flock':
-			return strpos($u_agent, trim('flock ' . str_replace('flock', '', $b))) !== false ? true : false;
+		case 'flock':
+			return strpos($u_agent, trim('flock ' . $r)) !== false ? true : false;
 		break;
 		case 'opera':
-			return strpos($u_agent, trim('opera ' . str_replace('opera', '', $b))) !== false ? true : false;
+			return strpos($u_agent, trim('opera ' . $r)) !== false ? true : false;
 		break;
 	}
     return false;

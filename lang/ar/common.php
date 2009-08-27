@@ -74,7 +74,7 @@ $lang = array_merge($lang, array(
 	'PUBLIC_USER_FILES' => 'مجلد ملفات العضو',
 	'FILEUSER' => 'مجلد ملفات عضو',
 	'GO_FILECP' => 'اضغط هنا لإدارة ملفاتك هذه',
-	'YOUR_FILEUSER' => 'مجلدك',
+	'YOUR_FILEUSER' => 'مجلدك الشخصي',
 	'COPY_AND_GET_DUD' => 'انسخ الرابط وأعطه لأصدقائك ليطلعوا على مجلدك ',
 	'CLOSED_FEATURE' => 'خاصية مغلقة',
 	'USERFILE_CLOSED' => 'خاصية مجلدات المستخدمين مغلقة !',
@@ -82,7 +82,7 @@ $lang = array_merge($lang, array(
 	'PFILE_4_FORUM' => 'قم بالذهاب للمنطقة الأعضاء لتغيير بياناتك',
 	'USER_PLACE' => 'منطقة أعضاء',
 	
-	'PROFILE' => 'ملفك الشخصي',
+	'PROFILE' => 'تعديل البيانات',
 	'EDIT_U_DATA' => 'تحديث بياناتك',
 	'PASS_ON_CHANGE' => 'كلمة المرور.. عند التغيير فقط',
 	'OLD' => 'القديمة',

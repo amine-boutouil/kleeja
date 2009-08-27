@@ -27,28 +27,28 @@
 <!---- start uplaod box  ---->
 <div class="tabber">
 
+<IF NAME="config.www_url">
 <!---- start uplaod normal  ---->
-<!---- start uplaod URL ---->    
-<IF NAME="config.www_url"><div class="tabbertab" title="{lang.DOWNLOAD_F}" id="filetype"></IF>
+<div class="tabbertab" title="{lang.DOWNLOAD_F}" id="filetype">
+</IF>
 <LOOP NAME=FILES_NUM_LOOP>
 	<input type="file" name="file[{{i}}]" id="file[{{i}}]" style="display:{{show}}" size="50" /><br id="br[{{i}}]" style="display:{{show}}" />
 </LOOP>
     <div id="upload_forum"></div>
     <br />
 	<input class="input_num" type="text" id="upload_num" value="1" size="1" readonly="readonly" style="text-align:center;color:#888"/>
-	<span class="zx"><a title="{lang.ADD_UPLAD_A}" name="mraupload" onclick="javascript:plus(1);"><img src="{STYLE_PATH}images/zx.png" style="vertical-align:middle;" /></a></span>
-	<span class="zl"><a title="{lang.ADD_UPLAD_B}" name="mreupload" onclick="javascript:minus(1);"><img src="{STYLE_PATH}images/zl.png" style="vertical-align:middle;" /></a></span>
+	<span class="zx"><a title="{lang.ADD_UPLAD_A}" name="mraupload" onclick="javascript:plus(1);"><img src="{STYLE_PATH}images/zx.gif" style="vertical-align:middle;" /></a></span>
+	<span class="zl"><a title="{lang.ADD_UPLAD_B}" name="mreupload" onclick="javascript:minus(1);"><img src="{STYLE_PATH}images/zl.gif" style="vertical-align:middle;" /></a></span>
 	<br />
 	<br />
-	<input id="checkr" type="checkbox" onclick="accept_terms('submitr','checkr');" /><strong class="agree">{lang.AGREE_RULES}</strong>
+	<input id="checkr" type="checkbox" onclick="accept_terms('submitr','checkr');" /><strong class="agree">{lang.AGREE_RULES}	<span class="bn_up"><input class="buttons" type="submit" id="submitr" name="submitr" value="{lang.DOWNLOAD_F}"  disabled="disabled" /></span></strong>
 	<br />
-	<br /> 
-	<input class="buttons" type="submit" id="submitr" name="submitr" value="{lang.DOWNLOAD_F}"  disabled="disabled" />
-<IF NAME="config.www_url"></div></IF>
 <!---- # end uplaod normal  ---->
+</div>
 
-<!---- start uplaod URL ---->    
+ 
 <IF NAME="config.www_url">
+<!---- start uplaod URL ---->   
 <div class="bg tabbertab" title="{lang.DOWNLOAD_T}" id="texttype">
 <LOOP NAME=FILES_NUM_LOOP>
 	<input class="url input_field" type="text" name="file[{{i}}]" id="fileu[{{i}}]" size="70" value="{lang.PAST_URL_HERE}" onclick="this.value=''" style="display:{{show}}"><br id="bru[{{i}}]" style="display:{{show}}" />
@@ -56,33 +56,31 @@
     <br />
 	<div id="upload_f_forum"></div>
 	<input class="inum input_num" type="text" id="upload_f_num" value="1" size="1" readonly="readonly" />
-	<span class="zx"><a title="{lang.ADD_UPLAD_A}" name="mraupload" onclick="javascript:plus(2);"><img src="{STYLE_PATH}images/zx.png" style="vertical-align:middle;" /></a></span>
-	<span class="zl"><a title="{lang.ADD_UPLAD_B}" name="mreupload" onclick="javascript:minus(2);"><img src="{STYLE_PATH}images/zl.png" style="vertical-align:middle;" /></a></span>
+	<span class="zx"><a title="{lang.ADD_UPLAD_A}" name="mraupload" onclick="javascript:plus(2);"><img src="{STYLE_PATH}images/zx.gif" style="vertical-align:middle;" /></a></span>
+	<span class="zl"><a title="{lang.ADD_UPLAD_B}" name="mreupload" onclick="javascript:minus(2);"><img src="{STYLE_PATH}images/zl.gif" style="vertical-align:middle;" /></a></span>
     <br />
 	<br />
-    <input id="checkr2" type="checkbox" onclick="accept_terms('submittxt','checkr2');" /><b class="agree">{lang.AGREE_RULES}</b>
+    <input id="checkr2" type="checkbox" onclick="accept_terms('submittxt','checkr2');" /><strong class="agree">{lang.AGREE_RULES} <span class="bn_up"> <input class="buttons" type="submit" id="submittxt" name="submittxt" value="{lang.DOWNLOAD_T}" disabled="disabled" /></span></strong>
     <br />
-	<br />
-    <input class="buttons" type="submit" id="submittxt" name="submittxt" value="{lang.DOWNLOAD_T}"   disabled="disabled" />
 </div>
-</IF>
 <!---- # END uplaod URL ---->  	
+</IF>
 
 </div>
 <!---- # end uplaod boxs  ---->
 
 <IF NAME="config.safe_code">
-<!---- start  safe code  ---->
+<!---- start  safe code  ---->				
 <div class="safe_code">
-	<b>{lang.VERTY_CODE}</b>
-	<br /><br />
-	<img style="vertical-align:middle;" id="kleeja_img_captcha" src="{captcha_file_path}" alt="{lang.REFRESH_CAPTCHA}" title="{lang.REFRESH_CAPTCHA}" onclick="javascript:update_kleeja_captcha('{captcha_file_path}', 'kleeja_code_answer');" />
-	<input type="text" name="kleeja_code_answer" id="kleeja_code_answer" style="direction:ltr" />
-	<br /><br />
-	<span class="explain">{lang.NOTE_CODE}</span>
-	<br />
+<span>{lang.VERTY_CODE}</span>
+<br /><br />
+<img style="vertical-align:middle;" id="kleeja_img_captcha" src="{captcha_file_path}" alt="{lang.REFRESH_CAPTCHA}" title="{lang.REFRESH_CAPTCHA}" onclick="javascript:update_kleeja_captcha('{captcha_file_path}', 'kleeja_code_answer');" />
+<input type="text" name="kleeja_code_answer" id="kleeja_code_answer" />
+<br /><br />
+<strong class="explain">{lang.NOTE_CODE}</strong>
+<br />
 </div>
-<!---- # End  safe code  ---->	  
+<!---- ## End  safe code  ---->	  
 </IF>
  
 </form>

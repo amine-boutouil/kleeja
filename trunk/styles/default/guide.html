@@ -9,67 +9,77 @@
 <div class="clr"></div><div class="line"></div>
 <!-- # End line top  -->
 
-
-<IF NAME="users_data">
-<!-- start user list of files allowed -->
-<table class="guide_user">
-<tr><th>{lang.GUIDE_USERS}</th></tr>
-<tr>
-<td>
-<LOOP NAME="users_data">
-	<IF LOOP="is_first_row">
-		<IF LOOP="realy_first_row">
-		<ELSE>
-			</div>
+<!-- start table files allowed -->
+<table id="guide" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<IF NAME="users_data">
+		<!-- start user list of files allowed -->
+		<th class="guide_user_th">{lang.GUIDE_USERS}</th>
+		<!-- # END user list of files allowed -->
 		</IF>
-	<div class="user_box">
-		<div class="user_img"><img src="images/filegroups/{{group}}.png" style="vertical-align:middle;" />
-		<div class="user_n4me">{lang.GUIDE_GROUPS} : {{group_name}}</div>
-		</div>
-		<br />
-	</IF>
-		<div class="user_ext">
-			<span class="user_ext_lang">{lang.EXT} : </span><span class="user_ext_color">{{ext}}</span>
-			<span class="user_ext_lang">{lang.SIZE} : </span><span class="user_ext_color">{{num}}</span>
-		</div>
-</LOOP>
-	</div>
-</td>
-</tr>
-</table>
-<!-- # END user list of files allowed -->
-</IF>
-
-
-<IF NAME="gusts_data">
-<!-- start visitor list files  -->
-<table class="guide_visitor" border="0" cellspacing="0" cellpadding="0">
-<tr><th>{lang.GUIDE_VISITORS}</th></tr>
-<tr>
-<td>
-<LOOP NAME="gusts_data">
-	<IF LOOP="is_first_row">
-		<IF LOOP="realy_first_row">
-		<ELSE>
-			</div>
+		<!-- clear ten pixels -->
+		<th style="width:10px">&nbsp;</th>
+		<!-- # clear ten pixels  -->
+		<IF NAME="gusts_data">
+		<!-- start visitor list files  -->
+		<th class="guide_visitor_th">{lang.GUIDE_VISITORS}</th>
+		<!-- # END visitor list files  -->
 		</IF>
-	<div class="visitor_box user_box">
-		<div class="visitor_img user_img"><img src="images/filegroups/{{group}}.png" style="vertical-align:middle;" />
-		<div class="visitor_n4me user_n4me">{lang.GUIDE_GROUPS} : {{group_name}}</div>
-		</div>
-		<br />
-	</IF>
-		<div class="visitor_ext user_ext">
-			<span class="visitor_ext_lang user_ext_lang">{lang.EXT} : </span><span class="visitor_ext_color user_ext_color">{{ext}}</span>
-			<span class="visitor_ext_lang user_ext_lang">{lang.SIZE} : </span><span class="visitor_ext_color user_ext_color">{{num}}</span>
-		</div>
-	</LOOP>
-	</div>
-</td>
-</tr>
+	</tr>
+	
+	<tr>
+		<!-- start user list of files allowed -->
+		<td>
+		<LOOP NAME="users_data">
+			<IF LOOP="is_first_row">
+				<IF LOOP="realy_first_row">
+					<ELSE>
+					</div>
+				</IF>
+			<div class="user_box">
+				<div class="user_img"><img src="images/filegroups/{{group}}.png" style="vertical-align:middle;" />
+				<div class="user_n4me">{lang.GUIDE_GROUPS} : {{group_name}}</div>
+				</div>
+				<br />
+			</IF>
+				<div class="user_ext">
+					<span class="user_ext_lang">{lang.EXT} : </span><span class="user_ext_color">{{ext}}</span>
+					<span class="user_ext_lang">{lang.SIZE} : </span><span class="user_ext_color">{{num}}</span>
+				</div>
+		</LOOP>
+			</div>
+		</td>
+		<!-- # END user list of files allowed -->
+		
+		<!-- clear ten pixels  -->
+		<td style="width:10px">&nbsp;</td>
+		<!-- # clear ten pixels  -->
+		
+		<!-- start visitor list files  -->
+		<td>
+		<LOOP NAME="gusts_data">
+			<IF LOOP="is_first_row">
+				<IF LOOP="realy_first_row">
+					<ELSE>
+					</div>
+				</IF>
+			<div class="visitor_box user_box">
+				<div class="visitor_img"><img src="images/filegroups/{{group}}.png" style="vertical-align:middle;" />
+				<div class="visitor_n4me user_n4me">{lang.GUIDE_GROUPS} : {{group_name}}</div>
+				</div>
+				<br />
+			</IF>
+				<div class="visitor_ext user_ext">
+					<span class="visitor_ext_lang user_ext_lang">{lang.EXT} : </span><span class="visitor_ext_color user_ext_color">{{ext}}</span>
+					<span class="visitor_ext_lang user_ext_lang">{lang.SIZE} : </span><span class="visitor_ext_color user_ext_color">{{num}}</span>
+				</div>
+		</LOOP>
+			</div>
+		</td>
+		<!-- # END visitor list files  -->
+	</tr>
 </table>
-<!-- # END visitor list files  -->
-</IF>
+<!-- # END table files allowed -->
 
 <div class="clr"></div><br />
    

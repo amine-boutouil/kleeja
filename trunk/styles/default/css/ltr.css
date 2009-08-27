@@ -44,8 +44,9 @@ h2 {font-size: 22px; font-weight: bold; color:#BE1111; text-shadow: 0px 1px rgb(
 
 #content_index_body  {float:right;}
 
-/* title */
-.title-x strong{float:left}
+/* start site name and titles all */
+.title-x {float:left;}
+/* # END site name and titles all */
 
 #right_menu{
         float:left;
@@ -75,108 +76,14 @@ h2 {font-size: 22px; font-weight: bold; color:#BE1111; text-shadow: 0px 1px rgb(
 #content {float: right;}
 
 
-/* Footer */
-
-#fixed {
-right:2px; text-align: right;
-}
-
-/*start Option to control panel */
-
-#adminPan{
-left:80px;
-}
-
-
-#adminPan a {
-        float:left;
-        background-position:right top;
-        padding:0 4px 0 0;
-        }
-#adminPan a span {
-        float:right;
-        background-position:left top;
-}
-       
-
-#adminPan a:hover {background-position:0% 43px;}
-#adminPan a:hover span {background-position:100% 43px;}
 
 
 
-/* box */
-.box {
-        background-position: top right;
-}
-.box_top {
-        background-position: top left;
-}
-.box_bottom {
-        background-position:  bottom right;
-}
-.box_bottom div {
-        background-position: bottom left;
-}
-.box_content {
-        background-position: top left;
-}
+/* safe code all box */
+.safe_code {background:#F9F5F0 url(../images/saf3_code_ltr.gif) no-repeat 100% 50%;}
+/* # end safe code all box */
 
 
-.box_content{ padding: 0 0 0 15px; }
-/* ##  box */
-
-/* file report */
-.fileReport {
-        padding:6px 0 0 30px;
-}
-/* ##  file report */
-
-
-.info-down {
-        float:left;
-}
-
-
-#download  {
-        margin:50px 30px 0 0;
-
-        }
-#download a {
-        padding:15px 0 0 30px;
-}
-
-
-.wait{
-        margin:30px 0 0 30px;
-        padding:5px 0 0 20px;
-}
-
-.err {margin: 10px 0 0 10px;}
-.info {margin: 10px 0 0 10px;}
-.result { margin: 10px 0 0 10px;}
-
-
-.page_stats{float:right;}
-
-
-/* footer template */
-#footerlinksleft ul{float:right;}
-#footerlinksleft li{float:right}
-
-/* Copyrights */
-#footer .Copyrights {float:left;}
-/* footr stats */
-#footer .page_stats { float:left;}
-/* googleanalytics */
-#footer .googleanalytics {text-align:left;}
-/*start Option to control panel */
-
-#adminPan{margin:5px 25px 5px 10px;width:94%;height:45px;float:left;}
-#adminPan ul{float:left;margin-bottom:8px;padding:10px}
-/* # footer template */
-
-.safe_code {margin:5px 0;padding:10px; background-position:98% 50%; }
-.safe_code  td span{text-align: center;}
 
 caption, th, td {
         text-align: left;
@@ -184,90 +91,88 @@ caption, th, td {
 
 option {padding-left: 1em;}
 
-/* pagination */
-.pagination {margin:8px 0;float:left;}
+
 
 #stats{background-position: top right;}
 
 
-#usercp  .imguser{background-position: top left;}
-#usercp  .imguser b{padding-left:80px;}
-#usercp .uname{padding-left:80px;padding-right:10px;}
-#usercp  .copylink{padding:4px 40px;}
+/*-- start user control panel  Files  >> filecp.html  */
+.file_cp {background-position:80% 45%;}
+.left_button{float:right;}
+.file_cp  .odd  {text-align:left;}
+.file_cp  .nbr  {text-align:left;}
+/*-- # end  user control panel  Files  >> filecp.html  */
 
 
+.call { background-position:90% 50%}
 
 
+/* System Messages body */
 
-
-
-
-
-
-.call { background-position:95% 10%}
-
-/* System Messages */
-#system-message dd.info  ul li {
-background-position:1% 10%
-}
-#system-message dd.error ul li{
-background-position:1% 10%
-}
-#system-message dd.info_f ul li {
-background-position:1% 10%
-}
+#system-message dd {text-indent:40px; }
+#system-message dd.info  ul li {background-position:1% 10%}
+#system-message dd.error ul li{background-position:1% 10%}
+#system-message dd.info_f ul li {background-position:1% 10%}
 /* ##  End  System Messages */
 
-#bg_log1n{
-float:left;
-margin:1% 2% 2% 12%;
-background-position:98% 50%;
-}
-#login {        float:left;}
-#login .username,#login .password{padding-right:20px;padding-left:2px;}
-#login  .username{background-position:100% 50%}
-#login  .password{background-position:100% 50%}
-#login  .forget_pass  {float:right;margin:5px 10px 0 0;}
-
-
-#register{background-position:92% 40%;}
-#bg_get_password{background-position:90% 40%}
-
-
-/*-- start Profile template  */
-.userdata td {border-right:1px solid #e5eff8;text-align:left;        }                                
-.userdata th {border-right:1px solid #e5eff8;}                                                        
-.userdata thead th {text-align:left;}        
-/*-- End Profile template  */
-
-/*-- start Profile template  */
-#userdata .userdata {float:left}
-#userdata .in{margin-left:12px;}
-/*-- End Profile template  */
-
-/* Downlod template */
-#data_file {float:left;margin-right:10px;}
-#data_file ul.data_menu li {border-left:5px solid #CCC;padding:2px 10px 2px 5px;}
-#data_file_down {float:right;}
-#data_file_down .find_x,#data_file_down .find_image {font-size:22px;text-align:center;}
-.wait {font-size:200%;}
-/* # End Downlod template */
-
-.rebort  {background-position:95% 20%;}        
-
-/* button Downlod */
-#download {text-align:center;height:50px;margin:12px auto;}
-#download a {background:#FEC008 url(../images/bg_download.png) repeat-x top right;border-top:3px solid #9B7500;
-                        border-bottom:3px solid #9B7500;color:#9B7500;font-size:100%;font-weight:700;padding:20px;}
-#download a:hover {background:#FFD65D;color:#000;}
-/* # End Downlod template */
 
 /* online */
 .name_users {float:left;}
 
+
+.left_button{float:left;}
+
+
+/* pagination */
+.pagination {float:right;}
+/* ## pagination */
+
+
+/* fixed */
+#fixed {width:30%;position:fixed;left:0%;bottom:2px;text-align:right;color:#111;}
+/* #  fixed */
+
+/* register template >> register.html */
+.reg_table{background-position:90% 50%;margin:5px 0;padding:15px 10px;}
+/*#  register template >> register.html */
+
+/* footer template */
+#footer{margin:2px auto;}
+#footer .page_stats {float:right;margin-top:10px;margin-bottom:10px;}
 /*start Option to control panel */
-#adminPan{float:left;}
-#adminPan p {float:left;}
+.admin_cp_link span{padding:7px 25px;}
+.admin_cp_link {width:100%;float:right;margin-top:5px;margin-bottom:10px}
+/* # footer template */
 
+/* login template >> login.html */
+#bg_log1n{background-position:90% 50%;}
+#login .username,#login .password{padding-right:20px;}
+#login  .username,#login  .password{background-position:100% 50%}
+#login .login {width:300px}
+/* # login template >> login.html  */
 
-.left_button{float:right;}
+/* back password template >> get_pass.html */
+#bg_get_password{background-position:90% 50%}
+/* # back password template >> get_pass.html */
+		
+/*-- start Profile template >> profile.html  */
+#profile .boxdata{float:left;}
+#profile .boxdata  .in{margin-left:22px;}
+/*-- End Profile template >> profile.html   */
+
+/*-- start  box user name and all files  >> fileuser.html  */
+#boxfileuser  .box_user,#boxfileuser  .us3r_n4me {background-position:5% 50%}
+#boxfileuser  .box_user {float: left;}
+#boxfileuser  .us3r_n4me {background-position:5% 50%;float: right;}
+#boxfileuser  .public {margin:5px 15px 5px auto;}
+#filecplink  .copylink {float:left;}
+#filecplink .link_user{float:left;}
+.tabledata {float:left;}
+.tabledata .odd  {text-align:left}
+/*-- #  end box user name and all files  >> fileuser.html  */
+
+/* start Downlod template >> download.html */
+#data_file {float:left;margin-left:5px;}
+#data_file_down {float:right}
+.wait {font-size:250%;}
+/* # End Downlod template >> download.html */

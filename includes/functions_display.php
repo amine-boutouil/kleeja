@@ -22,6 +22,7 @@ function Saaheader($title, $outscript=false)
 		//is user ? and username
 		$user_is = ($usrcp->name()) ? true: false;
 		$username = ($usrcp->name()) ? $usrcp->name() : $lang['GUST'];
+		$is_opera = (is_browser('opera')) ? true : false;
 		
 		//links for header
 		$_LINKS = array(

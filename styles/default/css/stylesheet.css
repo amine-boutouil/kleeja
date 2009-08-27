@@ -79,11 +79,11 @@ img.right {float: right;margin-left:15px;}
 #extras_header,#extras_footer {width:100%;margin:8px auto;padding:10px;text-align:center;}
 /*# END extras  header and  footer template */
 
-/* fixed */
-#fixed {background:#C8C8C8;padding:1px 0 2px 0;position:fixed;left:2px;bottom:2px;text-align: left;color:#898989;text-shadow: 0px 1px rgb(247, 247, 247)}
-#fixed a,#fixed a:link{color:#CF6600;}
-#fixed a:hover{color:#000;}
-/* #  fixed */
+/* divx */
+#divx {text-transform:capitalize; width:15%;background:#C8C8C8;padding:1px 0 2px 0;position:fixed;left:5%;bottom:0px;text-align: left;color:#111;text-shadow: 0px 1px rgb(247, 247, 247)}
+#divx a,#divx a:link{color:#CF6600;font-emphasize-style:disc;}
+#divx a:hover{color:#000;}
+/* #  divx */
 
 /* start Downlod template >> download.html */
 #file-info {height:230px;margin:5px auto;}
@@ -118,10 +118,10 @@ img.right {float: right;margin-left:15px;}
 #index_body{background:url(../images/index_body.png) no-repeat left top;}
 .wolcome_msg {width:70%;font-size:10px;color:#777;text-shadow: 0px 1px rgb(247, 247, 247);padding:3px 6px;}
 .siten4me{font-size:13px;padding:3px;color:#BE1111}
-.agree{font-size:12px;font-weight:normal;color:#1E801E;padding:1px 6px;}
+.agree{font-size:10px;font-weight:bold;padding:1px 6px;}
 .zx,.zl {cursor:pointer;padding:4px;}
 .zx a:hover,.zl a:hover {background:#FEEA00}
-.bn_up {margin-right:50px;margin-top:-8px;}
+.bn_up {margin-right:60px;margin-top:-8px;}
 .url {margin-top:3px;height:15px;direction:ltr;color:#DD6F00}
 .inum {text-align:center;color:#888;}
 .input_num {background:#FFF;border: 1px solid #B3B9C4;font:normal 10px tahoma,Arial,sans-serif;outline:1px solid #ccc;padding:2px 0;}
@@ -130,11 +130,11 @@ img.right {float: right;margin-left:15px;}
 
 /*  START FOR ONLINE */
 .online{width:100%;float:right;padding:4px 0;margin-bottom:3px;}
-.number_online_all ,.online_visitor ,.online_users {display:inline;color:#F9F9F9;padding:5px 10px;border:1px solid #E2E2E2;-moz-border-radius:6px;-webkit-border-radius:6px;-khtml-border-radius:6px;border-radius:6px;}
-.number_online_all  {background:#FF9E3F url(../images/number_online_all.gif) no-repeat 98% 50%;padding-right:20px;}
-.online_visitor{background:#955360}
-.online_users{background:#92A5C4}
-.name_users{margin-bottom:7px;display:block;background:#92A5C4;float: right;color:#fff;padding:3px 15px;border:1px solid #E2E2E2;-moz-border-radius:6px;-webkit-border-radius:6px;-khtml-border-radius:6px;border-radius:6px;}
+.number_online_all ,.online_visitor ,.online_users {display:inline;padding:5px 10px;border:1px outset #E2E2E2;-moz-border-radius:6px;-webkit-border-radius:6px;-khtml-border-radius:6px;border-radius:6px;}
+.number_online_all  {background:url(../images/number_online_all.gif) no-repeat 98% 50%;padding-right:20px;color:#CC3300}
+.online_visitor{color:#0066FF}
+.online_users{color:#000}
+.name_users{margin-bottom:7px;margin-top:4px;display:block;float: right;color:#444;padding:5px 14px;border:1px inset #444;-moz-border-radius:6px;-webkit-border-radius:6px;-khtml-border-radius:6px;border-radius:6px;}
 /*  #  END FOR ONLINE */
 
 /* tabs */
@@ -161,8 +161,8 @@ ul.tabbernav li.tabberactive a:hover{color:#AE4600;}
 
 /* ALL buttons */
 #buttons ,.buttons{margin-top:2px;outline:0;cursor: pointer;padding:4px 20px;font: normal 12px Tahoma, Arial, sans-serif;
-background:#D7FFD7 url(../images/headline_bg.png) repeat-x top right;color:#111;border:1px solid #999;-moz-border-radius:10px;-webkit-border-radius:10px;-khtml-border-radius:10px;border-radius:10px;}
-#buttons:hover ,.buttons:hover{background:#96D896;color: #111;border:1px solid #666;text-decoration:none;}
+background:#99CCFF url(../images/headline_bg.png) repeat-x top right;color:#111;border:1px solid #999;-moz-border-radius:10px;-webkit-border-radius:10px;-khtml-border-radius:10px;border-radius:10px;}
+#buttons:hover ,.buttons:hover{background:#33CCFF;color: #111;border:1px solid #666;text-decoration:none;}
 /* ## ALL buttons */
 
 /* pagination */

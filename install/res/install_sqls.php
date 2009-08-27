@@ -202,7 +202,7 @@ $install_sqls['config_insert4'] = "INSERT INTO `{$dbprefix}config` (`name`, `val
 
 $install_sqls['config_insert5'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`, `type`) VALUES ('decode', '1', '<select id=\"decode\" name=\"decode\">\r\n <option <IF NAME=\"con.decode==0\">selected=\"selected\"</IF> value=\"0\">{lang.NO_CHANGE}</option>\r\n <option <IF NAME=\"con.decode==2\">selected=\"selected\"</IF> value=\"2\">{lang.CHANGE_MD5}</option>\r\n <option <IF NAME=\"con.decode==1\">selected=\"selected\"</IF> value=\"1\">{lang.CHANGE_TIME}</option>\r\n				<!-- another config decode options -->\r\n </select>', 11, 'upload')";
 
-$install_sqls['config_insert6'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`, `type`) VALUES ('style', 'default', '<select name=\"style\" id=\"style\">\r\n {stylfiles}\r\n </select>', 18, 'interface')";
+$install_sqls['config_insert6'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`, `type`) VALUES ('style', '$config_style', '<select name=\"style\" id=\"style\">\r\n {stylfiles}\r\n </select>', 18, 'interface')";
 
 $install_sqls['config_insert7'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`, `type`) VALUES ('closemsg', 'sits is closed now', '<input type=\"text\" id=\"closemsg\" name=\"closemsg\" value=\"{con.closemsg}\" size=\"40\">', 10, 'general')";
 

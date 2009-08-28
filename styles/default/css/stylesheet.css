@@ -140,8 +140,8 @@ img.right {float: right;margin-left:15px;}
 .tabber {width:100%}
 .tabberlive {margin-top:2px;margin-bottom:2px;}
 .tabberlive .tabbertabhide {display:none;}
-.tabbertab {width:70%;height:100%;padding:20px;background:#C0C0C0 url(../images/bg_tabbertab.png) repeat-x top left;border:1px solid #aaa;-moz-border-radius-bottomleft: 10px;-webkit-border-bottom-left-radius: 10px;-moz-border-radius-bottomright: 10px;-webkit-border-bottom-right-radius: 10px;}
-.bg {background:#E8E8E8 url(../images/bg_tabbertab_1.png) repeat-x top left;}
+.tabbertab {width:70%;height:100%;padding:20px;background:#E8E8E8 url(../images/bg_tabbertab_1.png) repeat-x top left;border:1px solid #aaa;-moz-border-radius-bottomleft: 10px;-webkit-border-bottom-left-radius: 10px;-moz-border-radius-bottomright: 10px;-webkit-border-bottom-right-radius: 10px;}
+.bg {background:#C0C0C0 url(../images/bg_tabbertab.png) repeat-x top left}
 ul.tabbernav{ padding:5px 0; font: bold 11px tahoma, sans-serif;}
 ul.tabbernav li{ list-style: none; display: inline;}
 ul.tabbernav li a{ padding:5px 14px; margin-left: 5px; border: 1px solid #aaa;background:#F68618;text-decoration: none;-moz-border-radius-topleft: 10px;-webkit-border-top-left-radius: 10px;-moz-border-radius-topright: 10px;-webkit-border-top-right-radius: 10px;}

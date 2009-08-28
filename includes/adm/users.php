@@ -19,7 +19,8 @@
 	$action 	= basename(ADMIN_PATH) . "?cp=users&amp;page=" . (isset($_GET['page'])  ? intval($_GET['page']) : 1) . (isset($_GET['search']) ? '&search=' . $SQL->escape($_GET['search']) : '') . ((isset($_GET['admin']) && $_GET['admin'] == '1') ? '&admin=1' : '');
 	$is_search	= false;
 	$isn_search	= true;
-
+	$affected = false;
+	
 	$query = array(
 					'SELECT'	=> 'COUNT(id) AS total_users',
 					'FROM'		=> "{$dbprefix}users",
@@ -197,7 +198,6 @@
 
 			$result = $SQL->build($query);
 
-			$affected = false;
 			while($row=$SQL->fetch_array($result))
 			{
 				//make new lovely arrays !!

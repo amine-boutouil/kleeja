@@ -89,9 +89,9 @@ ul.tabbernav li.tabberactive a:hover{text-decoration:none;}
 .left_button{padding:5px;}
 
 /* template list of files allowed > guide.html */
-.guide_user_th  {background:#669933 url(../images/headine_bg.png) repeat-x top right;}
+.guide_user_th  {background:#bbb url(../images/headine_bg.png) repeat-x top right;}
 .guide_visitor_th {background:#A71515 url(../images/headine_bg.png) repeat-x top right}
-.user_ext{background:#F2F9F0 url(../images/headlne_bg.png) repeat-x top right}
+.user_ext{background:#E8E8E8 url(../images/headlne_bg.png) repeat-x top right}
 .visitor_ext{background:#FDEEEF url(../images/headlie_bg.png) repeat-x top right;}
 /* #  template list of files allowed > guide.html */
 

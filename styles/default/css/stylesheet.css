@@ -87,20 +87,23 @@ img.right {float: right;margin-left:15px;}
 
 /* start Downlod template >> download.html */
 #file-info {height:230px;margin:5px auto;}
-#data_file {float:right;width:46%;height:220px;margin-left:10px;background:#FFF;padding:10px;-moz-border-radius:6px;-webkit-border-radius:6px;-khtml-border-radius:6px;border-radius:6px;}
+#data_file {width:46%;height:220px;float:left;background:#C0C0C0 url(../images/bg_tabbertab.png) repeat-x top left;padding:10px;-moz-border-radius:6px;-webkit-border-radius:6px;-khtml-border-radius:6px;border-radius:6px;}
 #data_file .data_file p {color:#F0502E;font-size:26px;}
 #data_file .t {color:#555;background:#ccc;font-size:12px;text-align:center;border:1px solid #f2f2f2;border-right:5px solid #CCC;border-left:5px solid #CCC;margin-top:10px;padding:2px 5px;}
 #data_file .nup {font-size:18px}
 #data_file ul.data_menu {list-style:none;margin:0;}
-#data_file ul.data_menu li {display:block;background:#f2f2f2;padding:2px 5px 2px 10px;margin-bottom:1px;border-right:5px solid #CCC;border:1px solid #f2f2f2;font-weight:700;color:#333;text-decoration:none;}
+#data_file ul.data_menu li {display:block;background:#B5D9FC url(../images/bg_tabbertab_1.png) repeat-x top left;padding:2px 5px 2px 10px;margin-bottom:1px;border-right:5px solid #CCC;border:1px solid #f2f2f2;font-weight:700;color:#333;text-decoration:none;}
 #data_file ul.data_menu li b {color:#040476;}
-#data_file_down {width:45%;height:220px;float:left;background:#FAF8EA;padding:10px;-moz-border-radius:6px;-webkit-border-radius:6px;-khtml-border-radius:6px;border-radius:6px;}
-#data_file_down .find_x,#data_file_down .find_image {color:#2B8800;font-size:22px;text-align:center;}
+#data_file_down {float:right;display:inline;margin-left:10px;width:45%;height:220px;background:#fff url(../images/bg_tabbertab.png) repeat-x bottom left;padding:10px;-moz-border-radius:6px;-webkit-border-radius:6px;-khtml-border-radius:6px;border-radius:6px;}
+#data_file_down .find_x {color:#2B8800;font-size:22px;text-align:center;}
+#data_file_down .find_image {text-align:center;}
 .fileReport {text-align:center;border-top:2px solid #FFBFBF;border-bottom:2px solid #FFBFBF;cursor:pointer;background-color:#FFE6E6;margin:10px auto;padding:3px 10px;}
 .fileReport a {color:#D88181;font-size:110%;}
-.fileReport a:hover,.fileReport:hover {background-color:#FFAAAA;color:#111;}
-.wait {color:#F04C2D;font-size:300%;font-weight:700;padding:5px 10px;}
-#download {text-align:center;margin:8px auto;}
+.fileReport a:hover {color:#111;}
+.fileReport:hover {background-color:#E8E8E8;color:#111;}
+.wait {color:#F04C2D;font-size:300%;font-weight:700;padding:3px 10px;text-align:center;}
+#download {text-align:center;margin:4px auto;}
+#download  div{margin-top:1px;}
 #download a {background:#A2C900;border-top:3px solid #6C9F01;border-bottom:3px solid #6C9F01;color:#fff;font-size:100%;font-weight:700;padding:10px 30px;}
 #download a:hover {background:#77AA02;}
 /* # End Downlod template >> download.html */
@@ -122,7 +125,7 @@ img.right {float: right;margin-left:15px;}
 /* start index body  >> index_body.html  */
 #content_index_body  {float: left;width: 70%;padding:5px 30px;}
 #index_body{background:url(../images/index_body.png) no-repeat left top;}
-.wolcome_msg {width:70%;font-size:10px;color:#777;text-shadow: 0px 1px rgb(247, 247, 247);padding:3px 6px;}
+.wolcome_msg {width:76%;text-indent:40px;font-size:10px;color:#777;text-shadow: 0px 1px rgb(247, 247, 247);padding:3px 6px;}
 .siten4me{font-size:13px;padding:3px;color:#BE1111}
 .agree{font-size:10px;font-weight:bold;padding:1px 6px;}
 .zx,.zl {cursor:pointer;padding:4px;}
@@ -166,8 +169,8 @@ ul.tabbernav li.tabberactive a:hover{color:#3399FF;}
 
 /* ALL buttons */
 #buttons ,.buttons{margin-top:2px;outline:0;cursor: pointer;padding:4px 20px;font: normal 12px Tahoma, Arial, sans-serif;
-background:#3399FF url(../images/headline_bg.png) repeat-x top right;color:#111;border:1px solid #999;-moz-border-radius:10px;-webkit-border-radius:10px;-khtml-border-radius:10px;border-radius:10px;}
-#buttons:hover ,.buttons:hover{background:#FF9933;color: #111;border:1px solid #666;text-decoration:none;}
+background:#FF9933 url(../images/headline_bg.png) repeat-x top right;color:#111;border:1px solid #999;-moz-border-radius:10px;-webkit-border-radius:10px;-khtml-border-radius:10px;border-radius:10px;}
+#buttons:hover ,.buttons:hover{background:#FFCC33;color: #111;border:1px solid #666;text-decoration:none;}
 /* ## ALL buttons */
 
 /* pagination */
@@ -242,7 +245,7 @@ background:#3399FF url(../images/headline_bg.png) repeat-x top right;color:#111;
 /*#  register template >> register.html */
 
 /* back password template >> get_pass.html */
-#bg_get_password{background:#FAF8EA url(../images/get_password.png) no-repeat 15% 50%;border:1px solid #FAF3C4;margin:5px 0;padding:15px 10px;}
+#bg_get_password{background:#F0F3F9 url(../images/get_password.png) no-repeat 15% 50%;border:1px solid #CFDFFF;margin:5px 0;padding:15px 10px;}
 .get_pass{color:#BF0000;margin-bottom:10px;font-weight:bold;}
 /* # back password template >> get_pass.html */
 
@@ -251,7 +254,7 @@ background:#3399FF url(../images/headline_bg.png) repeat-x top right;color:#111;
 .call label ,.rebort label {display:block;font-weight:bold;margin:5px 0;}
 .call input ,.rebort input {padding: 2px;border:1px solid #999;font: bold 12px tahoma, Verdana, sans-serif;color:#666;}
 .call textarea,.rebort textarea {width:300px;padding:2px;font: bold 12px tahoma, Verdana, sans-serif;border:1px solid #999;height:100px;display:block;color:#666;}
-.rebort{background:#F3F1E2 url(../images/file_rebort.png) no-repeat 10% 50%;border:1px solid #CCC79F;margin:5px 0;padding:15px 10px;}
+.rebort{background:#F0F3F9 url(../images/file_rebort.png) no-repeat 10% 50%;border:1px solid #CFDFFF;margin:5px 0;padding:15px 10px;}
 .urlcolor{background:#FFCDCD}
 /* # call and file report templates */        
 

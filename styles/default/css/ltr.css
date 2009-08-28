@@ -52,7 +52,7 @@ option {padding-left: 1em;}
 .file_cp  .nbr  {text-align:left;}
 /*-- # end  user control panel  Files  >> filecp.html  */
 
-.call { background-position:90% 50%}
+.call { background-position:84% 50%}
 
 /* System Messages body */
 #system-message dd {text-indent:40px; }
@@ -115,8 +115,8 @@ option {padding-left: 1em;}
 /*-- #  end box user name and all files  >> fileuser.html  */
 
 /* start Downlod template >> download.html */
-#data_file {float:left;margin-left:5px;}
-#data_file_down {float:right}
+#data_file {float:left;}
+#data_file_down {float:right;margin-left:5px;}
 .wait {font-size:250%;}
 /* # End Downlod template >> download.html */
 
@@ -130,3 +130,5 @@ option {padding-left: 1em;}
 #index_body{background-position:right top;}
 #content_index_body  {float:right;}
 .bn_up {margin-left:60px;margin-top:-8px;}
+
+.rebort{background-position:86% 50%;}

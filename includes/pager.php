@@ -56,7 +56,7 @@ class SimplePager
 
 		// Add a previous page link
 		if ($this->totalPages > 1 && $this->currentPage > 1)
-			($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '<a class="paging" href="' . $link . '-' . ($this->currentPage-1) . '.html">'. $lang['PREV'] .'</a>&nbsp;&nbsp;' : $re .= '<a class="paging" href="' . $link . '&amp;page=' . ($this->currentPage-1) . '">'. $lang['PREV'] .'</a>&nbsp;&nbsp;';
+			($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '<a class="paging" href="' . $link . '-' . ($this->currentPage-1) . '.html">'. $lang['PREV'] .'</a>' : $re .= '<a class="paging" href="' . $link . '&amp;page=' . ($this->currentPage-1) . '">'. $lang['PREV'] .'</a>';
 
 		if ($this->currentPage > 3)		
 			($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '<a class="paging" href="' . $link . '-1.html">1</a>' . (($this->currentPage > 5) ? '...' : '') : $re .= '<a class="paging" href="' . $link . '&amp;page=1">1</a>' . (($this->currentPage > 5) ? '...' : '');
@@ -67,9 +67,9 @@ class SimplePager
 			if ($current < 1 || $current > $this->totalPages)
 				continue;
 			else if ($current != $this->currentPage)
-				($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '<a href="'. $link .'-'.($current).'.html" class="paging">'. $current .'</a>&nbsp;' : $re .= '<a href="'. $link .'&amp;page='.($current).'" class="paging">'. $current .'</a>&nbsp;';
+				($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '<a href="'. $link .'-'.($current).'.html" class="paging">'. $current .'</a>' : $re .= '<a href="'. $link .'&amp;page='.($current).'" class="paging">'. $current .'</a>';
 			else
-				$re .= '<strong class="here_page">'. $current .'</strong>&nbsp;';
+				$re .= '<strong class="here_page">'. $current .'</strong>';
 		}
 
 		if ($this->currentPage <= ($this->totalPages-3))
@@ -81,7 +81,7 @@ class SimplePager
 
 		// Add a next page link
 		if ($this->totalPages > 1 && $this->currentPage < $this->totalPages)
-			($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '&nbsp;&nbsp;<a class="paging" href="' . $link . '-' . ($this->currentPage+1) . '.html">'. $lang['NEXT'] .'</a>' :  $re .= '&nbsp;&nbsp;<a class="paging" href="' . $link . '&amp;page=' . ($this->currentPage+1) . '">'. $lang['NEXT'] .'</a>';
+			($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '<a class="paging" href="' . $link . '-' . ($this->currentPage+1) . '.html">'. $lang['NEXT'] .'</a>' :  $re .= '<a class="paging" href="' . $link . '&amp;page=' . ($this->currentPage+1) . '">'. $lang['NEXT'] .'</a>';
 
 		$re .= '</div>'; 
 

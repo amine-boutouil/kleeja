@@ -13,6 +13,9 @@
 		exit('no directly opening : ' . __file__);
 	}
 
+	$stylee	= "admin_check_update";
+	$error = false;
+	$update_link = $config['siteurl'] . '/install/update.php?lang=' . $config['language'];
 	
 	//get data from kleeja database
 	$b_data = fetch_remote_file('http://www.kleeja.com/check_vers/?i=' . urlencode($_SERVER['SERVER_NAME']) . '&v=' . KLEEJA_VERSION, false, 5);
@@ -20,7 +23,7 @@
 	if ($b_data === false && !isset($_GET['show_msg']))
 	{
 		$text	= $lang['ERROR_CHECK_VER'];
-		$stylee	= "admin_err";
+		$error	= true;
 	}
 	else
 	{
@@ -35,19 +38,15 @@
 		if (version_compare(strtolower(KLEEJA_VERSION), strtolower($version_data), '<'))
 		{
 			$text	= $lang['UPDATE_KLJ_NOW'];
-			$stylee	= "admin_err";
+			$error = true;
 		}
 		else if (version_compare(strtolower(KLEEJA_VERSION), strtolower($version_data), '='))
 		{
-			
 			$text	= $lang['U_LAST_VER_KLJ'];
-			$stylee	= "admin_info";
-			
 		}
 		else if (version_compare(strtolower(KLEEJA_VERSION), strtolower($version_data), '>'))
 		{
 			$text	= $lang['U_USE_PRE_RE'];
-			$stylee	= "admin_info";
 		}
 		
 		//lets recore it
@@ -93,7 +92,7 @@
 			//clean cache
 			delete_cache('data_config');
 			
-		//}	
+		//}
 	}
 	
 	//then go back  to start

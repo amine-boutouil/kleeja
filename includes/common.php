@@ -265,7 +265,7 @@
 	}
 
 	//install.php exists
-	if (file_exists(PATH . 'install') && !defined('IN_ADMIN') && !defined('IN_LOGIN'))
+	if (file_exists(PATH . 'install') && !defined('IN_ADMIN') && !defined('IN_LOGIN') && !defined('DEV_STAGE')) 
 	{
 		kleeja_info($lang['WE_UPDATING_KLEEJA_NOW'], $lang['SITE_CLOSED']);
 	}

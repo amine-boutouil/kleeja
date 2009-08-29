@@ -37,7 +37,7 @@
 		
 		if (version_compare(strtolower(KLEEJA_VERSION), strtolower($version_data), '<'))
 		{
-			$text	= $lang['UPDATE_KLJ_NOW'];
+			$text	= sprintf($lang['UPDATE_NOW_S'] , KLEEJA_VERSION, strtolower($version_data)) . '<br /><br />' . $lang['UPDATE_KLJ_NOW'];
 			$error = true;
 		}
 		else if (version_compare(strtolower(KLEEJA_VERSION), strtolower($version_data), '='))

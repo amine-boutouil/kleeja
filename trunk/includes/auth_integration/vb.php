@@ -40,6 +40,12 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 			$forum_user	= $config['MasterServer']['username'];
 			$forum_pass	= $config['MasterServer']['password'];
 			$forum_prefix= $config['Database']['tableprefix'];
+			
+			//some people change their db charset 
+			if(isset($config['Mysqli']['charset']))
+			{
+				$forum_db_charset = $config['Mysqli']['charset'];
+			}
 		} 
 		else
 		{
@@ -53,6 +59,12 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 		$forum_user	= $script_user;
 		$forum_pass	= $script_pass;
 		$forum_prefix = $script_prefix;
+				
+		//some people change their db charset 
+		if(isset($script_db_charset))
+		{
+			$forum_db_charset = $script_db_charset;
+		}
 	}
 	
 	if(empty($forum_srv) || empty($forum_user) || empty($forum_db))
@@ -64,8 +76,16 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 	
 	//if(!preg_match('/utf/i',strtolower($script_encoding)))
 	//{
-	$charset_db = $SQLVB->client_encoding();
-	$SQLVB->set_names($charset_db);
+	if(isset($forum_db_charset))
+	{	//config
+		$SQLVB->set_names($forum_db_charset);
+	}
+	else //auto
+	{
+		$charset_db = $SQLVB->client_encoding();
+		$SQLVB->set_names($charset_db);
+	}
+	
 	//}
 	//$mysql_version = @mysql_get_server_info($SQLVB->connect_id);
 				

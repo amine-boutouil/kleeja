@@ -506,9 +506,9 @@ $lang = array_merge($lang, array(
 	'T_CLEANING_FILES_NOW'		=> 'جاري تنفيذ عمليه حذف الملفات الخامله حالياً على دفعات تفادياً للضغط ,وقت العمليه يعتمد على عدد الملفات وحجمها ...',
 	'WE_UPDATING_KLEEJA_NOW'	=> 'الموقع مغلق للتطوير , يرجى الصبر ...',
 	'HOW_UPDATE_KLEEJA'			=> 'كيف تقوم بتحديث كليجا ؟',
-	'HOW_UPDATE_KLEEJA_STEP1'	=> 'اذهب لموقع <a href="http://www.kleeja.com/">Kleeja.com</a>, وتوجه لصفحة التحميل وحمل آخر نسخه , ولو توفرت نسخه الترقيه فحملها.',
-	'HOW_UPDATE_KLEEJA_STEP2'	=> 'قم بفك الضغط على الملف الذي قمت بتحميله ورفعه على موقعك باستبدال الملفات القديمه بالجديده <b>عدا ملف</b> config.php.',
-	'HOW_UPDATE_KLEEJA_STEP3'	=> 'بعد اتمام عملية رفع ملفات النسخه الجديده , قم بطلب العنوان التالي للتحديث :',
+	'HOW_UPDATE_KLEEJA_STEP1'	=> 'توجه الى موقع <a href="http://www.kleeja.com/">Kleeja.com</a> ثم الى صفحة التحميل وقم بتنزيل حمل آخر نسخه صدرت من الاسكربت في حال توفر سكربت الترقيه قم بتحميله',
+	'HOW_UPDATE_KLEEJA_STEP2'	=> ' بعد ذلك قم بفك الضغط عن الملف الذي قمت بتحميله ثم رفعه الى موقعك لاستبدال الملفات القديمه بالجديده <b> عدا ملف config.php</b>.',
+	'HOW_UPDATE_KLEEJA_STEP3'	=> 'بعد اتمام الخطوه السابقه بنجاح ,  قم بطلب العنوان التالي للتحديث قاعدة بيانـات الاسكربت:',
 
 	//last line of this file ...					 
 	'S_TRANSLATED_BY' 			=> 'Translated By <a href="http://www.fenix4web.com/">Fenix4Web</a>',

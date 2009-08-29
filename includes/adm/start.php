@@ -2,25 +2,25 @@
 	//start
 	//part of admin extensions
 	//begin of admin
-	
+
 	//copyright 2007-2009 Kleeja.com ..
 	//license http://opensource.org/licenses/gpl-license.php GNU Public License
 	//$Author$ , $Rev$,  $Date::                           $
-	
-	
+
+
 	// not for directly open
 	if (!defined('IN_ADMIN'))
 	{
 		exit('no directly opening : ' . __file__);
 	}
-	
+
 		//style of
 		$stylee			= "admin_start";
 		//last visit
 		$last_visit		= (defined('LAST_VISIT')) ?  date("[d-m-Y], [h:i a] ", LAST_VISIT) : false;
 		$h_lst_files	= basename(ADMIN_PATH) . '?cp=files&amp;last_visit=' . (defined('LAST_VISIT') ? LAST_VISIT : time() - 3600*12);
 		$h_lst_imgs		= basename(ADMIN_PATH) . '?cp=img_ctrl&amp;last_visit=' . (defined('LAST_VISIT') ? LAST_VISIT : time() - 3600*12);
-		
+
 		//data
 		$lst_reg			= (empty($stat_last_user)) ? $lang['UNKNOWN'] : $stat_last_user;
 		$files_number 		= $stat_files;
@@ -40,7 +40,7 @@
 		$s_last_yahoo		= ($stat_last_yahoo == 0) ? '[ ? ]' : date("d-m-Y h:i a", $stat_last_yahoo);
 		$s_yahoo_num		= $stat_yahoo_num;
 		$usernamelang		= sprintf($lang['KLEEJA_CP_W'], $username);
-		
+
 		//size board by percent
 		$per	= $stat_sizes / ($config['total_size'] * 1048576);
 		$per1	= round($per*100, 2);
@@ -48,7 +48,7 @@
 
 		//ppl must know about kleeja version!
 		$kleeja_version	 = '<a href="' . basename(ADMIN_PATH) . '?cp=check_update" title="' . $lang['R_CHECK_UPDATE'] . '">' . KLEEJA_VERSION . '</a>';
-		
+
 		//admin messages system
 		$ADM_NOTIFICATIONS = array();
 		
@@ -70,11 +70,11 @@
 									
 			($hook = kleeja_run_hook('admin_update_now')) ? eval($hook) : null; //run hook 
 		}
-		
-		
+
+
 		//check upload_max_filesize
-		$u_e_s = array_values($u_exts);
-		$g_e_s = array_values($g_exts);
+		$u_e_s = isset($u_exts) && is_array($u_exts) ? array_values($u_exts) : array(0);
+		$g_e_s = isset($g_exts) && is_array($g_exts) ? array_values($g_exts) : array(0);
 		asort($u_e_s);
 		asort($g_e_s);
 		if(strpos($upload_max_filesize, 'M') !== false)
@@ -95,7 +95,7 @@
 									'msg'=> sprintf($lang['PHPINI_FILESIZE_SMALL'] , Customfile_size($big_size_is), Customfile_size($upload_max_filesize_s))
 									);
 		}
-		
+
 		//check post_max_size
 		if(strpos($post_max_size, 'M') !== false)
 		{
@@ -105,9 +105,9 @@
 		{
 			$post_max_size_s = ((int) trim(str_replace('G', '', $post_max_size))) * 1073741824;
 		}
-		
+
 		$post_max_size_s_must_be = ($config['filesnum'] * $big_size_is) + 5242880;//+ 5 mega to make sure it's ok
-		
+
 		if(!empty($post_max_size) && $post_max_size_s < $post_max_size_s_must_be)
 		{
 			$ADM_NOTIFICATIONS[]  = array(
@@ -116,7 +116,7 @@
 									'msg'=> sprintf($lang['PHPINI_MPOSTSIZE_SMALL'] , $config['filesnum'], Customfile_size($post_max_size_s_must_be))
 									);		
 		}
-	
+
 		//if 24 hours, lets chcek agian !
 		if((time() - $v['last_check']) > 86400 && !$v['msg_appeared'] && $_SERVER['SERVER_NAME'] != 'localhost')
 		{
@@ -124,8 +124,8 @@
 			$SQL->close();
 			exit;
 		}	
-		
-		
+
+
 		//cached templates
 		$there_is_cached = false;
 		$cached_file = $root_path . 'cache/styles_cached.php';
@@ -137,26 +137,25 @@
 								'msg'=> sprintf($lang['CACHED_STYLES_DISC'] , '<a href="' . basename(ADMIN_PATH) . '?cp=styles&amp;sty_t=cached">' . $lang['CLICKHERE'] .'</a>')
 							);
 		}
-		
+
 		//if config not safe
 		if((bool) (@fileperms($root_path . 'config.php') & 0x0002))
 		{
 			$ADM_NOTIFICATIONS[]  = array('id' => 'config_perm', 'msg_type'=> 'info', 'title'=> $lang['NOTE'], 'msg'=> $lang['CONFIG_WRITEABLE']);
 		}
-		
+
 		//no htaccess
 		if(!file_exists($root_path . $config['foldername'] . '/.htaccess'))
 		{
 			$ADM_NOTIFICATIONS[]  = array('id' => 'htaccess_u', 'msg_type'=> 'error', 'title'=> $lang['WARN'], 'msg'=> sprintf($lang['NO_HTACCESS_DIR_UP'], $config['foldername']));
 		}
-		
+
 		if(!file_exists($root_path . $config['foldername'] . '/thumbs/.htaccess'))
 		{
 			$ADM_NOTIFICATIONS[]  = array('id' => 'htaccess_t', 'msg_type'=> 'error', 'title'=> $lang['WARN'], 'msg'=> sprintf($lang['NO_HTACCESS_DIR_UP_THUMB'], $config['foldername'] . '/thumbs'));
 		}
-		
 
-		
+
 		//check is there any copyright on footer.html if not show pretty msg with peace
 		if(file_exists($STYLE_PATH . 'footer.html'))
 		{
@@ -174,13 +173,13 @@
 				}
 			}
 		}
-		
+
 		//there is cleaning files process now
 		if((int)$config['klj_clean_files_from'] > 0)
 		{
 			$ADM_NOTIFICATIONS[]  = array('id' => 'klj_clean_files', 'msg_type'=> 'info', 'title'=> '', 'msg'=> $lang['T_CLEANING_FILES_NOW']);
 		}
-		
+
 		($hook = kleeja_run_hook('default_admin_page')) ? eval($hook) : null; //run hook 
-		
+
 #<--- EOF

@@ -318,3 +318,25 @@ width:70%;padding:5px 25px;font:bold 12px Tahoma, Arial, Helvetica, sans-serif;}
 
 .goback{ background:#EEE6B7;margin:2px auto;padding:5px 10px;font:bold 12px Tahoma, Arial, Helvetica, sans-serif;}
 .goback:hover{background:#fff;color:#FF8000}
+
+/* for check_update*/
+.update_info{
+padding: 15px 8px 15px 8px; border: 1px dashed #FFFF00;  background-color: #FFFFCC; color:#6A5236;font-weight:bold;
+}
+.update_error{
+padding: 15px 8px 15px 8px; border: 1px dashed #fff;  background-color: #BC2A4D; color:#fff;font-weight:bold;
+}
+.update_error a, .update_error a:visited{
+color:#fff;
+text-decoration:underline;
+}
+.update_list {
+
+}
+.update_list .link_copy {
+padding: 3px; border: 1px solid #ccc;  background-color: #ff; color:#666;
+direction:ltr;
+}
+
+/* / for check_update*/
+

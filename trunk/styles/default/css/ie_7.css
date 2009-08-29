@@ -40,3 +40,12 @@ ul.tabbernav li.tabberactive a:hover{text-decoration:none;}
 /* ALL buttons */
 #buttons ,.buttons{padding:4px 10px;}
 /* ## ALL buttons */
+
+/**  start The main menu at the top **/        
+#top_menu {width: 100%;height: 43px}
+#top_menu  .m3nu {width: 80%;height: 43px;font-size: 12px;font-weight: bold;list-style-type: none;margin: 0 auto;}
+#top_menu  ul.m3nu li {float: left;}
+#top_menu  ul.m3nu li a {height: 43px;color: #777;text-decoration: none;        display: block;float: left;padding: 8px 15px 0;}
+#top_menu  ul.m3nu li a:hover {color: #333;background: url(../images/current-bg.gif) top left repeat-x;}
+#top_menu  ul.m3nu li a.current{color: #FFF;background: url(../images/current-bg.gif) top left repeat-x;padding:5px 15px;}
+/** # End The main menu at the top **/  

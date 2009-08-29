@@ -17,34 +17,39 @@
 /* #  right menu */
 
 /*  START FOR ONLINE */
-.onlineall ,.onlinevisitor ,.onlineusers {float:right;margin-left:4px;margin-right:4px;}
+.onlineall ,.onlinevisitor ,.onlineusers {float:left;margin-left:4px;margin-right:4px;}
 /*  #  END FOR ONLINE */
 
 /**  start The main menu at the top **/        
-#top_menu  .m3nu {margin-right:auto;margin-left:auto;}
-#top_menu  ul.m3nu li {margin-right:5px;}
-#top_menu  ul.m3nu li a {padding-top:8px;padding-right:15px}
-#top_menu  ul.m3nu li a.current{padding-top:12px;padding-right:15px}
-/** # End The main menu at the top **/        
+#top_menu {width: 100%;height: 43px;float: left;}
+#top_menu  .m3nu {width: 80%;height: 43px;font-size: 12px;font-weight: bold;list-style-type: none;margin: 0 auto;}
+#top_menu  ul.m3nu li {float: right;}
+#top_menu  ul.m3nu li a {height: 43px;color: #777;text-decoration: none;        display: block;float: left;padding: 8px 15px 0;}
+#top_menu  ul.m3nu li a:hover {color: #333;background: url(../images/current-bg.gif) top left repeat-x;}
+#top_menu  ul.m3nu li a.current{color: #FFF;background: url(../images/current-bg.gif) top left repeat-x;padding:2px 15px;padding-top:12px;}
+/** # End The main menu at the top **/     
 
 /* start index body  >> index_body.html  */
 #index_body{background:url(../images/indexbody.png) no-repeat left top;}
+#content_index_body  {float:right;width: 68%;}
 .agree{text-align:right;}
 .bn_up  input{margin-right:20px;}
 /* tabs */
-.tabbertab {width:74%;border:0px solid #aaa;}
+.tabber {width:100%}
+.tabbertab {border:0px solid #aaa;}
 ul.tabbernav li a{padding-top:5px;padding-bottom:5px;padding-right:14px;padding-left:14px; margin-left:5px;border:0px}
 ul.tabbernav li a:hover{padding-top:5px;padding-bottom:5px;padding-right:14px;padding-left:14px;text-decoration:none;}
 ul.tabbernav li.tabberactive a{padding-top:5px;padding-bottom:5px;padding-right:14px;padding-left:14px;}
 ul.tabbernav li.tabberactive a:hover{text-decoration:none;}
+ul.tabbernav li a:hover{background:#ccc;}
 /* # tabs  */
 
 /* divx */
-#divx {position:absolute;right:90px;bottom:100px;background-color:#C8C8C8;}
+#divx {width:100%;position:absolute;right:80px;bottom:40px;text-align:right;}
 /* #  divx */
 
 /* ALL buttons */
-#buttons ,.buttons{background:#FFA500 url(../images/headlinebg.png) repeat-x top right;padding:4px 10px;}
+#buttons ,.buttons{background:#FFA500 url(../images/headlinebg.png) repeat-x top right;padding:4px 5px;}
 /* ## ALL buttons */
 
 /* start Downlod template >> download.html */
@@ -79,9 +84,9 @@ ul.tabbernav li.tabberactive a:hover{text-decoration:none;}
 
 /*-- start  box user name and all files  >> fileuser.html  */
 #boxfileuser ,#filecplink {background:#fff;}
-#boxfileuser  .box_user,#boxfileuser  .us3r_n4me {background:#DFDFDF url(../images/imguser.png) no-repeat 96% 50%;}
+#boxfileuser  .box_user,#boxfileuser  .us3r_n4me {display:inline;background:#DFDFDF url(../images/imguser.png) no-repeat 96% 50%;}
 #boxfileuser  .us3r_n4me {background:#DFDFDF url(../images/boxfileuser.png) no-repeat 96% 50%;}
-#boxfileuser  .public {background:#EDF1F8}
+#boxfileuser  .public {width:64%;margin:5px auto 5px 1px;background:#EDF1F8;padding:5px 10px;color:#555;border:1px dashed #EDF1F8;font-weight:normal;}
 #filecplink {height:100%;}
 .tabledata thead th {background:#F68618 url(../images/headine_bg.png) repeat-x center right;}
 /*-- #  end box user name and all files  >> fileuser.html  */
@@ -105,9 +110,14 @@ ul.tabbernav li.tabberactive a:hover{text-decoration:none;}
 /* #  stats template >> stats.html  */
 
 /*-- start Profile template >> profile.html  */
-#profile .boxdata .tit{background:#F68618 url(../images/hedline_bg.png) repeat-x top right;}
-#profile .boxdata .bq {line-height:16px;padding:1px 5px;}
-#profile .boxdata .in{line-height:16px;padding:1px 5px;margin-right:10px;}
+#profile .boxdata{float:left;width:28%;height:220px;border:1px solid #bbb;background-color:#DDD;margin:5px;}
+#profile .boxdata .tit{background:#F68618 url(../images/headline_bg.png) repeat-x top right;padding:10px;margin:1px;font:bold 12px tahoma, sans-serif;color:#111;text-align:center;}
+#profile .boxdata .in{margin-right:10px;}
+
 /*-- End Profile template >> profile.html   */
 
 .all_boxes textarea{margin-top:10px;padding:5px; }
+
+/* box  ALL templates  */
+#content {float:right;width:68%}
+/* # end box  ALL templates  */

@@ -17,7 +17,7 @@ if (!defined('IN_COMMON'))
 function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = false)
 {
 	// ok, i dont hate vb .. but i cant feel my self use it ... 
-	global $script_path, $lang, $script_encoding, $script_srv, $script_db, $script_user, $script_pass, $script_prefix, $config, $usrcp, $userinfo;
+	global $script_path, $lang, $script_encoding, $script_srv, $script_db, $script_user, $script_pass, $script_prefix, $config, $usrcp, $userinfo, $script_db_charset;
 	
 	if(isset($script_path))
 	{				

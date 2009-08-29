@@ -178,7 +178,7 @@ background:#FF9933 url(../images/headline_bg.png) repeat-x top right;color:#111;
 
 /* pagination */
 .pagination {margin:2px 0;float:right;}
-.pagination  a{padding:3px 9px;color:#333;}
+.pagination  a{padding:3px 9px;color:#333;margin:0 2px;}
 .paging {background:#C8C8C8 url(../images/headline_bg.png) repeat-x center right;border: 1px solid #999;font-size:10px;text-align:center;}
 .here_page ,.paging:hover,.paging {-moz-border-radius-topleft: 10px;-webkit-border-top-left-radius: 10px;-moz-border-radius-bottomright: 10px;-webkit-border-bottom-right-radius: 10px;}
 .here_page ,.paging:hover{padding:3px 9px;border: 1px solid #888;font-size:10px;color:#BD5900;background:#FFF8C6 url(../images/headline_bg.png) repeat-x center right;text-align:center;text-decoration:none;}

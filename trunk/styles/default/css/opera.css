@@ -4,3 +4,18 @@
 # copyright 2007-2009  ..
 */
 
+/*  START FOR ONLINE */
+.onlineall ,.onlinevisitor ,.onlineusers {float:right;margin-left:4px;margin-right:4px;}
+/*  #  END FOR ONLINE */
+
+/*-- start Profile template >> profile.html  */
+#profile .boxdata .bq {line-height:16px;padding:1px 5px;}
+#profile .boxdata .in{line-height:16px;padding:1px 5px;margin-right:20px;}
+/*-- End Profile template >> profile.html   */
+
+/* pagination */
+.pagination {padding:6px;}
+.paging {background:#C8C8C8 url(../images/headlinebg.png) repeat-x center right;margin:0 2px;padding:3px 6px;}
+.here_page {background:#FFF8C6 url(../images/headlinebg.png) repeat-x center right;margin:0 2px;padding:3px 6px; }
+.here_page ,.paging:hover{background:#FFF8C6 url(../images/headlinebg.png) repeat-x center right;}
+/* pagination */

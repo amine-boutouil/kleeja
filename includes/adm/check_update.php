@@ -15,7 +15,7 @@
 
 	$stylee	= "admin_check_update";
 	$error = false;
-	$update_link = $config['siteurl'] . '/install/update.php?lang=' . $config['language'];
+	$update_link = $config['siteurl'] . 'install/update.php?lang=' . $config['language'];
 	
 	//get data from kleeja database
 	$b_data = fetch_remote_file('http://www.kleeja.com/check_vers/?i=' . urlencode($_SERVER['SERVER_NAME']) . '&v=' . KLEEJA_VERSION, false, 5);

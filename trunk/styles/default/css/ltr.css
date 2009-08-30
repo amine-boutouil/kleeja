@@ -59,8 +59,8 @@ img.right {float: left;margin-right:15px;}
 /* ##  End  System Messages */
 
 /*  right menu */
-#right_menu{width:10%;float:left;padding:5px;}
-#right_menu .list{margin-right:16px;width: 180px;}
+#right_menu{width:200px;float:left;padding:5px;margin:0 auto}
+#right_menu .list{margin-left:16px;width: 180px;}
 #right_menu .list ul{list-style-type: none;}
 #right_menu .list span{background:url(../images/menu-right-top.png) no-repeat;height:36px;width:160px;display:block;color:#000;padding:0px 10px;font-weight:bold;text-align:left;border-bottom: 1px solid #666;}
 #right_menu .list b{background:url(../images/menu_right_bottom.png) no-repeat;height:37px;width:160px;display:block;padding:0px 10px;font-weight:bold;color: #F1F7E1;}
@@ -75,7 +75,7 @@ img.right {float: left;margin-right:15px;}
 /*# END extras  header and  footer template */
 
 /* divx */
-#divx {float:left;background-color:#C8C8C8;padding-top:4px;position:fixed;left:4px;bottom:1px;text-align:left;color:#555;text-shadow: 0px 1px rgb(247, 247, 247)}
+#divx {float:left;padding-top:4px;position:fixed;left:9%;bottom:120px;text-align:left;line-height:16px;color:#555;text-shadow: 0px 1px rgb(247, 247, 247)}
 #divx a,#divx a:link{color:#CF6600;}
 #divx a:hover{color:#000;}
 /* #  divx */
@@ -96,7 +96,7 @@ img.right {float: left;margin-right:15px;}
 .fileReport a {color:#D88181;font-size:110%;}
 .fileReport a:hover {color:#111;}
 .fileReport:hover {background-color:#E8E8E8;color:#111;}
-.wait {color:#F04C2D;font-size:300%;font-weight:700;padding:3px 10px;text-align:center;}
+.wait {color:#F04C2D;font-size:240%;font-weight:700;padding:3px 10px;text-align:center;}
 #download {text-align:center;margin:4px auto;}
 #download  div{margin-top:1px;}
 #download a {background:#A2C900;border-top:3px solid #6C9F01;border-bottom:3px solid #6C9F01;color:#fff;font-size:100%;font-weight:700;padding:10px 30px;}
@@ -118,8 +118,8 @@ img.right {float: left;margin-right:15px;}
 /* #  rules template >> rules.html  */
 
 /* start index body  >> index_body.html  */
-#content_index_body  {float:right;width:70%;padding:5px 15px;}
-#index_body{background:url(../images/index_body.png) no-repeat right top;}
+#content_index_body  {float:left;width:68%;text-align:left;display:inline}
+#index_body{padding:5px 15px;background:url(../images/index_body.png) no-repeat right top;}
 .wolcome_msg {width:76%;text-indent:40px;font-size:10px;color:#777;text-shadow: 0px 1px rgb(247, 247, 247);padding:3px 6px;}
 .siten4me{font-size:13px;padding:3px;color:#BE1111}
 .agree{font-size:10px;font-weight:bold;padding:1px 6px;}
@@ -148,12 +148,12 @@ ul.tabbernav li.tabberactive a:hover{color:#F68618;}
 /* # tabs  */
 
 /*  START FOR ONLINE */
-.online{width:100%;float:left;padding:4px 0;margin-bottom:3px;}
+.online{width:100%;float:left;padding:4px;margin-bottom:3px;}
 .onlineall ,.onlinevisitor ,.onlineusers {float:left;display:inline;padding:5px 10px;border:1px outset #E2E2E2;-moz-border-radius:6px;-webkit-border-radius:6px;-khtml-border-radius:6px;border-radius:6px;}
 .onlineall  {background:url(../images/number_online_all.gif) no-repeat 2% 50%;padding-left:20px;color:#CC3300}
 .onlinevisitor{color:#000}
 .onlineusers{color:#555}
-.name_users{background:#FFF3DF;margin-bottom:7px;margin-top:4px;display:block;float:left;color:#555;padding:3px 14px;border:1px inset #444;-moz-border-radius:6px;-webkit-border-radius:6px;-khtml-border-radius:6px;border-radius:6px;}
+.name_users{background:#FFF3DF;margin-bottom:7px;margin-top:4px;margin-left:8px;display:block;float:left;color:#555;padding:4px 12px;border:1px inset #444;-moz-border-radius:6px;-webkit-border-radius:6px;-khtml-border-radius:6px;border-radius:6px;}
 /*  #  END FOR ONLINE */
 
 /*  ALL inputs */
@@ -218,7 +218,7 @@ background:#FF9933 url(../images/headline_bg.png) repeat-x top left;color:#111;b
 #boxfileuser .uname{color:#006CD8;font: bold 18px tahoma,Verdana, Helvetica, sans-serif;text-align:center}
 #boxfileuser .nums{font-size:32px;text-align:center}
 #filecplink  .copylink {float:left;padding:3px 6px;color:#D20000;font: bold 12px tahoma,sans-serif;}
-#filecplink .link_user{float:right;width:290px;padding:2px;direction:ltr;}
+#filecplink .link_user{float:left;width:290px;padding:2px;direction:ltr;}
 .tabledata {width:100%;background-color:#CECECE;color:#111;font-size:11px;border:2px ridge #eee;}
 .tabledata th ,.tabledata td {padding:5px;border-right:1px solid #aaa;border-top: 1px solid #eee;border-left:1px solid #eee;border-bottom: 1px solid #aaa; text-align:center; }
 .tabledata .odd  {background:#D4D0C8; text-align:left;width:50%;}
@@ -259,7 +259,7 @@ background:#FF9933 url(../images/headline_bg.png) repeat-x top left;color:#111;b
 #profile .boxdata p  {padding:2px;text-align:center;}
 #profile .boxdata .tit{background:#F68618 url(../images/headline_bg.png) repeat-x top right;padding:10px;margin:1px;font:bold 12px tahoma, sans-serif;color:#111;text-align:center;}
 #profile .boxdata .bq {color:#111;line-height:18px;padding:0 5px;}
-#profile .boxdata .in{color:#111;line-height:18px;padding:0 5px;margin-right:8%;}
+#profile .boxdata .in{color:#111;line-height:18px;padding:0 5px;margin-left:9%;}
 #profile .boxdata .biguser {color:#D61B1B;line-height:30px;padding:5px;font: bold 14px tahoma, sans-serif;text-align:center;}
 .buttons_center {line-height:24px;padding:5px;text-align:center;margin:3px auto;}
 /*-- End Profile template >> profile.html   */

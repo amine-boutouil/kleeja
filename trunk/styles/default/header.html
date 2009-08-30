@@ -18,8 +18,12 @@
 <link rel="stylesheet" type="text/css" href="{STYLE_PATH}css/ie_7.css" />
 </IS_BROWSER>
 <IF NAME="{lang.DIR}==ltr">
-<link rel="stylesheet" type="text/css" href="{STYLE_PATH}ltr_css/ltr_screen.css" />
+<link rel="stylesheet" type="text/css" href="{STYLE_PATH}css/ltr_screen.css" />
 </IF>
+<IF NAME="{lang.DIR}==ltr">
+<link rel="stylesheet" type="text/css" href="{STYLE_PATH}css/ltr_ie6.css" />
+</IF>
+
 <script type="text/javascript">
  var number_of_uploads={config.filesnum};
  var LANG_PAST_URL_HERE ="{lang.PAST_URL_HERE}";

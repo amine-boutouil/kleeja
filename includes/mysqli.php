@@ -16,7 +16,7 @@ if (!defined('IN_COMMON'))
 	exit('no directly opening : ' . __file__);
 }  
 
-	
+
 if(!defined("SQL_LAYER")):
 
 define("SQL_LAYER","mysqli");
@@ -378,16 +378,17 @@ class SSQL
 				function error_msg($msg)
 				{
 					global $dbprefix;
-					
+
 					if(!$this->show_errors)
 					{
 						return;
 					}
-					
-					$error_no  = mysqli_errno($this->connect_id);
-					$error_msg = mysqli_error($this->connect_id);
+
+
+					$error_no  = $this->connect_id ? @mysqli_errno($this->connect_id) : @mysqli_connect_errno();
+					$error_msg = $this->connect_id ? @mysqli_error($this->connect_id) : @mysqli_connect_error();
 					$error_sql = @current($this->debugr[$this->query_num+1]);
-					
+
 					//some ppl want hide their table names
 					if(!defined('DEV_STAGE'))
 					{
@@ -396,7 +397,7 @@ class SSQL
 						$error_sql = preg_replace("#\s{1,3}(from|update|into)\s{1,3}([a-z0-9]+)\s{1,3}#ie", "' $1 <span style=\"color:blue\">' . substr('$2', 0, 1) . '</span> '", $error_sql);
 						$error_msg = preg_replace("#\s{1,3}(from|update|into)\s{1,3}([a-z0-9]+)\s{1,3}#ie", "' $1 <span style=\"color:blue\">' . substr('$2', 0, 1) . '</span> '", $error_msg);
 					}
-					
+
 					echo "<html><head><title>ERROR IM MYSQL</title>";
 					echo "<style>BODY{FONT-FAMILY:tahoma;FONT-SIZE:12px;}.error {}</style></head><body>";
 					echo '<br />';
@@ -418,15 +419,22 @@ class SSQL
 					@$this->close();
 					exit();
 				}
-				
+
 				/*
 				return last error
 				*/
 				function get_error()
 				{
-					return array(mysqli_errno($this->connect_id), mysqli_error($this->connect_id)); 
+					if($this->connect_id)
+					{
+						return array(@mysqli_errno($this->connect_id), @mysqli_error($this->connect_id)); 
+					}
+					else
+					{
+						return array(@mysqli_connect_errno(), @mysqli_connect_error()); 
+					}
 				}
-			
+
 }#end of class
 
 endif;

@@ -17,7 +17,7 @@
 /* #  right menu */
 
 /*  START FOR ONLINE */
-.onlineall ,.onlinevisitor ,.onlineusers {float:left;margin-left:4px;margin-right:4px;}
+.onlineall ,.onlinevisitor ,.onlineusers {float:right;margin-left:4px;margin-right:4px;}
 /*  #  END FOR ONLINE */
 
 /**  start The main menu at the top **/        

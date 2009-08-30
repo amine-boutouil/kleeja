@@ -4,48 +4,12 @@
 # copyright 2007-2009  ..
 */
 
-*{margin:0;padding:0;}
 
-/* start site name and titles all */
-.title-x {background:url(../images/headline_bg.png) repeat-x top right;}
-/* # END site name and titles all */
 
-/*  right menu */
-#right_menu .list span{background:#6B6B6B url(../images/menuright-top.png) no-repeat;height:18px;}
-#right_menu .list b{background:#6B6B6B url(../images/menuightbottom.png) no-repeat;height:12px;}
-#right_menu .list a:hover{background:#B2B2B2 url(../images/rigtmenu.png) repeat;}
-/* #  right menu */
-
-/*  START FOR ONLINE */
-.onlineall ,.onlinevisitor ,.onlineusers {float:left;margin-left:4px;margin-right:4px;}
-/*  #  END FOR ONLINE */
-
-/**  start The main menu at the top **/        
-#top_menu {width: 100%;height: 43px;}
-#top_menu  .m3nu {width: 80%;height: 43px;font-size: 12px;font-weight: bold;list-style-type: none;margin: 0 auto;}
-#top_menu  ul.m3nu li {float: left;}
-#top_menu  ul.m3nu li a {height: 43px;color: #777;text-decoration: none;        display: block;float: left;padding: 8px 15px 0;}
-#top_menu  ul.m3nu li a:hover {color: #333;background: url(../images/current-bg.gif) top left repeat-x;}
-#top_menu  ul.m3nu li a.current{color: #FFF;background: url(../images/current-bg.gif) top left repeat-x;padding:2px 15px;padding-top:12px;}
-/** # End The main menu at the top **/     
-
-/* start index body  >> index_body.html  */
-#index_body{background:url(../images/indexbody.png) no-repeat left top;}
-#content_index_body  {float:right;width: 68%;}
-.agree{text-align:right;}
-.bn_up  input{margin-right:20px;}
-/* tabs */
-.tabber {width:100%}
-.tabbertab {border:0px solid #aaa;}
-ul.tabbernav li a{padding-top:5px;padding-bottom:5px;padding-right:14px;padding-left:14px; margin-left:5px;border:0px}
-ul.tabbernav li a:hover{padding-top:5px;padding-bottom:5px;padding-right:14px;padding-left:14px;text-decoration:none;}
-ul.tabbernav li.tabberactive a{padding-top:5px;padding-bottom:5px;padding-right:14px;padding-left:14px;}
-ul.tabbernav li.tabberactive a:hover{text-decoration:none;}
-ul.tabbernav li a:hover{background:#ccc;}
-/* # tabs  */
+   
 
 /* divx */
-#divx {width:100%;position:absolute;right:80px;bottom:40px;text-align:right;}
+#divx {width:20%;position:absolute;left:70px;bottom:40px;text-align:left;line-height:15px}
 /* #  divx */
 
 /* ALL buttons */

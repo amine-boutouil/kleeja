@@ -121,7 +121,7 @@ option {padding-left: 1em;}
 /* # End Downlod template >> download.html */
 
 /*  START FOR ONLINE */
-.online{float:left;}
+.onlineall ,.onlinevisitor ,.onlineusers {float:left;margin-left:4px;margin-right:4px;}
 .onlineall  {background-position:4% 50%;padding-left:25px;}
 .name_users{float:left;}
 /*  #  END FOR ONLINE */

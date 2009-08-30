@@ -102,7 +102,7 @@
 					//delete from folder ..
 					@kleeja_unlink ($root_path . $row['folder'] . "/" . $row['name']);
 					//delete thumb
-					if (is_file($row['folder'] . "/thumbs/" . $row['name'] ))
+					if (file_exists($root_path . $row['folder'] . "/thumbs/" . $row['name'] ))
 					{
 						@kleeja_unlink ($root_path . $row['folder'] . "/thumbs/" . $row['name'] );
 					}

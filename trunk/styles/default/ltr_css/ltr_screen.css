@@ -1,0 +1,13 @@
+/*
+# Powered by Kleeja .... Kleeja.com
+# Designed by Tar3q .... Tar3q.com
+# copyright 2007-2009  ..
+*/
+/* theme screen stylesheets */
+
+/* import stylesheets and hide from ie/mac \*/
+@import url("ltr.css");
+@import url("reset.css");
+@import url("ltr_opera.css");
+
+/* end import/hide */

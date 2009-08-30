@@ -9,6 +9,7 @@
 <title>{lang.KLEEJA_CP} - {config.sitename}</title>
 <meta http-equiv="Content-Language" content="ar" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/curvycorners.js"></script> 
 <link rel="stylesheet" href="{STYLE_PATH_ADMIN}css/admin_reset.css" type="text/css" />
 <link rel="stylesheet" href="{STYLE_PATH_ADMIN}css/admin_stylesheet.css" type="text/css" />
 <link rel="stylesheet" href="{STYLE_PATH_ADMIN}css/jquery.lightbox.css" type="text/css" />
@@ -24,6 +25,19 @@
 <link rel="stylesheet" type="text/css" href="{STYLE_PATH_ADMIN}css/ie_7.css" />
 <![endif]-->
 <script type="text/javascript">
+	//for opera and ie
+	addEvent(window, 'load', initCorners);
+	function initCorners() 
+	{
+		var settings1 = { tl: { radius: 10 }, tr: { radius: 0 }, bl: { radius: 0 }, br: { radius: 10 }, antiAlias: true }
+		var settings = { tl: { radius: 10 }, tr: { radius: 10 }, bl: { radius: 10 }, br: { radius: 10 }, antiAlias: true }
+		
+		//only tl, br
+		curvyCorners(settings1, "#divheader");
+		//all cornder
+		curvyCorners(settings, "#divmiddle fieldset, #rightmenu");
+	}
+
 	var STYLE_PATH_ADMIN = '{STYLE_PATH_ADMIN}';
 
 	function confirm_from()
@@ -88,6 +102,7 @@
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.js"></script> 
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.lightbox.js"></script> 
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.pulse.js"></script> 
+
 </head>
 <body>
 <!-- start top div header  -->

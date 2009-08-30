@@ -17,7 +17,7 @@
 	($hook = kleeja_run_hook('begin_index_page')) ? eval($hook) : null; //run hook
 	
 	//is kleeja only for memebers ! 
-	if(sizeof($g_exts) == 0 && !$usrcp->name())
+	if(isset($g_exts)  && (sizeof($g_exts) == 0 && !$usrcp->name()))
 	{
 		// Send a 503 HTTP response code to prevent search bots from indexing this message
 		header('HTTP/1.1 503 Service Temporarily Unavailable');

@@ -24,43 +24,45 @@
 	//
 	define('DEV_STAGE', true);
 
-
 	// Report all errors, except notices
 	defined('DEV_STAGE') ? @error_reporting(E_ALL) : @error_reporting(E_ALL ^ E_NOTICE);
 	//Just to check
 	define('IN_PHP6', (version_compare(PHP_VERSION, '6.0.0-dev', '>=') ? true : false));
-
-	//get admin path from config.php
-	$adminpath = isset($adminpath) ? $adminpath : './admin/index.php';
-
-	//admin path
-	define('ADMIN_PATH', $adminpath);
-
+	
 	// start session
 	$s_time = 86400 * 2; // 2 : two days 
-	$s_key = (!empty($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '') . (!empty($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : null);
-	$s_sid = 'klj_' . substr('_' . md5($s_key), 0, 8);
-	@ini_set('session.use_only_cookies', false);
-	@ini_set('session.auto_start', false);
-	//this will help people with some problem with their sessions path
-	//session_save_path('./cache/');
 	if(defined('IN_ADMIN'))
 	{
-		//admin session timeout
-		$admintime = isset($admintime) ? $admintime : 18000;
 		//session_set_cookie_params($admintime);
 		if (function_exists('session_set_cookie_params'))
 		{
-    		session_set_cookie_params($admintime, basename(ADMIN_PATH));
+    		session_set_cookie_params($adm_time, $adm_path);
   		} 
 		elseif (function_exists('ini_set'))
 		{
-    		ini_set('session.cookie_lifetime', $admintime);
-    		ini_set('session.cookie_path', basename(ADMIN_PATH));
+    		ini_set('session.cookie_lifetime', $adm_time);
+    		ini_set('session.cookie_path', $adm_path);
   		}
 	}
+	if(function_exists('ini_set'))
+	{
+		if (version_compare(PHP_VERSION, '5.0.0', 'ge') && substr(PHP_OS, 0 ,3) != 'WIN')
+		{
+			ini_set('session.hash_function', 1);
+			ini_set('session.hash_bits_per_character', 6);
+		}
+		ini_set('session.use_only_cookies', false);
+		ini_set('session.auto_start', false);
+		ini_set('session.use_trans_sid', true);
+		ini_set('session.cookie_lifetime', $s_time);
+		ini_set('session.gc_maxlifetime', $s_time);
+		//
+		//this will help people with some problem with their sessions path
+		//
+		//session_save_path('./cache/');
+	}
 
-	session_name($s_sid);
+	@session_name('sid');
 	@session_start();
 
 
@@ -131,7 +133,10 @@
 	//include files .. & classes ..
 	$path = dirname(__file__) . '/';
 	$root_path = PATH;
+	$adminpath = isset($adminpath) ? $adminpath : './admin/index.php';
+	!defined('ADMIN_PATH') ? define('ADMIN_PATH', $adminpath) : null;
 	$db_type = isset($db_type) ? $db_type : 'mysql';
+
 	include_once ($path . 'version.php');
 	switch ($db_type)
 	{

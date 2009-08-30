@@ -14,22 +14,25 @@
 	define ('PATH' , '../');
 	define ('IN_INDEX' , true);
 	define ('IN_ADMIN' , true);
-	
+
 	if(isset($_GET['go']) && $_GET['go'] == 'login')
 	{
 		define('IN_ADMIN_LOGIN', true);
 	}
-	
+
 	if(isset($_GET['go']) && $_GET['go'] == 'login' && isset($_POST['submit']))
 	{
 		define('IN_ADMIN_LOGIN_POST', true);
 	}
 
-	
+	//we are in admin path, session and cookies require this
+	$adm_path = basename(dirname(__file__), '/') . '/' . basename(__file__);
+	$adm_time = 18000;
+
 	//include imprtant file ..
 	require_once (PATH . 'includes/common.php');
 
-	
+
 	//go to ..
 	$go_to	= isset($_GET['cp']) ? htmlspecialchars($_GET['cp']) : 'start';
 	$username = $usrcp->name();

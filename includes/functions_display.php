@@ -65,11 +65,12 @@ function Saaheader($title, $outscript=false)
 		
 		if($config['siteclose'] == '1' && $usrcp->admin() && !defined('IN_ADMIN'))
 		{
-			//<style>body {height: 30%;}</style>
-			$header = str_replace('<body>', '<body>
+			//add notification bar 
+			$header = preg_replace('/<body([^\>]*)>/i', '<body\\1>
 <!-- site is closed -->
 <p style="width: 100%; text-align:center; background:#FFFFA6; color:black; border:thin;top:0;left:0; position:absolute; width:100%;clear:both;">' . $lang['NOTICECLOSED'] . '</p>
 <!-- //site is closed -->', $header);
+
 		}
 
 		echo $header;

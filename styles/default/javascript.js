@@ -62,9 +62,17 @@
 	//submit
 	function form_submit() 
 	{
-		var load = $('loadbox');
+		setTimeout
+		( 
+			function() 
+			{ 
+				var load = $('loadbox');
+				load.style.display='inline'; 
+				load.src='ajax-loader.gif'
+			},
+			500
+		)
 		var uploader = $("uploader");
-		load.style.display = "inline";
 		uploader.style.display = "none";
 		document.uploader.submit();
 	}

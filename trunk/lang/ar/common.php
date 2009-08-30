@@ -13,8 +13,11 @@ if (empty($lang) || !is_array($lang))
 
 
 $lang = array_merge($lang, array(
-	'HOME' => 'البداية',
+	//language inforamtion
 	'DIR' => 'rtl',
+	'LANG_SMALL_NAME'	=> 'ar-sa',
+
+	'HOME' => 'البداية',
 	'INDEX' => 'الرئيسية',
 	'SITE_CLOSED' => 'الموقع مغلق !',
 	'STOP_FOR_SIZE' => 'متوقف حالياً !',

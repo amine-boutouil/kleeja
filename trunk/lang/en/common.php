@@ -14,7 +14,10 @@ if (empty($lang) || !is_array($lang))
 
 
 $lang = array_merge($lang, array(
+	//language inforamtion
 	'DIR' => 'ltr',
+	'LANG_SMALL_NAME'	=> 'en-us',
+
 	'HOME' => 'Home',
 	'INDEX' => 'Index',
 	'SITE_CLOSED' => 'The website is closed.',

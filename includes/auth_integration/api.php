@@ -1,6 +1,6 @@
 <?php
 //
-//auth integration remote vb with kleeja
+//auth integration remote api with kleeja
 //
 //copyright 2007-2009 Kleeja.com ..
 //license http://opensource.org/licenses/gpl-license.php GNU Public License
@@ -21,14 +21,14 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 	//URL must be begin with http://
 	if(empty($script_path) || $script_path[0] != 'h')
 	{
-		big_error('Forum URL must be begin with http://', sprintf($lang['SCRIPT_AUTH_PATH_WRONG'], 'Vbulletin'));
+		big_error('Forum URL must be begin with http://', sprintf($lang['SCRIPT_AUTH_PATH_WRONG'], 'API'));
 	}
 	
 	//api key is the key to make the query between the remote script and kleeja more secure !
 	//this must be changed in the real use 
 	if(empty($script_api_key))
 	{
-		big_error('Vbulletin api key', 'To connect to the remote Vbulletin you have to write the API key ...');
+		big_error('api key', 'To connect to the remote script you have to write the API key ...');
 	}
 	
 	//if not utf8 and no iconv , i think it's fuckin bad situation
@@ -44,7 +44,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 	}
 
 	/*
-		@see file : docs/kleeja_api.txt
+		@see file : docs/kleeja_(vb,mysmartbb,phpbb)_api.txt
 	*/
 
 	$api_http_query = 'api_key=' . urlencode($script_api_key) . '&' . ($hashed ? 'userid' : 'username') . '=' . urlencode($name) . '&pass=' . urlencode($pass);
@@ -53,8 +53,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 	
 
 	//get it
-	$remote_data = fetch_remote_file($script_path . '/kleeja_api.php?' . $api_http_query);
-
+	$remote_data = fetch_remote_file($script_path . '?' . $api_http_query);
 
 	//no responde
 	//empty or can not connect

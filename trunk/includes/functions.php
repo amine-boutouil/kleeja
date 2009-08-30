@@ -1777,6 +1777,21 @@ function kleeja_log($text, $reset = false)
 //
 function is_browser($b)
 {
+	//is there , which mean -OR-
+	if(strpos($b, ',') !== false)
+	{
+		$e = explode(',', $b);
+		foreach($e as $n)
+		{
+			if(is_browser(trim($n)))
+			{
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
     $u_agent = strtolower($_SERVER['HTTP_USER_AGENT']);
 	$t = trim(preg_replace('/[0-9.]/', '', $b));
 	$r = trim(preg_replace('/[a-z]/', '', $b));

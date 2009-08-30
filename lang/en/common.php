@@ -514,7 +514,7 @@ $lang = array_merge($lang, array(
 	'HOW_UPDATE_KLEEJA_STEP3'	=> 'بعد اتمام الخطوه السابقه بنجاح ,  قم بطلب العنوان التالي للتحديث قاعدة بيانـات الاسكربت:',
 
 	//last line of this file ...					 
-	'S_TRANSLATED_BY' 			=> 'Translated By <a href="http://www.fenix4web.com/">Fenix4Web</a>',
+	'S_TRANSLATED_BY' 			=> '<br />Translated By <a href="http://www.fenix4web.com/">Fenix4Web</a>',
 ));
 
 #<-- EOF

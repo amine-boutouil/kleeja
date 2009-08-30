@@ -78,10 +78,16 @@ if (!defined('IN_COMMON'))
 			
 			$this->HTML = file_get_contents($template_path);
 			$this->_parse($this->HTML);
-			$filename = @fopen($root_path . 'cache/tpl_' . $this->re_name_tpl($template_name) . '.php', 'w');
-			@flock($filename, LOCK_EX); // exlusive look
-			@fwrite($filename, $this->HTML);
-			@fclose($filename);
+			//use 'b' to force binary mode
+			if($filename = @fopen($root_path . 'cache/tpl_' . $this->re_name_tpl($template_name) . '.php', 'wb'))
+			{
+				@flock($filename, LOCK_EX);
+				@fwrite($filename, $this->HTML);
+				@flock($filename, LOCK_UN);
+				@fclose($filename);
+				// Read and write for owner, read for everybody else
+				@chmod($root_path . 'cache/tpl_' . $this->re_name_tpl($template_name) . '.php', 0644);
+			}
         }
 		
 		

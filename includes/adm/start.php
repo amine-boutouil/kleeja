@@ -73,8 +73,8 @@
 
 
 		//check upload_max_filesize
-		$u_e_s = isset($u_exts) && is_array($u_exts) ? array_values($u_exts) : array(0);
-		$g_e_s = isset($g_exts) && is_array($g_exts) ? array_values($g_exts) : array(0);
+		$u_e_s = isset($u_exts) && is_array($u_exts) ? array_values($u_exts) : array(0 => array('size'=>0));
+		$g_e_s = isset($g_exts) && is_array($g_exts) ? array_values($g_exts) : array(0 => array('size'=>0));
 		asort($u_e_s);
 		asort($g_e_s);
 		if(strpos($upload_max_filesize, 'M') !== false)
@@ -86,7 +86,7 @@
 			$upload_max_filesize_s = ((int) trim(str_replace('G', '', $upload_max_filesize))) * 1073741824;
 		}
 		
-		$big_size_is = $u_e_s[0]['size'] > $g_e_s[0]['size'] ? $u_e_s[0]['size'] : $g_e_s[0]['size'];
+		$big_size_is = isset($u_e_s[0]['size']) && ($u_e_s[0]['size'] > $g_e_s[0]['size']) ? $u_e_s[0]['size'] : (isset($g_e_s[0]['size']) ? $g_e_s[0]['size'] : 0);
 		if(!empty($upload_max_filesize) && $upload_max_filesize_s < $big_size_is)
 		{
 			$ADM_NOTIFICATIONS[]  = array(

@@ -1,0 +1,16 @@
+<?php
+//
+//File for remote phpbb3
+//This file must be exists in phpbb3 folder script. 
+//copyright 2007-2009 Kleeja.com ..
+//license http://opensource.org/licenses/gpl-license.php GNU Public License
+//$Author: phpfalcon $ , $Rev: 817 $,  $Date:: 2009-08-12 14:43:06 +0300#$
+//
+
+define('IN_PHPBB', true);
+$phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './';
+$phpEx = substr(strrchr(__FILE__, '.'), 1);
+include($phpbb_root_path . 'common.' . $phpEx);
+
+//change this
+$script_api_key = sha1('123456');

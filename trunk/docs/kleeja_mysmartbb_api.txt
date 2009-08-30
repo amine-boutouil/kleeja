@@ -1,0 +1,8 @@
+<?php
+//
+//File for remote Mysmartbb
+//This file must be exists in mysmartbb folder script. 
+//copyright 2007-2009 Kleeja.com ..
+//license http://opensource.org/licenses/gpl-license.php GNU Public License
+//$Author: phpfalcon $ , $Rev: 817 $,  $Date:: 2009-08-12 14:43:06 +0300#$
+//

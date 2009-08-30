@@ -319,7 +319,7 @@
 
 
 	//clean files
-	if((int) $config['del_f_day'] > 0)
+	if((int) $config['del_f_day'] > 0 && PATH == './')
 	{
 		klj_clean_old_files($config['klj_clean_files_from']);
 	}

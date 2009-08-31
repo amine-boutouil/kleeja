@@ -24,7 +24,7 @@ img.right {float: left;margin-right:15px;}
 /* # END site name and titles all */
 
 /* safe code all box */
-.safe_code {margin:5px 0;padding:10px;border:1px solid #ECCEBB;background:#F9F5F0 url(../images/saf3_code_ltr.gif) no-repeat 100% 50%;}
+.safe_code {margin:5px 0;padding:10px 30px;border:1px solid #ECCEBB;background:#F9F5F0 url(../images/saf3_code_ltr.gif) no-repeat 100% 50%;}
 .safe_code span {padding-left:4px;color:#FF5A00}
 .safe_code input[type="text"]{padding:3px 3px;font-size:12px;}
 .safe_code input[type="text"]:focus {background-color: #ffd ;border: 1px solid #D26900;direction:ltr;padding:3px;font-size:12px;}
@@ -82,36 +82,35 @@ img.right {float: left;margin-right:15px;}
 
 /* start Downlod template >> download.html */
 #file-info {height:230px;margin:5px auto;}
-#data_file {width:46%;height:220px;float:right;background:#C0C0C0 url(../images/bg_tabbertab.png) repeat-x top left;padding:10px;-moz-border-radius:6px;-webkit-border-radius:6px;-khtml-border-radius:6px;border-radius:6px;}
+#data_file {width:46%;float:right;background:#C0C0C0 url(../images/bg_tabbertab.png) repeat-x top left;padding:10px;-moz-border-radius:6px;-webkit-border-radius:6px;-khtml-border-radius:6px;border-radius:6px;}
 #data_file .data_file p {color:#F0502E;font-size:26px;}
 #data_file .t {color:#555;background:#ccc;font-size:12px;text-align:center;border:1px solid #f2f2f2;border-right:5px solid #CCC;border-left:5px solid #CCC;margin-top:10px;padding:2px 5px;}
 #data_file .nup {font-size:18px}
 #data_file ul.data_menu {list-style:none;margin:0;}
 #data_file ul.data_menu li {display:block;background:url(../images/bg_tabbertab_1.png) repeat-x top left;padding:2px 5px 2px 10px;margin-bottom:1px;border-right:5px solid #CCC;border:1px solid #f2f2f2;font-weight:700;color:#333;text-decoration:none;}
 #data_file ul.data_menu li b {color:#040476;}
-#data_file_down {float:left;display:inline;margin-left:10px;width:45%;height:220px;background:#fff url(../images/bg_tabbertab.png) repeat-x bottom left;padding:10px;-moz-border-radius:6px;-webkit-border-radius:6px;-khtml-border-radius:6px;border-radius:6px;}
-#data_file_down .find_x {color:#2B8800;font-size:22px;text-align:center;}
-#data_file_down .find_image {text-align:center;}
+#data_file_down {float:left;display:inline;margin-right:10px;width:45%;background:#fff url(../images/bg_tabbertab.png) repeat-x bottom left;padding:10px;-moz-border-radius:6px;-webkit-border-radius:6px;-khtml-border-radius:6px;border-radius:6px;}
+#data_file_down .find_x {color:#2B8800;font-size:20px;text-align:center;}
+#data_file_down .find_image {text-align:center;padding-top:15px;}
 .fileReport {text-align:center;border-top:2px solid #FFBFBF;border-bottom:2px solid #FFBFBF;cursor:pointer;background-color:#FFE6E6;margin:10px auto;padding:3px 10px;}
 .fileReport a {color:#D88181;font-size:110%;}
 .fileReport a:hover {color:#111;}
 .fileReport:hover {background-color:#E8E8E8;color:#111;}
-.wait {color:#F04C2D;font-size:240%;font-weight:700;padding:3px 10px;text-align:center;}
-#download {text-align:center;margin:4px auto;}
-#download  div{margin-top:1px;}
+.wait {color:#F04C2D;font-size:240%;font-weight:700;padding:3px 10px;}
+#download {text-align:center;margin:3px auto;}
 #download a {background:#A2C900;border-top:3px solid #6C9F01;border-bottom:3px solid #6C9F01;color:#fff;font-size:100%;font-weight:700;padding:10px 30px;}
 #download a:hover {background:#77AA02;}
 /* # End Downlod template >> download.html */
 
 /* stats template >> stats.html */
-#stats  {border:1px solid #CFDFFF;margin:5px 0;padding:10px;font-size:11px;font-weight:700;background:#F0F3F9 url(../images/stats.png) no-repeat 90% 50%;}
+#stats  {border:1px solid #CFDFFF;margin:5px 0;padding:10px 30px;font-size:11px;font-weight:700;background:#F0F3F9 url(../images/stats.png) no-repeat 90% 50%;}
 #stats ul {list-style:circle;list-style-position:inside}
 #stats  ul li span{color:#FF3300;padding:1px}
 #stats .st i{font-size:12px;font-weight:normal;margin-bottom:5px;padding:4px 8px;color: #444;border-bottom:1px solid #ccc;}
 /* #  stats template >> stats.html  */
 
 /* rules template >> rules.html */
-#rules  {background:#F0F3F9;border:1px solid #CFDFFF;padding:10px;font-size:11px;font-weight:700;}
+#rules  {background:#F0F3F9;border:1px solid #CFDFFF;padding:10px 30px;font-size:11px;font-weight:700;}
 #rules ul {list-style:square;list-style-position:inside;text-indent:30px;}
 #rules  ul li {color:#336699;padding:1px}
 #rules .rut {clear:both;height:16px;margin-bottom:3px;border-bottom:1px solid #fff;color:#FF0000;padding:4px 0px}
@@ -169,10 +168,10 @@ background:#FF9933 url(../images/headline_bg.png) repeat-x top left;color:#111;b
 /* ## ALL buttons */
 
 /* pagination */
-.pagination {margin:2px 0;float:left;}
+.pagination {margin:2px 0;}
 .pagination  a{padding:3px 9px;color:#333;margin:0 2px;}
 .paging {background:#C8C8C8 url(../images/headline_bg.png) repeat-x center left;border: 1px solid #999;font-size:10px;text-align:center;}
-.here_page ,.paging:hover,.paging {-moz-border-radius-topleft: 10px;-webkit-border-top-left-radius: 10px;-moz-border-radius-bottomright: 10px;-webkit-border-bottom-right-radius: 10px;}
+.here_page ,.paging:hover,.paging {float:left;-moz-border-radius-topleft: 10px;-webkit-border-top-left-radius: 10px;-moz-border-radius-bottomright: 10px;-webkit-border-bottom-right-radius: 10px;}
 .here_page ,.paging:hover{padding:3px 9px;border: 1px solid #888;font-size:10px;color:#BD5900;background:#FFF8C6 url(../images/headline_bg.png) repeat-x center right;text-align:center;text-decoration:none;}
 /* ## pagination */
 
@@ -217,7 +216,8 @@ background:#FF9933 url(../images/headline_bg.png) repeat-x top left;color:#111;b
 #boxfileuser  .public {width:60%;margin:5px 15px 5px auto;background:#DFDFDF;padding:5px 10px;color:#555;border:1px dashed #EDF1F8;font-weight:normal;}
 #boxfileuser .uname{color:#006CD8;font: bold 18px tahoma,Verdana, Helvetica, sans-serif;text-align:center}
 #boxfileuser .nums{font-size:32px;text-align:center}
-#filecplink  .copylink {float:left;padding:3px 6px;color:#D20000;font: bold 12px tahoma,sans-serif;}
+#filecplink {height:60px;}
+#filecplink  .copylink {display:block;padding:3px 6px;color:#D20000;float:left;margin-bottom:10px;}
 #filecplink .link_user{float:left;width:290px;padding:2px;direction:ltr;}
 .tabledata {width:100%;background-color:#CECECE;color:#111;font-size:11px;border:2px ridge #eee;}
 .tabledata th ,.tabledata td {padding:5px;border-right:1px solid #aaa;border-top: 1px solid #eee;border-left:1px solid #eee;border-bottom: 1px solid #aaa; text-align:center; }
@@ -234,7 +234,7 @@ background:#FF9933 url(../images/headline_bg.png) repeat-x top left;color:#111;b
 /*-- #  end box user name and all files  >> fileuser.html  */
 
 /* register template >> register.html */
-.reg_table{background:#F0F3F9 url(../images/register.png) no-repeat 90% 50%;border:1px solid #CFDFFF;margin:5px 0;padding:15px 10px;}
+.reg_table{background:#F0F3F9 url(../images/register.png) no-repeat 90% 50%;border:1px solid #CFDFFF;margin:5px 0;padding:15px 30px;}
 .reg_table td{width:130px;padding-bottom:5px;}
 .reg_table td input{width:180px;}
 /*#  register template >> register.html */
@@ -245,7 +245,7 @@ background:#FF9933 url(../images/headline_bg.png) repeat-x top left;color:#111;b
 /* # back password template >> get_pass.html */
 
 /* call and file report templates */
-.call{background:#F0F3F9 url(../images/call.png) no-repeat 90% 50%;border:1px solid #CFDFFF;margin:5px 0;padding:15px 10px;}
+.call{background:#F0F3F9 url(../images/call.png) no-repeat 90% 50%;border:1px solid #CFDFFF;margin:5px 0;padding:15px 30px;}
 .call label ,.rebort label {display:block;font-weight:bold;margin:5px 0;}
 .call input ,.rebort input {padding: 2px;border:1px solid #999;font: bold 12px tahoma, Verdana, sans-serif;color:#666;}
 .call textarea,.rebort textarea {width:300px;padding:2px;font: bold 12px tahoma, Verdana, sans-serif;border:1px solid #999;height:100px;display:block;color:#666;}

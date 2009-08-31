@@ -4,10 +4,14 @@
 // $Author$ , $Rev$,  $Date::                           $
 //
 
-if (phpversion() < '4.3')
-{
-	exit('Your php version is too old !');
-}
+/*
+ Requirements of Kleeja
+*/
+define('MIN_PHP_VERSION', '4.3.0');
+define('MIN_MYSQL_VERSION', '4.1.2');
+//set no errors
+define('MYSQL_NO_ERRORS', true);
+
 
 //for lang 
 if(isset($_GET['change_lang']))

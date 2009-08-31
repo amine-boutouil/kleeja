@@ -73,50 +73,52 @@
 
 
 		//check upload_max_filesize
-		$u_e_s = isset($u_exts) && is_array($u_exts) ? array_values($u_exts) : array(0 => array('size'=>0));
-		$g_e_s = isset($g_exts) && is_array($g_exts) ? array_values($g_exts) : array(0 => array('size'=>0));
-		asort($u_e_s);
-		asort($g_e_s);
-		if(strpos($upload_max_filesize, 'M') !== false)
+		if(isset($u_exts)  && isset($g_exts) && is_array($u_exts) && !is_array($g_exts))
 		{
-			$upload_max_filesize_s = ((int) trim(str_replace('M', '', $upload_max_filesize))) * 1048576;
-		}
-		else if(strpos($upload_max_filesize, 'G') !== false)
-		{
-			$upload_max_filesize_s = ((int) trim(str_replace('G', '', $upload_max_filesize))) * 1073741824;
-		}
-		
-		$big_size_is = isset($u_e_s[0]['size']) && ($u_e_s[0]['size'] > $g_e_s[0]['size']) ? $u_e_s[0]['size'] : (isset($g_e_s[0]['size']) ? $g_e_s[0]['size'] : 0);
-		if(!empty($upload_max_filesize) && $upload_max_filesize_s < $big_size_is)
-		{
-			$ADM_NOTIFICATIONS[]  = array(
-									'id' => 'file_size_ini_low',
-									'msg_type'=> 'info', 'title'=> $lang['NOTE'], 
-									'msg'=> sprintf($lang['PHPINI_FILESIZE_SMALL'] , Customfile_size($big_size_is), Customfile_size($upload_max_filesize_s))
-									);
-		}
+			$u_e_s = array_values($u_exts);
+			$g_e_s = array_values($g_exts);
+			asort($u_e_s);
+			asort($g_e_s);
+			if(strpos($upload_max_filesize, 'M') !== false)
+			{
+				$upload_max_filesize_s = ((int) trim(str_replace('M', '', $upload_max_filesize))) * 1048576;
+			}
+			else if(strpos($upload_max_filesize, 'G') !== false)
+			{
+				$upload_max_filesize_s = ((int) trim(str_replace('G', '', $upload_max_filesize))) * 1073741824;
+			}
+			
+			$big_size_is = isset($u_e_s[0]['size']) && ($u_e_s[0]['size'] > $g_e_s[0]['size']) ? $u_e_s[0]['size'] : (isset($g_e_s[0]['size']) ? $g_e_s[0]['size'] : 0);
+			if(!empty($upload_max_filesize) && $upload_max_filesize_s < $big_size_is)
+			{
+				$ADM_NOTIFICATIONS[]  = array(
+										'id' => 'file_size_ini_low',
+										'msg_type'=> 'info', 'title'=> $lang['NOTE'], 
+										'msg'=> sprintf($lang['PHPINI_FILESIZE_SMALL'] , Customfile_size($big_size_is), Customfile_size($upload_max_filesize_s))
+										);
+			}
 
-		//check post_max_size
-		if(strpos($post_max_size, 'M') !== false)
-		{
-			$post_max_size_s = ((int) trim(str_replace('M', '', $post_max_size))) * 1048576;
-		}
-		else if(strpos($post_max_size, 'G') !== false)
-		{
-			$post_max_size_s = ((int) trim(str_replace('G', '', $post_max_size))) * 1073741824;
-		}
+			//check post_max_size
+			if(strpos($post_max_size, 'M') !== false)
+			{
+				$post_max_size_s = ((int) trim(str_replace('M', '', $post_max_size))) * 1048576;
+			}
+			else if(strpos($post_max_size, 'G') !== false)
+			{
+				$post_max_size_s = ((int) trim(str_replace('G', '', $post_max_size))) * 1073741824;
+			}
 
-		$post_max_size_s_must_be = ($config['filesnum'] * $big_size_is) + 5242880;//+ 5 mega to make sure it's ok
+			$post_max_size_s_must_be = ($config['filesnum'] * $big_size_is) + 5242880;//+ 5 mega to make sure it's ok
 
-		if(!empty($post_max_size) && $post_max_size_s < $post_max_size_s_must_be)
-		{
-			$ADM_NOTIFICATIONS[]  = array(
-									'id' => 'post_m_size_ini_low',
-									'msg_type'=> 'info', 'title'=> $lang['NOTE'], 
-									'msg'=> sprintf($lang['PHPINI_MPOSTSIZE_SMALL'] , $config['filesnum'], Customfile_size($post_max_size_s_must_be))
-									);		
+			if(!empty($post_max_size) && $post_max_size_s < $post_max_size_s_must_be)
+			{
+				$ADM_NOTIFICATIONS[]  = array(
+										'id' => 'post_m_size_ini_low',
+										'msg_type'=> 'info', 'title'=> $lang['NOTE'], 
+										'msg'=> sprintf($lang['PHPINI_MPOSTSIZE_SMALL'] , $config['filesnum'], Customfile_size($post_max_size_s_must_be))
+										);		
+			}
 		}
-
 		//if 24 hours, lets chcek agian !
 		if((time() - $v['last_check']) > 86400 && !$v['msg_appeared'] && $_SERVER['SERVER_NAME'] != 'localhost')
 		{

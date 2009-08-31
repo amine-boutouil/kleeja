@@ -38,7 +38,7 @@ switch ($_GET['sty_t'])
 		$arr = array();
 		if ($dh = @opendir($root_path . 'styles'))
 		{
-				while (($file = readdir($dh)) !== false)
+				while (($file = @readdir($dh)) !== false)
 				{
 					if(strpos($file, '.') === false && $file != '..' && $file != '.')
 					{
@@ -50,7 +50,7 @@ switch ($_GET['sty_t'])
 									);
 					}
 				}
-				closedir($dh);
+				@closedir($dh);
 		}
 		
 		//look is there any template changes for plugins
@@ -86,17 +86,28 @@ switch ($_GET['sty_t'])
 			{
 				default:
 				case '1': //show templates
-				
+
 					//for style ..
 					$stylee = "admin_show_tpls";
 					$action = basename(ADMIN_PATH) . "?cp=styles&amp;sty_t=style_orders";
 
-					
+
+					//get backup templates
+					$show_bk_templates = false;
+					include_once  $root_path . 'includes/bk_templates.php';
+					if (version_compare(strtolower(KLEEJA_VERSION), strtolower($bk_version), '='))
+					{
+						$show_bk_templates = true;
+						$bkup_templates = array_keys($bkup_templates);
+					}
+
+
 					//get_tpls
 					$tpls_basic = array();
 					$tpls_msg = array();
 					$tpls_user = array();
 					$tpls_other = array();
+					$tpls_all = array();
 					if ($dh = @opendir($d_style_path))
 					{
 							while (($file = readdir($dh)) !== false)
@@ -119,12 +130,17 @@ switch ($_GET['sty_t'])
 									{
 										$tpls_other[] = array( 'template_name'=>  $file );
 									}
+								
+									$tpls_all[$file] = true;
 								}
 							}
 							closedir($dh);
 					}
 					
-					
+					//show only template required in this style
+					$bkup_templates = array_intersect(array_keys($tpls_all), $bkup_templates);
+
+
 				break;
 			
 				case '2': // make as default
@@ -275,10 +291,16 @@ switch ($_GET['sty_t'])
 				//style id 
 				$style_id = str_replace('..', '', $_POST['style_id']);
 				//tpl name 
-				$tpl_name =	htmlspecialchars_decode($_POST['new_tpl']);
+				$tpl_name =	str_replace('..', '', $_POST['new_tpl']);
 				$tpl_path = $root_path . 'styles/' . $style_id . '/' . $tpl_name;
-			
-				$tpl_content = $_POST['template_content'];
+				
+				//same name, exists before, let's edit it
+				if(file_exists($tpl_path))
+				{
+					$tpl_path = $root_path . 'styles/' . $style_id . '/' . str_replace('.html', substr(uniqid('_'), 0, 5) . '.html', $tpl_name);
+				}
+				
+				$tpl_content = '';
 				if($filename = @fopen($tpl_path, 'w'))
 				{
 					@fwrite($filename, $tpl_content);
@@ -289,14 +311,62 @@ switch ($_GET['sty_t'])
 				$text	= $lang['TPL_CREATED']  . '<br /> <a href="' . $link . '">' . $lang['GO_BACK_BROWSER'] . '</a><meta HTTP-EQUIV="REFRESH" content="1; url=' . $link . '">' ."\n";
 				$stylee	= "admin_info";
 			}
-		
-		break;
-		
-		
-		case 'cached':
-		
-			$cached_file = $root_path . 'cache/styles_cached.php';
 			
+			//return bakup template
+			if(isset($_POST['submit_bk_tpl']))
+			{
+				//style id 
+				$style_id = str_replace('..', '', $_POST['style_id']);
+				$tpl_name = str_replace('..', '', $_POST['tpl_choose']);
+				include_once  $root_path . 'includes/bk_templates.php';
+				
+				if(!isset($bkup_templates[$tpl_name]))
+				{
+					redirect(basename(ADMIN_PATH) . '?cp=styles&style_choose=' . $style_id . '&method=1');
+					exit;
+				}
+				
+				$tpl_path = $root_path . 'styles/' . $style_id . '/' . $tpl_name;
+				
+				if(!is_writable($tpl_path))
+				{
+					if($filename = @fopen($tpl_path, 'w'))
+					{
+						@fwrite($filename, base64_decode($bkup_templates[$tpl_name]));
+						@fclose($filename);
+					}
+				}
+				else
+				{
+					$cached[$tpl_name] = array('action'			=> 'replace_with', 
+												'find'			=> '',
+												'action_text'	=> base64_decode($bkup_templates[$tpl_name]),
+								);
+
+					if(file_exists($root_path . 'cache/styles_cached.php'))
+					{
+						$cached_content = file_get_contents($root_path . 'cache/styles_cached.php');
+						$cached_content = base64_decode($cached_content);
+						$cached_content = unserialize($cached_content);
+						$cached += $cached_content;
+					}
+					
+					$filename = @fopen($root_path . 'cache/styles_cached.php' , 'w');
+					@fwrite($filename, base64_encode(serialize($cached)));
+					@fclose($filename);
+				}
+
+				$link	= basename(ADMIN_PATH) . '?cp=styles&amp;style_choose=' . $style_id . '&amp;method=1';
+				$text	= sprintf($lang['TPL_BK_RETURNED'], $tpl_name)  . '<br /> <a href="' . $link . '">' . $lang['GO_BACK_BROWSER'] . '</a><meta HTTP-EQUIV="REFRESH" content="1; url=' . $link . '">' ."\n";
+				$stylee	= "admin_info";
+			}
+
+		break;
+
+		case 'cached':
+
+			$cached_file = $root_path . 'cache/styles_cached.php';
+
 			//delete cached styles
 			if(isset($_GET['del']))
 			{
@@ -311,80 +381,123 @@ switch ($_GET['sty_t'])
 			}
 			else
 			{
-				
 				$content = file_get_contents($cached_file);
 				$content = base64_decode($content);
 				$content = unserialize($content);
-				
+
 				ob_start();
 				foreach($content as $template_name=>$do)
 				{
-					
 					echo '<strong>' . $lang['OPEN'] . '</strong> : <br /> ' . (substr($template_name, 0, 6) == 'admin_' ? $STYLE_PATH_ADMIN : $STYLE_PATH) . $template_name . '<br />';
 					switch($do['action']):
 						case 'replace_with':
-						
-
-						
 							echo '<strong> ' . $lang['SEARCH_FOR'] . '<strong> : <br />';
 							//if it's to code
 							if(strpos($do['find'], '(.*?)') !== false)
 							{
 								$do['find'] = explode('(.*?)', $do['find']);
-								echo '<textarea style="direction:ltr;width:90%">' . trim($do['find'][0]) . '</textarea> <br />';
+								echo '<textarea style="direction:ltr;width:90%">' . trim(htmlspecialchars($do['find'][0])) . '</textarea> <br />';
 									echo '<strong> ' . $lang['REPLACE_TO_REACH'] . '<strong> : <br />';
-								echo '<textarea style="direction:ltr;width:90%">' . trim($do['find'][1]) . '</textarea> <br />';
+								echo '<textarea style="direction:ltr;width:90%">' . trim(htmlspecialchars($do['find'][1])) . '</textarea> <br />';
 							}
 							else
 							{
-								echo '<textarea style="direction:ltr;width:90%">' . trim($do['find']) . '</textarea> <br />';
+								echo '<textarea style="direction:ltr;width:90%;height:50px">' . trim(htmlspecialchars($do['find'])) . '</textarea> <br />';
 							}
 							echo '<strong> ' . $lang['REPLACE_WITH'] . '<strong> : <br />';
-							echo '<textarea style="direction:ltr;width:90%">' . trim($do['action_text']) . '</textarea> <br />'; 
+							echo '<textarea style="direction:ltr;width:90%;height:100px">' . trim(htmlspecialchars($do['action_text'])) . '</textarea> <br />'; 
 						break;
 						case 'add_after':
 							echo '<strong> ' . $lang['SEARCH_FOR'] . '<strong> : <br />';
-							echo '<textarea style="direction:ltr;width:90%">' . trim($do['find']) . '</textarea> <br />';
+							echo '<textarea style="direction:ltr;width:90%;height:50px">' . trim(htmlspecialchars($do['find'])) . '</textarea> <br />';
 							echo '<strong> ' . $lang['ADD_AFTER'] . '<strong> : <br />';
-							echo '<textarea style="direction:ltr;width:90%">' . trim($do['action_text']) . '</textarea> <br />'; 
+							echo '<textarea style="direction:ltr;width:90%;height:100px">' . trim(htmlspecialchars($do['action_text'])) . '</textarea> <br />'; 
 						break;	
 						case 'add_after_same_line':
 							echo '<strong> ' . $lang['SEARCH_FOR'] . '<strong> : <br />';
-							echo '<textarea style="direction:ltr;width:90%">' . trim($do['find']) . '</textarea> <br />';
+							echo '<textarea style="direction:ltr;width:90%;height:50px">' . trim(htmlspecialchars($do['find'])) . '</textarea> <br />';
 							echo '<strong> ' . $lang['ADD_AFTER_SAME_LINE'] . '<strong> : <br />';
-							echo '<textarea style="direction:ltr;width:90%">' . trim($do['action_text']) . '</textarea> <br />'; 
+							echo '<textarea style="direction:ltr;width:90%;height:100px">' .trim(htmlspecialchars($do['action_text'])) . '</textarea> <br />'; 
 						break;
 						case 'add_before':
 							echo '<strong> ' . $lang['SEARCH_FOR'] . '<strong> : <br />';
-							echo '<textarea style="direction:ltr;width:90%">' . trim($do['find']) . '</textarea> <br />';
+							echo '<textarea style="direction:ltr;width:90%;height:50px">' . trim(htmlspecialchars($do['find'])) . '</textarea> <br />';
 							echo '<strong> ' . $lang['ADD_BEFORE'] . '<strong> : <br />';
-							echo '<textarea style="direction:ltr;width:90%">' . trim($do['action_text']) . '</textarea> <br />'; 
+							echo '<textarea style="direction:ltr;width:90%;height:100px">' . trim(htmlspecialchars($do['action_text'])) . '</textarea> <br />'; 
 						break;	
 						case 'add_before_same_line':
 							echo '<strong> ' . $lang['SEARCH_FOR'] . '<strong> : <br />';
-							echo '<textarea style="direction:ltr;width:90%">' . trim($do['find']) . '</textarea> <br />';
+							echo '<textarea style="direction:ltr;width:90%;height:50px">' . trim(htmlspecialchars($do['find'])) . '</textarea> <br />';
 							echo '<strong> ' . $lang['ADD_BEFORE_SAME_LINE'] . '<strong> : <br />';
-							echo '<textarea style="direction:ltr;width:90%">' . trim($do['action_text']) . '</textarea> <br />'; 
+							echo '<textarea style="direction:ltr;width:90%;height:100px">' . trim(htmlspecialchars($do['action_text'])) . '</textarea> <br />'; 
 						break;
 						case 'new':
 							echo '<strong> ' . $lang['ADD_IN'] . '<strong> : <br />';
-							echo '<textarea style="direction:ltr;width:90%">' . trim($do['action_text']) . '</textarea> <br />'; 
+							echo '<textarea style="direction:ltr;width:90%;height:150px">' . trim(htmlspecialchars($do['action_text'])) . '</textarea> <br />'; 
 						break;
 					endswitch;	
-				
-					
+
 					echo '<br /><hr /><br />';
 				}
-								
+		
 				$text = ob_get_contents();
 				ob_end_clean();
 
 				$text .= '<br /><br /><a href="' . basename(ADMIN_PATH) . '?cp=styles&amp;sty_t=cached&amp;del=1">' . $lang['DELETE_CACHED_STYLES'] . '</a>';  
-						
 				$stylee = 'admin_info';
 			}
 		break;
 		
+		//
+		// Create backup version of default style
+		//
+		case 'bk':
+
+			//must be writable
+			if(!is_writable($root_path . 'includes/bk_templates.php') || !defined('DEV_STAGE'))
+			{
+				redirect('./');
+			}
+
+			//default must be here
+			$style_folder = $root_path . 'styles/default/';
+			if (!$dh = @opendir($style_folder))
+			{
+				redirect('./');
+			}
+
+			//open bk_template.php to write contents of templates to it.
+			$bkf = @fopen($root_path . 'includes/bk_templates.php', 'wb');
+			
+			$bkf_contents = "<" . "?php\n//\n//bakup of Kleeja templates\n//\n\n//no for directly open\nif (!defined('IN_COMMON'))\n{";
+			$bkf_contents .= "\n\texit('no directly opening : ' . __file__);\n}\n\n//for version\n\$bk_version = '" . KLEEJA_VERSION . "';";
+			$bkf_contents .= "\n\n//Done in : " . date('d-m-Y H:i a') . "\n\n\$bkup_templates = array();\n\n";
+			
+			$f = 0;
+			while (($file = @readdir($dh)) !== false)
+			{
+				//exceptions
+				if(!in_array(strtolower($file), array('.', '..', 'index.html', 'javascript.js', 'css', '.svn', 'images'))) 
+				{
+					$f++;
+					$bkf_contents .= "\$bkup_templates['" . $file . "'] = '" . base64_encode(file_get_contents($style_folder . $file)) . "';\n";
+				}
+			}
+
+
+			//write to bk_template.php
+			@ftruncate($bkf, 0);
+			@fwrite($bkf, $bkf_contents);
+
+			//...
+			@fclose($bkf); 
+			@closedir($bkf);
+
+
+			$text ='Done, ' . $f . ' files !';
+			$stylee = 'admin_info';
+
+		break;
 }
 
 //<--- EOF

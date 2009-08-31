@@ -8,21 +8,15 @@
 <link rel="shortcut icon" href="favicon.ico" >
 <link rel="icon" type="image/gif" href="images/animated_favicon1.gif" >
 <link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH}css/screen.css" />
-<IS_BROWSER="opera">
-<link rel="stylesheet" type="text/css" href="{STYLE_PATH}css/opera.css" />
-</IS_BROWSER>
+<IF NAME="{lang.DIR}==ltr">
+<link rel="stylesheet" type="text/css" href="{STYLE_PATH}css/ltr_screen.css" />
+</IF>
 <IS_BROWSER="ie6">
 <link rel="stylesheet" type="text/css" href="{STYLE_PATH}css/ie_6.css" />
 </IS_BROWSER>
 <IS_BROWSER="ie7">
 <link rel="stylesheet" type="text/css" href="{STYLE_PATH}css/ie_7.css" />
 </IS_BROWSER>
-<IF NAME="{lang.DIR}==ltr">
-<link rel="stylesheet" type="text/css" href="{STYLE_PATH}css/ltr_screen.css" />
-</IF>
-<IF NAME="{lang.DIR}==ltr">
-<link rel="stylesheet" type="text/css" href="{STYLE_PATH}css/ltr_ie6.css" />
-</IF>
 
 <script type="text/javascript">
  var number_of_uploads={config.filesnum};

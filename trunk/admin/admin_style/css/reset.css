@@ -23,7 +23,7 @@ a:hover   { text-decoration: underline; }
 input:focus, select:focus, textarea:focus  {background-color:#CCFFFF ;border: 1px solid #6699FF;}
 textarea {	font: 11px tahoma,verdana,arial,sans-serif; width: 60%; padding: 2px;}
 label { cursor: pointer;padding: 0 5px 0 0;}
-fieldset { padding:20px; border: 4px solid #6496C3;	background-color: #B0D2F6; position: relative; -moz-border-radius: 8px; border-radius:1px;}
+fieldset { margin:1px 5px 0px 0px;padding:20px; border: 4px solid #6496C3;	background-color: #B0D2F6; position: relative; -moz-border-radius: 8px; border-radius:1px;}
 legend { padding: 1px 0; font:bold 11px tahoma,verdana,arial,sans-serif;color: #115098; margin-top: -.4em; position: relative; text-transform: none;line-height: 1.2em; top: 0; vertical-align: middle;}
 input { margin-right:2px;margin-left:2px;}
 input, textarea { font: 11px tahoma,verdana,arial,sans-serif; font-weight: normal;cursor: text; vertical-align: middle; padding: 2px; color: #000;border-left: 1px solid #AFAEAA; border-top: 1px solid #AFAEAA; border-right: 1px solid #D5D5C8;border-bottom: 1px solid #D5D5C8; background-color:#D8D8D8;}

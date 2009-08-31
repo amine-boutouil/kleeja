@@ -381,7 +381,8 @@ class SSQL
 					else
 					{
 						// because mysql_escape_string doesnt escape % & _[php.net/mysql_escape_string]
-						return addcslashes(mysql_escape_string($msg),'%_');
+						//return addcslashes(mysql_escape_string($msg),'%_');
+						return mysql_escape_string($msg);
 					}
 
 				}

@@ -13,7 +13,6 @@ html, body, div, span, applet, object, iframe, h1,h3, h4, h5, h6, p, blockquote,
 body {background: #FFFFFF url(../images/adm-body.jpg) repeat-x ;	color: #3D3D3D; margin: 0 ;	padding: 0;	font: normal 11px Tahoma, Arial, Helvetica, sans-serif; }
 
 /* all root */
-form { margin: 0;padding: 0; }
 h2 {	padding-bottom: 4px; color: #FD6812; font: bold 18 Tahoma, Arial, Helvetica, sans-serif;}
 li {list-style: none;}
 ul{margin: 0 0 4px 0; text-align: justify; line-height: 26px;}

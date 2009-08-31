@@ -11,7 +11,7 @@
 error_reporting(E_ALL & ~E_NOTICE);
 
 // #################### DEFINE IMPORTANT CONSTANTS #######################
-define('THIS_SCRIPT', 'login');
+define('THIS_SCRIPT', 'sendmessage');
 
 //call vb global file
 require_once('./global.php');
@@ -23,7 +23,7 @@ $script_api_key = sha1('123456');
 
 
 
-if(!isset($_GET['api_key']) || (isset($_GET['api_key']) &&  $_GET['api_key'] != $script_api_key) || (!isset($_GET['userid']) && !isset($_GET['username'])))
+if(!isset($_GET['api_key']) || (isset($_GET['api_key']) &&  base64_decode($_GET['api_key']) != $script_api_key) || (!isset($_GET['userid']) && !isset($_GET['username'])))
 {
 	print_output('0');
 	exit;
@@ -31,11 +31,13 @@ if(!isset($_GET['api_key']) || (isset($_GET['api_key']) &&  $_GET['api_key'] != 
 
 #hashed ? 
 $hashed = isset($_GET['userid']) ? true : false;
-
+$pass = isset($_GET['pass']) ? stripslashes(htmlspecialchars_decode(base64_decode($_GET['pass']))) : '';
+$username = isset($_GET['username']) ? base64_decode($_GET['username']) : '';
+$userid = isset($_GET['userid']) ? base64_decode($_GET['userid']) : '';
 $c = array(
-    'pass' => isset($_GET['pass']) ?  htmlspecialchars($_GET['pass']) : '',
-    'username' => isset($_GET['username']) ? htmlspecialchars($_GET['username']) : '',
-    'userid' => isset($_GET['userid']) ? intval($_GET['userid']) : 0,
+    'pass' => isset($_GET['pass']) ?  htmlspecialchars($pass) : '',
+    'username' => isset($_GET['username']) ? htmlspecialchars($username) : '',
+    'userid' => isset($_GET['userid']) ? intval($userid) : 0,
 );
 
 

@@ -39,7 +39,7 @@
 
 <form method="post" action="{action}">
 
-<table style="width:90%;text-align:center">
+<table style="width:100%;text-align:center">
 <IF NAME="no_results">
 ...
 <ELSE>
@@ -48,7 +48,7 @@
         <td>#<em>{{lang_id}}</em></td>
         <td><span class="s_box_tpls">{{word}}</span></td>
 		<td> <strong>=</strong> </td>
-        <td><label><input type="text" name="t_{{word}}" value="{{trans}}" size="56" ></label></td>
+        <td><label><input type="text" name="t_{{word}}" value="{{trans}}" ></label></td>
         <td><input type="checkbox" name="del_{{word}}" value="1"> {lang.DELETE}</td>
     </tr>
 </LOOP>

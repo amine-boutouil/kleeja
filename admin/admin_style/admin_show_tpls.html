@@ -79,6 +79,9 @@
 
 </form>
 
+<!--
+add new template form
+-->
 
 <!-- start clear  -->
 <div class="clr"></div><br />
@@ -119,6 +122,55 @@
 </div>
 <!-- end div border table  -->
 </form>
+
+<!--
+return back up template for,
+-->
+<IF NAME="show_bk_templates">
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
+
+
+<form method="post" action="{action}">
+
+<!-- start div border table  -->
+<div  id="border-table">
+
+<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/styles_button.gif" />{lang.RETURN_TEMPLATE_BK}</h2>
+
+<!-- start dot  -->
+<p class="dot" />
+<!-- end dot  -->
+
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
+
+<table>
+	<tr style="background-color:#EFE7B8">
+		<td style="border-top:1px solid #FEA53D;border-bottom:1px solid #FEA53D;">{lang.RETURN_TEMPLATE_BK_EXP}</td>
+	</tr>
+	<tr style="background-color:#F5F5F5">
+		<td>
+		<select name="tpl_choose">
+		<LOOP NAME="bkup_templates">
+		<option name="{%value%}">{%value%}</option>
+		</LOOP>
+		</select>
+		<input type="hidden" name="style_id" value="{style_id}" />
+		</td>
+	</tr>
+</table>
+
+<!--  button  -->
+<fieldset class="quick" style="text-align:center"><input class="button2" name="submit_bk_tpl" type="submit" value="{lang.SUBMIT}" /></fieldset>
+<!--  button  -->
+
+</div>
+<!-- end div border table  -->
+</form>
+</IF>
 
 </fieldset>
 

@@ -47,7 +47,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 		@see file : docs/kleeja_(vb,mysmartbb,phpbb)_api.txt
 	*/
 
-	$api_http_query = 'api_key=' . base64_encode($script_api_key) . '&' . ($hashed ? 'userid' : 'username') . '=' . base64_encode($name) . '&pass=' . base64_encode($pass);
+	$api_http_query = 'api_key=' . base64_encode($script_api_key) . '&' . ($hashed ? 'userid' : 'username') . '=' . urlencode($name) . '&pass=' . base64_encode($pass);
 	//if only username, let tell him in the query
 	$api_http_query .= $return_username ? '&return_username=1' : '';
 	

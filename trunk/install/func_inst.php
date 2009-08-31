@@ -292,7 +292,7 @@ $footer_inst = '<br />
 
 
 //export config 
-function do_config_export($type, $srv, $usr, $pass, $nm, $prf, $fpath)
+function do_config_export($type, $srv, $usr, $pass, $nm, $prf, $fpath = '')
 {
 		global $_path;
 		
@@ -303,16 +303,16 @@ function do_config_export($type, $srv, $usr, $pass, $nm, $prf, $fpath)
 		
 		$data	= '<?php'."\n\n" . '//fill those varaibles with your data' . "\n";
 		$data	.= '$db_type		= \'' . $type . "'; //mysqli or mysql \n";
-		$data	.= '$dbserver		= \'' . str_replace("'","\'", $srv) . "'; //database server \n";
-		$data	.= '$dbuser			= \''. str_replace("'","\'", $usr)."' ; // database user \n";
-		$data	.= '$dbpass			= \''. str_replace("'","\'", $pass)."'; // database password \n";
-		$data	.= '$dbname			= \''. str_replace("'","\'", $nm)."'; // database name \n";
-		$data	.= '$dbprefix		= \''. str_replace("'","\'", $prf)."'; // if you use perfix for tables , fill it \n";
+		$data	.= '$dbserver		= \'' . str_replace("'", "\'", $srv) . "'; //database server \n";
+		$data	.= '$dbuser			= \'' . str_replace("'", "\'", $usr) . "' ; // database user \n";
+		$data	.= '$dbpass			= \'' . str_replace("'", "\'", $pass) . "'; // database password \n";
+		$data	.= '$dbname			= \'' . str_replace("'", "\'", $nm) . "'; // database name \n";
+		$data	.= '$dbprefix		= \'' . str_replace("'", "\'", $prf) . "'; // if you use perfix for tables , fill it \n";
 		//$data	.= '$adminpath		= \'admin.php\';// if you renamed your acp file , please fill the new name here \n';
-		$data	.= "\n\n\n";
-		$data	.= "//for integration with script  must change user systen from admin cp  \n";
-		$data	.= '$script_path	= \''. str_replace("'","\'", $fpath)."'; // path of script (./forums)  \n";
-		$data	.= "\n\n";
+		//$data	.= "\n\n\n";
+		//$data	.= "//for integration with script  must change user systen from admin cp  \n";
+		//$data	.= '$script_path	= \'' . str_replace("'", "\'", $fpath) . "'; // path of script (./forums)  \n";
+		//$data	.= "\n\n";
 		//$data	.= '?'.'>';
 	
 		$written = false;

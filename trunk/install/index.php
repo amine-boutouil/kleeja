@@ -4,16 +4,27 @@
 // $Author$ , $Rev$,  $Date::                           $
 //
 
+// Report all errors, except notices
+@error_reporting(E_ALL ^ E_NOTICE);
+
+
 /*
 include important files
 */
 
-	
+
 define ( 'IN_COMMON' , true);
 $_path = "../";
 (file_exists($_path . 'config.php')) ? include_once ($_path . 'config.php') : null;
 include_once ($_path . 'includes/functions.php');
-include_once ($_path . 'includes/mysql.php');
+switch ($db_type)
+{
+	case 'mysqli':
+		include_once ($_path . 'includes/mysqli.php');
+	break;
+	default:
+		include_once ($_path . 'includes/mysql.php');
+}
 include_once ('func_inst.php');
 
 

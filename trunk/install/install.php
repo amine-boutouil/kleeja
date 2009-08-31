@@ -18,7 +18,14 @@ $_path = "../";
 define('PATH', '../');
 (file_exists($_path . 'config.php')) ? include_once ($_path . 'config.php') : null;
 include_once ($_path . 'includes/functions.php');
-include_once ($_path . 'includes/mysql.php');
+switch ($db_type)
+{
+	case 'mysqli':
+		include_once ($_path . 'includes/mysqli.php');
+	break;
+	default:
+		include_once ($_path . 'includes/mysql.php');
+}
 include_once ('func_inst.php');
 
 //
@@ -180,8 +187,7 @@ case 'c':
 						$_POST['db_user'],
 						$_POST['db_pass'],
 						$_POST['db_name'],
-						$_POST['db_prefix'],
-						$_POST['fpath']
+						$_POST['db_prefix']
 						);
 	
 	}
@@ -235,7 +241,7 @@ case 'c':
 			</table>
 			<br />
 			</fieldset>
-			
+			<!--
 			<fieldset class="home" id="Group1" dir="' . $lang['DIR'] . '">
 			<b>' . $lang['IN_INFO'] . '</b>
 			<br />
@@ -249,7 +255,7 @@ case 'c':
 			</table>
 			<br />
 			</fieldset>
-
+			-->
 			<input name="dbsubmit" type="submit" value="' . ($writeable_path ? $lang['INST_SUBMIT'] : $lang['INST_EXPORT']) . '" />
 			</form>
 			<br />
@@ -376,12 +382,12 @@ case 'data' :
 
 		$user_salt			= substr(base64_encode(pack("H*", sha1(mt_rand()))), 0, 7);
 		$user_pass 			= $usrcp->kleeja_hash_password($_POST['password'] . $user_salt);
-		$user_name 			= $_POST['username'];
-		$user_mail 			= $_POST['email'];
-		$config_sitename	= $_POST['sitename'];
-		$config_siteurl		= $_POST['siteurl'];
-		$config_sitemail	= $_POST['sitemail'];
-		$config_style		= $_POST['style'];
+		$user_name 			= mysql_real_escape_string($_POST['username']);
+		$user_mail 			= mysql_real_escape_string($_POST['email']);
+		$config_sitename	= mysql_real_escape_string($_POST['sitename']);
+		$config_siteurl		= mysql_real_escape_string($_POST['siteurl']);
+		$config_sitemail	= mysql_real_escape_string($_POST['sitemail']);
+		$config_style		= mysql_real_escape_string($_POST['style']);
 		$clean_name			= $usrcp->cleanusername(mysql_real_escape_string($user_name));
 		
 		

@@ -16,7 +16,14 @@ $path = "../includes/";
 define('PATH', '../');
 (file_exists('../config.php')) ? include_once ('../config.php') : null;
 include_once ($path . 'functions.php');
-include_once ($path . 'mysql.php');
+switch ($db_type)
+{
+	case 'mysqli':
+		include_once ($_path . 'includes/mysqli.php');
+	break;
+	default:
+		include_once ($_path . 'includes/mysql.php');
+}
 include_once ('func_inst.php');
 
 //exception for development

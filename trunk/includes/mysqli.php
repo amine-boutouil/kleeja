@@ -46,8 +46,14 @@ class SSQL
 					$this->db_name     = $db_name;
 					$this->db_password = 'hidden';
 
-
 					$this->connect_id = @mysqli_connect($this->host, $this->db_username, $db_password, $this->db_name);
+					
+					//no error
+					if(defined('MYSQL_NO_ERRORS'))
+					{
+						$this->show_errors = false;
+					}
+					
 					
 					if(!$this->connect_id)
 					{
@@ -55,11 +61,15 @@ class SSQL
 						kleeja_log('[No connection, Closing connection] : -->');
 						$this->close();
 						$this->error_msg("we can not connect to the server ...");
-						return;
+						return false;
 					}
+
 					//version of mysql
-					$this->mysql_version = mysqli_get_server_info($this->connect_id);
-						
+					$vr = $this->query('SELECT VERSION() AS v');
+					$vs = $this->fetch_array($vr);
+					$vs = $vs['v'];
+					$this->mysql_version = preg_replace('/^([^-]+).*$/', '\\1', $vs);
+
 					#loggin -> connecting 
 					kleeja_log('[Connected] : --> ');
 
@@ -126,11 +136,18 @@ class SSQL
 				*/
                 function query($query, $transaction = false)
 				{
+					
+					//no connection
+					if(!$this->connect_id)
+					{
+						return false;
+					}
+				
 					//
 					// Remove any pre-existing queries
 					//
 					unset($this->result);
-
+					
 					if(!empty($query))
 					{
 						//debug .. //////////////
@@ -383,7 +400,7 @@ class SSQL
 
 					if(!$this->show_errors)
 					{
-						return;
+						return false;
 					}
 
 

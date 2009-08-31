@@ -295,22 +295,18 @@ case 'check':
 	else
 	{
 		//connect .. for check
-		$connect = @mysql_connect($dbserver, $dbuser, $dbpass);
-		if (!$connect) 
-			$texterr .= '<span style="color:red;">' . $lang['INST_CONNCET_ERR'] . '</span><br />';
-			
-		$select = @mysql_select_db($dbname);
-		if (!$select)
+		$SQL = new SSQL($dbserver, $dbuser, $dbpass, $dbname);
+
+		if (!$SQL->connect_id)
 		{
-			//lets try to make the db 
-			$sql = 'CREATE DATABASE ' . $dbname ;
-			if (@mysql_query($sql, $connect))
+			$texterr .= '<span style="color:red;">' . $lang['INST_CONNCET_ERR'] . '</span><br />';
+		}
+		else
+		{
+			if (version_compare($SQL->mysql_version, MIN_MYSQL_VERSION, '<'))
 			{
-				$select = @mysql_select_db($dbname);
+				$texterr .= '<span style="color:red;">' . sprintf($lang['INST_MYSQL_LESSMIN'], MIN_MYSQL_VERSION, $SQL->mysql_version) . '</span><br />';
 			}
-			
-			if (!$select)
-			$texterr .= '<span style="color:red;">' . $lang['INST_SELECT_ERR'] . '</span><br />';
 		}
 	}
 		
@@ -373,22 +369,21 @@ case 'data' :
 			exit();
 		}
 
-		$connect = @mysql_connect($dbserver,$dbuser,$dbpass);
-		$select = @mysql_select_db($dbname);
-		mysql_query("SET NAMES 'utf8'");
+		//connect .. for check
+		$SQL = new SSQL($dbserver, $dbuser, $dbpass, $dbname);
 		 
 		include_once  '../includes/usr.php';
 		$usrcp = new usrcp;
 
 		$user_salt			= substr(base64_encode(pack("H*", sha1(mt_rand()))), 0, 7);
 		$user_pass 			= $usrcp->kleeja_hash_password($_POST['password'] . $user_salt);
-		$user_name 			= mysql_real_escape_string($_POST['username']);
-		$user_mail 			= mysql_real_escape_string($_POST['email']);
-		$config_sitename	= mysql_real_escape_string($_POST['sitename']);
-		$config_siteurl		= mysql_real_escape_string($_POST['siteurl']);
-		$config_sitemail	= mysql_real_escape_string($_POST['sitemail']);
-		$config_style		= mysql_real_escape_string($_POST['style']);
-		$clean_name			= $usrcp->cleanusername(mysql_real_escape_string($user_name));
+		$user_name 			= $SQL->escape($_POST['username']);
+		$user_mail 			= $SQL->escape($_POST['email']);
+		$config_sitename	= $SQL->escape($_POST['sitename']);
+		$config_siteurl		= $SQL->escape($_POST['siteurl']);
+		$config_sitemail	= $SQL->escape($_POST['sitemail']);
+		$config_style		= $SQL->escape($_POST['style']);
+		$clean_name			= $usrcp->cleanusername($SQL->escape($user_name));
 		
 		
 		 /// ok .. will get sqls now ..
@@ -396,18 +391,17 @@ case 'data' :
 		 
 		$err = 0;
 		$dots = 0;
+		$errors = '';
 		//do important before
-		//mysql_query($install_sqls['DROP_TABLES'], $connect);
-		mysql_query($install_sqls['ALTER_DATABASE_UTF'], $connect);
+		$SQL->query($install_sqls['ALTER_DATABASE_UTF']);
 		
 		foreach($install_sqls as $name=>$sql_content)
 		{
-			
 			if($name == 'DROP_TABLES' || $name == 'ALTER_DATABASE_UTF') continue;
-			
-			$do_it	= @mysql_query($sql_content, $connect);
-		
-			if($do_it)
+
+			$is = $SQL->query($sql_content);
+
+			if($is)
 			{
 				if ($name == 'call')			echo '<span style="color:green;">' . $lang['INST_CRT_CALL'] . '</span><br />';
 				elseif ($name == 'reports')		echo '<span style="color:green;">' . $lang['INST_CRT_REPRS'] . '</span><br />';
@@ -425,19 +419,20 @@ case 'data' :
 				{
 					
 					echo ' . ';
-					if($dots == 7)
+					if($dots == 10)
 					{
 						$dots = 0;
 						echo '<br />';
 					}
 					else
+					{
 						$dots++;
-						
-					//echo '<span style="color:green;"> [' .$name  . '] : ' . $lang['INST_SQL_OK'] . '</span><br />';
+					}
 				}
 			}
 			else
 			{
+				$errors  = implode(':', $SQL->get_error()) . '' . "\n___\n";
 				echo '<span style="color:red;"> [' .$name . '] : ' . $lang['INST_SQL_ERR'] . '</span><br />';
 				$err++;
 			}
@@ -446,9 +441,6 @@ case 'data' :
 
 		if (!$err)
 		{
-			// start classe..
-			$SQL	= new SSQL($dbserver,$dbuser,$dbpass,$dbname);
-
 			echo '<fieldset class="home"><form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=end&' . getlang(1) . '">
 			<input name="agres" type="submit" value="' . $lang['INST_SUBMIT'] . '"/>
 			</form></fieldset>';
@@ -458,72 +450,76 @@ case 'data' :
 		}
 		else
 		{
-			echo '<fieldset class="home"><span style="color:red;">' . $lang['INST_FINISH_ERRSQL'] . '</span></fieldset>';
+			echo '<fieldset class="home"><span style="color:red;">' . $lang['INST_FINISH_ERRSQL'] . '</span>';
+			
+			echo '<br /><br /><textarea cols="50" rows="3">' . $errors . '</textarea>';
+			
+			echo '</fieldset>';
 		}
 
 	}
 	else
 	{
 
-	//$sitepath = $_SERVER['DOCUMENT_ROOT'].dirname($_SERVER['PHP_SELF']);
-	$urlsite =  "http://".$_SERVER['HTTP_HOST'] . str_replace('install','',dirname($_SERVER['PHP_SELF']));
+		$urlsite =  "http://" . $_SERVER['HTTP_HOST'] . str_replace('install', '', dirname($_SERVER['PHP_SELF']));
 
- echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=data&' . getlang(1) . '"  onsubmit="javascript:return formCheck(this, Array(\'sitename\',\'siteurl\',\'sitemail\' ,\'username\', \'password\',\'email\' ));">
-	<fieldset class="home" id="Group1" dir="' . $lang['DIR'] . '">
-	<legend style="width: 73px"> [ <strong>' . $lang['INST_SITE_INFO'] . '</strong> ]</legend>
-	<table style="width: 100%">
-		<tr>
-			<td>' . $lang['SITENAME'] . '</td>
-			<td><input name="sitename" type="text" style="width: 256px" /></td>
-		</tr>
-		<tr>
-			<td>' . $lang['SITEURL'] . '</td>
-			<td><input name="siteurl" type="text" value="' . $urlsite . '" style="width: 256px" /></td>
-		</tr>
-		<tr>
-			<td>' . $lang['SITEMAIL'] . '</td>
-			<td><input name="sitemail" id="sitemail" type="text" style="width: 256px" onchange="return w_email(this.name);" /></td>
-		</tr>       
-	</table>
-	</fieldset>
+		echo '
+		<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=data&' . getlang(1) . '"  onsubmit="javascript:return formCheck(this, Array(\'sitename\',\'siteurl\',\'sitemail\' ,\'username\', \'password\',\'email\' ));">
+		<fieldset class="home" id="Group1" dir="' . $lang['DIR'] . '">
+		<legend style="width: 73px"> [ <strong>' . $lang['INST_SITE_INFO'] . '</strong> ]</legend>
+		<table style="width: 100%">
+			<tr>
+				<td>' . $lang['SITENAME'] . '</td>
+				<td><input name="sitename" type="text" style="width: 256px" /></td>
+			</tr>
+			<tr>
+				<td>' . $lang['SITEURL'] . '</td>
+				<td><input name="siteurl" type="text" value="' . $urlsite . '" style="width: 256px" /></td>
+			</tr>
+			<tr>
+				<td>' . $lang['SITEMAIL'] . '</td>
+				<td><input name="sitemail" id="sitemail" type="text" style="width: 256px" onchange="return w_email(this.name);" /></td>
+			</tr>       
+		</table>
+		</fieldset>
 
-	<br />
+		<br />
 
-	<fieldset class="home" id="Group2" dir="' . $lang['DIR'] . '">
-	<legend style="width: 73px"> [ <strong>' . $lang['INST_ADMIN_INFO'] . '</strong> ]</legend>
-	<table style="width: 100%">
-		<tr>
-			<td>' . $lang['USERNAME'] . '</td>
-			<td><input name="username" type="text" style="width: 256px" /></td>
-		</tr>
-		<tr>
-			<td>' . $lang['PASSWORD'] . '</td>
-			<td><input name="password" id="password" type="text" style="width: 173px"  onkeyup="return passwordChanged();"/> <span id="strength"><img src="img/p1.gif" alt="! .." /></span></td>
-		</tr>
-		<tr>
-			<td>' . $lang['PASSWORD2'] . '</td>
-			<td><input name="password2" id="password2" type="text" style="width: 253px" /></td>
-		</tr>
-		<tr>
-			<td><strong>' . $lang['EMAIL'] . '</strong></td>
-			<td><input name="email" id="email" type="text" style="width: 256px"  onchange="return w_email(this.name);" /></td>
-		</tr>
-	</table>
-	</fieldset>
-	
-	
-	<fieldset class="home" id="Group2" dir="' . $lang['DIR'] . '">
-	<legend style="width: 73px"> [ <strong>' . $lang['INST_STYLE_INFO'] . '</strong> ]</legend>
-	<table style="width: 100%">
-		<tr>
-			<td><img src="img/style1.png" /> <br /><small>' . $lang['INST_STYLE1_INFO'] . '</small><br /> <input type="radio" name="style" value="default" checked="checked" /> Default</td>
-			<td><img src="img/style2.png" /> <br /><small>' . $lang['INST_STYLE2_INFO'] . '</small><br /> <input type="radio" name="style" value="legacy" />  Legacy </td>
-		</tr>
-	</table>
-	</fieldset>
+		<fieldset class="home" id="Group2" dir="' . $lang['DIR'] . '">
+		<legend style="width: 73px"> [ <strong>' . $lang['INST_ADMIN_INFO'] . '</strong> ]</legend>
+		<table style="width: 100%">
+			<tr>
+				<td>' . $lang['USERNAME'] . '</td>
+				<td><input name="username" type="text" style="width: 256px" /></td>
+			</tr>
+			<tr>
+				<td>' . $lang['PASSWORD'] . '</td>
+				<td><input name="password" id="password" type="text" style="width: 173px"  onkeyup="return passwordChanged();"/> <span id="strength"><img src="img/p1.gif" alt="! .." /></span></td>
+			</tr>
+			<tr>
+				<td>' . $lang['PASSWORD2'] . '</td>
+				<td><input name="password2" id="password2" type="text" style="width: 253px" /></td>
+			</tr>
+			<tr>
+				<td><strong>' . $lang['EMAIL'] . '</strong></td>
+				<td><input name="email" id="email" type="text" style="width: 256px"  onchange="return w_email(this.name);" /></td>
+			</tr>
+		</table>
+		</fieldset>
+		
+		
+		<fieldset class="home" id="Group2" dir="' . $lang['DIR'] . '">
+		<legend style="width: 73px"> [ <strong>' . $lang['INST_STYLE_INFO'] . '</strong> ]</legend>
+		<table style="width: 100%">
+			<tr>
+				<td><img src="img/style1.png" /> <br /><small>' . $lang['INST_STYLE1_INFO'] . '</small><br /> <input type="radio" name="style" value="default" checked="checked" /> Default</td>
+				<td><img src="img/style2.png" /> <br /><small>' . $lang['INST_STYLE2_INFO'] . '</small><br /> <input type="radio" name="style" value="legacy" />  Legacy </td>
+			</tr>
+		</table>
+		</fieldset>
 
-	<input name="datasubmit" type="submit" value="' . $lang['INST_SUBMIT'] . '" />
-	</form>';
+		<input name="datasubmit" type="submit" value="' . $lang['INST_SUBMIT'] . '" />
+		</form>';
 	}#else
 
 

@@ -98,7 +98,8 @@
 	$lang['INST_UPDATE_IS_FINISH']					= 'Installation completed! you can now delete the <br /><b>INSTALL</b><br /> directory...';
 	$lang['IN_INFO']								= 'Fill in the fields below if you want to integrate kleeja with your script . Ignore this step if you do not wish to do it<br /><span style="color:red;">you should change user system from admin cp after installing kleeja</span>';
 	$lang['IN_PATH']								= 'Path of script';
-	
+	$lang['INST_PHP_LESSMIN']						= '· À»Ì  ﬂ·ÌÃ« ÌÃ» ⁄·Ï «·√ﬁ· √‰ ÌﬂÊ‰ ·œÌﬂ «’œ«— PHP %1$s , Ê«‰  ·œÌﬂ «’œ«— PHP %2$s.';
+	$lang['INST_MYSQL_LESSMIN']						= '· À»Ì  ﬂ·ÌÃ« ÌÃ» ⁄·Ï «·√ﬁ· √‰ ÌﬂÊ‰ ·œÌﬂ «’œ«— MYSQL %1$s , Ê«‰  ·œÌﬂ «’œ«— MYSQL %2$s.';
 	
 	//wizard
 	$lang['DIR']	=	'ltr';

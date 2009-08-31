@@ -40,55 +40,65 @@ class SSQL
                 function SSQL($host, $db_username, $db_password, $db_name, $new_link=false)
 				{
 					global $script_encoding;
-                          $this->host        = $host;
-                          $this->db_username = $db_username;
-                          $this->db_name     = $db_name;
-                          $this->db_password = 'hidden';
+					
+					$this->host			= $host;
+					$this->db_username	= $db_username;
+					$this->db_name     = $db_name;
+					$this->db_password = 'hidden';
+					
+					//no error
+					if(defined('MYSQL_NO_ERRORS'))
+					{
+						$this->show_errors = false;
+					}
 
+					$this->connect_id = @mysql_connect($this->host, $this->db_username, $db_password, $new_link) or die($this->error_msg("we can not connect to the server ..."));
 
-                        $this->connect_id = @mysql_connect($this->host, $this->db_username, $db_password, $new_link) or die($this->error_msg("we can not connect to the server ..."));
-						//version of mysql
-						$this->mysql_version = mysql_get_server_info($this->connect_id);
-						
-						if($this->connect_id)
-						{
-							#loggin -> connecting 
-							kleeja_log('[Connected] : ' . $this->connect_id);
+					if($this->connect_id)
+					{
+						#loggin -> connecting 
+						kleeja_log('[Connected] : ' . $this->connect_id);
 							
-							if(!empty($db_name))
-							{
-								$dbselect = @mysql_select_db($this->db_name) or die($this->error_msg("we can not select database"));
+						//version of mysql
+						$vr = $this->query('SELECT VERSION() AS v');
+						$vs = $this->fetch_array($vr);
+						$vs = $vs['v'];
+						$this->mysql_version = preg_replace('/^([^-]+).*$/', '\\1', $vs);
+						
+						if(!empty($db_name))
+						{
+							$dbselect = @mysql_select_db($this->db_name) or die($this->error_msg("we can not select database"));
 								
-								if ($dbselect)
-								{
-									#loggin -> selecting database 
-									kleeja_log('[Selected Database] :' . $this->connect_id);
+							if ($dbselect)
+							{
+								#loggin -> selecting database 
+								kleeja_log('[Selected Database] :' . $this->connect_id);
 									
-									if ((!preg_match('/utf/i', strtolower($script_encoding)) && !defined('IN_LOGINPAGE') && !defined('IN_ADMIN_LOGIN') && !defined('DISABLE_INTR')) || ((empty($script_encoding) || preg_match('/utf/i', strtolower($script_encoding)) || defined('DISABLE_INTR'))))
+								if ((!preg_match('/utf/i', strtolower($script_encoding)) && !defined('IN_LOGINPAGE') && !defined('IN_ADMIN_LOGIN') && !defined('DISABLE_INTR')) || ((empty($script_encoding) || preg_match('/utf/i', strtolower($script_encoding)) || defined('DISABLE_INTR'))))
+								{
+									if(mysql_query("SET NAMES 'utf8'"))
 									{
-										if(mysql_query("SET NAMES 'utf8'"))
-										{
-											#loggin -> set utf8 
-											kleeja_log('[Set to UTF8] :' . $this->connect_id);
-										}
+										#loggin -> set utf8 
+										kleeja_log('[Set to UTF8] :' . $this->connect_id);
 									}
 								}
-								else if(!$dbselect)
-								{
-									#loggin -> no database -> close connection
-									kleeja_log('[No database, Closing connection] :' . $this->connect_id);
-									
-									mysql_close($this->connect_id);
-									$this->connect_id = $dbselect;
-								}
 							}
+							else if(!$dbselect)
+							{
+								#loggin -> no database -> close connection
+								kleeja_log('[No database, Closing connection] :' . $this->connect_id);
+									
+								mysql_close($this->connect_id);
+								$this->connect_id = $dbselect;
+							}
+						}
 
 							return $this->connect_id;
-						}
-						else
-						{
-							return false;
-						}
+					}
+					else
+					{
+						return false;
+					}
 				}
 
 				/*
@@ -141,13 +151,17 @@ class SSQL
 				*/
                 function query($query, $transaction = FALSE)
 				{
+					//no connection
+					if(!$this->connect_id)
+					{
+						return false;
+					}
+				
 					//
 					// Remove any pre-existing queries
 					//
 					unset($this->result);
 
-
-					
 					if(!empty($query))
 					{
 						//debug .. //////////////
@@ -411,7 +425,7 @@ class SSQL
 					
 					if(!$this->show_errors)
 					{
-						return;
+						return false;
 					}
 					
 					$error_no  = mysql_errno();

@@ -32,16 +32,17 @@ if(!isset($_GET['api_key']) || (isset($_GET['api_key']) &&  base64_decode($_GET[
 #hashed ? 
 $hashed = isset($_GET['userid']) ? true : false;
 $pass = isset($_GET['pass']) ? stripslashes(htmlspecialchars_decode(base64_decode($_GET['pass']))) : '';
-$username = isset($_GET['username']) ? base64_decode($_GET['username']) : '';
-$userid = isset($_GET['userid']) ? base64_decode($_GET['userid']) : '';
+$username = isset($_GET['username']) ? strip_blank_ascii($_GET['username'], ' ') : '';
+//print_output($username);
+$userid = isset($_GET['userid']) ? $_GET['userid'] : '';
 $c = array(
     'pass' => isset($_GET['pass']) ?  htmlspecialchars($pass) : '',
-    'username' => isset($_GET['username']) ? htmlspecialchars($username) : '',
+    'username' => isset($_GET['username']) ? $username : '',
     'userid' => isset($_GET['userid']) ? intval($userid) : 0,
 );
 
 
-$q_where = $hashed ? "userid='" . $c['userid'] . "' AND password='" . mysql_escape_string($c['pass']) . "' AND usergroupid != '8'" :  "username='" . mysql_escape_string($c['username']) . "' AND usergroupid != '8'";
+$q_where = $hashed ? "userid='" . $c['userid'] . "' AND password='" . mysql_escape_string($c['pass']) . "' AND usergroupid != '8'" :  "username='" . $vbulletin->db->escape_string(htmlspecialchars_uni($c['username'])) . "' AND usergroupid != '8'";
 
 $rqr = mysql_query("SELECT " . ($hashed ? '*' : 'salt') . " FROM " . $config['Database']['tableprefix'] . "user WHERE " . $q_where);
 

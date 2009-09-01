@@ -67,7 +67,7 @@ $update_sqls['configs12'] = "UPDATE `{$dbprefix}config` SET `option` = '<input t
 
 $update_sqls['configs13'] = "UPDATE `{$dbprefix}config` SET `option` = '<label>{lang.YES}<input type=\"radio\" id=\"thumbs_imgs\" name=\"thumbs_imgs\" value=\"1\"  <IF NAME=\"con.thumbs_imgs==1\"> checked=\"checked\"</IF>></label><label>{lang.NO}<input type=\"radio\" id=\"thumbs_imgs\" name=\"thumbs_imgs\" value=\"0\" <IF NAME=\"con.thumbs_imgs==0\"> checked=\"checked\"</IF>></label></td></tr><tr><td><label for=\"thumbs_imgs\">{lang.DIMENSIONS_THMB}</label></td>\r\n <td><input type=\"text\" id=\"thmb_dim_w\" name=\"thmb_dim_w\" value=\"{thmb_dim_w}\" size=\"2\"> * <input type=\"text\" id=\"thmb_dim_h\" name=\"thmb_dim_h\" value=\"{thmb_dim_h}\" size=\"2\"> ',`display_order` = 9 WHERE  `name` = 'thumbs_imgs';";
 
-$update_sqls['configs14'] = "UPDATE `{$dbprefix}config` SET `option` = '<div style=\"border:1px outset\"><img src=\"{STAMP_IMG_URL}\" /> <br />\r\n                <label>{lang.YES}<input type=\"radio\" id=\"write_imgs\" name=\"write_imgs\" value=\"1\"  <IF NAME=\"con.write_imgs==1\"> checked=\"checked\"</IF>></label>\r\n                <label>{lang.NO}<input type=\"radio\" id=\"write_imgs\" name=\"write_imgs\" value=\"0\"  <IF NAME=\"con.write_imgs==0\"> checked=\"checked\"</IF>></label>\r\n                <br /></div>',`display_order` = 27 WHERE  `name` = 'write_imgs';";
+$update_sqls['configs14'] = "UPDATE `{$dbprefix}config` SET `option` = '<img src=\"{STAMP_IMG_URL}\" /> <br />\r\n  <label>{lang.YES}<input type=\"radio\" id=\"write_imgs\" name=\"write_imgs\" value=\"1\"  <IF NAME=\"con.write_imgs==1\"> checked=\"checked\"</IF>></label>\r\n                <label>{lang.NO}<input type=\"radio\" id=\"write_imgs\" name=\"write_imgs\" value=\"0\"  <IF NAME=\"con.write_imgs==0\"> checked=\"checked\"</IF>></label>\r\n                <br />',`display_order` = 27 WHERE  `name` = 'write_imgs';";
 
 $update_sqls['configs15'] = "UPDATE `{$dbprefix}config` SET `option` = '<label>{lang.YES}<input type=\"radio\" id=\"del_url_file\" name=\"del_url_file\" value=\"1\"  <IF NAME=\"con.del_url_file==1\"> checked=\"checked\"</IF>></label>\r\n                <label>{lang.NO}<input type=\"radio\" id=\"del_url_file\" name=\"del_url_file\" value=\"0\"  <IF NAME=\"con.del_url_file==0\"> checked=\"checked\"</IF>></label>',`display_order` = 13 WHERE  `name` = 'del_url_file';";
 
@@ -91,7 +91,7 @@ $update_sqls['configs24'] = "UPDATE `{$dbprefix}config` SET `option` = '<label>{
 
 $update_sqls['configs25'] = "UPDATE `{$dbprefix}config` SET `option` = '<input type=\"text\" id=\"sitename\" name=\"sitename\" value=\"{con.sitename}\" size=\"40\">',`display_order` = 1 WHERE  `name` = 'sitename';";
 
-$update_sqls['configs26'] = "UPDATE `{$dbprefix}config` SET `option` = '<input type=\"text\" id=\"siteurl\" name=\"siteurl\" value=\"{con.siteurl}\" size=\"40\">',`display_order` = 2 WHERE  `name` = 'siteurl';";
+$update_sqls['configs26'] = "UPDATE `{$dbprefix}config` SET `option` = '<input type=\"text\" id=\"siteurl\" name=\"siteurl\" value=\"{con.siteurl}\" size=\"40\" style=\"direction:ltr\">',`display_order` = 2 WHERE  `name` = 'siteurl';";
 
 $update_sqls['configs27'] = "UPDATE `{$dbprefix}config` SET `option` = '<input type=\"text\" id=\"sitemail\" name=\"sitemail\" value=\"{con.sitemail}\" size=\"40\">',`display_order` = 3 WHERE  `name` = 'sitemail';";
 

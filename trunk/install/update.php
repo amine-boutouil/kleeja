@@ -13,16 +13,17 @@ include important files
 */
 define ('IN_COMMON' , true);
 $path = "../includes/";
+$_path = "../";
 define('PATH', '../');
 (file_exists('../config.php')) ? include_once ('../config.php') : null;
 include_once ($path . 'functions.php');
 switch ($db_type)
 {
 	case 'mysqli':
-		include_once ($path . 'includes/mysqli.php');
+		include_once ($_path . 'includes/mysqli.php');
 	break;
 	default:
-		include_once ($path . 'includes/mysql.php');
+		include_once ($_path . 'includes/mysql.php');
 }
 include_once ('func_inst.php');
 

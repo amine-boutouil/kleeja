@@ -4,7 +4,7 @@
 # Designed by Tar3q .... Tar3q.com
 # copyright 2007-2009  ..
 */
-
+small{font-weight:normal;font-size:9px;}
 /* header logo */
 #header .logo2{
 padding-left: 60px;width: 300px;
@@ -13,21 +13,25 @@ padding-left: 60px;width: 300px;
 /* header logo */
 
  /* middle */
- #divmiddle { float: left;}
- #divmiddle .title { padding: 4px 5px 4px 35px; background-position:left;}
- #divmiddle .welcome span{padding-left:5px;}
+/* middle */
+#divmiddle {width:68%;}
+#divmiddle .title {letter-spacing:0px;}
+ #divmiddle .welcome span{padding-left:0px;}
  /* middle */	
  
- 				
  /* right  menu */	
- #rightmenu{ float: left;}
- #rightmenu .link-menu{ float: left; }
- /* right  menu */	
+#rightmenu{float:left;}
+#rightmenu .link-menu{float:left; height: 70px; width:48%;}
+#rightmenu  .link-menu-current {height: 70px; width:48%;} 
+#rightmenu .link-menu img {padding-bottom:10px ;}
+#rightmenu .link-menu a:hover {height:54px }
+/* right  menu */	
+
  
 .s_box {background-position:top left;}
 
  /* last visit */					
-#info-last-visit {float: left; }
+#info-last-visit {float: left; margin-right:0px;margin-left:5px;}
 #info-last-visit li {text-align: left;}
  /* last visit */	
 
@@ -51,7 +55,7 @@ padding-left: 60px;width: 300px;
 -.here_page { margin-left: 5px;}
  /* pagination */
  
-#disk_size .t_disk_size{padding:2px 10px 2px 35px;background-position:0% 40%;}
+#disk_size .t_disk_size{padding-left:0}
 
 #other-info .t_info{background-position:0% 40%;}
 
@@ -61,3 +65,5 @@ padding-left: 60px;width: 300px;
 .title_general_conf1gs,.title_other_conf1gs {background-position:2% 50%;}
 
 .adminstrators { background-position:0% 60%;}
+
+.imgtitle {margin-left:0}

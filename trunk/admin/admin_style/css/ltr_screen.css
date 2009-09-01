@@ -4,6 +4,6 @@
 # copyright 2007-2009  ..
 */
 /* import stylesheets and hide from ie/mac \*/
-@import url("ltr_reset.css");
+@import url("reset.css");
 @import url("ltr.css");
 /* end import/hide */

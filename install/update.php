@@ -19,10 +19,10 @@ include_once ($path . 'functions.php');
 switch ($db_type)
 {
 	case 'mysqli':
-		include_once ($_path . 'includes/mysqli.php');
+		include_once ($path . 'includes/mysqli.php');
 	break;
 	default:
-		include_once ($_path . 'includes/mysql.php');
+		include_once ($path . 'includes/mysql.php');
 }
 include_once ('func_inst.php');
 

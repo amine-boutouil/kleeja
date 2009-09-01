@@ -74,7 +74,7 @@
 			
 			//general varaibles
 			$action		= basename(ADMIN_PATH) . '?cp=options&amp;type=' . htmlspecialchars($_GET['type']);
-			$STAMP_IMG_URL = PATH . 'images/watermark.png';
+			$STAMP_IMG_URL = PATH . 'images/watermark.gif';
 			$stylfiles	= $lngfiles	= $authtypes = '';
 			$optionss	= array();
 			$n_googleanalytics = '<a href="http://www.google.com/analytics">Google Analytics</a>';

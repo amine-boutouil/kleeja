@@ -682,7 +682,7 @@ function process ()
 						//write on image
 						if( ($config['write_imgs'] != 0) && in_array(strtolower($this->typet), array('gif', 'png', 'jpg', 'jpeg')))
 						{
-							$this->watermark($folderee . "/" . $filname,strtolower($this->typet), 'images/watermark.png');
+							$this->watermark($folderee . "/" . $filname,strtolower($this->typet), 'images/watermark.gif');
 						}
 
 						//then show

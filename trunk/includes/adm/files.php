@@ -289,7 +289,7 @@
 	//after submit 
 	if (isset($_POST['submit']))
 	{
-		$text	= ($affected ? $lang['FILES_UPDATED'] : $lang['NO_UP_CHANGE_S']) . '<meta HTTP-EQUIV="REFRESH" content="0; url=' . $action . '">' . "\n";
+		$text	= ($affected ? $lang['FILES_UPDATED'] : $lang['NO_UP_CHANGE_S']) . '<meta HTTP-EQUIV="REFRESH" content="3; url=' . $action . '">' . "\n";
 		$stylee	= "admin_info";
 	}
 

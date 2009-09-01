@@ -77,6 +77,7 @@
 /* right  menu */	
 	
 /*  buttons */
+.left_button {float:left;display:inline;}
 .button1 ,.button2 {
     cursor: pointer; padding: 3px 9px;  margin:5px;
     font: normal 12px Tahoma, Helvetica, Arial, sans-serif;
@@ -89,7 +90,7 @@
 
 	
 /* class */
-fieldset.quick, p.quick {  margin: 0 0 5px; padding: 5px 0 0; border: none; background-color: transparent; text-align: center;}
+fieldset.quick, p.quick { margin: 0 5px; padding:5px 0; border: none; background-color: transparent; text-align: center;}
 input.button1, input.button3,input.button2 {
 	width: auto !important; padding: 3px 4px 3px 4px; color: #000; cursor: pointer;
 	font: normal 12px Tahoma, Helvetica, Arial, sans-serif;
@@ -191,7 +192,7 @@ input.button1, input.button3,input.button2 {
 /* toolTipBox */
 
 /* pagination */
-.pagination {margin:2px 0;}
+.arr_paging{float:right;display:inline;margin:8px 0;}
 .pagination  a{padding:3px 9px;color:#333;margin:0 2px;}
 .paging {background-color: #E6F2FF; border: 1px solid #6496C3;font-size:10px;text-align:center;}
 .here_page ,.paging:hover,.paging {float:right;padding:3px 9px;-moz-border-radius:10px;}

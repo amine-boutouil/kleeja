@@ -515,7 +515,9 @@ $lang = array_merge($lang, array(
 	'RETURN_TEMPLATE_BK'		=> 'استرجاع اي قالب للأصل',
 	'RETURN_TEMPLATE_BK_EXP'	=> 'قم باختيار اي قالب لاسترجاعه للمحتوى الاصلي قبل التعديل , القوالب هذه تتبع للستايل الافتراضي',
 	'TPL_BK_RETURNED'			=> 'تم إستعادة النسخه الاصليه للقالب %s.',
-
+	'KLEEJA_P_TEAM'				=> 'فريق تطوير كليجا',
+	'KLEEJA_D_TEAM'				=> 'فريق تصميم كليجا',
+	
 	//last line of this file ...					 
 	'S_TRANSLATED_BY' 			=> '<br />Translated By <a href="http://www.fenix4web.com/">Fenix4Web</a>',
 ));

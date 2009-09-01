@@ -72,7 +72,7 @@
 	font-size: xx-small;font-weight: bold;padding:5px;}
 #rightmenu .link-menu img {padding-bottom: 7px ;}
 #rightmenu .link-menu a:hover {
-	padding-bottom:5px;	text-decoration: none; background: #fff;	color:#000;
+	text-decoration: none; background: #fff;	color:#000;
 	border-top: #FE6914 3px solid; border-bottom: #FE6914 3px solid; }
 /* right  menu */	
 	
@@ -140,7 +140,7 @@ input.button1, input.button3,input.button2 {
 /* other info  */
 
 /* other info  */
-#disk_size{ margin:10px 0 0 0 ; padding: 10px 10px 0px 10px; font-weight: bold;background:#eee; border: 1px solid #999;position: relative;-moz-border-radius: 8px; border-radius:1px;}
+#disk_size{ margin-top:10px; padding: 10px 10px 0px 10px; font-weight: bold;background:#eee; border: 1px solid #999;position: relative;-moz-border-radius: 8px; border-radius:1px;}
 #disk_size ul { padding: 6px; }
 #disk_size li {color: #333;}
 #disk_size .t_disk_size{ padding:2px 0px 2px 10px; font-weight: bold;font-size:14px;color:#F46320}

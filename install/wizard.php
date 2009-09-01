@@ -30,10 +30,10 @@ include_once ('func_inst.php');
 
 
 //links
-$w1_link = $_path . 'admin.php?cp=options';
-$w2_link = $_path . 'admin.php?cp=exts';
-$w3_link = $_path . 'admin.php?cp=styles';
-$w4_link = $_path . 'admin.php?cp=rules';
+$w1_link = $_path . 'admin/?cp=options';
+$w2_link = $_path . 'admin/?cp=exts';
+$w3_link = $_path . 'admin/?cp=styles';
+$w4_link = $_path . 'admin/?cp=rules';
 
 
 $right_left = $lang['DIR']=='ltr' ? 'left' : 'right';

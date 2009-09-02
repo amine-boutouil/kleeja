@@ -234,7 +234,7 @@ background:#FF9933 url(../images/headline_bg.png) repeat-x top right;color:#111;
 .tabledata:hover {border-color:#FF6600}
 .tabledata tr:hover {background-color:#FF6600;color:#fff}
 .tabledata thead tr:hover th,.tabledata thead th:hover {background:#888 url(../images/headline_bg.png) repeat-x center right;cursor:default;color:#fff}
-.tabledata tr th:hover,.tabledata tr td:hover {background-color:#fff;color:#039;cursor:crosshair}
+.tabledata tr th:hover,.tabledata tr td:hover {background-color:#fff;color:#039;cursor:text}
 /*-- #  end box user name and all files  >> fileuser.html  */
 
 /* register template >> register.html */

@@ -650,7 +650,7 @@ function process ()
 				delete_cache('data_stats');
 
 				//inforantion of file 
-				$file_info = array('::ID::'=>$this->id_for_url, '::NAME::'=>$this->name_for_url, '::DIR::'=> $folderee, '::FNAME::'=>$filname);
+				$file_info = array('::ID::'=>$this->id_for_url, '::NAME::'=>$this->name_for_url, '::DIR::'=> $folderee, '::FNAME::'=>$realf);
 					
 				//show del code link
 				$extra_del = '';

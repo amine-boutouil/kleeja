@@ -100,7 +100,7 @@
 		//delete cache ..
 		delete_cache('data_exts');
 
-		$text	= ($affected ? $lang['UPDATED_EXTS'] : $lang['NO_UP_CHANGE_S']) . '<meta HTTP-EQUIV="REFRESH" content="0; url=' . basename(ADMIN_PATH) . '?cp=exts&amp;page=' .  (isset($_GET['page']) ? intval($_GET['page']) : '1') . '">' . "\n";
+		$text	= ($affected ? $lang['UPDATED_EXTS'] : $lang['NO_UP_CHANGE_S']) . '<meta HTTP-EQUIV="REFRESH" content="2; url=' . basename(ADMIN_PATH) . '?cp=exts&amp;page=' .  (isset($_GET['page']) ? intval($_GET['page']) : '1') . '">' . "\n";
 		$stylee	= "admin_info";
 	}
 	else if(isset($_GET['add_new_ext']))

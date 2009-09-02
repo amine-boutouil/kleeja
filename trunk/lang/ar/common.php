@@ -235,7 +235,7 @@ $lang = array_merge($lang, array(
 	'SIZE_U' => 'الحجم [م]',
 	'ALLOW_G' => 'سماح [ز]',
 	'ALLOW_U' => 'سماح [م]',
-	'E_EXTS' => '<b><font color="#008000">[&nbsp;ز&nbsp;]&nbsp;:&nbsp;  تعني الزوار</font></b>&nbsp;/&nbsp;<b><font color="#D80000">[&nbsp;م&nbsp;]&nbsp;:&nbsp; تعني الأعضاء </font></b>&nbsp;/&nbsp;<i>الأحجام تضبط بالكليوبايت</i>',
+	'E_EXTS' => '<font color="#008000">[&nbsp;ز&nbsp;]&nbsp;:&nbsp;  تعني الزوار</font>&nbsp;&nbsp;<font color="#D80000">[&nbsp;م&nbsp;]&nbsp;:&nbsp; تعني الأعضاء </font>&nbsp;/&nbsp;<i>الأحجام تضبط بالكليوبايت</i>',
 	'UPDATED_EXTS' => 'تم تحديث الإمتدادات بنجاح',
 	'UPDATE_FILES' => 'تحديث الملفات',
 	'BY' => 'من',

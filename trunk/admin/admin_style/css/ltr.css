@@ -12,7 +12,6 @@ small{font-weight:normal;font-size:9px;}
 #rightmenu{float:left;}
 #rightmenu .link-menu{float:left;}
 .s_box {background-position:top left;}
-.s_box_tpls_d{background-position:center left;}
 #info-last-visit {float:left;margin-right:5px;margin-left:0px}
 #info-last-visit li {text-align: left;}
 #other-info .t_info{background-position:0% 40%;}
@@ -23,11 +22,13 @@ small{font-weight:normal;font-size:9px;}
 .arr_paging{float:left}
 .pagination {float:left;}
 .paging {margin-left: 5px; }
--.here_page {margin-left: 5px;}
+.here_page {margin-left: 5px;}
+.here_page ,.paging:hover,.paging {float:left}
 #border-table {float:left;}
 .config_types_list div {float:left}
 .title_general_conf1gs,.title_other_conf1gs {background-position:2% 50%;}
 .adminstrators { background-position:0% 60%;}
 .imgtitle {margin-left:0}
-.update_info ,.update_error{background-position:2% 50%;}
+.update_info ,.update_error{background-position:1% 50%;}
 .left_button {float:right}
+.small_font {font-size:12px;font-weight:normal;}

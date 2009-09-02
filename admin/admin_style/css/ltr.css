@@ -5,65 +5,29 @@
 # copyright 2007-2009  ..
 */
 small{font-weight:normal;font-size:9px;}
-/* header logo */
-#header .logo2{
-padding-left: 60px;width: 300px;
-	background: url(../images/adminopen.png) no-repeat left center; 
-}
-/* header logo */
-
- /* middle */
-/* middle */
-#divmiddle {width:68%;}
+#header .logo2{padding-left:60px;background-position:left center;}
+#divmiddle {float:left}
 #divmiddle .title {letter-spacing:0px;}
- #divmiddle .welcome span{padding-left:0px;}
- /* middle */	
- 
- /* right  menu */	
+#divmiddle .welcome span{padding-left:0px;}
 #rightmenu{float:left;}
-#rightmenu .link-menu{float:left; height: 70px; width:48%;}
-#rightmenu  .link-menu-current {height: 70px; width:48%;} 
-#rightmenu .link-menu img {padding-bottom:10px ;}
-#rightmenu .link-menu a:hover {height:54px }
-/* right  menu */	
-
- 
+#rightmenu .link-menu{float:left;}
 .s_box {background-position:top left;}
-
- /* last visit */					
-#info-last-visit {float: left; margin-right:0px;margin-left:5px;}
+.s_box_tpls_d{background-position:center left;}
+#info-last-visit {float:left;margin-right:5px;margin-left:0px}
 #info-last-visit li {text-align: left;}
- /* last visit */	
-
-/* System Messages  #info*/
-#system-message div.info  ul li { padding-left: 35px; }
- #system-message div.info  ul li { background-position: left top;}
-/* System Messages  #info*/
- 
- /* System Messages  #error*/
- #system-message div.error  ul li { padding-left: 35px; }
- #system-message div.error ul li{ background-position: left top ;}
- /* System Messages  #error*/
- 	
- /*  toolTipBox */	
- #toolTipBox {text-align:left;}
- /* toolTipBox */
- 
- /* pagination */
-.pagination {float:left;}
-.paging {  margin-left: 5px; }
--.here_page { margin-left: 5px;}
- /* pagination */
- 
-#disk_size .t_disk_size{padding-left:0}
-
 #other-info .t_info{background-position:0% 40%;}
-
-/* config page */
+#disk_size .t_disk_size {padding-left:0}
+#system-message div.info  ul li ,#system-message div.error  ul li {padding-left: 35px;}
+#system-message div.info  ul li ,#system-message div.error ul li {background-position: left top;}
+#toolTipBox {text-align:left;}
+.arr_paging{float:left}
+.pagination {float:left;}
+.paging {margin-left: 5px; }
+-.here_page {margin-left: 5px;}
+#border-table {float:left;}
 .config_types_list div {float:left}
-
 .title_general_conf1gs,.title_other_conf1gs {background-position:2% 50%;}
-
 .adminstrators { background-position:0% 60%;}
-
 .imgtitle {margin-left:0}
+.update_info ,.update_error{background-position:2% 50%;}
+.left_button {float:right}

@@ -68,7 +68,7 @@ class KljUploader
 			return;
 		}
 
-		$src_logo = imagecreatefrompng($logo);
+		$src_logo = imagecreatefromgif($logo);
 
 		$bwidth  = @imageSX($src_img);
 		$bheight = @imageSY($src_img);

@@ -12,24 +12,11 @@
 <!-- start table files allowed -->
 <table id="guide" border="0" cellspacing="0" cellpadding="0">
 	<tr>
-		<IF NAME="users_data">
-		<!-- start user list of files allowed -->
-		<th class="guide_user_th">{lang.GUIDE_USERS}</th>
-		<!-- # END user list of files allowed -->
-		</IF>
-		<!-- clear ten pixels -->
-		<th style="width:10px">&nbsp;</th>
-		<!-- # clear ten pixels  -->
-		<IF NAME="gusts_data">
-		<!-- start visitor list files  -->
-		<th class="guide_visitor_th">{lang.GUIDE_VISITORS}</th>
-		<!-- # END visitor list files  -->
-		</IF>
-	</tr>
-	
-	<tr>
-		<!-- start user list of files allowed -->
+	<IF NAME="users_data">
+	<!-- start user list of files allowed -->
 		<td>
+		<div class="guide_user_th">{lang.GUIDE_USERS}</div>
+		
 		<LOOP NAME="users_data">
 			<IF LOOP="is_first_row">
 				<IF LOOP="realy_first_row">
@@ -50,13 +37,16 @@
 			</div>
 		</td>
 		<!-- # END user list of files allowed -->
+	</IF>
 		
 		<!-- clear ten pixels  -->
 		<td style="width:10px">&nbsp;</td>
 		<!-- # clear ten pixels  -->
 		
-		<!-- start visitor list files  -->
+	<IF NAME="gusts_data">
+	<!-- start visitor list files  -->
 		<td>
+		<div class="guide_visitor_th">{lang.GUIDE_VISITORS}</div>		
 		<LOOP NAME="gusts_data">
 			<IF LOOP="is_first_row">
 				<IF LOOP="realy_first_row">
@@ -77,6 +67,7 @@
 			</div>
 		</td>
 		<!-- # END visitor list files  -->
+	</IF>
 	</tr>
 </table>
 <!-- # END table files allowed -->

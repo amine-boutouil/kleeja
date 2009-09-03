@@ -157,7 +157,7 @@ ul.tabbernav li.tabberactive a:hover{color:#F68618;}
 .onlineall  {background:url(../images/number_online_all.gif) no-repeat 98% 50%;padding-right:20px;color:#CC3300}
 .onlinevisitor{color:#000}
 .onlineusers{color:#555}
-.name_users{background:#FFF3DF;margin-bottom:4px;margin-top:1px;display:block;float:right;color:#555;padding:3px 14px;border:1px inset #444;-moz-border-radius:6px;-webkit-border-radius:6px;-khtml-border-radius:6px;border-radius:6px;}
+.name_users{background:#FFF3DF;margin-bottom:4px;margin:2px;display:block;float:right;color:#555;padding:3px 14px;border:1px inset #444;-moz-border-radius:6px;-webkit-border-radius:6px;-khtml-border-radius:6px;border-radius:6px;}
 /*  #  END FOR ONLINE */
 
 /*  ALL inputs */
@@ -338,7 +338,7 @@ vertical-align:middle;
 line-height:25px
 }
 
-.all_boxes{width:98%;color:#004776;border:1px solid #80FFFF;outline:1px solid #84A0C0;direction:ltr}
+.all_boxes{width:98%;color:#004776;border:1px solid #80FFFF;outline:1px solid #84A0C0;direction:ltr;}
 .all_boxes:focus {background-color:#D9FDFF;border: 1px solid #005F9D;color:#111}
 
 .debug_kleeja{

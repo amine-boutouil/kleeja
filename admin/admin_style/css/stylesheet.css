@@ -4,7 +4,6 @@
 # copyright 2007-2009  ..
 */
 
-
 /* header */
 #divheader { width: 94%; margin: 10px auto 0px auto ; padding: 10px;
     border-top: 1px solid #D7D7D7; border-right: 1px solid #CCCCCC;
@@ -23,7 +22,6 @@
 	display: inline-block;}
 #header .logo2 b{padding-top: 20px;color:#444; font: bold 22px Tahoma, Arial, Helvetica, sans-serif;}
 /* header */
-
 
 /* body */
 #divbody   { 

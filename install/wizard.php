@@ -25,7 +25,14 @@ include important files
 define ( 'IN_COMMON' , true);
 include_once ($_path . 'config.php');
 include_once ($_path . 'includes/functions.php');
-include_once ($_path . 'includes/mysql.php');
+switch ($db_type)
+{
+	case 'mysqli':
+		include_once ($_path . 'includes/mysqli.php');
+	break;
+	default:
+		include_once ($_path . 'includes/mysql.php');
+}
 include_once ('func_inst.php');
 
 
@@ -62,7 +69,7 @@ echo '<a href="' . $w4_link . '" target="_blank"><img src="img/action_go.gif"></
 echo '</div>';
 
 echo '<fieldset class="home"><img src="img/home.gif" alt="home" />&nbsp;<a href="../index.php">' . $lang['INDEX'] . '</a><br /> ';
-echo '<img src="img/adm.gif" alt="admin" />&nbsp;<a href="../admin.php">' . $lang['ADMINCP'] . '</a></fieldset>';
+echo '<img src="img/adm.gif" alt="admin" />&nbsp;<a href="../admin/">' . $lang['ADMINCP'] . '</a></fieldset>';
 /*
 //echo footer
 */

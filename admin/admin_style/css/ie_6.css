@@ -5,6 +5,5 @@
 */
 #info-last-visit {width:48%;}
 #disk_size .tab-size {border-width:0px;}
-/*  toolTipBox */	
 #toolTipBox {width:200px;height:85px;font-size:11px;line-height:18px;display: none;position:absolute;}
-/* toolTipBox */
+.arr_paging{float:none}

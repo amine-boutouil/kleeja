@@ -1,8 +1,9 @@
 <!-- start Exts temlate  -->
 <div id="divmiddle">
 
-<form method="post" action="{action}">
 <fieldset>
+
+<form method="post" action="{action}">
 
 <!-- start div border table  -->
 <div id="border-table">
@@ -51,9 +52,9 @@
 <!-- end clear  -->
 
  <!-- start pagination  -->
-<div>
 <span class="arr_paging">{arr_paging}</span>
-<span class="left_button"><input class="button2" name="submit" type="submit" value="{lang.UPDATE_EXTS}" /><span>
+<div class="left_button">
+<input class="button2" name="submit" type="submit" value="{lang.UPDATE_EXTS}" />
 </div>
 <!-- end pagination  -->
 
@@ -85,7 +86,6 @@
 <!-- start div border table  -->
 <div id="border-table">
 
-<script type="text/javascript" src="includes/admin_style/byte.js"></script>
 <script type="text/javascript">
 /* This script and many more are available free online at
 The JavaScript Source :: http://javascript.internet.com
@@ -156,6 +156,8 @@ function convertgb(f)
 </div>
 <!-- end div border table  -->
 
+<div class="clr"></div>
+
 </form>
 
 
@@ -177,7 +179,9 @@ function convertgb(f)
 <p class="dot" />
 <!-- border line Vertical  -->
 
-<br />
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
 
 <!-- start table no hover  -->
 <table class="tab-no-hover">
@@ -200,9 +204,11 @@ function convertgb(f)
 
 </div>
 <!-- end div border table  -->
-</fieldset>
 
+<div class="clr"></div>
 </form>
+
+</fieldset>
 
 </div>
 

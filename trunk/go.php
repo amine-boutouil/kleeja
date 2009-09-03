@@ -25,6 +25,9 @@ if(!isset($_GET['go']))
 
 switch ($_GET['go'])
 {
+	//
+	//Page of allowed extensions for both users and members
+	//
 	case 'guide' : 
 
 		$stylee	= 'guide';
@@ -68,13 +71,16 @@ switch ($_GET['go'])
 									);
 			$last_gu_id_was = $data['group_id'];		
 		}
-		
+
 		($hook = kleeja_run_hook('guide_go_page')) ? eval($hook) : null; //run hook
-	
+
 	break;
-	
+
+	//
+	//Page of reporting
+	//
 	case 'report' :
-		
+
 		//page info
 		$stylee	= 'report';
 		$titlee	= $lang['REPORT'];
@@ -85,12 +91,12 @@ switch ($_GET['go'])
 		$NOT_USER = !$usrcp->name() ? true : false; 
 		//no error yet 
 		$ERRORS = false;
-		
+
 		//_post
 		$t_rname = isset($_POST['rname']) ? htmlspecialchars($_POST['rname']) : ''; 
 		$t_rmail = isset($_POST['rmail']) ? htmlspecialchars($_POST['rmail']) : ''; 
 		$t_rtext = isset($_POST['rtext']) ? htmlspecialchars($_POST['rtext']) : ''; 
-		
+
 		if (!isset($_POST['submit']))
 		{
 			// first
@@ -98,15 +104,15 @@ switch ($_GET['go'])
 			{
 				kleeja_err($lang['NO_ID']);
 			}
-				
+
 			($hook = kleeja_run_hook('no_submit_report_go_page')) ? eval($hook) : null; //run hook
 		}
 		else
 		{
 			$ERRORS	= array();
-			
+
 			($hook = kleeja_run_hook('submit_report_go_page')) ? eval($hook) : null; //run hook
-			
+
 			//check for form key
 			if(!kleeja_check_form_key('report'))
 			{
@@ -133,7 +139,7 @@ switch ($_GET['go'])
 			{
 				$ERRORS[]	= $lang['NO_ME300RES'];
 			}
-			
+
 			//no error , lets do process
 			if(empty($ERRORS))
 			{
@@ -150,49 +156,52 @@ switch ($_GET['go'])
 										'INTO'		=> "`{$dbprefix}reports`",
 										'VALUES'	=> "'$name', '$mail', '$url', '$text', '$time', '$ip'"
 										);
-					
+
 				($hook = kleeja_run_hook('qr_insert_new_report')) ? eval($hook) : null; //run hook
-			
+
 				$SQL->build($insert_query);
-					
+
 				//update number of reports
 				$update_query	= array('UPDATE'	=> "{$dbprefix}files",
 										'SET'		=> 'report=report+1',
 										'WHERE'		=> 'id=' . $rid,
 											);
-								
+
 				($hook = kleeja_run_hook('qr_update_no_file_report')) ? eval($hook) : null; //run hook
-					
+
 				$SQL->build($update_query);
-					
+
 				$to = $config['sitemail2']; //administrator e-mail
 				$message = $text . "\n\n\n\n" . 'URL :' . $url . ' - TIME : ' . date("d-m-Y h:i a", $time) . ' - IP:' . $ip;
 				$subject = $lang['REPORT'];
 				send_mail($to, $message, $subject, $mail, $name);
-					
+
 				kleeja_info($lang['THNX_REPORTED']);
-					
 			}
 		}
-		
+
 		($hook = kleeja_run_hook('report_go_page')) ? eval($hook) : null; //run hook
-	
+
 	break; 
 	
-	
+	//
+	//Pages of rules
+	//
 	case 'rules' :
-	
+
 		$stylee	= 'rules';
 		$titlee	= $lang['RULES'];
 		$contents = (strlen($ruless) > 3) ? stripslashes($ruless) : $lang['NO_RULES_NOW'];
-		
+
 		($hook = kleeja_run_hook('rules_go_page')) ? eval($hook) : null; //run hook
-	
+
 	break;
-	
-	
+
+	//
+	//Page of call-us
+	//
 	case 'call' : 
-		
+
 		//page info
 		$stylee	= 'call';
 		$titlee	= $lang['CALL'];
@@ -201,21 +210,21 @@ switch ($_GET['go'])
 		$NOT_USER = !$usrcp->name() ? true : false; 
 		//no error yet 
 		$ERRORS = false;
-			
+
 		//_post
 		$t_cname = isset($_POST['cname']) ? htmlspecialchars($_POST['cname']) : ''; 
 		$t_cmail = isset($_POST['cmail']) ? htmlspecialchars($_POST['cmail']) : ''; 
 		$t_ctext = isset($_POST['ctext']) ? htmlspecialchars($_POST['ctext']) : ''; 
-		
+
 		($hook = kleeja_run_hook('no_submit_call_go_page')) ? eval($hook) : null; //run hook
-		
+
 		if (isset($_POST['submit']))
 		{
 			//after sumit
 			$ERRORS	= array();
-			
+
 			($hook = kleeja_run_hook('submit_call_go_page')) ? eval($hook) : null; //run hook
-			
+
 			//check for form key
 			if(!kleeja_check_form_key('call'))
 			{
@@ -238,7 +247,7 @@ switch ($_GET['go'])
 			{
 				$ERRORS[] = $lang['NO_ME300TEXT'];
 			}
-			
+
 			//no errors ,lets do process
 			if(empty($ERRORS))
 			{
@@ -247,15 +256,14 @@ switch ($_GET['go'])
 				$mail	= $NOT_USER ? (string) strtolower(trim($SQL->escape($_POST['cmail']))) : $usrcp->mail();
 				$timee	= (int)	time();
 				$ip		=  get_ip();
-					
 
 				$insert_query	= array('INSERT'	=> "`name` ,`text` ,`mail` ,`time` ,`ip`",
 										'INTO'		=> "`{$dbprefix}call`",
 										'VALUES'	=> "'$name', '$text', '$mail', '$timee', '$ip'"
 										);
-					
+
 				($hook = kleeja_run_hook('qr_insert_new_call')) ? eval($hook) : null; //run hook
-			
+
 				if ($SQL->build($insert_query))
 				{
 					send_mail($config['sitemail2'], $text  . "\n\n\n\n" . 'TIME : ' . date("d-m-Y h:i a", $timee) . ' - IP:' . $ip, $lang['CALL'], $mail, $name);
@@ -263,15 +271,18 @@ switch ($_GET['go'])
 				}
 			}
 		}
-		
+
 		($hook = kleeja_run_hook('call_go_page')) ? eval($hook) : null; //run hook
 
 	break;
 	
+	//
+	//Page for requesting delete file 
+	//
 	case 'del' :
 
 		($hook = kleeja_run_hook('del_go_page')) ? eval($hook) : null; //run hook
-		
+
 		//stop .. check first ..
 		if (!$config['del_url_file'])
 		{
@@ -298,9 +309,9 @@ switch ($_GET['go'])
 								'WHERE'	=> "f.code_del='" . $cd . "'",
 								'LIMIT'	=> '1',
 							);
-					
+
 				($hook = kleeja_run_hook('qr_select_file_with_code_del')) ? eval($hook) : null; //run hook	
-				
+
 				$result	= $SQL->build($query);
 
 				if ($SQL->num_rows($result) != 0)
@@ -313,28 +324,35 @@ switch ($_GET['go'])
 						{
 							@kleeja_unlink ($row['folder'] . "/thumbs/" . $row['name']);
 						}
-						
+
 						$query_del = array(
 											'DELETE' => "{$dbprefix}files",
 											'WHERE'	=> "id='" . $row['id'] . "'"
 											);
-								
+
 						($hook = kleeja_run_hook('qr_del_file_with_code_del')) ? eval($hook) : null; //run hook	
+
+						$SQL->build($query_del);
 						
-						if ($SQL->build($query_del))
+						if($SQL->affected())
 						{
 							//update number of stats
-							$update_query	= array('UPDATE'	=> "{$dbprefix}stats",
+							$update_query	= array(
+													'UPDATE'	=> "{$dbprefix}stats",
 													'SET'		=> 'files=files-1,sizes=sizes-' . $row['size'],
 												);
-							
+
 							$SQL->build($update_query);
 							kleeja_info($lang['DELETE_SUCCESFUL']);
 						}
-						
+						else
+						{
+							kleeja_info($lang['ERROR_TRY_AGAIN']);
+						}
+
 						break;//to prevent divel actions
 					}
-				
+
 					$SQL->freeresult($result);
 				}
 			}
@@ -343,19 +361,22 @@ switch ($_GET['go'])
 				kleeja_info($lang['ARE_YOU_SURE_DO_THIS'] . '<script type="text/javascript">
 						function confirm_from()
 						{
-						if(confirm(\'' . $lang['ARE_YOU_SURE_DO_THIS'] . '\'))
-							window.location = "go.php?go=del&sure=ok&cd=' . $cd . '";
-						else
-							window.location = "index.php";
+							if(confirm(\'' . $lang['ARE_YOU_SURE_DO_THIS'] . '\'))
+								window.location = "go.php?go=del&sure=ok&cd=' . $cd . '";
+							else
+								window.location = "index.php";
 						}
 					</script>
 				<body onload="javascript:confirm_from()">');
+				// I dont like this part '<body ...' but it's work anyway :)
 			}
 		}#else
 
 	break;
-	
-	
+
+	//
+	//Page of last stats
+	//
 	case 'stats' :
 
 		//stop .. check first ..
@@ -363,7 +384,7 @@ switch ($_GET['go'])
 		{
 			kleeja_info($lang['STATS_CLOSED'], $lang['STATS_CLOSED']);
 		}
-		
+
 		$most_online = $stat_most_user_online_ever; 
 		$on_muoe	 = gmdate("d-m-Y H:i a", $stat_last_muoe);
 		//ok .. go on
@@ -374,14 +395,17 @@ switch ($_GET['go'])
 		$sizes_st	= Customfile_size($stat_sizes);	
 		$lst_dl_st	= ((int)$config['del_f_day'] <= 0) ? ' [ ' . $lang['CLOSED_FEATURE'] . ' ] ' : gmdate("d-m-Y H:i a", $stat_last_f_del);
 		$lst_reg	= (empty($stat_last_user)) ? $lang['UNKNOWN'] : $stat_last_user;
-		
+
 		($hook = kleeja_run_hook('stats_go_page')) ? eval($hook) : null; //run hook
-		
+
 	break; 
 	
+	//
+	//Page for redirect to downloading a file
+	//[!] depreacted from 1rc6+, see download.php
+	//
 	case 'down':
-	
-		#depreacted from 1rc6+, see download.php
+
 		//go.php?go=down&n=$1&f=$2&i=$3
 		if(isset($_GET['n']))
 		{
@@ -391,19 +415,23 @@ switch ($_GET['go'])
 		{
 			$url_file = $config['siteurl'];
 		}
-		
+
 		redirect($url_file);
 		$SQL->close();
 		exit;
-		
+
 	break;
-	
+
+	//
+	//Default , if you a developer , you can embed your page here with this hook
+	//by useing $_GET[go] and your codes.
+	//
 	default:
-		
+
 		($hook = kleeja_run_hook('default_go_page')) ? eval($hook) : null; //run hook	
-	
+
 		kleeja_err($lang['ERROR_NAVIGATATION']);
-	
+
 	break;
 }#end switch
 

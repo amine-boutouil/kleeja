@@ -517,7 +517,8 @@ $lang = array_merge($lang, array(
 	'TPL_BK_RETURNED'			=> 'تم إستعادة النسخه الاصليه للقالب %s.',
 	'KLEEJA_P_TEAM'				=> 'فريق تطوير كليجا',
 	'KLEEJA_D_TEAM'				=> 'فريق تصميم كليجا',
-	
+	'ERROR_TRY_AGAIN'			=> 'خطأ , حاول مجدداً.',
+
 	//last line of this file ...					 
 	'S_TRANSLATED_BY' 			=> '<br />Translated By <a href="http://www.fenix4web.com/">Fenix4Web</a>',
 ));

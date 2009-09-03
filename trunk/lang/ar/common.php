@@ -501,6 +501,7 @@ $lang = array_merge($lang, array(
 	'TPL_BK_RETURNED'			=> 'تم إستعادة النسخه الاصليه للقالب %s.',
 	'KLEEJA_P_TEAM'				=> 'فريق تطوير كليجا',
 	'KLEEJA_D_TEAM'				=> 'فريق تصميم كليجا',
+	'ERROR_TRY_AGAIN'			=> 'خطأ , حاول مجدداً.',
 	));
 
 #<-- EOF

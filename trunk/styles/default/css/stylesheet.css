@@ -79,11 +79,11 @@ img.right {float: right;margin-left:15px;}
 #extras_header,#extras_footer {width:100%;margin:8px auto;padding:10px;text-align:center;}
 /*# END extras  header and  footer template */
 
-/* divx */
-#divx {padding:4px 1px;margin:2px;position:relative;text-align:left;color:#555;text-shadow: 0px 1px rgb(247, 247, 247)}
-#divx a,#divx a:link{color:#CF6600;}
-#divx a:hover{color:#000;}
-/* #  divx */
+/* Powered by kleeja*/
+#kleeja{padding:4px 1px;margin:2px;float:left;color:#555;text-shadow: 0px 1px rgb(247, 247, 247)}
+#kleeja a,#kleeja a:link{color:#CF6600;}
+#kleeja a:hover{color:#000;}
+/* #  Powered by kleeja */
 
 /* start Downlod template >> download.html */
 #file-info {height:230px;margin:5px auto;}

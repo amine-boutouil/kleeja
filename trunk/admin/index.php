@@ -15,15 +15,6 @@
 	define ('IN_INDEX' , true);
 	define ('IN_ADMIN' , true);
 
-	if(isset($_GET['go']) && $_GET['go'] == 'login')
-	{
-		define('IN_ADMIN_LOGIN', true);
-	}
-
-	if(isset($_GET['go']) && $_GET['go'] == 'login' && isset($_POST['submit']))
-	{
-		define('IN_ADMIN_LOGIN_POST', true);
-	}
 
 	//we are in admin path, session and cookies require this
 	$adm_path = basename(dirname(__file__), '/') . '/' . basename(__file__);
@@ -32,32 +23,29 @@
 	//include imprtant file ..
 	require_once (PATH . 'includes/common.php');
 
-
 	//go to ..
 	$go_to	= isset($_GET['cp']) ? htmlspecialchars($_GET['cp']) : 'start';
 	$username = $usrcp->name();
-	//admin session timeout
-	$admintime = isset($admintime) ? $admintime : 18000;
-	
 
 	//for security
-	if (!$usrcp->name() && !$usrcp->admin() && !defined('IN_ADMIN_LOGIN_POST'))
+	if (!$usrcp->name())
 	{
 		($hook = kleeja_run_hook('user_not_admin_admin_page')) ? eval($hook) : null; //run hook 
-		redirect(PATH . 'ucp.php?go=login&return=' . str_replace(array('?', '/', '='), array('ooklj1oo', 'ooklj2oo', 'ooklj3oo'), ADMIN_PATH . '?cp=' . $go_to));
+		redirect(PATH . 'ucp.php?go=login&return=' . urlencode(ADMIN_PATH . '?cp=' . $go_to));
 	}
 	
-	
+	//
 	//need to login again
+	//
 	if((empty($_SESSION['ADMINLOGIN']) || $_SESSION['ADMINLOGIN'] != md5($usrcp->name() . $config['siteurl'])) || (empty($_SESSION['USER_SESS']) || $_SESSION['USER_SESS'] != session_id()))
 	{
 		if(isset($_GET['go']) && $_GET['go'] == 'login') 
-		{			
+		{
 			if (isset($_POST['submit']))
 			{
 				//for onlines
 				$ip	= get_ip();
-					
+
 				if ($config['allow_online'] == 1)
 				{
 					$query_del	= array('DELETE'	=> "{$dbprefix}online",
@@ -68,14 +56,10 @@
 				}
 
 				//login
-				$ERRORS	=	'';
+				$ERRORS	= array();
 				if (empty($_POST['lname']) || empty($_POST['lpass']))
 				{
 					$ERRORS[] = $lang['EMPTY_FIELDS'];
-				}
-				elseif((!$username && !$usrcp->data($_POST['lname'], $_POST['lpass'], false, $admintime)) || ($username && !$usrcp->data($_POST['lname'], $_POST['lpass'], false, $admintime)))
-				{
-					$ERRORS[] = $lang['LOGIN_ERROR'];
 				}
 				elseif(USER_ADMIN != 1)
 				{
@@ -85,16 +69,26 @@
 				{
 					$ERRORS[] = $lang['INVALID_FORM_KEY'];
 				}
-					
-				if(empty($ERRORS) && USER_ADMIN == 1)
+
+				if(!sizeof($ERRORS))
 				{
-					$_SESSION['USER_SESS'] = session_id();
-					$_SESSION['ADMINLOGIN'] = md5($usrcp->name() . $config['siteurl']);
-					redirect('./' . basename(ADMIN_PATH) . '?cp=' . $go_to);
-					$SQL->close();
-					exit;
+					if($usrcp->data($_POST['lname'], $_POST['lpass'], false, $adm_time, true))
+					{
+						$_SESSION['USER_SESS'] = session_id();
+						$_SESSION['ADMINLOGIN'] = md5($usrcp->name() . $config['siteurl']);
+						redirect('./' . basename(ADMIN_PATH) . '?cp=' . $go_to);
+						$SQL->close();
+						exit;
+					}
+					else
+					{	
+						//Wrong entries
+						$ERRORS[] = $lang['LOGIN_ERROR'];
+					}
 				}
-				else
+				
+				//let's see if there is errors
+				if(sizeof($ERRORS))
 				{
 					$errs =	'';
 					foreach($ERRORS as $r)
@@ -102,12 +96,11 @@
 						$errs .= '- ' . $r . '. <br />';
 					}
 					
-					$usrcp->logout();
-					
-					//kleeja_admin_err($errs,false);
+					//$usrcp->logout();
 				}
-			}
+			}#end if submit
 		}
+
 			//show template login .
 			//body
 			$action	= './' . basename(ADMIN_PATH) . "?go=login&amp;cp=" . $go_to;
@@ -131,10 +124,11 @@
 				echo $tpl->display("admin_login");
 			}
 			
-		$SQL->close();
-		exit;	//stop	
-	}
-	
+			$SQL->close();
+			exit;
+	}#end login
+
+
 	(!defined('LAST_VISIT')) ? define('LAST_VISIT', time() - 3600*12) : '';
 
 	//path of admin extensions

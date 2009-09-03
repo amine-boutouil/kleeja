@@ -4,8 +4,6 @@
 # copyright 2007-2009  ..
 */
 
-input:focus{background-color:#CCFFFF ;border: 1px solid #6699FF;}
-
 /* right  menu */	
 #rightmenu{margin-top:17px;}
-
+.arr_paging{float:none}

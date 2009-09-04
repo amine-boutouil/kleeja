@@ -251,7 +251,7 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 	else
 	{
 		//not exists img or thumb
-		if(isset($_GET['img']) || isset($_GET['thmb']) || isset($_GET['thmbf']) || isset($_GET['imf']))
+		if(isset($_GET['img']) || isset($_GET['thmb']) || isset($_GET['thmbf']) || isset($_GET['imgf']))
 		{
 			($hook = kleeja_run_hook('not_exists_qr_down_img')) ? eval($hook) : null; //run hook
 				

@@ -251,12 +251,17 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 	else
 	{
 		//not exists img or thumb
-		if($is_image)
+		if(isset($_GET['img']) || isset($_GET['thmb']) || isset($_GET['thmbf']) || isset($_GET['imf']))
 		{
 			($hook = kleeja_run_hook('not_exists_qr_down_img')) ? eval($hook) : null; //run hook
 				
 			$f = 'images';
 			$n = 'not_exists.jpg';
+			
+			//set image conditon on
+			$is_image = true;
+			
+			//unset some var
 			if(isset($_GET['thmb']) || isset($_GET['thmbf']))
 			{
 				unset($_GET['thmb'], $_GET['thmbf']);

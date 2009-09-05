@@ -60,7 +60,7 @@
 				//when submit !!
 				if (isset($_POST['submit']))
 				{
-						if ($del[])
+						if ($del[$row['id']])
 						{
 							$del_nums[] = $row['id'];
 						}

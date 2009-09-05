@@ -17,96 +17,6 @@
 <div class="clr"></div>
 <!-- end clear  -->
 
-<!-- start welcome user admin -->
-<div class="welcome"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/heart.png" alt="Kleeja love you ..," /><span>&nbsp;&nbsp;{usernamelang}</span></div>
-<!-- end  welcome user admin -->
-	
-<!-- start clear  -->
-<div class="clr"></div>
-<!-- end clear  -->
-
-<!-- start last visit  -->
-<div id="info-last-visit">
-	<ul>
-	<li>
-	<IF NAME="last_visit">
-	<strong>{lang.LAST_VISIT} : {last_visit}</strong><br />
-	<small><a href="{h_lst_files}">{lang.FLS_LST_VST_SEARCH}</a> | 
-	<a href="{h_lst_imgs}">{lang.IMG_LST_VST_SEARCH}</a>
-	</small>
-	</IF>
-	</li>
-	</ul>
-</div>
-<!-- end last visit  -->
-
-<!-- start last file  -->	
-<div id="info-last-visit">
-	<ul>
-	<li>
-	<strong>{lang.LSTFLE_ST} : <IF NAME="stat_last_file!='0'"><a href="{last_file_up_url}" target="blank">{last_file_up}</a><ELSE>{lang.UNKNOWN}</IF></strong>
-	<br /><small>{lang.LSTDELST}<a>{last_del_fles}</a></small>
-	</li>
-	</ul>
-</div>
-<!-- end last file  -->
-
-<!-- start users  number -->
-<div id="info-last-visit">
-	<ul>
-	<li>
-	<strong>{lang.AUSERS_NUM} : [{users_number}]
-	<br />
-	<IF NAME="config.user_system==1">
-	{lang.LAST_REG} : [{lst_reg}]
-	</IF>
-	</strong>
-	</li>
-	</ul>
-</div>
-<!-- end  users number  -->
-
-<!-- start files number  -->
-<div id="info-last-visit">
-	<ul>
-	<li>
-	<strong>{lang.AFILES_NUM} : [{files_number}]
-	<br /> {lang.AFILES_SIZE} : [{files_sizes}]
-	</strong>
-	</li>
-	</ul>
-</div>
-<!-- end files number  -->
-
-<!-- start  last google -->
-<div id="info-last-visit">
-	<ul>
-	<li>
-	<strong>{lang.LAST_GOOGLE} : {s_last_google}
-	<br />{lang.GOOGLE_NUM} : [{s_google_num}]
-	</strong>
-	</li>
-	</ul>
-</div>
-<!-- end  last google -->
-
-<!-- start  last yahoo -->		
-<div id="info-last-visit">
-	<ul>
-	<li>
-	<strong>{lang.LAST_YAHOO} : {s_last_yahoo}
-	<br />{lang.YAHOO_NUM} : [{s_yahoo_num}]
-	</strong>
-	</li>
-	</ul>
-</div>
-<!-- end  last yahoo -->	
-
-<!-- start clear  -->
-<div class="clr"></div>
-<!-- end clear  -->
-
-
 <LOOP NAME="ADM_NOTIFICATIONS">
 <!-- start >> error System Messages -->
 <div id="system-message">
@@ -127,50 +37,95 @@ $('div#{{id}}').pulse({
 </script>
 </IF>
 <!-- start clear  -->
-<div class="clr"></div>
+<div class="clr"></div><br />
 <!-- end clear  -->
 
 <!-- end >> error System Messages -->
 </LOOP>
 
-
 <!-- start clear  -->
-<div class="clr"></div><br />
+<div class="clr"></div>
 <!-- end clear  -->
 
-<!-- start stat  disk size -->
-<div id="disk_size">
-	<ul>
-	<li>
-	<span class="t_disk_size"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/disk_size.png" />{lang.SIZE_STAT}</span> <strong>&gt;&gt; {lang.USING_SIZE}</strong>
-		<table class="tab-size" border="0" cellspacing="1" cellpadding="0" dir="ltr">
-		<tr><td style="width:33%;background-color: #CCEECC;text-align:left;">0%</td>
-		<td style="width:34%; background-color: #FFFFE8; text-align:center;">50%</td>
-		<td style="width:33%;background-color: #FFD2D2; text-align:right;">100%</td></tr>
-		<tr><td colspan="3"><img src="{STYLE_PATH_ADMIN}images/spacer.gif" style="width:{per1}%; height:10px; background-color:red;" /></td></tr>
-		</table>
-	</li>
-	</ul>
+<!-- start welcome user admin -->
+<div id="idwelcom">
+<div class="welcome"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/heart.png" alt="Kleeja love you ..," />&nbsp;&nbsp;{usernamelang}</div>
 </div>
-<!-- end stat  disk size  --> 
+<!-- end  welcome user admin -->
+	
+<!-- start clear  -->
+<div class="clr"></div>
+<!-- end clear  -->
+
+<!-- start last visit  -->
+<table id="info-last-visit" width="100%" cellspacing="6" cellpadding="2">
+	<tr><IF NAME="last_visit">
+		<td>{lang.LAST_VISIT} : {last_visit}</td>
+		<td><small><a href="{h_lst_files}">{lang.FLS_LST_VST_SEARCH}</a></small> | 
+	<small><a href="{h_lst_imgs}">{lang.IMG_LST_VST_SEARCH}</a></small>
+	</td></IF>
+	</tr>
+</table>
+
+<table id="info-last-visit" width="100%" cellspacing="6" cellpadding="2">
+	<tr>
+		<td>{lang.LSTDELST} : <b>{last_del_fles}</b></td>		
+		<td>{lang.LSTFLE_ST} : <IF NAME="stat_last_file!='0'"><b><a href="{last_file_up_url}" target="blank">{last_file_up}</a></b><ELSE>{lang.UNKNOWN}</IF></td>
+	</tr>
+</table>
+
+<!-- start users  number -->
+<table id="info-last-visit" width="100%" cellspacing="6" cellpadding="2">
+	<tr>
+		<td>{lang.AUSERS_NUM} : <b>[ {users_number} ]<b></td>
+		<td><IF NAME="config.user_system==1">{lang.LAST_REG} : <b>[ {lst_reg} ]</b></IF></td>
+	</tr>
+</table>
+<!-- end  users number  -->
+
+<!-- start files number  -->
+<table id="info-last-visit" width="100%" cellspacing="6" cellpadding="2">
+	<tr>
+		<td>{lang.AFILES_NUM} : <b>[ {files_number} ]</b></td>
+		<td> {lang.AFILES_SIZE} : <b>[ {files_sizes} ]</b></td>
+	</tr>
+</table>
+<!-- end files number  -->
+
+<!-- start  last google -->
+<table id="info-last-visit" width="100%" cellspacing="6" cellpadding="2">
+	<tr>
+		<td>{lang.LAST_GOOGLE} : {s_last_google}</td>
+		<td>{lang.GOOGLE_NUM} : <b>[ {s_google_num} ]</b></td>
+	</tr>
+</table>
+<!-- end  last google -->
+
+<!-- start  last yahoo -->
+<table id="info-last-visit" width="100%" cellspacing="6" cellpadding="2">
+	<tr>
+		<td>{lang.LAST_YAHOO} : {s_last_yahoo}</td>
+		<td>{lang.YAHOO_NUM} : <b>[ {s_yahoo_num} ]</b></td>
+	</tr>
+</table>	
+<!-- end  last yahoo -->	
 
 <!-- start clear  -->
 <div class="clr"></div><br />
 <!-- end clear  -->
+<!-- start welcome user admin -->
+<div id="idwelcom">
+<div class="t_disk_size">{lang.OTHER_INFO} !</div>
+</div>
+<!-- end  welcome user admin -->
 
-<!-- start info -->
-<div id="other-info">
-<ul>
-<!-- start other info -->
-<li class="t_info">{lang.OTHER_INFO} !</li>
-<li>
-<table>
+<table class="data">
 <tr>
-	<td width="30%">{lang.KLEEJA_VERSION}</td>
+	<td>{lang.KLEEJA_VERSION}</td>
 	<td>{kleeja_version}</td>
 </tr>
 <tr>
-	<td>{lang.PHP_VER}</td>
+	<td style="width:25%;">{lang.PHP_VER}</td>
 	<td>{php_version}</td>
 </tr>
 <tr>
@@ -194,32 +149,153 @@ $('div#{{id}}').pulse({
 	<td>{memory_limit}</td>
 </tr>
 </table>
-</li>
-<!-- end other info -->
-<!-- start team info -->
-<li class="t_info">{lang.KLEEJA_P_TEAM}</li>
-<li>
-<table>
-<tr>
-	<td width="50%" style="direction:ltr">Phpfalcon [ Bader N. Al-Mutiry ] 2009</td>
-	<td width="50%" style="direction:ltr">Saanina [ Abdullrahman M. Alshawaiee ] 2007 - 2009</td>
-</tr>
-</table>
-</li>
-<li class="t_info">{lang.KLEEJA_D_TEAM}</li>
-<li>
-<table>
-<tr>
-	<td width="50%" style="direction:ltr">Tar3Q [ Abdulrahman ] 2009</td>
-</tr>
-</table>
-</li>
-<!-- end team info -->
-</ul>
-</div>
-<!-- end info -->
 
+<!-- start clear  -->
+<div class="clr"></div>
+<!-- end clear  -->
+
+<!-- start stat  disk size -->
+<table class="disk_size" border="0" width="100%" cellspacing="0" cellpadding="0">
+	<tr>
+		<td class="t_disk_size"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/disk_size.png" /> {lang.SIZE_STAT}</td>
+	</tr>
+	<tr>
+		<td><strong style="color:#888">{lang.USING_SIZE}</strong>
+			<table class="tab-size" border="0" cellspacing="1" cellpadding="0" dir="ltr">
+				<tr>
+					<td style="width:33%;background-color:#97FF97;text-align:left;">0%</td>
+					<td style="width:34%; background-color:#FFFE97; text-align:center;">50%</td>
+					<td style="width:33%;background-color:#FF9797; text-align:right;">100%</td>
+				</tr>
+				<tr>
+					<td colspan="3"><img src="{STYLE_PATH_ADMIN}images/spacer.gif" style="width:{per1}%; height:10px; background-color:Red" /></td>
+				</tr>
+			</table>
+				<div class="clr"></div>
+				<div class="filsiz">[{files_sizes}]</div>	
+		</td>
+	</tr>
+</table>
+<!-- end stat  disk size  -->
+
+<!-- start clear  -->
 <div class="clr"></div><br />
+<!-- end clear  -->
+
+<!-- start info -->
+<div id="other-info">
+<div class="t_info">{lang.KLEEJA_P_TEAM}</div>
+<div class="team">Saanina [ Abdullrahman M. Alshawaiee ] 2007 - 2009</div>
+<div class="team"> Phpfalcon [ Bader N. Al-Mutiry ] 2009</div>
+<div class="team">Tar3Q [ Abdulrahman E. AL-Harthy] 2009</div>
+</div>
+
+<div class="round4">&nbsp;</div>
+<div class="round2">&nbsp;</div>
+<div class="round1">&nbsp;</div>
+<div class="box-inner" id="bub" dir="ltr">
+	<div class="bub-top">
+		<div class="pagination2">&nbsp;</div>Project People</div>
+	<table class="results" id="resultstable" border="0" cellpadding="2" cellspacing="0" width="100%">
+		<tr id="headingrow">
+			<th style="white-space: wrap;">Name</th>
+			<th style="white-space: no-wrap;" width="153">Notes</th>
+			<th style="white-space: no-wrap;">Duties</th>
+			<th style="white-space: no-wrap;">Data</th>
+		</tr>
+		<tr>
+			<td width="38%" >
+			<a style="white-space: nowrap;" href="http://code.google.com/p/kleeja/people/detail?u=saanina">
+			saanina</a>
+ 
+ 			<p>[ Abdullrahman M. Alshawaiee ]</td>
+			<td width="153">
+			<a onclick="cancelBubble=true" href="http://code.google.com/p/kleeja/people/detail?u=saanina">
+			Professional php coder </a></td>
+			<td width="52%">
+			<ul style="margin: 0pt; padding-left: 1.2em;">
+				<li>
+				<a href="http://code.google.com/p/kleeja/people/detail?u=saanina">
+				Plan the scope of release milestones and track progress</a> 
+				</li>
+				<li>
+				<a href="http://code.google.com/p/kleeja/people/detail?u=saanina">
+				Design core libraries, write code and unit tests</a> </li>
+				<li>
+				<a href="http://code.google.com/p/kleeja/people/detail?u=saanina">
+				Package releases from release branches</a>
+ 				</li>
+			</ul>
+			</td>
+			<td width="9%">
+			2007 -2009</td>
+		</tr>
+		<tr>
+			<td>
+			<a style="white-space: nowrap;" href="http://code.google.com/p/kleeja/people/detail?u=phpfalcon">
+			phpfalcon</a>
+ 
+ 			<p>[ Bader N. Al-Mutiry ]</td>
+			<td width="153">
+			<a href="http://code.google.com/p/kleeja/people/detail?u=phpfalcon">
+			Php coder </a></td>
+			<td width="52%">
+			<ul style="margin: 0pt; padding-left: 1.2em;">
+				<li>
+				<a href="http://code.google.com/p/kleeja/people/detail?u=phpfalcon">
+				Design new features, write code and unit tests</a> </li>
+				<li>
+				<a href="http://code.google.com/p/kleeja/people/detail?u=phpfalcon">
+				Lead by providing a project vision and roadmap</a> </li>
+				<li>
+				<a href="http://code.google.com/p/kleeja/people/detail?u=phpfalcon">
+				Review code changes and provide constructive feedback</a>
+ 				</li>
+			</ul>
+			</td>
+			<td width="9%">
+			2009</td>
+		</tr>
+		<tr>
+			<td>
+			<a href="http://code.google.com/p/kleeja/people/detail?u=altar3q">T</a><a style="white-space: nowrap;" href="http://code.google.com/p/kleeja/people/detail?u=altar3q">ar3q</a>
+ 
+ 			<p>[ Abdulrahman E. AL-Harthy]</td>
+			<td width="153">
+			<a href="http://code.google.com/p/kleeja/people/detail?u=altar3q">
+			Web designer </a></td>
+			<td width="52%">
+			<ul style="margin: 0pt; padding-left: 1.2em;">
+				<li>
+				<a href="http://code.google.com/p/kleeja/people/detail?u=altar3q">
+				Test the system before each release</a> </li>
+				<li>
+				<a href="http://code.google.com/p/kleeja/people/detail?u=altar3q">
+				Design styles and reublid templates codes</a>
+ 				</li>
+			</ul>
+			</td>
+			<td width="9%">
+			2009</td>
+		</tr>
+	</table>
+</div>
+<div class="bub-bottom">
+	<div class="pagination2">
+&nbsp;</div>
+	&nbsp;
+ </div>
+<div class="round1">
+&nbsp;</div>
+<div class="round2">
+&nbsp;</div>
+
+
+<!-- end info -->
+<div class="kleejaversion">انت تستخدم الاصدار رقم {kleeja_version} من كليجا , ننصحك بتحديث النسخة بشكل دوري</div>
+
+<div class="clr"></div>
+
 
 </div>
 

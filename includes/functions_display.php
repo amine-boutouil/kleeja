@@ -522,9 +522,9 @@ function kleeja_get_link ($pid, $extra = array())
 			}
 			
 			$links += array(
-						'thumb' => '::DIR::/thumbs/::FNAME::',
-						'image' => '::DIR::/::FNAME::',
-						'file'	=> '::DIR::/::FNAME::',
+						'thumb' => '::DIR::/thumbs/::NAME::',
+						'image' => '::DIR::/::NAME::',
+						'file'	=> '::DIR::/::NAME::',
 						);
 		break;
 		default:

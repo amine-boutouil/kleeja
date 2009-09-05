@@ -100,7 +100,7 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 				
 		$file_ext_icon = file_exists('images/filetypes/' . $type . '.png') ? 'images/filetypes/' . $type . '.png' : 'images/filetypes/file.png';
 		$sty		= 'download';
-		$title 		=  $real_filename != '' ? str_replace('.' . $type, '', htmlspecialchars($real_filename)) : $name;
+		$title 		=  $name;
 		$title	   .= ' ' . $lang['DOWNLAOD'];
 	}
 	else

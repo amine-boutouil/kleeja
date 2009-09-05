@@ -33,9 +33,10 @@
 		$Pager			= new SimplePager($perpage,$nums_rows,$currentPage);
 		$start			= $Pager->getStartRow();
 
-		
+
 		$no_results = false;
-		
+		$del_nums = array();
+
 		if ($nums_rows > 0)
 		{
 			$query['LIMIT']	=	"$start, $perpage";
@@ -49,24 +50,19 @@
 								'mail' 		=> $row['mail'],
 								'url'  		=> $row['url'],
 								'text' 		=> $row['text'],
-								'time' 		=> date("d-m-Y H:a", $row['time']),
+								'time' 		=> date("d-m-Y H:i a", $row['time']),
 								'ip'	 	=> $row['ip'],
 								'ip_finder'	=> 'http://www.ripe.net/whois?form_type=simple&full_query_string=&searchtext=' . $row['ip'] . '&do_search=Search'
-								);
+						);
 			
 				$del[$row['id']] = ( isset($_POST["del_".$row['id']]) ) ? $_POST["del_".$row['id']] : "";
 				$sen[$row['id']] = ( isset($_POST["v_".$row['id']]) ) ? $_POST["v_".$row['id']] 	: "";
 				//when submit !!
 				if (isset($_POST['submit']))
 				{
-						if ($del[$row['id']])
+						if ($del[])
 						{
-							$query_del = array(
-											'DELETE'	=> "{$dbprefix}reports",
-											'WHERE'		=> "id='" . intval($row['id']) . "'"
-											);
-																
-							$SQL->build($query_del);
+							$del_nums[] = $row['id'];
 						}
 				}
 				
@@ -85,9 +81,7 @@
 								$text	= $lang['IS_SEND_MAIL'];
 								$stylee	= "admin_info";
 							}
-
 					}
-					//may send
 				}
 			}
 			$SQL->freeresult($result);
@@ -97,6 +91,17 @@
 		$no_results = true;
 	}
 	
+	//if deleted
+	if(sizeof($del_nums))
+	{
+		$query_del	= array(
+							'DELETE'	=> "{$dbprefix}reports",
+							'WHERE'		=> "id='" . implode("', '", $del_nums) . "'"
+					);
+																
+		$SQL->build($query_del);
+	}
+
 	$total_pages 	= $Pager->getTotalPages(); 
 	$page_nums 		= $Pager->print_nums(basename(ADMIN_PATH)  . '?cp=reports'); 
 		

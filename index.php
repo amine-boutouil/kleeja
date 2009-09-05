@@ -169,7 +169,7 @@ if ($show_online)
 	}
 
 	$most_online = $stat_most_user_online_ever; 
-	$on_muoe	 = gmdate("d-m-Y H:a", $stat_last_muoe);
+	$on_muoe	 = gmdate("d-m-Y H:i a", $stat_last_muoe);
 	($hook = kleeja_run_hook('if_online_index_page')) ? eval($hook) : null; //run hook	
 	
 }#allow_online

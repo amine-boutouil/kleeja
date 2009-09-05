@@ -35,7 +35,8 @@
 
 		
 		$no_results = false;
-		
+		$del_nums = array();
+
 		if ($nums_rows > 0 )
 		{
 			$query['LIMIT']	=	"$start,$perpage";
@@ -62,12 +63,7 @@
 				{
 					if ($del[$row['id']])
 					{
-						$query_del = array(
-										'DELETE'	=> "`{$dbprefix}call`",
-										'WHERE'		=> "id='" . intval($row['id'])."'"
-									);
-																
-						$SQL->build($query_del);
+						$del_nums[] = $row['id'];
 					}
 				}
 				
@@ -91,7 +87,6 @@
 							$stylee	= "admin_info";
 						}
 					}
-					//may send
 				}
 		}
 		$SQL->freeresult($result);
@@ -100,6 +95,17 @@
 	else
 	{
 		$no_results = true;
+	}
+	
+	//if deleted
+	if(sizeof($del_nums))
+	{
+		$query_del	= array(
+							'DELETE'	=> "{$dbprefix}call",
+							'WHERE'		=> "id='" . implode("', '", $del_nums) . "'"
+					);
+			
+		$SQL->build($query_del);
 	}
 	
 	$total_pages = $Pager->getTotalPages(); 

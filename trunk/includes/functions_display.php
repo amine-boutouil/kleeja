@@ -17,12 +17,15 @@
 function Saaheader($title, $outscript=false)
 {
 		global $tpl, $usrcp, $lang, $olang, $user_is, $username, $config;
-		global $extras, $script_encoding, $errorpage, $userinfo, $is_opera;
+		global $extras, $script_encoding, $errorpage, $userinfo, $charset;
 		
 		//is user ? and username
 		$user_is = ($usrcp->name()) ? true: false;
 		$username = ($usrcp->name()) ? $usrcp->name() : $lang['GUST'];
-		$is_opera = (is_browser('opera')) ? true : false;
+		/** $is_opera = (is_browser('opera')) ? true : false;  **/
+		
+		//our default charset
+		$charset = 'utf-8';
 		
 		//links for header
 		$_LINKS = array(
@@ -56,6 +59,9 @@ function Saaheader($title, $outscript=false)
 
 		if($config['user_system'] != '1' && isset($script_encoding) && function_exists('iconv') && !preg_match('/utf/i',strtolower($script_encoding)) && !$errorpage && $outscript && !defined('DISABLE_INTR')) 
 		{
+			//set script charset
+			$charset = (isset($script_encoding) && !empty($script_encoding)) ? $script_encoding : 'utf-8';
+			//if kleeja were intgrated with other script in this case we need to change our default charset
 			$header = iconv("UTF-8", strtoupper($script_encoding) . "//IGNORE", $tpl->display("header"));
 		}
 		else 
@@ -66,10 +72,7 @@ function Saaheader($title, $outscript=false)
 		if($config['siteclose'] == '1' && $usrcp->admin() && !defined('IN_ADMIN'))
 		{
 			//add notification bar 
-			$header = preg_replace('/<body([^\>]*)>/i', '<body\\1>
-<!-- site is closed -->
-<p style="width: 100%; text-align:center; background:#FFFFA6; color:black; border:thin;top:0;left:0; position:absolute; width:100%;clear:both;">' . $lang['NOTICECLOSED'] . '</p>
-<!-- //site is closed -->', $header);
+			$header = preg_replace('/<body([^\>]*)>/i', "<body\\1>\n<!-- site is closed -->\n<p style=\"width: 100%; text-align:center; background:#FFFFA6; color:black; border:thin;top:0;left:0; position:absolute; width:100%;clear:both;\">" . $lang['NOTICECLOSED'] . "</p>\n<!-- #site is closed -->", $header);
 
 		}
 
@@ -137,6 +140,7 @@ function Saafooter($outscript=false)
 		//show footer
 		if($config['user_system'] != '1' && isset($script_encoding) && function_exists('iconv')  && !preg_match('/utf/i',strtolower($script_encoding)) && !$errorpage && $outscript && !defined('DISABLE_INTR'))
 		{
+			//if kleeja were intgrated with other script in this case we need to change our default charset
 			$footer = iconv("UTF-8", strtoupper($script_encoding) . "//IGNORE", $tpl->display("footer"));
 		}
 		else 

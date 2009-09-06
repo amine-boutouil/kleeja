@@ -22,7 +22,7 @@
 </IF>
 
 <!-- START  FOR UPLOAD BOXES -->
-<form name="uploader" id="uploader" action="{action}" method="post" enctype="multipart/form-data"<IS_BROWSER!="ie6"> onsubmit="form_submit();"</IS_BROWSER>>
+<form id="uploader" action="{action}" method="post" enctype="multipart/form-data"<IS_BROWSER!="ie6"> onsubmit="form_submit();"</IS_BROWSER>>
 <IF NAME="config.safe_code">
 <!-- start  safe code  -->
 <div class="clr"></div>
@@ -48,7 +48,7 @@
 <div class="tabbertab" title="{lang.DOWNLOAD_F}" id="filetype">
 </IF>
 <LOOP NAME=FILES_NUM_LOOP>
-	<input type="file" name="file[{{i}}]" id="file[{{i}}]" style="display:{{show}}" size="50" /><br id="br[{{i}}]" style="display:{{show}}" />
+	<input type="file" name="file_{{i}}_" id="file_{{i}}_" style="display:{{show}}" size="50" /><br id="br_{{i}}_" style="display:{{show}}" />
 </LOOP>
     <div id="upload_forum"></div>
     <br />
@@ -67,7 +67,7 @@
 <!-- start uplaod URL -->   
 <div class="bg tabbertab" title="{lang.DOWNLOAD_T}" id="texttype">
 <LOOP NAME=FILES_NUM_LOOP>
-	<input class="url input_field" type="text" name="file[{{i}}]" id="fileu[{{i}}]" size="60" value="{lang.PAST_URL_HERE}" onclick="this.value=''" style="display:{{show}}" /><br id="bru[{{i}}]" style="display:{{show}}" />
+	<input class="url input_field" type="text" name="file_{{i}}_" id="fileu_{{i}}_" size="60" value="{lang.PAST_URL_HERE}" onclick="this.value=''" style="display:{{show}}" /><br id="bru_{{i}}_" style="display:{{show}}" />
 </LOOP>
     <br />
 	<div id="upload_f_forum"></div>

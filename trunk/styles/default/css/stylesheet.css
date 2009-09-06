@@ -26,7 +26,7 @@ img.right {float: right;margin-left:15px;}
 .safe_code {margin:5px 0;padding:10px;border:1px solid #ECCEBB;background:#F9F5F0 url(../images/saf3_code01.gif) no-repeat 0% 50%;}
 .safe_code span {padding-right:4px;color:#FF5A00}
 .safe_code input[type="text"]{padding:3px 3px;font-size:12px;}
-.safe_code input[type="text"]:focus {background-color: #ffd ;border: 1px solid #D26900;direction:ltr;padding:3px 3px;font-size:12px;}
+.safe_code input[type="text"]:focus {background-color: #ffd ;border: 1px solid #D26900;direction:ltr;padding:3px;font-size:12px;}
 .explain {font-size:xx-small;font-style:italic;color:#858585}
 /* # end safe code all box */
 
@@ -203,7 +203,7 @@ background:#FF9933 url(../images/headline_bg.png) repeat-x top right;color:#111;
 #login .username,#login .password{padding-left:20px;padding:2px;width:180px;font-size: 12px;}
 #login  .username{background:#fff url(../images/username.gif) no-repeat 1px 2px;}
 #login  .password{background:#fff url(../images/password.gif) no-repeat 1px 2px;}
-#login  .forget_pass  {display:inline;margin:1px; color:#C03C2D;}
+#login  .forget_pass  {display:black;margin:1px; color:#C03C2D;}
 #login  .forget_pass a:hover {color:#FF2020;}        
 #login  .remme{color: #000;border: 1px solid #999;font:normal 9px Tahoma, Helvetica, Arial, sans-serif;}
 /* # login template >> login.html  */

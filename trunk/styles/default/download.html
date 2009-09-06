@@ -13,7 +13,7 @@
 <div id="file-info">
 
 	<div id="data_file_down">
-		<p class="find_image"><img src="{STYLE_PATH}images/download.gif" alt="Find File the image" style="vertical-align:middle;" /></p>
+		<p class="find_image"><img src="{STYLE_PATH}images/download.gif" alt="" style="vertical-align:middle;" /></p>
 		<br />
 		<p class="find_x">{lang.FILE_FOUNDED}</p>
 		<br /><br />
@@ -37,10 +37,11 @@
 <div class="clr"></div>
 
 <!-- start button file report  -->
-<div class="fileReport" onclick="window.location.href='{REPORT}';"><img src="{STYLE_PATH}images/zl.png" style="vertical-align:middle;" />&nbsp;<a href="{REPORT}">{lang.FILEREPORT}</a></div>
+<div class="fileReport" onclick="window.location.href='{REPORT}';"><img src="{STYLE_PATH}images/zl.png" alt="" style="vertical-align:middle;" />&nbsp;<a href="{REPORT}">{lang.FILEREPORT}</a></div>
 <!-- ## End button file report  -->	
 
-<script language="javascript">
+<script type="text/javascript">
+<!--
 var timer = {seconds_w};
 ti();
 function ti()
@@ -55,6 +56,7 @@ function ti()
     {
         document.getElementById("url").innerHTML = '<div class="clr"></div><br /><div id="download"><a href="{url_file}" target="balnk">{lang.CLICK_DOWN}</a></div><div class="clr"></div>';
     }
+//-->
 }
 </script>
 

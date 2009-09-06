@@ -15,7 +15,11 @@ x>>
 ÇäÇ ÇÓÊÎÏã ÇáÈÑäÇãÌ ÇáÇÎÊÈÇÑ áãÊÕİÍ ÇßÓÈáæÑ IETester ÂÎÑ ÇÕÏÇÑ
 =============================================
 
-[01-Sep-2009 21:38:36] PHP Notice:  iconv() [<a href='function.iconv'>function.iconv</a>]: Detected an illegal character in input string in /home/shdadeen/public_html/up/admin/index.php on line 126
+ÕÇÍÈ ãÑßÒ ÇáÔÏÇÏíä
+íŞæá ÚäÏå ãÔßáÉ ÈÑİÚ ÇáãáİÇÊ ãä äæÚ 
+rm & ram
+ÇáãÔßáÉ Çäå ãÇ íßÊãá ÇáÊÍãíá
+æãÇ íÙåÑ ÑÓÇáÉ ÎØÃ íÑÌÚå Úáì ÇáÑÆíÓíÉ ÈÏæä ÇÚØÇÁå ÑæÇÈØ Çáãáİ æáã íÊã ÊÍãíá Çáãáİ
 
 ---------------------------------------------
 

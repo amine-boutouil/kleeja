@@ -224,6 +224,12 @@ background-color:#FBFFFD;
 position: static;
 -moz-border-radius:8px; border-radius:1px;}
 
+/* all tables */
+table {overflow:auto;table-layout:static;border-collapse: collapse;width:100%;padding: 5px;font: 12px Tahoma, Arial, Helvetica, sans-serif;border:inset 1px #DFDFDF;}
+tr {background-color:#EEEEEE;border-bottom:solid 1px #C8C8C8;border-top:solid 1px #C8C8C8}
+td {padding: 6px 5px 6px 5px;border-style:groove solid;border-color:#DFDFDF;border-width:1px;}
+tr:hover {background-color:#FFFFDD;}
+/* all tables */
 
 /* usefull colors */
 .ored, .ored:hover {background-color:#FFCACA;}

@@ -1,16 +1,12 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" dir="{lang.DIR}">
-<!--  
-# Powered by Kleeja .... Kleeja.com
-# Designed by Tar3Q .... Tar3q.com
-# copyright 2007-2009  ..
--->
 <head>
-	<title>{lang.LOGIN} - {lang.KLEEJA_CP} - {config.sitename}</title>
-	<meta http-equiv="Content-Language" content="ar" />
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<link rel="stylesheet" href="{STYLE_PATH_ADMIN}css/login_stylesheet.css" type="text/css" />
-	<link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
+<title>{lang.LOGIN} - {lang.KLEEJA_CP} - {config.sitename}</title>
+<meta http-equiv="Content-Language" content="ar" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="{STYLE_PATH_ADMIN}css/login_stylesheet.css" type="text/css" />
+<link rel="shortcut icon" href="{STYLE_PATH_ADMIN}favicon.ico" />
+<link rel="icon" type="image/gif" href="{STYLE_PATH_ADMIN}images/animated_favicon1.gif" />
 	<script type="text/javascript">
 	function confirm_from()
 	{
@@ -24,9 +20,7 @@
 	<script type="text/javascript" src="{STYLE_PATH_ADMIN}images/tips.js"></script> 
 </head>
 <body>
-
 <div class="h_header"></div>
-
 	<div id="klogo"></div>
 	<div id="content-box">
 	<div class="padding">
@@ -61,9 +55,9 @@
 					<form action="{action}" method="post" style="clear: both;">
 						<fieldset>
 						<legend>Sign-In</legend>
-							<label for="modlgn_username">{lang.USERNAME}</label>
+							<label>{lang.USERNAME}</label>
 							<input type="text" name="lname" value="{username}" class="textfield" />
-							<label for="modlgn_password">{lang.PASSWORD}</label>
+							<label>{lang.PASSWORD}</label>
 							<input type="password" name="lpass" value="" class="textfield" />
 							<input type="submit" name="submit" value="{lang.LOGIN}" class="button"/>
 							{H_FORM_KEYS}
@@ -92,11 +86,10 @@
 	</div>
 </div>
 <div id="footer">
-	<p class="copyright">
-	Powered by <a href="http://www.kleeja.com" target="_blank">Kleeja</a> | 
-	Styles, Hacks in <a href="http://www.kleeja.com" target="_blank">Kleeja Official Website</a> |
-	<a href="http://validator.w3.org/check?uri=referer" target="_blank">XHTML</a> | 
-	<a href="http://jigsaw.w3.org/css-validator/check/referer" target="_blank">css</a>	
+	<p class="copyright">Powered by <a onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com" >Kleeja</a> | 
+	Styles, Hacks in <a onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com" >Kleeja Official Website</a> |
+	<a onclick="window.open(this.href,'_blank');return false;" href="http://validator.w3.org/check?uri=referer" >XHTML</a> | 
+	<a onclick="window.open(this.href,'_blank');return false;" href="http://jigsaw.w3.org/css-validator/check/referer" >css</a>	
 	</p>
 </div>
 </body>

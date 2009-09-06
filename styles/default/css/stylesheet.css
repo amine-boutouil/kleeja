@@ -55,11 +55,12 @@ img.right {float: right;margin-left:15px;}
 /* System Messages body */
 #system-message  { margin:4px 0;}
 #system-message dd {font-weight: bold; text-indent: 30px; }
-#system-message dd.info ul ,#system-message dd.error ul{list-style:square;padding:25px 10px;list-style-position:inside;}
+#system-message dd.info ul ,#system-message dd.error ul{list-style:square;padding:20px 10px;list-style-position:inside;line-height:30px;}
 #system-message dd.info ul {border-top: 3px solid #FEA53D;border-bottom: 3px solid #FEA53D;background-color: #EFE7B8;}
-#system-message dd.info  ul li {color: #444;background: url(../images/info.png) no-repeat right top;padding:3px;}
-#system-message dd.error ul {background-color: #E6C0C0;border-top: 3px solid #DE7A7B;border-bottom: 3px solid #DE7A7B;}
-#system-message dd.error ul li{color:#c00;background: url(../images/error.png) no-repeat right top;padding:3px}
+#system-message dd.info  ul li ,#system-message dd.error ul li{padding:1px 5px 5px 5px}
+#system-message dd.info  ul li {color: #444;background: url(../images/info.png) no-repeat right top}
+#system-message dd.error ul {background-color: #E6C0C0;border-top:3px solid #DE7A7B;border-bottom: 3px solid #DE7A7B;}
+#system-message dd.error ul li{color:#c00;background: url(../images/error.png) no-repeat right top}
 /* ##  End  System Messages */
 
 /*  right menu */

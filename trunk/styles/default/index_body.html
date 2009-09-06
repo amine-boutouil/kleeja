@@ -22,7 +22,7 @@
 </IF>
 
 <!---- START  FOR UPLOAD BOXES ---->
-<form name="uploader" id="uploader" action="{action}" method="post"  enctype="multipart/form-data" onsubmit="form_submit();">
+<form name="uploader" id="uploader" action="{action}" method="post"  enctype="multipart/form-data"<IS_BROWSER!="ie6"> onsubmit="form_submit();"</IS_BROWSER>>
 <IF NAME="config.safe_code">
 <!---- start  safe code  ---->
 <div class="clr"></div>

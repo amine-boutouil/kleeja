@@ -107,6 +107,7 @@ if (!defined('IN_COMMON'))
 						'/<SWITCH\s+NAME\s*=\s*"([A-Z0-9_]{1,})"\s*CASE\s*=\s*"(.+)"\s*VALUE\s*=\s*"(.+)"\s*>/i' => '<?php echo  $this->_switch($this->vars["\\1"],"\\2","\\3")?>',
 						'/<INCLUDE\s+NAME\s*=\s*"(.+)"\s*>/iU' => '<?php echo  kleeja_style::_include("\\1"); ?>',
 						'/<IS_BROWSER\s*=\s*"([a-z0-9,]+)"\s*>/iU' => '<?php if(is_browser("\\1")){ ?>',
+						'/<IS_BROWSER\s*\!=\s*"([a-z0-9,]+)"\s*>/iU' => '<?php if(!is_browser("\\1")){ ?>',
 						'/(<ELSE>|<ELSE \/>)/i' => '<?php }else{ ?>',
 						'#<ODD="([a-zA-Z0-9\_\-\+\./]+)"\>(.*?)<\/ODD\>#is' => "<?php if(intval(\$value['\\1'])%2){?> \\2 <?php } ?>",
 						'#<EVEN="([a-zA-Z0-9\_\-\+\./]+)"\>(.*?)<\/EVEN\>#is' => "<?php if(intval(\$value['\\1'])% 2 == 0){?> \\2 <?php } ?>",

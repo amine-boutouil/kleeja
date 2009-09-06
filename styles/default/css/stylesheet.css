@@ -68,7 +68,7 @@ img.right {float: right;margin-left:15px;}
 #right_menu .list ul{list-style-type: none;}
 #right_menu .list .imgtop{background:url(../images/menu-right-top.png) no-repeat;height:36px;width:160px;display:block;color:#000;padding:0px 10px;font-weight:bold;text-align:left;border-bottom: 1px solid #666;}
 #right_menu .list .imgbottom{background:url(../images/menu_right_bottom.png) no-repeat;height:37px;width:160px;display:block;padding:0px 10px;font-weight:bold;color: #F1F7E1;}
-#right_menu .list img{padding:0px 0px 0px 5px;}
+#right_menu .list img{padding-right:5px;}
 #right_menu .list a{background-color:#767676;font: bold 11px tahoma;padding: 5px 10px;display: block;width:160px;color:#fff;text-decoration:none;border-bottom: 1px solid #666;}
 #right_menu .list a:hover{color: #111;background:#767676 url(../images/right_menu.png) repeat;}
 #right_menu .list a:active {background:#999}
@@ -79,9 +79,9 @@ img.right {float: right;margin-left:15px;}
 /*# END extras  header and  footer template */
 
 /* Powered by kleeja*/
-#kleeja{padding:4px 1px;margin:2px;float:left;color:#555;text-shadow: 0px 1px rgb(247, 247, 247)}
-#kleeja a,#kleeja a:link{color:#CF6600;}
-#kleeja a:hover{color:#000;}
+.kleeja{padding:4px 1px;margin:2px;float:left;color:#555;text-shadow: 0px 1px rgb(247, 247, 247)}
+.kleeja a,.kleeja a:link{color:#CF6600;}
+.kleeja a:hover{color:#000;}
 /* #  Powered by kleeja */
 
 /* start Downlod template >> download.html */
@@ -307,51 +307,15 @@ background:#FF9933 url(../images/headline_bg.png) repeat-x top right;color:#111;
 .visitor_ext_lang{color:#000;}
 /* #  template list of files allowed > guide.html */
 
-
 .thumb_div_tag {margin:2px auto;}
 .thumb_div_tag img{background:#FFF;border:1px solid #D20000;padding:5px}
 
-
-.index_info {
-display:block;
-width:73%;
-border-top: 3px solid #84A0C0;
-border-bottom: 3px solid #84A0C0;
-color:#004776;
-background:#C2D3E7 url(../images/info_f.png) no-repeat 99% 2%;
-padding:10px;
-text-indent:30px;
-}
-.index_err {
-display:block;
-width:75%;
-border-top: 3px solid #DE7A7B;
-border-bottom: 3px solid #DE7A7B;
-color:#c00;
-background:#E6C0C0 url(../images/err.png) no-repeat 98% 50%;
-padding:5px;
-text-indent:30px;
-}
-.index_err strong,.index_info  strong {
-vertical-align:middle;
-line-height:25px
-}
+.index_info {display:block;width:73%;border-top: 3px solid #84A0C0;border-bottom: 3px solid #84A0C0;color:#004776;background:#C2D3E7 url(../images/info_f.png) no-repeat 99% 2%;padding:10px;text-indent:30px;}
+.index_err {display:block;width:75%;border-top: 3px solid #DE7A7B;border-bottom: 3px solid #DE7A7B;color:#c00;background:#E6C0C0 url(../images/err.png) no-repeat 98% 50%;padding:5px;text-indent:30px;}
+.index_err strong,.index_info  strong {vertical-align:middle;line-height:25px}
 
 .all_boxes{width:98%;color:#004776;border:1px solid #80FFFF;outline:1px solid #84A0C0;direction:ltr;}
 .all_boxes:focus {background-color:#D9FDFF;border: 1px solid #005F9D;color:#111}
 
-.debug_kleeja{
-width:80%;
-margin:0 auto;
-background-color:#fff;
-border:1px #666 solid;
-margin-top:20px;
-margin-bottom:20px;
-}
-.debug_kleeja fieldset{
-margin:0 auto;
-width:80%;
-}
-
-
-
+.debug_kleeja{width:80%;margin:0 auto;background-color:#fff;border:1px #666 solid;margin-top:20px;margin-bottom:20px;}
+.debug_kleeja fieldset{margin:0 auto;width:80%;}

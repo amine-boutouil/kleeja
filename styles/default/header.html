@@ -9,9 +9,9 @@
 {EXTRA_CODE_META}
 <link rel="shortcut icon" href="favicon.ico" />
 <link rel="icon" type="image/gif" href="images/animated_favicon1.gif" />
-<link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH}css/screen.css" />
+<link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH}css/screen.css" />
 <IF NAME="{lang.DIR}==ltr">
-<link rel="stylesheet" type="text/css" href="{STYLE_PATH}css/ltr_screen.css" />
+<link rel="stylesheet" type="text/css" href="{STYLE_PATH}css/ltr.css" />
 </IF>
 <IS_BROWSER="ie6">
 <link rel="stylesheet" type="text/css" href="{STYLE_PATH}css/ie_6.css" />
@@ -19,7 +19,6 @@
 <IS_BROWSER="ie7">
 <link rel="stylesheet" type="text/css" href="{STYLE_PATH}css/ie_7.css" />
 </IS_BROWSER>
-
 <script type="text/javascript">
  var number_of_uploads={config.filesnum};
  var LANG_PAST_URL_HERE ="{lang.PAST_URL_HERE}";
@@ -27,10 +26,7 @@ var LANG_MORE_F_FILES ="{lang.MORE_F_FILES}";
 </script>
 <script type="text/javascript" src="{STYLE_PATH}javascript.js"></script>
 </head>
-
 <body>
-
-<!-- start logo -->
 <div id="logobody">
 	<div class="logo">
 		<a href="{config.siteurl}">
@@ -38,11 +34,7 @@ var LANG_MORE_F_FILES ="{lang.MORE_F_FILES}";
 		</a>
 	</div>
 </div>
-<!--  # End  logo -->
-
 <div class="clr"></div>
-
-<!-- start top menu  -->
 <div id="top_menu">
 	<ul class="m3nu">
 		<li><a href="{config.siteurl}" title="{lang.INDEX}" class="current"><img src="{STYLE_PATH}images/home.png" width="16" height="16" alt="{lang.INDEX}" style="vertical-align:middle;" />&nbsp;&nbsp;{lang.INDEX}</a></li>
@@ -54,24 +46,14 @@ var LANG_MORE_F_FILES ="{lang.MORE_F_FILES}";
 		</IF>
 	</ul>
 </div>
-<!--  # End  top menu -->
-
 <div class="clr"></div>
-
-<!-- start wrapper -->
 <div id="wrapper">
-
 <IF NAME="extras.header">
-<!-- start extras header  -->
 <div class="clr"></div>
 <div id="extras_header">{extras.header}</div>
 <div class="clr"></div>
-<!--  # End  extras header -->
 </IF>
-
 <div class="clr"></div>
-
-<!-- start  menu right -->         
 <div id="right_menu">
 	<div class="list">
 		<ul>
@@ -83,14 +65,12 @@ var LANG_MORE_F_FILES ="{lang.MORE_F_FILES}";
 			<li><a href="{_LINKS.filecp}"><img src="{STYLE_PATH}images/filecp.png" alt="{lang.FILECP}" style="vertical-align:middle;" />{lang.FILECP}</a></li>
 			<li><a href="{_LINKS.profile}"><img src="{STYLE_PATH}images/User.png" alt="{lang.PROFILE}" style="vertical-align:middle;" />{lang.PROFILE}</a></li>
 			<li><a href="{_LINKS.logout}"><img src="{STYLE_PATH}images/Go-Out.png" alt="{lang.LOGOUT}" style="vertical-align:middle;" />{lang.LOGOUT} [ {username} ]</a></li>
-			
-			<ELSE>
+				<ELSE>
 			<li><a href="{_LINKS.register}"><img src="{STYLE_PATH}images/User.png" alt="{lang.REGISTER}" style="vertical-align:middle;" />{lang.REGISTER}</a></li>
 			<li><a href="{_LINKS.login}"><img src="{STYLE_PATH}images/Go-Out.png" alt="{lang.LOGIN}" style="vertical-align:middle;" />{lang.LOGIN}</a></li>
 			</IF>
 			<li class="imgbottom">&nbsp;</li>
 		</ul>
 	</div>
-	<p>&nbsp;</p>
+	<div class="clr"></div>
 </div>
-<!--  # End  menu right -->

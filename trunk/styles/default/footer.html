@@ -15,11 +15,11 @@
 <!-- Start links left -->
 <div id="footerlinksleft">
   	<ul>
-	<li><a title="{lang.FOOTER_TXTS.BUGS}" target="_blank" href="http://www.kleeja.com/bugs/ar/">Bugs</a></li>
-	<li><a title="{lang.FOOTER_TXTS.PLUGINS}" target="_blank" href="http://www.kleeja.com/plugins/">Plugins</a> |</li>
-	<li><a title="{lang.FOOTER_TXTS.STYLES}" target="_blank" href="http://www.kleeja.com/styles/">Styles</a> | </li>
-	<li><a title="xhtml" target="_blank" href="http://validator.w3.org/check?uri=referer">xhtml</a> | </li>
-  	<li><a title="xhtml" target="_blank" href="http://jigsaw.w3.org/css-validator/check/referer">css</a> | </li>
+	<li><a title="{lang.FOOTER_TXTS.BUGS}" onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com/bugs/ar/">Bugs</a><IF NAME="{lang.DIR}==ltr"> |</IF></li>
+	<li><a title="{lang.FOOTER_TXTS.PLUGINS}" onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com/plugins/">Plugins</a> |</li>
+	<li><a title="{lang.FOOTER_TXTS.STYLES}" onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com/styles/">Styles</a> | </li>
+	<li><a title="xhtml" onclick="window.open(this.href,'_blank');return false;" href="http://validator.w3.org/check?uri=referer">xhtml</a> | </li>
+  	<li><a title="xhtml" onclick="window.open(this.href,'_blank');return false;" href="http://jigsaw.w3.org/css-validator/check/referer">css</a><IF NAME="{lang.DIR}!=ltr"> |</IF></li>
   </ul>
 </div>
 <!-- ## End links left -->

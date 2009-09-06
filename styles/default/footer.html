@@ -7,7 +7,6 @@
 </IF>
 <!-- ## end extra footer -->
 
-
 <!-- Start footer template -->
 <div id="footer">
 
@@ -29,7 +28,7 @@
 
 <div class="clr"></div>	 
  
- <IF NAME="page_stats">
+<IF NAME="page_stats">
 <div dir="ltr" class="page_stats">{page_stats}</div>
 </IF>
  
@@ -40,16 +39,18 @@
 </IF>
 
 
-<!-- start control panel -->
+
 <IF NAME="is_admin">
+<!-- start control panel -->
 {admin_page}
+<!-- # end control panel -->
 </IF>
-<!-- ## end control panel -->
 
 </div>
 <!-- ## end  footer template -->
 
-<div class="clr"></div>	
+<div class="clr"></div>
+
 <!--  Do not remove this notice  -->
  <div id="kleeja">Powered by : <a href="http://www.kleeja.com/" target="_blank">Kleeja</a><IF NAME="S_TRANSLATED_BY">{lang.S_TRANSLATED_BY}</IF></div>
 <!--  Do not remove this notice  -->

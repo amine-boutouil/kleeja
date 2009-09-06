@@ -1,17 +1,12 @@
-
-<!-- begin extra footer -->
 <IF NAME="extras.footer">
+<!-- extra footer -->
 <div class="clr"></div><br />	 
 <div id="extras_footer">{extras.footer}</div>
 <div class="clr"></div><br />
 </IF>
-<!-- ## end extra footer -->
-
 <!-- Start footer template -->
 <div id="footer">
-
 <div class="clr"></div><div class="dot"></div><div class="clr"></div>	  
-
 <!-- Start links left -->
 <div id="footerlinksleft">
   	<ul>
@@ -23,39 +18,28 @@
   </ul>
 </div>
 <!-- ## End links left -->
-
 <div class="Copyrights">{lang.COPYRIGHTS_X} &copy; <a href="{config.siteurl}">{config.sitename}</a></div>
-
 <div class="clr"></div>	 
- 
 <IF NAME="page_stats">
 <div dir="ltr" class="page_stats">{page_stats}</div>
 </IF>
- 
-<IF NAME="googleanalytics">
+ <IF NAME="googleanalytics">
 <div class="clr"></div>	
 <div class="googleanalytics">{googleanalytics}</div>
 <div class="clr"></div>		
 </IF>
-
-
-
 <IF NAME="is_admin">
 <!-- start control panel -->
 {admin_page}
 <!-- # end control panel -->
 </IF>
-
 </div>
 <!-- ## end  footer template -->
-
 <div class="clr"></div>
-
 <!--  Do not remove this notice  -->
  <div class="kleeja">Powered by : <a href="http://www.kleeja.com/" onclick="window.open(this.href,'_blank');return false;">Kleeja</a><IF NAME="S_TRANSLATED_BY">{lang.S_TRANSLATED_BY}</IF></div>
 <!--  Do not remove this notice  -->
- 
-</div>
+ </div>
 <!-- ## end  wrapper -->
 </body>
-</html> 
+</html>

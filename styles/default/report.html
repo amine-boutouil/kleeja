@@ -1,15 +1,6 @@
-<!-- start Rebort template  -->
 <div id="content">
-
-<!-- start site name and title  -->
 <div class="title-x"><strong><a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}</strong></div>
-<!--  # End  site name and title  -->
-
-<!-- start line top  -->
 <div class="clr"></div><div class="line"></div>
-<!-- # End line top  -->
-
-<!-- start error msg  -->
 <IF NAME="ERRORS">
 <dl id="system-message">
 	<dd class="error">
@@ -17,9 +8,6 @@
 	</dd>
 </dl>
 </IF>
-<!-- # end error msg  -->
-
-<!-- start form call  -->
 <form action="{action}" method="post">
 <div class="rebort">
 	<IF NAME="NOT_USER">
@@ -33,8 +21,6 @@
 	<label>{lang.REASON} : </label>
 	<textarea class="input_field" name="rtext" cols="5" rows="5">{t_rtext}</textarea>
 </div>
-
-<!---- start  safe code  ---->				
 <div class="safe_code">
 <span>{lang.VERTY_CODE}</span>
 <br /><br />
@@ -44,17 +30,10 @@
 <strong class="explain">{lang.NOTE_CODE}</strong>
 <br />
 </div>
-<!---- ## End  safe code  ---->	
-
 <div class="clr"></div>
-
 <input name="rid" value="{id_d}" type="hidden" />
 {H_FORM_KEYS}
 <input id="buttons" type="submit" name="submit" value="{lang.REPORT}" />
 </form>
-<!-- ## End form call  -->
-
 <div class="clr"></div><br />
-   
 </div>
-<!-- ## End Rebort template  -->

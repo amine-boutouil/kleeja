@@ -50,7 +50,10 @@ class SimplePager
 		global $lang, $config;
 
 		//if no page
-		if($this->totalPages <= 1) return;
+		if($this->totalPages <= 1)
+		{
+			return;
+		}
 
 		$re = '<div class="pagination">';
 
@@ -59,7 +62,7 @@ class SimplePager
 			($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '<a class="paging" href="' . $link . '-' . ($this->currentPage-1) . '.html">'. $lang['PREV'] .'</a>' : $re .= '<a class="paging" href="' . $link . '&amp;page=' . ($this->currentPage-1) . '">'. $lang['PREV'] .'</a>';
 
 		if ($this->currentPage > 3)		
-			($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '<a class="paging" href="' . $link . '-1.html">1</a>' . (($this->currentPage > 5) ? '...' : '') : $re .= '<a class="paging" href="' . $link . '&amp;page=1">1</a>' . (($this->currentPage > 5) ? '...' : '');
+			($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '<a class="paging" href="' . $link . '-1.html">1</a>' . (($this->currentPage > 5) ? '<span class="three_dots">...</span>' : '') : $re .= '<a class="paging" href="' . $link . '&amp;page=1">1</a>' . (($this->currentPage > 5) ? '<span class="three_dots">...</span>' : '');
 
 		// Don't ask me how the following works. It just does, OK? :-)
 		for ($current = ($this->currentPage == 5) ? $this->currentPage - 3 : $this->currentPage - 2, $stop = ($this->currentPage + 4 == $this->totalPages) ? $this->currentPage + 4 : $this->currentPage + 3; $current < $stop; ++$current)
@@ -75,7 +78,7 @@ class SimplePager
 		if ($this->currentPage <= ($this->totalPages-3))
 		{
 			if ($this->currentPage != ($this->totalPages-3) && $this->currentPage != ($this->totalPages-4))
-				$re .= '...';
+				$re .= '<span class="three_dots">...</span>';
 			($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '<a href="' . $link . '-' . ($this->totalPages) . '.html"  class="paging">'. $this->totalPages .'</a>' : $re .= '<a href="' . $link . '&amp;page=' . ($this->totalPages) . '"  class="paging">'. $this->totalPages .'</a>';
 		}
 

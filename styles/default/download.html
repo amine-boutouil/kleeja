@@ -48,13 +48,13 @@ function ti()
 {
     if(timer > 0)
     {
-        document.getElementById("url").innerHTML = '<strong class="wait">{lang.WAIT} ' + timer + ' </strong>';
+        document.getElementById("url").innerHTML = '<div class="wait">{lang.WAIT} ' + timer + ' <\/div>';
         timer = timer - 1;
         setTimeout("ti()", 1000)
     }
     else
     {
-        document.getElementById("url").innerHTML = '<div class="clr"></div><br /><div id="download"><a href="{url_file}" target="balnk">{lang.CLICK_DOWN}</a></div><div class="clr"></div>';
+        document.getElementById("url").innerHTML = '<div class="clr"><\/div><br /><div id="download"><a href="{url_file}" target="balnk">{lang.CLICK_DOWN}<\/a><\/div><div class="clr"><\/div>';
     }
 //-->
 }

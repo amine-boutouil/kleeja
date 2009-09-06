@@ -521,7 +521,7 @@ $lang = array_merge($lang, array(
 	'VIEW'						=> 'عرض',
 
 	//last line of this file ...					 
-	'S_TRANSLATED_BY' 			=> '<br />Translated By <a href="http://www.fenix4web.com/">Fenix4Web</a>',
+	'S_TRANSLATED_BY' 			=> 'Translated By <a href="http://www.fenix4web.com/">Fenix4Web</a>',
 ));
 
 #<-- EOF

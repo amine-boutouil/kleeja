@@ -1,0 +1,159 @@
+/*
+# Powered by Kleeja .... Kleeja.com
+# Designed by Tar3q .... Tar3q.com
+# copyright 2007-2009  ..
+*/
+option {padding-left: 1em;}
+caption, th, td {text-align:left}
+img.left {float:right;margin-left:15px;}
+img.right {float:left;margin-right:15px;}
+.line {background-position:left top}
+.title-x {float:left;background-position:left top}
+.safe_code {background:#F9F5F0 url(../images/saf3_code_ltr.gif) no-repeat 100% 50%;}
+#top_menu {background-position:top right;}
+#top_menu  ul.m3nu li {float: left}
+#top_menu  ul.m3nu li a {float: right}
+#content {float:right}
+#right_menu{float:left}
+#right_menu .list{margin-left:4px;margin-right:16px;}
+#right_menu .list img{padding-left:5px;}
+#system-message dd.info  ul li ,#system-message dd.error ul li{background-position:left top;}
+.kleeja {float:right}
+#data_file {float:left}
+#data_file_down {float:right}
+#stats  {background-position:90% 50%;}
+#content_index_body  {float:right}
+#index_body{background-position:right top;}
+.bn_up {margin-right:4px;margin-left:10px;}
+.tabbertab {-moz-border-radius-topleft:0px;-webkit-border-topleft-radius:0px;-moz-border-radius-topright:10px;-webkit-border-topright-radius:10px;}
+ul.tabbernav li a{margin-left:0px;margin-right:5px;}
+.online{float:left}
+.onlineall ,.onlinevisitor ,.onlineusers {float:left;margin-right:3px;margin-left:0px;}
+.onlineall  {background-position:2% 50%;padding-left:20px;padding-right:10px;}
+.name_users{float:left;}
+.here_page ,.paging {float:left}
+#bg_log1n{background-position:90% 50%;text-align:left}
+#login .login {width:300px;float:left;}
+#login .username,#login .password{background-position:99% 50%; padding-right:20px;padding-left:2px;}
+
+/*-- start  box user name and all files  >> fileuser.html  */
+#boxfileuser ,#filecplink {display:block;background:#ddd;margin:3px auto;padding:10px;border:2px ridge #eee;}
+#boxfileuser  .box_user,#boxfileuser  .us3r_n4me {display:inline;height:60px;padding:10px;background:#EDF1F8 url(../images/imguser.png) no-repeat 96% 50%;border:1px solid #bbb;-moz-border-radius:20px;-webkit-border-radius:20px;-khtml-border-radius:20px;border-radius:20px;}
+#boxfileuser  .box_user {width:46%;float: right;}
+#boxfileuser  .us3r_n4me {width:45%;background:#EDF1F8 url(../images/boxfileuser.png) no-repeat 96% 50%;float: left;}
+#boxfileuser  .public {width:60%;margin:5px auto 5px 15px;background:#DFDFDF;padding:5px 10px;color:#555;border:1px dashed #EDF1F8;font-weight:normal;}
+#boxfileuser .uname{color:#006CD8;font: bold 18px tahoma,Verdana, Helvetica, sans-serif;text-align:center}
+#boxfileuser .nums{font-size:32px;text-align:center}
+#filecplink  .copylink {float:right;padding:3px 6px;color:#D20000;font: bold 12px tahoma,sans-serif;}
+#filecplink .link_user{float:left;width:290px;padding:2px;direction:ltr;}
+.tabledata {width:100%;background-color:#CECECE;color:#111;font-size:11px;border:2px ridge #eee;}
+.tabledata th ,.tabledata td {padding:5px;border-right:1px solid #aaa;border-top: 1px solid #eee;border-left:1px solid #eee;border-bottom: 1px solid #aaa; text-align:center; }
+.tabledata .odd  {background:#D4D0C8; text-align:right;width:50%;}
+.tabledata thead th {white-space: nowrap;background:#888 url(../images/headline_bg.png) repeat-x center right; font-weight: bold;line-height:180%;color:#fff}
+.tabledata tbody td {line-height:180%;font-weight:700;white-space: nowrap;}
+.tabledata a,.tabledata a:link {color:#039;}
+.tabledata a:visited {color:#555;text-decoration:line-through;}
+.tabledata th:hover a,.tabledata td:hover a {color:#039;text-decoration:none;}
+.tabledata:hover {border-color:#FF6600}
+.tabledata tr:hover {background-color:#FF6600;color:#fff}
+.tabledata thead tr:hover th,.tabledata thead th:hover {background:#888 url(../images/headline_bg.png) repeat-x center right;cursor:default;color:#fff}
+.tabledata tr th:hover,.tabledata tr td:hover {background-color:#fff;color:#039;cursor:text}
+/*-- #  end box user name and all files  >> fileuser.html  */
+
+/* register template >> register.html */
+.reg_table { background:#F0F3F9 url(../images/register.png) no-repeat 15% 50%;border:1px solid #CFDFFF;margin:5px 0;padding:15px 10px;}
+.reg_table td{width:130px;padding-bottom:5px;}
+.reg_table td input{width:180px;}
+/*#  register template >> register.html */
+
+/* back password template >> get_pass.html */
+#bg_get_password{background:#F0F3F9 url(../images/get_password.png) no-repeat 15% 50%;border:1px solid #CFDFFF;margin:5px 0;padding:15px 10px;}
+.get_pass{color:#BF0000;margin-bottom:10px;font-weight:bold;}
+/* # back password template >> get_pass.html */
+
+/* call and file report templates */
+.call{background:#F0F3F9 url(../images/call.png) no-repeat 10% 50%;border:1px solid #CFDFFF;margin:5px 0;padding:15px 10px;}
+.call label ,.rebort label {display:block;font-weight:bold;margin:5px 0;}
+.call input ,.rebort input {padding: 2px;border:1px solid #999;font: bold 12px tahoma, Verdana, sans-serif;color:#666;}
+.call textarea,.rebort textarea {width:300px;padding:2px;font: bold 12px tahoma, Verdana, sans-serif;border:1px solid #999;height:100px;display:block;color:#666;}
+.rebort{background:#F0F3F9 url(../images/file_rebort.png) no-repeat 10% 50%;border:1px solid #CFDFFF;margin:5px 0;padding:15px 10px;}
+.urlcolor{background:#FFCDCD}
+/* # call and file report templates */        
+
+/*-- start Profile template >> profile.html  */
+#profile  select,#profile  option{background:#FFD;color: #000;font: bold 11px Tahoma, Helvetica, Arial, sans-serif;}
+#profile .boxdata{float:right;width:31%;height:220px;border:1px solid #bbb;background-color:#DDD;margin:5px;}
+#profile .boxdata p  {padding:2px;text-align:center;}
+#profile .boxdata .tit{background:#F68618 url(../images/headline_bg.png) repeat-x top right;padding:10px;margin:1px;font:bold 12px tahoma, sans-serif;color:#111;text-align:center;}
+#profile .boxdata .bq {color:#111;line-height:18px;padding:0 5px;}
+#profile .boxdata .in{color:#111;line-height:18px;padding:0 5px;margin-right:8%;}
+#profile .boxdata .biguser {color:#D61B1B;line-height:30px;padding:5px;font: bold 14px tahoma, sans-serif;text-align:center;}
+.buttons_center {line-height:24px;padding:5px;text-align:center;margin:3px auto;}
+/*-- End Profile template >> profile.html   */
+
+/*-- start user control panel  Files  >> filecp.html  */
+.file_cp {background:#DADADA url(../images/table_file_cp.png) no-repeat 15% 45%;color:#000;width:100%;border:1px solid #C2C2C2}
+.file_cp td {padding:6px 8px;white-space: pre-wrap}
+.file_cp th {padding:8px;white-space:pre-wrap;}
+.left_button{float:left;margin:2px 0;padding:5px 4px;}
+.file_cp  .odd  {text-align:right;width:76%;}
+.file_cp  .nbr  {font-size:11px;text-align:right;}
+.file_cp thead th,.file_cp tfoot th,.file_cp tbody td {border-right: 1px solid #aaa;border-top: 1px solid #eee;border-left:1px solid #eee;border-bottom: 1px solid #aaa;font-weight:bold;text-align:center}
+.file_cp thead th{background:#F68618 url(../images/headline_bg.png) repeat-x center right;}
+.file_cp tfoot th{background:#bbb url(../images/headline_bg.png) repeat-x center right;}
+.file_cp tbody tr:hover td{border-top:1px solid #aaa;border-bottom:1px solid #eee;}
+.file_cp  a { color:#444; }
+.file_cp  a:link {color:#666;}
+.file_cp a:visited {color:#000;}
+.file_cp  a:hover {color:#D2691E;text-decoration:line-through;}
+/*-- # end  user control panel  Files  >> filecp.html  */
+
+/* template list of files allowed > guide.html */
+#guide {width:100%;}
+.guide_user_th ,.guide_visitor_th{line-height:14px;padding:10px 15px;font-size:13px;font-weight:700;text-align:center;color:#fff;}
+.guide_user_th  {background:#767676 url(../images/headline_bg.png) repeat-x top right;}
+.guide_visitor_th {background:#FF7B00 url(../images/headline_bg.png) repeat-x top right}
+.user_box,.guide_user_th ,.guide_visitor_th,.user_img,.visitor_img {-moz-border-radius:9px;-webkit-border-radius:9px;-khtml-border-radius:9px;border-radius:9px;}
+.user_box{padding:10px;margin:3px 0px;background-color:#CECECE;border:1px double gray;}
+.user_img,.user_n4me,.visitor_img {display:block;font-size:14px;font-weight:700;color:#111;padding:5px 8px;}
+.user_img {background-color:#E1E1E1;border:1px double #bbb;}
+.user_n4me{display:inline;}
+.user_img img{padding-left:5px}
+.user_ext{line-height:18px;padding:4px 8px;background:#E8E8E8 url(../images/headline_bg.png) repeat-x top right;margin:2px 0;border-bottom: 1px solid #bbb;border-top: 1px solid #bbb;}
+.user_ext_color{font:bold 12px tahoma, sans-serif;color:#222;margin:2px;}
+.user_ext_lang{font:normal 12px tahoma, sans-serif;color:#000;margin:2px;}
+.visitor_box{background-color:#FFE9D5;border:1px #FFAC62 double;}
+.visitor_img {background-color:#FDF8EE;border:1px #EDCFAF double;}
+.visitor_img img{padding-left:5px}
+.visitor_n4me{color:#F68618;}
+.visitor_ext{background:#FDF8EE url(../images/headline_bg.png) repeat-x top right;border-bottom: 1px solid #FFD1BF;border-top: 1px solid #FFD1BF;}
+.visitor_ext_color{color:#333;}
+.visitor_ext_lang{color:#000;}
+/* #  template list of files allowed > guide.html */
+
+.thumb_div_tag {margin:2px auto;}
+.thumb_div_tag img{background:#FFF;border:1px solid #D20000;padding:5px}
+
+.index_info {display:block;width:73%;border-top: 3px solid #84A0C0;border-bottom: 3px solid #84A0C0;color:#004776;background:#C2D3E7 url(../images/info_f.png) no-repeat 99% 2%;padding:10px;text-indent:30px;}
+.index_err {display:block;width:75%;border-top: 3px solid #DE7A7B;border-bottom: 3px solid #DE7A7B;color:#c00;background:#E6C0C0 url(../images/err.png) no-repeat 98% 50%;padding:5px;text-indent:30px;}
+.index_err strong,.index_info  strong {vertical-align:middle;line-height:25px}
+
+.all_boxes{width:98%;color:#004776;border:1px solid #80FFFF;outline:1px solid #84A0C0;direction:ltr;}
+.all_boxes:focus {background-color:#D9FDFF;border: 1px solid #005F9D;color:#111}
+
+.debug_kleeja{width:80%;margin:0 auto;background-color:#fff;border:1px #666 solid;margin-top:20px;margin-bottom:20px;}
+.debug_kleeja fieldset{margin:0 auto;width:80%;}
+
+#footerlinksleft ul{width:350px;float:left;}
+#footerlinksleft li{float:left;font-size:11px; font-weight:normal;}
+#footerlinksleft ul li a{padding:2px 4px; color:#5C5C5C; }
+#footerlinksleft ul li a:hover,#footer .Copyrights  a:hover,#footer .page_stats a:hover{background:#787878;color:#fff;-moz-border-radius:4px;}
+#footer .Copyrights {float:right;padding:3px 0;color:#666;}
+#footer .page_stats { margin-top:10px;margin-bottom:24px;float:left;color:#999;}
+#footer .googleanalytics {margin-top:10px;margin-bottom:24px;padding:10px; text-align:center;}
+/*start Option to control panel */
+
+.admin_cp_link span{margin:10px 0;float:right;padding:7px 50px; background:url(../images/adminPan.gif) no-repeat center left;font-weight:bold; border:1px solid #858585;-moz-border-radius:8px;-webkit-border-radius:8px;-khtml-border-radius:8px;border-radius:8px;}
+.admin_cp_link {color:#2B2B2B; cursor:pointer;text-decoration:none;}
+.admin_cp_link:hover  {color:#fff;text-decoration:none;}
+/* # footer template */

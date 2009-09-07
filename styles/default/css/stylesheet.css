@@ -39,7 +39,7 @@ img.right {float: right;margin-left:15px;}
 #top_menu {width: 100%;height: 43px;background: url(../images/menu-bg.gif) repeat-x top left;margin-top:5px}
 #top_menu  .m3nu {width: 80%;height: 43px;font-size: 12px;font-weight: bold;list-style-type: none;margin: 0 auto;}
 #top_menu  ul.m3nu li {display: block;float: right;margin:0 5px 0 0;}
-#top_menu  ul.m3nu li a {height: 43px;color: #777;text-decoration: none;        display: block;float: left;padding: 8px 15px 0;}
+#top_menu  ul.m3nu li a {height:43px;color: #777;text-decoration: none;display: block;float: left;padding:8px 20px 0 20px;}
 #top_menu  ul.m3nu li a:hover {color: #333;background: url(../images/current-bg.gif) top left repeat-x;}
 #top_menu  ul.m3nu li a.current{color: #FFF;background: url(../images/current-bg.gif) top left repeat-x;padding:5px 15px;}
 /** # End The main menu at the top **/        

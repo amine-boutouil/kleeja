@@ -94,7 +94,7 @@
 <div id="divheader">
 	<div id="header">
 	<div class="logo1"><a href="{config.siteurl}"><img src="{STYLE_PATH_ADMIN}images/login/logo.png" alt="{config.sitename}" /></a></div>
-	<div class="logo2"><br /><b>{lang.KLEEJA_CP}</b></div>
+	<div class="logo2"><b>{lang.KLEEJA_CP}</b></div>
 	</div>
 </div>
 <!-- end top div header  -->
@@ -111,7 +111,7 @@
 <div id="rightmenu">	
 	<div class="body-menu">
 <IF NAME="SHOW_LIST">
-	<div class="link-menu"><div><p><a title="{lang.RETURN_HOME}" href="{config.siteurl}"><img src="{STYLE_PATH_ADMIN}images/index_button.gif" /><br />{lang.RETURN_HOME}</a></p></div></div>
+	<div class="linkhome"><div><p><a title="{lang.RETURN_HOME}" href="{config.siteurl}"><img src="{STYLE_PATH_ADMIN}images/index_button.gif" /><br />{lang.RETURN_HOME}</a></p></div></div>
 	<div class="link-menu"><div><p><a title="{lang.R_CPINDEX}" href="./"><img src="{STYLE_PATH_ADMIN}images/cp_button.gif" /><br />{lang.R_CPINDEX}</a></p></div></div>
 <LOOP NAME="adm_extensions_menu">	
 	<div class="link-menu<IF LOOP="current"> link-menu-current</IF>"><div><p><a title="{{lang}}" href="{{link}}"<IF LOOP="confirm"> onclick="javascript:return confirm_from();"</IF>><img src="{{icon}}" /><br />{{lang}}</a></p></div></div>

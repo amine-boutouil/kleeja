@@ -10,17 +10,11 @@
     border-bottom: 1px solid #CCCCCC; border-left: 1px solid #D7D7D7;
 	background: #F3F3F3 url(../images/div-header.jpg) repeat-x; 
 	/* Generation CSS3 Only  Firefox and Safari :(  Tar3q   */
-		-moz-border-radius-topleft: 10px; 
-		-webkit-border-top-left-radius: 10px;
-		-moz-border-radius-bottomright: 10px; 
-		-webkit-border-bottom-right-radius: 10px;}
+		-moz-border-radius-topleft: 10px;-webkit-border-top-left-radius: 10px;-moz-border-radius-bottomright: 10px;-webkit-border-bottom-right-radius: 10px;}
 #header { width: 100%; height: 78px; padding: 0; margin:0;  }
-#header .logo1 { float:left; width: 370px; padding:0; margin:0; }
-#header .logo2{
-	float:right; width: 370px; padding: 20px 10px; margin:0; 
-	background: url(../images/adminopen.png) no-repeat right center; padding-right: 50px;
-	display: inline-block;}
-#header .logo2 b{padding-top: 20px;color:#444; font: bold 22px Tahoma, Arial, Helvetica, sans-serif;}
+#header .logo1 { float:left; width: 370px; padding:0; margin:0;display: inline-block; }
+#header .logo2{ margin-right:15px;float:right;width: 370px; padding:35px 60px 20px 10px;background: url(../images/adminopen.png) no-repeat right center;}
+#header .logo2 b{padding:15px 25px;color:#0B55C4; font: bold 22px Tahoma, Arial, Helvetica, sans-serif;}
 /* header */
 
 /* body */
@@ -64,14 +58,21 @@
 	border-right: 1.5px solid #999;	border-bottom: 1.5px solid #999;
 	background: #E2E1DD url(../images/bg-right-menu.jpg) repeat;}
 #rightmenu  .link-menu-current {	height: 60px; width:48%;padding:0px;margin:1px;background:#fff;} 
-#rightmenu .link-menu-current  a {color:#000;}
+#rightmenu .link-menu-current  a {color:#000;border-top: #FEA53D 3px solid;border-bottom: #FEA53D 3px solid;border-right: #FE6914 3px solid; border-left: #FE6914 3px solid;}
 #rightmenu .link-menu a { 
 	display: block;	overflow: hidden; font-family:tahoma,verdana,arial,sans-serif;
 	font-size: xx-small;font-weight: bold;padding:5px;}
 #rightmenu .link-menu img {padding-bottom: 7px ;}
 #rightmenu .link-menu a:hover {
 	text-decoration: none; background: #fff;	color:#000;
-	border-top: #FE6914 3px solid; border-bottom: #FE6914 3px solid; }
+	border-top: #FEA53D 3px solid;border-bottom: #FEA53D 3px solid;border-right: #FE6914 3px solid; border-left: #FE6914 3px solid; }
+	
+
+#rightmenu .linkhome{float: right; height: 60px; width:48%;margin:1px ;background:#EFE7B8}
+#rightmenu .linkhome a {	display: block;	overflow: hidden;color:#111;font-size: xx-small;font-weight: bold;padding:5px;}
+#rightmenu .linkhome img {padding-bottom: 7px ;}
+#rightmenu .linkhome a:hover {text-decoration: none;border-top: #EFE7B8 3px solid; border-bottom: #EFE7B8 3px solid; }
+	
 /* right  menu */	
 	
 /*  buttons */
@@ -119,10 +120,10 @@ input.button1, input.button3,input.button2 {
 /*  table no hover */
 	
 /* last visit */
-#idwelcom {width:100%;background:#EEE;margin-bottom:4px;font-size:12px;border-top:2px dotted #fff;border-bottom:2px dotted #fff;border-left:0px;border-right:0px}
-#info-last-visit {width:100%;background:#F7F7F7;margin-bottom:4px;font-size:11px;border-top:2px ridge #fff;border-bottom:2px ridge #fff;border-left:0px;border-right:0px}
-#info-last-visit td {background:#F7F7F7;width:50%;padding:11px 5px;border:0px;text-align: right;}
-#info-last-visit  tr:hover { background:#DBE1F8}
+.idwelcom {width:100%;background:#EEE;margin-bottom:4px;font-size:12px;border-top:2px dotted #fff;border-bottom:2px dotted #fff;border-left:0px;border-right:0px}
+.infocontrol {width:100%;background:#F7F7F7;margin-bottom:4px;font-size:11px;border-top:2px ridge #fff;border-bottom:2px ridge #fff;border-left:0px;border-right:0px}
+.infocontrol td{background:#F7F7F7;width:50%;padding:11px 5px;border-bottom:0px;text-align: right;}
+.infocontrol:hover { background:#DBE1F8}
 /* last visit */	
 
 /* other info  */

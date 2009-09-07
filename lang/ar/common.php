@@ -503,6 +503,7 @@ $lang = array_merge($lang, array(
 	'KLEEJA_D_TEAM'				=> 'فريق تصميم كليجا',
 	'ERROR_TRY_AGAIN'			=> 'خطأ , حاول مجدداً.',
 	'VIEW'						=> 'عرض',
+	'REPLACE_WHOLW_TPL'			=> 'استبدل كامل محتويات القالب',
 	));
 
 #<-- EOF

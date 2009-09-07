@@ -291,9 +291,9 @@ switch ($_GET['sty_t'])
 				//style id 
 				$style_id = str_replace('..', '', $_POST['style_id']);
 				//tpl name 
-				$tpl_name =	str_replace('..', '', $_POST['new_tpl']);
-				$tpl_path = $root_path . 'styles/' . $style_id . '/' . $tpl_name;
-				
+				$tpl_name =	str_replace(array('..', '.html', '.php'), '', $_POST['new_tpl']);
+				$tpl_path = $root_path . 'styles/' . $style_id . '/' . $tpl_name . '.html';
+	
 				//same name, exists before, let's edit it
 				if(file_exists($tpl_path))
 				{
@@ -328,7 +328,7 @@ switch ($_GET['sty_t'])
 				
 				$tpl_path = $root_path . 'styles/' . $style_id . '/' . $tpl_name;
 				
-				if(!is_writable($tpl_path))
+				if(is_writable($tpl_path))
 				{
 					if($filename = @fopen($tpl_path, 'w'))
 					{
@@ -399,6 +399,10 @@ switch ($_GET['sty_t'])
 								echo '<textarea style="direction:ltr;width:90%">' . trim(htmlspecialchars($do['find'][0])) . '</textarea> <br />';
 									echo '<strong> ' . $lang['REPLACE_TO_REACH'] . '<strong> : <br />';
 								echo '<textarea style="direction:ltr;width:90%">' . trim(htmlspecialchars($do['find'][1])) . '</textarea> <br />';
+							}
+							else if(trim($do['find']) == '')
+							{
+								echo '<strong>' . $lang['REPLACE_WHOLW_TPL'] . '</strong><br />';
 							}
 							else
 							{

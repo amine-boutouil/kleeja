@@ -519,6 +519,7 @@ $lang = array_merge($lang, array(
 	'KLEEJA_D_TEAM'				=> 'فريق تصميم كليجا',
 	'ERROR_TRY_AGAIN'			=> 'خطأ , حاول مجدداً.',
 	'VIEW'						=> 'عرض',
+	'REPLACE_WHOLW_TPL'			=> 'استبدل كامل محتويات القالب',
 
 	//last line of this file ...					 
 	'S_TRANSLATED_BY' 			=> 'Translated By <a href="http://www.fenix4web.com/">Fenix4Web</a>',

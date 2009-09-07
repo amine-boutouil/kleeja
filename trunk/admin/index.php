@@ -17,7 +17,7 @@
 
 
 	//we are in admin path, session and cookies require this
-	$adm_path = basename(dirname(__file__), '/') . '/' . basename(__file__);
+	$adm_path = preg_replace('/.*?[\\\\|\/]([0-9a-z-_.]+)[\\\\|\/]([0-9a-z-_.]+)[\\\\|\/]' . preg_quote(basename(__file__), '/') . '/i', '/\\1/\\2/', __file__);
 	$adm_time = 18000;
 
 	//include imprtant file ..
@@ -38,9 +38,9 @@
 	//need to login again
 	//
 	if(
-			(empty($_SESSION['ADMINLOGIN']) || $_SESSION['ADMINLOGIN'] != md5($usrcp->name() . $config['siteurl'])) || 
-			(empty($_SESSION['USER_SESS']) || $_SESSION['USER_SESS'] != session_id()) ||
-			(empty($_SESSION['ADMINLOGIN_T']) || $_SESSION['ADMINLOGIN_T'] < time())	 
+		(empty($_SESSION['ADMINLOGIN']) || $_SESSION['ADMINLOGIN'] != md5($usrcp->name() . $config['siteurl'])) || 
+		(empty($_SESSION['USER_SESS']) || $_SESSION['USER_SESS'] != session_id()) ||
+		(empty($_SESSION['ADMINLOGIN_T']) || $_SESSION['ADMINLOGIN_T'] < time())	 
 	)
 	{
 		if(isset($_GET['go']) && $_GET['go'] == 'login') 

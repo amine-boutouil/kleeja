@@ -58,16 +58,13 @@ $('div#{{id}}').pulse({
 <!-- end clear  -->
 
 <!-- start last visit  -->
-<table id="info-last-visit" width="100%" cellspacing="6" cellpadding="2">
+<table class="infocontrol">
 	<tr><IF NAME="last_visit">
 		<td>{lang.LAST_VISIT} : {last_visit}</td>
 		<td><small><a href="{h_lst_files}">{lang.FLS_LST_VST_SEARCH}</a></small> | 
 	<small><a href="{h_lst_imgs}">{lang.IMG_LST_VST_SEARCH}</a></small>
 	</td></IF>
 	</tr>
-</table>
-
-<table id="info-last-visit" width="100%" cellspacing="6" cellpadding="2">
 	<tr>
 		<td>{lang.LSTDELST} : <b>{last_del_fles}</b></td>		
 		<td>{lang.LSTFLE_ST} : <IF NAME="stat_last_file!='0'"><b><a href="{last_file_up_url}" target="blank">{last_file_up}</a></b><ELSE>{lang.UNKNOWN}</IF></td>
@@ -75,16 +72,11 @@ $('div#{{id}}').pulse({
 </table>
 
 <!-- start users  number -->
-<table id="info-last-visit" width="100%" cellspacing="6" cellpadding="2">
+<table class="infocontrol">
 	<tr>
 		<td>{lang.AUSERS_NUM} : <b>[ {users_number} ]<b></td>
 		<td><IF NAME="config.user_system==1">{lang.LAST_REG} : <b>[ {lst_reg} ]</b></IF></td>
 	</tr>
-</table>
-<!-- end  users number  -->
-
-<!-- start files number  -->
-<table id="info-last-visit" width="100%" cellspacing="6" cellpadding="2">
 	<tr>
 		<td>{lang.AFILES_NUM} : <b>[ {files_number} ]</b></td>
 		<td> {lang.AFILES_SIZE} : <b>[ {files_sizes} ]</b></td>
@@ -93,16 +85,11 @@ $('div#{{id}}').pulse({
 <!-- end files number  -->
 
 <!-- start  last google -->
-<table id="info-last-visit" width="100%" cellspacing="6" cellpadding="2">
+<table class="infocontrol">
 	<tr>
 		<td>{lang.LAST_GOOGLE} : {s_last_google}</td>
 		<td>{lang.GOOGLE_NUM} : <b>[ {s_google_num} ]</b></td>
 	</tr>
-</table>
-<!-- end  last google -->
-
-<!-- start  last yahoo -->
-<table id="info-last-visit" width="100%" cellspacing="6" cellpadding="2">
 	<tr>
 		<td>{lang.LAST_YAHOO} : {s_last_yahoo}</td>
 		<td>{lang.YAHOO_NUM} : <b>[ {s_yahoo_num} ]</b></td>
@@ -187,22 +174,22 @@ $('div#{{id}}').pulse({
 <div class="t_info">{lang.KLEEJA_P_TEAM}</div>
 <div class="clr"></div><br />
 
-	<div class="bub-top">
-	<table dir="ltr" class="results" id="resultstable" border="0" cellpadding="2" cellspacing="0" width="100%">
-		<tr id="headingrow">
-			<th style="white-space: wrap;">Name</th>
-			<th style="white-space: no-wrap;" width="186">Notes</th>
-			<th style="white-space: no-wrap;">Duties</th>
-			<th style="white-space: no-wrap;">Data</th>
+	<div>
+	<table dir="ltr">
+		<tr>
+			<th>Name</th>
+			<th>Notes</th>
+			<th>Duties</th>
+			<th>Data</th>
 		</tr>
 		<tr>
-			<td width="9%" >
-			<a style="white-space: nowrap;" href="http://code.google.com/p/kleeja/people/detail?u=saanina">
+			<td>
+			<a href="http://code.google.com/p/kleeja/people/detail?u=saanina">
 			saanina</a><p>&nbsp;</td>
-			<td width="186">
+			<td>
 			Professional php coder</td>
-			<td width="62%">
-			<ul style="margin: 0pt; padding-left: 1.2em;">
+			<td>
+			<ul style="margin: 0pt; padding-left:5px;">
 				<li>
 				Plan the scope of release milestones and track progress 
 				</li>
@@ -213,17 +200,16 @@ $('div#{{id}}').pulse({
  				</li>
 			</ul>
 			</td>
-			<td width="9%">
-			2007 -2009</td>
+			<td>2007 -2009</td>
 		</tr>
 		<tr>
 			<td>
-			<a style="white-space: nowrap;" href="http://code.google.com/p/kleeja/people/detail?u=phpfalcon">
+			<a href="http://code.google.com/p/kleeja/people/detail?u=phpfalcon">
 			phpfalcon</a><p>&nbsp;</td>
-			<td width="186">
+			<td>
 			Php coder </td>
-			<td width="62%">
-			<ul style="margin: 0pt; padding-left: 1.2em;">
+			<td>
+			<ul style="margin: 0pt; padding-left:5px;;">
 				<li>
 				Design new features, write code and unit tests </li>
 				<li>
@@ -233,16 +219,12 @@ $('div#{{id}}').pulse({
  				</li>
 			</ul>
 			</td>
-			<td width="9%">
-			2009</td>
+			<td>2009</td>
 		</tr>
 		<tr>
-			<td>
-			<a href="http://code.google.com/p/kleeja/people/detail?u=altar3q">T</a><a style="white-space: nowrap;" href="http://code.google.com/p/kleeja/people/detail?u=altar3q">ar3q</a>&nbsp;</td>
-			<td width="186">
-			Web designer </td>
-			<td width="62%">
-			<ul style="margin: 0pt; padding-left: 1.2em;">
+			<td><a href="http://code.google.com/p/kleeja/people/detail?u=altar3q">Tar3q</a></td>
+			<td>Web designer </td>
+			<td><ul style="margin: 0pt; padding-left:5px;">
 				<li>
 				Test the system before each release </li>
 				<li>
@@ -250,8 +232,7 @@ $('div#{{id}}').pulse({
  				</li>
 			</ul>
 			</td>
-			<td width="9%">
-			2009</td>
+			<td>2009</td>
 		</tr>
 	</table>
 </div>

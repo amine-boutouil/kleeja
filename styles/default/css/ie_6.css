@@ -1,7 +1,10 @@
-#buttons ,.buttons{background:#E8E8E8 url(../images/headlinebg.png) repeat-x top right;padding:4px 5px;}
+#buttons ,.buttons{background:#FF8138 url(../images/headlinebg.png) repeat-x top right;padding:4px 5px;border:1px solid #aaa;}
 .guide_user_th  {background:#bbb url(../images/headinebg.png) repeat-x top right;}
 .guide_visitor_th {background:#FF7B00 url(../images/headinebg.png) repeat-x top right}
 .user_ext{background:#E8E8E8 url(../images/headlnebg.png) repeat-x top right}
 .visitor_ext{background:#FDF8EE url(../images/headliebg.png) repeat-x top right;}
+#content_index_body,#content  {width:68%}
 #index_body{background:url(../images/indexbody.png) no-repeat left top;}
 .tabledata thead th {background:#F68618 url(../images/headinebg.png) repeat-x center right;}
+.tabbertab {border:0px;}ul.tabbernav li a{border:0px}
+.here_page ,.paging:hover{background:#FFF8C6 url(../images/headlinebg.png) repeat-x center right}

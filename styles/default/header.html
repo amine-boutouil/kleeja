@@ -1,32 +1,35 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" dir="{dir}">
 <head>
-<title>{title} &#9679; {config.sitename}</title>
-<meta http-equiv="Content-Type" content="text/html;charset={charset}" />
-<meta http-equiv="Content-Language" content="{lang.LANG_SMALL_NAME}"/>
-<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
-<meta name="copyrights" content="Powered by Kleeja :: kleeja.com" />
-{EXTRA_CODE_META}
-<link rel="shortcut icon" href="favicon.ico" />
-<link rel="icon" type="image/gif" href="images/animated_favicon1.gif" />
-<link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH}css/screen.css" />
-<IF NAME="{lang.DIR}==ltr">
-<link rel="stylesheet" type="text/css" href="{STYLE_PATH}css/ltr.css" />
-</IF>
-<IS_BROWSER="ie6">
-<link rel="stylesheet" type="text/css" href="{STYLE_PATH}css/ie_6.css" />
-</IS_BROWSER>
-<IS_BROWSER="ie7">
-<link rel="stylesheet" type="text/css" href="{STYLE_PATH}css/ie_7.css" />
-</IS_BROWSER>
-<script type="text/javascript">
- var number_of_uploads={config.filesnum};
- var LANG_PAST_URL_HERE ="{lang.PAST_URL_HERE}";
-var LANG_MORE_F_FILES ="{lang.MORE_F_FILES}";
-</script>
-<script type="text/javascript" src="{STYLE_PATH}javascript.js"></script>
+	<title>{title} &#9679; {config.sitename}</title>
+	<meta http-equiv="Content-Type" content="text/html;charset={charset}" />
+	<meta http-equiv="Content-Language" content="{lang.LANG_SMALL_NAME}"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+	<meta name="copyrights" content="Powered by Kleeja :: kleeja.com" />
+	{EXTRA_CODE_META}
+	<link rel="shortcut icon" href="favicon.ico" />
+	<link rel="icon" type="image/gif" href="images/animated_favicon1.gif" />
+	<link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH}css/screen.css" />
+	<IF NAME="{lang.DIR}==ltr">
+	<link rel="stylesheet" type="text/css" href="{STYLE_PATH}css/ltr.css" />
+	</IF>
+	<IS_BROWSER="ie6">
+	<link rel="stylesheet" type="text/css" href="{STYLE_PATH}css/ie_6.css" />
+	</IS_BROWSER>
+	<IS_BROWSER="ie7">
+	<link rel="stylesheet" type="text/css" href="{STYLE_PATH}css/ie_7.css" />
+	</IS_BROWSER>
+	<script type="text/javascript">
+	 var number_of_uploads={config.filesnum};
+	 var LANG_PAST_URL_HERE ="{lang.PAST_URL_HERE}";
+	var LANG_MORE_F_FILES ="{lang.MORE_F_FILES}";
+	</script>
+	<script type="text/javascript" src="{STYLE_PATH}javascript.js"></script>
 </head>
+
 <body>
+
+<!-- start logo -->
 <div id="logobody">
 	<div class="logo">
 		<a href="{config.siteurl}">
@@ -34,7 +37,13 @@ var LANG_MORE_F_FILES ="{lang.MORE_F_FILES}";
 		</a>
 	</div>
 </div>
+<!--  # End  logo -->
+
+<!-- start clear  -->
 <div class="clr"></div>
+<!-- end clear  -->
+
+<!-- start top menu  -->
 <div id="top_menu">
 	<ul class="m3nu">
 		<li><a href="{config.siteurl}" title="{lang.INDEX}" class="current">{lang.INDEX}</a></li>
@@ -46,14 +55,26 @@ var LANG_MORE_F_FILES ="{lang.MORE_F_FILES}";
 		</IF>
 	</ul>
 </div>
+<!--  # End  top menu -->
+
+<!-- start clear  -->
 <div class="clr"></div>
+<!-- end clear  -->
+
+<!-- start wrapper -->
 <div id="wrapper">
+
 <IF NAME="extras.header">
-<div class="clr"></div>
+<!-- start extras header  -->
 <div id="extras_header">{extras.header}</div>
-<div class="clr"></div>
+<!-- start extras header  -->
 </IF>
+
+<!-- start clear  -->
 <div class="clr"></div>
+<!-- end clear  -->
+
+<!-- start  menu right -->
 <div id="right_menu">
 	<div class="list">
 		<ul>
@@ -72,5 +93,6 @@ var LANG_MORE_F_FILES ="{lang.MORE_F_FILES}";
 			<li class="imgbottom">&nbsp;</li>
 		</ul>
 	</div>
-	<div class="clr"></div>
+<div class="clr"></div>
 </div>
+<!--  # End  menu right -->

@@ -1,6 +1,31 @@
-<IF NAME="extras.footer"><div class="clr"></div><br /><div id="extras_footer">{extras.footer}</div><div class="clr"></div><br /></IF>
+<!-- start clear  -->
+<div class="clr"></div>
+<!-- end clear  -->
+
+<IF NAME="extras.footer">
+<!-- begin extra footer -->
+<div id="extras_footer">{extras.footer}</div>
+<!-- # end extra footer -->
+</IF>
+
+<!-- start clear  -->
+<div class="clr"></div>
+<!-- end clear  -->
+
+<!-- Start footer template -->
 <div id="footer">
-<div class="clr"></div><div class="dot"></div><div class="clr"></div>	  
+
+<!-- start clear  -->
+<div class="clr"></div>
+<!-- end clear  -->
+
+<div class="dot"></div>
+
+<!-- start clear  -->
+<div class="clr"></div>
+<!-- end clear  -->
+  
+<!-- Start links kleeja -->
 <div id="footerlinksleft">
   	<ul>
 	<li><a title="{lang.FOOTER_TXTS.BUGS}" onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com/bugs/ar/">Bugs</a><IF NAME="{lang.DIR}==ltr"> |</IF></li>
@@ -10,13 +35,43 @@
   	<li><a title="xhtml" onclick="window.open(this.href,'_blank');return false;" href="http://jigsaw.w3.org/css-validator/check/referer">css</a><IF NAME="{lang.DIR}!=ltr"> |</IF></li>
   </ul>
 </div>
-<div class="Copyrights">{lang.COPYRIGHTS_X} &copy; <a href="{config.siteurl}">{config.sitename}</a></div><div class="clr"></div>	 
-<IF NAME="page_stats"><div dir="ltr" class="page_stats">{page_stats}</div></IF>
-<IF NAME="googleanalytics"><div class="clr"></div><div class="googleanalytics">{googleanalytics}</div><div class="clr"></div></IF>
+<!-- # End links kleeja -->
+
+<div class="Copyrights">{lang.COPYRIGHTS_X} &copy; <a href="{config.siteurl}">{config.sitename}</a></div>
+
+<!-- start clear  -->
 <div class="clr"></div>
-<IF NAME="is_admin">{admin_page}</IF>
+<!-- end clear  -->
+
+<IF NAME="page_stats">
+<div dir="ltr" class="page_stats">{page_stats}</div>
+</IF>
+
+<!-- start clear  -->
+<div class="clr"></div>
+<!-- end clear  -->
+
+<IF NAME="googleanalytics">
+<div class="googleanalytics">{googleanalytics}</div>
+</IF>
+
+<!-- start clear  -->
+<div class="clr"></div>
+<!-- end clear  -->
+
+<IF NAME="is_admin">
+<!-- start control panel -->
+{admin_page}
+<!-- # end control panel -->
+</IF>
+<!-- start clear  -->
+<div class="clr"></div>
+<!-- end clear  -->
+																																																																																																																																																																															<!--  Do not remove this notice  --><div class="kleeja">Powered by : <a href="http://www.kleeja.com/" onclick="window.open(this.href,'_blank');return false;">Kleeja  </a><IF NAME="S_TRANSLATED_BY">{lang.S_TRANSLATED_BY}</IF></div>
 </div>
-<div class="clr"></div>																																																																																																																																																																																		<!--  Do not remove this notice  --><div class="kleeja">Powered by : <a href="http://www.kleeja.com/" onclick="window.open(this.href,'_blank');return false;">Kleeja  </a><IF NAME="S_TRANSLATED_BY">{lang.S_TRANSLATED_BY}</IF></div>
+<!-- # end  footer template -->
 </div>
+<!-- # end  wrapper -->
+
 </body>
 </html>

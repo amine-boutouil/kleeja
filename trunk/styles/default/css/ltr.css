@@ -10,13 +10,15 @@ img.right {float:left;margin-right:15px;}
 .line {background-position:left top}
 .title-x {float:left}
 .safe_code {background:#F9F5F0 url(../images/saf3_code_ltr.gif) no-repeat 100% 50%;}
-#top_menu {background-position:top right;}
-#top_menu  ul.m3nu li {float: left}
-#top_menu  ul.m3nu li a {float: right}
+#top_menu {background-position:top right}
+#top_menu  .m3nu {margin-right:0%;margin-left:10%;}
+#top_menu  .m3nu ul{float:left;}
+#top_menu  .m3nu li {float:left;margin:0 0 0 5px;}
+#top_menu  .m3nu li a {float: left;}
 #content {float:right}
 #right_menu{float:left}
 #right_menu .list{margin-left:4px;margin-right:16px;}
-#right_menu .list img{padding-left:5px;}
+#right_menu .list img{padding-right:5px;padding-left:0px;}
 #system-message dd.info  ul li ,#system-message dd.error ul li{background-position:left top;}
 #data_file {float:left}
 #data_file_down {float:right}
@@ -51,8 +53,9 @@ ul.tabbernav li a{margin-left:0px;margin-right:5px;}
 .file_cp  .odd  ,.file_cp  .nbr {text-align:left}
 .user_img img{padding-left:0px;padding-right:5px}
 .visitor_img img{padding-left:0px;padding-right:5px}
-.index_info ,.index_err {background-position:1% 2%}
-#footerlinksleft ul{width:22%;float:right;line-height:20px;}
+.index_info ,.index_err {background-position:1% 50%}
+#footerlinksleft ul{float:right}
 #footer .Copyrights {float:left;}
-.admin_cp_link span{float:left;padding:7px 30px;}
+.admin_cp_link {width:30%;line-height:24px;float:left;margin:5px 0;}
+.admin_cp_link span{padding:4px 30px;}
 .wait {font-size:250%}

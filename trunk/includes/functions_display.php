@@ -100,8 +100,8 @@ function Saafooter($outscript=false)
 			$loadtime		= number_format($endtime - $starttm , 4);
 			$queries_num	= $SQL->query_num;
 			$time_sql		= round($SQL->query_num / $loadtime) ;
-			$page_url		= preg_replace('/([\&\?]+)debug/i','', kleeja_get_page());
-			$link_dbg		= $usrcp->admin() &&  $config['mod_writer'] != '1' ? '[ <a href="' .  $page_url . (strpos($page_url, '?') === false ? '?' : '&') . 'debug">More Details ... </a> ]' : null;
+			$page_url		= preg_replace(array('/([\&\?]+)debug/i', '/&amp;/i'), array('', '&'), kleeja_get_page());
+			$link_dbg		= $usrcp->admin() &&  $config['mod_writer'] != '1' ? '[ <a href="' .  str_replace('&', '&amp;', $page_url) . (strpos($page_url, '?') === false ? '?' : '&amp;') . 'debug">More Details ... </a> ]' : null;
 			$page_stats		= "<strong>[</strong> GZIP : $gzip - Generation Time: $loadtime Sec  - Queries: $queries_num - Hook System:  $hksys <strong>]</strong>  " . $link_dbg ;
 		}#end statfooter
 		

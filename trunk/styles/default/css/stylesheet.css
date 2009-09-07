@@ -116,9 +116,8 @@ img.right {float: right;margin-left:15px;}
 
 /* rules template >> rules.html */
 #rules  {background:#F0F3F9;border:1px solid #CFDFFF;padding:10px;font-size:11px;font-weight:700;}
-#rules ul {list-style:square;list-style-position:inside;text-indent:30px;}
-#rules  ul li {color:#336699;padding:1px}
 #rules .rut {clear:both;height:16px;margin-bottom:3px;border-bottom:1px solid #fff;color:#FF0000;padding:4px 0px}
+#rules .rls {display:block;height:22px;line-height:22px;padding:4px 0px;text-indent:30px;color:#336699;font-size:12px;}
 /* #  rules template >> rules.html  */
 
 /* start index body  >> index_body.html  */
@@ -306,6 +305,8 @@ background:#FF9933 url(../images/headline_bg.png) repeat-x top right;color:#111;
 .visitor_ext{background:#FDF8EE url(../images/headline_bg.png) repeat-x top right;border-bottom: 1px solid #FFD1BF;border-top: 1px solid #FFD1BF;}
 .visitor_ext_color{color:#333;}
 .visitor_ext_lang{color:#000;}
+.visitor_ext:hover{background-color:#fff;}
+.user_ext:hover{background-color:#fff;color:#FD6812}
 /* #  template list of files allowed > guide.html */
 
 .thumb_div_tag {margin:2px auto;}

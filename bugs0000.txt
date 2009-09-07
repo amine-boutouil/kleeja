@@ -32,3 +32,6 @@ rm & ram
 C:\AppServ\www\kleeja\admin\admin_style\images\adminopen.png
 
 ÑÇÍ ÇÛíÑåÇ ÈÓ ÈÚÑİ æÔ ÇáßæÏ áå
+
+====================================
+ÊÙÈíØ ÇáÇÚÏÇÏÇÊ ßá ÇÚÏÇÏ ÈŞÓãå ÇáÕÍíÍ 

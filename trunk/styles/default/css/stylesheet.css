@@ -143,7 +143,7 @@ img.right {float: right;margin-left:15px;}
 .bg {background:#C0C0C0 url(../images/bg_tabbertab.png) repeat-x top left}
 ul.tabbernav{ padding:5px 0; font: bold 11px tahoma, sans-serif;}
 ul.tabbernav li{ list-style: none; display: inline;}
-ul.tabbernav li a{ padding:5px 14px; margin-left: 5px; border: 1px solid #aaa;background:#F68618;text-decoration: none;-moz-border-radius-topleft: 10px;-webkit-border-top-left-radius: 10px;-moz-border-radius-topright: 10px;-webkit-border-top-right-radius: 10px;}
+ul.tabbernav li a{margin-left:4px;padding:5px 14px; border: 1px solid #aaa;background:#F68618;text-decoration: none;-moz-border-radius-topleft: 10px;-webkit-border-top-left-radius: 10px;-moz-border-radius-topright: 10px;-webkit-border-top-right-radius: 10px;}
 ul.tabbernav li a:link {color:#fff;font-weight:normal;padding:5px 14px;}
 ul.tabbernav li a:hover{color:#222;}
 ul.tabbernav li.tabberactive a{ padding:5px 14px;border-bottom: 1px solid #fff;background-color:#fff;}
@@ -189,8 +189,8 @@ background:#FF9933 url(../images/headline_bg.png) repeat-x top right;color:#111;
 #footer .page_stats {margin-bottom:2px;float:left;color:#999;}
 #footer .googleanalytics {margin-bottom:2px;text-align:center;}
 /*start Option to control panel */
-.admin_cp_link span{margin:5px 0;padding:7px 50px; background:url(../images/adminPan.gif) no-repeat center left;font-weight:bold; border:1px solid #858585;-moz-border-radius:8px;-webkit-border-radius:8px;-khtml-border-radius:8px;border-radius:8px;}
-.admin_cp_link {width:20%;float:right;color:#2B2B2B;cursor:pointer;text-decoration:none;margin-top:15px;display:inline;}
+.admin_cp_link span{margin:5px 0;padding:4px 50px; background:url(../images/adminPan.gif) no-repeat center left;font-weight:bold; border:1px solid #858585;-moz-border-radius:8px;-webkit-border-radius:8px;-khtml-border-radius:8px;border-radius:8px;}
+.admin_cp_link {width:20%;line-height:24px;float:right;color:#2B2B2B;cursor:pointer;text-decoration:none;margin:5px 0;display:inline;}
 .admin_cp_link:hover  {color:#fff;text-decoration:none;}
 /* # footer template */
 
@@ -221,7 +221,7 @@ background:#FF9933 url(../images/headline_bg.png) repeat-x top right;color:#111;
 #boxfileuser .uname{color:#006CD8;font: bold 18px tahoma,Verdana, Helvetica, sans-serif;text-align:center}
 #boxfileuser .nums{font-size:32px;text-align:center}
 #filecplink  .copylink {float:right;padding:3px 6px;color:#D20000;font: bold 12px tahoma,sans-serif;}
-#filecplink .link_user{float:left;width:290px;padding:2px;direction:ltr;}
+#filecplink .link_user{float:left;width:400px;padding:2px 4px;direction:ltr;}
 .tabledata {width:100%;background-color:#CECECE;color:#111;font-size:11px;border:2px ridge #eee;}
 .tabledata th ,.tabledata td {padding:5px;border-right:1px solid #aaa;border-top: 1px solid #eee;border-left:1px solid #eee;border-bottom: 1px solid #aaa; text-align:center; }
 .tabledata .odd  {background:#D4D0C8; text-align:right;width:50%;}

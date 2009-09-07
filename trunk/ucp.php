@@ -419,7 +419,7 @@ switch ($_GET['go'])
 			$start			= $Pager->getStartRow();
 			$linkgoto		= $config['siteurl'] . ($config['mod_writer'] ? 'filecp' : 'ucp.php?go=filecp');
 			$page_nums		= $Pager->print_nums($linkgoto); 
-			$action			= "ucp.php?go=filecp&page={$currentPage}";
+			$action			= "ucp.php?go=filecp&amp;page={$currentPage}";
 			$total_pages	= $Pager->getTotalPages(); 
 			
 			//now, there is no result

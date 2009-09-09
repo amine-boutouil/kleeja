@@ -1,4 +1,4 @@
-/*
+﻿/*
 # Tweaks for left-to-right direction
 # Powered by Kleeja .... Kleeja.com
 # Designed by Tar3q .... Tar3q.com
@@ -11,6 +11,7 @@ small{font-weight:normal;font-size:9px;}
 #divmiddle .welcome span{padding-left:0px;}
 #rightmenu{float:left;}
 #rightmenu .link-menu{float:left;}
+#rightmenu .linkhome{float:left;}
 .s_box {background-position:top left;}
 #info-last-visit {float:left;margin-right:5px;margin-left:0px}
 #info-last-visit li {text-align: left;}

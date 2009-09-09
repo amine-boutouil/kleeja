@@ -92,9 +92,9 @@
 <body>
 <!-- start top div header  -->
 <div id="divheader">
-	<div id="header">
-	<div class="logo1"><a href="{config.siteurl}"><img src="{STYLE_PATH_ADMIN}images/login/logo.png" alt="{config.sitename}" /></a></div>
-	<div class="logo2"><b>{lang.KLEEJA_CP}</b></div>
+	<div id="header" >
+	<div class="logo1" <IF NAME="{lang.DIR}==ltr">style="float: right;"</IF>><a href="{config.siteurl}"><img src="{STYLE_PATH_ADMIN}images/login/logo.png" alt="{config.sitename}" /></a></div>
+	<div class="logo2" <IF NAME="{lang.DIR}==ltr">style="float: left;"</IF>><b>{lang.KLEEJA_CP}</b></div>
 	</div>
 </div>
 <!-- end top div header  -->

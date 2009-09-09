@@ -238,15 +238,29 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 		}
 				
 		$SQL->freeresult($result);
-			
-		//updates ups ..
-		$update_query = array(
+		
+		//check if the vistor is new in this page before updating kleeja counter
+		if(!preg_match('/,' . $ii . ',/i',$usrcp->kleeja_get_cookie('oldvistor')))
+		{
+			//updates ups ..
+			$update_query = array(
 									'UPDATE'=> "{$dbprefix}files",
 									'SET'	=> 'uploads=uploads+1, last_down=' . time(),
 									'WHERE'	=> ($is_id_filename) ? "name='" . $filename . "'" : "id='" . $id . "'",
 								);
-		($hook = kleeja_run_hook('qr_update_no_uploads_down')) ? eval($hook) : null; //run hook
-		$SQL->build($update_query);
+			($hook = kleeja_run_hook('qr_update_no_uploads_down')) ? eval($hook) : null; //run hook
+			$SQL->build($update_query);
+		
+			//define as old vistor
+			if($usrcp->kleeja_get_cookie('oldvistor')) //if this vistor has other views then add this view too
+			{
+				$usrcp->kleeja_set_cookie('oldvistor', $usrcp->kleeja_get_cookie('oldvistor') . $ii . ',', time()+86400); //old vistor just for 1 day ;)
+			}
+			else //first time 
+			{
+				$usrcp->kleeja_set_cookie('oldvistor', ',' . $ii . ',', time()+86400); //old vistor just for 1 day ;)
+			}
+		}
 	}
 	else
 	{
@@ -254,13 +268,13 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 		if(isset($_GET['img']) || isset($_GET['thmb']) || isset($_GET['thmbf']) || isset($_GET['imgf']))
 		{
 			($hook = kleeja_run_hook('not_exists_qr_down_img')) ? eval($hook) : null; //run hook
-				
+			
 			$f = 'images';
 			$n = 'not_exists.jpg';
-			
+		
 			//set image conditon on
 			$is_image = true;
-			
+		
 			//unset some var
 			if(isset($_GET['thmb']) || isset($_GET['thmbf']))
 			{

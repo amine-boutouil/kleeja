@@ -188,7 +188,7 @@ switch ($_GET['go'])
 				{
 					$ERRORS[] = $lang['EMPTY_FIELDS'];
 				}	
-				if (!eregi("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$", trim($_POST['lmail'])))
+				if (!preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/i", trim($_POST['lmail'])))
 				{
 					$ERRORS[] = $lang['WRONG_EMAIL'];
 				}

@@ -66,37 +66,70 @@
 	@session_start();
 
 
-	function stripslashes_our(&$value)
+	function stripslashes_our($value)
 	{
 		return is_array($value) ? array_map('stripslashes_our', $value) : stripslashes($value);  
-	} 
+	}
+	function kleeja_clean_string($value)
+	{
+		if(is_array($value))
+		{
+			return array_map('kleeja_clean_string', $value);
+		}
+		$value = str_replace(array("\r\n", "\r", "\0"), array("\n", "\n", ''), $value);
+		$value = preg_replace('/[\x80-\xFF]/', '?', $value); //allow only ASCII (0-127)
+		return $value;
+	}
 	//unsets all global variables set from a superglobal array
 	function unregister_globals() 
 	{
-		foreach (func_get_args() as $name)
+		$register_globals = @ini_get('register_globals');
+		if ($register_globals === "" || $register_globals === "0" || strtolower($register_globals) === "off")
 		{
-			foreach ($GLOBALS[$name] as $key=>$value)
+			return;
+		}
+
+		if (isset($_REQUEST['GLOBALS']) || isset($_FILES['GLOBALS']))
+		{
+			exit('Kleeja is queen of candies ...');
+		}
+
+		$input = array_merge($_GET, $_POST, $_COOKIE, $_SERVER, $_ENV, $_FILES, isset($_SESSION) && is_array($_SESSION) ? $_SESSION : array());
+		$no_unset = array('GLOBALS', '_GET', '_POST', '_COOKIE', '_REQUEST', '_SERVER', '_ENV', '_FILES');
+	
+		foreach ($input as $k => $v)
+		{
+			if (!in_array($k, $no_unset) && isset($GLOBALS[$k]))
 			{
-				if (isset($GLOBALS[$key]))
-				{
-					unset($GLOBALS[$key]);
-				}
+				unset($GLOBALS[$k]);
+				unset($GLOBALS[$k]);//make sure
 			}
 		}
+		
+		unset($input);
 	}
 
-	if (@ini_get('register_globals'))
+	unregister_globals();
+
+	//try close it
+	if (@get_magic_quotes_runtime())
 	{
-		unregister_globals('_POST', '_GET', '_COOKIE', '_REQUEST', '_SERVER', '_ENV', '_FILES'); 
+		@set_magic_quotes_runtime(0);
 	}
 
-	if( (function_exists("get_magic_quotes_gpc") && get_magic_quotes_gpc()) || 
-		(@ini_get('magic_quotes_sybase') && (strtolower(@ini_get('magic_quotes_sybase')) != "off")) )
-	{ 
-		stripslashes_our($_GET); 
-		stripslashes_our($_POST); 
-		stripslashes_our($_COOKIE); 
+	if(@get_magic_quotes_gpc())
+	{
+		$_GET	= stripslashes_our($_GET); 
+		$_POST	= stripslashes_our($_POST);
+		$_COOKIE	= stripslashes_our($_COOKIE); 
+		$_REQUEST	= stripslashes_our($_REQUEST);//we use this sometime
 	}
+
+	//clean string and remove bad chars
+	$_GET		= kleeja_clean_string($_GET);
+	$_POST		= kleeja_clean_string($_POST);
+	$_REQUEST	= kleeja_clean_string($_REQUEST);
+	$_COOKIE	= kleeja_clean_string($_COOKIE);
 
 
 	//time of start and end and wutever

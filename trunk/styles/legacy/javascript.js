@@ -23,7 +23,7 @@
 		{
 			var do_count = false;
 			var num_to = eval(value.value) + 1;
-			eval('var s = "' + id +'[' + num_to + ']";var br = "' + id2 +'[' + num_to + ']";do_count = true;');
+			eval('var s = "' + id +'_' + num_to + '_";var br = "' + id2 +'_' + num_to + '_";do_count = true;');
 			if(do_count)
 			{
 				$(s).style.display = '';
@@ -48,7 +48,7 @@
 		if (value.value != 1 )
 		{
 			var do_count = false;
-			eval('var s = "' + id +'[' + (value.value) + ']";var br = "' + id2 +'[' + (value.value) + ']"; do_count = true;');
+			eval('var s = "' + id +'_' + (value.value) + '_";var br = "' + id2 +'_' + (value.value) + '_"; do_count = true;');
 			if(do_count)
 			{
 				$(s).style.display = 'none';
@@ -62,9 +62,17 @@
 	//submit
 	function form_submit() 
 	{
-		var load = $('loadbox');
+		setTimeout
+		( 
+			function() 
+			{ 
+				var load = $('loadbox');
+				load.style.display='inline'; 
+				load.src='ajax-loader.gif'
+			},
+			500
+		)
 		var uploader = $("uploader");
-		load.style.display = "inline";
 		uploader.style.display = "none";
 		document.uploader.submit();
 	}

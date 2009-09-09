@@ -1,25 +1,30 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" dir="{dir}">
 <head>
-<title>{title} &#9679; {config.sitename}</title>
-<meta http-equiv="Content-Language" content="ar-sa"/>
-<meta name="copyrights" content="Powered by Kleeja :: kleeja.com" />
-{EXTRA_CODE_META}
-<link rel="shortcut icon" href="favicon.ico" >
-<link rel="icon" type="image/gif" href="images/animated_favicon1.gif" >
-<link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH}css/legacy_screen.css" />
-<IF NAME="{lang.DIR}==ltr">
-<link rel="stylesheet" type="text/css" href="{STYLE_PATH}css/legacy_ltr.css" />
-</IF>
-<!--[if IE]>
-<link rel="stylesheet" type="text/css" href="{STYLE_PATH}css/ie.css" />
-<![endif]-->
-<script type="text/javascript">
- var number_of_uploads={config.filesnum};
- var LANG_PAST_URL_HERE ="{lang.PAST_URL_HERE}";
-var LANG_MORE_F_FILES ="{lang.MORE_F_FILES}";
-</script>
-<script type="text/javascript" src="{STYLE_PATH}javascript.js"></script>
+	<title>{title} &#9679; {config.sitename}</title>
+	<meta http-equiv="Content-Type" content="text/html;charset={charset}" />
+	<meta http-equiv="Content-Language" content="{lang.LANG_SMALL_NAME}"/>
+	<meta name="copyrights" content="Powered by Kleeja :: kleeja.com" />
+	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+	{EXTRA_CODE_META}
+	<link rel="shortcut icon" href="favicon.ico" >
+	<link rel="icon" type="image/gif" href="images/animated_favicon1.gif" >
+	<link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH}css/legacy_screen.css" />
+	<IF NAME="{lang.DIR}==ltr">
+	<link rel="stylesheet" type="text/css" href="{STYLE_PATH}css/legacy_ltr.css" />
+	</IF>
+	<IS_BROWSER="ie6">
+	<link rel="stylesheet" type="text/css" href="{STYLE_PATH}css/ie_6.css" />
+	</IS_BROWSER>
+	<IS_BROWSER="ie">
+	<link rel="stylesheet" type="text/css" href="{STYLE_PATH}css/ie.css" />
+	</IS_BROWSER>
+	<script type="text/javascript">
+ 	var number_of_uploads={config.filesnum};
+ 	var LANG_PAST_URL_HERE ="{lang.PAST_URL_HERE}";
+	var LANG_MORE_F_FILES ="{lang.MORE_F_FILES}";
+	</script>
+	<script type="text/javascript" src="{STYLE_PATH}javascript.js"></script>
 </head>
 
 <body>
@@ -49,21 +54,24 @@ var LANG_MORE_F_FILES ="{lang.MORE_F_FILES}";
 <div id="right_menu">
 	<div class="list">
 		<ul>
-			<li><a href="{config.siteurl}"><img src="{STYLE_PATH}images/home.gif" style="vertical-align:middle;" />{index_name}</a></li>
-			<li><a href="{rules_url}"><img src="{STYLE_PATH}images/rules_name.gif" style="vertical-align:middle;" />{rules_name}</a></li>
-			<li><a href="{guide_url}"><img src="{STYLE_PATH}images/gu1de.gif" style="vertical-align:middle;" />{guide_name}</a></li>
-			<li><a href="{login_url}"><img src="{STYLE_PATH}images/Go-Out.gif" style="vertical-align:middle;" />{login_name}</a></li>
-			<li><a href="{usrcp_url}"><img src="{STYLE_PATH}images/User.gif" style="vertical-align:middle;" />{usrcp_name}</a></li>
-			<IF NAME="user_is">
+				<li><a href="{config.siteurl}" title="{lang.INDEX}" class="current">{lang.INDEX}</a></li>
+		<li><a href="{_LINKS.rules}" title="{lang.RULES}">{lang.RULES}</a></li>
+		<li><a href="{_LINKS.guide}" title="{lang.GUIDE}">{lang.GUIDE}</a></li>
+		<li><a href="{_LINKS.call}" title="{lang.CALL}">{lang.CALL}</a></li>
+		<IF NAME="config.allow_stat_pg">
+		<li><a href="{_LINKS.stats}" title="{lang.STATS}">{lang.STATS}</a></li>
+		</IF>
+						<IF NAME="user_is">
 			    <IF NAME="config.enable_userfile">
-			<li><a href="{usrfile_url}"><img src="{STYLE_PATH}images/folder.gif" style="vertical-align:middle;" />{usrfile_name}</a></li>
+				<li><a href="{_LINKS.fileuser}"><img src="{STYLE_PATH}images/user-folder.png" alt="{lang.YOUR_FILEUSER}" style="vertical-align:middle;" />{lang.YOUR_FILEUSER}</a></li>
 				</IF>
-			<li><a href="{filecp_url}"><img src="{STYLE_PATH}images/filecp.gif" style="vertical-align:middle;" />{filecp_name}</a></li>
+			<li><a href="{_LINKS.filecp}"><img src="{STYLE_PATH}images/filecp.png" alt="{lang.FILECP}" style="vertical-align:middle;" />{lang.FILECP}</a></li>
+			<li><a href="{_LINKS.profile}"><img src="{STYLE_PATH}images/User.png" alt="{lang.PROFILE}" style="vertical-align:middle;" />{lang.PROFILE}</a></li>
+			<li><a href="{_LINKS.logout}"><img src="{STYLE_PATH}images/Go-Out.png" alt="{lang.LOGOUT}" style="vertical-align:middle;" />{lang.LOGOUT} [ {username} ]</a></li>
+				<ELSE>
+			<li><a href="{_LINKS.register}"><img src="{STYLE_PATH}images/User.png" alt="{lang.REGISTER}" style="vertical-align:middle;" />{lang.REGISTER}</a></li>
+			<li><a href="{_LINKS.login}"><img src="{STYLE_PATH}images/Go-Out.png" alt="{lang.LOGIN}" style="vertical-align:middle;" />{lang.LOGIN}</a></li>
 			</IF>
-			<IF NAME="config.allow_stat_pg">
-			<li><a href="{stats_url}"><img src="{STYLE_PATH}images/stats.gif" style="vertical-align:middle;" />{stats_name}</a></li>
-			</IF>
-			<li><a href="{call_url}"><img src="{STYLE_PATH}images/mail.gif" style="vertical-align:middle;" />{call_name}</a></li>
 		</ul>
 	</div>
 </div>

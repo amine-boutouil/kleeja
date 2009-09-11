@@ -77,7 +77,7 @@
 			return array_map('kleeja_clean_string', $value);
 		}
 		$value = str_replace(array("\r\n", "\r", "\0"), array("\n", "\n", ''), $value);
-		$value = preg_replace('/[\x80-\xFF]/', '?', $value); //allow only ASCII (0-127)
+		//$value = preg_replace('/[\x80-\xFF]/', '?', $value); //allow only ASCII (0-127)
 		return $value;
 	}
 	//unsets all global variables set from a superglobal array

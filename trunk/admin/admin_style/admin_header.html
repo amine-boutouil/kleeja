@@ -1,10 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" dir="{lang.DIR}">
-<!--  
-# Powered by Kleeja .... Kleeja.com
-# Designed by Tar3Q .... Tar3q.com
-# copyright 2007-2009  .. Kleeja 
--->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> <html xmlns="http://www.w3.org/1999/xhtml" dir="{lang.DIR}">
+<!--  # Powered by Kleeja .... Kleeja.com   #  copyright 2007-2009  .. Kleeja -->
 <head>
 <title>{lang.KLEEJA_CP} - {config.sitename}</title>
 <meta http-equiv="Content-Language" content="{lang.LANG_SMALL_NAME}" />
@@ -24,6 +19,7 @@
 <link rel="stylesheet" type="text/css" href="{STYLE_PATH_ADMIN}css/ie_7.css" />
 </IS_BROWSER>
 <script type="text/javascript">
+<!--
 	var STYLE_PATH_ADMIN = '{STYLE_PATH_ADMIN}';
 
 	function confirm_from()
@@ -32,58 +28,10 @@
 			return true;
 		else
 			return false;
-	}
-
-	function change_color(obj, id, c, c2)
-	{
-		c = (c == null) ? 'ored' : c;
-		c2 = (c == null) ? 'osilver' : c2;
-		var ii = document.getElementById(id);
-		
-		if(obj.checked)
-		{
-			ii.setAttribute("class", c);
-			ii.setAttribute("className", c);
-		}
-		else
-		{
-			ii.setAttribute("class", c2);
-			ii.setAttribute("className", c2);	
-		}
-	}
-	
-	
-	function checkAll(form, id, _do_c_, c, c2)
-	{
-		for (var i=0;i<form.elements.length;i++)
-		{
-			if(form.elements[i].getAttribute("rel") != id)
-				continue;
-			
-			if(form.elements[i].checked)
-			{
-				
-				uncheckAll(form, id, _do_c_, c, c2);
-				break;
-			}
-	
-			form.elements[i].checked = true ;
-			change_color(form.elements[i], _do_c_+'['+form.elements[i].value+']', c, c2);
-		}
-	}
-
-	function uncheckAll(form, id, _do_c_, c, c2)
-	{
-		for (var i=0;i<form.elements.length;i++)
-		{
-			if(form.elements[i].getAttribute("rel") != id)
-				continue;
-			form.elements[i].checked = false ;
-			change_color(form.elements[i], _do_c_+'['+form.elements[i].value+']', c, c2);
-		}
-	}
-
+//-->
+}
 </script>
+<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/pc.js"></script> 
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}js/tips.js"></script> 
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.js"></script> 
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.lightbox.js"></script> 
@@ -111,10 +59,10 @@
 <div id="rightmenu">	
 	<div class="body-menu">
 <IF NAME="SHOW_LIST">
-	<div class="linkhome"><div><p><a title="{lang.RETURN_HOME}" href="{config.siteurl}"><img src="{STYLE_PATH_ADMIN}images/index_button.gif" /><br />{lang.RETURN_HOME}</a></p></div></div>
-	<div class="link-menu"><div><p><a title="{lang.R_CPINDEX}" href="./"><img src="{STYLE_PATH_ADMIN}images/cp_button.gif" /><br />{lang.R_CPINDEX}</a></p></div></div>
+	<div class="linkhome"><div><p><a title="{lang.RETURN_HOME}" href="{config.siteurl}"><img src="{STYLE_PATH_ADMIN}images/index_button.gif" alt="{lang.RETURN_HOME}" /><br />{lang.RETURN_HOME}</a></p></div></div>
+	<div class="link-menu"><div><p><a title="{lang.R_CPINDEX}" href="./"><img src="{STYLE_PATH_ADMIN}images/cp_button.gif" alt="{lang.R_CPINDEX}" /><br />{lang.R_CPINDEX}</a></p></div></div>
 <LOOP NAME="adm_extensions_menu">	
-	<div class="link-menu<IF LOOP="current"> link-menu-current</IF>"><div><p><a title="{{lang}}" href="{{link}}"<IF LOOP="confirm"> onclick="javascript:return confirm_from();"</IF>><img src="{{icon}}" /><br />{{lang}}</a></p></div></div>
+	<div class="link-menu<IF LOOP="current"> link-menu-current</IF>"><div><p><a title="{{lang}}" href="{{link}}"<IF LOOP="confirm"> onclick="javascript:return confirm_from();"</IF>><img src="{{icon}}" alt="{{lang}}" /><br />{{lang}}</a></p></div></div>
 </LOOP>	
 </IF>
 	</div>

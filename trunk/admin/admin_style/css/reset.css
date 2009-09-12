@@ -28,8 +28,8 @@ legend { padding: 1px 0; font:bold 11px tahoma,verdana,arial,sans-serif;color: #
 input { margin-right:2px;margin-left:2px;}
 input, textarea { font: 11px tahoma,verdana,arial,sans-serif; font-weight: normal;cursor: text; vertical-align: middle; padding: 2px; color: #000;border-left: 1px solid #AFAEAA; border-top: 1px solid #AFAEAA; border-right: 1px solid #D5D5C8;border-bottom: 1px solid #D5D5C8; background-color:#D8D8D8;}
 select ,option{font: 11px tahoma,verdana,arial,sans-serif; font-weight: normal;cursor: pointer; vertical-align: middle; width: auto; color: #000; padding:1px 3px;}
-input[type="text"] {background-color:#D8D8D8}
-input[type="text"]:focus{background-color:#CCFFFF ;border: 1px solid #6699FF;}
+input,input[type="text"] :{background-color:#D8D8D8}
+input:focus, input[type="text"]:focus{background-color:#CCFFFF ;border: 1px solid #6699FF;}
 /* all root */
 ol, ul {list-style: none;}
 /* tables still need 'cellspacing="0"' in the markup */

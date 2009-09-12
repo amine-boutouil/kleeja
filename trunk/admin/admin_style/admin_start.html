@@ -48,9 +48,9 @@ $('div#{{id}}').pulse({
 <!-- end clear  -->
 
 <!-- start welcome user admin -->
-<div id="welcom">
+
 <div class="welcome"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/heart.png" alt="Kleeja love you ..," />&nbsp;&nbsp;{usernamelang}</div>
-</div>
+
 <!-- end  welcome user admin -->
 	
 <!-- start clear  -->
@@ -67,14 +67,14 @@ $('div#{{id}}').pulse({
 	</tr>
 	<tr>
 		<td>{lang.LSTDELST} : <b>{last_del_fles}</b></td>		
-		<td>{lang.LSTFLE_ST} : <IF NAME="stat_last_file!='0'"><b><a href="{last_file_up_url}" target="blank">{last_file_up}</a></b><ELSE>{lang.UNKNOWN}</IF></td>
+		<td>{lang.LSTFLE_ST} : <IF NAME="stat_last_file!='0'"><b><a href="{last_file_up_url}" onclick="window.open(this.href,'_blank');return false;">{last_file_up}</a></b><ELSE>{lang.UNKNOWN}</IF></td>
 	</tr>
 </table>
 
 <!-- start users  number -->
 <table class="infocontrol">
 	<tr>
-		<td>{lang.AUSERS_NUM} : <b>[ {users_number} ]<b></td>
+		<td>{lang.AUSERS_NUM} : <b>[ {users_number} ]</b></td>
 		<td><IF NAME="config.user_system==1">{lang.LAST_REG} : <b>[ {lst_reg} ]</b></IF></td>
 	</tr>
 	<tr>
@@ -144,7 +144,7 @@ $('div#{{id}}').pulse({
 <!-- start stat  disk size -->
 <table class="disk_size" border="0" width="100%" cellspacing="0" cellpadding="0">
 	<tr>
-		<td class="t_disk_size"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/disk_size.png" /> {lang.SIZE_STAT}</td>
+		<td class="t_disk_size"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/disk_size.png" alt="{lang.SIZE_STAT}" /> {lang.SIZE_STAT}</td>
 	</tr>
 	<tr>
 		<td><strong style="color:#888">{lang.USING_SIZE}</strong>
@@ -155,7 +155,7 @@ $('div#{{id}}').pulse({
 					<td style="width:33%;background-color:#FF9797; text-align:right;">100%</td>
 				</tr>
 				<tr>
-					<td colspan="3"><img src="{STYLE_PATH_ADMIN}images/spacer.gif" style="width:{per1}%; height:10px; background-color:Red" /></td>
+					<td colspan="3"><img src="{STYLE_PATH_ADMIN}images/spacer.gif" style="width:{per1}%; height:10px; background-color:Red" alt="..." /></td>
 				</tr>
 			</table>
 				<div class="clr"></div>

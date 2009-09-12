@@ -92,7 +92,7 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 
 /* body #System Messages  */
 #system-message { margin:10px 0}
-#system-message div {font-weight: bold; text-indent: 2px; }
+#system-message div {font-weight: bold; }
 /* body #System Messages  */
 
 /* System Messages  #info*/

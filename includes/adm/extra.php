@@ -31,29 +31,35 @@
 		
 		while($row=$SQL->fetch_array($result))
 		{
-			$ex_headere = isset($_POST["ex_header"]) ? $_POST['ex_header'] : $row['ex_header'];
-			$ex_footere = isset($_POST["ex_footer"]) ? $_POST['ex_footer'] : $row['ex_footer'];
-			
-			$ex_header = htmlspecialchars($ex_headere);
-			$ex_footer = htmlspecialchars($ex_footere);
-				
+			$ex_header = isset($_POST["ex_header"]) ? $_POST['ex_header'] : $row['ex_header'];
+			$ex_footer = isset($_POST["ex_footer"]) ? $_POST['ex_footer'] : $row['ex_footer'];
+
+
 			//when submit !!
 			if (isset($_POST['submit']))
 			{
+				$ex_header = htmlspecialchars_decode($ex_header);
+				$ex_footer = htmlspecialchars_decode($ex_footer);
+
 				//update
 				$update_query = array(
 									'UPDATE'	=> "{$dbprefix}stats",
-									'SET'		=> "ex_header = '" . $SQL->escape($ex_headere) . "', ex_footer = '" . $SQL->escape($ex_footere) . "'"
+									'SET'		=> "ex_header = '" . $SQL->real_escape($ex_header) . "', ex_footer = '" . $SQL->real_escape($ex_footer) . "'"
 								);
 
 				$SQL->build($update_query);
-				
+
 				if($SQL->affected())
 				{
 					$AFFECTED = true;
 					//delete cache ..
 					delete_cache('data_extra');
 				}
+			}
+			else
+			{
+				$ex_header = htmlspecialchars($ex_header);
+				$ex_footer = htmlspecialchars($ex_footer);
 			}
 		}
 		$SQL->freeresult($result);

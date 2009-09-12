@@ -112,14 +112,14 @@ $update_sqls['password_salt'] = "ALTER TABLE `{$dbprefix}users` ADD `password_sa
 
 $update_sqls['type_config'] = "ALTER TABLE `{$dbprefix}config` ADD `type` VARCHAR( 20 ) NOT NULL DEFAULT 'other'";
 
-$update_sqls['type_config_general'] = "UPDATE `{$dbprefix}config` SET `type` = 'general' WHERE `name` IN ('sitename','siteclose','closemsg', 'style', 'welcome_msg', 'language', 'siteurl', 'sitemail', 'sitemail2','user_system','register','del_f_day','mod_writer','enable_userfile','id_form','cookie_name','cookie_path','cookie_domain','cookie_secure','livexts'
+$update_sqls['type_config_general'] = "UPDATE `{$dbprefix}config` SET `type` = 'general' WHERE `name` IN ('sitename','siteclose','closemsg', 'style', 'welcome_msg', 'language', 'siteurl', 'sitemail', 'sitemail2','user_system','register','del_f_day','mod_writer','enable_userfile','id_form','cookie_name','cookie_path','cookie_domain','cookie_secure'
 
 );";
 
-$update_sqls['type_config_upload'] = "UPDATE `{$dbprefix}config` SET `type` = 'upload' WHERE `name` IN ('foldername','prefixname','filesnum','decode','total_size','thumbs_imgs','thmb_dims','write_imgs','del_url_file','safe_code');";
+$update_sqls['type_config_upload'] = "UPDATE `{$dbprefix}config` SET `type` = 'upload' WHERE `name` IN ('foldername','prefixname','filesnum','decode','total_size','thumbs_imgs','thmb_dims','write_imgs','del_url_file','safe_code','livexts', 'www_url');";
 
 
-$update_sqls['type_config_interface'] = "UPDATE `{$dbprefix}config` SET `type` = 'interface' WHERE `name` IN ('style','sec_down','statfooter','gzip','welcome_msg','www_url','allow_stat_pg','allow_online','googleanalytics');";
+$update_sqls['type_config_interface'] = "UPDATE `{$dbprefix}config` SET `type` = 'interface' WHERE `name` IN ('style','sec_down','statfooter','gzip','welcome_msg','allow_stat_pg','allow_online','googleanalytics');";
 
 $update_sqls['cookie_1'] = "INSERT INTO `{$dbprefix}config` (`name` ,`value` ,`option` ,`display_order`,`type`)
 VALUES ('cookie_name', '" . $cookie_name . "', '<input type=\"text\" id=\"cookie_name\" name=\"cookie_name\" value=\"{con.cookie_name}\" size=\"30\">', '70', 'general');";

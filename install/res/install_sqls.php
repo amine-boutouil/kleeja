@@ -228,7 +228,7 @@ $install_sqls['config_insert17'] = "INSERT INTO `{$dbprefix}config` (`name`, `va
 
 $install_sqls['config_insert18'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`, `type`) VALUES ('language', '" . getlang() . "', '<select name=\"language\" id=\"language\">\r\n {lngfiles}\r\n </select>', 19, 'general')";
 
-$install_sqls['config_insert19'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`, `type`) VALUES ('www_url', '0', '<label>{lang.YES}<input type=\"radio\" id=\"www_url\" name=\"www_url\" value=\"1\"  <IF NAME=\"con.www_url==1\"> checked=\"checked\"</IF>></label>\r\n <label>{lang.NO}<input type=\"radio\" id=\"www_url\" name=\"www_url\" value=\"0\"  <IF NAME=\"con.www_url==0\"> checked=\"checked\"</IF>></label>', 8, 'interface')";
+$install_sqls['config_insert19'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`, `type`) VALUES ('www_url', '0', '<label>{lang.YES}<input type=\"radio\" id=\"www_url\" name=\"www_url\" value=\"1\"  <IF NAME=\"con.www_url==1\"> checked=\"checked\"</IF>></label>\r\n <label>{lang.NO}<input type=\"radio\" id=\"www_url\" name=\"www_url\" value=\"0\"  <IF NAME=\"con.www_url==0\"> checked=\"checked\"</IF>></label>', 8, 'upload')";
 
 $install_sqls['config_insert20'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`, `type`) VALUES ('del_f_day', '0', '<input type=\"text\" id=\"del_f_day\" name=\"del_f_day\" value=\"{con.del_f_day}\" size=\"10\">{lang.DELF_CAUTION}', 7, 'general')";
 
@@ -260,7 +260,7 @@ $install_sqls['config_insert32'] = "INSERT INTO `{$dbprefix}config` (`name`, `va
 $install_sqls['config_insert33'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('db_version', '" .  DB_VERSION . "', '', 0)";
 $install_sqls['config_insert34'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('last_online_time_update', '" .  time() . "', '', 0)";
 $install_sqls['config_insert35'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('klj_clean_files_from', '0', '', 0)";
-$install_sqls['config_insert36'] = "INSERT INTO `{$dbprefix}config` (`name` ,`value` ,`option` ,`display_order` ,`type`) VALUES ('livexts', 'swf', '<input type=\"text\" id=\"livexts\" name=\"livexts\" value=\"{con.livexts}\" size=\"20\">', '70', 'general')";
+$install_sqls['config_insert36'] = "INSERT INTO `{$dbprefix}config` (`name` ,`value` ,`option` ,`display_order` ,`type`) VALUES ('livexts', 'swf', '<input type=\"text\" id=\"livexts\" name=\"livexts\" value=\"{con.livexts}\" size=\"20\">', '70', 'upload')";
 $install_sqls['config_insert37'] = "INSERT INTO `{$dbprefix}config` (`name` ,`value` ,`option` ,`display_order`,`type`)
 VALUES ('sitemail2', '" . $config_sitemail . "', '<input type=\"text\" id=\"sitemail2\" name=\"sitemail2\" value=\"{con.sitemail2}\" size=\"40\">', '3', 'general');";
 

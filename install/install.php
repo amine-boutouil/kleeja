@@ -507,7 +507,7 @@ case 'data' :
 		</table>
 		</fieldset>
 		
-		
+		<!--
 		<fieldset class="home" id="Group2" dir="' . $lang['DIR'] . '">
 		<legend style="width: 73px"> [ <strong>' . $lang['INST_STYLE_INFO'] . '</strong> ]</legend>
 		<table style="width: 100%">
@@ -517,7 +517,7 @@ case 'data' :
 			</tr>
 		</table>
 		</fieldset>
-
+		-->
 		<input name="datasubmit" type="submit" value="' . $lang['INST_SUBMIT'] . '" />
 		</form>';
 	}#else

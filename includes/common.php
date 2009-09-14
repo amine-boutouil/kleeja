@@ -25,15 +25,9 @@
 	define('DEV_STAGE', true);
 
 	// Report all errors, except notices
-	defined('DEV_STAGE') ? @error_reporting( E_STRICT | E_ALL ) : @error_reporting(E_ALL ^ E_NOTICE);
+	defined('DEV_STAGE') ? @error_reporting( E_ALL ) : @error_reporting(E_ALL ^ E_NOTICE);
 	//Just to check
 	define('IN_PHP6', (version_compare(PHP_VERSION, '6.0.0-dev', '>=') ? true : false));
-
-	//when strict error enabled and date timezone is empty
-	if(!function_exists('ini_get') || trim(ini_get('date.timezone')) === '')
-	{
-		@date_default_timezone_set('UTC');
-	}
 
 	// start session
 	$s_time = 86400 * 2; // 2 : two days 

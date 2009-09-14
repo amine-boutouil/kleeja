@@ -95,10 +95,10 @@ if (!defined('IN_COMMON'))
         function _parse()
 		{
 			$this->HTML = preg_replace(array('#<([\?%])=?.*?\1>#s', '#<script\s+language\s*=\s*(["\']?)php\1\s*>.*?</script\s*>#s', '#<\?php(?:\r\n?|[ \n\t]).*?\?>#s'), '', $this->HTML);
-            $this->HTML = preg_replace_callback('/\(([{A-Z0-9_\.}\s!=<>]+)\?(.*):(.*)\)/iU',array('kleeja_style','_iif_callback'), $this->HTML);
-            $this->HTML = preg_replace_callback('/<(IF|ELSEIF) (.+)>/iU',array('kleeja_style','_if_callback'), $this->HTML);
-            $this->HTML = preg_replace_callback('/<LOOP\s+NAME\s*=\s*(\"|)+([a-z0-9_\.]{1,})+(\"|)\s*>/i',array('kleeja_style','_loop_callback'), $this->HTML);
-            $this->HTML = preg_replace_callback(kleeja_style::reg('var'),array('kleeja_style','_vars_callback'), $this->HTML);
+            $this->HTML = preg_replace_callback('/\(([{A-Z0-9_\.}\s!=<>]+)\?(.*):(.*)\)/iU', array($this, '_iif_callback'), $this->HTML);
+            $this->HTML = preg_replace_callback('/<(IF|ELSEIF) (.+)>/iU',array($this, '_if_callback'), $this->HTML);
+            $this->HTML = preg_replace_callback('/<LOOP\s+NAME\s*=\s*(\"|)+([a-z0-9_\.]{1,})+(\"|)\s*>/i',array($this, '_loop_callback'), $this->HTML);
+            $this->HTML = preg_replace_callback($this->reg('var'), array($this, '_vars_callback'), $this->HTML);
 
             $rep = array(
 						//"/<LOOP\s+NAME\s*=\s*(\"|)+([a-z0-9_]{1,})+(\"|)\s*>/i" => "< ? php foreach(\$this->vars[\"\\2\"] as \$key=>\$value){ ? >",
@@ -131,7 +131,7 @@ if (!defined('IN_COMMON'))
             $char  = array(' eq ',' lt ',' gt ',' lte ',' gte ', ' neq ', '==', '!=', '>=', '<=', '<', '>');
             $reps  = array('==','<','>','<=','>=', '!=', '==', '!=', '>=', '<=', '<', '>');
 			
-            $atts = call_user_func(array('kleeja_style','_get_attributes'), $matches[0]);
+            $atts = call_user_func(array($this, '_get_attributes'), $matches[0]);
 
             $con = !empty($atts['NAME']) ? $atts['NAME'] : (empty($atts['LOOP']) ? null : $atts['LOOP']);
 			
@@ -140,7 +140,7 @@ if (!defined('IN_COMMON'))
 				$arr[1] = trim($arr[1]);
 				if($arr[1][0] != '$')
 				{
-					$var1 = call_user_func(array('kleeja_style', '_var_callback'), (!empty($atts['NAME']) ? '{' . $arr[1] . '}' : '{{' . $arr[1] . '}}'));
+					$var1 = call_user_func(array($this, '_var_callback'), (!empty($atts['NAME']) ? '{' . $arr[1] . '}' : '{{' . $arr[1] . '}}'));
 				}
 				else
 				{
@@ -161,7 +161,7 @@ if (!defined('IN_COMMON'))
 			elseif($con[0] !== '$')
 			{
                 $con = !empty($atts['NAME']) ? '{' . $con . '}' : '{{' . $con . '}}';
-                $con = call_user_func(array('kleeja_style', '_var_callback'), $con);
+                $con = call_user_func(array($this, '_var_callback'), $con);
             }
 			
             if(strtoupper($matches[1])=='IF')
@@ -184,7 +184,7 @@ if (!defined('IN_COMMON'))
         //make variable printable
         function _vars_callback($matches)
 		{
-            $var = call_user_func(array('kleeja_style', '_var_callback'), $matches);
+            $var = call_user_func(array($this, '_var_callback'), $matches);
             return('<?php echo  ' . $var . '?>');
         }
 		
@@ -193,7 +193,7 @@ if (!defined('IN_COMMON'))
 		{
             if(!is_array($matches))
 			{
-                preg_match(kleeja_style::reg('var'), $matches, $matches);
+                preg_match($this->reg('var'), $matches, $matches);
             }
 
 			$var = '';
@@ -249,11 +249,11 @@ if (!defined('IN_COMMON'))
 				
                 if(preg_match('/NAME|LOOP/',$att))
 				{
-                    $attributes[$att] = preg_replace_callback(kleeja_style::reg('var'), array('kleeja_style', '_var_callback'), $attribute[2][$i]);
+                    $attributes[$att] = preg_replace_callback($this->reg('var'), array($this, '_var_callback'), $attribute[2][$i]);
                 }
 				else
 				{
-                    $attributes[$att] = preg_replace_callback(kleeja_style::reg('var'), array('kleeja_style', '_var_callback_att'), $attribute[2][$i]);
+                    $attributes[$att] = preg_replace_callback($this->reg('var'), array($this, '_var_callback_att'), $attribute[2][$i]);
                 }
             }
             return $attributes;
@@ -319,7 +319,7 @@ if (!defined('IN_COMMON'))
 			$this->vars[$arr_name.'_pages'] = @ceil($count/$limit);
             $this->vars[$arr_name] = $output;
         }
-		
+
 
         //load parser and return page content
         function display($template_name)
@@ -341,7 +341,7 @@ if (!defined('IN_COMMON'))
 		
 			return $page;
 		}
-		
+
 		function admindisplayoption($html)
 		{
 			global $config, $SQL, $root_path;
@@ -357,7 +357,7 @@ if (!defined('IN_COMMON'))
 		
 			return $page;
 		}
-		
+
 		//change name of template to be valid 1rc6+
 		function re_name_tpl($name)
 		{

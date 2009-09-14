@@ -25,7 +25,7 @@
 	define('DEV_STAGE', true);
 
 	// Report all errors, except notices
-	defined('DEV_STAGE') ? @error_reporting( -1 ) : @error_reporting(E_ALL ^ E_NOTICE);
+	defined('DEV_STAGE') ? @error_reporting( E_STRICT | E_ALL ) : @error_reporting(E_ALL ^ E_NOTICE);
 	//Just to check
 	define('IN_PHP6', (version_compare(PHP_VERSION, '6.0.0-dev', '>=') ? true : false));
 

@@ -1792,7 +1792,8 @@ function is_browser($b)
 		return false;
 	}
 	
-    $u_agent = strtolower($_SERVER['HTTP_USER_AGENT']);
+    //if no agent, let's take the worst case
+	$u_agent = (!empty($_SERVER['HTTP_USER_AGENT'])) ? htmlspecialchars((string) strtolower($_SERVER['HTTP_USER_AGENT'])) : 'msie 6.0';
 	$t = trim(preg_replace('/[0-9.]/', '', $b));
 	$r = trim(preg_replace('/[a-z]/', '', $b));
 	switch($t)

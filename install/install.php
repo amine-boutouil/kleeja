@@ -303,9 +303,9 @@ case 'check':
 		}
 		else
 		{
-			if (version_compare($SQL->mysql_version, MIN_MYSQL_VERSION, '<'))
+			if (version_compare($SQL->mysql_version(), MIN_MYSQL_VERSION, '<'))
 			{
-				$texterr .= '<span style="color:red;">' . sprintf($lang['INST_MYSQL_LESSMIN'], MIN_MYSQL_VERSION, $SQL->mysql_version) . '</span><br />';
+				$texterr .= '<span style="color:red;">' . sprintf($lang['INST_MYSQL_LESSMIN'], MIN_MYSQL_VERSION, $SQL->mysql_version()) . '</span><br />';
 			}
 		}
 	}

@@ -57,14 +57,13 @@ class SSQL
 					if(!$this->connect_id)
 					{
 						#loggin -> no database -> close connection
-						kleeja_log('[No connection, Closing connection] : -->');
 						$this->close();
 						$this->error_msg("we can not connect to the server ...");
 						return false;
 					}
 
 					#loggin -> connecting 
-					kleeja_log('[Connected] : --> ');
+					kleeja_log('[Connected] : ' . kleeja_get_page());
 
 	
 					if ((!preg_match('/utf/i', strtolower($script_encoding)) && !defined('IN_LOGINPAGE') && !defined('IN_ADMIN_LOGIN') && !defined('DISABLE_INTR')) || (empty($script_encoding) || preg_match('/utf/i', strtolower($script_encoding)) || defined('DISABLE_INTR')))

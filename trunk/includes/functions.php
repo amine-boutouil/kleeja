@@ -1765,8 +1765,10 @@ function kleeja_log($text, $reset = false)
 		return;
 	}
 
-	$fp = @fopen(PATH . 'cache/kleeja_log.log', 'a');
-	@fwrite($fp, $text . " [time : " . date('H:i a, d-m-Y') . "] \r\n");
+	$log_file = PATH . 'cache/kleeja_log.log';
+    $l_c = @file_get_contents($log_file);
+	$fp = @fopen($log_file, 'w');
+	@fwrite($fp, $text . " [time : " . date('H:i a, d-m-Y') . "] \r\n" . $l_c);
 	@fclose($fp);
 	return;
 }

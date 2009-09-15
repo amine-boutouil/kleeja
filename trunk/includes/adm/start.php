@@ -53,7 +53,7 @@
 		$ADM_NOTIFICATIONS = array();
 		
 		//useing IE6 ! and he is admin ?  omg !
-		if(strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE 6') !==false)
+		if(is_browser('ie6'))
 		{
 			$ADM_NOTIFICATIONS[]  = array('id' => 'IE6', 'msg_type'=> 'error', 'title'=> $lang['NOTE'], 'msg'=> $lang['ADMIN_USING_IE6']);
 		}
@@ -179,6 +179,38 @@
 		if((int)$config['klj_clean_files_from'] > 0)
 		{
 			$ADM_NOTIFICATIONS[]  = array('id' => 'klj_clean_files', 'msg_type'=> 'info', 'title'=> '', 'msg'=> $lang['T_CLEANING_FILES_NOW']);
+		}
+		
+		
+		//if dev stage
+		$sql_debug = false;
+		if(defined('DEV_STAGE'))
+		{
+			$sql_debug_c = '';
+			if(file_exists($root_path . 'cache/kleeja_log.log'))
+			{
+				$sql_debug_c = file_get_contents($root_path . 'cache/kleeja_log.log');
+			}
+			
+			preg_match_all("/\[([^\]]+)\]([^\[]+)\[time : ([^\]]+)\]/", $sql_debug_c, $matches, PREG_SET_ORDER);
+			
+			$sql_debug = array();
+			$r = 0;
+			$c = false;
+			$color1 = 'green';
+			$color2 = 'blue';
+			foreach ($matches as $v)
+			{
+				$c = $v[1] == 'Connected' ? ($c == $color1 ? $color2 : $color1) : $c;
+				
+				$r++;
+				$sql_debug[] = array ('type' => $v[1], 'content' => $v[2], 'time' => $v[3], 'colored' => $c);
+				if($r > 50 && $v[1] == 'Closing connection')
+				{
+					break;
+				}
+			}
+			unset($sql_debug_c);
 		}
 
 		($hook = kleeja_run_hook('default_admin_page')) ? eval($hook) : null; //run hook 

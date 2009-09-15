@@ -203,6 +203,22 @@ $('div#{{id}}').pulse({
 
 <!-- end info -->
 
+<!-- start sql debug -->
+<IF NAME="sql_debug">
+<h2 style="direction:ltr">SQL Debug</h2>
+<div style="direction:ltr;overflow:scroll;height:200px;border:1px #ccc dotted">
+<table>
+<LOOP NAME="sql_debug">
+<tr style="color:{{colored}}">
+<td>{{type}}</td>
+<td>{{time}}</td>
+<td>{{content}}</td>
+</tr>
+</LOOP>
+</table>
+</div>
+</IF>
+<!-- end sql debug -->
 
 <div class="clr"></div>
 

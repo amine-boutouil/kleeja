@@ -196,16 +196,15 @@
 			
 			$sql_debug = array();
 			$r = 0;
-			$c = false;
-			$color1 = 'green';
+			$color1 = $c = 'green';
 			$color2 = 'blue';
 			foreach ($matches as $v)
 			{
-				$c = $v[1] == 'Connected' ? ($c == $color1 ? $color2 : $color1) : $c;
+				$c = $v[1] == 'Closing connection' ? ($c == $color1 ? $color2 : $color1) : $c;
 				
 				$r++;
 				$sql_debug[] = array ('type' => $v[1], 'content' => $v[2], 'time' => $v[3], 'colored' => $c);
-				if($r > 50 && $v[1] == 'Closing connection')
+				if($r > 50 && $v[1] == 'Connected')
 				{
 					break;
 				}

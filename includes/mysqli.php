@@ -93,10 +93,10 @@ class SSQL
 						{
 							mysqli_commit($this->connect_id);
 						}
-						
+
 						#loggin -> close connection
-						kleeja_log('[Closing connection] : -->');
-						
+						kleeja_log('[Closing connection] : ' . kleeja_get_page());
+
 						return @mysqli_close($this->connect_id);
 					}
 					else

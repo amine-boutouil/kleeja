@@ -56,7 +56,7 @@ class SSQL
 					if($this->connect_id)
 					{
 						#loggin -> connecting 
-						kleeja_log('[Connected] : ' . $this->connect_id);
+						kleeja_log('[Connected] : ' . kleeja_get_page());
 
 						if(!empty($db_name))
 						{
@@ -79,9 +79,7 @@ class SSQL
 							else if(!$dbselect)
 							{
 								#loggin -> no database -> close connection
-								kleeja_log('[No database, Closing connection] :' . $this->connect_id);
-									
-								mysql_close($this->connect_id);
+								$this->close($this->connect_id);
 								$this->connect_id = $dbselect;
 							}
 						}
@@ -110,7 +108,7 @@ class SSQL
 						}
 						
 						#loggin -> close connection
-						kleeja_log('[Closing connection] :' . $this->connect_id);
+						kleeja_log('[Closing connection] :' . kleeja_get_page());
 						
 						return @mysql_close($this->connect_id);
 					}

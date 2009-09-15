@@ -30,7 +30,7 @@
 		$last_file_up		= (strlen($stat_last_file) > 25) ? substr($stat_last_file, 0, 25) . '...' : $stat_last_file;
 		$last_del_fles 		= date("d-m-Y h:i a", $stat_last_f_del);
 		$php_version 		= isset($NO_PHPINFO) || !function_exists('phpinfo') ? phpversion() : '<a href="' . basename(ADMIN_PATH) . '?cp=php_info" title="php_info">php ' . phpversion() . '</a>';
-		$mysql_version 		= 'MYSQL ' . $SQL->mysql_version;
+		$mysql_version 		= 'MYSQL ' . $SQL->mysql_version();
 		$max_execution_time = function_exists('ini_get') ?  @ini_get('max_execution_time') : @get_cfg_var('max_execution_time');
 		$upload_max_filesize= function_exists('ini_get') ?  @ini_get('upload_max_filesize') : @get_cfg_var('upload_max_filesize');
 		$post_max_size 		= function_exists('ini_get') ?  @ini_get('post_max_size') : @get_cfg_var('post_max_size');

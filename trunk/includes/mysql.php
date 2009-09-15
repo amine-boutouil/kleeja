@@ -27,7 +27,6 @@ class SSQL
 	var $connect_id              	= null;		
 	var $result;		
 	var $query_num					= 0;
-	var $mysql_version;
 	var $in_transaction 			= 0;
 	var $debugr						= false;
 	var $show_errors 				= true;
@@ -58,13 +57,7 @@ class SSQL
 					{
 						#loggin -> connecting 
 						kleeja_log('[Connected] : ' . $this->connect_id);
-							
-						//version of mysql
-						$vr = $this->query('SELECT VERSION() AS v');
-						$vs = $this->fetch_array($vr);
-						$vs = $vs['v'];
-						$this->mysql_version = preg_replace('/^([^-]+).*$/', '\\1', $vs);
-						
+
 						if(!empty($db_name))
 						{
 							$dbselect = @mysql_select_db($this->db_name) or die($this->error_msg("we can not select database"));
@@ -144,7 +137,16 @@ class SSQL
 				{
 					return mysql_client_encoding($this->connect_id);
 				}
-				
+
+				function mysql_version()
+				{
+					//version of mysql
+					$vr = $this->query('SELECT VERSION() AS v');
+					$vs = $this->fetch_array($vr);
+					$vs = $vs['v'];
+					return preg_replace('/^([^-]+).*$/', '\\1', $vs);
+				}
+
 				/*
 				the query func . its so important to do 
 				the quries and give results
@@ -188,6 +190,11 @@ class SSQL
 						if(!$this->result)
 						{
 							$this->error_msg('Error In query');
+						}
+						else
+						{
+							//let's debug it
+							kleeja_log('[Query] : --> ' . $query);
 						}
 					}
 					else

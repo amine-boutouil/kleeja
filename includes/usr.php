@@ -84,7 +84,7 @@ class usrcp
 		}
 		else
 		{
-			$query['WHERE'] = "clean_name='". $SQL->escape($this->cleanusername($name)) . "'";
+			$query['WHERE'] = "clean_name='" . $SQL->real_escape($this->cleanusername($name)) . "'";
 		}
 
 		($hook = kleeja_run_hook('qr_select_usrdata_n_usr_class')) ? eval($hook) : null; //run hook			
@@ -99,7 +99,7 @@ class usrcp
 					return false;
 				}
 
-				$phppass = ($hashed) ?  $pass : $pass . $row['password_salt'];
+				$phppass = $hashed ?  $pass : $pass . $row['password_salt'];
 
 				//CHECK IF IT'S MD5 PASSWORD
 				if(strlen($row['password']) == '32' && empty($row['password_salt']))   

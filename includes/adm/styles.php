@@ -100,7 +100,11 @@ switch ($_GET['sty_t'])
 						$show_bk_templates = true;
 						$bkup_templates = array_keys($bkup_templates);
 					}
-
+					
+					//get style detalis
+					$style_details1 = array('name'=>'[!]', 'version'=> '[!]', 'copyright'=>'[!]', 'kleeja_version'=>'[!]', 'depend_on'=>$lang['NONE']);
+					$style_details = kleeja_style_info($style_id);
+					$style_details += array_diff_assoc($style_details1, $style_details);
 
 					//get_tpls
 					$tpls_basic = array();
@@ -144,17 +148,28 @@ switch ($_GET['sty_t'])
 				break;
 			
 				case '2': // make as default
-				
-					$query_df = array(
-										'UPDATE'=> "{$dbprefix}config",
-										'SET'	=> "value='" . $SQL->escape($style_id) . "'",
-										'WHERE'	=> "name='style'"
-										);
-											
-					$SQL->build($query_df);
-									
-					
-					delete_cache('', true); //delete all cache to get new style
+
+					//
+					//check if this style depend on other style and 
+					//check kleeja version that required by this style
+					//
+					if(($style_info = kleeja_style_info($style_id)) != false)
+					{
+						if(isset($style_info['depend_on']) && !file_exists(PATH . 'styles/' . $style_info['depend_on']))
+						{
+							kleeja_admin_err(sprintf($lang['DEPEND_ON_NO_STYLE_ERR'], $style_info['depend_on']));
+						}
+						
+						if(isset($style_info['kleeja_version']) && version_compare(strtolower($style_info['kleeja_version']), strtolower(KLEEJA_VERSION), '<') == false)
+						{
+							kleeja_admin_err(sprintf($lang['KLJ_VER_NO_STYLE_ERR'], $style_info['kleeja_version']));
+						}
+					}
+
+					//make it as default
+					update_config('style', $style_id);
+					//delete all cache to get new style
+					delete_cache('', true);
 					
 					//show msg
 					$text = sprintf($lang['STYLE_NOW_IS_DEFAULT'], htmlspecialchars($style_id)) . '<meta HTTP-EQUIV="REFRESH" content="2; url=' . basename(ADMIN_PATH) . '?cp=styles">' ."\n";

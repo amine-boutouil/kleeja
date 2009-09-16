@@ -57,7 +57,7 @@ function Saaheader($title, $outscript=false)
 
 		$tpl->assign("EXTRA_CODE_META", $extra);
 
-		if($config['user_system'] != '1' && isset($script_encoding) && function_exists('iconv') && !preg_match('/utf/i',strtolower($script_encoding)) && !$errorpage && $outscript && !defined('DISABLE_INTR')) 
+		if($config['user_system'] != '1' && isset($script_encoding) && function_exists('iconv') && !preg_match('/utf/i',strtolower($script_encoding)) && !$page && $outscript && !defined('DISABLE_INTR')) 
 		{
 			//set script charset
 			$charset = (isset($script_encoding) && !empty($script_encoding)) ? $script_encoding : 'utf-8';
@@ -177,7 +177,7 @@ function kleeja_info($msg,$title='', $exit=true, $redirect=false, $rs='2')
 	($hook = kleeja_run_hook('kleeja_info_func')) ? eval($hook) : null; //run hook
 				
 	// assign {text} in info template
-	$text	= $msg;
+	$text = $msg;
 	//header
 	Saaheader($title);
 	//show tpl
@@ -605,6 +605,40 @@ function get_up_tpl_box($box_name, $extra = array())
 function group_id_order($a, $b) 
 { 
 	return ($a['group_id'] == $b['group_id']) ? 0 : ($a['group_id'] < $b['group_id'] ? -1 : 1); 
+}
+
+function kleeja_style_info($style_name)
+{
+	$inf_path = PATH . 'styles/' . $style_name . '/info.txt';
+
+	//is info.txt exists or not
+	if(!file_exists($inf_path))
+	{
+		return false;
+	}
+
+	$inf_c = file_get_contents($inf_path);
+	//some ppl will edit this file with notepad or even with office word :)
+	$inf_c = str_replace(array("\r\n", "\r"), array("\n", "\n"), $inf_c);
+
+	//as lines
+	$inf_l = @explode("\n", $inf_c);
+	$inf_l = array_map('trim', $inf_l);
+
+	$inf_r = array();
+	foreach($inf_l as $m)
+	{
+		//comments
+		if(isset($m[0]) && $m[0] == '#' || trim($m) == '')
+		{
+			continue;
+		}
+
+		$t = @explode('=', $m);
+		$inf_r[trim($t[0])] = trim($t[1]);
+	}
+
+	return $inf_r;
 }
 
 #<-- EOF

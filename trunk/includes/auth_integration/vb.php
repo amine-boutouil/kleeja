@@ -12,13 +12,17 @@ if (!defined('IN_COMMON'))
 {
 	exit('no directly opening : ' . __file__);
 }
-  
+
+//
+//Path of config file in vb
+//
+define('VB_CONFIG_PATH', '/includes/config.php');
 
 function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = false)
 {
 	// ok, i dont hate vb .. but i cant feel my self use it ... 
 	global $script_path, $lang, $script_encoding, $script_srv, $script_db, $script_user, $script_pass, $script_prefix, $config, $usrcp, $userinfo, $script_db_charset;
-	
+
 	if(isset($script_path))
 	{				
 		//check for last slash
@@ -26,21 +30,25 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 		{
 			$script_path = substr($script_path, 0, strlen($script_path));
 		}
-					
+
 		$script_path = ($script_path[0] == '/' ? '..' : '../') . $script_path;
 		
 		$script_path = PATH .  $script_path;
 
 		//get some useful data from vb config file
-		if(file_exists($script_path . '/includes/config.php'))
+		if(file_exists($script_path . VB_CONFIG_PATH))
 		{
-			require ($script_path . '/includes/config.php');
+			require_once ($script_path . VB_CONFIG_PATH);
+
+			//
+			//get config from config file
+			//
 			$forum_srv	= $config['MasterServer']['servername'];
 			$forum_db	= $config['Database']['dbname'];
 			$forum_user	= $config['MasterServer']['username'];
 			$forum_pass	= $config['MasterServer']['password'];
 			$forum_prefix= $config['Database']['tableprefix'];
-			
+
 			//some people change their db charset 
 			if(isset($config['Mysqli']['charset']))
 			{
@@ -54,26 +62,29 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 	}
 	else
 	{
+		//
+		//custom config data
+		//
 		$forum_srv	= $script_srv;
 		$forum_db	= $script_db;
 		$forum_user	= $script_user;
 		$forum_pass	= $script_pass;
 		$forum_prefix = $script_prefix;
-				
+
 		//some people change their db charset 
 		if(isset($script_db_charset))
 		{
 			$forum_db_charset = $script_db_charset;
 		}
 	}
-	
+
 	if(empty($forum_srv) || empty($forum_user) || empty($forum_db))
 	{
 		return;
 	}
-				
+
 	$SQLVB	= new SSQL($forum_srv, $forum_user, $forum_pass, $forum_db, true);
-	
+
 	//if(!preg_match('/utf/i',strtolower($script_encoding)))
 	//{
 	if(isset($forum_db_charset))
@@ -85,11 +96,10 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 		$charset_db = $SQLVB->client_encoding();
 		$SQLVB->set_names($charset_db);
 	}
-	
 	//}
 	//$mysql_version = @mysql_get_server_info($SQLVB->connect_id);
-				
-	unset($forum_pass); // We do not need this any longe
+
+	unset($forum_pass); // We do not need this any longer
 
 	if(!function_exists('iconv') && !preg_match('/utf/i',strtolower($script_encoding)))
  	{
@@ -97,15 +107,15 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
  	}
 
 	$query_salt = array(
-						'SELECT'		=> (($hashed) ? '*' : 'salt'), 
+						'SELECT'	=> $hashed ? '*' : 'salt', 
 						'FROM'		=> "`{$forum_prefix}user`",
 					);
-					
-	$query_salt['WHERE'] = ($hashed) ? "userid='" . intval($name) . "'  AND password='" . $SQLVB->real_escape($pass) . "' AND usergroupid != '8'" :  "username='" . $SQLVB->real_escape($name) . "' AND usergroupid != '8'";
-			
+
+	$query_salt['WHERE'] = $hashed ? "userid='" . intval($name) . "'  AND password='" . $SQLVB->real_escape($pass) . "' AND usergroupid != '8'" :  "username='" . $SQLVB->real_escape($name) . "' AND usergroupid != '8'";
+
 	($hook = kleeja_run_hook('qr_select_usrdata_vb_usr_class')) ? eval($hook) : null; //run hook				
 	$result_salt = $SQLVB->build($query_salt);
-				
+
 	if ($SQLVB->num_rows($result_salt) > 0) 
 	{
 		while($row1=$SQLVB->fetch_array($result_salt))
@@ -113,42 +123,39 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 			if(!$hashed)
 			{
 				$pass = md5(md5($pass) . $row1['salt']);  // without normal md5
-			
-				$query = array('SELECT'	=> '*',
-							'FROM'	=> "`{$forum_prefix}user`",
-							'WHERE'	=> "username='" . $SQLVB->real_escape($name) . "' AND password='" . $SQLVB->real_escape($pass) . "' AND usergroupid != '8'"
-							);
+
+				$query	= array(
+								'SELECT'	=> '*',
+								'FROM'	=> "`{$forum_prefix}user`",
+								'WHERE'	=> "username='" . $SQLVB->real_escape($name) . "' AND password='" . $SQLVB->real_escape($pass) . "' AND usergroupid != '8'"
+						);
 		
 				$result = $SQLVB->build($query);
-			
-			
-				if ($SQLVB->num_rows($result) != 0) 
+
+				if ($SQLVB->num_rows($result) != 0)
 				{
-					
 					while($row=$SQLVB->fetch_array($result))
 					{
 						if(!$loginadm)
 						{
-							define('USER_ID',$row['userid']);
-							define('USER_NAME',(preg_match('/utf/i',strtolower($script_encoding))) ? $row['username'] : iconv(strtoupper($script_encoding),"UTF-8//IGNORE",$row['username']));
-							define('USER_MAIL',$row['email']);
-							define('USER_ADMIN',($row['usergroupid'] == 6) ? 1 : 0);
+							define('USER_ID', $row['userid']);
+							define('USER_NAME', preg_match('/utf/i', strtolower($script_encoding)) ? $row['username'] : iconv(strtoupper($script_encoding), "UTF-8//IGNORE", $row['username']));
+							define('USER_MAIL', $row['email']);
+							define('USER_ADMIN', $row['usergroupid'] == 6 ? 1 : 0);
 						}
-					//define('LAST_VISIT',$row['last_visit']);
+
+						//define('LAST_VISIT',$row['last_visit']);
+
 						$userinfo = $row;
-					
 						$hash_key_expire = sha1(md5($config['h_key']) .  $expire);
-						
 						if(!$loginadm)
 						{
 							$usrcp->kleeja_set_cookie('ulogu', $usrcp->en_de_crypt($row['userid'] . '|' . $row['password'] . '|' . $expire . '|' . $hash_key_expire), $expire);
 						}
-					
-					
+
 					($hook = kleeja_run_hook('qr_while_usrdata_vb_usr_class')) ? eval($hook) : null; //run hook
 				}
-				$SQLVB->freeresult($result);   
-			
+				$SQLVB->freeresult($result);
 			}#nums_sql2
 			else
 			{
@@ -160,8 +167,8 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 			{
 				if(!$loginadm)
 				{
-					define('USER_ID',$row1['userid']);
-					define('USER_NAME',(preg_match('/utf/i',strtolower($script_encoding))) ? $row1['username'] : iconv(strtoupper($script_encoding),"UTF-8//IGNORE",$row1['username']));
+					define('USER_ID', $row1['userid']);
+					define('USER_NAME', preg_match('/utf/i', strtolower($script_encoding)) ? $row1['username'] : iconv(strtoupper($script_encoding),"UTF-8//IGNORE",$row1['username']));
 					define('USER_MAIL',$row1['email']);
 					define('USER_ADMIN',($row1['usergroupid'] == 6) ? 1 : 0);
 					$userinfo = $row1;
@@ -188,7 +195,7 @@ function kleeja_auth_username ($user_id)
 {
 	// ok, i dont hate vb .. but i cant feel my self use it ... 
 	global $script_path, $lang, $script_encoding, $script_srv, $script_db, $script_user, $script_pass, $script_prefix;
-	
+
 	if(isset($script_path))
 	{				
 		//check for last slash
@@ -196,15 +203,14 @@ function kleeja_auth_username ($user_id)
 		{
 			$script_path = substr($script_path, 0, strlen($script_path));
 		}
-						
+
 		$script_path = ($script_path[0] == '/' ? '..' : '../') . $script_path;
-		
 		$script_path = PATH .  $script_path;
-		
+
 		//get some useful data from vb config file
-		if(file_exists($script_path . '/includes/config.php'))
+		if(file_exists($script_path . VB_CONFIG_PATH))
 		{
-			require ($script_path . '/includes/config.php');
+			require_once ($script_path . VB_CONFIG_PATH);
 			$forum_srv	= $config['MasterServer']['servername'];
 			$forum_db	= $config['Database']['dbname'];
 			$forum_user	= $config['MasterServer']['username'];
@@ -224,12 +230,12 @@ function kleeja_auth_username ($user_id)
 		$forum_pass	= $script_pass;
 		$forum_prefix = $script_prefix;
 	}
-	
+
 	if(empty($forum_srv) || empty($forum_user) || empty($forum_db))
 	{
 		return;
 	}
-				
+
 	$SQLVB	= new SSQL($forum_srv, $forum_user, $forum_pass, $forum_db, TRUE);
 	unset($forum_pass); // We do not need this any longe
 
@@ -243,17 +249,17 @@ function kleeja_auth_username ($user_id)
 					'FROM'		=> "`{$forum_prefix}user`",
 					'WHERE'		=> "userid='" . intval($user_id) . "'"
 				);
-			
+
 	($hook = kleeja_run_hook('qr_select_usrname_vb_usr_class')) ? eval($hook) : null; //run hook				
 	$result_name = $SQLVB->build($query_name);
-				
+
 	if ($SQLVB->num_rows($result_name) > 0) 
 	{
 		while($row = $SQLVB->fetch_array($result_name))
 		{
-			$returnname = (preg_match('/utf/i',strtolower($script_encoding))) ? $row['username'] : iconv(strtoupper($script_encoding),"UTF-8//IGNORE",$row['username']);
+			$returnname = preg_match('/utf/i', strtolower($script_encoding)) ? $row['username'] : iconv(strtoupper($script_encoding), "UTF-8//IGNORE", $row['username']);
+		}
 
-		}#whil1
 		$SQLVB->freeresult($result_name); 
 		$SQLVB->close();
 		return $returnname;
@@ -263,4 +269,4 @@ function kleeja_auth_username ($user_id)
 		$SQLVB->close();
 		return false;
 	}
-}	
+}

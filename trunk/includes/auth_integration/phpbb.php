@@ -13,7 +13,12 @@ if (!defined('IN_COMMON'))
 {
 	exit('no directly opening : ' . __file__);
 }
-  
+ 
+//
+//Path of config file in phpBB
+//
+define('PHPBB_CONFIG_PATH', '/config.php');
+
 
 function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = false)
 {
@@ -25,24 +30,24 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 	{
 		if(isset($script_path[strlen($script_path)]) && $script_path[strlen($script_path)] == '/')
 		{
-				$script_path = substr($script_path, 0, strlen($script_path));
+			$script_path = substr($script_path, 0, strlen($script_path));
 		}
-						
+
 		$script_path = ($script_path[0] == '/' ? '..' : '../') . $script_path;
-		
+
 		$script_path = PATH .  $script_path;
 
 		//get some useful data from phbb config file
-		if(file_exists($script_path . '/config.php'))
+		if(file_exists($script_path . PHPBB_CONFIG_PATH))
 		{
-			require ($script_path . '/config.php');
+			require_once ($script_path . PHPBB_CONFIG_PATH);
 			
 			$forum_srv	= $dbhost;
 			$forum_db	= $dbname;
 			$forum_user	= $dbuser;
 			$forum_pass	= $dbpasswd;
 			$forum_prefix = $table_prefix;
-		} 
+		}
 		else
 		{
 			big_error('Forum path is not correct', sprintf($lang['SCRIPT_AUTH_PATH_WRONG'], 'phpBB'));
@@ -56,13 +61,13 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 		$forum_pass	= $script_pass;
 		$forum_prefix = $script_prefix;
 	}
-	
+
 	//if no variables of db
 	if(empty($forum_srv) || empty($forum_user) || empty($forum_db))
 	{
 		return;
 	}
-								
+
 	//conecting ...		
 	$SQLBB	= new SSQL($forum_srv,$forum_user,$forum_pass,$forum_db,true);
 	
@@ -71,9 +76,9 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 	$charset_db = $SQLBB->client_encoding();
 	$SQLBB->set_names($charset_db);
 	//}
-					
-	unset($forum_pass); // We do not need this any longe
-					
+
+	unset($forum_pass); // We do not need this any longer
+
 	//phpbb3
 	if(file_exists($script_path . '/includes/functions_transfer.php'))
 	{
@@ -82,18 +87,19 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 		$phpbb_root_path = $script_path . '/';
 		$phpEx = 'php';
 		include_once($script_path . '/includes/utf/utf_tools.' . $phpEx);
-							
+
 		$row_leve = 'user_type';
 		$admin_level = 3;					
-		$query2 = array('SELECT'	=> '*',
+		$query2 = array(
+						'SELECT'	=> '*',
 						'FROM'		=> "`{$forum_prefix}users`",
-						);
-		($hashed) ? $query2['WHERE'] = "user_id='" . intval($name) . "'  AND user_password='" . $SQLBB->real_escape($pass) . "' " : $query2['WHERE'] = "username_clean='" . utf8_clean_string($name) . "'";
-		
-		$query = "";
-		
+					);
+		$query2['WHERE'] = $hashed ?  "user_id='" . intval($name) . "'  AND user_password='" . $SQLBB->real_escape($pass) . "' " : "username_clean='" . utf8_clean_string($name) . "'";
+
+		$query = '';
+
 		if(!$hashed)
-		{										
+		{
 			$result2 = $SQLBB->build($query2);					
 			while($row=$SQLBB->fetch_array($result2))
 			{
@@ -107,38 +113,37 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 		else
 		{
 			$query = $query2;
-		}	
+		}
 	}
 	else//phpbb2
 	{
-	
-	if(!function_exists('iconv') && !preg_match('/utf/i',strtolower($script_encoding)))
- 	{
- 		big_error('No support for ICONV', 'You must enable the ICONV library to integrate kleeja with your forum. You can solve your problem by changing your forum db charset to UTF8.'); 
- 	}
-	
+		if(!function_exists('iconv') && !preg_match('/utf/i',strtolower($script_encoding)))
+		{
+			big_error('No support for ICONV', 'You must enable the ICONV library to integrate kleeja with your forum. You can solve your problem by changing your forum db charset to UTF8.'); 
+		}
+
 		$row_leve = 'user_level';
 		$admin_level = 1;
-	
-		$query = array('SELECT'	=> '*',
+
+		$query = array(
+						'SELECT'	=> '*',
 						'FROM'		=> "`{$forum_prefix}users`",
 						'WHERE'		=>"username='" . $SQLBB->real_escape($name) . "' AND user_password='" . md5($pass) . "'"
 					);
-					
-		($hashed) ? $query['WHERE'] = "user_id='" . intval($name) . "'  AND user_password='" . $SQLBB->real_escape($pass) . "' " : $query['WHERE'] = "username='" . $SQLBB->real_escape($name) . "' AND user_password='" . md5($pass) . "'";
-								
+
+		$query['WHERE'] = $hashed ?  "user_id='" . intval($name) . "'  AND user_password='" . $SQLBB->real_escape($pass) . "' " : "username='" . $SQLBB->real_escape($name) . "' AND user_password='" . md5($pass) . "'";
 	}
-	
+
 	if(empty($query))
 	{
 		$SQLBB->close();
 		return false;
 	}
-					
+
 	($hook = kleeja_run_hook('qr_select_usrdata_phpbb_usr_class')) ? eval($hook) : null; //run hook		
 	$result = $SQLBB->build($query);
-					
-				
+
+
 	if ($SQLBB->num_rows($result) != 0) 
 	{	
 		while($row=$SQLBB->fetch_array($result))
@@ -147,14 +152,15 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 			{
 				if(!$loginadm)
 				{
-					define('USER_ID',$row['user_id']);
-					define('USER_NAME',(preg_match('/utf/i',strtolower($script_encoding))) ? $row['username'] : iconv(strtoupper($script_encoding),"UTF-8//IGNORE",$row['username']));
+					define('USER_ID', $row['user_id']);
+					define('USER_NAME', preg_match('/utf/i', strtolower($script_encoding)) ? $row['username'] : iconv(strtoupper($script_encoding), "UTF-8//IGNORE", $row['username']));
 					define('USER_MAIL',$row['user_email']);
 					define('USER_ADMIN',($row[$row_leve] == $admin_level) ? 1 : 0);
 				}
-					//define('LAST_VISIT',$row['last_visit']);
+
+				//define('LAST_VISIT',$row['last_visit']);
 				$userinfo = $row;
-							
+
 				if(!$hashed)
 				{	
 					$hash_key_expire = sha1(md5($config['h_key']) .  $expire);
@@ -175,12 +181,11 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 			}
 
 		}
-		
+
 		$SQLBB->freeresult($result);   
 		unset($pass);
 		$SQLBB->close();
-						
-						
+
 		return true;
 	}
 	else
@@ -192,25 +197,25 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 
 function kleeja_auth_username ($user_id)
 {
-		global $script_path, $SQLBB, $phpEx, $phpbb_root_path, $lang, $script_encoding, $script_srv, $script_db, $script_user, $script_pass, $script_prefix;
+	global $script_path, $SQLBB, $phpEx, $phpbb_root_path, $lang, $script_encoding, $script_srv, $script_db, $script_user, $script_pass, $script_prefix;
 				
 	//check for last slash / 
 	if(isset($script_path))
 	{
 		if($script_path[strlen($script_path)] == '/')
 		{
-				$script_path = substr($script_path, 0, strlen($script_path));
+			$script_path = substr($script_path, 0, strlen($script_path));
 		}
-						
+
 		$script_path = ($script_path[0] == '/' ? '..' : '../') . $script_path;
-		
+
 		$script_path = PATH .  $script_path;
 
 		//get some useful data from phbb config file
-		if(file_exists($script_path . '/config.php'))
+		if(file_exists($script_path . PHPBB_CONFIG_PATH))
 		{
-			require ($script_path . '/config.php');
-			
+			require_once ($script_path . PHPBB_CONFIG_PATH);
+
 			$forum_srv	= $dbhost;
 			$forum_db	= $dbname;
 			$forum_user	= $dbuser;
@@ -230,39 +235,38 @@ function kleeja_auth_username ($user_id)
 		$forum_pass	= $script_pass;
 		$forum_prefix = $script_prefix;
 	}
-	
+
 	//if no variables of db
 	if(empty($forum_srv) || empty($forum_user) || empty($forum_db))
 	{
 		return;
 	}
-								
+
 	//conecting ...		
 	$SQLBB	= new SSQL($forum_srv,$forum_user,$forum_pass,$forum_db,TRUE);
 	//$charset_db = @mysql_client_encoding($SQLBB->connect_id);
 	unset($forum_pass); // We do not need this any longe
 
-	if(!function_exists('iconv') && !preg_match('/utf/i',strtolower($script_encoding)))
+	if(!function_exists('iconv') && !preg_match('/utf/i', strtolower($script_encoding)))
  	{
  		big_error('No support for ICONV', 'You must enable the ICONV library to integrate kleeja with your forum. You can solve your problem by changing your forum db charset to UTF8.'); 
  	}
 
 	$query_name = array(
-					'SELECT'	=> 'username',
-					'FROM'		=> "`{$forum_prefix}users`",
-					'WHERE'		=> "user_id='" . intval($user_id) . "'"
+						'SELECT'	=> 'username',
+						'FROM'		=> "`{$forum_prefix}users`",
+						'WHERE'		=> "user_id='" . intval($user_id) . "'"
 				);
-			
+
 	($hook = kleeja_run_hook('qr_select_usrname_phpbb_usr_class')) ? eval($hook) : null; //run hook				
 	$result_name = $SQLBB->build($query_name);
-				
+
 	if ($SQLBB->num_rows($result_name) > 0) 
 	{
 		while($row = $SQLBB->fetch_array($result_name))
 		{
 			$returnname = (preg_match('/utf/i',strtolower($script_encoding))) ? $row['username'] : iconv(strtoupper($script_encoding),"UTF-8//IGNORE",$row['username']);
-
-		}#whil1
+		}
 		$SQLBB->freeresult($result_name); 
 		$SQLBB->close();
 		return $returnname;

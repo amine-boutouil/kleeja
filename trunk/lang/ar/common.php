@@ -504,6 +504,14 @@ $lang = array_merge($lang, array(
 	'ERROR_TRY_AGAIN'			=> 'خطأ , حاول مجدداً.',
 	'VIEW'						=> 'عرض',
 	'REPLACE_WHOLW_TPL'			=> 'استبدل كامل محتويات القالب',
+	'DEPEND_ON_NO_STYLE_ERR'	=> 'هذا الستايل يعتمد على ستايل "%s" غير الموجود لديك ضمن الستايلات !.', 
+	'KLJ_VER_NO_STYLE_ERR'		=> 'هذا الستايل يتطلب على الاقل اصدار %s من كليجا .',
+	'KLJ_STYLE_INFO'			=> 'معلومات الستايل',
+	'STYLE_NAME'				=> 'اسم الستايل',
+	'STYLE_COPYRIGHT'			=> 'حقوق الستايل',
+	'STYLE_VERSION'				=> 'اصدار الستايل',
+	'STYLE_DEPEND_ON'			=> 'يعتمد على ستايل',
+	'NONE'						=> 'لا شيء',
 	));
 
 #<-- EOF

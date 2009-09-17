@@ -73,21 +73,20 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 #other-info{margin:6px 0;padding: 10px; font-weight: bold;background:#eee; border-top:2px dotted #fff;border-bottom:2px dotted #eee;border-left:0px;border-right:0px;}
 #other-info .t_info{ padding:5px 30px; font-weight: bold;font-size:14px;background:url(../images/t_info.png) no-repeat 100% 50%;color:#F46320}
 .data { font-weight: bold;font-size:11px;border: 1px dashed #D2D6FF}
-.data  tr{ background:#F7F7F7;cursor:help;}
+.data  tr{ background:#F7F7F7;}
 .data  td{border-top:1px ridge #D2D6FF;border-bottom:1px ridge #D2D6FF;padding:2px 10px; }
-.data  tr:hover { background:#DBE1F8}
 #other-info .team{display:block;padding:5px 10px;font-size:12px;text-align:left;font-weight:normal;}
 /* other info  */
 
 /*  disk_size */
 .disk_size{margin-top:10px; padding: 10px; font-weight: bold;border-top:2px dotted #fff;border-bottom:2px dotted #eee;border-left:0px;border-right:0px}
-.disk_size tr{background:#fff}
+.disk_size tr{background:#F7F7F7}
 .t_disk_size{background:#E8E8E8;padding:10px; font-weight:normal;font-size:14px;color:#000;text-align:right}
 .tab-size {border-collapse: collapse; margin-top:10px;width:100%; padding:5px ;cursor: text; }
 .tab-size tr {height: 24px;border-width:0px;}
-.tab-size td {padding: 3px 5px 3px 5px; border: 1px solid #fff;}
-.disk_size tr:hover {background-color:#FFF;}
-.filsiz{background:#FFF;padding:3px; font-weight:bold;font-size:30px;color:#D0D0D0;text-align:center}
+.tab-size td {padding: 3px 5px; border: 1px solid #F7F7F7;}
+.disk_size tr:hover {background-color:#F7F7F7;}
+.filsiz{padding:3px; font-weight:bold;font-size:30px;color:#D0D0D0;text-align:center}
 /*  disk_size */
 
 /* body #System Messages  */

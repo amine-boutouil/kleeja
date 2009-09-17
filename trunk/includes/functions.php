@@ -378,9 +378,9 @@ function creat_plugin_xml($contents)
 									$template_path = $style_path . $template_name . '.html';
 									if(!file_exists($template_path)) 
 									{
-										if(file_exists($style_path . 'depend_on.txt'))
+										if(trim($config['style_depend_on']) != '')
 										{
-											$depend_on = file_get_contents($style_path . 'depend_on.txt');
+											$depend_on = $config['style_depend_on'];
 											$template_path_alternative = str_replace('/' . $config['style'] . '/', '/' . trim($depend_on) . '/', $template_path);
 											if(file_exists($template_path_alternative))
 											{

@@ -558,9 +558,9 @@ function get_up_tpl_box($box_name, $extra = array())
 		if(!file_exists($tpl_path))
 		{
 			$depend_on = false;
-			if(file_exists($STYLE_PATH . 'depend_on.txt'))
+			if(trim($config['style_depend_on']) != '')
 			{
-				$depend_on = file_get_contents($STYLE_PATH . 'depend_on.txt');
+				$depend_on = $config['style_depend_on'];
 			}
 			else
 			{

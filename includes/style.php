@@ -26,10 +26,10 @@ class kleeja_style
         //Function to load a template file.
         function _load_template($template_name)
 		{
-			global $config, $root_path, $STYLE_PATH, $STYLE_PATH_ADMIN;
+			global $config, $root_path, $THIS_STYLE_PATH, $STYLE_PATH_ADMIN;
 
 			$is_admin_template = false;
-			$style_path = $STYLE_PATH;
+			$style_path = $THIS_STYLE_PATH;
 			
 			//admin template always begin with admin_
 			if(substr($template_name, 0, 6) == 'admin_')

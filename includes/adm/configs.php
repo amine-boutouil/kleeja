@@ -107,21 +107,6 @@
 				{
 					list($thmb_dim_w, $thmb_dim_h) = @explode('*', $con['thmb_dims']);
 				}
-				else if($row['name'] == 'style') 
-				{
-					//get styles
-					if ($dh = @opendir($root_path . 'styles'))
-					{
-							while (($file = readdir($dh)) !== false)
-							{
-								if(strpos($file, '.') === false && $file != '..' && $file != '.')
-								{
-									$stylfiles .= '<option ' . ($con['style'] == $file ? 'selected="selected"' : '') . ' value="' . $file . '">' . $file . '</option>' . "\n";
-								}
-							}
-							closedir($dh);
-					}
-				}
 				else if($row['name'] == 'language') 
 				{
 					//get languages
@@ -265,8 +250,7 @@
 				else
 				{
 				*/
-					if(isset($_POST['style']) && ($_POST['style'] != $config['style']) || isset($_POST['language']) && ($_POST['language'] != $config['language']))
-
+					if(isset($_POST['language']) && ($_POST['language'] != $config['language']))
 					{
 						delete_cache('', true); //delete all cache to get new style
 					}

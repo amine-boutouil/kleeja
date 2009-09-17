@@ -14,7 +14,7 @@ copyright = 2009 Kleeja.com
 version = 1.0.0
 
 #Min. required version of kleeja
-kleeja_version = 1.0.1
+kleeja_version = 1.0.0
 
 #name of the style required by this style 
 #depend_on = default

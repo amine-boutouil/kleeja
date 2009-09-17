@@ -159,8 +159,8 @@ switch ($_GET['sty_t'])
 						{
 							kleeja_admin_err(sprintf($lang['DEPEND_ON_NO_STYLE_ERR'], $style_info['depend_on']));
 						}
-						
-						if(isset($style_info['kleeja_version']) && version_compare(strtolower($style_info['kleeja_version']), strtolower(KLEEJA_VERSION), '<') == false)
+
+						if(isset($style_info['kleeja_version']) && version_compare(strtolower($style_info['kleeja_version']), strtolower(KLEEJA_VERSION), '>'))
 						{
 							kleeja_admin_err(sprintf($lang['KLJ_VER_NO_STYLE_ERR'], $style_info['kleeja_version']));
 						}
@@ -168,9 +168,11 @@ switch ($_GET['sty_t'])
 
 					//make it as default
 					update_config('style', $style_id);
+					update_config('style_depend_on', isset($style_info['depend_on']) ? $style_info['depend_on'] : '');
+
 					//delete all cache to get new style
 					delete_cache('', true);
-					
+
 					//show msg
 					$text = sprintf($lang['STYLE_NOW_IS_DEFAULT'], htmlspecialchars($style_id)) . '<meta HTTP-EQUIV="REFRESH" content="2; url=' . basename(ADMIN_PATH) . '?cp=styles">' ."\n";
 					$stylee	= "admin_info";

@@ -37,17 +37,16 @@ class kleeja_style
 				$style_path =  $STYLE_PATH_ADMIN;
 				$is_admin_template = true;
 			}
-			
+
 			$template_path = $style_path . $template_name . '.html';
 
 			//if template not found and default style is there and not admin tpl
 			$is_tpl_exist = file_exists($template_path);
 			if(!$is_tpl_exist) 
-			{	
-				if(file_exists($style_path . 'depend_on.txt'))
+			{
+				if(trim($config['style_depend_on']) != '')
 				{
-					$depend_on = file_get_contents($style_path . 'depend_on.txt');
-					$template_path_alternative = str_replace('/' . $config['style'] . '/', '/' . trim($depend_on) . '/', $template_path);
+					$template_path_alternative = str_replace('/' . $config['style'] . '/', '/' . $config['style_depend_on'] . '/', $template_path);
 					if(file_exists($template_path_alternative))
 					{
 						$template_path = $template_path_alternative;

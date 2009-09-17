@@ -47,7 +47,7 @@ $update_sqls['configs4'] = "UPDATE `{$dbprefix}config` SET `option` = '<label>{l
 
 $update_sqls['configs5'] = "UPDATE `{$dbprefix}config` SET `option` = '<select id=\"decode\" name=\"decode\">\r\n                <option <IF NAME=\"con.decode==0\">selected=\"selected\"</IF> value=\"0\">{lang.NO_CHANGE}</option>\r\n                <option <IF NAME=\"con.decode==2\">selected=\"selected\"</IF> value=\"2\">{lang.CHANGE_MD5}</option>\r\n                <option <IF NAME=\"con.decode==1\">selected=\"selected\"</IF> value=\"1\">{lang.CHANGE_TIME}</option>\r\n				<!-- another config decode options -->\r\n                </select>',`display_order` = 11 WHERE  `name` = 'decode';";
 
-$update_sqls['configs6'] = "UPDATE `{$dbprefix}config` SET `option` = '<select name=\"style\" id=\"style\">\r\n                {stylfiles}\r\n                </select>',`display_order` = 18 WHERE  `name` = 'style';";
+$update_sqls['configs6'] = "UPDATE `{$dbprefix}config` SET `option` = '',`display_order` = 0, `type`='' WHERE  `name` = 'style';";
 
 $update_sqls['configs7'] = "UPDATE `{$dbprefix}config` SET `option` = '<input type=\"text\" id=\"closemsg\" name=\"closemsg\" value=\"{con.closemsg}\" size=\"40\">',`display_order` = 10 WHERE  `name` = 'closemsg';";
 
@@ -112,14 +112,14 @@ $update_sqls['password_salt'] = "ALTER TABLE `{$dbprefix}users` ADD `password_sa
 
 $update_sqls['type_config'] = "ALTER TABLE `{$dbprefix}config` ADD `type` VARCHAR( 20 ) NOT NULL DEFAULT 'other'";
 
-$update_sqls['type_config_general'] = "UPDATE `{$dbprefix}config` SET `type` = 'general' WHERE `name` IN ('sitename','siteclose','closemsg', 'style', 'welcome_msg', 'language', 'siteurl', 'sitemail', 'sitemail2','user_system','register','del_f_day','mod_writer','enable_userfile','id_form','cookie_name','cookie_path','cookie_domain','cookie_secure'
+$update_sqls['type_config_general'] = "UPDATE `{$dbprefix}config` SET `type` = 'general' WHERE `name` IN ('sitename','siteclose','closemsg', 'welcome_msg', 'language', 'siteurl', 'sitemail', 'sitemail2','user_system','register','del_f_day','mod_writer','enable_userfile','id_form','cookie_name','cookie_path','cookie_domain','cookie_secure'
 
 );";
 
 $update_sqls['type_config_upload'] = "UPDATE `{$dbprefix}config` SET `type` = 'upload' WHERE `name` IN ('foldername','prefixname','filesnum','decode','total_size','thumbs_imgs','thmb_dims','write_imgs','del_url_file','safe_code','livexts', 'www_url');";
 
 
-$update_sqls['type_config_interface'] = "UPDATE `{$dbprefix}config` SET `type` = 'interface' WHERE `name` IN ('style','sec_down','statfooter','gzip','welcome_msg','allow_stat_pg','allow_online','googleanalytics');";
+$update_sqls['type_config_interface'] = "UPDATE `{$dbprefix}config` SET `type` = 'interface' WHERE `name` IN ('sec_down','statfooter','gzip','welcome_msg','allow_stat_pg','allow_online','googleanalytics');";
 
 $update_sqls['cookie_1'] = "INSERT INTO `{$dbprefix}config` (`name` ,`value` ,`option` ,`display_order`,`type`)
 VALUES ('cookie_name', '" . $cookie_name . "', '<input type=\"text\" id=\"cookie_name\" name=\"cookie_name\" value=\"{con.cookie_name}\" size=\"30\">', '70', 'general');";
@@ -134,7 +134,8 @@ $update_sqls['cookie_4'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `o
 $update_sqls['delf_caution'] = "UPDATE `{$dbprefix}config` SET `option` = '<input type=\"text\" id=\"del_f_day\" name=\"del_f_day\" value=\"{con.del_f_day}\" size=\"10\">{lang.DELF_CAUTION}' WHERE `name` = 'del_f_day';";
 
 
- 
+$update_sqls['config_insert42'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('style_depend_on', '', '', 0)";
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 //notes ////////////////////////////////////////////////////////////////////////////////////////////////

@@ -284,9 +284,11 @@
 		}
 	}
 
-	$STYLE_PATH = PATH . 'styles/' . $config['style'] . '/';
-	$STYLE_PATH_ADMIN  = PATH . 'admin/admin_style/';
 
+	$STYLE_PATH = PATH . 'styles/' . (trim($config['style_depend_on']) == '' ? $config['style'] : $config['style_depend_on']) . '/';
+	$STYLE_PATH_ADMIN  = PATH . 'admin/admin_style/';
+	$THIS_STYLE_PATH = PATH . 'styles/' . $config['style'] . '/';
+	
 	//get languge of common
 	get_lang('common');
 

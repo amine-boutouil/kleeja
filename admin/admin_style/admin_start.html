@@ -48,23 +48,23 @@ $('div#{{id}}').pulse({
 <!-- end clear  -->
 
 <!-- start welcome user admin -->
-
 <div class="welcome"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/heart.png" alt="Kleeja love you ..," />&nbsp;&nbsp;{usernamelang}</div>
-
 <!-- end  welcome user admin -->
+
+<div class="last">
+<IF NAME="last_visit">
+{lang.LAST_VISIT} : {last_visit}
+<small><a href="{h_lst_files}">{lang.FLS_LST_VST_SEARCH}</a></small> | 
+<small><a href="{h_lst_imgs}">{lang.IMG_LST_VST_SEARCH}</a></small>
+</IF>
+</div>
 	
 <!-- start clear  -->
-<div class="clr"></div>
+<div class="clr"></div><br />
 <!-- end clear  -->
 
 <!-- start last visit  -->
 <table class="infocontrol">
-	<tr><IF NAME="last_visit">
-		<td>{lang.LAST_VISIT} : {last_visit}</td>
-		<td><small><a href="{h_lst_files}">{lang.FLS_LST_VST_SEARCH}</a></small> | 
-	<small><a href="{h_lst_imgs}">{lang.IMG_LST_VST_SEARCH}</a></small>
-	</td></IF>
-	</tr>
 	<tr>
 		<td>{lang.LSTDELST} : <b>{last_del_fles}</b></td>		
 		<td>{lang.LSTFLE_ST} : <IF NAME="stat_last_file!='0'"><b><a href="{last_file_up_url}" onclick="window.open(this.href,'_blank');return false;">{last_file_up}</a></b><ELSE>{lang.UNKNOWN}</IF></td>

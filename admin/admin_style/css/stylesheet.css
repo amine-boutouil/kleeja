@@ -64,6 +64,7 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 	
 /* last visit */
 .welcom {width:100%;background:#EEE;margin-bottom:4px;font-size:12px;border-top:2px dotted #fff;border-bottom:2px dotted #fff;border-left:0px;border-right:0px}
+.last {font-size:12px;font-weight:normal;}
 .infocontrol {width:100%;background:#F7F7F7;margin-bottom:4px;font-size:11px;border-top:2px ridge #fff;border-bottom:2px ridge #fff;border-left:0px;border-right:0px}
 .infocontrol td{background:#F7F7F7;width:50%;padding:11px 5px;border-bottom:0px;text-align: right;}
 .infocontrol:hover { background:#DBE1F8}

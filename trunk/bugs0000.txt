@@ -10,3 +10,6 @@
 „« «œ—Ì Ê‘ «·„‘ﬂ·… »«·÷»ÿ :(
 
 ==========================================
+
+Notice: Undefined index: style_depend_on in c:\appserv\www\kleeja\includes\common.php on line 288
+

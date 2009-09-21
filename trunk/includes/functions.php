@@ -252,7 +252,7 @@ function xml_get_children($vals, &$i)
 */
 function creat_plugin_xml($contents) 
 {
-	global $dbprefix, $SQL, $lang, $config, $STYLE_PATH_ADMIN , $STYLE_PATH, $root_path, $olang;
+	global $dbprefix, $SQL, $lang, $config, $STYLE_PATH_ADMIN , $STYLE_PATH, $THIS_STYLE_PATH, $root_path, $olang;
 
 				$gtree = xml_to_array($contents);
 				
@@ -372,7 +372,7 @@ function creat_plugin_xml($contents)
 										case 'replace_with': $action_type =1; break;
 									endswitch;
 									
-									$style_path = (substr($template_name, 0, 6) == 'admin_') ? $STYLE_PATH_ADMIN : $STYLE_PATH;
+									$style_path = (substr($template_name, 0, 6) == 'admin_') ? $STYLE_PATH_ADMIN : $THIS_STYLE_PATH;
 									
 									//if template not found and default style is there and not admin tpl
 									$template_path = $style_path . $template_name . '.html';
@@ -443,7 +443,7 @@ function creat_plugin_xml($contents)
 							
 								foreach($plg_tpl['new']['template'] as $temp)
 								{
-									$style_path = (substr($template_name, 0, 6) == 'admin_') ? $STYLE_PATH_ADMIN : $STYLE_PATH;
+									$style_path = (substr($template_name, 0, 6) == 'admin_') ? $STYLE_PATH_ADMIN : $THIS_STYLE_PATH;
 									$template_name		= $temp['attributes']['name'];
 									$template_content	= trim($temp['value']);
 									
@@ -1311,9 +1311,9 @@ function get_lang($name, $folder = '')
 //
 function delete_ch_tpl($template_name, $delete_txt = array())
 {
-	global $dbprefix, $lang, $config, $STYLE_PATH_ADMIN , $STYLE_PATH, $root_path;
+	global $dbprefix, $lang, $config, $STYLE_PATH_ADMIN , $STYLE_PATH, $THIS_STYLE_PATH, $root_path;
 	
-	$style_path = (substr($template_name, 0, 6) == 'admin_') ? $STYLE_PATH_ADMIN : $STYLE_PATH;
+	$style_path = (substr($template_name, 0, 6) == 'admin_') ? $STYLE_PATH_ADMIN : $THIS_STYLE_PATH;
 	$is_admin_template = (substr($template_name, 0, 6) == 'admin_') ? true : false;
 									
 	//if template not found and default style is there and not admin tpl

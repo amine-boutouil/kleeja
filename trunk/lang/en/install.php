@@ -1,5 +1,5 @@
 <?php
-//English language
+// English language file
 //  By:NK , Email: n.k@cityofangelz.com 
 
 
@@ -54,7 +54,7 @@
 	$lang['DB_INFO_NW']								= 'Config.php file is missing, fill in the fields below and kleeja will create the file for you, place it in kleeja\'s directory.';
 	$lang['DB_INFO']								= 'Config.php file is missing, fill in the fields below and kleeja will create the file for you.';
 	$lang['DB_SERVER']								= 'Host';
-	$lang['DB_TYPE']								= '‰Ê⁄ ﬁ«⁄œÂ «·»Ì«‰« ';
+	$lang['DB_TYPE']								= 'Database type';
 	$lang['DB_TYPE_MYSQL']							= 'MySQL Standard';
 	$lang['DB_TYPE_MYSQLI']							= 'MySQL Improved';
 	$lang['DB_USER']								= 'Database Username';
@@ -65,9 +65,9 @@
 	$lang['CONFIG_EXISTS']							= 'Config.php was found, Continue...';
 	$lang['INST_SUBMIT_CONFIGOK']					= 'Upload the file in the main directory';
 	$lang['INST_EXPORT']							= 'Export File';
-	$lang['INST_STYLE_INFO']						= '«·«” «Ì·';
-	$lang['INST_STYLE1_INFO']					= '«·«” «Ì· «·«› —«÷Ì , —«∆⁄ ÊÃ„Ì· , ›ÌÂ «·Ê«‰ Ê’Ê— ﬂÀÌ—Â';
-	$lang['INST_STYLE2_INFO']					= '” «Ì· Ì⁄ „œ ⁄·Ï «·«› —«÷Ì , «·« «‰Â «»”ÿ Ê«Œ›';
+	$lang['INST_STYLE_INFO']						= 'Style';
+	$lang['INST_STYLE1_INFO']					= 'Default style, nice and elegant with great graphics and colors';
+	$lang['INST_STYLE2_INFO']					= 'Based on the default style, except its more light and simple';
 	//
 	$lang['FUNCTIONS_CHECK']						= 'Functions Check';
 	$lang['RE_CHECK']								= 'ReCheck';
@@ -78,10 +78,10 @@
 	$lang['FUNCTION_DISC_FOPEN']					= 'The function fopen is used to control styles & files in kleeja.';
 	$lang['FUNCTION_DISC_MUF']						= 'The function move_uploaded_file is used to upload files and it\'s the most important function in the script.';
 	//
-	$lang['ADVICES_CHECK']							= '›Õ’ „ ﬁœ„ (Ì„ﬂ‰  À»Ì  ﬂ·ÌÃ« »œÊ‰  Õﬁﬁ Â–« «·›Õ’ , ·ﬂ‰Â „Ã—œ „⁄·Ê„«  ·ﬂ)';
-	$lang['ADVICES_REGISTER_GLOBALS']				= 'Œ«’Ì… register_globals „›⁄·Â , Â–Â «·Œ«’ÌÂ €Ì— „Õ»»  ›⁄Ì·Â« ÊÌ›÷·  ⁄ÿÌ·Â« , Ê„⁄ Â–« ›ﬂ·ÌÃ«  Õ«Ê·  ⁄ÿÌ· «À«—Â« »—„ÃÌ« .';
-	$lang['ADVICES_ICONV']							= 'œÊ«· iconv €Ì— „›⁄·Â ·œÌﬂ , ·ﬂ‰ Â–« ·«Ì„‰⁄  À»Ì  ﬂ·ÌÃ« , ›ﬁÿ ” Ê«ÃÂ „‘«ﬂ· ⁄‰œ «·—»ÿ „⁄ ”ﬂ—» «  «Œ—Ï €Ì— „ Ê«›ﬁÂ „⁄ ‰Ÿ«„ «· —„Ì“ «·⁄«·„Ì UTF8.';
-	$lang['ADVICES_MAGIC_QUOTES']					= 'Œ«’Ì… magic_quotes „›⁄·Â , Â–Â «·Œ«’ÌÂ €Ì— „Õ»»  ›⁄Ì·Â« ÊÌ›÷·  ⁄ÿÌ·Â« , Ê„⁄ Â–« ›ﬂ·ÌÃ«  Õ«Ê·  ⁄ÿÌ· «À«—Â« »—„ÃÌ« ..';
+	$lang['ADVICES_CHECK']							= 'Advanced check (Optional)';
+	$lang['ADVICES_REGISTER_GLOBALS']				= 'register_globals function is enabled, its recommended that you disable it.';
+	$lang['ADVICES_ICONV']							= 'iconv module is not enabled, you can still install Kleeja but you will face problems integrating it with 3rd party scripts that are not compatible with UTF8 encoding';
+	$lang['ADVICES_MAGIC_QUOTES']					= 'magic_quotes function is enabled, it is recommended that you disable it.';
 	
 	//UPDATOR
 	$lang['INST_CHOOSE_UPDATE_FILE']				= 'Choose the appropriate update file';
@@ -98,8 +98,8 @@
 	$lang['INST_UPDATE_IS_FINISH']					= 'Installation completed! you can now delete the <br /><b>INSTALL</b><br /> directory...';
 	$lang['IN_INFO']								= 'Fill in the fields below if you want to integrate kleeja with your script . Ignore this step if you do not wish to do it<br /><span style="color:red;">you should change user system from admin cp after installing kleeja</span>';
 	$lang['IN_PATH']								= 'Path of script';
-	$lang['INST_PHP_LESSMIN']						= '· À»Ì  ﬂ·ÌÃ« ÌÃ» ⁄·Ï «·√ﬁ· √‰ ÌﬂÊ‰ ·œÌﬂ «’œ«— PHP %1$s , Ê«‰  ·œÌﬂ «’œ«— PHP %2$s.';
-	$lang['INST_MYSQL_LESSMIN']						= '· À»Ì  ﬂ·ÌÃ« ÌÃ» ⁄·Ï «·√ﬁ· √‰ ÌﬂÊ‰ ·œÌﬂ «’œ«— MYSQL %1$s , Ê«‰  ·œÌﬂ «’œ«— MYSQL %2$s.';
+	$lang['INST_PHP_LESSMIN']						= 'You need PHP %1$s or above to install Kleeja, your current version is %2$s';
+	$lang['INST_MYSQL_LESSMIN']						= 'You need MySQL %1$s or above to install Kleeja, your current version is %2$s';
 	
 	//wizard
 	$lang['DIR']	=	'ltr';

@@ -6,7 +6,7 @@
 <div id="border-table">
 
 <!-- start general stat panel admin -->
-<div class="title"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/generalstat.png" alt="{lang.GENERAL_STAT}" />&nbsp;&nbsp;{lang.GENERAL_STAT} : [ {config.sitename} ]</div>
+<div class="title">&#9679; {lang.GENERAL_STAT} : [ {config.sitename} ]</div>
 <!-- end h1 general stat panel admin -->
 
 <!-- start dot  -->
@@ -47,41 +47,61 @@ $('div#{{id}}').pulse({
 <div class="clr"></div>
 <!-- end clear  -->
 
+
+
+<fieldset class="fieldsetinfo">
+	<legend>{lang.KLEEJA_CP}</legend>
+<br />
+<div class="adminwelcome"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/heart.png" alt="Kleeja love you ..," />{usernamelang}</div>
+<div class="clr"></div>
 <!-- start welcome user admin -->
-<div class="welcome"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/heart.png" alt="Kleeja love you ..," />&nbsp;&nbsp;{usernamelang}</div>
+		<fieldset class="fieldseuser">
+			<legend>{lang.LAST_VISIT} : <span>{last_visit}</span></legend>
+		
+			<div class="boxlastfp">{lang.LSTFLE_ST} : <IF NAME="stat_last_file!='0'"><a href="{last_file_up_url}" onclick="window.open(this.href,'_blank');return false;">{last_file_up}</a><ELSE>{lang.UNKNOWN}</IF></div>
+<div class="clr"></div>
+			<IF NAME="last_visit">
+	<div class="boxlastfp"><a href="{h_lst_imgs}">{lang.IMG_LST_VST_SEARCH}</a></div>
+	<div class="boxlastfp"><a href="{h_lst_files}">{lang.FLS_LST_VST_SEARCH}</a></div>
+</IF>
+		</fieldset>
+
+<div class="clr"></div>
+
 <!-- end  welcome user admin -->
 
-<div class="last">
-<IF NAME="last_visit">
-{lang.LAST_VISIT} : {last_visit}
-<small><a href="{h_lst_files}">{lang.FLS_LST_VST_SEARCH}</a></small> | 
-<small><a href="{h_lst_imgs}">{lang.IMG_LST_VST_SEARCH}</a></small>
-</IF>
-</div>
-	
+
 <!-- start clear  -->
-<div class="clr"></div><br />
+<div class="clr"></div>
 <!-- end clear  -->
-
-<!-- start last visit  -->
-<table class="infocontrol">
-	<tr>
-		<td>{lang.LSTDELST} : <b>{last_del_fles}</b></td>		
-		<td>{lang.LSTFLE_ST} : <IF NAME="stat_last_file!='0'"><b><a href="{last_file_up_url}" onclick="window.open(this.href,'_blank');return false;">{last_file_up}</a></b><ELSE>{lang.UNKNOWN}</IF></td>
-	</tr>
-</table>
-
+		<fieldset class="fieldset">
+			<legend>{lang.AUSERS_NUM}</legend>
+			<div>[ {users_number} ]</div>
+		</fieldset>
+		<fieldset class="fieldset">
+		<IF NAME="config.user_system==1">
+			<legend>{lang.LAST_REG}</legend>
+			<div>[ {lst_reg} ]</div>
+		</fieldset>
+		</IF>
+		<fieldset class="fieldset">
+			<legend>{lang.AFILES_NUM}</legend>
+			<div>[ {files_number} ]</div>
+		</fieldset>
+		
+		<div class="fieldset">
+			<div class="fontst">{lang.LSTDELST}</div>
+			<br />
+			<div>{last_del_fles}</div>
+		</div>
+		
+		<div class="fieldset">
+			<div class="fontst">{lang.AFILES_SIZE}</div>
+			<br />
+			<div>[ {files_sizes} ]</div>
+		</div>
 <!-- start users  number -->
-<table class="infocontrol">
-	<tr>
-		<td>{lang.AUSERS_NUM} : <b>[ {users_number} ]</b></td>
-		<td><IF NAME="config.user_system==1">{lang.LAST_REG} : <b>[ {lst_reg} ]</b></IF></td>
-	</tr>
-	<tr>
-		<td>{lang.AFILES_NUM} : <b>[ {files_number} ]</b></td>
-		<td> {lang.AFILES_SIZE} : <b>[ {files_sizes} ]</b></td>
-	</tr>
-</table>
+
 <!-- end files number  -->
 
 <!-- start  last google -->
@@ -96,6 +116,10 @@ $('div#{{id}}').pulse({
 	</tr>
 </table>	
 <!-- end  last yahoo -->	
+
+
+
+</fieldset>
 
 <!-- start clear  -->
 <div class="clr"></div><br />
@@ -147,7 +171,8 @@ $('div#{{id}}').pulse({
 		<td class="t_disk_size"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/disk_size.png" alt="{lang.SIZE_STAT}" /> {lang.SIZE_STAT}</td>
 	</tr>
 	<tr>
-		<td><strong style="color:#888">{lang.USING_SIZE}</strong>
+		<td>
+		<strong> {lang.AFILES_SIZE} : <b>[ {files_sizes} ]</b></strong>
 			<table class="tab-size" border="0" cellspacing="1" cellpadding="0" dir="ltr">
 				<tr>
 					<td style="width:33%;background-color:#97FF97;text-align:left;">0%</td>

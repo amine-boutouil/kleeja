@@ -278,7 +278,6 @@ $lang = array_merge($lang, array(
 	'LAST_YAHOO' => 'Last visit to Yahoo!',
 	'YAHOO_NUM' => 'Yahoo! visits',
 	'KLEEJA_CP_W' => 'Hi [ %s ] , Welcome to <b>Kleeja</b> administration panel',
-	'USING_SIZE' => 'Disk Usage',
 	'PHP_VER' => 'php version',
 	'MYSQL_VER' => 'mysql version',
 	'N_IMGS' => 'Images',

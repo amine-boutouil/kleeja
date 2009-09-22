@@ -4,9 +4,9 @@
 #
 # Filename : s_strings.php
 # purpose : find strings in texrt and add after in another text or replace it ..
-# copyright 2007-2008 Kleeja.com ..
-#license http://opensource.org/licenses/gpl-license.php GNU Public License
-# last edit by : saanina
+# copyright 2007-2009 Kleeja.com ..
+# license http://opensource.org/licenses/gpl-license.php GNU Public License
+# $Author$ , $Rev$,  $Date::                           $
 ##################################################
 
 //no for directly open
@@ -15,18 +15,20 @@ if (!defined('IN_COMMON'))
 	exit('no directly opening : ' . __file__);
 }
 
-//by : saanina@gmail.om  as experince .. not final version .
-// do_search (numbers) : 
-// 1 : to find and replace 
-// 2 : find and replace which between to sentences 
-// 3 : find and add after in new line 
-// 4 : find and add after in the same line
-// 5 : find and add before in new line 
-// 6 : find and add before in the same liner
 
-//more discussions about this file , mail me at saanina@gmail.com 
-// for real discuss , and in http://moffed.com
-// for try use the code in the end of  this file ;) 
+/*
+ * Text search engine ,we designed this system to perform 
+ * some actions for our plugins that make replacements in files
+ * 
+ * do_search (numbers) : 
+ * 1 : to find and replace 
+ * 2 : find and replace which between to sentences 
+ * 3 : find and add after in new line 
+ * 4 : find and add after in the same line
+ * 5 : find and add before in new line 
+ * 6 : find and add before in the same liner
+ */
+
 
 class sa_srch
 {
@@ -35,17 +37,17 @@ class sa_srch
 	var $find_word		=	''; 
 	var $another_word	=	''; 
 
-	
-	/*
-	initiat class
+
+	/**
+	* initiate class
 	*/
 	function do_search($type_of_do=1)
 	{
-		if($this->find_word == '' || $this->text == '')
+		if($this->text == '')
 		{
 			return false;
 		}
-		
+
 		switch($type_of_do):
 			case 1: 
 				$this->type_replace();
@@ -70,25 +72,14 @@ class sa_srch
 	}
 
 	/*
-	find and replace
+	* find and replace
 	*/
 	function type_replace($many = false)
-	{	
-		
-		if($this->another_word == '')
+	{
+		if($many || is_array($this->find_word))
 		{
-			return false;
-		}
-		
-		if($many)
-		{
-			if(!is_array($this->find_word))
-			{
-				return false;
-			}
-			
 			$md5_f = md5($this->text);
-			$this->text	= preg_replace('#' . preg_quote($this->find_word[0] , '#') . '(.*?)' . preg_quote($this->find_word[1], '#') . '#', $this->another_word, $this->text);
+			$this->text	= preg_replace('#' . $this->ig_sp_exper(preg_quote($this->find_word[0] , '#')) . '(.*?)' . $this->ig_sp_exper(preg_quote($this->find_word[1], '#')) . '#', $this->another_word, $this->text);
 			
 			//lets do it with another idea
 			if($md5_f == md5($this->text))
@@ -101,7 +92,7 @@ class sa_srch
 		else
 		{
 			$md5_f = md5($this->text);
-			$this->text	= preg_replace('#' . preg_quote($this->find_word, '#') . '#', $this->another_word, $this->text);
+			$this->text	= preg_replace('#' . $this->ig_sp_exper(preg_quote($this->find_word, '#')) . '#', $this->another_word, $this->text);
 			
 			//lets do it with another idea
 			if($md5_f == md5($this->text))
@@ -114,17 +105,12 @@ class sa_srch
 	}
 	
 	/*
-	find and add after 
+	* find and add after 
 	*/
 	function type_after($same_line=false)
 	{
-		if($this->another_word == '')
-		{
-			return false;
-		}
-		
 		$md5_f = md5($this->text);
-		$this->text	=	preg_replace('#' . preg_quote($this->find_word, '#')  . '#', $this->find_word . (!$same_line ? "\n" : "") . $this->another_word, $this->text);
+		$this->text	=	preg_replace('#' . $this->ig_sp_exper(preg_quote($this->find_word, '#'))  . '#',  $this->find_word . (!$same_line ? "\n" : "") . $this->another_word . (!$same_line ? "\n" : ""), $this->text);
 
 		//lets do it with another idea
 		if($md5_f == md5($this->text))
@@ -133,26 +119,36 @@ class sa_srch
 			$this->text = $ex[0] . $this->find_word . (!$same_line ? "\n" : "") . $this->another_word . $ex[1];
 		}
 	}
-	
+
 	/*
-	find and add before 
+	* find and add before 
 	*/
 	function type_before($same_line=false)
 	{
-		if($this->another_word == '')
-		{
-			return false;
-		}
-		
 		$md5_f = md5($this->text);
-		$this->text	=	preg_replace('#' . preg_quote($this->find_word, '#') . '#',   $this->another_word . (!$same_line ? "\n" : "")  . $this->find_word, $this->text);
+		$this->text	=	preg_replace('#' . $this->ig_sp_exper(preg_quote($this->find_word, '#')) . '#',   (!$same_line ? "\n" : "") . $this->another_word . (!$same_line ? "\n" : "")  . $this->find_word, $this->text);
 		
 		//lets do it with another idea
 		if($md5_f == md5($this->text))
 		{
 			$ex = explode($this->find_word, $this->text, 2);
-			$this->text = $ex[0] . $this->another_word . (!$same_line ? "\n" : "")  . $this->find_word . $ex[1];
+			$this->text = $ex[0] . (!$same_line ? "\n" : "") . $this->another_word . (!$same_line ? "\n" : "")  . $this->find_word . $ex[1];
 		}
 	}
+
+	/**
+	* Ignore spaces & other not important chars
+	*/
+	function ig_sp_exper($text)
+	{
+		//clean spaces
+		$text = str_replace("\t", ' ', $text);
+		$text = preg_replace("#\s{2,}#", ' ', $text);
+
+		//i can put * here, and will be very usefull, but will make
+		//space like not here !
+		$text = str_replace(' ', '\s+', $text);
+		return $text;
+	}
 }
-?>
+

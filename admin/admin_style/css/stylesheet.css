@@ -18,19 +18,17 @@
 
 /* middle */
 #divmiddle {width:68%;float: right;display:inline;margin:5px ;}
-#divmiddle .welcome {padding:4px 8px; margin:10px 2px; color:#000;vertical-align: absmiddle;display:block;font: normal 14px tahoma,verdana,arial,sans-serif;}
-#divmiddle .title {width: 94%; font: bold 18px tahoma,verdana,arial,sans-serif; letter-spacing: -1px;color:#FE7C00; margin:5px 2px;padding: 4px 8px;}
 /* middle */	
 				
 /* right  menu */	
 #rightmenu{float:right; width:26%; margin:5px ; padding: 10px; background: #EFE7B8;border: 4px solid #FEA53D;position: relative;-moz-border-radius: 8px; border-radius:1px;}
 #rightmenu .body-menu {text-align: center;}
-#rightmenu .link-menu ,#rightmenu .linkhome{float: right; height: 60px; width:48%; padding: 0; margin: 1px }
+#rightmenu .link-menu ,#rightmenu .linkhome{float: right; height: 60px; width:48%; margin: 1px }
 #rightmenu .link-menu{border:1px solid #a9a9a9;background: #E2E1DD url(../images/bg-right-menu.jpg) repeat;}
 #rightmenu  .link-menu-current {height: 60px; width:48%;padding:0px;margin:1px;background:#fff;} 
 #rightmenu .link-menu-current  a {color:#000;border-top: #FEA53D 3px solid;border-bottom: #FEA53D 3px solid;border-right: #FE6914 3px solid; border-left: #FE6914 3px solid;}
 #rightmenu .link-menu a,#rightmenu .linkhome a  {display: block;overflow: hidden;font-family:tahoma,verdana,arial,sans-serif;font-size: xx-small;font-weight: bold;padding:5px;}
-#rightmenu .link-menu img,#rightmenu .linkhome img {padding-bottom: 7px ;}
+#rightmenu .link-menu img,#rightmenu .linkhome img {padding-bottom:9px ;}
 #rightmenu .link-menu a:hover {text-decoration: none; background: #fff;color:#000;border-top: #FEA53D 3px solid;border-bottom: #FEA53D 3px solid;border-right: #FE6914 3px solid; border-left: #FE6914 3px solid;}
 #rightmenu .linkhome {background:#EFE7B8;border: 1px solid #EFE7B8;}
 #rightmenu .linkhome a:hover {text-decoration:none;border: #EFE7B8 3px solid;color:#000;}
@@ -49,7 +47,7 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 .clr { clear: both; overflow:hidden; height: 0;}
 .dot {padding: 3px 0;background: url(../images/dot.gif) repeat-x;}
 .exts {padding: 5px;font: bold 11px Tahoma, Helvetica, Arial, sans-serif; color: #0B55C4; }
-.s_box {	width: 150px; margin:2px; border-style:solid; border-width:1px;font-family:tahoma,verdana,arial,sans-serif; padding:2px 4px;text-align:center; color:#484848; border-color:#F8F834; font-weight: bold;background: #FFFFF3 url(../images/i2.gif) no-repeat top right;}
+.s_box {	width: 150px; margin:2px; border-style:solid; border-width:1px;padding:2px 4px;text-align:center; color:#484848; border-color:#F8F834; font-weight: bold;background: #FFFFF3 url(../images/i2.gif) no-repeat top right;}
 .s_box_tpls{width:99%;margin:2px 0; border:1px solid #6496C3; color:#000;padding:2px 4px; background-color:#FFFDD7;}
 .s_box_tpls_d{margin:2px; text-align:center;padding:2px 4px 2px 4px; background:#D7D7D7 url(../images/s_box_tpls_d.png) no-repeat 96% 50%;color:#000; width:20%; cursor: pointer;}
 .s_box_tpls_d:hover{color:#fff;	background-color:#FD6812; }
@@ -63,8 +61,24 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 /*  table no hover */
 	
 /* last visit */
-.welcom {width:100%;background:#EEE;margin-bottom:4px;font-size:12px;border-top:2px dotted #fff;border-bottom:2px dotted #fff;border-left:0px;border-right:0px}
-.last {font-size:12px;font-weight:normal;}
+.title {font: bold 20px tahoma,verdana,arial,sans-serif;color:#FD6812;padding: 4px 8px;}
+.fieldseuser {margin:10px;padding:10px 6px; border: 1px solid #7F7F7F;background:none; position: relative; -moz-border-radius: 4px; border-radius:1px;}
+.boxlastfp {float:right;line-height:18px;background:#EFE7B8;border-top:1px solid #FEA53D;border-bottom:1px solid #FEA53D;padding:6px;margin:3px;text-align:center;}
+.boxlastfp a {font-size:11px;font-weight: bold;color:#444}
+.boxlastfp a:hover {color:#000;text-decoration: none;}
+.boxlastfp:hover {background:#EFECDB;}
+.fieldsetinfo { margin:10px auto;padding:10px 6px; border: 1px solid #7F7F7F;background:#F3F3F2 url(../images/fieldsetinfo.png) no-repeat -5% -12%; position: relative; -moz-border-radius: 8px; border-radius:1px;}
+.fieldsetinfo legend {padding:0 6px;}
+
+.fieldset { float:right;width:27%;margin:10px 6px;padding:10px 6px; border: 1px solid #7F7F7F;background:#FFF; position: relative; -moz-border-radius:4px; border-radius:1px;}
+.fieldset legend {padding:0 6px;}
+.fieldset .fontst {text-align:center;font-size:10px;font-weight: bold;color:#0B55C4}
+.fieldset div {text-align:center;font-size:13px;font-weight: bold;color:#FD6812}
+
+.adminwelcome {padding:2px;color:#111;font: normal 14px tahoma,verdana,arial,sans-serif;}
+
+.welcom {margin:2px 0;font-size:11px;}
+.last {font-weight:normal;}
 .infocontrol {width:100%;background:#F7F7F7;margin-bottom:4px;font-size:11px;border-top:2px ridge #fff;border-bottom:2px ridge #fff;border-left:0px;border-right:0px}
 .infocontrol td{background:#F7F7F7;width:50%;padding:11px 5px;border-bottom:0px;text-align: right;}
 .infocontrol:hover { background:#DBE1F8}
@@ -76,7 +90,7 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 .data { font-weight: bold;font-size:11px;border: 1px dashed #D2D6FF}
 .data  tr{ background:#F7F7F7;}
 .data  td{border-top:1px ridge #D2D6FF;border-bottom:1px ridge #D2D6FF;padding:2px 10px; }
-#other-info .team{display:block;padding:5px 10px;font-size:12px;text-align:left;font-weight:normal;}
+#other-info .team{display:block;padding:5px 10px;text-align:left;font-weight:normal;}
 /* other info  */
 
 /*  disk_size */
@@ -148,7 +162,7 @@ tr:hover {background-color:#FFFFDD;}
 .oblue{background-color:#EFB8C0;}
 .oblue td{border-top:2px solid #C87C87;border-bottom:2px solid #C87C87;}
 .oblue:hover {background-color:#EFB8C0;}
-.styles_exp{padding: 10px;font-size:12px;font-weight: bold;color:#000;}
+.styles_exp{padding: 10px;font-weight: bold;color:#000;}
 .osilver {background-color:#eee;}
 .file_cp1 {width:100%; margin: 5px 0; position: relative;overflow:auto;}
 .small_font {padding: 5px;font-size:11px;font-weight: bold;}
@@ -159,7 +173,7 @@ tr:hover {background-color:#FFFFDD;}
 .s_tpl_x, .s_tpl_x:focus{width:100%;direction:ltr;font-size:13px;background-color:#fff;border:1px #ccc solid;}
 
 .s_tpl_x OPTGROUP {margin:5px 0;background-color:#EFE7B8;border-top:1px solid #FEA53D;border-bottom:1px solid #FEA53D;padding:10px;font:bold 12px Tahoma, Arial, Helvetica, sans-serif;color:#003F9D}
-.s_tpl_x option {direction:ltr;border-top: 1px solid #999;border-bottom: 1px solid #999;padding:4px 8px; margin:2px 0; background:#F5F5F5;position: relative;color:#FD6812;font-size:12px;font-weight: bold;}
+.s_tpl_x option {direction:ltr;border-top: 1px solid #999;border-bottom: 1px solid #999;padding:4px 8px; margin:2px 0; background:#F5F5F5;position: relative;color:#FD6812;font-weight: bold;}
 .s_tpl_x option:hover {border-top: 1px solid #111;border-bottom: 1px solid #111;background-color:#FD6812;color:#fff;}
 /* / tpl */
 
@@ -175,7 +189,7 @@ tr:hover {background-color:#FFFFDD;}
 .title_other_conf1gs{background:#F3D1C9 url(../images/other_conf1gs.png) no-repeat 98% 50%;color:#BB0000;border-top:2px solid #A66758;border-bottom:2px solid #A66758;border-left:1px dotted #aaa;border-right:1px dotted #aaa;}
 /* / config page */
 
-.imgtitle {margin:0 6px;vertical-align:middle;}
+.imgtitle {margin-left:6px;vertical-align:middle;}
 
 .adminstrators { background: url(../images/adminstrators.gif) no-repeat 100% 70%;margin:0 auto;width:70%;padding:5px 25px;font:bold 11px Tahoma, Arial, Helvetica, sans-serif;}
 .adminstrators a{color:red}
@@ -200,5 +214,5 @@ tr:hover {background-color:#FFFFDD;}
 .update_info,.update_error{list-style: none; padding:30px 8px;text-indent:35px;font-size:11px;font-weight:bold;}
 .update_info{ color:000; border-top: 3px solid #FEA53D;border-bottom: 3px solid #FEA53D;background:#EFE7B8 url(../images/info.png) no-repeat 99% 50%;}
 .update_error{color:#CE0000;border-top: 3px solid #DE7A7B; border-bottom: 3px solid #DE7A7B;background: #E6C0C0 url(../images/error.png) no-repeat 99% 50%;}
-.link_copy {background:#E8E8E8;padding:10px; border-top:1px solid #ccc;border-bottom:1px solid #ccc;color:#666;direction:ltr;font-size:12px;font-weight:bold;}
+.link_copy {background:#E8E8E8;padding:10px; border-top:1px solid #ccc;border-bottom:1px solid #ccc;color:#666;direction:ltr;font-weight:bold;}
 /* # for check_update*/

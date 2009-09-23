@@ -59,7 +59,7 @@ $(document).ready(function() { $('#template_content').markItUp(mySettings); });
 <div class="clr"></div><br />
 <!-- end clear  -->
 
-<fieldset class="quick">
+<div class="quick">
 
 <IF NAME="not_style_writeable">
 <!-- start info System Messages -->
@@ -73,10 +73,10 @@ $(document).ready(function() { $('#template_content').markItUp(mySettings); });
 <!-- end info System Messages -->
 
 <ELSE>
-        <input class="button2" name="tpl_edit_submit" type="submit" value="{lang.SUBMIT}" />
+        <input name="tpl_edit_submit" type="submit" value="{lang.SUBMIT}" />
 </IF>
 
-</fieldset>
+</div>
 
 </div>
 <!-- end div border table  -->

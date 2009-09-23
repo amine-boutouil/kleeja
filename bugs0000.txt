@@ -28,7 +28,4 @@ X> ابشر للحين ما خلصت اللوحة راح احاول ابرزها
 
 =========================================
 
-http://localhost/kleeja/admin/index.php?cp=php_info
-
-عرض معلومات البي اتش بي .. سبق وان تم المفاهمة مع عبدالرحمن على وضع شرط في حالة عدم تفعيل الدالة لا يظهر الخيار ..
-ولكنه يظهر الآن حتى والدالة معطلة واذا طلبت القالب تخرج صفحة بيضاء .. هذا في السيرفرات التي اعتمدت تعطيل دالة phpinfo
+Warning: array_diff_assoc(): Argument #2 is not an array in c:\appserv\www\kleeja\includes\adm\styles.php on line 107

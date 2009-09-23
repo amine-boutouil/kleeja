@@ -3,6 +3,20 @@
 # Designed by Tar3q .... Tar3q.com
 # copyright 2007-2009  ..
 */
+body { background:#C8C8C8 url(../images/body.png) top center no-repeat fixed;font: bold 11px Tahoma, Arial, Helvetica, sans-serif;text-align: justify;color: #5C5C5C;line-height: 1;}
+h1, h2, h3 {	margin: 0;text-transform:lowercase;font-weight: normal;color: #FFFFFF;}
+h1 {	letter-spacing: -1px; font-size: 32px;}
+h2 {font-size: 13px; font-weight: bold; color:#EF5E00; text-shadow: 0px 1px rgb(247, 247, 247);margin: 5px 0}
+p, ul, ol { margin: 0; text-align: justify; line-height: 26px;list-style: none;}
+a:link, body_alink {color: #666;text-decoration: none;padding:2px;}
+a:visited, body_avisited {color: #666;	text-decoration: none;padding:2px;}
+a:hover, a:active, body_ahover {color:#D2691E;text-decoration:underline;padding:2px;}
+input:focus, textarea:focus ,select :focus{background-color: #ffd ;border: 1px solid #D26900;}
+option {padding-right: 1em;}
+textarea { width:60%;padding:2px;font-size:12px;line-height: 1.4em;}
+input {font-weight: normal; vertical-align: middle;padding:2px;font-size:12px;border: 1px solid #BCBCBC; background-position: 0 100%;color: #111;}
+select {font-weight: normal;cursor: pointer;vertical-align: middle;border: 1px solid #666666;padding: 1px;background-color: #FAFAFA;}
+input, textarea, select {font-size: 13px;color: #333333;}
 img.left {float: left;margin-right:15px;}
 img.right {float: right;margin-left:15px;}
 
@@ -313,7 +327,7 @@ background:#FF9933 url(../images/headline_bg.png) repeat-x top right;color:#111;
 .index_info,.index_err {display:block;padding:15px 10px;text-indent:30px;}
 .index_info {border-top: 3px solid #84A0C0;border-bottom: 3px solid #84A0C0;color:#004776;background:#C2D3E7;}
 .index_err {border-top: 3px solid #DE7A7B;border-bottom: 3px solid #DE7A7B;color:#c00;background:#E6C0C0;}
-.index_info  li {background-image:url(../images/info_f.png);background-repeat:no-repeat;background-position:no-repeat right top}
+.index_info  li {background-image:url(../images/info_f.png);background-repeat:no-repeat;background-position:right top}
 .index_err li {background-image:url(../images/err.png);background-repeat:no-repeat;background-position:right top }
 .index_err span,.index_info  span {color:#444;}
 /*  # Message Information System */

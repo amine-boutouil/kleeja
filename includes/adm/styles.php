@@ -104,6 +104,13 @@ switch ($_GET['sty_t'])
 					//get style detalis
 					$style_details1 = array('name'=>'[!]', 'version'=> '[!]', 'copyright'=>'[!]', 'kleeja_version'=>'[!]', 'depend_on'=>$lang['NONE']);
 					$style_details = kleeja_style_info($style_id);
+					
+					//fix if not array
+					if(!is_array($style_details))
+					{
+						$style_details = array();
+					}
+
 					$style_details += array_diff_assoc($style_details1, $style_details);
 
 					//get_tpls

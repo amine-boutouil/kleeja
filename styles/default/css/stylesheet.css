@@ -309,15 +309,25 @@ background:#FF9933 url(../images/headline_bg.png) repeat-x top right;color:#111;
 .user_ext:hover{background-color:#fff;color:#FD6812}
 /* #  template list of files allowed > guide.html */
 
-.thumb_div_tag {margin:2px auto;}
-.thumb_div_tag img{background:#FFF;border:1px solid #D20000;padding:5px}
+/* Message Information System */
+.index_info,.index_err {display:block;padding:15px 10px;text-indent:30px;}
+.index_info {border-top: 3px solid #84A0C0;border-bottom: 3px solid #84A0C0;color:#004776;background:#C2D3E7;}
+.index_err {border-top: 3px solid #DE7A7B;border-bottom: 3px solid #DE7A7B;color:#c00;background:#E6C0C0;}
+.index_info  li {background-image:url(../images/info_f.png);background-repeat:no-repeat;background-position:no-repeat right top}
+.index_err li {background-image:url(../images/err.png);background-repeat:no-repeat;background-position:right top }
+.index_err span,.index_info  span {color:#444;}
+/*  # Message Information System */
 
-.index_info {display:block;width:73%;border-top: 3px solid #84A0C0;border-bottom: 3px solid #84A0C0;color:#004776;background:#C2D3E7 url(../images/info_f.png) no-repeat 99% 2%;padding:10px;text-indent:30px;}
-.index_err {display:block;width:75%;border-top: 3px solid #DE7A7B;border-bottom: 3px solid #DE7A7B;color:#c00;background:#E6C0C0 url(../images/err.png) no-repeat 99% 2%;padding:5px;text-indent:30px;}
-.index_err strong,.index_info  strong {vertical-align:middle;line-height:25px}
-
-.all_boxes{width:98%;color:#004776;border:1px solid #80FFFF;outline:1px solid #84A0C0;direction:ltr;}
-.all_boxes:focus {background-color:#D9FDFF;border: 1px solid #005F9D;color:#111}
+/* #  template up > up_boxes.html */
+.thumb_div_tag {width:30%;margin:4px auto;text-indent:4px;}
+.thumb_div_tag img{background:#FFF;border:2px solid #84A0C0;padding:5px}
+.thumb_div_tag img:hover{border:2px solid #111}
+.inputbody {margin:4px 2px;border:1px solid #84A0C0;padding:10px;-moz-border-radius:9px;-webkit-border-radius:9px;-khtml-border-radius:9px;border-radius:9px;}
+.btitle {line-height:14px;color:#000;text-align:center;padding:2px 6px;text-indent:0px;}
+.all_boxes{float:left;width:98%;color:#004776;border:1px solid #005F9D;outline:1px solid #84A0C0;direction:ltr;padding:4px 6px;}
+.all_boxes:hover{border:1px solid #111;color:#111}
+.all_boxes:focus {background-color:#D9FDFF;border: 1px solid #0081F9;color:#000}
+/* # template up > up_boxes.html */
 
 .debug_kleeja{width:80%;margin:0 auto;background-color:#fff;border:1px #666 solid;margin-top:20px;margin-bottom:20px;}
 .debug_kleeja fieldset{margin:0 auto;width:80%;}

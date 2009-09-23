@@ -148,20 +148,20 @@ if ($show_online)
 	unset($online_names, $timeout, $timeout2);
 
 	/**
-	*	Wanna increase your onlines counter ..you can from next line 
-	*	but you must know this is illegal ... 
+	* Wanna increase your onlines counter ..you can from next line 
+	* but you must know this is illegal ... 
 	*/
 	$allnumbers = $usersnum + $visitornum;
 
 	//check & update most ever users and vistors was online 
-	if($stat_most_user_online_ever < $allnumbers)
+	if((int)$stat_most_user_online_ever < $allnumbers)
 	{
 		$stat_most_user_online_ever = $allnumbers;
 		$stat_last_muoe				= time();
 
 		$SQL->build(array(
 						'UPDATE'	=> "{$dbprefix}stats",
-						'SET'	=> "most_user_online_ever='" . intval($allnumbers) . "', last_muoe='" . time() . "'"
+						'SET'		=> "most_user_online_ever='" . intval($allnumbers) . "', last_muoe='" . time() . "'"
 					));
 
 		//refresh cached stats

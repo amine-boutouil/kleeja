@@ -4,6 +4,28 @@
 # copyright 2007-2009  ..
 */
 
+body {background: #FFFFFF url(../images/adm-body.jpg) repeat-x ;	color: #3D3D3D; margin: 0 ;	padding: 0;	font: normal 12px Tahoma, Arial, Helvetica, sans-serif; }
+h2 {	padding-bottom: 4px; color: #FD6812; font: bold 18 Tahoma, Arial, Helvetica, sans-serif;}
+li {list-style: none;}
+ul{margin: 0 0 4px 0; text-align: justify; line-height: 26px;}
+img {border:0px;}
+a:link    { color: #0B55C4; text-decoration: none; }
+a:visited { color: #0B55C4; text-decoration: none; }
+a:hover   { text-decoration: underline; }
+textarea {	font: 11px tahoma,verdana,arial,sans-serif; width: 60%; padding: 2px;cursor: text; vertical-align: middle; color: #000;border-left: 1px solid #AFAEAA; border-top: 1px solid #AFAEAA; border-right: 1px solid #D5D5C8;border-bottom: 1px solid #D5D5C8; background-color:#D8D8D8;}
+label { cursor: pointer;padding: 0 5px 0 0;}
+fieldset { margin:1px 5px;padding:20px; border: 4px solid #6496C3;	background-color: #B0D2F6; position: relative; -moz-border-radius: 8px; border-radius:1px;}
+legend { padding:0 5px; font:bold 11px tahoma,verdana,arial,sans-serif;color: #115098; margin-top: -.4em; position: relative; text-transform: none;line-height: 1.2em; top: 0; vertical-align: middle;}
+select ,option{font:normal 11px tahoma,verdana,arial,sans-serif;cursor: pointer; vertical-align: middle; width: auto; color: #000; padding:1px 5px;}
+input { margin-right:2px;margin-left:2px;}
+input[type="submit"] :{font:normal 11px tahoma,verdana,arial,sans-serif;padding:2px 5px;font-family:tahoma;}
+input[type="text"] {font:normal 11px tahoma,verdana,arial,sans-serif;}
+
+input[type="text"]:focus,
+select:focus, 
+textarea:focus  {background-color:#CCFFFF ;border: 1px solid #6699FF;}
+
+
 /* header */
 #divheader { width: 94%; margin: 10px auto 0px auto ; padding: 10px;border-top: 1px solid #D7D7D7; border-right: 1px solid #CCCCCC; border-bottom: 1px solid #CCCCCC; border-left: 1px solid #D7D7D7;background: #F3F3F3 url(../images/div-header.jpg) repeat-x;-moz-border-radius-topleft: 10px;-webkit-border-top-left-radius: 10px;-moz-border-radius-bottomright: 10px;-webkit-border-bottom-right-radius: 10px;}
 #header { width: 100%; height: 78px; padding: 0; margin:0;  }
@@ -74,6 +96,7 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 .fieldset legend {padding:0 6px;}
 .fieldset .fontst {text-align:center;font-size:10px;font-weight: bold;color:#0B55C4}
 .fieldset div {text-align:center;font-size:13px;font-weight: bold;color:#FD6812}
+
 
 .adminwelcome {padding:2px;color:#111;font: normal 14px tahoma,verdana,arial,sans-serif;}
 

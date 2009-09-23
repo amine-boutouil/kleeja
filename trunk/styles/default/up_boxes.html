@@ -1,55 +1,60 @@
+<div class="clr"></div>
+
 <!-- BEGIN image_thumb -->
-<div class="thumb_div_tag"><a target="_blank" href="{b_url_link}"><img src="{b_img_link}" class="thumb_img_tag" /></a></div>
+	<div class="thumb_div_tag"><a onclick="window.open(this.href,'_blank');return false;" href="{b_url_link}"><img src="{b_img_link}" alt="" class="thumb_img_tag" /></a></div>
 
 <div class="clr"></div>
 
-{b_title}:
-
-<div class="clr"></div>
-
-<textarea class="all_boxes" onclick="this.select();" readonly="readonly">[url={siteurl}][img]{b_img_link}[/img][/url]</textarea>
+	<fieldset class="inputbody">
+		<legend class="btitle">{b_title}</legend>
+		<input readonly="readonly" class="all_boxes" onclick="this.select();" type="text" value="[url={siteurl}][img]{b_img_link}[/img][/url]" />
+	</fieldset>
 	
 <div class="clr"></div>
 <!-- END image_thumb -->
 
 <!-- BEGIN image -->
-{b_bbc_title}:
+	<fieldset class="inputbody">
+		<legend class="btitle">{b_bbc_title}</legend>
+		<input readonly="readonly" class="all_boxes" onclick="this.select();" type="text" value="[url={siteurl}][img]{b_url_link}[/img][/url]" />
+	</fieldset>
+
 <div class="clr"></div>
 
-	<textarea class="all_boxes" onclick="this.select();" readonly="readonly">[url={siteurl}][img]{b_url_link}[/img][/url]</textarea>
+	<fieldset class="inputbody">
+		<legend class="btitle">{b_title}</legend>
+		<input readonly="readonly" class="all_boxes" onclick="this.select();" type="text" value="{b_url_link}" />
+	</fieldset>
 	
-<div class="clr"></div>
+<!-- END image -->		
 
-{b_title}:
 <div class="clr"></div>
-
-	<textarea class="all_boxes" onclick="this.select();" readonly="readonly">{b_url_link}</textarea>
-	
-<div class="clr"></div>
-<!-- END image -->
 
 <!-- BEGIN file -->
-{b_title}:
-<div class="clr"></div>
 
-	<textarea class="all_boxes" onclick="this.select();" readonly="readonly">{b_url_link}</textarea>
-	
-<div class="clr"></div>
-
-{b_bbc_title}:
+	<fieldset class="inputbody">
+		<legend class="btitle">{b_title}</legend>
+		<input readonly="readonly" class="all_boxes" onclick="this.select();" type="text" value="{b_url_link}" />
+	</fieldset>
 
 <div class="clr"></div>
 
-	<textarea class="all_boxes" onclick="this.select();" readonly="readonly">[url={b_url_link}]{b_url_link}[/url]</textarea>
-	
-<div class="clr"></div>
+	<fieldset class="inputbody">
+		<legend class="btitle">{b_bbc_title}</legend>
+		<input readonly="readonly" class="all_boxes" onclick="this.select();" type="text" value="[url={b_url_link}]{b_url_link}[/url]" />
+	</fieldset>
+		
 <!-- END file -->
 
-<!-- BEGIN del_file_code -->
-{b_title}:
 <div class="clr"></div>
 
-	<textarea  class="all_boxes" onclick="this.select();" readonly="readonly">{b_code_link}</textarea>
-	
-<div class="clr"></div>
+<!-- BEGIN del_file_code -->
+
+	<fieldset class="inputbody">
+		<legend class="btitle">{b_title}</legend>
+		<input readonly="readonly" class="all_boxes" onclick="this.select();" type="text" value="{b_code_link}" />
+	</fieldset>
+
 <!-- END del_file_code -->
+
+<div class="clr"></div><br />

@@ -29,3 +29,9 @@ X> ابشر للحين ما خلصت اللوحة راح احاول ابرزها
 =========================================
 
 Warning: array_diff_assoc(): Argument #2 is not an array in c:\appserv\www\kleeja\includes\adm\styles.php on line 107
+
+==========================================
+
+آخر زيارة لك : [01-01-1970], [03:00 am] 
+
+العام 1970

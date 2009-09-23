@@ -47,31 +47,27 @@ $('div#{{id}}').pulse({
 <div class="clr"></div>
 <!-- end clear  -->
 
-
-
-<fieldset class="fieldsetinfo">
-	<legend>{lang.KLEEJA_CP}</legend>
-<br />
-<div class="adminwelcome"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/heart.png" alt="Kleeja love you ..," />{usernamelang}</div>
-<div class="clr"></div>
 <!-- start welcome user admin -->
-		<fieldset class="fieldseuser">
-			<legend>{lang.LAST_VISIT} : <span>{last_visit}</span></legend>
-			<div class="boxlastfp">{lang.LSTFLE_ST} : <IF NAME="stat_last_file!='0'"><a href="{last_file_up_url}" onclick="window.open(this.href,'_blank');return false;">{last_file_up}</a><ELSE>{lang.UNKNOWN}</IF></div>
-<div class="clr"></div>
+<fieldset class="fieldsetinfo">
+		<legend>{lang.LAST_VISIT} : <span>{last_visit}</span></legend>
+				<div class="adminwelcome"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/heart.png" alt="Kleeja love you ..," />{usernamelang}</div>
+			<div class="clr"></div>
+				<div class="boxlastfp">{lang.LSTFLE_ST} : <IF NAME="stat_last_file!='0'"><a href="{last_file_up_url}" onclick="window.open(this.href,'_blank');return false;">{last_file_up}</a><ELSE>{lang.UNKNOWN}</IF></div>
+			<div class="clr"></div>
 			<IF NAME="last_visit">
-<div class="boxlastfp"><a href="{h_lst_imgs}">{lang.IMG_LST_VST_SEARCH}</a></div>
-
- 
-<div class="boxlastfp"><a href="{h_lst_files}">{lang.FLS_LST_VST_SEARCH}</a></div>
-</IF>
-		</fieldset>
-
-<div class="clr"></div>
-
+				<div class="boxlastfp"><a href="{h_lst_imgs}">{lang.IMG_LST_VST_SEARCH}</a></div>
+				<div class="boxlastfp"><a href="{h_lst_files}">{lang.FLS_LST_VST_SEARCH}</a></div>
+			</IF>
+</fieldset>
 <!-- end  welcome user admin -->
 
+<!-- start clear  -->
+<div class="clr"></div>
+<!-- end clear  -->
 
+
+<fieldset class="fieldseuser">
+	<legend>{lang.KLEEJA_CP}</legend>
 <!-- start clear  -->
 <div class="clr"></div>
 <!-- end clear  -->

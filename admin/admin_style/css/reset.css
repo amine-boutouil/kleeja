@@ -39,7 +39,6 @@ border-collapse: separate;
 border-spacing: 0;
 }
 caption, th, td {
-text-align: right;
 font-weight: normal;
 }
 blockquote:before, blockquote:after,

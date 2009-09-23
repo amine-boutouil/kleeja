@@ -156,6 +156,17 @@ class usrcp
 					{
 						$this->kleeja_set_cookie('ulogu', $this->en_de_crypt($row['id'] . '|' . $row['password'] . '|' . $expire . '|' . $hash_key_expire), $expire);
 					}
+					else
+					{
+						//update now !!
+						$update_last_visit = array(
+									'UPDATE'	=> "`{$dbprefix}users`",
+									'SET'		=> "last_visit=" . time() . "",
+									'WHERE'		=>	"id='" . intval($row['id']) ."'"
+							);
+
+						$SQL->build($update_last_visit);
+					}
 				}
 		
 				($hook = kleeja_run_hook('qr_while_usrdata_n_usr_class')) ? eval($hook) : null; //run hook

@@ -15,7 +15,7 @@ a:visited { color: #0B55C4; text-decoration: none; }
 a:hover   { text-decoration: underline; }
 label { cursor: pointer;padding: 0 5px 0 0;}
 fieldset { margin:1px 5px;padding:20px; border: 4px solid #6496C3;	background-color: #B0D2F6; position: relative; -moz-border-radius: 8px; border-radius:1px;}
-legend { padding:0 5px; font-weight:bold;font-size:12px;color: #115098; margin-top: -.4em; position: relative; text-transform: none;line-height: 1.2em; top: 0; vertical-align: middle;}
+legend { padding:0 5px; font-weight:bold;font-size:12px;color: #115098; margin-top: -.4em; position: relative; text-transform: none;line-height: 1.2em; top: 0; vertical-align: middle;font:bold 11px Tahoma, Arial, Helvetica, sans-serif;}
 select ,option{cursor: pointer; vertical-align: middle; width: auto; color: #000; padding:1px 5px;font:normal 12px Tahoma, Arial, Helvetica, sans-serif;}
 textarea {font:normal 12px Tahoma, Arial, Helvetica, sans-serif; cursor: text; vertical-align: middle; padding: 2px; color: #000;border-left: 1px solid #AFAEAA; border-top: 1px solid #AFAEAA; border-right: 1px solid #D5D5C8;border-bottom: 1px solid #D5D5C8; background-color:#F2F2F2;}
 input { padding:3px 6px;margin-right:2px;margin-left:2px;font:normal 12px Tahoma, Arial, Helvetica, sans-serif;}
@@ -53,7 +53,7 @@ textarea:focus  {background-color:#DFEFFF;border: 1px solid #84A0C0;}
 #rightmenu .link-menu{border:1px groove #C8BD7C;background: #E2E1DD url(../images/bg-right-menu.jpg) repeat;}
 #rightmenu  .link-menu-current {height: 60px; width:48%;padding:0px;margin:1px;background:#fff;} 
 #rightmenu .link-menu-current  a {color:#000;border-top: #FEA53D 3px solid;border-bottom: #FEA53D 3px solid;border-right: #FE6914 3px solid; border-left: #FE6914 3px solid;}
-#rightmenu .link-menu a  {display: block;overflow: hidden;font-size: xx-small;font-weight: bold;padding:5px;}
+#rightmenu .link-menu a  {display: block;overflow: hidden;color:#0033CC;font-size: xx-small;font-weight: bold;padding:5px;}
 #rightmenu .link-menu img {padding-bottom:10px ;}
 #rightmenu .link-menu a:hover {text-decoration: none; background: #fff;color:#000;border-top: #FEA53D 3px solid;border-bottom: #FEA53D 3px solid;border-right: #FE6914 3px solid; border-left: #FE6914 3px solid;}
 #rightmenu .linkhome img {padding-bottom:3px ;}
@@ -86,18 +86,21 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 .tab-no-hover td {padding: 3px 5px; border-top: solid 1px #D2D2D2;border-bottom: solid 1px #E4E4E4;border-left: solid 1px #D2D2D2;border-right: solid 1px #D2D2D2;}
 .tab-no-hover tr:hover {background-color:transparent;}
 /*  table no hover */
+
 	
 /* last visit */
-.fieldsetinfo { margin:10px auto;padding:10px 6px; border: 1px solid #7F7F7F;background:#F3F3F2 url(../images/fieldsetinfo.png) no-repeat -2% -100%; position: relative; -moz-border-radius: 8px; border-radius:1px;}
-.fieldsetinfo legend {padding:0 6px;}
+.title {font-weight:bold;font-size:18px;color:#FD6812;padding: 4px 8px;}
+.fieldsetinfo { margin:10px auto;padding:10px 6px; border: 1px solid #7F7F7F;background:#F3F3F2 url(../images/fieldsetinfo.png) no-repeat -8% -80%; position: relative; -moz-border-radius: 8px; border-radius:1px;}
+.fieldsetinfo legend {padding:0 6px;color:#CC0000}
+.fieldseuser {margin:10px;padding:10px 6px; border: 1px solid #7F7F7F;background:#F3F3F2; position: relative; -moz-border-radius: 4px; border-radius:1px;}
 
-.title {font-weight:bold;font-size:20px;color:#FD6812;padding: 4px 8px;}
-.fieldseuser {margin:10px;padding:10px 6px; border: 1px solid #7F7F7F;background:none; position: relative; -moz-border-radius: 4px; border-radius:1px;}
-.boxlastfp {float:right;line-height:18px;background:#EFE7B8;border-top:1px solid #FEA53D;border-bottom:1px solid #FEA53D;padding:6px;margin:3px;text-align:center;}
+
+.boxlastfp {float:right;width:30%;line-height:18px;background:#EFE7B8;border:1px solid #FEA53D;-moz-border-radius: 4px; border-radius:1px;padding:6px;margin:1px 3px 2px 6px;text-align:center;}
 .boxlastfp a {font-size:11px;font-weight: bold;color:#444}
 .boxlastfp a:hover {color:#000;text-decoration: none;}
 .boxlastfp:hover {background:#EFECDB;}
-
+.toplast {width:64%;line-height:14px;padding:6px;margin:2px 3px;text-align:right;}
+.lasttime {float:right;width:64%;margin:1px 3px;padding:3px 6px;color:#008000; }
 
 .fieldset { float:right;width:27%;margin:10px 6px;padding:10px 6px; border: 1px solid #7F7F7F;background:#FFF; position: relative; -moz-border-radius:4px; border-radius:1px;}
 .fieldset legend {padding:0 6px;}
@@ -105,7 +108,7 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 .fieldset div {text-align:center;font-size:13px;font-weight: bold;color:#FD6812}
 
 
-.adminwelcome {padding:2px;color:#111;font-size:14px;}
+.adminwelcome {padding:2px;color:#0000FF;font-size:11px;font-weight: bold;}
 
 .welcom {margin:2px 0;font-size:11px;}
 .last {font-weight:normal;}
@@ -124,12 +127,13 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 /* other info  */
 
 /*  disk_size */
-.disk_size{margin-top:10px; padding: 10px; font-weight: bold;border-top:2px dotted #fff;border-bottom:2px dotted #eee;border-left:0px;border-right:0px}
+.boxsizestat {float:right;width:200px;display:inline;padding:6px;}
+.sizestat {background:#EFE7B8;border:1px solid #FEA53D;-moz-border-radius: 4px; border-radius:1px;padding:6px;margin:1px 3px 2px 6px;text-align:center;}
+.statallfils {background:#EFE7B8;border:1px solid #FEA53D;-moz-border-radius: 4px; border-radius:1px;padding:6px;margin:1px 3px 2px 6px;text-align:center;}
+.perlstat {float:left;width:55%;display:inline;padding:6px;margin:1px 3px 2px 6px;text-align:center;}
+.disk_size{padding: 5px; font-weight: bold;border-top:2px dotted #fff;border-bottom:2px dotted #eee;border-left:0px;border-right:0px}
 .disk_size tr{background:#F2F2F2}
 .t_disk_size{background:#E8E8E8;padding:10px; font-size:14px;color:#000;text-align:right}
-.tab-size {border-collapse: collapse; margin-top:10px;width:100%; padding:5px ;cursor: text; }
-.tab-size tr {height: 24px;border-width:0px;}
-.tab-size td {padding: 3px 5px; border: 1px solid #F2F2F2;}
 .disk_size tr:hover {background-color:#F2F2F2;}
 .filsiz{padding:3px; font-weight:bold;font-size:30px;color:#D0D0D0;text-align:center}
 /*  disk_size */

@@ -73,7 +73,7 @@
 <ELSE>
 <LOOP NAME="arr">
         <tr id="su[{{id}}]" class="osilver">
-                <td><label><input type="text" name="nm_{{id}}" value="{{name}}" size="32"></label> <br />
+                <td style="text-align:center"><label><input type="text" name="nm_{{id}}" value="{{name}}" size="32"></label> <br />
 				<small><a href="{{delusrfile_link}}" onclick="javascript:return confirm_from();">{lang.ADMIN_DELETE_FILES}</a> | <a target="_blank" href="{{userfile_link}}">{lang.BROSWERF}</a></small>
 
 				</td>
@@ -87,11 +87,11 @@
 </IF>
 </table>
 
-<fieldset class="quick">
+<div class="quick">
 <div style="text-align:center">{page_nums}
-                <input class="button2" name="submit" type="submit" value="{lang.UPDATE_USERS}" />
+                <input name="submit" type="submit" value="{lang.UPDATE_USERS}" />
 </div>
-</fieldset>
+</div>
 
 </form>
 </div>
@@ -130,7 +130,7 @@
                 <!-- admin users data tr extra -->
 </table>
 
-<fieldset class="quick" style="text-align:center"><input class="button2" name="newuser" type="submit" value="{lang.SUBMIT}" /></fieldset>
+<fieldset class="quick" style="text-align:center"><input name="newuser" type="submit" value="{lang.SUBMIT}" /></fieldset>
 
 </div>
 

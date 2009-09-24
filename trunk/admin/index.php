@@ -178,7 +178,7 @@
 	//exception of 406 ! dirty hosting
 	if($go_to == 'options')
 	{
-		$go_to = 'configs';
+		$go_to = 'a_configs';
 	}
 	
 	//no requst or wrong !

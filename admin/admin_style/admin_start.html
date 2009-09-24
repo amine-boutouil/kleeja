@@ -53,13 +53,17 @@ $('div#{{id}}').pulse({
 		<legend>{lang.KLEEJA_CP}</legend>
 			<div class="adminwelcome"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/heart.png" alt="Kleeja love you ..," />{usernamelang}</div>
 			<div class="clr"></div>
+
+			<div class="boxlastfp lasttime">{lang.LAST_VISIT} : <b>{last_visit}</b></div>
+
 			<IF NAME="last_visit"><div class="boxlastfp lasttime">{lang.LAST_VISIT} : <span>{last_visit}</span></div></IF>
+
 			<div class="clr"></div>
 				<div class="boxlastfp toplast">{lang.LSTFLE_ST} : <IF NAME="stat_last_file!='0'"><a href="{last_file_up_url}" onclick="window.open(this.href,'_blank');return false;">{last_file_up}</a><ELSE>{lang.UNKNOWN}</IF></div>
 			<div class="clr"></div>
 			<IF NAME="last_visit">
-				<div class="boxlastfp"><a href="{h_lst_imgs}">{lang.IMG_LST_VST_SEARCH}</a></div>
-				<div class="boxlastfp"><a href="{h_lst_files}">{lang.FLS_LST_VST_SEARCH}</a></div>
+				<div class="boxlastfp"><a href="{h_lst_imgs}"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/viewpicture.png" alt="Kleeja love you ..," />{lang.IMG_LST_VST_SEARCH}</a></div>
+				<div class="boxlastfp"><a href="{h_lst_files}"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/viewfiles.png" alt="Kleeja love you ..," />{lang.FLS_LST_VST_SEARCH}</a></div>
 			</IF>
 </fieldset>
 <!-- end  welcome user admin -->
@@ -69,28 +73,28 @@ $('div#{{id}}').pulse({
 <!-- end clear  -->
 
 <!-- start stat  disk size -->
-<fieldset class="fieldsetinfo">
+<fieldset class="fieldsetinfo bgfilestat">
 		<legend>{lang.SIZE_STAT}</legend>
 			<div class="boxsizestat">
-			<div class="sizestat"> {lang.AFILES_NUM} <br />[ {files_number} ]</div><br />
-			<div class="statallfils"> {lang.AFILES_SIZE} <br />[ {files_sizes} ]</div>
+			<div class="statallfils">{lang.AFILES_NUM} <span>[ {files_number} ]</span> {lang.AFILES_SIZE} <span>[ {files_sizes} ]</span></div>
+			<div class="statallfils">{lang.LSTDELST} <span>{last_del_fles}</span></div>
 			</div>
+			<div class="clr"></div>
 			<div class="perlstat">
-			<table class="disk_size" border="0" width="100%" cellspacing="0" cellpadding="0" dir="ltr">
-				<tr>
-					<td style="width:33%;background-color:#97FF97;text-align:left;">0%</td>
-					<td style="width:34%; background-color:#FFFE97; text-align:center;">50%</td>
-					<td style="width:33%;background-color:#FF9797; text-align:right;">100%</td>
-				</tr>
-				<tr>
-					<td colspan="3"><img src="{STYLE_PATH_ADMIN}images/spacer.gif" style="width:{per1}%; height:10px; background-color:Red" alt="..." /></td>
-				</tr>
-			</table>
+				<table class="disk_size" border="0" width="100%" cellspacing="0" cellpadding="0" dir="ltr">
+					<tr>
+						<td style="width:33%;background-color:#97FF97;text-align:left;">0%</td>
+						<td style="width:34%; background-color:#FFFE97; text-align:center;">50%</td>
+						<td style="width:33%;background-color:#FF9797; text-align:right;">100%</td>
+					</tr>
+					<tr>
+						<td colspan="3"><img src="{STYLE_PATH_ADMIN}images/spacer.gif" style="width:{per1}%; height:10px; background-color:Red" alt="..." /></td>
+					</tr>
+				</table>
 			
-<div class="filsiz">[{files_sizes}]</div>
+			<div class="filsiz">[ {files_sizes} ]</div>
 
-</div>
-
+			</div>
 <div class="clr"></div>
 </fieldset>
 
@@ -120,11 +124,7 @@ $('div#{{id}}').pulse({
 		</div>
 		</IF>
 		
-		<div class="fieldset">
-			<div class="fontst">{lang.LSTDELST}</div>
-			<br />
-			<div>{last_del_fles}</div>
-		</div>
+
 		
 
 <!-- start users  number -->

@@ -90,25 +90,27 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 	
 /* last visit */
 .title {font-weight:bold;font-size:18px;color:#FD6812;padding: 4px 8px;}
-.fieldsetinfo { margin:10px auto;padding:10px 6px; border: 1px solid #7F7F7F;background:#F3F3F2 url(../images/fieldsetinfo.png) no-repeat -8% -80%; position: relative; -moz-border-radius: 8px; border-radius:1px;}
-.fieldsetinfo legend {padding:0 6px;color:#CC0000}
-.fieldseuser {margin:10px;padding:10px 6px; border: 1px solid #7F7F7F;background:#F3F3F2; position: relative; -moz-border-radius: 4px; border-radius:1px;}
+.fieldsetinfo { margin:10px auto;padding:10px 6px; border: 1px solid #7F7F7F;background:#F3F3F2 url(../images/web.png) no-repeat 0% 30%; position: relative; -moz-border-radius: 8px; border-radius:1px;}
+.fieldsetinfo legend {padding:0 6px;color:#0B55C4}
+.bgfilestat { background:#F3F3F2 url(../images/bgfilestat.png) no-repeat 1% -20%; }
+
+.fieldseuser {margin:10px;padding:10px 6px; border: 1px solid #7F7F7F;background:#FFF; position: relative; -moz-border-radius: 4px; border-radius:1px;}
 
 
-.boxlastfp {float:right;width:30%;line-height:18px;background:#EFE7B8;border:1px solid #FEA53D;-moz-border-radius: 4px; border-radius:1px;padding:6px;margin:1px 3px 2px 6px;text-align:center;}
+.boxlastfp {float:right;width:36%;line-height:18px;background:#FFF;border:1px solid #B8D8EF;-moz-border-radius: 4px; border-radius:1px;padding:6px;margin:1px 3px 2px 6px;text-align:center;}
 .boxlastfp a {font-size:11px;font-weight: bold;color:#444}
 .boxlastfp a:hover {color:#000;text-decoration: none;}
-.boxlastfp:hover {background:#EFECDB;}
+.boxlastfp:hover {background:#EAF2F4}
 .toplast {width:64%;line-height:14px;padding:6px;margin:2px 3px;text-align:right;}
-.lasttime {float:right;width:64%;margin:1px 3px;padding:3px 6px;color:#008000; }
+.lasttime {float:right;width:64%;margin:1px 3px;padding:3px 6px;color:#444;text-align:right; }
 
-.fieldset { float:right;width:27%;margin:10px 6px;padding:10px 6px; border: 1px solid #7F7F7F;background:#FFF; position: relative; -moz-border-radius:4px; border-radius:1px;}
+.fieldset { float:right;width:27%;margin:10px 6px;padding:10px 6px; border: 1px solid #7F7F7F;background:#EFF5F8; position: relative; -moz-border-radius:4px; border-radius:1px;}
 .fieldset legend {padding:0 6px;}
 .fieldset .fontst {text-align:center;font-size:10px;font-weight: bold;color:#0B55C4}
 .fieldset div {text-align:center;font-size:13px;font-weight: bold;color:#FD6812}
 
 
-.adminwelcome {padding:2px;color:#0000FF;font-size:11px;font-weight: bold;}
+.adminwelcome {padding:2px;color:#444;font-size:11px;font-weight: bold;}
 
 .welcom {margin:2px 0;font-size:11px;}
 .last {font-weight:normal;}
@@ -127,15 +129,15 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 /* other info  */
 
 /*  disk_size */
-.boxsizestat {float:right;width:200px;display:inline;padding:6px;}
-.sizestat {background:#EFE7B8;border:1px solid #FEA53D;-moz-border-radius: 4px; border-radius:1px;padding:6px;margin:1px 3px 2px 6px;text-align:center;}
-.statallfils {background:#EFE7B8;border:1px solid #FEA53D;-moz-border-radius: 4px; border-radius:1px;padding:6px;margin:1px 3px 2px 6px;text-align:center;}
-.perlstat {float:left;width:55%;display:inline;padding:6px;margin:1px 3px 2px 6px;text-align:center;}
+.boxsizestat {float:right;display:inline;padding:6px;}
+.statallfils {float:right;background:#fff;border:1px solid #B8D8EF;-moz-border-radius: 4px; border-radius:1px;padding:6px;margin:1px 3px 2px 6px;text-align:center;}
+.statallfils  span{background:#F2F2F2;color:#0B55C4;}
+.perlstat {padding:6px;margin:1px 3px 2px 6px;text-align:center;}
 .disk_size{padding: 5px; font-weight: bold;border-top:2px dotted #fff;border-bottom:2px dotted #eee;border-left:0px;border-right:0px}
 .disk_size tr{background:#F2F2F2}
 .t_disk_size{background:#E8E8E8;padding:10px; font-size:14px;color:#000;text-align:right}
 .disk_size tr:hover {background-color:#F2F2F2;}
-.filsiz{padding:3px; font-weight:bold;font-size:30px;color:#D0D0D0;text-align:center}
+.filsiz{padding:3px; font-weight:bold;font-size:22px;color:#555;text-align:center}
 /*  disk_size */
 
 /* body #System Messages  */

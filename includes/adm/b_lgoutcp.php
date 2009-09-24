@@ -5,7 +5,7 @@
 	
 	//copyright 2007-2009 Kleeja.com ..
 	//license http://opensource.org/licenses/gpl-license.php GNU Public License
-	//$Author$ , $Rev$,  $Date::                           $
+	//$Author: phpfalcon $ , $Rev: 737 $,  $Date:: 2009-08-07 21:26:18 +0300#$
 	
 	// not for directly open
 	if (!defined('IN_ADMIN'))

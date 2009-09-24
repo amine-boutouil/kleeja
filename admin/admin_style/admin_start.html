@@ -54,9 +54,7 @@ $('div#{{id}}').pulse({
 			<div class="adminwelcome"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/heart.png" alt="Kleeja love you ..," />{usernamelang}</div>
 			<div class="clr"></div>
 
-			<div class="boxlastfp lasttime">{lang.LAST_VISIT} : <b>{last_visit}</b></div>
-
-			<IF NAME="last_visit"><div class="boxlastfp lasttime">{lang.LAST_VISIT} : <span>{last_visit}</span></div></IF>
+			<IF NAME="last_visit"><div class="boxlastfp lasttime">{lang.LAST_VISIT} : <b>{last_visit}</b></div></IF>
 
 			<div class="clr"></div>
 				<div class="boxlastfp toplast">{lang.LSTFLE_ST} : <IF NAME="stat_last_file!='0'"><a href="{last_file_up_url}" onclick="window.open(this.href,'_blank');return false;">{last_file_up}</a><ELSE>{lang.UNKNOWN}</IF></div>

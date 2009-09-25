@@ -3,8 +3,6 @@
 
 <fieldset>
 
-<div id="border-table">
-
 <!-- start general stat panel admin -->
 <div class="title">&#9679; [ {config.sitename} ]</div>
 <!-- end h1 general stat panel admin -->
@@ -103,7 +101,7 @@ $('div#{{id}}').pulse({
 <div class="clr"></div>
 <!-- end clear  -->
 
-
+<div id="border-table">
 <fieldset class="fieldseuser">
 	<legend>{lang.GENERAL_STAT}</legend>
 <!-- start clear  -->
@@ -190,7 +188,7 @@ $('div#{{id}}').pulse({
 
 <!-- start info -->
 <div id="other-info">
-<div class="t_info">{lang.KLEEJA_P_TEAM}</div>
+<h2 style="direction:ltr"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/teamkleeja.png" alt="Team Kleeja" />  Development Team Kleeja</h2>
 <div class="clr"></div><br />
 
 <div>
@@ -224,7 +222,7 @@ $('div#{{id}}').pulse({
 
 <!-- start sql debug -->
 <IF NAME="sql_debug">
-<h2 style="direction:ltr">SQL Debug</h2>
+<h2 style="direction:ltr"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/sql.png" alt="SQL Debug" />  SQL Debug</h2>
 <div style="direction:ltr;overflow:scroll;height:200px;border:1px #ccc dotted">
 <table>
 <LOOP NAME="sql_debug">

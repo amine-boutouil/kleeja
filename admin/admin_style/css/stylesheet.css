@@ -90,14 +90,13 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 	
 /* last visit */
 .title {font-weight:bold;font-size:large;color:#386D9C;padding:6px 3px;}
-.fieldsetinfo { margin:10px auto;padding:10px 6px; border: 1px solid #7F7F7F;background:#F3F3F2 url(../images/web.png) no-repeat 0% 30%; position: relative; -moz-border-radius: 8px; border-radius:1px;}
-.fieldsetinfo legend {padding:4px 9px;color:#FFF;background:#7F7F7F}
-.bgfilestat { background:#F3F3F2 url(../images/bgfilestat.png) no-repeat 1% -20%; }
+.fieldsetinfo { margin:2px auto;padding:10px 6px; border:0px;background:url(../images/web.png) no-repeat 0% 30%; position: relative; -moz-border-radius: 8px; border-radius:1px;}
+.bgfilestat { background:url(../images/bgfilestat.png) no-repeat 1% -20%; }
 
 .fieldseuser {margin:10px;padding:10px 6px; border: 1px solid #7F7F7F;background:#FFF; position: relative; -moz-border-radius: 4px; border-radius:1px;}
 
 
-.boxlastfp {float:right;width:36%;line-height:18px;background:#FFF;border:1px solid #B8D8EF;-moz-border-radius: 4px; border-radius:1px;padding:6px;margin:1px 3px 2px 6px;text-align:center;}
+.boxlastfp {float:right;width:36%;line-height:18px;padding:6px;margin:1px 3px 2px 6px;text-align:center;}
 .boxlastfp a {font-size:11px;font-weight: bold;color:#444}
 .boxlastfp a:hover {color:#000;text-decoration: none;}
 .boxlastfp:hover {background:#EAF2F4}
@@ -110,9 +109,7 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 .fieldset div {text-align:center;font-size:13px;font-weight: bold;color:#FD6812}
 
 
-.adminwelcome {padding:2px;color:#444;font-size:11px;font-weight: bold;}
-
-.welcom {margin:2px 0;font-size:11px;}
+.adminwelcome {padding-bottom:10px;color:#444;font-size:11px;font-weight: bold;}
 .last {font-weight:normal;}
 .infocontrol {width:100%;background:#F2F2F2;margin-bottom:4px;font-size:11px;border-top:2px ridge #fff;border-bottom:2px ridge #fff;border-left:0px;border-right:0px}
 .infocontrol td{background:#F2F2F2;width:50%;padding:11px 5px;border-bottom:0px;text-align: right;}
@@ -134,7 +131,6 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 .perlstat {padding:6px;margin:1px 3px 2px 6px;text-align:center;}
 .disk_size{padding: 5px; font-weight: bold;border-top:2px dotted #fff;border-bottom:2px dotted #eee;border-left:0px;border-right:0px}
 .disk_size tr{background:#F2F2F2}
-.t_disk_size{background:#E8E8E8;padding:10px; font-size:14px;color:#000;text-align:right}
 .disk_size tr:hover {background-color:#F2F2F2;}
 .filsiz{padding:3px; font-weight:bold;font-size:x-large;color:#FF9797;text-align:center;text-decoration:line-through;vertical-align:top}
 /*  disk_size */
@@ -256,16 +252,11 @@ tr:hover {background-color:#FFFFDD;}
 /* message display page */
 .message_list {
 	list-style: none;
-	margin: 0;
-	padding: 0;
-	width: 583px;
 }
 .message_list p {
 text-align: right;
 }
 .message_list li {
-	padding: 0;
-	margin: 0;
 	background: url(../images/message-bar.gif) repeat-x;
 }
 .message_head {
@@ -274,41 +265,37 @@ text-align: right;
 	position: relative;
 }
 .message_head .timestamp {
-	color: #666666;
-	font-size: 95%;
-	position: absolute;
-	left: 10px;
-	top: 5px;
+background: url(../images/timestamp.gif) no-repeat left center;
+	float: left;
+	width:16px;
+		height:16px;
+	
 }
 .message_head cite {
-	font-size: 100%;
+	font-size: 12px;
 	font-weight: bold;
 	font-style: normal;
+	color:#0070D8
 }
 .message_body {
-	padding: 5px 10px 15px;
+	padding: 5px 10px;
 }
-.collapse_buttons {
-	text-align: right;
+
+.collapse_buttons  {
+	margin:5px 0;
+	float: left;
+}
+.message_list_bottom {
 	border-top: solid 1px #e4e4e4;
 	padding: 5px 0;
-	width: 583px;
+	clear: both;
 }
-.collapse_buttons a {
-	margin-left: 15px;
-	float: right;
-}
-.show_all_message {
+.show_all {
 	background: url(../images/tall-down-arrow.gif) no-repeat right center;
 	padding-right: 12px;
 }
-.show_recent_only {
+.hid_all {
 	display: none;
 	background: url(../images/tall-up-arrow.gif) no-repeat right center;
 	padding-right: 12px;
-}
-.collpase_all_message {
-	background: url(../images/collapse-all.gif) no-repeat right center;
-	padding-right: 12px;
-	color: #666666;
 }

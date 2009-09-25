@@ -2,59 +2,15 @@
 <div id="divmiddle">
 
 <fieldset>
-<script type="text/javascript">
-$(document).ready(function(){
-	
-	//hide message_body after the first one
-	$(".message_list .message_body:gt(0)").hide();
-	
-	//hide message li after the 5th
-	$(".message_list li:gt(4)").hide();
 
-	
-	//toggle message_body
-	$(".message_head").click(function(){
-		$(this).next(".message_body").slideToggle(500)
-		return false;
-	});
-
-	//collapse all messages
-	$(".collpase_all_message").click(function(){
-		$(".message_body").slideUp(500)
-		return false;
-	});
-
-	//show all messages
-	$(".show_all_message").click(function(){
-		$(this).hide()
-		$(".show_recent_only").show()
-		$(".message_list li:gt(4)").slideDown()
-		return false;
-	});
-
-	//show recent messages only
-	$(".show_recent_only").click(function(){
-		$(this).hide()
-		$(".show_all_message").show()
-		$(".message_list li:gt(4)").slideUp()
-		return false;
-	});
-
-});
-</script>
-
+<div id="border-table">
 <!-- start general stat panel admin -->
 <div class="title">&#9679; [ {config.sitename} ]</div>
 <!-- end h1 general stat panel admin -->
 
 <!-- start dot  -->
-<div class="clr"></div>
-<p class="dot" />
+<div class="clr"></div><p class="dot" /><div class="clr"></div>
 <!-- end dot  -->
-
-<!-- start clear  -->
-<div class="clr"></div>
-<!-- end clear  -->
 
 <LOOP NAME="ADM_NOTIFICATIONS">
 <!-- start >> error System Messages -->
@@ -82,15 +38,49 @@ $('div#{{id}}').pulse({
 <!-- end >> error System Messages -->
 </LOOP>
 
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	//hide message_body after the first one
+	$(".message_list .message_body:gt(1)").hide();
+	
+	//hide message li after the 5th
+	$(".message_list li:gt(4)").hide();
+
+	
+	//toggle message_body
+	$(".message_head").click(function(){
+		$(this).next(".message_body").slideToggle(00)
+		return false;
+	});
+
+	//show all messages
+	$(".show_all").click(function(){
+		$(this).hide()
+		$(".hid_all").show()
+		$(".message_body").slideDown()
+		return false;
+	});
+
+	//show recent messages only
+	$(".hid_all").click(function(){
+		$(this).hide()
+		$(".show_all").show()
+		$(".message_body").slideUp()
+		return false;
+	});
+
+});
+</script>
 
 <!-- start clear  -->
 <div class="clr"></div>
 <!-- end clear  -->
 
-<div id="border-table">
+
 <ol class="message_list">
 	<li>
-		<p class="message_head"><cite>{lang.KLEEJA_CP}</cite> <span class="timestamp">1 minute ago</span></p>
+		<p class="message_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/heart.png" alt="Kleeja love you ..," />{lang.KLEEJA_CP}</cite> <span class="timestamp"></span></p>
 		<div class="message_body">
 			<!-- start clear  -->
 <div class="clr"></div>
@@ -98,7 +88,7 @@ $('div#{{id}}').pulse({
 
 <!-- start welcome user admin -->
 <fieldset class="fieldsetinfo">
-			<div class="adminwelcome"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/heart.png" alt="Kleeja love you ..," />{usernamelang}</div>
+			<div class="adminwelcome">{usernamelang}</div>
 			<div class="clr"></div>
 
 			<IF NAME="last_visit"><div class="boxlastfp lasttime">{lang.LAST_VISIT} : <b>{last_visit}</b></div></IF>
@@ -115,7 +105,7 @@ $('div#{{id}}').pulse({
 		</div>
 	</li>
 	<li>
-		<p class="message_head"><cite>{lang.SIZE_STAT}</cite> <span class="timestamp">2 minutes ago</span></p>
+		<p class="message_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/general_title.png" alt="Kleeja love you ..," />{lang.SIZE_STAT}</cite> <span class="timestamp"></span></p>
 		<div class="message_body">
 			<!-- start clear  -->
 <div class="clr"></div>
@@ -151,7 +141,7 @@ $('div#{{id}}').pulse({
 		</div>
 	</li>
 	<li>
-		<p class="message_head"><cite>{lang.GENERAL_STAT}</cite> <span class="timestamp">1 day ago</span></p>
+		<p class="message_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/Folder.png" alt="Kleeja love you ..," />{lang.GENERAL_STAT}</cite> <span class="timestamp"></span></p>
 		<div class="message_body">
 			<fieldset class="fieldseuser">
 
@@ -181,7 +171,7 @@ $('div#{{id}}').pulse({
 		</div>
 	</li>
 	<li>
-		<p class="message_head"><cite>احصائيات محركات البحث</cite> <span class="timestamp">2 days ago</span></p>
+		<p class="message_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/google.png" alt="Kleeja love you ..," />احصائيات محركات البحث</cite> <span class="timestamp"></span></p>
 		<div class="message_body">
 			<!-- start  last google -->
 <table class="infocontrol">
@@ -198,12 +188,10 @@ $('div#{{id}}').pulse({
 		</div>
 	</li>
 	<li>
-		<p class="message_head"><cite>{lang.OTHER_INFO} !</cite> <span class="timestamp">3 days ago</span></p>
+		<p class="message_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/infoanother.png" alt="Kleeja love you ..," />{lang.OTHER_INFO} !</cite> <span class="timestamp"></span></p>
 		<div class="message_body">
 <!-- start welcome user admin -->
-<div id="welcom">
-<div class="t_disk_size">{lang.OTHER_INFO} !</div>
-</div>
+
 <!-- end  welcome user admin -->
 
 <table class="data">
@@ -238,43 +226,23 @@ $('div#{{id}}').pulse({
 </table>
 		</div>
 	</li>
-	<li>
-		<p class="message_head"><cite>nick:</cite> <span class="timestamp">5 days ago</span></p>
-		<div class="message_body">
-			<p>message here</p>
-		</div>
-	</li>
-	<li>
-		<p class="message_head"><cite>someone:</cite> <span class="timestamp">6 days ago</span></p>
-		<div class="message_body">
-			<p>message here</p>
-		</div>
-	</li>
-	<li>
-		<p class="message_head"><cite>nick:</cite> <span class="timestamp">7 days ago</span></p>
-		<div class="message_body">
-			<p>message here</p>
-		</div>
-	</li>
-	<li>
-		<p class="message_head"><cite>someone:</cite> <span class="timestamp">8 days ago</span></p>
-		<div class="message_body">
-			<p>message here</p>
-		</div>
-	</li>
 </ol>
-<p class="collapse_buttons"><a href="#" class="show_all_message">Show all message (9)</a> <a href="#" class="show_recent_only">Show 5 only</a> <a href="#" class="collpase_all_message">Collapse all</a></p>
 
-<br />
-
+<div class="message_list_bottom"></div>
+<div class="collapse_buttons"><a href="#" class="show_all">اظهار الكل</a> <a href="#" class="hid_all">أخفاء الكل</a></div>
+<div class="clr"></div>
+</div>
 
 <!-- start clear  -->
 <div class="clr"></div><br />
 <!-- end clear  -->
 
 <!-- start info -->
+
+<div id="border-table">
+
 <div id="other-info">
-<h2 style="direction:ltr"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/teamkleeja.png" alt="Team Kleeja" />  Development Team Kleeja</h2>
+<h2 style="direction:ltr"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/teamkleeja.png" alt="Team Kleeja" />Development Team</h2>
 <div class="clr"></div><br />
 
 <div>
@@ -305,10 +273,12 @@ $('div#{{id}}').pulse({
 <div class="clr"></div><br />
 
 <!-- end info -->
+</div>
+
 
 <!-- start sql debug -->
 <IF NAME="sql_debug">
-<h2 style="direction:ltr"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/sql.png" alt="SQL Debug" />  SQL Debug</h2>
+<h2 style="direction:ltr">SQL Debug</h2>
 <div style="direction:ltr;overflow:scroll;height:200px;border:1px #ccc dotted">
 <table>
 <LOOP NAME="sql_debug">
@@ -323,10 +293,8 @@ $('div#{{id}}').pulse({
 </IF>
 <!-- end sql debug -->
 
+
 <div class="clr"></div>
-
-
-</div>
 
 </fieldset>
 

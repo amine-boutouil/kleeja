@@ -2,6 +2,46 @@
 <div id="divmiddle">
 
 <fieldset>
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	//hide message_body after the first one
+	$(".message_list .message_body:gt(0)").hide();
+	
+	//hide message li after the 5th
+	$(".message_list li:gt(4)").hide();
+
+	
+	//toggle message_body
+	$(".message_head").click(function(){
+		$(this).next(".message_body").slideToggle(500)
+		return false;
+	});
+
+	//collapse all messages
+	$(".collpase_all_message").click(function(){
+		$(".message_body").slideUp(500)
+		return false;
+	});
+
+	//show all messages
+	$(".show_all_message").click(function(){
+		$(this).hide()
+		$(".show_recent_only").show()
+		$(".message_list li:gt(4)").slideDown()
+		return false;
+	});
+
+	//show recent messages only
+	$(".show_recent_only").click(function(){
+		$(this).hide()
+		$(".show_all_message").show()
+		$(".message_list li:gt(4)").slideUp()
+		return false;
+	});
+
+});
+</script>
 
 <!-- start general stat panel admin -->
 <div class="title">&#9679; [ {config.sitename} ]</div>
@@ -42,13 +82,22 @@ $('div#{{id}}').pulse({
 <!-- end >> error System Messages -->
 </LOOP>
 
+
 <!-- start clear  -->
+<div class="clr"></div>
+<!-- end clear  -->
+
+<div id="border-table">
+<ol class="message_list">
+	<li>
+		<p class="message_head"><cite>{lang.KLEEJA_CP}</cite> <span class="timestamp">1 minute ago</span></p>
+		<div class="message_body">
+			<!-- start clear  -->
 <div class="clr"></div>
 <!-- end clear  -->
 
 <!-- start welcome user admin -->
 <fieldset class="fieldsetinfo">
-		<legend>{lang.KLEEJA_CP}</legend>
 			<div class="adminwelcome"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/heart.png" alt="Kleeja love you ..," />{usernamelang}</div>
 			<div class="clr"></div>
 
@@ -63,14 +112,17 @@ $('div#{{id}}').pulse({
 			</IF>
 </fieldset>
 <!-- end  welcome user admin -->
-
-<!-- start clear  -->
+		</div>
+	</li>
+	<li>
+		<p class="message_head"><cite>{lang.SIZE_STAT}</cite> <span class="timestamp">2 minutes ago</span></p>
+		<div class="message_body">
+			<!-- start clear  -->
 <div class="clr"></div>
 <!-- end clear  -->
 
 <!-- start stat  disk size -->
 <fieldset class="fieldsetinfo bgfilestat">
-		<legend>{lang.SIZE_STAT}</legend>
 			<div class="boxsizestat">
 			<div class="statallfils">{lang.AFILES_NUM} <span>[ {files_number} ]</span> {lang.AFILES_SIZE} <span>[ {files_sizes} ]</span></div>
 			<div class="statallfils">{lang.LSTDELST} <span>{last_del_fles}</span></div>
@@ -96,14 +148,13 @@ $('div#{{id}}').pulse({
 
 
 <!-- end stat  disk size  -->
+		</div>
+	</li>
+	<li>
+		<p class="message_head"><cite>{lang.GENERAL_STAT}</cite> <span class="timestamp">1 day ago</span></p>
+		<div class="message_body">
+			<fieldset class="fieldseuser">
 
-<!-- start clear  -->
-<div class="clr"></div>
-<!-- end clear  -->
-
-<div id="border-table">
-<fieldset class="fieldseuser">
-	<legend>{lang.GENERAL_STAT}</legend>
 <!-- start clear  -->
 <div class="clr"></div>
 <!-- end clear  -->
@@ -127,12 +178,12 @@ $('div#{{id}}').pulse({
 
 <!-- end files number  -->
 </fieldset>
-
-<!-- start clear  -->
-<div class="clr"></div><br />
-<!-- end clear  -->
-
-<!-- start  last google -->
+		</div>
+	</li>
+	<li>
+		<p class="message_head"><cite>احصائيات محركات البحث</cite> <span class="timestamp">2 days ago</span></p>
+		<div class="message_body">
+			<!-- start  last google -->
 <table class="infocontrol">
 	<tr>
 		<td>{lang.LAST_GOOGLE} : {s_last_google}</td>
@@ -144,7 +195,11 @@ $('div#{{id}}').pulse({
 	</tr>
 </table>	
 <!-- end  last yahoo -->	
-
+		</div>
+	</li>
+	<li>
+		<p class="message_head"><cite>{lang.OTHER_INFO} !</cite> <span class="timestamp">3 days ago</span></p>
+		<div class="message_body">
 <!-- start welcome user admin -->
 <div id="welcom">
 <div class="t_disk_size">{lang.OTHER_INFO} !</div>
@@ -181,6 +236,37 @@ $('div#{{id}}').pulse({
 	<td>{memory_limit}</td>
 </tr>
 </table>
+		</div>
+	</li>
+	<li>
+		<p class="message_head"><cite>nick:</cite> <span class="timestamp">5 days ago</span></p>
+		<div class="message_body">
+			<p>message here</p>
+		</div>
+	</li>
+	<li>
+		<p class="message_head"><cite>someone:</cite> <span class="timestamp">6 days ago</span></p>
+		<div class="message_body">
+			<p>message here</p>
+		</div>
+	</li>
+	<li>
+		<p class="message_head"><cite>nick:</cite> <span class="timestamp">7 days ago</span></p>
+		<div class="message_body">
+			<p>message here</p>
+		</div>
+	</li>
+	<li>
+		<p class="message_head"><cite>someone:</cite> <span class="timestamp">8 days ago</span></p>
+		<div class="message_body">
+			<p>message here</p>
+		</div>
+	</li>
+</ol>
+<p class="collapse_buttons"><a href="#" class="show_all_message">Show all message (9)</a> <a href="#" class="show_recent_only">Show 5 only</a> <a href="#" class="collpase_all_message">Collapse all</a></p>
+
+<br />
+
 
 <!-- start clear  -->
 <div class="clr"></div><br />

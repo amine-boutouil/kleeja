@@ -138,7 +138,7 @@ img.right {float: right;margin-left:15px;}
 /* start index body  >> index_body.html  */
 #content_index_body  {float: left;width: 70%;padding:5px 30px;}
 #index_body{background:url(../images/index_body.png) no-repeat left top;}
-.wolcome_msg {width:76%;text-indent:40px;font-size:10px;color:#777;text-shadow: 0px 1px rgb(247, 247, 247);padding:3px 6px;}
+.wolcome_msg {width:76%;text-indent:5px;font-size:10px;color:#777;text-shadow: 0px 1px rgb(247, 247, 247);padding:3px 6px;}
 .siten4me{font-size:13px;padding:3px;color:#BE1111}
 .agree{font-size:10px;font-weight:bold;padding:1px 6px;}
 .zx,.zl {cursor:pointer;padding:4px;}

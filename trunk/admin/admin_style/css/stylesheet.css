@@ -14,7 +14,7 @@ a:link    { color: #0B55C4; text-decoration: none; }
 a:visited { color: #0B55C4; text-decoration: none; }
 a:hover   { text-decoration: underline; }
 label { cursor: pointer;padding: 0 5px 0 0;}
-fieldset { margin:1px 5px;padding:20px; border: 4px solid #6496C3;	background: #B0D2F6 url(../images/shutterstock_25969969.gif) repeat-y -1% 5%; position: relative; -moz-border-radius: 8px; border-radius:1px;}
+fieldset { margin:1px 5px;padding:20px; border: 4px solid #6496C3;	background: #B0D2F6 url(../images/shutterstock_25969969.gif) repeat-y -1% 0%; position: relative; -moz-border-radius: 8px; border-radius:1px;}
 legend { padding:0 5px; font-weight:bold;font-size:12px;color: #115098; margin-top: -.4em; position: relative; text-transform: none;line-height: 1.2em; top: 0; vertical-align: middle;font:bold 11px Tahoma, Arial, Helvetica, sans-serif;}
 select ,option{cursor: pointer; vertical-align: middle; width: auto; color: #000; padding:1px 5px;font:normal 12px Tahoma, Arial, Helvetica, sans-serif;}
 textarea {font:normal 12px Tahoma, Arial, Helvetica, sans-serif; cursor: text; vertical-align: middle; padding: 2px; color: #000;border-left: 1px solid #AFAEAA; border-top: 1px solid #AFAEAA; border-right: 1px solid #D5D5C8;border-bottom: 1px solid #D5D5C8; background-color:#F2F2F2;}
@@ -251,3 +251,64 @@ tr:hover {background-color:#FFFFDD;}
 .update_error{color:#CE0000;border-top: 3px solid #DE7A7B; border-bottom: 3px solid #DE7A7B;background: #E6C0C0 url(../images/error.png) no-repeat 99% 50%;}
 .link_copy {background:#E8E8E8;padding:10px; border-top:1px solid #ccc;border-bottom:1px solid #ccc;color:#666;direction:ltr;font-weight:bold;}
 /* # for check_update*/
+
+
+/* message display page */
+.message_list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	width: 583px;
+}
+.message_list p {
+text-align: right;
+}
+.message_list li {
+	padding: 0;
+	margin: 0;
+	background: url(../images/message-bar.gif) repeat-x;
+}
+.message_head {
+	padding: 5px 10px;
+	cursor: pointer;
+	position: relative;
+}
+.message_head .timestamp {
+	color: #666666;
+	font-size: 95%;
+	position: absolute;
+	left: 10px;
+	top: 5px;
+}
+.message_head cite {
+	font-size: 100%;
+	font-weight: bold;
+	font-style: normal;
+}
+.message_body {
+	padding: 5px 10px 15px;
+}
+.collapse_buttons {
+	text-align: right;
+	border-top: solid 1px #e4e4e4;
+	padding: 5px 0;
+	width: 583px;
+}
+.collapse_buttons a {
+	margin-left: 15px;
+	float: right;
+}
+.show_all_message {
+	background: url(../images/tall-down-arrow.gif) no-repeat right center;
+	padding-right: 12px;
+}
+.show_recent_only {
+	display: none;
+	background: url(../images/tall-up-arrow.gif) no-repeat right center;
+	padding-right: 12px;
+}
+.collpase_all_message {
+	background: url(../images/collapse-all.gif) no-repeat right center;
+	padding-right: 12px;
+	color: #666666;
+}

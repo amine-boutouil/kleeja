@@ -43,17 +43,17 @@ textarea:focus  {background-color:#DFEFFF;border: 1px solid #84A0C0;}
 /* body */
 
 /* middle */
-#divmiddle {width:68%;float: right;display:inline;margin:5px ;}
+#divmiddle {width:70%;float: left;display:inline;}
 /* middle */	
 				
 /* right  menu */	
-#rightmenu{float:right; width:26%; margin:5px ; padding: 10px; background: #EFE7B8;border: 4px solid #FEA53D;position: relative;-moz-border-radius: 8px; border-radius:1px;}
+#rightmenu{float:right; width:27%; padding: 5px; background: #EFE7B8;border: 4px solid #FEA53D;position: relative;-moz-border-radius: 8px; border-radius:1px;}
 #rightmenu .body-menu {text-align: center;}
 #rightmenu .link-menu {float: right; height: 60px; width:48%; margin: 1px }
 #rightmenu .link-menu{border:1px groove #C8BD7C;background: #E2E1DD url(../images/bg-right-menu.jpg) repeat;}
 #rightmenu  .link-menu-current {height: 60px; width:48%;padding:0px;margin:1px;background:#fff;} 
 #rightmenu .link-menu-current  a {color:#000;border-top: #FEA53D 3px solid;border-bottom: #FEA53D 3px solid;border-right: #FE6914 3px solid; border-left: #FE6914 3px solid;}
-#rightmenu .link-menu a  {display: block;overflow: hidden;color:#0033CC;font-size: xx-small;font-weight: bold;padding:5px;}
+#rightmenu .link-menu a  {display: block;overflow: hidden;color:#0033CC;font-size: xx-small;font-weight: bold;padding:5px;height: 45px;}
 #rightmenu .link-menu img {padding-bottom:10px ;}
 #rightmenu .link-menu a:hover {text-decoration: none; background: #fff;color:#000;border-top: #FEA53D 3px solid;border-bottom: #FEA53D 3px solid;border-right: #FE6914 3px solid; border-left: #FE6914 3px solid;}
 #rightmenu .linkhome img {padding-bottom:3px ;}
@@ -140,7 +140,7 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 /*  disk_size */
 
 /* body #System Messages  */
-#system-message { margin:10px 0}
+#system-message { margin:5px 0}
 #system-message div {font-weight: bold;font-size:11px }
 /* body #System Messages  */
 

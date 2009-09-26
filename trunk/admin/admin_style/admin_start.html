@@ -6,7 +6,7 @@
 <div id="border-table">
 
 <!-- start general stat panel admin -->
-<h2>&#9679; [ {config.sitename} ]</h2>
+<div class="tilestart"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/world.png" alt="Kleeja love you ..," />&#9679; {lang.KLEEJA_CP} ..</div>
 <!-- end general stat panel admin -->
 
 <!-- start clear  -->
@@ -82,22 +82,15 @@ $(document).ready(function(){
 
 <ol class="message_list">
 	<li>
-		<p class="message_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/heart.png" alt="Kleeja love you ..," />{lang.KLEEJA_CP}</cite> <span class="timestamp"></span></p>
+		<p class="message_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/user.png" alt="Kleeja love you ..," />{lang.KLEEJA_CP}</cite> <span class="timestamp"></span></p>
 		<div class="message_body">
-			<!-- start clear  -->
-<div class="clr"></div>
-<!-- end clear  -->
 
 <!-- start welcome user admin -->
 <fieldset class="fieldsetinfo">
 			<div class="adminwelcome">{usernamelang}</div>
-			<div class="clr"></div>
-
-			<IF NAME="last_visit"><div class="boxlastfp lasttime">{lang.LAST_VISIT} : <b>{last_visit}</b></div></IF>
-
-			<div class="clr"></div>
-				<div class="boxlastfp toplast">{lang.LSTFLE_ST} : <IF NAME="stat_last_file!='0'"><a href="{last_file_up_url}" onclick="window.open(this.href,'_blank');return false;">{last_file_up}</a><ELSE>{lang.UNKNOWN}</IF></div>
-			<div class="clr"></div>
+			<p class="meta"><IF NAME="last_visit">{lang.LAST_VISIT} : <span>{last_visit}</span></IF> &nbsp;&bull;&nbsp; {lang.LSTFLE_ST} : 
+			<IF NAME="stat_last_file!='0'"><a href="{last_file_up_url}" onclick="window.open(this.href,'_blank');return false;">{last_file_up}</a><ELSE>{lang.UNKNOWN}</IF></p>
+			
 			<IF NAME="last_visit">
 				<div class="boxlastfp"><a href="{h_lst_imgs}"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/viewpicture.png" alt="Kleeja love you ..," />{lang.IMG_LST_VST_SEARCH}</a></div>
 				<div class="boxlastfp"><a href="{h_lst_files}"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/viewfiles.png" alt="Kleeja love you ..," />{lang.FLS_LST_VST_SEARCH}</a></div>
@@ -114,7 +107,7 @@ $(document).ready(function(){
 <!-- end clear  -->
 
 <!-- start stat  disk size -->
-<fieldset class="fieldsetinfo bgfilestat">
+<fieldset class="fieldsetinfo">
 			<div class="boxsizestat">
 			<div class="statallfils">{lang.AFILES_NUM} <span>[ {files_number} ]</span> {lang.AFILES_SIZE} <span>[ {files_sizes} ]</span></div>
 			<div class="statallfils">{lang.LSTDELST} <span>{last_del_fles}</span></div>
@@ -143,7 +136,7 @@ $(document).ready(function(){
 		</div>
 	</li>
 	<li>
-		<p class="message_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/Folder.png" alt="Kleeja love you ..," />{lang.GENERAL_STAT}</cite> <span class="timestamp"></span></p>
+		<p class="message_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/general_statistics.png" alt="Kleeja love you ..," />{lang.GENERAL_STAT}</cite> <span class="timestamp"></span></p>
 		<div class="message_body">
 			<fieldset class="fieldseuser">
 
@@ -173,7 +166,7 @@ $(document).ready(function(){
 		</div>
 	</li>
 	<li>
-		<p class="message_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/google.png" alt="Kleeja love you ..," />احصائيات محركات البحث</cite> <span class="timestamp"></span></p>
+		<p class="message_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/search_engines.png" alt="Kleeja love you ..," />احصائيات محركات البحث</cite> <span class="timestamp"></span></p>
 		<div class="message_body">
 			<!-- start  last google -->
 <table class="infocontrol">
@@ -280,6 +273,7 @@ $(document).ready(function(){
 
 <!-- start sql debug -->
 <IF NAME="sql_debug">
+<br /><br /><br />
 <h2 style="direction:ltr">SQL Debug</h2>
 <div style="direction:ltr;overflow:scroll;height:200px;border:1px #ccc dotted">
 <table>

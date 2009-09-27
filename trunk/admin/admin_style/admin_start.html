@@ -6,7 +6,7 @@
 <div id="border-table">
 
 <!-- start general stat panel admin -->
-<div class="tilestart"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/world.png" alt="Kleeja love you ..," />&#9679; {lang.KLEEJA_CP} ..</div>
+<div class="tilestart"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/admin_start.png" alt="Kleeja love you ..," />&#9679; {lang.KLEEJA_CP} ..</div>
 <!-- end general stat panel admin -->
 
 <!-- start clear  -->
@@ -82,7 +82,7 @@ $(document).ready(function(){
 
 <ol class="message_list">
 	<li>
-		<p class="message_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/user.png" alt="Kleeja love you ..," />{lang.KLEEJA_CP}</cite> <span class="timestamp"></span></p>
+		<p class="message_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/user.png" alt=".." />{lang.GENERAL_STAT}</cite> <span class="timestamp"></span></p>
 		<div class="message_body">
 
 <!-- start welcome user admin -->
@@ -108,6 +108,19 @@ $(document).ready(function(){
 
 <!-- start stat  disk size -->
 <fieldset class="fieldsetinfo">
+		<div class="fieldset">
+			<div class="fontst">{lang.AUSERS_NUM}</div>
+			<br />
+			<div>[ {users_number} ]</div>
+		</div>
+		<IF NAME="config.user_system==1">
+		<div class="fieldset">
+			<div class="fontst">{lang.LAST_REG}</div>
+			<br />
+			<div>[ {lst_reg} ]</div>
+		</div>
+		</IF>
+		
 			<div class="boxsizestat">
 			<div class="statallfils">{lang.AFILES_NUM} <span>[ {files_number} ]</span> {lang.AFILES_SIZE} <span>[ {files_sizes} ]</span></div>
 			<div class="statallfils">{lang.LSTDELST} <span>{last_del_fles}</span></div>
@@ -135,36 +148,7 @@ $(document).ready(function(){
 <!-- end stat  disk size  -->
 		</div>
 	</li>
-	<li>
-		<p class="message_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/general_statistics.png" alt="Kleeja love you ..," />{lang.GENERAL_STAT}</cite> <span class="timestamp"></span></p>
-		<div class="message_body">
-			<fieldset class="fieldseuser">
 
-<!-- start clear  -->
-<div class="clr"></div>
-<!-- end clear  -->
-		<div class="fieldset">
-			<div class="fontst">{lang.AUSERS_NUM}</div>
-			<br />
-			<div>[ {users_number} ]</div>
-		</div>
-		<IF NAME="config.user_system==1">
-		<div class="fieldset">
-			<div class="fontst">{lang.LAST_REG}</div>
-			<br />
-			<div>[ {lst_reg} ]</div>
-		</div>
-		</IF>
-		
-
-		
-
-<!-- start users  number -->
-
-<!-- end files number  -->
-</fieldset>
-		</div>
-	</li>
 	<li>
 		<p class="message_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/search_engines.png" alt="Kleeja love you ..," />احصائيات محركات البحث</cite> <span class="timestamp"></span></p>
 		<div class="message_body">

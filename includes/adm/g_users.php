@@ -57,16 +57,19 @@ if(isset($_GET['deleteuserfile']) && $SQL->num_rows($SQL->query("SELECT * FROM `
 	{
 		kleeja_admin_err($lang['ADMIN_DELETE_NO_FILE']);
 	}
-
-	if($sizes)
+	else
 	{
 		//update number of stats
 		$update_query	= array(
 								'UPDATE'	=> "{$dbprefix}stats",
-								'SET'		=> "sizes=sizes-$sizes,files=files-$num",
+								'SET'		=> "sizes=sizes-$sizes, files=files-$num",
 							);
 
 		$SQL->build($update_query);
+		if($SQL->affected())
+		{
+			delete_cache('data_stats');
+		}
 
 		//delete all files in just one query
 		$d_query	= array(
@@ -77,10 +80,6 @@ if(isset($_GET['deleteuserfile']) && $SQL->num_rows($SQL->query("SELECT * FROM `
 		$SQL->build($d_query);
 
 		kleeja_admin_info($lang['ADMIN_DELETE_FILE_OK']);
-	}
-	else
-	{
-		kleeja_admin_err($lang['ADMIN_DELETE_FILE_ERR']);
 	}
 }
 //
@@ -242,7 +241,7 @@ if ($nums_rows > 0)
 				//delete user
 				$query_del	= array(
 									'DELETE'	=> "{$dbprefix}users",
-									'WHERE'		=> "id=" . intval($ids[$row['id']]) . ""
+									'WHERE'		=> 'id=' . intval($ids[$row['id']])
 								);
 
 				$SQL->build($query_del);
@@ -272,9 +271,9 @@ if ($nums_rows > 0)
 									'SET'		=> 	"name = '" . $SQL->escape($name[$row['id']]) . "',
 													mail = '" . $SQL->escape($mail[$row['id']]) . "',
 													" . $pass[$row['id']] . "
-													admin = '" . intval($admin[$row['id']]) . "',
+													admin = " . intval($admin[$row['id']]) . ",
 													clean_name = '" . $SQL->escape($usrcp->cleanusername($name[$row['id']])) . "'",
-									'WHERE'		=>	"id=" . $row['id']
+									'WHERE'		=>	'id=' . $row['id']
 							);
 
 			$SQL->build($update_query);

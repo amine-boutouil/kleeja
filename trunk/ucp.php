@@ -225,16 +225,22 @@ switch ($_GET['go'])
 					if ($SQL->build($insert_query))
 					{
 						$last_user_id = $SQL->insert_id();
-								
-						($hook = kleeja_run_hook('ok_added_users_register')) ? eval($hook) : null; //run hook
-						$text	= $lang['REGISTER_SUCCESFUL'] . '<a href="' .  $config['siteurl']  . ($config['mod_writer'] ?  'login.html' : 'ucp.php?go=login') . '">' . $lang['LOGIN'] . '</a>';
+						$text = $lang['REGISTER_SUCCESFUL'] . '<a href="' .  $config['siteurl']  . ($config['mod_writer'] ?  'login.html' : 'ucp.php?go=login') . '">' . $lang['LOGIN'] . '</a>';
+
 						//update number of stats
-						$update_query	= array('UPDATE'	=> "{$dbprefix}stats",
-												'SET'		=> "users=users+1,lastuser='$name'",
-												);
-												
-						($hook = kleeja_run_hook('qr_update_no_users_register')) ? eval($hook) : null; //run hook
-						$SQL->build($update_query);
+						$update_query	= array(
+												'UPDATE'	=> "{$dbprefix}stats",
+												'SET'		=> "users=users+1, lastuser='$name'",
+											);
+	
+						($hook = kleeja_run_hook('ok_added_users_register')) ? eval($hook) : null; //run hook
+
+						if($SQL->build($update_query))
+						{
+							//delete cache ..
+							delete_cache('data_stats');
+						}
+
 						kleeja_info($text);
 					}
 				}

@@ -10,7 +10,7 @@
 // not for directly open
 if (!defined('IN_ADMIN'))
 {
-		exit('no directly opening : ' . __file__);
+	exit('no directly opening : ' . __file__);
 }
 	
 
@@ -109,6 +109,6 @@ $page_nums	= $Pager->print_nums(basename(ADMIN_PATH) . '?cp=' . basename(__file_
 //after submit
 if (isset($_POST['submit']))
 {
-	$text	= ($SQL->affected() ? $lang['CALLS_UPDATED'] : $lang['NO_UP_CHANGE_S']) . '<meta HTTP-EQUIV="REFRESH" content="0; url=' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;page=' . (isset($_GET['page']) ? intval($_GET['page']) : '1') . '">' ."\n";
+	$text	= ($SQL->affected() ? $lang['CALLS_UPDATED'] : $lang['NO_UP_CHANGE_S']) . '<meta HTTP-EQUIV="REFRESH" content="0; url=' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;page=' . (isset($_GET['page']) ? intval($_GET['page']) : 1) . '">' ."\n";
 	$stylee	= "admin_info";
 }

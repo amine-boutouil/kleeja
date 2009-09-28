@@ -7,7 +7,7 @@ function show_msg (te, id)
 {
 var te = document.getElementById(te).value;
 var iee = te;
-        iee += "<div class='clr'></div><br /><form method='post' action='{action}'><textarea name='v_" + id + "' cols='80' rows='3'></textarea>";
+        iee += "<div class='clr'><br /></div><form method='post' action='{action}'><textarea name='v_" + id + "' cols='80' rows='3'></textarea>";
         iee += "<div class='clr'></div><br /><input name='reply_submit' type='submit' value='{lang.REPLY}' /></form>";        
 document.getElementById('mail_here').innerHTML= iee;
 
@@ -21,7 +21,7 @@ document.getElementById('mail_here').innerHTML= iee;
 <form method="post" name="callform" action="{action}">
 
 	<!-- title  -->
-	<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/calls_button.gif" />{lang.R_CALLS}</h2>
+	<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/calls_button.gif" />{lang.R_CALLS} :</h2>
 	<!-- #  -->
 	
 	<!-- clear  -->
@@ -77,20 +77,13 @@ document.getElementById('mail_here').innerHTML= iee;
 <div class="clr"></div>
 <!-- #  -->
 
-<!-- title  -->
-<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/calls_button.gif" />{lang.TEXT} :</h2>
-<!-- title  -->
-
-<!-- clear  -->
-<div class="clr"></div><br />
-<!-- #  -->
-
 <!-- mail here  -->
-<div id="mail_here"><p class="box_clickfont">{lang.E_CLICK}</p></div>
+<h6><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/calls_button.gif" />{lang.TEXT} :</h6>
+<div id="mail_here">{lang.E_CLICK}</div>
 <!-- # mail here  -->
 
 <!-- clear  -->
-<div class="clr"></div><br />
+<div class="clr"></div>
 <!-- #  -->
 
 </div>

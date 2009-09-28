@@ -3,8 +3,8 @@ function show_msg (te , id)
 {
 var te = document.getElementById(te).value;
 var iee = te;
-        iee += "<br /><br /><form method='post' action='{action}'><textarea name='v_" + id + "' cols='50' rows='4'></textarea>";
-        iee += "<br /><br /><input class='button2' name='reply_submit' type='submit' value='{lang.REPLY}' /></form>";        
+        iee += "<div class='clr'></div><br /><form method='post' action='{action}'><textarea name='v_" + id + "' cols='80' rows='3'></textarea>";
+        iee += "<div class='clr'></div><input name='reply_submit' type='submit' value='{lang.REPLY}' /></form>";        
 document.getElementById('mail_here').innerHTML = iee;
 
 }
@@ -12,51 +12,25 @@ document.getElementById('mail_here').innerHTML = iee;
 
 <!-- start view reborts  -->
 <div id="divmiddle">
-
 <fieldset>
 
 <!-- start div border table  -->
 <div id="border-table">
 
-<!-- title  -->
-<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/reports_button.gif" />{lang.TEXT} :</h2>
-<!-- title  -->
-
-<!-- start dot  -->
-<p class="dot" />
-<!-- end dot  -->
-
-<!-- start clear  -->
-<div class="clr"></div>
-<!-- end clear  -->
-
-<div id="mail_here">{lang.E_CLICK}</div>
-
-</div>
-<!-- end div border table  -->
-     
-<!-- start clear  -->
-<div class="clr"></div><br />
-<!-- end clear  -->	 
-	 
-	 
 <form method="post" name="reportform" action="{action}">
 
-<!-- start div border table  -->
-<div id="border-table">
 
 <!-- title  -->
 <h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/reports_button.gif" />{lang.R_REPORTS}</h2>
 <!-- title  -->
 
-<!-- start dot  -->
-<p class="dot" />
-<!-- end dot  -->
-
-<!-- start clear  -->
-<div class="clr"></div>
-<!-- end clear  -->
-
+	<!-- clear  -->
+	<div class="clr"></div><br />
+	<!-- #  -->
+	
+<IF NAME="no_results">
+	<div id="mail_here">{lang.MESSAGE_NONE}</div>
+<ELSE>
 
 <table style="text-align:center">
     <tr style="background-color:#DFDFDF">
@@ -68,9 +42,7 @@ document.getElementById('mail_here').innerHTML = iee;
         <td><a href="javascript:void(0);" onclick="checkAll(document.reportform, '_del', 'su');">{lang.DELETE}</a></td>
         <!-- admin reports info td1 extra -->
     </tr>
-<IF NAME="no_results">
-...
-<ELSE>
+
 <LOOP NAME="arr">
 	<tr id="su[{{id}}]" class="osilver">
 	      <td>
@@ -87,7 +59,7 @@ document.getElementById('mail_here').innerHTML = iee;
 		<!-- admin reports info td2 extra -->
     </tr>
 </LOOP>
-</IF>
+
 </table>
 
 <!--  pagination  -->
@@ -95,12 +67,35 @@ document.getElementById('mail_here').innerHTML = iee;
 <!--  pagination  -->
 
 <!--  button  -->
-<div class="quick"><input name="submit" type="submit" value="{lang.UPDATE_REPORTS}" /></div>
+<div class="left_button"><input name="submit" type="submit" value="{lang.UPDATE_REPORTS}" /></div>
 <!--  button  -->
+	
+	<!-- clear  -->
+	<div class="clr"></div><br />
+	<!-- #  -->
+</form>
 
+
+
+<!-- title  -->
+<h6><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/reports_button.gif" />{lang.TEXT} :</h6>
+<!-- title  -->
+
+	<!-- clear  -->
+	<div class="clr"></div>
+	<!-- #  -->
+
+<div id="mail_here">{lang.E_CLICK}</div>
+
+</IF>
+
+	<!-- clear  -->
+	<div class="clr"></div>
+	<!-- #  -->
+	
 </div>
 <!-- end div border table  -->
-</form>
+
 </fieldset>
 </div>
 <!-- end view reborts  -->

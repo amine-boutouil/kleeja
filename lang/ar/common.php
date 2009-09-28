@@ -509,6 +509,7 @@ $lang = array_merge($lang, array(
 	'STYLE_VERSION'				=> 'اصدار الستايل',
 	'STYLE_DEPEND_ON'			=> 'يعتمد على ستايل',
 	'NONE'						=> 'لا شيء',
+	'MESSAGE_NONE'				=> 'حتى الآن لا يوجد أي رسائل أو تبليغات ..',
 	));
 
 #<-- EOF

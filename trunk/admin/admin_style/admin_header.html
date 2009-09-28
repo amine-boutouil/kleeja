@@ -5,13 +5,14 @@
 <meta http-equiv="Content-Language" content="{lang.LANG_SMALL_NAME}" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
-<link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH_ADMIN}css/screen.css" />
-<link rel="stylesheet" href="{STYLE_PATH_ADMIN}css/jquery.lightbox.css" type="text/css" />
-
+<!--  Icon browsers  -->
 <link rel="shortcut icon" href="{STYLE_PATH_ADMIN}images/favicon.ico" />
 <link rel="icon" type="image/gif" href="{STYLE_PATH_ADMIN}images/favicon.gif" />
 <link rel="apple-touch-icon" href="{STYLE_PATH_ADMIN}images/apple-touch-icon.png" />
-
+<!--  # Icon browsers  -->
+<!--  css coding -->
+<link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH_ADMIN}css/screen.css" />
+<link rel="stylesheet" href="{STYLE_PATH_ADMIN}css/jquery.lightbox.css" type="text/css" />
 <IF NAME="{lang.DIR}==ltr">
 <link rel="stylesheet" href="{STYLE_PATH_ADMIN}css/ltr.css" type="text/css" />
 </IF>	
@@ -21,6 +22,7 @@
 <IS_BROWSER="ie7">
 <link rel="stylesheet" type="text/css" href="{STYLE_PATH_ADMIN}css/ie_7.css" />
 </IS_BROWSER>
+<!--  # css coding -->
 <script type="text/javascript">
 <!--
 	var STYLE_PATH_ADMIN = '{STYLE_PATH_ADMIN}';
@@ -59,19 +61,17 @@
 
 <!-- start admin menu right  -->
 <IF NAME="SHOW_LIST">
-<div id="rightmenu">	
-	<div class="body-menu">
-<IF NAME="SHOW_LIST">
-	<div class="link-menu"><div><p><a title="{lang.RETURN_HOME}" href="{config.siteurl}"><img src="{STYLE_PATH_ADMIN}images/index_button.gif" alt="{lang.RETURN_HOME}" /><br />{lang.RETURN_HOME}</a></p></div></div>
-	<div class="link-menu"><div><p><a title="{lang.R_CPINDEX}" href="./"><img src="{STYLE_PATH_ADMIN}images/cp_button.gif" alt="{lang.R_CPINDEX}" /><br />{lang.R_CPINDEX}</a></p></div></div>
+<div id="main_menu">	
+	<div class="body_menu">
+	<div class="link_menu"><p><a title="{lang.RETURN_HOME}" href="{config.siteurl}"><img src="{STYLE_PATH_ADMIN}images/index_button.gif" alt="{lang.RETURN_HOME}" /><br />{lang.RETURN_HOME}</a></p></div>
+	<div class="link_menu"><p><a title="{lang.R_CPINDEX}" href="./"><img src="{STYLE_PATH_ADMIN}images/cp_button.gif" alt="{lang.R_CPINDEX}" /><br />{lang.R_CPINDEX}</a></p></div>
 <LOOP NAME="adm_extensions_menu">	
-	<div class="link-menu<IF LOOP="current"> link-menu-current</IF>"><div><p><a title="{{lang}}" href="{{link}}"<IF LOOP="confirm"> onclick="javascript:return confirm_from();"</IF>><img src="{{icon}}" alt="{{lang}}" /><br />{{lang}}</a></p></div></div>
+	<div class="link_menu<IF LOOP="current">link_current</IF>"><p><a title="{{lang}}" href="{{link}}" <IF LOOP="confirm"> onclick="javascript:return confirm_from();"</IF>><img src="{{icon}}" alt="{{lang}}" /><br />{{lang}}</a></p></div>
 </LOOP>	
-</IF>
 	</div>
-	<!-- start clear  -->
+<!-- start clear  -->
 <div class="clr"></div>
 <!-- end clear  -->
 </div>
-<!-- end admin menu right -->
 </IF>
+<!-- end admin menu right -->

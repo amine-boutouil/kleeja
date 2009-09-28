@@ -43,14 +43,14 @@ input[type="password"]:focus,input[type="text"]:focus,select:focus,textarea:focu
 /* middle */	
 				
 /* right  menu */	
-#rightmenu{float:right; width:26%; padding:10px; background: #EFE7B8;border: 4px solid #FEA53D;position: relative;-moz-border-radius: 8px; border-radius:1px;}
-#rightmenu .body-menu {text-align:center;background: #E2E1DD}
-#rightmenu .link-menu{float: right; height: 60px; width:48%; margin:1px;border:1px solid #D6D6CE;border-top:1px solid #D6D6CE;border-bottom:2px solid #CDCDCD;background: #E2E1DD url(../images/bg-right-menu.jpg) repeat;}
-#rightmenu  .link-menu-current {height: 60px; width:48%;margin:1px;background:#fff;} 
-#rightmenu .link-menu-current  a {color:#000;border-top: #FEA53D 3px solid;border-bottom: #FEA53D 3px solid;}
-#rightmenu .link-menu a  {background:url(../images/hidbg.png) repeat-x bottom left;display: block;overflow: hidden;font-size:x-small;font-weight: bold;height: 60px;}
-#rightmenu .link-menu img {padding:2px 0 4px 0;}
-#rightmenu .link-menu a:hover{height: 57px;text-decoration: none;background:#FEF5E2 url(../images/hidbg.png) repeat-x bottom left; color:#000;border-top: #FEA53D 3px solid;border-bottom: #FEA53D 3px solid;}
+#main_menu{float:right; width:26%; padding:10px; background: #EFE7B8;border: 4px solid #FEA53D;position: relative;-moz-border-radius: 8px; border-radius:1px;}
+.body_menu {text-align:center;background: #E2E1DD}
+.link_menu{float: right; height: 60px; width:48%; margin:1px;border:1px solid #D6D6CE;border-top:1px solid #D6D6CE;border-bottom:2px solid #CDCDCD;background: #E2E1DD url(../images/bg-right-menu.jpg) repeat;}
+.link_current {height: 60px; width:48%;margin:1px;background:#fff;} 
+.link_current  a {color:#000;border-top: #FEA53D 3px solid;border-bottom: #FEA53D 3px solid;}
+.link_menu a  {background:url(../images/hidbg.png) repeat-x bottom left;display: block;overflow: hidden;font-size:x-small;font-weight: bold;height: 60px;}
+.link_menu img {padding:2px 0 4px 0;}
+.link_menu a:hover{height: 57px;text-decoration: none;background:#FEF5E2 url(../images/hidbg.png) repeat-x bottom left; color:#000;border-top: #FEA53D 3px solid;border-bottom: #FEA53D 3px solid;}
 /* right  menu */	
 	
 /*  buttons */

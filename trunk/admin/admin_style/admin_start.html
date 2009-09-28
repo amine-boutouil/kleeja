@@ -1,4 +1,39 @@
-﻿<!-- start body panel  -->
+﻿<script type="text/javascript">
+$(document).ready(function(){
+	
+	//hide message_body after the first one
+	$(".message_list .message_body:gt(1)").hide();
+	
+	//hide message li after the 5th
+	$(".message_list li:gt(4)").hide();
+
+	
+	//toggle message_body
+	$(".message_head").click(function(){
+		$(this).next(".message_body").slideToggle(00)
+		return false;
+	});
+
+	//show all messages
+	$(".show_all").click(function(){
+		$(this).hide()
+		$(".hid_all").show()
+		$(".message_body").slideDown()
+		return false;
+	});
+
+	//show recent messages only
+	$(".hid_all").click(function(){
+		$(this).hide()
+		$(".show_all").show()
+		$(".message_body").slideUp()
+		return false;
+	});
+
+});
+</script>
+
+<!-- start body panel  -->
 <div id="divmiddle">
 
 <fieldset>
@@ -40,45 +75,9 @@ $('div#{{id}}').pulse({
 <!-- end >> error System Messages -->
 </LOOP>
 
-<script type="text/javascript">
-$(document).ready(function(){
-	
-	//hide message_body after the first one
-	$(".message_list .message_body:gt(1)").hide();
-	
-	//hide message li after the 5th
-	$(".message_list li:gt(4)").hide();
-
-	
-	//toggle message_body
-	$(".message_head").click(function(){
-		$(this).next(".message_body").slideToggle(00)
-		return false;
-	});
-
-	//show all messages
-	$(".show_all").click(function(){
-		$(this).hide()
-		$(".hid_all").show()
-		$(".message_body").slideDown()
-		return false;
-	});
-
-	//show recent messages only
-	$(".hid_all").click(function(){
-		$(this).hide()
-		$(".show_all").show()
-		$(".message_body").slideUp()
-		return false;
-	});
-
-});
-</script>
-
 <!-- start clear  -->
 <div class="clr"></div>
 <!-- end clear  -->
-
 
 <ol class="message_list">
 	<li>
@@ -86,7 +85,7 @@ $(document).ready(function(){
 		<div class="message_body">
 
 <!-- start welcome user admin -->
-<div class="">
+<div>
 			<div class="box_ua">{usernamelang}</div>
 			<p class="meta"><IF NAME="last_visit">{lang.LAST_VISIT} : <span>{last_visit}</span></IF> &nbsp;&bull;&nbsp; {lang.LSTFLE_ST} : 
 			<IF NAME="stat_last_file!='0'"><a href="{last_file_up_url}" onclick="window.open(this.href,'_blank');return false;">{last_file_up}</a><ELSE>{lang.UNKNOWN}</IF></p>
@@ -95,13 +94,12 @@ $(document).ready(function(){
 				<div class="boxlastfp"><a href="{h_lst_imgs}"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/viewpicture.png" alt="Kleeja love you ..," />{lang.IMG_LST_VST_SEARCH}</a></div>
 				<div class="boxlastfp"><a href="{h_lst_files}"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/viewfiles.png" alt="Kleeja love you ..," />{lang.FLS_LST_VST_SEARCH}</a></div>
 			</IF>
+<div class="clr"></div>
 </div>
 <!-- end  welcome user admin -->
 		</div>
 	</li>
-<!-- start clear  -->
-<div class="clr"></div><br />
-<!-- # clear  -->
+
 	<li>
 		<p class="message_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/general_title.png" alt="Kleeja love you ..," />{lang.SIZE_STAT}</cite> <span class="timestamp"></span></p>
 		<div class="message_body">
@@ -135,16 +133,13 @@ $(document).ready(function(){
 			<div class="filsiz">[ {files_sizes} ]</div>
 
 			</div>
-<div class="clr"></div>
 </div>
 
 
 <!-- end stat  disk size  -->
 		</div>
 	</li>
-<!-- start clear  -->
-<div class="clr"></div><br />
-<!-- # clear  -->
+
 	<li>
 		<p class="message_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/search_engines.png" alt="Kleeja love you ..," />احصائيات محركات البحث</cite> <span class="timestamp"></span></p>
 		<div class="message_body">
@@ -162,9 +157,7 @@ $(document).ready(function(){
 <!-- end  last yahoo -->	
 		</div>
 	</li>
-<!-- start clear  -->
-<div class="clr"></div><br />
-<!-- # clear  -->
+
 	<li>
 		<p class="message_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/infoanother.png" alt="Kleeja love you ..," />{lang.OTHER_INFO} !</cite> <span class="timestamp"></span></p>
 		<div class="message_body">
@@ -285,4 +278,4 @@ $(document).ready(function(){
 </fieldset>
 
 </div>
-<!-- end body panel  -->
+<!--  # Powered by Kleeja .... Kleeja.com   #  copyright 2007-2009  .. Kleeja -->

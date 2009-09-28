@@ -86,8 +86,8 @@ $(document).ready(function(){
 		<div class="message_body">
 
 <!-- start welcome user admin -->
-<fieldset class="fieldsetinfo">
-			<div class="adminwelcome">{usernamelang}</div>
+<div class="">
+			<div class="box_ua">{usernamelang}</div>
 			<p class="meta"><IF NAME="last_visit">{lang.LAST_VISIT} : <span>{last_visit}</span></IF> &nbsp;&bull;&nbsp; {lang.LSTFLE_ST} : 
 			<IF NAME="stat_last_file!='0'"><a href="{last_file_up_url}" onclick="window.open(this.href,'_blank');return false;">{last_file_up}</a><ELSE>{lang.UNKNOWN}</IF></p>
 			
@@ -95,36 +95,30 @@ $(document).ready(function(){
 				<div class="boxlastfp"><a href="{h_lst_imgs}"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/viewpicture.png" alt="Kleeja love you ..," />{lang.IMG_LST_VST_SEARCH}</a></div>
 				<div class="boxlastfp"><a href="{h_lst_files}"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/viewfiles.png" alt="Kleeja love you ..," />{lang.FLS_LST_VST_SEARCH}</a></div>
 			</IF>
-</fieldset>
+</div>
 <!-- end  welcome user admin -->
 		</div>
 	</li>
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- # clear  -->
 	<li>
 		<p class="message_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/general_title.png" alt="Kleeja love you ..," />{lang.SIZE_STAT}</cite> <span class="timestamp"></span></p>
 		<div class="message_body">
-			<!-- start clear  -->
-<div class="clr"></div>
-<!-- end clear  -->
 
 <!-- start stat  disk size -->
-<fieldset class="fieldsetinfo">
-		<div class="fieldset">
-			<div class="fontst">{lang.AUSERS_NUM}</div>
-			<br />
-			<div>[ {users_number} ]</div>
-		</div>
+<div class="">
+
+			<div class="statallfils">{lang.AUSERS_NUM} :  {users_number} ]</div>
+
 		<IF NAME="config.user_system==1">
-		<div class="fieldset">
-			<div class="fontst">{lang.LAST_REG}</div>
-			<br />
-			<div>[ {lst_reg} ]</div>
-		</div>
+			<div class="statallfils">{lang.LAST_REG} : [ {lst_reg} ]</div>
 		</IF>
-		
-			<div class="boxsizestat">
-			<div class="statallfils">{lang.AFILES_NUM} <span>[ {files_number} ]</span> {lang.AFILES_SIZE} <span>[ {files_sizes} ]</span></div>
+	
+			<div class="statallfils">{lang.AFILES_NUM} <span>[ {files_number} ]</span></div>
+			<div class="statallfils">{lang.AFILES_SIZE} <span>[ {files_sizes} ]</span></div>
 			<div class="statallfils">{lang.LSTDELST} <span>{last_del_fles}</span></div>
-			</div>
+			
 			<div class="clr"></div>
 			<div class="perlstat">
 				<table class="disk_size" border="0" width="100%" cellspacing="0" cellpadding="0" dir="ltr">
@@ -142,13 +136,15 @@ $(document).ready(function(){
 
 			</div>
 <div class="clr"></div>
-</fieldset>
+</div>
 
 
 <!-- end stat  disk size  -->
 		</div>
 	</li>
-
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- # clear  -->
 	<li>
 		<p class="message_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/search_engines.png" alt="Kleeja love you ..," />احصائيات محركات البحث</cite> <span class="timestamp"></span></p>
 		<div class="message_body">
@@ -166,6 +162,9 @@ $(document).ready(function(){
 <!-- end  last yahoo -->	
 		</div>
 	</li>
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- # clear  -->
 	<li>
 		<p class="message_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/infoanother.png" alt="Kleeja love you ..," />{lang.OTHER_INFO} !</cite> <span class="timestamp"></span></p>
 		<div class="message_body">
@@ -208,8 +207,13 @@ $(document).ready(function(){
 </ol>
 
 <div class="message_list_bottom"></div>
-<div class="collapse_buttons"><a href="#" class="show_all">اظهار الكل</a> <a href="#" class="hid_all">أخفاء الكل</a></div>
+<!-- start clear  -->
 <div class="clr"></div>
+<!-- # clear  -->
+<div class="collapse_buttons"><a href="#" class="show_all">اظهار الكل</a> <a href="#" class="hid_all">أخفاء الكل</a></div>
+<!-- start clear  -->
+<div class="clr"></div>
+<!-- # clear  -->
 </div>
 
 <!-- start clear  -->
@@ -274,7 +278,9 @@ $(document).ready(function(){
 <!-- end sql debug -->
 
 
+<!-- start clear  -->
 <div class="clr"></div>
+<!-- # clear  -->
 
 </fieldset>
 

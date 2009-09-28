@@ -5,7 +5,8 @@
 */
 
 body {height:100%;width: 100%;background: #FFFFFF url(../images/adm-body.jpg) repeat-x ;border-top: 2px solid #FEA53D;border-bottom: 2px solid #6496C3;color: #3D3D3D; margin: 0 ;	padding: 0;font-family:Tahoma, Arial, Helvetica, sans-serif;font-weight:normal;font-size:12px; }
-h2 {	line-height:25px;padding:6px;background: url(../images/message-bar.gif) repeat-x;color: #FD6812; font-weight:bold;font-size:18px;}
+h2 {	line-height:25px;padding:6px;background: url(../images/message-bar.gif) repeat-x;color: #FD6812;font-size:160%;}
+h6 {	line-height:20px;padding:3px;color: #444;font-size:115%;font-weight:400;}
 li {list-style: none;}
 ul{margin: 0 0 4px 0; text-align: justify; line-height: 26px;}
 img {border:0px;}
@@ -17,7 +18,7 @@ label { cursor: pointer;padding: 0 5px 0 0;}
 fieldset { padding:10px; border: 4px solid #6496C3;background: #B0D2F6; position: relative; -moz-border-radius: 8px; border-radius:1px;}
 legend { padding:0 5px; font-weight:bold;font-size:12px;color: #115098; margin-top: -.4em; position: relative; text-transform: none;line-height: 1.2em; top: 0; vertical-align: middle;font:bold 11px Tahoma, Arial, Helvetica, sans-serif;}
 select ,option{cursor: pointer; vertical-align: middle; width: auto; color: #000; padding:1px 5px;font:normal 12px Tahoma, Arial, Helvetica, sans-serif;}
-textarea {font:normal 12px Tahoma, Arial, Helvetica, sans-serif; cursor: text; vertical-align: middle; padding: 2px; color: #000;border-left: 1px solid #AFAEAA; border-top: 1px solid #AFAEAA; border-right: 1px solid #D5D5C8;border-bottom: 1px solid #D5D5C8; background-color:#F2F2F2;}
+textarea {font:normal 12px Tahoma, Arial, Helvetica, sans-serif; cursor: text; vertical-align: middle; padding: 2px; color: #000;border-left: 1px solid #AFAEAA; border-top: 1px solid #AFAEAA; border-right: 1px solid #D5D5C8;border-bottom: 1px solid #D5D5C8; background-color:#FFF;}
 input { padding:3px 6px;margin-right:2px;margin-left:2px;font:normal 12px Tahoma, Arial, Helvetica, sans-serif;}
 input[type="text"],input[type="password"]{cursor: text;border-left: 1px solid #AFAEAA; border-top: 1px solid #AFAEAA; border-right: 1px solid #D5D5C8;border-bottom: 1px solid #D5D5C8;}
 input[type="submit"] ,input[type="button"]{cursor: pointer;padding:1px 18px;font-family:Tahoma, Arial, Helvetica, sans-serif;font-weight:normal;font-size:12px;}
@@ -44,12 +45,12 @@ input[type="password"]:focus,input[type="text"]:focus,select:focus,textarea:focu
 /* right  menu */	
 #rightmenu{float:right; width:26%; padding:10px; background: #EFE7B8;border: 4px solid #FEA53D;position: relative;-moz-border-radius: 8px; border-radius:1px;}
 #rightmenu .body-menu {text-align:center;background: #E2E1DD}
-#rightmenu .link-menu{float: right; height: 60px; width:48%; margin:1px;border:1px solid #D6D6CE;border-top:2px solid #D6D6CE;border-bottom:2px solid #CDCDCD;background: #E2E1DD url(../images/bg-right-menu.jpg) repeat;}
+#rightmenu .link-menu{float: right; height: 60px; width:48%; margin:1px;border:1px solid #D6D6CE;border-top:1px solid #D6D6CE;border-bottom:2px solid #CDCDCD;background: #E2E1DD url(../images/bg-right-menu.jpg) repeat;}
 #rightmenu  .link-menu-current {height: 60px; width:48%;margin:1px;background:#fff;} 
 #rightmenu .link-menu-current  a {color:#000;border-top: #FEA53D 3px solid;border-bottom: #FEA53D 3px solid;}
 #rightmenu .link-menu a  {background:url(../images/hidbg.png) repeat-x bottom left;display: block;overflow: hidden;font-size:x-small;font-weight: bold;height: 60px;}
 #rightmenu .link-menu img {padding:2px 0 4px 0;}
-#rightmenu .link-menu a:hover{height: 54px;padding-left:10px;text-decoration: none;background:#FEF5E2 url(../images/hidbg.png) repeat-x bottom left; color:#000;border-top: #FEA53D 3px solid;border-bottom: #FEA53D 3px solid;}
+#rightmenu .link-menu a:hover{height: 57px;text-decoration: none;background:#FEF5E2 url(../images/hidbg.png) repeat-x bottom left; color:#000;border-top: #FEA53D 3px solid;border-bottom: #FEA53D 3px solid;}
 /* right  menu */	
 	
 /*  buttons */
@@ -87,7 +88,7 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 /* other info  */
 
 /*  disk_size */
-.boxsizestat {float:right;display:inline;padding:6px;}
+
 .statallfils {float:right;background:#fff;border:1px solid #B8D8EF;-moz-border-radius: 4px; border-radius:1px;padding:6px;margin:1px 3px 2px 6px;text-align:center;}
 .statallfils  span{background:#F2F2F2;color:#0B55C4;}
 .perlstat {padding:6px;margin:1px 3px 2px 6px;text-align:center;}
@@ -262,17 +263,15 @@ color:#0B55C4;
 	padding-right: 12px;
 }
 .meta {
-	padding: 2px 20px;
-	border-top: 1px dashed #D2D4C9;
-	border-bottom: 1px dashed #D2D4C9;
+	padding: 6px 20px;	border-top: 1px dashed #D2D4C9;	border-bottom: 1px dashed #D2D4C9;
+	text-transform: uppercase;	text-align: right;color:#444;font-size:10px;font-weight: bold;}
+.box_ua {
+	padding:7px;
 	text-transform: uppercase;
 	text-align: right;
-	font-family: Arial, Helvetica, sans-serif;
-	font-size: 9px;
+color:#444;font-size:12px;font-weight: bold;
 }
-/* last visit */
 .tilestart {line-height:25px;padding:5px 10px;color:#FF6600;font-size:large;font-weight: bold;background:#F0F0F0 url(../images/bg_tilestart.png) repeat-x center left;border-top: 1px solid #D2D4C9;border-bottom: 1px solid #BCBCBC;}
-.fieldsetinfo {border-style:none;background:none;}
 
 .fieldseuser {margin:10px;padding:10px 6px; border: 1px solid #7F7F7F;background:#FFF; position: relative; -moz-border-radius: 4px; border-radius:1px;}
 
@@ -283,18 +282,12 @@ color:#0B55C4;
 .boxlastfp:hover {background:#EAF2F4}
 
 
-.fieldset { float:right;width:27%;margin:10px 6px;padding:10px 6px; border: 1px solid #7F7F7F;background:#EFF5F8; position: relative; -moz-border-radius:4px; border-radius:1px;}
-.fieldset legend {padding:0 6px;}
-.fieldset .fontst {text-align:center;font-size:10px;font-weight: bold;color:#0B55C4}
-.fieldset div {text-align:center;font-size:13px;font-weight: bold;color:#FD6812}
 
 
-.adminwelcome {padding-bottom:10px;color:#444;font-size:11px;font-weight: bold;}
 .last {font-weight:normal;}
 .infocontrol {width:100%;background:#F2F2F2;margin-bottom:4px;font-size:11px;border-top:2px ridge #fff;border-bottom:2px ridge #fff;border-left:0px;border-right:0px}
 .infocontrol td{background:#F2F2F2;width:50%;padding:11px 5px;border-bottom:0px;text-align: right;}
 .infocontrol:hover { background:#DBE1F8}
 
 
-.box_clickfont{margin:5px auto;padding:20px;background:#DFF0FF;border: 1px solid #9DBCD8;-moz-border-radius:4px; border-radius:2px;}	
-
+#mail_here {margin:5px auto;padding:10px;font-size:118%;word-spacing:3px;line-height:22px;background:#EFE7B8;border-top: 2px solid #FEA53D;border-bottom: 2px solid #FEA53D;}

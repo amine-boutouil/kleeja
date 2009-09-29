@@ -55,14 +55,14 @@ class SimplePager
 			return;
 		}
 
-		$re = '<div class="pagination">';
+		$re = '<div class="pagination"><ul>';
 
 		// Add a previous page link
 		if ($this->totalPages > 1 && $this->currentPage > 1)
-			($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '<a class="paging" href="' . $link . '-' . ($this->currentPage-1) . '.html">'. $lang['PREV'] .'</a>' : $re .= '<a class="paging" href="' . $link . '&amp;page=' . ($this->currentPage-1) . '">'. $lang['PREV'] .'</a>';
+			($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '<li><a class="disablelink" href="' . $link . '-' . ($this->currentPage-1) . '.html">'. $lang['PREV'] .'</a></li>' : $re .= '<li><a class="disablelink" href="' . $link . '&amp;page=' . ($this->currentPage-1) . ' ">'. $lang['PREV'] .'</a></li>';
 
 		if ($this->currentPage > 3)		
-			($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '<a class="paging" href="' . $link . '-1.html">1</a>' . (($this->currentPage > 5) ? '<span class="three_dots">...</span>' : '') : $re .= '<a class="paging" href="' . $link . '&amp;page=1">1</a>' . (($this->currentPage > 5) ? '<span class="three_dots">...</span>' : '');
+			($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '<li><a href="' . $link . '-1.html">1</a></li>' . (($this->currentPage > 5) ? '<li class="three_dots">...</li>' : '') : $re .= '<li><a href="' . $link . '&amp;page=1">1</a></li>' . (($this->currentPage > 5) ? '<li class="three_dots">...</li>' : '');
 
 		// Don't ask me how the following works. It just does, OK? :-)
 		for ($current = ($this->currentPage == 5) ? $this->currentPage - 3 : $this->currentPage - 2, $stop = ($this->currentPage + 4 == $this->totalPages) ? $this->currentPage + 4 : $this->currentPage + 3; $current < $stop; ++$current)
@@ -70,23 +70,23 @@ class SimplePager
 			if ($current < 1 || $current > $this->totalPages)
 				continue;
 			else if ($current != $this->currentPage)
-				($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '<a href="'. $link .'-'.($current).'.html" class="paging">'. $current .'</a>' : $re .= '<a href="'. $link .'&amp;page='.($current).'" class="paging">'. $current .'</a>';
+				($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '<li><a href="'. $link .'-'.($current).'.html">'. $current .'</a></li>' : $re .= '<li><a href="'. $link .'&amp;page='.($current).'">'. $current .'</a></li>';
 			else
-				$re .= '<strong class="here_page">'. $current .'</strong>';
+				$re .= '<li><strong class="currentpage">'. $current .'</strong></li>';
 		}
 
 		if ($this->currentPage <= ($this->totalPages-3))
 		{
 			if ($this->currentPage != ($this->totalPages-3) && $this->currentPage != ($this->totalPages-4))
-				$re .= '<span class="three_dots">...</span>';
-			($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '<a href="' . $link . '-' . ($this->totalPages) . '.html"  class="paging">'. $this->totalPages .'</a>' : $re .= '<a href="' . $link . '&amp;page=' . ($this->totalPages) . '"  class="paging">'. $this->totalPages .'</a>';
+				$re .= '<li class="three_dots">...</li>';
+			($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '<li><a href="' . $link . '-' . ($this->totalPages) . '.html">'. $this->totalPages .'</a></li>' : $re .= '<li><a href="' . $link . '&amp;page=' . ($this->totalPages) . '" >'. $this->totalPages .'</a></li>';
 		}
 
 		// Add a next page link
 		if ($this->totalPages > 1 && $this->currentPage < $this->totalPages)
-			($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '<a class="paging" href="' . $link . '-' . ($this->currentPage+1) . '.html">'. $lang['NEXT'] .'</a>' :  $re .= '<a class="paging" href="' . $link . '&amp;page=' . ($this->currentPage+1) . '">'. $lang['NEXT'] .'</a>';
+			($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '<li><a class="prevnext" href="' . $link . '-' . ($this->currentPage+1) . '.html">'. $lang['NEXT'] .'</a></li>' :  $re .= '<li><a class="prevnext" href="' . $link . '&amp;page=' . ($this->currentPage+1) . '">'. $lang['NEXT'] .'</a></li>';
 
-		$re .= '</div>'; 
+		$re .= '</ul></div>'; 
 
 		return $re;
 	}

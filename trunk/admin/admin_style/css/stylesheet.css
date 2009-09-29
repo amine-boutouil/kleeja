@@ -133,13 +133,6 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 #toolTipBox {display: none; padding: 10px; line-height:20px;	text-align:right; position: fixed;color:#111;background: #EFE7B8; border: 2px solid #FEA53D;-moz-border-radius: 8px; border-radius:1px;}
 /* toolTipBox */
 
-/* pagination */
-.arr_paging{float:right;display:inline;margin:8px 0;}
-.pagination  a{padding:3px 9px;color:#333;margin:0 2px;}
-.paging {background-color: #E6F2FF; border: 1px solid #6496C3;font-size:10px;text-align:center;}
-.here_page ,.paging:hover,.paging {float:right;padding:3px 9px;-moz-border-radius:10px;}
-.here_page ,.paging:hover{border:1px solid #6496c3;font-size:10px;color:#fff;background:#6496c3;text-align:center;text-decoration:none;}
-/* ## pagination */
 
 /* footer */
 #footer {position:relative; margin:0 auto; width:96%; padding:12px 0 10px;text-align: center; color: #444;}
@@ -299,4 +292,21 @@ color:#444;font-size:12px;font-weight: bold;
 
 
 #mail_here {margin:5px auto;padding:10px;font-size:118%;word-spacing:3px;line-height:22px;background:#EFE7B8;border-top: 2px solid #FEA53D;border-bottom: 2px solid #FEA53D;}
+
+
+/* pagination */
+.pagination{padding:2px 0;}
+.pagination ul{text-align: right;font-size: 10px;}
+.pagination li{list-style-type: none;display: inline;float:right;color:#333;margin-left:4px;text-align:center;}
+.pagination a{background-color: #DCE8ED;padding:3px 6px;border: 1px solid #0F90C6;text-decoration: none; color:#0F90C6;-moz-border-radius:10px;}
+.pagination a:hover, .pagination a:active{border: 1px solid #2b66a5;color: #000;background-color: #FFFF80;}
+.currentpage{background-color: #90C6FF; border: 1px solid #2A639B;color: #2A639B;margin-bottom:5px;padding:3px 6px;font-weight: bold;cursor: default;-moz-border-radius:10px;}
+.pagination a.disablelink, 
+.pagination a.disablelink:hover{
+background-color:#F2F2F2;cursor: default;color: #929292;border-color: #929292;}
+.pagination a.prevnext{font-weight: bold;}
+.three_dots {color: #aaa;}
+/* # pagination */
+
+.arr_paging{float:right;display:inline;margin:8px 0;}
 

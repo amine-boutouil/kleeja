@@ -186,13 +186,6 @@ background:#FF9933 url(../images/headline_bg.png) repeat-x top right;color:#111;
 #buttons:hover ,.buttons:hover{background:#FFCC33;color: #111;border:1px solid #666;text-decoration:none;}
 /* ## ALL buttons */
 
-/* pagination */
-.pagination  a{padding:3px 9px;color:#333;margin:1px 3px;}
-.paging {background:#C8C8C8 url(../images/headline_bg.png) repeat-x center right;border: 1px solid #999;font-size:10px;text-align:center;}
-.here_page ,.paging {margin:0px 1px;float:right;padding:3px 9px;-moz-border-radius-topleft: 10px;-webkit-border-top-left-radius: 10px;-moz-border-radius-bottomright: 10px;-webkit-border-bottom-right-radius: 10px;}
-.here_page ,.paging:hover{padding:3px 9px;border:1px solid #888;font-size:10px;color:#BD5900;background:#FFF8C6 url(../images/headline_bg.png) repeat-x center right;text-align:center;text-decoration:none;}
-/* ## pagination */
-
 /* footer template */
 #footer{ width: 100%;margin:3px auto;}
 #footerlinksleft ul{width:22%;line-height:20px;float:left;}
@@ -345,3 +338,18 @@ background:#FF9933 url(../images/headline_bg.png) repeat-x top right;color:#111;
 
 .debug_kleeja{width:80%;margin:0 auto;background-color:#fff;border:1px #666 solid;margin-top:20px;margin-bottom:20px;}
 .debug_kleeja fieldset{margin:0 auto;width:80%;}
+
+
+/* pagination */
+.pagination{padding:2px 0;}
+.pagination ul{text-align: right;font-size: 10px;}
+.pagination li{list-style-type: none;display: inline;float:right;color:#333;margin-left:4px;text-align:center;}
+.pagination a{background-color: #DCE8ED;padding:3px 6px;border: 1px solid #0F90C6;text-decoration: none; color:#0F90C6;-moz-border-radius:10px;}
+.pagination a:hover, .pagination a:active{border: 1px solid #2b66a5;color: #000;background-color: #FFFF80;}
+.currentpage{background-color: #90C6FF; border: 1px solid #2A639B;color: #2A639B;margin-bottom:5px;padding:3px 6px;font-weight: bold;cursor: default;-moz-border-radius:10px;}
+.pagination a.disablelink, 
+.pagination a.disablelink:hover{
+background-color:#F2F2F2;cursor: default;color: #929292;border-color: #929292;}
+.pagination a.prevnext{font-weight: bold;}
+.three_dots {color: #aaa;}
+/* # pagination */

@@ -35,21 +35,22 @@ $(document).ready(function(){
 
 <!-- start body panel  -->
 <div id="divmiddle">
-
 <fieldset>
 
-<div id="border-table">
+<!-- start box all -->
+<div class="box_all">
 
 <!-- start general stat panel admin -->
 <div class="tilestart"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/admin_start.png" alt="Kleeja love you ..," />&#9679; {lang.KLEEJA_CP} ..</div>
-<!-- end general stat panel admin -->
+<!-- ## general stat panel admin -->
 
 <!-- start clear  -->
-<div class="clr"></div><br />
-<!-- end clear  -->
+	<div class="clr"></div>
+	<br />
+<!-- ## clear  -->
 
-<LOOP NAME="ADM_NOTIFICATIONS">
 <!-- start >> error System Messages -->
+<LOOP NAME="ADM_NOTIFICATIONS">
 <div id="system-message">
 	<div class="{{msg_type}}" id="{{id}}">
 		<ul>
@@ -69,39 +70,50 @@ $('div#{{id}}').pulse({
 </IF>
 
 <!-- start clear  -->
-<div class="clr"></div><br />
-<!-- end clear  -->
+	<div class="clr"></div>
+	<br />
+<!-- ## clear  -->
 
-<!-- end >> error System Messages -->
 </LOOP>
+<!-- end >> error System Messages -->
 
 <!-- start clear  -->
-<div class="clr"></div>
-<!-- end clear  -->
+	<div class="clr"></div>
+<!-- ## clear  -->
 
+<!-- start view list control panel -->
+<div class="list_control_panel">
 <ol class="message_list">
 	<li>
-		<p class="message_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/user.png" alt=".." />{lang.GENERAL_STAT}</cite> <span class="timestamp"></span></p>
+		<div class="message_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/user.png" alt=".." />{lang.GENERAL_STAT}</cite><span class="timestamp"></span></div>
 		<div class="message_body">
-
-<!-- start welcome user admin -->
-<div>
-			<div class="box_ua">{usernamelang}</div>
-			<p class="meta"><IF NAME="last_visit">{lang.LAST_VISIT} : <span>{last_visit}</span></IF> &nbsp;&bull;&nbsp; {lang.LSTFLE_ST} : 
-			<IF NAME="stat_last_file!='0'"><a href="{last_file_up_url}" onclick="window.open(this.href,'_blank');return false;">{last_file_up}</a><ELSE>{lang.UNKNOWN}</IF></p>
-			
-			<IF NAME="last_visit">
-				<div class="boxlastfp"><a href="{h_lst_imgs}"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/viewpicture.png" alt="Kleeja love you ..," />{lang.IMG_LST_VST_SEARCH}</a></div>
-				<div class="boxlastfp"><a href="{h_lst_files}"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/viewfiles.png" alt="Kleeja love you ..," />{lang.FLS_LST_VST_SEARCH}</a></div>
-			</IF>
-<div class="clr"></div>
-</div>
-<!-- end  welcome user admin -->
+				<div class="adminusername">
+					<img src="{STYLE_PATH_ADMIN}images/adminusername.gif" alt="admin user name" />
+						<p>{usernamelang}</p>
+						<IF NAME="last_visit">
+							<p>{lang.LAST_VISIT} : {last_visit}</p>
+						</IF>
+						<IF NAME="stat_last_file!='0'">
+							<p>{lang.LSTFLE_ST} : <a href="{last_file_up_url}" onclick="window.open(this.href,'_blank');return false;">{last_file_up}</a>						</p>
+						<ELSE>
+							<p>{lang.UNKNOWN}</p>
+						</IF>
+				<!-- start clear  -->
+				<div class="clr"></div>
+				<!-- ## clear  -->
+				<IF NAME="last_visit">
+					<div class="boxlastfp"><a href="{h_lst_imgs}"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/viewpicture.png" alt="Kleeja love you ..," />{lang.IMG_LST_VST_SEARCH}</a></div>
+					<div class="boxlastfp"><a href="{h_lst_files}"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/viewfiles.png" alt="Kleeja love you ..," />{lang.FLS_LST_VST_SEARCH}</a></div>
+				</IF>
+				<!-- start clear  -->
+					<div class="clr"></div>
+				<!-- ## clear  -->
+			</div>
 		</div>
 	</li>
 
 	<li>
-		<p class="message_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/general_title.png" alt="Kleeja love you ..," />{lang.SIZE_STAT}</cite> <span class="timestamp"></span></p>
+		<div class="message_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/general_title.png" alt="Kleeja love you ..," />{lang.SIZE_STAT}</cite> <span class="timestamp"></span></div>
 		<div class="message_body">
 
 <!-- start stat  disk size -->
@@ -141,7 +153,7 @@ $('div#{{id}}').pulse({
 	</li>
 
 	<li>
-		<p class="message_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/search_engines.png" alt="Kleeja love you ..," />احصائيات محركات البحث</cite> <span class="timestamp"></span></p>
+		<div class="message_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/search_engines.png" alt="Kleeja love you ..," />احصائيات محركات البحث</cite> <span class="timestamp"></span></div>
 		<div class="message_body">
 			<!-- start  last google -->
 <table class="infocontrol">
@@ -159,7 +171,7 @@ $('div#{{id}}').pulse({
 	</li>
 
 	<li>
-		<p class="message_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/infoanother.png" alt="Kleeja love you ..," />{lang.OTHER_INFO} !</cite> <span class="timestamp"></span></p>
+		<div class="message_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/infoanother.png" alt="Kleeja love you ..," />{lang.OTHER_INFO} !</cite> <span class="timestamp"></span></div>
 		<div class="message_body">
 <!-- start welcome user admin -->
 
@@ -198,8 +210,10 @@ $('div#{{id}}').pulse({
 		</div>
 	</li>
 </ol>
-
 <div class="message_list_bottom"></div>
+</div>
+<!-- ## view list control panel -->
+
 <!-- start clear  -->
 <div class="clr"></div>
 <!-- # clear  -->
@@ -207,19 +221,23 @@ $('div#{{id}}').pulse({
 <!-- start clear  -->
 <div class="clr"></div>
 <!-- # clear  -->
+
 </div>
+<!-- ## box all -->
 
 <!-- start clear  -->
-<div class="clr"></div><br />
-<!-- end clear  -->
+	<div class="clr"></div><br />
+<!-- ## clear  -->
 
+<!-- start box all -->
+<div class="box_all">
 
-<div id="border-table">
-
-<!-- start team kleeja -->
+<!-- start box team kleeja -->
 <div class="team_info">
-<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/config_users.png" alt="Team Kleeja" />Development Team</h2>
-<table width="100%" cellspacing="0" cellpadding="0">
+	<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/config_users.png" alt="Team Kleeja" />{lang.KLEEJA_TEAM}</h2>
+	<p><a onclick="window.open(this.href,'_blank');return false;" href="http://code.google.com/p/kleeja"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/code_google.gif" alt="google code" /></a></p>
+		<div class="clr"></div>
+	<table width="100%" cellspacing="0" cellpadding="0">
 		<tr class="team_tr">
 			<td colspan="2">Name</td>
 			<td>Data</td>
@@ -242,12 +260,12 @@ $('div#{{id}}').pulse({
 		</tr>
 	</table>
 </div>
-<!-- # team kleeja -->
+<!-- ## box team kleeja -->
 
 <div class="clr"></div>
-
-<!-- end info -->
 </div>
+<!-- ## box all -->
+
 
 
 <!-- start sql debug -->
@@ -269,11 +287,11 @@ $('div#{{id}}').pulse({
 <!-- end sql debug -->
 
 
+
 <!-- start clear  -->
 <div class="clr"></div>
 <!-- # clear  -->
 
 </fieldset>
-
 </div>
 <!--  # Powered by Kleeja .... Kleeja.com   #  copyright 2007-2009  .. Kleeja -->

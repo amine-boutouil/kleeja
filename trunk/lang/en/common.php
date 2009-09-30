@@ -526,6 +526,7 @@ $lang = array_merge($lang, array(
 	'STYLE_DEPEND_ON'			=> 'Based on',
 	'NONE'						=> 'None',
 	'MESSAGE_NONE'				=> 'حتى الآن لا يوجد أي رسائل أو تبليغات ..',
+	'KLEEJA_TEAM'				=> 'فريق تطوير كليجا .. !',
 	//last line of this file ...					 
 	'S_TRANSLATED_BY' 			=> 'Translated By <a href="http://www.fenix4web.com/">Fenix4Web</a>',
 ));

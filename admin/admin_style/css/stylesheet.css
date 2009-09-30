@@ -227,22 +227,20 @@ tr:hover {background-color:#FFFFDD;}
 .message_list {list-style: none;}
 .message_list li {background: url(../images/message-bar.gif) repeat-x;border-top:1px solid #E9E9E9;}
 .message_head {padding: 5px 10px;cursor: pointer;position: relative;}
-.message_head .timestamp {background: url(../images/timestamp.gif) no-repeat left center;float:left;width:16px;height:16px;}
+.message_head .timestamp {float:left;}
 .message_head cite {font-size:18px;color:#0B55C4;}
 .message_body {padding:5px;display:block}
-
 .adminusername {padding:3px 0;color:#444;}
 .adminusername img{float:right;}
-.adminusername p{margin-top:5px;
-margin-right:10px;
-padding: 6px 0;
-border-top: 1px dashed #D2D4C9;
-border-bottom: 1px dashed #D2D4C9;
-color:#444;
+.text_info{margin-top:2px;width:60%;float:right;margin-right:10px;padding:4px 0;border-bottom: 1px dashed #D2D4C9;color:#444;}
 
 
-}
-
+.button_img {float:right;width:36%;line-height:46px;padding:6px;margin:1px 3px 2px 6px;text-align:center;background:#EAF2F4;
+border: solid 1px #e4e4e4; -moz-border-radius: 10px; border-radius:10px;}
+.button_img a {font-size:11px;font-weight: bold;color:#444}
+.button_img a:hover {color:#000;text-decoration: none;}
+.button_img:hover {background:#F0F0F0}
+.button_file {border: solid 1px #e4e4e4;}
 
 .collapse_buttons  {margin:5px 0;float: left;}
 .message_list_bottom {border-top: solid 1px #e4e4e4;	padding: 5px 0;clear: both;}
@@ -251,10 +249,6 @@ color:#444;
 
 .tilestart {line-height:25px;padding:5px 10px;color:#FF6600;font-size:large;font-weight: bold;background:#F0F0F0 url(../images/bg_tilestart.png) repeat-x top left;border-top: 1px solid #D2D4C9;border-bottom: 1px solid #BCBCBC;}
 .fieldseuser {margin:10px;padding:10px 6px; border: 1px solid #7F7F7F;background:#FFF; position: relative; -moz-border-radius: 4px; border-radius:1px;}
-.boxlastfp {float:right;width:36%;line-height:18px;padding:6px;margin:1px 3px 2px 6px;text-align:center;}
-.boxlastfp a {font-size:11px;font-weight: bold;color:#444}
-.boxlastfp a:hover {color:#000;text-decoration: none;}
-.boxlastfp:hover {background:#EAF2F4}
 .last {font-weight:normal;}
 .infocontrol {width:100%;background:#F2F2F2;margin-bottom:4px;font-size:11px;border-top:2px ridge #fff;border-bottom:2px ridge #fff;border-left:0px;border-right:0px}
 .infocontrol td{background:#F2F2F2;width:50%;padding:11px 5px;border-bottom:0px;text-align: right;}

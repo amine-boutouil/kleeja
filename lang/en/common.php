@@ -268,7 +268,6 @@ $lang = array_merge($lang, array(
 	'REPAIRE_CACHE' => '[Cache] deleted for  ..',
 	'KLEEJA_CP' => '[ Kleeja ] Administration',
 	'GENERAL_STAT' => 'General Stats',
-	'SIZE_STAT' => 'Size Stats',
 	'OTHER_INFO' => 'Other Info',
 	'AFILES_NUM' => 'Total number of files',
 	'AFILES_SIZE' => 'Total size of files',
@@ -527,6 +526,8 @@ $lang = array_merge($lang, array(
 	'NONE'						=> 'None',
 	'MESSAGE_NONE'				=> 'حتى الآن لا يوجد أي رسائل أو تبليغات ..',
 	'KLEEJA_TEAM'				=> 'فريق تطوير كليجا .. !',
+	'USER_STAT'					=> 'إحصائيات المستخدم',
+	'SEARCH_STAT' 				=> 'إحصائيات محركات البحث',
 	//last line of this file ...					 
 	'S_TRANSLATED_BY' 			=> 'Translated By <a href="http://www.fenix4web.com/">Fenix4Web</a>',
 ));

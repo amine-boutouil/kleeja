@@ -281,7 +281,7 @@ $lang = array_merge($lang, array(
 	'GOOGLE_NUM' => 'زيارات جوجل',
 	'LAST_YAHOO' => 'آخر زيارة للياهو',
 	'YAHOO_NUM' => 'زيارات الياهو',
-	'KLEEJA_CP_W' => 'أهلا وسهلاً بك عزيزي <b style="color:#FF0000">[ %s ]</b> في لوحة تحكم المركز  ..!',
+	'KLEEJA_CP_W' => 'مرحباً بك عزيزي <b style="color:#FF6600">[ %s ]</b> في لوحة تحكم الإدارة ..!',
 	'PHP_VER' => 'إصدار php',
 	'MYSQL_VER' => 'إصدار mysql',
 	'N_IMGS' => 'الصور',

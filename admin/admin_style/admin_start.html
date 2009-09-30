@@ -87,28 +87,34 @@ $('div#{{id}}').pulse({
 	<li>
 		<p class="message_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/user.png" alt=".." />{lang.USER_STAT}</cite><img class="timestamp" src="{STYLE_PATH_ADMIN}images/timestamp.gif" alt="Kleeja love you ..," /></p>
 		<div class="message_body">
-				<div class="adminusername">
-					<img src="{STYLE_PATH_ADMIN}images/adminusername.gif" alt="admin user name" />
-						<div class="text_info">{usernamelang}</div>
-						<IF NAME="last_visit">
-							<div class="text_info">{lang.LAST_VISIT} : {last_visit}</div>
-						</IF>
-						<IF NAME="stat_last_file!='0'">
-							<div class="text_info">{lang.LSTFLE_ST} : <a href="{last_file_up_url}" onclick="window.open(this.href,'_blank');return false;">{last_file_up}</a></div>
+		<!-- start info user admin -->
+		<table width="100%" cellspacing="0" cellpadding="0">
+			<tr>
+				<td class="adminimage">&nbsp;</td>
+				<td>
+						<p class="text_info">{usernamelang}</p>
+					<IF NAME="last_visit">
+						<p class="text_info">{lang.LAST_VISIT} : {last_visit}</p>
+					</IF>
+					<IF NAME="stat_last_file!='0'">
+						<p class="text_info">{lang.LSTFLE_ST} : <a href="{last_file_up_url}" onclick="window.open(this.href,'_blank');return false;">{last_file_up}</a></p>
 						<ELSE>
-							<div class="text_info">{lang.UNKNOWN}</div>
-						</IF>
-				<!-- start clear  -->
-				<div class="clr"></div><br />
-				<!-- ## clear  -->
+						<p class="text_info">{lang.UNKNOWN}</p>
+					</IF>
+					</td>
+				</tr>
+				
 				<IF NAME="last_visit">
-					<div class="button_img"><a href="{h_lst_imgs}"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/viewpicture.png" alt=".." />{lang.IMG_LST_VST_SEARCH}</a></div>
-					<div class="button_img button_file"><a href="{h_lst_files}"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/viewfiles.png" alt=".." />{lang.FLS_LST_VST_SEARCH}</a></div>
+				<tr>
+					<td>&nbsp;</td>
+					<td class="box_botton">
+						<p><a class="button_img" href="{h_lst_imgs}"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/viewpicture.png" alt=".." />{lang.IMG_LST_VST_SEARCH}</a></p>
+						<p><a class="button_file" href="{h_lst_files}"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/viewfiles.png" alt=".." />{lang.FLS_LST_VST_SEARCH}</a></p>
+					</td>
+				</tr>
 				</IF>
-				<!-- start clear  -->
-					<div class="clr"></div>
-				<!-- ## clear  -->
-			</div>
+		</table>
+		<!-- ## info user admin -->
 		</div>
 	</li>
 
@@ -117,7 +123,7 @@ $('div#{{id}}').pulse({
 		<div class="message_body">
 
 <!-- start stat  disk size -->
-<div class="">
+<div>
 
 			<div class="statallfils">{lang.AUSERS_NUM} :  {users_number} ]</div>
 
@@ -156,7 +162,7 @@ $('div#{{id}}').pulse({
 		<p class="message_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/search_engines.png" alt="Kleeja love you ..," />{lang.SEARCH_STAT}</cite><img class="timestamp" src="{STYLE_PATH_ADMIN}images/timestamp.gif" alt="Kleeja love you ..," /></p>
 		<div class="message_body">
 			<!-- start  last google -->
-<table class="infocontrol">
+<table>
 	<tr>
 		<td>{lang.LAST_GOOGLE} : {s_last_google}</td>
 		<td>{lang.GOOGLE_NUM} : <b>[ {s_google_num} ]</b></td>
@@ -177,7 +183,7 @@ $('div#{{id}}').pulse({
 
 <!-- end  welcome user admin -->
 
-<table class="data">
+<table>
 <tr>
 	<td>{lang.KLEEJA_VERSION}</td>
 	<td>{kleeja_version}</td>

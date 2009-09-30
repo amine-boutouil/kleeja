@@ -85,25 +85,25 @@ $('div#{{id}}').pulse({
 <div class="list_control_panel">
 <ol class="message_list">
 	<li>
-		<div class="message_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/user.png" alt=".." />{lang.GENERAL_STAT}</cite><span class="timestamp"></span></div>
+		<p class="message_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/user.png" alt=".." />{lang.USER_STAT}</cite><img class="timestamp" src="{STYLE_PATH_ADMIN}images/timestamp.gif" alt="Kleeja love you ..," /></p>
 		<div class="message_body">
 				<div class="adminusername">
 					<img src="{STYLE_PATH_ADMIN}images/adminusername.gif" alt="admin user name" />
-						<p>{usernamelang}</p>
+						<div class="text_info">{usernamelang}</div>
 						<IF NAME="last_visit">
-							<p>{lang.LAST_VISIT} : {last_visit}</p>
+							<div class="text_info">{lang.LAST_VISIT} : {last_visit}</div>
 						</IF>
 						<IF NAME="stat_last_file!='0'">
-							<p>{lang.LSTFLE_ST} : <a href="{last_file_up_url}" onclick="window.open(this.href,'_blank');return false;">{last_file_up}</a>						</p>
+							<div class="text_info">{lang.LSTFLE_ST} : <a href="{last_file_up_url}" onclick="window.open(this.href,'_blank');return false;">{last_file_up}</a></div>
 						<ELSE>
-							<p>{lang.UNKNOWN}</p>
+							<div class="text_info">{lang.UNKNOWN}</div>
 						</IF>
 				<!-- start clear  -->
-				<div class="clr"></div>
+				<div class="clr"></div><br />
 				<!-- ## clear  -->
 				<IF NAME="last_visit">
-					<div class="boxlastfp"><a href="{h_lst_imgs}"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/viewpicture.png" alt="Kleeja love you ..," />{lang.IMG_LST_VST_SEARCH}</a></div>
-					<div class="boxlastfp"><a href="{h_lst_files}"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/viewfiles.png" alt="Kleeja love you ..," />{lang.FLS_LST_VST_SEARCH}</a></div>
+					<div class="button_img"><a href="{h_lst_imgs}"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/viewpicture.png" alt=".." />{lang.IMG_LST_VST_SEARCH}</a></div>
+					<div class="button_img button_file"><a href="{h_lst_files}"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/viewfiles.png" alt=".." />{lang.FLS_LST_VST_SEARCH}</a></div>
 				</IF>
 				<!-- start clear  -->
 					<div class="clr"></div>
@@ -113,7 +113,7 @@ $('div#{{id}}').pulse({
 	</li>
 
 	<li>
-		<div class="message_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/general_title.png" alt="Kleeja love you ..," />{lang.SIZE_STAT}</cite> <span class="timestamp"></span></div>
+		<p class="message_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/general_title.png" alt="Kleeja love you ..," />{lang.GENERAL_STAT}</cite><img class="timestamp" src="{STYLE_PATH_ADMIN}images/timestamp.gif" alt="Kleeja love you ..," /></p>
 		<div class="message_body">
 
 <!-- start stat  disk size -->
@@ -153,7 +153,7 @@ $('div#{{id}}').pulse({
 	</li>
 
 	<li>
-		<div class="message_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/search_engines.png" alt="Kleeja love you ..," />احصائيات محركات البحث</cite> <span class="timestamp"></span></div>
+		<p class="message_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/search_engines.png" alt="Kleeja love you ..," />{lang.SEARCH_STAT}</cite><img class="timestamp" src="{STYLE_PATH_ADMIN}images/timestamp.gif" alt="Kleeja love you ..," /></p>
 		<div class="message_body">
 			<!-- start  last google -->
 <table class="infocontrol">
@@ -171,7 +171,7 @@ $('div#{{id}}').pulse({
 	</li>
 
 	<li>
-		<div class="message_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/infoanother.png" alt="Kleeja love you ..," />{lang.OTHER_INFO} !</cite> <span class="timestamp"></span></div>
+		<p class="message_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/infoanother.png" alt="Kleeja love you ..," />{lang.OTHER_INFO}</cite><img class="timestamp" src="{STYLE_PATH_ADMIN}images/timestamp.gif" alt="Kleeja love you ..," /></p>
 		<div class="message_body">
 <!-- start welcome user admin -->
 

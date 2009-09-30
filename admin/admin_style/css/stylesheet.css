@@ -5,7 +5,7 @@
 */
 
 body {height:100%;width: 100%;background: #E9E9E9 url(../images/bodybackground.jpg) no-repeat top left fixed;border-bottom: 2px solid #6496C3;color: #3D3D3D; margin:0 ;padding: 0;font-family:Tahoma, Arial, Helvetica, sans-serif;font-weight:normal;font-size:12px; }
-h2 {	line-height:25px;padding:6px;background: url(../images/message-bar.gif) repeat-x;color: #FD6812;font-size:160%;}
+h2 {	line-height:25px;padding:6px;background:#fff url(../images/message-bar.gif) repeat-x;color: #FD6812;font-size:160%;}
 h6 {	line-height:20px;padding:3px;color: #444;font-size:115%;font-weight:400;}
 li {list-style: none;}
 ul{margin: 0 0 4px 0; text-align: justify; line-height: 26px;}
@@ -88,7 +88,15 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 /*  table no hover */
 
 /* other info  */
-.other-info{margin:6px 0;padding: 10px; font-weight: bold;background:#eee; border-top:2px dotted #fff;border-bottom:2px dotted #eee;border-left:0px;border-right:0px;}
+.team_info{margin:4px 0;padding:10px 0;}
+.team_info h2{direction:ltr}
+.team_info table{direction:ltr}
+.team_info tr{border: 1px dashed #ddd}
+.team_info td{border:none;height:20px;line-height:20px;}
+.team_tr {height:30px;line-height:30px;background-color:transparent;}
+.team_tr:hover{background-color:transparent;}
+.team_info a{font-weight:700;}
+
 .data { font-weight: bold;font-size:11px;border: 1px dashed #D2D6FF}
 .data  tr{ background:#F2F2F2;}
 .data  td{border-top:1px ridge #D2D6FF;border-bottom:1px ridge #D2D6FF;padding:2px 10px; }

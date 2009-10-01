@@ -103,15 +103,27 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 .no_hover_table tr:hover {background-color:transparent;}
 /*  table no hover */
 
-/*  disk_size */
-.statallfils {float:right;background:#fff;border:1px solid #B8D8EF;-moz-border-radius: 4px; border-radius:1px;padding:6px;margin:1px 3px 2px 6px;text-align:center;}
-.statallfils  span{background:#F2F2F2;color:#0B55C4;}
-.perlstat {padding:6px;margin:1px 3px 2px 6px;text-align:center;}
-.disk_size{padding: 5px; font-weight: bold;border-top:2px dotted #fff;border-bottom:2px dotted #eee;border-left:0px;border-right:0px}
-.disk_size tr{background:#F2F2F2}
-.disk_size tr:hover {background-color:#F2F2F2;}
+/*   start general statistics */
+.general_statistics {padding:0;margin:0;text-align:center;}
+.text_general{
+background:#F4F4F4;
+float:right;
+
+height:40px;
+line-height:40px;
+padding:2px 8px;margin:1px 0px 1px 10px;
+font-size:10px;
+font-weight: bold;
+border-top: solid 1px #D7D7D7;
+border-bottom: solid 1px #D7D7D7;
+}
+
+.text_general  span{background:#fff;color:#0B55C4;padding:3px 6px;-moz-border-radius: 40px; border-radius:40px;}
+
+.disk_size{padding:0;margin:0;float:left;}
 .filsiz{padding:3px; font-weight:bold;font-size:x-large;color:#FF9797;text-align:center;text-decoration:line-through;vertical-align:top}
-/*  disk_size */
+/*  ##  start general statistics */
+
 
 /* body #System Messages  */
 #system-message { margin-bottom:5px}
@@ -154,7 +166,7 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 #border-table {padding:10px;background-color:#FBFFFD;border: 1px double #B2B2B2;}
 
 /* box_all */
-.box_all {padding:10px;background-color:#FBFFFD;border: 1px double #B2B2B2;}
+.box_all {padding:10px;background-color:#FBFFFD;border: 1px double #B2B2B2;-moz-border-radius-topleft: 14px;-webkit-border-top-left-radius: 14px;-moz-border-radius-bottomright: 14px;-webkit-border-bottom-right-radius: 14px;}
 /* ## box_all */
 
 /* all tables */
@@ -231,7 +243,7 @@ tr:hover {background-color:#FFFFDD;}
 .message_head .timestamp {float:left;}
 .message_head cite {font-size:18px;color:#0B55C4;}
 .message_body {padding:5px;display:block}
-.message_body table{border:none;margin:8px auto;padding:0;}
+.message_body table{border:none;margin:4px 0;padding:0;}
 .message_body tr{border:none;background-color:transparent;}
 .message_body td{border:none;}
 .message_body tr:hover {background-color:transparent;}
@@ -252,11 +264,11 @@ tr:hover {background-color:#FFFFDD;}
 /* ## info user admin  */
 
 /* start box team kleeja */
-.team_info{padding:10px 0;}
+.team_info{padding:5px 0;}
 .team_info h2{color:#0B55C4;font-size:18px;}
 .team_info p{direction:ltr;padding:0; margin-top:-20px;}
 .team_info table{direction:ltr;margin-top:2px;}
-.team_info tr{border: 1px dashed #ccc}
+.team_info tr{border: 1px dashed #DFDFDF}
 .team_info td{border:none;line-height:14px;}
 .team_tr {background:#fff url(../images/message-bar.gif) repeat-x bottom left;}
 .team_tr td{height:20px;line-height:20px}

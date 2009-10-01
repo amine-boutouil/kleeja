@@ -252,6 +252,7 @@ To Do 1.X:
 - show user total number of files which he uploaded in admin area 
 - add file description
 - add filter system
+- add configs backup ( last 5 changes ) and ablilty to return to one of them
 
 
 Thank you for reading this file. 

@@ -121,23 +121,22 @@ $('div#{{id}}').pulse({
 	<li>
 		<p class="message_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/general_title.png" alt="Kleeja love you ..," />{lang.GENERAL_STAT}</cite><img class="timestamp" src="{STYLE_PATH_ADMIN}images/timestamp.gif" alt="Kleeja love you ..," /></p>
 		<div class="message_body">
-
-<!-- start stat  disk size -->
-<div>
-
-			<div class="statallfils">{lang.AUSERS_NUM} :  {users_number} ]</div>
-
+<!-- start general statistics  -->	
+<div class="general_statistics">
+	<div class="text_general"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/numberusers.png" alt=".." />{lang.AUSERS_NUM} : <span>[ {users_number} ]</span></div>
 		<IF NAME="config.user_system==1">
-			<div class="statallfils">{lang.LAST_REG} : [ {lst_reg} ]</div>
-		</IF>
-	
-			<div class="statallfils">{lang.AFILES_NUM} <span>[ {files_number} ]</span></div>
-			<div class="statallfils">{lang.AFILES_SIZE} <span>[ {files_sizes} ]</span></div>
-			<div class="statallfils">{lang.LSTDELST} <span>{last_del_fles}</span></div>
-			
-			<div class="clr"></div>
-			<div class="perlstat">
-				<table class="disk_size" border="0" width="100%" cellspacing="0" cellpadding="0" dir="ltr">
+	<div class="text_general"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/lastuser.png" alt=".." />{lang.LAST_REG} : <span>[ {lst_reg} ]</span></div>
+		</IF>	
+	<div class="text_general"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/allfolders.png" alt=".." />{lang.AFILES_NUM} : <span>[ {files_number} ]</span></div>
+	<div class="text_general"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/sizefile.png" alt=".." />{lang.AFILES_SIZE} : <span>[ {files_sizes} ]</span></div>
+	<div class="text_general"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/timelast.png" alt=".." />{lang.LSTDELST} : <span>{last_del_fles}</span></div>		
+
+<!-- start clear  -->
+	<div class="clr"></div>
+<!-- ## clear  -->		
+
+			<div class="filsiz">[ {files_sizes} ]</div>	
+			<table class="disk_size" width="100%" cellspacing="0" cellpadding="0" dir="ltr">
 					<tr>
 						<td style="width:33%;background-color:#97FF97;text-align:left;">0%</td>
 						<td style="width:34%; background-color:#FFFE97; text-align:center;">50%</td>
@@ -146,15 +145,15 @@ $('div#{{id}}').pulse({
 					<tr>
 						<td colspan="3"><img src="{STYLE_PATH_ADMIN}images/spacer.gif" style="width:{per1}%; height:10px; background-color:Red" alt="..." /></td>
 					</tr>
-				</table>
-			
-			<div class="filsiz">[ {files_sizes} ]</div>
-
-			</div>
+			</table>
+	
+				
+<!-- start clear  -->
+	<div class="clr"></div>
+<!-- ## clear  -->
 </div>
+<!-- ## general statistics  -->	
 
-
-<!-- end stat  disk size  -->
 		</div>
 	</li>
 

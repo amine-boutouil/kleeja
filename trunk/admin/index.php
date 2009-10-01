@@ -50,7 +50,7 @@
 				//for onlines
 				$ip	= get_ip();
 
-				if ($config['allow_online'] == 1)
+				if ((int) $config['allow_online'] == 1)
 				{
 					$query_del	= array('DELETE'	=> "{$dbprefix}online",
 										'WHERE'		=> "ip='" . $ip . "'"
@@ -196,26 +196,26 @@
 
 	//New calls notice
 	$cr_time = LAST_VISIT > 0 ? LAST_VISIT : time() - 3600*12;
-	
-	$c_query	= array('SELECT'	=> 'c.id',
+
+	$c_query	= array('SELECT'	=> 'COUNT(c.id) AS total_rows',
 						'FROM'		=> "{$dbprefix}call c",
-						'WHERE'		=> "c.`time` > " . $cr_time . "" 
+						//'WHERE'		=> "c.`time` > " . $cr_time . "" 
 						);
 
-		$newcall = $SQL->num_rows($SQL->build($c_query));
-		$SQL->freeresult();
-		$newcall =  $newcall == 0  ?  ' [0]' : ' [' . $newcall . ']'; 
-	
+	$n_fetch = $SQL->fetch_array($SQL->build($c_query));
+	$newcall = '[' . $n_fetch['total_rows'] . ']';
+	$SQL->freeresult();
+
 	//New reports notice
 	$r_query	= array('SELECT'	=> 'r.id',
 						'FROM'		=> "{$dbprefix}reports r",
-						'WHERE'		=> "r.`time` > " . $cr_time . "" 
+						//'WHERE'		=> "r.`time` > " . $cr_time . "" 
 						);
-					
-	$newreport = $SQL->num_rows($SQL->build($r_query));
+
+	$n_fetch = $SQL->fetch_array($SQL->build($r_query));
+	$newreport = '[' . $n_fetch['total_rows'] . ']';
 	$SQL->freeresult();
-	$newreport = $newreport == 0 ?  ' [0]' : ' [' . $newreport . ']'; 
-		
+
 	foreach($adm_extensions as $m)
 	{
 		//some exceptions

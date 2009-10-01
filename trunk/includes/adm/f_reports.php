@@ -2,7 +2,7 @@
 //reports
 //part of admin extensions
 //conrtoll reports
-	
+
 //copyright 2007-2009 Kleeja.com ..
 //license http://opensource.org/licenses/gpl-license.php GNU Public License
 //$Author: saanina $ , $Rev: 1021 $,  $Date:: 2009-09-06 02:28:19 +0300#$
@@ -16,6 +16,8 @@ if (!defined('IN_ADMIN'))
 //for style ..
 $stylee	= "admin_reports";
 $action	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;page=' . (isset($GET['page'])  ? intval($GET['page']) : 1);
+$msg_sent = isset($_GET['sent']) ? intval($_GET['sent']) : false; 
+
 
 $query = array(
 				'SELECT'	=> '*',
@@ -51,6 +53,7 @@ if ($nums_rows > 0)
 						'text' 		=> $row['text'],
 						'time' 		=> date('d-m-Y H:i a', $row['time']),
 						'ip'	 	=> $row['ip'],
+						'sent'		=> $row['id'] == $msg_sent,
 						'ip_finder'	=> 'http://www.ripe.net/whois?form_type=simple&full_query_string=&searchtext=' . $row['ip'] . '&do_search=Search'
 				);
 
@@ -73,14 +76,20 @@ if ($nums_rows > 0)
 				$to      = $row['mail'];
 				$subject = $lang['REPLY_REPORT'] . ':' . $config['sitename'];
 				$message = "\n " . $lang['WELCOME'] . " " . $row['name'] . "\r\n " . $lang['U_REPORT_ON'] . " " . $config['sitename']. "\r\n " . 
-							$lang['BY_EMAIL'] . " : " . $row['mail']."\r\n" . $lang['ADMIN_REPLIED'] . ": \r\n".$sen[$row['id']] . "\r\n\r\n kleeja.com";
+							$lang['BY_EMAIL'] . " : " . $row['mail']."\r\n" . $lang['ADMIN_REPLIED'] . ": \r\n" . $sen[$row['id']] . "\r\n\r\n kleeja.com";
 
 				$send =  send_mail($to, $message, $subject, $config['sitemail'], $config['sitename']);
 
 				if ($send)
 				{
-					$text	= $lang['IS_SEND_MAIL'];
-					$stylee	= "admin_info";
+					//
+					//We will redirect to pages of results and show info msg there ! 
+					//
+					redirect(basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&page=' . (isset($_GET['page']) ? intval($_GET['page']) : 1) . '&sent=' . $row['id']);
+				}
+				else
+				{
+					kleeja_admin_err($lang['ERR_SEND_MAIL']);
 				}
 			}
 		}
@@ -99,13 +108,13 @@ if(sizeof($del_nums))
 						'DELETE'	=> "{$dbprefix}reports",
 						'WHERE'		=> "id IN('" . implode("', '", $del_nums) . "')"
 					);
-																
+
 	$SQL->build($query_del);
 }
 
 $total_pages 	= $Pager->getTotalPages(); 
 $page_nums 		= $Pager->print_nums(basename(ADMIN_PATH)  . '?cp=' . basename(__file__, '.php')); 
-		
+
 //after submit 
 if (isset($_POST['submit']))
 {

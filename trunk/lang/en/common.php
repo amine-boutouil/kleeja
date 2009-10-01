@@ -524,10 +524,12 @@ $lang = array_merge($lang, array(
 	'STYLE_VERSION'				=> 'Style version',
 	'STYLE_DEPEND_ON'			=> 'Based on',
 	'NONE'						=> 'None',
-	'MESSAGE_NONE'				=> 'حتى الآن لا يوجد أي رسائل أو تبليغات ..',
-	'KLEEJA_TEAM'				=> 'فريق تطوير كليجا .. !',
-	'USER_STAT'					=> 'إحصائيات المستخدم',
-	'SEARCH_STAT' 				=> 'إحصائيات محركات البحث',
+	'MESSAGE_NONE'				=> 'No messages yet ...',
+	'KLEEJA_TEAM'				=> 'Kleeja development team',
+	'USER_STAT'					=> 'User Stats',
+	'SEARCH_STAT' 				=> 'Search Bots Stats',
+	'ERR_SEND_MAIL'				=> 'Mail sending error, try again later !',
+
 	//last line of this file ...					 
 	'S_TRANSLATED_BY' 			=> 'Translated By <a href="http://www.fenix4web.com/">Fenix4Web</a>',
 ));

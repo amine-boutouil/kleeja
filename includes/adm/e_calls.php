@@ -17,6 +17,8 @@ if (!defined('IN_ADMIN'))
 //for style ..
 $stylee	= "admin_calls";
 $action	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;page=' . (isset($_GET['page']) ? intval($_GET['page']) : 1);
+$msg_sent = isset($_GET['sent']) ? intval($_GET['sent']) : false; 
+
 
 $query	= array(
 				'SELECT'	=> '*',
@@ -49,8 +51,9 @@ if ($nums_rows > 0)
 						'name' 		=> $row['name'],
 						'mail' 		=> $row['mail'],
 						'text' 		=> htmlspecialchars($row['text']),
-						'time' 		=> gmdate('d-m-Y H:a', $row['time']),
+						'time' 		=> gmdate('d-m-Y H:i a', $row['time']),
 						'ip' 		=> $row['ip'],
+						'sent'		=> $row['id'] == $msg_sent,
 						'ip_finder'	=> 'http://www.ripe.net/whois?form_type=simple&full_query_string=&searchtext=' . $row['ip'] . '&do_search=Search'
 					);
 
@@ -79,8 +82,14 @@ if ($nums_rows > 0)
 
 				if ($send)
 				{
-					$text	= $lang['IS_SEND_MAIL'];
-					$stylee	= "admin_info";
+					//
+					//We will redirect to pages of results and show info msg there ! 
+					//
+					redirect(basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&page=' . (isset($_GET['page']) ? intval($_GET['page']) : 1) . '&sent=' . $row['id']);
+				}
+				else
+				{
+					kleeja_admin_err($lang['ERR_SEND_MAIL']);
 				}
 			}
 		}
@@ -104,7 +113,7 @@ if(sizeof($del_nums))
 }
 	
 $total_pages	= $Pager->getTotalPages(); 
-$page_nums	= $Pager->print_nums(basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php')); 
+$page_nums		= $Pager->print_nums(basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php')); 
 
 //after submit
 if (isset($_POST['submit']))

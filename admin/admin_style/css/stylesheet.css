@@ -278,6 +278,8 @@ tr:hover {background-color:#FFFFDD;}
 
 
 #mail_here {margin:5px auto;padding:10px;font-size:118%;word-spacing:3px;line-height:22px;background:#EFE7B8;border-top: 2px solid #FEA53D;border-bottom: 2px solid #FEA53D;}
+.msg_sent { }
+.is_sent {}
 
 
 

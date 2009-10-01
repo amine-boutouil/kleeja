@@ -199,7 +199,7 @@
 
 	$c_query	= array('SELECT'	=> 'COUNT(c.id) AS total_rows',
 						'FROM'		=> "{$dbprefix}call c",
-						//'WHERE'		=> "c.`time` > " . $cr_time . "" 
+						//'WHERE'	=> "c.`time` > " . $cr_time . "" 
 						);
 
 	$n_fetch = $SQL->fetch_array($SQL->build($c_query));
@@ -207,9 +207,9 @@
 	$SQL->freeresult();
 
 	//New reports notice
-	$r_query	= array('SELECT'	=> 'r.id',
+	$r_query	= array('SELECT'	=> 'COUNT(c.id) AS total_rows',
 						'FROM'		=> "{$dbprefix}reports r",
-						//'WHERE'		=> "r.`time` > " . $cr_time . "" 
+						//'WHERE'	=> "r.`time` > " . $cr_time . "" 
 						);
 
 	$n_fetch = $SQL->fetch_array($SQL->build($r_query));

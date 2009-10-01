@@ -207,7 +207,7 @@
 	$SQL->freeresult();
 
 	//New reports notice
-	$r_query	= array('SELECT'	=> 'COUNT(c.id) AS total_rows',
+	$r_query	= array('SELECT'	=> 'COUNT(r.id) AS total_rows',
 						'FROM'		=> "{$dbprefix}reports r",
 						//'WHERE'	=> "r.`time` > " . $cr_time . "" 
 						);

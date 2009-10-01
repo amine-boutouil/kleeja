@@ -30,7 +30,10 @@ document.getElementById('mail_here').innerHTML= iee;
 	
 	<!-- if sent -->
 	<IF NAME="msg_sent">
-		<div class="msg_sent">{lang.IS_SEND_MAIL}</div>
+	<div class="msg_sent">{lang.IS_SEND_MAIL}</div>
+	<script type="text/javascript">
+	$('div.msg_sent').fadeOut(2000).fadeIn(2000).hide('slow');
+	</script>
 	</IF>
 	<!-- / if sent -->
 	

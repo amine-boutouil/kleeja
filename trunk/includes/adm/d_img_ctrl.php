@@ -17,7 +17,7 @@ if (!defined('IN_ADMIN'))
 if(!isset($images_cp_perpage) || !$images_cp_perpage)
 {
 	// you can add this varibale to config.php
-	$images_cp_perpage = 9;
+	$images_cp_perpage = 30;
 }
 
 //for style ..

@@ -28,14 +28,12 @@ $(function() {
 
 <!-- clear  -->
 <div class="clr"></div><!-- # clear  -->
+<IF NAME="no_results">
+لا يوجد هناك أي صور تم رفعها الى المركز منذ آخرة زيارة لك
+<ELSE>
 
 <!-- start table no hover  -->
-<table class="bg_img" style="text-align:center">
-
-<IF NAME="no_results">
-    <tr><td>...</td></tr>
-<ELSE>
-   
+<table class="bg_img" style="text-align:center">  
    <tr>   
 <LOOP NAME="arr">
 {{tdnum}}
@@ -49,12 +47,13 @@ $(function() {
 {{tdnum2}}
 </LOOP>
     </tr>   
-</IF>
+
 
 <tr><td><span id="toolTipBox" width="200"></span></td></tr>
 
 </table>
 <!-- end table no hover  -->
+
 
 <!-- clear  -->
 <div class="clr"></div><!-- # clear  -->
@@ -70,7 +69,7 @@ $(function() {
 <!-- end pagination  -->
 
 <!-- clear  --><div class="clr"></div><!-- # clear  -->
-
+</IF>
 </div>
 <!-- end div border table  -->
 

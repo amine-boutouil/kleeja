@@ -26,7 +26,7 @@ while($row=$SQL->fetch_array($result))
 	$resultf = $SQL->query($queryf);
 	if ($resultf)
 	{
-		$text .= $lang['REPAIRE_TABLE'] . $row['Name'] . '<br />';
+		$text .= '<li>' . $lang['REPAIRE_TABLE'] . $row['Name'] . '</li>';
 	}
 }
 	
@@ -77,15 +77,15 @@ $update_query	= array(
 
 if ($SQL->build($update_query))
 {
-	$text .= $lang['REPAIRE_F_STAT'] . "<br />";
-	$text .= $lang['REPAIRE_S_STAT'] . "<br />";
+	$text .= '<li>' . $lang['REPAIRE_F_STAT'] . '</li>';
+	$text .= '<li>' . $lang['REPAIRE_S_STAT'] . '</li>';
 }
 
 //
 //clear all cache ..
 //
 delete_cache('', true);
-$text .= $lang['REPAIRE_CACHE'];
+$text .= '<li>' . $lang['REPAIRE_CACHE'] . '</li>';
 
 $stylee = "admin_info";
 

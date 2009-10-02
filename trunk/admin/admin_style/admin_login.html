@@ -1,96 +1,65 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" dir="{lang.DIR}">
 <head>
-<title>{lang.LOGIN} - {lang.KLEEJA_CP} - {config.sitename}</title>
-<meta http-equiv="Content-Language" content="ar" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" href="{STYLE_PATH_ADMIN}css/login_stylesheet.css" type="text/css" />
-<link rel="shortcut icon" href="{STYLE_PATH_ADMIN}favicon.ico" />
-<link rel="icon" type="image/gif" href="{STYLE_PATH_ADMIN}images/animated_favicon1.gif" />
+	<title>{lang.LOGIN} - {lang.KLEEJA_CP} - {config.sitename}</title>
+	<meta http-equiv="Content-Language" content="ar" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="shortcut icon" href="{STYLE_PATH_ADMIN}images/favicon.ico" />
+	<link rel="icon" type="image/gif" href="{STYLE_PATH_ADMIN}images/animated_favicon1.gif" />
+	<link rel="apple-touch-icon" href="{STYLE_PATH_ADMIN}images/apple-touch-icon.png" />
+	<link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH_ADMIN}css/login_stylesheet.css" />
+	<IF NAME="{lang.DIR}==ltr">
+	<link rel="stylesheet" type="text/css" href="{STYLE_PATH_ADMIN}css/login_ltr.css" />
+	</IF>
 	<script type="text/javascript">
-	function confirm_from()
-	{
-		if(confirm('{lang.ARE_YOU_SURE_DO_THIS}'))
-			return true;
-		else
-			return false;
-	}
-	
+		function confirm_from()
+		{
+			if(confirm('{lang.ARE_YOU_SURE_DO_THIS}'))
+				return true;
+			else
+				return false;
+		}
+		
 	</script>
 	<script type="text/javascript" src="{STYLE_PATH_ADMIN}images/tips.js"></script> 
 </head>
 <body>
-<div class="h_header"></div>
-	<div id="klogo"></div>
-	<div id="content-box">
-	<div class="padding">
-	<div id="element-box" class="login">
-		<div class="t">
-			<div class="t">
-				<div class="t"></div>
-			</div>
-		</div>
-		<div class="m">
-			<div class="title">{config.sitename}</div>
-				<h1>{lang.LOGIN} {lang.KLEEJA_CP}</h1>
-					
-			<IF NAME="err">	
-			<div id="system-message">
-				<div class="error">
-				<ul>
-				<li>{errs}</li>
-				</ul>
-				</div>
-			</div>
-			</IF>
-			
-			<div id="section-box">
-				<div class="t">
-					<div class="t">
-						<div class="t"></div>
-					</div>
-				</div>
-			<div class="m">
-				<div class="boxed">
-					<form action="{action}" method="post" style="clear: both;">
-						<fieldset>
-						<legend>Sign-In</legend>
-							<label>{lang.USERNAME}</label>
-							<input type="text" name="lname" value="{username}" class="textfield" />
-							<label>{lang.PASSWORD}</label>
-							<input type="password" name="lpass" value="" class="textfield" />
-							<input type="submit" name="submit" value="{lang.LOGIN}" class="button"/>
-							{H_FORM_KEYS}
-						</fieldset>
-					</form>
-				</div>
-			<div class="clr"></div>
-			</div>			
-				<div class="b">
-					<div class="b">
-						<div class="b"></div>
-					</div>
-				</div>
-			</div>		
-			<p>{lang.MUST_LOGIN}</p>
-			<p class="backhome"><a href="{config.siteurl}">{lang.HOME}</a></p>
-			<div id="lock"></div>
-			<div class="clr"></div>
-			</div>
-			<div class="b">
-				<div class="b">
-					<div class="b"></div>
-				</div>
-			</div>
-		</div>
+	<div class="header"><div class="logo"><a onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com"><img src="{STYLE_PATH_ADMIN}images/login/logo.png" alt="kleeja" /></a></div></div>
+	<div class="site_name"><img src="{STYLE_PATH_ADMIN}images/login/Private.png" alt="{config.sitename}" /><a href="{config.siteurl}">{config.sitename} .. !</a></div>
+	<div class="box">
+	<div class="box_medium">
+	<form action="{action}" method="post" style="clear: both;">
+	<fieldset class="box_login">
+	<legend>{lang.USER_LOGIN}</legend>
+	<label>{lang.USERNAME}</label>
+	<input type="text" name="lname" value="{username}" size="22" />
+	<label>{lang.PASSWORD}</label>
+	<input type="password" name="lpass" value="" size="22" />
+	<div class="clr"></div><br />
+	<input type="submit" name="submit" value="{lang.LOGIN}" />
+	{H_FORM_KEYS}
+	<div class="clr"></div>
+	</fieldset>
+	</form>
+	<div class="text">
+	<p class="cp_kleeja">{lang.KLEEJA_CP}</p>
+	<p>{lang.MUST_LOGIN}</p>
+	<p class="backhome"><a title="{lang.RETURN_HOME}" href="{config.siteurl}">{lang.RETURN_HOME}</a></p>
 	</div>
-</div>
-<div id="footer">
-	<p class="copyright">Powered by <a onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com" >Kleeja</a> | 
-	Styles, Hacks in <a onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com" >Kleeja Official Website</a> |
-	<a onclick="window.open(this.href,'_blank');return false;" href="http://validator.w3.org/check?uri=referer" >XHTML</a> | 
-	<a onclick="window.open(this.href,'_blank');return false;" href="http://jigsaw.w3.org/css-validator/check/referer" >css</a>	
-	</p>
-</div>
+	<div class="clr"></div>
+	</div>
+	</div>
+	<IF NAME="err">	
+	<div class="system-message">
+	<div class="error">
+	<ul><li>{errs}</li></ul>
+	</div>
+	</div>
+	</IF>
+	<div class="clr"></div>
+	<div class="footer">
+	<p class="web2"><a class="xhtml" title="XHTML" onclick="window.open(this.href,'_blank');return false;" href="http://validator.w3.org/check?uri=referer" ><img src="{STYLE_PATH_ADMIN}images/login/xhtml.png" alt="XHTML" /></a><a class="css" title="CSS" onclick="window.open(this.href,'_blank');return false;" href="http://jigsaw.w3.org/css-validator/check/referer" ><img src="{STYLE_PATH_ADMIN}images/login/css.png" alt="css" /></a></p>
+	<p class="Powered">Powered by <a title="Kleeja" onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com" >Kleeja</a>  Version 1.0.0 ..::.. Styles, Hacks in <a title="Kleeja Official Website" onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com" >Kleeja Official Website</a></p>
+	</div>
 </body>
-</html>       
+</html>

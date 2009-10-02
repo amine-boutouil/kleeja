@@ -1,16 +1,16 @@
 ﻿<script type="text/javascript">
 $(document).ready(function(){
 	
-	//hide message_body after the first one
-	$(".message_list .message_body:gt(1)").hide();
+	//hide option_body after the first one
+	$(".option_list .option_body:gt(2)").hide();
 	
 	//hide message li after the 5th
-	$(".message_list li:gt(4)").hide();
+	$(".option_list li:gt(4)").hide();
 
 	
-	//toggle message_body
-	$(".message_head").click(function(){
-		$(this).next(".message_body").slideToggle(00)
+	//toggle option_body
+	$(".option_head").click(function(){
+		$(this).next(".option_body").slideToggle(00)
 		return false;
 	});
 
@@ -18,7 +18,7 @@ $(document).ready(function(){
 	$(".show_all").click(function(){
 		$(this).hide()
 		$(".hid_all").show()
-		$(".message_body").slideDown()
+		$(".option_body").slideDown()
 		return false;
 	});
 
@@ -26,7 +26,7 @@ $(document).ready(function(){
 	$(".hid_all").click(function(){
 		$(this).hide()
 		$(".show_all").show()
-		$(".message_body").slideUp()
+		$(".option_body").slideUp()
 		return false;
 	});
 
@@ -40,14 +40,14 @@ $(document).ready(function(){
 <!-- start box all -->
 <div class="box_all">
 
-<!-- start general stat panel admin -->
-<div class="tilestart"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/admin_start.png" alt="Kleeja love you ..," />&#9679; {lang.KLEEJA_CP} ..</div>
-<!-- ## general stat panel admin -->
+<!-- start title panel admin -->
+<div class="title_kleeja"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/admin_start.png" alt="Kleeja love you ..," />&#9679; {lang.KLEEJA_CP} ..</div>
+<!-- # title panel admin -->
 
 <!-- start clear  -->
 	<div class="clr"></div>
 	<br />
-<!-- ## clear  -->
+<!-- # clear  -->
 
 <!-- start >> error System Messages -->
 <LOOP NAME="ADM_NOTIFICATIONS">
@@ -72,70 +72,76 @@ $('div#{{id}}').pulse({
 <!-- start clear  -->
 	<div class="clr"></div>
 	<br />
-<!-- ## clear  -->
+<!-- # clear  -->
 
 </LOOP>
-<!-- end >> error System Messages -->
+<!-- # error System Messages -->
 
 <!-- start clear  -->
 	<div class="clr"></div>
-<!-- ## clear  -->
+<!-- # clear  -->
 
 <!-- start view list control panel -->
 <div class="list_control_panel">
-<ol class="message_list">
-	<li>
-		<p class="message_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/user.png" alt=".." />{lang.USER_STAT}</cite><img class="timestamp" src="{STYLE_PATH_ADMIN}images/timestamp.gif" alt="Kleeja love you ..," /></p>
-		<div class="message_body">
-		<!-- start info user admin -->
-		<table width="100%" cellspacing="0" cellpadding="0">
-			<tr>
-				<td class="adminimage">&nbsp;</td>
-				<td>
-						<p class="text_info">{usernamelang}</p>
-					<IF NAME="last_visit">
-						<p class="text_info">{lang.LAST_VISIT} : {last_visit}</p>
-					</IF>
-					<IF NAME="stat_last_file!='0'">
-						<p class="text_info">{lang.LSTFLE_ST} : <a href="{last_file_up_url}" onclick="window.open(this.href,'_blank');return false;">{last_file_up}</a></p>
-						<ELSE>
-						<p class="text_info">{lang.UNKNOWN}</p>
-					</IF>
-					</td>
-				</tr>
-				
-				<IF NAME="last_visit">
-				<tr>
-					<td>&nbsp;</td>
-					<td class="box_botton">
-						<p><a class="button_img" href="{h_lst_imgs}"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/viewpicture.png" alt=".." />{lang.IMG_LST_VST_SEARCH}</a></p>
-						<p><a class="button_file" href="{h_lst_files}"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/viewfiles.png" alt=".." />{lang.FLS_LST_VST_SEARCH}</a></p>
-					</td>
-				</tr>
-				</IF>
-		</table>
-		<!-- ## info user admin -->
-		</div>
-	</li>
+	<ol class="option_list">
 
-	<li>
-		<p class="message_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/general_title.png" alt="Kleeja love you ..," />{lang.GENERAL_STAT}</cite><img class="timestamp" src="{STYLE_PATH_ADMIN}images/timestamp.gif" alt="Kleeja love you ..," /></p>
-		<div class="message_body">
+<!-- start info user admin -->
+<li>
+	<p class="option_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/user.png" alt=".." />{lang.USER_STAT}</cite><img class="timestamp" src="{STYLE_PATH_ADMIN}images/timestamp.gif" alt="Kleeja love you ..," /></p>
+	<div class="option_body">
+	<!-- background box  -->
+	<div class="admin_anfo_bg">
+		<table width="100%" cellspacing="0" cellpadding="0">
+		<tr>
+			<td class="adminimage">&nbsp;</td>
+			<td>
+			<p class="text_info">{usernamelang}</p>
+			<IF NAME="last_visit">
+			<p class="text_info">{lang.LAST_VISIT} : {last_visit}</p>
+			</IF>
+			<IF NAME="stat_last_file!='0'">
+			<p class="text_info">{lang.LSTFLE_ST} : <a href="{last_file_up_url}" onclick="window.open(this.href,'_blank');return false;">{last_file_up}</a></p>
+			<ELSE>
+			<p class="text_info">{lang.UNKNOWN}</p>
+			</IF>
+			</td>
+		</tr>
+
+		<IF NAME="last_visit">
+		<tr>
+			<td>&nbsp;</td>
+			<td class="box_botton">
+			<p><a class="button_img" href="{h_lst_imgs}"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/viewpicture.png" alt=".." />{lang.IMG_LST_VST_SEARCH}</a></p>
+			<p><a class="button_file" href="{h_lst_files}"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/viewfiles.png" alt=".." />{lang.FLS_LST_VST_SEARCH}</a></p>
+			</td>
+		</tr>
+		</IF>
+		</table>
+	</div>
+	<!-- # background box  -->
+	</div>
+</li>
+<!-- # info user admin -->
+
 <!-- start general statistics  -->	
+<li>
+	<p class="option_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/general_title.png" alt="Kleeja love you ..," />{lang.GENERAL_STAT}</cite><img class="timestamp" src="{STYLE_PATH_ADMIN}images/timestamp.gif" alt="Kleeja love you ..," /></p>
+	<div class="option_body">
+
 <div class="general_statistics">
-	<div class="text_general"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/numberusers.png" alt=".." />{lang.AUSERS_NUM} : <span>[ {users_number} ]</span></div>
+	<p class="text_info"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/numberusers.png" alt=".." />{lang.AUSERS_NUM} : [ {users_number} ]</p>
 		<IF NAME="config.user_system==1">
-	<div class="text_general"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/lastuser.png" alt=".." />{lang.LAST_REG} : <span>[ {lst_reg} ]</span></div>
+	<p class="text_info"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/lastuser.png" alt=".." />{lang.LAST_REG} : [ {lst_reg} ]</p>
 		</IF>	
-	<div class="text_general"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/allfolders.png" alt=".." />{lang.AFILES_NUM} : <span>[ {files_number} ]</span></div>
-	<div class="text_general"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/sizefile.png" alt=".." />{lang.AFILES_SIZE} : <span>[ {files_sizes} ]</span></div>
-	<div class="text_general"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/timelast.png" alt=".." />{lang.LSTDELST} : <span>{last_del_fles}</span></div>		
+	<p class="text_info"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/allfolders.png" alt=".." />{lang.AFILES_NUM} : [ {files_number} ]</p>
+	<p class="text_info"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/sizefile.png" alt=".." />{lang.AFILES_SIZE} : [ {files_sizes} ]</p>
+	<p class="text_info"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/timelast.png" alt=".." />{lang.LSTDELST} : {last_del_fles}</p>		
 
 <!-- start clear  -->
-	<div class="clr"></div>
-<!-- ## clear  -->		
+	<div class="clr"></div><br />
+<!-- # clear  -->		
 
-			<div class="filsiz">[ {files_sizes} ]</div>	
+		
 			<table class="disk_size" width="100%" cellspacing="0" cellpadding="0" dir="ltr">
 					<tr>
 						<td style="width:33%;background-color:#97FF97;text-align:left;">0%</td>
@@ -146,41 +152,51 @@ $('div#{{id}}').pulse({
 						<td colspan="3"><img src="{STYLE_PATH_ADMIN}images/spacer.gif" style="width:{per1}%; height:10px; background-color:Red" alt="..." /></td>
 					</tr>
 			</table>
-	
+			<div class="filsiz">[ {files_sizes} ]</div>	
 				
 <!-- start clear  -->
 	<div class="clr"></div>
-<!-- ## clear  -->
+<!-- # clear  -->
 </div>
-<!-- ## general statistics  -->	
-
-		</div>
-	</li>
+</div>
+</li>
+<!-- # general statistics  -->
+	
+<!-- start search stat  -->
+<li>
+	<p class="option_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/search_engines.png" alt="{lang.SEARCH_STAT}" />{lang.SEARCH_STAT}</cite><img class="timestamp" src="{STYLE_PATH_ADMIN}images/timestamp.gif" alt="Kleeja love you ..," /></p>
+	<div class="option_body">
+	<!-- start table search  -->
+	<table width="100%" cellspacing="0" cellpadding="0">
+		<tr>
+		<td>
+			<!-- start gooloe -->
+			<fieldset class="fieldset_google">
+				<legend>Google</legend>
+				<p>{lang.LAST_GOOGLE} : {s_last_google}</p>
+				<p>{lang.GOOGLE_NUM} : [ {s_google_num} ]</p>
+			</fieldset>
+			<!-- # gooloe -->
+		</td>
+		<td>
+			<!-- start yahoo -->
+			<fieldset class="fieldset_yahoo">
+				<legend>Yahoo</legend>
+				<p>{lang.LAST_YAHOO} : {s_last_yahoo}</p>
+				<p>{lang.YAHOO_NUM} : [ {s_yahoo_num} ]</p>			
+			</fieldset>
+			<!-- # yahoo -->
+		</td>
+		</tr>
+	</table>
+	<!-- # table search  -->
+	</div>
+</li>
+<!-- # search stat  -->
 
 	<li>
-		<p class="message_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/search_engines.png" alt="Kleeja love you ..," />{lang.SEARCH_STAT}</cite><img class="timestamp" src="{STYLE_PATH_ADMIN}images/timestamp.gif" alt="Kleeja love you ..," /></p>
-		<div class="message_body">
-			<!-- start  last google -->
-<table>
-	<tr>
-		<td>{lang.LAST_GOOGLE} : {s_last_google}</td>
-		<td>{lang.GOOGLE_NUM} : <b>[ {s_google_num} ]</b></td>
-	</tr>
-	<tr>
-		<td>{lang.LAST_YAHOO} : {s_last_yahoo}</td>
-		<td>{lang.YAHOO_NUM} : <b>[ {s_yahoo_num} ]</b></td>
-	</tr>
-</table>	
-<!-- end  last yahoo -->	
-		</div>
-	</li>
-
-	<li>
-		<p class="message_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/infoanother.png" alt="Kleeja love you ..," />{lang.OTHER_INFO}</cite><img class="timestamp" src="{STYLE_PATH_ADMIN}images/timestamp.gif" alt="Kleeja love you ..," /></p>
-		<div class="message_body">
-<!-- start welcome user admin -->
-
-<!-- end  welcome user admin -->
+		<p class="option_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/infoanother.png" alt="Kleeja love you ..," />{lang.OTHER_INFO}</cite><img class="timestamp" src="{STYLE_PATH_ADMIN}images/timestamp.gif" alt="Kleeja love you ..," /></p>
+		<div class="option_body">
 
 <table>
 <tr>
@@ -214,34 +230,37 @@ $('div#{{id}}').pulse({
 </table>
 		</div>
 	</li>
+	
 </ol>
-<div class="message_list_bottom"></div>
+<div class="option_list_bottom"></div>
 </div>
-<!-- ## view list control panel -->
+<!-- # view list control panel -->
 
 <!-- start clear  -->
 <div class="clr"></div>
 <!-- # clear  -->
+
 <div class="collapse_buttons"><a href="#" class="show_all">اظهار الكل</a> <a href="#" class="hid_all">أخفاء الكل</a></div>
+
 <!-- start clear  -->
 <div class="clr"></div>
 <!-- # clear  -->
 
 </div>
-<!-- ## box all -->
+<!-- # box all -->
 
 <!-- start clear  -->
 	<div class="clr"></div><br />
-<!-- ## clear  -->
+<!-- # clear  -->
 
 <!-- start box all -->
 <div class="box_all">
 
-<!-- start box team kleeja -->
+<!-- start team kleeja -->
 <div class="team_info">
 	<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/config_users.png" alt="Team Kleeja" />{lang.KLEEJA_TEAM}</h2>
 	<p><a onclick="window.open(this.href,'_blank');return false;" href="http://code.google.com/p/kleeja"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/code_google.gif" alt="google code" /></a></p>
-		<div class="clr"></div>
+	<div class="clr"></div>
 	<table width="100%" cellspacing="0" cellpadding="0">
 		<tr class="team_tr">
 			<td colspan="2">Name</td>
@@ -253,8 +272,7 @@ $('div#{{id}}').pulse({
 			<td>2007 - 2009</td>
 		</tr>
 		<tr>
-			<td>
-			<a onclick="window.open(this.href,'_blank');return false;" href="http://code.google.com/p/kleeja/people/detail?u=phpfalcon">phpfalcon</a></td>
+			<td><a onclick="window.open(this.href,'_blank');return false;" href="http://code.google.com/p/kleeja/people/detail?u=phpfalcon">phpfalcon</a></td>
 			<td>[ Bader N. Al-Mutiry ]</td>
 			<td>2009</td>
 		</tr>
@@ -265,11 +283,14 @@ $('div#{{id}}').pulse({
 		</tr>
 	</table>
 </div>
-<!-- ## box team kleeja -->
+<!-- #  team kleeja -->
 
-<div class="clr"></div>
+<!-- start clear  -->
+	<div class="clr"></div><br />
+<!-- # clear  -->
+
 </div>
-<!-- ## box all -->
+<!-- # box all -->
 
 
 

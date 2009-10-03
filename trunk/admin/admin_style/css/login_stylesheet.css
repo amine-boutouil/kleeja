@@ -1,5 +1,5 @@
 ﻿/* Powered by Kleeja .... Kleeja.com # 2007 -2009  */
-body {background: #C5C5C5 url(../images/login/bg_login.jpg) no-repeat top left fixed;font: normal 12px Tahoma, Arial, Helvetica, sans-serif;border-top: 8px #FEA53D solid;color:#000;margin:0;padding:0;}
+body {background:#686868 url(../images/bodybackground.jpg) no-repeat top left fixed;font: normal 12px Tahoma, Arial, Helvetica, sans-serif;border-top: 8px #FEA53D solid;color:#000;margin:0;padding:0;}
 img {border:none;}
 p{margin:0;}
 form { margin: 0; padding: 0;}
@@ -20,17 +20,18 @@ a:hover {color:#0B55C4;text-decoration:overline;}
 .site_name{width:420px;padding:5px 0;margin:3px auto;font-size:18px;text-shadow:0px 1px rgb(247, 247, 247);}
 .site_name a{color:#0B55C4;}
 .site_name a:hover{text-decoration:none;color:#1C1CE3 }
-.site_name img{padding-left:8px;vertical-align: middle;}
+.site_name img,.cp_kleeja img{padding-left:8px;vertical-align: middle;}
 .box{display:block;width:100%;margin:0 auto;}
-.box_medium,.box_login {border:1px groove #666;-moz-border-radius:10px; border-radius:1px;margin:0 auto;}
-.box_medium {width:420px;padding:15px;border:1px dashed #757575;background:url(../images/login/stop.png) no-repeat 3% 3%;}
-.box_login{float:right; width: 170px;margin-left:10px;padding:10px;background:url(../images/login/bg_box.png) repeat-x bottom left;}
-.text {width:200px;padding:0 5px;color: #000;float:left;display:inline;}
-.text p{text-align:justify;line-height:20px;}
-.cp_kleeja{padding:2px 0;color:#EA1E1E;height:26px;font-size:18px;margin-bottom:5px;}
-.backhome {text-indent: 45px;margin-top:9px;}
-.backhome a {color: #0B55C4;background: #E7F0FE url(../images/login/go_back_home.png) no-repeat 98% 50%;padding:5px 22px;border-top: 1px solid #0B55C4;border-bottom: 1px solid #0B55C4;font-weight:bold;font-size:10px;}
-.backhome a:hover {background-color: #FFF;text-decoration: none;}
+.box_medium,.box_login {background:url(../images/bg_box_login.png) repeat-x bottom left;border:1px groove #666;-moz-border-radius:10px; border-radius:1px;margin:0 auto;}
+.box_medium {width:420px;padding:15px;border:1px dashed #757575;background-color:#fff}
+.box_login{float:right; width: 170px;margin-left:10px;padding:10px;}
+.text {width:200px;padding:0 5px;color: #003F9D;float:left;display:inline;}
+.txt {background:#fff;padding:5px;-moz-border-radius:10px; border-radius:1px;}
+.text p{text-align:justify;line-height:18px;}
+.cp_kleeja{padding:2px 0;color:#EA1E1E;height:26px;font-size:18px;margin-bottom:12px;}
+.backhome {text-indent: 45px;margin-top:12px;}
+.backhome a {color: #666;background: #EFE7B8 url(../images/icon/go_back_home.png) no-repeat 94% 50%;padding:5px 26px;border-top: 2px solid #FEA53D;border-bottom: 2px solid #FEA53D;font-weight:bold;font-size:10px;}
+.backhome a:hover {background:#EFE194;color: #111;text-decoration: none;}
 .system-message {margin:5px auto;width:450px;}
 .system-message div {font-weight:bold;text-indent: 35px; }
 .system-message div.error ul {list-style: none;padding:10px;background-color: #E6C0C0; border-top: 3px solid #DE7A7B;border-bottom: 3px solid #DE7A7B; }

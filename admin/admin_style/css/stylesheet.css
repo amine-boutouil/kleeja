@@ -4,7 +4,7 @@
 # copyright 2007-2009  ..
 */
 
-body {height:100%;width: 100%;background: #E9E9E9 url(../images/bodybackground.jpg) no-repeat top center fixed;border-bottom: 2px solid #6496C3;color: #3D3D3D; margin:0 ;padding: 0;font-family:Tahoma, Arial, Helvetica, sans-serif;font-weight:normal;font-size:12px; }
+body {height:100%;width: 100%;background:#686868 url(../images/bodybackground.jpg) no-repeat top center fixed;border-bottom: 2px solid #6496C3;color: #3D3D3D; margin:0 ;padding: 0;font-family:Tahoma, Arial, Helvetica, sans-serif;font-weight:normal;font-size:12px; }
 h2 {	line-height:25px;padding:6px;background:#fff url(../images/message-bar.png) repeat-x;color: #FD6812;font-size:160%;}
 h6 {	line-height:20px;padding:3px;color: #444;font-size:115%;font-weight:400;}
 li {list-style: none;}

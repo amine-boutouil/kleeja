@@ -34,8 +34,8 @@ a:hover {color:#0B55C4;text-decoration:overline;}
 .backhome a:hover {background:#EFE194;color: #111;text-decoration: none;}
 .system-message {margin:5px auto;width:450px;}
 .system-message div {font-weight:bold;text-indent: 35px; }
-.system-message div.error ul {list-style: none;padding:10px;background-color: #E6C0C0; border-top: 3px solid #DE7A7B;border-bottom: 3px solid #DE7A7B; }
-.system-message div.error ul li{color:#c00;background: url(../images/error.png) no-repeat right center;}
+.system-message div.error ul {list-style: none;padding:5px 10px;background-color: #E6C0C0; border-top: 4px solid #DE7A7B;border-bottom: 4px solid #DE7A7B; }
+.system-message div.error ul li{line-height:30px;color:#CC0000;background: url(../images/error.png) no-repeat right center;}
 .footer {position:fixed;bottom:0;left:0;clear:both;padding:2px 10px;border-bottom: 8px solid #6496C3;height:26px;width:100%;font-weight:bold;font-size:11px;}
 .Powered{width:422px;padding:5px 0;margin:3px auto;color:#222}
 .web2{float:left;width:220px;padding:5px 0;font-weight:bold;font-size:11px;color:#002F75;text-align:left}

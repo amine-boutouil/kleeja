@@ -8,13 +8,13 @@ body {height:100%;width: 100%;background:#686868 url(../images/bodybackground.jp
 h2 {	line-height:25px;padding:6px;background:#fff url(../images/message-bar.png) repeat-x;color: #FD6812;font-size:160%;}
 h6 {	line-height:20px;padding:3px;color: #444;font-size:115%;font-weight:400;}
 li {list-style: none;}
-ul{margin: 0 0 4px 0; text-align: justify; line-height: 26px;}
+ul{margin: 0 0 4px 0;line-height: 26px;}
 img {border:0px;}
 small{font-size:xx-small}
 a:link    { color: #0B55C4; text-decoration: none; }
 a:visited { color: #0B55C4; text-decoration: none; }
-a:hover   { text-decoration: underline; }
-a:active   {color:#FEA53D}
+a:hover   { color:#FF6600;text-decoration: underline; }
+
 label { cursor: pointer;padding: 0 5px 0 0;}
 fieldset { padding:10px; border: 4px solid #6496C3;background: #B0D2F6; position: relative; -moz-border-radius: 8px; border-radius:1px;}
 legend { padding:0 5px; font-weight:bold;font-size:12px;color: #115098; margin-top: -.4em; position: relative; text-transform: none;line-height: 1.2em; top: 0; vertical-align: middle;font:bold 11px Tahoma, Arial, Helvetica, sans-serif;}
@@ -42,7 +42,7 @@ input[type="password"]:focus,input[type="text"]:focus,select:focus,textarea:focu
 /* body */
 
 /* middle */
-#divmiddle {width:70%;float: left;display:inline;background:#FFF;}
+#divmiddle {width:70%;float: left;display:inline;}
 /* middle */	
 				
 /* right  menu */	
@@ -57,23 +57,18 @@ input[type="password"]:focus,input[type="text"]:focus,select:focus,textarea:focu
 /* right  menu */	
 
 /* pagination */
-.arr_paging{float:right;display:inline;margin:8px 0;}
-
-.pagination{padding:2px 0;}
-.pagination ul{text-align: right;font-size: 10px;}
-.pagination li{list-style-type: none;display: inline;float:right;color:#333;margin-left:4px;text-align:center;}
-.pagination a{background-color: #DCE8ED;padding:3px 6px;border: 1px solid #0F90C6;text-decoration: none; color:#0F90C6;-moz-border-radius:10px;}
-.pagination a:hover, .pagination a:active{border: 1px solid #2b66a5;color: #000;background-color: #FFFF80;}
-.currentpage{background-color: #90C6FF; border: 1px solid #2A639B;color: #2A639B;margin-bottom:5px;padding:3px 6px;font-weight: bold;cursor: default;-moz-border-radius:10px;}
-.pagination a.disablelink, 
-.pagination a.disablelink:hover{background-color:#F2F2F2;cursor: default;color: #929292;border-color: #929292;}
-.pagination a.prevnext{font-weight: bold;}
-.three_dots {color: #aaa;}
+.pagination{float:right;text-align:center;margin:3px 0px 3px 3px;color:#0E509E;font-size:11px;}
+.pagination li{float:right;margin-left:3px;}
+.pagination a{border:1px solid #9aafe5;text-decoration:none;padding:2px 6px;}
+.pagination a:hover{border-color:#2b55af;color:#0F478A;}
+.currentpage{background:#2e6ab1;border:2px solid #D4D4D4;color:#FFF;padding:3px 6px;cursor: default;}
+.pagination a.disablelink{cursor: default;border-color: #929292;color:#838383;padding: 2px 6px;}
+.pagination a.prevnext{color:#0F478A;cursor:pointer;font-weight:bold;}
+.three_dots {cursor: default; border:1px solid #9aafe5;padding:2px 3px;}
 /* # pagination */
 
-
 /*  buttons */
-.left_button {float:left;display:inline;margin:4px auto;padding:2px 0px}
+.left_button {float:left;display:inline;margin:3px 0;padding:2px 0}
 .button1 ,.button2 {cursor: pointer; padding:3px 9px;margin:5px;background: #549CBF url(../images/login/btn.gif) repeat left top;border: 1px solid #BCBCBC;}
 .button1:hover ,.button2:hover{	border: 1px solid #aaa; color: #fff;text-decoration: none;background: #BCBCBC url(../images/login/hoverblue.gif) repeat left top;}
 /*  buttons */
@@ -126,7 +121,17 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 /* view ../images */
 
 /*  toolTipBox */	
-#toolTipBox {display: none; padding: 10px; line-height:20px;	text-align:right; position: fixed;color:#111;background: #EFE7B8; border: 2px solid #FEA53D;-moz-border-radius: 8px; border-radius:1px;}
+#toolTipBox {
+position:fixed;
+display: none;
+padding: 10px;
+line-height:18px;
+font-weight:bold;
+font-size:11px;
+color:#222;
+background:#EFE7B8;
+border: 2px solid #FEA53D;
+}
 /* toolTipBox */
 
 /* footer */
@@ -160,7 +165,7 @@ tr:hover {background-color:#FFFFDD;}
 .oblue:hover {background-color:#DEEFDB;}
 .styles_exp{padding: 10px;font-weight: bold;color:#000;}
 .osilver {background-color:#eee;}
-.file_cp1 {width:100%; margin: 5px 0; position: relative;overflow:auto;}
+.file_cp1 {width:100%;position: relative;overflow:auto;}
 .small_font {padding:5px 5px 10px 5px;font-size:11px;font-weight: bold;color:#0B55C4;text-indent:34px}
 
 #dot {margin: 0;	padding:3px;background: url(../images/dot.gif) repeat-x;}

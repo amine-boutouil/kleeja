@@ -6,8 +6,10 @@
 <form method="post" name="filesform" action="{action}" onsubmit="javascript:return confirm_from();">
 
 <fieldset>
-<!-- start div border table  -->
-<div id="border-table">
+
+<!-- start box all -->
+<div class="box_all">
+
 <!-- title  -->
 <h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/files_button.gif" />{lang.R_FILES}</h2>
 <!-- title  -->
@@ -83,15 +85,21 @@
 <!-- end clear  -->
 
 <!-- start pagination  -->
-<strong class="arr_paging">{page_nums}</strong>
-<span class="left_button"><input name="submit" type="submit" value="{lang.UPDATE_FILES}" /></span>
-<!-- end pagination  -->
+{page_nums}
+<!-- # pagination  -->
+
+<input class="left_button" name="submit" type="submit" value="{lang.UPDATE_FILES}" />
+
+<!-- clear  -->
+<div class="clr"></div>
+<!-- # clear  -->
 
 </div>
+<!-- # box all -->
 
 </fieldset>
 </form>
 </div>
-<!-- end div border table  -->
+
 </div>
 <!-- end view files temlate  -->

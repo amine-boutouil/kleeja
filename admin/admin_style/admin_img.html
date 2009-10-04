@@ -15,53 +15,49 @@ $(function() {
 
 <!-- start view images temlate  -->
 <div id="divmiddle">
+<fieldset>
 
 <form method="post" action="{action}" name="imgform" onsubmit="javascript:return confirm_from();">
 
-<fieldset>
-
-<!-- start div border table  -->
-<div id="border-table">
+<!-- start box all -->
+<div class="box_all">
 
 <!-- title  -->
 <h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/img_ctrl_button.gif" />{lang.R_IMG_CTRL}</h2><!-- # title  -->
 
+<div class="line_img"></div>
+
 <!-- clear  -->
-<div class="clr"></div><!-- # clear  -->
+<div class="clr"></div>
+<br />
+<!-- # clear  -->
 <IF NAME="no_results">
-لا يوجد هناك أي صور تم رفعها الى المركز منذ آخرة زيارة لك
+<div class="nothing">{lang.NOTHING_IMAGE}</div>
 <ELSE>
 
-<!-- start table no hover  -->
 <table class="bg_img" style="text-align:center">  
-   <tr>   
 <LOOP NAME="arr">
 {{tdnum}}
-    <td>
+<td>
+<div>{{name}}<input name="del_{{id}}" type="checkbox" value="{{id}}"  style="float:right" onclick="change_color(this,'su[{{id}}]', 'ored');" rel="_del"/></div>
 <div class="img" id="su[{{id}}]">
-    <a href="{{href}}" class="lightbox" title="{{name}}"><img src="{{thumb_link}}"  <IF LOOP="is_thumb"><ELSE>style="width:100px;height:100px"</IF>  onmouseover="toolTip('{{name}}<br />{{ups}}<br />{{size}}<br />{{time}}<br />{{user}}<br />{{ip}}',this);"/></a>
-    <br />
-	<input name="del_{{id}}" type="checkbox" value="{{id}}"  style="float:right" onclick="change_color(this,'su[{{id}}]', 'ored bg_img', 'bg_img');" rel="_del"/>
+    <a href="{{href}}" class="lightbox" title="{{name}}"><img src="{{thumb_link}}" style="height:84px;width:84px;"<IF LOOP="is_thumb"><ELSE>style="width:100px;height:100px"</IF>  onmouseover="toolTip('<table><tr><td>{lang.FILENAME}</td><td>{{name}}</td></tr><tr><td>{{ups}}</td><td>{{size}}</td></tr><tr><td>{{time}}</td><td>{{user}}</td></tr><tr><td>{{ip}}</td><td></td></tr></table>',this);" /></a>
 </div>
-    </td>
+</td>
 {{tdnum2}}
 </LOOP>
-    </tr>   
-
-
-<tr><td><span id="toolTipBox" width="200"></span></td></tr>
-
 </table>
-<!-- end table no hover  -->
 
+<div id="toolTipBox"></div>
+<!-- clear  -->
+<div class="clr"></div>
+<!-- # clear  -->
+
+<div class="check_all">[ <a href="javascript:void(0);" onclick="checkAll(document.imgform, '_del', 'su', 'ored');">{lang.CHECK_ALL}</a> ]</div>
 
 <!-- clear  -->
-<div class="clr"></div><!-- # clear  -->
-
-<div class="check_all">[ <a href="javascript:void(0);" onclick="checkAll(document.imgform, '_del', 'su', 'ored bg_img', 'bg_img');">{lang.CHECK_ALL}</a> ]</div>
-
-<!-- clear  -->
-<div class="clr"></div><!-- # clear  -->
+<div class="clr"></div>
+<!-- # clear  -->
 
 <!-- start pagination  -->
 {page_nums}
@@ -72,12 +68,13 @@ $(function() {
 <!-- clear  -->
 <div class="clr"></div>
 <!-- # clear  -->
-
 </IF>
+
 </div>
-<!-- end div border table  -->
+<!-- # box all -->
+
+</form>
 
 </fieldset>
-</form>
 </div>
 <!-- # end view images temlate  -->  

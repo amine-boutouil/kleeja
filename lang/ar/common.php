@@ -513,6 +513,7 @@ $lang = array_merge($lang, array(
 	'MESSAGE_NONE'				=> 'حتى الآن لا يوجد أي رسائل  ..',
 	'KLEEJA_TEAM'				=> 'فريق تطوير كليجا .. !',
 	'ERR_SEND_MAIL'				=> 'هناك خطأ بالارسال , حاول مجدداً .. !',
+	'NOTHING_IMAGE'				=> 'لا يوجد أي جديد منذ آخرة زيارة لك ..!!',
 	));
 
 #<-- EOF

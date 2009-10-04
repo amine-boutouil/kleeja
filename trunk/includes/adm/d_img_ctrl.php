@@ -17,7 +17,7 @@ if (!defined('IN_ADMIN'))
 if(!isset($images_cp_perpage) || !$images_cp_perpage)
 {
 	// you can add this varibale to config.php
-	$images_cp_perpage = 18;
+	$images_cp_perpage = 20;
 }
 
 //for style ..
@@ -76,7 +76,7 @@ if ($nums_rows > 0)
 		$arr[]	= array(
 						'id'		=> $row['id'],
 						'tdnum'		=> ($tdnum==0) ? '<tr>': '',
-						'tdnum2'	=> ($tdnum==2) ? '</tr>' : '',
+						'tdnum2'	=> ($tdnum==3) ? '</tr>' : '',
 						'name'		=> ($row['real_filename'] == '' ? $row['name'] : $row['real_filename']),
 						'ip' 		=> $lang['IP'] . ':' . htmlspecialchars($row['user_ip']),
 						'href'		=> PATH . $row['folder'] . '/' . $row['name'],
@@ -89,7 +89,7 @@ if ($nums_rows > 0)
 					);
 
 		//fix ... 
-		$tdnum = ($tdnum == 2) ? 0 : $tdnum+1; 
+		$tdnum = ($tdnum == 3) ? 0 : $tdnum+1; 
 
 		$del[$row['id']] = (isset($_POST['del_' . $row['id']])) ? $_POST['del_' . $row['id']] : '';
 
@@ -153,7 +153,7 @@ $page_nums 		= $Pager->print_nums(basename(ADMIN_PATH). '?cp=' . basename(__file
 //after submit 
 if(isset($_POST['submit']))
 {
-	$text	= ($affected ? $lang['FILES_UPDATED'] : $lang['NO_UP_CHANGE_S']) . '<meta HTTP-EQUIV="REFRESH" content="0; url=' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;page=' . (isset($_GET['page']) ? intval($_GET['page']) : '1') . '">' . "\n";
+	$text	= ($affected ? $lang['FILES_UPDATED'] : $lang['NO_UP_CHANGE_S']) . '<meta HTTP-EQUIV="REFRESH" content="2; url=' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;page=' . (isset($_GET['page']) ? intval($_GET['page']) : '1') . '">' . "\n";
 	$stylee	= "admin_info";
 }
 

@@ -113,11 +113,14 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 /* System Messages  #error*/
 
 /* view ../images */
-.bg_img {border-collapse: collapse;width:100%; height:100px; padding:5px;}
-.img {height:100px; padding:10px; cursor: pointer;}
-.bg_img  tr {height: 24px; background-color:transparent;text-align:center;}
-.bg_img td {padding: 3px 5px; border-top: solid 1px #D2D2D2;border-bottom: solid 1px #E4E4E4;border-left: solid 1px #D2D2D2;border-right: solid 1px #D2D2D2;text-align:center;}
-.check_all {display:block;text-align:center;margin:4px auto;padding:5px;background-color:#EEE;}
+.line_img {height:18px;display:block;margin:2px 0;background:#D6D0CB url(../images/line_img.png) repeat-x top right;}
+.bg_img {border-collapse: collapse;width:100%; padding:10px;}
+.img {padding:10px; cursor: pointer;}
+.img img{border:4px solid #D2D2D2;}
+.img img:hover{border:4px solid #FF6A14;}
+.bg_img  tr {background-color:transparent;text-align:center;}
+.bg_img td {padding-bottom:10px; border-top: solid 1px #D2D2D2;border-bottom: solid 1px #E4E4E4;border-left: solid 1px #D2D2D2;border-right: solid 1px #D2D2D2;text-align:center;}
+.check_all {display:block;text-align:left;margin:4px;padding:5px;background:#eee;}
 /* view ../images */
 
 /*  toolTipBox */	
@@ -129,8 +132,9 @@ line-height:18px;
 font-weight:bold;
 font-size:11px;
 color:#222;
-background:#EFE7B8;
-border: 2px solid #FEA53D;
+background:#F5B1B4;
+border: 4px solid #CE767A;
+text-align:right;
 }
 /* toolTipBox */
 
@@ -280,3 +284,12 @@ tr:hover {background-color:#FFFFDD;}
 
 .reports {background:#fff url(../images/bg_reports.gif) no-repeat 50% 10%;}
 
+.nothing {
+margin:5px 0;
+padding:30px 10px;
+font-size:large;
+font-weight: bold;
+text-align:center;
+background:#EFE6B8;
+border: 1px solid #C8BD7C;
+}

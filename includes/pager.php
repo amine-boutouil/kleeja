@@ -62,7 +62,7 @@ class SimplePager
 			($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '<li><a class="disablelink" href="' . $link . '-' . ($this->currentPage-1) . '.html">'. $lang['PREV'] .'</a></li>' : $re .= '<li><a class="disablelink" href="' . $link . '&amp;page=' . ($this->currentPage-1) . ' ">'. $lang['PREV'] .'</a></li>';
 
 		if ($this->currentPage > 3)		
-			($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '<li><a href="' . $link . '-1.html">1</a></li>' . (($this->currentPage > 5) ? '<li class="three_dots">...</li>' : '') : $re .= '<li><a href="' . $link . '&amp;page=1">1</a></li>' . (($this->currentPage > 5) ? '<li class="three_dots">...</li>' : '');
+			($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '<li><a href="' . $link . '-1.html">1</a></li>' . (($this->currentPage > 5) ? '<li><span class="three_dots">...</span></li>' : '') : $re .= '<li><a href="' . $link . '&amp;page=1">1</a></li>' . (($this->currentPage > 5) ? '<li><span class="three_dots">...</span></li>' : '');
 
 		// Don't ask me how the following works. It just does, OK? :-)
 		for ($current = ($this->currentPage == 5) ? $this->currentPage - 3 : $this->currentPage - 2, $stop = ($this->currentPage + 4 == $this->totalPages) ? $this->currentPage + 4 : $this->currentPage + 3; $current < $stop; ++$current)
@@ -78,7 +78,7 @@ class SimplePager
 		if ($this->currentPage <= ($this->totalPages-3))
 		{
 			if ($this->currentPage != ($this->totalPages-3) && $this->currentPage != ($this->totalPages-4))
-				$re .= '<li class="three_dots">...</li>';
+				$re .= '<li><span class="three_dots">...</span></li>';
 			($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '<li><a href="' . $link . '-' . ($this->totalPages) . '.html">'. $this->totalPages .'</a></li>' : $re .= '<li><a href="' . $link . '&amp;page=' . ($this->totalPages) . '" >'. $this->totalPages .'</a></li>';
 		}
 

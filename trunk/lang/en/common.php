@@ -531,6 +531,9 @@ $lang = array_merge($lang, array(
 	'ERR_SEND_MAIL'				=> 'Mail sending error, try again later !',
 	'NOTHING_IMAGE'				=> 'لا يوجد أي جديد منذ آخرة زيارة لك ..!!',
 	'FIND_IP_FILES' 			=> 'تم العثور على',
+	'ALPHABETICAL_ORDER_FILES'	=> 'ترتيب الملفات حسب التسلسل الأبجدي', 
+	'ORDER_SIZE'				=> 'ترتيب الملفات حسب أحجامها من الأكبر حتى الأصغر',
+	'ORDER_TOTAL_DOWNLOADS'		=> 'ترتيب الملفات حسب عدد مرات التحميل', 
 	//last line of this file ...					 
 	'S_TRANSLATED_BY' 			=> 'Translated By <a href="http://www.fenix4web.com/">Fenix4Web</a>',
 ));

@@ -530,6 +530,7 @@ $lang = array_merge($lang, array(
 	'SEARCH_STAT' 				=> 'Search Bots Stats',
 	'ERR_SEND_MAIL'				=> 'Mail sending error, try again later !',
 	'NOTHING_IMAGE'				=> 'لا يوجد أي جديد منذ آخرة زيارة لك ..!!',
+	'FIND_IP_FILES' 			=> 'تم العثور على',
 	//last line of this file ...					 
 	'S_TRANSLATED_BY' 			=> 'Translated By <a href="http://www.fenix4web.com/">Fenix4Web</a>',
 ));

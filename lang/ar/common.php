@@ -466,7 +466,7 @@ $lang = array_merge($lang, array(
 	'GUIDE_GROUPS' 			    => 'مجموعة',
 	'ALL_FILES' 			    => 'عدد جميع الملفات',
 	'SHOWFILESBYIP'				=> 'عرض  ملفات الـ IP', 
-	'DELETEALLRES'				=> 'حذف كل النتائج',
+	'DELETEALLRES'				=> 'حذف كل ملفات الـ IP المحدد',
 	'ADMIN_DELETE_FILES_OK'     => 'تم حذف %s ملف بنجاح',
 	'ADMIN_DELETE_FILES_NOF'	=> 'لاتوجد نتائج للقيام بعملية الحذف',
 	'NOT_EXSIT_USER'			=> 'عفواً العضو الذي تبحث عنه غير موجود في قاعدة البيانات .. ربما أنك تحاول الوصول لعضوية غير موجودة او محذوفة !!!!',
@@ -514,6 +514,7 @@ $lang = array_merge($lang, array(
 	'KLEEJA_TEAM'				=> 'فريق تطوير كليجا .. !',
 	'ERR_SEND_MAIL'				=> 'هناك خطأ بالارسال , حاول مجدداً .. !',
 	'NOTHING_IMAGE'				=> 'لا يوجد أي جديد منذ آخرة زيارة لك ..!!',
+	'FIND_IP_FILES' 			=> 'تم العثور على',
 	));
 
 #<-- EOF

@@ -338,7 +338,7 @@
 	//check for page numbr
 	if(empty($perpage) || intval($perpage) == 0)
 	{
-		$perpage = 10;
+		$perpage = 14;
 	}
 
 	//site url must end with /

@@ -1,17 +1,14 @@
 ﻿<!-- start view files temlate  -->
 <div id="divmiddle">
-
 <div class="file_cp1">
-
 <form method="post" name="filesform" action="{action}" onsubmit="javascript:return confirm_from();">
-
 <fieldset>
 
 <!-- start box all -->
 <div class="box_all">
 
 <!-- title  -->
-<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/files_button.gif" />{lang.R_FILES}</h2>
+<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/files_button.gif" alt="{lang.R_FILES}" />{lang.R_FILES}</h2>
 <!-- title  -->
 
 <IF NAME="is_search">
@@ -38,34 +35,34 @@
 ...
 <ELSE>
 
-<table style="text-align:center;font-size:11px;">
-    <tr style="background-color:#D2D2D2;height:40px;font-weight: bold;">
-        <td><a href="{ord_action}&amp;order_by=real_filename">{lang.FILENAME}</a>
-		<a href="{page2_action}&amp;order_way=1"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/arrow_up.gif" alt=".." /></a>
-		<a href="{page2_action}"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/arrow_down.gif" alt=".." /></a>
-		</td>
-        <td><a href="{ord_action}&amp;order_by=user">{lang.BY}</a></td>
-        <td><a href="{ord_action}&amp;order_by=user_ip">{lang.IP}</a></td>
-        <td><a href="{ord_action}&amp;order_by=size">{lang.FILESIZE}</a></td>
-        <td><a href="{ord_action}&amp;order_by=uploads">{lang.FILEUPS}</a></td>
-        <td><a href="{ord_action}&amp;order_by=time">{lang.FILEDATE}</a></td>
-        <td><a href="{ord_action}&amp;order_by=type">{lang.FILETYPE}</a></td>
-        <td><a href="{ord_action}&amp;order_by=folder">{lang.FILDER}</a></td>
-        <td><a href="{ord_action}&amp;order_by=report">{lang.NUMPER_REPORT}</a></td>
-        <td><a href="javascript:void(0);" onclick="checkAll(document.filesform, '_del', 'su');">{lang.DELETE}</a></td>
+<table class="view_all_files">
+    <tr>
+        <th style="white-space:nowrap;"><a title="{lang.ALPHABETICAL_ORDER_FILES}" href="{ord_action}&amp;order_by=real_filename">{lang.FILENAME}</a>
+		<a href="{page2_action}&amp;order_way=1"><img src="{STYLE_PATH_ADMIN}images/icon/arrow_up.gif" alt=".." /></a>
+		<a href="{page2_action}"><img src="{STYLE_PATH_ADMIN}images/icon/arrow_down.gif" alt=".." /></a>
+		</th>
+        <th><a href="{ord_action}&amp;order_by=user">{lang.BY}</a></th>
+        <th><a href="{ord_action}&amp;order_by=user_ip">{lang.IP}</a></th>
+        <th><a title="{lang.ORDER_SIZE}" href="{ord_action}&amp;order_by=size">{lang.SIZE}</a></th>
+        <th><a title="{lang.ORDER_TOTAL_DOWNLOADS}" href="{ord_action}&amp;order_by=uploads">{lang.FILEUPS}</a></th>
+        <th><a href="{ord_action}&amp;order_by=time">{lang.FILEDATE}</a></th>
+        <th><a href="{ord_action}&amp;order_by=type">{lang.FILETYPE}</a></th>
+        <th><a href="{ord_action}&amp;order_by=folder">{lang.FILDER}</a></th>
+        <th><a href="{ord_action}&amp;order_by=report">{lang.NUMPER_REPORT}</a></th>
+        <th><a href="javascript:void(0);" onclick="checkAll(document.filesform, '_del', 'su');">{lang.DELETE}</a></th>
     </tr>
 <LOOP NAME="arr">
     <tr id="su[{{id}}]" class="osilver">
 		<td>{{name}}</td>
         <td>{{user}}</td>
-        <td>{{ip}} <a href="{{showfilesbyip}}" title="{lang.SHOWFILESBYIP}"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/find_file_ip.png" alt="find files" /></a></td>
+        <td>{{ip}} <br /><a title="{lang.SHOWFILESBYIP}" href="{{showfilesbyip}}"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/find_file_ip.png" alt="find files" /></a></td>
         <td>{{size}}</td>
         <td>{{ups}}</td>
         <td>{{time}}</td>
         <td>{{type}}</td>
         <td>{{folder}}</td>
         <td>{{report}}</td>
-        <td><input type="checkbox" name="del_{{id}}" value="{{id}}" onclick="change_color(this,'su[{{id}}]');" rel="_del"></td>
+        <td><input type="checkbox" name="del_{{id}}" value="{{id}}" onclick="change_color(this,'su[{{id}}]');" rel="_del" /></td>
     </tr>
 </LOOP>
 </IF>
@@ -100,6 +97,5 @@
 </fieldset>
 </form>
 </div>
-
 </div>
 <!-- end view files temlate  -->

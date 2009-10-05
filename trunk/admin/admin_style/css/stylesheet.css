@@ -48,12 +48,14 @@ input[type="password"]:focus,input[type="text"]:focus,select:focus,textarea:focu
 /* right  menu */	
 #main_menu{float:right; width:26%; padding:10px; background: #EFE7B8;border: 4px solid #FEA53D;position: relative;-moz-border-radius: 8px; border-radius:1px;}
 .body_menu {text-align:center;background: #E2E1DD}
-.link_menu{float: right; height: 60px; width:48%; margin:1px;border:1px solid #D6D6CE;border-top:1px solid #D6D6CE;border-bottom:2px solid #CDCDCD;background: #E2E1DD url(../images/bg-right-menu.jpg) repeat;}
-.link_current {height: 60px; width:48%;margin:1px;background:#fff;} 
-.link_current  a {color:#000;border-top: #FEA53D 3px solid;border-bottom: #FEA53D 3px solid;}
+.link_menu ,.link_current {float: right; height: 60px; width:48%; margin:1px;border:1px solid #D6D6CE;border-top:1px solid #D6D6CE;border-bottom:2px solid #CDCDCD;background: #E2E1DD url(../images/bg-right-menu.jpg) repeat;}
+.link_current {height:57px;background:#FFCC00;border-top: #EB8647 3px solid;border-bottom:#EB8647 3px solid;} 
+.link_current a{color:#000} 
 .link_menu a  {background:url(../images/hidbg.png) repeat-x bottom left;display: block;overflow: hidden;font-size:x-small;font-weight: bold;height: 60px;}
 .link_menu img {padding:2px 0 3px 0;}
 .link_menu a:hover{height:56px;text-decoration: none;background:#FEF5E2 url(../images/hidbg.png) repeat-x bottom left; color:#000;border-top: #FEA53D 3px solid;border-bottom: #FEA53D 3px solid;}
+.link_current a:hover{height:56px;text-decoration: none;background:url(../images/hidbg.png) repeat-x;border:none;cursor:default}
+
 /* right  menu */	
 
 /* pagination */
@@ -284,12 +286,16 @@ tr:hover {background-color:#FFFFDD;}
 
 .reports {background:#fff url(../images/bg_reports.gif) no-repeat 50% 10%;}
 
-.nothing {
+.nothing {margin:5px 0;padding:30px 10px;font-size:large;font-weight: bold;text-align:center;
+background:#EFE6B8;border: 1px solid #C8BD7C;}
+
+.find_files {
 margin:5px 0;
-padding:30px 10px;
-font-size:large;
+padding:10px 10px 15px ;
 font-weight: bold;
-text-align:center;
-background:#EFE6B8;
-border: 1px solid #C8BD7C;
+background:#FFF9D7;
+border: 1px solid #E2C822;
+}
+.find_files  p{
+ text-indent:40px;
 }

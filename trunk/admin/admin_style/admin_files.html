@@ -15,8 +15,11 @@
 <!-- title  -->
 
 <IF NAME="is_search">
-<img src="{STYLE_PATH_ADMIN}images/search_button.gif" ><strong> {lang.SEARCH_FILES} ( {nums_rows} )</strong>
- | <a href="{deletelink}" onclick="javascript:return confirm_from();">{lang.DELETEALLRES}</a>
+<div class="find_files">
+<div><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/search_button.gif" alt="find files" /> {lang.SEARCH_FILES} :</div>
+<p>{lang.FIND_IP_FILES} ( {nums_rows} ) {lang.FILE}  | <a href="{deletelink}" onclick="javascript:return confirm_from();">{lang.DELETEALLRES}</a>
+</p>
+ </div>
 <ELSE>
 
 </IF>
@@ -55,10 +58,7 @@
     <tr id="su[{{id}}]" class="osilver">
 		<td>{{name}}</td>
         <td>{{user}}</td>
-        <td style="font-size:xx-small">
-		{{ip}} <br />
-		<small><a href="{{showfilesbyip}}" title="{lang.SHOWFILESBYIP}">{lang.SHOWFILESBYIP}</a></small>
-		</td>
+        <td>{{ip}} <a href="{{showfilesbyip}}" title="{lang.SHOWFILESBYIP}"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/find_file_ip.png" alt="find files" /></a></td>
         <td>{{size}}</td>
         <td>{{ups}}</td>
         <td>{{time}}</td>

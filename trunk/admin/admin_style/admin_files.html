@@ -21,17 +21,11 @@
 
 </IF>
 
-<a href="{page2_action}&amp;order_way=1"><img src="{STYLE_PATH_ADMIN}images/arrow_up.png"></a>
-<a href="{page2_action}"><img src="{STYLE_PATH_ADMIN}images/arrow_down.png"></a>
-
-
 <!-- start clear  -->
 <div class="clr"></div>
 <!-- end clear  -->
 
-<!-- start dot  -->
-<p class="dot" />
-<!-- end dot  -->
+<div class="line_img"></div>
 
 <!-- start clear  -->
 <div class="clr"></div>
@@ -43,7 +37,10 @@
 
 <table style="text-align:center;font-size:11px;">
     <tr style="background-color:#D2D2D2;height:40px;font-weight: bold;">
-        <td><a href="{ord_action}&amp;order_by=real_filename">{lang.FILENAME}</a></td>
+        <td><a href="{ord_action}&amp;order_by=real_filename">{lang.FILENAME}</a>
+		<a href="{page2_action}&amp;order_way=1"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/arrow_up.gif" alt=".." /></a>
+		<a href="{page2_action}"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/arrow_down.gif" alt=".." /></a>
+		</td>
         <td><a href="{ord_action}&amp;order_by=user">{lang.BY}</a></td>
         <td><a href="{ord_action}&amp;order_by=user_ip">{lang.IP}</a></td>
         <td><a href="{ord_action}&amp;order_by=size">{lang.FILESIZE}</a></td>

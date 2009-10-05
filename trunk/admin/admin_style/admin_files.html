@@ -55,7 +55,10 @@
     <tr id="su[{{id}}]" class="osilver">
 		<td>{{name}}</td>
         <td>{{user}}</td>
-        <td style="font-size:xx-small">{{ip}}<small>{{showfilesbyip}}</small></td>
+        <td style="font-size:xx-small">
+		{{ip}} <br />
+		<small><a href="{{showfilesbyip}}" title="{lang.SHOWFILESBYIP}">{lang.SHOWFILESBYIP}</a></small>
+		</td>
         <td>{{size}}</td>
         <td>{{ups}}</td>
         <td>{{time}}</td>

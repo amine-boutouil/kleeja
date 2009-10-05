@@ -235,7 +235,7 @@ if ($nums_rows > 0)
 						'report' => ($row['report'] > 4) ? "<span style=\"color:red\"><big>" . $row['report'] . "</big></span>":$row['report'],
 						'user' => ($row['user'] == '-1') ? $lang['GUST'] :  '<a href="' . $userfile . '" target="_blank">' . $row['username'] . '</a>',
 						'ip' 	=> '<a href="http://www.ripe.net/whois?form_type=simple&amp;full_query_string=&amp;searchtext=' . $row['user_ip'] . '&amp;do_search=Search" target="_new">' . $row['user_ip'] . '</a>',
-						'showfilesbyip' => '<br /><a href="'. basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&search=' . base64_encode(serialize(array('user_ip' => $row['user_ip']))) . '">' . $lang['SHOWFILESBYIP'] . '</a>',
+						'showfilesbyip' => basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&search=' . base64_encode(serialize(array('user_ip' => $row['user_ip']))),
 					);
 
 		$del[$row['id']] = isset($_POST['del_' . $row['id']]) ? $_POST['del_' . $row['id']] : '';

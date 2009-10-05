@@ -16,7 +16,6 @@ $(function() {
 <!-- start view images temlate  -->
 <div id="divmiddle">
 <fieldset>
-
 <form method="post" action="{action}" name="imgform" onsubmit="javascript:return confirm_from();">
 
 <!-- start box all -->
@@ -30,20 +29,20 @@ $(function() {
 
 <!-- clear  -->
 <div class="clr"></div>
-<br />
 <!-- # clear  -->
+
 <IF NAME="no_results">
-<div class="nothing">{lang.NOTHING_IMAGE}</div>
+<div class="nothing"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/warning_nothing.gif" alt="nothing" />{lang.NOTHING}</div>
 <ELSE>
 
-<table class="bg_img" style="text-align:center">  
+<table class="bg_img">  
 <LOOP NAME="arr">
 {{tdnum}}
 <td style="width:25%;">
-<div>{{name}}<input name="del_{{id}}" type="checkbox" value="{{id}}"  style="float:right" rel="_del"/></div>
 <div class="img" id="su[{{id}}]">
     <a href="{{href}}" class="lightbox" title="{{name}}"><img src="{{thumb_link}}" style="height:100px;width:100px;"<IF LOOP="is_thumb"><ELSE>style="width:100px;height:100px"</IF>  onmouseover="toolTip('<table><tr><td>{lang.FILENAME}</td><td>{{name}}</td></tr><tr><td>{{ups}}</td><td>{{size}}</td></tr><tr><td>{{time}}</td><td>{{user}}</td></tr><tr><td>{{ip}}</td><td></td></tr></table>',this);" /></a>
 </div>
+<div><input name="del_{{id}}" type="checkbox" value="{{id}}" rel="_del" style="float: left;" />{{name}}</div>
 </td>
 {{tdnum2}}
 </LOOP>
@@ -64,7 +63,7 @@ $(function() {
 {page_nums}
 <!-- # pagination  -->
 
-<div class="left_button"><input name="submit" type="submit" value="{lang.DEL_SELECTED}" /></div>
+<input class="left_button" name="submit" type="submit" value="{lang.DEL_SELECTED}" />
 
 <!-- clear  -->
 <div class="clr"></div>
@@ -75,7 +74,6 @@ $(function() {
 <!-- # box all -->
 
 </form>
-
 </fieldset>
 </div>
 <!-- # end view images temlate  -->  

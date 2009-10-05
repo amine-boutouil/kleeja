@@ -32,18 +32,15 @@ ul.tabbernav li a{margin-left:0px;margin-right:4px;}
 .onlineall ,.onlinevisitor ,.onlineusers {float:left;margin-right:3px;margin-left:0px;}
 .onlineall  {background-position:2% 50%;padding-left:20px;padding-right:10px;}
 .name_users{float:left;}
-.pagination ul{text-align: left;}
-.pagination li{float:left;}
-.three_dots {color: #aaa;}
-.here_page ,.paging {float:left}
+.pagination{float:left;margin:3px 3px 3px 0px;}
+.pagination li{float:left;margin-left:0;margin-right:3px;}
 #bg_log1n{background-position:90% 50%;text-align:left}
 #login .login {width:300px;float:left;}
 #login .username,#login .password{background-position:99% 50%; padding-right:20px;padding-left:2px;}
-#boxfileuser  .box_user,#boxfileuser  .us3r_n4me {background-position:4% 50%}
-#boxfileuser  .box_user {float:left}
-#boxfileuser  .us3r_n4me {background-position:4% 50%;float:right;}
-#boxfileuser  .public {margin:5px 15px 5px auto}
-#filecplink  .copylink {float:left}
+#boxfileuser  .box_user {float:left;}
+#boxfileuser  .us3r_n4me {float:right;}
+#filecplink  .copylink {float:left;width:42%;}
+#filecplink .link_user{float:right;}
 .tabledata .odd  {text-align:left}
 .reg_table {background-position:85% 50%}
 #bg_get_password{background-position:85% 50%}

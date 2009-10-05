@@ -77,7 +77,7 @@ if ($nums_rows > 0)
 						'id'		=> $row['id'],
 						'tdnum'		=> ($tdnum==0) ? '<tr>': '',
 						'tdnum2'	=> ($tdnum==3) ? '</tr>' : '',
-						'name'		=> ($row['real_filename'] == '' ? $row['name'] : $row['real_filename']),
+						'name'		=> ($row['real_filename'] == '' ? ((strlen($row['name']) > 15) ? substr($row['name'], 0, 15) . '...' : $row['name']) : ((strlen($row['real_filename']) > 15) ? substr($row['real_filename'], 0, 15) . '...' : $row['real_filename'])),
 						'ip' 		=> $lang['IP'] . ':' . htmlspecialchars($row['user_ip']),
 						'href'		=> PATH . $row['folder'] . '/' . $row['name'],
 						'size'		=> $lang['FILESIZE']. ':' . Customfile_size($row['size']),

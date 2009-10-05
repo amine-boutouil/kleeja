@@ -12,11 +12,10 @@
 <!-- title  -->
 
 <IF NAME="is_search">
-<div class="find_files">
-<div><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/search_button.gif" alt="find files" /> {lang.SEARCH_FILES} :</div>
-<p>{lang.FIND_IP_FILES} ( {nums_rows} ) {lang.FILE}  | <a href="{deletelink}" onclick="javascript:return confirm_from();">{lang.DELETEALLRES}</a>
-</p>
- </div>
+<div class="nothing">
+<p><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/search_button.gif" alt="find files" /> {lang.SEARCH_FILES} :</p>
+<p class="find_files">{lang.FIND_IP_FILES} ( {nums_rows} ) {lang.FILE}  | <a href="{deletelink}" onclick="javascript:return confirm_from();">{lang.DELETEALLRES}</a></p>
+</div>
 <ELSE>
 
 </IF>
@@ -32,7 +31,7 @@
 <!-- end clear  -->
 
 <IF NAME="no_results">
-...
+<div class="nothing"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/warning_nothing.gif" alt="nothing" />{lang.NOTHING}</div>
 <ELSE>
 
 <table class="view_all_files">
@@ -65,7 +64,7 @@
         <td><input type="checkbox" name="del_{{id}}" value="{{id}}" onclick="change_color(this,'su[{{id}}]');" rel="_del" /></td>
     </tr>
 </LOOP>
-</IF>
+
 <tr style="background-color:#D2D2D2;height:6px;"><td colspan="10"></td></tr>
 </table>
 
@@ -87,6 +86,7 @@
 
 <input class="left_button" name="submit" type="submit" value="{lang.UPDATE_FILES}" />
 
+</IF>
 <!-- clear  -->
 <div class="clr"></div>
 <!-- # clear  -->

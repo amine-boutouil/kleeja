@@ -238,7 +238,7 @@ foreach($adm_extensions as $m)
 										'lang'	=> !empty($lang['R_'. strtoupper($m)]) ? $lang['R_'. strtoupper($m)] . ($m == 'calls' ? $newcall : '') . (($m == 'reports') ? $newreport : '') : (!empty($lang[strtoupper($m)]) ? $lang[strtoupper($m)] :  (!empty($olang[strtoupper($m)]) ? $olang[strtoupper($m)] : strtoupper($m))),
 										'link'	=> './' . basename(ADMIN_PATH) . '?cp=' . ($m == 'configs' ? 'options' : $s),
 										'confirm'	=> (@in_array($m, $ext_confirm)) ? true : false,
-										'current'	=> ($m == $go_to) ? true : false
+										'current'	=> ($s == $go_to) ? true : false
 									);
 
 }

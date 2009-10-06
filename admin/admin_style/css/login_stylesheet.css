@@ -22,11 +22,11 @@ a:hover {color:#0B55C4;text-decoration:overline;}
 .site_name a:hover{text-decoration:none;color:#1C1CE3 }
 .site_name img,.cp_kleeja img{padding-left:8px;vertical-align: middle;}
 .box{display:block;width:100%;margin:0 auto;}
-.box_medium,.box_login {background:url(../images/bg_box_login.png) repeat-x bottom left;border:1px groove #666;-moz-border-radius:10px; border-radius:1px;margin:0 auto;}
+.box_medium,.box_login {background:#F1F1F1 url(../images/bg_box_login.gif) repeat-x bottom left;border:1px groove #666;-moz-border-radius:10px; border-radius:1px;margin:0 auto;}
 .box_medium {width:420px;padding:15px;border:1px dashed #757575;background-color:#fff}
 .box_login{float:right; width: 170px;margin-left:10px;padding:10px;}
 .text {width:200px;padding:0 5px;color: #003F9D;float:left;display:inline;}
-.txt {background:#fff;padding:5px;-moz-border-radius:10px; border-radius:1px;}
+.txt {padding:5px;border-top: 1px solid #888;border-bottom: 1px solid #888;}
 .text p{text-align:justify;line-height:18px;}
 .cp_kleeja{padding:2px 0;color:#EA1E1E;height:26px;font-size:18px;margin-bottom:12px;}
 .backhome {text-indent: 45px;margin-top:12px;}

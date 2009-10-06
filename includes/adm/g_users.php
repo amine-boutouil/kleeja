@@ -19,7 +19,7 @@ $stylee 	= "admin_users";
 $action 	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;page=' . (isset($_GET['page'])  ? intval($_GET['page']) : 1);
 $action 	.= (isset($_GET['search']) ? '&search=' . $SQL->escape($_GET['search']) : '') . (isset($_GET['admin']) && $_GET['admin'] == '1' ? '&admin=1' : '');
 
-$is_search	= $affected =  false;
+$is_search	= $affected = $is_asearch = false;
 $isn_search	= true;
 
 

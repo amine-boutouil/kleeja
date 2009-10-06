@@ -439,7 +439,7 @@ $lang = array_merge($lang, array(
 								'هل أنت مطور ؟ هل قمت بتطوير اضافات لكليجا وتريد عرضها للأخرين أو تريد بيعها في مركز كليجا للاضافات ؟ اذن <a target="_blank" href="http://www.kleeja.com/plugins/">إضغط هنا ..! </a>. ',
 								),
 	'KLJ_MORE_STYLES'	=> array('قم بالحصول على الكثير من الستايلات من معرض الستايلات في موقع كليجا ,<a target="_blank" href="http://www.kleeja.com/styles/">إضغط هنا ..! </a> .',
-								'هل أنت مصمم ؟ هل تريد عرض ستايلاتك في في معرض كليجا للجميع مجانا او بمقابل ؟ <br /> إذن <a target="_blank" href="http://www.kleeja.com/styles/">إضغط هنا ..! </a> .',
+								'هل أنت مصمم ؟ هل تريد عرض ستايلاتك في معرض كليجا للجميع مجانا او بمقابل ؟ <br /> إذن <a target="_blank" href="http://www.kleeja.com/styles/">إضغط هنا ..! </a> .',
 							 ),
 	'CHECK_ALL'	 => 'تحديد الكل',
 	'BCONVERTER' => 'آلة حاسبة لتحويل الأحجام',

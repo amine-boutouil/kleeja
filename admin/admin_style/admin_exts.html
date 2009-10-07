@@ -3,7 +3,7 @@
 
 <fieldset>
 
-<form method="post" action="{action}">
+<form method="post" action="{action}" name="extsform">
 
 <!-- start div border table  -->
 <div id="border-table">
@@ -26,21 +26,24 @@
         <td>{lang.EXT}</td>
         <td>{lang.GROUP}</td>
         <td>{lang.SIZE_G}</td>
-        <td>{lang.ALLOW_G}</td>
+        <td><a href="javascript:void(0);" onclick="checkAll_exts(document.extsform, '_gext', 'su');" title="{lang.CHECK_ALL}">{lang.ALLOW_G}</a></td>
         <td>{lang.SIZE_U}</td>
-        <td>{lang.ALLOW_U}</td>
+        <td><a href="javascript:void(0);" onclick="checkAll_exts(document.extsform, '_uext', 'su');" title="{lang.CHECK_ALL}">{lang.ALLOW_U}</a></td>
     </tr>
 <IF NAME="no_results">
 ...
 <ELSE>
 <LOOP NAME="arr">
-    <tr>
+    <tr 
+		id="su[{{id}}]" 
+		class="<IF LOOP="ug_allow">o_all<ELSEIF LOOP="u_allow">o_u<ELSEIF LOOP="g_allow">o_g<ELSE>nothing</IF>"
+	>
         <td><strong>{{name}}</strong></td>
         <td>{{group}}</td>
-        <td><input name="gsz[{{id}}]" type="text" value="{{g_size}}" size="7" style="text-align:center;" /></td>
-        <td>{{g_allow}}</td>
+        <td><input name="gsz[{{id}}]" type="text" value="{{g_size}}" size="7" style="text-align:center;"   /></td>
+        <td><input name="gal[{{id}}]" id="gal_{{id}}" value="{{id}}" type="checkbox" ({{g_allow}}?checked="checked":)  onclick="change_color_exts('{{id}}');" rel="_gext" /></td>
         <td><input name="usz[{{id}}]" type="text" value="{{u_size}}" size="7" style="text-align:center;" /></td>
-        <td>{{u_allow}}</td>     
+        <td><input name="ual[{{id}}]" id="ual_{{id}}" value="{{id}}" type="checkbox" ({{u_allow}}?checked="checked":) onclick="change_color_exts('{{id}}');" rel="_uext" /></td>     
     </tr>
 </LOOP>
 </IF>

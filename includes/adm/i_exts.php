@@ -47,14 +47,15 @@ if ($nums_rows > 0)
 		$u_sz[$row['id']] = isset($_POST['usz' . $row['id']]) ? $_POST['usz' . $row['id']] : $row['user_size'];
 
 		$arr[]	= array(
-						'id' 		=>$row['id'],
-						'name' 		=>$row['ext'],
-						'group'		=>ch_g(false, $row['group_id'], true),
-						'g_size'	=>round($g_sz[$row['id']] / 1024),
-						'g_allow'	=>'<input name="gal[' . $row['id'] . ']" type="checkbox" ' . ($row['gust_allow'] ? 'checked="checked"' : '') . ' />',
-						'u_size'	=>round($u_sz[$row['id']] / 1024),
-						'u_allow'	=>'<input name="ual[' . $row['id'] . ']" type="checkbox" ' . ($row['user_allow']? 'checked="checked"' : '') . ' />',
-				);
+						'id' 		=> $row['id'],
+						'name' 		=> $row['ext'],
+						'group'		=> ch_g(false, $row['group_id'], true),
+						'g_size'	=> round($g_sz[$row['id']] / 1024),
+						'g_allow'	=> (int) $row['gust_allow'] ? true : false,
+						'u_size'	=> round($u_sz[$row['id']] / 1024),
+						'u_allow'	=> (int) $row['user_allow'] ?  true : false,
+						'ug_allow'	=> $row['gust_allow'] && $row['user_allow'] ? true : false
+					);
 	}
 	$SQL->freeresult($result_p);
 	$SQL->freeresult($result);

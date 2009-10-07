@@ -3,20 +3,20 @@
 
 <!-- start site name and title  -->
 <div class="title-x"><strong><a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}</strong></div>
-<!--  # End  site name and title  -->
+<!--  #   site name and title  -->
 
 <!-- start line top  -->
 <div class="clr"></div><div class="line"></div>
-<!-- # End line top  -->
+<!-- #  line top  -->
 
 <IF NAME="ERRORS">
 <!-- start error msg  -->
 <dl id="system-message">
-<dd class="error">
-<ul><LOOP NAME="ERRORS">
-<li>{%value%}</li></LOOP>
-</ul>
-</dd>
+	<dd class="error">
+		<ul><LOOP NAME="ERRORS">
+		<li>{%value%}</li></LOOP>
+		</ul>
+	</dd>
 </dl>
 <!-- # end error msg  -->
 </IF>
@@ -24,37 +24,35 @@
 <!-- start form get_pass  -->
 <form action="{action}" method="post">
 
-<div id="bg_get_password">
-<table>
-	<tr>
-		<td colspan="2"><p class="get_pass">{lang.E_GET_LOSTPASS}</p></td>
-	</tr>
-	<tr>
-		<td><b>{lang.EMAIL} : &nbsp;</b></td>
-		<td><input type="text" name="rmail" value="{t_rmail}" size="24" style="direction:ltr;"/></td>
-	</tr>
-</table>
-</div>
+<div class="get_password">
+	<p>{lang.E_GET_LOSTPASS}</p>
+	<div class="clr"></div><br />
+	<label>{lang.EMAIL} :</label>
+	<input type="text" name="rmail" value="{t_rmail}" size="30" style="direction:ltr;" />
+	<div class="clr"></div>
+</div>	
 
-<!-- start  safe code -->				
+<!-- start safe code -->				
 <div class="safe_code">
-<span>{lang.VERTY_CODE}</span>
-<br /><br />
-<img style="vertical-align:middle;" id="kleeja_img_captcha" src="{captcha_file_path}" alt="{lang.REFRESH_CAPTCHA}" title="{lang.REFRESH_CAPTCHA}" onclick="javascript:update_kleeja_captcha('{captcha_file_path}', 'kleeja_code_answer');" />
-<input type="text" name="kleeja_code_answer" id="kleeja_code_answer" />
-<br /><br />
-<strong class="explain">{lang.NOTE_CODE}</strong>
-<br />
+	<p>{lang.VERTY_CODE}</p>
+	<div class="clr"></div>
+	<div>
+		<img style="vertical-align:middle;" id="kleeja_img_captcha" src="{captcha_file_path}" alt="{lang.REFRESH_CAPTCHA}" title="{lang.REFRESH_CAPTCHA}" onclick="javascript:update_kleeja_captcha('{captcha_file_path}', 'kleeja_code_answer');" />
+		<input type="text" name="kleeja_code_answer" id="kleeja_code_answer" />
+	</div>
+	<div class="clr"></div>
+	<p class="explain">{lang.NOTE_CODE}</p>
 </div>
-<!-- ## End  safe code -->	
-
+<!-- # safe code -->
+	
+<div class="clr"></div>
 {H_FORM_KEYS}
-
-<input class="buttons" type="submit" name="submit" value="{lang.GET_LOSTPASS}" />
+<div class="clr"></div>
+<input type="submit" name="submit" value="{lang.GET_LOSTPASS}" />
 </form>
-<!-- ## End form get_pass  -->	
+<!-- #  form get_pass  -->	
 
-<div class="clr"></div><br />
+<div class="clr"></div>
    
 </div>
-<!-- ## End get_pass template  --> 
+<!-- #  get_pass template  --> 

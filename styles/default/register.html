@@ -22,22 +22,15 @@
 <!-- start form register  -->
 <form action="{action}" method="post">
 
-<div class="reg_table">
-<table>
-	<tr>
-		<td><b>{lang.USERNAME} :</b></td>
-		<td><input type="text" name="lname" value="{t_lname}"  /></td>
-	</tr>
-	<tr>
-		<td><b>{lang.PASSWORD} :</b></td>
-		<td><input type="password" name="lpass" value="{t_lpass}"  /></td>
-	</tr>
-	<tr>
-		<td><b>{lang.EMAIL} :</b></td>
-		<td><input type="text" name="lmail" value="{t_lmail}" style="direction:ltr" /></td>
-	</tr>
-</table>
-</div>
+<div class="register">
+	<label>{lang.USERNAME} :</label>
+		<p><input type="text" name="lname" value="{t_lname}" size="30" /></p>
+	<label>{lang.PASSWORD} :</label>
+		<p><input type="password" name="lpass" value="{t_lpass}" size="30" /></p>
+	<label>{lang.EMAIL} :</label>
+		<p><input type="text" name="lmail" value="{t_lmail}" size="30" style="direction:ltr" /></p>
+	<div class="clr"></div>
+</div>	
 
 <!-- start  safe code -->				
 <div class="safe_code">

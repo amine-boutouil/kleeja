@@ -2,56 +2,63 @@
 <div id="content">
 
 <!-- start site name and title  -->
-<div class="title-x"><strong><a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}</strong></div>
-<!--  #  -->
+<div class="title-x"><a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}</div>
+<!--  #  site name and title -->
 
 <!-- start line top  -->
 <div class="clr"></div><div class="line"></div>
-<!-- #  -->
-
+<!-- #  line top -->
 
 <IF NAME="ERRORS">
 <!-- start error msg  -->
 <dl id="system-message">
-<dd class="error"><ul>
-<LOOP NAME="ERRORS"><li>{%value%}</li></LOOP>
-</ul></dd></dl>
+	<dd class="error">
+		<ul>
+		<LOOP NAME="ERRORS">
+		<li>{%value%}</li>
+		</LOOP>
+		</ul>
+	</dd>
+</dl>
+<!-- # error msg  -->
 </IF>
 
-
-<form action="{action}" method="post">
 <!-- start form call  -->
+<form action="{action}" method="post">
 <div class="call">
 	<IF NAME="NOT_USER">
 	<label>{lang.YOURNAME} :</label>
-	<input class="input_field" type="text" name="cname" value="{t_cname}" size="30" />
+		<input type="text" name="cname" value="{t_cname}" size="30" />
+		<div class="clr"></div>
 	<label>{lang.EMAIL} :</label>
-	<input class="input_field" type="text" name="cmail" value="{t_cmail}" size="30" />
+		<input type="text" name="cmail" value="{t_cmail}" size="30" style="direction:ltr" />
 	</IF>
+		<div class="clr"></div>
 	<label>{lang.TEXT} :</label>
-	<textarea class="input_field" name="ctext" cols="5" rows="5">{t_ctext}</textarea>
-	<div class="clr"></div>
+		<textarea name="ctext" cols="70" rows="4">{t_ctext}</textarea>
+	<div class="clr"></div><br />
 </div>	
 
-<!-- start  safe code -->				
+<!-- start safe code -->				
 <div class="safe_code">
-<span>{lang.VERTY_CODE}</span>
-<br /><br />
-<img style="vertical-align:middle;" id="kleeja_img_captcha" src="{captcha_file_path}" alt="{lang.REFRESH_CAPTCHA}" title="{lang.REFRESH_CAPTCHA}" onclick="javascript:update_kleeja_captcha('{captcha_file_path}', 'kleeja_code_answer');" />
-<input type="text" name="kleeja_code_answer" id="kleeja_code_answer" />
-<br /><br />
-<strong class="explain">{lang.NOTE_CODE}</strong>
-<br />
+	<p>{lang.VERTY_CODE}</p>
+	<div class="clr"></div>
+	<div>
+		<img style="vertical-align:middle;" id="kleeja_img_captcha" src="{captcha_file_path}" alt="{lang.REFRESH_CAPTCHA}" title="{lang.REFRESH_CAPTCHA}" onclick="javascript:update_kleeja_captcha('{captcha_file_path}', 'kleeja_code_answer');" />
+		<input type="text" name="kleeja_code_answer" id="kleeja_code_answer" />
+	</div>
+	<div class="clr"></div>
+	<p class="explain">{lang.NOTE_CODE}</p>
 </div>
-<!-- ## -->		
+<!-- # safe code -->		
 	
 <div class="clr"></div>
 {H_FORM_KEYS}
-<input id="buttons" type="submit" name="submit" value="{lang.SEND}" />
+
+<input type="submit" name="submit" value="{lang.SEND}" />
+
 </form>
+<!-- # form call  -->
 
-<!-- ## End form call  -->
-
-<div class="clr"></div><br />
-   
+<div class="clr"></div>
 </div>

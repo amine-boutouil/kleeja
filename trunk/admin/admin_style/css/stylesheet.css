@@ -175,6 +175,12 @@ tr:hover {background-color:#FFFFDD;}
 .file_cp1 {width:100%;position: relative;overflow:auto;}
 .small_font {padding:5px 5px 10px 5px;font-size:11px;font-weight: bold;color:#0B55C4;text-indent:34px}
 
+/*exts colors*/
+.o_all, .o_all:hover {background-color:black; color;white}
+.o_g, .o_g:hover {background-color:green;}
+.o_u, .o_u:hover {background-color:blue;}
+
+
 #dot {margin: 0;	padding:3px;background: url(../images/dot.gif) repeat-x;}
 
 /*tpl*/

@@ -28,7 +28,8 @@ switch ($_GET['go'])
 	//
 	//Page of allowed extensions for both users and members
 	//
-	case 'guide' : 
+	case 'exts' :
+	case 'guide' :
 
 		$stylee	= 'guide';
 		$titlee	= $lang['GUIDE'];
@@ -37,21 +38,22 @@ switch ($_GET['go'])
 		uasort($g_exts, "group_id_order");
 		uasort($u_exts, "group_id_order");
 
-		
 		//make it loop
 		$gusts_data = array();
 		$last_gg_id_was = 0;
 		foreach($g_exts as $ext=>$data)
 		{
 			$group_d = kleeja_mime_groups($data['group_id']);
-			
-			$gusts_data[]	= array('ext'	=> $ext,
+
+			$gusts_data[]	= array(
+									'ext'	=> $ext,
 									'num'	=> Customfile_size($data['size']), //format size as kb, mb,...
 									'group'	=> $data['group_id'],
-									'group_name'	=> $group_d['name'],
-									'realy_first_row'		=> $last_gg_id_was == 0 ? true : false,
-									'is_first_row'	=> $last_gg_id_was != $data['group_id'] ? true :false,
-									);
+									'group_name'		=> $group_d['name'],
+									'realy_first_row'	=> $last_gg_id_was == 0 ? true : false,
+									'is_first_row'		=> $last_gg_id_was != $data['group_id'] ? true :false,
+								);
+
 			$last_gg_id_was = $data['group_id'];
 		}
 
@@ -61,14 +63,16 @@ switch ($_GET['go'])
 		foreach($u_exts as $ext=>$data)
 		{
 			$group_d = kleeja_mime_groups($data['group_id']);
-			
-			$users_data[]	= array('ext'	=> $ext,
+
+			$users_data[]	= array(
+									'ext'	=> $ext,
 									'num'	=> Customfile_size($data['size']), //format size as kb, mb,...
 									'group'	=> $data['group_id'],
-									'group_name'	=> $group_d['name'],
+									'group_name'		=> $group_d['name'],
 									'realy_first_row'	=> $last_gu_id_was == 0 ? true : false,
-									'is_first_row'	=> $last_gu_id_was != $data['group_id'] ? true :false,
-									);
+									'is_first_row'		=> $last_gu_id_was != $data['group_id'] ? true :false,
+								);
+
 			$last_gu_id_was = $data['group_id'];		
 		}
 
@@ -85,10 +89,11 @@ switch ($_GET['go'])
 		$stylee	= 'report';
 		$titlee	= $lang['REPORT'];
 		$id_d	= isset($_GET['id']) ? intval($_GET['id']) : 0;
-		$url_id	= ($config['mod_writer']) ? $config['siteurl'] . 'download' . $id_d . '.html' : $config['siteurl'] . 'download.php?id=' . $id_d;
+		$url_id	= (int) $config['mod_writer'] == 1 ? $config['siteurl'] . 'download' . $id_d . '.html' : $config['siteurl'] . 'download.php?id=' . $id_d;
 		$action	= './go.php?go=report';
-		$H_FORM_KEYS = kleeja_add_form_key('report');
-		$NOT_USER = !$usrcp->name() ? true : false; 
+		$H_FORM_KEYS	= kleeja_add_form_key('report');
+		$NOT_USER		= !$usrcp->name() ? true : false; 
+
 		//no error yet 
 		$ERRORS = false;
 
@@ -152,27 +157,29 @@ switch ($_GET['go'])
 				$ip		=  get_ip();
 
 
-				$insert_query	= array('INSERT'	=> '`name` ,`mail` ,`url` ,`text` ,`time` ,`ip`',
+				$insert_query	= array(
+										'INSERT'	=> '`name` ,`mail` ,`url` ,`text` ,`time` ,`ip`',
 										'INTO'		=> "`{$dbprefix}reports`",
-										'VALUES'	=> "'$name', '$mail', '$url', '$text', '$time', '$ip'"
-										);
+										'VALUES'	=> "'$name', '$mail', '$url', '$text', $time, '$ip'"
+									);
 
 				($hook = kleeja_run_hook('qr_insert_new_report')) ? eval($hook) : null; //run hook
 
 				$SQL->build($insert_query);
 
 				//update number of reports
-				$update_query	= array('UPDATE'	=> "{$dbprefix}files",
+				$update_query	= array(
+										'UPDATE'	=> "{$dbprefix}files",
 										'SET'		=> 'report=report+1',
 										'WHERE'		=> 'id=' . $rid,
-											);
+									);
 
 				($hook = kleeja_run_hook('qr_update_no_file_report')) ? eval($hook) : null; //run hook
 
 				$SQL->build($update_query);
 
 				$to = $config['sitemail2']; //administrator e-mail
-				$message = $text . "\n\n\n\n" . 'URL :' . $url . ' - TIME : ' . date("d-m-Y h:i a", $time) . ' - IP:' . $ip;
+				$message = $text . "\n\n\n\n" . 'URL :' . $url . ' - TIME : ' . date('d-m-Y h:i a', $time) . ' - IP:' . $ip;
 				$subject = $lang['REPORT'];
 				send_mail($to, $message, $subject, $mail, $name);
 
@@ -257,16 +264,17 @@ switch ($_GET['go'])
 				$timee	= (int)	time();
 				$ip		=  get_ip();
 
-				$insert_query	= array('INSERT'	=> "`name` ,`text` ,`mail` ,`time` ,`ip`",
+				$insert_query	= array(
+										'INSERT'	=> "`name` ,`text` ,`mail` ,`time` ,`ip`",
 										'INTO'		=> "`{$dbprefix}call`",
-										'VALUES'	=> "'$name', '$text', '$mail', '$timee', '$ip'"
-										);
+										'VALUES'	=> "'$name', '$text', '$mail', $timee, '$ip'"
+									);
 
 				($hook = kleeja_run_hook('qr_insert_new_call')) ? eval($hook) : null; //run hook
 
 				if ($SQL->build($insert_query))
 				{
-					send_mail($config['sitemail2'], $text  . "\n\n\n\n" . 'TIME : ' . date("d-m-Y h:i a", $timee) . ' - IP:' . $ip, $lang['CALL'], $mail, $name);
+					send_mail($config['sitemail2'], $text  . "\n\n\n\n" . 'TIME : ' . date('d-m-Y h:i a', $timee) . ' - IP:' . $ip, $lang['CALL'], $mail, $name);
 					kleeja_info($lang['THNX_CALLED']);
 				}
 			}
@@ -304,7 +312,8 @@ switch ($_GET['go'])
 			//to check
 			if(isset($_GET['sure']) && $_GET['sure'] == 'ok')
 			{
-				$query = array('SELECT'=> 'f.id, f.name, f.folder, f.size',
+				$query	= array(
+								'SELECT'=> 'f.id, f.name, f.folder, f.size',
 								'FROM'	=> "{$dbprefix}files f",
 								'WHERE'	=> "f.code_del='" . $cd . "'",
 								'LIMIT'	=> '1',
@@ -318,17 +327,17 @@ switch ($_GET['go'])
 				{
 					while($row=$SQL->fetch_array($result))
 					{
-						@kleeja_unlink ($row['folder'] . "/" . $row['name']);
+						@kleeja_unlink ($row['folder'] . '/' . $row['name']);
 						//delete thumb
-						if (file_exists($row['folder'] . "/thumbs/" . $row['name']))
+						if (file_exists($row['folder'] . '/thumbs/' . $row['name']))
 						{
-							@kleeja_unlink ($row['folder'] . "/thumbs/" . $row['name']);
+							@kleeja_unlink ($row['folder'] . '/thumbs/' . $row['name']);
 						}
 
-						$query_del = array(
+						$query_del	= array(
 											'DELETE' => "{$dbprefix}files",
-											'WHERE'	=> "id='" . $row['id'] . "'"
-											);
+											'WHERE'	=> 'id=' . $row['id']
+										);
 
 						($hook = kleeja_run_hook('qr_del_file_with_code_del')) ? eval($hook) : null; //run hook	
 
@@ -386,14 +395,14 @@ switch ($_GET['go'])
 		}
 
 		$most_online = $stat_most_user_online_ever; 
-		$on_muoe	 = gmdate("d-m-Y H:i a", $stat_last_muoe);
+		$on_muoe	 = gmdate('d-m-Y h:i a', $stat_last_muoe);
 		//ok .. go on
 		$titlee		= $lang['STATS'];
 		$stylee		= 'stats';
 		$files_st	= $stat_files;
 		$users_st	= $stat_users;
 		$sizes_st	= Customfile_size($stat_sizes);	
-		$lst_dl_st	= ((int)$config['del_f_day'] <= 0) ? ' [ ' . $lang['CLOSED_FEATURE'] . ' ] ' : gmdate("d-m-Y H:i a", $stat_last_f_del);
+		$lst_dl_st	= ((int)$config['del_f_day'] <= 0) ? ' [ ' . $lang['CLOSED_FEATURE'] . ' ] ' : gmdate('d-m-Y h:i a', $stat_last_f_del);
 		$lst_reg	= (empty($stat_last_user)) ? $lang['UNKNOWN'] : $stat_last_user;
 
 		($hook = kleeja_run_hook('stats_go_page')) ? eval($hook) : null; //run hook
@@ -401,15 +410,15 @@ switch ($_GET['go'])
 	break; 
 	
 	//
-	//Page for redirect to downloading a file
-	//[!] depreacted from 1rc6+, see download.php
+	// Page for redirect to downloading a file
+	// [!] depreacted from 1rc6+, see download.php
 	//
 	case 'down':
 
 		//go.php?go=down&n=$1&f=$2&i=$3
 		if(isset($_GET['n']))
 		{
-			$url_file = ($config['mod_writer']) ? $config['siteurl'] . "download" . intval($_GET['i']) . ".html" : $config['siteurl'] . "download.php?id=" . intval($_GET['n']);
+			$url_file = (int) $config['mod_writer'] == 1 ? $config['siteurl'] . 'download' . intval($_GET['i']) . '.html' : $config['siteurl'] . 'download.php?id=' . intval($_GET['n']);
 		}
 		else
 		{
@@ -423,26 +432,32 @@ switch ($_GET['go'])
 	break;
 
 	//
-	//Default , if you a developer , you can embed your page here with this hook
-	//by useing $_GET[go] and your codes.
+	// Default , if you are a developer , you can embed your page here with this hook
+	// by useing $_GET[go] and your codes.
 	//
 	default:
 
-		($hook = kleeja_run_hook('default_go_page')) ? eval($hook) : null; //run hook	
+		$no_request = true;
 
-		kleeja_err($lang['ERROR_NAVIGATATION']);
+		($hook = kleeja_run_hook('default_go_page')) ? eval($hook) : null; //run hook	
+		
+		if($no_request)
+		{
+			kleeja_err($lang['ERROR_NAVIGATATION']);
+		}
 
 	break;
 }#end switch
 
 ($hook = kleeja_run_hook('end_go_page')) ? eval($hook) : null; //run hook
 
-	//show style ...
-	//header
-	Saaheader($titlee);
-		//tpl
-		echo $tpl->display($stylee);
-	//footer
-	Saafooter();
+//no template ? 
+$stylee  = empty($stylee) ? 'info' : $stylee;
 
-#<-- EOF
+//header
+Saaheader($titlee);
+//tpl
+	echo $tpl->display($stylee);
+//footer
+Saafooter();
+

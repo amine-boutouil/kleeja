@@ -46,3 +46,4 @@ http://localhost/kleeja/admin/index.php?cp=d_img_ctrl
 =====================================
 
 Deprecated: Function eregi() is deprecated in C:\wamp\www\kleeja\ucp.php on line 705
+الدحمي > انحلت الحين

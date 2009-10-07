@@ -45,4 +45,4 @@ http://localhost/kleeja/admin/index.php?cp=d_img_ctrl
 الدحمي > اشوف ان فيها جدول , الظاهر سويتها انت
 =====================================
 
-
+Deprecated: Function eregi() is deprecated in C:\wamp\www\kleeja\ucp.php on line 705

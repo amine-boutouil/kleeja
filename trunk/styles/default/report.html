@@ -12,28 +12,33 @@
 <div class="rebort">
 	<IF NAME="NOT_USER">
 	<label>{lang.YOURNAME} :</label>
-	<input class="input_field" type="text" name="rname" value="{t_rname}" size="30" />
+	<input type="text" name="rname" value="{t_rname}" size="30" />
 	<label>{lang.EMAIL} : </label>
-	<input class="input_field" type="text" name="rmail" value="{t_rmail}" size="30" style="direction:ltr" />
+	<input type="text" name="rmail" value="{t_rmail}" size="30" style="direction:ltr" />
 	</IF>
 	<label>{lang.URL} : </label>
-	<input class="urlcolor" type="text" name="rurl" value="{url_id}"  readonly="readonly" size="46" style="direction:ltr" />
+	<input class="urlcolor" type="text" name="rurl" value="{url_id}"  readonly="readonly" size="72" style="direction:ltr" />
 	<label>{lang.REASON} : </label>
-	<textarea class="input_field" name="rtext" cols="5" rows="5">{t_rtext}</textarea>
+	<textarea name="rtext" cols="70" rows="4">{t_rtext}</textarea>
 </div>
+
+<!-- start safe code -->				
 <div class="safe_code">
-<span>{lang.VERTY_CODE}</span>
-<br /><br />
-<img style="vertical-align:middle;" id="kleeja_img_captcha" src="{captcha_file_path}" alt="{lang.REFRESH_CAPTCHA}" title="{lang.REFRESH_CAPTCHA}" onclick="javascript:update_kleeja_captcha('{captcha_file_path}', 'kleeja_code_answer');" />
-<input type="text" name="kleeja_code_answer" id="kleeja_code_answer" />
-<br /><br />
-<strong class="explain">{lang.NOTE_CODE}</strong>
-<br />
+	<p>{lang.VERTY_CODE}</p>
+	<div class="clr"></div>
+	<div>
+		<img style="vertical-align:middle;" id="kleeja_img_captcha" src="{captcha_file_path}" alt="{lang.REFRESH_CAPTCHA}" title="{lang.REFRESH_CAPTCHA}" onclick="javascript:update_kleeja_captcha('{captcha_file_path}', 'kleeja_code_answer');" />
+		<input type="text" name="kleeja_code_answer" id="kleeja_code_answer" />
+	</div>
+	<div class="clr"></div>
+	<p class="explain">{lang.NOTE_CODE}</p>
 </div>
+<!-- # safe code -->
+	
 <div class="clr"></div>
 <input name="rid" value="{id_d}" type="hidden" />
 {H_FORM_KEYS}
-<input id="buttons" type="submit" name="submit" value="{lang.REPORT}" />
+<input type="submit" name="submit" value="{lang.REPORT}" />
 </form>
 <div class="clr"></div><br />
 </div>

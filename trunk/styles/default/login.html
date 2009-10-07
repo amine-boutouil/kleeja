@@ -1,78 +1,62 @@
 <!-- start login template  -->
-
 <div id="content">
 
 <!-- start site name and title  -->
 <div class="title-x"><strong><a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}</strong></div>
-<!--  # End  site name and title  -->
+<!--  #  site name and title  -->
 
 <!-- start line top  -->
-<div class="clr"></div><div class="line"></div>
-<!-- # End line top  -->
+<div class="clr"></div>
+<div class="line"></div>
+<!-- #  line top  -->
 
 <IF NAME="ERRORS">
 <!-- start error msg  -->
 <dl id="system-message">
-<dd class="error"><ul>
-<LOOP NAME="ERRORS"><li>{%value%}</li></LOOP>
-</ul></dd></dl>
+	<dd class="error">
+		<ul>
+		<LOOP NAME="ERRORS">
+		<li>{%value%}</li>
+		</LOOP>
+		</ul>
+	</dd>
+</dl>
 <!-- # end error msg  -->
 </IF>
 
-<div id="bg_log1n">
-
-<!-- start form login  -->
-<div id="login">
-    <div class="title_login"><img src="{STYLE_PATH}images/infoo.png" width="16" height="16" alt="{lang.USER_LOGIN}" style="vertical-align:middle;" />&nbsp;{lang.USER_LOGIN}</div>
-    <form action="{action}" method="post">
-<table class="login">
-	<tr>
-		<td style="width:220px;"><b>{lang.USERNAME} :</b></td>
-		<td><input class="username input_field"  type="text" name="lname" value="{t_lname}"  /></td>
-	</tr>
-	
-	<tr>
-		<td style="width:220px;"><b>{lang.PASSWORD} :</b></td>
-		<td><input class="password input_field" type="password" name="lpass" value="{t_lpass}"  /></td>
-	</tr>
-	
-	<tr>
-		<td style="width:220px;"><b>{lang.REMME} :</b></td>
-		<td>
-				<select class="remme input_field" name="remme">
-					<option value="3600">{lang.HOUR}</option>
-					<option value="18000">{lang.5HOURS}</option>
-					<option value="864000">{lang.DAY}</option>
-					<option value="6048000">{lang.WEEK}</option>
-					<option value="25920000">{lang.MONTH}</option>
-					<option value="31536000">{lang.YEAR}</option>
-				</select>
-		</td>
-	</tr>
-	<tr>
-	<td style="width: 220px;"></td>
-		<td>
-<input class="buttons" type="submit" name="submit" value="{lang.LOGIN}" />
-		</td>
-	</tr>
-</table>
-	<div class="clr"></div><br />	
-	<div class="forget_pass"><a href="{forget_pass_link}"><img src="{STYLE_PATH}images/warning.gif" width="16" height="16" alt="{lang.LOSS_PASSWORD}" style="vertical-align:middle;" />&nbsp;{lang.LOSS_PASSWORD}</a></div>
+<!-- start form login  --> 
+<form action="{action}" method="post">
+<div class="login">
+<div class="box_login">
+	<div class="title_login">{lang.USER_LOGIN}</div>
+	<label>{lang.USERNAME} :</label>
+		<input class="username" type="text" name="lname" value="{t_lname}" size="30" />
+		<div class="clr"></div>
+	<label>{lang.PASSWORD} :</label>
+		<input class="password" type="password" name="lpass" value="{t_lpass}" size="30" />
+		<div class="clr"></div>	
+	<label>{lang.REMME} :</label>
+	<div class="clr"></div>
+		<select class="remme" name="remme">
+			<option value="3600">{lang.HOUR}</option>
+			<option value="18000">{lang.5HOURS}</option>
+			<option value="864000">{lang.DAY}</option>
+			<option value="6048000">{lang.WEEK}</option>
+			<option value="25920000">{lang.MONTH}</option>
+			<option value="31536000">{lang.YEAR}</option>
+		</select>
+	<input class="button_login" type="submit" name="submit" value="{lang.LOGIN}" />
+	<div class="clr"></div>
+</div>		
+	<div class="clr"></div>
+	<div class="forget_pass"><a href="{forget_pass_link}">{lang.LOSS_PASSWORD}</a></div>
 	<div class="clr"></div>
 	{H_FORM_KEYS}	
-	</form>
+	<div class="clr"></div>
 </div>
+</form>
+<!-- # form login  -->
+ 
 <div class="clr"></div>
 </div>
-
-<!-- ## End form login  -->
-
-<br />
-			
-			
-<!-- # End background login  -->
- 
-<div class="clr"></div><br />
-
-</div>
- <!-- ## End login template  -->        
+<!-- # login template  -->

@@ -5,7 +5,7 @@
 <div id="index_body">
 
 <!-- start welcome -->
-<h2><img src="{STYLE_PATH}images/Smile.gif" width="20" height="20" alt="{lang.WELCOME}" style="vertical-align:middle;" /> {lang.WELCOME} .. <span class="siten4me">{config.sitename}</span></h2>
+<h2><img src="{STYLE_PATH}images/Smile.gif" width="20" height="20" alt="{lang.WELCOME}" style="vertical-align:middle;" /> {lang.WELCOME} .. {config.sitename}</h2>
 <div class="wolcome_msg">{welcome_msg}</div>
 <!-- ## End welcome -->
 
@@ -97,19 +97,21 @@
 </div>
 <!-- # END BOX LOADING -->
 
-<div class="clr"></div><br />
+<div class="clr"></div>
 
 <IF NAME="show_online">
 <!-- START FOR ONLINE -->
+<div class="clr"></div>
 <div class="online">
 	<div class="onlineall">{lang.NUMBER_ONLINE} = {allnumbers}</div>
 	<div class="onlinevisitor">{lang.NUMBER_VONLINE} = {visitornum}</div>
 	<div class="onlineusers">{lang.NUMBER_UONLINE} = {usersnum}</div>
 </div>
-<LOOP NAME="shownames"><div class="name_users">{{name}}</div></LOOP>
+<LOOP NAME="shownames">
+<div class="name_users">{{name}}</div>
+</LOOP>
 <!-- # END FOR ONLINE -->
 </IF>
-
 
 </div>
 <!-- # End background body  -->

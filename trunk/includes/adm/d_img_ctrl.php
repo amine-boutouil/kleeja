@@ -65,7 +65,7 @@ if ($nums_rows > 0)
 	$query['LIMIT']	= "$start, $images_cp_perpage";
 	$result = $SQL->build($query);
 
-	$tdnum = $num =0;
+	$tdnum = $num = 0;
 
 	while($row=$SQL->fetch_array($result))
 	{
@@ -75,23 +75,23 @@ if ($nums_rows > 0)
 		//make new lovely arrays !!
 		$arr[]	= array(
 						'id'		=> $row['id'],
-						'tdnum'		=> ($tdnum==0) ? '<tr>': '',
-						'tdnum2'	=> ($tdnum==3) ? '</tr>' : '',
+						'tdnum'		=> $tdnum == 0 ? '<tr>': '',
+						'tdnum2'	=> $tdnum == 3 ? '</tr>' : '',
 						'name'		=> ($row['real_filename'] == '' ? ((strlen($row['name']) > 15) ? substr($row['name'], 0, 15) . '...' : $row['name']) : ((strlen($row['real_filename']) > 15) ? substr($row['real_filename'], 0, 15) . '...' : $row['real_filename'])),
 						'ip' 		=> $lang['IP'] . ':' . htmlspecialchars($row['user_ip']),
 						'href'		=> PATH . $row['folder'] . '/' . $row['name'],
-						'size'		=> $lang['FILESIZE']. ':' . Customfile_size($row['size']),
-						'ups'		=> $lang['FILEUPS'] .' : ' . $row['uploads'],
-						'time'		=> $lang['FILEDATE']. ':' . date('d-m-Y H:i a', $row['time']),
-						'user'		=> $lang['BY'] . ':' . ($row['user'] == '-1' ? $lang['GUST'] :  $row['username']),
+						'size'		=> Customfile_size($row['size']),
+						'ups'		=> $row['uploads'],
+						'time'		=> date('d-m-Y h:i a', $row['time']),
+						'user'		=> $row['user'] == '-1' ? $lang['GUST'] :  $row['username'],
 						'is_thumb'	=> $is_there_thumb,
 						'thumb_link'=> $is_there_thumb ? PATH . $row['folder'] . '/thumbs/' . $row['name'] :  PATH . $row['folder'] . '/' . $row['name'],
 					);
 
 		//fix ... 
-		$tdnum = ($tdnum == 3) ? 0 : $tdnum+1; 
+		$tdnum = $tdnum == 3 ? 0 : $tdnum+1; 
 
-		$del[$row['id']] = (isset($_POST['del_' . $row['id']])) ? $_POST['del_' . $row['id']] : '';
+		$del[$row['id']] = isset($_POST['del_' . $row['id']]) ? $_POST['del_' . $row['id']] : '';
 
 		//when submit !!
 		if (isset($_POST['submit']))

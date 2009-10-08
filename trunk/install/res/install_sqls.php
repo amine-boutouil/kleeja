@@ -264,6 +264,8 @@ $install_sqls['config_insert36'] = "INSERT INTO `{$dbprefix}config` (`name` ,`va
 $install_sqls['config_insert37'] = "INSERT INTO `{$dbprefix}config` (`name` ,`value` ,`option` ,`display_order`,`type`) VALUES ('sitemail2', '" . $config_sitemail . "', '<input type=\"text\" id=\"sitemail2\" name=\"sitemail2\" value=\"{con.sitemail2}\" size=\"40\">', '3', 'general');";
 //randome cookie name
 $cookie_name = 'klj_' . substr(md5(time()), 0, 6);
+$cookie_secure = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? '1' : '0';
+
 // rey to extract cookie domain
 $cookie_domain = (!empty($_SERVER['HTTP_HOST'])) ? strtolower($_SERVER['HTTP_HOST']) : ((!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : getenv('SERVER_NAME'));
 if (strtolower(substr($cookie_domain, 0, 4) ) == 'www.')
@@ -273,7 +275,6 @@ if (substr($cookie_domain, 0, 1) != '.' && $cookie_domain != 'localhost')
 $port = strpos($cookie_domain, ':');
 if ($port !== false)
 	$cookie_domain = substr($cookie_domain, 0, $port);
-	
 
 $install_sqls['config_insert38'] = "INSERT INTO `{$dbprefix}config` (`name` ,`value` ,`option` ,`display_order`,`type`)
 VALUES ('cookie_name', '" . $cookie_name . "', '<input type=\"text\" id=\"cookie_name\" name=\"cookie_name\" value=\"{con.cookie_name}\" size=\"30\">', '70', 'general');";
@@ -281,7 +282,7 @@ $install_sqls['config_insert39'] = "INSERT INTO `{$dbprefix}config` (`name` ,`va
 $install_sqls['config_insert40'] = "INSERT INTO `{$dbprefix}config` (`name` ,`value` ,`option` ,`display_order`, `type`)
 VALUES ('cookie_domain', '" . $cookie_domain . "', '<input type=\"text\" id=\"cookie_domain\" name=\"cookie_domain\" value=\"{con.cookie_domain}\" size=\"30\">', '70', 'general');";
 
-$install_sqls['config_insert41'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`, `type`) VALUES ('cookie_secure', '0', '<label>{lang.YES}<input type=\"radio\" id=\"cookie_secure\" name=\"cookie_secure\" value=\"1\"  <IF NAME=\"con.cookie_secure==1\"> checked=\"checked\"</IF>></label>\r\n <label>{lang.NO}<input type=\"radio\" id=\"cookie_secure\" name=\"cookie_secure\" value=\"0\"  <IF NAME=\"con.cookie_secure==0\"> checked=\"checked\"</IF>></label>', '70', 'general')";
+$install_sqls['config_insert41'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`, `type`) VALUES ('cookie_secure', '$cookie_secure', '<label>{lang.YES}<input type=\"radio\" id=\"cookie_secure\" name=\"cookie_secure\" value=\"1\"  <IF NAME=\"con.cookie_secure==1\"> checked=\"checked\"</IF>></label>\r\n <label>{lang.NO}<input type=\"radio\" id=\"cookie_secure\" name=\"cookie_secure\" value=\"0\"  <IF NAME=\"con.cookie_secure==0\"> checked=\"checked\"</IF>></label>', '70', 'general')";
 $install_sqls['config_insert42'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('style_depend_on', '', '', 0)";
 
 

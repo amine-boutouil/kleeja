@@ -67,7 +67,7 @@ if(version_compare(strtolower(KLEEJA_VERSION), strtolower($v['version_number']),
 									'msg_type'=> 'error', 'title'=> $lang['R_CHECK_UPDATE'], 
 									'msg'=> sprintf($lang['UPDATE_NOW_S'] , KLEEJA_VERSION, $v['version_number']) . '<br />' . '<a href="http://www.kleeja.com/">www.kleeja.com</a>'
 							);
-									
+
 	($hook = kleeja_run_hook('admin_update_now')) ? eval($hook) : null; //run hook 
 }
 
@@ -120,13 +120,17 @@ if(isset($u_exts)  && isset($g_exts) && is_array($u_exts) && !is_array($g_exts))
 	}
 }
 
+//
 //if 24 hours, lets chcek agian !
-if((time() - $v['last_check']) > 86400 && !$v['msg_appeared'] && $_SERVER['SERVER_NAME'] != 'localhost')
+//rev: let's say cache is not refreshed, so we will redirect alots of time,
+// so update_done will be good solution
+//
+if((time() - $v['last_check']) > 86400 && !$v['msg_appeared'] && $_SERVER['SERVER_NAME'] != 'localhost' && !isset($_GET['update_done']))
 {
 	redirect(basename(ADMIN_PATH) . '?cp=p_check_update&show_msg');
 	$SQL->close();
 	exit;
-}	
+}
 
 
 //cached templates
@@ -193,7 +197,7 @@ if(defined('DEV_STAGE'))
 	}
 
 	preg_match_all("/\[([^\]]+)\]([^\[]+)\[time : ([^\]]+)\]/", $sql_debug_c, $matches, PREG_SET_ORDER);
-			
+
 	$sql_debug = array();
 	$r = 0;
 	$color1 = $c = 'green';

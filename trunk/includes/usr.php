@@ -368,18 +368,24 @@ class usrcp
 	{
 		global $config;
 
+		$c_domain = !empty($_SERVER['HTTP_HOST']) ? strtolower($_SERVER['HTTP_HOST']) : (!empty($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : getenv('SERVER_NAME'));
+
 		if ($config['cookie_domain'] == '')
 		{
-			$config['cookie_domain'] = (!empty($_SERVER['HTTP_HOST'])) ? strtolower($_SERVER['HTTP_HOST']) : ((!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : getenv('SERVER_NAME'));
+			$config['cookie_domain'] = $c_domain;
 		}
-
-		if(strpos($config['cookie_domain'], 'localhost') !== false)
+		else if(strpos($config['cookie_domain'], 'localhost') !== false)
 		{
 			$config['cookie_domain'] = '';
 		}
-
-		if($config['cookie_domain'] != '')
+		
+		//
+		//when user add define('FORCE_COOKIES', true) in config.php we will make our settings of cookies
+		//
+		if(defined('FORCE_COOKIES'))
 		{
+			$config['cookie_domain'] = $c_domain;
+
 			// Fix the domain to accept domains with and without 'www.'.
 			if (strtolower(substr($config['cookie_domain'], 0, 4) ) == 'www.')
 			{
@@ -397,6 +403,10 @@ class usrcp
 			{
 				$config['cookie_domain'] = substr($config['cookie_domain'], 0, $port);
 			}
+			
+			//other cookies settings
+			$config['cookie_path'] = '/';
+			$config['cookie_secure'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? true : false;
 		}
 
 		// Enable sending of a P3P header

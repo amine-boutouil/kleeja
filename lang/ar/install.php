@@ -65,9 +65,13 @@
 	$lang['CONFIG_EXISTS']						= 'تم إيجاد ملف config.php قم بالمتابعه ...';
 	$lang['INST_SUBMIT_CONFIGOK']				= 'قمت برفع الملف , بالمجلد الرئيسي , تابع التثبيت';
 	$lang['INST_EXPORT']						= 'تصدير الملف';
-	$lang['INST_STYLE_INFO']					= 'الاستايل';
-	$lang['INST_STYLE1_INFO']					= 'الاستايل الافتراضي , رائع وجميل , فيه الوان وصور كثيره';
-	$lang['INST_STYLE2_INFO']					= 'ستايل يعتمد على الافتراضي , الا انه ابسط واخف';
+	$lang['INST_OTHER_INFO']					= 'معلومات اخرى';
+	$lang['URLS_TYPES']							= 'شكل روابط الملفات';
+	$lang['DEFAULT']							= 'الافتراضي';
+	$lang['FILENAME_URL']						= 'اسماء الملفات';
+	$lang['DIRECT_URL']							= 'روابط مباشره';
+	$lang['LIKE_THIS']							= 'مثال';
+
 	//
 	$lang['FUNCTIONS_CHECK']					= 'فحص الدوال';
 	$lang['RE_CHECK']							= 'إعادة الفحص';

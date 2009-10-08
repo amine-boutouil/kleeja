@@ -18,7 +18,7 @@ $error = false;
 $update_link = $config['siteurl'] . 'install/update.php?lang=' . $config['language'];
 
 //get data from kleeja database
-$b_data = fetch_remote_file('http://www.kleeja.com/check_vers/?i=' . urlencode($_SERVER['SERVER_NAME']) . '&v=' . KLEEJA_VERSION, false, 5);
+$b_data = fetch_remote_file('http://www.kleeja.com/check_vers/?i=' . urlencode($_SERVER['SERVER_NAME']) . '&v=' . KLEEJA_VERSION, false, 6);
 
 if ($b_data === false && !isset($_GET['show_msg']))
 {
@@ -78,14 +78,13 @@ else
 
 	$data = serialize($data);
 
-	update_config('new_version', $data);
-
+	update_config('new_version', $SQL->reql_escape($data), false);
 }
 	
 //then go back  to start
 if(isset($_GET['show_msg']))
 {
-	redirect(basename(ADMIN_PATH));
+	redirect(basename(ADMIN_PATH) . '?update_done');
 	$SQL->close();
 	exit;
 }

@@ -81,62 +81,63 @@ case 'gpl2':
 		$contentofgpl2 = "Can't find 'gpl2.txt' file .. search on the web about GPL2";
 	}
 	
-	echo '
-	<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=f&' . getlang(1) . '">
+?>
+
+	<form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>?step=f&<?php echo getlang(1);?>">
 	<br />
 	<div class="home" name="gpl2" style="width: 456px; height: 320px;direction:ltr;overflow: auto;margin:0 auto">
-	' . nl2br($contentofgpl2) . '
+	<?php echo nl2br($contentofgpl2);?>
 	</div>
 
 	<br />
-	' . $lang['INST_AGR_GPL2'] . ' <input name="agrec" id="agrec" type="checkbox" onclick="javascript:agree();"  /><br />
-	<input name="agres" id="agres" type="submit" value="' . $lang['INST_SUBMIT'] . '" disabled="disabled"/>
+	<?php echo $lang['INST_AGR_GPL2'];?> <input name="agrec" id="agrec" type="checkbox" onclick="javascript:agree();"  /><br />
+	<input name="agres" id="agres" type="submit" value="<?php echo $lang['INST_SUBMIT'];?>" disabled="disabled"/>
 
-	</form>';
-
+	</form>
+<?php
 
 break;
 case 'f':
 	
 	$check_ok = true;
-	
-	echo '<fieldset class="home" dir="' . $lang['DIR'] . '" style="text-align:' . ($lang['DIR'] == 'rtl' ? 'right' : 'left') . ';margin: 8px;">';
-	echo '<strong>' . $lang['FUNCTIONS_CHECK'] . '</strong> : <br />';
-	echo '<ul class="ul_check">';
-	if(function_exists('unlink'))
-		echo '<li style="color:green">' . sprintf($lang['FUNCTION_IS_EXISTS'], 'unlink') . '</li>';
-	else
-	{
-		$check_ok = false;
-		echo '<li style="color:red">' . sprintf($lang['FUNCTION_IS_NOT_EXISTS'], 'unlink') . '</li>';
-	}
-	echo '[ ' . $lang['FUNCTION_DISC_UNLINK'] . ']<br /> ';
-	if(function_exists('imagecreatetruecolor'))
+?>
 
-		echo '<li style="color:green">' . sprintf($lang['FUNCTION_IS_EXISTS'], 'imagecreatetruecolor') . '</li>';
-	else
-	{
-		$check_ok = false;
-		echo '<li style="color:red">' . sprintf($lang['FUNCTION_IS_NOT_EXISTS'], 'imagecreatetruecolor') . '</li>';
-	}
-	echo ' [ ' . $lang['FUNCTION_DISC_GD'] . ']<br /> ';
-	if(function_exists('fopen'))
-		echo '<li style="color:green">' . sprintf($lang['FUNCTION_IS_EXISTS'], 'fopen') . '</li>';
-	else
-	{
-		$check_ok = false;
-		echo '<li style="color:red">' . sprintf($lang['FUNCTION_IS_NOT_EXISTS'], 'fopen') . '</li>';
-	}
-	echo ' [ ' . $lang['FUNCTION_DISC_FOPEN'] . ']<br /> ';
-	if(function_exists('move_uploaded_file'))
-		echo '<li style="color:green">' . sprintf($lang['FUNCTION_IS_EXISTS'], 'move_uploaded_file') . '</li>';
-	else
-	{
-		$check_ok = false;
-		echo '<li style="color:red">' . sprintf($lang['FUNCTION_IS_NOT_EXISTS'], 'move_uploaded_file') . '</li>';
-	}
-	echo ' [ ' . $lang['FUNCTION_DISC_MUF'] . ']<br /> ';
+	<fieldset class="home" dir="' . $lang['DIR'] . '" style="text-align:<?php echo  $lang['DIR'] == 'rtl' ? 'right' : 'left';?>;margin: 8px;">
+	<strong><?php echo $lang['FUNCTIONS_CHECK'];?></strong> : <br />
+	<ul class="ul_check">
+	<?php if(function_exists('unlink')):?>
+		<li style="color:green"><?php echo sprintf($lang['FUNCTION_IS_EXISTS'], 'unlink');?></li>
+	<?php else: $check_ok = false; ?>
+		<li style="color:red"><?php echo sprintf($lang['FUNCTION_IS_NOT_EXISTS'], 'unlink');?></li>
+	<?php endif;?>
+
+	[ <?php echo $lang['FUNCTION_DISC_UNLINK'];?> ]<br />
 	
+	<?php if(function_exists('imagecreatetruecolor')):?>
+		<li style="color:green"><?php echo sprintf($lang['FUNCTION_IS_EXISTS'], 'imagecreatetruecolor');?></li>
+	<?php else: $check_ok = false;?>
+		<li style="color:red"><?php echo sprintf($lang['FUNCTION_IS_NOT_EXISTS'], 'imagecreatetruecolor');?></li>
+	<?php endif;?>
+	
+	 [ <?php echo $lang['FUNCTION_DISC_GD'];?> ]<br />
+	
+	<?php if(function_exists('fopen')):?>
+		<li style="color:green"><?php echo sprintf($lang['FUNCTION_IS_EXISTS'], 'fopen');?></li>
+	<?php else: $check_ok = false;?>
+		<li style="color:red"><?php echo sprintf($lang['FUNCTION_IS_NOT_EXISTS'], 'fopen');?></li>
+	<?php endif;?>
+
+	 [ <?php echo $lang['FUNCTION_DISC_FOPEN'];?> ]<br />
+	
+	<?php if(function_exists('move_uploaded_file')):?>
+		<li style="color:green"><?php echo sprintf($lang['FUNCTION_IS_EXISTS'], 'move_uploaded_file');?></li>
+	<?php else: $check_ok = false;?>
+		<li style="color:red"><?php echo sprintf($lang['FUNCTION_IS_NOT_EXISTS'], 'move_uploaded_file');?></li>
+	<?php endif;?>
+	
+	[ <?php echo $lang['FUNCTION_DISC_MUF'];?> ]<br />
+	
+<?php
 	//advies
 	$advices = ''; 
 	if (@ini_get('register_globals') == '1' || strtolower(@ini_get('register_globals')) == 'on')
@@ -152,28 +153,32 @@ case 'f':
 	{
 		$advices .= '<li>' . $lang['ADVICES_ICONV'] . '</li>'; 
 	}
+?>
 
+	<?php if($advices != ''):?>
+		</ul>
+		<br />
+		<strong><?php echo $lang['ADVICES_CHECK'];?></strong> : 
+		<br />
+		<ul  class="ul_check2">
+		<?php echo $advices;?>
+	<?php endif;?>
 	
-	if($advices != '')
-	{
-		echo '</ul><br /> <strong>' . $lang['ADVICES_CHECK'] . '</strong> : <br /> <ul  class="ul_check2">' . $advices;
-	}
+	</ul>
+	</fieldset>
+	<br />
 	
-	echo '</ul></fieldset><br />';
-	
-	if($check_ok)
-	{
-		echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=c&' . getlang(1) . '">
-		<input name="agres" type="submit" value="' . $lang['INST_SUBMIT'] . '"  />
-		</form>';
-	}
-	else
-	{
-		echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=f&' . getlang(1) . '">
-		<input name="agres" type="submit" value="' . $lang['RE_CHECK'] . '"  />
-		</form>';
-	}
-	
+	<?php if($check_ok):?>
+		<form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>?step=c&<?php echo getlang(1);?>">
+			<input name="agres" type="submit" value="<?php echo $lang['INST_SUBMIT'];?>"  />
+		</form>
+	<?php else:?>
+		<form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>?step=f&<?php echo getlang(1);?>">
+		<input name="agres" type="submit" value="<?php echo $lang['RE_CHECK'];?>"  />
+		</form>
+	<?php endif;?>
+
+<?php
 break;
 case 'c':
 	
@@ -189,98 +194,84 @@ case 'c':
 						$_POST['db_name'],
 						$_POST['db_prefix']
 						);
-	
+
 	}
 	
 	$xs	=!file_exists('../config.php') ? false : true;
 	$writeable_path = is_writable($_path) ? true : false;
 	
-	if(!$xs)
-	{
-		 echo '<br /><form method="post"  action="' . $_SERVER['PHP_SELF'] . '?step=c&' . getlang(1) . '"  onsubmit="javascript:return formCheck(this, Array(\'db_server\',\'db_user\' ,\'db_name\'));">
+	if(!$xs):
+	?>
+		 <br />
+		 <form method="post"  action="<?php echo $_SERVER['PHP_SELF'];?>?step=c&<?php echo getlang(1);?>"  onsubmit="javascript:return formCheck(this, Array(\'db_server\',\'db_user\' ,\'db_name\'));">
 
-			<fieldset class="home" id="Group1" dir="' . $lang['DIR'] . '">
-			<b>' . ($writeable_path ? $lang['DB_INFO'] : $lang['DB_INFO_NW']) . '</b>
+			<fieldset class="home" id="Group1" dir="<?php echo $lang['DIR'];?>">
+			<b><?php echo $writeable_path ? $lang['DB_INFO'] : $lang['DB_INFO_NW'];?></b>
 			<br />
 			<br />
 			<table style="width: 100%">
 				<tr>
-					<td>' . $lang['DB_TYPE'] . '</td>
+					<td><?php echo $lang['DB_TYPE'];?></td>
 					<td>
 					<select name="db_type">
-						' . (function_exists('mysqli_connect') ? '<option value="mysqli">' . $lang['DB_TYPE_MYSQLI'] . '</option>' : '') . '
-						<option value="mysql">' . $lang['DB_TYPE_MYSQL'] . '</option>
+						<?php if (function_exists('mysqli_connect')):?>
+							<option value="mysqli"><?php echo $lang['DB_TYPE_MYSQLI'];?></option>
+						<?php endif;?>
+						<option value="mysql"><?php echo $lang['DB_TYPE_MYSQL'];?></option>
 					</select>
 					</td>
 				</tr>
 				<tr>
-					<td>' . $lang['DB_SERVER'] . '</td>
+					<td><?php echo $lang['DB_SERVER'];?></td>
 					<td><input name="db_server" type="text" value="localhost" style="width: 256px" />
 					</td>
 				</tr>
 				<tr>
-					<td>' . $lang['DB_NAME'] . '</td>
+					<td><?php echo $lang['DB_NAME'];?></td>
 					<td><input name="db_name" type="text" style="width: 256px" />
 					</td>
 				</tr> 
 				<tr>
-					<td>' . $lang['DB_USER'] . '</td>
+					<td><?php echo $lang['DB_USER'];?></td>
 					<td><input name="db_user" type="text" style="width: 256px" />
 					</td>
 				</tr>
 				<tr>
-					<td>' . $lang['DB_PASSWORD'] . '</td>
+					<td><?php echo $lang['DB_PASSWORD'];?></td>
 					<td><input name="db_pass" type="text" style="width: 256px" />
 					</td>
 				</tr>  
 				<tr>
-					<td>' . $lang['DB_PREFIX'] . '</td>
+					<td><?php echo $lang['DB_PREFIX'];?></td>
 					<td><input name="db_prefix" type="text" value="klj_" style="width: 256px" />
 					</td>
 				</tr>       
 			</table>
 			<br />
 			</fieldset>
-			<!--
-			<fieldset class="home" id="Group1" dir="' . $lang['DIR'] . '">
-			<b>' . $lang['IN_INFO'] . '</b>
-			<br />
-			<br />
-			<table style="width: 100%">
-				<tr>
-					<td>' . $lang['IN_PATH'] . '</td>
-					<td><input name="fpath" type="text" value="./forum" style="width: 256px;direction:ltr" />
-					</td>
-				</tr>
-			</table>
-			<br />
-			</fieldset>
-			-->
-			<input name="dbsubmit" type="submit" value="' . ($writeable_path ? $lang['INST_SUBMIT'] : $lang['INST_EXPORT']) . '" />
-			</form>
-			<br />
-			';
+			<input name="dbsubmit" type="submit" value="<?php echo $writeable_path ? $lang['INST_SUBMIT'] : $lang['INST_EXPORT'];?>" />
+		</form>
+		<br />
+		
 			
-			if(!$writeable_path) 
-			{
-				echo '<br />
-				<hr/>
-				<br />
-				<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=c&' . getlang(1) . '">
-				<input  type="submit" value="' . $lang['INST_SUBMIT_CONFIGOK'] . '" />
-				</form>';
-			}
-	}
-	else
-	{
-		echo  ' <fieldset class="home"><br /><span style="color:green;"><strong>' .  $lang['CONFIG_EXISTS'] . '</strong><br /><br />';
-		echo  '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=check&' . getlang(1) . '">
-		<input name="agres" type="submit" value="' . $lang['INST_SUBMIT'] . '" />
-		</form></fieldset>';
-	}
+		<?php if(!$writeable_path):?>
+			<br />
+			<hr/>
+			<br />
+			<form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>?step=c&<?php echo getlang(1);?>">
+			<input  type="submit" value="<?php echo $lang['INST_SUBMIT_CONFIGOK'];?>" />
+			</form>
+		<?php endif;?>
+	
+	<?php else:?>
+		<fieldset class="home"><br /><span style="color:green;"><strong><?php echo $lang['CONFIG_EXISTS'];?></strong><br /><br />
+		<form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>?step=check&<?php echo getlang(1);?>">
+		<input name="agres" type="submit" value="<?php echo $lang['INST_SUBMIT'];?>" />
+		</form></fieldset>
+	<?php endif;?>
 
 
-
+<?php
 break;
 case 'check':
 
@@ -383,6 +374,7 @@ case 'data' :
 		$config_siteurl		= $SQL->escape($_POST['siteurl']);
 		$config_sitemail	= $SQL->escape($_POST['sitemail']);
 		$config_style		= $SQL->escape($_POST['style']);
+		$config_urls_type	= in_array($_POST['urls_type'], array('id', 'filename', 'direct')) ? $_POST['urls_type'] : 'id';
 		$clean_name			= $usrcp->cleanusername($SQL->escape($user_name));
 		
 		
@@ -507,17 +499,35 @@ case 'data' :
 		</table>
 		</fieldset>
 		
-		<!--
+
 		<fieldset class="home" id="Group2" dir="' . $lang['DIR'] . '">
-		<legend style="width: 73px"> [ <strong>' . $lang['INST_STYLE_INFO'] . '</strong> ]</legend>
+		<legend style="width: 73px"> [ <strong>' . $lang['INST_OTHER_INFO'] . '</strong> ]</legend>
 		<table style="width: 100%">
 			<tr>
-				<td><img src="img/style1.png" /> <br /><small>' . $lang['INST_STYLE1_INFO'] . '</small><br /> <input type="radio" name="style" value="default" checked="checked" /> Default</td>
-				<td><img src="img/style2.png" /> <br /><small>' . $lang['INST_STYLE2_INFO'] . '</small><br /> <input type="radio" name="style" value="legacy" />  Legacy </td>
+				<td><strong>' . $lang['URLS_TYPES'] . '</strong></td>
+				<td>
+					<script type="text/javascript">
+					//<![CDATA[
+						var explains = new Array(3);
+						explains["id"] = "' . $urlsite . 'download.php?id=123";
+						explains["filename"] =  "' . $urlsite . 'download.php?filename=12542219930.gif";
+						explains["direct"] = "' . $urlsite . 'uploads/12542219930.gif";
+					//]]>
+					</script>
+					<select name="urls_type" onChange="document.getElementById(\'like_this\').innerHTML=explains[this.options[this.selectedIndex].value]" >
+						<option value="id">' . $lang['DEFAULT'] . '</option>
+						<option value="filename">' . $lang['FILENAME_URL'] . '</option>
+						<option value="direct">' . $lang['DIRECT_URL'] . '</option>
+					</select>
+					<br />
+					<div>
+					' . $lang['LIKE_THIS'] . ' : <span id="like_this">' . $urlsite . 'download.php?id=123</span>
+					</div>
+				</td>
 			</tr>
 		</table>
 		</fieldset>
-		-->
+
 		<input name="datasubmit" type="submit" value="' . $lang['INST_SUBMIT'] . '" />
 		</form>';
 	}#else

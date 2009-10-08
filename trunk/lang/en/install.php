@@ -65,9 +65,13 @@
 	$lang['CONFIG_EXISTS']							= 'Config.php was found, Continue...';
 	$lang['INST_SUBMIT_CONFIGOK']					= 'Upload the file in the main directory';
 	$lang['INST_EXPORT']							= 'Export File';
-	$lang['INST_STYLE_INFO']						= 'Style';
-	$lang['INST_STYLE1_INFO']					= 'Default style, nice and elegant with great graphics and colors';
-	$lang['INST_STYLE2_INFO']					= 'Based on the default style, except its more light and simple';
+	$lang['INST_OTHER_INFO']						= 'Other info';
+	$lang['URLS_TYPES']								= 'Style of File urls';
+	$lang['DEFAULT']								= 'Default';
+	$lang['FILENAME_URL']							= 'Filenames';
+	$lang['DIRECT_URL']								= 'Direct links';
+	$lang['LIKE_THIS']								= 'Example : ';
+
 	//
 	$lang['FUNCTIONS_CHECK']						= 'Functions Check';
 	$lang['RE_CHECK']								= 'ReCheck';

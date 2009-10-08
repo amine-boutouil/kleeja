@@ -78,13 +78,13 @@ else
 
 	$data = serialize($data);
 
-	update_config('new_version', $SQL->reql_escape($data), false);
+	update_config('new_version', $SQL->real_escape($data), false);
 }
 	
 //then go back  to start
 if(isset($_GET['show_msg']))
 {
-	redirect(basename(ADMIN_PATH) . '?update_done');
+	redirect(basename(ADMIN_PATH) . '?update_done=1');
 	$SQL->close();
 	exit;
 }

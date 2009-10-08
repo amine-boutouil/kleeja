@@ -127,7 +127,7 @@ if(isset($u_exts)  && isset($g_exts) && is_array($u_exts) && !is_array($g_exts))
 //
 if((time() - $v['last_check']) > 86400 && !$v['msg_appeared'] && $_SERVER['SERVER_NAME'] != 'localhost' && !isset($_GET['update_done']))
 {
-	redirect(basename(ADMIN_PATH) . '?cp=p_check_update&show_msg');
+	redirect(basename(ADMIN_PATH) . '?cp=p_check_update&show_msg=1');
 	$SQL->close();
 	exit;
 }

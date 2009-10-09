@@ -14,7 +14,21 @@ define ('DB_VERSION' , '7');
 // sqls ////////////////////////////////////////
 //////////////////////////////////////////////
 
+//randome cookie name
+$cookie_name = 'klj_' . substr(md5(time()), 0, 6);
+// rey to extract cookie domain
+$cookie_domain = !empty($_SERVER['HTTP_HOST']) ? strtolower($_SERVER['HTTP_HOST']) : (!empty($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : getenv('SERVER_NAME'));
+if (strpos($cookie_domain, ':') !== false)
+	$cookie_domain = substr($cookie_domain, 0, strpos($cookie_domain, ':'));
+if (strpos($cookie_domain, 'www.') === 0)
+	$cookie_domain = str_replace('www.', '.', $cookie_domain);
 
+//randome cookie name
+$update_sqls['cookie_1'] = "INSERT INTO `{$dbprefix}config` (`name` ,`value` ,`option` ,`display_order`,`type`) VALUES ('cookie_name', '" . $cookie_name . "', '<input type=\"text\" id=\"cookie_name\" name=\"cookie_name\" value=\"{con.cookie_name}\" size=\"20\" style=\"direction:ltr\" />', '13', 'general');";
+$update_sqls['cookie_2'] = "INSERT INTO `{$dbprefix}config` (`name` ,`value` ,`option` ,`display_order`,`type`) VALUES ('cookie_path', '/', '<input type=\"text\" id=\"cookie_path\" name=\"cookie_path\" value=\"{con.cookie_path}\" size=\"20\" style=\"direction:ltr\" />', '14', 'general');";
+$update_sqls['cookie_3'] = "INSERT INTO `{$dbprefix}config` (`name` ,`value` ,`option` ,`display_order`, `type`) VALUES ('cookie_domain', '" . $cookie_domain . "', '<input type=\"text\" id=\"cookie_domain\" name=\"cookie_domain\" value=\"{con.cookie_domain}\" size=\"20\" style=\"direction:ltr\" />', '15', 'general');";
+$update_sqls['cookie_4'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`, `type`) VALUES ('cookie_secure', '0', '<label>{lang.YES}<input type=\"radio\" id=\"cookie_secure\" name=\"cookie_secure\" value=\"1\"  <IF NAME=\"con.cookie_secure==1\"> checked=\"checked\"</IF> /></label>\r\n <label>{lang.NO}<input type=\"radio\" id=\"cookie_secure\" name=\"cookie_secure\" value=\"0\"  <IF NAME=\"con.cookie_secure==0\"> checked=\"checked\"</IF> /></label>', '16', 'general')";
+	
 //system config
 $update_sqls['up_dbv_config'] = "UPDATE `{$dbprefix}config` SET `value` = '" . DB_VERSION . "' WHERE `name` = 'db_version'";
 $update_sqls['config_online'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('last_online_time_update', '" .  time() . "', '', 0)";
@@ -29,26 +43,10 @@ $update_sqls['online_moue2'] = "ALTER TABLE `{$dbprefix}stats` ADD `lastuser` VA
 $update_sqls['online_moue3'] = "ALTER TABLE `{$dbprefix}stats` ADD `last_muoe` INT( 10 ) NOT NULL";
 $update_sqls['delete_exts_f'] = "DELETE FROM `{$dbprefix}exts` WHERE `ext` IN('ini');";
 
-
-//randome cookie name
-$cookie_name = 'klj_' . substr(md5(time()), 0, 6);
-// rey to extract cookie domain
-$cookie_domain = !empty($_SERVER['HTTP_HOST']) ? strtolower($_SERVER['HTTP_HOST']) : (!empty($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : getenv('SERVER_NAME'));
-if (strpos($cookie_domain, ':') !== false)
-	$cookie_domain = substr($cookie_domain, 0, strpos($cookie_domain, ':'));
-if (strpos($cookie_domain, 'www.') === 0)
-	$cookie_domain = str_replace('www.', '.', $cookie_domain);
-//randome cookie name
-$update_sqls['cookie_1'] = "INSERT INTO `{$dbprefix}config` (`name` ,`value` ,`option` ,`display_order`,`type`) VALUES ('cookie_name', '" . $cookie_name . "', '<input type=\"text\" id=\"cookie_name\" name=\"cookie_name\" value=\"{con.cookie_name}\" size=\"20\" style=\"direction:ltr\" />', '13', 'general');";
-$update_sqls['cookie_2'] = "INSERT INTO `{$dbprefix}config` (`name` ,`value` ,`option` ,`display_order`,`type`) VALUES ('cookie_path', '/', '<input type=\"text\" id=\"cookie_path\" name=\"cookie_path\" value=\"{con.cookie_path}\" size=\"20\" style=\"direction:ltr\" />', '14', 'general');";
-$update_sqls['cookie_3'] = "INSERT INTO `{$dbprefix}config` (`name` ,`value` ,`option` ,`display_order`, `type`) VALUES ('cookie_domain', '" . $cookie_domain . "', '<input type=\"text\" id=\"cookie_domain\" name=\"cookie_domain\" value=\"{con.cookie_domain}\" size=\"20\" style=\"direction:ltr\" />', '15', 'general');";
-$update_sqls['cookie_4'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`, `type`) VALUES ('cookie_secure', '0', '<label>{lang.YES}<input type=\"radio\" id=\"cookie_secure\" name=\"cookie_secure\" value=\"1\"  <IF NAME=\"con.cookie_secure==1\"> checked=\"checked\"</IF> /></label>\r\n <label>{lang.NO}<input type=\"radio\" id=\"cookie_secure\" name=\"cookie_secure\" value=\"0\"  <IF NAME=\"con.cookie_secure==0\"> checked=\"checked\"</IF> /></label>', '16', 'general')";
-
 // Settings general
 $update_sqls['configs1'] = "UPDATE `{$dbprefix}config` SET `option` = '<input type=\"text\" id=\"sitename\" name=\"sitename\" value=\"{con.sitename}\" size=\"50\" />',`display_order` = 1 WHERE  `name` = 'sitename';";
 $update_sqls['configs2'] = "UPDATE `{$dbprefix}config` SET `option` = '<input type=\"text\" id=\"siteurl\" name=\"siteurl\" value=\"{con.siteurl}\" size=\"50\" style=\"direction:ltr\" />',`display_order` = 2 WHERE  `name` = 'siteurl';";
 $update_sqls['configs3'] = "UPDATE `{$dbprefix}config` SET `option` = '<input type=\"text\" id=\"sitemail\" name=\"sitemail\" value=\"{con.sitemail}\" size=\"25\" style=\"direction:ltr\" />',`display_order` = 3 WHERE  `name` = 'sitemail';";
-$update_sqls['sitemail2'] = "INSERT INTO `{$dbprefix}config` (`name` ,`value` ,`option` ,`display_order`) VALUES ('sitemail2', '" . inst_get_config('sitemail') . "', '<input type=\"text\" id=\"sitemail2\" name=\"sitemail2\" value=\"{con.sitemail2}\" size=\"25\" style=\"direction:ltr\" />', '4');";
 $update_sqls['configs5'] = "UPDATE `{$dbprefix}config` SET `option` = '<input type=\"text\" id=\"del_f_day\" name=\"del_f_day\" value=\"{con.del_f_day}\" size=\"6\" style=\"text-align:center\" />{lang.DELF_CAUTION}',`display_order` = 5 WHERE  `name` = 'del_f_day';";
 $update_sqls['configs6'] = "UPDATE `{$dbprefix}config` SET `option` = '<select name=\"language\" id=\"language\">\r\n {lngfiles}\r\n </select>',`display_order` = 6 WHERE  `name` = 'language';";
 $update_sqls['configs7'] = "UPDATE `{$dbprefix}config` SET `option` = '<label>{lang.YES}<input type=\"radio\" id=\"siteclose\" name=\"siteclose\" value=\"1\"  <IF NAME=\"con.siteclose==1\"> checked=\"checked\"</IF> /></label><label>{lang.NO}<input type=\"radio\" id=\"siteclose\" name=\"siteclose\" value=\"0\"  <IF NAME=\"con.siteclose==0\"> checked=\"checked\"</IF> /></label>',`display_order` = 7 WHERE  `name` = 'siteclose';";
@@ -57,9 +55,6 @@ $update_sqls['configs9'] = "UPDATE `{$dbprefix}config` SET `option` = '<select i
 $update_sqls['configs10'] = "UPDATE `{$dbprefix}config` SET `option` = '<label>{lang.YES}<input type=\"radio\" id=\"register\" name=\"register\" value=\"1\"  <IF NAME=\"con.register==1\"> checked=\"checked\"</IF> /></label>\r\n <label>{lang.NO}<input type=\"radio\" id=\"register\" name=\"register\" value=\"0\"  <IF NAME=\"con.register==0\"> checked=\"checked\"</IF> /></label>',`display_order` = 10 WHERE  `name` = 'register';";
 $update_sqls['configs11'] = "UPDATE `{$dbprefix}config` SET `option` = '<label>{lang.YES}<input type=\"radio\" id=\"enable_userfile\" name=\"enable_userfile\" value=\"1\"  <IF NAME=\"con.enable_userfile==1\"> checked=\"checked\"</IF> /></label>\r\n <label>{lang.NO}<input type=\"radio\" id=\"enable_userfile\" name=\"enable_userfile\" value=\"0\"  <IF NAME=\"con.enable_userfile==0\"> checked=\"checked\"</IF> /></label>',`display_order` = 11 WHERE  `name` = 'enable_userfile';";
 $update_sqls['configs12'] = "UPDATE `{$dbprefix}config` SET `option` = '<label>{lang.YES}<input type=\"radio\" id=\"mod_writer\" name=\"mod_writer\" value=\"1\"  <IF NAME=\"con.mod_writer==1\"> checked=\"checked\"</IF> /></label>\r\n <label>{lang.NO}<input type=\"radio\" id=\"mod_writer\" name=\"mod_writer\" value=\"0\"  <IF NAME=\"con.mod_writer==0\"> checked=\"checked\"</IF> /></label>\r\n   [ {lang.MOD_WRITER_EX} ]',`display_order` = 12 WHERE  `name` = 'mod_writer';";
-// config general
-$update_sqls['type_config_general'] = "UPDATE `{$dbprefix}config` SET `type` = 'general' WHERE `name` IN ('sitename','siteclose','closemsg','language','siteurl','sitemail','sitemail2','user_system','register','del_f_day','mod_writer','enable_userfile','cookie_name','cookie_path','cookie_domain','cookie_secure');";
-
 
 // Settings uploads
 $update_sqls['configs13'] = "UPDATE `{$dbprefix}config` SET `option` = '<input type=\"text\" id=\"total_size\" name=\"total_size\" value=\"{con.total_size}\" size=\"20\" style=\"direction:ltr\" />',`display_order` = 17 WHERE  `name` = 'total_size';";
@@ -74,10 +69,6 @@ $update_sqls['configs21'] = "UPDATE `{$dbprefix}config` SET `option` = '<label>{
 $update_sqls['configs22'] = "UPDATE `{$dbprefix}config` SET `option` = '<label>{lang.YES}<input type=\"radio\" id=\"www_url\" name=\"www_url\" value=\"1\"  <IF NAME=\"con.www_url==1\"> checked=\"checked\"</IF> /></label>\r\n <label>{lang.NO}<input type=\"radio\" id=\"www_url\" name=\"www_url\" value=\"0\"  <IF NAME=\"con.www_url==0\"> checked=\"checked\"</IF> /></label>',`display_order` = 26 WHERE  `name` = 'www_url';";
 $update_sqls['configs23'] = "UPDATE `{$dbprefix}config` SET `option` = '<label>{lang.YES}<input type=\"radio\" id=\"thumbs_imgs\" name=\"thumbs_imgs\" value=\"1\"  <IF NAME=\"con.thumbs_imgs==1\"> checked=\"checked\"</IF> /></label>\r\n <label>{lang.NO}<input type=\"radio\" id=\"thumbs_imgs\" name=\"thumbs_imgs\" value=\"0\" <IF NAME=\"con.thumbs_imgs==0\"> checked=\"checked\"</IF> /></label></td></tr><tr><td><label for=\"thumbs_imgs\">{lang.DIMENSIONS_THMB}</label></td>\r\n <td><input type=\"text\" id=\"thmb_dim_w\" name=\"thmb_dim_w\" value=\"{thmb_dim_w}\" size=\"2\" style=\"text-align:center\" /> * <input type=\"text\" id=\"thmb_dim_h\" name=\"thmb_dim_h\" value=\"{thmb_dim_h}\" size=\"2\" style=\"text-align:center\" /> ',`display_order` = 27 WHERE  `name` = 'thumbs_imgs';";
 $update_sqls['configs24'] = "UPDATE `{$dbprefix}config` SET `option` = '<label>{lang.YES}<input type=\"radio\" id=\"write_imgs\" name=\"write_imgs\" value=\"1\"  <IF NAME=\"con.write_imgs==1\"> checked=\"checked\"</IF> /></label>\r\n <label>{lang.NO}<input type=\"radio\" id=\"write_imgs\" name=\"write_imgs\" value=\"0\"  <IF NAME=\"con.write_imgs==0\"> checked=\"checked\"</IF> /></label>\r\n <br /><img src=\"{STAMP_IMG_URL}\" alt=\"Seal photo\" style=\"margin-top:4px;border:1px groove #FF865E;\" /> \r\n ',`display_order` = 28 WHERE  `name` = 'write_imgs';";
-$update_sqls['livexts_feature'] = "INSERT INTO `{$dbprefix}config` (`name` ,`value` ,`option` ,`display_order`)VALUES ('livexts', 'swf', '<input type=\"text\" id=\"livexts\" name=\"livexts\" value=\"{con.livexts}\" size=\"62\" style=\"direction:ltr\" />{lang.COMMA_X}', '29')";
-// config upload
-$update_sqls['type_config_upload'] = "UPDATE `{$dbprefix}config` SET `type` = 'upload' WHERE `name` IN ('foldername','prefixname','filesnum','decode','total_size','id_form','sec_down','thumbs_imgs','write_imgs','del_url_file','safe_code','livexts', 'www_url');";
-
 
 // Settings interface
 $update_sqls['configs26'] = "UPDATE `{$dbprefix}config` SET `option` = '<input type=\"text\" id=\"welcome_msg\" name=\"welcome_msg\" value=\"{con.welcome_msg}\" size=\"68\" />',`display_order` = 30 WHERE  `name` = 'welcome_msg';";
@@ -86,9 +77,20 @@ $update_sqls['configs28'] = "UPDATE `{$dbprefix}config` SET `option` = '<label>{
 $update_sqls['configs29'] = "UPDATE `{$dbprefix}config` SET `option` = '<label>{lang.YES}<input type=\"radio\" id=\"statfooter\" name=\"statfooter\" value=\"1\"  <IF NAME=\"con.statfooter==1\"> checked=\"checked=\"</IF> /></label>\r\n <label>{lang.NO}<input type=\"radio\" id=\"statfooter\" name=\"statfooter\" value=\"0\"  <IF NAME=\"con.statfooter==0\"> checked=\"checked\"</IF> /></label>',`display_order` = 33 WHERE  `name` = 'statfooter';";
 $update_sqls['configs30'] = "UPDATE `{$dbprefix}config` SET `option` = '<label>{lang.YES}<input type=\"radio\" id=\"gzip\" name=\"gzip\" value=\"1\"  <IF NAME=\"con.gzip==1\"> checked=\"checked\"</IF> /></label>\r\n <label>{lang.NO}<input type=\"radio\" id=\"gzip\" name=\"gzip\" value=\"0\"  <IF NAME=\"con.gzip==0\"> checked=\"checked\"</IF> /></label>',`display_order` = 34 WHERE  `name` = 'gzip';";
 $update_sqls['configs31'] = "UPDATE `{$dbprefix}config` SET `option` = '<input type=\"text\" id=\"googleanalytics\" name=\"googleanalytics\" value=\"{con.googleanalytics}\" size=\"10\" />',`display_order` = 35 WHERE  `name` = 'googleanalytics';";
+
+
+$update_sqls['livexts_feature'] = "INSERT INTO `{$dbprefix}config` (`name` ,`value` ,`option` ,`display_order`)VALUES ('livexts', 'swf', '<input type=\"text\" id=\"livexts\" name=\"livexts\" value=\"{con.livexts}\" size=\"62\" style=\"direction:ltr\" />{lang.COMMA_X}', '29')";
+$update_sqls['sitemail2'] = "INSERT INTO `{$dbprefix}config` (`name` ,`value` ,`option` ,`display_order`) VALUES ('sitemail2', '" . inst_get_config('sitemail') . "', '<input type=\"text\" id=\"sitemail2\" name=\"sitemail2\" value=\"{con.sitemail2}\" size=\"25\" style=\"direction:ltr\" />', '4');";
+
+
 // config interface
 $update_sqls['type_config_interface'] = "UPDATE `{$dbprefix}config` SET `type` = 'interface' WHERE `name` IN ('statfooter','gzip','welcome_msg','allow_stat_pg','allow_online','googleanalytics');";
 
+// config upload
+$update_sqls['type_config_upload'] = "UPDATE `{$dbprefix}config` SET `type` = 'upload' WHERE `name` IN ('foldername','prefixname','filesnum','decode','total_size','id_form','sec_down','thumbs_imgs','write_imgs','del_url_file','safe_code','livexts', 'www_url');";
+
+// config general
+$update_sqls['type_config_general'] = "UPDATE `{$dbprefix}config` SET `type` = 'general' WHERE `name` IN ('sitename','siteclose','closemsg','language','siteurl','sitemail','sitemail2','user_system','register','del_f_day','mod_writer','enable_userfile','cookie_name','cookie_path','cookie_domain','cookie_secure');";
 
 // ************************* MAFIII MALOOOM SDIG :(
 $update_sqls['configs6'] = "UPDATE `{$dbprefix}config` SET `option` = '',`display_order` = 0, `type`='' WHERE  `name` = 'style';";
@@ -106,7 +108,6 @@ $update_sqls['config_insert42'] = "INSERT INTO `{$dbprefix}config` (`name`, `val
 //////////////////////////////////////////////////
 
 $update_notes[]	= $lang['INST_NOTE_RC6_TO_1.0.0'];
-
 
 
 ////////////////////////////////////////////////

@@ -435,7 +435,7 @@ $lang = array_merge($lang, array(
 	'ON'					=> 'on',
 	'LAST_REG'				=> 'newest member',
 	'NEW_USER'				=> 'New user',
-	'LIVEXTS'				=> 'Live extensions <p class="live_xts">separate by comma (<font style="font-size:large"> , </font>)</p>',
+	'LIVEXTS'				=> 'Live extensions',
 	'MUST_LOGIN'			=> 'You must login with correct username and password .',
 	
 	'ADD_UPLAD_A'			=> 'Add more fields',
@@ -534,6 +534,7 @@ $lang = array_merge($lang, array(
 	'ALPHABETICAL_ORDER_FILES'	=> 'ترتيب الملفات حسب التسلسل الأبجدي', 
 	'ORDER_SIZE'				=> 'ترتيب الملفات حسب أحجامها من الأكبر حتى الأصغر',
 	'ORDER_TOTAL_DOWNLOADS'		=> 'ترتيب الملفات حسب عدد مرات التحميل', 
+	'COMMA_X'					=> '<p class="live_xts">separate by comma (<font style="font-size:large"> , </font>)</p>',
 	//last line of this file ...					 
 	'S_TRANSLATED_BY' 			=> 'Translated By <a href="http://www.fenix4web.com/">Fenix4Web</a>',
 ));

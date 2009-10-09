@@ -1,48 +1,44 @@
 <!-- start Exts temlate  -->
 <div id="divmiddle">
-
 <fieldset>
 
 <form method="post" action="{action}" name="extsform">
 
-<!-- start div border table  -->
-<div id="border-table">
+<!-- start box all -->
+<div class="box_all">
 
 <!-- title  -->
-<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/exts_button.gif" />{lang.R_EXTS} :</h2>
+<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/exts_button.gif" alt="{lang.R_EXTS}" />{lang.R_EXTS} :</h2>
 <!-- title  -->
 
 <!-- border line Vertical  -->
-<p class="dot" />
+<div class="line_img"></div>
 <!-- border line Vertical  -->
 
 <!-- start clear  -->
-<div class="clr"></div><br />
+<div class="clr"></div>
 <!-- end clear  -->
 
 <!-- start admin ext info tr extra -->
-<table style="text-align:center">
-    <tr style="background-color:#DFDFDF">
-        <td>{lang.EXT}</td>
-        <td>{lang.GROUP}</td>
-        <td>{lang.SIZE_G}</td>
-        <td><a href="javascript:void(0);" onclick="checkAll_exts(document.extsform, '_gext', 'su');" title="{lang.CHECK_ALL}">{lang.ALLOW_G}</a></td>
-        <td>{lang.SIZE_U}</td>
-        <td><a href="javascript:void(0);" onclick="checkAll_exts(document.extsform, '_uext', 'su');" title="{lang.CHECK_ALL}">{lang.ALLOW_U}</a></td>
+<table class="table_exts">
+    <tr>
+        <th>{lang.EXT}</th>
+        <th>{lang.GROUP}</th>
+        <th>{lang.SIZE_G}</th>
+        <th><a style="font-size:11px;" href="javascript:void(0);" onclick="checkAll_exts(document.extsform, '_gext', 'su');" title="{lang.CHECK_ALL}">{lang.ALLOW_G}</a></th>
+        <th>{lang.SIZE_U}</th>
+        <th><a style="font-size:11px;" href="javascript:void(0);" onclick="checkAll_exts(document.extsform, '_uext', 'su');" title="{lang.CHECK_ALL}">{lang.ALLOW_U}</a></th>
     </tr>
 <IF NAME="no_results">
 ...
 <ELSE>
 <LOOP NAME="arr">
-    <tr 
-		id="su[{{id}}]" 
-		class="<IF LOOP="ug_allow">o_all<ELSEIF LOOP="u_allow">o_u<ELSEIF LOOP="g_allow">o_g<ELSE>nothing</IF>"
-	>
+    <tr id="su[{{id}}]" class="<IF LOOP="ug_allow">o_all<ELSEIF LOOP="u_allow">o_u<ELSEIF LOOP="g_allow">o_g<ELSE>nothing</IF>">
         <td><strong>{{name}}</strong></td>
         <td>{{group}}</td>
-        <td><input name="gsz[{{id}}]" type="text" value="{{g_size}}" size="7" style="text-align:center;"   /></td>
+        <td><input name="gsz[{{id}}]" type="text" value="{{g_size}}" size="12" style="text-align:center;"   /></td>
         <td><input name="gal[{{id}}]" id="gal_{{id}}" value="{{id}}" type="checkbox" ({{g_allow}}?checked="checked":)  onclick="change_color_exts('{{id}}');" rel="_gext" /></td>
-        <td><input name="usz[{{id}}]" type="text" value="{{u_size}}" size="7" style="text-align:center;" /></td>
+        <td><input name="usz[{{id}}]" type="text" value="{{u_size}}" size="12" style="text-align:center;" /></td>
         <td><input name="ual[{{id}}]" id="ual_{{id}}" value="{{id}}" type="checkbox" ({{u_allow}}?checked="checked":) onclick="change_color_exts('{{id}}');" rel="_uext" /></td>     
     </tr>
 </LOOP>
@@ -51,12 +47,11 @@
  <!-- end admin ext data tr extra -->
  
  <!-- start clear  -->
-<div class="clr"></div><br />
+<div class="clr"></div>
 <!-- end clear  -->
 
 <!-- start pagination  -->
-<span>{arr_paging}</span>
-
+{arr_paging}
 <!-- # pagination  -->
 
 <input class="left_button" name="submit" type="submit" value="{lang.UPDATE_EXTS}" />
@@ -71,23 +66,19 @@
 <p class="exts">{lang.E_EXTS}</p>
 <!-- notice   -->
 
-<!-- start dot  -->
-<p class="dot" />
-<!-- end dot  -->
-
 <!-- start clear  -->
 <div class="clr"></div>
 <!-- end clear  -->
  
 </div>
-<!-- end div border table  -->
+<!-- # box all -->
 
 <!-- start clear  -->
 <div class="clr"></div><br />
 <!-- end clear  -->
 
-<!-- start div border table  -->
-<div id="border-table">
+<!-- start box all -->
+<div class="box_all">
 
 <script type="text/javascript">
 /* This script and many more are available free online at
@@ -157,7 +148,7 @@ function convertgb(f)
 <!-- end table no hover  -->
 
 </div>
-<!-- end div border table  -->
+<!-- # box all -->
 
 <div class="clr"></div>
 
@@ -171,8 +162,8 @@ function convertgb(f)
 
 <form method="post" action="{action_new_ext}">
 
-<!-- start div border table  -->
-<div id="border-table">
+<!-- start box all -->
+<div class="box_all">
 
 <!-- title  -->
 <h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/exts_button.gif" />{lang.ADD_NEW_EXT} :</h2>
@@ -204,12 +195,10 @@ function convertgb(f)
 <!-- end  button  -->
 
 </div>
-<!-- end div border table  -->
+<!-- # box all -->
 
 <div class="clr"></div>
 </form>
 
 </fieldset>
-
 </div>
-

@@ -151,9 +151,9 @@ switch($SHOW_CH_STAGE):
 			{
 				$optionss[$row['name']] = array
 				(
-					'option'		 => '<table><tr>' . "\n" .  
-											'<td style="width:40%;border-style:ridge dotted;border-color:#aaa;border-width:1px;"><label for="' . $row['name'] . '">' . (!empty($lang[strtoupper($row['name'])]) ? $lang[strtoupper($row['name'])] : $olang[strtoupper($row['name'])]) . '</label></td>' . "\n" .
-											'<td style="width:60%;border-style:ridge dotted;border-color:#aaa;border-width:1px;"><label>' . (empty($row['option']) ? '' : $tpl->admindisplayoption($row['option'])) . '</label></td>' . "\n" .
+					'option'		 => '<table class="tab_configs"><tr>' . "\n" .  
+											'<td style="width:35%;"><label for="' . $row['name'] . '">' . (!empty($lang[strtoupper($row['name'])]) ? $lang[strtoupper($row['name'])] : $olang[strtoupper($row['name'])]) . '</label></td>' . "\n" .
+											'<td style="width:65%;">' . (empty($row['option']) ? '' : $tpl->admindisplayoption($row['option'])) . '</td>' . "\n" .
 											'</tr></table>' . "\n",
 					'type'			=> $row['type'],
 					'display_order' => $row['display_order'],
@@ -202,15 +202,15 @@ switch($SHOW_CH_STAGE):
 			{ 
 				if($option['type'] == 'general')
 				{
-					$types['general'] = '<div class="title_general_conf1gs"><em><h3>' . (!empty($lang['CONFIG_KLJ_MENUS_GENERAL']) ? $lang['CONFIG_KLJ_MENUS_GENERAL'] : ((!empty($olang['CONFIG_KLJ_MENUS_GENERAL'])) ? $olang['CONFIG_KLJ_MENUS_GENERAL'] : $lang['CONFIG_KLJ_MENUS_OTHER'])) . '</h3></em></div>';
+					$types['general'] = '<div class="title_general_conf1gs">' . (!empty($lang['CONFIG_KLJ_MENUS_GENERAL']) ? $lang['CONFIG_KLJ_MENUS_GENERAL'] : ((!empty($olang['CONFIG_KLJ_MENUS_GENERAL'])) ? $olang['CONFIG_KLJ_MENUS_GENERAL'] : $lang['CONFIG_KLJ_MENUS_OTHER'])) . '</div>';
 				}
 				else if($option['type'] != 'general' && $option['type'] != 'other')
 				{
-					$types[$option['type']] = '<br /><div class="title_general_conf1gs"><em><h3>' . (!empty($lang['CONFIG_KLJ_MENUS_' . strtoupper($option['type'])]) ? $lang['CONFIG_KLJ_MENUS_' . strtoupper($option['type'])] : ((!empty($olang['CONFIG_KLJ_MENUS_' . strtoupper($option['type'])])) ? $olang['CONFIG_KLJ_MENUS_' . strtoupper($option['type'])] : $lang['CONFIG_KLJ_MENUS_OTHER'])) . '</h3></em></div>';
+					$types[$option['type']] = '<br /><div class="title_general_conf1gs">' . (!empty($lang['CONFIG_KLJ_MENUS_' . strtoupper($option['type'])]) ? $lang['CONFIG_KLJ_MENUS_' . strtoupper($option['type'])] : ((!empty($olang['CONFIG_KLJ_MENUS_' . strtoupper($option['type'])])) ? $olang['CONFIG_KLJ_MENUS_' . strtoupper($option['type'])] : $lang['CONFIG_KLJ_MENUS_OTHER'])) . '</div>';
 				}
 				else if($option['type'] == 'other')
 				{
-					$types['other'] = '<br /><div class="title_other_conf1gs"><em><h3>' . $lang['CONFIG_KLJ_MENUS_OTHER'] . '</h3></em></div>';
+					$types['other'] = '<br /><div class="title_general_conf1gs">' . $lang['CONFIG_KLJ_MENUS_OTHER'] . '</div>';
 				}
 			}
 		}

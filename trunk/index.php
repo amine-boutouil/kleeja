@@ -153,25 +153,25 @@ if ($show_online)
 	*/
 	$allnumbers = $usersnum + $visitornum;
 
-	//check & update most ever users and vistors was online 
-	if((int)$stat_most_user_online_ever < $allnumbers)
+	//check & update most ever users and vistors was online
+	if(empty($config['most_user_online_ever']) || trim($config['most_user_online_ever']) == '')
 	{
-		$stat_most_user_online_ever = $allnumbers;
-		$stat_last_muoe				= time();
-
-		$SQL->build(array(
-						'UPDATE'	=> "{$dbprefix}stats",
-						'SET'		=> "most_user_online_ever='" . intval($allnumbers) . "', last_muoe='" . time() . "'"
-					));
-
-		//refresh cached stats
-		delete_cache('data_stats');
+		$most_online	= $allnumbers;
+		$on_muoe		= time();
+	}
+	else
+	{
+		list($most_online, $on_muoe) = @explode($config['most_user_online_ever']);
 	}
 
-	$most_online = $stat_most_user_online_ever; 
-	$on_muoe	 = gmdate("d-m-Y H:i a", $stat_last_muoe);
+	if((int) $most_online < $allnumbers || (empty($config['most_user_online_ever']) || trim($config['most_user_online_ever']) == ''))
+	{
+		update_config('most_user_online_ever', $allnumbers . ':' . time());
+	}
+
+	$on_muoe = date('d-m-Y h:i a', $on_muoe);
+
 	($hook = kleeja_run_hook('if_online_index_page')) ? eval($hook) : null; //run hook	
-	
 }#allow_online
 
 

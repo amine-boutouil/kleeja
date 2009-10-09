@@ -70,9 +70,7 @@ CREATE TABLE `{$dbprefix}stats` (
   `rules` text collate utf8_bin NOT NULL,
   `ex_header` text collate utf8_bin NOT NULL,
   `ex_footer` text collate utf8_bin NOT NULL,
-  `most_user_online_ever` int(11) NOT NULL,
-  `lastuser` varchar(300) collate utf8_bin NOT NULL,
-  `last_muoe` int(10) NOT NULL
+  `lastuser` varchar(300) collate utf8_bin NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 ";
 
@@ -250,6 +248,7 @@ $install_sqls['config_insert39'] = "INSERT INTO `{$dbprefix}config` (`name`, `va
 $install_sqls['config_insert40'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('last_online_time_update', '" .  time() . "', '', 0)";
 $install_sqls['config_insert41'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('klj_clean_files_from', '0', '', 0)";
 $install_sqls['config_insert42'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('style_depend_on', '', '', 0)";
+$install_sqls['config_insert43'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('most_user_online_ever', '', '', 0)";
 
 $install_sqls['exts_insert1'] = "
 INSERT INTO `{$dbprefix}exts` (`id`, `group_id`, `ext`, `gust_size`, `gust_allow`, `user_size`, `user_allow`) VALUES

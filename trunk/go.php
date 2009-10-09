@@ -394,8 +394,17 @@ switch ($_GET['go'])
 			kleeja_info($lang['STATS_CLOSED'], $lang['STATS_CLOSED']);
 		}
 
-		$most_online = $stat_most_user_online_ever; 
-		$on_muoe	 = gmdate('d-m-Y h:i a', $stat_last_muoe);
+		//stats of most online users
+		if(empty($config['most_user_online_ever']) || trim($config['most_user_online_ever']) == '')
+		{
+			$most_online	= 1;// 1 == you 
+			$on_muoe		= time();
+		}
+		else
+		{
+			list($most_online, $on_muoe) = @explode($config['most_user_online_ever']);
+		}
+
 		//ok .. go on
 		$titlee		= $lang['STATS'];
 		$stylee		= 'stats';
@@ -404,7 +413,8 @@ switch ($_GET['go'])
 		$sizes_st	= Customfile_size($stat_sizes);	
 		$lst_dl_st	= ((int)$config['del_f_day'] <= 0) ? ' [ ' . $lang['CLOSED_FEATURE'] . ' ] ' : gmdate('d-m-Y h:i a', $stat_last_f_del);
 		$lst_reg	= (empty($stat_last_user)) ? $lang['UNKNOWN'] : $stat_last_user;
-
+		$on_muoe	 = date('d-m-Y h:i a', $on_muoe);
+	
 		($hook = kleeja_run_hook('stats_go_page')) ? eval($hook) : null; //run hook
 
 	break; 

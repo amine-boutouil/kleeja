@@ -248,8 +248,6 @@ if(!file_exists("cache/data_stats.php"))
 		$stat_google_num		=  $row['google_num'];
 		$stat_yahoo_num			=  $row['yahoo_num'];
 		$stat_last_user			=  $row['lastuser'];
-		$stat_most_user_online_ever		=  $row['most_user_online_ever'];
-		$stat_last_muoe		=  $row['last_muoe'];
 			
 		//write
 		$file_dataw .= '$stat_files  			=   \'' . $row['files'] . '\';' . "\n";

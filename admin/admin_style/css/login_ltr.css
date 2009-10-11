@@ -1,12 +1,6 @@
 /* Powered by Kleeja .... Kleeja.com # 2007 -2009  */
-.site_name img{padding-right:8px;padding-left:0;}
-.box_medium {background-position:99% 3%;}
-.box_login{float:left;width:160px;margin-left:0;margin-right:6px;}
-.text {float:right;width:215px;}
-.cp_kleeja{height:20px;font-size:14px;font-weight:bold;margin-bottom:15px;}
-.text p{text-align:left;}
-.backhome {text-indent: 30px;margin-top:15px;}
-.backhome a {background-position:2% 50%;}
-.system-message div.error ul li{background-position:left center}
-.css {margin-right:0;margin-left:4px;}
 /* Powered by Kleeja .... Kleeja.com # 2007 -2009  */
+input[type="submit"] {float:right;}
+.site_name a:hover{padding-right:0;padding-left:20px;}
+.site_name img,.cp_kleeja img{padding-left:0;padding-right:8px;}
+.system-message div.error ul li{background-position:left center;}

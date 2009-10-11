@@ -24,43 +24,34 @@
 	<script type="text/javascript" src="{STYLE_PATH_ADMIN}images/tips.js"></script>
 </head>
 <body>
-	<div class="header"><div class="logo"><a onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com"><img src="{STYLE_PATH_ADMIN}images/logo.png" alt="kleeja" /></a></div></div>
-	<div class="site_name"><img src="{STYLE_PATH_ADMIN}images/icon/Private.png" alt="{config.sitename}" /><a href="{config.siteurl}">{config.sitename} .. !</a></div>
+	<div class="site_name"><a href="{config.siteurl}"><img src="{STYLE_PATH_ADMIN}images/icon/go_back_home.gif" alt="{config.sitename}" />{lang.RETURN_HOME} {config.sitename} .. !</a></div>
+	<div class="logo"><h1><a onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com"><img src="{STYLE_PATH_ADMIN}images/logo.png" alt="kleeja" /></a></h1></div>
 	<div class="box">
-		<div class="box_medium">
-			<form action="{action}" method="post" style="clear: both;">
-			<fieldset class="box_login">
-				<legend>{lang.USER_LOGIN}</legend>
-				<label>{lang.USERNAME}</label>
-				<input type="text" name="lname" value="{username}" size="22" />
-				<label>{lang.PASSWORD}</label>
-				<input type="password" name="lpass" value="" size="22" />
-				<div class="clr"></div><br />
+		<div class="cp_kleeja"><img src="{STYLE_PATH_ADMIN}images/icon/stop.png" alt="stop here kleeja" />{lang.KLEEJA_CP} ..!</div>
+		<hr />
+		<form action="{action}" method="post" style="clear: both;">
+			<label>{lang.USERNAME}</label>
+				<input type="text" name="lname" value="{username}" />
+			<div class="clr"></div><br />
+			<label>{lang.PASSWORD}</label>
+				<input type="password" name="lpass" value="" />
+			<div class="clr"></div>
 				<input type="submit" name="submit" value="{lang.LOGIN}" />
 			{H_FORM_KEYS}
 			<div class="clr"></div>
-			</fieldset>
-			</form>
-			<div class="text">
-				<p class="cp_kleeja"><img src="{STYLE_PATH_ADMIN}images/icon/stop.png" alt="stop here kleeja" />{lang.KLEEJA_CP}</p>
-				<p class="txt">{lang.MUST_LOGIN}</p>
-				<p class="backhome"><a title="{lang.RETURN_HOME}" href="{config.siteurl}">{lang.RETURN_HOME}</a></p>
+		</form>
+		<IF NAME="err">	
+		<div class="clr"></div>
+		<div class="system-message">
+			<div class="error">
+			<ul><li>{errs}</li></ul>
 			</div>
-			<div class="clr"></div>
 		</div>
+		<div class="clr"></div>
+		</IF>	
 	</div>
-	<IF NAME="err">	
-	<div class="system-message">
-		<div class="error">
-		<ul><li>{errs}</li></ul>
-		</div>
-	</div>
-	</IF>
-	<div class="clr"></div>
-	<div class="footer">
-		<p class="web2"><a class="xhtml" title="XHTML" onclick="window.open(this.href,'_blank');return false;" href="http://validator.w3.org/check?uri=referer" ><img src="{STYLE_PATH_ADMIN}images/icon/xhtml.png" alt="XHTML" /></a><a class="css" title="CSS" onclick="window.open(this.href,'_blank');return false;" href="http://jigsaw.w3.org/css-validator/check/referer" ><img src="{STYLE_PATH_ADMIN}images/icon/css.png" alt="css" /></a></p>
-		<p class="Powered"><a title="Kleeja" onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com" >Kleeja</a> .. !  
-		is Free Software released under the <a title="Kleeja Official Website" onclick="window.open(this.href,'_blank');return false;" href="http://www.gnu.org/licenses/gpl-2.0.html" >GNU/GPL License.</a></p>
-	</div>
+	<div class="Powered"><h1>Powered by <a onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com" title="Powered by kleeja">Kleeja</a> Version 1.0.0 </h1></div>
+	<div class="web2"><a class="xhtml" title="XHTML" onclick="window.open(this.href,'_blank');return false;" href="http://validator.w3.org/check?uri=referer" ><img src="{STYLE_PATH_ADMIN}images/icon/xhtml.png" alt="XHTML" /></a><a class="css" title="CSS" onclick="window.open(this.href,'_blank');return false;" href="http://jigsaw.w3.org/css-validator/check/referer" ><img src="{STYLE_PATH_ADMIN}images/icon/css.png" alt="css" /></a></div>
+	<div class="footer"></div>
 </body>
 </html>

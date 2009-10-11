@@ -4,7 +4,7 @@
 # copyright 2007-2009  ..
 */
 
-body {height:100%;width: 100%;background:#686868 url(../images/bodybackground.jpg) no-repeat top center fixed;border-bottom: 2px solid #6496C3;color: #3D3D3D; margin:0 ;padding: 0;font-family:Tahoma, Arial, Helvetica, sans-serif;font-weight:normal;font-size:12px; }
+body {height:100%;width: 100%;background:#F1F1F1 url(../images/cp_body.jpg) repeat-x top left ;border-bottom: 2px solid #6496C3;color: #3D3D3D; margin:0 ;padding: 0;font-family:Tahoma, Arial, Helvetica, sans-serif;font-weight:normal;font-size:12px; }
 h2 {	line-height:25px;padding:6px;background:#fff url(../images/message-bar.png) repeat-x;color: #FD6812;font-size:160%;}
 h6 {	line-height:20px;padding:3px;color: #444;font-size:115%;font-weight:400;}
 li {list-style: none;}
@@ -31,7 +31,7 @@ input[type="password"]:focus,input[type="text"]:focus,select:focus,textarea:focu
 
 
 /* header */
-#divheader { width: 94%; margin: 5px auto 3px; padding:1px 10px;border-top: 1px solid #D7D7D7; border-right: 1px solid #CCCCCC; border-bottom: 1px solid #CCCCCC; border-left: 1px solid #D7D7D7;background:#F3F3F3 url(../images/div-header.png) repeat-x top left;-moz-border-radius-topleft: 10px;-webkit-border-top-left-radius: 10px;-moz-border-radius-bottomright: 10px;-webkit-border-bottom-right-radius: 10px;}
+#divheader { width: 94%; margin: 5px auto 3px; padding:1px 10px;border-top: 1px solid #D7D7D7; border-right: 1px solid #CCCCCC; border-bottom: 1px solid #CCCCCC; border-left: 1px solid #D7D7D7;background:#F3F3F3 url(../images/div-header.gif) repeat-x top left;-moz-border-radius-topleft: 10px;-webkit-border-top-left-radius: 10px;-moz-border-radius-bottomright: 10px;-webkit-border-bottom-right-radius: 10px;}
 .header { width: 100%; height: 84px; padding: 0; margin:0;  }
 .header .logo1 { float:left; width: 370px; display: inline; }
 .header .logo2{ text-indent:4px;float:right;width: 400px; padding:22px 10px 0px 10px;}

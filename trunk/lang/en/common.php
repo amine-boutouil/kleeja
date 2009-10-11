@@ -289,7 +289,7 @@ $lang = array_merge($lang, array(
 	'N_QT' => 'QuickTime',
 	'N_OTHERFILE' => 'Other Files',
 	'LOGOUT_CP_OK' => 'Your administration session has been cleared ..',
-	'RETURN_HOME' => '&lt;&lt;  Back to Home',
+	'RETURN_HOME' => '&lt;&lt;  Back to',
 	'R_CONFIGS' => 'General Settings',
 	'R_CPINDEX' => 'Main Admin Page',
 	'R_EXTS' => 'Extensions Settings',
@@ -436,7 +436,6 @@ $lang = array_merge($lang, array(
 	'LAST_REG'				=> 'newest member',
 	'NEW_USER'				=> 'New user',
 	'LIVEXTS'				=> 'Live extensions',
-	'MUST_LOGIN'			=> 'You must login with correct username and password .',
 	
 	'ADD_UPLAD_A'			=> 'Add more fields',
 	'ADD_UPLAD_B'			=> 'Remove fields',

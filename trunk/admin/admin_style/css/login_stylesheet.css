@@ -1,46 +1,33 @@
 ﻿/* Powered by Kleeja .... Kleeja.com # 2007 -2009  */
-body {background:#686868 url(../images/bodybackground.jpg) no-repeat top left fixed;font: normal 12px Tahoma, Arial, Helvetica, sans-serif;border-top: 8px #FEA53D solid;color:#000;margin:0;padding:0;}
+body {background:#fff url(../images/bodybackground.jpg) no-repeat top left fixed;	font: normal 12px Tahoma, Arial, Helvetica, sans-serif;	border-top: 4px #FEA53D solid;color:#555;margin:0;padding:0;}
+h1 {	display: block;font-size:12px;font-weight:normal;}
 img {border:none;}
-p{margin:0;}
-form { margin: 0; padding: 0;}
-ul{margin-bottom:4px;line-height: 26px;}
-label {display: block;font-size: x-small;padding-bottom:3px;}
-legend {background: transparent;padding:0 5px; font-weight:bold;font-size:11px; margin-top: -.4em; color:#666}
-input { padding:3px 6px;margin:0px 2px 2px 2px;font:normal 12px Tahoma, Arial, Helvetica, sans-serif;}
-input[type="text"],input[type="password"]{cursor: text;border-left: 1px solid #AFAEAA; border-top: 1px solid #AFAEAA; border-right: 1px solid #D5D5C8;border-bottom: 1px solid #D5D5C8;}
-input[type="submit"] {cursor: pointer;padding:1px 18px;font-family:Tahoma, Arial, Helvetica, sans-serif;}
+hr {color:#fff;}
+label {display: block;padding-bottom:3px;}
+input {margin:2px 0;font:normal 12px Tahoma, Arial, Helvetica, sans-serif;color:#555;}
+input[type="text"],input[type="password"]{width:272px;padding:2px;cursor: text;border-left: 1px solid #AFAEAA;border-top: 1px solid #AFAEAA;border-right: 1px solid #D5D5C8;border-bottom: 1px solid #D5D5C8;font:normal 22px Tahoma, Arial, Helvetica, sans-serif;}
+input[type="submit"] {cursor: pointer;padding:3px 18px;float:left;margin-top:4px;	color:#111;}
 input[type="submit"]:hover {color:#D74E00;}
 input[type="text"]:hover ,input[type="password"]:hover{border: 1px solid #888;}
-input[type="password"]:focus,input[type="text"]:focus  {background-color:#DFEFFF;border: 1px solid #84A0C0;}
+input[type="password"]:focus,input[type="text"]:focus  {background-color:#ffd;border: 1px solid #D26900;}
 a:link ,a:visited{color:#003F9D;text-decoration: none; }
 a:hover {color:#0B55C4;text-decoration:overline;}
 .clr {clear: both;overflow:hidden;height:0;}
-.header{display:block;height:100px;margin-bottom:10px;}
-.logo {float:left;width:370px;height:78px;}
-.site_name{width:420px;padding:5px 0;margin:3px auto;font-size:18px;text-shadow:0px 1px rgb(247, 247, 247);}
-.site_name a{color:#0B55C4;}
-.site_name a:hover{text-decoration:none;color:#1C1CE3 }
+.site_name{background-color:#464646;height:20px;line-height:16px;padding:5px;text-indent:10px;font-weight:bold;font-size:11px;border-bottom: 1px #222 solid;}
+.site_name a{color:#ddd;}
+.site_name a:hover{text-decoration:none;	color:#fff;padding-right:20px;}
 .site_name img,.cp_kleeja img{padding-left:8px;vertical-align: middle;}
-.box{display:block;width:100%;margin:0 auto;}
-.box_medium,.box_login {background:#F1F1F1 url(../images/bg_box_login.gif) repeat-x bottom left;border:1px groove #666;-moz-border-radius:10px; border-radius:1px;margin:0 auto;}
-.box_medium {width:420px;padding:15px;border:1px dashed #757575;background-color:#fff}
-.box_login{float:right; width: 170px;margin-left:10px;padding:10px;}
-.text {width:200px;padding:0 5px;color: #003F9D;float:left;display:inline;}
-.txt {padding:5px;border-top: 1px solid #888;border-bottom: 1px solid #888;}
-.text p{text-align:justify;line-height:18px;}
-.cp_kleeja{padding:2px 0;color:#EA1E1E;height:26px;font-size:18px;margin-bottom:12px;}
-.backhome {text-indent: 45px;margin-top:12px;}
-.backhome a {color: #666;background: #EFE7B8 url(../images/icon/go_back_home.png) no-repeat 94% 50%;padding:5px 26px;border-top: 2px solid #FEA53D;border-bottom: 2px solid #FEA53D;font-weight:bold;font-size:10px;}
-.backhome a:hover {background:#EFE194;color: #111;text-decoration: none;}
-.system-message {margin:5px auto;width:450px;}
-.system-message div {font-weight:bold;text-indent: 35px; }
-.system-message div.error ul {list-style: none;padding:5px 10px;background-color: #E6C0C0; border-top: 4px solid #DE7A7B;border-bottom: 4px solid #DE7A7B; }
+.logo {width:370px;height:78px;margin:35px auto 10px auto;}
+.box{display:block;width:280px;margin:0 auto;padding:10px 20px;background:#F1F1F1 url(../images/bg_box_login.gif) repeat-x bottom left;border: 1px solid #e5e5e5;-moz-border-radius: 11px;-khtml-border-radius: 11px;-webkit-border-radius: 11px;border-radius: 5px;-moz-box-shadow: rgba(200,200,200,1) 0 4px 18px;-webkit-box-shadow: rgba(200,200,200,1) 0 4px 18px;	-khtml-box-shadow: rgba(200,200,200,1) 0 4px 18px;box-shadow: rgba(200,200,200,1) 0 4px 18px;}
+.cp_kleeja{color:#EA1E1E;height:26px;font-size:18px;padding-bottom:10px;clear: both;}
+.system-message {margin:5px auto;}
+.system-message div {font-weight:bold;text-indent:35px; }
+.system-message div.error ul {list-style: none;padding:5px 10px;background-color: #E6C0C0;border-top: 4px solid #DE7A7B;border-bottom: 4px solid #DE7A7B;}
 .system-message div.error ul li{line-height:30px;color:#CC0000;background: url(../images/error.png) no-repeat right center;}
-.footer {position:fixed;bottom:0;left:0;clear:both;padding:2px 10px;border-bottom: 8px solid #6496C3;height:26px;width:100%;font-weight:bold;font-size:11px;}
-.Powered{width:422px;padding:5px 0;margin:3px auto;color:#222}
-.web2{float:left;width:220px;padding:5px 0;font-weight:bold;font-size:11px;color:#002F75;text-align:left}
-.css {margin-right:4px;}
-.css img:hover{margin-top:2px;}
-.xhtml img:hover{margin-bottom:2px;}
-.css:hover,.xhtml:hover{filter: Alpha(Opacity=40);opacity:.40;-moz-opacity:.40;}
-/* Powered by Kleeja .... Kleeja.com # 2007 -2009  */
+.Powered{padding:5px 0;margin:3px auto;text-align:center;}
+.footer {position:absolute;bottom:0;left:0;clear:both;border-bottom:2px solid #6496C3;width:100%;height:2px;}
+.web2{position:absolute;bottom:10px;left:10px;padding:5px 0;color:#002F75;height:20px;}
+a.css img{margin-right:4px;padding-bottom:2px;}
+a.css,a.xhtml{filter: Alpha(Opacity=40);opacity:.40;-moz-opacity:.40;}
+a.xhtml img:hover{margin-bottom:2px;}
+a.css:hover,a.xhtml:hover{filter: Alpha(Opacity=95);opacity:.95;-moz-opacity:.95;}

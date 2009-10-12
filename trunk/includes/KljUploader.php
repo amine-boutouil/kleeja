@@ -303,7 +303,7 @@ function process ()
 			{
 				for($i=0;$i<=$this->filesnum;$i++)
 				{
-					if((!empty($_SESSION['FIILES_NOT_DUPLI']['file']['name'][$i]) && !empty($_FILES['file_' . $i . '_']['name'])) && ($_SESSION['FIILES_NOT_DUPLI']['file']['name'][$i] == $_FILES['file_' . $i . '_']['name']))
+					if((!empty($_SESSION['FIILES_NOT_DUPLI']['file_' . $i . '_']['name']) && !empty($_FILES['file_' . $i . '_']['name'])) && ($_SESSION['FIILES_NOT_DUPLI']['file_' . $i . '_']['name'] == $_FILES['file_' . $i . '_']['name']))
 					{
 						redirect('./');
 						//return $this->errs[] = array($lang['NO_REPEATING_UPLOADING'], 'index_err');
@@ -314,7 +314,7 @@ function process ()
 			{
 				for($i=0;$i<=$this->filesnum;$i++)
 				{
-					if((!empty($_SESSION['FIILES_NOT_DUPLI_LINKS']['file'][$i]) && !empty($_POST['file_' . $i . '_']) && trim($_POST['file_' . $i . '_']) != $lang['PAST_URL_HERE'] && trim($_SESSION['FIILES_NOT_DUPLI_LINKS']['file'][$i]) != $lang['PAST_URL_HERE']) && ($_SESSION['FIILES_NOT_DUPLI_LINKS']['file'][$i]) == ($_POST['file_' . $i . '_']))
+					if((!empty($_SESSION['FIILES_NOT_DUPLI_LINKS']['file_' . $i . '_']) && !empty($_POST['file_' . $i . '_']) && trim($_POST['file_' . $i . '_']) != $lang['PAST_URL_HERE'] && trim($_SESSION['FIILES_NOT_DUPLI_LINKS']['file_' . $i . '_']) != $lang['PAST_URL_HERE']) && ($_SESSION['FIILES_NOT_DUPLI_LINKS']['file_' . $i . '_']) == ($_POST['file_' . $i . '_']))
 					{
 						redirect('./');
 						//return $this->errs[] = array($lang['NO_REPEATING_UPLOADING'], 'index_err');

@@ -1390,9 +1390,29 @@ function delete_ch_tpl($template_name, $delete_txt = array())
 }
 
 /*
+* Get fresh config value
+* some time cache doesnt not work as well, so some important 
+* events need fresh version of config values ...
+*/
+function get_config($name)
+{
+	global $dbprefix, $SQL;
+
+	$query = array(
+					'SELECT'	=> 'c.value',
+					'FROM'		=> "{$dbprefix}config c",
+					'WHERE'		=> "c.name = '" . $SQL->escape($name) . "'"
+				);
+
+	$result = $SQL->build($query);
+	$v = $SQL->fetch($result);
+	return $v['value'];
+}
+
+/*
 * Add new config option
 */
-function add_config ($name, $value, $order = '0', $html = '', $type = 'other') 
+function add_config ($name, $value, $order = '0', $html = '', $type = 'other')
 {
 	global $dbprefix, $SQL, $config;
 	
@@ -1401,16 +1421,23 @@ function add_config ($name, $value, $order = '0', $html = '', $type = 'other')
 		return true;
 	}
 
-	$insert_query = array(	'INSERT'	=> '`name` ,`value` ,`option` ,`display_order`, `type`',
+	$insert_query	= array(
+							'INSERT'	=> '`name` ,`value` ,`option` ,`display_order`, `type`',
 							'INTO'		=> "{$dbprefix}config",
-							'VALUES'	=> "'" . $SQL->escape($name) . "','" . $SQL->escape($value) . "', '" . addslashes($html) . "','" . intval($order) . "','" . $SQL->escape($type) . "'"
-							);
-							
-	delete_cache('data_config');
-	//make it globally ..
-	$config[$name] = $value;
-	
-	return $SQL->build($insert_query);						
+							'VALUES'	=> "'" . $SQL->escape($name) . "','" . $SQL->escape($value) . "', '" . $SQL->real_escape($html) . "','" . intval($order) . "','" . $SQL->escape($type) . "'"
+						);
+
+	$SQL->build($insert_query);	
+
+	if($SQL->affected())
+	{
+		delete_cache('data_config');
+		$config[$name] = $value;
+		return true;
+	}
+
+	return false;
+		
 }
 
 function add_config_r($configs)
@@ -1432,14 +1459,15 @@ function add_config_r($configs)
 function update_config($name, $value, $escape = true)
 {
 	global $SQL, $dbprefix;
-	
+
 	$value = ($escape) ? $SQL->escape($value) : $value;
-	
-	$update_query = array(
-						'UPDATE'	=> "{$dbprefix}config",
-						'SET'		=> "value='" . ($escape ? $SQL->escape($value) : $value) . "'",
-						'WHERE'		=> 'name = "' . $SQL->escape($name) . '"'
-				);
+
+	$update_query	= array(
+							'UPDATE'	=> "{$dbprefix}config",
+							'SET'		=> "value='" . ($escape ? $SQL->escape($value) : $value) . "'",
+							'WHERE'		=> 'name = "' . $SQL->escape($name) . '"'
+					);
+				
 	$SQL->build($update_query);
 	if($SQL->affected())
 	{
@@ -1447,10 +1475,9 @@ function update_config($name, $value, $escape = true)
 		delete_cache('data_config');
 		return true;
 	}
-	else
-	{
-		return false;
-	}
+
+	return false;
+	
 }
 
 /*
@@ -1459,46 +1486,51 @@ function update_config($name, $value, $escape = true)
 function delete_config ($name) 
 {
 	global $dbprefix, $SQL;
-	
-	//if array
+
 	if(is_array($name))
 	{
-		foreach($name as $n)
-		{
-			$delete_query	= array('DELETE'	=> "{$dbprefix}config",
-									'WHERE'		=>  'name = "' . $SQL->escape($n) . '"'
-									);
-		 	$SQL->build($delete_query);
-		}
+		$r_name = implode("', '", $name);
 	}
-	else 
+	else
 	{
-		$delete_query	= array('DELETE'	=> "{$dbprefix}config",
-								'WHERE'		=>  'name = "' . $SQL->escape($name) . '"'
-								);
-		$SQL->build($delete_query);
+		$r_name = $name;
 	}
+
+	$delete_query	= array(
+							'DELETE'	=> "{$dbprefix}config",
+							'WHERE'		=>  "name IN('" . $SQL->escape($r_name) . "')"
+						);
+
+	$SQL->build($delete_query);
 	
-	return;
+	if($SQL->affected())
+	{
+		return true;
+	}
+
+	
+	return false;
 }
 
 
 //
 //add words to lang
 //
-function add_olang($words = array(), $lang='en')
+function add_olang($words = array(), $lang = 'en')
 {
 	global $dbprefix, $SQL;
-	
+
 	foreach($words as $w=>$t)
 	{
-		$insert_query = array(	'INSERT'	=> '`word` ,`trans` ,`lang_id`',
+		$insert_query = array(
+								'INSERT'	=> '`word` ,`trans` ,`lang_id`',
 								'INTO'		=> "{$dbprefix}lang",
-								'VALUES'	=> "'" . $SQL->escape($w) . "','" . $SQL->escape($t) . "', '" . $SQL->escape($lang) . "'"
+								'VALUES'	=> "'" . $SQL->escape($w) . "','" . $SQL->real_escape($t) . "', '" . $SQL->escape($lang) . "'"
 								);
+
 		$SQL->build($insert_query);
 	}
-	
+
 	delete_cache("data_lang");
 	return;
 }
@@ -1510,26 +1542,28 @@ function delete_olang ($words, $lang='en')
 {
 	global $dbprefix, $SQL;
 	
-	//if array
 	if(is_array($words))
 	{
-		foreach($words as $w)
-		{
-			$delete_query	= array('DELETE'	=> "{$dbprefix}lang",
-									'WHERE'		=>  'word = "' . $SQL->escape($w) . '" AND lang_id="' . $SQL->escape($lang) . '"'
-									);
-		 	$SQL->build($delete_query);
-		}
+		$r_words = implode("', '", $words);
 	}
-	else 
+	else
 	{
-		$delete_query	= array('DELETE'	=> "{$dbprefix}lang",
-								'WHERE'		=>  'word = "' . $SQL->escape($words) . '" AND lang_id="' . $SQL->escape($lang) . '"'
-								);
-		$SQL->build($delete_query);
+		$r_words = $words;
 	}
-	
-	return;
+
+	$delete_query	= array(
+							'DELETE'	=> "{$dbprefix}lang",
+							'WHERE'		=> "word IN('" . $SQL->escape($r_words) . "') AND lang_id='" . $SQL->escape($lang) . "'"
+						);
+
+	$SQL->build($delete_query);
+
+	if($SQL->affected())
+	{
+		return true;
+	}
+
+	return false;
 }
 
 //when php less than 5 !

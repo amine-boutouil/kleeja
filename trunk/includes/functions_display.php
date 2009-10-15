@@ -413,11 +413,10 @@ function redirect($url, $header = true, $exit = true, $sec = 0)
 		echo '<script type="text/javascript"> setTimeout("window.location.href = \'' . $url . '\'", ' . $sec*1000 . '); </script>';
 		echo '<noscript><meta http-equiv="refresh" content="' . $sec .';url=' . $url . '" /></noscript>';
 	}
-	
-	$SQL->close();
-	
+
 	if($exit)
 	{
+		$SQL->close();
 		exit;
 	}
 }

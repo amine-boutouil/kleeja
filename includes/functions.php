@@ -1416,7 +1416,7 @@ function add_config ($name, $value, $order = '0', $html = '', $type = 'other')
 {
 	global $dbprefix, $SQL, $config;
 	
-	if(isset($config[$name]))
+	if(get_config($name))
 	{
 		return true;
 	}
@@ -1437,7 +1437,6 @@ function add_config ($name, $value, $order = '0', $html = '', $type = 'other')
 	}
 
 	return false;
-		
 }
 
 function add_config_r($configs)

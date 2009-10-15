@@ -335,6 +335,6 @@ INSERT INTO `{$dbprefix}exts` (`id`, `group_id`, `ext`, `gust_size`, `gust_allow
 (67, 9, 'ogg', 0, 0, 0, 0),
 (68, 9, 'ogm', 0, 0, 0, 0);";
 
-$install_sqls['stats_insert'] = "INSERT INTO `{$dbprefix}stats`  VALUES (0,1,0,0," . time() . ",0,0,0,0,'',0,0,0,0,'','','','','','')";
+$install_sqls['stats_insert'] = "INSERT INTO `{$dbprefix}stats`  VALUES (0,1,0,0," . time() . ",0,0,0,0,'',0,0,0,0,'','','','')";
 
 $install_sqls['users_insert'] = "INSERT INTO `{$dbprefix}users` (`id`,`name`,`password`,`password_salt`,`mail`,`admin`,`clean_name`) VALUES ('1','" . ($user_name) . "', '" . ($user_pass) . "','" . ($user_salt) . "', '" . ($user_mail) . "','1','" . $clean_name . "')";

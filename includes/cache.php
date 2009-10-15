@@ -260,8 +260,6 @@ if(!file_exists("cache/data_stats.php"))
 		$file_dataw .= '$stat_last_yahoo 		=	\'' . $row['last_yahoo'] . '\';' . "\n";
 		$file_dataw .= '$stat_yahoo_num 		=	\'' . $row['yahoo_num'] . '\';' . "\n";
 		$file_dataw .= '$stat_last_user	 		=	\'' . $row['lastuser'] . '\';' . "\n";
-		$file_dataw .= '$stat_most_user_online_ever	 		=	' . $row['most_user_online_ever'] . ';' . "\n";
-		$file_dataw .= '$stat_last_muoe	 		=	' . $row['last_muoe'] . ';' . "\n";
 
 		($hook = kleeja_run_hook('while_fetch_stats_in_cache')) ? eval($hook) : null; //run hook
 	}

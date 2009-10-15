@@ -400,18 +400,18 @@ function big_error ($error_title,  $msg_text)
 }
 
 //redirect [php.net]
-function redirect($url, $header=true, $exit=false)
+function redirect($url, $header = true, $exit = true, $sec = 0)
 {
 	global $SQL;
-	
+
     if (!headers_sent() && $header)
 	{
         header('Location: ' . $url); 
     }
 	else
 	{
-        echo '<script type="text/javascript">window.location.href="' . $url . '";</script>';
-        echo '<noscript><meta http-equiv="refresh" content="0;url=' . $url . '" /></noscript>'; 
+		echo '<script type="text/javascript"> setTimeout("window.location.href = \'' . $url . '\'", ' . $sec*1000 . '); </script>';
+		echo '<noscript><meta http-equiv="refresh" content="' . $sec .';url=' . $url . '" /></noscript>';
 	}
 	
 	$SQL->close();

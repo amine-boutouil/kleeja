@@ -1489,16 +1489,21 @@ function delete_config ($name)
 
 	if(is_array($name))
 	{
-		$r_name = implode("', '", $name);
-	}
-	else
-	{
-		$r_name = $name;
+		foreach($name as $n)
+		{
+			delete_config($n);
+		}
+		
+		return;
 	}
 
+	//
+	// 'IN' doesnt work here with delete, i dont know why ? 
+	//
+
 	$delete_query	= array(
-							'DELETE'	=> "{$dbprefix}config",
-							'WHERE'		=>  "name IN('" . $SQL->escape($r_name) . "')"
+								'DELETE'	=> "{$dbprefix}config",
+								'WHERE'		=>  "name  = '" . $SQL->escape($name) . "'"
 						);
 
 	$SQL->build($delete_query);
@@ -1508,7 +1513,6 @@ function delete_config ($name)
 		return true;
 	}
 
-	
 	return false;
 }
 
@@ -1526,7 +1530,7 @@ function add_olang($words = array(), $lang = 'en')
 								'INSERT'	=> '`word` ,`trans` ,`lang_id`',
 								'INTO'		=> "{$dbprefix}lang",
 								'VALUES'	=> "'" . $SQL->escape($w) . "','" . $SQL->real_escape($t) . "', '" . $SQL->escape($lang) . "'"
-								);
+						);
 
 		$SQL->build($insert_query);
 	}
@@ -1544,16 +1548,17 @@ function delete_olang ($words, $lang='en')
 	
 	if(is_array($words))
 	{
-		$r_words = implode("', '", $words);
-	}
-	else
-	{
-		$r_words = $words;
+		foreach($words as $w)
+		{
+			delete_olang ($w, $lang);
+		}
+		
+		return;
 	}
 
 	$delete_query	= array(
 							'DELETE'	=> "{$dbprefix}lang",
-							'WHERE'		=> "word IN('" . $SQL->escape($r_words) . "') AND lang_id='" . $SQL->escape($lang) . "'"
+							'WHERE'		=> "word = '" . $SQL->escape($words) . "' AND lang_id = '" . $SQL->escape($lang) . "'"
 						);
 
 	$SQL->build($delete_query);

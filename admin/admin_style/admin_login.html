@@ -11,6 +11,9 @@
 	<IF NAME="{lang.DIR}==ltr">
 	<link rel="stylesheet" type="text/css" href="{STYLE_PATH_ADMIN}css/login_ltr.css" />
 	</IF>
+	<IS_BROWSER="ie6">
+	<link rel="stylesheet" type="text/css" href="{STYLE_PATH_ADMIN}css/ie_6.css" />
+	</IS_BROWSER>
 	<script type="text/javascript">
 		function confirm_from()
 		{
@@ -24,10 +27,10 @@
 	<script type="text/javascript" src="{STYLE_PATH_ADMIN}images/tips.js"></script>
 </head>
 <body>
-	<div class="site_name"><a href="{config.siteurl}"><img src="{STYLE_PATH_ADMIN}images/icon/go_back_home.gif" alt="{config.sitename}" />{lang.RETURN_HOME} {config.sitename} .. !</a></div>
-	<div class="logo"><h1><a onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com"><img src="{STYLE_PATH_ADMIN}images/logo.png" alt="kleeja" /></a></h1></div>
+	<div class="site_name"><a href="{config.siteurl}"><img src="{STYLE_PATH_ADMIN}images/icon/go_back_home.gif" alt="{config.sitename}" />{lang.RETURN_HOME} > {config.sitename} .. !</a></div>
+	<div class="logo_cp"><h1><a onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com"><img src="{STYLE_PATH_ADMIN}images/logo.png" alt="kleeja" /></a></h1></div>
 	<div class="box">
-		<div class="cp_kleeja"><img src="{STYLE_PATH_ADMIN}images/icon/Security.png" alt="stop here kleeja" />{lang.KLEEJA_CP} ..!</div>
+		<div class="cp_kleeja"><img src="{STYLE_PATH_ADMIN}images/icon/Security_go.gif" alt="stop here kleeja" />{lang.KLEEJA_CP} ..!</div>
 		<hr />
 		<form action="{action}" method="post" style="clear: both;">
 			<label>{lang.USERNAME}</label>
@@ -36,7 +39,7 @@
 			<label>{lang.PASSWORD}</label>
 				<input type="password" name="lpass" value="" />
 			<div class="clr"></div>
-				<input type="submit" name="submit" value="{lang.LOGIN}" />
+				<input class="submit_go" type="submit" name="submit" value="{lang.LOGIN}" />
 			{H_FORM_KEYS}
 			<div class="clr"></div>
 		</form>

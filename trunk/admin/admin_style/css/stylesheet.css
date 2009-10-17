@@ -124,7 +124,7 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 .bg_img td {padding:10px 0;}
 .img {padding:10px; cursor: pointer;}
 .img img{border:4px solid #D2D2D2;}
-.img img:hover{border:4px solid #FF6A14;}
+.img img:hover{border:4px solid #B4B4B4;}
 .check_all {display:block;text-align:left;margin:4px;padding:5px;background:#eee;}
 /* view ../images */
 
@@ -132,15 +132,14 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 #toolTipBox {
 position:fixed;
 display: none;
-padding: 10px;
 line-height:18px;
 font-weight:bold;
 font-size:11px;
 color:#222;
-background:#F5B1B4;
-border: 4px solid #CE767A;
+border: 6px solid #CE767A;
 text-align:right;
 }
+
 /* toolTipBox */
 
 /* footer */
@@ -168,12 +167,18 @@ tr:hover {background-color:#FFFFDD;}
 /* all tables */
 
 /* usefull colors */
-.ored, .ored:hover {background-color:#FFCACA;}
+.ored,.ored:hover {background-color:#FFCACA;}
+.ored  img,.ored  img:hover{border:4px solid #FF2121;}
+
+.osilver,.osilver:hover{background-color:#F2F2F2;}
+.osilver img{border:4px solid #D2D2D2;}
+
+
 .oblue{background-color:#EDFFEA;}
 .oblue td{border-top:1px solid #87C87C;border-bottom:1px solid #87C87C;}
 .oblue:hover {background-color:#DEEFDB;}
 .styles_exp{padding: 10px;font-weight: bold;color:#000;}
-.osilver {background-color:#eee;}
+
 .file_cp1 {width:100%;position: relative;overflow:auto;}
 .small_font {padding:5px 5px 10px 5px;font-size:11px;font-weight: bold;color:#0B55C4;text-indent:34px}
 

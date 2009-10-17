@@ -37,7 +37,7 @@ p, ul, ol {
 label {
 	padding:4px 0;
 }
-input ,textarea ,select ,option{
+input ,textarea ,select  ,option{
 	font:normal 12px Tahoma, Arial, Helvetica, sans-serif;
 }
 select ,option{
@@ -47,15 +47,17 @@ select ,option{
 	color: #444;
 	padding:1px 5px;
 }
+textarea ,select {
+	border-left:1px solid #AFAEAA;
+	border-top:1px solid #AFAEAA;
+	border-right:1px solid #D5D5C8;
+	border-bottom:1px solid #D5D5C8;
+}
 textarea {
 	cursor: text;
 	vertical-align: middle;
 	padding:2px;
 	color: #000;
-	border-left:1px solid #AFAEAA;
-	border-top:1px solid #AFAEAA;
-	border-right:1px solid #D5D5C8;
-	border-bottom:1px solid #D5D5C8;
 }
 input {
 	padding:3px 6px;
@@ -76,30 +78,12 @@ input[type="submit"] ,input[type="button"]{
 	font-weight:normal;
 	font-size:12px;
 }
-input[type="submit"]:hover ,
-input[type="button"]:hover {
-	color:#D74E00;
-}
-input[type="text"]:hover ,
-input[type="password"]:hover{
-	border: 1px solid #888;
-}
-input[type="password"]:focus,
-input[type="text"]:focus,
-select:focus,textarea:focus {
-	background-color: #ffd;
-	border: 1px solid #D26900;
-}
-a:link, body_alink ,a:visited, body_avisited{
-	color: #666;
-	text-decoration: none;
-	padding:2px;
-}
-a:hover, a:active, body_ahover {
-	color:#D2691E;
-	text-decoration:underline;
-	padding:2px;
-}
+input[type="submit"]:hover ,input[type="button"]:hover {color:#D74E00;}
+input[type="text"]:hover ,input[type="password"]:hover,select:hover{border: 1px solid #888;}
+input[type="password"]:focus,input[type="text"]:focus,select:focus,textarea:focus {background-color:#ffd;border: 1px solid #D26900;}
+a:link, body_alink ,a:visited, body_avisited{color: #666;text-decoration: none;padding:2px;}
+a:hover, a:active, body_ahover {color:#D2691E;text-decoration:underline;padding:2px;}
+
 img.left {
 	float: left;
 	margin-right:15px;
@@ -448,71 +432,82 @@ background:#FF9933 url(../images/headline_bg.png) repeat-x top right;color:#111;
 
 /* login template >> login.html */
 .login {
-	margin:5px 0;
+	margin:5px 0 10px 0;
 	padding:10px;
-	background:#F9F1EC url(../images/login.png) no-repeat 10% 50%;
+	background:#F9F1EC url(../images/login.png) no-repeat 20% 50%;
 	border:1px solid #FFD8BF
 }
-.title_login {
-	color:#777;
-	text-indent:25px;
-	padding:6px 0;
-	margin-bottom:2px;
-	border:1px solid #D5D5D5;
-	background:#F1F0F1 url(../images/number_online_all.png) no-repeat 99% 50%;
-}
-.box_login {
-	width:50%;
+.box_form_login {
+	width:60%;
 	padding:5px;
-	border: 1px dashed #D8D89B;
-	background:#FCF7F3 url(../images/box_login.png) no-repeat 10% 50%;;
 }
-.login label {
+.title_login {
+	width:82%;
+	color:#000;
+	text-indent:25px;
+	height:24px;
+	line-height:24px;
+	margin-bottom:8px;
+	background:#FCF8F5 url(../images/title_login.gif) no-repeat 99% 50%;
+}
+.blocks{
 	display:block;
-	color:#111;
-	font-size:10px;
+	clear:both;
+	height:22px;
+	margin-bottom:6px;
 }
-.username,.password {
-	padding-left:20px;
-	padding:4px 6px;
-}
-.username{
-	background:#fff url(../images/username.gif) no-repeat 1px 2px;
-}
-.password{
-	background:#fff url(../images/password.gif) no-repeat 0px 2px;
-}
-input.username:focus,input.password:focus{
-	background:#FFDDDD;
-	border-color:#D89B9B;
-}
-.button_login{
-	float:left;
-	padding:2px 35px;
-	margin-left:25px;
-}
-.remme{
+.gather {
+	width:28%;
+	height:22px;
+	line-height:20px;
+	display:inline;
 	float:right;
-	font-size:11px;
+	margin-left:3px;
+	text-align:center;
+	font-weight: 400;
+	color:#444;
+	background:#F7B34F;
 }
-.remme:focus {
+input.username,input.password {
+	float:right;
+	padding:3px 6px 3px 20px;
+}
+input.username{
+	background:#fff url(../images/username.gif) no-repeat 2px 2px;
+}
+input.password{
+	background:#fff url(../images/password.gif) no-repeat 2px 2px;
+}
+input.button_login{
+	padding:2px 33px;
+	margin-right:0;
+}
+select.remme {
+	font-size:11px;
+	padding:1px 4px;
+	margin:0 2px;
+}
+select.remme:focus {
 	background:#FFDDDD;
 	border-color:#D89B9B;
 	color:#D80505;
 }
 .forget_pass {
-	width:50%;
-	text-indent:22px;
-	padding:8px 5px;
+	text-indent:15px;
+	padding:2px 5px;
 	margin-top:4px;
-	border: 1px dashed #D89B9B;
-	background:#FFDDDD url(../images/forget_pass.png) no-repeat 98% 50%;;
+	margin-left:60px;
+	background:url(../images/forget_pass.png) no-repeat 98% 50%;
+	float:left;
+	font-size:12px;
 }
 .forget_pass  a{
 	color:#D80505;
+	background-color:#FFFFCC;
 }
 .forget_pass a:hover {
 	color:#FF2020;
+	background-color:#FFFFA5;
 }
 /* # login template >> login.html  */
 

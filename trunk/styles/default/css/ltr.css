@@ -36,13 +36,13 @@ ul.tabbernav li a{margin-left:0px;margin-right:4px;}
 .pagination li{float:left;margin-left:0;margin-right:3px;}
 
 /* login template >> login.html */
-.login {	background-position:90% 50%;}
+.login {background-position:80% 50%;}
 .title_login {background-position:1% 50%;}
-.box_login {	background-position:90% 50%;}
-.username,.password {padding-left:0;	padding-right:20px;	background-position:99% 50%;}
-.button_login{float:right;margin-left:0;margin-right:25px;}
-.remme{float:left;}
-.forget_pass {background-position:2% 50%;}
+.gather {float:left;	margin-left:0px;margin-right:3px;}
+input.username,input.password {float:left;padding:3px 20px 3px 6px;}
+input.username ,input.password{background-position:right center;}
+input.button_login{margin-left:0;margin-right:0;}
+.forget_pass {margin-right:60px;	margin-left:0px;background-position:2% 50%;float:right;}
 /* # login template >> login.html  */
 
 /* captcha stuff*/

@@ -27,16 +27,11 @@
 <!-- start form login  --> 
 <form action="{action}" method="post">
 <div class="login">
-<div class="box_login">
+<div class="box_form_login">
 	<div class="title_login">{lang.USER_LOGIN}</div>
-	<label>{lang.USERNAME} :</label>
-		<input class="username" type="text" name="lname" value="{t_lname}" size="30" />
-		<div class="clr"></div>
-	<label>{lang.PASSWORD} :</label>
-		<input class="password" type="password" name="lpass" value="{t_lpass}" size="30" />
-		<div class="clr"></div>	
-	<label>{lang.REMME} :</label>
-	<div class="clr"></div>
+	<div class="blocks"><p class="gather">{lang.USERNAME}</p><input class="username" type="text" name="lname" value="{t_lname}" size="30" /></div>
+	<div class="blocks"><p class="gather">{lang.PASSWORD}</p><input class="password" type="password" name="lpass" value="{t_lpass}" size="30" /></div>
+	<div class="blocks"><p class="gather">{lang.REMME}</p>
 		<select class="remme" name="remme">
 			<option value="3600">{lang.HOUR}</option>
 			<option value="18000">{lang.5HOURS}</option>
@@ -45,14 +40,15 @@
 			<option value="25920000">{lang.MONTH}</option>
 			<option value="31536000">{lang.YEAR}</option>
 		</select>
-	<input class="button_login" type="submit" name="submit" value="{lang.LOGIN}" />
+	</div>
 	<div class="clr"></div>
-</div>		
+			<input class="button_login" type="submit" name="submit" value="{lang.LOGIN}" />
 	<div class="clr"></div>
 	<div class="forget_pass"><a href="{forget_pass_link}">{lang.LOSS_PASSWORD}</a></div>
 	<div class="clr"></div>
 	{H_FORM_KEYS}	
 	<div class="clr"></div>
+</div>		
 </div>
 </form>
 <!-- # form login  -->

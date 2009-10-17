@@ -38,11 +38,11 @@ $(function() {
 <table class="bg_img">  
 <LOOP NAME="arr">
 {{tdnum}}
-<td style="width:25%;">
-<div class="img" id="su[{{id}}]">
-    <a href="{{href}}" class="lightbox" title="{{name}}"><img src="{{thumb_link}}" style="height:100px;width:100px;"<IF LOOP="is_thumb"><ELSE>style="width:100px;height:100px"</IF>  onmouseover="toolTip('<table><tr><td>{lang.FILENAME}</td><td>{{name}}</td></tr><tr><td>{lang.FILEUPS} : {{ups}}</td><td>{lang.FILESIZE} : {{size}}</td></tr><tr><td>{lang.FILEDATE} : {{time}}</td><td>{lang.BY} : {{user}}</td></tr><tr><td>{{ip}}</td><td></td></tr></table>',this);" /></a>
+<td style="width:25%;" id="su[{{id}}]" class="osilver">
+<div class="img">
+    <a href="{{href}}" class="lightbox"><img src="{{thumb_link}}" style="height:100px;width:100px;"<IF LOOP="is_thumb"><ELSE>style="width:100px;height:100px"</IF>  onmouseover="toolTip('<table><tr><td>{lang.FILENAME}</td><td>{{name}}</td></tr><tr><td>{lang.FILEUPS}</td><td>{{ups}}</td></tr><tr><td>{lang.FILESIZE}</td><td>{{size}}</td></tr><tr><td>{lang.FILEDATE}</td><td>{{time}}</td></tr><tr><td>{lang.BY}</td><td>{{user}}</td></tr><tr><td>{lang.IP}</td><td>{{ip}}</td></tr></table>',this);" /></a>
 </div>
-<div><input name="del_{{id}}" type="checkbox" value="{{id}}" rel="_del" style="float: left;" />{{name}}</div>
+<div><input name="del_{{id}}" type="checkbox" value="{{id}}"  style="float:left" onclick="change_color(this,'su[{{id}}]', 'ored');" rel="_del" />{{name}}</div>
 </td>
 {{tdnum2}}
 </LOOP>

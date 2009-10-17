@@ -285,7 +285,7 @@ tr:hover {background-color:#FFFFDD;}
 .general_statistics {background:url(../images/bg_general_statistics.png) no-repeat -10px 4px;}
 
 .disk_size{padding:0;margin:0;float:left;}
-.filsiz{padding:3px; font-weight:bold;font-size:x-large;color:#FF9797;text-align:center;text-decoration:line-through;vertical-align:top}
+.filsiz{padding:3px; font-weight:bold;font-size:x-large;color:#BFBFBF;text-align:center;text-decoration:line-through;vertical-align:top}
 /*  #  start general statistics */
 
 /* start box team kleeja */

@@ -2,7 +2,7 @@
 /**
 *
 * @package Kleeja
-* @version $Id:  $
+* @version $Id$
 * @copyright (c) 2007 Kleeja.com
 * @license ./docs/license.txt
 *

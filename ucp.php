@@ -1,15 +1,14 @@
 <?php
-##################################################
-#						Kleeja 
-#
-# Filename : ucp.php 
-# purpose :  every things for users.
-# copyright 2007-2009 Kleeja.com ..
-# license http://opensource.org/licenses/gpl-license.php GNU Public License
-# $Author$ , $Rev$,  $Date::                           $
-##################################################
+/**
+*
+* @package Kleeja
+* @version $Id:  $
+* @copyright (c) 2007 Kleeja.com
+* @license ./docs/license.txt
+*
+*/
 
-// security .. 
+
 define ( 'IN_INDEX' , true);
 
 if(isset($_GET['go']))

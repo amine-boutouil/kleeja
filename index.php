@@ -1,22 +1,19 @@
 <?php
-##################################################
-#						Kleeja 
-#
-# Filename : index.php 
-# purpose :  home page  .
-# copyright 2007-2009 Kleeja.com ..
-# license http://opensource.org/licenses/gpl-license.php GNU Public License
-# $Author$ , $Rev$,  $Date::                           $
-##################################################
+/**
+*
+* @package Kleeja
+* @version $Id:  $
+* @copyright (c) 2007 Kleeja.com
+* @license ./docs/license.txt
+*
+*/
 
-// security .. 
+ 
 define ( 'IN_INDEX' , true);
-//include imprtant file .. 
 include ('includes/common.php');
 
-	
 ($hook = kleeja_run_hook('begin_index_page')) ? eval($hook) : null; //run hook
-	
+
 //
 //Is kleeja only for memebers ?! 
 //

@@ -1,17 +1,18 @@
 <?php
-//start
-//part of admin extensions
-//begin of admin
-
-//copyright 2007-2009 Kleeja.com ..
-//license http://opensource.org/licenses/gpl-license.php GNU Public License
-//$Author$ , $Rev$,  $Date::                           $
+/**
+*
+* @package adm
+* @version $Id:  $
+* @copyright (c) 2007 Kleeja.com
+* @license ./docs/license.txt
+*
+*/
 
 
 // not for directly open
 if (!defined('IN_ADMIN'))
 {
-	exit('no directly opening : ' . __file__);
+	exit();
 }
 
 //style of

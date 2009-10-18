@@ -1,8 +1,13 @@
 <?php
-//
-// kleeja wizard ...
-// $Author: saanina $ , $Rev: 287 $,  $Date:: 2009-04-28 00:42:26 +0300#$
-//
+/**
+*
+* @package install
+* @version $Id:  $
+* @copyright (c) 2007 Kleeja.com
+* @license ./docs/license.txt
+*
+*/
+
 
 
 // Report all errors, except notices
@@ -19,8 +24,8 @@ if (!file_exists($_path . 'config.php'))
 $_GET['step'] = 'kleeja_is_the_best';
 
 
-/*
-include important files
+/**
+* include important files
 */
 define ( 'IN_COMMON' , true);
 include_once ($_path . 'config.php');

@@ -1,19 +1,19 @@
 <?php
-//rules
-//part of admin extensions
-//conrtoll rules
-	
-//copyright 2007-2009 Kleeja.com ..
-//license http://opensource.org/licenses/gpl-license.php GNU Public License
-//$Author: saanina $ , $Rev: 618 $,  $Date:: 2009-07-22 10:49:40 +0300#$
-	
-	
+/**
+*
+* @package adm
+* @version $Id:  $
+* @copyright (c) 2007 Kleeja.com
+* @license ./docs/license.txt
+*
+*/
+
+
 // not for directly open
 if (!defined('IN_ADMIN'))
 {
-	exit('no directly opening : ' . __file__);
+	exit();
 }
-	
 
 //for style ..
 $stylee	= "admin_rules";

@@ -28,7 +28,7 @@
 //no for directly open
 if (!defined('IN_COMMON'))
 {
-	exit('no directly opening : ' . __file__);
+	exit();
 }
 
 class PasswordHash

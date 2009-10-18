@@ -1,18 +1,17 @@
 <?php
-##################################################
-#						Kleeja
-#
-# Filename : s_strings.php
-# purpose : find strings in texrt and add after in another text or replace it ..
-# copyright 2007-2009 Kleeja.com ..
-# license http://opensource.org/licenses/gpl-license.php GNU Public License
-# $Author$ , $Rev$,  $Date::                           $
-##################################################
+/**
+*
+* @package Kleeja
+* @version $Id:  $
+* @copyright (c) 2007 Kleeja.com
+* @license ./docs/license.txt
+*
+*/
 
 //no for directly open
 if (!defined('IN_COMMON'))
 {
-	exit('no directly opening : ' . __file__);
+	exit();
 }
 
 

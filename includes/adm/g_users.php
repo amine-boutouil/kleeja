@@ -1,16 +1,17 @@
 <?php
-//users
-//part of admin extensions
-//conrtoll users
-
-//copyright 2007-2009 Kleeja.com ..
-//license http://opensource.org/licenses/gpl-license.php GNU Public License
-//$Author: phpfalcon $ , $Rev: 935 $,  $Date:: 2009-08-29 01:32:53 +0300#$
+/**
+*
+* @package adm
+* @version $Id:  $
+* @copyright (c) 2007 Kleeja.com
+* @license ./docs/license.txt
+*
+*/
 
 // not for directly open
 if (!defined('IN_ADMIN'))
 {
-	exit('no directly opening : ' . __file__);
+	exit();
 }
 
 

@@ -1,16 +1,17 @@
 <?php
-//styles
-//part of admin extensions
-//conrtoll styles and templates 
-
-//copyright 2007-2009 Kleeja.com ..
-//license http://opensource.org/licenses/gpl-license.php GNU Public License
-//$Author: saanina $ , $Rev: 1106 $,  $Date:: 2009-09-24 00:45:28 +0300#$
+/**
+*
+* @package adm
+* @version $Id:  $
+* @copyright (c) 2007 Kleeja.com
+* @license ./docs/license.txt
+*
+*/
 
 // not for directly open
 if (!defined('IN_ADMIN'))
 {
-	exit('no directly opening : ' . __file__);
+	exit();
 }
 
 //prevent notice
@@ -505,7 +506,7 @@ switch ($_GET['sty_t'])
 		$bkf = @fopen($root_path . 'includes/bk_templates.php', 'wb');
 
 		$bkf_contents = "<" . "?php\n//\n//bakup of Kleeja templates\n//\n\n//no for directly open\nif (!defined('IN_COMMON'))\n{";
-		$bkf_contents .= "\n\texit('no directly opening : ' . __file__);\n}\n\n//for version\n\$bk_version = '" . KLEEJA_VERSION . "';";
+		$bkf_contents .= "\n\texit();\n}\n\n//for version\n\$bk_version = '" . KLEEJA_VERSION . "';";
 		$bkf_contents .= "\n\n//Done in : " . date('d-m-Y H:i a') . "\n\n\$bkup_templates = array();\n\n";
 
 		$f = 0;

@@ -8,7 +8,7 @@
 	$lang['INST_INSTALL_CLEAN_VER']				= "تثبيت نسخه جديده ";
 	$lang['INST_UPDATE_P_VER']					= "تحديث نسخه سابقه ";
 	$lang['INST_CHOOSE_INSTALLER']				= "... قم بإختيار ما يناسبك  من معالج تثبيت كليجا ...";
-	$lang['INST_AGR_GPL2']						= 'أوافق على هذه الشروط كلها';
+	$lang['INST_AGR_LICENSE']					= 'أوافق على هذه الشروط كلها';
 	$lang['INST_SUBMIT']						= '[  متابعه  ]';
 	$lang['INST_SITE_INFO']						= 'معلومات الموقع';
 	$lang['INST_ADMIN_INFO']					= 'معلومات المسؤول';

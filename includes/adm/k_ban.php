@@ -1,16 +1,18 @@
 <?php
-//ban
-//part of admin extensions
-//conrtoll bans
+/**
+*
+* @package adm
+* @version $Id:  $
+* @copyright (c) 2007 Kleeja.com
+* @license ./docs/license.txt
+*
+*/
 
-//copyright 2007-2009 Kleeja.com ..
-//license http://opensource.org/licenses/gpl-license.php GNU Public License
-//$Author: saanina $ , $Rev: 893 $,  $Date:: 2009-08-24 00:23:58 +0300#$
 
 // not for directly open
 if (!defined('IN_ADMIN'))
 {
-	exit('no directly opening : ' . __file__);
+	exit();
 }
 
 //for style ..

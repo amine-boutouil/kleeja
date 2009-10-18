@@ -1,16 +1,17 @@
 <?php
-//
-//auth integration vb with kleeja
-//
-//copyright 2007-2009 Kleeja.com ..
-//license http://opensource.org/licenses/gpl-license.php GNU Public License
-//$Author$ , $Rev$,  $Date::                           $
-//
+/**
+*
+* @package auth
+* @version $Id:  $
+* @copyright (c) 2007 Kleeja.com
+* @license ./docs/license.txt
+*
+*/
 
 //no for directly open
 if (!defined('IN_COMMON'))
 {
-	exit('no directly opening : ' . __file__);
+	exit();
 }
 
 //

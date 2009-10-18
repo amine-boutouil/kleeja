@@ -1,13 +1,13 @@
 <?php
-##################################################
-#						Kleeja 
-#
-# Filename : captcha.php 
-# purpose :  captcha
-# copyright 2007-2009 Kleeja.com ..
-# license http://opensource.org/licenses/gpl-license.php GNU Public License
-# $Author: saanina $ , $Rev: 550 $,  $Date:: 2009-07-17 02:48:55 +0300#$
-##################################################
+/**
+*
+* @package Kleeja
+* @version $Id:  $
+* @copyright (c) 2007 Kleeja.com
+* @license ./docs/license.txt
+*
+*/
+
 
 //start session
 if(function_exists('ini_set'))

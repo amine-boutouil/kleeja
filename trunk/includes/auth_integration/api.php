@@ -1,18 +1,19 @@
 <?php
-//
-//auth integration remote api with kleeja
-//
-//copyright 2007-2009 Kleeja.com ..
-//license http://opensource.org/licenses/gpl-license.php GNU Public License
-//$Author: phpfalcon $ , $Rev: 817 $,  $Date:: 2009-08-12 14:43:06 +0300#$
-//
+/**
+*
+* @package auth
+* @version $Id:  $
+* @copyright (c) 2007 Kleeja.com
+* @license ./docs/license.txt
+*
+*/
+
 
 //no for directly open
 if (!defined('IN_COMMON'))
 {
-	exit('no directly opening : ' . __file__);
+	exit();
 }
-  
 
 function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = false, $return_username = false)
 {

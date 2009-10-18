@@ -1,16 +1,17 @@
 <?php
-//configs
-//part of admin extensions
-//conrtoll all configuarations of the script 
-
-//copyright 2007-2009 Kleeja.com ..
-//license http://opensource.org/licenses/gpl-license.php GNU Public License
-//$Author: saanina $ , $Rev: 1087 $,  $Date:: 2009-09-17 03:15:03 +0300#$
+/**
+*
+* @package adm
+* @version $Id:  $
+* @copyright (c) 2007 Kleeja.com
+* @license ./docs/license.txt
+*
+*/
 
 // not for directly open
 if (!defined('IN_ADMIN'))
 {
-	exit('no directly opening : ' . __file__);
+	exit();
 }
 
 

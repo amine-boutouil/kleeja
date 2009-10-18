@@ -1,21 +1,19 @@
 <?php
-##################################################
-#						Kleeja 
-#
-# Filename : mysqli.php
-# purpose :  controll mysql database by mysqli extension.
-# copyright 2007-2009 Kleeja.com ..
-# license http://opensource.org/licenses/gpl-license.php GNU Public License
-# $Author: saanina $ , $Rev: 782 $,  $Date:: 2009-08-11 01:23:06 +0300#$
-##################################################
+/**
+*
+* @package Kleeja
+* @version $Id:  $
+* @copyright (c) 2007 Kleeja.com
+* @license ./docs/license.txt
+*
+*/
 
 
 //no for directly open
 if (!defined('IN_COMMON'))
 {
-	exit('no directly opening : ' . __file__);
+	exit();
 }  
-
 
 if(!defined("SQL_LAYER")):
 

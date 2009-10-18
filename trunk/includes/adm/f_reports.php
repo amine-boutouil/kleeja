@@ -1,16 +1,17 @@
 <?php
-//reports
-//part of admin extensions
-//conrtoll reports
-
-//copyright 2007-2009 Kleeja.com ..
-//license http://opensource.org/licenses/gpl-license.php GNU Public License
-//$Author: saanina $ , $Rev: 1021 $,  $Date:: 2009-09-06 02:28:19 +0300#$
+/**
+*
+* @package adm
+* @version $Id:  $
+* @copyright (c) 2007 Kleeja.com
+* @license ./docs/license.txt
+*
+*/
 	
 // not for directly open
 if (!defined('IN_ADMIN'))
 {
-	exit('no directly opening : ' . __file__);
+	exit();
 }
 
 //for style ..

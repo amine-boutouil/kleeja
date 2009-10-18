@@ -1,8 +1,12 @@
 <?php
-//
-// kleeja SQLs ...
-// $Author$ , $Rev$,  $Date::                           $
-//
+/**
+*
+* @package install
+* @version $Id:  $
+* @copyright (c) 2007 Kleeja.com
+* @license ./docs/license.txt
+*
+*/
 
 // not for directly open
 if (!defined('IN_COMMON'))

@@ -1,15 +1,19 @@
 <?php
-//
-// kleeja installer wizard ...
-// $Author$ , $Rev$,  $Date::                           $
-//
+/**
+*
+* @package install
+* @version $Id:  $
+* @copyright (c) 2007 Kleeja.com
+* @license ./docs/license.txt
+*
+*/
+
 
 // Report all errors, except notices
 @error_reporting(E_ALL ^ E_NOTICE);
 
-
-/*
-include important files
+/**
+* include important files
 */
 
 define ( 'IN_COMMON' , true);

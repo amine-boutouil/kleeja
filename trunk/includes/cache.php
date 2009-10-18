@@ -1,13 +1,13 @@
 <?php
-##################################################
-#						Kleeja
-#
-# Filename : cache.php
-# purpose :  cache for all script. the important feature of kleeja
-# copyright 2007-2009 Kleeja.com ..
-# license http://opensource.org/licenses/gpl-license.php GNU Public License
-# $Author$ , $Rev$,  $Date::                           $
-##################################################
+/**
+*
+* @package Kleeja
+* @version $Id:  $
+* @copyright (c) 2007 Kleeja.com
+* @license ./docs/license.txt
+*
+*/
+
 
 //no for directly open
 if (!defined('IN_COMMON'))
@@ -52,7 +52,7 @@ if(!defined('STOP_HOOKS'))
 		$result = $SQL->build($query);
 
 		$file_datac = '<' . '?php' . "\n\n";
-		$file_datac .= "if (!defined('IN_COMMON')) exit('no directly opening : ' . __file__);";
+		$file_datac .= "if (!defined('IN_COMMON')) exit();";
 		$file_datac .= "\n// auto-generated cache files\n//For: Kleeja \n\n";
 		$file_datac .= '$all_plg_hooks = array();' ."\n\n";
 
@@ -94,7 +94,7 @@ if (empty($config) or !file_exists($root_path . 'cache/data_config.php'))
 	$result = $SQL->build($query);
 
 	$file_datac = '<' . '?php' . "\n\n";
-	$file_datac .= "if (!defined('IN_COMMON')) exit('no directly opening : ' . __file__);";
+	$file_datac .= "if (!defined('IN_COMMON')) exit();";
 	$file_datac .= "\n// auto-generated cache files\n//For: Kleeja \n\n";
 	$file_datac .= '$config = array( ' . "\n";
 
@@ -135,7 +135,7 @@ if (!isset($olang) or !file_exists($root_path . 'cache/data_lang.php'))
 	$result = $SQL->build($query);
 
 	$file_datac = '<' . '?php' . "\n\n";
-	$file_datac .= "if (!defined('IN_COMMON')) exit('no directly opening : ' . __file__);";
+	$file_datac .= "if (!defined('IN_COMMON')) exit();";
 	$file_datac .= "\n// auto-generated cache files\n//For: Kleeja \n\n";
 	$file_datac .= '$olang = array( ' . "\n";
 
@@ -175,7 +175,7 @@ if ((empty($g_exts) || empty($u_exts)) || !(file_exists($root_path . 'cache/data
 	$result = $SQL->build($query);
 
 	$file_datat = '<' . '?php' . "\n\n";
-				//$file_datat .= "if (!defined('IN_COMMON')) exit('no directly opening : ' . __file__);";
+				//$file_datat .= "if (!defined('IN_COMMON')) exit();";
 				$file_datat .= "\n// auto-generated cache files\n//For: Kleeja \n\n";
 				$file_datat .= 'if (empty($g_exts) || !is_array($g_exts)){$g_exts = array();}' . "\n";
 				$file_datat .= 'if (empty($u_exts) || !is_array($u_exts)){$u_exts = array();}' . "\n\n";
@@ -233,7 +233,7 @@ if(!file_exists("cache/data_stats.php"))
 	$result = $SQL->build($query);
 
 	$file_dataw = '<' . '?php' . "\n\n";
-	$file_dataw .= "if (!defined('IN_COMMON')) exit('no directly opening : ' . __file__);";
+	$file_dataw .= "if (!defined('IN_COMMON')) exit();";
 	$file_dataw .= "\n// auto-generated cache files\n//For: Kleeja \n\n";
 
 	while($row=$SQL->fetch_array($result))
@@ -293,7 +293,7 @@ if (!isset($banss) || !file_exists($root_path . 'cache/data_ban.php'))
 	$result = $SQL->build($query);
 
 	$file_datab = '<' . '?php' . "\n\n";
-	$file_datab .= "if (!defined('IN_COMMON')) exit('no directly opening : ' . __file__);";
+	$file_datab .= "if (!defined('IN_COMMON')) exit();";
 	$file_datab .= "\n// auto-generated cache files\n//For: Kleeja \n\n";
 	$file_datab .= '$banss = array( ' . "\n";
 
@@ -343,7 +343,7 @@ if (!isset($ruless) or !file_exists($root_path . 'cache/data_rules.php'))
 	$result = $SQL->build($query);
 
 	$file_datar = '<' . '?php' . "\n\n";
-	$file_datar .= "if (!defined('IN_COMMON')) exit('no directly opening : ' . __file__);";
+	$file_datar .= "if (!defined('IN_COMMON')) exit();";
 	$file_datar .= "\n// auto-generated cache files\n//For: Kleeja \n\n";
 	$rules1 = '';
 	
@@ -384,7 +384,7 @@ if (!isset($extras) or !file_exists($root_path . 'cache/data_extra.php'))
 	$result = $SQL->build($query);
 
 	$file_datae = '<' . '?php' . "\n\n";
-	$file_datae .= "if (!defined('IN_COMMON')) exit('no directly opening : ' . __file__);";
+	$file_datae .= "if (!defined('IN_COMMON')) exit();";
 	$file_datae .= "\n// auto-generated cache files\n//For: Kleeja \n\n";
 
 	while($row=$SQL->fetch_array($result))

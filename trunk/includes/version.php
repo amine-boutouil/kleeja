@@ -1,15 +1,25 @@
 <?php
-	//no for directly open
-	if (!defined('IN_COMMON'))
-	{
-		exit('no directly opening : ' . __file__);
-	}
+/**
+*
+* @package Kleeja
+* @version $Id:  $
+* @copyright (c) 2007 Kleeja.com
+* @license ./docs/license.txt
+*
+*/
+
+
+//no for directly open
+if (!defined('IN_COMMON'))
+{
+	exit();
+}
 	
 	
-	//dont change it .. plz man 
-	 define ('KLEEJA_VERSION' , '1.0.0');
+//dont change it .. plz man 
+ define ('KLEEJA_VERSION' , '1.0.0');
  
-	/*
+/*
 	
 	as you know , 
 	kleeja is open source and free ,
@@ -28,5 +38,4 @@
 	but we are so lazy .. 
 	
 	
-	*/
-?>
+*/

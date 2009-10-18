@@ -1,8 +1,12 @@
 <?php
-//
-// kleeja installer ...
-// $Author$ , $Rev$,  $Date::                           $
-//
+/**
+*
+* @package install
+* @version $Id:  $
+* @copyright (c) 2007 Kleeja.com
+* @license ./docs/license.txt
+*
+*/
 
 
 // Report all errors, except notices
@@ -63,7 +67,7 @@ else
 
 if(!isset($_GET['step']))
 {
-	$_GET['step'] = 'gpl2';
+	$_GET['step'] = 'license';
 }
 
 /*
@@ -72,25 +76,25 @@ if(!isset($_GET['step']))
 switch ($_GET['step']) 
 {
 default:
-case 'gpl2':
+case 'license':
 
-	$contentofgpl2 = @file_get_contents('../docs/GPL2.txt');
+	$contentof_license = @file_get_contents('../docs/license.txt');
 	
-	if (strlen($contentofgpl2) < 3)
+	if (strlen($contentof_license) < 3)
 	{
-		$contentofgpl2 = "Can't find 'gpl2.txt' file .. search on the web about GPL2";
+		$contentof_license = "license.txt is empty or not found, got to kleeja.com and read the license content from there ...";
 	}
-	
+
 ?>
 
 	<form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>?step=f&<?php echo getlang(1);?>">
 	<br />
-	<div class="home" name="gpl2" style="width: 456px; height: 320px;direction:ltr;overflow: auto;margin:0 auto">
-	<?php echo nl2br($contentofgpl2);?>
+	<div class="home" name="license" style="width: 456px; height: 320px;direction:ltr;overflow: auto;margin:0 auto">
+	<?php echo nl2br($contentof_license);?>
 	</div>
 
 	<br />
-	<?php echo $lang['INST_AGR_GPL2'];?> <input name="agrec" id="agrec" type="checkbox" onclick="javascript:agree();"  /><br />
+	<?php echo $lang['INST_AGR_LICENSE'];?> <input name="agrec" id="agrec" type="checkbox" onclick="javascript:agree();"  /><br />
 	<input name="agres" id="agres" type="submit" value="<?php echo $lang['INST_SUBMIT'];?>" disabled="disabled"/>
 
 	</form>
@@ -102,7 +106,7 @@ case 'f':
 	$check_ok = true;
 ?>
 
-	<fieldset class="home" dir="' . $lang['DIR'] . '" style="text-align:<?php echo  $lang['DIR'] == 'rtl' ? 'right' : 'left';?>;margin: 8px;">
+	<fieldset class="home" dir="<?php echo $lang['DIR'];?>" style="text-align:<?php echo  $lang['DIR'] == 'rtl' ? 'right' : 'left';?>;margin: 8px;">
 	<strong><?php echo $lang['FUNCTIONS_CHECK'];?></strong> : <br />
 	<ul class="ul_check">
 	<?php if(function_exists('unlink')):?>

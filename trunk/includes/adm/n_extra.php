@@ -1,16 +1,18 @@
 <?php
-//extra
-//part of admin extensions
-//conrtoll extra heaer and footer
+/**
+*
+* @package adm
+* @version $Id:  $
+* @copyright (c) 2007 Kleeja.com
+* @license ./docs/license.txt
+*
+*/
 
-//copyright 2007-2009 Kleeja.com ..
-//license http://opensource.org/licenses/gpl-license.php GNU Public License
-//$Author: saanina $ , $Rev: 1076 $,  $Date:: 2009-09-12 08:18:51 +0300#$
 	
 // not for directly open
 if (!defined('IN_ADMIN'))
 {
-	exit('no directly opening : ' . __file__);
+	exit();
 }
 	
 

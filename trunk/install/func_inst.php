@@ -1,11 +1,15 @@
 <?php
-//
-// kleeja installer functions ...
-// $Author$ , $Rev$,  $Date::                           $
-//
+/**
+*
+* @package install
+* @version $Id:  $
+* @copyright (c) 2007 Kleeja.com
+* @license ./docs/license.txt
+*
+*/
 
 /*
- Requirements of Kleeja
+* Requirements of Kleeja
 */
 define('MIN_PHP_VERSION', '4.3.0');
 define('MIN_MYSQL_VERSION', '4.1.2');

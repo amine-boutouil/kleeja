@@ -1,16 +1,17 @@
 <?php
-//check_update
-//part of admin extensions
-//is there any new update !
-
-//copyright 2007-2009 Kleeja.com ..
-//license http://opensource.org/licenses/gpl-license.php GNU Public License
-//$Author: saanina $ , $Rev: 943 $,  $Date:: 2009-08-29 06:37:05 +0300#$
+/**
+*
+* @package adm
+* @version $Id:  $
+* @copyright (c) 2007 Kleeja.com
+* @license ./docs/license.txt
+*
+*/
 
 // not for directly open
 if (!defined('IN_ADMIN'))
 {
-	exit('no directly opening : ' . __file__);
+	exit();
 }
 
 $stylee	= "admin_check_update";

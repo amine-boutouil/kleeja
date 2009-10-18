@@ -1,13 +1,12 @@
-<?php 
-##################################################
-#						Kleeja
-#
-# Filename : admin/index.php
-# purpose :  control panel for administarator
-# copyright 2007-2009 Kleeja.com ..
-# license http://opensource.org/licenses/gpl-license.php GNU Public License
-# $Author: saanina $ , $Rev: 615 $,  $Date:: 2009-07-22 05:54:08 +0300#$
-##################################################
+<?php
+/**
+*
+* @package adm
+* @version $Id:  $
+* @copyright (c) 2007 Kleeja.com
+* @license ./docs/license.txt
+*
+*/
 
 
 //define important constants

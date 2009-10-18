@@ -1,19 +1,20 @@
 <?php
-//bckup
-//part of admin extensions
-//get backup of tables
-//thanks for [b]coder[/b] from montadaphp.net  
-	
-//copyright 2007-2009 Kleeja.com ..
-//license http://opensource.org/licenses/gpl-license.php GNU Public License
-//$Author: saanina $ , $Rev: 890 $,  $Date:: 2009-08-23 21:22:10 +0300#$
+/**
+*
+* @package adm
+* @version $Id:  $
+* @copyright (c) 2007 Kleeja.com
+* @license ./docs/license.txt
+*
+*/
+
 	
 // not for directly open
 if (!defined('IN_ADMIN'))
 {
-	exit('no directly opening : ' . __file__);
+	exit();
 }
-	
+
 //for style ..
 $stylee	= "admin_backup";
 $action	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php');

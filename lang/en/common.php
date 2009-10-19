@@ -534,6 +534,8 @@ $lang = array_merge($lang, array(
 	'ORDER_SIZE'				=> 'ترتيب الملفات حسب أحجامها من الأكبر حتى الأصغر',
 	'ORDER_TOTAL_DOWNLOADS'		=> 'ترتيب الملفات حسب عدد مرات التحميل', 
 	'COMMA_X'					=> '<p class="live_xts">separate by comma (<font style="font-size:large"> , </font>)</p>',
+	'NO_SEARCH_WORD'			=> 'لم تقم بكتابة كلمة بحث !',
+	
 	//last line of this file ...					 
 	'S_TRANSLATED_BY' 			=> 'Translated By <a href="http://www.fenix4web.com/">Fenix4Web</a>',
 ));

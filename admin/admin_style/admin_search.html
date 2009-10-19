@@ -1,8 +1,53 @@
+
+<script type="text/javascript">
+function check_search_files_form(form)
+{
+	var do_it = false;
+	if(form.filename.value != '')
+		do_it = true;
+	else if(form.username.value != '')
+		do_it = true;
+	else if(form.ext.value != '')
+		do_it = true;
+	else if(form.size.value != '')
+		do_it = true;
+	else if(form.ups.value != '')
+		do_it = true;
+	else if(form.rep.value != '')
+		do_it = true;
+	else if(form.lastdown.value != '')
+		do_it = true;
+	else if(form.user_ip.value != '')
+		do_it = true;
+
+	if(!do_it)
+	{
+		 alert('{lang.NO_SEARCH_WORD}');
+		 return false;
+	}
+}
+function check_search_users_form(form)
+{
+	var do_it = false;
+	if(form.username.value != '')
+		do_it = true;
+	else if(form.username.value != '')
+		do_it = true;
+
+	if(!do_it)
+	{
+		 alert('{lang.NO_SEARCH_WORD}');
+		 return false;
+	}
+}
+</script>
+
+
 <!-- start search temlate  -->
 <div id="divmiddle">
 <fieldset>
 
-<form method="post" action="{action1}">
+<form method="post" action="{action1}" onsubmit="return check_search_files_form(this);">
 
 <!-- start div border table  -->
 <div id="border-table">
@@ -77,7 +122,7 @@
 
 <!-- start users search temlate  -->
 <IF NAME="default_user_system">
-<form method="post" action="{action2}">
+<form method="post" action="{action2}" onsubmit="return check_search_users_form(this);">
 
 <!-- start div border table  -->
 <div id="border-table">

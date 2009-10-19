@@ -465,7 +465,7 @@ $lang = array_merge($lang, array(
 	'GUIDE_GROUPS' 			    => 'مجموعة',
 	'ALL_FILES' 			    => 'عدد جميع الملفات',
 	'SHOWFILESBYIP'				=> 'عرض  ملفات الـ IP', 
-	'DELETEALLRES'				=> 'حذف كل ملفات الـ IP المحدد',
+	'DELETEALLRES'				=> 'حذف كل ملفات البحث هذا',
 	'ADMIN_DELETE_FILES_OK'     => 'تم حذف %s ملف بنجاح',
 	'ADMIN_DELETE_FILES_NOF'	=> 'لاتوجد نتائج للقيام بعملية الحذف',
 	'NOT_EXSIT_USER'			=> 'عفواً العضو الذي تبحث عنه غير موجود في قاعدة البيانات .. ربما أنك تحاول الوصول لعضوية غير موجودة او محذوفة !!!!',
@@ -518,6 +518,7 @@ $lang = array_merge($lang, array(
 	'ORDER_SIZE'				=> 'ترتيب الملفات حسب أحجامها من الأكبر حتى الأصغر',
 	'ORDER_TOTAL_DOWNLOADS'		=> 'ترتيب الملفات حسب عدد مرات التحميل',
 	'COMMA_X'					=> '<p class="live_xts">افصل بين الامتدادات باستخدام الفاصلة (<font style="font-size:large"> , </font>)</p>', 
+	'NO_SEARCH_WORD'			=> 'لم تقم بكتابة كلمة بحث !',
 	));
 
 #<-- EOF

@@ -7,9 +7,9 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 	<meta name="copyrights" content="Powered by Kleeja :: kleeja.com" />
 	{EXTRA_CODE_META}
-		<link rel="shortcut icon" href="images/favicon.ico" />
-		<link rel="icon" type="image/gif" href="images/favicon.gif" />
-		<link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
+	<link rel="shortcut icon" href="images/favicon.ico" />
+	<link rel="icon" type="image/gif" href="images/favicon.gif" />
+	<link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
 	<link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH}css/screen.css" />
 	<IF NAME="{lang.DIR}==ltr">
 	<link rel="stylesheet" type="text/css" href="{STYLE_PATH}css/ltr.css" />
@@ -21,11 +21,15 @@
 	<link rel="stylesheet" type="text/css" href="{STYLE_PATH}css/ie.css" />
 	</IS_BROWSER>
 	<script type="text/javascript">
-	 var number_of_uploads={config.filesnum};
-	 var LANG_PAST_URL_HERE ="{lang.PAST_URL_HERE}";
-	var LANG_MORE_F_FILES ="{lang.MORE_F_FILES}";
+	var number_of_uploads={config.filesnum};
+	var LANG_PAST_URL_HERE = "{lang.PAST_URL_HERE}";
+	var LANG_MORE_F_FILES = "{lang.MORE_F_FILES}";
+	var STYLE_PATH  = "{STYLE_PATH}";
 	</script>
 	<script type="text/javascript" src="{STYLE_PATH}javascript.js"></script>
+	<!--[if lt IE 7]>
+	<script type="text/javascript" src="{STYLE_PATH}unitpngfix.js"></script>
+	<![endif]--> 
 </head>
 
 <body>

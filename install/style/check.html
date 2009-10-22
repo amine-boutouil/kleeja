@@ -1,0 +1,92 @@
+
+<fieldset class="home" dir="{{echo $lang['DIR']}}" style="text-align:{{echo $lang['DIR']=='rtl'?'right':'left'}};margin: 8px;">
+	
+	<strong>{{echo $lang['FUNCTIONS_CHECK']}}</strong> : 
+	<br />
+	<ul class="ul_check">
+	{{if(function_exists('unlink')):}}
+		<li style="color:green">
+			{{echo sprintf($lang['FUNCTION_IS_EXISTS'], 'unlink')}}>
+		</li>
+	{{else: $GLOBALS['check_ok'] = false;}}
+		<li style="color:red">
+			{{echo sprintf($lang['FUNCTION_IS_NOT_EXISTS'], 'unlink')}}
+		</li>
+	{{endif;}}
+
+	[ {{echo $lang['FUNCTION_DISC_UNLINK']}} ]
+	<br />
+	
+	{{if(function_exists('imagecreatetruecolor')):}}
+		<li style="color:green">
+			{{echo sprintf($lang['FUNCTION_IS_EXISTS'], 'imagecreatetruecolor')}}
+		</li>
+	{{else: $GLOBALS['check_ok'] = false;}}
+		<li style="color:red">
+			{{echo sprintf($lang['FUNCTION_IS_NOT_EXISTS'], 'imagecreatetruecolor')}}
+		</li>
+	{{endif;}}
+	
+	 [ {{echo $lang['FUNCTION_DISC_GD']}} ]
+	 <br />
+	
+	{{if(function_exists('fopen')):}}
+		<li style="color:green">
+			{{echo sprintf($lang['FUNCTION_IS_EXISTS'], 'fopen')}}
+		</li>
+	{{else: $GLOBALS['check_ok'] = false;}}
+		<li style="color:red">
+			{{echo sprintf($lang['FUNCTION_IS_NOT_EXISTS'], 'fopen')}}>
+		</li>
+	{{endif;}}
+
+	 [ {{echo $lang['FUNCTION_DISC_FOPEN']}} ]
+	 <br />
+	
+	{{if(function_exists('move_uploaded_file')):}}
+		<li style="color:green">
+			{{echo sprintf($lang['FUNCTION_IS_EXISTS'], 'move_uploaded_file')}}
+		</li>
+	{{else: $GLOBALS['check_ok'] = false;}}
+		<li style="color:red">
+			{{echo sprintf($lang['FUNCTION_IS_NOT_EXISTS'], 'move_uploaded_file')}}
+		</li>
+	{{endif;}}
+
+	</ul>	
+	
+	[ {{echo $lang['FUNCTION_DISC_MUF']}} ]
+	<br />
+
+	<br />
+	{{if($GLOBALS['advices']):}}
+		<br />
+		<strong>{{echo $lang['ADVICES_CHECK']}}</strong> : 
+		<br />
+		<ul  class="ul_check2">
+		{{if($GLOBALS['register_globals']):}}
+			<li>{{$lang['ADVICES_REGISTER_GLOBALS']}}</li>
+		{{endif;}}
+		
+		{{if($GLOBALS['get_magic_quotes_gpc']):}}
+			<li>{{$lang['ADVICES_MAGIC_QUOTES']}}</li>
+		{{endif;}}
+		
+		{{if($GLOBALS['iconv']):}}
+			<li>{{$lang['ADVICES_ICONV']}}</li>
+		{{endif;}}
+		</ul>
+	{{endif;}}
+
+	</fieldset>
+	
+		
+	{{if($GLOBALS['check_ok']):}}
+		<form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=c&amp;' . getlang(1)}}>">
+			<input name="agres" type="submit" value="{{echo $lang['INST_SUBMIT']}}"  />
+		</form>
+	{{else:}}
+		<form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=f&amp;' . getlang(1)}}">
+			<input name="agres" type="submit" value="{{echo $lang['RE_CHECK']}}"  />
+		</form>
+	{{endif;}}	

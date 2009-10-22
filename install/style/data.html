@@ -1,0 +1,80 @@
+		
+		<form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=data&amp;' . getlang(1)}}"  onsubmit="javascript:return formCheck(this, Array('sitename','siteurl','sitemail' ,'username', 'password','email' ));">
+		<fieldset class="home">
+		<legend style="width: 73px"> [ <strong>{{echo $lang['INST_SITE_INFO']}}</strong> ]</legend>
+		<table style="width: 100%">
+			<tr>
+				<td>{{echo $lang['SITENAME']}}</td>
+				<td><input name="sitename" type="text" style="width: 256px" /></td>
+			</tr>
+			<tr>
+				<td>{{echo $lang['SITEURL']}}</td>
+				<td><input name="siteurl" type="text" value="{{echo $GLOBALS['urlsite']}}" style="width: 256px" /></td>
+			</tr>
+			<tr>
+				<td>{{echo $lang['SITEMAIL']}}</td>
+				<td><input name="sitemail" id="sitemail" type="text" style="width: 256px" onchange="return w_email(this.name);" /></td>
+			</tr>       
+		</table>
+		</fieldset>
+
+		<br />
+
+		<fieldset class="home">
+		<legend style="width: 73px"> [ <strong>{{echo $lang['INST_ADMIN_INFO']}}</strong> ]</legend>
+		<table style="width: 100%">
+			<tr>
+				<td>{{echo $lang['USERNAME']}}</td>
+				<td><input name="username" type="text" style="width: 256px" /></td>
+			</tr>
+			<tr>
+				<td>{{echo $lang['PASSWORD']}}</td>
+				<td>
+					<input name="password" id="password" type="text" style="width: 173px"  onkeyup="return passwordChanged();"/>
+					<span id="strength"><img src="style/images/p1.gif" alt="! .." />
+				</span>
+				</td>
+			</tr>
+			<tr>
+				<td>{{echo $lang['PASSWORD2']}}</td>
+				<td><input name="password2" id="password2" type="text" style="width: 253px" /></td>
+			</tr>
+			<tr>
+				<td><strong>{{echo $lang['EMAIL']}}</strong></td>
+				<td><input name="email" id="email" type="text" style="width: 256px"  onchange="return w_email(this.name);" /></td>
+			</tr>
+		</table>
+		</fieldset>
+		
+
+		<fieldset class="home">
+		<legend style="width: 73px"> [ <strong>{{echo $lang['INST_OTHER_INFO']}}</strong> ]</legend>
+		<table style="width: 100%">
+			<tr>
+				<td><strong>{{echo $lang['URLS_TYPES']}}</strong></td>
+				<td>
+					<script type="text/javascript">
+					//<![CDATA[
+						var explains = new Array(3);
+						explains["id"] = "{{echo $GLOBALS['urlsite']}}download.php?id=123";
+						explains["filename"] =  "{{echo $GLOBALS['urlsite']}}download.php?filename=12542219930.gif";
+						explains["direct"] = "{{echo $GLOBALS['urlsite']}}uploads/12542219930.gif";
+					//]]>
+					</script>
+					<select name="urls_type" onChange="document.getElementById('like_this').innerHTML=explains[this.options[this.selectedIndex].value]" >
+						<option value="id">{{echo $lang['DEFAULT']}}</option>
+						<option value="filename">{{echo $lang['FILENAME_URL']}}</option>
+						<option value="direct">{{echo $lang['DIRECT_URL']}}</option>
+					</select>
+					<br />
+					<div>
+					{{echo $lang['LIKE_THIS']}} : 
+						<span id="like_this">{{echo $GLOBALS['urlsite']}}download.php?id=123</span>
+					</div>
+				</td>
+			</tr>
+		</table>
+		</fieldset>
+
+		<input name="datasubmit" type="submit" value="{{echo $lang['INST_SUBMIT']}}" />
+	</form>

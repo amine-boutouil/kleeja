@@ -31,8 +31,16 @@
 <!--  start link user  -->
 <div id="filecplink">
 <div class="clr"></div>
-<div class="copylink">{lang.COPY_AND_GET_DUD}</div>
-<div class="link_user"><input readonly="readonly" onclick="this.select();" type="text" name="option" value="{your_fileuser}" size="54" /></div>
+
+<table width="100%">
+	<tr>
+		<td width="50%"><p class="copylink">{lang.COPY_AND_GET_DUD}</p></td>
+		<td width="50%"><input class="link_user" readonly="readonly" onclick="this.select();" type="text" name="option" value="{your_fileuser}" size="60" /></td>
+	</tr>
+</table>
+
+
+
 <div class="clr"></div>
 </div>
 <!--  # end link user -->
@@ -85,7 +93,8 @@
 
 <IF NAME="filecp_link">
 <!--  start go button filecp   -->
-<div class="left_button"><a id="buttons" href="{filecp_link}" title="{lang.GO_FILECP}">{lang.GO_FILECP}</a></div>
+<div class="left_button"><input type="submit" name="filecp_link" value="{lang.GO_FILECP}" /></div>
+
 <!--  # end go button filecp  -->
 </IF>
  

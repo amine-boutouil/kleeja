@@ -208,20 +208,22 @@ case 'data' :
 		$config_style		= $SQL->escape($_POST['style']);
 		$config_urls_type	= in_array($_POST['urls_type'], array('id', 'filename', 'direct')) ? $_POST['urls_type'] : 'id';
 		$clean_name			= $usrcp->cleanusername($SQL->escape($user_name));
-		
-		
-		 /// ok .. will get sqls now ..
-		include ('res/install_sqls.php');
-		 
-		$err = 0;
-		$dots = 0;
+
+		 /// ok .. we will get sqls now ..
+		include 'includes/install_sqls.php';
+
+		$err = $dots = 0;
 		$errors = '';
-		//do important before
+
+		//do important alter before
 		$SQL->query($install_sqls['ALTER_DATABASE_UTF']);
 		
 		foreach($install_sqls as $name=>$sql_content)
 		{
-			if($name == 'DROP_TABLES' || $name == 'ALTER_DATABASE_UTF') continue;
+			if($name == 'DROP_TABLES' || $name == 'ALTER_DATABASE_UTF')
+			{
+				continue;
+			}
 
 			$is = $SQL->query($sql_content);
 

@@ -14,7 +14,7 @@
 define('MIN_PHP_VERSION', '4.3.0');
 define('MIN_MYSQL_VERSION', '4.1.2');
 //version of latest changes at db
-define ('DB_VERSION' , '7');
+define ('LAST_DB_VERSION' , '7');
 //set no errors
 define('MYSQL_NO_ERRORS', true);
 

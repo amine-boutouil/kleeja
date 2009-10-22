@@ -1,0 +1,26 @@
+<br /><br />
+
+{{if($GLOBALS['complete_upate']):}}
+
+	<span style="color:green;">{{echo $lang['INST_UPDATE_IS_FINISH']}}</span>
+	<br />
+	<img src="style/images/home.gif" alt="home" />&nbsp;<a href="../index.php">{{echo $lang['INDEX']}}</a>
+	<br /><br />
+	<img src="style/images/adm.gif" alt="admin" />&nbsp;<a href="../admin/">{{echo $lang['ADMINCP']}}</a>
+	<br /><br />
+	{{echo $lang['INST_KLEEJADEVELOPERS']}}
+	<br /><br />
+	<a href="http://www.kleeja.com">www.kleeja.com</a><br /><br />
+
+{{else:}}
+
+	<span style="color:orange;"><a href="./update.php?step=action_file&amp;{{echo getlang(1)}}">{{echo $lang['INST_UPDATE_SELECT_ONTHER_UPDATES']}}</span><br />
+	<br /><br />
+	<img src="style/images/home.gif" alt="home" />&nbsp;<a href="../index.php">{{echo $lang['INDEX']}}</a>
+	<br />
+	<img src="style/images/adm.gif" alt="admin" />&nbsp;<a href="../admin/">{{echo $lang['ADMINCP']}}</a>
+	<br /><br />
+	<br />
+	<a href="http://www.kleeja.com">www.kleeja.com</a>
+	<br /><br />	
+{{endif;}}

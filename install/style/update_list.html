@@ -1,0 +1,28 @@
+
+	<br />
+	<br />
+
+		{{$lang['INST_CHOOSE_UPDATE_FILE']}}
+		<br />
+		{{if (sizeof($upfiles)):}}
+		<form  action="{{echo $_SERVER['PHP_SELF'] . '?step=action_file&amp;' . getlang(1)}}" method="post">
+			<select name="action_file_do" style="width: 352px">
+			{{foreach($upfiles as $k=>$v):}}
+				<option value="{{echo $v}}">{{echo $v}}</option>
+			{{endforeach}}
+			</select>
+			<br />
+			<br />
+			<input name="submitlfile" type="submit" value="{{echo $lang['INST_SUBMIT']}}" />
+			<br /><br /><br />
+		</form>
+		{{else:}}
+			<br /><br />
+			<span style="color:green;">
+			<strong>{{echo $lang['INST_UPDATE_CUR_VER_IS_UP']}}
+			<br /> 
+			[ {{echo array_search($GLOBALS['config']['db_version'], $GLOBALS['order_update_files'])}} :: {{echo $GLOBALS['config']['db_version']}} ]
+			</strong>
+			</span>
+			<br /><br /><br />
+		{{endif;}}

@@ -138,7 +138,7 @@ CREATE TABLE `{$dbprefix}exts` (
   `user_size` int(10) NOT NULL,
   `user_allow` tinyint(1) NOT NULL default '0',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=67 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=68 ;
 ";
 
 $install_sqls['online'] = "
@@ -248,7 +248,7 @@ $install_sqls['config_insert35'] = "INSERT INTO `{$dbprefix}config` (`name`, `va
 $install_sqls['config_insert36'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('thmb_dims', '100*100', '', 0)";
 $install_sqls['config_insert37'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`, `type`) VALUES ('style', 'default', '', 0, '')";
 $install_sqls['config_insert38'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('new_version', '', '', 0)";
-$install_sqls['config_insert39'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('db_version', '" .  DB_VERSION . "', '', 0)";
+$install_sqls['config_insert39'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('db_version', '" .  LAST_DB_VERSION . "', '', 0)";
 $install_sqls['config_insert40'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('last_online_time_update', '" .  time() . "', '', 0)";
 $install_sqls['config_insert41'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('klj_clean_files_from', '0', '', 0)";
 $install_sqls['config_insert42'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('style_depend_on', '', '', 0)";

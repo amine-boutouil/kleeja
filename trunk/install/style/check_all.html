@@ -1,0 +1,63 @@
+<fieldset class="home">
+
+{{if(!isset($GLOBALS['dbname']) || !isset($GLOBALS['dbuser'])): $GLOBALS['submit_disabled'] = true;}}
+<span style="color:red;">
+	{{echo $lang['INST_CHANG_CONFIG']}}
+</span>
+<br />
+{{endif}}
+
+
+{{if(!isset($GLOBALS['no_connection'])): $GLOBALS['submit_disabled'] = true;}}
+<span style="color:red;">
+	{{echo $lang['INST_CONNCET_ERR']}}
+</span>
+<br />
+{{endif}}
+
+{{if(!isset($GLOBALS['mysql_ver'])): $GLOBALS['submit_disabled'] = true;}}
+<span style="color:red;">
+	{{echo sprintf($lang['INST_MYSQL_LESSMIN'], MIN_MYSQL_VERSION, $GLOBALS['mysql_ver'])}}
+</span>
+<br />
+{{endif}}
+
+{{if(!is_writable($_path . 'cache')) : $GLOBALS['submit_disabled'] = true;}}
+<span style="color:red;">
+	[ cache ] : 
+	{{echo $lang['INST_NO_WRTABLE']}}
+</span>
+<br />
+{{endif}}
+
+{{if(!is_writable($_path . 'uploads')) : $GLOBALS['submit_disabled'] = true;}}
+<span style="color:red;">
+	[ uploads ] : 
+	{{echo $lang['INST_NO_WRTABLE']}}
+</span>
+<br />
+{{endif}}
+
+
+{{if(!is_writable($_path . 'uploads/thumbs')) : $GLOBALS['submit_disabled'] = true;}}
+<span style="color:red;">
+	[ uploads/thumbs ] : 
+	{{echo $lang['INST_NO_WRTABLE']}}
+</span>
+<br />
+{{endif}}
+
+{{if(!$GLOBALS['submit_disabled']):}}
+<br />
+<img src="style/images/good.png" alt="good" />
+<br />
+<span style="color:green;"><b>[ {{echo $lang['INST_GOOD_GO']}} ]</b></span>
+<br />
+<br />
+
+<form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=data&amp;' . getlang(1)}}">
+	<input name="agres" type="submit" value="{{echo $lang['INST_SUBMIT']}}" />
+</form>
+{{endif}}
+
+</fieldset>

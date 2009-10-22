@@ -13,15 +13,18 @@
 @error_reporting(E_ALL ^ E_NOTICE);
 
 
-/*
-include important files
+/**
+* include important files
 */
-
-define ( 'IN_COMMON' , true);
+define('IN_COMMON', true);
 $_path = "../";
-define('PATH', '../');
-(file_exists($_path . 'config.php')) ? include_once ($_path . 'config.php') : null;
+if(file_exists($_path . 'config.php'))
+{
+	include_once ($_path . 'config.php');
+}
+
 include_once ($_path . 'includes/functions.php');
+
 switch ($db_type)
 {
 	case 'mysqli':
@@ -30,18 +33,13 @@ switch ($db_type)
 	default:
 		include_once ($_path . 'includes/mysql.php');
 }
-include_once ('func_inst.php');
-
-//
-//version of latest changes at db
-//
-define ('DB_VERSION' , '7');
+include_once ('includes/functions_install.php');
 
 
 //
-//kleeja must be safe ..
+// Kleeja must be safe ..
 //
-if(!empty($dbuser) && !empty($dbname) && !(isset($_GET['step']) && $_GET['step'] == 'end'))
+if(!empty($dbuser) && !empty($dbname) && !(isset($_GET['step']) && in_array($_GET['step'], array('end', 'wizard')))
 {
 	$d = inst_get_config('language');
 	if(!empty($d))
@@ -51,17 +49,16 @@ if(!empty($dbuser) && !empty($dbname) && !(isset($_GET['step']) && $_GET['step']
 	}
 }
 
-
-/*
-//echo header
+/**
+* Print header
 */
 if(isset($_POST['dbsubmit']) && !is_writable($_path))
 {
-	// ...
+	// soon
 }
 else
 {
-	echo $header_inst;	
+	echo gettpl('header.html');
 }
 
 
@@ -79,114 +76,46 @@ default:
 case 'license':
 
 	$contentof_license = @file_get_contents('../docs/license.txt');
-	
+
 	if (strlen($contentof_license) < 3)
 	{
-		$contentof_license = "license.txt is empty or not found, got to kleeja.com and read the license content from there ...";
+		$contentof_license = "license.txt is empty or not found, got to Kleeja.com and read the license content from there ...";
 	}
 
-?>
-
-	<form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>?step=f&<?php echo getlang(1);?>">
-	<br />
-	<div class="home" name="license" style="width: 456px; height: 320px;direction:ltr;overflow: auto;margin:0 auto">
-	<?php echo nl2br($contentof_license);?>
-	</div>
-
-	<br />
-	<?php echo $lang['INST_AGR_LICENSE'];?> <input name="agrec" id="agrec" type="checkbox" onclick="javascript:agree();"  /><br />
-	<input name="agres" id="agres" type="submit" value="<?php echo $lang['INST_SUBMIT'];?>" disabled="disabled"/>
-
-	</form>
-<?php
+	echo gettpl('license.html');
 
 break;
+
 case 'f':
-	
+
 	$check_ok = true;
-?>
-
-	<fieldset class="home" dir="<?php echo $lang['DIR'];?>" style="text-align:<?php echo  $lang['DIR'] == 'rtl' ? 'right' : 'left';?>;margin: 8px;">
-	<strong><?php echo $lang['FUNCTIONS_CHECK'];?></strong> : <br />
-	<ul class="ul_check">
-	<?php if(function_exists('unlink')):?>
-		<li style="color:green"><?php echo sprintf($lang['FUNCTION_IS_EXISTS'], 'unlink');?></li>
-	<?php else: $check_ok = false; ?>
-		<li style="color:red"><?php echo sprintf($lang['FUNCTION_IS_NOT_EXISTS'], 'unlink');?></li>
-	<?php endif;?>
-
-	[ <?php echo $lang['FUNCTION_DISC_UNLINK'];?> ]<br />
+	$advices = $register_globals = $get_magic_quotes_gpc = $iconv = false;
 	
-	<?php if(function_exists('imagecreatetruecolor')):?>
-		<li style="color:green"><?php echo sprintf($lang['FUNCTION_IS_EXISTS'], 'imagecreatetruecolor');?></li>
-	<?php else: $check_ok = false;?>
-		<li style="color:red"><?php echo sprintf($lang['FUNCTION_IS_NOT_EXISTS'], 'imagecreatetruecolor');?></li>
-	<?php endif;?>
-	
-	 [ <?php echo $lang['FUNCTION_DISC_GD'];?> ]<br />
-	
-	<?php if(function_exists('fopen')):?>
-		<li style="color:green"><?php echo sprintf($lang['FUNCTION_IS_EXISTS'], 'fopen');?></li>
-	<?php else: $check_ok = false;?>
-		<li style="color:red"><?php echo sprintf($lang['FUNCTION_IS_NOT_EXISTS'], 'fopen');?></li>
-	<?php endif;?>
-
-	 [ <?php echo $lang['FUNCTION_DISC_FOPEN'];?> ]<br />
-	
-	<?php if(function_exists('move_uploaded_file')):?>
-		<li style="color:green"><?php echo sprintf($lang['FUNCTION_IS_EXISTS'], 'move_uploaded_file');?></li>
-	<?php else: $check_ok = false;?>
-		<li style="color:red"><?php echo sprintf($lang['FUNCTION_IS_NOT_EXISTS'], 'move_uploaded_file');?></li>
-	<?php endif;?>
-	
-	[ <?php echo $lang['FUNCTION_DISC_MUF'];?> ]<br />
-	
-<?php
-	//advies
-	$advices = ''; 
 	if (@ini_get('register_globals') == '1' || strtolower(@ini_get('register_globals')) == 'on')
 	{
-		$advices .= '<li>' . $lang['ADVICES_REGISTER_GLOBALS'] . '</li>'; 
+		$register_globals = true;
 	}
 	if( (function_exists("get_magic_quotes_gpc") && get_magic_quotes_gpc()) || 
 	(@ini_get('magic_quotes_sybase') && (strtolower(@ini_get('magic_quotes_sybase')) != "off")) )
 	{
-		$advices .= '<li>' . $lang['ADVICES_MAGIC_QUOTES'] . '</li>'; 
+		$get_magic_quotes_gpc = true;
 	}
 	if (!function_exists('iconv'))
 	{
-		$advices .= '<li>' . $lang['ADVICES_ICONV'] . '</li>'; 
+		$iconv = true;
 	}
-?>
 
-	<?php if($advices != ''):?>
-		</ul>
-		<br />
-		<strong><?php echo $lang['ADVICES_CHECK'];?></strong> : 
-		<br />
-		<ul  class="ul_check2">
-		<?php echo $advices;?>
-	<?php endif;?>
-	
-	</ul>
-	</fieldset>
-	<br />
-	
-	<?php if($check_ok):?>
-		<form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>?step=c&<?php echo getlang(1);?>">
-			<input name="agres" type="submit" value="<?php echo $lang['INST_SUBMIT'];?>"  />
-		</form>
-	<?php else:?>
-		<form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>?step=f&<?php echo getlang(1);?>">
-		<input name="agres" type="submit" value="<?php echo $lang['RE_CHECK'];?>"  />
-		</form>
-	<?php endif;?>
+	if($register_globals || $get_magic_quotes_gpc || $iconv)
+	{
+		$advices = true;
+	}
 
-<?php
+	echo gettpl('check.html');
+
 break;
 case 'c':
 	
-	// SUBMIT
+	// after submit, generate config file
 	if(isset($_POST['dbsubmit']))
 	{
 		//lets do it
@@ -198,148 +127,47 @@ case 'c':
 						$_POST['db_name'],
 						$_POST['db_prefix']
 						);
-
 	}
-	
-	$xs	=!file_exists('../config.php') ? false : true;
-	$writeable_path = is_writable($_path) ? true : false;
-	
-	if(!$xs):
-	?>
-		 <br />
-		 <form method="post"  action="<?php echo $_SERVER['PHP_SELF'];?>?step=c&<?php echo getlang(1);?>"  onsubmit="javascript:return formCheck(this, Array(\'db_server\',\'db_user\' ,\'db_name\'));">
 
-			<fieldset class="home" id="Group1" dir="<?php echo $lang['DIR'];?>">
-			<b><?php echo $writeable_path ? $lang['DB_INFO'] : $lang['DB_INFO_NW'];?></b>
-			<br />
-			<br />
-			<table style="width: 100%">
-				<tr>
-					<td><?php echo $lang['DB_TYPE'];?></td>
-					<td>
-					<select name="db_type">
-						<?php if (function_exists('mysqli_connect')):?>
-							<option value="mysqli"><?php echo $lang['DB_TYPE_MYSQLI'];?></option>
-						<?php endif;?>
-						<option value="mysql"><?php echo $lang['DB_TYPE_MYSQL'];?></option>
-					</select>
-					</td>
-				</tr>
-				<tr>
-					<td><?php echo $lang['DB_SERVER'];?></td>
-					<td><input name="db_server" type="text" value="localhost" style="width: 256px" />
-					</td>
-				</tr>
-				<tr>
-					<td><?php echo $lang['DB_NAME'];?></td>
-					<td><input name="db_name" type="text" style="width: 256px" />
-					</td>
-				</tr> 
-				<tr>
-					<td><?php echo $lang['DB_USER'];?></td>
-					<td><input name="db_user" type="text" style="width: 256px" />
-					</td>
-				</tr>
-				<tr>
-					<td><?php echo $lang['DB_PASSWORD'];?></td>
-					<td><input name="db_pass" type="text" style="width: 256px" />
-					</td>
-				</tr>  
-				<tr>
-					<td><?php echo $lang['DB_PREFIX'];?></td>
-					<td><input name="db_prefix" type="text" value="klj_" style="width: 256px" />
-					</td>
-				</tr>       
-			</table>
-			<br />
-			</fieldset>
-			<input name="dbsubmit" type="submit" value="<?php echo $writeable_path ? $lang['INST_SUBMIT'] : $lang['INST_EXPORT'];?>" />
-		</form>
-		<br />
-		
-			
-		<?php if(!$writeable_path):?>
-			<br />
-			<hr/>
-			<br />
-			<form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>?step=c&<?php echo getlang(1);?>">
-			<input  type="submit" value="<?php echo $lang['INST_SUBMIT_CONFIGOK'];?>" />
-			</form>
-		<?php endif;?>
-	
-	<?php else:?>
-		<fieldset class="home"><br /><span style="color:green;"><strong><?php echo $lang['CONFIG_EXISTS'];?></strong><br /><br />
-		<form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>?step=check&<?php echo getlang(1);?>">
-		<input name="agres" type="submit" value="<?php echo $lang['INST_SUBMIT'];?>" />
-		</form></fieldset>
-	<?php endif;?>
+	$no_config		= !file_exists($_path . 'config.php') ? false : true;
+	$writeable_path	= is_writable($_path) ? true : false;
 
+	echo gettpl('configs.html');
 
-<?php
 break;
+
 case 'check':
 
-	$submit_wh = $texterr = '';
+	$submit_disabled = $no_connection = $mysql_ver = false;
 
 	//config,php
-	if (!isset($dbname) || !isset($dbuser))
-	{
-		$texterr = '<span style="color:red;">' . $lang['INST_CHANG_CONFIG'] . '</span><br />';
-		$submit_wh = 'disabled="disabled"';
-	}
-	else
+	if (isset($dbname) && isset($dbuser))
 	{
 		//connect .. for check
 		$SQL = new SSQL($dbserver, $dbuser, $dbpass, $dbname);
 
 		if (!$SQL->connect_id)
 		{
-			$texterr .= '<span style="color:red;">' . $lang['INST_CONNCET_ERR'] . '</span><br />';
+			$no_connection = true;
 		}
 		else
 		{
 			if (version_compare($SQL->mysql_version(), MIN_MYSQL_VERSION, '<'))
 			{
-				$texterr .= '<span style="color:red;">' . sprintf($lang['INST_MYSQL_LESSMIN'], MIN_MYSQL_VERSION, $SQL->mysql_version()) . '</span><br />';
+				$mysql_ver = $SQL->mysql_version();
 			}
 		}
 	}
-		
+
 	//try to chmod them
 	if(function_exists('chmod'))
 	{	
-		@chmod('../cache', 0777);
-		@chmod('../uploads', 0777);
-		@chmod('../uploads/thumbs', 0777);
-	}
-		
-	if (!is_writable('../cache')) 
-			$texterr .= '<span style="color:red;">[cache]: ' . $lang['INST_NO_WRTABLE'] . '</span><br />';
-	
-	
-	if (!is_writable('../uploads'))
-			$texterr .= '<span style="color:red;">[uploads]: ' . $lang['INST_NO_WRTABLE'] . '</span><br />';
-	
-	
-	if (!is_writable('../uploads/thumbs'))
-			$texterr .= '<span style="color:red;">[uploads/thumbs]: ' . $lang['INST_NO_WRTABLE'] . '</span><br />';
-	
-	
-	echo '<fieldset class="home">';
-	if ($texterr !='')
-	{
-		echo '<br /><img src="img/bad.png" alt="bad." /> <br />' . $texterr;
-		$submit_wh = 'disabled="disabled"';
+		@chmod($_path . 'cache', 0777);
+		@chmod($_path . 'uploads', 0777);
+		@chmod($_path . 'uploads/thumbs', 0777);
 	}
 
-	if($submit_wh == '')
-	{
-		echo '<br /><img src="img/good.png" alt="good" /> <br /><span style="color:green;"><b>[ ' . $lang['INST_GOOD_GO'] . ' ]</b></span><br /><br />';
-	}
-
-	echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=data&'.getlang(1) . '">
-	<input name="agres" type="submit" value="' . $lang['INST_SUBMIT'] . '" ' . $submit_wh . ' />
-	</form></fieldset>';
+	echo gettpl('check_all.html');
 
 break;
 
@@ -456,106 +284,30 @@ case 'data' :
 	}
 	else
 	{
-
-		$urlsite =  "http://" . $_SERVER['HTTP_HOST'] . str_replace('install', '', dirname($_SERVER['PHP_SELF']));
-
-		echo '
-		<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=data&' . getlang(1) . '"  onsubmit="javascript:return formCheck(this, Array(\'sitename\',\'siteurl\',\'sitemail\' ,\'username\', \'password\',\'email\' ));">
-		<fieldset class="home" id="Group1" dir="' . $lang['DIR'] . '">
-		<legend style="width: 73px"> [ <strong>' . $lang['INST_SITE_INFO'] . '</strong> ]</legend>
-		<table style="width: 100%">
-			<tr>
-				<td>' . $lang['SITENAME'] . '</td>
-				<td><input name="sitename" type="text" style="width: 256px" /></td>
-			</tr>
-			<tr>
-				<td>' . $lang['SITEURL'] . '</td>
-				<td><input name="siteurl" type="text" value="' . $urlsite . '" style="width: 256px" /></td>
-			</tr>
-			<tr>
-				<td>' . $lang['SITEMAIL'] . '</td>
-				<td><input name="sitemail" id="sitemail" type="text" style="width: 256px" onchange="return w_email(this.name);" /></td>
-			</tr>       
-		</table>
-		</fieldset>
-
-		<br />
-
-		<fieldset class="home" id="Group2" dir="' . $lang['DIR'] . '">
-		<legend style="width: 73px"> [ <strong>' . $lang['INST_ADMIN_INFO'] . '</strong> ]</legend>
-		<table style="width: 100%">
-			<tr>
-				<td>' . $lang['USERNAME'] . '</td>
-				<td><input name="username" type="text" style="width: 256px" /></td>
-			</tr>
-			<tr>
-				<td>' . $lang['PASSWORD'] . '</td>
-				<td><input name="password" id="password" type="text" style="width: 173px"  onkeyup="return passwordChanged();"/> <span id="strength"><img src="img/p1.gif" alt="! .." /></span></td>
-			</tr>
-			<tr>
-				<td>' . $lang['PASSWORD2'] . '</td>
-				<td><input name="password2" id="password2" type="text" style="width: 253px" /></td>
-			</tr>
-			<tr>
-				<td><strong>' . $lang['EMAIL'] . '</strong></td>
-				<td><input name="email" id="email" type="text" style="width: 256px"  onchange="return w_email(this.name);" /></td>
-			</tr>
-		</table>
-		</fieldset>
-		
-
-		<fieldset class="home" id="Group2" dir="' . $lang['DIR'] . '">
-		<legend style="width: 73px"> [ <strong>' . $lang['INST_OTHER_INFO'] . '</strong> ]</legend>
-		<table style="width: 100%">
-			<tr>
-				<td><strong>' . $lang['URLS_TYPES'] . '</strong></td>
-				<td>
-					<script type="text/javascript">
-					//<![CDATA[
-						var explains = new Array(3);
-						explains["id"] = "' . $urlsite . 'download.php?id=123";
-						explains["filename"] =  "' . $urlsite . 'download.php?filename=12542219930.gif";
-						explains["direct"] = "' . $urlsite . 'uploads/12542219930.gif";
-					//]]>
-					</script>
-					<select name="urls_type" onChange="document.getElementById(\'like_this\').innerHTML=explains[this.options[this.selectedIndex].value]" >
-						<option value="id">' . $lang['DEFAULT'] . '</option>
-						<option value="filename">' . $lang['FILENAME_URL'] . '</option>
-						<option value="direct">' . $lang['DIRECT_URL'] . '</option>
-					</select>
-					<br />
-					<div>
-					' . $lang['LIKE_THIS'] . ' : <span id="like_this">' . $urlsite . 'download.php?id=123</span>
-					</div>
-				</td>
-			</tr>
-		</table>
-		</fieldset>
-
-		<input name="datasubmit" type="submit" value="' . $lang['INST_SUBMIT'] . '" />
-		</form>';
-	}#else
-
+		$urlsite =  'http://' . $_SERVER['HTTP_HOST'] . str_replace('install', '', dirname($_SERVER['PHP_SELF']));
+		echo gettpl('data.html');
+	}
 
 break;
+
 case 'end' :
-		echo '<fieldset class="home"><img src="img/wink.png" alt="congratulation" /><br /><br />';
-		echo '<span style="color:blue;">' . $lang['INST_FINISH_SQL'] . '</span><br /><br />';
-		echo '<img src="img/wz.gif" alt="home" />&nbsp;<a href="./wizard.php">' . $lang['WZ_TITLE'] . '</a><br /><br />';
-		echo '<img src="img/home.gif" alt="home" />&nbsp;<a href="../index.php">' . $lang['INDEX'] . '</a><br /><br />';
-		echo '<img src="img/adm.gif" alt="admin" />&nbsp;<a href="../admin/">' . $lang['ADMINCP'] . '</a><br /><br />';
-		echo '' . $lang['INST_KLEEJADEVELOPERS'] . '<br /><br />';
-		echo '<a href="http://www.kleeja.com">www.kleeja.com</a><br /><br /></fieldset>';
+
+		echo gettpl('end.html');
 		//for safe ..
 		//@rename("install.php", "install.lock");
+
 break;
-}#endOFswitch
+
+case 'wizard' :
+
+		echo gettpl('wizard.html');
+
+break;
+}
 
 
-
-/*
-//echo footer
+/**
+* print footer
 */
-echo $footer_inst;
-
+echo gettpl('footer.html');
 

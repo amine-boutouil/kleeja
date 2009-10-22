@@ -1,0 +1,31 @@
+
+{{if(!$GLOBALS['php_ver']):}}
+<fieldset class="home">
+	<span style="color:red;">
+		{{echo sprintf($lang['INST_PHP_LESSMIN'], MIN_PHP_VERSION, PHP_VERSION)}}
+	</span>
+<br />
+</fieldset>
+
+{{else:}}
+
+<fieldset class="home">
+
+<span style="color:green;">{{echo $lang['INST_CHOOSE_INSTALLER']}}</span>
+
+<br /><br /><br />
+
+{{if($GLOBALS['install_or_no']):}}
+<a href="./install.php{{echo getlang(1)}}"><img src="style/images/Installer.png" alt="installer" /><br /> {{echo $lang['INST_INSTALL_CLEAN_VER']}}</a>
+<br /><br />
+{{endif;}}
+
+<a href="./update.php?{{echo getlang(1)}}"><img src="style/images/updater.png" alt="updater" /> <br /> {{echo $lang['INST_UPDATE_P_VER']}} </a>
+<br /><br /><br />
+
+<a href="http://www.kleeja.com"><span style="color:black;">www.kleeja.com</span></a>
+
+</fieldset>
+
+{{endif;}}
+

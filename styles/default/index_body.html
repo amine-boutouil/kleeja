@@ -23,23 +23,6 @@
 
 <!-- START  FOR UPLOAD BOXES -->
 <form id="uploader" action="{action}" method="post" enctype="multipart/form-data"<IS_BROWSER!="ie6"> onsubmit="form_submit();"</IS_BROWSER>>
-<IF NAME="config.safe_code">
-<!-- start  safe code  -->
-<div class="clr"></div>
-<div style="width:76%">			
-<div class="safe_code">
-<span>{lang.VERTY_CODE}</span>
-<br /><br />
-<img style="vertical-align:middle;" id="kleeja_img_captcha" src="{captcha_file_path}" alt="{lang.REFRESH_CAPTCHA}" title="{lang.REFRESH_CAPTCHA}" onclick="javascript:update_kleeja_captcha('{captcha_file_path}', 'kleeja_code_answer');" />
-<input type="text" name="kleeja_code_answer" id="kleeja_code_answer" />
-<br /><br />
-<strong class="explain">{lang.NOTE_CODE}</strong>
-<br />
-</div>
-</div>
-<div class="clr"></div>
-<!-- ## End  safe code  -->	  
-</IF>
 <!-- start uplaod box  -->
 <div class="tabber">
 
@@ -57,7 +40,7 @@
 	<span class="zl"><a title="{lang.ADD_UPLAD_B}" onclick="javascript:minus(1);"><img src="{STYLE_PATH}images/zl.gif" width="20" height="20" alt="{lang.ADD_UPLAD_B}" style="vertical-align:middle;" /></a></span>
 	<br />
 	<br />
-	<input id="checkr" type="checkbox" onclick="accept_terms('submitr','checkr');" /><strong class="agree">{lang.AGREE_RULES}	<span class="bn_up"><input class="buttons" type="submit" id="submitr" name="submitr" value="{lang.DOWNLOAD_F}"  disabled="disabled" /></span></strong>
+	<input id="checkr" type="checkbox" onclick="accept_terms('submitr','checkr');" /><strong class="agree">{lang.AGREE_RULES}	<span class="bn_up"><input type="submit" id="submitr" name="submitr" value="{lang.DOWNLOAD_F}"  disabled="disabled" /></span></strong>
 	<br />
 <!-- # end uplaod normal  -->
 <IF NAME="config.www_url">
@@ -68,7 +51,7 @@
 <!-- start uplaod URL -->   
 <div class="bg tabbertab" title="{lang.DOWNLOAD_T}" id="texttype">
 <LOOP NAME=FILES_NUM_LOOP>
-	<input class="url input_field" type="text" name="file_{{i}}_" id="fileu_{{i}}_" size="60" value="{lang.PAST_URL_HERE}" onclick="this.value=''" style="display:{{show}}" /><br id="bru_{{i}}_" style="display:{{show}}" />
+	<input class="url" type="text" name="file_{{i}}_" id="fileu_{{i}}_" size="60" value="{lang.PAST_URL_HERE}" onclick="this.value=''" style="display:{{show}}" /><br id="bru_{{i}}_" style="display:{{show}}" />
 </LOOP>
     <br />
 	<div id="upload_f_forum"></div>
@@ -77,7 +60,7 @@
 	<span class="zl"><a title="{lang.ADD_UPLAD_B}" onclick="javascript:minus(2);"><img src="{STYLE_PATH}images/zl.gif" width="20" height="20" alt="{lang.ADD_UPLAD_B}" style="vertical-align:middle;" /></a></span>
     <br />
 	<br />
-    <input id="checkr2" type="checkbox" onclick="accept_terms('submittxt','checkr2');" /><strong class="agree">{lang.AGREE_RULES} <span class="bn_up"> <input class="buttons" type="submit" id="submittxt" name="submittxt" value="{lang.DOWNLOAD_T}" disabled="disabled" /></span></strong>
+    <input id="checkr2" type="checkbox" onclick="accept_terms('submittxt','checkr2');" /><strong class="agree">{lang.AGREE_RULES} <span class="bn_up"> <input type="submit" id="submittxt" name="submittxt" value="{lang.DOWNLOAD_T}" disabled="disabled" /></span></strong>
     <br />
 </div>
 <!-- # END uplaod URL -->  	
@@ -85,7 +68,23 @@
 
 </div>
 <!-- # end uplaod boxs  -->
-
+<IF NAME="config.safe_code">
+<!-- start  safe code  -->
+<div class="clr"></div><br />
+<div style="width:76%">			
+<div class="safe_code">
+<span>{lang.VERTY_CODE}</span>
+<br /><br />
+<img style="vertical-align:middle;" id="kleeja_img_captcha" src="{captcha_file_path}" alt="{lang.REFRESH_CAPTCHA}" title="{lang.REFRESH_CAPTCHA}" onclick="javascript:update_kleeja_captcha('{captcha_file_path}', 'kleeja_code_answer');" />
+<input type="text" name="kleeja_code_answer" id="kleeja_code_answer" />
+<br /><br />
+<strong class="explain">{lang.NOTE_CODE}</strong>
+<br />
+</div>
+</div>
+<div class="clr"></div><br />
+<!-- ## End  safe code  -->	  
+</IF>
 </form>
 <!-- # END  FOR UPLOAD BOXES -->
 
@@ -115,6 +114,6 @@
 
 </div>
 <!-- # End background body  -->
-
+<div class="clr"></div>
 </div>
 <!-- ## End index template  -->

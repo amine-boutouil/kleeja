@@ -1,0 +1,16 @@
+	<br />		
+		<div class="centery">
+			<fieldset class="home">
+				<img src="style/images/map.png" style="border:0">
+				<br />
+				<form  action="{{echo $_SERVER['PHP_SELF'] . '?step=language&amp;' . getlang(1)}}" method="post">
+					<select name="lang" style="width: 352px">
+					{{if($dh = @opendir($_path . 'lang')): while (($file = readdir($dh)) !== false): if(strpos($file, '.') === false && $file != '..' && $file != '.'):}}
+						<option value="{{echo $file}}" {{echo $file=='en'?'selected="selected"':''}}>{{echo $file}}</option>
+					{{endif;endwhile;@closedir($dh);endif;}}
+					</select>
+					<br /><br /><br /><input name="submitlang" type="submit" value=" [   >>  ] " />
+					<br /><br /><br />
+				</form>
+			</fieldset>
+		</div>

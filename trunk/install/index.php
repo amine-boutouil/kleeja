@@ -15,11 +15,15 @@
 /**
 * include important files
 */
-
-define ( 'IN_COMMON' , true);
+define('IN_COMMON', true);
 $_path = "../";
-(file_exists($_path . 'config.php')) ? include_once ($_path . 'config.php') : null;
+if(file_exists($_path . 'config.php'))
+{
+	include_once ($_path . 'config.php');
+}
+
 include_once ($_path . 'includes/functions.php');
+
 switch ($db_type)
 {
 	case 'mysqli':
@@ -28,16 +32,16 @@ switch ($db_type)
 	default:
 		include_once ($_path . 'includes/mysql.php');
 }
-include_once ('func_inst.php');
+include_once ('includes/functions_install.php');
 
 
 
-/*
-//print header
+/**
+* print header
 */
 if (!isset($_POST['lang']))
 {
-	echo $header_inst;
+	echo gettpl('header.html');
 }
 
 if(!isset($_GET['step']))
@@ -45,106 +49,54 @@ if(!isset($_GET['step']))
 	$_GET['step'] = 'language';
 }
 
-/*
-//nvigate ..
+/**
+* Navigation ..
 */
 switch ($_GET['step']) 
 {
 default:
 case 'language':
 
-	if(isset($_POST['lang']))
+	if(isset($_POST['lang']) && !empty($_POST['lang']))
 	{
-		if (!empty($_POST['lang']))
-		{
-				//go to .. 2step
-				echo '<meta http-equiv="refresh" content="0;url=' . $_SERVER['PHP_SELF'] . '?step=choose&lang=' . $_POST['lang'] . '">';
-		}
-	
+		echo '<meta http-equiv="refresh" content="0;url=' . $_SERVER['PHP_SELF'] . '?step=choose&lang=' . htmlspecialchars($_POST['lang']) . '">';
+		exit;
 	}
-	//no language begin
-	else
-	{
-		//get language from LANGUAGE folder
-		$path = "../lang";
-		$lngfiles = '';
-		if ($dh = @opendir($path))
-		{
-			while (($file = readdir($dh)) !== false)
-			{
-				if(strpos($file, '.') === false && $file != '..' && $file != '.')
-				{
-					$lngfiles .= '<option value="' . $file . '"' . ($file == 'en' ? ' selected="selected"' : '') . '>' . $file . '</option>';
-				}
-			}
-			
-			@closedir($dh);
-		}
 
-
-		// show  language list ..
-		echo '<br />		
-		<div class="centery">
-			<fieldset class="home">
-				<img src="img/map.png" style="border:0" alt="al-Idrisi Map">
-				<br />
-				<form  action="' . $_SERVER['PHP_SELF'] . '?step=language&' . getlang(1) . '" method="post">
-					<select name="lang" style="width: 352px">' . $lngfiles . '</select>
-					<br /><br /><br /><input name="submitlang" type="submit" value=" [  Next >>  ] " /><br /><br /><br />
-				</form>
-			</fieldset>
-		</div>';
-
-	}
-	//no language end
-
-
+	echo gettpl('lang.html');
 
 break;
 case 'choose' :
-		
-		
+
+	$install_or_no	= $php_ver = true;
+
 	//check version of PHP 
 	if (!function_exists('version_compare') || version_compare(PHP_VERSION, MIN_PHP_VERSION, '<'))
 	{
-		echo '<fieldset class="home"><span style="color:red;">' . sprintf($lang['INST_PHP_LESSMIN'], MIN_PHP_VERSION, PHP_VERSION) . '</span><br /></fieldset>';
+		$php_ver = false;
 	}
-	else
+
+	if(file_exists($_path . 'config.php'))
 	{
-		echo '<fieldset class="home"><span style="color:green;">' . $lang['INST_CHOOSE_INSTALLER'] . '</span><br /><br /><br />';
-		
-		$install_or_no = true;
-		if(file_exists($_path . 'config.php'))
+		include_once $_path . 'config.php';
+		if(!empty($dbuser) && !empty($dbname))
 		{
-			include_once $_path . 'config.php';
-			if(!empty($dbuser) && !empty($dbname))
+			$d = inst_get_config('language');
+			if(!empty($d))
 			{
-				$d = inst_get_config('language');
-				if(!empty($d))
-				{
-					$install_or_no = false;
-				}
+				$install_or_no = false;
 			}
 		}
-		
-		
-		if($install_or_no)
-		{
-			echo '<a href="./install.php?' . getlang(1) . '"><img src="img/Installer.png" alt="installer" /><br />  ' . $lang['INST_INSTALL_CLEAN_VER'] . ' </a><br /><br />';
-		}
-		
-		echo '<a href="./update.php?' . getlang(1) . '"><img src="img/updater.png" alt="updater" /> <br /> ' . $lang['INST_UPDATE_P_VER'] . ' </a><br /><br /><br />';
-
-		echo '<a href="http://www.kleeja.com"><span style="color:black;">www.kleeja.com</span></a></fieldset>';
 	}
+
+	echo gettpl('choose.html');
+	
 break;
-
-}#endOFswitch
-
+}
 
 
-/*
-//print footer
+/**
+* print footer
 */
-echo $footer_inst;
+gettpl('footer.html');
 

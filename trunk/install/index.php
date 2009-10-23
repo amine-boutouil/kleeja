@@ -57,13 +57,29 @@ switch ($_GET['step'])
 default:
 case 'language':
 
-	if(isset($_POST['lang']) && !empty($_POST['lang']))
+	if(isset($_GET['ln']) && !empty($_GET['ln']))
 	{
-		echo '<meta http-equiv="refresh" content="0;url=' . $_SERVER['PHP_SELF'] . '?step=choose&lang=' . htmlspecialchars($_POST['lang']) . '">';
+		echo '<meta http-equiv="refresh" content="0;url=' . $_SERVER['PHP_SELF'] . '?step=official&lang=' . htmlspecialchars($_GET['ln']) . '">';
 		exit;
 	}
 
 	echo gettpl('lang.html');
+
+break;
+case 'official':
+	
+	if(isset($_POST['yes']))
+	{
+		echo '<meta http-equiv="refresh" content="0;url=' . $_SERVER['PHP_SELF'] . '?step=choose&lang=' . htmlspecialchars($_GET['lang']) . '">';
+		exit;
+	}
+	else if(isset($_POST['no']))
+	{
+		echo '<meta http-equiv="refresh" content="0;url=http://www.kleeja.com/">';
+		exit;
+	}
+	
+	echo gettpl('official.html');
 
 break;
 case 'choose' :

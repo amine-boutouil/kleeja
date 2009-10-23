@@ -104,7 +104,11 @@
 	$lang['IN_PATH']								= 'Path of script';
 	$lang['INST_PHP_LESSMIN']						= 'You need PHP %1$s or above to install Kleeja, your current version is %2$s';
 	$lang['INST_MYSQL_LESSMIN']						= 'You need MySQL %1$s or above to install Kleeja, your current version is %2$s';
-	
+	$lang['IS_IT_OFFICIAL']						= 'וב ÞדÊ ָÊֽדםב ַבה׃־ו דה ַבדזÞÚ ַבׁ׃דם Kleeja.com ?';
+	$lang['IS_IT_OFFICIAL_DESC']				= 'םױבהַ ַבßֻםׁ דה ַבװßַזם זַבÊ׃ִַבַÊ Úה ׃ָָ ָÚײ ַבדװַßב ַבÊם Êֻֽֿ Ýם ָÚײ ַבה׃־ זבַ ה׃Ê״םÚ דÚׁÝֹ ַבדװßבֹ Ûַבַָנ , בßה ָÚֿ ַבָֻֽ זּֿהַ ַה והַß ה׃־ַנ םÊד Êֽדםבוַ דה דזַÞÚ ַ־ׁל Ûםׁ ׁ׃דםו זÊßזה ַדַ דÚֿבֹ ָ״ׁםÞֹ ֶַָֿםֹ ַז דׁׂזÚ Ýםוַ ַßזַֿ ־ָםֻו.<br /><br /> ב׀ַ , וב ַהÊ דÊֳßֿ דה ַה ה׃־Êß ו׀ו Êד Êֽדםבוַ דה ַבדזÞÚ ַבׁ׃דם : kleeja.com ¿';
+	$lang['IS_IT_OFFICIAL_YES']					= 'הÚד , ה׃־Êם ÞדÊ ָÊֽדםבוַ דה ַבדזÞÚ ַבׁ׃דם kleeja.com';
+	$lang['IS_IT_OFFICIAL_NO']					= 'בַ , בד ַÞד ָÊֽדםבוַ דה והַß , ֽזבהם בבדזÞÚ  ַבׁ׃דם בבÊֽדםב ַבַה';
+
 	//wizard
 	$lang['DIR']	=	'ltr';
 	$lang['WZ_TITLE'] = 'Kleeja wizard';

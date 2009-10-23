@@ -43,8 +43,47 @@ line-height: 2.3em
 font-size: 0.9em;
 line-height: 2em
 }
+/*language step*/
+ul#choose, ul#choose ul {
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+}
+
+ul#choose li {
+  display: inline;
+  float: left;
+  text-indent: 0px;
+  margin: 2px;
+}
+
+ul#choose li a {
+  display: block;
+  text-decoration: none;
+}
+
+ul#choose li {
+  width: 80px;
+  height: 80px;
+  line-height: 50px;
+  background-position: 0 0; 
+}
+
+ul#choose img {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+#language_choose {
+  text-align: center;
+  margin:0 auto;
+}
+
 
 </style>
+<script type="text/javascript" src="{{echo getjquerylink()}}"></script>
 <script type="text/javascript">
 	//<![CDATA[
 	function agree ()
@@ -183,6 +222,17 @@ function formCheck(formobj, fieldRequired)
 		return false;
 	}
 }
+
+/*language step*/
+$(document).ready(function() {
+  $('#choose li').hover(function() {
+    $(this).animate( { width: "180", height: "180" }, { queue: false, duration: 100 });
+  },
+  function() {
+    $(this).animate( { width: "80", height: "80" }, { queue: false, duration: 130 });
+  });
+});
+
 // -->
 //]]>
 

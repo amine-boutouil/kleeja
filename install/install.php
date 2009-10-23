@@ -39,7 +39,7 @@ include_once ('includes/functions_install.php');
 //
 // Kleeja must be safe ..
 //
-if(!empty($dbuser) && !empty($dbname) && !(isset($_GET['step']) && in_array($_GET['step'], array('end', 'wizard')))
+if(!empty($dbuser) && !empty($dbname) && !(isset($_GET['step']) && in_array($_GET['step'], array('end', 'wizard'))))
 {
 	$d = inst_get_config('language');
 	if(!empty($d))

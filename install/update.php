@@ -131,7 +131,7 @@ case 'update_now':
 			define('C_U_F', true);
 		}
 		
-		$file_for_up = 'includes/update_files/' . preg_replace('/^[a-z0-9_\-\.]/i', '', $_GET['action_file_do']) . '.php';
+		$file_for_up = 'includes/update_files/' . preg_replace('/[^a-z0-9_\-\.]/i', '', $_GET['action_file_do']) . '.php';
 		if(!file_exists($file_for_up))
 		{
 			echo '<span style="color:red;">' . $lang['INST_ERR_NO_SELECTED_UPFILE_GOOD'] . ' [ ' . $file_for_up . ' ]</span><br />';

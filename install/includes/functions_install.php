@@ -18,45 +18,54 @@ define ('LAST_DB_VERSION' , '7');
 //set no errors
 define('MYSQL_NO_ERRORS', true);
 
-//for lang 
+
+// Detect choosing another lang while installing
 if(isset($_GET['change_lang']))
 {
 	if (!empty($_POST['lang']))
 	{
-		//Redirect browser
-		header("Location:" . $_SERVER['PHP_SELF'] . "?step=" . $_POST['step_is'] . "&lang=" . $_POST['lang']); 
+		header('Location: ' . $_SERVER['PHP_SELF'] . '?step=' . $_POST['step_is'] . '&lang=' . $_POST['lang']); 
 	}
 }
 
-function getlang ($link=false)
+// Including current language
+include ($_path . 'lang/' . getlang() . '/install.php');
+
+
+/**
+* Return current language of installing wizard 
+*/
+function getlang ($link = false)
 {
 	global $_path;
+
 	if (isset($_GET['lang']))
-	{ 
-		if(empty($_GET['lang']))
-		{
-			$_GET['lang'] = 'en';
-		}			
-		if(file_exists($_path . 'lang/' . htmlspecialchars($_GET['lang']) . '/install.php'))
-		{
-			$ln	=  htmlspecialchars($_GET['lang']);
-		}
-		else
-		{
-			$ln = 'en';
-		}
+	{
+		$_GET['lang'] = empty($_GET['lang']) ? 'en' : preg_replace('/[^a-z0-9]/i', '', $_GET['lang']);
+
+		$ln	= file_exists($_path . 'lang/' . $_GET['lang'] . '/install.php') ? $_GET['lang'] : 'en';
 	}
 	else
 	{
 		$ln	= 'en';
 	}
 
-	return $link != false ? 'lang=' . $ln : $ln;
+	return $link ? 'lang=' . $ln : $ln;
 }
 
-//for language //	
-include ($_path . 'lang/' . getlang() . '/install.php');
+function getjquerylink()
+{
+	global $_path;
 
+	if(file_exists($_path . 'admin/admin_style/js/jquery.js'))
+	{
+		return $_path . 'admin/admin_style/js/jquery.js';
+	}
+	else
+	{
+		return 'http://ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js';
+	}
+}
 
 
 /**
@@ -126,13 +135,18 @@ function do_config_export($type, $srv, $usr, $pass, $nm, $prf, $fpath = '')
 }	
 
 
-
+/**
+* Usefull to caluculte time of execution
+*/
 function get_microtime()
 {
 	list($usec, $sec) = explode(' ', microtime());
 	return ((float) $usec + (float) $sec);
 }
 
+/**
+* Get config value from database directly, if not return false.
+*/
 function inst_get_config($name)
 {
 	global $SQL, $dbprefix;
@@ -161,4 +175,3 @@ function inst_get_config($name)
 	}
 }
 
-#<-- EOF

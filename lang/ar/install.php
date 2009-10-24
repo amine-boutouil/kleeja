@@ -5,6 +5,7 @@
 
 	if(!isset($lang) || !is_array($lang)) $lang = array();
 	
+	$lang['INST_INSTALL_WIZARD']				= 'معالج تثبيت كليجا';
 	$lang['INST_INSTALL_CLEAN_VER']				= "تثبيت نسخه جديده ";
 	$lang['INST_UPDATE_P_VER']					= "تحديث نسخه سابقه ";
 	$lang['INST_CHOOSE_INSTALLER']				= "... قم بإختيار ما يناسبك  من معالج تثبيت كليجا ...";

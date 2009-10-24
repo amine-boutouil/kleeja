@@ -4,7 +4,8 @@
 
 
 	if(!isset($lang) || !is_array($lang)) $lang = array();
-	
+
+	$lang['INST_INSTALL_WIZARD']					= 'Kleeja installing wizard';
 	$lang['INST_INSTALL_CLEAN_VER']					= 'New Installation';
 	$lang['INST_UPDATE_P_VER']						= 'Update ';
 	$lang['INST_CHOOSE_INSTALLER']					= 'Choose what suits you best from the setup wizard';

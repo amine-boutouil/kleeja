@@ -70,19 +70,20 @@
 <!-- # end uplaod boxs  -->
 <IF NAME="config.safe_code">
 <!-- start  safe code  -->
-<div class="clr"></div><br />
+<div class="clr"></div>
 <div style="width:76%">			
 <div class="safe_code">
-<span>{lang.VERTY_CODE}</span>
-<br /><br />
-<img style="vertical-align:middle;" id="kleeja_img_captcha" src="{captcha_file_path}" alt="{lang.REFRESH_CAPTCHA}" title="{lang.REFRESH_CAPTCHA}" onclick="javascript:update_kleeja_captcha('{captcha_file_path}', 'kleeja_code_answer');" />
-<input type="text" name="kleeja_code_answer" id="kleeja_code_answer" />
-<br /><br />
-<strong class="explain">{lang.NOTE_CODE}</strong>
-<br />
+	<p>{lang.VERTY_CODE}</p>
+	<div class="clr"></div>
+	<div>
+		<img style="vertical-align:middle;" id="kleeja_img_captcha" src="{captcha_file_path}" alt="{lang.REFRESH_CAPTCHA}" title="{lang.REFRESH_CAPTCHA}" onclick="javascript:update_kleeja_captcha('{captcha_file_path}', 'kleeja_code_answer');" />
+		<input type="text" name="kleeja_code_answer" id="kleeja_code_answer" />
+	</div>
+	<div class="clr"></div>
+	<p class="explain">{lang.NOTE_CODE}</p>
 </div>
 </div>
-<div class="clr"></div><br />
+<div class="clr"></div>
 <!-- ## End  safe code  -->	  
 </IF>
 </form>

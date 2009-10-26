@@ -27,6 +27,13 @@ defined('DEV_STAGE') ? @error_reporting( E_ALL ) : @error_reporting(E_ALL ^ E_NO
 //Just to check
 define('IN_PHP6', (version_compare(PHP_VERSION, '6.0.0-dev', '>=') ? true : false));
 
+//if sessions is started before, let's destroy it!
+if(isset($_SESSION))
+{
+	@session_unset(); // fix bug with php4
+	@session_destroy();
+}
+
 // start session
 $s_time = 86400 * 2; // 2 : two days 
 if(defined('IN_ADMIN'))

@@ -16,173 +16,172 @@ if (!defined('IN_COMMON'))
 }
 
 
-/*
-* header of kleeja
-* to show header in any page you want .. 
-*  parameter : title : title of page as in <title></title>
+/**
+* Header
+* 
+* To show header in any page you want .. 
+* parameter : title : title of page as in <title></title>
 */	
 function Saaheader($title, $outscript=false)
 {
-		global $tpl, $usrcp, $lang, $olang, $user_is, $username, $config;
-		global $extras, $script_encoding, $errorpage, $userinfo, $charset;
+	global $tpl, $usrcp, $lang, $olang, $user_is, $username, $config;
+	global $extras, $script_encoding, $errorpage, $userinfo, $charset;
+
+	//is user ? and username
+	$user_is = ($usrcp->name()) ? true: false;
+	$username = ($usrcp->name()) ? $usrcp->name() : $lang['GUST'];
+
+
+	//our default charset
+	$charset = 'utf-8';
+
+	//links for header
+	$_LINKS = array(
+			//user related
+			'login'		=> $config['mod_writer'] ? 'login.html' : 'ucp.php?go=login',
+			'logout'	=> $config['mod_writer'] ? 'logout.html' : 'ucp.php?go=logout',
+			'register'	=> $config['mod_writer'] ? 'register.html' : 'ucp.php?go=register',
+			'profile'	=> $config['mod_writer'] ? 'profile.html' : 'ucp.php?go=profile',
+			'fileuser'	=> $config['mod_writer'] ? 'fileuser.html' : 'ucp.php?go=fileuser',
+			'filecp'	=> $config['mod_writer'] ? 'filecp.html' : 'ucp.php?go=filecp',
+			//another
+			'guide'	=> $config['mod_writer'] ? 'guide.html' : 'go.php?go=guide',
+			'rules'	=> $config['mod_writer'] ? 'rules.html' : 'go.php?go=rules',
+			'call'	=> $config['mod_writer'] ? 'call.html' : 'go.php?go=call',
+			'stats'	=> $config['mod_writer'] ? 'stats.html' : 'go.php?go=stats',
+		);
+
+	//assign some variables
+	$tpl->assign("dir", $lang['DIR']);
+	$tpl->assign("title", $title);
+	$tpl->assign("_LINKS", $_LINKS);
+	$tpl->assign("go_back_browser", $lang['GO_BACK_BROWSER']);
+	$extra = '';
+
+	//check for extra header 
+	$extras['header'] = empty($extras['header']) ? false : $extras['header'];
+
+	($hook = kleeja_run_hook('func_Saaheader')) ? eval($hook) : null; //run hook
+
+	$tpl->assign("EXTRA_CODE_META", $extra);
+
+	if($config['user_system'] != '1' && isset($script_encoding) && function_exists('iconv') && !preg_match('/utf/i',strtolower($script_encoding)) && !$page && $outscript && !defined('DISABLE_INTR')) 
+	{
+		//set script charset
+		$charset = (isset($script_encoding) && !empty($script_encoding)) ? $script_encoding : 'utf-8';
+		//if kleeja were intgrated with other script in this case we need to change our default charset
+		$header = iconv("UTF-8", strtoupper($script_encoding) . "//IGNORE", $tpl->display("header"));
+	}
+	else 
+	{
+		$header = $tpl->display("header");
+	}
 		
-		//is user ? and username
-		$user_is = ($usrcp->name()) ? true: false;
-		$username = ($usrcp->name()) ? $usrcp->name() : $lang['GUST'];
-		/** $is_opera = (is_browser('opera')) ? true : false;  **/
-		
-		//our default charset
-		$charset = 'utf-8';
-		
-		//links for header
-		$_LINKS = array(
-				//user related
-				'login'		=> $config['mod_writer'] ? 'login.html' : 'ucp.php?go=login',
-				'logout'	=> $config['mod_writer'] ? 'logout.html' : 'ucp.php?go=logout',
-				'register'	=> $config['mod_writer'] ? 'register.html' : 'ucp.php?go=register',
-				'profile'	=> $config['mod_writer'] ? 'profile.html' : 'ucp.php?go=profile',
-				'fileuser'	=> $config['mod_writer'] ? 'fileuser.html' : 'ucp.php?go=fileuser',
-				'filecp'	=> $config['mod_writer'] ? 'filecp.html' : 'ucp.php?go=filecp',
-				//another
-				'guide'	=> $config['mod_writer'] ? 'guide.html' : 'go.php?go=guide',
-				'rules'	=> $config['mod_writer'] ? 'rules.html' : 'go.php?go=rules',
-				'call'	=> $config['mod_writer'] ? 'call.html' : 'go.php?go=call',
-				'stats'	=> $config['mod_writer'] ? 'stats.html' : 'go.php?go=stats',
-			);
+	if($config['siteclose'] == '1' && $usrcp->admin() && !defined('IN_ADMIN'))
+	{
+		//add notification bar 
+		$header = preg_replace('/<body([^\>]*)>/i', "<body\\1>\n<!-- site is closed -->\n<p style=\"width: 100%; text-align:center; background:#FFFFA6; color:black; border:thin;top:0;left:0; position:absolute; width:100%;clear:both;\">" . $lang['NOTICECLOSED'] . "</p>\n<!-- #site is closed -->", $header);
+	}
 
-		//assign some variables
-		$tpl->assign("dir", $lang['DIR']);
-		$tpl->assign("title", $title);
-		$tpl->assign("_LINKS", $_LINKS);
-		$tpl->assign("go_back_browser", $lang['GO_BACK_BROWSER']);
-		$extra = '';
-
-		//check for extra header 
-		$extras['header'] = empty($extras['header']) ? false : $extras['header'];
-
-		($hook = kleeja_run_hook('func_Saaheader')) ? eval($hook) : null; //run hook
-
-		$tpl->assign("EXTRA_CODE_META", $extra);
-
-		if($config['user_system'] != '1' && isset($script_encoding) && function_exists('iconv') && !preg_match('/utf/i',strtolower($script_encoding)) && !$page && $outscript && !defined('DISABLE_INTR')) 
-		{
-			//set script charset
-			$charset = (isset($script_encoding) && !empty($script_encoding)) ? $script_encoding : 'utf-8';
-			//if kleeja were intgrated with other script in this case we need to change our default charset
-			$header = iconv("UTF-8", strtoupper($script_encoding) . "//IGNORE", $tpl->display("header"));
-		}
-		else 
-		{
-			$header = $tpl->display("header");
-		}
-		
-		if($config['siteclose'] == '1' && $usrcp->admin() && !defined('IN_ADMIN'))
-		{
-			//add notification bar 
-			$header = preg_replace('/<body([^\>]*)>/i', "<body\\1>\n<!-- site is closed -->\n<p style=\"width: 100%; text-align:center; background:#FFFFA6; color:black; border:thin;top:0;left:0; position:absolute; width:100%;clear:both;\">" . $lang['NOTICECLOSED'] . "</p>\n<!-- #site is closed -->", $header);
-
-		}
-
-		echo $header;
+	echo $header;
 }
 
 
-/*
-*footer
-* to show footer of any page you want 
+/**
+* Footer
+*
+* To show footer of any page you want 
 * paramenters : none
 */
 function Saafooter($outscript=false)
 {
-		global $tpl, $SQL, $starttm, $config, $usrcp, $lang, $olang;
-		global $do_gzip_compress, $script_encoding, $errorpage, $extras, $userinfo;
+	global $tpl, $SQL, $starttm, $config, $usrcp, $lang, $olang;
+	global $do_gzip_compress, $script_encoding, $errorpage, $extras, $userinfo;
+
+	//show stats ..
+	$page_stats = '';
+	if ($config['statfooter'] !=0) 
+	{
+		$gzip			= $do_gzip_compress !=0 ?  "Enabled" : "Disabled";
+		$hksys			= !defined('STOP_HOOKS') ? "Enabled" : "Disabled";
+		$endtime		= get_microtime();
+		$loadtime		= number_format($endtime - $starttm , 4);
+		$queries_num	= $SQL->query_num;
+		$time_sql		= round($SQL->query_num / $loadtime) ;
+		$page_url		= preg_replace(array('/([\&\?]+)debug/i', '/&amp;/i'), array('', '&'), kleeja_get_page());
+		$link_dbg		= $usrcp->admin() &&  $config['mod_writer'] != '1' ? '[ <a href="' .  str_replace('&', '&amp;', $page_url) . (strpos($page_url, '?') === false ? '?' : '&amp;') . 'debug">More Details ... </a> ]' : null;
+		$page_stats		= "<strong>[</strong> GZIP : $gzip - Generation Time: $loadtime Sec  - Queries: $queries_num - Hook System:  $hksys <strong>]</strong>  " . $link_dbg ;
+	}
 		
-		//show stats ..
-		$page_stats = '';
-		if ($config['statfooter'] !=0) 
-		{
-			$gzip			= $do_gzip_compress !=0 ?  "Enabled" : "Disabled";
-			$hksys			= !defined('STOP_HOOKS') ? "Enabled" : "Disabled";
-			$endtime		= get_microtime();
-			$loadtime		= number_format($endtime - $starttm , 4);
-			$queries_num	= $SQL->query_num;
-			$time_sql		= round($SQL->query_num / $loadtime) ;
-			$page_url		= preg_replace(array('/([\&\?]+)debug/i', '/&amp;/i'), array('', '&'), kleeja_get_page());
-			$link_dbg		= $usrcp->admin() &&  $config['mod_writer'] != '1' ? '[ <a href="' .  str_replace('&', '&amp;', $page_url) . (strpos($page_url, '?') === false ? '?' : '&amp;') . 'debug">More Details ... </a> ]' : null;
-			$page_stats		= "<strong>[</strong> GZIP : $gzip - Generation Time: $loadtime Sec  - Queries: $queries_num - Hook System:  $hksys <strong>]</strong>  " . $link_dbg ;
-		}#end statfooter
+	$tpl->assign("page_stats", $page_stats);
 		
-		$tpl->assign("page_stats", $page_stats);
-		
-		//if admin, show admin in the bottom of all page
-		$tpl->assign("admin_page", ($usrcp->admin() ? '<a href="' . ADMIN_PATH . '" class="admin_cp_link"><span>' . $lang['ADMINCP'] .  '</span></a>' : ''));
+	//if admin, show admin in the bottom of all page
+	$tpl->assign("admin_page", ($usrcp->admin() ? '<a href="' . ADMIN_PATH . '" class="admin_cp_link"><span>' . $lang['ADMINCP'] .  '</span></a>' : ''));
 
 		
-		// if google analytics .. //new version 
-		//http://www.google.com/support/googleanalytics/bin/answer.py?answer=55488&topic=11126
-		$googleanalytics = '';
-		if (strlen($config['googleanalytics']) > 4)
-		{
-			$googleanalytics .= '<script type="text/javascript">' . "\n";
-			$googleanalytics .= '<!--' . "\n";
-			$googleanalytics .= 'var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");' . "\n";
-			$googleanalytics .= 'document.write("\<script src=\'" + gaJsHost + "google-analytics.com/ga.js\' type=\'text/javascript\'>\<\/script>" );' . "\n";
-			$googleanalytics .= '</script>' . "\n";
-			$googleanalytics .= '<script type="text/javascript">' . "\n";
-			$googleanalytics .= 'var pageTracker = _gat._getTracker("' . $config['googleanalytics'] . '");' . "\n";
-			$googleanalytics .= 'pageTracker._initData();' . "\n";
-			$googleanalytics .= 'pageTracker._trackPageview();' . "\n";
-			$googleanalytics .= '//-->' . "\n";
-			$googleanalytics .= '</script>' . "\n";
-		}
+	// if google analytics .. //new version 
+	//http://www.google.com/support/googleanalytics/bin/answer.py?answer=55488&topic=11126
+	$googleanalytics = '';
+	if (strlen($config['googleanalytics']) > 4)
+	{
+		$googleanalytics .= '<script type="text/javascript">' . "\n";
+		$googleanalytics .= '<!--' . "\n";
+		$googleanalytics .= 'var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");' . "\n";
+		$googleanalytics .= 'document.write("\<script src=\'" + gaJsHost + "google-analytics.com/ga.js\' type=\'text/javascript\'>\<\/script>" );' . "\n";
+		$googleanalytics .= '</script>' . "\n";
+		$googleanalytics .= '<script type="text/javascript">' . "\n";
+		$googleanalytics .= 'var pageTracker = _gat._getTracker("' . $config['googleanalytics'] . '");' . "\n";
+		$googleanalytics .= 'pageTracker._initData();' . "\n";
+		$googleanalytics .= 'pageTracker._trackPageview();' . "\n";
+		$googleanalytics .= '//-->' . "\n";
+		$googleanalytics .= '</script>' . "\n";
+	}
 
-		$tpl->assign("googleanalytics", $googleanalytics);	
+	$tpl->assign("googleanalytics", $googleanalytics);	
 
-		//check for extra header 
-		if(empty($extras['footer']))
-		{
-			$extras['footer'] = false;
-		}
-		
-		($hook = kleeja_run_hook('func_Saafooter')) ? eval($hook) : null; //run hook
-		
-		//show footer
-		if($config['user_system'] != '1' && isset($script_encoding) && function_exists('iconv')  && !preg_match('/utf/i',strtolower($script_encoding)) && !$errorpage && $outscript && !defined('DISABLE_INTR'))
-		{
-			//if kleeja were intgrated with other script in this case we need to change our default charset
-			$footer = iconv("UTF-8", strtoupper($script_encoding) . "//IGNORE", $tpl->display("footer"));
-		}
-		else 
-		{
-			$footer = $tpl->display("footer");
-		}
-		
-		
-		echo $footer;
-		//print $footer;
-		
-		//page analysis 
-		if (isset($_GET['debug']) && $usrcp->admin())
-		{
-			kleeja_debug();
-		}
-		
-		// THEN .. at finish, close sql connections
-		$SQL->close();
+	//check for extra header 
+	if(empty($extras['footer']))
+	{
+		$extras['footer'] = false;
+	}
+
+	($hook = kleeja_run_hook('func_Saafooter')) ? eval($hook) : null; //run hook
+
+	//show footer
+	if($config['user_system'] != '1' && isset($script_encoding) && function_exists('iconv')  && !preg_match('/utf/i',strtolower($script_encoding)) && !$errorpage && $outscript && !defined('DISABLE_INTR'))
+	{
+		//if kleeja were intgrated with other script in this case we need to change our default charset
+		$footer = iconv("UTF-8", strtoupper($script_encoding) . "//IGNORE", $tpl->display("footer"));
+	}
+	else 
+	{
+		$footer = $tpl->display("footer");
+	}
+
+	echo $footer;
+
+	//page analysis 
+	if (isset($_GET['debug']) && $usrcp->admin())
+	{
+		kleeja_debug();
+	}
+
+	//at end, close sql connections
+	$SQL->close();
 }
 
-/*
+/**
 * print inforamtion message 
 * parameters : msg : text that will show as inforamtion
 					title : <title>title of page</title>
 					exit : stop script after showing msg 
 */
-function kleeja_info($msg,$title='', $exit=true, $redirect=false, $rs='2')
+function kleeja_info($msg, $title='', $exit= true, $redirect = false, $rs = 2)
 {
 	global $text, $tpl, $SQL;
-	
+
 	($hook = kleeja_run_hook('kleeja_info_func')) ? eval($hook) : null; //run hook
-				
+
 	// assign {text} in info template
 	$text = $msg;
 	//header
@@ -195,17 +194,16 @@ function kleeja_info($msg,$title='', $exit=true, $redirect=false, $rs='2')
 	//redirect
 	if($redirect)
 	{
-        echo '<meta http-equiv="refresh" content="' . $rs . ';url=' . $redirect . '" />'; 
+		redirect($redirect, false, $exit, $rs);
 	}
-	
-	if ($exit)
+	else if($exit)
 	{
 		$SQL->close();
 		exit();
 	}
 }
 
-/*
+/**
 * print error message 
 * parameters : msg : text that will show as error mressage
 					title : <title>title of page</title>
@@ -214,9 +212,9 @@ function kleeja_info($msg,$title='', $exit=true, $redirect=false, $rs='2')
 function kleeja_err($msg, $title='', $exit=true, $redirect=false, $rs='2')
 {
 	global $text, $tpl, $SQL;
-	
+
 	($hook = kleeja_run_hook('kleeja_err_func')) ? eval($hook) : null; //run hook
-				
+
 	// assign {text} in err template
 	$text	= $msg;
 	//header
@@ -229,25 +227,26 @@ function kleeja_err($msg, $title='', $exit=true, $redirect=false, $rs='2')
 	//redirect
 	if($redirect)
 	{
-        echo '<meta http-equiv="refresh" content="' . $rs . ';url=' . $redirect . '" />'; 
+		redirect($redirect, false, $exit, $rs);
 	}
-
-	if ($exit)
+	else if($exit)
 	{
 		$SQL->close();
 		exit();
 	}
 }
 
-/*
-	cp error function handler
+/**
+* Print cp error function handler
+*
+* For admin
 */
-function kleeja_admin_err($msg, $navigation=true, $title='', $exit=true)
+function kleeja_admin_err($msg, $navigation = true, $title='', $exit = true)
 {
 	global $text, $tpl, $SHOW_LIST, $adm_extensions, $adm_extensions_menu, $STYLE_PATH_ADMIN, $lang, $olang, $SQL;
 	
 	($hook = kleeja_run_hook('kleeja_admin_err_func')) ? eval($hook) : null; //run hook
-				
+
 	// assign {text} in err template
 	$text	= $msg;
 	$SHOW_LIST	= $navigation;
@@ -268,19 +267,18 @@ function kleeja_admin_err($msg, $navigation=true, $title='', $exit=true)
 }
 
 
-/*
-* print inforamtion message on admin panel
-* parameters : msg : text that will show as inforamtion
-					title : <title>title of page</title>
-					exit : stop script after showing msg 
+/**
+* Print inforamtion message on admin panel
+*
+* For admin
 */
 function kleeja_admin_info($msg, $navigation=true, $title='', $exit=true)
 {
 	global $text, $tpl, $SHOW_LIST, $adm_extensions, $adm_extensions_menu, $STYLE_PATH_ADMIN, $lang, $SQL;
 	
 	($hook = kleeja_run_hook('kleeja_admin_info_func')) ? eval($hook) : null; //run hook
-				
-// assign {text} in err template
+
+	// assign {text} in err template
 	$text	= $msg;
 	$SHOW_LIST	= $navigation;
 	
@@ -300,14 +298,14 @@ function kleeja_admin_info($msg, $navigation=true, $title='', $exit=true)
 }
 
 /**
-** show debug information 
-** parameters: none
-**/
+* Show debug information 
+* 
+* parameters: none
+*/
 function kleeja_debug ()
 {
 	global $SQL,$do_gzip_compress, $all_plg_hooks;
-	
-	
+
 	($hook = kleeja_run_hook('kleeja_debug_func')) ? eval($hook) : null; //run hook
 	
 		//get memory usage ; code of phpbb
@@ -375,10 +373,11 @@ function kleeja_debug ()
 		echo '</div>';
 }
 
-/*
-* show error of critical problem !
+/**
+* Show error of critical problem !
+* 
 * parameter: error_title : title of prblem
-*					msg_text: message of problem
+*			msg_text: message of problem
 */
 function big_error ($error_title,  $msg_text)
 {
@@ -406,14 +405,17 @@ function big_error ($error_title,  $msg_text)
 	exit();
 }
 
-//redirect [php.net]
+/**
+* Redirect
+*
+*/
 function redirect($url, $header = true, $exit = true, $sec = 0)
 {
 	global $SQL;
 
     if (!headers_sent() && $header)
 	{
-        header('Location: ' . $url); 
+        header('Location: ' . str_replace(array('&amp;'), array('&'), $url)); 
     }
 	else
 	{
@@ -428,7 +430,11 @@ function redirect($url, $header = true, $exit = true, $sec = 0)
 	}
 }
 
-//prevent CSRF, this will generate hidden fields for kleeja forms
+/**
+* Prevent CSRF, 
+*
+* This will generate hidden fields for kleeja forms
+*/
 function kleeja_add_form_key($form_name)
 {
 	global $config, $klj_session;
@@ -436,7 +442,11 @@ function kleeja_add_form_key($form_name)
 	return '<input type="hidden" name="k_form_key" value="' . sha1($config['h_key'] . $form_name . $now . $klj_session) . '" /><input type="hidden" name="k_form_time" value="' . $now . '" />' . "\n";
 }
 
-//prevent CSRF, this will check hidden fields that came from kleeja forms
+/**
+* Prevent CSRF, 
+*
+* This will check hidden fields that came from kleeja forms
+*/
 function kleeja_check_form_key($form_name, $require_time = 150 /*seconds*/ )
 {
 	global $config, $klj_session;
@@ -460,8 +470,12 @@ function kleeja_check_form_key($form_name, $require_time = 150 /*seconds*/ )
 	return false;
 }
 
+/**
+* Link generator 
+*
+* Files can be many links styles, so this will generate the current style of link
+*/
 
-//link generator 
 function kleeja_get_link ($pid, $extra = array())
 {
 	global $config;
@@ -550,7 +564,11 @@ function kleeja_get_link ($pid, $extra = array())
 	return $config['siteurl'] . str_replace(array_keys($extra), array_values($extra), $links[$pid]);
 }
 
-//for uploading boxes 
+/**
+*  Uploading boxes 
+*
+* Parse template of boxes and print them
+*/
 function get_up_tpl_box($box_name, $extra = array())
 {
 	global $STYLE_PATH, $config;
@@ -608,11 +626,17 @@ function get_up_tpl_box($box_name, $extra = array())
 	return $return;
 }
 
+/**
+* secondary function; see go.php?go=guide
+*/
 function group_id_order($a, $b) 
 { 
 	return ($a['group_id'] == $b['group_id']) ? 0 : ($a['group_id'] < $b['group_id'] ? -1 : 1); 
 }
 
+/**
+* Extract info of a style
+*/
 function kleeja_style_info($style_name)
 {
 	$inf_path = PATH . 'styles/' . $style_name . '/info.txt';

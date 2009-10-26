@@ -59,7 +59,8 @@ class KljUploader
 		{
 			$src_img = @imagecreatefrompng($name);
 		}
-		elseif (preg_match("/gif/", $ext) && !$this->is_ani($name)&& function_exists('imagecreatefromgif'))
+		//elseif (preg_match("/gif/", $ext) && !$this->is_ani($name)&& function_exists('imagecreatefromgif'))
+		elseif (preg_match("/gif/", $ext)&& function_exists('imagecreatefromgif'))
 		{
 			$src_img = @imagecreatefromgif($name);
 		}
@@ -108,6 +109,7 @@ class KljUploader
 	//
 	//check for gif image is animated or not ! 
 	//(c) http://us2.php.net/manual/en/function.imagecreatefromgif.php#88005
+	// todo: need more and more improvments
 	//
 	function is_ani($filename)
 	{

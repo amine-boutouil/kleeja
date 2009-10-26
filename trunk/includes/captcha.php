@@ -8,18 +8,28 @@
 *
 */
 
+//if sessions is started before, let's destroy it!
+if(isset($_SESSION))
+{
+	@session_unset(); // fix bug with php4
+	@session_destroy();
+}
+
+$s_time = 86400 * 2; // 2 : two days 
 
 //start session
 if(function_exists('ini_set'))
 {
 	if (version_compare(PHP_VERSION, '5.0.0', 'ge') && substr(PHP_OS, 0 ,3) != 'WIN')
 	{
-		@ini_set('session.hash_function', 1);
-		@ini_set('session.hash_bits_per_character', 6);
+		ini_set('session.hash_function', 1);
+		ini_set('session.hash_bits_per_character', 6);
 	}
-	@ini_set('session.use_only_cookies', false);
-	@ini_set('session.auto_start', false);
-	@ini_set('session.use_trans_sid', true);
+	ini_set('session.use_only_cookies', false);
+	ini_set('session.auto_start', false);
+	ini_set('session.use_trans_sid', true);
+	ini_set('session.cookie_lifetime', $s_time);
+	ini_set('session.gc_maxlifetime', $s_time);
 	//
 	//this will help people with some problem with their sessions path
 	//

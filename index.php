@@ -138,7 +138,7 @@ if ($show_online)
 	$shownames = array();
 	foreach ($online_names as $k)
 	{
-		$shownames[] = array('name' => $k );
+		$shownames[] = array('name' => $k, 'seperator' => sizeof($shownames) ? ',' : '');
 	}
 
 	//some variables must be destroyed here

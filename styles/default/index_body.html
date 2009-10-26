@@ -31,7 +31,7 @@
 <div class="tabbertab" title="{lang.DOWNLOAD_F}" id="filetype">
 </IF>
 <LOOP NAME=FILES_NUM_LOOP>
-	<input type="file" name="file_{{i}}_" id="file_{{i}}_" style="display:{{show}}" size="50" /><br id="br_{{i}}_" style="display:{{show}}" />
+	<input type="file" name="file_{{i}}_" id="file_{{i}}_" style="display:{{show}}" size="50" onchange="javascript:plus(1);" /><br id="br_{{i}}_" style="display:{{show}}" />
 </LOOP>
     <div id="upload_forum"></div>
     <br />

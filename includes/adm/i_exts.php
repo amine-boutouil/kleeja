@@ -119,44 +119,57 @@ else if(isset($_GET['add_new_ext']))
 		$text	= $lang['EMPTY_EXT_FIELD'];
 		$stylee	= 'admin_info';
 	}
-			
-	//demove the first . in ext
-	$new_ext_i = trim($new_ext_i);
-	if($new_ext_i[0] == '.')
-	{
-		$new_ext_i = substr($new_ext_i, 1, strlen($new_ext_i));
-	}
-			
-	//check if there is any exists of this ext in db
-	$query = array(
-					'SELECT'	=> '*',
-					'FROM'		=> "{$dbprefix}exts",
-					'WHERE'		=> "ext='" . $new_ext_i . "'",
-				);
-
-	$result = $SQL->build($query);
-
-	if ($SQL->num_rows($result) > 0)
-	{
-		$text = sprintf($lang['NEW_EXT_EXISTS_B4'], $new_ext_i);
-		$text .= '<meta HTTP-EQUIV="REFRESH" content="2; url=' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '">' . "\n";
-		$stylee	= "admin_err";
-	}
 	else
 	{
-		//add to db
-		$insert_query	= array(
-								'INSERT'	=> '`group_id` ,`ext` ,`gust_size` ,`gust_allow` ,`user_size` ,`user_allow`',
-								'INTO'		=> "`{$dbprefix}exts`",
-								'VALUES'	=> "'$ext_gr_i', '$new_ext_i', '$gust_size', '1', '$user_size', '1'"
-						);
+		//remove the first . in ext
+		$new_ext_i = trim($new_ext_i);
+		if($new_ext_i[0] == '.')
+		{
+			$new_ext_i = substr($new_ext_i, 1, strlen($new_ext_i));
+		}
 
-		$SQL->build($insert_query);
+		//check if it's welcomed one
+		//if he trying to be smart, he will add like ext1.ext2.php
+		//so we will just look at last one
+		$check_ext = array_pop(explode('.', $new_ext_i)); 
+		$not_welcomed_exts = array('php', 'php3', 'php5', 'php4', 'asp', 'shtml', 'html', 'htm', 'xhtml', 'phtml', 'pl', 'cgi');
+		if(in_array($check_ext, $not_welcomed_exts))
+		{
+			redirect($action, false, false, 5);
+			kleeja_admin_err(sprintf($lang['FORBID_EXT'], $check_ext));
+		}
 
-		$text	= $lang['NEW_EXT_ADD']. '<meta HTTP-EQUIV="REFRESH" content="2; url=' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '">' . "\n";
-		$stylee	= "admin_info";
-	}
+		//check if there is any exists of this ext in db
+		$query = array(
+						'SELECT'	=> '*',
+						'FROM'		=> "{$dbprefix}exts",
+						'WHERE'		=> "ext='" . $new_ext_i . "'",
+					);
 
-	$SQL->freeresult($result);
+		$result = $SQL->build($query);
+
+		if ($SQL->num_rows($result) > 0)
+		{
+			$text = sprintf($lang['NEW_EXT_EXISTS_B4'], $new_ext_i);
+			$text .= '<meta HTTP-EQUIV="REFRESH" content="2; url=' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '">' . "\n";
+			$stylee	= "admin_err";
+		}
+		else
+		{
+			//add to db
+			$insert_query	= array(
+									'INSERT'	=> '`group_id` ,`ext` ,`gust_size` ,`gust_allow` ,`user_size` ,`user_allow`',
+									'INTO'		=> "`{$dbprefix}exts`",
+									'VALUES'	=> "'$ext_gr_i', '$new_ext_i', '$gust_size', '1', '$user_size', '1'"
+							);
+
+			$SQL->build($insert_query);
+
+			$text	= $lang['NEW_EXT_ADD']. '<meta HTTP-EQUIV="REFRESH" content="2; url=' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '">' . "\n";
+			$stylee	= "admin_info";
+		}
+
+		$SQL->freeresult($result);
+	} # add new ext
 }
 

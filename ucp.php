@@ -468,7 +468,7 @@ switch ($_GET['go'])
 							($hook = kleeja_run_hook('submit_in_filecp')) ? eval($hook) : null; //run hook	
 
 							//check for form key
-							if(!kleeja_check_form_key('filecp'))
+							if(!kleeja_check_form_key('filecp', 1800 /* half hour */))
 							{
 								kleeja_info($lang['INVALID_FORM_KEY']);
 							}
@@ -501,7 +501,7 @@ switch ($_GET['go'])
 					{
 						$query_del = array(
 											'DELETE'	=> "{$dbprefix}files",
-											'WHERE'	=> "id IN (" . implode(',', $ids) . ")"
+											'WHERE'		=> "id IN (" . implode(',', $ids) . ")"
 										);
 	
 						($hook = kleeja_run_hook('qr_del_files_in_filecp')) ? eval($hook) : null; //run hook	
@@ -537,7 +537,7 @@ switch ($_GET['go'])
 			}
 			else
 			{
-				redirect($action);
+				kleeja_info($lang['NO_FILE_SELECTED'], '', true, $action);
 			}
 		}
 
@@ -557,7 +557,7 @@ switch ($_GET['go'])
 			$name		= $usrcp->name();
 			$mail		= $usrcp->mail();
 			$show_my_filecp	= $usrcp->get_data('show_my_filecp');
-			$data_forum		= ($config['user_system'] == 1) ? true : false ;
+			$data_forum		= (int) $config['user_system'] == 1 ? true : false ;
 			$goto_forum_link= !empty($forum_path) ? $forum_path : '';
 			$H_FORM_KEYS = kleeja_add_form_key('profile');
 			//no error yet 

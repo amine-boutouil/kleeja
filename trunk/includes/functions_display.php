@@ -486,7 +486,7 @@ function kleeja_get_link ($pid, $extra = array())
 	$config['id_form'] = empty($config['id_form']) ? 'id' : $config['id_form'];
 	
 	//for prevent bug with rewrite
-	if($config['mod_writer'] && !empty($extra['::NAME::']))
+	if($config['mod_writer'] && !empty($extra['::NAME::']) && $config['id_form'] != 'direct')
 	{
 		$extra['::NAME::'] = str_replace('.', '-', $extra['::NAME::']);
 	}

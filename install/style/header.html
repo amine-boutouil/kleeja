@@ -147,10 +147,10 @@ function formCheck(formobj, fieldRequired)
 /*language step*/
 $(document).ready(function() {
   $('#choose li').hover(function() {
-    $(this).animate( { width: "180", height: "180" }, { queue: false, duration: 100 });
+    $(this).animate( { width: "256", height: "256" }, { queue: false, duration: 200 });
   },
   function() {
-    $(this).animate( { width: "80", height: "80" }, { queue: false, duration: 130 });
+    $(this).animate( { width: "128", height: "128" }, { queue: false, duration: 230 });
   });
 });
 
@@ -174,9 +174,13 @@ $(document).ready(function() {
 </form>
 {{endif;}}
 
-<img src="style/images/logo.png" style="border:0;" alt="kleeja" />
-<br />
+<!-- start all box body  -->
+<div class="box_body">
 
-<br />
-<fieldset style="margin-left: 10%;margin: 0 auto;width: 724px;position: relative;-moz-border-radius: 8px;border-radius: 1px;">
+<a style="float:left;margin-top:20px;" onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com"><img src="../styles/default/images/logo.png" alt="kleeja" /></a>
+
+<div class="clr"></div><br />
+
+
+
 

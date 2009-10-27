@@ -1,15 +1,10 @@
-
-
-	<fieldset class="home">
-
-				<div id="language_choose">
-				  <ul id="choose">
-						{{if($dh = @opendir($_path . 'lang')): while (($file = readdir($dh)) !== false): if(strpos($file, '.') === false && $file != '..' && $file != '.'):}}
-							<li>
-								<a href="{{echo $_SERVER['PHP_SELF'] . '?step=language&amp;ln=' . $file}}"><img src="style/images/{{echo $file}}.png" alt="{{echo $file}}"/></a>
-							</li>
-						{{endif;endwhile;@closedir($dh);endif;}}
-				  </ul>
-				</div>
-
-	</fieldset>
+<div class="home">
+<img border="0" src="style/images/long_box.jpg" alt="{{echo $file}}" />
+</div>
+	<div class="language_choose">
+	  <ul id="choose">
+		{{if($dh = @opendir($_path . 'lang')): while (($file = readdir($dh)) !== false): if(strpos($file, '.') === false && $file != '..' && $file != '.'):}}
+		<li><a href="{{echo $_SERVER['PHP_SELF'] . '?step=language&amp;ln=' . $file}}"><img src="style/images/{{echo $file}}.png" alt="{{echo $file}}" /></a></li>
+		{{endif;endwhile;@closedir($dh);endif;}}
+	 </ul>
+	</div>

@@ -1,64 +1,63 @@
 
 <div class="home" dir="{{echo $lang['DIR']}}" style="text-align:{{echo $lang['DIR']=='rtl'?'right':'left'}};">
 	
-	<strong>{{echo $lang['FUNCTIONS_CHECK']}}</strong> : 
-	<br />
+	<p style="color:#0000FF;padding-bottom:6px;border-bottom:1px solid #aaa;"><img src="style/images/functi0ns.gif" alt="FUNCTIONS CHECK" style="margin:0 6px;vertical-align:middle;" /> {{echo $lang['FUNCTIONS_CHECK']}} : </p>  
+
 	<ul class="ul_check">
 	{{if(function_exists('unlink')):}}
 		<li style="color:green">
-			{{echo sprintf($lang['FUNCTION_IS_EXISTS'], 'unlink')}}>
+			<img src="style/images/yes.png" alt="yes" style="margin:0 6px;vertical-align:middle;" />{{echo sprintf($lang['FUNCTION_IS_EXISTS'], 'unlink')}}
 		</li>
-	{{else: $GLOBALS['check_ok'] = false;}}
+{{else: $GLOBALS['check_ok'] = false;}}
 		<li style="color:red">
-			{{echo sprintf($lang['FUNCTION_IS_NOT_EXISTS'], 'unlink')}}
+			<img src="style/images/no.png" alt="no" style="margin:0 6px;vertical-align:middle;" />{{echo sprintf($lang['FUNCTION_IS_NOT_EXISTS'], 'unlink')}}
 		</li>
 	{{endif;}}
 
-	[ {{echo $lang['FUNCTION_DISC_UNLINK']}} ]
-	<br />
+	<div class="notice_check">[ {{echo $lang['FUNCTION_DISC_UNLINK']}} ]</div>
+
 	
 	{{if(function_exists('imagecreatetruecolor')):}}
 		<li style="color:green">
-			{{echo sprintf($lang['FUNCTION_IS_EXISTS'], 'imagecreatetruecolor')}}
+			<img src="style/images/yes.png" alt="yes" style="margin:0 6px;vertical-align:middle;" />{{echo sprintf($lang['FUNCTION_IS_EXISTS'], 'imagecreatetruecolor')}}
 		</li>
 	{{else: $GLOBALS['check_ok'] = false;}}
 		<li style="color:red">
-			{{echo sprintf($lang['FUNCTION_IS_NOT_EXISTS'], 'imagecreatetruecolor')}}
+			<img src="style/images/no.png" alt="no" style="margin:0 6px;vertical-align:middle;" />{{echo sprintf($lang['FUNCTION_IS_NOT_EXISTS'], 'imagecreatetruecolor')}}
 		</li>
 	{{endif;}}
 	
-	 [ {{echo $lang['FUNCTION_DISC_GD']}} ]
-	 <br />
+	 <div class="notice_check">[ {{echo $lang['FUNCTION_DISC_GD']}} ]</div>
+
 	
 	{{if(function_exists('fopen')):}}
 		<li style="color:green">
-			{{echo sprintf($lang['FUNCTION_IS_EXISTS'], 'fopen')}}
+			<img src="style/images/yes.png" alt="yes" style="margin:0 6px;vertical-align:middle;" />{{echo sprintf($lang['FUNCTION_IS_EXISTS'], 'fopen')}}
 		</li>
 	{{else: $GLOBALS['check_ok'] = false;}}
 		<li style="color:red">
-			{{echo sprintf($lang['FUNCTION_IS_NOT_EXISTS'], 'fopen')}}>
+			<img src="style/images/no.png" alt="no" style="margin:0 6px;vertical-align:middle;" />{{echo sprintf($lang['FUNCTION_IS_NOT_EXISTS'], 'fopen')}}>
 		</li>
 	{{endif;}}
 
-	 [ {{echo $lang['FUNCTION_DISC_FOPEN']}} ]
-	 <br />
+	 <div class="notice_check">[ {{echo $lang['FUNCTION_DISC_FOPEN']}} ]</div>
+
 	
 	{{if(function_exists('move_uploaded_file')):}}
 		<li style="color:green">
-			{{echo sprintf($lang['FUNCTION_IS_EXISTS'], 'move_uploaded_file')}}
+			<img src="style/images/yes.png" alt="yes" style="margin:0 6px;vertical-align:middle;" />{{echo sprintf($lang['FUNCTION_IS_EXISTS'], 'move_uploaded_file')}}
 		</li>
 	{{else: $GLOBALS['check_ok'] = false;}}
 		<li style="color:red">
-			{{echo sprintf($lang['FUNCTION_IS_NOT_EXISTS'], 'move_uploaded_file')}}
+			<img src="style/images/no.png" alt="no" style="margin:0 6px;vertical-align:middle;" />{{echo sprintf($lang['FUNCTION_IS_NOT_EXISTS'], 'move_uploaded_file')}}
 		</li>
 	{{endif;}}
 
+	<div class="notice_check">[ {{echo $lang['FUNCTION_DISC_MUF']}} ]</div>
 	</ul>	
 	
-	[ {{echo $lang['FUNCTION_DISC_MUF']}} ]
 	<br />
-
-	<br />
+	
 	{{if($GLOBALS['advices']):}}
 		<br />
 		<strong>{{echo $lang['ADVICES_CHECK']}}</strong> : 

@@ -114,5 +114,6 @@ break;
 /**
 * print footer
 */
-gettpl('footer.html');
+echo gettpl('footer.html');
+
 

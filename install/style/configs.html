@@ -1,18 +1,12 @@
-
 {{if(!$GLOBALS['no_config']):}}
-		 
-		 <br />
-		 <form method="post"  action="{{echo $_SERVER['PHP_SELF'] . '?step=c&amp;' . getlang(1)}}"  onsubmit="javascript:return formCheck(this, Array('db_server','db_user' ,'db_name'));">
-
-			<fieldset class="home" id="Group1" dir="{{echo $lang['DIR']}}">
-			<b>{{echo $GLOBALS['writeable_path'] ? $lang['DB_INFO'] : $lang['DB_INFO_NW']}}</b>
-			<br />
-			<br />
-			<table style="width: 100%">
+<form method="post"  action="{{echo $_SERVER['PHP_SELF'] . '?step=c&amp;' . getlang(1)}}"  onsubmit="javascript:return formCheck(this, Array('db_server','db_user' ,'db_name'));">
+	<div class="home" id="Group1" dir="{{echo $lang['DIR']}}">
+		<div class="title"><img src="style/images/info.png" style="vertical-align:middle;padding:0 10px;" alt="?" />{{echo $GLOBALS['writeable_path'] ? $lang['DB_INFO'] : $lang['DB_INFO_NW']}}</div>
+			<table class="table_conf">
 				<tr>
-					<td>{{echo $lang['DB_TYPE']}}</td>
-					<td>
-					<select name="db_type">
+					<td class="td_conf">{{echo $lang['DB_TYPE']}}</td>
+					<td style="text-align:{{echo $lang['DIR']=='rtl'?'right':'left'}};">
+					<select name="db_type" >
 						{{if (function_exists('mysqli_connect')):}}
 							<option value="mysqli">{{echo $lang['DB_TYPE_MYSQLI']}}</option>
 						{{endif;}}
@@ -21,52 +15,51 @@
 					</td>
 				</tr>
 				<tr>
-					<td>{{echo $lang['DB_SERVER']}}</td>
-					<td><input name="db_server" type="text" value="localhost" style="width: 256px" />
+					<td class="td_conf">{{echo $lang['DB_SERVER']}}</td>
+					<td><input name="db_server" type="text" value="localhost" class="input_conf" />
 					</td>
 				</tr>
 				<tr>
-					<td>{{echo $lang['DB_NAME']}}</td>
-					<td><input name="db_name" type="text" style="width: 256px" />
+					<td class="td_conf">{{echo $lang['DB_NAME']}}</td>
+					<td><input name="db_name" type="text" class="input_conf" />
 					</td>
 				</tr> 
 				<tr>
-					<td>{{echo $lang['DB_USER']}}</td>
-					<td><input name="db_user" type="text" style="width: 256px" />
+					<td class="td_conf">{{echo $lang['DB_USER']}}</td>
+					<td><input name="db_user" type="text" class="input_conf" />
 					</td>
 				</tr>
 				<tr>
-					<td>{{echo $lang['DB_PASSWORD']}}</td>
-					<td><input name="db_pass" type="text" style="width: 256px" />
+					<td class="td_conf">{{echo $lang['DB_PASSWORD']}}</td>
+					<td><input name="db_pass" type="text" class="input_conf" />
 					</td>
 				</tr>  
 				<tr>
-					<td>{{echo $lang['DB_PREFIX']}}</td>
-					<td><input name="db_prefix" type="text" value="klj_" style="width: 256px" />
+					<td class="td_conf">{{echo $lang['DB_PREFIX']}}</td>
+					<td><input name="db_prefix" type="text" value="klj_" class="input_conf" />
 					</td>
 				</tr>       
 			</table>
-			<br />
-			</fieldset>
-			<input name="dbsubmit" type="submit" value="{{echo $GLOBALS['writeable_path'] ? $lang['INST_SUBMIT'] : $lang['INST_EXPORT']}}" />
-		</form>
-		<br />
-		
-			
-		{{if(!$GLOBALS['writeable_path']):}}
-			<br />
-			<hr/>
-			<br />
-			<form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=c&amp' . getlang(1)}}">
-				<input  type="submit" value="{{echo $lang['INST_SUBMIT_CONFIGOK']}}" />
-			</form>
-		{{endif;}}
 	
-	{{else:}}
-		<fieldset class="home">
-		<br /><span style="color:green;"><strong>{{echo $lang['CONFIG_EXISTS']}}</strong><br /><br />
-		<form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=check&amp;' . getlang(1)}}">
-		<input name="agres" type="submit" value="{{echo $lang['INST_SUBMIT']}}" />
-		</form>
-		</fieldset>
-	{{endif;}}
+	</div>
+<input name="dbsubmit" type="submit" value="{{echo $GLOBALS['writeable_path'] ? $lang['INST_SUBMIT'] : $lang['INST_EXPORT']}}" />
+</form>
+<br />
+{{if(!$GLOBALS['writeable_path']):}}
+<br />
+<hr />
+<br />
+<form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=c&amp' . getlang(1)}}">
+	<input  type="submit" value="{{echo $lang['INST_SUBMIT_CONFIGOK']}}" />
+</form>
+{{endif;}}
+	
+{{else:}}
+<div class="home">
+	<br />
+	<p style="color:green;"><strong>{{echo $lang['CONFIG_EXISTS']}}</p><br /><br />
+<form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=check&amp;' . getlang(1)}}">
+	<input name="agres" type="submit" value="{{echo $lang['INST_SUBMIT']}}" />
+	</form>
+</div>
+{{endif;}}

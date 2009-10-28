@@ -1,12 +1,9 @@
-<br />
-
-	<form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=f&amp;' . getlang(1)}}">
-		<div class="home" name="license" style="width: 456px; height: 320px;direction:ltr;overflow: auto;margin:0 auto">
-			{{echo nl2br($GLOBALS['contentof_license'])}}
-		</div>
-		
-		<br />
-		{{echo $lang['INST_AGR_LICENSE']}} <input name="agrec" id="agrec" type="checkbox" onclick="javascript:agree();"  />
-		<br />
+<form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=f&amp;' . getlang(1)}}">
+	<div class="licens3" name="license">{{echo nl2br($GLOBALS['contentof_license'])}}</div>
+	<div class="clr"></div>
+		<span style="color:green;padding:0 6px;">{{echo $lang['INST_AGR_LICENSE']}}</span>
+		<input name="agrec" id="agrec" type="checkbox" onclick="javascript:agree();" style="vertical-align:middle;"  />
+	<div class="clr"></div><br />
 		<input name="agres" id="agres" type="submit" value="{{echo $lang['INST_SUBMIT']}}" disabled="disabled"/>
-	</form>
+	<div class="clr"></div><br />
+</form>

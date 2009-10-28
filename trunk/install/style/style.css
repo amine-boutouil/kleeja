@@ -1,6 +1,6 @@
 * { padding: 0;margin: 0;}
 body {
-	background:#C8C8C8 url('../styles/default/images/body.png') no-repeat top center fixed;
+	background:#EAEBEF url('style/images/Background.jpg') no-repeat bottom left fixed;
 	font-family:Tahoma, Arial, Helvetica, sans-serif;
 	font-weight:bold;
 	font-size:9pt;
@@ -19,21 +19,6 @@ img { border:0px }
 * html fieldset { padding: 0 10px 5px 10px;}
 a {color: #3B6EBF;text-decoration: none;}
 a:hover {text-decoration: underline;}
-
-
-
-.header{  
-width: 100%;
-height: 22px;
-line-height:22px;
-background-color:#FF9900;
-font-size:12px;
-font-weight:400;
-text-indent:20px;
-letter-spacing:1px;
-border-bottom:1px inset #222;
-text-align:left;
-}
 
 .clr {clear: both;overflow:hidden;height:0;}
 
@@ -54,7 +39,7 @@ font-size: 0.9em;
 line-height: 2em
 }
 /*language step*/
-.language_choose {position: absolute;top:35%;left:36%;}
+.language_choose {position: absolute;top:32%;left:36%;}
 
 ul#choose, ul#choose ul {
   margin: 0px auto;
@@ -98,28 +83,85 @@ ul#choose img {
 	-webkit-border-radius:10px;
 }
 .text{
-color:#000059;
+color:black;
 padding:10px 20px;
 text-align:justify;
 }
 .submit_no,.submit_yes{
-width: 75%;
+width: 85%;
 font-weight:bold;
 margin:2px 0;
 padding: 4px 0;
 }
 .submit_no{color:red}
 .submit_yes{color:green}
-.word{
-background:url('style/images/world.png') repeat-x top center;
-}
-.title{
+
+.footer{  
 width: 100%;
-font-size:14px;
+height: 22px;
+position:absolute;bottom:0;left:0;
+line-height:22px;
+background-color:#FF6600;
+font-size:12px;
+font-weight:400;
+text-indent:20px;
+letter-spacing:1px;
+border-top:1px inset #ccc;
+text-align:left;
+direction:ltr;
+}
+
+.title{
+width: 94%;
+margin:0 auto;
+font-size:11pt;
 color:#D00000;
 background-color:#E6C0C0;
-padding: 7px 0px;
-border-top:3px solid #DE7A7B;
-border-bottom: 3px solid #DE7A7B;
-float: {{echo $lang['DIR']=='ltr'?'left':'right'}};
-} 
+padding: 10px 0px;
+border:1px solid #DE7A7B;
+text-align: center;
+}
+.install_on,.update_on {
+	width:35%;
+	padding:10px;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+}
+
+.install_on {
+	float:right;
+	margin:20px 50px 10px 5px;
+	background:#E8FFE8;
+	border:1px solid #C1FFC1;
+}
+
+.update_on {
+	float:left;
+	margin:20px 10px 10px 50px;
+	background:#E8E8FF;
+	border:1px solid #C1C1FF;
+}
+.install_on a {
+color:green;
+}
+
+.install_on:hover ,.update_on:hover {
+	background:#fff;
+	border:1px solid #FF0000;
+}
+.install_on a:hover ,.update_on a:hover {
+text-decoration: none;
+color:red;
+}
+.licens3 {
+width: 500px; 
+height:240px;
+direction:ltr;
+overflow: auto;
+padding:15px;
+margin:10px auto;
+background:#FEFEFE url('style/images/body_install.jpg') repeat-x top center;
+border: 1px solid #A9B8C2;
+text-align:left;
+color:#0043AE;
+}

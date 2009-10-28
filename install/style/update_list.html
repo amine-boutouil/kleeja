@@ -2,12 +2,13 @@
 	<br />
 	<br />
 
-		{{$lang['INST_CHOOSE_UPDATE_FILE']}}
+		{{echo $lang['INST_CHOOSE_UPDATE_FILE']}}
 		<br />
-		{{if (sizeof($upfiles)):}}
+		<br />
+		{{if (sizeof($GLOBALS['upfiles'])):}}
 		<form  action="{{echo $_SERVER['PHP_SELF'] . '?step=action_file&amp;' . getlang(1)}}" method="post">
 			<select name="action_file_do" style="width: 352px">
-			{{foreach($upfiles as $k=>$v):}}
+			{{foreach($GLOBALS['upfiles'] as $k=>$v):}}
 				<option value="{{echo $v}}">{{echo $v}}</option>
 			{{endforeach}}
 			</select>

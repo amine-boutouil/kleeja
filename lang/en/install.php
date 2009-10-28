@@ -105,10 +105,10 @@
 	$lang['IN_PATH']								= 'Path of script';
 	$lang['INST_PHP_LESSMIN']						= 'You need PHP %1$s or above to install Kleeja, your current version is %2$s';
 	$lang['INST_MYSQL_LESSMIN']						= 'You need MySQL %1$s or above to install Kleeja, your current version is %2$s';
-	$lang['IS_IT_OFFICIAL']							= 'Have you downloaded version from the official site Kleeja.com ?';
-	$lang['IS_IT_OFFICIAL_DESC']					= 'Ì’·‰« «·ﬂÀÌ— „‰ «·‘ﬂ«ÊÌ Ê«· ”«ƒ·«  ⁄‰ ”»» »⁄÷ «·„‘«ﬂ· «· Ì  ÕœÀ ›Ì »⁄÷ «·‰”Œ Ê·« ‰” ÿÌ⁄ „⁄—›… «·„‘ﬂ·… €«·»« , ·ﬂ‰ »⁄œ «·»ÕÀ ÊÃœ‰« «‰ Â‰«ﬂ ‰”Œ« Ì „  Õ„Ì·Â« „‰ „Ê«ﬁ⁄ «Œ—Ï €Ì— —”„ÌÂ Ê ﬂÊ‰ «„« „⁄œ·… »ÿ—Ìﬁ… »œ«∆Ì… «Ê „“—Ê⁄ œ«Œ·Â« «ﬂÊ«œ Œ»ÌÀÂ.<br /><br /> <fon style="color:#154188;border-bottom:1px dashed #154188;padding:4px 0;">·–« , Â· «‰  „ √ﬂœ „‰ «‰ ‰”Œ ﬂ Â–Â  „  Õ„Ì·Â« „‰ «·„Êﬁ⁄ «·—”„Ì : kleeja.com ø</font>';
-	$lang['IS_IT_OFFICIAL_YES']						= 'Yes, my copy you downloaded from the official site kleeja.com';
-	$lang['IS_IT_OFFICIAL_NO']						= 'No, I have not downloaded from there, Hollene to the official site for download now';
+	$lang['IS_IT_OFFICIAL']							= 'Did you get your copy from Kleeja.com (Kleeja official site) ?';
+	$lang['IS_IT_OFFICIAL_DESC']					= 'We receive a lot of complaints and questions about the cause of some bugs and issues which occur in kleeja and probably we can`t figure out what the problem is . After we have checked we have found that their are some unofficially copies released from untrusted publishers .<br /><br /> <fon style="color:#154188;border-bottom:1px dashed #154188;padding:4px 0;"> So are you sure of this copy is downloaded from kleeja official site ?</font>';
+	$lang['IS_IT_OFFICIAL_YES']						= 'Yes, my copy is downloaded from official kleeja site (Kleeja.com)';
+	$lang['IS_IT_OFFICIAL_NO']						= 'No, I`ve not downloaded it from there, Go ahead now and download it from the official site';
 
 	//wizard
 	$lang['DIR']	=	'ltr';

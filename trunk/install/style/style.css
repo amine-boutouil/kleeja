@@ -27,17 +27,6 @@ a:hover {text-decoration: underline;}
 
 .wz{-moz-border-radius: 8px; border-radius:1px;color: #333333; background-color: #FAFAFA;font-family: "Tahoma", Verdana, Helvetica, sans-serif;font-size: 1.1em;font-weight: normal;border: 1px solid #A9B8C2;padding: 1px;}
 
-.ul_check,.ul_check2 { 
-padding: 10px;
-}
-.ul_check li {
-font-size: 1.2em;
-line-height: 2.3em
-}
-.ul_check2 li {
-font-size: 0.9em;
-line-height: 2em
-}
 /*language step*/
 .language_choose {position: absolute;top:32%;left:36%;}
 
@@ -75,7 +64,7 @@ ul#choose img {
 
 .home {
 	width:70%;
-	padding:15px 0;
+	padding:15px 10px;
 	margin:20px auto;
 	background:#FEFEFE url('style/images/body_install.jpg') repeat-x top center;
 	border: 1px solid #A9B8C2;
@@ -96,17 +85,17 @@ padding: 4px 0;
 .submit_no{color:red}
 .submit_yes{color:green}
 
-.footer{  
+.header{  
 width: 100%;
 height: 22px;
-position:absolute;bottom:0;left:0;
+color:#fff;
 line-height:22px;
-background-color:#FF6600;
-font-size:12px;
-font-weight:400;
-text-indent:20px;
+background-color:#FF6633;
+font-size:11px;
+
+text-indent:22px;
 letter-spacing:1px;
-border-top:1px inset #ccc;
+border-bottom:1px inset #222;
 text-align:left;
 direction:ltr;
 }
@@ -118,11 +107,12 @@ font-size:11pt;
 color:#D00000;
 background-color:#E6C0C0;
 padding: 10px 0px;
-border:1px solid #DE7A7B;
+border-top:1px solid #DE7A7B;
+border-bottom:1px solid #DE7A7B;
 text-align: center;
 }
 .install_on,.update_on {
-	width:35%;
+	width:38%;
 	padding:10px;
 	-moz-border-radius:10px;
 	-webkit-border-radius:10px;
@@ -130,14 +120,14 @@ text-align: center;
 
 .install_on {
 	float:right;
-	margin:20px 50px 10px 5px;
+	margin:20px 30px 10px 5px;
 	background:#E8FFE8;
 	border:1px solid #C1FFC1;
 }
 
 .update_on {
 	float:left;
-	margin:20px 10px 10px 50px;
+	margin:20px 10px 10px 30px;
 	background:#E8E8FF;
 	border:1px solid #C1C1FF;
 }
@@ -164,4 +154,25 @@ background:#FEFEFE url('style/images/body_install.jpg') repeat-x top center;
 border: 1px solid #A9B8C2;
 text-align:left;
 color:#0043AE;
+}
+
+.ul_check,.ul_check2 {
+list-style:none;
+padding: 10px;
+}
+.ul_check li {
+line-height:2em
+}
+.ul_check2 li {
+line-height: 2em
+}
+.notice_check {
+	text-align:justify;
+	font-size:11px;
+	border-top:1px solid #D8D8A2;
+	border-bottom:1px solid #D8D8A2;
+	background-color:#FFFFE6;
+	padding:3px 10px;
+	text-indent:5px;
+	margin:2px 0;
 }

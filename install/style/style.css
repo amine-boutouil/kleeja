@@ -11,7 +11,7 @@ body {
 aligny {
 float : {{echo $lang['DIR']=='ltr'?'left':'right'}}
 }
-input {color: #333333;font-family: "Tahoma", Verdana, Helvetica, sans-serif;font-size: 1.1em;font-weight: normal;padding: 1px;}
+input {color: #333333;font-family: "Tahoma", Verdana, Helvetica, sans-serif;font-size:11px;font-weight: normal;padding: 2px;}
 select {color: #333333; background-color: #FAFAFA;font-family: "Tahoma", Verdana, Helvetica, sans-serif;font-size: 1.1em;font-weight: normal;border: 1px solid #A9B8C2;padding: 1px;}
 option { padding: 0 1em 0 0;}
 img { border:0px } 
@@ -101,15 +101,24 @@ ul#choose img {
 color:#000059;
 padding:10px 20px;
 text-align:justify;
-
 }
-
+.submit_no,.submit_yes{
+width: 75%;
+font-weight:bold;
+margin:2px 0;
+padding: 4px 0;
+}
+.submit_no{color:red}
+.submit_yes{color:green}
+.word{
+background:url('style/images/world.png') repeat-x top center;
+}
 .title{
 width: 100%;
-font-size:16px;
+font-size:14px;
 color:#D00000;
 background-color:#E6C0C0;
-padding: 10px 0px;
+padding: 7px 0px;
 border-top:3px solid #DE7A7B;
 border-bottom: 3px solid #DE7A7B;
 float: {{echo $lang['DIR']=='ltr'?'left':'right'}};

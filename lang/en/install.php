@@ -9,7 +9,7 @@
 	$lang['INST_INSTALL_CLEAN_VER']					= 'New Installation';
 	$lang['INST_UPDATE_P_VER']						= 'Update ';
 	$lang['INST_CHOOSE_INSTALLER']					= 'Choose what suits you best from the setup wizard';
-	$lang['INST_AGR_LICENSE']						= 'I Agree';
+	$lang['INST_AGR_LICENSE']						= 'I agree to terms and agreements';
 	$lang['INST_SUBMIT']							= '[  Continue  ]';
 	$lang['INST_SITE_INFO']							= 'Site Info';
 	$lang['INST_ADMIN_INFO']						= 'Admin Info';
@@ -52,8 +52,8 @@
 	$lang['WRONG_EMAIL']							= 'Incorrect Email Address!';
 	//
 	
-	$lang['DB_INFO_NW']								= 'Config.php file is missing, fill in the fields below and kleeja will create the file for you, place it in kleeja\'s directory.';
-	$lang['DB_INFO']								= 'Config.php file is missing, fill in the fields below and kleeja will create the file for you.';
+	$lang['DB_INFO_NW']								= 'Config.php file is missing, fill in the fields below and kleeja will create the file automatically in kleeja\'s directory.';
+	$lang['DB_INFO']								= 'Config.php file is missing, fill in the fields below and kleeja will create the file automatically.';
 	$lang['DB_SERVER']								= 'Host';
 	$lang['DB_TYPE']								= 'Database type';
 	$lang['DB_TYPE_MYSQL']							= 'MySQL Standard';
@@ -61,7 +61,7 @@
 	$lang['DB_USER']								= 'Database Username';
 	$lang['DB_PASSWORD']							= 'Database Password';
 	$lang['DB_NAME']								= 'Database Name';
-	$lang['DB_PREFIX']								= 'Database prefix <br />[a word you provide that is added to the beginning of all tables for this branch installation...]';
+	$lang['DB_PREFIX']								= 'Tables prefix';
 	$lang['VALIDATING_FORM_WRONG']					= 'A required field was left blank!';
 	$lang['CONFIG_EXISTS']							= 'Config.php was found, Continue...';
 	$lang['INST_SUBMIT_CONFIGOK']					= 'Upload the file in the main directory';
@@ -106,9 +106,9 @@
 	$lang['INST_PHP_LESSMIN']						= 'You need PHP %1$s or above to install Kleeja, your current version is %2$s';
 	$lang['INST_MYSQL_LESSMIN']						= 'You need MySQL %1$s or above to install Kleeja, your current version is %2$s';
 	$lang['IS_IT_OFFICIAL']							= 'Did you get your copy from Kleeja.com (Kleeja official site) ?';
-	$lang['IS_IT_OFFICIAL_DESC']					= 'We receive a lot of complaints and questions about the cause of some bugs and issues which occur in kleeja and probably we can`t figure out what the problem is . After we have checked we have found that their are some unofficially copies released from untrusted publishers .<br /><br /> <fon style="color:#154188;border-bottom:1px dashed #154188;padding:4px 0;"> So are you sure of this copy is downloaded from kleeja official site ?</font>';
-	$lang['IS_IT_OFFICIAL_YES']						= 'Yes, my copy is official and downloaded from there ( Kleeja.com )';
-	$lang['IS_IT_OFFICIAL_NO']						= 'No, I`ve not downloaded it from there, Go ahead now and download it from there';
+	$lang['IS_IT_OFFICIAL_DESC']					= 'We receive a lot of complaints and questions about the cause of some bugs and issues which occur in kleeja and probably we can\'t figure out what the problem is . After we have checked we have found that their are some unofficially copies released from untrusted publishers .<br /><br /> <fon style="color:#154188;border-bottom:1px dashed #154188;padding:4px 0;"> So are you sure of this copy is downloaded from kleeja official site ?</font>';
+	$lang['IS_IT_OFFICIAL_YES']						= 'Yes, my copy is officially and I downloaded it from the official site ( Kleeja.com )';
+	$lang['IS_IT_OFFICIAL_NO']						= 'No, I\'ve downloaded it from other site, Go ahead now and download it from Kleeja official site';
 
 	//wizard
 	$lang['DIR']	=	'ltr';

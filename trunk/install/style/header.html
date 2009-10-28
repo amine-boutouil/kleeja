@@ -160,11 +160,13 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
+<div class="header">Wizard installation kleeja ..... version 1.0.0</div>
+<p><a style="float:left" onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com"><img src="../styles/default/images/logo.png" alt="kleeja" /></a></p>
 <br />
 {{if((isset($_GET['step']) && $_GET['step'] != 'language') && (strpos('index.php', $_SERVER['PHP_SELF'])=== false && isset($_GET['step']))):}}
 <form action="?change_lang" method="post">
-<img src="style/images/world.png" alt="language" style="float:left;margin:5px 10px;" /> 
-<select name="lang" style="float:left" onchange="submit()">
+<img src="style/images/world.png" alt="language" style="float:right;margin:5px 10px;" /> 
+<select name="lang" style="float:right" onchange="submit()">
 {{if($dh = opendir($_path . 'lang')):}}
 {{while (($file = readdir($dh)) !== false): if(strpos($file, '.') === false && $file != '..' && $file != '.'):}}
 <option value="{{echo $file}}" {{echo $file==$_GET['lang']?'selected="selected"':''}}>{{echo $file}}</option>
@@ -177,7 +179,6 @@ $(document).ready(function() {
 <!-- start all box body  -->
 <div class="box_body">
 
-<a style="float:left;margin-top:20px;" onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com"><img src="../styles/default/images/logo.png" alt="kleeja" /></a>
 
 <div class="clr"></div><br />
 

@@ -379,7 +379,7 @@ function kleeja_debug ()
 * parameter: error_title : title of prblem
 *			msg_text: message of problem
 */
-function big_error ($error_title,  $msg_text)
+function big_error ($error_title,  $msg_text, $error = true)
 {
 	global $SQL; 
 	echo '<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">' . "\n";
@@ -389,13 +389,13 @@ function big_error ($error_title,  $msg_text)
 	echo '<style type="text/css">' . "\n\t";
 	echo '* { margin: 0; padding: 0; }' . "\n\t";
 	echo 'body { background: #fff;color: #444;font-family:tahoma, verdana, arial, sans-serif;font-size: 11px;margin: 0 auto;padding: 50px;width: 767px;}' . "\n\t";
-	echo '.error {color: #333;background:#ffebe8;border: 1px solid #dd3c10;}' . "\n\t";
-	echo '.error {padding: 10px;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size: 12px;}' . "\n";
+	echo '.error {color: #333;background:#ffebe8;border: 1px solid #dd3c10;} .info {color: #333;background:#fff9d7;border: 1px solid #e2c822;}' . "\n\t";
+	echo '.error,.info {padding: 10px;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size: 12px;}' . "\n";
 	echo '</style>' . "\n";
 	echo '</head>' . "\n";
 	echo '<body>' . "\n\t";
-	echo '<div class="error">' . "\n";
-	echo "\n\t\t<h2>Kleeja Error : </h2><br />" . "\n";
+	echo '<div class="' . ($error ? 'error' : 'info') . '">' . "\n";
+	echo "\n\t\t<h2>Kleeja " . ($error ? 'error' : 'information message') . " : </h2><br />" . "\n";
 	echo "\n\t\t<strong> [ " . $error_title . ' ] </strong><br /><br />' . "\n\t\t" . $msg_text . "\n\t";
 	echo "\n\t\t" . '<br /><br /><small>Visit <a href="http://www.kleeja.com/" title="kleeja">Kleeja</a> Website for more details.</small>' . "\n\t";
 	echo '</div>' . "\n";
@@ -404,6 +404,7 @@ function big_error ($error_title,  $msg_text)
 	@$SQL->close();
 	exit();
 }
+
 
 /**
 * Redirect
@@ -670,5 +671,7 @@ function kleeja_style_info($style_name)
 
 	return $inf_r;
 }
+
+
 
 #<-- EOF

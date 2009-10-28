@@ -16,6 +16,7 @@ define ('DB_VERSION' , '7');
 
 //randome cookie name
 $cookie_name = 'klj_' . substr(md5(time()), 0, 6);
+/*
 $cookie_secure = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? '1' : '0';
 
 // rey to extract cookie domain
@@ -24,6 +25,9 @@ if (strpos($cookie_domain, ':') !== false)
 	$cookie_domain = substr($cookie_domain, 0, strpos($cookie_domain, ':'));
 if (strpos($cookie_domain, 'www.') === 0)
 	$cookie_domain = str_replace('www.', '.', $cookie_domain);
+*/
+$cookie_domain = '';
+$cookie_secure = '0';
 
 //randome cookie name
 $update_sqls['cookie_1'] = "INSERT INTO `{$dbprefix}config` (`name` ,`value` ,`option` ,`display_order`,`type`) VALUES ('cookie_name', '" . $cookie_name . "', '<input type=\"text\" id=\"cookie_name\" name=\"cookie_name\" value=\"{con.cookie_name}\" size=\"20\" style=\"direction:ltr\" />', '13', 'general');";
@@ -117,9 +121,9 @@ $update_notes[]	= $lang['INST_NOTE_RC6_TO_1.0.0'];
 
 function update_clean_name()
 {
-	global $SQL, $dbprefix, $path, $lang;
+	global $SQL, $dbprefix, $_path, $lang;
 	
-	include_once $path . 'usr.php';
+	include_once $_path . 'includes/usr.php';
 	$usrcp = new usrcp;
 	$last_id_was = 0;
 	$user_per_refresh = 100;

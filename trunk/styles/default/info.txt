@@ -1,5 +1,5 @@
 #
-# This is a coniguraion file of the style.
+# This is a configuraion file of the style.
 # Change those values when you create 
 # your style ...
 #

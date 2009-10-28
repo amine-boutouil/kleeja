@@ -367,7 +367,8 @@ class usrcp
 	function kleeja_set_cookie($name, $value, $expire)
 	{
 		global $config;
-
+		
+		/*
 		$c_domain = !empty($_SERVER['HTTP_HOST']) ? strtolower($_SERVER['HTTP_HOST']) : (!empty($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : getenv('SERVER_NAME'));
 
 		if ($config['cookie_domain'] == '')
@@ -378,7 +379,17 @@ class usrcp
 		{
 			$config['cookie_domain'] = '';
 		}
+		*/
 		
+		//
+		//when user add cookie_* in config this will replace the current ones
+		//
+		global $cookie_name, $cookie_domian, $cookie_secure, $cookie_path;
+		$config['cookie_name']		= isset($cookie_name) ? $cookie_name : $config['cookie_name'];
+		$config['cookie_domain']	= isset($cookie_domain) ? $cookie_domain : $config['cookie_domain'];
+		$config['cookie_secure']	= isset($cookie_secure) ? $cookie_secure : $config['cookie_secure'];
+		$config['cookie_path']		= isset($cookie_path) ? $cookie_path : $config['cookie_path'];
+
 		//
 		//when user add define('FORCE_COOKIES', true) in config.php we will make our settings of cookies
 		//

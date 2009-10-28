@@ -105,10 +105,10 @@
 	$lang['IN_PATH']								= 'Path of script';
 	$lang['INST_PHP_LESSMIN']						= 'You need PHP %1$s or above to install Kleeja, your current version is %2$s';
 	$lang['INST_MYSQL_LESSMIN']						= 'You need MySQL %1$s or above to install Kleeja, your current version is %2$s';
-	$lang['IS_IT_OFFICIAL']						= 'еб ёг  » Ќгнб «бд”ќе гд «бгжёЏ «б—”гн Kleeja.com ?';
-	$lang['IS_IT_OFFICIAL_DESC']				= 'н’бд« «бяЋн— гд «б‘я«жн ж«б ”«ƒб«  Џд ”»» »Џ÷ «бг‘«яб «б н  ЌѕЋ Ён »Џ÷ «бд”ќ жб« д” ЎнЏ гЏ—Ё… «бг‘яб… џ«б»«р , бяд »Џѕ «б»ЌЋ жћѕд« «д ед«я д”ќ«р н г  Ќгнбе« гд гж«ёЏ «ќ—м џн— —”гне ж яжд «г« гЏѕб… »Ў—нё… »ѕ«∆н… «ж г“—жЏ Ёне« «яж«ѕ ќ»нЋе.<br /><br /> б–« , еб «д  г √яѕ гд «д д”ќ я е–е  г  Ќгнбе« гд «бгжёЏ «б—”гн : kleeja.com њ';
-	$lang['IS_IT_OFFICIAL_YES']					= 'дЏг , д”ќ н ёг  » Ќгнбе« гд «бгжёЏ «б—”гн kleeja.com';
-	$lang['IS_IT_OFFICIAL_NO']					= 'б« , бг «ёг » Ќгнбе« гд ед«я , Ќжбдн ббгжёЏ  «б—”гн бб Ќгнб «б«д';
+	$lang['IS_IT_OFFICIAL']							= 'Have you downloaded version from the official site Kleeja.com ?';
+	$lang['IS_IT_OFFICIAL_DESC']					= 'н’бд« «бяЋн— гд «б‘я«жн ж«б ”«ƒб«  Џд ”»» »Џ÷ «бг‘«яб «б н  ЌѕЋ Ён »Џ÷ «бд”ќ жб« д” ЎнЏ гЏ—Ё… «бг‘яб… џ«б»«р , бяд »Џѕ «б»ЌЋ жћѕд« «д ед«я д”ќ«р н г  Ќгнбе« гд гж«ёЏ «ќ—м џн— —”гне ж яжд «г« гЏѕб… »Ў—нё… »ѕ«∆н… «ж г“—жЏ Ёне« «яж«ѕ ќ»нЋе.<br /><br /> б–« , еб «д  г √яѕ гд «д д”ќ я е–е  г  Ќгнбе« гд «бгжёЏ «б—”гн : kleeja.com њ';
+	$lang['IS_IT_OFFICIAL_YES']						= 'Yes, my copy you downloaded from the official site kleeja.com';
+	$lang['IS_IT_OFFICIAL_NO']						= 'No, I have not downloaded from there, Hollene to the official site for download now';
 
 	//wizard
 	$lang['DIR']	=	'ltr';

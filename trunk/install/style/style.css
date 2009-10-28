@@ -11,7 +11,13 @@ body {
 aligny {
 float : {{echo $lang['DIR']=='ltr'?'left':'right'}}
 }
-input {color: #333333;font-family: "Tahoma", Verdana, Helvetica, sans-serif;font-size:11px;font-weight: normal;padding: 2px;}
+input{
+	padding:2px;
+	font-family: "Tahoma", Verdana, Helvetica, sans-serif;
+	font-size:11px;
+	font-weight: normal;
+}
+
 select {color: #333333; background-color: #FAFAFA;font-family: "Tahoma", Verdana, Helvetica, sans-serif;font-size: 1.1em;font-weight: normal;border: 1px solid #A9B8C2;padding: 1px;}
 option { padding: 0 1em 0 0;}
 img { border:0px } 
@@ -19,6 +25,11 @@ img { border:0px }
 * html fieldset { padding: 0 10px 5px 10px;}
 a {color: #3B6EBF;text-decoration: none;}
 a:hover {text-decoration: underline;}
+
+select:focus,textarea:focus {
+	background-color:#ffd;
+	border: 1px solid #D26900;
+}
 
 .clr {clear: both;overflow:hidden;height:0;}
 
@@ -77,7 +88,7 @@ padding:10px 20px;
 text-align:justify;
 }
 .submit_no,.submit_yes{
-width: 85%;
+width: 94%;
 font-weight:bold;
 margin:2px 0;
 padding: 4px 0;
@@ -92,7 +103,6 @@ color:#fff;
 line-height:22px;
 background-color:#FF6633;
 font-size:11px;
-
 text-indent:22px;
 letter-spacing:1px;
 border-bottom:1px inset #222;
@@ -175,4 +185,32 @@ line-height: 2em
 	padding:3px 10px;
 	text-indent:5px;
 	margin:2px 0;
+}
+.table_conf {
+	width:94%;
+	margin:6px auto;
+	font-size:12px;
+	font-weight:400;
+}
+.input_conf {
+	width:200px;
+	direction:ltr;
+	cursor: text;
+	border-left: 1px solid #AFAEAA;
+	border-top: 1px solid #AFAEAA;
+	border-right: 1px solid #D5D5C8;
+	border-bottom: 1px solid #D5D5C8;
+}
+.input_conf:hover {
+	border: 1px solid #999;
+}
+.input_conf:focus {
+	background-color:#ffd;
+	border: 1px solid #D26900;
+}
+.td_conf{
+	width:100%;
+	padding:0 10px;
+	background-color:#DDDDFF;
+	text-align:{{echo $lang['DIR']=='rtl'?'right':'left'}};
 }

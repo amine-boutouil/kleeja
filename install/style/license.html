@@ -5,7 +5,8 @@
 		<span style="color:green;padding:0 6px;">{{echo $lang['INST_AGR_LICENSE']}}</span>
 		<input name="agrec" id="agrec" type="checkbox" onclick="javascript:agree();" style="vertical-align:middle;"  />
 	<div class="clr"></div><br />
-		<input name="agres" id="agres" type="submit" value="{{echo $lang['INST_SUBMIT']}}" disabled="disabled" style="padding:3px 70px;" />
+		<input name="agres" id="agres" type="submit" value="{{echo $lang['INST_SUBMIT']}}" disabled="disabled" style="padding:3px 25px;" />
+		<input onclick="window.location.href='./index.php?step=choose&amp;{{echo getlang(1)}}';return false;" name="previous" type="submit" value="{{echo $lang['INST_PREVIOUS']}}" />
 	<div class="clr"></div>
 </form>
 </div>

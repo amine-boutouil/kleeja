@@ -10,7 +10,9 @@
 	$lang['INST_UPDATE_P_VER']					= "تحديث نسخه سابقه ";
 	$lang['INST_CHOOSE_INSTALLER']				= "... قم بإختيار ما يناسبك  من معالج تثبيت كليجا ...";
 	$lang['INST_AGR_LICENSE']					= 'أوافق على هذه الشروط كلها';
-	$lang['INST_SUBMIT']						= '[  متابعه  ]';
+	$lang['INST_SUBMIT']						= 'متابعة';
+	$lang['INST_NEXT']							= 'التالي';
+	$lang['INST_PREVIOUS']						= 'السابق';
 	$lang['INST_SITE_INFO']						= 'معلومات الموقع';
 	$lang['INST_ADMIN_INFO']					= 'معلومات المسؤول';
 	$lang['INST_CHANG_CONFIG']					= 'بعض البيانات المهمه ناقصه إملأ ملف config.php';

@@ -51,7 +51,8 @@ if(!empty($dbuser) && !empty($dbname) && !(isset($_GET['step']) && in_array($_GE
 
 if(!isset($_GET['step']))
 {
-	$_GET['step'] = 'license';
+	//if anyone request this file directly without passing index.php we will return him to index.php
+	header('Location: index.php');
 }
 
 /**

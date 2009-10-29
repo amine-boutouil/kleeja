@@ -13,12 +13,11 @@
 			<br />
 			<br />
 			
+		<input name="submitlfile" type="submit" value="{{echo $lang['INST_NEXT']}}" />		
+		<input onclick="window.location.href='./index.php?step=choose&amp;{{echo getlang(1)}}';return false;" name="previous" type="submit" value="{{echo $lang['INST_PREVIOUS']}}" />
 
-			<br />
 		</form>
 		
-		<input onclick="window.location.href='./update.php?step=action_file?{{echo getlang(1)}}';" name="submitlfile" type="submit" value="{{echo $lang['INST_NEXT']}}" />		
-		<input onclick="history.go(-1)" name="previous" type="submit" value="{{echo $lang['INST_PREVIOUS']}}" />
 
 		{{else:}}
 			<br /><br />

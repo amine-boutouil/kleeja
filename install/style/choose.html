@@ -14,7 +14,7 @@
 <table style="width:74%;margin:10px auto;" cellspacing="0" cellpadding="0">
 	<tr>	
 	{{if($GLOBALS['install_or_no']):}}
-		<td class="install_on" onclick="window.location.href='./install.php?{{echo getlang(1)}}';">
+		<td class="install_on" onclick="window.location.href='./install.php?step=license&amp;{{echo getlang(1)}}';">
 		<img src="style/images/Installer.png" alt="installer" />
 			<br />{{echo $lang['INST_INSTALL_CLEAN_VER']}}
 		</td>

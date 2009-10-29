@@ -163,7 +163,7 @@ $(document).ready(function() {
 <div class="header">Wizard installation kleeja , version 1.0.0 ....</div>
 <p><a style="float:left" onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com"><img src="../styles/default/images/logo.png" alt="kleeja" /></a></p>
 <br />
-{{if((isset($_GET['step']) && $_GET['step'] != 'language') && (strpos('index.php', $_SERVER['PHP_SELF'])=== false && isset($_GET['step']))):}}
+{{if(((isset($_GET['step']) && $_GET['step'] != 'language') && (strpos('index.php', $_SERVER['PHP_SELF'])=== false && isset($_GET['step']))) OR (isset($_GET['step']) && $_GET['step'] == 'license') ):}}
 <form action="?change_lang" method="post">
 <img src="style/images/world.png" alt="language" style="float:right;margin:2px 10px;" /> 
 <select name="lang" style="float:right;" onchange="submit()">

@@ -49,6 +49,11 @@ if(!empty($dbuser) && !empty($dbname) && !(isset($_GET['step']) && in_array($_GE
 	}
 }
 
+if(!isset($_GET['step']))
+{
+	$_GET['step'] = 'license';
+}
+
 /**
 * Print header
 */
@@ -62,10 +67,6 @@ else
 }
 
 
-if(!isset($_GET['step']))
-{
-	$_GET['step'] = 'license';
-}
 
 /*
 //nvigate ..
@@ -76,7 +77,6 @@ default:
 case 'license':
 
 	$contentof_license = @file_get_contents('../docs/license.txt');
-
 	if (strlen($contentof_license) < 3)
 	{
 		$contentof_license = "license.txt is empty or not found, got to Kleeja.com and read the license content from there ...";

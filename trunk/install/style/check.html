@@ -74,18 +74,19 @@
 		</ul>
 	{{endif;}}
 
-
-	
-		
+	<center>
 	{{if($GLOBALS['check_ok']):}}
 		<form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=c&amp;' . getlang(1)}}">
 			<input name="agres" type="submit" value="{{echo $lang['INST_NEXT']}}" />
+			<input onclick="window.location.href='./install.php?step=license&amp;{{echo getlang(1)}}';return false;" name="previous" type="submit" value="{{echo $lang['INST_PREVIOUS']}}" />
 		</form>
 	{{else:}}
+	<div style="center">
 		<form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=f&amp;' . getlang(1)}}">
 			<input name="agres" type="submit" value="{{echo $lang['RE_CHECK']}}" />
-			<input onclick="history.go(-1)" name="previous" type="submit" value="{{echo $lang['INST_PREVIOUS']}}" />
+			<input onclick="window.location.href='./install.php?step=license&amp;{{echo getlang(1)}}';return false;" name="previous" type="submit" value="{{echo $lang['INST_PREVIOUS']}}" />
 		</form>
-	{{endif;}}	
-		<input onclick="history.go(-1)" name="previous" type="submit" value="{{echo $lang['INST_PREVIOUS']}}" />
+	{{endif;}}
+	</center>
+	
 </div>

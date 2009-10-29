@@ -57,19 +57,19 @@
 	
 	{{if($GLOBALS['advices']):}}
 		<br />
-		<strong>{{echo $lang['ADVICES_CHECK']}}</strong> : 
-		<br />
+			<p style="color:#0000FF;padding-bottom:6px;border-bottom:1px solid #aaa;"><img src="style/images/functi0ns.gif" alt="FUNCTIONS CHECK" style="margin:0 6px;vertical-align:middle;" /> {{echo $lang['ADVICES_CHECK']}}</p> 
+
 		<ul  class="ul_check2">
 		{{if($GLOBALS['register_globals']):}}
-			<li>{{$lang['ADVICES_REGISTER_GLOBALS']}}</li>
+			<li class="notice_check">{{echo $lang['ADVICES_REGISTER_GLOBALS']}}</li>
 		{{endif;}}
 		
 		{{if($GLOBALS['get_magic_quotes_gpc']):}}
-			<li>{{$lang['ADVICES_MAGIC_QUOTES']}}</li>
+			<li class="notice_check">{{echo $lang['ADVICES_MAGIC_QUOTES']}}</li>
 		{{endif;}}
 		
 		{{if($GLOBALS['iconv']):}}
-			<li>{{$lang['ADVICES_ICONV']}}</li>
+			<li class="notice_check">{{echo $lang['ADVICES_ICONV']}}</li>
 		{{endif;}}
 		</ul>
 	{{endif;}}

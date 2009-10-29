@@ -301,6 +301,11 @@ function process ()
 				}
 			}
 			
+			if($this->user_is_flooding())
+			{
+				return $this->errs[] = array($lang['NO_REPEATING_UPLOADING'], 'index_err');
+			}
+			
 			if ($wut == 1 && isset($_SESSION['FIILES_NOT_DUPLI']))
 			{
 				for($i=0;$i<=$this->filesnum;$i++)
@@ -786,6 +791,30 @@ function process ()
 		
 		return (string)$headers["Content-Length"];
     }
+    
+    /** 
+	TODO : add options 3 in acp to control this function easily
+	**/
+    function user_is_flooding()
+    {
+    	global $SQL, $dbprefix;
+    	
+    	//In my point of view I see 30 seconds is not bad rate to stop flooding .. even though this minimum rate somtitme isn't enough to protect your site from flooding attacks 
+    	$time = time() - 30; 
+    	
+		$query = array(
+					'SELECT'	=> 'f.time',
+					'FROM'		=> "{$dbprefix}files f",
+					'WHERE'     => 'f.time >= \'' . $time . '\' AND f.user_ip = \'' .  get_ip() . '\'',
+				);
+
+		if ($SQL->num_rows($SQL->build($query)) != 0)
+		{
+			return true;
+		}
+				
+		return false;
+	}
 }#end class
 
 

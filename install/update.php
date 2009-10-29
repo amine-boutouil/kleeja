@@ -61,6 +61,10 @@ if($config['db_version'] == false)
 	$SQL->query("INSERT INTO `{$dbprefix}config` (`name` ,`value`)VALUES ('db_version', '')");
 }
 
+if(!isset($_GET['step']))
+{
+	$_GET['step'] = 'action_file';
+}
 
 /**
 * print header
@@ -70,10 +74,7 @@ if (!isset($_POST['action_file_do']))
 	echo gettpl('header.html');
 }
 
-if(!isset($_GET['step']))
-{
-	$_GET['step'] = 'action_file';
-}
+
 
 /**
 * Navigation ..

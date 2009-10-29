@@ -27,7 +27,6 @@ select {color: #333333; background-color: #FAFAFA;font-family: "Tahoma", Verdana
 option { padding: 0 1em 0 0;}
 img { border:0px } 
 
-* html fieldset { padding: 0 10px 5px 10px;}
 a {color: #3B6EBF;text-decoration: none;}
 a:hover {text-decoration: underline;}
 
@@ -189,6 +188,15 @@ line-height: 2em
 	text-indent:5px;
 	margin:2px 0;
 }
+
+
+.upda{
+background:url('style/images/update.png') no-repeat right center;
+}
+
+
+
+
 .table_conf {
 	width:94%;
 	margin:6px auto;
@@ -217,3 +225,4 @@ line-height: 2em
 	background-color:#DDDDFF;
 	text-align:{{echo $lang['DIR']=='rtl'?'right':'left'}};
 }
+

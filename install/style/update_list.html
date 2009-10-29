@@ -1,5 +1,6 @@
 <br /><br />
 <div class="home">
+<div class="upda">
 {{echo $lang['INST_CHOOSE_UPDATE_FILE']}}
 	<div class="clr"></div><br /><br />
 		{{if (sizeof($GLOBALS['upfiles'])):}}
@@ -17,7 +18,7 @@
 		</form>
 		
 		<input onclick="window.location.href='./update.php?step=action_file?{{echo getlang(1)}}';" name="submitlfile" type="submit" value="{{echo $lang['INST_NEXT']}}" />		
-		<input onclick="window.location.href='./index.php?step=choose?{{echo getlang(1)}}';" name="previous" type="submit" value="{{echo $lang['INST_PREVIOUS']}}" />
+		<input onclick="history.go(-1)" name="previous" type="submit" value="{{echo $lang['INST_PREVIOUS']}}" />
 
 		{{else:}}
 			<br /><br />
@@ -29,4 +30,5 @@
 			</p>
 			<br /><br /><br />
 		{{endif;}}
+</div>
 </div>

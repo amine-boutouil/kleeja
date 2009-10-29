@@ -57,7 +57,10 @@
 {{else:}}
 <div class="home">
 	<br />
-	<p style="color:green;"><strong>{{echo $lang['CONFIG_EXISTS']}}</p><br /><br />
+	<img src="style/images/check_conf.png" alt="config exists" />
+	<br /><br />
+	<p style="color:green;font-size:large">{{echo $lang['CONFIG_EXISTS']}}</p>
+	<br />
 <form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=check&amp;' . getlang(1)}}">
 	<input name="agres" type="submit" value="{{echo $lang['INST_SUBMIT']}}" />
 	</form>

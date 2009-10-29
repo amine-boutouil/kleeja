@@ -1,4 +1,4 @@
-<fieldset class="home">
+<div class="home">
 
 {{if(!isset($GLOBALS['dbname']) || !isset($GLOBALS['dbuser'])): $GLOBALS['submit_disabled'] = true;}}
 <span style="color:red;">
@@ -50,14 +50,12 @@
 {{if(!$GLOBALS['submit_disabled']):}}
 <br />
 <img src="style/images/good.png" alt="good" />
+<br /><br />
+<p style="color:green;font-size:large">[ {{echo $lang['INST_GOOD_GO']}} ]</p>
 <br />
-<span style="color:green;"><b>[ {{echo $lang['INST_GOOD_GO']}} ]</b></span>
-<br />
-<br />
-
 <form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=data&amp;' . getlang(1)}}">
 	<input name="agres" type="submit" value="{{echo $lang['INST_SUBMIT']}}" />
 </form>
 {{endif}}
 
-</fieldset>
+</div>

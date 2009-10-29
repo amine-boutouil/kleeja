@@ -1,9 +1,11 @@
+<div class="home">
 <form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=f&amp;' . getlang(1)}}">
 	<div class="licens3" name="license">{{echo nl2br($GLOBALS['contentof_license'])}}</div>
 	<div class="clr"></div>
 		<span style="color:green;padding:0 6px;">{{echo $lang['INST_AGR_LICENSE']}}</span>
 		<input name="agrec" id="agrec" type="checkbox" onclick="javascript:agree();" style="vertical-align:middle;"  />
 	<div class="clr"></div><br />
-		<input name="agres" id="agres" type="submit" value="{{echo $lang['INST_SUBMIT']}}" disabled="disabled"/>
-	<div class="clr"></div><br />
+		<input name="agres" id="agres" type="submit" value="{{echo $lang['INST_SUBMIT']}}" disabled="disabled" style="padding:3px 70px;" />
+	<div class="clr"></div>
 </form>
+</div>

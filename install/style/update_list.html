@@ -1,10 +1,7 @@
-
-	<br />
-	<br />
-
-		{{echo $lang['INST_CHOOSE_UPDATE_FILE']}}
-		<br />
-		<br />
+<br /><br />
+<div class="home">
+{{echo $lang['INST_CHOOSE_UPDATE_FILE']}}
+	<div class="clr"></div><br /><br />
 		{{if (sizeof($GLOBALS['upfiles'])):}}
 		<form  action="{{echo $_SERVER['PHP_SELF'] . '?step=action_file&amp;' . getlang(1)}}" method="post">
 			<select name="action_file_do" style="width: 352px">
@@ -14,16 +11,22 @@
 			</select>
 			<br />
 			<br />
-			<input name="submitlfile" type="submit" value="{{echo $lang['INST_SUBMIT']}}" />
-			<br /><br /><br />
+			
+
+			<br />
 		</form>
+		
+		<input onclick="window.location.href='./update.php?step=action_file?{{echo getlang(1)}}';" name="submitlfile" type="submit" value="{{echo $lang['INST_NEXT']}}" />		
+		<input onclick="window.location.href='./index.php?step=choose?{{echo getlang(1)}}';" name="previous" type="submit" value="{{echo $lang['INST_PREVIOUS']}}" />
+
 		{{else:}}
 			<br /><br />
-			<span style="color:green;">
+			<p style="color:green;">
 			<strong>{{echo $lang['INST_UPDATE_CUR_VER_IS_UP']}}
 			<br /> 
 			[ {{echo array_search($GLOBALS['config']['db_version'], $GLOBALS['order_update_files'])}} :: {{echo $GLOBALS['config']['db_version']}} ]
 			</strong>
-			</span>
+			</p>
 			<br /><br /><br />
 		{{endif;}}
+</div>

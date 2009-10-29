@@ -1,6 +1,6 @@
 * { padding: 0;margin: 0;}
 body {
-	background:#EAEBEF url('style/images/Background.jpg') no-repeat bottom left fixed;
+	background:#FAFAFA url('style/images/Background.jpg') no-repeat bottom left fixed;
 	font-family:Tahoma, Arial, Helvetica, sans-serif;
 	font-weight:bold;
 	font-size:9pt;
@@ -16,6 +16,11 @@ input{
 	font-family: "Tahoma", Verdana, Helvetica, sans-serif;
 	font-size:11px;
 	font-weight: normal;
+}
+input[type="submit"] {
+	cursor: pointer;
+	padding:3px 18px;
+
 }
 
 select {color: #333333; background-color: #FAFAFA;font-family: "Tahoma", Verdana, Helvetica, sans-serif;font-size: 1.1em;font-weight: normal;border: 1px solid #A9B8C2;padding: 1px;}
@@ -79,10 +84,9 @@ ul#choose img {
 	margin:20px auto;
 	background:#FEFEFE url('style/images/body_install.jpg') repeat-x top center;
 	border: 1px solid #A9B8C2;
-	-moz-border-radius:10px;
-	-webkit-border-radius:10px;
 }
-.text{
+
+.text {
 color:black;
 padding:10px 20px;
 text-align:justify;
@@ -121,49 +125,48 @@ border-top:1px solid #DE7A7B;
 border-bottom:1px solid #DE7A7B;
 text-align: center;
 }
+.home ,.install_on,.update_on{
+	-moz-border-radius:11px;
+	-khtml-border-radius: 11px;
+	-webkit-border-radius: 11px;
+	border-radius:10px;
+	-moz-box-shadow: rgba(112,112,112,1) 0 4px 10px;
+	-webkit-box-shadow: rgba(112,112,112,1) 0 4px 10px;	
+	-khtml-box-shadow: rgba(112,112,112,1) 0 4px 10px;
+	box-shadow: rgba(112,112,112,1) 0 4px 10px;
+}
+
 .install_on,.update_on {
-	width:38%;
-	padding:10px;
-	-moz-border-radius:10px;
-	-webkit-border-radius:10px;
+	width:50%;
+	padding:20px 0;
+	cursor:pointer;
 }
 
 .install_on {
-	float:right;
-	margin:20px 30px 10px 5px;
-	background:#E8FFE8;
-	border:1px solid #C1FFC1;
+	background:#E7FAE7 url('style/images/install_on.gif') repeat-x bottom center;
+	border:1px solid #A9F799;
 }
 
 .update_on {
-	float:left;
-	margin:20px 10px 10px 30px;
-	background:#E8E8FF;
-	border:1px solid #C1C1FF;
+	background:#E0EAEF url('style/images/update_on.gif') repeat-x bottom center;
+	border:1px solid #8CCAD9;
 }
-.install_on a {
-color:green;
+.install_on:hover ,.update_on:hover {
+	background:#FFFDE2 url('style/images/xhover.gif') repeat-x bottom center;
+	border:1px solid #FF6633;
 }
 
-.install_on:hover ,.update_on:hover {
-	background:#fff;
-	border:1px solid #FF0000;
-}
-.install_on a:hover ,.update_on a:hover {
-text-decoration: none;
-color:red;
-}
 .licens3 {
 width: 500px; 
-height:240px;
+height:180px;
 direction:ltr;
 overflow: auto;
 padding:15px;
 margin:10px auto;
-background:#FEFEFE url('style/images/body_install.jpg') repeat-x top center;
+background:#FCFCEF url('style/images/xhover.gif') repeat-x bottom center ;
 border: 1px solid #A9B8C2;
-text-align:left;
-color:#0043AE;
+text-align:justify;
+color:#111;
 }
 
 .ul_check,.ul_check2 {

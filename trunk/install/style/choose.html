@@ -18,12 +18,14 @@
 		<img src="style/images/Installer.png" alt="installer" />
 			<br />{{echo $lang['INST_INSTALL_CLEAN_VER']}}
 		</td>
-		{{endif;}}
+	{{else:}}
 		<td style="width:3%">&nbsp;</td>
 		<td class="update_on" onclick="window.location.href='./update.php?{{echo getlang(1)}}';">
 		<img src="style/images/update.png" alt="update" />
 			<br />{{echo $lang['INST_UPDATE_P_VER']}}
 		</td>
-		{{endif;}}
+	{{endif;}}
 	</tr>
 </table>
+
+{{endif;}}

@@ -9,7 +9,6 @@
 	$lang['INST_INSTALL_CLEAN_VER']				= "تثبيت نسخه جديده ";
 	$lang['INST_UPDATE_P_VER']					= "تحديث نسخه سابقه ";
 	$lang['INST_AGR_LICENSE']					= 'أوافق على هذه الشروط كلها';
-	$lang['INST_SUBMIT']						= 'متابعة';
 	$lang['INST_NEXT']							= 'التالي';
 	$lang['INST_PREVIOUS']						= 'السابق';
 	$lang['INST_SITE_INFO']						= 'معلومات الموقع';

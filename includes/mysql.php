@@ -443,6 +443,7 @@ class SSQL
 						$error_msg = preg_replace("#\s{1,3}{$dbprefix}([a-z0-9]+)\s{1,3}#e", "' <span style=\"color:blue\">' . substr('$1', 0, 1) . '</span> '", $error_msg);
 						$error_sql = preg_replace("#\s{1,3}(from|update|into)\s{1,3}([a-z0-9]+)\s{1,3}#ie", "' $1 <span style=\"color:blue\">' . substr('$2', 0, 1) . '</span> '", $error_sql);
 						$error_msg = preg_replace("#\s{1,3}(from|update|into)\s{1,3}([a-z0-9]+)\s{1,3}#ie", "' $1 <span style=\"color:blue\">' . substr('$2', 0, 1) . '</span> '", $error_msg);
+						$error_msg = preg_replace("#\s'([^']+)'@'([^']+)'#ie", "' <span style=\"color:blue\">hidden</span>@$2 '", $error_msg);
 					}
 					
 					echo "<html><head><title>ERROR IM MYSQL</title>";

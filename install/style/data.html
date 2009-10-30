@@ -1,60 +1,68 @@
 <div class="home" dir="{{echo $lang['DIR']}}" style="text-align:{{echo $lang['DIR']=='rtl'?'right':'left'}};">
-<div class="clr"></div><br />	
-		<form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=data&amp;' . getlang(1)}}"  onsubmit="javascript:return formCheck(this, Array('sitename','siteurl','sitemail' ,'username', 'password','email' ));">
-		
-		<legend style="width: 73px"> [ <strong>{{echo $lang['INST_SITE_INFO']}}</strong> ]</legend>
-		<table style="width: 100%">
+<div class="clr"></div>	
+	<form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=data&amp;' . getlang(1)}}"  onsubmit="javascript:return formCheck(this, Array('sitename','siteurl','sitemail' ,'username', 'password','email' ));">
+		<table class="data_table_install" dir="{{echo $lang['DIR']}}">
 			<tr>
-				<td>{{echo $lang['SITENAME']}}</td>
-				<td><input name="sitename" type="text" style="width: 256px" /></td>
+				<th colspan="2">{{echo $lang['INST_SITE_INFO']}}</th>
 			</tr>
 			<tr>
-				<td>{{echo $lang['SITEURL']}}</td>
-				<td><input name="siteurl" type="text" value="{{echo $GLOBALS['urlsite']}}" style="width: 256px" /></td>
+				<td class="tdd">{{echo $lang['SITENAME']}}</td>
+				<td><input name="sitename" type="text" /></td>
 			</tr>
 			<tr>
-				<td>{{echo $lang['SITEMAIL']}}</td>
-				<td><input name="sitemail" id="sitemail" type="text" style="width: 256px" onchange="return w_email(this.name);" /></td>
+				<td class="tdd">{{echo $lang['SITEURL']}}</td>
+				<td><input name="siteurl" type="text" value="{{echo $GLOBALS['urlsite']}}" style="direction:ltr;" /></td>
+			</tr>
+			<tr>
+				<td class="tdd">{{echo $lang['SITEMAIL']}}</td>
+				<td><input name="sitemail" id="sitemail" type="text" onchange="return w_email(this.name);" style="direction:ltr;width:50%" /></td>
 			</tr>       
 		</table>
 
-
-		<br />
-
-
-		<legend style="width: 73px"> [ <strong>{{echo $lang['INST_ADMIN_INFO']}}</strong> ]</legend>
-		<table style="width: 100%">
+<div class="clr"></div>
+	
+		<table class="data_table_install" dir="{{echo $lang['DIR']}}">
 			<tr>
-				<td>{{echo $lang['USERNAME']}}</td>
-				<td><input name="username" type="text" style="width: 256px" /></td>
+				<th colspan="2" style="background:#91CF0C;">{{echo $lang['INST_ADMIN_INFO']}}</th>
 			</tr>
 			<tr>
-				<td>{{echo $lang['PASSWORD']}}</td>
+				<td class="tdd">{{echo $lang['USERNAME']}}</td>
+				<td><input name="username" type="text" style="width:50%;" /></td>
+			</tr>
+			<tr>
+				<td class="tdd">{{echo $lang['PASSWORD']}}</td>
 				<td>
 
-<script type="text/javascript">
-$(function() {
-$('.password').pstrength();
-});
-</script>
-					<input name="password" class="password" type="text" style="width: 173px" />
+					<script type="text/javascript">
+						//<![CDATA[
+						$(function() {
+						$('.password').pstrength();
+						});
+						//]]>
+					</script>
+			
+					<input name="password" class="password" type="text" style="width:50%;" />
 			
 				</td>
 			</tr>
 			<tr>
-				<td>{{echo $lang['PASSWORD2']}}</td>
-				<td><input name="password2" id="password2" type="text" style="width: 253px" /></td>
+				<td class="tdd">{{echo $lang['PASSWORD2']}}</td>
+				<td><input name="password2" id="password2" type="text" style="width:50%;direction:ltr;" /></td>
 			</tr>
 			<tr>
-				<td><strong>{{echo $lang['EMAIL']}}</strong></td>
-				<td><input name="email" id="email" type="text" style="width: 256px"  onchange="return w_email(this.name);" /></td>
+				<td class="tdd">{{echo $lang['EMAIL']}}</td>
+				<td><input name="email" id="email" type="text" style="width:50%;direction:ltr;" onchange="return w_email(this.name);" /></td>
 			</tr>
 		</table>
+		
+<div class="clr"></div>
 
-		<legend style="width: 73px"> [ <strong>{{echo $lang['INST_OTHER_INFO']}}</strong> ]</legend>
-		<table style="width: 100%">
+		<table class="data_table_install" dir="{{echo $lang['DIR']}}">
 			<tr>
-				<td><strong>{{echo $lang['URLS_TYPES']}}</strong></td>
+				<th colspan="2" style="background:#D1910A;">{{echo $lang['INST_OTHER_INFO']}}</th>
+			</tr>
+			<tr>
+				<td class="tdd">{{echo $lang['URLS_TYPES']}}</td>
 				<td>
 					<script type="text/javascript">
 					//<![CDATA[
@@ -64,22 +72,24 @@ $('.password').pstrength();
 						explains["direct"] = "{{echo $GLOBALS['urlsite']}}uploads/12542219930.gif";
 					//]]>
 					</script>
-					<select name="urls_type" onChange="document.getElementById('like_this').innerHTML=explains[this.options[this.selectedIndex].value]" >
+					<select name="urls_type" onChange="document.getElementById('like_this').innerHTML=explains[this.options[this.selectedIndex].value]" style="width:50%">
 						<option value="id">{{echo $lang['DEFAULT']}}</option>
 						<option value="filename">{{echo $lang['FILENAME_URL']}}</option>
 						<option value="direct">{{echo $lang['DIRECT_URL']}}</option>
 					</select>
-					<br />
-					<div>
-					{{echo $lang['LIKE_THIS']}} : 
-						<span id="like_this">{{echo $GLOBALS['urlsite']}}download.php?id=123</span>
-					</div>
 				</td>
 			</tr>
+			<tr>
+				<td class="tdd">{{echo $lang['LIKE_THIS']}}</td>
+				<td style="direction:ltr;text-align:left"><p id="like_this">{{echo $GLOBALS['urlsite']}}download.php?id=123</p></td>
+			</tr>
 		</table>
-<center style="margin-top:10px;">
-	<input onclick="window.location.href='./install.php?step=check&amp;{{echo getlang(1)}}';return false;" name="previous" type="submit" value="{{echo $lang['INST_PREVIOUS']}}" />
-	<input name="datasubmit" type="submit" value="{{echo $lang['INST_NEXT']}}" />
-</center>
-	</form>
+		
+<div class="clr"></div>
+
+	<center style="margin-top:10px;">
+		<input onclick="window.location.href='./install.php?step=check&amp;{{echo getlang(1)}}';return false;" name="previous" type="submit" value="{{echo $lang['INST_PREVIOUS']}}" />
+		<input name="datasubmit" type="submit" value="{{echo $lang['INST_NEXT']}}" />
+	</center>
+</form>
 </div>

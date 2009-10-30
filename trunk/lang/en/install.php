@@ -8,7 +8,6 @@
 	$lang['INST_INSTALL_WIZARD']					= 'Kleeja installing wizard';
 	$lang['INST_INSTALL_CLEAN_VER']					= 'New Installation';
 	$lang['INST_UPDATE_P_VER']						= 'Update ';
-	$lang['INST_CHOOSE_INSTALLER']					= 'Choose what suits you best from the setup wizard';
 	$lang['INST_AGR_LICENSE']						= 'I agree to terms and agreements';
 	$lang['INST_SUBMIT']							= 'Continue';
 	$lang['INST_NEXT']								= 'Next';

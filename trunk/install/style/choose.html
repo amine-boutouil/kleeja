@@ -1,31 +1,26 @@
 {{if(!$GLOBALS['php_ver']):}}
-<div class="home">
-	<br />
-	<p style="color:red;">{{echo sprintf($lang['INST_PHP_LESSMIN'], MIN_PHP_VERSION, PHP_VERSION)}}</p>
-	<br />
+<div class="clr"></div><br />
+<div class="home" dir="{{echo $lang['DIR']}}">
+	<div class="clr"></div><br />
+	<div class="title"><img src="style/images/info.png" style="vertical-align:middle;padding:0 10px;" alt="?" />{{echo sprintf($lang['INST_PHP_LESSMIN'], MIN_PHP_VERSION, PHP_VERSION)}}</div>
+	<div class="clr"></div><br />
 </div>
 
 {{else:}}
 
-<div class="clr"></div><br /><br />
-<p style="width:80%;margin:20px auto;color:#0071E1;font-size:20px;text-shadow: 0px 1px rgb(160, 160, 160);">{{echo $lang['INST_CHOOSE_INSTALLER']}}</p>
-<div class="clr"></div>
-
-<table style="width:74%;margin:10px auto;" cellspacing="0" cellpadding="0">
-	<tr>	
-	{{if($GLOBALS['install_or_no']):}}
-		<td class="install_on" onclick="window.location.href='./install.php?step=license&amp;{{echo getlang(1)}}';">
-		<img src="style/images/Installer.png" alt="installer" />
-			<br />{{echo $lang['INST_INSTALL_CLEAN_VER']}}
-		</td>
+<div class="clr"></div><br />
+{{if($GLOBALS['install_or_no']):}}
+<div class="install_update" onclick="window.location.href='./install.php?step=license&amp;{{echo getlang(1)}}';">
+	<img src="style/images/Installer.png" alt="installer" />
+	<p>{{echo $lang['INST_INSTALL_CLEAN_VER']}}</p>
+</div>
 	{{else:}}
-		<td style="width:3%">&nbsp;</td>
-		<td class="update_on" onclick="window.location.href='./update.php?{{echo getlang(1)}}';">
-		<img src="style/images/update.png" alt="update" />
-			<br />{{echo $lang['INST_UPDATE_P_VER']}}
-		</td>
-	{{endif;}}
-	</tr>
-</table>
+<div class="install_update" onclick="window.location.href='./update.php?{{echo getlang(1)}}';">	
+	<img src="style/images/update.png" alt="update" />
+	<p>{{echo $lang['INST_UPDATE_P_VER']}}</p>
+</div>
+{{endif;}}
+
+<div class="clr"></div><br />
 
 {{endif;}}

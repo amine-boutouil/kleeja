@@ -1,19 +1,21 @@
 * { padding: 0;margin: 0;}
 body {
 	background:#FAFAFA url('style/images/Background.jpg') no-repeat bottom left fixed;
-	font-family:Tahoma, Arial, Helvetica, sans-serif;
+	font-family: Tahoma, Arial, Verdana, sans-serif, "Lucida Grande", "Lucida Sans Unicode";
 	font-weight:bold;
 	font-size:9pt;
 	line-height: 1.5em;
 	margin:0px auto; 
-	text-align: center
+	text-align: center;
+	behavior: url('style/ie6/iepngfix.htc')
 }
+
 aligny {
 float : {{echo $lang['DIR']=='ltr'?'left':'right'}}
 }
-input{
+input,select {
 	padding:2px;
-	font-family: "Tahoma", Verdana, Helvetica, sans-serif;
+	font-family: Tahoma, Arial, Verdana, sans-serif, "Lucida Grande", "Lucida Sans Unicode";
 	font-size:12px;
 	font-weight: normal;
 }
@@ -24,8 +26,10 @@ input[type="submit"] {
 	width:140px;
 }
 
-select {color: #333333; background-color: #FAFAFA;font-family: "Tahoma", Verdana, Helvetica, sans-serif;font-size: 1.1em;font-weight: normal;border: 1px solid #A9B8C2;padding: 1px;}
-option { padding: 0 1em 0 0;}
+select {color: #333333; background-color:#FAFAFA;border: 1px solid #A9B8C2;padding: 1px;}
+option { padding: 0 5px;}
+
+img, div { behavior: url('style/ie6/iepngfix.htc') }
 img { border:0px } 
 
 a {color: #3B6EBF;text-decoration: none;}
@@ -101,13 +105,12 @@ padding: 4px 0;
 
 .header{  
 width: 100%;
-height: 22px;
+height:25px;
 color:#fff;
-line-height:22px;
-background-color:#FF6633;
-font-size:11px;
+line-height:25px;
+background:#FF6633 url('style/images/bg_header.gif') repeat-x top center;
+font-size:8pt;
 text-indent:22px;
-letter-spacing:1px;
 border-bottom:1px inset #222;
 text-align:left;
 direction:ltr;
@@ -124,7 +127,7 @@ border-top:1px solid #DE7A7B;
 border-bottom:1px solid #DE7A7B;
 text-align: center;
 }
-.home ,.install_on,.update_on{
+.home ,.install_update{
 	-moz-border-radius:11px;
 	-khtml-border-radius: 11px;
 	-webkit-border-radius: 11px;
@@ -135,22 +138,24 @@ text-align: center;
 	box-shadow: rgba(112,112,112,1) 0 4px 10px;
 }
 
-.install_on,.update_on {
-	width:50%;
+.install_update {
+	width:44%;
+	margin:20px auto;
 	padding:20px 0;
 	cursor:pointer;
-}
-
-.install_on {
-	background:#E7FAE7 url('style/images/install_on.gif') repeat-x bottom center;
-	border:1px solid #A9F799;
-}
-
-.update_on {
 	background:#E0EAEF url('style/images/update_on.gif') repeat-x bottom center;
 	border:1px solid #8CCAD9;
 }
-.install_on:hover ,.update_on:hover {
+.install_update p{
+text-align:center;
+margin:8px auto;
+color:#0087CB;
+font-size:22px;
+}
+.install_update p:hover {
+color:#B2E5FF;
+}
+div.install_update:hover {
 	background:#FFFDE2 url('style/images/xhover.gif') repeat-x bottom center;
 	border:1px solid #FF6633;
 }
@@ -190,12 +195,9 @@ margin:5px 0;
 	font-weight:400;
 }
 
-
 .upda{
 background:url('style/images/update.png') no-repeat right center;
 }
-
-
 
 
 .table_conf {
@@ -225,4 +227,3 @@ background:url('style/images/update.png') no-repeat right center;
 	padding:1px 10px;
 	background-color:#DCE4FC;
 }
-

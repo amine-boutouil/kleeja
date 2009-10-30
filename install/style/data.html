@@ -1,6 +1,7 @@
-		
+<div class="home" dir="{{echo $lang['DIR']}}" style="text-align:{{echo $lang['DIR']=='rtl'?'right':'left'}};">
+<div class="clr"></div><br />	
 		<form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=data&amp;' . getlang(1)}}"  onsubmit="javascript:return formCheck(this, Array('sitename','siteurl','sitemail' ,'username', 'password','email' ));">
-		<fieldset class="home">
+		
 		<legend style="width: 73px"> [ <strong>{{echo $lang['INST_SITE_INFO']}}</strong> ]</legend>
 		<table style="width: 100%">
 			<tr>
@@ -16,11 +17,11 @@
 				<td><input name="sitemail" id="sitemail" type="text" style="width: 256px" onchange="return w_email(this.name);" /></td>
 			</tr>       
 		</table>
-		</fieldset>
+
 
 		<br />
 
-		<fieldset class="home">
+
 		<legend style="width: 73px"> [ <strong>{{echo $lang['INST_ADMIN_INFO']}}</strong> ]</legend>
 		<table style="width: 100%">
 			<tr>
@@ -44,10 +45,7 @@
 				<td><input name="email" id="email" type="text" style="width: 256px"  onchange="return w_email(this.name);" /></td>
 			</tr>
 		</table>
-		</fieldset>
-		
 
-		<fieldset class="home">
 		<legend style="width: 73px"> [ <strong>{{echo $lang['INST_OTHER_INFO']}}</strong> ]</legend>
 		<table style="width: 100%">
 			<tr>
@@ -74,7 +72,9 @@
 				</td>
 			</tr>
 		</table>
-		</fieldset>
-
-		<input name="datasubmit" type="submit" value="{{echo $lang['INST_SUBMIT']}}" />
+<center style="margin-top:10px;">
+	<input onclick="window.location.href='./install.php?step=check&amp;{{echo getlang(1)}}';return false;" name="previous" type="submit" value="{{echo $lang['INST_PREVIOUS']}}" />
+	<input name="datasubmit" type="submit" value="{{echo $lang['INST_SUBMIT']}}" />
+</center>
 	</form>
+</div>

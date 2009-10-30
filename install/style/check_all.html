@@ -1,5 +1,6 @@
 <div class="home" dir="{{echo $lang['DIR']}}">
 {{if(!isset($GLOBALS['dbname']) || !isset($GLOBALS['dbuser'])): $GLOBALS['submit_disabled'] = true;}}
+	<img src="style/images/bad.png" alt="no" style="margin:3px auto;" />
 	<p style="color:red;"><img src="style/images/glob4ls.png" alt="no" style="margin:0 6px;vertical-align:middle;" />{{echo $lang['INST_CHANG_CONFIG']}}</p>
 	<div class="clr"></div><br />
 {{endif}}

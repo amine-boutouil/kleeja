@@ -14,7 +14,7 @@
 body { 
 	background:#C8C8C8 url(../images/body.png) top center no-repeat fixed;
 	color: #444;
-	font-family:Tahoma, Arial, Helvetica, sans-serif;
+	font-family: "Tahoma", Arial, Verdana, sans-serif, Lucida Grande, Lucida Sans Unicode;
 	font-weight:bold;
 	font-size:11px;
 	text-align: justify;
@@ -40,8 +40,10 @@ p, ul, ol {
 label {
 	padding:4px 0;
 }
-input ,textarea ,select  ,option{
-	font:normal 12px Tahoma, Arial, Helvetica, sans-serif;
+input ,textarea ,select  ,option,input[type="text"],input[type="password"],input[type="file"],input[type="submit"] ,input[type="button"] {
+	font-family: "Tahoma", Arial, Verdana, sans-serif, Lucida Grande, Lucida Sans Unicode;
+	font-weight:normal;
+	font-size:12px;
 }
 select ,option{
 	cursor: pointer;
@@ -66,7 +68,7 @@ input {
 	padding:3px 6px;
 	margin:0 2px;
 }
-input[type="text"],input[type="password"]{
+input[type="text"],input[type="password"],input[type="file"]{
 	padding:2px;
 	cursor: text;
 	border-left: 1px solid #AFAEAA;
@@ -77,20 +79,22 @@ input[type="text"],input[type="password"]{
 input[type="submit"] ,input[type="button"]{
 	cursor: pointer;
 	padding:1px 18px;
-	font-family:Tahoma, Arial, Helvetica, sans-serif;
-	font-weight:normal;
-	font-size:12px;
 }
-input[type="submit"]:hover ,input[type="button"]:hover {
-	color:#D74E00;
-}
-input[type="text"]:hover ,input[type="password"]:hover,select:hover{
-	border: 1px solid #888;
-}
-input[type="password"]:focus,input[type="text"]:focus,select:focus,textarea:focus {
-	background-color:#ffd;
-	border: 1px solid #D26900;
-}
+input[type="submit"]:hover ,
+input[type="button"]:hover {color:#D74E00;}
+input[type="text"]:hover ,
+input[type="password"]:hover,
+input[type="file"]:hover,
+input[type="checkbox"]:hover,
+input[type="radio"]:hover,
+select:hover{border: 1px solid #888;}
+input[type="password"]:focus,
+input[type="text"]:focus,
+input[type="file"]:focus,
+input[type="checkbox"]:focus,
+input[type="radio"]:focus,
+select:focus,textarea:focus {background-color:#ffd;	border: 1px solid #D26900;}
+
 a:link, body_alink ,a:visited, body_avisited{
 	color: #666;
 	text-decoration: none;
@@ -570,7 +574,8 @@ p.explain {
 .input_num {
 	background:#FFF;
 	border: 1px solid #B3B9C4;
-	font:normal 10px tahoma,Arial,sans-serif;
+	font-weight:400;
+	font-size:10px;
 	outline:1px solid #ccc;
 	padding:2px;	
 }
@@ -611,7 +616,7 @@ p.explain {
 }
 ul.tabbernav{
 	padding:5px 0;
-	font: bold 11px tahoma, sans-serif;
+	font-size:11px;
 }
 ul.tabbernav li{
 	list-style:none;
@@ -1198,12 +1203,13 @@ select.remme:focus {
 	border-top: 1px solid #bbb;
 }
 .user_ext_color{
-	font:bold 12px tahoma, sans-serif;
+	font-size:12px;
 	color:#222;
 	margin:2px;
 }
 .user_ext_lang{
-	font:normal 12px tahoma, sans-serif;
+	font-weight:400;
+	font-size:12px;
 	color:#000;
 	margin:2px;
 }

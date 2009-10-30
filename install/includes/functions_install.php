@@ -67,6 +67,15 @@ function getjquerylink()
 	}
 }
 
+function getjquerypstrengthminlink()
+{
+	global $_path;
+
+	if(file_exists($_path . 'admin/admin_style/js/jquery.pstrength-min.1.2.js'))
+	{
+		return $_path . 'admin/admin_style/js/jquery.pstrength-min.1.2.js';
+	}
+}
 
 /**
 * Parsing installing templates

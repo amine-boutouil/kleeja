@@ -227,3 +227,11 @@ background:url('style/images/update.png') no-repeat right center;
 	padding:1px 10px;
 	background-color:#DCE4FC;
 }
+.password {
+font-size : 10px;
+border : 1px solid #cc9933;
+width : 100px;
+}
+.pstrength-minchar {
+font-size : 10px;
+}

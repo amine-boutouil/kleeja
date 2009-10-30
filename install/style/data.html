@@ -31,9 +31,14 @@
 			<tr>
 				<td>{{echo $lang['PASSWORD']}}</td>
 				<td>
-					<input name="password" id="password" type="text" style="width: 173px"  onkeyup="return passwordChanged();"/>
-					<span id="strength"><img src="style/images/p1.gif" alt="! .." />
-				</span>
+
+<script type="text/javascript">
+$(function() {
+$('.password').pstrength();
+});
+</script>
+					<input name="password" class="password" type="text" style="width: 173px" />
+			
 				</td>
 			</tr>
 			<tr>

@@ -14,13 +14,14 @@ float : {{echo $lang['DIR']=='ltr'?'left':'right'}}
 input{
 	padding:2px;
 	font-family: "Tahoma", Verdana, Helvetica, sans-serif;
-	font-size:11px;
+	font-size:12px;
 	font-weight: normal;
 }
 input[type="submit"] {
 	cursor: pointer;
-	padding:3px 18px;
-
+	padding:3px 20px;
+	margin:3 6px; 
+	width:140px;
 }
 
 select {color: #333333; background-color: #FAFAFA;font-family: "Tahoma", Verdana, Helvetica, sans-serif;font-size: 1.1em;font-weight: normal;border: 1px solid #A9B8C2;padding: 1px;}
@@ -91,7 +92,6 @@ padding:10px 20px;
 text-align:justify;
 }
 .submit_no,.submit_yes{
-width: 94%;
 font-weight:bold;
 margin:2px 0;
 padding: 4px 0;
@@ -170,23 +170,24 @@ color:#111;
 
 .ul_check,.ul_check2 {
 list-style:none;
-padding: 10px;
+margin:5px 0;
 }
-.ul_check li {
-line-height:2em
-}
-.ul_check2 li {
-line-height: 2em
-}
+
 .notice_check {
 	text-align:justify;
 	font-size:11px;
-	border-top:1px solid #D8D8A2;
-	border-bottom:1px solid #D8D8A2;
-	background-color:#FFFFE6;
-	padding:3px 10px;
-	text-indent:5px;
+	border-top:1px solid #D3B25B;
+	border-bottom:1px solid #D3B25B;
+	background-color:#FCF5E2;
+	padding:6px;
 	margin:2px 0;
+}
+.notice_check p{
+	text-indent:10px;
+	background-color:#FFF;
+	padding:2px 0;
+	margin-top:4px;
+	font-weight:400;
 }
 
 
@@ -204,7 +205,7 @@ background:url('style/images/update.png') no-repeat right center;
 	font-weight:400;
 }
 .input_conf {
-	width:200px;
+	width:220px;
 	direction:ltr;
 	cursor: text;
 	border-left: 1px solid #AFAEAA;
@@ -221,8 +222,7 @@ background:url('style/images/update.png') no-repeat right center;
 }
 .td_conf{
 	width:100%;
-	padding:0 10px;
-	background-color:#DDDDFF;
-	text-align:{{echo $lang['DIR']=='rtl'?'right':'left'}};
+	padding:1px 10px;
+	background-color:#DCE4FC;
 }
 

@@ -1,6 +1,6 @@
 {{if(!$GLOBALS['no_config']):}}
-<form method="post"  action="{{echo $_SERVER['PHP_SELF'] . '?step=c&amp;' . getlang(1)}}"  onsubmit="javascript:return formCheck(this, Array('db_server','db_user' ,'db_name'));">
-	<div class="home" id="Group1" dir="{{echo $lang['DIR']}}">
+<form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=c&amp;' . getlang(1)}}"  onsubmit="javascript:return formCheck(this, Array('db_server','db_user' ,'db_name'));">
+	<div class="home" id="Group1" dir="{{echo $lang['DIR']}}" style="text-align:{{echo $lang['DIR']=='rtl'?'right':'left'}};">
 		<div class="title"><img src="style/images/info.png" style="vertical-align:middle;padding:0 10px;" alt="?" />{{echo $GLOBALS['writeable_path'] ? $lang['DB_INFO'] : $lang['DB_INFO_NW']}}</div>
 			<table class="table_conf">
 				<tr>
@@ -40,29 +40,43 @@
 					</td>
 				</tr>       
 			</table>
-	
-	</div>
-<input name="dbsubmit" type="submit" value="{{echo $GLOBALS['writeable_path'] ? $lang['INST_SUBMIT'] : $lang['INST_EXPORT']}}" />
+	<div class="clr"></div>
+		<center style="margin-top:10px;">
+			<input onclick="window.location.href='./install.php?step=f&amp;{{echo getlang(1)}}';return false;" name="previous" type="submit" value="{{echo $lang['INST_PREVIOUS']}}" />
+			<input name="dbsubmit" type="submit" value="{{echo $GLOBALS['writeable_path'] ? $lang['INST_NEXT'] : $lang['INST_EXPORT']}}" />
+		</center>
+	<div class="clr"></div>
+</div>
 </form>
-<br />
+
 {{if(!$GLOBALS['writeable_path']):}}
-<br />
-<hr />
-<br />
-<form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=c&amp' . getlang(1)}}">
-	<input  type="submit" value="{{echo $lang['INST_SUBMIT_CONFIGOK']}}" />
-</form>
+<div class="clr"></div><br /><br />
+<div class="home" dir="{{echo $lang['DIR']}}">
+	<div class="clr"></div><br />
+		<img src="style/images/up_conf.png" alt="up config path" />
+	<div class="clr"></div><br /><br />
+	<p style="color:green;font-size:large">{{echo $lang['INST_SUBMIT_CONFIGOK']}}</p>
+	<div class="clr"></div><br />
+	<form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=c&amp' . getlang(1)}}">
+		<input onclick="window.location.href='./install.php?step=f&amp;{{echo getlang(1)}}';return false;" name="previous" type="submit" value="{{echo $lang['INST_PREVIOUS']}}" />
+		<input type="submit" value="{{echo $lang['INST_NEXT']}}" />
+	</form>
+</div>
 {{endif;}}
-	
+
+<div class="clr"></div>
+
 {{else:}}
-<div class="home">
-	<br />
-	<img src="style/images/check_conf.png" alt="config exists" />
-	<br /><br />
-	<p style="color:green;font-size:large">{{echo $lang['CONFIG_EXISTS']}}</p>
-	<br />
-<form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=check&amp;' . getlang(1)}}">
-	<input name="agres" type="submit" value="{{echo $lang['INST_SUBMIT']}}" />
+<div class="clr"></div><br /><br />
+<div class="home" dir="{{echo $lang['DIR']}}">
+	<div class="clr"></div><br />
+		<img src="style/images/check_conf.png" alt="config exists" />
+	<div class="clr"></div><br /><br />
+		<p style="color:green;font-size:large">{{echo $lang['CONFIG_EXISTS']}}</p>
+	<div class="clr"></div><br />
+	<form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=check&amp;' . getlang(1)}}">
+		<input onclick="window.location.href='./install.php?step=f&amp;{{echo getlang(1)}}';return false;" name="previous" type="submit" value="{{echo $lang['INST_PREVIOUS']}}" />
+		<input name="agres" type="submit" value="{{echo $lang['INST_NEXT']}}" />
 	</form>
 </div>
 {{endif;}}

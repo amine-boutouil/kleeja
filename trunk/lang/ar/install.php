@@ -10,9 +10,9 @@
 	$lang['INST_UPDATE_P_VER']					= "تحديث نسخه سابقه ";
 	$lang['INST_CHOOSE_INSTALLER']				= "... قم بإختيار ما يناسبك  من معالج تثبيت كليجا ...";
 	$lang['INST_AGR_LICENSE']					= 'أوافق على هذه الشروط كلها';
-	$lang['INST_SUBMIT']						= '< متابعة';
-	$lang['INST_NEXT']							= '< التالي';
-	$lang['INST_PREVIOUS']						= 'السابق >';
+	$lang['INST_SUBMIT']						= 'متابعة';
+	$lang['INST_NEXT']							= 'التالي';
+	$lang['INST_PREVIOUS']						= 'السابق';
 	$lang['INST_SITE_INFO']						= 'معلومات الموقع';
 	$lang['INST_ADMIN_INFO']					= 'معلومات المسؤول';
 	$lang['INST_CHANG_CONFIG']					= 'بعض البيانات المهمه ناقصه إملأ ملف config.php';
@@ -86,9 +86,9 @@
 	$lang['FUNCTION_DISC_MUF']					= 'دالة move_uploaded_file تستخدم لتحميل الملفات  وهي اهم دالة في السكربت.';
 	//
 	$lang['ADVICES_CHECK']						= 'فحص متقدم (يمكن تثبيت كليجا بدون تحقق هذا الفحص , لكنه مجرد معلومات لك)';
-	$lang['ADVICES_REGISTER_GLOBALS']			= 'خاصية register_globals مفعله , هذه الخاصيه غير محبب تفعيلها ويفضل تعطيلها , ومع هذا فكليجا تحاول تعطيل اثارها برمجياً .';
-	$lang['ADVICES_ICONV']						= 'دوال iconv غير مفعله لديك , لكن هذا لايمنع تثبيت كليجا , فقط ستواجه مشاكل عند الربط مع سكربتات اخرى غير متوافقه مع نظام الترميز العالمي UTF8.';
-	$lang['ADVICES_MAGIC_QUOTES']				= 'خاصية magic_quotes مفعله , هذه الخاصيه غير محبب تفعيلها ويفضل تعطيلها , ومع هذا فكليجا تحاول تعطيل اثارها برمجياً ..';
+	$lang['ADVICES_REGISTER_GLOBALS']			= '<span style="color:red;padding:0 6px;">خاصية register_globals مفعله ..!</span><br /> هذه الخاصيه غير محبب تفعيلها ويفضل تعطيلها , ومع هذا فكليجا تحاول تعطيل اثارها برمجياً .';
+	$lang['ADVICES_ICONV']						= '<span style="color:red;padding:0 6px;">دوال iconv غير مفعله لديك  ..!</span><br /> لكن هذا لايمنع تثبيت كليجا , فقط ستواجه مشاكل عند الربط مع سكربتات اخرى غير متوافقه مع نظام الترميز العالمي UTF8.';
+	$lang['ADVICES_MAGIC_QUOTES']				= '<span style="color:red;padding:0 6px;">خاصية magic_quotes مفعله ..!</span><br /> هذه الخاصيه غير محبب تفعيلها ويفضل تعطيلها , ومع هذا فكليجا تحاول تعطيل اثارها برمجياً ..';
 	
 	//UPDATOR
 	$lang['INST_CHOOSE_UPDATE_FILE']			= 'قم بإختيار التحديث المناسب لك ومن ثم تابع التحديث ..';

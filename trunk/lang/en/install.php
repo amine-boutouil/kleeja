@@ -10,9 +10,9 @@
 	$lang['INST_UPDATE_P_VER']						= 'Update ';
 	$lang['INST_CHOOSE_INSTALLER']					= 'Choose what suits you best from the setup wizard';
 	$lang['INST_AGR_LICENSE']						= 'I agree to terms and agreements';
-	$lang['INST_SUBMIT']							= 'Continue >';
-	$lang['INST_NEXT']								= 'Next >';
-	$lang['INST_PREVIOUS']							= '< back';
+	$lang['INST_SUBMIT']							= 'Continue';
+	$lang['INST_NEXT']								= 'Next';
+	$lang['INST_PREVIOUS']							= 'back';
 	$lang['INST_SITE_INFO']							= 'Site Info';
 	$lang['INST_ADMIN_INFO']						= 'Admin Info';
 	$lang['INST_CHANG_CONFIG']						= 'Missing requirements ... make sure you have edited the config.php file.';
@@ -86,9 +86,9 @@
 	$lang['FUNCTION_DISC_MUF']						= 'The function move_uploaded_file is used to upload files and it\'s the most important function in the script.';
 	//
 	$lang['ADVICES_CHECK']							= 'Advanced check (Optional)';
-	$lang['ADVICES_REGISTER_GLOBALS']				= 'register_globals function is enabled, its recommended that you disable it.';
-	$lang['ADVICES_ICONV']							= 'iconv module is not enabled, you can still install Kleeja but you will face problems integrating it with 3rd party scripts that are not compatible with UTF8 encoding';
-	$lang['ADVICES_MAGIC_QUOTES']					= 'magic_quotes function is enabled, it is recommended that you disable it.';
+	$lang['ADVICES_REGISTER_GLOBALS']				= '<span style="color:red;padding:0 6px;">register_globals function is enabled ..!</span><br /> its recommended that you disable it.';
+	$lang['ADVICES_ICONV']							= '<span style="color:red;padding:0 6px;">iconv module is not enabled ..!</span><br /> you can still install Kleeja but you will face problems integrating it with 3rd party scripts that are not compatible with UTF8 encoding';
+	$lang['ADVICES_MAGIC_QUOTES']					= '<span style="color:red;padding:0 6px;">magic_quotes function is enabled ..!</span><br /> it is recommended that you disable it.';
 	
 	//UPDATOR
 	$lang['INST_CHOOSE_UPDATE_FILE']				= 'Choose the appropriate update file';

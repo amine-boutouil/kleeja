@@ -230,18 +230,18 @@ case 'data' :
 
 			if($is)
 			{
-				if ($name == 'call')			echo '<span style="color:green;">' . $lang['INST_CRT_CALL'] . '</span><br />';
-				elseif ($name == 'reports')		echo '<span style="color:green;">' . $lang['INST_CRT_REPRS'] . '</span><br />';
-				elseif ($name == 'stats')		echo '<span style="color:green;">' . $lang['INST_CRT_STS'] . '</span><br />';
-				elseif ($name == 'users')		echo '<span style="color:green;">' . $lang['INST_CRT_USRS'] . '</span><br />';
-				elseif ($name == 'users')		echo '<span style="color:green;">' . $lang['INST_CRT_ADM'] . '</span><br />';
-				elseif ($name == 'files')		echo '<span style="color:green;">' . $lang['INST_CRT_FLS'] . '</span><br />';
-				elseif ($name == 'config')		echo '<span style="color:green;">' . $lang['INST_CRT_CNF'] . '</span><br />';
-				elseif ($name == 'exts')		echo '<span style="color:green;">' . $lang['INST_CRT_EXT'] . '</span><br />';
-				elseif ($name == 'online')		echo '<span style="color:green;">' . $lang['INST_CRT_ONL'] . '</span><br />';
-				elseif ($name == 'hooks')		echo '<span style="color:green;">' . $lang['INST_CRT_HKS'] . '</span><br />';
-				elseif ($name == 'plugins')		echo '<span style="color:green;">' . $lang['INST_CRT_PLG'] . '</span><br />';
-				elseif ($name == 'lang')		echo '<span style="color:green;">' . $lang['INST_CRT_LNG'] . '</span><br />';
+				if ($name == 'call')			echo '<div class="home"><ul class="sql_content"><li">' . $lang['INST_CRT_CALL'] . '</li>';
+				elseif ($name == 'reports')		echo '<li>' . $lang['INST_CRT_REPRS'] . '</li>';
+				elseif ($name == 'stats')		echo '<li>' . $lang['INST_CRT_STS'] . '</li>';
+				elseif ($name == 'users')		echo '<li>' . $lang['INST_CRT_USRS'] . '</li>';
+				elseif ($name == 'users')		echo '<li>' . $lang['INST_CRT_ADM'] . '</li>';
+				elseif ($name == 'files')		echo '<li>' . $lang['INST_CRT_FLS'] . '</li>';
+				elseif ($name == 'config')		echo '<li>' . $lang['INST_CRT_CNF'] . '</li>';
+				elseif ($name == 'exts')		echo '<li>' . $lang['INST_CRT_EXT'] . '</li>';
+				elseif ($name == 'online')		echo '<li>' . $lang['INST_CRT_ONL'] . '</li>';
+				elseif ($name == 'hooks')		echo '<li>' . $lang['INST_CRT_HKS'] . '</li>';
+				elseif ($name == 'plugins')		echo '<li>' . $lang['INST_CRT_PLG'] . '</li>';
+				elseif ($name == 'lang')		echo '<li>' . $lang['INST_CRT_LNG'] . '</li></ul></div>';
 				else
 				{
 					
@@ -268,20 +268,20 @@ case 'data' :
 
 		if (!$err)
 		{
-			echo '<fieldset class="home"><form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=end&' . getlang(1) . '">
-			<input name="agres" type="submit" value="' . $lang['INST_SUBMIT'] . '"/>
-			</form></fieldset>';
+			echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=end&' . getlang(1) . '">
+			<input name="agres" type="submit" value="' . $lang['INST_NEXT'] . '"/>
+			</form>';
 			
 			//clean cache
 			delete_cache(null, true);
 		}
 		else
 		{
-			echo '<fieldset class="home"><span style="color:red;">' . $lang['INST_FINISH_ERRSQL'] . '</span>';
+			echo '<div class="home"><span style="color:red;">' . $lang['INST_FINISH_ERRSQL'] . '</span>';
 			
 			echo '<br /><br /><textarea cols="50" rows="3">' . $errors . '</textarea>';
 			
-			echo '</fieldset>';
+			echo '</div>';
 		}
 
 	}

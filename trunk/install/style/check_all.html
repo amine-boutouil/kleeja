@@ -1,62 +1,44 @@
-<div class="home">
-
+<div class="home" dir="{{echo $lang['DIR']}}">
 {{if(!isset($GLOBALS['dbname']) || !isset($GLOBALS['dbuser'])): $GLOBALS['submit_disabled'] = true;}}
-<span style="color:red;">
-	{{echo $lang['INST_CHANG_CONFIG']}}
-</span>
-<br />
+	<p style="color:red;"><img src="style/images/glob4ls.png" alt="no" style="margin:0 6px;vertical-align:middle;" />{{echo $lang['INST_CHANG_CONFIG']}}</p>
+	<div class="clr"></div><br />
 {{endif}}
 
-
 {{if(!isset($GLOBALS['no_connection'])): $GLOBALS['submit_disabled'] = true;}}
-<span style="color:red;">
-	{{echo $lang['INST_CONNCET_ERR']}}
-</span>
-<br />
+	<p style="color:red;"><img src="style/images/glob4ls.png" alt="no" style="margin:0 6px;vertical-align:middle;" />{{echo $lang['INST_CONNCET_ERR']}}</p>
+	<div class="clr"></div><br />
 {{endif}}
 
 {{if(!isset($GLOBALS['mysql_ver'])): $GLOBALS['submit_disabled'] = true;}}
-<span style="color:red;">
-	{{echo sprintf($lang['INST_MYSQL_LESSMIN'], MIN_MYSQL_VERSION, $GLOBALS['mysql_ver'])}}
-</span>
-<br />
+	<p style="color:red;"><img src="style/images/glob4ls.png" alt="no" style="margin:0 6px;vertical-align:middle;" />{{echo sprintf($lang['INST_MYSQL_LESSMIN'], MIN_MYSQL_VERSION, $GLOBALS['mysql_ver'])}}</p>
+	<div class="clr"></div><br />
 {{endif}}
 
 {{if(!is_writable($_path . 'cache')) : $GLOBALS['submit_disabled'] = true;}}
-<span style="color:red;">
-	[ cache ] : 
-	{{echo $lang['INST_NO_WRTABLE']}}
-</span>
-<br />
+	<p style="color:red;"><img src="style/images/glob4ls.png" alt="no" style="margin:0 6px;vertical-align:middle;" />[ cache ] : {{echo $lang['INST_NO_WRTABLE']}}</p>
+	<div class="clr"></div><br />
 {{endif}}
 
 {{if(!is_writable($_path . 'uploads')) : $GLOBALS['submit_disabled'] = true;}}
-<span style="color:red;">
-	[ uploads ] : 
-	{{echo $lang['INST_NO_WRTABLE']}}
-</span>
-<br />
+	<p style="color:red;"><img src="style/images/glob4ls.png" alt="no" style="margin:0 6px;vertical-align:middle;" />[ uploads ] : {{echo $lang['INST_NO_WRTABLE']}}</p>
+	<div class="clr"></div><br />
 {{endif}}
 
 
 {{if(!is_writable($_path . 'uploads/thumbs')) : $GLOBALS['submit_disabled'] = true;}}
-<span style="color:red;">
-	[ uploads/thumbs ] : 
-	{{echo $lang['INST_NO_WRTABLE']}}
-</span>
-<br />
+	<p style="color:red;"><img src="style/images/glob4ls.png" alt="no" style="margin:0 6px;vertical-align:middle;" />[ uploads/thumbs ] : {{echo $lang['INST_NO_WRTABLE']}}</p>
+	<div class="clr"></div><br />
 {{endif}}
 
 {{if(!$GLOBALS['submit_disabled']):}}
-<br />
-<img src="style/images/good.png" alt="good" />
-<br /><br />
-<p style="color:green;font-size:large">[ {{echo $lang['INST_GOOD_GO']}} ]</p>
-<br />
-<form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=data&amp;' . getlang(1)}}">
-	<input name="agres" type="submit" value="{{echo $lang['INST_SUBMIT']}}" />
-</form>		
-<input onclick="history.go(-1)" name="previous" type="submit" value="{{echo $lang['INST_PREVIOUS']}}" />
+	<div class="clr"></div><br />
+	<img src="style/images/good.png" alt="good" />
+	<div class="clr"></div><br />
+	<p style="color:green;font-size:large">[ {{echo $lang['INST_GOOD_GO']}} ]</p>
+	<div class="clr"></div><br />
+	<form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=data&amp;' . getlang(1)}}">
+		<input onclick="window.location.href='./install.php?step=c&amp;{{echo getlang(1)}}';return false;" name="previous" type="submit" value="{{echo $lang['INST_PREVIOUS']}}" />
+		<input name="agres" type="submit" value="{{echo $lang['INST_NEXT']}}" />
+	</form>		
 {{endif}}
-
 </div>

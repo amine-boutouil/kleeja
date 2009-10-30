@@ -50,7 +50,6 @@
 </form>
 
 {{if(!$GLOBALS['writeable_path']):}}
-<div class="clr"></div><br /><br />
 <div class="home" dir="{{echo $lang['DIR']}}">
 	<div class="clr"></div><br />
 		<img src="style/images/up_conf.png" alt="up config path" />
@@ -67,11 +66,10 @@
 <div class="clr"></div>
 
 {{else:}}
-<div class="clr"></div><br /><br />
 <div class="home" dir="{{echo $lang['DIR']}}">
 	<div class="clr"></div><br />
 		<img src="style/images/check_conf.png" alt="config exists" />
-	<div class="clr"></div><br /><br />
+	<div class="clr"></div><br />
 		<p style="color:green;font-size:large">{{echo $lang['CONFIG_EXISTS']}}</p>
 	<div class="clr"></div><br />
 	<form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=check&amp;' . getlang(1)}}">

@@ -6,3 +6,9 @@
 #index_body{background:url(../images/indexbody.png) no-repeat left top;}
 .tabledata thead th {background:#F68618 url(../images/headinebg.png) repeat-x center right;}
 .tabbertab {border:0px;}ul.tabbernav li a{border:0px}
+
+input  {
+	font-family: "Tahoma", Arial, Verdana, sans-serif, Lucida Grande, Lucida Sans Unicode;
+	font-weight:normal;
+	font-size:12px;
+}

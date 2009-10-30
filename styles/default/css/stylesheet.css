@@ -41,7 +41,7 @@ label {
 	padding:4px 0;
 }
 input ,textarea ,select  ,option,input[type="text"],input[type="password"],input[type="file"],input[type="submit"] ,input[type="button"] {
-	font-family: "Tahoma", Arial, Verdana, sans-serif, Lucida Grande, Lucida Sans Unicode;
+	font-family: Tahoma, Arial, Verdana, sans-serif, Lucida Grande, Lucida Sans Unicode;
 	font-weight:normal;
 	font-size:12px;
 }
@@ -310,7 +310,9 @@ p.explain {
 	color: #F1F7E1;
 }
 #right_menu .list img{
-	padding-left:10px;
+	margin-left:10px;
+	width: 16px;
+	height: 16px;
 }
 #right_menu .list a{
 	background-color:#767676;

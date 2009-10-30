@@ -18,7 +18,7 @@ img.right {float:left;margin-right:15px;}
 #content {float:right}
 #right_menu{float:left}
 #right_menu .list{margin-left:4px;margin-right:16px;}
-#right_menu .list img{padding-right:5px;padding-left:0px;}
+#right_menu .list img{margin-right:10px; margin-left:0;}
 #system-message dd.info  ul li ,#system-message dd.error ul li{background-position:left top;}
 #data_file {float:left}
 #data_file_down {float:right}

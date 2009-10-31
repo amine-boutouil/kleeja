@@ -14,7 +14,7 @@
 body { 
 	background:#C8C8C8 url(../images/body.png) top center no-repeat fixed;
 	color: #444;
-	font-family: "Tahoma", Arial, Verdana, sans-serif, Lucida Grande, Lucida Sans Unicode;
+	font-family:"Tahoma", Arial, Verdana, sans-serif, Lucida Grande, Lucida Sans Unicode;
 	font-weight:bold;
 	font-size:11px;
 	text-align: justify;
@@ -30,7 +30,6 @@ h1 {
 h2 {
 	font-size: 13px;
 	color:#EF5E00;
-	text-shadow: 0px 1px rgb(247, 247, 247);
 	margin: 5px 0;
 }
 p, ul, ol {
@@ -68,6 +67,7 @@ input {
 	padding:3px 6px;
 	margin:0 2px;
 }
+
 input[type="text"],input[type="password"],input[type="file"]{
 	padding:2px;
 	cursor: text;
@@ -76,6 +76,7 @@ input[type="text"],input[type="password"],input[type="file"]{
 	border-right: 1px solid #D5D5C8;
 	border-bottom: 1px solid #D5D5C8;
 }
+
 input[type="submit"] ,input[type="button"]{
 	cursor: pointer;
 	padding:1px 18px;
@@ -139,7 +140,6 @@ img.right {
 	padding:10px 6px;
 	font-size:12px;
 	color:#FF5502;
-	text-shadow: 0px 1px rgb(247, 247, 247);
 }
 .title-x a:link {
 	color:#C95A12;
@@ -237,8 +237,6 @@ p.explain {
 	border-right:1px solid #ccc;
 	border-bottom:1px solid #aaa;
 	border-left:1px solid #aaa;
-	-moz-border-radius:10px;
-	-webkit-border-radius:10px;
 }
 
 /* System Messages body */
@@ -344,13 +342,12 @@ p.explain {
 
 /* Powered by kleeja*/
 .kleeja{
-	width:30%;
+	width:50%;
 	padding:4px 1px;
 	margin:2px auto;
 	float:left;
 	text-align:left;
 	color:#555;
-	text-shadow:0px 1px rgb(247, 247, 247)
 }
 .kleeja a{
 	color:#CF6600;
@@ -371,10 +368,6 @@ p.explain {
 	float:right;
 	background:#C0C0C0 url(../images/bg_tabbertab.png) repeat-x top left;
 	padding:10px;
-	-moz-border-radius:6px;
-	-webkit-border-radius:6px;
-	-khtml-border-radius:6px;
-	border-radius:6px;
 }
 #data_file .data_file p {
 	color:#F0502E;
@@ -420,10 +413,6 @@ p.explain {
 	height:220px;
 	background:#fff url(../images/bg_tabbertab.png) repeat-x bottom left;
 	padding:10px;
-	-moz-border-radius:6px;
-	-webkit-border-radius:6px;
-	-khtml-border-radius:6px;
-	border-radius:6px;
 }
 #data_file_down .find_x {
 	color:#2B8800;
@@ -536,21 +525,19 @@ p.explain {
 	width:70%;
 	padding:5px 30px;
 }
-#index_body{
-	background:url(../images/index_body.png) no-repeat -1% 0%;
-}
+
 .wolcome_msg {
 	width:76%;
 	text-indent:5px;
 	font-size:10px;
 	color:#777;
-	text-shadow: 0px 1px rgb(247, 247, 247);
 	padding:3px 6px;
 }
 .agree{
-	font-size:10px;
-	font-weight:bold;
-	padding:1px 6px;
+	margin:10px 0;
+	font-size:12px;
+	font-weight:normal;
+	padding:3px 0;
 }
 .zx,.zl {
 	cursor:pointer;
@@ -560,8 +547,7 @@ p.explain {
 	background:#FEEA00;
 }
 .bn_up {
-	margin-right:10px;
-	margin-top:-8px;
+	margin-top:10px;
 }
 .url {
 	margin-top:3px;
@@ -573,13 +559,13 @@ p.explain {
 	text-align:center;
 	color:#888;
 }
-.input_num {
+input.input_num {
 	background:#FFF;
 	border: 1px solid #B3B9C4;
 	font-weight:400;
 	font-size:10px;
 	outline:1px solid #ccc;
-	padding:2px;	
+	padding:2px 1px;	
 }
 #loadbox {
 	padding:10px;
@@ -594,30 +580,22 @@ p.explain {
 	width:100%;
 }
 .tabberlive {
-	margin-top:2px;
-	margin-bottom:2px;
+	margin:2px 0;
 }
 .tabberlive .tabbertabhide {
 	display:none;
 }
 .tabbertab {
-	width:70%;
-	height:100%;
+	width:100%;
 	padding:20px;
 	background:#E8E8E8 url(../images/bg_tabbertab_1.png) repeat-x top left;
 	border:1px solid #aaa;
-	-moz-border-radius-bottomleft:10px;
-	-webkit-border-bottom-left-radius: 10px;
-	-moz-border-radius-bottomright: 10px;
-	-webkit-border-bottom-right-radius: 10px; 
-	-moz-border-radius-topleft: 10px;
-	-webkit-border-topleft-radius: 10px;
 }
 .bg {
 	background:#C0C0C0 url(../images/bg_tabbertab.png) repeat-x top left;
 }
 ul.tabbernav{
-	padding:5px 0;
+	padding:2px 0;
 	font-size:11px;
 }
 ul.tabbernav li{
@@ -630,10 +608,6 @@ ul.tabbernav li a{
 	border: 1px solid #aaa;
 	background:#EB9D0B url(../images/bg_tile_tab.png) repeat-x top left;
 	text-decoration: none;
-	-moz-border-radius-topleft: 10px;
-	-webkit-border-top-left-radius: 10px;
-	-moz-border-radius-topright: 10px;
-	-webkit-border-top-right-radius: 10px;
 }
 ul.tabbernav li a:link {
 	color:#222;
@@ -670,35 +644,18 @@ ul.tabbernav li.tabberactive a:hover{
 	float:right;
 	margin-left:3px;
 	padding:5px 10px;
-	border:1px outset #E2E2E2;
-	-moz-border-radius:6px;
-	-webkit-border-radius:6px;
-	-khtml-border-radius:6px;
-	border-radius:6px;
 }
 .onlineall{
 	background:url(../images/number_online_all.png) no-repeat 98% 50%;
 	padding-right:20px;
-	color:#CC3300;
+	color:#FF0000;
 }
-.onlinevisitor{
-	color:#000;
-}
-.onlineusers{
-	color:#555;
-}
+
 .name_users{
-	background:#FFF3DF;
-	margin:2px;
-	display:block;
+	margin:0 2px;
+	padding:0 10px;
 	float:right;
-	color:#555;
-	padding:3px 14px;
-	border:1px inset #444;
-	-moz-border-radius:6px;
-	-webkit-border-radius:6px;
-	-khtml-border-radius:6px;
-	border-radius:6px;
+	font-size:11px;
 }
 /*  #  END FOR ONLINE */
 
@@ -740,7 +697,6 @@ ul.tabbernav li.tabberactive a:hover{
 #footerlinksleft ul li a:hover,#footer .Copyrights  a:hover,#footer .page_stats a:hover{
 	background:#787878;
 	color:#fff;
-	-moz-border-radius:4px;
 }
 #footer .Copyrights {
 	float:right;
@@ -777,10 +733,6 @@ ul.tabbernav li.tabberactive a:hover{
 	background:url(../images/adminPan.gif) no-repeat center left;
 	font-weight:bold;
 	border:1px solid #858585;
-	-moz-border-radius:8px;
-	-webkit-border-radius:8px;
-	-khtml-border-radius:8px;
-	border-radius:8px;
 }
 /* # footer template */
 
@@ -885,10 +837,6 @@ select.remme:focus {
 	padding:10px;
 	background:#fff;
 	border:1px solid #bbb;
-	-moz-border-radius:20px;
-	-webkit-border-radius:20px;
-	-khtml-border-radius:20px;
-	border-radius:20px;
 }
 #boxfileuser .box_user {
 	width:46%;
@@ -1167,12 +1115,6 @@ select.remme:focus {
 .guide_visitor_th {
 	background:#FF7B00 url(../images/headline_bg.png) repeat-x top right;
 }
-.user_box,.guide_user_th ,.guide_visitor_th,.user_img,.visitor_img {
-	-moz-border-radius:9px;
-	-webkit-border-radius:9px;
-	-khtml-border-radius:9px;
-	border-radius:9px;
-}
 .user_box{
 	padding:10px;
 	margin:3px 0px;
@@ -1296,10 +1238,6 @@ text-indent:4px;
 	margin:4px 2px;
 	border:1px solid #84A0C0;
 	padding:10px;
-	-moz-border-radius:9px;
-	-webkit-border-radius:9px;
-	-khtml-border-radius:9px;
-	border-radius:9px;
 }
 .btitle {
 	line-height:14px;

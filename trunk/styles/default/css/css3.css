@@ -1,0 +1,34 @@
+/*
+###################################
+#				Kleeja
+# package Kleeja
+# version 1.0.0
+# copyright (c) 2007 Kleeja.com
+# license ./docs/license.txt
+# Filename : styles/default/stylesheet.css
+# Author: Tar3Q  
+# Date:: 2009-10-07 03:58:00 +0300 # $
+###################################
+*/
+h2,.title-x ,.kleeja ,.wolcome_msg {text-shadow: 0px 1px rgb(247, 247, 247);}
+
+.tabbertab {	-moz-border-radius-bottomleft:10px;	-webkit-border-bottom-left-radius: 10px;-moz-border-radius-bottomright: 10px;-webkit-border-bottom-right-radius: 10px;-moz-border-radius-topleft: 10px;-webkit-border-topleft-radius: 10px;}
+
+ul.tabbernav li a{-moz-border-radius-topleft: 10px;-webkit-border-top-left-radius: 10px;-moz-border-radius-topright: 10px;-webkit-border-top-right-radius: 10px;}
+
+#boxfileuser .box_user,#boxfileuser .us3r_n4me {-moz-border-radius:20px;-webkit-border-radius:20px;-khtml-border-radius:20px;border-radius:20px;}
+
+#footerlinksleft ul li a:hover,
+#footer .Copyrights  a:hover,
+#footer .page_stats a:hover{-moz-border-radius:5px;-webkit-border-radius:5px;-khtml-border-radius:5px;border-radius:5px;}
+
+#content ,
+.admin_cp_link span,
+.user_box,
+.guide_user_th ,
+.guide_visitor_th,
+.user_img,
+.visitor_img ,
+.inputbody,
+#data_file ,
+#data_file_down{-moz-border-radius:10px;-webkit-border-radius:10px;-khtml-border-radius:10px;border-radius:10px;}

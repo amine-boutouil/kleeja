@@ -1,9 +1,6 @@
 <!-- start index template  -->
 <div id="content_index_body">
 
-<!-- start background  body  -->
-<div id="index_body">
-
 <!-- start welcome -->
 <h2><img src="{STYLE_PATH}images/Smile.gif" width="20" height="20" alt="{lang.WELCOME}" style="vertical-align:middle;" /> {lang.WELCOME} .. {config.sitename}</h2>
 <div class="wolcome_msg">{welcome_msg}</div>
@@ -39,9 +36,9 @@
 	<span class="zx"><a title="{lang.ADD_UPLAD_A}" onclick="javascript:plus(1);"><img src="{STYLE_PATH}images/zx.gif" width="20" height="20" alt="{lang.ADD_UPLAD_A}" style="vertical-align:middle;" /></a></span>
 	<span class="zl"><a title="{lang.ADD_UPLAD_B}" onclick="javascript:minus(1);"><img src="{STYLE_PATH}images/zl.gif" width="20" height="20" alt="{lang.ADD_UPLAD_B}" style="vertical-align:middle;" /></a></span>
 	<br />
-	<br />
-	<input id="checkr" type="checkbox" onclick="accept_terms('submitr','checkr');" /><strong class="agree">{lang.AGREE_RULES}	<span class="bn_up"><input type="submit" id="submitr" name="submitr" value="{lang.DOWNLOAD_F}"  disabled="disabled" /></span></strong>
-	<br />
+	<div class="agree"><input id="checkr" type="checkbox" onclick="accept_terms('submitr','checkr');" /> <span>{lang.AGREE_RULES}</span></div>
+	<div class="bn_up"><input type="submit" id="submitr" name="submitr" value="{lang.DOWNLOAD_F}"  disabled="disabled" /></div>
+	<div class="clr"></div>
 <!-- # end uplaod normal  -->
 <IF NAME="config.www_url">
 </div>
@@ -58,10 +55,10 @@
 	<input class="inum input_num" type="text" id="upload_f_num" value="1" size="1" readonly="readonly" />
 	<span class="zx"><a title="{lang.ADD_UPLAD_A}" onclick="javascript:plus(2);"><img src="{STYLE_PATH}images/zx.gif" width="20" height="20" alt="{lang.ADD_UPLAD_A}" style="vertical-align:middle;" /></a></span>
 	<span class="zl"><a title="{lang.ADD_UPLAD_B}" onclick="javascript:minus(2);"><img src="{STYLE_PATH}images/zl.gif" width="20" height="20" alt="{lang.ADD_UPLAD_B}" style="vertical-align:middle;" /></a></span>
-    <br />
 	<br />
-    <input id="checkr2" type="checkbox" onclick="accept_terms('submittxt','checkr2');" /><strong class="agree">{lang.AGREE_RULES} <span class="bn_up"> <input type="submit" id="submittxt" name="submittxt" value="{lang.DOWNLOAD_T}" disabled="disabled" /></span></strong>
-    <br />
+    <div class="agree"><input id="checkr2" type="checkbox" onclick="accept_terms('submittxt','checkr2');" /> <span>{lang.AGREE_RULES}</span></div>
+	<div class="bn_up"><input type="submit" id="submittxt" name="submittxt" value="{lang.DOWNLOAD_T}" disabled="disabled" /> </div>
+   	<div class="clr"></div>
 </div>
 <!-- # END uplaod URL -->  	
 </IF>
@@ -103,18 +100,19 @@
 <!-- START FOR ONLINE -->
 <div class="clr"></div>
 <div class="online">
-	<div class="onlineall">{lang.NUMBER_ONLINE} = {allnumbers}</div>
-	<div class="onlinevisitor">{lang.NUMBER_VONLINE} = {visitornum}</div>
-	<div class="onlineusers">{lang.NUMBER_UONLINE} = {usersnum}</div>
+	<div class="onlineall">{lang.NUMBER_ONLINE} : [ {allnumbers} ]</div>
+	<div class="onlinevisitor">{lang.NUMBER_VONLINE} : [ {visitornum} ]</div>
+	<div class="onlineusers">{lang.NUMBER_UONLINE} : [ {usersnum} ]</div>
 </div>
+<div class="clr"></div>
 <LOOP NAME="shownames">
-<div class="name_users"><!--{{seperator}}-->{{name}}</div>
+<button class="name_users" disabled="disabled" type="button"><!--{{seperator}}-->{{name}}</button>
 </LOOP>
 <!-- # END FOR ONLINE -->
+<div class="clr"></div>
 </IF>
 
-</div>
-<!-- # End background body  -->
-<div class="clr"></div>
+
+<div class="clr"></div><br />
 </div>
 <!-- ## End index template  -->

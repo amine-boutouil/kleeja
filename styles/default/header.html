@@ -10,12 +10,12 @@
 	<link rel="shortcut icon" href="images/favicon.ico" />
 	<link rel="icon" type="image/gif" href="images/favicon.gif" />
 	<link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
-	<link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH}css/screen.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH}css/all_media.css" />
 	<IF NAME="{lang.DIR}==ltr">
-	<link rel="stylesheet" type="text/css" href="{STYLE_PATH}css/ltr.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH}css/ltr.css" />
 	</IF>
 	<IS_BROWSER="ie6">
-	<link rel="stylesheet" type="text/css" href="{STYLE_PATH}css/ie_6.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH}css/ie_6.css" />
 		<style type="text/css">	
 			img ,li ,a ,td ,tr{ behavior: url('{STYLE_PATH}ie6/iepngfix.htc')};
 			div#top_menu .m3nu { behavior: none; };
@@ -23,7 +23,7 @@
 		</style> 
 	</IS_BROWSER>
 	<IS_BROWSER="ie">
-	<link rel="stylesheet" type="text/css" href="{STYLE_PATH}css/ie.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH}css/ie.css" />
 	</IS_BROWSER>
 	<script type="text/javascript">
 	var number_of_uploads={config.filesnum};

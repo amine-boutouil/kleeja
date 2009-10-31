@@ -9,4 +9,5 @@
 /* import stylesheets and hide from ie/mac \*/
 @import url("reset.css");
 @import url("stylesheet.css");
+@import url("css3.css");
 /* end import/hide */

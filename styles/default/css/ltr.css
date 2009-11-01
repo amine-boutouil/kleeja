@@ -35,7 +35,6 @@ img.right {float:left;margin-right:15px;margin-left:0;}
 .stats  {background-position: 94% 50%;}
 #content_index_body {float:right;}
 .go_up{	background-position: 94% 100%;}
-.bgurl{background-position: 94% 100%;}
 ul.tabbernav li a{margin-left:0;margin-right:4px;background-position:top right;}
 .online{float:left;}
 .onlineall ,.onlinevisitor ,.onlineusers,.name_users {margin-left:0;margin-right:3px;}
@@ -69,4 +68,3 @@ input.username,input.password {float:left;padding:3px 20px 3px 3px;background-po
 .pagination{float:left;margin:3px 3px 3px 0px;}
 .pagination li{float:left;margin-left:0;margin-right:3px;}
 .css_xhtml{float:right;right:0;bottom:0;}
-.go_up,.bgurl{	background-position: 360% 100%;}

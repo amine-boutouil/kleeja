@@ -286,12 +286,12 @@ p.explain {
 .index_info  li {
 	background-image:url(../images/info_f.png);
 	background-repeat:no-repeat;
-	background-position:right center;
+	background-position:right top;
 }
 .index_err li {
 	background-image:url(../images/err.png);
 	background-repeat:no-repeat;
-	background-position:right center;
+	background-position:right top;
 }
 .index_err span,.index_info  span {
 	color:#111;
@@ -365,8 +365,8 @@ p.explain {
 /* Powered by kleeja*/
 .kleeja{
 	width:30%;
-	padding:4px 1px;
-	margin-top:6px;
+	padding:2px 1px;
+	margin-top:4px;
 	float:left;
 	text-align:left;
 	color:#555;
@@ -621,9 +621,6 @@ input.input_num {
 .bg {
 	background:#fff url(../images/bg_tabbertab.png) repeat-x bottom left;
 }
-.bgurl{
-	background:url(../images/bgurl.png) no-repeat 6% 100%;
-}
 ul.tabbernav{
 	padding:2px 0;
 	font-size:11px;
@@ -665,12 +662,13 @@ ul.tabbernav li.tabberactive a:hover{
 .online{
 	width:100%;
 	float:right;
-	padding:4px 0;
+	padding:2px 0;
 	display:block;
-	margin:2px 0;
+	margin:5px 0;
 }
 .onlineall ,.onlinevisitor ,.onlineusers,.name_users {
-	margin-left:3px;
+	float:right;
+	margin-left:6px;
 	padding:2px 10px;
 	font-family:"Tahoma", Arial, Verdana, sans-serif, Lucida Grande, Lucida Sans Unicode;
 	font-weight:400;
@@ -723,12 +721,13 @@ ul.tabbernav li.tabberactive a:hover{
 }
 .footerlinksleft ul{
 	width:22%;
-	line-height:20px;
+	line-height:16px;
 	float:left;
 }
 .footerlinksleft li{
 	float:left;
 	font-weight:normal;
+	direction:ltr;
 }
 .footerlinksleft ul li a{
 	padding:2px 4px;
@@ -898,21 +897,20 @@ select.remme:focus {
 	color:#FF6600;
 	padding-top:4px;
 }
-#filecplink .copylink {
-	line-height:15px;
-	padding:1px 6px;
-	color:#FF6600;
-	background:#FFE;
-	border-left: 1px solid #AFAEAA;
-	border-top: 1px solid #AFAEAA;
-	border-right: 1px solid #D5D5C8;
-	border-bottom: 1px solid #D5D5C8;
+#filecplink .copylink  input ,#filecplink .link_user  input{
+	width:96%;
+	font-size:11px;
+	padding:4px 3px;
+	border: 1px solid #FFC58A;
 }
-#filecplink .link_user{
-	padding:2px 4px;
+#filecplink .link_user  input{
 	direction:ltr;
-	margin-right:5px;
 }
+
+#filecplink .copylink  input:hover,#filecplink .link_user  input:hover{
+	border: 1px solid #FF8F21;
+}
+
 .tabledata {
 	width:100%;
 	background-color:#CECECE;

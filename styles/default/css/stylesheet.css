@@ -1,16 +1,12 @@
 /*
-###################################
-#				Kleeja
 # package Kleeja
 # version 1.0.0
 # copyright (c) 2007 Kleeja.com
 # license ./docs/license.txt
 # Filename : styles/default/stylesheet.css
 # Author: Tar3Q  
-# Date:: 2009-10-07 03:58:00 +0300 # $
-###################################
+# Date:: 2009-10-07  $
 */
-
 body { 
 	background:#C8C8C8 url(../images/body.png) top center no-repeat fixed;
 	color: #444;
@@ -81,19 +77,11 @@ input[type="submit"] ,input[type="button"]{
 	cursor: pointer;
 	padding:1px 18px;
 }
-input[type="submit"]:hover ,
-input[type="button"]:hover {color:#D74E00;}
-input[type="text"]:hover ,
-input[type="password"]:hover,
-input[type="file"]:hover,
-input[type="checkbox"]:hover,
-input[type="radio"]:hover,
-select:hover{border: 1px solid #888;}
-input[type="password"]:focus,
-input[type="text"]:focus,
-input[type="file"]:focus,
-input[type="checkbox"]:focus,
-input[type="radio"]:focus,
+input[type="submit"]:hover ,input[type="button"]:hover {color:#D74E00;}
+input[type="text"]:hover ,input[type="password"]:hover,input[type="file"]:hover,input[type="checkbox"]:hover,input[type="radio"]:hover,
+select:hover{border: 1px solid #222;}
+
+input:focus,input[type="password"]:focus,input[type="text"]:focus,input[type="file"]:focus,input[type="checkbox"]:focus,input[type="radio"]:focus,
 select:focus,textarea:focus {background-color:#ffd;	border: 1px solid #D26900;}
 
 a:link, body_alink ,a:visited, body_avisited{
@@ -150,7 +138,7 @@ img.right {
 /* safe code all box */
 .safe_code {
 	margin:5px 0;
-	padding:10px;
+	padding:10px 20px;
 	border:1px solid #ECCEBB;
 	background:#F9F5F0 url(../images/saf3_code01.gif) no-repeat 0% 50%;
 }
@@ -165,11 +153,11 @@ img.right {
 	direction:ltr;
 }
 p.explain {
-	font-size:xx-small;
-	font-style:italic;
+	font-size:x-small;
+	font-weight: normal;
 	color:#666;
 	text-indent:4px;
-	padding:5px 0 0 0;
+	padding-top:5px;
 }
 /** LOGO */
 #logobody {
@@ -184,7 +172,7 @@ p.explain {
 /** The main menu at the top **/        
 #top_menu {
 	width: 100%;
-	height: 43px;
+	height: 50px;
 	background:url(../images/menu-bg.gif) repeat-x top left;
 	display: block;
 }
@@ -251,7 +239,7 @@ p.explain {
 	list-style:square;
 	list-style-position:inside;
 	padding:10px;
-	line-height:22px;
+	line-height:30px;
 }
 #system-message dd.info ul {
 	border-top: 3px solid #FEA53D;
@@ -275,6 +263,40 @@ p.explain {
 	background: url(../images/error.png) no-repeat right top;
 }
 /* ##  End  System Messages */
+
+/* Message Information System */
+.index_info,.index_err {
+	display:block;
+	padding:10px;
+	text-indent:30px;
+	line-height:30px;
+}
+.index_info {
+	border-top: 3px solid #84A0C0;
+	border-bottom: 3px solid #84A0C0;
+	color:#004776;
+	background:#C2D3E7;
+}
+.index_err {
+	border-top: 3px solid #DE7A7B;
+	border-bottom: 3px solid #DE7A7B;
+	color:#D80000;
+	background:#E6C0C0;
+}
+.index_info  li {
+	background-image:url(../images/info_f.png);
+	background-repeat:no-repeat;
+	background-position:right center;
+}
+.index_err li {
+	background-image:url(../images/err.png);
+	background-repeat:no-repeat;
+	background-position:right center;
+}
+.index_err span,.index_info  span {
+	color:#111;
+}
+/*  # Message Information System */
 
 /*  right menu */
 #right_menu{
@@ -331,7 +353,7 @@ p.explain {
 /* #  right menu */
 
 /* extras  header and  footer template */
-#extras_header,#extras_footer {
+.extras_header,.extras_footer {
 	clear:both;
 	width:100%;
 	margin:8px auto;
@@ -342,9 +364,9 @@ p.explain {
 
 /* Powered by kleeja*/
 .kleeja{
-	width:50%;
+	width:30%;
 	padding:4px 1px;
-	margin:2px auto;
+	margin-top:6px;
 	float:left;
 	text-align:left;
 	color:#555;
@@ -366,7 +388,7 @@ p.explain {
 	width:46%;
 	height:220px;
 	float:right;
-	background:#C0C0C0 url(../images/bg_tabbertab.png) repeat-x top left;
+	background:#fff url(../images/bg_tabbertab.png) repeat-x bottom left;
 	padding:10px;
 }
 #data_file .data_file p {
@@ -393,7 +415,7 @@ p.explain {
 }
 #data_file .data_menu li {
 	display:block;
-	background:url(../images/bg_tabbertab_1.png) repeat-x top left;
+	background:url(../images/bg_onlineall.gif) repeat-x center left;
 	padding:2px 5px 2px 10px;
 	margin-bottom:1px;
 	border-right:5px solid #CCC;
@@ -428,7 +450,7 @@ p.explain {
 	border-top:1px solid #FFBFBF;
 	border-bottom:1px solid #FFBFBF;
 	cursor:pointer;
-	background-color:#FFE6E6;
+	background:url(../images/bg_onlinevisitor.gif) repeat-x bottom left;
 	margin:10px auto;
 	padding:3px 10px;
 }
@@ -473,7 +495,7 @@ p.explain {
 	padding:10px;
 	background:#F9F5F0 url(../images/stats.png) no-repeat 2% 50%;
 	color:#111;
-	font-size:13px;
+	font-size:12px;
 	font-weight:400;
 }
 .stats ul {
@@ -484,10 +506,13 @@ p.explain {
 .stats  ul li {
 	line-height:28px;
 }
+.st {
+	text-indent:10px;
+}
 .st i{
 	background:#FEFFD7;
 	padding:4px 8px;
-	color: #444;
+	color: #C10000;
 	border-top:1px solid #ccc;
 	border-bottom:1px solid #ccc;
 }
@@ -527,7 +552,7 @@ p.explain {
 }
 
 .wolcome_msg {
-	width:76%;
+	width:96%;
 	text-indent:5px;
 	font-size:10px;
 	color:#777;
@@ -551,7 +576,6 @@ p.explain {
 }
 .url {
 	margin-top:3px;
-	height:15px;
 	direction:ltr;
 	color:#DD6F00;
 }
@@ -568,7 +592,7 @@ input.input_num {
 	padding:2px 1px;	
 }
 #loadbox {
-	padding:10px;
+	padding:10px 20px;
 	display:none;
 }
 .waitloading{
@@ -586,13 +610,19 @@ input.input_num {
 	display:none;
 }
 .tabbertab {
-	width:100%;
+	width:94%;
 	padding:20px;
-	background:#E8E8E8 url(../images/bg_tabbertab_1.png) repeat-x top left;
+	background:#fff url(../images/bg_tabbertab_1.png) repeat-x bottom left;
 	border:1px solid #aaa;
 }
+.go_up{
+	background:url(../images/go_up.png) no-repeat 6% 100%;
+}
 .bg {
-	background:#C0C0C0 url(../images/bg_tabbertab.png) repeat-x top left;
+	background:#fff url(../images/bg_tabbertab.png) repeat-x bottom left;
+}
+.bgurl{
+	background:url(../images/bgurl.png) no-repeat 6% 100%;
 }
 ul.tabbernav{
 	padding:2px 0;
@@ -606,7 +636,7 @@ ul.tabbernav li a{
 	margin-left:4px;
 	padding:5px 14px;
 	border: 1px solid #aaa;
-	background:#EB9D0B url(../images/bg_tile_tab.png) repeat-x top left;
+	background:#EB9D0B url(../images/current-bg.gif) top left repeat-x;
 	text-decoration: none;
 }
 ul.tabbernav li a:link {
@@ -639,23 +669,33 @@ ul.tabbernav li.tabberactive a:hover{
 	display:block;
 	margin:2px 0;
 }
-.onlineall ,.onlinevisitor ,.onlineusers {
-	display:inline;
-	float:right;
+.onlineall ,.onlinevisitor ,.onlineusers,.name_users {
 	margin-left:3px;
-	padding:5px 10px;
+	padding:2px 10px;
+	font-family:"Tahoma", Arial, Verdana, sans-serif, Lucida Grande, Lucida Sans Unicode;
+	font-weight:400;
+	font-size:11px;
+	outline:1px solid #fff;
 }
 .onlineall{
-	background:url(../images/number_online_all.png) no-repeat 98% 50%;
-	padding-right:20px;
-	color:#FF0000;
+	background:url(../images/bg_onlineall.gif) repeat-x center left;
+	border:1px solid #D2D29F;
+	color:#76760C;
 }
-
+.onlinevisitor{
+	background:url(../images/bg_onlinevisitor.gif) repeat-x center left;
+	border:1px solid #D29F9F;
+	color:#D20C0C;
+}
+.onlineusers{
+	background:url(../images/bg_onlineusers.gif) repeat-x center left;
+	border:1px solid #A1CAB4;
+	color:#009B00;
+}
 .name_users{
-	margin:0 2px;
-	padding:0 10px;
-	float:right;
-	font-size:11px;
+	background:url(../images/bg_nameusers.gif) repeat-x center left;
+	border:1px solid #8D98C9;
+	color:#0054A8;
 }
 /*  #  END FOR ONLINE */
 
@@ -681,20 +721,20 @@ ul.tabbernav li.tabberactive a:hover{
 	width:100%;
 	margin:3px auto;
 }
-#footerlinksleft ul{
+.footerlinksleft ul{
 	width:22%;
 	line-height:20px;
 	float:left;
 }
-#footerlinksleft li{
+.footerlinksleft li{
 	float:left;
 	font-weight:normal;
 }
-#footerlinksleft ul li a{
+.footerlinksleft ul li a{
 	padding:2px 4px;
 	color:#5C5C5C;
 }
-#footerlinksleft ul li a:hover,#footer .Copyrights  a:hover,#footer .page_stats a:hover{
+.footerlinksleft ul li a:hover,#footer .Copyrights  a:hover,#footer .page_stats a:hover{
 	background:#787878;
 	color:#fff;
 }
@@ -713,7 +753,7 @@ ul.tabbernav li.tabberactive a:hover{
 
 /*start Option to control panel */
 .admin_cp_link {
-	width:20%;
+	width:30%;
 	line-height:24px;
 	float:right;
 	display:inline;
@@ -739,8 +779,8 @@ ul.tabbernav li.tabberactive a:hover{
 /* login template >> login.html */
 .login {
 	margin:5px 0 10px 0;
-	padding:10px;
-	background:#F9F1EC url(../images/login.png) no-repeat 20% 50%;
+	padding:10px 20px;
+	background:#F9F1EC url(../images/login.png) no-repeat 10% 50%;
 	border:1px solid #FFD8BF
 }
 .box_form_login {
@@ -786,7 +826,6 @@ input.password{
 }
 input.button_login{
 	padding:2px 33px;
-	margin-right:0;
 }
 select.remme {
 	padding:1px 4px;
@@ -940,7 +979,7 @@ select.remme:focus {
 	background:#F9F5F0 url(../images/register.png) no-repeat 10% 50%;
 	border:1px solid #ECCEBB;
 	margin:5px 0;
-	padding:10px;
+	padding:10px 20px;
 }
 .register label {
 	display:block;
@@ -952,11 +991,13 @@ select.remme:focus {
 	background:#F9F5F0 url(../images/call.png) no-repeat 10% 50%;
 	border:1px solid #ECCEBB;
 	margin:5px 0;
-	padding:10px;
+	padding:10px 20px;
 }
 .call label {
 	display:block;
-	color:#111;
+}
+.textarea{
+	width:70%;
 }
 /* # connection template */
 
@@ -965,7 +1006,7 @@ select.remme:focus {
 	background:#F9F5F0 url(../images/get_password.png) no-repeat 15% 50%;
 	border:1px solid #ECCEBB;
 	margin:5px 0;
-	padding:10px;
+	padding:10px 20px;
 }
 .get_password p{
 	width:58%;
@@ -982,7 +1023,7 @@ select.remme:focus {
 	background:#F9F5F0 url(../images/file_rebort.png) no-repeat 10% 50%;
 	border:1px solid #ECCEBB;
 	margin:5px 0;
-	padding:10px;
+	padding:10px 20px;
 }
 .rebort label {
 	display:block;
@@ -1187,44 +1228,11 @@ select.remme:focus {
 }
 /* #  template list of files allowed > guide.html */
 
-/* Message Information System */
-.index_info,.index_err {
-	display:block;
-	padding:10px;
-	text-indent:30px;
-}
-.index_info {
-	border-top: 3px solid #84A0C0;
-	border-bottom: 3px solid #84A0C0;
-	color:#004776;
-	background:#C2D3E7;
-}
-.index_err {
-	border-top: 3px solid #DE7A7B;
-	border-bottom: 3px solid #DE7A7B;
-	color:#c00;
-	background:#E6C0C0;
-}
-.index_info  li {
-	background-image:url(../images/info_f.png);
-	background-repeat:no-repeat;
-	background-position:right top;
-}
-.index_err li {
-	background-image:url(../images/err.png);
-	background-repeat:no-repeat;
-	background-position:right top ;
-}
-.index_err span,.index_info  span {
-	color:#444;
-}
-/*  # Message Information System */
-
 /* #  template up > up_boxes.html */
 .thumb_div_tag {
-width:30%;
-margin:4px auto;
-text-indent:4px;
+	width:30%;
+	margin:4px auto;
+	text-indent:4px;
 }
 .thumb_div_tag img{
 	background:#FFF;
@@ -1326,3 +1334,18 @@ text-indent:4px;
 	padding:2px 3px;
 }
 /* # pagination */
+.css_xhtml{
+	float:left;
+	margin:4px 0px;
+	position:relative;
+	right:0;bottom:0;
+}
+.css img ,.xhtml img  {
+	border:1px solid #C8C8C8;
+}
+.css img:hover {
+	border:1px solid #FF8F21;
+}
+.xhtml img:hover {
+	border:1px solid #82C522;
+}

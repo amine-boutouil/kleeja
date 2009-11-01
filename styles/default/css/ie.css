@@ -1,2 +1,7 @@
 .tabbertab {border:0px;}ul.tabbernav li a{border:0px}
-
+.go_up{
+	background:url(../images/go_u4p.png) no-repeat 6% 100%;
+}
+.bgurl{
+	background:url(../images/bgu4rl.png) no-repeat 6% 100%;
+}

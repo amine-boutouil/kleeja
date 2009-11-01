@@ -4,7 +4,7 @@
 
 <IF NAME="extras.footer">
 <!-- begin extra footer -->
-<div id="extras_footer">{extras.footer}</div>
+<div class="extras_footer">{extras.footer}</div>
 <!-- # end extra footer -->
 </IF>
 
@@ -22,19 +22,29 @@
 <!-- end clear  -->
   
 <!-- Start links kleeja -->
-<div id="footerlinksleft">
+<div class="footerlinksleft">
   	<ul>
-	<li><a title="{lang.FOOTER_TXTS.BUGS}" onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com/bugs/ar/">Bugs</a><IF NAME="{lang.DIR}==ltr"> |</IF></li>
+	<li><a title="{lang.FOOTER_TXTS.BUGS}" onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com/bugs/ar/">Bugs</a> | </li>
 	<li><a title="{lang.FOOTER_TXTS.PLUGINS}" onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com/plugins/">Plugins</a> |</li>
 	<li><a title="{lang.FOOTER_TXTS.STYLES}" onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com/styles/">Styles</a> | </li>
-	<li><a title="xhtml" onclick="window.open(this.href,'_blank');return false;" href="http://validator.w3.org/check?uri=referer">xhtml</a> | </li>
-  	<li><a title="xhtml" onclick="window.open(this.href,'_blank');return false;" href="http://jigsaw.w3.org/css-validator/check/referer">css</a><IF NAME="{lang.DIR}!=ltr"> |</IF></li>
   </ul>
 </div>
 <!-- # End links kleeja -->
 
 <div class="Copyrights">{lang.COPYRIGHTS_X} &copy; <a href="{config.siteurl}">{config.sitename}</a></div>
 
+<!-- start clear  -->
+<div class="clr"></div>
+<!-- end clear  -->
+
+<IF NAME="is_admin">
+<!-- start control panel -->
+{admin_page}
+<!-- # end control panel -->
+</IF>
+
+<!--  Powered by : kleeja  -->
+																																																																																																																																																																										                                        	<!--  Do not remove this notice  --><div class="kleeja">Powered by : <a href="http://www.kleeja.com/" onclick="window.open(this.href,'_blank');return false;">Kleeja  </a><IF NAME="S_TRANSLATED_BY">{lang.S_TRANSLATED_BY}</IF></div>
 <!-- start clear  -->
 <div class="clr"></div>
 <!-- end clear  -->
@@ -46,18 +56,16 @@
 <IF NAME="googleanalytics">
 <div class="googleanalytics">{googleanalytics}</div>
 </IF>
+<div class="clr"></div>
+<div class="css_xhtml">
+<a class="xhtml" title="XHTML" onclick="window.open(this.href,'_blank');return false;" href="http://validator.w3.org/check?uri=referer"><img src="{STYLE_PATH}images/xhtml.gif" alt="xhtml" /></a>
+<a class="css" title="CSS" onclick="window.open(this.href,'_blank');return false;" href="http://jigsaw.w3.org/css-validator/check/referer"><img src="{STYLE_PATH}images/css.gif" alt="CSS" /></a>
+</div>
 
-<IF NAME="is_admin">
-<!-- start control panel -->
-{admin_page}
-<!-- # end control panel -->
-</IF>
-																																																																																																																																																																															<!--  Do not remove this notice  --><div class="kleeja">Powered by : <a href="http://www.kleeja.com/" onclick="window.open(this.href,'_blank');return false;">Kleeja  </a><IF NAME="S_TRANSLATED_BY">{lang.S_TRANSLATED_BY}</IF></div>
 </div>
 <!-- # end  footer template -->
 
 </div>
 <!-- # end  wrapper -->
-
 </body>
 </html>

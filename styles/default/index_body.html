@@ -1,4 +1,4 @@
-<!-- start index template  -->
+<!--  Powered by : kleeja  -->
 <div id="content_index_body">
 
 <!-- start welcome -->
@@ -6,7 +6,7 @@
 <div class="wolcome_msg">{welcome_msg}</div>
 <!-- ## End welcome -->
 
-<div class="clr"></div><br />
+<div class="clr"></div>
 
 <IF NAME="info">
 <!-- START  FOR INFORMATION -->
@@ -27,18 +27,21 @@
 <!-- start uplaod normal  -->
 <div class="tabbertab" title="{lang.DOWNLOAD_F}" id="filetype">
 </IF>
+<div class="go_up">
 <LOOP NAME=FILES_NUM_LOOP>
-	<input type="file" name="file_{{i}}_" id="file_{{i}}_" style="display:{{show}}" size="50" onchange="javascript:plus(1);" /><br id="br_{{i}}_" style="display:{{show}}" />
+	<input type="file" name="file_{{i}}_" id="file_{{i}}_" style="display:{{show}}" size="60" onchange="javascript:plus(1);" /><br id="br_{{i}}_" style="display:{{show}}" />
 </LOOP>
+
     <div id="upload_forum"></div>
     <br />
 	<input class="input_num" type="text" id="upload_num" value="1" size="1" readonly="readonly" style="text-align:center;color:#888"/>
-	<span class="zx"><a title="{lang.ADD_UPLAD_A}" onclick="javascript:plus(1);"><img src="{STYLE_PATH}images/zx.gif" width="20" height="20" alt="{lang.ADD_UPLAD_A}" style="vertical-align:middle;" /></a></span>
-	<span class="zl"><a title="{lang.ADD_UPLAD_B}" onclick="javascript:minus(1);"><img src="{STYLE_PATH}images/zl.gif" width="20" height="20" alt="{lang.ADD_UPLAD_B}" style="vertical-align:middle;" /></a></span>
+	<span class="zx"><a title="{lang.ADD_UPLAD_A}" onclick="javascript:plus(1);"><img src="{STYLE_PATH}images/add.gif" alt="{lang.ADD_UPLAD_A}" style="vertical-align:middle;" /></a></span>
+	<span class="zl"><a title="{lang.ADD_UPLAD_B}" onclick="javascript:minus(1);"><img src="{STYLE_PATH}images/remove.gif" alt="{lang.ADD_UPLAD_B}" style="vertical-align:middle;" /></a></span>
 	<br />
 	<div class="agree"><input id="checkr" type="checkbox" onclick="accept_terms('submitr','checkr');" /> <span>{lang.AGREE_RULES}</span></div>
 	<div class="bn_up"><input type="submit" id="submitr" name="submitr" value="{lang.DOWNLOAD_F}"  disabled="disabled" /></div>
 	<div class="clr"></div>
+</div>
 <!-- # end uplaod normal  -->
 <IF NAME="config.www_url">
 </div>
@@ -47,18 +50,20 @@
 <IF NAME="config.www_url">
 <!-- start uplaod URL -->   
 <div class="bg tabbertab" title="{lang.DOWNLOAD_T}" id="texttype">
+<div class="bgurl">
 <LOOP NAME=FILES_NUM_LOOP>
-	<input class="url" type="text" name="file_{{i}}_" id="fileu_{{i}}_" size="60" value="{lang.PAST_URL_HERE}" onclick="this.value=''" style="display:{{show}}" /><br id="bru_{{i}}_" style="display:{{show}}" />
+	<input class="url" type="text" name="file_{{i}}_" id="fileu_{{i}}_" size="70" value="{lang.PAST_URL_HERE}" onclick="this.value=''" style="display:{{show}}" /><br id="bru_{{i}}_" style="display:{{show}}" />
 </LOOP>
     <br />
 	<div id="upload_f_forum"></div>
 	<input class="inum input_num" type="text" id="upload_f_num" value="1" size="1" readonly="readonly" />
-	<span class="zx"><a title="{lang.ADD_UPLAD_A}" onclick="javascript:plus(2);"><img src="{STYLE_PATH}images/zx.gif" width="20" height="20" alt="{lang.ADD_UPLAD_A}" style="vertical-align:middle;" /></a></span>
-	<span class="zl"><a title="{lang.ADD_UPLAD_B}" onclick="javascript:minus(2);"><img src="{STYLE_PATH}images/zl.gif" width="20" height="20" alt="{lang.ADD_UPLAD_B}" style="vertical-align:middle;" /></a></span>
+	<span class="zx"><a title="{lang.ADD_UPLAD_A}" onclick="javascript:plus(2);"><img src="{STYLE_PATH}images/add.gif" alt="{lang.ADD_UPLAD_A}" style="vertical-align:middle;" /></a></span>
+	<span class="zl"><a title="{lang.ADD_UPLAD_B}" onclick="javascript:minus(2);"><img src="{STYLE_PATH}images/remove.gif" alt="{lang.ADD_UPLAD_B}" style="vertical-align:middle;" /></a></span>
 	<br />
     <div class="agree"><input id="checkr2" type="checkbox" onclick="accept_terms('submittxt','checkr2');" /> <span>{lang.AGREE_RULES}</span></div>
 	<div class="bn_up"><input type="submit" id="submittxt" name="submittxt" value="{lang.DOWNLOAD_T}" disabled="disabled" /> </div>
    	<div class="clr"></div>
+</div>
 </div>
 <!-- # END uplaod URL -->  	
 </IF>
@@ -68,7 +73,6 @@
 <IF NAME="config.safe_code">
 <!-- start  safe code  -->
 <div class="clr"></div>
-<div style="width:76%">			
 <div class="safe_code">
 	<p>{lang.VERTY_CODE}</p>
 	<div class="clr"></div>
@@ -78,7 +82,6 @@
 	</div>
 	<div class="clr"></div>
 	<p class="explain">{lang.NOTE_CODE}</p>
-</div>
 </div>
 <div class="clr"></div>
 <!-- ## End  safe code  -->	  
@@ -90,7 +93,7 @@
 <div id="loadbox">
 	<div class="waitloading">{lang.WAIT_LOADING}</div><div class="clr"></div><br />
 		<img src="{STYLE_PATH}images/loading.gif" alt="loading ..." />
-	<div class="clr"></div><br /><br /><br /><br />
+	<div class="clr"></div><br /><br /><br />
 </div>
 <!-- # END BOX LOADING -->
 
@@ -100,18 +103,17 @@
 <!-- START FOR ONLINE -->
 <div class="clr"></div>
 <div class="online">
-	<div class="onlineall">{lang.NUMBER_ONLINE} : [ {allnumbers} ]</div>
-	<div class="onlinevisitor">{lang.NUMBER_VONLINE} : [ {visitornum} ]</div>
-	<div class="onlineusers">{lang.NUMBER_UONLINE} : [ {usersnum} ]</div>
+<button class="onlineall" type="button">{lang.NUMBER_ONLINE} : [ {allnumbers} ]</button>
+<button class="onlinevisitor" type="button">{lang.NUMBER_VONLINE} : [ {visitornum} ]</button>
+<button class="onlineusers" type="button">{lang.NUMBER_UONLINE} : [ {usersnum} ]</button>
 </div>
-<div class="clr"></div>
-<LOOP NAME="shownames">
-<button class="name_users" disabled="disabled" type="button"><!--{{seperator}}-->{{name}}</button>
-</LOOP>
 <!-- # END FOR ONLINE -->
 <div class="clr"></div>
+	<LOOP NAME="shownames">
+		<button class="name_users" type="button"><!--{{seperator}}-->{{name}}</button>
+	</LOOP>
+	<div class="clr"></div>
 </IF>
-
 
 <div class="clr"></div><br />
 </div>

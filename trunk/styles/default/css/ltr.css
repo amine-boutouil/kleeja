@@ -1,75 +1,72 @@
 /*
-# Powered by Kleeja .... Kleeja.com
-# Designed by Tar3q .... Tar3q.com
-# copyright 2007-2009  ..
+# package Kleeja
+# version 1.0.0
+# copyright (c) 2007 Kleeja.com
+# license ./docs/license.txt
+# Filename : styles/default/ltr.css
+# Author: Tar3Q  
+# Date:: 2009-10-07  $
 */
 option {padding-left: 1em;}
 caption, th, td {text-align:left}
-img.left {float:right;margin-left:15px;}
-img.right {float:left;margin-right:15px;}
-.line {background-position:left top}
-.title-x {float:left}
-.safe_code {background:#F9F5F0 url(../images/saf3_code_ltr.gif) no-repeat 100% 50%;}
-#top_menu {background-position:top right}
-#top_menu  .m3nu {margin-right:0%;margin-left:10%;}
-#top_menu  .m3nu ul{float:left;}
-#top_menu  .m3nu li {float:left;margin:0 0 0 5px;}
-#top_menu  .m3nu li a {float: left;}
-#content {float:right}
-#right_menu{float:left}
-#right_menu .list{margin-left:4px;margin-right:16px;}
-#right_menu .list img{margin-right:10px; margin-left:0;}
-#system-message dd.info  ul li ,#system-message dd.error ul li{background-position:left top;}
-#data_file {float:left}
-#data_file_down {float:right}
-.stats  {background-position:98% 50%;}
-#content_index_body  {float:right}
-.bn_up {margin-right:4px;margin-left:10px;}
-.tabbertab {-moz-border-radius-topleft:0px;-webkit-border-topleft-radius:0px;-moz-border-radius-topright:10px;-webkit-border-topright-radius:10px;}
-ul.tabbernav li a{margin-left:0px;margin-right:4px;}
-.online{float:left}
-.onlineall ,.onlinevisitor ,.onlineusers {float:left;margin-right:3px;margin-left:0px;}
-.onlineall  {background-position:2% 50%;padding-left:20px;padding-right:10px;}
-.name_users{float:left;}
+img.left {float:right;margin-left:15px;margin-right:0;}
+img.right {float:left;margin-right:15px;margin-left:0;}
+.line {background-position:left top;}
+.title-x {float:left;background-position:left top;}
+.safe_code {	background:#F9F5F0 url(../images/saf3_code_ltr.gif) no-repeat 100% 50%;}
+#top_menu .m3nu {margin-right:0;margin-left:6%;}
+#top_menu .m3nu ul{float:left;}
+#top_menu .m3nu li {float:left;margin-left:0;margin-right:2px;}
+#top_menu .m3nu li a {float: left;}
+#top_menu .m3nu li a:hover {background-position:left top;}
+#content {float:right;}
+#system-message dd.info  ul li {background-position:left top;}
+#system-message dd.error ul li{background-position:left top;}
+.index_info  li {background-position:left center;}
+.index_err li {background-position:left center;}
+#right_menu {float:left;}
+#right_menu .list {margin-left:0;margin-right:16px;}
+#right_menu .list .imgtop {text-align:right;}
+#right_menu .list img {margin-left:0;margin-right:10px;}
+.kleeja {float:left;}
+#data_file {float:left;}
+#data_file_down {float:right;margin-right:0;margin-left:10px;}
+.wait {font-size:200%;}
+.stats  {background-position: 94% 50%;}
+#content_index_body {float:right;}
+.go_up{	background-position: 94% 100%;}
+.bgurl{background-position: 94% 100%;}
+ul.tabbernav li a{margin-left:0;margin-right:4px;background-position:top right;}
+.online{float:left;}
+.onlineall ,.onlinevisitor ,.onlineusers,.name_users {margin-left:0;margin-right:3px;}
+.footerlinksleft  ul{float:right;width:14%;}
+#footer .Copyrights {float:left;}
+.admin_cp_link {float:left;}
+.admin_cp_link span{	padding:4px 25px;}
+.login {	background-position:90% 50%;}
+.title_login {background-position:1% 50%;}
+.gather {float:left;	margin-left:0;margin-right:3px;}
+input.username,input.password {float:left;padding:3px 20px 3px 3px;background-position: 98% 50%;}
+.forget_pass {margin-left:0;margin-right:60px;background-position: 2% 50%;float:right;}
+#kleeja_img_captcha {float:left;}
+#boxfileuser .box_user {float:left;}
+#boxfileuser .us3r_n4me {float:right;}
+#filecplink .link_user{margin-right:0;margin-left:5px;}
+.tabledata .odd  {text-align:left;}
+.tabledata thead th {background-position:center right;}
+.tabledata thead tr:hover th,.tabledata thead th:hover {background-position:center right;}
+.register,.call {background-position:95% 50%;}
+.get_password,.file_cp{background-position:85% 50%;}
+.rebort{background-position:94% 50%;}
+#profile .boxdata{float:left;}
+#profile .boxdata .in{margin-right:0;margin-left:2%;}
+.left_button{float:right;}
+.file_cp  .odd ,.file_cp  .nbr  {text-align:left;}
+.user_img img,.visitor_img img{padding-left:0;padding-right:5px;}
+.user_ext{background-position:top left;}
+.visitor_ext{background-position:top left;}
+.all_boxes{float:right;}
 .pagination{float:left;margin:3px 3px 3px 0px;}
 .pagination li{float:left;margin-left:0;margin-right:3px;}
-
-/* login template >> login.html */
-.login {background-position:80% 50%;}
-.title_login {background-position:1% 50%;}
-.gather {float:left;	margin-left:0px;margin-right:3px;}
-input.username,input.password {float:left;padding:3px 20px 3px 6px;}
-input.username ,input.password{background-position:right center;}
-input.button_login{margin-left:0;margin-right:0;}
-.forget_pass {margin-right:60px;	margin-left:0px;background-position:2% 50%;float:right;}
-/* # login template >> login.html  */
-
-/* captcha stuff*/
-#kleeja_img_captcha {
-	float:left;
-}
-/* # captcha stuff*/
-
-
-#boxfileuser  .box_user {float:left;}
-#boxfileuser  .us3r_n4me {float:right;}
-.tabledata .odd  {text-align:left}
-.reg_table {background-position:85% 50%}
-.get_password{background-position:85% 50%}
-.call{background-position:90% 50%}
-.rebort{background-position:90% 50%}
-#profile .boxdata{float:left}
-#profile .boxdata .in{margin-right:0%;margin-left:8%;}
-.file_cp {background-position:75% 45%}
-.left_button{float:right}
-.file_cp  .odd  ,.file_cp  .nbr {text-align:left}
-.user_img img{padding-left:0px;padding-right:5px}
-.visitor_img img{padding-left:0px;padding-right:5px}
-.index_info  li {background-position:left top}
-.index_err li {background-position:left top }
-#footerlinksleft ul{float:right}
-#footer .Copyrights {float:left;}
-.admin_cp_link {width:30%;line-height:24px;float:left;margin:5px 0;}
-.admin_cp_link span{padding:4px 30px;}
-.wait {font-size:250%}
-.thumb_div_tag {width:20%;}
+.css_xhtml{float:right;right:0;bottom:0;}
+.go_up,.bgurl{	background-position: 360% 100%;}

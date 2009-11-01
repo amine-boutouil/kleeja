@@ -50,7 +50,7 @@
 <IF NAME="config.www_url">
 <!-- start uplaod URL -->   
 <div class="bg tabbertab" title="{lang.DOWNLOAD_T}" id="texttype">
-<div class="bgurl">
+<div class="go_up">
 <LOOP NAME=FILES_NUM_LOOP>
 	<input class="url" type="text" name="file_{{i}}_" id="fileu_{{i}}_" size="70" value="{lang.PAST_URL_HERE}" onclick="this.value=''" style="display:{{show}}" /><br id="bru_{{i}}_" style="display:{{show}}" />
 </LOOP>
@@ -103,14 +103,14 @@
 <!-- START FOR ONLINE -->
 <div class="clr"></div>
 <div class="online">
-<button class="onlineall" type="button">{lang.NUMBER_ONLINE} : [ {allnumbers} ]</button>
-<button class="onlinevisitor" type="button">{lang.NUMBER_VONLINE} : [ {visitornum} ]</button>
-<button class="onlineusers" type="button">{lang.NUMBER_UONLINE} : [ {usersnum} ]</button>
+<div class="onlineall">{lang.NUMBER_ONLINE} : [ {allnumbers} ]</div>
+<div class="onlinevisitor">{lang.NUMBER_VONLINE} : [ {visitornum} ]</div>
+<div class="onlineusers">{lang.NUMBER_UONLINE} : [ {usersnum} ]</div>
 </div>
 <!-- # END FOR ONLINE -->
 <div class="clr"></div>
 	<LOOP NAME="shownames">
-		<button class="name_users" type="button"><!--{{seperator}}-->{{name}}</button>
+		<div class="name_users"><!--{{seperator}}-->{{name}}</div>
 	</LOOP>
 	<div class="clr"></div>
 </IF>

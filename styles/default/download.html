@@ -23,11 +23,11 @@
 	<div id="data_file">
 		<p class="t">{lang.FILE_INFO}</p>
 		<ul class="data_menu">
-			<li>{lang.FILENAME} : <b>{name}</b></li>	
-			<li>{lang.FILETYPE} : <b>{type}</b></li>
-			<li>{lang.FILESIZE} : <b>{size}</b></li>
-			<li>{lang.FILEDATE} : <b>{time}</b></li>
-			<li>{lang.FILEUPS} : <b class="nup">{uploads}</b></li>				
+			<li>{lang.FILENAME} : <span>{name}</span></li>	
+			<li>{lang.FILETYPE} : <span>{type}</span></li>
+			<li>{lang.FILESIZE} : <span>{size}</span></li>
+			<li>{lang.FILEDATE} : <span>{time}</span></li>
+			<li>{lang.FILEUPS} : <span>{uploads}</span></li>				
       	</ul>
 	</div>	
 	
@@ -37,7 +37,7 @@
 <div class="clr"></div>
 
 <!-- start button file report  -->
-<div class="fileReport" onclick="window.location.href='{REPORT}';"><img src="{STYLE_PATH}images/zl.png" alt="" style="vertical-align:middle;" /> <a href="{REPORT}">{lang.FILEREPORT}</a></div>
+<div class="filereport" onclick="window.location.href='{REPORT}';"><img src="{STYLE_PATH}images/zl.png" alt="file Report" style="vertical-align:middle;padding:0 10px;" />{lang.FILEREPORT}</div>
 <!-- ## End button file report  -->	
 
 <script type="text/javascript">

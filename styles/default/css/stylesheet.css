@@ -386,15 +386,15 @@ p.explain {
 
 /* start Downlod template >> download.html */
 #file-info {
-	height:230px;
 	margin:5px auto;
 }
 #data_file {
 	width:46%;
-	height:220px;
+	height:190px;
 	float:right;
-	background:#fff url(../images/bg_tabbertab.png) repeat-x bottom left;
+	background:#F0F6E7 url(../images/bg_datafile.gif) repeat-x bottom left;
 	padding:10px;
+	border:1px solid #B3CB8C;
 }
 #data_file .data_file p {
 	color:#F0502E;
@@ -405,14 +405,8 @@ p.explain {
 	background:#ccc;
 	font-size:12px;
 	text-align:center;
-	border:1px solid #f2f2f2;
-	border-right:5px solid #CCC;
-	border-left:5px solid #CCC;
 	margin-top:10px;
-	padding:2px 5px;
-}
-#data_file .nup {
-	font-size:18px
+	padding:6px 5px;
 }
 #data_file .data_menu  ul{
 	list-style:none;
@@ -420,28 +414,31 @@ p.explain {
 }
 #data_file .data_menu li {
 	display:block;
-	background:url(../images/bg_onlineall.gif) repeat-x center left;
+	height:22px;
+	background:#fff;
 	padding:2px 5px 2px 10px;
-	margin-bottom:1px;
+	margin-bottom:2px;
 	border-right:5px solid #CCC;
 	border:1px solid #f2f2f2;
 	font-weight:700;
 	color:#333;
 	text-decoration:none;
 }
-#data_file .data_menu b {
+#data_file .data_menu span {
 	color:#040476;
 }
 #data_file_down {
 	float:left;
+	border:1px solid #ABAB68;
 	display:inline;
 	margin-right:10px;
 	width:45%;
-	height:220px;
-	background:#fff url(../images/bg_tabbertab.png) repeat-x bottom left;
+	height:190px;
+	background:#FAFAE7 url(../images/bg_onlineall.gif) repeat-x bottom left;
 	padding:10px;
 }
 #data_file_down .find_x {
+	margin-top:10px;
 	color:#2B8800;
 	font-size:22px;
 	text-align:center;
@@ -450,21 +447,17 @@ p.explain {
 	text-align:center;
 	padding-top:15px;
 }
-.fileReport {
+.filereport {
 	text-align:center;
-	border-top:1px solid #FFBFBF;
-	border-bottom:1px solid #FFBFBF;
+	border:1px solid #D88181;
 	cursor:pointer;
 	background:url(../images/bg_onlinevisitor.gif) repeat-x bottom left;
 	margin:10px auto;
 	padding:3px 10px;
 }
-.fileReport a {
-	color:#D88181;
-	font-size:110%;
-}
-.fileReport a:hover {
-	color:#111;
+
+.filereport:hover {
+	border:1px solid #FF0000;
 }
 
 .wait {
@@ -475,21 +468,21 @@ p.explain {
 	text-align:center;
 }
 #download {
-	margin:4px auto;
+	margin:10px auto 2px auto;
 	text-align:center;
 }
 #download a {
-	margin-top:3px;
-	background:#A2C900;
+	background:#A2C900 url(../images/bg_datafile.gif) repeat-x bottom left;
 	border-top:3px solid #6C9F01;
 	border-bottom:3px solid #6C9F01;
-	color:#fff;
+	color:#111;
 	font-size:100%;
 	font-weight:700;
-	padding:10px 30px;
+	padding:15px 30px;
 }
 #download a:hover {
-	background:#77AA02;
+	background:#fff;
+	text-decoration: none;
 }
 /* # End Downlod template >> download.html */
 

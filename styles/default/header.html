@@ -17,14 +17,15 @@
 	</IF>
 	<IS_BROWSER="ie6">
 	<link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH}css/ie_6.css" />
-		<style type="text/css">	
-			img ,li ,a ,td ,tr{ behavior: url('{STYLE_PATH}ie6/iepngfix.htc')};
-			div#top_menu .m3nu { behavior: none; };
-			div.tabledata ,div.tabbertab{ behavior: none; };
+		<style type="text/css">
+			img ,td ,tr{ behavior: url('{STYLE_PATH}ie/iepngfix.htc')};
 		</style> 
 	</IS_BROWSER>
 	<IS_BROWSER="ie">
 	<link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH}css/ie.css" />
+		<style type="text/css">	
+			body { behavior: url('{STYLE_PATH}ie/csshover3.htc')};
+		</style> 
 	</IS_BROWSER>
 	<script type="text/javascript">
 	var number_of_uploads={config.filesnum};

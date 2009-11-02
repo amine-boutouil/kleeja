@@ -3,9 +3,17 @@
 .user_ext{background:#E8E8E8 url(../images/headlnebg.png) repeat-x top right}
 .visitor_ext{background:#FDF8EE url(../images/headliebg.png) repeat-x top right;}
 .tabledata thead th {background:#F68618 url(../images/headinebg.png) repeat-x center right;}
-.tabbertab {border:0px;}ul.tabbernav li a{border:0px}
+.go_up{background:url(../images/goup.png) no-repeat 6% 100%;}
 input  {
 	font-family: "Tahoma", Arial, Verdana, sans-serif, Lucida Grande, Lucida Sans Unicode;
 	font-weight:normal;
 	font-size:12px;
+}
+#top_menu .m3nu li a:hover {
+	color:#fff;
+	background: url(../images/current-bg.gif) repeat-x top left;
+}
+#right_menu .list a:hover{
+	color:#fff;
+	background:#555 url(../images/right4_menu.png) repeat;
 }

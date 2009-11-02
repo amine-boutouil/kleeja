@@ -1,5 +1,4 @@
 .tabbertab {	border-right:1px solid #bbb;border-left:1px solid #bbb;border-bottom:1px solid #aaa;border-top:none;}
 ul.tabbernav li a{border-right:1px solid #aaa;border-left:1px solid #aaa;border-bottom:0;border-top:1px solid #bbb;}
-#right_menu .list a{background-color:#6B6B6B;border-bottom: 1px solid #656565;}
-#right_menu .list .imgtop{border-bottom: 1px solid #656565;}
+
 .safe_code ,.call,.register,.get_password,.tabbertab{width:93%;}

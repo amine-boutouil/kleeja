@@ -1,4 +1,4 @@
 .tabbertab {	border-right:1px solid #bbb;border-left:1px solid #bbb;border-bottom:1px solid #aaa;border-top:none;}
 ul.tabbernav li a{border-right:1px solid #aaa;border-left:1px solid #aaa;border-bottom:0;border-top:1px solid #bbb;}
-
 .safe_code ,.call,.register,.get_password,.tabbertab{width:93%;}
+#data_file_down,#data_file {height:180px;}

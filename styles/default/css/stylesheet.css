@@ -272,7 +272,7 @@ p.explain {
 .index_info,.index_err {
 	display:block;
 	padding:10px;
-	text-indent:30px;
+	text-indent:26px;
 	line-height:30px;
 }
 .index_info {
@@ -288,12 +288,12 @@ p.explain {
 	background:#E6C0C0;
 }
 .index_info  li {
-	background-image:url(../images/info_f.png);
+	background-image:url(../images/info_f.gif);
 	background-repeat:no-repeat;
 	background-position:right top;
 }
 .index_err li {
-	background-image:url(../images/err.png);
+	background-image:url(../images/err.gif);
 	background-repeat:no-repeat;
 	background-position:right top;
 }
@@ -304,7 +304,7 @@ p.explain {
 
 /*  right menu */
 #right_menu{
-	width:10%;
+	width:22%;
 	float:right;
 	padding:5px;
 }
@@ -542,9 +542,9 @@ p.explain {
 
 /* start index body  >> index_body.html  */
 #content_index_body  {
-	float:left;
-	width:70%;
-	padding:5px 30px;
+	float:right;
+	width:72%;
+	padding:5px 20px;
 }
 
 .wolcome_msg {
@@ -639,6 +639,7 @@ ul.tabbernav li a:link {
 }
 ul.tabbernav li a:hover{
 	color:#fff;
+	text-decoration: none;
 }
 ul.tabbernav li.tabberactive a{
 	padding:5px 14px;
@@ -651,6 +652,7 @@ ul.tabbernav li.tabberactive a:link{
 }
 ul.tabbernav li.tabberactive a:hover{
 	color:#F68618;
+	text-decoration: none;
 }
 /* # tabs  */
 
@@ -758,16 +760,16 @@ ul.tabbernav li.tabberactive a:hover{
 	margin:5px 0;
 }
 .admin_cp_link:hover  {
-	color:#fff;
+	color:#111;
 	text-decoration:none;
 }
 .admin_cp_link span{
 	display:inline;
 	margin:5px 0;
 	padding:4px 50px;
-	background:url(../images/adminPan.gif) no-repeat center left;
+	background:url(../images/adminpan.gif) no-repeat center left;
 	font-weight:bold;
-	border:1px solid #858585;
+	border:1px solid #F68618;
 }
 /* # footer template */
 
@@ -1237,20 +1239,23 @@ select.remme:focus {
 	border:2px solid #111;
 }
 .inputbody {
-	margin:4px 2px;
-	border:1px solid #84A0C0;
+	margin:5px 0;
 	padding:10px;
 }
 .btitle {
-	line-height:14px;
-	color:#000;
+	width:24%;
+	background:#84A0C0;
+	outline:1px solid #fff;
+	line-height:16px;
+	float:right;
+	color:#fff;
 	text-align:center;
-	padding:2px 6px;
+	padding:2px 0;
 	text-indent:0px;
 }
 .all_boxes{
 	float:left;
-	width:98%;
+	width:74%;
 	color:#004776;
 	border:1px solid #005F9D;
 	outline:1px solid #84A0C0;

@@ -68,7 +68,7 @@ input {
 	margin:0 2px;
 }
 
-input[type="text"],input[type="password"],input[type="file"]{
+input[type="text"],input[type="password"]{
 	padding:2px;
 	cursor: text;
 	border-left: 1px solid #AFAEAA;
@@ -83,9 +83,9 @@ input[type="submit"]{
 	padding:1px 18px;
 }
 input[type="submit"]:hover  {color:#D74E00;}
-input[type="text"]:hover ,input[type="password"]:hover,input[type="file"]:hover,select:hover,textarea:hover{border: 1px solid #888;}
-input[type="password"]:focus,input[type="text"]:focus,input[type="file"]:focus {background-color:#ffd;border: 1px solid #D26900;color:#003399;}
-input:focus,select:focus,textarea:focus {background-color:#ffd;border: 1px solid #D26900;color:#003399;}
+input[type="text"]:hover ,input[type="password"]:hover,select:hover,textarea:hover{border: 1px solid #888;}
+select:focus,textarea:focus ,input[type="password"]:focus,input[type="text"]:focus {background-color:#ffd;border: 1px solid #D26900;color:#003399;}
+
 
 a:link, body_alink ,a:visited, body_avisited{
 	color: #666;
@@ -1287,50 +1287,46 @@ select.remme:focus {
 }
 
 /* pagination */
-.pagination ul{
+.pagination {
 	float:right;
 	text-align:center;
-	margin:3px 0px 3px 3px;
+	margin:2px 0px;
 	font-weight:normal;
+	display:inline;
 }
-
-.pagination li{
-	float:right;height:18px;
-	margin-left:3px;
+.pagination tr{
+	line-height:18px;
+}
+.pagination td{
+	padding:3px;
 }
 .pagination a{
-	background-color:#ccc;
-	border:1px solid #929292;
 	text-decoration:none;
-	padding:2px 6px;
-	color:#666;
+	color:#000;
 }
 .pagination a:hover,.pagination a.prevnext:hover{
 	border-color:#222;
 	color:#222;
 }
-.currentpage{
-	background-color:#FF6600;
-	border:2px solid #D4D4D4;
-	color:#FFF;
-	padding:3px 6px;
+.currentpage {
+font-size:16px;
+	color:#FF0000;
+	padding:2px 6px;
 	cursor: default;
 }
-.pagination a.disablelink{
-	background-color:transparent;
+.disablelink a{
+
 	border-color:#ccc;
 	color:#999;
 }
-.pagination a.prevnext{
-	background-color:transparent;
+.prevnext a{
 	cursor:pointer;
 	font-weight:700;
 	border-color:#ccc;
+	margin-left:15px;
 }
-.three_dots {
-	background-color:#ccc;
+.three_dots span{
 	cursor:default;
-	border:1px solid #929292;
 	padding:2px 3px;
 }
 /* # pagination */
@@ -1348,6 +1344,12 @@ select.remme:focus {
 }
 .xhtml img:hover {
 	border:1px solid #82C522;
+}
+.google_chrome {
+	border:1px solid #D5D5C8;
+	background-color:#fff;
+	padding:1px 6px;
+	margin:0 0 1px 0;
 }
 
 /* PRINT */

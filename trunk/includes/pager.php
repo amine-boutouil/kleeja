@@ -55,14 +55,14 @@ class SimplePager
 			return;
 		}
 
-		$re = '<div class="pagination"><ul>';
+		$re = '<table class="pagination"><tr>';
 
 		// Add a previous page link
 		if ($this->totalPages > 1 && $this->currentPage > 1)
-			($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '<li><a class="disablelink" href="' . $link . '-' . ($this->currentPage-1) . '.html">'. $lang['PREV'] .'</a></li>' : $re .= '<li><a class="disablelink" href="' . $link . '&amp;page=' . ($this->currentPage-1) . ' ">'. $lang['PREV'] .'</a></li>';
+			($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '<td class="disablelink"><a href="' . $link . '-' . ($this->currentPage-1) . '.html">'. $lang['PREV'] .'</a></td>' : $re .= '<td class="disablelink"><a href="' . $link . '&amp;page=' . ($this->currentPage-1) . ' ">'. $lang['PREV'] .'</a></td>';
 
 		if ($this->currentPage > 3)		
-			($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '<li><a href="' . $link . '-1.html">1</a></li>' . (($this->currentPage > 5) ? '<li><span class="three_dots">...</span></li>' : '') : $re .= '<li><a href="' . $link . '&amp;page=1">1</a></li>' . (($this->currentPage > 5) ? '<li><span class="three_dots">...</span></li>' : '');
+			($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '<td><a href="' . $link . '-1.html">1</a></td>' . (($this->currentPage > 5) ? '<td class="three_dots"><span>...</span></td>' : '') : $re .= '<td><a href="' . $link . '&amp;page=1">1</a></td>' . (($this->currentPage > 5) ? '<td class="three_dots"><span>...</span></td>' : '');
 
 		// Don't ask me how the following works. It just does, OK? :-)
 		for ($current = ($this->currentPage == 5) ? $this->currentPage - 3 : $this->currentPage - 2, $stop = ($this->currentPage + 4 == $this->totalPages) ? $this->currentPage + 4 : $this->currentPage + 3; $current < $stop; ++$current)
@@ -70,23 +70,23 @@ class SimplePager
 			if ($current < 1 || $current > $this->totalPages)
 				continue;
 			else if ($current != $this->currentPage)
-				($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '<li><a href="'. $link .'-'.($current).'.html">'. $current .'</a></li>' : $re .= '<li><a href="'. $link .'&amp;page='.($current).'">'. $current .'</a></li>';
+				($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '<td><a href="'. $link .'-'.($current).'.html">'. $current .'</a></td>' : $re .= '<td><a href="'. $link .'&amp;page='.($current).'">'. $current .'</a></td>';
 			else
-				$re .= '<li><strong class="currentpage">'. $current .'</strong></li>';
+				$re .= '<td class="currentpage">'. $current .'</td>';
 		}
 
 		if ($this->currentPage <= ($this->totalPages-3))
 		{
 			if ($this->currentPage != ($this->totalPages-3) && $this->currentPage != ($this->totalPages-4))
-				$re .= '<li><span class="three_dots">...</span></li>';
-			($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '<li><a href="' . $link . '-' . ($this->totalPages) . '.html">'. $this->totalPages .'</a></li>' : $re .= '<li><a href="' . $link . '&amp;page=' . ($this->totalPages) . '" >'. $this->totalPages .'</a></li>';
+				$re .= '<td class="three_dots"><span>...</span></td>';
+			($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '<td><a href="' . $link . '-' . ($this->totalPages) . '.html">'. $this->totalPages .'</a></td>' : $re .= '<td><a href="' . $link . '&amp;page=' . ($this->totalPages) . '" >'. $this->totalPages .'</a></td>';
 		}
 
 		// Add a next page link
 		if ($this->totalPages > 1 && $this->currentPage < $this->totalPages)
-			($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '<li><a class="prevnext" href="' . $link . '-' . ($this->currentPage+1) . '.html">'. $lang['NEXT'] .'</a></li>' :  $re .= '<li><a class="prevnext" href="' . $link . '&amp;page=' . ($this->currentPage+1) . '">'. $lang['NEXT'] .'</a></li>';
+			($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '<td class="prevnext"><a href="' . $link . '-' . ($this->currentPage+1) . '.html">'. $lang['NEXT'] .'</a></td>' :  $re .= '<td class="prevnext"><a href="' . $link . '&amp;page=' . ($this->currentPage+1) . '">'. $lang['NEXT'] .'</a></td>';
 
-		$re .= '</ul></div>'; 
+		$re .= '</tr></table>'; 
 
 		return $re;
 	}

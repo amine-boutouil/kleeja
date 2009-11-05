@@ -305,7 +305,7 @@ function process ()
 			
 			if(!$this->user_is_adm && $this->user_is_flooding())
 			{
-				return $this->errs[] = array($lang['NO_REPEATING_UPLOADING'], 'index_err');
+				return $this->errs[] = array(sprintf($lang['YOU_HAVE_TO_WAIT'], ($this->id_user == '-1') ? $config['guestsectoupload'] : $config['usersectoupload']), 'index_err');
 			}
 			
 			if ($wut == 1 && isset($_SESSION['FIILES_NOT_DUPLI']))

@@ -535,7 +535,9 @@ $lang = array_merge($lang, array(
 	'ORDER_TOTAL_DOWNLOADS'		=> 'ترتيب الملفات حسب عدد مرات التحميل', 
 	'COMMA_X'					=> '<p class="live_xts">separate by comma (<font style="font-size:large"> , </font>)</p>',
 	'NO_SEARCH_WORD'			=> 'لم تقم بكتابة كلمة بحث !',
-	
+	'GUESTSECTOUPLOAD'			=> 'عدد الثواني بين كل عملية رفع للزائر',
+	'USERSECTOUPLOAD'			=> 'عدد الثواني بين كل عملية رفع للعضو',
+	'YOU_HAVE_TO_WAIT'			=> 'انتظر %s ثانية وبعد انقضاء الفترة الزمنيه قم بإعادة رفع الملفات',
 	//last line of this file ...					 
 	'S_TRANSLATED_BY' 			=> 'Translated By <a href="http://www.fenix4web.com/">Fenix4Web</a>',
 ));

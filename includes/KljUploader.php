@@ -23,6 +23,7 @@ class KljUploader
     var $types; 		 // filetypes
     var $ansaqimages;   // imagestypes
     var $filename;     // filename
+    var $total = 0;		//total files
 	//var $sizes;
 	var $typet;
 	var $sizet;
@@ -34,6 +35,7 @@ class KljUploader
 	var $id_user;
 	var $errs = array();
 	var $safe_code;	// captcha is on or off 
+	var $user_is_adm; //check if user is administrator
 
 
 
@@ -301,7 +303,7 @@ function process ()
 				}
 			}
 			
-			if($this->user_is_flooding())
+			if(!$this->user_is_adm && $this->user_is_flooding())
 			{
 				return $this->errs[] = array($lang['NO_REPEATING_UPLOADING'], 'index_err');
 			}
@@ -454,6 +456,8 @@ function process ()
 								{
 									$this->errs[] = array(sprintf($lang['CANT_UPLAOD'], $this->filename2), 'index_err');
 								}
+								
+								
 
 						}
 				}#for ... lmean loop
@@ -592,7 +596,7 @@ function process ()
 									}
 								}
 							}
-
+							
 						}#else
 					}//big else
 
@@ -702,6 +706,7 @@ function process ()
 						$img_html_result .= $extra_del;
 						
 						($hook = kleeja_run_hook('saveit_func_img_res_kljuploader')) ? eval($hook) : null; //run hook
+						$this->total++;
 						
 						$this->errs[] = array($lang['IMG_DOWNLAODED'] . '<br />' . $img_html_result, 'index_info');
 					}
@@ -717,7 +722,7 @@ function process ()
 						$else_html_result .= $extra_del;
 
 						($hook = kleeja_run_hook('saveit_func_else_res_kljuploader')) ? eval($hook) : null; //run hook
-						
+						$this->total++;
 						$this->errs[] = array($lang['FILE_DOWNLAODED'] . '<br />' . $else_html_result, 'index_info');	
 					}
 
@@ -792,15 +797,19 @@ function process ()
 		return (string)$headers["Content-Length"];
     }
     
-    /** 
-	TODO : add options 3 in acp to control this function easily
-	**/
+	//prevent flooding
     function user_is_flooding()
     {
-    	global $SQL, $dbprefix;
+    	global $SQL, $dbprefix, $config;
+    	
+    	//if the value is zero (means that the function is disabled) then return false immediately
+    	if(($this->id_user == '-1' && $config['guestsectoupload'] == 0) OR $this->id_user != '-1' && $config['usersectoupload'] == 0)
+    	{
+    		return false;
+		}
     	
     	//In my point of view I see 30 seconds is not bad rate to stop flooding .. even though this minimum rate somtitme isn't enough to protect your site from flooding attacks 
-    	$time = time() - 30; 
+    	$time = time() - (($this->id_user == '-1') ? $config['guestsectoupload'] : $config['usersectoupload']); 
     	
 		$query = array(
 					'SELECT'	=> 'f.time',

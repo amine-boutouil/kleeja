@@ -90,6 +90,9 @@ $update_sqls['configs29'] = "UPDATE `{$dbprefix}config` SET `option` = '<label>{
 $update_sqls['configs30'] = "UPDATE `{$dbprefix}config` SET `option` = '<label>{lang.YES}<input type=\"radio\" id=\"gzip\" name=\"gzip\" value=\"1\"  <IF NAME=\"con.gzip==1\"> checked=\"checked\"</IF> /></label>\r\n <label>{lang.NO}<input type=\"radio\" id=\"gzip\" name=\"gzip\" value=\"0\"  <IF NAME=\"con.gzip==0\"> checked=\"checked\"</IF> /></label>',`display_order` = 34 WHERE  `name` = 'gzip';";
 $update_sqls['configs31'] = "UPDATE `{$dbprefix}config` SET `option` = '<input type=\"text\" id=\"googleanalytics\" name=\"googleanalytics\" value=\"{con.googleanalytics}\" size=\"10\" />',`display_order` = 35 WHERE  `name` = 'googleanalytics';";
 
+$update_sqls['config_insert44'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`, `type`) VALUES ('usersectoupload', '10', '<input type=\"text\" id=\"usersectoupload\" name=\"usersectoupload\" value=\"{con.usersectoupload}\" size=\"10\" />', 44, 'upload')";
+
+$update_sqls['config_insert45'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`, `type`) VALUES ('guestsectoupload', '30', '<input type=\"text\" id=\"guestsectoupload\" name=\"guestsectoupload\" value=\"{con.guestsectoupload}\" size=\"10\" />', 44, 'upload')";
 
 $update_sqls['livexts_feature'] = "INSERT INTO `{$dbprefix}config` (`name` ,`value` ,`option` ,`display_order`)VALUES ('livexts', 'swf', '<input type=\"text\" id=\"livexts\" name=\"livexts\" value=\"{con.livexts}\" size=\"62\" style=\"direction:ltr\" />{lang.COMMA_X}', '29')";
 $update_sqls['sitemail2'] = "INSERT INTO `{$dbprefix}config` (`name` ,`value` ,`option` ,`display_order`) VALUES ('sitemail2', '" . inst_get_config('sitemail') . "', '<input type=\"text\" id=\"sitemail2\" name=\"sitemail2\" value=\"{con.sitemail2}\" size=\"25\" style=\"direction:ltr\" />', '4');";

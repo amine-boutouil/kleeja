@@ -205,6 +205,7 @@ $install_sqls['config_insert10'] = "INSERT INTO `{$dbprefix}config` (`name`, `va
 $install_sqls['config_insert11'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`, `type`) VALUES ('enable_userfile', '1', '<label>{lang.YES}<input type=\"radio\" id=\"enable_userfile\" name=\"enable_userfile\" value=\"1\"  <IF NAME=\"con.enable_userfile==1\"> checked=\"checked\"</IF> /></label>\r\n <label>{lang.NO}<input type=\"radio\" id=\"enable_userfile\" name=\"enable_userfile\" value=\"0\"  <IF NAME=\"con.enable_userfile==0\"> checked=\"checked\"</IF> /></label>', 11, 'general')";
 $install_sqls['config_insert12'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`, `type`) VALUES ('mod_writer', '0', '<label>{lang.YES}<input type=\"radio\" id=\"mod_writer\" name=\"mod_writer\" value=\"1\"  <IF NAME=\"con.mod_writer==1\"> checked=\"checked\"</IF> /></label>\r\n <label>{lang.NO}<input type=\"radio\" id=\"mod_writer\" name=\"mod_writer\" value=\"0\"  <IF NAME=\"con.mod_writer==0\"> checked=\"checked\"</IF> /></label>\r\n   [ {lang.MOD_WRITER_EX} ]', 12, 'general')";
 
+
 //randome cookie name
 $cookie_name = 'klj_' . substr(md5(time()), 0, 6);
 /*
@@ -257,6 +258,10 @@ $install_sqls['config_insert40'] = "INSERT INTO `{$dbprefix}config` (`name`, `va
 $install_sqls['config_insert41'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('klj_clean_files_from', '0', '', 0)";
 $install_sqls['config_insert42'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('style_depend_on', '', '', 0)";
 $install_sqls['config_insert43'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('most_user_online_ever', '', '', 0)";
+
+$install_sqls['config_insert44'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`, `type`) VALUES ('usersectoupload', '10', '<input type=\"text\" id=\"usersectoupload\" name=\"usersectoupload\" value=\"{con.usersectoupload}\" size=\"10\" />', 44, 'upload')";
+
+$install_sqls['config_insert45'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`, `type`) VALUES ('guestsectoupload', '30', '<input type=\"text\" id=\"guestsectoupload\" name=\"guestsectoupload\" value=\"{con.guestsectoupload}\" size=\"10\" />', 44, 'upload')";
 
 $install_sqls['exts_insert1'] = "
 INSERT INTO `{$dbprefix}exts` (`id`, `group_id`, `ext`, `gust_size`, `gust_allow`, `user_size`, `user_allow`) VALUES

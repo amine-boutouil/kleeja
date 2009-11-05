@@ -4,8 +4,6 @@
  2007-2009
 */
 
-	var totalupload_num = number_of_uploads-1;
-	
 	//get element by id name
 	function $(id)
 	{
@@ -13,23 +11,17 @@
 	}
 	
 	//new field
-	function plus (type)
+	function plus (id, type)
 	{
-		var value = (type==1) ?  $("upload_num") : $("upload_f_num");
-		var id = (type==1) ?  'file' : 'fileu';
-		var id2 = (type==1) ?  'br' : 'bru';
-		var num = number_of_uploads;
-		if (value.value < num )
+		id = id+1;
+		var input_id = (type==1) ?  'file' : 'fileu';
+		var br_id = (type==1) ?  'br' : 'bru';
+		
+		if (id < number_of_uploads+1)
 		{
-			var do_count = false;
-			var num_to = eval(value.value) + 1;
-			eval('var s = "' + id +'_' + num_to + '_";var br = "' + id2 +'_' + num_to + '_";do_count = true;');
-			if(do_count)
-			{
-				$(s).style.display = '';
-				$(br).style.display = '';
-				value.value++;
-			}
+			eval('var s = "' + input_id +'_' + id + '_";var br = "' + br_id + '_' + id + '_";');
+			$(s).style.display = '';
+			$(br).style.display = '';			
 		}
 		else
 		{
@@ -37,27 +29,7 @@
 		}
 	}
 	
-	//remove field
-	function minus (type)
-	{
-		var value = (type==1) ?  $("upload_num") : $("upload_f_num");
-		var id = (type==1) ?  'file' : 'fileu';
-		var id2 = (type==1) ?  'br' : 'bru';
-		var num = number_of_uploads;
-		var num_l = num-1;
-		if (value.value != 1 )
-		{
-			var do_count = false;
-			eval('var s = "' + id +'_' + (value.value) + '_";var br = "' + id2 +'_' + (value.value) + '_"; do_count = true;');
-			if(do_count)
-			{
-				$(s).style.display = 'none';
-				$(br).style.display = 'none';
-				value.value--;
-			}
 
-		}
-	}
 	
 	//submit
 	function form_submit() 

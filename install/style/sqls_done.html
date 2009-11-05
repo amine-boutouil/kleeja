@@ -1,0 +1,22 @@
+<div class="home">
+
+<ul class="sql_content">
+
+{{foreach($GLOBALS['sqls_done'] as $sql):}}
+<li>{{echo $sql}}</li>
+{{endforeach;}}
+
+</ul>
+</div>
+
+{{if (!$GLOBALS['err']):}}
+	<form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=end&' . getlang(1)}}">
+			<input name="agres" type="submit" value="{{echo $lang['INST_NEXT']}}"/>
+	</form>
+{{else:}}
+	<div class="home"><span style="color:red;">{{echo $lang['INST_FINISH_ERRSQL']}}</span>
+			
+	<br /><br /><textarea cols="50" rows="3">{{echo $GLOBALS['errors']}}</textarea>
+			
+	</div>
+{{endif;}}

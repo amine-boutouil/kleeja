@@ -219,6 +219,7 @@ case 'data' :
 		//do important alter before
 		$SQL->query($install_sqls['ALTER_DATABASE_UTF']);
 		
+		$sqls_done = array();
 		foreach($install_sqls as $name=>$sql_content)
 		{
 			if($name == 'DROP_TABLES' || $name == 'ALTER_DATABASE_UTF')
@@ -226,35 +227,23 @@ case 'data' :
 				continue;
 			}
 
-			$is = $SQL->query($sql_content);
-
-			if($is)
+			if($SQL->query($sql_content))
 			{
-				if ($name == 'call')			echo '<div class="home"><ul class="sql_content"><li">' . $lang['INST_CRT_CALL'] . '</li>';
-				elseif ($name == 'reports')		echo '<li>' . $lang['INST_CRT_REPRS'] . '</li>';
-				elseif ($name == 'stats')		echo '<li>' . $lang['INST_CRT_STS'] . '</li>';
-				elseif ($name == 'users')		echo '<li>' . $lang['INST_CRT_USRS'] . '</li>';
-				elseif ($name == 'users')		echo '<li>' . $lang['INST_CRT_ADM'] . '</li>';
-				elseif ($name == 'files')		echo '<li>' . $lang['INST_CRT_FLS'] . '</li>';
-				elseif ($name == 'config')		echo '<li>' . $lang['INST_CRT_CNF'] . '</li>';
-				elseif ($name == 'exts')		echo '<li>' . $lang['INST_CRT_EXT'] . '</li>';
-				elseif ($name == 'online')		echo '<li>' . $lang['INST_CRT_ONL'] . '</li>';
-				elseif ($name == 'hooks')		echo '<li>' . $lang['INST_CRT_HKS'] . '</li>';
-				elseif ($name == 'plugins')		echo '<li>' . $lang['INST_CRT_PLG'] . '</li>';
-				elseif ($name == 'lang')		echo '<li>' . $lang['INST_CRT_LNG'] . '</li></ul></div>';
+				if ($name == 'call') $sqls_done[] = $lang['INST_CRT_CALL'];
+				elseif ($name == 'reports')	$sqls_done[] = $lang['INST_CRT_REPRS'];
+				elseif ($name == 'stats')	$sqls_done[] = $lang['INST_CRT_STS'];
+				elseif ($name == 'users')	$sqls_done[] = $lang['INST_CRT_USRS'];
+				elseif ($name == 'users')	$sqls_done[] = $lang['INST_CRT_ADM'];
+				elseif ($name == 'files')	$sqls_done[] = $lang['INST_CRT_FLS'];
+				elseif ($name == 'config')	$sqls_done[] = $lang['INST_CRT_CNF'];
+				elseif ($name == 'exts')	$sqls_done[] = $lang['INST_CRT_EXT'];
+				elseif ($name == 'online')	$sqls_done[] = $lang['INST_CRT_ONL'];
+				elseif ($name == 'hooks')	$sqls_done[] = $lang['INST_CRT_HKS'];
+				elseif ($name == 'plugins')	$sqls_done[] = $lang['INST_CRT_PLG'];
+				elseif ($name == 'lang')	$sqls_done[] = $lang['INST_CRT_LNG'];
 				else
 				{
-					
-					echo ' . ';
-					if($dots == 10)
-					{
-						$dots = 0;
-						echo '<br />';
-					}
-					else
-					{
-						$dots++;
-					}
+					//$sqls_done[] = '...';
 				}
 			}
 			else
@@ -268,21 +257,11 @@ case 'data' :
 
 		if (!$err)
 		{
-			echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?step=end&' . getlang(1) . '">
-			<input name="agres" type="submit" value="' . $lang['INST_NEXT'] . '"/>
-			</form>';
-			
 			//clean cache
 			delete_cache(null, true);
 		}
-		else
-		{
-			echo '<div class="home"><span style="color:red;">' . $lang['INST_FINISH_ERRSQL'] . '</span>';
-			
-			echo '<br /><br /><textarea cols="50" rows="3">' . $errors . '</textarea>';
-			
-			echo '</div>';
-		}
+		
+		echo gettpl('sqls_done.html');
 
 	}
 	else

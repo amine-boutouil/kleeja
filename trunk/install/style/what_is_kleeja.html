@@ -1,0 +1,11 @@
+
+
+{{echo $lang['INST_WHAT_IS_KLEEJA_T']}} :
+<br />
+{{echo $lang['INST_WHAT_IS_KLEEJA']}}
+....
+
+<form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=official&amp;' . getlang(1)}}">
+	<input onclick="window.location.href='./index.php?step=language&amp;{{echo getlang(1)}}';return false;" name="previous" type="submit" value="{{echo $lang['INST_PREVIOUS']}}" />
+	<input name="agres" type="submit" value="{{echo $lang['INST_NEXT']}}" />
+</form>		

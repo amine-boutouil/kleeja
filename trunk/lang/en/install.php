@@ -109,6 +109,8 @@
 	$lang['IS_IT_OFFICIAL_DESC']					= 'We receive a lot of complaints and questions about the cause of some bugs and issues which occur in kleeja and probably we can\'t figure out what the problem is . After we have checked we have found that their are some unofficially copies released from untrusted publishers .<br /><br /> <fon style="color:#154188;border-bottom:1px dashed #154188;padding:4px 0;"> So are you sure of this copy is downloaded from kleeja official site ?</font>';
 	$lang['IS_IT_OFFICIAL_YES']						= 'Yes, my copy is officially and I downloaded it from the official site ( Kleeja.com )';
 	$lang['IS_IT_OFFICIAL_NO']						= 'No, I\'ve downloaded it from other site, Go ahead now and download it from Kleeja official site';
+	$lang['INST_WHAT_IS_KLEEJA_T']					= '„«ÂÌ ﬂ·ÌÃ« ø';
+	$lang['INST_WHAT_IS_KLEEJA']					= 'ﬂ·ÌÃ« ÂÌ ﬂ–« Êﬂ–« Êﬂ–« .. ';
 
 	//wizard
 	$lang['DIR']	=	'ltr';

@@ -121,7 +121,7 @@ class KljUploader
 	//
 	function ext_check_safe ($filename)
 	{
-		$not_allowed =	array('php','php3' ,'php5', 'php4','asp' ,'shtml' , 'html' ,'htm' ,'xhtml' ,'phtml', 'pl', 'cgi');
+		$not_allowed =	array('php', 'php3' ,'php5', 'php4', 'asp' ,'shtml' , 'html' ,'htm' ,'xhtml' ,'phtml', 'pl', 'cgi', 'htaccess', 'ini');
 		$tmp	= explode(".", $filename);
 		$before_last_ext = $tmp[sizeof($tmp)-2];
 

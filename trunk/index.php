@@ -49,6 +49,7 @@ $kljup->filesnum	= $config['filesnum'];
 //--------------------- start user system part
 $kljup->types		= ($usrcp->name()) ? $u_exts : $g_exts;
 $kljup->id_user		= ($usrcp->name()) ? $usrcp->id() : '-1';
+$kljup->user_is_adm = $usrcp->admin();
 $kljup->safe_code	= $config['safe_code'];
 //--------------------- end user system part
 $kljup->process();

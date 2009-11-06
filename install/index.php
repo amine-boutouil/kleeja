@@ -72,18 +72,7 @@ case 'what_is_kleeja':
 
 break;
 case 'official':
-	
-	if(isset($_POST['yes']))
-	{
-		echo '<meta http-equiv="refresh" content="0;url=' . $_SERVER['PHP_SELF'] . '?step=choose&lang=' . htmlspecialchars($_GET['lang']) . '">';
-		exit;
-	}
-	else if(isset($_POST['no']))
-	{
-		echo '<meta http-equiv="refresh" content="0;url=http://www.kleeja.com/">';
-		exit;
-	}
-	
+
 	echo gettpl('official.html');
 
 break;

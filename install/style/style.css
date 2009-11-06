@@ -69,7 +69,9 @@ div.install_update:hover {background:#FFFDE2 url('style/images/xhover.gif') repe
 .pstrength-bar {margin:1px 0;}
 
 
-
 .sql_content  {margin:5px 0;padding:20px 10px;}
 .sql_content ul {list-style-image:url('style/images/li_sq.gif') no-repeat;list-style-position:inside;text-indent:10px;}
 .sql_content  ul li {line-height:28px;color:green;}
+
+.waht_kleeja {width:68%;padding:15px;margin:5px auto;}
+.waht_kleeja p{text-align:justify;color:#000080;padding:6px 0;font-size:11px;}

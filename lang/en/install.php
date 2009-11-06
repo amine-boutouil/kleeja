@@ -110,7 +110,10 @@
 	$lang['IS_IT_OFFICIAL_YES']						= 'Yes, my copy is officially and I downloaded it from the official site ( Kleeja.com )';
 	$lang['IS_IT_OFFICIAL_NO']						= 'No, I\'ve downloaded it from other site, Go ahead now and download it from Kleeja official site';
 	$lang['INST_WHAT_IS_KLEEJA_T']					= 'г«ен ябнћ« њ';
-	$lang['INST_WHAT_IS_KLEEJA']					= 'ябнћ« ен я–« жя–« жя–« .. ';
+	$lang['INST_WHAT_IS_KLEEJA']					= 'Kleeja   дЎё Џ—»н«р " ябнћ« " ..! <br /> ”я—»  —ЁЏ гбЁ«  гћ«дн ж гЁ жЌ «бг’ѕ— гЏ ќ’«∆’ Ё—нѕе бг”«Џѕ… √’Ќ«» «бгж«ёЏ »√д нг бяж г—я“  Ќгнб ёжн жнЏ гѕ Џбне  .. е–« я Џ—нЁ г»”Ў  , √г« ябнћ« Ён «бЌёнёе еж ”я—»  ÷ќг «б«гя«дн«  ”еб «б≈ѕ«—… ж«б√ег еж √д дў«г «бЌг«н… г нд  жнгбя гд «б√дўг… «бгЏёѕ… г« нƒгд бгжёЏя «бЌг«н… «б «г… »≈–д «ббе ..!';
+	$lang['INST_SPECIAL_KLEEJA']					= 'гд √ег ггн“«  ябнћ« ..!';
+	$lang['INST_WHAT_IS_KLEEJA_ONE']				= '1. дў«г √Џ÷«Ѕ ёжн  ” ЎнЏ —»Ўе »√џб» «б”я—» «  «бг” ќѕг… Ён «бгж«ёЏ «б«ћ г«Џн… .<br />2. бжЌ…  Ќяг г–ебе бн” ЁёЎ бб Ќяг »«бгбЁ«  жбяд бб Ќяг √н÷« »яб ’џн—е жя»н—е »«б”я—»  .<br />3. дў«г «б” «нб«  «б»”нЎ нћЏбя  ” ЎнЏ «д  ’дЏ ” «нбя »дЁ”я.<br />4. гЏ ябнћ« ждў«г «б≈÷«Ё«  «б»—гћн…  ” ЎнЏ √д  ёжг » —ян» «бяЋн— гд «б«÷«Ё«  «б—«∆Џ… .<br />5. бн” е–« ЁЌ”» »б ябнћ«  гбя «бяЋн— ж«бяЋн— .. —ћ«Ѕ«р ёг »“н«—… «б’ЁЌе <a target="_blank" href="http://www.kleeja.com/about/">гЏбжг«  жггн“« </a> б Џ—Ё √яЋ— .';
+
 
 	//wizard
 	$lang['DIR']	=	'ltr';

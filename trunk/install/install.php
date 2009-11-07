@@ -257,6 +257,21 @@ case 'data' :
 
 		if (!$err)
 		{
+			//install built in plugins
+			$pl_path = "includes/plugins";
+			$dh = opendir($pl_path);
+			while (($file = readdir($dh)) !== false)
+			{
+				$e	= @explode(".", $file);
+				$e	= strtolower($e[sizeof($e)-1]);
+				
+				if($e == "xml") //only plugins ;)
+				{
+					//install them
+					creat_plugin_xml(@file_get_contents($pl_path . '/' . $file));
+				}
+			}
+			@closedir($dh);
 			//clean cache
 			delete_cache(null, true);
 		}

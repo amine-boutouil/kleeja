@@ -53,7 +53,7 @@ $update_sqls['online_c'] = "ALTER TABLE `{$dbprefix}online` ADD `session` VARCHA
 $update_sqls['runique_sesion'] = "ALTER TABLE {$dbprefix}online DROP INDEX session";//to prevent dublicate
 $update_sqls['unique_sesion'] = "ALTER TABLE `{$dbprefix}online` ADD UNIQUE (`session`)";
 $update_sqls['online_moue2'] = "ALTER TABLE `{$dbprefix}stats` ADD `lastuser` VARCHAR( 300 ) NOT NULL ";
-$update_sqls['delete_exts_f'] = "DELETE FROM `{$dbprefix}exts` WHERE `ext` IN('ini');";
+$update_sqls['delete_exts_f'] = "DELETE FROM `{$dbprefix}exts` WHERE `ext` IN('ini', 'txt');";
 
 // Settings general
 $update_sqls['configs1'] = "UPDATE `{$dbprefix}config` SET `option` = '<input type=\"text\" id=\"sitename\" name=\"sitename\" value=\"{con.sitename}\" size=\"50\" />',`display_order` = 1 WHERE  `name` = 'sitename';";

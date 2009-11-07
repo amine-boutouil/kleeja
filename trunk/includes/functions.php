@@ -1833,7 +1833,7 @@ function is_browser($b)
 	}
 	
     //if no agent, let's take the worst case
-	$u_agent = (!empty($_SERVER['HTTP_USER_AGENT'])) ? htmlspecialchars((string) strtolower($_SERVER['HTTP_USER_AGENT'])) : 'msie 6.0';
+	$u_agent = (!empty($_SERVER['HTTP_USER_AGENT'])) ? htmlspecialchars((string) strtolower($_SERVER['HTTP_USER_AGENT'])) : (function_exists('getenv') ? getenv('HTTP_USER_AGENT') : '');
 	$t = trim(preg_replace('/[0-9.]/', '', $b));
 	$r = trim(preg_replace('/[a-z]/', '', $b));
 	switch($t)

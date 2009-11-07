@@ -162,7 +162,7 @@ class usrcp
 						$update_last_visit = array(
 									'UPDATE'	=> "`{$dbprefix}users`",
 									'SET'		=> "last_visit=" . time() . "",
-									'WHERE'		=>	"id='" . intval($row['id']) ."'"
+									'WHERE'		=>	"id=" . intval($row['id'])
 							);
 
 						$SQL->build($update_last_visit);

@@ -9,36 +9,56 @@
 <div class="clr"></div><div class="line"></div>
 <!-- # End line top  -->
 
-<!-- start Information File   -->			
-<div id="file-info">
-
-	<div id="data_file_down">
-		<p class="find_image"><img src="{STYLE_PATH}images/download.gif" alt="" style="vertical-align:middle;" /></p>
-		<br />
-		<p class="find_x">{lang.FILE_FOUNDED}</p>
-		<br /><br />
-	<div id="url"><h3>{lang.JS_MUST_ON}</h3></div>
-</div>	
+<!-- start box   -->			
+<div class="file_info_box">
+<table style="width:100%;">
+	<tr>
+	<!-- start Information File   -->	
+		<td class="data_file">
+			<div class="tit">{lang.FILE_INFO}</div>
+			<table class="data_menu">
+				<tr>
+					<td class="td">{lang.FILENAME}</td>
+					<td>{name}</td>
+				</tr>
+				<tr>
+					<td class="td">{lang.FILETYPE}</td>
+					<td class="tddata">{type}</td>
+				</tr>
+				<tr>
+					<td class="td">{lang.FILESIZE}</td>
+					<td class="tddata">{size}</td>
+				</tr>
+				<tr>
+					<td class="td">{lang.FILEDATE}</td>
+					<td class="tddata">{time}</td>
+				</tr>
+				<tr>
+					<td class="td">{lang.FILEUPS}</td>
+					<td class="tddata">{uploads}</td>
+				</tr>
+			</table>
+			<div class="filereport" onclick="window.location.href='{REPORT}';"><img src="{STYLE_PATH}images/zl.png" alt="file Report" style="vertical-align:middle;padding:0 5px;" />{lang.FILEREPORT}</div>
+		</td>
+	<!-- # END Information File   -->
 	
-	<div id="data_file">
-		<p class="t">{lang.FILE_INFO}</p>
-		<ul class="data_menu">
-			<li>{lang.FILENAME} : <span>{name}</span></li>	
-			<li>{lang.FILETYPE} : <span>{type}</span></li>
-			<li>{lang.FILESIZE} : <span>{size}</span></li>
-			<li>{lang.FILEDATE} : <span>{time}</span></li>
-			<li>{lang.FILEUPS} : <span>{uploads}</span></li>				
-      	</ul>
-	</div>	
+	<td style="width:1%;"></td>
+	
+	<!-- start box download File   -->	
+	<td class="data_file_down">
+		<p class="find_x">{lang.FILE_FOUNDED}</p>
+		<div class="clr"></div><br />
+			<img src="{STYLE_PATH}images/download.png" alt="file found" />
+		<div class="clr"></div><br />
+		<div id="url"><p style="color:red">{lang.JS_MUST_ON}</p></div>
+		<div class="clr"></div>
+	</td>
+	<!-- # End box download File   -->		
+	</tr>
+</table>
 	
 </div>
-<!-- ## End Information File   -->	
-
-<div class="clr"></div>
-
-<!-- start button file report  -->
-<div class="filereport" onclick="window.location.href='{REPORT}';"><img src="{STYLE_PATH}images/zl.png" alt="file Report" style="vertical-align:middle;padding:0 10px;" />{lang.FILEREPORT}</div>
-<!-- ## End button file report  -->	
+<!-- ## End box   -->	
 
 <script type="text/javascript">
 <!--
@@ -54,7 +74,7 @@ function ti()
     }
     else
     {
-        document.getElementById("url").innerHTML = '<div class="clr"><\/div><br /><div id="download"><a href="{url_file}" target="balnk">{lang.CLICK_DOWN}<\/a><\/div><div class="clr"><\/div>';
+        document.getElementById("url").innerHTML = '<p class="download"><img src="{STYLE_PATH}images/download.gif" alt="file Report" style="vertical-align:middle;padding:0 7px;" /><a href="{url_file}" target="balnk">{lang.CLICK_DOWN}<\/a><\/p>';
     }
 
 }

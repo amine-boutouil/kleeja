@@ -55,14 +55,14 @@ class SimplePager
 			return;
 		}
 
-		$re = '<table class="pagination"><tr>';
+		$re = '<div class="pagination">';
 
 		// Add a previous page link
 		if ($this->totalPages > 1 && $this->currentPage > 1)
-			($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '<td class="disablelink"><a href="' . $link . '-' . ($this->currentPage-1) . '.html">'. $lang['PREV'] .'</a></td>' : $re .= '<td class="disablelink"><a href="' . $link . '&amp;page=' . ($this->currentPage-1) . ' ">'. $lang['PREV'] .'</a></td>';
+			($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '<a class="disabled" href="' . $link . '-' . ($this->currentPage-1) . '.html">'. $lang['PREV'] .'</a>' : $re .= '<a class="disabled" href="' . $link . '&amp;page=' . ($this->currentPage-1) . ' ">'. $lang['PREV'] .'</a>';
 
 		if ($this->currentPage > 3)		
-			($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '<td><a href="' . $link . '-1.html">1</a></td>' . (($this->currentPage > 5) ? '<td class="three_dots"><span>...</span></td>' : '') : $re .= '<td><a href="' . $link . '&amp;page=1">1</a></td>' . (($this->currentPage > 5) ? '<td class="three_dots"><span>...</span></td>' : '');
+			($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '<a href="' . $link . '-1.html">1</a>' . (($this->currentPage > 5) ? '<span class="three_dots">...</span>' : '') : $re .= '<a href="' . $link . '&amp;page=1">1</a>' . (($this->currentPage > 5) ? '<span class="three_dots">...</span>' : '');
 
 		// Don't ask me how the following works. It just does, OK? :-)
 		for ($current = ($this->currentPage == 5) ? $this->currentPage - 3 : $this->currentPage - 2, $stop = ($this->currentPage + 4 == $this->totalPages) ? $this->currentPage + 4 : $this->currentPage + 3; $current < $stop; ++$current)
@@ -70,23 +70,23 @@ class SimplePager
 			if ($current < 1 || $current > $this->totalPages)
 				continue;
 			else if ($current != $this->currentPage)
-				($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '<td><a href="'. $link .'-'.($current).'.html">'. $current .'</a></td>' : $re .= '<td><a href="'. $link .'&amp;page='.($current).'">'. $current .'</a></td>';
+				($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '<a href="'. $link .'-'.($current).'.html">'. $current .'</a>' : $re .= '<a href="'. $link .'&amp;page='.($current).'">'. $current .'</a>';
 			else
-				$re .= '<td class="currentpage">'. $current .'</td>';
+				$re .= '<span class="current">'. $current .'</span>';
 		}
 
 		if ($this->currentPage <= ($this->totalPages-3))
 		{
 			if ($this->currentPage != ($this->totalPages-3) && $this->currentPage != ($this->totalPages-4))
-				$re .= '<td class="three_dots"><span>...</span></td>';
-			($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '<td><a href="' . $link . '-' . ($this->totalPages) . '.html">'. $this->totalPages .'</a></td>' : $re .= '<td><a href="' . $link . '&amp;page=' . ($this->totalPages) . '" >'. $this->totalPages .'</a></td>';
+				$re .= '<span class="three_dots">...</span>';
+			($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '<a href="' . $link . '-' . ($this->totalPages) . '.html">'. $this->totalPages .'</a>' : $re .= '<a href="' . $link . '&amp;page=' . ($this->totalPages) . '" >'. $this->totalPages .'</a>';
 		}
 
 		// Add a next page link
 		if ($this->totalPages > 1 && $this->currentPage < $this->totalPages)
-			($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '<td class="prevnext"><a href="' . $link . '-' . ($this->currentPage+1) . '.html">'. $lang['NEXT'] .'</a></td>' :  $re .= '<td class="prevnext"><a href="' . $link . '&amp;page=' . ($this->currentPage+1) . '">'. $lang['NEXT'] .'</a></td>';
+			($config['mod_writer'] && !defined('IN_ADMIN')) ? $re .= '<a class="next" href="' . $link . '-' . ($this->currentPage+1) . '.html">'. $lang['NEXT'] .'</a>' :  $re .= '<a class="next" href="' . $link . '&amp;page=' . ($this->currentPage+1) . '">'. $lang['NEXT'] .'</a>';
 
-		$re .= '</tr></table>'; 
+		$re .= '</div>'; 
 
 		return $re;
 	}

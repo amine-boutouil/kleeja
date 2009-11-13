@@ -1,11 +1,7 @@
-.guide_user_th  {background:#bbb url(../images/headinebg.png) repeat-x top right;}
-.guide_visitor_th {background:#FF7B00 url(../images/headinebg.png) repeat-x top right}
-.user_ext{background:#E8E8E8 url(../images/headlnebg.png) repeat-x top right}
-.visitor_ext{background:#FDF8EE url(../images/headliebg.png) repeat-x top right;}
-.tabledata thead th {background:#F68618 url(../images/headinebg.png) repeat-x center right;}
-.go_up{background:url(../images/goup.png) no-repeat 6% 100%;}
+*html .classname {}
+
 input  {
-	font-family: "Tahoma", Arial, Verdana, sans-serif, Lucida Grande, Lucida Sans Unicode;
+	font-family : Tahoma, Arial, Verdana, sans-serif, "Lucida Grande", "Lucida Sans Unicode"; 
 	font-weight:normal;
 	font-size:12px;
 }
@@ -17,3 +13,10 @@ input  {
 	color:#fff;
 	background:#555 url(../images/right4_menu.png) repeat;
 }
+
+.guide_user_th  {background:#bbb url(../images/headinebg.png) repeat-x top right;}
+.guide_visitor_th {background:#FF7B00 url(../images/headinebg.png) repeat-x top right}
+.user_ext{background:#E8E8E8 url(../images/headlnebg.png) repeat-x top right}
+.visitor_ext{background:#FDF8EE url(../images/headliebg.png) repeat-x top right;}
+.tabledata thead th {background:#F68618 url(../images/headinebg.png) repeat-x center right;}
+.go_up{background:url(../images/goup.png) no-repeat 6% 100%;}

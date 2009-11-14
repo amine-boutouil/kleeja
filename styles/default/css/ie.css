@@ -5,3 +5,7 @@ ul.tabbernav li a{border-right:1px solid #aaa;border-left:1px solid #aaa;border-
 .data_menu td{
 	border:2px solid #F6EBE4;
 }
+input[type="submit"]{
+	cursor: pointer;
+	padding:0;
+}

@@ -29,7 +29,6 @@ img.right {float:left;margin-right:15px;margin-left:0;}
 .kleeja {clear:both;}
 .wait {font-size:200%;}
 .stats  {background-position: 94% 50%;}
-#content_index_body {float:right;}
 .go_up{	background-position: 94% 100%;}
 ul.tabbernav li a{margin-left:0;margin-right:4px;background-position:top right;}
 .footerlinksleft  ul{float:right;width:14%;}
@@ -65,3 +64,4 @@ input.username, input.password {float:left;padding:3px 20px 3px 3px;background-p
 .pagination a.next {margin-right:0;margin-left:5px;}
 .pagination a.next:hover {padding-right:0;padding-left:10px;}
 .pagination span.current, .pagination span.three_dots {margin-left:0;margin-right:3px;float:left;}
+#content_index_body  {float:left;}

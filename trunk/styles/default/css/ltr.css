@@ -9,6 +9,7 @@
 */
 option {padding-left: 1em;}
 caption, th, td {text-align:left}
+.logo {float:left;}
 img.left {float:right;margin-left:15px;margin-right:0;}
 img.right {float:left;margin-right:15px;margin-left:0;}
 .line {background-position:left top;}
@@ -22,30 +23,23 @@ img.right {float:left;margin-right:15px;margin-left:0;}
 #content {float:right;}
 #system-message dd.info  ul li {background-position:left top;}
 #system-message dd.error ul li{background-position:left top;}
-.index_info  li {background-position:left center;}
-.index_err li {background-position:left center;}
+.index_info  li {background-position:left top;}
+.index_err li {background-position:left top;}
 #right_menu {float:left;}
-#right_menu .list {margin-left:0;margin-right:16px;}
-#right_menu .list .imgtop {text-align:right;}
-#right_menu .list img {margin-left:0;margin-right:10px;}
-.kleeja {float:left;}
-#data_file {float:left;}
-#data_file_down {float:right;margin-right:0;margin-left:10px;}
+.kleeja {clear:both;}
 .wait {font-size:200%;}
 .stats  {background-position: 94% 50%;}
 #content_index_body {float:right;}
 .go_up{	background-position: 94% 100%;}
 ul.tabbernav li a{margin-left:0;margin-right:4px;background-position:top right;}
-.online{float:left;}
-.onlineall ,.onlinevisitor ,.onlineusers,.name_users {margin-left:0;margin-right:3px;}
 .footerlinksleft  ul{float:right;width:14%;}
 #footer .Copyrights {float:left;}
-.admin_cp_link {float:left;}
+.admin_cp_link {text-align:right;}
 .admin_cp_link span{	padding:4px 25px;}
 .login {	background-position:90% 50%;}
 .title_login {background-position:1% 50%;}
 .gather {float:left;	margin-left:0;margin-right:3px;}
-input.username,input.password {float:left;padding:3px 20px 3px 3px;background-position: 98% 50%;}
+input.username, input.password {float:left;padding:3px 20px 3px 3px;background-position: 98% 50%;}
 .forget_pass {margin-left:0;margin-right:60px;background-position: 2% 50%;float:right;}
 #kleeja_img_captcha {float:left;}
 #boxfileuser .box_user {float:left;}
@@ -53,18 +47,21 @@ input.username,input.password {float:left;padding:3px 20px 3px 3px;background-po
 #filecplink .link_user{margin-right:0;margin-left:5px;}
 .tabledata .odd  {text-align:left;}
 .tabledata thead th {background-position:center right;}
-.tabledata thead tr:hover th,.tabledata thead th:hover {background-position:center right;}
+.tabledata thead tr:hover th, .tabledata thead th:hover {background-position:center right;}
 .register,.call {background-position:95% 50%;}
 .get_password,.file_cp{background-position:85% 50%;}
 .rebort{background-position:94% 50%;}
 #profile .boxdata{float:left;}
 #profile .boxdata .in{margin-right:0;margin-left:2%;}
 .left_button{float:right;}
-.file_cp  .odd ,.file_cp  .nbr  {text-align:left;}
-.user_img img,.visitor_img img{padding-left:0;padding-right:5px;}
-.user_ext{background-position:top left;}
-.visitor_ext{background-position:top left;}
+.file_cp  .odd , .file_cp  .nbr  {text-align:left;}
+.user_img img, .visitor_img img{padding-left:0;padding-right:5px;}
+.user_ext, .visitor_ext {background-position:top left;}
 .all_boxes{float:right;}
-.pagination{float:left;margin:3px 3px 3px 0px;}
-.pagination li{float:left;margin-left:0;margin-right:3px;}
-.css_xhtml{float:right;right:0;bottom:0;}
+.btitle {float:left;}
+.online{float:left;}
+.onlineall, .onlinevisitor, .onlineusers, .name_users {float:left;margin-left:0;margin-right:6px;}
+.pagination a {float:left;margin-left:0;margin-right:3px;}
+.pagination a.next {margin-right:0;margin-left:5px;}
+.pagination a.next:hover {padding-right:0;padding-left:10px;}
+.pagination span.current, .pagination span.three_dots {margin-left:0;margin-right:3px;float:left;}

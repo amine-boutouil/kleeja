@@ -8,11 +8,7 @@
 # Date:: 2009-10-07  $
 */
 body { 
-	background-image:url(../images/body.png);
-	background-repeat:no-repeat;
-	background-attachment:fixed;
-	background-position:top left;
-	background-color:#C8C8C8;
+	background: #C8C8C8 url(../images/body.png) no-repeat fixed top left;
 	font-family : Tahoma, Arial, Verdana, sans-serif, "Lucida Grande", "Lucida Sans Unicode"; 
 	font-weight:bold;
 	font-size:11px;
@@ -251,7 +247,7 @@ p.explain {
 	background-color: #EFE7B8;
 }
 #system-message dd.info  ul li, #system-message dd.error ul li{
-	padding:1px 5px 5px 5px;
+	padding:0 5px;
 }
 #system-message dd.info  ul li {
 	color: #444;
@@ -271,9 +267,9 @@ p.explain {
 /* Message Information System */
 .index_info, .index_err {
 	display:block;
-	padding:10px;
+	padding:6px;
 	text-indent:30px;
-	line-height:30px;
+	line-height:24px;
 }
 .index_info {
 	border-top: 3px solid #84A0C0;
@@ -288,18 +284,12 @@ p.explain {
 	background:#E6C0C0;
 }
 .index_info  li {
-	background-image:url(../images/info_f.gif);
-	background-repeat:no-repeat;
-	background-position:100% 50%;
+	background:url(../images/info_f.gif) no-repeat right top;
 }
 .index_err li {
-	background-image:url(../images/err.gif);
-	background-repeat:no-repeat;
-	background-position:100% 50%;
+	background:url(../images/err.gif) no-repeat right top;
 }
-.index_err span, .index_info  span {
-	color:#B90000;
-}
+
 /*  # Message Information System */
 
 /*  right menu */
@@ -309,13 +299,13 @@ p.explain {
 	padding:5px;
 }
 #right_menu .list{
-	margin-left:16px;
-	width: 180px;
+	width:180px;
 }
 #right_menu .list ul{
 	list-style-type: none;
 	line-height:16px;
 }
+
 #right_menu .list .imgtop{
 	height:36px;
 	width:160px;
@@ -335,7 +325,7 @@ p.explain {
 	color: #F1F7E1;
 }
 #right_menu .list img{
-	margin-left:10px;
+	margin:0 10px;
 	width: 16px;
 	height: 16px;
 }
@@ -491,7 +481,6 @@ p.explain {
 	margin:5px 0;
 	padding:10px;
 	background:#F9F5F0 url(../images/stats.gif) no-repeat 2% 50%;
-	color:#111;
 	font-size:12px;
 	font-weight:400;
 }
@@ -526,7 +515,6 @@ p.explain {
 	clear:both;
 	margin-bottom:3px;
 	border-bottom:1px solid white;
-	color:#000;
 	padding:4px 0px;
 }
 #rules .rls {
@@ -535,7 +523,7 @@ p.explain {
 	padding:4px 0px;
 	text-indent:30px;
 	font-size:12px;
-	color:#D80000;
+	color:#FF5502;
 }
 /* #  rules template >> rules.html  */
 
@@ -591,7 +579,8 @@ input.input_num {
 	display:none;
 }
 .waitloading{
-	color:#004DAA;
+	color:#E17100;
+	font-size:120%;
 	margin:5px;
 }
 /* tabs */
@@ -617,7 +606,7 @@ input.input_num {
 	background:white url(../images/bg_tabbertab.png) repeat-x bottom left;
 }
 ul.tabbernav{
-	padding:3px 0;
+	padding:1px 0;
 	font-size:11px;
 }
 ul.tabbernav li{
@@ -626,7 +615,7 @@ ul.tabbernav li{
 }
 ul.tabbernav li a{
 	margin-left:4px;
-	padding:5px 14px;
+	padding:4px 14px;
 	border: 1px solid #aaa;
 	background:#EB9D0B url(../images/current-bg.gif) top left repeat-x;
 	text-decoration: none;
@@ -634,23 +623,23 @@ ul.tabbernav li a{
 ul.tabbernav li a:link {
 	color:#222;
 	font-weight:normal;
-	padding:5px 14px;
+	padding:4px 14px;
 }
 ul.tabbernav li a:hover{
 	color:white;
 	text-decoration: none;
 }
 ul.tabbernav li.tabberactive a{
-	padding:5px 14px;
+	padding:4px 14px;
 	border-bottom: 1px solid white;
 	background:white;
 }
 ul.tabbernav li.tabberactive a:link{
-	color: #666;
+	color: #F68618;
 	font-weight:bold;
 }
 ul.tabbernav li.tabberactive a:hover{
-	color:#F68618;
+	color:#333;
 	text-decoration: none;
 }
 /* # tabs  */
@@ -749,7 +738,6 @@ ul.tabbernav li.tabberactive a:hover{
 
 /*start Option to control panel */
 .admin_cp_link {
-	width:200px;
 	line-height:24px;
 	float:right;
 	display:inline;
@@ -783,7 +771,7 @@ ul.tabbernav li.tabberactive a:hover{
 }
 .title_login {
 	width:82%;
-	color:#000;
+
 	text-indent:35px;
 	height:24px;
 	line-height:24px;
@@ -909,7 +897,6 @@ select.remme:focus {
 .tabledata {
 	width:100%;
 	background-color:#CECECE;
-	color:#111;
 	border:1px solid #ccc;
 }
 .tabledata th , .tabledata td {
@@ -1020,7 +1007,6 @@ select.remme:focus {
 }
 .rebort label {
 	display:block;
-	color:#111;
 }
 .urlcolor{
 	background:#FFCDCD;
@@ -1052,7 +1038,7 @@ select.remme:focus {
 	text-align:center;
 }
 #profile .boxdata .bq , #profile .boxdata .in{
-	color:#111;
+	color:#999;
 	padding:0 5px;
 }
 #profile .boxdata .in{
@@ -1061,7 +1047,7 @@ select.remme:focus {
 #profile .boxdata .biguser {
 	color:#FF5502;
 	padding:5px;
-	font-size:16px;
+	font-size:12px;
 	text-align:center;
 }
 .buttons_center {
@@ -1159,7 +1145,7 @@ select.remme:focus {
 	display:block;
 	font-size:14px;
 	font-weight:700;
-	color:#111;
+	color:#333;
 	padding:5px 8px;
 }
 .user_img {
@@ -1284,9 +1270,8 @@ select.remme:focus {
 }
 .css_xhtml{
 	margin:5px auto;
-	width:90%;
+	width:94%;
 }
-
 .css img:hover {
 	border-bottom:4px solid #FF8F21;
 }

@@ -70,7 +70,6 @@ input[type="text"], input[type="password"]{
 	border-top: 1px solid #AFAEAA;
 	border-right: 1px solid #D5D5C8;
 	border-bottom: 1px solid #D5D5C8;
-	outline:1px solid white;
 }
 input[type="submit"]{
 	cursor: pointer;
@@ -364,7 +363,7 @@ p.explain {
 	margin-top:4px;
 	float:left;
 	text-align:left;
-	color:#555;
+	color:#5C5C5C;
 }
 .kleeja a{
 	color:#CF6600;
@@ -714,7 +713,6 @@ ul.tabbernav li.tabberactive a:hover{
 }
 .footerlinksleft li{
 	float:left;
-	font-weight:normal;
 	direction:ltr;
 }
 .footerlinksleft ul li a{
@@ -978,8 +976,8 @@ select.remme:focus {
 .call label {
 	display:block;
 }
-.textarea{
-	width:70%;
+.text_area{
+	width:60%;
 }
 /* # connection template */
 
@@ -1271,7 +1269,8 @@ select.remme:focus {
 	width:80%;
 }
 .css_xhtml{
-	margin:10px auto 0;
+	margin:3px auto;
+	padding:4px 0;
 	width:94%;
 }
 .css img:hover {

@@ -20,10 +20,10 @@
 <div class="login">
 <div class="box_form_login">
 	<div class="title_login">{lang.USER_LOGIN}</div>
-	<div class="blocks"><p class="gather">{lang.USERNAME}</p><input class="username" type="text" name="lname" value="{t_lname}" size="30" /></div>
-	<div class="blocks"><p class="gather">{lang.PASSWORD}</p><input class="password" type="password" name="lpass" value="{t_lpass}" size="30" /></div>
+	<div class="blocks"><p class="gather">{lang.USERNAME}</p><input class="username" type="text" name="lname" value="{t_lname}" size="30" tabindex="1" /></div>
+	<div class="blocks"><p class="gather">{lang.PASSWORD}</p><input class="password" type="password" name="lpass" value="{t_lpass}" size="30" tabindex="2" /></div>
 	<div class="blocks"><p class="gather">{lang.REMME}</p>
-		<select class="remme" name="remme">
+		<select class="remme" name="remme" tabindex="3">
 			<option value="3600">{lang.HOUR}</option>
 			<option value="18000">{lang.5HOURS}</option>
 			<option value="864000">{lang.DAY}</option>
@@ -33,7 +33,7 @@
 		</select>
 	</div>
 	<div class="clr"></div>
-			<input class="button_login" type="submit" name="submit" value="{lang.LOGIN}" />
+			<input class="button_login" type="submit" name="submit" value="{lang.LOGIN}" tabindex="4" />
 	<div class="clr"></div>
 	<div class="forget_pass"><a href="{forget_pass_link}">{lang.LOSS_PASSWORD}</a></div>
 	<div class="clr"></div>

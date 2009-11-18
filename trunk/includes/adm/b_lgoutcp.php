@@ -18,7 +18,7 @@ if (!defined('IN_ADMIN'))
 //remove just the administator session 
 if ($usrcp->logout_cp())
 {
-	redirect(basename(ADMIN_PATH));
+	redirect($config['siteurl']);
 	$SQL->close();
 	exit;
 }

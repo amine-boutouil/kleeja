@@ -22,7 +22,7 @@ if (!defined('IN_COMMON'))
 * To show header in any page you want .. 
 * parameter : title : title of page as in <title></title>
 */	
-function Saaheader($title, $outscript=false)
+function Saaheader($title, $outscript = false, $extra = '')
 {
 	global $tpl, $usrcp, $lang, $olang, $user_is, $username, $config;
 	global $extras, $script_encoding, $errorpage, $userinfo, $charset;
@@ -56,7 +56,7 @@ function Saaheader($title, $outscript=false)
 	$tpl->assign("title", $title);
 	$tpl->assign("_LINKS", $_LINKS);
 	$tpl->assign("go_back_browser", $lang['GO_BACK_BROWSER']);
-	$extra = '';
+	//$extra .= '';
 
 	//check for extra header 
 	$extras['header'] = empty($extras['header']) ? false : $extras['header'];
@@ -93,14 +93,14 @@ function Saaheader($title, $outscript=false)
 * To show footer of any page you want 
 * paramenters : none
 */
-function Saafooter($outscript=false)
+function Saafooter($outscript = false)
 {
 	global $tpl, $SQL, $starttm, $config, $usrcp, $lang, $olang;
 	global $do_gzip_compress, $script_encoding, $errorpage, $extras, $userinfo;
 
 	//show stats ..
 	$page_stats = '';
-	if ($config['statfooter'] !=0) 
+	if ($config['statfooter'] != 0) 
 	{
 		$gzip			= $do_gzip_compress !=0 ?  "Enabled" : "Disabled";
 		$hksys			= !defined('STOP_HOOKS') ? "Enabled" : "Disabled";
@@ -176,7 +176,7 @@ function Saafooter($outscript=false)
 					title : <title>title of page</title>
 					exit : stop script after showing msg 
 */
-function kleeja_info($msg, $title='', $exit= true, $redirect = false, $rs = 2)
+function kleeja_info($msg, $title='', $exit = true, $redirect = false, $rs = 2, $extra_code_header = '')
 {
 	global $text, $tpl, $SQL;
 
@@ -185,7 +185,7 @@ function kleeja_info($msg, $title='', $exit= true, $redirect = false, $rs = 2)
 	// assign {text} in info template
 	$text = $msg;
 	//header
-	Saaheader($title);
+	Saaheader($title, false, $extra_code_header);
 	//show tpl
 	echo $tpl->display('info');
 	//footer
@@ -209,7 +209,7 @@ function kleeja_info($msg, $title='', $exit= true, $redirect = false, $rs = 2)
 					title : <title>title of page</title>
 					exit : stop script after showing msg 
 */
-function kleeja_err($msg, $title='', $exit=true, $redirect=false, $rs='2')
+function kleeja_err($msg, $title = '', $exit = true, $redirect = false, $rs = 2, $extra_code_header)
 {
 	global $text, $tpl, $SQL;
 
@@ -218,7 +218,7 @@ function kleeja_err($msg, $title='', $exit=true, $redirect=false, $rs='2')
 	// assign {text} in err template
 	$text	= $msg;
 	//header
-	Saaheader($title);
+	Saaheader($title, false, $extra_code_header);
 	//show tpl
 	echo $tpl->display('err');
 	//footer

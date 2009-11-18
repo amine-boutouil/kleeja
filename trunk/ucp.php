@@ -585,7 +585,7 @@ switch ($_GET['go'])
 				{
 					$ERRORS[] = $lang['INVALID_FORM_KEY'];
 				}
-				if(!empty($_POST['ppass_new'])  && (($_POST['ppass_new'] !=  $_POST['ppass_new2']) 
+				if((!empty($_POST['ppass_new']) || !empty($_POST['ppass_new2']))  && (($_POST['ppass_new'] !=  $_POST['ppass_new2']) 
 						||  empty($_POST['ppass_old']) || (!$usrcp->data($usrcp->name(), $_POST['ppass_old'], false, 900))))
 				{
 					$ERRORS[] = $lang['PASS_O_PASS2'];

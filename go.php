@@ -364,7 +364,8 @@ switch ($_GET['go'])
 			}
 			else
 			{
-				kleeja_info($lang['ARE_YOU_SURE_DO_THIS'] . '<script type="text/javascript">
+				//fix for IE+
+				$extra_codes = '<script type="text/javascript">
 						function confirm_from()
 						{
 							if(confirm(\'' . $lang['ARE_YOU_SURE_DO_THIS'] . '\'))
@@ -372,9 +373,9 @@ switch ($_GET['go'])
 							else
 								window.location = "index.php";
 						}
-					</script>
-				<body onload="javascript:confirm_from()">');
-				// I dont like this part '<body ...' but it's work anyway :)
+						window.onload=confirm_from;
+					</script>';
+				kleeja_info($lang['ARE_YOU_SURE_DO_THIS'], '', true, false, 0, $extra_codes);
 			}
 		}#else
 
@@ -460,6 +461,7 @@ switch ($_GET['go'])
 
 //no template ? 
 $stylee  = empty($stylee) ? 'info' : $stylee;
+$titlee  = empty($titlee) ? '' : $titlee;
 
 //header
 Saaheader($titlee);

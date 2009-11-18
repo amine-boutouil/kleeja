@@ -177,7 +177,7 @@ if ($show_online)
 
 
 //header
-Saaheader($lang['HOME']);
+Saaheader();
 //index
 echo $tpl->display("index_body");
 //footer

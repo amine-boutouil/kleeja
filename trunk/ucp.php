@@ -271,8 +271,8 @@ switch ($_GET['go'])
 					$SQL->build($query_del);
 				}
 
-				$text	= $lang['LOGOUT_SUCCESFUL'] . '<br /> <a href="' .  $config['siteurl']  . '">' . $lang['HOME'] . '</a>';
-				kleeja_info($text, '', 1);
+				$text = $lang['LOGOUT_SUCCESFUL'] . '<br /> <a href="' .  $config['siteurl']  . '">' . $lang['HOME'] . '</a>';
+				kleeja_info($text, $lang['LOGOUT'], true, $config['siteurl'], 2);
 			}
 			else
 			{

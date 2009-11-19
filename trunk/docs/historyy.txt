@@ -247,6 +247,7 @@ To Do 1.X:
 
 - organize menus in general settings (options)
 - improve user system and add groups
+- add founder feature for user who installed Kleeja ..
 - add simple moderator panel
 - make callus to methods -> to admin email directly or to admin panel
 - show user total number of files which he uploaded in admin area 

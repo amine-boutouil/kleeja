@@ -92,19 +92,19 @@ else if (isset($_POST['newuser']))
 	{						
 		$ERRORS[] = $lang['EMPTY_FIELDS'];
 	}
-	else if (!preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/i", trim($_POST['lmail'])))
+	else if (!preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/i", trim(strtolower($_POST['lmail']))))
 	{
 		$ERRORS[] = $lang['WRONG_EMAIL'];
 	}
-	else if (strlen(trim($_POST['lname'])) < 4 || strlen(trim($_POST['lname'])) > 30)
+	else if (strlen(trim($_POST['lname'])) < 2 || strlen(trim($_POST['lname'])) > 100)
 	{
-		$ERRORS[] = $lang['WRONG_NAME'];
+		$ERRORS[] = str_replace('4', '2', $lang['WRONG_NAME']);
 	}
 	else if ($SQL->num_rows($SQL->query("SELECT * FROM `{$dbprefix}users` WHERE clean_name='" . trim($SQL->escape($usrcp->cleanusername($_POST["lname"]))) . "'")) != 0)
 	{
 		$ERRORS[] = $lang['EXIST_NAME'];
 	}
-	else if ($SQL->num_rows($SQL->query("SELECT * FROM `{$dbprefix}users` WHERE mail='" . trim($SQL->escape($_POST["lmail"])) . "'")) != 0)
+	else if ($SQL->num_rows($SQL->query("SELECT * FROM `{$dbprefix}users` WHERE mail='" . trim($SQL->escape(strtolower($_POST["lmail"]))) . "'")) != 0)
 	{
 		$ERRORS[] = $lang['EXIST_EMAIL'];
 	}
@@ -115,7 +115,7 @@ else if (isset($_POST['newuser']))
 		$name			= (string) $SQL->escape(trim($_POST['lname']));
 		$user_salt		= (string) substr(base64_encode(pack("H*", sha1(mt_rand()))), 0, 7);
 		$pass			= (string) $usrcp->kleeja_hash_password($SQL->escape(trim($_POST['lpass'])) . $user_salt);
-		$mail			= (string) trim($_POST['lmail']);
+		$mail			= (string) trim(strtolower($_POST['lmail']));
 		$clean_name		= (string) $usrcp->cleanusername($name);
 
 		$insert_query	= array(
@@ -164,7 +164,7 @@ else if (isset($_POST['newuser']))
 $query	= array(
 				'SELECT'	=> 'COUNT(id) AS total_users',
 				'FROM'		=> "{$dbprefix}users",
-				'ORDER BY'	=> 'id DESC'
+				'ORDER BY'	=> 'id ASC'
 		);
 
 //posts search ..

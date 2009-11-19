@@ -16,7 +16,7 @@
 	<!-- end info System Messages -->
 </IF>
 
-<form method="post" name="userform" action="{action}">
+<form method="post" name="userform" action="{action}" onsubmit="javascript:return confirm_from();">
          
 <IF NAME="is_search">
 <strong> 
@@ -80,7 +80,13 @@
                 <td><label><input type="text" name="ml_{{id}}" value="{{mail}}" size="20" style="direction:ltr"></label></td>
                 <td><label><input type="password" name="ps_{{id}}" value="" size="10" style="text-align:center;"></label></td>
                 <td>{{admin}}</td>
-                <td><input type="checkbox"  name="del_{{id}}" value="{{id}}" onclick="change_color(this,'su[{{id}}]');" rel="_del"></td>
+                <td>
+					<IF LOOP="id==1">
+					<img  src="{STYLE_PATH_ADMIN}images/padlock_closed.png" alt="--- founder ---"  style="border:0" />
+					<ELSE>
+					<input type="checkbox"  name="del_{{id}}" value="{{id}}" onclick="change_color(this,'su[{{id}}]');" rel="_del">
+					</IF>
+				</td>
                 <!-- admin users data tr extra -->
         </tr>
 </LOOP>

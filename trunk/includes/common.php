@@ -200,27 +200,27 @@ if (!$dbname || !$dbuser)
 }
 
 //include files .. & classes ..
-$path = dirname(__file__) . '/';
+//$path = dirname(__file__) . '/';
 $root_path = PATH;
 $adminpath = isset($adminpath) ? $adminpath : './admin/index.php';
 !defined('ADMIN_PATH') ? define('ADMIN_PATH', $adminpath) : null;
 $db_type = isset($db_type) ? $db_type : 'mysql';
 
-include_once ($path . 'version.php');
+include_once (PATH . 'includes/version.php');
 switch ($db_type)
 {
 	case 'mysqli':
-		require ($path . 'mysqli.php');
+		require (PATH . 'includes/mysqli.php');
 	break;
 	default:
-		require ($path . 'mysql.php');
+		require (PATH . 'includes/mysql.php');
 }
-require ($path . 'style.php');
-require ($path . 'KljUploader.php');
-require ($path . 'usr.php');
-require ($path . 'pager.php');
-require ($path . 'functions.php');
-require ($path . 'functions_display.php');
+require (PATH . 'includes/style.php');
+require (PATH . 'includes/KljUploader.php');
+require (PATH . 'includes/usr.php');
+require (PATH . 'includes/pager.php');
+require (PATH . 'includes/functions.php');
+require (PATH . 'includes/functions_display.php');
 	
 //fix intregation problems
 if(empty($script_encoding))
@@ -237,7 +237,7 @@ $kljup	= new KljUploader;
 $usrcp	= new usrcp;
 
 //then get caches
-require ($path . 'cache.php');
+require (PATH . 'includes/cache.php');
 
 //check user or guest
 $usrcp->kleeja_check_user();

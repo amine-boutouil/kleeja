@@ -65,18 +65,8 @@ function Saaheader($title, $outscript = false, $extra = '')
 
 	$tpl->assign("EXTRA_CODE_META", $extra);
 
-	if($config['user_system'] != '1' && isset($script_encoding) && function_exists('iconv') && !preg_match('/utf/i',strtolower($script_encoding)) && !$page && $outscript && !defined('DISABLE_INTR')) 
-	{
-		//set script charset
-		$charset = (isset($script_encoding) && !empty($script_encoding)) ? $script_encoding : 'utf-8';
-		//if kleeja were intgrated with other script in this case we need to change our default charset
-		$header = iconv("UTF-8", strtoupper($script_encoding) . "//IGNORE", $tpl->display("header"));
-	}
-	else 
-	{
-		$header = $tpl->display("header");
-	}
-		
+	$header = $tpl->display("header");
+
 	if($config['siteclose'] == '1' && $usrcp->admin() && !defined('IN_ADMIN'))
 	{
 		//add notification bar 
@@ -147,16 +137,7 @@ function Saafooter($outscript = false)
 
 	($hook = kleeja_run_hook('func_Saafooter')) ? eval($hook) : null; //run hook
 
-	//show footer
-	if($config['user_system'] != '1' && isset($script_encoding) && function_exists('iconv')  && !preg_match('/utf/i',strtolower($script_encoding)) && !$errorpage && $outscript && !defined('DISABLE_INTR'))
-	{
-		//if kleeja were intgrated with other script in this case we need to change our default charset
-		$footer = iconv("UTF-8", strtoupper($script_encoding) . "//IGNORE", $tpl->display("footer"));
-	}
-	else 
-	{
-		$footer = $tpl->display("footer");
-	}
+	$footer = $tpl->display("footer");
 
 	echo $footer;
 

@@ -17,7 +17,8 @@ if (!defined('IN_COMMON'))
 
 function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = false, $return_username = false)
 {
-	global $script_path, $lang, $script_encoding, $script_api_key, $script_prefix, $config, $usrcp, $userinfo;
+	global $lang, $config, $usrcp, $userinfo;
+	global $script_path, $script_encoding, $script_api_key, $script_prefix, $script_cp1256;
 
 	//URL must be begin with http://
 	if(empty($script_path) || $script_path[0] != 'h')
@@ -32,11 +33,6 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 		big_error('api key', 'To connect to the remote script you have to write the API key ...');
 	}
 
-	//if not utf8 and no iconv , i think it's fuckin bad situation
-	if(!function_exists('iconv') && !preg_match('/utf/i', strtolower($script_encoding)))
- 	{
- 		big_error('No support for ICONV', 'You must enable the ICONV library to integrate kleeja with your forum. You can solve your problem by changing your forum db charset to UTF8.'); 
- 	}
 
 	//check for last slash
 	if(isset($script_path[strlen($script_path)]) && $script_path[strlen($script_path)] == '/')
@@ -80,7 +76,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 	//
 	if($return_username)
 	{
-		return preg_match('/utf/i', strtolower($script_encoding)) ? $user_info[1] : iconv(strtoupper($script_encoding), "UTF-8//IGNORE", $user_info[1]);
+		return  empty($script_cp1256) || !$script_cp1256 ? $user_info[1] : $usrcp->kleeja_utf8($user_info[1]);
 	}
 
 	//
@@ -89,7 +85,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 	if(!$loginadm)
 	{
 		define('USER_ID', $user_info[1]);
-		define('USER_NAME', preg_match('/utf/i', strtolower($script_encoding)) ? $user_info[2] : iconv(strtoupper($script_encoding), "UTF-8//IGNORE", $user_info[2]));
+		define('USER_NAME', empty($script_cp1256) || !$script_cp1256 ? $user_info[2] : $usrcp->kleeja_utf8($user_info[2]));
 		define('USER_MAIL', $user_info[3]);
 		define('USER_ADMIN',((int) $user_info[5] == 6) ? 1 : 0);
 	}

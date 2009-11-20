@@ -15,21 +15,21 @@ if (!defined('IN_COMMON'))
 	exit();
 }
 
+/**
+* Usefull constants to force some settings :
+* 
+* FORCE_COOKIES, DISABLE_INTR
+*/
+
 class usrcp
 {
 	// this function like a traffic sign :)
-	function data ($name, $pass, $hashed = false, $expire, $loginadm = false)
+	function data ($name, $pass, $hashed = false, $expire = 86400, $loginadm = false)
 	{
-		global $config, $path;
+		global $config;
 
-		//we need this in future 
-		if(defined('IGNORE_USER_SYSTEM'))
-		{
-			$config['user_system'] = '1';
-		}
-
-		//fix it 
-		if($config['user_system'] == '' || empty($config['user_system']))
+		//return user system to normal
+		if(defined('DISABLE_INTR') || $config['user_system'] == '' || empty($config['user_system']))
 		{
 			$config['user_system'] = '1';
 		}
@@ -39,11 +39,11 @@ class usrcp
 
 		($hook = kleeja_run_hook('data_func_usr_class')) ? eval($hook) : null; //run hook
 
-		if($config['user_system'] != '1' && !defined('DISABLE_INTR'))
+		if($config['user_system'] != '1')
 		{
-			if(file_exists($path . 'auth_integration/' . trim($config['user_system']) . '.php'))
+			if(file_exists(PATH . 'includes/auth_integration/' . trim($config['user_system']) . '.php'))
 			{	
-				include_once ($path . 'auth_integration/' . trim($config['user_system']) . '.php');
+				include_once (PATH . 'includes/auth_integration/' . trim($config['user_system']) . '.php');
 				return kleeja_auth_login($name, $pass, $hashed, $expire, $loginadm);
 			}
 		}
@@ -55,18 +55,27 @@ class usrcp
 	//get username by id
 	function usernamebyid ($user_id) 
 	{
-		global $config, $path;
-		if($config['user_system'] != '1' && !defined('DISABLE_INTR'))
+		global $config;
+
+		//return user system to normal
+		if(defined('DISABLE_INTR'))
 		{
-			if(file_exists($path . 'auth_integration/' . trim($config['user_system']) . '.php'))
+			$config['user_system'] = '1';
+		}
+
+		if($config['user_system'] != '1')
+		{
+			if(file_exists(PATH . 'includes/auth_integration/' . trim($config['user_system']) . '.php'))
 			{	
-				include_once ($path . 'auth_integration/' . trim($config['user_system']) . '.php');
-				$username = kleeja_auth_username($user_id);
+				include_once (PATH . 'includes/auth_integration/' . trim($config['user_system']) . '.php');
+				return kleeja_auth_username($user_id);
 			}
 		}
-		return $username;	
-	}
 
+		//normal system
+		$u = $this->get_data('name', $user_id);	
+		return $u['name'];
+	}
 
 	//now ..  .. our table
 	function normal ($name, $pass, $hashed = false, $expire, $loginadm = false)
@@ -222,7 +231,7 @@ class usrcp
 	{
 		($hook = kleeja_run_hook('name_func_usr_class')) ? eval($hook) : null; //run hook
 
-		return defined('USER_NAME') ? USER_NAME : false;	
+		return defined('USER_NAME') ? USER_NAME : false;
 	}
 
 	/*
@@ -518,6 +527,19 @@ class usrcp
 			return false;//nothing
 		}
 	}
+	
+	/*
+	* convert from utf8 to cp1256 and vice versa
+	*/
+	function kleeja_utf8($str, $to_utf8 = true)
+	{
+		if($to_utf8)
+		{
+			return iconv('CP1256', "UTF-8//IGNORE", $str);
+		}
+		return iconv('UTF-8', "CP1256//IGNORE", $str);
+	}
+
 }#end class
 
 

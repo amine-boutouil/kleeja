@@ -114,17 +114,8 @@ if(
 		$err = true;
 	}
 
-	if($config['user_system'] != '1' && isset($script_encoding) && function_exists('iconv') && !preg_match('/utf/i', strtolower($script_encoding)) && !defined('DISABLE_INTR'))
-	{
-		//send custom charset header
-		header("Content-type: text/html; charset={$script_encoding}");
-		//change login page encoding if kleeja is integrated with other script
-		echo iconv("UTF-8", strtoupper($script_encoding) . "//IGNORE", $tpl->display("admin_login"));	
-	}
-	else
-	{
-		echo $tpl->display("admin_login");
-	}
+	echo $tpl->display("admin_login");
+	
 
 	$SQL->close();
 	exit;

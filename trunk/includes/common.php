@@ -225,7 +225,7 @@ require (PATH . 'includes/functions_display.php');
 //fix intregation problems
 if(empty($script_encoding))
 {
-	define('DISABLE_INTR', true);
+	$script_encoding = 'widnows-1256';
 }
 
 // start classes ..

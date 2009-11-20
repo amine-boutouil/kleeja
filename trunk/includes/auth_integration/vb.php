@@ -19,27 +19,23 @@ if (!defined('IN_COMMON'))
 //
 define('VB_CONFIG_PATH', '/includes/config.php');
 
-function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = false)
+function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = false, $return_name = false)
 {
-	// ok, i dont hate vb .. but i cant feel my self use it ... 
-	global $script_path, $lang, $script_encoding, $script_srv, $script_db, $script_user, $script_pass, $script_prefix, $config, $usrcp, $userinfo, $script_db_charset;
+	global $lang, $config, $usrcp, $userinfo;
+	global $script_path, $script_cp1256, $script_srv, $script_db, $script_user, $script_pass, $script_prefix, $script_db_charset;
 
 	if(isset($script_path))
-	{				
+	{
 		//check for last slash
 		if(isset($script_path[strlen($script_path)]) && $script_path[strlen($script_path)] == '/')
 		{
 			$script_path = substr($script_path, 0, strlen($script_path));
 		}
 
-		$script_path = ($script_path[0] == '/' ? '..' : '../') . $script_path;
-		
-		$script_path = PATH .  $script_path;
-
 		//get some useful data from vb config file
-		if(file_exists($script_path . VB_CONFIG_PATH))
+		if(file_exists(PATH .  $script_path . VB_CONFIG_PATH))
 		{
-			require_once ($script_path . VB_CONFIG_PATH);
+			require_once (PATH .  $script_path . VB_CONFIG_PATH);
 
 			//
 			//get config from config file
@@ -55,7 +51,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 			{
 				$forum_db_charset = $config['Mysqli']['charset'];
 			}
-		} 
+		}
 		else
 		{
 			big_error('Forum path is not correct', sprintf($lang['SCRIPT_AUTH_PATH_WRONG'], 'Vbulletin'));
@@ -86,8 +82,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 
 	$SQLVB	= new SSQL($forum_srv, $forum_user, $forum_pass, $forum_db, true);
 
-	//if(!preg_match('/utf/i',strtolower($script_encoding)))
-	//{
+
 	if(isset($forum_db_charset))
 	{	//config
 		$SQLVB->set_names($forum_db_charset);
@@ -97,22 +92,26 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 		$charset_db = $SQLVB->client_encoding();
 		$SQLVB->set_names($charset_db);
 	}
-	//}
-	//$mysql_version = @mysql_get_server_info($SQLVB->connect_id);
+
 
 	unset($forum_pass); // We do not need this any longer
 
-	if(!function_exists('iconv') && !preg_match('/utf/i',strtolower($script_encoding)))
- 	{
- 		big_error('No support for ICONV', 'You must enable the ICONV library to integrate kleeja with your forum. You can solve your problem by changing your forum db charset to UTF8.'); 
- 	}
-
+	$pass = empty($script_cp1256) || !$script_cp1256 ? $pass : $usrcp->kleeja_utf8($pass, false);
+	$name = empty($script_cp1256) || !$script_cp1256 || $hashed ? $name : $usrcp->kleeja_utf8($name, false);
+	
 	$query_salt = array(
 						'SELECT'	=> $hashed ? '*' : 'salt', 
 						'FROM'		=> "`{$forum_prefix}user`",
 					);
 
 	$query_salt['WHERE'] = $hashed ? "userid='" . intval($name) . "'  AND password='" . $SQLVB->real_escape($pass) . "' AND usergroupid != '8'" :  "username='" . $SQLVB->real_escape($name) . "' AND usergroupid != '8'";
+	
+	//if return only name let's ignore the obove
+	if($return_name)
+	{
+		$query_salt['SELECT']	= "username";
+		$query_salt['WHERE']	= "userid=" . intval($name) . "";
+	}
 
 	($hook = kleeja_run_hook('qr_select_usrdata_vb_usr_class')) ? eval($hook) : null; //run hook				
 	$result_salt = $SQLVB->build($query_salt);
@@ -121,6 +120,11 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 	{
 		while($row1=$SQLVB->fetch_array($result_salt))
 		{
+			if($return_name)
+			{
+				return empty($script_cp1256) || !$script_cp1256 ? $row1['username'] : $usrcp->kleeja_utf8($row1['username']);
+			}
+	
 			if(!$hashed)
 			{
 				$pass = md5(md5($pass) . $row1['salt']);  // without normal md5
@@ -140,7 +144,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 						if(!$loginadm)
 						{
 							define('USER_ID', $row['userid']);
-							define('USER_NAME', preg_match('/utf/i', strtolower($script_encoding)) ? $row['username'] : iconv(strtoupper($script_encoding), "UTF-8//IGNORE", $row['username']));
+							define('USER_NAME', empty($script_cp1256) || !$script_cp1256 ? $row['username'] : $usrcp->kleeja_utf8($row['username']));
 							define('USER_MAIL', $row['email']);
 							define('USER_ADMIN', $row['usergroupid'] == 6 ? 1 : 0);
 						}
@@ -169,7 +173,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 				if(!$loginadm)
 				{
 					define('USER_ID', $row1['userid']);
-					define('USER_NAME', preg_match('/utf/i', strtolower($script_encoding)) ? $row1['username'] : iconv(strtoupper($script_encoding),"UTF-8//IGNORE",$row1['username']));
+					define('USER_NAME', empty($script_cp1256) || !$script_cp1256 ? $row1['username'] : $usrcp->kleeja_utf8($row1['username']));
 					define('USER_MAIL',$row1['email']);
 					define('USER_ADMIN',($row1['usergroupid'] == 6) ? 1 : 0);
 					$userinfo = $row1;
@@ -194,80 +198,5 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 
 function kleeja_auth_username ($user_id)
 {
-	// ok, i dont hate vb .. but i cant feel my self use it ... 
-	global $script_path, $lang, $script_encoding, $script_srv, $script_db, $script_user, $script_pass, $script_prefix;
-
-	if(isset($script_path))
-	{				
-		//check for last slash
-		if($script_path[strlen($script_path)] == '/')
-		{
-			$script_path = substr($script_path, 0, strlen($script_path));
-		}
-
-		$script_path = ($script_path[0] == '/' ? '..' : '../') . $script_path;
-		$script_path = PATH .  $script_path;
-
-		//get some useful data from vb config file
-		if(file_exists($script_path . VB_CONFIG_PATH))
-		{
-			require_once ($script_path . VB_CONFIG_PATH);
-			$forum_srv	= $config['MasterServer']['servername'];
-			$forum_db	= $config['Database']['dbname'];
-			$forum_user	= $config['MasterServer']['username'];
-			$forum_pass	= $config['MasterServer']['password'];
-			$forum_prefix= $config['Database']['tableprefix'];
-		} 
-		else
-		{
-			big_error('Forum path is not correct', sprintf($lang['SCRIPT_AUTH_PATH_WRONG'], 'Vbulletin'));
-		}
-	}
-	else
-	{
-		$forum_srv	= $script_srv;
-		$forum_db	= $script_db;
-		$forum_user	= $script_user;
-		$forum_pass	= $script_pass;
-		$forum_prefix = $script_prefix;
-	}
-
-	if(empty($forum_srv) || empty($forum_user) || empty($forum_db))
-	{
-		return;
-	}
-
-	$SQLVB	= new SSQL($forum_srv, $forum_user, $forum_pass, $forum_db, TRUE);
-	unset($forum_pass); // We do not need this any longe
-
-	if(!function_exists('iconv') && !preg_match('/utf/i',strtolower($script_encoding)))
- 	{
- 		big_error('No support for ICONV', 'You must enable the ICONV library to integrate kleeja with your forum. You can solve your problem by changing your forum db charset to UTF8.'); 
- 	}
-
-	$query_name = array(
-					'SELECT'	=> 'username',
-					'FROM'		=> "`{$forum_prefix}user`",
-					'WHERE'		=> "userid='" . intval($user_id) . "'"
-				);
-
-	($hook = kleeja_run_hook('qr_select_usrname_vb_usr_class')) ? eval($hook) : null; //run hook				
-	$result_name = $SQLVB->build($query_name);
-
-	if ($SQLVB->num_rows($result_name) > 0) 
-	{
-		while($row = $SQLVB->fetch_array($result_name))
-		{
-			$returnname = preg_match('/utf/i', strtolower($script_encoding)) ? $row['username'] : iconv(strtoupper($script_encoding), "UTF-8//IGNORE", $row['username']);
-		}
-
-		$SQLVB->freeresult($result_name); 
-		$SQLVB->close();
-		return $returnname;
-	}
-	else
-	{
-		$SQLVB->close();
-		return false;
-	}
+	return kleeja_auth_login ($user_id, false, true, 0, false, true);
 }

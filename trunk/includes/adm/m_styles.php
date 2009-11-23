@@ -28,8 +28,11 @@ switch ($_GET['sty_t'])
 		//for style ..
 		$stylee 	= "admin_styles";
 		$action 	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') .'&amp;sty_t=st';
-		$edit_tpl_action = basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') .'&amp;sty_t=style_orders&amp;style_id=' . $config['style'] . '&amp;method=1&amp;tpl_choose=';
-		$show_all_tpls_action = basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') .'&amp;style_choose=' . $config['style'] . '&amp;method=1';
+		$edit_tpl_action		= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') .'&amp;sty_t=style_orders&amp;style_id=' . $config['style'] . '&amp;method=1&amp;tpl_choose=';
+		$show_all_tpls_action	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') .'&amp;style_choose=' . $config['style'] . '&amp;method=1';
+		$H_FORM_KEYS			= kleeja_add_form_key('adm_style_order_del_edit');
+		$H_FORM_KEYS2			= kleeja_add_form_key('adm_style_order_add');
+		$H_FORM_KEYS3			= kleeja_add_form_key('adm_style_order_bkup');
 
 		//kleeja depend on its users .. and kleeja love them .. so let's tell them about that ..
 		$klj_d_s = $lang['KLJ_MORE_STYLES'][rand(0, sizeof($lang['KLJ_MORE_STYLES'])-1)];
@@ -185,15 +188,24 @@ switch ($_GET['sty_t'])
 
 		//style id ..
 		$style_id = str_replace('..', '', $SQL->escape($_REQUEST['style_id']));
-
+		$redirect_to = basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&style_choose=' . $style_id . '&method=1';
+	
 		if(empty($_REQUEST['tpl_choose']))
 		{
-			redirect(basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&style_choose=' . $style_id . '&method=1');
+			redirect($redirect_to);
 		}
 
 		//edit or del tpl 
 		if(isset($_REQUEST['tpl_choose']) && !empty($_REQUEST['tpl_choose']) && isset($_REQUEST['style_id']))
 		{
+			//
+			// Check form key
+			//
+			if(!kleeja_check_form_key('adm_style_order_del_edit'))
+			{
+				kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $redirect_to, 1);
+			}
+
 			//tpl name 
 			$tpl_name =	$SQL->escape($_REQUEST['tpl_choose']);
 			$tpl_path = $root_path . 'styles/' . $style_id . '/' . $tpl_name;
@@ -226,8 +238,9 @@ switch ($_GET['sty_t'])
 					//for style ..
 					$stylee = "admin_edit_tpl";
 					$action = basename(ADMIN_PATH) . "?cp=styles&amp;sty_t=style_orders";
-					$action_return = basename(ADMIN_PATH) . '?cp=styles&amp;style_choose=' . $style_id . '&amp;method=1';
-
+					$action_return	= basename(ADMIN_PATH) . '?cp=styles&amp;style_choose=' . $style_id . '&amp;method=1';
+					$H_FORM_KEYS	= kleeja_add_form_key('adm_style_order_edit_content');
+			
 					//is there any possiablity to write on files
 					$not_style_writeable = true;
 					$d_style_path = $root_path . 'styles/' . $style_id; 
@@ -263,10 +276,18 @@ switch ($_GET['sty_t'])
 				break;
 			}
 		}
-			
+
 		// submit edit of tpl
 		if(isset($_POST['template_content']))
 		{
+			//
+			// Check form key
+			//
+			if(!kleeja_check_form_key('adm_style_order_edit_content'))
+			{
+				kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $redirect_to, 1);
+			}
+		
 			$style_id = str_replace('..', '', $SQL->escape($_POST['style_id']));
 			//tpl name 
 			$tpl_name =	htmlspecialchars_decode($_POST['tpl_choose']);
@@ -301,7 +322,15 @@ switch ($_GET['sty_t'])
 			
 		//new template file
 		if(isset($_POST['submit_new_tpl']))
-		{
+		{	
+			//
+			// Check form key
+			//
+			if(!kleeja_check_form_key('adm_style_order_add'))
+			{
+				kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $redirect_to, 1);
+			}
+
 			//style id 
 			$style_id = str_replace('..', '', $SQL->escape($_POST['style_id']));
 			//tpl name 
@@ -329,6 +358,14 @@ switch ($_GET['sty_t'])
 		//return bakup template
 		if(isset($_POST['submit_bk_tpl']))
 		{
+			//
+			// Check form key
+			//
+			if(!kleeja_check_form_key('adm_style_order_bkup'))
+			{
+				kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $redirect_to, 1);
+			}
+			
 			//style id 
 			$style_id = str_replace('..', '', $SQL->escape($_POST['style_id']));
 			$tpl_name = str_replace('..', '', $SQL->escape($_POST['tpl_choose']));

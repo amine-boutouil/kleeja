@@ -307,7 +307,7 @@ function creat_plugin_xml($contents)
 							//delete hooks !
 							$query_del = array(
 											'DELETE'	=> "{$dbprefix}hooks",
-											'WHERE'		=> "plg_id='" . $plg_id . "'"
+											'WHERE'		=> "plg_id=" . $plg_id
 											);		
 											
 							$SQL->build($query_del);
@@ -492,7 +492,7 @@ function creat_plugin_xml($contents)
 								$update_query = array(
 												'UPDATE'	=> "{$dbprefix}plugins",
 												'SET'		=> 'plg_ver="' . $new_ver . '", plg_author="' . $plugin_author . '", plg_dsc="' . $SQL->escape($plg_info['plugin_description']['value']) . '", plg_uninstall="' . $SQL->real_escape($plg_uninstall['value']) . '"',
-												'WHERE'		=> "plg_id='" . $plg_id . "'"
+												'WHERE'		=> "plg_id=" . $plg_id
 											);
 								$SQL->build($update_query);
 								

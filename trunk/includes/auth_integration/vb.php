@@ -103,13 +103,13 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 						'FROM'		=> "`{$forum_prefix}user`",
 					);
 
-	$query_salt['WHERE'] = $hashed ? "userid='" . intval($name) . "'  AND password='" . $SQLVB->real_escape($pass) . "' AND usergroupid != '8'" :  "username='" . $SQLVB->real_escape($name) . "' AND usergroupid != '8'";
+	$query_salt['WHERE'] = $hashed ? "userid=" . intval($name) . " AND password='" . $SQLVB->real_escape($pass) . "' AND usergroupid != '8'" :  "username='" . $SQLVB->real_escape($name) . "' AND usergroupid != '8'";
 	
 	//if return only name let's ignore the obove
 	if($return_name)
 	{
 		$query_salt['SELECT']	= "username";
-		$query_salt['WHERE']	= "userid=" . intval($name) . "";
+		$query_salt['WHERE']	= "userid=" . intval($name);
 	}
 
 	($hook = kleeja_run_hook('qr_select_usrdata_vb_usr_class')) ? eval($hook) : null; //run hook				

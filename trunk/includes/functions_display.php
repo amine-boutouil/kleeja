@@ -222,7 +222,7 @@ function kleeja_err($msg, $title = '', $exit = true, $redirect = false, $rs = 2,
 *
 * For admin
 */
-function kleeja_admin_err($msg, $navigation = true, $title='', $exit = true)
+function kleeja_admin_err($msg, $navigation = true, $title='', $exit = true, $redirect = false, $rs = 2)
 {
 	global $text, $tpl, $SHOW_LIST, $adm_extensions, $adm_extensions_menu, $STYLE_PATH_ADMIN, $lang, $olang, $SQL;
 	
@@ -239,9 +239,13 @@ function kleeja_admin_err($msg, $navigation = true, $title='', $exit = true)
 	//footer
 	echo $tpl->display("admin_footer");
 		
-	if ($exit)
+	//redirect
+	if($redirect)
 	{
-		//close mysql connection
+		redirect($redirect, false, $exit, $rs);
+	}
+	else if($exit)
+	{
 		$SQL->close();
 		exit();
 	}
@@ -253,7 +257,7 @@ function kleeja_admin_err($msg, $navigation = true, $title='', $exit = true)
 *
 * For admin
 */
-function kleeja_admin_info($msg, $navigation=true, $title='', $exit=true)
+function kleeja_admin_info($msg, $navigation=true, $title='', $exit=true, $redirect = false, $rs = 2)
 {
 	global $text, $tpl, $SHOW_LIST, $adm_extensions, $adm_extensions_menu, $STYLE_PATH_ADMIN, $lang, $SQL;
 	
@@ -270,9 +274,13 @@ function kleeja_admin_info($msg, $navigation=true, $title='', $exit=true)
 	//footer
 	echo $tpl->display("admin_footer");
 	
-	if ($exit)
+	//redirect
+	if($redirect)
 	{
-		//close mysql connection
+		redirect($redirect, false, $exit, $rs);
+	}
+	else if($exit)
+	{
 		$SQL->close();
 		exit();
 	}
@@ -401,7 +409,7 @@ function redirect($url, $header = true, $exit = true, $sec = 0)
     }
 	else
 	{
-		echo '<script type="text/javascript"> setTimeout("window.location.href = \'' . $url . '\'", ' . $sec*1000 . '); </script>';
+		echo '<script type="text/javascript"> setTimeout("window.location.href = \'' .  str_replace(array('&amp;'), array('&'), $url) . '\'", ' . $sec*1000 . '); </script>';
 		echo '<noscript><meta http-equiv="refresh" content="' . $sec .';url=' . $url . '" /></noscript>';
 	}
 
@@ -411,6 +419,14 @@ function redirect($url, $header = true, $exit = true, $sec = 0)
 		exit;
 	}
 }
+
+/**
+*
+* todo : make another function for _GET request i.e. ?formkey=2352g23 
+* //base64_encode('form_key|time') or another good idea !
+*/
+function kleeja_add_form_key_get($request_id) {}
+function kleeja_check_form_key_get($request_id) {}
 
 /**
 * Prevent CSRF, 
@@ -432,7 +448,13 @@ function kleeja_add_form_key($form_name)
 function kleeja_check_form_key($form_name, $require_time = 150 /*seconds*/ )
 {
 	global $config, $klj_session;
-	
+
+	if(defined('IN_ADMIN'))
+	{
+		//we increase it for admin to be a duble 
+		$require_time *= 2;
+	}
+
 	if (isset($_POST['k_form_key']) && isset($_POST['k_form_time']))
 	{
 		$key_was = trim($_POST['k_form_key']);

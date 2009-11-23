@@ -74,13 +74,13 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 					'FROM'	=> "`{$forum_prefix}member`",
 				);
 	
-	$query['WHERE'] = $hashed ?  "id='" . intval($name) . "'  AND password='" . $SQLMS->real_escape($pass) . "'" : "username='" . $SQLMS->real_escape($name) . "' AND password='" . md5($pass) . "'";
+	$query['WHERE'] = $hashed ?  "id=" . intval($name) . " AND password='" . $SQLMS->real_escape($pass) . "'" : "username='" . $SQLMS->real_escape($name) . "' AND password='" . md5($pass) . "'";
 	
 	//if return only name let's ignore the obove
 	if($return_name)
 	{
 		$query_salt['SELECT']	= "username";
-		$query_salt['WHERE']	= "id=" . intval($name) . "";
+		$query_salt['WHERE']	= "id=" . intval($name);
 	}
 	
 	($hook = kleeja_run_hook('qr_select_usrdata_mysbb_usr_class')) ? eval($hook) : null; //run hook	

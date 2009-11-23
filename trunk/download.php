@@ -43,7 +43,7 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 	else
 	{
 		$id_l = intval($_GET['id']);
-		$query['WHERE']	= "id=" . $id_l . "";
+		$query['WHERE']	= "id=" . $id_l;
 	}
 
 	($hook = kleeja_run_hook('qr_download_id_filename')) ? eval($hook) : null; //run hook

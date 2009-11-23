@@ -23,6 +23,21 @@ $n_submit 		= $lang['UPDATE_CONFIG'];
 $options		= '';
 $SHOW_CH_STAGE	= isset($_GET['type']) ? false : true;
 $CONFIGEXTEND	= false;
+$H_FORM_KEYS	= kleeja_add_form_key('adm_configs');
+
+
+//
+// Check form key
+//
+if (isset($_POST['submit']))
+{
+	if(!kleeja_check_form_key('adm_configs'))
+	{
+		$redirect_url = $action  . (isset($_GET['type']) ? '&amp;type=' . htmlspecialchars($_GET['type']) : '');
+		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $redirect_url, 1);
+	}
+}
+
 
 switch($SHOW_CH_STAGE):
 

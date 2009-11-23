@@ -19,11 +19,24 @@ if (!defined('IN_ADMIN'))
 $stylee		= "admin_plugins";
 $action		= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php');
 $no_plugins	= false;
-		
+
 //kleeja depend on its users .. and kleeja love them .. so let's tell them about that ..
 $klj_d_s = $lang['KLJ_MORE_PLUGINS'][rand(0, sizeof($lang['KLJ_MORE_PLUGINS'])-1)];
-		
-//get styles
+
+$H_FORM_KEYS	= kleeja_add_form_key('adm_plugins');
+
+//
+// Check form key
+//
+if (isset($_POST['submit_new_plg']))
+{
+	if(!kleeja_check_form_key('adm_plugins'))
+	{
+		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $action, 1);
+	}
+}
+
+//get plugins
 $query = array(
 				'SELECT'	=> '*',
 				'FROM'		=> "{$dbprefix}plugins"

@@ -28,7 +28,25 @@ $ord_action		= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . $url
 $page2_action	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . $url_or2 . $url_sea . $url_lst;
 $action			= $page_action;
 $is_search		= $affected = false;
+$H_FORM_KEYS	= kleeja_add_form_key('adm_files');
 
+//
+// Check form key
+//
+if (isset($_POST['submit']))
+{
+	if(!kleeja_check_form_key('adm_files'))
+	{
+		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $action, 1);
+	}
+}
+if (isset($_POST['search_file']))
+{
+	if(!kleeja_check_form_key('adm_files_search'))
+	{
+		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, basename(ADMIN_PATH) . '?cp=h_search', 1);
+	}
+}
 
 
 //

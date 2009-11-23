@@ -18,6 +18,26 @@ if (!defined('IN_ADMIN'))
 $stylee = "admin_exts";
 $action 		= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;page=' . (isset($_GET['page']) ? intval($_GET['page']) : 1);
 $action_new_ext = basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;add_new_ext=1';
+$H_FORM_KEYS	= kleeja_add_form_key('adm_exts');
+$H_FORM_KEYS2	= kleeja_add_form_key('adm_exts_new_ext');
+
+//
+// Check form key
+//
+if (isset($_POST['submit']))
+{
+	if(!kleeja_check_form_key('adm_exts'))
+	{
+		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $action, 1);
+	}
+}
+if (isset($_GET['add_new_ext']))
+{
+	if(!kleeja_check_form_key('adm_exts_new_ext'))
+	{
+		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $action, 1);
+	}
+}
 
 
 //show exts
@@ -88,7 +108,7 @@ if (isset($_POST['submit']))
 												"gust_allow = '" . (isset($_POST['gal'][$n]) ? 1 : 0) . "', " . 
 												"user_size = '" . round(intval($_POST['usz'][$n])*1024) . "', " . 
 												"user_allow = '" .  (isset($_POST['ual'][$n]) ? 1 : 0) . "'",
-								'WHERE'		=>	"id='" . intval($n) . "'"
+								'WHERE'		=>	"id=" . intval($n)
 						);
 	
 		$SQL->build($update_query);

@@ -24,6 +24,20 @@ if(!isset($images_cp_perpage) || !$images_cp_perpage)
 //for style ..
 $stylee	= "admin_img";
 $action	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;page=' . (isset($_GET['page']) ? intval($_GET['page']) : 1);
+$H_FORM_KEYS	= kleeja_add_form_key('adm_img_ctrl');
+
+
+//
+// Check form key
+//
+if (isset($_POST['submit']))
+{
+	if(!kleeja_check_form_key('adm_img_ctrl'))
+	{
+		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $action, 1);
+	}
+}
+
 
 $query	= array('SELECT'	=> 'COUNT(f.id) AS total_files',
 					'FROM'		=> "{$dbprefix}files f",

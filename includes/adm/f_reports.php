@@ -17,7 +17,19 @@ if (!defined('IN_ADMIN'))
 //for style ..
 $stylee	= "admin_reports";
 $action	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;page=' . (isset($GET['page'])  ? intval($GET['page']) : 1);
-$msg_sent = isset($_GET['sent']) ? intval($_GET['sent']) : false; 
+$msg_sent		= isset($_GET['sent']) ? intval($_GET['sent']) : false; 
+$H_FORM_KEYS	= kleeja_add_form_key('adm_reports');
+
+//
+// Check form key
+//
+if (isset($_POST['submit']))
+{
+	if(!kleeja_check_form_key('adm_reports'))
+	{
+		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $action, 1);
+	}
+}
 
 
 $query = array(

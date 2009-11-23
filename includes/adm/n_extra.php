@@ -17,9 +17,21 @@ if (!defined('IN_ADMIN'))
 	
 
 //for style ..
-$stylee	= "admin_extra";
-$action	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php');
-		
+$stylee		= "admin_extra";
+$action		= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php');
+$H_FORM_KEYS	= kleeja_add_form_key('adm_extra');
+
+//
+// Check form key
+//
+if (isset($_POST['submit']))
+{
+	if(!kleeja_check_form_key('adm_extra'))
+	{
+		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $action, 1);
+	}
+}
+
 $query	= array(
 				'SELECT'	=> 'ex_header,ex_footer',
 				'FROM'		=> "{$dbprefix}stats"

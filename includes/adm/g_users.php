@@ -22,7 +22,33 @@ $action 	.= (isset($_GET['search']) ? '&search=' . $SQL->escape($_GET['search'])
 
 $is_search	= $affected = $is_asearch = false;
 $isn_search	= true;
+$H_FORM_KEYS	= kleeja_add_form_key('adm_users');
+$H_FORM_KEYS2	= kleeja_add_form_key('adm_users_newuser');
 
+//
+// Check form key
+//
+if (isset($_POST['submit']))
+{
+	if(!kleeja_check_form_key('adm_users'))
+	{
+		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $action, 1);
+	}
+}
+if (isset($_POST['newuser']))
+{
+	if(!kleeja_check_form_key('adm_users_newuser'))
+	{
+		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $action, 1);
+	}
+}
+if (isset($_POST['search_user']))
+{
+	if(!kleeja_check_form_key('adm_users_search'))
+	{
+		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, basename(ADMIN_PATH) . '?cp=h_search', 1);
+	}
+}
 
 //
 //delete all user files [only one user]			

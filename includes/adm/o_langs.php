@@ -25,6 +25,18 @@ if(!isset($_REQUEST['lang']))
 $stylee 	= "admin_langs";
 $action 	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;page=' .  (isset($_GET['page']) ? intval($_GET['page']) : 1) . '&amp;lang=' . $SQL->escape($_REQUEST['lang']);
 $action2 	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php');
+$H_FORM_KEYS	= kleeja_add_form_key('adm_langs');
+
+//
+// Check form key
+//
+if (isset($_POST['submit']))
+{
+	if(!kleeja_check_form_key('adm_langs'))
+	{
+		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $action, 1);
+	}
+}
 
 //get languages
 $lngfiles = '';

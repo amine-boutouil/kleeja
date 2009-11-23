@@ -20,6 +20,19 @@ $stylee	= "admin_ban";
 $action	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php');
 
 $affected = false;
+$H_FORM_KEYS	= kleeja_add_form_key('adm_ban');
+
+//
+// Check form key
+//
+if (isset($_POST['submit']))
+{
+	if(!kleeja_check_form_key('adm_ban'))
+	{
+		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $action, 1);
+	}
+}
+
 
 $query	= array(
 				'SELECT'	=> 'ban',

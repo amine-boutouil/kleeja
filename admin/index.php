@@ -61,7 +61,8 @@ if(
 
 			//login
 			$ERRORS	= array();
-			if (empty($_POST['lname']) || empty($_POST['lpass']))
+			$pass_field = 'lpass_' . preg_replace('/[^0-9]/', '', sha1($klj_session . $config['h_key']));
+			if (empty($_POST['lname']) || empty($_POST[$pass_field]))
 			{
 				$ERRORS[] = $lang['EMPTY_FIELDS'];
 			}
@@ -76,7 +77,7 @@ if(
 
 			if(!sizeof($ERRORS))
 			{
-				if($f = $usrcp->data($_POST['lname'], $_POST['lpass'], false, $adm_time, true))
+				if($f = $usrcp->data($_POST['lname'], $_POST[$pass_field], false, $adm_time, true))
 				{
 					$_SESSION['USER_SESS'] = session_id();
 					$_SESSION['ADMINLOGIN'] = md5($usrcp->name() . $config['siteurl']);
@@ -92,7 +93,7 @@ if(
 					$ERRORS[] = $lang['LOGIN_ERROR'];
 				}
 			}
-var_dump($f);
+
 			//let's see if there is errors
 			if(sizeof($ERRORS))
 			{
@@ -107,7 +108,9 @@ var_dump($f);
 
 	//show template login .
 	$action	= './' . basename(ADMIN_PATH) . '?go=login&amp;cp=' . $go_to;
-	$H_FORM_KEYS = kleeja_add_form_key('admin_login');
+	$H_FORM_KEYS	= kleeja_add_form_key('admin_login');
+	$KEY_FOR_PASS	= preg_replace('/[^0-9]/', '', sha1($klj_session . $config['h_key'])); 
+
 	$err = false;
 	if(!empty($errs))
 	{

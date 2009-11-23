@@ -61,7 +61,7 @@ if(
 
 			//login
 			$ERRORS	= array();
-			$pass_field = 'lpass_' . preg_replace('/[^0-9]/', '', sha1($klj_session . $config['h_key']));
+			$pass_field = 'lpass_' .  preg_replace('/[^0-9]/', '', sha1($klj_session . sha1($config['h_key']) . $_POST['kid']));
 			if (empty($_POST['lname']) || empty($_POST[$pass_field]))
 			{
 				$ERRORS[] = $lang['EMPTY_FIELDS'];
@@ -109,7 +109,8 @@ if(
 	//show template login .
 	$action	= './' . basename(ADMIN_PATH) . '?go=login&amp;cp=' . $go_to;
 	$H_FORM_KEYS	= kleeja_add_form_key('admin_login');
-	$KEY_FOR_PASS	= preg_replace('/[^0-9]/', '', sha1($klj_session . $config['h_key'])); 
+	$KEY_FOR_WEE	= sha1(microtime() . sha1($config['h_key']));
+	$KEY_FOR_PASS	= preg_replace('/[^0-9]/', '', sha1($klj_session . sha1($config['h_key']) . $KEY_FOR_WEE)); 
 
 	$err = false;
 	if(!empty($errs))

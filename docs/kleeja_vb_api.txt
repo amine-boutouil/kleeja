@@ -3,7 +3,6 @@
 //File for remote vb
 //This file must be exists in VB  folder script. 
 //copyright 2007-2009 Kleeja.com ..
-//license http://opensource.org/licenses/gpl-license.php GNU Public License
 //$Author: phpfalcon $ , $Rev: 817 $,  $Date:: 2009-08-12 14:43:06 +0300#$
 //
 
@@ -17,7 +16,7 @@ define('THIS_SCRIPT', 'sendmessage');
 require_once('./global.php');
 
 //change this
-$script_api_key = sha1('123456');
+$script_api_key = '';
 
 //error_reporting(E_ALL & ~E_NOTICE);
 
@@ -42,24 +41,31 @@ $c = array(
 );
 
 
-$q_where = $hashed ? "userid='" . $c['userid'] . "' AND password='" . mysql_escape_string($c['pass']) . "' AND usergroupid != '8'" :  "username='" . $vbulletin->db->escape_string(htmlspecialchars_uni($c['username'])) . "' AND usergroupid != '8'";
+$q_where = $hashed ? "userid=" . $c['userid'] . " AND password='" . mysql_escape_string($c['pass']) . "' AND usergroupid != '8'" :  "username='" . $vbulletin->db->escape_string(htmlspecialchars_uni($c['username'])) . "' AND usergroupid != '8'";
 
-$rqr = mysql_query("SELECT " . ($hashed ? '*' : 'salt') . " FROM " . $config['Database']['tableprefix'] . "user WHERE " . $q_where);
+if(isset($_GET['return_username']))
+{
+	$q_where = "userid=" . $c['userid'];
+}
+
+$rqr = mysql_query("SELECT " . ($hashed ? '*' : (isset($_GET['return_username']) ? 'username' : 'salt')) . " FROM " . $config['Database']['tableprefix'] . "user WHERE " . $q_where);
 
 if (mysql_num_rows($rqr))
 {
 		while ($user = mysql_fetch_array($rqr))
 		{
-			//if return_username, no password just userid , and reutnr username
+			//if return_username, no password just userid , and return username
 			if(isset($_GET['return_username']))
 			{
 				print_output(base64_encode('1%|%' . $user['username']));
 				exit;
 			}
-
+			
+			$is_admin_or_no = ($row['usergroupid'] == 6) ? '1' : '0';
+			
 			if($hashed)
 			{
-				print_output(base64_encode('1%|%' . $user['userid'] . '%|%' . $user['username'] . '%|%' . $user['email'] . '%|%' . $user['password'] . '%|%' . $user['usergroupid']));
+				print_output(base64_encode('1%|%' . $user['userid'] . '%|%' . $user['username'] . '%|%' . $user['email'] . '%|%' . $user['password'] . '%|%' . $is_admin_or_no));
 				exit;
 			}
 			else
@@ -80,7 +86,7 @@ if (mysql_num_rows($rqr))
 				{
 					while ($user2 = mysql_fetch_array($rqr2))
 					{
-						print_output(base64_encode('1%|%' . $user2['userid'] . '%|%' . $user2['username'] . '%|%' . $user2['email'] . '%|%' . $user2['password'] . '%|%' . $user2['usergroupid']));
+						print_output(base64_encode('1%|%' . $user2['userid'] . '%|%' . $user2['username'] . '%|%' . $user2['email'] . '%|%' . $user2['password'] . '%|%' . $is_admin_or_no));
 						exit;
 					}
 					

@@ -17,7 +17,7 @@ if (!defined('IN_COMMON'))
 //
 //Path of config file in vb
 //
-define('VB_CONFIG_PATH', '/includes/config.php');
+define('SCRIPT_CONFIG_PATH', '/includes/config.php');
 
 function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = false, $return_name = false)
 {
@@ -33,9 +33,9 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 		}
 
 		//get some useful data from vb config file
-		if(file_exists(PATH .  $script_path . VB_CONFIG_PATH))
+		if(file_exists(PATH .  $script_path . SCRIPT_CONFIG_PATH))
 		{
-			require_once (PATH .  $script_path . VB_CONFIG_PATH);
+			require_once (PATH .  $script_path . SCRIPT_CONFIG_PATH);
 
 			//
 			//get config from config file
@@ -89,8 +89,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 	}
 	else //auto
 	{
-		$charset_db = $SQLVB->client_encoding();
-		$SQLVB->set_names($charset_db);
+		$SQLVB->set_names('latin1');
 	}
 
 
@@ -158,15 +157,15 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 							$usrcp->kleeja_set_cookie('ulogu', $usrcp->en_de_crypt($row['userid'] . '|' . $row['password'] . '|' . $expire . '|' . $hash_key_expire), $expire);
 						}
 
-					($hook = kleeja_run_hook('qr_while_usrdata_vb_usr_class')) ? eval($hook) : null; //run hook
+						($hook = kleeja_run_hook('qr_while_usrdata_vb_usr_class')) ? eval($hook) : null; //run hook
+					}
+					$SQLVB->freeresult($result);
+				}#nums_sql2
+				else
+				{
+					$SQLVB->close();
+					return false;
 				}
-				$SQLVB->freeresult($result);
-			}#nums_sql2
-			else
-			{
-				$SQLVB->close();
-				return false;
-			}
 			}
 			else
 			{

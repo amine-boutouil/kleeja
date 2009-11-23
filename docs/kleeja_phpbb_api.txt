@@ -3,7 +3,6 @@
 //File for remote phpbb3
 //This file must be exists in phpbb3 folder script. 
 //copyright 2007-2009 Kleeja.com ..
-//license http://opensource.org/licenses/gpl-license.php GNU Public License
 //$Author: phpfalcon $ , $Rev: 817 $,  $Date:: 2009-08-12 14:43:06 +0300#$
 //
 
@@ -13,4 +12,79 @@ $phpEx = substr(strrchr(__FILE__, '.'), 1);
 include($phpbb_root_path . 'common.' . $phpEx);
 
 //change this
-$script_api_key = sha1('123456');
+$script_api_key = '';
+
+
+//
+// dont change after this line !
+//
+
+
+	if(!isset($_GET['api_key']) || (isset($_GET['api_key']) &&  base64_decode($_GET['api_key']) != $script_api_key) || (!isset($_GET['userid']) && !isset($_GET['username'])))
+	{
+		echo '0';
+		exit;
+	}
+
+	#hashed ? 
+	$hashed		= isset($_GET['userid']) ? true : false;
+
+	$c = array(
+		'pass'		=> base64_decode(request_var('pass', '', true)),
+		'username'	=> urldecode(request_var('username', '', true)),
+		'userid'	=> request_var('userid', 0, true),
+	);
+
+
+
+	$sql = 'SELECT user_id, username, user_password, user_email, user_type
+		FROM ' . USERS_TABLE . '
+		WHERE ';
+
+	if ($hashed)
+	{
+		$sql .= 'user_id = ' . $c['userid'] . " AND user_password = '" .  $db->sql_escape($c['pass']) . "'";
+	}
+	else if(isset($_GET['return_username']))
+	{
+		$sql .= 'user_id = ' . $c['userid'];
+	}
+	else
+	{
+		$sql .= "username_clean = '" . $db->sql_escape(utf8_clean_string($c['username'])) . "'";
+	}
+
+	$result = $db->sql_query($sql);
+	$row = $db->sql_fetchrow($result);
+	$db->sql_freeresult($result);
+
+	if (!$row)
+	{
+		echo '0';
+		exit;
+	}
+	
+	
+	//check for password
+	if(!$hashed)
+	{
+		if(!phpbb_check_hash($c['pass'], $row['user_password']))
+		{
+			echo '0';
+			exit;
+		}
+	}
+	
+	//return only username
+	if(isset($_GET['return_username']))
+	{
+		echo base64_encode('1%|%' . $row['username']);
+		exit;
+	}
+	
+	
+	$is_admin_or_no = ($row['user_type'] == 3) ? '1' : '0';
+
+	
+	echo base64_encode('1%|%' . $row['user_id'] . '%|%' . $row['username'] . '%|%' . $row['user_email'] . '%|%' . $row['user_password'] . '%|%' . $is_admin_or_no);
+	exit;

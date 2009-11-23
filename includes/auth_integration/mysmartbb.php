@@ -18,7 +18,7 @@ if (!defined('IN_COMMON'))
 //
 //Path of config file in MySBB
 //
-define('MYSBB_CONFIG_PATH', '/engine/config.php');
+define('SCRIPT_CONFIG_PATH', '/engine/config.php');
 
 function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = false, $return_name = false)
 {
@@ -34,9 +34,9 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 		}
 
 		//get database data from mysmartbb config file
-		if(file_exists(PATH . $script_path . MYSBB_CONFIG_PATH)) 
+		if(file_exists(PATH . $script_path . SCRIPT_CONFIG_PATH)) 
 		{
-			require_once (PATH . $script_path . MYSBB_CONFIG_PATH);
+			require_once (PATH . $script_path . SCRIPT_CONFIG_PATH);
 			$forum_srv	= $config['db']['server'];
 			$forum_db	= $config['db']['name'];
 			$forum_user	= $config['db']['username'];
@@ -64,8 +64,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 
 	$SQLMS	= new SSQL($forum_srv, $forum_user, $forum_pass, $forum_db, true);
 
-	$charset_db = $SQLMS->client_encoding();
-	$SQLMS->set_names($charset_db);
+	$SQLVB->set_names('latin1');
 	
 	$pass = $usrcp->kleeja_utf8($pass, false);
 	$name = $usrcp->kleeja_utf8($name, false);

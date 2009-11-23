@@ -120,7 +120,7 @@ switch ($_GET['go'])
 					($hook = kleeja_run_hook('login_data_no_error')) ? eval($hook) : null; //run hook
 
 					$text	= $lang['LOGIN_SUCCESFUL'] . ' <br /> <a href="' . $config['siteurl'] . '">' . $lang['HOME'] . '</a>';
-					kleeja_info($text, '', true, 'index.php');
+					kleeja_info($text, '', true, $config['siteurl'], 1);
 				}
 			}
 			
@@ -148,8 +148,32 @@ switch ($_GET['go'])
 			else if ($config['user_system'] != '1')
 			{
 				($hook = kleeja_run_hook('register_not_default_sys')) ? eval($hook) : null; //run hook
-				$forum_path = (empty($script_register_url)) ? ($script_path[0] == '/' ? '..' : '../') .  $script_path : $script_register_url;
-				kleeja_info('<a href="' . $forum_path . '" title="' . $lang['REGISTER'] . '">' . $lang['REGISTER']. '</a>', $lang['REGISTER']);
+
+				if(!empty($register_script_path))
+				{
+					$goto_forum_link = $register_script_path;
+				}
+				else
+				{
+					if(isset($script_path))
+					{
+						$goto_forum_link = ($config['user_system'] == 'api') ? dirname($script_path) : $script_path;
+						if($config['user_system'] == 'phpbb' || ($config['user_system'] == 'api' && strpos($script_path, 'phpbb') !== false))
+						{
+							$goto_forum_link .= '/ucp.php?mode=register';
+						}
+						else if($config['user_system'] == 'vb' || ($config['user_system'] == 'api' && strpos($script_path, 'vb') !== false))
+						{
+							$goto_forum_link .= '/register.php';
+						}
+					}
+					else
+					{
+						$goto_forum_link = '...';
+					}
+				}
+
+				kleeja_info('<a href="' . $goto_forum_link . '" title="' . $lang['REGISTER'] . '" target="_blank">' . $lang['REGISTER']. '</a>', $lang['REGISTER']);
 			}
 
 			//logon before !
@@ -272,7 +296,7 @@ switch ($_GET['go'])
 				}
 
 				$text = $lang['LOGOUT_SUCCESFUL'] . '<br /> <a href="' .  $config['siteurl']  . '">' . $lang['HOME'] . '</a>';
-				kleeja_info($text, $lang['LOGOUT'], true, $config['siteurl'], 2);
+				kleeja_info($text, $lang['LOGOUT'], true, $config['siteurl'], 1);
 			}
 			else
 			{
@@ -558,11 +582,34 @@ switch ($_GET['go'])
 			$mail		= $usrcp->mail();
 			$show_my_filecp	= $usrcp->get_data('show_my_filecp');
 			$data_forum		= (int) $config['user_system'] == 1 ? true : false ;
-			$goto_forum_link= !empty($forum_path) ? $forum_path : '';
 			$H_FORM_KEYS = kleeja_add_form_key('profile');
 			//no error yet 
 			$ERRORS = false;
-
+			
+			if(!empty($profile_script_path))
+			{
+				$goto_forum_link = $profile_script_path;
+			}
+			else
+			{
+				if(isset($script_path))
+				{
+					$goto_forum_link = ($config['user_system'] == 'api') ? dirname($script_path) : $script_path;
+					if($config['user_system'] == 'phpbb' || ($config['user_system'] == 'api' && strpos($script_path, 'phpbb') !== false))
+					{
+						$goto_forum_link .= '/ucp.php?i=164';
+					}
+					else if($config['user_system'] == 'vb' || ($config['user_system'] == 'api' && strpos($script_path, 'vb') !== false))
+					{
+						$goto_forum_link .= '/profile.php?do=editprofile';
+					}
+				}
+				else
+				{
+					$goto_forum_link = '...';
+				}
+			}
+			
 			//_post
 			$t_pppass_old	= isset($_POST['pppass_old']) ? htmlspecialchars($_POST['pppass_old']) : ''; 
 			$t_ppass_old	= isset($_POST['ppass_old']) ? htmlspecialchars($_POST['ppass_old']) : ''; 

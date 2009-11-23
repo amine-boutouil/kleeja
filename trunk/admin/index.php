@@ -76,7 +76,7 @@ if(
 
 			if(!sizeof($ERRORS))
 			{
-				if($usrcp->data($_POST['lname'], $_POST['lpass'], false, $adm_time, true))
+				if($f = $usrcp->data($_POST['lname'], $_POST['lpass'], false, $adm_time, true))
 				{
 					$_SESSION['USER_SESS'] = session_id();
 					$_SESSION['ADMINLOGIN'] = md5($usrcp->name() . $config['siteurl']);
@@ -92,7 +92,7 @@ if(
 					$ERRORS[] = $lang['LOGIN_ERROR'];
 				}
 			}
-
+var_dump($f);
 			//let's see if there is errors
 			if(sizeof($ERRORS))
 			{

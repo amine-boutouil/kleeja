@@ -18,7 +18,7 @@ if (!defined('IN_COMMON'))
 function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = false, $return_username = false)
 {
 	global $lang, $config, $usrcp, $userinfo;
-	global $script_path, $script_encoding, $script_api_key, $script_prefix, $script_cp1256;
+	global $script_path, $script_api_key, $script_cp1256;
 
 	//URL must be begin with http://
 	if(empty($script_path) || $script_path[0] != 'h')
@@ -33,12 +33,8 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 		big_error('api key', 'To connect to the remote script you have to write the API key ...');
 	}
 
-
-	//check for last slash
-	if(isset($script_path[strlen($script_path)]) && $script_path[strlen($script_path)] == '/')
-	{
-		$script_path = substr($script_path, 0, strlen($script_path));
-	}
+	$pass = empty($script_cp1256) || !$script_cp1256 ? $pass : $usrcp->kleeja_utf8($pass, false);
+	$name = empty($script_cp1256) || !$script_cp1256 || $hashed ? $name : $usrcp->kleeja_utf8($name, false);
 
 	/*
 		@see file : docs/kleeja_(vb,mysmartbb,phpbb)_api.txt
@@ -87,7 +83,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 		define('USER_ID', $user_info[1]);
 		define('USER_NAME', empty($script_cp1256) || !$script_cp1256 ? $user_info[2] : $usrcp->kleeja_utf8($user_info[2]));
 		define('USER_MAIL', $user_info[3]);
-		define('USER_ADMIN',((int) $user_info[5] == 6) ? 1 : 0);
+		define('USER_ADMIN', ((int) $user_info[5] == 1) ? 1 : 0);
 	}
 
 	//user ifo
@@ -97,9 +93,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 	//add cookies
 	if(!$loginadm)
 	{
-		//for cookies
-		$hash_key_expire = sha1(md5($config['h_key']) .  $expire);
-		$usrcp->kleeja_set_cookie('ulogu', $usrcp->en_de_crypt($user_info[1] . '|' . $user_info[4] . '|' . $expire . '|' . $hash_key_expire), $expire);
+		$usrcp->kleeja_set_cookie('ulogu', $usrcp->en_de_crypt($user_info[1] . '|' . $user_info[4] . '|' . $expire . '|' . sha1(md5($config['h_key']) .  $expire)), $expire);
 	}
 
 	//no need after now

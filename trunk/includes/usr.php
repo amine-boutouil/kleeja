@@ -44,12 +44,12 @@ class usrcp
 			if(file_exists(PATH . 'includes/auth_integration/' . trim($config['user_system']) . '.php'))
 			{	
 				include_once (PATH . 'includes/auth_integration/' . trim($config['user_system']) . '.php');
-				return kleeja_auth_login($name, $pass, $hashed, $expire, $loginadm);
+				return (kleeja_auth_login(trim($name), trim($pass), $hashed, $expire, $loginadm) ? true : false);
 			}
 		}
 
 		//normal 
-		return $this->normal($name, $pass, $hashed, $expire, $loginadm);
+		return $this->normal(trim($name), trim($pass), $hashed, $expire, $loginadm);
 	}
 
 	//get username by id
@@ -99,7 +99,7 @@ class usrcp
 		($hook = kleeja_run_hook('qr_select_usrdata_n_usr_class')) ? eval($hook) : null; //run hook			
 		$result = $SQL->build($query);
 
-		if ($SQL->num_rows($result) != 0 ) 
+		if ($SQL->num_rows($result) != 0) 
 		{
 			while($row=$SQL->fetch_array($result))
 			{
@@ -130,7 +130,7 @@ class usrcp
 						$update_query = array(
 									'UPDATE'	=> "`{$dbprefix}users`",
 									'SET'		=> "password='" . $new_password . "' ,password_salt='" . $new_salt . "'",
-									'WHERE'		=>	"id='" . intval($row['id']) ."'"
+									'WHERE'		=>	"id=" . intval($row['id'])
 							);
 
 						$SQL->build($update_query);
@@ -195,17 +195,23 @@ class usrcp
 		get user data
 		new function:1rc5+
 	*/
-	function get_data($type="*", $user_id=false)
+	function get_data($type="*", $user_id = false)
 	{
 		global $dbprefix, $SQL;
 
-		if(!$user_id) $user_id	= $this->id();
+		if(!$user_id)
+		{
+			$user_id = $this->id();
+		}
+		
+		//todo : 
+		//if type != '*' and contains no , and type in 'name, id, email' return $this->id .. etc
 
 		//te get files and update them !!
 		$query_name = array(
 						'SELECT'	=> $type,
 						'FROM'		=> "{$dbprefix}users",
-						'WHERE'		=> "id='". $user_id ."'"
+						'WHERE'		=> "id=" . intval($user_id)
 					);
 
 		($hook = kleeja_run_hook('qr_select_userdata_in_usrclass')) ? eval($hook) : null; //run hook
@@ -288,75 +294,28 @@ class usrcp
 		return true;
 	}
 
-	//clean nicknames
-	function cleanusername ($uname) 
+	//clean usernames
+	function cleanusername($uname) 
 	{
-		$clean_chars = array(
-					'إ' => 'ا',
-					'ؤ' => 'و',
-					'ـ' => '',
-					'ً' => '',
-					'ٌ' => '',
-					'ُ' => '',
-					'َ' => '',
-					'ِ' => '',
-					'ْ' => '',
-					'آ' => 'ا',
-					'ئ' => 'ى',
-					'á'=> 'a',
-					'à'=> 'a',
-					'â'=> 'a',
-					'ã'=> 'a',
-					'ª'=> 'a',
-					'Á'=> 'a',
-					'À'=> 'a',
-					'Â'=> 'a',
-					'Ã'=> 'a',
-					'é'=> 'e',
-					'è'=> 'e',
-					'ê'=> 'e',
-					'É'=> 'e',
-					'È'=> 'e',
-					'Ê'=> 'e',
-					'í'=> 'i',
-					'ì'=> 'i',
-					'î'=> 'i',
-					'Í'=> 'i', 
-					'Ì'=> 'i',
-					'Î'=> 'i',
-					'ò'=> 'o',
-					'ó'=> 'o',
-					'ô'=> 'o',
-					'õ'=> 'o',
-					'º'=> 'o',
-					'Ó'=> 'o',
-					'Ò'=> 'o',
-					'Ô'=> 'o',
-					'Õ'=> 'o',
-					'ú'=> 'u',
-					'ù'=> 'u',
-					'û'=> 'u',
-					'Ú'=> 'u',
-					'Ù'=> 'u',
-					'Û'=> 'u',
-					'ç'=> 'c',
-					'Ç'=> 'c',
-					'Ñ'=> 'n',
-					'ñ'=> 'n',
-					'ÿ' => 'y',
-					'Ë' => 'e',
-					'Ø' => 'o',
-					'Å' => 'a',
-					'å' => 'a',
-					'ï' => 'i',
-					'Ï' => 'i',
-					'ø' => 'o',
-					'ë' => 'e',
+		static $arabic_t = array();
+		static $latin_t = array(
+			array('á','à','â','ã','å','Á','À','Â','Ã','Å','é','è','ê','ë','É','È','Ê','í','ì','ï','î','Í','Ì','Î','Ï','ò','ó','ô','õ','º','ø','Ó','Ò','Ô','Õ','Ø','ú','ù','û','Ú','Ù','Û','ç','Ç','Ñ','ñ','ÿ','Ë'),
+			array('a','a','a','a','a','a','a','a','a','a','e','e','e','e','e','e','e','i','i','i','i','i','i','i','i','o','o','o','o','o','o','o','o','o','o','o','u','u','u','u','u','u','c','c','n','n','y','e')
 		);
 
-    	$uname = str_replace(array_keys($clean_chars), array_values($clean_chars), $uname);
-    	$uname = strtolower($uname);
-    	return $uname;
+		if(empty($arabic_t))
+		{
+			//Arabic chars must be stay in utf8 format, so we encoded them
+			$arabic_t = unserialize(base64_decode('YToyOntpOjA7YToxMjp7aTowO3M6Mjoi2KMiO2k6MTtzOjI6ItilIjtpOjI7czoyOiLYpCI7aTozO3M6Mjoi2YAiO2k6NDtzOjI6Itm' .
+			'LIjtpOjU7czoyOiLZjCI7aTo2O3M6Mjoi2Y8iO2k6NztzOjI6ItmOIjtpOjg7czoyOiLZkCI7aTo5O3M6Mjoi2ZIiO2k6MTA7czoyOiLYoiI7aToxMTtzOjI6ItimIjt9aToxO' .
+			'2E6MTI6e2k6MDtzOjI6ItinIjtpOjE7czoyOiLYpyI7aToyO3M6Mjoi2YgiO2k6MztzOjA6IiI7aTo0O3M6MDoiIjtpOjU7czowOiIiO2k6NjtzOjA6IiI7aTo3O3M6MDoiIjt' . 
+			'pOjg7czowOiIiO2k6OTtzOjA6IiI7aToxMDtzOjI6ItinIjtpOjExO3M6Mjoi2YkiO319'));
+		}
+		$uname = str_replace($latin_t[0], $latin_t[1], $uname); //replace confusable Latin chars
+    	$uname = str_replace($arabic_t[0], $arabic_t[1], $uname); //replace confusable Arabic chars
+		$uname = preg_replace('#(?:[\x00-\x1F\x7F]+|(?:\xC2[\x80-\x9F])+)#', '', $uname); //un-wanted utf8 control chars
+		$uname = preg_replace('# {2,}#', ' ', $uname); //2+ spaces with one space
+    	return strtolower($uname);
 	}
 
 	//depand on phpass class
@@ -376,28 +335,15 @@ class usrcp
 	function kleeja_set_cookie($name, $value, $expire)
 	{
 		global $config;
-		
-		/*
-		$c_domain = !empty($_SERVER['HTTP_HOST']) ? strtolower($_SERVER['HTTP_HOST']) : (!empty($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : getenv('SERVER_NAME'));
 
-		if ($config['cookie_domain'] == '')
-		{
-			$config['cookie_domain'] = $c_domain;
-		}
-		else if(strpos($config['cookie_domain'], 'localhost') !== false)
-		{
-			$config['cookie_domain'] = '';
-		}
-		*/
-		
 		//
 		//when user add cookie_* in config this will replace the current ones
 		//
-		global $cookie_name, $cookie_domian, $cookie_secure, $cookie_path;
-		$config['cookie_name']		= isset($cookie_name) ? $cookie_name : $config['cookie_name'];
-		$config['cookie_domain']	= isset($cookie_domain) ? $cookie_domain : $config['cookie_domain'];
-		$config['cookie_secure']	= isset($cookie_secure) ? $cookie_secure : $config['cookie_secure'];
-		$config['cookie_path']		= isset($cookie_path) ? $cookie_path : $config['cookie_path'];
+		global $config_cookie_name, $config_cookie_domian, $config_cookie_secure, $config_cookie_path;
+		$config['cookie_name']		= isset($config_cookie_name) ? $config_cookie_name : $config['cookie_name'];
+		$config['cookie_domain']	= isset($config_cookie_domain) ? $config_cookie_domain : $config['cookie_domain'];
+		$config['cookie_secure']	= isset($config_cookie_secure) ? $config_cookie_secure : $config['cookie_secure'];
+		$config['cookie_path']		= isset($config_cookie_path) ? $config_cookie_path : $config['cookie_path'];
 
 		//
 		//when user add define('FORCE_COOKIES', true) in config.php we will make our settings of cookies
@@ -446,7 +392,7 @@ class usrcp
 	function en_de_crypt($data, $type = 1)
 	{
 		global $config;
-		static $txt;
+		static $txt = array();
 
 		if(empty($txt))
 		{
@@ -455,7 +401,6 @@ class usrcp
 				$config['h_key'] = '2^#@qr39)]k%$_-(';//default !
 			}
 			$chars = str_split($config['h_key']);
-			$txt = array();
 			foreach(range('a', 'z') as $k=>$v)
 			{
 				if(!isset($chars[$k]))
@@ -510,6 +455,10 @@ class usrcp
 			//if not expire 
 			if(($hashed_expire == sha1(md5($config['h_key']) . $expire_at)) && ($expire_at > time()))
 			{
+				//todo : 
+				//i think we need to use this if and only if he is admin and in other case return true !
+				//check == admin ... $this->data .. 
+				//else $user_data = true...
 				$user_data = $this->data($user_id, $hashed_password, true, $expire_at);
 			}
 
@@ -522,25 +471,113 @@ class usrcp
 				return $user_data;
 			}
 		}
-		else
-		{
-			return false;//nothing
-		}
+
+		return false; //nothing
 	}
 	
+
 	/*
 	* convert from utf8 to cp1256 and vice versa
 	*/
 	function kleeja_utf8($str, $to_utf8 = true)
 	{
+		$utf8 = new kleeja_utf8;
 		if($to_utf8)
 		{
-			return iconv('CP1256', "UTF-8//IGNORE", $str);
+			//return iconv('CP1256', "UTF-8//IGNORE", $str);
+			return $utf8->to_utf8($str);
 		}
-		return iconv('UTF-8', "CP1256//IGNORE", $str);
+		return $utf8->from_utf8($str);
+		//return iconv('UTF-8', "CP1256//IGNORE", $str);
 	}
 
 }#end class
 
+
+/**
+* Deep modifieded by Kleeja team ...
+* depend on class by Alexander Minkovsky (a_minkovsky@hotmail.com)
+*/
+class kleeja_utf8
+{
+	var $ascMap = array();
+	var $utfMap = array();
+	//ignore the untranslated char, of you put true we will translate it to html tags
+	//it's same the action of //IGNORE in iconv
+	var $ignore = false;
+
+	//Constructor
+	function kleeja_utf8()
+	{
+		static $lines = array();
+		if(empty($lines))
+		{
+			$lines = explode("\n", preg_replace(array("/#.*$/m", "/\n\n/"), '', file_get_contents(PATH . 'includes/CP1256.MAP')));
+		}
+		if(empty($this->ascMap))
+		{
+			foreach($lines as $line)
+			{
+				$parts = explode('0x', $line);
+				if(sizeof($parts) == 3)
+					$this->ascMap[hexdec(trim($parts[1]))] = hexdec(trim($parts[2]));
+			}
+			$this->utfMap = array_flip($this->ascMap);
+		}
+	}
+
+	//Translate string ($str) to UTF-8 from given charset
+	function to_utf8($str)
+	{
+		$chars = unpack('C*', $str);
+		$cnt = sizeof($chars);
+		for($i=1;$i <= $cnt; ++$i)
+			$this->_charToUtf8($chars[$i]);
+		return implode('', $chars);
+	}
+
+	//Translate UTF-8 string to single byte string in the given charset
+	function from_utf8($utf)
+	{
+		$chars = unpack('C*', $utf);
+		$cnt = sizeof($chars);
+		$res = ''; //No simple way to do it in place... concatenate char by char
+		for ($i=1;$i<=$cnt;$i++)
+			$res .= $this->_utf8ToChar($chars, $i);
+		return $res;
+	}
+
+	//Char to UTF-8 sequence
+	function _charToUtf8(&$char)
+	{
+		$c = (int) $this->ascMap[$char];
+		if ($c < 0x80)
+			$char = chr($c);
+		else if($c<0x800) // 2 bytes
+			$char = (chr(0xC0 | $c>>6) . chr(0x80 | $c & 0x3F));
+		else if($c<0x10000) // 3 bytes
+			$char = (chr(0xE0 | $c>>12) . chr(0x80 | $c>>6 & 0x3F) . chr(0x80 | $c & 0x3F));
+		else if($c<0x200000) // 4 bytes
+			$char = (chr(0xF0 | $c>>18) . chr(0x80 | $c>>12 & 0x3F) . chr(0x80 | $c>>6 & 0x3F) . chr(0x80 | $c & 0x3F));
+	}
+
+	//UTF-8 sequence to single byte character
+	function _utf8ToChar(&$chars, &$idx)
+	{
+		if(($chars[$idx] >= 240) && ($chars[$idx] <= 255))// 4 bytes
+			$utf = (intval($chars[$idx]-240)   << 18) + (intval($chars[++$idx]-128) << 12) + (intval($chars[++$idx]-128) << 6) + (intval($chars[++$idx]-128) << 0);
+		else if (($chars[$idx] >= 224) && ($chars[$idx] <= 239)) // 3 bytes
+			$utf = (intval($chars[$idx]-224)   << 12) + (intval($chars[++$idx]-128) << 6) + (intval($chars[++$idx]-128) << 0);
+		else if (($chars[$idx] >= 192) && ($chars[$idx] <= 223))// 2 bytes
+			$utf = (intval($chars[$idx]-192)   << 6) + (intval($chars[++$idx]-128) << 0);
+		else// 1 byte
+			$utf = $chars[$idx];
+
+		if(array_key_exists($utf, $this->utfMap))
+			return chr($this->utfMap[$utf]);
+		else
+		  return $this->ignore ? '' : '&#' . $utf . ';';
+	}
+}
 
 #<-- EOF

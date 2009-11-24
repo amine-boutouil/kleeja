@@ -1,0 +1,23 @@
+<div class="home">
+{{echo $lang['PLUGINS_INSTALLED'];}}
+<table style="width: 100%">
+	<tr>
+		<td>{{echo $lang['PLUGINS_NAME']}}</td>
+		<td>{{echo $lang['PLUGINS_DES']}}</td>
+		<td>{{echo $lang['PLUGINS_VER']}}</td>
+	</tr>
+
+{{foreach($GLOBALS['installed_plugins'] as $plugin):}}
+<tr>
+<td>{{echo $plugin['p_name']}}</td>
+<td>{{echo $plugin['p_des']}}</td>
+<td>{{echo $plugin['p_ver']}}</td>
+</tr>
+{{endforeach;}}
+
+</table>
+</div>
+
+	<form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=end&' . getlang(1)}}">
+			<input name="agres" type="submit" value="{{echo $lang['INST_NEXT']}}"/>
+	</form>

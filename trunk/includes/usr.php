@@ -89,7 +89,7 @@ class usrcp
 		
 		if($hashed)
 		{
-			$query['WHERE'] = "id='" . $SQL->escape(intval($name)) . "' and password='" . $SQL->escape($pass) . "'";
+			$query['WHERE'] = "id=" . intval($name) . " and password='" . $SQL->escape($pass) . "'";
 		}
 		else
 		{

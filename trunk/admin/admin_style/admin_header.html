@@ -67,17 +67,34 @@
 
 <!-- start admin menu right  -->
 <IF NAME="SHOW_LIST">
+<IF NAME="MINI_MENU">
+<div id="main_menu" style="width:160px">	
+	<div class="body_menu">
+	<div class="link_menu"><p><a title="{lang.RETURN_HOME}" href="{config.siteurl}"><img src="{STYLE_PATH_ADMIN}images/index_button.gif" alt="{lang.RETURN_HOME}" /></a></p></div>
+	<div class="link_menu"><p><a title="{lang.R_CPINDEX}" href="./"><img src="{STYLE_PATH_ADMIN}images/cp_button.gif" alt="{lang.R_CPINDEX}" /></a></p></div>
+<LOOP NAME="adm_extensions_menu">	
+	<div class="({{current}}?link_menu link_current:link_menu)"><p><a title="{{lang}}" href="{{link}}" <IF LOOP="confirm"> onclick="javascript:return confirm_from();"</IF>><img src="{{icon}}" alt="{{lang}}" /></a></p></div>
+</LOOP>
+	</div>
+<!-- start clear  -->
+<div class="clr"></div>
+<!-- end clear  -->
+<a href="{link_expand_menu}"><img src="{STYLE_PATH_ADMIN}images/expand_horizontal.gif" alt="{lang.RETURN_HOME}" style="float:left;" /></a>
+</div>
+<ELSE>
 <div id="main_menu">	
 	<div class="body_menu">
 	<div class="link_menu"><p><a title="{lang.RETURN_HOME}" href="{config.siteurl}"><img src="{STYLE_PATH_ADMIN}images/index_button.gif" alt="{lang.RETURN_HOME}" /><br />{lang.RETURN_HOME}</a></p></div>
 	<div class="link_menu"><p><a title="{lang.R_CPINDEX}" href="./"><img src="{STYLE_PATH_ADMIN}images/cp_button.gif" alt="{lang.R_CPINDEX}" /><br />{lang.R_CPINDEX}</a></p></div>
 <LOOP NAME="adm_extensions_menu">	
 	<div class="({{current}}?link_menu link_current:link_menu)"><p><a title="{{lang}}" href="{{link}}" <IF LOOP="confirm"> onclick="javascript:return confirm_from();"</IF>><img src="{{icon}}" alt="{{lang}}" /><br />{{lang}}</a></p></div>
-</LOOP>	
+</LOOP>
 	</div>
 <!-- start clear  -->
 <div class="clr"></div>
 <!-- end clear  -->
+<a href="{link_expand_menu}"><img src="{STYLE_PATH_ADMIN}images/expand_horizontal.gif" alt="{lang.RETURN_HOME}" style="float:left;" /></a>
 </div>
+</IF>
 </IF>
 <!-- end admin menu right -->

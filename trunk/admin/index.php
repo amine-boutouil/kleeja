@@ -259,6 +259,27 @@ if(empty($stylee))
 	$stylee = 'admin_info';
 }
 
+//is mini menu is enabled !
+
+
+if(isset($_GET['expand_menu']))
+{
+	update_config('expand_menu', intval($_GET['expand_menu']));
+	$config['expand_menu'] = intval($_GET['expand_menu']);
+}
+
+
+if((int) $config['expand_menu'] == 0 || empty($config['expand_menu']))
+{
+	$MINI_MENU = false;
+	$link_expand_menu = basename(ADMIN_PATH) . '?cp=' . $go_to . '&amp;expand_menu=1';
+}
+else
+{
+	$MINI_MENU = true;
+	$link_expand_menu = basename(ADMIN_PATH) . '?cp=' . $go_to . '&amp;expand_menu=0';
+}
+
 //header
 echo $tpl->display("admin_header");
 	//body

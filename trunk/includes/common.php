@@ -62,6 +62,8 @@ if(function_exists('ini_set'))
 	ini_set('session.use_trans_sid', true);
 	ini_set('session.cookie_lifetime', $s_time);
 	ini_set('session.gc_maxlifetime', $s_time);
+	//& is not valid xhtml, so we replaced with &amp;
+	ini_set('arg_separator.output', '&amp;');
 	//
 	//this will help people with some problem with their sessions path
 	//

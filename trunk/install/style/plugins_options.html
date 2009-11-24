@@ -1,0 +1,27 @@
+<div class="home" dir="{{echo $lang['DIR']}}" style="text-align:{{echo $lang['DIR']=='rtl'?'right':'left'}};">
+
+<div class="clr"></div>	
+{{echo $lang['PLUGINS_BUILT_IN'];}}
+	<form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=plugins&amp;' . getlang(1)}}">
+	<table style="width: 100%">
+	<tr>
+		<td>{{echo $lang['PLUGINS_NAME']}}</td>
+		<td>{{echo $lang['PLUGINS_DES']}}</td>
+		<td>{{echo $lang['PLUGINS_VER']}}</td>
+		<td></td>
+	</tr>
+
+{{foreach($GLOBALS['plugins'] as $plugin):}}
+<tr>
+<td>{{echo $plugin['p_name']}}</td>
+<td>{{echo $plugin['p_des']}}</td>
+<td>{{echo $plugin['p_ver']}}</td>
+<td><input type="checkbox" name="plugin_file[]" value="{{echo $plugin['p_file']}}" checked="checked" /></td>
+</tr>
+{{endforeach;}}
+</table>
+	<center style="margin-top:10px;">
+		<input name="datasubmit" type="submit" value="{{echo $lang['INST_NEXT']}}" />
+	</center>
+</form>
+</div>

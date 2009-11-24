@@ -622,7 +622,7 @@ function process ()
 		global $SQL, $dbprefix, $config, $lang;
 
 				// sometime cant see file after uploading.. but ..
-				@chmod($folderee . '/' . $filname , 0755); //0755
+				@chmod($folderee . '/' . $filname , 0644); //0644
 				
 				$name 	= (string)	$SQL->escape($filname);
 				$size	= (int) 	$sizeee;

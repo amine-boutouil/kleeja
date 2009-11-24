@@ -122,5 +122,12 @@
 	$lang['WZ_TXT_W2'] = 'Control all extensions and sizes you want allow to be uploaded';
 	$lang['WZ_TXT_W3'] = 'Select , control and edit all your styles  ..';
 	$lang['WZ_TXT_W4'] = 'Set your terms or the the rules you want  ...';
+	
+	//PLUGINS
+	$lang['PLUGINS_BUILT_IN']					= 'е–е «÷«Ё«   √ н гЏ ябнћ« »‘яб «Ё —«÷н , «–« «—ѕ  «“«б…  ÷гнд «Ќѕе« Ёяб г«Џбня еж «“«б… «б Џбнг Џбне« , жбяд дд’Ќя »Џѕг ЁЏб –бя б«д е–е «б«÷«Ё«   г «б Ќёё где« жен гЁнѕе бЏгб ябнћ« »‘яб ћнѕ ... ';
+	$lang['PLUGINS_NAME']						= '«”г «б«÷«Ё…';
+	$lang['PLUGINS_VER']						= '«’ѕ«— «б«÷«Ё…';
+	$lang['PLUGINS_DES']						= 'ж’Ё «б«÷«Ё…';	
+	$lang['PLUGINS_INSTALLED']					= ' г  Ћ»н  е–е «б«÷«Ё«  »дћ«Ќ !!';	
 
 //<-- EOF

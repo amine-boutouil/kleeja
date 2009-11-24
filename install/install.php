@@ -39,7 +39,7 @@ include_once ('includes/functions_install.php');
 //
 // Kleeja must be safe ..
 //
-if(!empty($dbuser) && !empty($dbname) && !(isset($_GET['step']) && in_array($_GET['step'], array('end', 'wizard'))))
+if(!empty($dbuser) && !empty($dbname) && !(isset($_GET['step']) && in_array($_GET['step'], array('plugins', 'end', 'wizard'))))
 {
 	$d = inst_get_config('language');
 	if(!empty($d))
@@ -254,27 +254,6 @@ case 'data' :
 			}
 
 		}#for
-
-		if (!$err)
-		{
-			//install built in plugins
-			$pl_path = "includes/plugins";
-			$dh = opendir($pl_path);
-			while (($file = readdir($dh)) !== false)
-			{
-				$e	= @explode(".", $file);
-				$e	= strtolower($e[sizeof($e)-1]);
-				
-				if($e == "xml") //only plugins ;)
-				{
-					//install them
-					creat_plugin_xml(@file_get_contents($pl_path . '/' . $file));
-				}
-			}
-			@closedir($dh);
-			//clean cache
-			delete_cache(null, true);
-		}
 		
 		echo gettpl('sqls_done.html');
 
@@ -285,6 +264,72 @@ case 'data' :
 		echo gettpl('data.html');
 	}
 
+break;
+case 'plugins' :
+	//connect .. for check
+	$SQL = new SSQL($dbserver, $dbuser, $dbpass, $dbname);
+	//install built in plugins
+	$pl_path = "includes/plugins";
+	if (isset($_POST['datasubmit']))
+	{
+			$p = $_POST['plugin_file'];
+			if(empty($p))
+			{
+				header('Location: ' . $_SERVER['PHP_SELF'] . '?step=end&' . getlang(1));
+			}
+			
+			//search for plugins
+			foreach($p as $file)
+			{				
+				if(file_exists($pl_path . '/' . $file)) //only plugins ;)
+				{
+					$contents 	= @file_get_contents($pl_path . '/' . $file);
+					$gtree 		= xml_to_array($contents);
+				
+					if($gtree != false) //great !! it's well-formed xml 
+					{
+						$installed_plugins[] = array(
+						'p_file' => $file,
+						'p_name' =>  $SQL->escape($gtree['kleeja']['info']['plugin_name']['value']),
+						'p_ver'  => $SQL->escape($gtree['kleeja']['info']['plugin_version']['value']),
+						'p_des'  => $SQL->escape($gtree['kleeja']['info']['plugin_description']['value']),
+						//'p_size' => @filesize($pl_path . '/' . $file),
+						);
+						//install them
+						creat_plugin_xml($contents);
+					}
+				}
+			}
+			//clean cache
+			delete_cache(null, true);
+			echo gettpl('plugins_done.html');
+	}
+	else
+	{
+		$dh = opendir($pl_path);
+		while (($file = readdir($dh)) !== false)
+		{
+			$e	= @explode(".", $file);
+			$e	= strtolower($e[sizeof($e)-1]);
+			if($e == "xml") //only plugins ;)
+			{
+				$contents 	= @file_get_contents($pl_path . '/' . $file);
+				$gtree 		= xml_to_array($contents);
+				
+				if($gtree != false) //great !! it's well-formed xml 
+				{
+					$plugins[]	= array(
+					'p_file' => $file,
+					'p_name' =>  $SQL->escape($gtree['kleeja']['info']['plugin_name']['value']),
+					'p_ver'  => $SQL->escape($gtree['kleeja']['info']['plugin_version']['value']),
+					'p_des'  => $SQL->escape($gtree['kleeja']['info']['plugin_description']['value']),
+					//'p_size' => @filesize($pl_path . '/' . $file),
+					);
+				}
+			}			
+		}
+		echo gettpl('plugins_options.html');
+	}
 break;
 
 case 'end' :

@@ -10,7 +10,7 @@
 </div>
 
 {{if (!$GLOBALS['err']):}}
-	<form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=end&' . getlang(1)}}">
+	<form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=plugins&' . getlang(1)}}">
 			<input name="agres" type="submit" value="{{echo $lang['INST_NEXT']}}"/>
 	</form>
 {{else:}}

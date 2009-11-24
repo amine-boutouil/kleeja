@@ -125,6 +125,21 @@ if(
 	exit;
 }#end login
 
+
+//ummm let's say it's illegal action
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && defined('STOP_CSRF'))
+{
+	$t_reff = explode('/', $_SERVER['HTTP_REFERER']);
+	$t_host = explode('/', $_SERVER['HTTP_HOST']);
+	if ($t_reff[2] != $t_host[0])
+	{
+		$usrcp->logout_cp();
+		redirect($config['siteurl']);
+		$SQL->close();
+		exit;
+	}
+}
+
 (!defined('LAST_VISIT')) ? define('LAST_VISIT', time() - 3600*12) : '';
 
 //path of admin extensions

@@ -439,11 +439,12 @@ class SSQL
 					//some ppl want hide their table names, not in develoment stage
 					if(!defined('DEV_STAGE'))
 					{
-						$error_sql = preg_replace("#\s{1,3}{$dbprefix}([a-z0-9]+)\s{1,3}#e", "' <span style=\"color:blue\">' . substr('$1', 0, 1) . '</span> '", $error_sql);
-						$error_msg = preg_replace("#\s{1,3}{$dbprefix}([a-z0-9]+)\s{1,3}#e", "' <span style=\"color:blue\">' . substr('$1', 0, 1) . '</span> '", $error_msg);
+						$error_sql = preg_replace("#\s{1,3}`*{$dbprefix}([a-z0-9]+)`*\s{1,3}#e", "' <span style=\"color:blue\">' . substr('$1', 0, 1) . '</span> '", $error_sql);
+						$error_msg = preg_replace("#{$this->db_name}.{$dbprefix}([a-z0-9]+)#e", "' <span style=\"color:blue\">' . substr('$1', 0, 1) . '</span> '", $error_msg);
 						$error_sql = preg_replace("#\s{1,3}(from|update|into)\s{1,3}([a-z0-9]+)\s{1,3}#ie", "' $1 <span style=\"color:blue\">' . substr('$2', 0, 1) . '</span> '", $error_sql);
 						$error_msg = preg_replace("#\s{1,3}(from|update|into)\s{1,3}([a-z0-9]+)\s{1,3}#ie", "' $1 <span style=\"color:blue\">' . substr('$2', 0, 1) . '</span> '", $error_msg);
 						$error_msg = preg_replace("#\s'([^']+)'@'([^']+)'#ie", "' <span style=\"color:blue\">hidden</span>@$2 '", $error_msg);
+						$error_sql = preg_replace("#password\s*=\s*'[^']+'#i", "password='<span style=\"color:blue\">hidden</span>'", $error_sql);
 					}
 					
 					echo "<html><head><title>ERROR IM MYSQL</title>";

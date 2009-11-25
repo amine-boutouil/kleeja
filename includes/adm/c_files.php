@@ -91,12 +91,12 @@ if(isset($_GET['deletefiles']))
 	while($row=$SQL->fetch_array($result))
 	{
 			//delete from folder ..
-			@kleeja_unlink ($root_path . $row['folder'] . "/" . $row['name']);
+			@kleeja_unlink (PATH . $row['folder'] . "/" . $row['name']);
 
 			//delete thumb
-			if (file_exists($root_path . $row['folder'] . "/thumbs/" . $row['name']))
+			if (file_exists(PATH . $row['folder'] . "/thumbs/" . $row['name']))
 			{
-				@kleeja_unlink ($root_path . $row['folder'] . "/thumbs/" . $row['name']);
+				@kleeja_unlink (PATH . $row['folder'] . "/thumbs/" . $row['name']);
 			}
 
 			$ids[] = $row['id'];
@@ -246,7 +246,7 @@ if ($nums_rows > 0)
 		//make new lovely arrays !!
 		$arr[]	= array(
 						'id' => $row['id'],
-						'name' => "<a title=\" " . ($row['real_filename'] == '' ? $row['name'] : $row['real_filename']) . "\" href=\"./" . $root_path . $row['folder'] . "/" . $row['name'] . "\" target=\"blank\">" . ($row['real_filename'] == '' ? ((strlen($row['name']) > 20) ? substr($row['name'], 0, 20) . '...' : $row['name']) : ((strlen($row['real_filename']) > 20) ? substr($row['real_filename'], 0, 20) . '...' : $row['real_filename'])) . "</a>",
+						'name' => "<a title=\" " . ($row['real_filename'] == '' ? $row['name'] : $row['real_filename']) . "\" href=\"./" . PATH . $row['folder'] . "/" . $row['name'] . "\" target=\"blank\">" . ($row['real_filename'] == '' ? ((strlen($row['name']) > 20) ? substr($row['name'], 0, 20) . '...' : $row['name']) : ((strlen($row['real_filename']) > 20) ? substr($row['real_filename'], 0, 20) . '...' : $row['real_filename'])) . "</a>",
 						'size' => Customfile_size($row['size']),
 						'ups' => $row['uploads'],
 						'time' => date('d-m-Y H:i a', $row['time']),
@@ -266,11 +266,11 @@ if ($nums_rows > 0)
 			if ($del[$row['id']])
 			{
 				//delete from folder ..
-				@kleeja_unlink ($root_path . $row['folder'] . '/' . $row['name']);
+				@kleeja_unlink (PATH . $row['folder'] . '/' . $row['name']);
 				//delete thumb
 				if (is_file($row['folder'] . '/thumbs/' . $row['name'] ))
 				{
-					@kleeja_unlink ($root_path . $row['folder'] . '/thumbs/' . $row['name']);
+					@kleeja_unlink (PATH . $row['folder'] . '/thumbs/' . $row['name']);
 				}
 				
 				$ids[] = $row['id'];

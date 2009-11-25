@@ -39,7 +39,7 @@ switch ($_GET['sty_t'])
 
 		//get styles
 		$arr = array();
-		if ($dh = @opendir($root_path . 'styles'))
+		if ($dh = @opendir(PATH . 'styles'))
 		{
 			while (($file = @readdir($dh)) !== false)
 			{
@@ -63,7 +63,7 @@ switch ($_GET['sty_t'])
 
 			//is there any possiplity to write on files
 			$not_style_writeable = true;
-			$d_style_path = $root_path . 'styles/' . $style_id; 
+			$d_style_path = PATH . 'styles/' . $style_id; 
 			if (!is_writable($d_style_path))
 			{
 				@chmod($d_style_path, 0777);
@@ -91,7 +91,7 @@ switch ($_GET['sty_t'])
 
 					//get backup templates
 					$show_bk_templates = false;
-					include_once  $root_path . 'includes/bk_templates.php';
+					include_once  PATH . 'includes/bk_templates.php';
 					if (version_compare(strtolower(KLEEJA_VERSION), strtolower($bk_version), '='))
 					{
 						$show_bk_templates = true;
@@ -208,8 +208,8 @@ switch ($_GET['sty_t'])
 
 			//tpl name 
 			$tpl_name =	$SQL->escape($_REQUEST['tpl_choose']);
-			$tpl_path = $root_path . 'styles/' . $style_id . '/' . $tpl_name;
-			$d_style_path = $root_path . 'styles/' . $style_id; 
+			$tpl_path = PATH . 'styles/' . $style_id . '/' . $tpl_name;
+			$d_style_path = PATH . 'styles/' . $style_id; 
 
 			if(!file_exists($tpl_path))
 			{
@@ -243,7 +243,7 @@ switch ($_GET['sty_t'])
 			
 					//is there any possiablity to write on files
 					$not_style_writeable = true;
-					$d_style_path = $root_path . 'styles/' . $style_id; 
+					$d_style_path = PATH . 'styles/' . $style_id; 
 					$lang['STYLE_DIR_NOT_WR'] = sprintf($lang['STYLE_DIR_NOT_WR'], $d_style_path);
 					if (!is_writable($d_style_path))
 					{
@@ -291,7 +291,7 @@ switch ($_GET['sty_t'])
 			$style_id = str_replace('..', '', $SQL->escape($_POST['style_id']));
 			//tpl name 
 			$tpl_name =	htmlspecialchars_decode($_POST['tpl_choose']);
-			$tpl_path = $root_path . 'styles/' . $style_id . '/' . $tpl_name;
+			$tpl_path = PATH . 'styles/' . $style_id . '/' . $tpl_name;
 			$tpl_content = stripslashes($_POST['template_content']);
 
 			//try to make template writable
@@ -335,12 +335,12 @@ switch ($_GET['sty_t'])
 			$style_id = str_replace('..', '', $SQL->escape($_POST['style_id']));
 			//tpl name 
 			$tpl_name =	str_replace(array('..', '.html', '.php'), '', $_POST['new_tpl']);
-			$tpl_path = $root_path . 'styles/' . $style_id . '/' . $tpl_name . '.html';
+			$tpl_path = PATH . 'styles/' . $style_id . '/' . $tpl_name . '.html';
 	
 			//same name, exists before, let's edit it
 			if(file_exists($tpl_path))
 			{
-				$tpl_path = $root_path . 'styles/' . $style_id . '/' . str_replace('.html', substr(uniqid('_'), 0, 5) . '.html', $tpl_name);
+				$tpl_path = PATH . 'styles/' . $style_id . '/' . str_replace('.html', substr(uniqid('_'), 0, 5) . '.html', $tpl_name);
 			}
 				
 			$tpl_content = '';
@@ -369,7 +369,7 @@ switch ($_GET['sty_t'])
 			//style id 
 			$style_id = str_replace('..', '', $SQL->escape($_POST['style_id']));
 			$tpl_name = str_replace('..', '', $SQL->escape($_POST['tpl_choose']));
-			include_once  $root_path . 'includes/bk_templates.php';
+			include_once  PATH . 'includes/bk_templates.php';
 
 			if(!isset($bkup_templates[$tpl_name]))
 			{
@@ -377,7 +377,7 @@ switch ($_GET['sty_t'])
 				exit;
 			}
 
-			$tpl_path = $root_path . 'styles/' . $style_id . '/' . $tpl_name;
+			$tpl_path = PATH . 'styles/' . $style_id . '/' . $tpl_name;
 
 			if(is_writable($tpl_path))
 			{
@@ -395,15 +395,15 @@ switch ($_GET['sty_t'])
 										'action_text'	=> base64_decode($bkup_templates[$tpl_name]),
 									);
 
-				if(file_exists($root_path . 'cache/styles_cached.php'))
+				if(file_exists(PATH . 'cache/styles_cached.php'))
 				{
-					$cached_content = file_get_contents($root_path . 'cache/styles_cached.php');
+					$cached_content = file_get_contents(PATH . 'cache/styles_cached.php');
 					$cached_content = base64_decode($cached_content);
 					$cached_content = unserialize($cached_content);
 					$cached += $cached_content;
 				}
 
-				$filename = @fopen($root_path . 'cache/styles_cached.php' , 'w');
+				$filename = @fopen(PATH . 'cache/styles_cached.php' , 'w');
 				@fwrite($filename, base64_encode(serialize($cached)));
 				@fclose($filename);
 			}
@@ -420,14 +420,14 @@ switch ($_GET['sty_t'])
 	//is not writable
 	case 'cached':
 
-		$cached_file = $root_path . 'cache/styles_cached.php';
+		$cached_file = PATH . 'cache/styles_cached.php';
 
 		//delete cached styles
 		if(isset($_GET['del']))
 		{
 			delete_cache('styles_cached');
-			$text = $lang['CACHED_STYLES_DELETED'];
-			$stylee = 'admin_info';
+			$text	= $lang['CACHED_STYLES_DELETED'];
+			$stylee	= 'admin_info';
 		}
 		elseif(!file_exists($cached_file))
 		{
@@ -527,20 +527,20 @@ switch ($_GET['sty_t'])
 	case 'bk':
 
 		//must be writable
-		if(!is_writable($root_path . 'includes/bk_templates.php') || !defined('DEV_STAGE'))
+		if(!is_writable(PATH . 'includes/bk_templates.php') || !defined('DEV_STAGE'))
 		{
 			redirect(basename(ADMIN_PATH));
 		}
 
 		//default must be here
-		$style_folder = $root_path . 'styles/default/';
+		$style_folder = PATH . 'styles/default/';
 		if (!$dh = @opendir($style_folder))
 		{
 			redirect(basename(ADMIN_PATH));
 		}
 
 		//open bk_template.php to write contents of templates to it.
-		$bkf = @fopen($root_path . 'includes/bk_templates.php', 'wb');
+		$bkf = @fopen(PATH . 'includes/bk_templates.php', 'wb');
 
 		$bkf_contents = "<" . "?php\n//\n//bakup of Kleeja templates\n//\n\n//no for directly open\nif (!defined('IN_COMMON'))\n{";
 		$bkf_contents .= "\n\texit();\n}\n\n//for version\n\$bk_version = '" . KLEEJA_VERSION . "';";

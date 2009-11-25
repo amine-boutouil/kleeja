@@ -40,7 +40,7 @@ if (isset($_POST['submit']))
 
 //get languages
 $lngfiles = '';
-if ($dh = @opendir($root_path . 'lang'))
+if ($dh = @opendir(PATH . 'lang'))
 {
 	while (($file = readdir($dh)) !== false)
 	{

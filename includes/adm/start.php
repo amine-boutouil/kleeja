@@ -136,7 +136,7 @@ if((time() - $v['last_check']) > 86400 && !$v['msg_appeared'] && $_SERVER['SERVE
 
 //cached templates
 $there_is_cached = false;
-$cached_file = $root_path . 'cache/styles_cached.php';
+$cached_file = PATH . 'cache/styles_cached.php';
 if(file_exists($cached_file))
 {
 	$ADM_NOTIFICATIONS[]  = array(
@@ -147,17 +147,17 @@ if(file_exists($cached_file))
 }
 
 //if config not safe
-if((bool) (@fileperms($root_path . 'config.php') & 0x0002))
+if((bool) (@fileperms(PATH . KLEEJA_CONFIG_FILE) & 0x0002))
 {
 	$ADM_NOTIFICATIONS[]  = array('id' => 'config_perm', 'msg_type'=> 'info', 'title'=> $lang['NOTE'], 'msg'=> $lang['CONFIG_WRITEABLE']);
 }
 
 //no htaccess
-if(!file_exists($root_path . $config['foldername'] . '/.htaccess'))
+if(!file_exists(PATH . $config['foldername'] . '/.htaccess'))
 {
 	$ADM_NOTIFICATIONS[]  = array('id' => 'htaccess_u', 'msg_type'=> 'error', 'title'=> $lang['WARN'], 'msg'=> sprintf($lang['NO_HTACCESS_DIR_UP'], $config['foldername']));
 }
-if(!file_exists($root_path . $config['foldername'] . '/thumbs/.htaccess'))
+if(!file_exists(PATH . $config['foldername'] . '/thumbs/.htaccess'))
 {
 	$ADM_NOTIFICATIONS[]  = array('id' => 'htaccess_t', 'msg_type'=> 'error', 'title'=> $lang['WARN'], 'msg'=> sprintf($lang['NO_HTACCESS_DIR_UP_THUMB'], $config['foldername'] . '/thumbs'));
 }
@@ -192,9 +192,9 @@ $sql_debug = false;
 if(defined('DEV_STAGE'))
 {
 	$sql_debug_c = '';
-	if(file_exists($root_path . 'cache/kleeja_log.log'))
+	if(file_exists(PATH . 'cache/kleeja_log.log'))
 	{
-		$sql_debug_c = file_get_contents($root_path . 'cache/kleeja_log.log');
+		$sql_debug_c = file_get_contents(PATH . 'cache/kleeja_log.log');
 	}
 
 	preg_match_all("/\[([^\]]+)\]([^\[]+)\[time : ([^\]]+)\]/", $sql_debug_c, $matches, PREG_SET_ORDER);

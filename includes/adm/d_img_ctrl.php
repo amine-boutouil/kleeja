@@ -114,11 +114,11 @@ if ($nums_rows > 0)
 			if ($del[$row['id']])
 			{
 				//delete from folder ..
-				@kleeja_unlink ($root_path . $row['folder'] . '/' . $row['name']);
+				@kleeja_unlink (PATH . $row['folder'] . '/' . $row['name']);
 				//delete thumb
-				if (file_exists($root_path . $row['folder'] . '/thumbs/' . $row['name'] ))
+				if (file_exists(PATH . $row['folder'] . '/thumbs/' . $row['name'] ))
 				{
-					@kleeja_unlink ($root_path . $row['folder'] . '/thumbs/' . $row['name'] );
+					@kleeja_unlink (PATH . $row['folder'] . '/thumbs/' . $row['name'] );
 				}
 				$ids[] = $row['id'];
 				$num++;		

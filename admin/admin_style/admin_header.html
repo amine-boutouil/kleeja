@@ -27,6 +27,7 @@
 <script type="text/javascript">
 <!--
 	var STYLE_PATH_ADMIN = '{STYLE_PATH_ADMIN}';
+	var PATH_SPACER = '{STYLE_PATH_ADMIN}images/spacer.gif';
 
 	function confirm_from()
 	{
@@ -37,13 +38,19 @@
 	}
 //-->
 </script>
-<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/pc.js"></script> 
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}js/tips.js"></script> 
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.js"></script> 
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.lightbox.js"></script> 
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.pulse.js"></script> 
+<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.checkbox.min.js"></script>
+<script type="text/javascript">
+<!--
+$(document).ready(function() {
+	$('input:checkbox').checkbox();
+});
+//-->
+</script>
 </head>
-
 <body>
 <!-- start top div header  -->
 <div id="divheader">

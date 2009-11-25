@@ -510,10 +510,10 @@ function kleeja_get_link ($pid, $extra = array())
 			else
 			{
 				$links += array(
-							'thumb' => 'download.php?thmb=::ID::',
-							'image' => 'download.php?img=::ID::',
+							'thumb' => 'do.php?thmb=::ID::',
+							'image' => 'do.php?img=::ID::',
 							'del'	=> 'go.php?go=del&amp;cd=::CODE::',
-							'file'	=> 'download.php?id=::ID::',
+							'file'	=> 'do.php?id=::ID::',
 						);
 			}
 		break;
@@ -530,10 +530,10 @@ function kleeja_get_link ($pid, $extra = array())
 			else
 			{
 				$links += array(
-							'thumb' => 'download.php?thmbf=::NAME::',
-							'image' => 'download.php?imgf=::NAME::',
+							'thumb' => 'do.php?thmbf=::NAME::',
+							'image' => 'do.php?imgf=::NAME::',
 							'del'	=> 'go.php?go=del&amp;cd=::CODE::',
-							'file'	=> 'download.php?filename=::NAME::',
+							'file'	=> 'do.php?filename=::NAME::',
 						);
 			}
 		break;

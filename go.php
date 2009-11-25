@@ -85,8 +85,8 @@ switch ($_GET['go'])
 		//page info
 		$stylee	= 'report';
 		$titlee	= $lang['REPORT'];
-		$id_d	= isset($_GET['id']) ? intval($_GET['id']) : 0;
-		$url_id	= (int) $config['mod_writer'] == 1 ? $config['siteurl'] . 'download' . $id_d . '.html' : $config['siteurl'] . 'download.php?id=' . $id_d;
+		$id_d	= isset($_GET['id']) ? intval($_GET['id']) : (isset($_POST['rid']) ? intval($_POST['rid']) : 0);
+		$url_id	= (int) $config['mod_writer'] == 1 ? $config['siteurl'] . 'download' . $id_d . '.html' : $config['siteurl'] . 'do.php?id=' . $id_d;
 		$action	= './go.php?go=report';
 		$H_FORM_KEYS	= kleeja_add_form_key('report');
 		$NOT_USER		= !$usrcp->name() ? true : false; 
@@ -419,14 +419,14 @@ switch ($_GET['go'])
 	
 	//
 	// Page for redirect to downloading a file
-	// [!] depreacted from 1rc6+, see download.php
+	// [!] depreacted from 1rc6+, see do.php
 	//
 	case 'down':
 
 		//go.php?go=down&n=$1&f=$2&i=$3
 		if(isset($_GET['n']))
 		{
-			$url_file = (int) $config['mod_writer'] == 1 ? $config['siteurl'] . 'download' . intval($_GET['i']) . '.html' : $config['siteurl'] . 'download.php?id=' . intval($_GET['n']);
+			$url_file = (int) $config['mod_writer'] == 1 ? $config['siteurl'] . 'download' . intval($_GET['i']) . '.html' : $config['siteurl'] . 'do.php?id=' . intval($_GET['n']);
 		}
 		else
 		{

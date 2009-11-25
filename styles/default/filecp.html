@@ -1,3 +1,60 @@
+<!-- javascripts -->
+<script type="text/javascript">
+<!--
+	function confirm_from()
+	{
+		if(confirm('{lang.ARE_YOU_SURE_DO_THIS}'))
+			return true;
+		else
+			return false;
+	}
+	
+	function change_color(obj, id, c, c2)
+	{
+		c = (c == null) ? 'ored' : c;
+		c2 = (c == null) ? 'osilver' : c2;
+		var ii = document.getElementById(id);
+		if(obj.checked)
+		{
+			ii.setAttribute("class", c); ii.setAttribute("className", c);
+		}
+		else
+		{
+			ii.setAttribute("class", c2); ii.setAttribute("className", c2);	
+		}
+	}
+
+	function checkAll(form, id, _do_c_, c, c2)
+	{
+		for (var i=0;i<form.elements.length;i++)
+		{
+			if(form.elements[i].getAttribute("rel") != id)
+				continue;
+			
+			if(form.elements[i].checked)
+			{
+				uncheckAll(form, id, _do_c_, c, c2);
+				break;
+			}
+
+			form.elements[i].checked = true ;
+			//change_color(form.elements[i], _do_c_+'['+form.elements[i].value+']', c, c2);
+		}
+	}
+
+	function uncheckAll(form, id, _do_c_, c, c2)
+	{
+		for (var i=0;i<form.elements.length;i++)
+		{
+			if(form.elements[i].getAttribute("rel") != id)
+				continue;
+			form.elements[i].checked = false ;
+			//change_color(form.elements[i], _do_c_+'['+form.elements[i].value+']', c, c2);
+		}
+	}
+//-->
+</script>
+
 <!-- start control files user template  -->
 <div id="content">
 
@@ -10,7 +67,7 @@
 <!-- # End line top  -->
 	
 <!--  start form user control panel  Files  -->	
-<form action="{action}" method="post">
+<form name="c" action="{action}" method="post" onsubmit="javascript:return confirm_from();">
 <IF NAME="no_results">
 
 <!--  start no files user -->
@@ -41,11 +98,11 @@
 	
 	<tbody>
 		<LOOP NAME="arr">	
-		<tr>
+		<tr id="su[{{id}}]">
 			<td>{{i}}</td>
 			<td><img src="{{icon_link}}" alt="{{file_type}}" /></td>
 			<td class="odd">{{name}}</td>
-			<td><input type="checkbox" name="del_{{id}}" value="1" /></td>
+			<td><input type="checkbox" name="del_{{id}}" value="1" rel="_del" /></td>
 		</tr>
 		</LOOP>
 	</tbody>
@@ -64,7 +121,7 @@
 {H_FORM_KEYS}
 
 <!--  start button filecp   -->
-<div class="left_button"><input type="submit" name="submit_files" value="{lang.DEL_SELECTED}" /></div>
+<div class="left_button"><a href="javascript:void(0);" onclick="checkAll(document.c, '_del', 'su');">{lang.CHECK_ALL}</a><input type="submit" name="submit_files" value="{lang.DEL_SELECTED}" /></div>
 <!--  # end button filecp   -->
 
 </IF>

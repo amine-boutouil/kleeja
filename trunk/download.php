@@ -17,7 +17,7 @@ $arr_req	= array();
 $get_data	= empty($_GET) ? array() : $_GET;
 foreach ($get_data as $key => $val)
 {
-	$arr_req[] = urlencode($numeric_prefix.$key) . '=' . urlencode($val);
+	$arr_req[] = urlencode($key) . '=' . urlencode($val);
 }
 
 $request = implode($arr_req, "&");

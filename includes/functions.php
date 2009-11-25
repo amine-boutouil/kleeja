@@ -989,7 +989,7 @@ function delete_cache($name, $all=false)
 
 	($hook = kleeja_run_hook('delete_cache_func')) ? eval($hook) : null; //run hook
 	
-	$path_to_cache = PATH . './cache';
+	$path_to_cache = PATH . 'cache';
 	
 	if($all)
 	{

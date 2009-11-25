@@ -209,7 +209,7 @@ $cr_time = LAST_VISIT > 0 ? LAST_VISIT : time() - 3600*12;
 
 $c_query	= array(
 					'SELECT'	=> 'COUNT(c.id) AS total_rows',
-					'FROM'		=> "{$dbprefix}call c",
+					'FROM'		=> "`{$dbprefix}call` c",
 					//'WHERE'	=> "c.`time` > " . $cr_time . "" 
 				);
 
@@ -220,7 +220,7 @@ $SQL->freeresult();
 // reports calls
 $r_query	= array(
 					'SELECT'	=> 'COUNT(r.id) AS total_rows',
-					'FROM'		=> "{$dbprefix}reports r",
+					'FROM'		=> "`{$dbprefix}reports` r",
 					//'WHERE'	=> "r.`time` > " . $cr_time . "" 
 				);
 

@@ -26,6 +26,8 @@ define('DEV_STAGE', true);
 defined('DEV_STAGE') ? @error_reporting( E_ALL ) : @error_reporting(E_ALL ^ E_NOTICE);
 //Just to check
 define('IN_PHP6', (version_compare(PHP_VERSION, '6.0.0-dev', '>=') ? true : false));
+//filename of config.php
+define('KLEEJA_CONFIG_FILE', 'config.php');
 
 //if sessions is started before, let's destroy it!
 if(isset($_SESSION))
@@ -185,14 +187,14 @@ if(!defined('PATH'))
 }
 
 // no config
-if (!file_exists(PATH . 'config.php'))
+if (!file_exists(PATH . KLEEJA_CONFIG_FILE))
 {
 	header('Location: ' . PATH . 'install/index.php');
 	exit;
 }
 
 // there is a config
-require (PATH . 'config.php');
+require (PATH . KLEEJA_CONFIG_FILE);
 
 //no enough data
 if (!$dbname || !$dbuser)

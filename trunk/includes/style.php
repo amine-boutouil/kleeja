@@ -26,7 +26,7 @@ class kleeja_style
         //Function to load a template file.
         function _load_template($template_name)
 		{
-			global $config, $root_path, $THIS_STYLE_PATH, $STYLE_PATH_ADMIN;
+			global $config, $THIS_STYLE_PATH, $STYLE_PATH_ADMIN;
 
 			$is_admin_template = false;
 			$style_path = $THIS_STYLE_PATH;
@@ -72,14 +72,14 @@ class kleeja_style
 			$this->HTML = file_get_contents($template_path);
 			$this->_parse($this->HTML);
 			//use 'b' to force binary mode
-			if($filename = @fopen($root_path . 'cache/tpl_' . $this->re_name_tpl($template_name) . '.php', 'wb'))
+			if($filename = @fopen(PATH . 'cache/tpl_' . $this->re_name_tpl($template_name) . '.php', 'wb'))
 			{
 				@flock($filename, LOCK_EX);
 				@fwrite($filename, $this->HTML);
 				@flock($filename, LOCK_UN);
 				@fclose($filename);
 				// Read and write for owner, read for everybody else
-				@chmod($root_path . 'cache/tpl_' . $this->re_name_tpl($template_name) . '.php', 0644);
+				@chmod(PATH . 'cache/tpl_' . $this->re_name_tpl($template_name) . '.php', 0644);
 			}
         }
 
@@ -215,18 +215,18 @@ class kleeja_style
         //load parser and return page content
         function display($template_name)
 		{
-			global $config, $SQL, $root_path;
+			global $config, $SQL;
 
 			$this->vars  = &$GLOBALS;
 
 			//is there ?
-			if(!file_exists($root_path.'cache/tpl_' . $this->re_name_tpl($template_name) . '.php') or !$this->caching)
+			if(!file_exists(PATH . 'cache/tpl_' . $this->re_name_tpl($template_name) . '.php') or !$this->caching)
 			{
 				$this->_load_template($template_name);
 			}
 
 			ob_start();
-			include($root_path . 'cache/tpl_' . $this->re_name_tpl($template_name) . '.php');
+			include(PATH . 'cache/tpl_' . $this->re_name_tpl($template_name) . '.php');
 			$page = ob_get_contents();
 			ob_end_clean();
 
@@ -235,10 +235,10 @@ class kleeja_style
 		
 		function admindisplayoption($html)
 		{
-			global $config, $SQL, $root_path;
+			global $config, $SQL;
 			
-			$this->vars  = &$GLOBALS;
-			$this->HTML = $html;
+			$this->vars	= &$GLOBALS;
+			$this->HTML	= $html;
 			$this->_parse($this->HTML);
 
  			ob_start();

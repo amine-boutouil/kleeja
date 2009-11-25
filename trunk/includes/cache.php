@@ -27,12 +27,12 @@ $SQL->set_utf8();
 //
 if(!defined('STOP_HOOKS'))
 {
-	if (file_exists($root_path . 'cache/data_hooks.php'))
+	if (file_exists(PATH . 'cache/data_hooks.php'))
 	{
-		include_once ($root_path . 'cache/data_hooks.php');
+		include_once (PATH . 'cache/data_hooks.php');
 	}
 
-	if (!isset($all_plg_hooks) && !file_exists($root_path . 'cache/data_hooks.php'))
+	if (!isset($all_plg_hooks) && !file_exists(PATH . 'cache/data_hooks.php'))
 	{
 		//get all hooks
 		$query = array(
@@ -66,7 +66,7 @@ if(!defined('STOP_HOOKS'))
 
 	 	$SQL->freeresult($result);
 
-		$filenumh = @fopen($root_path . 'cache/data_hooks.php', 'w');
+		$filenumh = @fopen(PATH . 'cache/data_hooks.php', 'w');
 		@flock($filenumh, LOCK_EX); // exlusive look
 		@fwrite($filenumh, $file_datac);
 		@flock($filenumh, LOCK_UN);
@@ -78,12 +78,12 @@ if(!defined('STOP_HOOKS'))
 //
 //get config data from config table  ...
 //
-if (file_exists($root_path . 'cache/data_config.php'))
+if (file_exists(PATH . 'cache/data_config.php'))
 {
-	include_once ($root_path . 'cache/data_config.php');
+	include_once (PATH . 'cache/data_config.php');
 }
 	
-if (empty($config) or !file_exists($root_path . 'cache/data_config.php'))
+if (empty($config) or !file_exists(PATH . 'cache/data_config.php'))
 {
 	$query = array(
 					'SELECT'	=> 'c.*',
@@ -107,7 +107,7 @@ if (empty($config) or !file_exists($root_path . 'cache/data_config.php'))
 	
 	 $SQL->freeresult($result);
 
-	$filenumc = @fopen($root_path . 'cache/data_config.php', 'w');
+	$filenumc = @fopen(PATH . 'cache/data_config.php', 'w');
 	@flock($filenumc, LOCK_EX); // exlusive look
 	@fwrite($filenumc, $file_datac);
 	@flock($filenumc, LOCK_UN);
@@ -117,12 +117,12 @@ if (empty($config) or !file_exists($root_path . 'cache/data_config.php'))
 //
 //get language terms from lang table  ...
 //
-if (file_exists($root_path . 'cache/data_lang.php'))
+if (file_exists(PATH . 'cache/data_lang.php'))
 {
-	include_once ($root_path . 'cache/data_lang.php');
+	include_once (PATH . 'cache/data_lang.php');
 }
 	
-if (!isset($olang) or !file_exists($root_path . 'cache/data_lang.php'))
+if (!isset($olang) or !file_exists(PATH . 'cache/data_lang.php'))
 {
 	$query = array(
 					'SELECT'	=> 'l.*',
@@ -149,7 +149,7 @@ if (!isset($olang) or !file_exists($root_path . 'cache/data_lang.php'))
 
 	$SQL->freeresult($result);
 
-	$filenuml = @fopen($root_path . 'cache/data_lang.php', 'w');
+	$filenuml = @fopen(PATH . 'cache/data_lang.php', 'w');
 	@flock($filenuml, LOCK_EX); // exlusive look
 	@fwrite($filenuml, $file_datac);
 	@flock($filenuml, LOCK_UN);
@@ -159,12 +159,12 @@ if (!isset($olang) or !file_exists($root_path . 'cache/data_lang.php'))
 //
 //get data from types table ... 
 //
-if (file_exists($root_path . 'cache/data_exts.php'))
+if (file_exists(PATH . 'cache/data_exts.php'))
 {
-	include_once ($root_path . 'cache/data_exts.php');
+	include_once (PATH . 'cache/data_exts.php');
 }
 	
-if ((empty($g_exts) || empty($u_exts)) || !(file_exists($root_path . 'cache/data_exts.php')))
+if ((empty($g_exts) || empty($u_exts)) || !(file_exists(PATH . 'cache/data_exts.php')))
 {
 	$query = array(
 					'SELECT'	=> 'e.*',
@@ -199,7 +199,7 @@ if ((empty($g_exts) || empty($u_exts)) || !(file_exists($root_path . 'cache/data
 
 	$SQL->freeresult($result);
 
-	$filenumt = @fopen($root_path . 'cache/data_exts.php', 'w');
+	$filenumt = @fopen(PATH . 'cache/data_exts.php', 'w');
 	@flock($filenumt, LOCK_EX); // exlusive look
 	@fwrite($filenumt, $file_datat);
 	@flock($filenumt, LOCK_UN);
@@ -266,7 +266,7 @@ if(!file_exists("cache/data_stats.php"))
 
 	$SQL->freeresult($result);
 
-	$filenumw = @fopen($root_path . 'cache/data_stats.php', 'w');
+	$filenumw = @fopen(PATH . 'cache/data_stats.php', 'w');
 	@flock($filenumw, LOCK_EX); // exlusive look
 	@fwrite($filenumw, $file_dataw);
 	@flock($filenumw, LOCK_UN);
@@ -277,12 +277,12 @@ if(!file_exists("cache/data_stats.php"))
 //
 //get banned ips data from stats table  ...
 //
-if (file_exists($root_path . 'cache/data_ban.php'))
+if (file_exists(PATH . 'cache/data_ban.php'))
 {
-	include_once ($root_path . 'cache/data_ban.php');
+	include_once (PATH . 'cache/data_ban.php');
 }
 
-if (!isset($banss) || !file_exists($root_path . 'cache/data_ban.php'))
+if (!isset($banss) || !file_exists(PATH . 'cache/data_ban.php'))
 {
 	$query = array(
 					'SELECT'	=> 's.ban',
@@ -317,7 +317,7 @@ if (!isset($banss) || !file_exists($root_path . 'cache/data_ban.php'))
 		$file_datab .= ');' . "\n\n";
 	}
 
-	$filenumb = @fopen($root_path . 'cache/data_ban.php', 'w');
+	$filenumb = @fopen(PATH . 'cache/data_ban.php', 'w');
 	@flock($filenumb, LOCK_EX); // exlusive look
 	@fwrite($filenumb, $file_datab);
 	@flock($filenumb, LOCK_UN);
@@ -327,12 +327,12 @@ if (!isset($banss) || !file_exists($root_path . 'cache/data_ban.php'))
 //	
 //get rules data from stats table  ...
 //
-if (file_exists($root_path . 'cache/data_rules.php'))
+if (file_exists(PATH . 'cache/data_rules.php'))
 {
-	include_once ($root_path . 'cache/data_rules.php'); 
+	include_once (PATH . 'cache/data_rules.php'); 
 }
 
-if (!isset($ruless) or !file_exists($root_path . 'cache/data_rules.php'))
+if (!isset($ruless) or !file_exists(PATH . 'cache/data_rules.php'))
 {
 	$query = array(
 					'SELECT'	=> 's.rules',
@@ -358,7 +358,7 @@ if (!isset($ruless) or !file_exists($root_path . 'cache/data_rules.php'))
 		$file_datar .= '$ruless = \'' . str_replace(array("'", "\'"), "\'", $rules1) . '\';' . "\n\n"; // its took 2 hours ..
 			
 	$file_datar .= '?' . '>';
-	$filenumr = @fopen($root_path . 'cache/data_rules.php', 'w');
+	$filenumr = @fopen(PATH . 'cache/data_rules.php', 'w');
 	@flock($filenumr, LOCK_EX); // exlusive look
 	@fwrite($filenumr, $file_datar);
 	@flock($filenumr, LOCK_UN);
@@ -368,12 +368,12 @@ if (!isset($ruless) or !file_exists($root_path . 'cache/data_rules.php'))
 //	
 //get ex-header-footer data from stats table  ... 
 //
-if (file_exists($root_path . 'cache/data_extra.php'))
+if (file_exists(PATH . 'cache/data_extra.php'))
 {
-	include_once ($root_path . 'cache/data_extra.php');
+	include_once (PATH . 'cache/data_extra.php');
 }
 	
-if (!isset($extras) or !file_exists($root_path . 'cache/data_extra.php'))
+if (!isset($extras) or !file_exists(PATH . 'cache/data_extra.php'))
 {
 	$query = array(
 					'SELECT'	=> 's.ex_header, s.ex_footer',
@@ -402,7 +402,7 @@ if (!isset($extras) or !file_exists($root_path . 'cache/data_extra.php'))
 	$file_datae .= '$extras[\'footer\'] = \'' . str_replace(array("'", "\'"), "\'", $footerr) . '\';' . "\n\n";
 	
 
-	$filenume = @fopen($root_path . 'cache/data_extra.php', 'w');
+	$filenume = @fopen(PATH . 'cache/data_extra.php', 'w');
 	@flock($filenume, LOCK_EX); // exlusive look
 	@fwrite($filenume, $file_datae);
 	@flock($filenume, LOCK_UN);

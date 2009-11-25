@@ -252,7 +252,7 @@ function xml_get_children($vals, &$i)
 */
 function creat_plugin_xml($contents) 
 {
-	global $dbprefix, $SQL, $lang, $config, $STYLE_PATH_ADMIN , $STYLE_PATH, $THIS_STYLE_PATH, $root_path, $olang;
+	global $dbprefix, $SQL, $lang, $config, $STYLE_PATH_ADMIN , $STYLE_PATH, $THIS_STYLE_PATH, $olang;
 
 				$gtree = xml_to_array($contents);
 				
@@ -531,14 +531,14 @@ function creat_plugin_xml($contents)
 						if(sizeof($cached_instructions) > 0)
 						{
 							//fix
-							if(file_exists($root_path . 'cache/styles_cached.php'))
+							if(file_exists(PATH . 'cache/styles_cached.php'))
 							{
-								$cached_content = file_get_contents($root_path . 'cache/styles_cached.php');
+								$cached_content = file_get_contents(PATH . 'cache/styles_cached.php');
 								$cached_content = base64_decode($cached_content);
 								$cached_content = unserialize($cached_content);
 								$cached_instructions += $cached_content;
 							}
-							$filename = @fopen($root_path . 'cache/styles_cached.php' , 'w');
+							$filename = @fopen(PATH . 'cache/styles_cached.php' , 'w');
 							fwrite($filename, base64_encode(serialize($cached_instructions)));
 							fclose($filename);
 						}
@@ -1281,7 +1281,7 @@ function get_mime_for_header($ext)
 //
 function get_lang($name, $folder = '')
 {
-	global $config, $root_path, $lang;
+	global $config, $lang;
 	
 	($hook = kleeja_run_hook('get_lang_func')) ? eval($hook) : null; //run hook
 	
@@ -1292,7 +1292,7 @@ function get_lang($name, $folder = '')
 		$name = $folder . '/' . $name;
 	}
 	
-	$path = $root_path . 'lang/' . $config['language'] . '/' . str_replace('.php', '', $name) . '.php';
+	$path = PATH . 'lang/' . $config['language'] . '/' . str_replace('.php', '', $name) . '.php';
 	
 	if(file_exists($path))
 	{
@@ -1311,7 +1311,7 @@ function get_lang($name, $folder = '')
 //
 function delete_ch_tpl($template_name, $delete_txt = array())
 {
-	global $dbprefix, $lang, $config, $STYLE_PATH_ADMIN , $STYLE_PATH, $THIS_STYLE_PATH, $root_path;
+	global $dbprefix, $lang, $config, $STYLE_PATH_ADMIN , $STYLE_PATH, $THIS_STYLE_PATH;
 	
 	$style_path = (substr($template_name, 0, 6) == 'admin_') ? $STYLE_PATH_ADMIN : $THIS_STYLE_PATH;
 	$is_admin_template = (substr($template_name, 0, 6) == 'admin_') ? true : false;
@@ -1373,15 +1373,15 @@ function delete_ch_tpl($template_name, $delete_txt = array())
 	if(sizeof($cached_instructions) > 0)
 	{
 		//fix
-		if(file_exists($root_path . 'cache/styles_cached.php'))
+		if(file_exists(PATH . 'cache/styles_cached.php'))
 		{
-			$cached_content = file_get_contents($root_path . 'cache/styles_cached.php');
+			$cached_content = file_get_contents(PATH . 'cache/styles_cached.php');
 			$cached_content = base64_decode($cached_content);
 			$cached_content = unserialize($cached_content);
 			$cached_instructions += $cached_content;
 		}
 		
-		$filename = @fopen($root_path . 'cache/styles_cached.php' , 'w');
+		$filename = @fopen(PATH . 'cache/styles_cached.php' , 'w');
 		fwrite($filename, base64_encode(serialize($cached_instructions)));
 		fclose($filename);
 	}

@@ -124,7 +124,7 @@ switch($SHOW_CH_STAGE):
 			else if($row['name'] == 'language') 
 			{
 				//get languages
-				if ($dh = @opendir($root_path . 'lang'))
+				if ($dh = @opendir(PATH . 'lang'))
 				{
 					while (($file = readdir($dh)) !== false)
 					{
@@ -146,7 +146,7 @@ switch($SHOW_CH_STAGE):
 				}
 
 				$authtypes .= '<option value="1"' . ($con['user_system']=='1' ? ' selected="selected"' : '') . '>' . $lang['NORMAL'] . '</option>' . "\n";
-				if ($dh = @opendir($root_path . 'includes/auth_integration'))
+				if ($dh = @opendir(PATH . 'includes/auth_integration'))
 				{
 					while (($file = readdir($dh)) !== false)
 					{

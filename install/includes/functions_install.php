@@ -184,3 +184,23 @@ function inst_get_config($name)
 	}
 }
 
+/**
+* Update only plugins you have ! 
+*/
+function updating_exists_plugin($plugin_name)
+{
+	global $dbprefix $SQL;
+
+	$query = array(
+					'SELECT'	=> 'plg_id',
+					'FROM'		=> "{$dbprefix}plugins",
+					'WHERE'		=> 'plg_name="' . $plugin_name . '"' 
+					);
+
+	$res = $SQL->build($query);
+	if($SQL->num_rows($res))
+	{
+		return true;
+	}
+	return false;
+}

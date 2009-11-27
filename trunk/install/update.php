@@ -210,6 +210,30 @@ case 'update_now':
 
 			if($complete_upate)
 			{
+				//check plugins
+				$pl_path = "includes/plugins";
+				$dh = opendir($pl_path);
+				while (($file = readdir($dh)) !== false)
+				{
+					$e	= strtolower(array_pop(@explode('.', $file)));
+
+					if($e == "xml") //only plugins ;)
+					{
+						$contents 	= @file_get_contents($pl_path . '/' . $file);
+						$gtree 		= xml_to_array($contents);
+
+						if($gtree != false) //great !! it's well-formed xml 
+						{
+							$plugin_name = preg_replace("/[^a-z0-9-_]/", "-", $gtree['kleeja']['info']['plugin_name']['value']);
+
+							if(updating_exists_plugin($plugin_name) || (isset($must_installing_plugins) && in_array($file, $must_installing_plugins)))
+							{
+								creat_plugin_xml($contents);
+							}
+						}
+					}
+				}
+
 				delete_cache(null, true);
 			}
 

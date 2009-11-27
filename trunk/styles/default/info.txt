@@ -1,4 +1,4 @@
-#
+﻿#
 # This is a configuraion file of the style.
 # Change those values when you create 
 # your style ...
@@ -6,6 +6,9 @@
 
 #Style name
 name = Default
+
+#Style desc
+desc = الستايل الافتراضي مع النسخه, وهذا مايقوم فريق كليجا تطويره دوماً
 
 #Style copyright
 copyright = 2009 Kleeja.com

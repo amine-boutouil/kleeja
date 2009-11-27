@@ -668,7 +668,7 @@ function kleeja_style_info($style_name)
 			continue;
 		}
 
-		$t = @explode('=', $m);
+		$t = @explode('=', $m, 2);
 		$inf_r[trim($t[0])] = trim($t[1]);
 	}
 

@@ -660,7 +660,6 @@ ul.tabbernav li.tabberactive a:hover{
 	margin-left:6px;
 	padding:2px 10px;
 	font-weight:400;
-	outline:1px solid white;
 }
 .onlineall{
 	background:url(../images/bg_onlineall.gif) repeat-x center left;
@@ -752,7 +751,7 @@ ul.tabbernav li.tabberactive a:hover{
 .admin_cp_link span{
 	margin:5px 0;
 	padding:4px 50px;
-	background:url(../images/adminpan.gif) no-repeat center left;
+	background:url(../images/admin_cp.gif) no-repeat center left;
 	font-weight:bold;
 	border:1px solid #F68618;
 }
@@ -1060,7 +1059,7 @@ select.remme:focus {
 
 /*-- start user control panel  Files  >> filecp.html  */
 .file_cp {
-	background:#DADADA url(../images/table_file_cp.gif) no-repeat 15% 45%;
+	background:#DADADA url(../images/table_file_cp.gif) no-repeat 40% 45%;
 	color:#000;
 	width:100%;
 	border:1px solid #C2C2C2;
@@ -1341,7 +1340,11 @@ select.remme:focus {
 .pagination span.three_dots {
 	background:#fff url(../images/pagination.gif) repeat-x bottom left;
 }
-
+.checkall a:link{
+	color:red;
+	font-size:12px;
+	font-weight: 400;
+}
 /* # pagination */
 
 /* PRINT */

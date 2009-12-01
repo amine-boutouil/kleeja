@@ -48,7 +48,7 @@ input.username, input.password {float:left;padding:3px 20px 3px 3px;background-p
 .tabledata thead th {background-position:center right;}
 .tabledata thead tr:hover th, .tabledata thead th:hover {background-position:center right;}
 .register,.call {background-position:95% 50%;}
-.get_password,.file_cp{background-position:85% 50%;}
+.get_password,.file_cp{background-position:55% 50%;}
 .rebort{background-position:94% 50%;}
 #profile .boxdata{float:left;}
 #profile .boxdata .in{margin-right:0;margin-left:2%;}

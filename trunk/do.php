@@ -133,6 +133,7 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 	($hook = kleeja_run_hook('begin_down_go_page')) ? eval($hook) : null; //run hook	
 
 	//must know from where he came ! and stop him if not image
+	//todo: if it's download manger, let's pass this
 	if(isset($_GET['down']) || isset($_GET['downf']))
 	{
 		if(!isset($_SERVER['HTTP_REFERER']) || empty($_SERVER['HTTP_REFERER']))
@@ -203,7 +204,7 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 	$livexts = explode(",", $config['livexts']);
 
 	//get info file
-	$query = array('SELECT'	=> 'f.id, f.name, f.folder, f.type',
+	$query = array('SELECT'	=> 'f.id, f.name, f.real_filename, f.folder, f.type',
 					'FROM'		=> "{$dbprefix}files f",
 					'WHERE'		=> ($is_id_filename) ? "f.name='" . $filename . "'" . 
 									(isset($_GET['downexf']) ? " AND f.type IN ('" . implode("', '", $livexts) . "')" : '') : 'f.id=' . $id  . 
@@ -223,6 +224,7 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 		{
 			$ii	= $row['id'];
 			$n	= $row['name'];
+			$rn	= $row['real_filename'];
 			$t	= strtolower(trim($row['type']));
 			$f	= $row['folder'];
 
@@ -305,7 +307,7 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 	}
 
 	$size = filesize($path_file);
-	$name = rawurldecode($n);
+	$name = empty($rn) ? rawurldecode($n) : rawurldecode($rn);
 
 	//Figure out the MIME type (if not specified) 
 	$ext		= array_pop(explode('.', $path_file));

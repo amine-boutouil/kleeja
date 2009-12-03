@@ -189,7 +189,7 @@ function inst_get_config($name)
 */
 function updating_exists_plugin($plugin_name)
 {
-	global $dbprefix $SQL;
+	global $dbprefix, $SQL;
 
 	$query = array(
 					'SELECT'	=> 'plg_id',

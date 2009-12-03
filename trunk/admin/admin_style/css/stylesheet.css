@@ -61,17 +61,6 @@ input[type="password"]:focus,input[type="text"]:focus,select:focus,textarea:focu
 
 /* right  menu */	
 
-/* pagination */
-.pagination{float:right;text-align:center;margin:3px 0px 3px 3px;color:#0E509E;font-size:11px;}
-.pagination li{float:right;margin-left:3px;}
-.pagination a{border:1px solid #9aafe5;text-decoration:none;padding:2px 6px;}
-.pagination a:hover{border-color:#2b55af;color:#0F478A;}
-.currentpage{background:#2e6ab1;border:2px solid #D4D4D4;color:#FFF;padding:3px 6px;cursor: default;}
-.pagination a.disablelink{cursor: default;border-color: #929292;color:#838383;padding: 2px 6px;}
-.pagination a.prevnext{color:#0F478A;cursor:pointer;font-weight:bold;}
-.three_dots {cursor: default; border:1px solid #9aafe5;padding:2px 3px;}
-/* # pagination */
-
 /*  buttons */
 .left_button {float:left;display:inline;margin:3px 0;padding:2px 0}
 .button1 ,.button2 {cursor: pointer; padding:3px 9px;margin:5px;background: #549CBF url(../images/login/btn.gif) repeat left top;border: 1px solid #BCBCBC;}
@@ -329,10 +318,10 @@ tr:hover {background-color:#FFFFDD;}
 
 
 /*checkboxes*/
-.jquery-checkbox       {display: inline; font-size: 20px; line-height: 20px; cursor: pointer; cursor: hand;}
+.jquery-checkbox       {display: inline; font-size: 16px; line-height: 16px; cursor: pointer; cursor: hand;}
 .jquery-checkbox .mark {display: inline;}
 
-.jquery-checkbox img {vertical-align: middle; width: 30px; height: 30px;}
+.jquery-checkbox img {vertical-align: middle; width: 16px; height: 16px;}
 .jquery-checkbox img{background: transparent url(../images/checkbox.gif) no-repeat;}
 
 .jquery-checkbox img{
@@ -355,3 +344,73 @@ tr:hover {background-color:#FFFFDD;}
 	background: transparent url(../images/checkbox-on.gif) no-repeat;
 }
 /* / checkboxes*/
+
+/*CSS style pagination*/
+.pagination {
+	padding:3px 0;
+	margin:2px 0;
+	color:#0B55C4;
+	font-size:80%;
+	width:60%;
+	display:inline;
+	font-weight: bold;
+}
+
+.pagination a {
+	float:right;
+	text-align:center;
+	border: 1px solid #0B55C4;
+	margin-left:3px;
+	padding:5px 7px;
+	background:#fff url(../images/pagination.gif) repeat-x top left;
+	text-decoration: none;
+	color: #0B55C4;		
+}
+.pagination a:hover {
+	border: 1px solid #5D9DD8;
+	background-image:none;
+	background-color:#93CCFF;
+	color: #222;
+}
+.pagination a.next , .pagination a.disabled{
+	font-size:11px;
+	padding:4px;
+	border:none;
+	background:transparent;
+}
+.pagination a.next {
+	margin-right:5px;
+	color: #0B55C4;
+}
+.pagination a.disabled {
+	color: #999;
+	font-weight: 400;
+}
+.pagination a.next:hover {
+	color:#666;
+	padding-right:10px;
+}
+.pagination a.disabled:hover {
+	color:#111;
+}	
+.pagination span.current, .pagination span.three_dots {
+	text-align:center;
+	margin-left:3px;
+	padding:5px 7px;
+	float:right;
+	border: 1px solid #0B55C4;
+}
+.pagination span.current {
+	background-color:#0B55C4;
+	color: #FFF;
+}
+.pagination span.three_dots {
+	background:#fff;
+}
+.pagination a, .pagination span.current, .pagination span.three_dots{
+	-moz-border-radius : 10px; /* Mozilla */
+	-webkit-border-radius : 10px; /* Webkit */
+	-khtml-border-radius : 10px; /* Konqueror */
+	border-radius : 10px; /* CSS3 only */
+}
+/* # pagination */

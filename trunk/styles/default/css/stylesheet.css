@@ -1340,12 +1340,13 @@ select.remme:focus {
 .pagination span.three_dots {
 	background:#fff url(../images/pagination.gif) repeat-x bottom left;
 }
+/* # pagination */
+
 .checkall a:link{
 	color:red;
 	font-size:12px;
 	font-weight: 400;
 }
-/* # pagination */
 
 /* PRINT */
 @media print {

@@ -115,6 +115,8 @@
 	$lang['INST_WHAT_IS_KLEEJA_ONE']				= '1. дў«г √Џ÷«Ѕ ёжн  ” ЎнЏ —»Ўе »√џб» «б”я—» «  «бг” ќѕг… Ён «бгж«ёЏ «б«ћ г«Џн… .<br />2. бжЌ…  Ќяг г–ебе бн” ЁёЎ бб Ќяг »«бгбЁ«  жбяд бб Ќяг √н÷« »яб ’џн—е жя»н—е »«б”я—»  .<br />3. дў«г «б” «нб«  «б»”нЎ нћЏбя  ” ЎнЏ «д  ’дЏ ” «нбя »дЁ”я.<br />4. гЏ ябнћ« ждў«г «б≈÷«Ё«  «б»—гћн…  ” ЎнЏ √д  ёжг » —ян» «бяЋн— гд «б«÷«Ё«  «б—«∆Џ… .<br />5. бн” е–« ЁЌ”» »б ябнћ«  гбя «бяЋн— ж«бяЋн— .. —ћ«Ѕ«р ёг »“н«—… «б’ЁЌе <a target="_blank" href="http://www.kleeja.com/about/">гЏбжг«  жггн“« </a> б Џ—Ё √яЋ— .';
 	$lang['YES']									= 'Yes';
 	$lang['NO']										= 'No';
+	$lang['PASS_X_CHARS']							= 'You must enter a minimum of %d characters';
+	$lang['PASS_X_TYPE']							= array('Weak', 'Normal', 'Medium', 'Strong', 'Very Strong');
 
 	//wizard
 	$lang['DIR']	=	'ltr';

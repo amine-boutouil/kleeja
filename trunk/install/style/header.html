@@ -144,7 +144,7 @@ $(document).ready(function() {
 <select name="lang" style="float:right;" onchange="submit()">
 {{if($dh = opendir($_path . 'lang')):}}
 {{while (($file = readdir($dh)) !== false): if(strpos($file, '.') === false && $file != '..' && $file != '.'):}}
-<option value="{{echo $file}}" {{echo $file==$_GET['lang']?'selected="selected"':''}}>{{echo $file}}</option>
+<option value="{{echo $file}}" {{echo $file==$_GET['lang'] || (empty($_GET['lang']) && $file=='en') ?'selected="selected"':''}}>{{echo $file}}</option>
 {{endif; endwhile;closedir($dh);endif;}}
 </select>
 <input type="hidden" name="step_is" value="{{echo htmlspecialchars($_GET['step'])}}" />

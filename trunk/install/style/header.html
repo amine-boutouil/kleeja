@@ -136,7 +136,7 @@ $(document).ready(function() {
 </head>
 <body>
 <div class="header">
-<p style="float:left;text-shadow: 0px 1px rgb(56, 56, 56);">Wizard installation kleeja , version 1.0.0<p>
+<p style="float:left;text-shadow: 0px 1px rgb(56, 56, 56);">Wizard installation kleeja , version 1.0.0</p>
 <div style="float:right;margin:3px 0;">
 {{if(((isset($_GET['step']) && $_GET['step'] != 'language') && (strpos('index.php', $_SERVER['PHP_SELF'])=== false && isset($_GET['step']))) OR (isset($_GET['step']) && $_GET['step'] == 'license' || $_GET['step'] == 'action_file') ):}}
 <form action="?step={{echo htmlspecialchars($_GET['step'])}}&amp;change_lang=1" method="post">

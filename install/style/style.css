@@ -54,7 +54,7 @@ div.install_update:hover {background:#FFFDE2 url('style/images/xhover.gif') repe
 .data_table_install input:focus {background-color:#E3FCDC;border: 1px solid #B7D876;}
 .data_table_install select  {border:1px solid #AF8FCE;}
 .data_table_install th ,.data_table_install td {padding:4px;border-right:1px solid #aaa;border-top: 1px solid #eee;	border-left:1px solid #eee;border-bottom:1px solid #aaa;}
-.data_table_install th {white-space: nowrap;background:#0C91CF;font-weight:bold;line-height:22px;color:#fff;text-align:center;font-size:13px;}
+.data_table_install th {white-space: nowrap;background:#0C91CF;font-weight:bold;line-height:22px;color:#fff;text-align:center;}
 .data_table_install  td {line-height:120%;white-space:nowrap;}
 .data_table_install a,.data_table_install a:link {color:#039;}
 .data_table_install th:hover a,.data_table_install td:hover a {color:#0000FF;text-decoration:underline;}

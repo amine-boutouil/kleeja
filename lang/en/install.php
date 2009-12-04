@@ -108,7 +108,7 @@
 	$lang['IS_IT_OFFICIAL']							= 'Did you get your copy from Kleeja.com (Kleeja official site) ?';
 	$lang['IS_IT_OFFICIAL_DESC']					= 'We receive a lot of complaints and questions about the cause of some bugs and issues which occur in kleeja and probably we can\'t figure out what the problem is . After we have checked we have found that their are some unofficially copies released from untrusted publishers .<br /><br /> <fon style="color:#154188;border-bottom:1px dashed #154188;padding:4px 0;"> So are you sure of this copy is downloaded from kleeja official site ?</font>';
 	$lang['IS_IT_OFFICIAL_YES']						= 'Yes, my copy is officially and I downloaded it from the official site ( Kleeja.com )';
-	$lang['IS_IT_OFFICIAL_NO']						= 'No, I\'ve downloaded it from other site, Go ahead now and download it from Kleeja official site';
+	$lang['IS_IT_OFFICIAL_NO']						= '<a style="color:red" target="_blank" href="http://www.kleeja.com">No, I\'ve downloaded it from other site, Go ahead now and download it from Kleeja official site</a>';
 	$lang['INST_WHAT_IS_KLEEJA_T']					= 'ãÇåí ßáíÌÇ ¿';
 	$lang['INST_WHAT_IS_KLEEJA']					= 'Kleeja  ÊäØŞ ÚÑÈíÇğ " ßáíÌÇ " ..! <br /> ÓßÑÈÊ ÑİÚ ãáİÇÊ ãÌÇäí æ ãİÊæÍ ÇáãÕÏÑ ãÚ ÎÕÇÆÕ İÑíÏå áãÓÇÚÏÉ ÃÕÍÇÈ ÇáãæÇŞÚ ÈÃä íãÊáßæ ãÑßÒ ÊÍãíá Şæí æíÚÊãÏ Úáíå  .. åĞÇ ßÊÚÑíİ ãÈÓØ  , ÃãÇ ßáíÌÇ İí ÇáÍŞíŞå åæ ÓßÑÈÊ ÖÎã ÇáÇãßÇäíÇÊ Óåá ÇáÅÏÇÑÉ æÇáÃåã åæ Ãä äÙÇã ÇáÍãÇíÉ ãÊíä  æíãáß ãä ÇáÃäÙãÉ ÇáãÚŞÏÉ ãÇ íÄãä áãæŞÚß ÇáÍãÇíÉ ÇáÊÇãÉ ÈÅĞä Çááå ..!';
 	$lang['INST_SPECIAL_KLEEJA']					= 'ãä Ãåã ããíÒÇÊ ßáíÌÇ ..!';

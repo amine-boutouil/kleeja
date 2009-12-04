@@ -36,7 +36,17 @@
 					<script type="text/javascript">
 						//<![CDATA[
 						$(function() {
-						$('.password').pstrength();
+							$('.password').pstrength(
+							{
+									'displayMinChar': true,
+									'minChar': 6,
+									'minCharText': '{{echo $lang['PASS_X_CHARS']}}',
+									'colors': ["#f00", "#c06", "#f60", "#3c0", "#3f0"],
+									'scores': [20, 30, 43, 50],
+									'verdicts':	['{{echo implode("' ,'", $lang['PASS_X_TYPE'])}}'],
+									'raisePower': 1.4
+							}
+							);
 						});
 						//]]>
 					</script>

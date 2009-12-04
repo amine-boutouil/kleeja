@@ -117,6 +117,7 @@
 	$lang['NO']										= 'No';
 	$lang['PASS_X_CHARS']							= 'You must enter a minimum of %d characters';
 	$lang['PASS_X_TYPE']							= array('Weak', 'Normal', 'Medium', 'Strong', 'Very Strong');
+	$lang['PLUGINS_KLEEJA']							= 'Plugins For Kleeja .. !';
 
 	//wizard
 	$lang['DIR']	=	'ltr';
@@ -127,9 +128,9 @@
 	$lang['WZ_TXT_W4'] = 'Set your terms or the the rules you want  ...';
 	
 	//PLUGINS
-	$lang['PLUGINS_BUILT_IN']					= 'е–е «÷«Ё«   √ н гЏ ябнћ« »‘яб «Ё —«÷н , «–« «—ѕ  «“«б…  ÷гнд «Ќѕе« Ёяб г«Џбня еж «“«б… «б Џбнг Џбне« , жбяд дд’Ќя »Џѕг ЁЏб –бя б«д е–е «б«÷«Ё«   г «б Ќёё где« жен гЁнѕе бЏгб ябнћ« »‘яб ћнѕ ... ';
+	$lang['PLUGINS_BUILT_IN']					= 'е–е «÷«Ё«   √ н гЏ ябнћ« »‘яб «Ё —«÷н , «–« «—ѕ  «“«б…  ÷гнд «Ќѕе« Ёяб г«Џбня еж «“«б… «б Џбнг Џбне« , жбяд дд’Ќя »Џѕг ЁЏб –бя б«д е–е «б«÷«Ё«   г «б Ќёё где« жен гЁнѕе бЏгб ябнћ« »‘яб ћнѕ  ,, жббЌ’жб Џбм «бг“нѕ гд «бе«я«  ёг »“н«—… гжёЏ <a style="color:red" target="_blank" href="http://www.kleeja.com/plugins/">kleeja.com !</a>';
 	$lang['PLUGINS_NAME']						= '«”г «б«÷«Ё…';
-	$lang['PLUGINS_VER']						= '«’ѕ«— «б«÷«Ё…';
+	$lang['PLUGINS_VER']						= '«б≈’ѕ«—';
 	$lang['PLUGINS_DES']						= 'ж’Ё «б«÷«Ё…';	
 	$lang['PLUGINS_INSTALLED']					= ' г  Ћ»н  е–е «б«÷«Ё«  »дћ«Ќ !!';	
 

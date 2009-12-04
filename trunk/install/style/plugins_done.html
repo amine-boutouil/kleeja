@@ -1,23 +1,22 @@
-<div class="home">
-{{echo $lang['PLUGINS_INSTALLED'];}}
-<table style="width: 100%">
+<div class="home" dir="{{echo $lang['DIR']}}" style="text-align:{{echo $lang['DIR']=='rtl'?'right':'left'}};">
+	<div class="title_plugin" style="text-align:center;font-size:18pt;"><img src="style/images/ok_Plugin.png" style="vertical-align:middle;padding:0 10px;" alt="" />{{echo $lang['PLUGINS_INSTALLED'];}}<br /></div>
+<table class="table_plugin" dir="{{echo $lang['DIR']}}">
 	<tr>
-		<td>{{echo $lang['PLUGINS_NAME']}}</td>
-		<td>{{echo $lang['PLUGINS_DES']}}</td>
-		<td>{{echo $lang['PLUGINS_VER']}}</td>
+		<th>{{echo $lang['PLUGINS_NAME']}}</th>
+		<th>{{echo $lang['PLUGINS_DES']}}</th>
+		<th>{{echo $lang['PLUGINS_VER']}}</th>
 	</tr>
-
-{{foreach($GLOBALS['installed_plugins'] as $plugin):}}
-<tr>
-<td>{{echo $plugin['p_name']}}</td>
-<td>{{echo $plugin['p_des']}}</td>
-<td>{{echo $plugin['p_ver']}}</td>
-</tr>
+	{{foreach($GLOBALS['installed_plugins'] as $plugin):}}
+	<tr>
+		<td style="white-space:nowrap;"><img src="style/images/li_sq.png" style="vertical-align:middle;padding:0 10px;" alt="" />{{echo $plugin['p_name']}}</td>
+		<td>{{echo $plugin['p_des']}}</td>
+		<td style="text-align:center;">{{echo $plugin['p_ver']}}</td>
+	</tr>
 {{endforeach;}}
-
 </table>
 </div>
-
-	<form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=end&' . getlang(1)}}">
-			<input name="agres" type="submit" value="{{echo $lang['INST_NEXT']}}"/>
-	</form>
+<form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=end&' . getlang(1)}}">
+	<center style="margin-top:4px;">
+			<input name="agres" type="submit" value="{{echo $lang['INST_NEXT']}}" />
+	</center>	
+</form>

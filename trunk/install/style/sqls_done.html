@@ -1,22 +1,26 @@
-<div class="home">
-
-<ul class="sql_content">
-
-{{foreach($GLOBALS['sqls_done'] as $sql):}}
-<li>{{echo $sql}}</li>
-{{endforeach;}}
-
-</ul>
-</div>
-
-{{if (!$GLOBALS['err']):}}
-	<form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=plugins&' . getlang(1)}}">
-			<input name="agres" type="submit" value="{{echo $lang['INST_NEXT']}}"/>
-	</form>
-{{else:}}
-	<div class="home"><span style="color:red;">{{echo $lang['INST_FINISH_ERRSQL']}}</span>
-			
-	<br /><br /><textarea cols="50" rows="3">{{echo $GLOBALS['errors']}}</textarea>
-			
+<div class="home" dir="{{echo $lang['DIR']}}" style="text-align:{{echo $lang['DIR']=='rtl'?'right':'left'}};">
+	<div class="sql_content">
+	<table border="0" width="100%" cellspacing="0" cellpadding="0">
+	<tr>
+		<td>
+			<ul>
+				{{foreach($GLOBALS['sqls_done'] as $sql):}}
+				<li><img src="style/images/li_sq.png" style="vertical-align:middle;padding:0 6px;" alt="" /> {{echo $sql}}</li>
+				{{endforeach;}}
+			</ul>
+		</td>
+		<td><img src="style/images/good.png" style="text-align:center;margin:5px auto;" alt="" /></td>
+	</tr>
+	</table>
 	</div>
+</div>
+{{if (!$GLOBALS['err']):}}
+<form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=plugins&' . getlang(1)}}">
+		<input name="agres" type="submit" value="{{echo $lang['INST_NEXT']}}"/>
+</form>
+{{else:}}
+<div class="home"><span style="color:red;">{{echo $lang['INST_FINISH_ERRSQL']}}</span>
+	<br /><br />
+	<textarea cols="50" rows="3">{{echo $GLOBALS['errors']}}</textarea>
+</div>
 {{endif;}}

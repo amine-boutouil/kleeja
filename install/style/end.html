@@ -1,14 +1,22 @@
-<fieldset class="home">
+<div class="home" dir="{{echo $lang['DIR']}}" style="text-align:cener;">
 
 	<img src="style/images/wink.png" alt="congratulation" />
 	<br /><br />
 	<span style="color:blue;">{{echo $lang['INST_FINISH_SQL']}}</span>
 	<br /><br />
-	<img src="style/images/wz.gif" alt="home" />&nbsp;<a href="./install.php?step=wizard&amp;{{echo getlang(1)}}">{{echo $lang['WZ_TITLE']}}</a>
-	<br /><br />
-	<img src="style/images/home.gif" alt="home" />&nbsp;<a href="../index.php">{{echo $lang['INDEX']}}</a>
-	<br /><br />
-	<img src="style/images/adm.gif" alt="admin" />&nbsp;<a href="../admin/">{{echo $lang['ADMINCP']}}</a>
+	<table width="40%" style="margin:0 auto;">
+		<tr>
+			<td class="wizard" onclick="window.location.href='./install.php?step=wizard&amp;{{echo getlang(1)}}';">
+			<img src="style/images/wizard.png" alt="home" style="vertical-align:middle;padding:0 10px;" />{{echo $lang['WZ_TITLE']}}</td>
+		</tr>
+	</table>
+	<br />
+	<table width="40%" style="margin:0 auto;">
+		<tr>
+			<td><img src="style/images/home.png" alt="home" style="vertical-align:middle;padding:0 4px;" /> <a href="../index.php">{{echo $lang['INDEX']}}</a></td>
+			<td><img src="style/images/kcontrol.png" alt="admin" style="vertical-align:middle;padding:0 4px;" /> <a href="../admin/">{{echo $lang['ADMINCP']}}</a></td>
+		</tr>
+	</table>
 	<br /><br />
 	{{echo $lang['INST_KLEEJADEVELOPERS']}}
 	<br /><br />
@@ -16,4 +24,4 @@
 	<a href="http://www.kleeja.com">www.kleeja.com</a>
 	<br /><br />
 
-</fieldset>
+</div>

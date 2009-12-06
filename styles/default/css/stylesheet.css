@@ -662,24 +662,24 @@ ul.tabbernav li.tabberactive a:hover{
 	font-weight:400;
 }
 .onlineall{
-	background:url(../images/bg_onlineall.gif) repeat-x center left;
-	border:1px solid #D2D29F;
+	background:#FAFAE7 url(../images/bg_onlineall.gif) repeat-x center left;
+	border:1px solid #9F9F4D;
 	color:#76760C;
 }
 .onlinevisitor{
-	background:url(../images/bg_onlinevisitor.gif) repeat-x center left;
+	background:#F9E5E5 url(../images/bg_onlinevisitor.gif) repeat-x center left;
 	border:1px solid #D29F9F;
 	color:#D20C0C;
 }
 .onlineusers{
-	background:url(../images/bg_onlineusers.gif) repeat-x center left;
+	background:#E6F5EB url(../images/bg_onlineusers.gif) repeat-x center left;
 	border:1px solid #A1CAB4;
 	color:#009B00;
 }
 .name_users{
-	background:url(../images/bg_nameusers.gif) repeat-x center left;
+	background:#D2D7F1 url(../images/bg_nameusers.gif) repeat-x center left;
 	border:1px solid #8D98C9;
-	color:#0054A8;
+	color:#004081;
 }
 /*  #  END FOR ONLINE */
 
@@ -1268,8 +1268,8 @@ select.remme:focus {
 	width:80%;
 }
 .css_xhtml{
-	margin:3px auto;
-	padding:4px 0;
+	margin:1px auto;
+	height:25px;
 	width:94%;
 }
 .css img:hover {

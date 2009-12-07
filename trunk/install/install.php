@@ -339,12 +339,6 @@ case 'end' :
 		//@rename("install.php", "install.lock");
 
 break;
-
-case 'wizard' :
-
-		echo gettpl('wizard.html');
-
-break;
 }
 
 

@@ -39,6 +39,20 @@ if(function_exists('ini_set'))
 @session_name('sid');
 @session_start();
 
+
+/*
+* Fix bug with path of font When using versions of the GD library lower than 2.0.18 
+*/
+if(function_exists('putenv'))
+{
+	@putenv('GDFONTPATH=' . realpath('.'));
+}
+else if(function_exists('ini_set'))
+{
+	@ini_set('GDFONTPATH', realpath('.'));
+}
+
+
 /*
  * When any body request this file , he will see an image .. 
  */

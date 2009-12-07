@@ -109,8 +109,13 @@
 	$lang['IS_IT_OFFICIAL_DESC']					= 'We receive a lot of complaints and questions about the cause of some bugs and issues which occur in kleeja and probably we can\'t figure out what the problem is . After we have checked we have found that their are some unofficially copies released from untrusted publishers .<br /><br /> <fon style="color:#154188;border-bottom:1px dashed #154188;padding:4px 0;"> So are you sure of this copy is downloaded from kleeja official site ?</font>';
 	$lang['IS_IT_OFFICIAL_YES']						= 'Yes, my copy is officially and I downloaded it from the official site ( Kleeja.com )';
 	$lang['IS_IT_OFFICIAL_NO']						= '<a style="color:red" target="_blank" href="http://www.kleeja.com">No, I\'ve downloaded it from other site, Go ahead now and download it from Kleeja official site</a>';
-	$lang['INST_WHAT_IS_KLEEJA_T']					= 'ãÇåí ßáíÌÇ ¿';
+	$lang['INST_WHAT_IS_KLEEJA_T']					= 'What is Kleeja ?';
+	
 	$lang['INST_WHAT_IS_KLEEJA']					= 'Kleeja  ÊäØŞ ÚÑÈíÇğ " ßáíÌÇ " ..! <br /> ÓßÑÈÊ ÑİÚ ãáİÇÊ ãÌÇäí æ ãİÊæÍ ÇáãÕÏÑ ãÚ ÎÕÇÆÕ İÑíÏå áãÓÇÚÏÉ ÃÕÍÇÈ ÇáãæÇŞÚ ÈÃä íãÊáßæ ãÑßÒ ÊÍãíá Şæí æíÚÊãÏ Úáíå  .. åĞÇ ßÊÚÑíİ ãÈÓØ  , ÃãÇ ßáíÌÇ İí ÇáÍŞíŞå åæ ÓßÑÈÊ ÖÎã ÇáÇãßÇäíÇÊ Óåá ÇáÅÏÇÑÉ æÇáÃåã åæ Ãä äÙÇã ÇáÍãÇíÉ ãÊíä  æíãáß ãä ÇáÃäÙãÉ ÇáãÚŞÏÉ ãÇ íÄãä áãæŞÚß ÇáÍãÇíÉ ÇáÊÇãÉ ÈÅĞä Çááå ..!';
+	
+	
+	$lang['INST_WHAT_IS_KLEEJA'] = 'Keeja is a free, features rich, open source files upload system. Kleeja is developed to help webmasters to provide a decent files hosting service on their sites . Kleeja comes with a simple source code and powerful User system , also with easy template system so you can easily customize your styles ';
+	
 	$lang['INST_SPECIAL_KLEEJA']					= 'ãä Ãåã ããíÒÇÊ ßáíÌÇ ..!';
 	$lang['INST_WHAT_IS_KLEEJA_ONE']				= '1. äÙÇã ÃÚÖÇÁ Şæí ÊÓÊØíÚ ÑÈØå ÈÃÛáÈ ÇáÓßÑÈÊÇÊ ÇáãÓÊÎÏãÉ İí ÇáãæÇŞÚ ÇáÇÌÊãÇÚíÉ .<br />2. áæÍÉ ÊÍßã ãĞåáå áíÓ İŞØ ááÊÍßã ÈÇáãáİÇÊ æáßä ááÊÍßã ÃíÖÇ Èßá ÕÛíÑå æßÈíÑå ÈÇáÓßÑÈÊ .<br />3. äÙÇã ÇáÓÊÇíáÇÊ ÇáÈÓíØ íÌÚáß ÊÓÊØíÚ Çä ÊÕäÚ ÓÊÇíáß ÈäİÓß.<br />4. ãÚ ßáíÌÇ æäÙÇã ÇáÅÖÇİÇÊ ÇáÈÑãÌíÉ ÊÓÊØíÚ Ãä ÊŞæã ÈÊÑßíÈ ÇáßËíÑ ãä ÇáÇÖÇİÇÊ ÇáÑÇÆÚÉ .<br />5. áíÓ åĞÇ İÍÓÈ Èá ßáíÌÇ Êãáß ÇáßËíÑ æÇáßËíÑ .. ÑÌÇÁÇğ Şã ÈÒíÇÑÉ ÇáÕİÍå <a target="_blank" href="http://www.kleeja.com/about/">ãÚáæãÇÊ æããíÒÇÊ</a> áÊÚÑİ ÃßËÑ .';
 	$lang['YES']									= 'Yes';

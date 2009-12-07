@@ -104,20 +104,4 @@ div.install_update:hover {background:#FFFDE2 url('style/images/xhover.gif') repe
 .cp{color:#79A33A;background-color:#EDFFD1;border-top:1px solid #BCD891;border-bottom:1px solid #BCD891;}
 .cp:hover {background-color:#FBFFF7;border-top:1px solid #DEFFAA;border-bottom:1px solid #DEFFAA;}
 .inst_finish {width:70%;padding:10px;margin:6px auto 0 auto;color:#004081;text-align:justify;background:#FEFEFE;border-top: 1px solid #A9B8C2;border-bottom: 1px solid #A9B8C2;}
-.wz{
-color: #333333;
-background-color: #FAFAFA;
-font-size:12px;
-font-weight: normal;
-border: 1px solid #A9B8C2;
-padding:10px 0;
-	-moz-border-radius : 8px; /* Mozilla */
-	-webkit-border-radius : 8px; /* Webkit */
-	-khtml-border-radius : 8px; /* Konqueror */
-	border-radius : 8px; /* CSS3 only */
 
-}
-.wz a:hover {
-color:#FF8000;
-text-decoration: none;
-}

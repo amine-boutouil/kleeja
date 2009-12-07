@@ -337,7 +337,11 @@ case 'end' :
 		echo gettpl('end.html');
 		//for safe ..
 		//@rename("install.php", "install.lock");
+break;
 
+case 'wizard' :
+
+                echo gettpl('wizard.html');
 break;
 }
 

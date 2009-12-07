@@ -1,22 +1,26 @@
 <div class="home" dir="{{echo $lang['DIR']}}" style="text-align:cener;">
-
-	<img src="style/images/wink.png" alt="congratulation" />
-	<br /><br />
-	<span style="color:blue;">{{echo $lang['INST_FINISH_SQL']}}</span>
-	<br /><br />
-
+	<p style="font-size:500%;color:#fff;margin-top:5px;">END</p>
 	<br />
-	<table width="40%" style="margin:0 auto;">
+	<table class="inst_finish">
 		<tr>
-			<td><img src="style/images/home.png" alt="home" style="vertical-align:middle;padding:0 4px;" /> <a href="../index.php">{{echo $lang['INDEX']}}</a></td>
-			<td><img src="style/images/kcontrol.png" alt="admin" style="vertical-align:middle;padding:0 4px;" /> <a href="../admin/">{{echo $lang['ADMINCP']}}</a></td>
+			<td><img src="style/images/wink.png" alt="" style="vertical-align:middle;padding:0 4px;" /> </td>
+			<td>{{echo $lang['INST_FINISH_SQL']}}</td>
 		</tr>
 	</table>
-	<br /><br />
-	{{echo $lang['INST_KLEEJADEVELOPERS']}}
-	<br /><br />
-
-	<a href="http://www.kleeja.com">www.kleeja.com</a>
-	<br /><br />
-
+	
+	<table width="70%" style="margin:5px auto;">
+		<tr>
+		<td rowspan="2" class="wizard" onclick="window.location.href='./install.php?step=wizard&amp;{{echo getlang(1)}}';">
+			<img src="style/images/tools-wizard.png" alt="" /><br />{{echo $lang['WZ_TITLE']}}</td>
+			<td class="wizard endhome" onclick="window.location.href='../index.php';" style="text-align:{{echo $lang['DIR']=='rtl'?'right':'left'}};"><img src="style/images/home.png" alt="" style="vertical-align:middle;padding:0 4px;" /> {{echo $lang['INDEX']}}</td>
+		</tr>
+		<tr>
+			<td class="wizard cp" onclick="window.location.href='../admin/';" style="text-align:{{echo $lang['DIR']=='rtl'?'right':'left'}};"><img src="style/images/kcontrol.png" alt="" style="vertical-align:middle;padding:0 4px;" /> {{echo $lang['ADMINCP']}}</td>
+		</tr>
+	</table>
+	<p style="font-size:150%;color:red;margin-top:5px;">{{echo $lang['INST_KLEEJADEVELOPERS']}}
+		<br /><br />
+		<a href="http://www.kleeja.com">www.kleeja.com</a>
+	</p>
+	<br />
 </div>

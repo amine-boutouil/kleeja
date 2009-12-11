@@ -1,12 +1,15 @@
-<br /><br />
+<div class="home" dir="{{echo $lang['DIR']}}" style="text-align:{{echo $lang['DIR']=='rtl'?'right':'left'}};">
 
 {{if($GLOBALS['complete_upate']):}}
-
-	<span style="color:green;">{{echo $lang['INST_UPDATE_IS_FINISH']}}</span>
+<div class="sql_content">
+	<ul>
+		<li><img src="style/images/li_sq.png" style="vertical-align:middle;padding:0 6px;" alt="ok" /> {{echo $lang['INST_UPDATE_IS_FINISH']}}</li>
+	</ul>
 	<br />
 	<img src="style/images/home.gif" alt="home" />&nbsp;<a href="../index.php">{{echo $lang['INDEX']}}</a>
 	<br /><br />
 	<img src="style/images/adm.gif" alt="admin" />&nbsp;<a href="../admin/">{{echo $lang['ADMINCP']}}</a>
+</div>
 	<br /><br />
 	{{echo $lang['INST_KLEEJADEVELOPERS']}}
 	<br /><br />
@@ -24,3 +27,5 @@
 	<a href="http://www.kleeja.com">www.kleeja.com</a>
 	<br /><br />	
 {{endif;}}
+	
+</div>

@@ -1,33 +1,36 @@
-<br /><br />
-<div class="home">
-<div class="upda">
-{{echo $lang['INST_CHOOSE_UPDATE_FILE']}}
-	<div class="clr"></div><br /><br />
-		{{if (sizeof($GLOBALS['upfiles'])):}}
-		<form  action="{{echo $_SERVER['PHP_SELF'] . '?step=action_file&amp;' . getlang(1)}}" method="post">
-			<select name="action_file_do" style="width: 352px">
+<div class="home" style="width:66%;" dir="{{echo $lang['DIR']}}">
+	<img src="style/images/webdev.png" alt="" />
+		<div class="clr"></div>
+	
+	{{if (sizeof($GLOBALS['upfiles'])):}}
+		<p style="color:#006BD8;margin:8px auto;">{{echo $lang['INST_CHOOSE_UPDATE_FILE']}}</p>
+			<div class="clr"></div>
+	<form  action="{{echo $_SERVER['PHP_SELF'] . '?step=action_file&amp;' . getlang(1)}}" method="post">
+		<select class="select_version" name="action_file_do" size="2" dir="ltr">
 			{{foreach($GLOBALS['upfiles'] as $k=>$v):}}
 				<option value="{{echo $v}}">{{echo $v}}</option>
 			{{endforeach}}
-			</select>
-			<br />
-			<br />
-			
+		</select>
+			<div class="clr"></div><br />
 		<input name="submitlfile" type="submit" value="{{echo $lang['INST_NEXT']}}" />		
 		<input onclick="window.location.href='./index.php?step=choose&amp;{{echo getlang(1)}}';return false;" name="previous" type="submit" value="{{echo $lang['INST_PREVIOUS']}}" />
-
-		</form>
 		
+	</form>
 
-		{{else:}}
-			<br /><br />
-			<p style="color:green;">
-			<strong>{{echo $lang['INST_UPDATE_CUR_VER_IS_UP']}}
-			<br /> 
-			[ {{echo array_search($GLOBALS['config']['db_version'], $GLOBALS['order_update_files'])}} :: {{echo $GLOBALS['config']['db_version']}} ]
-			</strong>
-			</p>
-			<br /><br /><br />
-		{{endif;}}
-</div>
+	{{else:}}
+	<div align="center">
+		<table class="up_ver" width="74%">
+			<tr>
+				<td><img src="style/images/ok_version.jpg" alt="ok update version" /></td>
+				<td>
+				<p style="font-size:12px;font-weight:400;">{{echo $lang['INST_UPDATE_CUR_VER_IS_UP']}}</p>
+				<div class="clr"></div><br />
+				<p style="color:green;font-size:21px;">[ {{echo array_search($GLOBALS['config']['db_version'], $GLOBALS['order_update_files'])}} :: {{echo $GLOBALS['config']['db_version']}} ]</p>
+
+				</td>
+			</tr>
+		</table>
+	</div>
+		<div class="clr"></div>
+	{{endif;}}
 </div>

@@ -35,7 +35,6 @@ div.install_update:hover {background:#FFFDE2 url('style/images/xhover.gif') repe
 .ul_check,.ul_check2 {list-style:none;margin:5px 0;}
 .notice_check {text-align:justify;font-size:11px;border-top:1px solid #D3B25B;border-bottom:1px solid #D3B25B;background-color:#FCF5E2;padding:6px;margin:2px 0;}
 .notice_check p{	text-indent:10px;background-color:#FFF;padding:2px 0;margin-top:4px;font-weight:400;}
-.upda{background:url('style/images/update.png') no-repeat right center;}
 .table_conf {width:94%;margin:6px auto;font-size:12px;font-weight:400;}
 .input_conf {width:220px;direction:ltr;cursor: text;border-left: 1px solid #AFAEAA;border-top: 1px solid #AFAEAA;border-right: 1px solid #D5D5C8;border-bottom: 1px solid #D5D5C8;}
 .input_conf:hover {border: 1px solid #999;}
@@ -104,4 +103,19 @@ div.install_update:hover {background:#FFFDE2 url('style/images/xhover.gif') repe
 .cp{color:#79A33A;background-color:#EDFFD1;border-top:1px solid #BCD891;border-bottom:1px solid #BCD891;}
 .cp:hover {background-color:#FBFFF7;border-top:1px solid #DEFFAA;border-bottom:1px solid #DEFFAA;}
 .inst_finish {width:70%;padding:10px;margin:6px auto 0 auto;color:#004081;text-align:justify;background:#FEFEFE;border-top: 1px solid #A9B8C2;border-bottom: 1px solid #A9B8C2;}
+.select_version {width:54%;border:1px solid #D5A920;}
+ 
+.select_version option { /* Text and background colour, blue on light gray */
+color:#FF8000;
+background-color:#fff;
+border-bottom:1px dotted #D6D6D6;
+font-size:14px;font-weight:bold;
+padding:2px 10px;
+}
 
+.up_ver{
+color:#004081;
+padding: 2px 6px;
+border-right:1px solid #91BBD8;
+border-left:1px solid #91BBD8;
+}

@@ -5,7 +5,7 @@
 	  <plugin_version>1.0</plugin_version>
 	  <plugin_description>نقل الصور والملفات التي تحمل صيغ معينه إلى مجلد خاص وعرضها برابط مباشر</plugin_description>
 	  <plugin_author>http://www.kleeja.com</plugin_author>
-	  <plugin_kleeja_version>1.0.0</plugin_kleeja_version>
+	  <plugin_kleeja_version>1.0.1</plugin_kleeja_version>
 	</info>
 
 	<install><![CDATA[
@@ -48,8 +48,15 @@
   	<hook name="kleeja_get_link_func"><![CDATA[
   	if(isset($extra['::NAME::']))
 	{
+		if($config['mod_writer'])
+		{
+			$extra['::NAME::'] = str_replace('-', '.', $extra['::NAME::']);	
+		}
+
 		$ext = @explode(".", $extra['::NAME::']);
 		$ext = $ext[sizeof($ext)-1];
+		
+		
 		$ex	= explode(',',$config['imagefolderexts']);
 		if(in_array(strtolower($ext), $ex))
 		{

@@ -2,10 +2,10 @@
 <kleeja>
 	<info>
 	  <plugin_name>Kleeja Live Folder name</plugin_name>
-	  <plugin_version>1.0</plugin_version>
+	  <plugin_version>1.1</plugin_version>
 	  <plugin_description>نقل الصور والملفات التي تحمل صيغ معينه إلى مجلد خاص وعرضها برابط مباشر</plugin_description>
 	  <plugin_author>http://www.kleeja.com</plugin_author>
-	  <plugin_kleeja_version>1.0.1</plugin_kleeja_version>
+	  <plugin_kleeja_version>1.0.0</plugin_kleeja_version>
 	</info>
 
 	<install><![CDATA[
@@ -48,18 +48,27 @@
   	<hook name="kleeja_get_link_func"><![CDATA[
   	if(isset($extra['::NAME::']))
 	{
-		if($config['mod_writer'])
+		if($config['mod_writer'] && !empty($extra['::NAME::']) && $config['id_form'] != 'direct')
 		{
-			$extra['::NAME::'] = str_replace('-', '.', $extra['::NAME::']);	
+			$ext = @explode("-", $extra['::NAME::']);
+		}
+		else
+		{
+			$ext = @explode(".", $extra['::NAME::']);
 		}
 
-		$ext = @explode(".", $extra['::NAME::']);
+		
 		$ext = $ext[sizeof($ext)-1];
-		
-		
 		$ex	= explode(',',$config['imagefolderexts']);
+		
 		if(in_array(strtolower($ext), $ex))
 		{
+			
+			if($config['mod_writer'] && !empty($extra['::NAME::']) && $config['id_form'] != 'direct')
+			{
+				$extra['::NAME::'] = str_replace('-', '.', $extra['::NAME::']);	
+			}
+			
 			$links = array_merge($links, array(
 						'thumb' => '::DIR::/thumbs/::NAME::',
 						'image' => '::DIR::/::NAME::',

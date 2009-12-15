@@ -72,9 +72,6 @@ if(function_exists('ini_set'))
 	//session_save_path('./cache/');
 }
 
-@session_name('sid');
-@session_start();
-
 
 /**
 * functions for start
@@ -153,11 +150,24 @@ function get_microtime()
 {
 	list($usec, $sec) = explode(' ', microtime());	return ((float)$usec + (float)$sec);
 }
+//is bot ?
+function is_bot($bots = array('googlebot', 'yahoo' ,'msnbot'))
+{
+	return preg_match('/(' . implode('|', $bots) . ')/i', ($_SERVER['HTTP_USER_AGENT'] ? 	$_SERVER['HTTP_USER_AGENT'] : @getenv('HTTP_USER_AGENT'))) ? true : false;
+}
 
+$IS_BOT = is_bot();
 $starttm = get_microtime();
+
 
 //Kill globals varibles
 unregister_globals();
+
+if(!is_bot())
+{
+	@session_name('sid');
+	@session_start();
+}
 
 //try close it
 if (@get_magic_quotes_runtime())
@@ -263,7 +273,7 @@ $klj_session = $SQL->escape(session_id());
 //fix bug # 181
 //we stopped this in development stage cuz it's will hide notices
 $do_gzip_compress = false; 
-if ($config['gzip'] == '1' && !defined('IN_DOWNLOAD') && !defined('IN_ADMIN') && !defined('DEV_STAGE')) 
+if ($config['gzip'] == '1' && !defined('IN_DOWNLOAD') && !defined('IN_ADMIN') && !defined('DEV_STAGE') && !defined('IN_SUBMIT_UPLOADING')) 
 {
 	function compress_output($output)
 	{

@@ -255,12 +255,12 @@ tr:hover {background-color:#FFFFDD;}
 .collapse_buttons  {margin:5px 0;float: left;}
 .show_all {background: url(../images/tall-down-arrow.gif) no-repeat right center;padding-right: 12px;}
 .hid_all {display: none;	background: url(../images/tall-up-arrow.gif) no-repeat right center;padding-right: 12px;}
-.admin_anfo_bg {background:url(../images/bg_admin_anfo.png) no-repeat -10px 4px;}
+.admin_anfo_bg {background:url(../images/bg_admin_anfo.png) no-repeat 1px 4px;}
 /* ## view list control panel */
 
 /* start info user admin */
 .adminimage {background: url(../images/adminusername.gif) no-repeat center;width:90px;height:78px;}
-.text_info{width:74%;line-height:24px;border-bottom: 1px dashed #DFDFDF;}
+.text_info{width:74%;line-height:24px;font-size:11px;font-weight: bold;border-bottom: 1px dashed #DFDFDF;}
 .box_botton{margin:2px auto;text-align:center;}
 .button_img ,.button_file{background:#EFECEC;float:right;padding:6px 10px;text-align:center;font-size:11px;font-weight: bold;border: solid 1px #D7D7D7;-moz-border-radius: 10px; border-radius:10px;}
 .button_img {margin-left:10px;}
@@ -269,6 +269,7 @@ tr:hover {background-color:#FFFFDD;}
 /* ## info user admin  */
 
 .fieldset_google,.fieldset_yahoo {height:56px;line-height:28px;padding:10px;background:#fff;border: 1px solid #B1B1B1;-moz-border-radius: 4px; border-radius:4px;}
+.fieldset_google p,.fieldset_yahoo p {line-height:28px;font-weight:bold;font-size:11px;}
 .fieldset_google {background:url(../images/google.gif) no-repeat 5% 50%;}
 .fieldset_yahoo {background:url(../images/yahoo.gif) no-repeat 5% 50%;}
 .fieldset_google  legend ,.fieldset_yahoo  legend{color:#B1B1B1;line-height:0;}
@@ -276,7 +277,7 @@ tr:hover {background-color:#FFFFDD;}
 .fieldset_yahoo:hover {background-color:#F3F3F3;border: 1px solid #A375CF;color:#800080}
 
 /*   start general statistics */
-.general_statistics {background:url(../images/bg_general_statistics.png) no-repeat -10px 4px;}
+.general_statistics {background:url(../images/bg_general_statistics.png) no-repeat -1px 4px;}
 
 .disk_size{padding:0;margin:0;float:left;}
 .filsiz{padding:3px; font-weight:bold;font-size:x-large;color:#BFBFBF;text-align:center;text-decoration:line-through;vertical-align:top}

@@ -87,7 +87,7 @@ $('div#{{id}}').pulse({
 
 <!-- start info user admin -->
 <li>
-	<p class="option_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/user.png" alt=".." />{lang.USER_STAT}</cite><img class="timestamp" src="{STYLE_PATH_ADMIN}images/timestamp.gif" alt="Kleeja love you ..," /></p>
+	<p class="option_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/user.png" alt=".." />{lang.USER_STAT}</cite><img class="timestamp" src="{STYLE_PATH_ADMIN}images/icon/timestamp.gif" alt="Kleeja love you ..," /></p>
 	<div class="option_body">
 	<!-- background box  -->
 	<div class="admin_anfo_bg">
@@ -95,14 +95,14 @@ $('div#{{id}}').pulse({
 		<tr>
 			<td class="adminimage">&nbsp;</td>
 			<td>
-			<p class="text_info">{usernamelang}</p>
-			<IF NAME="last_visit">
-			<p class="text_info">{lang.LAST_VISIT} : {last_visit}</p>
-			</IF>
+				<p class="text_info"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/Circle_Orange.png" alt=".." />{usernamelang}</p>
 			<IF NAME="stat_last_file!='0'">
-			<p class="text_info">{lang.LSTFLE_ST} : <a href="{last_file_up_url}" onclick="window.open(this.href,'_blank');return false;">{last_file_up}</a></p>
+				<p class="text_info"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/Circle_Orange.png" alt=".." />{lang.LSTFLE_ST} : <a href="{last_file_up_url}" onclick="window.open(this.href,'_blank');return false;">{last_file_up}</a></p>
 			<ELSE>
-			<p class="text_info">{lang.UNKNOWN}</p>
+				<p class="text_info"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/Circle_Orange.png" alt=".." />{lang.UNKNOWN}</p>
+			</IF>
+			<IF NAME="last_visit">
+				<p class="text_info"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/Circle_Orange.png" alt=".." />{lang.LAST_VISIT} : <span style="color:red">{last_visit}</span></p>
 			</IF>
 			</td>
 		</tr>
@@ -111,8 +111,9 @@ $('div#{{id}}').pulse({
 		<tr>
 			<td>&nbsp;</td>
 			<td class="box_botton">
-			<p><a class="button_img" href="{h_lst_imgs}"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/viewpicture.png" alt=".." />{lang.IMG_LST_VST_SEARCH}</a></p>
-			<p><a class="button_file" href="{h_lst_files}"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/viewfiles.png" alt=".." />{lang.FLS_LST_VST_SEARCH}</a></p>
+			
+			<p><a class="button_img" href="{h_lst_imgs}"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/viewpicture.png" alt=".." />{lang.IMG_LST_VST_SEARCH}</a></p>
+			<p><a class="button_file" href="{h_lst_files}"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/old-edit-find.png" alt=".." />{lang.FLS_LST_VST_SEARCH}</a></p>
 			</td>
 		</tr>
 		</IF>
@@ -125,10 +126,12 @@ $('div#{{id}}').pulse({
 
 <!-- start general statistics  -->	
 <li>
-	<p class="option_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/general_title.png" alt="Kleeja love you ..," />{lang.GENERAL_STAT}</cite><img class="timestamp" src="{STYLE_PATH_ADMIN}images/timestamp.gif" alt="Kleeja love you ..," /></p>
+	<p class="option_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/general_title.png" alt="Kleeja love you ..," />{lang.GENERAL_STAT}</cite><img class="timestamp" src="{STYLE_PATH_ADMIN}images/icon/timestamp.gif" alt="Kleeja love you ..," /></p>
 	<div class="option_body">
 
 <div class="general_statistics">
+
+
 	<p class="text_info"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/numberusers.png" alt=".." />{lang.AUSERS_NUM} : [ {users_number} ]</p>
 		<IF NAME="config.user_system==1">
 	<p class="text_info"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/lastuser.png" alt=".." />{lang.LAST_REG} : [ {lst_reg} ]</p>
@@ -164,7 +167,7 @@ $('div#{{id}}').pulse({
 	
 <!-- start search stat  -->
 <li>
-	<p class="option_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/search_engines.png" alt="{lang.SEARCH_STAT}" />{lang.SEARCH_STAT}</cite><img class="timestamp" src="{STYLE_PATH_ADMIN}images/timestamp.gif" alt="Kleeja love you ..," /></p>
+	<p class="option_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/search_engines.png" alt="{lang.SEARCH_STAT}" />{lang.SEARCH_STAT}</cite><img class="timestamp" src="{STYLE_PATH_ADMIN}images/icon/timestamp.gif" alt="Kleeja love you ..," /></p>
 	<div class="option_body">
 	<!-- start table search  -->
 	<table width="100%" cellspacing="0" cellpadding="0">
@@ -195,7 +198,7 @@ $('div#{{id}}').pulse({
 <!-- # search stat  -->
 
 	<li>
-		<p class="option_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/infoanother.png" alt="Kleeja love you ..," />{lang.OTHER_INFO}</cite><img class="timestamp" src="{STYLE_PATH_ADMIN}images/timestamp.gif" alt="Kleeja love you ..," /></p>
+		<p class="option_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/infoanother.png" alt="Kleeja love you ..," />{lang.OTHER_INFO}</cite><img class="timestamp" src="{STYLE_PATH_ADMIN}images/icon/timestamp.gif" alt="Kleeja love you ..," /></p>
 		<div class="option_body">
 
 <table>
@@ -258,7 +261,7 @@ $('div#{{id}}').pulse({
 
 <!-- start team kleeja -->
 <div class="team_info">
-	<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/config_users.png" alt="Team Kleeja" />{lang.KLEEJA_TEAM}</h2>
+	<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/Info_team.png" alt="Team Kleeja" />{lang.KLEEJA_TEAM}</h2>
 	<table width="100%" cellspacing="0" cellpadding="0">
 		<tr class="team_tr">
 			<td colspan="2">Name</td>

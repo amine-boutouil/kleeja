@@ -41,15 +41,17 @@ input[type="password"]:focus,input[type="text"]:focus,select:focus,textarea:focu
 
 
 /* body */
-#divbody   {margin:0px auto; width: 94%;padding:10px 10px 20px 10px;border: 1px solid #BFBFBF;background:#FFF url(../images/div-body.jpg) repeat-x top left;-moz-border-radius-topright: 10px;-webkit-border-top-right-radius: 10px;-moz-border-radius-bottomleft: 10px;-webkit-border-bottom-left-radius: 10px;}
+#divbody   {margin:0px auto;width: 94%;padding:10px 10px 20px 10px;border: 1px solid #BFBFBF;background:#FFF url(../images/div-body.jpg) repeat-x top left;-moz-border-radius-topright: 10px;-webkit-border-top-right-radius: 10px;-moz-border-radius-bottomleft: 10px;-webkit-border-bottom-left-radius: 10px;}
 /* body */
 
 /* middle */
 #divmiddle {width:70%;float: left;display:inline;}
-/* middle */	
+/* middle */
 				
 /* right  menu */	
-#main_menu, #menu_horizontal {float:right; width:26%; padding:10px; background: #EFE7B8;border: 4px solid #FEA53D;position: relative;-moz-border-radius: 8px; border-radius:1px;}
+#main_menu{ width:26%;}
+#menu_horizontal{ width:4%;}
+#main_menu, #menu_horizontal {float:right; padding:10px; background: #EFE7B8;border: 4px solid #FEA53D;position: relative;-moz-border-radius: 8px; border-radius:1px;}
 #main_menu .body_menu, #menu_horizontal .body_menu_horizontal {text-align:center;}
 .link_menu ,.link_current {float: right; height: 60px; width:48%; margin:1px;border:1px solid #D6D6CE;border-top:1px solid #D6D6CE;border-bottom:2px solid #CDCDCD;background: #E2E1DD url(../images/bg-right-menu.jpg) repeat;}
 .link_current {height:57px;background:#FFCC00;border-top: #EB8647 3px solid;border-bottom:#EB8647 3px solid;} 

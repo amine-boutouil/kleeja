@@ -23,6 +23,11 @@
 <IS_BROWSER="ie">
 <link rel="stylesheet" type="text/css" href="{STYLE_PATH_ADMIN}css/ie.css" />
 </IS_BROWSER>
+<IF NAME="MINI_MENU">
+<style type="text/css">
+	#divmiddle {width:93%;float: left;display:inline;}
+</style>
+</IF>
 <!--  # css coding -->
 <script type="text/javascript">
 <!--
@@ -78,10 +83,10 @@ $(document).ready(function() {
 <IF NAME="MINI_MENU">
 <div id="menu_horizontal">	
 	<div class="body_menu_horizontal">
-	<div class="link_menu_horizontal"><p><a title="{lang.RETURN_HOME}" href="{config.siteurl}"><img src="{STYLE_PATH_ADMIN}images/index_button.gif" alt="{lang.RETURN_HOME}" style="margin:0 8px;vertical-align:middle;" />{lang.RETURN_HOME}</a></p></div>
-	<div class="link_menu_horizontal"><p><a title="{lang.R_CPINDEX}" href="./"><img src="{STYLE_PATH_ADMIN}images/cp_button.gif" alt="{lang.R_CPINDEX}" style="margin:0 8px;vertical-align:middle;" />{lang.R_CPINDEX}</a></p></div>
+	<div class="link_menu_horizontal"><p><a title="{lang.RETURN_HOME}" href="{config.siteurl}"><img src="{STYLE_PATH_ADMIN}images/index_button.gif" alt="{lang.RETURN_HOME}" style="margin:0 8px;vertical-align:middle;" /></a></p></div>
+	<div class="link_menu_horizontal"><p><a title="{lang.R_CPINDEX}" href="./"><img src="{STYLE_PATH_ADMIN}images/cp_button.gif" alt="{lang.R_CPINDEX}" style="margin:0 8px;vertical-align:middle;" /></a></p></div>
 <LOOP NAME="adm_extensions_menu">	
-	<div class="({{current}}?link_menu_horizontal link_current_horizontal:link_menu_horizontal)"><p><a title="{{lang}}" href="{{link}}" <IF LOOP="confirm"> onclick="javascript:return confirm_from();"</IF>><img src="{{icon}}" alt="{{lang}}" style="margin:0 8px;vertical-align:middle;" />{{lang}}</a></p></div>
+	<div class="({{current}}?link_menu_horizontal link_current_horizontal:link_menu_horizontal)"><p><a title="{{lang}}" href="{{link}}" <IF LOOP="confirm"> onclick="javascript:return confirm_from();"</IF>><img src="{{icon}}" alt="{{lang}}" style="margin:0 8px;vertical-align:middle;" /></a></p></div>
 </LOOP>
 	</div>
 <!-- start clear  -->

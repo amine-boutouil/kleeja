@@ -76,12 +76,12 @@ $(document).ready(function() {
 <!-- start admin menu right  -->
 <IF NAME="SHOW_LIST">
 <IF NAME="MINI_MENU">
-<div id="main_menu" style="width:160px">	
-	<div class="body_menu">
-	<div class="link_menu"><p><a title="{lang.RETURN_HOME}" href="{config.siteurl}"><img src="{STYLE_PATH_ADMIN}images/index_button.gif" alt="{lang.RETURN_HOME}" /></a></p></div>
-	<div class="link_menu"><p><a title="{lang.R_CPINDEX}" href="./"><img src="{STYLE_PATH_ADMIN}images/cp_button.gif" alt="{lang.R_CPINDEX}" /></a></p></div>
+<div id="menu_horizontal">	
+	<div class="body_menu_horizontal">
+	<div class="link_menu_horizontal"><p><a title="{lang.RETURN_HOME}" href="{config.siteurl}"><img src="{STYLE_PATH_ADMIN}images/index_button.gif" alt="{lang.RETURN_HOME}" style="margin:0 8px;vertical-align:middle;" />{lang.RETURN_HOME}</a></p></div>
+	<div class="link_menu_horizontal"><p><a title="{lang.R_CPINDEX}" href="./"><img src="{STYLE_PATH_ADMIN}images/cp_button.gif" alt="{lang.R_CPINDEX}" style="margin:0 8px;vertical-align:middle;" />{lang.R_CPINDEX}</a></p></div>
 <LOOP NAME="adm_extensions_menu">	
-	<div class="({{current}}?link_menu link_current:link_menu)"><p><a title="{{lang}}" href="{{link}}" <IF LOOP="confirm"> onclick="javascript:return confirm_from();"</IF>><img src="{{icon}}" alt="{{lang}}" /></a></p></div>
+	<div class="({{current}}?link_menu_horizontal link_current_horizontal:link_menu_horizontal)"><p><a title="{{lang}}" href="{{link}}" <IF LOOP="confirm"> onclick="javascript:return confirm_from();"</IF>><img src="{{icon}}" alt="{{lang}}" style="margin:0 8px;vertical-align:middle;" />{{lang}}</a></p></div>
 </LOOP>
 	</div>
 <!-- start clear  -->

@@ -25,7 +25,7 @@
 </IS_BROWSER>
 <IF NAME="MINI_MENU">
 <style type="text/css">
-	#divmiddle {width:93%;float: left;display:inline;}
+	#divmiddle {width:93%;}
 </style>
 </IF>
 <!--  # css coding -->
@@ -81,33 +81,33 @@ $(document).ready(function() {
 <!-- start admin menu right  -->
 <IF NAME="SHOW_LIST">
 <IF NAME="MINI_MENU">
-<div id="menu_horizontal">	
-	<div class="body_menu_horizontal">
-	<div class="link_menu_horizontal"><p><a title="{lang.RETURN_HOME}" href="{config.siteurl}"><img src="{STYLE_PATH_ADMIN}images/index_button.gif" alt="{lang.RETURN_HOME}" style="margin:0 8px;vertical-align:middle;" /></a></p></div>
-	<div class="link_menu_horizontal"><p><a title="{lang.R_CPINDEX}" href="./"><img src="{STYLE_PATH_ADMIN}images/cp_button.gif" alt="{lang.R_CPINDEX}" style="margin:0 8px;vertical-align:middle;" /></a></p></div>
-<LOOP NAME="adm_extensions_menu">	
-	<div class="({{current}}?link_menu_horizontal link_current_horizontal:link_menu_horizontal)"><p><a title="{{lang}}" href="{{link}}" <IF LOOP="confirm"> onclick="javascript:return confirm_from();"</IF>><img src="{{icon}}" alt="{{lang}}" style="margin:0 8px;vertical-align:middle;" /></a></p></div>
-</LOOP>
+	<div id="menu_horizontal">	
+		<div class="body_menu_horizontal">
+		<div class="link_menu_horizontal"><p><a title="{lang.RETURN_HOME}" href="{config.siteurl}"><img src="{STYLE_PATH_ADMIN}images/menu_mini_icons/index_button.gif" alt="{lang.RETURN_HOME}" style="margin:0 8px;vertical-align:middle;" /></a></p></div>
+		<div class="link_menu_horizontal"><p><a title="{lang.R_CPINDEX}" href="./"><img src="{STYLE_PATH_ADMIN}images/menu_mini_icons/cp_button.gif" alt="{lang.R_CPINDEX}" style="margin:0 8px;vertical-align:middle;" /></a></p></div>
+	<LOOP NAME="adm_extensions_menu">	
+		<div class="({{current}}?link_menu_horizontal link_current_horizontal:link_menu_horizontal)"><p><a title="{{lang}}" href="{{link}}" <IF LOOP="confirm"> onclick="javascript:return confirm_from();"</IF>><img src="{{icon_mini}}" alt="{{lang}}" style="margin:0 8px;vertical-align:middle;" /></a></p></div>
+	</LOOP>
+		</div>
+	<!-- start clear  -->
+	<div class="clr"></div>
+	<!-- end clear  -->
+	<a href="{link_expand_menu}"><img src="{STYLE_PATH_ADMIN}images/expand_horizontal.png" alt="{lang.RETURN_HOME}" style="float:left;" /></a>
 	</div>
-<!-- start clear  -->
-<div class="clr"></div>
-<!-- end clear  -->
-<a href="{link_expand_menu}"><img src="{STYLE_PATH_ADMIN}images/expand_horizontal.png" alt="{lang.RETURN_HOME}" style="float:left;" /></a>
-</div>
 <ELSE>
-<div id="main_menu">	
-	<div class="body_menu">
-	<div class="link_menu"><p><a title="{lang.RETURN_HOME}" href="{config.siteurl}"><img src="{STYLE_PATH_ADMIN}images/index_button.gif" alt="{lang.RETURN_HOME}" /><br />{lang.RETURN_HOME}</a></p></div>
-	<div class="link_menu"><p><a title="{lang.R_CPINDEX}" href="./"><img src="{STYLE_PATH_ADMIN}images/cp_button.gif" alt="{lang.R_CPINDEX}" /><br />{lang.R_CPINDEX}</a></p></div>
-<LOOP NAME="adm_extensions_menu">	
-	<div class="({{current}}?link_menu link_current:link_menu)"><p><a title="{{lang}}" href="{{link}}" <IF LOOP="confirm"> onclick="javascript:return confirm_from();"</IF>><img src="{{icon}}" alt="{{lang}}" /><br />{{lang}}</a></p></div>
-</LOOP>
+	<div id="main_menu">	
+		<div class="body_menu">
+		<div class="link_menu"><p><a title="{lang.RETURN_HOME}" href="{config.siteurl}"><img src="{STYLE_PATH_ADMIN}images/menu_icons/index_button.gif" alt="{lang.RETURN_HOME}" /><br />{lang.RETURN_HOME}</a></p></div>
+		<div class="link_menu"><p><a title="{lang.R_CPINDEX}" href="./"><img src="{STYLE_PATH_ADMIN}images/menu_icons/cp_button.gif" alt="{lang.R_CPINDEX}" /><br />{lang.R_CPINDEX}</a></p></div>
+	<LOOP NAME="adm_extensions_menu">	
+		<div class="({{current}}?link_menu link_current:link_menu)"><p><a title="{{lang}}" href="{{link}}" <IF LOOP="confirm"> onclick="javascript:return confirm_from();"</IF>><img src="{{icon}}" alt="{{lang}}" /><br />{{lang}}</a></p></div>
+	</LOOP>
+		</div>
+	<!-- start clear  -->
+	<div class="clr"></div>
+	<!-- end clear  -->
+	<a href="{link_expand_menu}"><img src="{STYLE_PATH_ADMIN}images/expand_horizontal.png" alt="{lang.RETURN_HOME}" style="float:left;" /></a>
 	</div>
-<!-- start clear  -->
-<div class="clr"></div>
-<!-- end clear  -->
-<a href="{link_expand_menu}"><img src="{STYLE_PATH_ADMIN}images/expand_horizontal.png" alt="{lang.RETURN_HOME}" style="float:left;" /></a>
-</div>
 </IF>
 </IF>
 <!-- end admin menu right -->

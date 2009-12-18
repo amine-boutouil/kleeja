@@ -102,6 +102,17 @@ input[type="password"]:focus, input[type="text"]:focus, select:focus,textarea:fo
 }
 
 
+/* all tables */
+table {table-layout:auto;overflow:auto;empty-cells:hide;table-layout:auto;
+	 border-collapse: collapse;width:100%;padding: 5px;border:inset 1px #DFDFDF;
+}
+tr { background-color:#F2F2F2;border-bottom:solid 1px #C8C8C8;border-top:solid 1px #C8C8C8;
+}
+td {	padding:3px 5px;border-style:groove solid;border-color:#DFDFDF;border-width:1px;
+}
+tr:hover {background-color:#FFFFDD;}
+/* all tables */
+
 /* header */
 #divheader { 
 	width: 94%; margin: 5px auto 3px; padding:1px 10px;border-top: 1px solid #D7D7D7; 
@@ -295,7 +306,6 @@ input.button1, input.button3,input.button2 {
 /* System Messages  #error*/
 
 /* System Messages  #error*/
-#system-message div.msg_repair ul {background:#EFE7B8 url(../images/bg_msg_repair.png) no-repeat 20% 20% ; }
 #system-message div.msg_repair ul li{background: url(../images/msg_repair.gif) no-repeat right center ; padding-right: 25px; }
 /* System Messages  #error*/
 
@@ -342,12 +352,6 @@ text-align:right;
 .box_all {padding:10px;background:#FFF;border: 1px double #B2B2B2;-moz-border-radius-topleft: 14px;-webkit-border-top-left-radius: 14px;-moz-border-radius-bottomright: 14px;-webkit-border-bottom-right-radius: 14px;}
 /* ## box_all */
 
-/* all tables */
-table {table-layout:auto;overflow:auto;empty-cells:hide;table-layout:auto;border-collapse: collapse;width:100%;padding: 5px;border:inset 1px #DFDFDF;}
-tr {background-color:#F2F2F2;border-bottom:solid 1px #C8C8C8;border-top:solid 1px #C8C8C8}
-td {padding:3px 5px;border-style:groove solid;border-color:#DFDFDF;border-width:1px;}
-tr:hover {background-color:#FFFFDD;}
-/* all tables */
 
 /* usefull colors */
 .ored,.ored:hover {background-color:#FFCACA;}
@@ -371,12 +375,12 @@ tr:hover {background-color:#FFFFDD;}
 .table_exts td {vertical-align: middle;}
 
 .o_all, .o_all {background-color:black; color;white}
-.o_g, .o_g {background-color:green;}
-.o_u, .o_u{background-color:blue;}
+.o_g, .o_g {background-color:#FFD7DD;}
+.o_u, .o_u{background-color:#DDFFD7;}
 
 .o_all, .o_all:hover {background-color:#F2FFCA; color;white}
-.o_g, .o_g:hover {background-color:green;}
-.o_u, .o_u:hover {background-color:blue;}
+.o_g, .o_g:hover {background-color:#FFD7DD;}
+.o_u, .o_u:hover {background-color:#DDFFD7;}
 .exts {padding: 5px;font-style:italic;font-weight:bold;font-size:12px; color: #0B55C4;}
 
 

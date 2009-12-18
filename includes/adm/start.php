@@ -55,7 +55,7 @@ $ADM_NOTIFICATIONS = array();
 
 //useing IE6 ! and he is admin ?  omg !
 $u_agent = (!empty($_SERVER['HTTP_USER_AGENT'])) ? htmlspecialchars((string) strtolower($_SERVER['HTTP_USER_AGENT'])) : (function_exists('getenv') ? getenv('HTTP_USER_AGENT') : '');
-if(strpos($u_agent, trim('msie 6')) !== false && !empty($u_agent))
+if(is_browser('ie6') && !is_browser('ie8, ie7'))
 {
 	$ADM_NOTIFICATIONS[]  = array('id' => 'IE6', 'msg_type'=> 'error', 'title'=> $lang['NOTE'], 'msg'=> $lang['ADMIN_USING_IE6']);
 }

@@ -383,7 +383,7 @@ switch ($_GET['sty_t'])
 			{
 				if($filename = @fopen($tpl_path, 'w'))
 				{
-					@fwrite($filename, base64_decode($bkup_templates[$tpl_name]));
+					@fwrite($filename, kleeja_base64_decode($bkup_templates[$tpl_name]));
 					@fclose($filename);
 				}
 			}
@@ -392,19 +392,19 @@ switch ($_GET['sty_t'])
 				$cached[$tpl_name] = array(
 										'action'		=> 'replace_with', 
 										'find'			=> '',
-										'action_text'	=> base64_decode($bkup_templates[$tpl_name]),
+										'action_text'	=> kleeja_base64_decode($bkup_templates[$tpl_name]),
 									);
 
 				if(file_exists(PATH . 'cache/styles_cached.php'))
 				{
 					$cached_content = file_get_contents(PATH . 'cache/styles_cached.php');
-					$cached_content = base64_decode($cached_content);
+					$cached_content = kleeja_base64_decode($cached_content);
 					$cached_content = unserialize($cached_content);
 					$cached += $cached_content;
 				}
 
 				$filename = @fopen(PATH . 'cache/styles_cached.php' , 'w');
-				@fwrite($filename, base64_encode(serialize($cached)));
+				@fwrite($filename, kleeja_base64_encode(serialize($cached)));
 				@fclose($filename);
 			}
 
@@ -437,7 +437,7 @@ switch ($_GET['sty_t'])
 		else
 		{
 			$content = file_get_contents($cached_file);
-			$content = base64_decode($content);
+			$content = kleeja_base64_decode($content);
 			$content = unserialize($content);
 
 			ob_start();
@@ -553,7 +553,7 @@ switch ($_GET['sty_t'])
 			if(!in_array(strtolower($file), array('.', '..', 'index.html', 'javascript.js', 'css', '.svn', 'images'))) 
 			{
 				$f++;
-				$bkf_contents .= "\$bkup_templates['" . $file . "'] = '" . base64_encode(file_get_contents($style_folder . $file)) . "';\n";
+				$bkf_contents .= "\$bkup_templates['" . $file . "'] = '" . kleeja_base64_encode(file_get_contents($style_folder . $file)) . "';\n";
 			}
 		}
 

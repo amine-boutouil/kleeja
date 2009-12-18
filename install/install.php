@@ -197,9 +197,10 @@ case 'data' :
 		$SQL = new SSQL($dbserver, $dbuser, $dbpass, $dbname);
 		 
 		include_once  '../includes/usr.php';
+		include_once  '../includes/functions_alternative.php';
 		$usrcp = new usrcp;
 
-		$user_salt			= substr(base64_encode(pack("H*", sha1(mt_rand()))), 0, 7);
+		$user_salt			= substr(kleeja_base64_encode(pack("H*", sha1(mt_rand()))), 0, 7);
 		$user_pass 			= $usrcp->kleeja_hash_password($_POST['password'] . $user_salt);
 		$user_name 			= $SQL->escape($_POST['username']);
 		$user_mail 			= $SQL->escape($_POST['email']);

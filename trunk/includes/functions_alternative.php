@@ -62,7 +62,7 @@ if(!function_exists('str_split'))
 
 //Custom base64_* functions
 function kleeja_base64_encode($str = ''){ return function_exists('base64_encode') ? base64_encode($str) : base64encode($str); }
-function kleeja_base64_decode($str = ''){ return function_exists('base64_decode') ? base64_encode($str) : base64decode($str); }
+function kleeja_base64_decode($str = ''){ return function_exists('base64_decode') ? base64_decode($str) : base64decode($str); }
 
 //http://www.php.net/manual/en/function.base64-encode.php#63270
 function base64encode($string = '')

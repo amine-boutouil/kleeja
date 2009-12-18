@@ -93,7 +93,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 	//add cookies
 	if(!$loginadm)
 	{
-		$usrcp->kleeja_set_cookie('ulogu', $usrcp->en_de_crypt($user_info[1] . '|' . $user_info[4] . '|' . $expire . '|' . sha1(md5($config['h_key']) .  $expire)), $expire);
+		$usrcp->kleeja_set_cookie('ulogu', $usrcp->en_de_crypt($user_info[1] . '|' . $user_info[4] . '|' . $expire . '|' . sha1(md5($config['h_key']) .  $expire . '|' . (defined('USER_ADMIN') ? '1': '0'))), $expire);
 	}
 
 	//no need after now

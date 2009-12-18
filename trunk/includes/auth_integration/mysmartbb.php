@@ -111,7 +111,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 				$hash_key_expire = sha1(md5($config['h_key']) .  $expire);
 				if(!$loginadm)
 				{
-					$usrcp->kleeja_set_cookie('ulogu', $usrcp->en_de_crypt($row['id'] . '|' . $row['password'] . '|' . $expire . '|' . $hash_key_expire), $expire);
+					$usrcp->kleeja_set_cookie('ulogu', $usrcp->en_de_crypt($row['id'] . '|' . $row['password'] . '|' . $expire . '|' . $hash_key_expire . '|' . $row['usergroup']), $expire);
 				}
 			}
 

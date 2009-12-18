@@ -157,13 +157,13 @@ class usrcp
 
 				//all user fileds info
 				$userinfo = $row;
-
+				
 				if(!$hashed)
 				{
 					$hash_key_expire = sha1(md5($config['h_key']) .  $expire);
 					if(!$loginadm)
 					{
-						$this->kleeja_set_cookie('ulogu', $this->en_de_crypt($row['id'] . '|' . $row['password'] . '|' . $expire . '|' . $hash_key_expire), $expire);
+						$this->kleeja_set_cookie('ulogu', $this->en_de_crypt($row['id'] . '|' . $row['password'] . '|' . $expire . '|' . $hash_key_expire . '|' . $row['admin']), $expire);
 					}
 					else
 					{
@@ -391,7 +391,6 @@ class usrcp
 	//encrypt and decrypt any data with our function
 	function en_de_crypt($data, $type = 1)
 	{
-		echo $data;
 		global $config;
 		static $txt = array();
 
@@ -451,16 +450,15 @@ class usrcp
 		{
 			$user_data = false;
 
-			list($user_id, $hashed_password, $expire_at, $hashed_expire) =  @explode('|', $this->en_de_crypt($this->kleeja_get_cookie('ulogu'), 2));
+			list($user_id, $hashed_password, $expire_at, $hashed_expire, $adm_or_not) =  @explode('|', $this->en_de_crypt($this->kleeja_get_cookie('ulogu'), 2));
 
 			//if not expire 
 			if(($hashed_expire == sha1(md5($config['h_key']) . $expire_at)) && ($expire_at > time()))
 			{
-				//todo : 
-				//i think we need to use this if and only if he is admin and in other case return true !
-				//check == admin ... $this->data .. 
-				//else $user_data = true...
-				$user_data = $this->data($user_id, $hashed_password, true, $expire_at);
+				if((int) $adm_or_not == 1)
+				{
+					$user_data = $this->data($user_id, $hashed_password, true, $expire_at);
+				}
 			}
 
 			if($user_data == false)

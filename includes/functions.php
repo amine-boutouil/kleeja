@@ -1570,19 +1570,7 @@ function delete_olang ($words, $lang='en')
 	return false;
 }
 
-//when php less than 5 !
-if(!function_exists('htmlspecialchars_decode'))
-{
-	function htmlspecialchars_decode($string, $style=ENT_COMPAT)
-	{
-		$translation = array_flip(get_html_translation_table(HTML_SPECIALCHARS, $style));
-		if($style === ENT_QUOTES)
-		{
-			$translation['&#039;'] = '\'';
-		}
-		return strtr($string, $translation);
-	}
-}
+
 
 //
 // administarator sometime need some files and delete other .. we
@@ -1769,29 +1757,6 @@ function kleeja_check_captcha()
 	return false;
 }
 
-//
-//http://us2.php.net/manual/en/function.str-split.php#84891
-if(!function_exists('str_split'))
-{
-    function str_split($string, $string_length=1)
-	{
-        if(strlen($string) > $string_length || !$string_length)
-		{
-            do
-			{
-                $c = strlen($string);
-                $parts[] = substr($string, 0, $string_length);
-                $string	 = substr($string, $string_length);
-            }
-			while($string !== false);
-        }
-		else
-		{
-            $parts = array($string);
-        }
-        return $parts;
-    }
-}
 
 //
 //for logging

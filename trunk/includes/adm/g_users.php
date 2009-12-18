@@ -139,7 +139,7 @@ else if (isset($_POST['newuser']))
 	if(empty($ERRORS))	 
 	{
 		$name			= (string) $SQL->escape(trim($_POST['lname']));
-		$user_salt		= (string) substr(base64_encode(pack("H*", sha1(mt_rand()))), 0, 7);
+		$user_salt		= (string) substr(kleeja_base64_encode(pack("H*", sha1(mt_rand()))), 0, 7);
 		$pass			= (string) $usrcp->kleeja_hash_password($SQL->escape(trim($_POST['lpass'])) . $user_salt);
 		$mail			= (string) trim(strtolower($_POST['lmail']));
 		$clean_name		= (string) $usrcp->cleanusername($name);
@@ -196,13 +196,13 @@ $query	= array(
 //posts search ..
 if (isset($_POST['search_user']))
 {
-	 redirect(basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&search=' . base64_encode(serialize($_POST)));
+	 redirect(basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&search=' . kleeja_base64_encode(serialize($_POST)));
 	$SQL->close();
 	exit;
 }
 else if(isset($_GET['search']))
 {
-	$search = base64_decode($_GET['search']);
+	$search = kleeja_base64_decode($_GET['search']);
 	$search	= unserialize($search);
 	$usernamee	= $search['username'] != '' ? 'AND name  LIKE \'%' . $SQL->escape($search['username']) . '%\' ' : ''; 
 	$usermailee	= $search['usermail'] != '' ? 'AND mail  LIKE \'%' . $SQL->escape($search['usermail']) . '%\' ' : ''; 
@@ -290,7 +290,7 @@ if ($nums_rows > 0)
 
 			//update
 			$admin[$row['id']] = isset($_POST['ad_' . $row['id']])  ? 1 : 0 ;
-			$user_salt		   = substr(base64_encode(pack("H*", sha1(mt_rand()))), 0, 7);
+			$user_salt		   = substr(kleeja_base64_encode(pack("H*", sha1(mt_rand()))), 0, 7);
 			$pass[$row['id']]  = ($pass[$row['id']] != '') ? "password = '" . $usrcp->kleeja_hash_password($SQL->escape($pass[$row['id']]) . $user_salt) . "', password_salt='" . $user_salt . "'," : '';
 
 			$update_query	= array(

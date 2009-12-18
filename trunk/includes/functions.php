@@ -534,12 +534,12 @@ function creat_plugin_xml($contents)
 							if(file_exists(PATH . 'cache/styles_cached.php'))
 							{
 								$cached_content = file_get_contents(PATH . 'cache/styles_cached.php');
-								$cached_content = base64_decode($cached_content);
+								$cached_content = kleeja_base64_decode($cached_content);
 								$cached_content = unserialize($cached_content);
 								$cached_instructions += $cached_content;
 							}
 							$filename = @fopen(PATH . 'cache/styles_cached.php' , 'w');
-							fwrite($filename, base64_encode(serialize($cached_instructions)));
+							fwrite($filename, kleeja_base64_encode(serialize($cached_instructions)));
 							fclose($filename);
 						}
 						
@@ -624,7 +624,7 @@ function kleeja_get_page ()
 
 function _sm_mk_utf8($text)
 {
-	 return "=?UTF-8?B?" . base64_encode($text) . "?=";
+	 return "=?UTF-8?B?" . kleeja_base64_encode($text) . "?=";
 }
 
 
@@ -1376,13 +1376,13 @@ function delete_ch_tpl($template_name, $delete_txt = array())
 		if(file_exists(PATH . 'cache/styles_cached.php'))
 		{
 			$cached_content = file_get_contents(PATH . 'cache/styles_cached.php');
-			$cached_content = base64_decode($cached_content);
+			$cached_content = kleeja_base64_decode($cached_content);
 			$cached_content = unserialize($cached_content);
 			$cached_instructions += $cached_content;
 		}
 		
 		$filename = @fopen(PATH . 'cache/styles_cached.php' , 'w');
-		fwrite($filename, base64_encode(serialize($cached_instructions)));
+		fwrite($filename, kleeja_base64_encode(serialize($cached_instructions)));
 		fclose($filename);
 	}
 	

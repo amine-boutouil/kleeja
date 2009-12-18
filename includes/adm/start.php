@@ -54,7 +54,8 @@ $kleeja_version	 = '<a href="' . basename(ADMIN_PATH) . '?cp=p_check_update" tit
 $ADM_NOTIFICATIONS = array();
 
 //useing IE6 ! and he is admin ?  omg !
-if(is_browser('ie6'))
+$u_agent = (!empty($_SERVER['HTTP_USER_AGENT'])) ? htmlspecialchars((string) strtolower($_SERVER['HTTP_USER_AGENT'])) : (function_exists('getenv') ? getenv('HTTP_USER_AGENT') : '');
+if(strpos($u_agent, trim('msie 6')) !== false && !empty($u_agent))
 {
 	$ADM_NOTIFICATIONS[]  = array('id' => 'IE6', 'msg_type'=> 'error', 'title'=> $lang['NOTE'], 'msg'=> $lang['ADMIN_USING_IE6']);
 }

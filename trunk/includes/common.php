@@ -220,7 +220,9 @@ $adminpath = isset($adminpath) ? $adminpath : './admin/index.php';
 !defined('ADMIN_PATH') ? define('ADMIN_PATH', $adminpath) : null;
 $db_type = isset($db_type) ? $db_type : 'mysql';
 
-include_once (PATH . 'includes/version.php');
+require (PATH . 'includes/functions_alternative.php');
+require (PATH . 'includes/version.php');
+
 switch ($db_type)
 {
 	case 'mysqli':

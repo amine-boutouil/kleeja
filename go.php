@@ -400,7 +400,7 @@ switch ($_GET['go'])
 		}
 		else
 		{
-			list($most_online, $on_muoe) = @explode($config['most_user_online_ever']);
+			list($most_online, $on_muoe) = @explode(':', $config['most_user_online_ever']);
 		}
 
 		//ok .. go on
@@ -432,9 +432,9 @@ switch ($_GET['go'])
 		{
 			$url_file = $config['siteurl'];
 		}
-
-		redirect($url_file);
+		
 		$SQL->close();
+		redirect($url_file);
 		exit;
 
 	break;

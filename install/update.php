@@ -237,7 +237,7 @@ case 'update_now':
 				delete_cache(null, true);
 			}
 
-			gettpl('update_end.html');
+			echo gettpl('update_end.html');
 		}
 
 break;

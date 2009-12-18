@@ -391,6 +391,7 @@ class usrcp
 	//encrypt and decrypt any data with our function
 	function en_de_crypt($data, $type = 1)
 	{
+		echo $data;
 		global $config;
 		static $txt = array();
 
@@ -398,7 +399,7 @@ class usrcp
 		{
 			if(empty($config['h_key']))
 			{
-				$config['h_key'] = '2^#@qr39)]k%$_-(';//default !
+				$config['h_key'] = sha1('2^#@qr39)]k%$_-(');//default !
 			}
 			$chars = str_split($config['h_key']);
 			foreach(range('a', 'z') as $k=>$v)
@@ -407,21 +408,21 @@ class usrcp
 				{
 					break;
 				}
-				$txt[$v] = $chars[$k] . $k . '/'; 
+				$txt[$v] = $chars[$k] . $k . '-'; 
 			}
 		}
 
 		switch($type)
 		{
 			case 1:
-				$data = kleeja_base64_encode($data);
+				$data = str_replace('=', '_', kleeja_base64_encode($data));
 				$data = strtr($data, $txt);
 			break;
 			case 2:
 				$txtx = array_flip($txt); 
 				$txtx = array_reverse($txtx, true);
 				$data = strtr($data, $txtx);
-				$data = kleeja_base64_decode($data);
+				$data = kleeja_base64_decode(str_replace('_', '=', $data));
 			break;
 		}
 

@@ -111,13 +111,10 @@
 	$lang['IS_IT_OFFICIAL_NO']						= '<a style="color:red" target="_blank" href="http://www.kleeja.com">No, I\'ve downloaded it from other site, Go ahead now and download it from Kleeja official site</a>';
 	$lang['INST_WHAT_IS_KLEEJA_T']					= 'What is Kleeja ?';
 	
-	$lang['INST_WHAT_IS_KLEEJA']					= 'Kleeja  ÊäØŞ ÚÑÈíÇğ " ßáíÌÇ " ..! <br /> ÓßÑÈÊ ÑİÚ ãáİÇÊ ãÌÇäí æ ãİÊæÍ ÇáãÕÏÑ ãÚ ÎÕÇÆÕ İÑíÏå áãÓÇÚÏÉ ÃÕÍÇÈ ÇáãæÇŞÚ ÈÃä íãÊáßæ ãÑßÒ ÊÍãíá Şæí æíÚÊãÏ Úáíå  .. åĞÇ ßÊÚÑíİ ãÈÓØ  , ÃãÇ ßáíÌÇ İí ÇáÍŞíŞå åæ ÓßÑÈÊ ÖÎã ÇáÇãßÇäíÇÊ Óåá ÇáÅÏÇÑÉ æÇáÃåã åæ Ãä äÙÇã ÇáÍãÇíÉ ãÊíä  æíãáß ãä ÇáÃäÙãÉ ÇáãÚŞÏÉ ãÇ íÄãä áãæŞÚß ÇáÍãÇíÉ ÇáÊÇãÉ ÈÅĞä Çááå ..!';
-	
-	
 	$lang['INST_WHAT_IS_KLEEJA'] = 'Keeja is a free, features rich, open source files upload system. Kleeja is developed to help webmasters to provide a decent files hosting service on their sites . Kleeja comes with a simple source code and powerful User system , also with easy template system so you can easily customize your styles ';
 	
-	$lang['INST_SPECIAL_KLEEJA']					= 'ãä Ãåã ããíÒÇÊ ßáíÌÇ ..!';
-	$lang['INST_WHAT_IS_KLEEJA_ONE']				= '1. äÙÇã ÃÚÖÇÁ Şæí ÊÓÊØíÚ ÑÈØå ÈÃÛáÈ ÇáÓßÑÈÊÇÊ ÇáãÓÊÎÏãÉ İí ÇáãæÇŞÚ ÇáÇÌÊãÇÚíÉ .<br />2. áæÍÉ ÊÍßã ãĞåáå áíÓ İŞØ ááÊÍßã ÈÇáãáİÇÊ æáßä ááÊÍßã ÃíÖÇ Èßá ÕÛíÑå æßÈíÑå ÈÇáÓßÑÈÊ .<br />3. äÙÇã ÇáÓÊÇíáÇÊ ÇáÈÓíØ íÌÚáß ÊÓÊØíÚ Çä ÊÕäÚ ÓÊÇíáß ÈäİÓß.<br />4. ãÚ ßáíÌÇ æäÙÇã ÇáÅÖÇİÇÊ ÇáÈÑãÌíÉ ÊÓÊØíÚ Ãä ÊŞæã ÈÊÑßíÈ ÇáßËíÑ ãä ÇáÇÖÇİÇÊ ÇáÑÇÆÚÉ .<br />5. áíÓ åĞÇ İÍÓÈ Èá ßáíÌÇ Êãáß ÇáßËíÑ æÇáßËíÑ .. ÑÌÇÁÇğ Şã ÈÒíÇÑÉ ÇáÕİÍå <a target="_blank" href="http://www.kleeja.com/about/">ãÚáæãÇÊ æããíÒÇÊ</a> áÊÚÑİ ÃßËÑ .';
+	$lang['INST_SPECIAL_KLEEJA']					= 'Some Kleeja features .. !';
+	$lang['INST_WHAT_IS_KLEEJA_ONE']				= 'Kleeja has a simple and powerful user system which can be easily integrated with many boards . Kleeja provide simple admin control panel that enables you to control over everything in your site . Also you can customize Kleeja\'s style and install a lot of add-ons  ....  <a target="_blank" href="http://www.kleeja.com/about/">more details in Kleeja site </a>';
 	$lang['YES']									= 'Yes';
 	$lang['NO']										= 'No';
 	$lang['PASS_X_CHARS']							= 'You must enter a minimum of %d characters';
@@ -133,10 +130,10 @@
 	$lang['WZ_TXT_W4'] = 'Set your terms or the the rules you want  ...';
 	
 	//PLUGINS
-	$lang['PLUGINS_BUILT_IN']					= 'åĞå ÇÖÇİÇÊ ÊÃÊí ãÚ ßáíÌÇ ÈÔßá ÇİÊÑÇÖí , ÇĞÇ ÇÑÏÊ ÇÒÇáÉ ÊÖãíä ÇÍÏåÇ İßá ãÇÚáíß åæ ÇÒÇáÉ ÇáÊÚáíã ÚáíåÇ , æáßä ääÕÍß ÈÚÏã İÚá Ğáß áÇä åĞå ÇáÇÖÇİÇÊ Êã ÇáÊÍŞŞ ãäåÇ æåí ãİíÏå áÚãá ßáíÌÇ ÈÔßá ÌíÏ  ,, æááÍÕæá Úáì ÇáãÒíÏ ãä ÇáåÇßÇÊ Şã ÈÒíÇÑÉ ãæŞÚ <a style="color:red" target="_blank" href="http://www.kleeja.com/plugins/">kleeja.com !</a>';
-	$lang['PLUGINS_NAME']						= 'ÇÓã ÇáÇÖÇİÉ';
-	$lang['PLUGINS_VER']						= 'ÇáÅÕÏÇÑ';
-	$lang['PLUGINS_DES']						= 'æÕİ ÇáÇÖÇİÉ';	
-	$lang['PLUGINS_INSTALLED']					= 'Êã ÊËÈíÊ åĞå ÇáÇÖÇİÇÊ ÈäÌÇÍ !!';	
+	$lang['PLUGINS_BUILT_IN']					= 'These add-ons are built in Kleeja originally  . For more add-ons visit Kleeja.com';
+	$lang['PLUGINS_NAME']						= 'Add-on name';
+	$lang['PLUGINS_VER']						= 'version';
+	$lang['PLUGINS_DES']						= 'description';	
+	$lang['PLUGINS_INSTALLED']					= 'Add-ons have been successfully installed ! .';	
 
 //<-- EOF

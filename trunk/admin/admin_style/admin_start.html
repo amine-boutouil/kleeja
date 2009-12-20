@@ -29,6 +29,9 @@ $(document).ready(function(){
 		$(".option_body").slideUp()
 		return false;
 	});
+	
+	//percentage size meter
+	$("#percentage_size_meter").animate({width: "{per1}%"}, 1000 ); // animate a div
 
 });
 </script>
@@ -143,20 +146,25 @@ $('div#{{id}}').pulse({
 <!-- start clear  -->
 	<div class="clr"></div><br />
 <!-- # clear  -->		
-
 		
-			<table class="disk_size" width="100%" cellspacing="0" cellpadding="0" dir="ltr">
-					<tr>
-						<td style="width:33%;background-color:#97FF97;text-align:left;">0%</td>
-						<td style="width:34%; background-color:#FFFE97; text-align:center;">50%</td>
-						<td style="width:33%;background-color:#FF9797; text-align:right;">100%</td>
-					</tr>
-					<tr>
-						<td colspan="3"><img src="{STYLE_PATH_ADMIN}images/spacer.gif" style="width:{per1}%; height:10px; background-color:Red" alt="..." /></td>
-					</tr>
-			</table>
-			<div class="filsiz">[ {files_sizes} ]</div>	
-				
+<!-- start percentage meter -->
+<div id="progress"> 
+	<div class="pad"> 
+        <h3><span class="hide">Progress Meter</span></h3> 
+        <div id="progressBar"> 
+         	<div id="percentage_size_meter"><span>{per1}%</span></div> 
+        </div> 
+        <div id="seasonal"> </div> 
+        <div id="key"> 
+            <div id="left">%0</div> 
+            <div id="center">%50</div> 
+            <div id="right">%100</div> 
+        </div>         
+    </div> 
+</div> 
+<div class="filsiz">[ {files_sizes} ]</div>	
+<!-- # percentage meter -->
+			
 <!-- start clear  -->
 	<div class="clr"></div>
 <!-- # clear  -->

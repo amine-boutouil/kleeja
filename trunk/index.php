@@ -60,7 +60,7 @@ $kljup->process();
 $FILES_NUM_LOOP = array();
 foreach(range(1, $config['filesnum']) as $i)
 {
-	$FILES_NUM_LOOP[] = array('i' => $i, 'show'=>($i == 1 ? '' : 'display: none'));
+	$FILES_NUM_LOOP[] = array('i' => $i, 'show'=>($i == 1 || (!empty($config['filesnum_show']) && (int) $config['filesnum_show'] == 1) ? '' : 'display: none'));
 }
 
 //show errors and info

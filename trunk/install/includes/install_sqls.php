@@ -263,6 +263,7 @@ $install_sqls['config_insert44'] = "INSERT INTO `{$dbprefix}config` (`name`, `va
 
 $install_sqls['config_insert45'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`, `type`) VALUES ('guestsectoupload', '30', '<input type=\"text\" id=\"guestsectoupload\" name=\"guestsectoupload\" value=\"{con.guestsectoupload}\" size=\"10\" />', 44, 'upload')";
 $install_sqls['config_insert46'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('expand_menu', '0', '', 0)";
+$install_sqls['config_insert47'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`, `type`) VALUES ('filesnum_show', '0', '<label>{lang.YES}<input type=\"radio\" id=\"filesnum_show\" name=\"filesnum_show\" value=\"1\"  <IF NAME=\"con.filesnum_show==1\"> checked=\"checked\"</IF> /></label>\r\n <label>{lang.NO}<input type=\"radio\" id=\"filesnum_show\" name=\"filesnum_show\" value=\"0\"  <IF NAME=\"con.filesnum_show==0\"> checked=\"checked\"</IF> /></label>', 22, 'upload')";
 
 $install_sqls['exts_insert1'] = "
 INSERT INTO `{$dbprefix}exts` (`id`, `group_id`, `ext`, `gust_size`, `gust_allow`, `user_size`, `user_allow`) VALUES

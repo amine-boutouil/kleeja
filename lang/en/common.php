@@ -194,6 +194,7 @@ $lang = array_merge($lang, array(
 	'FOLDERNAME' => 'Folder name for uploaded files',
 	'PREFIXNAME' => 'Files prefix',
 	'FILESNUM' => 'Number of upload input fields',
+	'FILESNUM_SHOW' => 'Show all upload inputs',
 	'SITECLOSE' => 'Shutdown service',
 	'CLOSEMSG' => 'Shutdown message',
 	'LANGUAGE' => 'Language',

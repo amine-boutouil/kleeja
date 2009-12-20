@@ -134,40 +134,70 @@ $('div#{{id}}').pulse({
 
 <div class="general_statistics">
 
-
-	<p class="text_info"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/numberusers.png" alt=".." />{lang.AUSERS_NUM} : [ {users_number} ]</p>
+<table class="info_statistics" style="width:70%;">
+	<tr>
+		<td style="width:50%;">
+			<p>{lang.AUSERS_NUM}</p>
+			<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/numberusers.png" alt="" /> [ {users_number} ]
+			<br /><br />
+		</td>
 		<IF NAME="config.user_system==1">
-	<p class="text_info"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/lastuser.png" alt=".." />{lang.LAST_REG} : [ {lst_reg} ]</p>
-		</IF>	
-	<p class="text_info"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/allfolders.png" alt=".." />{lang.AFILES_NUM} : [ {files_number} ]</p>
-	<p class="text_info"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/sizefile.png" alt=".." />{lang.AFILES_SIZE} : [ {files_sizes} ]</p>
-	<p class="text_info"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/timelast.png" alt=".." />{lang.LSTDELST} : {last_del_fles}</p>		
+		<td style="width:50%;">
+			<p>{lang.LAST_REG}</p>
+			<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/list-add-user.png" alt="" /> [ {lst_reg} ]
+			<br /><br />
+		</td>
+		</IF>
+	</tr>
+	<tr>
+		<td style="width:50%;">
+		<p>{lang.AFILES_NUM}</p>
+		<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/allfolders.png" alt="" /> [ {files_number} ]
+		<br /><br />
+		</td>
+		<td style="width:50%;">
+		<p>{lang.LSTDELST}</p>
+		<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/timelast.png" alt="" /> {last_del_fles}
+		<br /><br />
+		</td>
+	</tr>
+</table>
+
+
 
 <!-- start clear  -->
-	<div class="clr"></div><br />
+	<div class="clr"></div>
 <!-- # clear  -->		
-		
+	
 <!-- start percentage meter -->
 <div id="progress"> 
 	<div class="pad"> 
-        <h3><span class="hide">Progress Meter</span></h3> 
+       <span class="hide">Progress Meter</span>
         <div id="progressBar"> 
          	<div id="percentage_size_meter"><span>{per1}%</span></div> 
         </div> 
         <div id="seasonal"> </div> 
         <div id="key"> 
             <div id="left">%0</div> 
+			<div id="right">%100</div> 
             <div id="center">%50</div> 
-            <div id="right">%100</div> 
         </div>         
     </div> 
 </div> 
-<div class="filsiz">[ {files_sizes} ]</div>	
 <!-- # percentage meter -->
 			
 <!-- start clear  -->
-	<div class="clr"></div>
+<div class="clr"></div>
 <!-- # clear  -->
+
+<!-- start All Files size  -->
+<div class="filsiz">{lang.AFILES_SIZE} : <span style="text-decoration:line-through;">[ {files_sizes} ]</span></div>
+<!-- # All Files size  -->
+
+<!-- start clear  -->
+	<div class="clr"></div><br />
+<!-- # clear  -->	
+
 </div>
 </div>
 </li>

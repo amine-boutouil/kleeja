@@ -134,7 +134,7 @@ $('div#{{id}}').pulse({
 
 <div class="general_statistics">
 
-<table class="info_statistics" style="width:70%;">
+<table class="info_statistics" style="width:78%;">
 	<tr>
 		<td style="width:50%;">
 			<p>{lang.AUSERS_NUM}</p>
@@ -152,7 +152,7 @@ $('div#{{id}}').pulse({
 	<tr>
 		<td style="width:50%;">
 		<p>{lang.AFILES_NUM}</p>
-		<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/allfolders.png" alt="" /> [ {files_number} ]
+		<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/allfolders.png" alt="" /> [ {files_number} ] = <span title="{lang.AFILES_SIZE}">[ {files_sizes} ]</span>
 		<br /><br />
 		</td>
 		<td style="width:50%;">
@@ -191,12 +191,8 @@ $('div#{{id}}').pulse({
 <!-- # clear  -->
 
 <!-- start All Files size  -->
-<div class="filsiz">{lang.AFILES_SIZE} : <span style="text-decoration:line-through;">[ {files_sizes} ]</span></div>
+<div class="filsiz" title="{lang.AFILES_SIZE}">[ {files_sizes} ]</div>
 <!-- # All Files size  -->
-
-<!-- start clear  -->
-	<div class="clr"></div><br />
-<!-- # clear  -->	
 
 </div>
 </div>

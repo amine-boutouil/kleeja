@@ -318,7 +318,18 @@ input.button1, input.button3,input.button2 {
 .img {padding:10px; cursor: pointer;}
 .img img{border:4px solid #D2D2D2;}
 .img img:hover{border:4px solid #B4B4B4;}
+
+.bg_tooltip {table-layout:auto;overflow:auto;empty-cells:hide;table-layout:auto;
+	 border-collapse: collapse;width:100%;padding: 5px;border:inset 1px #DFDFDF;
+}
+.bg_tooltip tr { background-color:#FFF9D7;border-bottom:solid 1px #C8C8C8;border-top:solid 1px #C8C8C8;
+}
+.bg_tooltip td {	padding:3px 5px;border-style:groove solid;border-color:#FFF9D7;border-width:1px;
+}
+
 .check_all {display:block;text-align:left;margin:4px;padding:5px;background:#eee;}
+
+
 /* view ../images */
 
 /*  toolTipBox */	
@@ -476,10 +487,23 @@ text-align:right;
 
 /*   start general statistics */
 .general_statistics {background:url(../images/bg_general_statistics.png) no-repeat -1px 4px;}
-
-.disk_size{padding:0;margin:0;float:left;}
-.filsiz{padding:3px; font-weight:bold;font-size:x-large;color:#BFBFBF;text-align:center;text-decoration:line-through;vertical-align:top}
+.info_statistics  p{height:25px;line-height:25px;margin-bottom:6px;font-size:11px;font-weight:bold;color:#002262;border-bottom: dashed 1px #D7D7D7;}
+.filsiz{padding:3px; font-weight:bold;font-size:x-large;color:#BFBFBF;text-align:center;vertical-align:top}
 /*  #  start general statistics */
+
+/* percentage meter */
+#progress {height:34px;margin-bottom:11px;direction:ltr}
+#progress .pad {margin:0pt auto;width:auto}
+#progress .hide {float:left;display:none;}
+#progressBar {background:transparent url(../images/progressBg.gif) repeat-x scroll left top;border:1px solid #999;float:left;height:16px;margin-top:7px;width:100%;}
+#progressBar #percentage_size_meter {width:0%;}#progressBar #percentage_size_meter {background:transparent url(../images/mercuryBg.gif) repeat-x scroll left top;border-right:1px solid #FF0000;height:16px;}
+#progressBar #percentage_size_meter span {display:block;float:right;font-size:10px;height:16px;line-height:16px;padding:0pt 5px 0pt 0pt;text-align:right;width:95px;}
+#progress #key {font-size:12px;width:100%;}
+#progress #left {float:left;display:inline;color:green;}
+#progress #center {text-align:center;margin:0 auto;color:orange;}
+#progress #right {float:right;display:inline;color:red;}
+#progressBar #percentage_size_meter .beyond {background:transparent url(../images/beyond.gif) no-repeat scroll right top;font-size:11px;font-weight:bold;}
+/* # percentage meter */
 
 /* start box team kleeja */
 .team_info{padding:5px 0;}
@@ -614,16 +638,3 @@ text-align:right;
 }
 /* # pagination */
 
-/* percentage meter */
-#progress {height:34px;margin-bottom:11px;direction:ltr}
-#progress .pad {margin:0pt auto;width:900px;}
-#progress h3 {float:left;height:22px;margin:6px 6px 0pt 0pt;width:106px;}
-#progress .hide {float:left;margin-left:-999em;}
-#progressBar {background:transparent url(../images/progressBg.gif) repeat-x scroll left top;border:1px solid #000000;float:left;height:16px;margin-top:7px;width:608px;}
-#progressBar #percentage_size_meter {width:0%;}#progressBar #percentage_size_meter {background:transparent url(../images/mercuryBg.gif) repeat-x scroll left top;border-right:1px solid #AC7B00;height:16px;}
-#progressBar #percentage_size_meter span {display:block;float:right;font-size:10px;height:16px;line-height:16px;padding:0pt 5px 0pt 0pt;text-align:right;width:95px;}
-#progress #key div {float:left;font-size:10px;width:22%;}
-#progress #center {text-align:center;}
-#progress #right {text-align:right;width:23.9% !important;}
-#progressBar #percentage_size_meter .beyond {background:transparent url(../images/beyond.gif) no-repeat scroll right top;font-size:11px;font-weight:bold;}
-/* # percentage meter */

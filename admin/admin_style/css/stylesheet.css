@@ -613,3 +613,17 @@ text-align:right;
 	border-radius : 10px; /* CSS3 only */
 }
 /* # pagination */
+
+/* percentage meter */
+#progress {height:34px;margin-bottom:11px;direction:ltr}
+#progress .pad {margin:0pt auto;width:900px;}
+#progress h3 {float:left;height:22px;margin:6px 6px 0pt 0pt;width:106px;}
+#progress .hide {float:left;margin-left:-999em;}
+#progressBar {background:transparent url(../images/progressBg.gif) repeat-x scroll left top;border:1px solid #000000;float:left;height:16px;margin-top:7px;width:608px;}
+#progressBar #percentage_size_meter {width:0%;}#progressBar #percentage_size_meter {background:transparent url(../images/mercuryBg.gif) repeat-x scroll left top;border-right:1px solid #AC7B00;height:16px;}
+#progressBar #percentage_size_meter span {display:block;float:right;font-size:10px;height:16px;line-height:16px;padding:0pt 5px 0pt 0pt;text-align:right;width:95px;}
+#progress #key div {float:left;font-size:10px;width:22%;}
+#progress #center {text-align:center;}
+#progress #right {text-align:right;width:23.9% !important;}
+#progressBar #percentage_size_meter .beyond {background:transparent url(../images/beyond.gif) no-repeat scroll right top;font-size:11px;font-weight:bold;}
+/* # percentage meter */

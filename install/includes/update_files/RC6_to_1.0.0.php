@@ -186,7 +186,8 @@ function update_clean_name()
 		
 	$SQL->freeresult($result);
 	
-	echo '<br /><span style="color:green;">' . $lang['RC6_1_CNV_CLEAN_NAMES'] . ' [ <strong>'  . $loop . ' -> ' . ceil($num_users/$user_per_refresh) . '</strong> ] </span>';
+	global $update_msgs_arr;
+	$update_msgs_arr[] = '<span style="color:green;">' . $lang['RC6_1_CNV_CLEAN_NAMES'] . ' [ <strong>'  . $loop . ' -> ' . ceil($num_users/$user_per_refresh) . '</strong> ] </span>';
 	if($num_users > $last_id_was)
 	{	
 		$url = 'update.php?step=update_now&amp;complet_up_func=1&amp;action_file_do=' . htmlspecialchars($_GET['action_file_do']) .'&amp;is_us=' . $last_id_was . '&amp;num_users=' . $num_users . '&amp;loop=' . $loop . '&amp;lang=' . htmlspecialchars($_GET['lang']);

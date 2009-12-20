@@ -123,7 +123,7 @@ case 'update_now':
 	
 		if(!isset($_GET['action_file_do']))
 		{
-			echo '<meta http-equiv="refresh" content="0;url=' . $_SERVER['PHP_SELF'].'?step=action_file&' . getlang(1) . '">';
+			echo '<meta http-equiv="refresh" content="0;url=' . $_SERVER['PHP_SELF'] . '?step=action_file&' . getlang(1) . '">';
 			exit();
 		}
 		
@@ -142,10 +142,11 @@ case 'update_now':
 			//get it
 			require $file_for_up;
 			$complete_upate = true;
+			$update_msgs_arr = array();
 			
 			if($config['db_version'] >= DB_VERSION && !defined('DEV_STAGE'))
 			{
-				echo '<br /><br /><span style="color:green;">' . $lang['INST_UPDATE_CUR_VER_IS_UP']. '</span><br />';
+				$update_msgs_arr[] = '<span style="color:green;">' . $lang['INST_UPDATE_CUR_VER_IS_UP']. '</span>';
 				$complete_upate = false;
 			}
 			
@@ -168,7 +169,7 @@ case 'update_now':
 						{
 							$sql = "UPDATE `{$dbprefix}config` SET `value` = '" . DB_VERSION . "' WHERE `name` = 'db_version'";
 							$SQL->query($sql);
-							echo '<br /><br /><span style="color:green;">' . $lang['INST_UPDATE_CUR_VER_IS_UP']. '</span><br />';
+							$update_msgs_arr[] = '<span style="color:green;">' . $lang['INST_UPDATE_CUR_VER_IS_UP']. '</span>';
 							$complete_upate = false;
 						}
 					}
@@ -192,16 +193,16 @@ case 'update_now':
 			//
 			//is there any notes 
 			//
+			$NOTES_CUP = false;
 			if($complete_upate or defined('DEV_STAGE'))
 			{
 				if(isset($update_notes) && sizeof($update_notes) > 0)
 				{
-					echo '<br /><span style="color:blue;"><b>' . $lang['INST_NOTES_UPDATE'] . ' :</b> </span><br />';
-					
 					$i=1;
+					$NOTES_CUP = array();
 					foreach($update_notes as $n)
 					{
-						echo '  [<b>' . $i . '</b>] <br /><span style="color:black;">' . $n. ' </span><br />';
+						$NOTES_CUP[$i] = $n;
 						++$i;
 					}
 

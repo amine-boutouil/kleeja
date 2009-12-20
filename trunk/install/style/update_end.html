@@ -1,32 +1,52 @@
+
+<div class="home" dir="{{echo $lang['DIR']}}" style="text-align:{{echo $lang['DIR']=='rtl'?'right':'left'}};">
+
+<div class="scroll_div" style="height: 100px;overflow: auto;">
+{{foreach($GLOBALS['update_msgs_arr'] as $m):}}
+
+<li>{{echo $m}}</li>
+
+{{endforeach;}}
+</div>
+
+<br />
+
+
 {{if($GLOBALS['complete_upate']):}}
-<div class="home" dir="{{echo $lang['DIR']}}" style="text-align:{{echo $lang['DIR']=='rtl'?'right':'left'}};">
 
-<div class="sql_content">
-	<ul>
-		<li><img src="style/images/li_sq.png" style="vertical-align:middle;padding:0 6px;" alt="ok" /> {{echo $lang['INST_UPDATE_IS_FINISH']}}</li>
-	</ul>
-</div>
-	<br />
-	<img src="style/images/home.png" alt="home" />&nbsp;<a href="../index.php">{{echo $lang['INDEX']}}</a>
-	<br /><br />
-	<img src="style/images/kcontrol.png" alt="admin" />&nbsp;<a href="../admin/">{{echo $lang['ADMINCP']}}</a>
-
-	<br /><br />
-	{{echo $lang['INST_KLEEJADEVELOPERS']}}
-	<br /><br />
-	<a href="http://www.kleeja.com">www.kleeja.com</a><br /><br />
-</div>
-{{else:}}
-<div class="home" dir="{{echo $lang['DIR']}}" style="text-align:{{echo $lang['DIR']=='rtl'?'right':'left'}};">
-	<span style="color:orange;"><a href="./update.php?step=action_file&amp;{{echo getlang(1)}}">{{echo $lang['INST_UPDATE_SELECT_ONTHER_UPDATES']}}</span><br />
-	<br /><br />
-	<img src="style/images/home.png" alt="home" />&nbsp;<a href="../index.php">{{echo $lang['INDEX']}}</a>
-	<br />
-	<img src="style/images/kcontrol.png" alt="admin" />&nbsp;<a href="../admin/">{{echo $lang['ADMINCP']}}</a>
-	<br /><br />
-	<br />
-	<a href="http://www.kleeja.com">www.kleeja.com</a>
-	<br /><br />
-</div>	
-{{endif;}}
+	<strong>{{echo $lang['INST_UPDATE_IS_FINISH']}}</strong>
 	
+	<br />
+	<br />
+	
+	<strong>{{echo $lang['INST_NOTES_UPDATE']}}</strong> :
+
+	{{if(is_array($GLOBALS['NOTES_CUP'])):foreach($GLOBALS['NOTES_CUP'] as $i=>$m):}}
+	<div class="sql_content">
+		<ul>
+			<li><img src="style/images/li_sq.png" style="vertical-align:middle;padding:0 6px;" alt="ok" />{{echo $i;}} - {{echo $m}} </li>
+		</ul>
+	</div>
+	{{endforeach;endif;}}
+	
+	<br />
+	<img src="style/images/home.png" alt="home" />&nbsp;<a href="../index.php">{{echo $lang['INDEX']}}</a>
+	<br /><br />
+	<img src="style/images/kcontrol.png" alt="admin" />&nbsp;<a href="../admin/">{{echo $lang['ADMINCP']}}</a>
+
+{{else:}}
+	<span style="color:orange;"><a href="./update.php?step=action_file&amp;{{echo getlang(1)}}">{{echo $lang['INST_UPDATE_SELECT_ONTHER_UPDATES']}}</span><br />
+{{endif;}}
+
+<br />
+<br />
+{{echo $lang['INST_KLEEJADEVELOPERS']}}
+<br /><br />
+<br /><br />
+<img src="style/images/home.png" alt="home" />&nbsp;<a href="../index.php">{{echo $lang['INDEX']}}</a>
+<br />
+<img src="style/images/kcontrol.png" alt="admin" />&nbsp;<a href="../admin/">{{echo $lang['ADMINCP']}}</a>
+<br /><br />
+<br />
+<a href="http://www.kleeja.com">www.kleeja.com</a><br /><br />
+</div>	

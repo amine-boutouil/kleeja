@@ -116,7 +116,7 @@ switch ($_GET['sty_t'])
 					{
 						while (($file = readdir($dh)) !== false)
 						{
-							if($file != '..' && $file != '.' && $file != '.svn' && !is_dir($d_style_path . '/' . $file))
+							if(array_pop(explode('.', $file)) == 'html' && !is_dir($d_style_path . '/' . $file))
 							{
 								if(in_array($file, array('header.html', 'footer.html', 'index_body.html')))
 								{
@@ -128,11 +128,11 @@ switch ($_GET['sty_t'])
 								}
 								else if(in_array($file, array('login.html', 'register.html', 'profile.html', 'get_pass.html', 'fileuser.html', 'filecp.html')))
 								{
-									$tpls_user[]	= array('template_name'=> $file);
+									$tpls_user[] = array('template_name'=> $file);
 								}
 								else
 								{
-									$tpls_other[] = array( 'template_name' => $file);
+									$tpls_other[] = array('template_name' => $file);
 								}
 								
 								$tpls_all[$file] = true;
@@ -201,7 +201,7 @@ switch ($_GET['sty_t'])
 			//
 			// Check form key
 			//
-			if(!kleeja_check_form_key('adm_style_order_del_edit'))
+			if(!kleeja_check_form_key('adm_style_order_del_edit') && !isset($_GET['tpl_choose']))
 			{
 				kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $redirect_to, 1);
 			}

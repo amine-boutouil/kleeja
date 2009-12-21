@@ -148,11 +148,13 @@ if(file_exists($cached_file))
 }
 
 //if config not safe
-if((bool) (@fileperms(PATH . KLEEJA_CONFIG_FILE) & 0x0002))
+if(function_exists('fileperms') && !defined('KLEEJA_NO_CONFIG_CHECK'))
 {
-	$ADM_NOTIFICATIONS[]  = array('id' => 'config_perm', 'msg_type'=> 'info', 'title'=> $lang['NOTE'], 'msg'=> $lang['CONFIG_WRITEABLE']);
+	if((bool) (@fileperms(PATH . KLEEJA_CONFIG_FILE) & 0x0002))
+	{
+		$ADM_NOTIFICATIONS[]  = array('id' => 'config_perm', 'msg_type'=> 'info', 'title'=> $lang['NOTE'], 'msg'=> $lang['CONFIG_WRITEABLE']);
+	}
 }
-
 //no htaccess
 if(!file_exists(PATH . $config['foldername'] . '/.htaccess'))
 {

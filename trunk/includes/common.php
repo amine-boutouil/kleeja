@@ -283,7 +283,7 @@ if ($config['gzip'] == '1' && !defined('IN_DOWNLOAD') && !defined('IN_ADMIN') &&
 	}
 		
 	// Check if the browser supports gzip encoding, HTTP_ACCEPT_ENCODING
-	if (strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') !== false && !headers_sent() && @extension_loaded('zlib'))
+	if (strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') !== false && !headers_sent() && @extension_loaded('zlib') && !defined('IN_DOWNLOAD'))
 	{
 		$do_gzip_compress = true; 
 		// Start output buffering, and register compress_output()

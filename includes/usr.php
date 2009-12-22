@@ -158,12 +158,14 @@ class usrcp
 				//all user fileds info
 				$userinfo = $row;
 				
+				$user_y = kleeja_base64_encode(serialize(array('id'=>$row['id'], 'name'=>$row['name'], 'mail'=>$row['mail'], 'last_visit'=>$row['last_visit'])));
+				
 				if(!$hashed)
 				{
 					$hash_key_expire = sha1(md5($config['h_key']) .  $expire);
 					if(!$loginadm)
 					{
-						$this->kleeja_set_cookie('ulogu', $this->en_de_crypt($row['id'] . '|' . $row['password'] . '|' . $expire . '|' . $hash_key_expire . '|' . $row['admin']), $expire);
+						$this->kleeja_set_cookie('ulogu', $this->en_de_crypt($row['id'] . '|' . $row['password'] . '|' . $expire . '|' . $hash_key_expire . '|' . $row['admin'] . '|' . $user_y), $expire);
 					}
 					else
 					{
@@ -450,7 +452,7 @@ class usrcp
 		{
 			$user_data = false;
 
-			list($user_id, $hashed_password, $expire_at, $hashed_expire, $adm_or_not) =  @explode('|', $this->en_de_crypt($this->kleeja_get_cookie('ulogu'), 2));
+			list($user_id, $hashed_password, $expire_at, $hashed_expire, $adm_or_not, $u_info) =  @explode('|', $this->en_de_crypt($this->kleeja_get_cookie('ulogu'), 2));
 
 			//if not expire 
 			if(($hashed_expire == sha1(md5($config['h_key']) . $expire_at)) && ($expire_at > time()))
@@ -458,6 +460,20 @@ class usrcp
 				if((int) $adm_or_not == 1)
 				{
 					$user_data = $this->data($user_id, $hashed_password, true, $expire_at);
+				}
+				else
+				{
+					if(!empty($u_info))
+					{
+						$uu_info = unserialize(kleeja_base64_decode($u_info));
+		
+						define('USER_ID', $uu_info['id']);
+						define('USER_NAME', $uu_info['name']);
+						define('USER_MAIL', $uu_info['mail']);
+						define('USER_ADMIN', '0');
+						define('LAST_VISIT', $uu_info['last_visit']);
+						$user_data = true;
+					}
 				}
 			}
 

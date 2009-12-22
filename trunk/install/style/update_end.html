@@ -1,26 +1,29 @@
-
 <div class="home" dir="{{echo $lang['DIR']}}" style="text-align:{{echo $lang['DIR']=='rtl'?'right':'left'}};">
-
-<div class="scroll_div" style="height: 100px;overflow: auto;">
-{{foreach($GLOBALS['update_msgs_arr'] as $m):}}
-
-<li>{{echo $m}}</li>
-
-{{endforeach;}}
-</div>
-
+	<div class="sql_content">
+		<table border="0" width="100%" cellspacing="0" cellpadding="0">
+		<tr>
+			<td width="70%">
+				<ul class="scroll_div" dir="{{echo $lang['DIR']}}">
+					{{foreach($GLOBALS['update_msgs_arr'] as $m):}}
+					<li><img src="style/images/li_sq.png" style="vertical-align:middle;padding:0 6px;" alt="ok" /> {{echo $m}}</li>
+					{{endforeach;}}
+				</ul>
+			</td>
+			<td width="2%"> </td>
+			<td width="28%" style="text-align:center;"><img src="style/images/good.png" alt="" /></td>
+		</tr>
+		</table>
+	</div>
 <br />
-
 
 {{if($GLOBALS['complete_upate']):}}
 
-	<strong>{{echo $lang['INST_UPDATE_IS_FINISH']}}</strong>
+	<p style="font-size:150%;color:red;margin-top:5px;">{{echo $lang['INST_UPDATE_IS_FINISH']}}</p>
 	
 	<br />
-	<br />
 	
-	<strong>{{echo $lang['INST_NOTES_UPDATE']}}</strong> :
-
+	<p style="font-size:150%;color:#1A1AB1;margin-top:5px;">{{echo $lang['INST_NOTES_UPDATE']}} :</p>
+	<br />
 	{{if(is_array($GLOBALS['NOTES_CUP'])):foreach($GLOBALS['NOTES_CUP'] as $i=>$m):}}
 	<div class="sql_content">
 		<ul>
@@ -29,24 +32,24 @@
 	</div>
 	{{endforeach;endif;}}
 	
-	<br />
-	<img src="style/images/home.png" alt="home" />&nbsp;<a href="../index.php">{{echo $lang['INDEX']}}</a>
-	<br /><br />
-	<img src="style/images/kcontrol.png" alt="admin" />&nbsp;<a href="../admin/">{{echo $lang['ADMINCP']}}</a>
-
 {{else:}}
-	<span style="color:orange;"><a href="./update.php?step=action_file&amp;{{echo getlang(1)}}">{{echo $lang['INST_UPDATE_SELECT_ONTHER_UPDATES']}}</span><br />
-{{endif;}}
+	<p style="text-align:center;"><a style="font-size:120%;color:red;" href="./update.php?step=action_file&amp;{{echo getlang(1)}}">{{echo $lang['INST_UPDATE_SELECT_ONTHER_UPDATES']}}</p>
+	<br />
 
-<br />
-<br />
-{{echo $lang['INST_KLEEJADEVELOPERS']}}
-<br /><br />
-<br /><br />
-<img src="style/images/home.png" alt="home" />&nbsp;<a href="../index.php">{{echo $lang['INDEX']}}</a>
-<br />
-<img src="style/images/kcontrol.png" alt="admin" />&nbsp;<a href="../admin/">{{echo $lang['ADMINCP']}}</a>
-<br /><br />
-<br />
-<a href="http://www.kleeja.com">www.kleeja.com</a><br /><br />
+	<table width="70%" style="margin:5px auto;">
+		<tr>
+			<td width="28%" class="endhome" onclick="window.location.href='../index.php';" style="text-align:center;"><img src="style/images/home.png" alt="" style="vertical-align:middle;padding:0 4px;" /> {{echo $lang['INDEX']}}</td>
+			<td width="2%"> </td>
+			<td width="28%" class="endhome cp" onclick="window.location.href='../admin/';" style="text-align:center;"><img src="style/images/kcontrol.png" alt="" style="vertical-align:middle;padding:0 4px;" /> {{echo $lang['ADMINCP']}}</td>
+		</tr>
+	</table>
+	
+	<br />
+	
+	<p style="font-size:110%;text-align:center;color:#1C6EBF;">{{echo $lang['INST_KLEEJADEVELOPERS']}}
+		<br /><br />
+		<a href="http://www.kleeja.com">www.kleeja.com</a>
+	</p>
+
+{{endif;}}
 </div>	

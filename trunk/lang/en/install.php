@@ -37,7 +37,7 @@
 	$lang['INST_SQL_ERR']							= 'Error Executing SQL .. ';
 	$lang['INST_FINISH_SQL']						= 'Kleeja was installed successfully, Please remove the INSTALL directory';
 	$lang['INST_FINISH_ERRSQL']						= 'Oops! there seems to be a problem, try again.';
-	$lang['INST_KLEEJADEVELOPERS']					= 'Thank you for using Kleeja and good luck from our development team.';
+	$lang['INST_KLEEJADEVELOPERS']					= 'Thank you for using Kleeja and good luck from our development team';
 	$lang['SITENAME']								= 'Website title';
 	$lang['SITEURL']								= 'Website URL';
 	$lang['SITEMAIL']								= 'Website Email';
@@ -119,21 +119,13 @@
 	$lang['NO']										= 'No';
 	$lang['PASS_X_CHARS']							= 'You must enter a minimum of %d characters';
 	$lang['PASS_X_TYPE']							= array('Weak', 'Normal', 'Medium', 'Strong', 'Very Strong');
-	$lang['PLUGINS_KLEEJA']							= 'Plugins For Kleeja .. !';
-
-	//wizard
-	$lang['DIR']	=	'ltr';
-	$lang['WZ_TITLE'] = 'Kleeja wizard';
-	$lang['WZ_TXT_W1'] = 'Change all your Kleeja settings into what you need trough Kleeja control panel in general settings';
-	$lang['WZ_TXT_W2'] = 'Control all extensions and sizes you want allow to be uploaded';
-	$lang['WZ_TXT_W3'] = 'Select , control and edit all your styles  ..';
-	$lang['WZ_TXT_W4'] = 'Set your terms or the the rules you want  ...';
 	
 	//PLUGINS
-	$lang['PLUGINS_BUILT_IN']					= 'These add-ons are built in Kleeja originally  . For more add-ons visit Kleeja.com';
-	$lang['PLUGINS_NAME']						= 'Add-on name';
-	$lang['PLUGINS_VER']						= 'version';
-	$lang['PLUGINS_DES']						= 'description';	
-	$lang['PLUGINS_INSTALLED']					= 'Add-ons have been successfully installed ! .';	
+	$lang['PLUGINS_KLEEJA']							= 'Plugins For Kleeja .. !';
+	$lang['PLUGINS_BUILT_IN']						= 'These add-ons are built in Kleeja originally  . For more add-ons visit Kleeja.com';
+	$lang['PLUGINS_NAME']							= 'Add-on name';
+	$lang['PLUGINS_VER']							= 'version';
+	$lang['PLUGINS_DES']							= 'description';	
+	$lang['PLUGINS_INSTALLED']						= 'Add-ons have been successfully installed ! .';	
 
 //<-- EOF

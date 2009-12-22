@@ -1,45 +1,55 @@
 * { padding: 0;margin: 0;}
-
 body {background:#FAFAFA url('style/images/Background.jpg') no-repeat bottom left fixed;font-family: Tahoma, Arial, Verdana, sans-serif, "Lucida Grande", "Lucida Sans Unicode";	font-weight:bold;font-size:11px;line-height: 1.5em;margin:0px auto;text-align: center;}
 input,select {padding:2px;font-family: Tahoma, Arial, Verdana, sans-serif, "Lucida Grande", "Lucida Sans Unicode";font-size:12px;font-weight: normal;}
 input[type="submit"] {cursor: pointer;padding:2px 8px;margin:3 6px;width:100px;}
 select {color: #333333; background-color:#FAFAFA;border: 1px solid #A9B8C2;padding: 1px;}
 option { padding: 0 5px;}
 img { border:0px } 
+
 a {color: #3B6EBF;text-decoration: none;}
 a:hover {text-decoration: underline;}
 select:focus,textarea:focus {background-color:#ffd;border: 1px solid #D26900;}
+
 img, div{ behavior: url('style/ie6/iepngfix.htc') ;}
 aligny {float : {{echo $lang['DIR']=='ltr'?'left':'right'}}}
+
 .box_body{width:80%;margin:2px auto;}
 .clr {clear: both;overflow:hidden;height:0;}
 .language_choose {position: absolute;top:32%;left:36%;}
+
 ul#choose, ul#choose ul {margin: 0px auto; list-style: none;}
 ul#choose li {display: block;float: left;text-indent: 0px;margin: 2px;}
 ul#choose li a {display: block;text-decoration: none;}
 ul#choose li {width: 128px;height: 128px;line-height: 50px;background-position: 0 0;}
 ul#choose img {width: 100%;height: 100%;border: 0;display: block;}
+
 .home {width:70%;padding:15px 10px;margin:20px auto;background:#FEFEFE url('style/images/body_install.jpg') repeat-x top center;	border: 1px solid #A9B8C2;}
 .text {color:black;padding:10px 20px;text-align:justify;font-size:11px;}
+
 .submit_no,.submit_yes{font-weight:bold;margin:2px 0;padding: 4px 0;}
 .submit_no{color:red}
 .submit_yes{color:green}
 .header{width: 100%;height:25px;color:#fff;line-height:25px;background:#FF6633 url('style/images/bg_header.gif') repeat-x top center;font-size:8pt;text-indent:22px;border-bottom:1px inset #222;text-align:left;direction:ltr;}
 .title{width: 94%;margin:0 auto;font-size:11pt;color:#D00000;background-color:#E6C0C0;padding: 10px 0px;border-top:1px solid #DE7A7B;border-bottom:1px solid #DE7A7B;text-align: center;}
+
 .home ,.install_update{-moz-border-radius:11px;-khtml-border-radius: 11px;-webkit-border-radius: 11px;border-radius:10px;-moz-box-shadow: rgba(112,112,112,1) 0 4px 10px;-webkit-box-shadow: rgba(112,112,112,1) 0 4px 10px;-khtml-box-shadow: rgba(112,112,112,1) 0 4px 10px;box-shadow: rgba(112,112,112,1) 0 4px 10px;}
 .install_update {width:44%;margin:20px auto;padding:20px 0;cursor:pointer;background:#E0EAEF url('style/images/update_on.gif') repeat-x bottom center;border:1px solid #8CCAD9;}
 .install_update p{text-align:center;margin:8px auto;color:#0087CB;font-size:22px;}
 .install_update p:hover {color:#B2E5FF;}
 div.install_update:hover {background:#FFFDE2 url('style/images/xhover.gif') repeat-x bottom center;border:1px solid #FF6633;}
+
 .licens3 {width: 500px;height:180px;direction:ltr;overflow: auto;padding:15px;margin:10px auto;background:#FCFCEF url('style/images/xhover.gif') repeat-x bottom center ;border: 1px solid #A9B8C2;text-align:justify;color:#111;}
 .ul_check,.ul_check2 {list-style:none;margin:5px 0;}
+
 .notice_check {text-align:justify;font-size:11px;border-top:1px solid #D3B25B;border-bottom:1px solid #D3B25B;background-color:#FCF5E2;padding:6px;margin:2px 0;}
 .notice_check p{	text-indent:10px;background-color:#FFF;padding:2px 0;margin-top:4px;font-weight:400;}
+
 .table_conf {width:94%;margin:6px auto;font-size:12px;font-weight:400;}
 .input_conf {width:220px;direction:ltr;cursor: text;border-left: 1px solid #AFAEAA;border-top: 1px solid #AFAEAA;border-right: 1px solid #D5D5C8;border-bottom: 1px solid #D5D5C8;}
 .input_conf:hover {border: 1px solid #999;}
 .input_conf:focus {background-color:#ffd;border: 1px solid #D26900;}
 .td_conf{width:100%;padding:1px 10px;background-color:#DCE4FC;}
+
 .data_table_install {width:92%;margin:5px auto;border:1px solid #E0EFF6;font-size:12px;font-weight: normal;}
 .tdd {width:24%;text-align:center;}
 .data_table_install input {width:90%;padding:2px 4px;border:1px solid #aaa;}
@@ -64,25 +74,8 @@ div.install_update:hover {background:#FFFDE2 url('style/images/xhover.gif') repe
 
 .waht_kleeja {width:68%;padding:15px;margin:5px auto;}
 .waht_kleeja p{text-align:justify;color:#111;padding:6px 0;font-size:11px;}
-.w_t {color:#004EC3;padding:3px;background:#FFF;
-	-moz-border-radius : 5px; /* Mozilla */
-	-webkit-border-radius : 5px; /* Webkit */
-	-khtml-border-radius : 5px; /* Konqueror */
-	border-radius : 5px; /* CSS3 only */
-}
-/*checkboxes*/
-.jquery-checkbox {display: inline; font-size: 16px; line-height: 16px; cursor: pointer; cursor: hand;}
-.jquery-checkbox .mark {display: inline;}
-.jquery-checkbox img {vertical-align: middle; width: 16px; height: 16px;}
-.jquery-checkbox img{background: transparent url(../admin/admin_style/images/checkbox.gif) no-repeat;}
-.jquery-checkbox img{background: transparent url(../admin/admin_style/images/checkbox.gif) no-repeat;}
-.jquery-checkbox-hover img{background: transparent url(../admin/admin_style/images/checkbox-on.gif) no-repeat;}
-.jquery-checkbox-checked img{background: transparent url(../admin/admin_style/images/checkbox-on.gif) no-repeat;}
-.jquery-checkbox-checked .jquery-checkbox-hover img {background: transparent url(../admin/admin_style/images/checkbox-on.gif) no-repeat;}
-.jquery-checkbox-disabled img{background: transparent url(../admin/admin_style/images/checkbox.gif) no-repeat;}
-.jquery-checkbox-checked .jquery-checkbox-disabled img{background: transparent url(../admin/admin_style/images/checkbox-on.gif) no-repeat;}
-/* / checkboxes*/
-
+.w_t {color:#004EC3;padding:3px;background:#FFF;	-moz-border-radius : 5px; /* Mozilla */	-webkit-border-radius : 5px; /* Webkit */	-khtml-border-radius : 5px; /* Konqueror */	border-radius : 5px; /* CSS3 only */}
+	
 .title_plugin{width: 94%;margin:0 auto 10px auto;font-size:13pt;color:#537027;background-color:#ECFFD1;padding: 5px 0px;border-top:1px solid #7E9F4D;border-bottom:1px solid #7E9F4D;}
 .text_plugin{color:#32490E;padding:2px 20px;text-align:justify;font-size:11px;}
 
@@ -96,26 +89,28 @@ div.install_update:hover {background:#FFFDE2 url('style/images/xhover.gif') repe
 .table_plugin tr:hover  {background-color:#DFFFE0;color:#32490E;}
 .table_plugin tr td:hover{background-color:#FDFFB9;color:#222;}
 
-.wizard{color:#004081;background-color:#D1ECFF;padding: 5px 0px;border-top:1px solid #91BBD8;border-bottom:1px solid #91BBD8;cursor:pointer;}
-.wizard:hover {background-color:#F7FBFF;border-top:1px solid #AADCFF;border-bottom:1px solid #AADCFF;cursor:pointer;}
-.endhome{color:#E87400;background-color:#FFE3D1;border-top:1px solid #D8AE91;border-bottom:1px solid #D8AE91;}
-.endhome:hover {color:#FF8000;background-color:#FFFAF7;border-top:1px solid #FFCBAA;border-bottom:1px solid #FFCBAA;}
+.endhome{color:#004081;background-color:#D1ECFF;padding: 20px 10px;border-top:1px solid #91BBD8;border-bottom:1px solid #91BBD8;cursor:pointer;}
+.endhome:hover {background-color:#F7FBFF;border-top:1px solid #AADCFF;border-bottom:1px solid #AADCFF;cursor:pointer;}
+
 .cp{color:#79A33A;background-color:#EDFFD1;border-top:1px solid #BCD891;border-bottom:1px solid #BCD891;}
 .cp:hover {background-color:#FBFFF7;border-top:1px solid #DEFFAA;border-bottom:1px solid #DEFFAA;}
-.inst_finish {width:70%;padding:10px;margin:6px auto 0 auto;color:#004081;text-align:justify;background:#FEFEFE;border-top: 1px solid #A9B8C2;border-bottom: 1px solid #A9B8C2;}
+.inst_finish {width:70%;padding:10px 0;margin:10px auto 0 auto;color:#004081;text-align:justify;border-bottom: 1px solid #A9B8C2;}
 .select_version {width:54%;border:1px solid #D5A920;}
  
-.select_version option { /* Text and background colour, blue on light gray */
-color:#FF8000;
-background-color:#fff;
-border-bottom:1px dotted #D6D6D6;
-font-size:14px;font-weight:bold;
-padding:2px 10px;
-}
+.select_version option { color:#FF8000;background-color:#fff;border-bottom:1px dotted #D6D6D6;font-size:14px;font-weight:bold;padding:2px 10px;}
+.up_ver{color:#004081;padding: 2px 6px;border-right:1px solid #91BBD8;border-left:1px solid #91BBD8;}
 
-.up_ver{
-color:#004081;
-padding: 2px 6px;
-border-right:1px solid #91BBD8;
-border-left:1px solid #91BBD8;
-}
+.scroll_div  {height:100px;overflow: auto;}
+.scroll_div ul {	list-style-type:none;text-indent:10px;}
+.scroll_div  ul li {height:26px;line-height:26px;color:green;font-size:12px;}
+
+.jquery-checkbox {display: inline; font-size: 16px; line-height: 16px; cursor: pointer; cursor: hand;}
+.jquery-checkbox .mark {display: inline;}
+.jquery-checkbox img {vertical-align: middle; width: 16px; height: 16px;}
+.jquery-checkbox img{background: transparent url(../admin/admin_style/images/checkbox.gif) no-repeat;}
+.jquery-checkbox img{background: transparent url(../admin/admin_style/images/checkbox.gif) no-repeat;}
+.jquery-checkbox-hover img{background: transparent url(../admin/admin_style/images/checkbox-on.gif) no-repeat;}
+.jquery-checkbox-checked img{background: transparent url(../admin/admin_style/images/checkbox-on.gif) no-repeat;}
+.jquery-checkbox-checked .jquery-checkbox-hover img {background: transparent url(../admin/admin_style/images/checkbox-on.gif) no-repeat;}
+.jquery-checkbox-disabled img{background: transparent url(../admin/admin_style/images/checkbox.gif) no-repeat;}
+.jquery-checkbox-checked .jquery-checkbox-disabled img{background: transparent url(../admin/admin_style/images/checkbox-on.gif) no-repeat;}

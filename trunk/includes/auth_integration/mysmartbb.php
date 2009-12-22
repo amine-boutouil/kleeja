@@ -105,13 +105,15 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 			}
 
 			$userinfo = $row;
+			$user_y = kleeja_base64_encode(serialize(array('id'=>$row['id'], 'name'=>$usrcp->kleeja_utf8($row['username']), 'mail'=>$row['email'], 'last_visit'=>time())));
 
 			if(!$hashed)
 			{
 				$hash_key_expire = sha1(md5($config['h_key']) .  $expire);
+
 				if(!$loginadm)
 				{
-					$usrcp->kleeja_set_cookie('ulogu', $usrcp->en_de_crypt($row['id'] . '|' . $row['password'] . '|' . $expire . '|' . $hash_key_expire . '|' . $row['usergroup']), $expire);
+					$usrcp->kleeja_set_cookie('ulogu', $usrcp->en_de_crypt($row['id'] . '|' . $row['password'] . '|' . $expire . '|' . $hash_key_expire . '|' . $row['usergroup'] . '|' . $user_y), $expire);
 				}
 			}
 

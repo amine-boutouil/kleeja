@@ -13,11 +13,15 @@
 	</tr>
 	</table>
 	</div>
-</div>
+
 {{if (!$GLOBALS['err']):}}
-<form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=plugins&' . getlang(1)}}">
+<center>
+	<form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=plugins&' . getlang(1)}}">
 		<input name="agres" type="submit" value="{{echo $lang['INST_NEXT']}}"/>
-</form>
+	</form>
+</center>
+<br />
+</div>
 {{else:}}
 <div class="home"><span style="color:red;">{{echo $lang['INST_FINISH_ERRSQL']}}</span>
 	<br /><br />

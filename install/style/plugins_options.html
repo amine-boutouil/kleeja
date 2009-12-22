@@ -1,27 +1,27 @@
 <form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=plugins&amp;' . getlang(1)}}">
-<div class="home" dir="{{echo $lang['DIR']}}" style="text-align:{{echo $lang['DIR']=='rtl'?'right':'left'}};">
-	<div class="title_plugin"><img src="style/images/plugin.png" style="vertical-align:middle;padding:0 10px;" alt="" />{{echo $lang['PLUGINS_KLEEJA'];}}</div>
-<div class="clr"></div>	
-<p class="text_plugin">{{echo $lang['PLUGINS_BUILT_IN'];}}</p>
-	
-	<table class="table_plugin" dir="{{echo $lang['DIR']}}">
-	<tr>
-		<th>{{echo $lang['PLUGINS_NAME']}}</th>
-		<th>{{echo $lang['PLUGINS_DES']}}</th>
-		<th>{{echo $lang['PLUGINS_VER']}}</th>
-		<th>#</th>
-	</tr>
-	{{foreach($GLOBALS['plugins'] as $plugin):}}
-	<tr>
-		<td style="white-space:nowrap;">{{echo $plugin['p_name']}}</td>
-		<td>{{echo $plugin['p_des']}}</td>
-		<td style="text-align:center;">{{echo $plugin['p_ver']}}</td>
-		<td style="text-align:center;"><input type="checkbox" name="plugin_file[]" value="{{echo $plugin['p_file']}}" checked="checked" /></td>
-	</tr>
-	{{endforeach;}}
-	</table>
-</div>
-	<center style="margin-top:10px;">
-		<input name="datasubmit" type="submit" value="{{echo $lang['INST_NEXT']}}" />
-	</center>
+	<div class="home" dir="{{echo $lang['DIR']}}" style="text-align:{{echo $lang['DIR']=='rtl'?'right':'left'}};">
+		<div class="title_plugin"><img src="style/images/plugin.png" style="vertical-align:middle;padding:0 10px;" alt="" />{{echo $lang['PLUGINS_KLEEJA'];}}</div>
+	<div class="clr"></div>	
+	<p class="text_plugin">{{echo $lang['PLUGINS_BUILT_IN'];}}</p>
+		
+		<table class="table_plugin" dir="{{echo $lang['DIR']}}">
+		<tr>
+			<th>{{echo $lang['PLUGINS_NAME']}}</th>
+			<th>{{echo $lang['PLUGINS_DES']}}</th>
+			<th>{{echo $lang['PLUGINS_VER']}}</th>
+			<th>#</th>
+		</tr>
+		{{foreach($GLOBALS['plugins'] as $plugin):}}
+		<tr>
+			<td style="white-space:nowrap;">{{echo $plugin['p_name']}}</td>
+			<td>{{echo $plugin['p_des']}}</td>
+			<td style="text-align:center;">{{echo $plugin['p_ver']}}</td>
+			<td style="text-align:center;"><input type="checkbox" name="plugin_file[]" value="{{echo $plugin['p_file']}}" checked="checked" /></td>
+		</tr>
+		{{endforeach;}}
+		</table>
+		<center style="margin-top:10px;">
+			<input name="datasubmit" type="submit" value="{{echo $lang['INST_NEXT']}}" />
+		</center>
+	</div>
 </form>

@@ -44,7 +44,7 @@ $(document).ready(function(){
 <div class="box_all">
 
 <!-- start title panel admin -->
-<div class="title_kleeja"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/start_cp.gif" alt="Kleeja love you ..," />&#9679; {lang.KLEEJA_CP} ..</div>
+<div class="title_kleeja"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/favicon.gif" alt="Kleeja love you ..," />&#9679; {lang.KLEEJA_CP} ..</div>
 <!-- # title panel admin -->
 
 <!-- start clear  -->
@@ -86,154 +86,138 @@ $('div#{{id}}').pulse({
 
 <!-- start view list control panel -->
 <div class="list_control_panel">
-	<ol class="option_list">
-
+<ol class="option_list">
 <!-- start info user admin -->
 <li>
 	<p class="option_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/user.png" alt=".." />{lang.USER_STAT}</cite><img class="timestamp" src="{STYLE_PATH_ADMIN}images/icon/timestamp.gif" alt="Kleeja love you ..," /></p>
 	<div class="option_body">
-	<!-- background box  -->
-	<div class="admin_anfo_bg">
-		<table width="100%" cellspacing="0" cellpadding="0">
-		<tr>
-			<td class="adminimage">&nbsp;</td>
-			<td>
-				<p class="text_info"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/Circle_Orange.png" alt=".." />{usernamelang}</p>
-			<IF NAME="stat_last_file!='0'">
-				<p class="text_info"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/Circle_Orange.png" alt=".." />{lang.LSTFLE_ST} : <a href="{last_file_up_url}" onclick="window.open(this.href,'_blank');return false;">{last_file_up}</a></p>
-			<ELSE>
-				<p class="text_info"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/Circle_Orange.png" alt=".." />{lang.UNKNOWN}</p>
-			</IF>
+		<div class="admin_anfo_bg">
+			<table width="100%" cellspacing="0" cellpadding="0">
+			<tr>
+				<td class="adminimage">&nbsp;</td>
+				<td>
+					<p class="text_info"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/Circle_Orange.png" alt=".." />{usernamelang}</p>
+					<IF NAME="stat_last_file!='0'">
+					<p class="text_info"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/Circle_Orange.png" alt=".." />{lang.LSTFLE_ST} : <a href="{last_file_up_url}" onclick="window.open(this.href,'_blank');return false;">{last_file_up}</a></p>
+					<ELSE>
+					<p class="text_info"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/Circle_Orange.png" alt=".." />{lang.UNKNOWN}</p>
+					</IF>
+					<IF NAME="last_visit">
+					<p class="text_info"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/Circle_Orange.png" alt=".." />{lang.LAST_VISIT} : <span style="color:red">{last_visit}</span></p>
+					</IF>
+				</td>
+			</tr>
 			<IF NAME="last_visit">
-				<p class="text_info"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/Circle_Orange.png" alt=".." />{lang.LAST_VISIT} : <span style="color:red">{last_visit}</span></p>
+			<tr>
+				<td>&nbsp;</td>
+				<td class="box_botton">
+					<p><a class="button_img" href="{h_lst_imgs}"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/viewpicture.png" alt=".." />{lang.IMG_LST_VST_SEARCH}</a></p>
+					<p><a class="button_file" href="{h_lst_files}"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/old-edit-find.png" alt=".." />{lang.FLS_LST_VST_SEARCH}</a></p>
+				</td>
+			</tr>
 			</IF>
-			</td>
-		</tr>
-
-		<IF NAME="last_visit">
-		<tr>
-			<td>&nbsp;</td>
-			<td class="box_botton">
-			
-			<p><a class="button_img" href="{h_lst_imgs}"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/viewpicture.png" alt=".." />{lang.IMG_LST_VST_SEARCH}</a></p>
-			<p><a class="button_file" href="{h_lst_files}"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/old-edit-find.png" alt=".." />{lang.FLS_LST_VST_SEARCH}</a></p>
-			</td>
-		</tr>
-		</IF>
-		</table>
-	</div>
-	<!-- # background box  -->
+			</table>
+		</div>
 	</div>
 </li>
 <!-- # info user admin -->
 
 <!-- start general statistics  -->	
 <li>
-	<p class="option_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/general_title.png" alt="Kleeja love you ..," />{lang.GENERAL_STAT}</cite><img class="timestamp" src="{STYLE_PATH_ADMIN}images/icon/timestamp.gif" alt="Kleeja love you ..," /></p>
+<p class="option_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/general_title.png" alt="Kleeja love you ..," />{lang.GENERAL_STAT}</cite><img class="timestamp" src="{STYLE_PATH_ADMIN}images/icon/timestamp.gif" alt="Kleeja love you ..," /></p>
 	<div class="option_body">
-
-<div class="general_statistics">
-
-<table class="info_statistics" style="width:78%;">
-	<tr>
-		<td style="width:50%;">
-			<p>{lang.AUSERS_NUM}</p>
-			<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/numberusers.png" alt="" /> [ {users_number} ]
-			<br /><br />
-		</td>
-		<IF NAME="config.user_system==1">
-		<td style="width:50%;">
-			<p>{lang.LAST_REG}</p>
-			<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/list-add-user.png" alt="" /> [ {lst_reg} ]
-			<br /><br />
-		</td>
-		</IF>
-	</tr>
-	<tr>
-		<td style="width:50%;">
-		<p>{lang.AFILES_NUM}</p>
-		<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/allfolders.png" alt="" /> [ {files_number} ] = <span title="{lang.AFILES_SIZE}">[ {files_sizes} ]</span>
-		<br /><br />
-		</td>
-		<td style="width:50%;">
-		<p>{lang.LSTDELST}</p>
-		<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/timelast.png" alt="" /> {last_del_fles}
-		<br /><br />
-		</td>
-	</tr>
-</table>
-
-
-
-<!-- start clear  -->
+		<div class="general_statistics">
+		<table class="info_statistics" style="width:78%;">
+			<tr>
+				<td style="width:55%;">
+					<p>{lang.AUSERS_NUM}</p>
+					<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/numberusers.png" alt="" /> [ {users_number} ]<br />
+				</td>
+				<IF NAME="config.user_system==1">
+				<td style="width:45%;">
+					<p>{lang.LAST_REG}</p>
+					<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/list-add-user.png" alt="" /> [ {lst_reg} ]<br />
+				</td>
+				</IF>
+			</tr>
+			<tr>
+				<td style="width:55%;">
+					<p>{lang.AFILES_NUM}</p>
+					<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/allfolders.png" alt="" /> [ {files_number} {lang.FILE} ] ≈ <span title="{lang.AFILES_SIZE}">[ {files_sizes} ]</span><br />
+				</td>
+				<td style="width:45%;">
+					<p>{lang.LSTDELST}</p>
+					<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/timelast.png" alt="" /> {last_del_fles}<br />
+				</td>
+			</tr>
+		</table>
+		
 	<div class="clr"></div>
-<!-- # clear  -->		
 	
-<!-- start percentage meter -->
-<div id="progress"> 
-	<div class="pad"> 
-       <span class="hide">Progress Meter</span>
-        <div id="progressBar"> 
-         	<div id="percentage_size_meter"><span>{per1}%</span></div> 
-        </div> 
-        <div id="seasonal"> </div> 
-        <div id="key"> 
-            <div id="left">%0</div> 
-			<div id="right">%100</div> 
-            <div id="center">%50</div> 
-        </div>         
-    </div> 
-</div> 
-<!-- # percentage meter -->
-			
-<!-- start clear  -->
-<div class="clr"></div>
-<!-- # clear  -->
+		<!-- start percentage meter -->
+		<fieldset id="fieldset_progress">
+			<legend>{lang.AFILES_SIZE_SPACE}</legend>
+			<div id="progress"> 
+				<div class="pad"> 
+				<span class="hide">Progress Meter</span>
+					<div id="progressBar"> 
+						<div id="percentage_size_meter"><span>{per1}%</span></div> 
+					</div> 
+					<div id="seasonal"> </div> 
+					<div id="key"> 
+						<div id="left">%0</div> 
+						<div id="right">%100</div> 
+						<div id="center">%50</div> 
+					</div>         
+				</div> 
+			</div> 
+			<div class="clr"></div>
+			<!-- start All Files size  -->
+			<div class="filsiz" title="{lang.AFILES_SIZE}">[ {files_sizes} ]</div>
+			<!-- # All Files size  -->
+		</fieldset>
+		<!-- # percentage meter -->
 
-<!-- start All Files size  -->
-<div class="filsiz" title="{lang.AFILES_SIZE}">[ {files_sizes} ]</div>
-<!-- # All Files size  -->
-
-</div>
-</div>
+		</div>
+	</div>
 </li>
 <!-- # general statistics  -->
 	
-<!-- start search stat  -->
+<!-- start Statistics Search Engines   -->
 <li>
-	<p class="option_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/search_engines.png" alt="{lang.SEARCH_STAT}" />{lang.SEARCH_STAT}</cite><img class="timestamp" src="{STYLE_PATH_ADMIN}images/icon/timestamp.gif" alt="Kleeja love you ..," /></p>
+<p class="option_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/search_engines.png" alt="{lang.SEARCH_STAT}" />{lang.SEARCH_STAT}</cite><img class="timestamp" src="{STYLE_PATH_ADMIN}images/icon/timestamp.gif" alt="Kleeja love you ..," /></p>
 	<div class="option_body">
-	<!-- start table search  -->
-	<table width="100%" cellspacing="0" cellpadding="0">
-		<tr>
-		<td>
+		<table width="100%">
+			<tr>
 			<!-- start gooloe -->
-			<fieldset class="fieldset_google">
-				<legend>Google</legend>
-				<p>{lang.LAST_GOOGLE} : {s_last_google}</p>
-				<p>{lang.GOOGLE_NUM} : [ {s_google_num} ]</p>
-			</fieldset>
-			<!-- # gooloe -->
-		</td>
-		<td>
+			<td width="50%">
+				<fieldset class="fieldset_google">
+					<legend>Google</legend>
+					<p>{lang.LAST_GOOGLE} :</p>
+					<p style="color:#0D3690;">{s_last_google}</p>
+					<p>{lang.GOOGLE_NUM} :</p>
+					<p style="color:#0D3690;">[ {s_google_num} ]</p>
+				</fieldset>
+			</td>
 			<!-- start yahoo -->
-			<fieldset class="fieldset_yahoo">
-				<legend>Yahoo</legend>
-				<p>{lang.LAST_YAHOO} : {s_last_yahoo}</p>
-				<p>{lang.YAHOO_NUM} : [ {s_yahoo_num} ]</p>			
-			</fieldset>
-			<!-- # yahoo -->
-		</td>
-		</tr>
-	</table>
-	<!-- # table search  -->
+			<td width="50%">
+				<fieldset class="fieldset_yahoo">
+					<legend>Yahoo</legend>
+					<p>{lang.LAST_YAHOO} :</p>
+					<p style="color:#430B47;">{s_last_yahoo}</p>
+					<p>{lang.YAHOO_NUM} :</p>	
+					<p style="color:#430B47;">[ {s_yahoo_num} ]</p>					
+				</fieldset>
+			</td>
+			</tr>
+		</table>
 	</div>
 </li>
-<!-- # search stat  -->
+<!-- # Statistics Search Engines   -->
 
-	<li>
-		<p class="option_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/infoanother.png" alt="Kleeja love you ..," />{lang.OTHER_INFO}</cite><img class="timestamp" src="{STYLE_PATH_ADMIN}images/icon/timestamp.gif" alt="Kleeja love you ..," /></p>
-		<div class="option_body">
+<li>
+<p class="option_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/infoanother.png" alt=".." />{lang.OTHER_INFO}</cite><img class="timestamp" src="{STYLE_PATH_ADMIN}images/icon/timestamp.gif" alt=".." /></p>
+	<div class="option_body">
 
 <table>
 <tr>
@@ -296,23 +280,23 @@ $('div#{{id}}').pulse({
 <!-- start team kleeja -->
 <div class="team_info">
 	<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/Info_team.png" alt="Team Kleeja" />{lang.KLEEJA_TEAM}</h2>
-	<table width="100%" cellspacing="0" cellpadding="0">
+	<table style="width:100%;margin-top:12px;">
 		<tr class="team_tr">
 			<td colspan="2">Name</td>
 			<td>Date</td>
 		</tr>
 		<tr>
-			<td><a onclick="window.open(this.href,'_blank');return false;" href="http://code.google.com/p/kleeja/people/detail?u=saanina">saanina</a></td>
+			<td><a href="mailto:saanina@gmail.com" title="saanina@gmail.com">saanina</a></td>
 			<td>[ Abdullrahman M. Alshawaiee ]</td>
 			<td>2007 - 2009</td>
 		</tr>
 		<tr>
-			<td><a onclick="window.open(this.href,'_blank');return false;" href="http://code.google.com/p/kleeja/people/detail?u=phpfalcon">phpfalcon</a></td>
+			<td><a href="mailto:i3u@hotmail.com" title="i3u@hotmail.com">phpfalcon</a></td>
 			<td>[ Bader N. Al-Mutairi ]</td>
 			<td>2009</td>
 		</tr>
 		<tr>
-			<td><a onclick="window.open(this.href,'_blank');return false;" href="http://code.google.com/p/kleeja/people/detail?u=altar3q">Tar3q</a></td>
+			<td><a href="mailto:altar3q@gmail.com" title="altar3q@gmail.com">Tar3q</a></td>
 			<td>[ Abdulrahman E. Al-Harthy]</td>	
 			<td>2009</td>
 		</tr>
@@ -320,9 +304,11 @@ $('div#{{id}}').pulse({
 </div>
 <!-- #  team kleeja -->
 
-<!-- start clear  -->
-	<div class="clr"></div><br />
-<!-- # clear  -->
+	<div style="text-align:left;margin:6px 0;">
+		<p style="line-height:18px;">Thank you very much for the brother <span style="color:green">Garebooo</span> And Thank's for the website <a onclick="window.open(this.href,'_blank');return false;" href="http://www.moffed.com">moffed.com</a></p>
+	</div>
+
+	<div class="clr"></div>
 
 </div>
 <!-- # box all -->

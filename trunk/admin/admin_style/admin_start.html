@@ -2,7 +2,7 @@
 $(document).ready(function(){
 	
 	//hide option_body after the first one
-	$(".option_list .option_body:gt(1)").hide();
+	$(".option_list .option_body:gt(3)").hide();
 	
 	//hide message li after the 5th
 	$(".option_list li:gt(4)").hide();
@@ -218,40 +218,46 @@ $('div#{{id}}').pulse({
 <li>
 <p class="option_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/infoanother.png" alt=".." />{lang.OTHER_INFO}</cite><img class="timestamp" src="{STYLE_PATH_ADMIN}images/icon/timestamp.gif" alt=".." /></p>
 	<div class="option_body">
-
-<table>
-<tr>
-	<td>{lang.KLEEJA_VERSION}</td>
-	<td>{kleeja_version}</td>
-</tr>
-<tr>
-	<td style="width:25%;">{lang.PHP_VER}</td>
-	<td>{php_version}</td>
-</tr>
-<tr>
-	<td>{lang.MYSQL_VER}</td>
-	<td>{mysql_version}</td>
-</tr>
-<tr>
-	<td>max_execution_time</td>
-	<td>{max_execution_time}</td>
-</tr>
-<tr>
-	<td>upload_max_filesize</td>
-	<td>{upload_max_filesize}</td>
-</tr>
-<tr>
-	<td>post_max_size</td>
-	<td>{post_max_size}</td>
-</tr>
-<tr>
-	<td>memory_limit</td>
-	<td>{memory_limit}</td>
-</tr>
-</table>
-		</div>
-	</li>
-	
+	<div style="margin-top:8px;">
+		<table class="other_information">
+			<tr align="center">
+				<td width="33%" style="font-size:120%;">{lang.KLEEJA_VERSION}</td>
+				<td width="33%" style="font-size:120%;">{lang.PHP_VER}</td>
+				<td width="33%" style="font-size:120%;">{lang.MYSQL_VER}</td>
+			</tr>
+			<tr align="center" style="line-height:44px;">
+				<td><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/ver_kleeja.png" alt="" /> {kleeja_version}</td>
+				<td><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/ver_php.png" alt="" /> {php_version}</td>
+				<td style="color:#0B55C4;"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/vre_mysql.png" alt="" /> {mysql_version}</td>
+			</tr>
+		</table>
+	</div>
+	<div style="margin-top:8px;">
+		
+		<table class="valuable_data" style="direction:ltr;">
+		<tr>
+			<td rowspan="4" align="center" width="40%">	
+			<p style="color:green;">Valuable information from the php.ini file</p>
+			<img class="img_valuable_data" src="{STYLE_PATH_ADMIN}images/icon/ap4chec0nf.png" alt="" /></td>
+			<td width="30%">max_execution_time</td>
+			<td width="8%">{max_execution_time}</td>
+		</tr>
+		<tr>
+			<td>upload_max_filesize</td>
+			<td>{upload_max_filesize}</td>
+		</tr>
+		<tr>
+			<td>post_max_size</td>
+			<td>{post_max_size}</td>
+		</tr>
+		<tr>
+			<td>memory_limit</td>
+			<td>{memory_limit}</td>
+		</tr>
+		</table>
+	</div>
+	</div>
+</li>
 </ol>
 <div class="option_list_bottom"></div>
 </div>

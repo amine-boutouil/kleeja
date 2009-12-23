@@ -314,12 +314,23 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 .fieldset_yahoo:hover {background-color:#F3F3F3;border: 1px solid #A375CF;color:#800080}
 /* ## Statistics Search Engines */
 
+/* Other information */
+.other_information {width:100%;}
+.other_information tr{line-height:24px;}
+.other_information td{border: 1px dashed #D3D3FF;font-size:140%;}
+
+.valuable_data {width:100%;}
+.valuable_data tr{line-height:14px;}
+.valuable_data td{border: 1px dashed #D3D3FF;font-size:100%;}
+.img_valuable_data {margin:6px auto;vertical-align:middle;}
+/* # Other information  */
+
 /* start team kleeja */
 .team_info{padding:5px 0;}
 .team_info h2{color:#0B55C4;font-size:18px;}
 .team_info p{direction:ltr;padding:0; margin-top:-20px;}
 .team_info table{direction:ltr;margin-top:2px;}
-.team_info tr{border: 1px dashed #DFDFDF}
+.team_info tr{border: 1px solid #DFDFDF;}
 .team_info td{border:none;line-height:14px;}
 .team_tr {background:#fff url(../images/message-bar.png) repeat-x bottom left;}
 .team_tr td{height:20px;line-height:20px;}

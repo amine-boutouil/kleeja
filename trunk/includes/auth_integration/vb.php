@@ -153,7 +153,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 						$userinfo = $row;
 						$user_y = kleeja_base64_encode(serialize(array('id'=>$row['userid'], 'name'=>USER_NAME, 'mail'=>$row['email'], 'last_visit'=>time())));
 						
-						$hash_key_expire = sha1(md5($config['h_key']) .  $expire);
+						$hash_key_expire = sha1(md5($config['h_key'] . $row['password']) .  $expire);
 						if(!$loginadm)
 						{
 							$usrcp->kleeja_set_cookie('ulogu', $usrcp->en_de_crypt($row['userid'] . '|' . $row['password'] . '|' . $expire . '|' . $hash_key_expire . '|' . (defined('USER_ADMIN') ? '1': '0') . '|' . $user_y), $expire);

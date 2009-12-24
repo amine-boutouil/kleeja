@@ -109,7 +109,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 
 			if(!$hashed)
 			{
-				$hash_key_expire = sha1(md5($config['h_key']) .  $expire);
+				$hash_key_expire = sha1(md5($config['h_key'] . $row['password']) .  $expire);
 
 				if(!$loginadm)
 				{

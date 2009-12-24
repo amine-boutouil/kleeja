@@ -18,7 +18,7 @@ if (!defined('IN_COMMON'))
 /**
 * Usefull constants to force some settings :
 * 
-* FORCE_COOKIES, DISABLE_INTR
+* FORCE_COOKIES, DISABLE_INTR, STRICT_CHECK_USER
 */
 
 class usrcp
@@ -162,7 +162,7 @@ class usrcp
 				
 				if(!$hashed)
 				{
-					$hash_key_expire = sha1(md5($config['h_key']) .  $expire);
+					$hash_key_expire = sha1(md5($config['h_key'] . $row['password']).  $expire);
 					if(!$loginadm)
 					{
 						$this->kleeja_set_cookie('ulogu', $this->en_de_crypt($row['id'] . '|' . $row['password'] . '|' . $expire . '|' . $hash_key_expire . '|' . $row['admin'] . '|' . $user_y), $expire);
@@ -455,9 +455,9 @@ class usrcp
 			list($user_id, $hashed_password, $expire_at, $hashed_expire, $adm_or_not, $u_info) =  @explode('|', $this->en_de_crypt($this->kleeja_get_cookie('ulogu'), 2));
 
 			//if not expire 
-			if(($hashed_expire == sha1(md5($config['h_key']) . $expire_at)) && ($expire_at > time()))
+			if(($hashed_expire == sha1(md5($config['h_key'] . $hashed_password) . $expire_at)) && ($expire_at > time()))
 			{
-				if((int) $adm_or_not == 1)
+				if((int) $adm_or_not == 1 || defined('STRICT_CHECK_USER'))
 				{
 					$user_data = $this->data($user_id, $hashed_password, true, $expire_at);
 				}

@@ -18,7 +18,7 @@ if (!defined('IN_COMMON'))
 /**
 * Usefull constants to force some settings :
 * 
-* FORCE_COOKIES, DISABLE_INTR, STRICT_CHECK_USER
+* FORCE_COOKIES, DISABLE_INTR
 */
 
 class usrcp
@@ -457,7 +457,7 @@ class usrcp
 			//if not expire 
 			if(($hashed_expire == sha1(md5($config['h_key'] . $hashed_password) . $expire_at)) && ($expire_at > time()))
 			{
-				if((int) $adm_or_not == 1 || defined('STRICT_CHECK_USER'))
+				if((int) $adm_or_not == 1 || !defined('IN_DOWNLOAD'))
 				{
 					$user_data = $this->data($user_id, $hashed_password, true, $expire_at);
 				}

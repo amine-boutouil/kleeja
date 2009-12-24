@@ -1,5 +1,5 @@
 ﻿/* Powered by Kleeja .... Kleeja.com # 2007 -2009  */
-body {background:#fff url(../images/bodybackground.jpg) no-repeat top left fixed;font: normal 12px Tahoma, Arial, Helvetica, sans-serif;	border-top: 4px #FEA53D solid;color:#555;margin:0;padding:0;}
+body {background:#fff url(../images/bodybackground.jpg) no-repeat top left fixed;font: normal 12px Tahoma, Arial, Helvetica, sans-serif;	border-top: 3px #FEA53D solid;color:#555;margin:0;padding:0;}
 h1 {	display: block;font-size:12px;font-weight:normal;}
 img {border:none;}
 hr {color:#fff;}
@@ -11,7 +11,7 @@ input[type="password"]:focus,input[type="text"]:focus  {background-color:#ffd;bo
 a:link ,a:visited{color:#003F9D;text-decoration: none; }
 a:hover {color:#0B55C4;text-decoration:overline;}
 .clr {clear: both;overflow:hidden;height:0;}
-.site_name{background-color:#464646;height:20px;line-height:16px;padding:5px;text-indent:10px;font-weight:bold;font-size:11px;border-bottom: 1px #222 solid;}
+.site_name{background:#464646 url(../images/bglogin.gif) repeat;height:20px;line-height:16px;padding:5px;text-indent:10px;font-weight:bold;font-size:11px;border-bottom: 1px #aaa solid;}
 .site_name a:link ,.site_name a:visited{color:#ddd;}
 .site_name a:hover{text-decoration:none;	color:#fff;padding-right:10px;}
 .site_name img,.cp_kleeja img{padding-left:8px;vertical-align: middle;}
@@ -21,11 +21,11 @@ a:hover {color:#0B55C4;text-decoration:overline;}
 .submit_go {cursor: pointer;padding:3px 25px;float:left;margin-top:10px;color:#fff;background-color:#2786B2;border: 1px solid #09628B;}
 .submit_go:hover {background-color:#0E98D8;color:#eee}
 .system-message {margin:5px auto;}
-.system-message div {font-weight:bold;text-indent:35px; }
-.system-message div.error ul {list-style: none;padding:5px 10px;background-color: #E6C0C0;border-top: 4px solid #DE7A7B;border-bottom: 4px solid #DE7A7B;}
+.system-message div {font-weight:400;text-indent:35px; }
+.system-message div.error ul {list-style: none;padding:5px 10px;background-color: #E6C0C0;border-top: 3px solid #DE7A7B;border-bottom:3px solid #DE7A7B;}
 .system-message div.error ul li{line-height:30px;color:#CC0000;background: url(../images/error.png) no-repeat right center;}
 .Powered{padding:5px 0;margin:3px auto;text-align:center;}
-.footer {position:fixed;bottom:0;left:0;clear:both;border-bottom:4px solid #6496C3;width:100%;height:4px;}
+.footer {position:fixed;bottom:0;left:0;clear:both;border-bottom:4px solid #2786B2;width:100%;height:4px;}
 .web2{position:fixed;bottom:10px;left:10px;padding:5px 0;color:#002F75;height:20px;}
 a.css img{margin-right:4px;padding-bottom:2px;}
 a.css,a.xhtml{filter: Alpha(Opacity=40);opacity:.40;-moz-opacity:.40;}

@@ -2,7 +2,7 @@
 $(document).ready(function(){
 	
 	//hide option_body after the first one
-	$(".option_list .option_body:gt(3)").hide();
+	$(".option_list .option_body:gt(1)").hide();
 	
 	//hide message li after the 5th
 	$(".option_list li:gt(4)").hide();
@@ -48,8 +48,7 @@ $(document).ready(function(){
 <!-- # title panel admin -->
 
 <!-- start clear  -->
-	<div class="clr"></div>
-	<br />
+<div class="clr"></div><br />
 <!-- # clear  -->
 
 <!-- start >> error System Messages -->
@@ -73,15 +72,14 @@ $('div#{{id}}').pulse({
 </IF>
 
 <!-- start clear  -->
-	<div class="clr"></div>
-	<br />
+<div class="clr"></div><br />
 <!-- # clear  -->
 
 </LOOP>
 <!-- # error System Messages -->
 
 <!-- start clear  -->
-	<div class="clr"></div>
+<div class="clr"></div>
 <!-- # clear  -->
 
 <!-- start view list control panel -->
@@ -221,38 +219,46 @@ $('div#{{id}}').pulse({
 	<div style="margin-top:8px;">
 		<table class="other_information">
 			<tr align="center">
-				<td width="33%" style="font-size:120%;">{lang.KLEEJA_VERSION}</td>
-				<td width="33%" style="font-size:120%;">{lang.PHP_VER}</td>
-				<td width="33%" style="font-size:120%;">{lang.MYSQL_VER}</td>
-			</tr>
-			<tr align="center" style="line-height:44px;">
-				<td><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/ver_kleeja.png" alt="" /> {kleeja_version}</td>
-				<td><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/ver_php.png" alt="" /> {php_version}</td>
-				<td style="color:#0B55C4;"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/vre_mysql.png" alt="" /> {mysql_version}</td>
+				<td width="33%">
+					<div class="ver_kleeja">
+					<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/ver_kleeja.png" alt="" />  <br />
+					<p> {lang.KLEEJA_VERSION} : {kleeja_version}</p>
+				</div>
+				</td>
+				<td width="33%">
+					<div class="ver_php">
+					<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/ver_php.png" alt="" /> <br />
+					<p>{lang.PHP_VER} : {php_version}</p>
+				</div>
+				</td>
+				<td width="33%">
+				<div class="vre_mysql">
+					<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/vre_mysql.png" alt="" /> <br />
+					<p>{lang.MYSQL_VER} : {mysql_version}</p>
+				</div>
+				</td>
 			</tr>
 		</table>
 	</div>
-	<div style="margin-top:8px;">
+	<div style="margin:4px auto;" align="center" >
 		
-		<table class="valuable_data" style="direction:ltr;">
+		<table class="valuable_data">
 		<tr>
-			<td rowspan="4" align="center" width="40%">	
-			<p style="color:green;">Valuable information from the php.ini file</p>
-			<img class="img_valuable_data" src="{STYLE_PATH_ADMIN}images/icon/ap4chec0nf.png" alt="" /></td>
-			<td width="30%">max_execution_time</td>
-			<td width="8%">{max_execution_time}</td>
+			<td rowspan="4" align="center" width="25%" class="img_valuable_data"> </td>
+			<td width="55%">max_execution_time</td>
+			<td width="10%" style="text-align:center;font-weight:700;">{max_execution_time}</td>
 		</tr>
 		<tr>
 			<td>upload_max_filesize</td>
-			<td>{upload_max_filesize}</td>
+			<td style="font-weight:700;text-align:center">{upload_max_filesize}</td>
 		</tr>
 		<tr>
 			<td>post_max_size</td>
-			<td>{post_max_size}</td>
+			<td style="font-weight:700;text-align:center">{post_max_size}</td>
 		</tr>
 		<tr>
 			<td>memory_limit</td>
-			<td>{memory_limit}</td>
+			<td style="font-weight:700;text-align:center">{memory_limit}</td>
 		</tr>
 		</table>
 	</div>
@@ -277,7 +283,7 @@ $('div#{{id}}').pulse({
 <!-- # box all -->
 
 <!-- start clear  -->
-	<div class="clr"></div><br />
+<div class="clr"></div><br />
 <!-- # clear  -->
 
 <!-- start box all -->
@@ -286,38 +292,43 @@ $('div#{{id}}').pulse({
 <!-- start team kleeja -->
 <div class="team_info">
 	<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/Info_team.png" alt="Team Kleeja" />{lang.KLEEJA_TEAM}</h2>
-	<table style="width:100%;margin-top:12px;">
-		<tr class="team_tr">
-			<td colspan="2">Name</td>
-			<td>Date</td>
+	<table class="team_tr">
+		<tr>
+			<td colspan="2" style="width:80%;">Name</td>
+			<td style="width:20%">Date</td>
+		</tr>
+	</table>
+	<table class="team_table">
+		<tr>
+			<td style="width:20%;"><a>saanina</a></td>
+			<td style="width:60%;">[ Abdullrahman M. Alshawaiee ]</td>
+			<td style="width:20%;">2007 - 2009</td>
 		</tr>
 		<tr>
-			<td><a href="mailto:saanina@gmail.com" title="saanina@gmail.com">saanina</a></td>
-			<td>[ Abdullrahman M. Alshawaiee ]</td>
+			<td><a>Garebooo</a></td>
+			<td>[ Mansour A. Kareem ]</td>
 			<td>2007 - 2009</td>
 		</tr>
 		<tr>
-			<td><a href="mailto:i3u@hotmail.com" title="i3u@hotmail.com">phpfalcon</a></td>
+			<td><a>phpfalcon</a></td>
 			<td>[ Bader N. Al-Mutairi ]</td>
 			<td>2009</td>
 		</tr>
 		<tr>
-			<td><a href="mailto:altar3q@gmail.com" title="altar3q@gmail.com">Tar3q</a></td>
+			<td><a>Tar3q</a></td>
 			<td>[ Abdulrahman E. Al-Harthy]</td>	
 			<td>2009</td>
 		</tr>
 	</table>
 </div>
 <!-- #  team kleeja -->
-
-	<div style="text-align:left;margin:6px 0;">
-		<p style="line-height:18px;">Thank you very much for the brother <span style="color:green">Garebooo</span> And Thank's for the website <a onclick="window.open(this.href,'_blank');return false;" href="http://www.moffed.com">moffed.com</a></p>
-	</div>
-
+	<p style="text-align:left;margin:10px 0 5px 0;line-height:18px;">Thank you very much for the  website <a style="color:green" onclick="window.open(this.href,'_blank');return false;" href="http://www.moffed.com">moffed.com</a></p>
 	<div class="clr"></div>
-
 </div>
 <!-- # box all -->
+
+
+
 
 
 
@@ -338,6 +349,8 @@ $('div#{{id}}').pulse({
 </div>
 </IF>
 <!-- end sql debug -->
+
+
 
 
 

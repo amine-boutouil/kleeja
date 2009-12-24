@@ -55,6 +55,7 @@ function Saaheader($title, $outscript = false, $extra = '')
 	$tpl->assign("dir", $lang['DIR']);
 	$tpl->assign("title", $title);
 	$tpl->assign("_LINKS", $_LINKS);
+	$tpl->assign("go_current", (isset($_GET['go']) ? htmlentities($_GET['go']) : false));
 	$tpl->assign("go_back_browser", $lang['GO_BACK_BROWSER']);
 	//$extra .= '';
 

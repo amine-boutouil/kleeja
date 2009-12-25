@@ -61,12 +61,12 @@
 <!-- start top menu  -->
 <div id="top_menu">
 	<ul class="m3nu">
-		<li><a href="{config.siteurl}" title="{lang.INDEX}" class="current">{lang.INDEX}</a></li>
-		<li><a href="{_LINKS.rules}" title="{lang.RULES}">{lang.RULES}</a></li>
-		<li><a href="{_LINKS.guide}" title="{lang.GUIDE}">{lang.GUIDE}</a></li>
-		<li><a href="{_LINKS.call}" title="{lang.CALL}">{lang.CALL}</a></li>
+		<li><a href="{config.siteurl}" title="{lang.INDEX}" (go_current?:class="current")>{lang.INDEX}</a></li>
+		<li><a href="{_LINKS.rules}" title="{lang.RULES}" (go_current==rules?class="current":)>{lang.RULES}</a></li>
+		<li><a href="{_LINKS.guide}" title="{lang.GUIDE}" (go_current==guide?class="current":)>{lang.GUIDE}</a></li>
+		<li><a href="{_LINKS.call}" title="{lang.CALL}" (go_current==call?class="current":)>{lang.CALL}</a></li>
 		<IF NAME="config.allow_stat_pg">
-		<li><a href="{_LINKS.stats}" title="{lang.STATS}">{lang.STATS}</a></li>
+		<li><a href="{_LINKS.stats}" title="{lang.STATS}" (go_current==stats?class="current":)>{lang.STATS}</a></li>
 		</IF>
 	</ul>
 </div>

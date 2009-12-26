@@ -57,6 +57,9 @@ function Saaheader($title, $outscript = false, $extra = '')
 	$tpl->assign("_LINKS", $_LINKS);
 	$tpl->assign("go_current", (isset($_GET['go']) ? htmlentities($_GET['go']) : false));
 	$tpl->assign("go_back_browser", $lang['GO_BACK_BROWSER']);
+	$tpl->assign("H_FORM_KEYS_LOGIN", kleeja_add_form_key('login'));
+	$tpl->assign("action_login", 'ucp.php?go=login' . (isset($_GET['return']) ? '&amp;return=' . htmlspecialchars($_GET['return']) : ''));
+	
 	//$extra .= '';
 
 	//check for extra header 

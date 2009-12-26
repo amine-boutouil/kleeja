@@ -83,7 +83,7 @@
 			</tr>
 		</table>
 		<ELSE>		
-		<form action="{action}" method="post">
+		<form action="{action_login}" method="post">
 				<table class="boxed">
 					<tr>
 						<td><input type="text" value="{lang.USERNAME}" disabled="disabled" /></td>
@@ -95,7 +95,10 @@
 					</tr>
 					<tr>
 						<td><a href="{forget_pass_link}">{lang.LOSS_PASSWORD}</a></td>
-						<td><input type="submit" name="submit" value="{lang.LOGIN}" /></td>
+						<td>
+							{H_FORM_KEYS_LOGIN}
+							<input type="submit" name="submit" value="{lang.LOGIN}" />
+						</td>
 					</tr>
 				</table>
 		</form>	

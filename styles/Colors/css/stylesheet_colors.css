@@ -13,7 +13,7 @@ body {
 	font-weight:bold;
 	font-size:11px;
 	text-align:justify;
-	color: #444;
+	color:#376007;
 	height:100%;
 	width: 100%;
 	margin:0;
@@ -79,12 +79,12 @@ select:focus, textarea:focus, input[type="password"]:focus, input[type="text"]:f
 
 
 a:link, body_alink, a:visited, body_avisited{
-	color: #666;
+	color: #376007;
 	text-decoration: none;
 	padding:2px;
 }
 a:hover, a:active, body_ahover {
-	color:#D2691E;
+	color:#863D00;
 	text-decoration:underline;
 	padding:2px;
 }
@@ -284,12 +284,14 @@ p.explain {
 /* Powered by kleeja*/
 .kleeja{
 	text-align:center;
+	color:#0044C4;
+	letter-spacing:1px;
 }
 .kleeja a{
-	color:#CF6600;
+	color:#0044C4;
 }
 .kleeja a:hover{
-	color:#000;
+	color:#863D00;
 }
 /* #  Powered by kleeja */
 
@@ -631,7 +633,7 @@ ul.tabbernav li.tabberactive a:hover{
 	width:100%;
 	height:100%;
 	background: url(../images/footer_body.gif) repeat;
-	border-bottom:3px solid #D6D0CB;
+	border-bottom:1px solid #D6D0CB;
 	margin:0 auto;
 	padding:10px 0;
 	display:block;
@@ -640,6 +642,7 @@ ul.tabbernav li.tabberactive a:hover{
 	width:90%;
 	margin:0 auto;
 	padding:10px auto;
+	font-size:11px;
 }
 
 .footerlinksleft ul{
@@ -649,24 +652,25 @@ ul.tabbernav li.tabberactive a:hover{
 .footerlinksleft li{
 	float:left;
 	direction:ltr;
+	background-color:#fff;
+	padding:1px 6px;
 }
 .footerlinksleft ul li a{
-	padding:2px 0;
-	color:#5C5C5C;
+	color:#376007;
 }
 .footerlinksleft ul li a:hover, .Copyrights  a:hover, .page_stats a:hover{
 	color:#D01B1B;
 }
 .Copyrights {
+	line-height:16px;
 	float:right;
-	padding:3px 0;
-	color:#666;
+	padding:1px 0;
 }
 
 .css_xhtml{
-	margin:10px auto 4px;
-	height:25px;
-	width:20%;
+	margin:6px 0 2px 0;
+	height:20px;
+	width:12%;
 	float:right;
 	display:inline;
 }
@@ -677,7 +681,7 @@ a.xhtml{
 	height:16px;
 	line-height:16px;
 	margin-left:4px;
-	font-size:10pt; 
+	font-size:11pt; 
 	font-weight:bold;
 	text-align:center; 
 	float:right;
@@ -698,36 +702,41 @@ a.xhtml:hover , a.css:hover{
 
 .page_stats, .googleanalytics{
 	display:inline;
+	line-height:16px;
 	margin:10px 0;
 	float:left;
 	direction:ltr;
-	color:#999;
+	color:#111;
 }
 
 /*start Option to control panel */
-
-.admin_cp_link {
-	line-height:24px;
-	float:right;
+.box_admin_page {
+	margin:0 auto;
+	text-align:center;
+	width:15%;
+}
+a.admin_cp_link {
+	line-height:16px;
 	display:inline;
-	color:#2B2B2B;
+	color:#C60000;
 	cursor:pointer;
 	text-decoration:none;
 }
-.admin_cp_link:hover  {
-	color:#111;
+a.admin_cp_link:hover  {
+	color:#fff;
 	text-decoration:none;
 }
 .admin_cp_link span{
-	margin:5px 0;
-	padding:4px 50px;
-	background:url(../images/admin_cp.gif) no-repeat center left;
-	font-weight:bold;
-	border:1px solid #F68618;
+	padding:3px 4px;
+	background:url(../images/admin_cp.gif) no-repeat 50% -64%;
+	font-size:18px;
 }
-
+.admin_cp_link span:hover{
+	padding:1px 4px;
+	background:url(../images/admin_cp.gif) no-repeat 50% 100%;
+}
 .debug_kleeja{
-	width:80%;
+	width:90%;
 	margin:0 auto;
 	background-color:white;
 	border:1px #666 solid;

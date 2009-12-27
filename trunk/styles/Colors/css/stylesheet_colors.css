@@ -3,9 +3,9 @@
 # version 1.0.0
 # copyright (c) 2007 Kleeja.com
 # license ./docs/license.txt
-# Filename : styles/default/stylesheet.css
+# Filename : styles/colors/stylesheet_colors.css
 # Author: Tar3Q  
-# Date:: 2009-10-07  $
+# Date:: 2009-12-27  $
 */
 body { 
 	background:url(../images/body.jpg) no-repeat top left;
@@ -44,7 +44,6 @@ select, option{
 	cursor: pointer;
 	vertical-align: middle;
 	width: auto;
-	color: #444;
 	padding:1px 5px;
 }
 textarea ,select {
@@ -57,7 +56,6 @@ textarea {
 	cursor: text;
 	vertical-align: middle;
 	padding:2px;
-	color: #000;
 }
 input {
 	padding:3px 6px;
@@ -118,15 +116,9 @@ img.right {
 	width:100%;
 	padding:10px 0;
 	font-size:12px;
-	color:#FF5502;
 	text-indent:10px;
 }
-.title-x a:link {
-	color:#C95A12;
-}
-.title-x a:hover {
-	color:#000;
-}
+
 /* safe code all box */
 .safe_code {
 	margin:3px 0;
@@ -195,7 +187,7 @@ p.explain {
 
 /** The main menu at the top **/        
 .underlinemenu{width:100%;height:70px;margin: 0 auto;display:block;}
-.underlinemenu ul{padding: 6px 0 7px 0; margin: 0;}
+.underlinemenu ul{padding: 6px 0 7px 0;}
 .underlinemenu ul li {display: inline;}
 .underlinemenu ul li a{color: #494949;padding: 6px 10px; margin:0 5px; text-decoration: none;border-bottom: 6pt solid #939393;}
 .underlinemenu ul li a:hover { border-bottom-color:#E3E31C; }
@@ -291,12 +283,7 @@ p.explain {
 
 /* Powered by kleeja*/
 .kleeja{
-	width:30%;
-	padding:2px 1px;
-	margin-top:4px;
-	float:left;
-	text-align:left;
-	color:#5C5C5C;
+	text-align:center;
 }
 .kleeja a{
 	color:#CF6600;
@@ -474,10 +461,10 @@ p.explain {
 }
 
 .wolcome_msg {
-	width:96%;
+	width:100%;
 	text-align:center;
 	font-size:11px;
-	color:#660066;
+	color:#57871F;
 	padding:3px 6px;
 }
 .agree{
@@ -640,14 +627,22 @@ ul.tabbernav li.tabberactive a:hover{
 
 
 /* footer template */
-#footer{
+.footer_body {
 	width:100%;
-	margin:12px auto 3px auto;
-	background:url(../images/bg_footer.gif) repeat-x;
+	height:100%;
+	background: url(../images/footer_body.gif) repeat;
+	border-bottom:3px solid #D6D0CB;
+	margin:0 auto;
+	padding:10px 0;
+	display:block;
+}
+.footer_box{
+	width:90%;
+	margin:0 auto;
+	padding:10px auto;
 }
 
 .footerlinksleft ul{
-	width:60%;
 	line-height:16px;
 	float:left;
 }
@@ -656,7 +651,7 @@ ul.tabbernav li.tabberactive a:hover{
 	direction:ltr;
 }
 .footerlinksleft ul li a{
-	padding:2px 4px;
+	padding:2px 0;
 	color:#5C5C5C;
 }
 .footerlinksleft ul li a:hover, .Copyrights  a:hover, .page_stats a:hover{
@@ -667,6 +662,40 @@ ul.tabbernav li.tabberactive a:hover{
 	padding:3px 0;
 	color:#666;
 }
+
+.css_xhtml{
+	margin:10px auto 4px;
+	height:25px;
+	width:20%;
+	float:right;
+	display:inline;
+}
+a.xhtml{
+	background-color:#FF8000; 
+	color:#FFFFFF; 
+	width:50px; 
+	height:16px;
+	line-height:16px;
+	margin-left:4px;
+	font-size:10pt; 
+	font-weight:bold;
+	text-align:center; 
+	float:right;
+	font-variant:small-caps;
+	border-bottom:3px solid #D0D0D0;
+}
+a.css{
+	background-color:#82C522; 
+	width:40px;
+	border-bottom-color:#D0D0D0;
+}
+a.xhtml:hover , a.css:hover{
+	background-color:#555; 
+	color:#FFFFFF;
+	text-decoration:none;
+	border-bottom-color:#82C522;
+}
+
 .page_stats, .googleanalytics{
 	display:inline;
 	margin:10px 0;
@@ -676,6 +705,7 @@ ul.tabbernav li.tabberactive a:hover{
 }
 
 /*start Option to control panel */
+
 .admin_cp_link {
 	line-height:24px;
 	float:right;
@@ -694,6 +724,19 @@ ul.tabbernav li.tabberactive a:hover{
 	background:url(../images/admin_cp.gif) no-repeat center left;
 	font-weight:bold;
 	border:1px solid #F68618;
+}
+
+.debug_kleeja{
+	width:80%;
+	margin:0 auto;
+	background-color:white;
+	border:1px #666 solid;
+	margin-top:20px;
+	margin-bottom:20px;
+}
+.debug_kleeja fieldset{
+	margin:0 auto;
+	width:80%;
 }
 /* # footer template */
 
@@ -1188,32 +1231,7 @@ select.remme:focus {
 }
 /* # template up > up_boxes.html */
 
-.debug_kleeja{
-	width:80%;
-	margin:0 auto;
-	background-color:white;
-	border:1px #666 solid;
-	margin-top:20px;
-	margin-bottom:20px;
-}
-.debug_kleeja fieldset{
-	margin:0 auto;
-	width:80%;
-}
-.css_xhtml{
-	margin:10px auto 4px;
-	height:25px;
-	width:100%;
-}
-.css img:hover {
-	border-bottom:4px solid #FF8F21;
-}
-.xhtml img:hover {
-	border-bottom:4px solid #82C522;
-}
-.css_xhtml a:hover{
-	background:transparent;
-}
+
 /*CSS style pagination*/
 .pagination {
 	padding:3px 0;

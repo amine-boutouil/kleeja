@@ -58,17 +58,11 @@ ul.tabbernav li a{
 	-khtml-border-radius : 5px; /* Konqueror */
 	border-radius : 5px; /* CSS3 only */
 }
-#content, .download a, .admin_cp_link span, .user_box, .guide_user_th , .guide_visitor_th, .user_img, .visitor_img , .inputbody, .data_file, .data_file_down {
+.download a, .admin_cp_link span, .user_box, .guide_user_th , .guide_visitor_th, .user_img, .visitor_img , .inputbody, .data_file, .data_file_down {
 	-moz-border-radius : 10px; /* Mozilla */
 	-webkit-border-radius : 10px; /* Webkit */
 	-khtml-border-radius : 10px; /* Konqueror */
 	border-radius : 10px; /* CSS3 only */
-}
-#content{
-	-moz-box-shadow: 4px 4px 5px #999; /* Mozilla */
-	-webkit-box-shadow: 4px 4px 5px #999; /* Webkit */
-	-khtml-box-shadow: 4px 4px 5px #999; /* Konqueror */
-	box-shadow: 4px 4px 5px #999; /* CSS3 only */
 }
 
 /* iPhone */

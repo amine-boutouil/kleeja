@@ -18,6 +18,7 @@
 */
 define('IN_COMMON', true);
 $_path = "../";
+define('PATH', $_path);
 if(file_exists($_path . 'config.php'))
 {
 	include_once ($_path . 'config.php');
@@ -209,7 +210,7 @@ case 'update_now':
 				}
 			}
 
-			if($complete_upate)
+			if($complete_upate or defined('DEV_STAGE'))
 			{
 				//check plugins
 				$pl_path = "includes/plugins";

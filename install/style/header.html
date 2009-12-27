@@ -14,6 +14,8 @@ var PATH_SPACER = '../admin/admin_style/images/spacer.gif';
 //<![CDATA[
 $(document).ready(function() {
 	$('input:checkbox').checkbox();
+	$('.scroll_div').animate({scrollTop: $('.scroll_div')[0].scrollHeight});
+
 });
 function agree ()
 	{

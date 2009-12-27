@@ -33,13 +33,14 @@ class usrcp
 		{
 			$config['user_system'] = '1';
 		}
+	
 
 		//expire
-		$expire = time() + intval($expire);
+		$expire = time() + ((int) $expire ? intval($expire) : 86400);
 
 		($hook = kleeja_run_hook('data_func_usr_class')) ? eval($hook) : null; //run hook
 
-		if($config['user_system'] != '1')
+		if((int) $config['user_system'] != 1)
 		{
 			if(file_exists(PATH . 'includes/auth_integration/' . trim($config['user_system']) . '.php'))
 			{	
@@ -60,10 +61,10 @@ class usrcp
 		//return user system to normal
 		if(defined('DISABLE_INTR'))
 		{
-			$config['user_system'] = '1';
+			$config['user_system'] = 1;
 		}
 
-		if($config['user_system'] != '1')
+		if((int) $config['user_system'] != 1)
 		{
 			if(file_exists(PATH . 'includes/auth_integration/' . trim($config['user_system']) . '.php'))
 			{	

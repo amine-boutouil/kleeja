@@ -935,6 +935,7 @@ function kleeja_check_mime ($mime, $group_id, $file_path)
 	{
 		return true;
 	}
+
 	
 	$return = false;
 	$s_items = @explode(':', 'image:png:jpg:tif:tga:targa');
@@ -986,22 +987,23 @@ function kleeja_check_mime ($mime, $group_id, $file_path)
 //delete cache
 function delete_cache($name, $all=false)
 {
-
 	($hook = kleeja_run_hook('delete_cache_func')) ? eval($hook) : null; //run hook
-	
+
 	$path_to_cache = PATH . 'cache';
 	
 	if($all)
 	{
-		$dh = @opendir($path_to_cache);
-		while (($file = @readdir($dh)) !== false)
+		if($dh = @opendir($path_to_cache))
 		{
-			if($file != "." && $file != ".." && $file != ".htaccess" && $file != "index.html" && $file != "php.ini" && $file != 'styles_cached.php')
+			while (($file = @readdir($dh)) !== false)
 			{
-				$del = kleeja_unlink($path_to_cache . '/' . $file, true);
+				if($file != "." && $file != ".." && $file != ".htaccess" && $file != "index.html" && $file != "php.ini" && $file != 'styles_cached.php')
+				{
+					$del = kleeja_unlink($path_to_cache . '/' . $file, true);
+				}
 			}
+			@closedir($dh);
 		}
-		@closedir($dh);
 	}
 	else
 	{
@@ -1083,6 +1085,7 @@ function get_mime_for_header($ext)
 		"clp" => "application/x-msclip",
 		"cmx" => "image/x-cmx",
 		"cod" => "image/cis-cod",
+		"psd" => "image/psd",
 		"cpio" => "application/x-cpio",
 		"crd" => "application/x-mscardfile",
 		"crl" => "application/pkix-crl",

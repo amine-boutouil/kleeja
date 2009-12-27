@@ -88,7 +88,7 @@ switch ($_GET['go'])
 				{
 					$ERRORS[] = $lang['EMPTY_FIELDS'];
 				}
-				elseif(!$usrcp->data($_POST['lname'], $_POST['lpass'], false, $_POST['remme']))
+				elseif(!$usrcp->data($_POST['lname'], $_POST['lpass'], false, (isset($_POST['remme']) ? false : $_POST['remme'])))
 				{
 					$ERRORS[] = $lang['LOGIN_ERROR'];
 				}

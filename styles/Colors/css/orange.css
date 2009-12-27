@@ -3,9 +3,9 @@
 # version 1.0.0
 # copyright (c) 2007 Kleeja.com
 # license ./docs/license.txt
-# Filename : styles/default/stylesheet.css
+# Filename : styles/colors/orange.css
 # Author: Tar3Q  
-# Date:: 2009-10-07  $
+# Date:: 2009-12-27  $
 */
 body {background:url(../images/bg-orange.gif) repeat-x top left;color: #444;}
 h2 {	color:#EF5E00;}
@@ -19,159 +19,7 @@ select:focus, textarea:focus, input[type="password"]:focus, input[type="text"]:f
 a:link, body_alink, a:visited, body_avisited{color: #666;}
 a:hover, a:active, body_ahover {color:#D2691E;}
 
-.title-x {color:#FF5502;}
-.title-x a:link {color:#C95A12;}
-.title-x a:hover {color:#000;}
-
-.safe_code {	border-top:1px solid #ECCEBB;border-bottom:1px solid #ECCEBB;}
-.safe_code p {color:#FF5502;}
-
-p.explain {color:#666;}
-
 .underlinemenu ul li a{color: #494949;border-bottom: 6pt solid #939393;}
 .underlinemenu li a.current ,.underlinemenu li a.current:hover{border-bottom-color: red;}
 
-.kleeja{color:#5C5C5C;}
-.kleeja a{color:#CF6600;}
-.kleeja a:hover{	color:#000;}
-
-.data_file {	border:1px solid #ABAB68;background:#FAFAE7 url(../images/bg_onlineall.gif) repeat-x bottom left;}
-.tit {background:#FFE4D5 url(../images/headline_bg.png) repeat-x top left;border-left:1px solid #F6EBE4;	border-bottom:1px solid #FFCBAE;border-top:1px solid #FFCBAE;color:#D88427;}
-.data_menu tr{background:white;border-left:2px solid #F6EBE4;	border-bottom:2px solid #F6EBE4;border-top:2px solid #F6EBE4;}
-.td {background:#F6EBE4 url(../images/headline_bg.png) repeat-x top left;color:#555;}
-.filereport {border-top:1px solid #D88181;border-bottom:1px solid #D88181;background:url(../images/bg_onlinevisitor.gif) repeat-x bottom left;color:#9B2020;}
-.filereport:hover {background:#F9B6C1;border-top:1px solid #FF0000;border-bottom:1px solid #FF0000;}
-.data_file_down {background:#F0F6E7 url(../images/bg_datafile.gif) repeat-x bottom left;	border:1px solid #B3CB8C;}
-.find_x {color:#6C9F01;}
-.wait {color:#F04C2D;}
-.download  a{background:#F5F7EF url(../images/here_download.png) repeat-x bottom left;border:1px solid #6D9026;color:#4A690C;}
-.download a:hover {background:white;	border:1px solid #ADD101;}
-
-.st i{background:#FEFFD7;color: #C10000;border-top:1px solid #ccc;border-bottom:1px solid #ccc;}
-
-#rules .rut {background:#F0F0F0;}
-#rules .rls {color:#006BB1;}
-
-.wolcome_msg {color:#660066;}
-.zx a:hover, .zl a:hover {background:#FEEA00;}
-.url {color:#DD6F00;}
-.inum {color:#888;}
-input.input_num {	background:white;border: 1px solid #B3B9C4;outline:1px solid #ccc;}
-.waitloading{color:#E17100;}
-
-ul.tabbernav li a{	border: 1px solid #aaa;background:#EB9D0B url(../images/current-bg.gif) top left repeat-x;}
-ul.tabbernav li a:link {color:#222;}
-ul.tabbernav li a:hover{color:white;}
-ul.tabbernav li.tabberactive a{border-bottom: 1px solid white;	background:white;}
-ul.tabbernav li.tabberactive a:link{color: #F68618;}
-ul.tabbernav li.tabberactive a:hover{color:#333;}
-
-.input_link, .input_field {	background:white;border:1px solid #B3B9C4;}
-.input_field:hover, .input_link:hover{border: 1px solid #999;}
-.input_field:focus, .input_link:focus{border:1px solid #D26900;	background:#ffd;}
-
-#footer{background:url(../images/bg_footer.gif) repeat-x;}
-
-.footerlinksleft ul li a{color:#5C5C5C;}
-.footerlinksleft ul li a:hover, .Copyrights  a:hover, .page_stats a:hover{color:#D01B1B;}
-.Copyrights {color:#666;}
-.page_stats, .googleanalytics{color:#999;}
-
-.admin_cp_link {	color:#2B2B2B;}
-.admin_cp_link:hover  {color:#111;}
-
-.login {	background: url(../images/login.gif) no-repeat 15% 50%;}
-.title_login {background:#FCF8F5 url(../images/title_login.png) no-repeat 99% 50%;}
-.gather {color:#444;	background:#F5F9FC;}
-select.remme:focus {background:#FFDDDD;border-color:#D89B9B;color:#D80505;}
-.forget_pass  a{	color:#0079B1;background-color:#fff;}
-.forget_pass a:hover {color:#FF2020;background-color:#FFFFA5;}
-
-#boxfileuser ,#filecplink {background:#ddd;border:1px ridge #ccc;}
-#boxfileuser .box_user, #boxfileuser .us3r_n4me {	background:white;border:1px solid #bbb;}
-#boxfileuser .public {background:#DFDFDF;color:#555;border:1px dashed white;}
-#boxfileuser .uname, #boxfileuser .nums{	color:#FF6600;}
-#filecplink .copylink  input , #filecplink .link_user  input{border: 1px solid #FFC58A;}
-#filecplink .copylink  input:hover, #filecplink .link_user  input:hover{border: 1px solid #FF8F21;}
-
-.tabledata {	background-color:#CECECE;border:1px solid #ccc;}
-.tabledata th , .tabledata td {	border-right:1px solid #aaa;border-top: 1px solid #eee;border-left:1px solid #eee;border-bottom: 1px solid #aaa;}
-.tabledata .odd  {background:#D4D0C8;}
-.tabledata thead th {background:#888 url(../images/headline_bg.png) repeat-x center right;color:white;}
-.tabledata a, .tabledata a:link {	color:#039;}
-.tabledata a:visited {color:#555;}
-.tabledata th:hover a, .tabledata td:hover a {color:#0000FF;}
-.tabledata:hover {border-color:#FF6600;}
-.tabledata tr:hover {	background-color:#FF6600;color:white;}
-.tabledata thead tr:hover th, .tabledata thead th:hover {background:#888 url(../images/headline_bg.png) repeat-x center right;	color:white;}
-.tabledata tr th:hover, .tabledata tr td:hover {background-color:white;color:#FF6600;}
-
-.register {background: url(../images/register.gif) no-repeat 30% 80%;}
-
-.call{background:url(../images/call.gif) no-repeat 10% 50%;}
-
-.get_password{background:#F9F5F0 url(../images/get_password.gif) no-repeat 15% 50%;border:1px solid #ECCEBB;}
-.get_password p{	background:white;border:1px solid #EEB;color:#D25D0D;}
-
-.rebort{background: url(../images/file_rebort.gif) no-repeat 10% 50%;}
-.urlcolor{background:#FFCDCD;}
-
-#profile  select, #profile  option{background:#FFD;color:#000;}
-#profile .boxdata{border:1px solid #bbb;	background:#DFDFDF url(../images/bg_tabbertab_1.png) repeat-x top left;}
-
-#profile .boxdata .tit {background:#EB9D0B url(../images/bg_tile_tab.png) repeat-x bottom left;color:white;}
-#profile .boxdata .bq , #profile .boxdata .in{color:#999;}
-#profile .boxdata .biguser {color:#FF5502;}
-
-.file_cp {background:#DADADA url(../images/table_file_cp.gif) no-repeat 40% 45%;}
-.file_cp thead th, .file_cp tfoot th, .file_cp tbody td {border-right: 1px solid #aaa;border-top: 1px solid #eee;border-left:1px solid #eee;	border-bottom: 1px solid #aaa;}
-.file_cp thead th{background:#EB9D0B url(../images/bg_tile_tab.png) repeat-x bottom left;}
-.file_cp tfoot th{background:#bbb url(../images/headline_bg.png) repeat-x center right;}
-.file_cp tbody tr:hover td{border-top:1px solid #aaa;border-bottom:1px solid #eee;}
-.file_cp  a {color:#444;}
-.file_cp  a:link {color:#666;}
-.file_cp a:visited {color:#000;}
-.file_cp  a:hover {color:#D2691E;}
-
-.guide_user_th, .guide_visitor_th{color:white;}
-.guide_user_th  {background:#767676 url(../images/headline_bg.png) repeat-x top right;}
-.guide_visitor_th {background:#FF7B00 url(../images/headline_bg.png) repeat-x top right;}
-.user_box{background-color:#CECECE;border:1px double gray;}
-.user_img,.user_n4me, .visitor_img {	color:#333;}
-.user_img {background-color:#E1E1E1;	border:1px double #bbb;}
-.user_ext{background:#E8E8E8 url(../images/headline_bg.png) repeat-x top right;border-bottom: 1px solid #bbb;border-top: 1px solid #bbb;}
-.user_ext_color{color:#222;}
-.user_ext_lang{color:#000;}
-.visitor_box{background-color:#FFE9D5;border:1px #FFAC62 double;}
-.visitor_img {background-color:#FDF8EE;border:1px #EDCFAF double;}
-.visitor_n4me{color:#F68618;}
-.visitor_ext{background:#FDF8EE url(../images/headline_bg.png) repeat-x top right;border-bottom: 1px solid #FFD1BF;	border-top: 1px solid #FFD1BF;}
-.visitor_ext_color{color:#333;}
-.visitor_ext_lang{color:#000;}
-.user_ext:hover{background-color:#FEE3A5;}
-
-.thumb_div_tag img{background:white;border:2px solid #84A0C0;}
-.thumb_div_tag img:hover{border:2px solid #111;}
-
-.btitle {background:#84A0C0;outline:1px solid white;	color:white;}
-.all_boxes{color:#004776;border:1px solid #005F9D;outline:1px solid #84A0C0;}
-.all_boxes:hover{border:1px solid #111;color:#111;}
-.all_boxes:focus {background-color:#D9FDFF;border: 1px solid #0081F9;color:#000;}
-
-.debug_kleeja{background-color:white;border:1px #666 solid;}
-
-.css img:hover {border-bottom:4px solid #FF8F21;}
-.xhtml img:hover {border-bottom:4px solid #82C522;}
-
-.pagination {color:#ff6500;}
-.pagination a {border: 1px solid #ff9600;background:#fff url(../images/pagination.gif) repeat-x bottom left;color: #ff6500;}
-.pagination a:hover {border: 1px solid #ff9600;background-image:none;background-color:#ffc794;color: #ff6500;}
-.pagination a.next {	color: #ff6500;}
-.pagination a.disabled {color: #555;}
-.pagination a.next:hover {color:#666;}
-.pagination a.disabled:hover {color:#999;}	
-.pagination span.current, .pagination span.three_dots {border: 1px solid #FF9600;}
-.pagination span.current {background-color:#ff6500;color: #FEF3EF;}
-.pagination span.three_dots {background:#fff url(../images/pagination.gif) repeat-x bottom left;}
-
-.checkall a:link{color:red;}
+.wolcome_msg {color:#57871F;}

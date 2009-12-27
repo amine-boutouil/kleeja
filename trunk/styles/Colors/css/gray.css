@@ -7,7 +7,7 @@
 # Author: Tar3Q  
 # Date:: 2009-10-07  $
 */
-body {background: #fff url(../images/bg-gray.gif) repeat-x top left;color: #444;}
+body {background:url(../images/bg-gray.gif) repeat-x top left;color: #444;}
 h2 {	color:#EF5E00;}
 select, option{color: #444;}
 textarea ,select {	border-left:1px solid #AFAEAA;border-top:1px solid #AFAEAA;border-right:1px solid #D5D5C8;border-bottom:1px solid #D5D5C8;}

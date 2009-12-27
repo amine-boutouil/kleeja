@@ -28,9 +28,8 @@ a:hover, a:active, body_ahover {color:#D2691E;}
 
 p.explain {color:#666;}
 
-.underlinemenu ul li a{color: #494949;border-bottom: 6pt solid #939393;}
-.underlinemenu ul li a:hover {border-bottom-color:#6FAB41;}
-.underlinemenu li a.current ,.underlinemenu li a.current:hover{border-bottom-color: red;}
+.underlinemenu ul li a{color: #588A23;border-bottom: 6pt solid #7EB148;}
+.underlinemenu li a.current ,.underlinemenu li a.current:hover{border-bottom-color:#3188D4;}
 
 .kleeja{color:#5C5C5C;}
 .kleeja a{color:#CF6600;}

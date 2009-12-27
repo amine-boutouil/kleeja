@@ -541,30 +541,33 @@ ul.tabbernav{
 ul.tabbernav li{
 	list-style:none;
 	display: inline;
+	
 }
 ul.tabbernav li a{
-	margin-left:4px;
-	padding:4px 14px;
-	border: 1px solid #aaa;
-	background:#EB9D0B url(../images/current-bg.gif) top left repeat-x;
+	float:right;
+	width:20%;
+	padding:5px 0;
+	background:#FDF5C1;
+	border-top: 2px solid #D6CB83;	
+	border-bottom: 2px solid #D6CB83;
 	text-decoration: none;
 }
 ul.tabbernav li a:link {
-	color:#222;
-	font-weight:normal;
-	padding:4px 14px;
+	color:#800000;
 }
 ul.tabbernav li a:hover{
-	color:white;
-	text-decoration: none;
+	color:#A351AF;
 }
 ul.tabbernav li.tabberactive a{
-	padding:4px 14px;
-	border-bottom: 1px solid white;
-	background:white;
+	float:left;
+	width:20%;
+	padding:5px 0;
+	background:#FDF5C1;
+	border-top: 2px solid #D6CB83;	
+	border-bottom: 2px solid #D6CB83;
 }
 ul.tabbernav li.tabberactive a:link{
-	color: #F68618;
+	color: #A29435;
 	font-weight:bold;
 }
 ul.tabbernav li.tabberactive a:hover{

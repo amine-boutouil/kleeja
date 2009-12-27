@@ -151,7 +151,7 @@ else if(isset($_GET['add_new_ext']))
 		//check if it's welcomed one
 		//if he trying to be smart, he will add like ext1.ext2.php
 		//so we will just look at last one
-		$check_ext = array_pop(explode('.', $new_ext_i)); 
+		$check_ext = strtolower(array_pop(explode('.', $new_ext_i))); 
 		$not_welcomed_exts = array('php', 'php3', 'php5', 'php4', 'asp', 'aspx', 'shtml', 'html', 'htm', 'xhtml', 'phtml', 'pl', 'cgi', 'ini', 'htaccess', 'sql', 'txt');
 		if(in_array($check_ext, $not_welcomed_exts))
 		{

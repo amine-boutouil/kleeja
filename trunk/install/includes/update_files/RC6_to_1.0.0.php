@@ -109,6 +109,9 @@ $update_sqls['type_config_upload'] = "UPDATE `{$dbprefix}config` SET `type` = 'u
 // config general
 $update_sqls['type_config_general'] = "UPDATE `{$dbprefix}config` SET `type` = 'general' WHERE `name` IN ('sitename','siteclose','closemsg','language','siteurl','sitemail','sitemail2','user_system','register','del_f_day','mod_writer','enable_userfile','cookie_name','cookie_path','cookie_domain','cookie_secure');";
 
+//exts
+$update_sqls['ext_psd'] = "UPDATE  `{$dbprefix}exts` SET  `group_id` =  '9' WHERE `id` = 6;";
+
 // ************************* MAFIII MALOOOM SDIG :(
 $update_sqls['configs_style'] = "UPDATE `{$dbprefix}config` SET `option` = '',`display_order` = 0, `type`='' WHERE  `name` = 'style';";
 $update_sqls['clean_name'] = "ALTER TABLE `{$dbprefix}users` ADD `clean_name` VARCHAR( 200 ) NOT NULL AFTER `name`";

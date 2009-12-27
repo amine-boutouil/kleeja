@@ -58,7 +58,7 @@ ul.tabbernav li a{
 	-khtml-border-radius : 5px; /* Konqueror */
 	border-radius : 5px; /* CSS3 only */
 }
-.download a, .admin_cp_link span, .user_box, .guide_user_th , .guide_visitor_th, .user_img, .visitor_img , .inputbody, .data_file, .data_file_down {
+.download a, .user_box, .guide_user_th , .guide_visitor_th, .user_img, .visitor_img , .inputbody, .data_file, .data_file_down {
 	-moz-border-radius : 10px; /* Mozilla */
 	-webkit-border-radius : 10px; /* Webkit */
 	-khtml-border-radius : 10px; /* Konqueror */

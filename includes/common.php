@@ -363,6 +363,18 @@ if (file_exists(PATH . 'install') && !defined('IN_ADMIN') && !defined('IN_LOGIN'
 $login_page = '';
 if ($config['siteclose'] == '1' && !$usrcp->admin() && !defined('IN_LOGIN') && !defined('IN_ADMIN'))
 {
+	//if download, images ?
+	if(defined('IN_DOWNLOAD') && (isset($_GET['img']) || isset($_GET['thmb']) || isset($_GET['thmbf']) || isset($_GET['imgf'])))
+	{
+		@$SQL->close();
+		$fullname = "images/not_exists.jpg";
+		$filesize = filesize($fullname);
+		header("Content-length: $filesize");
+		header("Content-type: image/jpg");
+		readfile($fullname);
+		exit;
+	}
+
 	// Send a 503 HTTP response code to prevent search bots from indexing the maintenace message
 	header('HTTP/1.1 503 Service Temporarily Unavailable');
 	kleeja_info($config['closemsg'], $lang['SITE_CLOSED']);

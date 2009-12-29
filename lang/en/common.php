@@ -446,10 +446,10 @@ $lang = array_merge($lang, array(
 	'ADMIN_DELETE_FILES'		=> 'Delete all user files',
 	
 	'KLJ_MORE_PLUGINS'			=> array('Get more plugins from Kleeja\'s plugin center ,<a target="_blank" href="http://www.kleeja.com/plugins/">click here</a> .',
-								'Are you a developer? have you developed plugins for Kleeja & you want to showcase or sell them in Kleeja\'s plugins center? <a target="_blank" href="http://www.kleeja.com/plugins/">click here</a>. ',
+								'Are you a developer? have you developed plugins for Kleeja & you want to showcase  in Kleeja\'s plugins center? <a target="_blank" href="http://www.kleeja.com/plugins/">click here</a>. ',
 								),
 	'KLJ_MORE_STYLES'			=> array('Get more styles from Kleeja\'s style gallery ,<a target="_blank" href="http://www.kleeja.com/styles/">click here</a> .',
-								'Are you a designer? looking to showcase your styles in Kleeja\'s gallery for everyone for free or otherwise? <a target="_blank" href="http://www.kleeja.com/styles/">click here</a> .',
+								'Are you a designer? looking to showcase your styles in Kleeja\'s gallery for everyone? <a target="_blank" href="http://www.kleeja.com/styles/">click here</a> .',
 								),
 							 
 	'CHECK_ALL'	 				=> 'Check all',

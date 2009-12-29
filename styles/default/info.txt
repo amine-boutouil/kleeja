@@ -21,3 +21,6 @@ kleeja_version = 1.0.0
 
 #name of the style required by this style 
 #depend_on = default
+
+#plugins required to install this style
+#plugins_required = test, test2

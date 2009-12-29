@@ -78,7 +78,20 @@ if (isset($_GET['do_plg']))
 		case '2': //enable it
 
 			$action	= (int) $_GET['m'] == 1 ? 1 : 0;
-
+			
+			//check if there is style require this plugin
+			if($action == 1)
+			{
+				if(($style_info = kleeja_style_info($config['style'])) != false)
+				{
+					$plugins_required = array_map('trim', explode(',', $style_info['plugins_required']));
+					if(in_array($_GET['pn'], $plugins_required))
+					{
+						kleeja_admin_err($lang['PLUGIN_REQ_BY_STYLE_ERR']);
+					}
+				}
+			}
+			
 			//update
 			$update_query = array(
 									'UPDATE'	=> "{$dbprefix}plugins",
@@ -101,6 +114,16 @@ if (isset($_GET['do_plg']))
 		
 		//Delete plguin
 		case '3': 
+		
+			//check if there is style require this plugin
+			if(($style_info = kleeja_style_info($config['style'])) != false)
+			{
+				$plugins_required = array_map('trim', explode(',', $style_info['plugins_required']));
+				if(in_array($_GET['pn'], $plugins_required))
+				{
+					kleeja_admin_err($lang['PLUGIN_REQ_BY_STYLE_ERR']);
+				}
+			}
 
 			//before delete we have look for unistalling 
 			$query	= array(

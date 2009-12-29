@@ -346,12 +346,6 @@ get_lang('common');
 //ban system 
 get_ban();
 
-//some languages have copyrights !
-$S_TRANSLATED_BY = false;
-if(isset($lang['S_TRANSLATED_BY']) && strlen($lang['S_TRANSLATED_BY']) > 2)
-{
-	$S_TRANSLATED_BY = true;
-}
 
 //install.php exists
 if (file_exists(PATH . 'install') && !defined('IN_ADMIN') && !defined('IN_LOGIN') && !defined('DEV_STAGE')) 

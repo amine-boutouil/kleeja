@@ -99,7 +99,7 @@ switch ($_GET['sty_t'])
 					}
 
 					//get style detalis
-					$style_details1 = array('name'=>'[!]', 'version'=> '[!]', 'copyright'=>'[!]', 'kleeja_version'=>'[!]', 'depend_on' => $lang['NONE']);
+					$style_details1 = array('name'=>'[!]', 'version'=> '[!]', 'copyright'=>'[!]', 'kleeja_version'=>'[!]', 'depend_on' => $lang['NONE'], 'plugins_required'=>'[!]');
 					$style_details = kleeja_style_info($style_id);
 					
 					//fix if not array
@@ -162,6 +162,39 @@ switch ($_GET['sty_t'])
 						if(isset($style_info['kleeja_version']) && version_compare(strtolower($style_info['kleeja_version']), strtolower(KLEEJA_VERSION), '>'))
 						{
 							kleeja_admin_err(sprintf($lang['KLJ_VER_NO_STYLE_ERR'], $style_info['kleeja_version']));
+						}
+						
+						//is this style require some plugins to be installed
+						if(isset($style_info['plugins_required']))
+						{
+							$plugins_required = array_map('trim', explode(',', $style_info['plugins_required']));
+	
+							$query = array(
+											'SELECT'	=> 'plg_name',
+											'FROM'		=> "{$dbprefix}plugins",
+										);
+
+							$result = $SQL->build($query);
+
+							if($SQL->num_rows($result) != 0)
+							{
+								$plugins_required = array_flip($plugins_required);
+								while($row=$SQL->fetch_array($result))
+								{
+									if(in_array($row['plg_name'], $plugins_required))
+									{
+										unset($plugins_required[$row['plg_name']]);
+									}
+								}
+							}
+
+							$SQL->freeresult($result);
+							
+							$plugins_required = array_flip($plugins_required);
+							if(sizeof($plugins_required))
+							{
+								kleeja_admin_err(sprintf($lang['PLUGINS_REQ_NO_STYLE_ERR'], implode(', ', $plugins_required)));
+							}
 						}
 					}
 

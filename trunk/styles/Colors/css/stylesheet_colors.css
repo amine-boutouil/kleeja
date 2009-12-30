@@ -13,7 +13,7 @@ body {
 	font-weight:bold;
 	font-size:11px;
 	text-align:justify;
-	color:#376007;
+	color:#111;
 	height:100%;
 	width: 100%;
 	margin:0;
@@ -79,7 +79,7 @@ select:focus, textarea:focus, input[type="password"]:focus, input[type="text"]:f
 
 
 a:link, body_alink, a:visited, body_avisited{
-	color: #376007;
+	color: #111;
 	text-decoration: none;
 	padding:2px;
 }
@@ -114,9 +114,13 @@ img.right {
 .title-x {
 	float:right;
 	width:100%;
-	padding:10px 0;
+	padding:5px 0;
+	margin-bottom:10px;
 	font-size:12px;
 	text-indent:10px;
+	background:#F0F0F0;
+	border-bottom:1px solid #D3D3D3;
+	border-top:1px solid #E4E4E4;
 }
 
 /* safe code all box */
@@ -428,22 +432,19 @@ p.explain {
 #rules  {
 	padding:10px;
 	font-weight:700;
-	background:url(../images/rules.gif) no-repeat 2% 50%;
 }
 #rules .rut {
 	clear:both;
-	background:#F0F0F0;
 	margin-bottom:3px;
 	padding:4px 0px;
 	text-indent:10px;
+	color:#D80000;
 }
 #rules .rls {
 	display:block;
 	line-height:16px;
-	padding:4px 0px;
+	padding:1px 0px;
 	text-indent:10px;
-	font-weight:400;
-	color:#006BB1;
 }
 #rules .rls  ul {
 	list-style-type:disc;
@@ -451,7 +452,7 @@ p.explain {
 	text-indent:10px;
 }
 #rules .rls  ul li {
-	height:20px;
+	line-height:16px;
 }
 /* #  rules template >> rules.html  */
 
@@ -541,12 +542,11 @@ ul.tabbernav{
 ul.tabbernav li{
 	list-style:none;
 	display: inline;
-	
+	width:40%;
 }
 ul.tabbernav li a{
-	float:right;
-	width:20%;
-	padding:5px 0;
+	margin-left:8px;
+	padding:5px 20px;
 	background:#FDF5C1;
 	border-top: 2px solid #D6CB83;	
 	border-bottom: 2px solid #D6CB83;
@@ -559,15 +559,14 @@ ul.tabbernav li a:hover{
 	color:#A351AF;
 }
 ul.tabbernav li.tabberactive a{
-	float:left;
 	width:20%;
-	padding:5px 0;
+	padding:5px 20px;
 	background:#FDF5C1;
 	border-top: 2px solid #D6CB83;	
 	border-bottom: 2px solid #D6CB83;
 }
 ul.tabbernav li.tabberactive a:link{
-	color: #A29435;
+	color: #D80000;
 	font-weight:bold;
 }
 ul.tabbernav li.tabberactive a:hover{
@@ -679,7 +678,7 @@ ul.tabbernav li.tabberactive a:hover{
 }
 a.xhtml{
 	background-color:#FF8000; 
-	color:#FFFFFF; 
+	color:#FFF; 
 	width:50px; 
 	height:16px;
 	line-height:16px;
@@ -1111,33 +1110,31 @@ select.remme:focus {
 .guide_user_th, .guide_visitor_th{
 	line-height:14px;
 	padding:10px 15px;
-	font-size:13px;
+	font-size:12px;
 	font-weight:700;
 	text-align:center;
-	color:white;
+	color:#fff;
 }
 .guide_user_th  {
-	background:#767676 url(../images/headline_bg.png) repeat-x top right;
+	background:#B5AF44;
 }
 .guide_visitor_th {
-	background:#FF7B00 url(../images/headline_bg.png) repeat-x top right;
+	background:#5B91A8;
 }
 .user_box{
 	padding:10px;
 	margin:3px 0px;
-	background-color:#CECECE;
-	border:1px double gray;
+	background-color:#F2F3E2;
+
 }
 .user_img,.user_n4me, .visitor_img {
 	display:block;
-	font-size:14px;
+	font-size:18px;
 	font-weight:700;
-	color:#333;
 	padding:5px 8px;
 }
 .user_img {
-	background-color:#E1E1E1;
-	border:1px double #bbb;
+	color:#8E8820;
 }
 .user_n4me{
 	display:inline;
@@ -1147,14 +1144,13 @@ select.remme:focus {
 }
 .user_ext{
 	line-height:18px;
-	padding:4px 8px;
-	background:#E8E8E8 url(../images/headline_bg.png) repeat-x top right;
-	margin:2px 0;
-	border-bottom: 1px solid #bbb;
-	border-top: 1px solid #bbb;
+	padding:4px 15px;
+	background:#EBECD2;
+	margin:1px 10px;
+	border: 1px solid #DADCAD;
 }
 .user_ext_color{
-	font-size:12px;
+	font-size:14px;
 	color:#222;
 	margin:2px;
 }
@@ -1165,23 +1161,17 @@ select.remme:focus {
 	margin:2px;
 }
 .visitor_box{
-	background-color:#FFE9D5;
-	border:1px #FFAC62 double;
-}
-.visitor_img {
-	background-color:#FDF8EE;
-	border:1px #EDCFAF double;
+	background-color:#DDF0F9;
 }
 .visitor_img img{
 	padding-left:5px;
 }
 .visitor_n4me{
-	color:#F68618;
+	color:#326A81;
 }
 .visitor_ext{
-	background:#FDF8EE url(../images/headline_bg.png) repeat-x top right;
-	border-bottom: 1px solid #FFD1BF;
-	border-top: 1px solid #FFD1BF;
+	background:#CEE9F5;
+	border: 1px solid #B7DFF0;
 }
 .visitor_ext_color{
 	color:#333;
@@ -1190,7 +1180,7 @@ select.remme:focus {
 	color:#000;
 }
 .user_ext:hover{
-	background-color:#FEE3A5;
+	background-color:#fff;
 }
 /* #  template list of files allowed > guide.html */
 

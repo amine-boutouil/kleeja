@@ -19,7 +19,7 @@ select:focus, textarea:focus, input[type="password"]:focus, input[type="text"]:f
 a:link, body_alink, a:visited, body_avisited{color: #666;}
 a:hover, a:active, body_ahover {color:#D2691E;}
 
-.underlinemenu ul li a{color: #494949;border-bottom: 6pt solid #939393;}
-.underlinemenu li a.current ,.underlinemenu li a.current:hover{border-bottom-color: red;}
+.underlinemenu ul li a{border-bottom: 6pt solid #8555B8;}
+.underlinemenu li a.current ,.underlinemenu li a.current:hover{border-bottom-color:#D9BCF0;}
 
 .wolcome_msg {color:#57871F;}

@@ -19,7 +19,18 @@ select:focus, textarea:focus, input[type="password"]:focus, input[type="text"]:f
 a:link, body_alink, a:visited, body_avisited{color:#004080;}
 a:hover, a:active, body_ahover {color:#0080FF;}
 
-.underlinemenu ul li a{color: #494949;border-bottom: 6pt solid #437CAE;}
-.underlinemenu li a.current ,.underlinemenu li a.current:hover{border-bottom-color:#AD580E;}
+.underlinemenu ul li a{border-bottom: 6pt solid #437CAE;}
+.underlinemenu li a.current ,.underlinemenu li a.current:hover{border-bottom-color:#B3D3EE;}
 
 .wolcome_msg {color:#1F5787;}
+
+/* template list of files allowed > guide.html */
+.guide_user_th  {background:#487EB1;}
+.guide_visitor_th {background:#4491B5;}
+.user_box{background-color:#E2EBF3;}
+.user_img {color:#000080;}
+.user_ext{background:#D1E0ED;border: 1px solid #D5D9EC;}
+.visitor_box{background-color:#E2F0F3;}
+.visitor_n4me{color:#206B8E;}
+.visitor_ext{background:#DBEDF0;border: 1px solid #CCE6EA;}
+/* #  template list of files allowed > guide.html */

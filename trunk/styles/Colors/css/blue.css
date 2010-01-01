@@ -23,14 +23,15 @@ a:hover, a:active, body_ahover {color:#0080FF;}
 .underlinemenu li a.current ,.underlinemenu li a.current:hover{border-bottom-color:#B3D3EE;}
 
 .wolcome_msg {color:#1F5787;}
+.url {color:#004080;}
+.title-x {background:#DDE6ED;border-color:#C0D1DA;}
 
 /* template list of files allowed > guide.html */
-.guide_user_th  {background:#487EB1;}
-.guide_visitor_th {background:#4491B5;}
-.user_box{background-color:#E2EBF3;}
-.user_img {color:#000080;}
-.user_ext{background:#D1E0ED;border: 1px solid #D5D9EC;}
-.visitor_box{background-color:#E2F0F3;}
-.visitor_n4me{color:#206B8E;}
-.visitor_ext{background:#DBEDF0;border: 1px solid #CCE6EA;}
+.guide_user_th  {background:#E2F2F3;color:#3188D4;}
+.user_box{border: 1px solid #E2F2F3;}
+.user_img {color:#3188D4;}
+.user_ext{background:#F0F9F9;}
+.guide_visitor_th {background:#E3F0FF}
+.visitor_box{border: 1px solid #E3F0FF;}
+.visitor_ext{background:#F0F8FF;}
 /* #  template list of files allowed > guide.html */

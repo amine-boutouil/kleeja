@@ -118,7 +118,7 @@ img.right {
 	margin-bottom:10px;
 	font-size:12px;
 	text-indent:10px;
-	background:#F0F0F0;
+	background:url(../images/body.jpg) no-repeat 50% 70%;
 	border-bottom:1px solid #D3D3D3;
 	border-top:1px solid #E4E4E4;
 }
@@ -173,6 +173,7 @@ p.explain {
 #header_login{
 	float:left;
 	padding:2px 0;
+	margin-left:6px;
 	display: inline;
 	width:50%;
 }
@@ -467,7 +468,7 @@ p.explain {
 	width:100%;
 	text-align:center;
 	font-size:11px;
-	color:#57871F;
+	color:#111;
 	padding:3px 6px;
 }
 .agree{
@@ -489,7 +490,7 @@ p.explain {
 .url {
 	margin-top:3px;
 	direction:ltr;
-	color:#DD6F00;
+	color:#444;
 }
 .inum {
 	text-align:center;
@@ -526,7 +527,7 @@ input.input_num {
 }
 .tabbertab {
 	width:94%;
-	padding:20px;
+	padding:10px 20px;
 	text-align:center;
 }
 .go_up{
@@ -542,28 +543,26 @@ ul.tabbernav{
 ul.tabbernav li{
 	list-style:none;
 	display: inline;
-	width:40%;
 }
 ul.tabbernav li a{
-	margin-left:8px;
-	padding:5px 20px;
+	margin-left:10px;
+	padding:5px 40px;
 	background:#FDF5C1;
-	border-top: 2px solid #D6CB83;	
-	border-bottom: 2px solid #D6CB83;
+	border-top: 1px solid #D6CB83;	
+	border-bottom: 1px solid #D6CB83;
 	text-decoration: none;
 }
 ul.tabbernav li a:link {
-	color:#800000;
+	color:#AFA351;
 }
 ul.tabbernav li a:hover{
-	color:#A351AF;
+	color:#663300;
 }
 ul.tabbernav li.tabberactive a{
-	width:20%;
-	padding:5px 20px;
-	background:#FDF5C1;
-	border-top: 2px solid #D6CB83;	
-	border-bottom: 2px solid #D6CB83;
+	padding:5px 50px;
+	background:#FDC1C9;
+	border-top: 1px solid #FF9CA9;	
+	border-bottom: 1px solid #FF9CA9;
 }
 ul.tabbernav li.tabberactive a:link{
 	color: #D80000;
@@ -1113,19 +1112,18 @@ select.remme:focus {
 	font-size:12px;
 	font-weight:700;
 	text-align:center;
-	color:#fff;
 }
 .guide_user_th  {
-	background:#B5AF44;
+	background:#F2F3E2;
+	color:#8E8820;
 }
 .guide_visitor_th {
-	background:#5B91A8;
+	background:#EAEAEA;
 }
 .user_box{
 	padding:10px;
-	margin:3px 0px;
-	background-color:#F2F3E2;
-
+	margin:1px 0px;
+	border: 1px solid #F2F3E2;
 }
 .user_img,.user_n4me, .visitor_img {
 	display:block;
@@ -1145,9 +1143,8 @@ select.remme:focus {
 .user_ext{
 	line-height:18px;
 	padding:4px 15px;
-	background:#EBECD2;
+	background:#F9F8F0;
 	margin:1px 10px;
-	border: 1px solid #DADCAD;
 }
 .user_ext_color{
 	font-size:14px;
@@ -1161,17 +1158,13 @@ select.remme:focus {
 	margin:2px;
 }
 .visitor_box{
-	background-color:#DDF0F9;
+	border: 1px solid #EAEAEA;
 }
 .visitor_img img{
 	padding-left:5px;
 }
-.visitor_n4me{
-	color:#326A81;
-}
 .visitor_ext{
-	background:#CEE9F5;
-	border: 1px solid #B7DFF0;
+	background:#F4F4F4;
 }
 .visitor_ext_color{
 	color:#333;

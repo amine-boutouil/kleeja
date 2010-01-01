@@ -22,4 +22,17 @@ a:hover, a:active, body_ahover {color:#D2691E;}
 .underlinemenu ul li a{border-bottom: 6pt solid #848484;}
 .underlinemenu li a.current ,.underlinemenu li a.current:hover{border-bottom-color:#D7D6D8;}
 
-.wolcome_msg {color:#57871F;}
+.wolcome_msg {color:#444;}
+.url {color:#888;}
+.title-x {background:#F4F4F4;border-color:#CDCDCD;}
+
+/* template list of files allowed > guide.html */
+.guide_user_th  {background:#DFDFDF;color:#666;}
+.user_box{border: 1px solid #DFDFDF;}
+.user_img {color:#666;}
+.user_ext{background:#EBEBEB;}
+
+.guide_visitor_th {background:#EAEAEA}
+.visitor_box{border: 1px solid #EAEAEA;}
+.visitor_ext{background:#F4F4F4;}
+/* #  template list of files allowed > guide.html */

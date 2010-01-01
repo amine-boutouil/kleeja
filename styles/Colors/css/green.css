@@ -7,7 +7,7 @@
 # Author: Tar3Q  
 # Date:: 2009-12-27  $
 */
-body {background:url(../images/bg-green.gif) repeat-x top left;color: #444;}
+body {background:url(../images/bg-green.gif) repeat-x top left;color:#537607;}
 h2 {	color:#EF5E00;}
 select, option{color: #444;}
 textarea ,select {	border-left:1px solid #AFAEAA;border-top:1px solid #AFAEAA;border-right:1px solid #D5D5C8;border-bottom:1px solid #D5D5C8;}
@@ -22,15 +22,16 @@ a:hover, a:active, body_ahover {color:#D2691E;}
 .underlinemenu ul li a{border-bottom: 6pt solid #7EB148;}
 .underlinemenu li a.current ,.underlinemenu li a.current:hover{border-bottom-color:#C6E8AC;}
 
-.wolcome_msg {color:#0B8243;}
+.wolcome_msg {color:#537607;}
+.title-x {background:#E6EDDD;border-color:#9DBD9D;}
+.url {color:#6BD800;}
 
 /* template list of files allowed > guide.html */
-.guide_user_th  {background:#7EB148;}
-.guide_visitor_th {background:#48B17B;}
-.user_box{background-color:#EBF3E2;}
-.user_img {color:#008000;}
-.user_ext{background:#E0EDD1;border: 1px solid #D9ECD5;}
-.visitor_box{background-color:#E2F3EA;}
-.visitor_n4me{color:#238A55;}
-.visitor_ext{background:#D2ECD3;border: 1px solid #BCE2BE;}
+.guide_user_th  {background:#E0F9CF;color:#80B24A;}
+.user_box{border: 1px solid #E0F9CF;}
+.user_img {color:#80B24A;}
+.user_ext{background:#F1FDEA;}
+.guide_visitor_th {background:#CFFAD1}
+.visitor_box{border: 1px solid #CFFAD1;}
+.visitor_ext{background:#EEFDEF;}
 /* #  template list of files allowed > guide.html */

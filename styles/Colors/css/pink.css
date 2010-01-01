@@ -7,7 +7,7 @@
 # Author: Tar3Q  
 # Date:: 2009-12-27  $
 */
-body {background:url(../images/bg-pink.gif) repeat-x top left;color: #444;}
+body {background:url(../images/bg-pink.gif) repeat-x top left;color: #CC0099;}
 h2 {	color:#EF5E00;}
 select, option{color: #444;}
 textarea ,select {	border-left:1px solid #AFAEAA;border-top:1px solid #AFAEAA;border-right:1px solid #D5D5C8;border-bottom:1px solid #D5D5C8;}
@@ -22,4 +22,17 @@ a:hover, a:active, body_ahover {color:#D2691E;}
 .underlinemenu ul li a{border-bottom: 6pt solid #C8718E;}
 .underlinemenu li a.current ,.underlinemenu li a.current:hover{border-bottom-color:#F3CEE6;}
 
-.wolcome_msg {color:#57871F;}
+.wolcome_msg {color:#CC0099;}
+.url {color:#FF0080;}
+.title-x {background:#F3EBF1;border-color:#FDC6FC;}
+
+/* template list of files allowed > guide.html */
+.guide_user_th  {background:#F3E2F2;color:#D217D2;}
+.user_box{border: 1px solid #F3E2F2;}
+.user_img {color:#D217D2}
+.user_ext{background:#F9F0F9;}
+
+.guide_visitor_th {background:#FACFE9}
+.visitor_box{border: 1px solid #FACFE9}
+.visitor_ext{background:#FDEAF5;}
+/* #  template list of files allowed > guide.html */

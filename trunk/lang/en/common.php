@@ -492,6 +492,7 @@ $lang = array_merge($lang, array(
 	'CONFIG_KLJ_MENUS_ALL'		=> 'Display all the settings',
 	'CONFIG_KLJ_MENUS_UPLOAD'	=> 'Upload settings',
 	'CONFIG_KLJ_MENUS_INTERFACE'=> 'Interface and design settings',
+	'CONFIG_KLJ_MENUS_ADVANCED' => 'Advanced settings',
 	'DELF_CAUTION'				=> '<span class="delf_caution">Caution: this function might be dangerous when using small numbers .</span>',
 	'PLUGIN_N_CMPT_KLJ'			=> 'This plugin is not compatible with your current version of Kleeja.',
 	'PHPINI_FILESIZE_SMALL'		=> 'Maximum file size allowed for your service is "%1$s" while upload_max_filesize in your hosts PHP settings is set to "%2$s" upload it so that your chosen size can be applied.',

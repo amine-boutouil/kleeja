@@ -107,7 +107,10 @@ $update_sqls['type_config_interface'] = "UPDATE `{$dbprefix}config` SET `type` =
 $update_sqls['type_config_upload'] = "UPDATE `{$dbprefix}config` SET `type` = 'upload' WHERE `name` IN ('foldername','prefixname','filesnum','decode','total_size','id_form','sec_down','thumbs_imgs','write_imgs','del_url_file','safe_code','livexts', 'www_url');";
 
 // config general
-$update_sqls['type_config_general'] = "UPDATE `{$dbprefix}config` SET `type` = 'general' WHERE `name` IN ('sitename','siteclose','closemsg','language','siteurl','sitemail','sitemail2','user_system','register','del_f_day','mod_writer','enable_userfile','cookie_name','cookie_path','cookie_domain','cookie_secure');";
+$update_sqls['type_config_general'] = "UPDATE `{$dbprefix}config` SET `type` = 'general' WHERE `name` IN ('sitename','siteclose','closemsg','language','siteurl','sitemail','sitemail2','register','del_f_day','enable_userfile');";
+
+//config advanced
+$update_sqls['type_config_advanced'] = "UPDATE `{$dbprefix}config` SET `type` = 'advanced' WHERE `name` IN ('del_f_day','user_system','mod_writer','cookie_name','cookie_path','cookie_domain','cookie_secure');";
 
 //exts
 $update_sqls['ext_psd'] = "UPDATE  `{$dbprefix}exts` SET  `group_id` =  '9' WHERE `id` = 6;";

@@ -475,6 +475,7 @@ $lang = array_merge($lang, array(
 	'CONFIG_KLJ_MENUS_ALL'		=> 'عرض كل الخيارات',
 	'CONFIG_KLJ_MENUS_UPLOAD'	=> 'اعدادات التحميل',
 	'CONFIG_KLJ_MENUS_INTERFACE'=> 'خيارات الواجهه والتصميم',
+	'CONFIG_KLJ_MENUS_ADVANCED' => 'خيارات متقدمة',
 	'DELF_CAUTION'				=> '<span class="delf_caution">تحذير : هذه الخاصيه قد تكون خطره عند وضع ارقام صغيره .</span>',
 	'PLUGIN_N_CMPT_KLJ'			=> 'هذه الاضافه غيره متوافقه مع إصدار كليجا الذي تستخدمه ! .',
 	'PHPINI_FILESIZE_SMALL'		=> 'اعلى حجم يستطيع المستخدمين تحميله لديك "%1$s" بينما إعدادات الـ PHP لديك فيما يتعلق بـ upload_max_filesize هي فقط "%2$s" , قم برفعها ليستطيع المستخدمين رفع الحجم الذي وضعته.',

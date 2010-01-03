@@ -7,7 +7,7 @@
 # Author: Tar3Q  
 # Date:: 2009-12-27  $
 */
-body {background:url(../images/bg-orange.gif) repeat-x top left;color:#FF3300;}
+body {background:url(../images/bg-orange.gif) repeat-x top left;color:#A54210;}
 h2 {	color:#EF5E00;}
 select, option{color: #444;}
 textarea ,select {	border-left:1px solid #AFAEAA;border-top:1px solid #AFAEAA;border-right:1px solid #D5D5C8;border-bottom:1px solid #D5D5C8;}
@@ -60,3 +60,21 @@ a:hover, a:active, body_ahover {color:#D2691E;}
 .pagination a.next {color:#D85600;}
 .pagination a.next:hover {color:#FF3300;}
 /* # pagination */
+
+/*-- start Profile template >> profile.html  */
+#profile  select, #profile  option{background:#FF9933;}
+#profile .boxdata .biguser {color:#FF8000;}
+#profile .boxdata{border-color:#E2C7B7;	background:#FFF6F3;}
+#profile .boxdata .tit{background:url(../images/bg-orange.gif) repeat-x 100% 1%;}
+/*-- End Profile template >> profile.html   */
+
+/*-- start user control panel  Files  >> filecp.html  */
+.file_cp {background:#F9F0E8;color:#333;}
+.file_cp thead tr{	background:url(../images/bg-orange.gif) repeat-x 00% 10%;}
+.file_cp tbody td, .file_cp tfoot th {	border-top-color:#DDC6B7;}
+.file_cp  a:link {color:#FF8000;}
+.file_cp a:visited {color:#333;}
+.file_cp  a:hover {color:#CC6633;}
+.file_cp tbody tr:hover td{background:#FADDC0;border-top-color:#D59980;}
+.checkall a:hover{color:#FF0000;}
+/*-- # end  user control panel  Files  >> filecp.html  */

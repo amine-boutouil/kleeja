@@ -310,14 +310,11 @@ p.explain {
 }
 .tit {
 	background:#FFE4D5 url(../images/headline_bg.png) repeat-x top left;
-	border-left:1px solid #F6EBE4;
-	border-bottom:1px solid #FFCBAE;
-	border-top:1px solid #FFCBAE;
 	font-weight:700;
 	color:#D88427;
 	text-align:center;
 	padding:6px 0;
-	margin:2px 0;
+	margin:2px auto;
 }
 .data_menu  {
 	width:100%;
@@ -998,40 +995,40 @@ select.remme:focus {
 /* # call and file report templates */        
 
 /*-- start Profile template >> profile.html  */
+
 #profile  select, #profile  option{
-	background:#FFD;
+	background:#FFFF04;
 	color:#000;
 }
 #profile .boxdata{
 	float:right;
 	width:31%;
-	height:180px;
+	height:170px;
 	border:1px solid #bbb;
-	background:#DFDFDF url(../images/bg_tabbertab_1.png) repeat-x top left;
-	margin:5px;
+	background:#F4F8E9;
+	margin:5px auto;
 }
 #profile .boxdata p  {
 	padding:2px;
 	text-align:center;
 }
 #profile .boxdata .tit{
-	background:#EB9D0B url(../images/bg_tile_tab.png) repeat-x bottom left;
+	background:url(../images/body.jpg) no-repeat 40% 10%;
 	padding:3px;
-	margin:1px;
+	margin:0px;
 	color:white;
 	text-align:center;
 }
 #profile .boxdata .bq , #profile .boxdata .in{
-	color:#999;
 	padding:0 5px;
 }
-#profile .boxdata .in{
-	margin-right:2%;
+#profile .boxdata {
+	margin:1%;
 }
 #profile .boxdata .biguser {
-	color:#FF5502;
+	color:#660066;
 	padding:5px;
-	font-size:12px;
+	font-size:134%;
 	text-align:center;
 }
 .buttons_center {
@@ -1044,17 +1041,20 @@ select.remme:focus {
 
 /*-- start user control panel  Files  >> filecp.html  */
 .file_cp {
-	background:#DADADA url(../images/table_file_cp.gif) no-repeat 40% 45%;
+	background:#F9F9E8;
 	color:#000;
 	width:100%;
-	border:1px solid #C2C2C2;
+}
+.file_cp tr {
+	height:34px;
+	line-height:34px;
 }
 .file_cp td {
-	padding:6px 8px;
+	padding:0 8px;
 	white-space: nowrap;
 }
 .file_cp th {
-	padding:8px;
+	padding:0 8px;
 	white-space:nowrap;
 }
 .left_button {
@@ -1063,28 +1063,28 @@ select.remme:focus {
 }
 .file_cp  .odd  {
 	text-align:right;
-	width:76%;
+	width:66%;
 }
 .file_cp  .nbr  {
 	text-align:right;
 }
 .file_cp thead th, .file_cp tfoot th, .file_cp tbody td {
-	border-right: 1px solid #aaa;
-	border-top: 1px solid #eee;
-	border-left:1px solid #eee;
-	border-bottom: 1px solid #aaa;
+	border-right: none;
+	border-left:none;
 	font-weight:bold;
 	text-align:center;
 }
-.file_cp thead th{
-	background:#EB9D0B url(../images/bg_tile_tab.png) repeat-x bottom left;
+.file_cp tbody td, .file_cp tfoot th {
+	border-top: 3px solid #D1D1C2;
+	border-bottom: 1px solid #999;
 }
-.file_cp tfoot th{
-	background:#bbb url(../images/headline_bg.png) repeat-x center right;
+.file_cp thead tr{
+	background:url(../images/body.jpg) no-repeat 60% 20%;
 }
+
 .file_cp tbody tr:hover td{
-	border-top:1px solid #aaa;
-	border-bottom:1px solid #eee;
+	border-top:3px solid #D2D211;
+	background:#F9F9C2;
 }
 .file_cp  a {
 	color:#444;
@@ -1094,10 +1094,20 @@ select.remme:focus {
 }
 .file_cp a:visited {
 	color:#000;
+	text-decoration:line-through;
 }
 .file_cp  a:hover {
-	color:#D2691E;
-	text-decoration:line-through;
+	color:#FF8000;
+	text-decoration:none;
+}
+.checkall a:link{
+	font-size:95%;
+	font-weight: 700;
+	background:#FFFF00;
+	padding:4px 8px;
+}
+.checkall a:hover{
+	color:#FF0000;
 }
 /*-- # end  user control panel  Files  >> filecp.html  */
 
@@ -1259,7 +1269,7 @@ select.remme:focus {
 }
 .pagination a.next {
 	margin-right:5px;
-	color: #5E9E03;
+	color: #467700;
 }
 .pagination a.disabled {
 	color: #111;
@@ -1286,11 +1296,6 @@ select.remme:focus {
 }
 /* # pagination */
 
-.checkall a:link{
-	color:red;
-	font-size:12px;
-	font-weight: 400;
-}
 
 /* PRINT */
 @media print {

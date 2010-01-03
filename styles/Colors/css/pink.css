@@ -7,7 +7,7 @@
 # Author: Tar3Q  
 # Date:: 2009-12-27  $
 */
-body {background:url(../images/bg-pink.gif) repeat-x top left;color: #CC0099;}
+body {background:url(../images/bg-pink.gif) repeat-x top left;color: #990066;}
 h2 {	color:#EF5E00;}
 select, option{color: #444;}
 textarea ,select {	border-left:1px solid #AFAEAA;border-top:1px solid #AFAEAA;border-right:1px solid #D5D5C8;border-bottom:1px solid #D5D5C8;}
@@ -19,7 +19,7 @@ select:focus, textarea:focus, input[type="password"]:focus, input[type="text"]:f
 a:link, body_alink, a:visited, body_avisited{color: #666;}
 a:hover, a:active, body_ahover {color:#D2691E;}
 
-.underlinemenu ul li a{border-bottom: 6pt solid #C8718E;}
+.underlinemenu ul li a{border-bottom: 6pt solid #D083D2;}
 .underlinemenu li a.current ,.underlinemenu li a.current:hover{border-bottom-color:#F3CEE6;}
 
 .wolcome_msg {color:#CC0099;}
@@ -55,8 +55,27 @@ a:hover, a:active, body_ahover {color:#D2691E;}
 /*-- #  end box user name and all files  >> fileuser.html  */
 
 /*CSS style pagination*/
-.pagination a ,.pagination span.three_dots {color:#FF1382;border-color:#FF1382;background:#FCE9F2;}
-.pagination a:hover, .pagination span.current {background-color:#D50F6D;border-color:#D50F6D;}
+.pagination a ,.pagination span.three_dots {color:#D60EB8;border-color:#D60EB8;background:#FCE9F2;}
+.pagination a:hover, .pagination span.current {background-color:#D60EB8;border-color:#D60EB8;}
 .pagination a.next {color:#A5007C;}
 .pagination a.next:hover {color:#FF00FF;}
 /* # pagination */
+
+/*-- start Profile template >> profile.html  */
+#profile  select, #profile  option{background:#FF97F8;}
+#profile .boxdata .biguser {color:#FF26EF;}
+#profile .boxdata{border-color:#EDDDE6;	background:#FBF0F8;}
+#profile .boxdata .tit{background:url(../images/body.jpg) no-repeat 1% 10%;}
+/*-- End Profile template >> profile.html   */
+
+/*-- start user control panel  Files  >> filecp.html  */
+.file_cp {background:#F9E8F0;color:#222;}
+.file_cp thead tr{	background:url(../images/bg-pink.gif) repeat-x 00% 10%;}
+.file_cp tbody td, .file_cp tfoot th {	border-top-color:#D1C2D1;}
+.file_cp  a:link {color:#7D007D}
+.file_cp a:visited {color:#560056;}
+.file_cp  a:hover {color:#FF00FF;}
+.file_cp tbody tr:hover td{background:#F9C2F9;border-top-color:#D083D2;}
+.checkall a:hover{color:#FF0000;}
+/*-- # end  user control panel  Files  >> filecp.html  */
+

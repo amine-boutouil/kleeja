@@ -7,17 +7,16 @@
 # Author: Tar3Q  
 # Date:: 2009-12-27  $
 */
-body {background:url(../images/bg-orange.gif) repeat-x top left;color:#A54210;}
-h2 {	color:#EF5E00;}
-select, option{color: #444;}
-textarea ,select {	border-left:1px solid #AFAEAA;border-top:1px solid #AFAEAA;border-right:1px solid #D5D5C8;border-bottom:1px solid #D5D5C8;}
-textarea {	color: #000;}
-input[type="text"], input[type="password"]{border-left: 1px solid #AFAEAA;border-top: 1px solid #AFAEAA;border-right: 1px solid #D5D5C8;border-bottom: 1px solid #D5D5C8;}
-input[type="submit"]:hover  {color:#D74E00;}
-input[type="text"]:hover, input[type="password"]:hover, select:hover, textarea:hover{border: 1px solid #888;}
-select:focus, textarea:focus, input[type="password"]:focus, input[type="text"]:focus {background-color:#ffd;border: 1px solid #D26900;color:#003399;}
-a:link, body_alink, a:visited, body_avisited{color: #666;}
-a:hover, a:active, body_ahover {color:#D2691E;}
+body {background:url(../images/bg-orange.gif) repeat-x top left;color:#D85600;}
+h2 {	color:#FF3300;}
+select, option{color: #FF3300;}
+textarea {background:#FFF7F4;}
+input[type="text"], input[type="password"]{background:#FFF7F4;}
+input[type="submit"]:hover  {color:#FF6600;}
+input[type="text"]:hover, input[type="password"]:hover, select:hover, textarea:hover{border-color:#FF6600;}
+select:focus, textarea:focus, input[type="password"]:focus, input[type="text"]:focus {background-color:#FFF;border-color:#FF6600;}
+a:link, body_alink, a:visited, body_avisited{color:#0000FF;}
+a:hover, a:active, body_ahover {color:#FF6600;}
 
 .underlinemenu ul li a{border-bottom: 6pt solid #CC6633;}
 .underlinemenu li a.current ,.underlinemenu li a.current:hover{border-bottom-color:#FCDFB9;}

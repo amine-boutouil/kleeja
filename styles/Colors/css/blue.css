@@ -8,16 +8,15 @@
 # Date:: 2009-12-27  $
 */
 body {background:url(../images/bg-blue.gif) repeat-x top left;color: #003366;}
-h2 {	color:#1F5787;}
+h2 {	color:#0033FF;}
 select, option{color: #004080;}
-textarea ,select {	border-left:1px solid #AFAEAA;border-top:1px solid #AFAEAA;border-right:1px solid #D5D5C8;border-bottom:1px solid #D5D5C8;}
-textarea {	color: #004080;}
-input[type="text"], input[type="password"]{border-left: 1px solid #AFAEAA;border-top: 1px solid #AFAEAA;border-right: 1px solid #D5D5C8;border-bottom: 1px solid #D5D5C8;}
-input[type="submit"]:hover  {color:#004080;}
-input[type="text"]:hover, input[type="password"]:hover, select:hover, textarea:hover{border: 1px solid #888;}
-select:focus, textarea:focus, input[type="password"]:focus, input[type="text"]:focus {background-color:#DDFFFF;border: 1px solid #0069D2;color:#004080;}
-a:link, body_alink, a:visited, body_avisited{color:#004080;}
-a:hover, a:active, body_ahover {color:#0080FF;}
+textarea {background:#F4FCFF;}
+input[type="text"], input[type="password"]{background:#F4FCFF;}
+input[type="submit"]:hover  {color:#0080FF;}
+input[type="text"]:hover, input[type="password"]:hover, select:hover, textarea:hover{border-color:#00ADD2;}
+select:focus, textarea:focus, input[type="password"]:focus, input[type="text"]:focus {background-color:#FFF;border-color:#00ADD2;}
+a:link, body_alink, a:visited, body_avisited{color:#0000FF;}
+a:hover, a:active, body_ahover {color:#00CCF8;}
 
 .underlinemenu ul li a{border-bottom: 6pt solid #437CAE;}
 .underlinemenu li a.current ,.underlinemenu li a.current:hover{border-bottom-color:#B3D3EE;}

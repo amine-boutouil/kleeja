@@ -7,24 +7,6 @@
 # Author: Tar3Q  
 # Date:: 2009-10-07  $
 */
-input, textarea, select{
-	-moz-box-shadow: 1px 1px 2px #ECCEBB;
-	-webkit-box-shadow: 1px 1px 2px #ECCEBB;
-	-khtml-box-shadow: 1px 1px 2px #ECCEBB;
-	box-shadow: 1px 1px 2px #ECCEBB;
-}
-.boxed  td  input{
-	-moz-box-shadow: 0px 0px 0px #ECCEBB;
-	-webkit-box-shadow: 0px 0px 0px #ECCEBB;
-	-khtml-box-shadow: 0px 0px 0px #ECCEBB;
-	box-shadow: 0px 0px 0px #ECCEBB;
-}
-input[type="file"]{
-	-moz-box-shadow: 0px 0px 0px #ffffff;
-	-webkit-box-shadow: 0px 0px 0px #ffffff;
-	-khtml-box-shadow: 0px 0px 0px #ffffff;
-	box-shadow: 0px 0px 0px #ffffff;
-}
 
 h2, .title-x, .kleeja, .wolcome_msg  {
 	text-shadow : rgb(247, 247, 247) 0 1px;

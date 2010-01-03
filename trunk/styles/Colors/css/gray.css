@@ -32,8 +32,31 @@ a:hover, a:active, body_ahover {color:#D2691E;}
 .user_box{border: 1px solid #DFDFDF;}
 .user_img {color:#666;}
 .user_ext{background:#EBEBEB;}
-
 .guide_visitor_th {background:#EAEAEA}
 .visitor_box{border: 1px solid #EAEAEA;}
 .visitor_ext{background:#F4F4F4;}
 /* #  template list of files allowed > guide.html */
+
+/*-- start  box user name and all files  >> fileuser.html  */
+#boxfileuser .public {background:#D4D4D4}
+#boxfileuser .uname, #boxfileuser .nums{color:#777;}
+#filecplink .copylink  input , #filecplink .link_user  input{border-color:#CDCDCD;color:#555;}
+#filecplink .copylink  input:hover, #filecplink .link_user  input:hover{border-color:#777;}
+.tabledata {	background-color:#F2F2F2;border-color:#CDCDCD;}
+.tabledata .odd  {background: #EBEBEB;}
+.tabledata thead tr,.tabledata thead tr:hover th{background:#C7C7C7 url(../images/headline_bg.png) repeat-x center right;}
+.tabledata th , .tabledata td {	border-top-color:#B4B4B4;}
+.tabledata:hover {border-color:#646464;}
+.tabledata a, .tabledata a:link {color:#4C4C4C;}
+.tabledata a:visited {color:#222;}
+.tabledata th:hover a, .tabledata td:hover a {color:#FFF;}
+.tabledata tr:hover  {color:#7F7F0E;}
+.tabledata tr th:hover, .tabledata tr td:hover {background-color:#7F7F7F;color:#FFF;}
+/*-- #  end box user name and all files  >> fileuser.html  */
+
+/*CSS style pagination*/
+.pagination a ,.pagination span.three_dots {color:#4C4C4C;border-color:#4C4C4C;background:#F2F2F2;}
+.pagination a:hover, .pagination span.current {background-color:#4C4C4C;border-color:#4C4C4C;}
+.pagination a.next {color:#111;}
+.pagination a.next:hover {color:#909090;}
+/* # pagination */

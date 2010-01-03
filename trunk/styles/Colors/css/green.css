@@ -45,9 +45,18 @@ a:hover, a:active, body_ahover {color:#D2691E;}
 .tabledata {	background-color:#E2F3E3;border-color:#B8DFB8;}
 .tabledata .odd  {background: #E2FFD2;}
 .tabledata thead tr,.tabledata thead tr:hover th {background:#A8D777 url(../images/headline_bg.png) repeat-x center right;}
+.tabledata th , .tabledata td {	border-top-color:#B4C6A4;}
+.tabledata:hover {border-color:#10CC1B;}
 .tabledata a, .tabledata a:link {color:#00B000;}
 .tabledata a:visited {color:#003F00;}
 .tabledata th:hover a, .tabledata td:hover a {color:#FFF;}
-.tabledata tr:hover  {color:#00CC33;}
+.tabledata tr:hover  {color:#73C400;}
 .tabledata tr th:hover, .tabledata tr td:hover {background-color:#98E100;color:#FFF;}
 /*-- #  end box user name and all files  >> fileuser.html  */
+
+/*CSS style pagination*/
+.pagination a ,.pagination span.three_dots {color:#006500;border-color:#006500;background:#E7F3E2;}
+.pagination a:hover, .pagination span.current {background-color:#5E9E03;border-color:#5E9E03;}
+.pagination a.next {color:#003F00;}
+.pagination a.next:hover {color:#8CEB05;}
+/* # pagination */

@@ -7,7 +7,7 @@
 # Author: Tar3Q  
 # Date:: 2009-12-27  $
 */
-body {background:url(../images/bg-violet.gif) repeat-x top left;color:#660099;}
+body {background:url(../images/bg-violet.gif) repeat-x top left;color:#430064;}
 h2 {	color:#EF5E00;}
 select, option{color: #444;}
 textarea ,select {	border-left:1px solid #AFAEAA;border-top:1px solid #AFAEAA;border-right:1px solid #D5D5C8;border-bottom:1px solid #D5D5C8;}
@@ -37,3 +37,27 @@ a:hover, a:active, body_ahover {color:#D2691E;}
 .visitor_box{border: 1px solid #F5E2FF}
 .visitor_ext{background:#FBF2FF;}
 /* #  template list of files allowed > guide.html */
+
+/*-- start  box user name and all files  >> fileuser.html  */
+#boxfileuser .public {background:#D8BBEF}
+#boxfileuser .uname, #boxfileuser .nums{color:#990099;}
+#filecplink .copylink  input , #filecplink .link_user  input{border-color:#C9B3E8;color:#990099;}
+#filecplink .copylink  input:hover, #filecplink .link_user  input:hover{border-color:#990099;}
+.tabledata {	background-color:#F1E9FC;border-color:#C9B3E8;}
+.tabledata .odd  {background: #E9DEFA;}
+.tabledata thead tr,.tabledata thead tr:hover th{background:#BD91FF url(../images/headline_bg.png) repeat-x center right;}
+.tabledata:hover {border-color:#6224A6;}
+.tabledata th , .tabledata td {	border-top-color:#BFAABF;}
+.tabledata a, .tabledata a:link {color:#660099;}
+.tabledata a:visited {color:#430064;}
+.tabledata th:hover a, .tabledata td:hover a {color:#FFF;}
+.tabledata tr:hover  {color:#9900FF;}
+.tabledata tr th:hover, .tabledata tr td:hover {background-color:#9900FF;color:#FFF;}
+/*-- #  end box user name and all files  >> fileuser.html  */
+
+/*CSS style pagination*/
+.pagination a ,.pagination span.three_dots {color:#9900FF;border-color:#9900FF;background:#F1E9FC;}
+.pagination a:hover, .pagination span.current {background-color:#9900FF;border-color:#9900FF;}
+.pagination a.next {color:#430064;}
+.pagination a.next:hover {color:#9900FF;}
+/* # pagination */

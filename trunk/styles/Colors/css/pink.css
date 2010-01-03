@@ -32,7 +32,6 @@ a:hover, a:active, body_ahover {color:#D2691E;}
 .user_box{border: 1px solid #F3E2F2;}
 .user_img {color:#D217D2}
 .user_ext{background:#F9F0F9;}
-
 .guide_visitor_th {background:#FACFE9}
 .visitor_box{border: 1px solid #FACFE9}
 .visitor_ext{background:#FDEAF5;}
@@ -46,9 +45,18 @@ a:hover, a:active, body_ahover {color:#D2691E;}
 .tabledata {	background-color:#F3E2F2;border-color:#DFB8DF;}
 .tabledata .odd  {background: #FFD2F7;}
 .tabledata thead tr,.tabledata thead tr:hover th{background:#FF91D3 url(../images/headline_bg.png) repeat-x center right;}
+.tabledata th , .tabledata td {	border-top-color:#C6A4B4;}
+.tabledata:hover {border-color:#A5259E;}
 .tabledata a, .tabledata a:link {color:#F20079;}
 .tabledata a:visited {color:#A50052;}
 .tabledata th:hover a, .tabledata td:hover a {color:#FFF;}
 .tabledata tr:hover  {color:#222;}
 .tabledata tr th:hover, .tabledata tr td:hover {background-color:#FF00FF;color:#FFF;}
 /*-- #  end box user name and all files  >> fileuser.html  */
+
+/*CSS style pagination*/
+.pagination a ,.pagination span.three_dots {color:#FF1382;border-color:#FF1382;background:#FCE9F2;}
+.pagination a:hover, .pagination span.current {background-color:#D50F6D;border-color:#D50F6D;}
+.pagination a.next {color:#A5007C;}
+.pagination a.next:hover {color:#FF00FF;}
+/* # pagination */

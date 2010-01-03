@@ -887,7 +887,7 @@ select.remme:focus {
 	padding:5px;
 	border-right:none;
 	border-left:none;
-	border-top: 2px solid #DFDFDF;
+	border-top: 2px solid #BFBFAA;
 	border-bottom: 1px solid #787878;
 	text-align:center;
 }
@@ -922,7 +922,7 @@ select.remme:focus {
 	text-decoration:underline;
 }
 .tabledata:hover {
-	border-color:#787878;
+	border-color:#C1CC10;
 }
 .tabledata tr:hover  {
 	background-color:white;
@@ -938,6 +938,7 @@ select.remme:focus {
 	color:#FF6600;
 	cursor:text;
 }
+
 /*-- #  end box user name and all files  >> fileuser.html  */
 
 /* register template >> register.html */
@@ -1229,7 +1230,7 @@ select.remme:focus {
 .pagination {
 	padding:3px 0;
 	margin:2px 0;
-	color:#0082D8;
+	color:#787878;
 	font-size:80%;
 	width:60%;
 	display:inline;
@@ -1239,17 +1240,17 @@ select.remme:focus {
 	float:right;
 	font-weight: bold;
 	text-align:center;
-	border: 1px solid #0082D8;
+	border: 1px solid #787878;
 	margin-left:3px;
 	padding:5px 9px;
-	background:#F4F4F4;
+	background:#EAEAEA;
 	text-decoration: none;
-	color: #0082D8;		
+	color: #787878;		
 }
-.pagination a:hover {
-	border: 1px solid #00CCFF;
-	background-color:#C6E8FF;
-	color: #3399CC;
+.pagination a:hover, .pagination span.current {
+	background-color:#0082D8;
+	border: 1px solid #0082D8;
+	color: #FFF;
 }
 .pagination a.next , .pagination a.disabled{
 	font-size:11px;
@@ -1258,7 +1259,7 @@ select.remme:focus {
 }
 .pagination a.next {
 	margin-right:5px;
-	color: #0066FF;
+	color: #5E9E03;
 }
 .pagination a.disabled {
 	color: #111;
@@ -1278,11 +1279,7 @@ select.remme:focus {
 	margin-left:3px;
 	padding:5px 7px;
 	float:right;
-	border: 1px solid #0082D8;
-}
-.pagination span.current {
-	background-color:#0082D8;
-	color: #FFF;
+	border: 1px solid #787878;
 }
 .pagination span.three_dots {
 	background:#F4F4F4 ;

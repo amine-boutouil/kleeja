@@ -7,7 +7,7 @@
 # Author: Tar3Q  
 # Date:: 2009-12-27  $
 */
-body {background:url(../images/bg-red.gif) repeat-x top left;color: #CC0000;}
+body {background:url(../images/bg-red.gif) repeat-x top left;color: #B30000;}
 h2 {	color:#EF5E00;}
 select, option{color: #444;}
 textarea ,select {	border-left:1px solid #AFAEAA;border-top:1px solid #AFAEAA;border-right:1px solid #D5D5C8;border-bottom:1px solid #D5D5C8;}
@@ -19,7 +19,7 @@ select:focus, textarea:focus, input[type="password"]:focus, input[type="text"]:f
 a:link, body_alink, a:visited, body_avisited{color: #666;}
 a:hover, a:active, body_ahover {color:#D2691E;}
 
-.underlinemenu ul li a{border-bottom: 6pt solid #D63838;}
+.underlinemenu ul li a{border-bottom: 6pt solid #FC1C1C;}
 .underlinemenu li a.current ,.underlinemenu li a.current:hover{border-bottom-color:#F8B7B7;}
 
 .wolcome_msg {color:#CC0000;}
@@ -37,3 +37,27 @@ a:hover, a:active, body_ahover {color:#D2691E;}
 .visitor_box{border: 1px solid #FFE6E6}
 .visitor_ext{background:#FFF2F2;}
 /* #  template list of files allowed > guide.html */
+
+/*-- start  box user name and all files  >> fileuser.html  */
+#boxfileuser .public {background:#FFBFBF}
+#boxfileuser .uname, #boxfileuser .nums{color:#FF0000;}
+#filecplink .copylink  input , #filecplink .link_user  input{border-color:#E7B4B4;color:#D80000;}
+#filecplink .copylink  input:hover, #filecplink .link_user  input:hover{border-color:#FF0000;}
+.tabledata {	background-color:#FCE9E9;border-color:#DFB8B8;}
+.tabledata .odd  {background: #FFDDDE;}
+.tabledata thead tr,.tabledata thead tr:hover th{background:#FF8484 url(../images/headline_bg.png) repeat-x center right;}
+.tabledata:hover {border-color:#A52D25}
+.tabledata th , .tabledata td {	border-top-color:#C1A8A9;}
+.tabledata a, .tabledata a:link {color:#FF0000;}
+.tabledata a:visited {color:#990000;}
+.tabledata th:hover a, .tabledata td:hover a {color:#FFF;}
+.tabledata tr:hover  {color:#FF0033;}
+.tabledata tr th:hover, .tabledata tr td:hover {background-color:#FF0000;color:#FFF;}
+/*-- #  end box user name and all files  >> fileuser.html  */
+
+/*CSS style pagination*/
+.pagination a ,.pagination span.three_dots {color:#FF0000;border-color:#FF0000;background:#FCE9E9;}
+.pagination a:hover, .pagination span.current {background-color:#FF0000;border-color:#FF0000;}
+.pagination a.next {color:#B30000;}
+.pagination a.next:hover {color:#FF0000;}
+/* # pagination */

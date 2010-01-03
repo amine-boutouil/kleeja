@@ -7,24 +7,23 @@
 # Author: Tar3Q  
 # Date:: 2009-12-27  $
 */
-body {background:url(../images/bg-green.gif) repeat-x top left;color:#006633;}
-h2 {	color:#EF5E00;}
-select, option{color: #444;}
-textarea ,select {	border-left:1px solid #AFAEAA;border-top:1px solid #AFAEAA;border-right:1px solid #D5D5C8;border-bottom:1px solid #D5D5C8;}
-textarea {	color: #000;}
-input[type="text"], input[type="password"]{border-left: 1px solid #AFAEAA;border-top: 1px solid #AFAEAA;border-right: 1px solid #D5D5C8;border-bottom: 1px solid #D5D5C8;}
-input[type="submit"]:hover  {color:#D74E00;}
-input[type="text"]:hover, input[type="password"]:hover, select:hover, textarea:hover{border: 1px solid #888;}
-select:focus, textarea:focus, input[type="password"]:focus, input[type="text"]:focus {background-color:#ffd;border: 1px solid #D26900;color:#003399;}
-a:link, body_alink, a:visited, body_avisited{color: #666;}
-a:hover, a:active, body_ahover {color:#D2691E;}
+body {background:url(../images/bg-green.gif) repeat-x top left;color:#003300;}
+h2 {	color:#006600;}
+select, option{color: #003300;}
+textarea {background:#F4FFF4;}
+input[type="text"], input[type="password"]{background:#F4FFF4;}
+input[type="submit"]:hover  {color:#588A23;}
+input[type="text"]:hover, input[type="password"]:hover, select:hover, textarea:hover{border-color:#7EB148;}
+select:focus, textarea:focus, input[type="password"]:focus, input[type="text"]:focus {background-color:#FFF;border-color:#7EB148;}
+a:link, body_alink, a:visited, body_avisited{color:#006600;}
+a:hover, a:active, body_ahover {color:#588A23;}
 
 .underlinemenu ul li a{border-bottom: 6pt solid #7EB148;}
 .underlinemenu li a.current ,.underlinemenu li a.current:hover{border-bottom-color:#C6E8AC;}
 
 .wolcome_msg {color:#537607;}
 .title-x {background:#E6EDDD;}
-.url {color:#6BD800;}
+.url {color:#588A23;}
 .st i{color:#588A23;border-color:#C1F260;}
 
 /* template list of files allowed > guide.html */

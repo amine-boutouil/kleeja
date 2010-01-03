@@ -7,17 +7,16 @@
 # Author: Tar3Q  
 # Date:: 2009-12-27  $
 */
-body {background:url(../images/bg-gray.gif) repeat-x top left;color: #444;}
-h2 {	color:#EF5E00;}
-select, option{color: #444;}
-textarea ,select {	border-left:1px solid #AFAEAA;border-top:1px solid #AFAEAA;border-right:1px solid #D5D5C8;border-bottom:1px solid #D5D5C8;}
-textarea {	color: #000;}
-input[type="text"], input[type="password"]{border-left: 1px solid #AFAEAA;border-top: 1px solid #AFAEAA;border-right: 1px solid #D5D5C8;border-bottom: 1px solid #D5D5C8;}
-input[type="submit"]:hover  {color:#D74E00;}
-input[type="text"]:hover, input[type="password"]:hover, select:hover, textarea:hover{border: 1px solid #888;}
-select:focus, textarea:focus, input[type="password"]:focus, input[type="text"]:focus {background-color:#ffd;border: 1px solid #D26900;color:#003399;}
-a:link, body_alink, a:visited, body_avisited{color: #666;}
-a:hover, a:active, body_ahover {color:#D2691E;}
+body {background:url(../images/bg-gray.gif) repeat-x top left;color: #000;}
+h2 {	color:#000;}
+select, option{color: #0000;}
+textarea {background:#F9F9F9;}
+input[type="text"], input[type="password"]{background:#F9F9F9;}
+input[type="submit"]:hover  {color:#666;}
+input[type="text"]:hover, input[type="password"]:hover, select:hover, textarea:hover{border-color:#666;}
+select:focus, textarea:focus, input[type="password"]:focus, input[type="text"]:focus {background-color:#FFF;border-color:#666;}
+a:link, body_alink, a:visited, body_avisited{color:#111;}
+a:hover, a:active, body_ahover {color:#888;}
 
 .underlinemenu ul li a{border-bottom: 6pt solid #848484;}
 .underlinemenu li a.current ,.underlinemenu li a.current:hover{border-bottom-color:#D7D6D8;}

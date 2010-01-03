@@ -25,7 +25,7 @@ h1 {
 }
 h2 {
 	font-size: 13px;
-	color:#EF5E00;
+	color:#333;
 	margin: 5px 0;
 }
 p, ul, ol {
@@ -55,7 +55,8 @@ textarea ,select {
 textarea {
 	cursor: text;
 	vertical-align: middle;
-	padding:2px;
+	padding:5px;
+	background:#FBF9F0;
 }
 input {
 	padding:3px 6px;
@@ -68,23 +69,24 @@ input[type="text"], input[type="password"]{
 	border-top: 1px solid #AFAEAA;
 	border-right: 1px solid #D5D5C8;
 	border-bottom: 1px solid #D5D5C8;
+	background:#FBF9F0;
 }
 input[type="submit"]{
 	cursor: pointer;
 	padding:1px 18px;
 }
-input[type="submit"]:hover  {color:#D74E00;}
-input[type="text"]:hover, input[type="password"]:hover, select:hover, textarea:hover{border: 1px solid #888;}
-select:focus, textarea:focus, input[type="password"]:focus, input[type="text"]:focus {background-color:#ffd;border: 1px solid #D26900;color:#003399;}
+input[type="submit"]:hover  {color:#FF0000;}
+input[type="text"]:hover, input[type="password"]:hover, select:hover, textarea:hover{border: 1px solid #D1B301;}
+select:focus, textarea:focus, input[type="password"]:focus, input[type="text"]:focus {background-color:#FFFFF0;border: 1px solid #D1B301;}
 
 
 a:link, body_alink, a:visited, body_avisited{
-	color: #111;
+	color: #004000;
 	text-decoration: none;
 	padding:2px;
 }
 a:hover, a:active, body_ahover {
-	color:#863D00;
+	color:#FF0000;
 	text-decoration:underline;
 	padding:2px;
 }
@@ -124,14 +126,11 @@ img.right {
 /* safe code all box */
 .safe_code {
 	margin:3px 0;
-	padding:10px 20px;
-	border-top:1px solid #ECCEBB;
-	border-bottom:1px solid #ECCEBB;
-	background:url(../images/saf3_code01.png) no-repeat 50% 50%;
+	padding:0;
+	background:url(../images/saf3_code01.png) no-repeat 60% 50%;
 }
 .safe_code p {
 	line-height:10px;
-	color:#FF5502;
 	padding-bottom:5px;
 }
 .safe_code input[type="text"]{
@@ -211,7 +210,7 @@ p.explain {
 
 /* System Messages body */
 #system-message  {
-	margin:5px 0;
+	margin:8px 0;
 }
 #system-message dd {
 	font-weight: bold;
@@ -229,11 +228,11 @@ p.explain {
 	background-color: #EFE7B8;
 }
 #system-message dd.info  ul li, #system-message dd.error ul li{
-	padding:0 5px;
+	padding:4px;
 }
 #system-message dd.info  ul li {
 	color: #444;
-	background: url(../images/info.png) no-repeat right top;
+	background: url(../images/info.png) no-repeat 100% 50%;
 }
 #system-message dd.error ul {
 	background-color: #E6C0C0;
@@ -242,14 +241,14 @@ p.explain {
 }
 #system-message dd.error ul li{
 	color:#c00;
-	background: url(../images/error.png) no-repeat right top;
+	background: url(../images/error.png) no-repeat 100% 50%;
 }
 /* ##  End  System Messages */
 
 /* Message Information System */
 #system-message .index_info, #system-message .index_err {
 	display:block;
-	padding:6px;
+	padding:15px;
 	text-indent:30px;
 	line-height:24px;
 }
@@ -260,10 +259,10 @@ p.explain {
 	background:#C2D3E7;
 }
 #system-message .index_err {
-	border-top: 3px solid #DE7A7B;
-	border-bottom: 3px solid #DE7A7B;
+	border-top: 2px solid #DE7A7B;
+	border-bottom: 2px solid #DE7A7B;
 	color:#D80000;
-	background:#E6C0C0;
+	background:#F1DCDC;
 }
 #system-message .index_info  li {
 	background:url(../images/info_f.gif) no-repeat right top;
@@ -400,8 +399,7 @@ p.explain {
 .stats  {
 	margin:4px 0;
 	background:url(../images/stats.gif) no-repeat 15% 50%;
-	font-size:12px;
-	font-weight:400;
+	font-size:11px;
 }
 .stats ul {
 	list-style-type:square;
@@ -417,7 +415,7 @@ p.explain {
 .st i{
 	background:#FEFFD7;
 	padding:4px 8px;
-	color: #C10000;
+	color: #AA9200;
 	border-top:1px solid #ccc;
 	border-bottom:1px solid #ccc;
 }
@@ -539,32 +537,26 @@ ul.tabbernav li{
 	display: inline;
 }
 ul.tabbernav li a{
-	margin-left:10px;
-	padding:5px 40px;
-	background:#FDF5C1;
-	border-top: 1px solid #D6CB83;	
-	border-bottom: 1px solid #D6CB83;
+	margin-left:15px;
+	padding:5px 10px;
 	text-decoration: none;
 }
 ul.tabbernav li a:link {
-	color:#AFA351;
+	color:#336600;
 }
 ul.tabbernav li a:hover{
-	color:#663300;
+	color:#00AE00;
 }
 ul.tabbernav li.tabberactive a{
-	padding:5px 50px;
-	background:#FDC1C9;
-	border-top: 1px solid #FF9CA9;	
-	border-bottom: 1px solid #FF9CA9;
+	padding:5px 10px;
+
 }
 ul.tabbernav li.tabberactive a:link{
 	color: #D80000;
 	font-weight:bold;
 }
 ul.tabbernav li.tabberactive a:hover{
-	color:#333;
-	text-decoration: none;
+	color:#D80000;
 }
 /* # tabs  */
 
@@ -940,7 +932,6 @@ select.remme:focus {
 
 /* register template >> register.html */
 .register {
-	background: url(../images/register.gif) no-repeat 30% 80%;
 	margin-bottom:15px;
 	padding:10px 20px;
 }
@@ -951,32 +942,26 @@ select.remme:focus {
 
 /* start connection template */
 .call{
-	background:url(../images/call.gif) no-repeat 10% 50%;
 	margin:5px 0;
-	padding:10px 20px;
+	padding:0;
 }
 .call label {
 	display:block;
 }
 .text_area{
-	width:60%;
+	width:80%;
 }
 /* # connection template */
 
 /* back password template >> get_pass.html */
 .get_password{
-	background:#F9F5F0 url(../images/get_password.gif) no-repeat 15% 50%;
-	border:1px solid #ECCEBB;
+	background: url(../images/get_password.gif) no-repeat 15% 50%;
+	border-bottom:1px solid #aaa;
 	margin:5px 0;
-	padding:10px 20px;
+	padding:15px 0;
 }
 .get_password p{
 	width:65%;
-	background:white;
-	border:1px solid #EEB;
-	padding:3px 6px;
-	text-align:center;
-	color:#D25D0D;
 }
 /* # back password template >> get_pass.html */
 

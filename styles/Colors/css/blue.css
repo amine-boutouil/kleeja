@@ -45,22 +45,18 @@ a:hover, a:active, body_ahover {color:#0080FF;}
 .tabledata {	background-color:#E2F2F3;border-color:#B8DFDF;}
 .tabledata .odd  {background: #D2E2FF;}
 .tabledata thead tr,.tabledata thead tr:hover th {background:#A8D6ED url(../images/headline_bg.png) repeat-x center right;}
+.tabledata th , .tabledata td {	border-top-color:#A4B4C6;}
+.tabledata:hover {border-color:#10C1CC;}
 .tabledata a, .tabledata a:link {color:#0000FF;}
 .tabledata a:visited {color:#000066;}
 .tabledata th:hover a, .tabledata td:hover a {color:#FFF;}
 .tabledata tr:hover  {color:#3333FF;}
 .tabledata tr th:hover, .tabledata tr td:hover {background-color:#0099FF;color:#FFF;}
-/*-- #  end box user name and all files  >> fileuser.html  */
+/* #  end box user name and all files  >> fileuser.html  */
 
 /*CSS style pagination*/
-.pagination {color:#ff6500;}
-.pagination a {color: #ff6500;border-color:#ff9600;background:#fff;}
-.pagination a:hover {color: #ff6500;border-color:#ff9600;background-color:#ffc794;}
-.pagination a.next {color: #ff6500;}
-.pagination a.disabled {color: #555;}
-.pagination a.next:hover {color:#666;}
-.pagination a.disabled:hover {color:#999;}	
-.pagination span.current, .pagination span.three_dots {border-color:#FF9600;}
-.pagination span.current {background-color:#ff6500;color: #FEF3EF;}
-.pagination span.three_dots {background:#fff;}
+.pagination a ,.pagination span.three_dots {color: #006AB1;border-color:#0082D8;background:#E2F2F3;}
+.pagination a:hover, .pagination span.current {background-color:#0082D8;border-color:#0082D8;}
+.pagination a.next {color: #003399;}
+.pagination a.next:hover {color:#0099FF;}
 /* # pagination */

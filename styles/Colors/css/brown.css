@@ -7,7 +7,7 @@
 # Author: Tar3Q  
 # Date:: 2009-12-27  $
 */
-body {background:url(../images/bg-brown.gif) repeat-x top left;color: #6A5535;}
+body {background:url(../images/bg-brown.gif) repeat-x top left;color: #3F1F00;}
 h2 {	color:#EF5E00;}
 select, option{color: #444;}
 textarea ,select {	border-left:1px solid #AFAEAA;border-top:1px solid #AFAEAA;border-right:1px solid #D5D5C8;border-bottom:1px solid #D5D5C8;}
@@ -32,8 +32,30 @@ a:hover, a:active, body_ahover {color:#D2691E;}
 .user_box{border: 1px solid #E7DED5;}
 .user_img {color:#663300}
 .user_ext{background:#F7F3F0;}
-
 .guide_visitor_th {background:#ECE6DF}
 .visitor_box{border: 1px solid #ECE6DF}
 .visitor_ext{background:#F7F3F0;}
 /* #  template list of files allowed > guide.html */
+
+/*-- start  box user name and all files  >> fileuser.html  */
+#boxfileuser .public {background:#C5B8A6}
+#boxfileuser .uname, #boxfileuser .nums{color:#663300;}
+#filecplink .copylink  input , #filecplink .link_user  input{border-color:#D8CDC2;color:#663300;}
+#filecplink .copylink  input:hover, #filecplink .link_user  input:hover{border-color:#947552;}
+.tabledata {	background-color:#F3ECE6;border-color:#CCC0B0;}
+.tabledata .odd  {background: #E2D9CF;}
+.tabledata thead tr,.tabledata thead tr:hover th{background:#B8A892 url(../images/headline_bg.png) repeat-x center right;}
+.tabledata:hover {border-color:#663300;}
+.tabledata a, .tabledata a:link {color:#6C3E1C;}
+.tabledata a:visited {color:#452207;}
+.tabledata th:hover a, .tabledata td:hover a {color:#FFF;}
+.tabledata tr:hover  {color:#996600;}
+.tabledata tr th:hover, .tabledata tr td:hover {background-color:#917D5E;color:#FFF;}
+/*-- #  end box user name and all files  >> fileuser.html  */
+
+/*CSS style pagination*/
+.pagination a ,.pagination span.three_dots {color:#663300;border-color:#663300;background:#F3ECE6;}
+.pagination a:hover, .pagination span.current {background-color:#996600;border-color:#996600;}
+.pagination a.next {color:#663300;}
+.pagination a.next:hover {color:#996600;}
+/* # pagination */

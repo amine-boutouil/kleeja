@@ -300,6 +300,11 @@ class usrcp
 	//clean usernames
 	function cleanusername($uname) 
 	{
+		if(!function_exists('kleeja_base64_decode'))
+		{
+			include_once (PATH . 'includes/functions_alternative.php');	
+		}
+		
 		static $arabic_t = array();
 		static $latin_t = array(
 			array('á','à','â','ã','å','Á','À','Â','Ã','Å','é','è','ê','ë','É','È','Ê','í','ì','ï','î','Í','Ì','Î','Ï','ò','ó','ô','õ','º','ø','Ó','Ò','Ô','Õ','Ø','ú','ù','û','Ú','Ù','Û','ç','Ç','Ñ','ñ','ÿ','Ë'),
@@ -314,6 +319,7 @@ class usrcp
 			'2E6MTI6e2k6MDtzOjI6ItinIjtpOjE7czoyOiLYpyI7aToyO3M6Mjoi2YgiO2k6MztzOjA6IiI7aTo0O3M6MDoiIjtpOjU7czowOiIiO2k6NjtzOjA6IiI7aTo3O3M6MDoiIjt' . 
 			'pOjg7czowOiIiO2k6OTtzOjA6IiI7aToxMDtzOjI6ItinIjtpOjExO3M6Mjoi2YkiO319'));
 		}
+		
 		$uname = str_replace($latin_t[0], $latin_t[1], $uname); //replace confusable Latin chars
     	$uname = str_replace($arabic_t[0], $arabic_t[1], $uname); //replace confusable Arabic chars
 		$uname = preg_replace('#(?:[\x00-\x1F\x7F]+|(?:\xC2[\x80-\x9F])+)#', '', $uname); //un-wanted utf8 control chars

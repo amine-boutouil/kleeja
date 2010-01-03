@@ -24,7 +24,8 @@ a:hover, a:active, body_ahover {color:#D2691E;}
 
 .wolcome_msg {color:#6A5535;}
 .url {color:#663300;}
-.title-x {background:#F4EFEC;border-color:#E2D2C7;}
+.title-x {background:#F4EFEC;}
+.st i{color: #6A5535;border-color:#C2AD8F;}
 
 /* template list of files allowed > guide.html */
 .guide_user_th  {background:#E7DED5;color:#663300;}

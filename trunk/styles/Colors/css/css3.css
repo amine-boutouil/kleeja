@@ -30,7 +30,7 @@ h2, .title-x, .kleeja, .wolcome_msg  {
 	text-shadow : rgb(247, 247, 247) 0 1px;
 } 
 
-#boxfileuser .box_user, #boxfileuser .us3r_n4me, .pagination a, .pagination span.current, .pagination span.three_dots  {
+#boxfileuser .box_user, #boxfileuser .us3r_n4me  {
 	-moz-border-radius : 20px; /* Mozilla */
 	-webkit-border-radius : 20px; /* Webkit */
 	-khtml-border-radius : 20px; /* Konqueror */
@@ -48,6 +48,13 @@ h2, .title-x, .kleeja, .wolcome_msg  {
 	-khtml-border-radius : 10px; /* Konqueror */
 	border-radius : 10px; /* CSS3 only */
 }
-
+.pagination a, .pagination span.current, .pagination span.three_dots  {
+	-moz-border-radius-topleft : 10px; /* Mozilla */
+	-webkit-border-top-left-radius : 10px; /* Webkit */
+	border-top-left-radius : 10px; /* CSS3 only */
+	-moz-border-radius-bottomright : 10px; /* Mozilla */
+	-webkit-border-bottom-right-radius : 10px; /* Webkit */
+	border-bottom-right-radius : 10px; /* CSS3 only */
+}
 /* iPhone */
 @media screen and (max-device-width: 480px) { html { -webkit-text-size-adjust: none; } }

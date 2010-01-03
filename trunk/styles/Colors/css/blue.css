@@ -24,7 +24,8 @@ a:hover, a:active, body_ahover {color:#0080FF;}
 
 .wolcome_msg {color:#1F5787;}
 .url {color:#004080;}
-.title-x {background:#DDE6ED;border-color:#C0D1DA;}
+.title-x {background:#DDE6ED;}
+.st i{color: #0052A4;border-color:#60C1F2;}
 
 /* template list of files allowed > guide.html */
 .guide_user_th  {background:#E2F2F3;color:#3188D4;}
@@ -35,3 +36,31 @@ a:hover, a:active, body_ahover {color:#0080FF;}
 .visitor_box{border: 1px solid #E3F0FF;}
 .visitor_ext{background:#F0F8FF;}
 /* #  template list of files allowed > guide.html */
+
+/*-- start  box user name and all files  >> fileuser.html  */
+#boxfileuser .public {background:#BFE0FF;}
+#boxfileuser .uname, #boxfileuser .nums{color:#0080FF;}
+#filecplink .copylink  input , #filecplink .link_user  input{border-color:#BFE1FF;color:#000066;}
+#filecplink .copylink  input:hover, #filecplink .link_user  input:hover{border-color:#00FFFF;}
+.tabledata {	background-color:#E2F2F3;border-color:#B8DFDF;}
+.tabledata .odd  {background: #D2E2FF;}
+.tabledata thead tr,.tabledata thead tr:hover th {background:#A8D6ED url(../images/headline_bg.png) repeat-x center right;}
+.tabledata a, .tabledata a:link {color:#0000FF;}
+.tabledata a:visited {color:#000066;}
+.tabledata th:hover a, .tabledata td:hover a {color:#FFF;}
+.tabledata tr:hover  {color:#3333FF;}
+.tabledata tr th:hover, .tabledata tr td:hover {background-color:#0099FF;color:#FFF;}
+/*-- #  end box user name and all files  >> fileuser.html  */
+
+/*CSS style pagination*/
+.pagination {color:#ff6500;}
+.pagination a {color: #ff6500;border-color:#ff9600;background:#fff;}
+.pagination a:hover {color: #ff6500;border-color:#ff9600;background-color:#ffc794;}
+.pagination a.next {color: #ff6500;}
+.pagination a.disabled {color: #555;}
+.pagination a.next:hover {color:#666;}
+.pagination a.disabled:hover {color:#999;}	
+.pagination span.current, .pagination span.three_dots {border-color:#FF9600;}
+.pagination span.current {background-color:#ff6500;color: #FEF3EF;}
+.pagination span.three_dots {background:#fff;}
+/* # pagination */

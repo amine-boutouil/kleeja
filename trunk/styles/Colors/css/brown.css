@@ -59,3 +59,21 @@ a:hover, a:active, body_ahover {color:#D2691E;}
 .pagination a.next {color:#663300;}
 .pagination a.next:hover {color:#996600;}
 /* # pagination */
+
+/*-- start Profile template >> profile.html  */
+#profile  select, #profile  option{background:#E4B349;}
+#profile .boxdata .biguser {color:#CC6600;}
+#profile .boxdata{border-color:#DCCAB8;	background:#F4EEEA;}
+#profile .boxdata .tit{background:url(../images/bg-brown.gif) repeat-x 100% 1%;}
+/*-- End Profile template >> profile.html   */
+
+/*-- start user control panel  Files  >> filecp.html  */
+.file_cp {background:#F6F0EB;color:#222;}
+.file_cp thead tr{	background:url(../images/bg-brown.gif) repeat-x 00% 10%;}
+.file_cp tbody td, .file_cp tfoot th {	border-top-color:#D2CDC1;}
+.file_cp  a:link {color:#663300;}
+.file_cp a:visited {color:#222;}
+.file_cp  a:hover {color:#996600;}
+.file_cp tbody tr:hover td{background:#E7DDD3;border-top-color:#BEB396;}
+.checkall a:hover{color:#FF0000;}
+/*-- # end  user control panel  Files  >> filecp.html  */

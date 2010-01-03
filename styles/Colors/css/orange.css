@@ -24,15 +24,30 @@ a:hover, a:active, body_ahover {color:#D2691E;}
 
 .wolcome_msg {color:#FF3300;}
 .url {color:#FF8000;}
-.title-x {background:#F3EFEB;border-color:#FBDDB7;}
+.title-x {background:#F3EFEB;}
+.st i{color:#F26018;border-color:#F29160;}
 
 /* template list of files allowed > guide.html */
 .guide_user_th  {background:#F9E7CF;color:#FF8F13;}
 .user_box{border: 1px solid #F9E7CF;}
 .user_img {color:#FF8F13;}
 .user_ext{background:#FCF3E9;}
-
 .guide_visitor_th {background:#FAE0CF}
 .visitor_box{border: 1px solid #FAE0CF}
 .visitor_ext{background:#FDF3EC;}
 /* #  template list of files allowed > guide.html */
+
+/*-- start  box user name and all files  >> fileuser.html  */
+#boxfileuser .public {background:#FFDEBF}
+#boxfileuser .uname, #boxfileuser .nums{color:#FF7E00;}
+#filecplink .copylink  input , #filecplink .link_user  input{border-color:#FFDDBF;color:#CC3300;}
+#filecplink .copylink  input:hover, #filecplink .link_user  input:hover{border-color:#FF7E00;}
+.tabledata {	background-color:#FCF3E9;border-color:#E7C6B1;}
+.tabledata .odd  {background: #FFEFD2;}
+.tabledata thead tr,.tabledata thead tr:hover th{background:#FFBA8C url(../images/headline_bg.png) repeat-x center right;}
+.tabledata a, .tabledata a:link {color:#FF6600;}
+.tabledata a:visited {color:#CC3300;}
+.tabledata th:hover a, .tabledata td:hover a {color:#FFF;}
+.tabledata tr:hover  {color:#333;}
+.tabledata tr th:hover, .tabledata tr td:hover {background-color:#FF6600;color:#FFF;}
+/*-- #  end box user name and all files  >> fileuser.html  */

@@ -890,8 +890,8 @@ select.remme:focus {
 	font-weight:bold;
 	line-height:180%;
 }
-.tabledata thead tr {
-	background:#D4D4D4 url(../images/headline_bg.png) repeat-x center right;
+.tabledata thead tr ,.tabledata thead tr:hover th{
+	background:url(../images/body.jpg) no-repeat 1% 20%;
 	color:#111;
 }
 .tabledata tbody td {
@@ -917,11 +917,7 @@ select.remme:focus {
 	background-color:white;
 	color:#D80000;
 }
-.tabledata thead tr:hover th {
-	background:#D4D4D4 url(../images/headline_bg.png) repeat-x center right;
-	cursor:default;
-	color:#111;
-}
+
 .tabledata tr th:hover, .tabledata tr td:hover {
 	background:#F3F39E url(../images/headline_bg.png) repeat-x center right;
 	color:#FF6600;

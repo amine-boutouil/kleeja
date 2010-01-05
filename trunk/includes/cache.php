@@ -22,17 +22,59 @@ define('IN_CACHE', true);
 //make sure it's utf8 data
 $SQL->set_utf8();
 
+
+//
+//In the future here will be a real cache class 
+//this codes, it's just a sample and usefull for
+//some time ..
+//
+class cache
+{
+	function get($name)
+	{
+		$name =  preg_replace('![^a-z0-9_]!', '_', $name);
+	
+		if (file_exists(PATH . 'cache/' . $name . '.php'))
+		{
+			include_once (PATH . 'cache/' . $name . '.php');
+			return  empty($data) ? false : $data;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	function save($name, $data, $time = 86400)
+	{
+		$name =  preg_replace('![^a-z0-9_]!i', '_', $name);
+		$data_for_save = '<?' . 'php' . "\n";
+		$data_for_save .= '//Cache file, generated for Kleeja at ' . gmdate('d-m-Y h:i A') . "\n\n";
+		$data_for_save .= '//No direct opening' . "\n";
+		$data_for_save .= '(!defined("IN_COMMON") ? exit("hacking attemp!") : null);' . "\n\n";
+		$data_for_save .= '//return false after x time' . "\n";	
+		$data_for_save .= 'if(time() > ' . (time() + $time) . ') return false;' . "\n\n";	
+		$data_for_save .= '$data = ' . var_export($data, true) . ";\n\n//end of cache";
+
+		if($fd = @fopen(PATH . 'cache/' . $name . '.php', 'w'))
+		{
+			@flock($fd, LOCK_EX); // exlusive look
+			@fwrite($fd, $data_for_save);
+			@flock($fd, LOCK_UN);
+			@fclose($fd);
+		}
+		return;
+	}
+}
+
+$cache = new cache;
+
 //	
 //get hooks data from hooks table  ... 
 //
 if(!defined('STOP_HOOKS'))
 {
-	if (file_exists(PATH . 'cache/data_hooks.php'))
-	{
-		include_once (PATH . 'cache/data_hooks.php');
-	}
-
-	if (!isset($all_plg_hooks) && !file_exists(PATH . 'cache/data_hooks.php'))
+	if (!($all_plg_hooks = $cache->get('data_hooks')))
 	{
 		//get all hooks
 		$query = array(
@@ -49,28 +91,16 @@ if(!defined('STOP_HOOKS'))
 		);
 
 		($hook = kleeja_run_hook('qr_select_hooks_cache')) ? eval($hook) : null; //run hook
-		$result = $SQL->build($query);
 
-		$file_datac = '<' . '?php' . "\n\n";
-		$file_datac .= "if (!defined('IN_COMMON')) exit();";
-		$file_datac .= "\n// auto-generated cache files\n//For: Kleeja \n\n";
-		$file_datac .= '$all_plg_hooks = array();' ."\n\n";
+		$result = $SQL->build($query);
 
 		while($row=$SQL->fetch_array($result))
 		{
 			$all_plg_hooks[$row['hook_name']][$row['plg_name']] =	$row['hook_content'];
-			$file_datac .= '$all_plg_hooks[\'' . $row['hook_name'] . '\'][\'' . $row['plg_name'] . '\'] = \'' . str_replace(array("'", "\'"), "\'",  $row['hook_content']) . '\';' . "\n";
 		}
-
-		$file_datac .= '' . "\n\n";
-
 	 	$SQL->freeresult($result);
 
-		$filenumh = @fopen(PATH . 'cache/data_hooks.php', 'w');
-		@flock($filenumh, LOCK_EX); // exlusive look
-		@fwrite($filenumh, $file_datac);
-		@flock($filenumh, LOCK_UN);
-		@fclose($filenumh);
+		$cache->save('data_hooks', $all_plg_hooks);
 	}
 }#plugins is on
 
@@ -78,211 +108,136 @@ if(!defined('STOP_HOOKS'))
 //
 //get config data from config table  ...
 //
-if (file_exists(PATH . 'cache/data_config.php'))
-{
-	include_once (PATH . 'cache/data_config.php');
-}
-	
-if (empty($config) or !file_exists(PATH . 'cache/data_config.php'))
+
+if (!($config = $cache->get('data_config')))
 {
 	$query = array(
 					'SELECT'	=> 'c.*',
 					'FROM'		=> "{$dbprefix}config c"
 				);
-		
+
 	($hook = kleeja_run_hook('qr_select_config_cache')) ? eval($hook) : null; //run hook				
 	$result = $SQL->build($query);
 
-	$file_datac = '<' . '?php' . "\n\n";
-	$file_datac .= "if (!defined('IN_COMMON')) exit();";
-	$file_datac .= "\n// auto-generated cache files\n//For: Kleeja \n\n";
-	$file_datac .= '$config = array( ' . "\n";
 
 	while($row=$SQL->fetch_array($result))
 	{
 		$config[$row['name']] =$row['value'];
-		$file_datac .= '\'' . $row['name'] . '\' => \'' . str_replace(array("'", "\'"), "\'", $row['value']) . '\',' . "\n";
 	}
-	$file_datac .= ');' . "\n\n";
-	
-	 $SQL->freeresult($result);
 
-	$filenumc = @fopen(PATH . 'cache/data_config.php', 'w');
-	@flock($filenumc, LOCK_EX); // exlusive look
-	@fwrite($filenumc, $file_datac);
-	@flock($filenumc, LOCK_UN);
-	@fclose($filenumc);
+	$SQL->freeresult($result);
+
+	$cache->save('data_config', $config);
 }
 
 //
 //get language terms from lang table  ...
 //
-if (file_exists(PATH . 'cache/data_lang.php'))
-{
-	include_once (PATH . 'cache/data_lang.php');
-}
-	
-if (!isset($olang) or !file_exists(PATH . 'cache/data_lang.php'))
+
+if (!($olang = $cache->get('data_lang')))
 {
 	$query = array(
 					'SELECT'	=> 'l.*',
 					'FROM'		=> "{$dbprefix}lang l",
 					'WHERE'		=> "l.lang_id='" . $SQL->escape($config['language']) . "'",
 				);
-					
+
 	($hook = kleeja_run_hook('qr_select_lang_cache')) ? eval($hook) : null; //run hook		
 
 	$result = $SQL->build($query);
 
-	$file_datac = '<' . '?php' . "\n\n";
-	$file_datac .= "if (!defined('IN_COMMON')) exit();";
-	$file_datac .= "\n// auto-generated cache files\n//For: Kleeja \n\n";
-	$file_datac .= '$olang = array( ' . "\n";
-
 	while($row=$SQL->fetch_array($result))
 	{
 		$olang[$row['word']] = $row['trans'];
-		$file_datac .= '\'' . $row['word'] . '\' => \'' . str_replace(array("'", "\'"), "\'", $row['trans']) . '\',' . "\n";
 	}
-
-	$file_datac .= ');' . "\n\n";
 
 	$SQL->freeresult($result);
 
-	$filenuml = @fopen(PATH . 'cache/data_lang.php', 'w');
-	@flock($filenuml, LOCK_EX); // exlusive look
-	@fwrite($filenuml, $file_datac);
-	@flock($filenuml, LOCK_UN);
-	@fclose($filenuml);
+	$cache->save('data_lang', $olang);
 }
 	
 //
 //get data from types table ... 
 //
-if (file_exists(PATH . 'cache/data_exts.php'))
-{
-	include_once (PATH . 'cache/data_exts.php');
-}
-	
-if ((empty($g_exts) || empty($u_exts)) || !(file_exists(PATH . 'cache/data_exts.php')))
+if (!($exts = $cache->get('data_exts')))
 {
 	$query = array(
 					'SELECT'	=> 'e.*',
 					'FROM'		=> "{$dbprefix}exts e"
 				);
-					
+
 	($hook = kleeja_run_hook('qr_select_exts_cache')) ? eval($hook) : null; //run hook		
 	$result = $SQL->build($query);
+	
+	$exts = array();
 
-	$file_datat = '<' . '?php' . "\n\n";
-				//$file_datat .= "if (!defined('IN_COMMON')) exit();";
-				$file_datat .= "\n// auto-generated cache files\n//For: Kleeja \n\n";
-				$file_datat .= 'if (empty($g_exts) || !is_array($g_exts)){$g_exts = array();}' . "\n";
-				$file_datat .= 'if (empty($u_exts) || !is_array($u_exts)){$u_exts = array();}' . "\n\n";
-				
 	while($row=$SQL->fetch_array($result))
 	{
 		if ($row['gust_allow'])
 		{
-			$g_exts[$row['ext']] = array('id' => $row['id'], 'size' => $row['gust_size'], 'group_id' => $row['group_id']);
-			$file_datat	.= '$g_exts[\'' . $row['ext'] . '\']  =   array("id"=>\'' . $row['id'] . '\',"size"=>\'' . $row['gust_size'] . '\',"group_id"=>\'' . $row['group_id'] . '\' );' . "\n";
+			$exts['g_exts'][$row['ext']] = array('id' => $row['id'], 'size' => $row['gust_size'], 'group_id' => $row['group_id']);
 		}
 
 		if ($row['user_allow'])
 		{
-			$u_exts[$row['ext']] = array('id' => $row['id'], 'size' => $row['user_size'], 'group_id' => $row['group_id']);
-			$file_datat	.= '$u_exts[\'' . $row['ext'] . '\']  =   array("id"=>\'' . $row['id'] . '\',"size"=>\'' . $row['user_size'] . '\',"group_id"=>\'' . $row['group_id'] . '\' );' . "\n";
+			$exts['u_exts'][$row['ext']] = array('id' => $row['id'], 'size' => $row['user_size'], 'group_id' => $row['group_id']);
 		}
 	}
 
-	$file_datat .= "\n\n";
-
 	$SQL->freeresult($result);
 
-	$filenumt = @fopen(PATH . 'cache/data_exts.php', 'w');
-	@flock($filenumt, LOCK_EX); // exlusive look
-	@fwrite($filenumt, $file_datat);
-	@flock($filenumt, LOCK_UN);
-	@fclose($filenumt);
+	$cache->save('data_exts', $exts);
 }
+
+//make them as seperated vars
+extract($exts);
+unset($exts);
+
 
 //
 //stats .. to cache
 //
-if(file_exists("cache/data_stats.php"))
-{
-	$tfile = filemtime("cache/data_stats.php");
-	if((time()-$tfile) >= 3600)//after 1 hours exactly
-	{    
-		delete_cache("data_stats");
-	}
-	else
-	{
-		include_once ("cache/data_stats.php");
-	}
-}
-	
-if(!file_exists("cache/data_stats.php"))
+if (!($stats = $cache->get('data_stats')))
 {
 	$query = array(
 					'SELECT'	=> 's.*',
 					'FROM'		=> "{$dbprefix}stats s"
 			);
-					
+
 	($hook = kleeja_run_hook('qr_select_stats_cache')) ? eval($hook) : null; //run hook				
 	$result = $SQL->build($query);
 
-	$file_dataw = '<' . '?php' . "\n\n";
-	$file_dataw .= "if (!defined('IN_COMMON')) exit();";
-	$file_dataw .= "\n// auto-generated cache files\n//For: Kleeja \n\n";
-
 	while($row=$SQL->fetch_array($result))
 	{
-		$stat_files 			=  $row['files'];
-		$stat_sizes 			=  $row['sizes'];
-		$stat_users 			=  $row['users'];
-		$stat_last_file 		=  $row['last_file'];
-		$stat_last_f_del		=  $row['last_f_del'];
-		$stat_last_google		=  $row['last_google'];
-		$stat_last_yahoo		=  $row['last_yahoo'];
-		$stat_google_num		=  $row['google_num'];
-		$stat_yahoo_num			=  $row['yahoo_num'];
-		$stat_last_user			=  $row['lastuser'];
-			
-		//write
-		$file_dataw .= '$stat_files  			=   \'' . $row['files'] . '\';' . "\n";
-		$file_dataw .= '$stat_sizes  			=   \'' . $row['sizes'] . '\';' . "\n";
-		$file_dataw .= '$stat_users  			=   \'' . $row['users'] . '\';' . "\n";
-		$file_dataw .= '$stat_last_file 		=	\'' . $row['last_file'] . '\';' . "\n";
-		$file_dataw .= '$stat_last_f_del		=	\'' . $row['last_f_del'] . '\';' . "\n";
-		$file_dataw .= '$stat_last_google 		=	\'' . $row['last_google'] . '\';' . "\n";
-		$file_dataw .= '$stat_google_num 		=	\'' . $row['google_num'] . '\';' . "\n";
-		$file_dataw .= '$stat_last_yahoo 		=	\'' . $row['last_yahoo'] . '\';' . "\n";
-		$file_dataw .= '$stat_yahoo_num 		=	\'' . $row['yahoo_num'] . '\';' . "\n";
-		$file_dataw .= '$stat_last_user	 		=	\'' . $row['lastuser'] . '\';' . "\n";
-
+		$stats = array(
+			'stat_files'		=> $row['files'],
+			'stat_sizes'		=> $row['sizes'],
+			'stat_users'		=> $row['users'],
+			'stat_last_file'	=> $row['last_file'],
+			'stat_last_f_del'	=> $row['last_f_del'],
+			'stat_last_google'	=> $row['last_google'],
+			'stat_last_yahoo'	=> $row['last_yahoo'],
+			'stat_google_num'	=> $row['google_num'],
+			'stat_yahoo_num'	=> $row['yahoo_num'],
+			'stat_last_user'	=> $row['lastuser']
+		);
+	
 		($hook = kleeja_run_hook('while_fetch_stats_in_cache')) ? eval($hook) : null; //run hook
 	}
 
 	$SQL->freeresult($result);
 
-	$filenumw = @fopen(PATH . 'cache/data_stats.php', 'w');
-	@flock($filenumw, LOCK_EX); // exlusive look
-	@fwrite($filenumw, $file_dataw);
-	@flock($filenumw, LOCK_UN);
-	@fclose($filenumw);
-}//end else
+	$cache->save('data_stats', $stats, 3600);
+}
 
+//make them as seperated vars
+extract($stats);
+unset($stats);
 
 //
 //get banned ips data from stats table  ...
 //
-if (file_exists(PATH . 'cache/data_ban.php'))
-{
-	include_once (PATH . 'cache/data_ban.php');
-}
-
-if (!isset($banss) || !file_exists(PATH . 'cache/data_ban.php'))
+if (!($banss = $cache->get('data_ban')))
 {
 	$query = array(
 					'SELECT'	=> 's.ban',
@@ -292,47 +247,31 @@ if (!isset($banss) || !file_exists(PATH . 'cache/data_ban.php'))
 	($hook = kleeja_run_hook('qr_select_ban_cache')) ? eval($hook) : null; //run hook				
 	$result = $SQL->build($query);
 
-	$file_datab = '<' . '?php' . "\n\n";
-	$file_datab .= "if (!defined('IN_COMMON')) exit();";
-	$file_datab .= "\n// auto-generated cache files\n//For: Kleeja \n\n";
-	$file_datab .= '$banss = array( ' . "\n";
-
-	while($row=$SQL->fetch_array($result))
-	{
-		$ban1 = $row['ban'];
-	}
-
+	$row = $SQL->fetch_array($result);
+	$ban1 = $row['ban'];
 	$SQL->freeresult($result);
+
+	$banss = array();
 
 	if (!empty($ban1) || $ban1 != ' '|| $ban1 != '  ')
 	{
 		//seperate ips .. 
-		$ban2 = explode("|", $ban1);
+		$ban2 = explode('|', $ban1);
 		for ($i=0; $i<sizeof($ban2); $i++)
 		{
 			$banss[$i] = $ban2[$i];
-			$file_datab .= '\'' . trim($ban2[$i]) . '\',' . "\n";
-		}#for
-		
-		$file_datab .= ');' . "\n\n";
+		}
 	}
 
-	$filenumb = @fopen(PATH . 'cache/data_ban.php', 'w');
-	@flock($filenumb, LOCK_EX); // exlusive look
-	@fwrite($filenumb, $file_datab);
-	@flock($filenumb, LOCK_UN);
-	@fclose($filenumb);
+	unset($ban1, $ban1);
+
+	$cache->save('data_ban', $banss);
 }
 
 //	
 //get rules data from stats table  ...
 //
-if (file_exists(PATH . 'cache/data_rules.php'))
-{
-	include_once (PATH . 'cache/data_rules.php'); 
-}
-
-if (!isset($ruless) or !file_exists(PATH . 'cache/data_rules.php'))
+if (!($ruless = $cache->get('data_rules')))
 {
 	$query = array(
 					'SELECT'	=> 's.rules',
@@ -342,38 +281,18 @@ if (!isset($ruless) or !file_exists(PATH . 'cache/data_rules.php'))
 	($hook = kleeja_run_hook('qr_select_rules_cache')) ? eval($hook) : null; //run hook					
 	$result = $SQL->build($query);
 
-	$file_datar = '<' . '?php' . "\n\n";
-	$file_datar .= "if (!defined('IN_COMMON')) exit();";
-	$file_datar .= "\n// auto-generated cache files\n//For: Kleeja \n\n";
-	$rules1 = '';
-	
-	while($row=$SQL->fetch_array($result))
-	{
-			$rules1 = $row['rules'];
-	}
-
+	$row = $SQL->fetch_array($result);
+	$ruless = $row['rules'];
 	$SQL->freeresult($result);
 
-	$ruless = $rules1;
-		$file_datar .= '$ruless = \'' . str_replace(array("'", "\'"), "\'", $rules1) . '\';' . "\n\n"; // its took 2 hours ..
-			
-	$file_datar .= '?' . '>';
-	$filenumr = @fopen(PATH . 'cache/data_rules.php', 'w');
-	@flock($filenumr, LOCK_EX); // exlusive look
-	@fwrite($filenumr, $file_datar);
-	@flock($filenumr, LOCK_UN);
-	@fclose($filenumr);
+	$cache->save('data_rules', $ruless);
 }	
-	
+
+
 //	
 //get ex-header-footer data from stats table  ... 
 //
-if (file_exists(PATH . 'cache/data_extra.php'))
-{
-	include_once (PATH . 'cache/data_extra.php');
-}
-	
-if (!isset($extras) or !file_exists(PATH . 'cache/data_extra.php'))
+if (!($extras = $cache->get('data_extra')))
 {
 	$query = array(
 					'SELECT'	=> 's.ex_header, s.ex_footer',
@@ -383,30 +302,16 @@ if (!isset($extras) or !file_exists(PATH . 'cache/data_extra.php'))
 	($hook = kleeja_run_hook('qr_select_extra_cache')) ? eval($hook) : null; //run hook		
 	$result = $SQL->build($query);
 
-	$file_datae = '<' . '?php' . "\n\n";
-	$file_datae .= "if (!defined('IN_COMMON')) exit();";
-	$file_datae .= "\n// auto-generated cache files\n//For: Kleeja \n\n";
-
-	while($row=$SQL->fetch_array($result))
-	{
-			$headerr = $row['ex_header'];
-			$footerr = $row['ex_footer'];
-	}
+	$row = $SQL->fetch_array($result);
+	
+	$extras = array(
+		'header' => $row['ex_header'],
+		'footer' => $row['ex_footer']
+	);
 
 	$SQL->freeresult($result);
 
-	$extras['header'] = $headerr;
-	$file_datae .= '$extras[\'header\'] = \'' . str_replace(array("'", "\'"), "\'", $headerr) . '\';' . "\n\n";
-
-	$extras['footer'] = $footerr;
-	$file_datae .= '$extras[\'footer\'] = \'' . str_replace(array("'", "\'"), "\'", $footerr) . '\';' . "\n\n";
-	
-
-	$filenume = @fopen(PATH . 'cache/data_extra.php', 'w');
-	@flock($filenume, LOCK_EX); // exlusive look
-	@fwrite($filenume, $file_datae);
-	@flock($filenume, LOCK_UN);
-	@fclose($filenume);
+	$cache->save('data_extra', $extras);
 }
 	
 

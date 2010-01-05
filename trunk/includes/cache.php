@@ -18,7 +18,6 @@ if (!defined('IN_COMMON'))
 //we are in cache now ..
 define('IN_CACHE', true);
 
-
 //make sure it's utf8 data
 $SQL->set_utf8();
 
@@ -263,7 +262,7 @@ if (!($banss = $cache->get('data_ban')))
 		}
 	}
 
-	unset($ban1, $ban1);
+	unset($ban1, $ban2);
 
 	$cache->save('data_ban', $banss);
 }

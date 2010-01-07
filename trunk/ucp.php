@@ -698,7 +698,7 @@ switch ($_GET['go'])
 				$h_key = htmlspecialchars($_GET['activation_key']);
 				$u_id = intval($_GET['uid']);
 				
-				$result = $SQL->query("SELECT new_password FROM `{$dbprefix}users` WHERE hash_key='" . $SQL->escape($h_key) . "' AND id='" . $u_id . "'");
+				$result = $SQL->query("SELECT new_password FROM `{$dbprefix}users` WHERE hash_key='" . $SQL->escape($h_key) . "' AND id=" . $u_id . "");
 				if($SQL->num_rows($result))
 				{
 					$npass = $SQL->fetch_array($result);
@@ -779,32 +779,32 @@ switch ($_GET['go'])
 					($hook = kleeja_run_hook('qr_select_mail_get_pass')) ? eval($hook) : null; //run hook
 					$result	=	$SQL->build($query);
 	
-					while($row=$SQL->fetch_array($result))
+					$row = $SQL->fetch_array($result);
+
+					//generate password
+					$chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+					$newpass = '';
+					for ($i = 0; $i < 7; ++$i)
 					{
-						//generate password
-						$chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-						$newpass = '';
-						for ($i = 0; $i < 7; ++$i)
-						{
-							$newpass .= substr($chars, (mt_rand() % strlen($chars)), 1);
-						}
-
-						$hash_key = md5($newpass . time());
-								
-						$to			= $row['mail'];
-						$subject	= $lang['GET_LOSTPASS'] . ':' . $config['sitename'];
-						$activation_link = $config['siteurl'] . 'ucp.php?go=get_pass&activation_key=' . urlencode($hash_key) . '&uid=' . $row['id'];
-						$message	= "\n " . $lang['WELCOME'] . " " . $row['name'] . "\r\n " . sprintf($lang['GET_LOSTPASS_MSG'], $activation_link, $newpass)  . "\r\n\r\n kleeja.com";
-
-						$update_query	= array(
-												'UPDATE'=> "{$dbprefix}users",
-												'SET'	=> "new_password = '" . md5($SQL->escape($newpass)) . "', hash_key = '" . $hash_key . "'",
-												'WHERE'	=> 'id=' . $row['id'],
-											);
-										
-						($hook = kleeja_run_hook('qr_update_newpass_get_pass')) ? eval($hook) : null; //run hook
-						$SQL->build($update_query);
+						$newpass .= substr($chars, (mt_rand() % strlen($chars)), 1);
 					}
+
+					$hash_key = md5($newpass . time());
+					$pass		= (string) $usrcp->kleeja_hash_password($SQL->escape($newpass) . $row['password_salt']);
+					$to			= $row['mail'];
+					$subject	= $lang['GET_LOSTPASS'] . ':' . $config['sitename'];
+					$activation_link = $config['siteurl'] . 'ucp.php?go=get_pass&activation_key=' . urlencode($hash_key) . '&uid=' . $row['id'];
+					$message	= "\n " . $lang['WELCOME'] . " " . $row['name'] . "\r\n " . sprintf($lang['GET_LOSTPASS_MSG'], $activation_link, $newpass)  . "\r\n\r\n kleeja.com";
+
+					$update_query	= array(
+												'UPDATE'=> "{$dbprefix}users",
+												'SET'	=> "new_password = '" . $SQL->escape($pass) . "', hash_key = '" . $hash_key . "'",
+												'WHERE'	=> 'id=' . $row['id'],
+										);
+										
+					($hook = kleeja_run_hook('qr_update_newpass_get_pass')) ? eval($hook) : null; //run hook
+					$SQL->build($update_query);
+					
 
 					$SQL->freeresult($result);
 

@@ -542,6 +542,7 @@ $lang = array_merge($lang, array(
 	'GUESTSECTOUPLOAD'			=> 'The period time (number of seconds) between each upload process for the visitor',
 	'USERSECTOUPLOAD'			=> 'The period time (number of seconds) between each upload process for the registered user',
 	'YOU_HAVE_TO_WAIT'			=> 'Wait %s seconds .. then try to re-upload your files',
+	'ADM_UNWANTED_FILES'		=> 'يبدوا انك قمت بالترقيه من نسخه لاحقه وبسبب اختلاف اسماء بعض الملفات ستلاحظ وجود ازرار متكرره بلوحة التحكم . <br /> لحل المشكلة قم بإزالة كافة الملفات في المسار "includes/adm" واعادة رفعها من جديد.',
 	//last line of this file ...					 
 	'S_TRANSLATED_BY' 			=> 'Translated By <a href="http://www.fenix4web.com/">Fenix4Web</a>',
 ));

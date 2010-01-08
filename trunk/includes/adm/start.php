@@ -60,6 +60,12 @@ if(is_browser('ie6') && !is_browser('ie8, ie7'))
 	$ADM_NOTIFICATIONS[]  = array('id' => 'IE6', 'msg_type'=> 'error', 'title'=> $lang['NOTE'], 'msg'=> $lang['ADMIN_USING_IE6']);
 }
 
+//if upgrading from 1rc6 to 1.0, some files must be deleted ! 
+if(file_exists(PATH . 'includes/adm/files.php'))
+{
+	$ADM_NOTIFICATIONS[]  = array('id' => 'IE6', 'msg_type'=> 'info', 'title'=> $lang['NOTE'], 'msg'=> $lang['ADM_UNWANTED_FILES']);
+}
+
 //updating
 $v = @unserialize($config['new_version']);
 if(version_compare(strtolower(KLEEJA_VERSION), strtolower($v['version_number']), '<'))

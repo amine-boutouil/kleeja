@@ -575,20 +575,22 @@ switch ($_GET['sty_t'])
 		//open bk_template.php to write contents of templates to it.
 		$bkf = @fopen(PATH . 'includes/bk_templates.php', 'wb');
 
-		$bkf_contents = "<" . "?php\n//\n//bakup of Kleeja templates\n//\n\n//no for directly open\nif (!defined('IN_COMMON'))\n{";
+		$bkf_contents = "<" . "?php\n//\n//bakup of Kleeja templates\n//Automatically generated from DEV version cp=m_styles&sty_t=bk\n//\n\n//no for directly open\nif (!defined('IN_COMMON'))\n{";
 		$bkf_contents .= "\n\texit();\n}\n\n//for version\n\$bk_version = '" . KLEEJA_VERSION . "';";
-		$bkf_contents .= "\n\n//Done in : " . date('d-m-Y H:i a') . "\n\n\$bkup_templates = array();\n\n";
+		$bkf_contents .= "\n\n//Done in : " . date('d-m-Y H:i a') . "\n\n\$bkup_templates = array(\n";
 
 		$f = 0;
 		while (($file = @readdir($dh)) !== false)
 		{
 			//exceptions
-			if(!in_array(strtolower($file), array('.', '..', 'index.html', 'javascript.js', 'css', '.svn', 'images'))) 
+			if(!in_array(strtolower($file), array('.', '..', 'index.html', 'javascript.js', 'css', '.svn', 'images', '.htaccess', 'ie', 'info.txt'))) 
 			{
 				$f++;
-				$bkf_contents .= "\$bkup_templates['" . $file . "'] = '" . kleeja_base64_encode(file_get_contents($style_folder . $file)) . "';\n";
+				$bkf_contents .= "\t'" . $file . "' => '" . kleeja_base64_encode(file_get_contents($style_folder . $file)) . "',\n";
 			}
 		}
+		
+		$bkf_contents .= "\n);";
 
 		//write to bk_template.php
 		@ftruncate($bkf, 0);

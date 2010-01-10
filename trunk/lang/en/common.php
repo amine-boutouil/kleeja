@@ -278,7 +278,7 @@ $lang = array_merge($lang, array(
 	'GOOGLE_NUM' 			=> 'Google visits',
 	'LAST_YAHOO' 			=> 'Last visit to Yahoo!',
 	'YAHOO_NUM' 			=> 'Yahoo! visits',
-	'KLEEJA_CP_W' 			=> 'Hi [ %s ] , Welcome to <b>Kleeja</b> administration panel',
+	'KLEEJA_CP_W' 			=> 'Hello ! [ %s ] , Welcome to <b>Kleeja</b> administration panel',
 	'PHP_VER' 				=> 'php version',
 	'MYSQL_VER' 			=> 'mysql version',
 	'N_IMGS' 				=> 'Images',
@@ -543,8 +543,10 @@ $lang = array_merge($lang, array(
 	'USERSECTOUPLOAD'			=> 'The period time (number of seconds) between each upload process for the registered user',
 	'YOU_HAVE_TO_WAIT'			=> 'Wait %s seconds .. then try to re-upload your files',
 	'ADM_UNWANTED_FILES'		=> 'يبدوا انك قمت بالترقيه من نسخه لاحقه وبسبب اختلاف اسماء بعض الملفات ستلاحظ وجود ازرار متكرره بلوحة التحكم . <br /> لحل المشكلة قم بإزالة كافة الملفات في المسار "includes/adm" واعادة رفعها من جديد.',
+	'ADVANCED_SETTINGS_CATUION' => 'Caution : you must know what these settings are in order to edit them!',
 	//last line of this file ...					 
 	'S_TRANSLATED_BY' 			=> 'Translated By <a href="http://www.fenix4web.com/">Fenix4Web</a>',
+	
 ));
 
 #<-- EOF

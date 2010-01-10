@@ -222,7 +222,7 @@ switch($SHOW_CH_STAGE):
 				}
 				else if($option['type'] != 'general' && $option['type'] != 'other')
 				{
-					$types[$option['type']] = '<br /><div class="title_general_conf1gs">' . (!empty($lang['CONFIG_KLJ_MENUS_' . strtoupper($option['type'])]) ? $lang['CONFIG_KLJ_MENUS_' . strtoupper($option['type'])] : ((!empty($olang['CONFIG_KLJ_MENUS_' . strtoupper($option['type'])])) ? $olang['CONFIG_KLJ_MENUS_' . strtoupper($option['type'])] : $lang['CONFIG_KLJ_MENUS_OTHER'])) . '</div>';
+					$types[$option['type']] = '<br /><div class="title_general_conf1gs">' . (!empty($lang['CONFIG_KLJ_MENUS_' . strtoupper($option['type'])]) ? $lang['CONFIG_KLJ_MENUS_' . strtoupper($option['type'])] : ((!empty($olang['CONFIG_KLJ_MENUS_' . strtoupper($option['type'])])) ? $olang['CONFIG_KLJ_MENUS_' . strtoupper($option['type'])] : $lang['CONFIG_KLJ_MENUS_OTHER'])) . (($option['type'] == 'advanced') ? '&nbsp;<span class="advanced_caution">' . $lang['ADVANCED_SETTINGS_CATUION'] . '</span>' : '') . '</div>';
 				}
 				else if($option['type'] == 'other')
 				{

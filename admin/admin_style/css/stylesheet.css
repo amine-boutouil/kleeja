@@ -358,6 +358,7 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 .view_all_files td {vertical-align: middle;}
 
 /* class in the language files */
+.advanced_caution{color:red;background:#FFDFDF;padding:3px 5px;border:1px solid #D88C8C;margin-right:7px; font-size: 11px;}
 .delf_caution{color:red;background:#FFDFDF;padding:3px 5px;border:1px solid #D88C8C;margin-right:5px;}
 .live_xts{font-size:xx-small;font-weight: bold;color:#0B55C4}
 /* ## class in the language files */

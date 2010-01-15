@@ -39,7 +39,10 @@
 	if(in_array($row['type'], $exlive_types))
 	{
 		$ex_ids[] = $row['id'];
-		continue 1;
+		if($real_num != $num_of_files_to_delete)
+		{
+			continue;
+		}
 	}
 	]]></hook>
   <hook name="beforewhile_klj_clean_old_files_func"><![CDATA[

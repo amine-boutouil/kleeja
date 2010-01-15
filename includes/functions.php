@@ -1612,8 +1612,9 @@ function klj_clean_old_files($from = 0)
 		($hook = kleeja_run_hook('qr_select_klj_clean_old_files_func')) ? eval($hook) : null; //run hook
 		
 		$result	= $SQL->build($query);					
-
-		if($SQL->num_rows($result) == 0)
+		
+		$num_of_files_to_delete = $SQL->num_rows($result);
+		if($num_of_files_to_delete == 0)
 		{
 		   	 //update $stat_last_f_del !!
 			$update_query = array(
@@ -1631,7 +1632,7 @@ function klj_clean_old_files($from = 0)
 			return;
 		}
 		
-		$last_id_from = $num = $sizes = 0;
+		$last_id_from = $num = $real_num = $sizes = 0;
 		$ids = array();
 		$ex_ids =  array();
 		//$ex_types = explode(',', $config['livexts']);
@@ -1641,6 +1642,7 @@ function klj_clean_old_files($from = 0)
 		//delete files 
 		while($row=$SQL->fetch_array($result))
 		{
+			$real_num++;
 			$last_id_from = $row['id'];
 			
 			/*

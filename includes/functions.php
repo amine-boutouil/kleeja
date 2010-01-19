@@ -1830,4 +1830,40 @@ function is_browser($b)
     return false;
 }
 
+
+/**
+* Check if the browser has the file already and set the appropriate headers-
+* @returns false if a resend is in order.
+* @author phpBB, modified by Kleeja team
+*/
+function set_modified_headers($stamp, $not_ie6_and_not_ie8)
+{
+	// let's see if we have to send the file at all
+	$last_load 	= isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) ? strtotime(trim($_SERVER['HTTP_IF_MODIFIED_SINCE'])) : false;
+	if ($not_ie6_and_not_ie8)
+	{
+		if ($last_load !== false && $last_load <= $stamp)
+		{
+			if (substr(strtolower(@php_sapi_name()),0,3) === 'cgi')
+			{
+				// in theory, we shouldn't need that due to php doing it. Reality offers a differing opinion, though
+				header('Status: 304 Not Modified', true, 304);
+			}
+			else
+			{
+				header('HTTP/1.0 304 Not Modified', true, 304);
+			}
+			// seems that we need those too ... browsers
+			header('Pragma: public');
+			header('Expires: ' . gmdate('D, d M Y H:i:s \G\M\T', time() + 31536000));
+			return true;
+		}
+		else
+		{
+			header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $stamp) . ' GMT');
+		}
+	}
+	return false;
+}
+
 #<-- EOF

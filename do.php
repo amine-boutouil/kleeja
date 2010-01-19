@@ -310,15 +310,19 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 	$size = @filesize($path_file);
 	$name = empty($rn) ? $n : $rn;
 
-	if (is_browser('MSIE', 'Safari', 'Konqueror'))
+	if (is_browser('mozilla'))
 	{
-		$h_name =  "filename=" . rawurlencode($name);
+		$h_name = "filename*=UTF-8''" . rawurlencode(htmlspecialchars_decode($name));
+	}
+	else if (is_browser('opera, safari, konqueror'))
+	{
+		$h_name = 'filename="' . str_replace('"', '', htmlspecialchars_decode($name)) . '"';
 	}
 	else
 	{
-		$h_name =  "filename*=UTF-8''" . rawurlencode($name);
+		$h_name = 'filename="' . rawurlencode(htmlspecialchars_decode($name)) . '"';
 	}
-	
+
 	//Figure out the MIME type (if not specified) 
 	$ext		= array_pop(explode('.', $path_file));
 	$mime_type	= get_mime_for_header($ext);
@@ -328,23 +332,25 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 		@ob_end_clean();
 	}
 
-	header('Pragma: public');
-
 	// required for IE, otherwise Content-Disposition may be ignored
 	if(@ini_get('zlib.output_compression'))
 	{
 		@ini_set('zlib.output_compression', 'Off');
 	}
 
+	header('Pragma: public');
+
 	header('Content-Type: ' . $mime_type . (($is_ie8) ? '; authoritative=true; X-Content-Type-Options: nosniff;' : ''));
 	if(!$is_image && !$is_live && $is_ie8)
 	{
 		header('X-Download-Options: noopen');
 	}
-	header('Content-Disposition: ' . (($is_image || $is_live) ? 'inline' : 'attachment') . ' ;'  . $h_name );
-	//header('Content-Transfer-Encoding: binary');
+	header('Content-Disposition: ' . (($is_image || $is_live) ? 'inline' : 'attachment') . '; '  . $h_name);
+	if($is_image)
+	{
+		header('Content-Transfer-Encoding: binary');
+	}
 	//header('Accept-Ranges: bytes');
-
 
 	if($is_ie6)
 	{

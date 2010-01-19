@@ -1815,7 +1815,7 @@ function is_browser($b)
 			return strpos(str_replace('/', ' ', $u_agent), trim('firefox ' . $r)) !== false ? true : false;
 		break;
 		case 'safari':
-			return strpos($u_agent, trim('safari ' . $r)) !== false ? true : false;
+			return strpos($u_agent, trim('safari/' . $r)) !== false ? true : false;
 		break;
 		case 'chrome':
 			return strpos($u_agent, trim('chrome ' . $r)) !== false ? true : false;
@@ -1825,6 +1825,15 @@ function is_browser($b)
 		break;
 		case 'opera':
 			return strpos($u_agent, trim('opera ' . $r)) !== false ? true : false;
+		break;
+		case 'konqueror':
+			return strpos($u_agent, trim('konqueror/' . $r)) !== false ? true : false;
+		break;
+		case 'mozilla':
+			return strpos($u_agent, trim('gecko/' . $r)) !== false ? true : false;
+		break;
+		case 'webkit':
+			return strpos($u_agent, trim('applewebkit/' . $r)) !== false ? true : false;
 		break;
 	}
     return false;

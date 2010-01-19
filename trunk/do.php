@@ -227,6 +227,7 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 			$rn	= $row['real_filename'];
 			$t	= strtolower(trim($row['type']));
 			$f	= $row['folder'];
+			$ftime	= $row['time'];
 
 			//img or not
 			$is_image = in_array($t, array('gif', 'jpg', 'jpeg', 'bmp', 'png', 'tiff', 'tif')) ? true : false; 
@@ -294,7 +295,7 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 
 	//downalod porcess
 	$path_file = (isset($_GET['thmb']) || isset($_GET['thmbf']))  ? "./{$f}/thumbs/{$n}" : "./{$f}/{$n}";
-	$chunksize = 1*(1024*1024); //size that will send to user every second
+	$chunksize = 1024*8; //size that will send to user every loop
 	$resuming_on = true;
 
 	($hook = kleeja_run_hook('down_go_page')) ? eval($hook) : null; //run hook	
@@ -306,14 +307,28 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 		big_error('----', 'Error - can not open file.');
 	}
 
-	$size = filesize($path_file);
-	$name = empty($rn) ? rawurldecode($n) : rawurldecode($rn);
+	$size = @filesize($path_file);
+	$name = empty($rn) ? $n : $rn;
 
+	if (is_browser('MSIE', 'Safari', 'Konqueror'))
+	{
+		$h_name =  "filename=" . rawurlencode($name);
+	}
+	else
+	{
+		$h_name =  "filename*=UTF-8''" . rawurlencode($name);
+	}
+	
 	//Figure out the MIME type (if not specified) 
 	$ext		= array_pop(explode('.', $path_file));
 	$mime_type	= get_mime_for_header($ext);
-	//turn off output buffering to decrease cpu usage
-	@ob_end_clean(); 
+
+	if (@ob_get_length())
+	{
+		@ob_end_clean();
+	}
+
+	header('Pragma: public');
 
 	// required for IE, otherwise Content-Disposition may be ignored
 	if(@ini_get('zlib.output_compression'))
@@ -321,17 +336,15 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 		@ini_set('zlib.output_compression', 'Off');
 	}
 
-	header('Content-Type: ' . $mime_type . (($is_ie8) ? '; authoritative=true;' : ''));
+	header('Content-Type: ' . $mime_type . (($is_ie8) ? '; authoritative=true; X-Content-Type-Options: nosniff;' : ''));
 	if(!$is_image && !$is_live && $is_ie8)
 	{
 		header('X-Download-Options: noopen');
 	}
-	header('Content-Disposition: ' . (($is_image || $is_live) ? 'inline' : 'attachment') . ' ; filename="'  . $name . '"');
-	header('Content-Transfer-Encoding: binary');
-	header('Accept-Ranges: bytes');
-	// The three lines below basically make the  download non-cacheable 
-	header('Cache-control: private');
-	header('Pragma: private');
+	header('Content-Disposition: ' . (($is_image || $is_live) ? 'inline' : 'attachment') . ' ;'  . $h_name );
+	//header('Content-Transfer-Encoding: binary');
+	//header('Accept-Ranges: bytes');
+
 
 	if($is_ie6)
 	{
@@ -343,21 +356,36 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 	}
 
 	// multipart-download and download resuming support
+	$range_enable = false;
 	if(isset($_SERVER['HTTP_RANGE']) && !$is_image && !$is_live && $resuming_on)
 	{
-		list($a, $range) = explode("=", $_SERVER['HTTP_RANGE'], 2);
-		list($range) = explode(",", $range, 2);
-		list($range, $range_end) = explode("-", $range);
-		$range = intval($range);
-		$range_end = (!$range_end) ? $size-1 : intval($range_end);
-		$new_length = $range_end-$range+1;
-		header("HTTP/1.1 206 Partial Content");
-		header("Content-Length: $new_length");
-		header("Content-Range: bytes $range-$range_end/$size");
+		list($size_unit, $range_orig) = explode("=", $_SERVER['HTTP_RANGE'], 2);
+        if ($size_unit == 'bytes')
+        {
+            list($range, $extra_ranges) = explode(',', $range_orig, 2);
+        }
+        else
+        {
+            $range = '';
+        }
+
+		list($seek_start, $seek_end) = explode('-', $range, 2);
+		$seek_end = (empty($seek_end)) ? ($size - 1) : min(abs(intval($seek_end)),($size - 1));
+		$seek_start = (empty($seek_start) || $seek_end < abs(intval($seek_start))) ? 0 : max(abs(intval($seek_start)),0);
+
+		if ($seek_start > 0 || $seek_end < ($size - 1))
+		{
+			header('HTTP/1.1 206 Partial Content');
+		}
+
+		header('Accept-Ranges: bytes');
+		header('Content-Range: bytes ' . $seek_start . '-' . $seek_end . '/' . $size);
+		header('Content-Length: ' . ($seek_end - $seek_start + 1));
+		
+		$range_enable = true;
 	}
 	else
 	{
-		$new_length = $size;
 		if($size)
 		{
 			header("Content-Length: " . $size);
@@ -366,35 +394,41 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 
 	//prevent some limits
 	@set_time_limit(0);
+	$SQL->close();
 
 	//output the file
-	$bytes_send = 0;
-	if ($file = fopen($path_file, 'r'))
+	if (!set_modified_headers($ftime, !$is_ie6 && !$is_ie8))
 	{
-		if(isset($_SERVER['HTTP_RANGE']) && !$is_image && !$is_live)
-		{
-			fseek($file, $range);
-		}	 
+		$fp = @fopen($path_file, 'rb');
 
-		while(!feof($file) && (!connection_aborted()) && ($new_length && ($bytes_send < $new_length)))
+		if ($fp !== false)
 		{
-			$buffer = fread($file, $chunksize);
-			echo $buffer; 
-			flush();
-			$bytes_send += strlen($buffer);
+			if($range_enable)
+			{
+				fseek($fp, $seek_start);
+			}
+
+			while (!feof($fp))
+			{
+				echo fread($fp, $chunksize);
+			}
+			fclose($fp);
+		}
+		else
+		{
+			@readfile($path_file);
 		}
 
-		fclose($file);
+		flush();
 	}
 	else
 	{
 		($hook = kleeja_run_hook('down_go_page_cant_op_file')) ? eval($hook) : null; //run hook
-		big_error('----', 'Error - can not open file.');
+		//big_error('----', 'Error - can not open file.');
 	}
 
 	$SQL->close();
-	unset($bytes_send); 
-	exit; // we dont need style
+	exit; // done
 }
 
 //

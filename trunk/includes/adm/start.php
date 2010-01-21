@@ -225,4 +225,9 @@ if(defined('DEV_STAGE'))
 	unset($sql_debug_c);
 }
 
+
+//is there copyrights for translator ? 
+$translator_copyrights = isset($lang['S_TRANSLATED_BY']) ?  $lang['S_TRANSLATED_BY'] : false;
+
+
 ($hook = kleeja_run_hook('default_admin_page')) ? eval($hook) : null; //run hook 

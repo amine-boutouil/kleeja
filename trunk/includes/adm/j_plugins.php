@@ -162,6 +162,24 @@ if (isset($_GET['do_plg']))
 			$stylee	= "admin_info";
 
 		break;
+		case '4': //plugin instructions
+			$query	= array(
+							'SELECT'	=> 'plg_instructions',
+							'FROM'		=> "{$dbprefix}plugins",
+							'WHERE'		=> "plg_id=" . $plg_id
+						);
+
+			$result = $SQL->fetch_array($SQL->build($query));
+			$result  = $result['plg_instructions'];
+
+			if(empty($result)) //no instructions
+			{
+				redirect(basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'));
+			}
+	
+			$info = unserialize(kleeja_base64_decode($result));
+			kleeja_admin_info($info[$config['language']]);
+		break;
 	}
 }
 
@@ -187,7 +205,7 @@ if(isset($_POST['submit_new_plg']))
 	// Are there contents?
 	if(!trim($contents))
 	{
-		$text = $lang['ERR_UPLOAD_XML_NO_CONTENT'];
+		kleeja_admin_err($lang['ERR_UPLOAD_XML_NO_CONTENT'],true,'',true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'));
 	}
 
 	if(empty($text))
@@ -200,7 +218,7 @@ if(isset($_POST['submit_new_plg']))
 		}
 		else if ($return === 'xyz')//exists before
 		{
-			$text = $lang['PLUGIN_EXISTS_BEFORE'] . '<meta HTTP-EQUIV="REFRESH" content="3; url=' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '">' . "\n";					
+			kleeja_admin_err($lang['PLUGIN_EXISTS_BEFORE'],true,'',true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'));			
 		}
 		else if ($return === 'upd') // updated success
 		{
@@ -208,7 +226,7 @@ if(isset($_POST['submit_new_plg']))
 		}
 		else
 		{
-			$text = $lang['ERR_IN_UPLOAD_XML_FILE'];
+			kleeja_admin_err($lang['ERR_IN_UPLOAD_XML_FILE'],true,'',true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'));	
 		}
 	}		
 

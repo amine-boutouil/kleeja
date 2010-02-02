@@ -264,6 +264,7 @@ function creat_plugin_xml($contents)
 				$plg_hooks			= empty($tree['hooks']) ? null : $tree['hooks'];		
 				$plg_langs			= empty($tree['langs']) ? null : $tree['langs'];
 				$plg_updates		= empty($tree['updates']) ? null : $tree['updates'];
+				//$plg_instructions 	= empty($tree['instructions']) ? null : $tree['instructions'];
 
 				//important tags not exists 
 				if(empty($plg_info))
@@ -321,8 +322,30 @@ function creat_plugin_xml($contents)
 							}
 						}
 					}
-					
-					
+
+
+					//if the plugin was new 
+					if($plg_new)
+					{
+						//insert in plugin table 
+						$insert_query = array(
+						'INSERT'	=> 'plg_name, plg_ver, plg_author, plg_dsc, plg_uninstall',
+						'INTO'		=> "{$dbprefix}plugins",
+						'VALUES'	=> "'" . $SQL->escape($plugin_name) . "','" . $SQL->escape($plg_info['plugin_version']['value']) . "','" . $plugin_author . "','" . $SQL->escape($plg_info['plugin_description']['value']) . "','" . $SQL->real_escape($plg_uninstall['value']) . "'");
+						($hook = kleeja_run_hook('qr_insert_plugininfo_crtplgxml_func')) ? eval($hook) : null; //run hook
+						$SQL->build($insert_query);
+			
+						$new_plg_id	=	$SQL->insert_id();
+					}
+					else //if it was just update proccess
+					{
+						$update_query = array(
+						'UPDATE'	=> "{$dbprefix}plugins",
+						'SET'		=> 'plg_ver="' . $new_ver . '", plg_author="' . $plugin_author . '", plg_dsc="' . $SQL->escape($plg_info['plugin_description']['value']) . '", plg_uninstall="' . $SQL->real_escape($plg_uninstall['value']) . '"',
+						'WHERE'		=> "plg_id=" . $plg_id);
+						$SQL->build($update_query);
+						$new_plg_id	= $plg_id;
+					}
 					
 					//eval install code
 					if (isset($plg_install) && trim($plg_install['value']) != '' && $plg_new)
@@ -467,32 +490,9 @@ function creat_plugin_xml($contents)
 							$plugin_author = strip_tags($plg_info['plugin_author']['value'], '<a><span>');
 							$plugin_author = $SQL->real_escape($plugin_author);
 							
-							//if plugin is new 
-							if($plg_new)
+							//if the plugin is not new then replace the old hooks with the new hooks
+							if(!$plg_new)
 							{
-								//insert in plugin table 
-								$insert_query = array(
-												'INSERT'	=> 'plg_name, plg_ver, plg_author, plg_dsc, plg_uninstall',
-												'INTO'		=> "{$dbprefix}plugins",
-												'VALUES'	=> "'" . $SQL->escape($plugin_name) . "','" . $SQL->escape($plg_info['plugin_version']['value']) . "','" . $plugin_author . "','" . $SQL->escape($plg_info['plugin_description']['value']) . "','" . $SQL->real_escape($plg_uninstall['value']) . "'"
-												);
-								($hook = kleeja_run_hook('qr_insert_plugininfo_crtplgxml_func')) ? eval($hook) : null; //run hook
-								$SQL->build($insert_query);
-			
-								$new_plg_id	=	$SQL->insert_id();
-							}
-							else //if it's update proccess
-							{
-
-								$update_query = array(
-												'UPDATE'	=> "{$dbprefix}plugins",
-												'SET'		=> 'plg_ver="' . $new_ver . '", plg_author="' . $plugin_author . '", plg_dsc="' . $SQL->escape($plg_info['plugin_description']['value']) . '", plg_uninstall="' . $SQL->real_escape($plg_uninstall['value']) . '"',
-												'WHERE'		=> "plg_id=" . $plg_id
-											);
-								$SQL->build($update_query);
-								
-								$new_plg_id	=	$plg_id;
-								
 								//delete old hooks !
 								$query_del = array(
 											'DELETE'	=> "{$dbprefix}hooks",
@@ -500,6 +500,7 @@ function creat_plugin_xml($contents)
 											);		
 											
 								$SQL->build($query_del);
+							
 							}
 							
 							//then

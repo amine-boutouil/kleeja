@@ -303,15 +303,7 @@ function creat_plugin_xml($contents)
 							return 'xyz';
 						}
 						else if (!empty($plg_updates))
-						{
-							//delete hooks !
-							$query_del = array(
-											'DELETE'	=> "{$dbprefix}hooks",
-											'WHERE'		=> "plg_id=" . $plg_id
-											);		
-											
-							$SQL->build($query_del);
-							
+						{	
 							if(is_array($plg_updates['update']))
 							{
 								if(array_key_exists("attributes", $plg_updates['update']))
@@ -474,6 +466,8 @@ function creat_plugin_xml($contents)
 						{
 							$plugin_author = strip_tags($plg_info['plugin_author']['value'], '<a><span>');
 							$plugin_author = $SQL->real_escape($plugin_author);
+							
+							//if plugin is new 
 							if($plg_new)
 							{
 								//insert in plugin table 
@@ -487,8 +481,9 @@ function creat_plugin_xml($contents)
 			
 								$new_plg_id	=	$SQL->insert_id();
 							}
-							else 
+							else //if it's update proccess
 							{
+
 								$update_query = array(
 												'UPDATE'	=> "{$dbprefix}plugins",
 												'SET'		=> 'plg_ver="' . $new_ver . '", plg_author="' . $plugin_author . '", plg_dsc="' . $SQL->escape($plg_info['plugin_description']['value']) . '", plg_uninstall="' . $SQL->real_escape($plg_uninstall['value']) . '"',
@@ -497,7 +492,16 @@ function creat_plugin_xml($contents)
 								$SQL->build($update_query);
 								
 								$new_plg_id	=	$plg_id;
+								
+								//delete old hooks !
+								$query_del = array(
+											'DELETE'	=> "{$dbprefix}hooks",
+											'WHERE'		=> "plg_id=" . $plg_id
+											);		
+											
+								$SQL->build($query_del);
 							}
+							
 							//then
 								if(is_array($plg_hooks['hook']))
 								{

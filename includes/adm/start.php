@@ -61,9 +61,15 @@ if(is_browser('ie6') && !is_browser('ie8, ie7'))
 }
 
 //if upgrading from 1rc6 to 1.0, some files must be deleted ! 
-if(file_exists(PATH . 'includes/adm/files.php'))
+if(file_exists(PATH . 'includes/adm/files.php') || file_exists(PATH . 'admin.php'))
 {
-	$ADM_NOTIFICATIONS[]  = array('id' => 'IE6', 'msg_type'=> 'info', 'title'=> $lang['NOTE'], 'msg'=> $lang['ADM_UNWANTED_FILES']);
+	$ADM_NOTIFICATIONS[]  = array('id' => 'old_files', 'msg_type'=> 'info', 'title'=> $lang['NOTE'], 'msg'=> $lang['ADM_UNWANTED_FILES']);
+}
+
+//if html url is enabled but .htaccess is not available in the root dir !
+if(!file_exists(PATH . '.htaccess'))
+{
+	$ADM_NOTIFICATIONS[]  = array('id' => 'htmlurlshtaccess', 'msg_type'=> 'info', 'title'=> $lang['NOTE'], 'msg'=> $lang['HTML_URLS_ENABLED_NO_HTCC']);
 }
 
 //updating

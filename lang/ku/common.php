@@ -525,6 +525,7 @@ $lang = array_merge($lang, array(
 	'YOU_HAVE_TO_WAIT'			=> 'تکایه‌ %s چاوه‌ڕوانبه‌ ، پاش کۆتای هاتنی کاته‌ دیاریکراوه‌که‌ هه‌وڵبده‌‌',
 	'ADM_UNWANTED_FILES'		=> 'يبدوا انك قمت بالترقيه من نسخه لاحقه وبسبب اختلاف اسماء بعض الملفات ستلاحظ وجود ازرار متكرره بلوحة التحكم . <br /> لحل المشكلة قم بإزالة كافة الملفات في المسار "includes/adm" واعادة رفعها من جديد.',
 	'ADVANCED_SETTINGS_CATUION' => 'Caution : you must know what these settings are in order to edit them!',
+	'HTML_URLS_ENABLED_NO_HTCC'	=> 'لقد قمت بتفعيل روابط الهتمل ولكنك اهملت نقل ملف الضبط الموجود في مجلد docs/.htaccess.txt لمجلد كليجا الرئيسي واعادة تسميته بـ ".htaccess". اذا لم تفهم شيئاً من هذا الكلام قم بالسؤال في الدعم الفني لكليجا او قم بتعطيل روابط الهتمل .',	
 	//last line of this file ...					 
 	'S_TRANSLATED_BY' 			=> 'Translated By <a href="http://www.Host4k.com/">Host4k</a>',
 	));

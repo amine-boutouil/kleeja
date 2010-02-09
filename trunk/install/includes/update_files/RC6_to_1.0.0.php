@@ -124,6 +124,10 @@ $update_sqls['password_salt'] = "ALTER TABLE `{$dbprefix}users` ADD `password_sa
 $update_sqls['type_config'] = "ALTER TABLE `{$dbprefix}config` ADD `type` VARCHAR( 20 ) NOT NULL DEFAULT 'other'";
 $update_sqls['config_insert42'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('style_depend_on', '', '', 0)";
 $update_sqls['config_insert43'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('most_user_online_ever', '', '', 0)";
+$update_sqls['plg_instructions'] = "ALTER TABLE `{$dbprefix}plugins` ADD `plg_instructions` MEDIUMTEXT NOT NULL";
+$update_sqls['plg_store'] = "ALTER TABLE `{$dbprefix}plugins` ADD `plg_store` LONGTEXT NOT NULL";
+$update_sqls['plg_id_in_lang_table'] = "ALTER TABLE `{$dbprefix}lang` ADD `plg_id` INT( 11 ) NOT NULL DEFAULT '0'";
+$update_sqls['config_plg_id'] = "ALTER TABLE `{$dbprefix}config` ADD `plg_id` INT( 11 ) NOT NULL DEFAULT '0'";
 // ******************** MAFIII MALOOOM SDIG :(
 
 

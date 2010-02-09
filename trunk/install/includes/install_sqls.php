@@ -123,6 +123,7 @@ CREATE TABLE `{$dbprefix}config` (
   `option` mediumtext collate utf8_bin NOT NULL,
   `display_order` int(10) NOT NULL,
   `type` varchar(20) NULL DEFAULT 'other',
+  `plg_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY  (`name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 ";
@@ -172,6 +173,8 @@ CREATE TABLE `{$dbprefix}plugins` (
   `plg_dsc` varchar(255) collate utf8_bin NOT NULL,
   `plg_uninstall` mediumtext collate utf8_bin NOT NULL,
   `plg_disabled` tinyint(1) unsigned NOT NULL default '0',
+  `plg_instructions` mediumtext COLLATE utf8_bin NOT NULL,
+  `plg_store` longtext COLLATE utf8_bin NOT NULL,
   PRIMARY KEY  (`plg_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin ;
 ";
@@ -182,6 +185,7 @@ CREATE TABLE `{$dbprefix}lang` (
   `word` varchar(255) collate utf8_bin NOT NULL,
   `trans` varchar(255) collate utf8_bin NOT NULL,
   `lang_id` varchar(100) COLLATE utf8_bin NOT NULL,
+  `plg_id` int(11) NOT NULL DEFAULT '0',
   KEY `lang` (`lang_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 ";

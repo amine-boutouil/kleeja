@@ -67,7 +67,7 @@ if(file_exists(PATH . 'includes/adm/files.php') || file_exists(PATH . 'admin.php
 }
 
 //if html url is enabled but .htaccess is not available in the root dir !
-if(!file_exists(PATH . '.htaccess'))
+if(!file_exists(PATH . '.htaccess') && (int) $config['mod_writer'] == 1)
 {
 	$ADM_NOTIFICATIONS[]  = array('id' => 'htmlurlshtaccess', 'msg_type'=> 'info', 'title'=> $lang['NOTE'], 'msg'=> $lang['HTML_URLS_ENABLED_NO_HTCC']);
 }

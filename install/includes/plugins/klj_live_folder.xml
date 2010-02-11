@@ -7,33 +7,34 @@
 	  <plugin_author>http://www.kleeja.com</plugin_author>
 	  <plugin_kleeja_version>1.0.0</plugin_kleeja_version>
 	</info>
-
-	<install><![CDATA[
-		add_config('imagefolder','uploads','40','<input type="text" id="imagefolder" name="imagefolder" value="{con.imagefolder}" size="40">', 'KLIVE');
-		add_config('imagefolderexts','png,gif,jpg,jpeg,tif,tiff,swf','40','<input type="text" id="imagefolderexts" name="imagefolderexts" value="{con.imagefolderexts}" size="80">', 'KLIVE');
-		add_config('imagefoldere','1','40','<label>{lang.YES}<input type="radio" id="imagefoldere" name="imagefoldere" value="1"  <IF NAME="con.imagefoldere"> checked="checked"</IF>></label><label>{lang.NO}<input type="radio" id="imagefoldere" name="imagefoldere" value="0"  <IF NAME="con.imagefoldere"> <ELSE> checked="checked"</IF>></label>', 'KLIVE');
-						add_olang(array(
-						"IMAGEFOLDER" => "مجلد الصور والملفات المباشره",
-						"IMAGEFOLDEREXTS" => "صيغ الصور والملفات المباشره",
-						"IMAGEFOLDERE" => "تغيير اسم الملف او الصوره المباشره",
-						"CONFIG_KLJ_MENUS_KLIVE" => "اعدادات اضافة الصور والملفات بروابط مباشرة",
-					), 'ar');
-		add_olang(array(
-					"IMAGEFOLDER" => "Image folder",
-					"IMAGEFOLDEREXTS" => "Extension of the direct files",
-					"IMAGEFOLDERE" => "Change image name",
-					"CONFIG_KLJ_MENUS_KLIVE" => "Kleeja Live links settings",
-					), 'en');
-	  ]]>
-	</install>
-
-	<uninstall><![CDATA[
-		delete_config(array('imagefolder', 'imagefoldere', 'imagefolderexts',));
-		delete_olang(array('IMAGEFOLDER', 'IMAGEFOLDERE', 'IMAGEFOLDEREXTS', 'CONFIG_KLJ_MENUS_KLIVE'),'ar');
-		delete_olang(array('IMAGEFOLDER', 'IMAGEFOLDERE', 'IMAGEFOLDEREXTS', 'CONFIG_KLJ_MENUS_KLIVE'),'en');
-	  ]]>
-	</uninstall>
-
+	
+	<options>
+		<option name="imagefolder" value="uploads" order="40" menu="KLIVE"><![CDATA[
+			<input type="text" id="imagefolder" name="imagefolder" value="{con.imagefolder}" size="40">
+		]]></option>
+		<option name="imagefolderexts" value="png,gif,jpg,jpeg,tif,tiff,swf" order="40" menu="KLIVE"><![CDATA[
+			<input type="text" id="imagefolderexts" name="imagefolderexts" value="{con.imagefolderexts}" size="80">
+		]]></option>
+		<option name="imagefoldere" value="1" order="40" menu="KLIVE"><![CDATA[
+			<label>{lang.YES}<input type="radio" id="imagefoldere" name="imagefoldere" value="1"  <IF NAME="con.imagefoldere"> checked="checked"</IF>></label><label>{lang.NO}<input type="radio" id="imagefoldere" name="imagefoldere" value="0"  <IF NAME="con.imagefoldere"> <ELSE> checked="checked"</IF>></label>
+		]]></option>
+	</options>
+	
+	<phrases>
+		<lang name="ar">
+			<phrase name="IMAGEFOLDER">مجلد الصور والملفات المباشره</phrase>
+			<phrase name="IMAGEFOLDEREXTS">صيغ الصور والملفات المباشره</phrase>
+			<phrase name="IMAGEFOLDERE">تغيير اسم الملف او الصوره المباشره</phrase>
+			<phrase name="CONFIG_KLJ_MENUS_KLIVE">اعدادات اضافة الصور والملفات بروابط مباشرة</phrase>
+		</lang>
+		<lang name="en">
+			<phrase name="IMAGEFOLDER">live folder</phrase>
+			<phrase name="IMAGEFOLDEREXTS">Extensions of the live links files</phrase>
+			<phrase name="IMAGEFOLDERE">Change file name</phrase>
+			<phrase name="CONFIG_KLJ_MENUS_KLIVE">Kleeja Live links settings</phrase>
+		</lang>
+	</phrases>
+	
   <hooks>
 	<hook name="while_klj_clean_old_files_func"><![CDATA[
 	if(in_array($row['type'], $exlive_types))

@@ -265,6 +265,8 @@ function creat_plugin_xml($contents)
 				$plg_langs			= empty($tree['langs']) ? null : $tree['langs'];
 				$plg_updates		= empty($tree['updates']) ? null : $tree['updates'];
 				$plg_instructions 	= empty($tree['instructions']) ? null : $tree['instructions'];
+				$plg_phrases		= empty($tree['phrases']) ? null : $tree['phrases'];
+				$plg_options		= empty($tree['options']) ? null : $tree['options'];
 
 				//important tags not exists 
 				if(empty($plg_info))
@@ -344,15 +346,31 @@ function creat_plugin_xml($contents)
 							$instarr[$in['attributes']['lang']] = $in['value'];
 						}
 					}
-
+					
+					//store important tags (for now only "install" and "templates" tags)
+					$store = '';
+					
+					//storing unreached elements
+					if (isset($plg_install) && trim($plg_install['value']) != '')
+					{
+						$store .= '<install><![CDATA[' . $plg_install['value'] . ']]></install>' . "\n\n";
+					}
+					
+					if (isset($plg_tpl))
+					{
+						$templates 	 =  explode("<templates>", $contents);
+						$templates 	 =  explode("</templates>", $templates[1]);
+						$store 		.= '<templates>' . $templates[0] . '</templates>' . "\n\n";
+					}
+					
 					//if the plugin was new 
 					if($plg_new)
 					{
 						//insert in plugin table 
 						$insert_query = array(
-						'INSERT'	=> 'plg_name, plg_ver, plg_author, plg_dsc, plg_uninstall, plg_instructions',
+						'INSERT'	=> 'plg_name, plg_ver, plg_author, plg_dsc, plg_uninstall, plg_instructions, plg_store',
 						'INTO'		=> "{$dbprefix}plugins",
-						'VALUES'	=> "'" . $SQL->escape($plugin_name) . "','" . $SQL->escape($plg_info['plugin_version']['value']) . "','" . $plugin_author . "','" . $SQL->escape($plg_info['plugin_description']['value']) . "','" . $SQL->real_escape($plg_uninstall['value']) . "','" . ((isset($instarr) && !empty($instarr)) ? $SQL->escape(kleeja_base64_encode(serialize($instarr))) : '') . "'");
+						'VALUES'	=> "'" . $SQL->escape($plugin_name) . "','" . $SQL->escape($plg_info['plugin_version']['value']) . "','" . $plugin_author . "','" . $SQL->escape($plg_info['plugin_description']['value']) . "','" . $SQL->real_escape($plg_uninstall['value']) . "','" . ((isset($instarr) && !empty($instarr)) ? $SQL->escape(kleeja_base64_encode(serialize($instarr))) : '') . "','" .  $SQL->real_escape($store) . "'");
 						($hook = kleeja_run_hook('qr_insert_plugininfo_crtplgxml_func')) ? eval($hook) : null; //run hook
 						$SQL->build($insert_query);
 			
@@ -362,7 +380,7 @@ function creat_plugin_xml($contents)
 					{
 						$update_query = array(
 						'UPDATE'	=> "{$dbprefix}plugins",
-						'SET'		=> 'plg_ver="' . $new_ver . '", plg_author="' . $plugin_author . '", plg_dsc="' . $SQL->escape($plg_info['plugin_description']['value']) . '", plg_uninstall="' . $SQL->real_escape($plg_uninstall['value']) . '", plg_instructions="' . ((isset($instarr) && !empty($instarr)) ? $SQL->escape(kleeja_base64_encode(serialize($instarr))) : '') . '"',
+						'SET'		=> 'plg_ver="' . $new_ver . '", plg_author="' . $plugin_author . '", plg_dsc="' . $SQL->escape($plg_info['plugin_description']['value']) . '", plg_uninstall="' . $SQL->real_escape($plg_uninstall['value']) . '", plg_instructions="' . ((isset($instarr) && !empty($instarr)) ? $SQL->escape(kleeja_base64_encode(serialize($instarr))) : '') . '", plg_store="' . $SQL->escape($store) . '"',
 						'WHERE'		=> "plg_id=" . $plg_id);
 						$SQL->build($update_query);
 						$new_plg_id	= $plg_id;
@@ -375,7 +393,55 @@ function creat_plugin_xml($contents)
 					}
 					
 					
-					//
+					if(isset($plg_phrases))
+					{
+						if(is_array($plg_phrases['lang']))
+						{
+							if(array_key_exists("attributes", $plg_phrases['lang']))
+							{
+									$plg_phrases['lang'] = array($plg_phrases['lang']);
+							}
+						}
+						
+						$phrases = array();		
+						foreach($plg_phrases['lang'] as $in)
+						{
+							if(empty($in['attributes']['name']) || !isset($in['attributes']['name']))
+							{
+								big_error('Error',$lang['ERR_XML_NO_G_TAGS']);
+							}
+							
+							//first we create a new array that can carry language phrases
+							$phrases[$in['attributes']['name']] = array();
+							
+							//get phrases value
+							foreach($in['phrase'] as $phrase)
+							{
+								$phrases[$in['attributes']['name']][$phrase['attributes']['name']] = $phrase['value'];
+							}
+
+							//finally we store it in the database
+							add_olang($phrases[$in['attributes']['name']], $in['attributes']['name'], $new_plg_id);
+						}
+					}
+					
+					if(isset($plg_options))
+					{
+						if(is_array($plg_options['option']))
+						{
+							if(array_key_exists("attributes", $plg_options['option']))
+							{
+								$plg_options['option'] = array($plg_options['option']);
+							}
+						}
+							
+						foreach($plg_options['option'] as $in)
+						{
+							add_config($in['attributes']['name'], $in['attributes']['value'], $in['attributes']['order'], $in['value'], $in['attributes']['menu'], $new_plg_id);
+						}
+					}
+					
+					//cache important instruction
 					$cached_instructions = array();
 					
 					//some actions with tpls
@@ -1440,7 +1506,7 @@ function get_config($name)
 /*
 * Add new config option
 */
-function add_config ($name, $value, $order = '0', $html = '', $type = 'other')
+function add_config ($name, $value, $order = '0', $html = '', $type = 'other', $plg_id = '0')
 {
 	global $dbprefix, $SQL, $config;
 	
@@ -1450,9 +1516,9 @@ function add_config ($name, $value, $order = '0', $html = '', $type = 'other')
 	}
 
 	$insert_query	= array(
-							'INSERT'	=> '`name` ,`value` ,`option` ,`display_order`, `type`',
+							'INSERT'	=> '`name` ,`value` ,`option` ,`display_order`, `type`, `plg_id`',
 							'INTO'		=> "{$dbprefix}config",
-							'VALUES'	=> "'" . $SQL->escape($name) . "','" . $SQL->escape($value) . "', '" . $SQL->real_escape($html) . "','" . intval($order) . "','" . $SQL->escape($type) . "'"
+							'VALUES'	=> "'" . $SQL->escape($name) . "','" . $SQL->escape($value) . "', '" . $SQL->real_escape($html) . "','" . intval($order) . "','" . $SQL->escape($type) . "','" . intval($plg_id) . "'",
 						);
 
 	$SQL->build($insert_query);	
@@ -1547,16 +1613,16 @@ function delete_config ($name)
 //
 //add words to lang
 //
-function add_olang($words = array(), $lang = 'en')
+function add_olang($words = array(), $lang = 'en', $plg_id = '0')
 {
 	global $dbprefix, $SQL;
 
 	foreach($words as $w=>$t)
 	{
 		$insert_query = array(
-								'INSERT'	=> '`word` ,`trans` ,`lang_id`',
+								'INSERT'	=> '`word` ,`trans` ,`lang_id`, `plg_id`',
 								'INTO'		=> "{$dbprefix}lang",
-								'VALUES'	=> "'" . $SQL->escape($w) . "','" . $SQL->real_escape($t) . "', '" . $SQL->escape($lang) . "'"
+								'VALUES'	=> "'" . $SQL->escape($w) . "','" . $SQL->real_escape($t) . "', '" . $SQL->escape($lang) . "','" . intval($plg_id) . "'",
 						);
 
 		$SQL->build($insert_query);

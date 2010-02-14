@@ -359,42 +359,20 @@ class usrcp
 		//
 		if(defined('FORCE_COOKIES'))
 		{
-			$config['cookie_domain'] = $c_domain;
-
-			// Fix the domain to accept domains with and without 'www.'.
-			if (strtolower(substr($config['cookie_domain'], 0, 4) ) == 'www.')
-			{
-				$config['cookie_domain'] = substr($config['cookie_domain'], 4);
-			}
-			// Add the dot prefix to ensure compatibility with subdomains
-			if (substr($config['cookie_domain'], 0, 1) != '.' )
-			{
-				$config['cookie_domain'] = '.' . $config['cookie_domain'];
-			}
-			// Remove port information.
-			$port = strpos($config['cookie_domain'], ':');
-			
-			if ($port !== false)
-			{
-				$config['cookie_domain'] = substr($config['cookie_domain'], 0, $port);
-			}
-			
-			//other cookies settings
+			$config['cookie_domain'] = (!empty($_SERVER['HTTP_HOST'])) ? strtolower($_SERVER['HTTP_HOST']) : ((!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : @getenv('SERVER_NAME'));
+			$config['cookie_domain'] = str_replace('www.', '.', substr($config['cookie_domain'], 0, strpos($config['cookie_domain'], ':')));
 			$config['cookie_path'] = '/';
 			$config['cookie_secure'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? true : false;
 		}
 
 		// Enable sending of a P3P header
 		header('P3P: CP="CUR ADM"');
+		
+		$name_data = rawurlencode($config['cookie_name'] . '_' . $name) . '=' . rawurlencode($value);
+		$rexpire = gmdate('D, d-M-Y H:i:s \\G\\M\\T', $expire);
+		$domain = (!$config['cookie_domain'] || $config['cookie_domain'] == 'localhost' || $config['cookie_domain'] == '127.0.0.1') ? '' : '; domain=' . $config['cookie_domain'];
 
-		if (version_compare(PHP_VERSION, '5.2.0', '>='))
-		{
-			setcookie($config['cookie_name'] . '_' . $name, $value, $expire, $config['cookie_path'], $config['cookie_domain'], $config['cookie_secure'], true);
-		}
-		else
-		{
-			setcookie($config['cookie_name'] . '_' . $name, $value, $expire, $config['cookie_path'] . '; HttpOnly', $config['cookie_domain'], $config['cookie_secure']);
-		}
+		header('Set-Cookie: ' . $name_data . (($expire) ? '; expires=' . $rexpire : '') . '; path=' . $config['cookie_path'] . $domain . ((!$config['cookie_secure']) ? '' : '; secure') . '; HttpOnly', false);
 	}
 
 	//encrypt and decrypt any data with our function

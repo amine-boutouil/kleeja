@@ -204,3 +204,53 @@ function updating_exists_plugin($plugin_name)
 	}
 	return false;
 }
+
+
+/**
+* trying to detect cookies settings
+*/
+function get_cookies_settings()
+{
+	$server_port = !empty($_SERVER['SERVER_PORT']) ? (int) $_SERVER['SERVER_PORT'] : (int) @getenv('SERVER_PORT');
+	$server_name = $server_name = (!empty($_SERVER['HTTP_HOST'])) ? strtolower($_SERVER['HTTP_HOST']) : ((!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : @getenv('SERVER_NAME'));
+	
+	// HTTP HOST can carry a port number...
+	if (strpos($server_name, ':') !== false)
+		$server_name = substr($server_name, 0, strpos($server_name, ':'));
+
+
+	$cookie_secure	= isset($_SERVER['HTTPS'])  && $_SERVER['HTTPS'] == 'on' ? true : false;
+	$cookie_name	= 'klj_' . strtolower(substr(str_replace('0', 'z', base_convert(md5(mt_rand()), 16, 35)), 0, 5));
+
+	$name = (!empty($_SERVER['PHP_SELF'])) ? $_SERVER['PHP_SELF'] : getenv('PHP_SELF');
+	if (!$name)
+		$name = (!empty($_SERVER['REQUEST_URI'])) ? $_SERVER['REQUEST_URI'] : @getenv('REQUEST_URI');
+
+	$script_path = trim(dirname(str_replace(array('\\', '//'), '/', $name)));
+
+	
+	if ($script_path !== '/')
+	{
+		if (substr($script_path, -1) == '/')
+			$script_path = substr($script_path, 0, -1);
+
+		$script_path = str_replace(array('../', './'), '', $script_path);
+		if ($script_path[0] != '/')
+			$script_path = '/' . $script_path;
+	}
+	
+	$cookie_domain = $server_name;
+	if (strpos($cookie_domain, 'www.') === 0)
+	{
+		$cookie_domain = str_replace('www.', '.', $cookie_domain);
+	}
+
+	return array(
+		'server_name'	=> $server_name,
+		'cookie_secure'	=> $cookie_secure,
+		'cookie_name'	=> $cookie_name,
+		'cookie_domain'	=> $cookie_domain,
+		'cookie_path'	=> $script_path,
+	);
+	
+}

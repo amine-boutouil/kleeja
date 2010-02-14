@@ -90,7 +90,7 @@ break;
 case 'f':
 
 	$check_ok = true;
-	$advices = $register_globals = $get_magic_quotes_gpc = $iconv = false;
+	$advices = $register_globals = $get_magic_quotes_gpc = false;
 	
 	if (@ini_get('register_globals') == '1' || strtolower(@ini_get('register_globals')) == 'on')
 	{
@@ -100,10 +100,6 @@ case 'f':
 	(@ini_get('magic_quotes_sybase') && (strtolower(@ini_get('magic_quotes_sybase')) != "off")) )
 	{
 		$get_magic_quotes_gpc = true;
-	}
-	if (!function_exists('iconv'))
-	{
-		$iconv = true;
 	}
 
 	if($register_globals || $get_magic_quotes_gpc || $iconv)

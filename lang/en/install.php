@@ -79,13 +79,12 @@
 	$lang['FUNCTION_IS_NOT_EXISTS']					= 'The function %s is disabled.';
 	$lang['FUNCTION_IS_EXISTS']						= 'The function %s is enabled.';
 	$lang['FUNCTION_DISC_UNLINK']					= 'The function Unlink is used to remove and update cache files.';
-	$lang['FUNCTION_DISC_GD']						= 'The function imagecreatetruecolor is a GD library that is used to create thumbnails & control photos.';
+	$lang['FUNCTION_DISC_GD']						= 'The function imagecreatetruecolor is function of GD library that is used to create thumbnails & control photos.';
 	$lang['FUNCTION_DISC_FOPEN']					= 'The function fopen is used to control styles & files in kleeja.';
 	$lang['FUNCTION_DISC_MUF']						= 'The function move_uploaded_file is used to upload files and it\'s the most important function in the script.';
 	//
 	$lang['ADVICES_CHECK']							= 'Advanced check (Optional)';
 	$lang['ADVICES_REGISTER_GLOBALS']				= '<span style="color:red;padding:0 6px;">register_globals function is enabled ..!</span><br /> its recommended that you disable it.';
-	$lang['ADVICES_ICONV']							= '<span style="color:red;padding:0 6px;">iconv module is not enabled ..!</span><br /> you can still install Kleeja but you will face problems integrating it with 3rd party scripts that are not compatible with UTF8 encoding';
 	$lang['ADVICES_MAGIC_QUOTES']					= '<span style="color:red;padding:0 6px;">magic_quotes function is enabled ..!</span><br /> it is recommended that you disable it.';
 	
 	//UPDATOR
@@ -111,7 +110,7 @@
 	$lang['IS_IT_OFFICIAL_NO']						= '<a style="color:red" target="_blank" href="http://www.kleeja.com">No, I\'ve downloaded it from other site, Go ahead now and download it from Kleeja official site</a>';
 	$lang['INST_WHAT_IS_KLEEJA_T']					= 'What is Kleeja ?';
 	
-	$lang['INST_WHAT_IS_KLEEJA'] = 'Keeja is a free, features rich, open source files upload system. Kleeja is developed to help webmasters to provide a decent files hosting service on their sites . Kleeja comes with a simple source code and powerful User system , also with easy template system so you can easily customize your styles ';
+	$lang['INST_WHAT_IS_KLEEJA'] = 'Keeja is a free, features rich,  files and images upload system. Kleeja is developed to help webmasters to provide a decent files hosting service on their sites . Kleeja comes with a simple source code and powerful User system , also with easy template system so you can easily customize your styles ';
 	
 	$lang['INST_SPECIAL_KLEEJA']					= 'Some Kleeja features .. !';
 	$lang['INST_WHAT_IS_KLEEJA_ONE']				= 'Kleeja has a simple and powerful user system which can be easily integrated with many boards . Kleeja provide simple admin control panel that enables you to control over everything in your site . Also you can customize Kleeja\'s style and install a lot of add-ons  ....  <a target="_blank" href="http://www.kleeja.com/about/">more details in Kleeja site </a>';
@@ -122,10 +121,10 @@
 	
 	//PLUGINS
 	$lang['PLUGINS_KLEEJA']							= 'Plugins For Kleeja .. !';
-	$lang['PLUGINS_BUILT_IN']						= 'These add-ons are built in Kleeja originally  . For more add-ons visit Kleeja.com';
-	$lang['PLUGINS_NAME']							= 'Add-on name';
+	$lang['PLUGINS_BUILT_IN']						= 'These Plugins are built in Kleeja originally  . For more Plugins visit Kleeja.com';
+	$lang['PLUGINS_NAME']							= 'Plugin name';
 	$lang['PLUGINS_VER']							= 'version';
 	$lang['PLUGINS_DES']							= 'description';	
-	$lang['PLUGINS_INSTALLED']						= 'Add-ons have been successfully installed ! .';	
+	$lang['PLUGINS_INSTALLED']						= 'Plugins have been successfully installed ! .';	
 
 //<-- EOF

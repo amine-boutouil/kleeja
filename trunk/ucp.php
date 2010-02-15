@@ -76,24 +76,25 @@ switch ($_GET['go'])
 			elseif (isset($_POST['submit']))
 			{
 				$ERRORS	= array();
-					
+
 				($hook = kleeja_run_hook('login_after_submit')) ? eval($hook) : null; //run hook
 
 				//check for form key
 				if(!kleeja_check_form_key('login'))
 				{
-					$ERRORS[] = $lang['INVALID_FORM_KEY'];
+					$ERRORS['form_key'] = $lang['INVALID_FORM_KEY'];
 				}
 				elseif (empty($_POST['lname']) || empty($_POST['lpass']))
 				{
-					$ERRORS[] = $lang['EMPTY_FIELDS'];
+					$ERRORS['empty_fields'] = $lang['EMPTY_FIELDS'];
 				}
 				elseif(!$usrcp->data($_POST['lname'], $_POST['lpass'], false, (!isset($_POST['remme']) ? false : $_POST['remme'])))
 				{
-					$ERRORS[] = $lang['LOGIN_ERROR'];
+					$ERRORS['login_check'] = $lang['LOGIN_ERROR'];
 				}
-					
-				
+
+				($hook = kleeja_run_hook('login_after_submit2')) ? eval($hook) : null; //run hook
+
 				if(empty($ERRORS))
 				{
 					//delete him from online as guest
@@ -141,7 +142,7 @@ switch ($_GET['go'])
 			$ERRORS = false;
 
 			//config register
-			if ($config['register'] != '1' &&  $config['user_system'] == '1')
+			if ((int) $config['register'] != 1 && (int) $config['user_system'] == 1)
 			{
 				kleeja_info($lang['REGISTER_CLOSED'], $lang['PLACE_NO_YOU']);
 			}
@@ -203,32 +204,34 @@ switch ($_GET['go'])
 				//check for form key
 				if(!kleeja_check_form_key('register'))
 				{
-					$ERRORS[] = $lang['INVALID_FORM_KEY'];
+					$ERRORS['form_key'] = $lang['INVALID_FORM_KEY'];
 				}
 				if(!kleeja_check_captcha())
 				{
-					$ERRORS[] = $lang['WRONG_VERTY_CODE'];
+					$ERRORS['captcha'] = $lang['WRONG_VERTY_CODE'];
 				}
-				if (trim($_POST['lname'])=='' || trim($_POST['lpass'])=='' || trim($_POST['lmail'])=='')
+				if (trim($_POST['lname']) == '' || trim($_POST['lpass']) == '' || trim($_POST['lmail']) == '')
 				{
-					$ERRORS[] = $lang['EMPTY_FIELDS'];
+					$ERRORS['empty_fields'] = $lang['EMPTY_FIELDS'];
 				}	
 				if (!preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/i", trim($_POST['lmail'])))
 				{
-					$ERRORS[] = $lang['WRONG_EMAIL'];
+					$ERRORS['lmail'] = $lang['WRONG_EMAIL'];
 				}
-				if (strlen(trim($_POST['lname'])) < 4 || strlen(trim($_POST['lname'])) > 20)
+				if (strlen(trim($_POST['lname'])) < 3 || strlen(trim($_POST['lname'])) > 50)
 				{
-					$ERRORS[] = $lang['WRONG_NAME'];
+					$ERRORS['lname'] = $lang['WRONG_NAME'];
 				}
-				else if ($SQL->num_rows($SQL->query("SELECT * FROM `{$dbprefix}users` WHERE clean_name='" . trim($SQL->escape($usrcp->cleanusername($_POST["lname"]))) . "'")) !=0 )
+				else if ($SQL->num_rows($SQL->query("SELECT * FROM `{$dbprefix}users` WHERE clean_name='" . trim($SQL->escape($usrcp->cleanusername($_POST["lname"]))) . "'")) != 0)
 				{
-					$ERRORS[] = $lang['EXIST_NAME'];
+					$ERRORS['name_exists_before'] = $lang['EXIST_NAME'];
 				}
-				else if ($SQL->num_rows($SQL->query("SELECT * FROM `{$dbprefix}users` WHERE mail='" . strtolower(trim($SQL->escape($_POST["lmail"]))) . "'")) !=0 )
+				else if ($SQL->num_rows($SQL->query("SELECT * FROM `{$dbprefix}users` WHERE mail='" . strtolower(trim($SQL->escape($_POST["lmail"]))) . "'")) != 0)
 				{
-					$ERRORS[] = $lang['EXIST_EMAIL'];
+					$ERRORS['mail_exists_before'] = $lang['EXIST_EMAIL'];
 				}
+
+				($hook = kleeja_run_hook('register_submit2')) ? eval($hook) : null; //run hook
 
 				//no errors, lets do process
 				if(empty($ERRORS))	 
@@ -630,17 +633,19 @@ switch ($_GET['go'])
 				//check for form key
 				if(!kleeja_check_form_key('profile'))
 				{
-					$ERRORS[] = $lang['INVALID_FORM_KEY'];
+					$ERRORS['form_key'] = $lang['INVALID_FORM_KEY'];
 				}
 				if((!empty($_POST['ppass_new']) || !empty($_POST['ppass_new2']))  && (($_POST['ppass_new'] !=  $_POST['ppass_new2']) 
 						||  empty($_POST['ppass_old']) || (!$usrcp->data($usrcp->name(), $_POST['ppass_old'], false, 900))))
 				{
-					$ERRORS[] = $lang['PASS_O_PASS2'];
+					$ERRORS['pass1_neq_pass2'] = $lang['PASS_O_PASS2'];
 				}
 				if (!empty($_POST['pppass_old'])  && (!preg_match('/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/i', trim($_POST['pmail'])) || empty($_POST['pmail']) || (!$usrcp->data($usrcp->name(), $_POST['pppass_old'], false, 900))))
 				{
-					$ERRORS[] = $lang['WRONG_EMAIL'];
+					$ERRORS['pmail'] = $lang['WRONG_EMAIL'];
 				}
+	
+				($hook = kleeja_run_hook('submit_profile2')) ? eval($hook) : null; //run hook
 
 				//no errors , do it
 				if(empty($ERRORS))
@@ -658,10 +663,10 @@ switch ($_GET['go'])
 											'WHERE'		=> 'id=' . $id,
 											);
 
-						($hook = kleeja_run_hook('qr_update_data_in_profile')) ? eval($hook) : null; //run hook
+					($hook = kleeja_run_hook('qr_update_data_in_profile')) ? eval($hook) : null; //run hook
 
-						$SQL->build($update_query);
-						kleeja_info($lang['DATA_CHANGED_O_LO'], '', true, $action);
+					$SQL->build($update_query);
+					kleeja_info($lang['DATA_CHANGED_O_LO'], '', true, $action);
 				}
 
 		}#else submit
@@ -748,24 +753,26 @@ switch ($_GET['go'])
 				//check for form key
 				if(!kleeja_check_form_key('get_pass'))
 				{
-					$ERRORS[] = $lang['INVALID_FORM_KEY'];
+					$ERRORS['form_key'] = $lang['INVALID_FORM_KEY'];
 				}
 				if(!kleeja_check_captcha())
 				{
-					$ERRORS[] = $lang['WRONG_VERTY_CODE'];
+					$ERRORS['captcha'] = $lang['WRONG_VERTY_CODE'];
 				}
 				if (empty($_POST['rmail']))
 				{
-					$ERRORS[] = $lang['EMPTY_FIELDS'];
+					$ERRORS['empty_fields'] = $lang['EMPTY_FIELDS'];
 				}	
 				if (!preg_match('/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/i', trim(strtolower($_POST['rmail']))))
 				{
-					$ERRORS[] = $lang['WRONG_EMAIL'];
+					$ERRORS['rmail'] = $lang['WRONG_EMAIL'];
 				}
 				else if ($SQL->num_rows($SQL->query("SELECT name FROM `{$dbprefix}users` WHERE mail='" . $SQL->escape(strtolower($_POST['rmail'])) . "'")) == 0)
 				{
-					$ERRORS[] = $lang['WRONG_DB_EMAIL'];
+					$ERRORS['no_rmail'] = $lang['WRONG_DB_EMAIL'];
 				}
+
+				($hook = kleeja_run_hook('submit_get_pass2')) ? eval($hook) : null; //run hook
 
 				//no errors, lets do it
 				if(empty($ERRORS))
@@ -847,8 +854,8 @@ switch ($_GET['go'])
 //
 //show style ...
 //
-$titlee = empty($titlee) ? $lang['USERS_SYSTEM'] : $titlee;
-
+$titlee		= empty($titlee) ? $lang['USERS_SYSTEM'] : $titlee;
+$stylee		= empty($stylee) ? 'info' : $stylee;
 
 //header
 Saaheader($titlee);

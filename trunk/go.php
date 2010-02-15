@@ -118,30 +118,32 @@ switch ($_GET['go'])
 			//check for form key
 			if(!kleeja_check_form_key('report'))
 			{
-				$ERRORS[] = $lang['INVALID_FORM_KEY'];
+				$ERRORS['form_key'] = $lang['INVALID_FORM_KEY'];
 			}
 			if(!kleeja_check_captcha())
 			{
-				$ERRORS[]	= $lang['WRONG_VERTY_CODE'];
+				$ERRORS['captcha']	= $lang['WRONG_VERTY_CODE'];
 			}
 			if ((empty($_POST['rname']) && $NOT_USER) || empty($_POST['rurl']))
 			{
-				$ERRORS[]	= $lang['EMPTY_FIELDS'] . ' : ' . (empty($_POST['rname']) && $NOT_USER ? ' [ ' . $lang['YOURNAME'] . ' ] ' : '')  
+				$ERRORS['rname']	= $lang['EMPTY_FIELDS'] . ' : ' . (empty($_POST['rname']) && $NOT_USER ? ' [ ' . $lang['YOURNAME'] . ' ] ' : '')  
 									. (empty($_POST['rurl']) ? '  [ ' . $lang['URL']  . ' ] ': '');
 			}
 			if(empty($_POST['rid']))
 			{
-				$ERRORS[]	= $lang['NO_ID'];
+				$ERRORS['rid']	= $lang['NO_ID'];
 			}
 			if (isset($_POST['rmail']) &&  !preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/i", trim(strtolower($_POST['rmail']))) && $NOT_USER)
 			{
-				$ERRORS[]	= $lang['WRONG_EMAIL'];
+				$ERRORS['rmail']	= $lang['WRONG_EMAIL'];
 			}
 			if (strlen($_POST['rtext']) > 300)
 			{
-				$ERRORS[]	= $lang['NO_ME300RES'];
+				$ERRORS['rtext']	= $lang['NO_ME300RES'];
 			}
-
+			
+			($hook = kleeja_run_hook('submit_report_go_page2')) ? eval($hook) : null; //run hook
+		
 			//no error , lets do process
 			if(empty($ERRORS))
 			{
@@ -232,25 +234,27 @@ switch ($_GET['go'])
 			//check for form key
 			if(!kleeja_check_form_key('call'))
 			{
-				$ERRORS[] = $lang['INVALID_FORM_KEY'];
+				$ERRORS['form_key'] = $lang['INVALID_FORM_KEY'];
 			}
 			if(!kleeja_check_captcha())
 			{
-				$ERRORS[] = $lang['WRONG_VERTY_CODE'];
+				$ERRORS['captcha'] = $lang['WRONG_VERTY_CODE'];
 			}
 			if ((empty($_POST['cname']) && $NOT_USER)  || empty($_POST['ctext']) )
 			{
-				$ERRORS[]	= $lang['EMPTY_FIELDS'] . ' : ' . (empty($_POST['cname']) && $NOT_USER ? ' [ ' . $lang['YOURNAME'] . ' ] ' : '') 
+				$ERRORS['cname']	= $lang['EMPTY_FIELDS'] . ' : ' . (empty($_POST['cname']) && $NOT_USER ? ' [ ' . $lang['YOURNAME'] . ' ] ' : '') 
 								. (empty($_POST['ctext']) ? '  [ ' . $lang['TEXT']  . ' ] ': '');
 			}
 			if (isset($_POST['cmail']) && !preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/i", trim(strtolower($_POST['cmail']))) && $NOT_USER)
 			{
-				$ERRORS[] = $lang['WRONG_EMAIL'];
+				$ERRORS['cmail'] = $lang['WRONG_EMAIL'];
 			}
 			if (strlen($_POST['ctext']) > 300)
 			{
-				$ERRORS[] = $lang['NO_ME300TEXT'];
+				$ERRORS['ctext'] = $lang['NO_ME300TEXT'];
 			}
+
+			($hook = kleeja_run_hook('submit_call_go_page2')) ? eval($hook) : null; //run hook
 
 			//no errors ,lets do process
 			if(empty($ERRORS))

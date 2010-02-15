@@ -414,6 +414,14 @@ function creat_plugin_xml($contents)
 							//first we create a new array that can carry language phrases
 							$phrases[$in['attributes']['name']] = array();
 							
+							if(is_array($in['phrase']))
+							{
+								if(array_key_exists("attributes", $in['phrase']))
+								{
+									$in['phrase'] = array($in['phrase']);
+								}
+							}
+				
 							//get phrases value
 							foreach($in['phrase'] as $phrase)
 							{

@@ -220,7 +220,6 @@ if (isset($_GET['do_plg']))
 				
 				
 				//start xml
-				//header('Content-Type: text/xml');
 				$name = $row['plg_name'] . '-' . str_replace('.', '-', $row['plg_ver']) . '.xml';
 
 				if (is_browser('mozilla'))
@@ -254,54 +253,57 @@ if (isset($_GET['do_plg']))
 
 				echo '<?xml version="1.0" encoding="utf-8"?>' . "\n";
 				echo '<kleeja>' . "\n";
-				echo '<info>' . "\n";
-				echo '	<plugin_name>' . $row['plg_name'] . '</plugin_name>' . "\n";
-				echo '	<plugin_version>' . $row['plg_ver'] . '</plugin_version>' . "\n";
-				echo '	<plugin_description>' . $row['plg_dsc'] . '</plugin_description>' . "\n";
-				echo '	<plugin_author>' . $row['plg_author'] . '</plugin_author>' . "\n";
-				echo '	<plugin_kleeja_version>' . KLEEJA_VERSION . '</plugin_kleeja_version>' . "\n";
-				echo '</info>' . "\n\n";
+				echo "\t" . '<info>' . "\n";
+				echo "\t\t" . '<plugin_name>' . $row['plg_name'] . '</plugin_name>' . "\n";
+				echo "\t\t" . '<plugin_version>' . $row['plg_ver'] . '</plugin_version>' . "\n";
+				echo "\t\t" . '<plugin_description>' . $row['plg_dsc'] . '</plugin_description>' . "\n";
+				echo "\t\t" . '<plugin_author>' . $row['plg_author'] . '</plugin_author>' . "\n";
+				echo "\t\t" . '<plugin_kleeja_version>' . KLEEJA_VERSION . '</plugin_kleeja_version>' . "\n";
+				echo "\t" . '</info>' . "\n";
 				
 				if(!empty($row['plg_instructions']))
 				{
-					echo '<instructions>' . "\n";
+					echo  "\t" . '<instructions>' . "\n";
 					$inst = unserialize(kleeja_base64_decode($row['plg_instructions']));
 					foreach($inst as $lang => $instruction)
 					{
-						echo '	<instruction lang="' . $lang . '"><![CDATA[' .  $instruction  . ']]></instruction>' . "\n";
+						echo  "\t\t" . '<instruction lang="' . $lang . '"><![CDATA[' .  $instruction  . ']]></instruction>' . "\n";
 					}
-					echo '</instructions>' . "\n\n";
+					echo  "\t" . '</instructions>' . "\n";
 				}
 				
-				echo '<uninstall><![CDATA[';
+				echo "\t" . '<uninstall><![CDATA[';
 				echo $row['plg_uninstall'];
-				echo ']]></uninstall>' . "\n\n";
-				
-				echo $row['plg_store'] . "\n\n";
-				
-				
-				$querylang = $SQL->build(array('SELECT'	=> 'DISTINCT(lang_id)', 
+				echo "\t" . ']]></uninstall>' . "\n";
+
+				echo $row['plg_store'] . "\n";
+
+				$querylang = $SQL->build(array(
+												'SELECT'	=> 'DISTINCT(lang_id)', 
 												'FROM'	=> "{$dbprefix}lang",
-												'WHERE' => "plg_id=" . $plg_id));
-				
+												'WHERE' => "plg_id=" . $plg_id
+											));
+
 				if($SQL->num_rows($querylang)>0)
 				{
-					echo '<phrases>' . "\n";
+					echo "\t" . '<phrases>' . "\n";
 					while($phrases=$SQL->fetch_array($querylang))
 					{
-						echo ' <lang name="' . $phrases['lang_id'] . '">' . "\n";
+						echo "\t\t" . '<lang name="' . $phrases['lang_id'] . '">' . "\n";
+
 						$queryp = $SQL->build(array(
 													'SELECT'	=> '*',
 						 							'FROM'		=> "{$dbprefix}lang",
 													'WHERE'		=> "plg_id='" . $plg_id . "' AND lang_id='" . $phrases['lang_id'] . "'"
-													));
+												));
+
 						while($phrase=$SQL->fetch_array($queryp))
 						{
-							echo '	 <phrase name="' . $phrase['word'] . '">' . $phrase['trans'] . '</phrase>' . "\n";
+							echo "\t\t\t" . '<phrase name="' . $phrase['word'] . '">' . $phrase['trans'] . '</phrase>' . "\n";
 						}
-						echo ' </lang>' . "\n";
+						echo "\t\t" . '</lang>' . "\n";
 					}
-					echo '</phrases>' . "\n\n";
+					echo "\t" . '</phrases>' . "\n";
 				}
 				
 				
@@ -311,26 +313,28 @@ if (isset($_GET['do_plg']))
 				
 				if($SQL->num_rows($querylang)>0)
 				{
-					echo '<options>' . "\n";
+					echo "\t" . '<options>' . "\n";
 					while($config=$SQL->fetch_array($queryconfig))
 					{
-						echo '	<option name="' . $config['name'] . '" value="' . $config['value'] . '" order="' . $config['display_order'] . '" menu="' . $config['type'] . '"><![CDATA[' . $config['option'] . ']]></option>' . "\n";
+						echo "\t\t" . '<option name="' . $config['name'] . '" value="' . $config['value'] . '" order="' . $config['display_order'] . '" menu="' . $config['type'] . '"><![CDATA[' . $config['option'] . ']]></option>' . "\n";
 					}
-					echo '</options>' . "\n\n";
+					echo "\t" . '</options>' . "\n";
 				}
-				
-				$queryhooks = $SQL->build(array('SELECT'	=> '*', 
-												'FROM'	=> "{$dbprefix}hooks",
-												'WHERE' => "plg_id=" . $plg_id));
-				
+
+				$queryhooks = $SQL->build(array(
+												'SELECT'	=> '*', 
+												'FROM'		=> "{$dbprefix}hooks",
+												'WHERE'		=> "plg_id=" . $plg_id
+											));
+
 				if($SQL->num_rows($queryhooks)>0)
 				{
-					echo '<hooks>' . "\n";
+					echo "\t" . '<hooks>' . "\n";
 					while($hook=$SQL->fetch_array($queryhooks))
 					{
-						echo '	<hook name="' . $hook['hook_name'] . '"><![CDATA[' . $hook['hook_content'] . ']]></hook>' . "\n";
+						echo "\t\t" . '<hook name="' . $hook['hook_name'] . '"><![CDATA[' . $hook['hook_content'] . ']]></hook>' . "\n";
 					}
-					echo '</hooks>' . "\n\n";
+					echo "\t" . '</hooks>' . "\n";
 				}
 				
 				echo '</kleeja>';

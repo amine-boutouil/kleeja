@@ -356,13 +356,20 @@ function creat_plugin_xml($contents)
 						$store .= '<install><![CDATA[' . $plg_install['value'] . ']]></install>' . "\n\n";
 					}
 					
+					if (isset($plg_updates))
+					{
+						$updates 	 =  explode("<updates>", $contents);
+						$updates 	 =  explode("</updates>", $updates[1]);
+						$store 		.= '<updates>' . $updates[0] . '</updates>' . "\n\n";
+					}
+
 					if (isset($plg_tpl))
 					{
 						$templates 	 =  explode("<templates>", $contents);
 						$templates 	 =  explode("</templates>", $templates[1]);
 						$store 		.= '<templates>' . $templates[0] . '</templates>' . "\n\n";
 					}
-					
+
 					//if the plugin was new 
 					if($plg_new)
 					{

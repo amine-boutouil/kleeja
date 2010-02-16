@@ -221,7 +221,7 @@ if (isset($_GET['do_plg']))
 				
 				//start xml
 				//header('Content-Type: text/xml');
-				$name = $row['plg_name'] . '-' . $row['plg_ver'] . '.xml';
+				$name = $row['plg_name'] . '-' . str_replace('.', '-', $row['plg_ver']) . '.xml';
 
 				if (is_browser('mozilla'))
 				{
@@ -257,8 +257,8 @@ if (isset($_GET['do_plg']))
 				echo '<info>' . "\n";
 				echo '	<plugin_name>' . $row['plg_name'] . '</plugin_name>' . "\n";
 				echo '	<plugin_version>' . $row['plg_ver'] . '</plugin_version>' . "\n";
-				echo '	<plugin_description>' . $row['plg_dsc '] . '</plugin_description>' . "\n";
-				echo '	<plugin_author>' . $row['plg_ver'] . '</plugin_author>' . "\n";
+				echo '	<plugin_description>' . $row['plg_dsc'] . '</plugin_description>' . "\n";
+				echo '	<plugin_author>' . $row['plg_author'] . '</plugin_author>' . "\n";
 				echo '	<plugin_kleeja_version>' . KLEEJA_VERSION . '</plugin_kleeja_version>' . "\n";
 				echo '</info>' . "\n\n";
 				

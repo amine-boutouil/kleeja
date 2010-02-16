@@ -370,7 +370,7 @@ function creat_plugin_xml($contents)
 						$insert_query = array(
 						'INSERT'	=> 'plg_name, plg_ver, plg_author, plg_dsc, plg_uninstall, plg_instructions, plg_store',
 						'INTO'		=> "{$dbprefix}plugins",
-						'VALUES'	=> "'" . $SQL->escape($plugin_name) . "','" . $SQL->escape($plg_info['plugin_version']['value']) . "','" . $plugin_author . "','" . $SQL->escape($plg_info['plugin_description']['value']) . "','" . $SQL->real_escape($plg_uninstall['value']) . "','" . ((isset($instarr) && !empty($instarr)) ? $SQL->escape(kleeja_base64_encode(serialize($instarr))) : '') . "','" .  $SQL->real_escape($store) . "'");
+						'VALUES'	=> "'" . $SQL->escape($plugin_name) . "','" . $SQL->escape($plg_info['plugin_version']['value']) . "','" . $SQL->escape($plg_info['plugin_author']['value']) . "','" . $SQL->escape($plg_info['plugin_description']['value']) . "','" . $SQL->real_escape($plg_uninstall['value']) . "','" . ((isset($instarr) && !empty($instarr)) ? $SQL->escape(kleeja_base64_encode(serialize($instarr))) : '') . "','" .  $SQL->real_escape($store) . "'");
 						($hook = kleeja_run_hook('qr_insert_plugininfo_crtplgxml_func')) ? eval($hook) : null; //run hook
 						$SQL->build($insert_query);
 			
@@ -380,7 +380,7 @@ function creat_plugin_xml($contents)
 					{
 						$update_query = array(
 						'UPDATE'	=> "{$dbprefix}plugins",
-						'SET'		=> 'plg_ver="' . $new_ver . '", plg_author="' . $plugin_author . '", plg_dsc="' . $SQL->escape($plg_info['plugin_description']['value']) . '", plg_uninstall="' . $SQL->real_escape($plg_uninstall['value']) . '", plg_instructions="' . ((isset($instarr) && !empty($instarr)) ? $SQL->escape(kleeja_base64_encode(serialize($instarr))) : '') . '", plg_store="' . $SQL->escape($store) . '"',
+						'SET'		=> 'plg_ver="' . $new_ver . '", plg_author="' . $SQL->escape($plg_info['plugin_author']['value']) . '", plg_dsc="' . $SQL->escape($plg_info['plugin_description']['value']) . '", plg_uninstall="' . $SQL->real_escape($plg_uninstall['value']) . '", plg_instructions="' . ((isset($instarr) && !empty($instarr)) ? $SQL->escape(kleeja_base64_encode(serialize($instarr))) : '') . '", plg_store="' . $SQL->escape($store) . '"',
 						'WHERE'		=> "plg_id=" . $plg_id);
 						$SQL->build($update_query);
 						$new_plg_id	= $plg_id;

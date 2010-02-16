@@ -268,13 +268,13 @@ if (isset($_GET['do_plg']))
 					$inst = unserialize(kleeja_base64_decode($row['plg_instructions']));
 					foreach($inst as $lang => $instruction)
 					{
-						echo '	<instruction lang="' . $lang . '"><![CDATA[' . "\n	" . $instruction  . "\n" . '	]]></instruction>' . "\n";
+						echo '	<instruction lang="' . $lang . '"><![CDATA[' .  $instruction  . ']]></instruction>' . "\n";
 					}
 					echo '</instructions>' . "\n\n";
 				}
 				
-				echo '<uninstall><![CDATA[' . "\n";
-				echo $row['plg_uninstall'] . "\n";
+				echo '<uninstall><![CDATA[';
+				echo $row['plg_uninstall'];
 				echo ']]></uninstall>' . "\n\n";
 				
 				echo $row['plg_store'] . "\n\n";
@@ -314,7 +314,7 @@ if (isset($_GET['do_plg']))
 					echo '<options>' . "\n";
 					while($config=$SQL->fetch_array($queryconfig))
 					{
-						echo '	<option name="' . $config['name'] . '" value="' . $config['value'] . '" order="' . $config['display_order'] . '" menu="' . $config['type'] . '"><![CDATA[' . "\n	" . $config['option'] . "\n" . '	]]></option>' . "\n";
+						echo '	<option name="' . $config['name'] . '" value="' . $config['value'] . '" order="' . $config['display_order'] . '" menu="' . $config['type'] . '"><![CDATA[' . $config['option'] . ']]></option>' . "\n";
 					}
 					echo '</options>' . "\n\n";
 				}
@@ -328,7 +328,7 @@ if (isset($_GET['do_plg']))
 					echo '<hooks>' . "\n";
 					while($hook=$SQL->fetch_array($queryhooks))
 					{
-						echo '	<hook name="' . $hook['hook_name'] . '"><![CDATA[' . "\n	" . $hook['hook_content'] . "\n" . '	]]></hook>' . "\n";
+						echo '	<hook name="' . $hook['hook_name'] . '"><![CDATA[' . $hook['hook_content'] . ']]></hook>' . "\n";
 					}
 					echo '</hooks>' . "\n\n";
 				}

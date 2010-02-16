@@ -329,9 +329,9 @@ function creat_plugin_xml($contents)
 					{
 						if(is_array($plg_instructions['instruction']))
 						{
-							if(array_key_exists("attributes", $plg_instructions['update']))
+							if(array_key_exists("attributes", $plg_instructions['instruction']))
 							{
-									$plg_instructions['update'] = array($plg_instructions['update']);
+									$plg_instructions['instruction'] = array($plg_instructions['instruction']);
 							}
 						}
 						

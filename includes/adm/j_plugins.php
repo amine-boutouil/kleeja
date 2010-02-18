@@ -38,8 +38,8 @@ if (isset($_POST['submit_new_plg']))
 
 //get plugins
 $query = array(
-				'SELECT'	=> '*',
-				'FROM'		=> "{$dbprefix}plugins"
+				'SELECT'	=> 'p.plg_id, p.plg_name, p.plg_disabled, p.plg_ver, p.plg_ver, p.plg_author, p.plg_dsc, p.plg_instructions',
+				'FROM'		=> "{$dbprefix}plugins p"
 			);
 
 $result = $SQL->build($query);
@@ -51,12 +51,13 @@ if($SQL->num_rows($result)>0)
 	while($row=$SQL->fetch_array($result))
 	{
 		$arr[]	= array(
-						'plg_id'		=> $row['plg_id'],
-						'plg_name'		=> $row['plg_name'] . ($row['plg_disabled'] == 1 ? ' [x]': ''),
-						'plg_disabled'	=> (int) $row['plg_disabled'] == 1 ? true : false,
-						'plg_ver'		=> $row['plg_ver'],
-						'plg_author'	=> $row['plg_author'],
-						'plg_dsc'		=> $row['plg_dsc'],
+						'plg_id'			=> $row['plg_id'],
+						'plg_name'			=> str_replace('-', ' ', $row['plg_name']) . ($row['plg_disabled'] == 1 ? ' [ x ]': ''),
+						'plg_disabled'		=> (int) $row['plg_disabled'] == 1 ? true : false,
+						'plg_ver'			=> $row['plg_ver'],
+						'plg_author'		=> $row['plg_author'],
+						'plg_dsc'			=> $row['plg_dsc'],
+						'plg_instructions'	=> trim($row['plg_instructions']) == '' ? false : true,
 				);
 	}
 }
@@ -180,21 +181,24 @@ if (isset($_GET['do_plg']))
 		break;
 		case '4': //plugin instructions
 			$query	= array(
-							'SELECT'	=> 'plg_instructions',
-							'FROM'		=> "{$dbprefix}plugins",
-							'WHERE'		=> "plg_id=" . $plg_id
+							'SELECT'	=> 'p.plg_name, p.plg_ver, p.plg_instructions',
+							'FROM'		=> "{$dbprefix}plugins p",
+							'WHERE'		=> "p.plg_id=" . $plg_id
 						);
 
 			$result = $SQL->fetch_array($SQL->build($query));
-			$result  = $result['plg_instructions'];
+
 
 			if(empty($result)) //no instructions
 			{
 				redirect(basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'));
 			}
 	
-			$info = unserialize(kleeja_base64_decode($result));
-			kleeja_admin_info($info[$config['language']]);
+			$info = unserialize(kleeja_base64_decode($result['plg_instructions']));
+			kleeja_admin_info('<h3>' . $result['plg_name'] . ' &nbsp;' . $result['plg_ver']  . ' : </h3>' . 
+							$info[$config['language']] . '<br /><a href="' . basename(ADMIN_PATH) . '?cp=' .
+							basename(__file__, '.php') . '">' . $lang['GO_BACK_BROWSER'] . '</a>');
+
 		break;
 		case '5': //plugins exporting
 			if(!isset($plg_id))
@@ -311,7 +315,7 @@ if (isset($_GET['do_plg']))
 												'FROM'	=> "{$dbprefix}config",
 												'WHERE' => "plg_id=" . $plg_id));
 				
-				if($SQL->num_rows($querylang)>0)
+				if($SQL->num_rows($queryconfig)>0)
 				{
 					echo "\t" . '<options>' . "\n";
 					while($config=$SQL->fetch_array($queryconfig))
@@ -376,24 +380,31 @@ if(isset($_POST['submit_new_plg']))
 	if(empty($text))
 	{
 		$return = creat_plugin_xml($contents);
-
-		if($return === true)
+		
+		switch($return)
 		{
-			$text = $lang['NEW_PLUGIN_ADDED'] . '<meta HTTP-EQUIV="REFRESH" content="3; url=' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '">' . "\n";
+			//plugin added
+			case 'done':
+				$text = $lang['NEW_PLUGIN_ADDED'] . '<meta HTTP-EQUIV="REFRESH" content="3; url=' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '">' . "\n";
+			break;
+			case 'xyz': //exists before
+				kleeja_admin_err($lang['PLUGIN_EXISTS_BEFORE'],true,'',true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'));			
+			break;
+			case 'upd': // updated success
+				$text = $lang['PLUGIN_UPDATED_SUCCESS'] . '<meta HTTP-EQUIV="REFRESH" content="3; url=' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '">' . "\n";			
+			break;
+			default:
+				if(strpos($return, 'inst:') !== false)
+				{
+					$plg_id = array_pop(explode(':', $return)); 
+					$text = $lang['NEW_PLUGIN_ADDED'] . '<meta HTTP-EQUIV="REFRESH" content="1; url=' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;do_plg=' . $plg_id . '&amp;m=4">' . "\n";
+				}
+				else
+				{
+					kleeja_admin_err($lang['ERR_IN_UPLOAD_XML_FILE'],true,'',true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'));	
+				}
 		}
-		else if ($return === 'xyz')//exists before
-		{
-			kleeja_admin_err($lang['PLUGIN_EXISTS_BEFORE'],true,'',true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'));			
-		}
-		else if ($return === 'upd') // updated success
-		{
-			$text = $lang['PLUGIN_UPDATED_SUCCESS'] . '<meta HTTP-EQUIV="REFRESH" content="3; url=' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '">' . "\n";			
-		}
-		else
-		{
-			kleeja_admin_err($lang['ERR_IN_UPLOAD_XML_FILE'],true,'',true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'));	
-		}
-	}		
+	}
 
 	$stylee	= "admin_info";
 }

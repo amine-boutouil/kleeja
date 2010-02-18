@@ -347,6 +347,14 @@ function creat_plugin_xml($contents)
 						}
 					}
 					
+					//if there is instructions
+					$there_is_intruct = false;
+					if(isset($instarr) && !empty($instarr))
+					{
+						$there_is_intruct = true;
+					}
+					
+					
 					//store important tags (for now only "install" and "templates" tags)
 					$store = '';
 					
@@ -387,7 +395,7 @@ function creat_plugin_xml($contents)
 					{
 						$update_query = array(
 						'UPDATE'	=> "{$dbprefix}plugins",
-						'SET'		=> 'plg_ver="' . $new_ver . '", plg_author="' . $SQL->escape($plg_info['plugin_author']['value']) . '", plg_dsc="' . $SQL->escape($plg_info['plugin_description']['value']) . '", plg_uninstall="' . $SQL->real_escape($plg_uninstall['value']) . '", plg_instructions="' . ((isset($instarr) && !empty($instarr)) ? $SQL->escape(kleeja_base64_encode(serialize($instarr))) : '') . '", plg_store="' . $SQL->escape($store) . '"',
+						'SET'		=> 'plg_ver="' . $new_ver . '", plg_author="' . $SQL->escape($plg_info['plugin_author']['value']) . '", plg_dsc="' . $SQL->escape($plg_info['plugin_description']['value']) . '", plg_uninstall="' . $SQL->real_escape($plg_uninstall['value']) . '", plg_instructions="' . ($there_is_intruct ? $SQL->escape(kleeja_base64_encode(serialize($instarr))) : '') . '", plg_store="' . $SQL->escape($store) . '"',
 						'WHERE'		=> "plg_id=" . $plg_id);
 						$SQL->build($update_query);
 						$new_plg_id	= $plg_id;
@@ -631,7 +639,7 @@ function creat_plugin_xml($contents)
 								delete_cache('data_hooks');
 						}
 					
-					if(sizeof($plg_errors)<1) 
+					if(sizeof($plg_errors) < 1) 
 					{
 						//add cached instuctions to cache if there
 						if(sizeof($cached_instructions) > 0)
@@ -649,7 +657,7 @@ function creat_plugin_xml($contents)
 							fclose($filename);
 						}
 						
-						return $plg_new ? true : 'upd';
+						return $plg_new ? ($there_is_intruct ? 'inst:' . $new_plg_id : 'done') : 'upd';
 					}
 					else 
 					{

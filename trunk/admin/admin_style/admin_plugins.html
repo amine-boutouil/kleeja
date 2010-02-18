@@ -12,43 +12,55 @@
 <!-- border line Vertical  -->
 <p class="dot" />
 <!-- border line Vertical  -->
+<br />
+
+<strong>{lang.PLUGINS_EX}</strong>
+<br />
 
 <!-- start clear  -->
 <div class="clr"></div><br />
 <!-- end clear  -->
 
 <!-- start table no hover  -->
-<table class="tab-no-hover">
-<tr style="background-color:#EFE7B8">
-	<td>{lang.PLUGINS_EX}</td>
-	</tr>
+
 <IF NAME="no_plugins">
-	<td class="small_font"><br />{lang.NO_PLUGINS}<br /><br /></td>
+<div id="system-message">
+	<div class="info">
+		<ul>
+		<li><p>{lang.NO_PLUGINS}</p></li>
+		</ul>
+	</div>
+</div>
 <ELSE>
 	<LOOP NAME="arr">
+<table class="tab-no-hover" style="margin-bottom:10px;">
+	<tr style="background-color:#EFE7B8">
+		<td colspan="2"><span style="font-family: Georgia, Times, 'Times New Roman', serif;font-size:16px;font-weight: normal;">{{plg_name}} {{plg_ver}}</span></td>
+	</tr>
 	<tr>
-		<td>
-			[ 
+		<td style="width:80%">
+			{{plg_dsc}}
+			<br />
+			<em>{{plg_author}}</em>
+			<em></em>
+		</td>
+		<td style="width:20%;padding-(lang.DIR==ltr?left:right):10px;">
+			
 				<IF LOOP="plg_disabled">
 				<a href="{action}&amp;do_plg={{plg_id}}&amp;m=2" title="{lang.ENABLE}"><img src="{STYLE_PATH_ADMIN}images/control_play.png" alt="{lang.ENABLE}" /></a>
 				<ELSE>
 				<a href="{action}&amp;do_plg={{plg_id}}&amp;m=1&amp;pn={{plg_name}}" title="{lang.DISABLE}"><img src="{STYLE_PATH_ADMIN}images/control_pause.png" alt="{lang.DISABLE}" /></a>
 				</IF>
 				<a href="{action}&amp;do_plg={{plg_id}}&amp;m=3&amp;pn={{plg_name}}" title="{lang.DELETE}"><img src="{STYLE_PATH_ADMIN}images/del.png" alt="{lang.DELETE}" onclick="javascript:return confirm_from();" /></a>
-				<a href="{action}&amp;do_plg={{plg_id}}&amp;m=4" title="{lang.INFORMATION}"><img src="{STYLE_PATH_ADMIN}images/help.png" alt="{lang.INFORMATION}" /></a>
-			<a href="{action}&amp;do_plg={{plg_id}}&amp;m=5" title="{lang.EXPORT_AS_XML}"><img src="{STYLE_PATH_ADMIN}images/export.png" alt="{lang.EXPORT_AS_XML}" /></a>
-			] 
-			<strong>{{plg_name}} {{plg_ver}}</strong> 
+				<a href="{action}&amp;do_plg={{plg_id}}&amp;m=5" title="{lang.EXPORT_AS_XML}"><img src="{STYLE_PATH_ADMIN}images/export.png" alt="{lang.EXPORT_AS_XML}" /></a>
+				<IF LOOP="plg_instructions"><a href="{action}&amp;do_plg={{plg_id}}&amp;m=4" title="{lang.INFORMATION}"><img src="{STYLE_PATH_ADMIN}images/help.png" alt="{lang.INFORMATION}" /></a></IF>
 			
-			<br />
-			{{plg_dsc}}
-			<br />
-			<em>{{plg_author}}</em>
 		</td>
 	</tr>
+	</table>
 	</LOOP>
 </IF>
-</table>
+
 <!-- end table no hover  -->
 
 <!-- start clear  -->
@@ -80,13 +92,9 @@
 <table class="tab-no-hover">
 <tr style="background-color:#EFE7B8"><td>{lang.ADD_NEW_PLUGIN_EXP}</td></tr>
 <tr><td>
-<!-- start clear  -->
-<div class="clr"></div><br />
-<!-- end clear  -->
+
 <input name="imp_file" type="file" />
-<!-- start clear  -->
-<div class="clr"></div><br /><br />
-<!-- end clear  -->
+
 </td>
 </tr>
 </table>
@@ -126,6 +134,3 @@
 
 </div>
 <!-- end  add new plugins temlate  -->
-
-
-        

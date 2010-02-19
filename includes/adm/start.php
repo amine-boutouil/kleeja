@@ -160,7 +160,7 @@ if(file_exists($cached_file))
 }
 
 //if config not safe
-if(function_exists('fileperms') && !defined('KLEEJA_NO_CONFIG_CHECK'))
+if(function_exists('fileperms') && !defined('KLEEJA_NO_CONFIG_CHECK') && strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN')
 {
 	if((bool) (@fileperms(PATH . KLEEJA_CONFIG_FILE) & 0x0002))
 	{

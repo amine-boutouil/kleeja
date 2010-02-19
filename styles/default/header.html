@@ -64,10 +64,10 @@
 		<li><a href="{config.siteurl}" title="{lang.INDEX}" (go_current?:class="current")>{lang.INDEX}</a></li>
 		<li><a href="{_LINKS.rules}" title="{lang.RULES}" (go_current==rules?class="current":)>{lang.RULES}</a></li>
 		<li><a href="{_LINKS.guide}" title="{lang.GUIDE}" (go_current==guide?class="current":)>{lang.GUIDE}</a></li>
-		<li><a href="{_LINKS.call}" title="{lang.CALL}" (go_current==call?class="current":)>{lang.CALL}</a></li>
 		<IF NAME="config.allow_stat_pg">
 		<li><a href="{_LINKS.stats}" title="{lang.STATS}" (go_current==stats?class="current":)>{lang.STATS}</a></li>
 		</IF>
+		<li><a href="{_LINKS.call}" title="{lang.CALL}" (go_current==call?class="current":)>{lang.CALL}</a></li>
 	</ul>
 </div>
 <!--  # End  top menu -->
@@ -98,12 +98,12 @@
 			    <IF NAME="config.enable_userfile">
 				<li><a href="{_LINKS.fileuser}"><img src="{STYLE_PATH}images/user-folder.png" alt="{lang.YOUR_FILEUSER}" style="vertical-align:middle;" />{lang.YOUR_FILEUSER}</a></li>
 				</IF>
-			<li><a href="{_LINKS.filecp}"><img src="{STYLE_PATH}images/filecp.png" alt="{lang.FILECP}" style="vertical-align:middle;" />{lang.FILECP}</a></li>
-			<li><a href="{_LINKS.profile}"><img src="{STYLE_PATH}images/User.png" alt="{lang.PROFILE}" style="vertical-align:middle;" />{lang.PROFILE}</a></li>
-			<li><a href="{_LINKS.logout}"><img src="{STYLE_PATH}images/Go-Out.png" alt="{lang.LOGOUT}" style="vertical-align:middle;" />{lang.LOGOUT} [ {username} ]</a></li>
-				<ELSE>
-			<li><a href="{_LINKS.register}"><img src="{STYLE_PATH}images/User.png" alt="{lang.REGISTER}" style="vertical-align:middle;" />{lang.REGISTER}</a></li>
-			<li><a href="{_LINKS.login}"><img src="{STYLE_PATH}images/Go-Out.png" alt="{lang.LOGIN}" style="vertical-align:middle;" />{lang.LOGIN}</a></li>
+				<li><a href="{_LINKS.filecp}"><img src="{STYLE_PATH}images/filecp.png" alt="{lang.FILECP}" style="vertical-align:middle;" />{lang.FILECP}</a></li>
+				<li><a href="{_LINKS.profile}"><img src="{STYLE_PATH}images/User.png" alt="{lang.PROFILE}" style="vertical-align:middle;" />{lang.PROFILE}</a></li>
+				<li><a href="{_LINKS.logout}"><img src="{STYLE_PATH}images/Go-Out.png" alt="{lang.LOGOUT}" style="vertical-align:middle;" />{lang.LOGOUT} [ {username} ]</a></li>
+			<ELSE>
+				<li><a href="{_LINKS.login}"><img src="{STYLE_PATH}images/Go-Out.png" alt="{lang.LOGIN}" style="vertical-align:middle;" />{lang.LOGIN}</a></li>
+				<IF NAME="config.register><li><a href="{_LINKS.register}"><img src="{STYLE_PATH}images/User.png" alt="{lang.REGISTER}" style="vertical-align:middle;" />{lang.REGISTER}</a></li></IF>
 			</IF>
 			<li class="imgbottom">&nbsp;</li>
 		</ul>

@@ -132,9 +132,9 @@
 			<li><a href="{_LINKS.filecp}" title="{lang.FILECP}" (go_current==filecp?class="current":)><img src="{THIS_STYLE_PATH}images/filecp.png" alt="{lang.FILECP}" /></a></li>
 			<li><a href="{_LINKS.profile}" title="{lang.PROFILE}" (go_current==profile?class="current":)><img src="{THIS_STYLE_PATH}images/profile.png" alt="{lang.PROFILE}" /></a></li>
 			<li><a href="{_LINKS.logout}" title="{lang.LOGOUT}" (go_current==logout?class="current":)><img src="{THIS_STYLE_PATH}images/logout.png" alt="{lang.LOGOUT}" /></a></li>
-			<ELSE>
-			<li><a href="{_LINKS.register}" title="{lang.REGISTER}" (go_current==register?class="current":)><img src="{THIS_STYLE_PATH}images/register.png" alt="{lang.REGISTER}" /></a></li>
+		<ELSE>
 			<li><a href="{_LINKS.login}" title="{lang.LOGIN}" (go_current==login?class="current":)><img src="{THIS_STYLE_PATH}images/login.png" alt="{lang.LOGIN}" /></a></li>
+			<IF NAME="config.register><li><a href="{_LINKS.register}" title="{lang.REGISTER}" (go_current==register?class="current":)><img src="{THIS_STYLE_PATH}images/register.png" alt="{lang.REGISTER}" /></a></li></IF>
 		</IF>
 	</ul>
 </div>

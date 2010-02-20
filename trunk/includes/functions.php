@@ -462,6 +462,8 @@ function creat_plugin_xml($contents)
 						{
 							add_config($in['attributes']['name'], $in['attributes']['value'], $in['attributes']['order'], $in['value'], $in['attributes']['menu'], $new_plg_id);
 						}
+						
+						delete_cache('data_config');
 					}
 					
 					//cache important instruction

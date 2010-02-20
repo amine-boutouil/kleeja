@@ -1697,7 +1697,8 @@ function delete_olang ($words, $lang='en')
 function klj_clean_old_files($from = 0)
 {
 	global $config, $SQL, $stat_last_f_del, $dbprefix;
-
+	
+	($hook = kleeja_run_hook('klj_clean_old_files_func')) ? eval($hook) : null; //run hook
 
 	if((int) $config['del_f_day'] <= 0)
 	{

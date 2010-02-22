@@ -16,664 +16,135 @@ if (!defined('IN_COMMON'))
 }
 
 
-/*
-*to return file size in propriate format
-* parameters : size: file of size in bites
+/**
+* To return file size in propriate format
 */
 function Customfile_size($size)
 {
-	  $sizes = array(' B', ' KB', ' MB', ' GB', ' TB', 'PB', ' EB');
-	  $ext = $sizes[0];
-	  for ($i=1; (($i < count($sizes)) && ($size >= 1024)); $i++)
-	  {
-		   $size = $size / 1024;
-		   $ext  = $sizes[$i];
-	  }
-	  $result	=	 round($size, 2).$ext;
-	  ($hook = kleeja_run_hook('func_Customfile_size')) ? eval($hook) : null; //run hook
-	  return  $result;
+	$sizes = array(' B', ' KB', ' MB', ' GB', ' TB', 'PB', ' EB');
+	$ext = $sizes[0];
+	for ($i=1; (($i < count($sizes)) && ($size >= 1024)); $i++)
+	{
+		$size = $size / 1024;
+		$ext  = $sizes[$i];
+	}
+	$result	=	 round($size, 2).$ext;
+	($hook = kleeja_run_hook('func_Customfile_size')) ? eval($hook) : null; //run hook
+	return  $result;
 }
 
-/*
-*for recording who onlines now .. 
-*prameters : none
+/**
+* For recording who onlines now .. 
 */
 function KleejaOnline ()
 {
-		global $SQL, $usrcp, $dbprefix, $config, $klj_session;
+	global $SQL, $usrcp, $dbprefix, $config, $klj_session;
 		
-		// get information .. 
-		$ip				= get_ip();
-		$agent			= $SQL->escape($_SERVER['HTTP_USER_AGENT']);
-		$timeout		= 600; //seconds //10 min
-		$time			= time();  
-		$timeout2		= $time-$timeout;  
-		$username		= ($usrcp->name()) ? $usrcp->name(): '-1';
-		$session		= $klj_session;
+	// get information .. 
+	$ip				= get_ip();
+	$agent			= $SQL->escape($_SERVER['HTTP_USER_AGENT']);
+	$timeout		= 600; //seconds //10 min
+	$time			= time();  
+	$timeout2		= $time-$timeout;  
+	$username		= ($usrcp->name()) ? $usrcp->name(): '-1';
+	$session		= $klj_session;
 		
-		//
-		//for stats 
-		//
-		if (strstr($agent, 'Google'))
-		{
-				$update_query = array(
-									'UPDATE'	=> "{$dbprefix}stats",
-									'SET'		=> "last_google='$time', google_num=google_num+1"
-									);
-				($hook = kleeja_run_hook('qr_update_google_lst_num')) ? eval($hook) : null; //run hook
-				$SQL->build($update_query);
-
-		}
-		elseif (strstr($agent, 'Yahoo'))
-		{
-				$update_query = array(
-									'UPDATE'	=> "{$dbprefix}stats",
-									'SET'		=> "last_yahoo='$time', yahoo_num=yahoo_num+1"
-									);
-				($hook = kleeja_run_hook('qr_update_yahoo_lst_num')) ? eval($hook) : null; //run hook	
-				$SQL->build($update_query);
-		}
-		
-		//put another bots as a hook if you want !
-		($hook = kleeja_run_hook('anotherbots_onlline_func')) ? eval($hook) : null; //run hook
-		
-		//---
-		if(!empty($ip) && !empty($agent) && !empty($session))
-		{
-			$rep_query = array(
-								'REPLACE'	=> 'ip, username, agent, time, session',
-								'INTO'		=> "{$dbprefix}online",
-								'VALUES'	=> "'$ip','$username','$agent','$time','$session'",
-								'UNIQUE'	=>  "session='$session'"
+	//
+	//for stats 
+	//
+	if (strstr($agent, 'Google'))
+	{
+		$update_query = array(
+								'UPDATE'	=> "{$dbprefix}stats",
+								'SET'		=> "last_google='$time', google_num=google_num+1"
 							);
-			($hook = kleeja_run_hook('qr_rep_ifnot_onlline_func')) ? eval($hook) : null; //run hook
-			$SQL->build($rep_query);
-		}
+		($hook = kleeja_run_hook('qr_update_google_lst_num')) ? eval($hook) : null; //run hook
+		$SQL->build($update_query);
+	}
+	elseif (strstr($agent, 'Yahoo'))
+	{
+		$update_query = array(
+								'UPDATE'	=> "{$dbprefix}stats",
+								'SET'		=> "last_yahoo='$time', yahoo_num=yahoo_num+1"
+							);
+		($hook = kleeja_run_hook('qr_update_yahoo_lst_num')) ? eval($hook) : null; //run hook	
+		$SQL->build($update_query);
+	}
+		
+	//put another bots as a hook if you want !
+	($hook = kleeja_run_hook('anotherbots_onlline_func')) ? eval($hook) : null; //run hook
+		
+	//---
+	if(!empty($ip) && !empty($agent) && !empty($session))
+	{
+		$rep_query = array(
+							'REPLACE'	=> 'ip, username, agent, time, session',
+							'INTO'		=> "{$dbprefix}online",
+							'VALUES'	=> "'$ip','$username','$agent','$time','$session'",
+							'UNIQUE'	=>  "session='$session'"
+						);
+		($hook = kleeja_run_hook('qr_rep_ifnot_onlline_func')) ? eval($hook) : null; //run hook
+		$SQL->build($rep_query);
+	}
 
-		//clean online table
-		if((time() - $config['last_online_time_update']) >= 3600)
-		{
-			$query_del = array(
+	//clean online table
+	if((time() - $config['last_online_time_update']) >= 3600)
+	{
+		$query_del = array(
 							'DELETE'	=> "{$dbprefix}online",
 							'WHERE'		=> "time < '$timeout2'"
 						);
-			($hook = kleeja_run_hook('qr_del_ifgo_onlline_func')) ? eval($hook) : null; //run hook									
-			$SQL->build($query_del);
-			
-			//update last_online_time_update 
-			update_config('last_online_time_update', time());
-		}
-		
-		($hook = kleeja_run_hook('KleejaOnline_func')) ? eval($hook) : null; //run hook	
+		($hook = kleeja_run_hook('qr_del_ifgo_onlline_func')) ? eval($hook) : null; //run hook									
+		$SQL->build($query_del);
 
-}#End function
+		//update last_online_time_update 
+		update_config('last_online_time_update', time());
+	}
+		
+	($hook = kleeja_run_hook('KleejaOnline_func')) ? eval($hook) : null; //run hook	
+}
 	
 
-/*
-*for ban ips .. 
-*parameters : none
+/**
+* For ban ips .. 
 */
 function get_ban ()
 {
-		global $banss, $lang, $tpl, $text;
+	global $banss, $lang, $tpl, $text;
 	
-		//visitor ip now 
-		$ip	= get_ip();
+	//visitor ip now 
+	$ip	= get_ip();
 
-		
-		//now .. loop for banned ips 
-		if (is_array($banss) && !empty($ip))
+	//now .. loop for banned ips 
+	if (is_array($banss) && !empty($ip))
+	{
+		foreach ($banss as $ip2)
 		{
-			foreach ($banss as $ip2)
+			$ip2 = trim($ip2);
+				
+			if(empty($ip2))
 			{
-				$ip2 = trim($ip2);
+				continue;
+			}
 				
-				if(empty($ip2))
-				{
-					continue;
-				}
-				
-				//first .. replace all * with something good .
-				$replace_it = str_replace("*", '([0-9]{1,3})', $ip2);
-				$replace_it = str_replace(".", '\.', $replace_it);
+			//first .. replace all * with something good .
+			$replace_it = str_replace("*", '([0-9]{1,3})', $ip2);
+			$replace_it = str_replace(".", '\.', $replace_it);
 			
-				if ($ip == $ip2 || @preg_match('/' . preg_quote($replace_it, '/') . '/i', $ip))
-				{
-					($hook = kleeja_run_hook('banned_get_ban_func')) ? eval($hook) : null; //run hook	
-					kleeja_info($lang['U_R_BANNED'], $lang['U_R_BANNED']);
-				}
+			if ($ip == $ip2 || @preg_match('/' . preg_quote($replace_it, '/') . '/i', $ip))
+			{
+				($hook = kleeja_run_hook('banned_get_ban_func')) ? eval($hook) : null; //run hook	
+				kleeja_info($lang['U_R_BANNED'], $lang['U_R_BANNED']);
 			}
-		}#empty	
-		
-		($hook = kleeja_run_hook('get_ban_func')) ? eval($hook) : null; //run hook	
+		}
+	}
+
+	($hook = kleeja_run_hook('get_ban_func')) ? eval($hook) : null; //run hook	
 }
 
 
-
-/*convert xml codes to array  
-* parameters : raw_xml : xml codes
-*codes from mybb
-*/ 
-function xml_to_array($raw_xml) 
-{
-		$parser = xml_parser_create();
-		xml_parser_set_option($parser, XML_OPTION_SKIP_WHITE, 0);
-		xml_parser_set_option($parser, XML_OPTION_CASE_FOLDING, 0);
-		if(xml_parse_into_struct($parser, $raw_xml, $vals, $index) === 0)
-		{
-			return false;
-		}
-		$i = -1;
-		return xml_get_children($vals, $i);
-}
-
-/*
- * xml_build_tag
-* parameters : thisvals, vals, i, type
-*codes from mybb
-*/
-function xml_build_tag($thisvals, $vals, &$i, $type)
-{
-		$tag['tag'] = $thisvals['tag'];
-		if(isset($thisvals['attributes']))
-		{
-			$tag['attributes'] = $thisvals['attributes'];
-		}
-
-		if($type == "complete")
-		{
-			$tag['value'] = $thisvals['value'];
-		}
-		else
-		{
-			$tag = array_merge($tag, xml_get_children($vals, $i));
-		}
-		return $tag;
-}
-	
-/*
-*xml_get_children
-*parameters: vals, i
-*/
-function xml_get_children($vals, &$i)
-{
-		$collapse_dups = 1;
-		$index_numeric = 0;
-		$children = array();
-
-		if($i > -1 && isset($vals[$i]['value']))
-		{
-			$children['value'] = $vals[$i]['value'];
-		}
-
-		while(++$i < count($vals))
-		{
-			$type = $vals[$i]['type'];
-			if($type == "cdata")
-			{
-				$children['value'] .= $vals[$i]['value'];
-			}
-			elseif($type == "complete" || $type == "open")
-			{
-				$tag = xml_build_tag($vals[$i], $vals, $i, $type);
-				if($index_numeric)
-				{
-					$tag['tag']	= $vals[$i]['tag'];
-					$children[]	= $tag;
-				}
-				else
-				{
-					$children[$tag['tag']][]	= $tag;
-				}
-			}
-			elseif($type == "close")
-			{
-				break;
-			}
-		}
-		if($collapse_dups)
-		{
-			foreach($children as $key => $value)
-			{
-				if(is_array($value) && (count($value) == 1))
-				{
-					$children[$key]	= $value[0];
-				}
-			}
-		}
-		return $children;
-}
-
-
-
-/*
-* insert a new plugin from xml file
-* parameters : contents : xml contents of plugin
-*/
-function creat_plugin_xml($contents) 
-{
-	global $dbprefix, $SQL, $lang, $config, $STYLE_PATH_ADMIN , $STYLE_PATH, $THIS_STYLE_PATH, $olang;
-
-				$gtree = xml_to_array($contents);
-				
-				$tree				= empty($gtree['kleeja']) ? null : $gtree['kleeja'];
-				$plg_info			= empty($tree['info']) ? null : $tree['info'];
-				$plg_install		= empty($tree['install']) ? null : $tree['install'];
-				$plg_uninstall		= empty($tree['uninstall']) ? null : $tree['uninstall'];
-				$plg_tpl			= empty($tree['templates']) ? null : $tree['templates'];		
-				$plg_hooks			= empty($tree['hooks']) ? null : $tree['hooks'];		
-				$plg_langs			= empty($tree['langs']) ? null : $tree['langs'];
-				$plg_updates		= empty($tree['updates']) ? null : $tree['updates'];
-				$plg_instructions 	= empty($tree['instructions']) ? null : $tree['instructions'];
-				$plg_phrases		= empty($tree['phrases']) ? null : $tree['phrases'];
-				$plg_options		= empty($tree['options']) ? null : $tree['options'];
-
-				//important tags not exists 
-				if(empty($plg_info))
-				{
-					big_error('Error',$lang['ERR_XML_NO_G_TAGS']);
-				}
-
-				if(!empty($plg_info['plugin_kleeja_version']['value']) && version_compare(strtolower($plg_info['plugin_kleeja_version']['value']), strtolower(KLEEJA_VERSION), '>=') == false)
-				{
-					big_error('Error', $lang['PLUGIN_N_CMPT_KLJ']);
-				}
-
-					$plg_errors	=	array();
-					$plg_new = true;
-					
-					$plugin_name = preg_replace("/[^a-z0-9-_]/", "-", strtolower($plg_info['plugin_name']['value']));
-					
-					//is this plugin exists before ! 
-					$is_query = array(
-										'SELECT'	=> 'plg_id, plg_name, plg_ver',
-										'FROM'		=> "{$dbprefix}plugins",
-										'WHERE'		=> 'plg_name="' . $plugin_name . '"' 
-										);
-					($hook = kleeja_run_hook('qr_chk_plginfo_crtplgxml_func')) ? eval($hook) : null; //run hook
-					$res = $SQL->build($is_query);
-					if($SQL->num_rows($res))
-					{
-						//omg, it's not new one ! 
-						//let's see if it same version
-						$plg_new = false;
-						$cur_ver = $SQL->fetch_array($res);
-						$plg_id = $cur_ver['plg_id'];
-						$cur_ver = $cur_ver['plg_ver'];
-						$new_ver = $SQL->escape($plg_info['plugin_version']['value']);
-						if (version_compare(strtolower($cur_ver), strtolower($new_ver), '>='))
-						{
-							return 'xyz';
-						}
-						else if (!empty($plg_updates))
-						{	
-							if(is_array($plg_updates['update']))
-							{
-								if(array_key_exists("attributes", $plg_updates['update']))
-								{
-										$plg_updates['update'] = array($plg_updates['update']);
-								}
-							}
-								
-							foreach($plg_updates['update'] as $up)
-							{
-								if (version_compare(strtolower($cur_ver), strtolower($up['attributes']['to']), '<'))
-								{
-									eval($up['value']);
-								}
-							}
-						}
-					}
-
-					if(isset($plg_instructions))
-					{
-						if(is_array($plg_instructions['instruction']))
-						{
-							if(array_key_exists("attributes", $plg_instructions['instruction']))
-							{
-									$plg_instructions['instruction'] = array($plg_instructions['instruction']);
-							}
-						}
-						
-						$instarr = array();		
-						foreach($plg_instructions['instruction'] as $in)
-						{
-							if(empty($in['attributes']['lang']) || !isset($in['attributes']['lang']))
-							{
-								big_error('Error',$lang['ERR_XML_NO_G_TAGS']);
-							}
-							
-							$instarr[$in['attributes']['lang']] = $in['value'];
-						}
-					}
-					
-					//if there is instructions
-					$there_is_intruct = false;
-					if(isset($instarr) && !empty($instarr))
-					{
-						$there_is_intruct = true;
-					}
-					
-					
-					//store important tags (for now only "install" and "templates" tags)
-					$store = '';
-					
-					//storing unreached elements
-					if (isset($plg_install) && trim($plg_install['value']) != '')
-					{
-						$store .= '<install><![CDATA[' . $plg_install['value'] . ']]></install>' . "\n\n";
-					}
-					
-					if (isset($plg_updates))
-					{
-						$updates 	 =  explode("<updates>", $contents);
-						$updates 	 =  explode("</updates>", $updates[1]);
-						$store 		.= '<updates>' . $updates[0] . '</updates>' . "\n\n";
-					}
-
-					if (isset($plg_tpl))
-					{
-						$templates 	 =  explode("<templates>", $contents);
-						$templates 	 =  explode("</templates>", $templates[1]);
-						$store 		.= '<templates>' . $templates[0] . '</templates>' . "\n\n";
-					}
-
-					//if the plugin was new 
-					if($plg_new)
-					{
-						//insert in plugin table 
-						$insert_query = array(
-						'INSERT'	=> 'plg_name, plg_ver, plg_author, plg_dsc, plg_uninstall, plg_instructions, plg_store',
-						'INTO'		=> "{$dbprefix}plugins",
-						'VALUES'	=> "'" . $SQL->escape($plugin_name) . "','" . $SQL->escape($plg_info['plugin_version']['value']) . "','" . $SQL->escape($plg_info['plugin_author']['value']) . "','" . $SQL->escape($plg_info['plugin_description']['value']) . "','" . $SQL->real_escape($plg_uninstall['value']) . "','" . ((isset($instarr) && !empty($instarr)) ? $SQL->escape(kleeja_base64_encode(serialize($instarr))) : '') . "','" .  $SQL->real_escape($store) . "'");
-						($hook = kleeja_run_hook('qr_insert_plugininfo_crtplgxml_func')) ? eval($hook) : null; //run hook
-						$SQL->build($insert_query);
-			
-						$new_plg_id	=	$SQL->insert_id();
-					}
-					else //if it was just update proccess
-					{
-						$update_query = array(
-						'UPDATE'	=> "{$dbprefix}plugins",
-						'SET'		=> 'plg_ver="' . $new_ver . '", plg_author="' . $SQL->escape($plg_info['plugin_author']['value']) . '", plg_dsc="' . $SQL->escape($plg_info['plugin_description']['value']) . '", plg_uninstall="' . $SQL->real_escape($plg_uninstall['value']) . '", plg_instructions="' . ($there_is_intruct ? $SQL->escape(kleeja_base64_encode(serialize($instarr))) : '') . '", plg_store="' . $SQL->escape($store) . '"',
-						'WHERE'		=> "plg_id=" . $plg_id);
-						$SQL->build($update_query);
-						$new_plg_id	= $plg_id;
-					}
-					
-					//eval install code
-					if (isset($plg_install) && trim($plg_install['value']) != '' && $plg_new)
-					{
-						eval($plg_install['value']);
-					}
-					
-					
-					if(isset($plg_phrases))
-					{
-						if(is_array($plg_phrases['lang']))
-						{
-							if(array_key_exists("attributes", $plg_phrases['lang']))
-							{
-									$plg_phrases['lang'] = array($plg_phrases['lang']);
-							}
-						}
-						
-						$phrases = array();		
-						foreach($plg_phrases['lang'] as $in)
-						{
-							if(empty($in['attributes']['name']) || !isset($in['attributes']['name']))
-							{
-								big_error('Error',$lang['ERR_XML_NO_G_TAGS']);
-							}
-							
-							//first we create a new array that can carry language phrases
-							$phrases[$in['attributes']['name']] = array();
-							
-							if(is_array($in['phrase']))
-							{
-								if(array_key_exists("attributes", $in['phrase']))
-								{
-									$in['phrase'] = array($in['phrase']);
-								}
-							}
-				
-							//get phrases value
-							foreach($in['phrase'] as $phrase)
-							{
-								$phrases[$in['attributes']['name']][$phrase['attributes']['name']] = $phrase['value'];
-							}
-
-							//finally we store it in the database
-							add_olang($phrases[$in['attributes']['name']], $in['attributes']['name'], $new_plg_id);
-						}
-					}
-					
-					if(isset($plg_options))
-					{
-						if(is_array($plg_options['option']))
-						{
-							if(array_key_exists("attributes", $plg_options['option']))
-							{
-								$plg_options['option'] = array($plg_options['option']);
-							}
-						}
-							
-						foreach($plg_options['option'] as $in)
-						{
-							add_config($in['attributes']['name'], $in['attributes']['value'], $in['attributes']['order'], $in['value'], $in['attributes']['menu'], $new_plg_id);
-						}
-						
-						delete_cache('data_config');
-					}
-					
-					//cache important instruction
-					$cached_instructions = array();
-					
-					//some actions with tpls
-					if(isset($plg_tpl))
-					{
-						//edit template
-						if(isset($plg_tpl['edit']))
-						{
-							include_once "s_strings.php";
-							$finder	= new sa_srch;
-							
-							if(is_array($plg_tpl['edit']['template']))
-							{
-								if(array_key_exists("attributes", $plg_tpl['edit']['template']))
-								{
-									$plg_tpl['edit']['template'] = array($plg_tpl['edit']['template']);
-								}
-							}		
-							
-							foreach($plg_tpl['edit']['template'] as $temp)
-							{
-									$template_name			= $SQL->real_escape($temp['attributes']['name']);
-									$finder->find_word		= $temp['find']['value'];
-									$finder->another_word	= $temp['action']['value'];
-									switch($temp['action']['attributes']['type']):
-										case 'add_after': $action_type =3; break;
-										case 'add_after_same_line': $action_type =4; break;
-										case 'add_before': $action_type =5; break;
-										case 'add_before_same_line': $action_type =6; break;
-										case 'replace_with': $action_type =1; break;
-									endswitch;
-									
-									$style_path = (substr($template_name, 0, 6) == 'admin_') ? $STYLE_PATH_ADMIN : $THIS_STYLE_PATH;
-									
-									//if template not found and default style is there and not admin tpl
-									$template_path = $style_path . $template_name . '.html';
-									if(!file_exists($template_path)) 
-									{
-										if(trim($config['style_depend_on']) != '')
-										{
-											$depend_on = $config['style_depend_on'];
-											$template_path_alternative = str_replace('/' . $config['style'] . '/', '/' . trim($depend_on) . '/', $template_path);
-											if(file_exists($template_path_alternative))
-											{
-												$template_path = $template_path_alternative;
-											}
-										}
-										else if($config['style'] != 'default' && !$is_admin_template)
-										{
-											$template_path_alternative = str_replace('/' . $config['style'] . '/', '/default/', $template_path);
-											if(file_exists($template_path_alternative))
-											{
-												$template_path = $template_path_alternative;
-											}
-										}
-									}
-									
-									if(file_exists($template_path))
-										$d_contents = file_get_contents($template_path);
-									else
-										$d_contents = '';
-									
-									$finder->text = trim($d_contents);
-									$finder->do_search($action_type);
-									
-									if($d_contents  != '' && $finder->text != $d_contents && is_writable($style_path))
-									{
-										//update
-										$filename = @fopen($style_path . $template_name . '.html', 'w');
-										fwrite($filename, $finder->text);
-										fclose($filename);
-															
-										($hook = kleeja_run_hook('op_update_tplcntedit_crtplgxml_func')) ? eval($hook) : null; //run hook
-	
-										//delete cache ..
-										delete_cache('tpl_' .$template_name);
-									}
-									else
-									{
-										$cached_instructions[$template_name] = array(
-																		'action'		=> $temp['action']['attributes']['type'], 
-																		'find'			=> $temp['find']['value'],
-																		'action_text'	=> $temp['action']['value'],
-																		);
-										
-									}
-								}
-						}#end edit
-							
-							//new templates 
-							if(isset($plg_tpl['new']))
-							{
-								
-								if(is_array($plg_tpl['new']['template']))
-								{
-									if(array_key_exists("attributes",$plg_tpl['new']['template']))
-									{
-										$plg_tpl['new']['template'] = array($plg_tpl['new']['template']);
-									}
-								}		
-							
-								foreach($plg_tpl['new']['template'] as $temp)
-								{
-									$style_path = (substr($template_name, 0, 6) == 'admin_') ? $STYLE_PATH_ADMIN : $THIS_STYLE_PATH;
-									$template_name		= $temp['attributes']['name'];
-									$template_content	= trim($temp['value']);
-									
-									if(is_writable($style_path))
-									{
-										$filename = @fopen($style_path . $template_name . '.html', 'w');
-										fwrite($filename, $template_content);
-										fclose($filename);
-									}
-									else
-									{
-										$cached_instructions[$template_name] = array(
-																		'action'		=> 'new', 
-																		'find'			=> '',
-																		'action_text'	=> $template_content,
-																		);
-									}
-									
-									($hook = kleeja_run_hook('op_insert_newtpls_crtplgxml_func')) ? eval($hook) : null; //run hook
-									
-								}
-							
-							} #end new
-					}#ens tpl
-						
-						//hooks
-						if(isset($plg_hooks['hook']))
-						{
-							$plugin_author = strip_tags($plg_info['plugin_author']['value'], '<a><span>');
-							$plugin_author = $SQL->real_escape($plugin_author);
-							
-							//if the plugin is not new then replace the old hooks with the new hooks
-							if(!$plg_new)
-							{
-								//delete old hooks !
-								$query_del = array(
-											'DELETE'	=> "{$dbprefix}hooks",
-											'WHERE'		=> "plg_id=" . $plg_id
-											);		
-											
-								$SQL->build($query_del);
-							
-							}
-							
-							//then
-								if(is_array($plg_hooks['hook']))
-								{
-									if(array_key_exists("attributes",$plg_hooks['hook']))
-									{
-										$plg_hooks['hook'] = array($plg_hooks['hook']);
-									}
-								}
-								foreach($plg_hooks['hook'] as $hk)
-								{
-
-									$hook_for =	$SQL->real_escape($hk['attributes']['name']);
-									$hk_value =	$SQL->real_escape($hk['value']);
-
-									$insert_query = array(
-														'INSERT'	=> 'plg_id, hook_name, hook_content',
-														'INTO'		=> "{$dbprefix}hooks",
-														'VALUES'	=> "'" . $new_plg_id . "','" . $hook_for . "', '" . $hk_value . "'"
-														);
-									($hook = kleeja_run_hook('qr_insert_hooks_crtplgxml_func')) ? eval($hook) : null; //run hook
-									$SQL->build($insert_query);		
-								}
-								//delete cache ..
-								delete_cache('data_hooks');
-						}
-					
-					if(sizeof($plg_errors) < 1) 
-					{
-						//add cached instuctions to cache if there
-						if(sizeof($cached_instructions) > 0)
-						{
-							//fix
-							if(file_exists(PATH . 'cache/styles_cached.php'))
-							{
-								$cached_content = file_get_contents(PATH . 'cache/styles_cached.php');
-								$cached_content = kleeja_base64_decode($cached_content);
-								$cached_content = unserialize($cached_content);
-								$cached_instructions += $cached_content;
-							}
-							$filename = @fopen(PATH . 'cache/styles_cached.php' , 'w');
-							fwrite($filename, kleeja_base64_encode(serialize($cached_instructions)));
-							fclose($filename);
-						}
-						
-						return $plg_new ? ($there_is_intruct ? 'inst:' . $new_plg_id : 'done') : 'upd';
-					}
-					else 
-					{
-						return $plg_errors;
-					}
-				
-					
-				($hook = kleeja_run_hook('creat_plugin_xml_func')) ? eval($hook) : null; //run hook
-				return false;
-}	  
-	    
-/*
-*run hooks of kleeja
-* parameter : hook_name: name of hook or place that will run at.
+/**
+* Run hooks of kleeja
 */
 function kleeja_run_hook ($hook_name)
 {
@@ -686,9 +157,8 @@ function kleeja_run_hook ($hook_name)
 	return implode("\n", $all_plg_hooks[$hook_name]);
 }
 
-/*
-* return current page 
-* parameters : none
+/**
+* Return current page url
 */
 function kleeja_get_page ()
 {
@@ -734,15 +204,13 @@ function kleeja_get_page ()
 	return str_replace(array('&amp;'), array('&'), htmlspecialchars($location));
 }
 
-/*
+/**
 * send email
 */
-
 function _sm_mk_utf8($text)
 {
-	 return "=?UTF-8?B?" . kleeja_base64_encode($text) . "?=";
+	return "=?UTF-8?B?" . kleeja_base64_encode($text) . "?=";
 }
-
 
 function send_mail($to, $body, $subject, $fromaddress, $fromname,$bcc='')
 {
@@ -765,22 +233,18 @@ function send_mail($to, $body, $subject, $fromaddress, $fromname,$bcc='')
 	$headers .= 'X-MSMail-Priority: Normal' . $eol;
 	$headers .= 'X-Mailer: : PHP v' . phpversion() . $eol;
 	$headers .= 'X-MimeOLE: kleeja' . $eol;
-		
-		
+
 	($hook = kleeja_run_hook('kleeja_send_mail')) ? eval($hook) : null; //run hook
-		
+
 	$mail_sent = @mail($to, _sm_mk_utf8($subject), preg_replace("#(?<!\r)\n#s", "\n", $body), $headers);
-  
+
 	return $mail_sent;
 }
 
 
-/*
-* get remote files
+/**
+* Get remote files
 * (c) punbb
-* parameters : 
-	url : link of file
-	save_in : folder
 */
 function fetch_remote_file($url, $save_in = false, $timeout = 20, $head_only = false, $max_redirects = 10)
 {
@@ -984,58 +448,58 @@ function fetch_remote_file($url, $save_in = false, $timeout = 20, $head_only = f
 }
 
 
-
+/**
+* Get the mime groups or one of them
+*/
 function kleeja_mime_groups($return_one = false)
 {
 	global $lang;
-	
-		$s = array(
-					0 => array('name' => ''),
-					1 => array('name' => $lang['N_IMGS']),
-					2 => array('name' => $lang['N_ZIPS']),
-					3 => array('name' => $lang['N_TXTS']),
-					4 => array('name' => $lang['N_DOCS']),
-					5 => array('name' => $lang['N_RM']),
-					6 => array('name' => $lang['N_WM']),
-					7 => array('name' => $lang['N_SWF']),
-					8 => array('name' => $lang['N_QT']),
-					9 => array('name' => $lang['N_OTHERFILE']),
-			);
-		
-		($hook = kleeja_run_hook('kleeja_mime_groups_func')) ? eval($hook) : null; //run hook
-		
-		return ($return_one != false ? $s[$return_one] : $s);
+
+	$s = array(
+				0 => array('name' => ''),
+				1 => array('name' => $lang['N_IMGS']),
+				2 => array('name' => $lang['N_ZIPS']),
+				3 => array('name' => $lang['N_TXTS']),
+				4 => array('name' => $lang['N_DOCS']),
+				5 => array('name' => $lang['N_RM']),
+				6 => array('name' => $lang['N_WM']),
+				7 => array('name' => $lang['N_SWF']),
+				8 => array('name' => $lang['N_QT']),
+				9 => array('name' => $lang['N_OTHERFILE']),
+	);
+
+	($hook = kleeja_run_hook('kleeja_mime_groups_func')) ? eval($hook) : null; //run hook
+
+	return ($return_one != false ? $s[$return_one] : $s);
 }
 
-/*
-*admin function for extensions types
-*parameters : $name_of_select, $g_id, $return_name
+/**
+* Admin. function for extensions types
 */
 function ch_g ($name_of_select, $g_id, $return_name = false)
 {
-		global $lang;
+	global $lang;
+
+	$s = kleeja_mime_groups(($return_name ?  $g_id : false));
 		
+	//return name if he want
+	if($return_name != false) 
+	{
+		return $s['name'];
+	}
 		
-		$s = kleeja_mime_groups(($return_name ?  $g_id : false));
+	$show = "<select name=\"{$name_of_select}\">\n";
 		
-		//return name if he want
-		if($return_name != false) 
-		{
-			return $s['name'];
-		}
+	for($i=1; $i< sizeof($s); $i++)
+	{
+		$selected = ($g_id == $i)? "selected=\"selected\"" : "";
+		$show .= "<option $selected value=\"$i\">" . $s[$i]['name'] . "</option>\n";
+	}
 		
-		$show = "<select name=\"{$name_of_select}\">\n";
+	$show .="</select>";
 		
-		for($i=1; $i< sizeof($s); $i++)
-		{
-			$selected = ($g_id == $i)? "selected=\"selected\"" : "";
-			$show .= "<option $selected value=\"$i\">" . $s[$i]['name'] . "</option>\n";
-		}
-		
-		$show .="</select>";
-		
-		($hook = kleeja_run_hook('ch_g_func')) ? eval($hook) : null; //run hook
-		return $show;
+	($hook = kleeja_run_hook('ch_g_func')) ? eval($hook) : null; //run hook
+	return $show;
 }  
 
 //1rc6+ for check file mime
@@ -1100,7 +564,9 @@ function kleeja_check_mime ($mime, $group_id, $file_path)
 	return $return;
 }
 
-//delete cache
+/**
+* Delete cache
+*/
 function delete_cache($name, $all=false)
 {
 	($hook = kleeja_run_hook('delete_cache_func')) ? eval($hook) : null; //run hook
@@ -1134,10 +600,10 @@ function delete_cache($name, $all=false)
 	return $del;
 }
 
-//
-//try delete files or at least change its name.
-//for those who have dirty hosting 
-//
+/**
+* Try delete files or at least change its name.
+* for those who have dirty hosting 
+*/
 function kleeja_unlink($filepath, $cache_file = false)
 {
 	//99.9% who use this
@@ -1171,8 +637,10 @@ function kleeja_unlink($filepath, $cache_file = false)
 
 }
 
-
-//1rc6+ get mime header
+/**
+* Get mime header
+* 1rc6+ 
+*/
 function get_mime_for_header($ext)
 {
 	$mime_types = array(
@@ -1395,9 +863,9 @@ function get_mime_for_header($ext)
 }
 
 
-//
-//include lang
-//
+/**
+* Include language file
+*/
 function get_lang($name, $folder = '')
 {
 	global $config, $lang;
@@ -1425,16 +893,17 @@ function get_lang($name, $folder = '')
 	return true;
 }
 
-//
-//delete any content from any template , this will used in plugins
-//
+/**
+* delete any content from any template , this will used in plugins
+* used in unistall tag at plugin xml file
+*/
 function delete_ch_tpl($template_name, $delete_txt = array())
 {
 	global $dbprefix, $lang, $config, $STYLE_PATH_ADMIN , $STYLE_PATH, $THIS_STYLE_PATH;
 	
 	$style_path = (substr($template_name, 0, 6) == 'admin_') ? $STYLE_PATH_ADMIN : $THIS_STYLE_PATH;
 	$is_admin_template = (substr($template_name, 0, 6) == 'admin_') ? true : false;
-									
+
 	//if template not found and default style is there and not admin tpl
 	$template_path = $style_path . $template_name . '.html';
 	if(!file_exists($template_path)) 
@@ -1595,7 +1064,6 @@ function update_config($name, $value, $escape = true)
 	}
 
 	return false;
-	
 }
 
 /*
@@ -1835,8 +1303,8 @@ function klj_clean_old_files($from = 0)
 
 }
 
-/*
-*	 get_ip() for the user
+/**
+* get_ip() for the user
 */
 function get_ip()
 {
@@ -1993,4 +1461,3 @@ function set_modified_headers($stamp, $not_ie6_and_not_ie8)
 	return false;
 }
 
-#<-- EOF

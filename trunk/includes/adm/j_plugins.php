@@ -15,6 +15,10 @@ if (!defined('IN_ADMIN'))
 }
 
 
+include PATH . 'includes/plugins.php';
+$plg = new kplugins;
+
+
 //for style ..
 $stylee		= "admin_plugins";
 $action		= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php');
@@ -66,7 +70,19 @@ else
 	$no_plugins	=	true;
 }
 
+
 $SQL->freeresult($result);
+
+//check methods of files handler, if there is no any one , so 
+//we have disable uploading
+
+$there_is_files_method = false;
+if($plg->f_method != '')
+{
+	$there_is_files_method = $plg->f_method;
+}
+
+
 
 //after submit 
 if (isset($_GET['do_plg']))
@@ -379,7 +395,25 @@ if(isset($_POST['submit_new_plg']))
 
 	if(empty($text))
 	{
-		$return = creat_plugin_xml($contents);
+		if(isset($_POST['is_ftp']))
+		{
+			if(empty($_POST['ftp_host']) || empty($_POST['ftp_port']) || empty($_POST['ftp_user']) ||empty($_POST['ftp_pass']))
+			{
+				kleeja_admin_err($lang['EMPTY_FIELDS'], true,'', true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'));
+			}
+			else
+			{
+				$plg->info = array('host'=>$_POST['ftp_host'], 'port'=>$_POST['ftp_port'], 'user'=>$_POST['ftp_user'], 'pass'=>$_POST['ftp_pass']);
+				if(!$plg->check_connect())
+				{
+					kleeja_admin_err($lang['LOGIN_ERROR'], true,'', true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'));
+				}
+			}
+		}
+
+		$return = $plg->add_plugin($contents);
+
+		$plg->atend();
 		
 		switch($return)
 		{

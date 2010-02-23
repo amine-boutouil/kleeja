@@ -94,32 +94,35 @@
 <IF NAME="there_is_files_method">
 <tr><td>
 
-<input name="imp_file" type="file" />
+<input name="imp_file" type="file" onchange="this.value != '' ? $('#ftp_info_div').show() : null;" />
 
 </td></tr>
 	<IF NAME="there_is_files_method != kfile">
 	<tr><td>
-	uploading plugin require ftp information : 
+	<div id="ftp_info_div" style="display:none">
+	<br />
+	<h3>{lang.PLUGIN_FTP_EXP} :</h3>
 	<br />
 		<table style="width:100%">
 			<tr>
-				<td><label for="ftp_host">ftp host</label></td>
+				<td><label for="ftp_host">{lang.PLUGIN_FTP_HOST}</label></td>
 				<td><input type="text" name="ftp_host" id="ftp_host" /></td>
 			</tr>
 			<tr>
-				<td><label for="ftp_user">ftp user</label></td>
+				<td><label for="ftp_user">{lang.PLUGIN_FTP_USER}</label></td>
 				<td><input type="text" name="ftp_user" id="ftp_user" /></td>
 			</tr>
 			<tr>
-				<td><label for="ftp_pass">ftp password</label></td>
+				<td><label for="ftp_pass">{lang.PLUGIN_FTP_PASS}</label></td>
 				<td><input type="text" name="ftp_pass" id="ftp_pass" /></td>
 			</tr>
 			<tr>
-				<td><label for="ftp_port">ftp port</label></td>
+				<td><label for="ftp_port">{lang.PLUGIN_FTP_PORT}</label></td>
 				<td><input type="text" name="ftp_port" id="ftp_port" value="21" /></td>
 			</tr>
 		</table>
 		<input type="hidden" name="is_ftp" value="1" />
+		</div>
 	</td></tr>
 	</IF>
 <ELSE>
@@ -129,7 +132,7 @@ YOU CAN NOT .. NO METHODS !
 <!-- end #table no hover  -->
 
 <!--  button  -->
-<div class="quick"><input name="submit_new_plg" type="submit" value="{lang.SUBMIT}" /></div >
+<div class="quick"><input name="submit_new_plg" type="submit" value="{lang.SUBMIT}" onclick="javascript:return confirm_from('{lang.PLUGIN_CONFIRM_ADD}');" /></div >
 <!--  button  -->
 
 <!-- start clear  -->

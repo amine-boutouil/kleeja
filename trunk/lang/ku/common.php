@@ -526,6 +526,13 @@ $lang = array_merge($lang, array(
 	'ADM_UNWANTED_FILES'		=> 'يبدوا انك قمت بالترقيه من نسخه لاحقه وبسبب اختلاف اسماء بعض الملفات ستلاحظ وجود ازرار متكرره بلوحة التحكم . <br /> لحل المشكلة قم بإزالة كافة الملفات في المسار "includes/adm" واعادة رفعها من جديد.',
 	'ADVANCED_SETTINGS_CATUION' => 'Caution : you must know what these settings are in order to edit them!',
 	'HTML_URLS_ENABLED_NO_HTCC'	=> 'لقد قمت بتفعيل روابط الهتمل ولكنك اهملت نقل ملف الضبط الموجود في مجلد docs/.htaccess.txt لمجلد كليجا الرئيسي واعادة تسميته بـ ".htaccess". اذا لم تفهم شيئاً من هذا الكلام قم بالسؤال في الدعم الفني لكليجا او قم بتعطيل روابط الهتمل .',	
+	'PLUGIN_FTP_EXP'			=> 'لا نستطيع التعديل على الملفات حالياً بدون تصريح الدخول للـ FTP, لذا قم بكتابتهم بالاسفل لنستطيع تثبيت الاضافه',
+	'PLUGIN_FTP_HOST'			=> 'خادم الـ FTP',
+	'PLUGIN_FTP_USER'			=> 'اسم المستخدم لـ FTP',
+	'PLUGIN_FTP_PASS'			=> 'كلمة المرور لـ FTP',
+	'PLUGIN_FTP_PORT'			=> 'منفذ الـ FTP <small>(غالبا هو 21 لذا ان كنت غير متأكد دعه كما هو.)</small>',
+	'PLUGIN_CONFIRM_ADD'		=> 'انتبه, الاضافات هي تعديلات برمجيه على السكربت و قد تكون ضاره احيانا , لذا ان كنت غير متأكد من مصدر الاضافه ولم تقم بتحميلها من موقع كليجا فالافضل ان تراجع نفسك الآن . هل حقا تريد التثبيت ؟',
+
 	//last line of this file ...					 
 	'S_TRANSLATED_BY' 			=> 'Translated By <a href="http://www.Host4k.com/">Host4k</a>',
 	));

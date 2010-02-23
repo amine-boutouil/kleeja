@@ -34,9 +34,11 @@
 	var STYLE_PATH_ADMIN = '{STYLE_PATH_ADMIN}';
 	var PATH_SPACER = '{STYLE_PATH_ADMIN}images/spacer.gif';
 
-	function confirm_from()
+	function confirm_from(r)
 	{
-		if(confirm('{lang.ARE_YOU_SURE_DO_THIS}'))
+		var msg = !r ? '{lang.ARE_YOU_SURE_DO_THIS}' : r;
+
+		if(confirm(msg))
 			return true;
 		else
 			return false;

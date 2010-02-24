@@ -80,6 +80,14 @@ $there_is_files_method = false;
 if($plg->f_method != '')
 {
 	$there_is_files_method = $plg->f_method;
+
+	//
+	//todo : make sure to figure this from OS, and some other things
+	//
+	$suggested_ftp_path = '/public_html' . str_replace('/admin', '', dirname($_SERVER['PHP_SELF'])) . '/';
+	//
+	//todo : return values of ftp from config, if not get suggested one 
+	//
 }
 
 
@@ -403,7 +411,12 @@ if(isset($_POST['submit_new_plg']))
 			}
 			else
 			{
-				$plg->info = array('host'=>$_POST['ftp_host'], 'port'=>$_POST['ftp_port'], 'user'=>$_POST['ftp_user'], 'pass'=>$_POST['ftp_pass']);
+				$plg->info = array('host'=>$_POST['ftp_host'], 'port'=>$_POST['ftp_port'], 'user'=>$_POST['ftp_user'], 'pass'=>$_POST['ftp_pass'], 'path'=>$_POST['ftp_path']);
+				
+				//
+				//todo : save those values except password in config and return them next time !
+				//
+				
 				if(!$plg->check_connect())
 				{
 					kleeja_admin_err($lang['LOGIN_ERROR'], true,'', true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'));

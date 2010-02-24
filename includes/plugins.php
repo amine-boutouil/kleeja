@@ -7,7 +7,19 @@
 * @license ./docs/license.txt
 *
 */
+//no for directly open
+if (!defined('IN_COMMON'))
+{
+	exit();
+}
 
+
+@set_time_limit(0); 
+
+/**
+* Kleeja Plugins System
+* @package Kleeja
+*/
 class kplugins
 {
 
@@ -542,8 +554,8 @@ class kfile
 class kftp
 {
 	var $handler = null;
-	var $timeout = 10;
-	var $roo	 = './';
+	var $timeout = 15;
+	var $root	 = '';
 
 	function _open($info = array())
 	{
@@ -563,17 +575,17 @@ class kftp
 		{
 			return false;
 		}
-		
-		$this->root = PATH;
-		
-		if (!$this->_chdir($this->root))
+
+		$this->root = ($info['path'][0] != '/' ? '/' : '') . $info['path'] . ($info['path'][strlen($info['path'])-1] != '/' ? '/' : '');
+
+		if (!$this->_chdir(PATH))
 		{
 			return false;
 		}
-		
+
 		return true;
 	}
-	
+
 	function _close()
 	{
 		if (!$this->handler)
@@ -595,18 +607,18 @@ class kftp
 			}
 		}
 
-		return @ftp_chdir($this->handler, $dir);
+		return @ftp_chdir($this->handler, $this->_fixpath($dir));
 	}
 	
 	function _chmod($file, $perm = 0644)
 	{
 		if (function_exists('ftp_chmod'))
 		{
-			$action = @ftp_chmod($this->handler, $perm, $file);
+			$action = @ftp_chmod($this->handler, $perm, $this->_fixpath($file));
 		}
 		else
 		{
-			$chmod_cmd = 'CHMOD ' . base_convert($perm, 10, 8) . ' ' . $file;
+			$chmod_cmd = 'CHMOD ' . base_convert($perm, 10, 8) . ' ' . $this->_fixpath($file);
 			$action = $this->_site($chmod_cmd);
 		}
 		return $action;
@@ -619,7 +631,7 @@ class kftp
 	
 	function _delete($file)
 	{
-		return @ftp_delete($this->handler, $file);
+		return @ftp_delete($this->handler, $this->_fixpath($file));
 	}
 
 	function _write($filepath, $content)
@@ -629,49 +641,58 @@ class kftp
 		$filename = array_pop($fnames);
 		$extension = strtolower(array_pop(explode('.', $filename)));
 		$path = dirname($fnames);
-	
+		$cached_file = PATH . 'cache/plg_system_' . $filename;
+
 		//make it as a cached one
-		$h = @fopen(PATH . 'cache/plg_system_' . $filename, 'w');
+		$h = @fopen($cached_file, 'w');
 		fwrite($h, $content);
 		@fclose($h);
 	
+		if(in_array($extension, array('gif', 'jpg', 'png')))
+		{
+			$mode = FTP_BINARY;
+		}
+		else
+		{
+			$mode = FTP_ASCII;
+		}
 
-		$mode = FTP_BINARY;
-	
-		$this->_chdir($path);
+		$this->_chdir($this->_fixpath($path));
 
-		$r = @ftp_put($this->handler, $filename, PATH . 'cache/plg_system_' . $filename, $mode);
+		$r = @ftp_put($this->handler, $filename, $this->_fixpath($cached_file), $mode);
 		$this->_chdir($this->root);
 		
-		kleeja_unlink(PATH . 'cache/plg_system_' . $filename);
+		kleeja_unlink($cached_file);
 		
 		return $r;
 	}
 	
 	function _rename($old_file, $new_file)
 	{
-		return @ftp_rename($this->handler, $old_file, $new_file);
+		return @ftp_rename($this->handler, $this->_fixpath($old_file), $this->_fixpath($new_file));
 	}
 	
 	
 	function _mkdir($dir, $perm = 0777)
 	{
-		return @ftp_mkdir($this->handler, $dir);
+		return @ftp_mkdir($this->handler, $this->_fixpath($dir));
 	}
 	
 	function _rmdir($dir)
 	{
-		return @ftp_rmdir($this->handler, $dir);
+		return @ftp_rmdir($this->handler, $this->_fixpath($dir));
+	}
+	
+	function _fixpath($path)
+	{
+		return $this->root . str_replace(PATH, '', $path);
 	}
 }
 /**
 * Make changes with files using fsock
 * @package Kleeja
 */
-class ksock 
-{
-
-}
+class kfsock {}
 
 
 /**

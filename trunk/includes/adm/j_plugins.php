@@ -81,13 +81,19 @@ if($plg->f_method != '')
 {
 	$there_is_files_method = $plg->f_method;
 
-	//
-	//todo : make sure to figure this from OS, and some other things
-	//
-	$suggested_ftp_path = '/public_html' . str_replace('/admin', '', dirname($_SERVER['PHP_SELF'])) . '/';
-	//
-	//todo : return values of ftp from config, if not get suggested one 
-	//
+	//return values of ftp from config, if not get suggested one 
+	$ftp_info = array('host', 'user', 'pass', 'path', 'port');
+
+	if(!empty($config['ftp_info']))
+	{
+		$ftp_info = @unserialize($config['ftp_info']);
+	}
+	else
+	{
+		//todo : make sure to figure this from OS, and some other things
+		$ftp_info['path'] = '/public_html' . str_replace('/admin', '', dirname($_SERVER['PHP_SELF'])) . '/';
+		$ftp_info['port'] = 21;
+	}
 }
 
 
@@ -411,11 +417,11 @@ if(isset($_POST['submit_new_plg']))
 			}
 			else
 			{
-				$plg->info = array('host'=>$_POST['ftp_host'], 'port'=>$_POST['ftp_port'], 'user'=>$_POST['ftp_user'], 'pass'=>$_POST['ftp_pass'], 'path'=>$_POST['ftp_path']);
 				
-				//
-				//todo : save those values except password in config and return them next time !
-				//
+				$plg->info = $ftpinfo = array('host'=>$_POST['ftp_host'], 'port'=>$_POST['ftp_port'], 'user'=>$_POST['ftp_user'], 'pass'=>$_POST['ftp_pass'], 'path'=>$_POST['ftp_path']);
+
+				$ftpinfo['pass'] = '';
+				update_config('ftp_info', serialize($ftpinfo), false);
 				
 				if(!$plg->check_connect())
 				{

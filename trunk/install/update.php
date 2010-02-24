@@ -212,6 +212,10 @@ case 'update_now':
 
 			if($complete_upate or defined('DEV_STAGE'))
 			{
+				include PATH . 'includes/plugins.php';
+				$plg = new kplugins;
+				$XML = new kxml;
+
 				//check plugins
 				$pl_path = "includes/plugins";
 				$dh = opendir($pl_path);
@@ -222,7 +226,7 @@ case 'update_now':
 					if($e == "xml") //only plugins ;)
 					{
 						$contents 	= @file_get_contents($pl_path . '/' . $file);
-						$gtree 		= xml_to_array($contents);
+						$gtree		= $XML->xml_to_array($contents);
 
 						if($gtree != false) //great !! it's well-formed xml 
 						{
@@ -230,12 +234,14 @@ case 'update_now':
 
 							if(updating_exists_plugin($plugin_name) || (isset($must_installing_plugins) && in_array($file, $must_installing_plugins)))
 							{
-								creat_plugin_xml($contents);
+								//we dont care about the return value here !
+								$plg->add_plugin($contents);
 							}
 						}
 					}
 				}
 
+				$plg->atend();
 				delete_cache(null, true);
 			}
 

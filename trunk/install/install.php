@@ -18,6 +18,7 @@
 */
 define('IN_COMMON', true);
 $_path = "../";
+define('PATH', $_path);
 if(file_exists($_path . 'config.php'))
 {
 	include_once ($_path . 'config.php');
@@ -269,37 +270,46 @@ case 'plugins' :
 	$pl_path = "includes/plugins";
 	if (isset($_POST['datasubmit']))
 	{
-			$p = $_POST['plugin_file'];
-			if(empty($p))
+		$p = $_POST['plugin_file'];
+		if(empty($p))
+		{
+			header('Location: ' . $_SERVER['PHP_SELF'] . '?step=end&' . getlang(1));
+			exit;
+		}
+		
+		include PATH . 'includes/plugins.php';
+		$plg = new kplugins;
+		$XML = new kxml;
+
+		//search for plugins
+		foreach($p as $file)
+		{				
+			if(file_exists($pl_path . '/' . $file)) //only plugins ;)
 			{
-				header('Location: ' . $_SERVER['PHP_SELF'] . '?step=end&' . getlang(1));
-			}
-			
-			//search for plugins
-			foreach($p as $file)
-			{				
-				if(file_exists($pl_path . '/' . $file)) //only plugins ;)
-				{
-					$contents 	= @file_get_contents($pl_path . '/' . $file);
-					$gtree 		= xml_to_array($contents);
+				$contents 	= @file_get_contents($pl_path . '/' . $file);
+				$gtree		= $XML->xml_to_array($contents);
 				
-					if($gtree != false) //great !! it's well-formed xml 
-					{
-						$installed_plugins[] = array(
-						'p_file' => $file,
-						'p_name' =>  $SQL->escape($gtree['kleeja']['info']['plugin_name']['value']),
-						'p_ver'  => $SQL->escape($gtree['kleeja']['info']['plugin_version']['value']),
-						'p_des'  => $SQL->escape($gtree['kleeja']['info']['plugin_description']['value']),
-						//'p_size' => @filesize($pl_path . '/' . $file),
-						);
-						//install them
-						creat_plugin_xml($contents);
-					}
+				if($gtree != false) //great !! it's well-formed xml 
+				{
+					$installed_plugins[] = array(
+								'p_file' => $file,
+								'p_name' =>  $SQL->escape($gtree['kleeja']['info']['plugin_name']['value']),
+								'p_ver'  => $SQL->escape($gtree['kleeja']['info']['plugin_version']['value']),
+								'p_des'  => $SQL->escape($gtree['kleeja']['info']['plugin_description']['value']),
+								//'p_size' => @filesize($pl_path . '/' . $file),
+					);
+					
+					//we dont care about the return value here !
+					$plg->add_plugin($contents);
 				}
 			}
-			//clean cache
-			delete_cache(null, true);
-			echo gettpl('plugins_done.html');
+		}
+		
+		$plg->atend();
+
+		//clean cache
+		delete_cache(null, true);
+		echo gettpl('plugins_done.html');
 	}
 	else
 	{

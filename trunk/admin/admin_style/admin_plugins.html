@@ -106,23 +106,23 @@
 		<table style="width:100%">
 			<tr>
 				<td><label for="ftp_host">{lang.PLUGIN_FTP_HOST}</label></td>
-				<td><input type="text" name="ftp_host" id="ftp_host" size="25"  style="direction:ltr" /></td>
+				<td><input type="text" name="ftp_host" id="ftp_host" value="{ftp_info.host}" size="25"  style="direction:ltr" /></td>
 			</tr>
 			<tr>
 				<td><label for="ftp_user">{lang.PLUGIN_FTP_USER}</label></td>
-				<td><input type="text" name="ftp_user" id="ftp_user"  style="direction:ltr" /></td>
+				<td><input type="text" name="ftp_user" id="ftp_user" value="{ftp_info.user}" style="direction:ltr" /></td>
 			</tr>
 			<tr>
 				<td><label for="ftp_pass">{lang.PLUGIN_FTP_PASS}</label></td>
-				<td><input type="text" name="ftp_pass" id="ftp_pass"  style="direction:ltr"  /></td>
+				<td><input type="text" name="ftp_pass" id="ftp_pass" value="{ftp_info.pass}" style="direction:ltr"  /></td>
 			</tr>
 			<tr>
 				<td><label for="ftp_path">{lang.PLUGIN_FTP_PATH}</label></td>
-				<td><input type="text" name="ftp_path" id="ftp_path" value="{suggested_ftp_path}" size="45"  style="direction:ltr" /></td>
+				<td><input type="text" name="ftp_path" id="ftp_path" value="{ftp_info.path}" size="45"  style="direction:ltr" /></td>
 			</tr>
 			<tr>
 				<td><label for="ftp_port">{lang.PLUGIN_FTP_PORT}</label></td>
-				<td><input type="text" name="ftp_port" id="ftp_port" value="21" size="5" style="direction:ltr"  /></td>
+				<td><input type="text" name="ftp_port" id="ftp_port" value="{ftp_info.port}" size="5" style="direction:ltr"  /></td>
 			</tr>
 		</table>
 		<input type="hidden" name="is_ftp" value="1" />

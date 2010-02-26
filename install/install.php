@@ -268,6 +268,9 @@ case 'plugins' :
 	$SQL = new SSQL($dbserver, $dbuser, $dbpass, $dbname);
 	//install built in plugins
 	$pl_path = "includes/plugins";
+	include PATH . 'includes/plugins.php';
+	$XML = new kxml;
+
 	if (isset($_POST['datasubmit']))
 	{
 		$p = $_POST['plugin_file'];
@@ -276,10 +279,8 @@ case 'plugins' :
 			header('Location: ' . $_SERVER['PHP_SELF'] . '?step=end&' . getlang(1));
 			exit;
 		}
-		
-		include PATH . 'includes/plugins.php';
+
 		$plg = new kplugins;
-		$XML = new kxml;
 
 		//search for plugins
 		foreach($p as $file)
@@ -321,7 +322,7 @@ case 'plugins' :
 			if($e == "xml") //only plugins ;)
 			{
 				$contents 	= @file_get_contents($pl_path . '/' . $file);
-				$gtree 		= xml_to_array($contents);
+				$gtree		= $XML->xml_to_array($contents);
 				
 				if($gtree != false) //great !! it's well-formed xml 
 				{

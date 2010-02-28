@@ -94,15 +94,18 @@
 <tr style="background-color:#EFE7B8"><td>{lang.ADD_NEW_PLUGIN_EXP}</td></tr>
 <tr><td>
 
-<input name="imp_file" type="file" onchange="this.value != '' ? $('#ftp_info_div').show() : null;" />
+<input name="imp_file" type="file" />
 
 </td></tr>
 	<IF NAME="there_is_files_method != kfile">
 	<tr><td>
+		<b>{lang.PLUGIN_WT_FILE_METHOD}</b>
+		<br />
+		<br />
+	<input type="radio" name="_fmethod" value="zfile" checked="checked" onchange="this.checked ? $('#ftp_info_div').hide(): $('#ftp_info_div').show();" />{lang.PLUGIN_ZIP_FILE_METHOD}<br />
+	<input type="radio" name="_fmethod" value="kftp" onchange="this.checked ? $('#ftp_info_div').show() : $('#ftp_info_div').hide();" /> {lang.PLUGIN_FTP_FILE_METHOD} <br />
 	<div id="ftp_info_div" style="display:none">
-	<br />
-	<h3>{lang.PLUGIN_FTP_EXP} :</h3>
-	<br />
+
 		<table style="width:100%">
 			<tr>
 				<td><label for="ftp_host">{lang.PLUGIN_FTP_HOST}</label></td>

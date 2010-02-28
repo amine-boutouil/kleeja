@@ -35,7 +35,7 @@ class kplugins
 		$f_method = '';
 		$disabled_functions = explode(',', @ini_get('disable_functions'));
 
-		if(is_writable(PATH))
+		if(!is_writable(PATH))
 		{
 			$this->f_method = 'kfile';
 		}
@@ -651,6 +651,66 @@ class kfile
 }
 
 /**
+* It's not a real method, it's just for save files changes
+* @package Kleeja
+*/
+class zfile
+{
+	var $handler = null;
+	var $files = array();
+
+	function _open($info = array()){ return true; }
+	function _close() { return true; }
+
+	function _write($filepath, $content)
+	{
+		$files[$filepath] = $content;
+	}
+
+	function _delete($filepath)
+	{
+		//
+		// best way is tell his that directly .. i have alot of ideas
+		// just we have wait ..  
+		//
+		return true;
+	}
+	
+	function _rename($oldfile, $newfile)
+	{
+		//see _delete
+		//or, just we can give him a new file in zip ? good idea
+		return true;
+	}
+	
+	function _chmod($filepath, $perm = 0644)
+	{
+		//i hv no idea ...
+		return true;
+	}
+	
+	function _mkdir($dir, $perm = 0777)
+	{
+		//we can make dir in zip file, so wut ?
+		return true;
+	}
+	function _rmdir($dir){ return true; }
+	
+	function push()
+	{
+		$z = new zipfile;
+		
+		foreach($files as $filepath => $content)
+		{
+			//todo : we have make a simple path, so clean it ..
+			$z->create_file($filepath, $content);
+		}
+
+		//save file to cache and return the cached file name
+	}
+}
+
+/**
 * Make changes with files using ftp
 * @package Kleeja
 */
@@ -896,3 +956,71 @@ class kxml
 	}
 }
 
+
+/**
+*	zipfile class for writing .zip files
+*	Copyright (C) Joshua Townsend (http://www.gamingg.net)
+*	Based on tutorial given by John Coggeshall
+*	@edited on 2010 By Kleeja team
+*/
+class zipfile
+{
+	//container variables
+	var $datasec= array(), $dirs = array(), $ctrl_dir = array();
+	//end of Central directory record
+	var $eof_ctrl_dir = "\x50\x4b\x05\x06\x00\x00\x00\x00"; 
+	var $old_offset = 0;
+	var $basedir = '.';
+
+	function create_dir($name, $echo = 1)
+	{
+		$name = str_replace("\\", "/", $name);
+		$fr = "\x50\x4b\x03\x04" . "\x0a\x00" . "\x00\x00" . "\x00\x00" . "\x00\x00\x00\x00" . pack("V",0). pack("V",0) . pack("V",0) . pack("v", strlen($name)) . pack("v", 0) . $name . pack("V",0) . pack("V",0) .pack("V",0);
+		$this->datasec[] = $fr;
+		//output now !
+		if($echo)
+			echo $fr;
+		$new_offset = strlen(implode('', $this->datasec));
+		// now add to central record
+		$cdrec = "\x50\x4b\x01\x02" . "\x00\x00" . "\x0a\x00" . "\x00\x00". "\x00\x00" . "\x00\x00\x00\x00" . pack("V",0) . pack("V",0) . pack("V",0) . pack("v", strlen($name)) . pack("v", 0) .  pack("v", 0) . pack("v", 0) . pack("v", 0) . pack("V", 16) . pack("V", $this->old_offset) . $name;
+		$this->old_offset = $new_offset;
+		$this->ctrl_dir[] = $cdrec;
+		$this->dirs[] = $name;
+	}
+
+	function check_file_path($filepath)
+	{
+		// todo : check dir and creat them
+		// path/path2/path3/filename.ext
+		// here there is 3 folder, so you have to make them
+		// before creating file
+		return true;
+	}
+
+	function create_file($data, $name, $echo = 1)
+	{
+		$name = str_replace("\\", "/", $name);
+		$fr = "\x50\x4b\x03\x04". "\x14\x00" . "\x00\x00" . "\x08\x00" . "\x00\x00\x00\x00"; 
+		$unc_len = strlen($data);
+		$crc = crc32($data);
+		$zdata =  substr(gzcompress($data), 2, -4);
+		$c_len = strlen($zdata);
+		$fr .= pack("V",$crc) . pack("V",$c_len) . pack("V",$unc_len) . pack("v", strlen($name)) .  pack("v", 0). $name . $zdata .  pack("V",$crc) . pack("V",$c_len) . pack("V",$unc_len);
+		$this->datasec[] = $fr;
+		$new_offset = strlen(implode("", $this->datasec));
+		//output now !
+		if($echo)
+			echo $fr;
+		// now add to central directory record
+		$cdrec = "\x50\x4b\x01\x02" . "\x00\x00" . "\x14\x00" . "\x00\x00" . "\x08\x00" . "\x00\x00\x00\x00" . pack("V",$crc) . pack("V",$c_len) . pack("V",$unc_len) . pack("v", strlen($name) ). pack("v", 0 ) . pack("v", 0 ) . pack("v", 0 ) . pack("v", 0 ) . pack("V", 32 ) . pack("V", $this->old_offset) . $name;
+		$this->old_offset = $new_offset;
+		$this->ctrl_dir[] = $cdrec;
+	}
+
+	function zipped_file($d = 0)
+	{
+		$data = implode('', $this->datasec);
+		$ctrldir = implode('', $this->ctrl_dir);
+		return 	($d ? $data : null) . $ctrldir . $this->eof_ctrl_dir . pack("v", sizeof($this->ctrl_dir)). pack("v", sizeof($this->ctrl_dir)). pack("V", strlen($ctrldir)) . pack("V", strlen($data)) . "\x00\x00";
+	}
+}

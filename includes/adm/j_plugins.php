@@ -54,13 +54,15 @@ if($SQL->num_rows($result)>0)
 
 	while($row=$SQL->fetch_array($result))
 	{
+		$desc = unserialize(kleeja_base64_decode($row['plg_dsc']));
+
 		$arr[]	= array(
 						'plg_id'			=> $row['plg_id'],
 						'plg_name'			=> str_replace('-', ' ', $row['plg_name']) . ($row['plg_disabled'] == 1 ? ' [ x ]': ''),
 						'plg_disabled'		=> (int) $row['plg_disabled'] == 1 ? true : false,
 						'plg_ver'			=> $row['plg_ver'],
 						'plg_author'		=> $row['plg_author'],
-						'plg_dsc'			=> $row['plg_dsc'],
+						'plg_dsc'			=> isset($desc[$config['language']]) ? $desc[$config['language']] : $desc['en'],
 						'plg_instructions'	=> trim($row['plg_instructions']) == '' ? false : true,
 				);
 	}
@@ -225,9 +227,12 @@ if (isset($_GET['do_plg']))
 			}
 	
 			$info = unserialize(kleeja_base64_decode($result['plg_instructions']));
-			kleeja_admin_info('<h3>' . $result['plg_name'] . ' &nbsp;' . $result['plg_ver']  . ' : </h3>' . 
-							$info[$config['language']] . '<br /><a href="' . basename(ADMIN_PATH) . '?cp=' .
-							basename(__file__, '.php') . '">' . $lang['GO_BACK_BROWSER'] . '</a>');
+			$info = isset($info[$config['language']]) ? $info[$config['language']] : $info['en'];
+			kleeja_admin_info(
+							'<h3>' . $result['plg_name'] . ' &nbsp;' . $result['plg_ver']  . ' : </h3>' . 
+							$info . '<br /><a href="' . basename(ADMIN_PATH) . '?cp=' .
+							basename(__file__, '.php') . '">' . $lang['GO_BACK_BROWSER'] . '</a>'
+							);
 
 		break;
 		case '5': //plugins exporting
@@ -409,7 +414,7 @@ if(isset($_POST['submit_new_plg']))
 
 	if(empty($text))
 	{
-		if(isset($_POST['is_ftp']))
+		if(isset($_POST['_fmethod']) && $_POST['_fmethod'] == 'kftp')
 		{
 			if(empty($_POST['ftp_host']) || empty($_POST['ftp_port']) || empty($_POST['ftp_user']) ||empty($_POST['ftp_pass']))
 			{
@@ -428,6 +433,10 @@ if(isset($_POST['submit_new_plg']))
 					kleeja_admin_err($lang['LOGIN_ERROR'], true,'', true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'));
 				}
 			}
+		}
+		else if(isset($_POST['_fmethod']) && $_POST['_fmethod'] == 'zfile')
+		{
+			$plg->f_method = 'zfile';
 		}
 
 		$return = $plg->add_plugin($contents);

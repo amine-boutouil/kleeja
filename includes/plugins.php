@@ -154,7 +154,8 @@ class kplugins
 				}
 			}
 		}
-
+		
+		$there_is_intruct = false;
 		if(isset($plg_instructions))
 		{
 			if(is_array($plg_instructions['instruction']))
@@ -175,14 +176,33 @@ class kplugins
 
 				$instarr[$in['attributes']['lang']] = $in['value'];
 			}
+			
+			$there_is_intruct = isset($instarr) && !empty($instarr) ? true : false;
+		}
+	
+
+		if(isset($plg_info['plugin_description']))
+		{
+			if(is_array($plg_info['plugin_description']['description']))
+			{
+				if(array_key_exists("attributes", $plg_info['plugin_description']['description']))
+				{
+					$plg_info['plugin_description']['description'] = array($plg_info['plugin_description']['description']);
+				}
+			}
+	
+			$p_desc = array();		
+			foreach($plg_info['plugin_description']['description'] as $in)
+			{
+				if(empty($in['attributes']['lang']) || !isset($in['attributes']['lang']))
+				{
+					big_error('Error', $lang['ERR_XML_NO_G_TAGS']);
+				}
+				$p_desc[$in['attributes']['lang']] = $in['value'];
+			}
 		}
 
-		//if there is instructions
-		$there_is_intruct = false;
-		if(isset($instarr) && !empty($instarr))
-		{
-			$there_is_intruct = true;
-		}
+
 	
 		//store important tags (for now only "install" and "templates" tags)
 		$store = '';
@@ -216,7 +236,7 @@ class kplugins
 								'INTO'		=> "{$dbprefix}plugins",
 								'VALUES'	=> "'" . $SQL->escape($plugin_name) . "','" . $SQL->escape($plg_info['plugin_version']['value']) . 
 												"','" . $SQL->escape($plg_info['plugin_author']['value']) . "','" . 
-												$SQL->escape($plg_info['plugin_description']['value']) . "','" . $SQL->real_escape($plg_uninstall['value']) . "','" . 
+												$SQL->escape(kleeja_base64_encode(serialize($p_desc))) . "','" . $SQL->real_escape($plg_uninstall['value']) . "','" . 
 												((isset($instarr) && !empty($instarr)) ? $SQL->escape(kleeja_base64_encode(serialize($instarr))) : '') . "','" .  
 												$SQL->real_escape($store) . "'"
 							);

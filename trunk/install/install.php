@@ -292,14 +292,29 @@ case 'plugins' :
 				
 				if($gtree != false) //great !! it's well-formed xml 
 				{
+					$plg_dsc = $gtree['kleeja']['info']['plugin_description'];
+					if(isset($plg_dsc))
+					{
+						if(is_array($plg_dsc['description']) && array_key_exists("attributes", $plg_dsc['description']))
+						{
+							$plg_dsc['description'] = array($plg_dsc['description']);
+						}
+
+						$p_desc = array();		
+						foreach($plg_dsc['description'] as $in)
+						{
+							$p_desc[$in['attributes']['lang']] = $in['value'];
+						}
+					}
+		
 					$installed_plugins[] = array(
 								'p_file' => $file,
-								'p_name' =>  $SQL->escape($gtree['kleeja']['info']['plugin_name']['value']),
-								'p_ver'  => $SQL->escape($gtree['kleeja']['info']['plugin_version']['value']),
-								'p_des'  => $SQL->escape($gtree['kleeja']['info']['plugin_description']['value']),
+								'p_name' => htmlspecialchars($gtree['kleeja']['info']['plugin_name']['value']),
+								'p_ver'  => htmlspecialchars($gtree['kleeja']['info']['plugin_version']['value']),
+								'p_des'  => isset($p_desc[getlang()]) ? $p_desc[getlang()] : $p_desc['en'],
 								//'p_size' => @filesize($pl_path . '/' . $file),
 					);
-					
+
 					//we dont care about the return value here !
 					$plg->add_plugin($contents);
 				}
@@ -326,12 +341,27 @@ case 'plugins' :
 				
 				if($gtree != false) //great !! it's well-formed xml 
 				{
+					$plg_dsc = $gtree['kleeja']['info']['plugin_description'];
+					if(isset($plg_dsc))
+					{
+						if(is_array($plg_dsc['description']) && array_key_exists("attributes", $plg_dsc['description']))
+						{
+							$plg_dsc['description'] = array($plg_dsc['description']);
+						}
+
+						$p_desc = array();		
+						foreach($plg_dsc['description'] as $in)
+						{
+							$p_desc[$in['attributes']['lang']] = $in['value'];
+						}
+					}
+				
 					$plugins[]	= array(
-					'p_file' => $file,
-					'p_name' =>  $SQL->escape($gtree['kleeja']['info']['plugin_name']['value']),
-					'p_ver'  => $SQL->escape($gtree['kleeja']['info']['plugin_version']['value']),
-					'p_des'  => $SQL->escape($gtree['kleeja']['info']['plugin_description']['value']),
-					//'p_size' => @filesize($pl_path . '/' . $file),
+						'p_file' => $file,
+						'p_name' => htmlspecialchars($gtree['kleeja']['info']['plugin_name']['value']),
+						'p_ver'  => htmlspecialchars($gtree['kleeja']['info']['plugin_version']['value']),
+						'p_des'  => isset($p_desc[getlang()]) ? $p_desc[getlang()] : $p_desc['en'],
+						//'p_size' => @filesize($pl_path . '/' . $file),
 					);
 				}
 			}			

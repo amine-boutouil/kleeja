@@ -103,9 +103,10 @@ $update_sqls['type_config_advanced'] = "UPDATE `{$dbprefix}config` SET `type` = 
 
 //exts
 $update_sqls['ext_psd'] = "UPDATE  `{$dbprefix}exts` SET  `group_id` =  '9' WHERE `id` = 6;";
+$update_sqls['plg_desc'] = "ALTER TABLE  `{$dbprefix}plugins` CHANGE  `plg_dsc`  `plg_dsc` MEDIUMTEXT CHARACTER SET utf8 COLLATE utf8_bin NOT NULL";
 
 // ************************* MAFIII MALOOOM SDIG :(
-$update_sqls['configs_style'] = "UPDATE `{$dbprefix}config` SET `option` = '',`display_order` = 0, `type`='' WHERE  `name` = 'style';";
+$update_sqls['configs_style'] = "UPDATE `{$dbprefix}config` SET `option` = '',`display_order` = 0, `type`='', value='default' WHERE  `name` = 'style';";
 $update_sqls['clean_name'] = "ALTER TABLE `{$dbprefix}users` ADD `clean_name` VARCHAR( 200 ) NOT NULL AFTER `name`";
 $update_sqls['new_password'] = "ALTER TABLE `{$dbprefix}users` ADD `new_password` VARCHAR( 200 ) NOT NULL DEFAULT ''";
 $update_sqls['hash_key'] = "ALTER TABLE `{$dbprefix}users` ADD `hash_key` VARCHAR( 200 ) NOT NULL DEFAULT ''";

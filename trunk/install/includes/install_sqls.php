@@ -175,6 +175,7 @@ CREATE TABLE `{$dbprefix}plugins` (
   `plg_disabled` tinyint(1) unsigned NOT NULL default '0',
   `plg_instructions` mediumtext COLLATE utf8_bin NOT NULL,
   `plg_store` longtext COLLATE utf8_bin NOT NULL,
+  `plg_files` text COLLATE utf8_bin NOT NULL,
   PRIMARY KEY  (`plg_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin ;
 ";

@@ -26,8 +26,10 @@ class kplugins
 	//everytime we install plugin
 	//we ask user for this..
 	var $info		= array();
-	var $f_method	= '';
+	var $f_method	= 'kfile';
 	var $f			= null;
+	var $plg_id		= 0;
+	var $zipped_files	= '';
 
 	function kplugins()
 	{
@@ -97,6 +99,7 @@ class kplugins
 		$plg_instructions 	= empty($tree['instructions']) ? null : $tree['instructions'];
 		$plg_phrases		= empty($tree['phrases']) ? null : $tree['phrases'];
 		$plg_options		= empty($tree['options']) ? null : $tree['options'];
+		$plg_files			= empty($tree['files']) ? null : $tree['files'];
 
 		//important tags not exists 
 		if(empty($plg_info))
@@ -128,7 +131,7 @@ class kplugins
 			//it's not new one ! , let's see if it same version
 			$plg_new = false;
 			$cur_ver = $SQL->fetch_array($res);
-			$plg_id = $cur_ver['plg_id'];
+			$this->plg_id = $cur_ver['plg_id'];
 			$cur_ver = $cur_ver['plg_ver'];
 			$new_ver = $SQL->escape($plg_info['plugin_version']['value']);
 			if (version_compare(strtolower($cur_ver), strtolower($new_ver), '>='))
@@ -178,6 +181,31 @@ class kplugins
 			}
 			
 			$there_is_intruct = isset($instarr) && !empty($instarr) ? true : false;
+		}
+		
+		$there_is_files = false;
+		if(isset($plg_files))
+		{
+			if(is_array($plg_files['file']))
+			{
+				if(array_key_exists("attributes", $plg_files['file']))
+				{
+					$plg_files['file'] = array($plg_files['file']);
+				}
+			}
+	
+			$newfiles = array();		
+			foreach($plg_files['file'] as $in)
+			{
+				if(empty($in['attributes']['lang']) || !isset($in['attributes']['lang']))
+				{
+					big_error('Error',$lang['ERR_XML_NO_G_TAGS']);
+				}
+
+				$newfiles[$in['attributes']['lang']] = $in['value'];
+			}
+
+			$there_is_files = isset($newfiles) && !empty($newfiles) ? true : false;
 		}
 	
 
@@ -232,38 +260,40 @@ class kplugins
 		{
 			//insert in plugin table 
 			$insert_query = array(
-								'INSERT'	=> 'plg_name, plg_ver, plg_author, plg_dsc, plg_uninstall, plg_instructions, plg_store',
+								'INSERT'	=> 'plg_name, plg_ver, plg_author, plg_dsc, plg_uninstall, plg_instructions, plg_store, plg_files',
 								'INTO'		=> "{$dbprefix}plugins",
 								'VALUES'	=> "'" . $SQL->escape($plugin_name) . "','" . $SQL->escape($plg_info['plugin_version']['value']) . 
 												"','" . $SQL->escape($plg_info['plugin_author']['value']) . "','" . 
 												$SQL->escape(kleeja_base64_encode(serialize($p_desc))) . "','" . $SQL->real_escape($plg_uninstall['value']) . "','" . 
-												((isset($instarr) && !empty($instarr)) ? $SQL->escape(kleeja_base64_encode(serialize($instarr))) : '') . "','" .  
-												$SQL->real_escape($store) . "'"
+												($there_is_intruct ? $SQL->escape(kleeja_base64_encode(serialize($instarr))) : '') . "','" .  
+												$SQL->real_escape($store) . "','" . 
+												($there_is_files ? $SQL->escape(kleeja_base64_encode(serialize(array_keys($newfiles)))) : '') . "'"
+
 							);
 
 			($hook = kleeja_run_hook('qr_insert_plugininfo_crtplgxml_func')) ? eval($hook) : null; //run hook
 			
 			$SQL->build($insert_query);
 		
-			$new_plg_id	=	$SQL->insert_id();
+			$this->plg_id = $SQL->insert_id();
 		}
 		else //if it was just update proccess
 		{
 			$update_query = array(
 				
 								'UPDATE'	=> "{$dbprefix}plugins",
-								'SET'		=> 'plg_ver="' . $new_ver . '", plg_author="' . $SQL->escape($plg_info['plugin_author']['value']) . 
-												'", plg_dsc="' . $SQL->escape($plg_info['plugin_description']['value']) . '", plg_uninstall="' . 
-												$SQL->real_escape($plg_uninstall['value']) . '", plg_instructions="' .
-												($there_is_intruct ? $SQL->escape(kleeja_base64_encode(serialize($instarr))) : '') . 
-												'", plg_store="' . $SQL->escape($store) . '"',
-								'WHERE'		=> "plg_id=" . $plg_id
+								'SET'		=> "plg_ver='" . $new_ver . "', plg_author='" . $SQL->escape($plg_info['plugin_author']['value']) . 
+												"', plg_dsc='" . $SQL->escape($plg_info['plugin_description']['value']) . "', plg_uninstall='" . 
+												$SQL->real_escape($plg_uninstall['value']) . "', plg_instructions='" .
+												($there_is_intruct ? $SQL->escape(kleeja_base64_encode(serialize($instarr))) : '') . "', plg_files='" .
+												($there_is_files ? $SQL->escape(kleeja_base64_encode(serialize(array_keys($newfiles)))) : '') . 
+												"', plg_store='" . $SQL->escape($store) . "'",
+								'WHERE'		=> "plg_id=" . $this->plg_id
 						);
 
 			($hook = kleeja_run_hook('qr_update_plugininfo_crtplgxml_func')) ? eval($hook) : null; //run hook
-			
+
 			$SQL->build($update_query);
-			$new_plg_id	= $plg_id;
 		}
 	
 		//eval install code
@@ -308,7 +338,7 @@ class kplugins
 				}
 
 				//finally we add it to the database
-				add_olang($phrases[$in['attributes']['name']], $in['attributes']['name'], $new_plg_id);
+				add_olang($phrases[$in['attributes']['name']], $in['attributes']['name'], $this->plg_id);
 			}
 		}
 
@@ -324,11 +354,22 @@ class kplugins
 
 			foreach($plg_options['option'] as $in)
 			{
-				add_config($in['attributes']['name'], $in['attributes']['value'], $in['attributes']['order'], $in['value'], $in['attributes']['menu'], $new_plg_id);
+				add_config($in['attributes']['name'], $in['attributes']['value'], $in['attributes']['order'], $in['value'], $in['attributes']['menu'], $this->plg_id);
 			}
 
 			delete_cache('data_config');
 		}
+		
+		
+		//add new files 
+		if($there_is_files)
+		{
+			foreach($newfiles as $path => $content)
+			{
+				$this->f->_write($this->_fixpath_newfile($path), kleeja_base64_decode($content));
+			}
+		}
+
 
 		//cache important instruction
 		$cached_instructions = array();
@@ -484,7 +525,7 @@ class kplugins
 				$insert_query = array(
 										'INSERT'	=> 'plg_id, hook_name, hook_content',
 										'INTO'		=> "{$dbprefix}hooks",
-										'VALUES'	=> "'" . $new_plg_id . "','" . $hook_for . "', '" . $hk_value . "'"
+										'VALUES'	=> "'" . $this->plg_id . "','" . $hook_for . "', '" . $hk_value . "'"
 									);
 				($hook = kleeja_run_hook('qr_insert_hooks_crtplgxml_func')) ? eval($hook) : null; //run hook
 				$SQL->build($insert_query);		
@@ -492,10 +533,9 @@ class kplugins
 			//delete cache ..
 			delete_cache('data_hooks');
 		}
+
 		
-		
-		//todo : files tag ?
-		
+		//done !
 		if(sizeof($plg_errors) < 1) 
 		{
 			//add cached instuctions to cache if there
@@ -512,15 +552,26 @@ class kplugins
 
 				$this->f->_write('cache/styles_cached.php', kleeja_base64_encode(serialize($cached_instructions)));
 			}
+			
+			if($this->f_method == 'zfile')
+			{
+				if($this->f->check())
+				{
+					$this->zipped_files = $this->f->push($plugin_name);
 
-			return $plg_new ? ($there_is_intruct ? 'inst:' . $new_plg_id : 'done') : 'upd';
+					return $there_is_intruct ? 'zipped/inst' : 'zipped';
+				}
+			}
+			
+			
+			return $plg_new ? ($there_is_intruct ? 'inst' : 'done') : 'upd';
 		}
-		else 
+		else
 		{
 			return $plg_errors;
 		}
 
-		($hook = kleeja_run_hook('creat_plugin_xml_func')) ? eval($hook) : null; //run hook
+		($hook = kleeja_run_hook('create_plugin_xml_func')) ? eval($hook) : null; //run hook
 		return false;
 	}
 
@@ -616,6 +667,13 @@ class kplugins
 	function delete($files = array())
 	{
 		return;
+	}
+	
+	
+	
+	function _fixpath_newfile($path)
+	{
+		return $path; /*must be fixed*/
 	}
 }
 
@@ -716,7 +774,12 @@ class zfile
 	}
 	function _rmdir($dir){ return true; }
 	
-	function push()
+	function check()
+	{
+		return is_array($this->files) ? true : false;
+	}
+	
+	function push($plg_name)
 	{
 		$z = new zipfile;
 		
@@ -726,7 +789,15 @@ class zfile
 			$z->create_file($filepath, $content);
 		}
 
+		$ff = 'changes_of_' . str_replace(array('.', '-', ' '), '_', strtolower($plg_name)) . '.zip';
+
 		//save file to cache and return the cached file name
+		$c = $zipfile->zipped_file();
+		$fn = @fopen(PATH . 'cache/' . $ff, 'w');
+		fwrite($fn, $c);
+		fclose($fn);
+
+		return $ff;
 	}
 }
 

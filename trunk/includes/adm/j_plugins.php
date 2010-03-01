@@ -384,6 +384,50 @@ if (isset($_GET['do_plg']))
 			}
 			exit;
 		break;
+		
+		//downaloding zipped changes ..
+		case 6:
+			
+			if(!isset($_GET['fn']))
+			{
+				kleeja_admin_err($lang['ERROR']);
+			}
+			
+			$_f		= preg_replace('![^a-z0-9_]!', '', $_GET['fn']);
+			$name	= str_replace('_', ' ', $_f);
+			
+			if (is_browser('mozilla'))
+			{
+				$h_name = "filename*=UTF-8''" . rawurlencode(htmlspecialchars_decode($name));
+			}
+			else if (is_browser('opera, safari, konqueror'))
+			{
+				$h_name = 'filename="' . str_replace('"', '', htmlspecialchars_decode($name)) . '"';
+			}
+			else
+			{
+				$h_name = 'filename="' . rawurlencode(htmlspecialchars_decode($name)) . '"';
+			}
+
+			if (@ob_get_length())
+			{
+				@ob_end_clean();
+			}
+
+			// required for IE, otherwise Content-Disposition may be ignored
+			if(@ini_get('zlib.output_compression'))
+			{
+				@ini_set('zlib.output_compression', 'Off');
+			}
+				
+			header('Pragma: public');
+			header('Content-Type: application/zip');
+			header('X-Download-Options: noopen');
+			header('Content-Disposition: attachment; '  . $h_name);
+			
+			echo file_get_contents(PATH . 'cache/' . $_f);
+			
+		break;
 	}
 }
 
@@ -455,16 +499,20 @@ if(isset($_POST['submit_new_plg']))
 			case 'upd': // updated success
 				$text = $lang['PLUGIN_UPDATED_SUCCESS'] . '<meta HTTP-EQUIV="REFRESH" content="3; url=' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '">' . "\n";			
 			break;
+			case 'inst':
+				$text = $lang['NEW_PLUGIN_ADDED'] . '<meta HTTP-EQUIV="REFRESH" content="1; url=' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;do_plg=' . $plg->plg_id . '&amp;m=4">' . "\n";
+			break;
+			case 'zipped':
+				
+				//todo : show link to downloading zip file from do_plg=$plg->plg_id&m=6&fn=$plg->zipped_files
+		
+			break;
+			case 'zipped/inst':
+				//todo : as above ..
+				//todo : inst link also ..
+			break;
 			default:
-				if(strpos($return, 'inst:') !== false)
-				{
-					$plg_id = array_pop(explode(':', $return)); 
-					$text = $lang['NEW_PLUGIN_ADDED'] . '<meta HTTP-EQUIV="REFRESH" content="1; url=' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;do_plg=' . $plg_id . '&amp;m=4">' . "\n";
-				}
-				else
-				{
-					kleeja_admin_err($lang['ERR_IN_UPLOAD_XML_FILE'],true,'',true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'));	
-				}
+				kleeja_admin_err($lang['ERR_IN_UPLOAD_XML_FILE'],true,'',true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'));	
 		}
 	}
 

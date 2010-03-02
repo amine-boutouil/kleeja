@@ -104,7 +104,7 @@ class kplugins
 		//important tags not exists 
 		if(empty($plg_info))
 		{
-			big_error('Error',$lang['ERR_XML_NO_G_TAGS']);
+			big_error('Error',$lang['ERR_XML_NO_G_TAGS'] . (defined('DEV_STAGE') ? __file__ . ':'. __line__ : ''));
 		}
 
 		if(!empty($plg_info['plugin_kleeja_version']['value']) && version_compare(strtolower($plg_info['plugin_kleeja_version']['value']), strtolower(KLEEJA_VERSION), '>=') == false)
@@ -161,12 +161,9 @@ class kplugins
 		$there_is_intruct = false;
 		if(isset($plg_instructions))
 		{
-			if(is_array($plg_instructions['instruction']))
+			if(is_array($plg_instructions['instruction']) && array_key_exists("attributes", $plg_instructions['instruction']))
 			{
-				if(array_key_exists("attributes", $plg_instructions['instruction']))
-				{
-					$plg_instructions['instruction'] = array($plg_instructions['instruction']);
-				}
+				$plg_instructions['instruction'] = array($plg_instructions['instruction']);
 			}
 	
 			$instarr = array();		
@@ -174,7 +171,7 @@ class kplugins
 			{
 				if(empty($in['attributes']['lang']) || !isset($in['attributes']['lang']))
 				{
-					big_error('Error',$lang['ERR_XML_NO_G_TAGS']);
+					big_error('Error',$lang['ERR_XML_NO_G_TAGS'] . (defined('DEV_STAGE') ? __file__ . ':'. __line__ : ''));
 				}
 
 				$instarr[$in['attributes']['lang']] = $in['value'];
@@ -186,23 +183,20 @@ class kplugins
 		$there_is_files = false;
 		if(isset($plg_files))
 		{
-			if(is_array($plg_files['file']))
+			if(is_array($plg_files['file']) && array_key_exists("attributes", $plg_files['file']))
 			{
-				if(array_key_exists("attributes", $plg_files['file']))
-				{
-					$plg_files['file'] = array($plg_files['file']);
-				}
+				$plg_files['file'] = array($plg_files['file']);
 			}
 	
 			$newfiles = array();		
 			foreach($plg_files['file'] as $in)
 			{
-				if(empty($in['attributes']['lang']) || !isset($in['attributes']['lang']))
+				if(empty($in['attributes']['path']) || !isset($in['attributes']['path']))
 				{
-					big_error('Error',$lang['ERR_XML_NO_G_TAGS']);
+					big_error('Error', $lang['ERR_XML_NO_G_TAGS'] . (defined('DEV_STAGE') ? __file__ . ':'. __line__ : ''));
 				}
 
-				$newfiles[$in['attributes']['lang']] = $in['value'];
+				$newfiles[$in['attributes']['path']] = $in['value'];
 			}
 
 			$there_is_files = isset($newfiles) && !empty($newfiles) ? true : false;
@@ -211,12 +205,9 @@ class kplugins
 
 		if(isset($plg_info['plugin_description']))
 		{
-			if(is_array($plg_info['plugin_description']['description']))
+			if(is_array($plg_info['plugin_description']['description']) && array_key_exists("attributes", $plg_info['plugin_description']['description']))
 			{
-				if(array_key_exists("attributes", $plg_info['plugin_description']['description']))
-				{
-					$plg_info['plugin_description']['description'] = array($plg_info['plugin_description']['description']);
-				}
+				$plg_info['plugin_description']['description'] = array($plg_info['plugin_description']['description']);
 			}
 	
 			$p_desc = array();		
@@ -224,7 +215,7 @@ class kplugins
 			{
 				if(empty($in['attributes']['lang']) || !isset($in['attributes']['lang']))
 				{
-					big_error('Error', $lang['ERR_XML_NO_G_TAGS']);
+					big_error('Error', $lang['ERR_XML_NO_G_TAGS'] . (defined('DEV_STAGE') ? __file__ . ':'. __line__ : ''));
 				}
 				$p_desc[$in['attributes']['lang']] = $in['value'];
 			}
@@ -304,12 +295,9 @@ class kplugins
 
 		if(isset($plg_phrases))
 		{
-			if(is_array($plg_phrases['lang']))
+			if(is_array($plg_phrases['lang']) && array_key_exists("attributes", $plg_phrases['lang']))
 			{
-				if(array_key_exists("attributes", $plg_phrases['lang']))
-				{
-					$plg_phrases['lang'] = array($plg_phrases['lang']);
-				}
+				$plg_phrases['lang'] = array($plg_phrases['lang']);
 			}
 
 			$phrases = array();		
@@ -323,12 +311,9 @@ class kplugins
 				//first we create a new array that can carry language phrases
 				$phrases[$in['attributes']['name']] = array();
 
-				if(is_array($in['phrase']))
+				if(is_array($in['phrase']) && array_key_exists("attributes", $in['phrase']))
 				{
-					if(array_key_exists("attributes", $in['phrase']))
-					{
-						$in['phrase'] = array($in['phrase']);
-					}
+					$in['phrase'] = array($in['phrase']);
 				}
 				
 				//get phrases value
@@ -344,12 +329,9 @@ class kplugins
 
 		if(isset($plg_options))
 		{
-			if(is_array($plg_options['option']))
+			if(is_array($plg_options['option']) && array_key_exists("attributes", $plg_options['option']))
 			{
-				if(array_key_exists("attributes", $plg_options['option']))
-				{
-					$plg_options['option'] = array($plg_options['option']);
-				}
+				$plg_options['option'] = array($plg_options['option']);
 			}
 
 			foreach($plg_options['option'] as $in)
@@ -383,12 +365,9 @@ class kplugins
 				include_once "s_strings.php";
 				$finder	= new sa_srch;
 							
-				if(is_array($plg_tpl['edit']['template']))
+				if(is_array($plg_tpl['edit']['template']) && array_key_exists("attributes", $plg_tpl['edit']['template']))
 				{
-					if(array_key_exists("attributes", $plg_tpl['edit']['template']))
-					{
-						$plg_tpl['edit']['template'] = array($plg_tpl['edit']['template']);
-					}
+					$plg_tpl['edit']['template'] = array($plg_tpl['edit']['template']);
 				}		
 
 				foreach($plg_tpl['edit']['template'] as $temp)
@@ -776,7 +755,7 @@ class zfile
 	
 	function check()
 	{
-		return is_array($this->files) ? true : false;
+		return @sizeof($this->files) ? true : false;
 	}
 	
 	function push($plg_name)
@@ -792,7 +771,7 @@ class zfile
 		$ff = 'changes_of_' . str_replace(array('.', '-', ' '), '_', strtolower($plg_name)) . '.zip';
 
 		//save file to cache and return the cached file name
-		$c = $zipfile->zipped_file();
+		$c = $z->zipped_file();
 		$fn = @fopen(PATH . 'cache/' . $ff, 'w');
 		fwrite($fn, $c);
 		fclose($fn);

@@ -88,6 +88,7 @@ class kplugins
 
 		$gtree = $XML->xml_to_array($contents);
 		
+		//sekelton of Kleeja plugin file
 		$tree				= empty($gtree['kleeja']) ? null : $gtree['kleeja'];
 		$plg_info			= empty($tree['info']) ? null : $tree['info'];
 		$plg_install		= empty($tree['install']) ? null : $tree['install'];
@@ -101,6 +102,7 @@ class kplugins
 		$plg_options		= empty($tree['options']) ? null : $tree['options'];
 		$plg_files			= empty($tree['files']) ? null : $tree['files'];
 
+		
 		//important tags not exists 
 		if(empty($plg_info))
 		{
@@ -123,7 +125,7 @@ class kplugins
 							'FROM'		=> "{$dbprefix}plugins",
 							'WHERE'		=> 'plg_name="' . $plugin_name . '"' 
 						);
-		($hook = kleeja_run_hook('qr_chk_plginfo_crtplgxml_func')) ? eval($hook) : null; //run hook
+
 		$res = $SQL->build($is_query);
 	
 		if($SQL->num_rows($res))
@@ -261,8 +263,6 @@ class kplugins
 												($there_is_files ? $SQL->escape(kleeja_base64_encode(serialize(array_keys($newfiles)))) : '') . "'"
 
 							);
-
-			($hook = kleeja_run_hook('qr_insert_plugininfo_crtplgxml_func')) ? eval($hook) : null; //run hook
 			
 			$SQL->build($insert_query);
 		
@@ -281,8 +281,6 @@ class kplugins
 												"', plg_store='" . $SQL->escape($store) . "'",
 								'WHERE'		=> "plg_id=" . $this->plg_id
 						);
-
-			($hook = kleeja_run_hook('qr_update_plugininfo_crtplgxml_func')) ? eval($hook) : null; //run hook
 
 			$SQL->build($update_query);
 		}
@@ -350,6 +348,8 @@ class kplugins
 			{
 				$this->f->_write($this->_fixpath_newfile($path), kleeja_base64_decode($content));
 			}
+			
+			unset($newfiles);
 		}
 
 
@@ -417,8 +417,6 @@ class kplugins
 					{
 						//update
 						$this->f->_write($style_path . $template_name . '.html', $finder->text);
-
-						($hook = kleeja_run_hook('op_update_tplcntedit_crtplgxml_func')) ? eval($hook) : null; //run hook
 	
 						//delete cache ..
 						delete_cache('tpl_' . $template_name);
@@ -463,7 +461,6 @@ class kplugins
 																	);
 					**/
 
-					($hook = kleeja_run_hook('op_insert_newtpls_crtplgxml_func')) ? eval($hook) : null; //run hook
 				}
 
 			} #end new
@@ -506,7 +503,7 @@ class kplugins
 										'INTO'		=> "{$dbprefix}hooks",
 										'VALUES'	=> "'" . $this->plg_id . "','" . $hook_for . "', '" . $hk_value . "'"
 									);
-				($hook = kleeja_run_hook('qr_insert_hooks_crtplgxml_func')) ? eval($hook) : null; //run hook
+
 				$SQL->build($insert_query);		
 			}
 			//delete cache ..
@@ -531,8 +528,8 @@ class kplugins
 
 				$this->f->_write('cache/styles_cached.php', kleeja_base64_encode(serialize($cached_instructions)));
 			}
-			
-			if($this->f_method == 'zfile')
+
+			if($this->f_method === 'zfile')
 			{
 				if($this->f->check())
 				{
@@ -550,7 +547,7 @@ class kplugins
 			return $plg_errors;
 		}
 
-		($hook = kleeja_run_hook('create_plugin_xml_func')) ? eval($hook) : null; //run hook
+
 		return false;
 	}
 
@@ -604,8 +601,6 @@ class kplugins
 			$filename = @fopen($style_path . $template_name . '.html', 'w');
 			fwrite($filename, $finder->text);
 			fclose($filename);
-																
-			($hook = kleeja_run_hook('op_up_tplcntedit_dlchtpl_fuck')) ? eval($hook) : null; //run hook
 			
 			//delete cache ..
 			delete_cache('tpl_' .$template_name);
@@ -652,7 +647,12 @@ class kplugins
 	
 	function _fixpath_newfile($path)
 	{
-		return $path; /*must be fixed*/
+		if($path[0] == '/')
+		{
+			$path = substr($path, 1);
+		}
+
+		return $path;
 	}
 }
 
@@ -721,7 +721,7 @@ class zfile
 
 	function _write($filepath, $content)
 	{
-		$files[$filepath] = $content;
+		$this->files[$filepath] = $content;
 	}
 
 	function _delete($filepath)
@@ -762,17 +762,24 @@ class zfile
 	{
 		$z = new zipfile;
 		
-		foreach($files as $filepath => $content)
+		/* 
+		//testing ...
+		echo '<pre>';
+		print_r($this->files);
+		echo '</pre>';
+		exit;
+		*/
+
+		foreach($this->files as $filepath => $content)
 		{
-			//todo : we have make a simple path, so clean it ..
-			$z->create_file($filepath, $content);
+			$z->create_file($content, $filepath);
 		}
 
-		$ff = 'changes_of_' . str_replace(array('.', '-', ' '), '_', strtolower($plg_name)) . '.zip';
+		$ff = md5($plg_name);
 
 		//save file to cache and return the cached file name
 		$c = $z->zipped_file();
-		$fn = @fopen(PATH . 'cache/' . $ff, 'w');
+		$fn = @fopen(PATH . 'cache/changes_of_' . $ff . '.zip', 'w');
 		fwrite($fn, $c);
 		fclose($fn);
 
@@ -877,7 +884,7 @@ class kftp
 		$cached_file = PATH . 'cache/plg_system_' . $filename;
 
 		//make it as a cached one
-		$h = @fopen($cached_file, 'w');
+		$h = @fopen($cached_file, 'wb');
 		fwrite($h, $content);
 		@fclose($h);
 	
@@ -1042,7 +1049,7 @@ class zipfile
 	var $old_offset = 0;
 	var $basedir = '.';
 
-	function create_dir($name, $echo = 1)
+	function create_dir($name, $echo = false)
 	{
 		$name = str_replace("\\", "/", $name);
 		$fr = "\x50\x4b\x03\x04" . "\x0a\x00" . "\x00\x00" . "\x00\x00" . "\x00\x00\x00\x00" . pack("V",0). pack("V",0) . pack("V",0) . pack("v", strlen($name)) . pack("v", 0) . $name . pack("V",0) . pack("V",0) .pack("V",0);
@@ -1067,7 +1074,7 @@ class zipfile
 		return true;
 	}
 
-	function create_file($data, $name, $echo = 1)
+	function create_file($data, $name, $echo = false)
 	{
 		$name = str_replace("\\", "/", $name);
 		$fr = "\x50\x4b\x03\x04". "\x14\x00" . "\x00\x00" . "\x08\x00" . "\x00\x00\x00\x00"; 
@@ -1087,7 +1094,7 @@ class zipfile
 		$this->ctrl_dir[] = $cdrec;
 	}
 
-	function zipped_file($d = 0)
+	function zipped_file($d = true)
 	{
 		$data = implode('', $this->datasec);
 		$ctrldir = implode('', $this->ctrl_dir);

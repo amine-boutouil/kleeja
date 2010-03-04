@@ -387,15 +387,20 @@ if (isset($_GET['do_plg']))
 		
 		//downaloding zipped changes ..
 		case 6:
-			
+
 			if(!isset($_GET['fn']))
 			{
 				kleeja_admin_err($lang['ERROR']);
 			}
-			
-			$_f		= preg_replace('![^a-z0-9_.]!', '', $_GET['fn']);
-			$name	= str_replace('_', ' ', $_f);
-			
+
+			$_f		= preg_replace('![^a-z0-9]!', '', $_GET['fn']);
+			$name	= 'changes_of_' . $_f . '.zip';
+
+			if(!file_exists(PATH . 'cache/' . $name))
+			{
+				kleeja_admin_err($lang['ERROR']);
+			}
+
 			if (is_browser('mozilla'))
 			{
 				$h_name = "filename*=UTF-8''" . rawurlencode(htmlspecialchars_decode($name));
@@ -419,13 +424,13 @@ if (isset($_GET['do_plg']))
 			{
 				@ini_set('zlib.output_compression', 'Off');
 			}
-				
+
 			header('Pragma: public');
 			header('Content-Type: application/zip');
 			header('X-Download-Options: noopen');
 			header('Content-Disposition: attachment; '  . $h_name);
 			
-			echo file_get_contents(PATH . 'cache/' . $_f);
+			echo file_get_contents(PATH . 'cache/' . $name);
 			
 		break;
 	}

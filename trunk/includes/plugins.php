@@ -526,7 +526,9 @@ class kplugins
 					$cached_instructions += $cached_content;
 				}
 
-				$this->f->_write('cache/styles_cached.php', kleeja_base64_encode(serialize($cached_instructions)));
+				$filename = @fopen(PATH . 'cache/styles_cached.php' , 'w');
+				fwrite($filename, kleeja_base64_encode(serialize($cached_instructions)));
+				fclose($filename);
 			}
 
 			if($this->f_method === 'zfile')
@@ -598,12 +600,10 @@ class kplugins
 		if($d_contents  != '' && md5($finder->text) != md5($d_contents) && is_writable($style_path))
 		{
 			//update
-			$filename = @fopen($style_path . $template_name . '.html', 'w');
-			fwrite($filename, $finder->text);
-			fclose($filename);
-			
+			$this->f->_write($style_path . $template_name . '.html', $finder->text);
+
 			//delete cache ..
-			delete_cache('tpl_' .$template_name);
+			delete_cache('tpl_' . $template_name);
 		}
 		else
 		{

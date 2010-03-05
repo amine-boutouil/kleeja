@@ -147,7 +147,28 @@ if (isset($_GET['do_plg']))
 		
 		//Delete plguin
 		case '3': 
-		
+
+			//
+			//todo : 
+			// - 1-1: show a page with options of file handling 
+			// - 1-2: after submit , delete the plugin
+			// - 2 : delete files added by installing system
+			// - 3 : dont forget update exporting system
+	
+			$stylee		= "admin_plugin_mfile";
+			$action		= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;m=3&amp;un=1&amp;do_plg=' . $plg_id;
+			$for_unistalling = true;
+
+			//after submit
+			if(isset($_GET['un']))
+			{
+			
+			}
+			else
+			{
+			
+			}
+
 			//check if there is style require this plugin
 			if(($style_info = kleeja_style_info($config['style'])) != false)
 			{

@@ -73,7 +73,7 @@ $cache = new cache;
 //
 if(!defined('STOP_HOOKS'))
 {
-	if (!($all_plg_hooks = $cache->get('data_hooks')))
+	if (!($all_plg_hooks = $cache->get('data_hooks')) || defined('APC_CACHE'))
 	{
 		//get all hooks
 		$query = array(
@@ -99,7 +99,10 @@ if(!defined('STOP_HOOKS'))
 		}
 	 	$SQL->freeresult($result);
 
-		$cache->save('data_hooks', $all_plg_hooks);
+		if(!defined('APC_CACHE'))
+		{
+			$cache->save('data_hooks', $all_plg_hooks);
+		}
 	}
 }#plugins is on
 
@@ -108,7 +111,7 @@ if(!defined('STOP_HOOKS'))
 //get config data from config table  ...
 //
 
-if (!($config = $cache->get('data_config')))
+if (!($config = $cache->get('data_config')) || defined('APC_CACHE'))
 {
 	$query = array(
 					'SELECT'	=> 'c.*',
@@ -126,14 +129,17 @@ if (!($config = $cache->get('data_config')))
 
 	$SQL->freeresult($result);
 
-	$cache->save('data_config', $config);
+	if(!defined('APC_CACHE'))
+	{
+		$cache->save('data_config', $config);
+	}
 }
 
 //
 //get language terms from lang table  ...
 //
 
-if (!($olang = $cache->get('data_lang')))
+if (!($olang = $cache->get('data_lang')) || defined('APC_CACHE'))
 {
 	$query = array(
 					'SELECT'	=> 'l.*',
@@ -152,13 +158,15 @@ if (!($olang = $cache->get('data_lang')))
 
 	$SQL->freeresult($result);
 
-	$cache->save('data_lang', $olang);
-}
-	
+	if(!defined('APC_CACHE'))
+	{
+		$cache->save('data_lang', $olang);
+	}
+}	
 //
 //get data from types table ... 
 //
-if (!($exts = $cache->get('data_exts')))
+if (!($exts = $cache->get('data_exts')) || defined('APC_CACHE'))
 {
 	$query = array(
 					'SELECT'	=> 'e.*',
@@ -185,9 +193,11 @@ if (!($exts = $cache->get('data_exts')))
 
 	$SQL->freeresult($result);
 
-	$cache->save('data_exts', $exts);
+	if(!defined('APC_CACHE'))
+	{
+		$cache->save('data_exts', $exts);
+	}
 }
-
 //make them as seperated vars
 extract($exts);
 unset($exts);
@@ -196,7 +206,7 @@ unset($exts);
 //
 //stats .. to cache
 //
-if (!($stats = $cache->get('data_stats')))
+if (!($stats = $cache->get('data_stats')) || defined('APC_CACHE'))
 {
 	$query = array(
 					'SELECT'	=> 's.*',
@@ -226,7 +236,10 @@ if (!($stats = $cache->get('data_stats')))
 
 	$SQL->freeresult($result);
 
-	$cache->save('data_stats', $stats, 3600);
+	if(!defined('APC_CACHE'))
+	{
+		$cache->save('data_stats', $stats, 3600);
+	}
 }
 
 //make them as seperated vars
@@ -236,7 +249,7 @@ unset($stats);
 //
 //get banned ips data from stats table  ...
 //
-if (!($banss = $cache->get('data_ban')))
+if (!($banss = $cache->get('data_ban')) || defined('APC_CACHE'))
 {
 	$query = array(
 					'SELECT'	=> 's.ban',
@@ -270,7 +283,7 @@ if (!($banss = $cache->get('data_ban')))
 //	
 //get rules data from stats table  ...
 //
-if (!($ruless = $cache->get('data_rules')))
+if (!($ruless = $cache->get('data_rules')) || defined('APC_CACHE'))
 {
 	$query = array(
 					'SELECT'	=> 's.rules',
@@ -284,14 +297,17 @@ if (!($ruless = $cache->get('data_rules')))
 	$ruless = $row['rules'];
 	$SQL->freeresult($result);
 
-	$cache->save('data_rules', $ruless);
+	if(!defined('APC_CACHE'))
+	{
+		$cache->save('data_rules', $ruless);
+	}
 }	
 
 
 //	
 //get ex-header-footer data from stats table  ... 
 //
-if (!($extras = $cache->get('data_extra')))
+if (!($extras = $cache->get('data_extra')) || defined('APC_CACHE'))
 {
 	$query = array(
 					'SELECT'	=> 's.ex_header, s.ex_footer',
@@ -309,8 +325,11 @@ if (!($extras = $cache->get('data_extra')))
 	);
 
 	$SQL->freeresult($result);
-
-	$cache->save('data_extra', $extras);
+	
+	if(!defined('APC_CACHE'))
+	{
+		$cache->save('data_extra', $extras);
+	}
 }
 	
 

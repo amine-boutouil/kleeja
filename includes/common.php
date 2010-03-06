@@ -29,6 +29,12 @@ define('IN_PHP6', (version_compare(PHP_VERSION, '6.0.0-dev', '>=') ? true : fals
 //filename of config.php
 define('KLEEJA_CONFIG_FILE', 'config.php');
 
+
+if(@extension_loaded('apc'))
+{
+	define('APC_CACHE', true);
+}
+
 //if sessions is started before, let's destroy it!
 if(isset($_SESSION))
 {

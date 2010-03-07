@@ -337,7 +337,7 @@ switch ($_GET['go'])
 			}
 
 			//to get userdata!!
-			$data_user = ((int) $config['user_system'] == 1) ? $usrcp->get_data('name, show_my_filecp', $user_id) : array('name' => $usrcp->name(), 'show_my_filecp' => '1');
+			$data_user = ((int) $config['user_system'] == 1) ? $usrcp->get_data('name, show_my_filecp', $user_id) : array('name' => $usrcp->usernamebyid($user_id), 'show_my_filecp' => '1');
 
 			if(!$data_user['name'])
 			{

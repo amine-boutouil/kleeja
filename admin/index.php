@@ -117,9 +117,10 @@ if(
 	{
 		$err = true;
 	}
-
-	echo $tpl->display("admin_login");
 	
+	//prevent indexing this page by bots
+	header('HTTP/1.1 503 Service Temporarily Unavailable');
+	echo $tpl->display("admin_login");
 
 	$SQL->close();
 	exit;
@@ -295,6 +296,7 @@ else
 	$MINI_MENU = true;
 	$link_expand_menu = basename(ADMIN_PATH) . '?cp=' . $go_to . '&amp;expand_menu=0';
 }
+
 
 //header
 echo $tpl->display("admin_header");

@@ -37,7 +37,7 @@ class kplugins
 		$f_method = '';
 		$disabled_functions = explode(',', @ini_get('disable_functions'));
 
-		if(!is_writable(PATH))
+		if(is_writable(PATH))
 		{
 			$this->f_method = 'kfile';
 		}
@@ -424,11 +424,7 @@ class kplugins
 					if($d_contents  != '' && $finder->text != $d_contents)
 					{
 						//update
-						//$this->f->_write($style_path . $template_name . '.html', $finder->text);
-						$filename = @fopen($style_path . $template_name . '.html' , 'w');
-						fwrite($filename, $finder->text);
-						fclose($filename);
-						
+						$this->f->_write($style_path . $template_name . '.html', $finder->text);
 						//delete cache ..
 						delete_cache('tpl_' . $template_name);
 					}
@@ -461,12 +457,8 @@ class kplugins
 					$template_name		= $temp['attributes']['name'];
 					$template_content	= trim($temp['value']);
 
-					//$this->f->_write($style_path . $template_name . '.html', $template_content);
-					$filename = @fopen($style_path . $template_name . '.html' , 'w');
-					fwrite($filename, $finder->text);
-					fclose($filename);
-			
-					
+					$this->f->_write($style_path . $template_name . '.html', $template_content);
+
 					/**
 						$cached_instructions[$template_name] = array(
 																		'action'		=> 'new', 
@@ -577,6 +569,16 @@ class kplugins
 	{
 		global $dbprefix, $lang, $config, $STYLE_PATH_ADMIN , $STYLE_PATH, $THIS_STYLE_PATH;
 		
+		if(is_array($template_name))
+		{
+			foreach($template_name as $tn)
+			{
+				$this->delete_ch_tpl($tn, $delete_txt);
+			}
+			return;
+		}
+
+
 		$style_path = (substr($template_name, 0, 6) == 'admin_') ? $STYLE_PATH_ADMIN : $THIS_STYLE_PATH;
 		$is_admin_template = (substr($template_name, 0, 6) == 'admin_') ? true : false;
 
@@ -614,11 +616,7 @@ class kplugins
 		if($d_contents  != '' && md5($finder->text) != md5($d_contents) && is_writable($style_path))
 		{
 			//update
-			//$this->f->_write($style_path . $template_name . '.html', $finder->text);
-			$filename = @fopen($style_path . $template_name . '.html' , 'w');
-			fwrite($filename, $finder->text);
-			fclose($filename);
-			
+			$this->f->_write($style_path . $template_name . '.html', $finder->text);
 			//delete cache ..
 			delete_cache('tpl_' . $template_name);
 		}

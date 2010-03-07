@@ -158,6 +158,21 @@ function kleeja_run_hook ($hook_name)
 }
 
 /**
+* is plugin installed ?
+*/
+function kleeja_plugin_exists($plugin_name)
+{
+	global $all_plg_plugins;
+
+	if(defined('STOP_HOOKS') || !isset($all_plg_plugins[$plugin_name]))
+	{
+		return false;
+	}
+	
+	return true;
+}
+
+/**
 * Return current page url
 */
 function kleeja_get_page ()

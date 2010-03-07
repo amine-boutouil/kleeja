@@ -373,7 +373,16 @@ class kplugins
 				foreach($plg_tpl['edit']['template'] as $temp)
 				{
 					$template_name			= $SQL->real_escape($temp['attributes']['name']);
-					$finder->find_word		= $temp['find']['value'];
+					if(isset($temp['find']['value']) && isset($temp['findend']['value']))
+					{
+						$finder->find_word		= array(1 => $temp['find']['value'],
+														2 => $temp['findend']['value']);
+					}
+					else
+					{
+						$finder->find_word		= $temp['find']['value'];
+					}
+					
 					$finder->another_word	= $temp['action']['value'];
 					switch($temp['action']['attributes']['type']):
 						case 'add_after': $action_type =3; break;
@@ -407,8 +416,7 @@ class kplugins
 							}
 						}
 					}
-	
-				
+					
 					$d_contents = file_exists($template_path) ? file_get_contents($template_path) : '';
 					$finder->text = trim($d_contents);
 					$finder->do_search($action_type);
@@ -416,8 +424,11 @@ class kplugins
 					if($d_contents  != '' && $finder->text != $d_contents)
 					{
 						//update
-						$this->f->_write($style_path . $template_name . '.html', $finder->text);
-	
+						//$this->f->_write($style_path . $template_name . '.html', $finder->text);
+						$filename = @fopen($style_path . $template_name . '.html' , 'w');
+						fwrite($filename, $finder->text);
+						fclose($filename);
+						
 						//delete cache ..
 						delete_cache('tpl_' . $template_name);
 					}
@@ -450,7 +461,10 @@ class kplugins
 					$template_name		= $temp['attributes']['name'];
 					$template_content	= trim($temp['value']);
 
-					$this->f->_write($style_path . $template_name . '.html', $template_content);
+					//$this->f->_write($style_path . $template_name . '.html', $template_content);
+					$filename = @fopen($style_path . $template_name . '.html' , 'w');
+					fwrite($filename, $finder->text);
+					fclose($filename);
 			
 					
 					/**
@@ -600,8 +614,11 @@ class kplugins
 		if($d_contents  != '' && md5($finder->text) != md5($d_contents) && is_writable($style_path))
 		{
 			//update
-			$this->f->_write($style_path . $template_name . '.html', $finder->text);
-
+			//$this->f->_write($style_path . $template_name . '.html', $finder->text);
+			$filename = @fopen($style_path . $template_name . '.html' , 'w');
+			fwrite($filename, $finder->text);
+			fclose($filename);
+			
 			//delete cache ..
 			delete_cache('tpl_' . $template_name);
 		}

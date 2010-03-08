@@ -34,12 +34,12 @@ class kplugins
 	function kplugins()
 	{
 		//check for the best method of files handling
-		$f_method = '';
+		$this->f_method = '';
 		$disabled_functions = explode(',', @ini_get('disable_functions'));
 
 		if(is_writable(PATH))
 		{
-			$this->f_method = 'kfile';
+			$this->f_method = 'skfile';
 		}
 		else if (@extension_loaded('ftp'))
 		{

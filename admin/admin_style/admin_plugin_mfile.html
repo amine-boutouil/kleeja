@@ -7,16 +7,13 @@
 <div id="border-table">
 
 <!-- title  -->
-<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/menu_icons/plugins_button.gif" />{lang.PLUGINS} :</h2>
+<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/menu_icons/plugins_button.gif" />{lang.PLUGINS} / {lang.DELETE} :</h2>
 <!-- title  -->
 
 <!-- border line Vertical  -->
 <p class="dot" />
 <!-- border line Vertical  -->
-<br />
 
-<strong>{lang.PLUGINS_EX}</strong>
-<br />
 
 <!-- start clear  -->
 <div class="clr"></div><br />
@@ -25,6 +22,8 @@
 <form method="post" action="{action}">
 
 </IF>
+
+<IF NAME="there_is_files_method">
 
 <b>{lang.PLUGIN_WT_FILE_METHOD}</b>
 <br />
@@ -55,14 +54,24 @@
 			</tr>
 		</table>
 </div>
-		
-<IF NAME="for_unistalling">
 
+<IF NAME="for_unistalling">
+<!--  button  -->
+<div class="quick"><input name="submit_del_plg" type="submit" value="{lang.SUBMIT}" /></div >
+<!--  button  -->
 </fieldset>
 {H_FORM_KEYS}
 </form>
 
 </div>
 </IF>
+
+<ELSE>
+
+{lang.PLUGIN_NO_FILE_METHOD}
+
+</IF>
+
+
 
 <!-- end view plugins mfile temlate  -->

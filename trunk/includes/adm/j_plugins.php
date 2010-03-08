@@ -14,10 +14,37 @@ if (!defined('IN_ADMIN'))
 	exit();
 }
 
+//todo : delete page ... 
+//		update exporting system
 
 include PATH . 'includes/plugins.php';
 $plg = new kplugins;
 
+//check methods of files handler, if there is nothing of them, so 
+//we have disable uploading.
+$there_is_files_method = false;
+if($plg->f_method != '')
+{
+	$there_is_files_method = $plg->f_method;
+
+	//return values of ftp from config, if not get suggested one 
+	$ftp_info = array('host', 'user', 'pass', 'path', 'port');
+
+	if(!empty($config['ftp_info']))
+	{
+		$ftp_info = @unserialize($config['ftp_info']);
+	}
+	else
+	{
+		//todo : make sure to figure this from OS, and some other things
+		$ftp_info['path'] = '/public_html' . str_replace('/admin', '', dirname($_SERVER['PHP_SELF'])) . '/';
+		$ftp_info['port'] = 21;
+	}
+}
+
+
+//show first page of plugins
+if (!isset($_GET['do_plg'])):
 
 //for style ..
 $stylee		= "admin_plugins";
@@ -75,34 +102,10 @@ else
 
 $SQL->freeresult($result);
 
-//check methods of files handler, if there is no any one , so 
-//we have disable uploading
-
-$there_is_files_method = false;
-if($plg->f_method != '')
-{
-	$there_is_files_method = $plg->f_method;
-
-	//return values of ftp from config, if not get suggested one 
-	$ftp_info = array('host', 'user', 'pass', 'path', 'port');
-
-	if(!empty($config['ftp_info']))
-	{
-		$ftp_info = @unserialize($config['ftp_info']);
-	}
-	else
-	{
-		//todo : make sure to figure this from OS, and some other things
-		$ftp_info['path'] = '/public_html' . str_replace('/admin', '', dirname($_SERVER['PHP_SELF'])) . '/';
-		$ftp_info['port'] = 21;
-	}
-}
-
-
 
 //after submit 
-if (isset($_GET['do_plg']))
-{
+else:
+
 	$plg_id = intval($_GET['do_plg']);
 
 	switch($_GET['m'])
@@ -148,6 +151,16 @@ if (isset($_GET['do_plg']))
 		//Delete plguin
 		case '3': 
 
+			//check if there is style require this plugin
+			if(($style_info = kleeja_style_info($config['style'])) != false)
+			{
+				$plugins_required = array_map('trim', explode(',', $style_info['plugins_required']));
+				if(in_array($_GET['pn'], $plugins_required))
+				{
+					kleeja_admin_err($lang['PLUGIN_REQ_BY_STYLE_ERR']);
+				}
+			}
+
 			//
 			//todo : 
 			// - 1-1: show a page with options of file handling 
@@ -160,76 +173,79 @@ if (isset($_GET['do_plg']))
 			$for_unistalling = true;
 
 			//after submit
-			if(isset($_GET['un']))
+			if(isset($_GET['un']) || $plg->f_method == 'kfile')
 			{
 			
-			}
-			else
-			{
-			
-			}
-
-			//check if there is style require this plugin
-			if(($style_info = kleeja_style_info($config['style'])) != false)
-			{
-				$plugins_required = array_map('trim', explode(',', $style_info['plugins_required']));
-				if(in_array($_GET['pn'], $plugins_required))
+				if(isset($_POST['_fmethod']) && $_POST['_fmethod'] == 'kftp')
 				{
-					kleeja_admin_err($lang['PLUGIN_REQ_BY_STYLE_ERR']);
+					if(empty($_POST['ftp_host']) || empty($_POST['ftp_port']) || empty($_POST['ftp_user']) ||empty($_POST['ftp_pass']))
+					{
+						kleeja_admin_err($lang['EMPTY_FIELDS'], true,'', true, str_replace('un=1', '', $action));
+					}
+					else
+					{
+						
+						$plg->info = $ftpinfo = array('host'=>$_POST['ftp_host'], 'port'=>$_POST['ftp_port'], 'user'=>$_POST['ftp_user'], 'pass'=>$_POST['ftp_pass'], 'path'=>$_POST['ftp_path']);
+
+						$ftpinfo['pass'] = '';
+						update_config('ftp_info', serialize($ftpinfo), false);
+						
+						if(!$plg->check_connect())
+						{
+							kleeja_admin_err($lang['LOGIN_ERROR'], true,'', true, str_replace('un=1', '', $action));
+						}
+					}
 				}
-			}
+				else if(isset($_POST['_fmethod']) && $_POST['_fmethod'] == 'zfile')
+				{
+					$plg->f_method = 'zfile';
+				}
 
-			//before delete we have look for unistalling 
-			$query	= array(
-							'SELECT'	=> 'plg_uninstall',
-							'FROM'		=> "{$dbprefix}plugins",
-							'WHERE'		=> "plg_id=" . $plg_id
-						);
-
-			$result = $SQL->fetch_array($SQL->build($query));
-
-			if(trim($result['plg_uninstall']) != '')
-			{
-				eval($result['plg_uninstall']);
-			}
-							
-			$query_del	= array(
-								'DELETE'	=> "{$dbprefix}plugins",
-								'WHERE'		=> "plg_id=" . $plg_id 
+			
+				//before delete we have look for unistalling 
+				$query	= array(
+								'SELECT'	=> 'plg_uninstall, plg_files',
+								'FROM'		=> "{$dbprefix}plugins",
+								'WHERE'		=> "plg_id=" . $plg_id
 							);
 
-			$SQL->build($query_del);
+				$result = $SQL->fetch_array($SQL->build($query));
+				
+				//do uninstalling codes
+				if(trim($result['plg_uninstall']) != '')
+				{
+					eval($result['plg_uninstall']);
+				}
+				
+				//delete files of plugin
+				if(trim($result['plg_files']) != '')
+				{
+					$plg->delete(@unserialize(kleeja_base64_decode($result['plg_files'])));
+				}
+				
+				//delete some data in Kleeja tables
+				$delete_from_tables = array('plugins', 'hooks', 'lang', 'config');
+				foreach($delete_from_tables as $table)
+				{
+					$query_del	= array(
+										'DELETE'	=> "{$dbprefix}{$table}",
+										'WHERE'		=> "plg_id=" . $plg_id 
+									);
 
-			$query_del2 = array(
-								'DELETE'	=> "{$dbprefix}hooks",
-								'WHERE'		=> "plg_id=" . $plg_id
-							);		
-
-			$SQL->build($query_del2);
+					$SQL->build($query_del);
+				}
 			
-			$query_del3 = array(
-								'DELETE'	=> "{$dbprefix}lang",
-								'WHERE'		=> "plg_id=" . $plg_id
-							);		
+				//delete caches ..
+				delete_cache(array('data_hooks', 'data_config'));
+				
+				$plg->atend();
 
-			$SQL->build($query_del3);
-			
-			$query_del4 = array(
-								'DELETE'	=> "{$dbprefix}config",
-								'WHERE'		=> "plg_id=" . $plg_id
-							);		
+				//todo : 
+				//msg must be differnt, if zipped give him link to download changed files, if not just return to our plugins page
 
-			$SQL->build($query_del4);
-
-
-
-			//delete caches ..
-			delete_cache('data_hooks');
-			delete_cache('data_config');
-
-			//show msg
-			$text = $lang['PLUGIN_DELETED'] . '<meta HTTP-EQUIV="REFRESH" content="1; url=' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '">' . "\n";
-			$stylee	= "admin_info";
+				$text = $lang['PLUGIN_DELETED'] . '<meta HTTP-EQUIV="REFRESH" content="1; url=' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '">' . "\n";
+				$stylee	= "admin_info";
+			}
 
 		break;
 		case '4': //plugin instructions
@@ -398,12 +414,13 @@ if (isset($_GET['do_plg']))
 				}
 				
 				echo '</kleeja>';
+				exit;
 			}
 			else
 			{
 				kleeja_admin_err($lang['ERROR']);
 			}
-			exit;
+
 		break;
 		
 		//downaloding zipped changes ..
@@ -455,7 +472,9 @@ if (isset($_GET['do_plg']))
 			
 		break;
 	}
-}
+
+endif;//else submit
+
 
 //new style from xml
 if(isset($_POST['submit_new_plg']))

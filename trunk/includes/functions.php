@@ -585,6 +585,16 @@ function kleeja_check_mime ($mime, $group_id, $file_path)
 function delete_cache($name, $all=false)
 {
 	($hook = kleeja_run_hook('delete_cache_func')) ? eval($hook) : null; //run hook
+	
+	//handle array of cached files
+	if(is_array($name))
+	{
+		foreach($name as $n)
+		{
+			delete_cache($n, false);
+		}
+		return true;
+	}
 
 	$path_to_cache = PATH . 'cache';
 	

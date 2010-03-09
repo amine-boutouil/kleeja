@@ -167,7 +167,7 @@ else:
 			// - 1-2: after submit , delete the plugin
 			// - 2 : delete files added by installing system
 			// - 3 : dont forget update exporting system
-	
+
 			$stylee		= "admin_plugin_mfile";
 			$action		= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;m=3&amp;un=1&amp;do_plg=' . $plg_id;
 			$for_unistalling = true;
@@ -210,19 +210,19 @@ else:
 							);
 
 				$result = $SQL->fetch_array($SQL->build($query));
-				
+	
 				//do uninstalling codes
 				if(trim($result['plg_uninstall']) != '')
 				{
 					eval($result['plg_uninstall']);
 				}
-				
+
 				//delete files of plugin
 				if(trim($result['plg_files']) != '')
 				{
-					$plg->delete(@unserialize(kleeja_base64_decode($result['plg_files'])));
+					$plg->delete_files(@unserialize(kleeja_base64_decode($result['plg_files'])));
 				}
-				
+
 				//delete some data in Kleeja tables
 				$delete_from_tables = array('plugins', 'hooks', 'lang', 'config');
 				foreach($delete_from_tables as $table)
@@ -234,7 +234,7 @@ else:
 
 					$SQL->build($query_del);
 				}
-			
+
 				//delete caches ..
 				delete_cache(array('data_hooks', 'data_config'));
 				
@@ -381,12 +381,13 @@ else:
 					}
 					echo "\t" . '</phrases>' . "\n";
 				}
-				
-				
-				$queryconfig = $SQL->build(array('SELECT'	=> '*', 
+
+				$queryconfig = $SQL->build(array(
+												'SELECT'	=> '*', 
 												'FROM'	=> "{$dbprefix}config",
-												'WHERE' => "plg_id=" . $plg_id));
-				
+												'WHERE' => "plg_id=" . $plg_id)
+												);
+
 				if($SQL->num_rows($queryconfig)>0)
 				{
 					echo "\t" . '<options>' . "\n";

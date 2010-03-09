@@ -39,7 +39,7 @@ class kplugins
 
 		if(is_writable(PATH))
 		{
-			$this->f_method = 'skfile';
+			$this->f_method = 'kfile';
 		}
 		else if (@extension_loaded('ftp'))
 		{
@@ -50,6 +50,8 @@ class kplugins
 			//not supported yet !
 			//$this->f_method = 'kfsock';
 		}
+
+		$this->check_connect();
 	}
 
 	function check_connect()
@@ -653,12 +655,21 @@ class kplugins
 	* to delete file at uninstalling
 	*
 	*/
-	function delete($files = array())
+	function delete_files($files = array())
 	{
-		return;
+		if(empty($files) || $this->f_method == 'zfile')
+		{
+			return true;
+		}
+
+		foreach($files as $path)
+		{
+			$this->f->_delete($this->_fixpath_newfile($path));
+		}
+		
+		return true;
 	}
-	
-	
+
 	
 	function _fixpath_newfile($path)
 	{
@@ -691,34 +702,44 @@ class kfile
 
 	function _write($filepath, $content)
 	{
-		$filename = @fopen($filepath, 'w');
+		$filename = @fopen($this->_fixpath($filepath), 'w');
 		fwrite($filename, $content);
 		@fclose($filename);
 	}
 
 	function _delete($filepath)
 	{
-		return kleeja_unlink($filepath);
+		return kleeja_unlink($this->_fixpath($filepath));
 	}
 	
 	function _rename($oldfile, $newfile)
 	{
-		return @rename($oldfile, $newfile);
+		return @rename($this->_fixpath($oldfile), $this->_fixpath($newfile));
 	}
 	
 	function _chmod($filepath, $perm = 0644)
 	{
-		return @chmod($filepath, $perm);
+		return @chmod($this->_fixpath($filepath), $perm);
 	}
 	
 	function _mkdir($dir, $perm = 0777)
 	{
-		return @mkdir($dir, $perm);
+		return @mkdir($this->_fixpath($dir), $perm);
 	}
 	
 	function _rmdir($dir)
 	{
-		return @rmdir($dir);
+		return @rmdir($this->_fixpath($dir));
+	}
+	
+	function _fixpath($path)
+	{
+		if($path[0] == '/')
+		{
+			$path = substr($path, 1);
+		}
+
+		return PATH . $path;
 	}
 }
 

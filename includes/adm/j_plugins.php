@@ -549,15 +549,15 @@ if(isset($_POST['submit_new_plg']))
 				$text = $lang['NEW_PLUGIN_ADDED'] . '<meta HTTP-EQUIV="REFRESH" content="1; url=' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;do_plg=' . $plg->plg_id . '&amp;m=4">' . "\n";
 			break;
 			case 'zipped':
-				
-				//todo : show link to downloading zip file from do_plg=$plg->plg_id&m=6&fn=$plg->zipped_files
-				$text = $lang['NEW_PLUGIN_ADDED'] . '<br /> <a href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;do_plg=' . $plg->plg_id . '&amp;m=6&amp;fn=' . $plg->zipped_files . '"> zip file </a>';
+				$text = sprintf($lang['PLUGIN_ADDED_ZIPPED'], '<a href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;do_plg=' . $plg->plg_id . '&amp;m=6&amp;fn=' . $plg->zipped_files . '">', '</a>');
 			break;
 			case 'zipped/inst':
-				//todo : as above ..
-				//todo : inst link also ..
-				$text = $lang['NEW_PLUGIN_ADDED'] . '<br /> <a href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;do_plg=' . $plg->plg_id . '&amp;m=6&amp;fn=' . $plg->zipped_files . '"> zip file </a>';
-
+				$text = sprintf($lang['PLUGIN_ADDED_ZIPPED_INST'], 
+								'<a href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;do_plg=' . $plg->plg_id . '&amp;m=6&amp;fn=' . $plg->zipped_files . '">',
+								'</a>',
+								'<a href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;do_plg=' . $plg->plg_id . '&amp;m=4">',
+								'</a>'
+								);
 			break;
 			default:
 				kleeja_admin_err($lang['ERR_IN_UPLOAD_XML_FILE'],true,'',true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'));	

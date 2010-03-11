@@ -56,7 +56,7 @@ $query['WHERE']	= "type IN ('" . implode("', '", $img_types) . "')";
 
 if(isset($_GET['last_visit']))
 {
-	$query['WHERE']	.= " AND time > " . intval($_GET['last_visit']) . "";
+	$query['WHERE']	.= " AND time > " . intval($_GET['last_visit']);
 }
 
 

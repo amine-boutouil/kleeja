@@ -188,35 +188,20 @@ else if(isset($_GET['search']))
 }
 else if(isset($_REQUEST['last_visit']))
 {
-	$query['WHERE']	= "f.time > '" . intval($_REQUEST['last_visit']) . "'";
+	$query['WHERE']	= "f.time > " . intval($_REQUEST['last_visit']);
 }
 
-if(isset($_REQUEST['order_by']) && ($_REQUEST['order_by'] == 'real_filename' || $_REQUEST['order_by'] == 'size' || $_REQUEST['order_by'] == 'user' || $_REQUEST['order_by'] == 'user_ip' || $_REQUEST['order_by'] == 'uploads' || $_REQUEST['order_by'] == 'time' || $_REQUEST['order_by'] == 'type' || $_REQUEST['order_by'] == 'folder' || $_REQUEST['order_by'] == 'report'))
+if(isset($_REQUEST['order_by']) && in_array($_REQUEST['order_by'], array('real_filename', 'size', 'user', 'user_ip', 'uploads', 'time', 'type', 'folder', 'report')))
 {
 	$query['ORDER BY'] = "f." . $SQL->escape($_REQUEST['order_by']);
 }
 
-if(isset($_REQUEST['order_way']) && (int) $_REQUEST['order_way'] == 1)
-{
-	$query['ORDER BY'] .= ' ASC';
-}
-else
-{
-	$query['ORDER BY'] .= ' DESC';
-}
+$query['ORDER BY'] .= (isset($_REQUEST['order_way']) && (int) $_REQUEST['order_way'] == 1) ? ' ASC' : ' DESC';
+
 
 //display files or display pics and files only in search
-
 $img_types = array('gif','jpg','png','bmp','jpeg','tif','tiff','GIF','JPG','PNG','BMP','JPEG','TIF','TIFF');
-
-if(empty($query['WHERE']))
-{
-	$query['WHERE'] = "f.type NOT IN ('" . implode("', '", $img_types) . "')";
-}
-else if (isset($_REQUEST['last_visit']))
-{
-	$query['WHERE'] .= "AND f.type NOT IN ('" . implode("', '", $img_types) . "')";
-}
+$query['WHERE'] = (empty($query['WHERE']) ? '' : ' AND ') . "f.type NOT IN ('" . implode("', '", $img_types) . "')";
 
 $result_p = $SQL->build($query);
 

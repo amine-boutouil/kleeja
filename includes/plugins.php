@@ -34,7 +34,7 @@ class kplugins
 	function kplugins()
 	{
 		//check for the best method of files handling
-		$this->f_method = '';
+		$this->f_method = 'zfile';
 		$disabled_functions = explode(',', @ini_get('disable_functions'));
 
 		if(is_writable(PATH))
@@ -56,11 +56,11 @@ class kplugins
 
 	function check_connect()
 	{
-		if(empty($this->f) && $this->f_method != '')
+		if((empty($this->f) || $this->f->n !== $this->f_method))
 		{
 			$this->f = new $this->f_method;
 		}
-		
+
 		if($this->f->_open($this->info))
 		{
 			return false;
@@ -69,7 +69,7 @@ class kplugins
 
 	function atend()
 	{
-		if(!empty($this->f))
+		if(!empty($this->f) && $this->f_method != 'zfile')
 		{
 			$this->f->_close();
 		}
@@ -377,8 +377,10 @@ class kplugins
 					$template_name			= $SQL->real_escape($temp['attributes']['name']);
 					if(isset($temp['find']['value']) && isset($temp['findend']['value']))
 					{
-						$finder->find_word		= array(1 => $temp['find']['value'],
-														2 => $temp['findend']['value']);
+						$finder->find_word		= array(
+														1 => $temp['find']['value'],
+														2 => $temp['findend']['value']
+														);
 					}
 					else
 					{
@@ -689,6 +691,7 @@ class kplugins
 class kfile
 {
 	var $handler = null;
+	var $n = 'kfile';
 
 	function _open($info = array())
 	{
@@ -739,7 +742,7 @@ class kfile
 			$path = substr($path, 1);
 		}
 
-		return PATH . $path;
+		return PATH . str_replace(PATH, '', $path);
 	}
 }
 
@@ -751,6 +754,7 @@ class zfile
 {
 	var $handler = null;
 	var $files = array();
+	var $n = 'zfile';
 
 	function _open($info = array()){ return true; }
 	function _close() { return true; }
@@ -821,6 +825,7 @@ class zfile
 
 		return $ff;
 	}
+	
 }
 
 /**
@@ -832,6 +837,7 @@ class kftp
 	var $handler = null;
 	var $timeout = 15;
 	var $root	 = '';
+	var $n = 'kftp';
 
 	function _open($info = array())
 	{

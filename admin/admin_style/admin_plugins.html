@@ -90,31 +90,25 @@
 
 <!-- start table no hover  -->
 <table class="tab-no-hover">
-<IF NAME="there_is_files_method">
 <tr style="background-color:#EFE7B8"><td>{lang.ADD_NEW_PLUGIN_EXP}</td></tr>
 <tr><td>
 
 <input name="imp_file" type="file" />
 
 </td></tr>
-	<IF NAME="there_is_files_method != kfile">
-		<tr><td>
-		<INCLUDE NAME="admin_plugin_mfile"> 
-		</td></tr>
-	</IF>
-<ELSE>
+<IF NAME="there_is_files_method != kfile">
 <tr><td>
-{lang.PLUGIN_NO_FILE_METHOD}
+	<INCLUDE NAME="admin_plugin_mfile"> 
 </td></tr>
 </IF>
+
 </table>
 <!-- end #table no hover  -->
 
-<IF NAME="there_is_files_method">
 <!--  button  -->
 <div class="quick"><input name="submit_new_plg" type="submit" value="{lang.SUBMIT}" onclick="javascript:return confirm_from('{lang.PLUGIN_CONFIRM_ADD}');" /></div >
 <!--  button  -->
-</IF>
+
 
 
 <!-- start clear  -->

@@ -801,18 +801,10 @@ class zfile
 	function push($plg_name)
 	{
 		$z = new zipfile;
-		
-		/* 
-		//testing ...
-		echo '<pre>';
-		print_r($this->files);
-		echo '</pre>';
-		exit;
-		*/
 
 		foreach($this->files as $filepath => $content)
 		{
-			$z->create_file($content, $filepath);
+			$z->create_file($content, str_replace(PATH, '', $filepath));
 		}
 
 		$ff = md5($plg_name);

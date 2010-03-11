@@ -332,7 +332,13 @@ else:
 				echo "\t" . '<info>' . "\n";
 				echo "\t\t" . '<plugin_name>' . $row['plg_name'] . '</plugin_name>' . "\n";
 				echo "\t\t" . '<plugin_version>' . $row['plg_ver'] . '</plugin_version>' . "\n";
-				echo "\t\t" . '<plugin_description>' . $row['plg_dsc'] . '</plugin_description>' . "\n";
+				echo "\t\t" . '<plugin_description>' . "\n";
+				$plgdsc = unserialize(kleeja_base64_decode($row['plg_dsc']));
+				foreach($plgdsc as $ln => $cn)
+				{
+					echo "\t\t\t" . '<description lang="' . $ln . '"><![CDATA[' . $cn . ']]></description>' . "\n";
+				}
+				echo "\t\t" . '</plugin_description>' . "\n";
 				echo "\t\t" . '<plugin_author>' . $row['plg_author'] . '</plugin_author>' . "\n";
 				echo "\t\t" . '<plugin_kleeja_version>' . KLEEJA_VERSION . '</plugin_kleeja_version>' . "\n";
 				echo "\t" . '</info>' . "\n";
@@ -348,14 +354,14 @@ else:
 					echo  "\t" . '</instructions>' . "\n";
 				}
 				
-				echo "\t" . '<uninstall><![CDATA[';
+				echo "\t" . '<uninstall><![CDATA[' . "\n";
 				echo $row['plg_uninstall'];
 				echo "\t" . ']]></uninstall>' . "\n";
 
-				echo $row['plg_store'] . "\n";
+				echo "\t" . $row['plg_store'] . "\n";
 
 				$querylang = $SQL->build(array(
-												'SELECT'	=> 'DISTINCT(lang_id)', 
+												'SELECT'=> 'DISTINCT(lang_id)', 
 												'FROM'	=> "{$dbprefix}lang",
 												'WHERE' => "plg_id=" . $plg_id
 											));
@@ -375,7 +381,7 @@ else:
 
 						while($phrase=$SQL->fetch_array($queryp))
 						{
-							echo "\t\t\t" . '<phrase name="' . $phrase['word'] . '">' . $phrase['trans'] . '</phrase>' . "\n";
+							echo "\t\t\t" . '<phrase name="' . $phrase['word'] . '"><![CDATA[' . $phrase['trans'] . ']]></phrase>' . "\n";
 						}
 						echo "\t\t" . '</lang>' . "\n";
 					}
@@ -414,6 +420,21 @@ else:
 					echo "\t" . '</hooks>' . "\n";
 				}
 				
+				if(!empty($row['plg_files']))
+				{
+					$nfiles = unserialize(kleeja_base64_decode($row['plg_files']));
+					echo "\t" . '<files>' . "\n";
+					foreach($nfiles as $f)
+					{
+						if($f[0] == '/')
+						{
+							$f = substr($f, 1);
+						}
+						echo "\t\t" . '<file path="' . $f . '"><![CDATA[' . @file_get_contents(PATH . $f) . ']]></file>' . "\n";
+					}
+					echo "\t" . '</files>' . "\n";
+				}
+
 				echo '</kleeja>';
 				exit;
 			}

@@ -9,7 +9,8 @@
 */
 
  
-define ('IN_INDEX' , true);
+define ('IN_INDEX', true);
+define ('IN_REAL_INDEX', true);
 define ('IN_SUBMIT_UPLOADING' , (isset($_POST['submitr']) || isset($_POST['submittxt'])));
 
 include ('includes/common.php');

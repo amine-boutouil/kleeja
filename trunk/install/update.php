@@ -25,6 +25,7 @@ if(file_exists($_path . 'config.php'))
 }
 
 include_once ($_path . 'includes/functions.php');
+include_once ($_path . 'includes/functions_alternative.php');
 
 switch ($db_type)
 {

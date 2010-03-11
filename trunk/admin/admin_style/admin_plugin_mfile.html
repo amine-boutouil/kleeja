@@ -23,13 +23,12 @@
 
 </IF>
 
-<IF NAME="there_is_files_method">
 
 <b>{lang.PLUGIN_WT_FILE_METHOD}</b>
 <br />
 <br />
 <input type="radio" name="_fmethod" value="zfile" checked="checked" onchange="this.checked ? $('#ftp_info_div').hide(): $('#ftp_info_div').show();" />{lang.PLUGIN_ZIP_FILE_METHOD}<br />
-<input type="radio" name="_fmethod" value="kftp" onchange="this.checked ? $('#ftp_info_div').show() : $('#ftp_info_div').hide();" /> {lang.PLUGIN_FTP_FILE_METHOD} <br />
+<del><input type="radio" name="_fmethod" value="kftp" onchange="this.checked ? $('#ftp_info_div').show() : $('#ftp_info_div').hide();" /> {lang.PLUGIN_FTP_FILE_METHOD} <br /></del>
 <div id="ftp_info_div" style="display:none">
 		<table style="width:100%">
 			<tr>
@@ -65,13 +64,6 @@
 
 </div>
 </IF>
-
-<ELSE>
-
-{lang.PLUGIN_NO_FILE_METHOD}
-
-</IF>
-
 
 
 <!-- end view plugins mfile temlate  -->

@@ -527,6 +527,8 @@ if(isset($_POST['submit_new_plg']))
 		else if(isset($_POST['_fmethod']) && $_POST['_fmethod'] == 'zfile')
 		{
 			$plg->f_method = 'zfile';
+			$plg->check_connect();
+			
 		}
 
 		$return = $plg->add_plugin($contents);

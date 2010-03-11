@@ -389,14 +389,12 @@ if (($stat_sizes >= ($config['total_size'] *(1048576))) && !defined('IN_LOGIN') 
 }
 
 //calculate  onlines ...  
-if ($config['allow_online'] == '1')
+if ((int) $config['allow_online'] == '1' && defined('IN_REAL_INDEX'))
 {
+	//it's only work in index page .. so we reduce some loads
 	KleejaOnline();
 }
 
-// claculate for counter ..
- // of course , its not printable function , its just for calculating :)
-//visit_stats();
 
 //check for page numbr
 if(empty($perpage) || intval($perpage) == 0)

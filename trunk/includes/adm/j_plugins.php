@@ -14,8 +14,11 @@ if (!defined('IN_ADMIN'))
 	exit();
 }
 
-//todo : delete page ... 
-//		update exporting system
+//
+//todo : 
+// ftp ? 
+// check if there r changes_*.zip files and show them, use cache class to prevent loads ..
+//
 
 include PATH . 'includes/plugins.php';
 $plg = new kplugins;
@@ -161,15 +164,8 @@ else:
 				}
 			}
 
-			//
-			//todo : 
-			// - 1-1: show a page with options of file handling 
-			// - 1-2: after submit , delete the plugin
-			// - 2 : delete files added by installing system
-			// - 3 : dont forget update exporting system
-
 			$stylee		= "admin_plugin_mfile";
-			$action		= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;m=3&amp;un=1&amp;do_plg=' . $plg_id;
+			$action		= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;m=3&amp;un=1&amp;pn=' . htmlspecialchars($_GET['pn']) . '&amp;do_plg=' . $plg_id;
 			$for_unistalling = true;
 
 			//after submit
@@ -199,6 +195,7 @@ else:
 				else if(isset($_POST['_fmethod']) && $_POST['_fmethod'] == 'zfile')
 				{
 					$plg->f_method = 'zfile';
+					$plg->check_connect();
 				}
 
 			
@@ -239,11 +236,17 @@ else:
 				delete_cache(array('data_hooks', 'data_config'));
 				
 				$plg->atend();
+				
+				if(empty($plg->zipped_files))
+				{
+					$text = $lang['PLUGIN_DELETED'] . '<meta HTTP-EQUIV="REFRESH" content="1; url=' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '">' . "\n";
+				}
+				else
+				{
+					$text = sprintf($lang['PLUGIN_DELETED_ZIPPED'], '<a href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;do_plg=' . $plg->plg_id . '&amp;m=6&amp;fn=' . $plg->zipped_files . '">', '</a>');
+					$text .= '<br /><br /><a href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '">' . $lang['GO_BACK_BROWSER'] . '</a>';
+				}
 
-				//todo : 
-				//msg must be differnt, if zipped give him link to download changed files, if not just return to our plugins page
-
-				$text = $lang['PLUGIN_DELETED'] . '<meta HTTP-EQUIV="REFRESH" content="1; url=' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '">' . "\n";
 				$stylee	= "admin_info";
 			}
 

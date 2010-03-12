@@ -53,11 +53,11 @@ switch ($_GET['go'])
 			$stylee					= 'login';
 			$titlee					= $lang['LOGIN'];
 			$action					= 'ucp.php?go=login' . (isset($_GET['return']) ? '&amp;return=' . htmlspecialchars($_GET['return']) : '');
-			$forget_pass_link		= 'ucp.php?go=get_pass';
+			$forget_pass_link		= !empty($forgetpass_script_path) && (int) $config['user_system'] != 1 ? $forgetpass_script_path : 'ucp.php?go=get_pass';
 			$H_FORM_KEYS			= kleeja_add_form_key('login');
 			//no error yet 
 			$ERRORS = false;
-			
+
 			//_post
 			$t_lname = isset($_POST['lname']) ? htmlspecialchars($_POST['lname']) : ''; 
 			$t_lpass = isset($_POST['lpass']) ? htmlspecialchars($_POST['lpass']) : ''; 
@@ -681,9 +681,9 @@ switch ($_GET['go'])
 		case 'get_pass' : 
 
 			//if not default system, let's give him a link for integrated script
-			if ($config['user_system'] != '1')
+			if ((int) $config['user_system'] != 1)
 			{
-				$text = '<a href="' . $forum_path . '">' . $lang['LOST_PASS_FORUM'] . '</a>';
+				$text = '<a href="' . (!empty($forgetpass_script_path) ? $forgetpass_script_path : $script_path) . '">' . $lang['LOST_PASS_FORUM'] . '</a>';
 				kleeja_info($text, $lang['PLACE_NO_YOU']);
 			}
 

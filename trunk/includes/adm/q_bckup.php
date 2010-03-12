@@ -97,7 +97,7 @@ if (isset($_POST['submit']))
 			while($res = current($ro))
 			{
 				$fields[] = '`' . key($ro) . '`';
-				$values[] = "'$res'";
+				$values[] = "'" . str_replace("'", "\'", $res) . "'";
 				next($ro);
 			}
 

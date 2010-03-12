@@ -632,7 +632,7 @@ class kplugins
 														'action_text'	=> $finder->another_word,
 													);
 		}
-		
+
 		//add cached instuctions to cache if there
 		if(sizeof($cached_instructions) > 0)
 		{
@@ -649,7 +649,15 @@ class kplugins
 			fwrite($filename, kleeja_base64_encode(serialize($cached_instructions)));
 			fclose($filename);
 		}
-		
+
+		if($this->f_method === 'zfile')
+		{
+			if($this->f->check())
+			{
+				$this->zipped_files = $this->f->push($plugin_name);
+			}
+		}
+
 		return true;
 	}
 	

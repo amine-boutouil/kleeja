@@ -15,7 +15,10 @@ if (!defined('IN_COMMON'))
 }
 
 
-$install_sqls = array();
+if(empty($install_sqls) || !is_array($install_sqls))
+{
+	$install_sqls = array();
+}
 
 /* droping process is not a good idea !
 $install_sqls['DROP_TABLES'] = "
@@ -93,7 +96,8 @@ CREATE TABLE `{$dbprefix}users` (
   `show_my_filecp` tinyint(1) unsigned NOT NULL default '1',
   `new_password` varchar(200) COLLATE utf8_bin NOT NULL DEFAULT '',
   `hash_key` varchar(200) COLLATE utf8_bin NOT NULL DEFAULT '',
-  PRIMARY KEY  (`id`)
+  PRIMARY KEY (`id`),
+  KEY `clean_name` (`clean_name`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 ";
 
@@ -101,7 +105,7 @@ $install_sqls['files'] = "
 CREATE TABLE `{$dbprefix}files` (
   `id` int(10) NOT NULL auto_increment,
   `last_down` int(11) NOT NULL,
-  `name` varchar(350) collate utf8_bin NOT NULL,
+  `name` varchar(300) collate utf8_bin NOT NULL,
   `real_filename` VARCHAR( 350 ) collate utf8_bin NOT NULL,
   `size` int(10) NOT NULL,
   `uploads` int(10) NOT NULL,
@@ -112,7 +116,10 @@ CREATE TABLE `{$dbprefix}files` (
   `user` int(10) NOT NULL default '-1',
   `code_del` varchar(150) collate utf8_bin NOT NULL,
   `user_ip` VARCHAR( 250 ) NOT NULL,
-  PRIMARY KEY  (`id`)
+  PRIMARY KEY (`id`),
+  KEY `name` (`name`),
+  KEY `user` (`user`),
+  KEY `code_del` (`code_del`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 ";
 
@@ -124,7 +131,9 @@ CREATE TABLE `{$dbprefix}config` (
   `display_order` int(10) NOT NULL,
   `type` varchar(20) NULL DEFAULT 'other',
   `plg_id` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY  (`name`)
+  PRIMARY KEY (`name`),
+  KEY `type` (`type`),
+  KEY `plg_id` (`plg_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 ";
 
@@ -138,7 +147,8 @@ CREATE TABLE `{$dbprefix}exts` (
   `gust_allow` tinyint(1) NOT NULL default '0',
   `user_size` int(10) NOT NULL,
   `user_allow` tinyint(1) NOT NULL default '0',
-  PRIMARY KEY  (`id`)
+  PRIMARY KEY (`id`),
+  KEY `group_id` (`group_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=68 ;
 ";
 
@@ -149,7 +159,9 @@ CREATE TABLE `{$dbprefix}online` (
   `agent` varchar(100) collate utf8_bin NOT NULL,
   `time` int(10) NOT NULL,
   `session` varchar(100) NOT NULL,
-  UNIQUE KEY `session` (`session`)
+  UNIQUE KEY `session` (`session`),
+  KEY `time` (`time`),
+  KEY `ip` (`ip`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 ";
 
@@ -159,7 +171,8 @@ CREATE TABLE `{$dbprefix}hooks` (
   `plg_id` int(11) unsigned NOT NULL,
   `hook_name` varchar(255) collate utf8_bin NOT NULL,
   `hook_content` mediumtext collate utf8_bin NOT NULL,
-  PRIMARY KEY  (`hook_id`)
+  PRIMARY KEY (`hook_id`),
+  KEY `plg_id` (`plg_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 ";
 
@@ -176,7 +189,8 @@ CREATE TABLE `{$dbprefix}plugins` (
   `plg_instructions` mediumtext COLLATE utf8_bin NOT NULL,
   `plg_store` longtext COLLATE utf8_bin NOT NULL,
   `plg_files` text COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY  (`plg_id`)
+  PRIMARY KEY (`plg_id`),
+  KEY `plg_name` (`plg_name`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin ;
 ";
 
@@ -187,7 +201,9 @@ CREATE TABLE `{$dbprefix}lang` (
   `trans` varchar(255) collate utf8_bin NOT NULL,
   `lang_id` varchar(100) COLLATE utf8_bin NOT NULL,
   `plg_id` int(11) NOT NULL DEFAULT '0',
-  KEY `lang` (`lang_id`)
+  KEY `lang_id` (`lang_id`),
+  KEY `plg_id` (`plg_id`),
+  KEY `word` (`word`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 ";
 

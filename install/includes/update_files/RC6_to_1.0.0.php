@@ -122,6 +122,32 @@ $update_sqls['config_plg_id'] = "ALTER TABLE `{$dbprefix}config` ADD `plg_id` IN
 // ******************** MAFIII MALOOOM SDIG :(
 
 
+//Before we start finidng treasure, we have to find the map ... 
+$update_sqls['_name_300_'] = "ALTER TABLE  `{$dbprefix}files` CHANGE  `name`  `name` VARCHAR( 300 ) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL";
+$update_sqls['index_k1'] = "ALTER TABLE  `{$dbprefix}files` ADD INDEX (  `name` )";
+$update_sqls['index_k2'] = "ALTER TABLE  `{$dbprefix}files` ADD INDEX (  `user` )";
+$update_sqls['index_k3'] = "ALTER TABLE  `{$dbprefix}files` ADD INDEX (  `code_del` )";
+//
+$update_sqls['index_k4'] = "ALTER TABLE  `{$dbprefix}config` ADD INDEX (  `plg_id` )";
+$update_sqls['index_k5'] = "ALTER TABLE  `{$dbprefix}config` ADD INDEX (  `type` )";
+//
+$update_sqls['index_k6'] = "ALTER TABLE  `{$dbprefix}online` ADD INDEX (  `time` )";
+$update_sqls['index_k7'] = "ALTER TABLE  `{$dbprefix}online` ADD INDEX (  `ip` )";
+//
+$update_sqls['index_k8'] = "ALTER TABLE  `{$dbprefix}lang` DROP INDEX  `lang`";
+$update_sqls['index_k9'] = "ALTER TABLE  `{$dbprefix}lang` ADD INDEX (  `word` )";
+$update_sqls['index_k10'] = "ALTER TABLE  `{$dbprefix}lang` ADD INDEX (  `plg_id` )";
+$update_sqls['index_k11'] = "ALTER TABLE  `{$dbprefix}lang` ADD INDEX (  `lang_id` )";
+//
+$update_sqls['index_k12'] = "ALTER TABLE  `{$dbprefix}hooks` ADD INDEX (  `plg_id` )";
+//
+$update_sqls['index_k13'] = "ALTER TABLE  `{$dbprefix}exts` ADD INDEX (  `group_id` )";
+//
+$update_sqls['index_k14'] = "ALTER TABLE  `{$dbprefix}users` ADD INDEX (  `clean_name` )";
+//
+$update_sqls['index_k15'] = "ALTER TABLE  `{$dbprefix}plugins` ADD INDEX (  `plg_name` )";
+
+
 //////////////////////////////////////////////////
 //notes ///////////////////////////////////////////
 //////////////////////////////////////////////////

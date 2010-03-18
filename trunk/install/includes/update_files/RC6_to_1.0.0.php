@@ -127,6 +127,8 @@ $update_sqls['_name_300_'] = "ALTER TABLE  `{$dbprefix}files` CHANGE  `name`  `n
 $update_sqls['index_k1'] = "ALTER TABLE  `{$dbprefix}files` ADD INDEX (  `name` )";
 $update_sqls['index_k2'] = "ALTER TABLE  `{$dbprefix}files` ADD INDEX (  `user` )";
 $update_sqls['index_k3'] = "ALTER TABLE  `{$dbprefix}files` ADD INDEX (  `code_del` )";
+$update_sqls['index_kk1'] = "ALTER TABLE  `{$dbprefix}files` ADD INDEX (  `time` )";
+$update_sqls['index_kk2'] = "ALTER TABLE  `{$dbprefix}files` ADD INDEX (  `last_down` )";
 //
 $update_sqls['index_k4'] = "ALTER TABLE  `{$dbprefix}config` ADD INDEX (  `plg_id` )";
 $update_sqls['index_k5'] = "ALTER TABLE  `{$dbprefix}config` ADD INDEX (  `type` )";

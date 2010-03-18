@@ -209,8 +209,9 @@ case 'data' :
 		$config_urls_type	= in_array($_POST['urls_type'], array('id', 'filename', 'direct')) ? $_POST['urls_type'] : 'id';
 		$clean_name			= $usrcp->cleanusername($SQL->escape($user_name));
 
-		 /// ok .. we will get sqls now ..
+		/// ok .. we will get sqls now ..
 		include 'includes/install_sqls.php';
+		include 'includes/default_values.php';
 
 		$err = $dots = 0;
 		$errors = '';
@@ -253,6 +254,33 @@ case 'data' :
 			}
 
 		}#for
+		
+		if($err == 0)
+		{
+			//add configs
+			foreach($config_values as $cn)
+			{
+				$sql = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`, `type`) VALUES ('$cn[0]', '$cn[1]', '$cn[2]', '$cn[3]', '$cn[4]');";
+				if(!$SQL->query($sql))
+				{
+					$errors  = implode(':', $SQL->get_error()) . '' . "\n___\n";
+					echo '<span style="color:red;"> [' .$name . '] : ' . $lang['INST_SQL_ERR'] . '</span><br />';
+					$err++;
+				}
+			}
+
+			//add exts
+			foreach($ext_values as $cn)
+			{
+				$sql = "INSERT INTO `{$dbprefix}exts` (`group_id`, `ext`, `gust_size`, `gust_allow`, `user_size`, `user_allow`) VALUES ('$cn[0]', '$cn[1]', '$cn[2]', '$cn[3]', '$cn[4]', '$cn[5]');";
+				if(!$SQL->query($sql))
+				{
+					$errors  = implode(':', $SQL->get_error()) . '' . "\n___\n";
+					echo '<span style="color:red;"> [' .$name . '] : ' . $lang['INST_SQL_ERR'] . '</span><br />';
+					$err++;
+				}
+			}
+		}
 		
 		echo gettpl('sqls_done.html');
 

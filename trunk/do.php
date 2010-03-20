@@ -413,11 +413,16 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 			{
 				fseek($fp, $seek_start);
 			}
-
-			while (!feof($fp))
+			
+			while(@ob_end_flush())
 			{
-				echo fread($fp, $chunksize);
+				while (!feof($fp))
+				{
+					echo fread($fp, $chunksize);
+					@ob_flush();
+				}
 			}
+			
 			fclose($fp);
 		}
 		else

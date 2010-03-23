@@ -69,6 +69,50 @@
 
 </div>
 
+<IF NAME="is_there_changes_files">
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
+
+<!-- start div border table  -->
+<div id="border-table">
+
+<!-- title  -->
+<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/menu_icons/plugins_button.gif" />{lang.PLUGINS_CHANGES_FILES} :</h2>
+<!-- title  -->
+
+<!-- border line Vertical  -->
+<p class="dot" />
+<!-- border line Vertical  -->
+<br />
+
+<strong>{lang.PLUGINS_CHANGES_FILES_EXP}</strong>
+<br />
+
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
+
+<table style="width:100%">
+<LOOP NAME="changes_files">	
+	<tr>
+		<td>{{file}}</td>
+		<td><a href="{{path}}">{lang.DOWNLAOD}</a></td>
+	</tr>
+</LOOP>
+	<tr>
+		<td colspan="2" style="text-align:center;padding:6px;font-size:16px"> [ <a href="{action}&amp;cc=1">{lang.DELETE}</a> ] </td>
+	</tr>
+</table>
+
+<!-- start clear  -->
+<div class="clr"></div><br />
+<!-- end clear  -->
+
+</div>
+</IF>
+
+
 <!-- start clear  -->
 <div class="clr"></div><br />
 <!-- end clear  -->

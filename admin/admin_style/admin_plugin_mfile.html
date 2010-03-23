@@ -28,7 +28,8 @@
 <br />
 <br />
 <input type="radio" name="_fmethod" value="zfile" checked="checked" onchange="this.checked ? $('#ftp_info_div').hide(): $('#ftp_info_div').show();" />{lang.PLUGIN_ZIP_FILE_METHOD}<br />
-<del><input type="radio" name="_fmethod" value="kftp" onchange="this.checked ? $('#ftp_info_div').show() : $('#ftp_info_div').hide();" /> {lang.PLUGIN_FTP_FILE_METHOD} <br /></del>
+<IF NAME="is_ftp_supported">
+<input type="radio" name="_fmethod" value="kftp" onchange="this.checked ? $('#ftp_info_div').show() : $('#ftp_info_div').hide();" /> {lang.PLUGIN_FTP_FILE_METHOD} <br />
 <div id="ftp_info_div" style="display:none">
 		<table style="width:100%">
 			<tr>
@@ -53,6 +54,8 @@
 			</tr>
 		</table>
 </div>
+</IF>
+
 
 <IF NAME="for_unistalling">
 <!--  button  -->

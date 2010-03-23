@@ -74,6 +74,12 @@ class cache
 		}
 		return;
 	}
+
+	function clean($name)
+	{
+		$name =  preg_replace('![^a-z0-9_]!i', '_', $name);
+		kleeja_unlink(PATH . 'cache/' . $name . '.php');
+	}
 }
 
 $cache = new cache;

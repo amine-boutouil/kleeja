@@ -30,6 +30,7 @@ class kplugins
 	var $f			= null;
 	var $plg_id		= 0;
 	var $zipped_files	= '';
+	var $is_ftp_supported = false;
 
 	function kplugins()
 	{
@@ -41,8 +42,10 @@ class kplugins
 		{
 			$this->f_method = 'kfile';
 		}
-		else if (@extension_loaded('ftp'))
+		//it's not finished yet, it's enabled for developers right now !
+		else if (@extension_loaded('ftp') && defined('DEV_STAGE'))
 		{
+			$this->is_ftp_supported = true;
 			$this->f_method = 'kftp';
 		}
 		else if (!in_array('fsockopen', $disabled_functions))
@@ -686,6 +689,10 @@ class kplugins
 		if($path[0] == '/')
 		{
 			$path = substr($path, 1);
+		}
+		else if ($path[0] . $path[1] == './')
+		{
+			$path = substr($path, 2);
 		}
 
 		return $path;

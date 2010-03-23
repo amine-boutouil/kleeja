@@ -16,9 +16,8 @@ if (!defined('IN_ADMIN'))
 
 //
 //todo : 
-// ftp ? 
-// check if there r changes_*.zip files and show them, use cache class to prevent loads ..
-//
+// imporve FTP, it's enabled for developers now, so it want alot of testing
+
 
 include PATH . 'includes/plugins.php';
 $plg = new kplugins;
@@ -45,9 +44,32 @@ if($plg->f_method != '')
 	}
 }
 
+$is_ftp_supported = $plg->is_ftp_supported;
+
+
+//clean changes files
+if(isset($_GET['cc'])):
+
+if ($dh = @opendir(PATH . 'cache'))
+{
+	while (($file = @readdir($dh)) !== false)
+	{
+
+		if(preg_match('!changes_of_[a-z0-9]+.zip!', $file))
+		{
+			kleeja_unlink(PATH . 'cache/' . $file);
+		}
+	}
+	@closedir($dh);
+}
+
+$cache->clean('__changes_files__');
+
+redirect(basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'));
+
 
 //show first page of plugins
-if (!isset($_GET['do_plg'])):
+elseif (!isset($_GET['do_plg'])):
 
 //for style ..
 $stylee		= "admin_plugins";
@@ -104,6 +126,31 @@ else
 
 
 $SQL->freeresult($result);
+
+
+
+//is there any changes from recent installing plugins
+if (!($changes_files = $cache->get('__changes_files__')))
+{
+	if ($dh = @opendir(PATH . 'cache'))
+	{
+		while (($file = @readdir($dh)) !== false)
+		{
+
+			if(preg_match('!changes_of_[a-z0-9]+.zip!', $file))
+			{
+				$changes_files[] = array(	
+								'file'	=> $file,
+								'path'	=> basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;do_plg=1&amp;m=6&amp;fn=' . str_replace(array('changes_of_', '.zip'),'', $file),
+							);
+			}
+		}
+		@closedir($dh);
+	}
+	$cache->save('__changes_files__', $changes_files);
+}
+
+$is_there_changes_files = empty($changes_files) ? false : true;
 
 
 //after submit 
@@ -576,6 +623,7 @@ if(isset($_POST['submit_new_plg']))
 			break;
 			case 'zipped':
 				$text = sprintf($lang['PLUGIN_ADDED_ZIPPED'], '<a href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;do_plg=' . $plg->plg_id . '&amp;m=6&amp;fn=' . $plg->zipped_files . '">', '</a>');
+				$text .= '<br /><br /><a href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '">' . $lang['GO_BACK_BROWSER'] . '</a>';
 			break;
 			case 'zipped/inst':
 				$text = sprintf($lang['PLUGIN_ADDED_ZIPPED_INST'], 
@@ -584,11 +632,14 @@ if(isset($_POST['submit_new_plg']))
 								'<a href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;do_plg=' . $plg->plg_id . '&amp;m=4">',
 								'</a>'
 								);
+				$text .= '<br /><br /><a href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '">' . $lang['GO_BACK_BROWSER'] . '</a>';
 			break;
 			default:
 				kleeja_admin_err($lang['ERR_IN_UPLOAD_XML_FILE'],true,'',true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'));	
 		}
 	}
-
+	
+	$cache->clean('__changes_files__');
+	
 	$stylee	= "admin_info";
 }

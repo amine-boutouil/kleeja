@@ -1,0 +1,131 @@
+/**
+*
+* @version $Id$
+* @copyright (c) 2007 Kleeja.com
+* @license ./docs/license.txt
+*
+*/
+
+
+/* header */
+#divheader {margin: 5px auto 3px auto; 	background-position: top right;}	
+#divheader .header .logo1 {float:right;}
+#divheader .header .logo2{float:left;}
+/* header */
+
+/* middle */
+#divmiddle {float: right;}
+/* middle */
+
+/* start Main Menu */				
+#main_menu, #menu_horizontal {float:left;}
+	/* right  menu */	
+	#main_menu .link_menu ,
+	#main_menu .link_current {float: left; }
+	#main_menu .link_menu a  {background-position:bottom right;}
+	#main_menu .link_menu a:hover{background-position:bottom left;}
+	/* # right  menu */	
+
+	/* horizontal menu */
+	#menu_horizontal .link_menu_horizontal,
+	#menu_horizontal .link_current_horizontal { text-align:left;}
+	/* # horizontal  menu */
+/* #  Main Menu */	
+
+/*  buttons */
+.left_button {float:right;}
+.button1 ,.button2 {background-position:right top;}
+.button1:hover ,.button2:hover{background-position:right top;}
+/*  buttons */
+
+/* class */
+input.button1, input.button3,input.button2 {background-position:right top;}
+.s_box {background-position:top left;}
+/* class */
+
+/* System Messages  #info*/
+#system-message div.info  ul li {background-position:left top ;padding-left: 35px; }
+/* System Messages  #info*/
+
+/* System Messages  #error*/
+#system-message div.error ul li{background-position:left top ; padding-left: 35px; }
+/* System Messages  #error*/
+
+/* System Messages  #error*/
+#system-message div.msg_repair ul li{background-position:left center; padding-left: 25px; }
+/* System Messages  #error*/
+
+/* view ../images */
+.line_img {background-position:top left;}
+.check_all {text-align:right:}
+/* view ../images */
+
+
+/*  toolTipBox */	
+#toolTipBox {text-align:left;}
+/* toolTipBox */
+
+/* footer */
+#footer a.xhtml{margin-left:4px;float:right;}
+/* footer */
+
+
+/* config page */
+.config_types_list div {float: left;}
+/* / config page */
+
+.imgtitle {margin-right:6px;}
+
+
+/* start view list control panel */
+.list_control_panel{width:100%;}
+.title_kleeja { background-position:top right;}
+.option_head .timestamp {float:right;}
+.collapse_buttons  {float: right;}
+.show_all {background-position:left center;padding-left: 12px;}
+.hid_all {background-position:left center;padding-left: 12px;}
+/* ## view list control panel */
+
+/* start info user admin */
+.admin_anfo_bg {background-position:98% 50%;}
+.adminimage {background-position:center;}
+.button_img ,.button_file{float:left;}
+.button_img {margin-right:10px;}
+/* ## info user admin  */
+
+/*   start general statistics */
+.general_statistics {background-position:98% 10%;}
+/* percentage meter */
+#progress .hide {float:right;}
+#progressBar {background-position:right top;float:left;}
+ #progressBar #percentage_size_meter {background-position:right top;}
+#progressBar #percentage_size_meter span {text-align:left;}
+#progress #left {float:right;}
+#progress #center {text-align:center;}
+#progress #right {float:left;}
+#progressBar #percentage_size_meter .beyond {background-position:left top;}
+/*  # #  general statistics */
+
+
+/* start Statistics Search Engines */
+.fieldset_google {background-position:98% 50%;}
+.fieldset_yahoo {background-position:98% 50%;}
+/* ## Statistics Search Engines */
+
+
+.reports {background-position: 50% 10%;}
+
+.nothing img{margin-right:10px}
+
+/* class in the language files */
+.advanced_caution{margin-left:7px;}
+.delf_caution{margin-left:5px;}
+/* ## class in the language files */
+
+
+/*CSS style pagination*/
+.pagination a {float:left;margin-right:3px;background-position: top right;}
+.pagination a.next {margin-left:5px;}
+.pagination a.next:hover {padding-left:10px;}
+.pagination span.current, .pagination span.three_dots {margin-right:3px;float:left;}
+/* # pagination */

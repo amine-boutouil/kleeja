@@ -2,7 +2,11 @@
     Order allow,deny
     Deny from all
 </Files>
-<IfModule !mod_suphp.c>
+<IfModule mod_php4.c>
 php_flag engine off
 </IfModule>
+<IfModule mod_php5.c>
+php_flag engine off
+</IfModule>
+
 RemoveType .php .php* .phtml .pl .cgi .asp .aspx .sql

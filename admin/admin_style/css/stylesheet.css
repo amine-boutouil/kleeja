@@ -195,11 +195,10 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 .table_exts th {background-color:#D2D2D2;padding:4px 2px;vertical-align: middle;border: 1px solid #BCBCBC;line-height:14px;}
 .table_exts td {vertical-align: middle;}
 
-.o_all, .o_all {background-color:black; color;white}
 .o_g, .o_g {background-color:#FFD7DD;}
 .o_u, .o_u{background-color:#DDFFD7;}
 
-.o_all, .o_all:hover {background-color:#F2FFCA; color;white}
+.o_all, .o_all:hover {background-color:#F2FFCA;}
 .o_g, .o_g:hover {background-color:#FFD7DD;}
 .o_u, .o_u:hover {background-color:#DDFFD7;}
 .exts {padding: 5px;font-style:italic;font-weight:bold;font-size:12px; color: #0B55C4;}
@@ -368,13 +367,13 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 .jquery-checkbox       {display: inline; font-size: 16px; line-height: 16px; cursor: pointer; cursor: hand;}
 .jquery-checkbox .mark {display: inline;}
 .jquery-checkbox img {vertical-align: middle; width: 16px; height: 16px;}
-.jquery-checkbox img{background: transparent url(../images/checkbox.gif) no-repeat;}
-.jquery-checkbox img{background: transparent url(../images/checkbox.gif) no-repeat;}
-.jquery-checkbox-hover img{background: transparent url(../images/checkbox.gif) no-repeat;}
-.jquery-checkbox-checked img{background: transparent url(../images/checkbox-on.gif) no-repeat;}
-.jquery-checkbox-checked .jquery-checkbox-hover img {	background: transparent url(../images/checkbox-on.gif) no-repeat;}
-.jquery-checkbox-disabled img{background: transparent url(../images/checkbox.gif) no-repeat;}
-.jquery-checkbox-checked .jquery-checkbox-disabled img{background: transparent url(../images/checkbox-on.gif) no-repeat;}
+.jquery-checkbox img{background: transparent url(../images/checkbox.png) no-repeat;}
+.jquery-checkbox img{background: transparent url(../images/checkbox.png) no-repeat;}
+.jquery-checkbox-hover img{background: transparent url(../images/checkbox.png) no-repeat;}
+.jquery-checkbox-checked img{background: transparent url(../images/checkbox-on.png) no-repeat;}
+.jquery-checkbox-checked .jquery-checkbox-hover img {	background: transparent url(../images/checkbox-on.png) no-repeat;}
+.jquery-checkbox-disabled img{background: transparent url(../images/checkbox.png) no-repeat;}
+.jquery-checkbox-checked .jquery-checkbox-disabled img{background: transparent url(../images/checkbox-on.png) no-repeat;}
 /* / checkboxes*/
 
 /*CSS style pagination*/

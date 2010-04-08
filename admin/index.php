@@ -33,6 +33,9 @@ if (!$username)
 	redirect(PATH . 'ucp.php?go=login&return=' . urlencode(ADMIN_PATH . '?cp=' . $go_to));
 }
 
+//get languge of admin
+get_lang('acp');
+
 //
 //need to login again
 //

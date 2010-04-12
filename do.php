@@ -204,7 +204,7 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 	$livexts = explode(",", $config['livexts']);
 
 	//get info file
-	$query = array('SELECT'	=> 'f.id, f.name, f.real_filename, f.folder, f.type',
+	$query = array('SELECT'	=> 'f.id, f.name, f.real_filename, f.folder, f.type, f.size',
 					'FROM'		=> "{$dbprefix}files f",
 					'WHERE'		=> ($is_id_filename) ? "f.name='" . $filename . "'" . 
 									(isset($_GET['downexf']) ? " AND f.type IN ('" . implode("', '", $livexts) . "')" : '') : 'f.id=' . $id  . 
@@ -228,6 +228,7 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 			$t	= strtolower(trim($row['type']));
 			$f	= $row['folder'];
 			$ftime	= $row['time'];
+			$d_size	= $row['size'];
 
 			//img or not
 			$is_image = in_array($t, array('gif', 'jpg', 'jpeg', 'bmp', 'png', 'tiff', 'tif')) ? true : false; 
@@ -295,7 +296,7 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 
 	//downalod porcess
 	$path_file = (isset($_GET['thmb']) || isset($_GET['thmbf']))  ? "./{$f}/thumbs/{$n}" : "./{$f}/{$n}";
-	$chunksize = 1024*8; //size that will send to user every loop
+	$chunksize = 1024*120; //1 kelobyte * 120 = 120kb that will send to user every loop
 	$resuming_on = true;
 
 	($hook = kleeja_run_hook('down_go_page')) ? eval($hook) : null; //run hook	
@@ -307,7 +308,11 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 		big_error('----', 'Error - can not open file.');
 	}
 
-	$size = @filesize($path_file);
+	if(!($size = @filesize($path_file)))
+	{
+		$size = $d_size;
+	}
+
 	$name = empty($rn) ? $n : $rn;
 
 	if (is_browser('mozilla'))
@@ -405,26 +410,58 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 	//output the file
 	if (!set_modified_headers($ftime, !$is_ie6 && !$is_ie8))
 	{
-		$fp = @fopen($path_file, 'rb');
-
-		if ($fp !== false)
+		//if 2mb file or less, let's dump it as one.
+		if($size >= 2*1048576)
 		{
-			if($range_enable)
+			if (($fp = @fopen($path_file, 'rb')) !== false)
 			{
-				fseek($fp, $seek_start);
-			}
+				if($range_enable)
+				{
+					fseek($fp, $seek_start);
+				}
 
-			while (!feof($fp))
-			{
-				echo fread($fp, $chunksize);
-				@ob_flush();
+				while (!feof($fp))
+				{
+					echo fread($fp, $chunksize);
+					@ob_flush();
+				}
+				
+				fclose($fp);
 			}
-			
-			fclose($fp);
+			else
+			{
+				// I'm not sure why user would visit this area !
+			}
 		}
 		else
 		{
-			@readfile($path_file);
+			kleeja_log('before downloading (' . $path_file . ') : ' . Customfile_size(memory_get_usage()));
+			if(function_exists('file_get_contents'))
+			{
+				kleeja_log('downloading with file_get_contents (' . $path_file . ') : ' . Customfile_size(memory_get_usage()));
+				echo file_get_contents($path_file);
+			}
+			else if (function_exists('readfile'))
+			{
+				kleeja_log('downloading with readfile (' . $path_file . ') : ' . Customfile_size(memory_get_usage()));
+				@readfile($path_file);
+			}
+			else if (($fp = @fopen($path_file, 'rb')) !== false)
+			{
+				if (function_exists('fpassthru'))
+				{
+					kleeja_log('downloading with fpassthru (' . $path_file . ') : ' . Customfile_size(memory_get_usage()));
+					fpassthru($fp);
+				}
+				else
+				{
+					kleeja_log('downloading with fread (' . $path_file . ') : ' . Customfile_size(memory_get_usage()));
+					echo fread($fp, $size);
+				}
+				kleeja_log('before close fb (' . $path_file . ')  : ' . Customfile_size(memory_get_usage()));
+				fclose($fp);
+			}
+				kleeja_log('after downloading (' . $path_file . ') : ' . Customfile_size(memory_get_usage()));
 		}
 
 		flush();

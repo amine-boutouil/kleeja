@@ -107,10 +107,10 @@ div.install_update:hover {background:#FFFDE2 url('style/images/xhover.gif') repe
 .jquery-checkbox {display: inline; font-size: 16px; line-height: 16px; cursor: pointer; cursor: hand;}
 .jquery-checkbox .mark {display: inline;}
 .jquery-checkbox img {vertical-align: middle; width: 16px; height: 16px;}
-.jquery-checkbox img{background: transparent url(../admin/admin_style/images/checkbox.gif) no-repeat;}
-.jquery-checkbox img{background: transparent url(../admin/admin_style/images/checkbox.gif) no-repeat;}
-.jquery-checkbox-hover img{background: transparent url(../admin/admin_style/images/checkbox-on.gif) no-repeat;}
-.jquery-checkbox-checked img{background: transparent url(../admin/admin_style/images/checkbox-on.gif) no-repeat;}
-.jquery-checkbox-checked .jquery-checkbox-hover img {background: transparent url(../admin/admin_style/images/checkbox-on.gif) no-repeat;}
-.jquery-checkbox-disabled img{background: transparent url(../admin/admin_style/images/checkbox.gif) no-repeat;}
-.jquery-checkbox-checked .jquery-checkbox-disabled img{background: transparent url(../admin/admin_style/images/checkbox-on.gif) no-repeat;}
+.jquery-checkbox img{background: transparent url(../admin/admin_style/images/checkbox.png) no-repeat;}
+.jquery-checkbox img{background: transparent url(../admin/admin_style/images/checkbox.png) no-repeat;}
+.jquery-checkbox-hover img{background: transparent url(../admin/admin_style/images/checkbox-on.png) no-repeat;}
+.jquery-checkbox-checked img{background: transparent url(../admin/admin_style/images/checkbox-on.png) no-repeat;}
+.jquery-checkbox-checked .jquery-checkbox-hover img {background: transparent url(../admin/admin_style/images/checkbox-on.png) no-repeat;}
+.jquery-checkbox-disabled img{background: transparent url(../admin/admin_style/images/checkbox.png) no-repeat;}
+.jquery-checkbox-checked .jquery-checkbox-disabled img{background: transparent url(../admin/admin_style/images/checkbox-on.png) no-repeat;}

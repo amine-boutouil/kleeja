@@ -364,16 +364,14 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 
 
 /*checkboxes*/
-.jquery-checkbox       {display: inline; font-size: 16px; line-height: 16px; cursor: pointer; cursor: hand;}
+.jquery-checkbox  {display: inline; line-height: 18px; cursor: pointer; cursor: hand;}
 .jquery-checkbox .mark {display: inline;}
-.jquery-checkbox img {vertical-align: middle; width: 16px; height: 16px;}
-.jquery-checkbox img{background: transparent url(../images/checkbox.png) no-repeat;}
-.jquery-checkbox img{background: transparent url(../images/checkbox.png) no-repeat;}
-.jquery-checkbox-hover img{background: transparent url(../images/checkbox.png) no-repeat;}
-.jquery-checkbox-checked img{background: transparent url(../images/checkbox-on.png) no-repeat;}
-.jquery-checkbox-checked .jquery-checkbox-hover img {	background: transparent url(../images/checkbox-on.png) no-repeat;}
-.jquery-checkbox-disabled img{background: transparent url(../images/checkbox.png) no-repeat;}
-.jquery-checkbox-checked .jquery-checkbox-disabled img{background: transparent url(../images/checkbox-on.png) no-repeat;}
+.jquery-checkbox img {vertical-align: middle; width: 18px; height: 18px;background: url(../images/checkbox1.png) no-repeat 0px 0px}
+.jquery-checkbox-hover img{background: url(../images/checkbox1.png) no-repeat -27px 0px;}
+.jquery-checkbox-checked img{background: url(../images/checkbox1.png) no-repeat -82px 0px;}
+.jquery-checkbox-checked .jquery-checkbox-hover img {	background: url(../images/checkbox1.png) no-repeat -55px 0px;}
+.jquery-checkbox-disabled img{background: url(../images/checkbox1.png) no-repeat 0px 0px;}
+.jquery-checkbox-checked .jquery-checkbox-disabled img{background: url(../images/checkbox1.png) no-repeat 0px 0px;}
 /* / checkboxes*/
 
 /*CSS style pagination*/

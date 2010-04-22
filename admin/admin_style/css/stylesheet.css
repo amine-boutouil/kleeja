@@ -364,7 +364,7 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 
 
 /*checkboxes*/
-.jquery-checkbox  {display: inline; line-height: 18px; cursor: pointer; cursor: hand;}
+.jquery-checkbox  {display: inline; line-height: 18px; cursor: pointer;}
 .jquery-checkbox .mark {display: inline;}
 .jquery-checkbox img {vertical-align: middle; width: 18px; height: 18px;background: url(../images/checkbox1.png) no-repeat 0px 0px}
 .jquery-checkbox-hover img{background: url(../images/checkbox1.png) no-repeat -27px 0px;}
@@ -388,3 +388,8 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 .pagination span.three_dots {background:#fff;}
 .pagination a, .pagination span.current, .pagination span.three_dots{	-moz-border-radius : 10px; /* Mozilla */	-webkit-border-radius : 10px; /* Webkit */	-khtml-border-radius : 10px; /* Konqueror */	border-radius : 10px; /* CSS3 only */}
 /* # pagination */
+
+.expand_horizontal , .expand_horizontal2{float:right;width:30px; height: 20px;background: url(../images/expand_horizontal.png) no-repeat 0px 0px;}
+.expand_horizontal2  {float:left;background-position: 0px -20px;}
+.expand_horizontal:hover {background-position: -30px 0px;}
+.expand_horizontal2:hover {background-position: -30px -20px;}

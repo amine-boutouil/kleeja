@@ -1,55 +1,54 @@
 <script type="text/javascript">
-function show_msg (te, id)
-{
-//
-//must be impeoved in future, we use jquery in kleeja now !
-//
-var te = document.getElementById(te).value;
-var iee = te;
-        iee += "<div class='clr'></div><br /><form method='post' action='{action}'><textarea name='v_" + id + "' cols='80' rows='3'></textarea>";
-        iee += "<div class='clr'></div><input name='reply_submit' type='submit' value='{lang.REPLY}' /></form>";        
-document.getElementById('mail_here').innerHTML= iee;
-
-}
+	<!--
+	function show_msg (te, id)
+	{
+		var te = document.getElementById(te).value;
+		var iee = te;
+		iee += "<div class='clr'></div><br /><form method='post' action='{action}'><textarea name='v_" + id + "' cols='80' rows='3'></textarea>";
+		iee += "<div class='clr'></div><input name='reply_submit' type='submit' value='{lang.REPLY}' /></form>";
+		document.getElementById('mail_here').innerHTML = iee;
+	}
+	-->
 </script>
 
 
 <!-- start calls temlate  -->
 <div id="divmiddle">
+
 <fieldset>
 
 <!-- start div border table  -->
 <div id="border-table">
 
+	<!-- title  -->
+	<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/menu_icons/calls_button.gif" />{lang.R_CALLS} :</h2><!-- END -->
+	
+	<!-- mail here  -->
+	<div id="mail_here">{lang.E_CLICK}</div><!-- END -->
+
+	<div class="clr"></div>
+	
 <!-- start form  --> 
 <form method="post" name="callform" action="{action}">
 
-	<!-- title  -->
-	<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/menu_icons/calls_button.gif" />{lang.R_CALLS} :</h2>
-	<!-- #  -->
 	
 	<!-- if sent -->
 	<IF NAME="msg_sent">
 	<div class="msg_sent">{lang.IS_SEND_MAIL}</div>
 	<script type="text/javascript">
-	$('div.msg_sent').fadeOut(2000).fadeIn(2000).hide('slow');
+		$('div.msg_sent').fadeOut(2000).fadeIn(2000).hide('slow');
 	</script>
 	</IF>
-	<!-- / if sent -->
+	<!-- END -->
 	
 	<!-- clear  -->
-	<div class="clr"></div><br />
-	<!-- #  -->
+	<div class="clr"></div><br /><!-- END -->
+
 	<IF NAME="no_results">
 	<div id="mail_here">{lang.MESSAGE_NONE}</div>
 	<ELSE>
+	
 	<!-- start data table -->
-	<!-- mail here  -->
-	<div id="mail_here">{lang.E_CLICK}</div>
-	<!-- # mail here  -->
-	<!-- clear  -->
-	<div class="clr"></div><br />
-	<!-- #  -->
 	<table style="text-align:center">
 		<tr style="background-color:#DFDFDF">
 			<td>#</td>
@@ -72,38 +71,26 @@ document.getElementById('mail_here').innerHTML= iee;
 		</tr>
 		</LOOP>
 
-	</table>
-	<!-- # data table -->
+	</table><!-- END -->
 
-	<!-- clear  -->
 	<div class="clr"></div>
-	<!-- #  -->
 
 	<!-- start pagination  -->
-	<div style="text-align:center">{page_nums}</div>
-	<!-- # pagination  -->
+	<div style="text-align:center">{page_nums}</div><!-- END -->
 
 	<!-- start button  -->
-	<div class="left_button"><input name="submit" type="submit" value="{lang.UPDATE_CALSS}" /></div>
-	<!-- # button  -->
-		
-	<!-- clear  -->
+	<div class="left_button"><input name="submit" type="submit" value="{lang.UPDATE_CALSS}" /></div><!-- END -->
+
 	<div class="clr"></div>
-	<!-- #  -->
-{H_FORM_KEYS}
+
+	{H_FORM_KEYS}
 </form>
-<!-- # form  -->
-
-
 </IF>
 
-<!-- clear  -->
 <div class="clr"></div>
-<!-- #  -->
 
-</div>
-<!-- #  div border  -->
+</div><!-- END div border  -->
 
 </fieldset>
-</div>
-<!-- end calls temlate  -->
+
+</div><!-- END calls temlate  -->

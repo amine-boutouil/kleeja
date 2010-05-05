@@ -1,13 +1,14 @@
 <script type="text/javascript">
-function show_msg (te , id)
-{
-var te = document.getElementById(te).value;
-var iee = te;
-        iee += "<div class='clr'></div><br /><form method='post' action='{action}'><textarea name='v_" + id + "' cols='80' rows='3'></textarea>";
-        iee += "<div class='clr'></div><input name='reply_submit' type='submit' value='{lang.REPLY}' /></form>";        
-document.getElementById('mail_here').innerHTML = iee;
-
-}
+	<!--
+	function show_msg (te , id)
+	{
+		var te = document.getElementById(te).value;
+		var iee = te;
+		iee += "<div class='clr'></div><br /><form method='post' action='{action}'><textarea name='v_" + id + "' cols='80' rows='3'></textarea>";
+		iee += "<div class='clr'></div><input name='reply_submit' type='submit' value='{lang.REPLY}' /></form>";
+		document.getElementById('mail_here').innerHTML = iee;
+	}
+	-->
 </script>
 
 <!-- start view reborts  -->
@@ -17,11 +18,14 @@ document.getElementById('mail_here').innerHTML = iee;
 <!-- start box all -->
 <div class="box_all reports">
 
-<form method="post" name="reportform" action="{action}">
+	<!-- title  -->
+	<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/menu_icons/reports_button.gif" />{lang.R_REPORTS}</h2><!-- END -->
+	
+	<div id="mail_here">{lang.E_CLICK}</div>
 
-	<!-- title  -->
-	<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/menu_icons/reports_button.gif" />{lang.R_REPORTS}</h2>
-	<!-- title  -->
+	<div class="clr"></div>
+	
+<form method="post" name="reportform" action="{action}">
 
 	<!-- if sent -->
 	<IF NAME="msg_sent">
@@ -32,9 +36,7 @@ document.getElementById('mail_here').innerHTML = iee;
 	</IF>
 	<!-- / if sent -->
 
-	<!-- clear  -->
 	<div class="clr"></div><br />
-	<!-- #  -->
 	
 <IF NAME="no_results">
 	<div id="mail_here">{lang.MESSAGE_NONE}</div>
@@ -71,40 +73,24 @@ document.getElementById('mail_here').innerHTML = iee;
 </table>
 
 <!--  pagination  -->
-<div style="text-align:center"><p>{page_nums}</p></div>
-<!--  pagination  -->
+<div style="text-align:center"><p>{page_nums}</p></div><!-- END -->
 
 <!--  button  -->
-<div class="left_button"><input name="submit" type="submit" value="{lang.UPDATE_REPORTS}" /></div>
-<!--  button  -->
+<div class="left_button"><input name="submit" type="submit" value="{lang.UPDATE_REPORTS}" /></div><!-- END -->
 	
-	<!-- clear  -->
 	<div class="clr"></div><br />
-	<!-- #  -->
-{H_FORM_KEYS}
+
+	{H_FORM_KEYS}
 </form>
 
 
 
-<!-- title  -->
-<h6><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/menu_icons/reports_button.gif" />{lang.TEXT} :</h6>
-<!-- title  -->
-
-	<!-- clear  -->
-	<div class="clr"></div>
-	<!-- #  -->
-
-<div id="mail_here">{lang.E_CLICK}</div>
-
 </IF>
 
-	<!-- clear  -->
-	<div class="clr"></div>
-	<!-- #  -->
-	
-</div>
-<!-- ## box all -->
+<div class="clr"></div>
+
+</div><!-- ## box all -->
 
 </fieldset>
-</div>
-<!-- end view reborts  -->
+
+</div><!-- end view reborts  -->

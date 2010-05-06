@@ -1367,39 +1367,64 @@ function is_browser($b)
     return false;
 }
 
+/**
+* Return the first and last seek of range to be flushed.
+*/
+function kleeja_set_range($range, $filesize)
+{
+	$dash	= strpos($range, '-');
+	$first	= trim(substr($range, 0, $dash));
+	$last	= trim(substr($range, $dash+1));
+	if (!$first)
+	{
+		$suffix	= $last;
+		$last	= $filesize-1;
+		$first	= $filesize-$suffix;
+		if($first < 0)
+		{
+			$first = 0;
+		}
+	}
+	else
+	{
+		if(!$last || $last > $filesize-1)
+		{
+			$last = $filesize-1;
+		}
+	}
+
+	if($first > $last)
+	{
+		//unsatisfiable range
+		header("Status: 416 Requested range not satisfiable");
+		header("Content-Range: */$filesize");
+		exit;
+	}
+	
+	return array($first, $last);
+}
 
 /**
-* Check if the browser has the file already and set the appropriate headers-
-* @returns false if a resend is in order.
-* @author phpBB, modified by Kleeja team
+* Outputs up to $bytes from the file $file to standard output,
+* $buffer_size bytes at a time.
 */
-function set_modified_headers($stamp, $not_ie6_and_not_ie8)
+function kleeja_buffere_range($file, $bytes, $buffer_size = 1024)
 {
-	// let's see if we have to send the file at all
-	$last_load 	= isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) ? strtotime(trim($_SERVER['HTTP_IF_MODIFIED_SINCE'])) : false;
-	if ($not_ie6_and_not_ie8)
+	$bytes_left = $bytes;
+	while($bytes_left >0 && !feof($file))
 	{
-		if ($last_load !== false && $last_load <= $stamp)
+		if($bytes_left > $buffer_size)
 		{
-			if (substr(strtolower(@php_sapi_name()),0,3) === 'cgi')
-			{
-				// in theory, we shouldn't need that due to php doing it. Reality offers a differing opinion, though
-				header('Status: 304 Not Modified', true, 304);
-			}
-			else
-			{
-				header('HTTP/1.0 304 Not Modified', true, 304);
-			}
-			// seems that we need those too ... browsers
-			header('Pragma: public');
-			header('Expires: ' . gmdate('D, d M Y H:i:s \G\M\T', time() + 31536000));
-			return true;
+			$bytes_to_read = $buffer_size;
 		}
 		else
 		{
-			header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $stamp) . ' GMT');
+			$bytes_to_read = $bytes_left;
 		}
-	}
-	return false;
-}
 
+		$bytes_left	-= $bytes_to_read;
+		$contents	= fread($file, $bytes_to_read);
+		echo $contents;
+		flush();
+	}
+}

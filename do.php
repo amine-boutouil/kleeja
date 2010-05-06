@@ -132,6 +132,9 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 {
 	($hook = kleeja_run_hook('begin_down_go_page')) ? eval($hook) : null; //run hook	
 
+
+	kleeja_log('downloading file start -  (' . implode(', ', $_GET) . ') -> ' . $_SERVER['HTTP_REFERER']);
+
 	//must know from where he came ! and stop him if not image
 	//todo: if it's download manger, let's pass this
 	if(isset($_GET['down']) || isset($_GET['downf']))
@@ -163,6 +166,11 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 
 		$isset_down = (isset($_GET['downf'])) ? 'do.php?filename=' . $_GET['downf'] : (isset($_GET['down']) ? 'do.php?id=' . $_GET['down'] : '');
 		if(strpos($_SERVER['HTTP_REFERER'], $isset_down) !== false)
+		{
+			$not_reffer = false;
+		}
+
+		if(empty($_SERVER['HTTP_REFERER']) || strpos($config['siteurl'], str_replace(array('http://', 'www.'), '', $_SERVER['HTTP_REFERER'])))
 		{
 			$not_reffer = false;
 		}
@@ -345,7 +353,8 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 
 	header('Pragma: public');
 
-	header('Content-Type: ' . $mime_type . (($is_ie8) ? '; authoritative=true; X-Content-Type-Options: nosniff;' : ''));
+
+
 	if(!$is_image && !$is_live && $is_ie8)
 	{
 		header('X-Download-Options: noopen');
@@ -355,123 +364,97 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 	{
 		header('Content-Transfer-Encoding: binary');
 	}
-	//header('Accept-Ranges: bytes');
 
-	if($is_ie6)
-	{
-		header('Expires: -1');	
-	}
-	else
-	{
-		header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
-	}
 
+	header(($is_ie6 ? 'Expires: -1' : 'Expires: Mon, 26 Jul 1997 05:00:00 GMT'));	
+
+	
+	#(($is_ie8) ? '; authoritative=true; X-Content-Type-Options: nosniff;' : '')
+	
+	if (($pfile = @fopen($path_file, 'rb')) === false)
+	{
+		#so ... it's failed to open !
+		header("HTTP/1.0 404 Not Found");
+		big_error('----', 'Error - can not open file.');
+	}
+	
+	#sending some headers
+	header('Accept-Ranges: bytes');
+	
+	#prevent some limits
+	@set_time_limit(0);
+	
 	// multipart-download and download resuming support
 	$range_enable = false;
-	if(isset($_SERVER['HTTP_RANGE']) && !$is_image && !$is_live && $resuming_on)
+	if(isset($_SERVER['HTTP_RANGE']) && strpos($_SERVER['HTTP_RANGE'],'bytes=') && !$is_image && !$is_live && $resuming_on)
 	{
-		list($size_unit, $range_orig) = explode("=", $_SERVER['HTTP_RANGE'], 2);
-        if ($size_unit == 'bytes')
-        {
-            list($range, $extra_ranges) = explode(',', $range_orig, 2);
-        }
-        else
-        {
-            $range = '';
-        }
-
-		list($seek_start, $seek_end) = explode('-', $range, 2);
-		$seek_end = (empty($seek_end)) ? ($size - 1) : min(abs(intval($seek_end)),($size - 1));
-		$seek_start = (empty($seek_start) || $seek_end < abs(intval($seek_start))) ? 0 : max(abs(intval($seek_start)),0);
-
-		if ($seek_start > 0 || $seek_end < ($size - 1))
-		{
-			header('HTTP/1.1 206 Partial Content');
-		}
-
-		header('Accept-Ranges: bytes');
-		header('Content-Range: bytes ' . $seek_start . '-' . $seek_end . '/' . $size);
-		header('Content-Length: ' . ($seek_end - $seek_start + 1));
 		
-		$range_enable = true;
+		header('HTTP/1.1 206 Partial Content');
+
+        $ranges		= explode(',', substr(trim($_SERVER['HTTP_RANGE']), 6));
+		$boundary	= substr(md5($name . microtime()), 24);
+
+		# many ranges requested 
+		if(sizeof($ranges) > 1)
+		{
+			$content_length = 0;
+			foreach ($ranges as $range)
+			{
+				list($first, $last) = kleeja_set_range($range, $size);
+				$content_length += strlen("\r\n--$boundary\r\n");
+				$content_length += strlen("Content-Type: $mime_type\r\n");
+				$content_length += strlen("Content-range: bytes $first-$last/$size\r\n\r\n");
+				$content_length += $last-$first+1;          
+			}
+			$content_length += strlen("\r\n--$boundary--\r\n");
+
+			header("Content-Length: $content_length");
+			header("Content-Type: multipart/x-byteranges; boundary=$boundary");
+
+			foreach ($ranges as $range)
+			{
+				list($first, $last) = kleeja_set_range($range, $size);
+				echo "\r\n--$boundary\r\n";
+				echo "Content-Type: $mime_type\r\n";
+				echo "Content-range: bytes $first-$last/$size\r\n\r\n";
+				fseek($pfile, $first);
+				kleeja_buffere_range($pfile, $last-$first+1, $chunksize);          
+			}
+			echo "\r\n--$boundary--\r\n";
+		}
+		else
+		{
+			#single range is request.
+			list($first, $last) = kleeja_set_range($ranges[0], $size); 
+			header("Content-Length: " . ($last-$first+1));
+			header("Content-Range: bytes $first-$last/$size");
+			header("Content-Type: $mime_type");  
+			fseek($pfile, $first);
+			kleeja_buffere_range($pfile, $last-$first+1, $chunksize);
+		}
 	}
 	else
 	{
-		if($size)
+
+		header("Content-Length: " . $size);
+		header("Content-Type: $mime_type");  
+		
+		if(!$size)
 		{
-			header("Content-Length: " . $size);
-		}
-	}
-
-	//prevent some limits
-	@set_time_limit(0);
-	$SQL->close();
-
-	//output the file
-	if (!set_modified_headers($ftime, !$is_ie6 && !$is_ie8))
-	{
-		//if 2mb file or less, let's dump it as one.
-		if($size >= 2*1048576)
-		{
-			if (($fp = @fopen($path_file, 'rb')) !== false)
+			while (!feof($pfile))
 			{
-				if($range_enable)
-				{
-					fseek($fp, $seek_start);
-				}
-
-				while (!feof($fp))
-				{
-					echo fread($fp, $chunksize);
-					@ob_flush();
-				}
-				
-				fclose($fp);
-			}
-			else
-			{
-				// I'm not sure why user would visit this area !
+				echo fread($pfile, $chunksize);
+				@ob_flush();
 			}
 		}
 		else
 		{
-			kleeja_log('before downloading (' . $path_file . ') : ' . Customfile_size(memory_get_usage()));
-			if(function_exists('file_get_contents'))
-			{
-				kleeja_log('downloading with file_get_contents (' . $path_file . ') : ' . Customfile_size(memory_get_usage()));
-				echo file_get_contents($path_file);
-			}
-			else if (function_exists('readfile'))
-			{
-				kleeja_log('downloading with readfile (' . $path_file . ') : ' . Customfile_size(memory_get_usage()));
-				@readfile($path_file);
-			}
-			else if (($fp = @fopen($path_file, 'rb')) !== false)
-			{
-				if (function_exists('fpassthru'))
-				{
-					kleeja_log('downloading with fpassthru (' . $path_file . ') : ' . Customfile_size(memory_get_usage()));
-					fpassthru($fp);
-				}
-				else
-				{
-					kleeja_log('downloading with fread (' . $path_file . ') : ' . Customfile_size(memory_get_usage()));
-					echo fread($fp, $size);
-				}
-				kleeja_log('before close fb (' . $path_file . ')  : ' . Customfile_size(memory_get_usage()));
-				fclose($fp);
-			}
-				kleeja_log('after downloading (' . $path_file . ') : ' . Customfile_size(memory_get_usage()));
+			kleeja_buffere_range($pfile, $size, $chunksize);
 		}
-
-		flush();
-	}
-	else
-	{
-		($hook = kleeja_run_hook('down_go_page_cant_op_file')) ? eval($hook) : null; //run hook
-		//big_error('----', 'Error - can not open file.');
 	}
 
+	flush();
+	fclose($pfile);
 	$SQL->close();
 	exit; // done
 }

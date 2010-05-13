@@ -188,6 +188,7 @@ switch ($_GET['go'])
 			//_post
 			$t_lname = isset($_POST['lname']) ? htmlspecialchars($_POST['lname']) : ''; 
 			$t_lpass = isset($_POST['lpass']) ? htmlspecialchars($_POST['lpass']) : ''; 
+			$t_lpass2 = isset($_POST['lpass2']) ? htmlspecialchars($_POST['lpass2']) : ''; 
 			$t_lmail = isset($_POST['lmail']) ? htmlspecialchars($_POST['lmail']) : ''; 
 
 			//no submit 
@@ -213,7 +214,11 @@ switch ($_GET['go'])
 				if (trim($_POST['lname']) == '' || trim($_POST['lpass']) == '' || trim($_POST['lmail']) == '')
 				{
 					$ERRORS['empty_fields'] = $lang['EMPTY_FIELDS'];
-				}	
+				}
+				if ($t_lpass != $t_lpass2)
+				{
+					$ERRORS['pass_neq_pass2'] = $lang['PASS_NEQ_PASS2'];
+ 				}
 				if (!preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/i", trim($_POST['lmail'])))
 				{
 					$ERRORS['lmail'] = $lang['WRONG_EMAIL'];

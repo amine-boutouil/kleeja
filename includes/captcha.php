@@ -72,7 +72,7 @@ function kleeja_cpatcha_image()
 	$security_code = str_replace('0', '', $md5_hash);
 
 	//We don't need a 32 character long string so we trim it down to 5 
-	$security_code = substr($security_code, 15, 5);
+	$security_code = substr($security_code, 15, 4);
 
 	//Set the session to store the security code
 	$_SESSION["klj_sec_code"] = $security_code;
@@ -105,22 +105,19 @@ function kleeja_cpatcha_image()
 		// he search in the Linux fonts cache , but when you add './' he will know it's our font.
 		//
 		imagettftext ($image, 16,$angle , rand(50, $x), $y+rand(1,3), $white,'./arial.ttf', $security_code);
+		#imagettftext ($image, 7, 0, $width-30, $height-4, $white,'./arial.ttf', 'Kleeja');
 	}
 	else
 	{
 		imagestring ($image, imageloadfont('arial.gdf'), $x+rand(10,15), $y-rand(10,15), $security_code, $white);
+		#imagestring ($image, 1, $width-35, $height-10, 'Kleeja', ImageColorAllocate($image, 200, 200, 200));
 	}
-	
-	//kleeja !
-	imagestring ($image, 1, $width-35, $height-10, 'Kleeja', ImageColorAllocate($image, 200, 200, 200));
-	
+
 	//Throw in some lines to make it a little bit harder for any bots to break 
 	ImageRectangle($image,0,0,$width-1,$height-1,$grey); 
 	imageline($image, 0, $height/2, $width, $height/2, $grey); 
 	imageline($image, $width/2, 0, $width/2, $height, $grey); 
  
-
-
 			
 	//Tell the browser what kind of file is come in 
 	header("Content-Type: image/png"); 

@@ -265,6 +265,8 @@ $lang = array_merge($lang, array(
 	'SEARCH_STAT' 				=> 'Search Bots Stats',
 	'NOTHING'					=> 'There are no new files or photos .. !!',
 	'YOU_HAVE_TO_WAIT'			=> 'Wait %s seconds .. then try to re-upload your files',
+	'REPEAT_PASS'				=> 'Repeat Password',
+	'PASS_NEQ_PASS2'			=> 'Passwords are not equal !',
 
 	//last line of this file ...					 
 	'S_TRANSLATED_BY' 			=> 'Translated By <a href="http://www.fenix4web.com/" target="_blank">Fenix4Web</a>',

@@ -122,12 +122,14 @@ function Saafooter($outscript = false)
 		$googleanalytics .= '<!--' . "\n";
 		$googleanalytics .= 'var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");' . "\n";
 		$googleanalytics .= 'document.write("\<script src=\'" + gaJsHost + "google-analytics.com/ga.js\' type=\'text/javascript\'>\<\/script>" );' . "\n";
+		$googleanalytics .= '-->' . "\n";
 		$googleanalytics .= '</script>' . "\n";
 		$googleanalytics .= '<script type="text/javascript">' . "\n";
+		$googleanalytics .= '<!--' . "\n";
 		$googleanalytics .= 'var pageTracker = _gat._getTracker("' . $config['googleanalytics'] . '");' . "\n";
 		$googleanalytics .= 'pageTracker._initData();' . "\n";
 		$googleanalytics .= 'pageTracker._trackPageview();' . "\n";
-		$googleanalytics .= '//-->' . "\n";
+		$googleanalytics .= '-->' . "\n";
 		$googleanalytics .= '</script>' . "\n";
 	}
 

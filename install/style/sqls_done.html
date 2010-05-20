@@ -7,6 +7,9 @@
 				{{foreach($GLOBALS['sqls_done'] as $sql):}}
 				<li><img src="style/images/li_sq.png" style="vertical-align:middle;padding:0 6px;" alt="ok" /> {{echo $sql}}</li>
 				{{endforeach;}}
+				{{foreach($GLOBALS['sql_err'] as $sql):}}
+				<li style="color:red"><img src="style/images/glob4ls.png" style="vertical-align:middle;padding:0 6px;" alt="ok" /> {{echo $sql}}</li>
+				{{endforeach;}}
 			</ul>
 		</td>
 		<td><img src="style/images/good.png" style="text-align:center;margin:5px auto;" alt="" /></td>
@@ -25,6 +28,6 @@
 {{else:}}
 <div class="home"><span style="color:red;">{{echo $lang['INST_FINISH_ERRSQL']}}</span>
 	<br /><br />
-	<textarea cols="50" rows="3">{{echo $GLOBALS['errors']}}</textarea>
+	<textarea cols="50" rows="3" style="direction:ltr">{{echo $GLOBALS['errors']}}</textarea>
 </div>
 {{endif;}}

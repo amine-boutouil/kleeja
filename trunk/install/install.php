@@ -219,7 +219,7 @@ case 'data' :
 		//do important alter before
 		$SQL->query($install_sqls['ALTER_DATABASE_UTF']);
 		
-		$sqls_done = array();
+		$sqls_done = $sql_err = array();
 		foreach($install_sqls as $name=>$sql_content)
 		{
 			if($name == 'DROP_TABLES' || $name == 'ALTER_DATABASE_UTF')
@@ -248,8 +248,8 @@ case 'data' :
 			}
 			else
 			{
-				$errors  = implode(':', $SQL->get_error()) . '' . "\n___\n";
-				echo '<span style="color:red;"> [' .$name . '] : ' . $lang['INST_SQL_ERR'] . '</span><br />';
+				$errors .= implode(':', $SQL->get_error()) . '' . "\n___\n";
+				$sql_err[] = $lang['INST_SQL_ERR'] . ' : ' . $name;
 				$err++;
 			}
 
@@ -263,8 +263,8 @@ case 'data' :
 				$sql = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`, `type`) VALUES ('$cn[0]', '$cn[1]', '$cn[2]', '$cn[3]', '$cn[4]');";
 				if(!$SQL->query($sql))
 				{
-					$errors  = implode(':', $SQL->get_error()) . '' . "\n___\n";
-					echo '<span style="color:red;"> [' .$name . '] : ' . $lang['INST_SQL_ERR'] . '</span><br />';
+					$errors .= implode(':', $SQL->get_error()) . '' . "\n___\n";
+					$sql_err[] = $lang['INST_SQL_ERR'] . ' : ' . $name;					
 					$err++;
 				}
 			}
@@ -275,8 +275,8 @@ case 'data' :
 				$sql = "INSERT INTO `{$dbprefix}exts` (`group_id`, `ext`, `gust_size`, `gust_allow`, `user_size`, `user_allow`) VALUES ('$cn[0]', '$cn[1]', '$cn[2]', '$cn[3]', '$cn[4]', '$cn[5]');";
 				if(!$SQL->query($sql))
 				{
-					$errors  = implode(':', $SQL->get_error()) . '' . "\n___\n";
-					echo '<span style="color:red;"> [' .$name . '] : ' . $lang['INST_SQL_ERR'] . '</span><br />';
+					$errors .= implode(':', $SQL->get_error()) . '' . "\n___\n";
+					$sql_err[] = $lang['INST_SQL_ERR'] . ' : ' . $name;	
 					$err++;
 				}
 			}

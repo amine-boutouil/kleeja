@@ -118,10 +118,10 @@ CREATE TABLE `{$dbprefix}files` (
   `user_ip` VARCHAR( 250 ) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `name` (`name`(300)),
-  KEY `user` (`user`(10)),
+  KEY `user` (`user`),
   KEY `code_del` (`code_del`(150)),
-  KEY `time` (`time`(11)),
-  KEY `last_down` (`last_down`(11))
+  KEY `time` (`time`),
+  KEY `last_down` (`last_down`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 ";
 

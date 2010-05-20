@@ -97,7 +97,7 @@ CREATE TABLE `{$dbprefix}users` (
   `new_password` varchar(200) COLLATE utf8_bin NOT NULL DEFAULT '',
   `hash_key` varchar(200) COLLATE utf8_bin NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
-  KEY `clean_name` (`clean_name`)
+  KEY `clean_name` (`clean_name`(300))
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 ";
 
@@ -117,11 +117,11 @@ CREATE TABLE `{$dbprefix}files` (
   `code_del` varchar(150) collate utf8_bin NOT NULL,
   `user_ip` VARCHAR( 250 ) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `name` (`name`),
-  KEY `user` (`user`),
-  KEY `code_del` (`code_del`),
-  KEY `time` (`time`),
-  KEY `last_down` (`last_down`)
+  KEY `name` (`name`(300)),
+  KEY `user` (`user`(10)),
+  KEY `code_del` (`code_del`(150)),
+  KEY `time` (`time`(11)),
+  KEY `last_down` (`last_down`(11))
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 ";
 

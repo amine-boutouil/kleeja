@@ -304,7 +304,9 @@ class usrcp
 		{
 			include_once (PATH . 'includes/functions_alternative.php');	
 		}
-		
+
+		($hook = kleeja_run_hook('cleanusername_func_usr_class')) ? eval($hook) : null; //run hook
+
 		static $arabic_t = array();
 		static $latin_t = array(
 			array('á','à','â','ã','å','Á','À','Â','Ã','Å','é','è','ê','ë','É','È','Ê','í','ì','ï','î','Í','Ì','Î','Ï','ò','ó','ô','õ','º','ø','Ó','Ò','Ô','Õ','Ø','ú','ù','û','Ú','Ù','Û','ç','Ç','Ñ','ñ','ÿ','Ë'),
@@ -332,6 +334,8 @@ class usrcp
 	{
 		include_once('phpass.php');
 
+		($hook = kleeja_run_hook('kleeja_hash_password_func_usr_class')) ? eval($hook) : null; //run hook
+
 		$return = false;
 		$hasher = new PasswordHash(8, true);
 		$return = $hasher->HashPassword($password);
@@ -344,6 +348,8 @@ class usrcp
 	function kleeja_set_cookie($name, $value, $expire)
 	{
 		global $config;
+
+		($hook = kleeja_run_hook('kleeja_set_cookie_func_usr_class')) ? eval($hook) : null; //run hook
 
 		//
 		//when user add cookie_* in config this will replace the current ones
@@ -422,7 +428,7 @@ class usrcp
 	function kleeja_get_cookie($name)
 	{
 		global $config;
-
+		($hook = kleeja_run_hook('kleeja_get_cookie_func_usr_class')) ? eval($hook) : null; //run hook
 		return isset($_COOKIE[$config['cookie_name'] . '_' . $name]) ? $_COOKIE[$config['cookie_name'] . '_' . $name] : false;
 	}
 
@@ -431,6 +437,8 @@ class usrcp
 	function kleeja_check_user()
 	{
 		global $config, $SQL, $dbprefix;
+
+		($hook = kleeja_run_hook('kleeja_check_user_func_usr_class')) ? eval($hook) : null; //run hook
 
 		//if login up
 		if($this->kleeja_get_cookie('ulogu'))

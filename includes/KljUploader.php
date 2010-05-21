@@ -168,7 +168,7 @@ class KljUploader
 		{
 			return;
 		}
-		
+
 		$old_x	= @imageSX($src_img);
 		$old_y	= @imageSY($src_img);
 		
@@ -270,28 +270,26 @@ function process ()
 		}
 
 			//then wut did u click
+			$wut = false;
+			//clicked, _file uploading
 			if (isset($_POST['submitr']))
 			{
 				$wut = 1;
 			}
+			//clicked ,urls uloading
 			elseif(isset($_POST['submittxt']))
 			{
 				$wut = 2;
 			}
-			else
+
+			//add your clicked actions
+			($hook = kleeja_run_hook('another_wut_kljuploader')) ? eval($hook) : null; //run hook
+
+			if(!$wut)
 			{
-				$wut = null;
 				//no uploading yet, or just go to index.php, so we have make a new session
 				unset($_SESSION['FIILES_NOT_DUPLI'], $_SESSION['FIILES_NOT_DUPLI_LINKS']);
 			}
-			
-			//if submit 
-			if($wut)
-			{	
-				//for plugins
-				($hook = kleeja_run_hook('if_wut_kljuploader_w1')) ? eval($hook) : null; //run hook	
-			}
-
 
 			//safe_code .. captcha is on
 			if($this->safe_code && $wut)
@@ -330,10 +328,13 @@ function process ()
 					}
 				}
 			}
-			
-			
+	
 			// uploading process 
 			$check = false;
+
+			//add your hook here, if wut == 'my_action' ...
+			($hook = kleeja_run_hook('wuts_processes_kljuploader')) ? eval($hook) : null; //run hook
+
 			if ($wut == 1)
 			{
 				($hook = kleeja_run_hook('submit_filesupload_kljuploader')) ? eval($hook) : null; //run hook	

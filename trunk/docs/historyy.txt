@@ -254,7 +254,8 @@ To Do 1.X:
 - add file description
 - add filter system
 - add configs backup ( last 5 changes ) and ablilty to return to one of them
-
+- remove 'show files from last visit' and add 'show files from *2* hourse' *2* is a list.
+- add menu in start admin page for quick action, like add new ext or change style, language etc.
 
 Thank you for reading this file. 
 

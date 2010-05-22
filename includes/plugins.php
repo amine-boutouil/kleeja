@@ -252,6 +252,12 @@ class kplugins
 			$templates 	 =  explode("</templates>", $templates[1]);
 			$store 		.= '<templates>' . $templates[0] . '</templates>' . "\n\n";
 		}
+	
+		//eval install code
+		if (isset($plg_install) && trim($plg_install['value']) != '' && $plg_new)
+		{
+			eval($plg_install['value']);
+		}
 
 		//if the plugin was new 
 		if($plg_new)
@@ -289,12 +295,7 @@ class kplugins
 
 			$SQL->build($update_query);
 		}
-	
-		//eval install code
-		if (isset($plg_install) && trim($plg_install['value']) != '' && $plg_new)
-		{
-			eval($plg_install['value']);
-		}
+
 
 		if(isset($plg_phrases))
 		{

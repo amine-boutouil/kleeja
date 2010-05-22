@@ -162,14 +162,21 @@ function kleeja_run_hook ($hook_name)
 */
 function kleeja_plugin_exists($plugin_name)
 {
-	global $all_plg_plugins;
-
-	if(defined('STOP_HOOKS') || !isset($all_plg_plugins[$plugin_name]))
-	{
-		return false;
-	}
+	global $SQL, $dbprefix;
 	
-	return true;
+	$plugin_name = str_replace(' ', '-', $plugin_name); 
+
+	$query = array(
+					'SELECT'	=> 'p.plg_id',
+					'FROM'		=> "{$dbprefix}plugins p",
+					'WHERE'		=> "p.plg_name = '" . $SQL->escape($plugin_name) . "'",
+				);
+		
+		($hook = kleeja_run_hook('qr_select_kleeja_plugin_exists_func')) ? eval($hook) : null; //run hook
+		
+		$result	= $SQL->build($query);					
+		$num = $SQL->num_rows($result);
+		return ($num == 0) ? false : true;
 }
 
 /**

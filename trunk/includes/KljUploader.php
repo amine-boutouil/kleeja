@@ -221,7 +221,7 @@ function process ()
 		global $use_ftp,$ftp_server,$ftp_user,$ftp_pass,$ch;
 		
 		($hook = kleeja_run_hook('start_process_kljuploader')) ? eval($hook) : null; //run hook	
-		
+
 		//check prefix 
 		if (preg_match("/{rand:([0-9]+)}/i", $this->filename, $m))
 		{

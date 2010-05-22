@@ -188,7 +188,7 @@ else:
 			$SQL->build($update_query);
 			if($SQL->affected())
 			{
-				delete_cache('data_hooks');
+				delete_cache(array('data_plugins', 'data_config'));
 			}		
 
 			//show msg
@@ -280,8 +280,8 @@ else:
 				}
 
 				//delete caches ..
-				delete_cache(array('data_hooks', 'data_config'));
-				
+				delete_cache(array('data_plugins', 'data_config'));
+
 				$plg->atend();
 				
 				if(empty($plg->zipped_files))
@@ -346,7 +346,7 @@ else:
 				
 				
 				//start xml
-				$name = $row['plg_name'] . '-' . str_replace('.', '-', $row['plg_ver']) . '.xml';
+				$name = $row['plg_name'] . '-' . str_replace('.', '-', $row['plg_ver']) . '.klj';
 
 				if (is_browser('mozilla'))
 				{
@@ -376,21 +376,31 @@ else:
 				header('Content-Type: text/xml');
 				header('X-Download-Options: noopen');
 				header('Content-Disposition: attachment; '  . $h_name);
-
+				
+				function clean_xml($str)
+				{
+					 return str_replace(array('"', "'", '<', '>', '&'), array('&quot;', '&apos;', '&lt;', '&gt;', '&amp;'), $str);
+				}
+				
+				function clean_xml_cdata($str)
+				{
+					return str_replace(array('<![CDATA', ']]>'), array('&lt;![CDATA', ']]&gt;'), $str);
+				}
+				
 				echo '<?xml version="1.0" encoding="utf-8"?>' . "\n";
 				echo '<kleeja>' . "\n";
 				echo "\t" . '<info>' . "\n";
-				echo "\t\t" . '<plugin_name>' . $row['plg_name'] . '</plugin_name>' . "\n";
-				echo "\t\t" . '<plugin_version>' . $row['plg_ver'] . '</plugin_version>' . "\n";
+				echo "\t\t" . '<plugin_name>' . clean_xml($row['plg_name']) . '</plugin_name>' . "\n";
+				echo "\t\t" . '<plugin_version>' . clean_xml($row['plg_ver']) . '</plugin_version>' . "\n";
 				echo "\t\t" . '<plugin_description>' . "\n";
 				$plgdsc = unserialize(kleeja_base64_decode($row['plg_dsc']));
 				foreach($plgdsc as $ln => $cn)
 				{
-					echo "\t\t\t" . '<description lang="' . $ln . '"><![CDATA[' . $cn . ']]></description>' . "\n";
+					echo "\t\t\t" . '<description lang="' . $ln . '">' . clean_xml($cn) . '</description>' . "\n";
 				}
 				echo "\t\t" . '</plugin_description>' . "\n";
-				echo "\t\t" . '<plugin_author>' . $row['plg_author'] . '</plugin_author>' . "\n";
-				echo "\t\t" . '<plugin_kleeja_version>' . KLEEJA_VERSION . '</plugin_kleeja_version>' . "\n";
+				echo "\t\t" . '<plugin_author>' . clean_xml($row['plg_author']) . '</plugin_author>' . "\n";
+				echo "\t\t" . '<plugin_kleeja_version>' . clean_xml(KLEEJA_VERSION) . '</plugin_kleeja_version>' . "\n";
 				echo "\t" . '</info>' . "\n";
 				
 				if(!empty($row['plg_instructions']))
@@ -399,13 +409,13 @@ else:
 					$inst = unserialize(kleeja_base64_decode($row['plg_instructions']));
 					foreach($inst as $lang => $instruction)
 					{
-						echo  "\t\t" . '<instruction lang="' . $lang . '"><![CDATA[' .  $instruction  . ']]></instruction>' . "\n";
+						echo  "\t\t" . '<instruction lang="' . $lang . '"><![CDATA[' .  clean_xml_cdata($instruction)  . ']]></instruction>' . "\n";
 					}
 					echo  "\t" . '</instructions>' . "\n";
 				}
 				
 				echo "\t" . '<uninstall><![CDATA[' . "\n";
-				echo $row['plg_uninstall'];
+				echo clean_xml_cdata($row['plg_uninstall']);
 				echo "\t" . ']]></uninstall>' . "\n";
 
 				echo "\t" . $row['plg_store'] . "\n";
@@ -431,7 +441,7 @@ else:
 
 						while($phrase=$SQL->fetch_array($queryp))
 						{
-							echo "\t\t\t" . '<phrase name="' . $phrase['word'] . '"><![CDATA[' . $phrase['trans'] . ']]></phrase>' . "\n";
+							echo "\t\t\t" . '<phrase name="' . $phrase['word'] . '"><![CDATA[' . clean_xml_cdata($phrase['trans']) . ']]></phrase>' . "\n";
 						}
 						echo "\t\t" . '</lang>' . "\n";
 					}
@@ -449,7 +459,7 @@ else:
 					echo "\t" . '<options>' . "\n";
 					while($config=$SQL->fetch_array($queryconfig))
 					{
-						echo "\t\t" . '<option name="' . $config['name'] . '" value="' . $config['value'] . '" order="' . $config['display_order'] . '" menu="' . $config['type'] . '"><![CDATA[' . $config['option'] . ']]></option>' . "\n";
+						echo "\t\t" . '<option name="' . $config['name'] . '" value="' . $config['value'] . '" order="' . $config['display_order'] . '" menu="' . $config['type'] . '"><![CDATA[' . clean_xml_cdata($config['option']) . ']]></option>' . "\n";
 					}
 					echo "\t" . '</options>' . "\n";
 				}
@@ -465,7 +475,7 @@ else:
 					echo "\t" . '<hooks>' . "\n";
 					while($hook=$SQL->fetch_array($queryhooks))
 					{
-						echo "\t\t" . '<hook name="' . $hook['hook_name'] . '"><![CDATA[' . $hook['hook_content'] . ']]></hook>' . "\n";
+						echo "\t\t" . '<hook name="' . $hook['hook_name'] . '"><![CDATA[' . clean_xml_cdata($hook['hook_content']) . ']]></hook>' . "\n";
 					}
 					echo "\t" . '</hooks>' . "\n";
 				}
@@ -480,7 +490,7 @@ else:
 						{
 							$f = substr($f, 1);
 						}
-						echo "\t\t" . '<file path="' . $f . '"><![CDATA[' . @file_get_contents(PATH . $f) . ']]></file>' . "\n";
+						echo "\t\t" . '<file path="' . $f . '"><![CDATA[' . kleeja_base64_encode(@file_get_contents(PATH . $f)) . ']]></file>' . "\n";
 					}
 					echo "\t" . '</files>' . "\n";
 				}

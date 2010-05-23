@@ -570,8 +570,11 @@ function kleeja_get_link ($pid, $extra = array())
 		break;
 	}
 	
+	$return = $config['siteurl'] . str_replace(array_keys($extra), array_values($extra), $links[$pid]);
+
 	($hook = kleeja_run_hook('kleeja_get_link_func')) ? eval($hook) : null; //run hook
-	return $config['siteurl'] . str_replace(array_keys($extra), array_values($extra), $links[$pid]);
+
+	return $return; 
 }
 
 /**
@@ -633,6 +636,9 @@ function get_up_tpl_box($box_name, $extra = array())
 	{
 		$return = preg_replace('/{' . $var . '}/', $val, $return);
 	}
+	
+	($hook = kleeja_run_hook('get_up_tpl_box_func')) ? eval($hook) : null; //run hook
+
 	return $return;
 }
 
@@ -678,9 +684,7 @@ function kleeja_style_info($style_name)
 		$inf_r[trim($t[0])] = trim($t[1]);
 	}
 
+	($hook = kleeja_run_hook('kleeja_style_info_func')) ? eval($hook) : null; //run hook
+
 	return $inf_r;
 }
-
-
-
-#<-- EOF

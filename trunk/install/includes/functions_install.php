@@ -63,17 +63,7 @@ function getjquerylink()
 	}
 	else
 	{
-		return 'http://ajax.googleapis.com/ajax/libs/jquery/1.3.0/jquery.min.js';
-	}
-}
-
-function getjquerypstrengthminlink()
-{
-	global $_path;
-
-	if(file_exists($_path . 'admin/admin_style/js/jquery.pstrength-min.1.2.js'))
-	{
-		return $_path . 'admin/admin_style/js/jquery.pstrength-min.1.2.js';
+		return 'http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js';
 	}
 }
 

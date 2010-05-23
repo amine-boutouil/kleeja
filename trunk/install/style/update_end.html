@@ -3,11 +3,13 @@
 		<table border="0" width="100%" cellspacing="0" cellpadding="0">
 		<tr>
 			<td width="70%">
-				<ul class="scroll_div" dir="{{echo $lang['DIR']}}">
+			<div id="scroll_div">
+				<ul class="inner" dir="{{echo $lang['DIR']}}">
 					{{foreach($GLOBALS['update_msgs_arr'] as $m):}}
 					<li><img src="style/images/li_sq.png" style="vertical-align:middle;padding:0 6px;" alt="ok" /> {{echo $m}}</li>
 					{{endforeach;}}
 				</ul>
+			</div>
 			</td>
 			<td width="2%"> </td>
 			<td width="28%" style="text-align:center;"><img src="style/images/good.png" alt="" /></td>

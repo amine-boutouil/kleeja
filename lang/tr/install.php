@@ -49,7 +49,6 @@
 	$lang['EMAIL']									= 'Email';
 	$lang['INDEX']									= 'AnaSayfa';
 	$lang['ADMINCP']								= 'Kontrol Paneli';
-	$lang['DIR']									= 'rtl';
 	$lang['EMPTY_FIELDS']							= 'Bazý önemli alanlarý boþ býraktýn!';
 	$lang['WRONG_EMAIL']							= 'Hatalý email adresi';
 	//

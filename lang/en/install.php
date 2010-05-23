@@ -48,7 +48,6 @@
 	$lang['EMAIL']									= 'Email';
 	$lang['INDEX']									= 'Home';
 	$lang['ADMINCP']								= 'Control Panel';
-	$lang['DIR']									= 'rtl';
 	$lang['EMPTY_FIELDS']							= 'Some important fields were left blank!';
 	$lang['WRONG_EMAIL']							= 'Incorrect Email Address!';
 	//

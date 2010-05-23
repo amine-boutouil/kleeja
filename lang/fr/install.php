@@ -48,7 +48,6 @@
 	$lang['EMAIL']									= 'Email';
 	$lang['INDEX']									= 'Index';
 	$lang['ADMINCP']								= 'Panneau de Contr&ocirc;le';
-	$lang['DIR']									= 'rtl';
 	$lang['EMPTY_FIELDS']							= 'Certains champs importants ont &eacute;t&eacute; laiss&eacute;s en blanc!';
 	$lang['WRONG_EMAIL']							= 'Adresse Email incorrecte!';
 	//

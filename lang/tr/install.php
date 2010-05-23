@@ -6,6 +6,7 @@
 
 	if(!isset($lang) || !is_array($lang)) $lang = array();
 
+	$lang['DIR']									= 'ltr';
 	$lang['INST_INSTALL_WIZARD']					= 'Kleeja yükleme sihirbazý';
 	$lang['INST_INSTALL_CLEAN_VER']					= 'Yeni kurulum';
 	$lang['INST_UPDATE_P_VER']						= 'Güncelleme ';

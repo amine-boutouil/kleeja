@@ -5,6 +5,7 @@
 
 	if(!isset($lang) || !is_array($lang)) $lang = array();
 
+	$lang['DIR']									= 'ltr';
 	$lang['INST_INSTALL_WIZARD']					= 'Kleeja assistant d\'installation';
 	$lang['INST_INSTALL_CLEAN_VER']					= 'Nouvelle Installation';
 	$lang['INST_UPDATE_P_VER']						= 'Mise &agrave; jour ';

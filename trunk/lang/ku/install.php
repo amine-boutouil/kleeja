@@ -5,6 +5,7 @@
 
 	if(!isset($lang) || !is_array($lang)) $lang = array();
 	
+	$lang['DIR']								= 'rtl';
 	$lang['INST_INSTALL_WIZARD']				= 'دامه‌زراندنی کلیجا';
 	$lang['INST_INSTALL_CLEAN_VER']				= "دامه‌زراندن بۆ یه‌که‌م جار ";
 	$lang['INST_UPDATE_P_VER']					= "نوێکردنه‌وه‌ بۆ وه‌شانی نوێ ";

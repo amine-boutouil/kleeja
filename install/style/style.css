@@ -13,12 +13,12 @@ select:focus,textarea:focus {background-color:#ffd;border: 1px solid #D26900;}
 img, div{ behavior: url('style/ie6/iepngfix.htc') ;}
 aligny {float : {{echo $lang['DIR']=='ltr'?'left':'right'}}}
 
-.box_body{width:80%;margin:2px auto;}
+.box_body{width:85%;margin:2px auto;}
 .clr {clear: both;overflow:hidden;height:0;}
 
-.language_choose {position: absolute;top:35%;left:16%;}
+.language_choose {position: absolute;top:30%;right:auto;left:auto;overflow:hidden;}
 ul#choose, ul#choose ul {margin:0;padding:0;list-style: none;}
-ul#choose li {width: 128px;height: 128px;float: left;margin: 2px;text-align:center;overflow:hidden;}
+ul#choose li {width: 128px;height: 128px;float: left;margin: 5px;text-align:center;overflow:hidden;}
 ul#choose li a {display: block;text-decoration: none;}
 ul#choose img {width: 100%;height: 100%;border: 0;display: block;}
 
@@ -99,9 +99,9 @@ div.install_update:hover {background:#FFFDE2 url('style/images/xhover.gif') repe
 .select_version option { color:#FF8000;background-color:#fff;border-bottom:1px dotted #D6D6D6;font-size:14px;font-weight:bold;padding:2px 10px;}
 .up_ver{color:#004081;padding: 2px 6px;border-right:1px solid #91BBD8;border-left:1px solid #91BBD8;}
 
-.scroll_div  {height:100px;overflow: auto;}
-.scroll_div ul {	list-style-type:none;text-indent:10px;}
-.scroll_div  ul li {height:26px;line-height:26px;color:green;font-size:12px;}
+#scroll_div  {height:200px;overflow: auto;}
+#scroll_div ul {	list-style-type:none;text-indent:10px;}
+#scroll_div  ul li {height:26px;line-height:26px;color:green;font-size:12px;}
 
 
 /*checkboxes*/

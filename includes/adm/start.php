@@ -155,7 +155,7 @@ if(file_exists($cached_file))
 	$ADM_NOTIFICATIONS[]  = array(
 								'id' => 'cached_tpl',
 								'msg_type'=> 'info', 'title'=> $lang['CACHED_STYLES'],
-								'msg'=> sprintf($lang['CACHED_STYLES_DISC'] , '<a href="' . basename(ADMIN_PATH) . '?cp=styles&amp;sty_t=cached">' . $lang['CLICKHERE'] .'</a>')
+								'msg'=> sprintf($lang['CACHED_STYLES_DISC'] , '<a href="' . basename(ADMIN_PATH) . '?cp=m_styles&amp;sty_t=cached">' . $lang['CLICKHERE'] .'</a>')
 							);
 }
 

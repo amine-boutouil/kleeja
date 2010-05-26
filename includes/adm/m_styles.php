@@ -56,12 +56,19 @@ switch ($_GET['sty_t'])
 			@closedir($dh);
 		}
 
+
 		//after submit
 		if(isset($_REQUEST['style_choose']))
 		{
 			$style_id = str_replace('..', '', $_REQUEST['style_choose']);
 
-			//is there any possiplity to write on files
+			//if empty, let's ignore it
+			if(empty($style_id))
+			{
+				redirect(basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'));
+			}
+
+			//is there any possiblity to write on files
 			$not_style_writeable = true;
 			$d_style_path = PATH . 'styles/' . $style_id; 
 			if (!is_writable($d_style_path))
@@ -74,19 +81,20 @@ switch ($_GET['sty_t'])
 			}
 			else
 			{
+				//there is no possiblity to write on files
 				$not_style_writeable = false;
 			}
 			
 			$lang['STYLE_DIR_NOT_WR'] = sprintf($lang['STYLE_DIR_NOT_WR'], $d_style_path);
 
-			
+			//handling styles, show or make default ...
 			switch($_REQUEST['method'])
 			{
 				default:
 				case '1': //show templates
 
 					//for style ..
-					$stylee = "admin_show_tpls";
+					$stylee = 'admin_show_tpls';
 					$action = basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') .'&amp;sty_t=style_orders';
 
 					//get backup templates
@@ -209,27 +217,25 @@ switch ($_GET['sty_t'])
 					$text = sprintf($lang['STYLE_NOW_IS_DEFAULT'], htmlspecialchars($style_id)) . '<meta HTTP-EQUIV="REFRESH" content="2; url=' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') .  '">' . "\n";
 					$stylee	= "admin_info";
 						
-				break;
-				
-				
+				break;				
 			}
 		}
 
-	break; 
+	break;
 
 	case 'style_orders' :
 
 		//style id ..
 		$style_id = str_replace('..', '', $SQL->escape($_REQUEST['style_id']));
 		$redirect_to = basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&style_choose=' . $style_id . '&method=1';
-	
+
 		if(empty($_REQUEST['tpl_choose']))
 		{
 			redirect($redirect_to);
 		}
 
 		//edit or del tpl 
-		if(isset($_REQUEST['tpl_choose']) && !empty($_REQUEST['tpl_choose']) && isset($_REQUEST['style_id']))
+		if(isset($_REQUEST['tpl_choose']) && !empty($_REQUEST['tpl_choose']) && isset($_REQUEST['style_id']) && isset($_REQUEST['method']))
 		{
 			//
 			// Check form key
@@ -270,8 +276,8 @@ switch ($_GET['sty_t'])
 
 					//for style ..
 					$stylee = "admin_edit_tpl";
-					$action = basename(ADMIN_PATH) . "?cp=styles&amp;sty_t=style_orders";
-					$action_return	= basename(ADMIN_PATH) . '?cp=styles&amp;style_choose=' . $style_id . '&amp;method=1';
+					$action = basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;sty_t=style_orders';
+					$action_return	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;style_choose=' . $style_id . '&amp;method=1';
 					$H_FORM_KEYS	= kleeja_add_form_key('adm_style_order_edit_content');
 			
 					//is there any possiablity to write on files
@@ -316,11 +322,11 @@ switch ($_GET['sty_t'])
 			//
 			// Check form key
 			//
-			if(!kleeja_check_form_key('adm_style_order_edit_content'))
+			if(!kleeja_check_form_key('adm_style_order_edit_content', 3600))
 			{
 				kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $redirect_to, 1);
 			}
-		
+
 			$style_id = str_replace('..', '', $SQL->escape($_POST['style_id']));
 			//tpl name 
 			$tpl_name =	htmlspecialchars_decode($_POST['tpl_choose']);
@@ -348,7 +354,7 @@ switch ($_GET['sty_t'])
 			//delete cache ..
 			delete_cache('tpl_' . str_replace('html', 'php', $tpl_name));
 			//show msg
-			$link	= basename(ADMIN_PATH) . '?cp=styles&amp;sty_t=style_orders&amp;style_id=' . $style_id . '';
+			$link	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;sty_t=style_orders&amp;style_id=' . $style_id . '';
 			$text	= $lang['TPL_UPDATED'] . '<br /><meta HTTP-EQUIV="REFRESH" content="3; url=' . $link . '">' ."\n";
 			$stylee	= "admin_info";
 		}
@@ -477,7 +483,7 @@ switch ($_GET['sty_t'])
 			foreach($content as $template_name=>$do)
 			{
 				echo '<strong>' . $lang['OPEN'] . '</strong> : <br /> ' . (substr($template_name, 0, 6) == 'admin_' ? $STYLE_PATH_ADMIN : $STYLE_PATH) . $template_name . '<br />';
-				switch($do['action']):
+				switch(trim($do['action'])):
 					case 'replace_with':
 
 						echo '<strong> ' . $lang['SEARCH_FOR'] . '<strong> : <br />';
@@ -549,7 +555,7 @@ switch ($_GET['sty_t'])
 			$text = ob_get_contents();
 			ob_end_clean();
 
-			$text .= '<br /><br /><a href="' . basename(ADMIN_PATH) . '?cp=styles&amp;sty_t=cached&amp;del=1">' . $lang['DELETE_CACHED_STYLES'] . '</a>';  
+			$text .= '<br /><br /><a href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;sty_t=cached&amp;del=1">' . $lang['DELETE_CACHED_STYLES'] . '</a>';  
 			$stylee = 'admin_info';
 		}
 	break;
@@ -575,7 +581,7 @@ switch ($_GET['sty_t'])
 		//open bk_template.php to write contents of templates to it.
 		$bkf = @fopen(PATH . 'includes/bk_templates.php', 'wb');
 
-		$bkf_contents = "<" . "?php\n//\n//bakup of Kleeja templates\n//Automatically generated from DEV version cp=m_styles&sty_t=bk\n//\n\n//no for directly open\nif (!defined('IN_COMMON'))\n{";
+		$bkf_contents = "<" . "?php\n//\n//bakup of Kleeja templates\n//Automatically generated from DEV version cp=" . basename(__file__, '.php') . "&sty_t=bk\n//\n\n//no for directly open\nif (!defined('IN_COMMON'))\n{";
 		$bkf_contents .= "\n\texit();\n}\n\n//for version\n\$bk_version = '" . KLEEJA_VERSION . "';";
 		$bkf_contents .= "\n\n//Done in : " . date('d-m-Y H:i a') . "\n\n\$bkup_templates = array(\n";
 

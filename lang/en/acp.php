@@ -281,9 +281,9 @@ $lang = array_merge($lang, array(
 	'PLUGIN_FTP_PATH'			=> 'Script directory on FTP',
 	'PLUGIN_FTP_PORT'			=> 'FTP Port <small>(usually 21, If you are unsure leave it as it is.)</small>',
 	'PLUGIN_CONFIRM_ADD'		=> 'Caution: the plugins make programmatical changes to the script, and they could be harmful at times. so be sure to check the plugin source and make sure that it\'s an official Kleeja plugin, Do you want to continue?',
-	'PLUGIN_ADDED_ZIPPED'		=> 'Plugin added. to complete the setup process s$2%download$1% the modified files and replace them manually. forgetting or ignoring to replace the files can lead to plugin malfunction.',
-	'PLUGIN_ADDED_ZIPPED_INST'	=> 'Plugin added. to complete the setup process s$2%download$1% the modified files and replace them manually. forgetting or ignoring to replace the files can lead to plugin malfunction. </ br> you should also s$4%reads$3% the plugin instructions for more info. Or you can read them later on the plugins page.',
-	'PLUGIN_DELETED_ZIPPED'		=> 'The plugin has been deleted, to complete the deletion 1%$sdownload2%$s the modified files and replace them with the current files in Kleeja manually.', 
+	'PLUGIN_ADDED_ZIPPED'		=> 'Plugin added. to complete the setup process %1$sdownload%2$s the modified files and replace them manually. forgetting or ignoring to replace the files can lead to plugin malfunction.',
+	'PLUGIN_ADDED_ZIPPED_INST'	=> 'Plugin added. to complete the setup process %1$sdownload%2$s the modified files and replace them manually. forgetting or ignoring to replace the files can lead to plugin malfunction. </ br> you should also %3$sreads%4$s the plugin instructions for more info. Or you can read them later on the plugins page.',
+	'PLUGIN_DELETED_ZIPPED'		=> 'The plugin has been deleted, to complete the deletion %1$sdownload%2$s the modified files and replace them with the current files in Kleeja manually.', 
 	'PLUGINS_CHANGES_FILES'		=> 'Modified files as a result of plugin installation', 
 	'PLUGINS_CHANGES_FILES_EXP'	=> 'These are compressed files that contain the modified files that were changed for some plugins, you need to download them from here and replace them. you can remove the zip files when done.',
 

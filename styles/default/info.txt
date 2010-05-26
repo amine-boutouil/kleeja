@@ -8,7 +8,9 @@
 name = Default
 
 #Style desc
-desc = الستايل الافتراضي مع النسخه, وهذا مايقوم فريق كليجا تطويره دوماً
+desc:en = Default style of Kleeja, developed and improved by Kleeja team 
+desc:ar = الستايل الافتراضي مع النسخه, وهذا مايقوم فريق كليجا تطويره دوماً
+
 
 #Style copyright
 copyright = 2009 Kleeja.com

@@ -96,6 +96,7 @@ switch ($_GET['sty_t'])
 					//for style ..
 					$stylee = 'admin_show_tpls';
 					$action = basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') .'&amp;sty_t=style_orders';
+					$action2 = basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') .'&amp;sty_t=style_orders';
 
 					//get backup templates
 					$show_bk_templates = false;
@@ -107,13 +108,28 @@ switch ($_GET['sty_t'])
 					}
 
 					//get style detalis
-					$style_details1 = array('name'=>'[!]', 'version'=> '[!]', 'copyright'=>'[!]', 'kleeja_version'=>'[!]', 'depend_on' => $lang['NONE'], 'plugins_required'=>'[!]');
+					$style_details1 = array('name'=>'[!]', 'desc'=> '[!]', 'version'=> '[!]', 'copyright'=>'[!]', 'kleeja_version'=>'[!]', 'depend_on' => $lang['NONE'], 'plugins_required'=>'[!]');
 					$style_details = kleeja_style_info($style_id);
-					
+
 					//fix if not array
 					if(!is_array($style_details))
 					{
 						$style_details = array();
+					}
+					else
+					{
+						//sepcify language of description of style
+						if(!empty($style_details['desc']))
+						{
+							if(!empty($style_details['desc'][$config['language']]))
+							{
+								$style_details['desc'] = $style_details['desc'][$config['language']];
+							}
+							else
+							{
+								$style_details['desc'] = $style_details['desc']['en'];
+							}
+						}
 					}
 
 					$style_details += array_diff_assoc($style_details1, $style_details);
@@ -231,7 +247,7 @@ switch ($_GET['sty_t'])
 
 		if(empty($_REQUEST['tpl_choose']))
 		{
-			redirect($redirect_to);
+			#redirect($redirect_to);
 		}
 
 		//edit or del tpl 
@@ -354,14 +370,14 @@ switch ($_GET['sty_t'])
 			//delete cache ..
 			delete_cache('tpl_' . str_replace('html', 'php', $tpl_name));
 			//show msg
-			$link	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;sty_t=style_orders&amp;style_id=' . $style_id . '';
+			$link	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;sty_t=st&amp;style_choose=' . $style_id . '';
 			$text	= $lang['TPL_UPDATED'] . '<br /><meta HTTP-EQUIV="REFRESH" content="3; url=' . $link . '">' ."\n";
 			$stylee	= "admin_info";
 		}
 			
 		//new template file
 		if(isset($_POST['submit_new_tpl']))
-		{	
+		{
 			//
 			// Check form key
 			//

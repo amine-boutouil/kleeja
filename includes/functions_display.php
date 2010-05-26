@@ -680,8 +680,17 @@ function kleeja_style_info($style_name)
 			continue;
 		}
 
-		$t = @explode('=', $m, 2);
-		$inf_r[trim($t[0])] = trim($t[1]);
+		$t = array_map('trim', @explode('=', $m, 2));
+		# ':' mean ummm, mean something secondary as in sub-array
+		if(strpos($t[0], ':') !== false)
+		{
+			$t_t0 = array_map('trim', @explode(':', $t[0]));
+			$inf_r[$t_t0[0]][$t_t0[1]] = $t[1];
+		}
+		else
+		{
+			$inf_r[$t[0]] = $t[1];
+		}
 	}
 
 	($hook = kleeja_run_hook('kleeja_style_info_func')) ? eval($hook) : null; //run hook

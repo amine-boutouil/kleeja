@@ -450,7 +450,11 @@ class usrcp
 			//if not expire 
 			if(($hashed_expire == sha1(md5($config['h_key'] . $hashed_password) . $expire_at)) && ($expire_at > time()))
 			{
-				if((int) $adm_or_not == 1 || !defined('IN_DOWNLOAD'))
+				 /* For better performance we will take the risks */
+				 /*
+				 	!defined('IN_DOWNLOAD') 
+				 */
+				if((int) $adm_or_not == 1)
 				{
 					$user_data = $this->data($user_id, $hashed_password, true, $expire_at);
 				}

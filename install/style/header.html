@@ -12,25 +12,23 @@
 </head>
 <body>
 <div class="header">
-<p style="float:left;text-shadow: 0px 1px rgb(56, 56, 56);">Wizard installation kleeja , version 1.0.0</p>
-<div style="float:right;margin:3px 0;">
-{{if(((isset($_GET['step']) && $_GET['step'] != 'language') && (strpos('index.php', $_SERVER['PHP_SELF'])=== false && isset($_GET['step']))) OR (isset($_GET['step']) && $_GET['step'] == 'license' || $_GET['step'] == 'action_file') ):}}
-<form action="?step={{echo htmlspecialchars($_GET['step'])}}&amp;change_lang=1" method="post">
-<img src="style/images/world.png" alt="language" style="float:right;margin:1px 6px;" /> 
-<select name="lang" style="float:right;" onchange="submit()">
-{{if($dh = opendir($_path . 'lang')):}}
-{{while (($file = readdir($dh)) !== false): if(strpos($file, '.') === false && $file != '..' && $file != '.'):}}
-<option value="{{echo $file}}" {{echo isset($_GET['lang']) && $file==$_GET['lang'] || (empty($_GET['lang']) && $file=='en') ?'selected="selected"':''}}>{{echo $file}}</option>
-{{endif; endwhile;closedir($dh);endif;}}
-</select>
-<input type="hidden" name="step_is" value="{{echo htmlspecialchars($_GET['step'])}}" />
-</form>
-{{endif;}}
+<p class="header_text">Wizard installation kleeja , version 1.0.0</p>
+<div style="float:right;margin:2px 12px 0 0;">
+	{{if(((isset($_GET['step']) && $_GET['step'] != 'language') && (strpos('index.php', $_SERVER['PHP_SELF'])=== false && isset($_GET['step']))) OR (isset($_GET['step']) && $_GET['step'] == 'license' || $_GET['step'] == 'action_file') ):}}
+		<form action="?step={{echo htmlspecialchars($_GET['step'])}}&amp;change_lang=1" method="post">
+			<a href="./."><img src="style/images/world.png" alt="" style="float:right;margin:1px 10px;" /></a>
+			<select name="lang" id="Select_language" onchange="submit()">
+			{{if($dh = opendir($_path . 'lang')):}}
+				{{while (($file = readdir($dh)) !== false): if(strpos($file, '.') === false && $file != '..' && $file != '.'):}}
+				<option style="height:16px;line-height:13px;" value="{{echo $file}}" title="style/images/{{echo $file}}_16.png" {{echo isset($_GET['lang']) && $file==$_GET['lang'] || (empty($_GET['lang']) && $file=='en') ?'selected="selected"':''}}>{{echo $file}}</option>
+			{{endif; endwhile;closedir($dh);endif;}}
+			</select>
+			<input type="hidden" name="step_is" value="{{echo htmlspecialchars($_GET['step'])}}" />
+		</form>
+	{{endif;}}
 </div>
 </div>
-
-<p><a style="float:left" onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com"><img src="style/images/logo.png" alt="logo kleeja" /></a></p>
-
+<div class="divline"></div>
+<p class="logo"><a onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com"><img src="style/images/logo.png" alt="kleeja" /></a></p>
 <!-- start all box body  -->
-<div class="box_body">
-<div class="clr"></div><br />
+<div class="box_body"><div class="clr"></div>

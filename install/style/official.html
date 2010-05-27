@@ -1,14 +1,29 @@
 <div class="home" style="text-align:{{echo $lang['DIR']=='rtl'?'right':'left'}};" dir="{{echo $lang['DIR']}}">
-	<div class="title"><img src="style/images/info.png" style="vertical-align:middle;padding:0 10px;" alt="?" />{{echo $lang['IS_IT_OFFICIAL']}} </div>
+	<div class="title"><img src="style/images/glob4ls.png" style="vertical-align:middle;padding:0 10px;" alt="?" />{{echo $lang['IS_IT_OFFICIAL']}} </div>
 		<div class="clr"></div>
-	<p class="text">{{echo $lang['IS_IT_OFFICIAL_DESC']}}</p>
-		<div class="clr"></div>
-	<p class="text" style="color:green;padding:4px 20px;"><input type="checkbox" name="yes" onclick="javascript:this.checked?document.getElementById('next').disabled='':document.getElementById('next').disabled='disabled';" style="vertical-align:middle;"/>  {{echo $lang['IS_IT_OFFICIAL_YES']}}</p>
-	<p class="text" style="color:red;padding:4px 42px 4px 10px;">{{echo $lang['IS_IT_OFFICIAL_NO']}} !</p>
-	<div class="clr"></div><br />
+			<p class="text">{{echo $lang['IS_IT_OFFICIAL_DESC']}}</p>
+		<div align="center">
+		<table border="0" width="100%" cellspacing="0" cellpadding="0">
+			<tr align="center">
+				<td><p class="official_yes"><img src="style/images/official_yes.png" alt="" /><br />
+						<input type="checkbox" name="yes" style="vertical-align:middle;" onclick="javascript:this.checked?document.getElementById('next').disabled='':document.getElementById('next').disabled='disabled';" /> 
+						<span style="color:green;">{{echo $lang['IS_IT_OFFICIAL_YES']}}</span>
+					</p>
+				</td>
+				<td><p class="official_yes"><img src="style/images/official_no.png" alt="" /><br />
+						<a class="official_no" target="_blank" href="http://www.kleeja.com">{{echo $lang['IS_IT_OFFICIAL_NO']}} !</a>
+					</p>
+				</td>
+			</tr>
+		</table>
+		</div>
+
+	<div class="clr"></div>
+
+	<center style="margin-top:10px;">
+		<form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=choose&amp;' . getlang(1)}}">
+			<input onclick="window.location.href='./index.php?step=what_is_kleeja&amp;{{echo getlang(1)}}';return false;" name="previous" type="submit" value="{{echo $lang['INST_PREVIOUS']}}"  />
+			<input id="next" name="next" type="submit" value="{{echo $lang['INST_NEXT']}}"  disabled='disabled'/>
+		</form>	
+	</center>
 </div>
-<div class="clr"></div>
-<form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=choose&amp;' . getlang(1)}}">
-	<input onclick="window.location.href='./index.php?step=what_is_kleeja&amp;{{echo getlang(1)}}';return false;" name="previous" type="submit" value="{{echo $lang['INST_PREVIOUS']}}"  />
-	<input id="next" name="next" type="submit" value="{{echo $lang['INST_NEXT']}}"  disabled='disabled'/>
-</form>	

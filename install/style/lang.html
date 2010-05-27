@@ -1,4 +1,3 @@
-<div align="center">
 <div class="language_choose">
 	<ul id="choose">
 		{{if($dh = @opendir($_path . 'lang')): while (($file = readdir($dh)) !== false): if(strpos($file, '.') === false && $file != '..' && $file != '.'):}}
@@ -6,4 +5,5 @@
 		{{endif;endwhile;@closedir($dh);endif;}}
 	</ul>
 </div>
-</div>
+<br />
+<div align="center"><img src="style/images/world_country.png" alt="" /></div>

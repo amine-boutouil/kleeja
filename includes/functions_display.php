@@ -230,12 +230,13 @@ function kleeja_err($msg, $title = '', $exit = true, $redirect = false, $rs = 2,
 */
 function kleeja_admin_err($msg, $navigation = true, $title='', $exit = true, $redirect = false, $rs = 2)
 {
-	global $text, $tpl, $SHOW_LIST, $adm_extensions, $adm_extensions_menu, $STYLE_PATH_ADMIN, $lang, $olang, $SQL;
-	
+	global $text, $tpl, $SHOW_LIST, $adm_extensions, $adm_extensions_menu;
+	global $STYLE_PATH_ADMIN, $lang, $olang, $SQL, $MINI_MENU;
+
 	($hook = kleeja_run_hook('kleeja_admin_err_func')) ? eval($hook) : null; //run hook
 
 	// assign {text} in err template
-	$text	= $msg;
+	$text		= $msg;
 	$SHOW_LIST	= $navigation;
 
 	//header
@@ -265,14 +266,15 @@ function kleeja_admin_err($msg, $navigation = true, $title='', $exit = true, $re
 */
 function kleeja_admin_info($msg, $navigation=true, $title='', $exit=true, $redirect = false, $rs = 2)
 {
-	global $text, $tpl, $SHOW_LIST, $adm_extensions, $adm_extensions_menu, $STYLE_PATH_ADMIN, $lang, $SQL;
-	
+	global $text, $tpl, $SHOW_LIST, $adm_extensions, $adm_extensions_menu;
+	global $STYLE_PATH_ADMIN, $lang, $SQL, $MINI_MENU;
+
 	($hook = kleeja_run_hook('kleeja_admin_info_func')) ? eval($hook) : null; //run hook
 
 	// assign {text} in err template
-	$text	= $msg;
+	$text		= $msg;
 	$SHOW_LIST	= $navigation;
-	
+
 	//header
 	echo $tpl->display("admin_header");
 	//show tpl

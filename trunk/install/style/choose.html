@@ -11,12 +11,12 @@
 <div class="clr"></div><br />
 {{if($GLOBALS['install_or_no']):}}
 <div class="install_update" onclick="window.location.href='./install.php?step=license&amp;{{echo getlang(1)}}';">
-	<img src="style/images/Installer.png" alt="installer" />
+	<img src="style/images/Installer.png" alt="Install Kleeja" />
 	<p>{{echo $lang['INST_INSTALL_CLEAN_VER']}}</p>
 </div>
 	{{else:}}
 <div class="install_update" onclick="window.location.href='./update.php?{{echo getlang(1)}}';">	
-	<img src="style/images/update.png" alt="update" />
+	<img src="style/images/update.png" alt="update Kleeja" />
 	<p>{{echo $lang['INST_UPDATE_P_VER']}}</p>
 </div>
 {{endif;}}

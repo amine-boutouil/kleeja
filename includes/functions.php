@@ -919,7 +919,14 @@ function get_lang($name, $folder = '')
 	}
 	else
 	{
-		big_error('There is no language file in the current path', '' . $path . ' not found');
+		if(file_exists(PATH . 'lang/en/' . str_replace('.php', '', $name) . '.php'))
+		{
+			include_once(PATH . 'lang/en/' . str_replace('.php', '', $name) . '.php');
+		}
+		else
+		{
+			big_error('There is no language file in the current path', '' . $path . ' not found');
+		}
 	}
 
 	return true;

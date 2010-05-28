@@ -18,8 +18,10 @@ if (!defined('IN_COMMON'))
 //
 //Path of config file in phpBB3
 //
-define('SCRIPT_CONFIG_PATH', '/config.php');
-
+if(!defined('SCRIPT_CONFIG_PATH'))
+{
+	define('SCRIPT_CONFIG_PATH', '/config.php');
+}
 
 function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = false, $return_name = false)
 {

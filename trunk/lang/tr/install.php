@@ -108,9 +108,9 @@
 	$lang['INST_PHP_LESSMIN']						= 'Kleeja\'yý yükleyebilmek için PHP %1$s yada daha yüksek versiyonuna ihtiyacýnýz var, þu anki versiyon:  %2$s';
 	$lang['INST_MYSQL_LESSMIN']						= 'Kleeja\'yý yükleyebilmek için MYSQL %1$s versiyonuna ihtiyacýnýz var, þu anki versiyon: %2$s';
 	$lang['IS_IT_OFFICIAL']							= 'Sizdeki Kleeja dosyalarýný nereden buldunuz? ?';
-	$lang['IS_IT_OFFICIAL_DESC']					= 'Eðer dosyalarý bizim sitemizden indirirseniz kleeja hakkýnda her türlü konuda bizden yardým alabilirsiniz fakat Baþka sitelerden aldýðýnýzda yardým ve destek hizmetini vermiyoruz . Ayrýca bulduðunuz baþka sitelerden olan dosyalar güvenilir deðildir .<br /><br /> <fon style="color:#154188;border-bottom:1px dashed #154188;padding:4px 0;">Bunun için neden Kleeja\'yý neden Kleeja\'nýn kendi sitesinden indirmiyorsun?</font>';
+	$lang['IS_IT_OFFICIAL_DESC']					= 'Eðer dosyalarý bizim sitemizden indirirseniz kleeja hakkýnda her türlü konuda bizden yardým alabilirsiniz fakat Baþka sitelerden aldýðýnýzda yardým ve destek hizmetini vermiyoruz . Ayrýca bulduðunuz baþka sitelerden olan dosyalar güvenilir deðildir .<span class="sure"> Bunun için neden Kleeja\'yý neden Kleeja\'nýn kendi sitesinden indirmiyorsun?</span>';
 	$lang['IS_IT_OFFICIAL_YES']						= 'Kleeja\'nýn kendi sitesinden Kleeja.com';
-	$lang['IS_IT_OFFICIAL_NO']						= '<a style="color:red" target="_blank" href="http://www.kleeja.com">Hayýr, Ben Kleeja\'yý baþka siteden indirdim, Týklayýn ve Kleeja\'nýn kendi sitesinden indirin.</a>';
+	$lang['IS_IT_OFFICIAL_NO']						= 'Hayýr, Ben Kleeja\'yý baþka siteden indirdim, Týklayýn ve Kleeja\'nýn kendi sitesinden indirin.';
 	$lang['INST_WHAT_IS_KLEEJA_T']					= 'Kleeja Nedir?';
 // Tarih: 18 Mayýs 2010 saat 16:22 CEZALAND Türkçeleþtirmeye devam ediyor... Emeðe saygý burdaki yazýnýn size hiçbir zararý yok burda kalsa biyerinizmi eksilcek =)	
 // Türkçeleþtirme kafama göre devam ediyorum o yüzden her bir satýrýn saat farklý =)

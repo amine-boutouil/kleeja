@@ -45,14 +45,13 @@ class KljUploader
 	 */
 	 function watermark($name, $ext, $logo)
 	 {
-	 
 		($hook = kleeja_run_hook('watermark_func_kljuploader')) ? eval($hook) : null; //run hook	
 		
 		if(!file_exists($name))
 		{
 			return;
 		}
-		
+
 		if (preg_match("/jpg|jpeg/",$ext) && function_exists('imagecreatefromjpeg'))
 		{
 			$src_img = @imagecreatefromjpeg($name);
@@ -71,7 +70,14 @@ class KljUploader
 			return;
 		}
 
-		$src_logo = imagecreatefromgif($logo);
+		if(file_exists('images/watermark.gif')
+		{
+			$src_logo = imagecreatefromgif($logo);
+		}
+		elseif(file_exists('images/watermark.png')
+		{
+			$src_logo = imagecreatefrompng($logo);
+		}
 
 		$bwidth  = @imageSX($src_img);
 		$bheight = @imageSY($src_img);
@@ -81,24 +87,23 @@ class KljUploader
 		//fix bug for 1beta3
 		if ($bwidth > 160 &&  $bheight > 130)
 		{
-		
-				$src_x = $bwidth - ($lwidth + 5);
-				$src_y = $bheight - ($lheight + 5);
-				@ImageAlphaBlending($src_img, true);
-				@ImageCopy($src_img,$src_logo,$src_x,$src_y,0,0,$lwidth,$lheight);
+			$src_x = $bwidth - ($lwidth + 5);
+			$src_y = $bheight - ($lheight + 5);
+			@ImageAlphaBlending($src_img, true);
+			@ImageCopy($src_img,$src_logo,$src_x,$src_y,0,0,$lwidth,$lheight);
 
-				if (preg_match("/jpg|jpeg/",$ext))
-				{
-					@imagejpeg($src_img, $name);
-				}
-				elseif (preg_match("/png/",$ext))
-				{
-					imagepng($src_img, $name);
-				}
-				elseif (preg_match("/gif/",$ext))
-				{
-					@imagegif($src_img, $name);
-				}
+			if (preg_match("/jpg|jpeg/",$ext))
+			{
+				@imagejpeg($src_img, $name);
+			}
+			elseif (preg_match("/png/",$ext))
+			{
+				imagepng($src_img, $name);
+			}
+			elseif (preg_match("/gif/",$ext))
+			{
+				@imagegif($src_img, $name);
+			}
 		
 		}# < 150
 		else 
@@ -152,15 +157,16 @@ class KljUploader
 			return;
 		}
 		
-		if (preg_match("/jpg|jpeg/",$ext) && function_exists('imagecreatefromjpeg'))
+		if (strpos($ext, 'jp') !== false)
 		{
 			$src_img = @imagecreatefromjpeg($name);
 		}
-		elseif (preg_match("/png/",$ext) && function_exists('imagecreatefrompng'))
+		elseif (strpos($ext, 'png') !== false)
 		{
 			$src_img = @imagecreatefrompng($name);
 		}
-		elseif (preg_match("/gif/", $ext) && !$this->is_ani($name)&& function_exists('imagecreatefromgif'))
+		#todo : try to use some avilable php library to make gif thumb
+		elseif (strpos($ext, 'gif') !== false)
 		{
 			$src_img = @imagecreatefromgif($name);
 		}
@@ -171,7 +177,7 @@ class KljUploader
 
 		$old_x	= @imageSX($src_img);
 		$old_y	= @imageSY($src_img);
-		
+
 		if ($old_x > $old_y)
 		{
 			$thumb_w=$new_w;
@@ -188,28 +194,25 @@ class KljUploader
 			$thumb_h=$new_h;
 		}
 		
-		$dst_img = @ImageCreateTrueColor($thumb_w,$thumb_h);
+		$dst_img = @ImageCreateTrueColor($thumb_w, $thumb_h);
 		@imagecopyresampled($dst_img, $src_img, 0, 0, 0, 0, $thumb_w, $thumb_h, $old_x, $old_y);
-		
-		if (preg_match("/jpg|jpeg/", $ext))
+
+		if (strpos($ext, 'jp') !== false)
 		{
 			@imagejpeg($dst_img, $filename);
 		}
-		elseif (preg_match("/png/", $ext))
+		elseif (strpos($ext, 'png') !== false)
 		{
 			@imagepng($dst_img, $filename);
 		}
-		elseif (preg_match("/gif/", $ext))
+		elseif (strpos($ext, 'gif') !== false)
 		{
 			@imagegif($dst_img, $filename);
 		}
-		
 
 		@imagedestroy($dst_img);
 		@imagedestroy($src_img);
 	}
-
-
 
 
 //
@@ -694,7 +697,7 @@ function process ()
 						//write on image
 						if( ($config['write_imgs'] != 0) && in_array(strtolower($this->typet), array('gif', 'png', 'jpg', 'jpeg')))
 						{
-							$this->watermark($folderee . "/" . $filname,strtolower($this->typet), 'images/watermark.gif');
+							$this->watermark($folderee . "/" . $filname,strtolower($this->typet));
 						}
 
 						//then show

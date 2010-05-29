@@ -51,8 +51,8 @@ div.install_update:hover {background:#F9F9E8 url('style/images/xhover.gif') repe
 .licens3 {width: 500px;height:180px;direction:ltr;overflow: auto;padding:15px;margin:10px auto;background:#FCFCEF url('style/images/xhover.gif') repeat-x bottom center ;border: 1px solid #A9B8C2;text-align:justify;color:#111;}
 .ul_check,.ul_check2 {list-style:none;margin:5px 0;}
 
-.notice_check {text-align:justify;font-size:11px;border-top:1px solid #D3B25B;border-bottom:1px solid #D3B25B;background-color:#FCF5E2;padding:6px;margin:2px 0;}
-.notice_check p{	text-indent:10px;background-color:#FFF;padding:2px 0;margin-top:4px;font-weight:400;}
+.notice_check {text-align:justify;font-size:11px;border-top:1px solid #D3B25B;border-bottom:1px solid #D3B25B;background:#F9F9E8 url('style/images/xhover.gif') repeat-x bottom center;padding:6px;margin:2px 0;}
+.notice_check p{	text-indent:10px;padding:2px 0;margin-top:4px;font-weight:700;}
 
 .table_conf {width:94%;margin:6px auto;font-size:12px;font-weight:400;}
 .input_conf {width:220px;direction:ltr;cursor: text;border-left: 1px solid #AFAEAA;border-top: 1px solid #AFAEAA;border-right: 1px solid #D5D5C8;border-bottom: 1px solid #D5D5C8;}
@@ -60,7 +60,7 @@ div.install_update:hover {background:#F9F9E8 url('style/images/xhover.gif') repe
 .input_conf:focus {background-color:#ffd;border: 1px solid #D26900;}
 .td_conf{width:100%;padding:1px 10px;background-color:#FFF;}
 
-.data_table_install {width:92%;margin:5px auto;border:1px solid #E0EFF6;font-size:12px;font-weight: normal;}
+.data_table_install {width:92%;margin:5px auto;border:1px solid #F6E7E0;font-size:12px;font-weight: normal;}
 .tdd {width:24%;text-align:center;}
 .data_table_install input {width:90%;padding:2px 4px;border:1px solid #aaa;}
 .data_table_install input:focus {background-color:#E3FCDC;border: 1px solid #B7D876;}
@@ -88,7 +88,7 @@ div.install_update:hover {background:#F9F9E8 url('style/images/xhover.gif') repe
 .title_plugin{width: 94%;margin:0 auto 10px auto;font-size:13pt;color:#537027;background-color:#ECFFD1;padding: 5px 0px;border-top:1px solid #7E9F4D;border-bottom:1px solid #7E9F4D;}
 .text_plugin{color:#32490E;padding:2px 20px;text-align:justify;font-size:11px;}
 
-.table_plugin {width:92%;margin:5px auto;border:1px solid #E0EFF6;font-size:12px;font-weight: normal;}
+.table_plugin {width:92%;margin:5px auto;border:1px solid #F6E7E0;font-size:12px;font-weight: normal;}
 .table_plugin th ,.table_plugin td {padding:4px;border-right:1px solid #aaa;border-top: 1px solid #eee;border-left:1px solid #eee;border-bottom:1px solid #aaa;}
 .table_plugin th {white-space:normal;text-align: center;background:#91CF0C;font-weight:bold;line-height:22px;color:#111;font-size:11px;}
 .table_plugin  td {line-height:120%;white-space:normal;}

@@ -1,7 +1,7 @@
 {{if(!$GLOBALS['no_config']):}}
 <form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=c&amp;' . getlang(1)}}"  onsubmit="javascript:return formCheck(this, Array('db_server','db_user' ,'db_name'));">
 	<div class="home" id="Group1" dir="{{echo $lang['DIR']}}" style="text-align:{{echo $lang['DIR']=='rtl'?'right':'left'}};">
-		<div class="title"><img src="style/images/info.png" style="vertical-align:middle;padding:0 10px;" alt="?" />{{echo $GLOBALS['writeable_path'] ? $lang['DB_INFO'] : $lang['DB_INFO_NW']}}</div>
+		<div class="title" style="font-size:11px;"><img src="style/images/glob4ls.png" style="vertical-align:middle;padding:0 10px;" alt="?" />{{echo $GLOBALS['writeable_path'] ? $lang['DB_INFO'] : $lang['DB_INFO_NW']}}</div>
 			<table class="table_conf">
 				<tr>
 					<td class="td_conf">{{echo $lang['DB_TYPE']}}</td>

@@ -1,22 +1,15 @@
-<div class="home" dir="{{echo $lang['DIR']}}" style="text-align:cener;">
-	<table class="inst_finish">
-		<tr>
-			<td><img src="style/images/wink.png" alt="" style="vertical-align:middle;padding:0 4px;" /> </td>
-			<td width="2%"> </td>
-			<td>{{echo $lang['INST_FINISH_SQL']}}</td>
-		</tr>
-	</table>
-	
-	<table width="70%" style="margin:5px auto;">
-		<tr>
-			<td width="33%" class="endhome" onclick="window.location.href='../index.php';" style="text-align:center"><img src="style/images/home.png" alt="" style="vertical-align:middle;padding:0 4px;" /> {{echo $lang['INDEX']}}</td>
-			<td width="2%"> </td>
-			<td width="33%" class="endhome cp" onclick="window.location.href='../admin/';" style="text-align:center;"><img src="style/images/kcontrol.png" alt="" style="vertical-align:middle;padding:0 4px;" /> {{echo $lang['ADMINCP']}}</td>
-		</tr>
-	</table>
-	<p style="font-size:11px;color:red;margin-top:5px;">{{echo $lang['INST_KLEEJADEVELOPERS']}}
-		<br /><br />
-		<a href="http://www.kleeja.com">www.kleeja.com</a>
-	</p>
-
+<div class="home" dir="{{echo $lang['DIR']}}" style="text-align:center;">
+	<div class="inst_finish">
+		<div style="text-align:center;"><img src="style/images/wink.png" alt="" /></div>
+		<p>{{echo $lang['INST_FINISH_SQL']}}</p>
+		<div class="clr"></div>
+		<p style="font-size:11px;color:red;margin-top:5px;">{{echo $lang['INST_KLEEJADEVELOPERS']}}</p>
+		<div class="clr"></div>
+		<center style="margin:10px 0;">
+			<button type="button" onclick="window.location.href='../index.php';" class="button"><img src="style/images/home.png" alt="" style="vertical-align:middle;padding:0 4px;" />{{echo $lang['INDEX']}}</button>
+			<button type="button" onclick="window.location.href='../admin/';" class="button"><img src="style/images/kcontrol.png" alt="" style="vertical-align:middle;padding:0 4px;" />{{echo $lang['ADMINCP']}}</button>
+		</center>
+		<div class="clr"></div>
+		<p><a href="http://www.kleeja.com">www.kleeja.com</a></p>
+	</div>
 </div>

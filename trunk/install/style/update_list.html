@@ -6,7 +6,7 @@
 		<p style="color:#006BD8;margin:8px auto;">{{echo $lang['INST_CHOOSE_UPDATE_FILE']}}</p>
 			<div class="clr"></div>
 	<form  action="{{echo $_SERVER['PHP_SELF'] . '?step=action_file&amp;' . getlang(1)}}" method="post">
-		<select class="select_version" name="action_file_do" size="2" dir="ltr">
+		<select class="select_version" name="action_file_do" size="4" dir="ltr">
 			{{foreach($GLOBALS['upfiles'] as $k=>$v):}}
 				<option value="{{echo $v}}">{{echo $v}}</option>
 			{{endforeach}}
@@ -27,7 +27,6 @@
 				<p style="font-size:12px;font-weight:400;">{{echo $lang['INST_UPDATE_CUR_VER_IS_UP']}}</p>
 				<div class="clr"></div><br />
 				<p style="color:green;font-size:21px;">[ {{echo array_search($GLOBALS['config']['db_version'], $GLOBALS['order_update_files'])}} :: {{echo $GLOBALS['config']['db_version']}} ]</p>
-
 				</td>
 			</tr>
 		</table>

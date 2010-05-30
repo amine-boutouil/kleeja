@@ -1,57 +1,47 @@
 <div class="home" dir="{{echo $lang['DIR']}}" style="text-align:{{echo $lang['DIR']=='rtl'?'right':'left'}};">
-	<div class="sql_content">
+	<div class="sql_done_box">
 		<table border="0" width="100%" cellspacing="0" cellpadding="0">
 		<tr>
-			<td width="70%">
+			<td width="80%">
 			<div id="scroll_div">
 				<ul class="inner" dir="{{echo $lang['DIR']}}">
 					{{foreach($GLOBALS['update_msgs_arr'] as $m):}}
-					<li><img src="style/images/li_sq.png" style="vertical-align:middle;padding:0 6px;" alt="ok" /> {{echo $m}}</li>
+					<li><img src="style/images/sql_done.png" style="vertical-align:middle;padding:0 6px;" alt="ok" /> {{echo $m}}</li>
 					{{endforeach;}}
 				</ul>
 			</div>
 			</td>
 			<td width="2%"> </td>
-			<td width="28%" style="text-align:center;"><img src="style/images/good.png" alt="" /></td>
+			<td width="18%" style="text-align:center;"><img src="style/images/ok_version.jpg" alt="" /></td>
 		</tr>
 		</table>
 	</div>
-<br />
+<div class="clr"></div><br />
 
 {{if($GLOBALS['complete_upate']):}}
 
-	<p style="font-size:150%;color:red;margin-top:5px;">{{echo $lang['INST_UPDATE_IS_FINISH']}}</p>
+	<p style="margin-top:5px;">{{echo $lang['INST_UPDATE_IS_FINISH']}}</p>
 	
-	<br />
-	
-	<p style="font-size:150%;color:#1A1AB1;margin-top:5px;">{{echo $lang['INST_NOTES_UPDATE']}} :</p>
-	<br />
+	<div class="clr"></div>
+	<p style="font-size:12px;color:#1A1AB1;margin-top:5px;">{{echo $lang['INST_NOTES_UPDATE']}} :</p>
+	<div class="clr"></div>
 	{{if(is_array($GLOBALS['NOTES_CUP'])):foreach($GLOBALS['NOTES_CUP'] as $i=>$m):}}
-	<div class="sql_content">
+	<div class="sql_done_box">
 		<ul>
-			<li><img src="style/images/li_sq.png" style="vertical-align:middle;padding:0 6px;" alt="ok" />{{echo $i;}} - {{echo $m}} </li>
+			<li><img src="style/images/sql_done.png" style="vertical-align:middle;padding:0 6px;" alt="ok" />{{echo $i;}} - {{echo $m}} </li>
 		</ul>
 	</div>
 	{{endforeach;endif;}}
 	
 {{else:}}
-	<p style="text-align:center;"><a style="font-size:120%;color:red;" href="./update.php?step=action_file&amp;{{echo getlang(1)}}">{{echo $lang['INST_UPDATE_SELECT_ONTHER_UPDATES']}}</p>
-	<br />
-
-	<table width="70%" style="margin:5px auto;">
-		<tr>
-			<td width="28%" class="endhome" onclick="window.location.href='../index.php';return false;" style="text-align:center;"><img src="style/images/home.png" alt="" style="vertical-align:middle;padding:0 4px;" /> {{echo $lang['INDEX']}}</td>
-			<td width="2%"> </td>
-			<td width="28%" class="endhome cp" onclick="window.location.href='../admin/';return false;" style="text-align:center;"><img src="style/images/kcontrol.png" alt="" style="vertical-align:middle;padding:0 4px;" /> {{echo $lang['ADMINCP']}}</td>
-		</tr>
-	</table>
-	
-	<br />
-	
-	<p style="font-size:110%;text-align:center;color:#1C6EBF;">{{echo $lang['INST_KLEEJADEVELOPERS']}}
-		<br /><br />
-		<a href="http://www.kleeja.com">www.kleeja.com</a>
-	</p>
-
+	<p style="font-size:12px;text-align:center;"><a style="color:red;" href="./update.php?step=action_file&amp;{{echo getlang(1)}}">{{echo $lang['INST_UPDATE_SELECT_ONTHER_UPDATES']}}</a></p>
+		<center style="margin:10px 0;">
+			<button type="button" onclick="window.location.href='../index.php';" class="button"><img src="style/images/home.png" alt="" style="vertical-align:middle;padding:0 4px;" />{{echo $lang['INDEX']}}</button>
+			<button type="button" onclick="window.location.href='../admin/';" class="button"><img src="style/images/kcontrol.png" alt="" style="vertical-align:middle;padding:0 4px;" />{{echo $lang['ADMINCP']}}</button>
+		</center>
+	<div class="clr"></div><br />
+	<p style="font-size:12px;text-align:center;color:#FF7B00;background:#FFF;">{{echo $lang['INST_KLEEJADEVELOPERS']}}</p>
+	<div class="clr"></div><br />
+	<p style="text-align:center;"><a href="http://www.kleeja.com">www.kleeja.com</a></p>
 {{endif;}}
 </div>	

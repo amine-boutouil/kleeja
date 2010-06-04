@@ -159,7 +159,15 @@ function get_microtime()
 //is bot ?
 function is_bot($bots = array('googlebot', 'yahoo' ,'msnbot'))
 {
-	return preg_match('/(' . implode('|', $bots) . ')/i', ($_SERVER['HTTP_USER_AGENT'] ? 	$_SERVER['HTTP_USER_AGENT'] : @getenv('HTTP_USER_AGENT'))) ? true : false;
+	if(isset($_SERVER['HTTP_USER_AGENT']))
+	{	
+		return preg_match('/(' . implode('|', $bots) . ')/i', ($_SERVER['HTTP_USER_AGENT'] ? 	$_SERVER['HTTP_USER_AGENT'] : @getenv('HTTP_USER_AGENT'))) ? true : false;
+	}
+	else
+	{
+		//bot
+		return true;
+	}
 }
 
 $IS_BOT = is_bot();

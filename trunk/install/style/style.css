@@ -99,11 +99,11 @@ div.install_update:hover {background:#F9F9E8 url('style/images/xhover.gif') repe
 .inst_finish p{line-height:26px;}
 button.button {font:normal 12px Tahoma;text-align:center;padding:2px 10px;cursor:pointer;}
 
-.select_version {width:54%;border:1px solid #D5A920;}
-.select_version option { color:#FF8000;background-color:#fff;border-bottom:1px dotted #D6D6D6;font-size:14px;font-weight:bold;padding:2px 10px;}
+.select_version {width:54%;border:1px solid #CDCDCD;font-weight:bold;font-size:14px;color:#D80000;}
+.select_version option { color:#FF8000;background-color:#fff;border-bottom:1px dotted #D6D6D6;padding:0px 10px;}
 .up_ver{color:#004081;padding: 2px 6px;border-right:1px solid #91BBD8;border-left:1px solid #91BBD8;}
 
-#scroll_div  {height:200px;overflow:hidden;}
+#scroll_div  {height:200px;overflow:auto;}
 #scroll_div ul {list-style-type:none;text-indent:10px;}
 #scroll_div  ul li {height:26px;line-height:26px;color:green;font-size:12px;}
 

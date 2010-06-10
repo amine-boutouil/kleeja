@@ -3,10 +3,10 @@
 		<div class="clr"></div>
 	
 	{{if (sizeof($GLOBALS['upfiles'])):}}
-		<p style="color:#006BD8;margin:8px auto;">{{echo $lang['INST_CHOOSE_UPDATE_FILE']}}</p>
+		<p style="margin:8px auto;">{{echo $lang['INST_CHOOSE_UPDATE_FILE']}}</p>
 			<div class="clr"></div>
 	<form  action="{{echo $_SERVER['PHP_SELF'] . '?step=action_file&amp;' . getlang(1)}}" method="post">
-		<select class="select_version" name="action_file_do" size="4" dir="ltr">
+		<select class="select_version" name="action_file_do" dir="ltr">
 			{{foreach($GLOBALS['upfiles'] as $k=>$v):}}
 				<option value="{{echo $v}}">{{echo $v}}</option>
 			{{endforeach}}

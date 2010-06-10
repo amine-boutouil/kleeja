@@ -1,0 +1,44 @@
+# @package Kleeja
+# @version $Id: robots.txt 2010-06-10 15:12:53Z Tar3q $
+# @copyright (c) 2007 Kleeja.com
+# @checking your website to go: http://www.sxw.org.uk/computing/robots/check.html
+
+User-agent: *
+# Directories
+Disallow: /cgi-bin/
+Disallow: /admin/
+Disallow: /cache/
+Disallow: /docs/
+Disallow: /images/
+Disallow: /includes/
+Disallow: /install/
+Disallow: /install*/
+Disallow: /*install/
+Disallow: /lang/
+Disallow: /styles/
+Disallow: /convertor/
+
+# Files
+Disallow: /config.php
+Disallow: /fix.php
+Disallow: /admin/index.php
+Disallow: /install.php
+Disallow: /install_sqls.php
+Disallow: /update.php
+Disallow: /*/install.php
+Disallow: /*/update.php
+
+# clean URLs
+Disallow: /?cp=*
+Disallow: /?step=*
+
+# Google bot Image
+User-agent: Googlebot-Image
+Allow: /*.gif$
+Allow: /*.png$
+Allow: /*.jpeg$
+Allow: /*.jpg$
+Allow: /*.ico$
+Allow: /*.jpg$
+Allow: /uploads
+Allow: /uploads/thumbs

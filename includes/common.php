@@ -161,13 +161,10 @@ function is_bot($bots = array('googlebot', 'yahoo' ,'msnbot'))
 {
 	if(isset($_SERVER['HTTP_USER_AGENT']))
 	{	
-		return preg_match('/(' . implode('|', $bots) . ')/i', ($_SERVER['HTTP_USER_AGENT'] ? 	$_SERVER['HTTP_USER_AGENT'] : @getenv('HTTP_USER_AGENT'))) ? true : false;
+		return preg_match('/(' . implode('|', $bots) . ')/i', ($_SERVER['HTTP_USER_AGENT'] ? $_SERVER['HTTP_USER_AGENT'] : @getenv('HTTP_USER_AGENT'))) ? true : false;
 	}
-	else
-	{
-		//bot
-		return true;
-	}
+
+	return false;
 }
 
 $IS_BOT = is_bot();
@@ -360,6 +357,20 @@ get_lang('common');
 //ban system 
 get_ban();
 
+//check load average
+if((function_exists('sys_getloadavg') && $load = sys_getloadavg()) || ($load = explode(' ', @file_get_contents('/proc/loadavg'))))
+{
+	//This feature will not work on Windows !. @see php.net/sys_getloadavg
+	if ($load[0] > 80  && !defined('IN_ADMIN') && !defined('IN_LOGIN'))
+	{
+		if(is_bot())
+		{
+			header('HTTP/1.1 503 Too busy, try again later');
+		}
+
+		kleeja_info($lang['LOAD_IS_HIGH_NOW'], $lang['SITE_CLOSED']);
+	}
+}
 
 //install.php exists
 if (file_exists(PATH . 'install') && !defined('IN_ADMIN') && !defined('IN_LOGIN') && !defined('DEV_STAGE')) 

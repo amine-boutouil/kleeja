@@ -265,7 +265,10 @@ $lang = array_merge($lang, array(
         'SEARCH_STAT'                           => 'Stats Robots de recherche',
         'NOTHING'                                       => 'Il n\'y a aucun fichier ou photo .. !!',
         'YOU_HAVE_TO_WAIT'                      => 'Veuillez attendre %s secondes .. avant de télécharger un autre fichier',
-
+		'REPEAT_PASS'				=> 'Repeat Password',
+		'PASS_NEQ_PASS2'			=> 'Passwords are not equal !',
+		'LOAD_IS_HIGH_NOW'			=> 'Our website facing very high load right now !, please wait and try refresh this page again.',
+	
 
         //last line of this file ...                                    
         'S_TRANSLATED_BY'                       => 'Translated By <a href="http://2lo.in/" target="_blank">2lo.in</a>',

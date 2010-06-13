@@ -563,6 +563,7 @@ $lang = array_merge($lang, array(
 	'PLUGIN_ADDED_ZIPPED'		=> 'لقد تم تثبيت الاضافه, لاكمال عملية التثبيت قم %1$sبتحميل%2$s الملفات المعدلة و استبدالها يدوياً. عدم استبدال الملفات المعدله يعني عدم تركيب الاضافه بشكل جيد.',
 	'PLUGIN_ADDED_ZIPPED_INST'	=> 'لقد تم تثبيت الاضافه, لاكمال عملية التثبيت قم %1$sبتحميل%2$s الملفات المعدلة و استبدالها يدوياً. عدم استبدال الملفات المعدله يعني عدم تركيب الاضافه بشكل جيد. <br /> ايضا يجب ان تقوم بـ %3$sقراءة%4$s تعليمات الاضافه لمعلومات اكثر. تعليمات الاضافة يمكن قراءتها لاحقاً من صفحة الاضافات.',
 	'PLUGIN_DELETED_ZIPPED'		=> 'لقد تم حذف الاضافة, ليكتمل الحذف قم بـ%1$sتحميل%2$s الملفات المعدله واستبدالها يدوياً.', 
+	'LOAD_IS_HIGH_NOW'			=> 'Our website facing very high load right now !, please wait and try refresh this page again.',
 
 	//last line of this file ...					 
 	'S_TRANSLATED_BY' 			=> '<b>Çeviri yapan</b>       <a href="http://www.forumvakti.net/">CEZALAND</a>',

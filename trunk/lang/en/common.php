@@ -267,7 +267,8 @@ $lang = array_merge($lang, array(
 	'YOU_HAVE_TO_WAIT'			=> 'Wait %s seconds .. then try to re-upload your files',
 	'REPEAT_PASS'				=> 'Repeat Password',
 	'PASS_NEQ_PASS2'			=> 'Passwords are not equal !',
-
+	'LOAD_IS_HIGH_NOW'			=> 'Our website facing very high load right now !, please wait and try refresh this page again.',
+	
 	//last line of this file ...					 
 	'S_TRANSLATED_BY' 			=> 'Translated By <a href="http://www.fenix4web.com/" target="_blank">Fenix4Web</a>',
 	

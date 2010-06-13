@@ -538,6 +538,7 @@ $lang = array_merge($lang, array(
 	'PLUGIN_DELETED_ZIPPED'		=> 'لقد تم حذف الاضافة, ليكتمل الحذف قم بـ%1$sتحميل%2$s الملفات المعدله واستبدالها يدوياً.', 
 	'PLUGINS_CHANGES_FILES'		=> 'ملفات معدله من تركيب الاضافات', 
 	'PLUGINS_CHANGES_FILES_EXP'	=> 'هذه الملفات هي ملفات مضغوطه تحوي الملفات المعدله التي تم تعديلها خصيصا لبعض الاضافات , يجب ان تقوم بتحميلها من هنا واستبدال الملفات بكليجا فيها , تستطيع مسحها عند الانتهاء.',
+	'LOAD_IS_HIGH_NOW'			=> 'Our website facing very high load right now !, please wait and try refresh this page again.',
 
 	//last line of this file ...					 
 	'S_TRANSLATED_BY' 			=> 'Translated By <a href="http://www.Host4k.com/" target="_blank">Host4k</a>',

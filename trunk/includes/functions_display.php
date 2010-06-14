@@ -571,11 +571,11 @@ function kleeja_get_link ($pid, $extra = array())
 			($hook = kleeja_run_hook('kleeja_get_link_d_func')) ? eval($hook) : null; //run hook
 		break;
 	}
-	
-	$return = $config['siteurl'] . str_replace(array_keys($extra), array_values($extra), $links[$pid]);
 
 	($hook = kleeja_run_hook('kleeja_get_link_func')) ? eval($hook) : null; //run hook
 
+	$return = $config['siteurl'] . str_replace(array_keys($extra), array_values($extra), $links[$pid]);
+	
 	return $return; 
 }
 

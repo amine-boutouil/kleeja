@@ -576,6 +576,8 @@ function kleeja_get_link ($pid, $extra = array())
 
 	$return = $config['siteurl'] . str_replace(array_keys($extra), array_values($extra), $links[$pid]);
 	
+	($hook = kleeja_run_hook('kleeja_get_link_func_rerun')) ? eval($hook) : null; //run hook
+	
 	return $return; 
 }
 

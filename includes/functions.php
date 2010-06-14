@@ -1184,6 +1184,7 @@ function klj_clean_old_files($from = 0)
 		//delete files 
 		while($row=$SQL->fetch_array($result))
 		{
+			$continue = true;
 			$real_num++;
 			$last_id_from = $row['id'];
 			
@@ -1196,29 +1197,35 @@ function klj_clean_old_files($from = 0)
 			}
 			*/
 			
+			//excpetions
 			if($config['id_form'] == 'direct')
 			{
 				$ex_ids[] = $row['id'];
+				
+				//move on
 				continue;
 			}
 			
 			//your exepctions
 			($hook = kleeja_run_hook('while_klj_clean_old_files_func')) ? eval($hook) : null; //run hook
-			
-			//delete from folder ..
-			if (file_exists($row['folder'] . "/" . $row['name']))
+		
+			if($continue)
 			{
-				@kleeja_unlink ($row['folder'] . "/" . $row['name']);
-			}
-			//delete thumb
-			if (file_exists($row['folder'] . "/thumbs/" . $row['name'] ))
-			{
-				@kleeja_unlink ($row['folder'] . "/thumbs/" . $row['name'] );
-			}
+				//delete from folder ..
+				if (file_exists($row['folder'] . "/" . $row['name']))
+				{
+					@kleeja_unlink ($row['folder'] . "/" . $row['name']);
+				}
+				//delete thumb
+				if (file_exists($row['folder'] . "/thumbs/" . $row['name'] ))
+				{
+					@kleeja_unlink ($row['folder'] . "/thumbs/" . $row['name'] );
+				}
 					
-			$ids[] = $row['id'];
-			$num++;		
-			$sizes += $row['size'];
+				$ids[] = $row['id'];
+				$num++;		
+				$sizes += $row['size'];
+			}
 			
 	    }#END WHILE
 		

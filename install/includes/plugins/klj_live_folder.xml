@@ -45,7 +45,7 @@
 		$ex_ids[] = $row['id'];
 		if($real_num != $num_of_files_to_delete)
 		{
-			continue;
+			$continue = false;
 		}
 	}
 	]]></hook>

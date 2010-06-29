@@ -143,14 +143,19 @@ if(isset($_GET['deletefiles']))
 $query	= array(
 				'SELECT'	=> 'COUNT(f.id) AS total_files',
 				'FROM'		=> "{$dbprefix}files f",
-				'JOINS'		=> array(
-							array(
-								'LEFT JOIN'	=> "{$dbprefix}users u",
-								'ON'		=> 'u.id=f.user'
-							)
-						),
 				'ORDER BY'	=> 'f.id '
 		);
+
+#if user system is default, we use users table
+if((int) $config['user_system'] == 1)
+{
+	$query['JOINS']	=	array(
+								array(
+									'LEFT JOIN'	=> "{$dbprefix}users u",
+									'ON'		=> 'u.id=f.user'
+								)
+							);
+}
 
 //posts search ..
 if (isset($_POST['search_file']))
@@ -220,27 +225,44 @@ $no_results = false;
 	
 if ($nums_rows > 0)
 {
-	$query['SELECT'] = 'f.*, u.name AS username';
+	$query['SELECT'] = 'f.*' . ((int) $config['user_system'] == 1 ? ', u.name AS username' : '');
 	$query['LIMIT']	= "$start, $perpage";
 	$result = $SQL->build($query);
 	$sizes = false;
 	$num = 0;
+	#if Kleeja integtared we dont want make alot of queries
+	$ids_and_names = array();
+
 	while($row=$SQL->fetch_array($result))
 	{
 		$userfile =  $config['siteurl'] . ($config['mod_writer'] ? 'fileuser-' . $row['user'] . '.html' : 'ucp.php?go=fileuser&amp;id=' . $row['user']);
 
+		#for username in integrated user system
+		if($row['user'] != '-1' and (int) $config['user_system'] != 1)
+		{
+			if(!in_array($row['user'], $ids_and_names))
+			{
+				$row['username'] = $usrcp->usernamebyid($row['user']);
+				$ids_and_names[$row['user']] = $row['username'];
+			}
+			else
+			{
+				$row['username'] = $ids_and_names[$row['user']];	
+			}
+		}
+
 		//make new lovely arrays !!
 		$arr[]	= array(
-						'id' => $row['id'],
-						'name' => "<a title=\" " . ($row['real_filename'] == '' ? $row['name'] : $row['real_filename']) . "\" href=\"./" . PATH . $row['folder'] . "/" . $row['name'] . "\" target=\"blank\">" . ($row['real_filename'] == '' ? ((strlen($row['name']) > 20) ? substr($row['name'], 0, 20) . '...' : $row['name']) : ((strlen($row['real_filename']) > 20) ? substr($row['real_filename'], 0, 20) . '...' : $row['real_filename'])) . "</a>",
-						'size' => Customfile_size($row['size']),
-						'ups' => $row['uploads'],
-						'time' => date('d-m-Y H:i a', $row['time']),
-						'type' => $row['type'],
-						'folder' => $row['folder'],
-						'report' => ($row['report'] > 4) ? "<span style=\"color:red;font-weight:bold\">" . $row['report'] . "</span>":$row['report'],
-						'user' => ($row['user'] == '-1') ? $lang['GUST'] :  '<a href="' . $userfile . '" target="_blank">' . $row['username'] . '</a>',
-						'ip' 	=> '<a href="http://www.ripe.net/whois?form_type=simple&amp;full_query_string=&amp;searchtext=' . $row['user_ip'] . '&amp;do_search=Search" target="_new">' . $row['user_ip'] . '</a>',
+						'id'		=> $row['id'],
+						'name'		=> "<a title=\" " . ($row['real_filename'] == '' ? $row['name'] : $row['real_filename']) . "\" href=\"./" . PATH . $row['folder'] . "/" . $row['name'] . "\" target=\"blank\">" . ($row['real_filename'] == '' ? ((strlen($row['name']) > 20) ? substr($row['name'], 0, 20) . '...' : $row['name']) : ((strlen($row['real_filename']) > 20) ? substr($row['real_filename'], 0, 20) . '...' : $row['real_filename'])) . "</a>",
+						'size'		=> Customfile_size($row['size']),
+						'ups'		=> $row['uploads'],
+						'time'		=> date('d-m-Y H:i a', $row['time']),
+						'type'		=> $row['type'],
+						'folder'	=> $row['folder'],
+						'report'	=> ($row['report'] > 4) ? "<span style=\"color:red;font-weight:bold\">" . $row['report'] . "</span>":$row['report'],
+						'user'		=> ($row['user'] == '-1') ? $lang['GUST'] :  '<a href="' . $userfile . '" target="_blank">' . $row['username'] . '</a>',
+						'ip'		=> '<a href="http://www.ripe.net/whois?form_type=simple&amp;full_query_string=&amp;searchtext=' . $row['user_ip'] . '&amp;do_search=Search" target="_new">' . $row['user_ip'] . '</a>',
 						'showfilesbyip' => basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&search=' . kleeja_base64_encode(serialize(array('user_ip' => $row['user_ip']))),
 					);
 

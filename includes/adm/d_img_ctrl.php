@@ -41,14 +41,19 @@ if (isset($_POST['submit']))
 
 $query	= array('SELECT'	=> 'COUNT(f.id) AS total_files',
 					'FROM'		=> "{$dbprefix}files f",
-					'JOINS'		=> array(
-							array(
-								'LEFT JOIN'	=> "{$dbprefix}users u",
-								'ON'		=> 'u.id=f.user'
-							)
-						),
 					'ORDER BY'	=> 'f.id DESC'
 					);
+
+#if user system is default, we use users table
+if((int) $config['user_system'] == 1)
+{
+	$query['JOINS']	=	array(
+								array(
+									'LEFT JOIN'	=> "{$dbprefix}users u",
+									'ON'		=> 'u.id=f.user'
+								)
+							);
+}
 
 $img_types = array('gif','jpg','png','bmp','jpeg','tif','tiff','GIF','JPG','PNG','BMP','JPEG','TIF','TIFF');
 
@@ -76,16 +81,33 @@ $start		= $Pager->getStartRow();
 $no_results = $affected = $sizes = false;
 if ($nums_rows > 0) 
 {
-	$query['SELECT'] = 'f.*, u.name AS username';
+
+	$query['SELECT'] = 'f.*' . ((int) $config['user_system'] == 1 ? ', u.name AS username' : '');
 	$query['LIMIT']	= "$start, $images_cp_perpage";
 	$result = $SQL->build($query);
 
 	$tdnum = $num = 0;
+	#if Kleeja integtared we dont want make alot of queries
+	$ids_and_names = array();
 
 	while($row=$SQL->fetch_array($result))
 	{
 		//thumb ?
 		$is_there_thumb = file_exists(PATH . $row['folder'] . '/thumbs/' . $row['name']) ? true : false;
+		
+		#for username in integrated user system
+		if($row['user'] != '-1' and (int) $config['user_system'] != 1)
+		{
+			if(!in_array($row['user'], $ids_and_names))
+			{
+				$row['username'] = $usrcp->usernamebyid($row['user']);
+				$ids_and_names[$row['user']] = $row['username'];
+			}
+			else
+			{
+				$row['username'] = $ids_and_names[$row['user']];	
+			}
+		}
 
 		//make new lovely arrays !!
 		$arr[]	= array(
@@ -93,12 +115,12 @@ if ($nums_rows > 0)
 						'tdnum'		=> $tdnum == 0 ? '<tr>': '',
 						'tdnum2'	=> $tdnum == 3 ? '</tr>' : '',
 						'name'		=> ($row['real_filename'] == '' ? ((strlen($row['name']) > 15) ? substr($row['name'], 0, 15) . '...' : $row['name']) : ((strlen($row['real_filename']) > 15) ? str_replace('\'', "\'", substr($row['real_filename'], 0, 15)) . '...' : str_replace('\'', "\'", $row['real_filename']))),
-						'ip' 		=> $lang['IP'] . ':' . htmlspecialchars($row['user_ip']),
+						'ip' 		=> htmlspecialchars($row['user_ip']),
 						'href'		=> PATH . $row['folder'] . '/' . $row['name'],
 						'size'		=> Customfile_size($row['size']),
 						'ups'		=> $row['uploads'],
 						'time'		=> date('d-m-Y h:i a', $row['time']),
-						'user'		=> $row['user'] == '-1' ? $lang['GUST'] :  $row['username'],
+						'user'		=> $row['user'] == '-1' ? $lang['GUST'] : $row['username'],
 						'is_thumb'	=> $is_there_thumb,
 						'thumb_link'=> $is_there_thumb ? PATH . $row['folder'] . '/thumbs/' . $row['name'] :  PATH . $row['folder'] . '/' . $row['name'],
 					);

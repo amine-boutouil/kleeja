@@ -184,9 +184,6 @@ function kleeja_plugin_exists($plugin_name)
 */
 function kleeja_get_page ()
 {
-
-	($hook = kleeja_run_hook('kleeja_get_page_func')) ? eval($hook) : null; //run hook
-
 	if(isset($_SERVER['REQUEST_URI']))
 	{
 		$location = $_SERVER['REQUEST_URI'];
@@ -223,7 +220,9 @@ function kleeja_get_page ()
 		}
 	}
 
-	return str_replace(array('&amp;'), array('&'), htmlspecialchars($location));
+	$return = str_replace(array('&amp;'), array('&'), htmlspecialchars($location));
+	($hook = kleeja_run_hook('kleeja_get_page_func')) ? eval($hook) : null; //run hook
+	return $return;
 }
 
 /**
@@ -274,7 +273,9 @@ function fetch_remote_file($url, $save_in = false, $timeout = 20, $head_only = f
 
 	// Quite unlikely that this will be allowed on a shared host, but it can't hurt
 	if (function_exists('ini_set'))
+	{
 		@ini_set('default_socket_timeout', $timeout);
+	}
 	$allow_url_fopen = function_exists('ini_get') ? strtolower(@ini_get('allow_url_fopen')) : strtolower(@get_cfg_var('allow_url_fopen'));
 
 	if(function_exists('curl_init'))
@@ -490,9 +491,9 @@ function kleeja_mime_groups($return_one = false)
 				9 => array('name' => $lang['N_OTHERFILE']),
 	);
 
+	$return = $return_one != false ? $s[$return_one] : $s;
 	($hook = kleeja_run_hook('kleeja_mime_groups_func')) ? eval($hook) : null; //run hook
-
-	return ($return_one != false ? $s[$return_one] : $s);
+	return $return;
 }
 
 /**
@@ -529,8 +530,6 @@ function ch_g ($name_of_select, $g_id, $return_name = false)
 // you can share your experinces with us from our site kleeja.com...
 function kleeja_check_mime ($mime, $group_id, $file_path)
 {
-	($hook = kleeja_run_hook('kleeja_check_mime_func')) ? eval($hook) : null; //run hook
-
 	//This code for images only
 	//it's must be improved for all files in future !
 	if($group_id != 1)
@@ -583,6 +582,8 @@ function kleeja_check_mime ($mime, $group_id, $file_path)
 		}
 	}
 	
+	($hook = kleeja_run_hook('kleeja_check_mime_func')) ? eval($hook) : null; //run hook
+	
 	return $return;
 }
 
@@ -591,8 +592,11 @@ function kleeja_check_mime ($mime, $group_id, $file_path)
 */
 function delete_cache($name, $all=false)
 {
+	#Those files are exceptions and not for deletion
+	$exceptions = array('.htaccess', 'index.html', 'php.ini', 'styles_cached.php');
+
 	($hook = kleeja_run_hook('delete_cache_func')) ? eval($hook) : null; //run hook
-	
+
 	//handle array of cached files
 	if(is_array($name))
 	{
@@ -611,7 +615,7 @@ function delete_cache($name, $all=false)
 		{
 			while (($file = @readdir($dh)) !== false)
 			{
-				if($file != "." && $file != ".." && $file != ".htaccess" && $file != "index.html" && $file != "php.ini" && $file != 'styles_cached.php')
+				if($file != "." && $file != ".." && in_array($file, $exceptions))
 				{
 					$del = kleeja_unlink($path_to_cache . '/' . $file, true);
 				}
@@ -880,18 +884,20 @@ function get_mime_for_header($ext)
 		//add more mime here
 	);
 	
-	($hook = kleeja_run_hook('get_mime_for_header_func')) ? eval($hook) : null; //run hook
-	
+
 	//return mime
 	$ext = strtolower($ext);
     if(in_array($ext, array_keys($mime_types)))
     {
-		return  $mime_types[$ext];
+		$return = $mime_types[$ext];
 	}
 	else
 	{
-    	return 'application/force-download';  
-	}	
+    	$return = 'application/force-download';  
+	}
+	
+	($hook = kleeja_run_hook('get_mime_for_header_func')) ? eval($hook) : null; //run hook
+	return $return;
 }
 
 
@@ -948,9 +954,12 @@ function get_config($name)
 					'WHERE'		=> "c.name = '" . $SQL->escape($name) . "'"
 				);
 
-	$result = $SQL->build($query);
-	$v = $SQL->fetch($result);
-	return $v['value'];
+	$result	= $SQL->build($query);
+	$v		= $SQL->fetch($result);
+	$return	= $v['value'];
+
+	($hook = kleeja_run_hook('get_config_func')) ? eval($hook) : null; //run hook
+	return $return;
 }
 
 /*
@@ -970,6 +979,7 @@ function add_config ($name, $value, $order = '0', $html = '', $type = 'other', $
 							'INTO'		=> "{$dbprefix}config",
 							'VALUES'	=> "'" . $SQL->escape($name) . "','" . $SQL->escape($value) . "', '" . $SQL->real_escape($html) . "','" . intval($order) . "','" . $SQL->escape($type) . "','" . intval($plg_id) . "'",
 						);
+	($hook = kleeja_run_hook('insert_sql_add_config_func')) ? eval($hook) : null; //run hook
 
 	$SQL->build($insert_query);	
 
@@ -1010,7 +1020,8 @@ function update_config($name, $value, $escape = true)
 							'SET'		=> "value='" . ($escape ? $SQL->escape($value) : $value) . "'",
 							'WHERE'		=> 'name = "' . $SQL->escape($name) . '"'
 					);
-				
+	($hook = kleeja_run_hook('update_sql_update_config_func')) ? eval($hook) : null; //run hook
+
 	$SQL->build($update_query);
 	if($SQL->affected())
 	{
@@ -1047,6 +1058,7 @@ function delete_config ($name)
 								'DELETE'	=> "{$dbprefix}config",
 								'WHERE'		=>  "name  = '" . $SQL->escape($name) . "'"
 						);
+	($hook = kleeja_run_hook('del_sql_delete_config_func')) ? eval($hook) : null; //run hook
 
 	$SQL->build($delete_query);
 	
@@ -1073,11 +1085,11 @@ function add_olang($words = array(), $lang = 'en', $plg_id = '0')
 								'INTO'		=> "{$dbprefix}lang",
 								'VALUES'	=> "'" . $SQL->escape($w) . "','" . $SQL->real_escape($t) . "', '" . $SQL->escape($lang) . "','" . intval($plg_id) . "'",
 						);
-
+		($hook = kleeja_run_hook('insert_sql_add_olang_func')) ? eval($hook) : null; //run hook
 		$SQL->build($insert_query);
 	}
 
-	delete_cache("data_lang");
+	delete_cache('data_lang');
 	return;
 }
 
@@ -1102,7 +1114,8 @@ function delete_olang ($words, $lang='en')
 							'DELETE'	=> "{$dbprefix}lang",
 							'WHERE'		=> "word = '" . $SQL->escape($words) . "' AND lang_id = '" . $SQL->escape($lang) . "'"
 						);
-
+	($hook = kleeja_run_hook('del_sql_delete_olang_func')) ? eval($hook) : null; //run hook
+		
 	$SQL->build($delete_query);
 
 	if($SQL->affected())
@@ -1293,22 +1306,26 @@ function get_ip()
 		}
 	}
 	
-	return preg_replace('/[^0-9a-z.]/i', '', $ip);
+	$return = preg_replace('/[^0-9a-z.]/i', '', $ip);
+	($hook = kleeja_run_hook('del_sql_delete_olang_func')) ? eval($hook) : null; //run hook
+	return $return;
 }
 
 //check captcha field after submit
 function kleeja_check_captcha()
 {
+	$return = false;
 	if(!empty($_SESSION['klj_sec_code']) && !empty($_POST['kleeja_code_answer']))
 	{
 		if($_SESSION['klj_sec_code'] == $_POST['kleeja_code_answer'])
 		{
 			$_SESSION['klj_sec_code'] = '';
-			return true;
+			$return = true;
 		}
 	}
 	
-	return false;
+	($hook = kleeja_run_hook('kleeja_check_captcha_func')) ? eval($hook) : null; //run hook
+	return $return;
 }
 
 
@@ -1355,37 +1372,40 @@ function is_browser($b)
 	$u_agent = (!empty($_SERVER['HTTP_USER_AGENT'])) ? htmlspecialchars((string) strtolower($_SERVER['HTTP_USER_AGENT'])) : (function_exists('getenv') ? getenv('HTTP_USER_AGENT') : '');
 	$t = trim(preg_replace('/[0-9.]/', '', $b));
 	$r = trim(preg_replace('/[a-z]/', '', $b));
+	$return = false;
 	switch($t)
 	{
 		case 'ie':
-			return strpos($u_agent, trim('msie ' . $r)) !== false ? true : false;
+			$return = strpos($u_agent, trim('msie ' . $r)) !== false ? true : false;
 		break;
 		case 'firefox':
-			return strpos(str_replace('/', ' ', $u_agent), trim('firefox ' . $r)) !== false ? true : false;
+			$return = strpos(str_replace('/', ' ', $u_agent), trim('firefox ' . $r)) !== false ? true : false;
 		break;
 		case 'safari':
-			return strpos($u_agent, trim('safari/' . $r)) !== false ? true : false;
+			$return = strpos($u_agent, trim('safari/' . $r)) !== false ? true : false;
 		break;
 		case 'chrome':
-			return strpos($u_agent, trim('chrome ' . $r)) !== false ? true : false;
+			$return = strpos($u_agent, trim('chrome ' . $r)) !== false ? true : false;
 		break;
 		case 'flock':
-			return strpos($u_agent, trim('flock ' . $r)) !== false ? true : false;
+			$return = strpos($u_agent, trim('flock ' . $r)) !== false ? true : false;
 		break;
 		case 'opera':
-			return strpos($u_agent, trim('opera ' . $r)) !== false ? true : false;
+			$return = strpos($u_agent, trim('opera ' . $r)) !== false ? true : false;
 		break;
 		case 'konqueror':
-			return strpos($u_agent, trim('konqueror/' . $r)) !== false ? true : false;
+			$return = strpos($u_agent, trim('konqueror/' . $r)) !== false ? true : false;
 		break;
 		case 'mozilla':
-			return strpos($u_agent, trim('gecko/' . $r)) !== false ? true : false;
+			$return = strpos($u_agent, trim('gecko/' . $r)) !== false ? true : false;
 		break;
 		case 'webkit':
-			return strpos($u_agent, trim('applewebkit/' . $r)) !== false ? true : false;
+			$return = strpos($u_agent, trim('applewebkit/' . $r)) !== false ? true : false;
 		break;
 	}
-    return false;
+    
+	($hook = kleeja_run_hook('is_browser_func')) ? eval($hook) : null; //run hook
+    return $return;
 }
 
 /**

@@ -65,7 +65,7 @@ function Saaheader($title, $outscript = false, $extra = '')
 	//check for extra header 
 	$extras['header'] = empty($extras['header']) ? false : $extras['header'];
 
-	($hook = kleeja_run_hook('func_Saaheader')) ? eval($hook) : null; //run hook
+	
 
 	$tpl->assign("EXTRA_CODE_META", $extra);
 
@@ -76,8 +76,11 @@ function Saaheader($title, $outscript = false, $extra = '')
 		//add notification bar 
 		$header = preg_replace('/<body([^\>]*)>/i', "<body\\1>\n<!-- site is closed -->\n<p style=\"width: 100%; text-align:center; background:#FFFFA6; color:black; border:thin;top:0;left:0; position:absolute; width:100%;clear:both;\">" . $lang['NOTICECLOSED'] . "</p>\n<!-- #site is closed -->", $header);
 	}
+	
+	($hook = kleeja_run_hook('Saaheader_func')) ? eval($hook) : null; //run hook
 
 	echo $header;
+	flush();
 }
 
 
@@ -144,6 +147,8 @@ function Saafooter($outscript = false)
 	($hook = kleeja_run_hook('func_Saafooter')) ? eval($hook) : null; //run hook
 
 	$footer = $tpl->display("footer");
+	
+	($hook = kleeja_run_hook('Saafooter_func')) ? eval($hook) : null; //run hook
 
 	echo $footer;
 
@@ -411,6 +416,8 @@ function redirect($url, $header = true, $exit = true, $sec = 0)
 {
 	global $SQL;
 
+	($hook = kleeja_run_hook('redirect_func')) ? eval($hook) : null; //run hook
+
     if (!headers_sent() && $header)
 	{
         header('Location: ' . str_replace(array('&amp;'), array('&'), $url)); 
@@ -445,7 +452,10 @@ function kleeja_add_form_key($form_name)
 {
 	global $config, $klj_session;
 	$now = time();
-	return '<input type="hidden" name="k_form_key" value="' . sha1($config['h_key'] . $form_name . $now . $klj_session) . '" /><input type="hidden" name="k_form_time" value="' . $now . '" />' . "\n";
+	$return = '<input type="hidden" name="k_form_key" value="' . sha1($config['h_key'] . $form_name . $now . $klj_session) . '" /><input type="hidden" name="k_form_time" value="' . $now . '" />' . "\n";
+	
+	($hook = kleeja_run_hook('kleeja_add_form_key_func')) ? eval($hook) : null; //run hook
+	return $return;
 }
 
 /**
@@ -462,7 +472,8 @@ function kleeja_check_form_key($form_name, $require_time = 150 /*seconds*/ )
 		//we increase it for admin to be a duble 
 		$require_time *= 2;
 	}
-
+	
+	$return = false;
 	if (isset($_POST['k_form_key']) && isset($_POST['k_form_time']))
 	{
 		$key_was = trim($_POST['k_form_key']);
@@ -474,12 +485,13 @@ function kleeja_check_form_key($form_name, $require_time = 150 /*seconds*/ )
 		{
 			if(sha1($config['h_key'] . $form_name . $time_was . $klj_session) === $key_was)
 			{
-				return true;
+				$return = true;
 			}
 		}
 	}
 	
-	return false;
+	($hook = kleeja_run_hook('kleeja_check_form_key_func')) ? eval($hook) : null; //run hook
+	return $return;
 }
 
 /**
@@ -651,7 +663,10 @@ function get_up_tpl_box($box_name, $extra = array())
 */
 function group_id_order($a, $b) 
 { 
-	return ($a['group_id'] == $b['group_id']) ? 0 : ($a['group_id'] < $b['group_id'] ? -1 : 1); 
+	$return = ($a['group_id'] == $b['group_id']) ? 0 : ($a['group_id'] < $b['group_id'] ? -1 : 1);
+
+	($hook = kleeja_run_hook('group_id_order_func')) ? eval($hook) : null; //run hook
+	return $return;
 }
 
 /**

@@ -1070,6 +1070,31 @@ function delete_config ($name)
 	return false;
 }
 
+//
+//update words to lang
+//
+function update_olang($name, $lang = 'en', $value)
+{
+	global $SQL, $dbprefix;
+
+	$value = ($escape) ? $SQL->escape($value) : $value;
+
+	$update_query	= array(
+							'UPDATE'	=> "{$dbprefix}lang",
+							'SET'		=> "trans='" . $SQL->escape($value) . "'",
+							'WHERE'		=> 'word = "' . $SQL->escape($name) . '", lang_id = "' .  $SQL->escape($lang) . '"'
+					);
+	($hook = kleeja_run_hook('update_sql_update_olang_func')) ? eval($hook) : null; //run hook
+
+	$SQL->build($update_query);
+	if($SQL->affected())
+	{
+		$olang[$name] = $value;
+		return true;
+	}
+
+	return false;
+}
 
 //
 //add words to lang
@@ -1096,7 +1121,7 @@ function add_olang($words = array(), $lang = 'en', $plg_id = '0')
 //
 //delete words from lang
 //
-function delete_olang ($words, $lang='en') 
+function delete_olang ($words = '', $lang='en', $plg_id = '') 
 {
 	global $dbprefix, $SQL;
 	
@@ -1109,11 +1134,17 @@ function delete_olang ($words, $lang='en')
 		
 		return;
 	}
-
+	
 	$delete_query	= array(
 							'DELETE'	=> "{$dbprefix}lang",
 							'WHERE'		=> "word = '" . $SQL->escape($words) . "' AND lang_id = '" . $SQL->escape($lang) . "'"
 						);
+						
+	if(isset($plg_id) && !empty($plg_id))
+	{
+		$delete_query['WHERE'] = "plg_id = '" . intval($plg_id) . "'";
+	}
+
 	($hook = kleeja_run_hook('del_sql_delete_olang_func')) ? eval($hook) : null; //run hook
 		
 	$SQL->build($delete_query);

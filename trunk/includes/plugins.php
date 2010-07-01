@@ -281,6 +281,9 @@ class kplugins
 		}
 		else //if it was just update proccess
 		{
+			//update language
+			delete_olang('', '', $this->plg_id);
+			
 			$update_query = array(
 				
 								'UPDATE'	=> "{$dbprefix}plugins",

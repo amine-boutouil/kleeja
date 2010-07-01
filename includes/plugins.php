@@ -492,7 +492,7 @@ class kplugins
 				//delete old hooks !
 				$query_del = array(
 									'DELETE'	=> "{$dbprefix}hooks",
-									'WHERE'		=> "plg_id=" . $plg_id
+									'WHERE'		=> "plg_id=" . $this->plg_id
 								);		
 
 				$SQL->build($query_del);

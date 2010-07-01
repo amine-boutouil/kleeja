@@ -2,7 +2,7 @@
 <kleeja>
 	<info>
 	  <plugin_name>Kleeja Live Folder name</plugin_name>
-	  <plugin_version>1.6</plugin_version>
+	  <plugin_version>1.7</plugin_version>
 		<plugin_description>
 			<description lang="ar"><![CDATA[نقل الصور والملفات التي تحمل صيغ معينه إلى مجلد خاص وعرضها برابط مباشر]]></description>
 			<description lang="en"><![CDATA[Filtering files depend on thier extensions and moving them to special folder.]]></description>

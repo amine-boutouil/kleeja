@@ -806,11 +806,11 @@ function process ()
     {
     	global $SQL, $dbprefix, $config;
     	
-    	$return = null;
+    	$return = 'empty';
  
     	($hook = kleeja_run_hook('user_is_flooding_func_kljuploader')) ? eval($hook) : null; //run 
 
-		if($return != null)
+		if($return != 'empty')
 		{
 			return $return;
 		}

@@ -798,7 +798,7 @@ function process ()
 			return (array("error" => array("errno" => $errno, "errstr" => $errstr)));
         }
 		
-		return (string)$headers["Content-Length"];
+		return (string) $headers["Content-Length"];
     }
     
 	//prevent flooding
@@ -806,13 +806,23 @@ function process ()
     {
     	global $SQL, $dbprefix, $config;
     	
+    	$return = null;
+ 
+    	($hook = kleeja_run_hook('user_is_flooding_func_kljuploader')) ? eval($hook) : null; //run 
+
+		if($return != null)
+		{
+			return $return;
+		}
+
     	//if the value is zero (means that the function is disabled) then return false immediately
     	if(($this->id_user == '-1' && $config['guestsectoupload'] == 0) OR $this->id_user != '-1' && $config['usersectoupload'] == 0)
     	{
     		return false;
 		}
-    	
-    	//In my point of view I see 30 seconds is not bad rate to stop flooding .. even though this minimum rate somtitme isn't enough to protect your site from flooding attacks 
+
+    	//In my point of view I see 30 seconds is not bad rate to stop flooding .. 
+    	//even though this minimum rate sometime isn't enough to protect Kleeja from flooding attacks 
     	$time = time() - (($this->id_user == '-1') ? $config['guestsectoupload'] : $config['usersectoupload']); 
     	
 		$query = array(
@@ -825,7 +835,7 @@ function process ()
 		{
 			return true;
 		}
-				
+
 		return false;
 	}
 }#end class

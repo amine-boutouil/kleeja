@@ -6,6 +6,7 @@
 		<plugin_description>
 			<description lang="ar"><![CDATA[نقل الصور والملفات التي تحمل صيغ معينه إلى مجلد خاص وعرضها برابط مباشر]]></description>
 			<description lang="en"><![CDATA[Filtering files depend on thier extensions and moving them to special folder.]]></description>
+			<description lang="sk"><![CDATA[Filtrovanie súborov závisí na ich rozlíšení a ich presunutí do špeciálnej zložky.]]></description>
 		</plugin_description>
 	  <plugin_author>http://www.kleeja.com</plugin_author>
 	  <plugin_kleeja_version>1.0.0</plugin_kleeja_version>
@@ -35,6 +36,12 @@
 			<phrase name="IMAGEFOLDEREXTS">Extensions of the live links files</phrase>
 			<phrase name="IMAGEFOLDERE">Change file name</phrase>
 			<phrase name="CONFIG_KLJ_MENUS_KLIVE">Kleeja Live links settings</phrase>
+		</lang>
+		<lang name="sk">
+			<phrase name="IMAGEFOLDER">Aktuálna zložka</phrase>
+			<phrase name="IMAGEFOLDEREXTS">Typy súborov pre živé odkazy súborov</phrase>
+			<phrase name="IMAGEFOLDERE">Zmeniť názvy súborov</phrase>
+			<phrase name="CONFIG_KLJ_MENUS_KLIVE">Nastavenie živých odkazov</phrase>
 		</lang>
 	</phrases>
 	

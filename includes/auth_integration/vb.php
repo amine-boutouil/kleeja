@@ -48,6 +48,10 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 			$forum_user	= $config['MasterServer']['username'];
 			$forum_pass	= $config['MasterServer']['password'];
 			$forum_prefix= $config['Database']['tableprefix'];
+			if($config['MasterServer']['port'] != 3306)
+			{
+				$forum_srv .= ':' . $config['MasterServer']['port'];
+			}
 
 			//some people change their db charset 
 			if(isset($config['Mysqli']['charset']))

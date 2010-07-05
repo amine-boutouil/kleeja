@@ -42,8 +42,19 @@ class SSQL
 					$this->db_username = $db_username;
 					$this->db_name     = $db_name;
 					$this->db_password = 'hidden';
-
-					$this->connect_id = @mysqli_connect($this->host, $this->db_username, $db_password, $this->db_name);
+					
+					//checks if there was a port
+					if(preg_match('/:/i', $this->host))
+					{
+						list($host, $port) = explode(":", $data);
+						$this->host = $host;
+						$this->connect_id = @mysqli_connect($this->host, $this->db_username, $db_password, $this->db_name, $port);
+					}
+					else
+					{
+						$this->connect_id = @mysqli_connect($this->host, $this->db_username, $db_password, $this->db_name);
+					}
+					
 					
 					//no error
 					if(defined('MYSQL_NO_ERRORS'))

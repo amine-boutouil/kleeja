@@ -1,33 +1,32 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml" dir="{dir}">
 <head>
 	<title>{title}(title? &#9679; :){config.sitename}</title>
-	<!--  Powered by : kleeja >>>  URL www.kleeja.com  -->
+	<!--  Powered by kleeja >>>  URL www.kleeja.com  -->
 	<meta http-equiv="Content-Type" content="text/html;charset={charset}" />
-	<meta http-equiv="Content-Language" content="{lang.LANG_SMALL_NAME}"/>
+	<meta http-equiv="Content-Language" content="{lang.LANG_SMALL_NAME}" />
 	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+	<meta http-equiv="Cache-Control" content="Public" />
+	<meta http-equiv="Content-Style-Type" content="text/css" />	
 	<meta name="copyrights" content="Powered by Kleeja :: kleeja.com" />
+	<meta name="copyright" content="{config.sitename}" />
+	<meta name="classification" content="phpuploader, phpproject, uploadfiles, filesuploader, kleeja, imageuploader" />
+	<meta name="rating" content="general" />
+	<meta name="distribution" content="includes/common" />
+	<meta name="resource-type" content="document" />
+	<meta name="Expires" content="-1" />
+	<meta name="revisit-after" content="2 hours" />
 	<meta name="robots" content="index,follow" />
+	<meta name="author" content="Powered by Kleeja" />
 	<link rel="shortcut icon" href="images/favicon.ico" />
 	<link rel="icon" type="image/gif" href="images/favicon.gif" />
 	<link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
-	<link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH}css/reset.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH}css/stylesheet.css" />
-	<IF NAME="{lang.DIR}==ltr">
-	<link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH}css/ltr.css" />
-	</IF>
-	<IS_BROWSER="ie6">
-	<link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH}css/ie_6.css" />
-		<style type="text/css">
-			img ,td ,tr{ behavior: url('{STYLE_PATH}ie/iepngfix.htc')};
-		</style> 
-	</IS_BROWSER>
-	<IS_BROWSER="ie">
-	<link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH}css/ie.css" />
-		<style type="text/css">	
-			body { behavior: url('{STYLE_PATH}ie/csshover3.htc')};
-		</style> 
-	</IS_BROWSER>
+	<IF NAME="{lang.DIR}==ltr"><link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH}css/ltr.css" /></IF>
+	<IS_BROWSER="ie6"><link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH}css/ie_6.css" /><style type="text/css">	img ,td ,tr{ behavior: url('{STYLE_PATH}ie/iepngfix.htc')};	</style></IS_BROWSER>
+	<IS_BROWSER="ie"><link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH}css/ie.css" /><style type="text/css">	body { behavior: url('{STYLE_PATH}ie/csshover3.htc')};</style></IS_BROWSER>
+	
 	<script type="text/javascript">
 	<!--
 	document.write('<link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH}css/css3.css" />');

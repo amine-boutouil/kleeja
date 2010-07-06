@@ -225,6 +225,7 @@ $lang = array_merge($lang, array(
 	'MOST_EVER_ONLINE'			=> 'اكثر عدد تواجد بالمركز كان',
 	'ON'						=> 'في',
 	'LAST_REG'					=> 'آخر عضو مسجل',
+	'NEW_USER'					=> 'عضو جديد',
 	'ADD_UPLAD_A'				=> 'إضافة المزيد',
 	'ADD_UPLAD_B'				=> 'حذف',
 	'COPYRIGHTS_X'				=> 'جميع الحقوق محفوظة',

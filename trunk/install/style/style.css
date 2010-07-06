@@ -22,7 +22,7 @@ img, div{ behavior: url('style/ie6/iepngfix.htc') ;}
 
 .logo {width:100%;margin:0px auto 10px auto;clear: both;}
 
-.language_choose {position: absolute;top:38%;left:18%;overflow:hidden;}
+.language_choose {position: absolute;top:38%;left:10%;overflow:hidden;}
 ul#choose, ul#choose ul {margin:0;padding:0;list-style: none;}
 ul#choose li {width: 128px;height: 128px;float: left;margin: 5px;text-align:center;overflow:hidden;}
 ul#choose li a {display: block;text-decoration: none;}

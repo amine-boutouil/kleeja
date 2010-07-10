@@ -229,4 +229,4 @@ $update_functions[]	= 'update_clean_name()';
 //
 //Plugins that must installed in this version
 //
-$must_installing_plugins[] = 'klj_live_folder.xml';
+$must_installing_plugins[] = 'klj_live_folder.klj';

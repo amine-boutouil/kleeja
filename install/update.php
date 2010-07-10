@@ -224,7 +224,7 @@ case 'update_now':
 				{
 					$e	= strtolower(array_pop(@explode('.', $file)));
 
-					if($e == "xml") //only plugins ;)
+					if($e == "klj") //only plugins ;)
 					{
 						$contents 	= @file_get_contents($pl_path . '/' . $file);
 						$gtree		= $XML->xml_to_array($contents);

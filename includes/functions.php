@@ -1360,9 +1360,10 @@ function kleeja_check_captcha()
 }
 
 
-//
-//for logging
-//
+/**
+* for logging and testing
+* enables only in DEV. stage !
+*/
 function kleeja_log($text, $reset = false)
 {
 	if(!defined('DEV_STAGE'))
@@ -1378,10 +1379,12 @@ function kleeja_log($text, $reset = false)
 	return;
 }
 
-//
-//Browser detection system
-//returns whether or not the visiting browser is the one specified [part of kleeja style system]
-//
+/**
+* Browser detection
+* returns whether or not the visiting browser is the one specified [part of kleeja style system]
+* i.e. is_browser('ie6') -> true or false
+* i.e. is_browser('ie, opera') -> true or false
+*/
 function is_browser($b)
 {
 	//is there , which mean -OR-
@@ -1395,7 +1398,7 @@ function is_browser($b)
 				return true;
 			}
 		}
-		
+
 		return false;
 	}
 	
@@ -1432,6 +1435,25 @@ function is_browser($b)
 		break;
 		case 'webkit':
 			$return = strpos($u_agent, trim('applewebkit/' . $r)) !== false ? true : false;
+		break;
+		/**
+		 * Mobile Phones are so popular those days, so we have to support them ...
+		 * This is still in our test lab.
+		 * @see http://en.wikipedia.org/wiki/List_of_user_agents_for_mobile_phones
+		 **/
+		case 'mobile':
+			$mobile_agents = array('iPhone;', 'iPod;', 'BlackBerry', 'Android', 'HTC' , 'IEMobile', 'LG/', 'LG-',
+									'LGE-', 'MOT-', 'Nokia', 'SymbianOS', 'nokia_', 'PalmSource', 'webOS', 'SAMSUNG-', 
+									'SEC-SGHU', 'SonyEricsson');
+			$return = false;
+			foreach($mobile_agents as $agent)
+			{
+				if(strpos($u_agent, $agent) !== false)
+				{
+					$return = true;
+					break;
+				}
+			}
 		break;
 	}
     
@@ -1483,7 +1505,7 @@ function kleeja_set_range($range, $filesize)
 function kleeja_buffere_range($file, $bytes, $buffer_size = 1024)
 {
 	$bytes_left = $bytes;
-	while($bytes_left >0 && !feof($file))
+	while($bytes_left > 0 && !feof($file))
 	{
 		if($bytes_left > $buffer_size)
 		{
@@ -1497,6 +1519,6 @@ function kleeja_buffere_range($file, $bytes, $buffer_size = 1024)
 		$bytes_left	-= $bytes_to_read;
 		$contents	= fread($file, $bytes_to_read);
 		echo $contents;
-		flush();
+		@flush();  @ob_flush();
 	}
 }

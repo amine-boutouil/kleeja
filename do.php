@@ -137,7 +137,7 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 
 	//must know from where he came ! and stop him if not image
 	//todo: if it's download manger, let's pass this
-	if(isset($_GET['down']) || isset($_GET['downf']))
+	if((isset($_GET['down']) || isset($_GET['downf'])) && !defined('DEV_STAGE'))
 	{
 		if(!isset($_SERVER['HTTP_REFERER']) || empty($_SERVER['HTTP_REFERER']))
 		{
@@ -212,7 +212,7 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 	$livexts = explode(",", $config['livexts']);
 
 	//get info file
-	$query = array('SELECT'	=> 'f.id, f.name, f.real_filename, f.folder, f.type, f.size',
+	$query = array('SELECT'	=> 'f.id, f.name, f.real_filename, f.folder, f.type, f.size, f.time',
 					'FROM'		=> "{$dbprefix}files f",
 					'WHERE'		=> ($is_id_filename) ? "f.name='" . $filename . "'" . 
 									(isset($_GET['downexf']) ? " AND f.type IN ('" . implode("', '", $livexts) . "')" : '') : 'f.id=' . $id  . 
@@ -351,44 +351,40 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 		@ini_set('zlib.output_compression', 'Off');
 	}
 
-	header('Pragma: public');
-
-
+	header('Date: ' . gmdate('D, d M Y H:i:s', $ftime) . ' GMT');
+	header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $ftime) . ' GMT');
+	header('Content-Encoding: none');
+	header('Content-Disposition: ' . (($is_image || $is_live) ? 'inline' : 'attachment') . '; '  . $h_name);
+	#if($is_image)
+	#{
+	#	header('Content-Transfer-Encoding: binary');
+	#}
 
 	if(!$is_image && !$is_live && $is_ie8)
 	{
 		header('X-Download-Options: noopen');
 	}
-	header('Content-Disposition: ' . (($is_image || $is_live) ? 'inline' : 'attachment') . '; '  . $h_name);
-	if($is_image)
-	{
-		header('Content-Transfer-Encoding: binary');
-	}
 
-
-	header(($is_ie6 ? 'Expires: -1' : 'Expires: Mon, 26 Jul 1997 05:00:00 GMT'));	
-
-	
+	#header(($is_ie6 ? 'Expires: -1' : 'Expires: Mon, 26 Jul 1997 05:00:00 GMT'));	
 	#(($is_ie8) ? '; authoritative=true; X-Content-Type-Options: nosniff;' : '')
-	
+
 	if (($pfile = @fopen($path_file, 'rb')) === false)
 	{
 		#so ... it's failed to open !
 		header("HTTP/1.0 404 Not Found");
 		big_error('----', 'Error - can not open file.');
 	}
-	
+
 	#sending some headers
 	header('Accept-Ranges: bytes');
-	
+
 	#prevent some limits
 	@set_time_limit(0);
-	
+
 	// multipart-download and download resuming support
 	$range_enable = false;
-	if(isset($_SERVER['HTTP_RANGE']) && strpos($_SERVER['HTTP_RANGE'],'bytes=') && !$is_image && !$is_live && $resuming_on)
+	if(isset($_SERVER['HTTP_RANGE']) && strpos($_SERVER['HTTP_RANGE'],'bytes=') !== false && !$is_image && !$is_live && $resuming_on)
 	{
-		
 		header('HTTP/1.1 206 Partial Content');
 
         $ranges		= explode(',', substr(trim($_SERVER['HTTP_RANGE']), 6));

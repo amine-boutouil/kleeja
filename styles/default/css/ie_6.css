@@ -1,17 +1,15 @@
 *html .classname {}
 
 input  {
-	font-family : Tahoma, Arial, Verdana, sans-serif, "Lucida Grande", "Lucida Sans Unicode"; 
-	font-weight:normal;
-	font-size:12px;
+    font: normal 12px Tahoma, Arial, Verdana, sans-serif, "Lucida Grande", "Lucida Sans Unicode";
 }
 #top_menu .m3nu li a:hover {
-	color:#fff;
-	background: url(../images/current-bg.gif) repeat-x top left;
+    color:#fff;
+    background: url(../images/current-bg.gif) repeat-x top left;
 }
 #right_menu .list a:hover{
-	color:#fff;
-	background:#555 url(../images/right4_menu.png) repeat;
+    color:#fff;
+    background:#555 url(../images/right4_menu.png) repeat;
 }
 
 .guide_user_th  {background:#bbb url(../images/headinebg.png) repeat-x top right;}

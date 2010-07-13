@@ -8,13 +8,13 @@
 # Date:: 2009-10-07  $
 */
 option {padding-left: 1em;}
-caption, th, td {text-align:left}
+caption, th, td {text-align:left;} /* missing ; */
 .logo {float:left;}
 img.left {float:right;margin-left:15px;margin-right:0;}
 img.right {float:left;margin-right:15px;margin-left:0;}
 .line {background-position:left top;}
 .title-x {float:left;background-position:left top;}
-.safe_code {	background:#F9F5F0 url(../images/saf3_code_ltr.gif) no-repeat 100% 50%;}
+.safe_code {    background:#F9F5F0 url(../images/saf3_code_ltr.gif) no-repeat 100% 50%;}
 #top_menu .m3nu {margin-right:0;margin-left:6%;}
 #top_menu .m3nu ul{float:left;}
 #top_menu .m3nu li {float:left;margin-left:0;margin-right:2px;}
@@ -29,15 +29,15 @@ img.right {float:left;margin-right:15px;margin-left:0;}
 .kleeja {clear:both;}
 .wait {font-size:200%;}
 .stats  {background-position: 94% 50%;}
-.go_up{	background-position: 94% 100%;}
+.go_up{    background-position: 94% 100%;}
 ul.tabbernav li a{margin-left:0;margin-right:4px;background-position:top right;}
 .footerlinksleft  ul{float:right;width:14%;}
 #footer .Copyrights {float:left;}
 .admin_cp_link {text-align:right;}
-.admin_cp_link span{	padding:4px 25px;}
-.login {	background-position:90% 50%;}
+.admin_cp_link span{    padding:4px 25px;}
+.login {    background-position:90% 50%;}
 .title_login {background-position:1% 50%;}
-.gather {float:left;	margin-left:0;margin-right:3px;}
+.gather {float:left;    margin-left:0;margin-right:3px;}
 input.username, input.password {float:left;padding:3px 20px 3px 3px;background-position: 98% 50%;}
 .forget_pass {margin-left:0;margin-right:60px;background-position: 2% 50%;float:right;}
 #kleeja_img_captcha {float:left;}

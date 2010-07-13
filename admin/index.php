@@ -211,26 +211,29 @@ $i = 0;
 // calls numbers
 $cr_time = LAST_VISIT > 0 ? LAST_VISIT : time() - 3600*12;
 
-$c_query	= array(
-					'SELECT'	=> 'COUNT(c.id) AS total_rows',
-					'FROM'		=> "`{$dbprefix}call` c",
-					//'WHERE'	=> "c.`time` > " . $cr_time . "" 
+//small bubble system 
+//any item can show what is inside it as unread messages
+$kbubbles = array();
+
+//for calls and reports
+foreach(array('call'=>'calls', 'reports'=>'reports') as $table=>$n)
+{
+	$query	= array(
+					'SELECT'	=> 'COUNT(' . $table[0] . '.id) AS total_rows',
+					'FROM'		=> "`{$dbprefix}" . $table . "` " . $table[0]
 				);
 
-$n_fetch = $SQL->fetch_array($SQL->build($c_query));
-$newcall = '[' . $n_fetch['total_rows'] . ']';
-$SQL->freeresult();
+	$fetched = $SQL->fetch_array($SQL->build($c_query));
+	if($fetched['total_rows'])
+	{
+		$kbubbles[$n] = $fetched['total_rows'];
+	}
+	$SQL->freeresult();
+}
 
-// reports calls
-$r_query	= array(
-					'SELECT'	=> 'COUNT(r.id) AS total_rows',
-					'FROM'		=> "`{$dbprefix}reports` r",
-					//'WHERE'	=> "r.`time` > " . $cr_time . "" 
-				);
+//add your own bubbles here
+($hook = kleeja_run_hook('kbubbles_admin_page')) ? eval($hook) : null; //run hook 
 
-$n_fetch = $SQL->fetch_array($SQL->build($r_query));
-$newreport = '[' . $n_fetch['total_rows'] . ']';
-$SQL->freeresult();
 
 foreach($adm_extensions as $m)
 {
@@ -249,12 +252,22 @@ foreach($adm_extensions as $m)
 	$adm_extensions_menu[$i]	= array(
 										'icon'		=> (file_exists($STYLE_PATH_ADMIN . 'images/menu_icons/' . ($m == 'configs' ? 'options' : $m) . '_button.gif'))	? $STYLE_PATH_ADMIN . 'images/menu_icons/' . ($m == 'configs' ? 'options' : $m) . '_button.gif' : $STYLE_PATH_ADMIN . 'images/menu_icons/no_icon.png',
 										'icon_mini'	=> (file_exists($STYLE_PATH_ADMIN . 'images/menu_mini_icons/' . ($m == 'configs' ? 'options' : $m) . '_button.gif'))	? $STYLE_PATH_ADMIN . 'images/menu_mini_icons/' . ($m == 'configs' ? 'options' : $m) . '_button.gif' : $STYLE_PATH_ADMIN . 'images/menu_mini_icons/no_icon.png',
-										'lang'	=> !empty($lang['R_'. strtoupper($m)]) ? $lang['R_'. strtoupper($m)] . ($m == 'calls' ? $newcall : '') . (($m == 'reports') ? $newreport : '') : (!empty($lang[strtoupper($m)]) ? $lang[strtoupper($m)] :  (!empty($olang[strtoupper($m)]) ? $olang[strtoupper($m)] : strtoupper($m))),
+										'lang'	=> !empty($lang['R_'. strtoupper($m)]) ? $lang['R_'. strtoupper($m)] : (!empty($lang[strtoupper($m)]) ? $lang[strtoupper($m)] :  (!empty($olang[strtoupper($m)]) ? $olang[strtoupper($m)] : strtoupper($m))),
 										'link'	=> './' . basename(ADMIN_PATH) . '?cp=' . ($m == 'configs' ? 'options' : $s),
 										'confirm'	=> (@in_array($m, $ext_confirm)) ? true : false,
 										'current'	=> ($s == $go_to) ? true : false
 									);
+	
+	//add another item to array for title='' in href or other thing
+	$adm_extensions_menu[$i]['title'] = $adm_extensions_menu[$i]['lang'];
 
+	//is this item has a bubble ?
+	if(in_array($m, array_keys($kbubbles)))
+	{
+		$adm_extensions_menu[$i]['lang'] .= '<span class="kbubbles">' . $kbubbles[$m] . '</span>';
+	}
+
+	($hook = kleeja_run_hook('endforeach_ext_admin_page')) ? eval($hook) : null; //run hook 
 }
 
 

@@ -88,7 +88,7 @@ $(document).ready(function() {
 		<div class="link_menu_horizontal"><p><a title="{lang.RETURN_HOME}" href="{config.siteurl}"><img src="{STYLE_PATH_ADMIN}images/menu_mini_icons/index_button.gif" alt="{lang.RETURN_HOME}" style="margin:0 8px;vertical-align:middle;" /></a></p></div>
 		<div class="link_menu_horizontal"><p><a title="{lang.R_CPINDEX}" href="./"><img src="{STYLE_PATH_ADMIN}images/menu_mini_icons/cp_button.gif" alt="{lang.R_CPINDEX}" style="margin:0 8px;vertical-align:middle;" /></a></p></div>
 	<LOOP NAME="adm_extensions_menu">	
-		<div class="({{current}}?link_menu_horizontal link_current_horizontal:link_menu_horizontal)"><p><a title="{{lang}}" href="{{link}}" <IF LOOP="confirm"> onclick="javascript:return confirm_from();"</IF>><img src="{{icon_mini}}" alt="{{lang}}" style="margin:0 8px;vertical-align:middle;" /></a></p></div>
+		<div class="({{current}}?link_menu_horizontal link_current_horizontal:link_menu_horizontal)"><p><a title="{{title}}" href="{{link}}" <IF LOOP="confirm"> onclick="javascript:return confirm_from();"</IF>><img src="{{icon_mini}}" alt="{{title}}" style="margin:0 8px;vertical-align:middle;" /></a></p></div>
 	</LOOP>
 		</div>
 	<!-- start clear  -->
@@ -102,7 +102,7 @@ $(document).ready(function() {
 		<div class="link_menu"><p><a title="{lang.RETURN_HOME}" href="{config.siteurl}"><img src="{STYLE_PATH_ADMIN}images/menu_icons/index_button.gif" alt="{lang.RETURN_HOME}" /><br />{lang.RETURN_HOME}</a></p></div>
 		<div class="link_menu"><p><a title="{lang.R_CPINDEX}" href="./"><img src="{STYLE_PATH_ADMIN}images/menu_icons/cp_button.gif" alt="{lang.R_CPINDEX}" /><br />{lang.R_CPINDEX}</a></p></div>
 	<LOOP NAME="adm_extensions_menu">	
-		<div class="({{current}}?link_menu link_current:link_menu)"><p><a title="{{lang}}" href="{{link}}" <IF LOOP="confirm"> onclick="javascript:return confirm_from();"</IF>><img src="{{icon}}" alt="{{lang}}" /><br />{{lang}}</a></p></div>
+		<div class="({{current}}?link_menu link_current:link_menu)"><p><a title="{{title}}" href="{{link}}" <IF LOOP="confirm"> onclick="javascript:return confirm_from();"</IF>><img src="{{icon}}" alt="{{title}}" /><br />{{lang}}</a></p></div>
 	</LOOP>
 		</div>
 	<!-- start clear  -->

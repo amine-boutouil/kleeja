@@ -76,6 +76,8 @@ tr:hover {background-color:#FFFFDD;}
 	#main_menu .link_menu img {padding:2px 0 3px 0;}
 	#main_menu .link_menu a:hover{height:56px; color:#000; text-decoration: none;background:#FEF5E2 url(../images/hidbg.png) repeat-x bottom left;border-top: #FEA53D 3px solid;border-bottom: #FEA53D 3px solid;}
 	#main_menu .link_current a:hover{height:56px;text-decoration: none;border:none;cursor:default;background:url(../images/hidbg.png) repeat-x;}
+	#main_menu .kbubbles {background-color:#FFB007;color:#fff;margin:2px;padding:2px 0px;font-size:9px;-moz-border-radius : 8px; /* Mozilla */	-webkit-border-radius : 8px; /* Webkit */ -khtml-border-radius : 8px; /* Konqueror */	border-radius : 8px; /* CSS3 only */}
+	
 	/* # right  menu */	
 
 	/* horizontal menu */

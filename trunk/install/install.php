@@ -313,7 +313,7 @@ case 'plugins' :
 
 		//search for plugins
 		foreach($p as $file)
-		{				
+		{
 			if(file_exists($pl_path . '/' . $file)) //only plugins ;)
 			{
 				$contents 	= @file_get_contents($pl_path . '/' . $file);
@@ -358,12 +358,13 @@ case 'plugins' :
 	}
 	else
 	{
+		$plugins = array();
 		$dh = opendir($pl_path);
 		while (($file = readdir($dh)) !== false)
 		{
 			$e	= @explode(".", $file);
 			$e	= strtolower($e[sizeof($e)-1]);
-			if($e == "xml") //only plugins ;)
+			if($e == "klj") //only plugins ;)
 			{
 				$contents 	= @file_get_contents($pl_path . '/' . $file);
 				$gtree		= $XML->xml_to_array($contents);

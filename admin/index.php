@@ -252,8 +252,8 @@ foreach($adm_extensions as $m)
 	$adm_extensions_menu[$i]	= array(
 										'icon'		=> (file_exists($STYLE_PATH_ADMIN . 'images/menu_icons/' . ($m == 'configs' ? 'options' : $m) . '_button.gif'))	? $STYLE_PATH_ADMIN . 'images/menu_icons/' . ($m == 'configs' ? 'options' : $m) . '_button.gif' : $STYLE_PATH_ADMIN . 'images/menu_icons/no_icon.png',
 										'icon_mini'	=> (file_exists($STYLE_PATH_ADMIN . 'images/menu_mini_icons/' . ($m == 'configs' ? 'options' : $m) . '_button.gif'))	? $STYLE_PATH_ADMIN . 'images/menu_mini_icons/' . ($m == 'configs' ? 'options' : $m) . '_button.gif' : $STYLE_PATH_ADMIN . 'images/menu_mini_icons/no_icon.png',
-										'lang'	=> !empty($lang['R_'. strtoupper($m)]) ? $lang['R_'. strtoupper($m)] : (!empty($lang[strtoupper($m)]) ? $lang[strtoupper($m)] :  (!empty($olang[strtoupper($m)]) ? $olang[strtoupper($m)] : strtoupper($m))),
-										'link'	=> './' . basename(ADMIN_PATH) . '?cp=' . ($m == 'configs' ? 'options' : $s),
+										'lang'		=> !empty($lang['R_'. strtoupper($m)]) ? $lang['R_'. strtoupper($m)] : (!empty($olang['R_' . strtoupper($m)]) ? $olang['R_' . strtoupper($m)] : strtoupper($m)),
+										'link'		=> './' . basename(ADMIN_PATH) . '?cp=' . ($m == 'configs' ? 'options' : $s),
 										'confirm'	=> (@in_array($m, $ext_confirm)) ? true : false,
 										'current'	=> ($s == $go_to) ? true : false
 									);

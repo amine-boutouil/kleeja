@@ -615,7 +615,7 @@ function delete_cache($name, $all=false)
 		{
 			while (($file = @readdir($dh)) !== false)
 			{
-				if($file != "." && $file != ".." && in_array($file, $exceptions))
+				if($file != '.' && $file != '..' && !in_array($file, $exceptions))
 				{
 					$del = kleeja_unlink($path_to_cache . '/' . $file, true);
 				}

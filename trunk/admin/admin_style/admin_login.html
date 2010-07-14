@@ -4,6 +4,7 @@
 	<title>{lang.LOGIN} - {lang.KLEEJA_CP} - {config.sitename}</title>
 	<meta http-equiv="Content-Language" content="ar" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="robots" content="noindex, follow" />
 	<link rel="shortcut icon" href="{STYLE_PATH_ADMIN}images/favicon.ico" />
 	<link rel="icon" type="image/gif" href="{STYLE_PATH_ADMIN}images/favicon.gif" />
 	<link rel="apple-touch-icon" href="{STYLE_PATH_ADMIN}images/apple-touch-icon.png" />
@@ -15,6 +16,7 @@
 	<link rel="stylesheet" type="text/css" href="{STYLE_PATH_ADMIN}css/ie_6.css" />
 	</IS_BROWSER>
 	<script type="text/javascript">
+	<!--
 		function confirm_from()
 		{
 			if(confirm('{lang.ARE_YOU_SURE_DO_THIS}'))
@@ -22,15 +24,15 @@
 			else
 				return false;
 		}
-		
+	//-->	
 	</script>
-	<script type="text/javascript" src="{STYLE_PATH_ADMIN}images/tips.js"></script>
 </head>
 <body>
-	<div class="site_name"><a href="{config.siteurl}"><img src="{STYLE_PATH_ADMIN}images/icon/go_back_home.gif" alt="{config.sitename}" />{lang.RETURN_HOME} .. !</a></div>
-	<div class="logo_cp"><h1><a onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com"><img src="{STYLE_PATH_ADMIN}images/logo.png" alt="kleeja" /></a></h1></div>
+	<div class="site_name"><a href="{config.siteurl}" title="{lang.RETURN_HOME}"><img src="{STYLE_PATH_ADMIN}images/login/go_back_home.gif" alt="{config.sitename}" />{lang.RETURN_HOME} .. !</a></div>
+	<div class="divline"></div>
+	<div class="logo_cp"><h1><a href="{config.siteurl}" title="{lang.RETURN_HOME}"><img src="{STYLE_PATH_ADMIN}images/logo.png" alt="kleeja" /></a></h1></div>
 	<div class="box">
-		<div class="cp_kleeja"><img src="{STYLE_PATH_ADMIN}images/icon/Security_go.gif" alt="stop here kleeja" />{lang.KLEEJA_CP} ..!</div>
+		<div class="cp_kleeja"><img src="{STYLE_PATH_ADMIN}images/login/Sec_go.gif" alt="stop here kleeja" />{lang.KLEEJA_CP} ..!</div>
 		<hr />
 		<form action="{action}" method="post" style="clear: both;">
 			<label>{lang.USERNAME}</label>
@@ -55,7 +57,7 @@
 		</IF>
 	</div>
 	<div class="Powered"><h1>Powered by <a onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com" title="Powered by kleeja">Kleeja</a></h1></div>
-	<div class="web2"><a class="xhtml" title="XHTML" onclick="window.open(this.href,'_blank');return false;" href="http://validator.w3.org/check?uri=referer" ><img src="{STYLE_PATH_ADMIN}images/icon/xhtml.png" alt="XHTML" /></a><a class="css" title="CSS" onclick="window.open(this.href,'_blank');return false;" href="http://jigsaw.w3.org/css-validator/check/referer" ><img src="{STYLE_PATH_ADMIN}images/icon/css.png" alt="css" /></a></div>
+	<div class="web2"><a class="xhtml" title="XHTML" onclick="window.open(this.href,'_blank');return false;" href="http://validator.w3.org/check?uri=referer" ><img src="{STYLE_PATH_ADMIN}images/login/xhtml.png" alt="XHTML" /></a><a class="css" title="CSS" onclick="window.open(this.href,'_blank');return false;" href="http://jigsaw.w3.org/css-validator/check/referer" ><img src="{STYLE_PATH_ADMIN}images/login/css.png" alt="css" /></a></div>
 	<div class="footer"></div>
 </body>
 </html>

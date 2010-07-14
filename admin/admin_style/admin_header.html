@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Language" content="{lang.LANG_SMALL_NAME}" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
-<meta name="robots" content="noindex, follow">
+<meta name="robots" content="noindex, follow" />
 <!--  Icon browsers  -->
 <link rel="shortcut icon" href="{STYLE_PATH_ADMIN}images/favicon.ico" />
 <link rel="icon" type="image/gif" href="{STYLE_PATH_ADMIN}images/favicon.gif" />
@@ -25,90 +25,71 @@
 </IS_BROWSER>
 <IF NAME="MINI_MENU">
 <style type="text/css">
-	#divmiddle {width:90%;}
+	#divmiddle {width:88%;}
 </style>
 </IF>
 <!--  # css coding -->
-<script type="text/javascript">
-<!--
-	var STYLE_PATH_ADMIN = '{STYLE_PATH_ADMIN}';
-	var PATH_SPACER = '{STYLE_PATH_ADMIN}images/spacer.gif';
-
-	function confirm_from(r)
-	{
-		var msg = !r ? '{lang.ARE_YOU_SURE_DO_THIS}' : r;
-
-		if(confirm(msg))
-			return true;
-		else
-			return false;
-	}
-//-->
-</script>
-<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/pc.js"></script> 
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.js"></script>
-<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/cluetip.js"></script>  
-<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.lightbox.js"></script> 
-<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.pulse.js"></script> 
-<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.checkbox.min.js"></script>
-<script type="text/javascript">
-<!--
-$(document).ready(function() {
-	$('input:checkbox').checkbox();
-});
-//-->
-</script>
+<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.kleeja.js"></script>
 </head>
 <body>
-<!-- start top div header  -->
-<div id="divheader">
-	<div class="header" >
-	<div class="logo1" <IF NAME="{lang.DIR}==ltr">style="float: right;"</IF>><a href="{config.siteurl}"><img src="{STYLE_PATH_ADMIN}images/logo.png" alt="{config.sitename}" /></a></div>
-	<div class="logo2" <IF NAME="{lang.DIR}==ltr">style="float: left;"</IF>><a href="./"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/sitename.png" alt=".." />   {config.sitename}</a></div>
+
+<!-- start div wrapper -->
+<div id="wrapper">
+
+<!-- start top header  -->
+<div class="header_bg">
+	<div class="header_left"></div>
+	<div class="header_right"></div>
+	<div class="box_header" >
+		<div class="logo1"><a href="{config.siteurl}"><img src="{STYLE_PATH_ADMIN}images/logo.png" alt="{config.sitename}" /></a></div>
+		<div class="logo2"><a href="./"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/sitename.png" alt=".." />{lang.KLEEJA_CP}</a></div>
 	</div>
 </div>
-<!-- end top div header  -->
 
-<!-- start clear  -->
 <div class="clr"></div>
-<!-- end clear  -->
 
-<!-- start  div body  -->
-<div id="divbody">
+<!-- start top div site name  -->
+<div class="box_h_bg">
+	<div class="box_h_left"></div>
+	<div class="box_h_right"></div>
+	<div class="sitetitle">{config.sitename}</div>
+</div>
+<!-- end top div site name  -->
 
-<!-- start clear  -->
+<!-- start div content -->
+<div class="content_left">
+	<div class="content_right">
+		<div class="content">
+
 <div class="clr"></div>
-<!-- end clear  -->
 
 <!-- start admin menu right  -->
 <IF NAME="SHOW_LIST">
 <IF NAME="MINI_MENU">
-	<div id="menu_horizontal">	
-		<div class="body_menu_horizontal">
-		<div class="link_menu_horizontal"><p><a title="{lang.RETURN_HOME}" href="{config.siteurl}"><img src="{STYLE_PATH_ADMIN}images/menu_mini_icons/index_button.gif" alt="{lang.RETURN_HOME}" style="margin:0 8px;vertical-align:middle;" /></a></p></div>
-		<div class="link_menu_horizontal"><p><a title="{lang.R_CPINDEX}" href="./"><img src="{STYLE_PATH_ADMIN}images/menu_mini_icons/cp_button.gif" alt="{lang.R_CPINDEX}" style="margin:0 8px;vertical-align:middle;" /></a></p></div>
+<div id="menu_thumbnail">
+	<div class="link_menu_thumbnail"><p><a class="Tooltip" title="{lang.RETURN_HOME}" href="{config.siteurl}"><img src="{STYLE_PATH_ADMIN}images/menu_icons/index_button.gif" alt="{lang.RETURN_HOME}" style="margin:0 8px;vertical-align:middle;" /></a></p></div>
+	<div class="link_menu_thumbnail"><p><a class="Tooltip" title="{lang.R_CPINDEX}" href="./"><img src="{STYLE_PATH_ADMIN}images/menu_icons/cp_button.gif" alt="{lang.R_CPINDEX}" style="margin:0 8px;vertical-align:middle;" /></a></p></div>
 	<LOOP NAME="adm_extensions_menu">	
-		<div class="({{current}}?link_menu_horizontal link_current_horizontal:link_menu_horizontal)"><p><a title="{{title}}" href="{{link}}" <IF LOOP="confirm"> onclick="javascript:return confirm_from();"</IF>><img src="{{icon_mini}}" alt="{{title}}" style="margin:0 8px;vertical-align:middle;" /></a></p></div>
+		<div class="({{current}}?link_menu_thumbnail link_current_thumbnail:link_menu_thumbnail)"><p><a class="Tooltip" title="{{title}}" href="{{link}}" <IF LOOP="confirm"> onclick="javascript:return confirm_from();"</IF>><img src="{{icon}}" alt="{{title}}" style="margin:0 8px;vertical-align:middle;" /></a></p></div>
 	</LOOP>
-		</div>
-	<!-- start clear  -->
 	<div class="clr"></div>
-	<!-- end clear  -->
-	<a href="{link_expand_menu}" class="expand_horizontal"><img src="{STYLE_PATH_ADMIN}images/spacer.gif" alt="{lang.RETURN_HOME}" /></a>
-	</div>
+	<a href="{link_expand_menu}" class="expand_thumbnail"><img src="{STYLE_PATH_ADMIN}images/spacer.gif" alt="{lang.RETURN_HOME}" /></a>
+	<div class="clr"></div>
+</div>
 <ELSE>
 	<div id="main_menu">	
 		<div class="body_menu">
-		<div class="link_menu"><p><a title="{lang.RETURN_HOME}" href="{config.siteurl}"><img src="{STYLE_PATH_ADMIN}images/menu_icons/index_button.gif" alt="{lang.RETURN_HOME}" /><br />{lang.RETURN_HOME}</a></p></div>
-		<div class="link_menu"><p><a title="{lang.R_CPINDEX}" href="./"><img src="{STYLE_PATH_ADMIN}images/menu_icons/cp_button.gif" alt="{lang.R_CPINDEX}" /><br />{lang.R_CPINDEX}</a></p></div>
+		<div class="link_menu"><p><a class="main_menuTooltip" title="{lang.RETURN_HOME}" href="{config.siteurl}"><img src="{STYLE_PATH_ADMIN}images/menu_icons/index_button.gif" alt="{lang.RETURN_HOME}" /><br />{lang.RETURN_HOME}</a></p></div>
+		<div class="link_menu"><p><a class="main_menuTooltip" title="{lang.R_CPINDEX}" href="./"><img src="{STYLE_PATH_ADMIN}images/menu_icons/cp_button.gif" alt="{lang.R_CPINDEX}" /><br />{lang.R_CPINDEX}</a></p></div>
 	<LOOP NAME="adm_extensions_menu">	
-		<div class="({{current}}?link_menu link_current:link_menu)"><p><a title="{{title}}" href="{{link}}" <IF LOOP="confirm"> onclick="javascript:return confirm_from();"</IF>><img src="{{icon}}" alt="{{title}}" /><br />{{lang}}</a></p></div>
+		<div class="({{current}}?link_menu link_current:link_menu)"><p><a class="main_menuTooltip" title="{{title}}" href="{{link}}" <IF LOOP="confirm"> onclick="javascript:return confirm_from();"</IF>><img src="{{icon}}" alt="{{title}}" /><br />{{lang}}</a></p></div>
 	</LOOP>
 		</div>
 	<!-- start clear  -->
 	<div class="clr"></div>
 	<!-- end clear  -->
-	<a href="{link_expand_menu}" class="expand_horizontal2"><img src="{STYLE_PATH_ADMIN}images/spacer.gif" alt="{lang.RETURN_HOME}" /></a>
+	<a href="{link_expand_menu}" class="expand_thumbnail2"><img src="{STYLE_PATH_ADMIN}images/spacer.gif" alt="{lang.RETURN_HOME}" /></a>
 	</div>
 </IF>
 </IF>

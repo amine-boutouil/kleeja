@@ -44,7 +44,7 @@ $(document).ready(function(){
 <div class="box_all">
 
 <!-- start title panel admin -->
-<div class="title_kleeja"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/favicon.gif" alt="Kleeja love you ..," />&#9679; {lang.KLEEJA_CP} ..</div>
+<div class="title_kleeja"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/favicon.gif" alt="Kleeja love you ..," />&#9679; {config.sitename}</div>
 <!-- # title panel admin -->
 
 <!-- start clear  -->
@@ -62,12 +62,9 @@ $(document).ready(function(){
 </div>
 <IF LOOP="msg_type==error">
 <script type="text/javascript">
-$('div#{{id}}').pulse({
-    speed: 500,
-    opacityRange: [0.4,0.9],
-	duration: 7000 // i.e. 7 seconds
-});
-
+<!--
+   $('div#{{id}}').pulse({opacity: [0,2]}, {times: 20 });// i.e. 7 seconds
+//-->
 </script>
 </IF>
 

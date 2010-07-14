@@ -1,20 +1,26 @@
 <script type="text/javascript">
+<!--
 $(function() {
-	$('a.cluetip').cluetip({splitTitle: '|-kleeja-|'});
-
+	$('img.tTip').tinyTips('title');	
 	$('a.lightbox').lightBox({
-		overlayBgColor: '#666',
-		overlayOpacity: 0.6,
+		overlayBgColor: '#111',
+		overlayOpacity: 0.8,
 		imageLoading: STYLE_PATH_ADMIN+'images/loading.gif',
 		imageBtnClose: STYLE_PATH_ADMIN+'images/close.gif',
 		imageBtnPrev: STYLE_PATH_ADMIN+'images/prevlabel.gif',
 		imageBtnNext: STYLE_PATH_ADMIN+'images/nextlabel.gif',
-		containerResizeSpeed: 350
+		containerResizeSpeed: 400
 	});
-
+	$('.img').hover(
+	function(){
+		$(this).stop().fadeTo('slow',0.4);
+	},
+	function(){
+		$(this).stop().fadeTo('slow',1);
+	});
 });
+//-->
 </script>
-
 <!-- start view images temlate  -->
 <div id="divmiddle">
 <fieldset>
@@ -27,7 +33,7 @@ $(function() {
 <h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/menu_icons/img_ctrl_button.gif" />{lang.R_IMG_CTRL}</h2>
 <!-- # title  -->
 
-<div class="line_img"></div>
+<div class="dot"></div>
 
 <!-- clear  -->
 <div class="clr"></div>
@@ -41,13 +47,8 @@ $(function() {
 <LOOP NAME="arr">
 {{tdnum}}
 <td style="width:25%;" id="su[{{id}}]" class="osilver">
-<div class="img">
-    <a href="{{href}}"
-    title="{{name}}|-kleeja-|{lang.FILEUPS} : {{ups}}|-kleeja-|{lang.FILESIZE} : {{size}}|-kleeja-|{lang.FILEDATE} : {{time}}|-kleeja-|{lang.BY} : {{user}}|-kleeja-|{lang.IP} : {{ip}}"
-    class="lightbox cluetip"><img src="{{thumb_link}}" style="height:100px;width:100px;<IF LOOP="is_thumb"><ELSE>width:100px;height:100px;</IF>" /></a>
-</div>
-<div>
-<input name="del_{{id}}" type="checkbox" value="{{id}}"  style="float:left" onclick="change_color(this,'su[{{id}}]', 'ored');" rel="_del" />{{name}}</div>
+<div class="img"><a href="{{href}}" class="lightbox"><img class="tTip" title="<div>{{name}}</div><table><tr><td>{lang.FILEUPS}</td><td>{{ups}}</td></tr><tr><td>{lang.FILESIZE}</td><td>{{size}}</td></tr><tr><td>{lang.FILEDATE}</td><td>{{time}}</td></tr><tr><td>{lang.BY}</td><td>{{user}}</td></tr><tr><td>{lang.IP}</td><td>{{ip}}</td></tr></table>" src="{{thumb_link}}" style="height:100px;width:100px;<IF LOOP="is_thumb"><ELSE>width:100px;height:100px;</IF>" /></a></div>
+<div><input name="del_{{id}}" type="checkbox" value="{{id}}"  style="float:left" onclick="change_color(this,'su[{{id}}]', 'ored');" rel="_del" />{{name}}</div>
 </td>
 {{tdnum2}}
 </LOOP>

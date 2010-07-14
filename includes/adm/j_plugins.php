@@ -650,6 +650,7 @@ if(isset($_POST['submit_new_plg']))
 	}
 	
 	$cache->clean('__changes_files__');
-	
+	delete_cache(array('data_plugins', 'data_config'));
+
 	$stylee	= "admin_info";
 }

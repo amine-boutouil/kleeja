@@ -346,7 +346,7 @@ class kplugins
 				add_config($in['attributes']['name'], $in['attributes']['value'], $in['attributes']['order'], $in['value'], $in['attributes']['menu'], $this->plg_id);
 			}
 
-			delete_cache('data_config');
+			//delete_cache('data_config');
 		}
 		
 		
@@ -524,7 +524,7 @@ class kplugins
 				$SQL->build($insert_query);		
 			}
 			//delete cache ..
-			delete_cache('data_hooks');
+			//delete_cache('data_hooks');
 		}
 
 		

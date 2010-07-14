@@ -375,7 +375,7 @@ $lang = array_merge($lang, array(
 	'WORD_DELETED' => 'Kelime başarıyla silindi...',
 	'WORD_CREATED' => 'Kelime başarıyla eklendi...',
 	*/
-	'PLUGINS' 					=> 'Eklentiler',
+	'R_PLUGINS' 				=> 'Eklentiler',
 	'PLUGINS_EX' 				=> 'Silinmiş yada güncellenmiş eklentiler burada...',
 	'DISABLE' 					=> 'Kapalı',
 	'ENABLE' 					=> 'Açık',

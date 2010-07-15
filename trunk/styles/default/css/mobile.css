@@ -1,0 +1,32 @@
+/*
+# package Kleeja
+# version 1.0.0
+# copyright (c) 2007 Kleeja.com
+# license ./docs/license.txt
+# Filename : styles/default/mobile.css
+# Author: Tar3Q  
+# Date: 7-14-2010 $
+*/
+
+/* mobile styles */
+@media handheld {
+	html, body {
+	font:normal 12px/15px Tahoma, Arial, Verdana, sans-serif, "Lucida Grande", "Lucida Sans Unicode"; 
+	height:100%;width: 100%;background:#fff;padding:3px;color: #000;margin: 0;}
+	h1, h2, h3, h4, h5, h6 {font-weight: normal;font-size:x-small;}
+	a:link, a:visited {text-decoration: underline;color: #0000CC;}
+	a:hover, a:active {text-decoration: underline;color: #660066;}
+	h2 {font-size: 13px;color:#EF5E00;margin: 5px 0;}
+	p, ul, ol {line-height:100%;}
+	.title-x {font-size:85%;}
+	#footer,.safe_code {display:none;}
+	.logo {	max-width:200px;}
+	#top_menu {width: 100%;}
+	#top_menu .m3nu li {font-size:xx-small;}
+	#content {width:60%;padding:0;margin:4px auto;}
+	#right_menu{width:22%;}
+	#right_menu .list{width:18%;}
+	#content_index_body  {width:72%;padding:0;}
+}
+/* iPhone-specific styles */
+@media only screen and (max-device-width: 480px) {html {webkit-text-size-adjust: none;}}

@@ -1354,7 +1354,4 @@ select.remme:focus {
 }
 
 /* PRINT */
-@media print {
-	body{ color: #000 !important; }
-	a, a:link, a:visited { color: #000 !important; text-decoration:none !important; }
-}
+@media print{ body {color: #000 !important; }a, a:link, a:visited { color: #000 !important; text-decoration:none !important;} }

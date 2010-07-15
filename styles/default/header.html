@@ -1,37 +1,44 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml" dir="{dir}">
+<!--  Powered by kleeja || URL kleeja.com  -->
 <head>
 	<title>{title}(title? &#9679; :){config.sitename}</title>
-	<!--  Powered by kleeja >>>  URL www.kleeja.com  -->
 	<meta http-equiv="Content-Type" content="text/html;charset={charset}" />
 	<meta http-equiv="Content-Language" content="{lang.LANG_SMALL_NAME}" />
 	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
-	<meta http-equiv="Cache-Control" content="Public" />
-	<meta http-equiv="Content-Style-Type" content="text/css" />	
-	<meta name="copyrights" content="Powered by Kleeja :: kleeja.com" />
-	<meta name="copyright" content="{config.sitename}" />
-	<meta name="classification" content="phpuploader, phpproject, uploadfiles, filesuploader, kleeja, imageuploader" />
-	<meta name="rating" content="general" />
-	<meta name="distribution" content="includes/common" />
-	<meta name="resource-type" content="document" />
+	<meta name="copyrights" content="Powered by Kleeja || kleeja.com" />
+	<meta name="author" content="Team Kleeja" />
+	<meta name="Publisher" content="Notepad++" />
+	<!-- metatags.info/all_meta_tags -->
+	<meta name="description" content="{config.sitename}" />
+	<meta name="Abstract" content="php uploader, upload files, files uploader, kleeja, image uploader" />
 	<meta name="Expires" content="-1" />
 	<meta name="revisit-after" content="2 hours" />
 	<meta name="robots" content="index,follow" />
-	<meta name="author" content="Powered by Kleeja" />
+	<meta name = "viewport" content = "width = 320, initial-scale = 2.3, user-scalable = no" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<link rel="home" href="{config.siteurl}" />
 	<link rel="shortcut icon" href="images/favicon.ico" />
 	<link rel="icon" type="image/gif" href="images/favicon.gif" />
 	<link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
 	<link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH}css/stylesheet.css" />
 	<IF NAME="{lang.DIR}==ltr"><link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH}css/ltr.css" /></IF>
-	<IS_BROWSER="ie6"><link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH}css/ie_6.css" /><style type="text/css">	img ,td ,tr{ behavior: url('{STYLE_PATH}ie/iepngfix.htc')};	</style></IS_BROWSER>
-	<IS_BROWSER="ie"><link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH}css/ie.css" /><style type="text/css">	body { behavior: url('{STYLE_PATH}ie/csshover3.htc')};</style></IS_BROWSER>
-	
+	<IS_BROWSER="ie6">
+		<link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH}css/ie_6.css" />
+		<style type="text/css">	img ,td ,tr{ behavior: url('{STYLE_PATH}ie/iepngfix.htc')};	</style>
+	</IS_BROWSER>
+	<IS_BROWSER="ie">
+		<link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH}css/ie.css" />
+		<style type="text/css">	body { behavior: url('{STYLE_PATH}ie/csshover3.htc')};</style>
+	</IS_BROWSER>
+	<IS_BROWSER="mobile">
+		<link rel="stylesheet" type="text/css" href="{STYLE_PATH}css/mobile.css" media="handheld" />
+	</IS_BROWSER>
 	<script type="text/javascript">
 	<!--
 	document.write('<link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH}css/css3.css" />');
 	-->
-	</script> 
+	</script>
 	<script type="text/javascript">
 	<!--
 	var number_of_uploads={config.filesnum};
@@ -43,22 +50,17 @@
 	<script type="text/javascript" src="{STYLE_PATH}javascript.js"></script>
 	{EXTRA_CODE_META}
 </head>
-
 <body>
-
 <!-- start logo -->
 <div id="logobody">
 	<div class="logo">
-		<a href="{config.siteurl}">
-			<img src="{STYLE_PATH}images/logo.png" alt="{config.sitename}" style="border:0px" />
-		</a>
+		<a href="{config.siteurl}"><img src="{STYLE_PATH}images/logo.png" alt="{config.sitename}" style="border:0px" /></a>
 	</div>
 </div>
 <!--  # End  logo -->
 
-<!-- start clear  -->
+<!-- clear  -->
 <div class="clr"></div>
-<!-- end clear  -->
 
 <!-- start top menu  -->
 <div id="top_menu">
@@ -74,24 +76,21 @@
 </div>
 <!--  # End  top menu -->
 
-<!-- start clear  -->
+<!-- clear  -->
 <div class="clr"></div>
-<!-- end clear  -->
 
 <!-- start wrapper -->
 <div id="wrapper">
 
 <IF NAME="extras.header">
-<!-- start extras header  -->
+<!-- extras header  -->
 <div class="extras_header">{extras.header}</div>
-<!-- start extras header  -->
 </IF>
 
-<!-- start clear  -->
+<!-- clear  -->
 <div class="clr"></div>
-<!-- end clear  -->
 
-<!-- start  menu right -->
+<!-- start menu right -->
 <div id="right_menu">
 	<div class="list">
 		<ul>
@@ -116,4 +115,4 @@
 		<a class="css" title="CSS" onclick="window.open(this.href,'_blank');return false;" href="http://jigsaw.w3.org/css-validator/check/referer?profile=css3"><img src="{STYLE_PATH}images/css.gif" alt="CSS" /></a>
 	</div>
 </div>
-<!--  # End  menu right -->
+<!-- # End menu right -->

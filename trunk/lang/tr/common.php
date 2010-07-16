@@ -149,6 +149,7 @@ $lang = array_merge($lang, array(
 	'FILENAME' 				=> 'Dosya ismi',
 	'FILESIZE' 				=> 'Dosya Boyutu',
 	'FILETYPE' 				=> 'Dosya tipi',
+	'FILEDATE' 				=> 'Yüklenme tarihi',
 	'LAST_DOWN' 			=> 'Son indirilen',
 	'FILEUPS' 				=> 'Indirilme sayısı',
 	'FILEREPORT' 			=> 'Kurallara haykırı dosyayı ihbar et',

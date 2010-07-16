@@ -146,6 +146,7 @@ $lang = array_merge($lang, array(
 	'FILESIZE' 				=> 'Veľkosť súboru',
 	'FILETYPE' 				=> 'Typ súboru',
 	'LAST_DOWN' 			=> 'Posledné stiahnuté',
+	'FILEDATE' 				=> 'Dátum nahratia súboru',
 	'FILEUPS' 				=> 'Počet stiahnutí',
 	'FILEREPORT' 			=> 'Nahlásiť porušenie podmienok',
 	'FILE_NO_FOUNDED' 		=> 'Súbor nebol nájdený..',

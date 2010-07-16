@@ -143,6 +143,7 @@ $lang = array_merge($lang, array(
 	'FILENAME' 				=> 'اسم الملف',
 	'FILESIZE' 				=> 'حجم الملف',
 	'FILETYPE' 				=> 'نوع الملف',
+	'FILEDATE' 				=> 'تاريخ الرفع',
 	'LAST_DOWN' 			=> 'آخر تحميل',
 	'FILEUPS' 				=> 'عدد التحميلات',
 	'FILEREPORT' 			=> 'ملف مخالف  : إرسال بلاغ مخالفة',

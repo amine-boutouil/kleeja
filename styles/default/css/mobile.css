@@ -7,6 +7,16 @@
 # Author: Tar3Q  
 # Date: 7-14-2010 $
 */
+@charset "utf-8";
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-weight:inherit;font-style:inherit;font-size:inherit;font-family:inherit;vertical-align:baseline;}
+body{overflow-x:hidden;}
+img{vertical-align:middle;}
+#mmtail{border-top:1px solid #b8b8b8;background:#cfcfcf;clear:both;position:relative;font-family:arial,helvetica,sans-serif;font-size:small;padding:5px 4px;text-align:left;}
+#mmtail a:link, #mmtail a:active, #mmtail a:visited{color:#434343;}
+#full_site{position:absolute;right:4px;}
+/* Deprecated */
+#mmheader ul li{display:inline;margin-right:5px;}
+#mmtail p{margin:0;padding:0;display:inline;}
 
 /* mobile styles */
 @media handheld {
@@ -18,15 +28,16 @@
 	a:hover, a:active {text-decoration: underline;color: #660066;}
 	h2 {font-size: 13px;color:#EF5E00;margin: 5px 0;}
 	p, ul, ol {line-height:100%;}
-	.title-x {font-size:85%;}
+	.title {font-size:85%;}
 	#footer,.safe_code {display:none;}
 	.logo {	max-width:200px;}
-	#top_menu {width: 100%;}
-	#top_menu .m3nu li {font-size:xx-small;}
+	.top_nav {width: 100%;}
+	.top_nav .menu li {font-size:xx-small;}
 	#content {width:60%;padding:0;margin:4px auto;}
 	#right_menu{width:22%;}
 	#right_menu .list{width:18%;}
-	#content_index_body  {width:72%;padding:0;}
+	#content_index  {width:72%;padding:0;}
 }
 /* iPhone-specific styles */
 @media only screen and (max-device-width: 480px) {html {webkit-text-size-adjust: none;}}
+@media only screen and (max-device-width:480px) { body {-webkit-text-stroke:0 black; } } /* Undo the fix for Mobile Safari */

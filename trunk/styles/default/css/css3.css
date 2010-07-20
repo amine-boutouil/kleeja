@@ -1,69 +1,62 @@
-/*
-# package Kleeja
-# version 1.0.0
-# copyright (c) 2007 Kleeja.com
-# license ./docs/license.txt
-# Filename : styles/default/css3.css
-# Author: Tar3Q  
-# Date:: 2009-10-07  $
-*/
-input, textarea, select{
-	-moz-box-shadow: 1px 1px 2px #ECCEBB;
-	-webkit-box-shadow: 1px 1px 2px #ECCEBB;
-	-khtml-box-shadow: 1px 1px 2px #ECCEBB;
-	box-shadow: 1px 1px 2px #ECCEBB;
-}
-input[type="file"]{
-	-moz-box-shadow: 0px 0px 0px #ffffff;
-	-webkit-box-shadow: 0px 0px 0px #ffffff;
-	-khtml-box-shadow: 0px 0px 0px #ffffff;
-	box-shadow: 0px 0px 0px #ffffff;
-}
-
-h2, .title-x, .kleeja, .wolcome_msg  {
-	text-shadow : rgb(247, 247, 247) 0 1px;
-} 
-.tabbertab {	
-	-moz-border-radius-bottomleft :10px; /* Mozilla */
-	-webkit-border-bottom-left-radius : 10px; /* Webkit */
-	border-bottom-left-radius : 10px; /* CSS3 only */
+@charset "UTF-8";
+/*	--------------------------------------------------
+	Theme Name: 	default V1
+	package:		Kleeja  copyright(c)2007-2010
+	version:		1.0.0
+	URL:			http://www.kleeja.com
+	Date:			2010-07-10
+	Author: 		Tar3Q
+	-------------------------------------------------- */
 	
-	-moz-border-radius-bottomright : 10px;
-	-webkit-border-bottom-right-radius : 10px;
-	border-bottom-right-radius : 10px;	
-}
+	/* @iPhone -------------- */
+	@media screen and (max-device-width: 480px) { html { -webkit-text-size-adjust: none; } }
+	
+	/* @Snow Leopard Safari Type Fix -------------- */
+	body {-webkit-text-stroke: 1px rgba(255,255,255,.01); }
+	
+	/* @Get fancy with rounded corners -------------- */
+	table thead tr th:first-child { -webkit-border-top-left-radius: 5px; -moz-border-radius: 3px 0 0 0; }
+	table thead tr th:last-child { -webkit-border-top-right-radius: 5px; -moz-border-radius: 0 3px 0 0; }
+	table tbody tr:last-child td:first-child { -webkit-border-bottom-left-radius: 5px; -moz-border-radius: 0 0 0 3px; }
+	table tbody tr:last-child td:last-child { -webkit-border-bottom-right-radius: 5px; -moz-border-radius: 0 0 3px 0; }
+	
+	button::-moz-focus-inner { border: 0; padding: 0; }
+	
+	body {text-shadow: 0 0 2px #fff;}
+	
+input, textarea, select{
+	-moz-box-shadow: 0px 0px 8px #ECCEBB;-webkit-box-shadow: 0px 0px 8px #ECCEBB;
+	-khtml-box-shadow: 0px 0px 8px #ECCEBB;box-shadow: 0px 0px 8px #ECCEBB;
+	}
+input[type="text"]:hover,input[type="text"]:focus, textarea:focus, textarea:hover,input[type="password"]:hover,input[type="password"]:focus,select:hover,select:focus{
+	-moz-box-shadow:0 0 5px #D26900;-webkit-box-shadow:0 0 5px #D26900;box-shadow:0 0 5px #D26900;
+	}
+.top_nav .menu li a.current,#right_menu .list a,#right_menu .list a.current,.guide_user_th, .guide_visitor_th,.tit ,.file_cp thead th ,.tabledata thead th,
+#footer .admin_cp_link span,#boxfileuser .public{
+	text-shadow: 0 0 2px #444;
+	}
+.tabbertab {	
+	-moz-border-radius-bottomleft :5px;-webkit-border-bottom-left-radius : 5px;border-bottom-left-radius : 5px; 
+	-moz-border-radius-bottomright : 5px;-webkit-border-bottom-right-radius : 5px;border-bottom-right-radius : 5px;
+	}
 ul.tabbernav li a{
-	-moz-border-radius-topleft : 10px;
-	-webkit-border-top-left-radius : 10px;
-	border-top-right-radius : 10px;
-	-moz-border-radius-topright : 10px;
-	-webkit-border-top-right-radius : 10px;
-	border-top-left-radius : 10px;
-}
-#boxfileuser .box_user, #boxfileuser .us3r_n4me, .pagination a, .pagination span.current, .pagination span.three_dots  {
-	-moz-border-radius : 20px; /* Mozilla */
-	-webkit-border-radius : 20px; /* Webkit */
-	-khtml-border-radius : 20px; /* Konqueror */
-	border-radius : 20px; /* CSS3 only */
-}
-#footer .footerlinksleft ul li a:hover, #footer .Copyrights  a:hover, #footer .page_stats a:hover, .onlineall, .onlinevisitor, .onlineusers, .name_users {
-	-moz-border-radius : 5px; /* Mozilla */
-	-webkit-border-radius : 5px; /* Webkit */
-	-khtml-border-radius : 5px; /* Konqueror */
-	border-radius : 5px; /* CSS3 only */
-}
-#content, .download a, .admin_cp_link span, .user_box, .guide_user_th , .guide_visitor_th, .user_img, .visitor_img , .inputbody, .data_file, .data_file_down {
-	-moz-border-radius : 10px; /* Mozilla */
-	-webkit-border-radius : 10px; /* Webkit */
-	-khtml-border-radius : 10px; /* Konqueror */
-	border-radius : 10px; /* CSS3 only */
-}
-#content{
-	-moz-box-shadow : 2px 2px 4px #777; /* Mozilla */
-	-webkit-box-shadow : 2px 2px 4px #777; /* Webkit */
-	-khtml-box-shadow : 2px 2px 4px #777; /* Konqueror */
-	box-shadow : 2px 2px 4px #777; /* CSS3 only */
-}
-
-/* iPhone */
-@media screen and (max-device-width: 480px) { html { -webkit-text-size-adjust: none; } }
+	-moz-border-radius-topleft : 5px;-webkit-border-top-left-radius : 5px;border-top-right-radius : 5px;
+	-moz-border-radius-topright : 5px;-webkit-border-top-right-radius : 5px;border-top-left-radius : 5px;
+	}
+.pagination a, .pagination span.current, .pagination span.three_dots, #footer .footerlinksleft ul li a:hover, #footer .Copyrights  a:hover, #footer .page_stats a:hover, .onlineall, .onlinevisitor, .onlineusers,
+.forget_pass,#profile .boxdata,.name_users ,#boxfileuser .box_user, #boxfileuser .us3r_n4me,.data_file,
+ .data_file_down,.data_file_down .download  a {
+	-moz-border-radius : 5px;-webkit-border-radius : 5px;-khtml-border-radius : 5px;border-radius : 5px; }
+#content, .admin_cp_link span, .user_img, .visitor_img  {
+	-moz-border-radius : 10px;-webkit-border-radius : 10px;-khtml-border-radius : 10px;border-radius : 10px;
+	}
+#content, .tabbertab, ul.tabbernav li a, #footer a.admin_cp_link,select,.data_file .data_menu tr,.data_file .filereport {
+	-moz-box-shadow : 0px 0px 5px #FFFFFF;-webkit-box-shadow : 0px 0px 5px #FFFFFF; 
+	-khtml-box-shadow : 0px 0px 5px #FFFFFF;box-shadow : 0px 0px 5px #FFFFFF;
+	}
+.onlineall, .onlinevisitor, .onlineusers, .name_users,.guide_user_th, .guide_visitor_th,.user_box,.forget_pass,#footer .admin_cp_link span,#profile .boxdata,.file_cp,#boxfileuser .box_user, .tabledata,
+#boxfileuser .us3r_n4me,.data_file, .data_file_down,.data_file_down .download  a {
+	-moz-box-shadow : 0px 0px 3px #999;-webkit-box-shadow : 0px 0px 3px #999; 
+	-khtml-box-shadow : 0px 0px 3px #999;box-shadow : 0px 0px 3px #999;
+	}
+.pagination a:hover ,.pagination span.current{-moz-box-shadow:0 0 6px #fff;-webkit-box-shadow:0 0 6px #fff;box-shadow:0 0 6px #fff;}

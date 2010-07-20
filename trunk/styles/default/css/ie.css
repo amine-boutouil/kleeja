@@ -1,3 +1,8 @@
+html {
+      background : url(null) fixed no-repeat;
+     }
+
+	
 .tabbertab {	border-right:1px solid #bbb;border-left:1px solid #bbb;border-bottom:1px solid #aaa;border-top:none;}
 ul.tabbernav li a{border-right:1px solid #aaa;border-left:1px solid #aaa;border-bottom:0;border-top:1px solid #bbb;}
 .safe_code ,.call,.register,.get_password,.tabbertab{width:94%;}
@@ -7,5 +12,19 @@ ul.tabbernav li a{border-right:1px solid #aaa;border-left:1px solid #aaa;border-
 }
 input[type="submit"]{
 	cursor: pointer;
-	padding:0;
 }
+#wrapper {
+position: relative;
+z-index: inherit;
+zoom: 1; /* For IE6 */
+}
+#content {
+
+}
+
+.box1 {
+border:1px solid #fff;
+-moz-border-radius: 11px;
+	-webkit-border-radius: 11px;
+	border-radius: 11px;
+};

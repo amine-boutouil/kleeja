@@ -8,11 +8,16 @@
 	# Author: Tar3Q  
 	# Date:: 2009-12-17  $
 */
+img {-ms-interpolation-mode:bicubic;#} /* ! */
+*::selection {background:#E6E5C3;color:#291F16}
+*::-moz-selection {background:#E6E5C3;color:#291F16}
+* {padding:0;margin:0}
 
 body {height:100%;width: 100%; margin:0; padding:0; background:#E7E7DC url(../images/box/bg.jpg) repeat-x;color: #3D3D3D; font-weight:normal;font-size:12px;font-family : Tahoma, Arial, Verdana, sans-serif, "Lucida Grande", "Lucida Sans Unicode";}
 h2 {	line-height:25px; padding:6px;background:#fff url(../images/message-bar.png) repeat-x;color: #FD6812;font-size:160%;}
 h6 {	line-height:20px;padding:3px;color: #444; font-size:115%; font-weight:400;}
 li {list-style: none;}
+p {line-height: 150%;}
 ul{margin: 0 0 4px 0;line-height: 26px;}
 img {border:0px;}
 small{font-size:xx-small;}
@@ -97,14 +102,37 @@ tr:hover {background-color:#FFFFDD;}
 /* start Main Menu */
 #main_menu,#menu_thumbnail{float:right; width:26%; padding:10px; background: #EFE7B8;border: 4px solid #FEA53D;}
 #main_menu .body_menu, #menu_thumbnail .body_menu_thumbnail {text-align:center;}
-	#main_menu .link_menu ,
-	#main_menu .link_current {float: right; height: 60px; width:48%; margin:1px;border:1px solid #D6D6CE;border-top:1px solid #D6D6CE;border-bottom:2px solid #CDCDCD;background: #E2E1DD url(../images/bg-right-menu.jpg) repeat;}
-	#main_menu .link_current {height:57px;background:#FFCC00;border-top: #EB8647 3px solid;border-bottom:#EB8647 3px solid;} 
-	#main_menu .link_current a{	color:#000;} 
+	#main_menu .link_menu ,#main_menu .link_current {
+	float: right; 
+	height: 60px; 
+	width:48%; 
+	margin:1px;
+	border:1px solid #D6D6CE;
+	background: #E2E1DD url(../images/bg-right-menu.jpg) repeat;
+	}
+	#main_menu .link_current {
+	background:#FFCC00;
+	border-color: #EB8647;
+	}
+	#main_menu .link_menu p,#main_menu .link_current p {line-height: 100%;}
+	#main_menu .link_current a{color:#000;} 
 	#main_menu .link_menu a  {background:url(../images/hidbg.png) repeat-x bottom left;display: block;overflow: hidden;font-size:x-small;font-weight: bold;height: 60px;}
 	#main_menu .link_menu img {padding:2px 0 3px 0;}
-	#main_menu .link_menu a:hover{height:56px; color:#000; text-decoration: none;background:#FEF5E2 url(../images/hidbg.png) repeat-x bottom left;border-top: #FEA53D 3px solid;border-bottom: #FEA53D 3px solid;}
-	#main_menu .link_current a:hover{height:56px;text-decoration: none;border:none;cursor:default;background:url(../images/hidbg.png) repeat-x;}
+	#main_menu .link_menu a:hover{
+	height:56px;
+	color:#000;
+	text-decoration: none;
+	background:#FEF5E2 url(../images/hidbg.png) repeat-x bottom left;
+	border-top: #FEA53D 3px solid;
+	border-bottom: #FEA53D 3px solid;
+	}
+	#main_menu .link_current a:hover{
+	height:56px;
+	text-decoration: none;
+	border:none;
+	cursor:default;
+	background:url(../images/hidbg.png) repeat-x;
+	}
 	#main_menu .kbubbles {background-color:#FFB007;color:#fff;margin:2px;padding:2px 0px;font-size:9px;-moz-border-radius : 8px; /* Mozilla */	-webkit-border-radius : 8px; /* Webkit */ -khtml-border-radius : 8px; /* Konqueror */	border-radius : 8px; /* CSS3 only */}
 	
 	/* thumbnail menu */
@@ -204,12 +232,12 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 .table_exts th {background-color:#D2D2D2;padding:4px 2px;vertical-align: middle;border: 1px solid #BCBCBC;line-height:14px;}
 .table_exts td {vertical-align: middle;}
 
-.o_g, .o_g {background-color:#FFD7DD;}
-.o_u, .o_u{background-color:#DDFFD7;}
+.o_g, .o_g {background:#FFD7DD;}
+.o_u, .o_u{background:#DDFFD7;}
 
-.o_all, .o_all:hover {background-color:#F2FFCA;}
-.o_g, .o_g:hover {background-color:#FFD7DD;}
-.o_u, .o_u:hover {background-color:#DDFFD7;}
+.o_all, .o_all:hover {background:#F2FFCA;}
+.o_g, .o_g:hover {background:#FFD7DD;}
+.o_u, .o_u:hover {background:#DDFFD7;}
 .exts {padding: 5px;font-style:italic;font-weight:bold;font-size:12px; color: #0B55C4;}
 
 /*tpl*/

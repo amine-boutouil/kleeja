@@ -1,5 +1,5 @@
 <div id="content">
-<div class="title-x"><strong><a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}</strong></div>
+<div class="title"><strong><a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}</strong></div>
 <div class="clr"></div><div class="line"></div>
 <IF NAME="ERRORS">
 <dl id="system-message">
@@ -19,9 +19,10 @@
 	<label>{lang.URL} : </label>
 	<input class="urlcolor" type="text" name="rurl" value="{url_id}"  readonly="readonly" size="66" style="direction:ltr" />
 	<label>{lang.REASON} : </label>
-	<textarea name="rtext" class="text_area" rows="3" cols="40">{t_rtext}</textarea>
+	<textarea name="rtext" class="text_area" rows="3" cols="42">{t_rtext}</textarea>
 </div>
 <div class="clr"></div>
+
 <!-- start safe code -->				
 <div class="safe_code">
 	<p>{lang.VERTY_CODE}</p>
@@ -37,7 +38,7 @@
 	
 <div class="clr"></div><br />
 <input name="rid" value="{id_d}" type="hidden" />
-<p>{H_FORM_KEYS}</p>
+{H_FORM_KEYS}
 <input type="submit" name="submit" value="{lang.REPORT}" />
 </form>
 <div class="clr"></div>

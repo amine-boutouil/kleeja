@@ -1,21 +1,21 @@
 <!--  Powered by : kleeja  -->
-<div id="content_index_body">
+<div id="content_index">
 
 <!-- start welcome -->
-<h2><img src="{STYLE_PATH}images/Smile.gif" width="20" height="20" alt="{lang.WELCOME}" style="vertical-align:middle;" /> {lang.WELCOME} .. {config.sitename}</h2>
+<h6><img src="{STYLE_PATH}images/Smile.gif" width="20" height="20" alt="{lang.WELCOME}" style="vertical-align:middle;" /> {lang.WELCOME} .. <IF NAME="user_is">[ {username} ]</IF></h6>
 <div class="wolcome_msg">{welcome_msg}</div>
 <!-- ## End welcome -->
 
 <div class="clr"></div>
 
 <IF NAME="info">
-<!-- START  FOR INFORMATION -->
+<!-- START FOR INFORMATION -->
 <div id="system-message">
 <LOOP NAME="info">
 <ul class="{{t}}"><li>{lang.INFORMATION} : <span> {{i}} </span></li></ul>
 </LOOP>
 </div>
-<!-- END  FOR INFORMATION -->
+<!-- END FOR INFORMATION -->
 </IF>
 
 <div class="clr"></div>
@@ -44,7 +44,7 @@
  
 <IF NAME="config.www_url">
 <!-- start uplaod URL -->   
-<div class="bg tabbertab" title="{lang.DOWNLOAD_T}" id="texttype">
+<div class="tabbertab" title="{lang.DOWNLOAD_T}" id="texttype">
 <div class="go_up">
 <LOOP NAME=FILES_NUM_LOOP>
 	<input class="url" type="text" name="file_{{i}}_" id="fileu_{{i}}_" style="{{show}}" size="70" value="{lang.PAST_URL_HERE}" onclick="this.value='';javascript:plus({{i}}, 2);" /><br id="bru_{{i}}_" style="{{show}}" />
@@ -79,28 +79,28 @@
 </form>
 <!-- # END  FOR UPLOAD BOXES -->
 
-<!-- START BOX LOADING -->
-<div id="loadbox">
-	<div class="waitloading">{lang.WAIT_LOADING}</div><div class="clr"></div><br />
-		<img src="{STYLE_PATH}images/loading.gif" alt="loading ..." />
-	<div class="clr"></div><br /><br /><br />
-</div>
-<!-- # END BOX LOADING -->
+	<!-- START BOX LOADING -->
+	<div id="loadbox">
+		<div class="waitloading">{lang.WAIT_LOADING}</div><div class="clr"></div><br />
+			<img src="{STYLE_PATH}images/loading.gif" alt="loading ..." />
+		<div class="clr"></div><br /><br /><br />
+	</div>
+	<!--#END-->
 
-<div class="clr"></div>
+	<div class="clr"></div>
 
 <IF NAME="show_online">
-<!-- START FOR ONLINE -->
-<div class="clr"></div>
-<div class="online">
-<div class="onlineall">{lang.NUMBER_ONLINE} : [ {allnumbers} ]</div>
-<div class="onlinevisitor">{lang.NUMBER_VONLINE} : [ {visitornum} ]</div>
-<div class="onlineusers">{lang.NUMBER_UONLINE} : [ {usersnum} ]</div>
-	<!-- # END FOR ONLINE -->
-	<LOOP NAME="shownames">
-		<div class="name_users"><!--{{seperator}}-->{{name}}</div>
-	</LOOP>
-</div>
+	<!-- START FOR ONLINE -->
+	<div class="clr"></div>
+	<div class="online">
+		<div class="onlineall">{lang.NUMBER_ONLINE} : [ {allnumbers} ]</div>
+		<div class="onlinevisitor">{lang.NUMBER_VONLINE} : [ {visitornum} ]</div>
+		<div class="onlineusers">{lang.NUMBER_UONLINE} : [ {usersnum} ]</div>	
+		<LOOP NAME="shownames">
+			<div class="name_users"><!--{{seperator}}-->{{name}}</div>
+		</LOOP>
+	</div>
+	<!--#END-->
 </IF>
 
 <div class="clr"></div>

@@ -1,62 +1,44 @@
-<!-- start clear  -->
-<div class="clr"></div>
-<!-- end clear  -->
+	<div class="clr"></div>
 
-<IF NAME="extras.footer">
-<!-- begin extra footer -->
-<div class="extras_footer">{extras.footer}</div>
-<!-- # end extra footer -->
-</IF>
+	<IF NAME="extras.footer">
+		<!--START EXTRAS FOOTER-->
+		<div class="dot"></div>
+			<div class="extras_footer">{extras.footer}</div>
+		<div class="dot"></div>
+		<!--# END EXTRAS FOOTER-->
+		<div class="clr"></div>
+	</IF>
+	
+</div><!--# END WRAPPER-->
+</div><!--# END MAIN-->
 
-<!-- start clear  -->
-<div class="clr"></div>
-<!-- end clear  -->
-
-<!-- Start footer template -->
+<!--START FOOTER-->
 <div id="footer">
-
-<div class="dot"></div>
-
-<!-- start clear  -->
-<div class="clr"></div>
-<!-- end clear  -->
-  
-<!-- Start links kleeja -->
-<div class="footerlinksleft">
-  	<ul>
-	<li><a title="{lang.FOOTER_TXTS.BUGS}" onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com/bugs/ar/">Bugs</a> | </li>
-	<li><a title="{lang.FOOTER_TXTS.PLUGINS}" onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com/plugins/">Plugins</a> |</li>
-	<li><a title="{lang.FOOTER_TXTS.STYLES}" onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com/styles/">Styles</a></li>
-  </ul>
-</div>
-<!-- # End links kleeja -->
-
-<div class="Copyrights">{lang.COPYRIGHTS_X} &copy; <a href="{config.siteurl}">{config.sitename}</a></div>
-
-<!--  Powered by : kleeja  -->
-																																																																																																																																																																																																			<!--  Do not remove this notice  --><div class="kleeja">Powered by : <a href="http://www.kleeja.com/" onclick="window.open(this.href,'_blank');return false;">Kleeja</a></div>
-<!-- start clear  -->
-<div class="clr"></div>
-<!-- end clear  -->
-
-<IF NAME="page_stats">
-<div class="page_stats">{page_stats}</div>
-</IF>
-
-<IF NAME="googleanalytics">
-<div class="googleanalytics">{googleanalytics}</div>
-</IF>
-
-<IF NAME="is_admin">
-<!-- start control panel -->
-{admin_page}
-<!-- # end control panel -->
-</IF>
-
-</div>
-<!-- # end  footer template -->
-
-</div>
-<!-- # end  wrapper -->
+    <div class="footer_inner">
+		<div class="left">	
+		<!--  Powered by : kleeja  -->
+																																																																																																																																																																																																		<!--  Do not remove this notice  --><div class="kleeja">Powered by : <a href="http://www.kleeja.com/" onclick="window.open(this.href,'_blank');return false;" title="Powered by Kleeja">Kleeja</a></div>
+		<div class="clr"></div><br />
+		<IF NAME="page_stats"><div class="footer_stats">{page_stats}</div></IF>
+		<IF NAME="googleanalytics"><div class="footer_stats">{googleanalytics}</div></IF>
+        </div>
+		
+		<div class="right">
+		<!--START COPYRIGHTS-->
+			<div class="Copyrights">
+				{lang.COPYRIGHTS_X} &copy; <a href="{config.siteurl}">{config.sitename}</a>
+			</div>
+		<!--# END COPYRIGHTS-->
+	
+		<div class="clr"></div><br />
+		
+		<IF NAME="is_admin">
+			<!--START BUTTON PANEL-->
+			{admin_page}
+			<!--# END BUTTON PANEL-->
+		</IF>
+		</div>
+	</div>
+</div><!--END FOOTER-->
 </body>
 </html>

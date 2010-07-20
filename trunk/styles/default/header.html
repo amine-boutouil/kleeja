@@ -8,8 +8,8 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 	<meta name="copyrights" content="Powered by Kleeja || kleeja.com" />
 	<meta name="author" content="Team Kleeja" />
-	<meta name="Publisher" content="Notepad++" />
 	<!-- metatags.info/all_meta_tags -->
+	<meta name="Publisher" content="Notepad++" />
 	<meta name="description" content="{config.sitename}" />
 	<meta name="Abstract" content="php uploader, upload files, files uploader, kleeja, image uploader" />
 	<meta name="Expires" content="-1" />
@@ -29,7 +29,10 @@
 	</IS_BROWSER>
 	<IS_BROWSER="ie">
 		<link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH}css/ie.css" />
-		<style type="text/css">	body { behavior: url('{STYLE_PATH}ie/csshover3.htc')};</style>
+		<style type="text/css">	
+			 body { behavior: url('{STYLE_PATH}ie/csshover3.htc')};
+			.box1 { behavior: url('{STYLE_PATH}ie/border-radius.htc')};
+		</style>
 	</IS_BROWSER>
 	<IS_BROWSER="mobile">
 		<link rel="stylesheet" type="text/css" href="{STYLE_PATH}css/mobile.css" media="handheld" />
@@ -51,68 +54,69 @@
 	{EXTRA_CODE_META}
 </head>
 <body>
-<!-- start logo -->
-<div id="logobody">
-	<div class="logo">
-		<a href="{config.siteurl}"><img src="{STYLE_PATH}images/logo.png" alt="{config.sitename}" style="border:0px" /></a>
-	</div>
-</div>
-<!--  # End  logo -->
+<!--START MAIN-->
+<div id="main">
 
-<!-- clear  -->
-<div class="clr"></div>
+	<!--START HEADER-->
+	<div id="box_header">
+		<div class="logo">
+			<a href="{config.siteurl}"><img src="{STYLE_PATH}images/logo.png" alt="{config.sitename}" style="border:0px" /></a>
+		</div>
+	</div><!--# END HEADER-->
 
-<!-- start top menu  -->
-<div id="top_menu">
-	<ul class="m3nu">
-		<li><a href="{config.siteurl}" title="{lang.INDEX}" (go_current?:class="current")>{lang.INDEX}</a></li>
-		<li><a href="{_LINKS.rules}" title="{lang.RULES}" (go_current==rules?class="current":)>{lang.RULES}</a></li>
-		<li><a href="{_LINKS.guide}" title="{lang.GUIDE}" (go_current==guide?class="current":)>{lang.GUIDE}</a></li>
-		<IF NAME="config.allow_stat_pg">
-		<li><a href="{_LINKS.stats}" title="{lang.STATS}" (go_current==stats?class="current":)>{lang.STATS}</a></li>
-		</IF>
-		<li><a href="{_LINKS.call}" title="{lang.CALL}" (go_current==call?class="current":)>{lang.CALL}</a></li>
-	</ul>
-</div>
-<!--  # End  top menu -->
+	<div class="clr"></div>
 
-<!-- clear  -->
-<div class="clr"></div>
-
-<!-- start wrapper -->
-<div id="wrapper">
-
-<IF NAME="extras.header">
-<!-- extras header  -->
-<div class="extras_header">{extras.header}</div>
-</IF>
-
-<!-- clear  -->
-<div class="clr"></div>
-
-<!-- start menu right -->
-<div id="right_menu">
-	<div class="list">
-		<ul>
-			<li class="imgtop">&nbsp;</li>
-			<IF NAME="user_is">
-			    <IF NAME="config.enable_userfile">
-				<li><a href="{_LINKS.fileuser}"><img src="{STYLE_PATH}images/user-folder.png" alt="{lang.YOUR_FILEUSER}" style="vertical-align:middle;" />{lang.YOUR_FILEUSER}</a></li>
-				</IF>
-				<li><a href="{_LINKS.filecp}"><img src="{STYLE_PATH}images/filecp.png" alt="{lang.FILECP}" style="vertical-align:middle;" />{lang.FILECP}</a></li>
-				<li><a href="{_LINKS.profile}"><img src="{STYLE_PATH}images/User.png" alt="{lang.PROFILE}" style="vertical-align:middle;" />{lang.PROFILE}</a></li>
-				<li><a href="{_LINKS.logout}"><img src="{STYLE_PATH}images/Go-Out.png" alt="{lang.LOGOUT}" style="vertical-align:middle;" />{lang.LOGOUT} [ {username} ]</a></li>
-			<ELSE>
-				<li><a href="{_LINKS.login}"><img src="{STYLE_PATH}images/Go-Out.png" alt="{lang.LOGIN}" style="vertical-align:middle;" />{lang.LOGIN}</a></li>
-				<IF NAME="config.register"><li><a href="{_LINKS.register}"><img src="{STYLE_PATH}images/User.png" alt="{lang.REGISTER}" style="vertical-align:middle;" />{lang.REGISTER}</a></li></IF>
+	<!--START TOP NAV-->
+	<div class="top_nav">
+		<ul class="menu">
+			<li><a href="{config.siteurl}" title="{lang.INDEX}" (go_current?:class="current")>{lang.INDEX}</a></li>
+			<li><a href="{_LINKS.rules}" title="{lang.RULES}" (go_current==rules?class="current":)>{lang.RULES}</a></li>
+			<li><a href="{_LINKS.guide}" title="{lang.GUIDE}" (go_current==guide?class="current":)>{lang.GUIDE}</a></li>
+			<IF NAME="config.allow_stat_pg">
+			<li><a href="{_LINKS.stats}" title="{lang.STATS}" (go_current==stats?class="current":)>{lang.STATS}</a></li>
 			</IF>
-			<li class="imgbottom">&nbsp;</li>
+			<li><a href="{_LINKS.call}" title="{lang.CALL}" (go_current==call?class="current":)>{lang.CALL}</a></li>
 		</ul>
-	</div>
+	</div><!--# END TOP NAV-->
+
+	<div class="clr"></div>
+
+	<!--START WRAPPER-->
+	<div id="wrapper" class="clearfix">
+
+	<IF NAME="extras.header">
+	<!--START EXTRAS HEADER-->
+	<div class="dot"></div>
+	<div class="extras_header">{extras.header}</div>
+	<div class="dot"></div>
+	<!--END EXTRAS HEADER-->
+	</IF>
+
+	<div class="clr"></div>
+
+	<!--START MENU RIGHT-->
+	<div id="right_menu">
+		<div class="list">
+			<ul>
+				<li class="imgtop">&nbsp;</li>
+				<IF NAME="user_is">
+					<IF NAME="config.enable_userfile">
+					<li><a href="{_LINKS.fileuser}" (go_current==fileuser?class="current":)><img src="{STYLE_PATH}images/user-folder.png" alt="{lang.YOUR_FILEUSER}" style="vertical-align:middle;" />{lang.YOUR_FILEUSER}</a></li>
+					</IF>
+					<li><a href="{_LINKS.filecp}" (go_current==filecp?class="current":)><img src="{STYLE_PATH}images/filecp.png" alt="{lang.FILECP}" style="vertical-align:middle;" />{lang.FILECP}</a></li>
+					<li><a href="{_LINKS.profile}" (go_current==profile?class="current":)><img src="{STYLE_PATH}images/User.png" alt="{lang.PROFILE}" style="vertical-align:middle;" />{lang.PROFILE}</a></li>
+					<li><a href="{_LINKS.logout}" (go_current==logout?class="current":)><img src="{STYLE_PATH}images/Go-Out.png" alt="{lang.LOGOUT}" style="vertical-align:middle;" />{lang.LOGOUT} [ {username} ]</a></li>
+				<ELSE>
+					<li><a href="{_LINKS.login}" (go_current==login?class="current":)><img src="{STYLE_PATH}images/Go-Out.png" alt="{lang.LOGIN}" style="vertical-align:middle;" />{lang.LOGIN}</a></li>
+					<IF NAME="config.register"><li><a href="{_LINKS.register}" (go_current==register?class="current":)><img src="{STYLE_PATH}images/User.png" alt="{lang.REGISTER}" style="vertical-align:middle;" />{lang.REGISTER}</a></li></IF>
+				</IF>
+				<li class="imgbottom">&nbsp;</li>
+			</ul>
+		</div>
 		<div class="clr"></div>
-	<div class="css_xhtml">
-		<a class="xhtml" title="Valid XHTML" onclick="window.open(this.href,'_blank');return false;" href="http://validator.w3.org/check?uri=referer"><img src="{STYLE_PATH}images/xhtml.gif" alt="Valid XHTML" /></a>
-		<a class="css" title="CSS" onclick="window.open(this.href,'_blank');return false;" href="http://jigsaw.w3.org/css-validator/check/referer?profile=css3"><img src="{STYLE_PATH}images/css.gif" alt="CSS" /></a>
+		<div class="css_xhtml">
+			<a class="xhtml" title="Valid XHTML" onclick="window.open(this.href,'_blank');return false;" href="http://validator.w3.org/check?uri=referer"><img src="{STYLE_PATH}images/xhtml.gif" alt="Valid XHTML" /></a>
+			<a class="css" title="CSS" onclick="window.open(this.href,'_blank');return false;" href="http://jigsaw.w3.org/css-validator/check/referer?profile=css3"><img src="{STYLE_PATH}images/css.gif" alt="CSS" /></a>
+		</div>
 	</div>
-</div>
-<!-- # End menu right -->
+	<!--# END MENU RIGHT-->

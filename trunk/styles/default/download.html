@@ -2,7 +2,7 @@
 <div id="content">
 
 <!-- start site name and title  -->
-<div class="title-x"><strong><a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}</strong></div>
+<div class="title"><strong><a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}</strong></div>
 <!--  # End  site name and title  -->
 
 <!-- start line top  -->
@@ -74,7 +74,7 @@ function ti()
     }
     else
     {
-        document.getElementById("url").innerHTML = '<p class="download"><img src="{STYLE_PATH}images/download.gif" alt="download file" style="vertical-align:middle;padding:0 7px;" /><a href="{url_file}" target="balnk">{lang.CLICK_DOWN}<\/a><\/p>';
+        document.getElementById("url").innerHTML = '<p class="download"><a href="{url_file}" target="balnk">{lang.CLICK_DOWN}<\/a><br /><span>{size}<\/span><\/p>';
     }
 }
 //-->

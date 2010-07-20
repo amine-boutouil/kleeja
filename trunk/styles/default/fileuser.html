@@ -1,7 +1,7 @@
 <div id="content">
 
 <!-- start site name and title  -->
-<div class="title-x"><strong><a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}</strong></div>
+<div class="title"><strong><a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}</strong></div>
 <!--  # End  site name and title  -->
 
 <!-- start line top  -->
@@ -13,12 +13,12 @@
 <div id="boxfileuser">
 	<div class="box_user">
 	<img class="right" src="{STYLE_PATH}images/imguser.png" alt="image user" />
-		<div class="public">{lang.PUBLIC_USER_FILES} : </div>
+		<div class="public">{lang.PUBLIC_USER_FILES}</div>
 		<div class="uname">{user_name}</div>
 	</div>
 	<div class="us3r_n4me">
 		<img class="right" src="{STYLE_PATH}images/boxfileuser.png" alt="files number" />
-		<div class="public">{lang.ALL_FILES} : </div>
+		<div class="public">{lang.ALL_FILES}</div>
 		<div class="nums">{nums_rows}</div> 
 	</div>
 	<div class="clr"></div>
@@ -30,28 +30,21 @@
 <IF NAME="filecp_link">
 <!--  start link user  -->
 <div id="filecplink">
-<div class="clr"></div>
-
-<table width="100%">
-	<tr>
-		<td class="copylink"><input readonly="readonly" type="text" value="{lang.COPY_AND_GET_DUD}" /></td>
-		<td class="link_user"><input readonly="readonly" onclick="this.select();" type="text" name="option" value="{your_fileuser}" /></td>
-	</tr>
-</table>
-
-
-
-<div class="clr"></div>
+	<div class="clr"></div>
+		<fieldset>
+			<legend class="copylink">{lang.COPY_AND_GET_DUD}</legend>
+			<input class="link_user" readonly="readonly" onclick="this.select();" type="text" name="option" value="{your_fileuser}" />
+		 </fieldset>
+	<div class="clr"></div>
 </div>
 <!--  # end link user -->
 </IF>
 
-
 <IF NAME="no_results">
 <!--  start no files user -->
 <div id="boxfileuser" style="text-align:center">
-<img src="{STYLE_PATH}images/warning_nofile.png" /><br />
-<h2>{lang.NO_FILE_USER}</h2>
+	<img src="{STYLE_PATH}images/warning_nofile.png" /><br />
+	<h2>{lang.NO_FILE_USER}</h2>
 </div>
 <!--  # end  no files user -->
 

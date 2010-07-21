@@ -1,83 +1,78 @@
-<!-- start Profile template  -->
-<div id="content">
+<!-- Profile template -->
+<div id="content" class="border_radius">
+	<!-- title  -->
+	<div class="title"><strong><a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}</strong></div>
+	<!-- @end -->
 
-<!-- start site name and title  -->
-<div class="title"><strong><a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}</strong></div>
-<!--  # End  site name and title  -->
-
-<!-- start line top  -->
-<div class="clr"></div><div class="line"></div>
-<!-- # End line top  -->
-
-<IF NAME="ERRORS">
-<!-- start error msg  -->
-<dl id="system-message">
-<dd class="error">
-<ul><li>
-<LOOP NAME="ERRORS">
-<strong>{lang.INFORMATION} : </strong>{%value%}<br />
-</LOOP>
-</li></ul>
-</dd>
-</dl>
-<!-- # end error msg  -->
-</IF>
-
-<IF NAME="data_forum">
-<form action="{action}" method="post">
-
-<!-- start profile  -->
-<div id="profile">
-
-<div class="boxdata">
-	<p class="tit">{lang.EDIT_U_DATA}</p>
-	<p class="pq">{lang.USERNAME}</p>
-	<p class="biguser">{name}</p>
-	<p class="pq">{lang.SHOW_MY_FILECP}</p>
-	<p><select name="show_my_filecp">
-		<option value="1" <IF NAME="show_my_filecp.show_my_filecp==1">selected="selected"</IF> >{lang.YES}</option>
-		<option value="0" <IF NAME="show_my_filecp.show_my_filecp==0">selected="selected"</IF> >{lang.NO}</option>
-	   </select>
-	</p>
-</div>
-		
-<div class="boxdata">
-	<p class="tit">{lang.EMAIL}</p>
-    <p class="pq">{lang.PASSWORD}</p>
-	<p class="in"><input type="password" name="pppass_old" value="{t_pppass_old}" /></p>
-    <p class="pq">{lang.EMAIL}</p>
-	<p class="in"><input type="text" name="pmail" value="{mail}" style="direction:ltr" /></p>
-</div>
+	<!-- line top -->
+	<div class="line"></div>
+	<!-- @end -->
 	
-<div class="boxdata">
-	<p class="tit">{lang.PASS_ON_CHANGE}</p>
-	<p class="pq">{lang.OLD}</p>
-	<p class="in"><input type="password" name="ppass_old" value="{t_ppass_old}" /></p>
-	
-	<p class="pq">{lang.NEW}</p>
-	<p class="in"><input type="password" name="ppass_new" value="{t_ppass_new}" /></p>
-	
-	<p class="pq">{lang.NEW_AGAIN}</p>
-	<p class="in"><input type="password" name="ppass_new2" value="{t_ppass_new2}" /></p>
-		 
-	<p>{H_FORM_KEYS}</p>		
-</div>
+	<IF NAME="ERRORS">
+	<!-- msg, Infos & Alerts & Errors -->
+	<dl id="system-message">
+		<dd class="error">
+			<ul>
+				<li>
+				<LOOP NAME="ERRORS">
+				<strong>{lang.INFORMATION} : </strong>{%value%}<br />
+				</LOOP>
+				</li>
+			</ul>
+		</dd>
+	</dl>
+	<!-- @end -->
+	</IF>
 
-<div class="clr"></div>
-		
-<!--  button  -->
-<div class="buttons_center"><input type="submit" name="submit_data" value="{lang.EDIT_U_DATA}" /></div>
-<!-- # button  -->	
-	
-</div>	
-<!-- # End profile -->
+	<IF NAME="data_forum">
+	<!-- profile -->
+	<form action="{action}" method="post">
+	<div id="profile">
+		<div class="boxdata">
+			<h6 class="tit">{lang.EDIT_U_DATA}</h6>
+			<label class="pq">{lang.USERNAME}</label>
+			<h2 class="biguser">{name}</h2>
+			<label class="pq">{lang.SHOW_MY_FILECP}</label>
+			<select name="show_my_filecp">
+				<option value="1" <IF NAME="show_my_filecp.show_my_filecp==1">selected="selected"</IF> >{lang.YES}</option>
+				<option value="0" <IF NAME="show_my_filecp.show_my_filecp==0">selected="selected"</IF> >{lang.NO}</option>
+			 </select>
+		</div>
+				
+		<div class="boxdata">
+			<h6 class="tit">{lang.EMAIL}</h6>
+			<label class="pq">{lang.PASSWORD} :</label>
+			<input type="password" name="pppass_old" value="{t_pppass_old}" tabindex="1" />
+			<label class="pq">{lang.EMAIL} :</label>
+			<input type="text" name="pmail" value="{mail}" style="direction:ltr" tabindex="2" />
+		</div>
+			
+		<div class="boxdata">
+			<h6 class="tit">{lang.PASS_ON_CHANGE}</h6>
+			<label class="pq">{lang.OLD} :</label>
+			<input type="password" name="ppass_old" value="{t_ppass_old}" tabindex="3" />
+			<label class="pq">{lang.NEW} :</label>
+			<input type="password" name="ppass_new" value="{t_ppass_new}" tabindex="4" />
+			<label class="pq">{lang.NEW_AGAIN} :</label>
+			<input type="password" name="ppass_new2" value="{t_ppass_new2}" tabindex="5" />
+			{H_FORM_KEYS}
+		</div>
 
-</form>
-<ELSE>
-<div class="buttons_center"><a href="{goto_forum_link}">{lang.PFILE_4_FORUM}</a></div>
-</IF>
- 
-<div class="clr"></div>
-   
+		<div class="clr"></div>
+				
+		<!-- button -->
+		<div class="buttons_center"><input type="submit" name="submit_data" value="{lang.EDIT_U_DATA}" tabindex="6" /></div>
+		<!-- @end -->		
+	</div>	
+	</form>
+	<!-- @end -->
+	
+	<ELSE>
+	
+	<div class="buttons_center"><a href="{goto_forum_link}">{lang.PFILE_4_FORUM}</a></div>
+	
+	</IF>
+	 
+	<div class="clr"></div>
 </div>
-<!-- ## End Profile template  -->
+<!-- @end -->

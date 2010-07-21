@@ -1,4 +1,3 @@
-<!-- javascripts -->
 <script type="text/javascript">
 <!--
 	function confirm_from()
@@ -12,81 +11,80 @@
 //-->
 </script>
 
-<!-- start control files user template  -->
-<div id="content">
+<!-- File Manager users -->
+<div id="content" class="border_radius">
 
-<!-- start site name and title  -->
-<div class="title"><strong><a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}</strong></div>
-<!--  # End  site name and title  -->
+	<!-- title  -->
+	<div class="title"><strong><a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}</strong></div>
+	<!-- @end -->
 
-<!-- start line top  -->
-<div class="clr"></div><div class="line"></div>
-<!-- # End line top  -->
+	<!-- line top -->
+		<div class="line"></div>
+		<br />
+	<!-- @end -->
 	
-<!--  start form user control panel  Files  -->	
-<form name="c" action="{action}" method="post" onsubmit="javascript:return confirm_from();">
-<IF NAME="no_results">
+	<!-- form Files users -->	
+	<form name="c" action="{action}" method="post" onsubmit="javascript:return confirm_from();">
+	<IF NAME="no_results">
 
-<!--  start no files user -->
-<div id="boxfileuser" style="text-align:center">
-<img src="{STYLE_PATH}images/warning_nofile.png" /><br />
-<h2>{lang.NO_FILE_USER}</h2>
-</div>
-<!--  # end  no files user -->
+	<!-- msg, no files user -->
+	<div id="boxfileuser" style="text-align:center">
+		<img src="{STYLE_PATH}images/warning_nofile.png" /><br />
+		<h1>{lang.NO_FILE_USER}</h1>
+	</div>
+	<!-- @end -->
 
-<ELSE>
+	<ELSE>
 
-<!--  start table files  -->	
-<table class="file_cp">
-	<thead>
-		<tr>
-			<th>#</th>	
-			<th>/</th>
-			<th class="odd">{lang.FILENAME}</th>
-			<th><a href="javascript:void(0);" onclick="checkAll(document.c, '_del', 'su');" title="{lang.CHECK_ALL}">{lang.DELETE}</a></th>
-		</tr>	
-	</thead>
-	
-	<tfoot>	
-		<tr>
-			<th colspan="3" class="nbr">{lang.ALL_FILES} [ {nums_rows} ] {lang.FILE}</th>
-			<th class="checkall"><a href="javascript:void(0);" onclick="checkAll(document.c, '_del', 'su');" title="{lang.CHECK_ALL}">{lang.CHECK_ALL}</a></th>
-		</tr>
-	</tfoot>
-	
-	<tbody>
-		<LOOP NAME="arr">	
-		<tr id="su[{{id}}]">
-			<td>{{i}}</td>
-			<td style="vertical-align:middle;"><img src="{{icon_link}}" alt="{{file_type}}" /></td>
-			<td class="odd">{{name}}</td>
-			<td style="vertical-align:middle;"><input type="checkbox" name="del_{{id}}" value="{{id}}" onclick="change_color(this,'su[{{id}}]');" rel="_del" /></td>
-		</tr>
-		</LOOP>
-	</tbody>
-	
-</table>
-<!--  # end table files  -->	
+	<!-- table files  -->	
+	<table class="file_cp">
+		<thead>
+			<tr>
+				<th>#</th>	
+				<th>/</th>
+				<th class="odd">{lang.FILENAME}</th>
+				<th><a href="javascript:void(0);" onclick="checkAll(document.c, '_del', 'su');" title="{lang.CHECK_ALL}">{lang.DELETE}</a></th>
+			</tr>	
+		</thead>
+		
+		<tfoot>	
+			<tr>
+				<th colspan="3" class="nbr">{lang.ALL_FILES} [ {nums_rows} ] {lang.FILE}</th>
+				<th class="checkall"><a href="javascript:void(0);" onclick="checkAll(document.c, '_del', 'su');" title="{lang.CHECK_ALL}">{lang.CHECK_ALL}</a></th>
+			</tr>
+		</tfoot>
+		
+		<tbody>
+			<LOOP NAME="arr">	
+			<tr id="su[{{id}}]">
+				<td>{{i}}</td>
+				<td style="vertical-align:middle;"><img src="{{icon_link}}" alt="{{file_type}}" /></td>
+				<td class="odd">{{name}}</td>
+				<td style="vertical-align:middle;"><input type="checkbox" name="del_{{id}}" value="{{id}}" onclick="change_color(this,'su[{{id}}]');" rel="_del" /></td>
+			</tr>
+			</LOOP>
+		</tbody>
+		
+	</table>
+	<!-- @end -->	
 
+	<div class="clr"></div><br />
 
-<div class="clr"></div><br />
+	<!-- pagination   -->
+	{page_nums}
+	<!-- @end -->
 
-<!--  start pagination   -->
-{page_nums}
-<!--  # end pagination  -->
+	{H_FORM_KEYS}
 
+	<!-- button -->
+	<div class="left_button"><input type="submit" name="submit_files" value="{lang.DEL_SELECTED}" /></div>
+	<!-- @end -->
 
-{H_FORM_KEYS}
+	</IF>
+	</form>
+	<!-- @end -->
 
-<!--  start button filecp   -->
-<div class="left_button"><input type="submit" name="submit_files" value="{lang.DEL_SELECTED}" /></div>
-<!--  # end button filecp   -->
-
-</IF>
-</form>
-<!--  end form user control panel  Files  -->	
-
-<div class="clr"></div><br />
+	<div class="clr"></div>
    
 </div>
- <!-- # End  control files user template  -->       
+<!-- @end -->     

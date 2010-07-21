@@ -44,18 +44,17 @@ ul.tabbernav li a{
 	-moz-border-radius-topright : 5px;-webkit-border-top-right-radius : 5px;border-top-left-radius : 5px;
 	}
 .pagination a, .pagination span.current, .pagination span.three_dots, #footer .footerlinksleft ul li a:hover, #footer .Copyrights  a:hover, #footer .page_stats a:hover, .onlineall, .onlinevisitor, .onlineusers,
-.forget_pass,#profile .boxdata,.name_users ,#boxfileuser .box_user, #boxfileuser .us3r_n4me,.data_file,
- .data_file_down,.data_file_down .download  a {
+.forget_pass,#profile .boxdata,.name_users ,#boxfileuser .box_user, #boxfileuser .us3r_n4me, .data_file_down .download  a {
 	-moz-border-radius : 5px;-webkit-border-radius : 5px;-khtml-border-radius : 5px;border-radius : 5px; }
-#content, .admin_cp_link span, .user_img, .visitor_img  {
+.border_radius, .admin_cp_link span, .user_img, .visitor_img  {
 	-moz-border-radius : 10px;-webkit-border-radius : 10px;-khtml-border-radius : 10px;border-radius : 10px;
 	}
-#content, .tabbertab, ul.tabbernav li a, #footer a.admin_cp_link,select,.data_file .data_menu tr,.data_file .filereport {
+.border_radius, .tabbertab, ul.tabbernav li a, #footer a.admin_cp_link,select,.data_file .filereport {
 	-moz-box-shadow : 0px 0px 5px #FFFFFF;-webkit-box-shadow : 0px 0px 5px #FFFFFF; 
 	-khtml-box-shadow : 0px 0px 5px #FFFFFF;box-shadow : 0px 0px 5px #FFFFFF;
 	}
 .onlineall, .onlinevisitor, .onlineusers, .name_users,.guide_user_th, .guide_visitor_th,.user_box,.forget_pass,#footer .admin_cp_link span,#profile .boxdata,.file_cp,#boxfileuser .box_user, .tabledata,
-#boxfileuser .us3r_n4me,.data_file, .data_file_down,.data_file_down .download  a {
+#boxfileuser .us3r_n4me, .data_file_down .download  a {
 	-moz-box-shadow : 0px 0px 3px #999;-webkit-box-shadow : 0px 0px 3px #999; 
 	-khtml-box-shadow : 0px 0px 3px #999;box-shadow : 0px 0px 3px #999;
 	}

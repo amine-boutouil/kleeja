@@ -18,13 +18,3 @@ position: relative;
 z-index: inherit;
 zoom: 1; /* For IE6 */
 }
-#content {
-
-}
-
-.box1 {
-border:1px solid #fff;
--moz-border-radius: 11px;
-	-webkit-border-radius: 11px;
-	border-radius: 11px;
-};

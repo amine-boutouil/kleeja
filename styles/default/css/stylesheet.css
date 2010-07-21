@@ -42,7 +42,7 @@
 	1. HTML Tags
 	-------------------------------------------------- */
 	html, body {margin: 0; padding: 0;}
-	body {text-align:justify;color:#444;	font-family: Tahoma, Arial, Verdana, sans-serif, "Lucida Grande", "Lucida Sans Unicode"; font-size: 12px;}
+	body {text-align:justify;color:#474747;	font-family: Tahoma, Arial, Verdana, sans-serif, "Lucida Grande", "Lucida Sans Unicode"; font-size: 12px;}
 	h1, h2, h3, h4, h5, h6 { color: #333; font-weight: bold; margin: 5px 0;}
 	h1, h2, h3, h4 { line-height: 1;}
 	h5, h6 { line-height: 18px;}
@@ -53,7 +53,7 @@
 	h5 { font-size: 14px;}
 	h6 { font-size: 12px;color:#FF6A15;}
 	p { line-height: 18px; margin: 0 0 10px; }
-	strong {font-weight: bold; color: #111;}
+	strong {font-weight: bold; color: #FF5502;}
 	small {font-size: 90%; line-height: inherit; color: #444; font-weight: normal; }
 	em {font-style:italic;}
 	p img {margin: 0;}
@@ -74,7 +74,7 @@
 	/* @group Forms -------------- */
 	form {margin-bottom:10px; }
 	fieldset {  }
-	label {display: block;font-size: 11px; font-weight: bold; line-height: 18px; cursor: pointer; padding:4px 0; }
+	label {display: block;line-height: 18px; cursor: pointer; padding:4px 0; }
 	input, textarea, select, option, input[type="text"], input[type="password"], input[type="file"],input[type="submit"] {font:normal 12px Tahoma, Arial, Verdana, sans-serif, "Lucida Grande", "Lucida Sans Unicode"; }	
 	select, option{cursor: pointer;vertical-align: middle;	width:auto;padding:1px 5px;}
 	textarea ,select {border:1px solid #aaa;}
@@ -109,7 +109,7 @@
 	img.left {float:left;}
 	img.right {float:right;}
 	
-	.clr {clear:both;overflow:hidden;height:0;}
+	.clr,.line  {clear:both;overflow:hidden;height:0;}
 	.dot {padding:5px 0;background: url(../images/bg_dots.gif) repeat-x;}
 	.line {background:url(../images/line.png) repeat-x right top;height:6px;	margin:1px;}
 	
@@ -136,11 +136,11 @@
 	.title a:link {color:#C95A12;}
 	.title a:hover {color:#000;}
 	
-	/* safe code */
-	.safe_code {	margin:3px 0;padding: 15px;border:1px solid #ECCEBB;background:#F9F5F0 url(../images/saf3_code01.gif) no-repeat 0% 50%;}
-	.safe_code p {line-height:10px;color:#FF5502;padding-bottom:5px;}
+	/* verification code */
+	.safe_code {	margin:10px 0;padding: 10px;border:1px solid #F3C1A3;background:#F9F9F0 url(../images/saf3_code01.gif) no-repeat 0% 50%;}
+	.safe_code p {line-height:10px;color:#FF5502;font-size:90%;font-weight:700;}
 	.safe_code input[type="text"]{padding:4px;text-transform:lowercase;direction:ltr;}
-	p.explain {font-size:x-small;font-weight: normal;color:#444;	text-indent:4px;padding-top:5px;}
+	p.explain {font-size:x-small;font-weight: normal;color:#666;	text-indent:4px;padding-top:5px;}
 	
 	/* extras header and extras footer */
 	.extras_header, .extras_footer {	clear:both;	width:100%;overflow:hidden;	margin:5px auto;padding:10px 0;text-align:center;}
@@ -168,7 +168,7 @@
 	dd.error ul li{color:#c00;background: url(../images/error.png) no-repeat right top;}
 
 	/* Only Index */
-	ul.index_info {border-top: 3px solid #8D8D8D;border-bottom: 3px solid #8D8D8D;color:#333;background:#ccc;}
+	ul.index_info {border-top: 3px solid #FEA53D;border-bottom: 3px solid #FEA53D;background:#EFE7B8;}
 	ul.index_info  li {background:url(../images/info_f.gif) no-repeat right top;}
 	
 	ul.index_err {border-top: 3px solid #DE7A7B;border-bottom: 3px solid #DE7A7B;color:#c00;background:#E6C0C0;}
@@ -181,9 +181,8 @@
 	body {width:100%;height:100%;background: #ececec url(../images/bg_body.png) repeat-x top center;}
 	#main {width:960px;background:url(../images/bg_main.png) no-repeat top right;margin:10px auto;}
 	#wrapper {height:100%;padding:10px 35px;}
-	#content {float:left;width:600px;padding:10px 30px;margin:10px 30px 10px 0;
-	background:#DFDFDF url(../images/bg_content.png) repeat-x;border:1px solid #aaa;}
-	#content_index {float:left;padding:10px 30px;width:600px;}
+	#content {float:left;width:600px;padding:10px 30px;margin:10px 30px 10px 0;background:#DFDFDF url(../images/bg_content.png) repeat-x;border:1px solid #aaa;}
+	#content_index {float:left;padding:10px 30px;width:600px;margin:0 30px 0 0;}
 /* @end */
 	
 /*	--------------------------------------------------
@@ -193,16 +192,16 @@
 	#box_header .logo {padding:10px 15px;display: inline;float:right;}
 
 	/** The main menu at the top **/        
-	.top_nav {width: 938px;height:50px;margin:0 auto;background:url(../images/menu-bg.gif) repeat-x top left;display: block;}
+	.top_nav {width:938px;height:50px;margin:0 auto;background:url(../images/menu-bg.gif) repeat-x top left;display: block;}
 	.top_nav .menu {margin:0 40px;}
-	.top_nav .menu ul{list-style-type: none;	float:right;}
+	.top_nav .menu ul{list-style-type: none;float:right;}
 	.top_nav .menu li {display: block;float:right;margin-left:2px;}
-	.top_nav .menu li a {height:47px;line-height:40px;	color: #444;text-decoration: none;display: block;float: left;padding:0 20px;}
+	.top_nav .menu li a {height:47px;line-height:40px;	color: #444;text-decoration: none;display: block;float: left;padding:0 20px;font-size:90%;font-weight:700;}
 	.top_nav .menu li a:hover {color:#F68618;background:url(../images/hover.png) repeat-x top left;}
 	.top_nav .menu li a.current {color:white;background:url(../images/current-bg.gif) top left repeat-x;padding:0px 20px;}
 
 	/*  right menu */
-	#right_menu{width:180px;float:right;padding:10px 5px;position:relative;display:inline;}
+	#right_menu{width:180px;float:right;padding:10px 5px;position:relative;display:inline;font-size:90%;font-weight:700;}
 	#right_menu .list ul{list-style-type: none;line-height:16px;}
 	#right_menu .list .imgtop{height:36px;width:160px;background:url(../images/menu-right-top.gif) no-repeat;display:block;color:#000;padding:0px 10px;text-align:left;}
 	#right_menu .list .imgbottom{background:url(../images/menu_right_bottom.gif) no-repeat;height:37px;width:160px;display:block;padding:0px 10px;color: #F1F7E1;border-top: 1px solid #666;}
@@ -227,8 +226,8 @@
 	.waitloading{color:#E17100;font-size:120%;margin:5px;}
 
 	/*	Tabs -------------------- */
-	.tabber {width:100%;margin-top:8px;}
-	.tabberlive {margin:10px 0;}
+	.tabber {width:100%;margin:4px 0;}
+	.tabberlive {margin:5px 0;}
 	.tabberlive .tabbertabhide {display:none;}
 	.tabbertab {padding:20px 25px;background:white url(../images/bg_tabbertab.png) repeat-x bottom left;border:1px solid #B9B9B9;}
 	.go_up{background:url(../images/go_up.png) no-repeat 0% 100%;}
@@ -247,49 +246,49 @@
 /*	--------------------------------------------------
 	7. Template & Downlod > download.html
 	-------------------------------------------------- */
-	.file_info_box {margin:5px auto;}
-	.data_file,.data_file_down {width:56%;padding:15px;border:1px solid #fff;background:white url(../images/bg_tabbertab.png) repeat-x bottom left;}
-	.data_file .tit {background:#8C8C8C url(../images/bg_tile.gif) repeat-x bottom;border:1px solid #727272;font-weight:700;color:#fff;text-align:center;padding:6px 0;margin:2px 0;}
+	.file_info_box {margin:5px auto;padding:10px 0;}
+	.data_file,.data_file_down {width:56%;}
+	.data_file .tit {background:#8C8C8C url(../images/bg_tile.gif) repeat-x bottom;border:1px solid #727272;font-weight:700;color:#fff;text-align:center;padding:5px 0;margin:1px 0;}
 	.data_file .data_menu  {width:100%;font-size:12px;table-layout:fixed;}
-	.data_file .data_menu tr{display:block;margin-bottom:2px;background:white;border:1px solid #C7C7C7;}
-	.data_file .data_menu td{	white-space:nowrap;padding:0 5px;height:22px;line-height:22px;}
+	.data_file .data_menu tr{display:block;margin-bottom:1px;background:white;border:1px solid #C7C7C7;}
+	.data_file .data_menu td{	white-space:nowrap;padding-right:5px;height:24px;line-height:24px;}
 	.data_file .data_menu .td  {width:82px;text-align:center;background:#FFEDC1 url(../images/headline_bg.png) repeat-x top right;color:#333;}
 	.data_file .filereport {height:26px;line-height:26px;text-align:center;border-top:1px solid #D88181;border-bottom:1px solid #D88181;cursor:pointer;background:url(../images/bg_onlinevisitor.gif) repeat-x bottom left;margin-top:5px;color:#D80000;font-weight:700;}
 	.data_file .filereport:hover {background:#F9B6C1;border-color:#B14F4F;}
 	.data_file_down {width:40%;text-align:center;font-weight:700;}
 	.data_file_down p.find_x {margin:2px 0;font-size:small;}
-	.data_file_down .wait {color:#F04C2D;font-size:x-large;height:45px;line-height:45px;}
-	.download {margin-top:12px;}
-	.download a{cursor:pointer;background:#FA9A00 url(../images/bg_animated.gif) repeat;border:1px solid #C16600;height:25px;line-height:25px;color:#6F3A00;padding:6px 16px;}
-	.data_file_down .download a:hover {border-color:#fff;color:#222;text-decoration:none;}
-	.data_file_down .download a:hover {text-decoration:none;}
-	.download span{font-size:xx-small;color:#999;}
+	.data_file_down .wait {color:#F04C2D;font-size:xx-large;height:45px;line-height:45px;}
+	.download {margin:5px auto;}
+	.download a{cursor:pointer;background:#FA9A00 url(../images/bg_animated.gif) repeat;border:1px solid #C16600;height:34px;line-height:34px;color:#6F3A00;padding:10px 15px;}
+	.download a:hover {border-color:#fff;color:#222;text-decoration:none;}
+	.download span{font-size:x-small;color:#777;}
 /* @end */
 
 /*	--------------------------------------------------
 	8. Template & Stats > stats.html
 	-------------------------------------------------- */
-	.stats  {margin:5px 0;background: url(../images/stats.gif) no-repeat 2% 50%;font-size:13px;font-weight:400;}
-	.stats ul {list-style-image:url(../images/list_stat.gif);list-style-position:inside;text-indent:10px;}
-	.stats  ul li {height:28px;line-height:28px;}
-	.st {text-indent:10px;}
-	.st i{background:#FFF;padding:4px 20px;color: #FF5502;font-size:12px;border-top:1px solid #ECCEBB;border-bottom:1px solid #ECCEBB;}
+	.stats  {margin:5px 0;background: url(../images/stats.gif) no-repeat 2% 40%;font-size:115%;}
+	.stats ul {list-style-type:none;text-indent:4px;}
+	.stats  ul li {height:30px;line-height:30px;background:transparent url(../images/list_stat.gif) no-repeat right center;padding-right:15px;}
+	.st {text-indent:20px;}
+	.st i{background:#FFF;padding:4px 20px;color: #FF5502;border-top:1px solid #ECCEBB;border-bottom:1px solid #ECCEBB;}
 /* @end */
 
 /*	--------------------------------------------------
 	10. Template & Rules > rules.html
 	-------------------------------------------------- */
-	#rules {background:#F9F5F0;border:1px solid #ECCEBB;	padding:10px;font-weight:700;}
-	#rules .rut {clear:both;margin-bottom:3px;padding:4px 0px;text-indent:10px;color:red;font-size:12px;}
+	#rules {padding:10px 0;font-weight:700;}
+	#rules .rut {clear:both;margin-bottom:3px;padding:4px 0px;text-indent:10px;color:red;}
 	#rules .rls {display:block;text-indent:10px;}
-	#rules .rls ul{list-style-image:url(../images/list_rls.gif);list-style-position:inside;text-indent:10px;}
-	#rules .rls ul li{height:25px;line-height:25px;}
+	#rules .rls ul{list-style-type:none;text-indent:4px;}
+	#rules .rls ul li {height:24px;line-height:24px;background:transparent url(../images/list_rls.gif) no-repeat right center;padding-right:15px;padding-bottom:2px;font-size:90%;color:#111;}
+
 /* @end */
 
 /*	--------------------------------------------------
 	10. Template & Footer > footer.html
 	-------------------------------------------------- */
-	#footer{width:100%;background:#EBEBEB url(../images/bg_footer.gif) repeat-x;min-height: 50px;padding:20px 0;}
+	#footer{width:100%;background:#EBEBEB url(../images/bg_footer.gif) repeat-x;min-height: 50px;padding:20px 0 10px 0;}
 	#footer .footer_inner{width:900px;margin:0 auto;}
 	#footer .left{float:left;}
 	#footer .right{float:right;}
@@ -308,15 +307,12 @@
 /*	--------------------------------------------------
 	11. Template & login > login.html
 	-------------------------------------------------- */
-	.login {margin:5px 0 10px 0;	padding:15px;background: url(../images/login.gif) no-repeat 6% 50%;}
-	.box_form_login {width:70%;padding:5px;}
-	.title_login {width:100%;text-indent:45px;height:32px;line-height:32px;font-size:18px;font-weight: 400;color:#FF6A15;margin-bottom:8px;background:#F7EDE7 url(../images/title_login.gif) no-repeat 99% 50%;}
-	.blocks{display:block;clear:both;height:22px;margin-bottom:6px;}
-	.gather {width:100px;height:22px;line-height:20px;display:inline;float:right;margin-left:3px;text-align:center;font-weight: 400;color:#111;background:#FF8D1B url(../images/bg_tile_tab.png) repeat-x;}
-	input.username, input.password {float:right;padding:3px 6px 3px 20px;}
+	.login {margin:5px 0;padding:15px;background:transparent url(../images/login.gif) no-repeat 0% 50%;}
+	.title_login {width:100%;text-indent:45px;height:32px;line-height:32px;font-size:18px;font-weight: 400;color:#FF6A15;background:#F7EDE7 url(../images/title_login.gif) no-repeat 99% 50%;}
+	.box_form_login {width:50%;padding:5px 0;}
+	input.username, input.password {padding:3px 6px 3px 20px;}
 	input.username{background:white url(../images/username.gif) no-repeat 2px 2px;}
 	input.password{background:white url(../images/password.gif) no-repeat 2px 2px;}
-	input.button_login{padding:2px 33px;}
 	select.remme {padding:1px 4px;margin:0 2px;}
 	.forget_pass {text-indent:10px;padding:4px 15px;margin-top:4px;background:#fff url(../images/forget_pass.png) no-repeat 96% 50%;	float:left;font-size:12px;}
 	.forget_pass  a{color:#444;}
@@ -352,29 +348,27 @@
 /*	--------------------------------------------------
 	13. Template & Register > register.html
 	-------------------------------------------------- */
-	.register {background:#F9F5F0 url(../images/register.gif) no-repeat 10% 50%;border:1px solid #ECCEBB;margin:5px 0;padding: 15px;}
-	.register label {display:block;font-weight: 400;}
+	.register {background:transparent url(../images/register.gif) no-repeat 0% 50%;margin:5px 0;}
 /* @end */
 
 /*	--------------------------------------------------
 	14. Template & Contact Us > call.html
 	-------------------------------------------------- */
-	.call{background:#F9F5F0 url(../images/call.gif) no-repeat 10% 50%;border:1px solid #ECCEBB;margin:5px 0;padding: 15px;}
-	.call label {display:block;}
-	.text_area{width:65%;}
+	.call{background:transparent url(../images/call.gif) no-repeat 0% 50%;margin:5px 0;}
+	textarea.text_area{width:70%;}
 /* @end */
 
 /*	--------------------------------------------------
 	15. Template & Password Recovery > get_pass.html
 	-------------------------------------------------- */
-	.get_password{background:#F9F5F0 url(../images/get_password.gif) no-repeat 15% 50%;border:1px solid #ECCEBB;margin:5px 0;padding: 15px;}
+	.get_password{background:transparent url(../images/get_password.gif) no-repeat 4% 50%;margin:5px 0;padding: 10px 0;}
 	.get_password p{width:65%;background:white;border:1px solid #ECCEBB;padding:3px 6px;text-align:center;color:#D80000;}
 /* @end */
 
 /*	--------------------------------------------------
 	16. Template & Report a File > report.html
 	-------------------------------------------------- */
-	.rebort{background:#F9F5F0 url(../images/file_rebort.gif) no-repeat 10% 50%;border:1px solid #ECCEBB;margin:5px 0;padding: 15px;}
+	.rebort{background:transparent url(../images/file_rebort.gif) no-repeat 2% 50%;margin:5px 0;padding: 5px 0;}
 	.rebort label {display:block;}
 	input.urlcolor{background:#FFDFDF !important;	border:1px solid #D88D8D !important;letter-spacing:1px;width:65%;}
 	input.urlcolor:focus,input.urlcolor:hover{background:#FFDFDF !important;cursor:default;border-color:#D88D8D !important;}
@@ -384,12 +378,10 @@
 	17. Template & Profile > profile.html
 	-------------------------------------------------- */
 	#profile  select, #profile  option{background:#FFD;color:#000;}
-	#profile .boxdata{float:right;width:31%;height:180px;border:1px solid #fff;background:#fff url(../images/bg_tabbertab.png) repeat-x bottom left;	margin:5px;}
-	#profile .boxdata p  {padding:2px;text-align:center;}
+	#profile .boxdata{float:right;text-align:center;width:31%;height:180px;border:1px solid #fff;background:#fff url(../images/bg_tabbertab.png) repeat-x bottom left;	margin:5px;}
 	#profile .boxdata .tit{background:#FF9A1D url(../images/bg_tile_tab.png) repeat-x bottom left;padding:4px;margin:0px;color:white;text-align:center;}
-	#profile .boxdata .bq , #profile .boxdata .in{color:#999;padding:0 5px;}
-	#profile .boxdata .in{margin-right:2%;}
-	#profile .boxdata .biguser {color:#FF5502;padding:5px;font-size:12px;text-align:center;}
+	#profile .boxdata .bq {color:#999;padding:0 5px;}
+	#profile .boxdata .biguser {color:#FF5502;padding:5px;}
 	.buttons_center {line-height:24px;padding:5px;text-align:center;margin:3px auto;}
 /* @end */
 
@@ -420,7 +412,7 @@
 /*	--------------------------------------------------
 	19. Template & List of allowed file upload > guide.html
 	-------------------------------------------------- */
-	#guide {width:100%;}
+	#guide {width:100%;margin:5px auto 15px;}
 	.guide_user_th, .guide_visitor_th{padding:8px 15px;font-weight:700;font-size:12px;text-align:center;color:white;border: 1px solid #D54D10;}
 	.guide_user_th  {background:#767676 url(../images/bg_tile.gif) repeat-x bottom right;border-color:#727272;}
 	.guide_visitor_th {background:#FF9A1D url(../images/bg_tile_tab.png) repeat-x bottom left;}
@@ -445,13 +437,13 @@
 /*	--------------------------------------------------
 	20. Template & Copy the links after upload > up_boxes.html
 	-------------------------------------------------- */
-	.thumb_img {width:100%;margin:5px auto 2px auto;text-align:center;}
+	.thumb_img {width:100%;margin:5px auto;text-align:center;}
 	.thumb_img a img{background:white;border:2px solid #444;padding:5px;}
 	.thumb_img a img:hover{border-color:#FEA53D;}
-	.up_box_input {margin:1px auto;border: 1px solid #FEA53D;background:#ECECEC;}
+	.up_box_input {margin:1px auto;border: 1px solid #B0A24A;background:#ECECEC;}
 	.up_box_input tr{height:30px;line-height:30px;}
 	td.btitle ,td.all_box_link{border:1px solid #fff;text-align:center;font-size:11px;font-weight:700;padding:0 4px;}
 	td.btitle {color:#333;width:120px;padding:0 1px;border-left:none;}
 	td.all_box_link {border-right:none;}
-	input[type="text"].up_input {direction:ltr;width:97%;color:#222;padding:3px;letter-spacing:1px;vertical-align:middle;}
+	input[type="text"].up_input {direction:ltr;width:97%;color:#CF6600;padding:3px;letter-spacing:1px;vertical-align:middle;}
 /* @end */

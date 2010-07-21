@@ -1,82 +1,82 @@
-<!-- start Guide template  -->
-<div id="content">
+<!-- List of allowed file -->
+<div id="content" class="border_radius">
 
-<!-- start site name and title  -->
-<div class="title"><strong><a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}</strong></div>
-<!--  # End  site name and title  -->
+	<!-- title  -->
+	<div class="title"><strong><a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}</strong></div>
+	<!-- @end -->
 
-<!-- start line top  -->
-<div class="clr"></div><div class="line"></div>
-<!-- # End line top  -->
+	<!-- line top -->
+	<div class="line"></div>
+	<!-- @end -->
 
-<!-- start table files allowed -->
-<table id="guide" border="0" cellspacing="0" cellpadding="0">
-	<tr>
-	<IF NAME="users_data">
-	<!-- start user list of files allowed -->
+	<!-- table files allowed -->
+	<table id="guide" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+		<IF NAME="users_data">
+		<!-- user list of files allowed -->
 		<td>
-		<div class="guide_user_th">{lang.GUIDE_USERS}</div>
-		
-		<LOOP NAME="users_data">
-			<IF LOOP="is_first_row">
-				<IF LOOP="realy_first_row">
-					<ELSE>
+			<div class="guide_user_th">{lang.GUIDE_USERS}</div>
+			
+			<LOOP NAME="users_data">
+				<IF LOOP="is_first_row">
+					<IF LOOP="realy_first_row">
+						<ELSE>
+						</div>
+					</IF>
+				<div class="user_box">
+					<div class="user_img"><img src="images/filegroups/{{group}}.png" width="32" height="32" alt="{{group_name}}" style="vertical-align:middle;" />
+					<div class="user_n4me">{lang.GUIDE_GROUPS} : {{group_name}}</div>
 					</div>
+					<br />
 				</IF>
-			<div class="user_box">
-				<div class="user_img"><img src="images/filegroups/{{group}}.png" width="32" height="32" alt="{{group_name}}" style="vertical-align:middle;" />
-				<div class="user_n4me">{lang.GUIDE_GROUPS} : {{group_name}}</div>
+					<div class="user_ext">
+						<span class="user_ext_lang">{lang.EXT} : </span>
+						<span class="user_ext_color">{{ext}}</span>
+						<span class="user_ext_lang">{lang.SIZE} : </span>
+						<span class="user_ext_color">{{num}}</span>
+					</div>
+			</LOOP>
 				</div>
-				<br />
-			</IF>
-				<div class="user_ext">
-					<span class="user_ext_lang">{lang.EXT} : </span>
-					<span class="user_ext_color">{{ext}}</span>
-					<span class="user_ext_lang">{lang.SIZE} : </span>
-					<span class="user_ext_color">{{num}}</span>
-				</div>
-		</LOOP>
-			</div>
 		</td>
-		<!-- # END user list of files allowed -->
-	</IF>
-		
+		<!-- @end -->
+		</IF>
+			
 		<!-- clear ten pixels  -->
 		<td style="width:2%">&nbsp;</td>
-		<!-- # clear ten pixels  -->
-		
-	<IF NAME="gusts_data">
-	<!-- start visitor list files  -->
+		<!-- @end -->
+			
+		<IF NAME="gusts_data">
+		<!-- visitor list files -->
 		<td>
-		<div class="guide_visitor_th">{lang.GUIDE_VISITORS}</div>		
-		<LOOP NAME="gusts_data">
-			<IF LOOP="is_first_row">
-				<IF LOOP="realy_first_row">
-					<ELSE>
+			<div class="guide_visitor_th">{lang.GUIDE_VISITORS}</div>		
+			<LOOP NAME="gusts_data">
+				<IF LOOP="is_first_row">
+					<IF LOOP="realy_first_row">
+						<ELSE>
+						</div>
+					</IF>
+				<div class="visitor_box user_box">
+					<div class="visitor_img"><img src="images/filegroups/{{group}}.png" width="32" height="32" alt="{{group_name}}" style="vertical-align:middle;" />
+					<div class="visitor_n4me user_n4me">{lang.GUIDE_GROUPS} : {{group_name}}</div>
 					</div>
+					<br />
 				</IF>
-			<div class="visitor_box user_box">
-				<div class="visitor_img"><img src="images/filegroups/{{group}}.png" width="32" height="32" alt="{{group_name}}" style="vertical-align:middle;" />
-				<div class="visitor_n4me user_n4me">{lang.GUIDE_GROUPS} : {{group_name}}</div>
+					<div class="visitor_ext user_ext">
+						<span class="visitor_ext_lang user_ext_lang">{lang.EXT} : </span>
+						<span class="visitor_ext_color user_ext_color">{{ext}}</span>
+						<span class="visitor_ext_lang user_ext_lang">{lang.SIZE} : </span>
+						<span class="visitor_ext_color user_ext_color">{{num}}</span>
+					</div>
+			</LOOP>
 				</div>
-				<br />
-			</IF>
-				<div class="visitor_ext user_ext">
-					<span class="visitor_ext_lang user_ext_lang">{lang.EXT} : </span>
-					<span class="visitor_ext_color user_ext_color">{{ext}}</span>
-					<span class="visitor_ext_lang user_ext_lang">{lang.SIZE} : </span>
-					<span class="visitor_ext_color user_ext_color">{{num}}</span>
-				</div>
-		</LOOP>
-			</div>
 		</td>
-		<!-- # END visitor list files  -->
-	</IF>
-	</tr>
-</table>
-<!-- # END table files allowed -->
+		<!-- @end -->
+		</IF>
+		</tr>
+	</table>
+	<!-- @end -->
 
-<div class="clr"></div><br />
+	<div class="clr"></div>
    
 </div>
-<!-- ## End Guide template  -->
+<!-- @end -->

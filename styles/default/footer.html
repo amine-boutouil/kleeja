@@ -1,22 +1,21 @@
 	<div class="clr"></div>
 
 	<IF NAME="extras.footer">
-		<!--START EXTRAS FOOTER-->
+		<!-- EXTRAS FOOTER -->
 		<div class="dot"></div>
 			<div class="extras_footer">{extras.footer}</div>
 		<div class="dot"></div>
-		<!--# END EXTRAS FOOTER-->
-		<div class="clr"></div>
+		<!-- @end -->
 	</IF>
 	
-</div><!--# END WRAPPER-->
-</div><!--# END MAIN-->
+</div><!-- @end WRAPPER -->
+</div><!-- @end MAIN -->
 
-<!--START FOOTER-->
+<!-- FOOTER -->
 <div id="footer">
     <div class="footer_inner">
 		<div class="left">	
-		<!--  Powered by : kleeja  -->
+		<!-- @Powered by : kleeja  -->
 																																																																																																																																																																																																		<!--  Do not remove this notice  --><div class="kleeja">Powered by : <a href="http://www.kleeja.com/" onclick="window.open(this.href,'_blank');return false;" title="Powered by Kleeja">Kleeja</a></div>
 		<div class="clr"></div><br />
 		<IF NAME="page_stats"><div class="footer_stats">{page_stats}</div></IF>
@@ -24,21 +23,23 @@
         </div>
 		
 		<div class="right">
-		<!--START COPYRIGHTS-->
+			<!-- COPYRIGHTS-->
 			<div class="Copyrights">
 				{lang.COPYRIGHTS_X} &copy; <a href="{config.siteurl}">{config.sitename}</a>
 			</div>
-		<!--# END COPYRIGHTS-->
+			<!-- @end -->
 	
-		<div class="clr"></div><br />
+			<div class="clr"></div><br />
 		
 		<IF NAME="is_admin">
-			<!--START BUTTON PANEL-->
+			<!-- BUTTON PANEL -->
 			{admin_page}
-			<!--# END BUTTON PANEL-->
+			<!-- @end -->
 		</IF>
 		</div>
+		
 	</div>
-</div><!--END FOOTER-->
+</div>
+<!-- @end FOOTER -->
 </body>
 </html>

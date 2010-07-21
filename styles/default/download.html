@@ -1,86 +1,84 @@
-<!-- start Downlod template  -->
-<div id="content">
+<!-- Downlod template -->
+<div id="content" class="border_radius">
 
-<!-- start site name and title  -->
-<div class="title"><strong><a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}</strong></div>
-<!--  # End  site name and title  -->
+	<!-- title  -->
+	<div class="title"><strong><a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}</strong></div>
+	<!-- @end -->
 
-<!-- start line top  -->
-<div class="clr"></div><div class="line"></div>
-<!-- # End line top  -->
+	<!-- line top -->
+		<div class="line"></div>
+	<!-- @end -->
 
-<!-- start box   -->            
-<div class="file_info_box">
-<table style="width:100%;">
-    <tr>
-    <!-- start Information File   -->    
-        <td class="data_file">
-            <div class="tit">{lang.FILE_INFO}</div>
-            <table class="data_menu">
-                <tr>
-                    <td class="td">{lang.FILENAME}</td>
-                    <td>{name}</td>
-                </tr>
-                <tr>
-                    <td class="td">{lang.FILETYPE}</td>
-                    <td class="tddata">{type}</td>
-                </tr>
-                <tr>
-                    <td class="td">{lang.FILESIZE}</td>
-                    <td class="tddata">{size}</td>
-                </tr>
-                <tr>
-                    <td class="td">{lang.FILEDATE}</td>
-                    <td class="tddata">{time}</td>
-                </tr>
-                <tr>
-                    <td class="td">{lang.FILEUPS}</td>
-                    <td class="tddata">{uploads}</td>
-                </tr>
-            </table>
-            <div class="filereport" onclick="window.location.href='{REPORT}';"><img src="{STYLE_PATH}images/zl.png" alt="file Report" style="vertical-align:middle;padding:0 5px;" />{lang.FILEREPORT}</div>
-        </td>
-    <!-- # END Information File   -->
-    
-    <td style="width:1%;"></td>
-    
-    <!-- start box download File   -->    
-    <td class="data_file_down">
-        <p class="find_x">{lang.FILE_FOUNDED}</p>
-        <div class="clr"></div><br />
-            <img src="{STYLE_PATH}images/download.png" alt="file found" />
-        <div class="clr"></div><br />
-        <div id="url"><p style="color:red">{lang.JS_MUST_ON}</p></div>
-        <div class="clr"></div>
-    </td>
-    <!-- # End box download File   -->        
-    </tr>
-</table>
-    
+	<!-- box Downlod -->            
+	<div class="file_info_box">
+		<table style="width:100%;">
+			<tr>
+			<!-- Information File -->    
+				<td class="data_file">
+					<div class="tit">{lang.FILE_INFO}</div>
+					<table class="data_menu">
+						<tr>
+							<td class="td">{lang.FILENAME}</td>
+							<td>{name}</td>
+						</tr>
+						<tr>
+							<td class="td">{lang.FILETYPE}</td>
+							<td class="tddata">{type}</td>
+						</tr>
+						<tr>
+							<td class="td">{lang.FILESIZE}</td>
+							<td class="tddata">{size}</td>
+						</tr>
+						<tr>
+							<td class="td">{lang.FILEDATE}</td>
+							<td class="tddata">{time}</td>
+						</tr>
+						<tr>
+							<td class="td">{lang.FILEUPS}</td>
+							<td class="tddata">{uploads}</td>
+						</tr>
+					</table>
+					<div class="filereport" onclick="window.location.href='{REPORT}';"><img src="{STYLE_PATH}images/zl.png" alt="file Report" style="vertical-align:middle;padding:0 5px;" />{lang.FILEREPORT}</div>
+				</td>
+			<!-- @end -->
+			
+			<td style="width:1%;"></td>
+			
+			<!-- box File -->    
+			<td class="data_file_down">
+				<p class="find_x">{lang.FILE_FOUNDED}</p>
+				<div class="clr"></div><br />
+					<img src="{STYLE_PATH}images/download.png" alt="" />
+				<div class="clr"></div><br />
+				<div id="url"><p style="color:red">{lang.JS_MUST_ON}</p></div>
+				<div class="clr"></div>
+			</td>
+			<!-- @end -->
+			
+			</tr>
+		</table>
+	</div>
+	<!-- @end -->   
+
+	<script type="text/javascript">
+	<!--
+	var timer = {seconds_w};
+	ti();
+	function ti()
+	{
+		if(timer > 0)
+		{
+			document.getElementById("url").innerHTML = '<div class="wait">{lang.WAIT} ' + timer + ' <\/div>';
+			timer = timer - 1;
+			setTimeout("ti()", 1000)
+		}
+		else
+		{
+			document.getElementById("url").innerHTML = '<p class="download"><a href="{url_file}" target="balnk">{lang.CLICK_DOWN}<\/a><br /><span>{size}<\/span><\/p>';
+		}
+	}
+	//-->
+	</script>
+ 
 </div>
-<!-- ## End box   -->    
-
-<script type="text/javascript">
-<!--
-var timer = {seconds_w};
-ti();
-function ti()
-{
-    if(timer > 0)
-    {
-        document.getElementById("url").innerHTML = '<div class="wait">{lang.WAIT} ' + timer + ' <\/div>';
-        timer = timer - 1;
-        setTimeout("ti()", 1000)
-    }
-    else
-    {
-        document.getElementById("url").innerHTML = '<p class="download"><a href="{url_file}" target="balnk">{lang.CLICK_DOWN}<\/a><br /><span>{size}<\/span><\/p>';
-    }
-}
-//-->
-</script>
-
-<div class="clr"></div>
-   
-</div>
-<!-- ## End Downlod template  -->
+<!-- @end -->

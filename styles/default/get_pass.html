@@ -1,64 +1,61 @@
-<!-- start get_pass template  -->
-<div id="content">
+<!-- Password Recovery Template -->
+<div id="content" class="border_radius">
 
-<!-- start site name and title  -->
-<div class="title"><strong><a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}</strong></div>
-<!--  #   site name and title  -->
+	<!-- title  -->
+	<div class="title"><strong><a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}</strong></div>
+	<!-- @end -->
 
-<!-- start line top  -->
-<div class="clr"></div><div class="line"></div>
-<!-- #  line top  -->
+	<!-- line top -->
+	<div class="line"></div>
+	<!-- @end -->
 
-<IF NAME="ERRORS">
-<!-- start error msg  -->
-<dl id="system-message">
-	<dd class="error">
-		<ul><LOOP NAME="ERRORS">
-		<li>{%value%}</li></LOOP>
-		</ul>
-	</dd>
-</dl>
-<!-- # end error msg  -->
-</IF>
+	<IF NAME="ERRORS">
+	<!-- msg, Infos & Alerts & Errors -->
+	<dl id="system-message">
+		<dd class="error">
+			<ul><LOOP NAME="ERRORS">
+			<li>{%value%}</li></LOOP>
+			</ul>
+		</dd>
+	</dl>
+	<!-- @end -->
+	</IF>
 
-<!-- start form get_pass  -->
-<form action="{action}" method="post">
+	<!-- form -->
+	<form action="{action}" method="post">
+		<div class="get_password">
+			<p>{lang.E_GET_LOSTPASS}</p>
+			<div class="clr"></div>
+			<label>{lang.EMAIL} :</label>
+			<input type="text" name="rmail" value="{t_rmail}" size="50" style="direction:ltr;" tabindex="1" />
+			<div class="clr"></div>
+		</div>
 
-<div class="get_password">
-	<p>{lang.E_GET_LOSTPASS}</p>
-	<div class="clr"></div><br />
-	<label>{lang.EMAIL} :</label>
-	<input type="text" name="rmail" value="{t_rmail}" size="30" style="direction:ltr;" />
-	<div class="clr"></div>
-</div>
+		<div class="clr"></div>
 
-<div class="clr"></div>
-
-<!-- start safe code -->				
-<div class="safe_code">
-	<p>{lang.VERTY_CODE}</p>
-	<div class="clr"></div>
-	<div>
-		<img style="vertical-align:middle;" id="kleeja_img_captcha" src="{captcha_file_path}" alt="{lang.REFRESH_CAPTCHA}" title="{lang.REFRESH_CAPTCHA}" onclick="javascript:update_kleeja_captcha('{captcha_file_path}', 'kleeja_code_answer');" />
-		<input type="text" name="kleeja_code_answer" id="kleeja_code_answer" />
-	</div>
-	<div class="clr"></div>
-	<p class="explain">{lang.NOTE_CODE}</p>
-</div>
-<!-- # safe code -->
+		<!-- verification code -->				
+		<div class="safe_code">
+			<p>{lang.VERTY_CODE}</p>
+			<div class="clr"></div>
+			<div>
+				<img style="vertical-align:middle;" id="kleeja_img_captcha" src="{captcha_file_path}" alt="{lang.REFRESH_CAPTCHA}" title="{lang.REFRESH_CAPTCHA}" onclick="javascript:update_kleeja_captcha('{captcha_file_path}', 'kleeja_code_answer');" />
+				<input type="text" name="kleeja_code_answer" id="kleeja_code_answer" tabindex="2" />
+			</div>
+			<div class="clr"></div>
+			<p class="explain">{lang.NOTE_CODE}</p>
+		</div>
+		<!-- @end -->
 	
-<div class="clr"></div><br />
+		<div class="clr"></div>
 
-<p>{H_FORM_KEYS}</p>
+		{H_FORM_KEYS}
 
-<div class="clr"></div>
+		<input type="submit" name="submit" value="{lang.GET_LOSTPASS}" tabindex="3" />
 
-<input type="submit" name="submit" value="{lang.GET_LOSTPASS}" />
+	</form>
+	<!-- @end -->
 
-</form>
-<!-- #  form get_pass  -->	
-
-<div class="clr"></div>
+	<div class="clr"></div>
    
 </div>
-<!-- #  get_pass template  --> 
+<!-- @end -->

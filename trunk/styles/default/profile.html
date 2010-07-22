@@ -1,12 +1,12 @@
 <!-- Profile template -->
 <div id="content" class="border_radius">
-	<!-- title  -->
+	<!-- title -->
 	<div class="title"><strong><a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}</strong></div>
-	<!-- @end -->
+	<!-- @end-title -->
 
 	<!-- line top -->
 	<div class="line"></div>
-	<!-- @end -->
+	<!-- @end-line -->
 	
 	<IF NAME="ERRORS">
 	<!-- msg, Infos & Alerts & Errors -->
@@ -21,7 +21,7 @@
 			</ul>
 		</dd>
 	</dl>
-	<!-- @end -->
+	<!-- @end-msg -->
 	</IF>
 
 	<IF NAME="data_forum">
@@ -62,10 +62,10 @@
 				
 		<!-- button -->
 		<div class="buttons_center"><input type="submit" name="submit_data" value="{lang.EDIT_U_DATA}" tabindex="6" /></div>
-		<!-- @end -->		
+		<!-- @end-button -->		
 	</div>	
 	</form>
-	<!-- @end -->
+	<!-- @end-profile -->
 	
 	<ELSE>
 	
@@ -75,4 +75,4 @@
 	 
 	<div class="clr"></div>
 </div>
-<!-- @end -->
+<!-- @end-Profile-template -->

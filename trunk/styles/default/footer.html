@@ -1,45 +1,45 @@
 	<div class="clr"></div>
 
 	<IF NAME="extras.footer">
-		<!-- EXTRAS FOOTER -->
+		<!-- Extras Footer -->
 		<div class="dot"></div>
 			<div class="extras_footer">{extras.footer}</div>
 		<div class="dot"></div>
-		<!-- @end -->
+		<!-- @end-extras-footer -->
 	</IF>
 	
-</div><!-- @end WRAPPER -->
-</div><!-- @end MAIN -->
+	</div><!-- @end-wrapper -->
+</div><!-- @end-main -->
 
-<!-- FOOTER -->
+<!-- begin footer -->
 <div id="footer">
     <div class="footer_inner">
 		<div class="left">	
 		<!-- @Powered by : kleeja  -->
-																																																																																																																																																																																																		<!--  Do not remove this notice  --><div class="kleeja">Powered by : <a href="http://www.kleeja.com/" onclick="window.open(this.href,'_blank');return false;" title="Powered by Kleeja">Kleeja</a></div>
+																																																																																																																																																																																																		<!--  Do not remove this notice  --><h1 class="kleeja">Powered by : <a href="http://www.kleeja.com/" onclick="window.open(this.href,'_blank');return false;" title="Powered by Kleeja">Kleeja</a></h1>
 		<div class="clr"></div><br />
 		<IF NAME="page_stats"><div class="footer_stats">{page_stats}</div></IF>
 		<IF NAME="googleanalytics"><div class="footer_stats">{googleanalytics}</div></IF>
         </div>
 		
 		<div class="right">
-			<!-- COPYRIGHTS-->
+			<!-- Copyrights-->
 			<div class="Copyrights">
 				{lang.COPYRIGHTS_X} &copy; <a href="{config.siteurl}">{config.sitename}</a>
 			</div>
-			<!-- @end -->
+			<!-- @end-Copyrights -->
 	
 			<div class="clr"></div><br />
 		
 		<IF NAME="is_admin">
-			<!-- BUTTON PANEL -->
+			<!-- button panel -->
 			{admin_page}
-			<!-- @end -->
+			<!-- @end-button-panel -->
 		</IF>
 		</div>
 		
 	</div>
 </div>
-<!-- @end FOOTER -->
+<!-- @end-footer -->
 </body>
 </html>

@@ -4,7 +4,7 @@
 	<!-- welcome -->
 	<h6><img src="{STYLE_PATH}images/Smile.gif" width="20" height="20" alt="{lang.WELCOME}" style="vertical-align:middle;" /> {lang.WELCOME} .. <IF NAME="user_is">[ {username} ]</IF></h6>
 	<div class="wolcome_msg">{welcome_msg}</div>
-	<!-- @end -->
+	<!-- @end-welcome -->
 
 	<div class="clr"></div>
 
@@ -16,14 +16,14 @@
 			<li>{lang.INFORMATION} : <span> {{i}} </span></li>
 		</ul>
 		</LOOP>
-	</div>
-	<!-- @end -->
+	</div><!-- @end-msg -->
 	</IF>
 
 	<div class="clr"></div>
 	
-	<!-- UPLOAD BOXES -->
+	<!-- form upload -->
 	<form id="uploader" action="{action}" method="post" enctype="multipart/form-data"<IS_BROWSER!="ie6"> onsubmit="form_submit();"</IS_BROWSER>>
+		<!-- upload boxes -->
 		<div class="tabber">
 		
 		<IF NAME="config.www_url">
@@ -40,10 +40,9 @@
 				<div class="bn_up"><input type="submit" id="submitr" name="submitr" value="{lang.DOWNLOAD_F}"  disabled="disabled" /></div>
 				<div class="clr"></div>
 		</div>
-		<!-- @end -->
 		
 		<IF NAME="config.www_url">
-		</div>
+		</div><!-- @end-uplaod-normal -->		
 		</IF>
 		 
 		<IF NAME="config.www_url">
@@ -58,43 +57,39 @@
 				<div class="bn_up"><input type="submit" id="submittxt" name="submittxt" value="{lang.DOWNLOAD_T}" disabled="disabled" /> </div>
 				<div class="clr"></div>
 			</div>
-		</div>
-		<!-- @end -->	
+		</div><!-- @end-uplaod-URL -->	
 		</IF>
 
-	</div>
-	<!-- @end -->
+		</div><!-- @end-upload-boxes -->
 	
-	<IF NAME="config.safe_code">
-	<!-- verification code -->	
-	<div class="safe_code">
-		<p>{lang.VERTY_CODE}</p>
-		<div class="clr"></div>
-		<div>
-			<img style="vertical-align:middle;" id="kleeja_img_captcha" src="{captcha_file_path}" alt="{lang.REFRESH_CAPTCHA}" title="{lang.REFRESH_CAPTCHA}" onclick="javascript:update_kleeja_captcha('{captcha_file_path}', 'kleeja_code_answer');" />
-			<input type="text" name="kleeja_code_answer" id="kleeja_code_answer" />
+		<IF NAME="config.safe_code">
+		<!-- verification code -->	
+		<div class="safe_code">
+			<p>{lang.VERTY_CODE}</p>
+			<div class="clr"></div>
+			<div>
+				<img style="vertical-align:middle;" id="kleeja_img_captcha" src="{captcha_file_path}" alt="{lang.REFRESH_CAPTCHA}" title="{lang.REFRESH_CAPTCHA}" onclick="javascript:update_kleeja_captcha('{captcha_file_path}', 'kleeja_code_answer');" />
+				<input type="text" name="kleeja_code_answer" id="kleeja_code_answer" />
+			</div>
+			<div class="clr"></div>
+			<p class="explain">{lang.NOTE_CODE}</p>
 		</div>
 		<div class="clr"></div>
-		<p class="explain">{lang.NOTE_CODE}</p>
-	</div>
-	<div class="clr"></div>
-	<!-- @end -->
-	</IF>
+		<!-- @end-verification-code -->
+		</IF>
 	
-	</form>
-	<!-- @end -->
+	</form><!-- @end-form-upload -->
 
-	<!-- BOX LOADING -->
+	<!-- box loading -->
 	<div id="loadbox">
 		<div class="waitloading">{lang.WAIT_LOADING}</div>
 		<div class="clr"></div><br />
 			<img src="{STYLE_PATH}images/loading.gif" alt="loading ..." />
 		<div class="clr"></div><br /><br /><br />
-	</div>
-	<!-- @end -->
+	</div><!-- @end-box-loading -->
 
 	<IF NAME="show_online">
-		<!-- ONLINE -->
+		<!-- OnLine -->
 		<div class="online">
 			<div class="onlineall">{lang.NUMBER_ONLINE} : [ {allnumbers} ]</div>
 			<div class="onlinevisitor">{lang.NUMBER_VONLINE} : [ {visitornum} ]</div>
@@ -102,9 +97,7 @@
 			<LOOP NAME="shownames">
 				<div class="name_users"><!--{{seperator}}-->{{name}}</div>
 			</LOOP>
-		</div>
-		<!-- @end -->
+		</div><!-- @end-OnLine -->
 	</IF>
 
 </div>
-<!-- @end -->

@@ -1,13 +1,13 @@
-<!-- Report a File template -->
+<!-- Report template -->
 <div id="content" class="border_radius">
 
-	<!-- title  -->
+	<!-- title -->
 	<div class="title"><strong><a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}</strong></div>
-	<!-- @end -->
+	<!-- @end-title -->
 
 	<!-- line top -->
 	<div class="line"></div>
-	<!-- @end -->
+	<!-- @end-line -->
 	
 	<IF NAME="ERRORS">
 	<!-- msg, Infos & Alerts & Errors -->
@@ -20,7 +20,7 @@
 		</ul>
 		</dd>
 	</dl>
-	<!-- @end -->
+	<!-- @end-msg -->
 	</IF>
 	
 	<!-- Report Forom -->
@@ -51,7 +51,7 @@
 			<div class="clr"></div>
 			<p class="explain">{lang.NOTE_CODE}</p>
 		</div>
-		<!-- @end -->
+		<!-- @end-verification-code -->
 	
 		<div class="clr"></div>
 		
@@ -62,7 +62,7 @@
 		<input type="submit" name="submit" value="{lang.REPORT}" tabindex="5" />
 		
 	</form>
-	<!-- @end -->
+	<!-- @end-Report-Forom -->
 	
 </div>
-<!-- @end -->
+<!-- @end-Report-template -->

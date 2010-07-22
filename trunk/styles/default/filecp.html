@@ -16,12 +16,12 @@
 
 	<!-- title  -->
 	<div class="title"><strong><a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}</strong></div>
-	<!-- @end -->
+	<!-- @end-title -->
 
 	<!-- line top -->
 		<div class="line"></div>
 		<br />
-	<!-- @end -->
+	<!-- @end-line -->
 	
 	<!-- form Files users -->	
 	<form name="c" action="{action}" method="post" onsubmit="javascript:return confirm_from();">
@@ -32,11 +32,11 @@
 		<img src="{STYLE_PATH}images/warning_nofile.png" /><br />
 		<h1>{lang.NO_FILE_USER}</h1>
 	</div>
-	<!-- @end -->
+	<!-- @end-msg -->
 
 	<ELSE>
 
-	<!-- table files  -->	
+	<!-- table files -->	
 	<table class="file_cp">
 		<thead>
 			<tr>
@@ -66,25 +66,25 @@
 		</tbody>
 		
 	</table>
-	<!-- @end -->	
+	<!-- @end-table-files -->	
 
 	<div class="clr"></div><br />
 
 	<!-- pagination   -->
 	{page_nums}
-	<!-- @end -->
+	<!-- @end-pagination -->
 
 	{H_FORM_KEYS}
 
 	<!-- button -->
 	<div class="left_button"><input type="submit" name="submit_files" value="{lang.DEL_SELECTED}" /></div>
-	<!-- @end -->
+	<!-- @end-button -->
 
 	</IF>
 	</form>
-	<!-- @end -->
+	<!-- @end-form-Files-users -->
 
 	<div class="clr"></div>
    
 </div>
-<!-- @end -->     
+<!-- @end-File-Manager-users -->     

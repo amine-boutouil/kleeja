@@ -1,13 +1,13 @@
 <!-- register template -->
 <div id="content" class="border_radius">
 
-	<!-- title  -->
+	<!-- title -->
 	<div class="title"><strong><a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}</strong></div>
-	<!-- @end -->
+	<!-- @end-title -->
 
 	<!-- line top -->
 		<div class="line"></div>
-	<!-- @end -->
+	<!-- @end-line -->
 
 	<IF NAME="ERRORS">
 	<!-- msg, Infos & Alerts & Errors -->
@@ -20,7 +20,7 @@
 			</ul>
 		</dd>
 	</dl>
-	<!-- @end -->
+	<!-- @end-msg -->
 	</IF>
 
 	<!-- form register -->
@@ -50,7 +50,7 @@
 			<div class="clr"></div>
 			<p class="explain">{lang.NOTE_CODE}</p>
 		</div>
-		<!-- @end -->		
+		<!-- @end-verification-code -->		
 
 		<div class="clr"></div>
 
@@ -59,9 +59,9 @@
 		<input type="submit" name="submit" value="{lang.REGISTER}" tabindex="6" />
 
 	</form>
-	<!-- @end -->
+	<!-- @end-form-register -->
 	
 	<div class="clr"></div>
   
 </div>
-<!-- @end -->
+<!-- @end-register-template -->

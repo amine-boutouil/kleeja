@@ -1,13 +1,13 @@
-<!-- Users Files -->
+<!-- Users Files template -->
 <div id="content" class="border_radius">
 
-	<!-- title  -->
+	<!-- title -->
 	<div class="title"><strong><a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}</strong></div>
-	<!-- @end -->
+	<!-- @end-title -->
 
 	<!-- line top -->
 		<div class="line"></div>
-	<!-- @end -->
+	<!-- @end-line -->
 
 	<IF NAME="user_name">
 	<!-- box user name and all files  -->
@@ -24,7 +24,7 @@
 		</div>
 		<div class="clr"></div>
 	</div>
-	<!-- @end -->
+	<!-- @end-box-user-name-and-all-files -->
 	</IF>
 
 	<IF NAME="filecp_link">
@@ -37,7 +37,7 @@
 			 </fieldset>
 		<div class="clr"></div>
 	</div>
-	<!-- @end -->
+	<!-- @end-link-user -->
 	</IF>
 
 	<IF NAME="no_results">
@@ -47,7 +47,7 @@
 		<br />
 		<h1>{lang.NO_FILE_USER}</h1>
 	</div>
-	<!-- @end -->
+	<!-- @end-no-files-user -->
 
 	<ELSE>
 	
@@ -76,7 +76,7 @@
 			</LOOP>
 		</tbody>	
 	</table>
-	<!-- @end -->
+	<!-- @end-table-all-files -->
 	</IF>
 	
 
@@ -84,15 +84,15 @@
 
 	<!-- pagination -->
 	{page_nums}
-	<!-- @end -->
+	<!-- @end-pagination -->
 
 	<IF NAME="filecp_link">
 	<!-- button filecp -->
 	<div class="left_button"><input type="submit" name="submit_files" value="{lang.GO_FILECP}" onclick="location.href='{filecp_link}';" /></div>
-	<!-- @end -->
+	<!-- @end-button-filecp -->
 	</IF>
  
 	<div class="clr"></div>
    
 </div>
-<!-- @end -->
+<!-- @end-Users-Files -->

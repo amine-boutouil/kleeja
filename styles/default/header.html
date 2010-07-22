@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" dir="{dir}">
-<!--  Powered by kleeja || URL kleeja.com  -->
+<!-- Powered by kleeja || URL www.kleeja.com -->
 <head>
 	<title>{title}(title? &#9679; :){config.sitename}</title>
 	<meta http-equiv="Content-Type" content="text/html;charset={charset}" />
@@ -23,17 +23,9 @@
 	<link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
 	<link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH}css/stylesheet.css" />
 	<IF NAME="{lang.DIR}==ltr"><link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH}css/ltr.css" /></IF>
-	<IS_BROWSER="ie6">
-		<link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH}css/ie_6.css" />
-		<style type="text/css">	img ,td ,tr{ behavior: url('{STYLE_PATH}ie/iepngfix.htc')};	</style>
-	</IS_BROWSER>
-	<IS_BROWSER="ie">
-		<link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH}css/ie.css" />
-		<style type="text/css">	body { behavior: url('{STYLE_PATH}ie/csshover3.htc')}; .border_radius { behavior: url('{STYLE_PATH}ie/border-radius.htc')};</style>
-	</IS_BROWSER>
-	<IS_BROWSER="mobile">
-		<link rel="stylesheet" type="text/css" href="{STYLE_PATH}css/mobile.css" media="handheld" />
-	</IS_BROWSER>
+	<IS_BROWSER="ie6"><link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH}css/ie_6.css" /><style type="text/css">	img ,td ,tr{ behavior: url('{STYLE_PATH}ie/iepngfix.htc')};	</style></IS_BROWSER>
+	<IS_BROWSER="ie"><link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH}css/ie.css" /><style type="text/css">	body { behavior: url('{STYLE_PATH}ie/csshover3.htc')}; .border_radius { behavior: url('{STYLE_PATH}ie/border-radius.htc')};</style></IS_BROWSER>
+	<IS_BROWSER="mobile"><link rel="stylesheet" type="text/css" href="{STYLE_PATH}css/mobile.css" media="handheld" /></IS_BROWSER>
 	<script type="text/javascript">
 	<!--
 	document.write('<link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH}css/css3.css" />');
@@ -48,22 +40,23 @@
 	-->
 	</script>
 	<script type="text/javascript" src="{STYLE_PATH}javascript.js"></script>
+	<!-- Extra code -->
 	{EXTRA_CODE_META}
 </head>
 <body>
-<!--START MAIN-->
+<!-- begin Main -->
 <div id="main">
 
-	<!--START HEADER-->
+	<!--begin Header-->
 	<div id="box_header">
 		<div class="logo">
 			<a href="{config.siteurl}"><img src="{STYLE_PATH}images/logo.png" alt="{config.sitename}" style="border:0px" /></a>
 		</div>
-	</div><!--# END HEADER-->
+	</div><!-- @end-Header -->
 
 	<div class="clr"></div>
 
-	<!--START TOP NAV-->
+	<!-- begin Top Navigation -->
 	<div class="top_nav">
 		<ul class="menu">
 			<li><a href="{config.siteurl}" title="{lang.INDEX}" (go_current?:class="current")>{lang.INDEX}</a></li>
@@ -74,24 +67,24 @@
 			</IF>
 			<li><a href="{_LINKS.call}" title="{lang.CALL}" (go_current==call?class="current":)>{lang.CALL}</a></li>
 		</ul>
-	</div><!--# END TOP NAV-->
+	</div><!-- @end-Top-Navigation -->
 
 	<div class="clr"></div>
 
-	<!--START WRAPPER-->
+	<!-- begin wrapper -->
 	<div id="wrapper" class="clearfix">
 
 	<IF NAME="extras.header">
-	<!--START EXTRAS HEADER-->
+	<!-- begin extras header -->
 	<div class="dot"></div>
-	<div class="extras_header">{extras.header}</div>
+		<div class="extras_header">{extras.header}</div>
 	<div class="dot"></div>
-	<!--END EXTRAS HEADER-->
+	<!-- @end-extras-header -->
 	</IF>
 
 	<div class="clr"></div>
 
-	<!--START MENU RIGHT-->
+	<!-- begin menu right -->
 	<div id="right_menu">
 		<div class="list">
 			<ul>
@@ -115,5 +108,4 @@
 			<a class="xhtml" title="Valid XHTML" onclick="window.open(this.href,'_blank');return false;" href="http://validator.w3.org/check?uri=referer"><img src="{STYLE_PATH}images/xhtml.gif" alt="Valid XHTML" /></a>
 			<a class="css" title="CSS" onclick="window.open(this.href,'_blank');return false;" href="http://jigsaw.w3.org/css-validator/check/referer?profile=css3"><img src="{STYLE_PATH}images/css.gif" alt="CSS" /></a>
 		</div>
-	</div>
-	<!--# END MENU RIGHT-->
+	</div><!-- @end-menu-right -->

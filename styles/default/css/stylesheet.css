@@ -74,7 +74,7 @@
 	/* @group Forms -------------- */
 	form {margin-bottom:10px; }
 	fieldset {  }
-	label {display: block;line-height: 18px; cursor: pointer; padding:4px 0; }
+	label {display: block;line-height: 18px; padding:4px 0; color:#222;}
 	input, textarea, select, option, input[type="text"], input[type="password"], input[type="file"],input[type="submit"] {font:normal 12px Tahoma, Arial, Verdana, sans-serif, "Lucida Grande", "Lucida Sans Unicode"; }	
 	select, option{cursor: pointer;vertical-align: middle;	width:auto;padding:1px 5px;}
 	textarea ,select {border:1px solid #aaa;}
@@ -90,7 +90,7 @@
 
 	/* @Links -------------------- */
 	a:link, a:visited{color: #474747;text-decoration: none;outline: 0; line-height: inherit;}
-	a:hover, a:active {color:#FF5502;text-decoration:underline;}
+	a:hover, a:active {color:#FF5502;text-decoration:none;}
 	p a {line-height: inherit;}
 	h1 a, h2 a, h3 a {color: #333; font-weight: bold; }
 	h4 a, h5 a { line-height: inherit; font-weight: bold; }
@@ -106,8 +106,8 @@
 	.clearfix {display:inline-block;}
 	.clearfix {display: block;} /* Hide from IE Mac */
 	
-	img.left {float:left;}
-	img.right {float:right;}
+	.left, img.left {float:left;}
+	.right, img.right {float:right;}
 	
 	.clr,.line  {clear:both;overflow:hidden;height:0;}
 	.dot {padding:5px 0;background: url(../images/bg_dots.gif) repeat-x;}
@@ -119,22 +119,20 @@
 	
 	/* group Pagination */
 	.pagination {padding:3px 0;margin:2px 0;color:#ff6500;font-size:80%;width:60%;display:inline;}
-	.pagination a {float:right;font-weight: bold;text-align:center;border: 1px solid #ff9600;margin-left:3px;padding:5px 7px;background:#fff url(../images/pagination.gif) repeat-x bottom left;text-decoration: none;color: #ff6500;}
+	.pagination a {float:right;font-weight: bold;text-align:center;border: 1px solid #ff9600;margin-left:3px;padding:5px 7px;background:#fff url(../images/pagination.gif) repeat-x bottom left;color: #ff6500;}
 	.pagination a:hover, .pagination span.current {border: 1px solid #ff9600;background-image:none;background-color:#fff;color: #ff6500;}
 	.pagination span.current, .pagination span.three_dots {text-align:center;margin-left:3px;padding:5px 7px;float:right;border: 1px solid #FF9600;}
-	.pagination span.current{background-color:#ffc794;}
+	.pagination span.current{background-color:#fff;font-size:120%;font-weight: bold;}
 	.pagination span.three_dots {background:#fff url(../images/pagination.gif) repeat-x bottom left;}
 	
 	/* xhtml and css */
-	.css_xhtml{margin:1px auto;height:30px;width:96%;}
+	.css_xhtml{margin:1px auto;height:30px;text-align:center;}
 	a.css img ,a.xhtml img{border:1px solid #FFF;}
 	a.css img:hover {border:1px solid #FF8F21;border-bottom-width:4px;}
 	a.xhtml img:hover {border:1px solid #82C522;border-bottom-width:4px;}
 
 	/* titles all */
-	.title {width:100%;background:url(../images/headline_bg.png) repeat-x top;padding:10px 0;font-size:11px;color:#FF5502;text-indent:10px;}
-	.title a:link {color:#C95A12;}
-	.title a:hover {color:#000;}
+	h1.title {width:100%;background:url(../images/headline_bg.png) repeat-x top;padding:5px 0;font-size:140%;}
 	
 	/* verification code */
 	.safe_code {	margin:10px 0;padding: 10px;border:1px solid #F3C1A3;background:#F9F9F0 url(../images/saf3_code01.gif) no-repeat 0% 50%;}
@@ -143,10 +141,13 @@
 	p.explain {font-size:x-small;font-weight: normal;color:#666;	text-indent:4px;padding-top:5px;}
 	
 	/* extras header and extras footer */
-	.extras_header, .extras_footer {	clear:both;	width:100%;overflow:hidden;	margin:5px auto;padding:10px 0;text-align:center;}
+	.extras_header, .extras_footer {	clear:both;	width:100%;overflow:hidden;	margin:5px auto;padding:10px;text-align:center;}
 	
 	/* captcha stuff */
 	#kleeja_img_captcha {cursor:pointer;float:right;}
+	
+	/* Powered by kleeja -------------------- */
+	h1.kleeja, h1.kleeja a {text-align:left;font: normal 96% Verdana,"Palatino","Book Antiqua",tahoma, "Lucida Sans Unicode";color:#474747;margin:0;}
 /* @end */
 
 /*	--------------------------------------------------
@@ -180,33 +181,32 @@
 	-------------------------------------------------- */
 	body {width:100%;height:100%;background: #ececec url(../images/bg_body.png) repeat-x top center;}
 	#main {width:960px;background:url(../images/bg_main.png) no-repeat top right;margin:10px auto;}
-	#wrapper {height:100%;padding:10px 35px;}
-	#content {float:left;width:600px;padding:10px 30px;margin:10px 30px 10px 0;background:#DFDFDF url(../images/bg_content.png) repeat-x;border:1px solid #aaa;}
-	#content_index {float:left;padding:10px 30px;width:600px;margin:0 30px 0 0;}
+	#wrapper {height:100%;padding:15px 20px 10px 20px;}
+	#content,#content_index  {float:right;width:70%;padding:10px 20px;margin:0 5px;background:#DFDFDF url(../images/bg_content.png) repeat-x;border:1px solid #aaa;}
+	#content_index {background-color:transparent;background-image:none;border:none;padding:0 15px;margin:0;}
 /* @end */
 	
 /*	--------------------------------------------------
 	5. Template & Header > header.html
 	-------------------------------------------------- */
-	#box_header {width:100%;margin:5px auto;}
-	#box_header .logo {padding:10px 15px;display: inline;float:right;}
-
-	/** The main menu at the top **/        
+	#header {width:100%;padding:10px;}
+	/* @Logo -------------------- */  
+	#header .logo {float:right;display:inline;text-indent:-99999px;overflow: hidden;width:360px;height:78px;background:transparent url("../images/logo.png") right center no-repeat;}
+	/* @Top Navigation -------------------- */       
 	.top_nav {width:938px;height:50px;margin:0 auto;background:url(../images/menu-bg.gif) repeat-x top left;display: block;}
 	.top_nav .menu {margin:0 40px;}
 	.top_nav .menu ul{list-style-type: none;float:right;}
 	.top_nav .menu li {display: block;float:right;margin-left:2px;}
-	.top_nav .menu li a {height:47px;line-height:40px;	color: #444;text-decoration: none;display: block;float: left;padding:0 20px;font-size:90%;font-weight:700;}
+	.top_nav .menu li a {height:47px;line-height:40px;	color: #444;display: block;float: left;padding:0 20px;font-size:90%;font-weight:700;}
 	.top_nav .menu li a:hover {color:#F68618;background:url(../images/hover.png) repeat-x top left;}
 	.top_nav .menu li a.current {color:white;background:url(../images/current-bg.gif) top left repeat-x;padding:0px 20px;}
-
-	/*  right menu */
-	#right_menu{width:180px;float:right;padding:10px 5px;position:relative;display:inline;font-size:90%;font-weight:700;}
+	/* @right menu -------------------- */
+	#right_menu{width:180px;float:right;margin:0 15px 0 20px;position:relative;display:inline;font-size:90%;font-weight:700;}
 	#right_menu .list ul{list-style-type: none;line-height:16px;}
 	#right_menu .list .imgtop{height:36px;width:160px;background:url(../images/menu-right-top.gif) no-repeat;display:block;color:#000;padding:0px 10px;text-align:left;}
 	#right_menu .list .imgbottom{background:url(../images/menu_right_bottom.gif) no-repeat;height:37px;width:160px;display:block;padding:0px 10px;color: #F1F7E1;border-top: 1px solid #666;}
 	#right_menu .list img{margin:0 10px;width: 16px;height: 16px;}
-	#right_menu .list a{background-color:#777;padding:6px 10px;display: block;width:160px;color:white;text-decoration:none;border-top: 1px solid #666;}
+	#right_menu .list a{background-color:#777;padding:6px 10px;display: block;width:160px;color:white;border-top: 1px solid #666;}
 	#right_menu .list a:hover,#right_menu .list a.current{background:#666 url(../images/bg_right_menu.gif) repeat-y right;}
 	#right_menu .list a:active {background:#666;}
 /* @end */
@@ -214,8 +214,9 @@
 /*	--------------------------------------------------
 	6. Template & Index > index_body.html
 	-------------------------------------------------- */
-	.wolcome_msg {text-indent:5px;font-size:12px;font-weight:400;padding:3px 6px;}
+	.wolcome_msg {text-indent:5px;font-size:12px;padding:3px 6px;}
 	.agree{margin:10px 0;padding:3px 0;}
+	.agree span{font-size:90%;font-weight:700;}
 	.zx, .zl {cursor:pointer;padding:4px;}
 	.zx a:hover, .zl a:hover {background:#FEEA00;}
 	.bn_up {margin-top:10px;}
@@ -226,16 +227,17 @@
 	.waitloading{color:#E17100;font-size:120%;margin:5px;}
 
 	/*	Tabs -------------------- */
-	.tabber {width:100%;margin:4px 0;}
-	.tabberlive {margin:5px 0;}
 	.tabberlive .tabbertabhide {display:none;}
-	.tabbertab {padding:20px 25px;background:white url(../images/bg_tabbertab.png) repeat-x bottom left;border:1px solid #B9B9B9;}
+	.tabber { }
+	.tabberlive {margin-top:10px;}
+	.tabberlive .tabbertab {padding:20px;background:white url(../images/bg_tabbertab.png) repeat-x bottom left;border:1px solid #ccc;border-top:none;}
 	.go_up{background:url(../images/go_up.png) no-repeat 0% 100%;}
-	ul.tabbernav{padding:1px 0;font-size:11px;}
-	ul.tabbernav li{list-style:none;display: inline;}
-	ul.tabbernav li a:link,ul.tabbernav li a:visited{margin-left:4px;padding:4px 14px;color:#444;font-weight:normal;border: 1px solid #B9B9B9;background:#D54D10 url(../images/bg_tabbernav.gif) repeat-x;text-decoration: none;}
-	ul.tabbernav li a:hover{color:#000;text-decoration: none;}
-	ul.tabbernav li.tabberactive a:link{border-bottom-color:white;background:white;color: #F45E13;}
+	ul.tabbernav{margin:0;padding: 4px 0;border-bottom: 1px solid #ccc;font-size:11px;}
+	ul.tabbernav li{list-style: none;margin: 0;display: inline;}
+	ul.tabbernav li a{padding: 3px 1em; margin-left: 4px;background:#FFF3E5;border: 1px solid #ccc;border-bottom: none;}
+	ul.tabbernav li a:link ,ul.tabbernav li a:visited {color:#C8740D;}
+	ul.tabbernav li a:hover{color:#000;background:#CAA397 url(../images/bg_tabbernav.gif) repeat-x;border-color: #ccc;}
+	ul.tabbernav li.tabberactive a{color:#FF6A15;background:#fff url(../images/bg_tabbernav.gif) repeat-x center;border-bottom: 1px solid #fff;}
 
 	/*	ONLINE -------------------- */
 	.online{width:100%;float:right;padding:2px 0;display:block;}
@@ -260,48 +262,42 @@
 	.data_file_down .wait {color:#F04C2D;font-size:xx-large;height:45px;line-height:45px;}
 	.download {margin:5px auto;}
 	.download a{cursor:pointer;background:#FA9A00 url(../images/bg_animated.gif) repeat;border:1px solid #C16600;height:34px;line-height:34px;color:#6F3A00;padding:10px 15px;}
-	.download a:hover {border-color:#fff;color:#222;text-decoration:none;}
+	.download a:hover {border-color:#fff;color:#222;}
 	.download span{font-size:x-small;color:#777;}
 /* @end */
 
 /*	--------------------------------------------------
 	8. Template & Stats > stats.html
 	-------------------------------------------------- */
-	.stats  {margin:5px 0;background: url(../images/stats.gif) no-repeat 2% 40%;font-size:115%;}
+	.stats  {font-size:90%;font-weight:700;color:#333;margin:5px 0;background: url(../images/stats.gif) no-repeat 2% 40%;}
 	.stats ul {list-style-type:none;text-indent:4px;}
 	.stats  ul li {height:30px;line-height:30px;background:transparent url(../images/list_stat.gif) no-repeat right center;padding-right:15px;}
-	.st {text-indent:20px;}
-	.st i{background:#FFF;padding:4px 20px;color: #FF5502;border-top:1px solid #ECCEBB;border-bottom:1px solid #ECCEBB;}
+	.st i{background:#FFF;padding:5px 20px;color: #FF5502;border-top:1px solid #ECCEBB;border-bottom:1px solid #ECCEBB;}
 /* @end */
 
 /*	--------------------------------------------------
 	10. Template & Rules > rules.html
 	-------------------------------------------------- */
-	#rules {padding:10px 0;font-weight:700;}
+	#rules {padding:10px 0;font-size:90%;font-weight:700;color:#333;}
 	#rules .rut {clear:both;margin-bottom:3px;padding:4px 0px;text-indent:10px;color:red;}
 	#rules .rls {display:block;text-indent:10px;}
 	#rules .rls ul{list-style-type:none;text-indent:4px;}
-	#rules .rls ul li {height:24px;line-height:24px;background:transparent url(../images/list_rls.gif) no-repeat right center;padding-right:15px;padding-bottom:2px;font-size:90%;color:#111;}
+	#rules .rls ul li {height:24px;line-height:24px;background:transparent url(../images/list_stat.gif) no-repeat right center;padding-right:15px;padding-bottom:2px;}
 
 /* @end */
 
 /*	--------------------------------------------------
 	10. Template & Footer > footer.html
 	-------------------------------------------------- */
-	#footer{width:100%;background:#EBEBEB url(../images/bg_footer.gif) repeat-x;min-height: 50px;padding:20px 0 10px 0;}
-	#footer .footer_inner{width:900px;margin:0 auto;}
-	#footer .left{float:left;}
-	#footer .right{float:right;}
-	#footer .right .Copyrights {text-align: right;font-size:12px;	word-spacing:1px;font-weight: 400;color:#474747;margin-bottom:10px;}
-	#footer .right .admin_cp_link {cursor:pointer;text-decoration:none;margin-top:10px;}
-	#footer .right .admin_cp_link span:hover  {color:#111;text-decoration:none;}
-	#footer .right .admin_cp_link span{padding:6px 30px;background:url(../images/admin_cp.gif) no-repeat center left;font-weight:bold;border:1px solid #FFF;color:#fff;}
-	#footer .footer_stats,#footer .googleanalytics{display:block;margin:5px 0;direction:ltr;}
-	#footer .footer_stats {font-size: 0.9em !important;font-family:Baskerville,"Goudy Old Style","Palatino","Book Antiqua",tahoma;}
-	#footer a:link, #footer a:active, #footer a:visited{color:#474747;text-decoration:none;}
+	#footer{width:100%;background:#EBEBEB url(../images/bg_footer.gif) repeat-x;min-height:50px;padding:20px 0 10px 0;}
+	#footer .footer_inner{width:930px;margin:0 auto;font-size:96%;color:#474747;}
+	#footer .bu-panel{margin-top:25px !important;float:right;}
+	#footer .admin_cp_link span{padding:6px 35px;background:url(../images/admin_cp.gif) no-repeat center left;font-weight:bold;border:1px solid #FFF;color:#fff;}
+	#footer .admin_cp_link span:hover {cursor:pointer;color:#111;text-decoration:none;}
+	#footer .footer_stats, #footer .googleanalytics{display:block;margin-top:25px !important;direction:ltr;}
+	#footer .footer_stats, #footer .footer_stats strong {font-size:90%;font-family:Baskerville,"Palatino","Book Antiqua",tahoma;color:#777;}
+	#footer a:link, #footer a:active, #footer a:visited{color:#474747;}
 	#footer a:hover{text-decoration:underline;color:#FF6A15;}
-	/* Powered by kleeja -------------------- */
-	.kleeja {padding:2px 0;text-align:left;font:12px Verdana,"Palatino","Book Antiqua",tahoma, "Lucida Sans Unicode";color:#474747;}
 /* @end */
 
 /*	--------------------------------------------------
@@ -316,26 +312,26 @@
 	select.remme {padding:1px 4px;margin:0 2px;}
 	.forget_pass {text-indent:10px;padding:4px 15px;margin-top:4px;background:#fff url(../images/forget_pass.png) no-repeat 96% 50%;	float:left;font-size:12px;}
 	.forget_pass  a{color:#444;}
-	.forget_pass a:hover {color:#FF6A15;}
+	.forget_pass a:hover {color:#FF6A15;text-decoration: underline;}
 /* @end */
 
 /*	--------------------------------------------------
 	12. Template & Users Files > fileuser.html
 	-------------------------------------------------- */
-	#boxfileuser ,#filecplink {display:block;margin:8px auto;}
+	#boxfileuser ,#filecplink {display:block;margin:8px auto;font-weight: 700;}
 	#boxfileuser .box_user, #boxfileuser .us3r_n4me {display:inline;height:60px;padding:10px;background:#fff url(../images/bg_box_1.gif) repeat-x top left;border:1px solid #fff;}
 	#boxfileuser .box_user {width:46%;float:right;}
 	#boxfileuser .us3r_n4me {width:45%;float:left;}
-	#boxfileuser .public {margin:5px auto;background:#8C8C8C url(../images/bg_tile.gif) repeat-x bottom;padding:5px 10px;color:#fff;text-align:center;border-top:1px dashed #EEE;border-bottom:1px dashed #EEE;}
-	#boxfileuser .uname, #boxfileuser .nums{font-size:large;color:#FF6600;padding-top:4px;text-align:center;}
+	#boxfileuser .public {margin:5px auto;background:#8C8C8C url(../images/bg_tile.gif) repeat-x bottom;font-size:90%;padding:5px 10px;color:#fff;text-align:center;border-top:1px dashed #EEE;border-bottom:1px dashed #EEE;}
+	#boxfileuser .uname, #boxfileuser .nums{font-size:160%;color:#FF6600;padding-top:4px;text-align:center;}
 	#filecplink fieldset{padding: 15px;margin:8px auto;border: 1px solid #aaa;}
-	#filecplink  input.link_user {direction:ltr;width:98%;margin:0 auto;color:#EA5812;padding:6px;font-size:12px;font-weight: 700;letter-spacing:1px;}
-	#filecplink legend.copylink {font-size:11px;font-weight: 700;padding:0 5px;color:#000;}
+	#filecplink  input.link_user {direction:ltr;width:98%;margin:0 auto;color:#EA5812;padding:6px;font-size:90%;font-weight: 700;letter-spacing:1px;}
+	#filecplink legend.copylink {font-size:90%;font-weight: 700;padding:0 5px;color:#000;}
 	.tabledata {width:100%;background:#E6E6E6 url(../images/bg_user_box.gif) repeat-x top left;border:1px solid #aaa;}
 	.tabledata th , .tabledata td ,.tabledata tbody td {padding:0 5px;height: 30px;line-height: 30px;vertical-align:middle;border:1px solid #aaa;border-top-color: #fff;border-left-color: #fff;border-bottom-color:#aaa;text-align:center;}
 	.tabledata .odd  {background:#ECECEC url(../images/bg_footer.gif) repeat-x center right;text-align:right;width:50%;}
 	.tabledata thead th {white-space: nowrap;font-weight:bold;background:#D54D10 url(../images/bg_tile_tab.png) repeat-x top left;	color:#fff;border:none;}
-	.tabledata tbody td {font-size:12px;font-weight: 400;white-space:nowrap;}
+	.tabledata tbody td {font-size:90%;font-weight: 700;white-space:nowrap;}
 	.tabledata a, .tabledata a:link {color:#222;}
 	.tabledata a:visited {color:#444;text-decoration:line-through;}
 	.tabledata th:hover a, .tabledata td:hover a {color:#FF6600;text-decoration:underline;}
@@ -348,13 +344,13 @@
 /*	--------------------------------------------------
 	13. Template & Register > register.html
 	-------------------------------------------------- */
-	.register {background:transparent url(../images/register.gif) no-repeat 0% 50%;margin:5px 0;}
+	.register {background:transparent url(../images/register.gif) no-repeat 0% 50%;margin:5px 0;padding: 10px 0;}
 /* @end */
 
 /*	--------------------------------------------------
 	14. Template & Contact Us > call.html
 	-------------------------------------------------- */
-	.call{background:transparent url(../images/call.gif) no-repeat 0% 50%;margin:5px 0;}
+	.call{background:transparent url(../images/call.gif) no-repeat 0% 50%;margin:5px 0;padding: 8px 0;}
 	textarea.text_area{width:70%;}
 /* @end */
 
@@ -369,7 +365,6 @@
 	16. Template & Report a File > report.html
 	-------------------------------------------------- */
 	.rebort{background:transparent url(../images/file_rebort.gif) no-repeat 2% 50%;margin:5px 0;padding: 5px 0;}
-	.rebort label {display:block;}
 	input.urlcolor{background:#FFDFDF !important;	border:1px solid #D88D8D !important;letter-spacing:1px;width:65%;}
 	input.urlcolor:focus,input.urlcolor:hover{background:#FFDFDF !important;cursor:default;border-color:#D88D8D !important;}
 /* @end */      
@@ -378,22 +373,24 @@
 	17. Template & Profile > profile.html
 	-------------------------------------------------- */
 	#profile  select, #profile  option{background:#FFD;color:#000;}
-	#profile .boxdata{float:right;text-align:center;width:31%;height:180px;border:1px solid #fff;background:#fff url(../images/bg_tabbertab.png) repeat-x bottom left;	margin:5px;}
-	#profile .boxdata .tit{background:#FF9A1D url(../images/bg_tile_tab.png) repeat-x bottom left;padding:4px;margin:0px;color:white;text-align:center;}
-	#profile .boxdata .bq {color:#999;padding:0 5px;}
-	#profile .boxdata .biguser {color:#FF5502;padding:5px;}
+	#profile .boxdata{float:right;text-align:center;width:31%;height:180px;border:1px solid #fff;background:#fff url(../images/bg_tabbertab.png) repeat-x bottom left;margin:5px;}
+	#profile .boxdata .tit{background:#FF9A1D url(../images/bg_tile_tab.png) repeat-x bottom left;padding:6px;margin:0;color:white;font-size:90%;}
+	#profile .boxdata .boxdata_inner {padding:8px 14px;text-align:center;}
+	#profile .boxdata .boxdata_inner label {padding:3px 10px;text-align:right;}
+	#profile .boxdata .boxdata_inner input, #profile .boxdata .boxdata_inner select  {font-size:90%;font-weight:700;color:#FF5502;padding:2px 4px;}
+	#profile .boxdata .boxdata_inner select {float:right;margin-right:10px;width:88%;padding:0px 4px;}
 	.buttons_center {line-height:24px;padding:5px;text-align:center;margin:3px auto;}
 /* @end */
 
 /*	--------------------------------------------------
 	18. Template & File Manager users > filecp.html
 	-------------------------------------------------- */
-	.file_cp {background:#ECECEC url(../images/table_file_cp.gif) no-repeat 40% 45%;	color:#444;width:100%;border:1px solid #fff;}
+	.file_cp {background:#ECECEC url(../images/table_file_cp.gif) no-repeat 40% 45%;	color:#444;width:100%;border:1px solid #fff;font-size:90%;}
 	.file_cp td {height: 30px;line-height: 30px;padding:0px 8px;white-space: nowrap;}
 	.file_cp th {padding:8px;white-space:nowrap;}
 	.left_button {float:left;margin:2px 0;}
-	.file_cp  .odd  {text-align:right;width:76%;}
-	.file_cp  .nbr  {text-align:right;color:#000;}
+	.file_cp .odd  {text-align:right;width:76%;}
+	.file_cp .nbr  {text-align:right;color:#000;}
 	.file_cp thead th, .file_cp tfoot th, .file_cp tbody td {border: 1px solid #aaa;border-top-color: #fff;border-left-color: #fff;border-bottom-color: #aaa;font-weight:bold;text-align:center;}
 	.file_cp thead th{background:#D54D10 url(../images/bg_tile_tab.png) repeat-x top left;color:#fff;border:none;}
 	.file_cp thead th a:link{color:#fff;}
@@ -403,10 +400,9 @@
 	.file_cp  a:link {color:#444;}
 	.file_cp a:visited {color:#000;}
 	.file_cp  a:hover {color:#D2691E;}
-	.checkall a:link{color:#FF6500;background:#fff;font-weight: 400;}
-	.ored,.ored:hover,.ored a:link, .ored a:hover, .ored a:visited {background:#FFCACA;color:red !important;text-decoration:line-through;}
-	.ored td,.ored:hover td{border: none !important;}
-	.osilver{background:#F2F2F2;}
+	.checkall a:link{color:#FF6500;}
+	.ored,.ored:hover,.ored a:link, .ored a:hover, .ored a:visited {background:#FFE1E2;color:red !important;text-decoration:line-through;}
+	.ored td,.ored:hover td{border-top-color:#aaa !important;border-bottom-color:#fff !important;}
 /* @end */
 
 /*	--------------------------------------------------
@@ -438,12 +434,12 @@
 	20. Template & Copy the links after upload > up_boxes.html
 	-------------------------------------------------- */
 	.thumb_img {width:100%;margin:5px auto;text-align:center;}
-	.thumb_img a img{background:white;border:2px solid #444;padding:5px;}
+	.thumb_img a img{background:white;border:2px solid #CABE7E;padding:5px;}
 	.thumb_img a img:hover{border-color:#FEA53D;}
-	.up_box_input {margin:1px auto;border: 1px solid #B0A24A;background:#ECECEC;}
+	.up_box_input {margin:1px auto;border: 1px solid #fff;background:#ECECEC;}
 	.up_box_input tr{height:30px;line-height:30px;}
-	td.btitle ,td.all_box_link{border:1px solid #fff;text-align:center;font-size:11px;font-weight:700;padding:0 4px;}
+	td.btitle ,td.all_box_link{border:1px solid #C8BD7C;text-align:center;font-size:11px;font-weight:700;padding:0 4px;}
 	td.btitle {color:#333;width:120px;padding:0 1px;border-left:none;}
 	td.all_box_link {border-right:none;}
-	input[type="text"].up_input {direction:ltr;width:97%;color:#CF6600;padding:3px;letter-spacing:1px;vertical-align:middle;}
+	input[type="text"].up_input {direction:ltr;width:97%;color:#7D5E4A;padding:3px;letter-spacing:1px;vertical-align:middle;}
 /* @end */

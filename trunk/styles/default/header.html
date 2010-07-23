@@ -28,7 +28,7 @@
 	<IS_BROWSER="mobile"><link rel="stylesheet" type="text/css" href="{STYLE_PATH}css/mobile.css" media="handheld" /></IS_BROWSER>
 	<script type="text/javascript">
 	<!--
-	document.write('<link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH}css/css3.css" />');
+	document.write('<link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH}css/css3.css" \/>','<style type="text/css">.tabber{display:none;}<\/style>');
 	-->
 	</script>
 	<script type="text/javascript">
@@ -48,11 +48,10 @@
 <div id="main">
 
 	<!--begin Header-->
-	<div id="box_header">
-		<div class="logo">
-			<a href="{config.siteurl}"><img src="{STYLE_PATH}images/logo.png" alt="{config.sitename}" style="border:0px" /></a>
-		</div>
-	</div><!-- @end-Header -->
+	<div id="header" class="clearfix">
+		<h1><a href="{config.siteurl}" class="logo">{config.sitename}</a></h1>
+	</div>
+	<!-- @end-Header -->
 
 	<div class="clr"></div>
 

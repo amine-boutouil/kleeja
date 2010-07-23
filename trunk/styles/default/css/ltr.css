@@ -1,20 +1,51 @@
-/*
-# package Kleeja
-# version 1.0.0
-# copyright (c) 2007 Kleeja.com
-# license ./docs/license.txt
-# Filename : styles/default/ltr.css
-# Author: Tar3Q  
-# Date:: 2009-10-07  $
-*/
-option {padding-left: 1em;}
-caption, th, td {text-align:left;} /* missing ; */
-.logo {float:left;}
-img.left {float:right;}
-img.right {float:left;}
-.line {background-position:left top;}
-.title {float:left;background-position:left top;}
-.safe_code {    background:#F9F5F0 url(../images/saf3_code_ltr.gif) no-repeat 100% 50%;}
+@charset "UTF-8";
+/*	--------------------------------------------------
+	Theme Name: 	default V1
+	Filename: 		styles/default/ltr.css
+	package:		Kleeja  copyright(c)2007-2010
+	version:		1.0.0
+	URL:			http://www.kleeja.com
+	Date:			2010-07-10
+	Author: 		Tar3Q
+	-------------------------------------------------- */
+	
+	/* @Font Family -------------------- */
+	body { font-family: Arial, Helvetica, Helvetica Neue, Verdana, sans-serif; font-size: 13px;}
+	
+	/* @Font Size -------------------- */
+	
+	
+	/* @Font Weight -------------------- */
+	
+	
+	/* @Text Align > Left -------------------- */
+	
+	
+	/* @Float > Left -------------------- */
+	
+	
+	/* @Float > Right -------------------- */
+	
+	
+	/* @Background Position -------------------- */
+	
+	
+	/* @Margin -------------------- */
+	
+	
+	/* @Padding -------------------- */
+	
+	
+	/* @Misc -------------------- */
+	
+	option {padding-left: 1em;}
+	caption, th, td {text-align:left;} /* missing ; */
+	.logo {float:left;}
+	img.left {float:right;}
+	img.right {float:left;}
+	.line {background-position:left top;}
+	.title {float:left;background-position:left top;}
+	.safe_code {background:#F9F5F0 url(../images/saf3_code_ltr.gif) no-repeat 100% 50%;}
 .top_nav .menu {margin-right:0;margin-left:6%;}
 .top_nav .menu ul{float:left;}
 .top_nav .menu li {float:left;margin-left:0;margin-right:2px;}
@@ -30,11 +61,11 @@ img.right {float:left;}
 .kleeja {clear:both;}
 .wait {font-size:200%;}
 .stats  {background-position: 94% 50%;}
-.go_up{    background-position: 94% 100%;}
+.go_up{ background-position: 94% 100%;}
 ul.tabbernav li a{margin-left:0;margin-right:4px;background-position:top right;}
-.login {    background-position:90% 50%;}
+.login {background-position:90% 50%;}
 .title_login {background-position:1% 50%;}
-.gather {float:left;    margin-left:0;margin-right:3px;}
+.gather {float:left; margin-left:0;margin-right:3px;}
 input.username, input.password {float:left;padding:3px 20px 3px 3px;background-position: 98% 50%;}
 .forget_pass {margin-left:0;margin-right:60px;background-position: 2% 50%;float:right;}
 #kleeja_img_captcha {float:left;}

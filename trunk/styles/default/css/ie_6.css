@@ -1,28 +1,34 @@
-*html .classname {}
-* html selector{property:value;}
+@charset "UTF-8";
+/*	--------------------------------------------------
+	Theme Name: 	default V1
+	Filename: 		styles/default/ie_6.css
+	package:		Kleeja  copyright(c)2007-2010
+	version:		1.0.0
+	URL:			http://www.kleeja.com
+	Date:			2010-07-10
+	Author: 		Tar3Q
+	-------------------------------------------------- */
 
-input {font: normal 12px Tahoma, Arial, Verdana, sans-serif, "Lucida Grande", "Lucida Sans Unicode";}
+	/* @CSS Hacks for IE6 and Lower */
+	
+	*html .classname {}
+	* html selector{property:value;}
 
-.top_nav .menu li a:hover {
-    color:#fff;
-    background: url(../images/current-bg.gif) repeat-x top left;
-}
-#right_menu .list a:hover{
-    color:#fff;
-    background:#555 url(../images/right4_menu.png) repeat;
-}
+	input {font: normal 12px Tahoma, Arial, Verdana, sans-serif, "Lucida Grande", "Lucida Sans Unicode";}
+	ul ul {display:none; } 
+	li:hover ul {display:block;}
 
-.guide_user_th  {background-image:none;}
-.guide_visitor_th {background:#FF7B00 url(../images/headinebg.png) repeat-x top right}
-.user_ext{background:#E8E8E8 url(../images/headlnebg.png) repeat-x top right}
-.visitor_ext{background:#FDF8EE url(../images/headliebg.png) repeat-x top right;}
-.tabledata thead th {background:#F68618 url(../images/headinebg.png) repeat-x center right;}
-.go_up{background:url(../images/goup.png) no-repeat 6% 100%;}
+	.top_nav .menu li a:hover {color:#fff;background: url(../images/current-bg.gif) repeat-x top left;}
+	#right_menu .list a:hover{color:#fff;background:#555 url(../images/right4_menu.png) repeat;}
 
-ul ul {display:none; } 
-li:hover ul {display:block;}
-div.user_ext:hover{background-color:#fff;}
-.title {background-image:none;margin:10px 0;}
+	.guide_user_th , .guide_visitor_th,.user_ext , .visitor_ext, .tabledata thead th, .title{background-image:none;}
+
+	.go_up{background:url(../images/goup.png) no-repeat 6% 100%;}
+
+	div.user_ext:hover{background-color:#fff;}
+	.title {margin:10px 0;}
+
+
 
 	
 .cboxIE #cboxMiddleRight {
@@ -30,22 +36,12 @@ div.user_ext:hover{background-color:#fff;}
 	background: none transparent scroll repeat 0% 0%;
 }
 
-* html #facebox_overlay { /* ie6 hack */
-  position: absolute;
-  height: expression(document.body.scrollHeight > document.body.offsetHeight ? document.body.scrollHeight : document.body.offsetHeight + 'px');
-}
-
+* html #facebox_overlay { 
+	position: absolute;height: expression(document.body.scrollHeight > document.body.offsetHeight ? document.body.scrollHeight : document.body.offsetHeight + 'px');}
 /* App dialogs */
-
 #appdialogs {
   /* fake max-height */
   height:expression(this.scrollHeight > document.documentElement.clientHeight ? document.documentElement.clientHeight + "px" : "auto");
-  float: left;
-  width: 100%;
-  overflow-x: hidden;
-}
+  float: left;width: 100%; overflow-x: hidden;}
 
-.editProfile-watermark-preview {
-  width: 100%;
-  display: inline-block;
-}
+.editProfile-watermark-preview {width: 100%;display: inline-block;}

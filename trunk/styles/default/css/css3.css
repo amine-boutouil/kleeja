@@ -1,61 +1,75 @@
 @charset "UTF-8";
 /*	--------------------------------------------------
 	Theme Name: 	default V1
+	Filename: 		styles/default/css3.css
 	package:		Kleeja  copyright(c)2007-2010
 	version:		1.0.0
 	URL:			http://www.kleeja.com
 	Date:			2010-07-10
 	Author: 		Tar3Q
 	-------------------------------------------------- */
-	
-	/* @iPhone -------------- */
+
+/*  #iPhone ----------- */	
 	@media screen and (max-device-width: 480px) { html { -webkit-text-size-adjust: none; } }
 	
-	/* @Snow Leopard Safari Type Fix -------------- */
+/*  #Snow Leopard Safari Type Fix ----------- */	
 	body {-webkit-text-stroke: 1px rgba(255,255,255,.01); }
-	
-	/* @Get fancy with rounded corners -------------- */
-	table thead tr th:first-child { -webkit-border-top-left-radius: 5px; -moz-border-radius: 3px 0 0 0; }
-	table thead tr th:last-child { -webkit-border-top-right-radius: 5px; -moz-border-radius: 0 3px 0 0; }
-	table tbody tr:last-child td:first-child { -webkit-border-bottom-left-radius: 5px; -moz-border-radius: 0 0 0 3px; }
-	table tbody tr:last-child td:last-child { -webkit-border-bottom-right-radius: 5px; -moz-border-radius: 0 0 3px 0; }
-	
-	button::-moz-focus-inner { border: 0; padding: 0; }
-	
+
+/*	---------------------------------------
+	#Text Shadow
+	--------------------------------------- */
+	/* @White text shadow ------- */
 	body {text-shadow: 0 0 2px #fff;}
 	
-input, textarea, select{
-	-moz-box-shadow: 0px 0px 8px #ECCEBB;-webkit-box-shadow: 0px 0px 8px #ECCEBB;
-	-khtml-box-shadow: 0px 0px 8px #ECCEBB;box-shadow: 0px 0px 8px #ECCEBB;
-	}
-input[type="text"]:hover,input[type="text"]:focus, textarea:focus, textarea:hover,input[type="password"]:hover,input[type="password"]:focus,select:hover,select:focus{
-	-moz-box-shadow:0 0 5px #D26900;-webkit-box-shadow:0 0 5px #D26900;box-shadow:0 0 5px #D26900;
-	}
-.top_nav .menu li a.current,#right_menu .list a,#right_menu .list a.current,.guide_user_th, .guide_visitor_th,.tit ,.file_cp thead th ,.tabledata thead th,
-#footer .admin_cp_link span,#boxfileuser .public{
-	text-shadow: 0 0 2px #444;
-	}
-.tabbertab {	
-	-moz-border-radius-bottomleft :5px;-webkit-border-bottom-left-radius : 5px;border-bottom-left-radius : 5px; 
-	-moz-border-radius-bottomright : 5px;-webkit-border-bottom-right-radius : 5px;border-bottom-right-radius : 5px;
-	}
-ul.tabbernav li a{
-	-moz-border-radius-topleft : 5px;-webkit-border-top-left-radius : 5px;border-top-right-radius : 5px;
-	-moz-border-radius-topright : 5px;-webkit-border-top-right-radius : 5px;border-top-left-radius : 5px;
-	}
-.pagination a, .pagination span.current, .pagination span.three_dots, #footer .footerlinksleft ul li a:hover, #footer .Copyrights  a:hover, #footer .page_stats a:hover, .onlineall, .onlinevisitor, .onlineusers,
-.forget_pass,#profile .boxdata,.name_users ,#boxfileuser .box_user, #boxfileuser .us3r_n4me, .data_file_down .download  a {
-	-moz-border-radius : 5px;-webkit-border-radius : 5px;-khtml-border-radius : 5px;border-radius : 5px; }
-.border_radius, .admin_cp_link span, .user_img, .visitor_img  {
-	-moz-border-radius : 10px;-webkit-border-radius : 10px;-khtml-border-radius : 10px;border-radius : 10px;
-	}
-.border_radius, .tabbertab, ul.tabbernav li a, #footer a.admin_cp_link,select,.data_file .filereport {
-	-moz-box-shadow : 0px 0px 5px #FFFFFF;-webkit-box-shadow : 0px 0px 5px #FFFFFF; 
-	-khtml-box-shadow : 0px 0px 5px #FFFFFF;box-shadow : 0px 0px 5px #FFFFFF;
-	}
-.onlineall, .onlinevisitor, .onlineusers, .name_users,.guide_user_th, .guide_visitor_th,.user_box,.forget_pass,#footer .admin_cp_link span,#profile .boxdata,.file_cp,#boxfileuser .box_user, .tabledata,
-#boxfileuser .us3r_n4me, .data_file_down .download  a {
-	-moz-box-shadow : 0px 0px 3px #999;-webkit-box-shadow : 0px 0px 3px #999; 
-	-khtml-box-shadow : 0px 0px 3px #999;box-shadow : 0px 0px 3px #999;
-	}
-.pagination a:hover ,.pagination span.current{-moz-box-shadow:0 0 6px #fff;-webkit-box-shadow:0 0 6px #fff;box-shadow:0 0 6px #fff;}
+	/* @Dark gray text shadow ------- */
+	.top_nav .menu li a.current, .guide_user_th, .guide_visitor_th, .tit , .file_cp thead th , .tabledata thead th,
+	#right_menu .list a,	#right_menu .list a.current,	#footer .admin_cp_link span,	#boxfileuser .public {
+	text-shadow: 0 0 2px #444;}
+/* @end */
+
+/*	---------------------------------------
+	#Box Shadow
+	--------------------------------------- */	
+	/* @Orange Light Shadow --------------- */
+	input, textarea, select{-moz-box-shadow: 0px 0px 8px #F3CFB3;-webkit-box-shadow: 0px 0px 8px #F3CFB3;-khtml-box-shadow: 0px 0px 8px #F3CFB3;box-shadow: 0px 0px 8px #F3CFB3;}
+	
+	/* @Orange Light Shadow --------------- */
+	input[type="file"]{-moz-box-shadow: none;-webkit-box-shadow: none;-khtml-box-shadow: none;box-shadow:none;}
+	
+	/* @Orange Shadow --------------- */
+	input[type="text"]:hover, input[type="text"]:focus, input[type="password"]:hover, input[type="password"]:focus,
+	textarea:focus, textarea:hover,	select:hover, select:focus{
+	-moz-box-shadow:0 0 4px #D26900;-webkit-box-shadow:0 0 4px #D26900;-khtml-box-shadow:0 0 4px #D26900;box-shadow:0 0 4px #D26900;}
+	
+	/* @White Shadow (4) pixel ------------- */
+	.border_radius,	.tabbertab,	ul.tabbernav li a,	#footer a.admin_cp_link,	.data_file .filereport {
+	-moz-box-shadow : 0px 0px 4px #FFFFFF;-webkit-box-shadow : 0px 0px 4px #FFFFFF;-khtml-box-shadow : 0px 0px 4px #FFFFFF;box-shadow : 0px 0px 4px #FFFFFF;}
+	
+	/* @White Shadow (7) pixel ------------- */	
+	.pagination a:hover , .pagination span.current{
+	-moz-box-shadow:0 0 7px #fff;-webkit-box-shadow:0 0 7px #fff;box-shadow:0 0 7px #fff;}
+
+	/* @Gray Shadow --------------- */	
+	.onlineall,	.onlinevisitor,	.onlineusers, .name_users, .guide_user_th, .guide_visitor_th, .user_box,.forget_pass,
+	#footer .admin_cp_link span,	#profile .boxdata,.file_cp,	#boxfileuser .box_user, .tabledata,	#boxfileuser .us3r_n4me,	.data_file_down .download  a {
+	-moz-box-shadow : 0px 0px 3px #999;-webkit-box-shadow : 0px 0px 3px #999;-khtml-box-shadow : 0px 0px 3px #999;box-shadow : 0px 0px 3px #999;}
+/* @end */	
+
+/*	---------------------------------------
+	#Rounded Corners
+	--------------------------------------- */
+	/* @Border Corners only, Top Left and Right --------------- */
+	.tabbertab {	-moz-border-radius-bottomleft :5px;	-moz-border-radius-bottomright : 5px;-webkit-border-bottom-left-radius : 5px;-webkit-border-bottom-right-radius : 5px;border-bottom-left-radius : 5px; border-bottom-right-radius : 5px;}
+	/* @Border Corners only, Bottom Left and Right --------------- */
+	ul.tabbernav li a, #profile .boxdata .tit{-moz-border-radius-topleft : 5px;-moz-border-radius-topright : 5px;-webkit-border-top-left-radius : 5px;-webkit-border-top-right-radius : 5px; border-top-right-radius : 5px;border-top-left-radius : 5px;}
+	
+	/* @Borders all Corners (5)Pixel ----------- */	
+	.pagination a, .pagination span.current, .pagination span.three_dots, .forget_pass, .name_users, .data_file_down .download  a,
+	#footer .footerlinksleft ul li a:hover, #footer .Copyrights  a:hover, #footer .page_stats a:hover,	.onlineall,	.onlinevisitor,	.onlineusers,
+	#profile .boxdata, #boxfileuser .box_user, #boxfileuser .us3r_n4me {
+	-moz-border-radius : 5px;-webkit-border-radius : 5px;-khtml-border-radius : 5px; border-radius : 5px;}
+
+	/* @Borders all Corners (10)Pixel ----------- */	
+	.border_radius,	.admin_cp_link span,	.user_img,.visitor_img  {
+	-moz-border-radius : 10px;-webkit-border-radius : 10px;-khtml-border-radius : 10px;border-radius : 10px;}
+/* @end */

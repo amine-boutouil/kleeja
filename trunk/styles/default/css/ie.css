@@ -1,20 +1,21 @@
-html {
-      background : url(null) fixed no-repeat;
-     }
+@charset "UTF-8";
+/*	--------------------------------------------------
+	Theme Name: 	default V1
+	Filename: 		styles/default/ie.css
+	package:		Kleeja  copyright(c)2007-2010
+	version:		1.0.0
+	URL:			http://www.kleeja.com
+	Date:			2010-07-10
+	Author: 		Tar3Q
+	-------------------------------------------------- */
 
-	
+/* public/stylesheets/global/ie7_hacks.css @ 1268439931 */
+
+
+html {background : url(null) fixed no-repeat;}
+input[type="submit"]{cursor: pointer;}
 .tabbertab {	border-right:1px solid #bbb;border-left:1px solid #bbb;border-bottom:1px solid #aaa;border-top:none;}
 ul.tabbernav li a{border-right:1px solid #aaa;border-left:1px solid #aaa;border-bottom:0;border-top:1px solid #bbb;}
 .safe_code ,.call,.register,.get_password,.tabbertab{width:94%;}
-
-.data_menu td{
-	border:2px solid #F6EBE4;
-}
-input[type="submit"]{
-	cursor: pointer;
-}
-#wrapper {
-position: relative;
-z-index: inherit;
-zoom: 1; /* For IE6 */
-}
+.data_menu td{border:2px solid #F6EBE4;}
+#wrapper {position: relative;z-index: inherit;zoom: 1; /* For IE6 */}

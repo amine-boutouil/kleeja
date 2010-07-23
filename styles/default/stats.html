@@ -1,8 +1,8 @@
 <!-- stats template -->
 <div id="content" class="border_radius">
 
-	<!-- title  -->
-	<div class="title"><strong><a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}</strong></div>
+	<!-- title -->
+	<h1 class="title">&#9679; {title}</h1>
 	<!-- @end-title -->
 
 	<!-- line top -->
@@ -15,7 +15,7 @@
 		<li>{lang.FILES_ST} : <span>[ {files_st} {lang.FILE} ] </span></li>
 		<li>{lang.USERS_ST} : <span>[ {users_st} {lang.USER} ] </span></li>
 		<IF NAME="config.user_system==1"><li>{lang.LAST_REG} : <span>[ {lst_reg} ]  </span></li></IF>
-		<li>{lang.SIZES_ST} : <span>[ {sizes_st} ] </span></li>
+		<li>{lang.SIZES_ST} : <span style="color:red;">[ {sizes_st} ] </span></li>
 		<li>{lang.LSTDELST} : <span>{lst_dl_st} </span></li>
 		<li>{lang.MOST_EVER_ONLINE} : <span>[ {most_online} ]</span> {lang.ON} <span>[ {on_muoe} ]</span></li>
 	</ul>

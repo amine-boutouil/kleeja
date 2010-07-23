@@ -15,31 +15,32 @@
 <div id="footer">
     <div class="footer_inner">
 		<div class="left">	
-		<!-- @Powered by : kleeja  -->
-																																																																																																																																																																																																		<!--  Do not remove this notice  --><h1 class="kleeja">Powered by : <a href="http://www.kleeja.com/" onclick="window.open(this.href,'_blank');return false;" title="Powered by Kleeja">Kleeja</a></h1>
-		<div class="clr"></div><br />
-		<IF NAME="page_stats"><div class="footer_stats">{page_stats}</div></IF>
-		<IF NAME="googleanalytics"><div class="footer_stats">{googleanalytics}</div></IF>
+		<!-- @Powered by kleeja  -->
+																																																																																																																																																																																																																																																																								<!--  Do not remove this notice  --><h1 class="kleeja">Powered by <a href="http://www.kleeja.com/" onclick="window.open(this.href,'_blank');return false;" title="Powered by Kleeja">Kleeja</a></h1>
         </div>
 		
 		<div class="right">
 			<!-- Copyrights-->
 			<div class="Copyrights">
 				{lang.COPYRIGHTS_X} &copy; <a href="{config.siteurl}">{config.sitename}</a>
-			</div>
-			<!-- @end-Copyrights -->
-	
-			<div class="clr"></div><br />
+			</div><!-- @end-Copyrights -->
+		</div>
+
+		<div class="clr"></div>
 		
 		<IF NAME="is_admin">
 			<!-- button panel -->
-			{admin_page}
-			<!-- @end-button-panel -->
+			<div class="bu-panel">{admin_page}</div><!-- @end-button-panel -->
 		</IF>
-		</div>
-		
+		<IF NAME="page_stats">
+			<!-- footer stats -->
+			<div class="footer_stats">{page_stats}</div><!-- @end-footer-stats -->
+		</IF>
+		<IF NAME="googleanalytics">
+			<!-- google analytics -->
+			<div class="footer_stats">{googleanalytics}</div><!-- @end-google-analytics -->
+		</IF>
 	</div>
-</div>
-<!-- @end-footer -->
+</div><!-- @end-footer -->
 </body>
 </html>

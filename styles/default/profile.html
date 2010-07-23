@@ -1,7 +1,8 @@
 <!-- Profile template -->
 <div id="content" class="border_radius">
+
 	<!-- title -->
-	<div class="title"><strong><a href="{config.siteurl}">{config.sitename}</a> &#9679; {title}</strong></div>
+	<h1 class="title">&#9679; {title}</h1>
 	<!-- @end-title -->
 
 	<!-- line top -->
@@ -30,32 +31,38 @@
 	<div id="profile">
 		<div class="boxdata">
 			<h6 class="tit">{lang.EDIT_U_DATA}</h6>
-			<label class="pq">{lang.USERNAME}</label>
-			<h2 class="biguser">{name}</h2>
-			<label class="pq">{lang.SHOW_MY_FILECP}</label>
-			<select name="show_my_filecp">
-				<option value="1" <IF NAME="show_my_filecp.show_my_filecp==1">selected="selected"</IF> >{lang.YES}</option>
-				<option value="0" <IF NAME="show_my_filecp.show_my_filecp==0">selected="selected"</IF> >{lang.NO}</option>
-			 </select>
+			<div class="boxdata_inner">
+				<label>{lang.USERNAME}</label>
+				<input type="text" readonly="readonly" class="bu_username" value="{name}" />
+				<label>{lang.SHOW_MY_FILECP}</label>
+				<select name="show_my_filecp">
+					<option value="1" <IF NAME="show_my_filecp.show_my_filecp==1">selected="selected"</IF> >{lang.YES}</option>
+					<option value="0" <IF NAME="show_my_filecp.show_my_filecp==0">selected="selected"</IF> >{lang.NO}</option>
+				</select>
+			 </div>
 		</div>
 				
 		<div class="boxdata">
 			<h6 class="tit">{lang.EMAIL}</h6>
-			<label class="pq">{lang.PASSWORD} :</label>
-			<input type="password" name="pppass_old" value="{t_pppass_old}" tabindex="1" />
-			<label class="pq">{lang.EMAIL} :</label>
-			<input type="text" name="pmail" value="{mail}" style="direction:ltr" tabindex="2" />
+			<div class="boxdata_inner">
+				<label>{lang.PASSWORD} :</label>
+				<input type="password" name="pppass_old" value="{t_pppass_old}" tabindex="1" />
+				<label>{lang.EMAIL} :</label>
+				<input type="text" name="pmail" value="{mail}" style="direction:ltr" tabindex="2" />
+			</div>
 		</div>
 			
 		<div class="boxdata">
 			<h6 class="tit">{lang.PASS_ON_CHANGE}</h6>
-			<label class="pq">{lang.OLD} :</label>
-			<input type="password" name="ppass_old" value="{t_ppass_old}" tabindex="3" />
-			<label class="pq">{lang.NEW} :</label>
-			<input type="password" name="ppass_new" value="{t_ppass_new}" tabindex="4" />
-			<label class="pq">{lang.NEW_AGAIN} :</label>
-			<input type="password" name="ppass_new2" value="{t_ppass_new2}" tabindex="5" />
-			{H_FORM_KEYS}
+			<div class="boxdata_inner">
+				<label>{lang.OLD} :</label>
+				<input type="password" name="ppass_old" value="{t_ppass_old}" tabindex="3" />
+				<label>{lang.NEW} :</label>
+				<input type="password" name="ppass_new" value="{t_ppass_new}" tabindex="4" />
+				<label>{lang.NEW_AGAIN} :</label>
+				<input type="password" name="ppass_new2" value="{t_ppass_new2}" tabindex="5" />
+				{H_FORM_KEYS}
+			</div>
 		</div>
 
 		<div class="clr"></div>

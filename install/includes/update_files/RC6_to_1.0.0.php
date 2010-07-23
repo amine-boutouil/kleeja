@@ -105,6 +105,7 @@ $update_sqls['type_config_advanced'] = "UPDATE `{$dbprefix}config` SET `type` = 
 $update_sqls['ext_psd'] = "UPDATE  `{$dbprefix}exts` SET  `group_id` =  '9' WHERE `id` = 6;";
 $update_sqls['plg_desc'] = "ALTER TABLE  `{$dbprefix}plugins` CHANGE  `plg_dsc`  `plg_dsc` MEDIUMTEXT CHARACTER SET utf8 COLLATE utf8_bin NOT NULL";
 $update_sqls['plg_files'] = "ALTER TABLE  `{$dbprefix}plugins` ADD  `plg_files` TEXT NOT NULL";
+$update_sqls['plg_icon'] = "ALTER TABLE  `{$dbprefix}plugins` ADD  `plg_icon` BLOB NOT NULL AFTER `plg_dsc`";
 
 // ************************* MAFIII MALOOOM SDIG :(
 $update_sqls['configs_style'] = "UPDATE `{$dbprefix}config` SET `option` = '',`display_order` = 0, `type`='', value='default' WHERE  `name` = 'style';";

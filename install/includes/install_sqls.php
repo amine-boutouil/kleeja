@@ -186,6 +186,7 @@ CREATE TABLE `{$dbprefix}plugins` (
   `plg_ver` varchar(255) collate utf8_bin NOT NULL,
   `plg_author` varchar(255) collate utf8_bin NOT NULL,
   `plg_dsc` mediumtext COLLATE utf8_bin NOT NULL,
+  `plg_icon` blob NOT NULL,
   `plg_uninstall` mediumtext COLLATE utf8_bin NOT NULL,
   `plg_disabled` tinyint(1) unsigned NOT NULL default '0',
   `plg_instructions` mediumtext COLLATE utf8_bin NOT NULL,

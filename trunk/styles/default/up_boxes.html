@@ -24,10 +24,16 @@
 	<table border="0" width="100%" cellspacing="0" cellpadding="0" class="up_box_input">
 		<tr>
 			<td class="btitle">{b_bbc_title}</td>
-			<td class="all_box_link"><input readonly="readonly" class="up_input" onclick="this.select();" type="text" value="[url={siteurl}][img]{b_url_link}[/img][/url]" /></td>
+			<td class="all_box_link"><input readonly="readonly" class="up_input" tabindex="1" onclick="this.select();" type="text" value="[url={siteurl}][img]{b_url_link}[/img][/url]" /></td>
 		</tr>
 	</table>
 
+	<table border="0" width="100%" cellspacing="0" cellpadding="0" class="up_box_input">
+		<tr>
+			<td class="btitle">HTML</td>
+			<td class="all_box_link"><input readonly="readonly" class="up_input" tabindex="3" onclick="this.select();" type="text" value="<a href='{b_url_link}' target='_blank' title='' ><img src='{b_url_link}' alt='' /></a>" /></td>
+		</tr>
+	</table>
 <!-- END image -->		
 
 <!-- BEGIN file -->
@@ -35,14 +41,14 @@
 	<table border="0" width="100%" cellspacing="0" cellpadding="0" class="up_box_input">
 		<tr>
 			<td class="btitle">{b_title}</td>
-			<td class="all_box_link"><input readonly="readonly" class="up_input" onclick="this.select();" type="text" value="{b_url_link}" /></td>
+			<td class="all_box_link"><input readonly="readonly" class="up_input" tabindex="2" onclick="this.select();" type="text" value="{b_url_link}" /></td>
 		</tr>
 	</table>
-
+	
 	<table border="0" width="100%" cellspacing="0" cellpadding="0" class="up_box_input">
 		<tr>
 			<td class="btitle">{b_bbc_title}</td>
-			<td class="all_box_link"><input readonly="readonly" class="up_input" onclick="this.select();" type="text" value="[url={b_url_link}]{b_url_link}[/url]" /></td>
+			<td class="all_box_link"><input readonly="readonly" class="up_input" tabindex="4" onclick="this.select();" type="text" value="[url={b_url_link}]{b_url_link}[/url]" /></td>
 		</tr>
 	</table>
 
@@ -53,9 +59,8 @@
 	<table border="0" width="100%" cellspacing="0" cellpadding="0" class="up_box_input">
 		<tr>
 			<td class="btitle">{b_title}</td>
-			<td class="all_box_link"><input readonly="readonly" class="up_input" onclick="this.select();" type="text" value="{b_code_link}" /></td>
+			<td class="all_box_link"><input readonly="readonly" class="up_input" tabindex="5" onclick="this.select();" type="text" value="{b_code_link}" /></td>
 		</tr>
 	</table>
 
-<div class="clr" style="margin-bottom:5px;"></div>
 <!-- END del_file_code -->

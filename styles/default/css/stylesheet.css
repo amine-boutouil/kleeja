@@ -84,8 +84,7 @@
 	input[type="submit"]{	cursor: pointer;padding:2px 15px;}
 	select:focus, textarea:focus {outline: none;}
 	input[type="text"]:hover, input[type="password"]:hover, textarea:hover, select:hover{border: 1px solid #888;}
-	select:focus, textarea:focus, input[type="password"]:focus, input[type="text"]:focus ,
-	select.remme:hover,select.remme:focus{background-color:#ffd;border: 1px solid #D26900;}
+	select:focus, textarea:focus, input[type="password"]:focus, input[type="text"]:focus , select.remme:hover,select.remme:focus{background-color:#ffd;border: 1px solid #D26900;}
 	input[type="submit"]:hover  {color:#D74E00;}
 
 	/* @Links -------------------- */
@@ -94,7 +93,7 @@
 	p a {line-height: inherit;}
 	h1 a, h2 a, h3 a {color: #333; font-weight: bold; }
 	h4 a, h5 a { line-height: inherit; font-weight: bold; }
-	h3 a:hover { color: auto; }
+	h3 a:hover { color: #FF5502; }
 	h4 a:hover, h5 a:hover { text-decoration: underline; }
 /* @end */
 	
@@ -114,7 +113,7 @@
 	.line {background:url(../images/line.png) repeat-x right top;height:6px;	margin:1px;}
 	
 	/* debug kleeja */
-	.debug_kleeja{width:80%;margin:0 auto;background-color:white;border:1px #666 solid;margin-top:20px;margin-bottom:20px;}
+	.debug_kleeja{width:80%;margin:0 auto;background-color:white;border:1px #666 solid;margin:20px 0;}
 	.debug_kleeja fieldset{margin:0 auto;width:80%;}
 	
 	/* group Pagination */
@@ -159,7 +158,7 @@
 	dd.info ul, dd.error ul, ul.index_info, ul.index_err{list-style:square;list-style-position:inside;padding:12px;line-height:30px;font-weight: bold;}
 	ul.index_info, ul.index_err {margin:4px auto;text-indent:30px;border-top: 1px solid #fff;border-bottom: 1px solid #fff;}
 	dd.info  ul li, dd.error ul li{ padding:0 5px;}
-	
+		
 	/* Infos */
 	dd.info ul { border-top: 3px solid #FEA53D;border-bottom: 3px solid #FEA53D;background-color: #EFE7B8; }
 	dd.info  ul li { color: #333;background: url(../images/info.png) no-repeat right top; }
@@ -167,6 +166,7 @@
 	/* Errors */
 	dd.error ul {background-color: #E6C0C0;border-top:3px solid #DE7A7B;border-bottom: 3px solid #DE7A7B;}
 	dd.error ul li{color:#c00;background: url(../images/error.png) no-repeat right top;}
+	dd.error ul li strong{color:#c00;}
 
 	/* Only Index */
 	ul.index_info {border-top: 3px solid #FEA53D;border-bottom: 3px solid #FEA53D;background:#EFE7B8;}
@@ -182,7 +182,7 @@
 	body {width:100%;height:100%;background: #ececec url(../images/bg_body.png) repeat-x top center;}
 	#main {width:960px;background:url(../images/bg_main.png) no-repeat top right;margin:10px auto;}
 	#wrapper {height:100%;padding:15px 20px 10px 20px;}
-	#content,#content_index  {float:right;width:70%;padding:10px 20px;margin:0 5px;background:#DFDFDF url(../images/bg_content.png) repeat-x;border:1px solid #aaa;}
+	#content, #content_index  {float:right;width:70%;padding:10px 20px;margin:0 5px;background:#DFDFDF url(../images/bg_content.png) repeat-x;border:1px solid #aaa;}
 	#content_index {background-color:transparent;background-image:none;border:none;padding:0 15px;margin:0;}
 /* @end */
 	
@@ -224,7 +224,7 @@
 	.inum {text-align:center;color:#888;}
 	input.input_num {background:white;border: 1px solid #B3B9C4;font-weight:400;font-size:10px;outline:1px solid #ccc;padding:2px 1px;}
 	#loadbox {padding: 15px;	display:none;}
-	.waitloading{color:#E17100;font-size:120%;margin:5px;}
+	.waitloading{color:#FF6A15;font-size:120%;margin:5px;}
 
 	/*	Tabs -------------------- */
 	.tabberlive .tabbertabhide {display:none;}
@@ -325,8 +325,8 @@
 	#boxfileuser .public {margin:5px auto;background:#8C8C8C url(../images/bg_tile.gif) repeat-x bottom;font-size:90%;padding:5px 10px;color:#fff;text-align:center;border-top:1px dashed #EEE;border-bottom:1px dashed #EEE;}
 	#boxfileuser .uname, #boxfileuser .nums{font-size:160%;color:#FF6600;padding-top:4px;text-align:center;}
 	#filecplink fieldset{padding: 15px;margin:8px auto;border: 1px solid #aaa;}
-	#filecplink  input.link_user {direction:ltr;width:98%;margin:0 auto;color:#EA5812;padding:6px;font-size:90%;font-weight: 700;letter-spacing:1px;}
-	#filecplink legend.copylink {font-size:90%;font-weight: 700;padding:0 5px;color:#000;}
+	#filecplink  input.link_user {direction:ltr;width:98%;margin:0 auto;color:#FF6A15;padding:6px;font-size:90%;font-weight: 700;letter-spacing:1px;}
+	#filecplink legend.copylink {font-size:90%;font-weight: 400;padding:0 5px;color:#000;}
 	.tabledata {width:100%;background:#E6E6E6 url(../images/bg_user_box.gif) repeat-x top left;border:1px solid #aaa;}
 	.tabledata th , .tabledata td ,.tabledata tbody td {padding:0 5px;height: 30px;line-height: 30px;vertical-align:middle;border:1px solid #aaa;border-top-color: #fff;border-left-color: #fff;border-bottom-color:#aaa;text-align:center;}
 	.tabledata .odd  {background:#ECECEC url(../images/bg_footer.gif) repeat-x center right;text-align:right;width:50%;}
@@ -441,5 +441,5 @@
 	td.btitle ,td.all_box_link{border:1px solid #C8BD7C;text-align:center;font-size:11px;font-weight:700;padding:0 4px;}
 	td.btitle {color:#333;width:120px;padding:0 1px;border-left:none;}
 	td.all_box_link {border-right:none;}
-	input[type="text"].up_input {direction:ltr;width:97%;color:#7D5E4A;padding:3px;letter-spacing:1px;vertical-align:middle;}
+	input[type="text"].up_input {direction:ltr;width:97%;color:#111;padding:3px;letter-spacing:1px;vertical-align:middle;}
 /* @end */

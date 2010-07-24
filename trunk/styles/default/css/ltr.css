@@ -5,93 +5,88 @@
 	package:		Kleeja  copyright(c)2007-2010
 	version:		1.0.0
 	URL:			http://www.kleeja.com
-	Date:			2010-07-10
+	Date:			2010-07-24
 	Author: 		Tar3Q
+	-------------------------------------------------- 
+	$Id$	
 	-------------------------------------------------- */
-	
-	/* @Font Family -------------------- */
+
+ 	/* @HTML Tags -------------- */
 	body { font-family: Arial, Helvetica, Helvetica Neue, Verdana, sans-serif; font-size: 13px;}
-	
-	/* @Font Size -------------------- */
-	
-	
-	/* @Font Weight -------------------- */
-	
-	
-	/* @Text Align > Left -------------------- */
-	
-	
-	/* @Float > Left -------------------- */
-	
-	
-	/* @Float > Right -------------------- */
-	
-	
-	/* @Background Position -------------------- */
-	
-	
-	/* @Margin -------------------- */
-	
-	
-	/* @Padding -------------------- */
-	
-	
-	/* @Misc -------------------- */
-	
+	input, textarea, select, option, input[type="text"], input[type="password"], input[type="file"],input[type="submit"] {font:normal 12px  Arial, Verdana, sans-serif, "Lucida Grande", "Lucida Sans Unicode"; }	
+	ol {margin-right:0;margin-left: 25px;}
 	option {padding-left: 1em;}
-	caption, th, td {text-align:left;} /* missing ; */
-	.logo {float:left;}
-	img.left {float:right;}
-	img.right {float:left;}
-	.line {background-position:left top;}
-	.title {float:left;background-position:left top;}
+	caption, th, td {text-align:left;}
+	/* @Misc -------------- */
+	.left, img.left {float:right;}
+	.right, img.right {float:left;}
+	/* @Pagination -------------- */
+	.pagination a, .pagination span.current, .pagination span.three_dots {float:left;margin-left:0;margin-right:3px;}
+	/* @verification code -------------- */
 	.safe_code {background:#F9F5F0 url(../images/saf3_code_ltr.gif) no-repeat 100% 50%;}
-.top_nav .menu {margin-right:0;margin-left:6%;}
-.top_nav .menu ul{float:left;}
-.top_nav .menu li {float:left;margin-left:0;margin-right:2px;}
-.top_nav .menu li a {float: left;}
-.top_nav .menu li a:hover {background-position:left top;}
-#content {float:right;}
-#system-message dd.info  ul li {background-position:left top;}
-#system-message dd.error ul li{background-position:left top;}
-.index_info  li {background-position:left top;}
-.index_err li {background-position:left top;}
-#right_menu {float:left;}
-#right_menu .list a:hover,#right_menu .list a.current{background-position: left;}
-.kleeja {clear:both;}
-.wait {font-size:200%;}
-.stats  {background-position: 94% 50%;}
-.go_up{ background-position: 94% 100%;}
-ul.tabbernav li a{margin-left:0;margin-right:4px;background-position:top right;}
-.login {background-position:90% 50%;}
-.title_login {background-position:1% 50%;}
-.gather {float:left; margin-left:0;margin-right:3px;}
-input.username, input.password {float:left;padding:3px 20px 3px 3px;background-position: 98% 50%;}
-.forget_pass {margin-left:0;margin-right:60px;background-position: 2% 50%;float:right;}
-#kleeja_img_captcha {float:left;}
-#boxfileuser .box_user {float:left;}
-#boxfileuser .us3r_n4me {float:right;}
-.tabledata .odd  {text-align:left;}
-.tabledata thead th {background-position:center right;}
-.tabledata thead tr:hover th, .tabledata thead th:hover {background-position:center right;}
-.register,.call {background-position:95% 50%;}
-.get_password,.file_cp{background-position:60% 50%;}
-.rebort{background-position:94% 50%;}
-#profile .boxdata{float:left;}
-#profile .boxdata .in{margin-right:0;margin-left:2%;}
-.left_button{float:right;}
-.file_cp  .odd , .file_cp  .nbr  {text-align:left;}
-.user_img img, .visitor_img img{padding-left:0;padding-right:5px;}
-.user_ext, .visitor_ext {background-position:top left;}
-.online{float:left;}
-.onlineall, .onlinevisitor, .onlineusers, .name_users {float:left;margin-left:0;margin-right:6px;}
-.pagination a {float:left;margin-left:0;margin-right:3px;}
-.pagination a.next {margin-right:0;margin-left:5px;}
-.pagination a.disabled{margin-right:5px;}
-.pagination a.next:hover {padding-right:0;padding-left:10px;}
-.pagination span.current, .pagination span.three_dots {margin-left:0;margin-right:3px;float:left;}
-#content_index  {float:left;}
-#footer .right{float:left;margin-right:0;margin-left:-4px;}
-#footer .left{float:right;}
-#footer ul.footer_subnav li{padding-right:0;padding-left:10px;float:right;}
-#footer .Copyrights {float:left !important;text-align: left;}
+	/* @captcha stuff -------------- */
+	#kleeja_img_captcha {float:left;}
+	/* @group Infos & Alerts & Errors -------------- */
+	dd.info  ul li, dd.error ul li,ul.index_info  li, ul.index_err li { background-position:left top;font-size:120%;}
+	/* @Main Structure -------------- */
+	#content, #content_index  {float:left;}
+	/* @Template & Header > header.html -------------- */
+	#header .logo {float:left;background-position:left center;}
+	.top_nav .menu ul{float:left;}
+	.top_nav .menu li {float:left;margin-left:0;margin-right:2px;}
+	.top_nav .menu li a {float:right;}
+	#right_menu {float:left;margin:0 20px 0 15px;}
+	#right_menu .list .imgtop{text-align:left;}
+	/* @Template & Index > index_body.html -------------- */
+	.waitloading{font-size:140%;}
+	ul.tabbernav li a{margin-left:0;margin-right: 4px;}
+	.online{float:left;}
+	.onlineall, .onlinevisitor, .onlineusers, .name_users {float:left;margin-left:0;margin-right:6px;}
+	/* @Template & Downlod > download.html -------------- */
+	.data_file .data_menu td{padding-right:0;padding-left:5px;}
+	.data_file .data_menu .td  {width:125px;}
+	.data_file_down .wait {font-size:x-large;}
+	/* @Template & Stats > stats.html -------------- */
+	.stats  {font-size:100%;font-weight:400;background-position: 94% 50%;}
+	.stats  ul li {background-position:left center;padding-right:0;padding-left:10px;}
+	/* @Template & Rules > rules.html -------------- */
+	#rules {font-size:100%;font-weight:400;}
+	#rules .rut {text-indent:0;}
+	#rules .rls ul li {background-position:left center;padding-right:0;padding-left:10px;}
+	/* @Template & Footer > footer.html -------------- */
+	#footer .footer_inner{font-size:100%;}
+	#footer .bu-panel{float:left;}
+	#footer .footer_stats, #footer .googleanalytics{float:right;font-size:100%;}
+	/* @Template & login > login.html -------------- */
+	.login {background-position:80% 50%;}
+	.title_login {background-position:1% 50%;}
+	input.username, input.password {float:left;padding:3px 20px 3px 6px;background-position: 98% 50%;}
+	.forget_pass {background-position: 2% 50%;float:right;}
+	/* @Template & Users Files > fileuser.html ------- */
+	#boxfileuser .box_user {float:right;}
+	#boxfileuser .us3r_n4me {float:left;}
+	#boxfileuser .box_user {float:left;}
+	#boxfileuser .us3r_n4me {float:right;}
+	.tabledata .odd  {text-align:left;}
+	/* @Template & Register > register.html ------ */
+	.register {background-position:85% 50%;}
+	/* @Template & Contact Us > call.html -------------- */
+	.call {background-position:100% 50%;}
+	/* @Template & Password Recovery > get_pass.html ------- */
+	.get_password{background-position:60% 50%;}
+	/* @Template & Report a File > report.html ----- */
+	.rebort{background-position:94% 50%;}
+	/* @Template & Profile > profile.html ---------- */
+	#profile .boxdata{float:right;}
+	#profile .boxdata .boxdata_inner label {text-align:left;}
+	#profile .boxdata .boxdata_inner select {float:left;margin-right:0;margin-left:10px;}
+	/* @Template & File Manager users > filecp.html ------- */
+	.file_cp {background-position:60% 50%;}
+	.left_button {float:right;}
+	.file_cp .odd, .file_cp .nbr {text-align:left;}
+	/* @Template & List of allowed file upload > guide.html -------------- */
+	.user_img img, .visitor_img img{padding-left:0;padding-right:5px;}
+	/* @Template & Copy the links after upload > up_boxes.html --------- */
+	td.btitle {width:120px;border-left:1px solid #C8BD7C;border-right:none;}
+	td.all_box_link {border-right:1px solid #C8BD7C;border-left:none;}
+/* @end */

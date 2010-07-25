@@ -716,3 +716,86 @@ function kleeja_style_info($style_name)
 
 	return $inf_r;
 }
+
+
+/**
+* Browser detection
+* returns whether or not the visiting browser is the one specified [part of kleeja style system]
+* i.e. is_browser('ie6') -> true or false
+* i.e. is_browser('ie, opera') -> true or false
+*/
+function is_browser($b)
+{
+	//is there , which mean -OR-
+	if(strpos($b, ',') !== false)
+	{
+		$e = explode(',', $b);
+		foreach($e as $n)
+		{
+			if(is_browser(trim($n)))
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
+	
+    //if no agent, let's take the worst case
+	$u_agent = (!empty($_SERVER['HTTP_USER_AGENT'])) ? htmlspecialchars((string) strtolower($_SERVER['HTTP_USER_AGENT'])) : (function_exists('getenv') ? getenv('HTTP_USER_AGENT') : '');
+	$t = trim(preg_replace('/[0-9.]/', '', $b));
+	$r = trim(preg_replace('/[a-z]/', '', $b));
+	$return = false;
+	switch($t)
+	{
+		case 'ie':
+			$return = strpos($u_agent, trim('msie ' . $r)) !== false ? true : false;
+		break;
+		case 'firefox':
+			$return = strpos(str_replace('/', ' ', $u_agent), trim('firefox ' . $r)) !== false ? true : false;
+		break;
+		case 'safari':
+			$return = strpos($u_agent, trim('safari/' . $r)) !== false ? true : false;
+		break;
+		case 'chrome':
+			$return = strpos($u_agent, trim('chrome ' . $r)) !== false ? true : false;
+		break;
+		case 'flock':
+			$return = strpos($u_agent, trim('flock ' . $r)) !== false ? true : false;
+		break;
+		case 'opera':
+			$return = strpos($u_agent, trim('opera ' . $r)) !== false ? true : false;
+		break;
+		case 'konqueror':
+			$return = strpos($u_agent, trim('konqueror/' . $r)) !== false ? true : false;
+		break;
+		case 'mozilla':
+			$return = strpos($u_agent, trim('gecko/' . $r)) !== false ? true : false;
+		break;
+		case 'webkit':
+			$return = strpos($u_agent, trim('applewebkit/' . $r)) !== false ? true : false;
+		break;
+		/**
+		 * Mobile Phones are so popular those days, so we have to support them ...
+		 * This is still in our test lab.
+		 * @see http://en.wikipedia.org/wiki/List_of_user_agents_for_mobile_phones
+		 **/
+		case 'mobile':
+			$mobile_agents = array('iPhone;', 'iPod;', 'iPad;', 'BlackBerry', 'Android', 'HTC' , 'IEMobile', 'LG/', 'LG-',
+									'LGE-', 'MOT-', 'Nokia', 'SymbianOS', 'nokia_', 'PalmSource', 'webOS', 'SAMSUNG-', 
+									'SEC-SGHU', 'SonyEricsson');
+			$return = false;
+			foreach($mobile_agents as $agent)
+			{
+				if(strpos($u_agent, $agent) !== false)
+				{
+					$return = true;
+					break;
+				}
+			}
+		break;
+	}
+    
+	($hook = kleeja_run_hook('is_browser_func')) ? eval($hook) : null; //run hook
+    return $return;
+}

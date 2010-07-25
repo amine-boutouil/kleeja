@@ -12,9 +12,6 @@
 /*  @iPhone-specific styles -------------------- */
 	@media only screen and (max-device-width: 480px) {html {webkit-text-size-adjust: none;}}
 	
-/*  @Undo the fix for Mobile Safari ----------- */
-	@media only screen and (max-device-width:480px)  {body {-webkit-text-stroke:0 black; }} 
-
 	html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-weight:inherit;font-style:inherit;font-size:inherit;font-family:inherit;vertical-align:baseline;}
 	body{overflow-x:hidden;}
 	img{vertical-align:middle;}
@@ -27,7 +24,7 @@
 
 /*  @mobile styles -------------------- */
 	@media handheld {
-		html, body {font:normal 12px/15px Tahoma, Arial, Verdana, sans-serif, "Lucida Grande", "Lucida Sans Unicode"; height:100%;width: 100%;background:#fff;padding:3px;color: #000;margin: 0;}
+		html, body {font:normal 100% Tahoma, Arial, Verdana, sans-serif, "Lucida Grande", "Lucida Sans Unicode"; height:100%;width: 100%;background:#fff;padding:3px;color: #000;margin: 0;}
 		h1, h2, h3, h4, h5, h6 {font-weight: normal;font-size:x-small;}
 		a:link, a:visited {text-decoration: underline;color: #0000CC;}
 		a:hover, a:active {text-decoration: underline;color: #660066;}

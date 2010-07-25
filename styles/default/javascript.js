@@ -1,12 +1,11 @@
 /** ------------------------------------------------
-	^_^ JavaScript
-	Filename : 	styles/default/javascript.js
+				^_^ JavaScript
+	Filename: 	styles/default/javascript.js
 	package:	Kleeja  copyright(c)2007-2010
 	version:	1.0.0
 	URL:		http://www.kleeja.com
-	Date:		2010-07-22
+	Author: 	Tar3Q  
 	-------------------------------------------------
-	$Id$
 	$Id$
 	-------------------------------------------------
 **/

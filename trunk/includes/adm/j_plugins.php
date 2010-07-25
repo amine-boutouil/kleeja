@@ -68,6 +68,32 @@ $cache->clean('__changes_files__');
 redirect(basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'));
 
 
+//show icon of plugin
+elseif(isset($_GET['iconp'])):
+
+//is there any changes from recent installing plugins
+$icon = false;
+if ($plgicons = $cache->get('__plugins_icons__'))
+{
+	if(!empty($plgicons[$_GET['iconp']]))
+	{
+		$icon = base64_decode($plgicons[$_GET['iconp']]);
+	}
+}
+
+if(!$icon)
+{
+	$icon = file_get_contents($STYLE_PATH_ADMIN . 'images/default_plguin_icon.png');
+}
+
+header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
+header('Accept-Ranges: bytes');
+header('Content-Length: ' . strlen($icon));
+header('Content-Type: image/png');
+echo $icon;
+exit;
+
+
 //show first page of plugins
 elseif (!isset($_GET['do_plg'])):
 
@@ -92,9 +118,13 @@ if (isset($_POST['submit_new_plg']))
 	}
 }
 
+//empty array of icons
+$plugins_icons = array();
+
+
 //get plugins
 $query = array(
-				'SELECT'	=> 'p.plg_id, p.plg_name, p.plg_disabled, p.plg_ver, p.plg_ver, p.plg_author, p.plg_dsc, p.plg_instructions',
+				'SELECT'	=> 'p.plg_id, p.plg_name, plg_icon, p.plg_disabled, p.plg_ver, p.plg_ver, p.plg_author, p.plg_dsc, p.plg_instructions',
 				'FROM'		=> "{$dbprefix}plugins p"
 			);
 
@@ -117,6 +147,12 @@ if($SQL->num_rows($result)>0)
 						'plg_dsc'			=> isset($desc[$config['language']]) ? $desc[$config['language']] : $desc['en'],
 						'plg_instructions'	=> trim($row['plg_instructions']) == '' ? false : true,
 				);
+				
+				
+		if(!empty($row['plg_icon']))
+		{
+			$plugins_icons[$row['plg_id']] = $row['plg_icon'];
+		}
 	}
 }
 else
@@ -127,6 +163,11 @@ else
 
 $SQL->freeresult($result);
 
+//save icons in cache ...
+if (!$cache->exists('__plugins_icons__'))
+{
+	$cache->save('__plugins_icons__', $plugins_icons);
+}
 
 
 //is there any changes from recent installing plugins
@@ -280,6 +321,7 @@ else:
 				}
 
 				//delete caches ..
+				$cache->clean(array('__changes_files__', '__plugins_icons__'));
 				delete_cache(array('data_plugins', 'data_config'));
 
 				$plg->atend();
@@ -649,7 +691,7 @@ if(isset($_POST['submit_new_plg']))
 		}
 	}
 	
-	$cache->clean('__changes_files__');
+	$cache->clean(array('__changes_files__', '__plugins_icons__'));
 	delete_cache(array('data_plugins', 'data_config'));
 
 	$stylee	= "admin_info";

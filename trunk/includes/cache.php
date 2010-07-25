@@ -44,6 +44,16 @@ class cache
 		}
 	}
 	
+	function exists($name)
+	{
+		$name =  preg_replace('![^a-z0-9_]!', '_', $name);
+	
+		if (file_exists(PATH . 'cache/' . $name . '.php'))
+		{
+			return true;
+		}
+	}
+	
 	function save($name, $data, $time = 86400)
 	{
 		//
@@ -77,6 +87,15 @@ class cache
 
 	function clean($name)
 	{
+		if(is_array($name))
+		{
+			foreach($name as $n)
+			{
+				$this->clean($n);
+			}
+			return;
+		}
+
 		$name =  preg_replace('![^a-z0-9_]!i', '_', $name);
 		kleeja_unlink(PATH . 'cache/' . $name . '.php');
 	}

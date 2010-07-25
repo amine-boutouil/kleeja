@@ -257,6 +257,9 @@ To Do 1.X:
 - remove 'show files from last visit' and add 'show files from *2* hours' *2* is a list.
 - add menu in start admin page for quick action, like add new ext or change style, language etc.
 - add *delete* button in report admin page for quick delete 
+- add ability to create db table for *indexing* to let searching be better, - indexing begin from last indexing
+-
+ 
 
 Thank you for reading this file. 
 

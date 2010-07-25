@@ -1,11 +1,12 @@
 @charset "UTF-8";
 /*	--------------------------------------------------
-	Theme Name: 	default V1
+	Theme Name:		default V1
 	package:		Kleeja  copyright(c)2007-2010
 	version:		1.0.0
 	URL:			http://www.kleeja.com
-	Date:			2010-07-10
-	Author: 		Tar3Q
+	Author:			Tar3Q
+	--------------------------------------------------
+	$Id$
 	--------------------------------------------------
 
 	@CSS Reset was written by Dejan Cancarevic & http://stylizedweb.com/2008/02/14/10-best-css-hacks/
@@ -28,21 +29,20 @@
    10. Template & Footer						> footer.html
    11. Template & login							> login.html
    12. Template & Users Files					> fileuser.html
-   13. Template & Register    					> register.html 
-   14. Template & Contact Us  					> call.html
-   15. Template & Password Recovery 			> get_pass.html
-   16. Template & Report a File 				> report.html
+   13. Template & Register						> register.html 
+   14. Template & Contact Us					> call.html
+   15. Template & Password Recovery				> get_pass.html
+   16. Template & Report a File					> report.html
    17. Template & Profile						> profile.html
    18. Template & File Manager users			> filecp.html
    19. Template & List of allowed file			> guide.html
    20. Template & Copy the links after upload	> up_boxes.html
-
  
 /*	--------------------------------------------------
 	1. HTML Tags
 	-------------------------------------------------- */
 	html, body {margin: 0; padding: 0;}
-	body {text-align:justify;color:#474747;	font-family: Tahoma, Arial, Verdana, sans-serif, "Lucida Grande", "Lucida Sans Unicode"; font-size: 12px;}
+	body {text-align:justify;color:#474747;font-family: Tahoma, Arial, Verdana, sans-serif, "Lucida Grande", "Lucida Sans Unicode"; font-size: 12px;}
 	h1, h2, h3, h4, h5, h6 { color: #333; font-weight: bold; margin: 5px 0;}
 	h1, h2, h3, h4 { line-height: 1;}
 	h5, h6 { line-height: 18px;}

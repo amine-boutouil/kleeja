@@ -2,7 +2,7 @@
 /**
 *
 * @package Kleeja
-* @version $Id: pager.php 1251 2009-11-13 22:48:20Z altar3q $
+* @version $Id$
 * @copyright (c) 2007 Kleeja.com
 * @license ./docs/license.txt
 *
@@ -259,16 +259,26 @@ class kplugins
 			eval($plg_install['value']);
 		}
 
+		
+		//if there is an icon with the plugin 
+		$plugin_icon = false;
+		if(!empty($plg_info['plugin_icon']['value']))
+		{
+			$plugin_icon = $SQL->escape($plg_info['plugin_version']['value']);
+		}
+		
+		
 		//if the plugin was new 
 		if($plg_new)
 		{
 			//insert in plugin table 
 			$insert_query = array(
-								'INSERT'	=> 'plg_name, plg_ver, plg_author, plg_dsc, plg_uninstall, plg_instructions, plg_store, plg_files',
+								'INSERT'	=> 'plg_name, plg_ver, plg_author, plg_dsc, plg_icon, plg_uninstall, plg_instructions, plg_store, plg_files',
 								'INTO'		=> "{$dbprefix}plugins",
 								'VALUES'	=> "'" . $SQL->escape($plugin_name) . "','" . $SQL->escape($plg_info['plugin_version']['value']) . 
 												"','" . $SQL->escape($plg_info['plugin_author']['value']) . "','" . 
-												$SQL->escape(kleeja_base64_encode(serialize($p_desc))) . "','" . $SQL->real_escape($plg_uninstall['value']) . "','" . 
+												$SQL->escape(kleeja_base64_encode(serialize($p_desc))) . "','" . ($plugin_icon ? $plugin_icon . "','" : '') . 
+												$SQL->real_escape($plg_uninstall['value']) . "','" . 
 												($there_is_intruct ? $SQL->escape(kleeja_base64_encode(serialize($instarr))) : '') . "','" .  
 												$SQL->real_escape($store) . "','" . 
 												($there_is_files ? $SQL->escape(kleeja_base64_encode(serialize(array_keys($newfiles)))) : '') . "'"
@@ -289,9 +299,9 @@ class kplugins
 								'UPDATE'	=> "{$dbprefix}plugins",
 								'SET'		=> "plg_ver='" . $new_ver . "', plg_author='" . $SQL->escape($plg_info['plugin_author']['value']) . 
 												"', plg_dsc='" . $SQL->escape($plg_info['plugin_description']['value']) . "', plg_uninstall='" . 
-												$SQL->real_escape($plg_uninstall['value']) . "', plg_instructions='" .
-												($there_is_intruct ? $SQL->escape(kleeja_base64_encode(serialize($instarr))) : '') . "', plg_files='" .
-												($there_is_files ? $SQL->escape(kleeja_base64_encode(serialize(array_keys($newfiles)))) : '') . 
+												$SQL->real_escape($plg_uninstall['value']) . ($plugin_icon ? "', plg_icon='" . $plugin_icon : '') .
+												"', plg_instructions='" . ($there_is_intruct ? $SQL->escape(kleeja_base64_encode(serialize($instarr))) : '') . 
+												"', plg_files='" . ($there_is_files ? $SQL->escape(kleeja_base64_encode(serialize(array_keys($newfiles)))) : '') . 
 												"', plg_store='" . $SQL->escape($store) . "'",
 								'WHERE'		=> "plg_id=" . $this->plg_id
 						);

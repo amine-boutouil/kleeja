@@ -110,7 +110,7 @@
 	$lang['IS_IT_OFFICIAL_NO']						= 'No, I\'ve downloaded it from other site, Go ahead now and download it from Kleeja official site';
 	$lang['INST_WHAT_IS_KLEEJA_T']					= 'What is Kleeja ?';
 	
-	$lang['INST_WHAT_IS_KLEEJA'] = 'Keeja is a free, features rich,  files and images upload system. Kleeja is developed to help webmasters to provide a decent files hosting service on their sites . Kleeja comes with a simple source code and powerful User system , also with easy template system so you can easily customize your styles ';
+	$lang['INST_WHAT_IS_KLEEJA']					= 'Keeja is a free, features rich, files and images upload system. Kleeja is developed to help webmasters to provide a decent files hosting service on their sites . Kleeja comes with a simple source code and powerful User system , also with easy template system so you can easily customize your styles ';
 	
 	$lang['INST_SPECIAL_KLEEJA']					= 'Some Kleeja features .. !';
 	$lang['INST_WHAT_IS_KLEEJA_ONE']				= 'Kleeja has a simple and powerful user system which can be easily integrated with many boards . Kleeja provide simple admin control panel that enables you to control over everything in your site . Also you can customize Kleeja\'s style and install a lot of add-ons  ....  <a target="_blank" href="http://www.kleeja.com/about/">more details in Kleeja site </a>';

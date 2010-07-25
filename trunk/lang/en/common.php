@@ -271,7 +271,7 @@ $lang = array_merge($lang, array(
 	'LOAD_IS_HIGH_NOW'			=> 'Our website facing very high load right now !, please wait and try refresh this page again.',
 	
 	//last line of this file ...					 
-	'S_TRANSLATED_BY' 			=> 'Translated By <a href="http://www.fenix4web.com/" target="_blank">Fenix4Web</a>',
+	'S_TRANSLATED_BY' 			=> 'Translated By <a href="http://www.fenix4web.com/" target="_blank">Fenix4Web</a> &amp; Kleeja Team',
 	
 ));
 

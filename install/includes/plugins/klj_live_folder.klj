@@ -125,5 +125,39 @@
 		$this->folder = $config['foldername']; //default folder (fix bug #435)
 	}
 	]]></hook>
+	<hook name="no_folder_check_kljuploader"><![CDATA[
+		// check folder
+		if(!file_exists($config['imagefolder'])) 
+		{
+			$jadid	=	mkdir($config['imagefolder']);
+			$jadid2	=	mkdir($config['imagefolder'] . '/thumbs');
+			
+			if($jadid)
+			{
+				$this->errs[] = array($lang['NEW_DIR_CRT'], 'index_info');
+				
+				$htaccess_data = "<Files ~ \"^.*\.(php|php*|cgi|pl|phtml|shtml|sql|asp|aspx)\">\nOrder allow,deny\nDeny from all\n</Files>\n<IfModule mod_php4.c>\nphp_flag engine off\n</IfModule>\n<IfModule mod_php5.c>\nphp_flag engine off\n</IfModule>\nRemoveType .php .php* .phtml .pl .cgi .asp .aspx .sql";
+				$fo		= @fopen($config['imagefolder'] . "/index.html","w");
+				$fo2	= @fopen($config['imagefolder'] . "/thumbs/index.html","w");
+				$fw		= @fwrite($fo,'<a href="http://kleeja.com"><p>KLEEJA ..</p></a>');
+				$fw2	= @fwrite($fo2,'<a href="http://kleeja.com"><p>KLEEJA ..</p></a>');
+				$fi		= @fopen($config['imagefolder'] . "/.htaccess", "w");
+				$fi2	= @fopen($config['imagefolder'] . "/thumbs/.htaccess","w");
+				$fy		= @fwrite($fi, $htaccess_data);
+				$fy2	= @fwrite($fi2, $htaccess_data);
+				$chmod	= @chmod($config['imagefolder'], 0777);
+				$chmod2	= @chmod($config['imagefolder'] . '/thumbs/', 0777);
+
+				if(!$chmod)
+				{
+					$this->errs[] = array($lang['PR_DIR_CRT'], 'index_err');
+				} 
+			}
+			else
+			{
+				$this->errs[] = array($lang['CANT_DIR_CRT'], 'index_err');
+			}
+		}
+	]]></hook>
    </hooks>
 </kleeja>

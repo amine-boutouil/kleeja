@@ -236,6 +236,7 @@ function process ()
 			$this->filename = preg_replace("/{date:([a-zA-Z-_]+)}/i", date($m[1]), $this->filename);
 		}
 		
+		($hook = kleeja_run_hook('no_folder_check_kljuploader')) ? eval($hook) : null; //run hook
 		
 		// check folder
 		if(!file_exists($this->folder)) 

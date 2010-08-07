@@ -1,0 +1,78 @@
+@charset "UTF-8";
+/*	--------------------------------------------------
+	Theme Name: 	default V1
+	package:		Kleeja  copyright(c)2007-2010
+	version:		1.0.0
+	Filename: 		admin/admin_style/css/css3.css
+	URL:			http://www.kleeja.com
+	Date:			2010-07-10
+	Author: 		Tar3Q
+	-------------------------------------------------- 
+	$Id: css3.css 1550 2010-07-25 18:30:31Z ALTAR3Q $	*/
+
+/*  #iPhone ----------- */	
+	@media screen and (max-device-width: 480px) { html { -webkit-text-size-adjust: none; } }
+	
+/*  #Snow Leopard Safari Type Fix ----------- */	
+	body {-webkit-text-stroke: 1px rgba(255,255,255,.01); }
+
+/*	---------------------------------------
+	#Text Shadow
+	--------------------------------------- */
+	/* @White text shadow ------- */
+	body {text-shadow: 0 0 2px #fff;}
+	
+	/* @Dark gray text shadow ------- */
+	#boxfileuser .public {
+	text-shadow: 0 0 2px #444;}
+/* @end */
+
+/*	---------------------------------------
+	#Box Shadow
+	--------------------------------------- */	
+	/* @Orange Light Shadow --------------- */
+	input, textarea, select{-moz-box-shadow: 0px 0px 3px #888;-webkit-box-shadow: 0px 0px 3px #888;-khtml-box-shadow: 0px 0px 3px #888;box-shadow: 0px 0px 3px #888;}
+	
+	/* @Orange Light Shadow --------------- */
+	input[type="file"]{-moz-box-shadow: none;-webkit-box-shadow: none;-khtml-box-shadow: none;box-shadow:none;}
+	
+	/* @Orange Shadow --------------- */
+	input[type="text"]:hover, input[type="text"]:focus, input[type="password"]:hover, input[type="password"]:focus,
+	textarea:focus, textarea:hover,	select:hover, select:focus{
+	-moz-box-shadow:0 0 4px #D26900;-webkit-box-shadow:0 0 4px #D26900;-khtml-box-shadow:0 0 4px #D26900;box-shadow:0 0 4px #D26900;}
+	
+	/* @White Shadow (4) pixel ------------- */
+	.data_file .filereport {
+	-moz-box-shadow : 0px 0px 4px #FFFFFF;-webkit-box-shadow : 0px 0px 4px #FFFFFF;-khtml-box-shadow : 0px 0px 4px #FFFFFF;box-shadow : 0px 0px 4px #FFFFFF;}
+	
+	/* @White Shadow (7) pixel ------------- */	
+	.pagination span.current{
+	-moz-box-shadow:0 0 7px #fff;-webkit-box-shadow:0 0 7px #fff;box-shadow:0 0 7px #fff;}
+
+	/* @Gray Shadow --------------- */	
+	.onlineall {
+	-moz-box-shadow : 0px 0px 3px #999;-webkit-box-shadow : 0px 0px 3px #999;-khtml-box-shadow : 0px 0px 3px #999;box-shadow : 0px 0px 3px #999;}
+/* @end */	
+
+/*	---------------------------------------
+	#Rounded Corners
+	--------------------------------------- */
+	/* @Border Corners only, Top Left and Right --------------- */
+	.tabbertab {	-moz-border-radius-bottomleft :5px;	-moz-border-radius-bottomright : 5px;-webkit-border-bottom-left-radius : 5px;-webkit-border-bottom-right-radius : 5px;border-bottom-left-radius : 5px; border-bottom-right-radius : 5px;}
+	/* @Border Corners only, Bottom Left and Right --------------- */
+	ul.tabbernav li a{-moz-border-radius-topleft : 5px;-moz-border-radius-topright : 5px;-webkit-border-top-left-radius : 5px;-webkit-border-top-right-radius : 5px; border-top-right-radius : 5px;border-top-left-radius : 5px;}
+	
+	/* @Borders all Corners (3)Pixel ----------- */	
+	.tipsy-inner {
+	-moz-border-radius : 3px;-webkit-border-radius : 3px;-khtml-border-radius : 3px; border-radius : 3px;
+	-moz-box-shadow : 0px 0px 5px #444;-webkit-box-shadow : 0px 0px 5px #444;-khtml-box-shadow : 0px 0px 5px #444;box-shadow : 0px 0px 5px #444;}
+
+	
+	/* @Borders all Corners (5)Pixel ----------- */	
+	.pagination a, .pagination span.current, .pagination span.three_dots, #border-table,.box_all, fieldset, #main_menu, #menu_thumbnail {
+	-moz-border-radius : 5px;-webkit-border-radius : 5px;-khtml-border-radius : 5px; border-radius : 5px;}
+
+	/* @Borders all Corners (10)Pixel ----------- */	
+	#main_menu .kbubbles, .button_img ,.button_file ,#fieldset_progress, .fieldset_google, .fieldset_yahoo  {
+	-moz-border-radius : 10px;-webkit-border-radius : 10px;-khtml-border-radius : 10px;border-radius : 10px;}
+/* @end */

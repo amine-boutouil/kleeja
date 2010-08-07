@@ -7,6 +7,8 @@
 	# Filename : admin/admin_style/css/stylesheet.css
 	# Author: Tar3Q  
 	# Date:: 2009-12-17  $
+	---------------------------------------------------------
+	$Id$
 */
 img {-ms-interpolation-mode:bicubic;#} /* ! */
 *::selection {background:#E6E5C3;color:#291F16}
@@ -34,8 +36,6 @@ input[type="text"],input[type="password"]{padding:3px 3px;cursor: text;border-le
 input[type="submit"] ,input[type="button"]{cursor: pointer;padding:1px 18px;font-weight:normal;font-size:12px;font-family:Tahoma, Arial, Verdana, sans-serif, "Lucida Grande", "Lucida Sans Unicode";}
 input[type="text"]:hover ,input[type="password"]:hover{border: 1px solid #888;}
 input[type="password"]:focus,input[type="text"]:focus  {background-color:#ffd;border: 1px solid #D26900;}
-input[type="text"]:hover,input[type="text"]:focus, input[type="password"]:hover,input[type="password"]:focus{-moz-box-shadow:0 0 5px #D26900;-webkit-box-shadow:0 0 5px #D26900;box-shadow:0 0 5px #D26900;}
-input[type="submit"]:hover{-moz-box-shadow:0 0 5px #0E98D8;-webkit-box-shadow:0 0 5px #0E98D8;box-shadow:0 0 5px #0E98D8;}
 
 a:link    {color: #0B55C4; text-decoration: none;}
 a:visited {color:#0B55C4; text-decoration: none;}
@@ -65,10 +65,10 @@ tr:hover {background-color:#FFFFDD;}
 .box_header .logo2 a:hover {text-decoration: none;color:#969485;}
 
 /* top div site name */
-.box_h_bg{background:url('../images/box/box_h_bg.jpg') repeat-x;height:66px;}
-.box_h_right{background:url('../images/box/box_h_right.jpg') no-repeat right;height:66px;width:26px;float:right;}
-.box_h_left{background:url('../images/box/box_h_left.jpg') no-repeat;height:66px;width:26px;float:left;}
-.sitetitle{line-height:30px;text-align:center;padding-top:15px;font:bold 14pt Arial, Tahoma, sans-serif;color:#fff;}
+.box_h_bg{background:url('../images/box/box_h_bg.jpg') repeat-x;height:54px;}
+.box_h_right{background:url('../images/box/box_h_right.jpg') no-repeat right;height:54px;width:26px;float:right;}
+.box_h_left{background:url('../images/box/box_h_left.jpg') no-repeat;height:54px;width:26px;float:left;}
+.sitetitle{line-height:30px;text-align:center;padding-top:10px;font:bold 12pt Arial, Tahoma, sans-serif;color:#111;}
 
 /* div content */
 .content_left{background:url('../images/box/content_left.jpg') repeat-y left;padding-left:20px;}
@@ -88,7 +88,7 @@ tr:hover {background-color:#FFFFDD;}
 
 /*  toolTip Main Menu */
 .tipsy { padding:5px; font-size: 11px;font-weight:bold;background-repeat: no-repeat;  background-image: url(../images/tipsy.gif); }
-.tipsy-inner {color: white;max-width: 200px;text-align: center;text-shadow: 0 0 2px #000;padding: 10px;background-color: rgb(25,25,25);background-color: rgba(25,25,25,0.92);background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(transparent), to(#000));border-radius: 3px;-webkit-border-radius: 3px;-moz-border-radius: 3px;box-shadow: 0 0 3px #555;-webkit-box-shadow: 0 0 3px #555;-moz-box-shadow: 0 0 3px #555;}
+.tipsy-inner {color: white;max-width: 200px;text-align: center;text-shadow: 0 0 2px #000;padding: 10px;background-color: rgb(25,25,25);background-color: rgba(25,25,25,0.92);background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(transparent), to(#000));}
 .tipsy-north { background-position: top center; }
 .tipsy-south { background-position: bottom center; }
 .tipsy-east { background-position: right center; }
@@ -97,7 +97,7 @@ tr:hover {background-color:#FFFFDD;}
 /* middle */
 #divmiddle {	width:70%; float: left;display:inline;}
 /* box_all */
-#border-table,.box_all {padding:10px;background:#FFF;border:1px dashed #cccccc;-moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px;}
+#border-table,.box_all {padding:10px;background:#FFF;border:1px dashed #cccccc;}
 
 /* start Main Menu */
 #main_menu,#menu_thumbnail{float:right; width:26%; padding:10px; background: #EFE7B8;border: 4px solid #FEA53D;}
@@ -133,7 +133,7 @@ tr:hover {background-color:#FFFFDD;}
 	cursor:default;
 	background:url(../images/hidbg.png) repeat-x;
 	}
-	#main_menu .kbubbles {background-color:#FFB007;color:#fff;margin:2px;padding:2px 0px;font-size:9px;-moz-border-radius : 8px; /* Mozilla */	-webkit-border-radius : 8px; /* Webkit */ -khtml-border-radius : 8px; /* Konqueror */	border-radius : 8px; /* CSS3 only */}
+	#main_menu .kbubbles {background-color:#FFB007;color:#fff;margin:2px;padding:2px 0px;font-size:9px;}
 	
 	/* thumbnail menu */
 	#menu_thumbnail {width:10%;padding:0;}
@@ -311,7 +311,7 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 .adminimage {background: url(../images/adminusername.gif) no-repeat center;width:90px;height:78px;}
 .text_info{width:74%;line-height:24px;font-size:11px;font-weight: bold;border-bottom: 1px dashed #DFDFDF;}
 .box_botton{margin:2px auto;text-align:center;}
-.button_img ,.button_file{background:#EFECEC;float:right;padding:6px 10px;text-align:center;font-size:11px;font-weight: bold;border: solid 1px #D7D7D7;-moz-border-radius: 10px; border-radius:10px;}
+.button_img ,.button_file{background:#EFECEC;float:right;padding:6px 10px;text-align:center;font-size:11px;font-weight: bold;border: solid 1px #D7D7D7;}
 .button_img {margin-left:10px;}
 .button_img:link,.button_file:link ,.button_img:visited,.button_file:visited {color:#414042;}
 .button_img:hover,.button_file:hover {color:#333;text-decoration: none;background:#FFD699;border: solid 1px #D8A861;}
@@ -322,7 +322,7 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 .info_statistics  p{height:22px;line-height:22px;margin-bottom:4px;font-size:11px;font-weight:bold;color:#002262;border-bottom: dashed 1px #D7D7D7;}
 .filsiz{padding:3px; font-weight:bold;font-size:xx-large;color:#BFBFBF;text-align:center;text-decoration:line-through;vertical-align:top}
 /* percentage meter */
-#fieldset_progress {margin-top:10px;padding:15px 20px;background:#fff;border: 1px solid #B1B1B1; -moz-border-radius : 8px; /* Mozilla */	-webkit-border-radius : 8px; /* Webkit */ -khtml-border-radius : 8px; /* Konqueror */	border-radius : 8px; /* CSS3 only */}
+#fieldset_progress {margin-top:10px;padding:15px 20px;background:#fff;border: 1px solid #B1B1B1; }
 #fieldset_progress  legend{color:#B1B1B1;line-height:0;}
 #progress {height:34px;margin:2px auto 10px auto;direction:ltr;}
 #progress .pad {margin:0pt auto;width:auto}
@@ -338,7 +338,7 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 /*  # #  general statistics */
 
 /* start Statistics Search Engines */
-.fieldset_google, .fieldset_yahoo {height:70px;margin-top:10px;padding:15px 20px;background:#fff;border: 1px solid #B1B1B1; -moz-border-radius : 8px; /* Mozilla */	-webkit-border-radius : 8px; /* Webkit */ -khtml-border-radius : 8px; /* Konqueror */	border-radius : 8px; /* CSS3 only */}
+.fieldset_google, .fieldset_yahoo {height:70px;margin-top:10px;padding:15px 20px;background:#fff;border: 1px solid #B1B1B1; }
 .fieldset_google p, .fieldset_yahoo p {line-height:18px;font-weight:bold;font-size:11px;}
 .fieldset_google {background:url(../images/google.gif) no-repeat 8% 50%;}
 .fieldset_yahoo {background:url(../images/yahoo.gif) no-repeat 8% 50%;}
@@ -416,7 +416,5 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 .pagination a.disabled:hover {color:#111;}	
 .pagination span.current {text-align:center;	margin-left:3px;padding:5px 7px;float:right;border: 1px solid #0B55C4;}
 .pagination span.current {background-color:#0B55C4;color: #FFF;}
-.pagination a, .pagination span.current,.pagination span.three_dots{-moz-border-radius : 4px;-webkit-border-radius : 4px;-khtml-border-radius : 4px;border-radius : 4px;}
 /* # pagination */
 
-fieldset,#main_menu,#menu_thumbnail{-moz-border-radius : 5px; -webkit-border-radius : 5px;-khtml-border-radius : 5px; border-radius : 5px; -moz-box-shadow:0 0 3px #999;-webkit-box-shadow:0 0 3px #999;box-shadow:0 0 3px #999;}

@@ -1,96 +1,25 @@
-#
-# Apache/PHP/Kleeja settings:
-#
+# Htaccess for Protection
+# Kleeja 2007 - 2010
 # $Id$
 
-	# Don't show directory listings for URLs which map to a directory.
-	Options -Indexes
+<Files ~ "^.*\.(php|php*|cgi|pl|phtml|shtml|sql|asp|aspx)">
+    Order allow,deny
+    Deny from all
+</Files>
 
-	# Make Drupal handle any 404 errors.
-	ErrorDocument 404 ../index.php
+#Disable PHP engine in this folder
+<IfModule mod_php4.c>
+php_flag engine off
+</IfModule>
 
-	# Set the default handler.
-	DirectoryIndex ../index.php
+#Disable PHP engine in this folder
+<IfModule mod_php5.c>
+php_flag engine off
+</IfModule>
 
-	# Override PHP settings. but the following cannot be changed at runtime.
-	# PHP 4, Apache 1.
-	<IfModule mod_php4.c>
-	  php_value magic_quotes_gpc                0
-	  php_value register_globals                0
-	  php_value session.auto_start              0
-	  php_value mbstring.http_input             pass
-	  php_value mbstring.http_output            pass
-	  php_value mbstring.encoding_translation   0
-	</IfModule>
+#Don't handle those types in this folder
+RemoveType .php .php* .phtml .pl .cgi .asp .aspx .sql
 
-	# PHP 4, Apache 2.
-	<IfModule sapi_apache2.c>
-	  php_value magic_quotes_gpc                0
-	  php_value register_globals                0
-	  php_value session.auto_start              0
-	  php_value mbstring.http_input             pass
-	  php_value mbstring.http_output            pass
-	  php_value mbstring.encoding_translation   0
-	</IfModule>
-
-	# PHP 5, Apache 1 and 2.
-	<IfModule mod_php5.c>
-	  php_value magic_quotes_gpc                0
-	  php_value register_globals                0
-	  php_value session.auto_start              0
-	  php_value mbstring.http_input             pass
-	  php_value mbstring.http_output            pass
-	  php_value mbstring.encoding_translation   0
-	</IfModule>
-
-	# Protect files and directories from prying eyes.
-	<FilesMatch "\.(engine|inc|info|install|make|module|profile|test|po|sh|.*sql|theme|tpl(\.php)?|xtmpl|svn-base)$|^(code-style\.pl|Entries.*|Repository|Root|Tag|Template|all-wcprops|entries|format)$">
-	  Order allow,deny
-	</FilesMatch>
-
-	# Requires mod_expires to be enabled.
-	<IfModule mod_expires.c>
-	  # Enable expirations.
-	  ExpiresActive On
-
-	  # Cache all files for 2 weeks after access (A).
-	  ExpiresDefault A1209600
-	</IfModule>
-
-	# Don't listing directory
-	AddType text/html .php*
-	AddType text/html .phtml
-
-	# http://perishablepress.com/press/2006/01/10/stupid-htaccess-tricks/#security
-	# Remove all Type
-	<Files ~ "^.*\.(php|php*|cgi|pl|phtml|shtml|asp|aspx)">
-		Order allow,deny
-		Deny from all
-	</Files>
-
-	# Remove all Type
-	RemoveType .php .php* .phtml .pl .cgi .asp .aspx
-
-	<IfModule mod_php4.c>
-	php_flag engine off
-	</IfModule>
-
-	<IfModule mod_php5.c>
-	php_flag engine off
-	</IfModule>
-
-	# Turn on mod_gzip if available
-	<IfModule mod_gzip.c>
-	mod_gzip_on yes
-	mod_gzip_dechunk yes
-	mod_gzip_keep_workfiles No
-	mod_gzip_minimum_file_size 1000
-	mod_gzip_maximum_file_size 1000000
-	mod_gzip_maximum_inmem_size 1000000
-	mod_gzip_item_include mime ^text/.*
-	mod_gzip_item_include mime ^application/javascript$
-	mod_gzip_item_include mime ^application/x-javascript$
-	# Exclude old browsers and images since IE has trouble with this
-	mod_gzip_item_exclude reqheader "User-Agent: .*Mozilla/4\..*\["
-	mod_gzip_item_exclude mime ^image/.*
-	</IfModule>
+#404 error should show something usefull
+#todo/ images->image info, another show our info page
+ErrorDocument 404 ../images/not_exists.jpg

@@ -146,6 +146,7 @@ if($SQL->num_rows($result)>0)
 						'plg_author'		=> $row['plg_author'],
 						'plg_dsc'			=> isset($desc[$config['language']]) ? $desc[$config['language']] : $desc['en'],
 						'plg_instructions'	=> trim($row['plg_instructions']) == '' ? false : true,
+						'plg_icon_url'		=> basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;iconp=' . $row['plg_id']
 				);
 				
 				

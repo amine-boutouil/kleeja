@@ -65,10 +65,7 @@ tr:hover {background-color:#FFFFDD;}
 .box_header .logo2 a:hover {text-decoration: none;color:#969485;}
 
 /* top div site name */
-.box_h_bg{background:url('../images/box/box_h_bg.jpg') repeat-x;height:54px;}
-.box_h_right{background:url('../images/box/box_h_right.jpg') no-repeat right;height:54px;width:26px;float:right;}
-.box_h_left{background:url('../images/box/box_h_left.jpg') no-repeat;height:54px;width:26px;float:left;}
-.sitetitle{line-height:30px;text-align:center;padding-top:10px;font:bold 12pt Arial, Tahoma, sans-serif;color:#111;}
+.sitename_head{margin-right:50px; width:400px;}
 
 /* div content */
 .content_left{background:url('../images/box/content_left.jpg') repeat-y left;padding-left:20px;}

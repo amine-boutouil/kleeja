@@ -18,7 +18,7 @@ if (!defined('IN_ADMIN'))
 //for style ..
 $stylee 		= "admin_configs";
 //words
-$action 		= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php');
+$action 		= basename(ADMIN_PATH) . '?cp=options';
 $n_submit 		= $lang['UPDATE_CONFIG'];
 $options		= '';
 $SHOW_CH_STAGE	= isset($_GET['type']) ? false : true;
@@ -87,7 +87,7 @@ switch($SHOW_CH_STAGE):
 	case false:
 
 		//general varaibles
-		$action		= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;type=' . htmlspecialchars($_GET['type']);
+		$action		= basename(ADMIN_PATH) . '?cp=options&amp;type=' . htmlspecialchars($_GET['type']);
 		$STAMP_IMG_URL = PATH . 'images/watermark.gif';
 		$stylfiles	= $lngfiles	= $authtypes = '';
 		$optionss	= array();

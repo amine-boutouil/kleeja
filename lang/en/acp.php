@@ -137,7 +137,7 @@ $lang = array_merge($lang, array(
 	'NO_TPL_NAME_WROTE' 	=> 'Please enter the name of the template!',
 	'ADD_NEW_STYLE' 		=> 'Create a new style',
 	'EXPORT_AS_XML' 		=> 'Export As xml',
-	'NEW_STYLES_EXP' 		=> 'Upload style from a XML file',
+	'NEW_STYLES_EXP' 		=> 'Upload style from a "klj" file',
 	'NEW_STYLE_ADDED' 		=> 'Style added successfully',
 	
 	'ERR_IN_UPLOAD_XML_FILE' 		=> '(ERR:XML) Error uploading...',

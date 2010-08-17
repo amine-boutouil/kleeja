@@ -12,7 +12,7 @@
 * Requirements of Kleeja
 */
 define('MIN_PHP_VERSION', '4.3.0');
-define('MIN_MYSQL_VERSION', '4.1.2');
+define('MIN_MYSQL_VERSION', '4.2.2');
 //version of latest changes at db
 define ('LAST_DB_VERSION' , '7');
 //set no errors
@@ -76,7 +76,7 @@ function gettpl($tplname)
 
 	$tpl = preg_replace('/{{([^}]+)}}/', '<?php \\1 ?>', file_get_contents('style/' . $tplname));
 	ob_start();
-	eval('?> ' . $tpl . '<?php ');
+	eval('?> ' . stripslashes($tpl) . '<?php ');
 	$stpl = ob_get_contents();
 	ob_end_clean();
 	

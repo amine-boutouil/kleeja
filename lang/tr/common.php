@@ -479,6 +479,7 @@ $lang = array_merge($lang, array(
 	'YEAR'						=> '1 yıl',
 	'ADMINISTRATORS'			=> 'Adminler',
 	'INVALID_FORM_KEY'			=> 'Hatalı form, yada oturumunuz zaman aşımına uğradı',
+	'INVALID_GET_KEY'			=> 'Sorry, The requested link is expired, and is blocked for secuirty reason, go back and try again.',
 	'REFRESH_CAPTCHA'			=> 'Buraya tıkla ve	CAPTCHA resmini yenile',
 	'CHOSE_F'					=> 'Lütfen bir dosya seçin',
 	'NO_REPEATING_UPLOADING'	=> 'Bu sayfa yüklemeden sonra yenilenemez!.',

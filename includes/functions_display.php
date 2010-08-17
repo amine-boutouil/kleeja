@@ -175,7 +175,7 @@ function kleeja_info($msg, $title='', $exit = true, $redirect = false, $rs = 2, 
 	($hook = kleeja_run_hook('kleeja_info_func')) ? eval($hook) : null; //run hook
 
 	// assign {text} in info template
-	$text = $msg;
+	$text = $msg . ($redirect ? redirect($redirect, false, $exit, $rs, true) : '');
 	//header
 	Saaheader($title, false, $extra_code_header);
 	//show tpl
@@ -183,12 +183,7 @@ function kleeja_info($msg, $title='', $exit = true, $redirect = false, $rs = 2, 
 	//footer
 	Saafooter();
 	
-	//redirect
-	if($redirect)
-	{
-		redirect($redirect, false, $exit, $rs);
-	}
-	else if($exit)
+	if($exit)
 	{
 		$SQL->close();
 		exit();
@@ -208,7 +203,7 @@ function kleeja_err($msg, $title = '', $exit = true, $redirect = false, $rs = 2,
 	($hook = kleeja_run_hook('kleeja_err_func')) ? eval($hook) : null; //run hook
 
 	// assign {text} in err template
-	$text	= $msg;
+	$text	= $msg . ($redirect ? redirect($redirect, false, $exit, $rs, true) : '');
 	//header
 	Saaheader($title, false, $extra_code_header);
 	//show tpl
@@ -216,12 +211,7 @@ function kleeja_err($msg, $title = '', $exit = true, $redirect = false, $rs = 2,
 	//footer
 	Saafooter();
 
-	//redirect
-	if($redirect)
-	{
-		redirect($redirect, false, $exit, $rs);
-	}
-	else if($exit)
+	if($exit)
 	{
 		$SQL->close();
 		exit();
@@ -241,7 +231,7 @@ function kleeja_admin_err($msg, $navigation = true, $title='', $exit = true, $re
 	($hook = kleeja_run_hook('kleeja_admin_err_func')) ? eval($hook) : null; //run hook
 
 	// assign {text} in err template
-	$text		= $msg;
+	$text		= $msg . ($redirect ? redirect($redirect, false, false, $rs, true) : '');
 	$SHOW_LIST	= $navigation;
 
 	//header
@@ -251,12 +241,7 @@ function kleeja_admin_err($msg, $navigation = true, $title='', $exit = true, $re
 	//footer
 	echo $tpl->display("admin_footer");
 		
-	//redirect
-	if($redirect)
-	{
-		redirect($redirect, false, $exit, $rs);
-	}
-	else if($exit)
+	if($exit)
 	{
 		$SQL->close();
 		exit();
@@ -277,7 +262,7 @@ function kleeja_admin_info($msg, $navigation=true, $title='', $exit=true, $redir
 	($hook = kleeja_run_hook('kleeja_admin_info_func')) ? eval($hook) : null; //run hook
 
 	// assign {text} in err template
-	$text		= $msg;
+	$text		= $msg . ($redirect ? redirect($redirect, false, false, $rs, true) : '');
 	$SHOW_LIST	= $navigation;
 
 	//header
@@ -286,13 +271,9 @@ function kleeja_admin_info($msg, $navigation=true, $title='', $exit=true, $redir
 	echo $tpl->display('admin_info');
 	//footer
 	echo $tpl->display("admin_footer");
-	
-	//redirect
-	if($redirect)
-	{
-		redirect($redirect, false, $exit, $rs);
-	}
-	else if($exit)
+
+
+	if($exit)
 	{
 		$SQL->close();
 		exit();
@@ -412,20 +393,25 @@ function big_error ($error_title,  $msg_text, $error = true)
 * Redirect
 *
 */
-function redirect($url, $header = true, $exit = true, $sec = 0)
+function redirect($url, $header = true, $exit = true, $sec = 0, $return = false)
 {
 	global $SQL;
 
 	($hook = kleeja_run_hook('redirect_func')) ? eval($hook) : null; //run hook
 
-    if (!headers_sent() && $header)
+    if (!headers_sent() && $header && !$return)
 	{
         header('Location: ' . str_replace(array('&amp;'), array('&'), $url)); 
     }
 	else
 	{
-		echo '<script type="text/javascript"> setTimeout("window.location.href = \'' .  str_replace(array('&amp;'), array('&'), $url) . '\'", ' . $sec*1000 . '); </script>';
-		echo '<noscript><meta http-equiv="refresh" content="' . $sec .';url=' . $url . '" /></noscript>';
+		$gre = '<script type="text/javascript"> setTimeout("window.location.href = \'' .  str_replace(array('&amp;'), array('&'), $url) . '\'", ' . $sec*1000 . '); </script>';
+		$gre .= '<noscript><meta http-equiv="refresh" content="' . $sec .';url=' . $url . '" /></noscript>';
+
+		if($return)
+		{
+			return $gre;
+		}
 	}
 
 	if($exit)
@@ -437,11 +423,36 @@ function redirect($url, $header = true, $exit = true, $sec = 0)
 
 /**
 *
-* todo : make another function for _GET request i.e. ?formkey=2352g23 
-* //base64_encode('form_key|time') or another good idea !
+* Prevent CSRF, 
+*
+* This will generate security token for GET request
 */
-function kleeja_add_form_key_get($request_id) {}
-function kleeja_check_form_key_get($request_id) {}
+function kleeja_add_form_key_get($request_id)
+{
+	global $config;
+	
+	$return = 'formkey=' . substr(sha1($config['h_key'] . date('H-d-m') . $request_id), 0, 20);
+	
+	($hook = kleeja_run_hook('kleeja_add_form_key_get_func')) ? eval($hook) : null; //run hook
+	return $return;
+}
+
+
+function kleeja_check_form_key_get($request_id)
+{
+	global $config;
+
+	$token = substr(sha1($config['h_key'] . date('H-d-m') . $request_id), 0, 20);
+
+	$return = false;
+	if($token == $_GET['formkey'])
+	{
+		$return = true; 
+	}
+
+	($hook = kleeja_run_hook('kleeja_check_form_key_get_func')) ? eval($hook) : null; //run hook
+	return $return;
+}
 
 /**
 * Prevent CSRF, 

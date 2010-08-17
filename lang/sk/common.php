@@ -245,6 +245,7 @@ $lang = array_merge($lang, array(
 	'MONTH'						=> 'mesiac',
 	'YEAR'						=> 'rok',
 	'INVALID_FORM_KEY'			=> 'Neplatný formulár, alebo skončila jeho platnosť',
+	'INVALID_GET_KEY'			=> 'Sorry, The requested link is expired, and is blocked for secuirty reason, go back and try again.',
 	'REFRESH_CAPTCHA'			=> 'Kliknite pre získanie nového bezpečnostného obrázku',
 	'CHOSE_F'					=> 'Vyberte prosím aspoň jeden súbor',
 	'NO_REPEATING_UPLOADING'	=> 'Stránka nemôže byť obnovená počas nahrávania!',

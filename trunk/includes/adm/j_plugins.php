@@ -106,6 +106,7 @@ $no_plugins	= false;
 $klj_d_s = $lang['KLJ_MORE_PLUGINS'][rand(0, sizeof($lang['KLJ_MORE_PLUGINS'])-1)];
 
 $H_FORM_KEYS	= kleeja_add_form_key('adm_plugins');
+$GET_FORM_KEY	= kleeja_add_form_key_get('adm_plugins');
 
 //
 // Check form key
@@ -183,7 +184,7 @@ if (!($changes_files = $cache->get('__changes_files__')))
 			{
 				$changes_files[] = array(	
 								'file'	=> $file,
-								'path'	=> basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;do_plg=1&amp;m=6&amp;fn=' . str_replace(array('changes_of_', '.zip'),'', $file),
+								'path'	=> basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;do_plg=1&amp;m=6&amp;fn=' . str_replace(array('changes_of_', '.zip'),'', $file) . '&amp;' . $GET_FORM_KEY,
 							);
 			}
 		}
@@ -200,6 +201,15 @@ else:
 
 	$plg_id = intval($_GET['do_plg']);
 
+	//check _GET Csrf token
+	//remember to add token at every m=? request !
+	if(!kleeja_check_form_key_get('adm_plugins'))
+	{
+		kleeja_admin_err($lang['INVALID_GET_KEY'], true, $lang['ERROR'], true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'), 2);
+	}
+
+
+	//handle all m=?
 	switch($_GET['m'])
 	{
 		case '1': // disable the plguin		

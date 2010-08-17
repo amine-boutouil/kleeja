@@ -245,6 +245,7 @@ $lang = array_merge($lang, array(
         'MONTH'                                         => 'un mois',
         'YEAR'                                          => 'un an',
         'INVALID_FORM_KEY'                      => 'Formulaire vide, ou votre session a expirée',
+		'INVALID_GET_KEY'			=> 'Sorry, The requested link is expired, and is blocked for secuirty reason, go back and try again.',
         'REFRESH_CAPTCHA'                       => 'Cliquer ici',
         'CHOSE_F'                                       => 'S\'il vous plaît sélectionnez au moins un fichier',
         'NO_REPEATING_UPLOADING'        => 'La page ne devrait pas être actualisé après un transfert!.',

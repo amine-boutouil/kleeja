@@ -456,6 +456,7 @@ $lang = array_merge($lang, array(
 	'YEAR'						=> 'یه‌ک ساڵ',
 	'ADMINISTRATORS'			=> 'گه‌ڕان به‌دوای هه‌موو ئه‌و ئه‌ندامانه‌ی مافی چوونه‌ کۆنترۆل پانێڵیان هه‌یه‌ .. !',
 	'INVALID_FORM_KEY'			=> 'خشته‌ی هه‌ڵه‌ , یاخود کاتی زیاتر له‌ دیاریکراوت به‌کاربرد بۆ پڕکردنه‌وه‌ی.',
+	'INVALID_GET_KEY'			=> 'Sorry, The requested link is expired, and is blocked for secuirty reason, go back and try again.',
 	'REFRESH_CAPTCHA'			=> 'کرته‌ بکه‌ بۆ گۆڕینی وێنه‌ به‌ دانه‌یه‌کی تر',
 	'CHOSE_F'					=> 'تکایه‌ لایه‌نی که‌م په‌ڕگه‌یه‌ک هه‌ڵبژێره‌',
 	'NO_REPEATING_UPLOADING'	=> 'ناتوانیت په‌ڕگه‌ دوابه‌دوای یه‌ک باربکه‌یت .. تکایه‌ 30 چرکه‌ چاوه‌ڕێبکه‌ پاشان هه‌وڵێکی تربده‌ ... !.',

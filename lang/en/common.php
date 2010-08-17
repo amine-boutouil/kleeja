@@ -245,7 +245,6 @@ $lang = array_merge($lang, array(
 	'MONTH'						=> 'a month',
 	'YEAR'						=> 'a year',
 	'INVALID_FORM_KEY'			=> 'Invalid form, or your session was expired',
-	'INVALID_GET_KEY'			=> 'عفواً, هذا الرابط انتهت مدته مسبقاً, وتم منعه للامان, عد للصفحة السابقه واعد المحاوله.',
 	'INVALID_GET_KEY'			=> 'Sorry, The requested link is expired, and is blocked for secuirty reason, go back and try again.',
 	'REFRESH_CAPTCHA'			=> 'Click to get a new CAPTCHA image',
 	'CHOSE_F'					=> 'Please select at least one file',

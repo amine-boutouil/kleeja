@@ -454,6 +454,7 @@ else:
 				echo "\t\t" . '</plugin_description>' . "\n";
 				echo "\t\t" . '<plugin_author>' . clean_xml($row['plg_author']) . '</plugin_author>' . "\n";
 				echo "\t\t" . '<plugin_kleeja_version>' . clean_xml(KLEEJA_VERSION) . '</plugin_kleeja_version>' . "\n";
+				echo "\t\t" . '<plugin_icon><![CDATA[' . clean_xml_cdata($row['plg_icon']) . ']]></plugin_icon>' . "\n";
 				echo "\t" . '</info>' . "\n";
 				
 				if(!empty($row['plg_instructions']))

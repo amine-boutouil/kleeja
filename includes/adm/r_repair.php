@@ -16,6 +16,13 @@ if (!defined('IN_ADMIN'))
 }
 
 
+//check _GET Csrf token
+if(!kleeja_check_form_key_get('GLOBAL_FORM_KEY'))
+{
+	kleeja_admin_err($lang['INVALID_GET_KEY'], true, $lang['ERROR'], true, basename(ADMIN_PATH), 2);
+}
+
+
 //
 //fix tables ..
 //

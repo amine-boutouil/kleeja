@@ -13,11 +13,15 @@
 	<div class="stats">
 	<ul>
 		<li>{lang.FILES_ST} : <span>[ {files_st} {lang.FILE} ] </span></li>
-		<li>{lang.USERS_ST} : <span>[ {users_st} {lang.USER} ] </span></li>
-		<IF NAME="config.user_system==1"><li>{lang.LAST_REG} : <span>[ {lst_reg} ]  </span></li></IF>
+		<IF NAME="config.user_system==1">
+			<li>{lang.USERS_ST} : <span>[ {users_st} {lang.USER} ] </span></li>
+			<li>{lang.LAST_REG} : <span>[ {lst_reg} ]  </span></li>
+		</IF>
 		<li>{lang.SIZES_ST} : <span style="color:red;">[ {sizes_st} ] </span></li>
 		<li>{lang.LSTDELST} : <span>{lst_dl_st} </span></li>
-		<li>{lang.MOST_EVER_ONLINE} : <span>[ {most_online} ]</span> {lang.ON} <span>[ {on_muoe} ]</span></li>
+		<IF NAME="config.allow_online==1">
+			<li>{lang.MOST_EVER_ONLINE} : <span>[ {most_online} ]</span> {lang.ON} <span>[ {on_muoe} ]</span></li>
+		</IF>
 	</ul>
 		<div class="clr"></div><br />
 			<p class="st"><i>{lang.LAST_1_H}</i></p>

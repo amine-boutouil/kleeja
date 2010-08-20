@@ -23,6 +23,32 @@ if(!kleeja_check_form_key_get('GLOBAL_FORM_KEY'))
 }
 
 
+// We, I mean developrts and support team anywhere, need sometime
+// some inforamtion about the status of Kleeja .. this will give 
+// a zip file contain those data ..
+if(isset($_GET['third_august_1987']))
+{
+	include PATH . 'includes/plugins.php';
+	$zip = new zipfile();
+
+	#grab configs
+	$d_config = $config;
+	unset($d_config['h_key'], $d_config['ftp_info']);
+	$zip->create_file(var_export($d_config, true), 'configs.txt');
+	unset($d_config);
+
+	#server info
+	
+	#plugins info
+
+	#push it
+	header('Content-Type: application/zip');
+	header('X-Download-Options: noopen');
+	header('Content-Disposition: attachment; filename="KleejaDataForSupport' .  date('dmY'). '.zip"');
+	echo $zip->zipped_file();
+}
+
+
 //
 //fix tables ..
 //

@@ -74,7 +74,7 @@
 <LOOP NAME="arr">
         <tr id="su[{{id}}]" class="osilver">
                 <td style="text-align:center"><label><input type="text" name="nm_{{id}}" value="{{name}}" size="32"></label> <br />
-				<small><a href="{{delusrfile_link}}" onclick="javascript:return confirm_from();">{lang.ADMIN_DELETE_FILES}</a> | <a target="_blank" href="{{userfile_link}}">{lang.BROSWERF}</a></small>
+				<small><a href="{{delusrfile_link}}&amp;{GET_FORM_KEY}" onclick="javascript:return confirm_from();">{lang.ADMIN_DELETE_FILES}</a> | <a target="_blank" href="{{userfile_link}}">{lang.BROSWERF}</a></small>
 
 				</td>
                 <td><label><input type="text" name="ml_{{id}}" value="{{mail}}" size="20" style="direction:ltr"></label></td>

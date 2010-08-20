@@ -22,6 +22,7 @@ $action 	.= (isset($_GET['search']) ? '&search=' . $SQL->escape($_GET['search'])
 
 $is_search	= $affected = $is_asearch = false;
 $isn_search	= true;
+$GET_FORM_KEY	= kleeja_add_form_key_get('adm_users');
 $H_FORM_KEYS	= kleeja_add_form_key('adm_users');
 $H_FORM_KEYS2	= kleeja_add_form_key('adm_users_newuser');
 
@@ -53,8 +54,23 @@ if (isset($_POST['search_user']))
 //
 //delete all user files [only one user]			
 //
-if(isset($_GET['deleteuserfile']) && $SQL->num_rows($SQL->query("SELECT * FROM `{$dbprefix}users` WHERE id=" . intval($_GET['deleteuserfile']))) != 0)
+if(isset($_GET['deleteuserfile'])) 
 {
+	//redirect to page 
+	$redirect_to = basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . (isset($_GET['page']) ? intval($_GET['page']) : '');
+
+	//check _GET Csrf token
+	if(!kleeja_check_form_key_get('adm_users'))
+	{
+		kleeja_admin_err($lang['INVALID_GET_KEY'], true, $lang['ERROR'], true, $redirect_to, 2);
+	}
+
+	//is exists ?
+	if(!$SQL->num_rows($SQL->query("SELECT * FROM `{$dbprefix}users` WHERE id=" . intval($_GET['deleteuserfile']))))
+	{
+		redirect($redirect_to);
+	}
+
 	$query = array(
 					'SELECT'	=> 'size, name, folder',
 					'FROM'		=> "{$dbprefix}files",
@@ -62,8 +78,8 @@ if(isset($_GET['deleteuserfile']) && $SQL->num_rows($SQL->query("SELECT * FROM `
 				);
 
 	$result = $SQL->build($query);
-	$sizes = false;
-	$num = 0;
+
+	$sizes = $num = 0;
 	while($row=$SQL->fetch_array($result))
 	{
 		//delete from folder ..
@@ -106,9 +122,11 @@ if(isset($_GET['deleteuserfile']) && $SQL->num_rows($SQL->query("SELECT * FROM `
 
 		$SQL->build($d_query);
 
-		kleeja_admin_info($lang['ADMIN_DELETE_FILE_OK']);
+		kleeja_admin_info($lang['ADMIN_DELETE_FILE_OK'], true, '', true, $redirect_to, 3);
 	}
 }
+
+
 //
 //add new user
 //
@@ -256,7 +274,7 @@ if ($nums_rows > 0)
 						'name'	=> $name[$row['id']],
 						'mail'	=> $mail[$row['id']],
 						'userfile_link' => $userfile,
-						'delusrfile_link' => basename(ADMIN_PATH) .'?cp=' . basename(__file__, '.php') . '&deleteuserfile='. $row['id'],
+						'delusrfile_link' => basename(ADMIN_PATH) .'?cp=' . basename(__file__, '.php') . '&amp;deleteuserfile='. $row['id'] . (isset($_GET['page']) ? '&amp;page=' . intval($_GET['page']) : ''),
 						'admin'	=> !empty($admin[$row['id']]) ? '<input name="ad_' . $row['id'] . '" type="checkbox" checked="checked" />' : '<input name="ad_' . $row['id'] . '" type="checkbox" />'
 				);
 

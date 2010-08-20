@@ -149,8 +149,8 @@ function get_microtime()
 function inst_get_config($name)
 {
 	global $SQL, $dbprefix;
-	
-	if(!is_resource($SQL))
+
+	if(!$SQL)
 	{
 		global $dbserver, $dbuser, $dbpass, $dbname;
 		if(!isset($dbserver))
@@ -159,8 +159,12 @@ function inst_get_config($name)
 		}
 		$SQL = new SSQL($dbserver, $dbuser, $dbpass, $dbname);
 	}
-	
-	$SQL->show_errors = false;
+
+	if(!$SQL)
+	{
+		return false;
+	}
+
 	$sql = "SELECT value FROM `{$dbprefix}config` WHERE `name` = '" . $name . "'";
 	$result	= $SQL->query($sql);
 	if($SQL->num_rows($result) == 0)

@@ -154,10 +154,17 @@ $ext_expt	= array();
 $ext_expt[]	= 'start';
 $ext_expt[]	= 'php_info';
 $ext_expt[]	= 'aupdate';
+
 //confirm msgs
 $ext_confirm	= array();
 $ext_confirm[]	= 'repair';	
-$ext_confirm[]	= 'lgoutcp';	
+$ext_confirm[]	= 'lgoutcp';
+
+//formkey extension, Csrf protection
+$GET_FORM_KEY_GLOBAL = kleeja_add_form_key_get('GLOBAL_FORM_KEY');
+$ext_formkey	= array();
+$ext_formkey[] = 'lgoutcp';
+$ext_formkey[] = 'repair';
 
 ($hook = kleeja_run_hook('begin_admin_page')) ? eval($hook) : null; //run hook 
 
@@ -186,9 +193,9 @@ if(!$adm_extensions || !is_array($adm_extensions))
 }
 
 /**
-* exception of 406 ! dirty hosting
+* Exception of 406 ! dirty hosting
 * 'configs' word listed as dangrous requested word
-* so we replaced this word with 'options' insted. 
+* so we replaced this word with 'options' instead. 
 */
 if($go_to == 'options')
 {
@@ -223,7 +230,7 @@ foreach(array('call'=>'calls', 'reports'=>'reports') as $table=>$n)
 					'FROM'		=> "`{$dbprefix}" . $table . "` " . $table[0]
 				);
 
-	$fetched = $SQL->fetch_array($SQL->build($c_query));
+	$fetched = $SQL->fetch_array($SQL->build($query));
 	if($fetched['total_rows'])
 	{
 		$kbubbles[$n] = $fetched['total_rows'];
@@ -252,11 +259,11 @@ foreach($adm_extensions as $m)
 	$adm_extensions_menu[$i]	= array(
 										'icon'		=> (file_exists($STYLE_PATH_ADMIN . 'images/menu_icons/' . ($m == 'configs' ? 'options' : $m) . '_button.gif'))	? $STYLE_PATH_ADMIN . 'images/menu_icons/' . ($m == 'configs' ? 'options' : $m) . '_button.gif' : $STYLE_PATH_ADMIN . 'images/menu_icons/no_icon.png',
 										'lang'		=> !empty($lang['R_'. strtoupper($m)]) ? $lang['R_'. strtoupper($m)] : (!empty($olang['R_' . strtoupper($m)]) ? $olang['R_' . strtoupper($m)] : strtoupper($m)),
-										'link'		=> './' . basename(ADMIN_PATH) . '?cp=' . ($m == 'configs' ? 'options' : $s),
+										'link'		=> './' . basename(ADMIN_PATH) . '?cp=' . ($m == 'configs' ? 'options' : $s) . (@in_array($m, $ext_formkey) ? '&amp;' . $GET_FORM_KEY_GLOBAL : ''),
 										'confirm'	=> (@in_array($m, $ext_confirm)) ? true : false,
 										'current'	=> ($s == $go_to) ? true : false
 									);
-	
+
 	//add another item to array for title='' in href or other thing
 	$adm_extensions_menu[$i]['title'] = $adm_extensions_menu[$i]['lang'];
 

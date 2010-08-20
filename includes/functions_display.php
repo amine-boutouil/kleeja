@@ -163,40 +163,12 @@ function Saafooter($outscript = false)
 }
 
 /**
-* print inforamtion message 
-* parameters : msg : text that will show as inforamtion
-					title : <title>title of page</title>
-					exit : stop script after showing msg 
-*/
-function kleeja_info($msg, $title='', $exit = true, $redirect = false, $rs = 2, $extra_code_header = '')
-{
-	global $text, $tpl, $SQL;
-
-	($hook = kleeja_run_hook('kleeja_info_func')) ? eval($hook) : null; //run hook
-
-	// assign {text} in info template
-	$text = $msg . ($redirect ? redirect($redirect, false, $exit, $rs, true) : '');
-	//header
-	Saaheader($title, false, $extra_code_header);
-	//show tpl
-	echo $tpl->display('info');
-	//footer
-	Saafooter();
-	
-	if($exit)
-	{
-		$SQL->close();
-		exit();
-	}
-}
-
-/**
 * print error message 
 * parameters : msg : text that will show as error mressage
 					title : <title>title of page</title>
 					exit : stop script after showing msg 
 */
-function kleeja_err($msg, $title = '', $exit = true, $redirect = false, $rs = 2, $extra_code_header)
+function kleeja_err($msg, $title = '', $exit = true, $redirect = false, $rs = 2, $extra_code_header, $style = 'err')
 {
 	global $text, $tpl, $SQL;
 
@@ -218,12 +190,28 @@ function kleeja_err($msg, $title = '', $exit = true, $redirect = false, $rs = 2,
 	}
 }
 
+
+/**
+* print inforamtion message 
+* parameters : msg : text that will show as inforamtion
+					title : <title>title of page</title>
+					exit : stop script after showing msg 
+*/
+function kleeja_info($msg, $title='', $exit = true, $redirect = false, $rs = 2, $extra_code_header = '')
+{
+	global $text, $tpl, $SQL;
+
+	($hook = kleeja_run_hook('kleeja_info_func')) ? eval($hook) : null; //run hook
+
+	return kleeja_err($msg, $title, $exit, $redirect, $rs, $extra_code_header, 'info');
+}
+
 /**
 * Print cp error function handler
 *
 * For admin
 */
-function kleeja_admin_err($msg, $navigation = true, $title='', $exit = true, $redirect = false, $rs = 2)
+function kleeja_admin_err($msg, $navigation = true, $title='', $exit = true, $redirect = false, $rs = 2, $style = 'admin_err')
 {
 	global $text, $tpl, $SHOW_LIST, $adm_extensions, $adm_extensions_menu;
 	global $STYLE_PATH_ADMIN, $lang, $olang, $SQL, $MINI_MENU;
@@ -231,13 +219,13 @@ function kleeja_admin_err($msg, $navigation = true, $title='', $exit = true, $re
 	($hook = kleeja_run_hook('kleeja_admin_err_func')) ? eval($hook) : null; //run hook
 
 	// assign {text} in err template
-	$text		= $msg . ($redirect ? redirect($redirect, false, false, $rs, true) : '');
+	$text		= $msg . ($redirect != false ? redirect($redirect, false, false, $rs, true) : '');
 	$SHOW_LIST	= $navigation;
 
 	//header
 	echo $tpl->display("admin_header");
 	//show tpl
-	echo $tpl->display('admin_err');
+	echo $tpl->display($style);
 	//footer
 	echo $tpl->display("admin_footer");
 		
@@ -256,28 +244,9 @@ function kleeja_admin_err($msg, $navigation = true, $title='', $exit = true, $re
 */
 function kleeja_admin_info($msg, $navigation=true, $title='', $exit=true, $redirect = false, $rs = 2)
 {
-	global $text, $tpl, $SHOW_LIST, $adm_extensions, $adm_extensions_menu;
-	global $STYLE_PATH_ADMIN, $lang, $SQL, $MINI_MENU;
-
 	($hook = kleeja_run_hook('kleeja_admin_info_func')) ? eval($hook) : null; //run hook
 
-	// assign {text} in err template
-	$text		= $msg . ($redirect ? redirect($redirect, false, false, $rs, true) : '');
-	$SHOW_LIST	= $navigation;
-
-	//header
-	echo $tpl->display("admin_header");
-	//show tpl
-	echo $tpl->display('admin_info');
-	//footer
-	echo $tpl->display("admin_footer");
-
-
-	if($exit)
-	{
-		$SQL->close();
-		exit();
-	}
+	return kleeja_admin_err($msg, $navigation, $title, $exit, $redirect, $rs, 'admin_info');
 }
 
 /**
@@ -406,12 +375,14 @@ function redirect($url, $header = true, $exit = true, $sec = 0, $return = false)
 	else
 	{
 		$gre = '<script type="text/javascript"> setTimeout("window.location.href = \'' .  str_replace(array('&amp;'), array('&'), $url) . '\'", ' . $sec*1000 . '); </script>';
-		$gre .= '<noscript><meta http-equiv="refresh" content="' . $sec .';url=' . $url . '" /></noscript>';
+		$gre .= '<noscript><meta http-equiv="refresh" content="' . $sec . ';url=' . $url . '" /></noscript>';
 
 		if($return)
 		{
 			return $gre;
 		}
+		
+		echo $gre;
 	}
 
 	if($exit)

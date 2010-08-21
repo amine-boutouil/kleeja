@@ -91,6 +91,7 @@ header('Accept-Ranges: bytes');
 header('Content-Length: ' . strlen($icon));
 header('Content-Type: image/png');
 echo $icon;
+$SQL->close();
 exit;
 
 
@@ -605,7 +606,9 @@ else:
 			header('Content-Disposition: attachment; '  . $h_name);
 			
 			echo file_get_contents(PATH . 'cache/' . $name);
-			
+			$SQL->close();
+			exit;
+
 		break;
 	}
 

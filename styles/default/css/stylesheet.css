@@ -189,7 +189,7 @@
 /*	--------------------------------------------------
 	5. Template & Header > header.html
 	-------------------------------------------------- */
-	#header {width:100%;padding:10px;}
+	#header {width:100%;padding:10px 0;}
 	/* @Logo -------------------- */  
 	#header .logo {float:right;display:inline;text-indent:-99999px;overflow: hidden;width:360px;height:78px;background:transparent url("../images/logo.png") right center no-repeat;}
 	/* @Top Navigation -------------------- */       

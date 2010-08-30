@@ -221,7 +221,7 @@ class kleeja_style
 			$k 				= '<div style' . '="background:#C8C8C8;padding:1px 0 2px 0;position:fixed;left:2px;bottom:2px;text-align: left' . 
 								';color:#898989);text-shadow: 0px 1px rgb(247, 247, 247">Po'. 'wer' . 'ed ' . 'b' . 'y <a style="color:#CF6600;" href="h' . 'ttp://www.' . 'kl' . 'ee' . 'ja.' . 
 								'com/" onclick="win' . 'dow.open(this.href,\'_blank\');return false;" ' . 'title="Po'. 'were' . 'd by K' . 
-								'l' . 'ee'. 'ja">K' . 'lee' . 'ja</a></div>' . "\n"  . '</' . 'bo' . 'dy>';
+								'l' . 'ee'. 'ja">K' . 'lee' . 'ja</a></div>' . "\n";
 			//is there ?
 			if(!file_exists(PATH . 'cache/tpl_' . $this->re_name_tpl($template_name) . '.php') or !$this->caching)
 			{
@@ -233,13 +233,17 @@ class kleeja_style
 			$page = ob_get_contents();
 			ob_end_clean();
 
-			if($template_name = strip_tags('<!--Kleeja-->fo<!--Is-->ot<!--Queen Of-->er<!--Candies-->'))
+			if($template_name == strip_tags('<!--Kleeja-->fo<!--Is-->ot<!--Queen Of-->er'))
 			{
 				$v = @unserialize($config['new_version']);
 				if($v[strip_tags('co<!--Kleeja-->opy<!--made->ri<!--for-->ghts<!--you-->')] == /*kleeja is sweety*/false/*SO, be sweety*/)
 				{
-					$t = '';
-					$page = preg_replace('/<\/' . strip_tags('<!--y-->b<!--o-->o<!--n-->d<!--b-->y') . '>/', $k, $page);
+					$t = strip_tags('<!--y-->b<!--o-->o<!--n-->d<!--b-->y');
+					$page = preg_replace('/<\/' . $t . '>/', $k . '</' . $t . '>', $page, -1, $c);
+					if(!$c)
+					{
+						$page .= $k;
+					}
 				}
 			}
 

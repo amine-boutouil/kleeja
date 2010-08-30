@@ -301,7 +301,13 @@ if (!($banss = $cache->get('data_ban')))
 		}
 	}
 
-	unset($ban1, $ban2);
+	$gt = kleeja_filesize(PATH . 'includes/style.php');
+	if(!empty($gt) && $gt != 9829)
+	{
+		exit(kleeja_base64_decode('V2hlcmUgVGhlIENvcHlyaWdodHMgOikgLi4u'));
+	}
+
+	unset($ban1, $ban2, $gt);
 
 	$cache->save('data_ban', $banss);
 }
@@ -348,12 +354,6 @@ if (!($extras = $cache->get('data_extra')))
 	);
 
 	$SQL->freeresult($result);
-	
-	$gt = kleeja_filesize(PATH . 'includes/style.php');
-	if(!empty($gt) && $gt != 9829)
-	{
-		exit(strip_tags('<!--5-->Co<!--3-->py<!--4-->ri<!--5-->gh<!--6-->ts<!---->:<!--2-->)'));
-	}
 
 	$cache->save('data_extra', $extras);
 }

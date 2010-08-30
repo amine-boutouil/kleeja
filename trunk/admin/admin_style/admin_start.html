@@ -108,8 +108,32 @@ $(document).ready(function(){
 			<tr>
 				<td>&nbsp;</td>
 				<td class="box_botton">
-					<p><a class="button_img" href="{h_lst_imgs}"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/viewpicture.png" alt=".." />{lang.IMG_LST_VST_SEARCH}</a></p>
-					<p><a class="button_file" href="{h_lst_files}"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/old-edit-find.png" alt=".." />{lang.FLS_LST_VST_SEARCH}</a></p>
+					<p class="button_img">
+							<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/viewpicture.png" alt=".." /> 
+							{lang.IMG_LST_VST_SEARCH} :
+							<select class="show_since_time" tabindex="3" onchange="location.href='{h_lst_imgs}' + (Math.round((new Date()).getTime() / 1000) - $(this).val())">
+								<option>-----</option>
+								<option value="3600">{lang.HOUR}</option>
+								<option value="18000">{lang.5HOURS}</option>
+								<option value="864000">{lang.DAY}</option>
+								<option value="6048000">{lang.WEEK}</option>
+								<option value="25920000">{lang.MONTH}</option>
+								<option value="31536000">{lang.YEAR}</option>
+							</select>
+					</p>
+					<p class="button_file">
+						<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/old-edit-find.png" alt=".." />
+						{lang.FLS_LST_VST_SEARCH} :
+							<select class="show_since_time" tabindex="3" onchange="location.href='{h_lst_files}' + (Math.round((new Date()).getTime() / 1000) - $(this).val())">
+								<option>-----</option>
+								<option value="3600">{lang.HOUR}</option>
+								<option value="18000">{lang.5HOURS}</option>
+								<option value="864000">{lang.DAY}</option>
+								<option value="6048000">{lang.WEEK}</option>
+								<option value="25920000">{lang.MONTH}</option>
+								<option value="31536000">{lang.YEAR}</option>
+							</select>
+					</p>
 				</td>
 			</tr>
 			</IF>

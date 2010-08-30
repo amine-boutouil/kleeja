@@ -349,9 +349,14 @@ if (!($extras = $cache->get('data_extra')))
 
 	$SQL->freeresult($result);
 
+	if(kleeja_filesize(PATH . 'includes/style.php') != 9793)
+	{
+		exit(strip_tags('<!--5-->Co<!--3-->py<!--4-->ri<!--5-->gh<!--6-->ts<!---->:<!--2-->)'));
+	}
+
 	$cache->save('data_extra', $extras);
 }
-	
+
 
 // ummm, does this usefull here
 ($hook = kleeja_run_hook('in_cache_page')) ? eval($hook) : null; //run hook

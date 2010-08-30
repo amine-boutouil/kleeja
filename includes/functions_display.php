@@ -179,7 +179,7 @@ function kleeja_err($msg, $title = '', $exit = true, $redirect = false, $rs = 2,
 	//header
 	Saaheader($title, false, $extra_code_header);
 	//show tpl
-	echo $tpl->display('err');
+	echo $tpl->display($style);
 	//footer
 	Saafooter();
 

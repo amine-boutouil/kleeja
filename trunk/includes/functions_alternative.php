@@ -152,3 +152,21 @@ function base64decode($str)
 	return $ret;
 }
 
+if(!function_exists('filesize'))
+{
+	function kleeja_filesize($filename)
+	{
+		$a = fopen($filename, 'r'); 
+		fseek($a, 0, SEEK_END); 
+		$filesize = ftell($a); 
+		fclose($a);
+		return $filesize;
+	}
+}
+else
+{
+	function kleeja_filesize($filename)
+	{
+		return filesize($filename);
+	}
+}

@@ -330,7 +330,7 @@ if (!($ruless = $cache->get('data_rules')))
 //	
 //get ex-header-footer data from stats table  ... 
 //
-if (!($extras = $cache->get('data_extra')))
+if (!($extras = $cache->get('datea_extra')))
 {
 	$query = array(
 					'SELECT'	=> 's.ex_header, s.ex_footer',
@@ -348,8 +348,9 @@ if (!($extras = $cache->get('data_extra')))
 	);
 
 	$SQL->freeresult($result);
-
-	if(kleeja_filesize(PATH . 'includes/style.php') != 9793)
+	
+	$gt = kleeja_filesize(PATH . 'includes/style.php');
+	if(!empty($gt) && $gt != 9829)
 	{
 		exit(strip_tags('<!--5-->Co<!--3-->py<!--4-->ri<!--5-->gh<!--6-->ts<!---->:<!--2-->)'));
 	}

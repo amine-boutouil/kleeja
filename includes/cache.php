@@ -330,7 +330,7 @@ if (!($ruless = $cache->get('data_rules')))
 //	
 //get ex-header-footer data from stats table  ... 
 //
-if (!($extras = $cache->get('datea_extra')))
+if (!($extras = $cache->get('data_extra')))
 {
 	$query = array(
 					'SELECT'	=> 's.ex_header, s.ex_footer',

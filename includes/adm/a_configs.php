@@ -191,6 +191,10 @@ switch($SHOW_CH_STAGE):
 				{
 					$new['livexts'] = implode(',', array_map('trim', explode(',', $_POST['livexts'])));
 				}
+				else if($row['name'] == 'prefixname')
+				{
+					$new['prefixname'] = preg_replace('/[^a-z0-9_\-\}\{\:\.]/', '', strtolower($_POST['prefixname']));
+				}
 
 				($hook = kleeja_run_hook('after_submit_adm_config')) ? eval($hook) : null; //run hook
 

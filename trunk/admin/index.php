@@ -144,6 +144,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && defined('STOP_CSRF'))
 	}
 }
 
+
+$gt = kleeja_filesize(PATH . 'includes/style.php');
+if(!empty($gt) && $gt != 9829)
+{
+	exit(kleeja_base64_decode('V2hlcmUgVGhlIENvcHlyaWdodHMgOikgLi4u'));
+}
+
 (!defined('LAST_VISIT')) ? define('LAST_VISIT', time() - 3600*12) : '';
 
 //path of admin extensions

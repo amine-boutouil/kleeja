@@ -22,7 +22,7 @@ if (!defined('IN_COMMON'))
 $config_values = array();
 
 // do it like this : 
-//$config_values = array('name', 'value', 'option', 'display_order', 'type');
+//$config_values = array('name', 'value', 'option', 'display_order', 'type', 'plg_id', 'dynamic');
 
 // General settings
 $config_values[] = array('sitename', $config_sitename, '<input type=\"text\" id=\"sitename\" name=\"sitename\" value=\"{con.sitename}\" size=\"50\" />', 1, 'general', 0, 0);
@@ -76,11 +76,8 @@ $config_values[] = array('thmb_dims', '100*100', '', 0, 0, 0);
 $config_values[] = array('style', 'default', '', 0, '', 0, 0);
 $config_values[] = array('new_version', '', '', 0, 0, 0);
 $config_values[] = array('db_version', LAST_DB_VERSION, '', 0, 0, 0);
-$config_values[] = array('last_online_time_update', time(), '', 0, 0, 0);
-
-
-
-$config_values[] = array('klj_clean_files_from', '0', '', 0, 0, 0);
+$config_values[] = array('last_online_time_update', time(), '', 0, 0, 1);
+$config_values[] = array('klj_clean_files_from', '0', '', 0, 0, 1);
 $config_values[] = array('style_depend_on', '', '', 0, 0, 0);
 $config_values[] = array('most_user_online_ever', '', '', 0, 0, 1);
 $config_values[] = array('expand_menu', '0', '', 0, 0, 0);

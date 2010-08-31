@@ -112,16 +112,16 @@ if(!defined('STOP_HOOKS'))
 	{
 		//get all hooks
 		$query = array(
-		'SELECT'	=> 'h.hook_id,h.hook_name, h.hook_content, h.plg_id, p.plg_name',
-		'FROM'		=> "{$dbprefix}hooks AS h",
-		'JOINS'		=> array(
-			array(
-				'INNER JOIN'	=> "{$dbprefix}plugins AS p",
-				'ON'			=> 'p.plg_id=h.plg_id'
-			)
-		),
-		'WHERE'		=> 'p.plg_disabled=0',
-		'ORDER BY'	=> 'h.hook_id'
+			'SELECT'	=> 'h.hook_id,h.hook_name, h.hook_content, h.plg_id, p.plg_name',
+			'FROM'		=> "{$dbprefix}hooks AS h",
+			'JOINS'		=> array(
+				array(
+					'INNER JOIN'	=> "{$dbprefix}plugins AS p",
+					'ON'			=> 'p.plg_id=h.plg_id'
+				)
+			),
+			'WHERE'		=> 'p.plg_disabled=0',
+			'ORDER BY'	=> 'h.hook_id'
 		);
 
 		($hook = kleeja_run_hook('qr_select_hooks_cache')) ? eval($hook) : null; //run hook
@@ -146,22 +146,21 @@ if(!defined('STOP_HOOKS'))
 //
 //get config data from config table  ...
 //
-
 if (!($config = $cache->get('data_config')))
 {
 	$query = array(
-					'SELECT'	=> 'c.*',
+					'SELECT'	=> 'c.name, c.value',
 					'FROM'		=> "{$dbprefix}config c",
 					'WHERE'		=> 'c.dynamic = 0',
 				);
 
-	($hook = kleeja_run_hook('qr_select_config_cache')) ? eval($hook) : null; //run hook				
+	($hook = kleeja_run_hook('qr_select_config_cache')) ? eval($hook) : null; //run hook	
+			
 	$result = $SQL->build($query);
-
 
 	while($row=$SQL->fetch_array($result))
 	{
-		$config[$row['name']] =$row['value'];
+		$config[$row['name']] = $row['value'];
 	}
 
 	$SQL->freeresult($result);
@@ -176,7 +175,7 @@ if (!($config = $cache->get('data_config')))
 if (!($olang = $cache->get('data_lang')))
 {
 	$query = array(
-					'SELECT'	=> 'l.*',
+					'SELECT'	=> 'l.word, l.trans',
 					'FROM'		=> "{$dbprefix}lang l",
 					'WHERE'		=> "l.lang_id='" . $SQL->escape($config['language']) . "'",
 				);
@@ -239,11 +238,13 @@ unset($exts);
 if (!($stats = $cache->get('data_stats')))
 {
 	$query = array(
-					'SELECT'	=> 's.*',
+					'SELECT'	=> 's.files, s.sizes, s.users, s.last_file, s.last_f_del, s.last_google' . 
+									', s.last_yahoo, s.google_num, s.yahoo_num, s.lastuser',
 					'FROM'		=> "{$dbprefix}stats s"
 			);
 
-	($hook = kleeja_run_hook('qr_select_stats_cache')) ? eval($hook) : null; //run hook				
+	($hook = kleeja_run_hook('qr_select_stats_cache')) ? eval($hook) : null; //run hook
+	
 	$result = $SQL->build($query);
 
 	while($row=$SQL->fetch_array($result))

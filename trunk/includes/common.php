@@ -266,18 +266,18 @@ $usrcp	= new usrcp;
 //then get caches
 require (PATH . 'includes/cache.php');
 
-//dynamic config
+//getting dynamic configs
 $query = array(
-					'SELECT'	=> 'c.*',
-					'FROM'		=> "{$dbprefix}config c",
-					'WHERE'		=> 'c.dynamic = 1',
-				);
+				'SELECT'	=> 'c.name, c.value',
+				'FROM'		=> "{$dbprefix}config c",
+				'WHERE'		=> 'c.dynamic = 1',
+			);
 			
 $result = $SQL->build($query);
 
 while($row=$SQL->fetch_array($result))
 {
-	$config[$row['name']] =$row['value'];
+	$config[$row['name']] = $row['value'];
 }
 
 $SQL->freeresult($result);

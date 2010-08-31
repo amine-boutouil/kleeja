@@ -14,8 +14,9 @@ define ('DB_VERSION' , '7');
 // sqls ////////////////////////////////////////
 //////////////////////////////////////////////
 
-$cookie_data = get_cookies_settings();
+$update_sqls['dynamic_config'] = "ALTER TABLE `{$dbprefix}config` ADD `dynamic` TINYINT( 1 ) NOT NULL DEFAULT '0'";
 
+$cookie_data = get_cookies_settings();
 //dev versions need this 
 if(defined('DEV_STAGE'))
 {
@@ -23,6 +24,10 @@ if(defined('DEV_STAGE'))
 	$update_sqls['up_cookie_2'] = "UPDATE `{$dbprefix}config` SET `value` = '" . $cookie_data['cookie_path'] . "' WHERE `name` = 'cookie_path'";
 	$update_sqls['up_cookie_3'] = "UPDATE `{$dbprefix}config` SET `value` = '" . ($cookie_data['cookie_secure'] ? '1' : '0') . "' WHERE `name` = 'cookie_secure'";
 	$update_sqls['up_cookie_4'] = "UPDATE `{$dbprefix}config` SET `value` = '" . $cookie_data['cookie_name'] . "' WHERE `name` = 'cookie_name'";
+
+	$update_sqls['c_dynamic'] = "UPDATE `{$dbprefix}config` SET `dynamic` = '1' WHERE `name` = 'most_user_online_ever'";
+	$update_sqls['cc_dynamic'] = "UPDATE `{$dbprefix}config` SET `dynamic` = '1' WHERE `name` = 'klj_clean_files_from'";
+	$update_sqls['ccc_dynamic'] = "UPDATE `{$dbprefix}config` SET `dynamic` = '1' WHERE `name` = 'last_online_time_update'";
 }
 
 
@@ -33,8 +38,8 @@ $update_sqls['cookie_4'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `o
 
 //system config
 $update_sqls['up_dbv_config'] = "UPDATE `{$dbprefix}config` SET `value` = '" . DB_VERSION . "' WHERE `name` = 'db_version'";
-$update_sqls['config_online'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('last_online_time_update', '" .  time() . "', '', 0)";
-$update_sqls['files_del_c'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('klj_clean_files_from', '0', '', 0)";
+$update_sqls['config_online'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`, `dynamic`) VALUES ('last_online_time_update', '" .  time() . "', '', 0, 1)";
+$update_sqls['files_del_c'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`, `dynamic`) VALUES ('klj_clean_files_from', '0', '', 0, 1)";
 $update_sqls['online_i'] = "ALTER TABLE `{$dbprefix}online` DROP `id`";
 $update_sqls['online_t'] = "TRUNCATE TABLE `{$dbprefix}online`";
 $update_sqls['online_c'] = "ALTER TABLE `{$dbprefix}online` ADD `session` VARCHAR( 100 ) NOT NULL";
@@ -115,7 +120,7 @@ $update_sqls['hash_key'] = "ALTER TABLE `{$dbprefix}users` ADD `hash_key` VARCHA
 $update_sqls['password_salt'] = "ALTER TABLE `{$dbprefix}users` ADD `password_salt` VARCHAR( 250 ) NOT NULL AFTER `password`";
 $update_sqls['type_config'] = "ALTER TABLE `{$dbprefix}config` ADD `type` VARCHAR( 20 ) NOT NULL DEFAULT 'other'";
 $update_sqls['config_insert42'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('style_depend_on', '', '', 0)";
-$update_sqls['config_insert43'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('most_user_online_ever', '', '', 0)";
+$update_sqls['config_insert43'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`, `dynamic`) VALUES ('most_user_online_ever', '', '', 0, 1)";
 $update_sqls['plg_instructions'] = "ALTER TABLE `{$dbprefix}plugins` ADD `plg_instructions` MEDIUMTEXT NOT NULL";
 $update_sqls['plg_store'] = "ALTER TABLE `{$dbprefix}plugins` ADD `plg_store` LONGTEXT NOT NULL";
 $update_sqls['plg_id_in_lang_table'] = "ALTER TABLE `{$dbprefix}lang` ADD `plg_id` INT( 11 ) NOT NULL DEFAULT '0'";
@@ -151,9 +156,6 @@ $update_sqls['index_k14'] = "ALTER TABLE  `{$dbprefix}users` ADD INDEX (  `clean
 $update_sqls['index_k15'] = "ALTER TABLE  `{$dbprefix}plugins` ADD INDEX (  `plg_name` )";
 
 
-//dynamic configs
-$update_sqls['dynamic_config'] = "ALTER TABLE `{$dbprefix}config` ADD `dynamic` TINYINT( 1 ) NOT NULL DEFAULT '0'";
-$update_sqls['mostonline_dynamic'] = "UPDATE `{$dbprefix}config` SET `dynamic` = '1' WHERE `name` = 'most_user_online_ever'";
 
 //////////////////////////////////////////////////
 //notes ///////////////////////////////////////////

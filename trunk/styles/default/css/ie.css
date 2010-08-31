@@ -1,21 +1,19 @@
 @charset "UTF-8";
-/*	--------------------------------------------------
-	Theme Name: 	default V1
-	Filename: 		styles/default/ie.css
-	package:		Kleeja  copyright(c)2007-2010
-	version:		1.0.0
-	URL:			http://www.kleeja.com
-	Date:			2010-07-10
-	Author: 		Tar3Q
-	-------------------------------------------------- */
-
-/* public/stylesheets/global/ie7_hacks.css @ 1268439931 */
-
-
+/*	---	Explore all versions browser ----------- */
 html {background : url(null) fixed no-repeat;}
 input[type="submit"]{cursor: pointer;}
-.tabbertab {	border-right:1px solid #bbb;border-left:1px solid #bbb;border-bottom:1px solid #aaa;border-top:none;}
-ul.tabbernav li a{border-right:1px solid #aaa;border-left:1px solid #aaa;border-bottom:0;border-top:1px solid #bbb;}
+.tabber {width:auto;}
 .safe_code ,.call,.register,.get_password,.tabbertab{width:94%;}
 .data_menu td{border:2px solid #F6EBE4;}
 #wrapper {position: relative;z-index: inherit;zoom: 1; /* For IE6 */}
+#right_menu{margin:0 0 0 20px;}
+.css_xhtml{margin:0 20px 0 0;}
+#content_index {margin:0 20px;}
+.IEs_c {width:97%;}
+#filecplink  input.link_user {margin-top:10px;}
+#filecplink legend.copylink {padding:5px;}
+#footer .bu-panel{line-height:28px;}
+.data_file .data_menu  {table-layout:auto;}
+
+.data_file .data_menu td{	white-space:nowrap;height:24px;line-height:24px;}
+.data_file .data_menu .td  {width:82px;text-align:center;background:#FFEDC1 url(../images/headline_bg.png) repeat-x top right;color:#333;}

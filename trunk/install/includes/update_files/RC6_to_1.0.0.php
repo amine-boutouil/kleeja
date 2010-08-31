@@ -151,6 +151,10 @@ $update_sqls['index_k14'] = "ALTER TABLE  `{$dbprefix}users` ADD INDEX (  `clean
 $update_sqls['index_k15'] = "ALTER TABLE  `{$dbprefix}plugins` ADD INDEX (  `plg_name` )";
 
 
+//dynamic configs
+$update_sqls['dynamic_config'] = "ALTER TABLE `{$dbprefix}config` ADD `dynamic` TINYINT( 1 ) NOT NULL DEFAULT '0'";
+$update_sqls['mostonline_dynamic'] = "UPDATE `{$dbprefix}config` SET `dynamic` = '1' WHERE `name` = 'most_user_online_ever'";
+
 //////////////////////////////////////////////////
 //notes ///////////////////////////////////////////
 //////////////////////////////////////////////////

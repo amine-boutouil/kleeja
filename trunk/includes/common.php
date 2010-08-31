@@ -266,6 +266,23 @@ $usrcp	= new usrcp;
 //then get caches
 require (PATH . 'includes/cache.php');
 
+//dynamic config
+$query = array(
+					'SELECT'	=> 'c.*',
+					'FROM'		=> "{$dbprefix}config c",
+					'WHERE'		=> 'c.dynamic = 1',
+				);
+			
+$result = $SQL->build($query);
+
+while($row=$SQL->fetch_array($result))
+{
+	$config[$row['name']] =$row['value'];
+}
+
+$SQL->freeresult($result);
+
+
 //check user or guest
 $usrcp->kleeja_check_user();
 

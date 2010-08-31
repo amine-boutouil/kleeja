@@ -260,7 +260,7 @@ case 'data' :
 			//add configs
 			foreach($config_values as $cn)
 			{
-				$sql = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`, `type`) VALUES ('$cn[0]', '$cn[1]', '$cn[2]', '$cn[3]', '$cn[4]');";
+				$sql = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`, `type`, `plg_id`, `dynamic`) VALUES ('$cn[0]', '$cn[1]', '$cn[2]', '$cn[3]', '$cn[4]', '$cn[5]', '$cn[6]');";
 				if(!$SQL->query($sql))
 				{
 					$errors .= implode(':', $SQL->get_error()) . '' . "\n___\n";

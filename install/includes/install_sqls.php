@@ -133,6 +133,7 @@ CREATE TABLE `{$dbprefix}config` (
   `display_order` int(10) NOT NULL,
   `type` varchar(20) NULL DEFAULT 'other',
   `plg_id` int(11) NOT NULL DEFAULT '0',
+  `dynamic` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`name`),
   KEY `type` (`type`),
   KEY `plg_id` (`plg_id`)

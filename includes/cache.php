@@ -151,7 +151,8 @@ if (!($config = $cache->get('data_config')))
 {
 	$query = array(
 					'SELECT'	=> 'c.*',
-					'FROM'		=> "{$dbprefix}config c"
+					'FROM'		=> "{$dbprefix}config c",
+					'WHERE'		=> 'c.dynamic = 0',
 				);
 
 	($hook = kleeja_run_hook('qr_select_config_cache')) ? eval($hook) : null; //run hook				

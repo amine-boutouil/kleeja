@@ -24,7 +24,9 @@
 	<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/menu_icons/calls_button.gif" />{lang.R_CALLS} :</h2><!-- END -->
 	
 	<!-- mail here  -->
-	<div id="mail_here">{lang.E_CLICK}</div><!-- END -->
+<IF NAME="no_results"><ELSE>
+	<div id="mail_here">{lang.E_CLICK}</div>
+</IF>
 
 	<div class="clr"></div>
 	

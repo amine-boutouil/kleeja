@@ -46,7 +46,7 @@
 	h1, h2, h3, h4, h5, h6 { color: #333; font-weight: bold; margin: 5px 0;}
 	h1, h2, h3, h4 { line-height: 1;}
 	h5, h6 { line-height: 18px;}
-	h1 { font-size: 32px;color:#FF6A15;}
+	h1 { font-size: 32px;color:#FF6A15;text-shadow: 1px 1px 2px #000000;}
 	h2 { font-size: 24px;}
 	h3 { font-size: 20px;}
 	h4 { font-size: 18px;}

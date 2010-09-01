@@ -12,9 +12,6 @@ input, textarea, select, option {font:normal 12px Tahoma, Arial, Verdana, sans-s
 .left_button input{cursor: hand;}
 .up_input {direction:ltr;width:97%;color:#111;padding:3px;letter-spacing:1px;vertical-align:middle;}
 .agree{position:relative}
-input:hover, textarea:hover, select:hover{}
-input:focus, textarea:focus, input.sffocus { border: 1px solid #D26900;}
-
+input:focus, textarea:focus, input.sffocus { border: 1px solid #D26900;padding:4px 0px;}
 .data_file .filereport {height:22px;line-height:22px;}
-
 .line {background:#fff;height:2px;border-bottom: 1px solid #ECECEC;}

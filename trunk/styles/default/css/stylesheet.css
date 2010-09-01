@@ -366,7 +366,7 @@
 	16. Template & Report a File > report.html
 	-------------------------------------------------- */
 	.rebort{background:transparent url(../images/file_rebort.gif) no-repeat 2% 50%;margin:5px 0;padding: 5px 0;}
-	input.urlcolor{background:#FFDFDF !important;	border:1px solid #D88D8D !important;letter-spacing:1px;width:65%;}
+	input.urlcolor{background:#FFDFDF !important;	border:1px solid #D88D8D !important;letter-spacing:1px;width:70%;}
 	input.urlcolor:focus,input.urlcolor:hover{background:#FFDFDF !important;cursor:default;border-color:#D88D8D !important;}
 /* @end */      
 

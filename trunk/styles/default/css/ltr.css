@@ -29,13 +29,15 @@
 	/* @group Infos & Alerts & Errors -------------- */
 	dd.info  ul li, dd.error ul li,ul.index_info  li, ul.index_err li { background-position:left top;font-size:120%;}
 	/* @Main Structure -------------- */
-	#content, #content_index  {float:left;}
+
+	#content  {float:right;}
+	#content_index  {float:left;}
 	/* @Template & Header > header.html -------------- */
 	#header .logo {float:left;background-position:left center;margin-left:20px;}
 	.top_nav .menu ul{float:left;}
 	.top_nav .menu li {float:left;margin-left:0;margin-right:2px;}
 	.top_nav .menu li a {float:left;}
-	#right_menu {float:left;margin:0 20px 0 15px;}
+	#right_menu {float:left;margin:0 26px 0 10px;}
 	#right_menu .list .imgtop{text-align:left;}
 	/* @Template & Index > index_body.html -------------- */
 	.waitloading{font-size:140%;}

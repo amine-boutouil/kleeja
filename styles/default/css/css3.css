@@ -9,9 +9,6 @@
 	Author: 		Tar3Q
 	-------------------------------------------------- */
 
-/*  #iPhone ----------- */	
-	@media screen and (max-device-width: 480px) { html { -webkit-text-size-adjust: none; } }
-	
 /*  #Snow Leopard Safari Type Fix ----------- */	
 	body {-webkit-text-stroke: 1px rgba(255,255,255,.01); }
 
@@ -20,7 +17,7 @@
 	--------------------------------------- */
 	/* @White text shadow ------- */
 	body {text-shadow: 0 0 2px #fff;}
-	
+	h1 { text-shadow: 0px 0px 2px #FFFF80;}
 	/* @Dark gray text shadow ------- */
 	.top_nav .menu li a.current, .guide_user_th, .guide_visitor_th, .tit , .file_cp thead th , .tabledata thead th,
 	#right_menu .list a,	#right_menu .list a.current,	#footer .admin_cp_link span,	#boxfileuser .public {
@@ -51,7 +48,7 @@
 
 	/* @Gray Shadow --------------- */	
 	.onlineall,	.onlinevisitor,	.onlineusers, .name_users, .guide_user_th, .guide_visitor_th, .user_box,.forget_pass,
-	#footer .admin_cp_link span,	#profile .boxdata,.file_cp,	#boxfileuser .box_user, .tabledata,	#boxfileuser .us3r_n4me,	.data_file_down .download  a {
+	#profile .boxdata,.file_cp,	#boxfileuser .box_user, .tabledata,	#boxfileuser .us3r_n4me,	.data_file_down .download  a {
 	-moz-box-shadow : 0px 0px 3px #999;-webkit-box-shadow : 0px 0px 3px #999;-khtml-box-shadow : 0px 0px 3px #999;box-shadow : 0px 0px 3px #999;}
 /* @end */	
 

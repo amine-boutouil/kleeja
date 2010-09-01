@@ -27,11 +27,12 @@
 		html, body {font:normal 100% Tahoma, Arial, Verdana, sans-serif, "Lucida Grande", "Lucida Sans Unicode"; height:100%;width: 100%;background:#fff;padding:3px;color: #000;margin: 0;}
 		h1, h2, h3, h4, h5, h6 {font-weight: normal;font-size:x-small;}
 		a:link, a:visited {text-decoration: underline;color: #0000CC;}
-		a:hover, a:active {text-decoration: underline;color: #660066;}
+		a:hover, a:active {text-decoration: none;color: #660066;}
 		h2 {font-size: 13px;color:#EF5E00;margin: 5px 0;}
 		p, ul, ol {line-height:100%;}
+		#main {width:100%;margin:0px auto;background-image: none;}
 		.title {font-size:85%;}
-		#footer,.safe_code {display:none;}
+		#footer,.extras_header, .extras_footer {display:none;}
 		.logo {	max-width:200px;}
 		.top_nav {width: 100%;}
 		.top_nav .menu li {font-size:xx-small;}

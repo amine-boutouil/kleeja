@@ -250,12 +250,12 @@
 	-------------------------------------------------- */
 	.file_info_box {margin:5px auto;padding:10px 0;}
 	.data_file,.data_file_down {width:56%;}
-	.data_file .tit {background:#8C8C8C url(../images/bg_tile.gif) repeat-x bottom;border:1px solid #727272;font-weight:700;color:#fff;text-align:center;padding:5px 0;margin:1px 0;}
+	.data_file .tit {background:#8C8C8C url(../images/bg_tile.gif) repeat-x bottom;border:1px solid #727272;font-weight:700;color:#fff;text-align:center;padding:8px 0;margin:1px 0;}
 	.data_file .data_menu  {width:100%;font-size:12px;table-layout:fixed;}
-	.data_file .data_menu tr{display:block;margin-bottom:1px;background:white;border:1px solid #C7C7C7;}
-	.data_file .data_menu td{	white-space:nowrap;padding-right:5px;height:24px;line-height:24px;}
+	.data_file .data_menu tr{display:block;margin-bottom:1px;background:white;border-top:1px solid #C7C7C7;border-bottom:1px solid #bbb;}
+	.data_file .data_menu td{	white-space:nowrap;padding-right:5px;height:24px;line-height:24px;border:none;}
 	.data_file .data_menu .td  {width:82px;text-align:center;background:#FFEDC1 url(../images/headline_bg.png) repeat-x top right;color:#333;}
-	.data_file .filereport {height:26px;line-height:26px;text-align:center;border-top:1px solid #D88181;border-bottom:1px solid #D88181;cursor:pointer;background:url(../images/bg_onlinevisitor.gif) repeat-x bottom left;margin-top:5px;color:#D80000;font-weight:700;}
+	.data_file .filereport {height:24px;line-height:24px;text-align:center;border-top:1px solid #D88181;border-bottom:1px solid #D88181;cursor:pointer;background:url(../images/bg_onlinevisitor.gif) repeat-x bottom left;margin-top:1px;color:#D80000;font-weight:700;}
 	.data_file .filereport:hover {background:#F9B6C1;border-color:#B14F4F;}
 	.data_file_down {width:40%;text-align:center;font-weight:700;}
 	.data_file_down p.find_x {margin:2px 0;font-size:small;}

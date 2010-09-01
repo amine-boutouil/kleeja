@@ -46,7 +46,7 @@
 	h1, h2, h3, h4, h5, h6 { color: #333; font-weight: bold; margin: 5px 0;}
 	h1, h2, h3, h4 { line-height: 1;}
 	h5, h6 { line-height: 18px;}
-	h1 { font-size: 32px;color:#FF6A15;text-shadow: 1px 1px 2px #000000;}
+	h1 { font-size: 32px;color:#FF6A15;}
 	h2 { font-size: 24px;}
 	h3 { font-size: 20px;}
 	h4 { font-size: 18px;}
@@ -182,7 +182,7 @@
 	body {width:100%;height:100%;background: #ececec url(../images/bg_body.png) repeat-x top center;}
 	#main {width:960px;background:url(../images/bg_main.png) no-repeat top right;margin:10px auto;}
 	#wrapper {height:100%;padding:15px 30px 10px 30px;}
-	#content, #content_index  {float:left;width:70%;padding:10px 20px;margin:0 0 0 10px;background:#DFDFDF url(../images/bg_content.png) repeat-x;border:1px solid #aaa;}
+	#content, #content_index  {float:left;width:70%;padding:10px 20px;margin:0 0 0 10px;background:#DFDFDF url(../images/bg_content.png) repeat-x;border:1px solid #C9C9C9;}
 	#content_index {float:right;background-color:transparent;background-image:none;border:none;padding:0 15px;margin:0;}
 /* @end */
 	
@@ -278,11 +278,11 @@
 /*	--------------------------------------------------
 	10. Template & Rules > rules.html
 	-------------------------------------------------- */
-	#rules {padding:10px 0;font-size:90%;font-weight:700;color:#333;}
+	#rules {padding:10px 0;font-size:90%;font-weight:700;color:#555;}
 	#rules .rut {clear:both;margin-bottom:3px;padding:4px 0px;text-indent:10px;color:red;}
 	#rules .rls {display:block;text-indent:10px;}
-	#rules .rls ul{list-style-type:none;text-indent:4px;}
-	#rules .rls ul li {height:24px;line-height:24px;background:transparent url(../images/list_stat.gif) no-repeat right center;padding-right:15px;padding-bottom:2px;}
+	#rules .rls ul{list-style-type:disc;text-indent:4px;}
+	#rules .rls ul li {line-height:20px;padding:1px 5px 2px 0;}
 
 /* @end */
 

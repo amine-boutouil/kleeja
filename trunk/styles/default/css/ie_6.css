@@ -1,47 +1,20 @@
 @charset "UTF-8";
-/*	--------------------------------------------------
-	Theme Name: 	default V1
-	Filename: 		styles/default/ie_6.css
-	package:		Kleeja  copyright(c)2007-2010
-	version:		1.0.0
-	URL:			http://www.kleeja.com
-	Date:			2010-07-10
-	Author: 		Tar3Q
-	-------------------------------------------------- */
+/* @CSS Hacks for IE6 and Lower */
+*html .classname {}
+* html selector{property:value;}
+input, textarea, select, option {font:normal 12px Tahoma, Arial, Verdana, sans-serif, "Lucida Grande", "Lucida Sans Unicode"; }	
+.top_nav .menu li a:hover {color:#fff;background: url(../images/current-bg.gif) repeat-x top left;}
+#right_menu .list a:hover{color:#fff;background:#555 url(../images/right4_menu.png) repeat;}
+.guide_user_th , .guide_visitor_th,.user_ext , .visitor_ext{background-image:none;}
+.go_up{background:url(../images/goup.png) no-repeat 6% 100%;}
+.title {margin:10px 0;}
+.css_xhtml{display:none;}
+.left_button input{cursor: hand;}
+.up_input {direction:ltr;width:97%;color:#111;padding:3px;letter-spacing:1px;vertical-align:middle;}
+.agree{position:relative}
+input:hover, textarea:hover, select:hover{}
+input:focus, textarea:focus, input.sffocus { border: 1px solid #D26900;}
 
-	/* @CSS Hacks for IE6 and Lower */
-	
-	*html .classname {}
-	* html selector{property:value;}
+.data_file .filereport {height:22px;line-height:22px;}
 
-	input {font: normal 12px Tahoma, Arial, Verdana, sans-serif, "Lucida Grande", "Lucida Sans Unicode";}
-	ul ul {display:none; } 
-	li:hover ul {display:block;}
-
-	.top_nav .menu li a:hover {color:#fff;background: url(../images/current-bg.gif) repeat-x top left;}
-	#right_menu .list a:hover{color:#fff;background:#555 url(../images/right4_menu.png) repeat;}
-
-	.guide_user_th , .guide_visitor_th,.user_ext , .visitor_ext, .tabledata thead th, .title{background-image:none;}
-
-	.go_up{background:url(../images/goup.png) no-repeat 6% 100%;}
-
-	div.user_ext:hover{background-color:#fff;}
-	.title {margin:10px 0;}
-
-
-
-	
-.cboxIE #cboxMiddleRight {
-	FILTER: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=../img/internet_explorer/borderMiddleRight.png, sizingMethod='scale');
-	background: none transparent scroll repeat 0% 0%;
-}
-
-* html #facebox_overlay { 
-	position: absolute;height: expression(document.body.scrollHeight > document.body.offsetHeight ? document.body.scrollHeight : document.body.offsetHeight + 'px');}
-/* App dialogs */
-#appdialogs {
-  /* fake max-height */
-  height:expression(this.scrollHeight > document.documentElement.clientHeight ? document.documentElement.clientHeight + "px" : "auto");
-  float: left;width: 100%; overflow-x: hidden;}
-
-.editProfile-watermark-preview {width: 100%;display: inline-block;}
+.line {background:#fff;height:2px;border-bottom: 1px solid #ECECEC;}

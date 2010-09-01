@@ -25,8 +25,8 @@
 	<link rel="apple-touch-startup-image" href="images/iPhone.png" />
 	<link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH}css/stylesheet.css" />
 	<IF NAME="{lang.DIR}==ltr"><link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH}css/ltr.css" /></IF>
-	<IS_BROWSER="ie6"><link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH}css/ie_6.css" /><style type="text/css">	img ,td ,tr{ behavior: url('{STYLE_PATH}ie/iepngfix.htc')};	</style></IS_BROWSER>
-	<IS_BROWSER="ie"><link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH}css/ie.css" /><style type="text/css">	body { behavior: url('{STYLE_PATH}ie/csshover3.htc')}; .border_radius { behavior: url('{STYLE_PATH}ie/border-radius.htc')};</style></IS_BROWSER>
+	<IS_BROWSER="ie6"><link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH}css/ie_6.css" /><style type="text/css">.logo, #main, .title, .pngfix { behavior: url('{STYLE_PATH}ie/iepngfix.htc')};	</style></IS_BROWSER>
+	<IS_BROWSER="ie"><link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH}css/ie.css" /><style type="text/css">.border_radius { behavior: url('{STYLE_PATH}ie/border-radius.htc')};</style></IS_BROWSER>
 	<IS_BROWSER="mobile"><link rel="stylesheet" type="text/css" href="{STYLE_PATH}css/mobile.css" media="handheld" /></IS_BROWSER>
 	<script type="text/javascript">
 	<!--
@@ -92,14 +92,14 @@
 				<li class="imgtop">&nbsp;</li>
 				<IF NAME="user_is">
 					<IF NAME="config.enable_userfile">
-					<li><a href="{_LINKS.fileuser}" (go_current==fileuser?class="current":)><img src="{STYLE_PATH}images/user-folder.png" alt="{lang.YOUR_FILEUSER}" style="vertical-align:middle;" />{lang.YOUR_FILEUSER}</a></li>
+					<li><a href="{_LINKS.fileuser}" (go_current==fileuser?class="current":)><img src="{STYLE_PATH}images/user-folder.png" class="pngfix" alt="{lang.YOUR_FILEUSER}" style="vertical-align:middle;" />{lang.YOUR_FILEUSER}</a></li>
 					</IF>
-					<li><a href="{_LINKS.filecp}" (go_current==filecp?class="current":)><img src="{STYLE_PATH}images/filecp.png" alt="{lang.FILECP}" style="vertical-align:middle;" />{lang.FILECP}</a></li>
-					<li><a href="{_LINKS.profile}" (go_current==profile?class="current":)><img src="{STYLE_PATH}images/User.png" alt="{lang.PROFILE}" style="vertical-align:middle;" />{lang.PROFILE}</a></li>
-					<li><a href="{_LINKS.logout}" (go_current==logout?class="current":)><img src="{STYLE_PATH}images/Go-Out.png" alt="{lang.LOGOUT}" style="vertical-align:middle;" />{lang.LOGOUT} [ {username} ]</a></li>
+					<li><a href="{_LINKS.filecp}" (go_current==filecp?class="current":)><img src="{STYLE_PATH}images/filecp.png" class="pngfix" alt="{lang.FILECP}" style="vertical-align:middle;" />{lang.FILECP}</a></li>
+					<li><a href="{_LINKS.profile}" (go_current==profile?class="current":)><img src="{STYLE_PATH}images/User.png" class="pngfix" alt="{lang.PROFILE}" style="vertical-align:middle;" />{lang.PROFILE}</a></li>
+					<li><a href="{_LINKS.logout}" (go_current==logout?class="current":)><img src="{STYLE_PATH}images/Go-Out.png" class="pngfix" alt="{lang.LOGOUT}" style="vertical-align:middle;" />{lang.LOGOUT} [ {username} ]</a></li>
 				<ELSE>
-					<li><a href="{_LINKS.login}" (go_current==login?class="current":)><img src="{STYLE_PATH}images/Go-Out.png" alt="{lang.LOGIN}" style="vertical-align:middle;" />{lang.LOGIN}</a></li>
-					<IF NAME="config.register"><li><a href="{_LINKS.register}" (go_current==register?class="current":)><img src="{STYLE_PATH}images/User.png" alt="{lang.REGISTER}" style="vertical-align:middle;" />{lang.REGISTER}</a></li></IF>
+					<li><a href="{_LINKS.login}" (go_current==login?class="current":)><img src="{STYLE_PATH}images/Go-Out.png" class="pngfix" alt="{lang.LOGIN}" style="vertical-align:middle;" />{lang.LOGIN}</a></li>
+					<IF NAME="config.register"><li><a href="{_LINKS.register}" (go_current==register?class="current":)><img src="{STYLE_PATH}images/User.png" class="pngfix" alt="{lang.REGISTER}" style="vertical-align:middle;" />{lang.REGISTER}</a></li></IF>
 				</IF>
 				<li class="imgbottom">&nbsp;</li>
 			</ul>

@@ -2,6 +2,8 @@
 /*	---	Explore all versions browser ----------- */
 html {background : url(null) fixed no-repeat;}
 input[type="submit"]{cursor: pointer;}
+input[type="text"]:hover, input[type="password"]:hover, textarea:hover, select:hover{border: 1px solid #D26900;}
+input:focus, input.sffocus { background-color:#ffd;border: 1px solid #D26900;}
 .tabber {width:auto;}
 .safe_code ,.call,.register,.get_password,.tabbertab{width:94%;}
 .data_menu td{border:2px solid #F6EBE4;}
@@ -13,7 +15,8 @@ input[type="submit"]{cursor: pointer;}
 #filecplink  input.link_user {margin-top:10px;}
 #filecplink legend.copylink {padding:5px;}
 #footer .bu-panel{line-height:28px;}
-.data_file .data_menu  {table-layout:auto;}
+.data_file .tit {padding:5px 0;margin:1px 1px;}
+.data_file .data_menu  {width:100%;font-size:12px;table-layout:fixed;}
+.data_file .data_menu tr{margin-bottom:0px;}
+.data_file .filereport {margin:5px 1px 0 1px;}
 
-.data_file .data_menu td{	white-space:nowrap;height:24px;line-height:24px;}
-.data_file .data_menu .td  {width:82px;text-align:center;background:#FFEDC1 url(../images/headline_bg.png) repeat-x top right;color:#333;}

@@ -13,12 +13,12 @@
 	<!-- box user name and all files  -->
 	<div id="boxfileuser">
 		<div class="box_user">
-		<img class="right" src="{STYLE_PATH}images/imguser.png" alt="image user" />
+		<img class="right pngfix" src="{STYLE_PATH}images/imguser.png" alt="image user" />
 			<div class="public">{lang.PUBLIC_USER_FILES}</div>
 			<div class="uname">{user_name}</div>
 		</div>
 		<div class="us3r_n4me">
-			<img class="right" src="{STYLE_PATH}images/boxfileuser.png" alt="files number" />
+			<img class="right pngfix" src="{STYLE_PATH}images/boxfileuser.png" alt="files number" />
 			<div class="public">{lang.ALL_FILES}</div>
 			<div class="nums">{nums_rows}</div> 
 		</div>
@@ -43,7 +43,7 @@
 	<IF NAME="no_results">
 	<!-- no files user -->
 	<div id="boxfileuser" style="text-align:center">
-		<img src="{STYLE_PATH}images/warning_nofile.png" />
+		<img class="pngfix" src="{STYLE_PATH}images/warning_nofile.png" />
 		<br />
 		<h1>{lang.NO_FILE_USER}</h1>
 	</div>
@@ -70,7 +70,7 @@
 				<td>{{file_type}}</td>
 				<td><img src="{{icon_link}}" alt="{{file_type}}" /></td>
 				<td class="odd">{{name}}</td>
-				<td><span class="fcolor">{{uploads}}</span></td>
+				<td>{{uploads}}</td>
 				<td>{{last_down}}</td>
 			</tr>
 			</LOOP>

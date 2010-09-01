@@ -8,8 +8,8 @@ input:focus, input.sffocus { background-color:#ffd;border: 1px solid #D26900;}
 .safe_code ,.call,.register,.get_password,.tabbertab{width:94%;}
 .data_menu td{border:2px solid #F6EBE4;}
 #wrapper {position: relative;z-index: inherit;zoom: 1; /* For IE6 */}
-#right_menu{margin:0 0 0 20px;}
-.css_xhtml{margin:0 20px 0 0;}
+#right_menu{margin:0;}
+.css_xhtml{margin:0;}
 #content_index {margin:0 20px;}
 .IEs_c {width:97%;}
 #filecplink  input.link_user {margin-top:10px;}
@@ -19,6 +19,3 @@ input:focus, input.sffocus { background-color:#ffd;border: 1px solid #D26900;}
 .data_file .data_menu  {width:100%;font-size:12px;table-layout:fixed;}
 .data_file .data_menu tr{margin-bottom:0px;}
 .data_file .filereport {margin:5px 1px 0 1px;}
-
-
-

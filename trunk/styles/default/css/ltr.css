@@ -28,16 +28,15 @@
 	#kleeja_img_captcha {float:left;}
 	/* @group Infos & Alerts & Errors -------------- */
 	dd.info  ul li, dd.error ul li,ul.index_info  li, ul.index_err li { background-position:left top;font-size:120%;}
+	.css_xhtml{padding-left:15px;}
 	/* @Main Structure -------------- */
-
-	#content  {float:right;}
-	#content_index  {float:left;}
+	#content {float:right;}
 	/* @Template & Header > header.html -------------- */
-	#header .logo {float:left;background-position:left center;margin-left:20px;}
+	#header .logo {float:left;background-position:left center;margin:0 10px 0 30px;}
 	.top_nav .menu ul{float:left;}
 	.top_nav .menu li {float:left;margin-left:0;margin-right:2px;}
 	.top_nav .menu li a {float:left;}
-	#right_menu {float:left;margin:0 26px 0 10px;}
+	#right_menu{float:left;padding:0 10px 0 0;}
 	#right_menu .list .imgtop{text-align:left;}
 	/* @Template & Index > index_body.html -------------- */
 	.waitloading{font-size:140%;}
@@ -58,6 +57,7 @@
 	/* @Template & Footer > footer.html -------------- */
 	#footer .footer_inner{font-size:100%;}
 	#footer .bu-panel{float:left;}
+	#footer .admin_cp_link span{font-weight:bold;padding:4px 35px;}
 	#footer .footer_stats, #footer .googleanalytics{float:right;font-size:100%;}
 	/* @Template & login > login.html -------------- */
 	.login {background-position:80% 50%;}
@@ -80,7 +80,7 @@
 	.rebort{background-position:94% 50%;}
 	/* @Template & Profile > profile.html ---------- */
 	#profile .boxdata{float:right;}
-	#profile .boxdata .boxdata_inner label {text-align:left;}
+	#profile .boxdata .boxdata_inner label {text-align:left;font-size:90%;}
 	#profile .boxdata .boxdata_inner select {float:left;margin-right:0;margin-left:10px;}
 	/* @Template & File Manager users > filecp.html ------- */
 	.file_cp {background-position:60% 50%;}

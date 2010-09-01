@@ -20,3 +20,6 @@ input:focus, input.sffocus { background-color:#ffd;border: 1px solid #D26900;}
 .data_file .data_menu tr{margin-bottom:0px;}
 .data_file .filereport {margin:5px 1px 0 1px;}
 
+	
+#profile .boxdata .tit {position: relative;zoom: 1; /* IE6 */z-index: 500;	border-radius : 4px;text-shadow: 2px 2px 2px #444444;}
+

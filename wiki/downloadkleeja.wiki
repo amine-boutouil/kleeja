@@ -1,0 +1,5 @@
+#labels download,kleeja,تحميل--كليجا
+= Downloading Kleeja =
+
+  * Go to [http://kleeja.com/download/ Kleeja Download Page].
+  * Choose the stable version and downlaod it.

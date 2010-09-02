@@ -304,7 +304,7 @@ if (!($banss = $cache->get('data_ban')))
 	}
 
 	$gt = kleeja_filesize(PATH . 'includes/style.php');
-	if(!empty($gt) && $gt != 9851)
+	if(!empty($gt) && $gt != 9850)
 	{
 		exit(kleeja_base64_decode('V2hlcmUgVGhlIENvcHlyaWdodHMgOikgLi4u'));
 	}

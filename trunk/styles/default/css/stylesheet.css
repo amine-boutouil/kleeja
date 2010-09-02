@@ -111,7 +111,8 @@
 	.clr,.line  {clear:both;overflow:hidden;height:0;}
 	.dot {padding:5px 0;background: url(../images/bg_dots.gif) repeat-x;}
 	.line {background:url(../images/line.png) repeat-x right top;height:6px;	margin:1px;}
-	
+	.FooterLine{width:100%;background:#ffffff;height:1px;margin:0;}
+
 	/* debug kleeja */
 	.debug_kleeja{width:80%;margin:0 auto;background-color:white;border:1px #666 solid;margin:20px 0;}
 	.debug_kleeja fieldset{margin:0 auto;width:80%;}
@@ -289,7 +290,7 @@
 /*	--------------------------------------------------
 	10. Template & Footer > footer.html
 	-------------------------------------------------- */
-	#footer{width:100%;background:#EBEBEB url(../images/bg_footer.gif) repeat-x;min-height:50px;padding:20px 0 10px 0;}
+	#footer{width:100%;background:#EBEBEB url(../images/bg_footer.gif) repeat;padding:15px 0;border-top:1px solid #D8D8D8;}
 	#footer .footer_inner{width:930px;margin:0 auto;font-size:96%;color:#474747;}
 	#footer .Copyrights{margin-bottom:15px !important;line-height:22px;}
 	#footer .bu-panel{line-height:22px;margin:10px 0 !important;float:right;}

@@ -184,7 +184,7 @@
 	#main {width:960px;background:url(../images/bg_main.png) no-repeat top right;margin:10px auto;}
 	#wrapper {height:100%;padding:15px 40px 10px 40px;}
 	#content, #content_index  {float:left;width:70%;padding:10px 20px;margin:0;background:#DFDFDF url(../images/bg_content.png) repeat-x;border:1px solid #C9C9C9;}
-	#content_index {float:right;background-color:transparent;background-image:none;border:none;padding:0 20px;}
+	#content_index {float:right;background-color:transparent;background-image:none;border:none;padding:0 30px;}
 /* @end */
 	
 /*	--------------------------------------------------
@@ -290,7 +290,7 @@
 /*	--------------------------------------------------
 	10. Template & Footer > footer.html
 	-------------------------------------------------- */
-	#footer{width:100%;background:#EBEBEB url(../images/bg_footer.gif) repeat;padding:15px 0;border-top:1px solid #D8D8D8;}
+	#footer{width:100%;background:#EBEBEB url(../images/bg_footer.gif) repeat;padding:10px 0;border-top:1px solid #D8D8D8;}
 	#footer .footer_inner{width:930px;margin:0 auto;font-size:96%;color:#474747;}
 	#footer .Copyrights{margin-bottom:15px !important;line-height:22px;}
 	#footer .bu-panel{line-height:22px;margin:10px 0 !important;float:right;}

@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /*	---	Explore all versions browser ----------- */
-html {background : url(null) fixed no-repeat;}
+html {background: #EBEBEB url(../images/bg_footer.gif) repeat;}
 input[type="submit"]{cursor: pointer;}
 input[type="text"]:hover, input[type="password"]:hover, textarea:hover, select:hover{border: 1px solid #D26900;}
 input:focus, input.sffocus { background-color:#ffd;border: 1px solid #D26900;}
@@ -10,7 +10,7 @@ input:focus, input.sffocus { background-color:#ffd;border: 1px solid #D26900;}
 #wrapper {position: relative;z-index: inherit;zoom: 1; /* For IE6 */}
 #right_menu{margin:0;}
 .css_xhtml{margin:0;}
-#content_index {margin:0 20px;}
+#content, #content_index  {width:600px;margin:0 15px;}
 .IEs_c {width:97%;}
 #filecplink  input.link_user {margin-top:10px;}
 #filecplink legend.copylink {padding:5px;}

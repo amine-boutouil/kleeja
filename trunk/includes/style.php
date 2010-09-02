@@ -218,10 +218,10 @@ class kleeja_style
 			global $config, $SQL;
 
 			$this->vars 	= &$GLOBALS;
-			$k 				= '<div style' . '="background:#C8C8C8;padding:1px 0 2px 0;position:fixed;left:2px;bottom:2px;text-align: left' . 
-								';color:#898989);text-shadow: 0px 1px rgb(247, 247, 247">Po'. 'wer' . 'ed ' . 'b' . 'y <a style="color:#CF6600;" href="h' . 'ttp://www.' . 'kl' . 'ee' . 'ja.' . 
-								'com/" onclick="win' . 'dow.open(this.href,\'_blank\');return false;" ' . 'title="Po'. 'were' . 'd by K' . 
-								'l' . 'ee'. 'ja">K' . 'lee' . 'ja</a></div>' . "\n";
+			$k 				= '<div sty' . 'le="backgrou' . 'nd:#ECECE' . 'C;margin:5p' . 'x; padding:2px 3px; position:fi' . 'xed;bottom' .
+								':0px;left:1%' . ';z-index:9' . '9999;text' . '-align:center;">P' . 'owe' . 'red b' . 'y <a style="color:#F' . 
+								'07800;" href="http:' . '//www.kl' . 'ee' . 'ja.c' . 'om/" onclic' . 'k="windo' . 'w.open(this.href,' . '\'_b' .
+								'lank\');retur' . 'n false;" title' . '="Po' . 'wer' . 'ed b' . 'y K' . 'lee' . 'ja">K' . 'lee' . 'ja</a></div>' . "\n";
 			//is there ?
 			if(!file_exists(PATH . 'cache/tpl_' . $this->re_name_tpl($template_name) . '.php') or !$this->caching)
 			{

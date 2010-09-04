@@ -105,13 +105,13 @@ switch($SHOW_CH_STAGE):
 			$CONFIGEXTENDLANG = (!empty($lang['CONFIG_KLJ_MENUS_' . strtoupper($SQL->escape($_GET['type']))]) ? $lang['CONFIG_KLJ_MENUS_' . strtoupper($SQL->escape($_GET['type']))] : ((!empty($olang['CONFIG_KLJ_MENUS_' . strtoupper($SQL->escape($_GET['type']))])) ? $olang['CONFIG_KLJ_MENUS_' . strtoupper($SQL->escape($_GET['type']))] : $lang['CONFIG_KLJ_MENUS_OTHER']));
 			if($_GET['type'] != 'all')
 			{
-					$query['WHERE'] = "type = '" . $SQL->escape($_GET['type']) . "' or type = ''";
+					$query['WHERE'] = "type = '" . $SQL->escape($_GET['type']) . "' OR type = ''";
 			}
 		}
 
 		$result = $SQL->build($query);
 
-		$thmb_dim_w =  $thmb_dim_h = 0;
+		list($thmb_dim_w, $thmb_dim_h) = @explode('*', $config['thmb_dims'])
 		while($row=$SQL->fetch_array($result))
 		{
 			//make new lovely array !!

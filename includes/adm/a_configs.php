@@ -111,7 +111,7 @@ switch($SHOW_CH_STAGE):
 
 		$result = $SQL->build($query);
 
-		list($thmb_dim_w, $thmb_dim_h) = @explode('*', $config['thmb_dims'])
+		list($thmb_dim_w, $thmb_dim_h) = @explode('*', $config['thmb_dims']);
 		while($row=$SQL->fetch_array($result))
 		{
 			//make new lovely array !!

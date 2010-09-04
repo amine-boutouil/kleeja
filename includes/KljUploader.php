@@ -165,9 +165,28 @@ class KljUploader
 		{
 			$src_img = @imagecreatefrompng($name);
 		}
-		#todo : try to use some avilable php library to make gif thumb
+		#FIXME: imporove it
 		elseif (strpos($ext, 'gif') !== false)
 		{
+			//is ImageMagic exists ?
+			if(function_exists('phpversion') && phpversion('imagick'))
+			{
+				$im = new Imagick($name);
+				$i = 0;
+				foreach ($im as $frame)
+				{
+					$frame->thumbnailImage($new_w, 0);
+					$frame->setImagePage($new_w, 0, 0, 0);
+					#if($i > 20)
+					#{
+					#	break;
+					#}
+					#$i++;
+				}
+				$im->writeImages($filename, true);
+				return;
+			}
+
 			$src_img = @imagecreatefromgif($name);
 		}
 		else

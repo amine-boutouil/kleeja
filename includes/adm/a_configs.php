@@ -96,7 +96,7 @@ switch($SHOW_CH_STAGE):
 		$query	= array(
 						'SELECT'	=> '*',
 						'FROM'		=> "{$dbprefix}config",
-						'ORDER BY'	=> 'display_order'
+						'ORDER BY'	=> 'display_order ASC'
 					);
 
 		if(!$SHOW_CH_STAGE)

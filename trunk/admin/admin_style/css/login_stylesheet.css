@@ -6,8 +6,8 @@ input[type="text"],input[type="password"]{width:272px;padding:2px;cursor: text;b
 input[type="text"]:hover ,input[type="password"]:hover{border: 1px solid #888;}input[type="password"]:focus,input[type="text"]:focus  {background-color:#ffd;border: 1px solid #D26900;}input[type="text"]:hover,input[type="text"]:focus, input[type="password"]:hover,input[type="password"]:focus{-moz-box-shadow:0 0 8px #D26900;-webkit-box-shadow:0 0 8px #D26900;box-shadow:0 0 8px #D26900;}input[type="submit"]:hover{-moz-box-shadow:0 0 8px #0E98D8;-webkit-box-shadow:0 0 8px #0E98D8;box-shadow:0 0 8px #0E98D8;}
 a:link ,a:visited{color:#003F9D;text-decoration: none;}a:hover {color:#0B55C4;text-decoration:overline;}
 .clr {clear: both;overflow:hidden;height:0;}.divline {height:14px;background: url("../images/login/divline.png") no-repeat top center;}
-.site_name{background:#464646 url("../images/login/bglogin.gif") repeat;height:20px;line-height:16px;padding:5px;text-indent:10px;font-weight:bold;font-size:11px;}
-.site_name a:link ,.site_name a:visited{color:#ddd;}.site_name a:hover{text-decoration:none;color:#fff;padding-right:10px;}
+.site_name{background:#FF901C url("../images/login/bglogin.gif") repeat;height:20px;line-height:16px;padding:5px;text-indent:10px;font-weight:bold;font-size:11px;}
+.site_name a:link ,.site_name a:visited{color:#444;}.site_name a:hover{text-decoration:none;color:#000;padding-right:10px;}
 .site_name img,.cp_kleeja img{padding-left:8px;vertical-align: middle;}.logo_cp {width:360px;height:78px;margin:25px auto 10px auto;}
 .box{display:block;width:280px;margin:0 auto;padding:10px 20px;background:#F1F1F1 url("../images/login/bg_box_login.gif") repeat-x bottom left;border: 1px solid #B7B7B7;-moz-border-radius: 11px;-khtml-border-radius: 11px;-webkit-border-radius: 11px;border-radius: 5px;-moz-box-shadow: rgba(200,200,200,1) 0 4px 18px;-webkit-box-shadow: rgba(200,200,200,1) 0 4px 18px;	-khtml-box-shadow: rgba(200,200,200,1) 0 4px 18px;box-shadow: rgba(200,200,200,1) 0 4px 18px;}
 .cp_kleeja{color:#003F9D;height:26px;font-size:20px;padding-bottom:10px;clear: both;}

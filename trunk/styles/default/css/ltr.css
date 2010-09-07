@@ -32,7 +32,7 @@
 	/* @Main Structure -------------- */
 	#content {float:right;}
 	/* @Template & Header > header.html -------------- */
-	#header .logo {float:left;background-position:left center;margin:0 10px 0 30px;}
+	#header .logo {float:left;background-position:left center;margin:0 10px 0 40px;}
 	.top_nav .menu ul{float:left;}
 	.top_nav .menu li {float:left;margin-left:0;margin-right:2px;}
 	.top_nav .menu li a {float:left;}

@@ -278,7 +278,7 @@ foreach($adm_extensions as $m)
 	//is this item has a bubble ?
 	if(in_array($m, array_keys($kbubbles)))
 	{
-		$adm_extensions_menu[$i]['lang'] .= '<span class="kbubbles">' . $kbubbles[$m] . '</span>';
+		$adm_extensions_menu[$i]['lang'] = '<span class="kbubbles">' . $kbubbles[$m] . '</span>' . $adm_extensions_menu[$i]['lang'];
 	}
 
 	($hook = kleeja_run_hook('endforeach_ext_admin_page')) ? eval($hook) : null; //run hook 

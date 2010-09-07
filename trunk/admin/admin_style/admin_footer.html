@@ -73,6 +73,15 @@ $(function() {
 //-->
 </script>
 </IF>
+
+<script type="text/javascript">
+setInterval(function () {
+	jQuery('#jquery-ajax-loader-example').ajaxLoader();
+	setTimeout(function () {
+		jQuery('#jquery-ajax-loader-example').ajaxLoaderRemove();
+	}, 2000);
+}, 4000);
+</script>
 <!--  # Powered by Kleeja # copyright 2007-2010 & Kleeja.com -->
 </body>
 </html>     

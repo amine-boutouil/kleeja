@@ -52,6 +52,7 @@
 	.clr {clear: both; overflow:hidden; height: 0;}
 	.dot {padding: 3px 0;background: url(../images/dot.gif) repeat-x;}
 	.hr {background:transparent url(../images/box/hr-bg.gif) repeat-x 0 0;clear:both;height:5px;margin:0 0 1em;padding:0;}
+	div.jquery-ajax-loader {background: #333 url(../images/loading.gif) no-repeat 50% 50%;opacity: .6;}
 
 	/* wrapper */
 	#Wrapper,body{background:#E6E0C8 url(../images/box/bodyBg.gif) repeat-x 0 0}

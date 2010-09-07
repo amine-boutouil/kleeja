@@ -23,7 +23,7 @@
 	body {text-shadow: 0 0 2px #fff;}
 	
 	/* @Dark gray text shadow ------- */
-	#boxfileuser .public {
+	#boxfileuser .public,#Footer .Powered h1 ,.Wuser {
 	text-shadow: 0 0 2px #444;}
 /* @end */
 
@@ -69,10 +69,10 @@
 
 	
 	/* @Borders all Corners (5)Pixel ----------- */	
-	.pagination a, .pagination span.current, .pagination span.three_dots, #border-table,.box_all, fieldset, #main_menu, #menu_thumbnail {
+	.pagination a, .pagination span.current, .pagination span.three_dots, #border-table,.box_all, fieldset {
 	-moz-border-radius : 5px;-webkit-border-radius : 5px;-khtml-border-radius : 5px; border-radius : 5px;}
 
 	/* @Borders all Corners (10)Pixel ----------- */	
-	#main_menu .kbubbles, .button_img ,.button_file ,#fieldset_progress, .fieldset_google, .fieldset_yahoo  {
+	.body_menu,.Bmenu, .button_img ,.button_file ,#fieldset_progress, .fieldset_google, .fieldset_yahoo  {
 	-moz-border-radius : 10px;-webkit-border-radius : 10px;-khtml-border-radius : 10px;border-radius : 10px;}
 /* @end */

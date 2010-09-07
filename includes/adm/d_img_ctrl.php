@@ -57,11 +57,18 @@ if((int) $config['user_system'] == 1)
 
 $img_types = array('gif','jpg','png','bmp','jpeg','tif','tiff','GIF','JPG','PNG','BMP','JPEG','TIF','TIFF');
 
-$query['WHERE']	= "type IN ('" . implode("', '", $img_types) . "')";
+#
+# There is a bug with IN statment in MySQL and they said it will solved at 6.0 version
+# forums.mysql.com/read.php?10,243691,243888#msg-243888
+# $query['WHERE']	= "f.type IN ('" . implode("', '", $img_types) . "')";
+#
+
+$query['WHERE'] = "f.type = '" . implode("' OR f.type = '", $img_types) . "'";
+
 
 if(isset($_GET['last_visit']))
 {
-	$query['WHERE']	.= " AND time > " . intval($_GET['last_visit']);
+	$query['WHERE']	.= " AND f.time > " . intval($_GET['last_visit']);
 }
 
 

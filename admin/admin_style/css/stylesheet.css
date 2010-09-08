@@ -53,7 +53,7 @@
 	.dot {padding: 3px 0;background: url(../images/dot.gif) repeat-x;}
 	.hr {background:transparent url(../images/box/hr-bg.gif) repeat-x 0 0;clear:both;height:5px;margin:0 0 1em;padding:0;}
 	
-
+		
 	/* wrapper */
 	#Wrapper,body{background:#E6E0C8 url(../images/box/bodyBg.gif) repeat-x 0 0}
 	#PageWrapper{margin:0 auto;padding:25px 0 0;width:990px;position:relative}
@@ -184,15 +184,19 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 /* System Messages */
 
 /* view ../images */
+.spinner{position: relative;overflow:hidden;z-index:9000000;height:100%;background:url(../images/loading.gif) center center no-repeat;}
+.yaload{width:150px !important;height:150px;}
+.yaload img{width:100px !important;height:100px !important;}
+		
 .line_img {height:18px;display:block;margin:2px 0;background:#D6D0CB url(../images/line_img.png) repeat-x top right;}
 
 .bg_img {width:100%;border:none;padding:10px;text-align:center}
 .bg_img  tr {background-color:transparent;text-align:center;border:none;}
 .bg_img td {padding:10px 0;background:#F2F2F2;-moz-box-shadow:0 0 30px #999 inset;-webkit-box-shadow:0 0 30px #999 inset;box-shadow:0 0 30px #999 inset;}
 .img {padding:10px; cursor: pointer;}
-.img img{border:4px solid #999;}
+.img img{border:2px solid #555;}
 .bg_img td:hover{-moz-box-shadow:0 0 30px #444 inset;-webkit-box-shadow:0 0 30px #444 inset;box-shadow:0 0 30px #444 inset;}
-.img img:hover{border:4px solid #FF8000;}
+.img img:hover{border:2px solid #FF8000;}
 
 /*  toolTip image */
 .tinyTip {width:260px; padding: 14px 0px 0px 0px; display: block; background: url(../images/box/tinyTip-top.png) no-repeat; }

@@ -52,7 +52,7 @@
 	.clr {clear: both; overflow:hidden; height: 0;}
 	.dot {padding: 3px 0;background: url(../images/dot.gif) repeat-x;}
 	.hr {background:transparent url(../images/box/hr-bg.gif) repeat-x 0 0;clear:both;height:5px;margin:0 0 1em;padding:0;}
-	div.jquery-ajax-loader {background: #333 url(../images/loading.gif) no-repeat 50% 50%;opacity: .6;}
+	
 
 	/* wrapper */
 	#Wrapper,body{background:#E6E0C8 url(../images/box/bodyBg.gif) repeat-x 0 0}
@@ -64,7 +64,7 @@
 
 	/* header */
 	#MenuWrapper{height:62px}
-	#MmLeft{ background: url(../images/box/mm_left.png) no-repeat 0 0;float:left;height:62px;width:25px }		/* menu background graphics */
+	#MmLeft{ background: url(../images/box/mm_left.png) no-repeat 0 0;float:left;height:62px;width:25px }	
 	#MmRight{ background: url(../images/box/mm_right.png) no-repeat 0 0;float:right;height:62px;width:20px }
 	#MmBody	{ background: url(../images/box/mm_repeat.png) repeat-x 0 0;float:left;height:62px;min-width:500px }
 	#MainMenu{float:right;height:62px;position:relative;right:20px;top:-20px;z-index:9999}

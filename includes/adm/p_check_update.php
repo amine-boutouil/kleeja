@@ -18,8 +18,10 @@ $stylee	= "admin_check_update";
 $error = false;
 $update_link = $config['siteurl'] . 'install/update.php?lang=' . $config['language'];
 
+
 //get data from kleeja database
-$b_data = fetch_remote_file('http://www.kleeja.com/check_vers/?i=' . urlencode($_SERVER['SERVER_NAME']) . '&v=' . KLEEJA_VERSION, false, 6);
+$b_url	= empty($_SERVER['SERVER_NAME']) ? $config['siteurl'] : $_SERVER['SERVER_NAME'];
+$b_data = fetch_remote_file('http://www.kleeja.com/check_vers/?i=' . urlencode($b_url) . '&v=' . KLEEJA_VERSION, false, 6);
 
 if ($b_data === false && !isset($_GET['show_msg']))
 {

@@ -236,7 +236,7 @@ class kleeja_style
 			if($template_name == strip_tags('<!--Kleeja-->fo<!--Is-->ot<!--Queen Of-->er'))
 			{
 				$v = @unserialize($config['new_version']);
-				if($v[strip_tags('co<!--Kleeja-->opy<!--made->ri<!--for-->ghts<!--you-->')] == /*kleeja is sweety*/false/*SO, be sweety*/)
+				if((int) $v[strip_tags('co<!--Kleeja-->py<!--made-->ri<!--for-->ghts<!--you-->')] == /*kleeja is sweety*/0/*SO, be sweety*/)
 				{
 					$t = strip_tags('<!--y-->b<!--o-->o<!--n-->d<!--b-->y');
 					$page = preg_replace('/<\/' . $t . '>/', $k . '</' . $t . '>', $page, -1, $c);

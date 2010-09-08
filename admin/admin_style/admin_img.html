@@ -1,29 +1,22 @@
 <script type="text/javascript">
 <!--
 $(document).ready(function() {
-	// TinyTips Plugin
-	$('.tTip').tinyTips('title');
-	
-	// lightBox plugin
-	$("a#kljfancy").fancybox({
-		'transitionIn'		: 'elastic',
-		'transitionOut'		: 'elastic'
-	});
-		
-	// imges hover effect
-	$('.img').hover(function(){$(this).stop().fadeTo('slow',0.4);},function(){$(this).stop().fadeTo('slow',1);});
-	
-	// Ajax Loader images
-	$('.yaload').each(function(i, elem) {
-		var im = new Image();
-		im.src = $(this).attr("klj_img");
-		var spinner = $(this).find('.spinner')
-		im.onload = function(e)	{
-		spinner.hide('slow');};
-		$(this).append(im);
-	});
+ // TinyTips Plugin
+ $('.tTip').tinyTips('title');
+ // fancybox plugin
+ $("a.fancybox").attr('rel', 'gallery').fancybox({'transitionIn' : 'elastic','transitionOut' : 'elastic'});
+ // imges hover effect
+ $('.img').hover(function(){$(this).stop().fadeTo('slow',0.4);},function(){$(this).stop().fadeTo('slow',1);});
+ // Ajax Loader images
+ $('.yaload').each(function(i, elem) {
+	var im = new Image();
+	im.src = $(this).attr("klj_img");
+	var spinner = $(this).find('.spinner')
+	im.onload = function(e)	{
+	spinner.hide('slow');};
+	$(this).append(im);
+  });
 });
-
 //-->
 </script>
 
@@ -49,13 +42,13 @@ $(document).ready(function() {
 <div class="nothing"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/warning_nothing.gif" alt="nothing" />{lang.NOTHING}</div>
 <ELSE>
 
-<table class="bg_img" dir="ltr">  
+<table class="bg_img">  
 <LOOP NAME="arr">
 {{tdnum}}
 <td style="width:25%;" id="su[{{id}}]" class="osilver" align="center">
-		<a id="kljfancy" href="{{href}}" class="tTip" title="<div>{{name}}</div><table><tr><td>{lang.FILEUPS}</td><td>{{ups}}</td></tr><tr><td>{lang.FILESIZE}</td><td>{{size}}</td></tr><tr><td>{lang.FILEDATE}</td><td>{{time}}</td></tr><tr><td>{lang.BY}</td><td>{{user}}</td></tr><tr><td>{lang.IP}</td><td>{{ip}}</td></tr></table>">
+		<a href="{{href}}" class="fancybox tTip" title="<div>{{name}}</div><table><tr><td>{lang.FILEUPS}</td><td>{{ups}}</td></tr><tr><td>{lang.FILESIZE}</td><td>{{size}}</td></tr><tr><td>{lang.FILEDATE}</td><td>{{time}}</td></tr><tr><td>{lang.BY}</td><td>{{user}}</td></tr><tr><td>{lang.IP}</td><td>{{ip}}</td></tr></table>">
 		<div class="yaload img" klj_img="{{thumb_link}}" style="height:100px;width:100px;<IF LOOP="is_thumb"><ELSE>width:100px;height:100px;</IF>">
-			<div class="spinner"></div>
+		<span class="spinner"></span>
 		</div>
 		</a>
 		<div class="clr"></div>

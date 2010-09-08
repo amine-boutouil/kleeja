@@ -25,6 +25,14 @@
  /** Brandon Aaron (http://brandonaaron.net)  **/
  (function(b){function d(a){var f=[].slice.call(arguments,1),e=0;a=b.event.fix(a||window.event);a.type="mousewheel";if(a.wheelDelta)e=a.wheelDelta/120;if(a.detail)e=-a.detail/3;f.unshift(a,e);return b.event.handle.apply(this,f)}var c=["DOMMouseScroll","mousewheel"];b.event.special.mousewheel={setup:function(){if(this.addEventListener)for(var a=c.length;a;)this.addEventListener(c[--a],d,false);else this.onmousewheel=d},teardown:function(){if(this.removeEventListener)for(var a=c.length;a;)this.removeEventListener(c[--a],d,false);else this.onmousewheel=null}};b.fn.extend({mousewheel:function(a){return a?this.bind("mousewheel",a):this.trigger("mousewheel")},unmousewheel:function(a){return this.unbind("mousewheel",a)}})})(jQuery);
 
+ /** Main  **/
+ $(document).ready(function() {
+ 	$('input:checkbox').checkbox();
+    $('.Tooltip').tipsy();
+	$('.main_menuTooltip').tipsy({gravity: 's'});
+  });
+
+ 
  /** Kleeja Uploader - acp javascript  **/
  function change_color(obj,id,c,c2){c=(c==null)?'ored':c;c2=(c==null)?'osilver':c2;var ii=document.getElementById(id);if(obj.checked){ii.setAttribute("class",c);ii.setAttribute("className",c)}else{ii.setAttribute("class",c2);ii.setAttribute("className",c2)}}function checkAll(form,id,_do_c_,c,c2){for(var i=0;i<form.elements.length;i++){if(form.elements[i].getAttribute("rel")!=id)continue;if(form.elements[i].checked){uncheckAll(form,id,_do_c_,c,c2);break}form.elements[i].checked=true;change_color(form.elements[i],_do_c_+'['+form.elements[i].value+']',c,c2)}}function uncheckAll(form,id,_do_c_,c,c2){for(var i=0;i<form.elements.length;i++){if(form.elements[i].getAttribute("rel")!=id)continue;form.elements[i].checked=false;change_color(form.elements[i],_do_c_+'['+form.elements[i].value+']',c,c2)}}function change_color_exts(id){eval('var ii = document.getElementById("su['+id+']");');eval('var g_obj = document.getElementById("gal_'+id+'");');eval('var u_obj = document.getElementById("ual_'+id+'");');if(g_obj.checked&&u_obj.checked){ii.setAttribute("class",'o_all');ii.setAttribute("className",'o_all')}else if(g_obj.checked){ii.setAttribute("class",'o_g');ii.setAttribute("className",'o_g')}else if(u_obj.checked){ii.setAttribute("class",'o_u');ii.setAttribute("className",'o_u')}else{ii.setAttribute("class",'');ii.setAttribute("className",'')}}function checkAll_exts(form,id,_do_c_){for(var i=0;i<form.elements.length;i++){if(form.elements[i].getAttribute("rel")!=id)continue;if(form.elements[i].checked){uncheckAll_exts(form,id,_do_c_);break}form.elements[i].checked=true;change_color_exts(form.elements[i].value)}}function uncheckAll_exts(form,id,_do_c_){for(var i=0;i<form.elements.length;i++){if(form.elements[i].getAttribute("rel")!=id)continue;form.elements[i].checked=false;change_color_exts(form.elements[i].value)}}
 

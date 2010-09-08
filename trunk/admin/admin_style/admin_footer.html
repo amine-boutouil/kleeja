@@ -50,29 +50,19 @@
 			return true;
 		else
 			return false;
+
 	}
 //-->
 </script>
-<script type="text/javascript">
-<!--
-$(function() {
-	$('input:checkbox').checkbox();
-    $('.Tooltip').tipsy();
-	$('.main_menuTooltip').tipsy({gravity: 's'});
-});
-//-->
-</script>
 
-
-<IF NAME="{lang.DIR}==ltr">
-<script type="text/javascript">
-<!--
-$(function() {
-	$('.Tooltip').tipsy({gravity: 'w'});
-});
-//-->
-</script>
-</IF>
-<!--  # Powered by Kleeja # copyright 2007-2010 & Kleeja.com -->
+	<IF NAME="{lang.DIR}==ltr">
+	<script type="text/javascript">
+		<!--
+		$(function(){$('.Tooltip').tipsy({gravity: 'w'});});
+		//-->
+	</script>
+	</IF>
+	
+	<!-- Powered by Kleeja & copyright 2007-2010 & Kleeja.com -->
 </body>
 </html>     

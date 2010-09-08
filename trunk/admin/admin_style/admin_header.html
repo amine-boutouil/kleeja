@@ -33,9 +33,7 @@
 <!--  javascript coding  -->
 <script type="text/javascript">
 <!--
-var STYLE_PATH_ADMIN = '{STYLE_PATH_ADMIN}';
-var go_to = '{go_to}';
-var GET_FORM_KEY_GLOBAL = '{GET_FORM_KEY_GLOBAL}';
+var STYLE_PATH_ADMIN = '{STYLE_PATH_ADMIN}';var go_to = '{go_to}';var GET_FORM_KEY_GLOBAL = '{GET_FORM_KEY_GLOBAL}';
 //-->
 </script>
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.js"></script>
@@ -83,7 +81,6 @@ var GET_FORM_KEY_GLOBAL = '{GET_FORM_KEY_GLOBAL}';
 			<div id="MainMenuWrap" class="thumbnail">
 			<div class="MainMenuBox1">
 			<div class="MainMenuBox2">
-
 				<div class="link_menu_thumbnail"><p><a class="Tooltip" title="{lang.RETURN_HOME}" href="{config.siteurl}"><img src="{STYLE_PATH_ADMIN}images/menu_icons/mini/index_button.png" alt="{lang.RETURN_HOME}" style="margin:0 8px;vertical-align:middle;" /></a></p></div>
 				<div class="link_menu_thumbnail"><p><a class="Tooltip" title="{lang.R_CPINDEX}" href="./"><img src="{STYLE_PATH_ADMIN}images/menu_icons/mini/cp_button.png" alt="{lang.R_CPINDEX}" style="margin:0 8px;vertical-align:middle;" /></a></p></div>
 				<LOOP NAME="adm_extensions_menu">	
@@ -92,7 +89,6 @@ var GET_FORM_KEY_GLOBAL = '{GET_FORM_KEY_GLOBAL}';
 				<div class="clr"></div>
 				<a href="{link_expand_menu}" class="expand_thumbnail"><img src="{STYLE_PATH_ADMIN}images/spacer.gif" alt="{lang.RETURN_HOME}" /></a>
 				<div class="clr"></div>
-			
 			</div>
 			</div>
 			</div>
@@ -100,10 +96,10 @@ var GET_FORM_KEY_GLOBAL = '{GET_FORM_KEY_GLOBAL}';
 			<div id="main_menu">	
 				<div class="body_menu">
 				<div class="Bmenu">
-				<div class="link_menu"><p><a class="main_menuTooltip" title="{lang.RETURN_HOME}" href="{config.siteurl}"><img src="{STYLE_PATH_ADMIN}images/menu_icons/index_button.gif" alt="{lang.RETURN_HOME}" /><br />{lang.RETURN_HOME}</a></p></div>
-				<div class="link_menu"><p><a class="main_menuTooltip" title="{lang.R_CPINDEX}" href="./"><img src="{STYLE_PATH_ADMIN}images/menu_icons/cp_button.gif" alt="{lang.R_CPINDEX}" /><br />{lang.R_CPINDEX}</a></p></div>
+				<div class="link_menu"><p><a class="main_menu Tooltip" title="{lang.RETURN_HOME}" href="{config.siteurl}"><img src="{STYLE_PATH_ADMIN}images/menu_icons/index_button.gif" alt="{lang.RETURN_HOME}" /><br />{lang.RETURN_HOME}</a></p></div>
+				<div class="link_menu"><p><a class="main_menu Tooltip" title="{lang.R_CPINDEX}" href="./"><img src="{STYLE_PATH_ADMIN}images/menu_icons/cp_button.gif" alt="{lang.R_CPINDEX}" /><br />{lang.R_CPINDEX}</a></p></div>
 				<LOOP NAME="adm_extensions_menu">	
-				<div class="({{current}}?link_menu link_current:link_menu)"><p><a class="main_menuTooltip" title="{{title}}" href="{{link}}" <IF LOOP="confirm"> onclick="javascript:return confirm_from();"</IF>><img src="{{icon}}" alt="{{title}}" /><br />{{lang}}</a></p></div>
+				<div class="({{current}}?link_menu link_current:link_menu)"><p><a class="main_menu Tooltip" title="{{title}}" href="{{link}}" <IF LOOP="confirm"> onclick="javascript:return confirm_from();"</IF>><img src="{{icon}}" alt="{{title}}" /><br />{{lang}}</a></p></div>
 				</LOOP>
 				<div class="clr"></div>
 				</div>

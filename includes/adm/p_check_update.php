@@ -82,8 +82,9 @@ else
 	$data = serialize($data);
 
 	update_config('new_version', $SQL->real_escape($data), false);
+	delete_cache('data_config');
 }
-	
+
 //then go back  to start
 if(isset($_GET['show_msg']))
 {

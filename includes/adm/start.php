@@ -17,8 +17,6 @@ if (!defined('IN_ADMIN'))
 
 //style of
 $stylee			= "admin_start";
-//last visit
-$last_visit		= defined('LAST_VISIT') && preg_match('/[0-9]{10}/', LAST_VISIT) ? date("[d-m-Y], [h:i a]", LAST_VISIT) : false;
 $h_lst_files	= basename(ADMIN_PATH) . '?cp=c_files&amp;last_visit=';
 $h_lst_imgs		= basename(ADMIN_PATH) . '?cp=d_img_ctrl&amp;last_visit=';
 

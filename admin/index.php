@@ -152,6 +152,8 @@ if(!empty($gt) && $gt != 9852)
 }
 
 (!defined('LAST_VISIT')) ? define('LAST_VISIT', time() - 3600*12) : '';
+//last visit
+$last_visit		= defined('LAST_VISIT') && preg_match('/[0-9]{10}/', LAST_VISIT) ? date("[d-m-Y], [h:i a]", LAST_VISIT) : false;
 
 //path of admin extensions
 $path_adm	= PATH . 'includes/adm';

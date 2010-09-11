@@ -69,11 +69,11 @@
 	.right, img.right {float:right;}
 	
 	button{cursor:pointer;overflow:visible;position:relative;font:bold 12px Tahoma;}
-	button.btn{background:transparent url(../images/box/button.gif) no-repeat right -91px;border:0;margin-left:-6px;margin-right:5px;outline:none;padding:0 35px 0 0;text-align:center}
+	button.btn{background:transparent url(../images/box/button.gif) no-repeat right -92px;border:0;margin:0 5px 0 -6px;outline:none;padding:0 35px 0 0;text-align:center}
 	button span{display:block;position:relative;white-space:nowrap}
-	button.btn span{background:transparent url(../images/box/button.gif) no-repeat left top;color:#fff;height:29px;line-height:1.2;padding:13px 0 0 35px;text-shadow:#000 -1px -1px 0}
-	button.btn:hover{background-position:right -137px}
-	button.btn:hover span{background-position:0 -46px;text-shadow:#333 -1px -1px 1px}
+	button.btn span{background:transparent url(../images/box/button.gif) no-repeat left top;color:#fff;height:46px;line-height:40px;padding:0px 0 0 35px;text-shadow:#000 -1px -1px 0}
+	button.btn:hover{background-position:right -138px}
+	button.btn:hover span{background-position:0 -46px;}
 
 	/* wrapper */
 	#Wrapper,body{background:#E6E0C8 url(../images/box/bodyBg.gif) repeat-x 0 0}

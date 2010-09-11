@@ -24,9 +24,7 @@
 <link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/ie.css" />
 </IS_BROWSER>
 <IF NAME="MINI_MENU">
-<style type="text/css">
-	#divmiddle {width:82%;}
-</style>
+<style type="text/css">#divmiddle {width:698px;}</style>
 </IF>
 <!--  # css coding -->
 
@@ -38,7 +36,6 @@ var STYLE_PATH_ADMIN = '{STYLE_PATH_ADMIN}';var go_to = '{go_to}';var GET_FORM_K
 </script>
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.js"></script>
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.kleeja.js"></script>
-<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/fancybox/fancybox.js"></script>
 
 <!--  # javascript coding  -->
 </head>
@@ -96,10 +93,10 @@ var STYLE_PATH_ADMIN = '{STYLE_PATH_ADMIN}';var go_to = '{go_to}';var GET_FORM_K
 			<div id="main_menu">	
 				<div class="body_menu">
 				<div class="Bmenu">
-				<div class="link_menu"><p><a class="main_menu Tooltip" title="{lang.RETURN_HOME}" href="{config.siteurl}"><img src="{STYLE_PATH_ADMIN}images/menu_icons/index_button.gif" alt="{lang.RETURN_HOME}" /><br />{lang.RETURN_HOME}</a></p></div>
-				<div class="link_menu"><p><a class="main_menu Tooltip" title="{lang.R_CPINDEX}" href="./"><img src="{STYLE_PATH_ADMIN}images/menu_icons/cp_button.gif" alt="{lang.R_CPINDEX}" /><br />{lang.R_CPINDEX}</a></p></div>
+				<div class="link_menu"><p><a class="mmTooltip" title="{lang.RETURN_HOME}" href="{config.siteurl}"><img src="{STYLE_PATH_ADMIN}images/menu_icons/index_button.gif" alt="{lang.RETURN_HOME}" /><br />{lang.RETURN_HOME}</a></p></div>
+				<div class="link_menu"><p><a class="mmTooltip" title="{lang.R_CPINDEX}" href="./"><img src="{STYLE_PATH_ADMIN}images/menu_icons/cp_button.gif" alt="{lang.R_CPINDEX}" /><br />{lang.R_CPINDEX}</a></p></div>
 				<LOOP NAME="adm_extensions_menu">	
-				<div class="({{current}}?link_menu link_current:link_menu)"><p><a class="main_menu Tooltip" title="{{title}}" href="{{link}}" <IF LOOP="confirm"> onclick="javascript:return confirm_from();"</IF>><img src="{{icon}}" alt="{{title}}" /><br />{{lang}}</a></p></div>
+				<div class="({{current}}?link_menu link_current:link_menu)"><p><a class="mmTooltip" title="{{title}}" href="{{link}}" <IF LOOP="confirm"> onclick="javascript:return confirm_from();"</IF>><img src="{{icon}}" alt="{{title}}" /><br />{{lang}}</a></p></div>
 				</LOOP>
 				<div class="clr"></div>
 				</div>

@@ -12,8 +12,6 @@
 */
 
 /* import stylesheets and hide from ie/mac \*/
-@import url("reset.css");
 @import url("stylesheet.css");
 @import url("css3.css");
-@import url("jquery.lightbox.css");
 /* end import/hide */

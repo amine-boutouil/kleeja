@@ -39,9 +39,8 @@
 
 <script type="text/javascript">
 <!--
-	var STYLE_PATH_ADMIN = '{STYLE_PATH_ADMIN}';
 	var PATH_SPACER = '{STYLE_PATH_ADMIN}images/spacer.gif';
-
+	
 	function confirm_from(r)
 	{
 		var msg = !r ? '{lang.ARE_YOU_SURE_DO_THIS}' : r;
@@ -50,10 +49,20 @@
 			return true;
 		else
 			return false;
-
 	}
 //-->
 </script>
+
+	<script type="text/javascript">
+	<!--
+	 $(document).ready(function() {
+		$('input:checkbox').checkbox();
+		$('.Tooltip').tipsy();
+		$('.mmTooltip').tipsy({gravity: 's'});
+	  });
+	//-->
+	</script>
+
 
 	<IF NAME="{lang.DIR}==ltr">
 	<script type="text/javascript">

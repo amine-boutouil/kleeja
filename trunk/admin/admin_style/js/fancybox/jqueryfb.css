@@ -1,3 +1,26 @@
+/* view images temlate */
+#boxs {width:598px;display:inline;}
+#boxs .bodybox {padding:0 10px;}
+
+/* thumbnail Table */
+
+.xthumbs {width:100%;border:none;padding:0;border:none !important;}
+.xthumbs  tr {background-color:transparent;border:none !important;}
+.xthumbs td {position:relative !important;width:128px !important;height: 128px !important;cursor: pointer;padding:0 0 0 0 !important;border:none !important;z-index:600;}
+
+#yaload {padding:0 !important;z-index:650;}
+#yaload img{width:110px;height:110px;padding:8px !important;z-index:700;}
+img.bgm{width:110px;height:110px;z-index:1010;background: url(bgsmall.png) white no-repeat top center;}
+
+
+.spinner {position: absolute;top:0;left:0; width:128px !important;height:128px !important; background: url(../../images/ajax-loader.gif) white no-repeat center center; z-index: 99999; }
+input.imgcb {margin-top:10px;padding: 0 0 0 0;z-index:10000 !important;}
+
+	
+.osilver,.undefined,.osilver:hover,.undefined:hover {background-color:transparent !important;}
+
+
+/* fanc ybox */
 #fancybox-loading {position: fixed;top: 50%;left: 50%;height: 40px;width: 40px;margin-top: -20px;margin-left: -20px;cursor: pointer;overflow: hidden;z-index: 1104;display: none;}
 * html #fancybox-loading {	/* IE6 */position: absolute;margin-top: 0;}
 #fancybox-loading div {position: absolute;top: 0;left: 0;width: 40px;height: 480px;background-image: url('fancybox.png');}
@@ -41,7 +64,6 @@
 #fancy-bg-sw {bottom: -20px;left: -20px;background-image: url('fancybox.png');background-position: -40px -142px;}
 #fancy-bg-w {top: 0;left: -20px;height: 100%;background-image: url('fancybox-y.png');}
 #fancy-bg-nw {top: -20px;left: -20px;background-image: url('fancybox.png');background-position: -40px -122px;}
-
 /* IE */
 #fancybox-loading.fancybox-ie div	{ background: transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='fancybox/fancy_loading.png', sizingMethod='scale'); }
 .fancybox-ie #fancybox-close		{ background: transparent; filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='fancybox/fancy_close.png', sizingMethod='scale'); }

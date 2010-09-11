@@ -9,8 +9,13 @@
 	# Date:: 2009-12-17  $
 	---------------------------------------------------------
 	$Id$
-*/
-
+    |
+	|
+	@CSS Reset was written by Dejan Cancarevic & http://stylizedweb.com/2008/02/14/10-best-css-hacks/
+	-------------------------------------------------- */
+	html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre,a, abbr, acronym, address, big, cite, code,del, dfn, em, font, img, ins, kbd, q, s, samp,small, strike, strong, sub, sup, tt, var,dl, dt, dd, ol, ul, li,fieldset, form, label, legend,table, caption, tbody, tfoot, thead, tr, th, td {margin: 0;padding: 0;border: 0;outline: 0;font-weight: inherit;font-style: inherit;font-size: 100%;font-family: inherit;vertical-align: baseline;}:focus {outline: 0;}body {line-height: 1;color: black;background: white;}ol, ul {list-style: none;}table {border-collapse: separate;border-spacing: 0;}caption, th, td {text-align: right;font-weight: normal;}blockquote:before, blockquote:after,q:before, q:after {content: "";}blockquote, q {quotes: "" "";}
+	
+	/*	---- HTML Tags ---- */
 	* {padding:0;margin:0}
 	body {height:100%;width: 100%; margin:0; padding:0;background:#E6E0C8;color: #595959;font-weight:normal;font-size:12px;font-family : Tahoma, Arial, Verdana, sans-serif, "Lucida Grande", "Lucida Sans Unicode";}
 	p,dl,hr,h1,h2,h3,h4,h5,h6{margin-bottom:15px;}
@@ -48,20 +53,36 @@
 	td {	padding:3px 5px;border-style:groove solid;border-color:#DFDFDF;border-width:1px;}
 	tr:hover {background-color:#FFFFDD;}
 	/* all tables */
-
+	
+	pre {font-size: 12px;padding: 0;	margin: 0;	background: #f0f0f0;
+		border-left: 1px solid #ccc;border-bottom: 1px solid #ccc;line-height: 20px; 
+		background: url(pre_code_bg.gif) repeat-y left top;	width: 600px;
+		overflow: auto; overflow-Y: hidden; }
+	
+	pre code {margin: 0 0 0 40px;	padding: 18px 0;display: block;}
+	
 	.clr {clear: both; overflow:hidden; height: 0;}
 	.dot {padding: 3px 0;background: url(../images/dot.gif) repeat-x;}
 	.hr {background:transparent url(../images/box/hr-bg.gif) repeat-x 0 0;clear:both;height:5px;margin:0 0 1em;padding:0;}
 	.line_img {height:18px;display:block;margin:2px 0;background:#D6D0CB url(../images/line_img.png) repeat-x top right;}
+	.left, img.left {float:left;}
+	.right, img.right {float:right;}
+	
+	button{cursor:pointer;overflow:visible;position:relative;font:bold 12px Tahoma;}
+	button.btn{background:transparent url(../images/box/button.gif) no-repeat right -91px;border:0;margin-left:-6px;margin-right:5px;outline:none;padding:0 35px 0 0;text-align:center}
+	button span{display:block;position:relative;white-space:nowrap}
+	button.btn span{background:transparent url(../images/box/button.gif) no-repeat left top;color:#fff;height:29px;line-height:1.2;padding:13px 0 0 35px;text-shadow:#000 -1px -1px 0}
+	button.btn:hover{background-position:right -137px}
+	button.btn:hover span{background-position:0 -46px;text-shadow:#333 -1px -1px 1px}
 
-		
 	/* wrapper */
 	#Wrapper,body{background:#E6E0C8 url(../images/box/bodyBg.gif) repeat-x 0 0}
-	#PageWrapper{margin:0 auto;padding:25px 0 0;width:990px;position:relative}
+	#PageWrapper{margin:0 auto;padding:25px 0 0 ;width:990px;position:relative}
 	#Header,#pageMain{background:transparent url(../images/box/pageBg-repeat.png) repeat-y 0 0}
 	#Header,#pageMain,#Footer,#FooterBottom{width:990px}
 	.pageTop{background:transparent url(../images/box/pageBg-top.png) no-repeat 0 0;height:10px;overflow:hidden}
 	.contentArea{margin:0 26px;width:938px}
+	#divmiddle,#main_menu,#MainMenuWrap,#boxs {margin:10px 10px 0 20px;float:right;}
 
 	/* header */
 	#MenuWrapper{height:62px}
@@ -96,7 +117,7 @@
 	#Copyright p{padding:0 0 1em}
 
 	/* start Main Menu */
-	#main_menu{float:right;width:273px;}
+	#main_menu{width:280px;margin:10px 20px 0 10px !important;}
 	#main_menu .body_menu {background:#F1EEE0;border: 2px solid #D9D4BD;text-align:center;}
 	#main_menu .Bmenu {text-align:center; padding:10px;border: 1px solid #ffffff;}
 	#main_menu .link_menu ,#main_menu .link_current {float: right;height: 60px;width:48%;margin:1px;border:1px solid #D6D6CE;background: #E2E1DD url(../images/bg-right-menu.jpg) repeat;}
@@ -108,13 +129,13 @@
 	#main_menu .link_menu a:hover{height:56px;color:#000;text-decoration: none;background:#FEF5E2 url(../images/hidbg.png) repeat-x bottom left;border-top: #FEA53D 3px solid;border-bottom: #FEA53D 3px solid;}
 	#main_menu .link_current a:hover{height:56px;text-decoration: none;border:none;cursor:default;background:url(../images/hidbg.png) repeat-x;}
 	span.kbubbles {
-	background:url(../images/menu_icons/kbubbles.png) no-repeat;color:#fff;
-	width:29px;height:30px;padding:7px 0 0;text-align: center;
-	position:absolute;left:-2px;top: -2px;z-index:900;
+	background:url(../images/menu_icons/bubble.gif) no-repeat;color:#fff;
+	width:30px;height:28px;padding:4px 0 0;text-align: center;
+	position:absolute;left:4px;top:4px;z-index:900;
 	font-size:x-small;font-weight: 400;}	
 	
 	/* thumbnail menu */
-	#MainMenuWrap{float:right;width:180px;background:transparent url(../images/box/side-navigation-repeat.gif) repeat-y 0 0;}
+	#MainMenuWrap{width:180px;margin:10px 20px 0 10px !important;background:transparent url(../images/box/side-navigation-repeat.gif) repeat-y 0 0;}
 	.MainMenuBox1{background:transparent url(../images/box/side-navigation-top.gif) no-repeat 0 0;padding:15px 0 0}
 	.MainMenuBox2{background:transparent url(../images/box/side-navigation-bottom.gif) no-repeat 0 100%;padding:0 0 15px}
 	.thumbnail {padding:0;}
@@ -135,6 +156,7 @@
 	.expand_thumbnail2:hover {background-position: -30px -20px;}
 /* # Main Menu */
 
+
 /*  toolTip Main Menu */
 .tipsy { padding:5px; font-size: 11px;font-weight:bold;background-repeat: no-repeat;  background-image: url(../images/tipsy.gif); }
 .tipsy-inner {color: white;max-width: 200px;text-align: center;text-shadow: 0 0 2px #000;padding: 10px;background-color: rgb(25,25,25);background-color: rgba(25,25,25,0.92);background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(transparent), to(#000));}
@@ -143,9 +165,8 @@
 .tipsy-east { background-position: right center; }
 .tipsy-west { background-position: left center; }
   
-/* middle */
-#divmiddle {	width:70%; float: left;display:inline;}
 /* box_all */
+#divmiddle{width:598px;display:inline;}
 #border-table,.box_all {padding:10px;background:#FFF;border:1px dashed #cccccc;}
 
 
@@ -186,19 +207,6 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 #system-message div.msg_repair ul li{background: url(../images/msg_repair.gif) no-repeat right center ; padding-right: 25px; }
 /* System Messages */
 
-/* view ../images */
-
-.bg_img {width:100%;border:none;padding:10px;text-align:center}
-.bg_img  tr {background-color:transparent;text-align:center;border:none;}
-.bg_img td {cursor: pointer;padding:10px 0;background:#F2F2F2;-moz-box-shadow:0 0 30px #999 inset;-webkit-box-shadow:0 0 30px #999 inset;box-shadow:0 0 30px #999 inset;}
-.bg_img td:hover{-moz-box-shadow:0 0 30px #444 inset;-webkit-box-shadow:0 0 30px #444 inset;box-shadow:0 0 30px #444 inset;}
-
-.spinner{width:100px !important;height:100px !important;position:absolute;overflow:hidden;z-index:9000000;background:#fff url(../images/ajax-loader.gif) center center no-repeat;}
-.yaload{width:100px !important;height:100px;}
-.yaload img{border:2px solid #555;width:100px !important;height:100px !important;}
-.yaload img:hover{border:2px solid #FF8000;}
-
-
 /*  toolTip image */
 .tinyTip {width:260px; padding: 14px 0px 0px 0px; display: block; background: url(../images/box/tinyTip-top.png) no-repeat; }
 .tinyTip .content { padding: 0px 14px; font-size: 11px; font-weight:bold; color: #010101;background: url(../images/box/tinyTip-content.png) repeat-y;}
@@ -207,7 +215,6 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 .tinyTip .content table {border:1px #fff solid;}
 .tinyTip .content tr {background-color:transparent;background-image:none;border:none;}
 .tinyTip .content td {border:1px #FFE1C8 solid;}
-
 .check_all {display:block;text-align:left;margin:4px;padding:5px;background:#eee;}
 /* view ../images */
 

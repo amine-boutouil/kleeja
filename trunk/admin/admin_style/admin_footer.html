@@ -15,13 +15,13 @@
 				</div>
 
 				<div class="Powered last">
-					<a title="Stay updated" onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com/download/"><img src="{STYLE_PATH_ADMIN}images/box/updated.png" alt="updated" /></a>
-					<a title="Bugs" onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com/bugs/"><img src="{STYLE_PATH_ADMIN}images/box/bug.png" alt="Bugs" /></a>
-					<a title="help" onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com/forums/"><img src="{STYLE_PATH_ADMIN}images/box/help.png" alt="help" /></a>
-					<a title="Plugins" onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com/plugins/"><img src="{STYLE_PATH_ADMIN}images/box/plugin.png" alt="Plugins" /></a>
-					<a title="styles" onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com/styles/"><img src="{STYLE_PATH_ADMIN}images/box/style.png" alt="styles" /></a>
+					<a onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com/download/"><img class="updated mmTooltip" title="Stay updated" src="{STYLE_PATH_ADMIN}images/spacer.gif" alt="updated" /></a>
+					<a onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com/bugs/"><img class="updated Bugs mmTooltip" title="Bugs" src="{STYLE_PATH_ADMIN}images/spacer.gif" alt="Bugs" /></a>
+					<a onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com/forums/"><img class="updated help mmTooltip" title="help" src="{STYLE_PATH_ADMIN}images/spacer.gif" alt="help" /></a>
+					<a onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com/plugins/"><img class="updated Plugin mmTooltip" title="Plugins" src="{STYLE_PATH_ADMIN}images/spacer.gif" alt="Plugins" /></a>
+					<a onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com/styles/"><img class="updated style mmTooltip" title="styles" src="{STYLE_PATH_ADMIN}images/spacer.gif" alt="styles" /></a>
 					<!-- Do not remove this copyright and notice  -->
-					<a title="!" href="./?cp=r_repair&amp;{GET_FORM_KEY_GLOBAL}&amp;third_august_1987=SaaninaBorn"><img src="{STYLE_PATH_ADMIN}images/box/attention.png" alt="!" /></a>
+					<a href="./?cp=r_repair&amp;{GET_FORM_KEY_GLOBAL}&amp;third_august_1987=SaaninaBorn"><img class="updated SaaninaBorn mmTooltip" title="!" src="{STYLE_PATH_ADMIN}images/spacer.gif" alt="!" /></a>
 				</div>
 	
 				<div class="clr"></div>
@@ -58,7 +58,7 @@
 	 $(document).ready(function() {
 		$('input:checkbox').checkbox();
 		$('.Tooltip').tipsy();
-		$('.mmTooltip').tipsy({gravity: 's'});
+		$('.mmTooltip').tipsy({gravity: 's'});// nw | n | ne | w | e | sw | s | se
 	  });
 	//-->
 	</script>

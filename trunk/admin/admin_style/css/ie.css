@@ -1,0 +1,7 @@
+/*** For Sucky Browsers (all versions of IE) ***/
+
+/* stupid IE7 HasLayout hack */
+#wrapper { zoom: 1; }
+
+/*TESTING*/
+#pageMain {overflow-x: hidden;}

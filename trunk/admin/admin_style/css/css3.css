@@ -50,8 +50,8 @@
 	-moz-box-shadow:0 0 7px #fff;-webkit-box-shadow:0 0 7px #fff;box-shadow:0 0 7px #fff;}
 
 	/* @Gray Shadow --------------- */	
-	.onlineall {
-	-moz-box-shadow : 0px 0px 3px #999;-webkit-box-shadow : 0px 0px 3px #999;-khtml-box-shadow : 0px 0px 3px #999;box-shadow : 0px 0px 3px #999;}
+	img.bgm  {
+	-moz-box-shadow : 0px 0px 3px #EFDABE;-webkit-box-shadow : 0px 0px 3px #EFDABE;-khtml-box-shadow : 0px 0px 3px#EFDABE;box-shadow : 0px 0px 3px #EFDABE;}
 /* @end */	
 
 /*	---------------------------------------
@@ -69,7 +69,7 @@
 
 	
 	/* @Borders all Corners (5)Pixel ----------- */	
-	.pagination a, .pagination span.current, .pagination span.three_dots, #border-table,.box_all, fieldset {
+	.pagination a, .pagination span.current, .pagination span.three_dots, #border-table,.box_all, img.bgm {
 	-moz-border-radius : 5px;-webkit-border-radius : 5px;-khtml-border-radius : 5px; border-radius : 5px;}
 
 	/* @Borders all Corners (10)Pixel ----------- */	

@@ -18,7 +18,7 @@ if (!defined('IN_ADMIN'))
 if(!isset($images_cp_perpage) || !$images_cp_perpage)
 {
 	// you can add this varibale to config.php
-	$images_cp_perpage = 20;
+	$images_cp_perpage = 25;
 }
 
 //for style ..
@@ -120,8 +120,8 @@ if ($nums_rows > 0)
 		$arr[]	= array(
 						'id'		=> $row['id'],
 						'tdnum'		=> $tdnum == 0 ? '<tr>': '',
-						'tdnum2'	=> $tdnum == 3 ? '</tr>' : '',
-						'name'		=> ($row['real_filename'] == '' ? ((strlen($row['name']) > 15) ? substr($row['name'], 0, 15) . '...' : $row['name']) : ((strlen($row['real_filename']) > 15) ? str_replace('\'', "\'", substr($row['real_filename'], 0, 15)) . '...' : str_replace('\'', "\'", $row['real_filename']))),
+						'tdnum2'	=> $tdnum == 4 ? '</tr>' : '',
+						'name'		=> ($row['real_filename'] == '' ? ((strlen($row['name']) > 25) ? substr($row['name'], 0, 20) . '...' : $row['name']) : ((strlen($row['real_filename']) > 20) ? str_replace('\'', "\'", substr($row['real_filename'], 0, 20)) . '...' : str_replace('\'', "\'", $row['real_filename']))),
 						'ip' 		=> htmlspecialchars($row['user_ip']),
 						'href'		=> PATH . $row['folder'] . '/' . $row['name'],
 						'size'		=> Customfile_size($row['size']),
@@ -133,7 +133,7 @@ if ($nums_rows > 0)
 					);
 
 		//fix ... 
-		$tdnum = $tdnum == 3 ? 0 : $tdnum+1; 
+		$tdnum = $tdnum == 4 ? 0 : $tdnum+1; 
 
 		$del[$row['id']] = isset($_POST['del_' . $row['id']]) ? $_POST['del_' . $row['id']] : '';
 

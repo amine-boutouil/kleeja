@@ -23,7 +23,7 @@
 	h2 {	line-height:25px; padding:6px;background:#fff url(../images/message-bar.png) repeat-x;color: #FD6812;font-size:160%;}
 	h6 {	line-height:20px;padding:3px;color: #444; font-size:115%; font-weight:400;}
 	li {list-style: none;}
-	p {line-height: 150%;}
+	p {line-height: 150%;font-size:100%; font-weight:700;}
 	ul{margin: 0 0 4px 0;line-height: 26px;}
 	small{font-size:xx-small;}
 	label { cursor: pointer;padding: 0 5px 0 0;}
@@ -67,6 +67,10 @@
 	.line_img {height:18px;display:block;margin:2px 0;background:#D6D0CB url(../images/line_img.png) repeat-x top right;}
 	.left, img.left {float:left;}
 	.right, img.right {float:right;}
+	
+	.breadcrumbs{margin-top:-1em;font-size:90%;}
+	.breadcrumbs span{font:bold 1.2em Arial, Helvetica, Garuda, sans-serif}
+
 	
 	button{cursor:pointer;overflow:visible;position:relative;font:bold 12px Tahoma;}
 	button.btn{background:transparent url(../images/box/button.gif) no-repeat right -92px;border:0;margin:0 5px 0 -6px;outline:none;padding:0 35px 0 0;text-align:center}
@@ -180,11 +184,26 @@
   .tipsy-e .tipsy-arrow { top: 50%; margin-top: -4px; right: 0; width: 5px; height: 9px; background-position: top right; }
   .tipsy-w .tipsy-arrow { top: 50%; margin-top: -4px; left: 0; width: 5px; height: 9px; }
 
-  
+
   
 /* box_all */
 #divmiddle{width:598px;display:inline;}
 #border-table,.box_all {padding:10px;background:#FFF;border:1px dashed #cccccc;}
+
+/* ribbon edge (wrap around, changes on scroll) */
+.ribbon span a:link, .ribbon span a:visited { color: #fff; }	
+.ribbon span a:hover, .ribbon span a:active { color: #A4D9D7; }	
+.ribbon span { color: #EFDABE; }	
+.ribbon,.ribbon .wrapAround,.ribbon .tab{height:52px;overflow:hidden}
+.ribbon{margin:0 -4px 8px -53px;width:638px}
+.ribbon .wrapAround{background:transparent url(../images/box/ribbon-wrap.png) no-repeat 0 -52px;float:left;width:52px}
+.ribbon .tab{background:transparent url(../images/box/ribbon.png) no-repeat 0 0;float:left;width:586px}
+.ribbon span a{font-weight:700}
+.ribbon span{color:#CDCDCD;float:left;font-size:1.4em;font-weight:700;margin:16px 0 0}
+.ribbon span.blogDate{font-size:1.85em;margin:13px 0 0}
+.ribbon span.blogPostInfo{float:right;font-size:1.1em;font-weight:400;margin:18px 28px 0 0}
+
+
 
 
 /*  buttons */

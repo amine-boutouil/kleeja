@@ -39,17 +39,16 @@ $(document).ready(function() {
 	<div class="bodybox">
 	
 	<!-- title  -->
-	<p class="breadcrumbs"><a href="./">{lang.R_CPINDEX}</a> <span>&raquo;</span>{lang.R_IMG_CTRL}</p>
+	<p class="titleAll"><a href="./">{lang.R_CPINDEX}</a> <span>&raquo;</span>{lang.R_IMG_CTRL}</p>
 	
 	<!-- clear  -->
 	<div class="clr"></div>
 	
-	<div class="ribbon"><div class="wrapAround"></div><div class="tab"> <span class="blogDate">06 Mar</span> </div></div>
+	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><span class="STitle"><a href="index.php?cp=d_img_ctrl">{lang.R_IMG_CTRL}</a></span></div></div>
 
 	<IF NAME="no_results">
 	<div class="nothing"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/warning_nothing.gif" alt="nothing" />{lang.NOTHING}</div>
 	<ELSE>
-	
 	<table class="xthumbs" dir="ltr">
 	<LOOP NAME="arr">
 	{{tdnum}}
@@ -74,8 +73,7 @@ $(document).ready(function() {
 
 	<!-- pagination -->{page_nums}
 
-	<button type="submit" name="submit" class="left btn"><span>{lang.DEL_SELECTED}</span></button>
-
+	<p class="left" style="margin: -7px 0 0;"><button type="submit" name="submit" class="btn"><span>{lang.DEL_SELECTED}</span></button></p>
 	<div class="clr"></div>
 
 	</IF>

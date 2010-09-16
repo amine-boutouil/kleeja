@@ -1,22 +1,33 @@
 <style type="text/css" media="screen">@import url("{STYLE_PATH_ADMIN}js/fancybox/jqueryfb.css"); </style>
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}js/fancybox/fancybox.js"></script>
+<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/fancybox/custom.js"></script>
+
 <script type="text/javascript">
 <!--
 $(document).ready(function() {
  // TinyTips Plugin
  $('.tTip').tinyTips('title');
  // fancybox plugin
- $("a.fancybox").attr('rel', 'gallery').fancybox({'transitionIn' : 'elastic','transitionOut' : 'elastic','titleShow' : false });
+ $("a.fancybox").attr('rel', 'gallery').fancybox({'titleShow': false,'transitionIn'	: 'elastic', 'transitionOut':'elastic','easingIn':'easeOutBack','easingOut':'easeInBack'});
+ // The Image preloader
+ $('#boxs').kleeja_image_preloader({delay:25, callback:removeloader});
+ $("div.expand").hover(function () {$(this).addClass("lightimg");},function () {$(this).removeClass("lightimg");});
+
+ // Fade In & Fade Out Effect 
+ $(function() {$(".bgm").css("opacity","0.5");$(".bgm").hover(function () {$(this).stop().animate({opacity: 0.5}, "slow");},function () {$(this).stop().animate({opacity: 0.7}, "slow");});});
+
  // Ajax Loader images
- $('#yaload img').each(function(i, elem) {
+ /*$('#yaload img').each(function(i, elem) {
      var im = new Image();
      im.src = $(this).attr("src");
      var tthis = $(this);
      im.onload = function(e) {
-		tthis.find ('.spinner').hide('slow');
+		tthis.find ('.spinner').remove();
 		tthis.append(im);
 	   };
     });
+*/
+	
 });
 //-->
 </script>
@@ -26,11 +37,14 @@ $(document).ready(function() {
 	<form method="post" action="{action}" name="imgform" onsubmit="javascript:return confirm_from();">
 	<!-- body box -->
 	<div class="bodybox">
+	
 	<!-- title  -->
-	<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/menu_icons/img_ctrl_button.gif" />{lang.R_IMG_CTRL}</h2>
-	<div class="dot"></div>
+	<p class="breadcrumbs"><a href="./">{lang.R_CPINDEX}</a> <span>&raquo;</span>{lang.R_IMG_CTRL}</p>
+	
 	<!-- clear  -->
 	<div class="clr"></div>
+	
+	<div class="ribbon"><div class="wrapAround"></div><div class="tab"> <span class="blogDate">06 Mar</span> </div></div>
 
 	<IF NAME="no_results">
 	<div class="nothing"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/warning_nothing.gif" alt="nothing" />{lang.NOTHING}</div>
@@ -39,13 +53,13 @@ $(document).ready(function() {
 	<table class="xthumbs" dir="ltr">
 	<LOOP NAME="arr">
 	{{tdnum}}
-	<td id="su[{{id}}]" class="osilver" align="center">
-		<div style="position:relative !important;">
-		<a id="yaload" href="{{href}}" class="fancybox tTip spinner" title="<div>{{name}}</div><table><tr><td>{lang.FILEUPS}</td><td>{{ups}}</td></tr><tr><td>{lang.FILESIZE}</td><td>{{size}}</td></tr><tr><td>{lang.FILEDATE}</td><td>{{time}}</td></tr><tr><td>{lang.BY}</td><td>{{user}}</td></tr><tr><td>{lang.IP}</td><td>{{ip}}</td></tr></table>">
-			<img src="{{thumb_link}}" class="bgm" style="height:100px;width:100px;<IF LOOP='is_thumb'><ELSE>width:100px;height:100px;</IF>" />
+	<td align="center">
+		<div class="expand" style="position:relative !important;">
+		<a id="su[{{id}}]" href="{{href}}" class="fancybox tTip spinner osilver" title="<div>{{name}}</div><table><tr><td>{lang.FILEUPS}</td><td>{{ups}}</td></tr><tr><td>{lang.FILESIZE}</td><td>{{size}}</td></tr><tr><td>{lang.FILEDATE}</td><td>{{time}}</td></tr><tr><td>{lang.BY}</td><td>{{user}}</td></tr><tr><td>{lang.IP}</td><td>{{ip}}</td></tr></table>">
+			<img src="{{thumb_link}}" class="bgm" style="height:90px;width:90px;<IF LOOP='is_thumb'><ELSE>width:90px;height:90px;</IF>" />
 		</a>
+		<span class="imgcb"><input name="del_{{id}}" type="checkbox" value="{{id}}" onclick="change_color(this,'su[{{id}}]', 'ored');" rel="_del" /></span>
 		</div>
-		<input name="del_{{id}}" class="imgcb" type="checkbox" value="{{id}}" onclick="change_color(this,'su[{{id}}]', 'ored');" rel="_del" />
 		
 	</td>
 	{{tdnum2}}

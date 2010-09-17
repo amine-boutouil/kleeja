@@ -67,6 +67,7 @@
 	.left, img.left {float:left;}
 	.right, img.right {float:right;}
 	
+	.headline {color:#8F8F8F;display:block;font-size:.6em;margin:-.1em 0 0;font-family:"Liberation Sans", Arial, Helvetica, Garuda, sans-serif;font-weight:400;line-height:1;margin:0 0 .5em;padding:0 0 .2em}
 	.titleAll{margin-top:-1em;font-size:90%;}
 	
 	button.btn{background:transparent url(../images/box/button.gif) no-repeat right -92px;border:0;font:bold 100% tahoma;margin:0 5px 0 -6px;outline:none;padding:0 35px 0 0;text-align:center;cursor:pointer;overflow:visible;position:relative;}
@@ -125,17 +126,17 @@
 
 
 	/* start Main Menu */
-	#main_menu{width:280px;margin:10px 20px 0 10px !important;}
-	#main_menu .body_menu {background:#F1EEE0;border: 2px solid #D9D4BD;text-align:center;}
-	#main_menu .Bmenu {text-align:center; padding:10px;border: 1px solid #ffffff;}
-	#main_menu .link_menu ,#main_menu .link_current {float: right;height: 60px;width:48%;margin:1px;border:1px solid #D6D6CE;background: #E2E1DD url(../images/bg-right-menu.jpg) repeat;}
-	#main_menu .link_current {background:#FFCC00;border-color: #EB8647;}
+	#MainMenuWrap,#main_menu{margin:10px 20px 0 10px !important;background:transparent url(../images/box/side-navigation-repeat.gif) repeat-y 0 0;}
+	
+	#main_menu{width:220px !important;}
+	#main_menu p{border-bottom: 1px dotted #DBDBDC;}
+	#main_menu .link_menu ,#main_menu .link_current {float:right;height: 46px;width:210px;margin:2px 0;background:url(../images/menu_icons/bg_buttons.png) no-repeat center bottom;}
+	#main_menu .link_current,#main_menu .link_current a:hover {background:url(../images/menu_icons/bg_buttons.png) no-repeat center -46px !important;}
 	#main_menu .link_menu p,#main_menu .link_current p {position: relative;line-height: 100%;}
 	#main_menu .link_current a{color:#000;} 
-	#main_menu .link_menu a  {background:url(../images/hidbg.png) repeat-x bottom left;display: block;overflow: hidden;font-size:x-small;font-weight: bold;height: 60px;}
-	#main_menu .link_menu img {padding:2px 0 3px 0;}
-	#main_menu .link_menu a:hover{height:56px;color:#000;text-decoration: none;background:#FEF5E2 url(../images/hidbg.png) repeat-x bottom left;border-top: #FEA53D 3px solid;border-bottom: #FEA53D 3px solid;}
-	#main_menu .link_current a:hover{height:56px;text-decoration: none;border:none;cursor:default;background:url(../images/hidbg.png) repeat-x;}
+	#main_menu  .link_menu a  {display: block;overflow: hidden;font-size:11px;font-weight: bold;height:46px;width:210px;}
+	#main_menu .link_menu img {padding:2px 0 3px 0;margin:4px 10px 0 14px;}
+	#main_menu .link_menu a:hover{color:#FF8000;text-decoration: none;background:url(../images/menu_icons/bg_buttons.png) no-repeat center top;}
 	span.kbubbles {
 	background:url(../images/menu_icons/kbubbles.png) no-repeat;color:#fff;
 	width:30px;height:28px;padding:7px 0 0;text-align: center;
@@ -143,7 +144,7 @@
 	font-size:x-small;font-weight: 400;}	
 	
 	/* thumbnail menu */
-	#MainMenuWrap{width:180px;margin:10px 20px 0 10px !important;background:transparent url(../images/box/side-navigation-repeat.gif) repeat-y 0 0;}
+	#MainMenuWrap{width:180px;background:transparent url(../images/box/side-navigation-repeat.gif) repeat-y 0 0;}
 	.MainMenuBox1{background:transparent url(../images/box/side-navigation-top.gif) no-repeat 0 0;padding:15px 0 0}
 	.MainMenuBox2{background:transparent url(../images/box/side-navigation-bottom.gif) no-repeat 0 100%;padding:0 0 15px}
 	.thumbnail {padding:0;}

@@ -23,8 +23,9 @@
 	body {text-shadow: 0 0 2px #fff;}
 	
 	/* @Dark gray text shadow ------- */
-	#boxfileuser .public,#Footer .Powered h1 ,.Wuser {
-	text-shadow: 0 0 2px #444;}
+	#boxfileuser .public,#Footer .Powered h1 ,.Wuser,span.kbubbles {text-shadow: 0 0 2px #444;}
+	
+	#main_menu .link_menu a:hover{text-shadow: 0 -1px 1px #FED681;}
 /* @end */
 
 /*	---------------------------------------

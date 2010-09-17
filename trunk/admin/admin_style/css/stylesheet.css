@@ -143,7 +143,7 @@
 	.MainMenuBox2{background:transparent url(../images/box/menu_navbm.gif) no-repeat 0 100%;padding:0 0 15px}
 	.thumbnail {padding:0;}
 	.link_menu_thumbnail,
-	.link_current_thumbnail {float: right;height:64px; line-height:40px; width:70px; margin:0px ;text-align:center;}
+	.link_current_thumbnail {float: right;height:74px; line-height:40px; width:70px; margin:0px ;text-align:center;}
 	.link_menu_thumbnail img,.link_current_thumbnail img{text-align:center;padding:2px 0 3px 0;}
 	.link_current_thumbnail {background:#FDE37A;}
 	.link_menu_thumbnail p,#menu_thumbnail .link_current_thumbnail p {position: relative;line-height: 100%;}
@@ -173,8 +173,8 @@
 
 	/* ribbon */
 	.ribbon,.ribbon .wrapAround,.ribbon .tab{height:60px;overflow:hidden;}
-	.ribbon{margin:-10px -4px 8px -37px;width:682px}
-	.ribbon .wrapAround{background:transparent url(../images/box/ribbon-wrap.png) no-repeat scroll;float:left;width:52px;display: block;margin-left:-2px;}
+	.ribbon{margin:-15px -4px 8px -37px;width:682px}
+	.ribbon .wrapAround{background:transparent url(../images/box/ribbon-wrap.png) no-repeat 0 -104px scroll;float:left;width:52px;display: block;margin-left:-2px;}
 	.ribbon .tab{background:transparent url(../images/box/ribbon.png) no-repeat 0 0;float:left;width:630px}
 	.ribbon span a{font-weight:700;}
 	.ribbon span.STitle{margin:17px 28px 0 20px;font-size:140%;text-shadow:#884005 -1px -1px 1px}

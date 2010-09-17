@@ -76,7 +76,7 @@ var STYLE_PATH_ADMIN = '{STYLE_PATH_ADMIN}';var go_to = '{go_to}';var GET_FORM_K
 			<div class="MainMenuBox1">
 			<div class="MainMenuBox2">
 				<LOOP NAME="adm_extensions_menu">	
-					<div class="({{current}}?link_menu_thumbnail link_current_thumbnail:link_menu_thumbnail)"><p><a class="eTooltip" title="{{title}}" href="{{link}}" <IF LOOP="confirm"> onclick="javascript:return confirm_from();"</IF>><img src="{{icon_mini}}" alt="{{title}}" style="margin:0 8px;vertical-align:middle;" /></a></p></div>
+					<div class="({{current}}?link_menu_thumbnail link_current_thumbnail:link_menu_thumbnail)"><p><a class="eTooltip" title="{{title}}" href="{{link}}" <IF LOOP="confirm"> onclick="javascript:return confirm_from();"</IF>><img src="{{icon_mini}}" alt="{{title}}" style="margin:0 8px;vertical-align:middle;" /></a>{{kbubble}}</p></div>
 				</LOOP>
 				<div class="clr"></div><br />
 				<a href="{link_expand_menu}" class="expand_thumbnail"><img src="{STYLE_PATH_ADMIN}images/spacer.gif" alt="{lang.RETURN_HOME}" /></a>
@@ -88,7 +88,7 @@ var STYLE_PATH_ADMIN = '{STYLE_PATH_ADMIN}';var go_to = '{go_to}';var GET_FORM_K
 			<div class="MainMenuBox1">
 			<div class="MainMenuBox2">
 				<LOOP NAME="adm_extensions_menu">	
-				<div class="({{current}}?link_menu link_current:link_menu)"><p><a title="{{title}}" href="{{link}}" <IF LOOP="confirm"> onclick="javascript:return confirm_from();"</IF>><img src="{{icon}}" alt="{{title}}" /><span>{{lang}}</span></a></p></div>
+				<div class="({{current}}?link_menu link_current:link_menu)"><p><a title="{{title}}" href="{{link}}" <IF LOOP="confirm"> onclick="javascript:return confirm_from();"</IF>><img src="{{icon}}" alt="{{title}}" /><span>{{kbubble}}{{lang}}</span></a></p></div>
 				</LOOP>
 				<div class="clr"></div><br />
 				<a href="{link_expand_menu}" class="expand_thumbnail2"><img src="{STYLE_PATH_ADMIN}images/spacer.gif" alt="{lang.RETURN_HOME}" /></a>

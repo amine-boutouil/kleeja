@@ -35,8 +35,6 @@ $(document).ready(function() {
 <!-- start temlate displaying images -->
 <div id="boxs">
 	<form method="post" action="{action}" name="imgform" onsubmit="javascript:return confirm_from();">
-	<!-- body box -->
-	<div class="bodybox">
 	
 	<!-- title  -->
 	<p class="titleAll"><a href="./">{lang.R_CPINDEX}</a> <span>&raquo;</span>{lang.R_IMG_CTRL}</p>
@@ -44,8 +42,10 @@ $(document).ready(function() {
 	<!-- clear  -->
 	<div class="clr"></div>
 	
-	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><span class="STitle"><a href="index.php?cp=d_img_ctrl">{lang.R_IMG_CTRL}</a></span></div></div>
+	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><img class="left TSubImg" src="{STYLE_PATH_ADMIN}images/spacer.gif" alt="" /><span class="STitle left"><a href="index.php?cp=d_img_ctrl">{lang.R_IMG_CTRL}</a></span></div></div>
 
+	<br /><div class="hr"></div>
+	
 	<IF NAME="no_results">
 	<div class="nothing"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/warning_nothing.gif" alt="nothing" />{lang.NOTHING}</div>
 	<ELSE>
@@ -65,19 +65,17 @@ $(document).ready(function() {
 	</LOOP>
 	</table>
 
-	<div style="clr"></div>
-
-	<div class="check_all">[ <a href="javascript:void(0);" onclick="checkAll(document.imgform, '_del', 'su', 'ored');">{lang.CHECK_ALL}</a> ]</div>
-
-	<div class="clr"></div>
-
+	<br /><div class="hr"></div>
+	
+	<div class="left check_all">[ <a href="javascript:void(0);" onclick="checkAll(document.imgform, '_del', 'su', 'ored');">{lang.CHECK_ALL}</a> ]</div>
+	
 	<!-- pagination -->{page_nums}
 
-	<p class="left" style="margin: -7px 0 0;"><button type="submit" name="submit" class="btn"><span>{lang.DEL_SELECTED}</span></button></p>
-	<div class="clr"></div>
+	<div class="hr"></div><br />
+
+	<p class="left" style="margin-top:-15px;"><button type="submit" name="submit" class="btn"><span>{lang.DEL_SELECTED}</span></button></p>
 
 	</IF>
-	</div><!-- body box -->
 	
 	{H_FORM_KEYS}
 	</form>

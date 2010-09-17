@@ -269,17 +269,12 @@ foreach($adm_extensions as $m)
 										'lang'		=> !empty($lang['R_'. strtoupper($m)]) ? $lang['R_'. strtoupper($m)] : (!empty($olang['R_' . strtoupper($m)]) ? $olang['R_' . strtoupper($m)] : strtoupper($m)),
 										'link'		=> './' . basename(ADMIN_PATH) . '?cp=' . ($m == 'configs' ? 'options' : $s) . (@in_array($m, $ext_formkey) ? '&amp;' . $GET_FORM_KEY_GLOBAL : ''),
 										'confirm'	=> (@in_array($m, $ext_confirm)) ? true : false,
-										'current'	=> ($s == $go_to) ? true : false
+										'current'	=> ($s == $go_to) ? true : false,
+										'kbubble'	=> in_array($m, array_keys($kbubbles)) ? '<span class="kbubbles">' . $kbubbles[$m] . '</span>' : ''
 									);
 
 	//add another item to array for title='' in href or other thing
 	$adm_extensions_menu[$i]['title'] = $adm_extensions_menu[$i]['lang'];
-
-	//is this item has a bubble ?
-	if(in_array($m, array_keys($kbubbles)))
-	{
-		$adm_extensions_menu[$i]['lang'] = '<span class="kbubbles">' . $kbubbles[$m] . '</span>' . $adm_extensions_menu[$i]['lang'];
-	}
 
 	($hook = kleeja_run_hook('endforeach_ext_admin_page')) ? eval($hook) : null; //run hook 
 }

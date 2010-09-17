@@ -183,6 +183,25 @@
 
 	.ribbon span a:link, .ribbon span a:visited { color: #EFDABE; }	/* ribbon links (wrap around graphic)  */
 	.ribbon span a:hover, .ribbon span a:active { color: #fff; }
+
+	/*CSS style pagination*/
+	#pagination	{ text-align:right; margin:0 0 10px 0; float:right; }
+	a.paginate { display:inline-block;height:23px; padding:0 3px; font-size:80%; font-weight:bold; color:#333; text-shadow:1px 1px 0 #fff; background:url(../images/pagination.png) 0 0 no-repeat; white-space:nowrap; border:none; overflow:visible; cursor:pointer; text-decoration:none; }
+	a.paginate > span {display:block; height:23px; padding:0 10px 0 8px; line-height:23px; background:url(../images/pagination.png) 100% 0 no-repeat; }
+	a.paginate:hover, a.paginate:focus{ color:#fff; text-decoration:none; text-shadow:-1px -1px 0 rgba(0,0,0,0.3); background-position:0 -30px; }
+	a.paginate:hover > span, a.paginate:focus > span { background-position:100% -30px; }
+	a.dots { background:url(../images/pagination.png) 0 -150px no-repeat;}
+	a.dots > span { background-position:100% -150px;cursor:default;}
+	a.dots:hover, a.dots:focus{ color:#333; text-shadow:1px 1px 0 #fff; background-position:0 -150px; }
+	a.dots:hover > span, a.dots:focus > span	{ background-position:100% -150px; }
+	a.current { background:url(../images/pagination.png) 0 -90px no-repeat; color:#fff; text-shadow:-1px -1px 0 rgba(0,0,0,0.3); }
+	a.current > span { background-position:100% -90px;cursor:default;}
+	a.current:hover, a.current:focus{background-position:0 -90px; }
+	a.current:hover > span, a.current:focus > span { background-position:100% -90px;}
+	a.phover { background:url(../images/pagination.png) 0 -30px no-repeat; color:#fff; text-shadow:-1px -1px 0 rgba(0,0,0,0.3); }
+	a.phover > span { background-position:100% -30px;}
+	a.phover:hover, a.phover:focus { color:#fff; text-decoration:none; text-shadow:-1px -1px 0 rgba(0,0,0,0.3); background-position:0 -90px; }
+	a.phover:hover > span, a.phover:focus > span { background-position:100% -90px;}
  
 
 #border-table,.box_all {padding:0 10px;}
@@ -419,23 +438,5 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 .jquery-checkbox-checked .jquery-checkbox-disabled img{background: url(../images/checkbox1.png) no-repeat 0px 0px;}
 /* / checkboxes*/
 
-/*CSS style pagination*/
-#pagination	{ text-align:right; margin:0 0 10px 0; float:right; }
-a.paginate { display:inline-block;height:23px; padding:0 3px; font-size:80%; font-weight:bold; color:#333; text-shadow:1px 1px 0 #fff; background:url(../images/pagination.png) 0 0 no-repeat; white-space:nowrap; border:none; overflow:visible; cursor:pointer; text-decoration:none; }
-a.paginate > span {display:block; height:23px; padding:0 10px 0 8px; line-height:23px; background:url(../images/pagination.png) 100% 0 no-repeat; }
-a.paginate:hover, a.paginate:focus{ color:#fff; text-decoration:none; text-shadow:-1px -1px 0 rgba(0,0,0,0.3); background-position:0 -30px; }
-a.paginate:hover > span, a.paginate:focus > span { background-position:100% -30px; }
-a.dots { background:url(../images/pagination.png) 0 -150px no-repeat;}
-a.dots > span { background-position:100% -150px;cursor:default;}
-a.dots:hover, a.dots:focus{ color:#333; text-shadow:1px 1px 0 #fff; background-position:0 -150px; }
-a.dots:hover > span, a.dots:focus > span	{ background-position:100% -150px; }
-a.current { background:url(../images/pagination.png) 0 -90px no-repeat; color:#fff; text-shadow:-1px -1px 0 rgba(0,0,0,0.3); }
-a.current > span { background-position:100% -90px;cursor:default;}
-a.current:hover, a.current:focus{background-position:0 -90px; }
-a.current:hover > span, a.current:focus > span { background-position:100% -90px;}
-a.phover { background:url(../images/pagination.png) 0 -30px no-repeat; color:#fff; text-shadow:-1px -1px 0 rgba(0,0,0,0.3); }
-a.phover > span { background-position:100% -30px;}
-a.phover:hover, a.phover:focus { color:#fff; text-decoration:none; text-shadow:-1px -1px 0 rgba(0,0,0,0.3); background-position:0 -90px; }
-a.phover:hover > span, a.phover:focus > span { background-position:100% -90px;}
-/* # pagination */
+
 

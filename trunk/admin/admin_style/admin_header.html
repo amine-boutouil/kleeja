@@ -53,7 +53,7 @@ var STYLE_PATH_ADMIN = '{STYLE_PATH_ADMIN}';var go_to = '{go_to}';var GET_FORM_K
 					<div class="mmDivider"></div>
 					<div class="Wlogin"><a href="./" title="{lang.R_CPINDEX}"><img class="micon" src="{STYLE_PATH_ADMIN}images/icon/home.png" alt="" /></a></div>
 					<div class="Wlogin"><a href="{config.siteurl}" title="{lang.RETURN_HOME}"><img class="micon" src="{STYLE_PATH_ADMIN}images/icon/sign-out.png" alt="" /></a></div>
-					<div class="Wlogin"><a href="#" title="مسح جلسة الإدارة"><img class="micon" src="{STYLE_PATH_ADMIN}images/icon/lgoutcp.png" alt="" /></a></div>
+					<div class="Wlogin"><a href="./?cp=r_repair&amp;{GET_FORM_KEY_GLOBAL}" title="{lang.R_LGOUTCP}"><img class="micon" src="{STYLE_PATH_ADMIN}images/icon/lgoutcp.png" alt="" /></a></div>
 				</div>
 			<div id="MmRight"></div>
 			</div>
@@ -75,8 +75,6 @@ var STYLE_PATH_ADMIN = '{STYLE_PATH_ADMIN}';var go_to = '{go_to}';var GET_FORM_K
 			<div id="MainMenuWrap" class="thumbnail">
 			<div class="MainMenuBox1">
 			<div class="MainMenuBox2">
-				<div class="link_menu_thumbnail"><p><a class="eTooltip" title="{lang.RETURN_HOME}" href="{config.siteurl}"><img src="{STYLE_PATH_ADMIN}images/menu_icons/mini/index_button.png" alt="{lang.RETURN_HOME}" style="margin:0 8px;vertical-align:middle;" /></a></p></div>
-				<div class="link_menu_thumbnail"><p><a class="eTooltip" title="{lang.R_CPINDEX}" href="./"><img src="{STYLE_PATH_ADMIN}images/menu_icons/mini/cp_button.png" alt="{lang.R_CPINDEX}" style="margin:0 8px;vertical-align:middle;" /></a></p></div>
 				<LOOP NAME="adm_extensions_menu">	
 					<div class="({{current}}?link_menu_thumbnail link_current_thumbnail:link_menu_thumbnail)"><p><a class="eTooltip" title="{{title}}" href="{{link}}" <IF LOOP="confirm"> onclick="javascript:return confirm_from();"</IF>><img src="{{icon_mini}}" alt="{{title}}" style="margin:0 8px;vertical-align:middle;" /></a></p></div>
 				</LOOP>
@@ -89,7 +87,6 @@ var STYLE_PATH_ADMIN = '{STYLE_PATH_ADMIN}';var go_to = '{go_to}';var GET_FORM_K
 		<div id="main_menu">
 			<div class="MainMenuBox1">
 			<div class="MainMenuBox2">
-				<div class="link_menu"><p><a title="{lang.R_CPINDEX}" href="./"><img src="{STYLE_PATH_ADMIN}images/menu_icons/cp_sb.png" alt="{lang.R_CPINDEX}" /><span>{lang.R_CPINDEX}</span></a></p></div>
 				<LOOP NAME="adm_extensions_menu">	
 				<div class="({{current}}?link_menu link_current:link_menu)"><p><a title="{{title}}" href="{{link}}" <IF LOOP="confirm"> onclick="javascript:return confirm_from();"</IF>><img src="{{icon}}" alt="{{title}}" /><span>{{lang}}</span></a></p></div>
 				</LOOP>

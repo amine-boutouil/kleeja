@@ -162,17 +162,15 @@ $path_adm	= PATH . 'includes/adm';
 $ext_expt	= array();
 $ext_expt[]	= 'start';
 $ext_expt[]	= 'php_info';
-$ext_expt[]	= 'aupdate';
+$ext_expt[]	= 'b_lgoutcp';
 
 //confirm msgs
 $ext_confirm	= array();
 $ext_confirm[]	= 'repair';	
-$ext_confirm[]	= 'lgoutcp';
 
 //formkey extension, Csrf protection
 $GET_FORM_KEY_GLOBAL = kleeja_add_form_key_get('GLOBAL_FORM_KEY');
 $ext_formkey	= array();
-$ext_formkey[] = 'lgoutcp';
 $ext_formkey[] = 'repair';
 
 ($hook = kleeja_run_hook('begin_admin_page')) ? eval($hook) : null; //run hook 

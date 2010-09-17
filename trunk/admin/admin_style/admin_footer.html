@@ -58,6 +58,8 @@
 	 $(document).ready(function() {
 		$('input:checkbox').checkbox();
 		$('.Tooltip').tipsy();
+		$('.eTooltip').tipsy({gravity: 'e'});
+		$('.seTooltip').tipsy({gravity: 'se'});
 		$('.mmTooltip').tipsy({gravity: 's'});// nw | n | ne | w | e | sw | s | se
 	  });
 	//-->

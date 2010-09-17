@@ -63,7 +63,7 @@ $img_types = array('gif','jpg','png','bmp','jpeg','tif','tiff','GIF','JPG','PNG'
 # $query['WHERE']	= "f.type IN ('" . implode("', '", $img_types) . "')";
 #
 
-$query['WHERE'] = "f.type = '" . implode("' OR f.type = '", $img_types) . "'";
+$query['WHERE'] = "(f.type = '" . implode("' OR f.type = '", $img_types) . "')";
 
 
 if(isset($_GET['last_visit']))

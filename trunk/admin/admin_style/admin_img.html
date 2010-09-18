@@ -1,6 +1,5 @@
 <style type="text/css" media="screen">@import url("{STYLE_PATH_ADMIN}js/fancybox/jqueryfb.css"); </style>
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}js/fancybox/fancybox.js"></script>
-<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/fancybox/custom.js"></script>
 
 <script type="text/javascript">
 <!--
@@ -9,25 +8,64 @@ $(document).ready(function() {
  $('.tTip').tinyTips('title');
  // fancybox plugin
  $("a.fancybox").attr('rel', 'gallery').fancybox({'titleShow': false,'transitionIn'	: 'elastic', 'transitionOut':'elastic','easingIn':'easeOutBack','easingOut':'easeInBack'});
- // The Image preloader
- $('#boxs').kleeja_image_preloader({delay:25, callback:removeloader});
- $("div.expand").hover(function () {$(this).addClass("lightimg");},function () {$(this).removeClass("lightimg");});
-
- // Fade In & Fade Out Effect 
- $(function() {$(".bgm").css("opacity","0.5");$(".bgm").hover(function () {$(this).stop().animate({opacity: 0.5}, "slow");},function () {$(this).stop().animate({opacity: 0.7}, "slow");});});
 
  // Ajax Loader images
- /*$('#yaload img').each(function(i, elem) {
-     var im = new Image();
-     im.src = $(this).attr("src");
-     var tthis = $(this);
-     im.onload = function(e) {
+ $('.yaload').each(function(i, elem) {
+	var im = new Image();
+	var tthis	= $(this);
+	im.src		= tthis.attr("klj_img");
+	//img loaded
+	im.onload = function(e) {
+		//img is done, remove spinner
 		tthis.find ('.spinner').remove();
+		//add img to the yaload div
 		tthis.append(im);
-	   };
-    });
-*/
-	
+		//fade effect the yaload div
+		tthis.css("opacity","0.5");
+		tthis.hover(function () {$(this).stop().animate({opacity: 0.5}, "slow");},function () {$(this).stop().animate({opacity: 0.7}, "slow");});
+	 };
+	//img error, or aborted
+	im.onerror = function(e) { tthis.find ('.spinner').removeClass('spinner'); tthis.addClass('thumb-not-loaded-error'); }
+	im.onabort = function(e) { tthis.find ('.spinner').removeClass('spinner'); tthis.addClass('thumb-not-loaded-aborted'); }
+});
+
+ //Navigate to pages by arrows
+ $(document).keydown(function(e) {
+
+	if (!$('#pagination').length) {
+		return;
+	}
+
+	var current_page = parseInt($('#pagination .current span').html());
+	var is_there_next = $('#pagination .phover').length < 2 && current_page > 1 ? false : true;
+	var current_location = $(location).attr('href').replace(/[&]*page=[0-9]+/i, '').replace(/&&/, '');
+
+	switch(e.keyCode) { 
+		//left, next
+		case 37:
+			if(!is_there_next){
+				return;
+			}
+			location.href = current_location + '&page=' + (current_page+1);
+		break;
+		//right, prev
+		case 39:
+			if(current_page <= 1){
+				return;
+			}
+			location.href = current_location + '&page=' + (current_page-1);
+		break;
+		//select all
+		case 83:
+			checkAll(document.imgform, '_del', 'su', 'ored');
+		break;
+		//enter, submit
+		case 13:
+			$('#submit').click();
+		break;
+	}
+});
+
 });
 //-->
 </script>
@@ -54,8 +92,10 @@ $(document).ready(function() {
 	{{tdnum}}
 	<td align="center">
 		<div class="expand" style="position:relative !important;">
-		<a id="su[{{id}}]" href="{{href}}" class="fancybox tTip spinner osilver" title="<div>{{name}}</div><table><tr><td>{lang.FILEUPS}</td><td>{{ups}}</td></tr><tr><td>{lang.FILESIZE}</td><td>{{size}}</td></tr><tr><td>{lang.FILEDATE}</td><td>{{time}}</td></tr><tr><td>{lang.BY}</td><td>{{user}}</td></tr><tr><td>{lang.IP}</td><td>{{ip}}</td></tr></table>">
-			<img src="{{thumb_link}}" class="bgm" style="height:90px;width:90px;<IF LOOP='is_thumb'><ELSE>width:90px;height:90px;</IF>" />
+		<a id="su[{{id}}]" href="{{href}}" class="fancybox tTip osilver" title="<div>{{name}}</div><table><tr><td>{lang.FILEUPS}</td><td>{{ups}}</td></tr><tr><td>{lang.FILESIZE}</td><td>{{size}}</td></tr><tr><td>{lang.FILEDATE}</td><td>{{time}}</td></tr><tr><td>{lang.BY}</td><td>{{user}}</td></tr><tr><td>{lang.IP}</td><td>{{ip}}</td></tr></table>">
+			<div klj_img="{{thumb_link}}" class="bgm yaload" />
+				<span class="spinner"></span>
+			</div>
 		</a>
 		<span class="imgcb"><input name="del_{{id}}" type="checkbox" value="{{id}}" onclick="change_color(this,'su[{{id}}]', 'ored');" rel="_del" /></span>
 		</div>
@@ -73,10 +113,20 @@ $(document).ready(function() {
 
 	<div class="hr"></div><br />
 
-	<p class="left" style="margin-top:-15px;"><button type="submit" name="submit" class="btn"><span>{lang.DEL_SELECTED}</span></button></p>
+	<p class="left" style="margin-top:-15px;"><button type="submit" id="submit" name="submit" class="btn"><span>{lang.DEL_SELECTED}</span></button></p>
 
 	</IF>
 	
 	{H_FORM_KEYS}
 	</form>
+	
+	<!-- do you know ? 
+	<br />
+	<h3>Keyboards Keys /</h3>
+	->	: {lang.NEXT} <br />
+	<-	: {lang.PREV} <br />
+	S	: {lang.CHECK_ALL} <br />
+	ENTER : {lang.DEL_SELECTED}
+	-->
+
 </div>

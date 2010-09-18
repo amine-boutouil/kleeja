@@ -440,4 +440,12 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 /* / checkboxes*/
 
 
+.bgm, .bgm img{
+	width:90px !important;
+	height:90px !important;
+}
 
+.thumb-not-loaded-error, .thumb-not-loaded-aborted{
+	border: 1px #ccc solid;
+	background: url(../images/error.png) no-repeat 50% 50%;
+}

@@ -135,7 +135,7 @@
 	#main_menu  .link_menu a  {display: block;overflow: hidden;font-size:94%;font-weight: bold;height:46px;width:210px;}
 	#main_menu .link_menu img {padding:2px 0 3px 0;margin:4px 10px 0 14px;}
 	#main_menu .link_menu a:hover{color:#FF8000;text-decoration: none;background:url(../images/menu_icons/bg_buttons.png) no-repeat center top;}
-	span.kbubbles {background:url(../images/menu_icons/kbubbles.png) no-repeat;color:#fff;width:30px;height:28px;padding:7px 0 0;text-align: center;position:absolute;left:-4px;top:0px;z-index:900;font-size:x-small;font-weight: 400;}	
+	span.kbubbles {background:url(../images/menu_icons/kbubbles.png) no-repeat;color:#fff;width:30px;height:28px;padding:7px 0 0;text-align: center;position:absolute;left:-4px;top:-4px;z-index:900;font-size:x-small;font-weight: 400;}	
 	
 	/* thumbnail menu */
 	#MainMenuWrap{width:180px;}
@@ -143,15 +143,16 @@
 	.MainMenuBox2{background:transparent url(../images/box/menu_navbm.gif) no-repeat 0 100%;padding:0 0 15px}
 	.thumbnail {padding:0;}
 	.link_menu_thumbnail,
-	.link_current_thumbnail {float: right;height:74px; line-height:40px; width:70px; margin:0px ;text-align:center;}
+	.link_current_thumbnail {float: right;height:82px; line-height:40px; width:82px; margin:0px ;text-align:center;}
 	.link_menu_thumbnail img,.link_current_thumbnail img{text-align:center;padding:2px 0 3px 0;}
-	.link_current_thumbnail {background:#FDE37A;}
+	.link_current_thumbnail {padding-right:10px;}
 	.link_menu_thumbnail p,#menu_thumbnail .link_current_thumbnail p {position: relative;line-height: 100%;}
 	.link_current_thumbnail a  {color:#000;}
 	.link_menu_thumbnail a  {display: block; overflow: hidden;}
 	.link_menu_thumbnail a:hover{}
 	.link_current_thumbnail a:hover{cursor:default;}
-	
+	#MainMenuWrap span.kbubbles {background:url(../images/menu_icons/mini/kbubbles.png) no-repeat center center;width:43px;height:32px;padding:16px 0 0 0;position:absolute;left:-10px;top:-15px;}	
+
 	/* # thumbnail  menu */
 	.expand_thumbnail , .expand_thumbnail2{float:left;width:30px; height: 20px;background: url("../images/box/expand_thumbnail.gif") no-repeat 0px 0px;}
 	.expand_thumbnail2  {background-position: 0px -20px;}

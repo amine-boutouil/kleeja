@@ -91,7 +91,7 @@
 	#MmLeft{ background: url(../images/box/mm_left.png) no-repeat 0 0;float:left;height:62px;width:25px }	
 	#MmRight{ background: url(../images/box/mm_right.png) no-repeat 0 0;float:right;height:62px;width:20px }
 	#MmBody	{ background: url(../images/box/mm_repeat.png) repeat-x 0 0;float:left;height:62px;min-width:500px }
-	#MainMenu{float:right;height:62px;position:relative;right:20px;top:-20px;z-index:800}
+	#MainMenu{float:right;height:62px;position:relative;right:5px;top:-20px;z-index:800}
 	.mmDivider{ background: url(../images/box/mm_divider.gif) no-repeat 0 0;float:right;height:40px;margin:7px 10px 0;width:10px }
 	.Wuser,.Wlogin{float:right;margin:7px 0 1em;line-height:50px;color:#ffffff;}
 	.Wlogin{float:right;}
@@ -135,7 +135,7 @@
 	#main_menu  .link_menu a  {display: block;overflow: hidden;font-size:94%;font-weight: bold;height:46px;width:210px;}
 	#main_menu .link_menu img {padding:2px 0 3px 0;margin:4px 10px 0 14px;}
 	#main_menu .link_menu a:hover{color:#FF8000;text-decoration: none;background:url(../images/menu_icons/bg_buttons.png) no-repeat center top;}
-	span.kbubbles {background:url(../images/menu_icons/kbubbles.png) no-repeat;color:#fff;width:30px;height:28px;padding:7px 0 0;text-align: center;position:absolute;left:-4px;top:-4px;z-index:900;font-size:x-small;font-weight: 400;}	
+	span.kbubbles {background:url(../images/menu_icons/kbubbles.png) no-repeat center center;color:#fff;width:36px;height:26px;padding:13px 0 0;text-align: center;position:absolute;left:-10px;top:2px;z-index:900;font-size:x-small;font-weight: 400;}	
 	
 	/* thumbnail menu */
 	#MainMenuWrap{width:180px;}
@@ -151,7 +151,7 @@
 	.link_menu_thumbnail a  {display: block; overflow: hidden;}
 	.link_menu_thumbnail a:hover{}
 	.link_current_thumbnail a:hover{cursor:default;}
-	#MainMenuWrap span.kbubbles {background:url(../images/menu_icons/mini/kbubbles.png) no-repeat center center;width:43px;height:32px;padding:16px 0 0 0;position:absolute;left:-10px;top:-15px;}	
+	#MainMenuWrap span.kbubbles {background:url(../images/menu_icons/mini/kbubbles.png) no-repeat center center;position:absolute;left:-3px;top:-5px;}	
 
 	/* # thumbnail  menu */
 	.expand_thumbnail , .expand_thumbnail2{float:left;width:30px; height: 20px;background: url("../images/box/expand_thumbnail.gif") no-repeat 0px 0px;}
@@ -180,7 +180,7 @@
 	.ribbon span a{font-weight:700;}
 	.ribbon span.STitle{margin:17px 28px 0 20px;font-size:140%;text-shadow:#884005 -1px -1px 1px}
 	.ribbon span.TitleSub {color:#FFF !important;font-size:100%;margin:16px 0 0 20px}
-	.ribbon img.TSubImg{width:59px;height:60px;background:transparent url(../images/menu_icons/mini/img_ctrl_button.png) no-repeat 0 0;}
+	.ribbon img.TSubImg{width:64px;height:74px;background:transparent url(../images/menu_icons/mini/img_ctrl_button.png) no-repeat 0 0;}
 
 	.ribbon span a:link, .ribbon span a:visited { color: #EFDABE; }	/* ribbon links (wrap around graphic)  */
 	.ribbon span a:hover, .ribbon span a:active { color: #fff; }

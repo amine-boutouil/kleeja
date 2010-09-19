@@ -5,12 +5,15 @@
 .xthumbs {width:100%;border:none;padding:0;border:none !important;}
 .xthumbs  tr {background-color:transparent;border:none !important;margin:0 0 3px 0 !important;}
 .xthumbs td {position:relative !important;width:110px !important;height: 110px !important;cursor: pointer;padding:5px !important;border:none !important;z-index:600;}
-img.bgm {width:90px;height:90px;padding:8px !important;z-index:700;border: 1px solid #D9D4BD; background: #F1EEE0;}
+.bgm,.bgm img{width:90px !important;height:90px !important;padding:8px !important;z-index:700;}
+.bgm img{border: 1px solid #D9D4BD; background: #F1EEE0;}
 .spinner {position: absolute;top:0;left:0; width:90px !important;height:90px !important; background: url(../../images/ajax-loader.gif) no-repeat center center; z-index: 99999; }
 
 .failerror {width:90px !important;height:90px !important; background: url(fail.jpg) no-repeat center center; z-index: 99999; }
 
 .imgcb {position: absolute;bottom:2px;left:2px;z-index:10000 !important;}
+
+.thumb-not-loaded-aborted{border: 1px #ccc solid;background: url(../images/error.png) no-repeat 50% 50%;}
 
 .ored img,.ored:hover img {background:#D88B8B !important;border: 1px solid red;}
 .lightimg{background:url(expand.png) no-repeat center center !important;}

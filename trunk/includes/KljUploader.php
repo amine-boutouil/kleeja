@@ -71,13 +71,13 @@ class KljUploader
 			return;
 		}
 
-		if(file_exists('images/watermark.gif'))
-		{
-			$src_logo = imagecreatefromgif('images/watermark.gif');
-		}
-		elseif(file_exists('images/watermark.png'))
+		if(file_exists('images/watermark.png'))
 		{
 			$src_logo = imagecreatefrompng('images/watermark.png');
+		}
+		elseif(file_exists('images/watermark.gif'))
+		{
+			$src_logo = imagecreatefromgif('images/watermark.gif');
 		}
 
 		$bwidth  = @imageSX($src_img);

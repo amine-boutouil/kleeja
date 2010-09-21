@@ -123,7 +123,9 @@
 	$lang['NO']										= 'Hayýr';
 	$lang['PASS_X_CHARS']							= 'En az %d karakter girmelisiniz';
 	$lang['PASS_X_TYPE']							= array('Zayýf', 'Normal', 'Orta', 'Saðlam', 'Çok saðlam');
-	
+	$lang['KLEEJA_TEAM_MSG_NAME']					= 'Kleeja Development Team';
+	$lang['KLEEJA_TEAM_MSG_TEXT']					= "Thank you for choosing Kleeja to empower your website,\n We really hope you enjoy the unique experince that Kleeja offers to you to control the files and images.\nDon't forget to visit http://kleeja.com for support, styles and plugins ..";
+
 	//PLUGINS
 	$lang['PLUGINS_KLEEJA']							= 'Kleeja için Eklentiler .. !';
 	$lang['PLUGINS_BUILT_IN']						= 'Burdaki eklentiler kleejanýn orjinal eklentileri  . Dahasý için Kleeja.com u ziyaret edin';

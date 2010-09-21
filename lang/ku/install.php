@@ -118,7 +118,9 @@
 	$lang['NO']									= 'نه‌خێر';
 	$lang['PASS_X_CHARS']						= 'تکایه‌  %d پیت بنوسه‌';
 	$lang['PASS_X_TYPE']						= array('لاوازه‌', 'ئاسای', 'مامناوه‌ند', 'پته‌و', 'زۆر پته‌و');
-	
+	$lang['KLEEJA_TEAM_MSG_NAME']				= 'Kleeja Development Team';
+	$lang['KLEEJA_TEAM_MSG_TEXT']				= "Thank you for choosing Kleeja to empower your website,\n We really hope you enjoy the unique experince that Kleeja offers to you to control the files and images.\nDon't forget to visit http://kleeja.com for support, styles and plugins ..";
+
 	//PLUGINS
 	$lang['PLUGINS_KLEEJA']						= 'زیادکاریه‌کانی کلیجا .. !';
 	$lang['PLUGINS_BUILT_IN']					= 'ئه‌م زیادکاریانه‌ خۆکاری له‌گه‌ڵ کلیجادا دێن , گه‌ر ناته‌وێت به‌کاری به‌ریت ته‌نها نیشانه‌ی سه‌رچوارگۆشه‌ بچوکه‌که‌ لابه‌ره‌ , به‌ڵام ئامۆژگاریت ده‌که‌ین که‌ ئه‌و کاره‌ نه‌که‌یت چونکه‌ ئه‌م زیادکاریانه‌ لێیان کۆڵدراوه‌ته‌و و گرنگه‌ بۆ کارکردنی کلیجا به‌ باشی  ,, بۆ ده‌ستکه‌وتنی زیادکاری زیاتر سه‌ردانی ماڵپه‌ڕ بکه‌ <a style="color:red" target="_blank" href="http://www.kleeja.com/plugins/">kleeja.com !</a>';

@@ -281,24 +281,30 @@ foreach($adm_extensions as $m)
 
 
 //is mini menu is enabled !
+$GET_VARS_R	= empty($_GET) ? array() : $_GET;
+$GET_VARS_V = array();
+foreach ($GET_VARS_R as $key => $val)
+{
+	$GET_VARS_V[] = htmlspecialchars($key) . '=' . htmlspecialchars($val);
+}
+
+$E_MENU_USERS = @unserialize($config['expand_menu']);
+$MINI_MENU = false;
+if(in_array($usrcp->id(), array_keys($E_MENU_USERS)))
+{
+	$MINI_MENU = (int) $E_MENU_USERS[$usrcp->id()];
+}
+
 if(isset($_GET['expand_menu']))
 {
-	update_config('expand_menu', intval($_GET['expand_menu']));
-	$config['expand_menu'] = intval($_GET['expand_menu']);
+	#bedro says use cookies, but i don't think it's good idea ..
+	$E_MENU_USERS[$usrcp->id()] = $MINI_MENU = intval($_GET['expand_menu']);
+	update_config('expand_menu', serialize($E_MENU_USERS) , false);	
 }
 
+$link_expand_menu = basename(ADMIN_PATH) . '?cp=' . $go_to  . '&amp;' . implode('&amp;', $GET_VARS_V) . '&amp;expand_menu=' . ($MINI_MENU ? 0 : 1);
 
-if((int) $config['expand_menu'] == 0 || empty($config['expand_menu']))
-{
-	$MINI_MENU = false;
-	$link_expand_menu = basename(ADMIN_PATH) . '?cp=' . $go_to . '&amp;expand_menu=1';
-}
-else
-{
-	$MINI_MENU = true;
-	$link_expand_menu = basename(ADMIN_PATH) . '?cp=' . $go_to . '&amp;expand_menu=0';
-}
-
+unset($GET_VARS_R, $GET_VARS_V, $E_MENU_USERS);
 
 
 //get it 

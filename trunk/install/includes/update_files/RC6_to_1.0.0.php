@@ -28,6 +28,7 @@ if(defined('DEV_STAGE'))
 	$update_sqls['c_dynamic'] = "UPDATE `{$dbprefix}config` SET `dynamic` = '1' WHERE `name` = 'most_user_online_ever'";
 	$update_sqls['cc_dynamic'] = "UPDATE `{$dbprefix}config` SET `dynamic` = '1' WHERE `name` = 'klj_clean_files_from'";
 	$update_sqls['ccc_dynamic'] = "UPDATE `{$dbprefix}config` SET `dynamic` = '1' WHERE `name` = 'last_online_time_update'";
+	$update_sqls['expand_menu_dynamic'] = "UPDATE `{$dbprefix}config` SET `dynamic` = '1' WHERE `name` = 'expand_menu'";
 }
 
 
@@ -86,7 +87,7 @@ $update_sqls['configs31'] = "UPDATE `{$dbprefix}config` SET `option` = '<input t
 $update_sqls['config_insert44'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`, `type`) VALUES ('usersectoupload', '10', '<input type=\"text\" id=\"usersectoupload\" name=\"usersectoupload\" value=\"{con.usersectoupload}\" size=\"10\" />', 44, 'upload')";
 
 $update_sqls['config_insert45'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`, `type`) VALUES ('guestsectoupload', '30', '<input type=\"text\" id=\"guestsectoupload\" name=\"guestsectoupload\" value=\"{con.guestsectoupload}\" size=\"10\" />', 44, 'upload')";
-$update_sqls['config_insert46'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('expand_menu', '0', '', 0)";
+$update_sqls['config_insert46'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`, `dynamic`) VALUES ('expand_menu', '0', '', 0, 1)";
 $update_sqls['config_insert47'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`, `type`) VALUES ('filesnum_show', '0', '<label>{lang.YES}<input type=\"radio\" id=\"filesnum_show\" name=\"filesnum_show\" value=\"1\"  <IF NAME=\"con.filesnum_show==1\"> checked=\"checked\"</IF> /></label>\r\n <label>{lang.NO}<input type=\"radio\" id=\"filesnum_show\" name=\"filesnum_show\" value=\"0\"  <IF NAME=\"con.filesnum_show==0\"> checked=\"checked\"</IF> /></label>', 22, 'upload')";
 $update_sqls['config_insert48'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`) VALUES ('ftp_info', '', '', 0)";
 

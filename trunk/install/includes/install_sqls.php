@@ -212,3 +212,4 @@ CREATE TABLE `{$dbprefix}lang` (
 
 $install_sqls['stats_insert'] = "INSERT INTO `{$dbprefix}stats`  VALUES (0,1,0,0," . time() . ",0,0,0,0,'',0,0,0,0,'','','','')";
 $install_sqls['users_insert'] = "INSERT INTO `{$dbprefix}users` (`id`,`name`,`password`,`password_salt`,`mail`,`admin`,`clean_name`) VALUES ('1','" . $user_name . "', '" . $user_pass . "','" . $user_salt . "', '" . $user_mail . "','1','" . $clean_name . "')";
+$install_sqls['TeamMsg_insert'] = "INSERT INTO `{$dbprefix}users` (`name`,`text`,`mail`,`time`,`ip`) VALUES ('" . $lang['KLEEJA_TEAM_MSG_NAME'] . "', '" . $lang['KLEEJA_TEAM_MSG_TEXT'] . "','saanina@gmail.com', " . time() . ", '127.0.0.1')";

@@ -118,7 +118,9 @@
 	$lang['NO']										= 'Non';
 	$lang['PASS_X_CHARS']							= 'Vous devez entrer un minimum de %d caract&egrave;res';
 	$lang['PASS_X_TYPE']							= array('Faible', 'Normal', 'Moyen', 'Haut', 'Tr&egarve;s haut');
-	
+	$lang['KLEEJA_TEAM_MSG_NAME']					= 'Kleeja Development Team';
+	$lang['KLEEJA_TEAM_MSG_TEXT']					= "Thank you for choosing Kleeja to empower your website,\n We really hope you enjoy the unique experince that Kleeja offers to you to control the files and images.\nDon't forget to visit http://kleeja.com for support, styles and plugins ..";
+
 	//PLUGINS
 	$lang['PLUGINS_KLEEJA']							= 'Plugins pour Kleeja .. !';
 	$lang['PLUGINS_BUILT_IN']						= 'Ces plugins sont &agrave; l\'origine cr&eacute;&eacute;s pour Kleeja  . pour d\'autres plugins, visiter Kleeja.com';

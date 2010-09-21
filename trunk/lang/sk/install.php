@@ -122,7 +122,9 @@
 	$lang['NO']										= 'Nie';
 	$lang['PASS_X_CHARS']							= 'Musíte zadať aspoň %d znakov';
 	$lang['PASS_X_TYPE']							= array('Slabé', 'Normálne', 'Stredne silné', 'Silné', 'Veľmi silné');
-	
+	$lang['KLEEJA_TEAM_MSG_NAME']					= 'Kleeja Development Team';
+	$lang['KLEEJA_TEAM_MSG_TEXT']					= "Thank you for choosing Kleeja to empower your website,\n We really hope you enjoy the unique experince that Kleeja offers to you to control the files and images.\nDon't forget to visit http://kleeja.com for support, styles and plugins ..";
+
 	//PLUGINS
 	$lang['PLUGINS_KLEEJA']							= 'Rozšírenia pre Kleeja..';
 	$lang['PLUGINS_BUILT_IN']						= 'Tieto rozšírenia boli vyrobene v originálnom systéme Kleeja. Pre viac rozšírení navštívte oficiálnu web stránku kleeja.com';

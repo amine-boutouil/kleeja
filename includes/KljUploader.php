@@ -150,113 +150,89 @@ class KljUploader
 		}	
 	}
 
-	/*
-		Function createthumb($name,$filename,$new_w,$new_h)
-		example : createthumb('pics/apple.jpg','thumbs/tn_apple.jpg',100,100);
-		creates a resized image
-		source :http://icant.co.uk/articles/phpthumbnails/
+	#return good ratio for thumb image
+	#need imporovment, now only depend on new_h
+	function get_scale_thumb($old_x, $old_y, $new_w, $new_h, $ext = '')
+	{
+		return array(round($old_x * $new_h / $old_y), $new_h);
+	}
+	
+	/**
+	* Creates a resized image
+	* @example createthumb('pics/apple.jpg','thumbs/tn_apple.jpg',100,100);
+	* @url http://icant.co.uk/articles/phpthumbnails/
 	*/
 	function createthumb($name, $ext, $filename, $new_w, $new_h)
 	{
 		($hook = kleeja_run_hook('createthumb_func_kljuploader')) ? eval($hook) : null; //run hook	
-		
+
 		if(!file_exists($name))
 		{
 			return;
 		}
-		
-		if (strpos($ext, 'jp') !== false)
-		{
-			$src_img = @imagecreatefromjpeg($name);
-		}
-		elseif (strpos($ext, 'png') !== false)
-		{
-			$src_img = @imagecreatefrompng($name);
-		}
-		#FIXME: imporove it
-		elseif (strpos($ext, 'gif') !== false)
-		{
-			//is ImageMagic exists ?
-			if(function_exists('phpversion') && phpversion('imagick'))
-			{
-				$im = new Imagick($name);
-				$i = 0;
-				foreach ($im as $frame)
-				{
-					$frame->thumbnailImage($new_w, 0);
-					$frame->setImagePage($new_w, 0, 0, 0);
-					#if($i > 20)
-					#{
-					#	break;
-					#}
-					#$i++;
-				}
-				$im->writeImages($filename, true);
-				return;
-			}
 
-			$src_img = @imagecreatefromgif($name);
-		}
-		elseif(strpos($ext, 'bmp') !== false)
+		if(function_exists('phpversion') && phpversion('imagick'))
 		{
-			$src_img = imagecreatefrombmp($name);
+			$this->createthumb_imagick($name, $ext, $filename, $new_w, $new_h);
+			return;
 		}
-		else
+
+		$function_create = 'imagecreatefrom' . str_replace('jpg', 'jpeg', $ext);
+		if(!function_exists($function_create))
 		{
 			return;
 		}
 
-		$old_x	= @imageSX($src_img);
-		$old_y	= @imageSY($src_img);
-
-		if(strpos($ext, 'bmp') !== false)
-		{
-			$thumb_w = round($old_x * $new_h / $old_y); 
-			$thumb_h = $new_h;
-		}
-		else
-		{
-			if ($old_x > $old_y)
-			{
-				$thumb_w=$new_w;
-				$thumb_h=$old_y*($new_h/$old_x);
-			}
-			elseif ($old_x < $old_y)
-			{
-				$thumb_w=$old_x*($new_w/$old_y);
-				$thumb_h=$new_h;
-			}
-			elseif ($old_x == $old_y)
-			{
-				$thumb_w=$new_w;
-				$thumb_h=$new_h;
-			}
-		}//endelse
+		$src_img = @$function_create($name);
+		$old_x = imageSX($src_img);
+		$old_y = imageSY($src_img);
+		list($thumb_w, $thumb_h) = $this->get_scale_thumb($old_x, $old_y, $new_w, $new_h, $ext);
 
 		$dst_img = @ImageCreateTrueColor($thumb_w, $thumb_h);
 		@imagecopyresampled($dst_img, $src_img, 0, 0, 0, 0, $thumb_w, $thumb_h, $old_x, $old_y);
 
-		if (strpos($ext, 'jp') !== false)
+		$function = 'image' . str_replace('jpg', 'jpeg', $ext);
+		if(function_exists($function))
 		{
-			@imagejpeg($dst_img, $filename);
-		}
-		elseif (strpos($ext, 'png') !== false)
-		{
-			@imagepng($dst_img, $filename);
-		}
-		elseif (strpos($ext, 'gif') !== false)
-		{
-			@imagegif($dst_img, $filename);
-		}
-		elseif (strpos($ext, 'bmp') !== false)
-		{
-			@imagebmp($dst_img, $filename);
+			@$function($dst_img, $filename);
 		}
 
 		@imagedestroy($dst_img);
 		@imagedestroy($src_img);
 	}
 
+
+	function createthumb_imagick($name, $ext, $filename, $new_w, $new_h)
+	{
+		$im = new Imagick($name);
+
+		$old_x = $im->getImageWidth();
+        $old_y = $im->getImageHeight();
+		list($thumb_w, $thumb_h) = $this->get_scale_thumb($old_x, $old_y, $new_w, $new_h, $ext);
+
+		if($ext == 'gif')
+		{
+			$i = 0;
+			foreach ($im as $frame)
+			{
+				$frame->thumbnailImage($thumb_w, $thumb_h);
+				$frame->setImagePage($thumb_w, $thumb_h, 0, 0);
+				#if($i > 20)
+				#{
+				#	break;
+				#}
+				#$i++;
+			}
+		}
+		else
+		{
+			$im->thumbnailImage($thumb_w, $thumb_h);
+		}
+
+		$im->writeImages($filename, ($ext == 'gif'));
+
+		return;
+	}
 
 //
 // prorcess

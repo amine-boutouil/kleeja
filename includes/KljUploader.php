@@ -233,10 +233,6 @@ class KljUploader
 			}
 		}//endelse
 		
-		$thumb_w = round($old_x * $new_h / $old_y) ; 
-		$thumb_h = $new_h;
-
-		
 
 		$dst_img = @ImageCreateTrueColor($thumb_w, $thumb_h);
 		@imagecopyresampled($dst_img, $src_img, 0, 0, 0, 0, $thumb_w, $thumb_h, $old_x, $old_y);

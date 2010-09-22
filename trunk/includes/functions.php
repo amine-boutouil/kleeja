@@ -558,7 +558,7 @@ function kleeja_check_mime ($mime, $group_id, $file_path)
 	//another check
 	if($return == true)
 	{
-		if(@filesize($file_path) > 4*(1000*1024))
+		if(@kleeja_filesize($file_path) > 4*(1000*1024))
 		{
 			return true;
 		}
@@ -696,7 +696,8 @@ function get_mime_for_header($ext)
 		"bas" => "text/plain",
 		"bcpio" => "application/x-bcpio",
 		"bin" => "application/octet-stream",
-		"bmp" => "image/bmp",
+		"bmp" => "image/bmp", # this is not a good mime, but it work anyway
+		//"bmp"	=> "image/x-ms-bmp", # @see bugs.php.net/47359
 		"c" => "text/plain",
 		"cat" => "application/vnd.ms-pkiseccat",
 		"cdf" => "application/x-cdf",

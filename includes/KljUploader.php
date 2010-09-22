@@ -66,6 +66,10 @@ class KljUploader
 		{
 			$src_img = @imagecreatefromgif($name);
 		}
+		elseif(strpos($ext, 'bmp') !== false)
+		{
+			$src_img = imagecreatefrombmp($name);
+		}
 		else
 		{
 			return;
@@ -104,6 +108,10 @@ class KljUploader
 			elseif (strpos($ext, 'gif') !== false)
 			{
 				@imagegif($src_img, $name);
+			}
+			elseif (strpos($ext, 'bmp') !== false)
+			{
+				@imagebmp($src_img, $name);
 			}
 		}# < 150
 		else 
@@ -189,6 +197,10 @@ class KljUploader
 
 			$src_img = @imagecreatefromgif($name);
 		}
+		elseif(strpos($ext, 'bmp') !== false)
+		{
+			$src_img = imagecreatefrombmp($name);
+		}
 		else
 		{
 			return;
@@ -197,22 +209,35 @@ class KljUploader
 		$old_x	= @imageSX($src_img);
 		$old_y	= @imageSY($src_img);
 
-		if ($old_x > $old_y)
+		if(strpos($ext, 'bmp') !== false)
 		{
-			$thumb_w=$new_w;
-			$thumb_h=$old_y*($new_h/$old_x);
+			$thumb_w = round($old_x * $new_h / $old_y); 
+			$thumb_h = $new_h;
 		}
-		elseif ($old_x < $old_y)
+		else
 		{
-			$thumb_w=$old_x*($new_w/$old_y);
-			$thumb_h=$new_h;
-		}
-		elseif ($old_x == $old_y)
-		{
-			$thumb_w=$new_w;
-			$thumb_h=$new_h;
-		}
+			if ($old_x > $old_y)
+			{
+				$thumb_w=$new_w;
+				$thumb_h=$old_y*($new_h/$old_x);
+			}
+			elseif ($old_x < $old_y)
+			{
+				$thumb_w=$old_x*($new_w/$old_y);
+				$thumb_h=$new_h;
+			}
+			elseif ($old_x == $old_y)
+			{
+				$thumb_w=$new_w;
+				$thumb_h=$new_h;
+			}
+		}//endelse
 		
+		$thumb_w = round($old_x * $new_h / $old_y) ; 
+		$thumb_h = $new_h;
+
+		
+
 		$dst_img = @ImageCreateTrueColor($thumb_w, $thumb_h);
 		@imagecopyresampled($dst_img, $src_img, 0, 0, 0, 0, $thumb_w, $thumb_h, $old_x, $old_y);
 
@@ -227,6 +252,10 @@ class KljUploader
 		elseif (strpos($ext, 'gif') !== false)
 		{
 			@imagegif($dst_img, $filename);
+		}
+		elseif (strpos($ext, 'bmp') !== false)
+		{
+			@imagebmp($dst_img, $filename);
 		}
 
 		@imagedestroy($dst_img);
@@ -697,11 +726,11 @@ function process ()
 
 
 					//show imgs
-					if (in_array(strtolower($this->typet), array('png','gif','jpg','jpeg','tif','tiff')))
+					if (in_array(strtolower($this->typet), array('png','gif','jpg','jpeg','tif','tiff', 'bmp')))
 					{
 						//make thumbs
 						$img_html_result = '';
-						if( ($config['thumbs_imgs'] != 0) && in_array(strtolower($this->typet), array('png','jpg','jpeg','gif')))
+						if( ($config['thumbs_imgs'] != 0) && in_array(strtolower($this->typet), array('png','jpg','jpeg','gif', 'bmp')))
 						{
 							list($thmb_dim_w, $thmb_dim_h) = @explode('*', $config['thmb_dims']);
 							$this->createthumb($folderee . '/' . $filname, strtolower($this->typet), $folderee . '/thumbs/' . $filname, $thmb_dim_w, $thmb_dim_h);
@@ -715,7 +744,7 @@ function process ()
 						}
 						
 						//write on image
-						if( ($config['write_imgs'] != 0) && in_array(strtolower($this->typet), array('gif', 'png', 'jpg', 'jpeg')))
+						if( ($config['write_imgs'] != 0) && in_array(strtolower($this->typet), array('gif', 'png', 'jpg', 'jpeg', 'bmp')))
 						{
 							$this->watermark($folderee . "/" . $filname,strtolower($this->typet));
 						}

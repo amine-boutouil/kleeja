@@ -316,7 +316,7 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 		big_error('----', 'Error - can not open file.');
 	}
 
-	if(!($size = @filesize($path_file)))
+	if(!($size = @kleeja_filesize($path_file)))
 	{
 		$size = $d_size;
 	}

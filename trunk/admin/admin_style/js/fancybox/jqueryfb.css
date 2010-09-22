@@ -3,31 +3,21 @@
 
 /* thumbnail Table */
 .xthumbs {width:100%;border:none;padding:0;border:none !important;}
-.xthumbs  tr {background-color:transparent;border:none !important;margin:0 0 3px 0 !important;}
+.xthumbs  tr {background-color:transparent;background-image:none;border:none !important;margin:0 0 3px 0 !important;}
 .xthumbs td {width:110px !important;height: 110px !important;cursor: pointer;padding:5px !important;border:none !important;z-index:600;}
-.bgm,.bgm img,.failerror{width:90px !important;height:90px !important;padding:0px !important;z-index:700;}
-.bgm img,.failerror{border:5px solid rgba(51,51,51,.2); background: #F1EEE0;}
-.bgm img:hover{border:5px solid rgba(233,150,122,.4);}
-.spinner {position: absolute;top:0;left:0; width:90px !important;height:90px !important; background: url(../../images/ajax-loader.gif) no-repeat center center; z-index: 999; }
+.bgm,.bgm img,.failerror{width:110px !important;height:110px !important;padding:0px !important;z-index:700;}
+
+.spinner {position: absolute;top:0;left:0; width:110px !important;height:110px !important; background: url(../../images/ajax-loader.gif) no-repeat center center; z-index: 900; }
 .failerror  {background: url(failerror.jpg) no-repeat center center !important;}
-.failerror:hover,.aux img .failerror:hover{border:none !important;background-image:none !important;background-color:transparent !important;}
+.failerror:hover{border:none !important;background-image:none !important;background-color:transparent !important;}
 
-.imgcb {position: relative;bottom:2px;left:2px;z-index:1000 !important;}
+.imgcb {position: relative;bottom:2px;left:2px;z-index:999 !important;}
 
-.thumb-not-loaded-aborted{background: url(failerror.jpg) no-repeat 50% 50%;}
+.osilver,.undefined{border:none !important;background-image:none !important;background-color:transparent !important;}
+.osilver:hover,.undefined:hover{border:none !important;background-image:none !important;background-color:transparent !important;}
+.ored img,.ored:hover img {background:none;border:5px solid rgba(165,42,42,.4);}
 
-.ored img,.ored:hover img {background:#D88B8B !important;border:5px solid rgba(165,42,42,.4);}
-
-.aux {position:absolute;display: none;top:0;left:0;}
-
-.aux img:hover {
-	background: #fff;
-	filter:alpha(opacity=50);
-	opacity:.50;
-	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-
-}
-
+.mask {position:absolute;top:0;left:0;}
 
 
 /*  toolTip image */

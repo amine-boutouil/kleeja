@@ -26,6 +26,7 @@
 <IF NAME="MINI_MENU">
 <style type="text/css">#divmiddle,#boxs{width:75%;}.ribbon{width:749px}.ribbon .tab{width:696px}</style>
 </IF>
+<style type="text/css" media="screen">@import url("{STYLE_PATH_ADMIN}js/fancybox/jqueryfb.css"); </style>
 
 <!--  javascript coding  -->
 <script type="text/javascript">
@@ -35,11 +36,21 @@ var STYLE_PATH_ADMIN = '{STYLE_PATH_ADMIN}';var go_to = '{go_to}';
 </script>
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.js"></script>
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.kleeja.js"></script>
+<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/fancybox/fancybox.js"></script>
 <script type="text/javascript">
 <!--
-function get_kleeja_link(URL, ID)
+function get_kleeja_link(URL, ID, confirm)
 {
-	$("#sign_ajax_error").css('display', 'none'); // .hide() doesn't work in Safari when the element isn't on the DOM already
+	$("#sign_ajax_error").css('display', 'none');
+	
+	if(confirm)
+	{
+		if(!confirm_from())
+		{
+			return;
+		}
+	}
+
 	$("#sign_ajax").show();
 
 	$.ajax({
@@ -47,11 +58,11 @@ function get_kleeja_link(URL, ID)
 	  cache: false,
 	  success: function(html){
 		$(ID).html(html);
-		$("#sign_ajax").css('display', 'none'); // .hide() doesn't work in Safari when the element isn't on the DOM already
+		$("#sign_ajax").css('display', 'none');
 	  },
 	  error : function(html){
 		  //$(ID).html('----');
-		  $("#sign_ajax").css('display', 'none'); // .hide() doesn't work in Safari when the element isn't on the DOM already
+		  $("#sign_ajax").css('display', 'none');
 		  $("#sign_ajax_error").show();
 		}
 	});
@@ -105,7 +116,7 @@ function get_kleeja_link(URL, ID)
 				<div class="MainMenuBox2">
 					<a href="{link_expand_menu}" class="expand_thumbnail"><img src="{STYLE_PATH_ADMIN}images/spacer.gif" alt="{lang.RETURN_HOME}" /></a>
 					<LOOP NAME="adm_extensions_menu">	
-						<div class="({{current}}?link_menu_thumbnail link_current_thumbnail:link_menu_thumbnail)"><p><a class="seTooltip" title="{{title}}" href="javascript:void(0);" onclick="javascript:get_kleeja_link('{{link}}', '#main_container');" <IF LOOP="confirm"> onclick="javascript:return confirm_from();"</IF>><img src="{{icon_mini}}" alt="{{title}}" style="margin:0 8px;vertical-align:middle;" /></a>{{kbubble}}</p></div>
+						<div class="({{current}}?link_menu_thumbnail link_current_thumbnail:link_menu_thumbnail)"><p><a class="seTooltip" title="{{title}}" href="{{link}}" onclick="javascript:get_kleeja_link('{{link}}', '#main_container'<IF LOOP="confirm">, true</IF>); return false;"><img src="{{icon_mini}}" alt="{{title}}" style="margin:0 8px;vertical-align:middle;" /></a>{{kbubble}}</p></div>
 					</LOOP>
 					<div class="clr"></div>
 				</div>

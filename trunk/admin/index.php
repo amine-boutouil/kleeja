@@ -120,11 +120,15 @@ if(
 	{
 		$err = true;
 	}
-	
+
+	if(isset($_GET['_ajax_']))
+	{
+		echo_ajax(999, '');
+	}
+
 	//prevent indexing this page by bots
 	header('HTTP/1.1 503 Service Temporarily Unavailable');
 	echo $tpl->display("admin_login");
-
 	$SQL->close();
 	exit;
 }#end login
@@ -138,6 +142,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && defined('STOP_CSRF'))
 	if ($t_reff[2] != $t_host[0])
 	{
 		$usrcp->logout_cp();
+		if(isset($_GET['_ajax_']))
+		{
+			echo_ajax(999, '');
+		}
+
 		redirect($config['siteurl']);
 		$SQL->close();
 		exit;
@@ -196,6 +205,11 @@ if(($dh = @opendir($path_adm)) !== false)
 //no extensions ?
 if(!$adm_extensions || !is_array($adm_extensions))
 {
+	if(isset($_GET['_ajax_']))
+	{
+		echo_ajax(888, 'Error while loading admin extensions!.');
+	}
+
 	big_error('No Extensions', 'Error while loading admin extensions !');
 }
 
@@ -317,7 +331,12 @@ if (file_exists($path_adm . '/' . $go_to . '.php'))
 }
 else
 {
-	big_error('In Loading !', 'Error while loading : ' . $go_to . '');
+	if(isset($_GET['_ajax_']))
+	{
+		echo_ajax(888, 'Error while loading : ' . $go_to);
+	}
+
+	big_error('In Loading !', 'Error while loading : ' . $go_to);
 }
 
 ($hook = kleeja_run_hook('end_admin_page')) ? eval($hook) : null; //run hook 
@@ -338,7 +357,14 @@ if(!isset($_GET['_ajax_']))
 }
 
 //body
-echo $tpl->display($stylee);
+if(!isset($_GET['_ajax_']))
+{
+	echo $tpl->display($stylee);
+}
+else
+{
+	echo_ajax(1, $tpl->display($stylee));
+}
 
 //footer
 if(!isset($_GET['_ajax_']))

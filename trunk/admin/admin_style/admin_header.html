@@ -39,11 +39,11 @@ var STYLE_PATH_ADMIN = '{STYLE_PATH_ADMIN}';var go_to = '{go_to}';
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}js/fancybox/fancybox.js"></script>
 <script type="text/javascript">
 <!--
-function get_kleeja_link(URL, ID, confirm)
+function get_kleeja_link(URL, ID, p)
 {
 	$("#sign_ajax_error").css('display', 'none');
-	
-	if(confirm)
+
+	if(p['confirm'])
 	{
 		if(!confirm_from())
 		{
@@ -59,6 +59,11 @@ function get_kleeja_link(URL, ID, confirm)
 	  success: function(html){
 		$(ID).html(html);
 		$("#sign_ajax").css('display', 'none');
+		if(p['current_id'])
+		{
+			$('.' + p['current_class']).removeClass(p['current_class']);
+			$('#' + p['current_id']).addClass(p['current_class']);
+		}
 	  },
 	  error : function(html){
 		  //$(ID).html('----');
@@ -116,7 +121,7 @@ function get_kleeja_link(URL, ID, confirm)
 				<div class="MainMenuBox2">
 					<a href="{link_expand_menu}" class="expand_thumbnail"><img src="{STYLE_PATH_ADMIN}images/spacer.gif" alt="{lang.RETURN_HOME}" /></a>
 					<LOOP NAME="adm_extensions_menu">	
-						<div class="({{current}}?link_menu_thumbnail link_current_thumbnail:link_menu_thumbnail)"><p><a class="seTooltip" title="{{title}}" href="{{link}}" onclick="javascript:get_kleeja_link('{{link}}', '#main_container'<IF LOOP="confirm">, true</IF>); return false;"><img src="{{icon_mini}}" alt="{{title}}" style="margin:0 8px;vertical-align:middle;" /></a>{{kbubble}}</p></div>
+						<div class="({{current}}?link_menu_thumbnail link_current_thumbnail:link_menu_thumbnail)" id="c_{{goto}}"><p><a class="seTooltip" title="{{title}}" href="{{link}}" onclick="javascript:get_kleeja_link('{{link}}', '#main_container', {'current_id':'c_{{goto}}', 'current_class':'link_current_thumbnail'<IF LOOP="confirm">, 'confirm':true</IF>}); return false;"><img src="{{icon_mini}}" alt="{{title}}" style="margin:0 8px;vertical-align:middle;" /></a>{{kbubble}}</p></div>
 					</LOOP>
 					<div class="clr"></div>
 				</div>
@@ -128,7 +133,7 @@ function get_kleeja_link(URL, ID, confirm)
 				<div class="MainMenuBox2">
 					<a href="{link_expand_menu}" class="expand_thumbnail2"><img src="{STYLE_PATH_ADMIN}images/spacer.gif" alt="{lang.RETURN_HOME}" /></a>
 					<LOOP NAME="adm_extensions_menu">	
-						<div class="({{current}}?link_menu link_current:link_menu)"><p><a title="{{title}}" href="{{link}}" onclick="javascript:get_kleeja_link(this.href, '#main_container'<IF LOOP="confirm">, true</IF>); return false;"><img src="{{icon}}" alt="{{title}}" />{{kbubble}}<span>{{lang}}</span></a></p></div>
+						<div class="({{current}}?link_menu link_current:link_menu)" id="c_{{goto}}"><p><a title="{{title}}" href="{{link}}" onclick="javascript:get_kleeja_link('{{link}}', '#main_container', {'current_id':'c_{{goto}}', 'current_class':'link_current'<IF LOOP="confirm">, 'confirm':true</IF>}); return false;"><img src="{{icon}}" alt="{{title}}" />{{kbubble}}<span>{{lang}}</span></a></p></div>
 					</LOOP>
 					<div class="clr"></div>
 				</div>

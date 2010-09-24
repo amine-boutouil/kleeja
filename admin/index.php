@@ -270,6 +270,7 @@ foreach($adm_extensions as $m)
 										'link'		=> './' . basename(ADMIN_PATH) . '?cp=' . ($m == 'configs' ? 'options' : $s) . (@in_array($m, $ext_formkey) ? '&amp;' . $GET_FORM_KEY_GLOBAL : ''),
 										'confirm'	=> (@in_array($m, $ext_confirm)) ? true : false,
 										'current'	=> ($s == $go_to) ? true : false,
+										'goto'		=> $s,
 										'kbubble'	=> in_array($m, array_keys($kbubbles)) ? '<span class="kbubbles">' . $kbubbles[$m] . '</span>' : ''
 									);
 

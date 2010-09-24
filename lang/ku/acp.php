@@ -13,4 +13,7 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, array(
 
+	# ?
+	'LOADING'					=> 'Loading',
+	'ERROR_AJAX'				=> 'There is an error, try again!.',
 ));

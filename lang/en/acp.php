@@ -286,5 +286,6 @@ $lang = array_merge($lang, array(
 	'PLUGIN_DELETED_ZIPPED'		=> 'The plugin has been deleted, to complete the deletion %1$sdownload%2$s the modified files and replace them with the current files in Kleeja manually.', 
 	'PLUGINS_CHANGES_FILES'		=> 'Modified files as a result of plugin installation', 
 	'PLUGINS_CHANGES_FILES_EXP'	=> 'These are compressed files that contain the modified files that were changed for some plugins, you need to download them from here and replace them. you can remove the zip files when done.',
-
+	'LOADING'					=> 'Loading',
+	'ERROR_AJAX'				=> 'There is an error, try again!.',
 ));

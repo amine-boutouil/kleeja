@@ -30,13 +30,49 @@
 <!--  javascript coding  -->
 <script type="text/javascript">
 <!--
-var STYLE_PATH_ADMIN = '{STYLE_PATH_ADMIN}';var go_to = '{go_to}';var GET_FORM_KEY_GLOBAL = '{GET_FORM_KEY_GLOBAL}';
+var STYLE_PATH_ADMIN = '{STYLE_PATH_ADMIN}';var go_to = '{go_to}';
 //-->
 </script>
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.js"></script>
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.kleeja.js"></script>
+<script type="text/javascript">
+<!--
+function get_kleeja_link(URL, ID)
+{
+	$("#sign_ajax_error").hide();
+	$("#sign_ajax").show();
+
+	$.ajax({
+	  url: URL.replace('&amp;', '&') + '&_ajax_=1',
+	  cache: false,
+	  success: function(html){
+		$(ID).html(html);
+		$("#sign_ajax").hide();
+	  },
+	  error : function(html){
+		  //$(ID).html('----');
+		  $("#sign_ajax").hide();
+		  $("#sign_ajax_error").show();
+		}
+	});
+}
+
+
+//-->
+</script>
 </head>
 <body>
+
+<!-- ajax loading sign -->
+<div id="sign_ajax" style="display:none;background-color: #fff;color: #000;top: 0px;left: 0px;position: fixed; border-right:1px solid #000;border-bottom:1px solid #000;padding:7px;">
+	{lang.LOADING} ...
+	<img src="{STYLE_PATH_ADMIN}images/ajax-loader-small.gif" />
+</div>
+<div id="sign_ajax_error" style="display:none;background-color: #fff;color: red;top: 0px;left: 0px;position: fixed; border-right:1px solid #000;border-bottom:1px solid #000;padding:7px;">
+	{lang.ERROR_AJAX}
+	<img src="{STYLE_PATH_ADMIN}images/del.png" />
+</div>
+<!-- end#ajax loading sign -->
 
 <!-- start wrapper -->
 <div id="wrapper">
@@ -72,28 +108,31 @@ var STYLE_PATH_ADMIN = '{STYLE_PATH_ADMIN}';var go_to = '{go_to}';var GET_FORM_K
 		<!-- start Main Menu right  -->
 		<IF NAME="SHOW_LIST">
 		<IF NAME="MINI_MENU">
-			<div id="MainMenuWrap" class="thumbnail">
+		<div id="MainMenuWrap" class="thumbnail">
 			<div class="MainMenuBox1">
-			<div class="MainMenuBox2">
-				<a href="{link_expand_menu}" class="expand_thumbnail"><img src="{STYLE_PATH_ADMIN}images/spacer.gif" alt="{lang.RETURN_HOME}" /></a>
-				<LOOP NAME="adm_extensions_menu">	
-					<div class="({{current}}?link_menu_thumbnail link_current_thumbnail:link_menu_thumbnail)"><p><a class="seTooltip" title="{{title}}" href="{{link}}" <IF LOOP="confirm"> onclick="javascript:return confirm_from();"</IF>><img src="{{icon_mini}}" alt="{{title}}" style="margin:0 8px;vertical-align:middle;" /></a>{{kbubble}}</p></div>
-				</LOOP>
-				<div class="clr"></div>
+				<div class="MainMenuBox2">
+					<a href="{link_expand_menu}" class="expand_thumbnail"><img src="{STYLE_PATH_ADMIN}images/spacer.gif" alt="{lang.RETURN_HOME}" /></a>
+					<LOOP NAME="adm_extensions_menu">	
+						<div class="({{current}}?link_menu_thumbnail link_current_thumbnail:link_menu_thumbnail)"><p><a class="seTooltip" title="{{title}}" href="javascript:void(0);" onclick="javascript:get_kleeja_link('{{link}}', '#main_container');" <IF LOOP="confirm"> onclick="javascript:return confirm_from();"</IF>><img src="{{icon_mini}}" alt="{{title}}" style="margin:0 8px;vertical-align:middle;" /></a>{{kbubble}}</p></div>
+					</LOOP>
+					<div class="clr"></div>
+				</div>
 			</div>
-			</div>
-			</div>
+		</div>
 		<ELSE>
 		<div id="main_menu">
 			<div class="MainMenuBox1">
-			<div class="MainMenuBox2">
-				<a href="{link_expand_menu}" class="expand_thumbnail2"><img src="{STYLE_PATH_ADMIN}images/spacer.gif" alt="{lang.RETURN_HOME}" /></a>
-				<LOOP NAME="adm_extensions_menu">	
-				<div class="({{current}}?link_menu link_current:link_menu)"><p><a title="{{title}}" href="{{link}}" <IF LOOP="confirm"> onclick="javascript:return confirm_from();"</IF>><img src="{{icon}}" alt="{{title}}" />{{kbubble}}<span>{{lang}}</span></a></p></div>
-				</LOOP>
-				<div class="clr"></div>
+				<div class="MainMenuBox2">
+					<a href="{link_expand_menu}" class="expand_thumbnail2"><img src="{STYLE_PATH_ADMIN}images/spacer.gif" alt="{lang.RETURN_HOME}" /></a>
+					<LOOP NAME="adm_extensions_menu">	
+						<div class="({{current}}?link_menu link_current:link_menu)"><p><a title="{{title}}" href="{{link}}" onclick="javascript:get_kleeja_link(this.href, '#main_container');" <IF LOOP="confirm"> onclick="javascript:return confirm_from();"</IF>><img src="{{icon}}" alt="{{title}}" />{{kbubble}}<span>{{lang}}</span></a></p></div>
+					</LOOP>
+					<div class="clr"></div>
+				</div>
 			</div>
-			</div>
-			</div>
+		</div>
 		</IF>
 		</IF>
+	
+	<!-- MainContainer -->
+	<div id="main_container">

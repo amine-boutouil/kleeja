@@ -781,3 +781,35 @@ function is_browser($b)
 	($hook = kleeja_run_hook('is_browser_func')) ? eval($hook) : null; //run hook
     return $return;
 }
+
+
+/**
+* Converting array to JSON format, nested arrays not supported
+*/
+function generate_json($array)
+{
+	$json = '';
+	$json_escape = array(
+		array("\\", "/", "\n", "\t", "\r", "\b", "\f", '"'),
+		array('\\\\', '\\/', '\\n', '\\t', '\\r', '\\b', '\\f', '\"')
+	);
+
+	foreach($array as $key=>$value)
+	{
+		$json .= ($json != '' ? ', ' : '') . '"' . $key . '":' . 
+				(preg_match('^[0-9]+$', $value) ? $v : '"' . str_replace($json_escape[0], $json_escape[1], $value) . '"');  
+	}
+
+	return '{' . $json . '}';
+}
+
+/**
+* Send an answer for ajax request
+*/
+function echo_ajax($code_number, $content)
+{
+	global $SQL;
+	$SQL->close();
+
+	exit(generate_json(array('code' => $code_number, 'content' => $content)));
+}

@@ -54,21 +54,37 @@ function get_kleeja_link(URL, ID, p)
 	$("#sign_ajax").show();
 
 	$.ajax({
-	  url: URL.replace('&amp;', '&') + '&_ajax_=1',
-	  cache: false,
-	  success: function(html){
-		$(ID).html(html);
-		$("#sign_ajax").css('display', 'none');
-		if(p['current_id'])
-		{
-			$('.' + p['current_class']).removeClass(p['current_class']);
-			$('#' + p['current_id']).addClass(p['current_class']);
-		}
-	  },
-	  error : function(html){
-		  //$(ID).html('----');
-		  $("#sign_ajax").css('display', 'none');
-		  $("#sign_ajax_error").show();
+		url: URL.replace('&amp;', '&') + '&_ajax_=1',
+		cache: false,
+		dataType: 'json',
+		success: function(R){
+			
+			$("#sign_ajax").css('display', 'none');
+			
+			//not login 
+			if(R.code == 999)
+			{
+				location.href = './';
+			}
+			else if(R.code == 888)
+			{
+				alert(R.content);
+			}
+			else
+			{
+				$(ID).html(R.content);
+				
+				if(p['current_id'])
+				{
+					$('.' + p['current_class']).removeClass(p['current_class']);
+					$('#' + p['current_id']).addClass(p['current_class']);
+				}
+			}
+		},
+		error : function(R){
+			//$(ID).html('----');
+			$("#sign_ajax").css('display', 'none');
+			$("#sign_ajax_error").show();
 		}
 	});
 }

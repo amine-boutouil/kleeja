@@ -39,7 +39,7 @@ var STYLE_PATH_ADMIN = '{STYLE_PATH_ADMIN}';var go_to = '{go_to}';
 <!--
 function get_kleeja_link(URL, ID)
 {
-	$("#sign_ajax_error").hide();
+	$("#sign_ajax_error").css('display', 'none'); // .hide() doesn't work in Safari when the element isn't on the DOM already
 	$("#sign_ajax").show();
 
 	$.ajax({
@@ -47,11 +47,11 @@ function get_kleeja_link(URL, ID)
 	  cache: false,
 	  success: function(html){
 		$(ID).html(html);
-		$("#sign_ajax").hide();
+		$("#sign_ajax").css('display', 'none'); // .hide() doesn't work in Safari when the element isn't on the DOM already
 	  },
 	  error : function(html){
 		  //$(ID).html('----');
-		  $("#sign_ajax").hide();
+		  $("#sign_ajax").css('display', 'none'); // .hide() doesn't work in Safari when the element isn't on the DOM already
 		  $("#sign_ajax_error").show();
 		}
 	});
@@ -62,18 +62,10 @@ function get_kleeja_link(URL, ID)
 </script>
 </head>
 <body>
-
-<!-- ajax loading sign -->
-<div id="sign_ajax" style="display:none;background-color: #fff;color: #000;top: 0px;left: 0px;position: fixed; border-right:1px solid #000;border-bottom:1px solid #000;padding:7px;">
-	{lang.LOADING} ...
-	<img src="{STYLE_PATH_ADMIN}images/ajax-loader-small.gif" />
-</div>
-<div id="sign_ajax_error" style="display:none;background-color: #fff;color: red;top: 0px;left: 0px;position: fixed; border-right:1px solid #000;border-bottom:1px solid #000;padding:7px;">
-	{lang.ERROR_AJAX}
-	<img src="{STYLE_PATH_ADMIN}images/del.png" />
-</div>
-<!-- end#ajax loading sign -->
-
+	<!-- ajax loading sign -->
+	<div id="sign_ajax">{lang.LOADING} ...<img src="{STYLE_PATH_ADMIN}images/ajax-loader-small.gif" /></div>
+	<div id="sign_ajax_error">{lang.ERROR_AJAX}<img src="{STYLE_PATH_ADMIN}images/del.png" /></div>
+		
 <!-- start wrapper -->
 <div id="wrapper">
 	<div id="PageWrapper">

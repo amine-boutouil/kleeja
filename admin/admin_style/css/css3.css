@@ -25,7 +25,7 @@
 	/* @Dark gray text shadow ------- */
 	#boxfileuser .public,#Footer .Powered h1 ,.Wuser,span.kbubbles {text-shadow: 0 0 2px #444;}
 	
-	#main_menu .link_menu a:hover{text-shadow: 0 -1px 1px #FED681;}
+
 /* @end */
 
 /*	---------------------------------------
@@ -46,9 +46,7 @@
 	.data_file .filereport {
 	-moz-box-shadow : 0px 0px 4px #FFFFFF;-webkit-box-shadow : 0px 0px 4px #FFFFFF;-khtml-box-shadow : 0px 0px 4px #FFFFFF;box-shadow : 0px 0px 4px #FFFFFF;}
 	
-	/* @Gray Shadow --------------- */	
-	img.bgm  {
-	-moz-box-shadow : 0px 0px 3px #EFDABE;-webkit-box-shadow : 0px 0px 3px #EFDABE;-khtml-box-shadow : 0px 0px 3px#EFDABE;box-shadow : 0px 0px 3px #EFDABE;}
+	
 /* @end */	
 
 /*	---------------------------------------
@@ -66,7 +64,7 @@
 
 	
 	/* @Borders all Corners (5)Pixel ----------- */	
-	#border-table,.box_all, img.bgm {
+	#border-table,.box_all{
 	-moz-border-radius : 5px;-webkit-border-radius : 5px;-khtml-border-radius : 5px; border-radius : 5px;}
 
 	/* @Borders all Corners (10)Pixel ----------- */	

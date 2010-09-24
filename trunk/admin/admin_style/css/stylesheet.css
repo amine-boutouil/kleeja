@@ -86,6 +86,14 @@
 	#divmiddle,#main_menu,#MainMenuWrap,#boxs {margin:10px 15px 0 15px !important;float:right;}
 	#divmiddle,#boxs{width:68%;display:inline;}
 
+	#main_container{position:relative;}
+	#sign_ajax,#sign_ajax_error{
+	position: fixed;top: 45%;left: 45%;padding:10px;
+	background-color: #fff;	color: #000;border:1px solid #ccc;
+	cursor: pointer;overflow: hidden;z-index: 1999;display: none;}
+	#sign_ajax img,#sign_ajax_error img{padding-right:10px;}
+	#sign_ajax_error{color: red;}
+	
 	/* header */
 	#MenuWrapper{height:62px}
 	#MmLeft{ background: url(../images/box/mm_left.png) no-repeat 0 0;float:left;height:62px;width:25px }	
@@ -145,7 +153,7 @@
 	.link_menu_thumbnail,
 	.link_current_thumbnail {float: right;height:82px; line-height:40px; width:82px; margin:0px ;text-align:center;}
 	.link_menu_thumbnail img,.link_current_thumbnail img{text-align:center;padding:2px 0 3px 0;}
-	.link_current_thumbnail {padding-right:10px;}
+	.link_current_thumbnail {}
 	.link_menu_thumbnail p,#menu_thumbnail .link_current_thumbnail p {position: relative;line-height: 100%;}
 	.link_current_thumbnail a  {color:#000;}
 	.link_menu_thumbnail a  {display: block; overflow: hidden;}

@@ -331,12 +331,19 @@ if(empty($stylee))
 
 
 //header
-echo $tpl->display("admin_header");
-	//body
-	echo $tpl->display($stylee);
-//footer
-echo $tpl->display("admin_footer");
+if(!isset($_GET['_ajax_']))
+{
+	echo $tpl->display("admin_header");
+}
 
+//body
+echo $tpl->display($stylee);
+
+//footer
+if(!isset($_GET['_ajax_']))
+{
+	echo $tpl->display("admin_footer");
+}
 //close db
 $SQL->close();
 exit;

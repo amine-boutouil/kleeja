@@ -287,5 +287,6 @@ $lang = array_merge($lang, array(
 	'PLUGIN_DELETED_ZIPPED'		=> 'Rozšírenie bolo vymazané, na dokončenie procesu mazania 1%$sdownload2%$s je potrebné upraviť súbory a nahradiť ich aktuálnymi súbormi v Kleeja ručné.', 
 	'PLUGINS_CHANGES_FILES'		=> 'Modifikované súbory v dôsledku inštalácie rozšírenia.', 
 	'PLUGINS_CHANGES_FILES_EXP'	=> 'Tieto komprimované súbory, ktoré obsahujú upravené súbory, zmenili niektoré rozšírenia. Musíte si ich preto stiahnuť a nahradiť ich. Keď budete hotový môžete odstrániť ZIP súbory.',
-
+	'LOADING'					=> 'Loading',
+	'ERROR_AJAX'				=> 'There is an error, try again!.',
 ));

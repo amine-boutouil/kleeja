@@ -43,6 +43,11 @@ function get_kleeja_link(URL, ID, p)
 {
 	$("#sign_ajax_error").css('display', 'none');
 
+	if(!p)
+	{
+		p = {}
+	}
+
 	if(p['confirm'])
 	{
 		if(!confirm_from())

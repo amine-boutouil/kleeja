@@ -28,9 +28,9 @@
 
 <div class="config_types_list">
 	<LOOP NAME="typesnavi">
-		<div onclick="location.href='{{typelink}}'">
+		<div onclick="javascript:get_kleeja_link('{{typelink}}', '#main_container');">
 			<img src="{{typeicon}}" alt="{{typetitle}}" /><br />
-			<a href="{{typelink}}" title="{{typetitle}}">{{typetitle}}</a>
+			<a href="{{typelink}}" onclick="javascript:get_kleeja_link('{{typelink}}', '#main_container'); return false;" title="{{typetitle}}">{{typetitle}}</a>
 		</div>
 	</LOOP>
 </div>

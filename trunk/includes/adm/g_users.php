@@ -339,7 +339,10 @@ else #num rows
 		
 //pages
 $total_pages 	= $Pager->getTotalPages(); 
-$page_nums 		= $Pager->print_nums(basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . (isset($_GET['search']) ? '&search=' . strip_tags($_GET['search']) : '')); 
+$page_nums 		= $Pager->print_nums(
+								basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . (isset($_GET['search']) ? '&search=' . strip_tags($_GET['search']) : ''),
+								'onclick="javascript:get_kleeja_link($(this).attr(\'href\'), \'#main_container\'); return false;"' 
+							); 
 
 //if not noraml user system 
 $user_not_normal = (int) $config['user_system'] != 1 ?  true : false;

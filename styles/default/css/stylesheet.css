@@ -118,12 +118,24 @@
 	.debug_kleeja fieldset{margin:0 auto;width:80%;}
 	
 	/* group Pagination */
-	.pagination {padding:3px 0;margin:2px 0;color:#ff6500;font-size:80%;width:60%;display:inline;}
-	.pagination a {float:right;font-weight: bold;text-align:center;border: 1px solid #ff9600;margin-left:3px;padding:5px 7px;background:#fff url(../images/pagination.gif) repeat-x bottom left;color: #ff6500;}
-	.pagination a:hover, .pagination span.current {border: 1px solid #ff9600;background-image:none;background-color:#fff;color: #ff6500;}
-	.pagination span.current, .pagination span.three_dots {text-align:center;margin-left:3px;padding:5px 7px;float:right;border: 1px solid #FF9600;}
-	.pagination span.current{background-color:#fff;font-size:120%;font-weight: bold;}
-	.pagination span.three_dots {background:#fff url(../images/pagination.gif) repeat-x bottom left;}
+	#pagination	{ text-align:right; margin:0 0 10px 0; float:right; }
+	a.paginate { display:inline-block;height:23px; padding:0 1px; font-size:80%; font-weight:bold; color:#333;background:url(../images/pagination.png) 0 0 no-repeat; white-space:nowrap; border:none; overflow:visible; cursor:pointer; text-decoration:none; }
+	a.paginate > span {display:block; height:23px; padding:0 10px 0 8px; line-height:23px; background:url(../images/pagination.png) 100% 0 no-repeat; }
+	a.paginate:hover, a.paginate:focus{ color:#fff; text-decoration:none;background-position:0 -90px; }
+	a.paginate:hover > span, a.paginate:focus > span { background-position:100% -90px; }
+	a.dots { background:url(../images/pagination.png) 0 0 no-repeat;}
+	a.dots > span { background-position:100% 0;cursor:default;}
+	a.dots:hover, a.dots:focus{ color:#333;background-position:0 0; }
+	a.dots:hover > span, a.dots:focus > span	{ background-position:100% 0; }
+	a.current { background:url(../images/pagination.png) 0 -90px no-repeat; color:#fff;}
+	a.current > span { background-position:100% -90px;cursor:default;}
+	a.current:hover, a.current:focus{background-position:0 -90px; }
+	a.current:hover > span, a.current:focus > span { background-position:100% -90px;}
+	a.phover { background:url(../images/pagination.png) 0 -150px no-repeat; color:#fff;}
+	a.phover > span { background-position:100% -150px;}
+	a.phover:hover, a.phover:focus { color:#fff; text-decoration:none; background-position:0 -90px; }
+	a.phover:hover > span, a.phover:focus > span { background-position:100% -90px;}
+ 
 	
 	/* xhtml and css */
 	.css_xhtml{margin:0;height:30px;text-align:center;}

@@ -1,4 +1,39 @@
-﻿<!-- start view files temlate  -->
+﻿<script type="text/javascript">
+<!--
+ //Navigate to pages by arrows
+ $(document).keydown(function(e) {
+
+	if (!$('#pagination').length) {
+		return;
+	}
+
+	var current_page = parseInt($('#pagination .current span').html());
+	var is_there_next = $('#pagination .phover').length < 2 && current_page > 1 ? false : true;
+	var current_location = '{action}'.replace(/[&]*page=[0-9]+/i, '').replace(/&&/, '');
+
+	switch(e.keyCode) { 
+		//left, next
+		case 37:
+			if(!is_there_next){
+				return;
+			}
+			get_kleeja_link(current_location + '&page=' + (current_page+1), '#main_container');
+		break;
+		//right, prev
+		case 39:
+			if(current_page <= 1){
+				return;
+			}
+			get_kleeja_link(current_location + '&page=' + (current_page-1), '#main_container');
+		break;
+	}
+});
+
+});
+//-->
+</script>
+
+<!-- start view files temlate  -->
 <div id="divmiddle">
 <div class="file_cp1">
 <form method="post" name="filesform" action="{action}" onsubmit="javascript:return confirm_from();">
@@ -8,7 +43,7 @@
 <div class="box_all">
 
 <!-- title  -->
-<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/menu_icons/files_button.gif" alt="{lang.R_FILES}" />{lang.R_FILES}</h2>
+<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/menu_icons/files_button.gif" alt="{lang.R_FILES}" />{lang.R_FILES} ( {current_page} : {total_pages} )</h2>
 <!-- title  -->
 
 <IF NAME="is_search">

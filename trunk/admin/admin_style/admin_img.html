@@ -42,7 +42,7 @@ jQuery(document).ready(function($){
 
 	var current_page = parseInt($('#pagination .current span').html());
 	var is_there_next = $('#pagination .phover').length < 2 && current_page > 1 ? false : true;
-	var current_location = $(location).attr('href').replace(/[&]*page=[0-9]+/i, '').replace(/&&/, '');
+	var current_location = '{action}'.replace(/[&]*page=[0-9]+/i, '').replace(/&&/, '');
 
 	switch(e.keyCode) { 
 		//left, next
@@ -50,22 +50,14 @@ jQuery(document).ready(function($){
 			if(!is_there_next){
 				return;
 			}
-			location.href = current_location + '&page=' + (current_page+1);
+			get_kleeja_link(current_location + '&page=' + (current_page+1), '#main_container');
 		break;
 		//right, prev
 		case 39:
 			if(current_page <= 1){
 				return;
 			}
-			location.href = current_location + '&page=' + (current_page-1);
-		break;
-		//select all
-		case 83:
-			checkAll(document.imgform, '_del', 'su', 'ored');
-		break;
-		//enter, submit
-		case 13:
-			$('#submit').click();
+			get_kleeja_link(current_location + '&page=' + (current_page-1), '#main_container');
 		break;
 	}
 });
@@ -79,7 +71,7 @@ jQuery(document).ready(function($){
 	<form method="post" action="{action}" name="imgform" onsubmit="javascript:return confirm_from();">
 	
 	<!-- title  -->
-	<p class="titleAll"><a href="./">{lang.R_CPINDEX}</a> <span>&raquo;</span>{lang.R_IMG_CTRL}</p>
+	<p class="titleAll"><a href="./">{lang.R_CPINDEX}</a> <span>&raquo;</span>{lang.R_IMG_CTRL} ( {current_page} : {total_pages} )</p> 
 	
 	<!-- clear  -->
 	<div class="clr"></div>
@@ -129,8 +121,6 @@ jQuery(document).ready(function($){
 	<h3>Keyboards Keys /</h3>
 	->	: {lang.NEXT} <br />
 	<-	: {lang.PREV} <br />
-	S	: {lang.CHECK_ALL} <br />
-	ENTER : {lang.DEL_SELECTED}
 	-->
 
 </div>

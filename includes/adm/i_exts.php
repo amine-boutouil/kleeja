@@ -88,7 +88,7 @@ else #num rows
 
 //pages
 $total_pages 	= $Pager->getTotalPages(); 
-$arr_paging 	= $Pager->print_nums(basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php')); 
+$arr_paging 	= $Pager->print_nums(basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'), 'onclick="javascript:get_kleeja_link($(this).attr(\'href\'), \'#main_container\'); return false;"'); 
 $gr_exts_arr	= ch_g('new_ext_group', 9);
 
 //after submit 

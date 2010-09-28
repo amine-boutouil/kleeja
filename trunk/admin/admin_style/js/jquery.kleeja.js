@@ -28,6 +28,4 @@ jQuery(document).ready(function($){
 		$('.eTooltip').tipsy({gravity: 'e'});
 		$('.seTooltip').tipsy({gravity: 'se'});
 		$('.mmTooltip').tipsy({gravity: 's'});// nw | n | ne | w | e | sw | s | se
-		
-		/*$(".link_menu_thumbnail").fadeTo("slow", 0.7);$(".thumbnail").hover(function(){$(this).fadeTo("slow", 1.0);},function(){$(this).fadeTo("slow", 0.7);});*/
 });

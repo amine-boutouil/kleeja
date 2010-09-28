@@ -1,11 +1,13 @@
-
 <script type="text/javascript">
 <!--
 jQuery(document).ready(function($){
  // TinyTips Plugin
  $('.tTip').tinyTips('title');
  // fancybox plugin
- $("a.fancybox").attr('rel', 'gallery').fancybox({'titleShow': false,'transitionIn'	: 'elastic', 'transitionOut':'elastic','easingIn':'easeOutBack','easingOut':'easeInBack'});
+ $("a.fancybox").fancybox({'titleShow': false,'transitionIn':'elastic', 'transitionOut':'elastic','easingIn':'easeOutBack','easingOut':'easeInBack'});
+ 
+  // custom checkboxes
+ $('input.img_checkbox').checkbox();
 
  // Ajax Loader images
  $('.yaload').each(function(i, elem) {
@@ -13,25 +15,15 @@ jQuery(document).ready(function($){
 	var tthis	= $(this);
 	im.src		= tthis.attr("klj_img");
 	im.onload = function(e) {
-		tthis.find ('.spinner').removeClass('spinner');
+		tthis.removeClass('spinner');
 		tthis.append(im);
 		tthis.css("opacity",1);
-		tthis.hover(function () {$(this).stop().animate({opacity: 0.5}, "slow");},function () {$(this).stop().animate({opacity: 1}, "slow");});
+		tthis.hover(function () {$(this).stop().animate({opacity: 0.7}, "slow");},function () {$(this).stop().animate({opacity: 1}, "slow");});
 	 };
-	im.onerror = function(e) { tthis.find ('.spinner').removeClass('spinner'); tthis.addClass('failerror');};
-	im.onabort = function(e) { tthis.find ('.spinner').removeClass('spinner'); tthis.addClass('failerror');}
+	im.onerror = function(e) { tthis.removeClass('spinner'); tthis.addClass('failerror');};
+	im.onabort = function(e) { tthis.removeClass('spinner'); tthis.addClass('failerror');}
 });
 
-	//Hide Rating Until hover over on thumb
-   /* $('.expand').css("opacity", 0);
-    $('.expand').hover(function() {
-        $(this).find().stop().fadeTo('fast', 0.5).show();
-         }, function() {
-        $(this).find().stop().fadeTo('fast', 0 , function() {
-            $(this).hide() //Hide the image after fade
-        });
-    });*/
-	
 	
  //Navigate to pages by arrows
  $(document).keydown(function(e) {
@@ -87,15 +79,14 @@ jQuery(document).ready(function($){
 	<LOOP NAME="arr">
 	{{tdnum}}
 	<td align="center">
-		<div style="position:relative !important;">
-		<a id="su[{{id}}]" href="{{href}}" class="fancybox tTip" title="<div>{{name}}</div><table><tr><td>{lang.FILEUPS}</td><td>{{ups}}</td></tr><tr><td>{lang.FILESIZE}</td><td>{{size}}</td></tr><tr><td>{lang.FILEDATE}</td><td>{{time}}</td></tr><tr><td>{lang.BY}</td><td>{{user}}</td></tr><tr><td>{lang.IP}</td><td>{{ip}}</td></tr></table>">
-			<div klj_img="{{thumb_link}}" class="bgm yaload spinner">
+		<div style="position:relative !important;" id="su[{{id}}]" class="osilver">
+		<a href="{{href}}" class="fancybox tTip" title="<div>{{name}}</div><table><tr><td>{lang.FILEUPS}</td><td>{{ups}}</td></tr><tr><td>{lang.FILESIZE}</td><td>{{size}}</td></tr><tr><td>{lang.FILEDATE}</td><td>{{time}}</td></tr><tr><td>{lang.BY}</td><td>{{user}}</td></tr><tr><td>{lang.IP}</td><td>{{ip}}</td></tr></table>">
+			<div klj_img="{{thumb_link}}" class="yaload spinner">
 				<span class="mask expand"><img src="{STYLE_PATH_ADMIN}js/fancybox/mask.png" alt="" /></span>
 			</div>
 		</a>
 		</div>
-		<p class="imgcb"><input name="del_{{id}}" type="checkbox" value="{{id}}" onclick="change_color(this,'su[{{id}}]', 'ored');" rel="_del" /></p>
-
+		<span class="pbox"><input name="del_{{id}}" type="checkbox" value="{{id}}" class="img_checkbox" onclick="change_color(this,'su[{{id}}]', 'ored');" rel="_del" /><span>
 	</td>
 	{{tdnum2}}
 	</LOOP>

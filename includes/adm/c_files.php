@@ -327,6 +327,7 @@ else
 //some vars
 $total_pages	= $Pager->getTotalPages(); 
 $page_nums 		= $Pager->print_nums($page_action, 'onclick="javascript:get_kleeja_link($(this).attr(\'href\'), \'#main_container\'); return false;"'); 
+$current_page	= $Pager->currentPage;
 
 //after submit 
 if (isset($_POST['submit']))

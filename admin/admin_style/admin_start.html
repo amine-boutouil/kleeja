@@ -60,7 +60,7 @@ jQuery(document).ready(function($){
 <IF LOOP="msg_type==error">
 <script type="text/javascript">
 <!--
-   $('div#{{id}}').pulse({opacity: [0,2]}, {times: 20 });// i.e. 7 seconds
+   $('div#{{id}}').pulse({opacity: [0,2]}, {times: 5});// i.e. 7 seconds
 //-->
 </script>
 </IF>
@@ -91,7 +91,7 @@ jQuery(document).ready(function($){
 				<td>
 					<p class="text_info"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/Circle_Orange.png" alt=".." />{usernamelang}</p>
 					<IF NAME="stat_last_file!='0'">
-					<p class="text_info"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/Circle_Orange.png" alt=".." />{lang.LSTFLE_ST} : <a href="{last_file_up_url}" onclick="window.open(this.href,'_blank');return false;">{last_file_up}</a></p>
+					<p class="text_info"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/Circle_Orange.png" alt=".." />{lang.LSTFLE_ST} : <a href="{last_file_up_url}"  onclick="window.open(this.href,'_blank');return false;">{last_file_up}</a></p>
 					<ELSE>
 					<p class="text_info"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/Circle_Orange.png" alt=".." />{lang.UNKNOWN}</p>
 					</IF>
@@ -107,7 +107,7 @@ jQuery(document).ready(function($){
 					<p class="button_img">
 							<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/viewpicture.png" alt=".." /> 
 							{lang.IMG_LST_VST_SEARCH} :
-							<select class="show_since_time" tabindex="3" onchange="location.href='{h_lst_imgs}' + (Math.round((new Date()).getTime() / 1000) - $(this).val())">
+							<select class="show_since_time" tabindex="3" onchange="javascript:get_kleeja_link('{h_lst_imgs}' + (Math.round((new Date()).getTime() / 1000) - $(this).val()), '#main_container');">">
 								<option>-----</option>
 								<option value="3600">{lang.HOUR}</option>
 								<option value="18000">{lang.5HOURS}</option>
@@ -120,7 +120,7 @@ jQuery(document).ready(function($){
 					<p class="button_file">
 						<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/old-edit-find.png" alt=".." />
 						{lang.FLS_LST_VST_SEARCH} :
-							<select class="show_since_time" tabindex="3" onchange="location.href='{h_lst_files}' + (Math.round((new Date()).getTime() / 1000) - $(this).val())">
+							<select class="show_since_time" tabindex="3" onchange="javascript:get_kleeja_link('{h_lst_files}' + (Math.round((new Date()).getTime() / 1000) - $(this).val()), '#main_container');">
 								<option>-----</option>
 								<option value="3600">{lang.HOUR}</option>
 								<option value="18000">{lang.5HOURS}</option>

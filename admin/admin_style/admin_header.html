@@ -41,6 +41,7 @@ var STYLE_PATH_ADMIN = '{STYLE_PATH_ADMIN}';var go_to = '{go_to}';
 function get_kleeja_link(URL, ID, p)
 {
 	$("#sign_ajax_error").css('display', 'none');
+	$(ID).css('display', 'none');
 
 	if(!p)
 	{
@@ -55,6 +56,7 @@ function get_kleeja_link(URL, ID, p)
 		}
 	}
 
+
 	$("#sign_ajax").show();
 
 	$.ajax({
@@ -64,7 +66,7 @@ function get_kleeja_link(URL, ID, p)
 		success: function(R){
 			
 			$("#sign_ajax").css('display', 'none');
-			
+
 			//not login 
 			if(R.code == 999)
 			{
@@ -83,6 +85,8 @@ function get_kleeja_link(URL, ID, p)
 					$('.' + p['current_class']).removeClass(p['current_class']);
 					$('#' + p['current_id']).addClass(p['current_class']);
 				}
+				
+				$(ID).fadeIn(500);
 			}
 		},
 		error : function(R){

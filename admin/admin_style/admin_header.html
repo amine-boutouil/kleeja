@@ -92,8 +92,17 @@ function get_kleeja_link(URL, ID, p)
 					$('.' + p['current_class']).removeClass(p['current_class']);
 					$('#' + p['current_id']).addClass(p['current_class']);
 				}
-				
+
 				$(ID).fadeIn(500);
+
+				if($('body').scrollTop() > 0 && $('body').scrollTop() > 200)
+				{
+					$('body').animate({scrollTop:0}, 'slow');
+				}
+				else if($('html').scrollTop() > 0 && $('html').scrollTop() > 230)
+				{
+					$('html').animate({scrollTop:0}, 'slow');
+				}
 			}
 		},
 		error : function(R){
@@ -136,6 +145,14 @@ function submit_kleeja_data(FORM_ID, ID)
 			{
 				$(ID).html(R.content);
 				$(ID).fadeIn(500);
+				if($('body').scrollTop() > 0 && $('body').scrollTop() > 200)
+				{
+					$('body').animate({scrollTop:0}, 'slow');
+				}
+				else if($('html').scrollTop() > 0 && $('html').scrollTop() > 230)
+				{
+					$('html').animate({scrollTop:0}, 'slow');
+				}
 			}
 		},
 		error : function(R){

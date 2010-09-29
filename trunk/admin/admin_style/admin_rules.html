@@ -1,4 +1,3 @@
-
 <!-- markItUp! -->
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}js/markitup/jquery.markitup.pack.js"></script>
 <link rel="stylesheet" type="text/css" href="{STYLE_PATH_ADMIN}js/markitup/skins/markitup/style.css" />
@@ -14,10 +13,9 @@ $(document).ready(function() { $('#rules_text').markItUp(mySettings); });
 <!-- start rules temlate  -->
 <div id="divmiddle">
 <form method="post" action="{action}">
-<fieldset>
 
-<!-- start div border table  -->
-<div id="border-table">
+<!-- start DivTable -->
+<div id="DivTable">
 
 <!-- title  -->
 <h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/menu_icons/rules_button.gif" />{lang.R_RULES} :</h2>
@@ -48,15 +46,15 @@ $(document).ready(function() { $('#rules_text').markItUp(mySettings); });
 
 <textarea name="rules_text" id="rules_text" style="direction:ltr;height: 260px;" >{rules}</textarea>
 
-<!-- button  -->
-<div class="quick"><input name="submit" type="submit" value="{lang.UPDATE_RULES}" /></div>
-<!-- button  -->
+	<!-- button -->
+	<p class="left_button MarginTop">
+		<button type="submit" id="submit" name="submit" class="btn"><span>{lang.UPDATE_RULES}</span></button>
+	</p>
+	
+
+</div><!-- end#DivTable -->
 
 
-</div>
-<!-- end div border table  -->
-
-</fieldset>
 {H_FORM_KEYS}
 </form>
 </div>

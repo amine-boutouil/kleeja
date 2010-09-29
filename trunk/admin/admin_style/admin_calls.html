@@ -11,88 +11,82 @@
 	-->
 </script>
 
-
-<!-- start calls temlate  -->
+<!-- start CallsTemlate -->
 <div id="divmiddle">
 
-<fieldset>
+	<!-- start DivTable -->
+	<div id="DivTable">
 
-<!-- start div border table  -->
-<div id="border-table">
-
-	<!-- title  -->
-	<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/menu_icons/calls_button.gif" />{lang.R_CALLS} :</h2><!-- END -->
-	
-	<!-- mail here  -->
-<IF NAME="no_results"><ELSE>
-	<div id="mail_here">{lang.E_CLICK}</div>
-</IF>
-
-	<div class="clr"></div>
-	
-<!-- start form  --> 
-<form method="post" name="callform" action="{action}">
-
-	
-	<!-- if sent -->
-	<IF NAME="msg_sent">
-	<div class="msg_sent">{lang.IS_SEND_MAIL}</div>
-	<script type="text/javascript">
-		$('div.msg_sent').fadeOut(2000).fadeIn(2000).hide('slow');
-	</script>
+		<!-- title  -->
+		<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/menu_icons/calls_button.gif" />{lang.R_CALLS} :</h2><!-- END -->
+		
+		<!-- mail here  -->
+	<IF NAME="no_results"><ELSE>
+		<div id="mail_here">{lang.E_CLICK}</div>
 	</IF>
-	<!-- END -->
-	
-	<!-- clear  -->
-	<div class="clr"></div><br /><!-- END -->
 
-	<IF NAME="no_results">
-	<div id="mail_here">{lang.MESSAGE_NONE}</div>
-	<ELSE>
-	
-	<!-- start data table -->
-	<table style="text-align:center">
-		<tr style="background-color:#DFDFDF">
-			<td>#</td>
-			<td>{lang.NAME}</td>
-			<td>{lang.TIME}</td>
-			<td>{lang.IP}</td>
-			<td><a href="javascript:void(0);" onclick="checkAll(document.callform, '_del', 'su');">{lang.DELETE}</a></td>
-			<!-- admin calls data td1 extra -->
-		</tr>
+		<div class="clr"></div>
+		
+	<!-- start form  --> 
+	<form method="post" name="callform" action="{action}">
 
-		<LOOP NAME="arr">
-		<tr id="su[{{id}}]" class="osilver<IF LOOP="sent"> is_sent</IF>">
-			<td style="border: none;">
-			<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/view_mail.gif" alt=".." /><a href="javascript:void(0);" onclick="javascript:show_msg('textva_{{id}}',{{id}});">{lang.VIEW}</a></td>
-			<td style="border: none;"><a title="{lang.EMAIL}:{{mail}}">{{name}}</a> <input type="hidden" value="{{mail}} :<br /> {{text}}" id="textva_{{id}}" /></td>
-			<td style="border: none;">{{time}}</td>
-			<td style="border: none;"><a href="{{ip_finder}}" target="_blank">{{ip}}</a></td>
-			<td style="border: none;"><input type="checkbox" name="del_{{id}}" value="{{id}}" onclick="change_color(this,'su[{{id}}]');" rel="_del" /></td>
-			<!-- admin calls data td2 extra -->
-		</tr>
-		</LOOP>
+		
+		<!-- if sent -->
+		<IF NAME="msg_sent">
+		<div class="msg_sent">{lang.IS_SEND_MAIL}</div>
+		<script type="text/javascript">
+			$('div.msg_sent').fadeOut(2000).fadeIn(2000).hide('slow');
+		</script>
+		</IF>
+		<!-- END -->
+		
+		<!-- clear  -->
+		<div class="clr"></div><br /><!-- END -->
 
-	</table><!-- END -->
+		<IF NAME="no_results">
+		<div id="mail_here">{lang.MESSAGE_NONE}</div>
+		<ELSE>
+		
+		<!-- start data table -->
+		<table style="text-align:center">
+			<tr style="background-color:#DFDFDF">
+				<td>#</td>
+				<td>{lang.NAME}</td>
+				<td>{lang.TIME}</td>
+				<td>{lang.IP}</td>
+				<td><a href="javascript:void(0);" onclick="checkAll(document.callform, '_del', 'su');">{lang.DELETE}</a></td>
+				<!-- admin calls data td1 extra -->
+			</tr>
+
+			<LOOP NAME="arr">
+			<tr id="su[{{id}}]" class="osilver<IF LOOP="sent"> is_sent</IF>">
+				<td style="border: none;">
+				<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/view_mail.gif" alt=".." /><a href="javascript:void(0);" onclick="javascript:show_msg('textva_{{id}}',{{id}});">{lang.VIEW}</a></td>
+				<td style="border: none;"><a title="{lang.EMAIL}:{{mail}}">{{name}}</a> <input type="hidden" value="{{mail}} :<br /> {{text}}" id="textva_{{id}}" /></td>
+				<td style="border: none;">{{time}}</td>
+				<td style="border: none;"><a href="{{ip_finder}}" target="_blank">{{ip}}</a></td>
+				<td style="border: none;"><input type="checkbox" name="del_{{id}}" value="{{id}}" onclick="change_color(this,'su[{{id}}]');" rel="_del" /></td>
+				<!-- admin calls data td2 extra -->
+			</tr>
+			</LOOP>
+
+		</table><!-- END -->
+
+		<div class="clr"></div>
+
+		<!-- start pagination  -->
+		<div style="text-align:center">{page_nums}</div><!-- END -->
+
+		<!-- button -->
+		<p class="left_button MarginTop">
+			<button type="submit" id="submit" name="submit" class="btn"><span>{lang.UPDATE_CALSS}</span></button>
+		</p>
+		{H_FORM_KEYS}
+	</form>
+	</IF>
 
 	<div class="clr"></div>
 
-	<!-- start pagination  -->
-	<div style="text-align:center">{page_nums}</div><!-- END -->
+	</div><!-- END#DivTable -->
 
-	<!-- start button  -->
-	<div class="left_button"><input name="submit" type="submit" value="{lang.UPDATE_CALSS}" /></div><!-- END -->
-
-	<div class="clr"></div>
-
-	{H_FORM_KEYS}
-</form>
-</IF>
-
-<div class="clr"></div>
-
-</div><!-- END div border  -->
-
-</fieldset>
-
-</div><!-- END calls temlate  -->
+</div><!-- END#CallsTemlate -->

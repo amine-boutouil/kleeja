@@ -2,8 +2,8 @@
 
  <fieldset>
  
-<!-- start div border table  -->
-<div  id="border-table">
+<!-- start DivTable -->
+<div id="DivTable">
 
  <!-- title  -->
 <h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/menu_icons/styles_button.gif" />{lang.R_STYLES}</h2>
@@ -42,15 +42,15 @@
 <div class="clr"></div><br />
 <!-- end clear  -->
 
-</div>
-<!-- end div border table  -->
+</div><!-- end#DivTable -->
+
 
 <!-- start clear  -->
 <div class="clr"></div><br />
 <!-- end clear  -->
 
-<!-- start div border table  -->
-<div  id="border-table">
+<!-- start DivTable -->
+<div id="DivTable">
 
 <h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/menu_icons/styles_button.gif" />{lang.TPLS_RE_BASIC} : </h2>
 
@@ -78,9 +78,11 @@
 </table>
 
 <br />
-<!--  button  -->
-<div class="quick"><a class="button2" href="{show_all_tpls_action}">{lang.SHOW_TPLS}</a></div>
-<!--  button  -->
+
+	<!-- button -->
+	<p class="MarginBottom">
+		<button type="submit" id="submit" name="submit_bk_tpl" class="btn" onclick="javascript:location.href='{show_all_tpls_action}'"><span>{lang.SHOW_TPLS}</span></button>
+	</p>
 
 <!-- start clear  -->
 <div class="clr"></div><br />
@@ -108,8 +110,7 @@
 <div class="clr"></div><br />
 <!-- end clear  -->
 
-</div>
-<!-- end div border table  -->
+</div><!-- end#DivTable -->
 
 </fieldset>
 </div>

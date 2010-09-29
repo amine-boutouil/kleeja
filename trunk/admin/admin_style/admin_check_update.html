@@ -1,58 +1,36 @@
-<!-- start php_info temlate  -->
-<div id="divmiddle">
+<!-- start php info temlate  -->
+<div id="boxs">
 
-<div class="file_cp1">
+	<!-- start DivTable -->
+	<div id="DivTable">
+	
+	<!-- title -->
+	<p class="titleAll"><a href="./">{lang.R_CPINDEX}</a> <span>&raquo;</span>{lang.R_CHECK_UPDATE}</p>
 
-<fieldset>
+	<!-- ribbon -->
+	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><img class="left TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/check_update_button.png" alt="" /><span class="STitle left"><a href="index.php?cp=d_img_ctrl">{lang.R_CHECK_UPDATE}</a></span></div></div>
 
-<!-- start div border table  -->
-<div id="border-table">
+	<br />
+	
+	<div class="<IF NAME="error">update_error<ELSE>update_info</IF>">{text}</div>
 
-<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/menu_icons/check_update_button.gif" alt="{lang.R_CHECK_UPDATE}" />{lang.R_CHECK_UPDATE} :</h2>
+	<br />
 
-<!-- start dot  -->
-<p class="dot" />
-<!-- end dot  -->
+	<h2 class="update_title">{lang.HOW_UPDATE_KLEEJA}</h2>
 
-<!-- start clear  -->
-<div class="clr"></div><br />
-<!-- end clear  -->
+	<br /><div class="hr"></div><!-- Line -->
 
-<div class="<IF NAME="error">update_error<ELSE>update_info</IF>">{text}</div>
+	<ul class="update_list">
+		<li>{lang.HOW_UPDATE_KLEEJA_STEP1} .</li>
+		<li>{lang.HOW_UPDATE_KLEEJA_STEP2}</li>
+		<li>{lang.HOW_UPDATE_KLEEJA_STEP3}
+		</li>
+	</ul>
 
-<!-- start clear  -->
-<div class="clr"></div><br />
-<!-- end clear  -->
+	<div class="link_copy">{update_link}</div>
 
-<h2 class="update_title">{lang.HOW_UPDATE_KLEEJA}</h2>
+	</div><!-- end#DivTable -->
 
-<!-- start dot  -->
-<p class="dot" />
-<!-- end dot  -->
+	<div class="clr"></div><!-- clear  -->
 
-<!-- start clear  -->
-<div class="clr"></div>
-<!-- end clear  -->
-
-<ul class="update_list">
-	<li>{lang.HOW_UPDATE_KLEEJA_STEP1} .</li>
-	<li>{lang.HOW_UPDATE_KLEEJA_STEP2}</li>
-	<li>{lang.HOW_UPDATE_KLEEJA_STEP3}
-	</li>
-</ul>
-<div class="link_copy">{update_link}</div>
-
-</div>
-<!-- end div border table  -->
-
-<!-- start clear  -->
-<div class="clr"></div>
-<!-- end clear  -->
-
-</fieldset>
-
-</div>
-
-</div>
-<!-- end php_info temlate  -->
-        
+</div><!--end#phpinfo temlate  -->

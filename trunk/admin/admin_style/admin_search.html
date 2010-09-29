@@ -45,12 +45,12 @@ function check_search_users_form(form)
 
 <!-- start search temlate  -->
 <div id="divmiddle">
-<fieldset>
+
 
 <form method="post" action="{action1}" onsubmit="return check_search_files_form(this);">
 
-<!-- start div border table  -->
-<div id="border-table">
+<!-- start DivTable -->
+<div id="DivTable">
 
 <!-- title  -->
 <h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/menu_icons/search_button.gif" />{lang.SEARCH_FILES} :</h2>
@@ -104,9 +104,10 @@ function check_search_users_form(form)
 </table>
 <!-- end table no hover  -->
 
-<!-- button  -->
-<div class="quick"><input name="search_file" type="submit" value="{lang.SEARCH_SUBMIT}" /></div>
-<!-- button  -->
+	<!-- button -->
+	<p class="right MarginBottom">
+		<button type="submit" id="submit" name="search_file" class="btn"><span>{lang.SEARCH_SUBMIT}</span></button>
+	</p>
 
 </div>
 <!-- end div border table  -->
@@ -125,15 +126,12 @@ function check_search_users_form(form)
 <form method="post" action="{action2}" onsubmit="return check_search_users_form(this);">
 
 <!-- start div border table  -->
-<div id="border-table">
+<div id="DivTable">
 
 <!-- title  -->
 <h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/menu_icons/search_button.gif" />{lang.SEARCH_USERS} :</h2>
 <!-- title  -->
 
-<!-- start dot  -->
-<p class="dot" />
-<!-- end dot  -->
 
 <!-- start clear  -->
 <div class="clr"></div><br />
@@ -152,16 +150,14 @@ function check_search_users_form(form)
 </table>
 <!-- end table no hover  -->
 
-<!-- button  -->
-<div class="quick"><input name="search_user" type="submit" value="{lang.SEARCH_SUBMIT}" /></div>
-<!-- button  -->
+	<!-- button -->
+	<p class="right MarginBottom">
+		<button type="submit" id="submit" name="search_user" class="btn"><span>{lang.SEARCH_SUBMIT}</span></button>
+	</p>
 
-</div>
-<!-- end div border table  -->
+</div><!-- end#DivTable -->
 {H_FORM_KEYS2}
 </form>
 </IF>
 
-</fieldset>
-</div>
-<!-- end users search temlate  -->     
+</div><!-- end users search temlate  -->

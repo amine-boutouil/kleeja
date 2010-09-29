@@ -1,18 +1,13 @@
 <!-- start language temlate  -->
 <div id="divmiddle">
 
-<fieldset>
-
-<!-- start div border table  -->
-<div id="border-table">
+<!-- start DivTable  -->
+<div id="DivTable">
 
 <!-- title  -->
 <h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/menu_icons/langs_button.gif" />{lang.R_LANGS} :</h2>
 <!-- title  -->
 
-<!-- start dot  -->
-<p class="dot" />
-<!-- end dot  -->
 
 <!-- start clear  -->
 <div class="clr"></div>
@@ -55,17 +50,16 @@
 </IF>
 </table>
 
-<!-- start button  -->
-<div class="quick"><input name="submit" type="submit" value="{lang.UPDATE}" /></div>
-<!-- end button  -->
+	<!-- button -->
+	<p class="left_button MarginTop">
+		<button type="submit" id="submit" name="submit" class="btn"><span>{lang.UPDATE}</span></button>
+	</p>
 
-<!-- start pagination  -->
-<div style="text-align:center"><b>{page_nums}</b></div>
-<!-- end pagination  -->
+{page_nums}<!-- pagination  -->
 
-</div>
-<!-- end div border table  -->
-</fieldset>
+
+</div><!-- end#DivTable -->
+
 {H_FORM_KEYS}
 </form>
 </div>

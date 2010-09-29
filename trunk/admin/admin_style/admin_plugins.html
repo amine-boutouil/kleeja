@@ -1,9 +1,8 @@
 <!-- start view plugins temlate  -->
 <div id="divmiddle">
-<fieldset>
 
 <!-- start div border table  -->
-<div id="border-table">
+<div id="DivTable">
 
 <!-- title  -->
 <h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/menu_icons/plugins_button.gif" />{lang.R_PLUGINS} :</h2>
@@ -76,7 +75,7 @@
 <!-- end clear  -->
 
 <!-- start div border table  -->
-<div id="border-table">
+<div id="DivTable">
 
 <!-- title  -->
 <h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/menu_icons/plugins_button.gif" />{lang.PLUGINS_CHANGES_FILES} :</h2>
@@ -119,7 +118,7 @@
 <!-- end clear  -->
 
 <!-- start div border table  -->
-<div id="border-table">
+<div id="DivTable">
 
 <form method="post" action="{action}" enctype="multipart/form-data">
 
@@ -150,11 +149,10 @@
 </table>
 <!-- end #table no hover  -->
 
-<!--  button  -->
-<div class="quick"><input name="submit_new_plg" type="submit" value="{lang.SUBMIT}" onclick="javascript:return confirm_from('{lang.PLUGIN_CONFIRM_ADD}');" /></div >
-<!--  button  -->
-
-
+	<!-- button -->
+	<p class="left_button MarginTop">
+		<button type="submit" id="submit" name="submit_new_plg" class="btn" onclick="javascript:return confirm_from('{lang.PLUGIN_CONFIRM_ADD}');"><span>{lang.SUBMIT}</span></button>
+	</p>
 
 <!-- start clear  -->
 <div class="clr"></div><br />
@@ -180,7 +178,7 @@
 
 </div>
 
-</fieldset>
+
 {H_FORM_KEYS}
 </form>
 

@@ -1,4 +1,3 @@
-
 <!-- markItUp! -->
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}js/markitup/jquery.markitup.pack.js"></script>
 <link rel="stylesheet" type="text/css" href="{STYLE_PATH_ADMIN}js/markitup/skins/markitup/style.css" />
@@ -14,66 +13,49 @@ $(document).ready(function() { $('#ex_header').markItUp(mySettings);$('#ex_foote
 <!-- start Extra temlate  -->
 <div id="divmiddle">
 
-<form method="post" action="{action}">
+	<form method="post" action="{action}">
 
-<fieldset>
+	<!-- start DivTable -->
+	<div id="DivTable">
 
-<!-- start div border table  -->
-<div id="border-table">
+		<!-- title  -->
+		<p class="titleAll"><a href="./">{lang.R_CPINDEX}</a> <span> &raquo; </span> {lang.ADD_HEADER_EXTRA} </p> 
+		<div class="ribbon"><div class="wrapAround"></div><div class="tab"><img class="left TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/extra_button.png" alt="" /><span class="STitle left"><a href="index.php?cp=d_img_ctrl">{lang.ADD_HEADER_EXTRA}</a></span></div></div>
+		<br />
+		
+	<label class="small_font" for="ex_header">{lang.EX_HEADER_N}</label>
+	<div class="clr"></div><br />
+	<textarea id="ex_header" name="ex_header" style="height:210px;direction:ltr;" >{ex_header}</textarea>
 
-<!-- title  -->
-<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/menu_icons/extra_button.gif" />{lang.ADD_HEADER_EXTRA} :</h2>
-<!-- title  -->
+	<!-- button -->
+	<p class="left_button MarginTop">
+		<button type="submit" id="submit" name="submit" class="btn"><span>{lang.UPDATE_EXTRA}</span></button>
+	</p>
 
-<!-- border line Vertical  -->
-<p class="dot" />
-<!-- border line Vertical  -->
+	</div><!-- end#DivTable -->
 
-<!-- start clear  -->
-<div class="clr"></div><br />
-<!-- end clear  -->
+	<br /><div class="hr"></div><br />
 
-<label class="small_font" for="ex_header">{lang.EX_HEADER_N}</label>
-<br />
-<textarea id="ex_header" name="ex_header" style="height:210px;direction:ltr;" >{ex_header}</textarea>
+	<!-- start DivTable -->
+	<div id="DivTable">
 
-<!-- start button  -->
-<div class="quick"><input name="submit" type="submit" value="{lang.UPDATE_EXTRA}" /></div>
-<!-- end button  -->
+		<!-- title  -->
+		<p class="titleAll"><a href="./">{lang.R_CPINDEX}</a> <span> &raquo; </span> {lang.ADD_FOOTER_EXTRA} </p> 
+		<div class="ribbon"><div class="wrapAround CenterAround"></div><div class="tab"><img class="left TSubImg2" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/extra_button.png" alt="" /><span class="STitle left"><a href="">{lang.ADD_FOOTER_EXTRA}</a></span></div></div>
+		<br />
 
-</div>
-<!-- end div border table  -->
+		<label class="small_font" for="ex_footer">{lang.EX_FOOTER_N}</label>
+		<div class="clr"></div><br />
+		<textarea id="ex_footer" name="ex_footer" style="height: 210px;direction:ltr;" >{ex_footer}</textarea>
 
-<!-- start clear  -->
-<div class="clr"></div><br />
-<!-- end clear  -->
+		<!-- button -->
+		<p class="left_button MarginTop">
+			<button type="submit" id="submit" name="submit" class="btn"><span>{lang.UPDATE_EXTRA}</span></button>
+		</p>
 
-<!-- start div border table  -->
-<div id="border-table">
-
-<!-- title  -->
-<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/menu_icons/extra_button.gif" />{lang.ADD_FOOTER_EXTRA} :</h2>
-<!-- title  -->
-
-<!-- border line Vertical  -->
-<p class="dot" />
-<!-- border line Vertical  -->
-
-<br />
-<label class="small_font" for="ex_footer">{lang.EX_FOOTER_N}</label>
-<br />
-<textarea id="ex_footer" name="ex_footer" style="height: 210px;direction:ltr;" >{ex_footer}</textarea>
-
-<!-- start button  -->
-<div class="quick"><input name="submit" type="submit" value="{lang.UPDATE_EXTRA}" /></div>
-<!-- end button  -->
-
-</div>
-<!-- end div border table  -->
-
-</fieldset>
-{H_FORM_KEYS}
-</form>
+	</div><!-- end#DivTable -->
+	{H_FORM_KEYS}
+	</form>
 </div>
 <!-- end Extra temlate  -->
  

@@ -1,4 +1,3 @@
-
 <!-- markItUp! -->
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}js/markitup/jquery.markitup.pack.js"></script>
 <link rel="stylesheet" type="text/css" href="{STYLE_PATH_ADMIN}js/markitup/skins/markitup/style.css" />
@@ -16,8 +15,6 @@ $(document).ready(function() { $('#template_content').markItUp(mySettings); });
 
 <form method="post" action="{action}">
 
-<fieldset>
-
 <!-- start div border table  -->
 <div  id="border-table">
 
@@ -27,37 +24,36 @@ $(document).ready(function() { $('#template_content').markItUp(mySettings); });
 
 <!-- border line Vertical  -->
 <p class="dot" />
-<!-- border line Vertical  -->
+
 
 <!-- start clear  -->
 <div class="clr"></div>
-<!-- end clear  -->
+
 
 <textarea name="template_content" id="template_content"  rows="" style="direction:ltr;" >{template_content}</textarea>
-
 
 <input type="hidden" name="style_id" value="{style_id}" />
 <input type="hidden" name="tpl_choose" value="{tpl_name}" />
 
 <!-- start clear  -->
 <div class="clr"></div><br />
-<!-- end clear  -->
+
 
 <!-- border line Vertical  -->
 <p class="dot" />
-<!-- border line Vertical  -->
+
 
 <!-- start clear  -->
 <div class="clr"></div><br />
-<!-- end clear  -->
+
 
 <!-- go back home -->
 <a class="goback"href="{action_return}">&lt; {lang.GO_BACK_BROWSER} : {style_id}</a>
-<!-- go back home -->
+
 
 <!-- start clear  -->
 <div class="clr"></div><br />
-<!-- end clear  -->
+
 
 <div class="quick">
 
@@ -81,10 +77,9 @@ $(document).ready(function() { $('#template_content').markItUp(mySettings); });
 </div>
 <!-- end div border table  -->
 
-</fieldset>
+
 {H_FORM_KEYS}
 </form>
 
 </div>
 <!-- end temlate Extra header and footer  -->
-        

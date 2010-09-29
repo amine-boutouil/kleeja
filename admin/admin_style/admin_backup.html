@@ -1,54 +1,42 @@
-
-<!-- start backup temlate  -->
+<!-- start BackupTemlate -->
 <div id="divmiddle">
 
-<!-- start form  -->
-<form  method="post" name="bkupfrom" action="{action}">
+	<form method="post" name="bkupfrom" action="{action}">
 
-<fieldset>
+	<!-- start DivTable -->
+	<div id="DivTable">
 
-<!-- start div border table  -->
-<div id="border-table">
+	<!-- title  -->
+	<p class="titleAll"><a href="./">{lang.R_CPINDEX}</a> <span> &raquo; </span> {lang.R_BCKUP} </p> 
+	
+	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><img class="left TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/bckup_button.png" alt="" /><span class="STitle left"><a href="index.php?cp=d_img_ctrl">{lang.R_BCKUP}</a></span></div></div>
 
-<!-- title backup  -->
-<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/menu_icons/bckup_button.gif" />{lang.R_BCKUP} :</h2>
-<!-- # title backup  -->
+	<div class="clr"></div><!-- clear -->
+	
+	<div class="small_font">{lang.E_BACKUP}</div><!-- notice -->
 
-<!-- clear  -->
-<div class="clr"></div>
+	<table style="text-align:center">
+		<tr style="background-color:#DFDFDF">
+			<td>{lang.NAME}</td>
+			<td>{lang.SIZE}</td>
+			<td><a href="javascript:void(0);" onclick="checkAll(document.bkupfrom, '_bkup', 'su',  'osilver', 'ored');">{lang.CHECK_ALL}</a></td>
+		</tr>
+		<LOOP NAME="tables_sho">
+			<tr id="su[{{name}}]" class="osilver">
+				<td>{{name}}</td><td>{{size}} kb</td><td><input type="checkbox" name="check[]" value="{{name}}" checked="checked" onclick="change_color(this,'su[{{name}}]', 'osilver', 'ored');" rel="_bkup" /></td>
+			</tr>        
+		</LOOP>       
+	</table>
 
-<!-- notice backup  -->
-<p class="small_font">{lang.E_BACKUP}</p>
-<!-- notice backup  -->
+		<!-- button  -->
+		<p class="left MarginBottom">
+			<button type="submit" id="submit" name="submit" class="btn"><span>{lang.TAKE_BK}</span></button>
+		</p>
 
-<!-- clear  -->
-<div class="clr"></div>
+	</div><!-- End-DivTable -->
 
-<table style="text-align:center">
-    <tr style="background-color:#DFDFDF">
-        <td>{lang.NAME}</td>
-        <td>{lang.SIZE}</td>
-		<td><a href="javascript:void(0);" onclick="checkAll(document.bkupfrom, '_bkup', 'su',  'osilver', 'ored');">{lang.CHECK_ALL}</a></td>
-    </tr>
-    <LOOP NAME="tables_sho">
-	<tr id="su[{{name}}]" class="osilver">
-		<td>{{name}}</td><td>{{size}} kb</td><td><input type="checkbox" name="check[]" value="{{name}}" checked="checked" onclick="change_color(this,'su[{{name}}]', 'osilver', 'ored');" rel="_bkup" /></td>
-	</tr>        
-        </LOOP>       
-</table>
-
-<!-- start button  -->
-<div class="quick"><input name="submit" type="submit" value="{lang.TAKE_BK}" /></div>
-<!-- end  button  -->
-
-</div>
-<!-- end div border table  -->
-
-</fieldset>
 {H_FORM_KEYS}
 </form>
-<!-- end form  -->
+<!-- end#Form  -->
 
-</div>
- <!-- end  backup temlate  -->
- 
+</div><!-- end# BackupTemlate -->

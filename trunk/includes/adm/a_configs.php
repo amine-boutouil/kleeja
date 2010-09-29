@@ -33,6 +33,11 @@ if (isset($_POST['submit']))
 {
 	if(!kleeja_check_form_key('adm_configs'))
 	{
+		if(isset($_GET['_ajax_']))
+		{
+			echo_ajax(888, $lang['INVALID_FORM_KEY']);
+		}
+
 		$redirect_url = $action  . (isset($_GET['type']) ? '&amp;type=' . htmlspecialchars($_GET['type']) : '');
 		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $redirect_url, 1);
 	}
@@ -105,7 +110,7 @@ switch($SHOW_CH_STAGE):
 			$CONFIGEXTENDLANG = (!empty($lang['CONFIG_KLJ_MENUS_' . strtoupper($SQL->escape($_GET['type']))]) ? $lang['CONFIG_KLJ_MENUS_' . strtoupper($SQL->escape($_GET['type']))] : ((!empty($olang['CONFIG_KLJ_MENUS_' . strtoupper($SQL->escape($_GET['type']))])) ? $olang['CONFIG_KLJ_MENUS_' . strtoupper($SQL->escape($_GET['type']))] : $lang['CONFIG_KLJ_MENUS_OTHER']));
 			if($_GET['type'] != 'all')
 			{
-					$query['WHERE'] = "type = '" . $SQL->escape($_GET['type']) . "' OR type = ''";
+				$query['WHERE'] = "type = '" . $SQL->escape($_GET['type']) . "' OR type = ''";
 			}
 		}
 
@@ -267,7 +272,10 @@ switch($SHOW_CH_STAGE):
 			else
 			{
 			*/
-			$text	= $lang['CONFIGS_UPDATED'] . '<meta HTTP-EQUIV="REFRESH" content="2; url=' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '">' . "\n";
+			$text	= $lang['CONFIGS_UPDATED'] .
+						'<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . basename(ADMIN_PATH) . 
+						'?cp=' . basename(__file__, '.php') . '\');", 2000);</script>' . "\n";
+
 			$stylee	= "admin_info";
 			//}
 				

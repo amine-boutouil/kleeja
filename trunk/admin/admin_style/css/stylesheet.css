@@ -53,12 +53,10 @@
 	tr:hover {background-color:#FFFFDD;}
 	/* all tables */
 	
-	pre {font-size: 12px;padding: 0;	margin: 0;	background: #f0f0f0;
-		border-left: 1px solid #ccc;border-bottom: 1px solid #ccc;line-height: 20px; 
-		background: url(pre_code_bg.gif) repeat-y left top;	width: 600px;
-		overflow: auto; overflow-Y: hidden; }
+	pre {font-size: 12px;padding:0;margin:0;background: #f0f0f0;border-left: 1px solid #ccc;border-bottom: 1px solid #ccc;
+	line-height: 20px; background: url(pre_code_bg.gif) repeat-y left top; width: auto;overflow: auto; overflow-Y: hidden; }
 	
-	pre code {margin: 0 0 0 40px;	padding: 18px 0;display: block;}
+	pre code {margin: 0 20px;	padding: 18px 0;display: block;}
 	
 	.clr {clear: both; overflow:hidden; height: 0;}
 	.dot {padding: 3px 0;background: url(../images/dot.gif) repeat-x;}
@@ -66,10 +64,11 @@
 	.line_img {height:18px;display:block;margin:2px 0;background:#D6D0CB url(../images/line_img.png) repeat-x top right;}
 	.left, img.left {float:left;}
 	.right, img.right {float:right;}
-	
+	.MarginTop {margin-top:-10px;}
+	.MarginBottom {margin-top:10px;}
 	.headline {color: #318391;display:block;font-size:180%;margin:-5px 0 0 0;font-weight:700;padding:0 0 20px 0;}
 	
-	.titleAll{margin-top:-1em;font-size:90%;}
+	.titleAll{margin:0 0 20px 0;font-size:120%;}
 	
 	button.btn{background:transparent url(../images/box/button.gif) no-repeat right -92px;border:0;font:bold 100% tahoma;margin:0 5px 0 -6px;outline:none;padding:0 35px 0 0;text-align:center;cursor:pointer;overflow:visible;position:relative;}
 	button.btn span{background:transparent url(../images/box/button.gif) no-repeat left top;color:#ffffff;height:29px;line-height:1.2;padding:13px 0 0 35px;text-shadow:#000 -1px -1px 0;display:block;position:relative;white-space:nowrap;margin-top: -1px;}
@@ -87,9 +86,7 @@
 	#divmiddle,#boxs{width:68%;display:inline;}
 
 	#main_container{position:relative;}
-	#sign_ajax,#sign_ajax_error{
-	position: fixed;top: 45%;left: 45%;padding:10px;
-	background-color: #fff;	color: #000;border:1px solid #ccc;
+	#sign_ajax,#sign_ajax_error{position: fixed;top: 45%;left: 45%;padding:10px;background-color: #fff;	color: #000;border:1px solid #ccc;
 	cursor: pointer;overflow: hidden;z-index: 1999;display: none;}
 	#sign_ajax img,#sign_ajax_error img{padding-right:10px;}
 	#sign_ajax_error{color: red;}
@@ -162,10 +159,8 @@
 	#MainMenuWrap span.kbubbles {background:url(../images/menu_icons/mini/kbubbles.png) no-repeat center center;position:absolute;left:-3px;top:-5px;}	
 
 	/* # thumbnail  menu */
-	.expand_thumbnail , .expand_thumbnail2{float:left;margin:-15px -30px 10px 0 !important;width:30px; height: 20px;background: url("../images/box/expand_thumbnail.gif") no-repeat 0px 0px;}
-	.expand_thumbnail2  {background-position: 0px -20px;}
-	.expand_thumbnail:hover {background-position: -30px 0px;}
-	.expand_thumbnail2:hover {background-position: -30px -20px;}
+	.expand_thumbnail , .expand_thumbnail2{float:left;margin:0 10px 0 !important;width:48px; height: 48px;background: url("../images/box/expand_thumbnail.png") no-repeat 0px 0px;}
+
 
 	/*  toolTip Main Menu */
 	.tipsy { padding: 5px; font-size: 11px;font-weight:bold; position: absolute; z-index: 100000; }
@@ -183,15 +178,18 @@
 	/* ribbon */
 	.ribbon,.ribbon .wrapAround,.ribbon .tab{height:52px;overflow:hidden;}
 	.ribbon{margin:-15px -4px 8px -37px;width:684px}
-	.ribbon .wrapAround{background:transparent url(../images/box/ribbon-wrap.png) no-repeat 0 -104px scroll;float:left;width:52px;display: block;}
-	.ribbon .tab{background:transparent url(../images/box/ribbon.png) no-repeat right;float:left;width:632px}
-	.ribbon span a{font-weight:700;}
-	.ribbon span.STitle{margin:17px 28px 0 20px;font-size:140%;text-shadow:#884005 -1px -1px 1px}
-	.ribbon span.TitleSub {color:#FFF !important;font-size:100%;margin:16px 0 0 20px}
-	.ribbon img.TSubImg{width:64px;height:74px;background:transparent url(../images/menu_icons/mini/img_ctrl_button.png) no-repeat 0 0;}
+	.ribbon .wrapAround{background:transparent url(../images/box/ribbon-wrap.png) no-repeat 0 -104px scroll;float:left;width:52px;display:block;}
+	.ribbon .CenterAround{background:transparent url(../images/box/ribbon-wrap.png) no-repeat 0 0px scroll;}
 
-	.ribbon span a:link, .ribbon span a:visited { color: #EFDABE; }	/* ribbon links (wrap around graphic)  */
-	.ribbon span a:hover, .ribbon span a:active { color: #fff; }
+	.ribbon .tab{background:transparent url(../images/box/ribbon.png) no-repeat right;float:left;width:620px}
+	.ribbon span a{font-weight:700;}
+	.ribbon span.STitle{margin:17px 20px 0 80px;font-size:140%;text-shadow:#884005 -1px -1px 1px}
+	.ribbon span.TitleSub {color:#FFF !important;font-size:100%;margin:16px 0 0 20px}
+	.ribbon img.TSubImg{width:64px;height:74px;position:absolute;top:25px;left:20px;z-index:701;}
+	.ribbon img.TSubImg2{position:relative;top:0px;left:20px;z-index:701;}
+
+	.ribbon span a:link, .ribbon span a:visited {color: #EFDABE;}	/* ribbon links (wrap around graphic)  */
+	.ribbon span a:hover, .ribbon span a:active {color: #fff;}
 
 	/*CSS style pagination*/
 	#pagination	{ text-align:right; margin:0 0 10px 0; float:right; }
@@ -213,7 +211,7 @@
 	a.phover:hover > span, a.phover:focus > span { background-position:100% -90px;}
  
 
-#border-table,.box_all {padding:0 10px;}
+#DivTable,.box_all {padding:0;}
 
 
 /*  buttons */
@@ -222,7 +220,6 @@
 .button1:hover ,.button2:hover{border: 1px solid #aaa; color: #fff;text-decoration: none;background: #BCBCBC url(../images/login/hoverblue.gif) repeat left top;}
 
 /* class */
-.quick, p.quick { margin:4px auto; padding:2px 0px; border: none; background-color: transparent; text-align: center;}
 input.button1, input.button3,input.button2 {width: auto !important; padding: 3px 4px 3px 4px; color: #000; cursor: pointer;	background: #549CBF url(../images/login/btn.gif) repeat left top;}
 .s_box {	width: 150px; margin:2px; border-style:solid; border-width:1px;	padding:2px 4px;text-align:center; color:#484848; border-color:#F8F834;	font-weight: bold;background: #FFFFF3 url(../images/info2.png) no-repeat top right;}
 .s_box_tpls{width:99%;margin:2px 0; border:1px solid #6496C3;color:#000;padding:2px 4px; background-color:#FFFDD7;}
@@ -255,7 +252,7 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 
 
 /* usefull colors */
-.ored,.ored:hover {background:#FFCACA;}
+.ored,.ored:hover {background:#D8D8CC;}
 .osilver,.undefined{background:#F2F2F2;}
 .osilver:hover,.undefined:hover{background:#FFFCE8;}
 .oblue{background:#EDFFEA;}
@@ -267,7 +264,7 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 .check_all {display:block;text-align:left;margin:0 0 10px 0;padding:5px;}
 
 .file_cp1 {width:100%;position: relative;overflow:auto;}
-.small_font {padding:5px 5px 10px 5px;font-size:11px;font-weight: bold;color:#3F5252;text-indent:34px}
+.small_font {padding:5px 5px 10px 5px;font-size:120%;font-weight:normal;color:#635C4B;text-indent:34px}
 
 /*exts colors*/
 .table_exts{text-align:center;}
@@ -344,8 +341,8 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 .option_body tr:hover {background-color:transparent;}
 .option_list_bottom {border-top: solid 1px #e4e4e4;	padding: 5px 0;clear: both;}
 .collapse_buttons  {margin:5px 0;float: left;}
-.show_all {background: url(../images/tall-down-arrow.gif) no-repeat right center;padding-right: 12px;}
-.hid_all {display: none;	background: url(../images/tall-up-arrow.gif) no-repeat right center;padding-right: 12px;}
+.show_all {background: url(../images/tall-down-arrow.png) no-repeat right center;padding-right: 12px;}
+.hid_all {display: none;	background: url(../images/tall-up-arrow.png) no-repeat right center;padding-right: 12px;}
 /* ## view list control panel */
 
 /* start info user admin */
@@ -437,12 +434,13 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 /* ## class in the language files */
 
 /*checkboxes*/
-.jquery-checkbox  {display: inline; line-height: 18px; cursor: pointer;}
+input.img_checkbox {padding:0 !important;;margin:0 !important;}
+.jquery-checkbox {line-height:18px;cursor:pointer;}
 .jquery-checkbox .mark {display: inline;}
 .jquery-checkbox img {vertical-align: middle; width: 18px; height: 18px;background: url(../images/checkbox1.png) no-repeat 0px 0px}
 .jquery-checkbox-hover img{background: url(../images/checkbox1.png) no-repeat -27px 0px;}
 .jquery-checkbox-checked img{background: url(../images/checkbox1.png) no-repeat -82px 0px;}
-.jquery-checkbox-checked .jquery-checkbox-hover img {	background: url(../images/checkbox1.png) no-repeat -55px 0px;}
+.jquery-checkbox-checked .jquery-checkbox-hover img {background: url(../images/checkbox1.png) no-repeat -55px 0px;}
 .jquery-checkbox-disabled img{background: url(../images/checkbox1.png) no-repeat 0px 0px;}
 .jquery-checkbox-checked .jquery-checkbox-disabled img{background: url(../images/checkbox1.png) no-repeat 0px 0px;}
 /* / checkboxes*/

@@ -1,85 +1,76 @@
 ﻿<!-- start setting temlate  -->
 <div id="divmiddle">
 
+	<!-- start DivTable  -->
+	<div id="DivTable">
 
-<fieldset>
+	<!-- title -->
+	<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/menu_icons/options_button.gif" alt="{lang.R_CONFIGS}" />{lang.R_CONFIGS}</h2>
+	
+	<IF NAME="CONFIGEXTEND">
+	<span class="small_font"> » {CONFIGEXTENDLANG}</span>
+	</IF>
 
-<!-- start div border table  -->
-<div id="border-table">
+	<!-- start clear  -->
+	<div class="clr"></div>
 
-<!-- title   -->
-<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/menu_icons/options_button.gif" alt="{lang.R_CONFIGS}" />{lang.R_CONFIGS}
-<IF NAME="CONFIGEXTEND">
-<span class="small_font"> » {CONFIGEXTENDLANG}</span>
-</IF>
-</h2>
-<!-- title   -->
+	<!--- START CHOOSING STAGE -->
+	<IF NAME="SHOW_CH_STAGE">
 
-<!-- start clear  -->
-<div class="clr"></div>
-<!-- end clear  -->
+	<!-- start dot  -->
+	<p class="dot" />
+	<!-- end dot  -->
 
-<!--- START CHOOSING STAGE -->
-<IF NAME="SHOW_CH_STAGE">
-
-<!-- start dot  -->
-<p class="dot" />
-<!-- end dot  -->
-
-<div class="config_types_list">
-	<LOOP NAME="typesnavi">
-		<div onclick="javascript:get_kleeja_link('{{typelink}}', '#main_container');">
-			<img src="{{typeicon}}" alt="{{typetitle}}" /><br />
-			<a href="{{typelink}}" onclick="javascript:get_kleeja_link('{{typelink}}', '#main_container'); return false;" title="{{typetitle}}">{{typetitle}}</a>
-		</div>
-	</LOOP>
-</div>
+	<div class="config_types_list">
+		<LOOP NAME="typesnavi">
+			<div onclick="javascript:get_kleeja_link('{{typelink}}', '#main_container');">
+				<img src="{{typeicon}}" alt="{{typetitle}}" /><br />
+				<a href="{{typelink}}" onclick="javascript:get_kleeja_link('{{typelink}}', '#main_container'); return false;" title="{{typetitle}}">{{typetitle}}</a>
+			</div>
+		</LOOP>
+	</div>
 
 
-<!-- start clear  -->
-<div class="clr"></div>
-<!-- end clear  -->
+	<!-- start clear  -->
+	<div class="clr"></div>
+	<!-- end clear  -->
 
-<!-- start dot  -->
-<p class="dot" />
-<!-- end dot  -->
+	<!-- start dot  -->
+	<p class="dot" />
+	<!-- end dot  -->
 
 
-<!--- / END CHOOSING STAGE -->
-<ELSE>
-<!--- START EDIT STAGE -->
+	<!--- / END CHOOSING STAGE -->
+	<ELSE>
+	<!--- START EDIT STAGE -->
 
-<!-- start dot  -->
-<p class="dot" />
-<!-- end dot  -->
+	<!-- start dot  -->
+	<p class="dot" />
+	<!-- end dot  -->
 
-<!-- start clear  -->
-<div class="clr"></div>
-<!-- end clear  -->
+	<!-- start clear  -->
+	<div class="clr"></div>
+	<!-- end clear  -->
 
-<form method="post" action="{action}" id="configs_form">
- <!-- admin configs tr extra begin -->
-{options}
-<!-- admin configs tr extra -->
+	<form method="post" action="{action}" id="configs_form">
+	 <!-- admin configs tr extra begin -->
+	{options}
+	<!-- admin configs tr extra -->
 
-<!-- start clear  -->
-<div class="clr"></div><br />
-<!-- end clear  -->
+	<!-- start clear  -->
+	<div class="clr"></div><br />
+	<!-- end clear  -->
 
-<!-- start button  -->
-<input type="hidden" name="submit" value="1" />
-<div class="quick"><input name="_submit_" type="submit" value="{n_submit}" onclick="javascript:submit_kleeja_data('#configs_form', '#main_container'); return false;" /></div>
-<!-- end button  -->
-{H_FORM_KEYS}
-</form>
+	<!-- start button  -->
+	<input type="hidden" name="submit" value="1" />
+	<div class="quick"><input name="_submit_" type="submit" value="{n_submit}" onclick="javascript:submit_kleeja_data('#configs_form', '#main_container'); return false;" /></div>
+	<!-- end button  -->
+	{H_FORM_KEYS}
+	
+	</form>
+	</IF>
+	<!--- / END EDIT STAGE -->
 
-</IF>
-<!--- / END EDIT STAGE -->
+	</div><!-- end#DivTable -->
 
-</div>
-<!-- end div border table  -->
-</fieldset>
-
-</div>
-<!-- end setting temlate  -->
-  
+</div><!-- end setting temlate  -->

@@ -57,7 +57,7 @@
 <div class="clr"></div>
 <!-- end clear  -->
 
-<form method="post" action="{action}">
+<form method="post" action="{action}" id="configs_form">
  <!-- admin configs tr extra begin -->
 {options}
 <!-- admin configs tr extra -->
@@ -67,7 +67,8 @@
 <!-- end clear  -->
 
 <!-- start button  -->
-<div class="quick"><input name="submit" type="submit" value="{n_submit}" /></div>
+<input type="hidden" name="submit" value="1" />
+<div class="quick"><input name="_submit_" type="submit" value="{n_submit}" onclick="javascript:submit_kleeja_data('#configs_form', '#main_container'); return false;" /></div>
 <!-- end button  -->
 {H_FORM_KEYS}
 </form>

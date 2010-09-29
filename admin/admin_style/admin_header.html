@@ -45,7 +45,12 @@ function get_kleeja_link(URL, ID, p)
 
 	if(!p)
 	{
-		p = {}
+		p = {};
+	}
+
+	if(!ID)
+	{
+		ID = '#main_container';
 	}
 
 	if(p['confirm'])
@@ -75,6 +80,8 @@ function get_kleeja_link(URL, ID, p)
 			else if(R.code == 888)
 			{
 				alert(R.content);
+				get_kleeja_link(URL, ID);
+				return;
 			}
 			else
 			{
@@ -97,6 +104,47 @@ function get_kleeja_link(URL, ID, p)
 	});
 }
 
+function submit_kleeja_data(FORM_ID, ID)
+{
+	$("#sign_ajax_error").css('display', 'none');
+	$(ID).css('display', 'none');
+
+	if(!ID)
+	{
+		ID = '#main_container';
+	}
+
+	$.ajax({
+		type: 'POST',
+		url: $(FORM_ID).attr('action').replace('&amp;', '&') + '&_ajax_=1',
+		data: $(FORM_ID).serialize(),
+		cache: false,
+		dataType: 'json',
+		success: function(R){
+			//not login 
+			if(R.code == 999)
+			{
+				location.href = './';
+			}
+			else if(R.code == 888)
+			{
+				alert(R.content);
+				get_kleeja_link($(FORM_ID).attr('action'), ID);
+				return;
+			}
+			else
+			{
+				$(ID).html(R.content);
+				$(ID).fadeIn(500);
+			}
+		},
+		error : function(R){
+			//$(ID).html('----');
+			$("#sign_ajax").css('display', 'none');
+			$("#sign_ajax_error").show();
+		}
+	});
+}
 
 //-->
 </script>

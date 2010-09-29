@@ -64,7 +64,7 @@
 
 	
 	/* @Borders all Corners (5)Pixel ----------- */	
-	#border-table,.box_all{
+	#DivTable,.box_all{
 	-moz-border-radius : 5px;-webkit-border-radius : 5px;-khtml-border-radius : 5px; border-radius : 5px;}
 
 	/* @Borders all Corners (10)Pixel ----------- */	

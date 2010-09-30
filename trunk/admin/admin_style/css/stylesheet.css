@@ -161,20 +161,6 @@
 	/* # thumbnail  menu */
 	.expand_thumbnail , .expand_thumbnail2{float:left;margin:0 10px 0 !important;width:48px; height: 48px;background: url("../images/box/expand_thumbnail.png") no-repeat 0px 0px;}
 
-
-	/*  toolTip Main Menu */
-	.tipsy { padding: 5px; font-size: 11px;font-weight:bold; position: absolute; z-index: 100000; }
-	.tipsy-inner { padding: 10px; background-color: black; color: white; max-width: 200px; text-align: center; }
-	.tipsy-arrow { position: absolute; background: url('../images/tipsy.gif') no-repeat top left; width: 9px; height: 5px; }
-	.tipsy-n .tipsy-arrow { top: 0; left: 50%; margin-left: -4px; }
-	.tipsy-nw .tipsy-arrow { top: 0; left: 10px; }
-	.tipsy-ne .tipsy-arrow { top: 0; right: 10px; }
-	.tipsy-s .tipsy-arrow { bottom: 0; left: 50%; margin-left: -4px; background-position: bottom left; }
-	.tipsy-sw .tipsy-arrow { bottom: 0; left: 10px; background-position: bottom left; }
-	.tipsy-se .tipsy-arrow { bottom: 0; right: 10px; background-position: bottom left; }
-	.tipsy-e .tipsy-arrow { top: 50%; margin-top: -4px; right: 0; width: 5px; height: 9px; background-position: top right; }
-	.tipsy-w .tipsy-arrow { top: 50%; margin-top: -4px; left: 0; width: 5px; height: 9px; }
-
 	/* ribbon */
 	.ribbon,.ribbon .wrapAround,.ribbon .tab{height:52px;overflow:hidden;}
 	.ribbon{margin:-15px -4px 8px -37px;width:684px}
@@ -445,4 +431,19 @@ input.img_checkbox {padding:0 !important;;margin:0 !important;}
 .jquery-checkbox-checked .jquery-checkbox-disabled img{background: url(../images/checkbox1.png) no-repeat 0px 0px;}
 /* / checkboxes*/
 
+.xthumbs {
+width:700px;
+position:relative;
+float:right;
+margin-top:10px;
+clear:both;
+}
 
+.xthumbs .box {
+float:right;
+width:128px;
+position:relative;
+clear:none;
+margin:0 6px 12px 0;
+padding:2px;
+}

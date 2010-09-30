@@ -1,7 +1,7 @@
 <script type="text/javascript">
 <!--
 jQuery(document).ready(function($){
- // TinyTips Plugin
+   
  // fancybox plugin
  $("a.fancybox").attr('rel', 'gallery').fancybox({'titleShow': false,'transitionIn'	: 'elastic', 'transitionOut':'elastic','easingIn':'easeOutBack','easingOut':'easeInBack'});	 
   // custom checkboxes
@@ -52,6 +52,7 @@ jQuery(document).ready(function($){
 });
 
 });
+		
 //-->
 </script>
 
@@ -72,31 +73,58 @@ jQuery(document).ready(function($){
 	<table class="xthumbs" dir="ltr">
 	<LOOP NAME="arr">
 	{{tdnum}}
-	<td align="center">
-		<div style="position:relative !important;" id="su[{{id}}]" class="osilver2">
-		<a href="{{href}}" class="fancybox" title="">
+	<td align="center" id="su[{{id}}]" class="osilver2">
+		<div style="position:relative !important;" id="kktip">
+		<a href="{{href}}" class="fancybox">
 			<div klj_img="{{thumb_link}}" class="yaload spinner"><strong class="expand"><img class="mask" src="{STYLE_PATH_ADMIN}js/fancybox/mask.png" alt="" /></strong>
 			</div>
 		</a>
 		<strong class="pbox"><input name="del_{{id}}" type="checkbox" value="{{id}}" class="img_checkbox" onclick="change_color(this,'su[{{id}}]', 'ored');" rel="_del" /></strong>
 		</div>
-		
-		<div style="display:none;">
-		<div>{{name}}</div>
-		<table>
-			<tr><td>{lang.FILEUPS}</td>
-			<td>{{ups}}</td></tr>
-			<tr><td>{lang.FILESIZE}</td>
-			<td>{{size}}</td></tr>
-			<tr><td>{lang.FILEDATE}</td>
-			<td>{{time}}</td></tr>
-			<tr><td>{lang.BY}</td>
-			<td>{{user}}</td></tr>
-			<tr><td>{lang.IP}</td>
-			<td>{{ip}}</td></tr>
-		</table>
+	
+		<div style="display:none;" class='cloneMe'>
+		<ul><li><span>{lang.FILEUPS} :</span> {{ups}}</li>
+			<li><span>{lang.FILESIZE} :</span> {{size}}</li>
+			<li><span>{lang.FILEDATE} :</span> {{time}}</li>
+			<li><span>{lang.BY} :</span> {{user}}</li>
+			<li><span>{lang.IP} :</span> {{ip}}</li></ul>
 		</div>
 	</td>
+		<script type="text/javascript">
+		<!--
+		jQuery(document).ready(function($){
+		 // TinyTips Plugin
+		 $('#kktip a[href]').qtip(
+		   {
+			content: {
+				 title: {
+				  text: '{{name}}',
+				  button: 'Close'
+				 },
+				 text: '<b>{{name}}</b>! <br /><br />' +
+					   '<ul><li><span>{lang.FILEUPS} :</span> {{ups}}</li>' +
+					   '<li><span>{lang.FILESIZE} :</span> {{size}}</li>' +
+					   '<li><span>{lang.FILEDATE} :</span> {{time}}</li>' +
+					   '<li><span>{lang.BY} :</span> {{user}}</li>' +
+					   '<li><span>{lang.IP} :</span> {{ip}}</li></ul>'
+			  },
+			  style: {
+					   border: {
+							 width: 3,
+							 radius: 8
+						  },
+						  padding: 10, 
+						  textAlign: 'center',
+						  tip: true, // Give it a speech bubble tip with automatic corner detection
+						  name: 'cream' // Style it according to the preset 'cream' style
+					   }	  
+		   });
+		   
+		 
+		});
+		//-->
+	</script>
+
 	{{tdnum2}}
 	</LOOP>
 	</table>
@@ -127,3 +155,4 @@ jQuery(document).ready(function($){
 	-->
 
 </div>
+

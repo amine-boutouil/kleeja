@@ -2,33 +2,15 @@
 <!--
 jQuery(document).ready(function($){
 	// TinyTips Plugin
-	$('#kktip a[href]').qtip(
-		   {
-			content: {
-				 title: {
-				  text: '{{name}}',
-				  button: 'Close'
-				 },
-				 text: '<b>{{name}}</b>! <br /><br />' +
-					   '<ul><li><span>{lang.FILEUPS} :</span> {{ups}}</li>' +
-					   '<li><span>{lang.FILESIZE} :</span> {{size}}</li>' +
-					   '<li><span>{lang.FILEDATE} :</span> {{time}}</li>' +
-					   '<li><span>{lang.BY} :</span> {{user}}</li>' +
-					   '<li><span>{lang.IP} :</span> {{ip}}</li></ul>'
-			  },
-			  style: {
-					   border: {
-							 width: 3,
-							 radius: 8
-						  },
-						  padding: 10, 
-						  textAlign: 'center',
-						  tip: true, // Give it a speech bubble tip with automatic corner detection
-						  name: 'cream' // Style it according to the preset 'cream' style
-					   }	  
-		   });
-
- // fancybox plugin
+   $('#kktip a[tooltip]').each(function() {
+      $(this).qtip({
+         content: $(this).attr('tooltip'),
+		 position: {corner: {target: 'topMiddle', tooltip: 'bottomMiddle'}},
+         style: {border: {width:3,radius: 8},padding: 10, tip: true, name: 'cream' }	
+      });
+   });
+   
+   // fancybox plugin
  $("a.fancybox").attr('rel', 'gallery').fancybox({'titleShow': false,'transitionIn'	: 'elastic', 'transitionOut':'elastic','easingIn':'easeOutBack','easingOut':'easeInBack'});	 
   // custom checkboxes
  $('input.img_checkbox').checkbox();
@@ -101,19 +83,14 @@ jQuery(document).ready(function($){
 	{{tdnum}}
 	<td align="center" id="su[{{id}}]" class="osilver2">
 		<div style="position:relative !important;" id="kktip">
-		<a href="{{href}}" class="fancybox">
-			<div klj_img="{{thumb_link}}" class="yaload spinner"><strong class="expand"><img class="mask" src="{STYLE_PATH_ADMIN}js/fancybox/mask.png" alt="" /></strong>
-			</div>
+		<a href="{{href}}" class="fancybox" tooltip='<ul class="ktip"><li><span>{lang.FILEUPS} :</span> {{ups}}</li><li><span>{lang.FILESIZE} :</span> {{size}}</li><li><span>{lang.FILEDATE} :</span> {{time}}</li><li><span>{lang.BY} :</span> {{user}}</li><li><span>{lang.IP} :</span> {{ip}}</li></ul>'>
+			<div klj_img="{{thumb_link}}" class="yaload spinner"><strong class="expand"><img class="mask" src="{STYLE_PATH_ADMIN}js/fancybox/mask.png" alt="" /></strong></div>
 		</a>
 		<strong class="pbox"><input name="del_{{id}}" type="checkbox" value="{{id}}" class="img_checkbox" onclick="change_color(this,'su[{{id}}]', 'ored');" rel="_del" /></strong>
 		</div>
 	
 		<div style="display:none;" class='cloneMe'>
-		<ul><li><span>{lang.FILEUPS} :</span> {{ups}}</li>
-			<li><span>{lang.FILESIZE} :</span> {{size}}</li>
-			<li><span>{lang.FILEDATE} :</span> {{time}}</li>
-			<li><span>{lang.BY} :</span> {{user}}</li>
-			<li><span>{lang.IP} :</span> {{ip}}</li></ul>
+		<ul><li><span>{lang.FILEUPS} :</span> {{ups}}</li><li><span>{lang.FILESIZE} :</span> {{size}}</li><li><span>{lang.FILEDATE} :</span> {{time}}</li><li><span>{lang.BY} :</span> {{user}}</li><li><span>{lang.IP} :</span> {{ip}}</li></ul>
 		</div>
 	</td>
 	{{tdnum2}}

@@ -41,11 +41,17 @@ var STYLE_PATH_ADMIN = '{STYLE_PATH_ADMIN}';var go_to = '{go_to}';
 
 <script type="text/javascript">
 <!--
+$(document).ready(function() {
+
+	hash = window.location.hash.replace('#!', '');
+	if(hash != '')
+	{
+		get_kleeja_link('./?' + hash);
+	}
+});
+
 function get_kleeja_link(URL, ID, p)
 {
-	$("#sign_ajax_error").css('display', 'none');
-	$(ID).css('display', 'none');
-
 	if(!p)
 	{
 		p = {};
@@ -56,6 +62,8 @@ function get_kleeja_link(URL, ID, p)
 		ID = '#main_container';
 	}
 
+	$("#sign_ajax_error").css('display', 'none');
+
 	if(p['confirm'])
 	{
 		if(!confirm_from())
@@ -64,7 +72,8 @@ function get_kleeja_link(URL, ID, p)
 		}
 	}
 
-
+	$(ID).css('display', 'none');
+	window.location.hash = '!' + URL.replace('&amp;', '&').split('?', 2)[1].replace(/&formkey=[a-z0-9]+/, '');
 	$("#sign_ajax").show();
 
 	$.ajax({
@@ -118,14 +127,13 @@ function get_kleeja_link(URL, ID, p)
 
 function submit_kleeja_data(FORM_ID, ID)
 {
-	$("#sign_ajax_error").css('display', 'none');
-	$(ID).css('display', 'none');
-
 	if(!ID)
 	{
 		ID = '#main_container';
 	}
-	
+
+	$("#sign_ajax_error").css('display', 'none');
+	$(ID).css('display', 'none');
 	$("#sign_ajax").show();
 	
 	$.ajax({

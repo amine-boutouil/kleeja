@@ -123,7 +123,9 @@ function submit_kleeja_data(FORM_ID, ID)
 	{
 		ID = '#main_container';
 	}
-
+	
+	$("#sign_ajax").show();
+	
 	$.ajax({
 		type: 'POST',
 		url: $(FORM_ID).attr('action').replace('&amp;', '&') + '&_ajax_=1',
@@ -131,6 +133,9 @@ function submit_kleeja_data(FORM_ID, ID)
 		cache: false,
 		dataType: 'json',
 		success: function(R){
+			
+			$("#sign_ajax").css('display', 'none');
+			
 			//not login 
 			if(R.code == 999)
 			{

@@ -16,18 +16,10 @@
 <link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}js/fancybox/jqueryfb.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}js/prototip/css/prototip.css" />
 
-<IF NAME="{lang.DIR}==ltr">
-<link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/ltr.css" />
-</IF>	
-<IS_BROWSER="ie6">
-<link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/ie_6.css" />
-</IS_BROWSER>
-<IS_BROWSER="ie">
-<link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/ie.css" />
-</IS_BROWSER>
-<IF NAME="MINI_MENU">
-<style type="text/css">#divmiddle,#boxs{width:700px;}.ribbon{width:749px}.ribbon .tab{width:696px}</style>
-</IF>
+<IF NAME="{lang.DIR}==ltr"><link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/ltr.css" /></IF>	
+<IS_BROWSER="ie6"><link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/ie_6.css" /></IS_BROWSER>
+<IS_BROWSER="ie"><link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/ie.css" /></IS_BROWSER>
+<IF NAME="MINI_MENU"><style type="text/css">#divmiddle,#boxs{width:700px;}.ribbon{width:749px}.ribbon .tab{width:696px}</style></IF>
 
 <!--  javascript coding  -->
 <script type="text/javascript">
@@ -105,7 +97,7 @@ function get_kleeja_link(URL, ID, p)
 					$('#' + p['current_id']).addClass(p['current_class']);
 				}
 
-				$(ID).fadeIn(500);
+				$(ID).fadeIn(200);
 
 				if($('body').scrollTop() > 0 && $('body').scrollTop() > 200)
 				{
@@ -160,7 +152,7 @@ function submit_kleeja_data(FORM_ID, ID)
 			else
 			{
 				$(ID).html(R.content);
-				$(ID).fadeIn(500);
+				$(ID).fadeIn(200);
 				if($('body').scrollTop() > 0 && $('body').scrollTop() > 200)
 				{
 					$('body').animate({scrollTop:0}, 'slow');

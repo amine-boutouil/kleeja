@@ -4,15 +4,18 @@
 /* thumbnail Table */
 .xthumbs {width:100%;padding:0 !important;border:none !important;}
 .xthumbs  tr {background-color:transparent !important;background-image:none !important;border:none !important;margin:0 0 0 0 !important;}
-.xthumbs td {width:130px !important;height: 130px !important;cursor:pointer;padding:0 !important;margin:0 !important;border:none !important;position:relative !important;}
-.yaload,.yaload img{position:static;width:128px !important;height:128px !important;padding:0 !important;margin:2px 1px 2px 5px !important;z-index:700;border:none !important;overflow:hidden;}
-.spinner {position:static;width:128px;height:128px;background: url(../../images/ajax-loader.gif) no-repeat center center;}
+.xthumbs td {width:128px !important;height: 128px !important;cursor:pointer;padding:0 !important;margin:0 !important;border:none !important;position:relative !important;}
+.yaload,.yaload img{position:static;width:125px !important;height:125px !important;padding:0 !important;margin:2px 1px 2px 5px !important;z-index:700;border:none !important;overflow:hidden;}
+.spinner {position:static;width:125px;height:125px;background: url(../../images/ajax-loader.gif) no-repeat center center;}
 .failerror {position:absolute;background: url(failerror.jpg) no-repeat center center !important;}
 img.mask {position:absolute;top:0;left:0;z-index:701;}
 #boxs .expand img:hover {background:url(expand.png) no-repeat center center; z-index:997;}
 .pbox {position:absolute;bottom:-1px;right:4px;z-index:702;padding:0 0 0 0 !important;margin:0 0 0 0 !important;}
 .osilver2,.osilver2:hover{background-color:transparent !important;background-image:none !important;border:none !important;}
 
+ul.ktip{float:right;}
+ul.ktip li{width:240px;height:22px;line-height:22px;float: right;border-bottom:1px solid #F0DE7D;text-align:right;}
+ul.ktip li div{float:right;width:100px !important;line-height:100%;text-align:left;font-weight:400;padding-left: 10px;}
 
 /* fanc ybox */
 #fancybox-loading {position: fixed;top: 50%;left: 50%;height: 40px;width: 40px;margin-top: -20px;margin-left: -20px;cursor: pointer;overflow: hidden;z-index: 1104;display: none;}

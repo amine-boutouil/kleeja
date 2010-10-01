@@ -1,14 +1,14 @@
 <script type="text/javascript">
 <!--
 jQuery(document).ready(function($){
-	// TinyTips Plugin
-   $('#kktip a[tooltip]').each(function() {
-      $(this).qtip({
-         content: $(this).attr('tooltip'),
+	// thumbnails 
+   $('div#kktip[title]').qtip({
+		 content: {text: false,title: { text: 'here name image', button:'Close'}},
+		 show: {delay:500, when: 'mouseover', solo: true , effect: {type: 'fade',length: 0}},
 		 position: {corner: {target: 'topMiddle', tooltip: 'bottomMiddle'}},
-         style: {border: {width:3,radius: 8},padding: 10, tip: true, name: 'cream' }	
+		 hide: 'unfocus',
+         style: {border: {width:3,radius: 8},padding: 10, tip: true, name: 'cream', width: 280 }	
       });
-   });
    
    // fancybox plugin
  $("a.fancybox").attr('rel', 'gallery').fancybox({'titleShow': false,'transitionIn'	: 'elastic', 'transitionOut':'elastic','easingIn':'easeOutBack','easingOut':'easeInBack'});	 
@@ -20,12 +20,7 @@ jQuery(document).ready(function($){
 	var im = new Image();
 	var tthis	= $(this);
 	im.src		= tthis.attr("klj_img");
-	im.onload = function(e) {
-		tthis.removeClass('spinner');
-		tthis.append(im);
-		tthis.css("opacity",1);
-		tthis.hover(function () {$(this).stop().animate({opacity: 0.7}, "slow");},function () {$(this).stop().animate({opacity: 1}, "slow");});
-	 };
+	im.onload = function(e) {tthis.removeClass('spinner');tthis.append(im);};
 	im.onerror = function(e) { tthis.removeClass('spinner'); tthis.addClass('failerror');};
 	im.onabort = function(e) { tthis.removeClass('spinner'); tthis.addClass('failerror');}
 });
@@ -82,16 +77,13 @@ jQuery(document).ready(function($){
 	<LOOP NAME="arr">
 	{{tdnum}}
 	<td align="center" id="su[{{id}}]" class="osilver2">
-		<div style="position:relative !important;" id="kktip">
-		<a href="{{href}}" class="fancybox" tooltip='<ul class="ktip"><li><span>{lang.FILEUPS} :</span> {{ups}}</li><li><span>{lang.FILESIZE} :</span> {{size}}</li><li><span>{lang.FILEDATE} :</span> {{time}}</li><li><span>{lang.BY} :</span> {{user}}</li><li><span>{lang.IP} :</span> {{ip}}</li></ul>'>
+		<div style="position:relative !important;" id="kktip" title="<ul class='ktip'><li><div>{lang.FILEUPS} :</div> {{ups}}</li><li><div>{lang.FILESIZE} :</div> {{size}}</li><li><div>{lang.FILEDATE} :</div> {{time}}</li><li><div>{lang.BY} :</div> {{user}}</li><li><div>{lang.IP} :</div> {{ip}}</li></ul>">
+		<a href="{{href}}" class="fancybox">
 			<div klj_img="{{thumb_link}}" class="yaload spinner"><strong class="expand"><img class="mask" src="{STYLE_PATH_ADMIN}js/fancybox/mask.png" alt="" /></strong></div>
 		</a>
 		<strong class="pbox"><input name="del_{{id}}" type="checkbox" value="{{id}}" class="img_checkbox" onclick="change_color(this,'su[{{id}}]', 'ored');" rel="_del" /></strong>
 		</div>
-	
-		<div style="display:none;" class='cloneMe'>
-		<ul><li><span>{lang.FILEUPS} :</span> {{ups}}</li><li><span>{lang.FILESIZE} :</span> {{size}}</li><li><span>{lang.FILEDATE} :</span> {{time}}</li><li><span>{lang.BY} :</span> {{user}}</li><li><span>{lang.IP} :</span> {{ip}}</li></ul>
-		</div>
+
 	</td>
 	{{tdnum2}}
 	</LOOP>

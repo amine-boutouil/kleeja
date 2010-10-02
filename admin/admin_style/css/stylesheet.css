@@ -51,7 +51,6 @@
 	tr { background:url("../images/box/bg_gradient.gif") repeat-x center bottom #F5F5F5;border-bottom:solid 1px #C8C8C8;border-top:solid 1px #C8C8C8;}
 	td {	padding:3px 5px;border-style:groove solid;border-color:#DFDFDF;border-width:1px;}
 	tr:hover {background-color:#FFFFDD;}
-	/* all tables */
 	
 	pre {font-size: 12px;padding:0;margin:0;background: #f0f0f0;border-left: 1px solid #ccc;border-bottom: 1px solid #ccc;
 	line-height: 20px; background: url(pre_code_bg.gif) repeat-y left top; width: auto;overflow: auto; overflow-Y: hidden; }
@@ -75,6 +74,11 @@
 	button.btn:hover{background-position:right -138px}
 	button.btn:hover span{background-position:0 -46px;color:#fff;text-shadow:#333 -1px -1px 1px}
 
+	blockquote.note{margin:15px auto;padding:0;background:url('../images/icon/info.png') no-repeat 99% 50% #FFFFE0;border:5px solid #F7F0B8;color:#707037}
+	blockquote.note div{padding:15px 58px 15px 15px;margin:0 !important;border:1px solid #EDE396;}
+	blockquote.note p{color:#311706;margin-bottom:10px !important;font-weight:400;font-size:120%;border:1px solid #EDE396;}
+	blockquote.note em{color:#A73033;text-decoration:underline;}
+	
 	/* wrapper */
 	#Wrapper,body{background:#E6E0C8 url(../images/box/bodyBg.gif) repeat-x 0 0}
 	#PageWrapper{margin:0 auto;padding:25px 0 0 ;width:990px;position:relative}
@@ -131,7 +135,7 @@
 	#Footer .Powered img.updated:hover {background-position: 0px -60px;}
 
 
-	/* start Main Menu */
+	/* Main Menu */
 	#MainMenuWrap,#main_menu{margin-top:-12px !important;background:transparent url(../images/box/menu_repeat.gif) repeat-y 0 0;}
 	#main_menu{width:240px !important;}
 	#main_menu .link_menu ,#main_menu .link_current {float:right;height: 46px;width:210px;margin:0;background:url(../images/menu_icons/bg_buttons.png) no-repeat center bottom;}
@@ -158,7 +162,7 @@
 	.link_current_thumbnail a:hover{cursor:default;}
 	#MainMenuWrap span.kbubbles {background:url(../images/menu_icons/mini/kbubbles.png) no-repeat center center;position:absolute;left:-3px;top:-5px;}	
 
-	/* # thumbnail  menu */
+	/* # thumbnail menu */
 	.expand_thumbnail , .expand_thumbnail2{float:left;margin:0 10px 0 !important;width:48px; height: 48px;background: url("../images/box/expand_thumbnail.png") no-repeat 0px 0px;}
 
 	/* ribbon */
@@ -166,14 +170,12 @@
 	.ribbon{margin:-15px -4px 8px -37px;width:684px}
 	.ribbon .wrapAround{background:transparent url(../images/box/ribbon-wrap.png) no-repeat 0 -104px scroll;float:left;width:52px;display:block;}
 	.ribbon .CenterAround{background:transparent url(../images/box/ribbon-wrap.png) no-repeat 0 0px scroll;}
-
 	.ribbon .tab{background:transparent url(../images/box/ribbon.png) no-repeat right;float:left;width:620px}
 	.ribbon span a{font-weight:700;}
 	.ribbon span.STitle{margin:17px 20px 0 80px;font-size:140%;text-shadow:#884005 -1px -1px 1px}
 	.ribbon span.TitleSub {color:#FFF !important;font-size:100%;margin:16px 0 0 20px}
 	.ribbon img.TSubImg{width:64px;height:74px;position:absolute;top:25px;left:20px;z-index:701;}
 	.ribbon img.TSubImg2{position:relative;top:0px;left:20px;z-index:701;}
-
 	.ribbon span a:link, .ribbon span a:visited {color: #EFDABE;}	/* ribbon links (wrap around graphic)  */
 	.ribbon span a:hover, .ribbon span a:active {color: #fff;}
 
@@ -197,6 +199,7 @@
 	a.phover:hover > span, a.phover:focus > span { background-position:100% -90px;}
  
 
+ 
 #DivTable,.box_all {padding:0;}
 
 

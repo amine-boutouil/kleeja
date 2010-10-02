@@ -32,41 +32,23 @@
 	--------------------------------------- */	
 	/* @Orange Light Shadow --------------- */
 	input, textarea, select{-moz-box-shadow: 0px 0px 3px #888;-webkit-box-shadow: 0px 0px 3px #888;-khtml-box-shadow: 0px 0px 3px #888;box-shadow: 0px 0px 3px #888;}
-	
 	/* @Orange Light Shadow --------------- */
 	input[type="file"]{-moz-box-shadow: none;-webkit-box-shadow: none;-khtml-box-shadow: none;box-shadow:none;}
-	
 	/* @Orange Shadow --------------- */
 	input[type="text"]:hover, input[type="text"]:focus, input[type="password"]:hover, input[type="password"]:focus,
-	textarea:focus, textarea:hover,	select:hover, select:focus{
-	-moz-box-shadow:0 0 4px #D26900;-webkit-box-shadow:0 0 4px #D26900;-khtml-box-shadow:0 0 4px #D26900;box-shadow:0 0 4px #D26900;}
-	
-	/* @White Shadow (4) pixel ------------- */
-	.data_file .filereport {
-	-moz-box-shadow : 0px 0px 4px #FFFFFF;-webkit-box-shadow : 0px 0px 4px #FFFFFF;-khtml-box-shadow : 0px 0px 4px #FFFFFF;box-shadow : 0px 0px 4px #FFFFFF;}
-	
-	
-/* @end */	
+	textarea:focus, textarea:hover,	select:hover, select:focus{-moz-box-shadow:0 0 4px #D26900;-webkit-box-shadow:0 0 4px #D26900;-khtml-box-shadow:0 0 4px #D26900;box-shadow:0 0 4px #D26900;}
+	.data_file .filereport {	-moz-box-shadow : 0px 0px 4px #FFFFFF;-webkit-box-shadow : 0px 0px 4px #FFFFFF;-khtml-box-shadow : 0px 0px 4px #FFFFFF;box-shadow : 0px 0px 4px #FFFFFF;}
+	blockquote.note{-moz-box-shadow:0px 0px 4px 2px #EDE396;-webkit-box-shadow:0px 0px 4px 2px #EDE396;box-shadow:0px 0px 4px 2px #EDE396;}
 
-/*	---------------------------------------
-	#Rounded Corners
-	--------------------------------------- */
-	/* @Border Corners only, Top Left and Right --------------- */
+
+/*	---	#Rounded Corners */
 	.tabbertab {	-moz-border-radius-bottomleft :5px;	-moz-border-radius-bottomright : 5px;-webkit-border-bottom-left-radius : 5px;-webkit-border-bottom-right-radius : 5px;border-bottom-left-radius : 5px; border-bottom-right-radius : 5px;}
-	/* @Border Corners only, Bottom Left and Right --------------- */
 	ul.tabbernav li a{-moz-border-radius-topleft : 5px;-moz-border-radius-topright : 5px;-webkit-border-top-left-radius : 5px;-webkit-border-top-right-radius : 5px; border-top-right-radius : 5px;border-top-left-radius : 5px;}
-	
-	/* @Borders all Corners (3)Pixel ----------- */	
 	.tipsy-inner {
 	-moz-border-radius : 3px;-webkit-border-radius : 3px;-khtml-border-radius : 3px; border-radius : 3px;text-shadow: 0 0 2px #000;
 	-moz-box-shadow : 0px 0px 5px #444;-webkit-box-shadow : 0px 0px 5px #444;-khtml-box-shadow : 0px 0px 5px #444;box-shadow : 0px 0px 5px #444;}
-
-	
-	/* @Borders all Corners (5)Pixel ----------- */	
-	#DivTable,.box_all{
+	#DivTable,.box_all ,blockquote.note {
 	-moz-border-radius : 5px;-webkit-border-radius : 5px;-khtml-border-radius : 5px; border-radius : 5px;}
-
-	/* @Borders all Corners (10)Pixel ----------- */	
 	.body_menu,.Bmenu, .button_img ,.button_file ,#fieldset_progress, .fieldset_google, .fieldset_yahoo  {
 	-moz-border-radius : 10px;-webkit-border-radius : 10px;-khtml-border-radius : 10px;border-radius : 10px;}
 /* @end */

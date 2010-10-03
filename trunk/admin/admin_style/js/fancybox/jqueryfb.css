@@ -4,14 +4,16 @@
 /* thumbnail Table */
 .xthumbs {width:100%;padding:0 !important;border:none !important;}
 .xthumbs  tr {background-color:transparent !important;background-image:none !important;border:none !important;margin:0 0 0 0 !important;}
-.xthumbs td {width:128px !important;height: 128px !important;cursor:pointer;padding:0 !important;margin:0 !important;border:none !important;position:relative !important;}
-.yaload,.yaload img{position:static;width:125px !important;height:125px !important;padding:0 !important;margin:2px 1px 2px 5px !important;z-index:700;border:none !important;overflow:hidden;}
-.spinner {position:static;width:125px;height:125px;background: url(../../images/ajax-loader.gif) no-repeat center center;}
+.xthumbs td {width:124px !important;height: 124px !important;cursor:pointer;padding:0 !important;margin:0 !important;border:none !important;position:relative !important;}
+.yaload,.yaload img{width:124px !important;height:124px !important;padding:0 !important;margin:0 !important;z-index:700;border:none !important;overflow:hidden;}
+.spinner {position:absolute;width:124px;height:124px;background: url(../../images/ajax-loader.gif) no-repeat center center;overflow:hidden;}
 .failerror {position:absolute;background: url(failerror.jpg) no-repeat center center !important;}
-img.mask {position:absolute;top:0;left:0;z-index:701;}
-#boxs .expand img:hover {background:url(expand.png) no-repeat center center; z-index:997;}
-.pbox {position:absolute;bottom:-1px;right:4px;z-index:702;padding:0 0 0 0 !important;margin:0 0 0 0 !important;}
-.osilver2,.osilver2:hover{background-color:transparent !important;background-image:none !important;border:none !important;}
+#boxs img.mask,.kfocus {position:absolute;top:0;left:0;z-index:701;background: url(mask.png) no-repeat center top !important;}
+#boxs img.mask:hover {background-position: center center !important;}
+
+.kfocus {background: url(mask.png) no-repeat center bottom !important;}
+
+.kcheck {position:relative;bottom:0;right:0;z-index:703;padding:0 !important;margin:1px 0 !important;}
 
 ul.ktip{float:right;}
 ul.ktip li{width:240px;height:22px;line-height:22px;float: right;border-bottom:1px solid #F0DE7D;text-align:right;}

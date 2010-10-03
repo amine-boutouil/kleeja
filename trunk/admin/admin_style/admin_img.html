@@ -4,18 +4,32 @@ jQuery(document).ready(function($){
 	// thumbnails 
    $('div#kktip[title]').qtip({
 		 content: {text: false,title: { text: 'here name image', button:'Close'}},
-		 show: { when: 'mouseover', delay:400, solo: true , effect: {type: 'fade',length: 0}},
-		 hide: { when: 'mouseout', delay: 1200, fixed: true },
+		 show: { when: 'mouseover', delay:600, solo: true , effect: {type: 'fade',length: 0}},
+		 hide: { when: 'mouseout', delay: 600, fixed: true },
 		 position: {corner: {target: 'topMiddle', tooltip: 'bottomMiddle'}},
-         style: {border: {width:3,radius: 8},padding: 10, tip: true, name: 'cream', width: 280 }	
+         style: {border: {width:3,radius: 8},padding: 10, tip: true, name: 'cream', width: 240 }	
       });
    
    // fancybox plugin
  $("a.fancybox").attr('rel', 'gallery').fancybox({'titleShow': false,'transitionIn'	: 'elastic', 'transitionOut':'elastic','easingIn':'easeOutBack','easingOut':'easeInBack'});	 
+ 
   // custom checkboxes
- $('input.img_checkbox').checkbox();
+  $('.kcheck input[type=checkbox]').checkbox();
+  
+    /*$('#cbDepartment input[type=checkbox]').click(function() {
+        var cell = $(this).closest('td');
+        
+        if ($(this).is(':checked')) {
+            cell.addClass('kfocus');
+        }
+        else {
+            cell.removeClass('kfocus');
+        }
+    });*/
+	
 
- // Ajax Loader images
+
+  // Ajax Loader images
  $('.yaload').each(function(i, elem) {
 	var im = new Image();
 	var tthis	= $(this);
@@ -54,8 +68,9 @@ jQuery(document).ready(function($){
 	}
 });
 
+
+
 });
-		
 //-->
 </script>
 
@@ -76,14 +91,13 @@ jQuery(document).ready(function($){
 	<table class="xthumbs" dir="ltr">
 	<LOOP NAME="arr">
 	{{tdnum}}
-	<td align="center" id="su[{{id}}]" class="osilver2">
-		<div style="position:relative !important;" id="kktip" title="<ul class='ktip'><li><div>{lang.FILEUPS} :</div> {{ups}}</li><li><div>{lang.FILESIZE} :</div> {{size}}</li><li><div>{lang.FILEDATE} :</div> {{time}}</li><li><div>{lang.BY} :</div> {{user}}</li><li><div>{lang.IP} :</div> {{ip}}</li></ul>">
+	<td align="center" id="su[{{id}}]">
+		<div style="position:relative !important;" id="kktip" title="<ul class='ktip'><li><span class='right'>{{name}}</span></li><li><div>{lang.FILEUPS} :</div> {{ups}}</li><li><div>{lang.FILESIZE} :</div> {{size}}</li><li><div>{lang.FILEDATE} :</div> {{time}}</li><li><div>{lang.BY} :</div> {{user}}</li><li><div>{lang.IP} :</div> {{ip}}</li></ul>">
 		<a href="{{href}}" class="fancybox">
-			<div klj_img="{{thumb_link}}" class="yaload spinner"><strong class="expand"><img class="mask" src="{STYLE_PATH_ADMIN}js/fancybox/mask.png" alt="" /></strong></div>
+			<div klj_img="{{thumb_link}}" class="yaload spinner"><strong class="expand"><img class="mask" src="{STYLE_PATH_ADMIN}images/spacer.gif" alt="" /></strong></div>
 		</a>
-		<strong class="pbox"><input name="del_{{id}}" type="checkbox" value="{{id}}" class="img_checkbox" onclick="change_color(this,'su[{{id}}]', 'ored');" rel="_del" /></strong>
+		<p class="kcheck"><input name="del_{{id}}" type="checkbox" value="{{id}}" onclick="change_color(this,'su[{{id}}]', 'kfocus');" rel="_del" /></p>
 		</div>
-
 	</td>
 	{{tdnum2}}
 	</LOOP>
@@ -91,7 +105,7 @@ jQuery(document).ready(function($){
 
 	<br /><div class="hr"></div>
 	
-	<div class="left check_all">[ <a href="javascript:void(0);" onclick="checkAll(document.imgform, '_del', 'su', 'ored');">{lang.CHECK_ALL}</a> ]</div>
+	<div class="left check_all">[ <a href="javascript:void(0);" onclick="checkAll(document.imgform, '_del', 'su', 'kfocus');">{lang.CHECK_ALL}</a> ]</div>
 	
 	<!-- pagination -->{page_nums}
 

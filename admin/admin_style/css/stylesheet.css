@@ -76,7 +76,7 @@
 
 	blockquote.note{margin:15px auto;padding:0;background:url('../images/icon/info.png') no-repeat 99% 50% #FFFFE0;border:5px solid #F7F0B8;color:#707037}
 	blockquote.note div{padding:15px 58px 15px 15px;margin:0 !important;border:1px solid #EDE396;}
-	blockquote.note p{color:#311706;margin-bottom:10px !important;font-weight:400;font-size:120%;border:1px solid #EDE396;}
+	blockquote.note p{color:#311706;margin-bottom:10px !important;font-weight:400;font-size:120%;}
 	blockquote.note em{color:#A73033;text-decoration:underline;}
 	
 	/* wrapper */
@@ -423,7 +423,7 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 /* ## class in the language files */
 
 /*checkboxes*/
-input.img_checkbox {padding:0 !important;;margin:0 !important;}
+input.img_checkbox {padding:0 !important;margin:0 !important;}
 .jquery-checkbox {line-height:18px;cursor:pointer;}
 .jquery-checkbox .mark {display: inline;}
 .jquery-checkbox img {vertical-align: middle; width: 18px; height: 18px;background: url(../images/checkbox1.png) no-repeat 0px 0px}
@@ -433,20 +433,3 @@ input.img_checkbox {padding:0 !important;;margin:0 !important;}
 .jquery-checkbox-disabled img{background: url(../images/checkbox1.png) no-repeat 0px 0px;}
 .jquery-checkbox-checked .jquery-checkbox-disabled img{background: url(../images/checkbox1.png) no-repeat 0px 0px;}
 /* / checkboxes*/
-
-.xthumbs {
-width:700px;
-position:relative;
-float:right;
-margin-top:10px;
-clear:both;
-}
-
-.xthumbs .box {
-float:right;
-width:128px;
-position:relative;
-clear:none;
-margin:0 6px 12px 0;
-padding:2px;
-}

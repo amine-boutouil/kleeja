@@ -966,7 +966,7 @@ function get_config($name)
 /*
 * Add new config option
 */
-function add_config ($name, $value, $order = '0', $html = '', $type = 'other', $plg_id = '0')
+function add_config ($name, $value, $order = '0', $html = '', $type = 'other', $plg_id = '0', $dynamic = false)
 {
 	global $dbprefix, $SQL, $config;
 	
@@ -974,11 +974,11 @@ function add_config ($name, $value, $order = '0', $html = '', $type = 'other', $
 	{
 		return true;
 	}
-
+	
 	$insert_query	= array(
-							'INSERT'	=> '`name` ,`value` ,`option` ,`display_order`, `type`, `plg_id`',
+							'INSERT'	=> '`name` ,`value` ,`option` ,`display_order`, `type`, `plg_id`, `dynamic`',
 							'INTO'		=> "{$dbprefix}config",
-							'VALUES'	=> "'" . $SQL->escape($name) . "','" . $SQL->escape($value) . "', '" . $SQL->real_escape($html) . "','" . intval($order) . "','" . $SQL->escape($type) . "','" . intval($plg_id) . "'",
+							'VALUES'	=> "'" . $SQL->escape($name) . "','" . $SQL->escape($value) . "', '" . $SQL->real_escape($html) . "','" . intval($order) . "','" . $SQL->escape($type) . "','" . intval($plg_id) . "','"  . (($dynamic) ? '1' : '0') . "'",
 						);
 	($hook = kleeja_run_hook('insert_sql_add_config_func')) ? eval($hook) : null; //run hook
 
@@ -1004,7 +1004,7 @@ function add_config_r($configs)
 	//array(name=>array(value=>,order=>,html=>),...);
 	foreach($configs as $n=>$m)
 	{
-		add_config($n, $m['value'], $m['order'], $m['html'], $m['type']);
+		add_config($n, $m['value'], $m['order'], $m['html'], $m['type'], $m['plg_id'], $m['dynamic']);
 	}
 	
 	return;

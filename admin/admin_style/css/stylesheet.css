@@ -96,20 +96,21 @@
 	#sign_ajax_error{color: red;}
 	
 	/* header */
-	#MenuWrapper{height:62px}
+	#MmWrap{float:right;height:62px;position:relative;right:26px;top:-20px;z-index:500}
 	#MmLeft{ background: url(../images/box/mm_left.png) no-repeat 0 0;float:left;height:62px;width:25px }	
 	#MmRight{ background: url(../images/box/mm_right.png) no-repeat 0 0;float:right;height:62px;width:20px }
-	#MmBody	{ background: url(../images/box/mm_repeat.png) repeat-x 0 0;float:left;height:62px;min-width:500px }
-	#MainMenu{float:right;height:62px;position:relative;right:5px;top:-20px;z-index:800}
+	#MmBody	{ background: url(../images/box/mm_repeat.png) repeat-x 0 0;float:left;height:62px;padding:0 20px; }
 	.mmDivider{ background: url(../images/box/mm_divider.gif) no-repeat 0 0;float:right;height:40px;margin:7px 10px 0;width:10px }
-	.Wuser,.Wlogin{float:right;margin:7px 0 1em;line-height:50px;color:#ffffff;}
-	.Wlogin{float:right;}
-	.mmicon{padding-left:10px}
+	.Wuser{float:right;margin:7px 0 1em;line-height:50px;color:#ffffff;font-size:100%; font-weight:700;}
 	.micon{padding-left:20px}
-	#Logo{float:left;margin:-65px 0 24px 10px;padding:10px;}
+	#Logo{float:left;margin:-75px 0 5px 10px;padding:10px;}
 	#Logo a{background:transparent url(../images/logo.png) no-repeat 0 0;display:block;height:69px;width:292px}
-	#HeaderRight{clear:right;float:right;margin:-5px 26px 10px}
-	.SitenameHead{height:40px;overflow:hidden;width:400px;color: #646464; font-size:160%; font-weight:400;}
+	#HeaderRight{clear:right;float:right;margin:-15px 36px 4px}
+	.SitenameHead{height:18px;overflow:hidden;width:300px;color: #646464; font-size:140%; font-weight:400;}
+	
+	#BoxNavTop{background:transparent url(../images/box/bg_navtop.png) no-repeat center bottom;height:84px;overflow:hidden;position:relative;}
+	ul.NavTop{width:312px;margin:-5px auto 10px auto;}
+	ul.NavTop li{float:right;}
 
 	/* footer */
 	#FooterTop{background:transparent url(../images/box/footerBg-top.png) no-repeat 0 0;height:2px;overflow:hidden}
@@ -136,7 +137,7 @@
 
 
 	/* Main Menu */
-	#MainMenuWrap,#main_menu{margin-top:-12px !important;background:transparent url(../images/box/menu_repeat.gif) repeat-y 0 0;}
+	#MainMenuWrap,#main_menu{margin-top:10px !important;background:transparent url(../images/box/menu_repeat.gif) repeat-y 0 0;}
 	#main_menu{width:240px !important;}
 	#main_menu .link_menu ,#main_menu .link_current {float:right;height: 46px;width:210px;margin:0;background:url(../images/menu_icons/bg_buttons.png) no-repeat center bottom;}
 	#main_menu .link_current a,#main_menu .link_current a:hover {background:url(../images/menu_icons/bg_buttons.png) no-repeat center -46px !important;color:#795A1C !important;}
@@ -149,7 +150,7 @@
 	/* thumbnail menu */
 	#MainMenuWrap{width:185px;margin-right:5px !important;}
 	.MainMenuBox1{background:transparent url(../images/box/menu_navtop.gif) no-repeat 0 0;padding:15px 0 0}
-	.MainMenuBox2{background:transparent url(../images/box/menu_navbm.gif) no-repeat 0 100%;padding:0 0 15px}
+	.MainMenuBox2{position:relative;background:transparent url(../images/box/menu_navbm.gif) no-repeat 0 100%;padding:0 0 15px}
 	.thumbnail {padding:0;}
 	.link_menu_thumbnail,
 	.link_current_thumbnail {float: right;height:82px; line-height:40px; width:82px; margin:0px ;text-align:center;}
@@ -163,7 +164,11 @@
 	#MainMenuWrap span.kbubbles {background:url(../images/menu_icons/mini/kbubbles.png) no-repeat center center;position:absolute;left:-3px;top:-5px;}	
 
 	/* # thumbnail menu */
-	.expand_thumbnail , .expand_thumbnail2{float:left;margin:0 10px 0 !important;width:48px; height: 48px;background: url("../images/box/expand_thumbnail.png") no-repeat 0px 0px;}
+	a.expand_thumbnail,a.expand_thumbnail2{position:absolute;top:-64px;right:-56px;height:64px;width:51px;
+				background:transparent url(../images/box/expand_thumbnail.png) no-repeat 0 0;}
+	a.expand_thumbnail2{right:-44px;background:transparent url(../images/box/expand_thumbnail2.png) no-repeat 0 0;}
+	
+	a.expand_thumbnail:hover,a.expand_thumbnail2:hover{background-position:0 -64px}
 
 	/* ribbon */
 	.ribbon,.ribbon .wrapAround,.ribbon .tab{height:52px;overflow:hidden;}

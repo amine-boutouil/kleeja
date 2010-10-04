@@ -184,32 +184,30 @@ function submit_kleeja_data(FORM_ID, ID)
 	<div id="PageWrapper">
 		<div class="pageTop"></div>
 		<div id="Header">
-		<div id="MenuWrapper">
-			<div id="MainMenu">
+		<div id="MmWrap">
 			<div id="MmLeft"></div>
 				<div id="MmBody">
-					<div class="Wuser"><img class="mmicon" src="{STYLE_PATH_ADMIN}images/favicon.gif" alt="" />{lang.WELCOME} .. {username}</div>
+					<div class="Wuser">{lang.WELCOME} : {username}</div>
 					<div class="mmDivider"></div>
 					<div class="Wuser">{lang.LAST_VISIT} : {last_visit}</div>
-					<div class="mmDivider"></div>
-					<div class="Wlogin"><a href="./" title="{lang.R_CPINDEX}"><img class="micon" src="{STYLE_PATH_ADMIN}images/icon/home.png" alt="" /></a></div>
-					<div class="Wlogin"><a href="{config.siteurl}" title="{lang.RETURN_HOME}"><img class="micon" src="{STYLE_PATH_ADMIN}images/icon/sign-out.png" alt="" /></a></div>
-					<div class="Wlogin"><a href="./?cp=b_lgoutcp&amp;{GET_FORM_KEY_GLOBAL}" title="{lang.R_LGOUTCP}" onclick="javascript:return confirm_from();"><img class="micon" src="{STYLE_PATH_ADMIN}images/icon/lgoutcp.png" alt="" /></a></div>
 				</div>
 			<div id="MmRight"></div>
-			</div>
 		</div>
 	
-		<div id="HeaderRight"><div class="SitenameHead"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/setting.png" alt=".." />{config.sitename}</div></div>
+		<div id="HeaderRight"><div class="SitenameHead">{config.sitename}</div></div>
 		<div id="Logo"><a href="./"></a></div>
 		<div class="clr"></div>
+		<div id="BoxNavTop">
+			<ul class="NavTop">
+				<li><a href="{config.siteurl}" title="{lang.RETURN_HOME}"><img class="micon" src="{STYLE_PATH_ADMIN}images/icon/back_home.png" alt="" /></a></li>
+				<li><a href="./" title="{lang.R_CPINDEX}"><img class="micon" src="{STYLE_PATH_ADMIN}images/icon/cp_kleeja.png" alt="" /></a></li>
+				<li><a href="./?cp=b_lgoutcp&amp;{GET_FORM_KEY_GLOBAL}" title="{lang.R_LGOUTCP}" onclick="javascript:return confirm_from();"><img class="micon" src="{STYLE_PATH_ADMIN}images/icon/sign_out.png" alt="" /></a></li>
+			</ul>
+		</div>
 	</div>
-	
+
 	<div id="pageMain">
 		<div class="contentArea">
-	
-		<div class="hr"></div>
-
 		<!-- start Main Menu right  -->
 		<IF NAME="SHOW_LIST">
 		<IF NAME="MINI_MENU">
@@ -217,7 +215,6 @@ function submit_kleeja_data(FORM_ID, ID)
 			<div class="MainMenuBox1">
 				<div class="MainMenuBox2">
 					<a href="{link_expand_menu}" class="expand_thumbnail"><img src="{STYLE_PATH_ADMIN}images/spacer.gif" alt="{lang.RETURN_HOME}" /></a>
-					<div class="clr"></div>
 					<LOOP NAME="adm_extensions_menu">	
 						<div class="({{current}}?link_menu_thumbnail link_current_thumbnail:link_menu_thumbnail)" id="c_{{goto}}"><p><a class="seTooltip" title="{{title}}" href="{{link}}" onclick="javascript:get_kleeja_link('{{link}}', '#main_container', {'current_id':'c_{{goto}}', 'current_class':'link_current_thumbnail'<IF LOOP="confirm">, 'confirm':true</IF>}); return false;"><img src="{{icon_mini}}" alt="{{title}}" style="margin:0 8px;vertical-align:middle;" /></a>{{kbubble}}</p></div>
 					</LOOP>
@@ -230,7 +227,6 @@ function submit_kleeja_data(FORM_ID, ID)
 			<div class="MainMenuBox1">
 				<div class="MainMenuBox2">
 					<a href="{link_expand_menu}" class="expand_thumbnail2"><img src="{STYLE_PATH_ADMIN}images/spacer.gif" alt="{lang.RETURN_HOME}" /></a>
-					<div class="clr"></div>
 					<LOOP NAME="adm_extensions_menu">	
 						<div class="({{current}}?link_menu link_current:link_menu)" id="c_{{goto}}"><p><a title="{{title}}" href="{{link}}" onclick="javascript:get_kleeja_link('{{link}}', '#main_container', {'current_id':'c_{{goto}}', 'current_class':'link_current'<IF LOOP="confirm">, 'confirm':true</IF>}); return false;"><img src="{{icon}}" alt="{{title}}" />{{kbubble}}<span>{{lang}}</span></a></p></div>
 					</LOOP>
@@ -240,6 +236,5 @@ function submit_kleeja_data(FORM_ID, ID)
 		</div>
 		</IF>
 		</IF>
-	
 	<!-- MainContainer -->
 	<div id="main_container">

@@ -67,7 +67,10 @@
 	.MarginBottom {margin-top:10px;}
 	.headline {color: #318391;display:block;font-size:180%;margin:-5px 0 0 0;font-weight:700;padding:0 0 20px 0;}
 	
+	.SitenameHead{height:18px;margin:-10px 5px 20px 0;overflow:hidden;width:600px;color:#646464;font-size:140%; font-weight:400;}
+
 	.titleAll{margin:0 0 20px 0;font-size:120%;}
+	.qtip .qtip-content{padding: 10px;overflow: hidden;}
 	
 	button.btn{background:transparent url(../images/box/button.gif) no-repeat right -92px;border:0;font:bold 100% tahoma;margin:0 5px 0 -6px;outline:none;padding:0 35px 0 0;text-align:center;cursor:pointer;overflow:visible;position:relative;}
 	button.btn span{background:transparent url(../images/box/button.gif) no-repeat left top;color:#ffffff;height:29px;line-height:1.2;padding:13px 0 0 35px;text-shadow:#000 -1px -1px 0;display:block;position:relative;white-space:nowrap;margin-top: -1px;}
@@ -105,11 +108,11 @@
 	.micon{padding-left:20px}
 	#Logo{float:left;margin:-75px 0 5px 10px;padding:10px;}
 	#Logo a{background:transparent url(../images/logo.png) no-repeat 0 0;display:block;height:69px;width:292px}
-	#HeaderRight{clear:right;float:right;margin:-15px 36px 4px}
-	.SitenameHead{height:18px;overflow:hidden;width:300px;color: #646464; font-size:140%; font-weight:400;}
-	
+	#HeaderRight{clear:right;float:right;margin:-15px 40px 0}
+	#HeaderRight .cp {font-size:180%;margin:0 !important;padding:0 0 0 0 !important;}
+
 	#BoxNavTop{background:transparent url(../images/box/bg_navtop.png) no-repeat center bottom;height:84px;overflow:hidden;position:relative;}
-	ul.NavTop{width:312px;margin:-5px auto 10px auto;}
+	ul.NavTop{width:312px;margin:-5px auto 0px auto;}
 	ul.NavTop li{float:right;}
 
 	/* footer */
@@ -164,18 +167,16 @@
 	#MainMenuWrap span.kbubbles {background:url(../images/menu_icons/mini/kbubbles.png) no-repeat center center;position:absolute;left:-3px;top:-5px;}	
 
 	/* # thumbnail menu */
-	a.expand_thumbnail,a.expand_thumbnail2{position:absolute;top:-64px;right:-56px;height:64px;width:51px;
-				background:transparent url(../images/box/expand_thumbnail.png) no-repeat 0 0;}
+	a.expand_thumbnail,a.expand_thumbnail2{position:absolute;top:-64px;right:-56px;height:64px;width:51px;background:transparent url(../images/box/expand_thumbnail.png) no-repeat 0 0;}
 	a.expand_thumbnail2{right:-44px;background:transparent url(../images/box/expand_thumbnail2.png) no-repeat 0 0;}
-	
 	a.expand_thumbnail:hover,a.expand_thumbnail2:hover{background-position:0 -64px}
 
 	/* ribbon */
 	.ribbon,.ribbon .wrapAround,.ribbon .tab{height:52px;overflow:hidden;}
-	.ribbon{margin:-15px -4px 8px -37px;width:684px}
+	.ribbon{margin:-15px -20px 8px -37px;width:700px}
 	.ribbon .wrapAround{background:transparent url(../images/box/ribbon-wrap.png) no-repeat 0 -104px scroll;float:left;width:52px;display:block;}
 	.ribbon .CenterAround{background:transparent url(../images/box/ribbon-wrap.png) no-repeat 0 0px scroll;}
-	.ribbon .tab{background:transparent url(../images/box/ribbon.png) no-repeat right;float:left;width:620px}
+	.ribbon .tab{background:transparent url(../images/box/ribbon.png) no-repeat right;float:left;width:632px}
 	.ribbon span a{font-weight:700;}
 	.ribbon span.STitle{margin:17px 20px 0 80px;font-size:140%;text-shadow:#884005 -1px -1px 1px}
 	.ribbon span.TitleSub {color:#FFF !important;font-size:100%;margin:16px 0 0 20px}

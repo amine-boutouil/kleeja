@@ -3,9 +3,9 @@
 jQuery(document).ready(function($){
 	// thumbnails 
    $('div#kktip[title]').qtip({
-		 content: {text: false,title: { text: 'here name image', button:'Close'}},
-		 show: { when: 'mouseover', delay:600, solo: true , effect: {type: 'fade',length: 0}},
-		 hide: { when: 'mouseout', delay: 600, fixed: true },
+		 content: {text: false,prerender: true},
+		 show: { when: 'mouseover', delay:200, solo: true , effect: {type: 'fade',length: 0}},
+		 hide: { when: 'mouseout', delay: 1000, fixed: true },
 		 position: {corner: {target: 'topMiddle', tooltip: 'bottomMiddle'}},
          style: {border: {width:3,radius: 8},padding: 10, tip: true, name: 'cream', width: 240 }	
       });

@@ -19,7 +19,7 @@
 <IF NAME="{lang.DIR}==ltr"><link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/ltr.css" /></IF>	
 <IS_BROWSER="ie6"><link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/ie_6.css" /></IS_BROWSER>
 <IS_BROWSER="ie"><link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/ie.css" /></IS_BROWSER>
-<IF NAME="MINI_MENU"><style type="text/css">#divmiddle,#boxs{width:700px;}.ribbon{width:749px}.ribbon .tab{width:696px}</style></IF>
+<IF NAME="MINI_MENU"><style type="text/css">#divmiddle,#boxs{width:700px;}.ribbon{width:749px;margin:-15px -4px 8px -37px;}.ribbon .tab{width:696px}</style></IF>
 
 <!--  javascript coding  -->
 <script type="text/javascript">
@@ -186,15 +186,11 @@ function submit_kleeja_data(FORM_ID, ID)
 		<div id="Header">
 		<div id="MmWrap">
 			<div id="MmLeft"></div>
-				<div id="MmBody">
-					<div class="Wuser">{lang.WELCOME} : {username}</div>
-					<div class="mmDivider"></div>
-					<div class="Wuser">{lang.LAST_VISIT} : {last_visit}</div>
-				</div>
+				<div id="MmBody"><div class="Wuser">{lang.WELCOME} : {username}</div><div class="mmDivider"></div><div class="Wuser">{lang.LAST_VISIT} : {last_visit}</div></div>
 			<div id="MmRight"></div>
 		</div>
 	
-		<div id="HeaderRight"><div class="SitenameHead">{config.sitename}</div></div>
+		<div id="HeaderRight"><div class="headline cp">{lang.KLEEJA_CP}</div></div>
 		<div id="Logo"><a href="./"></a></div>
 		<div class="clr"></div>
 		<div id="BoxNavTop">

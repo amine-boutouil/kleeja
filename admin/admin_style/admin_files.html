@@ -1,5 +1,6 @@
 ﻿<script type="text/javascript">
 <!--
+jQuery(document).ready(function($){
  //Navigate to pages by arrows
  $(document).keydown(function(e) {
 
@@ -36,7 +37,7 @@
 <!-- start view files temlate  -->
 <div id="divmiddle">
 <div class="file_cp1">
-<form method="post" name="filesform" action="{action}" onsubmit="javascript:return confirm_from();">
+<form method="post" name="filesform" action="{action}" id="files_form">
 <fieldset>
 
 <!-- start box all -->
@@ -119,7 +120,8 @@
 {page_nums}
 <!-- # pagination  -->
 
-<input class="left_button" name="submit" type="submit" value="{lang.UPDATE_FILES}" />
+<input type="hidden" name="submit" value="1" />
+<input class="left_button" name="submit" type="submit" value="{lang.UPDATE_FILES}" onclick="javascript:submit_kleeja_data('#files_form', '#main_container', 1); return false;" />
 
 </IF>
 <!-- clear  -->

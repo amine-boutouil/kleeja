@@ -37,6 +37,11 @@ if (isset($_POST['submit']))
 {
 	if(!kleeja_check_form_key('adm_files'))
 	{
+		if(isset($_GET['_ajax_']))
+		{
+			echo_ajax(888, $lang['INVALID_FORM_KEY']);
+		}
+
 		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $action, 1);
 	}
 }
@@ -44,6 +49,11 @@ if (isset($_POST['search_file']))
 {
 	if(!kleeja_check_form_key('adm_files_search'))
 	{
+		if(isset($_GET['_ajax_']))
+		{
+			echo_ajax(888, $lang['INVALID_FORM_KEY']);
+		}
+
 		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, basename(ADMIN_PATH) . '?cp=h_search', 1);
 	}
 }
@@ -332,7 +342,7 @@ $current_page	= $Pager->currentPage;
 //after submit 
 if (isset($_POST['submit']))
 {
-	$text	= ($affected ? $lang['FILES_UPDATED'] : $lang['NO_UP_CHANGE_S']) . '<meta HTTP-EQUIV="REFRESH" content="2; url=' . $action . '">' . "\n";
+	$text	= ($affected ? $lang['FILES_UPDATED'] : $lang['NO_UP_CHANGE_S']) .
+				'<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . $action . '\');", 2000);</script>' . "\n";
 	$stylee	= "admin_info";
 }
-

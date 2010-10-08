@@ -117,13 +117,21 @@ function get_kleeja_link(URL, ID, p)
 	});
 }
 
-function submit_kleeja_data(FORM_ID, ID)
+function submit_kleeja_data(FORM_ID, ID, CONFIRM)
 {
 	if(!ID)
 	{
 		ID = '#main_container';
 	}
 
+	if(CONFIRM)
+	{
+		if(!confirm_from())
+		{
+			return;
+		}
+	}
+	
 	$("#sign_ajax_error").css('display', 'none');
 	$(ID).css('display', 'none');
 	$("#sign_ajax").show();

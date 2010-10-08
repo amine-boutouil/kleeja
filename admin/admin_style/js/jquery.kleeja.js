@@ -19,21 +19,45 @@
  /** jQuery Easing - http://gsgd.co.uk/sandbox/jquery/easing/   **/
  eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--)r[e(c)]=k[c]||e(c);k=[function(e){return r[e]}];e=function(){return'\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('h.i[\'1a\']=h.i[\'z\'];h.O(h.i,{y:\'D\',z:9(x,t,b,c,d){6 h.i[h.i.y](x,t,b,c,d)},17:9(x,t,b,c,d){6 c*(t/=d)*t+b},D:9(x,t,b,c,d){6-c*(t/=d)*(t-2)+b},13:9(x,t,b,c,d){e((t/=d/2)<1)6 c/2*t*t+b;6-c/2*((--t)*(t-2)-1)+b},X:9(x,t,b,c,d){6 c*(t/=d)*t*t+b},U:9(x,t,b,c,d){6 c*((t=t/d-1)*t*t+1)+b},R:9(x,t,b,c,d){e((t/=d/2)<1)6 c/2*t*t*t+b;6 c/2*((t-=2)*t*t+2)+b},N:9(x,t,b,c,d){6 c*(t/=d)*t*t*t+b},M:9(x,t,b,c,d){6-c*((t=t/d-1)*t*t*t-1)+b},L:9(x,t,b,c,d){e((t/=d/2)<1)6 c/2*t*t*t*t+b;6-c/2*((t-=2)*t*t*t-2)+b},K:9(x,t,b,c,d){6 c*(t/=d)*t*t*t*t+b},J:9(x,t,b,c,d){6 c*((t=t/d-1)*t*t*t*t+1)+b},I:9(x,t,b,c,d){e((t/=d/2)<1)6 c/2*t*t*t*t*t+b;6 c/2*((t-=2)*t*t*t*t+2)+b},G:9(x,t,b,c,d){6-c*8.C(t/d*(8.g/2))+c+b},15:9(x,t,b,c,d){6 c*8.n(t/d*(8.g/2))+b},12:9(x,t,b,c,d){6-c/2*(8.C(8.g*t/d)-1)+b},Z:9(x,t,b,c,d){6(t==0)?b:c*8.j(2,10*(t/d-1))+b},Y:9(x,t,b,c,d){6(t==d)?b+c:c*(-8.j(2,-10*t/d)+1)+b},W:9(x,t,b,c,d){e(t==0)6 b;e(t==d)6 b+c;e((t/=d/2)<1)6 c/2*8.j(2,10*(t-1))+b;6 c/2*(-8.j(2,-10*--t)+2)+b},V:9(x,t,b,c,d){6-c*(8.o(1-(t/=d)*t)-1)+b},S:9(x,t,b,c,d){6 c*8.o(1-(t=t/d-1)*t)+b},Q:9(x,t,b,c,d){e((t/=d/2)<1)6-c/2*(8.o(1-t*t)-1)+b;6 c/2*(8.o(1-(t-=2)*t)+1)+b},P:9(x,t,b,c,d){f s=1.l;f p=0;f a=c;e(t==0)6 b;e((t/=d)==1)6 b+c;e(!p)p=d*.3;e(a<8.w(c)){a=c;f s=p/4}m f s=p/(2*8.g)*8.r(c/a);6-(a*8.j(2,10*(t-=1))*8.n((t*d-s)*(2*8.g)/p))+b},H:9(x,t,b,c,d){f s=1.l;f p=0;f a=c;e(t==0)6 b;e((t/=d)==1)6 b+c;e(!p)p=d*.3;e(a<8.w(c)){a=c;f s=p/4}m f s=p/(2*8.g)*8.r(c/a);6 a*8.j(2,-10*t)*8.n((t*d-s)*(2*8.g)/p)+c+b},T:9(x,t,b,c,d){f s=1.l;f p=0;f a=c;e(t==0)6 b;e((t/=d/2)==2)6 b+c;e(!p)p=d*(.3*1.5);e(a<8.w(c)){a=c;f s=p/4}m f s=p/(2*8.g)*8.r(c/a);e(t<1)6-.5*(a*8.j(2,10*(t-=1))*8.n((t*d-s)*(2*8.g)/p))+b;6 a*8.j(2,-10*(t-=1))*8.n((t*d-s)*(2*8.g)/p)*.5+c+b},F:9(x,t,b,c,d,s){e(s==u)s=1.l;6 c*(t/=d)*t*((s+1)*t-s)+b},E:9(x,t,b,c,d,s){e(s==u)s=1.l;6 c*((t=t/d-1)*t*((s+1)*t+s)+1)+b},16:9(x,t,b,c,d,s){e(s==u)s=1.l;e((t/=d/2)<1)6 c/2*(t*t*(((s*=(1.B))+1)*t-s))+b;6 c/2*((t-=2)*t*(((s*=(1.B))+1)*t+s)+2)+b},A:9(x,t,b,c,d){6 c-h.i.v(x,d-t,0,c,d)+b},v:9(x,t,b,c,d){e((t/=d)<(1/2.k)){6 c*(7.q*t*t)+b}m e(t<(2/2.k)){6 c*(7.q*(t-=(1.5/2.k))*t+.k)+b}m e(t<(2.5/2.k)){6 c*(7.q*(t-=(2.14/2.k))*t+.11)+b}m{6 c*(7.q*(t-=(2.18/2.k))*t+.19)+b}},1b:9(x,t,b,c,d){e(t<d/2)6 h.i.A(x,t*2,0,c,d)*.5+b;6 h.i.v(x,t*2-d,0,c,d)*.5+c*.5+b}});',62,74,'||||||return||Math|function|||||if|var|PI|jQuery|easing|pow|75|70158|else|sin|sqrt||5625|asin|||undefined|easeOutBounce|abs||def|swing|easeInBounce|525|cos|easeOutQuad|easeOutBack|easeInBack|easeInSine|easeOutElastic|easeInOutQuint|easeOutQuint|easeInQuint|easeInOutQuart|easeOutQuart|easeInQuart|extend|easeInElastic|easeInOutCirc|easeInOutCubic|easeOutCirc|easeInOutElastic|easeOutCubic|easeInCirc|easeInOutExpo|easeInCubic|easeOutExpo|easeInExpo||9375|easeInOutSine|easeInOutQuad|25|easeOutSine|easeInOutBack|easeInQuad|625|984375|jswing|easeInOutBounce'.split('|'),0,{}))
 
+ /** jQuery.Preload - Multifunctional preloader * @author Ariel Flesler  **/
+ ;(function($){var h=$.preload=function(c,d){if(c.split)c=$(c);d=$.extend({},h.defaults,d);var f=$.map(c,function(a){if(!a)return;if(a.split)return d.base+a+d.ext;var b=a.src||a.href;if(typeof d.placeholder=='string'&&a.src)a.src=d.placeholder;if(b&&d.find)b=b.replace(d.find,d.replace);return b||null}),data={loaded:0,failed:0,next:0,done:0,total:f.length};if(!data.total)return finish();var g=$(Array(d.threshold+1).join('<img/>')).load(handler).error(handler).bind('abort',handler).each(fetch);function handler(e){data.element=this;data.found=e.type=='load';data.image=this.src;data.index=this.index;var a=data.original=c[this.index];data[data.found?'loaded':'failed']++;data.done++;if(d.enforceCache)h.cache.push($('<img/>').attr('src',data.image)[0]);if(d.placeholder&&a.src)a.src=data.found?data.image:d.notFound||a.src;if(d.onComplete)d.onComplete(data);if(data.done<data.total)fetch(0,this);else{if(g&&g.unbind)g.unbind('load').unbind('error').unbind('abort');g=null;finish()}};function fetch(i,a,b){if(a.attachEvent&&data.next&&data.next%h.gap==0&&!b){setTimeout(function(){fetch(i,a,1)},0);return!1}if(data.next==data.total)return!1;a.index=data.next;a.src=f[data.next++];if(d.onRequest){data.index=a.index;data.element=a;data.image=a.src;data.original=c[data.next-1];d.onRequest(data)}};function finish(){if(d.onFinish)d.onFinish(data)}};h.gap=14;h.cache=[];h.defaults={threshold:2,base:'',ext:'',replace:''};$.fn.preload=function(a){h(this,a);return this}})(jQuery); 
+ 
  /** Kleeja Uploader - acp javascript  **/
  function change_color(obj,id,c,c2){c=(c==null)?'ored':c;c2=(c==null)?'osilver':c2;var ii=document.getElementById(id);if(obj.checked){ii.setAttribute("class",c);ii.setAttribute("className",c)}else{ii.setAttribute("class",c2);ii.setAttribute("className",c2)}}function checkAll(form,id,_do_c_,c,c2){for(var i=0;i<form.elements.length;i++){if(form.elements[i].getAttribute("rel")!=id)continue;if(form.elements[i].checked){uncheckAll(form,id,_do_c_,c,c2);break}form.elements[i].checked=true;change_color(form.elements[i],_do_c_+'['+form.elements[i].value+']',c,c2)}}function uncheckAll(form,id,_do_c_,c,c2){for(var i=0;i<form.elements.length;i++){if(form.elements[i].getAttribute("rel")!=id)continue;form.elements[i].checked=false;change_color(form.elements[i],_do_c_+'['+form.elements[i].value+']',c,c2)}}function change_color_exts(id){eval('var ii = document.getElementById("su['+id+']");');eval('var g_obj = document.getElementById("gal_'+id+'");');eval('var u_obj = document.getElementById("ual_'+id+'");');if(g_obj.checked&&u_obj.checked){ii.setAttribute("class",'o_all');ii.setAttribute("className",'o_all')}else if(g_obj.checked){ii.setAttribute("class",'o_g');ii.setAttribute("className",'o_g')}else if(u_obj.checked){ii.setAttribute("class",'o_u');ii.setAttribute("className",'o_u')}else{ii.setAttribute("class",'');ii.setAttribute("className",'')}}function checkAll_exts(form,id,_do_c_){for(var i=0;i<form.elements.length;i++){if(form.elements[i].getAttribute("rel")!=id)continue;if(form.elements[i].checked){uncheckAll_exts(form,id,_do_c_);break}form.elements[i].checked=true;change_color_exts(form.elements[i].value)}}function uncheckAll_exts(form,id,_do_c_){for(var i=0;i<form.elements.length;i++){if(form.elements[i].getAttribute("rel")!=id)continue;form.elements[i].checked=false;change_color_exts(form.elements[i].value)}}
 
  jQuery(document).ready(function($){
+	// custom checkboxes
 	$('input[type=checkbox]').checkbox();
+	
+	// thumbnails 
+    $('div#kktip[title]').qtip({
+		 content: {text: false,prerender: true},
+		 show: { when: 'mouseover', delay:200, solo: true , effect: {type: 'fade',length: 0}},
+		 hide: { when: 'mouseout', delay: 1000, fixed: true },
+		 position: {corner: {target: 'topMiddle', tooltip: 'bottomMiddle'}},
+         style: {border: {width:3,radius: 8},padding: 10, tip: true, name: 'cream', width: 240 }	
+    });
 	// Tooltip #BoxNavTop
-    $('ul.NavTop li a[title]').qtip({
-		 content: {text: false},
-		 position: {corner: {target: 'topMiddle', tooltip: 'rightBottom'}},
-         style: {border: {width:2,radius: 4},padding: 10, tip: true, name: 'light'}	
-      });
-	// Tooltip Footer
-	$('#ktipTop a[title]').qtip({ 
-		content: {text: false }, 
-		position: {corner: {target: 'topMiddle',tooltip: 'bottomRight'}},
-		style: { border: { width:2,radius: 5},padding: 10, textAlign: 'center', tip: true, name: 'dark'}
+    $('.NavTop li a img[title]').qtip({
+		content: {text: false},
+		position: {corner: {target: 'topMiddle', tooltip: 'rightBottom'}},
+		style: {border: {width:4,radius: 4},padding: 10, tip: true, name: 'light'}
 	});
+	
+	// Tooltip .thumbnail
+	$('.seTooltip a[title]').qtip({
+		content: {text: false },
+		position: {corner: {target: 'topMiddle',tooltip: 'bottomMiddle'}},
+		style: { background: '#262626', color: '#FFF', border: { width:2, color: '#B4B4B4', radius: 4},padding: 10, textAlign: 'center', tip:{corner: 'bottomMiddle', color: '#262626', size: { x: 20, y : 12 }}}
+	});
+
+	// Tooltip Footer
+	$('#ktipTop a img[title]').qtip({
+		content: {text: false },
+		position: {corner: {target: 'topMiddle',tooltip: 'bottomRight'}},
+		style: { border: { width:2,radius: 4},padding: 10, textAlign: 'center', tip: true, name: 'blue'}
+	});
+	
+
+	
  });

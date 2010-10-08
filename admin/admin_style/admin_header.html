@@ -14,7 +14,6 @@
 <!--  css coding -->
 <link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/screen.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}js/fancybox/jqueryfb.css" />
-<link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}js/prototip/css/prototip.css" />
 
 <IF NAME="{lang.DIR}==ltr"><link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/ltr.css" /></IF>	
 <IS_BROWSER="ie6"><link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/ie_6.css" /></IS_BROWSER>
@@ -28,8 +27,8 @@ var STYLE_PATH_ADMIN = '{STYLE_PATH_ADMIN}';var go_to = '{go_to}';
 //-->
 </script>
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.js"></script>
-<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.kleeja.js"></script>
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}js/fancybox/fancybox.js"></script>
+<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.kleeja.js"></script>
 
 <script type="text/javascript">
 <!--
@@ -97,7 +96,7 @@ function get_kleeja_link(URL, ID, p)
 					$('#' + p['current_id']).addClass(p['current_class']);
 				}
 
-				$(ID).fadeIn(200);
+				$(ID).fadeIn(100);
 
 				if($('body').scrollTop() > 0 && $('body').scrollTop() > 200)
 				{
@@ -160,7 +159,7 @@ function submit_kleeja_data(FORM_ID, ID, CONFIRM)
 			else
 			{
 				$(ID).html(R.content);
-				$(ID).fadeIn(200);
+				$(ID).fadeIn(100);
 				if($('body').scrollTop() > 0 && $('body').scrollTop() > 200)
 				{
 					$('body').animate({scrollTop:0}, 'slow');
@@ -203,9 +202,9 @@ function submit_kleeja_data(FORM_ID, ID, CONFIRM)
 		<div class="clr"></div>
 		<div id="BoxNavTop">
 			<ul class="NavTop">
-				<li><a href="{config.siteurl}" title="{lang.RETURN_HOME}"><img class="micon" src="{STYLE_PATH_ADMIN}images/icon/back_home.png" alt="" /></a></li>
-				<li><a href="./" title="{lang.R_CPINDEX}"><img class="micon" src="{STYLE_PATH_ADMIN}images/icon/cp_kleeja.png" alt="" /></a></li>
-				<li><a href="./?cp=b_lgoutcp&amp;{GET_FORM_KEY_GLOBAL}" title="{lang.R_LGOUTCP}" onclick="javascript:return confirm_from();"><img class="micon" src="{STYLE_PATH_ADMIN}images/icon/sign_out.png" alt="" /></a></li>
+				<li><a href="{config.siteurl}"><img class="micon" title="{lang.RETURN_HOME}" src="{STYLE_PATH_ADMIN}images/icon/back_home.png" alt="" /></a></li>
+				<li><a href="./"><img class="micon" title="{lang.R_CPINDEX}" src="{STYLE_PATH_ADMIN}images/icon/cp_kleeja.png" alt="" /></a></li>
+				<li><a href="./?cp=b_lgoutcp&amp;{GET_FORM_KEY_GLOBAL}" onclick="javascript:return confirm_from();"><img class="micon" title="{lang.R_LGOUTCP}" src="{STYLE_PATH_ADMIN}images/icon/sign_out.png" alt="" /></a></li>
 			</ul>
 		</div>
 	</div>
@@ -220,7 +219,7 @@ function submit_kleeja_data(FORM_ID, ID, CONFIRM)
 				<div class="MainMenuBox2">
 					<a href="{link_expand_menu}" class="expand_thumbnail"><img src="{STYLE_PATH_ADMIN}images/spacer.gif" alt="{lang.RETURN_HOME}" /></a>
 					<LOOP NAME="adm_extensions_menu">	
-						<div class="({{current}}?link_menu_thumbnail link_current_thumbnail:link_menu_thumbnail)" id="c_{{goto}}"><p><a class="seTooltip" title="{{title}}" href="{{link}}" onclick="javascript:get_kleeja_link('{{link}}', '#main_container', {'current_id':'c_{{goto}}', 'current_class':'link_current_thumbnail'<IF LOOP="confirm">, 'confirm':true</IF>}); return false;"><img src="{{icon_mini}}" alt="{{title}}" style="margin:0 8px;vertical-align:middle;" /></a>{{kbubble}}</p></div>
+						<div class="({{current}}?link_menu_thumbnail link_current_thumbnail:link_menu_thumbnail)" id="c_{{goto}}"><p class="seTooltip"><a title="{{title}}" href="{{link}}" onclick="javascript:get_kleeja_link('{{link}}', '#main_container', {'current_id':'c_{{goto}}', 'current_class':'link_current_thumbnail'<IF LOOP="confirm">, 'confirm':true</IF>}); return false;"><img src="{{icon_mini}}" alt="{{title}}" /></a>{{kbubble}}</p></div>
 					</LOOP>
 					<div class="clr"></div>
 				</div>
@@ -232,7 +231,7 @@ function submit_kleeja_data(FORM_ID, ID, CONFIRM)
 				<div class="MainMenuBox2">
 					<a href="{link_expand_menu}" class="expand_thumbnail2"><img src="{STYLE_PATH_ADMIN}images/spacer.gif" alt="{lang.RETURN_HOME}" /></a>
 					<LOOP NAME="adm_extensions_menu">	
-						<div class="({{current}}?link_menu link_current:link_menu)" id="c_{{goto}}"><p><a title="{{title}}" href="{{link}}" onclick="javascript:get_kleeja_link('{{link}}', '#main_container', {'current_id':'c_{{goto}}', 'current_class':'link_current'<IF LOOP="confirm">, 'confirm':true</IF>}); return false;"><img src="{{icon}}" alt="{{title}}" />{{kbubble}}<span>{{lang}}</span></a></p></div>
+						<div class="({{current}}?link_menu link_current:link_menu)" id="c_{{goto}}"><p><a href="{{link}}" onclick="javascript:get_kleeja_link('{{link}}', '#main_container', {'current_id':'c_{{goto}}', 'current_class':'link_current'<IF LOOP="confirm">, 'confirm':true</IF>}); return false;"><img src="{{icon}}" alt="{{title}}" />{{kbubble}}<span>{{lang}}</span></a></p></div>
 					</LOOP>
 					<div class="clr"></div>
 				</div>

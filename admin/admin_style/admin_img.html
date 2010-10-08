@@ -1,72 +1,42 @@
 <script type="text/javascript">
 <!--
 jQuery(document).ready(function($){
-	// thumbnails 
-   $('div#kktip[title]').qtip({
-		 content: {text: false,prerender: true},
-		 show: { when: 'mouseover', delay:200, solo: true , effect: {type: 'fade',length: 0}},
-		 hide: { when: 'mouseout', delay: 1000, fixed: true },
-		 position: {corner: {target: 'topMiddle', tooltip: 'bottomMiddle'}},
-         style: {border: {width:3,radius: 8},padding: 10, tip: true, name: 'cream', width: 240 }	
-      });
-   
-   // fancybox plugin
- $("a.fancybox").attr('rel', 'gallery').fancybox({'titleShow': false,'transitionIn'	: 'elastic', 'transitionOut':'elastic','easingIn':'easeOutBack','easingOut':'easeInBack'});	 
- 
-  // custom checkboxes
-  $('.kcheck input[type=checkbox]').checkbox();
-  
-    /*$('#cbDepartment input[type=checkbox]').click(function() {
-        var cell = $(this).closest('td');
-        
-        if ($(this).is(':checked')) {
-            cell.addClass('kfocus');
-        }
-        else {
-            cell.removeClass('kfocus');
-        }
-    });*/
+	// fancybox plugin
+	$("a.fancybox").attr('rel', 'gallery').fancybox({'titleShow': false,'transitionIn'	: 'elastic', 'transitionOut':'elastic','easingIn':'easeOutBack','easingOut':'easeInBack'});	 
 	
+	// custom checkboxes
+	$('.kcheck input[type=checkbox]').checkbox(); 
+	
+	// preload images
+	$.preload('#Kload img', {placeholder:'{STYLE_PATH_ADMIN}images/ajax-loader.gif',notFound:'{STYLE_PATH_ADMIN}js/fancybox/failerror.jpg',	enforceCache: true,	threshold: 2 });
 
+	$("img.mask").hover(function(){$(this).stop().animate({'opacity': '0'}, 'slow');},function() {$(this).stop().animate({'opacity': '1'}, 'slow');});
 
-  // Ajax Loader images
- $('.yaload').each(function(i, elem) {
-	var im = new Image();
-	var tthis	= $(this);
-	im.src		= tthis.attr("klj_img");
-	im.onload = function(e) {tthis.removeClass('spinner');tthis.append(im);};
-	im.onerror = function(e) { tthis.removeClass('spinner'); tthis.addClass('failerror');};
-	im.onabort = function(e) { tthis.removeClass('spinner'); tthis.addClass('failerror');}
-});
-
- //Navigate to pages by arrows
- $(document).keydown(function(e) {
-
-	if (!$('#pagination').length) {
-		return;
-	}
-
-	var current_page = parseInt($('#pagination .current span').html());
-	var is_there_next = $('#pagination .phover').length < 2 && current_page > 1 ? false : true;
-	var current_location = '{action}'.replace(/[&]*page=[0-9]+/i, '').replace(/&&/, '');
-
-	switch(e.keyCode) { 
-		//left, next
-		case 37:
-			if(!is_there_next){
-				return;
-			}
-			get_kleeja_link(current_location + '&page=' + (current_page+1), '#main_container');
-		break;
-		//right, prev
-		case 39:
-			if(current_page <= 1){
-				return;
-			}
-			get_kleeja_link(current_location + '&page=' + (current_page-1), '#main_container');
-		break;
-	}
-});
+	//Navigate to pages by arrows
+	$(document).keydown(function(e) {
+		if (!$('#pagination').length) {
+			return;
+		}
+		var current_page = parseInt($('#pagination .current span').html());
+		var is_there_next = $('#pagination .phover').length < 2 && current_page > 1 ? false : true;
+		var current_location = '{action}'.replace(/[&]*page=[0-9]+/i, '').replace(/&&/, '');
+		switch(e.keyCode) { 
+			//left, next
+			case 37:
+				if(!is_there_next){
+					return;
+				}
+				get_kleeja_link(current_location + '&page=' + (current_page+1), '#main_container');
+			break;
+			//right, prev
+			case 39:
+				if(current_page <= 1){
+					return;
+				}
+				get_kleeja_link(current_location + '&page=' + (current_page-1), '#main_container');
+			break;
+		}
+	});
 
 
 
@@ -83,25 +53,28 @@ jQuery(document).ready(function($){
 	
 	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><img class="left TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/img_ctrl_button.png" alt="" /><span class="STitle left"><a href="index.php?cp=d_img_ctrl">{lang.R_IMG_CTRL}</a></span></div></div>
 
-	<br />
+	<br /><div class="hr"></div>
 	
 	<IF NAME="no_results">
 	<div class="nothing"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/warning_nothing.gif" alt="nothing" />{lang.NOTHING}</div>
 	<ELSE>
-	<table class="xthumbs" dir="ltr">
+
+	<div class="xthumbs">
 	<LOOP NAME="arr">
 	{{tdnum}}
-	<td align="center" id="su[{{id}}]">
-		<div style="position:relative !important;" id="kktip" title="<ul class='ktip'><li><span class='right'>{{name}}</span></li><li><div>{lang.FILEUPS} :</div> {{ups}}</li><li><div>{lang.FILESIZE} :</div> {{size}}</li><li><div>{lang.FILEDATE} :</div> {{time}}</li><li><div>{lang.BY} :</div> {{user}}</li><li><div>{lang.IP} :</div> {{ip}}</li></ul>">
+	<li id="su[{{id}}]">
 		<a href="{{href}}" class="fancybox">
-			<div klj_img="{{thumb_link}}" class="yaload spinner"><strong class="expand"><img class="mask" src="{STYLE_PATH_ADMIN}images/spacer.gif" alt="" /></strong></div>
+			<div id="Kload"><img src="{{thumb_link}}" alt="" /></div>
+			<img class="mask" src="{STYLE_PATH_ADMIN}js/fancybox/k_mask.png" alt="" />
+			<img class="expand" src="{STYLE_PATH_ADMIN}js/fancybox/k_mask_hover.png" alt="" />
 		</a>
 		<p class="kcheck"><input name="del_{{id}}" type="checkbox" value="{{id}}" onclick="change_color(this,'su[{{id}}]', 'kfocus');" rel="_del" /></p>
-		</div>
-	</td>
+
+		<ul class='ktip'><li><span class='right'>{{name}}</span></li><li><div>{lang.FILEUPS} :</div> {{ups}}</li><li><div>{lang.FILESIZE} :</div> {{size}}</li><li><div>{lang.FILEDATE} :</div> {{time}}</li><li><div>{lang.BY} :</div> {{user}}</li><li><div>{lang.IP} :</div> {{ip}}</li></ul>
+	</li>
 	{{tdnum2}}
 	</LOOP>
-	</table>
+	</div>
 
 	<br /><div class="hr"></div>
 	

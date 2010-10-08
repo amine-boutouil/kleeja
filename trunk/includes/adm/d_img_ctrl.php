@@ -34,6 +34,11 @@ if (isset($_POST['submit']))
 {
 	if(!kleeja_check_form_key('adm_img_ctrl'))
 	{
+		if(isset($_GET['_ajax_']))
+		{
+			echo_ajax(888, $lang['INVALID_FORM_KEY']);
+		}
+
 		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $action, 1);
 	}
 }
@@ -198,7 +203,9 @@ $current_page	= $Pager->currentPage;
 //after submit 
 if(isset($_POST['submit']))
 {
-	$text	= ($affected ? $lang['FILES_UPDATED'] : $lang['NO_UP_CHANGE_S']) . '<meta HTTP-EQUIV="REFRESH" content="2; url=' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;page=' . (isset($_GET['page']) ? intval($_GET['page']) : '1') . '">' . "\n";
+	$text	= ($affected ? $lang['FILES_UPDATED'] : $lang['NO_UP_CHANGE_S']) .
+				'<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . 
+				'&amp;page=' . (isset($_GET['page']) ? intval($_GET['page']) : '1') . '\');", 2000);</script>' . "\n";
+
 	$stylee	= "admin_info";
 }
-

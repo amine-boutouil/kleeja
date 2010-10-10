@@ -26,13 +26,13 @@
 var STYLE_PATH_ADMIN = '{STYLE_PATH_ADMIN}';var go_to = '{go_to}';
 //-->
 </script>
-<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.js"></script>
+<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.min.js"></script>
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}js/fancybox/fancybox.js"></script>
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.kleeja.js"></script>
 
 <script type="text/javascript">
 <!--
-$(document).ready(function() {
+jQuery(document).ready(function($){
 
 	hash = window.location.hash.replace('#!', '');
 	if(hash != '')
@@ -203,7 +203,7 @@ function submit_kleeja_data(FORM_ID, ID, CONFIRM)
 		<div id="BoxNavTop">
 			<ul class="NavTop">
 				<li><a href="{config.siteurl}"><img class="micon" title="{lang.RETURN_HOME}" src="{STYLE_PATH_ADMIN}images/icon/back_home.png" alt="" /></a></li>
-				<li><a href="./"><img class="micon" title="{lang.R_CPINDEX}" src="{STYLE_PATH_ADMIN}images/icon/cp_kleeja.png" alt="" /></a></li>
+				<li><a href="./"><img class="micon k" title="{lang.R_CPINDEX}" src="{STYLE_PATH_ADMIN}images/icon/cp_kleeja.png" alt="" /></a></li>
 				<li><a href="./?cp=b_lgoutcp&amp;{GET_FORM_KEY_GLOBAL}" onclick="javascript:return confirm_from();"><img class="micon" title="{lang.R_LGOUTCP}" src="{STYLE_PATH_ADMIN}images/icon/sign_out.png" alt="" /></a></li>
 			</ul>
 		</div>

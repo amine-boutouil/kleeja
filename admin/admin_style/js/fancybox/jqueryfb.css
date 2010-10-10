@@ -16,7 +16,7 @@
 
 ul.ktip{float:right;display: none;}
 ul.ktip li{width:240px;height:22px;line-height:22px;float: right;border-bottom:1px solid #F0DE7D;text-align:right;}
-ul.ktip li div{float:right;width:100px !important;line-height:100%;text-align:left;font-weight:400;padding-left: 10px;}
+ul.ktip li span{float:right;width:84px !important;text-align:left;font-weight:400;padding-left: 10px;}
 
 /* fanc ybox */
 #fancybox-loading {position: fixed;top: 50%;left: 50%;height: 40px;width: 40px;margin-top: -20px;margin-left: -20px;cursor: pointer;overflow: hidden;z-index: 70104;display: none;}

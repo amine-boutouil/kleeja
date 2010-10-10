@@ -14,4 +14,5 @@
 /* import stylesheets and hide from ie/mac \*/
 @import url("stylesheet.css");
 @import url("css3.css");
+@import url("qtip.css");
 /* end import/hide */

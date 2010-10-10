@@ -21,12 +21,9 @@
 	--------------------------------------- */
 	/* @White text shadow ------- */
 	body {text-shadow: 0 0 2px #fff;}
-	.qtip {filter:alpha(opacity=90); opacity:0.9;}
-	
 
 	/* @Dark gray text shadow ------- */
 	#boxfileuser .public,#Footer .Powered h1 ,.Wuser,span.kbubbles {text-shadow: 0 0 2px #444;}
-	
 /* @end */
 
 /*	---------------------------------------
@@ -42,14 +39,15 @@
 	.data_file .filereport {	-moz-box-shadow : 0px 0px 4px #FFFFFF;-webkit-box-shadow : 0px 0px 4px #FFFFFF;-khtml-box-shadow : 0px 0px 4px #FFFFFF;box-shadow : 0px 0px 4px #FFFFFF;}
 	blockquote.note{-moz-box-shadow:0px 0px 4px 2px #EDE396;-webkit-box-shadow:0px 0px 4px 2px #EDE396;box-shadow:0px 0px 4px 2px #EDE396;}
 	
-
+	#sign_ajax,#sign_ajax_error{-webkit-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);	-moz-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);}
+	
 /*	---	#Rounded Corners */
 	.tabbertab {	-moz-border-radius-bottomleft :5px;	-moz-border-radius-bottomright : 5px;-webkit-border-bottom-left-radius : 5px;-webkit-border-bottom-right-radius : 5px;border-bottom-left-radius : 5px; border-bottom-right-radius : 5px;}
 	ul.tabbernav li a{-moz-border-radius-topleft : 5px;-moz-border-radius-topright : 5px;-webkit-border-top-left-radius : 5px;-webkit-border-top-right-radius : 5px; border-top-right-radius : 5px;border-top-left-radius : 5px;}
 	.tipsy-inner {
 	-moz-border-radius : 3px;-webkit-border-radius : 3px;-khtml-border-radius : 3px; border-radius : 3px;text-shadow: 0 0 2px #000;
 	-moz-box-shadow : 0px 0px 5px #444;-webkit-box-shadow : 0px 0px 5px #444;-khtml-box-shadow : 0px 0px 5px #444;box-shadow : 0px 0px 5px #444;}
-	#DivTable,.box_all ,blockquote.note {
+	#DivTable,.box_all ,blockquote.note,#sign_ajax,#sign_ajax_error {
 	-moz-border-radius : 5px;-webkit-border-radius : 5px;-khtml-border-radius : 5px; border-radius : 5px;}
 	.body_menu,.Bmenu, .button_img ,.button_file ,#fieldset_progress, .fieldset_google, .fieldset_yahoo  {
 	-moz-border-radius : 10px;-webkit-border-radius : 10px;-khtml-border-radius : 10px;border-radius : 10px;}

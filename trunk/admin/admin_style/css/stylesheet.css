@@ -93,7 +93,7 @@
 	#divmiddle,#boxs{width:68%;display:inline;}
 
 	#main_container{position:relative;}
-	#sign_ajax,#sign_ajax_error{position: fixed;top:1%;left: 45%;padding:15px;background-color: #fff;color:#000;border:1px solid #ccc;cursor: pointer;overflow: hidden;z-index: 9999;display: none;}
+	#sign_ajax,#sign_ajax_error{position: fixed;top:2%;left:45%;padding:10px 15px;background-color:#FFF;color:#51250B;border:1px solid #D9D4BD;font-size:120%;cursor: pointer;overflow: hidden;z-index: 9999;display: none;}
 	#sign_ajax img,#sign_ajax_error img{padding-right:10px;}
 	#sign_ajax_error{color: red;}
 	
@@ -203,9 +203,7 @@
 	a.phover:hover, a.phover:focus { color:#fff; text-decoration:none; text-shadow:-1px -1px 0 rgba(0,0,0,0.3); background-position:0 -90px; }
 	a.phover:hover > span, a.phover:focus > span { background-position:100% -90px;}
 	
-	/* tooltip plugin */
- 	.qtip-tip{bottom: 4px !important;z-index:7777 !important;}
- 
+
  
 #DivTable,.box_all {padding:0;}
 

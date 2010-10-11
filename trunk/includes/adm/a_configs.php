@@ -93,7 +93,7 @@ switch($SHOW_CH_STAGE):
 
 		//general varaibles
 		$action		= basename(ADMIN_PATH) . '?cp=options&amp;type=' . htmlspecialchars($_GET['type']);
-		$STAMP_IMG_URL = PATH . 'images/watermark.gif';
+		$STAMP_IMG_URL = file_exists(PATH . 'images/watermark.gif') ? PATH . 'images/watermark.gif' : PATH . 'images/watermark.png';
 		$stylfiles	= $lngfiles	= $authtypes = '';
 		$optionss	= array();
 		$n_googleanalytics = '<a href="http://www.google.com/analytics">Google Analytics</a>';

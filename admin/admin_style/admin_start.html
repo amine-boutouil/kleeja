@@ -1,288 +1,248 @@
 ﻿<script type="text/javascript">
 <!--
 jQuery(document).ready(function($){
-	
-	//hide option_body after the first one
-	$(".option_list .option_body:gt(1)").hide();
-	
-	//hide message li after the 5th
-	$(".option_list li:gt(4)").hide();
-
-	
-	//toggle option_body
-	$(".option_head").click(function(){
-		$(this).next(".option_body").slideToggle(00)
-		return false;
-	});
-
-	//show all messages
-	$(".show_all").click(function(){
-		$(this).hide()
-		$(".hid_all").show()
-		$(".option_body").slideDown()
-		return false;
-	});
-
-	//show recent messages only
-	$(".hid_all").click(function(){
-		$(this).hide()
-		$(".show_all").show()
-		$(".option_body").slideUp()
-		return false;
-	});
-	
 	//percentage size meter
 	$("#percentage_size_meter").animate({width: "{per1}%"}, 1000 ); // animate a div
-
 });
 //-->
 </script>
 
 <!-- start body panel  -->
 <div id="boxs">
+	<!-- site name -->
+	<h1 class="h1 kt">{lang.KLEEJA_CP}</h1>
+	<div class="hr"></div>
+	<p class="titleAll"><a href="./">{lang.R_CPINDEX}</a> <span>&raquo; </span> {lang.R_CPINDEX}</p> 
 
-	<!-- title panel admin -->
-	<h1 class="SitenameHead">{config.sitename}</h1>
-
-	<!-- start clear  -->
-	<div class="clr"></div>
-
-
-<!-- start >> error System Messages -->
-<LOOP NAME="ADM_NOTIFICATIONS">
-<div id="system-message">
-	<div class="{{msg_type}}" id="{{id}}">
-		<ul>
-		<li><u>{{title}} !</u><p>{{msg}}</p></li>
-		</ul>
+	<!-- start >> error System Messages -->
+	<LOOP NAME="ADM_NOTIFICATIONS">
+	<div id="system-message">
+		<div class="{{msg_type}}" id="{{id}}">
+			<ul>
+			<li><u>{{title}} !</u><p>{{msg}}</p></li>
+			</ul>
+		</div>
 	</div>
-</div>
-<IF LOOP="msg_type==error">
-<script type="text/javascript">
-<!--
-   $('div#{{id}}').pulse({opacity: [0,2]}, {times: 5});// i.e. 7 seconds
-//-->
-</script>
-</IF>
+	<IF LOOP="msg_type==error">
+	<script type="text/javascript">
+	<!--
+	   $('div#{{id}}').pulse({opacity: [0,2]}, {times: 5});// i.e. 7 seconds
+	//-->
+	</script>
+	</IF>
+	<div class="clr"></div><br />
+	</LOOP>
 
+	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><span class="STitle right">{lang.USER_STAT}</span></div></div>
+	<div class="clr"></div>
+	
+	<!-- User Statistics -->
+		<div class="option_body">
+		
+				<table width="100%" cellspacing="0" cellpadding="0">
+				<tr>
+					<td class="adminimage">&nbsp;</td>
+					<td>
+						<p class="text_info"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/Circle_Orange.png" alt=".." />{usernamelang}</p>
+						<IF NAME="stat_last_file!='0'">
+						<p class="text_info"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/Circle_Orange.png" alt=".." />{lang.LSTFLE_ST} : <a href="{last_file_up_url}"  onclick="window.open(this.href,'_blank');return false;">{last_file_up}</a></p>
+						<ELSE>
+						<p class="text_info"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/Circle_Orange.png" alt=".." />{lang.UNKNOWN}</p>
+						</IF>
+						<IF NAME="last_visit">
+						<p class="text_info"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/Circle_Orange.png" alt=".." />{lang.LAST_VISIT} : <span style="color:red">{last_visit}</span></p>
+						</IF>
+					</td>
+				</tr>
+				<IF NAME="last_visit">
+				<tr>
+					<td>&nbsp;</td>
+					<td class="box_botton">
+						<p class="button_img">
+								<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/viewpicture.png" alt=".." /> 
+								{lang.IMG_LST_VST_SEARCH} :
+								<select class="show_since_time" tabindex="3" onchange="javascript:get_kleeja_link('{h_lst_imgs}' + (Math.round((new Date()).getTime() / 1000) - $(this).val()), '#main_container');">">
+									<option>-----</option>
+									<option value="3600">{lang.HOUR}</option>
+									<option value="18000">{lang.5HOURS}</option>
+									<option value="864000">{lang.DAY}</option>
+									<option value="6048000">{lang.WEEK}</option>
+									<option value="25920000">{lang.MONTH}</option>
+									<option value="31536000">{lang.YEAR}</option>
+								</select>
+						</p>
+						<p class="button_file">
+							<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/old-edit-find.png" alt=".." />
+							{lang.FLS_LST_VST_SEARCH} :
+								<select class="show_since_time" tabindex="3" onchange="javascript:get_kleeja_link('{h_lst_files}' + (Math.round((new Date()).getTime() / 1000) - $(this).val()), '#main_container');">
+									<option>-----</option>
+									<option value="3600">{lang.HOUR}</option>
+									<option value="18000">{lang.5HOURS}</option>
+									<option value="864000">{lang.DAY}</option>
+									<option value="6048000">{lang.WEEK}</option>
+									<option value="25920000">{lang.MONTH}</option>
+									<option value="31536000">{lang.YEAR}</option>
+								</select>
+						</p>
+					</td>
+				</tr>
+				</IF>
+				</table>
+		</div><!-- #User Statistics -->
+		
+		<div class="ribbon"><div class="wrapAround"></div><div class="tab"><span class="STitle right">{lang.GENERAL_STAT}</span></div></div>
+		<div class="clr"></div>
+		
+			<!-- General Statistics  -->	
+			<div class="option_body">
+				<div class="general_statistics">
+				<table class="info_statistics" style="width:78%;">
+					<tr>
+						<td style="width:55%;">
+							<p>{lang.AUSERS_NUM}</p>
+							<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/numberusers.png" alt="" /> [ {users_number} ]<br />
+						</td>
+						<IF NAME="config.user_system==1">
+						<td style="width:45%;">
+							<p>{lang.LAST_REG}</p>
+							<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/list-add-user.png" alt="" /> [ {lst_reg} ]<br />
+						</td>
+						</IF>
+					</tr>
+					<tr>
+						<td style="width:55%;">
+							<p>{lang.AFILES_NUM}</p>
+							<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/allfolders.png" alt="" /> [ {files_number} {lang.FILE} ] ≈ <span title="{lang.AFILES_SIZE}">[ {files_sizes} ]</span><br />
+						</td>
+						<td style="width:45%;">
+							<p>{lang.LSTDELST}</p>
+							<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/timelast.png" alt="" /> {last_del_fles}<br />
+						</td>
+					</tr>
+				</table>
+				
+			<div class="clr"></div>
+			
+				<!-- start percentage meter -->
+				<fieldset id="fieldset_progress">
+					<legend>{lang.AFILES_SIZE_SPACE}</legend>
+					<div id="progress"> 
+						<div class="pad"> 
+						<span class="hide">Progress Meter</span>
+							<div id="progressBar"> 
+								<div id="percentage_size_meter"><span>{per1}%</span></div> 
+							</div> 
+							<div id="seasonal"> </div> 
+							<div id="key"> 
+								<div id="left">%0</div> 
+								<div id="right">%100</div> 
+								<div id="center">%50</div> 
+							</div>         
+						</div> 
+					</div> 
+					<div class="clr"></div>
+					<!-- start All Files size  -->
+					<div class="filsiz" title="{lang.AFILES_SIZE}">[ {files_sizes} ]</div>
+					<!-- # All Files size  -->
+				</fieldset>
+				<!-- # percentage meter -->
 
-<div class="clr"></div><br />
+				</div>
+			</div><!-- #General Statistics -->
 
+			
+			<!-- Statistics Search Engines -->
+			<div class="ribbon"><div class="wrapAround"></div><div class="tab"><span class="STitle right">{lang.SEARCH_STAT}</span></div></div>
+			<div class="clr"></div>
+				<div class="option_body">
+					<table width="100%">
+						<tr>
+						<!-- start gooloe -->
+						<td>
+							<fieldset class="fieldset_google">
+								<legend>Google</legend>
+								<p>{lang.LAST_GOOGLE} :</p>
+								<p style="color:#0D3690;">{s_last_google}</p>
+								<p>{lang.GOOGLE_NUM} :</p>
+								<p style="color:#0D3690;">[ {s_google_num} ]</p>
+							</fieldset>
+						</td>
+						</tr>
+						<tr>
+						<!-- start yahoo -->
+						<td>
+							<fieldset class="fieldset_yahoo">
+								<legend>Yahoo</legend>
+								<p>{lang.LAST_YAHOO} :</p>
+								<p style="color:#430B47;">{s_last_yahoo}</p>
+								<p>{lang.YAHOO_NUM} :</p>	
+								<p style="color:#430B47;">[ {s_yahoo_num} ]</p>					
+							</fieldset>
+						</td>
+						</tr>
+					</table>
+				</div><!-- #Statistics Search Engines  -->
+				
+			<!-- Other information -->	
+			<div class="ribbon"><div class="wrapAround"></div><div class="tab"><span class="STitle right">{lang.OTHER_INFO}</span></div></div>
+			<div class="clr"></div>
 
-</LOOP>
+			<div class="option_body">
+			<div style="margin-top:8px;">
+				<table class="other_information">
+					<tr align="center">
+						<td width="33%">
+							<div class="ver_kleeja">
+							<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/ver_kleeja.png" alt="" />  <br />
+							<p> {lang.KLEEJA_VERSION} : {kleeja_version}</p>
+						</div>
+						</td>
+						<td width="33%">
+							<div class="ver_php">
+							<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/ver_php.png" alt="" /> <br />
+							<p>{lang.PHP_VER} : {php_version}</p>
+						</div>
+						</td>
+						<td width="33%">
+						<div class="vre_mysql">
+							<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/vre_mysql.png" alt="" /> <br />
+							<p>{lang.MYSQL_VER} : {mysql_version}</p>
+						</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div style="margin:4px auto;" align="center" >
+				
+				<table class="valuable_data">
+				<tr>
+					<td rowspan="4" align="center" width="25%" class="img_valuable_data"> </td>
+					<td width="55%">max_execution_time</td>
+					<td width="10%" style="text-align:center;font-weight:700;">{max_execution_time}</td>
+				</tr>
+				<tr>
+					<td>upload_max_filesize</td>
+					<td style="font-weight:700;text-align:center">{upload_max_filesize}</td>
+				</tr>
+				<tr>
+					<td>post_max_size</td>
+					<td style="font-weight:700;text-align:center">{post_max_size}</td>
+				</tr>
+				<tr>
+					<td>memory_limit</td>
+					<td style="font-weight:700;text-align:center">{memory_limit}</td>
+				</tr>
+				</table>
+			</div>
+			</div><!-- #Other information -->
 
+			
 
-	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><span class="STitle right"><a href="index.php?cp=d_img_ctrl">{lang.USER_STAT}</a></span></div></div>
-
-<div class="clr"></div>
-
-
-<!-- start view list control panel -->
+<!-- Other information -->
 <div class="list_control_panel">
 <ol class="option_list">
-<!-- start info user admin -->
-<li>
-	<p class="option_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/user.png" alt=".." />{lang.USER_STAT}</cite><img class="timestamp" src="{STYLE_PATH_ADMIN}images/icon/timestamp.gif" alt="Kleeja love you ..," /></p>
-	<div class="option_body">
-		<div class="admin_anfo_bg">
-			<table width="100%" cellspacing="0" cellpadding="0">
-			<tr>
-				<td class="adminimage">&nbsp;</td>
-				<td>
-					<p class="text_info"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/Circle_Orange.png" alt=".." />{usernamelang}</p>
-					<IF NAME="stat_last_file!='0'">
-					<p class="text_info"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/Circle_Orange.png" alt=".." />{lang.LSTFLE_ST} : <a href="{last_file_up_url}"  onclick="window.open(this.href,'_blank');return false;">{last_file_up}</a></p>
-					<ELSE>
-					<p class="text_info"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/Circle_Orange.png" alt=".." />{lang.UNKNOWN}</p>
-					</IF>
-					<IF NAME="last_visit">
-					<p class="text_info"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/Circle_Orange.png" alt=".." />{lang.LAST_VISIT} : <span style="color:red">{last_visit}</span></p>
-					</IF>
-				</td>
-			</tr>
-			<IF NAME="last_visit">
-			<tr>
-				<td>&nbsp;</td>
-				<td class="box_botton">
-					<p class="button_img">
-							<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/viewpicture.png" alt=".." /> 
-							{lang.IMG_LST_VST_SEARCH} :
-							<select class="show_since_time" tabindex="3" onchange="javascript:get_kleeja_link('{h_lst_imgs}' + (Math.round((new Date()).getTime() / 1000) - $(this).val()), '#main_container');">">
-								<option>-----</option>
-								<option value="3600">{lang.HOUR}</option>
-								<option value="18000">{lang.5HOURS}</option>
-								<option value="864000">{lang.DAY}</option>
-								<option value="6048000">{lang.WEEK}</option>
-								<option value="25920000">{lang.MONTH}</option>
-								<option value="31536000">{lang.YEAR}</option>
-							</select>
-					</p>
-					<p class="button_file">
-						<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/old-edit-find.png" alt=".." />
-						{lang.FLS_LST_VST_SEARCH} :
-							<select class="show_since_time" tabindex="3" onchange="javascript:get_kleeja_link('{h_lst_files}' + (Math.round((new Date()).getTime() / 1000) - $(this).val()), '#main_container');">
-								<option>-----</option>
-								<option value="3600">{lang.HOUR}</option>
-								<option value="18000">{lang.5HOURS}</option>
-								<option value="864000">{lang.DAY}</option>
-								<option value="6048000">{lang.WEEK}</option>
-								<option value="25920000">{lang.MONTH}</option>
-								<option value="31536000">{lang.YEAR}</option>
-							</select>
-					</p>
-				</td>
-			</tr>
-			</IF>
-			</table>
-		</div>
-	</div>
-</li>
-<!-- # info user admin -->
 
-<!-- start general statistics  -->	
-<li>
-<p class="option_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/general_title.png" alt="Kleeja love you ..," />{lang.GENERAL_STAT}</cite><img class="timestamp" src="{STYLE_PATH_ADMIN}images/icon/timestamp.gif" alt="Kleeja love you ..," /></p>
-	<div class="option_body">
-		<div class="general_statistics">
-		<table class="info_statistics" style="width:78%;">
-			<tr>
-				<td style="width:55%;">
-					<p>{lang.AUSERS_NUM}</p>
-					<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/numberusers.png" alt="" /> [ {users_number} ]<br />
-				</td>
-				<IF NAME="config.user_system==1">
-				<td style="width:45%;">
-					<p>{lang.LAST_REG}</p>
-					<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/list-add-user.png" alt="" /> [ {lst_reg} ]<br />
-				</td>
-				</IF>
-			</tr>
-			<tr>
-				<td style="width:55%;">
-					<p>{lang.AFILES_NUM}</p>
-					<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/allfolders.png" alt="" /> [ {files_number} {lang.FILE} ] ≈ <span title="{lang.AFILES_SIZE}">[ {files_sizes} ]</span><br />
-				</td>
-				<td style="width:45%;">
-					<p>{lang.LSTDELST}</p>
-					<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/timelast.png" alt="" /> {last_del_fles}<br />
-				</td>
-			</tr>
-		</table>
-		
-	<div class="clr"></div>
-	
-		<!-- start percentage meter -->
-		<fieldset id="fieldset_progress">
-			<legend>{lang.AFILES_SIZE_SPACE}</legend>
-			<div id="progress"> 
-				<div class="pad"> 
-				<span class="hide">Progress Meter</span>
-					<div id="progressBar"> 
-						<div id="percentage_size_meter"><span>{per1}%</span></div> 
-					</div> 
-					<div id="seasonal"> </div> 
-					<div id="key"> 
-						<div id="left">%0</div> 
-						<div id="right">%100</div> 
-						<div id="center">%50</div> 
-					</div>         
-				</div> 
-			</div> 
-			<div class="clr"></div>
-			<!-- start All Files size  -->
-			<div class="filsiz" title="{lang.AFILES_SIZE}">[ {files_sizes} ]</div>
-			<!-- # All Files size  -->
-		</fieldset>
-		<!-- # percentage meter -->
 
-		</div>
-	</div>
-</li>
-<!-- # general statistics  -->
-	
-<!-- start Statistics Search Engines   -->
-<li>
-<p class="option_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/search_engines.png" alt="{lang.SEARCH_STAT}" />{lang.SEARCH_STAT}</cite><img class="timestamp" src="{STYLE_PATH_ADMIN}images/icon/timestamp.gif" alt="Kleeja love you ..," /></p>
-	<div class="option_body">
-		<table width="100%">
-			<tr>
-			<!-- start gooloe -->
-			<td width="50%">
-				<fieldset class="fieldset_google">
-					<legend>Google</legend>
-					<p>{lang.LAST_GOOGLE} :</p>
-					<p style="color:#0D3690;">{s_last_google}</p>
-					<p>{lang.GOOGLE_NUM} :</p>
-					<p style="color:#0D3690;">[ {s_google_num} ]</p>
-				</fieldset>
-			</td>
-			<!-- start yahoo -->
-			<td width="50%">
-				<fieldset class="fieldset_yahoo">
-					<legend>Yahoo</legend>
-					<p>{lang.LAST_YAHOO} :</p>
-					<p style="color:#430B47;">{s_last_yahoo}</p>
-					<p>{lang.YAHOO_NUM} :</p>	
-					<p style="color:#430B47;">[ {s_yahoo_num} ]</p>					
-				</fieldset>
-			</td>
-			</tr>
-		</table>
-	</div>
-</li>
-<!-- # Statistics Search Engines   -->
-
-<li>
-<p class="option_head"><cite><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/infoanother.png" alt=".." />{lang.OTHER_INFO}</cite><img class="timestamp" src="{STYLE_PATH_ADMIN}images/icon/timestamp.gif" alt=".." /></p>
-	<div class="option_body">
-	<div style="margin-top:8px;">
-		<table class="other_information">
-			<tr align="center">
-				<td width="33%">
-					<div class="ver_kleeja">
-					<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/ver_kleeja.png" alt="" />  <br />
-					<p> {lang.KLEEJA_VERSION} : {kleeja_version}</p>
-				</div>
-				</td>
-				<td width="33%">
-					<div class="ver_php">
-					<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/ver_php.png" alt="" /> <br />
-					<p>{lang.PHP_VER} : {php_version}</p>
-				</div>
-				</td>
-				<td width="33%">
-				<div class="vre_mysql">
-					<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/vre_mysql.png" alt="" /> <br />
-					<p>{lang.MYSQL_VER} : {mysql_version}</p>
-				</div>
-				</td>
-			</tr>
-		</table>
-	</div>
-	<div style="margin:4px auto;" align="center" >
-		
-		<table class="valuable_data">
-		<tr>
-			<td rowspan="4" align="center" width="25%" class="img_valuable_data"> </td>
-			<td width="55%">max_execution_time</td>
-			<td width="10%" style="text-align:center;font-weight:700;">{max_execution_time}</td>
-		</tr>
-		<tr>
-			<td>upload_max_filesize</td>
-			<td style="font-weight:700;text-align:center">{upload_max_filesize}</td>
-		</tr>
-		<tr>
-			<td>post_max_size</td>
-			<td style="font-weight:700;text-align:center">{post_max_size}</td>
-		</tr>
-		<tr>
-			<td>memory_limit</td>
-			<td style="font-weight:700;text-align:center">{memory_limit}</td>
-		</tr>
-		</table>
-	</div>
-	</div>
-</li>
 </ol>
 <div class="option_list_bottom"></div>
 </div>

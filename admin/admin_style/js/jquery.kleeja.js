@@ -22,16 +22,24 @@
  /** jQuery.Preload - Multifunctional preloader * @author Ariel Flesler  **/
  ;(function($){var h=$.preload=function(c,d){if(c.split)c=$(c);d=$.extend({},h.defaults,d);var f=$.map(c,function(a){if(!a)return;if(a.split)return d.base+a+d.ext;var b=a.src||a.href;if(typeof d.placeholder=='string'&&a.src)a.src=d.placeholder;if(b&&d.find)b=b.replace(d.find,d.replace);return b||null}),data={loaded:0,failed:0,next:0,done:0,total:f.length};if(!data.total)return finish();var g=$(Array(d.threshold+1).join('<img/>')).load(handler).error(handler).bind('abort',handler).each(fetch);function handler(e){data.element=this;data.found=e.type=='load';data.image=this.src;data.index=this.index;var a=data.original=c[this.index];data[data.found?'loaded':'failed']++;data.done++;if(d.enforceCache)h.cache.push($('<img/>').attr('src',data.image)[0]);if(d.placeholder&&a.src)a.src=data.found?data.image:d.notFound||a.src;if(d.onComplete)d.onComplete(data);if(data.done<data.total)fetch(0,this);else{if(g&&g.unbind)g.unbind('load').unbind('error').unbind('abort');g=null;finish()}};function fetch(i,a,b){if(a.attachEvent&&data.next&&data.next%h.gap==0&&!b){setTimeout(function(){fetch(i,a,1)},0);return!1}if(data.next==data.total)return!1;a.index=data.next;a.src=f[data.next++];if(d.onRequest){data.index=a.index;data.element=a;data.image=a.src;data.original=c[data.next-1];d.onRequest(data)}};function finish(){if(d.onFinish)d.onFinish(data)}};h.gap=14;h.cache=[];h.defaults={threshold:2,base:'',ext:'',replace:''};$.fn.preload=function(a){h(this,a);return this}})(jQuery); 
  
- /** Kleeja Uploader - acp javascript  **/
+ /** Change Color - Control Panel Kleeja >> "javascript"  **/
  function change_color(obj,id,c,c2){c=(c==null)?'ored':c;c2=(c==null)?'osilver':c2;var ii=document.getElementById(id);if(obj.checked){ii.setAttribute("class",c);ii.setAttribute("className",c)}else{ii.setAttribute("class",c2);ii.setAttribute("className",c2)}}function checkAll(form,id,_do_c_,c,c2){for(var i=0;i<form.elements.length;i++){if(form.elements[i].getAttribute("rel")!=id)continue;if(form.elements[i].checked){uncheckAll(form,id,_do_c_,c,c2);break}form.elements[i].checked=true;change_color(form.elements[i],_do_c_+'['+form.elements[i].value+']',c,c2)}}function uncheckAll(form,id,_do_c_,c,c2){for(var i=0;i<form.elements.length;i++){if(form.elements[i].getAttribute("rel")!=id)continue;form.elements[i].checked=false;change_color(form.elements[i],_do_c_+'['+form.elements[i].value+']',c,c2)}}function change_color_exts(id){eval('var ii = document.getElementById("su['+id+']");');eval('var g_obj = document.getElementById("gal_'+id+'");');eval('var u_obj = document.getElementById("ual_'+id+'");');if(g_obj.checked&&u_obj.checked){ii.setAttribute("class",'o_all');ii.setAttribute("className",'o_all')}else if(g_obj.checked){ii.setAttribute("class",'o_g');ii.setAttribute("className",'o_g')}else if(u_obj.checked){ii.setAttribute("class",'o_u');ii.setAttribute("className",'o_u')}else{ii.setAttribute("class",'');ii.setAttribute("className",'')}}function checkAll_exts(form,id,_do_c_){for(var i=0;i<form.elements.length;i++){if(form.elements[i].getAttribute("rel")!=id)continue;if(form.elements[i].checked){uncheckAll_exts(form,id,_do_c_);break}form.elements[i].checked=true;change_color_exts(form.elements[i].value)}}function uncheckAll_exts(form,id,_do_c_){for(var i=0;i<form.elements.length;i++){if(form.elements[i].getAttribute("rel")!=id)continue;form.elements[i].checked=false;change_color_exts(form.elements[i].value)}}
 
+ /** ribbon Development team Kleeja  **/
+ (function($){$.fn.KleejaRibbon=function(){var element=this;changePosition();$(window).bind("scroll",function(){changePosition()});function changePosition(){var t=$(window).scrollTop();var h=$(window).height();var offset=$(window).height()/25;var zoneSize=$(window).height()/3;var zoneOne=t+zoneSize+offset;var zoneTwo=t+zoneSize*2-offset;return $(element).each(function(){var obj=$(this);var objH=obj.height();var offset=obj.offset();if(offset.top+objH<=zoneOne){return $(this).css('background-position','0 0')}else if(offset.top>=zoneTwo){return $(this).css('background-position','0 -104px')}else{return $(this).css('background-position','0 -52px')}})}}})(jQuery);
+
+ 
  jQuery(document).ready(function($){
+ 
+	// Ribbon Scroll
+	$(".ribbon .wrapAround").KleejaRibbon();
+
 	// custom checkboxes
 	$('input[type=checkbox]').checkbox();
 	
-	$('.NavTop li a img').qtip({
-			position: {target: $('#BoxNavTop .NavTop img.k'),my: 'bottom center',at: 'top center',adjust: {y :-3 }},
-			show: {delay: 0},style: {tip: false}
+	$('.MmNavTop li a img').qtip({
+			position: {my: 'bottom right',at: 'top center', adjust: { x:2,  y : 3 , screen: 'flip'}},
+			show: {delay: 0},style: {classes: 'ui-tooltip-plain', tip: true}
 	});
 	
 	$('.seTooltip a').qtip({
@@ -42,7 +50,7 @@
 
 	// Tooltip Footer
 	$('#ktipTop a img').qtip({
-		position: {target: 'mouse',adjust: {x: 7, y :7,screen: 'flip'}},
+		position: {target: 'mouse',adjust: {x: 7, y: 7, screen: 'flip'}},
 		style: {classes: 'ui-tooltip-dark',tip: true}
 	});
 	

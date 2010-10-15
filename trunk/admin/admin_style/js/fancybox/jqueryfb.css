@@ -14,7 +14,7 @@
 
 .kfocus {background: url(expand.png) no-repeat center bottom !important;}
 
-ul.ktip{float:right;display: none;}
+ul.ktip{float:right;}
 ul.ktip li{width:240px;height:22px;line-height:22px;float: right;border-bottom:1px solid #F0DE7D;text-align:right;}
 ul.ktip li span{float:right;width:84px !important;text-align:left;font-weight:400;padding-left: 10px;}
 

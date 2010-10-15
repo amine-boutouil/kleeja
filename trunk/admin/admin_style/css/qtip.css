@@ -22,7 +22,7 @@
 .ui-tooltip .ui-tooltip-titlebar{background-color: #F0DE7D;}
 .ui-tooltip .ui-tooltip-close .ui-icon{background: #A27D35 url('../images/close.png') no-repeat 50% 50%;}
 /*! Plain tooltip style */
-.ui-tooltip-plain .ui-tooltip-wrapper{border-color: black;border-width: 1px;background-color: white;color: black;}
+.ui-tooltip-plain .ui-tooltip-wrapper{border-color:#4DAEBF;border-width: 2px;background-color:#D5ECF0;color: #318391;}
 .ui-tooltip-plain .ui-tooltip-titlebar{background-color: white;}
 .ui-tooltip-plain .ui-tooltip-close .ui-icon{background: black;}
 /*! Light tooltip style */

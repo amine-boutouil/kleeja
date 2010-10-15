@@ -48,7 +48,6 @@ jQuery(document).ready(function($){
 		}
 	});
 
-
 });
 //-->
 </script>
@@ -57,13 +56,13 @@ jQuery(document).ready(function($){
 <div id="boxs">
 	<form method="post" action="{action}" name="imgform" onsubmit="javascript:return confirm_from();">
 	
-	<!-- title  -->
+	<!-- Section Title  -->
+	<h1 class="SectionTitle"><a href="index.php?cp=d_img_ctrl">{lang.R_IMG_CTRL}</a></h1>
+	<div class="hr"></div>
 	<p class="titleAll"><a href="./">{lang.R_CPINDEX}</a> <span>&raquo; </span> {lang.R_IMG_CTRL} ( {current_page} : {total_pages} ) </p> 
-	
-	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><img class="left TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/img_ctrl_button.png" alt="" /><span class="STitle left"><a href="index.php?cp=d_img_ctrl">{lang.R_IMG_CTRL}</a></span></div></div>
+	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><img class="left TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/img_ctrl_button.png" alt="" /><span class="STitle left">{lang.R_IMG_CTRL}</span></div></div>
+	<div class="clr"></div><br />
 
-	<br /><div class="hr"></div>
-	
 	<IF NAME="no_results">
 	<div class="nothing"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/warning_nothing.gif" alt="nothing" />{lang.NOTHING}</div>
 	<ELSE>
@@ -77,7 +76,7 @@ jQuery(document).ready(function($){
 			<img class="mask" src="{STYLE_PATH_ADMIN}js/fancybox/k_mask.png" alt="" />
 			<img class="expand" src="{STYLE_PATH_ADMIN}js/fancybox/k_mask_hover.png" alt="" />
 		</a>
-		<ul class='ktip'>
+		<ul class='ktip' style="display: none;">
 			<li><span>{lang.FILENAME} :</span>{{name}}</li>
 			<li><span>{lang.FILEUPS} :</span> {{ups}}</li>
 			<li><span>{lang.FILESIZE} :</span> {{size}}</li>
@@ -91,13 +90,14 @@ jQuery(document).ready(function($){
 	</LOOP>
 	</div>
 
-	<br /><div class="hr"></div>
+	<div class="clr"></div><br /><div class="hr"></div>
+	
 	
 	<div class="left check_all">[ <a href="javascript:void(0);" onclick="checkAll(document.imgform, '_del', 'su', 'kfocus');">{lang.CHECK_ALL}</a> ]</div>
 	
 	<!-- pagination -->{page_nums}
 
-	<div class="hr"></div>
+	<br /><div class="clr"></div>
 
 	<!-- button -->
 	<p class="left_button MarginTop">

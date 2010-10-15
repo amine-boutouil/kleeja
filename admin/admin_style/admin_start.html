@@ -10,10 +10,11 @@ jQuery(document).ready(function($){
 <!-- start body panel  -->
 <div id="boxs">
 	<!-- site name -->
-	<h1 class="h1 kt">{lang.KLEEJA_CP}</h1>
+	<h1 class="h1 kt">{config.sitename}</h1>
 	<div class="hr"></div>
-	<p class="titleAll"><a href="./">{lang.R_CPINDEX}</a> <span>&raquo; </span> {lang.R_CPINDEX}</p> 
-
+	<p class="titleAll left"><a href="./">{lang.KLEEJA_CP}</a></p> 
+	<div class="clr"></div>
+	
 	<!-- start >> error System Messages -->
 	<LOOP NAME="ADM_NOTIFICATIONS">
 	<div id="system-message">
@@ -24,20 +25,20 @@ jQuery(document).ready(function($){
 		</div>
 	</div>
 	<IF LOOP="msg_type==error">
-	<script type="text/javascript">
-	<!--
+	<!--<script type="text/javascript">
+	
 	   $('div#{{id}}').pulse({opacity: [0,2]}, {times: 5});// i.e. 7 seconds
-	//-->
-	</script>
+	
+	</script>//-->
 	</IF>
-	<div class="clr"></div><br />
+	<div class="clr"></div>
 	</LOOP>
-
+	
+	<!-- User Statistics -->
 	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><span class="STitle right">{lang.USER_STAT}</span></div></div>
 	<div class="clr"></div>
 	
-	<!-- User Statistics -->
-		<div class="option_body">
+		<div class="option_box">
 		
 				<table width="100%" cellspacing="0" cellpadding="0">
 				<tr>
@@ -94,7 +95,7 @@ jQuery(document).ready(function($){
 		<div class="clr"></div>
 		
 			<!-- General Statistics  -->	
-			<div class="option_body">
+			<div class="option_box">
 				<div class="general_statistics">
 				<table class="info_statistics" style="width:78%;">
 					<tr>
@@ -154,7 +155,7 @@ jQuery(document).ready(function($){
 			<!-- Statistics Search Engines -->
 			<div class="ribbon"><div class="wrapAround"></div><div class="tab"><span class="STitle right">{lang.SEARCH_STAT}</span></div></div>
 			<div class="clr"></div>
-				<div class="option_body">
+				<div class="option_box">
 					<table width="100%">
 						<tr>
 						<!-- start gooloe -->
@@ -187,8 +188,8 @@ jQuery(document).ready(function($){
 			<div class="ribbon"><div class="wrapAround"></div><div class="tab"><span class="STitle right">{lang.OTHER_INFO}</span></div></div>
 			<div class="clr"></div>
 
-			<div class="option_body">
-			<div style="margin-top:8px;">
+			<div class="option_box">
+			<div class="option_box_inner">
 				<table class="other_information">
 					<tr align="center">
 						<td width="33%">

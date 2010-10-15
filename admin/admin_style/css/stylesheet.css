@@ -59,9 +59,7 @@
 	pre code {margin: 0 20px;	padding: 18px 0;display: block;}
 	
 	.clr {clear: both; overflow:hidden; height: 0;}
-	.dot {padding: 3px 0;background: url(../images/dot.gif) repeat-x;}
 	.hr {background:transparent url(../images/box/hr-bg.gif) repeat-x 0 0;clear:both;height:5px;margin:0 0 0 0;}
-	.line_img {height:18px;display:block;margin:2px 0;background:#D6D0CB url(../images/line_img.png) repeat-x top right;}
 	.left, img.left {float:left;}
 	.right, img.right {float:right;}
 	.MarginTop {margin-top:-10px;}
@@ -110,8 +108,6 @@
 	#MmBody ul.MmNavTop li a .Mmicon{padding:0 0 0 7px;}
 	#Logo{float:left;margin:-8px 0 8px 10px;padding:10px;}
 	#Logo a{background:transparent url(../images/logo.png) no-repeat 0 0;display:block;height:69px;width:292px}
-	#HeaderKT{width:550px;clear:right;float:right;margin:-18px 35px 0;padding:10px 0 0 0;}
-	#HeaderKT span.KT{background:#E1E2E3 url(../images/bg_input.gif) repeat-x 0 0;border:1px solid #fff;border-color:#C9CACB #fff #fff #C9CACB;outline:none;height:20px;margin:0;color:#646464;font-size:90%; font-weight:700;padding:5px 10px;overflow: hidden;}
 	#HeaderB{float:right;margin:-10px auto 10px auto;height:70px;width:100%;background:transparent url(../images/box/bg_navtop.png) no-repeat bottom center;}
 	.BHeaderB{margin:0 auto ;width:540px;}
 	.BTop{float:right;height:32px;overflow:hidden;border:1px solid #c0c0c0;padding:5px 14px;margin:0 0 0 4px;background:#E6E6E2 url(../images/highlight_line.gif) repeat-x top left;}
@@ -211,9 +207,16 @@
 	a.phover:hover > span, a.phover:focus > span { background-position:100% -90px;}
 
 	
-	.kt {height:60px;font-size:180%;margin:0 0 -20px 0 !important;padding:12px 74px 0 0 !important;background:transparent url(../images/icon/cp_kleeja.png) no-repeat right top;}
-
 	/* start control panel */
+	.kt {overflow:hidden;height:58px;line-height:48px;font-size:180%;margin:0 0 -9px 0 !important;padding:0px 0 0 90px !important;background:transparent url(../images/icon/cp_kleeja.png) no-repeat 0 0;}
+	.option_box {padding:5px;margin-bottom:10px;display:block;}
+	.option_box_inner{border-top: solid 1px #fff;border-bottom: solid 1px #fff;margin:4px 0;padding:10px 0;}
+	.option_box table{border:none;margin:4px 0;padding:0;}
+	.option_box tr{border:none;background-color:transparent;}
+	.option_box td{border:none;}
+	.option_box tr:hover {background-color:transparent;}
+	
+	
 	.list_control_panel{width:100%;}
 	.title_kleeja {line-height:25px;padding:5px 10px;color:#FF6600;font-size:large;font-weight: bold;background:url(../images/shop_gradient_top.gif) repeat-x top left;border-top: 1px solid #D2D4C9;border-bottom: 1px solid #BCBCBC;}
 	.option_list {list-style: none;}
@@ -221,11 +224,6 @@
 	.option_head {padding: 5px 10px;cursor: pointer;position: relative;}
 	.option_head .timestamp {float:left;}
 	.option_head cite {font-size:18px;color:#3F5252;}
-	.option_body {padding:5px;margin-bottom:10px;display:block;background:#FFF}
-	.option_body table{border:none;margin:4px 0;padding:0;}
-	.option_body tr{border:none;background-color:transparent;}
-	.option_body td{border:none;}
-	.option_body tr:hover {background-color:transparent;}
 	.option_list_bottom {border-top: solid 1px #e4e4e4;	padding: 5px 0;clear: both;}
 	.collapse_buttons  {margin:5px 0;float: left;}
 	.show_all {background: url(../images/tall-down-arrow.png) no-repeat right center;padding-right: 12px;}
@@ -243,11 +241,11 @@
 	
 	
 	/* CHOOSING STAGE */
-	#ConfigTypesList{width:100%;margin:10px auto;}
+	#ConfigTypesList{width:100%;margin:20px auto;}
 	.ConfigTypesList{float:right;border:1px solid #D9D4BD;margin:0 25px 25px 0;cursor:pointer;text-align:center;}
 	.TypeLink{float:right;width:150px;height:150px;padding:15px;overflow:hidden;border:1px solid #fff;background:#F1EEE0;}
 	.TypeLink span{display:block;padding-top:14px !important;}
-	.TypeLink:hover{background:#E6E0C8;border:1px solid #E6E0C8;color:#000;padding-top:16px;height:149px;}
+	.TypeLink:hover{background:#E6E0C8;border-color:#E6E0C8;color:#000;padding-top:16px;height:149px;}
 	#ConfigTypesList .BTHTypeLink{display:block;color:#888;font-size:120%;font-weight:400;padding:16px 0 15px 0;height:40px;line-height:20px; }
 	#ConfigTypesList .TypeLink:hover .BTHTypeLink{color:#000;}
 

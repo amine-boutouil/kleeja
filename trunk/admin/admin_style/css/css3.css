@@ -25,7 +25,7 @@
 	/* @Dark gray text shadow ------- */
 	#boxfileuser .public,#Footer .Powered h1 ,span.kbubbles {text-shadow: 0 0 2px #444;}
 	
-	#HeaderB a{	
+	#HeaderB a,.fieldset{	
 				text-shadow: 0px 1px 1px #fff;-o-text-shadow: 0px 1px 1px #fff;-moz-text-shadow: 0px 1px 1px #fff;-webkit-text-shadow: 0px 1px 1px #fff;
 				box-shadow: 0px 1px 1px #E6E6E2;-o-box-shadow: 0px 1px 1px #E6E6E2;-moz-box-shadow: 0px 1px 1px #E6E6E2;-webkit-box-shadow: 0px 1px 1px #E6E6E2;
 				border-radius: 3px;-o-border-radius: 3px;-moz-border-radius: 3px;-webkit-border-radius: 3px;}
@@ -57,6 +57,6 @@
 	-moz-box-shadow : 0px 0px 5px #444;-webkit-box-shadow : 0px 0px 5px #444;-khtml-box-shadow : 0px 0px 5px #444;box-shadow : 0px 0px 5px #444;}
 	#DivTable,.box_all ,blockquote.note,#sign_ajax,#sign_ajax_error {
 	-moz-border-radius : 5px;-webkit-border-radius : 5px;-khtml-border-radius : 5px; border-radius : 5px;}
-	.body_menu,.Bmenu, .button_img ,.button_file ,#fieldset_progress, .fieldset_google, .fieldset_yahoo  {
+	.body_menu,.Bmenu, .button_img ,.button_file ,#fieldset_progress  {
 	-moz-border-radius : 10px;-webkit-border-radius : 10px;-khtml-border-radius : 10px;border-radius : 10px;}
 /* @end */

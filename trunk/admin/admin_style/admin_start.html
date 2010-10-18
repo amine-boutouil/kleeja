@@ -10,7 +10,7 @@ jQuery(document).ready(function($){
 <!-- start body panel  -->
 <div id="boxs">
 	<!-- site name -->
-	<h1 class="h1 kt">{config.sitename}</h1>
+	<h1 class="h1 sitename">{config.sitename}</h1>
 	<div class="hr"></div>
 	<p class="titleAll left"><a href="./">{lang.KLEEJA_CP}</a></p> 
 	<div class="clr"></div>
@@ -37,32 +37,26 @@ jQuery(document).ready(function($){
 	<!-- User Statistics -->
 	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><span class="STitle right">{lang.USER_STAT}</span></div></div>
 	<div class="clr"></div>
-	
 		<div class="option_box">
-		
-				<table width="100%" cellspacing="0" cellpadding="0">
-				<tr>
-					<td class="adminimage">&nbsp;</td>
-					<td>
-						<p class="text_info"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/Circle_Orange.png" alt=".." />{usernamelang}</p>
-						<IF NAME="stat_last_file!='0'">
-						<p class="text_info"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/Circle_Orange.png" alt=".." />{lang.LSTFLE_ST} : <a href="{last_file_up_url}"  onclick="window.open(this.href,'_blank');return false;">{last_file_up}</a></p>
-						<ELSE>
-						<p class="text_info"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/Circle_Orange.png" alt=".." />{lang.UNKNOWN}</p>
-						</IF>
-						<IF NAME="last_visit">
-						<p class="text_info"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/Circle_Orange.png" alt=".." />{lang.LAST_VISIT} : <span style="color:red">{last_visit}</span></p>
-						</IF>
-					</td>
-				</tr>
-				<IF NAME="last_visit">
-				<tr>
-					<td>&nbsp;</td>
-					<td class="box_botton">
-						<p class="button_img">
-								<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/viewpicture.png" alt=".." /> 
-								{lang.IMG_LST_VST_SEARCH} :
-								<select class="show_since_time" tabindex="3" onchange="javascript:get_kleeja_link('{h_lst_imgs}' + (Math.round((new Date()).getTime() / 1000) - $(this).val()), '#main_container');">">
+			<div class="option_box_inner">
+			
+			<div class="userAdmin"><img class="ImgAdmin" src="{STYLE_PATH_ADMIN}images/icon/adm_user.png" alt="" height="100" width="100" />
+				<div class="InfoUserAdmin">
+					<h1>{usernamelang}</h1>
+					<ul>
+					<IF NAME="stat_last_file!='0'">
+						<li><img class="img" src="{STYLE_PATH_ADMIN}images/icon/last_file.png" alt="" /> {lang.LSTFLE_ST} : <a class="elementLTR" href="{last_file_up_url}"  onclick="window.open(this.href,'_blank');return false;">{last_file_up}</a></li>
+					<ELSE>
+						<li><img class="img" src="{STYLE_PATH_ADMIN}images/icon/last_file.png" alt="" /> {lang.UNKNOWN}</li>
+					</IF>
+					<IF NAME="last_visit">
+						<li><img class="img" src="{STYLE_PATH_ADMIN}images/icon/lastvisit.png" alt="" /> {lang.LAST_VISIT} : <span style="color:black;">{last_visit}</span></li>
+					</IF>
+					
+					<IF NAME="last_visit">
+						<li class="LastVisit"><img class="img" src="{STYLE_PATH_ADMIN}images/icon/find_photo.png" alt="" />
+							<span>{lang.IMG_LST_VST_SEARCH} :</span>
+							<select class="show_since_time" tabindex="3" onchange="javascript:get_kleeja_link('{h_lst_imgs}' + (Math.round((new Date()).getTime() / 1000) - $(this).val()), '#main_container');">">
 									<option>-----</option>
 									<option value="3600">{lang.HOUR}</option>
 									<option value="18000">{lang.5HOURS}</option>
@@ -70,12 +64,11 @@ jQuery(document).ready(function($){
 									<option value="6048000">{lang.WEEK}</option>
 									<option value="25920000">{lang.MONTH}</option>
 									<option value="31536000">{lang.YEAR}</option>
-								</select>
-						</p>
-						<p class="button_file">
-							<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/old-edit-find.png" alt=".." />
-							{lang.FLS_LST_VST_SEARCH} :
-								<select class="show_since_time" tabindex="3" onchange="javascript:get_kleeja_link('{h_lst_files}' + (Math.round((new Date()).getTime() / 1000) - $(this).val()), '#main_container');">
+							</select>
+						</li>
+						<li class="LastVisit"><img class="img" src="{STYLE_PATH_ADMIN}images/icon/find_file.png" alt="" />
+							<span>{lang.FLS_LST_VST_SEARCH} :</span>
+							<select class="show_since_time" tabindex="4" onchange="javascript:get_kleeja_link('{h_lst_files}' + (Math.round((new Date()).getTime() / 1000) - $(this).val()), '#main_container');">
 									<option>-----</option>
 									<option value="3600">{lang.HOUR}</option>
 									<option value="18000">{lang.5HOURS}</option>
@@ -83,19 +76,24 @@ jQuery(document).ready(function($){
 									<option value="6048000">{lang.WEEK}</option>
 									<option value="25920000">{lang.MONTH}</option>
 									<option value="31536000">{lang.YEAR}</option>
-								</select>
-						</p>
-					</td>
-				</tr>
-				</IF>
-				</table>
-		</div><!-- #User Statistics -->
+							</select>
+						</li>
+					</IF>
+					</ul>
+				</div>
+			</div><!-- #End .userAdmin -->
+			</div><!-- #End .option_box_inner -->
+		</div><!-- #End .option_box -->
 		
+		<div class="clr"></div><br />
+		
+		<!-- General Statistics  -->	
 		<div class="ribbon"><div class="wrapAround"></div><div class="tab"><span class="STitle right">{lang.GENERAL_STAT}</span></div></div>
 		<div class="clr"></div>
-		
-			<!-- General Statistics  -->	
-			<div class="option_box">
+		<div class="option_box">
+			<div class="option_box_inner">
+				
+				
 				<div class="general_statistics">
 				<table class="info_statistics" style="width:78%;">
 					<tr>
@@ -148,48 +146,47 @@ jQuery(document).ready(function($){
 				</fieldset>
 				<!-- # percentage meter -->
 
-				</div>
-			</div><!-- #General Statistics -->
-
+					</div>
+				</div><!-- #End .option_box_inner -->
+			</div><!-- #End .option_box -->
+			<!-- #General Statistics -->
+			
+			<div class="clr"></div><br />
 			
 			<!-- Statistics Search Engines -->
 			<div class="ribbon"><div class="wrapAround"></div><div class="tab"><span class="STitle right">{lang.SEARCH_STAT}</span></div></div>
 			<div class="clr"></div>
-				<div class="option_box">
-					<table width="100%">
-						<tr>
-						<!-- start gooloe -->
-						<td>
-							<fieldset class="fieldset_google">
-								<legend>Google</legend>
-								<p>{lang.LAST_GOOGLE} :</p>
-								<p style="color:#0D3690;">{s_last_google}</p>
-								<p>{lang.GOOGLE_NUM} :</p>
-								<p style="color:#0D3690;">[ {s_google_num} ]</p>
-							</fieldset>
-						</td>
-						</tr>
-						<tr>
-						<!-- start yahoo -->
-						<td>
-							<fieldset class="fieldset_yahoo">
-								<legend>Yahoo</legend>
-								<p>{lang.LAST_YAHOO} :</p>
-								<p style="color:#430B47;">{s_last_yahoo}</p>
-								<p>{lang.YAHOO_NUM} :</p>	
-								<p style="color:#430B47;">[ {s_yahoo_num} ]</p>					
-							</fieldset>
-						</td>
-						</tr>
-					</table>
-				</div><!-- #Statistics Search Engines  -->
+			<div class="option_box">
+				<div class="option_box_inner">
+				
+					<!-- start gooloe -->
+					<fieldset class="fieldset google">
+						<legend>Google</legend>
+							<p>{lang.LAST_GOOGLE} : {s_last_google}</p>
+							<p>{lang.GOOGLE_NUM} : [ {s_google_num} ]</p>
+					</fieldset>
+
+					<!-- yahoo -->
+					<fieldset class="fieldset yahoo">
+						<legend>Yahoo</legend>
+							<p>{lang.LAST_YAHOO} :	{s_last_yahoo}</p>
+							<p>{lang.YAHOO_NUM} : [ {s_yahoo_num} ]</p>					
+					</fieldset>
+					
+				</div><!-- #End .option_box_inner -->
+			</div><!-- #End .option_box -->
+			<!-- #Statistics Search Engines  -->
+			
+			<div class="clr"></div><br />			
 				
 			<!-- Other information -->	
 			<div class="ribbon"><div class="wrapAround"></div><div class="tab"><span class="STitle right">{lang.OTHER_INFO}</span></div></div>
 			<div class="clr"></div>
-
 			<div class="option_box">
-			<div class="option_box_inner">
+				<div class="option_box_inner">
+			
+			
+			<div style="margin-top:8px;">
 				<table class="other_information">
 					<tr align="center">
 						<td width="33%">
@@ -213,8 +210,8 @@ jQuery(document).ready(function($){
 					</tr>
 				</table>
 			</div>
+			
 			<div style="margin:4px auto;" align="center" >
-				
 				<table class="valuable_data">
 				<tr>
 					<td rowspan="4" align="center" width="25%" class="img_valuable_data"> </td>
@@ -235,7 +232,10 @@ jQuery(document).ready(function($){
 				</tr>
 				</table>
 			</div>
-			</div><!-- #Other information -->
+			
+				</div><!-- #End .option_box_inner -->
+			</div><!-- #End .option_box -->			
+			<!-- #Other information -->
 
 			
 

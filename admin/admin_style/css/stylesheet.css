@@ -62,11 +62,14 @@
 	.hr {background:transparent url(../images/box/hr-bg.gif) repeat-x 0 0;clear:both;height:5px;margin:0 0 0 0;}
 	.left, img.left {float:left;}
 	.right, img.right {float:right;}
+	 img.img {margin-left:6px;vertical-align:middle;}
+	 .elementLTR{direction:ltr;}
 	.MarginTop {margin-top:-10px;}
-	.MarginBottom {margin-top:10px;}
+	.MarginBottom {margin-bottom:10px;}
 	.h1 {color: #318391;font-size:180%;margin:-5px 0 10px 0;font-weight:700;padding:0 0 20px 0;}
 	.SectionTitle {color: #318391;display:block;font-size:180%;margin:0px 5px 15px 0;font-weight:700;}
 	.titleAll{margin:2px 0 20px 0;font-size:100%;font-weight:400;}
+	.fieldset {margin:10px 0;padding:15px;border: 1px solid #B1B1B1;}
 	
 	.SitenameHead{height:28px;margin:-20px 5px 5px 0;overflow:hidden;width:600px;color:#646464;font-size:160%; font-weight:700;}
 	.micon{padding-left:20px}
@@ -106,7 +109,7 @@
 	#MmBody ul.MmNavTop li {float:right;margin:0 5px;line-height:50px;color:#ffffff;font-size:96%;font-weight:700;text-shadow: 0 0 2px #000;}
 	#MmBody ul.MmNavTop li.mmDivider{ background: url(../images/box/mm_divider.gif) no-repeat 0 0;height:40px;width:10px }
 	#MmBody ul.MmNavTop li a .Mmicon{padding:0 0 0 7px;}
-	#Logo{float:left;margin:-8px 0 8px 10px;padding:10px;}
+	#Logo{float:left;margin:-14px 0 20px 8px;padding:10px;}
 	#Logo a{background:transparent url(../images/logo.png) no-repeat 0 0;display:block;height:69px;width:292px}
 	#HeaderB{float:right;margin:-10px auto 10px auto;height:70px;width:100%;background:transparent url(../images/box/bg_navtop.png) no-repeat bottom center;}
 	.BHeaderB{margin:0 auto ;width:540px;}
@@ -185,33 +188,58 @@
 	.ribbon span.STitle{margin:17px 20px 0 80px;font-size:140%;text-shadow:#884005 -1px -1px 1px}
 	.ribbon span.TitleSub {color:#FFF !important;font-size:100%;margin:16px 0 0 20px}
 	.ribbon img.TSubImg{width:64px;height:74px;position:absolute;top:55px;left:20px;z-index:701;}
-	.ribbon img.TSubImg2{position:relative;top:0px;left:20px;z-index:701;}
 
 	/*CSS style pagination*/
 	#pagination	{ text-align:right; margin:0 0 10px 0; float:right; }
-	a.paginate { display:inline-block;height:23px; padding:0 3px; font-size:80%; font-weight:bold; color:#333; text-shadow:1px 1px 0 #fff; background:url(../images/pagination.png) 0 0 no-repeat; white-space:nowrap; border:none; overflow:visible; cursor:pointer; text-decoration:none; }
-	a.paginate > span {display:block; height:23px; padding:0 10px 0 8px; line-height:23px; background:url(../images/pagination.png) 100% 0 no-repeat; }
+	a.paginate { display:inline-block;height:23px; padding:0 3px; font-size:80%; font-weight:bold; color:#333; text-shadow:1px 1px 0 #fff; background:url(../images/box/pagination.png) 0 0 no-repeat; white-space:nowrap; border:none; overflow:visible; cursor:pointer; text-decoration:none; }
+	a.paginate > span {display:block; height:23px; padding:0 10px 0 8px; line-height:23px; background:url(../images/box/pagination.png) 100% 0 no-repeat; }
 	a.paginate:hover, a.paginate:focus{ color:#fff; text-decoration:none; text-shadow:-1px -1px 0 rgba(0,0,0,0.3); background-position:0 -30px; }
 	a.paginate:hover > span, a.paginate:focus > span { background-position:100% -30px; }
-	a.dots { background:url(../images/pagination.png) 0 -150px no-repeat;}
+	a.dots { background:url(../images/box/pagination.png) 0 -150px no-repeat;}
 	a.dots > span { background-position:100% -150px;cursor:default;}
 	a.dots:hover, a.dots:focus{ color:#333; text-shadow:1px 1px 0 #fff; background-position:0 -150px; }
 	a.dots:hover > span, a.dots:focus > span	{ background-position:100% -150px; }
-	a.current { background:url(../images/pagination.png) 0 -90px no-repeat; color:#fff; text-shadow:-1px -1px 0 rgba(0,0,0,0.3); }
+	a.current { background:url(../images/box/pagination.png) 0 -90px no-repeat; color:#fff; text-shadow:-1px -1px 0 rgba(0,0,0,0.3); }
 	a.current > span { background-position:100% -90px;cursor:default;}
 	a.current:hover, a.current:focus{background-position:0 -90px; }
 	a.current:hover > span, a.current:focus > span { background-position:100% -90px;}
-	a.phover { background:url(../images/pagination.png) 0 -30px no-repeat; color:#fff; text-shadow:-1px -1px 0 rgba(0,0,0,0.3); }
+	a.phover { background:url(../images/box/pagination.png) 0 -30px no-repeat; color:#fff; text-shadow:-1px -1px 0 rgba(0,0,0,0.3); }
 	a.phover > span { background-position:100% -30px;}
 	a.phover:hover, a.phover:focus { color:#fff; text-decoration:none; text-shadow:-1px -1px 0 rgba(0,0,0,0.3); background-position:0 -90px; }
 	a.phover:hover > span, a.phover:focus > span { background-position:100% -90px;}
 
-	
 	/* start control panel */
-	.kt {overflow:hidden;height:58px;line-height:48px;font-size:180%;margin:0 0 -9px 0 !important;padding:0px 0 0 90px !important;background:transparent url(../images/icon/cp_kleeja.png) no-repeat 0 0;}
-	.option_box {padding:5px;margin-bottom:10px;display:block;}
-	.option_box_inner{border-top: solid 1px #fff;border-bottom: solid 1px #fff;margin:4px 0;padding:10px 0;}
-	.option_box table{border:none;margin:4px 0;padding:0;}
+	.sitename {overflow:hidden;height:58px;line-height:48px;font-size:180%;margin:0 0 -10px 0 !important;padding:0px 0 0 90px !important;background:transparent url(../images/icon/cp_kleeja.png) no-repeat 0 -2px;}
+	.option_box {margin:5px 0 15px 0;display:block;}
+	.option_box_inner{padding:0 10px;}
+		/* User Statistics */
+		.InfoUserAdmin{position:relative;right:0;overflow:hidden;padding:0 18px 0 0;margin:10px 0 10px 0;}
+		.InfoUserAdmin h1{font-weight:700;margin:0 0 15px;float:right}
+		.InfoUserAdmin ul {margin:4px 0 20px 0;}
+		.InfoUserAdmin ul li{clear:both;padding:4px 10px;font-size:100%;font-weight:400;}
+		.ImgAdmin{float:right;margin:-14px 2px 2px 2px;padding:0 2px;}
+		.LastVisit {clear:none !important;width:45%;float:right;margin-left:2px;padding:10px !important;background:#F1F1E4;border-top: solid 1px #fff;border-bottom: solid 1px #fff;}
+		.LastVisit span{padding:0 0 0 5px;font-size:90%;font-weight: bold;}
+		.LastVisit.img{padding:0 10px !important;}
+		/* Statistics Search Engines */
+		.fieldset.google, .fieldset.yahoo {margin-bottom:20px;padding:15px 20px;}
+		.fieldset p {line-height:28px;font-weight:bold;font-size:100%;margin:0 0 0 0;}
+		.fieldset.google {background:url(../images/icon/google.png) no-repeat 8% 50%;}
+		.fieldset.yahoo {background:url(../images/icon/yahoo.png) no-repeat 8% 50%;}
+		.fieldset  legend{line-height:0;font-size:150%;}
+		.fieldset.google  legend {color:#0051D8}
+		.fieldset.yahoo  legend{color:#800080}
+		
+		.fieldset.google:hover {background-color:#F3F3F3;border: 1px solid #5555FF;color:#0051D8}
+		.fieldset.yahoo:hover {background-color:#F3F3F3;border: 1px solid #A375CF;color:#800080}
+
+	
+	
+
+	
+
+	
+	.option_box table{border:none;margin:0;padding:0;}
 	.option_box tr{border:none;background-color:transparent;}
 	.option_box td{border:none;}
 	.option_box tr:hover {background-color:transparent;}
@@ -231,13 +259,8 @@
 	
 	/* User Statistics */
 	
-	.adminimage {background: url(../images/adminusername.gif) no-repeat center;width:90px;height:78px;}
-	.text_info{width:74%;line-height:24px;font-size:11px;font-weight: bold;border-bottom: 1px dashed #DFDFDF;}
-	.box_botton{margin:2px auto;text-align:center;}
-	.button_img ,.button_file{background:#EFECEC;float:right;padding:6px 10px;text-align:center;font-size:11px;font-weight: bold;border: solid 1px #D7D7D7;}
-	.button_img {margin-left:10px;}
-	.button_img:link,.button_file:link ,.button_img:visited,.button_file:visited {color:#414042;}
-	.button_img:hover,.button_file:hover {color:#333;text-decoration: none;background:#FFD699;border: solid 1px #D8A861;}
+	
+
 	
 	
 	/* CHOOSING STAGE */
@@ -370,7 +393,7 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 
 
 /*   start general statistics */
-.general_statistics {background:url(../images/bg_general_statistics.png) no-repeat -1% 4%;color:black;}
+
 .info_statistics  p{height:22px;line-height:22px;margin-bottom:4px;font-size:11px;font-weight:bold;color:#002262;border-bottom: dashed 1px #D7D7D7;}
 .filsiz{padding:3px; font-weight:bold;font-size:xx-large;color:#BFBFBF;text-align:center;text-decoration:line-through;vertical-align:top}
 /* percentage meter */
@@ -389,15 +412,7 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 #progressBar #percentage_size_meter .beyond {background:transparent url(../images/beyond.gif) no-repeat scroll right top;font-size:11px;font-weight:bold;}
 /*  # #  general statistics */
 
-/* start Statistics Search Engines */
-.fieldset_google, .fieldset_yahoo {height:70px;margin-top:10px;padding:15px 20px;background:#fff;border: 1px solid #B1B1B1; }
-.fieldset_google p, .fieldset_yahoo p {line-height:18px;font-weight:bold;font-size:11px;}
-.fieldset_google {background:url(../images/google.gif) no-repeat 8% 50%;}
-.fieldset_yahoo {background:url(../images/yahoo.gif) no-repeat 8% 50%;}
-.fieldset_google  legend, .fieldset_yahoo  legend{color:#B1B1B1;line-height:0;}
-.fieldset_google:hover {background-color:#F3F3F3;border: 1px solid #5555FF;color:#0000FF}
-.fieldset_yahoo:hover {background-color:#F3F3F3;border: 1px solid #A375CF;color:#800080}
-/* ## Statistics Search Engines */
+
 
 /* Other information */
 .other_information {width:100%;}

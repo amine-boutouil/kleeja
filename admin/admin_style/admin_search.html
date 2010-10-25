@@ -1,4 +1,3 @@
-
 <script type="text/javascript">
 function check_search_files_form(form)
 {
@@ -43,117 +42,100 @@ function check_search_users_form(form)
 </script>
 
 
-<!-- start search temlate  -->
-<div id="divmiddle">
+<!-- start Search Template  -->
+<div id="boxs">
 
+	<form method="post" action="{action1}" onsubmit="return check_search_files_form(this);">
 
-<form method="post" action="{action1}" onsubmit="return check_search_files_form(this);">
+	<!-- Section Title  -->
+	<h1 class="SectionTitle"><a href="index.php?cp=h_search">{lang.R_SEARCH}</a></h1>
+	<div class="hr"></div>
+	<p class="titleAll"><a href="./">{lang.R_CPINDEX}</a> <span>&raquo; </span> {lang.SEARCH_FILES}</p> 
+	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><img class="left TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/search_button.png" alt="" /><span class="STitle left">{lang.SEARCH_FILES}</span></div></div>
+	<div class="clr"></div>
+	
+	<!-- start table no hover  -->
+	<table>
+		<tr>
+			<td><label for="filename">{lang.FILENAME}</label></td>
+			<td><label><input type="text" id="filename" name="filename" size="40"></label></td>
+		</tr>        
+		<tr>
+			<td><label for="username">{lang.USERNAME}</label></td>
+			<td><label><input type="text" id="username" name="username" size="40"></label></td>
+		</tr>        
+		<tr>
+			<td><label for="ext">{lang.FILETYPE}</label></td>
+			<td><label><input type="text" id="ext" name="ext" size="20"></label></td>
+			</tr>
+		<tr>
+			<td><label for="size">{lang.FILESIZE} </label></td>
+			<td><select name="than"><option value="1">&gt;</option><option value="2">&lt;</option></select><label><input type="text" id="size" name="size" size="10"></label> {lang.KILOBYTE}</td>
+		</tr>
+		<tr>
+			<td><label for="ups">{lang.FILEUPS} </label></td>
+			<td><select name="uthan"><option value="1">&gt;</option><option value="2">&lt;</option></select><label> <input type="text" id="ups" name="ups" size="10"></label></td>
+		</tr>
+		<tr>
+			<td><label for="rep">{lang.REPORT} </label></td>
+			<td><select name="rthan"><option value="1">&gt;</option><option value="2">&lt;</option></select><label> <input type="text" id="rep" name="rep" size="10"></label></td>
+		</tr>
+		<tr>
+			<td><label for="lastdown">{lang.LAST_DOWN} </label></td>
+			<td>{lang.WAS_B4}<label><input type="text" id="lastdown" name="lastdown" size="10"></label>{lang.DAYS}</td>
+		</tr>
+		<tr>
+			<td><label for="user_ip">{lang.IP}</label></td>
+			<td><label><input type="text" id="user_ip" name="user_ip"  size="20"></label>
+			</td>
+		</tr>
+		<!-- admin search data tr extra -->
+	</table>
+	<!-- end table no hover  -->
 
-<!-- start DivTable -->
-<div id="DivTable">
-
-<!-- title  -->
-<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/menu_icons/search_button.gif" />{lang.SEARCH_FILES} :</h2>
-<!-- title  -->
-
-<!-- start clear  -->
-<div class="clr"></div><br />
-<!-- end clear  -->
-
-
-<!-- start table no hover  -->
-<table>
-    <tr>
-        <td><label for="filename">{lang.FILENAME}</label></td>
-        <td><label><input type="text" id="filename" name="filename" size="40"></label></td>
-    </tr>        
-    <tr>
-        <td><label for="username">{lang.USERNAME}</label></td>
-        <td><label><input type="text" id="username" name="username" size="40"></label></td>
-    </tr>        
-    <tr>
-        <td><label for="ext">{lang.FILETYPE}</label></td>
-        <td><label><input type="text" id="ext" name="ext" size="20"></label></td>
-        </tr>
-    <tr>
-        <td><label for="size">{lang.FILESIZE} </label></td>
-        <td><select name="than"><option value="1">&gt;</option><option value="2">&lt;</option></select><label><input type="text" id="size" name="size" size="10"></label> {lang.KILOBYTE}</td>
-    </tr>
-    <tr>
-        <td><label for="ups">{lang.FILEUPS} </label></td>
-        <td><select name="uthan"><option value="1">&gt;</option><option value="2">&lt;</option></select><label> <input type="text" id="ups" name="ups" size="10"></label></td>
-    </tr>
-    <tr>
-        <td><label for="rep">{lang.REPORT} </label></td>
-        <td><select name="rthan"><option value="1">&gt;</option><option value="2">&lt;</option></select><label> <input type="text" id="rep" name="rep" size="10"></label></td>
-    </tr>
-    <tr>
-        <td><label for="lastdown">{lang.LAST_DOWN} </label></td>
-        <td>{lang.WAS_B4}<label><input type="text" id="lastdown" name="lastdown" size="10"></label>{lang.DAYS}</td>
-    </tr>
-    <tr>
-        <td><label for="user_ip">{lang.IP}</label></td>
-        <td><label><input type="text" id="user_ip" name="user_ip"  size="20"></label>
-        </td>
-    </tr>
-    <!-- admin search data tr extra -->
-</table>
-<!-- end table no hover  -->
-
+	<div class="clr"></div><br />
+	
 	<!-- button -->
-	<p class="right MarginBottom">
-		<button type="submit" id="submit" name="search_file" class="btn"><span>{lang.SEARCH_SUBMIT}</span></button>
-	</p>
+	<p class="MarginBottom"><button type="submit" id="submit" name="search_file" class="btn"><span>{lang.SEARCH_SUBMIT}</span></button></p>
 
-</div>
-<!-- end div border table  -->
-{H_FORM_KEYS}
-</form>
-<!-- end search temlate  -->
+	<!-- end div border table  -->
+	{H_FORM_KEYS}
+	</form>
+	<!-- end search temlate  -->
 
 
-<!-- start clear  -->
-<div class="clr"></div><br />
-<!-- end clear  -->
+	
+	<div class="clr"></div><br /><!-- clear -->
 
 
-<!-- start users search temlate  -->
-<IF NAME="default_user_system">
-<form method="post" action="{action2}" onsubmit="return check_search_users_form(this);">
+	<!-- start users search temlate  -->
+	<IF NAME="default_user_system">
+	<form method="post" action="{action2}" onsubmit="return check_search_users_form(this);">
 
-<!-- start div border table  -->
-<div id="DivTable">
+	<!-- Section Title  -->
+	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><span class="STitle right">{lang.SEARCH_USERS}</span></div></div>
+	<div class="clr"></div>
 
-<!-- title  -->
-<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/menu_icons/search_button.gif" />{lang.SEARCH_USERS} :</h2>
-<!-- title  -->
+	<!-- start table no hover  -->
+	<table>
+		<tr>
+			<td><label for="username">{lang.USERNAME}</label></td>
+			<td><label><input type="text" id="username" name="username" size="40"></label></td>
+		</tr>                
+		<tr>
+			<td><label for="usermail">{lang.EMAIL}</label></td>
+			<td><label><input type="text" id="usermail" name="usermail" size="40"></label></td>
+		</tr>        
+	</table>
+	<!-- end table no hover  -->
 
-
-<!-- start clear  -->
-<div class="clr"></div><br />
-<!-- end clear  -->
-
-<!-- start table no hover  -->
-<table>
-    <tr>
-        <td><label for="username">{lang.USERNAME}</label></td>
-        <td><label><input type="text" id="username" name="username" size="40"></label></td>
-    </tr>                
-    <tr>
-        <td><label for="usermail">{lang.EMAIL}</label></td>
-        <td><label><input type="text" id="usermail" name="usermail" size="40"></label></td>
-    </tr>        
-</table>
-<!-- end table no hover  -->
-
+	<div class="clr"></div><br />
+	
 	<!-- button -->
-	<p class="right MarginBottom">
-		<button type="submit" id="submit" name="search_user" class="btn"><span>{lang.SEARCH_SUBMIT}</span></button>
-	</p>
+	<p class="MarginBottom"><button type="submit" id="submit" name="search_user" class="btn"><span>{lang.SEARCH_SUBMIT}</span></button></p>
 
-</div><!-- end#DivTable -->
-{H_FORM_KEYS2}
-</form>
-</IF>
+	{H_FORM_KEYS2}
+	</form>
+	</IF>
 
-</div><!-- end users search temlate  -->
+</div><!-- END#SearchTemplate -->

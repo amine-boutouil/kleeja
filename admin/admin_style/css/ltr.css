@@ -33,7 +33,7 @@
 /* #  Main Menu */	
 
 /*  buttons */
-.left_button {float:right;}
+
 .button1 ,.button2 {background-position:right top;}
 .button1:hover ,.button2:hover{background-position:right top;}
 /*  buttons */

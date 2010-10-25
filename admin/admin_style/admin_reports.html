@@ -11,89 +11,85 @@
 	-->
 </script>
 
-<!-- start view reborts  -->
-<div id="divmiddle">
-<fieldset>
+<!-- start Reborts Template -->
+<div id="boxs">
 
-<!-- start box all -->
-<div class="box_all reports">
-
+	<!-- Section Title  -->
+	<h1 class="SectionTitle"><a href="index.php?cp=f_reports">{lang.R_REPORTS}</a></h1>
+	<div class="hr"></div>
+	<p class="titleAll"><a href="./">{lang.R_CPINDEX}</a> <span>&raquo; </span> {lang.R_REPORTS}</p> 
+	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><img class="left TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/reports_button.png" alt="" /><span class="STitle left">{lang.R_REPORTS}</span></div></div>
+	<div class="clr"></div><br />
 	<!-- title  -->
-	<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/menu_icons/reports_button.gif" />{lang.R_REPORTS}</h2><!-- END -->
 	
-<IF NAME="no_results"><ELSE>
-	<div id="mail_here">{lang.E_CLICK}</div>
-</IF>
+		
+	<IF NAME="no_results"><ELSE>
+		<div id="mail_here">{lang.E_CLICK}</div>
+		<div class="clr"></div>
+	</IF>
+
+	<form method="post" name="reportform" action="{action}">
+
+		<!-- if sent -->
+		<IF NAME="msg_sent">
+		<div class="msg_sent">{lang.IS_SEND_MAIL}</div>
+		<script type="text/javascript">
+		$('div.msg_sent').fadeOut(2000).fadeIn(2000).hide('slow');
+		</script>
+		</IF>
+		<!-- / if sent -->
+
+		<div class="clr"></div><br />
+		
+	<IF NAME="no_results">
+		<div id="mail_here">{lang.MESSAGE_NONE}</div>
+	<ELSE>
+
+	<table style="text-align:center">
+		<tr style="background-color:#DFDFDF">
+			<td>#</td>
+			<td>{lang.NAME}</td>
+			<td>{lang.URL}</td>
+			<td>{lang.TIME}</td>
+			<td>{lang.IP}</td>
+			<td><a href="javascript:void(0);" onclick="checkAll(document.reportform, '_del', 'su');">{lang.DELETE}</a></td>
+			<!-- admin reports info td1 extra -->
+		</tr>
+
+	<LOOP NAME="arr">
+		<tr id="su[{{id}}]" class="osilver<IF LOOP="sent"> is_sent</IF>">
+			  <td>
+				<a href="javascript:void(0);" onclick="javascript:show_msg('textva_{{id}}',{{id}});">{lang.VIEW}</a>
+			</td>
+			<td>
+			<a title="{lang.EMAIL}:{{mail}}" onclick="javascript:show_msg('textva_{{id}}',{{id}});">{{name}}</a>
+			<input type="hidden" value="{{mail}} :<br /> {{text}}" id="textva_{{id}}">
+			</td>
+			<td><a target="_blank" href="{{url}}">{lang.CLICKHERE}<a/></td>
+			<td>{{time}}</td>
+			<td><a target="_blank" href="{{ip_finder}}" target="_blank">{{ip}}</a></td>
+			<td><input type="checkbox" name="del_{{id}}" value="{{id}}" onclick="change_color(this,'su[{{id}}]');" rel="_del"></td>
+			<!-- admin reports info td2 extra -->
+		</tr>
+	</LOOP>
+
+	</table>
+
+		<div class="clr"></div><br />
+		
+		{page_nums}<!--  pagination -->
+
+		<!-- button -->
+		<p class="left MarginBottom"><button type="submit" id="submit" name="submit" class="btn"><span>{lang.UPDATE_REPORTS}</span></button></p>
+		
+		<div class="clr"></div><br />
+
+		{H_FORM_KEYS}
+	</form>
+
+
+	</IF>
 
 	<div class="clr"></div>
-	
-<form method="post" name="reportform" action="{action}">
 
-	<!-- if sent -->
-	<IF NAME="msg_sent">
-	<div class="msg_sent">{lang.IS_SEND_MAIL}</div>
-	<script type="text/javascript">
-	$('div.msg_sent').fadeOut(2000).fadeIn(2000).hide('slow');
-	</script>
-	</IF>
-	<!-- / if sent -->
-
-	<div class="clr"></div><br />
-	
-<IF NAME="no_results">
-	<div id="mail_here">{lang.MESSAGE_NONE}</div>
-<ELSE>
-
-<table style="text-align:center">
-    <tr style="background-color:#DFDFDF">
-        <td>#</td>
-        <td>{lang.NAME}</td>
-        <td>{lang.URL}</td>
-        <td>{lang.TIME}</td>
-        <td>{lang.IP}</td>
-        <td><a href="javascript:void(0);" onclick="checkAll(document.reportform, '_del', 'su');">{lang.DELETE}</a></td>
-        <!-- admin reports info td1 extra -->
-    </tr>
-
-<LOOP NAME="arr">
-	<tr id="su[{{id}}]" class="osilver<IF LOOP="sent"> is_sent</IF>">
-	      <td>
-			<a href="javascript:void(0);" onclick="javascript:show_msg('textva_{{id}}',{{id}});">{lang.VIEW}</a>
-		</td>
-        <td>
-		<a title="{lang.EMAIL}:{{mail}}" onclick="javascript:show_msg('textva_{{id}}',{{id}});">{{name}}</a>
-		<input type="hidden" value="{{mail}} :<br /> {{text}}" id="textva_{{id}}">
-        </td>
-        <td><a target="_blank" href="{{url}}">{lang.CLICKHERE}<a/></td>
-        <td>{{time}}</td>
-        <td><a target="_blank" href="{{ip_finder}}" target="_blank">{{ip}}</a></td>
-        <td><input type="checkbox" name="del_{{id}}" value="{{id}}" onclick="change_color(this,'su[{{id}}]');" rel="_del"></td>
-		<!-- admin reports info td2 extra -->
-    </tr>
-</LOOP>
-
-</table>
-
-	{page_nums}<!--  pagination -->
-
-	<!-- button -->
-	<p class="left_button MarginTop">
-		<button type="submit" id="submit" name="submit" class="btn"><span>{lang.UPDATE_REPORTS}</span></button>
-	</p>
-	
-	<div class="clr"></div><br />
-
-	{H_FORM_KEYS}
-</form>
-
-
-
-</IF>
-
-<div class="clr"></div>
-
-</div><!-- ## box all -->
-
-</fieldset>
-
-</div><!-- end view reborts  -->
+</div><!-- end#RebortsTemplate -->

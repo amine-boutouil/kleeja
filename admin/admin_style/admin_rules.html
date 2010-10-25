@@ -10,49 +10,40 @@ $(document).ready(function() { $('#rules_text').markItUp(mySettings); });
 </script>
 <!-- / markItUp! -->
 
-<!-- start rules temlate  -->
-<div id="divmiddle">
-<form method="post" action="{action}">
+<!-- start Rules Template  -->
+<div id="boxs">
 
-<!-- start DivTable -->
-<div id="DivTable">
+	<form method="post" action="{action}">
 
-<!-- title  -->
-<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/menu_icons/rules_button.gif" />{lang.R_RULES} :</h2>
-<!-- title  -->
+	<!-- Section Title  -->
+	<h1 class="SectionTitle"><a href="index.php?cp=l_rules">{lang.R_RULES}</a></h1>
+	<div class="hr"></div>
+	<p class="titleAll"><a href="./">{lang.R_CPINDEX}</a> <span>&raquo; </span> {lang.R_RULES}</p> 
+	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><img class="left TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/rules_button.png" alt="" /><span class="STitle left">{lang.R_RULES}</span></div></div>
+	<div class="clr"></div><br />
+	
+	<!-- start table no hover  -->
+	<label class="small_font">{lang.RULES_EXP}</label>
+	<!-- start clear  -->
+	<div class="clr"></div>
+	<!-- end clear  -->
 
-<!-- start clear  -->
-<div class="clr"></div><br />
-<!-- end clear  -->
+	<xmp style="direction:ltr;">
+	<pre>
+	  <ul>
+		<li>example, number one</li>
+		<li>example, number two</li>
+		<li>example, number three</li>
+		<li>example, number four</li>
+	  </ul>
+	</pre>
+	</xmp>
 
-<!-- start table no hover  -->
-<label class="small_font">{lang.RULES_EXP}</label>
-<!-- start clear  -->
-<div class="clr"></div>
-<!-- end clear  -->
-
-<xmp style="direction:ltr;">
-<ul>
-  <li>example, number one</li>
-  <li>example, number two</li>
-  <li>example, number three</li>
-  <li>example, number four</li>
-</ul>
-</xmp>
-
-<textarea name="rules_text" id="rules_text" style="direction:ltr;height: 260px;" >{rules}</textarea>
+	<textarea name="rules_text" id="rules_text" style="direction:ltr;height: 260px;" >{rules}</textarea>
 
 	<!-- button -->
-	<p class="left_button MarginTop">
-		<button type="submit" id="submit" name="submit" class="btn"><span>{lang.UPDATE_RULES}</span></button>
-	</p>
-	
+	<p class="center MarginBottom"><button type="submit" id="submit" name="submit" class="btn"><span>{lang.UPDATE_RULES}</span></button></p>
 
-</div><!-- end#DivTable -->
-
-
-{H_FORM_KEYS}
-</form>
-</div>
-<!-- end rules temlate  -->
-        
+	{H_FORM_KEYS}
+	</form>
+</div><!-- END#RulesTemplate -->

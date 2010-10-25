@@ -1,171 +1,146 @@
-<!-- start view plugins temlate  -->
-<div id="divmiddle">
+<!-- start Plugins Template -->
+<div id="boxs">
 
-<!-- start div border table  -->
-<div id="DivTable">
+	<!-- Section Title  -->
+	<h1 class="SectionTitle"><a href="index.php?cp=j_plugins">{lang.R_PLUGINS}</a></h1>
+	<div class="hr"></div>
+	<p class="titleAll"><a href="./">{lang.R_CPINDEX}</a> <span>&raquo; </span>{lang.R_PLUGINS}</p> 
+	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><img class="left TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/plugins_button.png" alt="" /><span class="STitle left">{lang.R_PLUGINS}</span></div></div>
+	<div class="clr"></div><br />
+	
+	<strong>{lang.PLUGINS_EX}</strong>
+	<br />
 
-<!-- title  -->
-<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/menu_icons/plugins_button.gif" />{lang.R_PLUGINS} :</h2>
-<!-- title  -->
+	
+	<div class="clr"></div><br /><!-- clear -->
 
-<!-- border line Vertical  -->
-<p class="dot" />
-<!-- border line Vertical  -->
-<br />
-
-<strong>{lang.PLUGINS_EX}</strong>
-<br />
-
-<!-- start clear  -->
-<div class="clr"></div><br />
-<!-- end clear  -->
-
-<!-- start table no hover  -->
-
-<IF NAME="no_plugins">
-<div id="system-message">
-	<div class="info">
-		<ul>
-		<li><p>{lang.NO_PLUGINS}</p></li>
-		</ul>
+	<!-- start table no hover  -->
+	<IF NAME="no_plugins">
+	<div id="system-message">
+		<div class="info">
+			<ul>
+			<li><p>{lang.NO_PLUGINS}</p></li>
+			</ul>
+		</div>
 	</div>
-</div>
-<ELSE>
-	<LOOP NAME="arr">
-<table class="tab-no-hover" style="margin-bottom:10px;">
-	<tr style="background-color:#EFE7B8">
-		<td colspan="2"><span style="font-family: Georgia, Times, 'Times New Roman', serif;font-size:16px;font-weight: normal;">{{plg_name}} {{plg_ver}}</span></td>
-	</tr>
-	<tr>
-		<td style="width:80%">
-			<img src="{{plg_icon_url}}" />
-			{{plg_dsc}}
-			<br />
-			<em>{{plg_author}}</em>
-			<em></em>
-		</td>
-		<td style="width:20%;padding-(lang.DIR==ltr?left:right):10px;">
-			
-				<IF LOOP="plg_disabled">
-				<a href="{action}&amp;do_plg={{plg_id}}&amp;m=2&amp;{GET_FORM_KEY}" title="{lang.ENABLE}"><img src="{STYLE_PATH_ADMIN}images/control_play.png" alt="{lang.ENABLE}" /></a>
-				<ELSE>
-				<a href="{action}&amp;do_plg={{plg_id}}&amp;m=1&amp;pn={{plg_name}}&amp;{GET_FORM_KEY}" title="{lang.DISABLE}"><img src="{STYLE_PATH_ADMIN}images/control_pause.png" alt="{lang.DISABLE}" /></a>
-				</IF>
-				<a href="{action}&amp;do_plg={{plg_id}}&amp;m=3&amp;pn={{plg_name}}&amp;{GET_FORM_KEY}" title="{lang.DELETE}"><img src="{STYLE_PATH_ADMIN}images/del.png" alt="{lang.DELETE}" onclick="javascript:return confirm_from();" /></a>
-				<a href="{action}&amp;do_plg={{plg_id}}&amp;m=5&amp;{GET_FORM_KEY}" title="{lang.EXPORT_AS_XML}"><img src="{STYLE_PATH_ADMIN}images/export.png" alt="{lang.EXPORT_AS_XML}" /></a>
-				<IF LOOP="plg_instructions"><a href="{action}&amp;do_plg={{plg_id}}&amp;m=4&amp;{GET_FORM_KEY}" title="{lang.INFORMATION}"><img src="{STYLE_PATH_ADMIN}images/help.png" alt="{lang.INFORMATION}" /></a></IF>
-			
-		</td>
-	</tr>
-	</table>
+	<ELSE>
+		<LOOP NAME="arr">
+	<table class="tab-no-hover" style="margin-bottom:10px;">
+		<tr style="background-color:#EFE7B8">
+			<td colspan="2"><span style="font-family: Georgia, Times, 'Times New Roman', serif;font-size:16px;font-weight: normal;">{{plg_name}} {{plg_ver}}</span></td>
+		</tr>
+		<tr>
+			<td style="width:80%">
+				<img src="{{plg_icon_url}}" />
+				{{plg_dsc}}
+				<br />
+				<em>{{plg_author}}</em>
+				<em></em>
+			</td>
+			<td style="width:20%;padding-(lang.DIR==ltr?left:right):10px;">
+				
+					<IF LOOP="plg_disabled">
+					<a href="{action}&amp;do_plg={{plg_id}}&amp;m=2&amp;{GET_FORM_KEY}" title="{lang.ENABLE}"><img src="{STYLE_PATH_ADMIN}images/control_play.png" alt="{lang.ENABLE}" /></a>
+					<ELSE>
+					<a href="{action}&amp;do_plg={{plg_id}}&amp;m=1&amp;pn={{plg_name}}&amp;{GET_FORM_KEY}" title="{lang.DISABLE}"><img src="{STYLE_PATH_ADMIN}images/control_pause.png" alt="{lang.DISABLE}" /></a>
+					</IF>
+					<a href="{action}&amp;do_plg={{plg_id}}&amp;m=3&amp;pn={{plg_name}}&amp;{GET_FORM_KEY}" title="{lang.DELETE}"><img src="{STYLE_PATH_ADMIN}images/del.png" alt="{lang.DELETE}" onclick="javascript:return confirm_from();" /></a>
+					<a href="{action}&amp;do_plg={{plg_id}}&amp;m=5&amp;{GET_FORM_KEY}" title="{lang.EXPORT_AS_XML}"><img src="{STYLE_PATH_ADMIN}images/export.png" alt="{lang.EXPORT_AS_XML}" /></a>
+					<IF LOOP="plg_instructions"><a href="{action}&amp;do_plg={{plg_id}}&amp;m=4&amp;{GET_FORM_KEY}" title="{lang.INFORMATION}"><img src="{STYLE_PATH_ADMIN}images/help.png" alt="{lang.INFORMATION}" /></a></IF>
+				
+			</td>
+		</tr>
+		</table>
+		</LOOP>
+	</IF>
+	<!-- end table no hover  -->
+
+	
+	<div class="clr"></div><br /><!-- clear -->
+
+
+
+	<IF NAME="is_there_changes_files">
+	<!-- start clear  -->
+	<div class="clr"></div><br />
+	<!-- end clear  -->
+
+	<!-- start div border table  -->
+	<div id="DivTable">
+
+	<!-- title  -->
+	<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/menu_icons/plugins_button.gif" />{lang.PLUGINS_CHANGES_FILES} :</h2>
+
+
+
+	<br />
+
+	<strong>{lang.PLUGINS_CHANGES_FILES_EXP}</strong>
+	<br />
+
+	
+	<div class="clr"></div><br /><!-- clear -->
+
+	<table style="width:100%">
+	<LOOP NAME="changes_files">	
+		<tr>
+			<td>{{file}}</td>
+			<td><a href="{{path}}">{lang.DOWNLAOD}</a></td>
+		</tr>
 	</LOOP>
-</IF>
+		<tr>
+			<td colspan="2" style="text-align:center;padding:6px;font-size:16px"> [ <a href="{action}&amp;cc=1">{lang.DELETE}</a> ] </td>
+		</tr>
+	</table>
 
-<!-- end table no hover  -->
+	<!-- start clear  -->
+	<div class="clr"></div><br />
+	<!-- end clear  -->
 
-<!-- start clear  -->
-<div class="clr"></div><br />
-<!-- end clear  -->
+	</div>
+	</IF>
 
-</div>
-
-<IF NAME="is_there_changes_files">
-<!-- start clear  -->
-<div class="clr"></div><br />
-<!-- end clear  -->
-
-<!-- start div border table  -->
-<div id="DivTable">
-
-<!-- title  -->
-<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/menu_icons/plugins_button.gif" />{lang.PLUGINS_CHANGES_FILES} :</h2>
+	
+	<div class="clr"></div><br /><!-- clear -->
 
 
-<!-- border line Vertical  -->
-<p class="dot" />
+	<form method="post" action="{action}" enctype="multipart/form-data">
 
-<br />
+	<!-- Section Title  -->
+	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><span class="STitle right">{lang.ADD_NEW_PLUGIN}</span></div></div>
+	<div class="clr"></div><br />
+	
+	<!-- start table no hover  -->
+	<table class="tab-no-hover">
+	<tr style="background-color:#EFE7B8"><td>{lang.ADD_NEW_PLUGIN_EXP}</td></tr>
+	<tr><td>
 
-<strong>{lang.PLUGINS_CHANGES_FILES_EXP}</strong>
-<br />
+	<input name="imp_file" type="file" />
 
-<!-- start clear  -->
-<div class="clr"></div><br />
-<!-- end clear  -->
+	</td></tr>
+	<IF NAME="there_is_files_method != kfile">
+	<tr><td>
+		<INCLUDE NAME="admin_plugin_mfile"> 
+	</td></tr>
+	</IF>
 
-<table style="width:100%">
-<LOOP NAME="changes_files">	
-	<tr>
-		<td>{{file}}</td>
-		<td><a href="{{path}}">{lang.DOWNLAOD}</a></td>
-	</tr>
-</LOOP>
-	<tr>
-		<td colspan="2" style="text-align:center;padding:6px;font-size:16px"> [ <a href="{action}&amp;cc=1">{lang.DELETE}</a> ] </td>
-	</tr>
-</table>
-
-<!-- start clear  -->
-<div class="clr"></div><br />
-<!-- end clear  -->
-
-</div>
-</IF>
-
-
-<!-- start clear  -->
-<div class="clr"></div><br />
-
-
-<!-- start div border table  -->
-<div id="DivTable">
-
-<form method="post" action="{action}" enctype="multipart/form-data">
-
-<!-- title  -->
-<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/menu_icons/plugins_button.gif" />{lang.ADD_NEW_PLUGIN} :</h2>
-
-
-<p class="dot" />
-
-<!-- start clear  -->
-<div class="clr"></div><br />
-
-
-<!-- start table no hover  -->
-<table class="tab-no-hover">
-<tr style="background-color:#EFE7B8"><td>{lang.ADD_NEW_PLUGIN_EXP}</td></tr>
-<tr><td>
-
-<input name="imp_file" type="file" />
-
-</td></tr>
-<IF NAME="there_is_files_method != kfile">
-<tr><td>
-	<INCLUDE NAME="admin_plugin_mfile"> 
-</td></tr>
-</IF>
-
-</table>
-<!-- end #table no hover  -->
+	</table>
+	<!-- end #table no hover  -->
+	
+	<div class="clr"></div><br /><!-- clear  -->
 
 	<!-- button -->
-	<p class="left_button MarginTop">
-		<button type="submit" id="submit" name="submit_new_plg" class="btn" onclick="javascript:return confirm_from('{lang.PLUGIN_CONFIRM_ADD}');"><span>{lang.SUBMIT}</span></button>
-	</p>
+	<p class="left MarginBottom"><button type="submit" id="submit" name="submit_new_plg" class="btn" onclick="javascript:return confirm_from('{lang.PLUGIN_CONFIRM_ADD}');"><span>{lang.SUBMIT}</span></button></p>
 
-<!-- start clear  -->
-<div class="clr"></div><br />
-<!-- end clear  -->
+	
+	<div class="clr"></div><br /><!-- clear  -->
 
-<!-- note for user .. -->
-<blockquote class="note"><div><p><em>{lang.NOTE} !</em></p><p>{klj_d_s}</p></div></blockquote>
-
-</div>
+	<!-- note for user .. -->
+	<blockquote class="note"><div><p><em>{lang.NOTE} !</em></p><p>{klj_d_s}</p></div></blockquote>
 
 
-{H_FORM_KEYS}
-</form>
 
-</div>
-<!-- end  add new plugins temlate  -->
+	{H_FORM_KEYS}
+	</form>
+
+</div><!-- END#PluginsTemplate -->

@@ -1,64 +1,49 @@
-<!-- start language temlate  -->
-<div id="divmiddle">
+<!-- start language template  -->
+<div id="boxs">
 
-<!-- start DivTable  -->
-<div id="DivTable">
+	<!-- Section Title  -->
+	<h1 class="SectionTitle"><a href="index.php?cp=o_langs">{lang.R_LANGS}</a></h1>
+	<div class="hr"></div>
+	<p class="titleAll"><a href="./">{lang.R_CPINDEX}</a> <span>&raquo; </span> {lang.R_LANGS}</p> 
+	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><img class="left TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/langs_button.png" alt="" /><span class="STitle left">{lang.R_LANGS}</span></div></div>
+	<div class="clr"></div><br />
 
-<!-- title  -->
-<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/menu_icons/langs_button.gif" />{lang.R_LANGS} :</h2>
-<!-- title  -->
+	<form action="{action2}" method="post">
+		{lang.LANGUAGE}  
+		<select name="lang">
+			{lngfiles}
+		</select>
+		  <input type="submit" value="{lang.UPDATE}" />
+	</form>
+	
+	<div class="clr"></div><br /><!-- clear -->
 
+	<form method="post" action="{action}">
 
-<!-- start clear  -->
-<div class="clr"></div>
-<!-- end clear  -->
-
-
-<form action="{action2}" method="post">
-	<select name="lang">
-		{lngfiles}
-	</select>
-	  &nbsp;&nbsp;<input type="submit" value="{lang.UPDATE}" />
-</form>
-
-<!-- start clear  -->
-<div class="clr"></div><br />
-
-
-<!-- start clear  -->
-<div class="clr"></div><br />
-<!-- end clear  -->
-
-<form method="post" action="{action}">
-
-<table style="width:100%;text-align:center">
-<IF NAME="no_results">
-...
-<ELSE>
-<LOOP NAME="arr">
-    <tr style="background-color:<RAND="#D8EBFD","#fff">" class="">
-        <td>#<em>{{lang_id}}</em></td>
-        <td><span class="s_box_tpls">{{word}}</span></td>
-		<td> <strong>=</strong> </td>
-        <td><label><input type="text" name="t_{{word}}" value="{{trans}}" ></label></td>
-        <td><input type="checkbox" name="del_{{word}}" value="1"> {lang.DELETE}</td>
-    </tr>
-</LOOP>
-</IF>
-</table>
+	<table style="width:100%;text-align:center">
+	<IF NAME="no_results">
+	...
+	<ELSE>
+	<LOOP NAME="arr">
+		<tr style="background-color:<RAND="#D8EBFD","#fff">" class="">
+			<td>#<em>{{lang_id}}</em></td>
+			<td><span class="s_box_tpls">{{word}}</span></td>
+			<td> <strong>=</strong> </td>
+			<td><label><input type="text" name="t_{{word}}" value="{{trans}}" ></label></td>
+			<td><input type="checkbox" name="del_{{word}}" value="1"> {lang.DELETE}</td>
+		</tr>
+	</LOOP>
+	</IF>
+	</table>
+	
+	<div class="clr"></div><br />
 
 	<!-- button -->
-	<p class="left_button MarginTop">
-		<button type="submit" id="submit" name="submit" class="btn"><span>{lang.UPDATE}</span></button>
-	</p>
-
-{page_nums}<!-- pagination  -->
-
-
-</div><!-- end#DivTable -->
-
-{H_FORM_KEYS}
-</form>
-</div>
-<!--  end language temlate  -->
-        
+	<p class="left MarginBottom"><button type="submit" id="submit" name="submit" class="btn"><span>{lang.UPDATE}</span></button></p>
+	
+	<!-- pagination  -->
+	{page_nums}
+	
+	{H_FORM_KEYS}
+	</form>
+</div><!--  end language template  -->

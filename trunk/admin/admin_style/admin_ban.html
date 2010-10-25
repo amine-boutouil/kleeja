@@ -1,59 +1,41 @@
-<!-- start ban  temlate  -->
-<div id="divmiddle">
+<!-- start ban template  -->
+<div id="boxs">
 
-<!-- start form  -->
-<form method="post" action="{action}">
+	<!-- start form  -->
+	<form method="post" action="{action}">
+	
+	<!-- Section Title  -->
+	<h1 class="SectionTitle"><a href="index.php?cp=k_ban">{lang.R_BAN}</a></h1>
+	<div class="hr"></div>
+	<p class="titleAll"><a href="./">{lang.R_CPINDEX}</a> <span>&raquo; </span> {lang.R_BAN}</p> 
+	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><img class="left TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/ban_button.png" alt="" /><span class="STitle left">{lang.R_BAN}</span></div></div>
+	<div class="clr"></div><br />
 
-<fieldset>
+	<h2>{lang.BAN_EXP1}</h2>
 
-<!-- start DivTable -->
-<div  id="DivTable">
+	<!-- start clear  -->
+	<div class="clr"></div><br />
+	<!-- end clear  -->
 
-<!-- title and notice  -->	
-<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/menu_icons/ban_button.gif" alt="{lang.R_BAN}" />{lang.R_BAN} :</h2>
-<!-- title and notice  -->	
+	<!-- start table no hover  -->
+	<textarea name="ban_text" rows="2" cols="20" style="width:99%; height: 100px;direction:ltr;">{ban}</textarea>
+	<!-- end table no hover  -->
 
-<!-- border line Vertical  -->
-<p class="dot" />
-<!-- border line Vertical  -->
+	<!-- start clear  -->
+	<div class="clr"></div><br />
+	<!-- end clear  -->
 
-<!-- start clear  -->
-<div class="clr"></div><br />
-<!-- end clear  -->
+	<!--  notice  -->	
+	<span>{lang.BAN_EXP2}</span>
 
-<label>{lang.BAN_EXP1}</label>
 
-<!-- start clear  -->
-<div class="clr"></div><br />
-<!-- end clear  -->
+	<!-- start clear  -->
+	<div class="clr"></div><br />
 
-<!-- start table no hover  -->
-<textarea name="ban_text" rows="2" cols="20" style="width:99%; height: 100px;direction:ltr;">{ban}</textarea>
-<!-- end table no hover  -->
+	<!-- button -->
+	<p class="left MarginBottom"><button type="submit" id="submit" name="submit" class="btn"><span>{lang.UPDATE_BAN}</span></button></p>
+	
+	{H_FORM_KEYS}
+	</form><!-- end form  -->
 
-<!-- start clear  -->
-<div class="clr"></div><br />
-<!-- end clear  -->
-
-<!--  notice  -->	
-<label>{lang.BAN_EXP2}</label>
-<!--  notice  -->
-
-<!-- start clear  -->
-<div class="clr"></div><br />
-<!-- end clear  -->
-
-<!--  button  -->	
-<div class="quick"><input name="submit" type="submit" value="{lang.UPDATE_BAN}" /></div>
-<!--  button  -->	
-
-</div>
-</fieldset>
-
-<!-- end div border table  -->
-{H_FORM_KEYS}
-</form>
-<!-- end form  -->
-
-</div>
-<!-- end  ban  temlate  -->
+</div><!-- end ban template  -->

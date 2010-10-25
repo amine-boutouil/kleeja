@@ -10,52 +10,46 @@ $(document).ready(function() { $('#ex_header').markItUp(mySettings);$('#ex_foote
 </script>
 <!-- / markItUp! -->
 
-<!-- start Extra temlate  -->
-<div id="divmiddle">
+<!-- start Extra template  -->
+<div id="boxs">
 
 	<form method="post" action="{action}">
+	
+	<!-- Section Title  -->
+	<h1 class="SectionTitle"><a href="index.php?cp=n_extra">{lang.R_EXTRA}</a></h1>
+	<div class="hr"></div>
+	<p class="titleAll"><a href="./">{lang.R_CPINDEX}</a> <span>&raquo; </span> {lang.ADD_HEADER_EXTRA}</p> 
+	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><img class="left TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/extra_button.png" alt="" /><span class="STitle left">{lang.ADD_HEADER_EXTRA}</span></div></div>
+	<div class="clr"></div><br />
 
-	<!-- start DivTable -->
-	<div id="DivTable">
-
-		<!-- title  -->
-		<p class="titleAll"><a href="./">{lang.R_CPINDEX}</a> <span> &raquo; </span> {lang.ADD_HEADER_EXTRA} </p> 
-		<div class="ribbon"><div class="wrapAround"></div><div class="tab"><img class="left TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/extra_button.png" alt="" /><span class="STitle left"><a href="index.php?cp=d_img_ctrl">{lang.ADD_HEADER_EXTRA}</a></span></div></div>
-		<br />
 		
 	<label class="small_font" for="ex_header">{lang.EX_HEADER_N}</label>
 	<div class="clr"></div><br />
 	<textarea id="ex_header" name="ex_header" style="height:210px;direction:ltr;" >{ex_header}</textarea>
 
 	<!-- button -->
-	<p class="left_button MarginTop">
-		<button type="submit" id="submit" name="submit" class="btn"><span>{lang.UPDATE_EXTRA}</span></button>
-	</p>
+	<p class="left MarginBottom"><button type="submit" id="submit" name="submit" class="btn"><span>{lang.UPDATE_EXTRA}</span></button></p>
 
-	</div><!-- end#DivTable -->
+	
+	<div class="clr"></div><br /><br /><br />
+	
+	
+	<!-- Section Title  -->
+	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><span class="STitle right">{lang.ADD_FOOTER_EXTRA}</span></div></div>
+	<div class="clr"></div><br />
 
-	<br /><div class="hr"></div><br />
-
-	<!-- start DivTable -->
-	<div id="DivTable">
-
-		<!-- title  -->
-		<p class="titleAll"><a href="./">{lang.R_CPINDEX}</a> <span> &raquo; </span> {lang.ADD_FOOTER_EXTRA} </p> 
-		<div class="ribbon"><div class="wrapAround CenterAround"></div><div class="tab"><img class="left TSubImg2" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/extra_button.png" alt="" /><span class="STitle left"><a href="">{lang.ADD_FOOTER_EXTRA}</a></span></div></div>
-		<br />
 
 		<label class="small_font" for="ex_footer">{lang.EX_FOOTER_N}</label>
-		<div class="clr"></div><br />
+		<div class="clr"></div>
 		<textarea id="ex_footer" name="ex_footer" style="height: 210px;direction:ltr;" >{ex_footer}</textarea>
 
 		<!-- button -->
-		<p class="left_button MarginTop">
-			<button type="submit" id="submit" name="submit" class="btn"><span>{lang.UPDATE_EXTRA}</span></button>
-		</p>
+		<p class="left MarginBottom"><button type="submit" id="submit" name="submit" class="btn"><span>{lang.UPDATE_EXTRA}</span></button></p>
 
-	</div><!-- end#DivTable -->
+
 	{H_FORM_KEYS}
 	</form>
+	<div class="clr"></div><br />
 </div>
-<!-- end Extra temlate  -->
+<!-- end Extra template  -->
  

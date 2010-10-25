@@ -34,102 +34,91 @@ jQuery(document).ready(function($){
 //-->
 </script>
 
-<!-- start view files temlate  -->
-<div id="divmiddle">
-<div class="file_cp1">
-<form method="post" name="filesform" action="{action}" id="files_form">
-<fieldset>
+<!-- start view files template  -->
+<div id="boxs">
 
-<!-- start box all -->
-<div class="box_all">
+	<form method="post" name="filesform" action="{action}" id="files_form">
 
-<!-- title  -->
-<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/menu_icons/files_button.gif" alt="{lang.R_FILES}" />{lang.R_FILES} ( {current_page} : {total_pages} )</h2>
-<!-- title  -->
+	<!-- Section Title  -->
+	<h1 class="SectionTitle"><a href="index.php?cp=c_files">{lang.R_FILES}</a></h1>
+	<div class="hr"></div>
+	<p class="titleAll"><a href="./">{lang.R_CPINDEX}</a> <span>&raquo; </span> {lang.R_FILES} ( {current_page} : {total_pages} )</p> 
+	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><img class="left TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/files_button.png" alt="" /><span class="STitle left">{lang.R_FILES}</span></div></div>
+	<div class="clr"></div><br />
+	
+	<IF NAME="is_search">
+	<div class="nothing">
+	<p><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/menu_mini_icons/search_button.gif" alt="find files" /> {lang.SEARCH_FILES} :</p>
+	<p class="find_files">{lang.FIND_IP_FILES} ( {nums_rows} ) {lang.FILE}  | <a href="{deletelink}" onclick="javascript:return confirm_from();">{lang.DELETEALLRES}</a></p>
+	</div>
+	<ELSE>
 
-<IF NAME="is_search">
-<div class="nothing">
-<p><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/menu_mini_icons/search_button.gif" alt="find files" /> {lang.SEARCH_FILES} :</p>
-<p class="find_files">{lang.FIND_IP_FILES} ( {nums_rows} ) {lang.FILE}  | <a href="{deletelink}" onclick="javascript:return confirm_from();">{lang.DELETEALLRES}</a></p>
-</div>
-<ELSE>
+	</IF>
 
-</IF>
+	<div class="clr"></div><!-- clear -->
+	
+	<IF NAME="no_results">
+	<div class="nothing"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/warning_nothing.gif" alt="nothing" />{lang.NOTHING}</div>
+	<ELSE>
+	
+	<div class="overflow">
+	<table class="view_all_files">
+		<tr>
+			<th style="white-space:nowrap;"><a title="{lang.ALPHABETICAL_ORDER_FILES}" href="{ord_action}&amp;order_by=real_filename">{lang.FILENAME}</a>
+			<a href="{page2_action}&amp;order_way=1"><img src="{STYLE_PATH_ADMIN}images/icon/arrow_up.gif" alt=".." /></a>
+			<a href="{page2_action}"><img src="{STYLE_PATH_ADMIN}images/icon/arrow_down.gif" alt=".." /></a>
+			</th>
+			<th><a href="{ord_action}&amp;order_by=user">{lang.BY}</a></th>
+			<th><a href="{ord_action}&amp;order_by=user_ip">{lang.IP}</a></th>
+			<th><a title="{lang.ORDER_SIZE}" href="{ord_action}&amp;order_by=size">{lang.SIZE}</a></th>
+			<th><a title="{lang.ORDER_TOTAL_DOWNLOADS}" href="{ord_action}&amp;order_by=uploads">{lang.FILEUPS}</a></th>
+			<th><a href="{ord_action}&amp;order_by=time">{lang.FILEDATE}</a></th>
+			<th><a href="{ord_action}&amp;order_by=type">{lang.FILETYPE}</a></th>
+			<th><a href="{ord_action}&amp;order_by=folder">{lang.FILDER}</a></th>
+			<th><a href="{ord_action}&amp;order_by=report">{lang.NUMPER_REPORT}</a></th>
+			<th><a href="javascript:void(0);" onclick="checkAll(document.filesform, '_del', 'su');">{lang.DELETE}</a></th>
+		</tr>
+	<LOOP NAME="arr">
+		<tr id="su[{{id}}]" class="osilver">
+			<td>{{name}}</td>
+			<td>{{user}}</td>
+			<td>{{ip}} <br /><a title="{lang.SHOWFILESBYIP}" href="{{showfilesbyip}}"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/find_file_ip.png" alt="find files" /></a></td>
+			<td>{{size}}</td>
+			<td>{{ups}}</td>
+			<td>{{time}}</td>
+			<td>{{type}}</td>
+			<td>{{folder}}</td>
+			<td>{{report}}</td>
+			<td><input type="checkbox" name="del_{{id}}" value="{{id}}" onclick="change_color(this,'su[{{id}}]');" rel="_del" /></td>
+		</tr>
+	</LOOP>
 
-<!-- start clear  -->
-<div class="clr"></div>
-<!-- end clear  -->
+	<tr style="background-color:#D2D2D2;height:6px;"><td colspan="10"></td></tr>
+	</table>
+	
+	</div><!-- end.overflow -->
 
+	<!-- start clear  -->
+	<div class="clr"></div><br />
+	<!-- end clear  -->
 
+	<!-- start pagination  -->
+	{page_nums}
+	<!-- # pagination  -->
 
-<!-- start clear  -->
-<div class="clr"></div>
-<!-- end clear  -->
+	
+	<!-- button -->
+	<p class="left MarginBottom">
+		<input type="hidden" name="submit" value="1" />
+		<button type="submit" name="submit" class="btn" onclick="javascript:submit_kleeja_data('#files_form', '#main_container', 1); return false;"><span>{lang.UPDATE_FILES}</span></button>
+	</p>
+		
+	</IF>
+	
+	<div class="clr"></div><!-- clear  -->
 
-<IF NAME="no_results">
-<div class="nothing"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/warning_nothing.gif" alt="nothing" />{lang.NOTHING}</div>
-<ELSE>
+	{H_FORM_KEYS}
+	
+	</form>
 
-<table class="view_all_files">
-    <tr>
-        <th style="white-space:nowrap;"><a title="{lang.ALPHABETICAL_ORDER_FILES}" href="{ord_action}&amp;order_by=real_filename">{lang.FILENAME}</a>
-		<a href="{page2_action}&amp;order_way=1"><img src="{STYLE_PATH_ADMIN}images/icon/arrow_up.gif" alt=".." /></a>
-		<a href="{page2_action}"><img src="{STYLE_PATH_ADMIN}images/icon/arrow_down.gif" alt=".." /></a>
-		</th>
-        <th><a href="{ord_action}&amp;order_by=user">{lang.BY}</a></th>
-        <th><a href="{ord_action}&amp;order_by=user_ip">{lang.IP}</a></th>
-        <th><a title="{lang.ORDER_SIZE}" href="{ord_action}&amp;order_by=size">{lang.SIZE}</a></th>
-        <th><a title="{lang.ORDER_TOTAL_DOWNLOADS}" href="{ord_action}&amp;order_by=uploads">{lang.FILEUPS}</a></th>
-        <th><a href="{ord_action}&amp;order_by=time">{lang.FILEDATE}</a></th>
-        <th><a href="{ord_action}&amp;order_by=type">{lang.FILETYPE}</a></th>
-        <th><a href="{ord_action}&amp;order_by=folder">{lang.FILDER}</a></th>
-        <th><a href="{ord_action}&amp;order_by=report">{lang.NUMPER_REPORT}</a></th>
-        <th><a href="javascript:void(0);" onclick="checkAll(document.filesform, '_del', 'su');">{lang.DELETE}</a></th>
-    </tr>
-<LOOP NAME="arr">
-    <tr id="su[{{id}}]" class="osilver">
-		<td>{{name}}</td>
-        <td>{{user}}</td>
-        <td>{{ip}} <br /><a title="{lang.SHOWFILESBYIP}" href="{{showfilesbyip}}"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/find_file_ip.png" alt="find files" /></a></td>
-        <td>{{size}}</td>
-        <td>{{ups}}</td>
-        <td>{{time}}</td>
-        <td>{{type}}</td>
-        <td>{{folder}}</td>
-        <td>{{report}}</td>
-        <td><input type="checkbox" name="del_{{id}}" value="{{id}}" onclick="change_color(this,'su[{{id}}]');" rel="_del" /></td>
-    </tr>
-</LOOP>
-
-<tr style="background-color:#D2D2D2;height:6px;"><td colspan="10"></td></tr>
-</table>
-
-<!-- start clear  -->
-<div class="clr"></div><br />
-<!-- end clear  -->
-
-<!-- start clear  -->
-<div class="clr"></div>
-<!-- end clear  -->
-
-<!-- start pagination  -->
-{page_nums}
-<!-- # pagination  -->
-
-<input type="hidden" name="submit" value="1" />
-<input class="left_button" name="submit" type="submit" value="{lang.UPDATE_FILES}" onclick="javascript:submit_kleeja_data('#files_form', '#main_container', 1); return false;" />
-
-</IF>
-<!-- clear  -->
-<div class="clr"></div>
-<!-- # clear  -->
-
-</div>
-<!-- # box all -->
-
-</fieldset>
-{H_FORM_KEYS}
-</form>
-</div>
-</div>
-<!-- end view files temlate  -->
+</div><!-- end view files template  -->

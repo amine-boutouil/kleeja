@@ -20,7 +20,7 @@
 	body {height:100%;width: 100%; margin:0; padding:0;background:#E6E0C8;color: #595959;font-weight:normal;font-size:12px;font-family : Tahoma, Arial, Verdana, sans-serif, "Lucida Grande", "Lucida Sans Unicode";}
 	p,dl,hr,h1,h2,h3,h4,h5,h6{margin-bottom:15px;}
 	input, textarea, select, option, input[type="text"], input[type="password"], input[type="file"],input[type="submit"] {font:normal 12px Tahoma, Arial, Verdana, sans-serif, "Lucida Grande", "Lucida Sans Unicode"; }
-	h2 {	line-height:25px; padding:6px;background:#fff url(../images/message-bar.png) repeat-x;color: #FD6812;font-size:160%;}
+	h2 {	line-height:25px; padding:6px;font-size:160%;}
 	h6 {	line-height:20px;padding:3px;color: #444; font-size:115%; font-weight:400;}
 	li {list-style: none;}
 	p {line-height: 150%;font-size:100%; font-weight:700;}
@@ -58,10 +58,13 @@
 	
 	pre code {margin: 0 20px;	padding: 18px 0;display: block;}
 	
+	.overflow {width:100%;position: relative;overflow:auto;}
 	.clr {clear: both; overflow:hidden; height: 0;}
 	.hr {background:transparent url(../images/box/hr-bg.gif) repeat-x 0 0;clear:both;height:5px;margin:0 0 0 0;}
 	.left, img.left {float:left;}
 	.right, img.right {float:right;}
+	.center {margin:2px auto; text-align:center;}
+
 	 img.img {margin-left:6px;vertical-align:middle;}
 	 .elementLTR{direction:ltr;}
 	.MarginTop {margin-top:-10px;}
@@ -188,6 +191,7 @@
 	.ribbon span.STitle{margin:17px 20px 0 80px;font-size:140%;text-shadow:#884005 -1px -1px 1px}
 	.ribbon span.TitleSub {color:#FFF !important;font-size:100%;margin:16px 0 0 20px}
 	.ribbon img.TSubImg{width:64px;height:74px;position:absolute;top:55px;left:20px;z-index:701;}
+	.ribbon img.22TSubImg{width:64px;height:74px;position:absolute;bottom:5px;left:20px;z-index:701;}
 
 	/*CSS style pagination*/
 	#pagination	{ text-align:right; margin:0 0 10px 0; float:right; }
@@ -207,6 +211,13 @@
 	a.phover > span { background-position:100% -30px;}
 	a.phover:hover, a.phover:focus { color:#fff; text-decoration:none; text-shadow:-1px -1px 0 rgba(0,0,0,0.3); background-position:0 -90px; }
 	a.phover:hover > span, a.phover:focus > span { background-position:100% -90px;}
+	
+	/* for php_info  */
+	.php1{font-size:10px;font-weight: bold;width:100%;direction:ltr !important;}
+	.php1 table{width:100%;text-align:left !important;table-layout:fixed;empty-cells:hide;margin:5px auto;}
+	.php1 h1,.php1 h2, .php1 td{text-align:left !important;}
+	.row1 {overflow:auto;}
+	.row2{overflow:auto;}/* for php_info */
 
 	/* start control panel */
 	.sitename {overflow:hidden;height:58px;line-height:48px;font-size:180%;margin:0 0 -10px 0 !important;padding:0px 0 0 90px !important;background:transparent url(../images/icon/cp_kleeja.png) no-repeat 0 -2px;}
@@ -248,7 +259,7 @@
 	.list_control_panel{width:100%;}
 	.title_kleeja {line-height:25px;padding:5px 10px;color:#FF6600;font-size:large;font-weight: bold;background:url(../images/shop_gradient_top.gif) repeat-x top left;border-top: 1px solid #D2D4C9;border-bottom: 1px solid #BCBCBC;}
 	.option_list {list-style: none;}
-	.option_list li {background: url(../images/message-bar.png) repeat-x;border-top:1px solid #E9E9E9;}
+	.option_list li {border-top:1px solid #E9E9E9;}
 	.option_head {padding: 5px 10px;cursor: pointer;position: relative;}
 	.option_head .timestamp {float:left;}
 	.option_head cite {font-size:18px;color:#3F5252;}
@@ -282,7 +293,6 @@
 	
 	
 /*  buttons */
-.left_button {float:left;display:inline;margin:3px 0;padding:2px 0;}
 .button1 ,.button2 {cursor: pointer; padding:3px 9px;margin:5px;border: 1px solid #BCBCBC;background: #549CBF url(../images/login/btn.gif) repeat left top;}
 .button1:hover ,.button2:hover{border: 1px solid #aaa; color: #fff;text-decoration: none;background: #BCBCBC url(../images/login/hoverblue.gif) repeat left top;}
 
@@ -330,7 +340,6 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 
 .check_all {display:block;text-align:left;margin:0 0 10px 0;padding:5px;}
 
-.file_cp1 {width:100%;position: relative;overflow:auto;}
 .small_font {padding:5px 5px 10px 5px;font-size:120%;font-weight:normal;color:#635C4B;text-indent:34px}
 
 /*exts colors*/
@@ -367,16 +376,7 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 .adminstrators { background: url(../images/adminstrators.png) no-repeat 100% 70%;margin:0 auto;width:70%;padding:5px 25px;font-size:11px;font-weight: bold;}
 .adminstrators a{color:red}
 
-/* for php_info  */
-.php1{font-size:10px;font-weight: bold;width:100%;direction:ltr;}
-.php1 table{width:100%;text-align:left;table-layout:fixed;empty-cells:hide;margin:5px auto;}
-.php1 h1,.php1 h2{text-align:left;}
-.row1 {overflow:auto;}
-.row2{overflow:auto;}
-/* / for php_info */
 
-.goback{ background:#EEE6B7;margin:2px auto;padding:5px 10px;font-weight: bold;}
-.goback:hover{background:#fff;color:#FF8000}
 
 /* for check_update*/
 .update_title {color:#0A71D8;font-size:14px;}
@@ -444,7 +444,6 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 .msg_sent { }
 .is_sent {}
 
-.reports {background:#fff url(../images/bg_reports.gif) no-repeat 50% 10%;}
 
 
 .nothing{margin:5px 0;padding:15px;font-weight: bold;background:#FFF9D7;border: 1px solid #E2C822;color:#666}

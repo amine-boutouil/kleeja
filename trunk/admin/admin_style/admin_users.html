@@ -1,144 +1,129 @@
-﻿<div id="divmiddle">
+﻿<!-- start UsersTemplate -->
+<div id="boxs">
 
-<!-- start DivTable -->
-<div id="DivTable">
+	<!-- Section Title  -->
+	<h1 class="SectionTitle"><a href="index.php?cp=g_users">{lang.R_USERS}</a></h1>
+	<div class="hr"></div>
+	<p class="titleAll"><a href="./">{lang.R_CPINDEX}</a> <span>&raquo; </span> {lang.R_USERS}</p> 
+	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><img class="left TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/users_button.png" alt="" /><span class="STitle left">{lang.R_USERS}</span></div></div>
+	<div class="clr"></div>
+
 	
-<IF NAME="user_not_normal">
-	<!-- start info System Messages -->
-	<div id="system-message">
-		<div class="info">
-		<ul>
-		<li>{lang.USERS_NOT_NORMAL_SYS} !</li>
-		</ul>
-		</div>
-	</div>	
-	<!-- end info System Messages -->
-</IF>
+	<IF NAME="user_not_normal">
+		<!-- start info System Messages -->
+		<div id="system-message">
+			<div class="info">
+			<ul>
+			<li>{lang.USERS_NOT_NORMAL_SYS} !</li>
+			</ul>
+			</div>
+		</div>	
+		<!-- end info System Messages -->
+	</IF>
 
-<form method="post" name="userform" action="{action}" onsubmit="javascript:return confirm_from();">
-         
-<IF NAME="is_search">
-<strong> 
-<IF NAME="is_asearch">
-<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/menu_icons/search_button.gif" >{lang.ADMINISTRATORS}</h2>
+	<form method="post" name="userform" action="{action}" onsubmit="javascript:return confirm_from();">
+			 
+	<IF NAME="is_search">
+	<strong> 
+	<IF NAME="is_asearch">
+	<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/menu_icons/search_button.gif" >{lang.ADMINISTRATORS}</h2>
 
-<!-- start clear  -->
-<div class="clr"></div><br />
-<!-- end clear  -->
-<ELSE>
-{lang.SEARCH_USERS}
-</IF>
- {lang.AUSERS_NUM} : ( {nums_rows} )
-</strong>
-<!-- start clear  -->
-<div class="clr"></div><br />
-<!-- end clear  -->
-<ELSE>
+	
+	<div class="clr"></div><!-- clear -->
 
-<!-- title  -->
-<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/menu_icons/users_button.gif" />{lang.R_USERS} :</h2>
-<!-- title  -->
-
-<!-- start clear  -->
-<div class="clr"></div>
-<!-- end clear  -->
-
-<div class="adminstrators"><a href="{action}&admin=1">{lang.ADMINISTRATORS}</a></div>
-
-<!-- start clear  -->
-<div class="clr"></div><br />
-<!-- end clear  -->
-
-</IF>
-
-<table style="text-align:center">
-        <tr style="background-color:#DFDFDF">
-                <td>{lang.USERNAME}</td>
-                <td>{lang.EMAIL}</td>
-                <td>{lang.PASSWORD}</td>
-                <td>{lang.IS_ADMIN}</td>
-                <td><a href="javascript:void(0);" onclick="checkAll(document.userform, '_del', 'su');">{lang.DELETE}</a></td>
-                <!-- admin users info tr extra -->
-        </tr>
-<IF NAME="no_results">
-...		
-<ELSE>
-<LOOP NAME="arr">
-        <tr id="su[{{id}}]" class="osilver">
-                <td style="text-align:center"><label><input type="text" name="nm_{{id}}" value="{{name}}" size="32"></label> <br />
-				<small><a href="{{delusrfile_link}}&amp;{GET_FORM_KEY}" onclick="javascript:return confirm_from();">{lang.ADMIN_DELETE_FILES}</a> | <a target="_blank" href="{{userfile_link}}">{lang.BROSWERF}</a></small>
-
-				</td>
-                <td><label><input type="text" name="ml_{{id}}" value="{{mail}}" size="20" style="direction:ltr"></label></td>
-                <td><label><input type="password" name="ps_{{id}}" value="" size="10" style="text-align:center;"></label></td>
-                <td>{{admin}}</td>
-                <td>
-					<IF LOOP="id==1">
-					<img  src="{STYLE_PATH_ADMIN}images/padlock_closed.png" alt="--- founder ---"  style="border:0" />
-					<ELSE>
-					<input type="checkbox"  name="del_{{id}}" value="{{id}}" onclick="change_color(this,'su[{{id}}]');" rel="_del">
-					</IF>
-				</td>
-                <!-- admin users data tr extra -->
-        </tr>
-</LOOP>
-</IF>
-</table>
-
-<div class="quick">
-<div style="text-align:center">{page_nums}
-                <input name="submit" type="submit" value="{lang.UPDATE_USERS}" />
-</div>
-</div>
-{H_FORM_KEYS}
-</form>
-</div><!-- end#DivTable -->
+	<ELSE>
+	{lang.SEARCH_USERS}
+	</IF>
+	 {lang.AUSERS_NUM} : ( {nums_rows} )
+	</strong>
+	<!-- start clear  -->
+	<div class="clr"></div><br />
+	<!-- end clear  -->
+	<ELSE>
 
 
-<!-- start clear  -->
-<div class="clr"></div><br />
-<!-- end clear  -->
+	<div class="adminstrators"><a href="{action}&admin=1">{lang.ADMINISTRATORS}</a></div>
 
-<IF NAME="isn_search">
-<form method="post" action="">
+	<!-- start clear  -->
+	<div class="clr"></div><br />
+	<!-- end clear  -->
 
-<!-- start DivTable -->
-<div id="DivTable">
+	</IF>
 
-<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/menu_icons/users_button.gif" />{lang.NEW_USER} :</h2>
+	<table style="text-align:center">
+			<tr style="background-color:#DFDFDF">
+					<td>{lang.USERNAME}</td>
+					<td>{lang.EMAIL}</td>
+					<td>{lang.PASSWORD}</td>
+					<td>{lang.IS_ADMIN}</td>
+					<td><a href="javascript:void(0);" onclick="checkAll(document.userform, '_del', 'su');">{lang.DELETE}</a></td>
+					<!-- admin users info tr extra -->
+			</tr>
+	<IF NAME="no_results">
+	...		
+	<ELSE>
+	<LOOP NAME="arr">
+			<tr id="su[{{id}}]" class="osilver">
+					<td style="text-align:center"><label><input type="text" name="nm_{{id}}" value="{{name}}" size="32"></label> <br />
+					<small><a href="{{delusrfile_link}}&amp;{GET_FORM_KEY}" onclick="javascript:return confirm_from();">{lang.ADMIN_DELETE_FILES}</a> | <a target="_blank" href="{{userfile_link}}">{lang.BROSWERF}</a></small>
 
+					</td>
+					<td><label><input type="text" name="ml_{{id}}" value="{{mail}}" size="20" style="direction:ltr"></label></td>
+					<td><label><input type="password" name="ps_{{id}}" value="" size="10" style="text-align:center;"></label></td>
+					<td>{{admin}}</td>
+					<td>
+						<IF LOOP="id==1">
+						<img  src="{STYLE_PATH_ADMIN}images/padlock_closed.png" alt="--- founder ---"  style="border:0" />
+						<ELSE>
+						<input type="checkbox"  name="del_{{id}}" value="{{id}}" onclick="change_color(this,'su[{{id}}]');" rel="_del">
+						</IF>
+					</td>
+					<!-- admin users data tr extra -->
+			</tr>
+	</LOOP>
+	</IF>
+	</table>
 
-<!-- start clear  -->
-<div class="clr"></div><br />
-<!-- end clear  -->
+	<div class="clr"></div><br />
 
+	{page_nums}<!-- pagination -->
+	
+	<!-- button -->
+	<p class="left MarginBottom"><button type="submit" name="submit" class="btn"><span>{lang.UPDATE_USERS}</span></button></p>
+		
+	{H_FORM_KEYS}
+	</form>
 
-<table style="text-align:center">
-        <tr style="background-color:#DFDFDF">
-                <td>{lang.USERNAME}</td>
-                <td>{lang.EMAIL}</td>
-                <td>{lang.PASSWORD}</td>
-                <!-- admin users info tr extra -->
-        </tr>
-        <tr>
-                <td><label><input type="text" name="lname" value="" size="30"></label></td>
-                <td><label><input type="text" name="lmail" value="" size="20" style="direction:ltr"></label></td>
-                <td><label><input type="password" name="lpass" value="" size="20"></label></td>
-                <!-- admin users data tr extra -->
-</table>
+	<div class="clr"></div><br /><br /><!-- clear -->
+
+	<IF NAME="isn_search">
+	<form method="post" action="">
+
+	<!-- Section Title  -->
+	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><span class="STitle right">{lang.NEW_USER}</span></div></div>
+	<div class="clr"></div>
+
+	<table style="text-align:center">
+			<tr style="background-color:#DFDFDF">
+					<td>{lang.USERNAME}</td>
+					<td>{lang.EMAIL}</td>
+					<td>{lang.PASSWORD}</td>
+					<!-- admin users info tr extra -->
+			</tr>
+			<tr>
+					<td><label><input type="text" name="lname" value="" size="30"></label></td>
+					<td><label><input type="text" name="lmail" value="" size="20" style="direction:ltr"></label></td>
+					<td><label><input type="password" name="lpass" value="" size="20"></label></td>
+					<!-- admin users data tr extra -->
+	</table>
+	
+	<div class="clr"></div><br />
 
 	<!-- button -->
-	<p class="MarginBottom">
-		<button type="submit" id="submit" name="newuser" class="btn"><span>{lang.SUBMIT}</span></button>
-	</p>
-	
-</div><!-- end#DivTable -->
+	<p class="left MarginBottom"><button type="submit" id="submit" name="newuser" class="btn"><span>{lang.SUBMIT}</span></button></p>
+		
+	{H_FORM_KEYS2}
+	</form>
+	</IF>
 
-{H_FORM_KEYS2}
-</form>
-</IF>
-
-<div class="clr"></div>
-
-
-</div>
+</div><!-- END#UsersTemplate -->

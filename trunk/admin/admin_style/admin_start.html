@@ -92,61 +92,64 @@ jQuery(document).ready(function($){
 		<div class="clr"></div>
 		<div class="option_box">
 			<div class="option_box_inner">
-				
-				
-				<div class="general_statistics">
-				<table class="info_statistics" style="width:78%;">
+				<table class="info_statistics">
 					<tr>
-						<td style="width:55%;">
+						<td style="width:40%;">
 							<p>{lang.AUSERS_NUM}</p>
-							<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/numberusers.png" alt="" /> [ {users_number} ]<br />
+							<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/users.png" alt="" />
+							<span>[ {users_number} ]</span>
+							<br />
 						</td>
+						<!-- clear --><td style="width:10%;"></td>
 						<IF NAME="config.user_system==1">
-						<td style="width:45%;">
+						<td style="width:40%;">
 							<p>{lang.LAST_REG}</p>
-							<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/list-add-user.png" alt="" /> [ {lst_reg} ]<br />
+							<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/list-add-user.png" alt="" />
+							<span>[ {lst_reg} ]</span>
+							<br />
 						</td>
 						</IF>
 					</tr>
 					<tr>
-						<td style="width:55%;">
+						<td style="width:40%;">
 							<p>{lang.AFILES_NUM}</p>
-							<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/allfolders.png" alt="" /> [ {files_number} {lang.FILE} ] ≈ <span title="{lang.AFILES_SIZE}">[ {files_sizes} ]</span><br />
+							<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/allfolders.png" alt="" />
+							<span>[ {files_number} {lang.FILE} ]</span>
+							<br />
 						</td>
-						<td style="width:45%;">
+						<!-- clear --><td style="width:10%;"></td>
+						<td style="width:40%;">
 							<p>{lang.LSTDELST}</p>
-							<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/timelast.png" alt="" /> {last_del_fles}<br />
+							<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/timelast.png" alt="" />
+							<span>{last_del_fles}</span>
+							<br />
+						</td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							<p>{lang.AFILES_SIZE_SPACE}</p>
+							<div class="filsiz" title="{lang.AFILES_SIZE}">[ {files_sizes} ]</div>
+							<div class="clr"></div>
+							<!-- start percentage meter -->
+							<div id="progress"> 
+								<div class="pad"> 
+								<span class="hide">Progress Meter</span>
+									<div id="progressBar"> 
+										<div id="percentage_size_meter"><span>{per1}%</span></div> 
+									</div> 
+									<div id="seasonal"> </div> 
+									<div id="key"> 
+										 <div id="left">%0</div> 
+										 <div id="right">%100</div> 
+										 <div id="center">%50</div> 
+								   </div>
+								</div> 
+							</div> 
+							<!-- # percentage meter -->
 						</td>
 					</tr>
 				</table>
-				
-			<div class="clr"></div>
-			
-				<!-- start percentage meter -->
-				<fieldset id="fieldset_progress">
-					<legend>{lang.AFILES_SIZE_SPACE}</legend>
-					<div id="progress"> 
-						<div class="pad"> 
-						<span class="hide">Progress Meter</span>
-							<div id="progressBar"> 
-								<div id="percentage_size_meter"><span>{per1}%</span></div> 
-							</div> 
-							<div id="seasonal"> </div> 
-							<div id="key"> 
-								<div id="left">%0</div> 
-								<div id="right">%100</div> 
-								<div id="center">%50</div> 
-							</div>         
-						</div> 
-					</div> 
-					<div class="clr"></div>
-					<!-- start All Files size  -->
-					<div class="filsiz" title="{lang.AFILES_SIZE}">[ {files_sizes} ]</div>
-					<!-- # All Files size  -->
-				</fieldset>
-				<!-- # percentage meter -->
-
-					</div>
+				<div class="clr"></div>
 				</div><!-- #End .option_box_inner -->
 			</div><!-- #End .option_box -->
 			<!-- #General Statistics -->
@@ -248,12 +251,6 @@ jQuery(document).ready(function($){
 <div class="option_list_bottom"></div>
 </div>
 <!-- # view list control panel -->
-
-<!-- start clear  -->
-<div class="clr"></div>
-<!-- # clear  -->
-
-<div class="collapse_buttons"><a href="#" class="show_all"> {lang.VIEW} </a> <a href="#" class="hid_all"> [x] {lang.VIEW} </a></div>
 
 <!-- start clear  -->
 <div class="clr"></div>

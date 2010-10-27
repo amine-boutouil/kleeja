@@ -11,7 +11,7 @@
 	<link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH_ADMIN}css/login_stylesheet.css" />
 	<IF NAME="{lang.DIR}==ltr"><style type="text/css">input[type="submit"] {float:right;}.site_name a:hover{padding-right:0;padding-left:10px;}.site_name img,.cp_kleeja img{padding-left:0;padding-right:8px;}.submit_go {float:right;}.system-message div.error ul li{background-position:left top;}.cp_kleeja{font-size:18px;}</style></IF>
 	<IS_BROWSER="ie6"><link rel="stylesheet" type="text/css" href="{STYLE_PATH_ADMIN}css/ie_6.css" /></IS_BROWSER>
-	<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.js"></script>
+	<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.min.js"></script>
 	<script type="text/javascript">
 	<!--
 		$(document).ready(function() {
@@ -45,7 +45,7 @@
 		</form>
 		<IF NAME="err"><div class="clr"></div><div class="system-message"><div class="error"><ul><li><p>{errs}</p></li></ul></div></div><div class="clr"></div></IF>
 	</div>
-	<div class="Powered"><h1>Powered by <a onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com" title="Powered by kleeja">Kleeja</a></h1></div>
+	<div class="Powered">Powered by <a onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com" title="Powered by kleeja">Kleeja</a></div>
 	<div class="web2">XHTML | CSS</div>
 </body>
 </html>

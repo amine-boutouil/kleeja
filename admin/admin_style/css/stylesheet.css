@@ -240,11 +240,28 @@
 		.fieldset  legend{line-height:0;font-size:150%;}
 		.fieldset.google  legend {color:#0051D8}
 		.fieldset.yahoo  legend{color:#800080}
-		
 		.fieldset.google:hover {background-color:#F3F3F3;border: 1px solid #5555FF;color:#0051D8}
 		.fieldset.yahoo:hover {background-color:#F3F3F3;border: 1px solid #A375CF;color:#800080}
+		
+		/* General Statistics */
+		table.info_statistics tr{background:none;}
+		table.info_statistics td{padding:0 0 10px 0;}
+		table.info_statistics  p{height:22px;line-height:22px;padding:0 0 5px 0;margin:0 0 5px 0;font-size:110%;font-weight:bold;color:#318391;background:transparent url(../images/box/hr-bg.gif) repeat-x bottom center;}
+		table.info_statistics  span{font-size:100%;font-weight:bold;}
+		.filsiz{padding:3px 3px 5px 3px;font-weight:bold;font-size:xx-large;color:#C5BC98;text-align:center;text-decoration:line-through;}
+		/* percentage meter */
+		#progress {height:34px;margin:2px auto 10px auto;direction:ltr;}
+		#progress .pad {margin:0pt auto;width:auto}
+		#progress .hide {float:left;display:none;}
+		#progressBar {background:transparent url(../images/progressBg.gif) repeat-x scroll left top;border:1px solid #999;float:left;height:16px;margin-top:7px;width:100%;}
+		#progressBar #percentage_size_meter {width:0%;} #progressBar #percentage_size_meter {background:transparent url(../images/mercuryBg.gif) repeat-x scroll left top;border-right:1px solid #FF0000;height:16px;}
+		#progressBar #percentage_size_meter span {display:block;font-size:10px;height:16px;line-height:16px;padding:0 5px;text-align:right;color:black;}
+		#progress #key {font-size:12px;width:100%;}
+		#progress #left {float:left;display:inline;color:green;}
+		#progress #center {text-align:center;margin:0 auto;color:orange;}
+		#progress #right {float:right;display:inline;color:red;}
+		#progressBar #percentage_size_meter .beyond {background:transparent url(../images/beyond.gif) no-repeat scroll right top;font-size:11px;font-weight:bold;}
 
-	
 	
 
 	
@@ -264,14 +281,8 @@
 	.option_head .timestamp {float:left;}
 	.option_head cite {font-size:18px;color:#3F5252;}
 	.option_list_bottom {border-top: solid 1px #e4e4e4;	padding: 5px 0;clear: both;}
-	.collapse_buttons  {margin:5px 0;float: left;}
-	.show_all {background: url(../images/tall-down-arrow.png) no-repeat right center;padding-right: 12px;}
-	.hid_all {display: none;	background: url(../images/tall-up-arrow.png) no-repeat right center;padding-right: 12px;}
 	
 	/* User Statistics */
-	
-	
-
 	
 	
 	/* CHOOSING STAGE */
@@ -282,9 +293,13 @@
 	.TypeLink:hover{background:#E6E0C8;border-color:#E6E0C8;color:#000;padding-top:16px;height:149px;}
 	#ConfigTypesList .BTHTypeLink{display:block;color:#888;font-size:120%;font-weight:400;padding:16px 0 15px 0;height:40px;line-height:20px; }
 	#ConfigTypesList .TypeLink:hover .BTHTypeLink{color:#000;}
+	.title_general_conf1gs {height:40px;
+	line-height:40px;margin-top:4px;margin-bottom:2px;font-size:18px;font-weight: bold;
+	text-indent:45px;border-color:#7CA7C8;border-style:solid;
+	border-top-width:2px;border-bottom-width:2px;background:#CBE2F3 url(../images/general_conf1gs.png) no-repeat 98% 50%;
+	color:#386D9C;
+	}
 
-	
-	
 	
 	
 	
@@ -368,7 +383,6 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 .tab_configs td{border-right-width:0;border-left-width:0;}
 
 
-.title_general_conf1gs {height:40px;line-height:40px;margin-top:4px;margin-bottom:2px;font-size:18px;font-weight: bold;text-indent:45px;border-color:#7CA7C8;border-style:solid;border-top-width:2px;border-bottom-width:2px;background:#CBE2F3 url(../images/general_conf1gs.png) no-repeat 98% 50%;color:#386D9C;}
 /* / config page */
 
 .imgtitle {margin-left:6px;vertical-align:middle;}
@@ -392,25 +406,7 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 
 
 
-/*   start general statistics */
 
-.info_statistics  p{height:22px;line-height:22px;margin-bottom:4px;font-size:11px;font-weight:bold;color:#002262;border-bottom: dashed 1px #D7D7D7;}
-.filsiz{padding:3px; font-weight:bold;font-size:xx-large;color:#BFBFBF;text-align:center;text-decoration:line-through;vertical-align:top}
-/* percentage meter */
-#fieldset_progress {margin-top:10px;padding:15px 20px;background:#fff;border: 1px solid #B1B1B1; }
-#fieldset_progress  legend{color:#B1B1B1;line-height:0;}
-#progress {height:34px;margin:2px auto 10px auto;direction:ltr;}
-#progress .pad {margin:0pt auto;width:auto}
-#progress .hide {float:left;display:none;}
-#progressBar {background:transparent url(../images/progressBg.gif) repeat-x scroll left top;border:1px solid #999;float:left;height:16px;margin-top:7px;width:100%;}
-#progressBar #percentage_size_meter {width:0%;} #progressBar #percentage_size_meter {background:transparent url(../images/mercuryBg.gif) repeat-x scroll left top;border-right:1px solid #FF0000;height:16px;}
-#progressBar #percentage_size_meter span {display:block;font-size:10px;height:16px;line-height:16px;padding:0 5px;text-align:right;color:black;}
-#progress #key {font-size:12px;width:100%;}
-#progress #left {float:left;display:inline;color:green;}
-#progress #center {text-align:center;margin:0 auto;color:orange;}
-#progress #right {float:right;display:inline;color:red;}
-#progressBar #percentage_size_meter .beyond {background:transparent url(../images/beyond.gif) no-repeat scroll right top;font-size:11px;font-weight:bold;}
-/*  # #  general statistics */
 
 
 

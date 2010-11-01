@@ -54,7 +54,7 @@ jQuery(document).ready(function($){
 
 <!-- start temlate displaying images -->
 <div id="boxs">
-	<form method="post" action="{action}" name="imgform" onsubmit="javascript:return confirm_from();">
+	<form method="post" action="{action}" name="imgform" id="imgs_form">
 	
 	<!-- Section Title  -->
 	<h1 class="SectionTitle"><a href="index.php?cp=d_img_ctrl">{lang.R_IMG_CTRL}</a></h1>
@@ -100,13 +100,16 @@ jQuery(document).ready(function($){
 	<br /><div class="clr"></div>
 
 	<!-- button -->
-	<p class="left MarginBottom"><button type="submit" id="submit" name="submit" class="btn"><span>{lang.DEL_SELECTED}</span></button></p>
-	
+	<p class="left MarginBottom">
+		<input type="hidden" name="submit" value="1" />
+		<button type="submit" name="submit" class="btn" onclick="javascript:submit_kleeja_data('#imgs_form', '#main_container', 1); return false;"><span>{lang.DEL_SELECTED}</span></button>
+	</p>
+
 	</IF>
 	
 	{H_FORM_KEYS}
 	</form>
-	
+
 	<!-- do you know ? 
 	<br />
 	<h3>Keyboards Keys /</h3>

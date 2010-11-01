@@ -29,17 +29,17 @@
 	<div class="clr"></div>
 		
 	<!-- start form  --> 
-	<form method="post" name="callform" action="{action}">
+	<form method="post" name="callform" action="{action}" id="calls_form">
 
 		
-		<!-- if sent -->
+		<!-- if sent -- \>
 		<IF NAME="msg_sent">
 		<div class="msg_sent">{lang.IS_SEND_MAIL}</div>
 		<script type="text/javascript">
 			$('div.msg_sent').fadeOut(2000).fadeIn(2000).hide('slow');
 		</script>
 		</IF>
-		<!-- END -->
+		\<-- END -->
 		
 		<!-- clear  -->
 		<div class="clr"></div><br /><!-- END -->
@@ -78,7 +78,11 @@
 		{page_nums}<!-- pagination -->
 
 		<!-- button -->
-		<p class="left MarginBottom"><button type="submit" id="submit" name="submit" class="btn"><span>{lang.UPDATE_CALSS}</span></button></p>
+		<p class="left MarginBottom">
+			<input type="hidden" name="submit" value="1" />
+			<button type="submit" name="submit" class="btn" onclick="javascript:submit_kleeja_data('#calls_form', '#main_container', 0); return false;"><span>{lang.UPDATE_CALSS}</span></button>
+		</p>
+	
 		{H_FORM_KEYS}
 	</form>
 	</IF>

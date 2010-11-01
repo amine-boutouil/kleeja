@@ -339,8 +339,18 @@ input.button1, input.button3,input.button2 {width: auto !important; padding: 3px
 #system-message div.error ul li{color: #c00; background: url(../images/error.png) no-repeat right top ; padding-right: 35px; }
 
 /* System Messages  #error*/
-#system-message div.msg_repair ul li{background: url(../images/msg_repair.gif) no-repeat right center ; padding-right: 25px; }
+#system-message div.msg_repair ul li{background: transparent url(../images/msg_repair.gif) no-repeat right center ; padding-right: 25px; }
 /* System Messages */
+
+
+/*msgs start */
+#system-message-start { margin-bottom:10px; }
+#system-message-start div {font-size:11px}
+#system-message-start div.info ul {list-style: none; padding:3px; border-top: 2px solid #FEA53D;border-bottom: 2px solid #FEA53D; background: #EFE7B8}
+#system-message-start div.info  ul li {color:000; padding-right: 2px; }
+#system-message-start div.error ul {list-style: none; padding:3px; background: #E6C0C0;border-top: 2px solid #DE7A7B; border-bottom: 2px solid #DE7A7B;}
+#system-message-start div.error ul li{color: #c00; padding-right:2px; }
+
 
 
 /* usefull colors */

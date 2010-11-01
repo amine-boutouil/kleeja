@@ -27,6 +27,11 @@ if (isset($_POST['submit']))
 {
 	if(!kleeja_check_form_key('adm_reports'))
 	{
+		if(isset($_GET['_ajax_']))
+		{
+			echo_ajax(888, $lang['INVALID_FORM_KEY']);
+		}
+
 		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $action, 1);
 	}
 }
@@ -98,10 +103,20 @@ if ($nums_rows > 0)
 					//
 					//We will redirect to pages of results and show info msg there ! 
 					//
+					if(isset($_GET['_ajax_']))
+					{
+						echo_ajax(888, $lang['IS_SEND_MAIL']);
+					}
+
 					redirect(basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&page=' . (isset($_GET['page']) ? intval($_GET['page']) : 1) . '&sent=' . $row['id']);
 				}
 				else
 				{
+					if(isset($_GET['_ajax_']))
+					{
+						echo_ajax(888, $lang['ERR_SEND_MAIL']);
+					}
+
 					kleeja_admin_err($lang['ERR_SEND_MAIL']);
 				}
 			}
@@ -131,6 +146,7 @@ $page_nums 		= $Pager->print_nums(basename(ADMIN_PATH)  . '?cp=' . basename(__fi
 //after submit 
 if (isset($_POST['submit']))
 {
-	$text	= ($SQL->affected() ? $lang['REPORTS_UPDATED'] : $lang['NO_UP_CHANGE_S']) . '<meta HTTP-EQUIV="REFRESH" content="0; url=' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;page=' . (isset($_GET['page']) ? intval($_GET['page']) : 1) . '">' ."\n";
+	$text	= ($SQL->affected() ? $lang['REPORTS_UPDATED'] : $lang['NO_UP_CHANGE_S']) .
+				'<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . $action . '\');", 2000);</script>' . "\n";
 	$stylee	= "admin_info";
 }

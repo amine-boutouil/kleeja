@@ -29,7 +29,7 @@
 			<phrase name="IMAGEFOLDER">مجلد الصور والملفات المباشره</phrase>
 			<phrase name="IMAGEFOLDEREXTS">صيغ الصور والملفات المباشره</phrase>
 			<phrase name="IMAGEFOLDERE">تغيير اسم الملف او الصوره المباشره</phrase>
-			<phrase name="CONFIG_KLJ_MENUS_KLIVE">اعدادات اضافة الصور والملفات بروابط مباشرة</phrase>
+			<phrase name="CONFIG_KLJ_MENUS_KLIVE">اعدادات الروابط المباشرة</phrase>
 		</lang>
 		<lang name="en">
 			<phrase name="IMAGEFOLDER">live folder</phrase>

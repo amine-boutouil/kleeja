@@ -57,13 +57,13 @@ function getjquerylink()
 {
 	global $_path;
 
-	if(file_exists($_path . 'admin/admin_style/js/jquery.js'))
+	if(file_exists($_path . 'admin/admin_style/js/jquery.min.js'))
 	{
-		return $_path . 'admin/admin_style/js/jquery.js';
+		return $_path . 'admin/admin_style/js/jquery.min.js';
 	}
 	else
 	{
-		return 'http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js';
+		return 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js';
 	}
 }
 

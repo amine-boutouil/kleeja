@@ -6,7 +6,7 @@
 			<div id="scroll_div">
 				<ul class="inner" dir="{{echo $lang['DIR']}}">
 					{{foreach($GLOBALS['update_msgs_arr'] as $m):}}
-					<li><img src="style/images/sql_done.png" style="vertical-align:middle;padding:0 6px;" alt="ok" /> {{echo $m}}</li>
+					<li><img src="style/images/ok.png" style="vertical-align:middle;padding:0 6px;" alt="ok" /> {{echo $m}}</li>
 					{{endforeach;}}
 				</ul>
 			</div>
@@ -28,20 +28,20 @@
 	{{if(is_array($GLOBALS['NOTES_CUP'])):foreach($GLOBALS['NOTES_CUP'] as $i=>$m):}}
 	<div class="sql_done_box">
 		<ul>
-			<li><img src="style/images/sql_done.png" style="vertical-align:middle;padding:0 6px;" alt="ok" />{{echo $i;}} - {{echo $m}} </li>
+			<li><img src="style/images/ok.png" style="vertical-align:middle;padding:0 6px;" alt="ok" />{{echo $i;}} - {{echo $m}} </li>
 		</ul>
 	</div>
 	{{endforeach;endif;}}
 	
 {{else:}}
-	<p style="font-size:12px;text-align:center;"><a style="color:red;" href="./update.php?step=action_file&amp;{{echo getlang(1)}}">{{echo $lang['INST_UPDATE_SELECT_ONTHER_UPDATES']}}</a></p>
-		<center style="margin:10px 0;">
-			<button type="button" onclick="window.location.href='../index.php';" class="button"><img src="style/images/home.png" alt="" style="vertical-align:middle;padding:0 4px;" />{{echo $lang['INDEX']}}</button>
-			<button type="button" onclick="window.location.href='../admin/';" class="button"><img src="style/images/kcontrol.png" alt="" style="vertical-align:middle;padding:0 4px;" />{{echo $lang['ADMINCP']}}</button>
-		</center>
-	<div class="clr"></div><br />
-	<p style="font-size:12px;text-align:center;color:#FF7B00;background:#FFF;">{{echo $lang['INST_KLEEJADEVELOPERS']}}</p>
-	<div class="clr"></div><br />
-	<p style="text-align:center;"><a href="http://www.kleeja.com">www.kleeja.com</a></p>
+	<p style="font-weight:700;text-align:center;color:#C71919;">{{echo $lang['INST_KLEEJADEVELOPERS']}}</p>
+	<br />
+	<center style="margin:10px 0;">
+		<button type="button" onclick="window.location.href='./update.php?step=action_file&amp;{{echo getlang(1)}}';" class="button">{{echo $lang['INST_UPDATE_SELECT_ONTHER_UPDATES']}}</button>
+		<button type="button" onclick="window.location.href='../index.php';" class="button">{{echo $lang['INDEX']}}</button>
+		<button type="button" onclick="window.location.href='../admin/';" class="button">{{echo $lang['ADMINCP']}}</button>
+	</center>
+	<div class="clr"></div>
+	<p style="text-align:center;"><a style="color:gray;" href="http://www.kleeja.com">www.kleeja.com</a></p>
 {{endif;}}
 </div>	

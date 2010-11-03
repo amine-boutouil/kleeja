@@ -5,7 +5,7 @@
 <ul class="ul_check">
 	<div class="notice_check">
 	{{if(function_exists('unlink')):}}
-		<li style="color:green"><img src="style/images/yes.png" alt="yes" style="margin:0 6px;vertical-align:middle;" />{{echo sprintf($lang['FUNCTION_IS_EXISTS'], 'unlink')}}</li>
+		<li style="color:green"><img src="style/images/ok.png" alt="yes" style="margin:0 6px;vertical-align:middle;" />{{echo sprintf($lang['FUNCTION_IS_EXISTS'], 'unlink')}}</li>
 			{{else: $GLOBALS['check_ok'] = false;}}
 		<li style="color:red"><img src="style/images/no.png" alt="no" style="margin:0 6px;vertical-align:middle;" />{{echo sprintf($lang['FUNCTION_IS_NOT_EXISTS'], 'unlink')}}</li>
 	{{endif;}}
@@ -17,7 +17,7 @@
 
 	<div class="notice_check">
 	{{if(function_exists('imagecreatetruecolor')):}}
-		<li style="color:green"><img src="style/images/yes.png" alt="yes" style="margin:0 6px;vertical-align:middle;" />{{echo sprintf($lang['FUNCTION_IS_EXISTS'], 'imagecreatetruecolor')}}</li>
+		<li style="color:green"><img src="style/images/ok.png" alt="yes" style="margin:0 6px;vertical-align:middle;" />{{echo sprintf($lang['FUNCTION_IS_EXISTS'], 'imagecreatetruecolor')}}</li>
 	{{else: $GLOBALS['check_ok'] = false;}}
 		<li style="color:red"><img src="style/images/no.png" alt="no" style="margin:0 6px;vertical-align:middle;" />{{echo sprintf($lang['FUNCTION_IS_NOT_EXISTS'], 'imagecreatetruecolor')}}</li>
 	{{endif;}}
@@ -29,7 +29,7 @@
 
 	<div class="notice_check">
 	{{if(function_exists('fopen')):}}
-		<li style="color:green"><img src="style/images/yes.png" alt="yes" style="margin:0 6px;vertical-align:middle;" />{{echo sprintf($lang['FUNCTION_IS_EXISTS'], 'fopen')}}</li>
+		<li style="color:green"><img src="style/images/ok.png" alt="yes" style="margin:0 6px;vertical-align:middle;" />{{echo sprintf($lang['FUNCTION_IS_EXISTS'], 'fopen')}}</li>
 	{{else: $GLOBALS['check_ok'] = false;}}
 		<li style="color:red"><img src="style/images/no.png" alt="no" style="margin:0 6px;vertical-align:middle;" />{{echo sprintf($lang['FUNCTION_IS_NOT_EXISTS'], 'fopen')}}></li>
 	{{endif;}}
@@ -41,7 +41,7 @@
 
 	<div class="notice_check">
 	{{if(function_exists('move_uploaded_file')):}}
-		<li style="color:green"><img src="style/images/yes.png" alt="yes" style="margin:0 6px;vertical-align:middle;" />{{echo sprintf($lang['FUNCTION_IS_EXISTS'], 'move_uploaded_file')}}</li>
+		<li style="color:green"><img src="style/images/ok.png" alt="yes" style="margin:0 6px;vertical-align:middle;" />{{echo sprintf($lang['FUNCTION_IS_EXISTS'], 'move_uploaded_file')}}</li>
 	{{else: $GLOBALS['check_ok'] = false;}}
 		<li style="color:red"><img src="style/images/no.png" alt="no" style="margin:0 6px;vertical-align:middle;" />{{echo sprintf($lang['FUNCTION_IS_NOT_EXISTS'], 'move_uploaded_file')}}</li>
 	{{endif;}}

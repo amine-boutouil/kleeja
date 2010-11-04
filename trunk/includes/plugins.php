@@ -277,7 +277,7 @@ class kplugins
 								'INTO'		=> "{$dbprefix}plugins",
 								'VALUES'	=> "'" . $SQL->escape($plugin_name) . "','" . $SQL->escape($plg_info['plugin_version']['value']) . 
 												"','" . $SQL->escape($plg_info['plugin_author']['value']) . "','" . 
-												$SQL->escape(kleeja_base64_encode(serialize($p_desc))) . "','" . ($plugin_icon ? $plugin_icon . "','" : '') . 
+												$SQL->escape(kleeja_base64_encode(serialize($p_desc))) . "','" . ($plugin_icon ? $plugin_icon . "','" : "','") . 
 												$SQL->real_escape($plg_uninstall['value']) . "','" . 
 												($there_is_intruct ? $SQL->escape(kleeja_base64_encode(serialize($instarr))) : '') . "','" .  
 												$SQL->real_escape($store) . "','" . 

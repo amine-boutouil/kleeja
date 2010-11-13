@@ -13,6 +13,7 @@
 // to this version
 //
 
+/*
 $arr_req	= array();
 $get_data	= empty($_GET) ? array() : $_GET;
 foreach ($get_data as $key => $val)
@@ -23,3 +24,5 @@ foreach ($get_data as $key => $val)
 $request = implode($arr_req, "&");
 
 header('Location: do.php?' . $request);
+*/
+include 'do.php';

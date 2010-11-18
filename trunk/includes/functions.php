@@ -1187,15 +1187,15 @@ function klj_clean_old_files($from = 0)
 		$totaldays	= (time() - ($config['del_f_day']*86400));
 		$not_today	= time() - 86400;
 		
-		
+		#This feature will work only if id_form is not empty or direct !
 		$query = array(
-					'SELECT'	=> 'f.id, f.last_down, f.name, f.type, f.folder, f.time, f.size',
+					'SELECT'	=> 'f.id, f.last_down, f.name, f.type, f.folder, f.time, f.size, f.id_form',
 					'FROM'		=> "{$dbprefix}files f",
-					'WHERE'		=> "f.last_down < $totaldays AND f.time < $not_today AND f.id > $from",
+					'WHERE'		=> "(f.last_down < $totaldays AND f.time < $not_today AND f.id > $from) AND (f.id_form <> '' OR f.id_form <> 'direct')",
 					'ORDER BY'	=> 'f.id ASC',
 					'LIMIT'		=> '20',
 					);
-		
+
 		($hook = kleeja_run_hook('qr_select_klj_clean_old_files_func')) ? eval($hook) : null; //run hook
 		
 		$result	= $SQL->build($query);					

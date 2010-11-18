@@ -116,6 +116,7 @@ CREATE TABLE `{$dbprefix}files` (
   `user` int(10) NOT NULL default '-1',
   `code_del` varchar(150) collate utf8_bin NOT NULL,
   `user_ip` VARCHAR( 250 ) NOT NULL,
+  `id_form` VARCHAR( 100 ) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `name` (`name`(300)),
   KEY `user` (`user`),

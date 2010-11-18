@@ -656,12 +656,13 @@ function process ()
 				$user	= (int)		$this->id_user;
 				$code_del=(string)	md5(time());
 				$ip		= get_ip();
-				$realf	= (string)	$SQL->escape($real_filename);	
+				$realf	= (string)	$SQL->escape($real_filename);
+				$id_form= (string)	$SQL->escape($config['id_form']);
 				
 				$insert_query = array(
-									'INSERT'	=> '`name` ,`size` ,`time` ,`folder` ,`type`,`user`,`code_del`,`user_ip`, `real_filename`',
+									'INSERT'	=> '`name` ,`size` ,`time` ,`folder` ,`type`,`user`,`code_del`,`user_ip`, `real_filename`, `id_form`',
 									'INTO'		=> "`{$dbprefix}files`",
-									'VALUES'	=> "'$name', '$size', '$timeww', '$folder','$type', '$user', '$code_del', '$ip', '$realf'"
+									'VALUES'	=> "'$name', '$size', '$timeww', '$folder','$type', '$user', '$code_del', '$ip', '$realf', '$id_form'"
 									);
 									
 				($hook = kleeja_run_hook('qr_insert_new_file_kljuploader')) ? eval($hook) : null; //run hook

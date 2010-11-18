@@ -131,6 +131,8 @@ $update_sqls['config_plg_id'] = "ALTER TABLE `{$dbprefix}config` ADD `plg_id` IN
 
 //Before we start finidng treasure, we have to find the map ... 
 $update_sqls['_name_300_'] = "ALTER TABLE  `{$dbprefix}files` CHANGE  `name`  `name` VARCHAR( 300 ) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL";
+$update_sqls['_id_form_'] = "ALTER TABLE `{$dbprefix}files` ADD `id_form` VARCHAR( 100 ) NOT NULL";
+
 $update_sqls['index_k1'] = "ALTER TABLE  `{$dbprefix}files` ADD INDEX (  `name` )";
 $update_sqls['index_k2'] = "ALTER TABLE  `{$dbprefix}files` ADD INDEX (  `user` )";
 $update_sqls['index_k3'] = "ALTER TABLE  `{$dbprefix}files` ADD INDEX (  `code_del` )";

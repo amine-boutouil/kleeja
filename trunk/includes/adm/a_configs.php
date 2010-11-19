@@ -60,7 +60,7 @@ switch($SHOW_CH_STAGE):
 
 		$result = $SQL->build($query);
 			
-		$icons_path = $STYLE_PATH_ADMIN . 'images/config_icons/';
+		$icons_path = $STYLE_PATH_ADMIN . 'images/options_icon/';
 		$default_icon = $icons_path . 'default.png';
 		$typesnavi = array();
 

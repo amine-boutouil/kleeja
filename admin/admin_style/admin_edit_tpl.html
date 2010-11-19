@@ -12,16 +12,17 @@ $(document).ready(function() { $('#template_content').markItUp(mySettings); });
 
 <!-- start template Extra header and footer  -->
 <div id="boxs">
-
+	<!-- Section Title  -->
+	<div class="ribbon MarginTop"><div class="wrapAround"></div>
+		<div class="tab">
+			<img class="TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/styles_button.png" alt="" />
+			<span class="right">{lang.R_STYLES} &raquo; {lang.EDIT}</span>
+		</div>
+	</div>
+	<div class="clr"></div><br /><!-- clear  -->
+	
 	<form method="post" action="{action}">
 	
-	<!-- Section Title  -->
-	<h1 class="SectionTitle"><a href="index.php?cp=m_styles">{lang.EDIT}</a></h1>
-	<div class="hr"></div>
-	<p class="titleAll"><a href="./">{lang.R_CPINDEX}</a> <span>&raquo; </span> {lang.EDIT} <span>&raquo; </span> {tpl_name}</p> 
-	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><img class="left TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/styles_button.png" alt="" /><span class="STitle left">{lang.EDIT}</span></div></div>
-	<div class="clr"></div><br /><!-- clear  -->
-
 	<textarea name="template_content" id="template_content"  rows="" style="direction:ltr;" >{template_content}</textarea>
 
 	<input type="hidden" name="style_id" value="{style_id}" />
@@ -42,9 +43,7 @@ $(document).ready(function() { $('#template_content').markItUp(mySettings); });
 
 	<ELSE>
 		<!-- button -->
-		<p class="MarginTop">
-			<button type="submit" id="submit" name="tpl_edit_submit" class="btn"><span>{lang.SUBMIT}</span></button>
-		</p>
+		<button type="submit" id="submit" name="tpl_edit_submit" class="btn"><span>{lang.SUBMIT}</span></button>
 		
 	</IF>
 

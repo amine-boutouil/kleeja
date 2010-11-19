@@ -1,14 +1,16 @@
 <!-- start Styles Template -->
 <div id="boxs">
-
 	<!-- Section Title  -->
-	<h1 class="SectionTitle"><a href="index.php?cp=m_styles">{lang.R_STYLES}</a></h1>
-	<div class="hr"></div>
-	<p class="titleAll"><a href="./">{lang.R_CPINDEX}</a> <span>&raquo; </span> {lang.KLJ_STYLE_INFO}</p> 
-	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><img class="left TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/styles_button.png" alt="" /><span class="STitle left">{lang.KLJ_STYLE_INFO}</span></div></div>
+	<div class="ribbon MarginTop"><div class="wrapAround"></div>
+		<div class="tab">
+			<img class="TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/styles_button.png" alt="" />
+			<span class="right">{lang.R_STYLES}</span>
+		</div>
+	</div>
 	<div class="clr"></div><br />
 	 
 	<table>
+	<tr><td colspan="2">{lang.KLJ_STYLE_INFO}</td></tr>
 	<tr><td colspan="2"><div class="styles_exp">{lang.STYLES_EXP}</div></td></tr>
 	<LOOP NAME="arr">
 	 <tr class="<IF LOOP="is_default" >oblue</IF>">
@@ -29,10 +31,12 @@
 	</LOOP>
 	</table>
 
-	<div class="clr"></div><br /><br /><br /><!-- clear -->
+	<!-- clear -->
+	<div class="clr"></div><br />
+	<div class="hr"></div><br /><br />
 
 	<!-- Section Title  -->
-	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><span class="STitle right">{lang.TPLS_RE_BASIC}</span></div></div>
+	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><span class="right">{lang.TPLS_RE_BASIC}</span></div></div>
 	<div class="clr"></div>
 
 	<table>
@@ -53,9 +57,11 @@
 	<br />
 
 	<!-- button -->
-	<p class="left MarginBottom"><button type="submit" id="submit" name="submit_bk_tpl" class="btn" onclick="javascript:location.href='{show_all_tpls_action}'"><span>{lang.SHOW_TPLS}</span></button></p>
+	<button type="submit" id="submit" name="submit_bk_tpl" class="btn" onclick="javascript:location.href='{show_all_tpls_action}'"><span>{lang.SHOW_TPLS}</span></button>
 	
-	<div class="clr"></div><br /><!-- clear -->
+	<!-- clear -->
+	<div class="clr"></div><br />
+	<div class="hr"></div><br />
 
 	<!-- note for user .. -->
 	<blockquote class="note"><div><p><em>{lang.NOTE} !</em></p><p>{klj_d_s}</p></div></blockquote>

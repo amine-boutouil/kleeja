@@ -12,16 +12,16 @@ $(document).ready(function() { $('#ex_header').markItUp(mySettings);$('#ex_foote
 
 <!-- start Extra template  -->
 <div id="boxs">
-
-	<form method="post" action="{action}">
-	
 	<!-- Section Title  -->
-	<h1 class="SectionTitle"><a href="index.php?cp=n_extra">{lang.R_EXTRA}</a></h1>
-	<div class="hr"></div>
-	<p class="titleAll"><a href="./">{lang.R_CPINDEX}</a> <span>&raquo; </span> {lang.ADD_HEADER_EXTRA}</p> 
-	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><img class="left TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/extra_button.png" alt="" /><span class="STitle left">{lang.ADD_HEADER_EXTRA}</span></div></div>
+	<div class="ribbon MarginTop"><div class="wrapAround"></div>
+		<div class="tab">
+			<img class="TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/extra_button.png" alt="" />
+			<span class="right">{lang.ADD_HEADER_EXTRA}</span>
+		</div>
+	</div>
 	<div class="clr"></div><br />
-
+	
+	<form method="post" action="{action}">
 		
 	<label class="small_font" for="ex_header">{lang.EX_HEADER_N}</label>
 	<div class="clr"></div><br />
@@ -31,13 +31,14 @@ $(document).ready(function() { $('#ex_header').markItUp(mySettings);$('#ex_foote
 	<p class="left MarginBottom"><button type="submit" id="submit" name="submit" class="btn"><span>{lang.UPDATE_EXTRA}</span></button></p>
 
 	
-	<div class="clr"></div><br /><br /><br />
-	
+	<div class="clr"></div>
 	
 	<!-- Section Title  -->
-	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><span class="STitle right">{lang.ADD_FOOTER_EXTRA}</span></div></div>
+	<div class="ribbon MarginTop"><div class="wrapAround"></div>
+		<div class="tab"><span class="right">{lang.ADD_FOOTER_EXTRA}</span></div>
+	</div>
 	<div class="clr"></div><br />
-
+	
 
 		<label class="small_font" for="ex_footer">{lang.EX_FOOTER_N}</label>
 		<div class="clr"></div>

@@ -12,16 +12,17 @@ $(document).ready(function() { $('#rules_text').markItUp(mySettings); });
 
 <!-- start Rules Template  -->
 <div id="boxs">
-
-	<form method="post" action="{action}">
-
 	<!-- Section Title  -->
-	<h1 class="SectionTitle"><a href="index.php?cp=l_rules">{lang.R_RULES}</a></h1>
-	<div class="hr"></div>
-	<p class="titleAll"><a href="./">{lang.R_CPINDEX}</a> <span>&raquo; </span> {lang.R_RULES}</p> 
-	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><img class="left TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/rules_button.png" alt="" /><span class="STitle left">{lang.R_RULES}</span></div></div>
+	<div class="ribbon MarginTop"><div class="wrapAround"></div>
+		<div class="tab">
+			<img class="TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/rules_button.png" alt="" />
+			<span class="right">{lang.R_RULES}</span>
+		</div>
+	</div>
 	<div class="clr"></div><br />
 	
+	<form method="post" action="{action}">
+
 	<!-- start table no hover  -->
 	<label class="small_font">{lang.RULES_EXP}</label>
 	<!-- start clear  -->
@@ -42,7 +43,7 @@ $(document).ready(function() { $('#rules_text').markItUp(mySettings); });
 	<textarea name="rules_text" id="rules_text" style="direction:ltr;height: 260px;" >{rules}</textarea>
 
 	<!-- button -->
-	<p class="center MarginBottom"><button type="submit" id="submit" name="submit" class="btn"><span>{lang.UPDATE_RULES}</span></button></p>
+	<button type="submit" id="submit" name="submit" class="btn"><span>{lang.UPDATE_RULES}</span></button>
 
 	{H_FORM_KEYS}
 	</form>

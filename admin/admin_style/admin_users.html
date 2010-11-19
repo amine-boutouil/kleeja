@@ -1,13 +1,14 @@
 ﻿<!-- start UsersTemplate -->
 <div id="boxs">
-
 	<!-- Section Title  -->
-	<h1 class="SectionTitle"><a href="index.php?cp=g_users">{lang.R_USERS}</a></h1>
-	<div class="hr"></div>
-	<p class="titleAll"><a href="./">{lang.R_CPINDEX}</a> <span>&raquo; </span> {lang.R_USERS}</p> 
-	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><img class="left TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/users_button.png" alt="" /><span class="STitle left">{lang.R_USERS}</span></div></div>
+	<div class="ribbon MarginTop"><div class="wrapAround"></div>
+		<div class="tab">
+			<img class="TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/users_button.png" alt="" />
+			<span class="right">{lang.R_USERS}</span>
+		</div>
+	</div>
 	<div class="clr"></div>
-
+	
 	
 	<IF NAME="user_not_normal">
 		<!-- start info System Messages -->
@@ -89,38 +90,42 @@
 	{page_nums}<!-- pagination -->
 	
 	<!-- button -->
-	<p class="left MarginBottom"><button type="submit" name="submit" class="btn"><span>{lang.UPDATE_USERS}</span></button></p>
+	<button type="submit" name="submit" class="btn"><span>{lang.UPDATE_USERS}</span></button>
 		
 	{H_FORM_KEYS}
 	</form>
 
-	<div class="clr"></div><br /><br /><!-- clear -->
+	<!-- clear -->
+	<div class="clr"></div><br />
+	<div class="hr"></div><br /><br />
 
 	<IF NAME="isn_search">
 	<form method="post" action="">
 
 	<!-- Section Title  -->
-	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><span class="STitle right">{lang.NEW_USER}</span></div></div>
+	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><span class="right">{lang.NEW_USER}</span></div></div>
 	<div class="clr"></div>
 
 	<table style="text-align:center">
-			<tr style="background-color:#DFDFDF">
-					<td>{lang.USERNAME}</td>
-					<td>{lang.EMAIL}</td>
-					<td>{lang.PASSWORD}</td>
-					<!-- admin users info tr extra -->
-			</tr>
-			<tr>
-					<td><label><input type="text" name="lname" value="" size="30"></label></td>
-					<td><label><input type="text" name="lmail" value="" size="20" style="direction:ltr"></label></td>
-					<td><label><input type="password" name="lpass" value="" size="20"></label></td>
-					<!-- admin users data tr extra -->
+		<tr>
+			<td>{lang.USERNAME}</td>
+			<td><label><input type="text" name="lname" value="" size="30"></label></td>
+		</tr>
+		<tr>
+			<td>{lang.EMAIL}</td>
+			<td><label><input type="text" name="lmail" value="" size="30" style="direction:ltr"></label></td>
+		</tr>
+		<tr>
+			<td>{lang.PASSWORD}</td>
+			<td><label><input type="password" name="lpass" value="" size="30"></label></td>
+		</tr>
+
 	</table>
 	
 	<div class="clr"></div><br />
 
 	<!-- button -->
-	<p class="left MarginBottom"><button type="submit" id="submit" name="newuser" class="btn"><span>{lang.SUBMIT}</span></button></p>
+	<button type="submit" id="submit" name="newuser" class="btn"><span>{lang.SUBMIT}</span></button>
 		
 	{H_FORM_KEYS2}
 	</form>

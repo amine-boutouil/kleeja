@@ -1,19 +1,20 @@
 <!-- start language template  -->
 <div id="boxs">
-
 	<!-- Section Title  -->
-	<h1 class="SectionTitle"><a href="index.php?cp=o_langs">{lang.R_LANGS}</a></h1>
-	<div class="hr"></div>
-	<p class="titleAll"><a href="./">{lang.R_CPINDEX}</a> <span>&raquo; </span> {lang.R_LANGS}</p> 
-	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><img class="left TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/langs_button.png" alt="" /><span class="STitle left">{lang.R_LANGS}</span></div></div>
+	<div class="ribbon MarginTop"><div class="wrapAround"></div>
+		<div class="tab">
+			<img class="TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/langs_button.png" alt="" />
+			<span class="right">{lang.R_LANGS}</span>
+		</div>
+	</div>
 	<div class="clr"></div><br />
 
 	<form action="{action2}" method="post">
 		{lang.LANGUAGE}  
-		<select name="lang">
+		<select name="lang" onchange="submit()">
 			{lngfiles}
 		</select>
-		  <input type="submit" value="{lang.UPDATE}" />
+		  {lang.UPDATE}
 	</form>
 	
 	<div class="clr"></div><br /><!-- clear -->
@@ -37,12 +38,13 @@
 	</table>
 	
 	<div class="clr"></div><br />
-
-	<!-- button -->
-	<p class="left MarginBottom"><button type="submit" id="submit" name="submit" class="btn"><span>{lang.UPDATE}</span></button></p>
+	<div class="hr"></div><br />
 	
 	<!-- pagination  -->
 	{page_nums}
+	
+	<!-- button -->
+	<p class="left"><button type="submit" id="submit" name="submit" class="btn"><span>{lang.UPDATE}</span></button></p>
 	
 	{H_FORM_KEYS}
 	</form>

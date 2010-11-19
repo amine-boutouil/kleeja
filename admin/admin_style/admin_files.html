@@ -36,15 +36,16 @@ jQuery(document).ready(function($){
 
 <!-- start view files template  -->
 <div id="boxs">
-
-	<form method="post" name="filesform" action="{action}" id="files_form">
-
 	<!-- Section Title  -->
-	<h1 class="SectionTitle"><a href="index.php?cp=c_files">{lang.R_FILES}</a></h1>
-	<div class="hr"></div>
-	<p class="titleAll"><a href="./">{lang.R_CPINDEX}</a> <span>&raquo; </span> {lang.R_FILES} ( {current_page} : {total_pages} )</p> 
-	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><img class="left TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/files_button.png" alt="" /><span class="STitle left">{lang.R_FILES}</span></div></div>
+	<div class="ribbon MarginTop"><div class="wrapAround"></div>
+		<div class="tab">
+			<img class="TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/files_button.png" alt="" />
+			<span class="right">{lang.R_FILES} ( {current_page} : {total_pages} )</span>
+		</div>
+	</div>
 	<div class="clr"></div><br />
+	
+	<form method="post" name="filesform" action="{action}" id="files_form">
 	
 	<IF NAME="is_search">
 	<div class="nothing">

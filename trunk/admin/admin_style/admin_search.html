@@ -44,16 +44,17 @@ function check_search_users_form(form)
 
 <!-- start Search Template  -->
 <div id="boxs">
-
+	<!-- Section Title  -->
+	<div class="ribbon MarginTop"><div class="wrapAround"></div>
+		<div class="tab">
+			<img class="TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/search_button.png" alt="" />
+			<span class="right">{lang.R_SEARCH}</span>
+		</div>
+	</div>
+	<div class="clr"></div><br />
+	
 	<form method="post" action="{action1}" onsubmit="return check_search_files_form(this);">
 
-	<!-- Section Title  -->
-	<h1 class="SectionTitle"><a href="index.php?cp=h_search">{lang.R_SEARCH}</a></h1>
-	<div class="hr"></div>
-	<p class="titleAll"><a href="./">{lang.R_CPINDEX}</a> <span>&raquo; </span> {lang.SEARCH_FILES}</p> 
-	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><img class="left TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/search_button.png" alt="" /><span class="STitle left">{lang.SEARCH_FILES}</span></div></div>
-	<div class="clr"></div>
-	
 	<!-- start table no hover  -->
 	<table>
 		<tr>
@@ -96,24 +97,23 @@ function check_search_users_form(form)
 	<div class="clr"></div><br />
 	
 	<!-- button -->
-	<p class="MarginBottom"><button type="submit" id="submit" name="search_file" class="btn"><span>{lang.SEARCH_SUBMIT}</span></button></p>
+	<button type="submit" id="submit" name="search_file" class="btn"><span>{lang.SEARCH_SUBMIT}</span></button>
 
 	<!-- end div border table  -->
 	{H_FORM_KEYS}
 	</form>
 	<!-- end search temlate  -->
 
-
-	
-	<div class="clr"></div><br /><!-- clear -->
-
+	<!-- clear -->
+	<div class="clr"></div><br />
+	<div class="hr"></div><br /><br />
 
 	<!-- start users search temlate  -->
 	<IF NAME="default_user_system">
 	<form method="post" action="{action2}" onsubmit="return check_search_users_form(this);">
 
 	<!-- Section Title  -->
-	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><span class="STitle right">{lang.SEARCH_USERS}</span></div></div>
+	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><span class="right">{lang.SEARCH_USERS}</span></div></div>
 	<div class="clr"></div>
 
 	<!-- start table no hover  -->
@@ -132,7 +132,7 @@ function check_search_users_form(form)
 	<div class="clr"></div><br />
 	
 	<!-- button -->
-	<p class="MarginBottom"><button type="submit" id="submit" name="search_user" class="btn"><span>{lang.SEARCH_SUBMIT}</span></button></p>
+	<button type="submit" id="submit" name="search_user" class="btn"><span>{lang.SEARCH_SUBMIT}</span></button>
 
 	{H_FORM_KEYS2}
 	</form>

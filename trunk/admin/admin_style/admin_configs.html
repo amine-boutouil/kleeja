@@ -2,25 +2,25 @@
 <div id="boxs">
 
 	<!-- Section Title  -->
-	<h1 class="SectionTitle"><a href="index.php?cp=options">{lang.R_CONFIGS}</a></h1>
-	<div class="hr"></div>
-	<p class="titleAll"><a href="./">{lang.R_CPINDEX}</a> <span>&raquo; </span> {CONFIGEXTENDLANG}</p>
-	<div class="ribbon"><div class="wrapAround"></div>
-	<div class="tab">
-	<img class="left TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/options_button.png" alt="" />
-	<span class="STitle left">{lang.R_CONFIGS}</span></div></div>
+	<div class="ribbon MarginTop"><div class="wrapAround"></div>
+		<div class="tab">
+			<img class="TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/options_button.png" alt="" />
+			<span class="right">{lang.R_CONFIGS}</span>
+		</div>
+	</div>
 	<div class="clr"></div>
 	
 	<!--- START CHOOSING STAGE -->
 	<IF NAME="SHOW_CH_STAGE">
+
 		<div id="ConfigTypesList">
 			<LOOP NAME="typesnavi">
-			<div class="ConfigTypesList" onclick="javascript:get_kleeja_link('{{typelink}}', '#main_container');">
-				<a class="TypeLink" href="{{typelink}}" onclick="javascript:get_kleeja_link('{{typelink}}', '#main_container'); return false;">
-					<img src="{{typeicon}}" alt="" />
-					<span class="BTHTypeLink">{{typetitle}}</span>
-				</a>
-			</div>
+            <div class="ConfigTypesList" onclick="javascript:get_kleeja_link('{{typelink}}', '#main_container');">
+                <a class="TypeLink" href="{{typelink}}" onclick="javascript:get_kleeja_link('{{typelink}}', '#main_container'); return false;">
+                    <img src="{{typeicon}}" alt="" />
+                    <span class="BTHTypeLink">{{typetitle}}</span>
+                </a>
+            </div>
 			</LOOP>
 		</div>
 

@@ -1,14 +1,15 @@
 <!-- start Exts template  -->
 <div id="boxs">
-
-	<form method="post" action="{action}" name="extsform">
-
 	<!-- Section Title  -->
-	<h1 class="SectionTitle"><a href="index.php?cp=i_exts">{lang.R_EXTS}</a></h1>
-	<div class="hr"></div>
-	<p class="titleAll"><a href="./">{lang.R_CPINDEX}</a> <span>&raquo; </span> {lang.R_EXTS}</p> 
-	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><img class="left TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/exts_button.png" alt="" /><span class="STitle left">{lang.R_EXTS}</span></div></div>
+	<div class="ribbon MarginTop"><div class="wrapAround"></div>
+		<div class="tab">
+			<img class="TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/exts_button.png" alt="" />
+			<span class="right">{lang.R_EXTS}</span>
+		</div>
+	</div>
 	<div class="clr"></div><br />
+	
+	<form method="post" action="{action}" name="extsform">
 
 	<!-- start admin ext info tr extra -->
 	<table class="table_exts">
@@ -53,7 +54,7 @@
 	<div class="clr"></div><br /><!-- clear -->
 	
 	<!-- Section Title  -->
-	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><span class="STitle right">{lang.BCONVERTER}</span></div></div>
+	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><span class="right">{lang.BCONVERTER}</span></div></div>
 	<div class="clr"></div><br />
 
 	<script type="text/javascript">
@@ -107,10 +108,10 @@
 	<td align="center"><input type="text" size="10" name="gb" value="0"></td>
 	</tr>
 	<tr style="background-color:#FFF;text-align:center;border-width:0px"> 
-	<td style="border-width:0px"><button type="button" name="B2" class="btn" onClick="convert(this.form)"><span>   >   </span></button></td>
-	<td style="border-width:0px"><button type="button" name="B22" class="btn" onClick="convertkb(this.form)"><span>   < >   </span></button></td>
-	<td style="border-width:0px"><button type="button" name="B23" class="btn" onClick="convertmb(this.form)"><span>   < >   </span></td>
-	<td style="border-width:0px"><button type="button" name="B24" class="btn" onClick="convertgb(this.form)"><span>   <   </span></td>
+	<td style="border-width:0px"><button type="button" name="B2" class="btn" onClick="convert(this.form)"><span class="bc">  >  </span></button></td>
+	<td style="border-width:0px"><button type="button" name="B22" class="btn" onClick="convertkb(this.form)"><span class="bc">  < >  </span></button></td>
+	<td style="border-width:0px"><button type="button" name="B23" class="btn" onClick="convertmb(this.form)"><span class="bc">  < >  </span></td>
+	<td style="border-width:0px"><button type="button" name="B24" class="btn" onClick="convertgb(this.form)"><span class="bc">  <  </span></td>
 	</tr>
 	</table>
 	<!-- end table no hover  -->
@@ -126,7 +127,7 @@
 	<form method="post" action="{action_new_ext}">
 
 	<!-- Section Title  -->
-	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><span class="STitle right">{lang.ADD_NEW_EXT}</span></div></div>
+	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><span class="right">{lang.ADD_NEW_EXT}</span></div></div>
 	<div class="clr"></div>
 
 	<!-- start table no hover  -->

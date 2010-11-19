@@ -54,14 +54,16 @@ jQuery(document).ready(function($){
 
 <!-- start temlate displaying images -->
 <div id="boxs">
-	<form method="post" action="{action}" name="imgform" id="imgs_form">
-	
 	<!-- Section Title  -->
-	<h1 class="SectionTitle"><a href="index.php?cp=d_img_ctrl">{lang.R_IMG_CTRL}</a></h1>
-	<div class="hr"></div>
-	<p class="titleAll"><a href="./">{lang.R_CPINDEX}</a> <span>&raquo; </span> {lang.R_IMG_CTRL} ( {current_page} : {total_pages} ) </p> 
-	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><img class="left TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/img_ctrl_button.png" alt="" /><span class="STitle left">{lang.R_IMG_CTRL}</span></div></div>
+	<div class="ribbon MarginTop"><div class="wrapAround"></div>
+		<div class="tab">
+			<img class="TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/img_ctrl_button.png" alt="" />
+			<span class="right">{lang.R_IMG_CTRL} ( {current_page} : {total_pages} )</span>
+		</div>
+	</div>
 	<div class="clr"></div><br />
+	
+	<form method="post" action="{action}" name="imgform" id="imgs_form">
 
 	<IF NAME="no_results">
 	<div class="nothing"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/warning_nothing.gif" alt="nothing" />{lang.NOTHING}</div>
@@ -90,8 +92,8 @@ jQuery(document).ready(function($){
 	</LOOP>
 	</div>
 
-	<div class="clr"></div><br /><div class="hr"></div>
-	
+	<div class="clr"></div><br />
+	<div class="hr"></div><br />
 	
 	<div class="left check_all">[ <a href="javascript:void(0);" onclick="checkAll(document.imgform, '_del', 'su', 'kfocus');">{lang.CHECK_ALL}</a> ]</div>
 	

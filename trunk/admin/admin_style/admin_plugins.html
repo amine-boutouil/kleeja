@@ -1,12 +1,14 @@
 <!-- start Plugins Template -->
 <div id="boxs">
-
 	<!-- Section Title  -->
-	<h1 class="SectionTitle"><a href="index.php?cp=j_plugins">{lang.R_PLUGINS}</a></h1>
-	<div class="hr"></div>
-	<p class="titleAll"><a href="./">{lang.R_CPINDEX}</a> <span>&raquo; </span>{lang.R_PLUGINS}</p> 
-	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><img class="left TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/plugins_button.png" alt="" /><span class="STitle left">{lang.R_PLUGINS}</span></div></div>
+	<div class="ribbon MarginTop"><div class="wrapAround"></div>
+		<div class="tab">
+			<img class="TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/plugins_button.png" alt="" />
+			<span class="right">{lang.R_PLUGINS}</span>
+		</div>
+	</div>
 	<div class="clr"></div><br />
+	
 	
 	<strong>{lang.PLUGINS_EX}</strong>
 	<br />
@@ -107,7 +109,7 @@
 	<form method="post" action="{action}" enctype="multipart/form-data">
 
 	<!-- Section Title  -->
-	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><span class="STitle right">{lang.ADD_NEW_PLUGIN}</span></div></div>
+	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><span class="right">{lang.ADD_NEW_PLUGIN}</span></div></div>
 	<div class="clr"></div><br />
 	
 	<!-- start table no hover  -->
@@ -137,7 +139,6 @@
 
 	<!-- note for user .. -->
 	<blockquote class="note"><div><p><em>{lang.NOTE} !</em></p><p>{klj_d_s}</p></div></blockquote>
-
 
 
 	{H_FORM_KEYS}

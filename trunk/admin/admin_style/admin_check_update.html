@@ -1,10 +1,12 @@
 <!-- start php info template  -->
 <div id="boxs">
 	<!-- Section Title  -->
-	<h1 class="SectionTitle"><a href="index.php?cp=p_check_update">{lang.R_CHECK_UPDATE}</a></h1>
-	<div class="hr"></div>
-	<p class="titleAll"><a href="./">{lang.R_CPINDEX}</a> <span>&raquo; </span> {lang.R_CHECK_UPDATE} </p> 
-	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><img class="left TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/check_update_button.png" alt="" /><span class="STitle left">{lang.R_CHECK_UPDATE}</span></div></div>
+	<div class="ribbon MarginTop"><div class="wrapAround"></div>
+		<div class="tab">
+			<img class="TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/check_update_button.png" alt="" />
+			<span class="right">{lang.R_CHECK_UPDATE}</span>
+		</div>
+	</div>
 	<div class="clr"></div><br />
 	
 	<div class="<IF NAME="error">update_error<ELSE>update_info</IF>">{text}</div>

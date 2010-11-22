@@ -91,7 +91,6 @@
 	$lang['INST_CHOOSE_UPDATE_FILE']				= 'Choisissez le fichier de mise &agrave; jour appropri&eacute;e';
 	$lang['INST_ERR_NO_SELECTED_UPFILE_GOOD']		= 'Fichier de mise inappropri&eacute; ou absent!';
 	$lang['INST_UPDATE_CUR_VER_IS_UP']				= 'Votre version actuelle est r&eacute;cente que cette mise &agrave; jour.';
-	$lang['INST_UPDATE_SELECT_ONTHER_UPDATES']		= 'Retour et s&eacute;lectionnez une autre mise &agrave; jour.';
 	
 	$lang['INST_NOTES_UPDATE']						= 'Notes sur la mise &agrave; jour';
 	$lang['INST_NOTE_RC2_TO_RC3']					= 'Vous devez remplacer tous les fichiers du script, et pas seulement ex&eacute,cuter cet assistant  ...';
@@ -99,7 +98,7 @@
 	$lang['INST_NOTE_RC5_TO_RC6']					= 'Vous devez remplacer tous les nouveaux fichiers de script avec les anciens !.';
 	$lang['INST_NOTE_RC6_TO_1.0.0']					= 'Vous devez remplacer tous les nouveaux fichiers de script avec les anciens !.';
 	$lang['RC6_1_CNV_CLEAN_NAMES']					= 'Nettoyage de tous les utilisateurs ...';
-	$lang['INST_UPDATE_IS_FINISH']					= 'Installation termin&eacute;e! Vous pouvez maintenant supprimer le r&eacute;pertoire <br /><b>INSTALL</b><br />...';
+	$lang['INST_UPDATE_IS_FINISH']					= 'Installation termin&eacute;e! Vous pouvez maintenant supprimer le r&eacute;pertoire INSTALL .';
 	$lang['IN_INFO']								= 'Remplissez les champs ci-dessous si vous souhaitez int&eacute;grer kleeja avec votre script . Ignorez cette &eacute;tape si vous ne souhaitez pas le faire<br /><span style="color:red;">vous devez changer le syst&egrave;me d\'utilisateur cp admin apr&eacute;s l\'installation de kleeja</span>';
 	$lang['IN_PATH']								= 'Chemin du script';
 	$lang['INST_PHP_LESSMIN']						= 'Vous devez avoir PHP %1$s ou suivant pour installer Kleeja, votre version actuelle est la %2$s';

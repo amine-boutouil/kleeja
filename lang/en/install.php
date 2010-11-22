@@ -91,7 +91,6 @@
 	$lang['INST_CHOOSE_UPDATE_FILE']				= 'Choose the appropriate update file';
 	$lang['INST_ERR_NO_SELECTED_UPFILE_GOOD']		= 'Inappropriate update file, or it is missing!';
 	$lang['INST_UPDATE_CUR_VER_IS_UP']				= 'Your current version is newer than this update.';
-	$lang['INST_UPDATE_SELECT_ONTHER_UPDATES']		= 'Return back and select another update.';
 	
 	$lang['INST_NOTES_UPDATE']						= 'Update Notes';
 	$lang['INST_NOTE_RC2_TO_RC3']					= 'You need to replace all the script files and not just run this wizard  ...';
@@ -99,7 +98,7 @@
 	$lang['INST_NOTE_RC5_TO_RC6']					= 'You need to replace all new the script files with the old ones !.';
 	$lang['INST_NOTE_RC6_TO_1.0.0']					= 'You need to replace all new the script files with the old ones !.';
 	$lang['RC6_1_CNV_CLEAN_NAMES']					= 'Cleaning every username ...';
-	$lang['INST_UPDATE_IS_FINISH']					= 'Installation completed! you can now delete the <br /><b>INSTALL</b><br /> directory...';
+	$lang['INST_UPDATE_IS_FINISH']					= 'Installation completed! you can now delete the INSTALL directory...';
 	$lang['IN_INFO']								= 'Fill in the fields below if you want to integrate kleeja with your script . Ignore this step if you do not wish to do it<br /><span style="color:red;">you should change user system from admin cp after installing kleeja</span>';
 	$lang['IN_PATH']								= 'Path of script';
 	$lang['INST_PHP_LESSMIN']						= 'You need PHP %1$s or above to install Kleeja, your current version is %2$s';

@@ -93,7 +93,6 @@
 	$lang['INST_CHOOSE_UPDATE_FILE']				= 'Yükseltme dosyasýný seçin';
 	$lang['INST_ERR_NO_SELECTED_UPFILE_GOOD']		= 'hatalý yükseltme dosyasý, yada bulunamýyor!';
 	$lang['INST_UPDATE_CUR_VER_IS_UP']				= 'Þuanki versiyonunuz yükseltmek için seçtiðinizden daha yeni.';
-	$lang['INST_UPDATE_SELECT_ONTHER_UPDATES']		= 'Geri dön ve baþka yükseltme seç.';
 	
 	$lang['INST_NOTES_UPDATE']						= 'Yükseltme Notlarý';
 	$lang['INST_NOTE_RC2_TO_RC3']					= 'Sihirbazý çalýþtýrmadan önce dosyalarý deðiþtirmelisin  ...';
@@ -102,7 +101,7 @@
 	$lang['INST_NOTE_RC6_TO_1.0.0']					= 'Yeni script dosyalarý ile eskilerini deðiþtirmeye ihtiyacýn var !.';
 	$lang['RC6_1_CNV_CLEAN_NAMES']					= 'Kullanýcý isimleri temizlenmeli ...';
 	// 18 MAYIS 2010 16:32 devam ediyoruz...
-	$lang['INST_UPDATE_IS_FINISH']					= 'Yükleme iþlemi baþarýyla tamamlandý. Güvenliðiniz için siteye giriþ yapmadan önce <br /><b>INSTALL</b><br /> klasörüne silin...';
+	$lang['INST_UPDATE_IS_FINISH']					= 'Yükleme iþlemi baþarýyla tamamlandý. Güvenliðiniz için siteye giriþ yapmadan önce INSTALL klasörüne silin...';
 	$lang['IN_INFO']								= 'Fill in the fields below if you want to integrate kleeja with your script . Ignore this step if you do not wish to do it<br /><span style="color:red;">you should change user system from admin cp after installing kleeja</span>';
 	$lang['IN_PATH']								= 'Path of script';
 	$lang['INST_PHP_LESSMIN']						= 'Kleeja\'yý yükleyebilmek için PHP %1$s yada daha yüksek versiyonuna ihtiyacýnýz var, þu anki versiyon:  %2$s';

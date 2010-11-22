@@ -95,7 +95,6 @@
 	$lang['INST_CHOOSE_UPDATE_FILE']				= 'Vyberte si príslušnú aktualizáciu súboru';
 	$lang['INST_ERR_NO_SELECTED_UPFILE_GOOD']		= 'Nevhodný aktualizačný súbor, alebo nastala chýba!';
 	$lang['INST_UPDATE_CUR_VER_IS_UP']				= 'Vaša aktuálna verzia je novšia než táto aktualizácia.';
-	$lang['INST_UPDATE_SELECT_ONTHER_UPDATES']		= 'Vráťte sa späť a vyberte inú aktualizáciu.';
 	
 	$lang['INST_NOTES_UPDATE']						= 'Poznámky aktualizácie';
 	$lang['INST_NOTE_RC2_TO_RC3']					= 'Musíte nahradiť všetky súbory skriptov, a nie len spustiť tohto sprievodcu..';
@@ -103,7 +102,7 @@
 	$lang['INST_NOTE_RC5_TO_RC6']					= 'Musíte nahradiť všetky staré súbory skriptov za nové!';
 	$lang['INST_NOTE_RC6_TO_1.0.0']					= 'Musíte nahradiť všetky staré súbory skriptov za nové!';
 	$lang['RC6_1_CNV_CLEAN_NAMES']					= 'Užívateľské mená boly upratané..';
-	$lang['INST_UPDATE_IS_FINISH']					= 'Inštalácia dokončená! Teraz môžete zmazať adresár <br /><b>INSTALL</b><br />';
+	$lang['INST_UPDATE_IS_FINISH']					= 'Inštalácia dokončená! Teraz môžete zmazať adresár INSTALL .';
 	$lang['IN_INFO']								= 'Vyplňte pole nižšie, ak chcete integrovať Kleeja s Vaším skriptom. Tento krok môžete ignorovať. <br /><span style="color:red;">Užívateľsky systém môžete zmeniť neskor v ovládacom panely.</span>';
 	$lang['IN_PATH']								= 'Cesta skriptu';
 	$lang['INST_PHP_LESSMIN']						= 'Potrebujete PHP verziu %1$s alebo vyššiu pre inštaláciu Kleeja, aktuálna verzia je %2$s';

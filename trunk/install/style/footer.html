@@ -1,27 +1,20 @@
-<div class="clr"></div><br />
-</div>
-<div class="ins_klj"><img src="style/images/ins_klj.png" alt="" /></div>
-<!-- # end all box body  -->
+<div class="clr"></div></div><div class="ins_klj"><img src="style/images/ins_klj.png" alt="" /></div>
+<!-- strart code java script -->
 <script type="text/javascript">
 <!--
 $(document).ready(function () 
 {
 	// error in the browser Explore
-    $('#scroll_div').animate({
-        scrollTop : $('#scroll_div > .inner').outerHeight()
-    });
+    $('#scroll_div').animate({scrollTop : $('#scroll_div > .inner').outerHeight()});
     var elem = $('#scroll_div');
     var inner = $('#scroll_div > .inner');
     if ( Math.abs(inner.offset().top) + elem.height() + elem.offset().top >= inner.outerHeight() ) { }
 });
 	   
-function agree ()
-	{
+function agree () {
 		var agrec = document.getElementById('agrec');
 		var agres = document.getElementById('agres');
-
-		if (agrec.checked) { agres.disabled= '';}else{agres.disabled= 'disabled';}
-	}
+		if (agrec.checked) { agres.disabled= '';}else{agres.disabled= 'disabled';}};
 
 function w_email(l)
 {

@@ -1,19 +1,18 @@
-<div class="home waht_kleeja" style="text-align:{{echo $lang['DIR']=='rtl'?'right':'left'}};" dir="{{echo $lang['DIR']}}">
-	<div class="w_t"><img src="style/images/kleeja_info.png" alt="" style="margin:0 6px;vertical-align:middle;" />{{echo $lang['INST_WHAT_IS_KLEEJA_T']}} :</div>
-	<p>{{echo $lang['INST_WHAT_IS_KLEEJA']}}</p>
-
-	<div class="clr"></div><br />
-
-	<div class="w_t"><img src="style/images/klj_info.png" alt="" style="margin:0 6px;vertical-align:middle;" />{{echo $lang['INST_SPECIAL_KLEEJA']}}</div>
+<div class="BoxInner"><div class="BoxTopImg"></div><div class="BoxBody"><div class="inner">
+	<div class="clr"></div>
+			
+	<h2>{{echo $lang['INST_WHAT_IS_KLEEJA_T']}}</h2>
+	<p class="justify">{{echo $lang['INST_WHAT_IS_KLEEJA']}}</p>
+	<div class="clr"></div>
+	<h2>{{echo $lang['INST_SPECIAL_KLEEJA']}}</h2>
 	<p>{{echo $lang['INST_WHAT_IS_KLEEJA_ONE']}}</p>
+	<div class="hr"></div>
+	<center>
+		<form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=official&amp;' . getlang(1)}}">
+			<button onclick="window.location.href='./index.php?step=language&amp;{{echo getlang(1)}}';return false;" name="previous" type="submit" id="submit" class="btn"><span>&laquo;  {{echo $lang['INST_PREVIOUS']}}</span></button>
+			<button name="agres" type="submit" class="btn"><span>{{echo $lang['INST_NEXT']}} &raquo;</span></button>
+		</form>	
+	</center>
 
-	
-<div class="clr"></div>
-
-<center style="margin-top:10px;">
-	<form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=official&amp;' . getlang(1)}}">
-		<input onclick="window.location.href='./index.php?step=language&amp;{{echo getlang(1)}}';return false;" name="previous" type="submit" value="{{echo $lang['INST_PREVIOUS']}}" />
-		<input name="agres" type="submit" value="{{echo $lang['INST_NEXT']}}" />
-	</form>	
-</center>
-</div>
+	<div class="clr"></div>			
+</div></div><div class="BoxBottomImg"></div></div>

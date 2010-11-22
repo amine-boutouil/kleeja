@@ -36,7 +36,7 @@
 	// custom checkboxes
 	$('input[type=checkbox]').checkbox();
 	
-	$('.MmNavTop li a img').qtip({
+	$('.HTI a img').qtip({
 			position: {my: 'bottom right',at: 'top center', adjust: { x:2,  y : 3 , screen: 'flip'}},
 			show: {delay: 0},style: {classes: 'ui-tooltip-plain', tip: true}
 	});

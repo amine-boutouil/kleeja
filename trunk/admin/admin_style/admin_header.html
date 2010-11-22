@@ -194,37 +194,27 @@ function submit_kleeja_data(FORM_ID, ID, CONFIRM)
 				<div id="MmLeft"></div>
 				<div id="MmBody">
 					<ul class="MmNavTop">
-						<li><a href="{config.siteurl}"><img class="Mmicon" title="{lang.RETURN_HOME}" src="{STYLE_PATH_ADMIN}images/icon/return_home.png" alt="" /></a></li>
-						<li><a href="./"><img class="Mmicon" title="{lang.R_CPINDEX}" src="{STYLE_PATH_ADMIN}images/icon/k_cp.png" alt="" /></a></li>
-						<li><a href="./?cp=b_lgoutcp&amp;{GET_FORM_KEY_GLOBAL}" onclick="javascript:return confirm_from();"><img class="Mmicon" title="{lang.R_LGOUTCP}" src="{STYLE_PATH_ADMIN}images/icon/logout.png" alt="" /></a></li>
-						<li class="mmDivider"></li>
 						<li>{lang.WELCOME} : {username}</li>
-						<li class="mmDivider"></li>
+						<li class="mmDivider"> </li>
 						<li>{lang.LAST_VISIT} : {last_visit}</li>
 					</ul>
 				</div>
 				<div id="MmRight"></div>
 			</div>
 			<div id="Logo"><a href="./"></a></div>
-			
-			<div id="HeaderB">
-				<div class="BHeaderB">
-					<a class="BTop Rhome" href="{config.siteurl}">
-						<span class="BTHeading">{lang.RETURN_HOME}</span>
-					</a><!--end.Rhome-->
-					<a class="BTop CPindex" href="./">
-						<span class="BTHeading">{lang.R_CPINDEX}</span>
-					</a><!--end.CPindex-->
-					<a class="BTop Dkey" href="./?cp=b_lgoutcp&amp;{GET_FORM_KEY_GLOBAL}" onclick="javascript:return confirm_from();">
-						<span class="BTHeading">{lang.R_LGOUTCP}</span>
-					</a><!--end.Dkey-->
-				</div>
-			</div>
 			<div class="clr"></div>
 		</div>
 
 		<div id="pageMain">
 			<div class="contentArea">
+			
+			<div class="HTI">
+				<a href="{config.siteurl}"><img title="{lang.RETURN_HOME}" src="{STYLE_PATH_ADMIN}images/icon/back_website.png" alt="" /></a>
+				<a href="./"><img title="{lang.R_CPINDEX}" src="{STYLE_PATH_ADMIN}images/icon/cp_sb.png" alt="" /></a>
+				<a href="./?cp=b_lgoutcp&amp;{GET_FORM_KEY_GLOBAL}" onclick="javascript:return confirm_from();"><img title="{lang.R_LGOUTCP}" src="{STYLE_PATH_ADMIN}images/icon/lgoutcp_sb.png" alt="" /></a>
+			</div>
+			<div class="clr"></div>
+			
 			<!-- start Main Menu right  -->
 			<IF NAME="SHOW_LIST">
 			<IF NAME="MINI_MENU">

@@ -110,19 +110,16 @@
 	#MmBody ul.MmNavTop{float:right;margin:7px 0 0 0;}
 	#MmBody ul.MmNavTop li {float:right;margin:0 5px;line-height:50px;color:#ffffff;font-size:96%;font-weight:700;text-shadow: 0 0 2px #000;}
 	#MmBody ul.MmNavTop li.mmDivider{ background: url(../images/box/mm_divider.gif) no-repeat 0 0;height:40px;width:10px }
-	#MmBody ul.MmNavTop li a .Mmicon{padding:0 0 0 7px;}
 	#Logo{float:left;margin:-14px 0 20px 8px;padding:10px;}
 	#Logo a{background:transparent url(../images/logo.png) no-repeat 0 0;display:block;height:69px;width:292px}
-	#HeaderB{float:right;margin:-10px auto 10px auto;height:70px;width:100%;background:transparent url(../images/box/bg_navtop.png) no-repeat bottom center;}
-	.BHeaderB{margin:0 auto ;width:540px;}
-	.BTop{float:right;height:32px;overflow:hidden;border:1px solid #c0c0c0;padding:5px 14px;margin:0 0 0 4px;background:#E6E6E2 url(../images/highlight_line.gif) repeat-x top left;}
-	.BTop span{display:block;padding-top:9px;}
-	.BTop:hover{background:#ddd;border:1px solid #aaa;padding-top:9px;height:32px;line-height:32px;}
-	#HeaderB .BTHeading{display:block;color:#4a4a4a;font-size:120%;font-weight:400;padding:0 38px 0 0;line-height:29px;height:33px; }
-	#HeaderB .BTop:hover .BTHeading{color:#222;}
-	.Rhome .BTHeading{ background:transparent url(../images/icon/index_sb.png) no-repeat right top; }
-	.CPindex .BTHeading{ background:transparent url(../images/icon/cp_sb.png) no-repeat right top; }
-	.Dkey .BTHeading{ background:transparent url(../images/icon/lgoutcp_sb.png) no-repeat right top; }
+	
+	.HTI{float:right;margin:-44px 30px -10px auto;height:55px;}
+	.HTI a{float:right;height:32px;overflow:hidden;border:1px solid #D6D6CF;padding:10px 14px;margin:0 0 0 5px;background:#E6E6E2 url(../images/highlight_line.gif) repeat-x top left;}
+	.HTI a:hover{padding-top:11px;background:#F1EEE0}
+	
+
+
+
 	
 	
 	/* footer */

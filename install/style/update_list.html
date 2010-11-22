@@ -1,36 +1,29 @@
-<div class="home" style="width:66%;" dir="{{echo $lang['DIR']}}">
-	<img src="style/images/webdev.png" alt="" />
-		<div class="clr"></div>
+<div class="BoxInner"><div class="BoxTopImg"></div><div class="BoxBody"><div class="inner">
+	<div class="clr"></div>
 	
+	<img src="style/images/webdev.png" alt="update" /><br />
 	{{if (sizeof($GLOBALS['upfiles'])):}}
-		<p style="margin:8px auto;">{{echo $lang['INST_CHOOSE_UPDATE_FILE']}}</p>
-			<div class="clr"></div>
+	<p style="text-align:center;">{{echo $lang['INST_CHOOSE_UPDATE_FILE']}}</p>
 	<form  action="{{echo $_SERVER['PHP_SELF'] . '?step=action_file&amp;' . getlang(1)}}" method="post">
-		<select class="select_version" name="action_file_do" dir="ltr">
+		<select class="SelectVersion" name="action_file_do" dir="ltr">
 			{{foreach($GLOBALS['upfiles'] as $k=>$v):}}
 				<option value="{{echo $v}}">{{echo $v}}</option>
 			{{endforeach}}
 		</select>
-			<div class="clr"></div><br />
-		<input onclick="window.location.href='./index.php?step=choose&amp;{{echo getlang(1)}}';return false;" name="previous" type="submit" value="{{echo $lang['INST_PREVIOUS']}}" />
-		<input name="submitlfile" type="submit" value="{{echo $lang['INST_NEXT']}}" />		
-		
+	<div class="hr"></div>
+		<button onclick="window.location.href='./index.php?step=choose&amp;{{echo getlang(1)}}';return false;" name="previous" type="submit" class="btn"><span>&laquo;  {{echo $lang['INST_PREVIOUS']}}</span></button>
+		<button name="submitlfile" type="submit" class="btn"><span>{{echo $lang['INST_NEXT']}} &raquo;</span></button>
 	</form>
-
 	{{else:}}
-	
 	<div align="center">
-		<table class="up_ver" width="74%">
-			<tr>
-				<td><img src="style/images/ok_version.jpg" alt="ok update version" /></td>
-				<td>
-				<p style="font-size:12px;font-weight:400;">{{echo $lang['INST_UPDATE_CUR_VER_IS_UP']}}</p>
-				<div class="clr"></div><br />
-				<p style="color:green;font-size:21px;">[ {{echo array_search($GLOBALS['config']['db_version'], $GLOBALS['order_update_files'])}} :: {{echo $GLOBALS['config']['db_version']}} ]</p>
-				</td>
-			</tr>
-		</table>
+		<img src="style/images/official_yes.png" alt="ok update version" /><br /><br />
+		<p style="text-align:center;color:green;font-size:20px;">
+			{{echo $lang['INST_UPDATE_CUR_VER_IS_UP']}}
+			<br />
+			<span style="color:red;">[ {{echo array_search($GLOBALS['config']['db_version'], $GLOBALS['order_update_files'])}} :: {{echo $GLOBALS['config']['db_version']}} ]</span>
+		</p>
 	</div>
-		<div class="clr"></div>
 	{{endif;}}
-</div>
+	
+	<div class="clr"></div>			
+</div></div><div class="BoxBottomImg"></div></div>

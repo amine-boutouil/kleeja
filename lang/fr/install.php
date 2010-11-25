@@ -52,8 +52,8 @@
 	$lang['WRONG_EMAIL']							= 'Adresse Email incorrecte!';
 	//
 	
-	$lang['DB_INFO_NW']								= 'Le fichier config.php est manquant, remplissez les champs ci-dessous et kleeja cr&eacute;era automatiquement le fichier dans le r&eacute;pertoire kleeja.';
-	$lang['DB_INFO']								= 'Le fichier config.php est manquant, remplissez les champs ci-dessous et kleeja cr&eacute;era automatiquement le fichier.';
+	$lang['DB_INFO_NW']								= 'Entrez les donnees la base de donnees correctement .. Appuyez ensuite sur Suivant et l,assistant d,exporter le fichier config.php et mettez le dans un repertoire du script principal!';
+	$lang['DB_INFO']								= 'Entrez les donnees la base de donnees';
 	$lang['DB_SERVER']								= 'Host (serveur)';
 	$lang['DB_TYPE']								= 'Type de Database';
 	$lang['DB_TYPE_MYSQL']							= 'MySQL Standard';

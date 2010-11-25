@@ -56,8 +56,8 @@
 	$lang['WRONG_EMAIL']							= 'Nesprávna e-mailová adresa!';
 	//
 	
-	$lang['DB_INFO_NW']								= 'Chýba súbor config.php, vyplňte polia nižšie a Kleeja vytvorí súbor automaticky v adresári Kleeja.';
-	$lang['DB_INFO']								= 'Chýba súbor config.php, vyplňte polia nižšie a Kleeja vytvorí súbor automaticky.';
+	$lang['DB_INFO_NW']								= 'Zadajte databázy informácie správne .. Potom stlačte tlačidlo Ďalšie a sprievodca export config.php súbor a vložte ho do adresára hlavným skriptu!';
+	$lang['DB_INFO']								= 'Zadajte informácie z databázy ..!';
 	$lang['DB_SERVER']								= 'Server MySQL';
 	$lang['DB_TYPE']								= 'Typ databázy';
 	$lang['DB_TYPE_MYSQL']							= 'Štandardná MySQL';

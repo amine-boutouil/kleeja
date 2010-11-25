@@ -52,8 +52,8 @@
 	$lang['WRONG_EMAIL']							= 'Incorrect Email Address!';
 	//
 	
-	$lang['DB_INFO_NW']								= 'Config.php file is missing, fill in the fields below and kleeja will create the file automatically in kleeja\'s directory.';
-	$lang['DB_INFO']								= 'Config.php file is missing, fill in the fields below and kleeja will create the file automatically.';
+	$lang['DB_INFO_NW']								= 'Enter the database information correctly .. Then press Next and the wizard will export the config.php file and put it in a directory the main script !';
+	$lang['DB_INFO']								= 'Enter the database information ..!';
 	$lang['DB_SERVER']								= 'Host';
 	$lang['DB_TYPE']								= 'Database type';
 	$lang['DB_TYPE_MYSQL']							= 'MySQL Standard';

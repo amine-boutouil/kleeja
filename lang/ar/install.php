@@ -12,8 +12,8 @@
 	$lang['INST_AGR_LICENSE']					= 'أوافق على شروط ترخيص إستخدام كليجا .';
 	$lang['INST_NEXT']							= 'التالي';
 	$lang['INST_PREVIOUS']						= 'السابق';
-	$lang['INST_SITE_INFO']						= 'فضلاً قم بإدخال بيانات الموقع';
-	$lang['INST_ADMIN_INFO']					= 'معلومات مدير المركز';
+	$lang['INST_SITE_INFO']						= 'أدخل بيانات المركز ..!';
+	$lang['INST_ADMIN_INFO']					= 'أدخل بيانات مدير المركز ..!';
 	$lang['INST_CHANG_CONFIG']					= 'بعض البيانات المهمه ناقصه إملأ ملف config.php';
 	$lang['INST_CONNCET_ERR']					= 'لا يمكن الإتصال ..';
 	$lang['INST_SELECT_ERR']					= 'لا يمكن الإرتباط بقاعدة البيانات';
@@ -61,7 +61,7 @@
 	$lang['DB_USER']							= 'اسم المستخدم لقاعدة البيانات';
 	$lang['DB_PASSWORD']						= 'كلمة المرور لقاعدة البيانات';
 	$lang['DB_NAME']							= 'إسم قاعدة البيانات';
-	$lang['DB_PREFIX']							= 'بادئة الجداول <span style="font-size:10px;color:#FF0000">[كلمة توضع لتعريف جداول السكربت عن غيرها]</span>';
+	$lang['DB_PREFIX']							= 'بادئة الجداول';
 	$lang['VALIDATING_FORM_WRONG']				= 'يبدو أنك تركت أحد الحقول المطلوبه فارغاً ...';
 	$lang['CONFIG_EXISTS']						= 'تم إيجاد ملف config.php قم بالمتابعه ...';
 	$lang['INST_SUBMIT_CONFIGOK']				= 'أرفع ملف config.php في دليل كليجا الرئيسي وتابع عملية التثبيت ..!!';

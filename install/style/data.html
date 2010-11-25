@@ -1,9 +1,10 @@
-<div class="home" dir="{{echo $lang['DIR']}}" style="text-align:{{echo $lang['DIR']=='rtl'?'right':'left'}};">
-<div class="clr"></div>	
+<div class="BoxInner"><div class="BoxTopImg"></div><div class="BoxBody"><div class="inner">
+<div class="clr"></div>
+
 	<form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=data&amp;' . getlang(1)}}"  onsubmit="javascript:return formCheck(this, Array('sitename','siteurl','sitemail' ,'username', 'password','email' ));">
-		<table class="data_table_install" dir="{{echo $lang['DIR']}}">
+		<table class="DataTable" dir="{{echo $lang['DIR']}}">
 			<tr>
-				<th colspan="2"><img src="style/images/data_site.png" alt="" /> {{echo $lang['INST_SITE_INFO']}}</th>
+				<th colspan="2"><img src="style/images/s-home.png" class="img" alt="" /> {{echo $lang['INST_SITE_INFO']}}</th>
 			</tr>
 			<tr>
 				<td class="tdd">{{echo $lang['SITENAME']}}</td>
@@ -21,35 +22,35 @@
 
 <div class="clr"></div>
 	
-		<table class="data_table_install" dir="{{echo $lang['DIR']}}">
+		<table class="DataTable" dir="{{echo $lang['DIR']}}">
 			<tr>
-				<th colspan="2"><img src="style/images/data_site.png" alt="" />{{echo $lang['INST_ADMIN_INFO']}}</th>
+				<th colspan="2"><img src="style/images/s-user.png" class="img" alt="" />{{echo $lang['INST_ADMIN_INFO']}}</th>
 			</tr>
 			<tr>
 				<td class="tdd">{{echo $lang['USERNAME']}}</td>
-				<td><input name="username" type="text" style="width:35%;" /></td>
+				<td><input name="username" type="text" /></td>
 			</tr>
 			<tr>
 				<td class="tdd">{{echo $lang['PASSWORD']}}</td>
 				<td>
-					<input name="password" type="text" style="width:35%;" />
+					<input name="password" type="text" />
 				</td>
 			</tr>
 			<tr>
 				<td class="tdd">{{echo $lang['PASSWORD2']}}</td>
-				<td><input name="password2" id="password2" type="text" style="width:35%;" /></td>
+				<td><input name="password2" id="password2" type="text" /></td>
 			</tr>
 			<tr>
 				<td class="tdd">{{echo $lang['EMAIL']}}</td>
-				<td><input name="email" id="email" type="text" style="direction:ltr;width:35%;" onchange="return w_email(this.name);" /></td>
+				<td><input name="email" id="email" type="text" style="direction:ltr;" onchange="return w_email(this.name);" /></td>
 			</tr>
 		</table>
 		
 <div class="clr"></div>
 
-		<table class="data_table_install" dir="{{echo $lang['DIR']}}">
+		<table class="DataTable" dir="{{echo $lang['DIR']}}">
 			<tr>
-				<th colspan="2"><img src="style/images/data_site.png" alt="" />{{echo $lang['INST_OTHER_INFO']}}</th>
+				<th colspan="2"><img src="style/images/s-link.png" class="img" alt="" />{{echo $lang['INST_OTHER_INFO']}}</th>
 			</tr>
 			<tr>
 				<td class="tdd">{{echo $lang['URLS_TYPES']}}</td>
@@ -75,11 +76,10 @@
 			</tr>
 		</table>
 		
-<div class="clr"></div>
+		<div class="hr"></div>
+		<button onclick="window.location.href='./install.php?step=check&amp;{{echo getlang(1)}}';return false;" name="previous" type="submit" class="btn"><span>&laquo;  {{echo $lang['INST_PREVIOUS']}}</span></button>
+		<button name="datasubmit" type="submit" class="btn"><span>{{echo $lang['INST_NEXT']}} &raquo;</span></button>
+	</form>
 
-	<center style="margin:20px 0 10px 0;">
-		<input onclick="window.location.href='./install.php?step=check&amp;{{echo getlang(1)}}';return false;" name="previous" type="submit" value="{{echo $lang['INST_PREVIOUS']}}" />
-		<input name="datasubmit" type="submit" value="{{echo $lang['INST_NEXT']}}" />
-	</center>
-</form>
-</div>
+<div class="clr"></div>			
+</div></div><div class="BoxBottomImg"></div></div>

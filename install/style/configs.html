@@ -1,13 +1,13 @@
-<div class="BoxInner"><div class="BoxTopImg"></div><div class="BoxBody"><div class="inner" dir="{{echo $lang['DIR']}}">
+<div class="BoxInner"><div class="BoxTopImg"></div><div class="BoxBody"><div class="inner">
 <div class="clr"></div>	
 	
 {{if(!$GLOBALS['no_config']):}}
 <form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=c&amp;' . getlang(1)}}"  onsubmit="javascript:return formCheck(this, Array('db_server','db_user' ,'db_name'));">
 	<h2><img src="style/images/klj_info.png" class="img" alt="!" />{{echo $lang['DB_INFO']}}</h2>
-	<table class="table_conf">
+	<table class="TableConf" dir="{{echo $lang['DIR']}}">
 		<tr>
-			<td class="td_conf">{{echo $lang['DB_TYPE']}}</td>
-			<td style="text-align:{{echo $lang['DIR']=='rtl'?'right':'left'}};">
+			<td class="TdConf">{{echo $lang['DB_TYPE']}}</td>
+			<td class="TdInput">
 				<select name="db_type" >
 					{{if (function_exists('mysqli_connect')):}}
 					<option value="mysqli">{{echo $lang['DB_TYPE_MYSQLI']}}</option>
@@ -17,27 +17,27 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="td_conf">{{echo $lang['DB_SERVER']}}</td>
-			<td><input name="db_server" type="text" value="localhost" class="input_conf" /></td>
+			<td class="TdConf">{{echo $lang['DB_SERVER']}}</td>
+			<td class="TdInput"><input name="db_server" type="text" value="localhost" class="InputConf" /></td>
 		</tr>
 		<tr>
-			<td class="td_conf">{{echo $lang['DB_NAME']}}</td>
-			<td><input name="db_name" type="text" class="input_conf" /></td>
+			<td class="TdConf">{{echo $lang['DB_NAME']}}</td>
+			<td class="TdInput"><input name="db_name" type="text" class="InputConf" /></td>
 		</tr> 
 		<tr>
-			<td class="td_conf">{{echo $lang['DB_USER']}}</td>
-			<td><input name="db_user" type="text" class="input_conf" /></td>
+			<td class="TdConf">{{echo $lang['DB_USER']}}</td>
+			<td class="TdInput"><input name="db_user" type="text" class="InputConf" /></td>
 		</tr>
 		<tr>
-			<td class="td_conf">{{echo $lang['DB_PASSWORD']}}</td>
-			<td><input name="db_pass" type="text" class="input_conf" /></td>
+			<td class="TdConf">{{echo $lang['DB_PASSWORD']}}</td>
+			<td class="TdInput"><input name="db_pass" type="text" class="InputConf" /></td>
 		</tr>  
 		<tr>
-			<td class="td_conf">{{echo $lang['DB_PREFIX']}}</td>
-			<td><input name="db_prefix" type="text" value="klj_" class="input_conf" /></td>
+			<td class="TdConf">{{echo $lang['DB_PREFIX']}}</td>
+			<td class="TdInput"><input name="db_prefix" type="text" value="klj_" class="InputConf" /></td>
 		</tr>       
 	</table>
-	
+
 	{{if(!$GLOBALS['writeable_path']):}}
 	<div class="notice">
 		<p class="justify"><img src="style/images/inst_notes.png" class="img" alt=" " />{{echo $lang['DB_INFO_NW']}}</p>
@@ -53,7 +53,7 @@
 </form>
 
 	{{if(!$GLOBALS['writeable_path']):}}
-		<div class="clr"></div>
+		<div class="clr"></div><br />
 		<img src="style/images/up_c.png" alt="Upload Config" />
 		<div class="clr"></div><br />
 		<h2 class="h2">{{echo $lang['INST_SUBMIT_CONFIGOK']}}</h2>
@@ -67,7 +67,7 @@
 	{{endif;}}
 
 	{{else:}}
-		<div class="clr"></div>
+		<div class="clr"></div><br />
 		<img src="style/images/check_conf.png" alt=" " />
 		<div class="clr"></div><br />
 		<h2 class="h2">{{echo $lang['CONFIG_EXISTS']}}</h2>

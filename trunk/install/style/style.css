@@ -17,12 +17,12 @@ button.btn span{background:transparent url('style/images/button.gif') no-repeat 
 button.btn:hover{background-position:right -92px}
 button.btn:hover span{background-position:0 top;color:#FCFCF8;}
 .hr{background:url('style/images/hr.png') repeat-x ;clear:both;height:8px;margin:18px 0;}
-.img {margin:0 3px;vertical-align:middle;}
+.img {vertical-align:middle;margin-{{echo $lang['DIR']=='rtl'?'left':'right'}}:7px;}
 .ins_klj{position:fixed;bottom:150px;left:10px;background:url('style/images/Background.gif') no-repeat bottom left fixed;}
 p.justify {text-align:justify;margin-bottom:10px !important;}
-.clr {clear: both;overflow:hidden;height:0;}
+.clr {clear: both;overflow:hidden;height:0;}.hidden {display:none;}
+h2.h2 {background-image: none !important;text-align:center;}
 .Failure {margin:20px;}.Failure h2{background-image: none !important;}
-.hidden {display:none;}
 .notice {margin:15px 0;padding:15px;background:#FAF5F5;border:1px solid #D3AFAF;color:#D11A1A;font-weight:bold;}
 .notice h6{font-size:140%;margin:0 0 10px 0 !important;padding:0 0 5px 0;border-bottom:1px solid #fff;}
 .notice p{color:#333 !important;margin:0 0 3px 0 !important;}
@@ -93,6 +93,15 @@ ul.F_Check p{margin:0 0 0 0 !important;text-indent:24px;}
 li.YesCheck {color:green;border:1px solid #A2D8A2;}
 li.NoCheck {color:red;border:1px solid #FFBFBF;}
 
+.table_conf {width:94%;margin:6px auto;}
+.input_conf {width:220px;direction:ltr;cursor: text;border-left: 1px solid #AFAEAA;border-top: 1px solid #AFAEAA;border-right: 1px solid #D5D5C8;border-bottom: 1px solid #D5D5C8;}
+.input_conf:hover {border: 1px solid #999;}
+.input_conf:focus {background-color:#ffd;border: 1px solid #D26900;}
+.td_conf{width:100%;padding:1px 10px;background-color:#FFF;}
+
+
+
+
 
 
 
@@ -112,11 +121,7 @@ li.NoCheck {color:red;border:1px solid #FFBFBF;}
 
 
 
-.table_conf {width:94%;margin:6px auto;}
-.input_conf {width:220px;direction:ltr;cursor: text;border-left: 1px solid #AFAEAA;border-top: 1px solid #AFAEAA;border-right: 1px solid #D5D5C8;border-bottom: 1px solid #D5D5C8;}
-.input_conf:hover {border: 1px solid #999;}
-.input_conf:focus {background-color:#ffd;border: 1px solid #D26900;}
-.td_conf{width:100%;padding:1px 10px;background-color:#FFF;}
+
 .data_table_install {width:92%;margin:5px auto;border:1px solid #F6E7E0;}
 .tdd {width:20%;text-align:{{echo $lang['DIR']=='rtl'?'left':'right'}};}
 .data_table_install img {vertical-align:middle;padding:0 12px 0 12px;}

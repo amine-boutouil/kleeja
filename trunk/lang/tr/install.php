@@ -53,8 +53,8 @@
 	$lang['WRONG_EMAIL']							= 'Hatalý email adresi';
 	//
 	
-	$lang['DB_INFO_NW']								= 'Config.php dosyasý kayýp, tüm alanlarý doldurursanýz kleeja size config.php yaratacak.';
-	$lang['DB_INFO']								= 'Config.php dosyasý kayýp, tüm alanlarý doldurursanýz kleeja size config.php yaratacak';
+	$lang['DB_INFO_NW']								= 'doğru veritabanı bilgilerini girin .. Daha sonra Next tuşuna basın sihirbaz config.php dosyasını ihraç edecek ve bir dizine koydum ana script!';
+	$lang['DB_INFO']								= 'bilgi veritabanı iletişim girin!';
 	$lang['DB_SERVER']								= 'Host';
 	$lang['DB_TYPE']								= 'Database tipi';
 	$lang['DB_TYPE_MYSQL']							= 'MySQL Standard';

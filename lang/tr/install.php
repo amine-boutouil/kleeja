@@ -37,7 +37,10 @@
 	$lang['INST_CRT_TPL']							= 'Templates tablosu oluþturuldu';
 	$lang['INST_SQL_OK']							= 'SQL Baþarýyla yazýldý ..';
 	$lang['INST_SQL_ERR']							= 'SQL Yazmada hata .. ';
-	$lang['INST_FINISH_SQL']						= 'Kleeja baþarýyla yüklendi, Lütfen INSTALL klasörünü kaldýrýn';
+	$lang['INST_FINISH_SQL']						= 'Kleeja baþarýyla yüklendi';
+	$lang['INST_NOTES']								= 'Installation Notes ..!';
+	$lang['INST_END']								= 'The installation wizard is finished ,, Please remove the INSTALL directory..!';
+	$lang['INST_NOTE_D']							= 'Any observations or problems , please contact with the developers kleeja..!!';
 	$lang['INST_FINISH_ERRSQL']						= 'Oww! hatalar oluþtu gibi gözüküyor, tekrar deneyin.';
 	$lang['INST_KLEEJADEVELOPERS']					= 'Kleeja kullandýðýn için teþekkürler ve bizim tayfamýzdan size iyi þanslar';
 	$lang['SITENAME']								= 'Website Baþlýðý';

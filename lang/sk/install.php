@@ -39,7 +39,10 @@
 	$lang['INST_CRT_TPL']							= 'Tabuľka šablóny bola vytvorená.';
 	$lang['INST_SQL_OK']							= 'Vykonanie SQL bolo úspešné..';
 	$lang['INST_SQL_ERR']							= 'Chyba pri spúšťaní SQL.. ';
-	$lang['INST_FINISH_SQL']						= 'Kleeja bola úspešne nainštalovaná, prosím odstráňte inštalačný adresár.';
+	$lang['INST_FINISH_SQL']						= 'Kleeja bola úspešne nainštalovaná.';
+	$lang['INST_NOTES']								= 'Installation Notes ..!';
+	$lang['INST_END']								= 'The installation wizard is finished ,, Please remove the INSTALL directory..!';
+	$lang['INST_NOTE_D']							= 'Any observations or problems , please contact with the developers kleeja..!!';
 	$lang['INST_FINISH_ERRSQL']						= 'Zdá sa, že nastal problém, skúste to znova.';
 	$lang['INST_KLEEJADEVELOPERS']					= 'Ďakujeme, že používate Kleeja.';
 	$lang['SITENAME']								= 'Názov web stránky';

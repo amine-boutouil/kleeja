@@ -37,6 +37,9 @@
 	$lang['INST_SQL_OK']							= 'Donn&eacute;s SQL ex&eacute;cut&eacute;es ..';
 	$lang['INST_SQL_ERR']							= 'Erreur sur SQL .. ';
 	$lang['INST_FINISH_SQL']						= 'Kleeja a &eacute;t&eacute; install&eacute;e avec succ&egrave;s, S\'il vous pla&icirc;t supprimer le r&eacute;pertoire d\'installation';
+	$lang['INST_NOTES']								= 'Installation Notes ..!';
+	$lang['INST_END']								= 'The installation wizard is finished ,, Please remove the INSTALL directory..!';
+	$lang['INST_NOTE_D']							= 'Any observations or problems , please contact with the developers kleeja..!!';
 	$lang['INST_FINISH_ERRSQL']						= 'Oops! il y a des probl&egrave;mes. Veuillez recommencer.';
 	$lang['INST_KLEEJADEVELOPERS']					= 'Merci d\'utiliser Kleeja et bonne chance de notre &eacute;quipe de d&eacute;veloppement';
 	$lang['SITENAME']								= 'Titre du site';

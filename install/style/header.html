@@ -22,10 +22,10 @@
 	<div id="Header">
 		<div class="header">
 			<ul class="headerIcon">
-				<li><a onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com"><img src="style/images/kleeja.png" alt="" /></a></li>
-				<li><a onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com/forums/"><img src="style/images/help.png" alt="" /></a></li>
-				<li><a onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com/bugs/"><img src="style/images/bug.png" alt="" /></a></li>
-				<li><a href="./."><img src="style/images/install_h.png" alt="" /></a></li>
+				<li><a onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com"><img src="style/images/kleeja.png" title="Go to site kleeja" alt="" /></a></li>
+				<li><a onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com/forums/"><img title="Ask for help in the forums" src="style/images/help.png" alt="" /></a></li>
+				<li><a onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com/bugs/"><img title="Reporting bugs" src="style/images/bug.png" alt="" /></a></li>
+				<li><a href="./."><img title="Return to Installation" src="style/images/install_h.png" alt="" /></a></li>
 			</ul>
 			<div class="BoxLang">
 			{{if(((isset($_GET['step']) && $_GET['step'] != 'language') && (strpos('index.php', $_SERVER['PHP_SELF'])=== false && isset($_GET['step']))) OR (isset($_GET['step']) && $_GET['step'] == 'license' || $_GET['step'] == 'action_file') ):}}

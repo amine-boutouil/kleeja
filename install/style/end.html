@@ -1,15 +1,23 @@
-<div class="home" dir="{{echo $lang['DIR']}}" style="text-align:center;">
-	<div class="inst_finish">
-		<div style="text-align:center;"><img src="style/images/wink.png" alt="" /></div>
-		<p>{{echo $lang['INST_FINISH_SQL']}}</p>
-		<div class="clr"></div>
-		<p style="color:red;margin-top:5px;">{{echo $lang['INST_KLEEJADEVELOPERS']}}</p>
-		<div class="clr"></div>
-		<center style="margin:10px 0;">
-			<button type="button" onclick="window.location.href='../index.php';" class="button">{{echo $lang['INDEX']}}</button>
-			<button type="button" onclick="window.location.href='../admin/';" class="button">{{echo $lang['ADMINCP']}}</button>
-		</center>
-		<div class="clr"></div>
-		<p><a style="color:gray;" href="http://www.kleeja.com">www.kleeja.com</a></p>
+<div class="BoxInner"><div class="BoxTopImg"></div><div class="BoxBody"><div class="inner">
+<div class="clr"></div>
+
+	<img src="style/images/end.jpg" alt="" />
+	<h2 class="h2">{{echo $lang['INST_FINISH_SQL']}}</h2>
+	
+	<div class="notice">
+		<h6><img src="style/images/info2.png" class="img" alt=" " /> {{echo $lang['INST_NOTES']}}</h6>
+		<p><img src="style/images/inst_notes.png" class="img" alt=" " />{{echo $lang['INST_END']}}<br />
+			<img src="style/images/inst_notes.png" class="img" alt=" " />{{echo $lang['INST_NOTE_D']}}
+		</p>
 	</div>
-</div>
+	
+	<div class="notice TN">{{echo $lang['INST_KLEEJADEVELOPERS']}}</div>
+		
+	<div class="hr"></div>
+
+	<button type="button" class="btn" onclick="window.location.href='../index.php';"><span>{{echo $lang['INDEX']}}</span></button>
+	<button type="button" class="btn" onclick="window.location.href='../admin/';"><span>{{echo $lang['ADMINCP']}}</span></button>
+	<button type="button" class="btn" onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com"><span>kleeja.com</span></button>
+	
+<div class="clr"></div>			
+</div></div><div class="BoxBottomImg"></div></div>

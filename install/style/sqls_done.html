@@ -1,26 +1,31 @@
-<div class="home SQLDoneBox" dir="{{echo $lang['DIR']}}" style="text-align:{{echo $lang['DIR']=='rtl'?'right':'left'}};">
-	<div class="sql_done_box">
-		<ul>
-		{{foreach($GLOBALS['sqls_done'] as $sql):}}
-			<li class="sql_done"><img src="style/images/ok.png" style="vertical-align:middle;padding:0 2px;" alt="ok" /> {{echo $sql}}</li>
-		{{endforeach;}}
-		{{foreach($GLOBALS['sql_err'] as $sql):}}
-			<li class="sql_error"><img src="style/images/error.png" style="vertical-align:middle;padding:0 2px;" alt="!" /> {{echo $sql}}</li>
-		{{endforeach;}}
-		</ul>
+<div class="BoxInner"><div class="BoxTopImg"></div><div class="BoxBody"><div class="inner">
+<div class="clr"></div>
+
+	<div id="SQLDoneBox" style="width:80%;margin:10px auto">
+		<div id="scroll_div">
+			<ul>
+				{{foreach($GLOBALS['sqls_done'] as $sql):}}
+				<li><img src="style/images/ok.png" class="img" alt=" " /> {{echo $sql}}</li>
+				{{endforeach;}}
+				
+				{{foreach($GLOBALS['sql_err'] as $sql):}}
+				<li><img src="style/images/ok.png" class="img" alt=" " /> {{echo $sql}}</li>
+				{{endforeach;}}
+			</ul>
+		</div>
 	</div>
+
 	{{if (!$GLOBALS['err']):}}
-	<center>
-		<form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=plugins&' . getlang(1)}}">
-			<input name="agres" type="submit" value="{{echo $lang['INST_NEXT']}}"/>
-		</form>
-	</center>
+	<div class="hr"></div>
+	<form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=plugins&' . getlang(1)}}">
+		<button name="agres" type="submit" class="btn"><span>{{echo $lang['INST_NEXT']}} &raquo;</span></button>
+	</form>
 	{{else:}}
-	<div class="box_msg_error">
-		<img src="style/images/error_sqls.png" style="vertical-align:middle;margin:0 5px;" alt="" />
-		<span>{{echo $lang['INST_FINISH_ERRSQL']}}</span>  <a onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com">kleeja.com</a>
-		<br /><br />
+	<div class="notice">
+		<p class="error2"><img src="style/images/k_info.png" class="img" alt=" " />{{echo $lang['INST_FINISH_ERRSQL']}}</p>
 		<textarea rows="3" style="width:98%;direction:ltr">{{echo $GLOBALS['errors']}}</textarea>
 	</div>
 	{{endif;}}
-</div>
+
+<div class="clr"></div>			
+</div></div><div class="BoxBottomImg"></div></div>

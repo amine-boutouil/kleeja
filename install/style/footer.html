@@ -11,23 +11,18 @@ $(document).ready(function ()
     var elem = $('#scroll_div');
     var inner = $('#scroll_div > .inner');
     if ( Math.abs(inner.offset().top) + elem.height() + elem.offset().top >= inner.outerHeight() ) { }
-});
 
-	   
-function agree () {
-		var agrec = document.getElementById('agrec');
-		var agres = document.getElementById('agres');
-		if (agrec.checked) { agres.disabled= '';}else{agres.disabled= 'disabled';}};
+});
 
 function w_email(l)
 {
-		var m = document.getElementById(l);
-		if (m.value.indexOf("@") == -1 ||m.value.indexOf(".") == -1 || m.value.length < 7 ) 
-		{
-			alert("{{echo $lang['WRONG_EMAIL']}}");
-			m.focus();
-		}
+    var m = document.getElementById(l);
+    if (m.value.indexOf("@") == - 1 || m.value.indexOf(".") == - 1 || m.value.length < 7 ) {
+        alert("{{echo $lang['WRONG_EMAIL']}}");
+        m.focus();
+    }
 }
+
 
 //By JavaScript Kit (http://javascriptkit.com)
 function checkrequired(which)

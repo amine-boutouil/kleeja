@@ -1,29 +1,35 @@
 <div class="BoxInner"><div class="BoxTopImg"></div><div class="BoxBody"><div class="inner">
 <div class="clr"></div>
 
-	<div id="SQLDoneBox" style="width:80%;margin:10px auto">
+	{{if (!$GLOBALS['err']):}}
+	<div id="SQLDoneBox">
 		<div id="scroll_div">
 			<ul>
 				{{foreach($GLOBALS['sqls_done'] as $sql):}}
 				<li><img src="style/images/ok.png" class="img" alt=" " /> {{echo $sql}}</li>
 				{{endforeach;}}
-				
-				{{foreach($GLOBALS['sql_err'] as $sql):}}
-				<li><img src="style/images/ok.png" class="img" alt=" " /> {{echo $sql}}</li>
-				{{endforeach;}}
 			</ul>
 		</div>
 	</div>
-
-	{{if (!$GLOBALS['err']):}}
 	<div class="hr"></div>
 	<form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=plugins&' . getlang(1)}}">
 		<button name="agres" type="submit" class="btn"><span>{{echo $lang['INST_NEXT']}} &raquo;</span></button>
 	</form>
+	
 	{{else:}}
+	<div id="SQLErrBox">
+		<div id="scroll_div">
+			<ul>
+				{{foreach($GLOBALS['sql_err'] as $sql):}}
+				<li style="color:red"><img src="style/images/error.png" class="img" alt=" " /> {{echo $sql}}</li>
+				{{endforeach;}}
+			</ul>
+		</div>
+	</div>
+	<div class="hr"></div>
 	<div class="notice">
-		<p class="error2"><img src="style/images/k_info.png" class="img" alt=" " />{{echo $lang['INST_FINISH_ERRSQL']}}</p>
-		<textarea rows="3" style="width:98%;direction:ltr">{{echo $GLOBALS['errors']}}</textarea>
+		<p class="error2"><img src="style/images/info2.png" class="img" alt=" " />{{echo $lang['INST_FINISH_ERRSQL']}}</p>
+		<textarea rows="4" style="width:98%;direction:ltr">{{echo $GLOBALS['errors']}}</textarea>
 	</div>
 	{{endif;}}
 

@@ -113,9 +113,11 @@
 	#Logo{float:left;margin:-14px 0 20px 8px;padding:10px;}
 	#Logo a{background:transparent url(../images/logo.png) no-repeat 0 0;display:block;height:69px;width:292px}
 	
-	.HTI{float:right;margin:-44px 30px -10px auto;height:55px;}
+	.HTI{float:left;margin:-25px 0 0 0 ;height:55px;}
 	.HTI a{float:right;height:32px;overflow:hidden;border:1px solid #D6D6CF;padding:10px 14px;margin:0 0 0 5px;background:#E6E6E2 url(../images/highlight_line.gif) repeat-x top left;}
+	a.HTI_HOME{padding:10px 70px}
 	.HTI a:hover{padding-top:11px;background:#F1EEE0}
+	
 	
 
 
@@ -179,11 +181,11 @@
 	a.expand_thumbnail:hover,a.expand_thumbnail2:hover{background-position:0 -64px}
 
 	/* ribbon */
-	.ribbon,.ribbon .wrapAround,.ribbon .tab{height:52px;overflow:hidden;}
+	.ribbon,.ribbon .wrapAround,.ribbon .tab{height:52px;overflow:hidden;position:relative;}
 	.ribbon{margin:-14px -20px 10px -37px;width:700px}
 	.ribbon .wrapAround{background:transparent url(../images/box/ribbon-wrap.png) no-repeat 0 -104px;float:left;width:52px;display:block;}
-	.ribbon .tab{background:transparent url(../images/box/ribbon.png) no-repeat right;float:left;width:632px}
-	.ribbon span {font-weight:700;color:#F5E8D3;margin:17px 25px 0 40px;font-size:140%;text-shadow:#884005 1px 1px 1px}
+	.ribbon .tab{background:transparent url(../images/box/ribbon.png) no-repeat right;float:left;width:632px;}
+	.ribbon span {font-weight:700;color:#F5E8D3;margin:17px 25px 0 40px;font-size:140%;text-shadow:#884005 1px 1px 1px;}
 	.ribbon span.TitleSub {color:#FFF !important;font-size:100%;margin:16px 0 0 20px}
 	.ribbon img.TSubImg{width:64px;height:74px;position:absolute;top:10px;left:30px;z-index:701;}
 
@@ -287,9 +289,9 @@
        /* CHOOSING STAGE */
         #ConfigTypesList{width:100%;margin:20px auto;}
         .ConfigTypesList{float:right;border:1px solid #D9D4BD;margin:0 25px 25px 0;cursor:pointer;text-align:center;}
-        .TypeLink{float:right;width:150px;height:150px;padding:15px;overflow:hidden;border:1px solid #fff;background:#F1EEE0;}
+        .TypeLink{float:right;width:150px;height:90px;padding:15px;overflow:hidden;border:1px solid #fff;background:#F1EEE0;}
         .TypeLink span{display:block;padding-top:14px !important;}
-        .TypeLink:hover{background:#E6E0C8;border-color:#E6E0C8;color:#000;padding-top:16px;height:149px;}
+        .TypeLink:hover{background:#E6E0C8;border-color:#E6E0C8;color:#000;}
         #ConfigTypesList .BTHTypeLink{display:block;color:#888;font-size:120%;font-weight:400;padding:16px 0 15px 0;height:40px;line-height:20px; }
         #ConfigTypesList .TypeLink:hover .BTHTypeLink{color:#000;}
         .title_general_conf1gs {height:40px;

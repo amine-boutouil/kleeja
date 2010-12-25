@@ -1,0 +1,42 @@
+<!-- start ban template  -->
+<div id="boxs">
+	<!-- Section Title  -->
+	<div class="ribbon MarginTop"><div class="wrapAround"></div>
+		<div class="tab">
+			<img class="TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/ban_button.png" alt="" />
+			<span class="right">{lang.R_BAN}</span>
+		</div>
+	</div>
+	<div class="clr"></div>
+	
+	<!-- start form  -->
+	<form method="post" action="{action}">
+
+	<h2>{lang.BAN_EXP1}</h2>
+
+	<!-- start clear  -->
+	<div class="clr"></div><br />
+	<!-- end clear  -->
+
+	<!-- start table no hover  -->
+	<textarea name="ban_text" rows="2" cols="20" style="width:99%; height: 100px;direction:ltr;">{ban}</textarea>
+	<!-- end table no hover  -->
+
+	<!-- start clear  -->
+	<div class="clr"></div><br />
+	<!-- end clear  -->
+
+	<!--  notice  -->	
+	<span>{lang.BAN_EXP2}</span>
+
+
+	<!-- start clear  -->
+	<div class="clr"></div><br />
+
+	<!-- button -->
+	<p class="left MarginBottom"><button type="submit" id="submit" name="submit" class="btn"><span>{lang.UPDATE_BAN}</span></button></p>
+	
+	{H_FORM_KEYS}
+	</form><!-- end form  -->
+
+</div><!-- end ban template  -->

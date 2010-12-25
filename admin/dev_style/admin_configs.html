@@ -1,0 +1,51 @@
+﻿<!-- start setting template  -->
+<div id="boxs">
+
+	<!-- Section Title  -->
+	<div class="ribbon MarginTop"><div class="wrapAround"></div>
+		<div class="tab">
+			<img class="TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/options_button.png" alt="" />
+			<span class="right">{lang.R_CONFIGS}</span>
+		</div>
+	</div>
+	<div class="clr"></div>
+	
+	<!--- START CHOOSING STAGE -->
+	<IF NAME="SHOW_CH_STAGE">
+
+		<div id="ConfigTypesList">
+			<LOOP NAME="typesnavi">
+            <div class="ConfigTypesList" onclick="javascript:get_kleeja_link('{{typelink}}', '#main_container');">
+                <a class="TypeLink" href="{{typelink}}" onclick="javascript:get_kleeja_link('{{typelink}}', '#main_container'); return false;">
+                    <img src="{{typeicon}}" alt="" />
+                    <span class="BTHTypeLink">{{typetitle}}</span>
+                </a>
+            </div>
+			</LOOP>
+		</div>
+
+	<div class="clr"></div><!-- clear -->
+	
+	<ELSE><!--- / END CHOOSING STAGE -->
+	
+	<!--- START EDIT STAGE -->
+	<form method="post" action="{action}" id="configs_form">
+	 <!-- admin configs tr extra begin -->
+	{options}
+	<!-- admin configs tr extra -->
+
+	<div class="clr"></div><br /><!-- clear -->
+
+	<!-- button -->
+	<p class="left MarginBottom">
+		<input type="hidden" name="submit" value="1" />
+		<button type="submit" id="submit" name="_submit_" class="btn onclick='javascript:submit_kleeja_data('#configs_form', '#main_container'); return false;'"><span>{n_submit}</span></button>
+	</p>
+
+	{H_FORM_KEYS}
+	
+	</form>
+	</IF>
+	<!--- / END EDIT STAGE -->
+
+</div><!-- end setting template  -->

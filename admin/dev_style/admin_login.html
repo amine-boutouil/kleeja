@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="{lang.DIR}">
+<head>
+	<title>{lang.LOGIN} - {lang.KLEEJA_CP} - {config.sitename}</title>
+	<meta http-equiv="Content-Language" content="ar" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="robots" content="noindex, follow" />
+	<link rel="shortcut icon" href="{STYLE_PATH_ADMIN}images/favicon.ico" />
+	<link rel="icon" type="image/gif" href="{STYLE_PATH_ADMIN}images/favicon.gif" />
+	<link rel="apple-touch-icon" href="{STYLE_PATH_ADMIN}images/apple-touch-icon.png" />
+	<link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH_ADMIN}css/login_stylesheet.css" />
+	<IF NAME="{lang.DIR}==ltr"><style type="text/css">input[type="submit"] {float:right;}.site_name a:hover{padding-right:0;padding-left:10px;}.site_name img,.cp_kleeja img{padding-left:0;padding-right:8px;}.submit_go {float:right;}.system-message div.error ul li{background-position:left top;}.cp_kleeja{font-size:18px;}</style></IF>
+	<IS_BROWSER="ie6"><link rel="stylesheet" type="text/css" href="{STYLE_PATH_ADMIN}css/ie_6.css" /></IS_BROWSER>
+	<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.min.js"></script>
+	<script type="text/javascript">
+	<!--
+		$(document).ready(function() {
+			hash = window.location.hash.replace('#!', '');
+			if(hash != '')
+			{
+				$('#login_form').attr('action', $('form').attr('action') + '#!' + hash);
+			}
+		});
+	//-->
+	</script>
+</head>
+<body id="no_ie6">
+	<div class="site_name"><a href="{config.siteurl}" title="{lang.RETURN_HOME}"><img src="{STYLE_PATH_ADMIN}images/login/go_back_home.gif" alt="{config.sitename}" />{lang.RETURN_HOME} .. !</a></div>
+	<div class="divline"></div>
+	<div class="logo_cp"><h1><a href="{config.siteurl}" title="{lang.RETURN_HOME}"><img src="{STYLE_PATH_ADMIN}images/logo.png" alt="kleeja" /></a></h1></div>
+	<div class="box">
+		<div class="cp_kleeja"><img src="{STYLE_PATH_ADMIN}images/login/Sec_go.gif" alt="stop here kleeja" />{lang.KLEEJA_CP} ..!</div>
+		<hr />
+		<form action="{action}" method="post" style="clear: both;" id="login_form">
+			<label>{lang.USERNAME}</label>
+				<input type="text" name="lname" value="{username}" />
+			<div class="clr"></div><br />
+			<label>{lang.PASSWORD}</label>
+				<input type="password" name="lpass_{KEY_FOR_PASS}" value="" />
+			<div class="clr"></div>
+				<input class="submit_go" type="submit" name="submit" value="{lang.LOGIN}" />
+			{H_FORM_KEYS}
+			<input type="hidden" name="kid" value="{KEY_FOR_WEE}" />
+			<div class="clr"></div>
+		</form>
+		<IF NAME="err"><div class="clr"></div><div class="system-message"><div class="error"><ul><li><p>{errs}</p></li></ul></div></div><div class="clr"></div></IF>
+	</div>
+	<div class="Powered">Powered by <a onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com" title="Powered by kleeja">Kleeja</a></div>
+	<div class="web2">XHTML | CSS</div>
+</body>
+</html>

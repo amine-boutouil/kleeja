@@ -1,0 +1,51 @@
+<!-- start language template  -->
+<div id="boxs">
+	<!-- Section Title  -->
+	<div class="ribbon MarginTop"><div class="wrapAround"></div>
+		<div class="tab">
+			<img class="TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/langs_button.png" alt="" />
+			<span class="right">{lang.R_LANGS}</span>
+		</div>
+	</div>
+	<div class="clr"></div><br />
+
+	<form action="{action2}" method="post">
+		{lang.LANGUAGE}  
+		<select name="lang" onchange="submit()">
+			{lngfiles}
+		</select>
+		  {lang.UPDATE}
+	</form>
+	
+	<div class="clr"></div><br /><!-- clear -->
+
+	<form method="post" action="{action}">
+
+	<table style="width:100%;text-align:center">
+	<IF NAME="no_results">
+	...
+	<ELSE>
+	<LOOP NAME="arr">
+		<tr style="background-color:<RAND="#D8EBFD","#fff">" class="">
+			<td>#<em>{{lang_id}}</em></td>
+			<td><span class="s_box_tpls">{{word}}</span></td>
+			<td> <strong>=</strong> </td>
+			<td><label><input type="text" name="t_{{word}}" value="{{trans}}" ></label></td>
+			<td><input type="checkbox" name="del_{{word}}" value="1"> {lang.DELETE}</td>
+		</tr>
+	</LOOP>
+	</IF>
+	</table>
+	
+	<div class="clr"></div><br />
+	<div class="hr"></div><br />
+	
+	<!-- pagination  -->
+	{page_nums}
+	
+	<!-- button -->
+	<p class="left"><button type="submit" id="submit" name="submit" class="btn"><span>{lang.UPDATE}</span></button></p>
+	
+	{H_FORM_KEYS}
+	</form>
+</div><!--  end language template  -->

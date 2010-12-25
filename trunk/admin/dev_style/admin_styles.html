@@ -1,0 +1,71 @@
+<!-- start Styles Template -->
+<div id="boxs">
+	<!-- Section Title  -->
+	<div class="ribbon MarginTop"><div class="wrapAround"></div>
+		<div class="tab">
+			<img class="TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/styles_button.png" alt="" />
+			<span class="right">{lang.R_STYLES}</span>
+		</div>
+	</div>
+	<div class="clr"></div><br />
+	 
+	<table>
+	<tr><td colspan="2">{lang.KLJ_STYLE_INFO}</td></tr>
+	<tr><td colspan="2"><div class="styles_exp">{lang.STYLES_EXP}</div></td></tr>
+	<LOOP NAME="arr">
+	 <tr class="<IF LOOP="is_default" >oblue</IF>">
+		 <td>
+			<img class="imgtitle" src="{STYLE_PATH_ADMIN}images/style_name.png" />{{style_name}}
+		 </td>
+		 <td>
+		 <a href="{{link_show_tpls}}" title="{lang.SHOW_TPLS}">
+		 <img class="imgtitle" src="{STYLE_PATH_ADMIN}images/show_tpls.png" />{lang.SHOW_TPLS}</a> |
+		 <IF LOOP="is_default">
+			{lang.STYLE_IS_DEFAULT} <img class="imgtitle" src="{STYLE_PATH_ADMIN}images/default_style.png" />
+		 <ELSE>
+			<a href="{{link_mk_default}}" title="{lang.MAKE_AS_DEFAULT}">{lang.MAKE_AS_DEFAULT}</a>
+			
+		 </IF>
+		 </td>
+	 </tr>
+	</LOOP>
+	</table>
+
+	<!-- clear -->
+	<div class="clr"></div><br />
+	<div class="hr"></div><br /><br />
+
+	<!-- Section Title  -->
+	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><span class="right">{lang.TPLS_RE_BASIC}</span></div></div>
+	<div class="clr"></div>
+
+	<table>
+	<tr>
+		<td>header.html</td>
+		<td class="s_box_tpls_d" onclick="javascript:location.href='{edit_tpl_action}header.html'">{lang.EDIT}</td>
+	</tr>
+	<tr>
+		<td>index_body.html</td>
+		<td class="s_box_tpls_d" onclick="javascript:location.href='{edit_tpl_action}index_body.html'">{lang.EDIT}</td>
+	</tr>
+	<tr>
+		<td>footer.html</td>
+		<td class="s_box_tpls_d" onclick="javascript:location.href='{edit_tpl_action}footer.html'">{lang.EDIT}</td>
+	</tr>
+	</table>
+
+	<br />
+
+	<!-- button -->
+	<button type="submit" id="submit" name="submit_bk_tpl" class="btn" onclick="javascript:location.href='{show_all_tpls_action}'"><span>{lang.SHOW_TPLS}</span></button>
+	
+	<!-- clear -->
+	<div class="clr"></div><br />
+	<div class="hr"></div><br />
+
+	<!-- note for user .. -->
+	<blockquote class="note"><div><p><em>{lang.NOTE} !</em></p><p>{klj_d_s}</p></div></blockquote>
+
+	<div class="clr"></div><br /><!-- clear -->
+
+</div><!-- END#StylesTemplate -->

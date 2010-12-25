@@ -1,0 +1,117 @@
+/* $Id: admin_header.html 1723 2010-12-13 11:23:49Z saanina $ */
+
+
+/*reset*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
+body {line-height: 1; font: normal normal 12px/1.8em Tahoma, Arial, sans-serif,"Trebuchet MS";}
+ol, ul {list-style: none;}
+blockquote, q {quotes: none;}
+blockquote:before, blockquote:after,
+q:before, q:after {content: '';content: none;}
+:focus {outline: 0;}
+ins {text-decoration: none;}
+del {text-decoration: line-through;}
+table {border-collapse: collapse;border-spacing: 0;}
+
+
+/*common*/
+.clear {
+	clear: both; 
+	overflow:hidden;
+	height: 0;
+}
+
+/*admin_header.html*/
+#wrapper{
+	width:80%;
+	margin:30px auto;
+}
+
+#adm_menu{
+	float:right;
+	width:200px;
+	margin-top : 10px;
+	font-family:tahoma;
+	font-size:12px;
+	text-align:right;
+	border-left:1px solid #ccc;
+	padding-right:4px;
+	color:#000
+
+}
+	#adm_menu ul {
+		margin: 0 0 5px 0;
+		padding: 0 3 2px 0;
+		list-style-type: none;
+		width:100%;
+	}
+	#adm_menu ul li{
+		padding:3px 0;
+	}
+	#adm_menu ul li a {
+		color: #3B3B3B;
+		height: 16px;
+		padding: 4px 3px 4px 14px;
+		text-decoration: none;
+	}
+	#adm_menu ul li:hover {
+		background-color: #F3F3FF;
+		width:100%;
+	}
+	#adm_menu ul li.current{
+		background-color: #E9E9FF;
+		font-weight:bold;	
+	}
+	#adm_menu ul li.seperator{
+		border-top:1px solid #ccc;
+		margin:6px 0;
+	}
+		#adm_menu ul li.seperator:hover{background-color: #fff;}
+	
+	#adm_menu ul li img {
+		margin:0 4px;
+	}
+	#adm_menu ul li span.kbubbles{
+		float:left;
+		padding:0px 7px;
+		text-align:center;
+		background-color:#F3F3FF;
+		font-size:9px;
+	}
+	#adm_menu ul li:hover span.kbubbles{background-color:#fff;}
+	#adm_menu ul li.current span.kbubbles{background-color:#fff; font-weight:normal;}
+	
+#main_container{
+	float:left;
+	width:75%;
+}
+
+#sign_ajax, #sign_ajax_error{
+	display:none;
+}
+
+/*admin_footer.html*/
+#footer-copyright{
+	margin:5px;
+	direction:ltr;
+	font:normal 12px Tahoma;
+	color:#888;
+}
+
+

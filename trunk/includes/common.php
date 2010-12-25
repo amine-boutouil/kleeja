@@ -357,7 +357,7 @@ if(!$config['style'] || empty($config['style']))
 //check h_kay, important for kleeja
 if(empty($config['h_key']))
 {
-	$h_k = sha1(microtime() . rand(1000,9999));
+	$h_k = sha1(microtime() . rand(0, 100));
 	if(!update_config('h_key', $h_k))
 	{
 		add_config('h_key', $h_k);
@@ -366,7 +366,7 @@ if(empty($config['h_key']))
 
 //Global vars for Kleeja
 $STYLE_PATH = PATH . 'styles/' . (trim($config['style_depend_on']) == '' ? $config['style'] : $config['style_depend_on']) . '/';
-$STYLE_PATH_ADMIN  = PATH . 'admin/admin_style/';
+$STYLE_PATH_ADMIN  = defined('DEV_STAGE') ? PATH . 'admin/dev_style/' : PATH . 'admin/admin_style/';
 $THIS_STYLE_PATH = PATH . 'styles/' . $config['style'] . '/';
 	
 //get languge of common

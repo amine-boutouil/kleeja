@@ -1,0 +1,122 @@
+<script type="text/javascript">
+<!--
+jQuery(document).ready(function($){
+	// fancybox plugin
+	$("a.fancybox").attr('rel', 'gallery').fancybox({'titleShow': false,'transitionIn'	: 'elastic', 'transitionOut':'elastic','easingIn':'easeOutBack','easingOut':'easeInBack'});	 
+	
+	// custom checkboxes
+	$('.kcheck input[type=checkbox]').checkbox(); 
+	
+	// preload images
+	$.preload('#Kload img', {placeholder:'{STYLE_PATH_ADMIN}images/ajax-loader.gif',notFound:'{STYLE_PATH_ADMIN}js/fancybox/failerror.jpg',	enforceCache: true,	threshold: 2 });
+
+	$("img.mask").hover(function(){$(this).stop().animate({'opacity': '0'}, 'slow');},function() {$(this).stop().animate({'opacity': '1'}, 'slow');});
+			
+	$('.tip').each(function() {
+	   $(this).qtip({
+		content: $(this).next('.ktip'),
+		position: {at: 'top center',my: 'bottom center', adjust: {y :14,screen: 'flip'}},
+		show: {delay: 500},
+		hide: {fixed: true,	delay: 150},
+		style: {classes: 'ui-tooltip-k',tip: {width: 34,height: 20,	border: 4}}
+	   });
+	});
+
+	//Navigate to pages by arrows
+	$(document).keydown(function(e) {
+		if (!$('#pagination').length) {
+			return;
+		}
+		var current_page = parseInt($('#pagination .current span').html());
+		var is_there_next = $('#pagination .phover').length < 2 && current_page > 1 ? false : true;
+		var current_location = '{action}'.replace(/[&]*page=[0-9]+/i, '').replace(/&&/, '');
+		switch(e.keyCode) { 
+			//left, next
+			case 37:
+				if(!is_there_next){
+					return;
+				}
+				get_kleeja_link(current_location + '&page=' + (current_page+1), '#main_container');
+			break;
+			//right, prev
+			case 39:
+				if(current_page <= 1){
+					return;
+				}
+				get_kleeja_link(current_location + '&page=' + (current_page-1), '#main_container');
+			break;
+		}
+	});
+
+});
+//-->
+</script>
+
+<!-- start temlate displaying images -->
+<div id="boxs">
+	<!-- Section Title  -->
+	<div class="ribbon MarginTop"><div class="wrapAround"></div>
+		<div class="tab">
+			<img class="TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/img_ctrl_button.png" alt="" />
+			<span class="right">{lang.R_IMG_CTRL} ( {current_page} : {total_pages} )</span>
+		</div>
+	</div>
+	<div class="clr"></div><br />
+	
+	<form method="post" action="{action}" name="imgform" id="imgs_form">
+
+	<IF NAME="no_results">
+	<div class="nothing"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/warning_nothing.gif" alt="nothing" />{lang.NOTHING}</div>
+	<ELSE>
+
+	<div class="xthumbs">
+	<LOOP NAME="arr">
+	{{tdnum}}
+	<li id="su[{{id}}]">
+		<a href="{{href}}" class="fancybox tip">
+			<div id="Kload"><img src="{{thumb_link}}" alt="" /></div>
+			<img class="mask" src="{STYLE_PATH_ADMIN}js/fancybox/k_mask.png" alt="" />
+			<img class="expand" src="{STYLE_PATH_ADMIN}js/fancybox/k_mask_hover.png" alt="" />
+		</a>
+		<ul class='ktip' style="display: none;">
+			<li><span>{lang.FILENAME} :</span>{{name}}</li>
+			<li><span>{lang.FILEUPS} :</span> {{ups}}</li>
+			<li><span>{lang.FILESIZE} :</span> {{size}}</li>
+			<li><span>{lang.FILEDATE} :</span> {{time}}</li>
+			<li><span>{lang.BY} :</span> {{user}}</li>
+			<li><span>{lang.IP} :</span> {{ip}}</li>
+		</ul>
+		<p class="kcheck"><input name="del_{{id}}" type="checkbox" value="{{id}}" onclick="change_color(this,'su[{{id}}]', 'kfocus');" rel="_del" /></p>
+	</li>
+	{{tdnum2}}
+	</LOOP>
+	</div>
+
+	<div class="clr"></div><br />
+	<div class="hr"></div><br />
+	
+	<div class="left check_all">[ <a href="javascript:void(0);" onclick="checkAll(document.imgform, '_del', 'su', 'kfocus');">{lang.CHECK_ALL}</a> ]</div>
+	
+	<!-- pagination -->{page_nums}
+
+	<br /><div class="clr"></div>
+
+	<!-- button -->
+	<p class="left MarginBottom">
+		<input type="hidden" name="submit" value="1" />
+		<button type="submit" name="submit" class="btn" onclick="javascript:submit_kleeja_data('#imgs_form', '#main_container', 1); return false;"><span>{lang.DEL_SELECTED}</span></button>
+	</p>
+
+	</IF>
+	
+	{H_FORM_KEYS}
+	</form>
+
+	<!-- do you know ? 
+	<br />
+	<h3>Keyboards Keys /</h3>
+	->	: {lang.NEXT} <br />
+	<-	: {lang.PREV} <br />
+	-->
+
+</div>

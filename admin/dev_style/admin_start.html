@@ -1,1 +1,130 @@
 ﻿
+<!-- start#msgs -->
+<IF NAME="ADM_NOTIFICATIONS">
+<div class="start_page_msgs">
+<ul>
+	<LOOP NAME="ADM_NOTIFICATIONS">
+		<li class="{{msg_type}}" id="{{id}}">{{msg}}</li>
+	</LOOP>
+</ul>
+</div>
+<div class="start_seperator"></div>
+</IF>
+<!-- end#start#msgs -->
+
+<!-- start#userStats -->
+<div class="start_user_stats">
+<h2 class="start_cat">{lang.USER_STAT}</h2>
+<ul class="start_items">
+	<IF NAME="stat_last_file!='0'">
+	<li><span>{lang.LSTFLE_ST} / </span> <a href="{last_file_up_url}" onclick="window.open(this.href,'_blank');return false;">{last_file_up}</a></li>
+	</IF>
+	<IF NAME="last_visit">
+	<li><span>{lang.LAST_VISIT} / </span> {last_visit}</li>
+	</IF>
+	<li>
+		<span>{lang.IMG_LST_VST_SEARCH} / </span>
+		<select class="show_since_time" tabindex="3" onchange="javascript:get_kleeja_link('{h_lst_imgs}' + (Math.round((new Date()).getTime() / 1000) - $(this).val()), '#main_container');">">
+				<option>-----</option>
+				<option value="3600">{lang.HOUR}</option>
+				<option value="18000">{lang.5HOURS}</option>
+				<option value="864000">{lang.DAY}</option>
+				<option value="6048000">{lang.WEEK}</option>
+				<option value="25920000">{lang.MONTH}</option>
+				<option value="31536000">{lang.YEAR}</option>
+		</select>
+	</li>
+	<li>
+		<span>{lang.FLS_LST_VST_SEARCH} / </span>
+		<select class="show_since_time" tabindex="4" onchange="javascript:get_kleeja_link('{h_lst_files}' + (Math.round((new Date()).getTime() / 1000) - $(this).val()), '#main_container');">
+				<option>-----</option>
+				<option value="3600">{lang.HOUR}</option>
+				<option value="18000">{lang.5HOURS}</option>
+				<option value="864000">{lang.DAY}</option>
+				<option value="6048000">{lang.WEEK}</option>
+				<option value="25920000">{lang.MONTH}</option>
+				<option value="31536000">{lang.YEAR}</option>
+		</select>
+	</li>
+</ul>
+</div>
+<!-- end#start#userStats -->
+
+
+<!-- start#generalStats -->
+<div class="start_general_stats">
+<h2 class="start_cat">{lang.GENERAL_STAT}</h2>
+<ul class="start_items">
+	<li><span>{lang.AUSERS_NUM} /</span> {users_number}</li>
+	<IF NAME="config.user_system==1">
+	<li><span>{lang.LAST_REG} /</span> {lst_reg}</li>
+	</IF>
+	<li><span>{lang.AFILES_NUM} /</span> {files_number} {lang.FILE}</li>
+	<li><span>{lang.LSTDELST} /</span> {last_del_fles}</li>
+	<li><span>{lang.AFILES_SIZE_SPACE} /</span> {per1}% [ {files_sizes} ]</li>
+</ul>
+</div>
+<!-- end#start#generalStats -->
+
+
+<!-- start#searchStats -->
+<div class="start_search_stats">
+<h2 class="start_cat">{lang.SEARCH_STAT}</h2>
+<ul class="start_items">
+	<li><span>{lang.LAST_GOOGLE} /</span> {s_last_google}</li>
+	<li><span>{lang.GOOGLE_NUM} /</span> {s_google_num}</li>
+	<li><span>{lang.LAST_YAHOO} /</span> {s_last_yahoo}</li>
+	<li><span>{lang.YAHOO_NUM} /</span> {s_yahoo_num}</li>
+</ul>
+</div>
+<!-- end#start#searchStats -->
+
+<div class="start_seperator"></div>
+
+<!-- start#otherInfo -->
+<div class="start_other_info">
+<h2 class="start_cat">{lang.OTHER_INFO}</h2>
+<ul class="start_items">
+	<li><span>{lang.KLEEJA_VERSION} /</span> {kleeja_version}</li>
+	<li><span>{lang.PHP_VER} /</span> {php_version}</li>
+	<li><span>{lang.MYSQL_VER} /</span> {mysql_version}</li>
+	<li><span>upload_max_filesize /</span> {upload_max_filesize}</li>
+	<li><span>post_max_size /</span> {post_max_size}</li>
+	<li><span>memory_limit /</span> {memory_limit}</li>
+</ul>
+</div>
+<!-- end#otherInfo -->
+
+<!-- start#KleejaTeam -->
+<div class="start_kleeja_team">
+<h2 class="start_cat">{lang.KLEEJA_TEAM}</h2>
+<ul class="start_items">
+	<li><span>saanina</span> [ Abdullrahman M. Al-Shawaiee ] 2007 - 2011</li>
+	<li><span>phpfalcon</span> [ Bader N. Al-Mutairi ] 2009 - 2011</li>
+	<li><span>­Gareeboo</span> [ Mansour A. Kareem AlDouweghri ] 2007 - 2011</li>
+	<li><span>Tar3q</span> [ Abdulrahman E. Al-Harthy] 2009 - 2011</li>
+	<IF NAME="translator_copyrights">
+	<li>{translator_copyrights}</li>
+	</IF>
+</ul>
+</div>
+<!-- end#start#KleejaTeam -->
+
+<!-- start#SQLdebug -->
+<IF NAME="sql_debug">
+<div class="start_sql_debug">
+<h2 class="start_cat">SQL Debug</h2>
+	<div style="direction:ltr;overflow:scroll;height:200px;border:1px #ccc dotted">
+	<table style="">
+	<LOOP NAME="sql_debug">
+	<tr style="color:{{colored}}">
+	<td>{{type}}</td>
+	<td>{{time}}</td>
+	<td>{{content}}</td>
+	</tr>
+	</LOOP>
+	</table>
+	</div>
+</div>
+</IF>
+<!-- end#start#SQLdebug -->

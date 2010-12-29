@@ -25,7 +25,8 @@ var PATH_SPACER = '{STYLE_PATH_ADMIN}images/spacer.gif';
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}js/fancybox/fancybox.js"></script>
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.kleeja.js"></script>
 
-<script type= "text/javascript">/*<![CDATA[*/
+<script type= "text/javascript">
+//<!--
 jQuery(document).ready(function($){
 
 	hash = window.location.hash.replace('#!', '');
@@ -172,7 +173,8 @@ function submit_kleeja_data(FORM_ID, ID, CONFIRM)
 		}
 	});
 }
-/*]]>*/</script> 
+//-->
+</script> 
 
 </head>
 <body>
@@ -181,7 +183,14 @@ function submit_kleeja_data(FORM_ID, ID, CONFIRM)
 <div id="sign_ajax_error">{lang.ERROR_AJAX}<img src="{STYLE_PATH_ADMIN}images/icon/error.png" /></div>
 <!-- start wrapper -->
 <div id="wrapper">
+	<!-- header -->
+	<div id="header">
+			<div id="user_welcome"><img src="{STYLE_PATH_ADMIN}images/logo_small.gif" />&nbsp; {lang.WELCOME} : {username}, {lang.LAST_VISIT} : {last_visit}</div>
+	</div>
 
+	<div class="clear"></div>
+	
+	<!-- menu -->
 	<div id="adm_menu">
 		<ul>
 			<li id="c_start" <IF NAME="{go_to} eq start">class="current"</IF>>

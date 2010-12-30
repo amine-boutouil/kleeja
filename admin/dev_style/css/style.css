@@ -36,23 +36,37 @@ table {border-collapse: collapse;border-spacing: 0;}
 	overflow:hidden;
 	height: 0;
 }
+body{
+	
+	background:#EFEFEF url('../images/common/mainbg.gif') repeat-x;
+}
 
 /*admin_header.html*/
 #wrapper{
 	width:80%;
-	margin:30px auto;
+	margin:7px auto;
+}
+
+#borders{
+	border:0.1em solid #D5D5C8;
+	padding-bottom:5px;
+	padding-left:5px;
+	background-color:#fff;
 }
 
 #header{
 	width:100%;
-	padding-bottom:40px;	
+	padding-bottom:60px;
+	color:#fff;
 } 
 
 	#user_welcome{
 		float:right;
-		color:#666;
 	}
-		
+	#loading_sign{
+		float:left;
+		text-align:right;
+	}
 	
 #adm_menu{
 	float:right;
@@ -60,7 +74,7 @@ table {border-collapse: collapse;border-spacing: 0;}
 	font-size:12px;
 	text-align:right;
 	border-left:1px solid #ccc;
-	padding-right:4px;
+	
 	color:#000
 
 }
@@ -100,7 +114,7 @@ table {border-collapse: collapse;border-spacing: 0;}
 		float:left;
 		padding:0px 7px;
 		text-align:center;
-		background-color:#F3F3FF;
+		background-color:#E9E9FF;
 		font-size:9px;
 	}
 	#adm_menu ul li:hover span.kbubbles{background-color:#fff;}
@@ -109,7 +123,6 @@ table {border-collapse: collapse;border-spacing: 0;}
 #main_container{
 	float:left;
 	width:78%;
-	margin-top:-20px;/*FIXME*/
 }
 
 #sign_ajax, #sign_ajax_error{
@@ -119,11 +132,10 @@ table {border-collapse: collapse;border-spacing: 0;}
 /*admin_footer.html*/
 #footer{
 	height:100px; 
-	clear:both;
-	margin-top:20px;	
+	clear:both;	
 	font-size:10px;
 	color:#666;
-	border-top: 1px solid #ccc;
+
 } 
 	#footer .left {
 			width:40%;

@@ -12,15 +12,13 @@
 </IF>
 <!-- end#start#msgs -->
 
+
 <!-- start#userStats -->
 <div class="start_user_stats">
-<h2 class="start_cat">{lang.USER_STAT}</h2>
+<h2 class="start_cat">{lang.WELCOME} {username}, {lang.LAST_VISIT} : {last_visit}</h2>
 <ul class="start_items">
 	<IF NAME="stat_last_file!='0'">
 	<li><span>{lang.LSTFLE_ST} / </span> <a href="{last_file_up_url}" onclick="window.open(this.href,'_blank');return false;">{last_file_up}</a></li>
-	</IF>
-	<IF NAME="last_visit">
-	<li><span>{lang.LAST_VISIT} / </span> {last_visit}</li>
 	</IF>
 	<li>
 		<span>{lang.IMG_LST_VST_SEARCH} / </span>

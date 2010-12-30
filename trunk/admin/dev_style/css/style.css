@@ -19,7 +19,7 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 	vertical-align: baseline;
 	background: transparent;
 }
-body {line-height: 1; font: normal normal 12px/1.8em Tahoma, Arial, sans-serif,"Trebuchet MS";}
+body {line-height: 1;}
 ol, ul {list-style: none;}
 blockquote, q {quotes: none;}
 blockquote:before, blockquote:after,
@@ -37,8 +37,9 @@ table {border-collapse: collapse;border-spacing: 0;}
 	height: 0;
 }
 body{
-	
-	background:#EFEFEF url('../images/common/mainbg.gif') repeat-x;
+	color:#333;
+	 font: normal normal 12px/1.6em Tahoma, Arial, sans-serif,"Trebuchet MS";
+	background:#EFEFEF url('../images/common/345.jpg') repeat;
 }
 
 /*admin_header.html*/
@@ -48,20 +49,29 @@ body{
 }
 
 #borders{
-	border:0.1em solid #D5D5C8;
+	border:0.1em solid #0071E9;
 	padding-bottom:5px;
 	padding-left:5px;
 	background-color:#fff;
+	-webkit-border-radius: 20px;
+	-webkit-border-top-right-radius: 0;
+	-moz-border-radius: 20px;
+	-moz-border-radius-topright: 0;
+	border-radius: 20px;
+	border-top-right-radius: 0;
 }
 
 #header{
 	width:100%;
 	padding-bottom:60px;
-	color:#fff;
+	color:#666;
 } 
 
 	#user_welcome{
 		float:right;
+		background:transparent url('../images/logo_s.png') no-repeat;
+		width:300px;
+		height:100px;
 	}
 	#loading_sign{
 		float:left;
@@ -71,10 +81,9 @@ body{
 #adm_menu{
 	float:right;
 	width:20%;
-	font-size:12px;
+	font-size:11px;
 	text-align:right;
 	border-left:1px solid #ccc;
-	
 	color:#000
 
 }
@@ -85,7 +94,7 @@ body{
 		width:100%;
 	}
 	#adm_menu ul li{
-		padding:3px 0;
+		padding:2px 0;
 	}
 	#adm_menu ul li a {
 		color: #3B3B3B;
@@ -182,13 +191,11 @@ body{
 	padding:1px 33px 1px 1px;
 	margin-bottom:4px;
 	background:transparent no-repeat 99% 50%;
-	border:1px solid #ccc;
 	color:#373737;
 }
 
 .start_page_msgs ul li.error{
 	background-image:url('../images/common/error.png');
-	border-color:#FACBCB;
 }
 .start_page_msgs ul li.info	{
 	background-image:url('../images/common/information.png');
@@ -204,6 +211,7 @@ h2.start_cat{
 	background:transparent url('../images/common/cat.png') no-repeat 100% 50%;
 	padding-right:22px;
 	margin:10px 0;
+	color:#368396;
 }
 
 ul.start_items{

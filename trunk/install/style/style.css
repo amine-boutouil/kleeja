@@ -1,10 +1,10 @@
-/*	--------------------------------------------------
+/*
 	package:		Kleeja  copyright(c)2007-2011
 	version:		1.0.0
 	URL:			http://www.kleeja.com
-	$Id: install/style/style.css 1720 2010-11-28 21:58:46Z ALTar3Q $
-	--------------------------------------------------
+	$Id: style.css 1720 2010-11-28 21:58:46Z ALTar3Q $
 */
+
 * {padding:0;margin:0;}
 body {background:url('style/images/bg.png') repeat fixed;font-family: Tahoma, Arial, Verdana, sans-serif, "Lucida Grande", "Lucida Sans Unicode";font-weight:bold;font-size:100%;line-height: 1.5em;margin:0px auto;text-align: center;text-shadow:#fff 0px 1px 1px;}
 input ,select,textarea{padding:2px;font-family: Tahoma, Arial, Verdana, sans-serif, "Lucida Grande", "Lucida Sans Unicode";font-size:100%;font-weight: 400;vertical-align:middle}
@@ -22,7 +22,6 @@ button.btn:hover{background-position:right -92px}
 button.btn:hover span{background-position:0 top;color:#FCFCF8;}
 button.dbd{font:bold 100% tahoma;margin:-5px 5px 0 -6px;outline:none;padding:0 35px 0 0;text-align:center;cursor:pointer;overflow:visible;position:relative;}
 button.dbd span{height:20px;line-height:1.2;padding:6px 0 0 35px;display:block;position:relative;white-space:nowrap;margin-top:-1px;}
-
 .hr{background:url('style/images/hr.png') repeat-x ;clear:both;height:8px;margin:18px 0;}
 .img {vertical-align:middle;margin-{{echo $lang['DIR']=='rtl'?'left':'right'}}:7px;}
 .ins_klj{width:200px;height:300px;position:fixed;bottom:140px;left:10px;background:url('style/images/ins_klj.png') no-repeat left center;}

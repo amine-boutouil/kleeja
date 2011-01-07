@@ -1,9 +1,7 @@
 <div class="BoxInner"><div class="BoxTopImg"></div><div class="BoxBody"><div class="inner">
 	<div class="clr"></div>
-
-	<div id="SQLDoneBox">
-		<div id="scroll_div">
-			<ul>
+		<div id="Scro11">
+			<ul class="inside">
 				{{foreach($GLOBALS['update_msgs_arr'] as $m):}}
 				<li><img src="style/images/ok.png" class="img" alt="ok" /> {{echo $m}}</li>
 				{{endforeach;}}
@@ -12,60 +10,29 @@
 				{{endforeach;endif;}}
 			</ul>
 		</div>
-	</div>
-	
 	<div class="hr"></div>
-	
 	<div class="notice">
-		<h6><img src="style/images/info2.png" class="img" alt=" " /> {{echo $lang['INST_NOTES_UPDATE']}} :</h6>
-		<p>
-			<img src="style/images/inst_notes.png" class="img" alt=" " />{{echo $lang['INST_NOTE_RC6_TO_1.0.0']}}
-			<br />
-			<img src="style/images/inst_notes.png" class="img" alt=" " />{{echo $lang['INST_UPDATE_IS_FINISH']}}
-		</p>
+		<h6><img src="style/images/info2.png" class="img" alt="" /> {{echo $lang['INST_NOTES_UPDATE']}} :</h6>
+		<p><img src="style/images/inst_notes.png" class="img" alt="" />{{echo $lang['INST_NOTE_RC6_TO_1.0.0']}}</p>
+		<p><img src="style/images/inst_notes.png" class="img" alt="" />{{echo $lang['INST_UPDATE_IS_FINISH']}}</p>
 	</div>
-	
-	<div class="notice TN">{{echo $lang['INST_KLEEJADEVELOPERS']}}</div>
-	
+	<div class="notice TN"><p>{{echo $lang['INST_KLEEJADEVELOPERS']}}</p></div>
 	<div class="hr"></div>
-	
 	<button type="button" class="btn" onclick="window.location.href='../index.php';"><span>{{echo $lang['INDEX']}}</span></button>
 	<button type="button" class="btn" onclick="window.location.href='../admin/';"><span>{{echo $lang['ADMINCP']}}</span></button>
-	<button type="button" class="btn" onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com"><span>kleeja.com</span></button>
-	
-	
-<!--/ 
-	
-	{{if($GLOBALS['complete_upate']):}} 
-		<div class="notice"><img src="style/images/info2.png" class="img" alt=" " /> {{echo $lang['INST_UPDATE_IS_FINISH']}}</div>
-		<div class="clr"></div>
-		<p style="font-size:12px;color:#1A1AB1;margin-top:5px;">{{echo $lang['INST_NOTES_UPDATE']}} :</p>
-		<div class="clr"></div>
-		
-		{{if(is_array($GLOBALS['NOTES_CUP'])):foreach($GLOBALS['NOTES_CUP'] as $i=>$m):}}
-		
-		<div class="sql_done_box">
-			<ul>
-				<li><img src="style/images/ok.png" style="vertical-align:middle;padding:0 6px;" alt="ok" />{{echo $i;}} - {{echo $m}} </li>
-			</ul>
-		</div>
-		{{endforeach;endif;}}
-		
-	{{else:}}
-	
-		<p style="font-weight:700;text-align:center;color:#C71919;">{{echo $lang['INST_KLEEJADEVELOPERS']}}</p>
-		<br />
-		<center style="margin:10px 0;">
-			<button type="button" onclick="window.location.href='./update.php?step=action_file&amp;{{echo getlang(1)}}';" class="button">{{echo $lang['INST_UPDATE_SELECT_ONTHER_UPDATES']}}</button>
-			<button type="button" onclick="window.location.href='../index.php';" class="button">{{echo $lang['INDEX']}}</button>
-			<button type="button" onclick="window.location.href='../admin/';" class="button">{{echo $lang['ADMINCP']}}</button>
-		</center>
-		<div class="clr"></div>
-		<p style="text-align:center;"><a style="color:gray;" href="http://www.kleeja.com">www.kleeja.com</a></p>
-		
-	{{endif;}} 
-	
-/-->
-
-	<div class="clr"></div>			
+	<button type="button" class="btn" onclick="window.open(this.value,'_blank');return false;" value="http://www.kleeja.com"><span>kleeja.com</span></button>	
+<div class="clr"></div>			
 </div></div><div class="BoxBottomImg"></div></div>
+<script type="text/javascript">
+<!--
+jQuery(document).ready(function($){
+    // fixed error in the browser Explore
+    $('#Scro11').animate({scrollTop:$('#Scro11 > .inside').outerHeight() });
+	var elem = $('#Scro11');
+	var inside = $('#Scro11 > .inside');
+	if ( Math.abs(inside.offset().top) + elem.height() + elem.offset().top >= inside.outerHeight() ) {
+	  // We're at the bottom!
+	}
+});
+//-->
+</script>

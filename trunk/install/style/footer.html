@@ -1,32 +1,16 @@
-<div class="clr"></div></div><div class="ins_klj"><img src="style/images/ins_klj.png" alt="" /></div>
+<div class="clr"></div></div><div class="ins_klj"></div>
 <!-- strart code java script -->
 <script type="text/javascript">
 <!--
-$(document).ready(function () 
-{
-    // fixed error in the browser Explore 11-25-2010
-    $('#scroll_div').animate({
-        scrollTop : $('#scroll_div > .inner').outerHeight()
-    });
-    var elem = $('#scroll_div');
-    var inner = $('#scroll_div > .inner');
-    if ( Math.abs(inner.offset().top) + elem.height() + elem.offset().top >= inner.outerHeight() ) { }
-
-});
-
-function w_email(l)
-{
+function w_email(l){
     var m = document.getElementById(l);
     if (m.value.indexOf("@") == - 1 || m.value.indexOf(".") == - 1 || m.value.length < 7 ) {
         alert("{{echo $lang['WRONG_EMAIL']}}");
         m.focus();
     }
 }
-
-
-//By JavaScript Kit (http://javascriptkit.com)
-function checkrequired(which)
-{
+/** By JavaScript Kit (http://javascriptkit.com) **/
+function checkrequired(which){
 	var pass	=	true;
 	if (document.images)
 	{
@@ -53,10 +37,8 @@ function checkrequired(which)
 		return true;
 	}
 }
-
-// http://www.dynamicdrive.com/ 
-function formCheck(formobj, fieldRequired)
-{
+/** http://www.dynamicdrive.com **/ 
+function formCheck(formobj, fieldRequired){
 	// dialog message
 	var alertMsg = "{{echo $lang['VALIDATING_FORM_WRONG']}}:\n";
 	var l_Msg = alertMsg.length;

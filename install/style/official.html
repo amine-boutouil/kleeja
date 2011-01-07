@@ -20,7 +20,7 @@
 		<div class="hr"></div>
 		
 				<button onclick="window.location.href='./index.php?step=what_is_kleeja&amp;{{echo getlang(1)}}';return false;" name="previous" type="submit" class="btn"><span>&laquo;  {{echo $lang['INST_PREVIOUS']}}</span></button>
-				<button name="next" id="next" type="submit" class="btn"><span>{{echo $lang['INST_NEXT']}} &raquo;</span></button>
+				<button name="next" id="next" type="submit" class="btn" style="display:none"><span>{{echo $lang['INST_NEXT']}} &raquo;</span></button>
 		</form>	
 
 
@@ -29,12 +29,10 @@
 
 <script type="text/javascript">
 <!--
-
 $(document).ready(function() {
-    $("input").click(function() {
-        $("#next").toggle(this.checked);
-    }).triggerHandler('click');
+    $("#toggleElement").click(function() {
+        $("#next").toggle(!$(this).attr('checked'));
+        });
 });
-
 //-->
 </script>

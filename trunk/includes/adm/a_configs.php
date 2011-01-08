@@ -272,16 +272,27 @@ switch($SHOW_CH_STAGE):
 			else
 			{
 			*/
+	
+			#delete cache ..
+			delete_cache('data_config');
+
+			#some configs need refresh page ..
+			$need_refresh_configs = array('language');
+			foreach($need_refresh_configs as $l)
+			{
+				if(isset($_POST[$l]) and $_POST[$l] != $config[$l])
+				{
+					header('Location: ' . basename(ADMIN_PATH));
+					exit();
+				}
+			}
+
 			$text	= $lang['CONFIGS_UPDATED'] .
 						'<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . basename(ADMIN_PATH) . 
 						'?cp=' . basename(__file__, '.php') . '\');", 2000);</script>' . "\n";
 
 			$stylee	= "admin_info";
 			//}
-				
-			//delete cache ..
-			delete_cache('data_config');
-
 		}#submit
 		
 	break; //end false

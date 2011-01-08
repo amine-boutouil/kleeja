@@ -19,6 +19,7 @@ if (!defined('IN_ADMIN'))
 $stylee 	= "admin_users";
 $action 	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;page=' . (isset($_GET['page'])  ? intval($_GET['page']) : 1);
 $action 	.= (isset($_GET['search']) ? '&search=' . $SQL->escape($_GET['search']) : '') . (isset($_GET['admin']) && $_GET['admin'] == '1' ? '&admin=1' : '');
+$action_add =  basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php');
 
 $is_search	= $affected = $is_asearch = false;
 $isn_search	= true;
@@ -33,6 +34,11 @@ if (isset($_POST['submit']))
 {
 	if(!kleeja_check_form_key('adm_users'))
 	{
+		if(isset($_GET['_ajax_']))
+		{
+			echo_ajax(888, $lang['INVALID_FORM_KEY']);
+		}
+
 		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $action, 1);
 	}
 }
@@ -40,6 +46,11 @@ if (isset($_POST['newuser']))
 {
 	if(!kleeja_check_form_key('adm_users_newuser'))
 	{
+		if(isset($_GET['_ajax_']))
+		{
+			echo_ajax(888, $lang['INVALID_FORM_KEY']);
+		}
+
 		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $action, 1);
 	}
 }
@@ -47,6 +58,11 @@ if (isset($_POST['search_user']))
 {
 	if(!kleeja_check_form_key('adm_users_search'))
 	{
+		if(isset($_GET['_ajax_']))
+		{
+			echo_ajax(888, $lang['INVALID_FORM_KEY']);
+		}
+
 		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, basename(ADMIN_PATH) . '?cp=h_search', 1);
 	}
 }
@@ -98,6 +114,11 @@ if(isset($_GET['deleteuserfile']))
 
 	if($num == 0)
 	{
+		if(isset($_GET['_ajax_']))
+		{
+			echo_ajax(888, $lang['ADMIN_DELETE_NO_FILE']);
+		}
+
 		kleeja_admin_err($lang['ADMIN_DELETE_NO_FILE']);
 	}
 	else
@@ -185,8 +206,8 @@ else if (isset($_POST['newuser']))
 			}
 		}
 		
-		//return to users page
-		redirect(basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'));
+		//User added ..
+		kleeja_admin_info($lang['USERS_UPDATED'], true, '', true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'), 3);
 	}
 	else
 	{
@@ -194,6 +215,11 @@ else if (isset($_POST['newuser']))
 		foreach($ERRORS as $r)
 		{
 			$errs .= '- ' . $r . '. <br />';
+		}
+
+		if(isset($_GET['_ajax_']))
+		{
+			echo_ajax(888, str_replace('<br />', "\n", $errs));
 		}
 
 		kleeja_admin_err($errs);			
@@ -350,8 +376,10 @@ $user_not_normal = (int) $config['user_system'] != 1 ?  true : false;
 //after submit 
 if (isset($_POST['submit']) || isset($_POST['newuser']))
 {
-	$text	= ($affected ? $lang['USERS_UPDATED'] : $lang['NO_UP_CHANGE_S']) . '<meta HTTP-EQUIV="REFRESH" content="0; url=' . basename(ADMIN_PATH) . '?cp=';
-	$text	.= basename(__file__, '.php') . '&amp;page=' . (isset($_GET['page'])  ? intval($_GET['page']) : 1) . (isset($_GET['search']) ? '&search=' . strip_tags($_GET['search']) : '');
-	$text	.= ((isset($_GET['admin']) && $_GET['admin'] == '1') ? '&admin=1' : '') . '">' . "\n";
+	$g_link = basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;page=' . (isset($_GET['page'])  ? intval($_GET['page']) : 1) . 
+				(isset($_GET['search']) ? '&search=' . strip_tags($_GET['search']) : '') . ((isset($_GET['admin']) && $_GET['admin'] == '1') ? '&admin=1' : '');
+
+	$text	= ($affected ? $lang['USERS_UPDATED'] : $lang['NO_UP_CHANGE_S']) .
+				'<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . $g_link . '\');", 2000);</script>' . "\n";
 	$stylee	= "admin_info";
 }

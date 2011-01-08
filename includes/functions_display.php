@@ -218,6 +218,15 @@ function kleeja_admin_err($msg, $navigation = true, $title='', $exit = true, $re
 
 	($hook = kleeja_run_hook('kleeja_admin_err_func')) ? eval($hook) : null; //run hook
 
+	#Exception for ajax
+	if(isset($_GET['_ajax_']))
+	{
+		$text = $msg  . "\n" . '<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . $redirect . '\');", 2000);</script>';
+		echo $tpl->display($style);
+		$SQL->close();
+		exit();
+	}
+
 	// assign {text} in err template
 	$text		= $msg . ($redirect != false ? redirect($redirect, false, false, $rs, true) : '');
 	$SHOW_LIST	= $navigation;

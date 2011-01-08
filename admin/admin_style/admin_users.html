@@ -22,7 +22,7 @@
 		<!-- end info System Messages -->
 	</IF>
 
-	<form method="post" name="userform" action="{action}" onsubmit="javascript:return confirm_from();">
+	<form method="post" name="userform" action="{action}" id="users_form">
 			 
 	<IF NAME="is_search">
 	<strong> 
@@ -90,7 +90,8 @@
 	{page_nums}<!-- pagination -->
 	
 	<!-- button -->
-	<button type="submit" name="submit" class="btn"><span>{lang.UPDATE_USERS}</span></button>
+	<input type="hidden" name="submit" value="1" />
+	<button type="submit" name="submit" class="btn"  onclick="javascript:submit_kleeja_data('#users_form', '#main_container', 1); return false;"><span>{lang.UPDATE_USERS}</span></button>
 		
 	{H_FORM_KEYS}
 	</form>
@@ -100,7 +101,7 @@
 	<div class="hr"></div><br /><br />
 
 	<IF NAME="isn_search">
-	<form method="post" action="">
+	<form method="post" action="{action_add}" id="add_user_form">
 
 	<!-- Section Title  -->
 	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><span class="right">{lang.NEW_USER}</span></div></div>
@@ -125,7 +126,8 @@
 	<div class="clr"></div><br />
 
 	<!-- button -->
-	<button type="submit" id="submit" name="newuser" class="btn"><span>{lang.SUBMIT}</span></button>
+	<input type="hidden" name="newuser" value="1" />
+	<button type="submit" id="submit" name="newuser" class="btn" onclick="javascript:submit_kleeja_data('#add_user_form', '#main_container', 0); return false;"><span>{lang.SUBMIT}</span></button>
 		
 	{H_FORM_KEYS2}
 	</form>

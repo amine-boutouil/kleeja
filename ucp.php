@@ -841,6 +841,15 @@ switch ($_GET['go'])
 			($hook = kleeja_run_hook('end_get_pass')) ? eval($hook) : null; //run hook
 
 		break; 
+		
+		//
+		// Wrapper for captcha file
+		//
+		case 'captcha':
+			include PATH . 'includes/captcha.php';
+			exit;
+			
+		break;;
 
 		//
 		//add your own code here

@@ -18,14 +18,15 @@ if (!defined('IN_INDEX'))
 define ('IN_COMMON', true);
 
 //
-//development stage;  developers stage
+//Development stage;
+//if this enabled, KLeeja will treats you as a developer, things
+//disabled for users, will be enabled for you
 //
 define('DEV_STAGE', true);
 
 // Report all errors, except notices
 defined('DEV_STAGE') ? @error_reporting( E_ALL ) : @error_reporting(E_ALL ^ E_NOTICE);
-//Just to check
-define('IN_PHP6', (version_compare(PHP_VERSION, '6.0.0-dev', '>=') ? true : false));
+
 //filename of config.php
 define('KLEEJA_CONFIG_FILE', 'config.php');
 
@@ -120,7 +121,6 @@ function kleeja_clean_string($value)
 		return array_map('kleeja_clean_string', $value);
 	}
 	$value = str_replace(array("\r\n", "\r", "\0"), array("\n", "\n", ''), $value);
-	//$value = preg_replace('/[\x80-\xFF]/', '?', $value); //allow only ASCII (0-127)
 	return $value;
 }
 //unsets all global variables set from a superglobal array
@@ -204,13 +204,17 @@ $_COOKIE	= kleeja_clean_string($_COOKIE);
 //path 
 if(!defined('PATH'))
 {
-	define('PATH', './');
+	if(!defined('__DIR__'))
+	{
+		define('__DIR__', dirname(__FILE__)); 
+	}
+	define('PATH', str_replace('/includes', '', __DIR__) . '/');
 }
 
 // no config
 if (!file_exists(PATH . KLEEJA_CONFIG_FILE))
 {
-	header('Location: ' . PATH . 'install/index.php');
+	header('Location: ./install/index.php');
 	exit;
 }
 
@@ -220,15 +224,12 @@ require (PATH . KLEEJA_CONFIG_FILE);
 //no enough data
 if (!$dbname || !$dbuser)
 {
-	header('Location: ' . PATH . 'install/index.php');
+	header('Location: ./install/index.php');
 	exit;
 }
 
 //include files .. & classes ..
-//$path = dirname(__file__) . '/';
 $root_path = PATH;
-$adminpath = isset($adminpath) ? $adminpath : './admin/index.php';
-!defined('ADMIN_PATH') ? define('ADMIN_PATH', $adminpath) : null;
 $db_type = isset($db_type) ? $db_type : 'mysql';
 
 require (PATH . 'includes/functions_alternative.php');
@@ -292,12 +293,22 @@ if(defined('DEV_STAGE'))
 {
 	$tpl->caching = false;
 }
-
 //check if admin (true/false)
 $is_admin = $usrcp->admin();
 
 //kleeja session id
 $klj_session = $SQL->escape(session_id());
+
+
+//admin path
+$adminpath = 'admin/index.php';
+!defined('ADMIN_PATH') ? define('ADMIN_PATH', $config['siteurl'] . $adminpath) : null;
+
+//site url must end with /
+if($config['siteurl'])
+{
+	$config['siteurl'] = ($config['siteurl'][strlen($config['siteurl'])-1] != '/') ? $config['siteurl'] . '/' : $config['siteurl'];
+}
 
 // for gzip : php.net
 //fix bug # 181
@@ -365,7 +376,7 @@ if(empty($config['h_key']))
 }
 
 //Global vars for Kleeja
-$STYLE_PATH = PATH . 'styles/' . (trim($config['style_depend_on']) == '' ? $config['style'] : $config['style_depend_on']) . '/';
+$STYLE_PATH = $config['siteurl'] . 'styles/' . (trim($config['style_depend_on']) == '' ? $config['style'] : $config['style_depend_on']) . '/';
 $STYLE_PATH_ADMIN  = PATH . 'admin/admin_style/';
 $THIS_STYLE_PATH = PATH . 'styles/' . $config['style'] . '/';
 	
@@ -438,14 +449,8 @@ if(empty($perpage) || intval($perpage) == 0)
 	$perpage = 14;
 }
 
-//site url must end with /
-if($config['siteurl'])
-{
-	$config['siteurl'] = ($config['siteurl'][strlen($config['siteurl'])-1] != '/') ? $config['siteurl'] . '/' : $config['siteurl'];
-}
-
 //captch file 
-$captcha_file_path = $config['siteurl'] . 'includes/captcha.php';
+$captcha_file_path = $config['siteurl'] . 'ucp.php?go=captcha';
 
 //clean files
 if((int) $config['del_f_day'] > 0 && PATH == './')

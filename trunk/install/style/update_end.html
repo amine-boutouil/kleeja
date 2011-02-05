@@ -1,5 +1,4 @@
-<div class="BoxInner"><div class="BoxTopImg"></div><div class="BoxBody"><div class="inner">
-	<div class="clr"></div>
+<div class="BoxInner"><div class="BoxTopImg"></div><div class="BoxBody"><div class="inner"><div class="clr"></div>
 		<div id="Scro11">
 			<ul class="inside">
 				{{foreach($GLOBALS['update_msgs_arr'] as $m):}}
@@ -10,7 +9,7 @@
 				{{endforeach;endif;}}
 			</ul>
 		</div>
-
+		<div class="clr"></div>
         {{if($GLOBALS['complete_upate']):}} 
 			<div class="hr"></div>
 			<div class="notice">
@@ -33,8 +32,7 @@
         	<button type="button" class="btn" onclick="window.location.href='../index.php';"><span>{{echo $lang['INDEX']}}</span></button>
 			<button type="button" class="btn" onclick="window.location.href='../admin/';"><span>{{echo $lang['ADMINCP']}}</span></button>
 			<button type="button" class="btn" onclick="window.open(this.value,'_blank');return false;" value="http://www.kleeja.com"><span>kleeja.com</span></button>	
-        {{endif;}} 
-        
+        {{endif;}}
 <div class="clr"></div></div></div><div class="BoxBottomImg"></div></div>
 <script type="text/javascript">
 <!--

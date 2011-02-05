@@ -186,6 +186,5 @@ Saaheader();
 echo $tpl->display("index_body");
 //footer
 Saafooter();
-	
 
 //<-- EOF

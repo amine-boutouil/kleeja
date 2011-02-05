@@ -2,6 +2,11 @@
 <!-- strart code java script -->
 <script type="text/javascript">
 <!--
+jQuery(document).ready(function($){
+	// custom checkboxes
+	$('input[type=checkbox]').checkbox();
+});
+	
 function w_email(l){
     var m = document.getElementById(l);
     if (m.value.indexOf("@") == - 1 || m.value.indexOf(".") == - 1 || m.value.length < 7 ) {

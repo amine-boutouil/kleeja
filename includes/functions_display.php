@@ -591,14 +591,14 @@ function kleeja_get_link ($pid, $extra = array())
 */
 function get_up_tpl_box($box_name, $extra = array())
 {
-	global $STYLE_PATH, $config;
+	global $THIS_STYLE_PATH, $config;
 	static $boxes = false;
 	
 	//prevent loads
 	//also this must be cached in future
 	if($boxes !== true)
 	{
-		$tpl_path = $STYLE_PATH . 'up_boxes.html';
+		$tpl_path = $THIS_STYLE_PATH . 'up_boxes.html';
 		if(!file_exists($tpl_path))
 		{
 			$depend_on = false;
@@ -614,7 +614,6 @@ function get_up_tpl_box($box_name, $extra = array())
 			$tpl_path = str_replace('/' . $config['style'] . '/', '/' . trim($depend_on) . '/', $tpl_path);
 		}
 	
-
 		$tpl_code = file_get_contents($tpl_path);
 		$tpl_code = preg_replace("/\n[\n\r\s\t]*/", '', $tpl_code);//remove extra spaces
 		$matches = preg_match_all('#<!-- BEGIN (.*?) -->(.*?)<!-- END (?:.*?) -->#', $tpl_code, $match);

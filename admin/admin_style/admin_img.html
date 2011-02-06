@@ -10,7 +10,7 @@ jQuery(document).ready(function($){
 	// preload images
 	$.preload('#Kload img', {placeholder:'{STYLE_PATH_ADMIN}images/ajax-loader.gif',notFound:'{STYLE_PATH_ADMIN}js/fancybox/failerror.jpg',	enforceCache: true,	threshold: 2 });
 
-	$("img.mask").hover(function(){$(this).stop().animate({'opacity': '0'}, 'slow');},function() {$(this).stop().animate({'opacity': '1'}, 'slow');});
+	$("img.mask").hover(function(){$(this).stop().animate({'opacity': '0'}, 'fast');},function() {$(this).stop().animate({'opacity': '1'}, 'fast');});
 			
 	$('.tip').each(function() {
 	   $(this).qtip({

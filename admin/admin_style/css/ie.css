@@ -1,10 +1,6 @@
-/*** For Sucky Browsers (all versions of IE) ***/
+/*** Browsers (all versions of IE) ***/
 
-/* stupid IE7 HasLayout hack
-#wrapper { zoom: 1; }
-#pageMain {overflow-x: hidden;}
-*/
+/* stupid IE6 HasLayout hack */
+#pageMain { zoom: 1; }
 
-
-/* thumbnail menu */
-.MainMenuBox2{position:static;}
+button.btn span{ margin-top:0;}

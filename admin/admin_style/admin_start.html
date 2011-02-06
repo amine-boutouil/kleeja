@@ -8,25 +8,22 @@ jQuery(document).ready(function($){
 </script>
 
 <!-- start body panel  -->
-<div id="boxs" class="boxs_start">
-	<!-- site name
+<div id="boxs">
+	<!-- site name-->
 	<h1 class="h1 sitename">{config.sitename}</h1>
 	<div class="hr"></div>
 	<p class="titleAll left"><a href="./">{lang.KLEEJA_CP}</a></p> 
-	-->
+	
 
 	<div class="clr"></div><br/><br/>
 
 	
 	<!-- start >> error System Messages -->
 	<LOOP NAME="ADM_NOTIFICATIONS">
-	<div id="system-message-start">
-		<div class="{{msg_type}}" id="{{id}}">
-			<ul>
-			<li><!--u>{{title}} !</u--><p>{{msg}}</p></li>
-			</ul>
-		</div>
-	</div>
+	<div class="notification {{msg_type}} warning">
+        <span></span>
+        <p id="{{id}}"><strong>{{title}}!</strong>{{msg}}</p>
+    </div>
 	<IF LOOP="msg_type==error">
 	<!--<script type="text/javascript">
 	
@@ -44,11 +41,11 @@ jQuery(document).ready(function($){
 			<div class="option_box_inner">
 			
 			<div class="userAdmin"><img class="ImgAdmin" src="{STYLE_PATH_ADMIN}images/icon/adm_user.png" alt="" height="100" width="100" />
-				<div class="InfoUserAdmin">
+				<div class="InfoUserAdmin dir">
 					<h1>{usernamelang}</h1>
 					<ul>
 					<IF NAME="stat_last_file!='0'">
-						<li><img class="img" src="{STYLE_PATH_ADMIN}images/icon/last_file.png" alt="" /> {lang.LSTFLE_ST} : <a class="elementLTR" href="{last_file_up_url}"  onclick="window.open(this.href,'_blank');return false;">{last_file_up}</a></li>
+						<li><img class="img" src="{STYLE_PATH_ADMIN}images/icon/last_file.png" alt="" /> {lang.LSTFLE_ST} : <a href="{last_file_up_url}"  onclick="window.open(this.href,'_blank');return false;">{last_file_up}</a></li>
 					<ELSE>
 						<li><img class="img" src="{STYLE_PATH_ADMIN}images/icon/last_file.png" alt="" /> {lang.UNKNOWN}</li>
 					</IF>
@@ -90,8 +87,9 @@ jQuery(document).ready(function($){
 		
 		<div class="clr"></div><br />
 		
-		<!-- General Statistics  -->	
-		<div class="ribbon"><div class="wrapAround"></div><div class="tab"><span class="right">{lang.GENERAL_STAT}</span></div></div>
+		<!-- General Statistics  -->
+		<span class="right">{lang.GENERAL_STAT}</span>
+		<div class="hr"></div><br /><br />
 		<div class="clr"></div>
 		<div class="option_box">
 			<div class="option_box_inner">
@@ -153,9 +151,9 @@ jQuery(document).ready(function($){
 					</tr>
 				</table>
 				<div class="clr"></div>
-				</div><!-- #End .option_box_inner -->
-			</div><!-- #End .option_box -->
-			<!-- #General Statistics -->
+			</div><!-- #End .option_box_inner -->
+		</div><!-- #End .option_box -->
+		<!-- #General Statistics -->
 			
 			<div class="clr"></div><br />
 			
@@ -245,21 +243,6 @@ jQuery(document).ready(function($){
 
 			
 
-<!-- Other information -->
-<div class="list_control_panel">
-<ol class="option_list">
-
-
-</ol>
-<div class="option_list_bottom"></div>
-</div>
-<!-- # view list control panel -->
-
-<!-- start clear  -->
-<div class="clr"></div>
-<!-- # clear  -->
-
-
 
 <!-- start clear  -->
 <div class="clr"></div><br />
@@ -333,7 +316,4 @@ jQuery(document).ready(function($){
 
 <div class="clr"></div>
 
-
-
 </div>
-<!--  # Powered by Kleeja .... Kleeja.com   #  copyright 2007-2009  .. Kleeja -->

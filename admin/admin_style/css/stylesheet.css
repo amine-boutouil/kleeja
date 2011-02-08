@@ -66,7 +66,7 @@
 
 	.MarginTop {margin-top:20px !important;}
 	.MarginBottom {margin-bottom:10px !important;}
-	.h1 {color: #318391;font-size:180%;margin:-5px 0 10px 0;font-weight:700;padding:0 0 20px 0;}
+	.h1 {color: #318391;font-size:180%;margin:-5px 0 -12px 0;font-weight:700;padding:0 0 20px 0;}
 	.fieldset {margin:10px 0;padding:15px;border: 1px solid #B1B1B1;}
 	
 	.SitenameHead{height:28px;margin:-20px 5px 5px 0;overflow:hidden;width:600px;color:#646464;font-size:160%; font-weight:700;}
@@ -112,8 +112,8 @@
 
 
 	#Logo{float:left;padding:10px;}
-	#Logo a{background:transparent url(../images/logo.png) no-repeat 0 0;display:block;}
-	#Logo img{width:292px;height:69px;margin:-20px 5px 20px -20px;padding:10px;}
+	#Logo a{background:transparent url(../images/box/logo.png) no-repeat 0 0;display:block;margin:-25px 5px 20px -16px;}
+	#Logo img{width:136px;height:115px;padding:10px;}
 
 
 	/* Scroll Bar */
@@ -183,13 +183,13 @@
 	a.expand_thumbnail:hover,a.expand_thumbnail2:hover{background-position:0 -64px}
 
 	/* Ribbon Scroll */
-	.ribbon,.ribbon .wrapAround,.ribbon .tab{height:52px;overflow:hidden;position:relative;}
-	.ribbon{margin:-14px -20px 10px -37px;width:700px}
-	.ribbon .wrapAround{background:transparent url(../images/box/ribbon-wrap.png) no-repeat 0 -104px;float:left;width:52px;display:block;}
-	.ribbon .tab{background:transparent url(../images/box/ribbon.png) no-repeat right;float:left;width:632px;}
-	.ribbon span {font-weight:700;color:#F5E8D3;margin:17px 25px 0 40px;font-size:140%;text-shadow:#884005 1px 1px 1px;}
+	.ribbon,.ribbon .wrapAround,.ribbon .tab{height:74px;overflow:hidden;position:relative;}
+	.ribbon{margin:-14px -20px 10px -37px;width:668px}
+	.ribbon .wrapAround{background:transparent url(../images/box/ribbon-wrap.png) no-repeat left center;float:left;width:51px;display:block;}
+	.ribbon .tab{background:transparent url(../images/box/ribbon.png) no-repeat right center;float:left;width:600px;}
+	.ribbon span {font-weight:700;color:#F5E8D3;margin:28px 25px 0 40px;font-size:140%;text-shadow:#884005 1px 1px 1px;}
 	.ribbon span.TitleSub {color:#FFF !important;font-size:100%;margin:16px 0 0 20px}
-	.ribbon img.TSubImg{width:64px;height:74px;position:absolute;top:10px;left:30px;z-index:701;}
+	.ribbon img.TSubImg{width:64px;height:74px;position:absolute;top:0px;left:0px;z-index:701;}
 	
 	/* footer */
 	#FooterTop{background:transparent url(../images/box/footerBg-top.png) no-repeat 0 0;height:2px;overflow:hidden}
@@ -247,7 +247,7 @@
 	.row2{overflow:auto;}
 
 	/* start control panel */
-	.sitename {overflow:hidden;height:58px;line-height:48px;font-size:180%;margin:0 0 -10px 0 !important;padding:0px 0 0 90px !important;background:transparent url(../images/icon/cp_kleeja.png) no-repeat 0 -2px;}
+	.sitename {overflow:hidden;height:58px;line-height:48px;font-size:180%;margin:12px 20px -10px 40px !important;padding:0px 0 0 20px !important;}
 	.option_box {margin:5px 0 15px 0;display:block;}
 	.option_box_inner{padding:0 10px;}
 		/* User Statistics */

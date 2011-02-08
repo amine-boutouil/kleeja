@@ -10,11 +10,7 @@ jQuery(document).ready(function($){
 <!-- start body panel  -->
 <div id="boxs">
 	<!-- site name-->
-	<h1 class="h1 sitename">{config.sitename}</h1>
-	<div class="hr"></div>
-	<p class="titleAll left"><a href="./">{lang.KLEEJA_CP}</a></p> 
-	
-
+	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><img class="TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/cp_button.png" alt="" /><span class="sitename right">{config.sitename}</span></div></div>
 	<div class="clr"></div><br/><br/>
 
 	
@@ -35,7 +31,8 @@ jQuery(document).ready(function($){
 	</LOOP>
 	
 	<!-- User Statistics -->
-	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><span class="right">{lang.USER_STAT}</span></div></div>
+	<h1 class="h1 right">{lang.USER_STAT}</h1>
+	<div class="hr"></div><br /><br />
 	<div class="clr"></div>
 		<div class="option_box">
 			<div class="option_box_inner">
@@ -88,7 +85,7 @@ jQuery(document).ready(function($){
 		<div class="clr"></div><br />
 		
 		<!-- General Statistics  -->
-		<span class="right">{lang.GENERAL_STAT}</span>
+		<h1 class="h1 right">{lang.GENERAL_STAT}</h1>
 		<div class="hr"></div><br /><br />
 		<div class="clr"></div>
 		<div class="option_box">
@@ -157,9 +154,11 @@ jQuery(document).ready(function($){
 			
 			<div class="clr"></div><br />
 			
-			<!-- Statistics Search Engines -->
-			<div class="ribbon"><div class="wrapAround"></div><div class="tab"><span class="right">{lang.SEARCH_STAT}</span></div></div>
-			<div class="clr"></div>
+		<!-- Statistics Search Engines -->
+		<h1 class="h1 right">{lang.SEARCH_STAT}</h1>
+		<div class="hr"></div><br /><br />
+		<div class="clr"></div>
+
 			<div class="option_box">
 				<div class="option_box_inner">
 				
@@ -184,7 +183,8 @@ jQuery(document).ready(function($){
 			<div class="clr"></div><br />			
 				
 			<!-- Other information -->	
-			<div class="ribbon"><div class="wrapAround"></div><div class="tab"><span class="right">{lang.OTHER_INFO}</span></div></div>
+			<h1 class="h1 right">{lang.OTHER_INFO}</h1>
+			<div class="hr"></div><br /><br />
 			<div class="clr"></div>
 			<div class="option_box">
 				<div class="option_box_inner">
@@ -251,8 +251,10 @@ jQuery(document).ready(function($){
 
 
 <!-- start team kleeja -->
+	<div class="ribbon"><div class="wrapAround"></div><div class="tab"><img class="TSubImg" src="{STYLE_PATH_ADMIN}images/menu_icons/mini/users_button.png" alt="" /><span class="right">{lang.KLEEJA_TEAM}</span></div></div>
+	<div class="clr"></div>
+	
 <div class="team_info">
-	<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/icon/Info_team.png" alt="Team Kleeja" />{lang.KLEEJA_TEAM}</h2>
 	<table class="team_tr">
 		<tr>
 			<td colspan="2" style="width:80%;">Name</td>
@@ -299,8 +301,8 @@ jQuery(document).ready(function($){
 <!-- start sql debug -->
 <IF NAME="sql_debug">
 <br /><br /><br />
-<h2 style="direction:ltr">SQL Debug</h2>
-<div style="direction:ltr;overflow:scroll;height:200px;border:1px #ccc dotted">
+<h2 class="dir left">SQL Debug</h2>
+<div class="dir left" style="overflow:scroll;height:200px;border:1px #ccc dotted">
 <table>
 <LOOP NAME="sql_debug">
 <tr style="color:{{colored}}">

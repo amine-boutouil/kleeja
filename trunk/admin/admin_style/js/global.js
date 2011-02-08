@@ -13,9 +13,6 @@ jQuery(document).ready(function($){
     // custom checkboxes
 	$('input[type=checkbox]').checkbox();
 	
-	// Ribbon
-	$(".ribbon .wrapAround").KleejaRibbon();
-	
 	// Tooltip
 	$('.HTI a img').qtip({
 			position: {my: 'bottom right',at: 'top center', adjust: { x:2,  y : 3 , screen: 'flip'}},

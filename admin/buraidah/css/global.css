@@ -134,3 +134,4 @@ select:active {
 
 /*for ajax, make it less opacity*/
 .show_less { -moz-opacity:.50; filter:alpha(opacity=50); opacity:.50; }
+.show_more { -moz-opacity:1; filter:alpha(opacity=100); opacity:1; }

@@ -109,7 +109,8 @@ function get_kleeja_link(URL, ID, p)
 					$('.' + p['current_class']).removeClass(p['current_class']);
 					$('#' + p['current_id']).addClass(p['current_class']);
 				}
-
+				
+				$(ID).removeClass('show_less');
 				$(ID).fadeIn(100);
 
 				if($('body').scrollTop() > 0 && $('body').scrollTop() > 200)
@@ -148,7 +149,8 @@ function submit_kleeja_data(FORM_ID, ID, CONFIRM)
 	}
 	
 	$("#sign_ajax_error").css('display', 'none');
-	$(ID).css('display', 'none');
+	//$(ID).css('display', 'none');
+	$(ID).addClass('show_less');
 	$("#sign_ajax").show();
 	
 	$.ajax({
@@ -168,13 +170,14 @@ function submit_kleeja_data(FORM_ID, ID, CONFIRM)
 			}
 			else if(R.code == 888)
 			{
-				alert(R.content);
+				//alert(R.content);
 				get_kleeja_link($(FORM_ID).attr('action'), ID);
 				return;
 			}
 			else
 			{
 				$(ID).html(R.content);
+				$(ID).removeClass('show_less');
 				$(ID).fadeIn(100);
 				if($('body').scrollTop() > 0 && $('body').scrollTop() > 200)
 				{

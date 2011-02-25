@@ -57,9 +57,9 @@ function getjquerylink()
 {
 	global $_path;
 
-	if(file_exists($_path . 'admin/admin_style/js/jquery.min.js'))
+	if(file_exists($_path . 'admin/buraidah/js/jquery.min.js'))
 	{
-		return $_path . 'admin/admin_style/js/jquery.min.js';
+		return $_path . 'admin/buraidah/js/jquery.min.js';
 	}
 	else
 	{

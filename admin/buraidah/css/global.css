@@ -131,3 +131,6 @@ select:active {
 .delf_caution{color:red;background:#FFDFDF;padding:3px 5px;border:1px solid #D88C8C;margin-right:5px;font-size:10px;}
 .live_xts{font-size:xx-small;font-weight: bold;color:#3F5252}
 /* ## class in the language files */
+
+/*for ajax, make it less opacity*/
+.show_less { -moz-opacity:.50; filter:alpha(opacity=50); opacity:.50; }

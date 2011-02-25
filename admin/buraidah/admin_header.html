@@ -65,7 +65,8 @@ function get_kleeja_link(URL, ID, p)
 		}
 	}
 
-	$(ID).css('display', 'none');
+	//$(ID).css('display', 'none');
+	$(ID).addClass('show_less');
 	
 	if(URL.indexOf('?') == -1)
 	{
@@ -95,7 +96,7 @@ function get_kleeja_link(URL, ID, p)
 			}
 			else if(R.code == 888)
 			{
-				alert(R.content);
+				//alert(R.content);
 				get_kleeja_link(URL, ID);
 				return;
 			}

@@ -11,6 +11,10 @@ body{
 #pagination { text-align:left;  float:left; }
 
 
+#sign_ajax,#sign_ajax_error{
+	right:40%;
+}
+
 /* byname.css */
 
 #menu{

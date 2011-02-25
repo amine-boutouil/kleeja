@@ -238,16 +238,18 @@ $query	= array(
 		);
 
 //posts search ..
-if (isset($_POST['search_user']))
+if(isset($_GET['search']) || isset($_POST['search_user']))
 {
-	 redirect(basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&search=' . kleeja_base64_encode(serialize($_POST)));
-	$SQL->close();
-	exit;
-}
-else if(isset($_GET['search']))
-{
-	$search = kleeja_base64_decode($_GET['search']);
-	$search	= unserialize($search);
+	if(isset($_POST['search_user']))
+	{
+		$search = $_POST;
+		$_GET['search'] = kleeja_base64_encode(serialize($_POST));
+	}
+	else
+	{
+		$search	= unserialize(kleeja_base64_decode($_GET['search']));
+	}
+
 	$usernamee	= $search['username'] != '' ? 'AND name  LIKE \'%' . $SQL->escape($search['username']) . '%\' ' : ''; 
 	$usermailee	= $search['usermail'] != '' ? 'AND mail  LIKE \'%' . $SQL->escape($search['usermail']) . '%\' ' : ''; 
 	$is_search	= true;
@@ -367,7 +369,7 @@ else #num rows
 $total_pages 	= $Pager->getTotalPages(); 
 $page_nums 		= $Pager->print_nums(
 								basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . (isset($_GET['search']) ? '&search=' . strip_tags($_GET['search']) : ''),
-								'onclick="javascript:get_kleeja_link($(this).attr(\'href\'), \'#main_container\'); return false;"' 
+								'onclick="javascript:get_kleeja_link($(this).attr(\'href\'), \'#content\'); return false;"' 
 							); 
 
 //if not noraml user system 

@@ -287,5 +287,8 @@ $lang = array_merge($lang, array(
         'PLUGINS_CHANGES_FILES_EXP'     => 'Ces fichiers sont des fichiers compressés contenant les fichiers qui ont été modifiés spécifiquement pour certains ajouts, vous devez les télécharger à partir d\'ici et remplacer les fichiers Kleeja, vous pouvez le supprimer lorsque vous aurez terminé.',
 		'LOADING'					=> 'Loading',
 		'ERROR_AJAX'				=> 'There is an error, try again!.',
+		'MORE'						=> 'More',
+		'MENU'						=> 'Menu',
+		'WELCOME'					=> 'Welcome',
 ));
 

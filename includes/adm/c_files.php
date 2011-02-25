@@ -168,16 +168,20 @@ if((int) $config['user_system'] == 1)
 }
 
 //posts search ..
-if (isset($_POST['search_file']))
+if(isset($_GET['search']) || isset($_POST['search_file']))
 {
-		redirect(basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&search=' . kleeja_base64_encode(serialize($_POST)));
-		$SQL->close();
-		exit;
-}
-else if(isset($_GET['search']))
-{
-	$deletelink	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&deletefiles=' . $SQL->escape($_GET['search']);
-	$search		= unserialize(kleeja_base64_decode($_GET['search']));
+	if(isset($_POST['search_file']))
+	{
+		$search = $_POST;
+		$_GET['search'] = kleeja_base64_encode(serialize($_POST));
+	}
+	else
+	{
+		$search = unserialize(kleeja_base64_decode($_GET['search']));
+	}
+	
+	$deletelink = basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&deletefiles=' . $SQL->escape($_GET['search']);
+	
 	$search['filename'] = !isset($search['filename']) ? '' : $search['filename']; 
 	$search['username'] = !isset($search['username']) ? '' : $search['username'];
 	$search['than']		= !isset($search['than']) ? 1 : $search['than'];
@@ -336,7 +340,7 @@ else
 
 //some vars
 $total_pages	= $Pager->getTotalPages(); 
-$page_nums 		= $Pager->print_nums($page_action, 'onclick="javascript:get_kleeja_link($(this).attr(\'href\'), \'#main_container\'); return false;"'); 
+$page_nums 		= $Pager->print_nums($page_action, 'onclick="javascript:get_kleeja_link($(this).attr(\'href\'), \'#content\'); return false;"'); 
 $current_page	= $Pager->currentPage;
 
 //after submit 

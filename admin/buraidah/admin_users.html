@@ -1,0 +1,124 @@
+﻿
+<h1>{lang.R_USERS}</h1>
+
+<!-- if not normal user system, tell him --> 
+<IF NAME="user_not_normal">
+<div class="note-info">{lang.USERS_NOT_NORMAL_SYS}</div>
+</IF>
+
+<form method="post" name="userform" action="{action}" id="users_form">
+
+<IF NAME="is_search">
+	<strong> 
+	<IF NAME="is_asearch">
+	<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/menu_icons/search_button.gif" >{lang.ADMINISTRATORS}</h2>
+
+	
+	<div class="clr"></div><!-- clear -->
+
+	<ELSE>
+	{lang.SEARCH_USERS}
+	</IF>
+	 {lang.AUSERS_NUM} : ( {nums_rows} )
+	</strong>
+	<!-- start clear  -->
+	<div class="clr"></div><br />
+	<!-- end clear  -->
+<ELSE>
+
+
+	<div class="adminstrators"><a href="{action}&admin=1">{lang.ADMINISTRATORS}</a></div>
+
+	<!-- start clear  -->
+	<div class="clr"></div><br />
+	<!-- end clear  -->
+
+</IF>
+
+<!-- start data table -->
+<table>
+	<tr class="first">
+		<td>{lang.USERNAME}</td>
+		<td>{lang.EMAIL}</td>
+		<td>{lang.PASSWORD}</td>
+		<td>{lang.IS_ADMIN}</td>
+		<td><a href="javascript:void(0);" onclick="checkAll(document.userform, '_del', 'su');">{lang.DELETE}</a></td>
+		<!-- admin users info tr extra -->
+	</tr>
+	<IF NAME="no_results">
+	...		
+	<ELSE>
+	
+	<LOOP NAME="arr">
+	<tr id="su[{{id}}]" class="osilver">
+		<td>
+			<label><input type="text" name="nm_{{id}}" value="{{name}}" size="32"></label> <br />
+				<small><a href="{{delusrfile_link}}&amp;{GET_FORM_KEY}" onclick="javascript:return confirm_from();">{lang.ADMIN_DELETE_FILES}</a>
+				 | <a target="_blank" href="{{userfile_link}}">{lang.BROSWERF}</a></small>
+		</td>
+		<td><label><input type="text" name="ml_{{id}}" value="{{mail}}" size="20" style="direction:ltr"></label></td>
+		<td><label><input type="password" name="ps_{{id}}" value="" size="10" style="text-align:center;"></label></td>
+		<td>{{admin}}</td>
+		<td>
+		<IF LOOP="id==1">
+			<img  src="{STYLE_PATH_ADMIN}images/locked.png" alt="--- founder ---"  style="border:0" />
+		<ELSE>
+			<input type="checkbox"  name="del_{{id}}" value="{{id}}" onclick="change_color(this,'su[{{id}}]');" rel="_del">
+		</IF>
+		</td>
+		<!-- admin users data tr extra -->
+	</tr>
+	</LOOP>
+	</IF>
+</table>
+<!-- end data table -->
+
+<div class="br"></div>
+
+<!-- pagination -->
+{page_nums}
+
+	
+<!-- button -->
+<p>
+	<input type="hidden" name="submit" value="1" />
+	<button type="submit" name="submit" class="btn"  onclick="javascript:submit_kleeja_data('#users_form', '#content', 1); return false;"><span>{lang.UPDATE_USERS}</span></button>
+</p>
+	
+{H_FORM_KEYS}
+</form>
+
+<div class="br"></div>
+
+<!-- add new user -->
+<IF NAME="isn_search">
+<h1>{lang.NEW_USER}</h1>
+<form method="post" action="{action_add}" id="add_user_form">
+
+<div class="section">
+	<h3><label for="lname">{lang.USERNAME}</label></h3>
+	<div class="box"><input type="text" name="lname" id="lname" value="" size="30" /></div>
+</div>
+<div class="clear"></div>
+<div class="section">
+	<h3><label for="lmail">{lang.EMAIL}</label></h3>
+	<div class="box"><input type="text" name="lmail"  id="lmail" value=""size="30" style="direction:ltr" /></div>
+</div>
+<div class="clear"></div>
+<div class="section">
+	<h3><label for="lpass">{lang.PASSWORD}</label></h3>
+	<div class="box"><input type="password" name="lpass" id="lpass" value=""size="30" /></div>
+</div>
+<div class="clear"></div>
+
+<div class="br"></div>
+
+<!-- button -->
+<p>
+	<input type="hidden" name="newuser" value="1" />
+	<button type="submit" id="submit" name="newuser" class="btn" onclick="javascript:submit_kleeja_data('#add_user_form', '#content', 0); return false;"><span>{lang.SUBMIT}</span></button>
+</p>
+
+{H_FORM_KEYS2}
+</form>
+</IF>

@@ -88,7 +88,7 @@ else #num rows
 
 //pages
 $total_pages 	= $Pager->getTotalPages(); 
-$arr_paging 	= $Pager->print_nums(basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'), 'onclick="javascript:get_kleeja_link($(this).attr(\'href\'), \'#main_container\'); return false;"'); 
+$arr_paging 	= $Pager->print_nums(basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'), 'onclick="javascript:get_kleeja_link($(this).attr(\'href\'), \'#content\'); return false;"'); 
 $gr_exts_arr	= ch_g('new_ext_group', 9);
 
 //after submit 
@@ -137,6 +137,7 @@ else if(isset($_GET['add_new_ext']))
 	if(empty($new_ext_i))
 	{
 		$text	= $lang['EMPTY_EXT_FIELD'];
+		$text .= '<meta HTTP-EQUIV="REFRESH" content="2; url=' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '">' . "\n";
 		$stylee	= 'admin_info';
 	}
 	else

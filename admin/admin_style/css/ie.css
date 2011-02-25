@@ -1,6 +1,0 @@
-/*** Browsers (all versions of IE) ***/
-
-/* stupid IE6 HasLayout hack */
-#pageMain { zoom: 1; }
-
-button.btn span{ margin-top:0;}

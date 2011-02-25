@@ -197,7 +197,7 @@ else
 
 //pages
 $total_pages 	= $Pager->getTotalPages(); 
-$page_nums 		= $Pager->print_nums(basename(ADMIN_PATH). '?cp=' . basename(__file__, '.php'), 'onclick="javascript:get_kleeja_link($(this).attr(\'href\'), \'#main_container\'); return false;"'); 
+$page_nums 		= $Pager->print_nums(basename(ADMIN_PATH). '?cp=' . basename(__file__, '.php'), 'onclick="javascript:get_kleeja_link($(this).attr(\'href\'), \'#content\'); return false;"'); 
 $current_page	= $Pager->currentPage;
 
 //after submit 

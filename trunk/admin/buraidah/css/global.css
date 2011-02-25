@@ -23,7 +23,8 @@ a:visited, a:hover, a:link, .a:active {
 
 input {
 	border: 1px solid #AAA;
-	font-size: inherit;
+	font-family:Tahoma, arial;
+	font-size:11px;
 	padding: 3px;
 }
 button, input[type='submit'] {
@@ -127,6 +128,6 @@ select:active {
 
 /* class in the language files */
 .advanced_caution{color:red;background:#FFDFDF;padding:3px 5px;border:1px solid #D88C8C;margin-right:7px; font-size: 11px;}
-.delf_caution{color:red;background:#FFDFDF;padding:3px 5px;border:1px solid #D88C8C;margin-right:5px;}
+.delf_caution{color:red;background:#FFDFDF;padding:3px 5px;border:1px solid #D88C8C;margin-right:5px;font-size:10px;}
 .live_xts{font-size:xx-small;font-weight: bold;color:#3F5252}
 /* ## class in the language files */

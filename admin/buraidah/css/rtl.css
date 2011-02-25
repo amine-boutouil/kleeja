@@ -20,7 +20,8 @@ body{
 #menu{
 	right:0;
 	background:transparent url('../images/menu_bg_rtl.png') repeat-y;
-	}
+	left:auto;
+}
 
 	#menu .current-title{
 		text-align:left;
@@ -45,6 +46,7 @@ body{
 	}
 	#menu .top-bar .home ul{
 		right:9px;
+		left:auto;
 	}
 		#menu .top-bar .home ul li{
 			text-align:right;
@@ -55,6 +57,7 @@ body{
 
 #content{
 	right:267px;
+	left:auto;
 	margin:20px 20px 20px 0;
 }
 

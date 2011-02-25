@@ -28,6 +28,7 @@ body{
 	}
 	#menu .bottom-logo{
 		right:0.5%;
+		left:auto;
 	}
 	#menu .current-items #navlist li{
 		text-align:left;

@@ -289,4 +289,7 @@ $lang = array_merge($lang, array(
 	'PLUGINS_CHANGES_FILES_EXP'	=> 'Tieto komprimované súbory, ktoré obsahujú upravené súbory, zmenili niektoré rozšírenia. Musíte si ich preto stiahnuť a nahradiť ich. Keď budete hotový môžete odstrániť ZIP súbory.',
 	'LOADING'					=> 'Loading',
 	'ERROR_AJAX'				=> 'There is an error, try again!.',
+	'MORE'						=> 'More',
+	'MENU'						=> 'Menu',
+	'WELCOME'					=> 'Welcome',
 ));

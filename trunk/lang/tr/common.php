@@ -568,6 +568,9 @@ $lang = array_merge($lang, array(
 	'LOAD_IS_HIGH_NOW'			=> 'Our website facing very high load right now !, please wait and try refresh this page again.',
 	'LOADING'					=> 'Loading',
 	'ERROR_AJAX'				=> 'There is an error, try again!.',
+	'MORE'						=> 'More',
+	'MENU'						=> 'Menu',
+	'WELCOME'					=> 'Welcome',
 
 	//last line of this file ...					 
 	'S_TRANSLATED_BY' 			=> '<b>Çeviri yapan</b>       <a href="http://www.forumvakti.net/">CEZALAND</a>',

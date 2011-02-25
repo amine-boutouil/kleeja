@@ -25,7 +25,8 @@ if(!isset($_REQUEST['lang']))
 $stylee 	= "admin_langs";
 $action 	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;page=' .  (isset($_GET['page']) ? intval($_GET['page']) : 1) . '&amp;lang=' . $SQL->escape($_REQUEST['lang']);
 $action2 	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php');
-$H_FORM_KEYS	= kleeja_add_form_key('adm_langs');
+$H_FORM_KEYS= kleeja_add_form_key('adm_langs');
+
 
 //
 // Check form key
@@ -121,7 +122,8 @@ else
 
 //pages
 $total_pages 	= $Pager->getTotalPages(); 
-$page_nums 		= $Pager->print_nums(basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php')); 
+$page_nums 		= $Pager->print_nums(basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'),
+								'onclick="javascript:get_kleeja_link($(this).attr(\'href\'), \'#content\'); return false;"');
 
 //after submit 
 if (isset($_POST['submit']))

@@ -170,6 +170,7 @@ $path_adm	= PATH . 'includes/adm';
 //exception extentions
 $ext_expt	= array();
 $ext_expt[]	= 'start';
+$ext_expt[]	= 'a_configs';
 $ext_expt[]	= 'php_info';
 $ext_expt[]	= 'b_lgoutcp';
 
@@ -230,7 +231,9 @@ if(!$go_to || empty($go_to) ||  !in_array($go_to, $adm_extensions))
 }
 
 //make array for menu 
-$adm_extensions_menu =	array();
+$adm_extensions_menu =	$adm_topmenu = array();
+
+#$top_menu_items = array('c_files', 'd_img_ctrl', 'h_search', 'i_exts');
 
 //re oreder the items as alphapatic !
 sort($adm_extensions);
@@ -278,8 +281,8 @@ foreach($adm_extensions as $m)
 
 	++$i;
 	$adm_extensions_menu[$i]	= array(
-										'icon'		=> (file_exists($STYLE_PATH_ADMIN . 'images/menu_icons/' . ($m == 'configs' ? 'options' : $m) . '_sb.png'))	? $STYLE_PATH_ADMIN . 'images/menu_icons/' . ($m == 'configs' ? 'options' : $m) . '_sb.png' : $STYLE_PATH_ADMIN . 'images/menu_icons/no_icon.png',
-										'icon_mini'	=> (file_exists($STYLE_PATH_ADMIN . 'images/menu_icons/mini/' . ($m == 'configs' ? 'options' : $m) . '_button.png'))	? $STYLE_PATH_ADMIN . 'images/menu_icons/mini/' . ($m == 'configs' ? 'options' : $m) . '_button.png' : $STYLE_PATH_ADMIN . 'images/menu_icons/mini/no_icon.png',
+										//'icon'		=> (file_exists($STYLE_PATH_ADMIN . 'images/menu_icons/' . ($m == 'configs' ? 'options' : $m) . '_sb.png'))	? $STYLE_PATH_ADMIN . 'images/menu_icons/' . ($m == 'configs' ? 'options' : $m) . '_sb.png' : $STYLE_PATH_ADMIN . 'images/menu_icons/no_icon.png',
+										//'icon_mini'	=> (file_exists($STYLE_PATH_ADMIN . 'images/menu_icons/mini/' . ($m == 'configs' ? 'options' : $m) . '_button.png'))	? $STYLE_PATH_ADMIN . 'images/menu_icons/mini/' . ($m == 'configs' ? 'options' : $m) . '_button.png' : $STYLE_PATH_ADMIN . 'images/menu_icons/mini/no_icon.png',
 										'lang'		=> !empty($lang['R_'. strtoupper($m)]) ? $lang['R_'. strtoupper($m)] : (!empty($olang['R_' . strtoupper($m)]) ? $olang['R_' . strtoupper($m)] : strtoupper($m)),
 										'link'		=> './' . basename(ADMIN_PATH) . '?cp=' . ($m == 'configs' ? 'options' : $s) . (@in_array($m, $ext_formkey) ? '&amp;' . $GET_FORM_KEY_GLOBAL : ''),
 										'confirm'	=> (@in_array($m, $ext_confirm)) ? true : false,
@@ -290,36 +293,18 @@ foreach($adm_extensions as $m)
 
 	//add another item to array for title='' in href or other thing
 	$adm_extensions_menu[$i]['title'] = $adm_extensions_menu[$i]['lang'];
+	
+	#if(@in_array($s, $top_menu_items))
+	#{
+	#	$adm_topmenu[$i] = $adm_extensions_menu[$i];
+	#	unset($adm_extensions_menu[$i]);
+	#}
 
 	($hook = kleeja_run_hook('endforeach_ext_admin_page')) ? eval($hook) : null; //run hook 
 }
 
 
-//is mini menu is enabled !
-$GET_VARS_R	= empty($_GET) ? array() : $_GET;
-$GET_VARS_V = array();
-foreach ($GET_VARS_R as $key => $val)
-{
-	$GET_VARS_V[] = htmlspecialchars($key) . '=' . htmlspecialchars($val);
-}
 
-$E_MENU_USERS = @unserialize($config['expand_menu']);
-$MINI_MENU = false;
-if(in_array($usrcp->id(), array_keys($E_MENU_USERS)))
-{
-	$MINI_MENU = (int) $E_MENU_USERS[$usrcp->id()];
-}
-
-if(isset($_GET['expand_menu']))
-{
-	#bedro says use cookies, but i don't think it's good idea ..
-	$E_MENU_USERS[$usrcp->id()] = $MINI_MENU = intval($_GET['expand_menu']);
-	update_config('expand_menu', serialize($E_MENU_USERS) , false);	
-}
-
-$link_expand_menu = basename(ADMIN_PATH) . '?cp=' . $go_to  . '&amp;' . implode('&amp;', $GET_VARS_V) . '&amp;expand_menu=' . ($MINI_MENU ? 0 : 1);
-
-unset($GET_VARS_R, $GET_VARS_V, $E_MENU_USERS);
 
 
 //get it 
@@ -363,7 +348,16 @@ if(!isset($_GET['_ajax_']))
 }
 else
 {
-	echo_ajax(1, $tpl->display($stylee));
+	$go_menu_html = '';
+	if(isset($go_menu))
+	{
+		foreach($go_menu as $m=>$d)
+		{
+			$go_menu_html .= '<li class="' . ($d['current']?'active':'') .'" id="c_' . $d['goto'] . '"><a href="' . $d['link'] . '" onclick="javascript:get_kleeja_link(\'' . 
+							$d['link'] . '\', \'#content\', {\'current_id\':\'c_' . $d['goto'] . '\', \'current_class\':\'active\'' . ($d['confirm'] ? ', \'confirm\':true' : '') . '}); return false;">' . $d['name'] . '</a></li>';
+		}
+	}
+	echo_ajax(1, $tpl->display($stylee), $go_menu_html);
 }
 
 //footer

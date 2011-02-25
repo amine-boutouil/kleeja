@@ -16,4 +16,7 @@ $lang = array_merge($lang, array(
 	# ?
 	'LOADING'					=> 'Loading',
 	'ERROR_AJAX'				=> 'There is an error, try again!.',
+	'MORE'						=> 'More',
+	'MENU'						=> 'Menu',
+	'WELCOME'					=> 'Welcome',
 ));

@@ -1,0 +1,214 @@
+﻿
+<!-- general -->
+<IF NAME="current_smt == general">
+<h1>{usernamelang}</h1>
+
+<LOOP NAME="ADM_NOTIFICATIONS">
+<div class="note-{{msg_type}}">
+	<strong>{{title}}!</strong>
+		{{msg}}
+</div>
+</LOOP>
+
+
+<IF NAME="last_visit">
+<div class="section">
+	<h3>{lang.LAST_VISIT}</h3>
+	<div class="box">{last_visit}</div>
+</div>
+<div class="clear"></div>
+
+<div class="section">
+	<h3>{lang.IMG_LST_VST_SEARCH}</h3>
+	<div class="box">
+		<select class="show_since_time" tabindex="3" onchange="javascript:get_kleeja_link('{h_lst_imgs}' + (Math.round((new Date()).getTime() / 1000) - $(this).val()), '#content');">">
+			<option>-----</option>
+			<option value="3600">{lang.HOUR}</option>
+			<option value="18000">{lang.5HOURS}</option>
+			<option value="864000">{lang.DAY}</option>
+			<option value="6048000">{lang.WEEK}</option>
+			<option value="25920000">{lang.MONTH}</option>
+			<option value="31536000">{lang.YEAR}</option>
+		</select>
+	</div>
+</div>
+<div class="clear"></div>
+
+<div class="section">
+	<h3>{lang.FLS_LST_VST_SEARCH}</h3>
+	<div class="box">
+		<select class="show_since_time" tabindex="3" onchange="javascript:get_kleeja_link('{h_lst_files}' + (Math.round((new Date()).getTime() / 1000) - $(this).val()), '#content');">">
+			<option>-----</option>
+			<option value="3600">{lang.HOUR}</option>
+			<option value="18000">{lang.5HOURS}</option>
+			<option value="864000">{lang.DAY}</option>
+			<option value="6048000">{lang.WEEK}</option>
+			<option value="25920000">{lang.MONTH}</option>
+			<option value="31536000">{lang.YEAR}</option>
+		</select>
+	</div>
+</div>
+<div class="clear"></div>
+</IF>
+
+<div class="section">
+	<h3>{lang.LSTFLE_ST}</h3>
+	<div class="box"><IF NAME="stat_last_file!='0'"><a href="{last_file_up_url}"  onclick="window.open(this.href,'_blank');return false;">{last_file_up}</a><ELSE>{lang.UNKNOWN}</IF></div>
+</div>
+<div class="clear"></div>
+
+<div class="br"></div>
+
+<h1>{lang.GENERAL_STAT}</h1>
+
+<div class="section">
+	<h3>{lang.AUSERS_NUM}</h3>
+	<div class="box">{users_number}</div>
+</div>
+<div class="clear"></div>
+
+
+<IF NAME="config.user_system==1">
+<div class="section">
+	<h3>{lang.LAST_REG}</h3>
+	<div class="box">{lst_reg}</div>
+</div>
+<div class="clear"></div>
+</IF>
+
+<div class="section">
+	<h3>{lang.AFILES_NUM}</h3>
+	<div class="box">{files_number} {lang.FILE}</div>
+</div>
+<div class="clear"></div>
+
+<div class="section">
+	<h3>{lang.LSTDELST}</h3>
+	<div class="box">{last_del_fles}</div>
+</div>
+<div class="clear"></div>
+
+<div class="section">
+	<h3>{lang.AFILES_SIZE_SPACE}</h3>
+	<div class="box">
+		<div style="font-size:10px;"><div style="width:200px;height:7px;background-color:#ddd;"><img src="{STYLE_PATH_ADMIN}images/spacer.gif" style="width:{per1}%;height:7px;background-color:#000;" /></div> {per1}/100%</div>
+	</div>
+</div>
+<div class="clear"></div>
+
+<ELSEIF NAME="current_smt == other">
+<h1>{lang.OTHER_INFO}</h1>
+
+<div class="section">
+	<h3>{lang.KLEEJA_VERSION}</h3>
+	<div class="box">{kleeja_version}</div>
+</div>
+<div class="clear"></div>
+
+<div class="section">
+	<h3>{lang.PHP_VER}</h3>
+	<div class="box">{php_version}</div>
+</div>
+<div class="clear"></div>
+
+<div class="section">
+	<h3>{lang.MYSQL_VER}</h3>
+	<div class="box">{mysql_version}</div>
+</div>
+<div class="clear"></div>
+
+<div class="section">
+	<h3>{lang.OTHER_INFO}</h3>
+	<div class="box">
+		max_execution_time: {max_execution_time} <br />
+		upload_max_filesize: {upload_max_filesize} <br />
+		post_max_size: {post_max_size} <br />
+		memory_limit: {memory_limit} <br />
+	</div>
+</div>
+<div class="clear"></div>
+
+<div class="br"></div>
+<h1>{lang.SEARCH_STAT}</h1>
+
+<div class="section">
+	<h3>Google</h3>
+	<div class="box">
+		{lang.LAST_GOOGLE} : {s_last_google}<br />
+		{lang.GOOGLE_NUM} : {s_google_num} <br />
+	</div>
+</div>
+<div class="clear"></div>
+
+<div class="section">
+	<h3>Yahoo!</h3>
+	<div class="box">
+		{lang.LAST_YAHOO} :	{s_last_yahoo}<br />
+		{lang.YAHOO_NUM} : {s_yahoo_num}<br />
+	</div>
+</div>
+<div class="clear"></div>
+
+<IF NAME="sql_debug">
+<div class="br"></div>
+<h1>SQL DEBUGS</h1>
+<div class="dir left" style="overflow:scroll;height:200px;border:1px #ccc dotted">
+	<table>
+	<LOOP NAME="sql_debug">
+	<tr style="color:{{colored}}">
+	<td>{{type}}</td>
+	<td>{{time}}</td>
+	<td>{{content}}</td>
+	</tr>
+	</LOOP>
+	</table>
+</div>
+</IF>
+
+
+
+<ELSEIF NAME="current_smt == team">
+<h1>{lang.KLEEJA_TEAM}</h1>
+
+<div class="section">
+	<h3>Saanina</h3>
+	<div class="box">
+		Abdullrahman M. Al-Shawaiee<br />
+		2007-2011<br />
+	</div>
+</div>
+<div class="clear"></div>
+
+<div class="section">
+	<h3>­Gareeboo</h3>
+	<div class="box">
+		Mansour A. Kareem AlDouweghri<br />
+		2007-2011<br />
+	</div>
+</div>
+<div class="clear"></div>
+
+<div class="section">
+	<h3>phpfalcon</h3>
+	<div class="box">
+		Bader N. Al-Mutairi <br />
+		2009-2011<br />
+	</div>
+</div>
+<div class="clear"></div>
+
+<div class="section">
+	<h3>Tar3q</h3>
+	<div class="box">
+		Abdulrahman E. Al-Harthy <br />
+		2009-2011<br />
+	</div>
+</div>
+<div class="clear"></div>
+
+<IF NAME="translator_copyrights">
+<div class="br"></div>
+<h1>{translator_copyrights}</h1>
+</IF>
+
+</IF>

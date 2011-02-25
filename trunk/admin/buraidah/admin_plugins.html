@@ -1,0 +1,94 @@
+
+<h1>{lang.R_PLUGINS}</h1>
+
+<h2>{lang.PLUGINS_EX}</h2>
+
+<div class="br"></div>
+
+<IF NAME="no_plugins">
+<div class="note-info">{lang.NO_PLUGINS}</div>
+<ELSE>
+<LOOP NAME="arr">
+<table>
+	<tr class="first">
+		<td colspan="3">
+			<span style="font-family: Georgia, Times, 'Times New Roman', serif;font-size:16px;font-weight: normal;">{{plg_name}} {{plg_ver}}</span>
+		</td>
+	</tr>
+	<tr>
+	<td style="width:10%;text-align:(lang.DIR==ltr?left:right);">
+	<img src="{{plg_icon_url}}" />
+	</td>
+	<td style="width:70%;text-align:(lang.DIR==ltr?left:right);">
+		{{plg_dsc}}
+		<br />
+		<em>{{plg_author}}</em>
+	</td>
+	<td style="width:20%;padding-(lang.DIR==ltr?left:right):10px;text-align:(lang.DIR==ltr?left:right);">		
+	<IF LOOP="plg_disabled">
+		<a href="{action}&amp;do_plg={{plg_id}}&amp;m=2&amp;{GET_FORM_KEY}" title="{lang.ENABLE}"><img src="{STYLE_PATH_ADMIN}images/enable.png" alt="{lang.ENABLE}" /></a>
+	<ELSE>
+		<a href="{action}&amp;do_plg={{plg_id}}&amp;m=1&amp;pn={{plg_name}}&amp;{GET_FORM_KEY}" title="{lang.DISABLE}"><img src="{STYLE_PATH_ADMIN}images/disable.png" alt="{lang.DISABLE}" /></a>
+					</IF>
+					<a href="{action}&amp;do_plg={{plg_id}}&amp;m=3&amp;pn={{plg_name}}&amp;{GET_FORM_KEY}" title="{lang.DELETE}"><img src="{STYLE_PATH_ADMIN}images/del.png" alt="{lang.DELETE}" onclick="javascript:return confirm_from();" /></a>
+					<a href="{action}&amp;do_plg={{plg_id}}&amp;m=5&amp;{GET_FORM_KEY}" title="{lang.EXPORT_AS_XML}"><img src="{STYLE_PATH_ADMIN}images/export.png" alt="{lang.EXPORT_AS_XML}" /></a>
+					<IF LOOP="plg_instructions"><a href="{action}&amp;do_plg={{plg_id}}&amp;m=4&amp;{GET_FORM_KEY}" title="{lang.INFORMATION}"><img src="{STYLE_PATH_ADMIN}images/help.png" alt="{lang.INFORMATION}" /></a></IF>
+				
+		</td>
+	</tr>
+</table>
+</LOOP>
+</IF>
+
+<div class="br"></div>
+
+<!-- cached changed -->
+<IF NAME="is_there_changes_files">
+<h1>{lang.PLUGINS_CHANGES_FILES} </h1>
+<h2>{lang.PLUGINS_CHANGES_FILES_EXP}</h2>
+
+<div class="br"></div>
+<table style="width:100%">
+	<LOOP NAME="changes_files">	
+	<tr>
+			<td>{{file}}</td>
+			<td><a href="{{path}}">{lang.DOWNLAOD}</a></td>
+	</tr>
+	</LOOP>
+	<tr>
+		<td colspan="2" style="text-align:center;padding:6px;font-size:16px"> [ <a href="{action}&amp;cc=1">{lang.DELETE}</a> ] </td>
+	</tr>
+</table>
+
+<div class="br"></div>
+</IF>
+
+<!-- add new plugin -->
+<h1>{lang.ADD_NEW_PLUGIN}</h1>
+<form method="post" action="{action}" enctype="multipart/form-data">
+
+<div class="section">
+	<h3><label for="imp_file">{lang.ADD_NEW_PLUGIN_EXP}</label></h3>
+	<div class="box">
+		<input name="imp_file" id="imp_file" type="file" />
+	</div>
+</div>
+<div class="clear"></div>
+
+<IF NAME="there_is_files_method != kfile">
+	<div class="br"></div>
+	<INCLUDE NAME="admin_plugin_mfile"> 
+</IF>
+
+<div class="br"></div>
+
+<p>
+	<button type="submit" id="submit" name="submit_new_plg" class="btn" onclick="javascript:return confirm_from('{lang.PLUGIN_CONFIRM_ADD}');"><span>{lang.SUBMIT}</span></button>
+</p>
+	
+{H_FORM_KEYS}
+</form>
+
+<!-- note for user  -->
+<div class="br"></div>
+<div class="note-info"><strong>{lang.NOTE} !</strong> {klj_d_s}</div>

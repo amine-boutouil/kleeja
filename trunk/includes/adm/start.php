@@ -15,10 +15,13 @@ if (!defined('IN_ADMIN'))
 	exit();
 }
 
+
 //style of
 $stylee			= "admin_start";
 $h_lst_files	= basename(ADMIN_PATH) . '?cp=c_files&amp;last_visit=';
 $h_lst_imgs		= basename(ADMIN_PATH) . '?cp=d_img_ctrl&amp;last_visit=';
+$current_smt	= isset($_GET['smt']) ? (preg_match('![a-z0-9_]!i', trim($_GET['smt'])) ? trim($_GET['smt']) : 'general') : 'general';
+$current_title	= 
 
 //data
 $lst_reg			= (empty($stat_last_user)) ? $lang['UNKNOWN'] : $stat_last_user;
@@ -177,6 +180,7 @@ if(!file_exists(PATH . $config['foldername'] . '/thumbs/.htaccess'))
 
 
 //check is there any copyright on footer.html if not show pretty msg with peace
+/*
 if(file_exists($STYLE_PATH . 'footer.html'))
 {
 	$t_data = file_get_contents($STYLE_PATH . 'footer.html');
@@ -193,11 +197,11 @@ if(file_exists($STYLE_PATH . 'footer.html'))
 		}
 	}
 }
-
+*/
 //there is cleaning files process now
 if((int)$config['klj_clean_files_from'] > 0)
 {
-	$ADM_NOTIFICATIONS[]  = array('id' => 'klj_clean_files', 'msg_type'=> 'info', 'title'=> '', 'msg'=> $lang['T_CLEANING_FILES_NOW']);
+	$ADM_NOTIFICATIONS[]  = array('id' => 'klj_clean_files', 'msg_type'=> 'info', 'title'=> $lang['NOTE'], 'msg'=> $lang['T_CLEANING_FILES_NOW']);
 }
 		
 		
@@ -234,5 +238,12 @@ if(defined('DEV_STAGE'))
 //is there copyrights for translator ? 
 $translator_copyrights = isset($lang['S_TRANSLATED_BY']) ?  $lang['S_TRANSLATED_BY'] : false;
 
+
+//secondary menu
+$go_menu = array(
+				'general' => array('name'=>$lang['GENERAL_STAT'], 'link'=> basename(ADMIN_PATH) . '?cp=start&amp;smt=general', 'goto'=>'general', 'current'=> $current_smt == 'general'),
+				'other' => array('name'=>$lang['OTHER_INFO'], 'link'=> basename(ADMIN_PATH) . '?cp=start&amp;smt=other', 'goto'=>'other', 'current'=> $current_smt == 'other'),
+				'team' => array('name'=>$lang['KLEEJA_TEAM'], 'link'=> basename(ADMIN_PATH) . '?cp=start&amp;smt=team', 'goto'=>'team', 'current'=> $current_smt == 'team'),
+	);
 
 ($hook = kleeja_run_hook('default_admin_page')) ? eval($hook) : null; //run hook 

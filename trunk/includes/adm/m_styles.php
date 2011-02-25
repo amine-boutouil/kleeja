@@ -140,7 +140,7 @@ switch ($_GET['sty_t'])
 					{
 						while (($file = readdir($dh)) !== false)
 						{
-							if(array_pop(explode('.', $file)) == 'html' && !is_dir($d_style_path . '/' . $file))
+							if(array_pop(explode('.', $file)) == 'html' && !is_dir($d_style_path . '/' . $file) && $file != 'index.html')
 							{
 								if(in_array($file, array('header.html', 'footer.html', 'index_body.html')))
 								{

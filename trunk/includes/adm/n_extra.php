@@ -82,6 +82,7 @@ $SQL->freeresult($result);
 //after submit 
 if (isset($_POST['submit']))
 {
-	$text	= $affected ? $lang['EXTRA_UPDATED'] : $lang['NO_UP_CHANGE_S'];
+	$text = $affected ? $lang['EXTRA_UPDATED'] : $lang['NO_UP_CHANGE_S'];
+	$text .= '<meta HTTP-EQUIV="REFRESH" content="2; url=' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') .  '">' . "\n";  
 	$stylee	= "admin_info";
 }

@@ -377,7 +377,7 @@ if(empty($config['h_key']))
 
 //Global vars for Kleeja
 $STYLE_PATH = $config['siteurl'] . 'styles/' . (trim($config['style_depend_on']) == '' ? $config['style'] : $config['style_depend_on']) . '/';
-$STYLE_PATH_ADMIN  = PATH . 'admin/admin_style/';
+$STYLE_PATH_ADMIN  = PATH . 'admin/buraidah/';
 $THIS_STYLE_PATH = PATH . 'styles/' . $config['style'] . '/';
 	
 //get languge of common

@@ -814,10 +814,10 @@ function generate_json($array)
 /**
 * Send an answer for ajax request
 */
-function echo_ajax($code_number, $content)
+function echo_ajax($code_number, $content, $menu = '')
 {
 	global $SQL;
 	$SQL->close();
 
-	exit(generate_json(array('code' => $code_number, 'content' => $content)));
+	exit(generate_json(array('code' => $code_number, 'content' => $content, 'menu' => $menu)));
 }

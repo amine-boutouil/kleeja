@@ -1,0 +1,261 @@
+/**
+ * Specific CSS file 
+ * Kleeja Dev. team.
+ */
+
+
+	
+/* start: menu */
+#menu{
+	position:fixed;
+	left:0;
+	top:0;
+	width:267px;
+	bottom:0;
+	background:transparent url('../images/menu_bg.png') repeat-y;
+	}
+	#menu .current-title{
+		margin:15px;
+		margin-top:50px;
+		font-size:20px;
+		text-align:right;
+	}
+	#menu .bottom-logo{
+		height:50px;
+		width:200px;
+		bottom:1%;
+		left:0.5%;
+		position:fixed;
+		background:transparent url('../images/blogo1.png') no-repeat;
+	}
+	#menu .current-items{	
+		}
+	#menu .current-items #navlist{
+		padding: 0;
+		margin:0;
+	}
+	#menu .current-items #navlist li{
+		list-style: none;
+		margin: 0;
+		text-align: right;
+		padding:9px 15px 9px 0;
+		font-size:14px;
+	}
+	#menu .current-items #navlist li a{
+		color:#3A91AE;
+	}
+	#menu .current-items #navlist .active a{
+		color:#000;
+	}
+	#menu .current-items #navlist .active {
+		background: #D0F4FF url('../images/menu_bg_current.png') repeat-y;
+		border-width:0 1px;
+		border:1px solid #A7CCD8;
+	}
+	
+	#menu .top-bar {
+		margin:6px;
+	}
+	#menu .top-bar img{
+		cursor:pointer;
+		width:19px;
+		height:19px;
+		padding:3px;
+	}
+	#menu .top-bar .home{
+		float:left;
+		width:50%;
+	}
+	#menu .top-bar .cats{
+		float:right;
+		width:50%;
+		text-align:right;
+	}
+	#menu .top-bar .home ul{
+		position:absolute; 
+		left:9px;
+		display:none; 
+		margin:0 0 0 -1px; 
+		width:200px;
+		padding:0; 
+		list-style:none;
+		background-color:#FBFBFB;
+		border:1px solid #ccc;
+	}
+		#menu .top-bar .home ul li{
+			width:97%;
+			text-align:left;
+			padding:3px;
+			font-size:12px;
+			
+		}
+		#menu .top-bar .home ul li a{
+			display:block;
+			padding:3px;
+			color:#666;
+		}
+		#menu .top-bar .home ul li a .kbubbles{
+			margin-left:5px;
+			border: 1px solid #3DB2D0;
+			padding:0 3px;
+			background-color:#DAF0F6;
+			color:#3DB2D0;
+		}
+		#menu .top-bar .home ul li a:hover{
+			background:#ebebeb;
+		}
+/* end: menu*/
+
+/* start: content */
+#content{
+	position:absolute;
+	left:267px;
+	width:650px;
+	top:0;
+	height:100%;
+	margin:20px 0 20px 20px;
+	padding-bottom:50px;
+}
+	#content h1{
+		color:#3D7284;
+		font-size:22px;
+		padding:1px 1px 10px 1px;
+		border-bottom:1px solid #eee;
+		font-weight:normal;
+		margin-bottom: 10px;
+	}
+	#content .section {
+		margin-top:20px;
+		}
+	#content .section h3{
+		color:#000;
+		font-size:13px;
+		font-weight:bold;
+		float:left;
+		margin:0; padding:0;
+		width:170px;
+		vertical-align:middle;
+	}
+	#content .section .box{
+		color:#000;
+		font-size:12px;
+		text-align:left;
+		float:right;
+		width:470px;
+	}
+	#content .hr{
+			width:100%;
+			margin:20px auto;
+			clear:both;
+			border-bottom:1px solid #eee;
+		}
+	#content .br{
+			width:100%;
+			margin:30px auto;
+			clear:both;
+		}
+	#content .menu_but_in_content{
+		font-size:16px;
+		line-height:140%
+	}
+	#content .menu_but_in_content li .kbubbles{
+			margin-left:5px;
+			border: 1px solid #3DB2D0;
+			padding:0 3px;
+			background-color:#DAF0F6;
+			color:#3DB2D0;
+	}
+	
+	#content table{
+		width:100%;
+		
+	}
+	#content table td{
+		text-align:center;
+		vertical-align:middle;
+		padding:3px;
+	}
+	#content table .first{
+		background: #D0F4FF url('../images/input.png') repeat-x;
+		height:25px;
+	}
+	
+	#content h2{
+		font-size:13px;
+		font-weight:bold;
+	}
+
+.note-done{
+	background: #DAF0F6 url(../images/done.gif) no-repeat 1% 50%;
+	color:#518EB0;
+	padding: 10px;
+	padding-left:35px;
+	font-size:12px;
+	border: 1px solid #3DB2D0;
+	border-width:1px 0;
+	margin-top:5px;
+}
+
+#system-message .info, .note-info{
+	background: #FFFCDB url(../images/info.gif) no-repeat 1% 50%;
+	color:#B28600;
+	padding: 10px;
+	padding-left:35px;
+	font-size:12px;
+	border: 1px solid #FFE085;
+	border-width:1px 0;
+	margin-top:5px;
+}
+#system-message .error, .note-error{
+	background: #FFD8D8 url(../images/error.gif) no-repeat 1% 50%;
+	color:#DE0404;
+	padding: 10px;
+	padding-left:35px;
+	font-size:12px;
+	border: 1px solid #DE0404;
+	border-width:1px 0;
+	margin-top:5px;
+}
+
+
+.note-info strong, .note-error strong, .note-done strong{
+	font-weight:bold;
+}
+
+
+
+/* end: content */
+
+/* start: admin_start.html */
+
+/* end: admin_start.html */
+
+/* start: admin_calls.html*/
+
+/* end: admin_calls.html*/
+
+/* start: admin_styles.html*/
+.quick_edit_tpls{
+	
+}
+.quick_edit_tpls td {
+	text-align:left;
+}
+/* end: admin_styles.html*/
+
+/* start: admin_show_tpls.html*/
+.s_tpl_x{
+	padding:5px;
+	width:95%;
+}
+/* end: admin_show_tpls.html*/
+
+
+/* start: admin_chack_update.html */
+.update_title {color:#0A71D8;font-size:14px;}
+.update_list {font-size:11px;}
+.update_list li{list-style:square inside; padding:5px;}
+.link_copy {background:#E8E8E8;padding:10px; border-top:1px solid #ccc;border-bottom:1px solid #ccc;color:#666;direction:ltr;font-weight:bold;}
+/* end: admin_chack_update.html */
+
+

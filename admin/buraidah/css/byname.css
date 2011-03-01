@@ -28,7 +28,8 @@
 		position:fixed;
 		background:transparent url('../images/blogo1.png') no-repeat;
 	}
-	#menu .current-items{	
+	#menu .current-items{
+		overflow:auto;
 		}
 	#menu .current-items #navlist{
 		padding: 0;

@@ -67,6 +67,9 @@
 		float:left;
 		width:50%;
 	}
+	#menu .top-bar .home img{
+		width:27px;height:27px;
+	}
 	#menu .top-bar .cats{
 		float:right;
 		width:50%;

@@ -21,12 +21,13 @@
 		text-align:right;
 	}
 	#menu .bottom-logo{
-		height:50px;
+		/*height:50px;
 		width:200px;
 		bottom:1%;
 		left:0.5%;
 		position:fixed;
-		background:transparent url('../images/blogo1.png') no-repeat;
+		background:transparent url('../images/blogo1.png') no-repeat;*/
+		display:none;
 	}
 	#menu .current-items{
 		overflow:auto;
@@ -114,7 +115,7 @@
 #content{
 	position:absolute;
 	left:267px;
-	width:650px;
+	width:700px;
 	top:0;
 	height:100%;
 	margin:20px 0 20px 20px;
@@ -146,7 +147,7 @@
 		font-size:12px;
 		text-align:left;
 		float:right;
-		width:470px;
+		width:520px;
 	}
 	#content .hr{
 			width:100%;

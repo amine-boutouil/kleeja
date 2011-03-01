@@ -259,4 +259,64 @@
 .link_copy {background:#E8E8E8;padding:10px; border-top:1px solid #ccc;border-bottom:1px solid #ccc;color:#666;direction:ltr;font-weight:bold;}
 /* end: admin_chack_update.html */
 
+/* start: admin_login.html */
+#login_body{
+	background:transparent url(../images/fade.gif) repeat-x;
+	margin:0 auto;
+}
+#login_warp{
+	margin:200px auto;
+	width:300px;
+	font-family:tahoma;
+	font-size:13px;
+}
 
+.acp_login_box .ttitle{
+	font-size:18px;
+	margin-bottom:20px;
+}
+#login_top{ 
+	width:95%;
+	position:fixed;
+	top:0;
+	left:0;
+	padding:20px;
+}
+	#login_top .title_login{
+			float:right;
+		}
+	#login_top .return_login{
+			float:left;
+		}
+
+#login_warp .acp_login_box{
+		width:100%;
+		padding:10px;
+		margin-bottom:10px;
+		border:1px #eee solid;
+	}
+	#login_warp .acp_login_box p{
+		padding-bottom:50px;
+	}
+	#login_warp .acp_login_box input{
+		float:right;
+		width:170px;
+		padding:5px;
+		font-size:16px;
+		color:#666;
+	}
+	#login_warp .acp_login_box label{
+		float:left;
+		font-size:12px;
+		font-weight:bold;
+		color:#A9A9A9;
+		padding-top:9px;
+	}
+	
+	#login_warp .acp_login_box .submitt input{
+		width:300px;
+		margin:0 auto;
+		text-align:center;
+		cursor:pointer;
+	}
+/* end: admin_login.html */

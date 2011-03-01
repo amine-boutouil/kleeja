@@ -1,16 +1,15 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" dir="{lang.DIR}">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="{lang.LANG_SMALL_NAME}" xml:lang="{lang.LANG_SMALL_NAME}">
 <head>
 	<title>{lang.LOGIN} - {lang.KLEEJA_CP} - {config.sitename}</title>
 	<meta http-equiv="Content-Language" content="ar" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="robots" content="noindex, follow" />
-	<link rel="shortcut icon" href="{STYLE_PATH_ADMIN}images/favicon.ico" />
-	<link rel="icon" type="image/gif" href="{STYLE_PATH_ADMIN}images/favicon.gif" />
-	<link rel="apple-touch-icon" href="{STYLE_PATH_ADMIN}images/apple-touch-icon.png" />
-	<link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH_ADMIN}css/login_stylesheet.css" />
-	<IF NAME="{lang.DIR}==ltr"><style type="text/css">input[type="submit"] {float:right;}.site_name a:hover{padding-right:0;padding-left:10px;}.site_name img,.cp_kleeja img{padding-left:0;padding-right:8px;}.submit_go {float:right;}.system-message div.error ul li{background-position:left top;}.cp_kleeja{font-size:18px;}</style></IF>
-	<IS_BROWSER="ie6"><link rel="stylesheet" type="text/css" href="{STYLE_PATH_ADMIN}css/ie_6.css" /></IS_BROWSER>
+	<link rel="stylesheet" type="text/css" href="{STYLE_PATH_ADMIN}css/global.css" />
+	<link rel="stylesheet" type="text/css" href="{STYLE_PATH_ADMIN}css/byname.css" />
+	<IF NAME="{lang.DIR}==rtl"><link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH_ADMIN}css/rtl.css" /></IF>
+	<IS_BROWSER="ie6"><link rel="stylesheet" type="text/css" href="{STYLE_PATH_ADMIN}css/ie.css" /></IS_BROWSER>
+
 	<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.min.js"></script>
 	<script type="text/javascript">
 	<!--
@@ -24,8 +23,53 @@
 	//-->
 	</script>
 </head>
-<body id="no_ie6">
-	<div class="site_name"><a href="{config.siteurl}" title="{lang.RETURN_HOME}"><img src="{STYLE_PATH_ADMIN}images/login/go_back_home.gif" alt="{config.sitename}" />{lang.RETURN_HOME} .. !</a></div>
+<body id="login_body">
+	<div id="login_top">
+		<div class="title_login">
+			<!-- here -->
+		</div>	
+		<div class="return_login">
+			<a href="{config.siteurl}" title="{lang.RETURN_HOME}"> &laquo; {lang.RETURN_HOME}</a> 
+		</div>	
+	</div>
+
+	<div id="login_warp">
+		<form action="{action}" method="post" style="clear: both;" id="login_form">
+		<div class="acp_login_box">
+			<div class="ttitle">
+				{lang.KLEEJA_CP}
+			</div>
+			<div class="clear"></div>
+			<p>
+				<label for="lname">{lang.USERNAME}</label>
+				<input type="text" name="lname" id="lname" value="{username}" />
+			</p>
+			<p>
+				<label for="lpass_{KEY_FOR_PASS}">{lang.PASSWORD}</label>
+				<input type="password" id="lpass_{KEY_FOR_PASS}" name="lpass_{KEY_FOR_PASS}" value="" />
+			</p>
+			<p class="submitt">
+				<input class="submit_go" type="submit" name="submit" value="{lang.LOGIN}" />
+				{H_FORM_KEYS}
+				<input type="hidden" name="kid" value="{KEY_FOR_WEE}" />
+			</p>
+			
+			<div class="clear"></div>
+			<IF NAME="err">
+				<div class="note-error">{errs}</div>
+			</IF>
+		</div>
+	</form>	
+	</div>
+
+	<!--
+
+		<div class="site_name">
+			<a href="{config.siteurl}" title="{lang.RETURN_HOME}">
+				<img src="{STYLE_PATH_ADMIN}images/login/go_back_home.gif" alt="{config.sitename}" />{lang.RETURN_HOME} .. !
+			</a>
+		</div>
+
 	<div class="divline"></div>
 	<div class="logo_cp"><h1><a href="{config.siteurl}" title="{lang.RETURN_HOME}"><img src="{STYLE_PATH_ADMIN}images/logo.png" alt="kleeja" /></a></h1></div>
 	<div class="box">
@@ -43,9 +87,13 @@
 			<input type="hidden" name="kid" value="{KEY_FOR_WEE}" />
 			<div class="clr"></div>
 		</form>
-		<IF NAME="err"><div class="clr"></div><div class="system-message"><div class="error"><ul><li><p>{errs}</p></li></ul></div></div><div class="clr"></div></IF>
+		<IF NAME="err">
+			<div class="clr"></div><div class="system-message"><div class="error"><ul><li><p>{errs}</p></li></ul></div></div><div class="clr"></div></IF>
 	</div>
 	<div class="Powered">Powered by <a onclick="window.open(this.href,'_blank');return false;" href="http://www.kleeja.com" title="Powered by kleeja">Kleeja</a></div>
 	<div class="web2">XHTML | CSS</div>
+	-->
+	
+	
 </body>
 </html>

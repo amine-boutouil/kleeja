@@ -27,11 +27,14 @@ var STYLE_PATH_ADMIN = '{STYLE_PATH_ADMIN}';var go_to = '{go_to}';
 <!--//
 jQuery(document).ready(function($){
 	//for more menu at top menu
-	$('.top-bar .home').hover(
-			function () { $('ul', this).slideDown(50); }, 
-			function () { $('ul', this).slideUp(50); }
-	).click(function() {
-			$('#content').html('<h1>{lang.MENU}</h1><ul class="menu_but_in_content">' + $('.top-bar .home ul').html() + '</ul>');
+	$('.top-bar .home')
+	//.hover(
+	//		function () { $('ul', this).slideDown(50); }, 
+	//		function () { $('ul', this).slideUp(50); }
+	//)
+	.click(function() {
+			$('#menu .current-items ul').html($('.top-bar .home ul').html());
+			$('#menu .current-title').html('{lang.MENU}');
 	});
 	
 
@@ -123,6 +126,7 @@ function get_kleeja_link(URL, ID, p)
 				}
 				
 				$('#menu .current-items ul').html(R.menu);
+				$('#menu .current-title').html('{lang.WELCOME}');
 			}
 		},
 		error : function(R){
@@ -189,6 +193,7 @@ function submit_kleeja_data(FORM_ID, ID, CONFIRM)
 				}
 				
 				$('#menu .current-items ul').html(R.menu);
+				$('#menu .current-title').html('{lang.WELCOME}');
 			}
 		},
 		error : function(R){
@@ -290,7 +295,7 @@ function uncheckAll_exts(form, id, _do_c_) {
 							</a>
 						</li>
 					</LOOP>
-					</ul>
+				</ul>
 			</div>
 			<div class="cats">
 				<a href="./" onclick="javascript:get_kleeja_link('./'); return false;" title="{lang.R_CPINDEX}">

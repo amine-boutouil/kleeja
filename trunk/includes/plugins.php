@@ -264,7 +264,7 @@ class kplugins
 		$plugin_icon = false;
 		if(!empty($plg_info['plugin_icon']['value']))
 		{
-			$plugin_icon = $SQL->escape($plg_info['plugin_version']['value']);
+			$plugin_icon = $SQL->escape($plg_info['plugin_icon']['value']);
 		}
 		
 		
@@ -273,7 +273,7 @@ class kplugins
 		{
 			//insert in plugin table 
 			$insert_query = array(
-								'INSERT'	=> 'plg_name, plg_ver, plg_author, plg_dsc, plg_icon, plg_uninstall, plg_instructions, plg_store, plg_files',
+								'INSERT'	=> 'plg_name, plg_ver, plg_author, plg_dsc, ' . ($plugin_icon ? 'plg_icon,' : '') . 'plg_uninstall, plg_instructions, plg_store, plg_files',
 								'INTO'		=> "{$dbprefix}plugins",
 								'VALUES'	=> "'" . $SQL->escape($plugin_name) . "','" . $SQL->escape($plg_info['plugin_version']['value']) . 
 												"','" . $SQL->escape($plg_info['plugin_author']['value']) . "','" . 

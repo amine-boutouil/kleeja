@@ -12,6 +12,7 @@
 	top:0;
 	width:267px;
 	bottom:0;
+	overflow:auto;
 	background:transparent url('../images/menu_bg.png') repeat-y;
 	}
 	#menu .current-title{
@@ -30,31 +31,36 @@
 		display:none;
 	}
 	#menu .current-items{
-		overflow:auto;
 		}
-	#menu .current-items #navlist{
+	#menu .current-items ul{
 		padding: 0;
 		margin:0;
 	}
-	#menu .current-items #navlist li{
+	#menu .current-items ul li{
 		list-style: none;
 		margin: 0;
-		text-align: right;
-		padding:9px 15px 9px 0;
+		text-align: left;
+		padding:9px 0 9px 15px;
 		font-size:14px;
 	}
-	#menu .current-items #navlist li a{
+	#menu .current-items ul li a{
 		color:#3A91AE;
 	}
-	#menu .current-items #navlist .active a{
+	#menu .current-items  ul .active a{
 		color:#000;
 	}
-	#menu .current-items #navlist .active {
+	#menu .current-items ul.active {
 		background: #D0F4FF url('../images/menu_bg_current.png') repeat-y;
 		border-width:0 1px;
 		border:1px solid #A7CCD8;
 	}
-	
+		#menu .current-items ul li a .kbubbles{
+			margin-right:5px;
+			border: 1px solid #3DB2D0;
+			padding:0 3px;
+			background-color:#DAF0F6;
+			color:#3DB2D0;
+		}
 	#menu .top-bar {
 		margin:6px;
 	}
@@ -76,39 +82,7 @@
 		width:50%;
 		text-align:right;
 	}
-	#menu .top-bar .home ul{
-		position:absolute; 
-		left:9px;
-		display:none; 
-		margin:0 0 0 -1px; 
-		width:200px;
-		padding:0; 
-		list-style:none;
-		background-color:#FBFBFB;
-		border:1px solid #ccc;
-	}
-		#menu .top-bar .home ul li{
-			width:97%;
-			text-align:left;
-			padding:3px;
-			font-size:12px;
-			
-		}
-		#menu .top-bar .home ul li a{
-			display:block;
-			padding:3px;
-			color:#666;
-		}
-		#menu .top-bar .home ul li a .kbubbles{
-			margin-left:5px;
-			border: 1px solid #3DB2D0;
-			padding:0 3px;
-			background-color:#DAF0F6;
-			color:#3DB2D0;
-		}
-		#menu .top-bar .home ul li a:hover{
-			background:#ebebeb;
-		}
+
 /* end: menu*/
 
 /* start: content */

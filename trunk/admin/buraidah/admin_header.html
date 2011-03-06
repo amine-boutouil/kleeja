@@ -33,8 +33,16 @@ jQuery(document).ready(function($){
 	//		function () { $('ul', this).slideUp(50); }
 	//)
 	.click(function() {
-			$('#menu .current-items ul').html($('.top-bar .home ul').html());
+		if($('#navlist').css('display') == 'none'){
+			$('#navlist').css('display', 'block');
+			$('#real_menu').css('display', 'none');
+			$('#menu .current-title').html('{lang.WELCOME}');
+		}
+		else{
+			$('#real_menu').css('display', 'block');
+			$('#navlist').css('display', 'none');
 			$('#menu .current-title').html('{lang.MENU}');
+		}
 	});
 	
 
@@ -125,7 +133,8 @@ function get_kleeja_link(URL, ID, p)
 					$('html').animate({scrollTop:0}, 'slow');
 				}
 				
-				$('#menu .current-items ul').html(R.menu);
+				$('#real_menu').css('display', 'none');
+				$('#navlist').css('display', 'block').html(R.menu);
 				$('#menu .current-title').html('{lang.WELCOME}');
 			}
 		},
@@ -192,7 +201,8 @@ function submit_kleeja_data(FORM_ID, ID, CONFIRM)
 					$('html').animate({scrollTop:0}, 'slow');
 				}
 				
-				$('#menu .current-items ul').html(R.menu);
+				$('#real_menu').css('display', 'none');
+				$('#navlist').css('display', 'block').html(R.menu);
 				$('#menu .current-title').html('{lang.WELCOME}');
 			}
 		},
@@ -287,15 +297,6 @@ function uncheckAll_exts(form, id, _do_c_) {
 		<div class="top-bar">
 			<div class="home">
 				<img src="{STYLE_PATH_ADMIN}images/logo.gif" alt="{lang.MENU}" title="{lang.MENU}"  />
-				<ul>
-					<LOOP NAME="adm_extensions_menu">
-						<li class="({{current}}?active:)" id="g_{{goto}}">
-							<a href="{{link}}" onclick="javascript:get_kleeja_link('{{link}}', '#content', {'current_id':'g_{{goto}}', 'current_class':'link_current'<IF LOOP="confirm">, 'confirm':true</IF>}); return false;">
-								{{lang}}{{kbubble}}
-							</a>
-						</li>
-					</LOOP>
-				</ul>
 			</div>
 			<div class="cats">
 				<a href="./" onclick="javascript:get_kleeja_link('./'); return false;" title="{lang.R_CPINDEX}">
@@ -326,6 +327,15 @@ function uncheckAll_exts(form, id, _do_c_) {
 				</LOOP>
 			</IF>
 			</ul>
+			<ul id="real_menu" style="display:none">
+				<LOOP NAME="adm_extensions_menu">
+					<li class="({{current}}?active:)" id="g_{{goto}}">
+						<a href="{{link}}" onclick="javascript:get_kleeja_link('{{link}}', '#content', {'current_id':'g_{{goto}}', 'current_class':'link_current'<IF LOOP="confirm">, 'confirm':true</IF>}); return false;">
+							{{lang}}{{kbubble}}
+						</a>
+					</li>
+				</LOOP>
+				</ul>
 		</div>
 		
 		<div class="bottom-logo"></div>

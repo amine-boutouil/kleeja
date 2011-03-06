@@ -114,7 +114,7 @@ $GET_FORM_KEY	= kleeja_add_form_key_get('adm_plugins');
 //
 if (isset($_POST['submit_new_plg']))
 {
-	if(!kleeja_check_form_key('adm_plugins'))
+	if(!kleeja_check_form_key('adm_plugins', 3600))
 	{
 		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $action, 1);
 	}
@@ -172,6 +172,14 @@ if (!$cache->exists('__plugins_icons__'))
 	$cache->save('__plugins_icons__', $plugins_icons);
 }
 
+
+//cached templates
+$there_is_cached = false;
+$cached_file = PATH . 'cache/styles_cached.php';
+if(file_exists($cached_file))
+{
+	$there_is_cached =  sprintf($lang['CACHED_STYLES_DISC'] , '<a href="' . basename(ADMIN_PATH) . '?cp=m_styles&amp;sty_t=cached">' . $lang['CLICKHERE'] .'</a>');
+}
 
 //is there any changes from recent installing plugins
 if (!($changes_files = $cache->get('__changes_files__')))
@@ -615,7 +623,7 @@ else:
 endif;//else submit
 
 
-//new style from xml
+//new plugin from xml
 if(isset($_POST['submit_new_plg']))
 {
 	$text	= '';
@@ -686,17 +694,17 @@ if(isset($_POST['submit_new_plg']))
 				$text = $lang['PLUGIN_UPDATED_SUCCESS'] . '<meta HTTP-EQUIV="REFRESH" content="3; url=' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '">' . "\n";			
 			break;
 			case 'inst':
-				$text = $lang['NEW_PLUGIN_ADDED'] . '<meta HTTP-EQUIV="REFRESH" content="1; url=' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;do_plg=' . $plg->plg_id . '&amp;m=4">' . "\n";
+				$text = $lang['NEW_PLUGIN_ADDED'] . '<meta HTTP-EQUIV="REFRESH" content="1; url=' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;do_plg=' . $plg->plg_id . '&amp;m=4&amp;' . $GET_FORM_KEY . '">' . "\n";
 			break;
 			case 'zipped':
-				$text = sprintf($lang['PLUGIN_ADDED_ZIPPED'], '<a href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;do_plg=' . $plg->plg_id . '&amp;m=6&amp;fn=' . $plg->zipped_files . '">', '</a>');
+				$text = sprintf($lang['PLUGIN_ADDED_ZIPPED'], '<a href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;do_plg=' . $plg->plg_id . '&amp;m=6&amp;fn=' . $plg->zipped_files . '&amp;' . $GET_FORM_KEY . '">', '</a>');
 				$text .= '<br /><br /><a href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '">' . $lang['GO_BACK_BROWSER'] . '</a>';
 			break;
 			case 'zipped/inst':
 				$text = sprintf($lang['PLUGIN_ADDED_ZIPPED_INST'], 
-								'<a href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;do_plg=' . $plg->plg_id . '&amp;m=6&amp;fn=' . $plg->zipped_files . '">',
+								'<a href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;do_plg=' . $plg->plg_id . '&amp;m=6&amp;fn=' . $plg->zipped_files . '&amp;' . $GET_FORM_KEY . '">',
 								'</a>',
-								'<a href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;do_plg=' . $plg->plg_id . '&amp;m=4">',
+								'<a href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;do_plg=' . $plg->plg_id . '&amp;m=4&amp;' . $GET_FORM_KEY . '">',
 								'</a>'
 								);
 				$text .= '<br /><br /><a href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '">' . $lang['GO_BACK_BROWSER'] . '</a>';

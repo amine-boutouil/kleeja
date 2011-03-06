@@ -625,6 +625,11 @@ function delete_cache($name, $all=false)
 	}
 	else
 	{
+		if(strpos($name, 'tpl_') !== false and strpos($name, '.html') !== false)
+		{
+			$name = str_replace('.html', '', $name);
+		}
+
 		$del = true;
 		$name = str_replace('.php', '', $name) . '.php';
 		if (file_exists($path_to_cache . '/' . $name))

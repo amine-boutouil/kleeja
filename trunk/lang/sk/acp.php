@@ -292,4 +292,5 @@ $lang = array_merge($lang, array(
 	'MORE'						=> 'More',
 	'MENU'						=> 'Menu',
 	'WELCOME'					=> 'Welcome',
+	'ENABLE_CAPTCHA'			=> 'Enable Captcha in Kleeja',
 ));

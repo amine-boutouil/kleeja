@@ -112,7 +112,7 @@ switch ($_GET['go'])
 
 					if(isset($_GET['return']))
 					{
-						redirect('./' . urldecode($_GET['return']));
+						redirect(urldecode($_GET['return']));
 						$SQL->close();
 						exit;
 					}

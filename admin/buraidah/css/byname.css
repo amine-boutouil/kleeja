@@ -49,7 +49,7 @@
 	#menu .current-items  ul .active a{
 		color:#000;
 	}
-	#menu .current-items ul.active {
+	#menu .current-items ul .active {
 		background: #D0F4FF url('../images/menu_bg_current.png') repeat-y;
 		border-width:0 1px;
 		border:1px solid #A7CCD8;

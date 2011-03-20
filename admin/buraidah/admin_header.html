@@ -287,7 +287,7 @@ function uncheckAll_exts(form, id, _do_c_) {
 
 <!-- ajax loading sign -->
 <div id="sign_ajax"><img src="{STYLE_PATH_ADMIN}images/ajax-loader-small.gif" /> {lang.LOADING} ...</div>
-<div id="sign_ajax_error"><img src="{STYLE_PATH_ADMIN}images/error.png" /> {lang.ERROR_AJAX}</div>
+<div id="sign_ajax_error" onclick="javascript:get_kleeja_link('./');"><img src="{STYLE_PATH_ADMIN}images/error.png" /> {lang.ERROR_AJAX}</div>
 	
 
 
@@ -330,7 +330,7 @@ function uncheckAll_exts(form, id, _do_c_) {
 			<ul id="real_menu" style="display:none">
 				<LOOP NAME="adm_extensions_menu">
 					<li class="({{current}}?active:)" id="g_{{goto}}">
-						<a href="{{link}}" onclick="javascript:get_kleeja_link('{{link}}', '#content', {'current_id':'g_{{goto}}', 'current_class':'link_current'<IF LOOP="confirm">, 'confirm':true</IF>}); return false;">
+						<a href="{{link}}" onclick="javascript:get_kleeja_link('{{link}}', '#content', {'current_id':'g_{{goto}}', 'current_class':'active'<IF LOOP="confirm">, 'confirm':true</IF>}); return false;">
 							{{lang}}{{kbubble}}
 						</a>
 					</li>

@@ -70,6 +70,7 @@ $config_values[] = array('allow_online', '0', '<label>{lang.YES}<input type=\"ra
 $config_values[] = array('statfooter', '0' , '<label>{lang.YES}<input type=\"radio\" id=\"statfooter\" name=\"statfooter\" value=\"1\"  <IF NAME=\"con.statfooter==1\"> checked=\"checked=\"</IF> /></label>\r\n <label>{lang.NO}<input type=\"radio\" id=\"statfooter\" name=\"statfooter\" value=\"0\"  <IF NAME=\"con.statfooter==0\"> checked=\"checked\"</IF> /></label>', 33, 'interface', 0, 0);
 $config_values[] = array('gzip', '0', '<label>{lang.YES}<input type=\"radio\" id=\"gzip\" name=\"gzip\" value=\"1\"  <IF NAME=\"con.gzip==1\"> checked=\"checked\"</IF> /></label>\r\n <label>{lang.NO}<input type=\"radio\" id=\"gzip\" name=\"gzip\" value=\"0\"  <IF NAME=\"con.gzip==0\"> checked=\"checked\"</IF> /></label>', 34, 'interface', 0, 0);
 $config_values[] = array('googleanalytics', '', '<input type=\"text\" id=\"googleanalytics\" name=\"googleanalytics\" value=\"{con.googleanalytics}\" size=\"10\" />', 35, 'interface', 0, 0);
+$config_values[] = array('enable_captcha', '1', '<label>{lang.YES}<input type=\"radio\" id=\"enable_captcha\" name=\"enable_captcha\" value=\"1\"  <IF NAME=\"con.enable_captcha==1\"> checked=\"checked\"</IF> /></label>\r\n <label>{lang.NO}<input type=\"radio\" id=\"enable_captcha\" name=\"enable_captcha\" value=\"0\"  <IF NAME=\"con.enable_captcha==0\"> checked=\"checked\"</IF> /></label>', 36, 'interface', 0, 0);
 
 // System settings [ invisible configs ]
 $config_values[] = array('thmb_dims', '100*100', '', 0, 0, 0);

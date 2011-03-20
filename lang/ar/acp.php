@@ -295,4 +295,5 @@ $lang = array_merge($lang, array(
 	'MORE'						=> 'اكثر',
 	'MENU'						=> 'القائمة',
 	'WELCOME'					=> 'مرحباً',
+	'ENABLE_CAPTCHA'			=> 'تفعيل كود الامان بكليجا',
 ));

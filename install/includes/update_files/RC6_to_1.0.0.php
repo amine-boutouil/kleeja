@@ -94,6 +94,8 @@ $update_sqls['config_insert48'] = "INSERT INTO `{$dbprefix}config` (`name`, `val
 $update_sqls['livexts_feature'] = "INSERT INTO `{$dbprefix}config` (`name` ,`value` ,`option` ,`display_order`)VALUES ('livexts', 'swf', '<input type=\"text\" id=\"livexts\" name=\"livexts\" value=\"{con.livexts}\" size=\"62\" style=\"direction:ltr\" />{lang.COMMA_X}', '29')";
 $update_sqls['sitemail2'] = "INSERT INTO `{$dbprefix}config` (`name` ,`value` ,`option` ,`display_order`) VALUES ('sitemail2', '" . inst_get_config('sitemail') . "', '<input type=\"text\" id=\"sitemail2\" name=\"sitemail2\" value=\"{con.sitemail2}\" size=\"25\" style=\"direction:ltr\" />', '4');";
 
+$update_sqls['config_insert_2011_1'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`, `type`) VALUES ('enable_captcha', '1', '<label>{lang.YES}<input type=\"radio\" id=\"enable_captcha\" name=\"enable_captcha\" value=\"1\"  <IF NAME=\"con.enable_captcha==1\"> checked=\"checked\"</IF> /></label>\r\n <label>{lang.NO}<input type=\"radio\" id=\"enable_captcha\" name=\"enable_captcha\" value=\"0\"  <IF NAME=\"con.enable_captcha==0\"> checked=\"checked\"</IF> /></label>', 36, 'interface')";
+
 
 // config interface
 $update_sqls['type_config_interface'] = "UPDATE `{$dbprefix}config` SET `type` = 'interface' WHERE `name` IN ('statfooter','gzip','welcome_msg','allow_stat_pg','allow_online','googleanalytics');";

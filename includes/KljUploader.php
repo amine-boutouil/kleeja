@@ -217,11 +217,11 @@ class KljUploader
 			{
 				$frame->thumbnailImage($thumb_w, $thumb_h);
 				$frame->setImagePage($thumb_w, $thumb_h, 0, 0);
-				#if($i > 20)
-				#{
-				#	break;
-				#}
-				#$i++;
+				if($i > 10)
+				{
+					break;
+				}
+				$i++;
 			}
 		}
 		else

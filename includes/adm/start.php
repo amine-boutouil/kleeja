@@ -203,8 +203,14 @@ if((int)$config['klj_clean_files_from'] > 0)
 {
 	$ADM_NOTIFICATIONS[]  = array('id' => 'klj_clean_files', 'msg_type'=> 'info', 'title'=> $lang['NOTE'], 'msg'=> $lang['T_CLEANING_FILES_NOW']);
 }
-		
-		
+
+//if there is no thumbs folder
+if(!file_exists(PATH . $config['foldername'] . '/thumbs') && (int) $config['thumbs_imgs'] != 0)
+{
+	$ADM_NOTIFICATIONS[]  = array('id' => 'no_thumbs', 'msg_type'=> 'info', 'title'=> $lang['NOTE'], 'msg'=> sprintf($lang['NO_THUMB_FOLDER'], PATH . $config['foldername'] . '/thumbs'));
+}
+
+
 //if dev stage
 $sql_debug = false;
 if(defined('DEV_STAGE'))

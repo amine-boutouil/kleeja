@@ -572,7 +572,8 @@ $lang = array_merge($lang, array(
 	'MENU'						=> 'Menu',
 	'WELCOME'					=> 'Welcome',
 	'ENABLE_CAPTCHA'			=> 'Enable Captcha in Kleeja',
-
+	'NO_THUMB_FOLDER'			=> 'It seems you enabled Thumbs but in same time the folder %s does not exist! create it.',
+	
 	//last line of this file ...					 
 	'S_TRANSLATED_BY' 			=> '<b>Çeviri yapan</b>       <a href="http://www.forumvakti.net/">CEZALAND</a>',
 	

@@ -2,25 +2,22 @@
 <!--
 jQuery(document).ready(function($){
 	// fancybox plugin
-	$("a.fancybox").attr('rel', 'gallery').fancybox({'titleShow': false,'transitionIn'	: 'elastic', 'transitionOut':'elastic','easingIn':'easeOutBack','easingOut':'easeInBack'});	 
+	$("a.fancybox").attr('rel', 'gallery').fancybox({
+		});	 
 	
 	// custom checkboxes
-	$('.kcheck input[type=checkbox]').checkbox(); 
+	//$('.kcheck input[type=checkbox]').checkbox(); 
 	
 	// preload images
-	$.preload('#Kload img', {placeholder:'{STYLE_PATH_ADMIN}images/ajax-loader.gif',notFound:'{STYLE_PATH_ADMIN}js/fancybox/failerror.jpg',	enforceCache: true,	threshold: 2 });
+	//$.preload('#Kload img', {placeholder:'{STYLE_PATH_ADMIN}images/ajax-loader.gif',notFound:'{STYLE_PATH_ADMIN}js/fancybox/failerror.jpg',	enforceCache: true,	threshold: 2 });
 
 	$("img.mask").hover(function(){$(this).stop().animate({'opacity': '0'}, 'fast');},function() {$(this).stop().animate({'opacity': '1'}, 'fast');});
 			
-	$('.tip').each(function() {
-	   $(this).qtip({
-		content: $(this).next('.ktip'),
-		position: {at: 'top center',my: 'bottom center', adjust: {y :14,screen: 'flip'}},
-		show: {delay: 500},
-		hide: {fixed: true,	delay: 150},
-		style: {classes: 'ui-tooltip-k',tip: {width: 34,height: 20,	border: 4}}
+	$('.tip').tipsy({
+		title: function() { return $(this).children('.ktip').html() },
+		html: true,
+		gravity: $.fn.tipsy.autoNS
 	   });
-	});
 
 	//Navigate to pages by arrows
 	$(document).keydown(function(e) {
@@ -71,19 +68,21 @@ jQuery(document).ready(function($){
 <div class="xthumbs">
 	<LOOP NAME="arr">
 	{{tdnum}}
-	<li id="su[{{id}}]">
-		<a href="{{href}}" class="fancybox tip">
-			<div id="Kload"><img src="{{thumb_link}}" alt="" /></div>
+	<li id="su[{{id}}]" class="tip">
+		<a href="{{href}}" class="fancybox">
+			<div id="Kload"><img src="{{thumb_link}}" alt=""  /></div>
 			<img class="mask" src="{STYLE_PATH_ADMIN}js/fancybox/k_mask.png" alt="" />
 			<img class="expand" src="{STYLE_PATH_ADMIN}js/fancybox/k_mask_hover.png" alt="" />
 		</a>
 		<ul class='ktip' style="display: none;">
+			<ul>
 			<li><span>{lang.FILENAME} :</span>{{name}}</li>
 			<li><span>{lang.FILEUPS} :</span> {{ups}}</li>
 			<li><span>{lang.FILESIZE} :</span> {{size}}</li>
 			<li><span>{lang.FILEDATE} :</span> {{time}}</li>
 			<li><span>{lang.BY} :</span> {{user}}</li>
 			<li><span>{lang.IP} :</span> {{ip}}</li>
+			</ul>
 		</ul>
 		<p class="kcheck"><input name="del_{{id}}" type="checkbox" value="{{id}}" onclick="change_color(this,'su[{{id}}]', 'kfocus');" rel="_del" /></p>
 	</li>

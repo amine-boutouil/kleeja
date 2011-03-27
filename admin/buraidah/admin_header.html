@@ -12,6 +12,7 @@
 <link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/global.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/byname.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}js/fancybox/jqueryfb.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}js/tipsy/tipsy.css" />
 <IF NAME="{lang.DIR}==rtl"><link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/rtl.css" /></IF>	
 <IS_BROWSER="ie6"><link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/ie6.css" /></IS_BROWSER>
 <IS_BROWSER="ie"><link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/ie.css" /></IS_BROWSER>
@@ -23,9 +24,13 @@ var STYLE_PATH_ADMIN = '{STYLE_PATH_ADMIN}';var go_to = '{go_to}';
 </script>
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.min.js"></script>
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}js/fancybox/fancybox.js"></script>
+<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/tipsy/tipsy.js"></script>
 <script type="text/javascript">
 <!--//
 jQuery(document).ready(function($){
+
+	$('a[title]').tipsy({gravity: $.fn.tipsy.autoNS});
+
 	//for more menu at top menu
 	$('.top-bar .home')
 	//.hover(

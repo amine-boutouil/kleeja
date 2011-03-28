@@ -11,8 +11,7 @@ body{
 	margin:0;
 	padding:0;
 	color:#3B3B3B;
-	font-family: Tahoma;
-	font-size:11px;
+	font: 11px Tahoma, arial, Helvetica, sans-serif;
 	overflow: auto;
 }
 	
@@ -23,40 +22,52 @@ a:visited, a:hover, a:link, .a:active {
 
 input {
 	border: 1px solid #AAA;
-	font-family:Tahoma, arial;
+	font: 12px Tahoma, arial, Helvetica, sans-serif;
 	font-size:11px;
 	padding: 3px;
 }
 button, input[type='submit'] {
-	  background:#ebebeb;
-	  border: 1px solid #aaa;
-	  color: #444;
-	  font-size: inherit;
-	  margin-bottom: 0px;
-	  min-width: 4em;
-	  padding: 3px 12px 3px 12px;
+	display: inline-block;
+	outline: none;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	font: 12px Tahoma, arial, Helvetica, sans-serif;
+	padding: .5em 2em .55em;
+	text-shadow: 0 1px 1px rgba(0,0,0,.3);
+	-webkit-border-radius: .5em; 
+	-moz-border-radius: .5em;
+	border-radius: .5em;
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	color: #fef4e9;
+	border: solid 1px #da7c0c;
+	background: #f78d1d;
+	background: -webkit-gradient(linear, left top, left bottom, from(#faa51a), to(#f47a20));
+	background: -moz-linear-gradient(top,  #faa51a,  #f47a20);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#faa51a', endColorstr='#f47a20');
 	}
 button:hover, input[type='submit']:hover {
-	  background: #ebebeb;
-	  border-color: #999;
-	  color: #222;
+	  text-decoration: none;
 	}
 
 button:active, input[type='submit']:active {
-	  background: #D4D4D4;
-	  color: #333;
+	position: relative;
+	top: 1px;
 	}
 
 select {
-	  border: 1px solid #aaa;
-	  color: #555;
-	  font-size: inherit;
-	  margin: 0;
-	  overflow: hidden;
-	  padding: 2px 20px 2px 5px;
-	  text-overflow: ellipsis;
-	  white-space: nowrap;
-	}
+	border: 1px solid #aaa;
+	color: #555;
+	font: 12px Tahoma, arial, Helvetica, sans-serif;
+	font-size: inherit;
+	margin: 0;
+	overflow: hidden;
+	padding: 2px 20px 2px 5px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
 html[dir='rtl'] select {
 	  background-position: center left;
 	}

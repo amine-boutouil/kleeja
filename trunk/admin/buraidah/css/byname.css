@@ -56,10 +56,16 @@
 	}
 		#menu .current-items ul li a .kbubbles{
 			margin-right:5px;
+			font-size:11px;
 			border: 1px solid #3DB2D0;
 			padding:0 3px;
-			background-color:#DAF0F6;
-			color:#3DB2D0;
+			background-color:#3A91AE;
+			color:#fff;
+			-webkit-border-radius: 4px;
+			-moz-border-radius: 4px;
+			border-radius: 4px;
+			behavior: url(./PIE.htc);
+
 		}
 	#menu .top-bar {
 		margin:6px;
@@ -139,11 +145,11 @@
 		line-height:140%
 	}
 	#content .menu_but_in_content li .kbubbles{
-			margin-left:5px;
-			border: 1px solid #3DB2D0;
-			padding:0 3px;
-			background-color:#DAF0F6;
-			color:#3DB2D0;
+		margin-left:5px;
+		border: 1px solid #3DB2D0;
+		padding:0 3px;
+		background-color:#DAF0F6;
+		color:#3DB2D0;
 	}
 	
 	#content table{
@@ -155,8 +161,8 @@
 		vertical-align:middle;
 		padding:3px;
 	}
-	#content table .first{
-		background: #D0F4FF url('../images/input.png') repeat-x;
+	#content table .first, #content .first{
+		background: #ccc url('../images/input.png') repeat-x;
 		height:25px;
 	}
 	
@@ -183,8 +189,11 @@
 	padding-left:35px;
 	font-size:12px;
 	border: 1px solid #FFE085;
-	border-width:1px 0;
 	margin-top:5px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	behavior: url(./PIE.htc);
 }
 #system-message .error, .note-error{
 	background: #FFD8D8 url(../images/error.gif) no-repeat 1% 50%;
@@ -193,8 +202,11 @@
 	padding-left:35px;
 	font-size:12px;
 	border: 1px solid #DE0404;
-	border-width:1px 0;
 	margin-top:5px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	behavior: url(./PIE.htc);
 }
 
 
@@ -245,7 +257,7 @@
 }
 #login_warp{
 	margin:200px auto;
-	width:300px;
+	width:320px;
 	font-family:tahoma;
 	font-size:13px;
 }
@@ -272,28 +284,31 @@
 		width:100%;
 		padding:10px;
 		margin-bottom:10px;
-		border:1px #eee solid;
+		border:1px #ccc solid;
+		-webkit-border-radius: 10px;
+		-moz-border-radius: 10px;
+		border-radius: 10px;
+		behavior: url(./PIE.htc);
 	}
 	#login_warp .acp_login_box p{
-		padding-bottom:50px;
+		padding-bottom:44px;
 	}
 	#login_warp .acp_login_box input{
-		float:right;
+		float:left;
 		width:170px;
 		padding:5px;
 		font-size:16px;
-		color:#666;
+
 	}
 	#login_warp .acp_login_box label{
-		float:left;
-		font-size:12px;
-		font-weight:bold;
+		float:right;
+		font-size:13px;
 		color:#A9A9A9;
 		padding-top:9px;
 	}
 	
 	#login_warp .acp_login_box .submitt input{
-		width:300px;
+		width:320px;
 		margin:0 auto;
 		text-align:center;
 		cursor:pointer;

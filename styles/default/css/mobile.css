@@ -2,11 +2,11 @@
 /*	--------------------------------------------------
 	Theme Name: 	default V1
 	Filename: 		styles/default/mobile.css
-	package:		Kleeja  copyright(c)2007-2010
+	package:		Kleeja  copyright(c)2007-2011
 	version:		1.0.0
 	URL:			http://www.kleeja.com
 	Date:			2010-07-10
-	Author: 		Tar3Q
+	Author: 		Kleeja team
 	-------------------------------------------------- */
 	
 /*  @iPhone-specific styles -------------------- */
@@ -15,28 +15,32 @@
 	html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-weight:inherit;font-style:inherit;font-size:inherit;font-family:inherit;vertical-align:baseline;}
 	body{overflow-x:hidden;}
 	img{vertical-align:middle;}
-	#mmtail{border-top:1px solid #b8b8b8;background:#cfcfcf;clear:both;position:relative;font-family:arial,helvetica,sans-serif;font-size:small;padding:5px 4px;text-align:left;}
-	#mmtail a:link, #mmtail a:active, #mmtail a:visited{color:#434343;}
-	#full_site{position:absolute;right:4px;}
-	/* Deprecated */
-	#mmheader ul li{display:inline;margin-right:5px;}
-	#mmtail p{margin:0;padding:0;display:inline;}
 
 /*  @mobile styles -------------------- */
-	@media handheld {
-		html, body {font:normal 100% Tahoma, Arial, Verdana, sans-serif, "Lucida Grande", "Lucida Sans Unicode"; height:100%;width: 100%;background:#fff;padding:3px;color: #000;margin: 0;}
-		h1, h2, h3, h4, h5, h6 {font-weight: normal;font-size:x-small;}
-		a:link, a:visited {text-decoration: underline;color: #0000CC;}
-		a:hover, a:active {text-decoration: none;color: #660066;}
-		h2 {font-size: 13px;color:#EF5E00;margin: 5px 0;}
-		p, ul, ol {line-height:100%;}
-		#main {width:100%;margin:0px auto;background-image: none;}
-		.title {font-size:85%;}
-		#footer,.extras_header, .extras_footer {display:none;}
-		.logo {	max-width:200px;}
-		.top_nav {width: 100%;}
-		.top_nav .menu li {font-size:xx-small;}
-		#content, #content_index  {width:60%;padding:0;margin:4px auto;}
-		#right_menu{width:22%;}
-		#right_menu .list{width:18%;}
-	}
+
+	html, body {font:normal 100% Tahoma, Arial, Verdana, sans-serif, "Lucida Grande", "Lucida Sans Unicode"; height:100%;width: 100%;background:#fff;padding:3px;color: #000;margin: 0;font-size:16px}
+	h1, h2, h3, h4, h5, h6 {font-weight: normal;font-size:x-small;}
+	a:link, a:visited {text-decoration: underline;color: #0000CC;}
+	a:hover, a:active {text-decoration: none;color: #660066;}
+	h2 {font-size: 13px;color:#EF5E00;margin: 5px 0;}
+	p, ul, ol {line-height:100%;}
+	#main {width:100%;margin:0px auto;background-image: none;}
+	.title {font-size:85%;}
+	#footer,.extras_header, .extras_footer {display:none;}
+	.logo {	max-width:200px;}
+	.top_nav {width: 100%;}
+	.top_nav .menu li {font-size:xx-small;}
+	#content, #content_index  {width:60%;padding:0;margin:4px auto;}
+	#right_menu{width:22%;}
+	#right_menu .list{width:18%;}
+		
+/* last update */
+#header .logo {height:30px; text-indent:0px; background-image:none; font-size:16px;color: #FF8800;}
+.logo a{color: #FF8800 !important;}
+.top_nav {background:#FDEDD1 none repeat-x top left;}
+.top_nav .menu li a {color: #444; font-size:12px}
+.top_nav .menu li a:hover {color:#F68618;background:#FFDFA5 none repeat-x top left;}
+.top_nav .menu li a.current {color:white;background:#FCCC74 none top left repeat-x;}
+.css_xhtml{display:none;height:0;}
+#right_menu{width:auto;font-size:80%;font-weight:500;}
+#content_index, #content {min-height:220px;float:right;padding:1px; font-size:80%;}

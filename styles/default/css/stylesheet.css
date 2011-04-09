@@ -1,42 +1,38 @@
 @charset "UTF-8";
-/*	--------------------------------------------------
-	Theme Name:		default V1
-	package:		Kleeja  copyright(c)2007-2010
-	version:		1.0.0
-	URL:			http://www.kleeja.com
-	Author:			Tar3Q
-	--------------------------------------------------
+/** @package Name: Kleeja  	Copyright (c) 2007 (http://kleeja.com)
+	@version: 1.0.0			Theme: default V1
+	@Author: Tar3Q (http://Tar3Q.com)
+	******************************************************
 	$Id$
-	--------------------------------------------------
+	******************************************************/
 
-	@CSS Reset was written by Dejan Cancarevic & http://stylizedweb.com/2008/02/14/10-best-css-hacks/
-	-------------------------------------------------- */
+	/** @CSS Reset was written by Dejan Cancarevic & (http://stylizedweb.com/2008/02/14/10-best-css-hacks) **/
 	html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre,a, abbr, acronym, address, big, cite, code,del, dfn, em, font, img, ins, kbd, q, s, samp,small, strike, strong, sub, sup, tt, var,dl, dt, dd, ol, ul, li,fieldset, form, label, legend,table, caption, tbody, tfoot, thead, tr, th, td {margin: 0;padding: 0;border: 0;outline: 0;font-weight: inherit;font-style: inherit;font-size: 100%;font-family: inherit;vertical-align: baseline;}:focus {outline: 0;}body {line-height: 1;color: black;background: white;}ol, ul {list-style: none;}table {border-collapse: separate;border-spacing: 0;}caption, th, td {text-align: right;font-weight: normal;}blockquote:before, blockquote:after,q:before, q:after {content: "";}blockquote, q {quotes: "" "";}
-	
-	/* Print Styles -------------------- */
+		
+	/** @Print Styles **/
 	@media print{body {background-color:white !important;color: black !important; }a, a:link, a:visited { color: black !important; text-decoration:none !important;} #footer, .extras_header, .extras_footer{display: none;}}
 
-/*	--------------------------------------------------
+/**	--------------------------------------------------
 	1. HTML Tags
 	2. Misc
-	3. group Infos & Alerts & Errors
+	3. Message Infos, Alerts, Errors
 	4. Main Structure
-	5. Template & Header						> header.html
-	6. Template & Index							> index_body.html
-	7. Template & Downlod						> download.html
-	8. Template & stats							> stats.html	
-	9. Template & Rules							> rules.html
-   10. Template & Footer						> footer.html
-   11. Template & login							> login.html
-   12. Template & Users Files					> fileuser.html
-   13. Template & Register						> register.html 
-   14. Template & Contact Us					> call.html
-   15. Template & Password Recovery				> get_pass.html
-   16. Template & Report a File					> report.html
-   17. Template & Profile						> profile.html
-   18. Template & File Manager users			> filecp.html
-   19. Template & List of allowed file			> guide.html
-   20. Template & Copy the links after upload	> up_boxes.html
+	5. Template & Header				> header.html
+	6. Template & Index					> index_body.html
+	7. Template & Downlod				> download.html
+	8. Template & stats					> stats.html	
+	9. Template & Rules					> rules.html
+   10. Template & Footer				> footer.html
+   11. Template & login					> login.html
+   12. Template & Users Files			> fileuser.html
+   13. Template & Register				> register.html 
+   14. Template & Contact Us			> call.html
+   15. Template & Pass~ Recovery		> get_pass.html
+   16. Template & Report a File			> report.html
+   17. Template & Profile				> profile.html
+   18. Template & File Manager			> filecp.html
+   19. Template & List allowed file		> guide.html
+   20. Template & Links after upload	> up_boxes.html
  
 /*	--------------------------------------------------
 	1. HTML Tags
@@ -63,15 +59,13 @@
 	address { line-height: 18px; margin: 0 0 10px; }
 	abbr, acronym { text-transform: uppercase; font-size: 90%; cursor: help; }
 	abbr { text-transform: none; }
-	
-	/* @Lists -------------------- */
+	/* @Lists ******/
 	ul, ol , dd{ margin: 5px 0; }
 	ul { list-style: none inside; }
 	ol { list-style: decimal; margin-right: 25px; }
 	dt, dd { line-height: 18px; }
 	dt { font-weight: bold;}
-	
-	/* @group Forms -------------- */
+	/* @Forms ******/
 	form {margin-bottom:10px; }
 	fieldset {  }
 	label {display: block;line-height: 18px; padding:4px 0;}
@@ -82,18 +76,16 @@
 	input[type="text"], input[type="password"]{padding:2px;cursor: text;}
 	input[type="submit"]{	cursor: pointer;padding:2px 15px;}
 	select:focus, textarea:focus {outline: none;}
-
-
-	/* @Links -------------------- */
+	/* @Links ******/
 	a:link, a:visited{text-decoration: none;outline: 0; line-height: inherit;}
 	a:hover, a:active {text-decoration:none;}
 	p a {line-height: inherit;}
 	h1 a, h2 a, h3 a {font-weight: bold; }
 	h4 a, h5 a { line-height: inherit; font-weight: bold; }
 	h4 a:hover, h5 a:hover { text-decoration: underline; }
-/* @end */
+/*** @end ***/
 	
-/*	--------------------------------------------------
+/**
 	2. Misc
 	-------------------------------------------------- */
 	/* Clear the columns automagically, thanks @kneath */
@@ -139,8 +131,6 @@
 	/* captcha stuff */
 	#kleeja_img_captcha {cursor:pointer;float:right;}
 	
-	/* Powered by kleeja -------------------- */
-	h1.kleeja, h1.kleeja a {font: normal 96% Verdana,"Palatino","Book Antiqua",tahoma, "Lucida Sans Unicode";text-align:left;margin:0;}
 /* @end */
 
 /*	--------------------------------------------------
@@ -374,12 +364,12 @@
 	20. Template & Copy the links after upload > up_boxes.html
 	-------------------------------------------------- */
 	.thumb_img {width:100%;margin:5px auto;text-align:center;}
-	.thumb_img a img{padding:5px;}
+	.thumb_img a img{padding:10px;}
 	.up_box_input {margin:1px auto;padding:0 ;}
 	.up_box_input tr{height:30px;line-height:30px;padding:0 !important;}
 	.up_box_input td{padding:5px !important;}
 	td.btitle ,td.all_box_link{text-align:center;font-size:11px;font-weight:700;padding:0 4px;}
 	td.btitle {width:160px;text-align:left;white-space:nowrap}
 	td.all_box_link {padding:0 !important;text-align:right;}
-	textarea.up_input {direction:ltr;width:394px;padding:3px;letter-spacing:1px;vertical-align:middle;margin:5px;}
+	textarea.up_input {direction:ltr;width:400px;padding:3px;letter-spacing:1px;vertical-align:middle;margin:5px;}
 /* @end */

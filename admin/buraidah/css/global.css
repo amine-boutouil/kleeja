@@ -13,6 +13,8 @@ body{
 	color:#3B3B3B;
 	font: 11px Tahoma, arial, Helvetica, sans-serif;
 	overflow: auto;
+	text-align:left;
+	direction:ltr;
 }
 	
 a:visited, a:hover, a:link, .a:active {

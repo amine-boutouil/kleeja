@@ -16,8 +16,8 @@ if (!defined('IN_ADMIN'))
 
 //for style ..
 $stylee = "admin_exts";
-$action 		= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;page=' . (isset($_GET['page']) ? intval($_GET['page']) : 1);
-$action_new_ext = basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;add_new_ext=1';
+$current_smt	= isset($_GET['smt']) ? (preg_match('![a-z0-9_]!i', trim($_GET['smt'])) ? trim($_GET['smt']) : 'general') : 'general';
+$action 		= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;page=' . (isset($_GET['page']) ? intval($_GET['page']) : 1) . '&amp;smt=' . $current_smt;
 $H_FORM_KEYS	= kleeja_add_form_key('adm_exts');
 $H_FORM_KEYS2	= kleeja_add_form_key('adm_exts_new_ext');
 
@@ -120,11 +120,9 @@ if (isset($_POST['submit']))
 
 	//delete cache ..
 	delete_cache('data_exts');
-
-	$text	= ($affected ? $lang['UPDATED_EXTS'] : $lang['NO_UP_CHANGE_S']) . '<meta HTTP-EQUIV="REFRESH" content="2; url=' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;page=' .  (isset($_GET['page']) ? intval($_GET['page']) : '1') . '">' . "\n";
-	$stylee	= "admin_info";
+	kleeja_admin_info( ($affected ? $lang['UPDATED_EXTS'] : $lang['NO_UP_CHANGE_S']), true, '', true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;page=' .  (isset($_GET['page']) ? intval($_GET['page']) : '1'));
 }
-else if(isset($_GET['add_new_ext']))
+else if(isset($_POST['submit_new_ext']))
 {
 	$new_ext_i = $SQL->escape($_POST['new_ext']);
 	$ext_gr_i = intval($_POST['new_ext_group']);
@@ -136,9 +134,7 @@ else if(isset($_GET['add_new_ext']))
 			
 	if(empty($new_ext_i))
 	{
-		$text	= $lang['EMPTY_EXT_FIELD'];
-		$text .= '<meta HTTP-EQUIV="REFRESH" content="2; url=' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '">' . "\n";
-		$stylee	= 'admin_info';
+		kleeja_admin_err($lang['EMPTY_EXT_FIELD'] , true, '', true, $action);
 	}
 	else
 	{
@@ -156,8 +152,7 @@ else if(isset($_GET['add_new_ext']))
 		$not_welcomed_exts = array('php', 'php3', 'php5', 'php4', 'asp', 'aspx', 'shtml', 'html', 'htm', 'xhtml', 'phtml', 'pl', 'cgi', 'ini', 'htaccess', 'sql', 'txt');
 		if(in_array($check_ext, $not_welcomed_exts))
 		{
-			redirect($action, false, false, 5);
-			kleeja_admin_err(sprintf($lang['FORBID_EXT'], $check_ext));
+			kleeja_admin_err(sprintf($lang['FORBID_EXT'], $check_ext), true, '', true, $action);
 		}
 
 		//check if there is any exists of this ext in db
@@ -171,9 +166,7 @@ else if(isset($_GET['add_new_ext']))
 
 		if ($SQL->num_rows($result) > 0)
 		{
-			$text = sprintf($lang['NEW_EXT_EXISTS_B4'], $new_ext_i);
-			$text .= '<meta HTTP-EQUIV="REFRESH" content="2; url=' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '">' . "\n";
-			$stylee	= "admin_err";
+			kleeja_admin_err(sprintf($lang['NEW_EXT_EXISTS_B4'], $new_ext_i), true, '', true, $action);
 		}
 		else
 		{
@@ -185,12 +178,18 @@ else if(isset($_GET['add_new_ext']))
 							);
 
 			$SQL->build($insert_query);
+			
+			kleeja_admin_info($lang['NEW_EXT_ADD'], true, '', true,  basename(ADMIN_PATH) . '?cp=i_exts&amp;smt=general');
 
-			$text	= $lang['NEW_EXT_ADD']. '<meta HTTP-EQUIV="REFRESH" content="2; url=' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '">' . "\n";
-			$stylee	= "admin_info";
 		}
 
 		$SQL->freeresult($result);
 	} # add new ext
 }
 
+//secondary menu
+$go_menu = array(
+				'general' => array('name'=>$lang['R_EXTS'], 'link'=> basename(ADMIN_PATH) . '?cp=i_exts&amp;smt=general', 'goto'=>'general', 'current'=> $current_smt == 'general'),
+				'new_e' => array('name'=>$lang['ADD_NEW_EXT'], 'link'=> basename(ADMIN_PATH) . '?cp=i_exts&amp;smt=new_e', 'goto'=>'new_e', 'current'=> $current_smt == 'new_e'),
+				'calc' => array('name'=>$lang['BCONVERTER'], 'link'=> basename(ADMIN_PATH) . '?cp=i_exts&amp;smt=calc', 'goto'=>'calc', 'current'=> $current_smt == 'calc'),
+	);

@@ -1,6 +1,8 @@
 
-<h1>{lang.R_EXTS}</h1>
 
+
+<IF NAME="current_smt == general">
+<h1>{lang.R_EXTS}</h1>
 <form method="post" action="{action}" name="extsform" id="extsform">
 
 
@@ -51,10 +53,9 @@
 {H_FORM_KEYS}
 </form>
 
-<div class="br"></div>
-
+<ELSEIF NAME="current_smt == calc">
 <!-- convertor -->
-<h1>{lang.BCONVERTER}</h1>
+<h1>{lang.R_EXTS} &raquo; {lang.BCONVERTER}</h1>
 
 <script type="text/javascript">
 /*Created by: Uncle Jim :: http://jdstiles.com/javamain.html */
@@ -116,12 +117,12 @@
 <!-- end c table -->
 
 	
-<div class="br"></div>
+<ELSEIF NAME="current_smt == new_e">
 
 <!-- add new EXT. -->
-<h1>{lang.ADD_NEW_EXT}</h1>
+<h1>{lang.R_EXTS} &raquo; {lang.ADD_NEW_EXT}</h1>
 
-<form method="post" action="{action_new_ext}" id="add_new_ext">
+<form method="post" action="{action}" id="add_new_ext">
 
 <div class="section">
 	<h3><label for="new_ext">{lang.ADD_NEW_EXT_EXP}</label></h3>
@@ -142,3 +143,4 @@
 
 {H_FORM_KEYS2}
 </form>
+</IF>

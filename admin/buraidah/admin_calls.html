@@ -11,7 +11,7 @@
 	-->
 </script>
 
-<h1>{lang.R_CALLS}</h1>
+<h1>{lang.R_CALLS}<IF NAME="current_smt == show_h24"> &raquo; {lang.SHOW_FROM_24H}</IF></h1>
 
 <form method="post" name="callform" action="{action}" id="calls_form">
 
@@ -64,4 +64,9 @@
 	
 {H_FORM_KEYS}
 </form>
+</IF>
+
+<IF NAME="there_queue">
+<div class="br"></div>
+<div class="note-info">{lang.DELETE_PROCESS_IN_WORK}</div>
 </IF>

@@ -19,6 +19,12 @@
 			{
 				$('#login_form').attr('action', $('form').attr('action') + '#!' + hash);
 			}
+			
+			if($('lname').val() != ''){
+				$('#lpass_{KEY_FOR_PASS}').focus();
+			}else{
+				$('#lname').focus();
+			}
 		});
 	//-->
 	</script>

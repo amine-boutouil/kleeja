@@ -17,9 +17,11 @@ if (!defined('IN_ADMIN'))
 
 //for style ..
 $stylee	= "admin_calls";
-$action	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;page=' . (isset($_GET['page']) ? intval($_GET['page']) : 1);
+$current_smt	= isset($_GET['smt']) ? (preg_match('![a-z0-9_]!i', trim($_GET['smt'])) ? trim($_GET['smt']) : 'general') : 'general';
+$action	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;page=' . (isset($_GET['page']) ? intval($_GET['page']) : 1) . '&amp;smt=' . $current_smt;
 $msg_sent		= isset($_GET['sent']) ? intval($_GET['sent']) : false; 
 $H_FORM_KEYS	= kleeja_add_form_key('adm_calls');
+$there_queue	= !preg_match('!:del_[a-z0-9]{0,3}calls:!i', $config['queue']);
 
 //
 // Check form key
@@ -28,21 +30,38 @@ if (isset($_POST['submit']))
 {
 	if(!kleeja_check_form_key('adm_calls'))
 	{
-		if(isset($_GET['_ajax_']))
-		{
-			echo_ajax(888, $lang['INVALID_FORM_KEY']);
-		}
-
 		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $action, 1);
 	}
 }
 
 
+#add delete process to the queue
+if($current_smt == 'del_d30' || $current_smt == 'del_all')
+{
+	
+	if(strpos($config['queue'], ':' . $current_smt . 'calls:') !== false)
+	{
+		kleeja_admin_err($lang['DELETE_PROCESS_IN_WORK'], true, $lang['ERROR'], true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'), 1);
+	}
+	else
+	{
+		update_config('queue', $config['queue'] . ':' . $current_smt . 'calls:');
+		kleeja_admin_info($lang['DELETE_PROCESS_QUEUED'], true, '', true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'));
+	}
+}
+
+
 $query	= array(
-				'SELECT'	=> '*',
-				'FROM'		=> "`{$dbprefix}call`",
-				'ORDER BY'	=> 'id DESC'
+				'SELECT'	=> 'c.*',
+				'FROM'		=> "`{$dbprefix}call` c",
+				'ORDER BY'	=> 'c.id DESC'
 		);
+
+
+if($current_smt == 'show_h24')
+{
+	$query['WHERE'] = 'c.time < ' . intval(time() - 3600 * 24);
+}
 
 $result = $SQL->build($query);
 		
@@ -108,16 +127,11 @@ if ($nums_rows > 0)
 						echo_ajax(888, $lang['IS_SEND_MAIL']);
 					}
 					
-					redirect(basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&page=' . (isset($_GET['page']) ? intval($_GET['page']) : 1) . '&sent=' . $row['id']);
+					#redirect(basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&page=' . (isset($_GET['page']) ? intval($_GET['page']) : 1) . '&sent=' . $row['id']);
 				}
 				else
 				{
-					if(isset($_GET['_ajax_']))
-					{
-						echo_ajax(888, $lang['ERR_SEND_MAIL']);
-					}
-
-					kleeja_admin_err($lang['ERR_SEND_MAIL']);
+					kleeja_admin_err($lang['ERR_SEND_MAIL'], true, '', true,  $action);
 				}
 			}
 		}
@@ -146,7 +160,16 @@ $page_nums		= $Pager->print_nums(basename(ADMIN_PATH) . '?cp=' . basename(__file
 //after submit
 if (isset($_POST['submit']))
 {
-	$text	= ($SQL->affected() ? $lang['CALLS_UPDATED'] : $lang['NO_UP_CHANGE_S']) .
-				'<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . $action . '\');", 2000);</script>' . "\n";
-	$stylee	= "admin_info";
+	kleeja_admin_info(($SQL->affected() ? $lang['CALLS_UPDATED'] : $lang['NO_UP_CHANGE_S']),
+						true, '', true,  $action);
 }
+
+
+//secondary menu
+$go_menu = array(
+				'general' => array('name'=>$lang['R_CALLS'], 'link'=> basename(ADMIN_PATH) . '?cp=e_calls&amp;smt=general', 'goto'=>'general', 'current'=> $current_smt == 'general'),
+				'show_h24' => array('name'=>$lang['SHOW_FROM_24H'], 'link'=> basename(ADMIN_PATH) . '?cp=e_calls&amp;smt=show_h24', 'goto'=>'show_h24', 'current'=> $current_smt == 'show_h24'),
+				#CHECK IF IT'S ALREADY DONE ?
+				'del_d30' => array('name'=>$lang['DELETE_EARLIER_30DAYS'], 'link'=> basename(ADMIN_PATH) . '?cp=e_calls&amp;smt=del_d30', 'goto'=>'del_d30', 'current'=> $current_smt == 'del_d30'),
+				'del_all' => array('name'=>$lang['DELETE_ALL'], 'link'=> basename(ADMIN_PATH) . '?cp=e_calls&amp;smt=del_all', 'goto'=>'del_all', 'current'=> $current_smt == 'del_all'),
+	);

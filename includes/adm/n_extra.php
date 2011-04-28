@@ -18,7 +18,8 @@ if (!defined('IN_ADMIN'))
 
 //for style ..
 $stylee		= "admin_extra";
-$action		= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php');
+$current_smt	= isset($_GET['smt']) ? (preg_match('![a-z0-9_]!i', trim($_GET['smt'])) ? trim($_GET['smt']) : 'he') : 'he';
+$action		= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;smt=' . $current_smt;
 $H_FORM_KEYS	= kleeja_add_form_key('adm_extra');
 
 //
@@ -82,7 +83,12 @@ $SQL->freeresult($result);
 //after submit 
 if (isset($_POST['submit']))
 {
-	$text = $affected ? $lang['EXTRA_UPDATED'] : $lang['NO_UP_CHANGE_S'];
-	$text .= '<meta HTTP-EQUIV="REFRESH" content="2; url=' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') .  '">' . "\n";  
-	$stylee	= "admin_info";
+	kleeja_admin_info(($affected ? $lang['EXTRA_UPDATED'] : $lang['NO_UP_CHANGE_S']), true, '', true,  $action);
 }
+
+
+//secondary menu
+$go_menu = array(
+				'he' => array('name'=>$lang['ADD_HEADER_EXTRA'], 'link'=> basename(ADMIN_PATH) . '?cp=n_extra&amp;smt=he', 'goto'=>'he', 'current'=> $current_smt == 'he'),
+				'fe' => array('name'=>$lang['ADD_FOOTER_EXTRA'], 'link'=> basename(ADMIN_PATH) . '?cp=n_extra&amp;smt=fe', 'goto'=>'fe', 'current'=> $current_smt == 'fe'),
+	);

@@ -221,8 +221,8 @@ function kleeja_admin_err($msg, $navigation = true, $title='', $exit = true, $re
 	#Exception for ajax
 	if(isset($_GET['_ajax_']))
 	{
-		$text = $msg  . "\n" . '<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . $redirect . '\');", 2000);</script>';
-		echo $tpl->display($style);
+		$text = $msg  . "\n" . '<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . str_replace('&amp;', '&', $redirect) . '\');", 2000);</script>';
+		echo_ajax(1, $tpl->display($style));
 		$SQL->close();
 		exit();
 	}

@@ -1,5 +1,11 @@
 ﻿
-<h1>{lang.R_USERS}</h1>
+
+
+<IF NAME="current_smt != new_u">
+<h1>{lang.R_USERS} 
+<IF NAME="is_search"> &raquo; {lang.SEARCH_USERS} ( {nums_rows} )</IF>
+<IF NAME="current_smt == show_au"> &raquo; {lang.ADMINISTRATORS}</IF>
+</h1>
 
 <!-- if not normal user system, tell him --> 
 <IF NAME="user_not_normal">
@@ -8,33 +14,9 @@
 
 <form method="post" name="userform" action="{action}" id="users_form">
 
-<IF NAME="is_search">
-	<strong> 
-	<IF NAME="is_asearch">
-	<h2><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/menu_icons/search_button.gif" >{lang.ADMINISTRATORS}</h2>
-
-	
-	<div class="clr"></div><!-- clear -->
-
-	<ELSE>
-	{lang.SEARCH_USERS}
-	</IF>
-	 {lang.AUSERS_NUM} : ( {nums_rows} )
-	</strong>
 	<!-- start clear  -->
 	<div class="clr"></div><br />
 	<!-- end clear  -->
-<ELSE>
-
-
-	<div class="adminstrators"><a href="{action}&admin=1">{lang.ADMINISTRATORS}</a></div>
-
-	<!-- start clear  -->
-	<div class="clr"></div><br />
-	<!-- end clear  -->
-
-</IF>
-
 <!-- start data table -->
 <table>
 	<tr class="first">
@@ -91,8 +73,8 @@
 <div class="br"></div>
 
 <!-- add new user -->
-<IF NAME="isn_search">
-<h1>{lang.NEW_USER}</h1>
+<ELSE>
+<h1>{lang.R_USERS} &raquo; {lang.NEW_USER}</h1>
 <form method="post" action="{action_add}" id="add_user_form">
 
 <div class="section">

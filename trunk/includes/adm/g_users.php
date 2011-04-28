@@ -17,9 +17,10 @@ if (!defined('IN_ADMIN'))
 
 //for style ..
 $stylee 	= "admin_users";
+$current_smt	= isset($_GET['smt']) ? (preg_match('![a-z0-9_]!i', trim($_GET['smt'])) ? trim($_GET['smt']) : 'general') : 'general';
 $action 	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;page=' . (isset($_GET['page'])  ? intval($_GET['page']) : 1);
-$action 	.= (isset($_GET['search']) ? '&search=' . $SQL->escape($_GET['search']) : '') . (isset($_GET['admin']) && $_GET['admin'] == '1' ? '&admin=1' : '');
-$action_add =  basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php');
+$action 	.= (isset($_GET['search']) ? '&amp;search=' . $SQL->escape($_GET['search']) : '') . '&amp;smt=' . $current_smt;
+$action_add =  basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php')  . '&amp;smt=' . $current_smt;
 
 $is_search	= $affected = $is_asearch = false;
 $isn_search	= true;
@@ -34,11 +35,6 @@ if (isset($_POST['submit']))
 {
 	if(!kleeja_check_form_key('adm_users'))
 	{
-		if(isset($_GET['_ajax_']))
-		{
-			echo_ajax(888, $lang['INVALID_FORM_KEY']);
-		}
-
 		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $action, 1);
 	}
 }
@@ -46,11 +42,6 @@ if (isset($_POST['newuser']))
 {
 	if(!kleeja_check_form_key('adm_users_newuser'))
 	{
-		if(isset($_GET['_ajax_']))
-		{
-			echo_ajax(888, $lang['INVALID_FORM_KEY']);
-		}
-
 		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $action, 1);
 	}
 }
@@ -58,11 +49,6 @@ if (isset($_POST['search_user']))
 {
 	if(!kleeja_check_form_key('adm_users_search'))
 	{
-		if(isset($_GET['_ajax_']))
-		{
-			echo_ajax(888, $lang['INVALID_FORM_KEY']);
-		}
-
 		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, basename(ADMIN_PATH) . '?cp=h_search', 1);
 	}
 }
@@ -114,11 +100,6 @@ if(isset($_GET['deleteuserfile']))
 
 	if($num == 0)
 	{
-		if(isset($_GET['_ajax_']))
-		{
-			echo_ajax(888, $lang['ADMIN_DELETE_NO_FILE']);
-		}
-
 		kleeja_admin_err($lang['ADMIN_DELETE_NO_FILE']);
 	}
 	else
@@ -205,7 +186,8 @@ else if (isset($_POST['newuser']))
 				delete_cache('data_stats');
 			}
 		}
-		
+	
+	
 		//User added ..
 		kleeja_admin_info($lang['USERS_UPDATED'], true, '', true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'), 3);
 	}
@@ -217,12 +199,7 @@ else if (isset($_POST['newuser']))
 			$errs .= '- ' . $r . '. <br />';
 		}
 
-		if(isset($_GET['_ajax_']))
-		{
-			echo_ajax(888, str_replace('<br />', "\n", $errs));
-		}
-
-		kleeja_admin_err($errs);			
+		kleeja_admin_err($errs);
 	}
 }
 
@@ -256,13 +233,12 @@ if(isset($_GET['search']) || isset($_POST['search_user']))
 	$isn_search	= false;
 	$query['WHERE']	=	"name != '' $usernamee $usermailee";
 }
-else if(isset($_GET['admin']))
+else if($current_smt == 'show_au')
 {
-	$admin	= (int) $_GET['admin'] == 1 ? "AND admin = 1 " : ''; 
 	$is_search	= true;
 	$isn_search	= false;
 	$is_asearch = true;
-	$query['WHERE']	= "name != '' $admin";
+	$query['WHERE']	= "name != '' AND admin = 1 ";
 }
 
 $result = $SQL->build($query);
@@ -379,9 +355,19 @@ $user_not_normal = (int) $config['user_system'] != 1 ?  true : false;
 if (isset($_POST['submit']) || isset($_POST['newuser']))
 {
 	$g_link = basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;page=' . (isset($_GET['page'])  ? intval($_GET['page']) : 1) . 
-				(isset($_GET['search']) ? '&search=' . strip_tags($_GET['search']) : '') . ((isset($_GET['admin']) && $_GET['admin'] == '1') ? '&admin=1' : '');
+				(isset($_GET['search']) ? '&amp;search=' . strip_tags($_GET['search']) : '') . '&amp;smt=' . $current_smt;
 
 	$text	= ($affected ? $lang['USERS_UPDATED'] : $lang['NO_UP_CHANGE_S']) .
-				'<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . $g_link . '\');", 2000);</script>' . "\n";
+				'<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . str_replace('&amp;', '&', $g_link) . '\');", 2000);</script>' . "\n";
 	$stylee	= "admin_info";
 }
+
+
+
+//secondary menu
+$go_menu = array(
+				'general' => array('name'=>$lang['R_USERS'], 'link'=> basename(ADMIN_PATH) . '?cp=g_users&amp;smt=general', 'goto'=>'general', 'current'=> $current_smt == 'general'),
+				'show_au' => array('name'=>$lang['ADMINISTRATORS'], 'link'=> basename(ADMIN_PATH) . '?cp=g_users&amp;smt=show_au', 'goto'=>'show_au', 'current'=> $current_smt == 'show_au'),
+				'show_su' => array('name'=>$lang['SEARCH_USERS'], 'link'=> basename(ADMIN_PATH) . '?cp=h_search&amp;smt=users', 'goto'=>'show_su', 'current'=> $current_smt == 'show_su'),
+				'new_u' => array('name'=>$lang['NEW_USER'], 'link'=> basename(ADMIN_PATH) . '?cp=g_users&amp;smt=new_u', 'goto'=>'new_u', 'current'=> $current_smt == 'new_u'),
+	);

@@ -1,7 +1,7 @@
 ﻿
 <!--- START EDIT STAGE -->
 
-<form method="post" action="{action}" id="configs_form">
+<form method="post" action="{action}" id="opt_form">
 <!-- admin configs tr extra begin -->
 {options}
 <!-- admin configs tr extra -->
@@ -10,7 +10,7 @@
 <!-- button -->
 <p>
 	<input type="hidden" name="submit" value="1" />
-	<button type="submit" id="submit" name="_submit_" class="btn onclick='javascript:submit_kleeja_data('#configs_form', '#main_container'); return false;'"><span>{n_submit}</span></button>
+	<button type="submit" id="submit" name="_submit_" class="btn onclick='javascript:submit_kleeja_data('#opt_form', '#content', 0); return false;'"><span>{n_submit}</span></button>
 </p>
 
 {H_FORM_KEYS}

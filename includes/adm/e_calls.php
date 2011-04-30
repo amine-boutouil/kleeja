@@ -21,7 +21,7 @@ $current_smt	= isset($_GET['smt']) ? (preg_match('![a-z0-9_]!i', trim($_GET['smt
 $action	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;page=' . (isset($_GET['page']) ? intval($_GET['page']) : 1) . '&amp;smt=' . $current_smt;
 $msg_sent		= isset($_GET['sent']) ? intval($_GET['sent']) : false; 
 $H_FORM_KEYS	= kleeja_add_form_key('adm_calls');
-$there_queue	= !preg_match('!:del_[a-z0-9]{0,3}calls:!i', $config['queue']);
+$there_queue	= preg_match('!:del_[a-z0-9]{0,3}calls:!i', $config['queue']);
 
 //
 // Check form key

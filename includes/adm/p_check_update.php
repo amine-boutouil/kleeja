@@ -15,9 +15,12 @@ if (!defined('IN_ADMIN'))
 }
 
 $stylee	= "admin_check_update";
+$current_smt	= isset($_GET['smt']) ? (preg_match('![a-z0-9_]!i', trim($_GET['smt'])) ? trim($_GET['smt']) : 'general') : 'general';
 $error = false;
 $update_link = $config['siteurl'] . 'install/update.php?lang=' . $config['language'];
 
+#to prevent getting the url data for all cats
+if($current_smt == 'general'):
 
 //get data from kleeja database
 $b_url	= empty($_SERVER['SERVER_NAME']) ? $config['siteurl'] : $_SERVER['SERVER_NAME'];
@@ -92,3 +95,13 @@ if(isset($_GET['show_msg']))
 	$SQL->close();
 	exit;
 }
+
+#end current_smt == general
+endif;
+
+//secondary menu
+$go_menu = array(
+				'general' => array('name'=>$lang['R_CHECK_UPDATE'], 'link'=> basename(ADMIN_PATH) . '?cp=p_check_update&amp;smt=general', 'goto'=>'general', 'current'=> $current_smt == 'general'),
+				'howto' => array('name'=>$lang['HOW_UPDATE_KLEEJA'], 'link'=> basename(ADMIN_PATH) . '?cp=p_check_update&amp;smt=howto', 'goto'=>'howto', 'current'=> $current_smt == 'howto'),
+				'site' => array('name'=>'Kleeja.com', 'link'=> basename(ADMIN_PATH) . '?cp=p_check_update&amp;smt=site', 'goto'=>'site', 'current'=> $current_smt == 'site'),
+	);

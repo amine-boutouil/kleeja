@@ -17,11 +17,12 @@ if (!defined('IN_ADMIN'))
 
 //for style ..
 $stylee 		= "admin_configs";
+$current_smt	= isset($_GET['smt']) ? (preg_match('![a-z0-9_]!i', trim($_GET['smt'])) ? trim($_GET['smt']) : 'general') : 'general';
 //words
-$action 		= basename(ADMIN_PATH) . '?cp=options';
+$action 		= basename(ADMIN_PATH) . '?cp=options&amp;smt=' . $current_smt;
 $n_submit 		= $lang['UPDATE_CONFIG'];
 $options		= '';
-$current_type	= isset($_GET['type']) ? htmlspecialchars($_GET['type']) : 'general';
+#$current_type	= isset($_GET['type']) ? htmlspecialchars($_GET['type']) : 'general';
 $CONFIGEXTEND	= false;
 $H_FORM_KEYS	= kleeja_add_form_key('adm_configs');
 
@@ -38,10 +39,10 @@ $result = $SQL->build($query);
 while($row = $SQL->fetch_array($result))
 {
 	$name = !empty($lang['CONFIG_KLJ_MENUS_' . strtoupper($row['type'])]) ? $lang['CONFIG_KLJ_MENUS_' . strtoupper($row['type'])] : (!empty($olang['CONFIG_KLJ_MENUS_' . strtoupper($row['type'])]) ? $olang['CONFIG_KLJ_MENUS_' . strtoupper($row['type'])] : $lang['CONFIG_KLJ_MENUS_OTHER']);
-	$go_menu[$row['type']] = array('name'=>$name, 'link'=>$action . '&amp;type=' . $row['type'], 'goto'=>$row['type'], 'current'=> $current_type == $row['type']);
+	$go_menu[$row['type']] = array('name'=>$name, 'link'=>$action . '&amp;smt=' . $row['type'], 'goto'=>$row['type'], 'current'=> $current_smt == $row['type']);
 }
 
-$go_menu['all'] = array('name'=>$lang['CONFIG_KLJ_MENUS_ALL'], 'link'=>$action . '&amp;type=all', 'goto'=>'all', 'current'=> $current_type == 'all');
+$go_menu['all'] = array('name'=>$lang['CONFIG_KLJ_MENUS_ALL'], 'link'=>$action . '&amp;smt=all', 'goto'=>'all', 'current'=> $current_smt == 'all');
 
 //
 // Check form key
@@ -50,20 +51,14 @@ if (isset($_POST['submit']))
 {
 	if(!kleeja_check_form_key('adm_configs'))
 	{
-		if(isset($_GET['_ajax_']))
-		{
-			echo_ajax(888, $lang['INVALID_FORM_KEY']);
-		}
-
-		$redirect_url = $action  . '&amp;type=' . $current_type;
-		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $redirect_url, 1);
+		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $action, 1);
 	}
 }
 
 
 
 //general varaibles
-$action		= basename(ADMIN_PATH) . '?cp=options&amp;type=' .$current_type;
+#$action		= basename(ADMIN_PATH) . '?cp=options&amp;type=' .$current_type;
 $STAMP_IMG_URL = file_exists(PATH . 'images/watermark.gif') ? PATH . 'images/watermark.gif' : PATH . 'images/watermark.png';
 $stylfiles	= $lngfiles	= $authtypes = '';
 $optionss	= array();
@@ -75,12 +70,12 @@ $query	= array(
 					'ORDER BY'	=> 'display_order, type ASC'
 			);
 
-$CONFIGEXTEND	  = $SQL->escape($current_type);
-$CONFIGEXTENDLANG = $go_menu[$current_type]['name'];
+$CONFIGEXTEND	  = $SQL->escape($current_smt);
+$CONFIGEXTENDLANG = $go_menu[$current_smt]['name'];
 		
-if($current_type != 'all')
+if($current_smt != 'all')
 {
-	$query['WHERE'] = "type = '" . $SQL->escape($current_type) . "' OR type = ''";
+	$query['WHERE'] = "type = '" . $SQL->escape($current_smt) . "' OR type = ''";
 }
 
 $result = $SQL->build($query);
@@ -177,9 +172,9 @@ while($row=$SQL->fetch_array($result))
 								'WHERE'		=> "name='" . $row['name'] . "'"
 							);
 
-		if($current_type != 'all')
+		if($current_smt != 'all')
 		{
-			$query['WHERE'] .= " AND type = '" . $SQL->escape($current_type) . "'";
+			$query['WHERE'] .= " AND type = '" . $SQL->escape($current_smt) . "'";
 		}
 
 		$SQL->build($update_query);
@@ -245,10 +240,6 @@ if (isset($_POST['submit']))
 		}
 	}
 
-	$text	= $lang['CONFIGS_UPDATED'] .
-					'<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . basename(ADMIN_PATH) . 
-					'?cp=' . basename(__file__, '.php') . '\');", 2000);</script>' . "\n";
-
-	$stylee	= "admin_info";
+	kleeja_admin_info($lang['CONFIGS_UPDATED'], true, '', true,  basename(ADMIN_PATH) . '?cp=options');
 	//}
 }#submit

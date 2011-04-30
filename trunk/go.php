@@ -442,7 +442,18 @@ switch ($_GET['go'])
 		exit;
 
 	break;
-
+	
+	//
+	// for queue
+	//
+	case 'queue':
+		#img header and print spacer
+		#do some of the queue ..
+		#update its status
+		#end
+	break;
+	
+	
 	//
 	// Default , if you are a developer , you can embed your page here with this hook
 	// by useing $_GET[go] and your codes.

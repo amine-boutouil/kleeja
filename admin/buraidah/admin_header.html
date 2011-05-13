@@ -341,7 +341,7 @@ function uncheckAll_exts(form, id, _do_c_) {
 			<ul id="navlist">
 			<IF NAME="go_menu">
 				<LOOP NAME="go_menu">
-					<li class="({{current}}?active:)" id="c_{{goto}}"><a href="{{link}}" <IF LOOP="newtab">target="_blank"<ELSE>onclick="javascript:get_kleeja_link('{{link}}', '#content', {'current_id':'c_{{goto}}', 'current_class':'active'<IF LOOP="confirm">, 'confirm':true</IF>}); return false;"</IF>>{{name}}</a></li>
+					<li class="({{current}}?active :){{class}}" id="c_{{goto}}" class=""><a href="{{link}}" <IF LOOP="newtab">target="_blank"<ELSE>onclick="javascript:get_kleeja_link('{{link}}', '#content', {'current_id':'c_{{goto}}', 'current_class':'active'<IF LOOP="confirm">, 'confirm':true</IF>}); return false;"</IF>>{{name}}</a></li>
 				</LOOP>
 			</IF>
 			</ul>

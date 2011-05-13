@@ -67,7 +67,13 @@
 			behavior: url(./PIE.htc);
 
 		}
-
+	#menu .current-items ul .separator{
+		background-color:#000;
+		height:1px;
+		padding:0;
+		margin:6px 0;
+	}
+	
 	#menu .top-bar {
 		margin:6px;
 	}

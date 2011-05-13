@@ -591,14 +591,14 @@ function kleeja_get_link ($pid, $extra = array())
 */
 function get_up_tpl_box($box_name, $extra = array())
 {
-	global $THIS_STYLE_PATH, $config;
+	global $THIS_STYLE_PATH_ABS, $config;
 	static $boxes = false;
 	
 	//prevent loads
 	//also this must be cached in future
 	if($boxes !== true)
 	{
-		$tpl_path = $THIS_STYLE_PATH . 'up_boxes.html';
+		$tpl_path = $THIS_STYLE_PATH_ABS . 'up_boxes.html';
 		if(!file_exists($tpl_path))
 		{
 			$depend_on = false;

@@ -20,7 +20,7 @@ $stylee = "admin_search";
 //search files
 $action1 		= basename(ADMIN_PATH) . "?cp=c_files";
 //search users
-$action2 		= basename(ADMIN_PATH) . "?cp=g_users&smt=show_su";	
+$action2 		= basename(ADMIN_PATH) . "?cp=g_users&amp;smt=show_su";	
 //wut the default user system
 $default_user_system = (int) $config['user_system'] == 1 ? true : false;
 
@@ -33,7 +33,9 @@ $current_smt	= isset($_GET['smt']) ? (preg_match('![a-z0-9_]!i', trim($_GET['smt
 //secondary menu
 $go_menu = array(
 				'files' => array('name'=>$lang['R_SEARCH'], 'link'=> basename(ADMIN_PATH) . '?cp=h_search&amp;smt=files', 'goto'=>'files', 'current'=> $current_smt == 'files'),
+				'sep1' => array('class'=>'separator'),
 				'users' => array('name'=>$lang['SEARCH_USERS'], 'link'=> basename(ADMIN_PATH) . '?cp=h_search&amp;smt=users', 'goto'=>'users', 'current'=> $current_smt == 'users'),
+				'sep2' => array('class'=>'separator'),
 	);
 	
 if(!$default_user_system)

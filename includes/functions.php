@@ -1250,10 +1250,10 @@ function klj_clean_old_files($from = 0)
 			//excpetions
 			if($config['id_form'] == 'direct')
 			{
-				$ex_ids[] = $row['id'];
+				//$ex_ids[] = $row['id'];
 				
 				//move on
-				continue;
+				//continue;
 			}
 			
 			//your exepctions
@@ -1315,6 +1315,65 @@ function klj_clean_old_files($from = 0)
     } //stat_del
 
 }
+
+/**
+* klj_clean_old 
+* 
+*/
+ 
+function klj_clean_old($table, $for = 'all')
+{
+	
+	$days = intval(time() - 3600 * 24 * intval($for));
+
+	$query = array(
+					'SELECT'	=> 'f.id, f.last_down, f.name, f.type, f.folder, f.time, f.size, f.id_form',
+					'FROM'		=> "{$dbprefix}" . $table . " t",
+					'ORDER BY'	=> 'f.id ASC',
+					'LIMIT'		=> '20',
+					);
+
+	if($for != 'all')
+	{
+		$query['WHERE']	= "t.time < $days";
+	}
+
+	($hook = kleeja_run_hook('qr_select_klj_clean_old_func')) ? eval($hook) : null; //run hook
+		
+	$result	= $SQL->build($query);					
+	$num_to_delete = $SQL->num_rows($result);
+	if($num_to_delete == 0)
+	{
+		$t = $table == 'call' ? 'calls' : $table;
+		update_config('queue', preg_match('!:del_' . $for . $t . ':!i', '', $config['queue']));
+		$SQL->freeresult($result);
+		return;
+	}
+	
+	$ids = array();
+	$num = 0;
+	while($row=$SQL->fetch_array($result))
+	{
+		$ids[] = $row['id'];
+		$num++;
+	}
+
+	$SQL->freeresult($result);
+	
+	$query_del	= array(
+							'DELETE'	=> "{$dbprefix}" . $table,
+							'WHERE'	=> "id IN (" . implode(',', $ids) . ")"
+						);
+
+	($hook = kleeja_run_hook('qr_del_delf_old_table')) ? eval($hook) : null; //run hook
+
+	$SQL->build($query_del);
+	
+	return;
+}
+
+
+
 
 /**
 * get_ip() for the user

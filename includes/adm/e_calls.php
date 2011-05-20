@@ -60,12 +60,12 @@ $query	= array(
 
 if($current_smt == 'show_h24')
 {
-	$query['WHERE'] = 'c.time < ' . intval(time() - 3600 * 24);
+	$query['WHERE'] = 'c.time > ' . intval(time() - 3600 * 24);
 }
 
 $result = $SQL->build($query);
 		
-//pager 
+//pagination
 $nums_rows		= $SQL->num_rows($result);
 $currentPage	= isset($_GET['page']) ? intval($_GET['page']) : 1;
 $Pager			= new SimplePager($perpage, $nums_rows, $currentPage);

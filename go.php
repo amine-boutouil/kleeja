@@ -447,10 +447,30 @@ switch ($_GET['go'])
 	// for queue
 	//
 	case 'queue':
-		#img header and print spacer
+		#img header and print spacer gif
+		header('Cache-Control: no-cache');
+		header('Content-type: image/gif');
+		header('Content-length: 43');
+		echo base64_decode('R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==');
+
 		#do some of the queue ..
-		#update its status
+		if(preg_match('!:del_[a-z0-9]{0,3}calls:!i', $config['queue']))
+		{
+			klj_clean_old('call', (strpos('!:del_allcalls:!i', $config['queue']) !== false ? 'all': 30));
+		}
+		elseif(preg_match('!:del_[a-z0-9]{0,3}reports:!i', $config['queue']))
+		{
+			klj_clean_old('reports', (strpos('!:del_allreports:!i', $config['queue']) !== false ? 'all': 30));
+		}
+		elseif((int) $config['del_f_day'] > 0)
+		{
+			klj_clean_old_files($config['klj_clean_files_from']);
+		}
+
 		#end
+		$SQL->close();
+		exit;
+
 	break;
 	
 	

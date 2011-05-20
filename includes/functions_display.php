@@ -114,9 +114,12 @@ function Saafooter($outscript = false)
 		
 	//if admin, show admin in the bottom of all page
 	$tpl->assign("admin_page", ($usrcp->admin() ? '<a href="' . ADMIN_PATH . '" class="admin_cp_link"><span>' . $lang['ADMINCP'] .  '</span></a>' : ''));
+	
+	//assign cron
+	$tpl->assign("run_queue", '<img src="' . $config['siteurl'] . 'go.php?go=queue" width="1" height="1" alt="queue" />');
 
-		
-	// if google analytics .. //new version 
+
+	// if google analytics, new version 
 	//http://www.google.com/support/googleanalytics/bin/answer.py?answer=55488&topic=11126
 	$googleanalytics = '';
 	if (strlen($config['googleanalytics']) > 4)

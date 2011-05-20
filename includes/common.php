@@ -454,11 +454,6 @@ if(empty($perpage) || intval($perpage) == 0)
 //captch file 
 $captcha_file_path = $config['siteurl'] . 'ucp.php?go=captcha';
 
-//clean files
-if((int) $config['del_f_day'] > 0 && PATH == './')
-{
-	klj_clean_old_files($config['klj_clean_files_from']);
-}
 
 ($hook = kleeja_run_hook('end_common')) ? eval($hook) : null; //run hook
 

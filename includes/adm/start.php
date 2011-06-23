@@ -21,7 +21,6 @@ $stylee			= "admin_start";
 $h_lst_files	= basename(ADMIN_PATH) . '?cp=c_files&amp;last_visit=';
 $h_lst_imgs		= basename(ADMIN_PATH) . '?cp=d_img_ctrl&amp;last_visit=';
 $current_smt	= isset($_GET['smt']) ? (preg_match('![a-z0-9_]!i', trim($_GET['smt'])) ? trim($_GET['smt']) : 'general') : 'general';
-$current_title	= 
 
 //data
 $lst_reg			= (empty($stat_last_user)) ? $lang['UNKNOWN'] : $stat_last_user;
@@ -251,5 +250,16 @@ $go_menu = array(
 				'other' => array('name'=>$lang['OTHER_INFO'], 'link'=> basename(ADMIN_PATH) . '?cp=start&amp;smt=other', 'goto'=>'other', 'current'=> $current_smt == 'other'),
 				'team' => array('name'=>$lang['KLEEJA_TEAM'], 'link'=> basename(ADMIN_PATH) . '?cp=start&amp;smt=team', 'goto'=>'team', 'current'=> $current_smt == 'team'),
 	);
+
+if(!$config['firstime'])
+{
+	$go_menu['firstime'] = array('name'=>$lang['FIRST_TIME_CP'], 'link'=> basename(ADMIN_PATH) . '?cp=start&amp;smt=firstime', 'goto'=>'firstime', 'current'=> $current_smt == 'firstime');
+}
+
+if($current_smt == 'firstime')
+{
+	update_config('firstime', '1');
+}
+
 
 ($hook = kleeja_run_hook('default_admin_page')) ? eval($hook) : null; //run hook 

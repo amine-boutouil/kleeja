@@ -100,7 +100,8 @@ elseif (!isset($_GET['do_plg'])):
 
 //for style ..
 $stylee		= "admin_plugins";
-$action		= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php');
+$current_smt= isset($_GET['smt']) ? (preg_match('![a-z0-9_]!i', trim($_GET['smt'])) ? trim($_GET['smt']) : 'general') : 'general';
+$action		= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;smt=' . $current_smt;
 $no_plugins	= false;
 
 //kleeja depend on its users .. and kleeja love them .. so let's tell them about that ..
@@ -719,3 +720,10 @@ if(isset($_POST['submit_new_plg']))
 
 	$stylee	= "admin_info";
 }
+
+
+//secondary menu
+$go_menu = array(
+				'general' => array('name'=>$lang['R_PLUGINS'], 'link'=> basename(ADMIN_PATH) . '?cp=j_plugins&amp;smt=general', 'goto'=>'general', 'current'=> $current_smt == 'general'),
+				'newplg' => array('name'=>$lang['ADD_NEW_PLUGIN'], 'link'=> basename(ADMIN_PATH) . '?cp=j_plugins&amp;smt=newplg', 'goto'=>'newplg', 'current'=> $current_smt == 'newplg'),
+	);

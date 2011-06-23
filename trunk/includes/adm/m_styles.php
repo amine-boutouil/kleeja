@@ -20,6 +20,9 @@ if(!isset($_GET['sty_t']))
 	$_GET['sty_t'] = null;
 }
 
+#current secondary menu action
+$current_smt = isset($_GET['smt']) ? (preg_match('![a-z0-9_]!i', trim($_GET['smt'])) ? trim($_GET['smt']) : 'general') : 'general';
+
 switch ($_GET['sty_t']) 
 {
 	default:
@@ -27,9 +30,9 @@ switch ($_GET['sty_t'])
 
 		//for style ..
 		$stylee 	= "admin_styles";
-		$action 	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') .'&amp;sty_t=st';
-		$edit_tpl_action		= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') .'&amp;sty_t=style_orders&amp;style_id=' . $config['style'] . '&amp;method=1&amp;tpl_choose=';
-		$show_all_tpls_action	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') .'&amp;style_choose=' . $config['style'] . '&amp;method=1';
+		$action 	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') .'&amp;sty_t=st' . '&amp;smt=' . $current_smt;
+		$edit_tpl_action		= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') .'&amp;sty_t=style_orders&amp;style_id=' . $config['style'] .  '&amp;smt=' . $current_smt . '&amp;method=1&amp;tpl_choose=';
+		$show_all_tpls_action	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') .'&amp;style_choose=' . $config['style'] . '&amp;method=1' . '&amp;smt=' . $current_smt;
 		$H_FORM_KEYS			= kleeja_add_form_key('adm_style_order_del_edit');
 		$H_FORM_KEYS2			= kleeja_add_form_key('adm_style_order_add');
 		$H_FORM_KEYS3			= kleeja_add_form_key('adm_style_order_bkup');
@@ -48,8 +51,8 @@ switch ($_GET['sty_t'])
 					$arr[] = array(	
 									'style_name'	=> $file,
 									'is_default'	=> $config['style'] == $file ? true : false,
-									'link_show_tpls'	=> basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') .'&amp;sty_t=st&amp;style_choose=' . $file . '&amp;method=1',
-									'link_mk_default'	=> basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') .'&amp;sty_t=st&amp;style_choose=' . $file . '&amp;method=2',
+									'link_show_tpls'	=> basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') .'&amp;sty_t=st&amp;style_choose=' . $file . '&amp;method=1&amp;smt=curstyle',
+									'link_mk_default'	=> basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') .'&amp;sty_t=st&amp;style_choose=' . $file . '&amp;method=2&amp;smt=curstyle',
 							);
 				}
 			}
@@ -236,6 +239,8 @@ switch ($_GET['sty_t'])
 				break;				
 			}
 		}
+		
+
 
 	break;
 
@@ -627,4 +632,17 @@ switch ($_GET['sty_t'])
 
 	break;
 }
+
+$arrow_html = $lang['DIR'] == 'rtl' ? ' &rarr; ' : ' &larr; ';
+
+//secondary menu
+$go_menu = array();
+$go_menu['general'] = array('name'=>$lang['R_STYLES'], 'link'=> basename(ADMIN_PATH) . '?cp=m_styles&amp;smt=general', 'goto'=>'general', 'current'=> $current_smt == 'general');
+	
+if(isset($_GET['style_choose']))
+{
+	$go_menu['curstyle'] =  array('name'=>$_GET['style_choose'] . $arrow_html . $lang['STYLE'], 'link'=> basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') .'&amp;sty_t=st&amp;style_choose=' . $style_id . '&amp;method=1&amp;smt=curstyle', 'goto'=>'curstyle', 'current'=> $current_smt == 'curstyle');
+}
+
+$go_menu['basictpls'] = array('name'=>$lang['STYLE_IS_DEFAULT'] . $arrow_html . $lang['TPLS_RE_BASIC'], 'link'=> basename(ADMIN_PATH) . '?cp=m_styles&amp;smt=basictpls', 'goto'=>'basictpls', 'current'=> $current_smt == 'basictpls');
 

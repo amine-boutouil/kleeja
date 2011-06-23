@@ -211,4 +211,34 @@
 <h1>{translator_copyrights}</h1>
 </IF>
 
+<ELSEIF NAME="current_smt == firstime">
+<h1>{lang.FIRST_TIME_CP}</h1>
+
+<span class="firstime-text">{lang.FIRST_TIME_CP_EX}</span>
+
+
+
+<div class="br"></div>
+<img src="{STYLE_PATH_ADMIN}images/buraidah_ex.png" />
+<div class="br"></div>
+
+<ol class="firstime-list">
+	<li>{lang.FIRST_TIME_HOW1}</li>
+	<li>{lang.FIRST_TIME_HOW2}</li>
+	<li>{lang.FIRST_TIME_HOW3}</li>
+	<li>{lang.FIRST_TIME_HOW4}</li>
+	<li>{lang.FIRST_TIME_HOW5}</li>
+	<li>{lang.FIRST_TIME_HOW6}</li>
+	<li>{lang.FIRST_TIME_HOW7}</li>
+</ol>
+
+<div class="br"></div>
+
+<button class="firstime-button" onclick="get_kleeja_link('./');$('#menu').css('display', '');">{lang.FIRST_TIME_DONE}</button>
+<div class="br"></div>
+
+
+<script type="text/javascript">
+$('#menu').css('display', 'none');
+</script>
 </IF>

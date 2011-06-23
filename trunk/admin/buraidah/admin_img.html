@@ -53,8 +53,13 @@ jQuery(document).ready(function($){
 
 <h1>{lang.R_IMG_CTRL}  [{current_page}/{total_pages}]</h1>
 
-
 <div class="br"></div>
+<IF NAME="config.thumbs_imgs"><ELSE>
+<div class="note-info">
+{lang.THUMB_DIS_LONGTIME}
+</div>
+<div class="br"></div>
+</IF>
 
 <form method="post" name="imgform" action="{action}" id="imgs_form">
 	

@@ -1,4 +1,4 @@
-
+<IF NAME="current_smt == general">
 <h1>{lang.R_PLUGINS}</h1>
 
 <h2>{lang.PLUGINS_EX}</h2>
@@ -71,7 +71,15 @@
 <div class="br"></div>
 </IF>
 
+
+<!-- note for user  -->
+<div class="br"></div>
+<div class="note-info"><strong>{lang.NOTE} !</strong> {klj_d_s}</div>
+
+
 <!-- add new plugin -->
+<ELSEIF NAME="current_smt == newplg">
+
 <h1>{lang.ADD_NEW_PLUGIN}</h1>
 <form method="post" action="{action}" enctype="multipart/form-data">
 
@@ -97,6 +105,4 @@
 {H_FORM_KEYS}
 </form>
 
-<!-- note for user  -->
-<div class="br"></div>
-<div class="note-info"><strong>{lang.NOTE} !</strong> {klj_d_s}</div>
+</IF>

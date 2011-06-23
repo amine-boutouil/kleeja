@@ -226,7 +226,17 @@
 /* end: content */
 
 /* start: admin_start.html */
+.firstime-text{
+	font-size:12px;
+}
+.firstime-list{
+	font-size:12px;
+	list-style-type:decimal;
+}
 
+.firstime-button{
+	float:left;
+}
 /* end: admin_start.html */
 
 /* start: admin_calls.html*/

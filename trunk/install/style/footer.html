@@ -2,11 +2,10 @@
 <!-- strart code java script -->
 <script type="text/javascript">
 <!--
-jQuery(document).ready(function($){
-	// custom checkboxes
-	$('input[type=checkbox]').checkbox();
+$(document).ready(function() {
+	$('input:checkbox:not([safari])').checkbox();
 });
-	
+/** By JavaScript Kit (http://javascriptkit.com) **/			
 function w_email(l){
     var m = document.getElementById(l);
     if (m.value.indexOf("@") == - 1 || m.value.indexOf(".") == - 1 || m.value.length < 7 ) {
@@ -14,7 +13,6 @@ function w_email(l){
         m.focus();
     }
 }
-/** By JavaScript Kit (http://javascriptkit.com) **/
 function checkrequired(which){
 	var pass	=	true;
 	if (document.images)

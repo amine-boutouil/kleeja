@@ -16,13 +16,10 @@
 var PATH_SPACER = 'style/images/spacer.gif';
 $(document).ready(function(arg) {
 	$("#lang").msDropDown();
-	
-	$("#next").toggle($(this).is(':checked'));
-	$("#toggleElement").click(function() {
-		$("#next").toggle($(this).is(':checked'));
+	$("#toggleElement").click(function() {		
+		$("#next").toggle(!$(this).attr('checked'));		
 	});
 });
-
 //-->
 </script>
 </head>

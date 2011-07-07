@@ -29,6 +29,7 @@ if(isset($_GET['change_lang']))
 }
 
 // Including current language
+include ($_path . 'lang/' . getlang() . '/common.php');
 include ($_path . 'lang/' . getlang() . '/install.php');
 
 
@@ -76,7 +77,7 @@ function gettpl($tplname)
 
 	$tpl = preg_replace('/{{([^}]+)}}/', '<?php \\1 ?>', file_get_contents('style/' . $tplname));
 	ob_start();
-	eval('?> ' . stripslashes($tpl) . '<?php ');
+	eval('?> ' . $tpl . '<?php ');
 	$stpl = ob_get_contents();
 	ob_end_clean();
 	

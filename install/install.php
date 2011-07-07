@@ -175,15 +175,23 @@ case 'data' :
 	if (isset($_POST['datasubmit']))
 	{
 
+
 		//check data ...
 		if (empty($_POST['sitename']) || empty($_POST['siteurl']) || empty($_POST['sitemail'])
-			 || empty($_POST['username']) || empty($_POST['password']) || empty($_POST['email']) )
+			 || empty($_POST['username']) || empty($_POST['password']) || empty($_POST['password2']) || empty($_POST['email']) )
 		{
 			echo $lang['EMPTY_FIELDS'];
 			echo $footer_inst;
 			exit();
 		}
-
+		
+				//fix bug #r1777 (alta3rq revision)
+		if(!empty($_POST['password']) && !empty($_POST['password2']) && $_POST['password'] != $_POST['password2'])
+		{
+			echo $lang['PASS_NEQ_PASS2'];
+			echo $footer_inst;
+			exit();
+		}
 		 if (strpos($_POST['email'],'@') === false)
 		 {
 			echo $lang['WRONG_EMAIL'];

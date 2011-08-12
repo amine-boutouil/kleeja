@@ -41,8 +41,76 @@ if (isset($_POST['submit']))
 
 		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $action, 1);
 	}
-}
+	
+	
+	foreach ($_POST as $key => $value) 
+    {
+        if(preg_match('/del_(?P<digit>\d+)/', $key))
+        {
+            $del[$key] = $value;
+        }
+    }
+    
+    foreach ($del as $key => $id)
+    { 
+        $query	= array('SELECT'	=> '*',
+					'FROM'		=> "{$dbprefix}files",
+					'WHERE'	=> 'id = \'' . intval($id) . "'",
+					);
+                    
+         $result = $SQL->build($query);
 
+
+		while($row=$SQL->fetch_array($result))
+		{
+			//delete from folder ..
+			@kleeja_unlink (PATH . $row['folder'] . '/' . $row['name']);
+			//delete thumb
+			if (file_exists(PATH . $row['folder'] . '/thumbs/' . $row['name'] ))
+			{
+				@kleeja_unlink (PATH . $row['folder'] . '/thumbs/' . $row['name'] );
+			}
+			$ids[] = $row['id'];
+			$num++;		
+			$sizes += $row['size'];	
+		}
+	}
+    
+	$SQL->freeresult($result);
+	   
+	//no files to delete
+	if(isset($ids) && sizeof($ids))
+	{
+		$query_del = array(
+								'DELETE'	=> "{$dbprefix}files",
+								'WHERE'	=> "id IN (" . implode(',', $ids) . ")"
+							);
+			
+		$SQL->build($query_del);
+
+		//update number of stats
+		$update_query	= array(
+									'UPDATE'	=> "{$dbprefix}stats",
+									'SET'		=> "sizes=sizes-$sizes, files=files-$num",
+								);
+
+		$SQL->build($update_query);
+		if($SQL->affected())
+		{
+			delete_cache('data_stats');
+			$affected = true;
+		}
+	}
+        
+    //after submit 
+	$text	= ($affected ? $lang['FILES_UPDATED'] : $lang['NO_UP_CHANGE_S']) .
+				'<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . 
+				'&amp;page=' . (isset($_GET['page']) ? intval($_GET['page']) : '1') . '\');", 2000);</script>' . "\n";
+
+	$stylee	= "admin_info";
+}
+else
+{
 
 $query	= array('SELECT'	=> 'COUNT(f.id) AS total_files',
 					'FROM'		=> "{$dbprefix}files f",
@@ -141,7 +209,7 @@ if ($nums_rows > 0)
 		$tdnum = $tdnum == 4 ? 0 : $tdnum+1; 
 
 		$del[$row['id']] = isset($_POST['del_' . $row['id']]) ? $_POST['del_' . $row['id']] : '';
-
+/*
 		//when submit !!
 		if (isset($_POST['submit']))
 		{
@@ -159,10 +227,12 @@ if ($nums_rows > 0)
 				$sizes += $row['size'];	
 			}
 		}
+*/
 	}
 
 	$SQL->freeresult($result);
-
+	
+/*
 	if (isset($_POST['submit']))
 	{
 		//no files to delete
@@ -189,6 +259,8 @@ if ($nums_rows > 0)
 			}
 		}
 	}
+*/
+
 }
 else
 {
@@ -199,7 +271,9 @@ else
 $total_pages 	= $Pager->getTotalPages(); 
 $page_nums 		= $Pager->print_nums(basename(ADMIN_PATH). '?cp=' . basename(__file__, '.php'), 'onclick="javascript:get_kleeja_link($(this).attr(\'href\'), \'#content\'); return false;"'); 
 $current_page	= $Pager->currentPage;
+}
 
+/*
 //after submit 
 if(isset($_POST['submit']))
 {
@@ -208,4 +282,4 @@ if(isset($_POST['submit']))
 				'&amp;page=' . (isset($_GET['page']) ? intval($_GET['page']) : '1') . '\');", 2000);</script>' . "\n";
 
 	$stylee	= "admin_info";
-}
+}*/

@@ -16,7 +16,7 @@ body{
 	right:40%;
 }
 
-/* byname.css */
+/* byname.css 
 
 #menu{
 	right:0;
@@ -57,7 +57,7 @@ body{
 		#menu .top-bar .home ul li a .kbubbles{
 			margin-left:5px;
 		}
-
+*/
 #content{
 	right:267px;
 	left:auto;
@@ -71,9 +71,7 @@ body{
 		text-align:right;
 		float:left;
 	}
-	#content .menu_but_in_content li .kbubbles{
-			margin-left:5px;
-	}
+
 	
 .note-done, #system-message .info, .note-info, #system-message .error, .note-error{
 	background-position:99% 50%;

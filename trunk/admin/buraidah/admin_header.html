@@ -19,10 +19,12 @@
 
 <script type="text/javascript">
 <!--//
-var STYLE_PATH_ADMIN = '{STYLE_PATH_ADMIN}';var go_to = '{go_to}';
+var STYLE_PATH_ADMIN = '{STYLE_PATH_ADMIN}';
+var go_to = '{go_to}';
 //-->
 </script>
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.min.js"></script>
+<!--script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.ui.min.js"></script-->
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}js/fancybox/fancybox.js"></script>
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}js/tipsy/tipsy.js"></script>
 <script type="text/javascript">
@@ -31,32 +33,31 @@ jQuery(document).ready(function($){
 
 	$('a[title]').tipsy({gravity: $.fn.tipsy.autoNS});
 
-	//for more menu at top menu
-	$('.top-bar .home')
-	//.hover(
-	//		function () { $('ul', this).slideDown(50); }, 
-	//		function () { $('ul', this).slideUp(50); }
-	//)
-	.click(function() {
-		if($('#navlist').css('display') == 'none'){
-			$('#navlist').css('display', 'block');
-			$('#real_menu').css('display', 'none');
-			$('#menu .current-title').html('{lang.WELCOME}');
-		}
-		else{
-			$('#real_menu').css('display', 'block');
-			$('#navlist').css('display', 'none');
-			$('#menu .current-title').html('{lang.MENU}');
-		}
-	});
-	
-
 	//for # in address bar
 	hash = window.location.hash.replace('#!', '');
-	if(hash != '')
+	where_are_we = hash.match(/cp\=([0-9a-z_]+)/);
+	if(!where_are_we)
 	{
-		get_kleeja_link('./?' + hash);
+		where_are_we = 'index';
 	}
+	else
+	{
+		where_are_we = where_are_we[1];
+	}
+
+	console.debug('where_are_we='+where_are_we);
+	//for go menu
+	div_id = $('div[goto='+ where_are_we +']').attr('id');
+	gomenu_id = $("div[goto='"+ where_are_we +"']").attr('gomenu_id').trim();
+	console.debug('div_id='+div_id);
+	console.debug('gomenu_id='+gomenu_id);
+
+
+	//if(hash != '')
+	//{
+		//alert(hash)
+		get_kleeja_link('./?' + hash, '#content', {'current_id':div_id, 'current_class':'link_current_thumbnail', 'gomenu_id':gomenu_id});
+	//}
 });
 
 function get_kleeja_link(URL, ID, p)
@@ -137,10 +138,23 @@ function get_kleeja_link(URL, ID, p)
 				{
 					$('html').animate({scrollTop:0}, 'slow');
 				}
+
 				
-				$('#real_menu').css('display', 'none');
-				$('#navlist').css('display', 'block').html(R.menu);
-				$('#menu .current-title').html('{lang.WELCOME}');
+				if(p['gomenu_id'])
+				{
+					$('.go_menu').html('').fadeOut("slow")
+					if(R.menu)
+					{
+						$('#gomenu'+p['gomenu_id']).html(R.menu).fadeIn("slow");
+					}
+				}
+				else
+				{
+					if(R.menu)
+					{
+						$("div[class='link_current_thumbnail']").html(R.menu).fadeIn("slow");
+					}
+				}
 			}
 		},
 		error : function(R){
@@ -219,9 +233,21 @@ function submit_kleeja_data(FORM_ID, ID, CONFIRM)
 					$('html').animate({scrollTop:0}, 'slow');
 				}
 				
-				$('#real_menu').css('display', 'none');
-				$('#navlist').css('display', 'block').html(R.menu);
-				$('#menu .current-title').html('{lang.WELCOME}');
+				if(p['gomenu_id'])
+				{
+					$('.go_menu').html('').fadeOut("slow")
+					if(R.menu)
+					{
+						$('#gomenu'+p['gomenu_id']).html(R.menu).fadeIn("slow");
+					}
+				}
+				else
+				{
+					if(R.menu)
+					{
+						$("div[class='link_current_thumbnail']").html(R.menu).fadeIn("slow");
+					}
+				}
 			}
 		},
 		error : function(R){
@@ -306,58 +332,40 @@ function uncheckAll_exts(form, id, _do_c_) {
 <!-- ajax loading sign -->
 <div id="sign_ajax"><img src="{STYLE_PATH_ADMIN}images/ajax-loader-small.gif" /> {lang.LOADING} ...</div>
 <div id="sign_ajax_error" onclick="javascript:get_kleeja_link('./');"><img src="{STYLE_PATH_ADMIN}images/error.png" /> {lang.ERROR_AJAX}</div>
-	
 
+<!-- top right small icons -->
+<div id="top_small_icons">
+	<a href="{config.siteurl}" title="{lang.RETURN_HOME}">
+		<img src="{STYLE_PATH_ADMIN}images/website.png" alt="{lang.RETURN_HOME}" />
+	</a>
+	<a href="./?cp=b_lgoutcp&amp;{GET_FORM_KEY_GLOBAL}" onclick="javascript:return confirm_from();" title="{lang.R_LGOUTCP}" >
+		<img src="{STYLE_PATH_ADMIN}images/logout.png" alt="{lang.RETURN_HOME}" alt="{lang.R_LGOUTCP}"/>
+	</a>
+
+	<div class="clear"></div>
+</div>
 
 <div id="wrap">
-	<!-- secondary menu -->
+	<!--  menu -->
 	<div id="menu">
-		<div class="top-bar">
-			<div class="home">
-				<img src="{STYLE_PATH_ADMIN}images/logo.gif" alt="{lang.MENU}" title="{lang.MENU}"  />
+		<div id="MainMenuWrap" class="thumbnail">
+			<div class="link_menu_thumbnail" id="menu_item1" gomenu_id="2" goto="index">
+				<p><a class="seTooltip" title="{lang.R_CPINDEX}" href="./"  onclick="javascript:get_kleeja_link(this.href, '#content', {'current_id':'menu_item1', 'current_class':'link_current_thumbnail',gomenu_id:2}); return false;"><img src="{STYLE_PATH_ADMIN}images/menu/index_button.png" alt="{lang.R_CPINDEX}" style="margin:0 8px;vertical-align:middle;" /></a>
+				</p>
 			</div>
-			<div class="cats">
-				<a href="./" onclick="javascript:get_kleeja_link('./'); return false;" title="{lang.R_CPINDEX}">
-					<img src="{STYLE_PATH_ADMIN}images/home.png" alt="{lang.R_CPINDEX}"/>
-				</a>
-				<a href="{config.siteurl}" title="{lang.RETURN_HOME}">
-					<img src="{STYLE_PATH_ADMIN}images/website.png" alt="{lang.RETURN_HOME}" />
-				</a>
-				<a href="./?cp=b_lgoutcp&amp;{GET_FORM_KEY_GLOBAL}" onclick="javascript:return confirm_from();" title="{lang.R_LGOUTCP}" >
-					<img src="{STYLE_PATH_ADMIN}images/logout.png" alt="{lang.RETURN_HOME}" alt="{lang.R_LGOUTCP}"/>
-				</a>
-				<a href="./?cp=options" onclick="javascript:get_kleeja_link('./?cp=options', '#content', {}); return false;" title="{lang.R_CONFIGS}">
-					<img src="{STYLE_PATH_ADMIN}images/settings.png"  alt="{lang.R_CONFIGS}" />
-				</a>
+			<LOOP NAME="adm_extensions_menu">	
+				<div class="({{current}}?link_current_thumbnail:) link_menu_thumbnail" id="menu_item{{i}}" gomenu_id="<EVEN="i">{{i}}<ELSE>{{i2}}</EVEN>" goto="{{goto}}">
+					<p><a class="seTooltip" title="{{title}}" href="{{link}}" onclick="javascript:get_kleeja_link(this.href, '#content', {'current_id':'menu_item{{i}}', 'current_class':'link_current_thumbnail', 'gomenu_id':<EVEN="i">{{i}}<ELSE>{{i2}}</EVEN><IF LOOP="confirm">, confirm:true</IF>}); return false;"><img src="{{icon}}" alt="{{title}}" style="margin:0 8px;vertical-align:middle;" /></a> {{kbubble}}
+					</p>
+				</div>
+				<!--  sub menu -->
+				<EVEN="i">
 				<div class="clear"></div>
-			</div>
+				<ul class="go_menu" id="gomenu{{i}}"></ul>
+				</EVEN>
+			</LOOP>
 		</div>
-		
-		<div class="current-title">
-			{lang.WELCOME}
-		</div>
-		
-		<div class="current-items">
-			<ul id="navlist">
-			<IF NAME="go_menu">
-				<LOOP NAME="go_menu">
-					<li class="({{current}}?active :){{class}}" id="c_{{goto}}" class=""><a href="{{link}}" <IF LOOP="newtab">target="_blank"<ELSE>onclick="javascript:get_kleeja_link('{{link}}', '#content', {'current_id':'c_{{goto}}', 'current_class':'active'<IF LOOP="confirm">, 'confirm':true</IF>}); return false;"</IF>>{{name}}</a></li>
-				</LOOP>
-			</IF>
-			</ul>
-			<ul id="real_menu" style="display:none">
-				<LOOP NAME="adm_extensions_menu">
-					<li class="({{current}}?active:)" id="g_{{goto}}">
-						<a href="{{link}}" onclick="javascript:get_kleeja_link('{{link}}', '#content', {'current_id':'g_{{goto}}', 'current_class':'active'<IF LOOP="confirm">, 'confirm':true</IF>}); return false;">
-						{{kbubble}}	{{lang}}
-						</a>
-					</li>
-				</LOOP>
-				</ul>
-		</div>
-		
-		<div class="bottom-logo"></div>
-		
+
 	</div>
 
 	<div id="content">

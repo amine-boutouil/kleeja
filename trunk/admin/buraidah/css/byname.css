@@ -237,6 +237,44 @@
 .link_copy {background:#E8E8E8;padding:10px; border-top:1px solid #ccc;border-bottom:1px solid #ccc;color:#666;direction:ltr;font-weight:bold;}
 /* end: admin_chack_update.html */
 
+/* start: admin_reports.html */
+.report-show{
+	border:1px solid #F78F20;
+	background-color:#F7F7ED;
+	padding:8px;
+}
+	.report-show .email-for-msg{
+		background-color:#6F7072;
+		width:auto;
+		color:#F7F7ED;
+		padding:2px;
+		
+	}
+	.report-show .text-for-msg{
+		margin-top:6px;
+	}
+/* end: admin_reports.html */
+/* start: admin_reports.html */
+.call-show{
+	border:1px solid #F78F20;
+	background-color:#F7F7ED;
+	padding:8px;
+}
+	.call-show .email-for-msg{
+		background-color:#6F7072;
+		width:auto;
+		color:#F7F7ED;
+		padding:2px;
+		
+	}
+	.call-show .text-for-msg{
+		margin-top:6px;
+	}
+/* end: admin_reports.html */
+
+
+
+
 /* start: admin_login.html */
 #login_body{
 	background:transparent url(../images/fade.gif) repeat-x;
@@ -272,10 +310,7 @@
 		padding:10px;
 		margin-bottom:10px;
 		border:1px #ccc solid;
-		-webkit-border-radius: 10px;
-		-moz-border-radius: 10px;
-		border-radius: 10px;
-		behavior: url(./PIE.htc);
+
 	}
 	#login_warp .acp_login_box p{
 		padding-bottom:44px;

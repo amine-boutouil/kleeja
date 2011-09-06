@@ -17,7 +17,7 @@ if (!defined('IN_ADMIN'))
 //for style ..
 $stylee	= "admin_reports";
 $current_smt	= isset($_GET['smt']) ? (preg_match('![a-z0-9_]!i', trim($_GET['smt'])) ? trim($_GET['smt']) : 'general') : 'general';
-$action	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;page=' . (isset($_GET['page']) ? intval($_GET['page']) : 1) . '&amp;smt=' . $current_smt;
+$action			= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;page=' . (isset($_GET['page']) ? intval($_GET['page']) : 1) . '&amp;smt=' . $current_smt;
 $msg_sent		= isset($_GET['sent']) ? intval($_GET['sent']) : false; 
 $H_FORM_KEYS	= kleeja_add_form_key('adm_reports');
 $there_queue	= preg_match('!:del_[a-z0-9]{0,3}reports:!i', $config['queue']);
@@ -122,21 +122,12 @@ if ($nums_rows > 0)
 					//
 					//We will redirect to pages of results and show info msg there ! 
 					//
-					if(isset($_GET['_ajax_']))
-					{
-						echo_ajax(888, $lang['IS_SEND_MAIL']);
-					}
-
-					redirect(basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&page=' . (isset($_GET['page']) ? intval($_GET['page']) : 1) . '&sent=' . $row['id']);
+					kleeja_admin_info($lang['IS_SEND_MAIL'], true, '', true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&page=' . (isset($_GET['page']) ? intval($_GET['page']) : 1) . '&sent=' . $row['id']);
+	
 				}
 				else
 				{
-					if(isset($_GET['_ajax_']))
-					{
-						echo_ajax(888, $lang['ERR_SEND_MAIL']);
-					}
-
-					kleeja_admin_err($lang['ERR_SEND_MAIL']);
+					kleeja_admin_err($lang['ERR_SEND_MAIL'], true, '', true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&page=' . (isset($_GET['page']) ? intval($_GET['page']) : 1) . '&sent=' . $row['id']);
 				}
 			}
 		}

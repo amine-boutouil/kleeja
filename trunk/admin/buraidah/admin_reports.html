@@ -3,9 +3,10 @@
 	function show_msg (te, id)
 	{
 		var te = document.getElementById(te).value;
-		var iee = te;
-		iee += "<div class='clr'></div><br /><form method='post' action='{action}'><textarea name='v_" + id + "' cols='80' rows='3'></textarea>";
-		iee += "<div class='clr'></div><input name='reply_submit' type='submit' value='{lang.REPLY}' /></form>";
+		var iee = '<div class="report-show">' + te + '';
+		iee += "<div class='clr'></div><br /><form method='post' action='{action}' id='send_form'><textarea name='v_" + id + "' cols='80' rows='3'></textarea>";
+		iee += "<div class='clr'></div><input type='hidden' name='reply_submit' value='1'/>";
+		iee += "<button type='submit' name='reply_submit' class='btn' onclick='javascript:submit_kleeja_data(\"#send_form\", \"#content\", 0); return false;'><span>{lang.REPLY}</span></button></form></div>";
 		document.getElementById('mail_here').innerHTML = iee;
 	}
 	-->
@@ -13,16 +14,16 @@
 
 <h1>{lang.R_REPORTS}<IF NAME="current_smt == show_h24"> &raquo; {lang.SHOW_FROM_24H}</IF></h1>
 
+<!-- mail here  -->
+<IF NAME="no_results"><ELSE>
+	<div id="mail_here">{lang.E_CLICK}</div>
+</IF>
+
 <form method="post" name="reportform" action="{action}" id="reports_form">
 
 <IF NAME="no_results">
 <h2>{lang.MESSAGE_NONE}</h2>
 <ELSE>
-
-<!-- mail here  -->
-<IF NAME="no_results"><ELSE>
-	<div id="mail_here">{lang.E_CLICK}</div>
-</IF>
 
 <div class="br"></div>
 
@@ -43,7 +44,7 @@
 		<td><a href="javascript:void(0);" onclick="javascript:show_msg('textva_{{id}}',{{id}});">{lang.VIEW}</a></td>
 		<td>
 			<a title="{lang.EMAIL}:{{mail}}" onclick="javascript:show_msg('textva_{{id}}',{{id}});">{{name}}</a>
-			<input type="hidden" value="{{mail}} :<br /> {{text}}" id="textva_{{id}}">
+			<input type="hidden" value="&lt;div class='email-for-msg'&gt;{{name}}  ({{mail}}) :&lt;/div&gt;&lt;div class='text-for-msg'&gt;{{text}}&lt;/div&gt;" id="textva_{{id}}">
 		</td>
 		<td><a target="_blank" href="{{url}}">{lang.CLICKHERE}<a/></td>
 		<td>{{time}}</td>

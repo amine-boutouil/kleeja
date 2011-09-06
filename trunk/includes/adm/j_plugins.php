@@ -179,7 +179,7 @@ $there_is_cached = false;
 $cached_file = PATH . 'cache/styles_cached.php';
 if(file_exists($cached_file))
 {
-	$there_is_cached =  sprintf($lang['CACHED_STYLES_DISC'] , '<a href="' . basename(ADMIN_PATH) . '?cp=m_styles&amp;sty_t=cached">' . $lang['CLICKHERE'] .'</a>');
+	$there_is_cached =  sprintf($lang['CACHED_STYLES_DISC'] , '<a onclick="javascript:get_kleeja_link(this.href); return false;" href="' . basename(ADMIN_PATH) . '?cp=m_styles&amp;sty_t=cached">' . $lang['CLICKHERE'] .'</a>');
 }
 
 //is there any changes from recent installing plugins
@@ -254,9 +254,7 @@ else:
 			}		
 
 			//show msg
-			$text = $lang['PLGUIN_DISABLED_ENABLED'];
-			$text .= '<meta HTTP-EQUIV="REFRESH" content="1; url=' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '">' . "\n";
-			$stylee	= "admin_info";
+			kleeja_admin_info($lang['PLGUIN_DISABLED_ENABLED'], false, '', true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;smt=' . $current_smt);
 
 		break;
 		
@@ -349,15 +347,15 @@ else:
 				
 				if(empty($plg->zipped_files))
 				{
-					$text = $lang['PLUGIN_DELETED'] . '<meta HTTP-EQUIV="REFRESH" content="1; url=' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '">' . "\n";
+					$text = $lang['PLUGIN_DELETED'];
 				}
 				else
 				{
-					$text = sprintf($lang['PLUGIN_DELETED_ZIPPED'], '<a href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;do_plg=' . $plg->plg_id . '&amp;m=6&amp;fn=' . $plg->zipped_files . '">', '</a>');
-					$text .= '<br /><br /><a href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '">' . $lang['GO_BACK_BROWSER'] . '</a>';
+					$text = sprintf($lang['PLUGIN_DELETED_ZIPPED'], '<a  onclick="javascript:get_kleeja_link(this.href); return false;"  href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;do_plg=' . $plg->plg_id . '&amp;m=6&amp;fn=' . $plg->zipped_files . '&amp;smt=' . $current_smt . '">', '</a>');
+					$text .= '<br /><br /><a  onclick="javascript:get_kleeja_link(this.href); return false;"  href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;smt=' . $current_smt . '">' . $lang['GO_BACK_BROWSER'] . '</a>';
 				}
 
-				$stylee	= "admin_info";
+				kleeja_admin_info($text, false, '', true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;' . $current_smt);
 			}
 
 		break;
@@ -380,8 +378,8 @@ else:
 			$info = isset($info[$config['language']]) ? $info[$config['language']] : $info['en'];
 			kleeja_admin_info(
 							'<h3>' . $result['plg_name'] . ' &nbsp;' . $result['plg_ver']  . ' : </h3>' . 
-							$info . '<br /><a href="' . basename(ADMIN_PATH) . '?cp=' .
-							basename(__file__, '.php') . '">' . $lang['GO_BACK_BROWSER'] . '</a>'
+							$info . '<br /><a   onclick="javascript:get_kleeja_link(this.href); return false;" href="' . basename(ADMIN_PATH) . '?cp=' .
+							basename(__file__, '.php') . '&amp;smt=' . $current_smt . '">' . $lang['GO_BACK_BROWSER'] . '</a>'
 							);
 
 		break;
@@ -627,7 +625,7 @@ endif;//else submit
 //new plugin from xml
 if(isset($_POST['submit_new_plg']))
 {
-	$text	= '';
+	$text = '';
 	// oh , some errors
 	if($_FILES['imp_file']['error'])
 	{
@@ -686,32 +684,32 @@ if(isset($_POST['submit_new_plg']))
 		{
 			//plugin added
 			case 'done':
-				$text = $lang['NEW_PLUGIN_ADDED'] . '<meta HTTP-EQUIV="REFRESH" content="3; url=' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '">' . "\n";
+				$text = $lang['NEW_PLUGIN_ADDED'];
 			break;
 			case 'xyz': //exists before
 				kleeja_admin_err($lang['PLUGIN_EXISTS_BEFORE'],true,'',true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'));			
 			break;
 			case 'upd': // updated success
-				$text = $lang['PLUGIN_UPDATED_SUCCESS'] . '<meta HTTP-EQUIV="REFRESH" content="3; url=' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '">' . "\n";			
+				$text = $lang['PLUGIN_UPDATED_SUCCESS'];
 			break;
 			case 'inst':
-				$text = $lang['NEW_PLUGIN_ADDED'] . '<meta HTTP-EQUIV="REFRESH" content="1; url=' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;do_plg=' . $plg->plg_id . '&amp;m=4&amp;' . $GET_FORM_KEY . '">' . "\n";
+				$text = $lang['NEW_PLUGIN_ADDED'] . '<meta HTTP-EQUIV="REFRESH" content="1; url=' . basename(ADMIN_PATH) . '?#!cp=' . basename(__file__, '.php') . '&amp;do_plg=' . $plg->plg_id . '&amp;m=4&amp;' . $GET_FORM_KEY . '">' . "\n";
 			break;
 			case 'zipped':
-				$text = sprintf($lang['PLUGIN_ADDED_ZIPPED'], '<a href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;do_plg=' . $plg->plg_id . '&amp;m=6&amp;fn=' . $plg->zipped_files . '&amp;' . $GET_FORM_KEY . '">', '</a>');
-				$text .= '<br /><br /><a href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '">' . $lang['GO_BACK_BROWSER'] . '</a>';
+				$text = sprintf($lang['PLUGIN_ADDED_ZIPPED'], '<a onclick="javascript:get_kleeja_link(this.href); return false;" href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;do_plg=' . $plg->plg_id . '&amp;m=6&amp;fn=' . $plg->zipped_files . '&amp;' . $GET_FORM_KEY . '">', '</a>');
+				$text .= '<br /><br /><a onclick="javascript:get_kleeja_link(this.href); return false;" href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '">' . $lang['GO_BACK_BROWSER'] . '</a>';
 			break;
 			case 'zipped/inst':
 				$text = sprintf($lang['PLUGIN_ADDED_ZIPPED_INST'], 
-								'<a href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;do_plg=' . $plg->plg_id . '&amp;m=6&amp;fn=' . $plg->zipped_files . '&amp;' . $GET_FORM_KEY . '">',
+								'<a onclick="javascript:get_kleeja_link(this.href); return false;" href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;do_plg=' . $plg->plg_id . '&amp;m=6&amp;fn=' . $plg->zipped_files . '&amp;' . $GET_FORM_KEY . '">',
 								'</a>',
-								'<a href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;do_plg=' . $plg->plg_id . '&amp;m=4&amp;' . $GET_FORM_KEY . '">',
+								'<a onclick="javascript:get_kleeja_link(this.href); return false;" href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;do_plg=' . $plg->plg_id . '&amp;m=4&amp;' . $GET_FORM_KEY . '">',
 								'</a>'
 								);
-				$text .= '<br /><br /><a href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '">' . $lang['GO_BACK_BROWSER'] . '</a>';
+				$text .= '<br /><br /><a onclick="javascript:get_kleeja_link(this.href); return false;" href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '">' . $lang['GO_BACK_BROWSER'] . '</a>';
 			break;
 			default:
-				kleeja_admin_err($lang['ERR_IN_UPLOAD_XML_FILE'],true,'',true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'));	
+				kleeja_admin_err($lang['ERR_IN_UPLOAD_XML_FILE'],true,'',true, basename(ADMIN_PATH) . '?#!cp=' . basename(__file__, '.php'));	
 		}
 	}
 	

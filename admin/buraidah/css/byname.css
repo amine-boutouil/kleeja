@@ -92,7 +92,7 @@
 	padding-bottom:50px;
 }
 	#content h1{
-		color:#3D7284;
+		color:#6F7072;
 		font-size:22px;
 		padding:1px 1px 10px 1px;
 		border-bottom:1px solid #eee;
@@ -174,10 +174,7 @@
 	font-size:12px;
 	border: 1px solid #FFE085;
 	margin-top:5px;
-	-webkit-border-radius: 8px;
-	-moz-border-radius: 8px;
-	border-radius: 8px;
-	behavior: url(./PIE.htc);
+
 }
 #system-message .error, .note-error{
 	background: #FFD8D8 url(../images/error.gif) no-repeat 1% 50%;
@@ -187,10 +184,6 @@
 	font-size:12px;
 	border: 1px solid #DE0404;
 	margin-top:5px;
-	-webkit-border-radius: 8px;
-	-moz-border-radius: 8px;
-	border-radius: 8px;
-	behavior: url(./PIE.htc);
 }
 
 

@@ -91,6 +91,29 @@ switch ($_GET['go'])
 		$H_FORM_KEYS	= kleeja_add_form_key('report');
 		$NOT_USER		= !$usrcp->name() ? true : false; 
 
+		#Does this file exists ?
+		$query = array(
+						'SELECT'	=> 'f.real_filename, f.name',
+						'FROM'		=> "{$dbprefix}files f",
+						'WHERE'		=> 'id=' . $id_d
+					);
+
+		($hook = kleeja_run_hook('qr_report_go_id')) ? eval($hook) : null; //run hook
+		
+		$result	= $SQL->build($query);
+
+		if ($SQL->num_rows($result) != 0)
+		{
+			$row = $SQL->fetch_array($result);
+			$filename_for_show = $row['real_filename'] == '' ? $row['name'] : $row['real_filename']; 
+		}
+		else
+		{
+			($hook = kleeja_run_hook('not_exists_qr_report_go_id')) ? eval($hook) : null; //run hook
+			kleeja_err($lang['FILE_NO_FOUNDED']);
+		}
+		$SQL->freeresult($result);
+
 		//no error yet 
 		$ERRORS = false;
 

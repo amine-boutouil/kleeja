@@ -1,6 +1,10 @@
 /**
  * General CSS file 
  * Kleeja Dev. team.
+ * Colors :
+ * light: F7F7ED
+ * dark : 6F7072
+ * orange: F78F20
  */
 
 /** @CSS Reset was written by Dejan Cancarevic & http://stylizedweb.com/2008/02/14/10-best-css-hacks*/
@@ -10,7 +14,7 @@ html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, p, blockqu
 body{
 	margin:0;
 	padding:0;
-	color:#3B3B3B;
+	color:#6F7072;
 	font: 11px Tahoma, arial, Helvetica, sans-serif;
 	overflow: auto;
 	text-align:left;

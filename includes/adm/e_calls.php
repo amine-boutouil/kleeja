@@ -122,16 +122,12 @@ if ($nums_rows > 0)
 					//
 					//We will redirect to pages of results and show info msg there ! 
 					//
-					if(isset($_GET['_ajax_']))
-					{
-						echo_ajax(888, $lang['IS_SEND_MAIL']);
-					}
-					
-					#redirect(basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&page=' . (isset($_GET['page']) ? intval($_GET['page']) : 1) . '&sent=' . $row['id']);
+					kleeja_admin_info($lang['IS_SEND_MAIL'], true, '', true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&page=' . (isset($_GET['page']) ? intval($_GET['page']) : 1) . '&sent=' . $row['id']);
+	
 				}
 				else
 				{
-					kleeja_admin_err($lang['ERR_SEND_MAIL'], true, '', true,  $action);
+					kleeja_admin_err($lang['ERR_SEND_MAIL'], true, '', true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&page=' . (isset($_GET['page']) ? intval($_GET['page']) : 1) . '&sent=' . $row['id']);
 				}
 			}
 		}

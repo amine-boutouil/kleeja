@@ -200,7 +200,7 @@ function kleeja_err($msg, $title = '', $exit = true, $redirect = false, $rs = 2,
 					title : <title>title of page</title>
 					exit : stop script after showing msg 
 */
-function kleeja_info($msg, $title='', $exit = true, $redirect = false, $rs = 2, $extra_code_header = '')
+function kleeja_info($msg, $title='', $exit = true, $redirect = false, $rs = 5, $extra_code_header = '')
 {
 	global $text, $tpl, $SQL;
 
@@ -214,7 +214,7 @@ function kleeja_info($msg, $title='', $exit = true, $redirect = false, $rs = 2, 
 *
 * For admin
 */
-function kleeja_admin_err($msg, $navigation = true, $title='', $exit = true, $redirect = false, $rs = 2, $style = 'admin_err')
+function kleeja_admin_err($msg, $navigation = true, $title='', $exit = true, $redirect = false, $rs = 5, $style = 'admin_err')
 {
 	global $text, $tpl, $SHOW_LIST, $adm_extensions, $adm_extensions_menu;
 	global $STYLE_PATH_ADMIN, $lang, $olang, $SQL, $MINI_MENU;

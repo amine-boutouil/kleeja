@@ -18,12 +18,12 @@
 <ELSE>
 <LOOP NAME="arr">
 <table>
-	<tr class="first">
-		<td colspan="3">
+<tr class="first">
+	<td colspan="3">
 			<span style="font-family: Georgia, Times, 'Times New Roman', serif;font-size:16px;font-weight: normal;">{{plg_name}} {{plg_ver}}</span>
-		</td>
-	</tr>
-	<tr>
+	</td>
+</tr>
+<tr>
 	<td style="width:10%;text-align:(lang.DIR==ltr?left:right);">
 	<img src="{{plg_icon_url}}" />
 	</td>
@@ -34,16 +34,17 @@
 	</td>
 	<td style="width:20%;padding-(lang.DIR==ltr?left:right):10px;text-align:(lang.DIR==ltr?left:right);">		
 	<IF LOOP="plg_disabled">
-		<a href="{action}&amp;do_plg={{plg_id}}&amp;m=2&amp;{GET_FORM_KEY}" title="{lang.ENABLE}"><img src="{STYLE_PATH_ADMIN}images/enable.png" alt="{lang.ENABLE}" /></a>
+		<a  onclick="javascript:get_kleeja_link(this.href); return false;" href="{action}&amp;do_plg={{plg_id}}&amp;m=2&amp;{GET_FORM_KEY}" title="{lang.ENABLE}"><img src="{STYLE_PATH_ADMIN}images/enable.png" alt="{lang.ENABLE}" /></a>
 	<ELSE>
-		<a href="{action}&amp;do_plg={{plg_id}}&amp;m=1&amp;pn={{plg_name}}&amp;{GET_FORM_KEY}" title="{lang.DISABLE}"><img src="{STYLE_PATH_ADMIN}images/disable.png" alt="{lang.DISABLE}" /></a>
-					</IF>
-					<a href="{action}&amp;do_plg={{plg_id}}&amp;m=3&amp;pn={{plg_name}}&amp;{GET_FORM_KEY}" title="{lang.DELETE}"><img src="{STYLE_PATH_ADMIN}images/del.png" alt="{lang.DELETE}" onclick="javascript:return confirm_from();" /></a>
-					<a href="{action}&amp;do_plg={{plg_id}}&amp;m=5&amp;{GET_FORM_KEY}" title="{lang.EXPORT_AS_XML}"><img src="{STYLE_PATH_ADMIN}images/export.png" alt="{lang.EXPORT_AS_XML}" /></a>
-					<IF LOOP="plg_instructions"><a href="{action}&amp;do_plg={{plg_id}}&amp;m=4&amp;{GET_FORM_KEY}" title="{lang.INFORMATION}"><img src="{STYLE_PATH_ADMIN}images/help.png" alt="{lang.INFORMATION}" /></a></IF>
-				
-		</td>
-	</tr>
+		<a onclick="javascript:get_kleeja_link(this.href); return false;" href="{action}&amp;do_plg={{plg_id}}&amp;m=1&amp;pn={{plg_name}}&amp;{GET_FORM_KEY}" title="{lang.DISABLE}"><img src="{STYLE_PATH_ADMIN}images/disable.png" alt="{lang.DISABLE}" /></a>
+	</IF>
+		<a onclick="javascript:get_kleeja_link(this.href, '#content', {confirm:true}); return false;" href="{action}&amp;do_plg={{plg_id}}&amp;m=3&amp;pn={{plg_name}}&amp;{GET_FORM_KEY}" title="{lang.DELETE}"><img src="{STYLE_PATH_ADMIN}images/del.png" alt="{lang.DELETE}" /></a>
+		<a onclick="javascript:get_kleeja_link(this.href); return false;" href="{action}&amp;do_plg={{plg_id}}&amp;m=5&amp;{GET_FORM_KEY}" title="{lang.EXPORT_AS_XML}"><img src="{STYLE_PATH_ADMIN}images/export.png" alt="{lang.EXPORT_AS_XML}" /></a>
+		<IF LOOP="plg_instructions">
+			<a onclick="javascript:get_kleeja_link(this.href); return false;" href="{action}&amp;do_plg={{plg_id}}&amp;m=4&amp;{GET_FORM_KEY}" title="{lang.INFORMATION}"><img src="{STYLE_PATH_ADMIN}images/help.png" alt="{lang.INFORMATION}" /></a>
+		</IF>
+	</td>
+</tr>
 </table>
 </LOOP>
 </IF>
@@ -81,6 +82,8 @@
 <ELSEIF NAME="current_smt == newplg">
 
 <h1>{lang.ADD_NEW_PLUGIN}</h1>
+<div class="note-info"><strong>{lang.NOTE} !</strong> {lang.PLUGIN_CONFIRM_ADD}</div>
+
 <form method="post" action="{action}" enctype="multipart/form-data">
 
 <div class="section">
@@ -99,7 +102,8 @@
 <div class="br"></div>
 
 <p>
-	<button type="submit" id="submit" name="submit_new_plg" class="btn" onclick="javascript:return confirm_from('{lang.PLUGIN_CONFIRM_ADD}');"><span>{lang.SUBMIT}</span></button>
+	<input type="hidden" name="submit_new_plg" value="1" />
+	<button type="submit" id="submit" name="submit_new_plg" class="btn"><span>{lang.SUBMIT}</span></button>
 </p>
 	
 {H_FORM_KEYS}

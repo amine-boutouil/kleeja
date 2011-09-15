@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="{lang.LANG_SMALL_NAME}" xml:lang="{lang.LANG_SMALL_NAME}">
 <head>
 	<title>{lang.LOGIN} - {lang.KLEEJA_CP} - {config.sitename}</title>
@@ -32,7 +32,7 @@
 <body id="login_body">
 	<div id="login_top">
 		<div class="title_login">
-			<!-- here -->
+				{lang.KLEEJA_CP}
 		</div>	
 		<div class="return_login">
 			<a href="{config.siteurl}" title="{lang.RETURN_HOME}"> &laquo; {lang.RETURN_HOME}</a> 
@@ -42,10 +42,6 @@
 	<div id="login_warp">
 		<form action="{action}" method="post" style="clear: both;" id="login_form">
 		<div class="acp_login_box">
-			<div class="ttitle">
-				{lang.KLEEJA_CP}
-			</div>
-			<div class="clear"></div>
 			<p>
 				<label for="lname">{lang.USERNAME}</label>
 				<input type="text" name="lname" id="lname" value="{username}" />

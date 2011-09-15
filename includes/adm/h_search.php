@@ -33,9 +33,9 @@ $current_smt	= isset($_GET['smt']) ? (preg_match('![a-z0-9_]!i', trim($_GET['smt
 //secondary menu
 $go_menu = array(
 				'files' => array('name'=>$lang['R_SEARCH'], 'link'=> basename(ADMIN_PATH) . '?cp=h_search&amp;smt=files', 'goto'=>'files', 'current'=> $current_smt == 'files'),
-				'sep1' => array('class'=>'separator'),
+				#'sep1' => array('class'=>'separator'),
 				'users' => array('name'=>$lang['SEARCH_USERS'], 'link'=> basename(ADMIN_PATH) . '?cp=h_search&amp;smt=users', 'goto'=>'users', 'current'=> $current_smt == 'users'),
-				'sep2' => array('class'=>'separator'),
+				#'sep2' => array('class'=>'separator'),
 	);
 	
 if(!$default_user_system)

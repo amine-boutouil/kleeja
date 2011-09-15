@@ -90,6 +90,7 @@
 	height:100%;
 	margin:20px 0 20px 20px;
 	padding-bottom:50px;
+	
 }
 	#content h1{
 		color:#6F7072;
@@ -254,7 +255,7 @@
 		margin-top:6px;
 	}
 /* end: admin_reports.html */
-/* start: admin_reports.html */
+/* start: admin_cslls.html */
 .call-show{
 	border:1px solid #F78F20;
 	background-color:#F7F7ED;
@@ -270,27 +271,25 @@
 	.call-show .text-for-msg{
 		margin-top:6px;
 	}
-/* end: admin_reports.html */
+/* end: admin_cslls.html */
 
 
 
 
 /* start: admin_login.html */
 #login_body{
-	background:transparent url(../images/fade.gif) repeat-x;
+	background:transparent url(../images/bg_body.jpg) repeat-x;
 	margin:0 auto;
 }
 #login_warp{
-	margin:200px auto;
-	width:320px;
+	margin:250px auto;
+	width:340px;
 	font-family:tahoma;
 	font-size:13px;
+	background-color:#fff;						
+
 }
 
-.acp_login_box .ttitle{
-	font-size:18px;
-	margin-bottom:20px;
-}
 #login_top{ 
 	width:95%;
 	position:fixed;
@@ -306,14 +305,14 @@
 		}
 
 #login_warp .acp_login_box{
-		width:100%;
+
 		padding:10px;
 		margin-bottom:10px;
 		border:1px #ccc solid;
 
 	}
 	#login_warp .acp_login_box p{
-		padding-bottom:44px;
+		padding-bottom:30px;
 	}
 	#login_warp .acp_login_box input{
 		float:left;
@@ -331,8 +330,10 @@
 	
 	#login_warp .acp_login_box .submitt input{
 		width:320px;
-		margin:0 auto;
+		margin-top:9px;
 		text-align:center;
 		cursor:pointer;
+	
 	}
+	
 /* end: admin_login.html */

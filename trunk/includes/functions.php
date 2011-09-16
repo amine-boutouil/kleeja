@@ -1410,6 +1410,12 @@ function get_ip()
 //check captcha field after submit
 function kleeja_check_captcha()
 {
+	global $config;
+	if((int) $config['enable_captcha'] == 0)
+	{
+		return true;
+	}
+
 	$return = false;
 	if(!empty($_SESSION['klj_sec_code']) && !empty($_POST['kleeja_code_answer']))
 	{

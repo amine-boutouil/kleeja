@@ -33,18 +33,6 @@ $H_FORM_KEYS	= kleeja_add_form_key('adm_files');
 //
 // Check form key
 //
-if (isset($_POST['submit']))
-{
-	if(!kleeja_check_form_key('adm_files'))
-	{
-		if(isset($_GET['_ajax_']))
-		{
-			echo_ajax(888, $lang['INVALID_FORM_KEY']);
-		}
-
-		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $action, 1);
-	}
-}
 if (isset($_POST['search_file']))
 {
 	if(!kleeja_check_form_key('adm_files_search'))
@@ -56,7 +44,20 @@ if (isset($_POST['search_file']))
 
 		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, basename(ADMIN_PATH) . '?cp=h_search', 1);
 	}
-		
+}
+
+if (isset($_POST['submit']))
+{
+	if(!kleeja_check_form_key('adm_files'))
+	{
+		if(isset($_GET['_ajax_']))
+		{
+			echo_ajax(888, $lang['INVALID_FORM_KEY']);
+		}
+
+		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $action, 1);
+	}
+
 	
 	foreach ($_POST as $key => $value) 
     {

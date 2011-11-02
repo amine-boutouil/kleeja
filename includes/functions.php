@@ -593,7 +593,7 @@ function kleeja_check_mime ($mime, $group_id, $file_path)
 function delete_cache($name, $all=false)
 {
 	#Those files are exceptions and not for deletion
-	$exceptions = array('.htaccess', 'index.html', 'php.ini', 'styles_cached.php');
+	$exceptions = array('.htaccess', 'index.html', 'php.ini', 'styles_cached.php', 'web.config');
 
 	($hook = kleeja_run_hook('delete_cache_func')) ? eval($hook) : null; //run hook
 

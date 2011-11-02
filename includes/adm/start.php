@@ -253,7 +253,7 @@ $go_menu = array(
 
 if(!$config['firstime'])
 {
-	$go_menu['firstime'] = array('name'=>$lang['FIRST_TIME_CP'], 'link'=> basename(ADMIN_PATH) . '?cp=start&amp;smt=firstime', 'goto'=>'firstime', 'current'=> $current_smt == 'firstime');
+	//$go_menu['firstime'] = array('name'=>$lang['FIRST_TIME_CP'], 'link'=> basename(ADMIN_PATH) . '?cp=start&amp;smt=firstime', 'goto'=>'firstime', 'current'=> $current_smt == 'firstime');
 }
 
 if($current_smt == 'firstime')

@@ -1,0 +1,106 @@
+﻿
+
+
+<IF NAME="current_smt != new_u">
+<h1>{lang.R_USERS} 
+<IF NAME="is_search"> &raquo; {lang.SEARCH_USERS} ( {nums_rows} )</IF>
+<IF NAME="current_smt == show_au"> &raquo; {lang.ADMINISTRATORS}</IF>
+</h1>
+
+<!-- if not normal user system, tell him --> 
+<IF NAME="user_not_normal">
+<div class="note-info">{lang.USERS_NOT_NORMAL_SYS}</div>
+</IF>
+
+<form method="post" name="userform" action="{action}" id="users_form">
+
+	<!-- start clear  -->
+	<div class="clr"></div><br />
+	<!-- end clear  -->
+<!-- start data table -->
+<table>
+	<tr class="first">
+		<td>{lang.USERNAME}</td>
+		<td>{lang.EMAIL}</td>
+		<td>{lang.PASSWORD}</td>
+		<td>{lang.IS_ADMIN}</td>
+		<td><a href="javascript:void(0);" onclick="checkAll(document.userform, '_del', 'su');">{lang.DELETE}</a></td>
+		<!-- admin users info tr extra -->
+	</tr>
+	<IF NAME="no_results">
+	...		
+	<ELSE>
+	
+	<LOOP NAME="arr">
+	<tr id="su[{{id}}]" class="osilver">
+		<td>
+			<label><input type="text" name="nm_{{id}}" value="{{name}}" size="32"></label> <br />
+				<small><a href="{{delusrfile_link}}&amp;{GET_FORM_KEY}" onclick="javascript:return confirm_from();">{lang.ADMIN_DELETE_FILES}</a>
+				 | <a target="_blank" href="{{userfile_link}}">{lang.BROSWERF}</a></small>
+		</td>
+		<td><label><input type="text" name="ml_{{id}}" value="{{mail}}" size="20" style="direction:ltr"></label></td>
+		<td><label><input type="password" name="ps_{{id}}" value="" size="10" style="text-align:center;"></label></td>
+		<td>{{admin}}</td>
+		<td>
+		<IF LOOP="id==1">
+			<img  src="{STYLE_PATH_ADMIN}images/locked.png" alt="--- founder ---"  style="border:0" />
+		<ELSE>
+			<input type="checkbox"  name="del_{{id}}" value="{{id}}" onclick="change_color(this,'su[{{id}}]');" rel="_del">
+		</IF>
+		</td>
+		<!-- admin users data tr extra -->
+	</tr>
+	</LOOP>
+	</IF>
+</table>
+<!-- end data table -->
+
+<div class="br"></div>
+
+<!-- pagination -->
+{page_nums}
+
+	
+<!-- button -->
+<p>
+	<input type="hidden" name="submit" value="1" />
+	<button type="submit" name="submit" class="btn"  onclick="javascript:submit_kleeja_data('#users_form', '#content', 1); return false;"><span>{lang.UPDATE_USERS}</span></button>
+</p>
+	
+{H_FORM_KEYS}
+</form>
+
+<div class="br"></div>
+
+<!-- add new user -->
+<ELSE>
+<h1>{lang.R_USERS} &raquo; {lang.NEW_USER}</h1>
+<form method="post" action="{action_add}" id="add_user_form">
+
+<div class="section">
+	<h3><label for="lname">{lang.USERNAME}</label></h3>
+	<div class="box"><input type="text" name="lname" id="lname" value="" size="30" /></div>
+</div>
+<div class="clear"></div>
+<div class="section">
+	<h3><label for="lmail">{lang.EMAIL}</label></h3>
+	<div class="box"><input type="text" name="lmail"  id="lmail" value=""size="30" style="direction:ltr" /></div>
+</div>
+<div class="clear"></div>
+<div class="section">
+	<h3><label for="lpass">{lang.PASSWORD}</label></h3>
+	<div class="box"><input type="password" name="lpass" id="lpass" value=""size="30" /></div>
+</div>
+<div class="clear"></div>
+
+<div class="br"></div>
+
+<!-- button -->
+<p>
+	<input type="hidden" name="newuser" value="1" />
+	<button type="submit" id="submit" name="newuser" class="btn" onclick="javascript:submit_kleeja_data('#add_user_form', '#content', 0); return false;"><span>{lang.SUBMIT}</span></button>
+</p>
+
+{H_FORM_KEYS2}
+</form>
+</IF>

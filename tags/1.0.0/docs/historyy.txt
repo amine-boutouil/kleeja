@@ -1,0 +1,264 @@
+############################
+# kleeja history .. 
+# http://kleeja.com/bugs/
+############################
+
+---------------------------------
+Guide : 
++  : add .. 
+-  : fix .. 
+---------------------------------
+
+beta..
++ first release .. 
+
+beta1 : 
+- fix progress picture ..
++ install file ..
++ more opitions in cp
+
+beta2
++ stats page .
++ automatic delete for files ..
++ upload url .. 
++ more opitions in cp
++ advanced cache ..
++ who online .. with allow from acp
++ visitors countor for today ..
++ visitors countor for yesterday and all days..
++ googleanalytics code .. 
++ ban system (cp + full ips ban )
+
+beta3 
++ english language 
+-  some language words
+- insert data bugs 
++antifloods system
++show thumbs when image uploads 
+- some bugs with creat thumbs and watermark
+
+beta4 [ 15-12-2007]
+-  fix bug with admin panel [extensions section]
++ seperate javascript in seperated file 
+- fix flood system.
+- fix cache system.
++ specific image for wrong images or delted images.
+
+
+beta 5 ..
++ add new code of google analytics.
++ add last time for google visit 
++ add numbers of google visits
++ add last time for yahoo visit 
++ add numbers of  yahoo visits
++ add rules panel in cp .. 
++ add rules in cache .. 
++ add select for languages in cp 
++ add select for styles in cp 
++add Mod Rewriter in all important links 
++ add mod Rewriter as option an cp 
++ add docs folder with important files
+
+beta 6 : 
++ new mysql class .. [ more stable, more strong ] 
++ new pages system [pager class].. 
++ new advanced search system in cp.. 
+- reprogram cp admin ,, 
++ fix backup cp section
++ multiple inputs for link download ,,
++ add images panel [ thumbs] in cp
++add extra [header+footer] panel 
++ public user folder 
+
+RC1 : 
++ new design for default style
+- fix usefile section 
+- fix filecp section
+- fix install file [ sql 40 ]
++ add new variable to err file [ go to back browser ] 
+- fix image section in paenl [ more <td> , no <tr> ]
+ - fix advanced search in admin cp 
++ add new captcha system
++ add safe_code in upload if you want .. [ more security]
+- seperate upload codes to style [ good for designers ]
++ seperate javascript to real javascript file [ b4 was php file ] [ good for designers ]
+- fix time format in admin cp [start page ]
++ add last files or imgs from last visit [ just for kleeja user system ]
+- fix cache system [ related with rules cache ]
+- rebulid admin cp style
+-fix slsecting language in install file
+- fix login or logout admin when center closed or size limited ..
+- fix some features to be able work when someone converted from another script 
+- fix error in admin file when limited size is zero .. 
+
+
+RC2 : 
+- fix pager syatem [ was no more one page ]
+ -fix page number in all sections in admin.php file
+- fix page number in usercp file 
+ - fix bbcodes links , cuz its doesnt work with forums ..
++ add copyrights in footer for the user .. not for kleeja .. but keeja is powerd by ... so dont remove it man 
++ add install help file in docs install_ar.html 
+
+
+RC3 : 
+ - fix captcha  ,, 
+- fix captcha [ was error with gd ] 
+- fix some files and template engine to work with php5 and php4
+- fix some codes on go.php and usercp.php
+- fix mysql class for security ..
+- rewrite some parts in kljuploader.php
++ add filename for error msg
+- fix big_error function when join with forum system
++ add new sql system prepared to use hook system in future
+- rewriting many codes and using new sql system 
++ add new style system controlling from acp .. 
++ add xml style file sytrem to export and import 
++ add new lang system controlling from acp and edit alots of template to put language vars
++ add xml language file sytrem to export and import 
++ add plugins system controlling from acp .. 
++ add xml style file sytrem to import plugins 
++ add many snaps of hook system and we will improve it in future  .. 
+ - fix error system and info system 
+- rewriting some codes for error and info system 
++ add some features for debug system .. [?debug=1 just for admin]
+-fix automatic deleting system 
++ new admin extensions system ( every section as a file )
+- fix admin css with firefox [ and javascript  error with edit_tpl template]
+-fix backup system  and improve teqnique to add new database tables in futres
++- new install+update system
+- fix extension in acp , error when change some ext.'s doesnt change : ). 
+-fix style (some vars to be easy to redesign after now) and fix uploader class for captcha issue .
+-fix info msg in index [ security field is worng ] 
++ add new instruction for style class [ ODD + EVEN + RAND] 
++ check for new updates 
+- fix upload from link 
+
+
+RC4
+- fix style doenst apear .. 
+- fix directly open of caches 
+- fix gzip feature ..
+
+RC5:
+- fix styles system  [ and admin panel style ]
+- fix styles show in config in admin panel
+- fix add new style system [ bad numbering]
+- fix extensions system [ cant updating ]
+- fix navigating page in img controls 
++ add new feature for user privacy [can prevent other see his files folder ]
+ - hook system now more stable , as styles , language systems.
+- fix update check service ..
++ new check technique for bad files !
++ support phpbb3
+- fix cache file and process
+- fix if extrension of file not small [download.php]
+- fix style and language sections in admin [ in adding new tpl or word ] 
++ add redirects for admin panel in many sections to be more editlable !
+ - fix replace and add class realted with plugins system !
+- fix hooks table 'hook_id' was not auto insertment
+ + auto delete codes from style , new function related with plugins system 
+- fix unistall step in plugin 
+- fix close site bug 
+- fix email validating in installing error ..
+- fix bug after editing template
+- fix ban system 
+- fix captcha [ rendreing error ]
+- remove SQL percentage in the footer stats 
++ user ip for uploaded files 
++ search now with ip in files
+- fix bug if user close his folder in other user systems [not with default]
+- fix updating wizard SQLs rc4->rc5
+- fix login with phpbb system related with some letters.
+- fix register with empty data 
+- fix if register is not disabled and usr system is not default. [ linked to user system ]
+
+
+RC6:
+- fix install config section in url to prevent 406 errors [mod_security]
+- fix bug with site link not end with slash /
+- remove "powerd by kleeja" in the header .. 
+- another fix for gzip
+- rename usrcp.php file to ucp.php file to prevent 406 errors [mod_security]
+- fix bug when inserting user data in installation ..
+- fix ip check 
+- fix if template not found .. use default template instead of..
+- fix plugin template change .. 
+- fix mod-writer link of download 
+- add bmp as default
+- fix install system and delete cache after install and delete drop tables if exists
+- add new check system depend on mime types 
+- add some links in html like register , login ... 
+- fix bug when you add fmore feilds then will delete filed value...
++ styles now in files
++ languages now in files
++ add ext from cp 
++ sizes now in kb in exts cp
+- fix updating exts
+- fix check mime and add many bad codes
++ add real_name of files to cp
++ add checking of safe premession of config.php 
++ users system integrations changed to easy way 
+- last visit not work always with admin 
++ thumbs dimensions
+- fix searching for file in cp
+- fix mail send function .. [ utf8 issue ]
+- fix cookies issue
+
+1.0 : 
+- completely re-designing kleeja
+- fix many bugs related with url uploading 
+- fix percentage stat. in admin stat.
+- fix integration with phpbb
+- fix search in admincp 
++ files links are flexible now
+- fix many bugs related with integration system
++ new methods to (id_form) feature.
++ live extensions feature 
++ admin now can delete all specific user files
++ new login system with cookies to make 'remmeber me' feature possible .
++ new captcha system, replaced old one [ old one made alot of loads ]
++ new passwords system [ completly new and strong ] replaced MD5 hashs
++ new anti-CSRF system to prevent witch called 'one-click attacks'
++ moved admin cp to seperated folder.
++ added reset password email confirm.
++ admin now can delete all files of any user with one click.
++ admin now can add user from admin cp.
+- fix dublicate uploading when refreshing.
++ new admin notification system.
++ new livext system which make direct downloading of some files possible.
++ new system for uploading files links, one-click change how links look like.
++ now uploading boxes seperated to thier own template.
++ now admin can now the new numbers of reports without entering the reports page.
++ now admin can now the new numbers of calls without entering the calls page.
++ new language system for plugins and developer, using $olang variable.
++ add quick sizes calcualtor in admin ext page.
+- imporved alot of codes to prevent loads, and to avoid sleepy mysql connections.
++ improved image preview in admin using javascript.
++ admin now can show admins only with one click. 
+- improved user files page, now show more data of files.
++ added captcha to reset pasword page.
++ remove 'show files from last visit' and add 'show files from *2* hours' *2* is a list.
+
+-----------------------------------
+-----------------------------------
+
+To Do 1.X: 
+
+- organize menus in general settings (options)
+- improve user system and add groups
+- add founder feature for user who installed Kleeja ..
+- add simple moderator panel
+- make callus to methods -> to admin email directly or to admin panel
+- show user total number of files which he uploaded in admin area 
+- add file description
+- add filter system
+- add configs backup ( last 5 changes ) and ablilty to return to one of them
+- add menu in start admin page for quick action, like add new ext or change style, language etc.
+- add *delete* button in report admin page for quick delete 
+- add ability to create db table for *indexing* to let searching be better, - indexing begin from last indexing
+ 
+
+Thank you for reading this file. 
+
+for more details http://kleeja.com/bugs

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kleeja>
+	<info>
+	  <plugin_name>Kleeja Live Folder name</plugin_name>
+	  <plugin_version>1.7</plugin_version>
+		<plugin_description>
+			<description lang="ar"><![CDATA[نقل الصور والملفات التي تحمل صيغ معينه إلى مجلد خاص وعرضها برابط مباشر]]></description>
+			<description lang="en"><![CDATA[Filtering files depend on thier extensions and moving them to special folder.]]></description>
+			<description lang="sk"><![CDATA[Filtrovanie súborov závisí na ich rozlíšení a ich presunutí do špeciálnej zložky.]]></description>
+		</plugin_description>
+	  <plugin_author>http://www.kleeja.com</plugin_author>
+	  <plugin_kleeja_version>1.0.0</plugin_kleeja_version>
+	</info>
+	
+	<options>
+		<option name="imagefolder" value="uploads" order="40" menu="KLIVE"><![CDATA[
+			<input type="text" id="imagefolder" name="imagefolder" value="{con.imagefolder}" size="40">
+		]]></option>
+		<option name="imagefolderexts" value="png,gif,jpg,jpeg,tif,tiff,swf" order="40" menu="KLIVE"><![CDATA[
+			<input type="text" id="imagefolderexts" name="imagefolderexts" value="{con.imagefolderexts}" size="80">
+		]]></option>
+		<option name="imagefoldere" value="1" order="40" menu="KLIVE"><![CDATA[
+			<label>{lang.YES}<input type="radio" id="imagefoldere" name="imagefoldere" value="1"  <IF NAME="con.imagefoldere"> checked="checked"</IF>></label><label>{lang.NO}<input type="radio" id="imagefoldere" name="imagefoldere" value="0"  <IF NAME="con.imagefoldere"> <ELSE> checked="checked"</IF>></label>
+		]]></option>
+	</options>
+	
+	<phrases>
+		<lang name="ar">
+			<phrase name="IMAGEFOLDER">مجلد الصور والملفات المباشره</phrase>
+			<phrase name="IMAGEFOLDEREXTS">صيغ الصور والملفات المباشره</phrase>
+			<phrase name="IMAGEFOLDERE">تغيير اسم الملف او الصوره المباشره</phrase>
+			<phrase name="CONFIG_KLJ_MENUS_KLIVE">اعدادات الروابط المباشرة</phrase>
+		</lang>
+		<lang name="en">
+			<phrase name="IMAGEFOLDER">live folder</phrase>
+			<phrase name="IMAGEFOLDEREXTS">Extensions of the live links files</phrase>
+			<phrase name="IMAGEFOLDERE">Change file name</phrase>
+			<phrase name="CONFIG_KLJ_MENUS_KLIVE">Kleeja Live links settings</phrase>
+		</lang>
+		<lang name="sk">
+			<phrase name="IMAGEFOLDER">Aktuálna zložka</phrase>
+			<phrase name="IMAGEFOLDEREXTS">Typy súborov pre živé odkazy súborov</phrase>
+			<phrase name="IMAGEFOLDERE">Zmeniť názvy súborov</phrase>
+			<phrase name="CONFIG_KLJ_MENUS_KLIVE">Nastavenie živých odkazov</phrase>
+		</lang>
+	</phrases>
+	
+  <hooks>
+	<hook name="while_klj_clean_old_files_func"><![CDATA[
+	if(in_array($row['type'], $exlive_types))
+	{
+		$ex_ids[] = $row['id'];
+		if($real_num != $num_of_files_to_delete)
+		{
+			$continue = false;
+		}
+	}
+	]]></hook>
+  <hook name="beforewhile_klj_clean_old_files_func"><![CDATA[
+  $exlive_types = explode(',', $config['imagefolderexts']);
+	]]></hook>
+  	<hook name="kleeja_get_link_func"><![CDATA[
+  	if(isset($extra['::NAME::']))
+	{
+		if($config['mod_writer'] && !empty($extra['::NAME::']) && $config['id_form'] != 'direct')
+		{
+			$ext = @explode("-", $extra['::NAME::']);
+		}
+		else
+		{
+			$ext = @explode(".", $extra['::NAME::']);
+		}
+
+		
+		//$ext = $ext[sizeof($ext)-1];
+		$ex	= explode(',',$config['imagefolderexts']);
+		
+		if(in_array(strtolower(array_pop($ext)), $ex))
+		{
+			
+			if($config['mod_writer'] && !empty($extra['::NAME::']) && $config['id_form'] != 'direct')
+			{
+				$extra['::NAME::'] = $extra['::NAME::'] = preg_replace('!-([^-]+)$!', ".$1", $extra['::NAME::']);	
+			}
+			
+			$links = array_merge($links, array(
+						'thumb' => '::DIR::/thumbs/::NAME::',
+						'image' => '::DIR::/::NAME::',
+						'file'	=> '::DIR::/::NAME::',
+						));
+		}
+	}
+	]]></hook>
+	<hook name="start_upload_wut2_kljuploader"><![CDATA[
+	$ex	= explode(',',$config['imagefolderexts']);
+	if (in_array(strtolower($this->typet), $ex))
+	{
+		if($config['imagefoldere'])
+		{
+			$zaid = time();
+			$this->filename2 = $this->filename . $zaid . $i . '.' . $this->typet;
+		}
+		
+		$this->folder = $config['imagefolder'];
+	}
+	else
+	{
+		$this->folder = $config['foldername']; //default folder (fix bug #435)
+	}
+	]]></hook>
+	<hook name="move_uploaded_file_kljuploader"><![CDATA[
+	$ex	= explode(',',$config['imagefolderexts']);
+	if (in_array(strtolower($this->typet), $ex))
+	{
+		if($config['imagefoldere'])
+		{
+			$zaid = time();
+			$this->filename2 = $this->filename . $zaid . $i . '.' . $this->typet;
+		}
+		
+		$this->folder = $config['imagefolder'];
+	}
+	else
+	{
+		$this->folder = $config['foldername']; //default folder (fix bug #435)
+	}
+	]]></hook>
+	<hook name="no_folder_check_kljuploader"><![CDATA[
+		// check folder
+		if(!file_exists($config['imagefolder'])) 
+		{
+			$jadid	=	mkdir($config['imagefolder']);
+			$jadid2	=	mkdir($config['imagefolder'] . '/thumbs');
+			
+			if($jadid)
+			{
+				$this->errs[] = array($lang['NEW_DIR_CRT'], 'index_info');
+				
+				$htaccess_data = "<Files ~ \"^.*\.(php|php*|cgi|pl|phtml|shtml|sql|asp|aspx)\">\nOrder allow,deny\nDeny from all\n</Files>\n<IfModule mod_php4.c>\nphp_flag engine off\n</IfModule>\n<IfModule mod_php5.c>\nphp_flag engine off\n</IfModule>\nRemoveType .php .php* .phtml .pl .cgi .asp .aspx .sql";
+				$fo		= @fopen($config['imagefolder'] . "/index.html","w");
+				$fo2	= @fopen($config['imagefolder'] . "/thumbs/index.html","w");
+				$fw		= @fwrite($fo,'<a href="http://kleeja.com"><p>KLEEJA ..</p></a>');
+				$fw2	= @fwrite($fo2,'<a href="http://kleeja.com"><p>KLEEJA ..</p></a>');
+				$fi		= @fopen($config['imagefolder'] . "/.htaccess", "w");
+				$fi2	= @fopen($config['imagefolder'] . "/thumbs/.htaccess","w");
+				$fy		= @fwrite($fi, $htaccess_data);
+				$fy2	= @fwrite($fi2, $htaccess_data);
+				$chmod	= @chmod($config['imagefolder'], 0777);
+				$chmod2	= @chmod($config['imagefolder'] . '/thumbs/', 0777);
+
+				if(!$chmod)
+				{
+					$this->errs[] = array($lang['PR_DIR_CRT'], 'index_err');
+				} 
+			}
+			else
+			{
+				$this->errs[] = array($lang['CANT_DIR_CRT'], 'index_err');
+			}
+		}
+	]]></hook>
+   </hooks>
+</kleeja>

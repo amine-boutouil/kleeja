@@ -1,0 +1,98 @@
+<!-- Users Files template -->
+<div id="content" class="border_radius">
+
+	<!-- title -->
+	<h1 class="title"><IF NAME="user_is">&#9679; {lang.YOUR_FILEUSER}<ELSE>&#9679; {title}</IF></h1>
+	<!-- @end-title -->
+
+	<!-- line top -->
+		<div class="line"></div>
+	<!-- @end-line -->
+
+	<IF NAME="user_name">
+	<!-- box user name and all files  -->
+	<div id="boxfileuser">
+		<div class="box_user">
+		<img class="right pngfix" src="{STYLE_PATH}images/imguser.png" alt="image user" />
+			<div class="public">{lang.PUBLIC_USER_FILES}</div>
+			<div class="uname">{user_name}</div>
+		</div>
+		<div class="us3r_n4me">
+			<img class="right pngfix" src="{STYLE_PATH}images/boxfileuser.png" alt="files number" />
+			<div class="public">{lang.ALL_FILES}</div>
+			<div class="nums">{nums_rows}</div> 
+		</div>
+		<div class="clr"></div>
+	</div>
+	<!-- @end-box-user-name-and-all-files -->
+	</IF>
+
+	<IF NAME="filecp_link">
+	<!-- link user -->
+	<div id="filecplink">
+		<div class="clr"></div>
+			<fieldset>
+				<legend class="copylink">{lang.COPY_AND_GET_DUD}</legend>
+				<input class="link_user" readonly="readonly" onclick="this.select();" type="text" name="option" value="{your_fileuser}" />
+			 </fieldset>
+		<div class="clr"></div>
+	</div>
+	<!-- @end-link-user -->
+	</IF>
+
+	<IF NAME="no_results">
+	<!-- no files user -->
+	<div id="boxfileuser" style="text-align:center">
+		<img class="pngfix" src="{STYLE_PATH}images/warning_nofile.png" />
+		<br />
+		<h1>{lang.NO_FILE_USER}</h1>
+	</div>
+	<!-- @end-no-files-user -->
+
+	<ELSE>
+	
+	<!-- table all files -->
+	<table class="tabledata">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th colspan="2">{lang.FILETYPE}</th>
+				<th>{lang.FILENAME}</th>
+				<th>{lang.FILEUPS}</th>
+				<th>{lang.LAST_DOWN}</th>
+			</tr>	
+		</thead>
+		
+		<tbody>
+			<LOOP NAME="arr">	
+			<tr>
+				<td>{{i}}</td>
+				<td>{{file_type}}</td>
+				<td><img src="{{icon_link}}" alt="{{file_type}}" /></td>
+				<td class="odd">{{name}}</td>
+				<td>{{uploads}}</td>
+				<td>{{last_down}}</td>
+			</tr>
+			</LOOP>
+		</tbody>	
+	</table>
+	<!-- @end-table-all-files -->
+	</IF>
+	
+
+	<div class="clr"></div><br />
+
+	<!-- pagination -->
+	{page_nums}
+	<!-- @end-pagination -->
+
+	<IF NAME="filecp_link">
+	<!-- button filecp -->
+	<div class="left_button"><input type="submit" name="submit_files" value="{lang.GO_FILECP}" onclick="location.href='{filecp_link}';" /></div>
+	<!-- @end-button-filecp -->
+	</IF>
+ 
+	<div class="clr"></div>
+   
+</div>
+<!-- @end-Users-Files -->

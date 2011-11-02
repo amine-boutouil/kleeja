@@ -1,0 +1,339 @@
+/**
+ * Specific CSS file 
+ * Kleeja Dev. team.
+ * Colors :
+ * light: F7F7ED
+ * dark : 6F7072
+ * orange: F78F20
+ */
+	
+/* start: menu */
+#top_small_icons{
+		position:fixed;
+		top:0;
+		left:0;
+		text-align:left;
+		float:left;
+		width:auto;
+		height:25px;
+		padding:2px 0px 0 4px;
+	}
+	
+	#top_small_icons img{
+		cursor:pointer;
+		width:19px;
+		height:19px;
+		padding:3px;
+	}
+
+#menu{
+	position:fixed;
+	right:0;
+	top:0;
+	width:225px;
+	bottom:0;
+	overflow:auto;
+	background-color:#F7F7ED;
+	border-left:1px solid #F78F20;
+	}
+
+
+	#MainMenuWrap{
+		width:100%;
+		margin:0 auto;
+		}
+
+	#MainMenuWrap .link_menu_thumbnail {float: right;height:82px; line-height:40px; width:82px; margin:5px 15px 5px 0;text-align:center;}
+	#MainMenuWrap .link_menu_thumbnail img{text-align:center;padding:2px 0 3px 0;}
+	#MainMenuWrap .link_current_thumbnail  {background:transparent url(../images/menu/arrow_gomenu.gif) no-repeat 50% 120%;}
+	#MainMenuWrap .link_menu_thumbnail p {position: relative;line-height: 100%;}
+	#MainMenuWrap .link_menu_thumbnail a  {display: block; overflow: hidden;}
+	#MainMenuWrap .link_menu_thumbnail a:hover{}
+	#MainMenuWrap span.kbubbles {background:url(../images/menu/kbubbles.png) no-repeat center center;color:#fff;width:36px;height:26px;padding:13px 0 0;text-align: center;position:absolute;left:-3px;top:-5px;z-index:900;font-size:x-small;font-weight: 400;}	
+
+	#MainMenuWrap .go_menu {height:100px!important;  background-color:#6F7072;
+			border:1px solid #F78F20;
+			padding:5px 20px;
+			margin-top:-6px;
+			border-width:1px 0;
+			display:none;
+		}
+		
+		#MainMenuWrap .go_menu{
+			overflow:true;
+		}
+		#MainMenuWrap .go_menu li:before {
+			content: "\00BB \0020";
+		}		#MainMenuWrap .go_menu li.active:before {
+			content: "\00AC \0020";
+		}
+		#MainMenuWrap .go_menu li{
+			padding-top:2px;
+			color:#F78F20;
+		}
+		#MainMenuWrap .go_menu li.active{
+			padding-right:-7px;
+		
+		}
+		#MainMenuWrap .go_menu a {color:#F7F7ED !important;}
+		#MainMenuWrap .go_menu li.active a {color:#F78F20 !important;}
+
+
+/* end: menu*/
+
+/* start: content */
+#content{
+	position:absolute;
+	left:267px;
+	width:700px;
+	top:0;
+	height:100%;
+	margin:20px 0 20px 20px;
+	padding-bottom:50px;
+	
+}
+	#content h1{
+		color:#6F7072;
+		font-size:22px;
+		padding:1px 1px 10px 1px;
+		border-bottom:1px solid #eee;
+		font-weight:normal;
+		margin-bottom: 10px;
+	}
+	#content .section {
+		margin-top:20px;
+		}
+	#content .section h3{
+		color:#000;
+		font-size:13px;
+		font-weight:bold;
+		float:left;
+		margin:0; padding:0;
+		line-height:120%;
+		width:170px;
+		vertical-align:middle;
+	}
+	#content .section .box{
+		color:#000;
+		font-size:12px;
+		text-align:left;
+		float:right;
+		width:520px;
+	}
+	#content .hr{
+			width:100%;
+			margin:20px auto;
+			clear:both;
+			border-bottom:1px solid #eee;
+		}
+	#content .br{
+			width:100%;
+			margin:30px auto;
+			clear:both;
+		}
+	#content .menu_but_in_content{
+		font-size:16px;
+		line-height:140%
+	}
+
+	
+	#content table{
+		width:100%;
+		
+	}
+	#content table td{
+		text-align:center;
+		vertical-align:middle;
+		padding:3px;
+	}
+	#content table .first, #content .first{
+		background: #ccc url('../images/input.png') repeat-x;
+		height:25px;
+	}
+	
+	#content h2{
+		font-size:13px;
+		font-weight:bold;
+	}
+
+.note-done{
+	background: #DAF0F6 url(../images/done.gif) no-repeat 1% 50%;
+	color:#518EB0;
+	padding: 10px;
+	padding-left:35px;
+	font-size:12px;
+	border: 1px solid #3DB2D0;
+	border-width:1px 0;
+	margin-top:5px;
+}
+
+#system-message .info, .note-info{
+	background: #FFFCDB url(../images/info.gif) no-repeat 1% 50%;
+	color:#B28600;
+	padding: 10px;
+	padding-left:35px;
+	font-size:12px;
+	border: 1px solid #FFE085;
+	margin-top:5px;
+
+}
+#system-message .error, .note-error{
+	background: #FFD8D8 url(../images/error.gif) no-repeat 1% 50%;
+	color:#DE0404;
+	padding: 10px;
+	padding-left:35px;
+	font-size:12px;
+	border: 1px solid #DE0404;
+	margin-top:5px;
+}
+
+
+.note-info strong, .note-error strong, .note-done strong{
+	font-weight:bold;
+}
+
+
+
+/* end: content */
+
+/* start: admin_start.html */
+.firstime-text{
+	font-size:12px;
+}
+.firstime-list{
+	font-size:12px;
+	list-style-type:decimal;
+}
+
+.firstime-button{
+	float:left;
+}
+/* end: admin_start.html */
+
+/* start: admin_calls.html*/
+
+/* end: admin_calls.html*/
+
+/* start: admin_styles.html*/
+.quick_edit_tpls{
+	
+}
+.quick_edit_tpls td {
+	text-align:left;
+}
+/* end: admin_styles.html*/
+
+/* start: admin_show_tpls.html*/
+.s_tpl_x{
+	padding:5px;
+	width:95%;
+}
+/* end: admin_show_tpls.html*/
+
+
+/* start: admin_chack_update.html */
+.update_title {color:#0A71D8;font-size:14px;}
+.update_list {font-size:11px;}
+.update_list li{list-style:square inside; padding:5px;}
+.link_copy {background:#E8E8E8;padding:10px; border-top:1px solid #ccc;border-bottom:1px solid #ccc;color:#666;direction:ltr;font-weight:bold;}
+/* end: admin_chack_update.html */
+
+/* start: admin_reports.html */
+.report-show{
+	border:1px solid #F78F20;
+	background-color:#F7F7ED;
+	padding:8px;
+}
+	.report-show .email-for-msg{
+		background-color:#6F7072;
+		width:auto;
+		color:#F7F7ED;
+		padding:2px;
+		
+	}
+	.report-show .text-for-msg{
+		margin-top:6px;
+	}
+/* end: admin_reports.html */
+/* start: admin_cslls.html */
+.call-show{
+	border:1px solid #F78F20;
+	background-color:#F7F7ED;
+	padding:8px;
+}
+	.call-show .email-for-msg{
+		background-color:#6F7072;
+		width:auto;
+		color:#F7F7ED;
+		padding:2px;
+		
+	}
+	.call-show .text-for-msg{
+		margin-top:6px;
+	}
+/* end: admin_cslls.html */
+
+
+
+
+/* start: admin_login.html */
+#login_body{
+	background:transparent url(../images/bg_body.jpg) repeat-x;
+	margin:0 auto;
+}
+#login_warp{
+	margin:250px auto;
+	width:340px;
+	font-family:tahoma;
+	font-size:13px;
+	background-color:#fff;						
+
+}
+
+#login_top{ 
+	width:95%;
+	position:fixed;
+	top:0;
+	left:0;
+	padding:20px;
+}
+	#login_top .title_login{
+			float:right;
+		}
+	#login_top .return_login{
+			float:left;
+		}
+
+#login_warp .acp_login_box{
+
+		padding:10px;
+		margin-bottom:10px;
+		border:1px #ccc solid;
+
+	}
+	#login_warp .acp_login_box p{
+		padding-bottom:30px;
+	}
+	#login_warp .acp_login_box input{
+		float:left;
+		width:170px;
+		padding:5px;
+		font-size:16px;
+
+	}
+	#login_warp .acp_login_box label{
+		float:right;
+		font-size:13px;
+		color:#A9A9A9;
+		padding-top:9px;
+	}
+	
+	#login_warp .acp_login_box .submitt input{
+		width:320px;
+		margin-top:9px;
+		text-align:center;
+		cursor:pointer;
+	
+	}
+	
+/* end: admin_login.html */

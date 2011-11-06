@@ -1,4 +1,4 @@
-﻿
+
 <!-- general -->
 <IF NAME="current_smt == general">
 <h1>{usernamelang}</h1>
@@ -152,12 +152,12 @@
 <IF NAME="sql_debug">
 <div class="br"></div>
 <h1>SQL DEBUGS</h1>
-<div class="dir left" style="overflow:scroll;height:200px;border:1px #ccc dotted">
+<div class="dir left" style="direction:ltr;overflow:scroll;height:200px;border:1px #ccc dotted;width:100%">
 	<table>
 	<LOOP NAME="sql_debug">
 	<tr style="color:{{colored}}">
-	<td>{{type}}</td>
-	<td>{{time}}</td>
+	<td style="width:20%">{{type}}</td>
+	<td style="width:20%">{{time}}</td>
 	<td>{{content}}</td>
 	</tr>
 	</LOOP>

@@ -48,7 +48,7 @@ $per1	= round($per*100, 2);
 $per1	= $per1 >= 100 ? 100 : $per1;
 
 //ppl must know about kleeja version!
-$kleeja_version	 = '<a href="' . basename(ADMIN_PATH) . '?cp=p_check_update" title="' . $lang['R_CHECK_UPDATE'] . '">' . KLEEJA_VERSION . '</a>';
+$kleeja_version	 = '<a href="' . basename(ADMIN_PATH) . '?cp=p_check_update" onclick="javascript:get_kleeja_link(this.href, \'#content\'); return false;" title="' . $lang['R_CHECK_UPDATE'] . '">' . KLEEJA_VERSION . '</a>';
 
 //admin messages system
 $ADM_NOTIFICATIONS = array();

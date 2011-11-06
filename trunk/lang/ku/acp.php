@@ -1,7 +1,7 @@
 <?php
 //
 // kleeja language, admin
-// Arabic
+// Kurdish
 //
 
 if (!defined('IN_COMMON'))
@@ -14,30 +14,30 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 
 	# ?
-	'LOADING'					=> 'Loading',
-	'ERROR_AJAX'				=> 'There is an error, try again!.',
-	'MORE'						=> 'More',
-	'MENU'						=> 'Menu',
-	'WELCOME'					=> 'Welcome',
-	'ENABLE_CAPTCHA'			=> 'Enable Captcha in Kleeja',
-	'NO_THUMB_FOLDER'			=> 'It seems you enabled Thumbs but in same time the folder %s does not exist! create it.',
-	'DELETE_EARLIER_30DAYS'		=> 'Delete files older than 30 days',
-	'DELETE_ALL'				=> 'Delete all',
-	'DELETE_PROCESS_QUEUED'		=> 'The delete process has been added to the waiting list to execute it gradually to reduce the load.',
-	'DELETE_PROCESS_IN_WORK'	=> 'Currently, the delete process is executing ...',
-	'SHOW_FROM_24H'				=> 'Show past 24 hours',
-	'FIRST_TIME_CP'				=> 'First time in Kleeja CP ?!', 
-	'FIRST_TIME_CP_EX'			=> 'Since 2007, Kleeja development team working on study of how Kleeja users are using Kleeja control panel' . 
-									' and after many developement versions we figured out a new ideas that you will figure them out by using' . 
-									' Kleeja later, and the main ideas you will notice are the AJAX and the new powerful menus. ' . 
-									' <br /><br /> Below is the explanation of Kleeja CP  and how to use it /',  
-	'FIRST_TIME_HOW1'			=> 'Main Kleeja menu, from here you can reach images control or files control page etc ..',
-	'FIRST_TIME_HOW2'			=> 'CP home button, move you to main cp page.',
-	'FIRST_TIME_HOW3'			=> 'Website button, move you to the main upload center page.',
-	'FIRST_TIME_HOW4'			=> 'CP logout button, destroy your CP session and let you become regular user.',
-	'FIRST_TIME_HOW5'			=> 'Settings button, from here you can change Kleeja settings, all of them.',
-	'FIRST_TIME_HOW6'			=> 'GO menu, it\'s submenu from the main menu, shows links from other sections.',
-	'FIRST_TIME_HOW7'			=> 'Here where the contents appears, clean to understand.',
-	'FIRST_TIME_DONE'			=> 'I got it, thank you',
-	'THUMB_DIS_LONGTIME'		=> 'Thumbs are disabled, this will force Kleeja to resize every images to be small here, and cost you time and bandwidth!. Enable thumbs now.', 
+	'LOADING'					=> 'چاوەڕوانبە',
+	'ERROR_AJAX'				=> 'هەڵەیەک ڕوویدا هەوڵێکی تر بدە!.',
+	'MORE'						=> 'زیاتر',
+	'MENU'						=> 'مینو',
+	'WELCOME'					=> 'بەخێربێیت',
+	'ENABLE_CAPTCHA'			=> 'چالاککردنی Captcha لە کلیجا',
+	'NO_THUMB_FOLDER'			=> 'وادیارە کە تۆ بچوکراوەت چالاککردووە بەڵام لە هەمان کاتدا بوخچەی %s بوونی نییە!. تکایە دروستی بکە.',
+	'DELETE_EARLIER_30DAYS'		=> 'سڕینەوەی ئەو پەڕگانەی لە ٣٠ ڕۆژ کۆنترن',
+	'DELETE_ALL'				=> 'سڕینەوەی هەموو',
+	'DELETE_PROCESS_QUEUED'		=> 'کرداری سڕینەوە زیادکرا بۆ خشتەی چاوەڕوانکردن، بە پلەبەندی جێبەجێ دەکرێن بۆ ئەوەی کارنەکاتە سەر خاوبوونی ڕاژە.',
+	'DELETE_PROCESS_IN_WORK'	=> 'کرداری جێبەجێکردنی سڕینەوە ئەنجام دەدرێت لەم کاتەدا ...',
+	'SHOW_FROM_24H'				=> 'نیشاندانی دوا ٢٤ کاتژمێر',
+	'FIRST_TIME_CP'				=> 'یەکەم جارتە لە کۆنتۆڵ پانێڵ؟!',
+	'FIRST_TIME_CP_EX'			=> ' لە ساڵی ٢٠٠٧ ـەوە منذ 2007 تیمی کلیجا لە شێوازی بەکارهێنەران دەکۆڵێتەوە بۆ بەکارهێنانی کۆنترۆڵ پانێڵ' . 
+									' بۆمان دەرکەوت کە دەتوانین شێوازی نوێ بەکاربێنین کە وا لە بەکارهێنەر بکات بەکاتی کەمتر و هەمان توانای پێشووەوە کۆنتۆڵ پانێڵ بەکاربەرێت' .
+									'چەندین بیرۆکەمان دانا کە لەکاتی گەڕانتدا بە کۆنترۆڵ پانێڵ بەدی دەکەیت لەوانە لیستەکانو ئەجاکس.' . 
+									'<br /><br /> ئەمەی خوارەوە شێوازی بەکارهێنانی کۆنترۆڵ پانێڵە/',
+	'FIRST_TIME_HOW1'			=> 'خشتەی کۆنترۆڵ پانێڵی سەرەکی کلیجا، ئێرە بۆ بەڕێوەبردنی وێنەو پەڕگەکان و هەتا دوای..',
+	'FIRST_TIME_HOW2'			=> 'دوگمەی سەرەتا، دەتگوێزێتەوە بۆ لاپەڕەی سەرەتای کلیجا.',
+	'FIRST_TIME_HOW3'			=> 'دوگمەی سەرەتای ماڵپەڕ، دەتگوێزێتەوە بۆ لاپەڕەی سەرەتای ناوەند.',
+	'FIRST_TIME_HOW4'			=> 'دوگمەی چوونە دەرەوە لە کۆنترۆڵ پانێڵ، کە دەچیتە دەرەوە لە مافە بەڕێوەبەریەتیەکانت و دەبیتە ئەندامیکی ئاسای.',
+	'FIRST_TIME_HOW5'			=> 'دوگمەی چاککردنەکان، لێرە دەتوانیت کلیجا بەڕێوەبەریت و دەستکاری بکەیت بەو شێوەیەی دەتەوێت.',
+	'FIRST_TIME_HOW6'			=> 'ئەمە خشتەی هەموو بەشەکانە، بۆ نمونە لێرە خشتەی تایبەت بە وێنە دەبینیت.',
+	'FIRST_TIME_HOW7'			=> 'لێرە ناوەڕۆکی هەموو بەستەرێک دەبینیت بەشێوەیەکی دیار و سادە.',
+	'FIRST_TIME_DONE'			=> 'تێگەشتیت؟ سوپاس',
+	'THUMB_DIS_LONGTIME'		=> 'بچوکراوەکان ناچالاکە، ئەمە وادەکات کلیجا هەستێت بە بچوککردنەوەی وێنە گەورەکانت بۆت، و کاتێکی زۆری ئەوێت بۆ دەرخستنیان، ئێستا بچوککراوەکان چالاک بکە.', 
 ));

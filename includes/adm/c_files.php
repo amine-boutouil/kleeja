@@ -18,6 +18,12 @@ if (!defined('IN_ADMIN'))
 //for style ..
 $stylee		= "admin_files";
 
+//convert seaech to get, so we can handle it in our way, or lets say Bader way
+if(isset($_POST['search_file']))
+{
+	$_GET['search'] = kleeja_base64_encode(serialize($_POST));
+}
+
 $url_or		= isset($_REQUEST['order_by']) ? '&amp;order_by=' . $SQL->escape($_REQUEST['order_by']) . (isset($_REQUEST['order_way']) ? '&amp;order_by=1' : '') : '';
 $url_or2	= isset($_REQUEST['order_by']) ? '&amp;order_by=' . $SQL->escape($_REQUEST['order_by'])  : '';
 $url_lst	= isset($_REQUEST['last_visit']) ? '&amp;last_visit=' . $SQL->escape($_REQUEST['last_visit']) : '';
@@ -235,17 +241,9 @@ if((int) $config['user_system'] == 1)
 }
 
 //posts search ..
-if(isset($_GET['search']) || isset($_POST['search_file']))
+if(isset($_GET['search']))
 {
-	if(isset($_POST['search_file']))
-	{
-		$search = $_POST;
-		$_GET['search'] = kleeja_base64_encode(serialize($_POST));
-	}
-	else
-	{
-		$search = unserialize(kleeja_base64_decode($_GET['search']));
-	}
+	$search = unserialize(kleeja_base64_decode($_GET['search']));
 	
 	$deletelink = basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&deletefiles=' . $SQL->escape($_GET['search']);
 	

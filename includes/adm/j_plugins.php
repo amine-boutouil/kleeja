@@ -684,7 +684,7 @@ if(isset($_POST['submit_new_plg']))
 		{
 			//plugin added
 			case 'done':
-				$text = $lang['NEW_PLUGIN_ADDED'];
+				$text = $lang['NEW_PLUGIN_ADDED'] . '<meta HTTP-EQUIV="REFRESH" content="1; url=' . basename(ADMIN_PATH) . '?#!cp=' . basename(__file__, '.php') . '">' . "\n";
 			break;
 			case 'xyz': //exists before
 				kleeja_admin_err($lang['PLUGIN_EXISTS_BEFORE'],true,'',true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'));			

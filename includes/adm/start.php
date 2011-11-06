@@ -30,7 +30,7 @@ $users_number 		= $stat_users;
 $last_file_up_url	= PATH . $stat_last_file;
 $last_file_up		= (strlen($stat_last_file) > 25) ? substr($stat_last_file, 0, 25) . '...' : $stat_last_file;
 $last_del_fles 		= date('d-m-Y h:i a', $stat_last_f_del);
-$php_version 		= isset($NO_PHPINFO) || !function_exists('phpinfo') ? phpversion() : '<a href="' . basename(ADMIN_PATH) . '?cp=php_info" title="php_info" onclick="javascript:get_kleeja_link(\'' . basename(ADMIN_PATH) . '?cp=php_info\', \'#main_container\'); return false;">php ' . phpversion() . '</a>';
+$php_version 		= isset($NO_PHPINFO) || !function_exists('phpinfo') ? phpversion() : '<a href="' . basename(ADMIN_PATH) . '?cp=php_info" title="php_info" onclick="javascript:get_kleeja_link(\'' . basename(ADMIN_PATH) . '?cp=php_info\', \'#content\'); return false;">php ' . phpversion() . '</a>';
 $mysql_version 		= 'MYSQL ' . $SQL->mysql_version();
 $max_execution_time = function_exists('ini_get') ?  @ini_get('max_execution_time') : @get_cfg_var('max_execution_time');
 $upload_max_filesize= function_exists('ini_get') ?  @ini_get('upload_max_filesize') : @get_cfg_var('upload_max_filesize');
@@ -155,7 +155,7 @@ if(file_exists($cached_file))
 	$ADM_NOTIFICATIONS[]  = array(
 								'id' => 'cached_tpl',
 								'msg_type'=> 'info', 'title'=> $lang['CACHED_STYLES'],
-								'msg'=> sprintf($lang['CACHED_STYLES_DISC'] , '<a href="' . basename(ADMIN_PATH) . '?cp=m_styles&amp;sty_t=cached">' . $lang['CLICKHERE'] .'</a>')
+								'msg'=> sprintf($lang['CACHED_STYLES_DISC'] , '<a href="' . basename(ADMIN_PATH) . '?cp=m_styles&amp;sty_t=cached" onclick="javascript:get_kleeja_link(this.href, \'#content\'); return false;">' . $lang['CLICKHERE'] .'</a>')
 							);
 }
 

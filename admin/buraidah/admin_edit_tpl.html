@@ -10,7 +10,7 @@ $(document).ready(function() { $('#template_content').markItUp(mySettings); });
 </script>
 <!-- / markItUp! -->
 
-<h1><a href="./?cp=m_styles" onclick="javascript:get_kleeja_link('./?cp=m_styles'); return false;">{lang.R_STYLES}</a> &raquo; {lang.EDIT}</h1>
+<h1><a href="./?cp=m_styles" onclick="javascript:get_kleeja_link(this.href, '#content'); return false;">{lang.R_STYLES}</a> &raquo; {lang.EDIT}</h1>
 
 <h2>{tpl_path}</h2>
 <form method="post" action="{action}" id="edit_form">

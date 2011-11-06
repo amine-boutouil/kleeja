@@ -107,10 +107,10 @@ case 'action_file':
 				$db_ver = $order_update_files[$file];
 
 				//condition for RC6 and DEV, this will be removed later...
-				if(defined('DEV_STAGE') && $config['db_version'] == 7)
-				{
-					$config['db_version'] = 6;
-				}
+				#if(defined('DEV_STAGE') && $config['db_version'] == 7)
+				#{
+				#	$config['db_version'] = 7;
+				#}
 
 				if((empty($config['db_version']) or $db_ver > $config['db_version']))
 				{

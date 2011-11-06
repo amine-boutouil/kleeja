@@ -1323,6 +1323,7 @@ function klj_clean_old_files($from = 0)
  
 function klj_clean_old($table, $for = 'all')
 {
+	global $SQL, $config, $dbprefix;
 	
 	$days = intval(time() - 3600 * 24 * intval($for));
 

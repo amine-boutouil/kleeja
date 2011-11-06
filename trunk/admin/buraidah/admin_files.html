@@ -1,4 +1,4 @@
-﻿<script type="text/javascript">
+<script type="text/javascript">
 <!--
 jQuery(document).ready(function($){
  //Navigate to pages by arrows
@@ -38,7 +38,7 @@ jQuery(document).ready(function($){
 <h1>{lang.R_FILES}  [{current_page}/{total_pages}]</h1>
 
 <IF NAME="is_search">
-<h2>{lang.FIND_IP_FILES} ( {nums_rows} ) {lang.FILE}  | <a href="{deletelink}" onclick="javascript:return confirm_from();">{lang.DELETEALLRES}</a></h2>
+<h2>{lang.FIND_IP_FILES} ( {nums_rows} ) {lang.FILE}  | <a href="{deletelink}"  onclick="javascript:get_kleeja_link(this.href, '#content', {confirm:true}); return false;">{lang.DELETEALLRES}</a></h2>
 <ELSE></IF>
 
 <div class="br"></div>
@@ -54,18 +54,18 @@ jQuery(document).ready(function($){
 <table>
 	<tr class="first">
 		<td style="white-space:nowrap;">
-			<a title="{lang.ALPHABETICAL_ORDER_FILES}" href="{ord_action}&amp;order_by=real_filename">{lang.FILENAME}</a>
-			<a href="{page2_action}&amp;order_way=1"><img src="{STYLE_PATH_ADMIN}images/arrow_up.gif" alt="&uarr;" /></a>
-			<a href="{page2_action}"><img src="{STYLE_PATH_ADMIN}images/arrow_down.gif" alt="&darr;" /></a>
+			<a title="{lang.ALPHABETICAL_ORDER_FILES}" href="{ord_action}&amp;order_by=real_filename"  onclick="javascript:get_kleeja_link(this.href, '#content'); return false;">{lang.FILENAME}</a>
+			<a href="{page2_action}&amp;order_way=1"><img src="{STYLE_PATH_ADMIN}images/arrow_up.gif" alt="&uarr;"  onclick="javascript:get_kleeja_link(this.href, '#content'); return false;" /></a>
+			<a href="{page2_action}"><img src="{STYLE_PATH_ADMIN}images/arrow_down.gif" alt="&darr;" onclick="javascript:get_kleeja_link(this.href, '#content'); return false;" /></a>
 		</td>
-		<td><a href="{ord_action}&amp;order_by=user">{lang.BY}</a></td>
-		<td><a href="{ord_action}&amp;order_by=user_ip">{lang.IP}</a></td>
-		<td><a title="{lang.ORDER_SIZE}" href="{ord_action}&amp;order_by=size">{lang.SIZE}</a></td>
-		<td><a title="{lang.ORDER_TOTAL_DOWNLOADS}" href="{ord_action}&amp;order_by=uploads">{lang.FILEUPS}</a></td>
-		<td><a href="{ord_action}&amp;order_by=time">{lang.FILEDATE}</a></td>
-		<td><a href="{ord_action}&amp;order_by=type">{lang.FILETYPE}</a></td>
-		<td><a href="{ord_action}&amp;order_by=folder">{lang.FILDER}</a></td>
-		<td><a href="{ord_action}&amp;order_by=report">{lang.NUMPER_REPORT}</a></td>
+		<td><a href="{ord_action}&amp;order_by=user" onclick="javascript:get_kleeja_link(this.href, '#content'); return false;">{lang.BY}</a></td>
+		<td><a href="{ord_action}&amp;order_by=user_ip" onclick="javascript:get_kleeja_link(this.href, '#content'); return false;">{lang.IP}</a></td>
+		<td><a title="{lang.ORDER_SIZE}" href="{ord_action}&amp;order_by=size" onclick="javascript:get_kleeja_link(this.href, '#content'); return false;">{lang.SIZE}</a></td>
+		<td><a title="{lang.ORDER_TOTAL_DOWNLOADS}" href="{ord_action}&amp;order_by=uploads" onclick="javascript:get_kleeja_link(this.href, '#content'); return false;">{lang.FILEUPS}</a></td>
+		<td><a href="{ord_action}&amp;order_by=time" onclick="javascript:get_kleeja_link(this.href, '#content'); return false;">{lang.FILEDATE}</a></td>
+		<td><a href="{ord_action}&amp;order_by=type" onclick="javascript:get_kleeja_link(this.href, '#content'); return false;">{lang.FILETYPE}</a></td>
+		<td><a href="{ord_action}&amp;order_by=folder" onclick="javascript:get_kleeja_link(this.href, '#content'); return false;">{lang.FILDER}</a></td>
+		<td><a href="{ord_action}&amp;order_by=report" onclick="javascript:get_kleeja_link(this.href, '#content'); return false;">{lang.NUMPER_REPORT}</a></td>
 		<td><a href="javascript:void(0);" onclick="checkAll(document.filesform, '_del', 'su');">{lang.DELETE}</a></td>
 		<!-- admin files data td1 extra -->
 	</tr>
@@ -74,7 +74,7 @@ jQuery(document).ready(function($){
 	<tr id="su[{{id}}]" class="osilver">
 		<td>{{name}}</td>
 		<td>{{user}}</td>
-		<td>{{ip}} <br /><a title="{lang.SHOWFILESBYIP}" href="{{showfilesbyip}}"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/find_file_ip.png" alt="find files" /></a></td>
+		<td>{{ip}} <br /><a title="{lang.SHOWFILESBYIP}" href="{{showfilesbyip}}" onclick="javascript:get_kleeja_link(this.href, '#content'); return false;"><img class="imgtitle" src="{STYLE_PATH_ADMIN}images/find_file_ip.png" alt="find files" /></a></td>
 		<td>{{size}}</td>
 		<td>{{ups}}</td>
 		<td>{{time}}</td>

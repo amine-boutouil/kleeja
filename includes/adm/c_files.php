@@ -124,7 +124,7 @@ if (isset($_POST['submit']))
 		}
 		
 		$text	= ($affected ? $lang['FILES_UPDATED'] : $lang['NO_UP_CHANGE_S']) .
-				'<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . $action . '\');", 2000);</script>' . "\n";
+				'<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . str_replace('&amp;', '&', $action) .  '\');", 2000);</script>' . "\n";
 		$stylee	= "admin_info";
 	}
 }

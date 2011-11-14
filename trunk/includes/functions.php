@@ -887,6 +887,7 @@ function get_mime_for_header($ext)
 		"pmd" => "application/x-pmd",
 		"jar" => "application/java-archive",
 		"jad" => "text/vnd.sun.j2me.app-descriptor",
+		'apk' => 'application/vnd.android.package-archive',
 		//add more mime here
 	);
 	

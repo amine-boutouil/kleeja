@@ -163,6 +163,13 @@ while($row=$SQL->fetch_array($result))
 		{
 			$new['prefixname'] = preg_replace('/[^a-z0-9_\-\}\{\:\.]/', '', strtolower($_POST['prefixname']));
 		}
+		else if($row['name'] == 'siteurl')
+		{
+			if($_POST['siteurl'][strlen($_POST['siteurl'])-1] != '/')
+			{
+				$new['siteurl'] .= '/';
+			}
+		}
 
 		($hook = kleeja_run_hook('after_submit_adm_config')) ? eval($hook) : null; //run hook
 

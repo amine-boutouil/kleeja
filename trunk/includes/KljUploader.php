@@ -654,7 +654,7 @@ function process ()
 				$folder	= (string)	$SQL->escape($folderee);
 				$timeww	= (int)		time();
 				$user	= (int)		$this->id_user;
-				$code_del=(string)	md5(time());
+				$code_del=(string)	md5($name);
 				$ip		= get_ip();
 				$realf	= (string)	$SQL->escape($real_filename);
 				$id_form= (string)	$SQL->escape($config['id_form']);

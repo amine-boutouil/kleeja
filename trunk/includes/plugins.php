@@ -114,7 +114,7 @@ class kplugins
 			big_error('Error',$lang['ERR_XML_NO_G_TAGS'] . (defined('DEV_STAGE') ? __file__ . ':'. __line__ : ''));
 		}
 
-		if(!empty($plg_info['plugin_kleeja_version']['value']) && version_compare(strtolower($plg_info['plugin_kleeja_version']['value']), strtolower(KLEEJA_VERSION), '>=') == false)
+		if(!empty($plg_info['plugin_kleeja_version']['value']) && version_compare(strtolower(KLEEJA_VERSION), strtolower($plg_info['plugin_kleeja_version']['value']), '>=') == false)
 		{
 			big_error('Error', $lang['PLUGIN_N_CMPT_KLJ']);
 		}

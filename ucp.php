@@ -259,7 +259,7 @@ switch ($_GET['go'])
 					if ($SQL->build($insert_query))
 					{
 						$last_user_id = $SQL->insert_id();
-						$text = $lang['REGISTER_SUCCESFUL'] . '<a href="' .  $config['siteurl']  . ($config['mod_writer'] ?  'login.html' : 'ucp.php?go=login') . '">' . $lang['LOGIN'] . '</a>';
+						$text = $lang['REGISTER_SUCCESFUL'] . '  <a href="' .  $config['siteurl']  . ($config['mod_writer'] ?  'login.html' : 'ucp.php?go=login') . '">' . $lang['LOGIN'] . '</a>';
 
 						//update number of stats
 						$update_query	= array(

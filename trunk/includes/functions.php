@@ -1329,8 +1329,8 @@ function klj_clean_old($table, $for = 'all')
 	$days = intval(time() - 3600 * 24 * intval($for));
 
 	$query = array(
-					'SELECT'	=> 'f.id, f.last_down, f.name, f.type, f.folder, f.time, f.size, f.id_form',
-					'FROM'		=> "{$dbprefix}" . $table . " t",
+					'SELECT'	=> 'f.id, f.time',
+					'FROM'		=> "{$dbprefix}" . $table . " f",
 					'ORDER BY'	=> 'f.id ASC',
 					'LIMIT'		=> '20',
 					);

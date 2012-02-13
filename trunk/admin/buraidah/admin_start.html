@@ -1,7 +1,7 @@
 
 <!-- general -->
 <IF NAME="current_smt == general">
-<h1>{usernamelang}</h1>
+
 
 <LOOP NAME="ADM_NOTIFICATIONS">
 <div class="note-{{msg_type}}">
@@ -10,6 +10,10 @@
 </div>
 </LOOP>
 
+
+<!-- the big box begin -->
+<div class="big-box">
+<h1>{usernamelang}</h1>
 
 <IF NAME="last_visit">
 <div class="section">
@@ -55,9 +59,17 @@
 	<h3>{lang.LSTFLE_ST}</h3>
 	<div class="box"><IF NAME="stat_last_file!='0'"><a href="{last_file_up_url}"  onclick="window.open(this.href,'_blank');return false;">{last_file_up}</a><ELSE>{lang.UNKNOWN}</IF></div>
 </div>
+
 <div class="clear"></div>
 
-<div class="br"></div>
+</div>
+<!-- the big box end -->
+
+
+
+
+<!-- the big box begin -->
+<div class="big-box">
 
 <h1>{lang.GENERAL_STAT}</h1>
 
@@ -96,7 +108,12 @@
 </div>
 <div class="clear"></div>
 
+</div>
+<!-- the big box end -->
+
 <ELSEIF NAME="current_smt == other">
+<!-- the big box begin -->
+<div class="big-box">
 <h1>{lang.OTHER_INFO}</h1>
 
 <div class="section">
@@ -127,8 +144,11 @@
 	</div>
 </div>
 <div class="clear"></div>
+</div>
+<!-- the big box end -->
 
-<div class="br"></div>
+<!-- the big box begin -->
+<div class="big-box">
 <h1>{lang.SEARCH_STAT}</h1>
 
 <div class="section">
@@ -148,9 +168,13 @@
 	</div>
 </div>
 <div class="clear"></div>
+</div>
+<!-- the big box end -->
+
 
 <IF NAME="sql_debug">
-<div class="br"></div>
+<!-- the big box begin -->
+<div class="big-box">
 <h1>SQL DEBUGS</h1>
 <div class="dir left" style="direction:ltr;overflow:scroll;height:200px;border:1px #ccc dotted;width:100%">
 	<table>
@@ -163,22 +187,41 @@
 	</LOOP>
 	</table>
 </div>
+</div>
+<!-- the big box end -->
 </IF>
 
 
 
 <ELSEIF NAME="current_smt == team">
+<!-- the big box begin -->
+<div class="big-box">
 <h1>{lang.KLEEJA_TEAM}</h1>
 
 <div class="section">
 	<h3>Saanina</h3>
-	<div class="box">
+	<div class="box" style="direction:ltr">
 		Abdullrahman M. Al-Shawaiee<br />
-		2007-2011<br />
+		2007-2012<br />
 	</div>
 </div>
 <div class="clear"></div>
-
+<div class="section">
+	<h3>phpfalcon</h3>
+	<div class="box">
+		Bader N. Al-Mutairi <br />
+		2009-2012<br />
+	</div>
+</div>
+<div class="clear"></div>
+<div class="section">
+	<h3>Moayead</h3>
+	<div class="box">
+		Moayead Yahea Hejazi <br />
+		2011-2012<br />
+	</div>
+</div>
+<div class="clear"></div>
 <div class="section">
 	<h3>­Gareeboo</h3>
 	<div class="box">
@@ -187,16 +230,6 @@
 	</div>
 </div>
 <div class="clear"></div>
-
-<div class="section">
-	<h3>phpfalcon</h3>
-	<div class="box">
-		Bader N. Al-Mutairi <br />
-		2009-2011<br />
-	</div>
-</div>
-<div class="clear"></div>
-
 <div class="section">
 	<h3>Tar3q</h3>
 	<div class="box">
@@ -205,13 +238,20 @@
 	</div>
 </div>
 <div class="clear"></div>
+</div>
+<!-- the big box end -->
 
 <IF NAME="translator_copyrights">
-<div class="br"></div>
+<!-- the big box begin -->
+<div class="big-box">
 <h1>{translator_copyrights}</h1>
+</div>
+<!-- the big box end -->
 </IF>
 
 <ELSEIF NAME="current_smt == firstime">
+<!-- the big box begin -->
+<div class="big-box">
 <h1>{lang.FIRST_TIME_CP}</h1>
 
 <span class="firstime-text">{lang.FIRST_TIME_CP_EX}</span>
@@ -235,7 +275,8 @@
 <div class="br"></div>
 
 <button class="firstime-button" onclick="get_kleeja_link('./');$('#menu').css('display', '');">{lang.FIRST_TIME_DONE}</button>
-<div class="br"></div>
+</div>
+<!-- the big box end -->
 
 
 <script type="text/javascript">

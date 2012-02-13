@@ -2,6 +2,8 @@
 
 
 <IF NAME="current_smt == general">
+<!-- the big box begin -->
+<div class="big-box">
 <h1>{lang.R_EXTS}</h1>
 <form method="post" action="{action}" name="extsform" id="extsform">
 
@@ -52,9 +54,12 @@
 	
 {H_FORM_KEYS}
 </form>
-
+</div>
+<!-- the big box end -->
 <ELSEIF NAME="current_smt == calc">
 <!-- convertor -->
+<!-- the big box begin -->
+<div class="big-box">
 <h1>{lang.R_EXTS} &raquo; {lang.BCONVERTER}</h1>
 
 <script type="text/javascript">
@@ -114,12 +119,16 @@
 	</tr>
 </table>
 </form>
+</div>
+<!-- the big box end -->
 <!-- end c table -->
 
 	
 <ELSEIF NAME="current_smt == new_e">
 
 <!-- add new EXT. -->
+<!-- the big box begin -->
+<div class="big-box">
 <h1>{lang.R_EXTS} &raquo; {lang.ADD_NEW_EXT}</h1>
 
 <form method="post" action="{action}" id="add_new_ext">
@@ -143,4 +152,6 @@
 
 {H_FORM_KEYS2}
 </form>
+</div>
+<!-- the big box end -->
 </IF>

@@ -1,10 +1,4 @@
 <IF NAME="current_smt == general">
-<h1>{lang.R_PLUGINS}</h1>
-
-<h2>{lang.PLUGINS_EX}</h2>
-
-<div class="br"></div>
-
 <IF NAME="there_is_cached">
 <div class="note-info">
 	<strong>{lang.CACHED_STYLES}!</strong>
@@ -13,8 +7,15 @@
 <div class="br"></div>
 </IF>
 
+<!-- the big box begin -->
+<div class="big-box">
+<h1>{lang.R_PLUGINS}</h1>
+
+<h2>{lang.PLUGINS_EX}</h2>
+
+
 <IF NAME="no_plugins">
-<div class="note-info">{lang.NO_PLUGINS}</div>
+{lang.NO_PLUGINS}
 <ELSE>
 <LOOP NAME="arr">
 <table>
@@ -49,10 +50,17 @@
 </LOOP>
 </IF>
 
-<div class="br"></div>
+</div>
+<!-- the big box end -->
 
+
+
+
+<!-- note for user  -->
 <!-- cached changed -->
 <IF NAME="is_there_changes_files">
+<!-- the big box begin -->
+<div class="big-box">
 <h1>{lang.PLUGINS_CHANGES_FILES} </h1>
 <h2>{lang.PLUGINS_CHANGES_FILES_EXP}</h2>
 
@@ -69,20 +77,20 @@
 	</tr>
 </table>
 
-<div class="br"></div>
+</div>
+<!-- the big box end -->
 </IF>
 
-
-<!-- note for user  -->
-<div class="br"></div>
 <div class="note-info"><strong>{lang.NOTE} !</strong> {klj_d_s}</div>
 
 
 <!-- add new plugin -->
 <ELSEIF NAME="current_smt == newplg">
-
-<h1>{lang.ADD_NEW_PLUGIN}</h1>
 <div class="note-info"><strong>{lang.NOTE} !</strong> {lang.PLUGIN_CONFIRM_ADD}</div>
+<!-- the big box begin -->
+<div class="big-box">
+<h1>{lang.ADD_NEW_PLUGIN}</h1>
+
 
 <form method="post" action="{action}" enctype="multipart/form-data">
 
@@ -108,5 +116,6 @@
 	
 {H_FORM_KEYS}
 </form>
-
+</div>
+<!-- the big box end -->
 </IF>

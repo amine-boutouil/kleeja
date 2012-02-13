@@ -1,4 +1,6 @@
 
+<!-- the big box begin -->
+<div class="big-box">
 <h1><a href="./?cp=m_styles" onclick="javascript:get_kleeja_link(this.href, '#content'); return false;">{lang.R_STYLES}</a> &raquo; {lang.KLJ_STYLE_INFO}</h1>
 
 <!-- start data table -->
@@ -26,17 +28,19 @@
 	</tr>
 </table>
 <!-- start data table -->
-
-<div class="br"></div>
+</div>
+<!-- the big box end -->
 
 <!-- show templates -->
+<!-- the big box begin -->
+<div class="big-box">
 <h1>{lang.SHOW_TPLS} &raquo; {style_id}</h1>
 
 <form method="post" action="{action}" id="showtpl_form">
 
 <!-- start showtpl table -->
 <table>
-	<tr style="background:#F5F5F5">
+	<tr >
 	<td style="text-align:(lang.DIR==ltr?left:right);">
 		<IF NAME="not_style_writeable"><div class="not-info">{lang.STYLE_DIR_NOT_WR} !</div></IF>
 		<select name="tpl_choose" size="11" class="s_tpl_x">
@@ -81,11 +85,12 @@
 
 {H_FORM_KEYS}
 </form>
-
-
-<div class="br"></div>
+</div>
+<!-- the big box end -->
 
 <!-- add new template -->
+<!-- the big box begin -->
+<div class="big-box">
 <h1>{lang.ADD_NEW_TPL}</h1>
 
 <form method="post" action="{action}" id="addtpl_form">
@@ -109,11 +114,14 @@
 
 {H_FORM_KEYS2}
 </form>
+</div>
+<!-- the big box end -->
 
-<div class="br"></div>
 
 <!-- start backup templates -->
 <IF NAME="show_bk_templates">
+<!-- the big box begin -->
+<div class="big-box">
 <h1>{lang.RETURN_TEMPLATE_BK}</h1>
 <h2>{lang.RETURN_TEMPLATE_BK_EXP}</h2>
 
@@ -143,4 +151,6 @@
 
 {H_FORM_KEYS3}
 </form>
+</div>
+<!-- the big box end -->
 </IF>

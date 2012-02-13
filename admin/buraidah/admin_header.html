@@ -48,7 +48,7 @@ jQuery(document).ready(function($){
 	console.debug('where_are_we='+where_are_we);
 	//for go menu
 	div_id = $('div[goto='+ where_are_we +']').attr('id');
-	gomenu_id = $("div[goto='"+ where_are_we +"']").attr('gomenu_id').trim();
+	gomenu_id = $("div[goto='"+ where_are_we +"']").attr('gomenu_id').replace(/^\s+|\s+$/g,"");
 	console.debug('div_id='+div_id);
 	console.debug('gomenu_id='+gomenu_id);
 
@@ -335,13 +335,15 @@ function uncheckAll_exts(form, id, _do_c_) {
 
 <!-- top right small icons -->
 <div id="top_small_icons">
+	<a href="http://www.moffed.com" title="الدعم الفني - Arabic Support" target="_blank">
+		<img src="{STYLE_PATH_ADMIN}images/moffed.png" alt="الدعم الفني - Arabic Support" />
+	</a>
 	<a href="{config.siteurl}" title="{lang.RETURN_HOME}">
 		<img src="{STYLE_PATH_ADMIN}images/website.png" alt="{lang.RETURN_HOME}" />
 	</a>
 	<a href="./?cp=b_lgoutcp&amp;{GET_FORM_KEY_GLOBAL}" onclick="javascript:return confirm_from();" title="{lang.R_LGOUTCP}" >
 		<img src="{STYLE_PATH_ADMIN}images/logout.png" alt="{lang.RETURN_HOME}" alt="{lang.R_LGOUTCP}"/>
 	</a>
-
 	<div class="clear"></div>
 </div>
 

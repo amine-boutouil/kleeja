@@ -1,7 +1,9 @@
-﻿
+
 
 
 <IF NAME="current_smt != new_u">
+<!-- the big box begin -->
+<div class="big-box">
 <h1>{lang.R_USERS} 
 <IF NAME="is_search"> &raquo; {lang.SEARCH_USERS} ( {nums_rows} )</IF>
 <IF NAME="current_smt == show_au"> &raquo; {lang.ADMINISTRATORS}</IF>
@@ -70,10 +72,13 @@
 {H_FORM_KEYS}
 </form>
 
-<div class="br"></div>
+</div>
+<!-- the big box end -->
 
 <!-- add new user -->
 <ELSE>
+<!-- the big box begin -->
+<div class="big-box">
 <h1>{lang.R_USERS} &raquo; {lang.NEW_USER}</h1>
 <form method="post" action="{action_add}" id="add_user_form">
 
@@ -103,4 +108,6 @@
 
 {H_FORM_KEYS2}
 </form>
+</div>
+<!-- the big box end -->
 </IF>

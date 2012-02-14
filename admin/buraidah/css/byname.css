@@ -8,6 +8,25 @@
  */
 	
 /* start: menu */
+#menu_scrollerU, #menu_scrollerD{
+	position:fixed;
+	right:0;
+	width:183px;
+	height:26px;
+	z-index: 10;
+	background-color:#fff;
+	display:none;
+	border:1px solid #ccc;
+	text-align:center;
+	cursor:pointer !important; cursor:hand;
+}
+#menu_scrollerU{
+	top:0;
+}
+#menu_scrollerD{
+	bottom:0;
+}
+
 #top_small_icons{
 		position:fixed;
 		top:0;
@@ -32,7 +51,7 @@
 	top:0;
 	width:183px;
 	bottom:0;
-	overflow:auto;
+	overflow:hidden;
 	background:#EBF9FF url(../images/bg.png) repeat;
 	border-left:1px solid #666;
 	}

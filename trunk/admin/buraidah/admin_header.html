@@ -29,6 +29,12 @@ var go_to = '{go_to}';
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}js/tipsy/tipsy.js"></script>
 <script type="text/javascript">
 <!--//
+//http://stackoverflow.com/questions/4814398/jquery-check-if-scrollbar-visible-div-with-overflowauto
+(function($) {
+    $.fn.hasScrollBar = function() {
+        return this.get(0).scrollHeight > this.height();
+    }
+})(jQuery);
 jQuery(document).ready(function($){
 
 	$('a[title]').tipsy({gravity: $.fn.tipsy.autoNS});
@@ -58,7 +64,75 @@ jQuery(document).ready(function($){
 		//alert(hash)
 		get_kleeja_link('./?' + hash, '#content', {'current_id':div_id, 'current_class':'link_current_thumbnail', 'gomenu_id':gomenu_id});
 	//}
+	
+	if($('#menu').hasScrollBar())
+	{
+		$("#menu_scrollerD").show();
+	}
 });
+
+$(window).resize(function() {
+	if($('#menu').hasScrollBar())
+	{
+		$("#menu_scrollerD").show();
+	}
+	else
+	{
+		$("#menu_scrollerD").css('display', 'none');
+	}
+
+});
+
+function scrollMenuD()
+{
+
+   curScrollDown=$('#menu').scrollTop();
+ 	if ( typeof lastCurScrollDown == 'undefined' )
+	{
+		lastCurScrollDown = curScrollDown;
+	}
+   $('#menu').scrollTop(curScrollDown+25);
+   if($('#menu').scrollTop() == curScrollDown)
+   {
+		$("#menu_scrollerD").css('display', 'none');
+   }
+
+   if(curScrollDown+lastCurScrollDown > lastCurScrollDown)
+   {
+		$('#menu_scrollerU').show();
+   }
+   else
+   {
+		$("#menu_scrollerU").css('display', 'none');
+   }
+   
+   lastCurScrollDown = curScrollDown;
+}
+function scrollMenuU()
+{
+   $smallerDiv=$("#menu");
+   curScrollDown=$smallerDiv.scrollTop();
+ 	if ( typeof lastCurScrollDown == 'undefined' )
+	{
+		lastCurScrollDown = curScrollDown;
+	}
+   $smallerDiv.scrollTop(curScrollDown-25);
+   if($('#menu').scrollTop() == curScrollDown)
+   {
+		$("#menu_scrollerU").css('display', 'none');
+   }
+
+   if(curScrollDown-lastCurScrollDown < lastCurScrollDown)
+   {
+		$('#menu_scrollerD').show();
+   }
+   else
+   {
+		$("#menu_scrollerD").css('display', 'none');
+   }
+   
+   lastCurScrollDown = curScrollDown;
+}
 
 function get_kleeja_link(URL, ID, p)
 {
@@ -332,6 +406,14 @@ function uncheckAll_exts(form, id, _do_c_) {
 <!-- ajax loading sign -->
 <div id="sign_ajax"><img src="{STYLE_PATH_ADMIN}images/ajax-loader-small.gif" /> {lang.LOADING} ...</div>
 <div id="sign_ajax_error" onclick="javascript:get_kleeja_link('./');"><img src="{STYLE_PATH_ADMIN}images/error.png" /> {lang.ERROR_AJAX}</div>
+
+<!-- scroller for menu -->
+<div id="menu_scrollerU" onclick="javascript:scrollMenuU();">
+	<img src="{STYLE_PATH_ADMIN}images/arrow_up_menu.png" /> 
+</div>
+<div id="menu_scrollerD" onclick="javascript:scrollMenuD();">
+	<img src="{STYLE_PATH_ADMIN}images/arrow_down_menu.png" /> 
+</div>
 
 <!-- top right small icons -->
 <div id="top_small_icons">

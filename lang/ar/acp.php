@@ -325,5 +325,6 @@ $lang = array_merge($lang, array(
 	'USERS'						=> 'الاعضاء',
 	'EDIT_DATA'					=> ' تعديل البيانات',
 	'EDIT_ACL'					=> 'تعديل الصلاحيات',
+	'GROUP_IS_DEFAULT'			=> 'هذه المجموعة افتراضية عند التسجيل',
 
 ));

@@ -207,16 +207,54 @@ else if (isset($_POST['newuser']))
 //
 //begin of default users page 
 //
+$query = array();
+$show_results = false;
+switch($current_smt):
 
-$query	= array(
-				'SELECT'	=> 'COUNT(id) AS total_users',
-				'FROM'		=> "{$dbprefix}users",
-				'ORDER BY'	=> 'id ASC'
-		);
+case 'general':
 
-//posts search ..
-if(isset($_GET['search']) || isset($_POST['search_user']))
-{
+	$query = array(
+					'SELECT'	=> 'COUNT(group_id) AS total_groups',
+					'FROM'		=> "{$dbprefix}groups",
+					'ORDER BY'	=> 'group_id ASC'
+			);
+
+	$result = $SQL->build($query);
+
+	$nums_rows = 0;
+	$n_fetch = $SQL->fetch_array($result);
+	$nums_rows = $n_fetch['total_groups'];
+	$no_results = false;
+	$e_groups	= $c_groups = array();
+
+	if ($nums_rows > 0)
+	{
+		$query['SELECT'] =	'group_id, group_name, group_is_default, group_is_essential';
+
+		$result = $SQL->build($query);
+
+		while($row=$SQL->fetch_array($result))
+		{
+			$r = array(
+						'id'	=> $row['group_id'],
+						'name'	=> preg_replace('!{lang.([A-Z0-9]+)}!e', '$lang[\'\\1\']', $row['group_name']),
+				);
+			if((int) $row['group_is_essential'] == 1)
+			{
+				$e_groups[] = $r;
+			}
+			else
+			{
+				$c_groups[] = $r;
+			}
+		}
+	}
+	
+	$SQL->freeresult($result);
+
+break;
+
+case 'show_su':
 	if(isset($_POST['search_user']))
 	{
 		$search = $_POST;
@@ -232,48 +270,53 @@ if(isset($_GET['search']) || isset($_POST['search_user']))
 	$is_search	= true;
 	$isn_search	= false;
 	$query['WHERE']	=	"name != '' $usernamee $usermailee";
-}
-else if($current_smt == 'show_au')
-{
+	
+case 'show_au':
 	$is_search	= true;
 	$isn_search	= false;
 	$is_asearch = true;
 	$query['WHERE']	= "name != '' AND admin = 1 ";
-}
 
-$result = $SQL->build($query);
 
-$nums_rows = 0;
-$n_fetch = $SQL->fetch_array($result);
-$nums_rows = $n_fetch['total_users'];
+case 'users':
 
-//pager 
-$currentPage	= isset($_GET['page']) ? intval($_GET['page']) : 1;
-$Pager			= new SimplePager($perpage, $nums_rows, $currentPage);
-$start			= $Pager->getStartRow();
-
-$no_results = false;
-
-if ($nums_rows > 0)
-{
-	$query['SELECT'] =	'*';
-	$query['LIMIT']	=	"$start, $perpage";
+	$query['SELECT']	= 'COUNT(id) AS total_users';
+	$query['FROM']		= "{$dbprefix}users";
+	$query['ORDER BY']	= 'id ASC';
 
 	$result = $SQL->build($query);
 
-	while($row=$SQL->fetch_array($result))
+	$nums_rows = 0;
+	$n_fetch = $SQL->fetch_array($result);
+	$nums_rows = $n_fetch['total_users'];
+
+	//pagination
+	$currentPage	= isset($_GET['page']) ? intval($_GET['page']) : 1;
+	$Pager			= new SimplePager($perpage, $nums_rows, $currentPage);
+	$start			= $Pager->getStartRow();
+
+	$no_results = false;
+
+	if ($nums_rows > 0)
 	{
-		//make new lovely arrays !!
-		$ids[$row['id']]	= $row['id'];
-		$name[$row['id']] 	= isset($_POST['nm_' . $row['id']]) ? $_POST['nm_' . $row['id']] : $row['name'];
-		$mail[$row['id']]	= isset($_POST['ml_' . $row['id']]) ? $_POST['ml_' . $row['id']] : $row['mail'];
-		$pass[$row['id']]	= isset($_POST['ps_' . $row['id']]) ? $_POST['ps_' . $row['id']] : '';
-		$admin[$row['id']]	= $row['admin'];
-		$del[$row['id']] 	= isset($_POST['del_' . $row['id']]) ? $_POST['del_' . $row['id']] : '';
+		$query['SELECT'] =	'*';
+		$query['LIMIT']	=	"$start, $perpage";
 
-		$userfile =  $config['siteurl'] . ($config['mod_writer'] ? 'fileuser-' . $row['id'] . '.html' : 'ucp.php?go=fileuser&amp;id=' . $row['id']);
+		$result = $SQL->build($query);
 
-		$arr[]	= array(
+		while($row=$SQL->fetch_array($result))
+		{
+			//make new lovely arrays !!
+			$ids[$row['id']]	= $row['id'];
+			$name[$row['id']] 	= isset($_POST['nm_' . $row['id']]) ? $_POST['nm_' . $row['id']] : $row['name'];
+			$mail[$row['id']]	= isset($_POST['ml_' . $row['id']]) ? $_POST['ml_' . $row['id']] : $row['mail'];
+			$pass[$row['id']]	= isset($_POST['ps_' . $row['id']]) ? $_POST['ps_' . $row['id']] : '';
+			$admin[$row['id']]	= $row['admin'];
+			$del[$row['id']] 	= isset($_POST['del_' . $row['id']]) ? $_POST['del_' . $row['id']] : '';
+
+			$userfile =  $config['siteurl'] . ($config['mod_writer'] ? 'fileuser-' . $row['id'] . '.html' : 'ucp.php?go=fileuser&amp;id=' . $row['id']);
+
+			$arr[]	= array(
 						'id'	=> $ids[$row['id']],
 						'name'	=> $name[$row['id']],
 						'mail'	=> $mail[$row['id']],
@@ -282,71 +325,76 @@ if ($nums_rows > 0)
 						'admin'	=> !empty($admin[$row['id']]) ? '<input name="ad_' . $row['id'] . '" type="checkbox" checked="checked" />' : '<input name="ad_' . $row['id'] . '" type="checkbox" />'
 				);
 
-		//when submit !!
-		if (isset($_POST['submit']))
-		{
-			if ($del[$row['id']])
+			//when submit !!
+			if (isset($_POST['submit']))
 			{
-				//delete user
-				$query_del	= array(
+				if ($del[$row['id']])
+				{
+					//delete user
+					$query_del	= array(
 									'DELETE'	=> "{$dbprefix}users",
 									'WHERE'		=> 'id=' . intval($ids[$row['id']])
 								);
 
-				$SQL->build($query_del);
+					$SQL->build($query_del);
 
-				//update number of stats
-				$update_query	= array(
+					//update number of stats
+					$update_query	= array(
 										'UPDATE'	=> "{$dbprefix}stats",
 										'SET'		=> 'users=users-1',
 									);
 
-				$SQL->build($update_query);
+					$SQL->build($update_query);
 						
-				if($SQL->affected())
-				{
-					$affected = true;
-					delete_cache('data_stats');
+					if($SQL->affected())
+					{
+						$affected = true;
+						delete_cache('data_stats');
+					}
 				}
-			}
 
-			//update
-			$admin[$row['id']] = isset($_POST['ad_' . $row['id']])  ? 1 : 0 ;
-			$user_salt		   = substr(kleeja_base64_encode(pack("H*", sha1(mt_rand()))), 0, 7);
-			$pass[$row['id']]  = ($pass[$row['id']] != '') ? "password = '" . $usrcp->kleeja_hash_password($SQL->escape($pass[$row['id']]) . $user_salt) . "', password_salt='" . $user_salt . "'," : '';
+				//update
+				$admin[$row['id']] = isset($_POST['ad_' . $row['id']])  ? 1 : 0 ;
+				$user_salt		   = substr(kleeja_base64_encode(pack("H*", sha1(mt_rand()))), 0, 7);
+				$pass[$row['id']]  = ($pass[$row['id']] != '') ? "password = '" . $usrcp->kleeja_hash_password($SQL->escape($pass[$row['id']]) . $user_salt) . "', password_salt='" . $user_salt . "'," : '';
 
-			$update_query	= array(
-									'UPDATE'	=> "{$dbprefix}users",
-									'SET'		=> 	"name = '" . $SQL->escape($name[$row['id']]) . "',
+				$update_query	= array(
+										'UPDATE'	=> "{$dbprefix}users",
+										'SET'		=> 	"name = '" . $SQL->escape($name[$row['id']]) . "',
 													mail = '" . $SQL->escape($mail[$row['id']]) . "',
 													" . $pass[$row['id']] . "
 													admin = " . intval($admin[$row['id']]) . ",
 													clean_name = '" . $SQL->escape($usrcp->cleanusername($name[$row['id']])) . "'",
-									'WHERE'		=>	'id=' . $row['id']
-							);
+										'WHERE'		=>	'id=' . $row['id']
+								);
 
-			$SQL->build($update_query);
+				$SQL->build($update_query);
 
-			if($SQL->affected())
-			{
-				$affected = true;
+				if($SQL->affected())
+				{
+					$affected = true;
+				}
 			}
 		}
-	}
 
-	$SQL->freeresult($result);
-}
-else #num rows
-{ 
-	$no_results = true;
-}
+		$SQL->freeresult($result);
+	}
+	else #num rows
+	{ 
+		$no_results = true;
+	}
 		
-//pages
-$total_pages 	= $Pager->getTotalPages(); 
-$page_nums 		= $Pager->print_nums(
+	//pages
+	$total_pages 	= $Pager->getTotalPages(); 
+	$page_nums 		= $Pager->print_nums(
 								basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . (isset($_GET['search']) ? '&search=' . strip_tags($_GET['search']) : ''),
 								'onclick="javascript:get_kleeja_link($(this).attr(\'href\'), \'#content\'); return false;"' 
 							); 
+
+	
+	$show_results = true;
+break;
+endswitch;
 
 //if not noraml user system 
 $user_not_normal = (int) $config['user_system'] != 1 ?  true : false;
@@ -366,7 +414,8 @@ if (isset($_POST['submit']) || isset($_POST['newuser']))
 
 //secondary menu
 $go_menu = array(
-				'general' => array('name'=>$lang['R_USERS'], 'link'=> basename(ADMIN_PATH) . '?cp=g_users&amp;smt=general', 'goto'=>'general', 'current'=> $current_smt == 'general'),
+				'general' => array('name'=>$lang['R_GROUPS'], 'link'=> basename(ADMIN_PATH) . '?cp=g_users&amp;smt=general', 'goto'=>'general', 'current'=> $current_smt == 'general'),
+				'users' => array('name'=>$lang['R_USERS'], 'link'=> basename(ADMIN_PATH) . '?cp=g_users&amp;smt=users', 'goto'=>'users', 'current'=> $current_smt == 'users'),
 				'show_au' => array('name'=>$lang['ADMINISTRATORS'], 'link'=> basename(ADMIN_PATH) . '?cp=g_users&amp;smt=show_au', 'goto'=>'show_au', 'current'=> $current_smt == 'show_au'),
 				'show_su' => array('name'=>$lang['SEARCH_USERS'], 'link'=> basename(ADMIN_PATH) . '?cp=h_search&amp;smt=users', 'goto'=>'show_su', 'current'=> $current_smt == 'show_su'),
 				'new_u' => array('name'=>$lang['NEW_USER'], 'link'=> basename(ADMIN_PATH) . '?cp=g_users&amp;smt=new_u', 'goto'=>'new_u', 'current'=> $current_smt == 'new_u'),

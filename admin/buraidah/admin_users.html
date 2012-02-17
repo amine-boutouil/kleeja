@@ -1,7 +1,42 @@
 
+<IF NAME="current_smt == general">
+<!-- the big box begin -->
+<div class="big-box">
+<h1>{lang.R_GROUPS}</h1>
 
+<!-- start data table -->
+<IF NAME="no_results">
+...		
+<ELSE>
+<b>{lang.ESSENTIAL_GROUPS}</b>
+<table>
+	<LOOP NAME="e_groups">
+	<tr>
+		<td style="font-size:16px">{{name}}</td>
+		<td>{lang.EDIT_DATA}</td>
+		<td>{lang.EDIT_ACL}</td>
+	</tr>
+	</LOOP>
+</table>
 
-<IF NAME="current_smt != new_u">
+<div class="br"></div>
+
+<b>{lang.CUSTOM_GROUPS}</b>
+<table>
+	<LOOP NAME="c_groups">
+	<tr>
+		<td style="font-size:16px">{{name}}</td>
+		<td>{lang.EDIT_DATA}</td>
+		<td>{lang.EDIT_ACL}</td>
+		<td>{lang.DELETE}</td>
+	</tr>
+	</LOOP>
+</table>
+</IF>
+
+<!-- end data table -->
+
+<ELSEIF NAME="show_results">
 <!-- the big box begin -->
 <div class="big-box">
 <h1>{lang.R_USERS} 
@@ -76,7 +111,7 @@
 <!-- the big box end -->
 
 <!-- add new user -->
-<ELSE>
+<ELSEIF NAME="current_smt == new_u">
 <!-- the big box begin -->
 <div class="big-box">
 <h1>{lang.R_USERS} &raquo; {lang.NEW_USER}</h1>

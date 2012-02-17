@@ -326,5 +326,9 @@ $lang = array_merge($lang, array(
 	'EDIT_DATA'					=> ' تعديل البيانات',
 	'EDIT_ACL'					=> 'تعديل الصلاحيات',
 	'GROUP_IS_DEFAULT'			=> 'هذه المجموعة افتراضية عند التسجيل',
+	'ADD_NEW_GROUP'				=> 'اضف مجموعة جديدة',
+	'DELETE_GROUP'				=> 'حذف مجموعة',
+	'GROUP_NAME'				=> 'اسم المجموعة',
+	'COPY_FROM'					=> 'نسخ من',
 
 ));

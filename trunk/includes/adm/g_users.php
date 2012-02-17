@@ -238,6 +238,7 @@ case 'general':
 			$r = array(
 						'id'	=> $row['group_id'],
 						'name'	=> preg_replace('!{lang.([A-Z0-9]+)}!e', '$lang[\'\\1\']', $row['group_name']),
+						'is_default'	=> (int) $row['group_is_default'] ? true : false
 				);
 			if((int) $row['group_is_essential'] == 1)
 			{

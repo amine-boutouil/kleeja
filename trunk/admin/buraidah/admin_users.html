@@ -12,7 +12,7 @@
 <table>
 	<LOOP NAME="e_groups">
 	<tr>
-		<td style="font-size:16px">{{name}}</td>
+		<td style="font-size:16px">{{name}} <IF LOOP="is_default"><img src="{STYLE_PATH_ADMIN}images/default_group.png" alt="{lang.GROUP_IS_DEFAULT}" /></IF></td>
 		<td>{lang.EDIT_DATA}</td>
 		<td>{lang.EDIT_ACL}</td>
 	</tr>
@@ -25,7 +25,7 @@
 <table>
 	<LOOP NAME="c_groups">
 	<tr>
-		<td style="font-size:16px">{{name}}</td>
+		<td style="font-size:16px">{{name}}  <IF LOOP="is_default"><img src="{STYLE_PATH_ADMIN}images/default_group.png" alt="{lang.GROUP_IS_DEFAULT}" /></IF></td>
 		<td>{lang.EDIT_DATA}</td>
 		<td>{lang.EDIT_ACL}</td>
 		<td>{lang.DELETE}</td>

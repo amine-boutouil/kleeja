@@ -114,7 +114,7 @@ if(
 	$H_FORM_KEYS	= kleeja_add_form_key('admin_login');
 	$KEY_FOR_WEE	= sha1(microtime() . sha1($config['h_key']));
 	$KEY_FOR_PASS	= preg_replace('/[^0-9]/', '', sha1($klj_session . sha1($config['h_key']) . $KEY_FOR_WEE)); 
-
+	$not_you		= sprintf($lang['USERNAME_NOT_YOU'], '<a href="' .$config['siteurl'] . 'ucp.php?go=logout">', '</a>');
 	$err = false;
 	if(!empty($errs))
 	{

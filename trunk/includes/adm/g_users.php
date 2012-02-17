@@ -20,13 +20,15 @@ $stylee 	= "admin_users";
 $current_smt	= isset($_GET['smt']) ? (preg_match('![a-z0-9_]!i', trim($_GET['smt'])) ? trim($_GET['smt']) : 'general') : 'general';
 $action 	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;page=' . (isset($_GET['page'])  ? intval($_GET['page']) : 1);
 $action 	.= (isset($_GET['search']) ? '&amp;search=' . $SQL->escape($_GET['search']) : '') . '&amp;smt=' . $current_smt;
-$action_add =  basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php')  . '&amp;smt=' . $current_smt;
+$action_all =  basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php')  . '&amp;smt=' . $current_smt;
 
 $is_search	= $affected = $is_asearch = false;
 $isn_search	= true;
 $GET_FORM_KEY	= kleeja_add_form_key_get('adm_users');
 $H_FORM_KEYS	= kleeja_add_form_key('adm_users');
 $H_FORM_KEYS2	= kleeja_add_form_key('adm_users_newuser');
+$H_FORM_KEYS3	= kleeja_add_form_key('adm_users_newgroup');
+$H_FORM_KEYS4	= kleeja_add_form_key('adm_users_delgroup');
 
 //
 // Check form key
@@ -41,6 +43,20 @@ if (isset($_POST['submit']))
 if (isset($_POST['newuser']))
 {
 	if(!kleeja_check_form_key('adm_users_newuser'))
+	{
+		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $action, 1);
+	}
+}
+if (isset($_POST['delgroup']))
+{
+	if(!kleeja_check_form_key('adm_users_delgroup'))
+	{
+		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $action, 1);
+	}
+}
+if (isset($_POST['newgroup']))
+{
+	if(!kleeja_check_form_key('adm_users_newgroup'))
 	{
 		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $action, 1);
 	}
@@ -226,6 +242,8 @@ case 'general':
 	$nums_rows = $n_fetch['total_groups'];
 	$no_results = false;
 	$e_groups	= $c_groups = array();
+	$l_groups	= array();
+
 
 	if ($nums_rows > 0)
 	{
@@ -240,6 +258,7 @@ case 'general':
 						'name'	=> preg_replace('!{lang.([A-Z0-9]+)}!e', '$lang[\'\\1\']', $row['group_name']),
 						'is_default'	=> (int) $row['group_is_default'] ? true : false
 				);
+			
 			if((int) $row['group_is_essential'] == 1)
 			{
 				$e_groups[] = $r;

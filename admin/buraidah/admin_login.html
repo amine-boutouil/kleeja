@@ -20,11 +20,11 @@
 				$('#login_form').attr('action', $('form').attr('action') + '#!' + hash);
 			}
 			
-			if($('lname').val() != ''){
-				$('#lpass_{KEY_FOR_PASS}').focus();
-			}else{
-				$('#lname').focus();
-			}
+			$('#toggler').focus();
+			$('#toggler').keydown(function() {
+    			$('#toggler').toggle();
+    			$('#lpass_{KEY_FOR_PASS}').toggle().focus();
+			})
 		});
 	//-->
 	</script>
@@ -40,21 +40,21 @@
 	</div>
 
 	<div id="login_warp">
+		<img src="{STYLE_PATH_ADMIN}images/blogo.png" />
 		<form action="{action}" method="post" style="clear: both;" id="login_form">
 		<div class="acp_login_box">
 			<p>
-				<label for="lname">{lang.USERNAME}</label>
-				<input type="text" name="lname" id="lname" value="{username}" />
+				<div class="login-name"><span>{username}</span> ({not_you})<div>
+				<br />
+				<input type="hidden" name="lname" id="lname" value="{username}" />
+				<input type="text" id="toggler" value="{lang.PASSWORD}" />
+				<input type="password" id="lpass_{KEY_FOR_PASS}" name="lpass_{KEY_FOR_PASS}" value="" style="display:none" /><input class="submit_go" type="submit" name="submit" value="{lang.LOGIN}" />
 			</p>
-			<p>
-				<label for="lpass_{KEY_FOR_PASS}">{lang.PASSWORD}</label>
-				<input type="password" id="lpass_{KEY_FOR_PASS}" name="lpass_{KEY_FOR_PASS}" value="" />
-			</p>
-			<p class="submitt">
-				<input class="submit_go" type="submit" name="submit" value="{lang.LOGIN}" />
+				
+				
 				{H_FORM_KEYS}
 				<input type="hidden" name="kid" value="{KEY_FOR_WEE}" />
-			</p>
+
 			
 			<div class="clear"></div>
 			<IF NAME="err">

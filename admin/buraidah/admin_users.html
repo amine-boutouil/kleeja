@@ -43,8 +43,7 @@
 <!-- the big box begin -->
 <div class="big-box">
 <h1>{lang.ADD_NEW_GROUP}</h1>
-<form method="post" action="{action_addgroup}" id="add_group_form">
-
+<form method="post" action="{action_all}" id="add_group_form">
 <div class="section">
 	<h3><label for="gname">{lang.GROUP_NAME}</label></h3>
 	<div class="box"><input type="text" name="gname" id="gname" value="" size="30" /></div>
@@ -52,7 +51,13 @@
 <div class="clear"></div>
 <div class="section">
 	<h3><label for="cfrom">{lang.COPY_FROM}</label></h3>
-	<div class="box"><select name="cfrom" id="cfrom"></select></div>
+	<div class="box">
+		<select name="cfrom" id="cfrom">
+			<option value="0">{lang.DEFAULT_GROUP}</option>
+			<LOOP NAME="e_groups"><option value="{{id}}">{{name}}</option></LOOP>
+			<LOOP NAME="c_groups"><option value="{{id}}">{{name}}</option></LOOP>
+		</select>
+	</div>
 </div>
 <div class="clear"></div>
 
@@ -73,7 +78,39 @@
 <!-- the big box begin -->
 <div class="big-box">
 <h1>{lang.DELETE_GROUP}</h1>
+<form method="post" action="{action_all}" id="del_group_form">
+<div class="section">
+	<h3><label for="dgroup">{lang.GROUP}</label></h3>
+	<div class="box">
+		<select name="dgroup" id="dgroup">
+			<LOOP NAME="e_groups"><option value="{{id}}">{{name}}</option></LOOP>
+			<LOOP NAME="c_groups"><option value="{{id}}">{{name}}</option></LOOP>
+		</select>
+	</div>
+</div>
+<div class="clear"></div>
+<div class="section">
+	<h3><label for="tgroup">{lang.G_USERS_MOVE_TO}</label></h3>
+	<div class="box">
+		<select name="tgroup" id="tgroup">
+			<option value="0">{lang.DEFAULT_GROUP}</option>
+			<LOOP NAME="e_groups"><option value="{{id}}">{{name}}</option></LOOP>
+			<LOOP NAME="c_groups"><option value="{{id}}">{{name}}</option></LOOP>
+		</select>
+	</div>
+</div>
+<div class="clear"></div>
 
+<div class="br"></div>
+
+<!-- button -->
+<p>
+	<input type="hidden" name="delgroup" value="1" />
+	<button type="submit" id="submit" name="delgroup" class="btn" onclick="javascript:submit_kleeja_data('#del_group_form', '#content', 0); return false;"><span>{lang.SUBMIT}</span></button>
+</p>
+
+{H_FORM_KEYS4}
+</form>
 </div>
 <!-- the big box end -->
 
@@ -157,7 +194,7 @@
 <!-- the big box begin -->
 <div class="big-box">
 <h1>{lang.R_USERS} &raquo; {lang.NEW_USER}</h1>
-<form method="post" action="{action_add}" id="add_user_form">
+<form method="post" action="{action_all}" id="add_user_form">
 
 <div class="section">
 	<h3><label for="lname">{lang.USERNAME}</label></h3>

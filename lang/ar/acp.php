@@ -318,6 +318,7 @@ $lang = array_merge($lang, array(
 	'THUMB_DIS_LONGTIME'		=> 'المصغرات معطلة, هذا سيجعل كليجا تقوم بتصغير الصور الكبيره لك هنا, وبالتالي ستاخذ وقتاً طويلاً لعرضها, فعل المصغرات الآن.',
 	#1.5
 	'R_GROUPS'					=> 'ادارة المجموعات',
+	'GROUP'						=> 'مجموعة',
 	'ESSENTIAL_GROUPS'			=> 'مجموعات اساسية',
 	'CUSTOM_GROUPS'				=> 'مجموعات معرفة بواسطة المستخدم',
 	'ADMINS'					=> 'المسؤولين',
@@ -330,5 +331,8 @@ $lang = array_merge($lang, array(
 	'DELETE_GROUP'				=> 'حذف مجموعة',
 	'GROUP_NAME'				=> 'اسم المجموعة',
 	'COPY_FROM'					=> 'نسخ من',
+	'USERNAME_NOT_YOU'			=> 'ليس انت؟ %1$sسجل خروج%2$s',
+	'DEFAULT_GROUP'				=> 'المجموعة الافتراضية',
+	'G_USERS_MOVE_TO'		=> 'نقل اعضاء المجموعة لـ',
 
 ));

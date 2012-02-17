@@ -316,7 +316,7 @@ margin: 0 0 20px 0; -webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25); -moz-bo
 
 /* start: admin_login.html */
 #login_body{
-	background:transparent url(../images/bg_body.jpg) repeat-x;
+	background:transparent url(../images/1.png) repeat;
 	margin:0 auto;
 }
 #login_warp{
@@ -324,8 +324,7 @@ margin: 0 0 20px 0; -webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25); -moz-bo
 	width:340px;
 	font-family:tahoma;
 	font-size:13px;
-	background-color:#fff;						
-
+	text-align:center;
 }
 
 #login_top{ 
@@ -343,34 +342,32 @@ margin: 0 0 20px 0; -webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25); -moz-bo
 		}
 
 #login_warp .acp_login_box{
-
-		padding:10px;
-		margin-bottom:10px;
-		border:1px #ccc solid;
-
+		margin-top:40px;
 	}
-	#login_warp .acp_login_box p{
-		padding-bottom:30px;
+	#login_warp .acp_login_box .login-name{
+		margin: 9px;
+		font-size:11px;
 	}
-	#login_warp .acp_login_box input{
-		float:left;
-		width:170px;
-		padding:5px;
-		font-size:16px;
-
-	}
-	#login_warp .acp_login_box label{
-		float:right;
-		font-size:13px;
-		color:#A9A9A9;
-		padding-top:9px;
+	#login_warp .acp_login_box .login-name span{
+		font-size:14px;
+		margin:0 5px;
 	}
 	
-	#login_warp .acp_login_box .submitt input{
-		width:320px;
-		margin-top:9px;
+	#login_warp .acp_login_box input{
+
+		width:130px;
+		padding:5px;
+		font-size:12px;
+		color:#999;
+	}
+
+	
+	#login_warp .acp_login_box .submit_go{
+		width:40px;
+		margin:0 2px;
 		text-align:center;
 		cursor:pointer;
+		color:#fff;
 	
 	}
 	

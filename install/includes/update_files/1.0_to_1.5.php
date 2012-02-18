@@ -44,3 +44,5 @@ $update_sqls['groups_insert'] = "INSERT INTO `{$dbprefix}groups` (`group_id`, `g
 (2, '{lang.GUESTS}', 0, 1),
 (3, '{lang.USERS}', 1, 1),
 (4, 'برونزي', 0, 0);";
+
+$update_sqls['admin2founder'] = "ALTER TABLE  `{$dbprefix}users` CHANGE  `admin`  `founder` TINYINT( 1 ) NOT NULL DEFAULT  '0'";

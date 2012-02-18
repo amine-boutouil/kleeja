@@ -221,7 +221,6 @@ background-image: -moz-linear-gradient(top, #FFAFAF, #FFD8D8);
 background-image: -ms-linear-gradient(top, #FFAFAF, #FFD8D8);
 background-image: -o-linear-gradient(top, #FFAFAF, #FFD8D8);
 padding: 15px;
-width:767px;
 margin: 0 0 20px 0; -webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25); -moz-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25); box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25);
 }
 
@@ -372,4 +371,3 @@ margin: 0 0 20px 0; -webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25); -moz-bo
 	}
 	
 /* end: admin_login.html */
-

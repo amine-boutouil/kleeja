@@ -16,11 +16,11 @@ if (!defined('IN_ADMIN'))
 
 
 //for style ..
-$stylee 	= "admin_users";
+$stylee			= "admin_users";
 $current_smt	= isset($_GET['smt']) ? (preg_match('![a-z0-9_]!i', trim($_GET['smt'])) ? trim($_GET['smt']) : 'general') : 'general';
-$action 	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;page=' . (isset($_GET['page'])  ? intval($_GET['page']) : 1);
-$action 	.= (isset($_GET['search']) ? '&amp;search=' . $SQL->escape($_GET['search']) : '') . '&amp;smt=' . $current_smt;
-$action_all =  basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php')  . '&amp;smt=' . $current_smt;
+$action			= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;page=' . (isset($_GET['page'])  ? intval($_GET['page']) : 1);
+$action			.= (isset($_GET['search']) ? '&amp;search=' . $SQL->escape($_GET['search']) : '') . '&amp;smt=' . $current_smt;
+$action_all		= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php')  . '&amp;smt=' . $current_smt . (isset($_GET['page']) ? '&amp;page=' . intval($_GET['page']) : '');
 
 $is_search	= $affected = $is_asearch = false;
 $isn_search	= true;
@@ -70,23 +70,20 @@ if (isset($_POST['search_user']))
 }
 
 //
-//delete all user files [only one user]			
+//delete all user files [only one user]
 //
 if(isset($_GET['deleteuserfile'])) 
 {
-	//redirect to page 
-	$redirect_to = basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . (isset($_GET['page']) ? intval($_GET['page']) : '');
-
 	//check _GET Csrf token
 	if(!kleeja_check_form_key_get('adm_users'))
 	{
-		kleeja_admin_err($lang['INVALID_GET_KEY'], true, $lang['ERROR'], true, $redirect_to, 2);
+		kleeja_admin_err($lang['INVALID_GET_KEY'], true, $lang['ERROR'], true, $action_all, 2);
 	}
 
 	//is exists ?
 	if(!$SQL->num_rows($SQL->query("SELECT * FROM `{$dbprefix}users` WHERE id=" . intval($_GET['deleteuserfile']))))
 	{
-		redirect($redirect_to);
+		redirect($action_all);
 	}
 
 	$query = array(
@@ -140,7 +137,7 @@ if(isset($_GET['deleteuserfile']))
 
 		$SQL->build($d_query);
 
-		kleeja_admin_info($lang['ADMIN_DELETE_FILE_OK'], true, '', true, $redirect_to, 3);
+		kleeja_admin_info($lang['ADMIN_DELETE_FILE_OK'], true, '', true, $action_all, 3);
 	}
 }
 
@@ -215,10 +212,57 @@ else if (isset($_POST['newuser']))
 			$errs .= '- ' . $r . '. <br />';
 		}
 
-		kleeja_admin_err($errs);
+		kleeja_admin_err($errs, true, '', true, $action_all, 3);
 	}
 }
 
+//
+//add new group
+//
+if(isset($_POST['newgroup']))
+{
+	if (trim($_POST['gname']) == '' || trim($_POST['gname']) == '' || trim($_POST['gname']) == '')
+	{						
+		$ERRORS[] = $lang['EMPTY_FIELDS'];
+	}
+	else if (strlen(trim($_POST['gname'])) < 2 || strlen(trim($_POST['gname'])) > 100)
+	{
+		$ERRORS[] = str_replace('4', '1', $lang['WRONG_NAME']);
+	}
+	else if ($SQL->num_rows($SQL->query("SELECT * FROM `{$dbprefix}groups` WHERE group_name='" . trim($SQL->escape($_POST["gname"])) . "'")) != 0)
+	{
+		$ERRORS[] = $lang['EXIST_NAME'];
+	}
+	elseif (in_array(trim($_POST['gname']), array($lang['ADMINS'], $lang['GUESTS'], $lang['USERS'])))
+	{						
+		$ERRORS[] = $lang['TAKEN_NAMES'];
+	}
+	
+	//no errors, lets do process
+	if(empty($ERRORS))	 
+	{
+		//
+	}
+	else
+	{
+		$errs =	'';
+		foreach($ERRORS as $r)
+		{
+			$errs .= '- ' . $r . '. <br />';
+		}
+
+		kleeja_admin_err($errs, true, '', true, $action_all, 3);
+	}
+}
+
+//
+//delete group
+//
+if(isset($_POST['delgroup']))
+{
+
+
+}
 
 //
 //begin of default users page 

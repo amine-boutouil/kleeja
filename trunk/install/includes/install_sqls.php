@@ -89,7 +89,7 @@ CREATE TABLE `{$dbprefix}users` (
   `password` varchar(200) collate utf8_bin NOT NULL,
   `password_salt` varchar(250) collate utf8_bin NOT NULL,
   `mail` varchar(350) collate utf8_bin NOT NULL,
-  `admin` tinyint(1) NOT NULL default '0',
+  `founder` tinyint(1) NOT NULL default '0',
   `session_id` char(32) collate utf8_bin NOT NULL,
   `clean_name` varchar(300) collate utf8_bin NOT NULL,
   `last_visit` INT(11) NOT NULL,

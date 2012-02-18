@@ -333,6 +333,7 @@ $lang = array_merge($lang, array(
 	'COPY_FROM'					=> 'نسخ من',
 	'USERNAME_NOT_YOU'			=> 'ليس انت؟ %1$sسجل خروج%2$s',
 	'DEFAULT_GROUP'				=> 'المجموعة الافتراضية',
-	'G_USERS_MOVE_TO'		=> 'نقل اعضاء المجموعة لـ',
+	'G_USERS_MOVE_TO'			=> 'نقل اعضاء المجموعة لـ',
+	'TAKEN_NAMES'				=> 'هذا الاسم من الاسماء المحجوزة، قم باختيار غيره!.', 
 
 ));

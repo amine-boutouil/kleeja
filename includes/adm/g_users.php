@@ -335,11 +335,13 @@ case 'show_su':
 	$isn_search	= false;
 	$query['WHERE']	=	"name != '' $usernamee $usermailee";
 	
-case 'show_au':
+case 'show_group':
 	$is_search	= true;
 	$isn_search	= false;
 	$is_asearch = true;
-	$query['WHERE']	= "name != '' AND admin = 1 ";
+	$req_group	= isset($POST['qg']) ? intval($POST['qg']) : 0;
+
+	$query['WHERE']	= "name != '' AND group_id =  " . $req_group;
 
 
 case 'users':

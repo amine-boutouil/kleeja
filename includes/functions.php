@@ -39,7 +39,7 @@ function Customfile_size($size)
 function KleejaOnline ()
 {
 	global $SQL, $usrcp, $dbprefix, $config, $klj_session;
-		
+
 	// get information .. 
 	$ip				= get_ip();
 	$agent			= $SQL->escape($_SERVER['HTTP_USER_AGENT']);
@@ -48,7 +48,7 @@ function KleejaOnline ()
 	$timeout2		= $time-$timeout;  
 	$username		= ($usrcp->name()) ? $usrcp->name(): '-1';
 	$session		= $klj_session;
-		
+
 	//
 	//for stats 
 	//
@@ -70,10 +70,10 @@ function KleejaOnline ()
 		($hook = kleeja_run_hook('qr_update_yahoo_lst_num')) ? eval($hook) : null; //run hook	
 		$SQL->build($update_query);
 	}
-		
+
 	//put another bots as a hook if you want !
 	($hook = kleeja_run_hook('anotherbots_onlline_func')) ? eval($hook) : null; //run hook
-		
+
 	//---
 	if(!empty($ip) && !empty($agent) && !empty($session))
 	{
@@ -100,10 +100,10 @@ function KleejaOnline ()
 		//update last_online_time_update 
 		update_config('last_online_time_update', time());
 	}
-		
+
 	($hook = kleeja_run_hook('KleejaOnline_func')) ? eval($hook) : null; //run hook	
 }
-	
+
 
 /**
 * For ban ips .. 
@@ -288,7 +288,7 @@ function fetch_remote_file($url, $save_in = false, $timeout = 20, $head_only = f
 		curl_setopt($ch, CURLOPT_NOBODY, $head_only);
 		curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
 		curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 5.0; Kleeja)');
-		
+
 		// Grab the page
 		$data = @curl_exec($ch);
 		$responce_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -337,7 +337,7 @@ function fetch_remote_file($url, $save_in = false, $timeout = 20, $head_only = f
 				}
 			}
 		}
-		//<--
+
 	}
 	// fsockopen() is the second best thing
 	else if(function_exists('fsockopen'))
@@ -346,32 +346,32 @@ function fetch_remote_file($url, $save_in = false, $timeout = 20, $head_only = f
 	    $host = $url_parsed['host'];
 	    $port = empty($url_parsed['port']) or $url_parsed['port'] == 0 ? 80 : $url_parsed['port'];
 		$path = $url_parsed['path'];
-	    
+
 		if (isset($url_parsed["query"]) && $url_parsed["query"] != '')
 		{
 			$path .= '?' . $url_parsed['query'];
 		}
-	
+
 	    if(!$fp = @fsockopen($host, $port, $errno, $errstr, $timeout))
 		{
 			return false;
 		}
-		
+
 		// Send a standard HTTP 1.0 request for the page
 		fwrite($fp, ($head_only ? 'HEAD' : 'GET') . " $path HTTP/1.0\r\n");
 		fwrite($fp, "Host: $host\r\n");
 		fwrite($fp, 'User-Agent: Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 5.0; Kleeja)' . "\r\n");
 		fwrite($fp, 'Connection: Close'."\r\n\r\n");
-			
+
 		stream_set_timeout($fp, $timeout);
 		$stream_meta = stream_get_meta_data($fp);
-		
+
 		//let's open new file to save it in.
 		if($save_in)
 		{
 			$fp2 = @fopen($save_in, "w");
 		}
-		
+
 		// Fetch the response 1024 bytes at a time and watch out for a timeout
 		$in = false;
 		while (!feof($fp) && !$stream_meta['timed_out'])
@@ -381,7 +381,7 @@ function fetch_remote_file($url, $save_in = false, $timeout = 20, $head_only = f
 			{
 				@fwrite($fp2, $in);
 			}
-			
+
 			$stream_meta = stream_get_meta_data($fp);
 		}
 
@@ -393,7 +393,7 @@ function fetch_remote_file($url, $save_in = false, $timeout = 20, $head_only = f
 			@fclose($fp2);
 			return true;
 		}
-		
+
 		// Process 301/302 redirect
 		if ($in !== false && $max_redirects > 0 && preg_match('#^HTTP/1.[01] 30[12]#', $in))
 		{
@@ -411,7 +411,7 @@ function fetch_remote_file($url, $save_in = false, $timeout = 20, $head_only = f
 				}
 			}
 		}
-		
+
 		// Ignore everything except a 200 response code
 		if ($in !== false && preg_match('#^HTTP/1.[01] 200 OK#', $in))
 		{
@@ -466,7 +466,7 @@ function fetch_remote_file($url, $save_in = false, $timeout = 20, $head_only = f
 			return $content;
 		}
 	}
-	
+
 	return false;
 }
 
@@ -510,7 +510,7 @@ function ch_g ($name_of_select, $g_id, $return_name = false)
 	{
 		return $s['name'];
 	}
-		
+
 	$show = "<select name=\"{$name_of_select}\">\n";
 		
 	for($i=1; $i< sizeof($s); $i++)
@@ -518,7 +518,7 @@ function ch_g ($name_of_select, $g_id, $return_name = false)
 		$selected = ($g_id == $i)? "selected=\"selected\"" : "";
 		$show .= "<option $selected value=\"$i\">" . $s[$i]['name'] . "</option>\n";
 	}
-		
+
 	$show .="</select>";
 		
 	($hook = kleeja_run_hook('ch_g_func')) ? eval($hook) : null; //run hook
@@ -548,12 +548,10 @@ function kleeja_check_mime ($mime, $group_id, $file_path)
 			break;
 		}
 	}
-		
+
 	//onther check
 	//$w = @getimagesize($file_path);
 	//$return =  ($w && (strpos($w['mime'], 'image') !== false)) ? true : false;
-	
-	
 
 	//another check
 	if($return == true)
@@ -581,7 +579,7 @@ function kleeja_check_mime ($mime, $group_id, $file_path)
 			}
 		}
 	}
-	
+
 	($hook = kleeja_run_hook('kleeja_check_mime_func')) ? eval($hook) : null; //run hook
 	
 	return $return;
@@ -637,7 +635,7 @@ function delete_cache($name, $all=false)
 			$del = kleeja_unlink ($path_to_cache . "/" . $name, true);
 		}
 	}
-	
+
 	return $del;
 }
 
@@ -675,7 +673,6 @@ function kleeja_unlink($filepath, $cache_file = false)
 	}
 
 	return false;
-
 }
 
 /**
@@ -890,7 +887,6 @@ function get_mime_for_header($ext)
 		'apk' => 'application/vnd.android.package-archive',
 		//add more mime here
 	);
-	
 
 	//return mime
 	$ext = strtolower($ext);
@@ -902,7 +898,7 @@ function get_mime_for_header($ext)
 	{
     	$return = 'application/force-download';  
 	}
-	
+
 	($hook = kleeja_run_hook('get_mime_for_header_func')) ? eval($hook) : null; //run hook
 	return $return;
 }
@@ -914,32 +910,27 @@ function get_mime_for_header($ext)
 function get_lang($name, $folder = '')
 {
 	global $config, $lang;
-	
+
 	($hook = kleeja_run_hook('get_lang_func')) ? eval($hook) : null; //run hook
-	
+
 	$name = str_replace('..', '', $name);
 	if($folder != '')
 	{
 		$folder = str_replace('..', '', $folder);
 		$name = $folder . '/' . $name;
 	}
-	
+
 	$path = PATH . 'lang/' . $config['language'] . '/' . str_replace('.php', '', $name) . '.php';
-	
-	if(file_exists($path))
+	$s = defined('DEBUG') ? include_once($path) : @include_once($path);
+
+	if($s === false)
 	{
-		include_once($path);
-	}
-	else
-	{
-		if(file_exists(PATH . 'lang/en/' . str_replace('.php', '', $name) . '.php'))
-		{
-			include_once(PATH . 'lang/en/' . str_replace('.php', '', $name) . '.php');
-		}
-		else
-		{
-			big_error('There is no language file in the current path', '' . $path . ' not found');
-		}
+		//$pathen = PATH . 'lang/en/' . str_replace('.php', '', $name) . '.php';
+		//$sen = defined('DEBUG') ? include_once($pathen) :  @include_once($pathen);
+		//if($sen === false)
+		//{
+			big_error('There is no language file in the current path', 'lang/' . $config['language'] . '/' . str_replace('.php', '', $name) . '.php  not found');
+		//}
 	}
 
 	return true;
@@ -980,7 +971,7 @@ function add_config ($name, $value, $order = '0', $html = '', $type = 'other', $
 	{
 		return true;
 	}
-	
+
 	$insert_query	= array(
 							'INSERT'	=> '`name` ,`value` ,`option` ,`display_order`, `type`, `plg_id`, `dynamic`',
 							'INTO'		=> "{$dbprefix}config",
@@ -1006,13 +997,13 @@ function add_config_r($configs)
 	{
 		return false;
 	}
-	
+
 	//array(name=>array(value=>,order=>,html=>),...);
 	foreach($configs as $n=>$m)
 	{
 		add_config($n, $m['value'], $m['order'], $m['html'], $m['type'], $m['plg_id'], $m['dynamic']);
 	}
-	
+
 	return;
 }
 
@@ -1043,7 +1034,7 @@ function update_config($name, $value, $escape = true)
 /*
 * Delete config
 */
-function delete_config ($name) 
+function delete_config($name) 
 {
 	global $dbprefix, $SQL;
 
@@ -1060,7 +1051,6 @@ function delete_config ($name)
 	//
 	// 'IN' doesnt work here with delete, i dont know why ? 
 	//
-
 	$delete_query	= array(
 								'DELETE'	=> "{$dbprefix}config",
 								'WHERE'		=>  "name  = '" . $SQL->escape($name) . "'"
@@ -1068,7 +1058,7 @@ function delete_config ($name)
 	($hook = kleeja_run_hook('del_sql_delete_config_func')) ? eval($hook) : null; //run hook
 
 	$SQL->build($delete_query);
-	
+
 	if($SQL->affected())
 	{
 		return true;
@@ -1131,22 +1121,22 @@ function add_olang($words = array(), $lang = 'en', $plg_id = '0')
 function delete_olang ($words = '', $lang='en', $plg_id = '') 
 {
 	global $dbprefix, $SQL;
-	
+
 	if(is_array($words))
 	{
 		foreach($words as $w)
 		{
 			delete_olang ($w, $lang);
 		}
-		
+
 		return;
 	}
-	
+
 	$delete_query	= array(
 							'DELETE'	=> "{$dbprefix}lang",
 							'WHERE'		=> "word = '" . $SQL->escape($words) . "' AND lang_id = '" . $SQL->escape($lang) . "'"
 						);
-						
+
 	if(isset($plg_id) && !empty($plg_id))
 	{
 		$delete_query['WHERE'] = "plg_id = '" . intval($plg_id) . "'";
@@ -1203,7 +1193,7 @@ function klj_clean_old_files($from = 0)
 					);
 
 		($hook = kleeja_run_hook('qr_select_klj_clean_old_files_func')) ? eval($hook) : null; //run hook
-		
+
 		$result	= $SQL->build($query);					
 		
 		$num_of_files_to_delete = $SQL->num_rows($result);
@@ -1214,9 +1204,9 @@ function klj_clean_old_files($from = 0)
 								'UPDATE'	=> "{$dbprefix}stats",
 								'SET'		=> "last_f_del ='" . time() . "'",
 							);
-						
+
 			($hook = kleeja_run_hook('qr_update_lstf_del_date_kcof')) ? eval($hook) : null; //run hook
-		
+
 			$SQL->build($update_query);		
 			//delete stats cache
 			delete_cache("data_stats");
@@ -1224,12 +1214,12 @@ function klj_clean_old_files($from = 0)
 			$SQL->freeresult($result);
 			return;
 		}
-		
+
 		$last_id_from = $num = $real_num = $sizes = 0;
 		$ids = array();
 		$ex_ids =  array();
 		//$ex_types = explode(',', $config['livexts']);
-		
+
 		($hook = kleeja_run_hook('beforewhile_klj_clean_old_files_func')) ? eval($hook) : null; //run hook
 		
 		//delete files 
@@ -1238,7 +1228,7 @@ function klj_clean_old_files($from = 0)
 			$continue = true;
 			$real_num++;
 			$last_id_from = $row['id'];
-			
+
 			/*
 			//excpetions
 			if(in_array($row['type'], $ex_types) || $config['id_form'] == 'direct')
@@ -1247,19 +1237,18 @@ function klj_clean_old_files($from = 0)
 				continue;
 			}
 			*/
-			
+
 			//excpetions
 			if($config['id_form'] == 'direct')
 			{
 				//$ex_ids[] = $row['id'];
-				
 				//move on
 				//continue;
 			}
-			
+
 			//your exepctions
 			($hook = kleeja_run_hook('while_klj_clean_old_files_func')) ? eval($hook) : null; //run hook
-		
+
 			if($continue)
 			{
 				//delete from folder ..
@@ -1277,55 +1266,51 @@ function klj_clean_old_files($from = 0)
 				$num++;		
 				$sizes += $row['size'];
 			}
-			
 	    }#END WHILE
-		
+
 		$SQL->freeresult($result);
-		
+
 		if(sizeof($ex_ids))
 		{
-				$update_query	= array(
-										'UPDATE'	=> "{$dbprefix}files",
-										'SET'		=> "last_down = '" . (time() + 2*86400) . "'",
-										'WHERE'		=> "id IN (" . implode(',', $ex_ids) . ")"
-										);
-				($hook = kleeja_run_hook('qr_update_lstdown_old_files')) ? eval($hook) : null; //run hook						
-				$SQL->build($update_query);
+			$update_query	= array(
+									'UPDATE'	=> "{$dbprefix}files",
+									'SET'		=> "last_down = '" . (time() + 2*86400) . "'",
+									'WHERE'		=> "id IN (" . implode(',', $ex_ids) . ")"
+									);
+			($hook = kleeja_run_hook('qr_update_lstdown_old_files')) ? eval($hook) : null; //run hook						
+			$SQL->build($update_query);
 		}
-		
+
 		if(sizeof($ids))
 		{
-				$query_del	= array(
-									'DELETE'	=> "{$dbprefix}files",
-									'WHERE'	=> "id IN (" . implode(',', $ids) . ")"
+			$query_del	= array(
+								'DELETE'	=> "{$dbprefix}files",
+								'WHERE'	=> "id IN (" . implode(',', $ids) . ")"
+								);
+
+			//update number of stats
+			$update_query	= array(
+									'UPDATE'	=> "{$dbprefix}stats",
+									'SET'		=> "sizes=sizes-$sizes,files=files-$num",
 									);
-									
-				//update number of stats
-				$update_query	= array(
-										'UPDATE'	=> "{$dbprefix}stats",
-										'SET'		=> "sizes=sizes-$sizes,files=files-$num",
-										);
-										
-				($hook = kleeja_run_hook('qr_del_delf_old_files')) ? eval($hook) : null; //run hook
-				
-				$SQL->build($query_del);
-				$SQL->build($update_query);
+
+			($hook = kleeja_run_hook('qr_del_delf_old_files')) ? eval($hook) : null; //run hook
+
+			$SQL->build($query_del);
+			$SQL->build($update_query);
 		}
-		
+
 		update_config('klj_clean_files_from', $last_id_from);
     } //stat_del
-
 }
 
 /**
 * klj_clean_old 
-* 
 */
- 
 function klj_clean_old($table, $for = 'all')
 {
 	global $SQL, $config, $dbprefix;
-	
+
 	$days = intval(time() - 3600 * 24 * intval($for));
 
 	$query = array(
@@ -1341,7 +1326,7 @@ function klj_clean_old($table, $for = 'all')
 	}
 
 	($hook = kleeja_run_hook('qr_select_klj_clean_old_func')) ? eval($hook) : null; //run hook
-		
+
 	$result	= $SQL->build($query);					
 	$num_to_delete = $SQL->num_rows($result);
 	if($num_to_delete == 0)
@@ -1351,7 +1336,7 @@ function klj_clean_old($table, $for = 'all')
 		$SQL->freeresult($result);
 		return;
 	}
-	
+
 	$ids = array();
 	$num = 0;
 	while($row=$SQL->fetch_array($result))
@@ -1361,7 +1346,7 @@ function klj_clean_old($table, $for = 'all')
 	}
 
 	$SQL->freeresult($result);
-	
+
 	$query_del	= array(
 							'DELETE'	=> "{$dbprefix}" . $table,
 							'WHERE'	=> "id IN (" . implode(',', $ids) . ")"
@@ -1370,12 +1355,9 @@ function klj_clean_old($table, $for = 'all')
 	($hook = kleeja_run_hook('qr_del_delf_old_table')) ? eval($hook) : null; //run hook
 
 	$SQL->build($query_del);
-	
+
 	return;
 }
-
-
-
 
 /**
 * get_ip() for the user
@@ -1403,7 +1385,7 @@ function get_ip()
 			}
 		}
 	}
-	
+
 	$return = preg_replace('/[^0-9a-z.]/i', '', $ip);
 	($hook = kleeja_run_hook('del_sql_delete_olang_func')) ? eval($hook) : null; //run hook
 	return $return;
@@ -1427,7 +1409,7 @@ function kleeja_check_captcha()
 			$return = true;
 		}
 	}
-	
+
 	($hook = kleeja_run_hook('kleeja_check_captcha_func')) ? eval($hook) : null; //run hook
 	return $return;
 }
@@ -1451,7 +1433,6 @@ function kleeja_log($text, $reset = false)
 	@fclose($fp);
 	return;
 }
-
 
 
 /**
@@ -1487,7 +1468,7 @@ function kleeja_set_range($range, $filesize)
 		header("Content-Range: */$filesize");
 		exit;
 	}
-	
+
 	return array($first, $last);
 }
 
@@ -1514,4 +1495,12 @@ function kleeja_buffere_range($file, $bytes, $buffer_size = 1024)
 		echo $contents;
 		@flush();  @ob_flush();
 	}
+}
+
+/**
+* user_can, used for checking the acl for the current user
+*/
+function user_can($acl_name)
+{
+
 }

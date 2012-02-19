@@ -31,7 +31,6 @@ function Saaheader($title, $outscript = false, $extra = '')
 	$user_is = ($usrcp->name()) ? true: false;
 	$username = ($usrcp->name()) ? $usrcp->name() : $lang['GUST'];
 
-
 	//our default charset
 	$charset = 'utf-8';
 
@@ -51,6 +50,11 @@ function Saaheader($title, $outscript = false, $extra = '')
 			'stats'	=> $config['mod_writer'] ? 'stats.html' : 'go.php?go=stats',
 		);
 
+	//check for extra header 
+	$extras['header'] = empty($extras['header']) ? false : $extras['header'];
+
+	($hook = kleeja_run_hook('Saaheader_links_func')) ? eval($hook) : null; //run hook
+
 	//assign some variables
 	$tpl->assign("dir", $lang['DIR']);
 	$tpl->assign("title", $title);
@@ -59,14 +63,6 @@ function Saaheader($title, $outscript = false, $extra = '')
 	$tpl->assign("go_back_browser", $lang['GO_BACK_BROWSER']);
 	$tpl->assign("H_FORM_KEYS_LOGIN", kleeja_add_form_key('login'));
 	$tpl->assign("action_login", 'ucp.php?go=login' . (isset($_GET['return']) ? '&amp;return=' . htmlspecialchars($_GET['return']) : ''));
-	
-	//$extra .= '';
-
-	//check for extra header 
-	$extras['header'] = empty($extras['header']) ? false : $extras['header'];
-
-	
-
 	$tpl->assign("EXTRA_CODE_META", $extra);
 
 	$header = $tpl->display("header");

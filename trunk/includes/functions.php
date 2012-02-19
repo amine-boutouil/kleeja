@@ -1493,14 +1493,22 @@ function kleeja_buffere_range($file, $bytes, $buffer_size = 1024)
 		$bytes_left	-= $bytes_to_read;
 		$contents	= fread($file, $bytes_to_read);
 		echo $contents;
-		@flush();  @ob_flush();
+		@flush();
+		@ob_flush();
 	}
 }
 
 /**
 * user_can, used for checking the acl for the current user
 */
-function user_can($acl_name)
+function user_can($acl_name, $group_id = 0)
 {
+	global $d_groups, $userinfo;
 
+	if($group_id == 0)
+	{
+		$group_id = $userinfo['group_id'];	
+	}
+
+	return (bool) $d_groups[$group_id]['acls'][$acl_name];
 }

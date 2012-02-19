@@ -69,7 +69,7 @@ if(
 			{
 				$ERRORS[] = $lang['EMPTY_FIELDS'];
 			}
-			elseif(USER_ADMIN != 1)
+			elseif(!user_can('enter_acp'))
 			{
 				$ERRORS[] = $lang['U_NOT_ADMIN'];
 			}

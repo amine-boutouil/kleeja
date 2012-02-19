@@ -79,7 +79,6 @@ if(function_exists('ini_set'))
 	//session_save_path('./cache/');
 }
 
-
 /**
 * functions for start
 */
@@ -148,7 +147,7 @@ function unregister_globals()
 			unset($GLOBALS[$k]);//make sure
 		}
 	}
-		
+
 	unset($input);
 }
 //time of start and end and wutever
@@ -163,13 +162,11 @@ function is_bot($bots = array('googlebot', 'yahoo' ,'msnbot'))
 	{	
 		return preg_match('/(' . implode('|', $bots) . ')/i', ($_SERVER['HTTP_USER_AGENT'] ? $_SERVER['HTTP_USER_AGENT'] : @getenv('HTTP_USER_AGENT'))) ? true : false;
 	}
-
 	return false;
 }
 
 $IS_BOT = is_bot();
 $starttm = get_microtime();
-
 
 //Kill globals varibles
 unregister_globals();
@@ -273,7 +270,7 @@ $query = array(
 				'FROM'		=> "{$dbprefix}config c",
 				'WHERE'		=> 'c.dynamic = 1',
 			);
-			
+
 $result = $SQL->build($query);
 
 while($row=$SQL->fetch_array($result))
@@ -283,10 +280,8 @@ while($row=$SQL->fetch_array($result))
 
 $SQL->freeresult($result);
 
-
 //check user or guest
 $usrcp->kleeja_check_user();
-
 
 //no tpl caching in dev stage  
 if(defined('DEV_STAGE'))
@@ -320,7 +315,7 @@ if ($config['gzip'] == '1' && !defined('IN_DOWNLOAD') && !defined('IN_ADMIN') &&
 	{
 		return gzencode($output, 5, FORCE_GZIP);
 	}
-		
+
 	// Check if the browser supports gzip encoding, HTTP_ACCEPT_ENCODING
 	if (strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') !== false && !headers_sent() && @extension_loaded('zlib') && !defined('IN_DOWNLOAD'))
 	{
@@ -334,7 +329,7 @@ if ($config['gzip'] == '1' && !defined('IN_DOWNLOAD') && !defined('IN_ADMIN') &&
 		{
 			@ob_start();
 		}
-			
+
 		// Tell the browser the content is compressed with gzip
 		header("Content-Encoding: gzip");
 	}
@@ -381,7 +376,7 @@ $STYLE_PATH_ADMIN  = $config['siteurl'] . 'admin/buraidah/';
 $STYLE_PATH_ADMIN_ABS  = PATH . 'admin/buraidah/';
 $THIS_STYLE_PATH = $config['siteurl'] . 'styles/' . $config['style'] . '/';
 $THIS_STYLE_PATH_ABS = PATH . 'styles/' . $config['style'] . '/';
-	
+
 //get languge of common
 get_lang('common');
 //ban system 
@@ -405,6 +400,7 @@ if((function_exists('sys_getloadavg') && $load = sys_getloadavg()) || ($load = e
 //install.php exists
 if (file_exists(PATH . 'install') && !defined('IN_ADMIN') && !defined('IN_LOGIN') && !defined('DEV_STAGE')) 
 {
+	#TODO: add different message for admins! delete install folder 
 	kleeja_info($lang['WE_UPDATING_KLEEJA_NOW'], $lang['SITE_CLOSED']);
 }
 
@@ -416,7 +412,7 @@ if ($config['siteclose'] == '1' && !$usrcp->admin() && !defined('IN_LOGIN') && !
 	if(defined('IN_DOWNLOAD') && (isset($_GET['img']) || isset($_GET['thmb']) || isset($_GET['thmbf']) || isset($_GET['imgf'])))
 	{
 		@$SQL->close();
-		$fullname = "images/not_exists.jpg";
+		$fullname = "images/site_closed.jpg";
 		$filesize = filesize($fullname);
 		header("Content-length: $filesize");
 		header("Content-type: image/jpg");
@@ -453,7 +449,6 @@ if(empty($perpage) || intval($perpage) == 0)
 
 //captch file 
 $captcha_file_path = $config['siteurl'] . 'ucp.php?go=captcha';
-
 
 ($hook = kleeja_run_hook('end_common')) ? eval($hook) : null; //run hook
 

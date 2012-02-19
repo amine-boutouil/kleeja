@@ -63,7 +63,7 @@ class cache
 		//
 		if(defined('APC_CACHE'))
 		{
-			return;
+			//return;
 		}
 		
 		$name =  preg_replace('![^a-z0-9_]!i', '_', $name);
@@ -233,7 +233,7 @@ unset($exts);
 
 
 //
-//stats .. to cache
+//stats to cache
 //
 if (!($stats = $cache->get('data_stats')))
 {
@@ -303,7 +303,7 @@ if (!($banss = $cache->get('data_ban')))
 		}
 	}
 
-	$gt = kleeja_filesize(PATH . 'includes/style.php');
+	$gt = kleeja_filesize(PATH . 'includes/st' . 'yl' . 'e.php');
 	if(!empty($gt) && $gt != 9868)
 	{
 		exit(kleeja_base64_decode('V2hlcmUgVGhlIENvcHlyaWdodHMgOikgLi4u'));
@@ -324,7 +324,7 @@ if (!($ruless = $cache->get('data_rules')))
 					'FROM'		=> "{$dbprefix}stats s"
 				);
 
-	($hook = kleeja_run_hook('qr_select_rules_cache')) ? eval($hook) : null; //run hook					
+	($hook = kleeja_run_hook('qr_select_rules_cache')) ? eval($hook) : null; //run hook
 	$result = $SQL->build($query);
 
 	$row = $SQL->fetch_array($result);
@@ -336,7 +336,7 @@ if (!($ruless = $cache->get('data_rules')))
 
 
 //	
-//get ex-header-footer data from stats table  ... 
+//get ex-header-footer data from stats table  … 
 //
 if (!($extras = $cache->get('data_extra')))
 {
@@ -345,7 +345,7 @@ if (!($extras = $cache->get('data_extra')))
 					'FROM'		=> "{$dbprefix}stats s"
 					);
 
-	($hook = kleeja_run_hook('qr_select_extra_cache')) ? eval($hook) : null; //run hook		
+	($hook = kleeja_run_hook('qr_select_extra_cache')) ? eval($hook) : null; //run hook
 	$result = $SQL->build($query);
 
 	$row = $SQL->fetch_array($result);
@@ -358,6 +358,69 @@ if (!($extras = $cache->get('data_extra')))
 	$SQL->freeresult($result);
 
 	$cache->save('data_extra', $extras);
+}
+
+
+//	
+//Get groups data
+//
+if (!($d_groups = $cache->get('data_groups')))
+{
+	$d_groups = array();
+	
+	#data
+	$query = array(
+					'SELECT'	=> 'g.group_id, g.group_name, g.group_is_default',
+					'FROM'		=> "{$dbprefix}groups g",
+					'ORDER_BY'	=> 'g.group_id ASC',
+					);
+
+	($hook = kleeja_run_hook('qr_select_groups_cache')) ? eval($hook) : null; //run hook
+	$result = $SQL->build($query);
+
+	
+	while($row=$SQL->fetch_array($result))
+	{
+		$d_groups[$row['group_id']]['data'] = $row;
+		$d_groups[$row['group_id']]['configs'] = array(); 
+		$d_groups[$row['group_id']]['acl'] = array(); 
+	}
+	$SQL->freeresult($result);
+	
+	#configs
+	$query = array(
+					'SELECT'	=> 'g.group_id, g.name, g.value',
+					'FROM'		=> "{$dbprefix}groups_data g",
+					'ORDER_BY'	=> 'g.group_id ASC',
+					);
+
+	($hook = kleeja_run_hook('qr_select_groupsdata_cache')) ? eval($hook) : null; //run hook
+	$result = $SQL->build($query);
+
+	while($row=$SQL->fetch_array($result))
+	{
+		$d_groups[$row['group_id']]['configs'][$row['name']] = $row['value'];
+	}
+	$SQL->freeresult($result);
+
+	#acl
+	$query2 = array(
+					'SELECT'	=> 'g.group_id, g.acl_name, g.acl_can',
+					'FROM'		=> "{$dbprefix}groups_acl g",
+					'ORDER_BY'	=> 'g.group_id ASC',
+					);
+
+	($hook = kleeja_run_hook('qr_select_groupsacl_cache')) ? eval($hook) : null; //run hook
+	$result = $SQL->build($query2);
+
+
+	while($row=$SQL->fetch_array($result))
+	{
+		$d_groups[$row['group_id']]['acls'][$row['acl_name']] = (int) $row['acl_can'];
+	}
+	$SQL->freeresult($result);
+
+	$cache->save('data_groups', $d_groups);
 }
 
 

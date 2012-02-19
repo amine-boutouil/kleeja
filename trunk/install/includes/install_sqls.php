@@ -86,6 +86,7 @@ $install_sqls['users'] = "
 CREATE TABLE `{$dbprefix}users` (
   `id` int(10) NOT NULL auto_increment,
   `name` varchar(300) collate utf8_bin NOT NULL,
+  `group_id` int(11) unsigned NOT NULL DEFAULT '3',
   `password` varchar(200) collate utf8_bin NOT NULL,
   `password_salt` varchar(250) collate utf8_bin NOT NULL,
   `mail` varchar(350) collate utf8_bin NOT NULL,
@@ -97,7 +98,8 @@ CREATE TABLE `{$dbprefix}users` (
   `new_password` varchar(200) COLLATE utf8_bin NOT NULL DEFAULT '',
   `hash_key` varchar(200) COLLATE utf8_bin NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
-  KEY `clean_name` (`clean_name`(300))
+  KEY `clean_name` (`clean_name`(300))،
+  KEY `group_id` (`group_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 ";
 

@@ -54,7 +54,7 @@ class usrcp
 	}
 
 	//get username by id
-	function usernamebyid ($user_id) 
+	function usernamebyid($user_id) 
 	{
 		global $config;
 
@@ -78,16 +78,21 @@ class usrcp
 		return $u['name'];
 	}
 
-	//now ..  .. our table
+	//now our table, normal user system
 	function normal ($name, $pass, $hashed = false, $expire, $loginadm = false)
 	{
 		global $SQL, $dbprefix, $config, $userinfo;
+		
+		$userinfo = array(
+							'id'		=> 0,
+							'group_id'	=> 2,
+			);
 
 		$query = array(
 					'SELECT'	=> '*',
 					'FROM'		=> "`{$dbprefix}users`",
 					);
-		
+
 		if($hashed)
 		{
 			$query['WHERE'] = "id=" . intval($name) . " and password='" . $SQL->escape($pass) . "'";
@@ -124,7 +129,6 @@ class usrcp
 						//new password hash
 						$new_password = $this->kleeja_hash_password(trim($pass) . $new_salt);
 
-
 						($hook = kleeja_run_hook('qr_update_usrdata_md5_n_usr_class')) ? eval($hook) : null; //run hook	
 
 						//update now !!
@@ -152,7 +156,6 @@ class usrcp
 					define('USER_ID', $row['id']);
 					define('USER_NAME', $row['name']);
 					define('USER_MAIL', $row['mail']);
-					define('USER_ADMIN', $row['admin']);
 					define('LAST_VISIT', $row['last_visit']);
 				}
 
@@ -166,7 +169,7 @@ class usrcp
 					$hash_key_expire = sha1(md5($config['h_key'] . $row['password']).  $expire);
 					if(!$loginadm)
 					{
-						$this->kleeja_set_cookie('ulogu', $this->en_de_crypt($row['id'] . '|' . $row['password'] . '|' . $expire . '|' . $hash_key_expire . '|' . $row['admin'] . '|' . $user_y), $expire);
+						$this->kleeja_set_cookie('ulogu', $this->en_de_crypt($row['id'] . '|' . $row['password'] . '|' . $expire . '|' . $hash_key_expire . '|' . $row['group_id'] . '|' . $user_y), $expire);
 					}
 					else
 					{
@@ -174,7 +177,7 @@ class usrcp
 						$update_last_visit = array(
 									'UPDATE'	=> "`{$dbprefix}users`",
 									'SET'		=> "last_visit=" . time() . "",
-									'WHERE'		=>	"id=" . intval($row['id'])
+									'WHERE'		=> "id=" . intval($row['id'])
 							);
 
 						$SQL->build($update_last_visit);
@@ -254,24 +257,14 @@ class usrcp
 	}
 
 	/*
-	is user admin ?
-	*/
-	function admin ()
-	{
-		($hook = kleeja_run_hook('admin_func_usr_class')) ? eval($hook) : null; //run hook
-
-		return defined('USER_ADMIN') ? USER_ADMIN : false;
-	}
-
-	/*
 	logout func
 	*/
 	function logout()
 	{
 		($hook = kleeja_run_hook('logout_func_usr_class')) ? eval($hook) : null; //run hook
 
-		//adm
-		if(defined('USER_ADMIN') && USER_ADMIN == 1 && !empty($_SESSION['ADMINLOGIN']))
+		//acp
+		if(user_can('enter_acp') && !empty($_SESSION['ADMINLOGIN']))
 		{ 
 			$this->logout_cp();
 		}
@@ -445,7 +438,7 @@ class usrcp
 		{
 			$user_data = false;
 
-			list($user_id, $hashed_password, $expire_at, $hashed_expire, $adm_or_not, $u_info) =  @explode('|', $this->en_de_crypt($this->kleeja_get_cookie('ulogu'), 2));
+			list($user_id, $hashed_password, $expire_at, $hashed_expire, $group_id, $u_info) =  @explode('|', $this->en_de_crypt($this->kleeja_get_cookie('ulogu'), 2));
 
 			//if not expire 
 			if(($hashed_expire == sha1(md5($config['h_key'] . $hashed_password) . $expire_at)) && ($expire_at > time()))
@@ -454,7 +447,7 @@ class usrcp
 				 /*
 				 	!defined('IN_DOWNLOAD') 
 				 */
-				if((int) $adm_or_not == 1)
+				if(user_can('enter_acp', $group_id))
 				{
 					$user_data = $this->data($user_id, $hashed_password, true, $expire_at);
 				}
@@ -467,7 +460,6 @@ class usrcp
 						define('USER_ID', $uu_info['id']);
 						define('USER_NAME', $uu_info['name']);
 						define('USER_MAIL', $uu_info['mail']);
-						define('USER_ADMIN', '0');
 						define('LAST_VISIT', $uu_info['last_visit']);
 						$user_data = true;
 					}

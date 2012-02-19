@@ -288,8 +288,6 @@ if(defined('DEV_STAGE'))
 {
 	$tpl->caching = false;
 }
-//check if admin (true/false)
-$is_admin = $usrcp->admin();
 
 //kleeja session id
 $klj_session = $SQL->escape(session_id());
@@ -400,13 +398,13 @@ if((function_exists('sys_getloadavg') && $load = sys_getloadavg()) || ($load = e
 //install.php exists
 if (file_exists(PATH . 'install') && !defined('IN_ADMIN') && !defined('IN_LOGIN') && !defined('DEV_STAGE')) 
 {
-	#TODO: add different message for admins! delete install folder 
-	kleeja_info($lang['WE_UPDATING_KLEEJA_NOW'], $lang['SITE_CLOSED']);
+	#Different message for admins! delete install folder 
+	kleeja_info((user_can('enter_acp') ? $lang['DELETE_INSTALL_FOLDER'] : $lang['WE_UPDATING_KLEEJA_NOW']), $lang['SITE_CLOSED']);
 }
 
 //site close ..
 $login_page = '';
-if ($config['siteclose'] == '1' && !$usrcp->admin() && !defined('IN_LOGIN') && !defined('IN_ADMIN'))
+if ($config['siteclose'] == '1' && !user_can('enter_acp') && !defined('IN_LOGIN') && !defined('IN_ADMIN'))
 {
 	//if download, images ?
 	if(defined('IN_DOWNLOAD') && (isset($_GET['img']) || isset($_GET['thmb']) || isset($_GET['thmbf']) || isset($_GET['imgf'])))

@@ -32,7 +32,7 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 	{
 		$filename_l  = (string) $SQL->escape($_GET['filename']);
 		if(isset($_GET['x']))
-		{
+		{ 
 			$query['WHERE']	= "name='" . $filename_l . '.' . $SQL->escape($_GET['x']) . "'";
 		}
 		else 

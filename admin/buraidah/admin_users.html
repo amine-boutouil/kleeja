@@ -14,8 +14,8 @@
 	<tr>
 		<td style="font-size:16px">{{name}} <IF LOOP="is_default"><img src="{STYLE_PATH_ADMIN}images/default_group.png" alt="{lang.GROUP_IS_DEFAULT}" title="{lang.GROUP_IS_DEFAULT}" /></IF></td>
 		<td>{lang.EDIT_DATA}</td>
-		<td>{lang.EDIT_ACL}</td>
-		<td><a href="{action_all}&amp;qg={{id}}">{lang.USERS}</a></td>
+		<td><a href="{action}&amp;smt=group_acl&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;">{lang.EDIT_ACL}</a></td>
+		<td><a href="{action}&amp;smt=show_group&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;">{lang.USERS}</a></td>
 	</tr>
 	</LOOP>
 </table>
@@ -226,4 +226,37 @@
 </form>
 </div>
 <!-- the big box end -->
+
+
+<ELSEIF NAME="current_smt == group_acl">
+<!-- the big box begin -->
+<div class="big-box">
+<h1>{lang.R_GROUPS} &raquo; {lang.EDIT_ACL} ({group_name})</h1>
+<form method="post" action="{action_all}" id="edit_acl_form">
+
+<LOOP NAME="acls">
+<div class="section">
+	<h3><label for="lname">{{acl_title}}</label></h3>
+	<div class="box">
+		<input type="radio" name="acls[{{acl_name}}]" id="acl_{{acl_name}}" value="1" <IF LOOP="acl_can == 1">checked="checked"</IF> /> <span style="color:green">{lang.HE_CAN}</span> &nbsp; &nbsp; &nbsp; &nbsp;
+		<input type="radio" name="acls[{{acl_name}}]" id="acl_{{acl_name}}" value="0" <IF LOOP="acl_can == 0">checked="checked"</IF> /> <span style="color:red">{lang.HE_CAN_NOT}</span>
+	</div>
+</div>
+<div class="clear"></div>
+</LOOP>
+
+
+<div class="br"></div>
+
+<!-- button -->
+<p>
+	<input type="hidden" name="editacl" value="1" />
+	<button type="submit" id="submit" name="editacl" class="btn" onclick="javascript:submit_kleeja_data('#edit_acl_form', '#content', 0); return false;"><span>{lang.SUBMIT}</span></button>
+</p>
+
+{H_FORM_KEYS5}
+</form>
+</div>
+<!-- the big box end -->
+
 </IF>

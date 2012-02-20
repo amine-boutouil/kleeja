@@ -30,6 +30,7 @@ $H_FORM_KEYS2	= kleeja_add_form_key('adm_users_newuser');
 $H_FORM_KEYS3	= kleeja_add_form_key('adm_users_newgroup');
 $H_FORM_KEYS4	= kleeja_add_form_key('adm_users_delgroup');
 $H_FORM_KEYS5	= kleeja_add_form_key('adm_users_editacl');
+$H_FORM_KEYS6	= kleeja_add_form_key('adm_users_editdata');
 
 //
 // Check form key
@@ -65,6 +66,13 @@ if (isset($_POST['newgroup']))
 if (isset($_POST['editacl']))
 {
 	if(!kleeja_check_form_key('adm_users_editacl'))
+	{
+		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $action, 1);
+	}
+}
+if (isset($_POST['editdata']))
+{
+	if(!kleeja_check_form_key('adm_users_editdata'))
 	{
 		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $action, 1);
 	}
@@ -347,6 +355,36 @@ case 'group_acl':
 						'acl_title'	=> $lang['ACLS_' .  strtoupper($row['acl_name'])],
 						'acl_name'	=> $row['acl_name'],
 						'acl_can'	=> (int) $row['acl_can']
+			);
+	
+	}
+	$SQL->freeresult($result);
+
+break;
+
+case 'group_data':
+	$req_group	= isset($_GET['qg']) ? intval($_GET['qg']) : 0;
+	$group_name	= preg_replace('!{lang.([A-Z0-9]+)}!e', '$lang[\'\\1\']', $d_groups[$req_group]['data']['group_name']);
+
+	$query = array(
+					'SELECT'	=> 'c.name, c.option',
+					'FROM'		=> "{$dbprefix}config c",
+					'WHERE'		=> "c.type='groups'",
+					'ORDER BY'	=> 'c.display_order ASC'
+			);
+
+	$result = $SQL->build($query);
+
+	$data = array();
+	$cdata= $d_groups[$req_groups]['configs'];
+
+	while($row=$SQL->fetch_array($result))
+	{
+		$data[] = array(
+						'option'	=> '<div class="section">' . "\n" .  
+										'<h3><label for="' . $row['name'] . '">' . (!empty($lang[strtoupper($row['name'])]) ? $lang[strtoupper($row['name'])] : $olang[strtoupper($row['name'])]) . '</label></h3>' . "\n" .
+										'<div class="box">' . (empty($row['option']) ? '' : $tpl->admindisplayoption(preg_replace('!{con.[a-z0-9_]+}!', '{cdata.' . $row['name'] . '}', $row['option']))) . '</div>' . "\n" .
+										'</div>' . "\n" . '<div class="clear"></div>',
 			);
 	
 	}

@@ -13,7 +13,7 @@
 	<LOOP NAME="e_groups">
 	<tr>
 		<td style="font-size:16px">{{name}} <IF LOOP="is_default"><img src="{STYLE_PATH_ADMIN}images/default_group.png" alt="{lang.GROUP_IS_DEFAULT}" title="{lang.GROUP_IS_DEFAULT}" /></IF></td>
-		<td>{lang.EDIT_DATA}</td>
+		<td><a href="{action}&amp;smt=group_data&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;">{lang.EDIT_DATA}</a></td>
 		<td><a href="{action}&amp;smt=group_acl&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;">{lang.EDIT_ACL}</a></td>
 		<td><a href="{action}&amp;smt=show_group&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;">{lang.USERS}</a></td>
 	</tr>
@@ -27,9 +27,9 @@
 	<LOOP NAME="c_groups">
 	<tr>
 		<td style="font-size:16px">{{name}}  <IF LOOP="is_default"><img src="{STYLE_PATH_ADMIN}images/default_group.png" alt="{lang.GROUP_IS_DEFAULT}" title="{lang.GROUP_IS_DEFAULT}" /></IF></td>
-		<td>{lang.EDIT_DATA}</td>
-		<td>{lang.EDIT_ACL}</td>
-		<td><a href="{action_all}&amp;qg={{id}}">{lang.USERS}</a></td>
+		<td><a href="{action}&amp;smt=group_data&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;">{lang.EDIT_DATA}</a></td>
+		<td><a href="{action}&amp;smt=group_acl&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;">{lang.EDIT_ACL}</a></td>
+		<td><a href="{action}&amp;smt=show_group&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;">{lang.USERS}</a></td>
 		<td>{lang.DELETE}</td>
 	</tr>
 	</LOOP>
@@ -231,7 +231,7 @@
 <ELSEIF NAME="current_smt == group_acl">
 <!-- the big box begin -->
 <div class="big-box">
-<h1>{lang.R_GROUPS} &raquo; {lang.EDIT_ACL} ({group_name})</h1>
+<h1><a href="{action}&amp;smt=general" onclick="javascript:get_kleeja_link(this.href); return false;">{lang.R_GROUPS}</a> &raquo; {lang.EDIT_ACL} ({group_name})</h1>
 <form method="post" action="{action_all}" id="edit_acl_form">
 
 <LOOP NAME="acls">
@@ -259,4 +259,28 @@
 </div>
 <!-- the big box end -->
 
+
+<ELSEIF NAME="current_smt == group_data">
+<!-- the big box begin -->
+<div class="big-box">
+<h1><a href="{action}&amp;smt=general" onclick="javascript:get_kleeja_link(this.href); return false;">{lang.R_GROUPS}</a> &raquo; {lang.EDIT_DATA} ({group_name})</h1>
+<form method="post" action="{action_all}" id="edit_data_form">
+
+<LOOP NAME="data">
+{{option}}
+</LOOP>
+
+
+<div class="br"></div>
+
+<!-- button -->
+<p>
+	<input type="hidden" name="editdata" value="1" />
+	<button type="submit" id="submit" name="editdata" class="btn" onclick="javascript:submit_kleeja_data('#edit_data_form', '#content', 0); return false;"><span>{lang.SUBMIT}</span></button>
+</p>
+
+{H_FORM_KEYS6}
+</form>
+</div>
+<!-- the big box end -->
 </IF>

@@ -29,6 +29,7 @@ $H_FORM_KEYS	= kleeja_add_form_key('adm_users');
 $H_FORM_KEYS2	= kleeja_add_form_key('adm_users_newuser');
 $H_FORM_KEYS3	= kleeja_add_form_key('adm_users_newgroup');
 $H_FORM_KEYS4	= kleeja_add_form_key('adm_users_delgroup');
+$H_FORM_KEYS5	= kleeja_add_form_key('adm_users_editacl');
 
 //
 // Check form key
@@ -61,6 +62,13 @@ if (isset($_POST['newgroup']))
 		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $action, 1);
 	}
 }
+if (isset($_POST['editacl']))
+{
+	if(!kleeja_check_form_key('adm_users_editacl'))
+	{
+		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $action, 1);
+	}
+}
 if (isset($_POST['search_user']))
 {
 	if(!kleeja_check_form_key('adm_users_search'))
@@ -68,6 +76,7 @@ if (isset($_POST['search_user']))
 		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, basename(ADMIN_PATH) . '?cp=h_search', 1);
 	}
 }
+
 
 //
 //delete all user files [only one user]
@@ -89,7 +98,7 @@ if(isset($_GET['deleteuserfile']))
 	$query = array(
 					'SELECT'	=> 'size, name, folder',
 					'FROM'		=> "{$dbprefix}files",
-					'WHERE'		=>	'user=' . intval($_GET['deleteuserfile']),
+					'WHERE'		=> 'user=' . intval($_GET['deleteuserfile']),
 				);
 
 	$result = $SQL->build($query);
@@ -105,7 +114,7 @@ if(isset($_GET['deleteuserfile']))
 			@kleeja_unlink (PATH . $row['folder'] . "/thumbs/" . $row['name']);
 		}
 
-		$num++;		
+		$num++;
 		$sizes += $row['size'];
 	}
 
@@ -318,6 +327,33 @@ case 'general':
 
 break;
 
+case 'group_acl':
+	$req_group	= isset($_GET['qg']) ? intval($_GET['qg']) : 0;
+	$group_name	= preg_replace('!{lang.([A-Z0-9]+)}!e', '$lang[\'\\1\']', $d_groups[$req_group]['data']['group_name']);
+
+	$query = array(
+					'SELECT'	=> 'acl_name, acl_can',
+					'FROM'		=> "{$dbprefix}groups_acl",
+					'WHERE'		=> 'group_id=' . $req_group,
+					'ORDER BY'	=> 'acl_name ASC'
+			);
+
+	$result = $SQL->build($query);
+	
+	$acls = array();
+	while($row=$SQL->fetch_array($result))
+	{
+		$acls[] = array(
+						'acl_title'	=> $lang['ACLS_' .  strtoupper($row['acl_name'])],
+						'acl_name'	=> $row['acl_name'],
+						'acl_can'	=> (int) $row['acl_can']
+			);
+	
+	}
+	$SQL->freeresult($result);
+
+break;
+
 case 'show_su':
 	if(isset($_POST['search_user']))
 	{
@@ -339,7 +375,7 @@ case 'show_group':
 	$is_search	= true;
 	$isn_search	= false;
 	$is_asearch = true;
-	$req_group	= isset($POST['qg']) ? intval($POST['qg']) : 0;
+	$req_group	= isset($_GET['qg']) ? intval($_GET['qg']) : 0;
 
 	$query['WHERE']	= "name != '' AND group_id =  " . $req_group;
 
@@ -453,7 +489,8 @@ case 'users':
 	//pages
 	$total_pages 	= $Pager->getTotalPages(); 
 	$page_nums 		= $Pager->print_nums(
-								basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . (isset($_GET['search']) ? '&search=' . strip_tags($_GET['search']) : ''),
+								basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . (isset($_GET['search']) ? '&search=' . strip_tags($_GET['search']) : '') 
+								. (isset($_GET['qg']) ? '&qg=' . intval($_GET['qg']) : '') . (isset($_GET['smt']) ? '&smt=' . $current_smt : ''),
 								'onclick="javascript:get_kleeja_link($(this).attr(\'href\'), \'#content\'); return false;"' 
 							); 
 

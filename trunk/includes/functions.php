@@ -1507,7 +1507,7 @@ function user_can($acl_name, $group_id = 0)
 
 	if($group_id == 0)
 	{
-		$group_id = $userinfo['group_id'];	
+		$group_id = $userinfo['group_id'];
 	}
 
 	return (bool) $d_groups[$group_id]['acls'][$acl_name];

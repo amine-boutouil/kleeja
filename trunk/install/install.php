@@ -262,7 +262,7 @@ case 'data' :
 			}
 
 		}#for
-		
+
 		if($err == 0)
 		{
 			//add configs
@@ -272,7 +272,7 @@ case 'data' :
 				if(!$SQL->query($sql))
 				{
 					$errors .= implode(':', $SQL->get_error()) . '' . "\n___\n";
-					$sql_err[] = $lang['INST_SQL_ERR'] . ' : ' . $name;					
+					$sql_err[] = $lang['INST_SQL_ERR'] . ' : [configs_values] ' . $cn;
 					$err++;
 				}
 			}
@@ -284,8 +284,25 @@ case 'data' :
 				if(!$SQL->query($sql))
 				{
 					$errors .= implode(':', $SQL->get_error()) . '' . "\n___\n";
-					$sql_err[] = $lang['INST_SQL_ERR'] . ' : ' . $name;	
+					$sql_err[] = $lang['INST_SQL_ERR'] . ' : [ext_values] ' . $cn;
 					$err++;
+				}
+			}
+
+			//add acls
+			foreach($ext_values as $cn=>$ct)
+			{
+				$it = 1;
+				foreach($ct as $ctk)
+				{
+					$sql = "INSERT INTO `{$dbprefix}groups_acl` (`acl_name`, `group_id`, `acl_can`) VALUES ('$cn', '$it', '$ctk');";
+					if(!$SQL->query($sql))
+					{
+						$errors .= implode(':', $SQL->get_error()) . '' . "\n___\n";
+						$sql_err[] = $lang['INST_SQL_ERR'] . ' : [acl_values] ' . $ctk;
+						$err++;
+					}
+					$it++;
 				}
 			}
 		}

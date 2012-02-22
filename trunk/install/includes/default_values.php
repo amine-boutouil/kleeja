@@ -176,4 +176,11 @@ $ext_values[] = array(9, 'ogg', 0, 0, 0, 0);
 $ext_values[] = array(9, 'ogm', 0, 0, 0, 0);
 $ext_values[] = array(9, 'psd', 0, 0, 0, 0);
 
+//
+// ACLs
+//
 
+$acls_values = array();
+
+//$acls_values['name of acl'] = array(admins, guests, users);
+$acls_values['enter_acp'] = array(1, 0, 0);

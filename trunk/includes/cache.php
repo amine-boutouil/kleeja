@@ -370,7 +370,7 @@ if (!($d_groups = $cache->get('data_groups')))
 	
 	#data
 	$query = array(
-					'SELECT'	=> 'g.group_id, g.group_name, g.group_is_default',
+					'SELECT'	=> 'g.*',
 					'FROM'		=> "{$dbprefix}groups g",
 					'ORDER_BY'	=> 'g.group_id ASC',
 					);
@@ -383,7 +383,7 @@ if (!($d_groups = $cache->get('data_groups')))
 	{
 		$d_groups[$row['group_id']]['data'] = $row;
 		$d_groups[$row['group_id']]['configs'] = array(); 
-		$d_groups[$row['group_id']]['acl'] = array(); 
+		$d_groups[$row['group_id']]['acls'] = array(); 
 	}
 	$SQL->freeresult($result);
 	

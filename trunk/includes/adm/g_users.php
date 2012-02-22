@@ -365,6 +365,7 @@ break;
 case 'group_data':
 	$req_group	= isset($_GET['qg']) ? intval($_GET['qg']) : 0;
 	$group_name	= preg_replace('!{lang.([A-Z0-9]+)}!e', '$lang[\'\\1\']', $d_groups[$req_group]['data']['group_name']);
+	$gdata		= $d_groups[$req_group]['data'];
 
 	$query = array(
 					'SELECT'	=> 'c.name, c.option',
@@ -376,7 +377,7 @@ case 'group_data':
 	$result = $SQL->build($query);
 
 	$data = array();
-	$cdata= $d_groups[$req_groups]['configs'];
+	$cdata= $d_groups[$req_group]['configs'];
 
 	while($row=$SQL->fetch_array($result))
 	{

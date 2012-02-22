@@ -98,7 +98,7 @@ CREATE TABLE `{$dbprefix}users` (
   `new_password` varchar(200) COLLATE utf8_bin NOT NULL DEFAULT '',
   `hash_key` varchar(200) COLLATE utf8_bin NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
-  KEY `clean_name` (`clean_name`(300))،
+  KEY `clean_name` (`clean_name`(300)),
   KEY `group_id` (`group_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 ";

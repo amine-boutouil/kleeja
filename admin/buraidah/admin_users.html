@@ -265,11 +265,30 @@
 <div class="big-box">
 <h1><a href="{action}&amp;smt=general" onclick="javascript:get_kleeja_link(this.href); return false;">{lang.R_GROUPS}</a> &raquo; {lang.EDIT_DATA} ({group_name})</h1>
 <form method="post" action="{action_all}" id="edit_data_form">
+<div class="section">
+	<h3><label for="group_name">{lang.GROUP_NAME}</label></h3>
+	<div class="box">
+		<IF NAME="gdata.group_is_essential">
+			{group_name}
+		<ELSE>
+			<input type="text" name="group_name" id="group_name" value="{gdata.group_name}" size="30" />
+		</IF>
+	</div>
+</div>
+<div class="br"></div>
+<div class="section">
+	<h3><label for="group_name">{lang.GROUP_IS_DEFAULT}</label></h3>
+	<div class="box">
+		<input type="radio" name="group_is_default" id="group_is_default" value="1" <IF NAME="gdata.group_is_default == 1">checked="checked"</IF> /> <span style="color:green">{lang.YES}</span> &nbsp; &nbsp; &nbsp; &nbsp;
+		<input type="radio" name="group_is_default" id="group_is_default" value="0" <IF NAME="gdata.group_is_default == 0">checked="checked"</IF> /> <span style="color:red">{lang.NO}</span>
+	</div>
+</div>
+<div class="br"></div>
 
+<hr />
 <LOOP NAME="data">
-{{option}}
+	{{option}}
 </LOOP>
-
 
 <div class="br"></div>
 

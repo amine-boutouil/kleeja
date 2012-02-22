@@ -290,7 +290,7 @@ case 'data' :
 			}
 
 			//add acls
-			foreach($ext_values as $cn=>$ct)
+			foreach($acls_values as $cn=>$ct)
 			{
 				$it = 1;
 				foreach($ct as $ctk)

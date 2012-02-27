@@ -1,5 +1,7 @@
 <!-- markItUp! -->
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}js/markitup/jquery.markitup.pack.js"></script>
+
+<head>
 <link rel="stylesheet" type="text/css" href="{STYLE_PATH_ADMIN}js/markitup/skins/markitup/style.css" />
 <link rel="stylesheet" type="text/css" href="{STYLE_PATH_ADMIN}js/markitup/sets/html/style.css" />
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}js/markitup/sets/html/set.js"></script>
@@ -11,8 +13,11 @@ $(document).ready(function() { $('#rules_text').markItUp(mySettings); });
 <!-- / markItUp! -->
 
 <!-- the big box begin -->
+</head>
+   <div class="tit_con">
+<h1>{lang.R_RULES}</h1>   
+   </div>
 <div class="big-box">
-<h1>{lang.R_RULES}</h1>
 <h2>{lang.RULES_EXP}</h2>
 
 
@@ -38,11 +43,7 @@ $(document).ready(function() { $('#rules_text').markItUp(mySettings); });
 <!-- button -->
 <p>
 	<input type="hidden" name="submit" value="1" />
-	<button type="submit" id="submit" name="submit" class="btn" onclick="javascript:submit_kleeja_data('#ban_form', '#content', 0); return false;"><span>{lang.UPDATE_RULES}</span></button>
-</p>
-
-
-{H_FORM_KEYS}
+	<button type="submit" id="submit" name="submit" class="btn" onclick="javascript:submit_kleeja_data('#ban_form', '#content', 0); return false;"><span>{lang.UPDATE_RULES}</span></button></p>{H_FORM_KEYS}
 </form>
 </div>
 <!-- the big box end -->

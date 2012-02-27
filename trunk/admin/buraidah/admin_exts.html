@@ -1,10 +1,9 @@
-
-
-
 <IF NAME="current_smt == general">
 <!-- the big box begin -->
-<div class="big-box">
+   <div class="tit_con">
 <h1>{lang.R_EXTS}</h1>
+   </div>
+<div class="big-box">
 <form method="post" action="{action}" name="extsform" id="extsform">
 
 
@@ -58,9 +57,11 @@
 <!-- the big box end -->
 <ELSEIF NAME="current_smt == calc">
 <!-- convertor -->
+   <div class="tit_con">
+<h1>{lang.R_EXTS} &raquo; {lang.BCONVERTER}</h1>
+   </div>
 <!-- the big box begin -->
 <div class="big-box">
-<h1>{lang.R_EXTS} &raquo; {lang.BCONVERTER}</h1>
 
 <script type="text/javascript">
 /*Created by: Uncle Jim :: http://jdstiles.com/javamain.html */
@@ -128,8 +129,10 @@
 
 <!-- add new EXT. -->
 <!-- the big box begin -->
-<div class="big-box">
+   <div class="tit_con">
 <h1>{lang.R_EXTS} &raquo; {lang.ADD_NEW_EXT}</h1>
+   </div>
+<div class="big-box">
 
 <form method="post" action="{action}" id="add_new_ext">
 

@@ -1,5 +1,7 @@
 <!-- markItUp! -->
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}js/markitup/jquery.markitup.pack.js"></script>
+
+<head>
 <link rel="stylesheet" type="text/css" href="{STYLE_PATH_ADMIN}js/markitup/skins/markitup/style.css" />
 <link rel="stylesheet" type="text/css" href="{STYLE_PATH_ADMIN}js/markitup/sets/html/style.css" />
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}js/markitup/sets/html/set.js"></script>
@@ -10,9 +12,12 @@ $(document).ready(function() { $('#template_content').markItUp(mySettings); });
 </script>
 <!-- / markItUp! -->
 
+</head>
+   
 <h1><a href="./?cp=m_styles" onclick="javascript:get_kleeja_link(this.href, '#content'); return false;">{lang.R_STYLES}</a> &raquo; {lang.EDIT}</h1>
-
+   <div class="tit_con">
 <h2>{tpl_path}</h2>
+    </div>
 <form method="post" action="{action}" id="edit_form">
 
 <!-- textarea -->

@@ -6,10 +6,11 @@
 </div>
 <div class="br"></div>
 </IF>
-
+   <div class="tit_con">
+<h1>{lang.R_PLUGINS}</h1>
+   </div>
 <!-- the big box begin -->
 <div class="big-box">
-<h1>{lang.R_PLUGINS}</h1>
 
 <h2>{lang.PLUGINS_EX}</h2>
 
@@ -83,14 +84,14 @@
 
 <div class="note-info"><strong>{lang.NOTE} !</strong> {klj_d_s}</div>
 
-
-<!-- add new plugin -->
 <ELSEIF NAME="current_smt == newplg">
-<div class="note-info"><strong>{lang.NOTE} !</strong> {lang.PLUGIN_CONFIRM_ADD}</div>
+<!-- add new plugin -->
 <!-- the big box begin -->
+   <div class="tit_con">
+<h1>{lang.ADD_NEW_PLUGIN}</h1>   
+   </div>
 <div class="big-box">
-<h1>{lang.ADD_NEW_PLUGIN}</h1>
-
+<div class="note-info"><strong>{lang.NOTE} !</strong> {lang.PLUGIN_CONFIRM_ADD}</div>
 
 <form method="post" action="{action}" enctype="multipart/form-data">
 

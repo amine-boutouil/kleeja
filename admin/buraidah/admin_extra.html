@@ -1,5 +1,7 @@
 <!-- markItUp! -->
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}js/markitup/jquery.markitup.pack.js"></script>
+
+<head>
 <link rel="stylesheet" type="text/css" href="{STYLE_PATH_ADMIN}js/markitup/skins/markitup/style.css" />
 <link rel="stylesheet" type="text/css" href="{STYLE_PATH_ADMIN}js/markitup/sets/html/style.css" />
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}js/markitup/sets/html/set.js"></script>
@@ -10,11 +12,15 @@ $(document).ready(function() { $('#ex_header').markItUp(mySettings);$('#ex_foote
 </script>
 <!-- / markItUp! -->
 <!-- the big box begin -->
-<div class="big-box">
-<form method="post" action="{action}" id="extra_form">
+</head>
 <IF NAME="current_smt == he">
 <!-- header extra -->
+   <div class="tit_con">
 <h1>{lang.ADD_HEADER_EXTRA}</h1>
+   </div>
+<div class="big-box">
+<form method="post" action="{action}" id="extra_form">
+
 <h2>{lang.EX_HEADER_N}</h2>
 
 <!-- textarea header -->
@@ -25,7 +31,9 @@ $(document).ready(function() { $('#ex_header').markItUp(mySettings);$('#ex_foote
 
 <ELSEIF NAME="current_smt == fe">
 <!-- footer extra -->
+  <div class="tit_con">
 <h1>{lang.ADD_FOOTER_EXTRA}</h1>
+  </div>
 <h2>{lang.EX_FOOTER_N}</h2>
 
 <!-- textarea footer -->

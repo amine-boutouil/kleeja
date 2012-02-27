@@ -1,8 +1,10 @@
 
 <IF NAME="current_smt == general">
 <!-- the big box begin -->
-<div class="big-box">
+   <div class="tit_con">
 <h1>{lang.R_GROUPS}</h1>
+   </div>
+<div class="big-box">
 
 <!-- start data table -->
 <IF NAME="no_results">
@@ -43,8 +45,10 @@
 
 
 <!-- the big box begin -->
+   <div class="tit_con">
+<h1>{lang.ADD_NEW_GROUP}</h1>   
+   </div>
 <div class="big-box">
-<h1>{lang.ADD_NEW_GROUP}</h1>
 <form method="post" action="{action_all}" id="add_group_form">
 <div class="section">
 	<h3><label for="gname">{lang.GROUP_NAME}</label></h3>
@@ -78,8 +82,10 @@
 
 
 <!-- the big box begin -->
+   <div class="tit_con">
+<h1>{lang.DELETE_GROUP}</h1>   
+   </div>
 <div class="big-box">
-<h1>{lang.DELETE_GROUP}</h1>
 <form method="post" action="{action_all}" id="del_group_form">
 <div class="section">
 	<h3><label for="dgroup">{lang.GROUP}</label></h3>
@@ -119,12 +125,13 @@
 
 <ELSEIF NAME="show_results">
 <!-- the big box begin -->
-<div class="big-box">
+   <div class="tit_con">
 <h1>{lang.R_USERS} 
 <IF NAME="is_search"> &raquo; {lang.SEARCH_USERS} ( {nums_rows} )</IF>
 <IF NAME="current_smt == show_au"> &raquo; {lang.ADMINISTRATORS}</IF>
 </h1>
-
+   </div>
+<div class="big-box">
 <!-- if not normal user system, tell him --> 
 <IF NAME="user_not_normal">
 <div class="note-info">{lang.USERS_NOT_NORMAL_SYS}</div>
@@ -194,8 +201,11 @@
 <!-- add new user -->
 <ELSEIF NAME="current_smt == new_u">
 <!-- the big box begin -->
-<div class="big-box">
+   <div class="tit_con">
 <h1>{lang.R_USERS} &raquo; {lang.NEW_USER}</h1>
+   </div>
+<div class="big-box">
+
 <form method="post" action="{action_all}" id="add_user_form">
 
 <div class="section">
@@ -229,9 +239,11 @@
 
 
 <ELSEIF NAME="current_smt == group_acl">
+   <div class="tit_con">
+<h1><a href="{action}&amp;smt=general" onclick="javascript:get_kleeja_link(this.href); return false;">{lang.R_GROUPS}</a> &raquo; {lang.EDIT_ACL} ({group_name})</h1>   
+   </div>
 <!-- the big box begin -->
 <div class="big-box">
-<h1><a href="{action}&amp;smt=general" onclick="javascript:get_kleeja_link(this.href); return false;">{lang.R_GROUPS}</a> &raquo; {lang.EDIT_ACL} ({group_name})</h1>
 <form method="post" action="{action_all}" id="edit_acl_form">
 
 <LOOP NAME="acls">
@@ -261,9 +273,11 @@
 
 
 <ELSEIF NAME="current_smt == group_data">
+   <div class="tit_con">
+<h1><a href="{action}&amp;smt=general" onclick="javascript:get_kleeja_link(this.href); return false;">{lang.R_GROUPS}</a> &raquo; {lang.EDIT_DATA} ({group_name})</h1>   
+   </div>
 <!-- the big box begin -->
 <div class="big-box">
-<h1><a href="{action}&amp;smt=general" onclick="javascript:get_kleeja_link(this.href); return false;">{lang.R_GROUPS}</a> &raquo; {lang.EDIT_DATA} ({group_name})</h1>
 <form method="post" action="{action_all}" id="edit_data_form">
 <div class="section">
 	<h3><label for="group_name">{lang.GROUP_NAME}</label></h3>

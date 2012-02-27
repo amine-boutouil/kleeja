@@ -12,8 +12,10 @@
 
 
 <!-- the big box begin -->
+   <div class="tit_con">
+<h1>{usernamelang}</h1>   
+   </div>
 <div class="big-box">
-<h1>{usernamelang}</h1>
 
 <IF NAME="last_visit">
 <div class="section">
@@ -69,9 +71,10 @@
 
 
 <!-- the big box begin -->
+   <div class="tit_con">
+<h1>{lang.GENERAL_STAT}</h1>   
+   </div>
 <div class="big-box">
-
-<h1>{lang.GENERAL_STAT}</h1>
 
 <div class="section">
 	<h3>{lang.AUSERS_NUM}</h3>
@@ -112,9 +115,11 @@
 <!-- the big box end -->
 
 <ELSEIF NAME="current_smt == other">
+   <div class="tit_con">
+<h1>{lang.OTHER_INFO}</h1>
+   </div>
 <!-- the big box begin -->
 <div class="big-box">
-<h1>{lang.OTHER_INFO}</h1>
 
 <div class="section">
 	<h3>{lang.KLEEJA_VERSION}</h3>
@@ -148,8 +153,10 @@
 <!-- the big box end -->
 
 <!-- the big box begin -->
+   <div class="tit_con">
+<h1>{lang.SEARCH_STAT}</h1>   
+   </div>
 <div class="big-box">
-<h1>{lang.SEARCH_STAT}</h1>
 
 <div class="section">
 	<h3>Google</h3>
@@ -174,8 +181,10 @@
 
 <IF NAME="sql_debug">
 <!-- the big box begin -->
+   <div class="tit_con">
+<h1>SQL DEBUGS</h1>   
+   </div>
 <div class="big-box">
-<h1>SQL DEBUGS</h1>
 <div class="dir left" style="direction:ltr;overflow:scroll;height:200px;border:1px #ccc dotted;width:100%">
 	<table>
 	<LOOP NAME="sql_debug">
@@ -195,8 +204,10 @@
 
 <ELSEIF NAME="current_smt == team">
 <!-- the big box begin -->
-<div class="big-box">
+   <div class="tit_con">
 <h1>{lang.KLEEJA_TEAM}</h1>
+   </div>
+<div class="big-box">
 
 <div class="section">
 	<h3>Saanina</h3>

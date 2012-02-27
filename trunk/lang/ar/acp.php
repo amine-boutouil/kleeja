@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 //
 // kleeja language, admin
 // Arabic

@@ -6,9 +6,9 @@
  * dark : 6F7072
  * orange: F78F20
  */
-	
-/* start: menu */
 
+/* start: menu */
+#LogoKLJ { margin: 30px 8px; }
 #menu, #menu_left{
     width: 212px;
     margin-top: 0px; 
@@ -52,7 +52,6 @@
 	position:absolute;
 	left:267px;
 	width:785px;
-	top:0;
 	height:100%;
 	margin:20px 0 20px 20px;
 	padding-bottom:50px;
@@ -330,7 +329,7 @@ margin: 0 0 20px 0; -webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25); -moz-bo
      
   }
 /* Start top navKLJ */
-#topKLJ { height: 96px; display: block; }
+#topKLJ { height: 34px; display: block; }
 .fixed { position: fixed; background: url(../images/topKLJ.jpg) repeat; width: 100%; color: #eeeeee; border-bottom: 1px solid #f47a20; z-index: 999; }
 .wrap_topKLJ { width: 980px; margin: auto; }
 .fix { clear: both; }

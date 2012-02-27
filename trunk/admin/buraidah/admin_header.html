@@ -30,11 +30,6 @@ var go_to = '{go_to}';
 <script type="text/javascript">
 <!--//
 //http://stackoverflow.com/questions/4814398/jquery-check-if-scrollbar-visible-div-with-overflowauto
-(function($) {
-    $.fn.hasScrollBar = function() {
-        return this.get(0).scrollHeight > this.height();
-    }
-})(jQuery);
 jQuery(document).ready(function($){
 
 	$('a[title]').tipsy({gravity: $.fn.tipsy.autoNS});
@@ -65,74 +60,7 @@ jQuery(document).ready(function($){
 		get_kleeja_link('./?' + hash, '#content', {'current_id':div_id, 'current_class':'link_current_thumbnail', 'gomenu_id':gomenu_id});
 	//}
 	
-	if($('#menu').hasScrollBar())
-	{
-		$("#menu_scrollerD").show();
-	}
 });
-
-$(window).resize(function() {
-	if($('#menu').hasScrollBar())
-	{
-		$("#menu_scrollerD").show();
-	}
-	else
-	{
-		$("#menu_scrollerD").css('display', 'none');
-	}
-
-});
-
-function scrollMenuD()
-{
-
-   curScrollDown=$('#menu').scrollTop();
- 	if ( typeof lastCurScrollDown == 'undefined' )
-	{
-		lastCurScrollDown = curScrollDown;
-	}
-   $('#menu').scrollTop(curScrollDown+25);
-   if($('#menu').scrollTop() == curScrollDown)
-   {
-		$("#menu_scrollerD").css('display', 'none');
-   }
-
-   if(curScrollDown+lastCurScrollDown > lastCurScrollDown)
-   {
-		$('#menu_scrollerU').show();
-   }
-   else
-   {
-		$("#menu_scrollerU").css('display', 'none');
-   }
-   
-   lastCurScrollDown = curScrollDown;
-}
-function scrollMenuU()
-{
-   $smallerDiv=$("#menu");
-   curScrollDown=$smallerDiv.scrollTop();
- 	if ( typeof lastCurScrollDown == 'undefined' )
-	{
-		lastCurScrollDown = curScrollDown;
-	}
-   $smallerDiv.scrollTop(curScrollDown-25);
-   if($('#menu').scrollTop() == curScrollDown)
-   {
-		$("#menu_scrollerU").css('display', 'none');
-   }
-
-   if(curScrollDown-lastCurScrollDown < lastCurScrollDown)
-   {
-		$('#menu_scrollerD').show();
-   }
-   else
-   {
-		$("#menu_scrollerD").css('display', 'none');
-   }
-   
-   lastCurScrollDown = curScrollDown;
-}
 
 function get_kleeja_link(URL, ID, p)
 {
@@ -407,49 +335,50 @@ function uncheckAll_exts(form, id, _do_c_) {
 <div id="sign_ajax"><img src="{STYLE_PATH_ADMIN}images/ajax-loader-small.gif" /> {lang.LOADING} ...</div>
 <div id="sign_ajax_error" onclick="javascript:get_kleeja_link('./');"><img src="{STYLE_PATH_ADMIN}images/error.png" /> {lang.ERROR_AJAX}</div>
 
-<!-- scroller for menu -->
-<div id="menu_scrollerU" onclick="javascript:scrollMenuU();">
-	<img src="{STYLE_PATH_ADMIN}images/arrow_up_menu.png" /> 
-</div>
-<div id="menu_scrollerD" onclick="javascript:scrollMenuD();">
-	<img src="{STYLE_PATH_ADMIN}images/arrow_down_menu.png" /> 
-</div>
-
-<!-- top right small icons -->
-<div id="top_small_icons">
-	<a href="http://www.moffed.com" title="الدعم الفني - Arabic Support" target="_blank">
-		<img src="{STYLE_PATH_ADMIN}images/moffed.png" alt="الدعم الفني - Arabic Support" />
-	</a>
-	<a href="{config.siteurl}" title="{lang.RETURN_HOME}">
-		<img src="{STYLE_PATH_ADMIN}images/website.png" alt="{lang.RETURN_HOME}" />
-	</a>
-	<a href="./?cp=b_lgoutcp&amp;{GET_FORM_KEY_GLOBAL}" onclick="javascript:return confirm_from();" title="{lang.R_LGOUTCP}" >
-		<img src="{STYLE_PATH_ADMIN}images/logout.png" alt="{lang.RETURN_HOME}" alt="{lang.R_LGOUTCP}"/>
-	</a>
-	<div class="clear"></div>
+<!-- top nav .. it's fixed :)  -->
+<div id="topKLJ">
+    <div class="fixed">
+        <div class="wrap_topKLJ">
+            <div class="welcome"><a href="#" title=""><img src="{STYLE_PATH_ADMIN}images/userPic.png" alt="" /></a><span>{usernamelang}</span></div>
+            <div class="userNav">
+                <ul>
+                    <li><a href="http://www.moffed.com" title="{lang.SUPPORT_MOFFED}" target="_blank">
+                         <img src="{STYLE_PATH_ADMIN}images/moffed.png" alt="{lang.SUPPORT_MOFFED}" /><span>{lang.SUPPORT_MOFFED}</span></a></li>
+                    <li><a href="{config.siteurl}" title="{lang.RETURN_HOME}">
+                         <img src="{STYLE_PATH_ADMIN}images/settings.png" alt="" /><span>{lang.RETURN_HOME}</span></a></li>
+                    <li><a href="./?cp=b_lgoutcp&amp;{GET_FORM_KEY_GLOBAL}" onclick="javascript:return confirm_from();" title="{lang.R_LGOUTCP}" >
+                         <img src="{STYLE_PATH_ADMIN}images/logout.png" alt="{lang.RETURN_HOME}" alt="{lang.R_LGOUTCP}"/><span>{lang.RETURN_HOME}</span></a></li>
+                </ul>
+            </div>
+        	<div class="clear"></div>
+        </div>
+    </div>
 </div>
 
 <div id="wrap">
 	<!--  menu -->
 	<div id="menu">
-		<div id="MainMenuWrap" class="thumbnail">
+		<ul id="MainMenuWrap2">
 			<div class="link_menu_thumbnail" id="menu_item1" gomenu_id="2" goto="index">
-				<p><a class="seTooltip" title="{lang.R_CPINDEX}" href="./"  onclick="javascript:get_kleeja_link(this.href, '#content', {'current_id':'menu_item1', 'current_class':'link_current_thumbnail',gomenu_id:2}); return false;"><img src="{STYLE_PATH_ADMIN}images/menu/index_button.png" alt="{lang.R_CPINDEX}" style="margin:0 8px;vertical-align:middle;" /></a>
-				</p>
+				<li><a class="seTooltip" title="{lang.R_CPINDEX}" href="./"  onclick="javascript:get_kleeja_link(this.href, '#content', {'current_id':'menu_item1', 'current_class':'link_current_thumbnail',gomenu_id:2}); return false;"><img src="{STYLE_PATH_ADMIN}images/menu/index_button.png" alt="{lang.R_CPINDEX}" style="margin:0 8px;vertical-align:middle;" /><span>{lang.R_CPINDEX}</span></a>
+				</li>
 			</div>
 			<LOOP NAME="adm_extensions_menu">	
 				<div class="({{current}}?link_current_thumbnail:) link_menu_thumbnail" id="menu_item{{i}}" gomenu_id="<EVEN="i">{{i}}<ELSE>{{i2}}</EVEN>" goto="{{goto}}">
-					<p><a class="seTooltip" title="{{title}}" href="{{link}}" onclick="javascript:get_kleeja_link(this.href, '#content', {'current_id':'menu_item{{i}}', 'current_class':'link_current_thumbnail', 'gomenu_id':<EVEN="i">{{i}}<ELSE>{{i2}}</EVEN><IF LOOP="confirm">, confirm:true</IF>}); return false;"><img src="{{icon}}" alt="{{title}}" style="margin:0 8px;vertical-align:middle;" /></a> {{kbubble}}
-					</p>
+				<li><a class="seTooltip2" title="{{title}}" href="{{link}}" onclick="javascript:get_kleeja_link(this.href, '#content', {'current_id':'menu_item{{i}}', 'current_class':'link_current_thumbnail', 'gomenu_id':<EVEN="i">{{i}}<ELSE>{{i2}}</EVEN><IF LOOP="confirm">, confirm:true</IF>}); return false;"><img src="{{icon}}" alt="{{title}}" style="margin:0 8px;vertical-align:middle;" /><span>{{title}}</span>{{kbubble}}</a>
+					</li>
 				</div>
-				<!--  sub menu -->
-				<EVEN="i">
-				<div class="clear"></div>
-				<ul class="go_menu" id="gomenu{{i}}"></ul>
-				</EVEN>
+
 			</LOOP>
-		</div>
+		</ul>
 
 	</div>
-
+	                 	<div id="menu_left">
+	                <LOOP NAME="adm_extensions_menu">
+			          <EVEN="i">
+			          	<div class="clear"></div>
+				           <ul class="go_menu" id="gomenu{{i}}"></ul>
+				      </EVEN>
+				    </LOOP>
+				    </div>
 	<div id="content">

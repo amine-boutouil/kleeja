@@ -311,5 +311,6 @@ $lang = array_merge($lang, array(
 	'FIRST_TIME_HOW6'			=> 'GO menu, it\'s submenu from the main menu, shows links from other sections.',
 	'FIRST_TIME_HOW7'			=> 'Here where the contents appears, clean to understand.',
 	'FIRST_TIME_DONE'			=> 'I got it, thank you',
+	'SUPPORT_MOFFED'			=> 'Arabic Support',
 	'THUMB_DIS_LONGTIME'		=> 'Thumbs are disabled, this will force Kleeja to resize every images to be small here, and cost you time and bandwidth!. Enable thumbs now.', 
 ));

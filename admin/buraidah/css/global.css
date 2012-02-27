@@ -87,8 +87,8 @@ select:active {
 		clear:both;
 		}
 #wrap{
-		width:100% !important;
-
+		width:99% !important;
+		margin: auto;
 		}
 #sign_ajax,#sign_ajax_error{
 	position:fixed;

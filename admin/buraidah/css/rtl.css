@@ -5,12 +5,11 @@
 
 /* global.css */
 body{
-	direction:rtl;
+    direction:rtl;
 	text-align: right;
 }
 
 #pagination { text-align:left;  float:left; }
-
 
 #sign_ajax,#sign_ajax_error{
 	right:40%;
@@ -59,7 +58,7 @@ body{
 		}
 */
 #content{
-	right:267px;
+	right:210px;
 	left:auto;
 	margin:20px 20px 20px 0;
 }

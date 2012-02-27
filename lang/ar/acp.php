@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 //
 // kleeja language, admin
 // Arabic
@@ -335,6 +335,7 @@ $lang = array_merge($lang, array(
 	'DEFAULT_GROUP'				=> 'المجموعة الافتراضية',
 	'G_USERS_MOVE_TO'			=> 'نقل اعضاء المجموعة لـ',
 	'TAKEN_NAMES'				=> 'هذا الاسم من الاسماء المحجوزة، قم باختيار غيره!.',
+	'SUPPORT_MOFFED'			=> 'الدعم الفني',
 
 
 ));

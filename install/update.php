@@ -38,13 +38,6 @@ switch ($db_type)
 include_once ('includes/functions_install.php');
 
 
-
-// Exceptions for development
-if(file_exists('.svn/entries') || file_exists('dev.txt'))
-{
-	define('DEV_STAGE', true);
-}
-
 $order_update_files = array(
 'RC2_to_RC3' => 3,
 'RC4_to_RC5' => 5,
@@ -68,6 +61,9 @@ if(!isset($_GET['step']))
 {
 	$_GET['step'] = 'action_file';
 }
+
+
+$IN_UPDATE = true;
 
 /**
 * print header

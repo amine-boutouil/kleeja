@@ -139,8 +139,8 @@ case 'check':
 
 	$submit_disabled = $no_connection = $mysql_ver = false;
 
-	//config,php
-	if (isset($dbname) && isset($dbuser))
+	//config.php
+	if(isset($dbname) && isset($dbuser))
 	{
 		//connect .. for check
 		$SQL = new SSQL($dbserver, $dbuser, $dbpass, $dbname);
@@ -185,7 +185,7 @@ case 'data' :
 			exit();
 		}
 		
-				//fix bug #r1777 (alta3rq revision)
+		//fix bug #r1777 (alta3rq revision)
 		if(!empty($_POST['password']) && !empty($_POST['password2']) && $_POST['password'] != $_POST['password2'])
 		{
 			echo $lang['PASS_NEQ_PASS2'];

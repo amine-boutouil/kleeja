@@ -33,6 +33,15 @@ include ($_path . 'lang/' . getlang() . '/common.php');
 include ($_path . 'lang/' . getlang() . '/install.php');
 
 
+$IN_DEV = false;
+// Exceptions for development
+if(file_exists($_path . '.svn/entries') || file_exists('dev.txt'))
+{
+	define('DEV_STAGE', true);
+	$IN_DEV = true;
+}
+
+
 /**
 * Return current language of installing wizard 
 */

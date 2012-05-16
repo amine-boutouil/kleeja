@@ -1,7 +1,7 @@
 <div class="BoxInner"><div class="BoxTopImg"></div><div class="BoxBody"><div class="inner">
 	<div class="clr"></div>
 	
-	<img src="style/images/webdev.png" alt="update" /><br />
+	<img src="style/images/update.png" alt="update" /><br />
 	{{if (sizeof($GLOBALS['upfiles'])):}}
 	<p style="text-align:center;">{{echo $lang['INST_CHOOSE_UPDATE_FILE']}}</p>
 	<form  action="{{echo $_SERVER['PHP_SELF'] . '?step=action_file&amp;' . getlang(1)}}" method="post">
@@ -16,7 +16,6 @@
 	</form>
 	{{else:}}
 	<div align="center">
-		<img src="style/images/official_yes.png" alt="ok update version" /><br /><br />
 		<p style="text-align:center;color:green;font-size:20px;">
 			{{echo $lang['INST_UPDATE_CUR_VER_IS_UP']}}
 			<br />

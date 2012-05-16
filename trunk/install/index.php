@@ -59,7 +59,7 @@ case 'language':
 
 	if(isset($_GET['ln']) && !empty($_GET['ln']))
 	{
-		echo '<meta http-equiv="refresh" content="0;url=' . $_SERVER['PHP_SELF'] . '?step=what_is_kleeja&lang=' . htmlspecialchars($_GET['ln']) . '">';
+		echo '<meta http-equiv="refresh" content="0;url=' . $_SERVER['PHP_SELF'] . '?step=official&lang=' . htmlspecialchars($_GET['ln']) . '">';
 		exit;
 	}
 

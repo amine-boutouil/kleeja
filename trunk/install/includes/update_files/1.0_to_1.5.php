@@ -46,4 +46,4 @@ $update_sqls['groups_insert'] = "INSERT INTO `{$dbprefix}groups` (`group_id`, `g
 (4, 'برونزي', 0, 0);";
 
 $update_sqls['admin2founder'] = "ALTER TABLE  `{$dbprefix}users` CHANGE  `admin`  `founder` TINYINT( 1 ) NOT NULL DEFAULT  '0'";
-$update_sqls['group_id4users'] = ALTER TABLE  `{$dbprefix}users` ADD  `group_id` INT( 11 ) UNSIGNED NOT NULL DEFAULT  '3' AFTER  `name` , ADD INDEX (  `group_id` )";
+$update_sqls['group_id4users'] = "ALTER TABLE  `{$dbprefix}users` ADD  `group_id` INT( 11 ) UNSIGNED NOT NULL DEFAULT  '3' AFTER  `name` , ADD INDEX (  `group_id` )";

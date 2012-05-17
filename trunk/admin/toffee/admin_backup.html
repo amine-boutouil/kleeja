@@ -1,0 +1,32 @@
+<!-- the big box begin -->
+   <div class="tit_con">
+<h1>{lang.R_BCKUP}</h1>
+   </div>
+<div class="big-box">
+<h2>{lang.E_BACKUP}</h2>
+
+
+<form method="post" name="bkupfrom" action="{action}" id="bkupfrom">
+
+<table>
+	<tr class="first">
+		<td>{lang.NAME}</td>
+		<td>{lang.SIZE}</td>
+		<td><a href="javascript:void(0);" onclick="checkAll(document.bkupfrom, '_bkup', 'su',  'osilver', 'ored');">{lang.CHECK_ALL}</a></td>
+	</tr>
+	<LOOP NAME="tables_sho">
+	<tr id="su[{{name}}]" class="osilver">
+		<td>{{name}}</td><td>{{size}} kb</td><td><input type="checkbox" name="check[]" value="{{name}}" checked="checked" onclick="change_color(this,'su[{{name}}]', 'osilver', 'ored');" rel="_bkup" /></td>
+	</tr>        
+	</LOOP>       
+</table>
+
+<!-- button  -->
+<p>
+	<button type="submit" id="submit" name="submit" class="btn"><span>{lang.TAKE_BK}</span></button>
+</p>
+
+{H_FORM_KEYS}
+</form>
+</div>
+<!-- the big box end -->

@@ -370,8 +370,8 @@ if(empty($config['h_key']))
 
 //Global vars for Kleeja
 $STYLE_PATH = $config['siteurl'] . 'styles/' . (trim($config['style_depend_on']) == '' ? $config['style'] : $config['style_depend_on']) . '/';
-$STYLE_PATH_ADMIN  = $config['siteurl'] . 'admin/buraidah/';
-$STYLE_PATH_ADMIN_ABS  = PATH . 'admin/buraidah/';
+$STYLE_PATH_ADMIN  = $config['siteurl'] . 'admin/toffee/';
+$STYLE_PATH_ADMIN_ABS  = PATH . 'admin/toffee/';
 $THIS_STYLE_PATH = $config['siteurl'] . 'styles/' . $config['style'] . '/';
 $THIS_STYLE_PATH_ABS = PATH . 'styles/' . $config['style'] . '/';
 

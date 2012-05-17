@@ -3,7 +3,17 @@
 
 
 1.5 - version : 
--[ ] Groups system
--[ ] New ACP style.
+-[ 40% done ] Groups system
+-[ 95% done ] New ACP style.
+	-- Opera 11 [ OK, top menu wont work ok ], On WIN
+	-- Opera 12 [ OK, top menu wont work ok ], On WIN
+	-- Chrome 19 [ OK ], on WIN
+	-- Firefox 12 [ OK ], on WIN
+	-- IEtester
+		--- IE5.5, IE6  [ it just work :), No plans to support them !!! ]
+		--- IE7, IE8 [ OK, but we need to test them as a standalone app ]
+	-- IE9 [ ok ]
+	
 -[ ] Make sure that vb, phpbb integration work with the new group system !
 -[ ] Try the group system with all siutations that may happin ?!!!
+-[ ] Security situation page 

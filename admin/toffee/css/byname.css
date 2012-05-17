@@ -47,8 +47,8 @@
 	content: "\00BB \0020";
 	}
 #menu_left ul li.active {
-		border-bottom:1px #ccc solid;
-		width:50%;
+		border-bottom:1px #ccc dotted;
+		width:70%;
 	}
 #menu_left ul li a:hover{}
 #menu .link_current{ 	
@@ -67,14 +67,33 @@
 		margin-bottom:10px;
 	}
 
-	#content h1{
-		font-size:20px;
-		padding:3px 1px;
-		color:#000;
-		font-weight:500;
+	#content .tit_con{
 		margin-bottom:10px;
 		border-bottom:1px #82CFFA solid;
+		padding:3px 1px;
+		width:100%;
+		height:25px
 	}
+	#content h1{
+		font-size:20px;
+		color:#000;
+		font-weight:500;
+		float:right;
+		width:70%;
+	}
+	#content .second-action{
+		float:left;
+		text-align:left;
+		width:25%;
+		font-size:14px;
+		cursor:pointer;
+	}
+		/*icons of actions*/
+		#content .tit_con .tit_plugins_icon{
+			background:transparent url('../images/small_add.png') no-repeat 1% 50%;
+			padding-left:24px;
+		}
+	
 	#content .section {
 		padding:6px 0;
 		}

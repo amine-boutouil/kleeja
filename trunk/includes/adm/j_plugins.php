@@ -723,7 +723,7 @@ if(isset($_POST['submit_new_plg']))
 
 
 //secondary menu
-$go_menu = array(
-				'general' => array('name'=>$lang['R_PLUGINS'], 'link'=> basename(ADMIN_PATH) . '?cp=j_plugins&amp;smt=general', 'goto'=>'general', 'current'=> $current_smt == 'general'),
-				'newplg' => array('name'=>$lang['ADD_NEW_PLUGIN'], 'link'=> basename(ADMIN_PATH) . '?cp=j_plugins&amp;smt=newplg', 'goto'=>'newplg', 'current'=> $current_smt == 'newplg'),
-	);
+//$go_menu = array(
+//				'general' => array('name'=>$lang['R_PLUGINS'], 'link'=> basename(ADMIN_PATH) . '?cp=j_plugins&amp;smt=general', 'goto'=>'general', 'current'=> $current_smt == 'general'),
+//				'newplg' => array('name'=>$lang['ADD_NEW_PLUGIN'], 'link'=> basename(ADMIN_PATH) . '?cp=j_plugins&amp;smt=newplg', 'goto'=>'newplg', 'current'=> $current_smt == 'newplg'),
+//	);

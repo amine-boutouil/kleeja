@@ -1,0 +1,422 @@
+/**
+ * Specific CSS file 
+ * Kleeja Dev. team.
+ * Colors :
+ * light: F7F7ED
+ * dark : 6F7072
+ * orange: F78F20
+ */
+
+ 
+#top-header {
+	height:40px;
+	padding:15px 0 5px 0;
+	text-align:left;
+ }
+ 
+/* start: menu */
+#menu, #menu_left{
+    width:200px;
+	margin:0;
+	float:right;
+}
+#menu_left{
+	padding:10px 0;
+}
+
+#menu_left ul li { position: relative;}
+
+#menu .link_menu, #menu_left ul li { 
+    display:block;
+	outline: none;
+	cursor: pointer;
+	text-decoration: none;
+	font: 14px Tahoma, arial, Helvetica, sans-serif;
+	padding:6px 5px 6px 0;
+	color: #000;
+}
+#menu .link_menu .kbubbles{
+	font-size:xx-small; vertical-align:top; color:#E0226E;
+}
+
+#menu_left ul li { 
+	font-size:12px !important;
+	margin-right:20px;
+}
+#menu_left ul li:before {
+	content: "\00BB \0020";
+	}
+#menu_left ul li.active {
+		border-bottom:1px #ccc solid;
+		width:50%;
+	}
+#menu_left ul li a:hover{}
+#menu .link_current{ 	
+	border-right: dotted 2px #da7c0c;
+}
+/* end: menu*/
+
+/* start: content */
+#content{
+	float:left;
+	width:750px !important;
+}
+	#content .big-box{
+		padding:10px 0;
+		width:100%;
+		margin-bottom:10px;
+	}
+
+	#content h1{
+		font-size:20px;
+		padding:3px 1px;
+		color:#000;
+		font-weight:500;
+		margin-bottom:10px;
+		border-bottom:1px #82CFFA solid;
+	}
+	#content .section {
+		padding:6px 0;
+		}
+	#content .section h3{
+		color:#000;
+		font-size:12px;
+		font-weight:500;
+		float:left;
+		margin:0; padding:0;
+		line-height:140%;
+		width:40%;
+		vertical-align:middle;
+	}
+	#content .section .box{
+		color:#000;
+		font-size:12px;
+		float:right;
+		width:50%;
+		text-align:center; 
+	}
+	#content .hr{
+			width:100%;
+			margin:20px auto;
+			clear:both;
+			border-bottom:1px solid #eee;
+		}
+	#content .br{
+			width:100%;
+			margin:30px auto;
+			clear:both;
+		}
+	#content .menu_but_in_content{
+		font-size:16px;
+		line-height:140%
+	}
+
+	
+	#content table{
+		width:100%;
+		
+	}
+	#content table td{
+		text-align:center;
+		vertical-align:middle;
+		padding:3px;
+	}
+	#content table .first, #content .first{
+		background: #ccc url('../images/input.png') repeat-x;
+		height:25px;
+	}
+	
+	#content h2{
+		font-size:13px;
+		margin:10px 0;
+	}
+
+#system-message .info, .note-info, .note-done{
+	border-top: 1px solid #82CFFA;
+	border-bottom: 1px solid #96C4EA;
+	border-left: 1px solid #E7F2FB;
+	border-right: 1px solid #E7F2FB;
+	background-color: #F4FAFE;
+	margin-bottom: 18px;
+	margin-top: 10px;
+	padding: 18px 40px 18px 54px;
+	line-height: 1.8em;
+}
+
+#system-message .error, .note-error{
+	border-top: 1px solid #E0226E;
+	border-bottom: 1px solid #E0226E;
+	border-left: 1px solid #FFDBEA;
+	border-right: 1px solid #FFDBEA;
+	background-color: #FFF0F6;
+	margin-bottom: 18px;
+	margin-top: 10px;
+	padding: 18px 40px 18px 54px;
+	line-height: 1.8em;
+}
+
+.note-info strong, .note-error strong, .note-done strong{
+	font-weight:bold;
+}
+/* end: content */
+
+/* start: admin_start.html */
+.firstime-text{
+	font-size:12px;
+}
+.firstime-list{
+	font-size:12px;
+	list-style-type:decimal;
+}
+
+.firstime-button{
+	float:left;
+}
+/* end: admin_start.html */
+
+/* start: admin_calls.html*/
+
+/* end: admin_calls.html*/
+
+/* start: admin_styles.html*/
+.quick_edit_tpls{
+	
+}
+.quick_edit_tpls td {
+	text-align:left;
+}
+/* end: admin_styles.html*/
+
+/* start: admin_show_tpls.html*/
+.s_tpl_x{
+	padding:5px;
+	width:95%;
+}
+/* end: admin_show_tpls.html*/
+
+
+/* start: admin_chack_update.html */
+.update_title {color:#0A71D8;font-size:14px;}
+.update_list {font-size:11px;}
+.update_list li{list-style:square inside; padding:5px;}
+.link_copy {background:#E8E8E8;padding:10px; border-top:1px solid #ccc;border-bottom:1px solid #ccc;color:#666;direction:ltr;font-weight:bold;}
+/* end: admin_chack_update.html */
+
+/* start: admin_reports.html */
+.report-show{
+	border:1px solid #F78F20;
+	background-color:#F7F7ED;
+	padding:8px;
+}
+	.report-show .email-for-msg{
+		background-color:#6F7072;
+		width:auto;
+		color:#F7F7ED;
+		padding:2px;
+		
+	}
+	.report-show .text-for-msg{
+		margin-top:6px;
+	}
+/* end: admin_reports.html */
+/* start: admin_cslls.html */
+.call-show{
+	border:1px solid #F78F20;
+	background-color:#F7F7ED;
+	padding:8px;
+}
+	.call-show .email-for-msg{
+		background-color:#6F7072;
+		width:auto;
+		color:#F7F7ED;
+		padding:2px;
+		
+	}
+	.call-show .text-for-msg{
+		margin-top:6px;
+	}
+/* end: admin_cslls.html */
+
+
+
+
+/* start: admin_login.html */
+#login_body{
+	margin:0 auto;
+	background:#fff url(../images/bg.png) no-repeat top left;
+}
+#login_warp{
+	margin:250px auto;
+	width:340px;
+	font-family:tahoma;
+	font-size:13px;
+	text-align:center;
+}
+
+#login_top{ 
+	width:95%;
+	position:fixed;
+	top:0;
+	left:0;
+	padding:20px;
+}
+	#login_top .title_login{
+			float:right;
+		}
+	#login_top .return_login{
+			float:left;
+		}
+
+#login_warp .acp_login_box{
+		margin-top:40px;
+	}
+	#login_warp .acp_login_box .login-name{
+		margin: 9px;
+		font-size:11px;
+	}
+	#login_warp .acp_login_box .login-name span{
+		font-size:14px;
+		margin:0 5px;
+	}
+	
+	#login_warp .acp_login_box input{
+
+		width:130px;
+		padding:5px;
+		font-size:12px;
+		color:#999;
+	}
+
+	
+	#login_warp .acp_login_box .submit_go{
+		width:40px;
+		margin:0 2px;
+		text-align:center;
+		cursor:pointer;
+		color:#fff;
+	
+	}
+	
+/* end: admin_login.html */
+
+ 
+/* Start top popup_menu */
+.popup_menu {width:100%;}
+.popup_menu ul {margin:0px; padding:0px;}
+.popup_menu li {list-style: none;}
+
+.popup_menu ul {background:#fff;}
+.popup_menu ul li {
+	cursor: pointer;
+}
+
+.popup_menu a {
+ color:#000 !important;
+ height:30px;
+ display:block;
+ line-height: 25px;
+ text-indent: 10px;                   
+ text-decoration:none;
+ width:100%;
+ text-align:center;
+}
+.popup_menu a:hover{
+background-color:#E3F2FF;
+}
+
+
+/*start plugins page*/
+#plugin_boxes{
+	width:530px !important;
+	margin:0 60px;
+}
+
+.plugin_box{
+	width:240px;
+	height:200px;
+	background-color:#F8F8F8;
+	border:1px #ccc solid;
+	cursor:pointer;
+	margin-top:30px;
+	margin-left:20px;
+}
+.plugin_box .plugin_info_show{
+	width:240px;
+	height:200px;
+	display:none;
+	background:#fff url(../images/plugin_show_info.png) no-repeat;
+}
+.plugin_box .plugin_info_show .f_text{
+	text-align:center;
+	font-size:16px;
+	font-weight:600;
+}
+
+.plugin_box .plugin_else .plugin_img{
+	width:222px;
+	height:142px;
+	background:#fff url(../images/default_plguin_icon.png) no-repeat;
+	margin:9px auto;
+}
+.plugin_box  .plugin_else .plugin_img img{
+	display:block;
+	margin:0 auto;
+	padding-top:16%;
+	padding-left:4%;
+}
+
+.plugin_box .plugin_else .plugin_title, .plugin_box .plugin_else .plugin_by{
+	width:222px;
+	margin:2px auto;
+	padding-left:11px;
+	font-weight:600;
+	font-size:14px;
+	text-align:left;
+    -o-text-overflow: ellipsis;   /* Opera */
+    text-overflow:    ellipsis;   /* IE, Safari (WebKit) */
+    overflow:hidden;              /* don't show excess chars */
+    white-space:nowrap;           /* force single line */
+}
+.plugin_box .plugin_else .plugin_by {
+	font-size:11px;
+	font-weight:500;
+	direction:ltr;
+}
+
+.plugin_information{
+}
+.plugin_information .plugin_info_title{
+	font-family: Georgia, Times, 'Times New Roman', serif;
+	font-size:16px;
+	font-weight:600;
+}
+.plugin_information .plugin_info_settings{
+	font-size:12px;
+	padding:10px 4px;
+	font-weight:500;
+	text-align:center;
+	margin:0 auto;
+}
+.plugin_information .plugin_info_desc{
+	padding:10px 4px;
+	text-align:right;	
+}
+
+
+
+/*plugin img*/
+#boxs .bodybox {padding:0 10px;}
+
+/* thumbnail Table */
+.xthumbs ul{width:100%;float:right;margin:3px auto;}
+.xthumbs li {float:right;cursor:pointer;padding:0;margin:0 0 0 3px;}
+#Kload img{width:124px !important;height:124px !important;z-index:700;overflow:hidden}
+#boxs img.mask {position:absolute;top:0;left:0;z-index: 701;}
+#boxs img.expand {position:absolute;top:0;left:0;}
+#boxs img.expand:hover {background:url(../images/expand.png) no-repeat center center !important;}
+
+.kcheck {position:absolute;bottom:1px;right:0;z-index:703;padding:0 !important;margin:1px 0 !important;}
+.kfocus {background: url(../images/expand.png) no-repeat center bottom !important;}
+ul.ktip{float:right;}
+ul.ktip li{width:240px;height:22px;line-height:22px;float: right;border-bottom:1px solid #F0DE7D;text-align:right;}
+ul.ktip li span{float:right;width:84px !important;text-align:left;font-weight:400;padding-left: 10px;}

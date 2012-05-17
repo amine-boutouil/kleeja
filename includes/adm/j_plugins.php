@@ -136,12 +136,14 @@ $result = $SQL->build($query);
 if($SQL->num_rows($result)>0)
 {
 	$arr = array();
-
+	
+	$i = 1;
 	while($row=$SQL->fetch_array($result))
 	{
 		$desc = unserialize(kleeja_base64_decode($row['plg_dsc']));
 
 		$arr[]	= array(
+						'i'					=> $i % 2 == 0,
 						'plg_id'			=> $row['plg_id'],
 						'plg_name'			=> str_replace('-', ' ', $row['plg_name']) . ($row['plg_disabled'] == 1 ? ' [ x ]': ''),
 						'plg_disabled'		=> (int) $row['plg_disabled'] == 1 ? true : false,
@@ -150,9 +152,9 @@ if($SQL->num_rows($result)>0)
 						'plg_dsc'			=> isset($desc[$config['language']]) ? $desc[$config['language']] : $desc['en'],
 						'plg_instructions'	=> trim($row['plg_instructions']) == '' ? false : true,
 						'plg_icon_url'		=> basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;iconp=' . $row['plg_id']
-				);
-				
-				
+				);		
+				$i++;				
+
 		if(!empty($row['plg_icon']))
 		{
 			$plugins_icons[$row['plg_id']] = $row['plg_icon'];

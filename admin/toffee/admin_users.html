@@ -1,10 +1,28 @@
-
+<script type="text/javascript">
+<!--//
+$(document).ready( function(){ 
+    $(".cb-enable").click(function(){
+        var parent = $(this).parents('.switch');
+        $('.cb-disable',parent).removeClass('selected');
+        $(this).addClass('selected');
+        $('.checkbox',parent).attr('checked', true);
+    });
+    $(".cb-disable").click(function(){
+        var parent = $(this).parents('.switch');
+        $('.cb-enable',parent).removeClass('selected');
+        $(this).addClass('selected');
+        $('.checkbox',parent).attr('checked', false);
+    });
+});
+//-->
+</script>
 <IF NAME="current_smt == general">
 <!-- the big box begin -->
-   <div class="tit_con">
-<h1>{lang.R_GROUPS}</h1>
-   </div>
 <div class="big-box">
+<div class="tit_con">
+	<h1>{lang.R_GROUPS}</h1>
+	<div class="second-action tit_groups_icon" onclick="javascript:jQuery.facebox({div:'#group_add_new'}); return false;">{lang.ADD_NEW_GROUP}</div>
+</div>
 
 <!-- start data table -->
 <IF NAME="no_results">
@@ -45,10 +63,12 @@
 
 
 <!-- the big box begin -->
-   <div class="tit_con">
-<h1>{lang.ADD_NEW_GROUP}</h1>   
-   </div>
-<div class="big-box">
+<div id="group_add_new" style="display:none">
+<b>{lang.ADD_NEW_GROUP}</b>   
+
+<br />
+<br />
+
 <form method="post" action="{action_all}" id="add_group_form">
 <div class="section">
 	<h3><label for="gname">{lang.GROUP_NAME}</label></h3>
@@ -72,14 +92,13 @@
 <!-- button -->
 <p>
 	<input type="hidden" name="newgroup" value="1" />
-	<button type="submit" id="submit" name="newgroup" class="btn" onclick="javascript:submit_kleeja_data('#add_group_form', '#content', 0); return false;"><span>{lang.SUBMIT}</span></button>
+	<button type="submit" id="submit" name="newgroup" class="btn" onclick="javascript:$.facebox.close(); submit_kleeja_data('#add_group_form', '#content', 0); return false;"><span>{lang.SUBMIT}</span></button>
 </p>
 
 {H_FORM_KEYS3}
 </form>
-</div>
 <!-- the big box end -->
-
+</div>
 
 <!-- the big box begin -->
    <div class="tit_con">
@@ -239,19 +258,23 @@
 
 
 <ELSEIF NAME="current_smt == group_acl">
-   <div class="tit_con">
-<h1><a href="{action}&amp;smt=general" onclick="javascript:get_kleeja_link(this.href); return false;">{lang.R_GROUPS}</a> &raquo; {lang.EDIT_ACL} ({group_name})</h1>   
-   </div>
 <!-- the big box begin -->
 <div class="big-box">
+<div class="tit_con">
+	<h1><a href="{action}&amp;smt=general" onclick="javascript:get_kleeja_link(this.href); return false;">{lang.R_GROUPS}</a> &raquo; {lang.EDIT_ACL} ({group_name})</h1>   
+</div>
+
 <form method="post" action="{action_all}" id="edit_acl_form">
 
 <LOOP NAME="acls">
-<div class="section">
-	<h3><label for="lname">{{acl_title}}</label></h3>
+<div class="section acls_tab">
+	<h3>{{acl_title}}</h3>
 	<div class="box">
-		<input type="radio" name="acls[{{acl_name}}]" id="acl_{{acl_name}}" value="1" <IF LOOP="acl_can == 1">checked="checked"</IF> /> <span style="color:green">{lang.HE_CAN}</span> &nbsp; &nbsp; &nbsp; &nbsp;
-		<input type="radio" name="acls[{{acl_name}}]" id="acl_{{acl_name}}" value="0" <IF LOOP="acl_can == 0">checked="checked"</IF> /> <span style="color:red">{lang.HE_CAN_NOT}</span>
+	<p class="field switch">
+		<label class="cb-enable<IF LOOP="acl_can == 1"> selected</IF>"><span>{lang.HE_CAN}</span></label>
+		<label class="cb-disable<IF LOOP="acl_can == 0"> selected</IF>"><span>{lang.HE_CAN_NOT}</span></label>
+		<input type="checkbox" id="acls_{{acl_name}}" class="checkbox" name="acls[{{acl_name}}]" />
+	</p>
 	</div>
 </div>
 <div class="clear"></div>

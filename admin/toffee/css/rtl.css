@@ -15,6 +15,13 @@ body{
 	right:40%;
 }
 
+
+#facebox .close{
+  position:absolute;
+  top:5px;
+  right:95%;
+ 
+ }
 /* byname.css 
 
 #menu{

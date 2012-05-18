@@ -195,7 +195,7 @@ foreach($optionss as $key => $option)
 {
 	if(empty($types[$option['type']]))
 	{ 
-		$types[$option['type']] = '<h1>' . $go_menu[$option['type']]['name'] . '</h1>';
+		$types[$option['type']] = '<div class="tit_con"><h1>' . $go_menu[$option['type']]['name'] . '</h1></div>';
 	}
 }
 

@@ -356,13 +356,19 @@ case 'group_acl':
 						'acl_name'	=> $row['acl_name'],
 						'acl_can'	=> (int) $row['acl_can']
 			);
-	
 	}
 	$SQL->freeresult($result);
 
 break;
 
 case 'group_data':
+	
+	#submit
+	if(isset($f))
+	{
+	}
+
+
 	$req_group	= isset($_GET['qg']) ? intval($_GET['qg']) : 0;
 	$group_name	= preg_replace('!{lang.([A-Z0-9]+)}!e', '$lang[\'\\1\']', $d_groups[$req_group]['data']['group_name']);
 	$gdata		= $d_groups[$req_group]['data'];

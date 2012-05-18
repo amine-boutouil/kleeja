@@ -277,6 +277,26 @@ case 'data' :
 				}
 			}
 
+			//add groups configs
+			foreach($config_values as $cn)
+			{
+				if($cn[4] != 'groups')
+				{
+					continue;
+				}
+
+				foreach(array(1, 2, 3) as $im)
+				{
+					$sql = "INSERT INTO `{$dbprefix}groups_data` (`group_id`, `name`, `value`) VALUES ('$im', '$cn[0]', '$cn[1]');";				
+					if(!$SQL->query($sql))
+					{
+						$errors .= implode(':', $SQL->get_error()) . '' . "\n___\n";
+						$sql_err[] = $lang['INST_SQL_ERR'] . ' : [groups_configs_values] ' . $cn;
+						$err++;
+					}
+				}
+			}
+
 			//add exts
 			foreach($ext_values as $cn)
 			{

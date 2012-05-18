@@ -14,6 +14,17 @@
 	text-align:left;
  }
  
+.cb-enable, .cb-disable, .cb-enable span, .cb-disable span { background: url(../images/switch.gif) repeat-x; display: block; float: left; }
+.cb-enable span, .cb-disable span { line-height: 30px; display: block; background-repeat: no-repeat; font-weight: bold; }
+.cb-enable span { background-position: left -90px; padding: 0 10px; }
+.cb-disable span { background-position: right -180px;padding: 0 10px; }
+.cb-disable.selected { background-position: 0 -30px; }
+.cb-disable.selected span { background-position: right -210px; color: #fff; }
+.cb-enable.selected { background-position: 0 -60px; }
+.cb-enable.selected span { background-position: left -150px; color: #fff; }
+.switch label { cursor: pointer; }
+.switch input { display: none; }
+ 
 /* start: menu */
 #menu, #menu_left{
     width:200px;
@@ -93,6 +104,10 @@
 			background:transparent url('../images/small_add.png') no-repeat 1% 50%;
 			padding-left:24px;
 		}
+		#content .tit_con .tit_groups_icon{
+			background:transparent url('../images/group_add.png') no-repeat 1% 50%;
+			padding-left:24px;
+		}
 	
 	#content .section {
 		padding:6px 0;
@@ -114,6 +129,13 @@
 		width:50%;
 		text-align:center; 
 	}
+	#content .section .box label{
+		padding:4px;
+	}
+	#content .section .box input[type='radio']{
+		margin:0 4px;
+	}
+
 	#content .hr{
 			width:100%;
 			margin:20px auto;
@@ -287,8 +309,10 @@
 		}
 
 #login_warp .acp_login_box{
-		margin-top:40px;
+		margin:40px auto;
+		width:190px;
 	}
+
 	#login_warp .acp_login_box .login-name{
 		margin: 9px;
 		font-size:11px;
@@ -299,7 +323,6 @@
 	}
 	
 	#login_warp .acp_login_box input{
-
 		width:130px;
 		padding:5px;
 		font-size:12px;
@@ -313,7 +336,6 @@
 		text-align:center;
 		cursor:pointer;
 		color:#fff;
-	
 	}
 	
 /* end: admin_login.html */
@@ -379,9 +401,7 @@ background-color:#E3F2FF;
 }
 .plugin_box  .plugin_else .plugin_img img{
 	display:block;
-	margin:0 auto;
-	padding-top:16%;
-	padding-left:4%;
+	margin:auto auto;
 }
 
 .plugin_box .plugin_else .plugin_title, .plugin_box .plugin_else .plugin_by{
@@ -434,8 +454,35 @@ background-color:#E3F2FF;
 #boxs img.expand {position:absolute;top:0;left:0;}
 #boxs img.expand:hover {background:url(../images/expand.png) no-repeat center center !important;}
 
-.kcheck {position:absolute;bottom:1px;right:0;z-index:703;padding:0 !important;margin:1px 0 !important;}
-.kfocus {background: url(../images/expand.png) no-repeat center bottom !important;}
+.kcheck {bottom:1px;right:0;z-index:703;padding:0 !important;margin:1px 0 !important;}
+.kfocus {background-color:#ccc;}
 ul.ktip{float:right;}
 ul.ktip li{width:240px;height:22px;line-height:22px;float: right;border-bottom:1px solid #F0DE7D;text-align:right;}
 ul.ktip li span{float:right;width:84px !important;text-align:left;font-weight:400;padding-left: 10px;}
+
+
+
+/*PHP info*/
+.big-box .php1{
+}
+.big-box .php1 td{
+	border-bottom:1px dotted #ccc;
+	direction:ltr;
+	text-align:left;
+}
+
+.big-box .php1 td.row1{
+	float:left;
+	background-color:#ccc;
+}
+.big-box .php1 td.row2{
+	float:right;
+}
+
+
+/*acls*/
+.acls_tab{
+	border-bottom:1px dotted #ccc;
+	padding:3px;
+	height:25px;
+}

@@ -21,7 +21,7 @@
 <ELSE>
 <div id="plugin_boxes">
 <LOOP NAME="arr">
-<div class="plugin_box" onclick="javascript:jQuery.facebox({div:'#plugin-{{plugin_id}}'});" 
+<div class="plugin_box" onclick="javascript:jQuery.facebox({div:'#plugin-{{plg_id}}'});" 
 	onmouseover="javascript:$('.plugin_info_show').show();$('.plugin_else').hide();" 
 	onmouseout="javascript:$('.plugin_info_show').hide();$('.plugin_else').show();"
 	style="float:<IF LOOP="i">left<ELSE>right</IF>">
@@ -32,7 +32,7 @@
 		<div class="plugin_by">{{plg_author}}</div>
 	</div>
 
-<div id="plugin-{{plugin_id}}" style="display:none;">
+<div id="plugin-{{plg_id}}" style="display:none;">
 <div class="plugin_information">
 	<div class="plugin_info_title">{{plg_name}} {{plg_ver}}</div>
 	<div class="plugin_info_desc">{{plg_dsc}}</div>

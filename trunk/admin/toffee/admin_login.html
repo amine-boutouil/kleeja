@@ -15,8 +15,7 @@
 	<!--
 		$(document).ready(function() {
 			hash = window.location.hash.replace('#!', '');
-			if(hash != '')
-			{
+			if(hash != ''){
 				$('#login_form').attr('action', $('form').attr('action') + '#!' + hash);
 			}
 			
@@ -44,7 +43,7 @@
 		<form action="{action}" method="post" style="clear: both;" id="login_form">
 		<div class="acp_login_box">
 			<p>
-				<div class="login-name"><span>{username}</span> ({not_you})<div>
+				<div class="login-name"><span>{username}</span> ({not_you})</div>
 				<br />
 				<input type="hidden" name="lname" id="lname" value="{username}" />
 				<input type="text" id="toggler" value="{lang.PASSWORD}" />
@@ -52,8 +51,8 @@
 			</p>
 				
 				
-				{H_FORM_KEYS}
-				<input type="hidden" name="kid" value="{KEY_FOR_WEE}" />
+			{H_FORM_KEYS}
+			<input type="hidden" name="kid" value="{KEY_FOR_WEE}" />
 
 			
 			<div class="clear"></div>

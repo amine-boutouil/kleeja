@@ -39,49 +39,45 @@ jQuery(document).ready(function($){
 	//for # in address bar
 	hash = window.location.hash.replace('#!', '');
 	where_are_we = hash.match(/cp\=([0-9a-z_]+)/);
-	if(!where_are_we)
-	{
+	if(!where_are_we){
 		where_are_we = 'index';
-	}
-	else
-	{
+	}else{
 		where_are_we = where_are_we[1];
 	}
 
 	console.debug('where_are_we='+where_are_we);
 	//for go menu
-	div_id = $('div[goto='+ where_are_we +']').attr('id');
-	gomenu_id = $("div[goto='"+ where_are_we +"']").attr('gomenu_id').replace(/^\s+|\s+$/g,"");
+	if(where_are_we != 'php_info'){
+		div_id = $('div[goto='+ where_are_we +']').attr('id');
+		gomenu_id = $("div[goto='"+ where_are_we +"']").attr('gomenu_id').replace(/^\s+|\s+$/g,"");
+	}else if(where_are_we == 'php_info'){
+		div_id = 'menu_item1'; gomenu_id = '1';
+	}
+
 	console.debug('div_id='+div_id);
-	console.debug('gomenu_id='+gomenu_id);
-
-
+	console.debug('gomenu_id='+gomenu_id);	
 	//if(hash != '')
 	//{
 		//alert(hash)
-		get_kleeja_link('./?' + hash, '#content', {'current_id':div_id, 'current_class':'link_current', 'gomenu_id':gomenu_id});
+	get_kleeja_link('./?' + hash, '#content', {'current_id':div_id, 'current_class':'link_current', 'gomenu_id':gomenu_id});
 	//}
 	
 });
 
 function get_kleeja_link(URL, ID, p)
 {
-	if(!p)
-	{
+	if(!p){
 		p = {};
 	}
 
-	if(!ID)
-	{
+	if(!ID){
 		ID = '#content';
 	}
 
 	$("#sign_ajax_error").css('display', 'none');
 
-	if(p['confirm'])
-	{
-		if(!confirm_from())
-		{
+	if(p['confirm']){
+		if(!confirm_from()){
 			return;
 		}
 	}
@@ -89,14 +85,12 @@ function get_kleeja_link(URL, ID, p)
 	//$(ID).css('display', 'none');
 	$(ID).addClass('show_less');
 	
-	if(URL.indexOf('?') == -1)
-	{
+	if(URL.indexOf('?') == -1){
 		URL += '?';
 	}
 	
 	window.location.hash = '!' + URL.replace('&amp;', '&').split('?', 2)[1];
-	if(window.location.hash.indexOf('formkey') != -1)
-	{
+	if(window.location.hash.indexOf('formkey') != -1){
 		window.location.hash = window.location.hash.replace(/&formkey=[a-z0-9]+/, '');
 	}
 
@@ -111,51 +105,36 @@ function get_kleeja_link(URL, ID, p)
 			$("#sign_ajax").css('display', 'none');
 
 			//not login 
-			if(R.code == 999)
-			{
+			if(R.code == 999){
 				location.href = './';
-			}
-			else if(R.code == 888)
-			{
+			} else if(R.code == 888) {
 				alert(R.content);
 				get_kleeja_link(URL, ID);
 				return;
-			}
-			else
-			{
+			} else {
 				$(ID).html(R.content);
-				
-				if(p['current_id'])
-				{
+
+				if(p['current_id']){
 					$('.' + p['current_class']).removeClass(p['current_class']);
 					$('#' + p['current_id']).addClass(p['current_class']);
 				}
-				
+
 				$(ID).removeClass('show_less');
 				$(ID).fadeIn(100);
 
-				if($('body').scrollTop() > 0 && $('body').scrollTop() > 200)
-				{
+				if($('body').scrollTop() > 0 && $('body').scrollTop() > 200){
 					$('body').animate({scrollTop:0}, 'slow');
-				}
-				else if($('html').scrollTop() > 0 && $('html').scrollTop() > 230)
-				{
+				} else if($('html').scrollTop() > 0 && $('html').scrollTop() > 230){
 					$('html').animate({scrollTop:0}, 'slow');
 				}
 
-				
-				if(p['gomenu_id'])
-				{
+				if(p['gomenu_id']) {
 					$('.go_menu').html('').fadeOut("slow")
-					if(R.menu)
-					{
+					if(R.menu) {
 						$('#gomenu'+p['gomenu_id']).html(R.menu).fadeIn("slow");
 					}
-				}
-				else
-				{
-					if(R.menu)
-					{
+				} else {
+					if(R.menu) {
 						$("div[class='link_current']").html(R.menu).fadeIn("slow");
 					}
 				}
@@ -171,27 +150,22 @@ function get_kleeja_link(URL, ID, p)
 
 function submit_kleeja_data(FORM_ID, ID, CONFIRM)
 {
-	if(!ID)
-	{
+	if(!ID){
 		ID = '#content';
 	}
 
-	if(CONFIRM)
-	{
-		if(!confirm_from())
-		{
+	if(CONFIRM){
+		if(!confirm_from()){
 			return;
 		}
 	}
 	
 	URL = $(FORM_ID).attr('action');
-	if(URL.indexOf('?') == -1)
-	{
+	if(URL.indexOf('?') == -1){
 		URL += '?';
 	}
 	window.location.hash = '!' + URL.replace('&amp;', '&').split('?', 2)[1];
-	if(window.location.hash.indexOf('formkey') != -1)
-	{
+	if(window.location.hash.indexOf('formkey') != -1){
 		window.location.hash = window.location.hash.replace(/&formkey=[a-z0-9]+/, '');
 	}
 
@@ -211,44 +185,31 @@ function submit_kleeja_data(FORM_ID, ID, CONFIRM)
 			$("#sign_ajax").css('display', 'none');
 			
 			//not login 
-			if(R.code == 999)
-			{
+			if(R.code == 999){
 				location.href = './';
-			}
-			else if(R.code == 888)
-			{
+			}else if(R.code == 888){
 				if(R.content != ''){
 					alert(R.content);
 				}
 				get_kleeja_link($(FORM_ID).attr('action'), ID);
 				return;
-			}
-			else
-			{
+			}else{
 				$(ID).html(R.content);
 				$(ID).removeClass('show_less');
 				$(ID).fadeIn(100);
-				if($('body').scrollTop() > 0 && $('body').scrollTop() > 200)
-				{
+				if($('body').scrollTop() > 0 && $('body').scrollTop() > 200){
 					$('body').animate({scrollTop:0}, 'slow');
-				}
-				else if($('html').scrollTop() > 0 && $('html').scrollTop() > 230)
-				{
+				}else if($('html').scrollTop() > 0 && $('html').scrollTop() > 230){
 					$('html').animate({scrollTop:0}, 'slow');
 				}
 				
-				if(p['gomenu_id'])
-				{
+				if(p['gomenu_id']){
 					$('.go_menu').html('').fadeOut("slow")
-					if(R.menu)
-					{
+					if(R.menu){
 						$('#gomenu'+p['gomenu_id']).html(R.menu).fadeIn("slow");
 					}
-				}
-				else
-				{
-					if(R.menu)
-					{
+				}else{
+					if(R.menu){
 						$("div[class='link_current']").html(R.menu).fadeIn("slow");
 					}
 				}

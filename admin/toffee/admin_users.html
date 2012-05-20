@@ -28,36 +28,59 @@ $(document).ready( function(){
 <IF NAME="no_results">
 ...		
 <ELSE>
-<b>{lang.ESSENTIAL_GROUPS}</b>
-<table>
+<fieldset class="fieldset_groups">
+<legend>{lang.ESSENTIAL_GROUPS}</legend>
+<div class="groups_list">
 	<LOOP NAME="e_groups">
-	<tr>
-		<td style="font-size:16px">{{name}} <IF LOOP="is_default"><img src="{STYLE_PATH_ADMIN}images/default_group.png" alt="{lang.GROUP_IS_DEFAULT}" title="{lang.GROUP_IS_DEFAULT}" /></IF></td>
-		<td><a href="{action}&amp;smt=group_data&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;">{lang.EDIT_DATA}</a></td>
-		<td><a href="{action}&amp;smt=group_acl&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;">{lang.EDIT_ACL}</a></td>
-		<td><a href="{action}&amp;smt=show_group&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;">{lang.USERS}</a></td>
-	</tr>
+	<div class="group_line">
+		<div class="r1">{{name}} <IF LOOP="is_default"><img src="{STYLE_PATH_ADMIN}images/default_group.png" alt="{lang.GROUP_IS_DEFAULT}" title="{lang.GROUP_IS_DEFAULT}" /></IF></div>
+		<div class="r2">
+			<a href="{action}&amp;smt=group_data&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.EDIT_DATA}">
+				<img  src="{STYLE_PATH_ADMIN}images/data_edit.png" alt="{lang.EDIT_DATA}" />
+			</a>
+			<a href="{action}&amp;smt=group_acl&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.EDIT_ACL}">
+				<img  src="{STYLE_PATH_ADMIN}images/acls_edit.png" alt="{lang.EDIT_ACL}" />
+			</a>
+			<a href="{action}&amp;smt=show_group&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.USERS}">
+				<img  src="{STYLE_PATH_ADMIN}images/users_show.png" alt="{lang.USERS}" />
+			</a>
+		</div>
+	<div class="clear"></div>
+	</div>
 	</LOOP>
-</table>
+</div>
+</fieldset>
 
 <div class="br"></div>
 
-<b>{lang.CUSTOM_GROUPS}</b>
-<table>
+<fieldset class="fieldset_groups">
+<legend>{lang.CUSTOM_GROUPS}</legend>
+<div class="groups_list">
 	<LOOP NAME="c_groups">
-	<tr>
-		<td style="font-size:16px">{{name}}  <IF LOOP="is_default"><img src="{STYLE_PATH_ADMIN}images/default_group.png" alt="{lang.GROUP_IS_DEFAULT}" title="{lang.GROUP_IS_DEFAULT}" /></IF></td>
-		<td><a href="{action}&amp;smt=group_data&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;">{lang.EDIT_DATA}</a></td>
-		<td><a href="{action}&amp;smt=group_acl&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;">{lang.EDIT_ACL}</a></td>
-		<td><a href="{action}&amp;smt=show_group&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;">{lang.USERS}</a></td>
-		<td>{lang.DELETE}</td>
-	</tr>
+	<div class="group_line">
+		<div class="r1">{{name}}  <IF LOOP="is_default"><img src="{STYLE_PATH_ADMIN}images/default_group.png" alt="{lang.GROUP_IS_DEFAULT}" title="{lang.GROUP_IS_DEFAULT}" /></IF></div>
+		<div class="r2">
+			<a href="{action}&amp;smt=group_data&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.EDIT_DATA}">
+				<img  src="{STYLE_PATH_ADMIN}images/data_edit.png" alt="{lang.EDIT_DATA}" />
+			</a>
+			<a href="{action}&amp;smt=group_acl&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.EDIT_ACL}">
+				<img  src="{STYLE_PATH_ADMIN}images/acls_edit.png" alt="{lang.EDIT_ACL}" />
+			</a>
+			<a href="{action}&amp;smt=show_group&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.USERS}">
+				<img  src="{STYLE_PATH_ADMIN}images/users_show.png" alt="{lang.USERS}" />
+			</a>
+		
+			<a href="#" onclick="javascript:jQuery.facebox({div:'#delete_group_{{id}}'});  return false;" title="{lang.DELETE}">
+				<img  src="{STYLE_PATH_ADMIN}images/do_delete.png" alt="{lang.DELETE}" />
+			</a>
+		</div>
+	<div class="clear"></div>
+	</div>
 	</LOOP>
-</table>
+</div>
+</fieldset>
 </IF>
-
 <!-- end data table -->
-
 </div>
 <!-- the big box end -->
 
@@ -65,10 +88,8 @@ $(document).ready( function(){
 <!-- the big box begin -->
 <div id="group_add_new" style="display:none">
 <b>{lang.ADD_NEW_GROUP}</b>   
-
 <br />
 <br />
-
 <form method="post" action="{action_all}" id="add_group_form">
 <div class="section">
 	<h3><label for="gname">{lang.GROUP_NAME}</label></h3>
@@ -101,44 +122,33 @@ $(document).ready( function(){
 </div>
 
 <!-- the big box begin -->
-   <div class="tit_con">
-<h1>{lang.DELETE_GROUP}</h1>   
-   </div>
-<div class="big-box">
+<LOOP NAME="c_groups">
+<div id="delete_group_{{id}}" style="display:none;">
+<b>{lang.DELETE_GROUP} : {{name}}</b>
+<br /><br />
 <form method="post" action="{action_all}" id="del_group_form">
-<div class="section">
-	<h3><label for="dgroup">{lang.GROUP}</label></h3>
-	<div class="box">
-		<select name="dgroup" id="dgroup">
-			<LOOP NAME="e_groups"><option value="{{id}}">{{name}}</option></LOOP>
-			<LOOP NAME="c_groups"><option value="{{id}}">{{name}}</option></LOOP>
-		</select>
-	</div>
-</div>
-<div class="clear"></div>
+<input type="hidden" name="dgroup" id="dgroup" value="{{id}}"  />
 <div class="section">
 	<h3><label for="tgroup">{lang.G_USERS_MOVE_TO}</label></h3>
 	<div class="box">
 		<select name="tgroup" id="tgroup">
-			<option value="0">{lang.DEFAULT_GROUP}</option>
+			<IF LOOP="is_default"><ELSE><option value="0">{lang.DEFAULT_GROUP}</option></IF>
 			<LOOP NAME="e_groups"><option value="{{id}}">{{name}}</option></LOOP>
 			<LOOP NAME="c_groups"><option value="{{id}}">{{name}}</option></LOOP>
 		</select>
 	</div>
 </div>
 <div class="clear"></div>
-
 <div class="br"></div>
-
 <!-- button -->
 <p>
 	<input type="hidden" name="delgroup" value="1" />
-	<button type="submit" id="submit" name="delgroup" class="btn" onclick="javascript:submit_kleeja_data('#del_group_form', '#content', 0); return false;"><span>{lang.SUBMIT}</span></button>
+	<button type="submit" id="submit" name="delgroup" class="btn" onclick="javascript:$.facebox.close(); submit_kleeja_data('#del_group_form', '#content', 0); return false;"><span>{lang.SUBMIT}</span></button>
 </p>
-
 {H_FORM_KEYS4}
 </form>
 </div>
+</LOOP>
 <!-- the big box end -->
 
 

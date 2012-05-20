@@ -2,9 +2,11 @@
 !! warrning !! dont open this file with WINDOWS notepad !!
 
 
-1.5 - version : 
--[ 45% done ] Groups system
--[ 95% done ] New ACP style.
+
+
+1.5 - version :
+-[ 47% done ] Groups system
+-[ 96% done ] New ACP style.
 	-- Opera 11 [ OK, top menu wont work ok ], On WIN
 	-- Opera 12 [ OK, top menu wont work ok ], On WIN
 	-- Chrome 19 [ OK ], on WIN
@@ -20,4 +22,6 @@
 -[ ] Security situation page 
 -[ ] ACP firstpage !  
 -[ ] Test upgrades under any curcumstances, and avoids problems that happened before !
--[ ] files, images ACP -> search files from this IP,user
+-[ ] Files, images ACP -> search files from this IP,user
+-[ ] Dealing with the huge invasion of Nginx
+-[ ] Add phrases from within ACP, (show how to embed them in template ?)

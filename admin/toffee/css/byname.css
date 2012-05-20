@@ -129,9 +129,7 @@
 		width:50%;
 		text-align:center; 
 	}
-	#content .section .box label{
-		padding:4px;
-	}
+
 	#content .section .box input[type='radio']{
 		margin:0 4px;
 	}
@@ -480,9 +478,40 @@ ul.ktip li span{float:right;width:84px !important;text-align:left;font-weight:40
 }
 
 
-/*acls*/
+/*users tpl*/
 .acls_tab{
 	border-bottom:1px dotted #ccc;
 	padding:3px;
 	height:25px;
 }
+
+.groups_list{
+
+}
+
+.group_line {
+	border-bottom:1px dotted #ccc;
+}
+.group_line:hover{
+	background-color:#FAFFD6;
+}
+.group_line .r1{
+	float:right;
+}
+.group_line .r2{
+	float:left;
+	text-align:right;
+}
+.group_line .r2 img{
+	padding:0 2px;
+}
+
+fieldset.fieldset_groups { 
+	border:1px solid #ccc;
+	padding:8px;
+ }
+
+fieldset.fieldset_groups legend {
+  padding: 0.2em 0.5em;
+  font-size:16px;
+  }

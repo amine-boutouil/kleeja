@@ -277,7 +277,7 @@ if(isset($_POST['newgroup']))
 //
 if(isset($_POST['delgroup']))
 {
-
+	
 
 }
 

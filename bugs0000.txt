@@ -25,3 +25,13 @@
 -[ ] Files, images ACP -> search files from this IP,user
 -[ ] Dealing with the huge invasion of Nginx
 -[ ] Add phrases from within ACP, (show how to embed them in template ?)
+
+
+NOTE NOTE NOTE :: 
+use this function to extend the group system all the script/
+	user_can($acl_name, $group_id = 0)
+	
+	it will return true of user can or false if he cant 
+	like : 
+	if(user_can('enter_acp')){
+	}

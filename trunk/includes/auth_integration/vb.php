@@ -150,6 +150,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 						if(!$loginadm)
 						{
 							define('USER_ID', $row['userid']);
+							define('GROUP_ID', 3);
 							define('USER_NAME', empty($script_cp1256) || !$script_cp1256 ? $row['username'] : $usrcp->kleeja_utf8($row['username']));
 							define('USER_MAIL', $row['email']);
 							define('USER_ADMIN', $row['usergroupid'] == 6 ? 1 : 0);

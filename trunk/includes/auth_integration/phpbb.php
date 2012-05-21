@@ -154,6 +154,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 				if(!$loginadm)
 				{
 					define('USER_ID', $row['user_id']);
+					define('GROUP_ID', 3);
 					define('USER_NAME', $row['username']);
 					define('USER_MAIL',$row['user_email']);
 					define('USER_ADMIN',($row[$row_leve] == $admin_level) ? 1 : 0);

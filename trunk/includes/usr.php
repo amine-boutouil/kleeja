@@ -154,6 +154,7 @@ class usrcp
 				if(!$loginadm)
 				{
 					define('USER_ID', $row['id']);
+					define('GROUP_ID', $row['group_id']);
 					define('USER_NAME', $row['name']);
 					define('USER_MAIL', $row['mail']);
 					define('LAST_VISIT', $row['last_visit']);
@@ -234,6 +235,16 @@ class usrcp
 		($hook = kleeja_run_hook('id_func_usr_class')) ? eval($hook) : null; //run hook
 		
 		return defined('USER_ID') ? USER_ID : false;
+	}
+	
+	/*
+	group ids
+	*/
+	function group_id ()
+	{
+		($hook = kleeja_run_hook('group_id_func_usr_class')) ? eval($hook) : null; //run hook
+		
+		return defined('GROUP_ID') ? USER_ID : false;
 	}
 
 	/*
@@ -458,6 +469,7 @@ class usrcp
 						$uu_info = unserialize(kleeja_base64_decode($u_info));
 		
 						define('USER_ID', $uu_info['id']);
+						define('GROUP_ID', $uu_info['group_id']);
 						define('USER_NAME', $uu_info['name']);
 						define('USER_MAIL', $uu_info['mail']);
 						define('LAST_VISIT', $uu_info['last_visit']);

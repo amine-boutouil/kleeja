@@ -387,6 +387,21 @@ case 'group_data':
 
 	while($row=$SQL->fetch_array($result))
 	{
+		if($row['name'] == 'language') 
+		{
+			//get languages
+			if ($dh = @opendir(PATH . 'lang'))
+			{
+				while (($file = readdir($dh)) !== false)
+				{
+					if(strpos($file, '.') === false && $file != '..' && $file != '.')
+					{
+						$lngfiles .= '<option ' . ($con['language'] == $file ? 'selected="selected"' : '') . ' value="' . $file . '">' . $file . '</option>' . "\n";
+					}
+				}
+				@closedir($dh);
+			}
+		}
 		$data[] = array(
 						'option'	=> '<div class="section">' . "\n" .  
 										'<h3><label for="' . $row['name'] . '">' . (!empty($lang[strtoupper($row['name'])]) ? $lang[strtoupper($row['name'])] : $olang[strtoupper($row['name'])]) . '</label></h3>' . "\n" .
@@ -563,8 +578,7 @@ if (isset($_POST['submit']) || isset($_POST['newuser']))
 //secondary menu
 $go_menu = array(
 				'general' => array('name'=>$lang['R_GROUPS'], 'link'=> basename(ADMIN_PATH) . '?cp=g_users&amp;smt=general', 'goto'=>'general', 'current'=> $current_smt == 'general'),
-				'users' => array('name'=>$lang['R_USERS'], 'link'=> basename(ADMIN_PATH) . '?cp=g_users&amp;smt=users', 'goto'=>'users', 'current'=> $current_smt == 'users'),
-				'show_au' => array('name'=>$lang['ADMINISTRATORS'], 'link'=> basename(ADMIN_PATH) . '?cp=g_users&amp;smt=show_au', 'goto'=>'show_au', 'current'=> $current_smt == 'show_au'),
+				#'users' => array('name'=>$lang['R_USERS'], 'link'=> basename(ADMIN_PATH) . '?cp=g_users&amp;smt=users', 'goto'=>'users', 'current'=> $current_smt == 'users'),
 				'show_su' => array('name'=>$lang['SEARCH_USERS'], 'link'=> basename(ADMIN_PATH) . '?cp=h_search&amp;smt=users', 'goto'=>'show_su', 'current'=> $current_smt == 'show_su'),
 				'new_u' => array('name'=>$lang['NEW_USER'], 'link'=> basename(ADMIN_PATH) . '?cp=g_users&amp;smt=new_u', 'goto'=>'new_u', 'current'=> $current_smt == 'new_u'),
 	);

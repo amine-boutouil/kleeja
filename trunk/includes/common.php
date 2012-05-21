@@ -283,6 +283,10 @@ $SQL->freeresult($result);
 //check user or guest
 $usrcp->kleeja_check_user();
 
+//+ configs of the current group
+$config += $d_groups[$usrcp->group_id()]['configs'];
+
+
 //no tpl caching in dev stage  
 if(defined('DEV_STAGE'))
 {

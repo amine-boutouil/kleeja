@@ -25,7 +25,7 @@
 -[ ] Files, images ACP -> search files from this IP,user
 -[ ] Dealing with the huge invasion of Nginx
 -[ ] Add phrases from within ACP, (show how to embed them in template ?)
-
+-[ ] Mobile style, see admin/mobile [ related files common.php+admin/index.php ]
 
 NOTE NOTE NOTE :: 
 use this function to extend the group system all the script/

@@ -3,64 +3,36 @@
 <head>
 <title>{lang.KLEEJA_CP} - {config.sitename}</title>
 <!-- top-head -->
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
 <meta http-equiv="Content-Language" content="{lang.LANG_SMALL_NAME}" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
-<link rel="shortcut icon" href="{STYLE_PATH_ADMIN}images/favicon.ico" />
-<link rel="icon" type="image/gif" href="{STYLE_PATH_ADMIN}images/favicon.gif" />
-
-<link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/global.css" />
-<link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/byname.css" />
-<link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/facebox.css" />
-<link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}js/tipsy/tipsy.css" />
-<link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/pop.css" />
-<IF NAME="{lang.DIR}==rtl"><link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/rtl.css" /></IF>	
-<IS_BROWSER="ie6"><link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/ie6.css" /></IS_BROWSER>
-<IS_BROWSER="ie"><link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/ie.css" /></IS_BROWSER>
+<link rel="shortcut icon" href="{DEFAULT_PATH_ADMIN}images/favicon.ico" />
+<link rel="icon" type="image/gif" href="{DEFAULT_PATH_ADMIN}images/favicon.gif" />
+<link rel="stylesheet" href="{STYLE_PATH_ADMIN}/jquery.mobile-1.1.0.min.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}byname.css" />
+<IF NAME="{lang.DIR}==rtl"><link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}rtl.css" /></IF>	
 
 <script type="text/javascript">
 <!--//
-var STYLE_PATH_ADMIN = '{STYLE_PATH_ADMIN}';
+var STYLE_PATH_ADMIN = '{DEFAULT_PATH_ADMIN}';
 var go_to = '{go_to}';
 //-->
 </script>
-<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.min.js"></script>
-<!--script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.ui.min.js"></script-->
-<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/facebox.js"></script>
-<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/tipsy/tipsy.js"></script>
-<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.pop.js"></script>
+<script type="text/javascript" src="{DEFAULT_PATH_ADMIN}js/jquery.min.js"></script>
+ <script src="{STYLE_PATH_ADMIN}/jquery.mobile-1.1.0.min.js"></script>
 <script type="text/javascript">
 <!--//
 jQuery(document).ready(function($){
-	$.pop();
-	$('a[title]').tipsy({gravity: $.fn.tipsy.autoNS});
-	$('a[rel*=facebox]').facebox();
+
+	setTimeout( function(){ window.scrollTo(0, 1); }, 100 );
 
 	//for # in address bar
 	hash = window.location.hash.replace('#!', '');
 	where_are_we = hash.match(/cp\=([0-9a-z_]+)/);
-	if(!where_are_we){
-		where_are_we = 'index';
-	}else{
-		where_are_we = where_are_we[1];
-	}
 
-	console.debug('where_are_we='+where_are_we);
-	//for go menu
-	if(where_are_we != 'php_info'){
-		div_id = $('div[goto='+ where_are_we +']').attr('id');
-		gomenu_id = $("div[goto='"+ where_are_we +"']").attr('gomenu_id').replace(/^\s+|\s+$/g,"");
-	}else if(where_are_we == 'php_info'){
-		div_id = 'menu_item1'; gomenu_id = '1';
-	}
-
-	console.debug('div_id='+div_id);
-	console.debug('gomenu_id='+gomenu_id);	
-	//if(hash != '')
-	//{
-		//alert(hash)
-	get_kleeja_link('./?' + hash, '#content', {'current_id':div_id, 'current_class':'link_current', 'gomenu_id':gomenu_id});
-	//}
+	//get_kleeja_link('./', '#content', {});
+	
 	
 });
 
@@ -128,15 +100,10 @@ function get_kleeja_link(URL, ID, p)
 					$('html').animate({scrollTop:0}, 'slow');
 				}
 
-				if(p['gomenu_id']) {
-					$('.go_menu').html('').fadeOut("slow")
-					if(R.menu) {
-						$('#gomenu'+p['gomenu_id']).html(R.menu).fadeIn("slow");
-					}
-				} else {
-					if(R.menu) {
-						$("div[class='link_current']").html(R.menu).fadeIn("slow");
-					}
+				$('#gomenu').html('').fadeOut("slow")
+				if(R.menu) {
+					mmmenu = R.menu.replace('<a ', '<a data-theme="c" data-icon="" ');
+					$('#gomenu').html(mmmenu).fadeIn("slow");
 				}
 			}
 		},
@@ -203,16 +170,13 @@ function submit_kleeja_data(FORM_ID, ID, CONFIRM)
 					$('html').animate({scrollTop:0}, 'slow');
 				}
 				
-				if(p['gomenu_id']){
-					$('.go_menu').html('').fadeOut("slow")
-					if(R.menu){
-						$('#gomenu'+p['gomenu_id']).html(R.menu).fadeIn("slow");
-					}
-				}else{
-					if(R.menu){
-						$("div[class='link_current']").html(R.menu).fadeIn("slow");
-					}
+				
+				$('#gomenu').html('').fadeOut("slow")
+				if(R.menu){
+						mmmenu = R.menu.replace('<li ', '<li data-theme="c" data-icon="" ');
+						$('#gomenu').html(mmmenu).fadeIn("slow");
 				}
+
 			}
 		},
 		error : function(R){
@@ -295,35 +259,81 @@ function uncheckAll_exts(form, id, _do_c_) {
 <body>
 
 <!-- ajax loading sign -->
-<div id="sign_ajax"><img src="{STYLE_PATH_ADMIN}images/ajax-loader-small.gif" /> {lang.LOADING} ...</div>
-<div id="sign_ajax_error" onclick="javascript:get_kleeja_link('./');"><img src="{STYLE_PATH_ADMIN}images/error.png" /> {lang.ERROR_AJAX}</div>
+<div id="sign_ajax"><img src="{DEFAULT_PATH_ADMIN}images/ajax-loader-small.gif" /> {lang.LOADING} ...</div>
+<div id="sign_ajax_error" onclick="javascript:get_kleeja_link('./');"><img src="{DEFAULT_PATH_ADMIN}images/error.png" /> {lang.ERROR_AJAX}</div>
 
-<div id="wrap">
-	<!-- top header -->
-	<div id="top-header" style="text-transform:capitalize;">
-		{username}
-			<div class="pop">
-            <div class="popup_menu">
-                <ul>
-                    <li><a href="http://www.moffed.com" target="_blank">{lang.SUPPORT_MOFFED}</a></li>
-                    <li><a href="{config.siteurl}">{lang.RETURN_HOME}</a></li>
-                    <li><a href="./?cp=b_lgoutcp&amp;{GET_FORM_KEY_GLOBAL}" onclick="javascript:return confirm_from();" >{lang.R_LGOUTCP}</a></li>
+
+	<!-- home -- first page -->
+        <div data-role="page" id="home">
+            <div data-theme="d" data-role="header">
+                <h3>
+                    Kleeja ACP
+                </h3>
+                <div data-role="navbar" data-iconpos="top">
+                    <ul>
+					
+                        <li>
+                            <a href="{config.siteurl}" data-theme="" data-icon="home">
+                                {lang.RETURN_HOME}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="./?cp=b_lgoutcp&amp;{GET_FORM_KEY_GLOBAL}" onclick="javascript:return confirm_from();" data-theme="" data-icon="delete">
+                                {lang.R_LGOUTCP}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://moffed.com" target="_blank" data-theme="" data-icon="info">
+                                {lang.SUPPORT_MOFFED}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+			</div>
+			<div data-role="content">
+                <ul data-role="listview" data-divider-theme="b" data-inset="true">
+                    <li data-role="list-divider" role="heading">
+                        {lang.MENU}
+                    </li>
+                    <li data-theme="d">
+                        <a href="#page1" onclick="javascript:get_kleeja_link('./', '#content', {}); return false;" data-transition="slide">
+                            {lang.R_CPINDEX}
+                        </a>
+                    </li> 
+					<LOOP NAME="adm_extensions_menu">
+					<li data-theme="d">
+                        <a href="#page1" onclick="javascript:get_kleeja_link('{{link}}', '#content', {}); return false;" data-transition="slide">
+                            {{title}}
+                        </a>
+                    </li>
+					</LOOP>
                 </ul>
             </div>
-		</div>
-	</div>
-	<!--  menu -->
-	<div id="menu">
-			<div class="link_menu" id="menu_item1" gomenu_id="1" goto="start">
-				<a title="{lang.R_CPINDEX}" href="./"  onclick="javascript:get_kleeja_link(this.href, '#content', {'current_id':'menu_item1', 'current_class':'link_current',gomenu_id:1}); return false;"><img src="{STYLE_PATH_ADMIN}images/menu/index_button.png" alt="{lang.R_CPINDEX}" style="margin:0 8px;vertical-align:middle;" /><span>{lang.R_CPINDEX}</span></a>
-				<div id="menu_left"><ul class="go_menu" id="gomenu1"></ul></div>
-			</div>
-			<LOOP NAME="adm_extensions_menu">
-			<div class="({{current}}?link_current:) link_menu" id="menu_item{{i}}" gomenu_id="{{i}}" goto="{{goto}}">
-				<a title="{{title}}" href="{{link}}" onclick="javascript:get_kleeja_link(this.href, '#content', {'current_id':'menu_item{{i}}', 'current_class':'link_current', 'gomenu_id':{{i}}<IF LOOP="confirm">, confirm:true</IF>}); return false;"><img src="{{icon}}" alt="{{title}}" style="margin:0 8px;vertical-align:middle;" /><span>{{title}}</span>{{kbubble}}</a>
-				<div id="menu_left"><ul class="go_menu" id="gomenu{{i}}"></ul></div>
-			</div>
-			</LOOP>
-	</div>
+        </div>
+		
+	<!---- page 1 - content -->
 
-	<div id="content">
+	        <div data-role="page" id="page1">
+            <div data-theme="a" data-role="header">
+                <h3>
+                    Kleeja ACP
+                </h3>
+                <div data-role="navbar" data-iconpos="left">
+                    <ul>
+                        <li>
+                            <a href="#home" data-theme="b" data-icon="arrow-l">
+                                {lang.GO_BACK_BROWSER}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+			    <div data-role="fieldcontain">
+                    <select name="selectmenu1" id="gomenu" onchange="location.href='#page1';javascript:get_kleeja_link(this.options[this.selectedIndex].value); return false;">
+                        <option value="option1">
+                           {lang.MENU}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div data-role="content" id="content">
+

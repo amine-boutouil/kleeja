@@ -284,7 +284,8 @@ $SQL->freeresult($result);
 $usrcp->kleeja_check_user();
 
 //+ configs of the current group
-$config += $d_groups[$usrcp->group_id()]['configs'];
+$config = array_merge($config, (array) $d_groups[$usrcp->group_id()]['configs']);
+
 
 
 //no tpl caching in dev stage  
@@ -337,7 +338,7 @@ if ($config['gzip'] == '1' && !defined('IN_DOWNLOAD') && !defined('IN_ADMIN') &&
 	}
 }
 
-// header .
+//header
 header('Content-type: text/html; charset=UTF-8');	
 header('Cache-Control: private, no-cache="set-cookie"');
 header('Expires: 0');
@@ -374,10 +375,13 @@ if(empty($config['h_key']))
 
 //Global vars for Kleeja
 $STYLE_PATH = $config['siteurl'] . 'styles/' . (trim($config['style_depend_on']) == '' ? $config['style'] : $config['style_depend_on']) . '/';
-$STYLE_PATH_ADMIN  = $config['siteurl'] . 'admin/toffee/';
-$STYLE_PATH_ADMIN_ABS  = PATH . 'admin/toffee/';
-$THIS_STYLE_PATH = $config['siteurl'] . 'styles/' . $config['style'] . '/';
-$THIS_STYLE_PATH_ABS = PATH . 'styles/' . $config['style'] . '/';
+$THIS_STYLE_PATH		= $config['siteurl'] . 'styles/' . $config['style'] . '/';
+$THIS_STYLE_PATH_ABS	= PATH . 'styles/' . $config['style'] . '/';
+$STYLE_PATH_ADMIN 		= $config['siteurl'] . 'admin/'. (is_browser('mobile') ? 'toffee/' : 'toffee/');
+$STYLE_PATH_ADMIN_ABS	= PATH . 'admin/'. (is_browser('mobile') ? 'toffee/' : 'toffee/');
+$DEFAULT_PATH_ADMIN_ABS = PATH . 'admin/toffee/';
+$DEFAULT_PATH_ADMIN		= $config['siteurl'] . 'admin/toffee/';
+
 
 //get languge of common
 get_lang('common');

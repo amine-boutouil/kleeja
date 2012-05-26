@@ -26,7 +26,7 @@ class kleeja_style
         //Function to load a template file.
         function _load_template($template_name)
 		{
-			global $config, $THIS_STYLE_PATH_ABS, $STYLE_PATH_ADMIN_ABS;
+			global $config, $THIS_STYLE_PATH_ABS, $STYLE_PATH_ADMIN_ABS, $DEFAULT_PATH_ADMIN_ABS;
 
 			$is_admin_template = false;
 			$style_path = $THIS_STYLE_PATH_ABS;
@@ -52,6 +52,11 @@ class kleeja_style
 						$template_path = $template_path_alternative;
 						$is_tpl_exist = true;
 					}
+				}
+				else if($is_admin_template)
+				{
+					$template_path = $DEFAULT_PATH_ADMIN_ABS . $template_name . '.html';
+					$is_tpl_exist = true;
 				}
 				else if($config['style'] != 'default' && !$is_admin_template)
 				{

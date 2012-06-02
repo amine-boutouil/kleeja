@@ -388,20 +388,42 @@ get_lang('common');
 //ban system 
 get_ban();
 
-//check load average
-if((function_exists('sys_getloadavg') && $load = sys_getloadavg()) || ($load = explode(' ', @file_get_contents('/proc/loadavg'))))
+/** Enable this if you want it !
+$load = 0;
+if (stristr(PHP_OS, 'win'))
 {
-	//This feature will not work on Windows !. @see php.net/sys_getloadavg
-	if ($load[0] > 80  && !defined('IN_ADMIN') && !defined('IN_LOGIN'))
+	ob_start();
+	passthru('typeperf -sc 1 "\processor(_total)\% processor time"',$status);
+	$content = ob_get_contents();
+	ob_end_clean();
+	if ($status === 0)
 	{
-		if(is_bot())
+		if (preg_match("/\,\"([0-9]+\.[0-9]+)\"/",$content,$load))
 		{
-			header('HTTP/1.1 503 Too busy, try again later');
+			$load = $load[1];
 		}
-
-		kleeja_info($lang['LOAD_IS_HIGH_NOW'], $lang['SITE_CLOSED']);
+	}
+	echo $load;
+}
+else
+{
+	if((function_exists('sys_getloadavg') && $load = sys_getloadavg()) || ($load = explode(' ', @file_get_contents('/proc/loadavg'))))
+	{
+		$load = $load[0];
 	}
 }
+
+if ($load > 80  && !defined('IN_ADMIN') && !defined('IN_LOGIN'))
+{
+	#tell the BOTs to not cache this page in thier search engines
+	if(is_bot())
+	{
+		header('HTTP/1.1 503 Too busy, try again later');
+	}
+	kleeja_info($lang['LOAD_IS_HIGH_NOW'], $lang['SITE_CLOSED']);
+}
+*/	
+
 
 //install.php exists
 if (file_exists(PATH . 'install') && !defined('IN_ADMIN') && !defined('IN_LOGIN') && !defined('DEV_STAGE')) 

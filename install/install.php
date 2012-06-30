@@ -257,7 +257,7 @@ case 'data' :
 			else
 			{
 				$errors .= implode(':', $SQL->get_error()) . '' . "\n___\n";
-				$sql_err[] = $lang['INST_SQL_ERR'] . ' : ' . $name;
+				$sql_err[] = $lang['INST_SQL_ERR'] . ' : ' . $name . '[basic]';
 				$err++;
 			}
 
@@ -280,7 +280,7 @@ case 'data' :
 			//add groups configs
 			foreach($config_values as $cn)
 			{
-				if($cn[4] != 'groups')
+				if($cn[4] != 'groups' or !$cn[4])
 				{
 					continue;
 				}

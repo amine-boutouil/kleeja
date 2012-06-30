@@ -25,7 +25,6 @@ CREATE TABLE `{$dbprefix}groups_data` (
   `group_id` int(11) unsigned NOT NULL,
   `name` varchar(255) COLLATE utf8_bin NOT NULL,
   `value` varchar(255) COLLATE utf8_bin NOT NULL,
-  UNIQUE KEY `name` (`name`),
   KEY `group_id` (`group_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 ";

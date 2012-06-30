@@ -59,7 +59,7 @@
 		<div class="clr"></div><br />
 		<h2 class="h2">{{echo $lang['INST_SUBMIT_CONFIGOK']}}</h2>
 		<div class="hr"></div>
-		<form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=c&amp' . getlang(1)}}">
+		<form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=c&amp;' . getlang(1)}}">
 			<center>
 				<button onclick="window.location.href='./install.php?step=f&amp;{{echo getlang(1)}}';return false;" name="previous" type="submit" class="btn"><span>&laquo;  {{echo $lang['INST_PREVIOUS']}}</span></button>
 				<button type="submit" name="agres" class="btn"><span>{{echo $lang['INST_NEXT']}} &raquo;</span></button>

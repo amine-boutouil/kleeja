@@ -49,7 +49,10 @@ jQuery(document).ready(function($){
 	//for go menu
 	if(where_are_we != 'php_info'){
 		div_id = $('div[goto='+ where_are_we +']').attr('id');
-		gomenu_id = $("div[goto='"+ where_are_we +"']").attr('gomenu_id').replace(/^\s+|\s+$/g,"");
+		gomenu_id = $("div[goto='"+ where_are_we +"']").attr('gomenu_id');
+		if(gomenu_id){
+			gomenu_id = gomenu_id.replace(/^\s+|\s+$/g,"");
+		}
 	}else if(where_are_we == 'php_info'){
 		div_id = 'menu_item1'; gomenu_id = '1';
 	}

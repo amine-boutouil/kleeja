@@ -46,3 +46,16 @@ $update_sqls['groups_insert'] = "INSERT INTO `{$dbprefix}groups` (`group_id`, `g
 
 $update_sqls['admin2founder'] = "ALTER TABLE  `{$dbprefix}users` CHANGE  `admin`  `founder` TINYINT( 1 ) NOT NULL DEFAULT  '0'";
 $update_sqls['group_id4users'] = "ALTER TABLE  `{$dbprefix}users` ADD  `group_id` INT( 11 ) UNSIGNED NOT NULL DEFAULT  '3' AFTER  `name` , ADD INDEX (  `group_id` )";
+$update_sqls['group_id4adm'] = "UPDATE  `{$dbprefix}users` SET  `group_id` =  '1' WHERE  `founder`= '1';";
+
+#Acls!!
+#1 = admin, 2 = guests, 3 = users [ 1 = true, 0  = false ]
+$update_sqls['groups_acls_enter_acp'] = "INSERT INTO `{$dbprefix}groups_acl` (`acl_name`, `group_id`, `acl_can`) VALUES ('enter_acp', 1, 1), ('enter_acp', 2, 0), ('enter_acp', 3, 0);";
+$update_sqls['groups_acls_access_fileuser'] = "INSERT INTO `{$dbprefix}groups_acl` (`acl_name`, `group_id`, `acl_can`) VALUES ('access_fileuser', 1, 1), ('access_fileuser', 2, 0), ('access_fileuser', 3, 1);";
+$update_sqls['groups_acls_access_filecp'] = "INSERT INTO `{$dbprefix}groups_acl` (`acl_name`, `group_id`, `acl_can`) VALUES ('access_filecp', 1, 1), ('access_filecp', 2, 0), ('access_filecp', 3, 1);";
+$update_sqls['groups_acls_access_stats'] = "INSERT INTO `{$dbprefix}groups_acl` (`acl_name`, `group_id`, `acl_can`) VALUES ('access_stats', 1, 1), ('access_stats', 2, 1), ('access_stats', 3, 1);";
+$update_sqls['groups_acls_access_call'] = "INSERT INTO `{$dbprefix}groups_acl` (`acl_name`, `group_id`, `acl_can`) VALUES ('access_call', 1, 1), ('access_call', 2, 1), ('access_call', 3, 1);";
+
+
+
+

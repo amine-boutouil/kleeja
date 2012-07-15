@@ -480,4 +480,5 @@ $captcha_file_path = $config['siteurl'] . 'ucp.php?go=captcha';
 
 ($hook = kleeja_run_hook('end_common')) ? eval($hook) : null; //run hook
 
+
 #<-- EOF

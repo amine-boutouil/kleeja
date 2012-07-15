@@ -53,13 +53,9 @@
 	<!-- begin Top Navigation -->
 	<div class="top_nav">
 		<ul class="menu">
-			<li><a href="{config.siteurl}" title="{lang.INDEX}" (go_current?:class="current")>{lang.INDEX}</a></li>
-			<li><a href="{_LINKS.rules}" title="{lang.RULES}" (go_current==rules?class="current":)>{lang.RULES}</a></li>
-			<li><a href="{_LINKS.guide}" title="{lang.GUIDE}" (go_current==guide?class="current":)>{lang.GUIDE}</a></li>
-			<IF NAME="config.allow_stat_pg">
-			<li><a href="{_LINKS.stats}" title="{lang.STATS}" (go_current==stats?class="current":)>{lang.STATS}</a></li>
-			</IF>
-			<li><a href="{_LINKS.call}" title="{lang.CALL}" (go_current==call?class="current":)>{lang.CALL}</a></li>
+		<LOOP NAME="top_menu"><IF LOOP="show">
+		<li><a href="{{url}}" (go_current=={{name}}?class="current":)>{{title}}</a></li>
+		</IF></LOOP>
 		</ul>
 	</div><!-- @end-Top-Navigation -->
 
@@ -83,17 +79,9 @@
 		<div class="list">
 			<ul>
 				<li class="imgtop">&nbsp;</li>
-				<IF NAME="user_is">
-					<IF NAME="config.enable_userfile">
-					<li><a href="{_LINKS.fileuser}" (go_current==fileuser?class="current":)><img src="{STYLE_PATH}images/user-folder.png" class="pngfix" alt="{lang.YOUR_FILEUSER}" style="vertical-align:middle;" />{lang.YOUR_FILEUSER}</a></li>
-					</IF>
-					<li><a href="{_LINKS.filecp}" (go_current==filecp?class="current":)><img src="{STYLE_PATH}images/filecp.png" class="pngfix" alt="{lang.FILECP}" style="vertical-align:middle;" />{lang.FILECP}</a></li>
-					<li><a href="{_LINKS.profile}" (go_current==profile?class="current":)><img src="{STYLE_PATH}images/User.png" class="pngfix" alt="{lang.PROFILE}" style="vertical-align:middle;" />{lang.PROFILE}</a></li>
-					<li><a href="{_LINKS.logout}" (go_current==logout?class="current":)><img src="{STYLE_PATH}images/Go-Out.png" class="pngfix" alt="{lang.LOGOUT}" style="vertical-align:middle;" />{lang.LOGOUT} [ {username} ]</a></li>
-				<ELSE>
-					<li><a href="{_LINKS.login}" (go_current==login?class="current":)><img src="{STYLE_PATH}images/Go-Out.png" class="pngfix" alt="{lang.LOGIN}" style="vertical-align:middle;" />{lang.LOGIN}</a></li>
-					<IF NAME="config.register"><li><a href="{_LINKS.register}" (go_current==register?class="current":)><img src="{STYLE_PATH}images/User.png" class="pngfix" alt="{lang.REGISTER}" style="vertical-align:middle;" />{lang.REGISTER}</a></li></IF>
-				</IF>
+				<LOOP NAME="side_menu"><IF LOOP="show">
+				<li><a href="{{url}}" (go_current=={{name}}?class="current":)><img src="{STYLE_PATH}images/{{name}}.png" class="pngfix" alt="{lang.LOGIN}" style="vertical-align:middle;" />{{title}} <IF LOOP="name==logout">[ {username} ]</IF></a></li>
+				</IF></LOOP>
 				<li class="imgbottom">&nbsp;</li>
 			</ul>
 		</div>

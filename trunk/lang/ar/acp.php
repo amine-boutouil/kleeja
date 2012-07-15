@@ -312,11 +312,11 @@ $lang = array_merge($lang, array(
 	'HE_CAN'					=> 'يستطيع',
 	'HE_CAN_NOT'				=> 'لا يستطيع',
 		#ACLS roles
-		'ACLS_ENTER_ACP'		=> 'يستطيع دخول لوحة التحكم',
-		'ACLS_ACCESS_FILEUSER'	=> 'يستطيع الوصول لمجلد ملفاته',
-		'ACLS_ACCESS_FILECP'	=> 'يستطيع الوصول لادارة ملفاته',
-		'ACLS_ACCESS_CALL'		=> 'يستطيع الوصول لصفحة اتصل بنا',
-		'ACLS_ACCESS_STATS'		=> 'يستطيع الوصول لصفحة الإحصائيات',
+		'ACLS_ENTER_ACP'		=> 'دخول لوحة التحكم',
+		'ACLS_ACCESS_FILEUSER'	=> 'الوصول لمجلد ملفاته',
+		'ACLS_ACCESS_FILECP'	=> 'الوصول لادارة ملفاته',
+		'ACLS_ACCESS_CALL'		=> 'الوصول لصفحة اتصل بنا',
+		'ACLS_ACCESS_STATS'		=> 'الوصول لصفحة الإحصائيات',
 
 	'GROUP_IS_DEFAULT'			=> 'هذه المجموعة افتراضية عند التسجيل',
 	'ADD_NEW_GROUP'				=> 'اضف مجموعة جديدة',

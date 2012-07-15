@@ -302,9 +302,9 @@ $lang = array_merge($lang, array(
 	'THUMB_DIS_LONGTIME'		=> 'Thumbs are disabled, this will force Kleeja to resize every images to be small here, and cost you time and bandwidth!. Enable thumbs now.', 
 	#1.5
 	'R_GROUPS'					=> 'Groups Managment',
-	'ESSENTIAL_GROUPS'			=> 'Foundmental Groups',
+	'ESSENTIAL_GROUPS'			=> 'Fundamental Groups',
 	'CUSTOM_GROUPS'				=> 'User-defined Groups',
-	'EDIT_DATA'					=> ' Edit data',
+	'EDIT_DATA'					=> 'Edit data',
 	'EDIT_ACL'					=> 'Edit ACL',
 	'HE_CAN'					=> 'Able',
 	'HE_CAN_NOT'				=> 'Unable',

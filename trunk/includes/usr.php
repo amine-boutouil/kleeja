@@ -440,9 +440,15 @@ class usrcp
 	//return : mean return true or false, but if return is false will show msg
 	function kleeja_check_user()
 	{
-		global $config, $SQL, $dbprefix;
+		global $config, $SQL, $dbprefix, $userinfo;
 
 		($hook = kleeja_run_hook('kleeja_check_user_func_usr_class')) ? eval($hook) : null; //run hook
+
+		#to make sure
+		$userinfo = array(
+							'id'		=> 0,
+							'group_id'	=> 2,
+			);
 
 		//if login up
 		if($this->kleeja_get_cookie('ulogu'))

@@ -2,7 +2,7 @@
 //
 // kleeja language file
 // English
-// By:NK , Email: n.k@cityofangelz.com 
+// By: Kleeja team & (NK, n.k@cityofangelz.com)
 //
 
 if (!defined('IN_COMMON'))
@@ -270,7 +270,14 @@ $lang = array_merge($lang, array(
 	'REPEAT_PASS'				=> 'Repeat Password',
 	'PASS_NEQ_PASS2'			=> 'Passwords are not equal !',
 	'LOAD_IS_HIGH_NOW'			=> 'Our website facing very high load right now !, please wait and try refresh this page again.',
-	
+	#1.5
+	'GROUP'						=> 'Group',
+	'ADMINS'					=> 'Admins',
+	'GUESTS'					=> 'Guests',
+	'USERS'						=> 'Users',
+	'DELETE_INSTALL_FOLDER'		=> 'To start using Kleeja, delete "install" folder, Kleeja will never work while this folder exists.',
+	'HV_NOT_PRVLG_ACCESS'		=> 'You don\'t have privilege to access this page.',
+
 	//last line of this file ...					 
 	'S_TRANSLATED_BY' 			=> 'Translated By <a href="http://www.fenix4web.com/" target="_blank">Fenix4Web</a> &amp; Kleeja Team',
 	

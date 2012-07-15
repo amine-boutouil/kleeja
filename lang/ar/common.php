@@ -266,6 +266,7 @@ $lang = array_merge($lang, array(
 	'GUESTS'					=> 'الزوار',
 	'USERS'						=> 'الاعضاء',
 	'DELETE_INSTALL_FOLDER'		=> 'لتستطيع استخدام كليجا الآن، قم بحذف مجلد install. لن تعمل كليجا بوجود هذا المجلد.',
+	'HV_NOT_PRVLG_ACCESS'		=> 'لاتملك صلاحيات للوصول لهذه الصفحة',
 	));
 
 #<-- EOF

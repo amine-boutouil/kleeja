@@ -298,19 +298,32 @@ $lang = array_merge($lang, array(
 	'DELETE_PROCESS_QUEUED'		=> 'The delete process has been added to the waiting list to execute it gradually to reduce the load.',
 	'DELETE_PROCESS_IN_WORK'	=> 'Currently, the delete process is executing ...',
 	'SHOW_FROM_24H'				=> 'Show past 24 hours',
-	'FIRST_TIME_CP'				=> 'First time in Kleeja CP ?!', 
-	'FIRST_TIME_CP_EX'			=> 'Since 2007, Kleeja development team working on study of how Kleeja users are using Kleeja control panel' . 
-									' and after many developement versions we figured out a new ideas that you will figure them out by using' . 
-									' Kleeja later, and the main ideas you will notice are the AJAX and the new powerful menus. ' . 
-									' <br /><br /> Below is the explanation of Kleeja CP  and how to use it /',  
-	'FIRST_TIME_HOW1'			=> 'Main Kleeja menu, from here you can reach images control or files control page etc ..',
-	'FIRST_TIME_HOW2'			=> 'CP home button, move you to main cp page.',
-	'FIRST_TIME_HOW3'			=> 'Website button, move you to the main upload center page.',
-	'FIRST_TIME_HOW4'			=> 'CP logout button, destroy your CP session and let you become regular user.',
-	'FIRST_TIME_HOW5'			=> 'Settings button, from here you can change Kleeja settings, all of them.',
-	'FIRST_TIME_HOW6'			=> 'GO menu, it\'s submenu from the main menu, shows links from other sections.',
-	'FIRST_TIME_HOW7'			=> 'Here where the contents appears, clean to understand.',
-	'FIRST_TIME_DONE'			=> 'I got it, thank you',
 	'SUPPORT_MOFFED'			=> 'Arabic Support',
 	'THUMB_DIS_LONGTIME'		=> 'Thumbs are disabled, this will force Kleeja to resize every images to be small here, and cost you time and bandwidth!. Enable thumbs now.', 
+	#1.5
+	'R_GROUPS'					=> 'Groups Managment',
+	'ESSENTIAL_GROUPS'			=> 'Foundmental Groups',
+	'CUSTOM_GROUPS'				=> 'User-defined Groups',
+	'EDIT_DATA'					=> ' Edit data',
+	'EDIT_ACL'					=> 'Edit ACL',
+	'HE_CAN'					=> 'Able',
+	'HE_CAN_NOT'				=> 'Unable',
+		#ACLS roles
+		'ACLS_ENTER_ACP'		=> 'Access ACP',
+		'ACLS_ACCESS_FILEUSER'	=> 'Access his own files\' folder',
+		'ACLS_ACCESS_FILECP'	=> 'Access his own files\s CP',
+		'ACLS_ACCESS_CALL'		=> 'Access "call us" page',
+		'ACLS_ACCESS_STATS'		=> 'Access "statistics" page',
+
+	'GROUP_IS_DEFAULT'			=> 'This group is default at registeration',
+	'ADD_NEW_GROUP'				=> 'Add new group',
+	'DELETE_GROUP'				=> 'Delete group',
+	'GROUP_NAME'				=> 'Group name',
+	'COPY_FROM'					=> 'Copy from',
+	'USERNAME_NOT_YOU'			=> 'Not you ? %1$slogout%2$s',
+	'DEFAULT_GROUP'				=> 'The default group',
+	'G_USERS_MOVE_TO'			=> 'Move the group users to',
+	'TAKEN_NAMES'				=> 'This name is taken. Choose another name',
+	'SUPPORT_MOFFED'			=> 'Support',
+
 ));

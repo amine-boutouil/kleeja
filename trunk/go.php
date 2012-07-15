@@ -231,6 +231,13 @@ switch ($_GET['go'])
 	//
 	case 'call' : 
 
+		//Not allowed to access this page ?
+		if (!user_can('access_call'))
+		{
+			($hook = kleeja_run_hook('user_cannot_access_call')) ? eval($hook) : null; //run hook
+			kleeja_info($lang['HV_NOT_PRVLG_ACCESS']);
+		}
+
 		//page info
 		$stylee	= 'call';
 		$titlee	= $lang['CALL'];
@@ -412,6 +419,13 @@ switch ($_GET['go'])
 	//Page of last stats
 	//
 	case 'stats' :
+
+		//Not allowed to access this page ?
+		if (!user_can('access_stats'))
+		{
+			($hook = kleeja_run_hook('user_cannot_access_stats')) ? eval($hook) : null; //run hook
+			kleeja_info($lang['HV_NOT_PRVLG_ACCESS']);
+		}
 
 		//stop .. check first ..
 		if (!$config['allow_stat_pg'])

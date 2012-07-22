@@ -117,34 +117,33 @@ class usrcp
 				$phppass = $hashed ?  $pass : $pass . $row['password_salt'];
 
 				//CHECK IF IT'S MD5 PASSWORD
-				//if(strlen($row['password']) == '32' && empty($row['password_salt']))   
-				//{
-					//$passmd5 = md5($pass);
-
+				if(strlen($row['password']) == '32' && empty($row['password_salt']) && defined('CONVERTED_SCRIPT'))   
+				{
+					$passmd5 = md5($pass);
 					////update old md5 hash to phpass hash
-					//if($row['password'] == $passmd5)
-					//{
+					if($row['password'] == $passmd5)
+					{
 						////new salt
-						//$new_salt = substr(kleeja_base64_encode(pack("H*", sha1(mt_rand()))), 0, 7);
+						$new_salt = substr(kleeja_base64_encode(pack("H*", sha1(mt_rand()))), 0, 7);
 						////new password hash
-						//$new_password = $this->kleeja_hash_password(trim($pass) . $new_salt);
+						$new_password = $this->kleeja_hash_password(trim($pass) . $new_salt);
 
-						//($hook = kleeja_run_hook('qr_update_usrdata_md5_n_usr_class')) ? eval($hook) : null; //run hook	
+						($hook = kleeja_run_hook('qr_update_usrdata_md5_n_usr_class')) ? eval($hook) : null; //run hook	
 
 						////update now !!
-						//$update_query = array(
-									//'UPDATE'	=> "`{$dbprefix}users`",
-									//'SET'		=> "password='" . $new_password . "' ,password_salt='" . $new_salt . "'",
-									//'WHERE'		=>	"id=" . intval($row['id'])
-							//);
+						$update_query = array(
+									'UPDATE'	=> "`{$dbprefix}users`",
+									'SET'		=> "password='" . $new_password . "' ,password_salt='" . $new_salt . "'",
+									'WHERE'		=>	"id=" . intval($row['id'])
+							);
 
-						//$SQL->build($update_query);
-					//}
-					//else //if the password is wrong
-					//{
-						//return false;
-					//}
-				//}
+						$SQL->build($update_query);
+					}
+					else //if the password is wrong
+					{
+						return false;
+					}
+				}
 				if(($phppass != $row['password'] && $hashed) || ($this->kleeja_hash_password($phppass, $row['password']) != true && $hashed == false))
 				{
 					return false;

@@ -144,19 +144,6 @@ CREATE TABLE `{$dbprefix}config` (
 ";
 
 
-$install_sqls['exts'] = "
-CREATE TABLE `{$dbprefix}exts` (
-  `id` mediumint(8) unsigned NOT NULL auto_increment,
-  `group_id` mediumint(8) unsigned NOT NULL default '0',
-  `ext` varchar(100) collate utf8_bin NOT NULL default '',
-  `gust_size` int(10) NOT NULL,
-  `gust_allow` tinyint(1) NOT NULL default '0',
-  `user_size` int(10) NOT NULL,
-  `user_allow` tinyint(1) NOT NULL default '0',
-  PRIMARY KEY (`id`),
-  KEY `group_id` (`group_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=68 ;
-";
 
 $install_sqls['online'] = "
 CREATE TABLE `{$dbprefix}online` (
@@ -239,6 +226,17 @@ CREATE TABLE `{$dbprefix}groups_acl` (
   `acl_can` tinyint(1) unsigned NOT NULL DEFAULT '0',
   KEY `group_id` (`group_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+";
+
+$install_sqls['groups_exts'] = "
+CREATE TABLE `{$dbprefix}groups_exts` (
+  `ext_id` int(11) NOT NULL AUTO_INCREMENT,
+  `ext` varchar(20) COLLATE utf8_bin NOT NULL,
+  `group_id` int(11) unsigned NOT NULL DEFAULT '0',
+  `size` int(11) NOT NULL,
+  PRIMARY KEY (`ext_id`),
+  KEY `group_id` (`group_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1;
 ";
 
 $install_sqls['stats_insert'] = "INSERT INTO `{$dbprefix}stats`  VALUES (0,1,0,0," . time() . ",0,0,0,0,'',0,0,0,0,'','','','')";

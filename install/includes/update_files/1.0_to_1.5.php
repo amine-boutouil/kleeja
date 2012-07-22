@@ -56,6 +56,39 @@ $update_sqls['groups_acls_access_filecp'] = "INSERT INTO `{$dbprefix}groups_acl`
 $update_sqls['groups_acls_access_stats'] = "INSERT INTO `{$dbprefix}groups_acl` (`acl_name`, `group_id`, `acl_can`) VALUES ('access_stats', 1, 1), ('access_stats', 2, 1), ('access_stats', 3, 1);";
 $update_sqls['groups_acls_access_call'] = "INSERT INTO `{$dbprefix}groups_acl` (`acl_name`, `group_id`, `acl_can`) VALUES ('access_call', 1, 1), ('access_call', 2, 1), ('access_call', 3, 1);";
 
+#exts !!
+$update_sqls['groups_exts'] = "
+CREATE TABLE `{$dbprefix}groups_exts` (
+  `ext_id` int(11) NOT NULL AUTO_INCREMENT,
+  `ext` varchar(20) COLLATE utf8_bin NOT NULL,
+  `group_id` int(11) unsigned NOT NULL DEFAULT '0',
+  `size` int(11) NOT NULL,
+  PRIMARY KEY (`ext_id`),
+  KEY `group_id` (`group_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1;
+";
 
+$update_sqls['exts2groups_exts'] = "INSERT INTO `{$dbprefix}groups_exts` (`ext_id`, `ext`, `group_id`, `size`) VALUES
+(1, 'gif', 1, 2097152),
+(2, 'png', 1, 2097152),
+(3, 'jpg', 1, 2097152),
+(4, 'jpeg', 1, 2097152),
+(5, 'bmp', 1, 2097152),
+(6, 'zip', 1, 2097152),
+(7, 'rar', 1, 2097152),
+(8, 'gif', 2, 2097152),
+(9, 'png', 2, 2097152),
+(10, 'jpg', 2, 2097152),
+(11, 'jpeg', 2, 2097152),
+(12, 'bmp', 2, 2097152),
+(13, 'zip', 2, 2097152),
+(14, 'rar', 2, 2097152),
+(15, 'gif', 3, 2097152),
+(16, 'png', 3, 2097152),
+(17, 'jpg', 3, 2097152),
+(18, 'jpeg', 3, 2097152),
+(19, 'bmp', 3, 2097152),
+(20, 'zip', 3, 2097152),
+(21, 'rar', 3, 2097152);";
 
 

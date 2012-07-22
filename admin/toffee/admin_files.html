@@ -10,7 +10,7 @@ jQuery(document).ready(function($){
 
 	var current_page = parseInt($('#pagination .current span').html());
 	var is_there_next = $('#pagination .phover').length < 2 && current_page > 1 ? false : true;
-	var current_location = '{action}'.replace(/[&]*page=[0-9]+/i, '').replace(/&&/, '');
+	var current_location = '{action}'.replace('&amp;', '&').replace(/[&]*page=[0-9]+/i, '').replace(/&&/, '');
 
 	switch(e.keyCode) { 
 		//left, next

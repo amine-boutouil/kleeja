@@ -5,7 +5,7 @@
 
 
 1.5 - version :
--[ 47% done ] Groups system
+-[ 65% done ] Groups system
 -[ 96% done ] New ACP style.
 	-- Opera 11 [ OK, top menu wont work ok ], On WIN
 	-- Opera 12 [ OK, top menu wont work ok ], On WIN
@@ -20,7 +20,7 @@
 -[ ] Make sure that vb, phpbb integration work with the new group system !
 -[ ] Try the group system with all siutations that may happin ?!!!
 -[ ] Security situation page 
--[ ] ACP firstpage !  
+-[-] ACP firstpage !  
 -[ ] Test upgrades under any curcumstances, and avoids problems that happened before !
 -[ ] Files, images ACP -> search files from this IP,user
 -[ ] Dealing with the huge invasion of Nginx

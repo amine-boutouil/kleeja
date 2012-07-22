@@ -41,12 +41,12 @@ include_once ('includes/functions_install.php');
 //
 // Kleeja must be safe ..
 //
-if(!empty($dbuser) && !empty($dbname) && !(isset($_GET['step']) && in_array($_GET['step'], array('plugins', 'end', 'wizard'))))
+if(!empty($dbuser) && !empty($dbname) && !(isset($_GET['step']) && in_array($_GET['step'], array('c','check', 'data', 'end', 'wizard'))))
 {
 	$d = inst_get_config('language');
 	if(!empty($d))
 	{
-		header('Location: ../');
+		//header('Location: ../');
 		exit;
 	}
 }
@@ -72,20 +72,27 @@ else
 
 
 /*
-//nvigate ..
+//navigate ..
 */
 switch ($_GET['step']) 
 {
 default:
 case 'license':
 
-	$contentof_license = @file_get_contents('../docs/license.txt');
-	if (strlen($contentof_license) < 3)
-	{
-		$contentof_license = "license.txt is empty or not found, got to Kleeja.com and read the license content from there ...";
-	}
-
-	echo gettpl('license.html');
+$contentof_license = "GPL version 2
+GNU General Public License, Free Software Foundation
+The GNU General Public License is a Free Software license. Like any Free Software license, it grants to you the four following freedoms:
+1. The freedom to run the program for any purpose.
+2. The freedom to study how the program works and adapt it to your needs.
+3. The freedom to redistribute copies so you can help your neighbor.
+4. The freedom to improve the program and release your improvements to the public, so that the whole community benefits.
+You may exercise the freedoms specified here provided that you comply with the express conditions of this license. The principal conditions are:
+You must conspicuously and appropriately publish on each copy distributed an appropriate copyright notice and disclaimer of warranty and keep intact all the notices that refer to this License and to the absence of any warranty; and give any other recipients of the Program a copy of the GNU General Public License along with the Program. Any translation of the GNU General Public License must be accompanied by the GNU General Public License.
+If you modify your copy or copies of the program or any portion of it, or develop a program based upon it, you may distribute the resulting work provided you do so under the GNU General Public License. Any translation of the GNU General Public License must be accompanied by the GNU General Public License.
+If you copy or distribute the program, you must accompany it with the complete corresponding machine-readable source code or with a written offer, valid for at least three years, to furnish the complete corresponding machine-readable source code.
+Any of the above conditions can be waived if you get permission from the copyright holder.";
+$contentof_license = nl2br($contentof_license);
+echo gettpl('license.html');
 
 break;
 
@@ -213,7 +220,7 @@ case 'data' :
 		$config_sitename	= $SQL->escape($_POST['sitename']);
 		$config_siteurl		= $SQL->escape($_POST['siteurl']);
 		$config_sitemail	= $SQL->escape($_POST['sitemail']);
-		$config_style		= $SQL->escape($_POST['style']);
+		//$config_style		= isset($_POST['style']) ? $SQL->escape($_POST['style']) : '';
 		$config_urls_type	= in_array($_POST['urls_type'], array('id', 'filename', 'direct')) ? $_POST['urls_type'] : 'id';
 		$clean_name			= $usrcp->cleanusername($SQL->escape($user_name));
 
@@ -251,7 +258,7 @@ case 'data' :
 				elseif ($name == 'lang')	$sqls_done[] = $lang['INST_CRT_LNG'];
 				else
 				{
-					//$sqls_done[] = '...';
+					$sqls_done[] = $name . '...';
 				}
 			}
 			else
@@ -268,6 +275,11 @@ case 'data' :
 			//add configs
 			foreach($config_values as $cn)
 			{
+				if(empty($cn[6]))
+				{
+					$cn[6] = 0;
+				}
+
 				$sql = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`, `type`, `plg_id`, `dynamic`) VALUES ('$cn[0]', '$cn[1]', '$cn[2]', '$cn[3]', '$cn[4]', '$cn[5]', '$cn[6]');";
 				if(!$SQL->query($sql))
 				{
@@ -285,26 +297,35 @@ case 'data' :
 					continue;
 				}
 
+				$itxt = '';
 				foreach(array(1, 2, 3) as $im)
 				{
-					$sql = "INSERT INTO `{$dbprefix}groups_data` (`group_id`, `name`, `value`) VALUES ('$im', '$cn[0]', '$cn[1]');";				
-					if(!$SQL->query($sql))
-					{
-						$errors .= implode(':', $SQL->get_error()) . '' . "\n___\n";
-						$sql_err[] = $lang['INST_SQL_ERR'] . ' : [groups_configs_values] ' . $cn;
-						$err++;
-					}
+					$itxt .= ($itxt == '' ? '' : ','). "($im, '$cn[0]', '$cn[1]')";
+				}
+	
+				$sql = "INSERT INTO `{$dbprefix}groups_data` (`group_id`, `name`, `value`) VALUES " . $itxt . ";";
+				if(!$SQL->query($sql))
+				{
+					$errors .= implode(':', $SQL->get_error()) . '' . "\n___\n";
+					$sql_err[] = $lang['INST_SQL_ERR'] . ' : [groups_configs_values] ' . $cn;
+					$err++;
 				}
 			}
 
 			//add exts
-			foreach($ext_values as $cn)
+			foreach($ext_values as $gid=>$exts)
 			{
-				$sql = "INSERT INTO `{$dbprefix}exts` (`group_id`, `ext`, `gust_size`, `gust_allow`, `user_size`, `user_allow`) VALUES ('$cn[0]', '$cn[1]', '$cn[2]', '$cn[3]', '$cn[4]', '$cn[5]');";
+				$itxt = '';
+				foreach($exts as $t=>$v)
+				{
+					$itxt .= ($itxt == '' ? '' : ','). "('$t', $gid, $v)";
+				}
+
+				$sql = "INSERT INTO `{$dbprefix}groups_exts` (`ext`, `group_id`, `size`) VALUES " . $itxt . ";";
 				if(!$SQL->query($sql))
 				{
 					$errors .= implode(':', $SQL->get_error()) . '' . "\n___\n";
-					$sql_err[] = $lang['INST_SQL_ERR'] . ' : [ext_values] ' . $cn;
+					$sql_err[] = $lang['INST_SQL_ERR'] . ' : [ext_values] ' . $gid;
 					$err++;
 				}
 			}
@@ -313,17 +334,22 @@ case 'data' :
 			foreach($acls_values as $cn=>$ct)
 			{
 				$it = 1;
+				$itxt = '';
 				foreach($ct as $ctk)
 				{
-					$sql = "INSERT INTO `{$dbprefix}groups_acl` (`acl_name`, `group_id`, `acl_can`) VALUES ('$cn', '$it', '$ctk');";
-					if(!$SQL->query($sql))
-					{
-						$errors .= implode(':', $SQL->get_error()) . '' . "\n___\n";
-						$sql_err[] = $lang['INST_SQL_ERR'] . ' : [acl_values] ' . $ctk;
-						$err++;
-					}
+					$itxt .= ($itxt == '' ? '' : ','). "('$cn', '$it', '$ctk')";
 					$it++;
 				}
+		
+				
+				$sql = "INSERT INTO `{$dbprefix}groups_acl` (`acl_name`, `group_id`, `acl_can`) VALUES " . $itxt . ";";
+				if(!$SQL->query($sql))
+				{
+					$errors .= implode(':', $SQL->get_error()) . '' . "\n___\n";
+					$sql_err[] = $lang['INST_SQL_ERR'] . ' : [acl_values] ' . $cn;
+					$err++;
+				}
+				$it++;
 			}
 		}
 		

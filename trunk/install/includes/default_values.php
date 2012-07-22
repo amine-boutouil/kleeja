@@ -86,94 +86,45 @@ $config_values[] = array('ftp_info', '', '', 0, 0, 0);
 $config_values[] = array('queue', '', '', 0, 0, 1);
 
 
-
 //
 // Extensions
 //
 
+// do it like this : 
+//$ext_values[group_id] = array('ext'=>sizeInKB);
 $ext_values = array();
 
-// do it like this : 
-//$ext_values[] = array('group_id', 'ext', 'gust_size', 'gust_allow', 'user_size', 'user_allow');
+#admins
+$ext_values[1] = array(
+			'gif' => 2097152,
+			'png' => 2097152,
+			'jpg' => 2097152,
+			'jpeg' => 2097152,
+			'bmp' => 2097152,
+			'zip' => 2097152,
+			'rar' => 2097152,
+);
+#guests
+$ext_values[2] = array(
+			'gif' => 2097152,
+			'png' => 2097152,
+			'jpg' => 2097152,
+			'jpeg' => 2097152,
+			'bmp' => 2097152,
+			'zip' => 2097152,
+			'rar' => 2097152,
+);
+#users
+$ext_values[3] = array(
+			'gif' => 2097152,
+			'png' => 2097152,
+			'jpg' => 2097152,
+			'jpeg' => 2097152,
+			'bmp' => 2097152,
+			'zip' => 2097152,
+			'rar' => 2097152,
+);
 
-
-//images
-$ext_values[] = array(1, 'gif', 2097152, 1, 2097152, 1);
-$ext_values[] = array(1, 'png', 2097152, 1, 2097152, 1);
-$ext_values[] = array(1, 'jpeg', 2097152, 1, 2097152, 1);
-$ext_values[] = array(1, 'jpg', 2097152, 1, 2097152, 1);
-$ext_values[] = array(1, 'bmp', 2097152, 1, 2097152, 1);
-$ext_values[] = array(1, 'tif', 0, 0, 0, 0);
-$ext_values[] = array(1, 'tiff', 0, 0, 0, 0);
-$ext_values[] = array(1, 'tga', 0, 0, 0, 0);
-//archives
-$ext_values[] = array(2, 'gtar', 0, 0, 0, 0);
-$ext_values[] = array(2, 'gz', 0, 0, 0, 0);
-$ext_values[] = array(2, 'tar', 0, 0, 0, 0);
-$ext_values[] = array(2, 'zip', 2097152, 1, 2097152, 1);
-$ext_values[] = array(2, 'rar', 0, 0, 0, 0);
-$ext_values[] = array(2, 'ace', 0, 0, 0, 0);
-$ext_values[] = array(2, 'torrent', 0, 0, 0, 0);
-$ext_values[] = array(2, 'tgz', 0, 0, 0, 0);
-$ext_values[] = array(2, 'bz2', 0, 0, 0, 0);
-$ext_values[] = array(2, '7z', 0, 0, 0, 0);
-//txts
-$ext_values[] = array(3, 'c', 0, 0, 0, 0);
-$ext_values[] = array(3, 'cpp', 0, 0, 0, 0);
-$ext_values[] = array(3, 'hpp', 0, 0, 0, 0);
-$ext_values[] = array(3, 'diz', 0, 0, 0, 0);
-$ext_values[] = array(3, 'csv', 0, 0, 0, 0);
-$ext_values[] = array(3, 'log', 0, 0, 0, 0);
-$ext_values[] = array(3, 'js', 0, 0, 0, 0);
-$ext_values[] = array(3, 'xml', 0, 0, 0, 0);
-//documents
-$ext_values[] = array(4, 'xls', 0, 0, 0, 0);
-$ext_values[] = array(4, 'xlsx', 0, 0, 0, 0);
-$ext_values[] = array(4, 'xlsm', 0, 0, 0, 0);
-$ext_values[] = array(4, 'xlsb', 0, 0, 0, 0);
-$ext_values[] = array(4, 'doc', 0, 0, 0, 0);
-$ext_values[] = array(4, 'docx', 0, 0, 0, 0);
-$ext_values[] = array(4, 'docm', 0, 0, 0, 0);
-$ext_values[] = array(4, 'dot', 0, 0, 0, 0);
-$ext_values[] = array(4, 'dotx', 0, 0, 0, 0);
-$ext_values[] = array(4, 'dotm', 0, 0, 0, 0);
-$ext_values[] = array(4, 'pdf', 0, 0, 0, 0);
-$ext_values[] = array(4, 'ai', 0, 0, 0, 0);
-$ext_values[] = array(4, 'ps', 0, 0, 0, 0);
-$ext_values[] = array(4, 'ppt', 0, 0, 0, 0);
-$ext_values[] = array(4, 'pptx', 0, 0, 0, 0);
-$ext_values[] = array(4, 'pptm', 0, 0, 0, 0);
-$ext_values[] = array(4, 'odg', 0, 0, 0, 0);
-$ext_values[] = array(4, 'odp', 0, 0, 0, 0);
-$ext_values[] = array(4, 'ods', 0, 0, 0, 0);
-$ext_values[] = array(4, 'odt', 0, 0, 0, 0);
-$ext_values[] = array(4, 'rtf', 0, 0, 0, 0);
-//real media
-$ext_values[] = array(5, 'rm', 0, 0, 0, 0);
-$ext_values[] = array(5, 'ram', 0, 0, 0, 0);
-//windows media
-$ext_values[] = array(6, 'wma', 0, 0, 0, 0);
-$ext_values[] = array(6, 'wmv', 0, 0, 0, 0);
-//flash
-$ext_values[] = array(7, 'swf', 0, 0, 0, 0);
-$ext_values[] = array(7, 'flv', 0, 0, 0, 0);
-$ext_values[] = array(7, 'fla', 0, 0, 0, 0);
-//quicktime media
-$ext_values[] = array(8, 'mov', 0, 0, 0, 0);
-$ext_values[] = array(8, 'm4v', 0, 0, 0, 0);
-$ext_values[] = array(8, 'm4a', 0, 0, 0, 0);
-$ext_values[] = array(8, 'mp4', 0, 0, 0, 0);
-$ext_values[] = array(8, '3gp', 0, 0, 0, 0);
-$ext_values[] = array(8, '3g2', 0, 0, 0, 0);
-$ext_values[] = array(8, 'qt', 0, 0, 0, 0);
-$ext_values[] = array(8, 'avi', 0, 0, 0, 0);
-//other extensions
-$ext_values[] = array(9, 'mpeg', 0, 0, 0, 0);
-$ext_values[] = array(9, 'mpg', 0, 0, 0, 0);
-$ext_values[] = array(9, 'mp3', 0, 0, 0, 0);
-$ext_values[] = array(9, 'ogg', 0, 0, 0, 0);
-$ext_values[] = array(9, 'ogm', 0, 0, 0, 0);
-$ext_values[] = array(9, 'psd', 0, 0, 0, 0);
 
 //
 // ACLs

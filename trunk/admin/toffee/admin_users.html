@@ -156,8 +156,7 @@ $(document).ready( function(){
 <!-- the big box begin -->
    <div class="tit_con">
 <h1>{lang.R_USERS} 
-<IF NAME="is_search"> &raquo; {lang.SEARCH_USERS} ( {nums_rows} )</IF>
-<IF NAME="current_smt == show_au"> &raquo; {lang.ADMINISTRATORS}</IF>
+<IF NAME="is_search"> &raquo; <IF NAME="current_smt == show_group">{group_name}<ELSE>{lang.SEARCH_USERS}</IF> ( {nums_rows} )</IF>
 </h1>
    </div>
 <div class="big-box">

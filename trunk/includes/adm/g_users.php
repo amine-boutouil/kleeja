@@ -436,6 +436,7 @@ case 'show_group':
 	$isn_search	= false;
 	$is_asearch = true;
 	$req_group	= isset($_GET['qg']) ? intval($_GET['qg']) : 0;
+	$group_name	= preg_replace('!{lang.([A-Z0-9]+)}!e', '$lang[\'\\1\']', $d_groups[$req_group]['data']['group_name']);
 
 	$query['WHERE']	= "name != '' AND group_id =  " . $req_group;
 

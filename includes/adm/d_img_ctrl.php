@@ -23,7 +23,8 @@ if(!isset($images_cp_perpage) || !$images_cp_perpage)
 
 //for style ..
 $stylee	= "admin_img";
-$action	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;page=' . (isset($_GET['page']) ? intval($_GET['page']) : 1);
+$action	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php')  . (isset($_GET['page']) ? '&amp;page='.intval($_GET['page']) : '') . 
+			(isset($_GET['last_visit']) ? '&amp;last_visit='.intval($_GET['last_visit']) : '');
 $H_FORM_KEYS	= kleeja_add_form_key('adm_img_ctrl');
 
 
@@ -269,7 +270,8 @@ else
 
 //pages
 $total_pages 	= $Pager->getTotalPages(); 
-$page_nums 		= $Pager->print_nums(basename(ADMIN_PATH). '?cp=' . basename(__file__, '.php'), 'onclick="javascript:get_kleeja_link($(this).attr(\'href\'), \'#content\'); return false;"'); 
+$page_nums 		= $Pager->print_nums(basename(ADMIN_PATH). '?cp=' . basename(__file__, '.php') . (isset($_GET['last_visit']) ? '&last_vists=' . intval($_GET['last_visit']) : '')
+						, 'onclick="javascript:get_kleeja_link($(this).attr(\'href\'), \'#content\'); return false;"'); 
 $current_page	= $Pager->currentPage;
 }
 

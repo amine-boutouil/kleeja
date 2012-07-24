@@ -471,68 +471,14 @@ function fetch_remote_file($url, $save_in = false, $timeout = 20, $head_only = f
 }
 
 
-/**
-* Get the mime groups or one of them
-*/
-function kleeja_mime_groups($return_one = false)
-{
-	global $lang;
-
-	$s = array(
-				0 => array('name' => ''),
-				1 => array('name' => $lang['N_IMGS']),
-				2 => array('name' => $lang['N_ZIPS']),
-				3 => array('name' => $lang['N_TXTS']),
-				4 => array('name' => $lang['N_DOCS']),
-				5 => array('name' => $lang['N_RM']),
-				6 => array('name' => $lang['N_WM']),
-				7 => array('name' => $lang['N_SWF']),
-				8 => array('name' => $lang['N_QT']),
-				9 => array('name' => $lang['N_OTHERFILE']),
-	);
-
-	$return = $return_one != false ? $s[$return_one] : $s;
-	($hook = kleeja_run_hook('kleeja_mime_groups_func')) ? eval($hook) : null; //run hook
-	return $return;
-}
-
-/**
-* Admin. function for extensions types
-*/
-function ch_g ($name_of_select, $g_id, $return_name = false)
-{
-	global $lang;
-
-	$s = kleeja_mime_groups(($return_name ?  $g_id : false));
-		
-	//return name if he want
-	if($return_name != false) 
-	{
-		return $s['name'];
-	}
-
-	$show = "<select name=\"{$name_of_select}\">\n";
-		
-	for($i=1; $i< sizeof($s); $i++)
-	{
-		$selected = ($g_id == $i)? "selected=\"selected\"" : "";
-		$show .= "<option $selected value=\"$i\">" . $s[$i]['name'] . "</option>\n";
-	}
-
-	$show .="</select>";
-		
-	($hook = kleeja_run_hook('ch_g_func')) ? eval($hook) : null; //run hook
-	return $show;
-}  
-
 //1rc6+ for check file mime
 //this function is under TESTING !
 // you can share your experinces with us from our site kleeja.com...
-function kleeja_check_mime ($mime, $group_id, $file_path)
+function kleeja_check_mime ($mime, $this_is_image,$file_path)
 {
 	//This code for images only
 	//it's must be improved for all files in future !
-	if($group_id != 1)
+	if($this_is_image == false)
 	{
 		return true;
 	}

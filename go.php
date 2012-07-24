@@ -23,56 +23,36 @@ if(!isset($_GET['go']))
 switch ($_GET['go'])
 {
 	//
-	//Page of allowed extensions for both users and members
+	//Page of allowed extensions for all groups
 	//
 	case 'exts' :
 	case 'guide' :
 
 		$stylee	= 'guide';
 		$titlee	= $lang['GUIDE'];
-		
-		//re oreder exts by group_id 
-		uasort($g_exts, "group_id_order");
-		uasort($u_exts, "group_id_order");
-
-		//make it loop
-		$gusts_data = array();
-		$last_gg_id_was = 0;
-		foreach($g_exts as $ext=>$data)
+	
+		$tgroups = $ttgroups = array();
+		$tgroups = array_keys($d_groups);
+		$same_group= $rando = 0;
+		foreach($tgroups as $gid)
 		{
-			$group_d = kleeja_mime_groups($data['group_id']);
-
-			$gusts_data[]	= array(
+			#TODO: if no exts, show that
+			foreach($d_groups[$gid]['exts'] as $ext=>$size)
+			{
+				$ttgroups[] = array(
 									'ext'	=> $ext,
-									'num'	=> Customfile_size($data['size']), //format size as kb, mb,...
-									'group'	=> $data['group_id'],
-									'group_name'		=> $group_d['name'],
-									'realy_first_row'	=> $last_gg_id_was == 0 ? true : false,
-									'is_first_row'		=> $last_gg_id_was != $data['group_id'] ? true :false,
-								);
-
-			$last_gg_id_was = $data['group_id'];
+									'size'	=> $size,
+									'group'	=> $gid,
+									'group_name'=> preg_replace('!{lang.([A-Z0-9]+)}!e', '$lang[\'\\1\']', $d_groups[$gid]['data']['group_name']),
+									'most_firstrow'=> $same_group == 0 ? true : false,
+									'firstrow'=> $same_group ==0 or $same_group != $gid ? true : false,
+									'rando'	=> $rando,
+				);
+				$same_group = $gid;
+			}
+			$rando = $rando ? 0 : 1;
 		}
-
-		//make it loop
-		$users_data = array();
-		$last_gu_id_was = 0;
-		foreach($u_exts as $ext=>$data)
-		{
-			$group_d = kleeja_mime_groups($data['group_id']);
-
-			$users_data[]	= array(
-									'ext'	=> $ext,
-									'num'	=> Customfile_size($data['size']), //format size as kb, mb,...
-									'group'	=> $data['group_id'],
-									'group_name'		=> $group_d['name'],
-									'realy_first_row'	=> $last_gu_id_was == 0 ? true : false,
-									'is_first_row'		=> $last_gu_id_was != $data['group_id'] ? true :false,
-								);
-
-			$last_gu_id_was = $data['group_id'];		
-		}
-
+	
 		($hook = kleeja_run_hook('guide_go_page')) ? eval($hook) : null; //run hook
 
 	break;

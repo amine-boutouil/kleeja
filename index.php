@@ -51,7 +51,7 @@ $kljup->filename	= $config['prefixname'];
 $kljup->action		= $action = "index.php";
 $kljup->filesnum	= $config['filesnum'];
 //--------------------- start user system part
-$kljup->types		= ($usrcp->name()) ? $u_exts : $g_exts;
+$kljup->types		= $d_groups[$userinfo['group_id']]['exts'];
 $kljup->id_user		= ($usrcp->name()) ? $usrcp->id() : '-1';
 $kljup->user_is_adm = user_can('enter_acp');
 $kljup->safe_code	= $config['safe_code'];

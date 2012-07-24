@@ -650,16 +650,6 @@ function get_up_tpl_box($box_name, $extra = array())
 	return $return;
 }
 
-/**
-* secondary function; see go.php?go=guide
-*/
-function group_id_order($a, $b) 
-{ 
-	$return = ($a['group_id'] == $b['group_id']) ? 0 : ($a['group_id'] < $b['group_id'] ? -1 : 1);
-
-	($hook = kleeja_run_hook('group_id_order_func')) ? eval($hook) : null; //run hook
-	return $return;
-}
 
 /**
 * Extract info of a style

@@ -423,13 +423,13 @@ function process ()
 								$this->errs[] = array(sprintf($lang['FORBID_EXT'], $this->typet), 'index_err');
 							}
 						}
-						elseif(kleeja_check_mime($_FILES['file_' . $i . '_']['type'], $this->types[strtolower($this->typet)]['group_id'], $_FILES['file_' . $i . '_']['tmp_name']) == false)
+						elseif(kleeja_check_mime($_FILES['file_' . $i . '_']['type'], in_array(strtolower($this->typet), array('gif', 'png', 'jpg', 'jpeg', 'bmp')), $_FILES['file_' . $i . '_']['tmp_name']) == false)
 						{
 							$this->errs[] = array(sprintf($lang['NOT_SAFE_FILE'], htmlspecialchars($_FILES['file_' . $i . '_']['name'])), 'index_err');
 						}
-						elseif($this->types[strtolower($this->typet)]['size'] > 0 && $this->sizet >= $this->types[strtolower($this->typet)]['size'])
+						elseif($this->types[strtolower($this->typet)] > 0 && $this->sizet >= $this->types[strtolower($this->typet)])
 						{
-							$this->errs[] = array(sprintf($lang['SIZE_F_BIG'], htmlspecialchars($_FILES['file_' . $i . '_']['name']), Customfile_size($this->types[strtolower($this->typet)]['size'])), 'index_err');
+							$this->errs[] = array(sprintf($lang['SIZE_F_BIG'], htmlspecialchars($_FILES['file_' . $i . '_']['name']), Customfile_size($this->types[strtolower($this->typet)])), 'index_err');
 						}
 						else
 						{
@@ -581,9 +581,9 @@ function process ()
 								if($data != false)
 								{
 									$this->sizet = strlen($data);
-									if($this->types[strtolower($this->typet)]['size'] > 0 && $this->sizet >= $this->types[strtolower($this->typet)]['size'])
+									if($this->types[strtolower($this->typet)] > 0 && $this->sizet >= $this->types[strtolower($this->typet)])
 									{
-										$this->errs[] = array(sprintf($lang['SIZE_F_BIG'], htmlspecialchars($_POST['file_' . $i . '_']), Customfile_size($this->types[strtolower($this->typet)]['size'])), 'index_err');
+										$this->errs[] = array(sprintf($lang['SIZE_F_BIG'], htmlspecialchars($_POST['file_' . $i . '_']), Customfile_size($this->types[strtolower($this->typet)])), 'index_err');
 									}
 									else
 									{
@@ -603,9 +603,9 @@ function process ()
 							{
 								$this->sizet = $this->get_remote_file_size($_POST['file_' . $i . '_']);
 		
-								if($this->types[strtolower($this->typet)]['size'] > 0 && $this->sizet >= $this->types[strtolower($this->typet)]['size'])
+								if($this->types[strtolower($this->typet)] > 0 && $this->sizet >= $this->types[strtolower($this->typet)])
 								{
-									$this->errs[] = array(sprintf($lang['SIZE_F_BIG'], htmlspecialchars($_POST['file_' . $i . '_']), Customfile_size($this->types[strtolower($this->typet)]['size'])), 'index_err');
+									$this->errs[] = array(sprintf($lang['SIZE_F_BIG'], htmlspecialchars($_POST['file_' . $i . '_']), Customfile_size($this->types[strtolower($this->typet)])), 'index_err');
 								}
 								else
 								{

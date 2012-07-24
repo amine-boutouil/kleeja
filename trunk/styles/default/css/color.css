@@ -314,22 +314,22 @@
 /*	--------------------------------------------------
 	19. Template & List of allowed file upload > guide.html
 	-------------------------------------------------- */
-	.guide_user_th, .guide_visitor_th{color:white;border: 1px solid #D54D10;}
-	.guide_user_th  {background:#767676 url("../images/bg_tile.gif") repeat-x bottom right;border-color:#727272;}
-	.guide_visitor_th {background:#FF9A1D url("../images/bg_tile_tab.png") repeat-x bottom left;}
-	.user_box{background:white url("../images/bg_box_1.gif") repeat-x top left;border-right:1px solid white;border-left:1px solid white;}
-	.user_img,.user_n4me, .visitor_img {color:#333;}
-	.user_img {background-color:white;border:1px solid #DBDBDB;}
-	.user_ext{background:#F9F9F9 url("../images/headline_bg.png") repeat-x top right;border-bottom: 1px solid #EFEFEF;border-top: 1px solid #DBDBDB;}
-	.user_ext_color{color:#222;}
-	.user_ext_lang{color:black;}
-	.visitor_box{background:white url("../images/bg_box.gif") repeat-x top left;border-right:1px solid white;border-left:1px solid white;}
-	.visitor_img {background-color:white;border: 1px solid #FFD1BF;}
-	.visitor_n4me{color:#F45E13;}
-	.visitor_ext{background:#FEFAF6 url("../images/headline_bg.png") repeat-x top right;border-bottom: 1px solid #FFE3D9;border-top: 1px solid #FFD1BF;}
-	.visitor_ext_color{color:#333;}
-	.visitor_ext_lang{color:black;}
-	.user_ext:hover{background-color:white;}
+	.guide_right_th, .guide_left_th{color:white;border: 1px solid #D54D10;}
+	.guide_right_th  {background:#767676 url("../images/bg_tile.gif") repeat-x bottom right;border-color:#727272;}
+	.guide_left_th {background:#FF9A1D url("../images/bg_tile_tab.png") repeat-x bottom left;}
+	.guide_right_box{background:white url("../images/bg_box_1.gif") repeat-x top left;border-right:1px solid white;border-left:1px solid white;}
+	.guide_right_img,.guide_right_n4me, .guide_left_img {color:#333;}
+	.guide_right_img {background-color:white;border:1px solid #DBDBDB;}
+	.guide_right_ext{background:#F9F9F9 url("../images/headline_bg.png") repeat-x top right;border-bottom: 1px solid #EFEFEF;border-top: 1px solid #DBDBDB;}
+	.guide_right_ext_color{color:#222;}
+	.guide_right_ext_lang{color:black;}
+	.guide_left_box{background:white url("../images/bg_box.gif") repeat-x top left;border-right:1px solid white;border-left:1px solid white;}
+	.guide_left_img {background-color:white;border: 1px solid #FFD1BF;}
+	.guide_left_n4me{color:#F45E13;}
+	.guide_left_ext{background:#FEFAF6 url("../images/headline_bg.png") repeat-x top right;border-bottom: 1px solid #FFE3D9;border-top: 1px solid #FFD1BF;}
+	.guide_left_ext_color{color:#333;}
+	.guide_left_ext_lang{color:black;}
+	.guide_right_ext:hover{background-color:white;}
 /* @end */
 
 /*	--------------------------------------------------

@@ -87,7 +87,7 @@
 	.left_button {float:right;}
 	.file_cp .odd, .file_cp .nbr {text-align:left;}
 	/* @Template & List of allowed file upload > guide.html -------------- */
-	.user_img img, .visitor_img img{padding-left:0;padding-right:5px;}
+	.guide_right_img img, .guide_left_img img{padding-left:0;padding-right:5px;}
 	/* @Template & Copy the links after upload > up_boxes.html --------- */
 	td.btitle {width:120px;border-left:1px solid #C8BD7C;border-right:none;}
 	td.all_box_link {border-right:1px solid #C8BD7C;border-left:none;}

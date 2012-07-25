@@ -28,8 +28,5 @@
     color: #fff; }
 .active .pop_toggle {
   z-index: 2000;
-  position: absolute;
-  top: 0;
-  left: 0;
   background-image: url(../images/header_arrow_down.png);
 }

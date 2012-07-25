@@ -47,7 +47,7 @@
 	color: #000;
 }
 #menu .link_menu .kbubbles{
-	font-size:xx-small; vertical-align:top; color:#E0226E;
+	font-size:xx-small; vertical-align:top; color:#fff;background-color: #ff0000;padding: 1px 4px; -webkit-border-radius: 8px;-moz-border-radius: 8px; border-radius: 8px;
 }
 
 #menu_left ul li { 

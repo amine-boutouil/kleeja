@@ -103,11 +103,11 @@ case 'action_file':
 				$file = str_replace('.php','', $file);
 				$db_ver = $order_update_files[$file];
 
-				//condition for RC6 and DEV, this will be removed later...
-				#if(defined('DEV_STAGE') && $config['db_version'] == 7)
-				#{
-				#	$config['db_version'] = 7;
-				#}
+				//condition DEV, this will be removed later...
+				if(defined('DEV_STAGE'))
+				{
+					$config['db_version']--;
+				}
 
 				if((empty($config['db_version']) or $db_ver > $config['db_version']))
 				{

@@ -92,6 +92,9 @@
 		/*float:right;*/
 		width:70%;
 	}
+	#content .tit_con h1{
+	float:right;
+	}
 	#content .second-action{
 		float:left;
 		text-align:left;

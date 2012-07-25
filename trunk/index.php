@@ -21,7 +21,7 @@ include ('includes/common.php');
 //
 //Is kleeja only for memebers ?! 
 //
-if(empty($g_exts) && !$usrcp->name())
+if(empty($d_groups[2]['exts']) && !$usrcp->name())
 {
 	// Send a 503 HTTP response code to prevent search bots from indexing this message
 	header('HTTP/1.1 503 Service Temporarily Unavailable');
@@ -78,7 +78,7 @@ $filecp_link	= $usrcp->id() ? $config['siteurl'] . ($config['mod_writer'] ? 'fil
 
 //
 //For who online now..  
-//I dont like this feature and i prefer disable it
+//I dont like this feature and I prefer to disable it
 //
 $show_online = $config['allow_online'] == 1 ? true : false;
 if ($show_online)
@@ -89,8 +89,12 @@ if ($show_online)
 	$timeout2		= time()-$timeout;  
 
 	$search_engines = array(
-							'Google' => '<span style="color:orange;">GoogleBot</span>',
-							'Yahoo' => '<span style="color:red;">Yahoo!Slurp</span>',
+							'AdsBot-Google' => '<span style="color:red;">Google Ads Bot</span>',
+							'ia_archiver'	=> '<span style="color:red;">Alexa Bot</span>',
+							'Baiduspider+('	=> '<span style="color:red;">Baidu Spider</span>',
+							'bingbot'			=> '<span style="color:red;">Bing Bot</span>',
+							'Mediapartners-Google'	=> '<span style="color:red;">Google Adsense Bot</span>',
+							'Google' 		=> '<span style="color:orange;">Google Bot</span>',
 							//add more ..
 							);
 

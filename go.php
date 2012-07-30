@@ -17,7 +17,7 @@ include ('includes/common.php');
 
 if(!isset($_GET['go']))
 {
-	$_GET['go'] = null;	
+	$_GET['go'] = null;
 }
 
 switch ($_GET['go'])
@@ -41,7 +41,7 @@ switch ($_GET['go'])
 			{
 				$ttgroups[] = array(
 									'ext'	=> $ext,
-									'size'	=> $size,
+									'size'	=> Customfile_size($size),
 									'group'	=> $gid,
 									'group_name'=> preg_replace('!{lang.([A-Z0-9]+)}!e', '$lang[\'\\1\']', $d_groups[$gid]['data']['group_name']),
 									'most_firstrow'=> $same_group == 0 ? true : false,

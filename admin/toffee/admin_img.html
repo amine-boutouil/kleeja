@@ -6,7 +6,8 @@ jQuery(document).ready(function($){
 	//$.preload('#Kload img', {placeholder:'{STYLE_PATH_ADMIN}images/ajax-loader-small.gif',notFound:'{STYLE_PATH_ADMIN}images/failerror.jpg',	enforceCache: true,	threshold: 2 });
 
 	$("img.mask").hover(function(){$(this).stop().animate({'opacity': '0'}, 'fast');},function() {$(this).stop().animate({'opacity': '1'}, 'fast');});
-			
+	
+	$('.tip').tipsy('hide');
 	$('.tip').tipsy({
 		title: function() { return $(this).children('.ktip').html() },
 		html: true,
@@ -38,7 +39,16 @@ jQuery(document).ready(function($){
 			break;
 		}
 	});
-
+	
+	//when checked one checkbox?
+	$(".kcheck input[type=checkbox]").click( function(){
+		if($('.kcheck input[type=checkbox]:checked').length == 1){
+			$('#search-one-item').css('display', 'inline');
+		}
+		else{
+			$('#search-one-item').css('display', 'none');
+		}
+	});
 });
 //-->
 </script>
@@ -106,8 +116,16 @@ jQuery(document).ready(function($){
 <p>
 	<input type="hidden" name="submit" value="1" />
 	<button type="submit" name="submit" class="btn" onclick="javascript:submit_kleeja_data('#imgs_form', '#content', 1); return false;"><span>{lang.DEL_SELECTED}</span></button>
+	 
+	<span id="search-one-item" style="display:none">
+	| <select>
+		<option value="0">Search For</option>
+		<option>IP</option>
+		<option>User</option>
+	</select>
+	
+	</span>
 </p>
-
 </IF>
 	
 {H_FORM_KEYS}

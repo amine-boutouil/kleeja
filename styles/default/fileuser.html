@@ -52,30 +52,29 @@
         <ELSE>
        
         <!-- table all files -->
-        <table class="tabledata">
-                <thead>
-                        <tr>
-                                <th>#</th>
-                                <th colspan="2">{lang.FILETYPE}</th>
-                                <th>{lang.FILENAME}</th>
-                                <th>{lang.FILEUPS}</th>
-                                <th>{lang.LAST_DOWN}</th>
-                        </tr>  
-                </thead>
-               
-                <tbody>
-                        <LOOP NAME="arr">      
-                        <tr>
-                                <td>{{i}}</td>
-                                <td>{{file_type}}</td>
-                                <td><img src="{{icon_link}}" alt="{{file_type}}" /></td>
-                                <td class="odd">{{name}}</td>
-                                <td>{{uploads}}</td>
-                                <td>{{last_down}}</td>
-                        </tr>
-                        </LOOP>
-                </tbody>        
-        </table>
+<div class="xthumbs">
+	<LOOP NAME="arr">
+	<ul>
+	<li id="su[{{id}}]" class="tip">
+		<a href="{{href}}" rel="facebox">
+			<div id="Kload"><img src="{{url_thumb}}" alt="{{file_type}}"  /></div>
+		</a>
+		<ul class='ktip' style="display: none;">
+			<ul>
+			<li><span>{lang.FILENAME} :</span>{{name}}</li>
+			<li><span>{lang.FILEUPS} :</span> {{ups}}</li>
+			<li><span>{lang.FILESIZE} :</span> {{size}}</li>
+			<li><span>{lang.FILEDATE} :</span> {{time}}</li>
+			<li><span>{lang.FILEUPS}</span>{{uploads}}</li>
+			<li><span>{lang.LAST_DOWN}</span>{{last_down}}</li>
+			</ul>
+		</ul>
+		<p class="kcheck" onclick="javascript:$('#del_{{id}}').attr('checked', !$('#del_{{id}}').attr('checked'));"><input id="del_{{id}}" name="del_{{id}}" type="checkbox" value="{{id}}" onclick="change_color(this,'su[{{id}}]', 'kfocus');" rel="_del" /></p>
+	</li>
+	</ul>
+	</LOOP>
+</div>
+
         <!-- @end-table-all-files -->
         </IF>
        

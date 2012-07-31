@@ -54,7 +54,7 @@
         <!-- table all files -->
 <div class="xthumbs">
 	<LOOP NAME="arr">
-	<ul>
+	{{tdnum}}
 	<li id="su[{{id}}]" class="tip">
 		<a href="{{href}}" rel="facebox">
 			<div id="Kload">{{url_thumb}}</div>
@@ -71,7 +71,7 @@
 		</ul>
 		<p class="kcheck" onclick="javascript:$('#del_{{id}}').attr('checked', !$('#del_{{id}}').attr('checked'));"><input id="del_{{id}}" name="del_{{id}}" type="checkbox" value="{{id}}" onclick="change_color(this,'su[{{id}}]', 'kfocus');" rel="_del" /></p>
 	</li>
-	</ul>
+	{{tdnum2}}
 	</LOOP>
 </div>
 

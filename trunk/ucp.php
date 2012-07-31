@@ -409,13 +409,13 @@ switch ($_GET['go'])
 
 				$is_image = in_array(strtolower(trim($row['type'])), array('gif', 'jpg', 'jpeg', 'bmp', 'png', 'tiff', 'tif')) ? true : false;
 				$url = ($is_image) ? kleeja_get_link('image', $file_info) : kleeja_get_link('file', $file_info);
+				$url_fileuser = ($is_image) ? $url : (file_exists("images/filetypes/".  $row['type'] . ".png"))? "images/filetypes/" . $row['type'] . ".png" : 'images/filetypes/file.png';
 
 				//make new lovely arrays !!
 				$arr[] 	= array(
 						'id'		=> $row['id'],
 						'name'		=> ($row['real_filename'] == '' ? ((strlen($row['name']) > 40) ? substr($row['name'], 0, 40) . '...' : $row['name']) : ((strlen($row['real_filename']) > 40) ? substr($row['real_filename'], 0, 40) . '...' : $row['real_filename'])),
-						'url_thumb' => $url,
-						'icon_link'	=>(file_exists("images/filetypes/".  $row['type'] . ".png"))? "images/filetypes/" . $row['type'] . ".png" : 'images/filetypes/file.png',
+						'url_thumb' => $url_fileuser,
 						'file_type'	=> $row['type'],
 						'image_path'=> $is_image ? $url : '',
 						'uploads'	=> $row['uploads'],
@@ -505,7 +505,6 @@ switch ($_GET['go'])
 						'id'	=> $row['id'],
 						'name'	=> '<a title="' . ($row['real_filename'] == '' ? $row['name'] : $row['real_filename']) . '" href="' .  $url . '" onclick="window.open(this.href,\'_blank\');return false;">' . ($row['real_filename'] == '' ? ((strlen($row['name']) > 40) ? substr($row['name'], 0, 40) . '...' : $row['name']) : ((strlen($row['real_filename']) > 40) ? substr($row['real_filename'], 0, 40) . '...' : $row['real_filename'])) . '</a>',
 						'i'		=> $i,
-						'icon_link'	=>(file_exists('images/filetypes/' . $row['type'] . '.png'))? 'images/filetypes/' . $row['type'] . '.png' : 'images/filetypes/file.png',
 						'file_type'	=> $row['type'],
 						);
 

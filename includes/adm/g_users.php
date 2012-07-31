@@ -18,8 +18,9 @@ if (!defined('IN_ADMIN'))
 //for style ..
 $stylee			= "admin_users";
 $current_smt	= isset($_GET['smt']) ? (preg_match('![a-z0-9_]!i', trim($_GET['smt'])) ? trim($_GET['smt']) : 'general') : 'general';
-$action			= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;page=' . (isset($_GET['page'])  ? intval($_GET['page']) : 1);
-$action			.= (isset($_GET['search']) ? '&amp;search=' . $SQL->escape($_GET['search']) : '') . '&amp;smt=' . $current_smt;
+$action			= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . (isset($_GET['page'])  ? '&amp;page=' . intval($_GET['page']) : '');
+$action			.= (isset($_GET['search']) ? '&amp;search=' . $SQL->escape($_GET['search']) : '');
+$action			.= (isset($_GET['qg']) ? '&amp;qg=' . intval($_GET['qg']) : '') . '&amp;smt=' . $current_smt;
 $action_all		= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php')  . '&amp;smt=' . $current_smt . (isset($_GET['page']) ? '&amp;page=' . intval($_GET['page']) : '');
 
 $is_search	= $affected = $is_asearch = false;
@@ -362,14 +363,12 @@ case 'group_acl':
 break;
 
 case 'group_data':
-	
-	#submit
-	if(isset($f))
+	$req_group = isset($_GET['qg']) ? intval($_GET['qg']) : 0;
+	if(!$req_group)
 	{
+		kleeja_admin_err('ERROR-NO-ID', true, '', true,  basename(ADMIN_PATH) . '?cp=g_users');
 	}
 
-
-	$req_group	= isset($_GET['qg']) ? intval($_GET['qg']) : 0;
 	$group_name	= preg_replace('!{lang.([A-Z0-9]+)}!e', '$lang[\'\\1\']', $d_groups[$req_group]['data']['group_name']);
 	$gdata		= $d_groups[$req_group]['data'];
 
@@ -384,10 +383,32 @@ case 'group_data':
 
 	$data = array();
 	$cdata= $d_groups[$req_group]['configs'];
+	$STAMP_IMG_URL = file_exists(PATH . 'images/watermark.gif') ? PATH . 'images/watermark.gif' : PATH . 'images/watermark.png';
 
 	while($row=$SQL->fetch_array($result))
-	{
-		if($row['name'] == 'language') 
+	{	
+		#submit, why here ? dont ask me just accept it as it.
+		if(isset($_POST['editdata']))
+		{
+			($hook = kleeja_run_hook('after_submit_adm_users_groupdata')) ? eval($hook) : null; //run hook
+
+			$new[$row['name']] = isset($_POST[$row['name']]) ? $_POST[$row['name']] : $row['value'];
+
+			$update_query = array(
+									'UPDATE'	=> "{$dbprefix}groups_data",
+									'SET'		=> "value='" . $SQL->escape($new[$row['name']]) . "'",
+									'WHERE'		=> "name='" . $row['name'] . "' AND group_id=". $req_group
+								);
+
+			$SQL->build($update_query);
+
+			#delete cache ..
+			delete_cache('data_groups');
+
+			kleeja_admin_info($lang['CONFIGS_UPDATED'], true, '', true,  basename(ADMIN_PATH) . '?cp=g_users');
+		}
+	
+		if($row['name'] == 'language')
 		{
 			//get languages
 			if ($dh = @opendir(PATH . 'lang'))
@@ -408,7 +429,6 @@ case 'group_data':
 										'<div class="box">' . (empty($row['option']) ? '' : $tpl->admindisplayoption(preg_replace('!{con.[a-z0-9_]+}!', '{cdata.' . $row['name'] . '}', $row['option']))) . '</div>' . "\n" .
 										'</div>' . "\n" . '<div class="clear"></div>',
 			);
-	
 	}
 	$SQL->freeresult($result);
 

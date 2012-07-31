@@ -402,6 +402,7 @@ switch ($_GET['go'])
 			}
 			$user_name = (!$data_user['name']) ? false : $data_user['name'];
 			$i = ($currentPage * $perpage) - $perpage;
+			$tdnum = $num = 0;
 			while($row=$SQL->fetch_array($result))
 			{
 				++$i;
@@ -412,7 +413,9 @@ switch ($_GET['go'])
 				$url = $is_image ? kleeja_get_link('image', $file_info) : kleeja_get_link('file', $file_info);
 			
 				$url_fileuser = $is_image ? $url : (file_exists("images/filetypes/".  $row['type'] . ".png")? "images/filetypes/" . $row['type'] . ".png" : 'images/filetypes/file.png');
-
+                
+				$tdnum = $tdnum == 4 ? 0 : $tdnum+1;
+				
 				//make new lovely arrays !!
 				$arr[] 	= array(
 						'id'		=> $row['id'],
@@ -421,6 +424,8 @@ switch ($_GET['go'])
 						'file_type'	=> $row['type'],
 						'image_path'=> $is_image ? $url : '',
 						'uploads'	=> $row['uploads'],
+						'tdnum'		=> $tdnum == 0 ? '<ul>': '',
+						'tdnum2'	=> $tdnum == 4 ? '</ul>' : '',
 						'last_down'	=> !empty($row['last_down']) ? date('d-m-Y h:i a', $row['last_down']) : '...',
 						'i'		=> $i,
 					);

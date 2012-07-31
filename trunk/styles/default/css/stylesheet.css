@@ -150,7 +150,7 @@
 	body {width:100%;height:100%;}
 	#main {width:960px;margin:10px auto;}
 	#wrapper {height:100%;padding:15px 40px 10px 40px;}
-	#content, #content_index  {float:left;width:70%;padding:10px 20px;margin:0;}
+	#content, #content_index  {float:left;width:73%;padding:10px 15px;margin:0;}
 	#content_index {min-height:220px;float:right;padding:0 20px;}
 /* @end */
 	

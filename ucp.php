@@ -417,7 +417,7 @@ switch ($_GET['go'])
 				$arr[] 	= array(
 						'id'		=> $row['id'],
 						'name'		=> ($row['real_filename'] == '' ? ((strlen($row['name']) > 40) ? substr($row['name'], 0, 40) . '...' : $row['name']) : ((strlen($row['real_filename']) > 40) ? substr($row['real_filename'], 0, 40) . '...' : $row['real_filename'])),
-						'url_thumb' => $url_fileuser,
+						'url_thumb' => '<a title="' . ($row['real_filename'] == '' ? $row['name'] : $row['real_filename']) . '"  href="' . $url . '" onclick="window.open(this.href,\'_blank\');return false;"><img src="' . $url_fileuser . '" alt="" /></a>',
 						'file_type'	=> $row['type'],
 						'image_path'=> $is_image ? $url : '',
 						'uploads'	=> $row['uploads'],

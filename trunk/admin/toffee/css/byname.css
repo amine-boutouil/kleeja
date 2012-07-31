@@ -453,7 +453,7 @@ background-color:#E3F2FF;
 #boxs img.expand {position:absolute;top:0;left:0;}
 #boxs img.expand:hover {background:url(../images/expand.png) no-repeat center center !important;}
 
-.kcheck {bottom:1px;right:0;z-index:703;padding:0 !important;margin:1px 0 !important;}
+.kcheck {bottom:1px;right:0;z-index:703;padding:0 !important;margin:1px 0 !important; background-color:#FAFAFA;}
 .kfocus {background-color:#ccc;}
 ul.ktip{float:right;}
 ul.ktip li{width:240px;height:22px;line-height:22px;float: right;border-bottom:1px solid #F0DE7D;text-align:right;}

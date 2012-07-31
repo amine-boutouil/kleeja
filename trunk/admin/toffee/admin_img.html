@@ -95,7 +95,7 @@ jQuery(document).ready(function($){
 			<li><span>{lang.IP} :</span> {{ip}}</li>
 			</ul>
 		</ul>
-		<p class="kcheck"><input name="del_{{id}}" type="checkbox" value="{{id}}" onclick="change_color(this,'su[{{id}}]', 'kfocus');" rel="_del" /></p>
+		<p class="kcheck" onclick="javascript:$('#del_{{id}}').attr('checked', !$('#del_{{id}}').attr('checked'));"><input id="del_{{id}}" name="del_{{id}}" type="checkbox" value="{{id}}" onclick="change_color(this,'su[{{id}}]', 'kfocus');" rel="_del" /></p>
 	</li>
 	{{tdnum2}}
 	</LOOP>

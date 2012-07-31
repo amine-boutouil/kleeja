@@ -408,8 +408,10 @@ switch ($_GET['go'])
 				$file_info = array('::ID::' => $row['id'], '::NAME::' => $row['name'], '::DIR::' => $row['folder'], '::FNAME::' => $row['real_filename']);
 
 				$is_image = in_array(strtolower(trim($row['type'])), array('gif', 'jpg', 'jpeg', 'bmp', 'png', 'tiff', 'tif')) ? true : false;
-				$url = ($is_image) ? kleeja_get_link('image', $file_info) : kleeja_get_link('file', $file_info);
-				$url_fileuser = ($is_image) ? $url : (file_exists("images/filetypes/".  $row['type'] . ".png"))? "images/filetypes/" . $row['type'] . ".png" : 'images/filetypes/file.png';
+		
+				$url = $is_image ? kleeja_get_link('image', $file_info) : kleeja_get_link('file', $file_info);
+			
+				$url_fileuser = $is_image ? $url : (file_exists("images/filetypes/".  $row['type'] . ".png")? "images/filetypes/" . $row['type'] . ".png" : 'images/filetypes/file.png');
 
 				//make new lovely arrays !!
 				$arr[] 	= array(

@@ -7,7 +7,7 @@
 	******************************************************/
 
 	/** @CSS Reset was written by Dejan Cancarevic & (http://stylizedweb.com/2008/02/14/10-best-css-hacks) **/
-	html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre,a, abbr, acronym, address, big, cite, code,del, dfn, em, font, img, ins, kbd, q, s, samp,small, strike, strong, sub, sup, tt, var,dl, dt, dd, ol, ul, li,fieldset, form, label, legend,table, caption, tbody, tfoot, thead, tr, th, td {margin: 0;padding: 0;border: 0;outline: 0;font-weight: inherit;font-style: inherit;font-size: 100%;font-family: inherit;vertical-align: baseline;}:focus {outline: 0;}body {line-height: 1;color: black;background: white;}ol, ul {list-style: none;}table {border-collapse: separate;border-spacing: 0;}caption, th, td {text-align: right;font-weight: normal;}blockquote:before, blockquote:after,q:before, q:after {content: "";}blockquote, q {quotes: "" "";}
+	html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre,a, abbr, acronym, address, big, cite, code,del, dfn, em, font, img, ins, kbd, q, s, samp,small, strike, strong, sub, sup, tt, var,dl, dt, dd, A D, li,fieldset, form, label, legend,table, caption, tbody, tfoot, thead, tr, th, td {margin: 0;padding: 0;border: 0;outline: 0;font-weight: inherit;font-style: inherit;font-size: 100%;font-family: inherit;vertical-align: baseline;}:focus {outline: 0;}body {line-height: 1;color: black;background: white;}ol, ul {list-style: none;}table {border-collapse: separate;border-spacing: 0;}caption, th, td {text-align: right;font-weight: normal;}blockquote:before, blockquote:after,q:before, q:after {content: "";}blockquote, q {quotes: "" "";}
 		
 	/** @Print Styles **/
 	@media print{body {background-color:white !important;color: black !important; }a, a:link, a:visited { color: black !important; text-decoration:none !important;} #footer, .extras_header, .extras_footer{display: none;}}
@@ -281,14 +281,9 @@
 	#filecplink fieldset{padding: 15px;margin:8px auto;}
 	#filecplink  input.link_user {direction:ltr;width:98%;margin:0 auto;padding:6px;font-size:90%;font-weight: 700;letter-spacing:1px;}
 	#filecplink legend.copylink {font-size:90%;font-weight: 400;padding:0 5px;}
-	.tabledata {width:100%;}
-	.tabledata th , .tabledata td ,.tabledata tbody td {padding:0 5px;height: 30px;line-height: 30px;vertical-align:middle;text-align:center;}
-	.tabledata .odd  {text-align:right;width:50%;}
-	.tabledata thead th {white-space: nowrap;font-weight:bold;}
-	.tabledata tbody td {font-size:90%;font-weight: 700;white-space:nowrap;}
-	.tabledata a:visited {text-decoration:line-through;}
-	.tabledata th:hover a, .tabledata td:hover a {text-decoration:underline;}
-	.tabledata tr th:hover, .tabledata tr td:hover {cursor:text;}
+	.xthumbs {width:100%;}
+	.xthumbs ul{list-style: none;}
+
 /* @end */
 
 /*	--------------------------------------------------

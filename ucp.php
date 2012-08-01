@@ -426,8 +426,9 @@ switch ($_GET['go'])
 						'uploads'	=> $row['uploads'],
 						'tdnum'		=> $tdnum == 0 ? '<ul>': '',
 						'tdnum2'	=> $tdnum == 4 ? '</ul>' : '',
+						'href'		=> $url,
 						'last_down'	=> !empty($row['last_down']) ? date('d-m-Y h:i a', $row['last_down']) : '...',
-						'i'		=> $i,
+						'thumb_link'=> $url_fileuser,
 					);
 			}
 			

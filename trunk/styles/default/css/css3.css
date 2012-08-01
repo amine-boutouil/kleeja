@@ -19,7 +19,7 @@
 	body {text-shadow: 0 0 2px #fff;}
 	h1 { text-shadow: 0px 0px 2px #FFFF80;}
 	/* @Dark gray text shadow ------- */
-	.top_nav .menu li a.current, .guide_right_th, .guide_left_th, .tit , .file_cp thead th , .tabledata thead th,
+	.top_nav .menu li a.current, .guide_right_th, .guide_left_th, .tit , .file_cp thead th ,
 	#right_menu .list a,	#right_menu .list a.current,	#footer .admin_cp_link span,	#boxfileuser .public {
 	text-shadow: 0 0 2px #444;}
 /* @end */
@@ -48,7 +48,7 @@
 
 	/* @Gray Shadow --------------- */	
 	.onlineall,	.onlinevisitor,	.onlineusers, .name_users, .guide_user_th, .guide_visitor_th, .user_box,.forget_pass,
-	#profile .boxdata,.file_cp,	#boxfileuser .box_user, .tabledata,	#boxfileuser .us3r_n4me,	.data_file_down .download  a,	#footer .admin_cp_link span {
+	#profile .boxdata,.file_cp,	#boxfileuser .box_user, .xthumbs,	#boxfileuser .us3r_n4me,	.data_file_down .download  a,	#footer .admin_cp_link span {
 	-moz-box-shadow : 0px 0px 3px #999;-webkit-box-shadow : 0px 0px 3px #999;-khtml-box-shadow : 0px 0px 3px #999;box-shadow : 0px 0px 3px #999;}
 	
 	a.paginate:hover, a.paginate:focus,a.dots:hover, a.dots:focus,a.current,a.phover,a.phover:hover, a.phover:focus {text-shadow:-1px -1px 0 rgba(0,0,0,0.3) !important;}

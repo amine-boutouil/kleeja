@@ -243,17 +243,8 @@
 	#filecplink fieldset{border: 1px solid #aaa;}
 	#filecplink  input.link_user {color:#FF6A15;}
 	#filecplink legend.copylink {color:black;}
-	.tabledata {background:#E6E6E6 url("../images/bg_user_box.gif") repeat-x top left;border:1px solid #aaa;}
-	.tabledata th , .tabledata td ,.tabledata tbody td {border:1px solid #aaa;border-top-color: white;border-left-color: white;border-bottom-color:#aaa;}
-	.tabledata .odd  {background:#ECECEC url("../images/bg_footer.gif") repeat-x center right;}
-	.tabledata thead th {background:#D54D10 url("../images/bg_tile_tab.png") repeat-x top left;color:white;border:none;}
-	.tabledata a, .tabledata a:link {color:#222;}
-	.tabledata a:visited {color:#444;}
-	.tabledata th:hover a, .tabledata td:hover a {color:#FF6600;}
-	.tabledata:hover {border-color:#FF6600;}
-	.tabledata tr:hover {background:#FFEDC1;color:#FF6600;}
-	.tabledata thead tr:hover th, .tabledata thead th:hover {color:white;background:#D54D10 url("../images/bg_tile_tab.png") repeat-x top left;}
-	.tabledata tr th:hover, .tabledata tr td:hover {background:white;color:#FF6600;}
+	.xthumbs {background:#E6E6E6 url("../images/bg_user_box.gif") repeat-x top left;}
+
 /* @end */
 
 /*	--------------------------------------------------

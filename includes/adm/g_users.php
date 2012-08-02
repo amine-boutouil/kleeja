@@ -337,7 +337,12 @@ case 'general':
 break;
 
 case 'group_acl':
-	$req_group	= isset($_GET['qg']) ? intval($_GET['qg']) : 0;
+	$req_group = isset($_GET['qg']) ? intval($_GET['qg']) : 0;
+	if(!$req_group)
+	{
+		kleeja_admin_err('ERROR-NO-ID', true, '', true,  basename(ADMIN_PATH) . '?cp=g_users');
+	}
+
 	$group_name	= preg_replace('!{lang.([A-Z0-9]+)}!e', '$lang[\'\\1\']', $d_groups[$req_group]['data']['group_name']);
 
 	$query = array(
@@ -349,9 +354,22 @@ case 'group_acl':
 
 	$result = $SQL->build($query);
 	
-	$acls = array();
+	$acls = $submitted_on_acls = $submitted_ff_acls = array();
 	while($row=$SQL->fetch_array($result))
 	{
+		#if submit
+		if($_POST['editacl'])
+		{
+			if(isset($_POST[$row['acl_name']]) and (int) $row['acl_can'] == 0)
+			{
+				$submitted_on_acls[] = $row['acl_name'];
+			}
+			else if(!isset($_POST[$row['acl_name']]) and (int) $row['acl_can'] == 1)
+			{
+				$submitted_off_acls[] = $row['acl_name'];
+			}
+		}
+
 		$acls[] = array(
 						'acl_title'	=> $lang['ACLS_' .  strtoupper($row['acl_name'])],
 						'acl_name'	=> $row['acl_name'],
@@ -360,6 +378,37 @@ case 'group_acl':
 	}
 	$SQL->freeresult($result);
 
+	#if submit
+	if($_POST['editacl'])
+	{
+		#update 'can' acls
+		if(sizeof($submitted_on_acls))
+		{
+			$update_query = array(
+									'UPDATE'	=> "{$dbprefix}groups_acl",
+									'SET'		=> "`acl_can`=1",
+									'WHERE'		=> "`acl_name` IN ('" . implode("', '", $submitted_on_acls) . "') AND `group_id`=". $req_group
+								);
+
+			$SQL->build($update_query);
+		}
+
+		#update 'can not' acls
+		if(sizeof($submitted_off_acls))
+		{
+			$update_query2 = array(
+									'UPDATE'	=> "{$dbprefix}groups_acl",
+									'SET'		=> "`acl_can`=0",
+									'WHERE'		=> "`acl_name` IN ('" . implode("', '", $submitted_off_acls) . "') AND `group_id`=". $req_group
+								);
+
+			$SQL->build($update_query2);
+		}
+
+		#delete cache ..
+		delete_cache('data_groups');
+		kleeja_admin_info($lang['CONFIGS_UPDATED'], true, '', true,  basename(ADMIN_PATH) . '?cp=g_users');
+	}	
 break;
 
 case 'group_data':

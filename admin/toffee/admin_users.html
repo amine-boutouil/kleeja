@@ -274,7 +274,7 @@ $(document).ready( function(){
 	<h1><a href="{action}&amp;smt=general" onclick="javascript:get_kleeja_link(this.href); return false;">{lang.R_GROUPS}</a> &raquo; {lang.EDIT_ACL} ({group_name})</h1>   
 </div>
 
-<form method="post" action="{action_all}" id="edit_acl_form">
+<form method="post" action="{action}" id="edit_acl_form">
 
 <LOOP NAME="acls">
 <div class="section acls_tab">
@@ -283,7 +283,7 @@ $(document).ready( function(){
 	<p class="field switch">
 		<label class="cb-enable<IF LOOP="acl_can == 1"> selected</IF>"><span>{lang.HE_CAN}</span></label>
 		<label class="cb-disable<IF LOOP="acl_can == 0"> selected</IF>"><span>{lang.HE_CAN_NOT}</span></label>
-		<input type="checkbox" id="acls_{{acl_name}}" class="checkbox" name="acls[{{acl_name}}]" />
+		<input type="checkbox" id="acls_{{acl_name}}" class="checkbox" name="{{acl_name}}" <IF LOOP="acl_can == 1">checked="checked"</IF> />
 	</p>
 	</div>
 </div>

@@ -396,16 +396,12 @@ case 'group_data':
 
 			$update_query = array(
 									'UPDATE'	=> "{$dbprefix}groups_data",
-									'SET'		=> "value='" . $SQL->escape($new[$row['name']]) . "'",
-									'WHERE'		=> "name='" . $row['name'] . "' AND group_id=". $req_group
+									'SET'		=> "`value`='" . $SQL->escape($new[$row['name']]) . "'",
+									'WHERE'		=> "`name`='" . $row['name'] . "' AND `group_id`=". $req_group
 								);
 
 			$SQL->build($update_query);
-
-			#delete cache ..
-			delete_cache('data_groups');
-
-			kleeja_admin_info($lang['CONFIGS_UPDATED'], true, '', true,  basename(ADMIN_PATH) . '?cp=g_users');
+			continue;
 		}
 	
 		if($row['name'] == 'language')
@@ -431,6 +427,14 @@ case 'group_data':
 			);
 	}
 	$SQL->freeresult($result);
+
+	#submit
+	if(isset($_POST['editdata']))
+	{
+		#delete cache ..
+		delete_cache('data_groups');
+		kleeja_admin_info($lang['CONFIGS_UPDATED'], true, '', true,  basename(ADMIN_PATH) . '?cp=g_users');
+	}
 
 break;
 

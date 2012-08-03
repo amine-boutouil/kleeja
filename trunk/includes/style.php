@@ -264,7 +264,7 @@ class kleeja_style
 			$this->_parse($this->HTML);
 
  			ob_start();
-			eval('?' . '>' . trim($this->HTML) . '<' . '?');
+			eval(' ?' . '>' . trim($this->HTML) . '<' . '?php ');
 			$page = ob_get_contents();
 			ob_end_clean();
 		

@@ -472,9 +472,9 @@ case 'group_data':
 		}
 		$data[] = array(
 						'option'	=> '<div class="section">' . "\n" .  
-										'<h3><label for="' . $row['name'] . '">' . (!empty($lang[strtoupper($row['name'])]) ? $lang[strtoupper($row['name'])] : $olang[strtoupper($row['name'])]) . '</label></h3>' . "\n" .
-										'<div class="box">' . (empty($row['option']) ? '' : $tpl->admindisplayoption(preg_replace('!{con.[a-z0-9_]+}!', '{cdata.' . $row['name'] . '}', $row['option']))) . '</div>' . "\n" .
-										'</div>' . "\n" . '<div class="clear"></div>',
+										"\t" . '<h3><label for="' . $row['name'] . '">' . (!empty($lang[strtoupper($row['name'])]) ? $lang[strtoupper($row['name'])] : $olang[strtoupper($row['name'])]) . '</label></h3>' . "\n" .
+										"\t" . '<div class="box">' . (empty($row['option']) ? '' : $tpl->admindisplayoption(preg_replace('!{con.[a-z0-9_]+}!', '{cdata.' . $row['name'] . '}', $row['option']))) . '</div>' . "\n" .
+										'</div>' . "\n" . '<div class="br"></div>',
 			);
 	}
 	$SQL->freeresult($result);
@@ -482,6 +482,14 @@ case 'group_data':
 	#submit
 	if(isset($_POST['editdata']))
 	{
+		#update not-configs data
+		$update_query = array(
+								'UPDATE'	=> "{$dbprefix}groups",
+								'SET'		=> "`group_is_default`='" . intval($_POST['group_is_default']) . "'" . (isset($_POST['group_name']) ? ", `group_name`='" . $SQL->escape($new[$row['name']]) . "'" : ''),
+								'WHERE'		=> "`group_id`=". $req_group
+								);
+		$SQL->build($update_query);
+
 		#delete cache ..
 		delete_cache('data_groups');
 		kleeja_admin_info($lang['CONFIGS_UPDATED'], true, '', true,  basename(ADMIN_PATH) . '?cp=g_users');
@@ -489,12 +497,13 @@ case 'group_data':
 
 break;
 
-#handling adding-editing allowd file extensions for requested group
+#handling adding-editing allowed file extensions for requested group
 case 'group_exts':
 
 
 break;
 
+#show users (from search keyword)
 case 'show_su':
 	if(isset($_POST['search_user']))
 	{
@@ -512,6 +521,7 @@ case 'show_su':
 	$isn_search	= false;
 	$query['WHERE']	=	"name != '' $usernamee $usermailee";
 	
+#show users (for requested group)
 case 'show_group':
 	$is_search	= true;
 	$isn_search	= false;
@@ -521,7 +531,7 @@ case 'show_group':
 
 	$query['WHERE']	= "name != '' AND group_id =  " . $req_group;
 
-
+#show users (all) 
 case 'users':
 
 	$query['SELECT']	= 'COUNT(id) AS total_users';

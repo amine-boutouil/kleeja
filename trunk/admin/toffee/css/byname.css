@@ -143,7 +143,7 @@
 		}
 	#content .br{
 			width:100%;
-			margin:30px auto;
+			margin-top:10px;
 			clear:both;
 		}
 	#content .menu_but_in_content{
@@ -519,3 +519,21 @@ fieldset.fieldset_groups legend {
   padding: 0.2em 0.5em;
   font-size:16px;
   }
+  
+.groups_edit .section:hover{
+	background-color:#FAFFD6;
+}
+.groups_edit .section {
+	border-bottom:1px dotted #ccc;
+	padding:3px;
+	height:25px;
+	font-size:14px;
+}
+
+.groups_edit .section .box br{
+ display:none;
+}
+.groups_edit .section .box img{
+	margin-right:20px;
+	float:left;
+}

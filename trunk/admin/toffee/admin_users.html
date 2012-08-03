@@ -311,11 +311,12 @@ $(document).ready( function(){
 
 
 <ELSEIF NAME="current_smt == group_data">
-   <div class="tit_con">
-<h1><a href="{action}&amp;smt=general" onclick="javascript:get_kleeja_link(this.href); return false;">{lang.R_GROUPS}</a> &raquo; {lang.EDIT_DATA} ({group_name})</h1>   
-   </div>
+<div class="tit_con">
+	<h1><a href="{action}&amp;smt=general" onclick="javascript:get_kleeja_link(this.href); return false;">{lang.R_GROUPS}</a> &raquo; {lang.EDIT_DATA} ({group_name})</h1>
+</div>
+
 <!-- the big box begin -->
-<div class="big-box">
+<div class="big-box groups_edit">
 <form method="post" action="{action}" id="edit_data_form">
 <div class="section">
 	<h3><label for="group_name">{lang.GROUP_NAME}</label></h3>
@@ -338,12 +339,11 @@ $(document).ready( function(){
 <div class="br"></div>
 
 <hr />
+
 <LOOP NAME="data">
 	{{option}}
 </LOOP>
-
 <div class="br"></div>
-
 <!-- button -->
 <p>
 	<input type="hidden" name="editdata" value="1" />

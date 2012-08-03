@@ -537,3 +537,28 @@ fieldset.fieldset_groups legend {
 	margin-right:20px;
 	float:left;
 }
+/*configs page*/
+.configs_page .section:hover{
+	background-color:#FAFFD6;
+}
+.configs_page .section {
+	border-bottom:1px dotted #ccc;
+	padding:3px;
+	height:25px;
+	font-size:14px;
+}
+.configs_page .section .box br{
+ display:none;
+}
+.configs_page .section .box img{
+	margin-right:20px;
+	float:left;
+}
+.configs_page .section .box label[for=thumbs_imgs]{
+	padding-right:30px;
+}
+.configs_page .section .box label[for=thumbs_imgs]:before{
+content:",";
+}.configs_page .section .box label[for=thumbs_imgs]:after{
+content:":	";
+}

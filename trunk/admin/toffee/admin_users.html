@@ -42,6 +42,9 @@ $(document).ready( function(){
 			<a href="{action}&amp;smt=group_acl&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.EDIT_ACL}">
 				<img  src="{STYLE_PATH_ADMIN}images/acls_edit.png" alt="{lang.EDIT_ACL}" />
 			</a>
+			<a href="{action}&amp;smt=group_exts&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.R_EXTS}">
+				<img  src="{STYLE_PATH_ADMIN}images/exts_edit.png" alt="{lang.R_EXTS}" />
+			</a>
 			<a href="{action}&amp;smt=show_group&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.USERS}">
 				<img  src="{STYLE_PATH_ADMIN}images/users_show.png" alt="{lang.USERS}" />
 			</a>
@@ -67,10 +70,12 @@ $(document).ready( function(){
 			<a href="{action}&amp;smt=group_acl&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.EDIT_ACL}">
 				<img  src="{STYLE_PATH_ADMIN}images/acls_edit.png" alt="{lang.EDIT_ACL}" />
 			</a>
+			<a href="{action}&amp;smt=group_exts&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.R_EXTS}">
+				<img  src="{STYLE_PATH_ADMIN}images/exts_edit.png" alt="{lang.R_EXTS}" />
+			</a>
 			<a href="{action}&amp;smt=show_group&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.USERS}">
 				<img  src="{STYLE_PATH_ADMIN}images/users_show.png" alt="{lang.USERS}" />
 			</a>
-		
 			<a href="#" onclick="javascript:jQuery.facebox({div:'#delete_group_{{id}}'});  return false;" title="{lang.DELETE}">
 				<img  src="{STYLE_PATH_ADMIN}images/do_delete.png" alt="{lang.DELETE}" />
 			</a>

@@ -492,6 +492,9 @@ ul.ktip li span{float:right;width:84px !important;text-align:left;font-weight:40
 
 .group_line {
 	border-bottom:1px dotted #ccc;
+	padding:3px;
+	height:25px;
+	font-size:14px;
 }
 .group_line:hover{
 	background-color:#FAFFD6;

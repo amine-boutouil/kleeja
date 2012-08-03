@@ -336,6 +336,7 @@ case 'general':
 
 break;
 
+#handling editing ACLs(permissions) for the requesting groups
 case 'group_acl':
 	$req_group = isset($_GET['qg']) ? intval($_GET['qg']) : 0;
 	if(!$req_group)
@@ -411,6 +412,7 @@ case 'group_acl':
 	}	
 break;
 
+#handling editing settings for the requested group
 case 'group_data':
 	$req_group = isset($_GET['qg']) ? intval($_GET['qg']) : 0;
 	if(!$req_group)
@@ -484,6 +486,12 @@ case 'group_data':
 		delete_cache('data_groups');
 		kleeja_admin_info($lang['CONFIGS_UPDATED'], true, '', true,  basename(ADMIN_PATH) . '?cp=g_users');
 	}
+
+break;
+
+#handling adding-editing allowd file extensions for requested group
+case 'group_exts':
+
 
 break;
 

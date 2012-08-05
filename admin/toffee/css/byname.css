@@ -537,6 +537,27 @@ fieldset.fieldset_groups legend {
 	margin-right:20px;
 	float:left;
 }
+
+.group_exts .section:hover{
+	background-color:#FAFFD6;
+}
+.group_exts .section {
+	border-bottom:1px dotted #ccc;
+	padding:3px;
+	height:25px;
+	font-size:14px;
+	background-position:98% 50%;
+	background-repeat:no-repeat;
+}
+.group_exts .section h3{
+	font-size:20px !important;
+	text-align:center !important;
+	font-family:Georgia, Times, "Times New Roman", serif;
+}
+.group_exts .section .box{
+	text-align:center !important;
+}
+
 /*configs page*/
 .configs_page .section:hover{
 	background-color:#FAFFD6;

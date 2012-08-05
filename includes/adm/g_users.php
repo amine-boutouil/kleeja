@@ -499,6 +499,34 @@ break;
 
 #handling adding-editing allowed file extensions for requested group
 case 'group_exts':
+	$req_group = isset($_GET['qg']) ? intval($_GET['qg']) : 0;
+	if(!$req_group)
+	{
+		kleeja_admin_err('ERROR-NO-ID', true, '', true,  basename(ADMIN_PATH) . '?cp=g_users');
+	}
+
+	$group_name	= preg_replace('!{lang.([A-Z0-9]+)}!e', '$lang[\'\\1\']', $d_groups[$req_group]['data']['group_name']);
+
+	$query = array(
+					'SELECT'	=> 'ext_id, ext, size',
+					'FROM'		=> "{$dbprefix}groups_exts",
+					'WHERE'		=> 'group_id=' . $req_group,
+					'ORDER BY'	=> 'ext_id ASC'
+			);
+
+	$result = $SQL->build($query);
+	
+	$exts = array();
+	while($row=$SQL->fetch_array($result))
+	{		
+		$exts[] = array(
+						'ext_id'	=> $row['ext_id'],
+						'ext_name'	=> $row['ext'],
+						'ext_size'	=> round((int) $row['size'] / 1024),
+						'ext_icon'	=> file_exists(PATH . "images/filetypes/".  $row['ext'] . ".png") ? PATH . "images/filetypes/" . $row['ext'] . ".png" : PATH. 'images/filetypes/file.png'
+			);
+	}
+	$SQL->freeresult($result);
 
 
 break;

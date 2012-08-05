@@ -309,6 +309,40 @@ $(document).ready( function(){
 </div>
 <!-- the big box end -->
 
+<ELSEIF NAME="current_smt == group_exts">
+<!-- the big box begin -->
+<div class="big-box group_exts">
+<div class="tit_con">
+	<h1><a href="{action}&amp;smt=general" onclick="javascript:get_kleeja_link(this.href); return false;">{lang.R_GROUPS}</a> &raquo; {lang.R_EXTS} ({group_name})</h1>   
+</div>
+
+<form method="post" action="{action}" id="edit_exts_form">
+<div class="br"></div>
+<LOOP NAME="exts">
+<div class="section" style="background-image:url('{{ext_icon}}')">
+	<h3>{{ext_name}}</h3>
+	<div class="box">
+		<input type="text" name="size[{{ext_id}}]" value="{{ext_size}}" size="6" /> {lang.KILOBYTE}	
+	</div>
+</div>
+<div class="clear"></div>
+</LOOP>
+
+<div class="br"></div>
+
+<!-- button -->
+<p>
+	<input type="hidden" name="editexts" value="1" />
+	<button type="submit" id="submit" name="editexts" class="btn" onclick="javascript:submit_kleeja_data('#edit_exts_form', '#content', 0); return false;"><span>{lang.SUBMIT}</span></button>
+</p>
+<div class="br"></div>
+{lang.E_EXTS}
+
+{H_FORM_KEYS7}
+</form>
+</div>
+<!-- the big box end -->
+
 
 <ELSEIF NAME="current_smt == group_data">
 <div class="tit_con">

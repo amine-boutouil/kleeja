@@ -46,7 +46,12 @@
 		<form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=data&amp;' . getlang(1)}}">
 			<button onclick="window.location.href='./install.php?step=c&amp;{{echo getlang(1)}}';return false;" name="previous" type="submit" class="btn"><span>&laquo;  {{echo $lang['INST_PREVIOUS']}}</span></button>
 			<button name="agres" type="submit" class="btn"><span>{{echo $lang['INST_NEXT']}} &raquo;</span></button>
-		</form>		
+		</form>
+	{{else:}}
+		<form method="post" action="{{echo $_SERVER['PHP_SELF'] . '?step=check&amp;' . getlang(1)}}">
+			<button onclick="window.location.href='./install.php?step=c&amp;{{echo getlang(1)}}';return false;" name="previous" type="submit" id="submit" class="btn"><span>&laquo;  {{echo $lang['INST_PREVIOUS']}}</span></button>
+			<button name="agres" type="submit" class="btn"><span>{{echo $lang['RE_CHECK']}} &raquo;</span></button>
+		</form>	
 	{{endif}}
 
 <div class="clr"></div>			

@@ -32,6 +32,7 @@ $H_FORM_KEYS3	= kleeja_add_form_key('adm_users_newgroup');
 $H_FORM_KEYS4	= kleeja_add_form_key('adm_users_delgroup');
 $H_FORM_KEYS5	= kleeja_add_form_key('adm_users_editacl');
 $H_FORM_KEYS6	= kleeja_add_form_key('adm_users_editdata');
+$H_FORM_KEYS7	= kleeja_add_form_key('adm_users_editexts');
 
 //
 // Check form key
@@ -507,6 +508,35 @@ case 'group_exts':
 
 	$group_name	= preg_replace('!{lang.([A-Z0-9]+)}!e', '$lang[\'\\1\']', $d_groups[$req_group]['data']['group_name']);
 
+	#delete ext?
+	$DELETED_EXT = false;
+	if(isset($_GET['del']))
+	{
+		//check _GET Csrf token
+		if(!kleeja_check_form_key_get('adm_users'))
+		{
+			kleeja_admin_err($lang['INVALID_GET_KEY'], true, $lang['ERROR'], true, $action_all, 2);
+		}
+		
+		$req_ext = isset($_GET['del']) ? intval($_GET['del']) : 0;
+		if(!$req_ext)
+		{
+			kleeja_admin_err('ERROR-NO-EXT-ID', true, '', true,  basename(ADMIN_PATH) . '?cp=g_users&smt=group_exts&gq=' . $req_group);
+		}
+
+		$query_del	= array(
+							'DELETE'	=> "{$dbprefix}groups_exts",
+							'WHERE'		=> 'ext_id=' . $req_ext
+						);
+
+		$SQL->build($query_del);
+		
+		#done
+		$DELETED_EXT = $SQL->affected() ? 2 : 3;
+		delete_cache('data_groups');
+	}
+
+	#show exts
 	$query = array(
 					'SELECT'	=> 'ext_id, ext, size',
 					'FROM'		=> "{$dbprefix}groups_exts",

@@ -52,6 +52,7 @@ $lang = array_merge($lang, array(
 	'NUMFIELD_S' 			=> 'You can only use numbers with some fields !!',
 	'CONFIGS_UPDATED' 		=> 'Settings updated successfully.',
 	'UPDATE_EXTS' 			=> 'Update Extensions',
+	'EXT_DELETED'			=> 'The extension deleted successfully.',
 	'E_EXTS' 				=> 'Note : Sizes are measured in kilobytes .</i>',
 	'UPDATED_EXTS' 			=> 'Extensions updated successfully.',
 	'UPDATE_REPORTS' 		=> 'Update Reports',

@@ -557,6 +557,9 @@ fieldset.fieldset_groups legend {
 .group_exts .section .box{
 	text-align:center !important;
 }
+.group_exts .section .box .xdel{
+	float:left;
+}
 
 /*configs page*/
 .configs_page .section:hover{

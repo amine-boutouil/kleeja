@@ -316,6 +316,21 @@ $(document).ready( function(){
 	<h1><a href="{action}&amp;smt=general" onclick="javascript:get_kleeja_link(this.href); return false;">{lang.R_GROUPS}</a> &raquo; {lang.R_EXTS} ({group_name})</h1>   
 </div>
 
+<IF NAME="DELETED_EXT">
+	<script type="text/javascript">
+		setTimeout(function() {
+			$('.deleted_ext').fadeOut('fast');
+		}, 5000);
+	</script>
+	<div id="system-message" class="deleted_ext">
+	<IF NAME="{DELETED_EXT} == 2">
+	<div class="info">{lang.EXT_DELETED}</div>
+	<ELSE>
+	<div class="error">{lang.DATA_CHANGED_NO}</div>
+	</IF>
+	</div>
+</IF>
+
 <form method="post" action="{action}" id="edit_exts_form">
 <div class="br"></div>
 <LOOP NAME="exts">
@@ -323,6 +338,11 @@ $(document).ready( function(){
 	<h3>{{ext_name}}</h3>
 	<div class="box">
 		<input type="text" name="size[{{ext_id}}]" value="{{ext_size}}" size="6" /> {lang.KILOBYTE}	
+		<div class="xdel">
+			<a href="{action}&amp;smt=group_exts&amp;del={{ext_id}}&amp;{GET_FORM_KEY}"  onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.DELETE}">
+				<img  src="{STYLE_PATH_ADMIN}images/do_delete.png" alt="{lang.DELETE}" />
+			</a>
+		</div>
 	</div>
 </div>
 <div class="clear"></div>
@@ -331,7 +351,7 @@ $(document).ready( function(){
 <div class="br"></div>
 
 <!-- button -->
-<p>
+<p class="submit">
 	<input type="hidden" name="editexts" value="1" />
 	<button type="submit" id="submit" name="editexts" class="btn" onclick="javascript:submit_kleeja_data('#edit_exts_form', '#content', 0); return false;"><span>{lang.SUBMIT}</span></button>
 </p>

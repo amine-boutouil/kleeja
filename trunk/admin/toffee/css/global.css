@@ -159,3 +159,8 @@ small {
 font-size:10px;
 font-weight:normal;
 }
+
+form .submit{
+	float:left;
+	margin-left:-3px;
+}

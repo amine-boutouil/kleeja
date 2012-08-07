@@ -21,7 +21,7 @@ $(document).ready( function(){
 <div class="big-box">
 <div class="tit_con">
 	<h1>{lang.R_GROUPS}</h1>
-	<div class="second-action tit_groups_icon" onclick="javascript:jQuery.facebox({div:'#group_add_new'}); return false;">{lang.ADD_NEW_GROUP}</div>
+	<div class="second-action tit_groups_icon" onclick="javascript:jQuery.facybox({div:'#group_add_new'}); return false;">{lang.ADD_NEW_GROUP}</div>
 </div>
 
 <div class="clear"></div>
@@ -76,7 +76,7 @@ $(document).ready( function(){
 			<a href="{action}&amp;smt=show_group&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.USERS}">
 				<img  src="{STYLE_PATH_ADMIN}images/users_show.png" alt="{lang.USERS}" />
 			</a>
-			<a href="#" onclick="javascript:jQuery.facebox({div:'#delete_group_{{id}}'});  return false;" title="{lang.DELETE}">
+			<a href="#" onclick="javascript:jQuery.facybox({div:'#delete_group_{{id}}'});  return false;" title="{lang.DELETE}">
 				<img  src="{STYLE_PATH_ADMIN}images/do_delete.png" alt="{lang.DELETE}" />
 			</a>
 		</div>
@@ -119,7 +119,7 @@ $(document).ready( function(){
 <!-- button -->
 <p>
 	<input type="hidden" name="newgroup" value="1" />
-	<button type="submit" id="submit" name="newgroup" class="btn" onclick="javascript:$.facebox.close(); submit_kleeja_data('#add_group_form', '#content', 0); return false;"><span>{lang.SUBMIT}</span></button>
+	<button type="submit" id="submit" name="newgroup" class="btn" onclick="javascript:$.facybox.close(); submit_kleeja_data('#add_group_form', '#content', 0); return false;"><span>{lang.SUBMIT}</span></button>
 </p>
 
 {H_FORM_KEYS3}
@@ -149,7 +149,7 @@ $(document).ready( function(){
 <!-- button -->
 <p>
 	<input type="hidden" name="delgroup" value="1" />
-	<button type="submit" id="submit" name="delgroup" class="btn" onclick="javascript:$.facebox.close(); submit_kleeja_data('#del_group_form', '#content', 0); return false;"><span>{lang.SUBMIT}</span></button>
+	<button type="submit" id="submit" name="delgroup" class="btn" onclick="javascript:$.facybox.close(); submit_kleeja_data('#del_group_form', '#content', 0); return false;"><span>{lang.SUBMIT}</span></button>
 </p>
 {H_FORM_KEYS4}
 </form>
@@ -314,7 +314,7 @@ $(document).ready( function(){
 <div class="big-box group_exts">
 <div class="tit_con">
 	<h1><a href="{action}&amp;smt=general" onclick="javascript:get_kleeja_link(this.href); return false;">{lang.R_GROUPS}</a> &raquo; {lang.R_EXTS} ({group_name})</h1>   
-	<div class="second-action tit_ext_icon" onclick="javascript:jQuery.facebox({div:'#new_ext_form'}); return false;">{lang.ADD_NEW_EXT}</div>
+	<div class="second-action tit_ext_icon" onclick="javascript:jQuery.facybox({div:'#new_ext_form'}); return false;">{lang.ADD_NEW_EXT}</div>
 </div>
 
 <IF NAME="GE_INFO">
@@ -366,7 +366,7 @@ $(document).ready( function(){
 	<button type="submit" id="submit" name="editexts" class="btn" onclick="javascript:submit_kleeja_data('#edit_exts_form', '#content', 0); return false;"><span>{lang.SUBMIT}</span></button>
 </p>
 <div class="br"></div>
-{lang.E_EXTS} (<a href="#converter_form" onclick="javascript:jQuery.facebox({div:'#converter_form'}); return false;">{lang.BCONVERTER}</a>)
+{lang.E_EXTS} (<a href="#converter_form" onclick="javascript:jQuery.facybox({div:'#converter_form'}); return false;">{lang.BCONVERTER}</a>)
 
 {H_FORM_KEYS7}
 </form>
@@ -379,8 +379,7 @@ $(document).ready( function(){
 <b>{lang.ADD_NEW_EXT}</b>   
 <br />
 <br />
-<form method="post" action="{action}" id="add_new_ext">
-
+<form method="post" action="{action}" id="add_new_ext--change--">
 <div class="section">
 	<h3><label>{lang.ADD_NEW_EXT_EXP}</label></h3>
 	<div class="box">
@@ -394,7 +393,7 @@ $(document).ready( function(){
 <!-- button -->
 <p class="submit">
 	<input type="hidden" name="newext" value="1" />
-	<button type="submit" id="submit" name="newext" class="btn" onclick="javascript:submit_kleeja_data('#add_new_ext', '#content', 0); $.facebox.close(); return false;"><span>{lang.SUBMIT}</span></button>
+	<button type="submit" id="submit" name="newext" class="btn" onclick="javascript:submit_kleeja_data('#add_new_ext--change--', '#content', 0); $.facybox.close(); return false;"><span>{lang.SUBMIT}</span></button>
 </p>
 
 {H_FORM_KEYS7}

@@ -86,6 +86,13 @@ if (isset($_POST['search_user']))
 		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, basename(ADMIN_PATH) . '?cp=h_search', 1);
 	}
 }
+if (isset($_POST['newext']) or isset($_POST['editexts']))
+{
+	if(!kleeja_check_form_key('adm_users_editexts'))
+	{
+		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $action, 1);
+	}
+}
 
 
 //
@@ -509,7 +516,7 @@ case 'group_exts':
 	$group_name	= preg_replace('!{lang.([A-Z0-9]+)}!e', '$lang[\'\\1\']', $d_groups[$req_group]['data']['group_name']);
 
 	#delete ext?
-	$DELETED_EXT = false;
+	$DELETED_EXT = $GE_INFO =  false;
 	if(isset($_GET['del']))
 	{
 		//check _GET Csrf token
@@ -532,7 +539,57 @@ case 'group_exts':
 		$SQL->build($query_del);
 		
 		#done
-		$DELETED_EXT = $SQL->affected() ? 2 : 3;
+		$DELETED_EXT = $GE_INFO =  $SQL->affected() ? 2 : 3;
+		delete_cache('data_groups');
+	}
+	
+	#add ext?
+	$ADDED_EXT = false;
+	if(isset($_POST['newext']))
+	{
+		$new_ext = isset($_POST['extisnew']) ? preg_replace('/[^a-z0-9]/', '', strtolower($_POST['extisnew'])) : false;
+
+		if(!$new_ext)
+		{
+			kleeja_admin_err($lang['EMPTY_EXT_FIELD'], true, '', true,  basename(ADMIN_PATH) . '?cp=g_users&smt=group_exts&gq=' . $req_group);
+		}
+
+		//check if it's welcomed one
+		//if he trying to be smart, he will add like ext1.ext2.php
+		//so we will just look at last one
+		$check_ext = strtolower(array_pop(explode('.', $new_ext))); 
+		$not_welcomed_exts = array('php', 'php3', 'php5', 'php4', 'asp', 'aspx', 'shtml', 'html', 'htm', 'xhtml', 'phtml', 'pl', 'cgi', 'ini', 'htaccess', 'sql', 'txt');
+		if(in_array($check_ext, $not_welcomed_exts))
+		{
+			kleeja_admin_err(sprintf($lang['FORBID_EXT'], $check_ext), true, '', true,  basename(ADMIN_PATH) . '?cp=g_users&smt=group_exts&gq=' . $req_group);
+		}
+
+		//check if there is any exists of this ext in db
+		$query = array(
+						'SELECT'	=> '*',
+						'FROM'		=> "{$dbprefix}groups_exts",
+						'WHERE'		=> "ext='" . $new_ext . "' and group_id=" . $req_group,
+					);
+
+		$result = $SQL->build($query);
+
+		if ($SQL->num_rows($result))
+		{
+			kleeja_admin_err(sprintf($lang['NEW_EXT_EXISTS_B4'], $new_ext), true, '', true,  basename(ADMIN_PATH) . '?cp=g_users&smt=group_exts&gq=' . $req_group);
+		}
+	
+		#add
+		$default_size = '2097152';#bytes
+		$insert_query	= array(
+									'INSERT'	=> '`ext` ,`group_id`, `size`',
+									'INTO'		=> "`{$dbprefix}groups_exts`",
+									'VALUES'	=> "'$new_ext', $req_group, $default_size"
+							);
+
+		$SQL->build($insert_query);
+
+		#done
+		$ADDED_EXT = $GE_INFO =  $SQL->affected() ? 2 : 3;
 		delete_cache('data_groups');
 	}
 

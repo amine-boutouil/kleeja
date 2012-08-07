@@ -314,19 +314,29 @@ $(document).ready( function(){
 <div class="big-box group_exts">
 <div class="tit_con">
 	<h1><a href="{action}&amp;smt=general" onclick="javascript:get_kleeja_link(this.href); return false;">{lang.R_GROUPS}</a> &raquo; {lang.R_EXTS} ({group_name})</h1>   
+	<div class="second-action tit_ext_icon" onclick="javascript:jQuery.facebox({div:'#new_ext_form'}); return false;">{lang.ADD_NEW_EXT}</div>
 </div>
 
-<IF NAME="DELETED_EXT">
+<IF NAME="GE_INFO">
 	<script type="text/javascript">
 		setTimeout(function() {
-			$('.deleted_ext').fadeOut('fast');
+			$('.infoexts').fadeOut('fast');
 		}, 5000);
 	</script>
-	<div id="system-message" class="deleted_ext">
-	<IF NAME="{DELETED_EXT} == 2">
-	<div class="info">{lang.EXT_DELETED}</div>
-	<ELSE>
-	<div class="error">{lang.DATA_CHANGED_NO}</div>
+	<div id="system-message" class="infoexts">
+	<IF NAME="{DELETED_EXT}">
+		<IF NAME="{DELETED_EXT} == 2">
+		<div class="info">{lang.EXT_DELETED}</div>
+		<ELSE>
+		<div class="error">{lang.DATA_CHANGED_NO}</div>
+		</IF>
+	</IF>
+	<IF NAME="{ADDED_EXT}">
+		<IF NAME="{ADDED_EXT} == 2">
+		<div class="info">{lang.NEW_EXT_ADD}</div>
+		<ELSE>
+		<div class="error">{lang.DATA_CHANGED_NO}</div>
+		</IF>
 	</IF>
 	</div>
 </IF>
@@ -356,13 +366,109 @@ $(document).ready( function(){
 	<button type="submit" id="submit" name="editexts" class="btn" onclick="javascript:submit_kleeja_data('#edit_exts_form', '#content', 0); return false;"><span>{lang.SUBMIT}</span></button>
 </p>
 <div class="br"></div>
-{lang.E_EXTS}
+{lang.E_EXTS} (<a href="#converter_form" onclick="javascript:jQuery.facebox({div:'#converter_form'}); return false;">{lang.BCONVERTER}</a>)
 
 {H_FORM_KEYS7}
 </form>
 </div>
 <!-- the big box end -->
 
+
+<!-- add new EXT. -->
+<div id="new_ext_form" style="display:none">
+<b>{lang.ADD_NEW_EXT}</b>   
+<br />
+<br />
+<form method="post" action="{action}" id="add_new_ext">
+
+<div class="section">
+	<h3><label>{lang.ADD_NEW_EXT_EXP}</label></h3>
+	<div class="box">
+		<input type="text" name="extisnew" value="" />
+	</div>
+</div>
+<div class="clear"></div>
+
+<div class="br"></div>
+
+<!-- button -->
+<p class="submit">
+	<input type="hidden" name="newext" value="1" />
+	<button type="submit" id="submit" name="newext" class="btn" onclick="javascript:submit_kleeja_data('#add_new_ext', '#content', 0); $.facebox.close(); return false;"><span>{lang.SUBMIT}</span></button>
+</p>
+
+{H_FORM_KEYS7}
+</form>
+</div>
+<!-- the big box end -->
+
+<div id="converter_form" style="display:none">
+<b>{lang.BCONVERTER}</b>   
+<br />
+<br />
+<!-- converter table -->
+<script type="text/javascript">
+/*Created by: Uncle Jim :: http://jdstiles.com/javamain.html */
+
+	function convert(f) 
+	{
+	  f.kb.value=Math.round(f.byte.value/1024*100000)/100000
+	  f.mb.value=Math.round(f.byte.value/1048576*100000)/100000
+	  f.gb.value=Math.round(f.byte.value/1073741824*100000)/100000
+	}
+
+	function convertkb(f) 
+	{
+	  f.byte.value=Math.round(f.kb.value*1024*100000)/100000
+	  f.mb.value=Math.round(f.kb.value/1024*100000)/100000
+	  f.gb.value=Math.round(f.kb.value/1048576*100000)/100000
+	}
+
+	function convertmb(f)
+	{
+	  f.byte.value=Math.round(f.mb.value*1048576*100000)/100000
+	  f.kb.value=Math.round(f.mb.value*1024*100000)/100000
+	  f.gb.value=Math.round(f.mb.value/1024*100000)/100000
+	}
+
+	function convertgb(f) 
+	{
+	  f.byte.value=Math.round(f.gb.value*1073741824*100000)/100000
+	  f.kb.value=Math.round(f.gb.value*1048576*100000)/100000
+	  f.mb.value=Math.round(f.gb.value*1024*100000)/100000
+	}
+</script>
+
+
+<!-- start c table -->
+<form>
+<table>
+	<tr class="first"> 
+		<td>Byte</td>
+		<td>Kilobyte</td>
+		<td>Megabyte</td>
+		<td>Gigabyte</td>
+	</tr>
+	<tr> 
+		<td><input type="text" size="10" name="byte" value="0" /></td>
+		<td><input type="text" size="10" name="kb" value="0" /></td>
+		<td><input type="text" size="10" name="mb" value="0" /></td>
+		<td><input type="text" size="10" name="gb" value="0" /></td>
+	</tr>
+
+	<tr> 
+		<td style="border-width:0px"><button type="button" name="B2" class="btn" onClick="javascript:convert(this.form)"><span class="bc">  &gt;  </span></button></td>
+		<td style="border-width:0px"><button type="button" name="B22" class="btn" onClick="javascript:convertkb(this.form)"><span class="bc">  &lt; &gt;  </span></button></td>
+		<td style="border-width:0px"><button type="button" name="B23" class="btn" onClick="javascript:convertmb(this.form)"><span class="bc">  &lt; &gt;  </span></td>
+		<td style="border-width:0px"><button type="button" name="B24" class="btn" onClick="javascript:convertgb(this.form)"><span class="bc">  &lt;  </span></td>
+	</tr>
+</table>
+</form>
+</div>
+<!-- the big box end -->
+<!-- end c table -->
+
+	
 
 <ELSEIF NAME="current_smt == group_data">
 <div class="tit_con">

@@ -109,6 +109,10 @@
 			background:transparent url('../images/group_add.png') no-repeat 1% 50%;
 			padding-left:24px;
 		}
+		#content .tit_con .tit_ext_icon{
+			background:transparent url('../images/ext_add.png') no-repeat 1% 50%;
+			padding-left:24px;
+		}
 	
 	#content .section {
 		padding:6px 0;
@@ -560,6 +564,7 @@ fieldset.fieldset_groups legend {
 .group_exts .section .box .xdel{
 	float:left;
 }
+
 
 /*configs page*/
 .configs_page .section:hover{

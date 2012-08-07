@@ -324,14 +324,14 @@ $(document).ready( function(){
 		}, 5000);
 	</script>
 	<div id="system-message" class="infoexts">
-	<IF NAME="{DELETED_EXT}">
+	<IF NAME="DELETED_EXT">
 		<IF NAME="{DELETED_EXT} == 2">
 		<div class="info">{lang.EXT_DELETED}</div>
 		<ELSE>
 		<div class="error">{lang.DATA_CHANGED_NO}</div>
 		</IF>
 	</IF>
-	<IF NAME="{ADDED_EXT}">
+	<IF NAME="ADDED_EXT">
 		<IF NAME="{ADDED_EXT} == 2">
 		<div class="info">{lang.NEW_EXT_ADD}</div>
 		<ELSE>

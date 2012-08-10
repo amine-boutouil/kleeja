@@ -592,6 +592,28 @@ case 'group_exts':
 		$ADDED_EXT = $GE_INFO =  $SQL->affected() ? 2 : 3;
 		delete_cache('data_groups');
 	}
+	
+	#if submit/update
+	if(isset($_POST['editexts']))
+	{		
+		$ext_ids = $_POST['size'];
+		if(is_array($ext_ids))
+		{
+			foreach($ext_ids as $e_id=>$e_val)
+			{
+				$update_query = array(
+										'UPDATE'	=> "{$dbprefix}groups_exts",
+										'SET'		=> "`size`=" . (intval($e_val)*1024),
+										'WHERE'		=> "`ext_id`=" . intval($e_id) . " AND `group_id`=". $req_group
+										);
+				$SQL->build($update_query);
+			}
+
+			#delete cache ..
+			delete_cache('data_groups');
+			kleeja_admin_info($lang['UPDATED_EXTS'], true, '', true,  $action);
+		}
+	}
 
 	#show exts
 	$query = array(

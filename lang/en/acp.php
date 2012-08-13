@@ -322,5 +322,6 @@ $lang = array_merge($lang, array(
 	'G_USERS_MOVE_TO'			=> 'Move the group users to',
 	'TAKEN_NAMES'				=> 'This name is taken. Choose another name',
 	'SUPPORT_MOFFED'			=> 'Support',
-
+	'GROUP_DELETED'				=> 'Group "%1$s" has been deleted and its user moved to group "%2$s".',
+	'NO_MOVE_SAME_GRP'			=> 'You cann\'t move the users to the same group!.',
 ));

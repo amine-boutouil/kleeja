@@ -286,8 +286,71 @@ if(isset($_POST['newgroup']))
 //
 if(isset($_POST['delgroup']))
 {
+	$from_group = isset($_POST['dgroup']) ? intval($_POST['dgroup']) : 0;
+	$to_group = isset($_POST['tgroup']) ? intval($_POST['tgroup']) : 0;
 	
+	#if missing IDs of groups, deleted one and transfering-to one.
+	if(!$from_group or !$to_group)
+	{
+		kleeja_admin_err('ERROR-NO-ID', true, '', true,  basename(ADMIN_PATH) . '?cp=g_users');
+	}
 
+	#We can not move users to the same group we deleting ! that's stupid pro!
+	if($from_group  == $to_group)
+	{
+		kleeja_admin_err($lang['NO_MOVE_SAME_GRP'], true, '', true,  basename(ADMIN_PATH) . '?cp=g_users');
+	}
+
+	#to_group = '-1' : means default group .. so now we get the real ID.
+	if($to_group == -1)
+	{
+		$to_group = (int) $config['default_group'];
+	}
+
+	#delete the exts
+	$query_del	= array(
+							'DELETE'	=> "{$dbprefix}groups_exts",
+							'WHERE'		=> 'group_id=' . $from_group
+						);
+
+	$SQL->build($query_del);
+	#then, delete the configs
+	$query_del	= array(
+							'DELETE'	=> "{$dbprefix}groups_data",
+							'WHERE'		=> 'group_id=' . $from_group
+						);
+
+	$SQL->build($query_del);
+	#then, delete acls
+	$query_del	= array(
+							'DELETE'	=> "{$dbprefix}groups_acl",
+							'WHERE'		=> 'group_id=' . $from_group
+						);
+
+	$SQL->build($query_del);
+	#then, delete the group itself
+	$query_del	= array(
+							'DELETE'	=> "{$dbprefix}groups",
+							'WHERE'		=> 'group_id=' . $from_group
+						);
+
+	$SQL->build($query_del); 
+	#then, move users to the dest. group
+	$update_query = array(
+							'UPDATE'	=> "{$dbprefix}users",
+							'SET'		=> "`group_id`=" . $to_group,
+							'WHERE'		=> "`group_id`=". $from_group
+						);
+
+	$SQL->build($update_query);
+	
+	#get those groups name
+	$group_name_from	= preg_replace('!{lang.([A-Z0-9]+)}!e', '$lang[\'\\1\']', $d_groups[$from_group]['data']['group_name']);
+	$group_name_to		= preg_replace('!{lang.([A-Z0-9]+)}!e', '$lang[\'\\1\']', $d_groups[$to_group]['data']['group_name']);
+
+	#delete cache ..
+	delete_cache('data_groups');
+	kleeja_admin_info(sprintf($lang['GROUP_DELETED'], $group_name_from, $group_name_to), true, '', true,  basename(ADMIN_PATH) . '?cp=g_users');
 }
 
 //
@@ -472,7 +535,7 @@ case 'group_data':
 				{
 					if(strpos($file, '.') === false && $file != '..' && $file != '.')
 					{
-						$lngfiles .= '<option ' . ($con['language'] == $file ? 'selected="selected"' : '') . ' value="' . $file . '">' . $file . '</option>' . "\n";
+						$lngfiles .= '<option ' . ($d_groups[$req_group]['configs']['language'] == $file ? 'selected="selected"' : '') . ' value="' . $file . '">' . $file . '</option>' . "\n";
 					}
 				}
 				@closedir($dh);
@@ -490,14 +553,25 @@ case 'group_data':
 	#submit
 	if(isset($_POST['editdata']))
 	{
+		#Remove group_is_default from the current one
+		if(intval($_POST['group_is_default']) == 1)
+		{
+			$update_query = array(
+									'UPDATE'	=> "{$dbprefix}groups",
+									'SET'		=> "`group_is_default`=0",
+									'WHERE'		=> "`group_is_default`=1"
+									);
+			$SQL->build($update_query);
+		}
+		
 		#update not-configs data
 		$update_query = array(
 								'UPDATE'	=> "{$dbprefix}groups",
-								'SET'		=> "`group_is_default`='" . intval($_POST['group_is_default']) . "'" . (isset($_POST['group_name']) ? ", `group_name`='" . $SQL->escape($new[$row['name']]) . "'" : ''),
+								'SET'		=> "`group_is_default`=" . intval($_POST['group_is_default']) . (isset($_POST['group_name']) ? ", `group_name`='" . $SQL->escape($_POST['group_name']) . "'" : ''),
 								'WHERE'		=> "`group_id`=". $req_group
 								);
 		$SQL->build($update_query);
-
+		
 		#delete cache ..
 		delete_cache('data_groups');
 		kleeja_admin_info($lang['CONFIGS_UPDATED'], true, '', true,  basename(ADMIN_PATH) . '?cp=g_users');
@@ -510,7 +584,7 @@ case 'group_exts':
 	$req_group = isset($_GET['qg']) ? intval($_GET['qg']) : 0;
 	if(!$req_group)
 	{
-		kleeja_admin_err('ERROR-NO-ID', true, '', true,  basename(ADMIN_PATH) . '?cp=g_users');
+		kleeja_admin_err('ERROR-NO-ID', true, '', true,  $action);
 	}
 
 	$group_name	= preg_replace('!{lang.([A-Z0-9]+)}!e', '$lang[\'\\1\']', $d_groups[$req_group]['data']['group_name']);
@@ -528,7 +602,7 @@ case 'group_exts':
 		$req_ext = isset($_GET['del']) ? intval($_GET['del']) : 0;
 		if(!$req_ext)
 		{
-			kleeja_admin_err('ERROR-NO-EXT-ID', true, '', true,  basename(ADMIN_PATH) . '?cp=g_users&smt=group_exts&gq=' . $req_group);
+			kleeja_admin_err('ERROR-NO-EXT-ID', true, '', true,  $action);
 		}
 
 		$query_del	= array(
@@ -561,7 +635,7 @@ case 'group_exts':
 		$not_welcomed_exts = array('php', 'php3', 'php5', 'php4', 'asp', 'aspx', 'shtml', 'html', 'htm', 'xhtml', 'phtml', 'pl', 'cgi', 'ini', 'htaccess', 'sql', 'txt');
 		if(in_array($check_ext, $not_welcomed_exts))
 		{
-			kleeja_admin_err(sprintf($lang['FORBID_EXT'], $check_ext), true, '', true,  basename(ADMIN_PATH) . '?cp=g_users&smt=group_exts&gq=' . $req_group);
+			kleeja_admin_err(sprintf($lang['FORBID_EXT'], $check_ext), true, '', true,  $action);
 		}
 
 		//check if there is any exists of this ext in db
@@ -575,7 +649,7 @@ case 'group_exts':
 
 		if ($SQL->num_rows($result))
 		{
-			kleeja_admin_err(sprintf($lang['NEW_EXT_EXISTS_B4'], $new_ext), true, '', true,  basename(ADMIN_PATH) . '?cp=g_users&smt=group_exts&gq=' . $req_group);
+			kleeja_admin_err(sprintf($lang['NEW_EXT_EXISTS_B4'], $new_ext), true, '', true,  $action);
 		}
 	
 		#add

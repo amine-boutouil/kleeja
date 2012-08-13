@@ -96,7 +96,7 @@
 	$lang['INST_UPDATE_CUR_VER_IS_UP']				= 'Your current version is newer than this update.';
 	
 	$lang['INST_NOTES_UPDATE']						= 'Update Notes';
-	$lang['INST_NOTE_RC6_TO_1.0.0']					= 'You need to replace all new the script files with the old ones !.';
+	$lang['INST_NOTE_1.0_TO_1.5']					= 'You need to replace all new the script files with the old ones !.';
 	$lang['RC6_1_CNV_CLEAN_NAMES']					= 'Cleaning every username ...';
 	$lang['INST_UPDATE_IS_FINISH']					= 'Installation completed! you can now delete the INSTALL directory...';
 	$lang['IN_INFO']								= 'Fill in the fields below if you want to integrate kleeja with your script . Ignore this step if you do not wish to do it<br /><span style="color:red;">you should change user system from admin cp after installing kleeja</span>';

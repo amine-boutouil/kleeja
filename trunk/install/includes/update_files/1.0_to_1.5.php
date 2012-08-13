@@ -10,6 +10,11 @@ if (!defined('IN_COMMON'))
 //
 define ('DB_VERSION' , '8');
 
+
+#new configs
+$update_sqls['groups'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`, `type`, `plg_id`, `dynamic`) VALUES ('default_group', '3', '', '', '0', '0', '0');";
+
+#new tables
 $update_sqls['groups'] = "
 CREATE TABLE `{$dbprefix}groups` (
   `group_id` int(11) unsigned NOT NULL AUTO_INCREMENT,

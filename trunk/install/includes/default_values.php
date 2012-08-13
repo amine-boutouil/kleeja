@@ -84,7 +84,7 @@ $config_values[] = array('expand_menu', '0', '', 0, 0, 1);
 $config_values[] = array('firstime', '0', '', 0, 0, 1);
 $config_values[] = array('ftp_info', '', '', 0, 0, 0);
 $config_values[] = array('queue', '', '', 0, 0, 1);
-
+$config_values[] = array('default_group', '3', '', 0, 0, 1);
 
 //
 // Extensions

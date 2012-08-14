@@ -97,7 +97,7 @@ $(document).ready( function(){
 <b>{lang.ADD_NEW_GROUP}</b>   
 <br />
 <br />
-<form method="post" action="{action}" id="add_group_form">
+<form method="post" action="{action}" id="add_group_form--change--">
 <div class="section">
 	<h3><label for="gname">{lang.GROUP_NAME}</label></h3>
 	<div class="box"><input type="text" name="gname" id="gname" value="" size="30" /></div>
@@ -107,7 +107,7 @@ $(document).ready( function(){
 	<h3><label for="cfrom">{lang.COPY_FROM}</label></h3>
 	<div class="box">
 		<select name="cfrom" id="cfrom">
-			<option value="0">{lang.DEFAULT_GROUP}</option>
+			<option value="-1">{lang.DEFAULT_GROUP}</option>
 			<LOOP NAME="e_groups"><option value="{{id}}">{{name}}</option></LOOP>
 			<LOOP NAME="c_groups"><option value="{{id}}">{{name}}</option></LOOP>
 		</select>
@@ -120,7 +120,7 @@ $(document).ready( function(){
 <!-- button -->
 <p>
 	<input type="hidden" name="newgroup" value="1" />
-	<button type="submit" id="submit" name="newgroup" class="btn" onclick="javascript:$.facybox.close(); submit_kleeja_data('#add_group_form', '#content', 0); return false;"><span>{lang.SUBMIT}</span></button>
+	<button type="submit" id="submit" name="newgroup" class="btn" onclick="javascript:$.facybox.close(); submit_kleeja_data('#add_group_form--change--', '#content', 0); return false;"><span>{lang.SUBMIT}</span></button>
 </p>
 
 {H_FORM_KEYS3}

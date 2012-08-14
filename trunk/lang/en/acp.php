@@ -324,4 +324,8 @@ $lang = array_merge($lang, array(
 	'SUPPORT_MOFFED'			=> 'Support',
 	'GROUP_DELETED'				=> 'Group "%1$s" has been deleted and its user moved to group "%2$s".',
 	'NO_MOVE_SAME_GRP'			=> 'You cann\'t move the users to the same group!.',
+	'DEFAULT_GRP_NO_DEL'		=> 'You cann\'t delete this group becuase it\'s the current default group, change the default group then try to delete it!.',
+	'GROUP_ADDED'				=> 'Group "%s" has been added successfully ...',
+	
+	
 ));

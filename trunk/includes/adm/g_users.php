@@ -167,7 +167,6 @@ if(isset($_GET['deleteuserfile']))
 	}
 }
 
-
 //
 //add new user
 //
@@ -227,8 +226,8 @@ else if (isset($_POST['newuser']))
 		}
 	
 	
-		//User added ..
-		kleeja_admin_info($lang['USERS_UPDATED'], true, '', true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'), 3);
+		#User added ..
+		kleeja_admin_info($lang['USERS_UPDATED'], true, '', true, $action, 3);
 	}
 	else
 	{
@@ -267,7 +266,89 @@ if(isset($_POST['newgroup']))
 	//no errors, lets do process
 	if(empty($ERRORS))	 
 	{
-		//
+		#Insert the group ..
+		$insert_query	= array(
+									'INSERT'	=> '`group_name`',
+									'INTO'		=> "`{$dbprefix}groups`",
+									'VALUES'	=> "'" . trim($SQL->escape($_POST["gname"])) . "'"
+							);
+
+		$SQL->build($insert_query);
+		#Then, get the ID
+		$new_group_id = $SQL->insert_id();
+		$org_group_id = intval($_POST['cfrom']);
+		if(!$new_group_id or !$org_group_id)
+		{
+			kleeja_admin_err('ERROR-NO-ID', true, '', true,  $action);
+		}
+		if($org_group_id == -1)
+		{
+			$org_group_id = (int) $config['default_group'];
+		}
+	
+		#copy acls from the other group to this group		
+		$query = array(
+						'SELECT'	=> 'acl_name, acl_can',
+						'FROM'		=> "{$dbprefix}groups_acl",
+						'WHERE'		=> 'group_id=' . $org_group_id,
+						'ORDER BY'	=> 'acl_name ASC'
+				);
+		$result = $SQL->build($query);
+		
+		while($row=$SQL->fetch_array($result))
+		{
+			$insert_query	= array(
+										'INSERT'	=> '`acl_name`, `acl_can`, `group_id`',
+										'INTO'		=> "`{$dbprefix}groups_acl`",
+										'VALUES'	=>  "'" . $row['acl_name'] . "', " . $row['acl_can'] . ", " . $new_group_id
+								);
+			$SQL->build($insert_query);
+		}
+		$SQL->free($result);
+
+		#copy configs from the other group to this group		
+		$query = array(
+						'SELECT'	=> 'd.name, d.value',
+						'FROM'		=> "{$dbprefix}groups_data d",
+						'WHERE'		=> 'd.group_id=' . $org_group_id,
+						'ORDER BY'	=> 'd.name ASC'
+				);
+		$result = $SQL->build($query);
+		
+		while($row=$SQL->fetch_array($result))
+		{
+			$insert_query	= array(
+										'INSERT'	=> '`name`, `value`, `group_id`',
+										'INTO'		=> "`{$dbprefix}groups_data`",
+										'VALUES'	=>  "'" . $row['name'] . "', '" . $SQL->escape($row['value']) . "', " . $new_group_id
+								);
+			$SQL->build($insert_query);
+		}
+		$SQL->free($result);
+
+		#copy exts from the other group to this group		
+		$query = array(
+						'SELECT'	=> 'e.ext, e.size',
+						'FROM'		=> "{$dbprefix}groups_exts e",
+						'WHERE'		=> 'e.group_id=' . $org_group_id,
+						'ORDER BY'	=> 'e.ext_id ASC'
+				);
+		$result = $SQL->build($query);
+		
+		while($row=$SQL->fetch_array($result))
+		{
+			$insert_query	= array(
+										'INSERT'	=> '`ext`, `size`, `group_id`',
+										'INTO'		=> "`{$dbprefix}groups_exts`",
+										'VALUES'	=>  "'" . $row['ext'] . "', " . $row['size'] . ", " . $new_group_id
+								);
+			$SQL->build($insert_query);
+		}
+		$SQL->free($result);
+
+		#show group-is-added message
+		delete_cache('data_groups');
+		kleeja_admin_info(sprintf($lang['GROUP_ADDED'], htmlspecialchars($_POST['gname'])), true, '', true,  basename(ADMIN_PATH) . '?cp=g_users');
 	}
 	else
 	{
@@ -277,7 +358,7 @@ if(isset($_POST['newgroup']))
 			$errs .= '- ' . $r . '. <br />';
 		}
 
-		kleeja_admin_err($errs, true, '', true, $action_all, 3);
+		kleeja_admin_err($errs, true, '', true, $action, 3);
 	}
 }
 
@@ -305,6 +386,12 @@ if(isset($_POST['delgroup']))
 	if($to_group == -1)
 	{
 		$to_group = (int) $config['default_group'];
+	}
+
+	#you can not delete default group ! 
+	if($from_group == (int) $config['default_group'])
+	{
+		kleeja_admin_err($lang['DEFAULT_GRP_NO_DEL'], true, '', true,  basename(ADMIN_PATH) . '?cp=g_users');
 	}
 
 	#delete the exts
@@ -562,8 +649,12 @@ case 'group_data':
 									'WHERE'		=> "`group_is_default`=1"
 									);
 			$SQL->build($update_query);
+
+			#update config value of the current default group
+			update_config('default_group', $req_group);
+			delete_cache('data_config');
 		}
-		
+
 		#update not-configs data
 		$update_query = array(
 								'UPDATE'	=> "{$dbprefix}groups",

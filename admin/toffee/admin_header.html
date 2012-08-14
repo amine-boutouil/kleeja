@@ -143,11 +143,15 @@ function get_kleeja_link(URL, ID, p)
 				}
 			}
 		},
-		error : function(R){
-			//CHECK IF ERROR IM MYSQL
-			//$(ID).html('----');
+		error : function(R, status, errormsg){
+			if(R.responseText != '' || errormsg != ''){
+				$("#sign_ajax_error .error_msg_content").html((R.responseText == '' ? status+':'+errormsg : R.responseText));
+			}
+
 			$("#sign_ajax").css('display', 'none');
 			$("#sign_ajax_error").show();
+			$("#sign_ajax_error .error_msg_content").show();
+			
 		}
 	});
 }
@@ -220,9 +224,13 @@ function submit_kleeja_data(FORM_ID, ID, CONFIRM)
 			}
 		},
 		error : function(R){
-			//$(ID).html('----');
+			if(R.responseText != '' || errormsg != ''){
+				$("#sign_ajax_error .error_msg_content").html((R.responseText == '' ? status+':'+errormsg : R.responseText));
+			}
+
 			$("#sign_ajax").css('display', 'none');
 			$("#sign_ajax_error").show();
+			$("#sign_ajax_error .error_msg_content").show();
 		}
 	});
 }
@@ -300,7 +308,10 @@ function uncheckAll_exts(form, id, _do_c_) {
 
 <!-- ajax loading sign -->
 <div id="sign_ajax"><img src="{STYLE_PATH_ADMIN}images/ajax-loader-small.gif" /> {lang.LOADING} ...</div>
-<div id="sign_ajax_error" onclick="javascript:get_kleeja_link('./');"><img src="{STYLE_PATH_ADMIN}images/error.png" /> {lang.ERROR_AJAX}</div>
+<div id="sign_ajax_error" onclick="javascript:get_kleeja_link('./');">
+		<img src="{STYLE_PATH_ADMIN}images/error.png" /> {lang.ERROR_AJAX}
+		<div class="error_msg_content"></div>
+</div>
 
 <div id="wrap">
 	<!-- top header -->

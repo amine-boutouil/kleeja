@@ -107,6 +107,19 @@ select:active {
 	}
 #sign_ajax img,#sign_ajax_error img{padding-right:10px;}
 #sign_ajax_error{color: red;}
+#sign_ajax_error .error_msg_content{
+	display: none;
+	margin-top:5px;
+	height:60px !important;
+	direction:ltr;
+	overflow:scroll;
+	border:1px dashed #E1E1E1;
+	color:#333344;
+	background:#FAFAFA;
+	font-family:monospace;
+	font-size:11px;
+	padding:0.5em;
+}
 
 /* usefull colors */
 .ored,.ored:hover {background:#D8D8CC;}

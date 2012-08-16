@@ -116,7 +116,7 @@ $lang = array_merge($lang, array(
 	'RULES_UPDATED' 		=> 'تم تحديث الشروط بنجاح..',
 	'R_SEARCH' 				=> 'بحث متقدم',
 	'SEARCH_FILES' 			=> 'بحث عن الملفات',
-	'SEARCH_SUBMIT' 		=> 'بحث الآن',
+	'SEARCH_SUBMIT' 		=> 'بحث',
 	'LAST_DOWN' 			=> 'آخر تحميل',
 	'WAS_B4' 				=> 'كان قبل',
 	'SEARCH_USERS' 			=> 'بحث عن مستخدمين',
@@ -329,4 +329,6 @@ $lang = array_merge($lang, array(
 	'NO_MOVE_SAME_GRP'			=> 'لايمكن نقل الاعضاء لنفس المجموعة !.',
 	'DEFAULT_GRP_NO_DEL'		=> 'لايمكن حذف المجموعة الافتراضية, قم بتغيير المجموعة الافتراضية لمجموعة اخرى ثم قم بحذف هذه المجموعه من جديد!.', 
 	'GROUP_ADDED'				=> 'تم اضافة المجموعة "%s" بنجاح... ',
+	'SEARCH4FILES_BYIP'			=> 'بحث عن الملفات بواسطة الـ IP',
+	'SEARCH4FILES_BYUSER'		=> 'بحث عن الملفات لهذا المستخدم',
 ));

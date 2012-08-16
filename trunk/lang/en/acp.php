@@ -114,7 +114,7 @@ $lang = array_merge($lang, array(
 	'RULES_UPDATED' 		=> 'Terms and conditions updated successfully ..',
 	'R_SEARCH' 				=> 'Advanced search',
 	'SEARCH_FILES' 			=> 'Search for files',
-	'SEARCH_SUBMIT' 		=> 'Search now',
+	'SEARCH_SUBMIT' 		=> 'Search',
 	'LAST_DOWN' 			=> 'Last download',
 	'WAS_B4' 				=> 'Was before',
 	'SEARCH_USERS' 			=> 'Search for users',
@@ -326,6 +326,7 @@ $lang = array_merge($lang, array(
 	'NO_MOVE_SAME_GRP'			=> 'You cann\'t move the users to the same group!.',
 	'DEFAULT_GRP_NO_DEL'		=> 'You cann\'t delete this group becuase it\'s the current default group, change the default group then try to delete it!.',
 	'GROUP_ADDED'				=> 'Group "%s" has been added successfully ...',
-	
+	'SEARCH4FILES_BYIP'			=> 'Search files via selected IP',
+	'SEARCH4FILES_BYUSER'		=> 'Search files for this user',
 	
 ));

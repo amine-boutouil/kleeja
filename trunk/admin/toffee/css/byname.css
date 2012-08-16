@@ -459,9 +459,6 @@ background-color:#E3F2FF;
 
 .kcheck {bottom:1px;right:0;z-index:703;padding:0 !important;margin:1px 0 !important; background-color:#FAFAFA;}
 .kfocus {background-color:#ccc;}
-ul.ktip{float:right;}
-ul.ktip li{width:240px;height:22px;line-height:22px;float: right;border-bottom:1px solid #F0DE7D;text-align:right;}
-ul.ktip li span{float:right;width:84px !important;text-align:left;font-weight:400;padding-left: 10px;}
 
 
 

@@ -29,6 +29,19 @@ $H_FORM_KEYS2	= kleeja_add_form_key('adm_users_search');
 
 $current_smt	= isset($_GET['smt']) ? (preg_match('![a-z0-9_]!i', trim($_GET['smt'])) ? trim($_GET['smt']) : 'files') : 'files';
 
+#filling the inputs automatically via GET
+$filled_ip = $filled_username = '';
+if(isset($_GET['s_input']))
+{
+	if((int) $_GET['s_input'] == 2)
+	{
+		$filled_username = htmlspecialchars($_GET['s_value']);
+	}
+	elseif((int) $_GET['s_input'] == 1)
+	{
+		$filled_ip = htmlspecialchars($_GET['s_value']);
+	}
+}
 
 //secondary menu
 $go_menu = array(

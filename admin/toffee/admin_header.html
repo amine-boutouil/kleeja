@@ -99,6 +99,9 @@ function get_kleeja_link(URL, ID, p)
 
 	$("#sign_ajax").show();
 
+	$('.tip').remove();
+	$('.tip').tipsy('hide');
+
 	$.ajax({
 		url: URL.replace('&amp;', '&') + '&_ajax_=1',
 		cache: false,

@@ -2,15 +2,17 @@
 <!--
 jQuery(document).ready(function($){
 	// preload images
-	$('a[rel*=facebox]').facebox();
+	$('a[rel*=facebox]').facybox('<textarea>fff</textarea>');
 	//$.preload('#Kload img', {placeholder:'{STYLE_PATH_ADMIN}images/ajax-loader-small.gif',notFound:'{STYLE_PATH_ADMIN}images/failerror.jpg',	enforceCache: true,	threshold: 2 });
 
 	$("img.mask").hover(function(){$(this).stop().animate({'opacity': '0'}, 'fast');},function() {$(this).stop().animate({'opacity': '1'}, 'fast');});
 	
-	$('.tip').tipsy('hide');
+	
 	$('.tip').tipsy({
 		title: function() { return $(this).children('.ktip').html() },
 		html: true,
+		fade:true,
+		gravity: $.fn.tipsy.autoNS
 		//gravity: $.fn.tipsy.autoNS
 	   });
 
@@ -41,13 +43,36 @@ jQuery(document).ready(function($){
 	});
 	
 	//when checked one checkbox?
-	$(".kcheck input[type=checkbox]").click( function(){
+	$(".kcheck input[type=checkbox]").change( function(){
 		if($('.kcheck input[type=checkbox]:checked').length == 1){
 			$('#search-one-item').css('display', 'inline');
-		}
-		else{
+		} else{
+			$('#search-one-item select').prop('selectedIndex', 0);
 			$('#search-one-item').css('display', 'none');
 		}
+	});
+
+	$(".kcheck input[type=checkbox]").click( function(){
+		$(this).attr('checked', !$(this).attr('checked'));
+		$(this).trigger('change');
+	});
+	
+	$(".kcheck").click( function(){
+		$(this).find('input').attr('checked', !$(this).find('input').attr('checked'));
+		$(this).find('input').trigger('change');
+	});
+	
+	$('#search-one-item select').change(function(){
+		tt = this.options[this.selectedIndex].value;
+		dd = $('.kcheck input[type=checkbox]:checked').val();
+		if(tt == 1){
+			s_value = $('#ip_'+dd).html();
+		}else if(tt == 2){
+			s_value = $('#user_'+dd).html();
+		}
+
+		window.open("{action_search}&s_input="+tt+"&s_value=" + encodeURI(s_value), '_newtab');
+		
 	});
 });
 //-->
@@ -85,17 +110,15 @@ jQuery(document).ready(function($){
 		<a href="{{href}}" rel="facebox">
 			<div id="Kload"><img src="{{thumb_link}}" alt=""  /></div>
 		</a>
-		<ul class='ktip' style="display: none;">
-			<ul>
-			<li><span>{lang.FILENAME} :</span>{{name}}</li>
-			<li><span>{lang.FILEUPS} :</span> {{ups}}</li>
-			<li><span>{lang.FILESIZE} :</span> {{size}}</li>
-			<li><span>{lang.FILEDATE} :</span> {{time}}</li>
-			<li><span>{lang.BY} :</span> {{user}}</li>
-			<li><span>{lang.IP} :</span> {{ip}}</li>
-			</ul>
-		</ul>
-		<p class="kcheck" onclick="javascript:$('#del_{{id}}').attr('checked', !$('#del_{{id}}').attr('checked'));"><input id="del_{{id}}" name="del_{{id}}" type="checkbox" value="{{id}}" onclick="change_color(this,'su[{{id}}]', 'kfocus');" rel="_del" /></p>
+		<div class="ktip" style="display: none;">
+			<span>{lang.FILENAME} : </span>{{name}}<br />
+			<span>{lang.FILEUPS} : </span> {{ups}}<br />
+			<span>{lang.FILESIZE} : </span> {{size}}<br />
+			<span>{lang.FILEDATE} : </span> {{time}}<br />
+			<span>{lang.BY} : </span> <span id="user_{{id}}">{{user}}</span><br />
+			<span>{lang.IP} : </span> <span id="ip_{{id}}">{{ip}}</span>
+		</div>
+		<p class="kcheck"><input id="del_{{id}}" name="del_{{id}}" type="checkbox" value="{{id}}" rel="_del" /></p>
 	</li>
 	{{tdnum2}}
 	</LOOP>
@@ -113,18 +136,16 @@ jQuery(document).ready(function($){
 <div class="br"></div>
 
 <!-- button -->
-<p>
+<p class="submit">
+<span id="search-one-item" style="display:none">
+	<select>
+		<option value="0">{lang.SEARCH_SUBMIT} : </option>
+		<option value="1">{lang.SEARCH4FILES_BYIP}</option>
+		<option value="2">{lang.SEARCH4FILES_BYUSER}</option>
+	</select> | 
+	</span>
 	<input type="hidden" name="submit" value="1" />
 	<button type="submit" name="submit" class="btn" onclick="javascript:submit_kleeja_data('#imgs_form', '#content', 1); return false;"><span>{lang.DEL_SELECTED}</span></button>
-	 
-	<span id="search-one-item" style="display:none">
-	| <select>
-		<option value="0">Search For</option>
-		<option>IP</option>
-		<option>User</option>
-	</select>
-	
-	</span>
 </p>
 </IF>
 	

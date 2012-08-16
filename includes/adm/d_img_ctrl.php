@@ -25,6 +25,7 @@ if(!isset($images_cp_perpage) || !$images_cp_perpage)
 $stylee	= "admin_img";
 $action	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php')  . (isset($_GET['page']) ? '&amp;page='.intval($_GET['page']) : '') . 
 			(isset($_GET['last_visit']) ? '&amp;last_visit='.intval($_GET['last_visit']) : '');
+$action_search = basename(ADMIN_PATH) . "?cp=h_search#!cp=h_search";
 $H_FORM_KEYS	= kleeja_add_form_key('adm_img_ctrl');
 
 
@@ -35,15 +36,9 @@ if (isset($_POST['submit']))
 {
 	if(!kleeja_check_form_key('adm_img_ctrl'))
 	{
-		if(isset($_GET['_ajax_']))
-		{
-			echo_ajax(888, $lang['INVALID_FORM_KEY']);
-		}
-
 		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $action, 1);
 	}
-	
-	
+
 	foreach ($_POST as $key => $value) 
     {
         if(preg_match('/del_(?P<digit>\d+)/', $key))
@@ -54,9 +49,10 @@ if (isset($_POST['submit']))
     
     foreach ($del as $key => $id)
     { 
-        $query	= array('SELECT'	=> '*',
-					'FROM'		=> "{$dbprefix}files",
-					'WHERE'	=> 'id = \'' . intval($id) . "'",
+        $query	= array(
+						'SELECT'	=> '*',
+						'FROM'		=> "{$dbprefix}files",
+						'WHERE'		=> 'id = ' . intval($id),
 					);
                     
          $result = $SQL->build($query);
@@ -113,7 +109,8 @@ if (isset($_POST['submit']))
 else
 {
 
-$query	= array('SELECT'	=> 'COUNT(f.id) AS total_files',
+$query	= array(
+					'SELECT'	=> 'COUNT(f.id) AS total_files',
 					'FROM'		=> "{$dbprefix}files f",
 					'ORDER BY'	=> 'f.id DESC'
 					);
@@ -201,7 +198,8 @@ if ($nums_rows > 0)
 						'size'		=> Customfile_size($row['size']),
 						'ups'		=> $row['uploads'],
 						'time'		=> date('d-m-Y h:i a', $row['time']),
-						'user'		=> $row['user'] == '-1' ? $lang['GUST'] : $row['username'],
+						'user'		=> (int) $row['user'] == -1 ? $lang['GUST'] : $row['username'],
+						'is_user'	=> (int) $row['user'] == -1 ? 0 : 1,
 						'is_thumb'	=> $is_there_thumb,
 						'thumb_link'=> $is_there_thumb ? PATH . $row['folder'] . '/thumbs/' . $row['name'] :  PATH . $row['folder'] . '/' . $row['name'],
 					);

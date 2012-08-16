@@ -8,8 +8,8 @@
 
 
 1.5 - version :
--[ 65% done ] Groups system
--[ 96% done ] New ACP style.
+-[ 97% done ] Groups system
+-[ 97% done ] New ACP style.
 	-- Opera 11 [ OK, top menu wont work ok ], On WIN
 	-- Opera 12 [ OK, top menu wont work ok ], On WIN
 	-- Chrome 19 [ OK ], on WIN
@@ -29,6 +29,7 @@
 -[ ] Dealing with the huge invasion of Nginx
 -[ ] Add phrases from within ACP, (show how to embed them in template ?)
 -[ ] Mobile style, see admin/mobile [ related files common.php+admin/index.php ]
+-[ ] filters at images & files (same db tables for searchs !)
 
 NOTE NOTE NOTE :: 
 use this function to extend the group system all the script/

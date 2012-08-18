@@ -30,6 +30,10 @@
 -[ ] Add phrases from within ACP, (show how to embed them in template ?)
 -[ ] Mobile style, see admin/mobile [ related files common.php+admin/index.php ]
 -[ ] filters at images & files (same db tables for searchs !)
+	-[ ] filters at images.
+	-[ ] filters at files.
+	-[ ] convert searches to use filters and show last 10 ones.
+
 
 NOTE NOTE NOTE :: 
 use this function to extend the group system all the script/

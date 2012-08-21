@@ -896,8 +896,8 @@ case 'users':
 						'id'		=> $row['id'],
 						'name'		=> $row['name'],
 						'userfile_link' => $userfile,
-						'delusrfile_link'	=> basename(ADMIN_PATH) .'?cp=' . basename(__file__, '.php') . '&amp;deleteuserfile='. $row['id'] . (isset($_GET['page']) ? '&amp;page=' . intval($_GET['page']) : ''),
-						'delusr_link'		=> basename(ADMIN_PATH) .'?cp=' . basename(__file__, '.php') . '&amp;del_user='. $row['id'] . (isset($_GET['page']) ? '&amp;page=' . intval($_GET['page']) : ''),
+						'delusrfile_link'	=> $row['founder'] && (int) $userinfo['founder'] == 0 ? false : basename(ADMIN_PATH) .'?cp=' . basename(__file__, '.php') . '&amp;deleteuserfile='. $row['id'] . (isset($_GET['page']) ? '&amp;page=' . intval($_GET['page']) : ''),
+						'delusr_link'		=> $row['founder'] && (int) $userinfo['founder'] == 0 ? false : basename(ADMIN_PATH) .'?cp=' . basename(__file__, '.php') . '&amp;del_user='. $row['id'] . (isset($_GET['page']) ? '&amp;page=' . intval($_GET['page']) : ''),
 						'founder'			=> (int) $row['founder'],
 						'last_visit'		=> kleeja_date($row['last_visit']),
 						'group'				=> preg_replace('!{lang.([A-Z0-9]+)}!e', '$lang[\'\\1\']', $d_groups[$row['group_id']]['data']['group_name'])

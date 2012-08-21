@@ -835,7 +835,7 @@ function echo_ajax($code_number, $content, $menu = '')
 /**
 * show date in a human-readable-text
 */
-define('TIME_FORMAT', 'd-m-Y h:m i'); # to be moved to configs later
+define('TIME_FORMAT', 'd-m-Y h:i a'); # to be moved to configs later
 function kleeja_date($time, $format = false)
 {
 	global $lang;

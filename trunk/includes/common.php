@@ -156,7 +156,7 @@ function get_microtime()
 	list($usec, $sec) = explode(' ', microtime());	return ((float)$usec + (float)$sec);
 }
 //is bot ?
-function is_bot($bots = array('googlebot', 'yahoo' ,'msnbot'))
+function is_bot($bots = array('googlebot', 'bing' ,'msnbot'))
 {
 	if(isset($_SERVER['HTTP_USER_AGENT']))
 	{	

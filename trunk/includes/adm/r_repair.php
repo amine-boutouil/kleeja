@@ -80,7 +80,7 @@ if(isset($_GET['third_august_1987']))
 
 	#stats
 	$stat_vars = array('stat_files', 'stat_sizes', 'stat_users', 'stat_last_file', 'stat_last_f_del',
-				'stat_last_google', 'stat_last_yahoo', 'stat_google_num', 'stat_yahoo_num', 'stat_last_user');
+				'stat_last_google', 'stat_last_bing', 'stat_google_num', 'stat_bing_num', 'stat_last_user');
 	$zip->create_file(var_export(compact($stat_vars), true), 'stats.txt');
 	unset($stat_vars);
 

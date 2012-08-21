@@ -249,9 +249,9 @@ switch ($_GET['go'])
 				$clean_name		= (string) $usrcp->cleanusername($name);
 					
 				$insert_query	= array(
-								'INSERT'	=> 'name ,password, password_salt ,mail,admin, session_id, clean_name',
+								'INSERT'	=> 'name ,password, password_salt ,mail, session_id, clean_name',
 								'INTO'		=> "{$dbprefix}users",
-								'VALUES'	=> "'$name', '$pass', '$user_salt', '$mail','0','$session_id','$clean_name'"
+								'VALUES'	=> "'$name', '$pass', '$user_salt', '$mail','$session_id','$clean_name'"
 							);
 
 				($hook = kleeja_run_hook('qr_insert_new_user_register')) ? eval($hook) : null; //run hook
@@ -259,7 +259,7 @@ switch ($_GET['go'])
 				if ($SQL->build($insert_query))
 				{
 					$last_user_id = $SQL->insert_id();
-					$text = $lang['REGISTER_SUCCESFUL'] . '  <a href="' .  $config['siteurl']  . ($config['mod_writer'] ?  'login.html' : 'ucp.php?go=login') . '">' . $lang['LOGIN'] . '</a>';
+					$text = $lang['REGISTER_SUCCESFUL'] . ' <br /> <a href="' . $config['siteurl'] . '">' . $lang['HOME'] . '</a>';
 
 					//update number of stats
 					$update_query	= array(
@@ -274,8 +274,11 @@ switch ($_GET['go'])
 						//delete cache ..
 						delete_cache('data_stats');
 					}
-
-					kleeja_info($text);
+                    
+                    //auto login
+                    $usrcp->data($t_lname, $t_lpass, false, false);
+                    kleeja_info($text, '', true, $config['siteurl'], 3);
+                    
 				}
 			}
 		}

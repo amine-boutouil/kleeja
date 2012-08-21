@@ -188,7 +188,7 @@ $(document).ready( function(){
 		<div class="x_options">
 			<a target="_blank" href="{{userfile_link}}" title="{lang.BROSWERF}"><img src="{STYLE_PATH_ADMIN}images/show_files.png" alt="{lang.BROSWERF}" /></a>
 			<a href="{{delusrfile_link}}&amp;{GET_FORM_KEY}" onclick="javascript:return confirm_from();" title="{lang.ADMIN_DELETE_FILES}"><img src="{STYLE_PATH_ADMIN}images/delete_all_files.png" alt="{lang.ADMIN_DELETE_FILES}" /></a>
-			<a href="{{deluser_link}}&amp;{GET_FORM_KEY}" title="{lang.DELETE}"><img src="{STYLE_PATH_ADMIN}images/user_delete.png" alt="{lang.DELETE}" /></a>
+			<IF LOOP="delusr_link"><a href="{{delusr_link}}&amp;{GET_FORM_KEY}" title="{lang.DELETE}"><img src="{STYLE_PATH_ADMIN}images/user_delete.png" alt="{lang.DELETE}" /></a></IF>
 			<a href="{{userfile_link}}" title="{lang.EDIT}"><img src="{STYLE_PATH_ADMIN}images/user_edit.png" alt="{lang.EDIT}" /></a>
 		</div>
 	</div>

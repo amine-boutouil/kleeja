@@ -72,7 +72,7 @@ CREATE TABLE `{$dbprefix}stats` (
   `ban` text collate utf8_bin NOT NULL,
   `last_google` int(11) unsigned NOT NULL,
   `google_num` int(11) unsigned NOT NULL,
-  `last_yahoo` int(11) unsigned NOT NULL,
+  `last_bing` int(11) unsigned NOT NULL,
   `yahoo_num` int(11) unsigned NOT NULL,
   `rules` text collate utf8_bin NOT NULL,
   `ex_header` text collate utf8_bin NOT NULL,
@@ -144,19 +144,6 @@ CREATE TABLE `{$dbprefix}config` (
 ";
 
 
-
-$install_sqls['online'] = "
-CREATE TABLE `{$dbprefix}online` (
-  `ip` varchar(30) collate utf8_bin NOT NULL,
-  `username` varchar(100) collate utf8_bin NOT NULL,
-  `agent` varchar(100) collate utf8_bin NOT NULL,
-  `time` int(10) NOT NULL,
-  `session` varchar(100) NOT NULL,
-  UNIQUE KEY `session` (`session`),
-  KEY `time` (`time`),
-  KEY `ip` (`ip`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-";
 
 $install_sqls['hooks'] = "
 CREATE TABLE `{$dbprefix}hooks` (

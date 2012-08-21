@@ -83,28 +83,18 @@ $filecp_link	= $usrcp->id() ? $config['siteurl'] . ($config['mod_writer'] ? 'fil
 $show_online = $config['allow_online'] == 1 ? true : false;
 if ($show_online)
 {
-	$visitornum		= $usersnum	=	0;
+	$usersnum	=	0;
 	$online_names	= array();
-	$timeout		= 100; //second  
+	$timeout		= 100; //100 second  
 	$timeout2		= time()-$timeout;  
-
-	$search_engines = array(
-							'AdsBot-Google' => '<span style="color:red;">Google Ads Bot</span>',
-							'ia_archiver'	=> '<span style="color:red;">Alexa Bot</span>',
-							'Baiduspider+('	=> '<span style="color:red;">Baidu Spider</span>',
-							'bingbot'			=> '<span style="color:red;">Bing Bot</span>',
-							'Mediapartners-Google'	=> '<span style="color:red;">Google Adsense Bot</span>',
-							'Google' 		=> '<span style="color:orange;">Google Bot</span>',
-							//add more ..
-							);
 
 	//put another bot name
 	($hook = kleeja_run_hook('anotherbots_online_index_page')) ? eval($hook) : null; //run hook
 
 	$query = array(
-					'SELECT'	=> 'DISTINCT(n.ip), n.username, n.agent',
-					'FROM'		=> "{$dbprefix}online n",
-					'WHERE'		=> "n.time > '$timeout2'"
+					'SELECT'	=> 'u.name',
+					'FROM'		=> "{$dbprefix}users u",
+					'WHERE'		=> "u.last_visit > '$timeout2'"
 				);
 
 	($hook = kleeja_run_hook('qr_select_online_index_page')) ? eval($hook) : null; //run hook
@@ -115,54 +105,28 @@ if ($show_online)
 	{
 		($hook = kleeja_run_hook('while_qr_select_online_index_page')) ? eval($hook) : null; //run hook	
 
-		//check if agent and add him to online list
-		if(!empty($row['agent']))
-		{
-			foreach($search_engines as $c=>$s)
-			{
-				if (strstr($row['agent'], $c) && empty($online_names[$c]))
-				{
-					$usersnum++; 
-					$online_names[$c] = $s;
-					break;
-				}
-			}
-		}
-
-		//not guest , -1 is userid for guest
-		if($row['username'] != '-1') 
-		{
-			$usersnum++; 
-			$online_names[$row['username']] = $row['username'];
-		}
-		else
-		{
-			$visitornum++;
-		}
-	} #while
+		$usersnum++; 
+		$online_names[$row['name']] = $row['name'];
+	}#while
 		
 	$SQL->freeresult($result);
 
 	//make names as array to print them in template
 	$shownames = array();
+	$shownames_sizeof =  sizeof($shownames);
+	
 	foreach ($online_names as $k)
 	{
-		$shownames[] = array('name' => $k, 'seperator' => sizeof($shownames) ? ',' : '');
+		$shownames[] = array('name' => $k, 'seperator' => $shownames_sizeof ? ',' : '');
 	}
 
 	//some variables must be destroyed here
 	unset($online_names, $timeout, $timeout2);
 
-	/**
-	* Wanna increase your onlines counter ..you can from next line 
-	* but you must know this is illegal ... 
-	*/
-	$allnumbers = $usersnum + $visitornum;
-
 	//check & update most ever users and vistors was online
 	if(empty($config['most_user_online_ever']) || trim($config['most_user_online_ever']) == '')
 	{
-		$most_online	= $allnumbers;
+		$most_online	= $usersnum;
 		$on_muoe		= time();
 	}
 	else
@@ -172,10 +136,16 @@ if ($show_online)
 
 	if((int) $most_online < $allnumbers || (empty($config['most_user_online_ever']) || trim($config['most_user_online_ever']) == ''))
 	{
-		update_config('most_user_online_ever', $allnumbers . ':' . time());
+		update_config('most_user_online_ever', $usersnum . ':' . time());
 	}
 
 	$on_muoe = date('d-m-Y h:i a', $on_muoe);
+
+	if(!$usersnum)
+	{
+		$show_online = false;
+	}
+
 
 	($hook = kleeja_run_hook('if_online_index_page')) ? eval($hook) : null; //run hook	
 }#allow_online

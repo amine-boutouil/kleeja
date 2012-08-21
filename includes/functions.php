@@ -21,22 +21,14 @@ if (!defined('IN_COMMON'))
 /**
 * For recording who onlines now .. 
 */
-function KleejaOnline ()
+function kleeja_detecting_bots ()
 {
 	global $SQL, $usrcp, $dbprefix, $config, $klj_session;
 
 	// get information .. 
-	$ip				= get_ip();
 	$agent			= $SQL->escape($_SERVER['HTTP_USER_AGENT']);
-	$timeout		= 600; //seconds //10 min
-	$time			= time();  
-	$timeout2		= $time-$timeout;  
-	$username		= ($usrcp->name()) ? $usrcp->name(): '-1';
-	$session		= $klj_session;
 
-	//
 	//for stats 
-	//
 	if (strstr($agent, 'Google'))
 	{
 		$update_query = array(
@@ -46,7 +38,7 @@ function KleejaOnline ()
 		($hook = kleeja_run_hook('qr_update_google_lst_num')) ? eval($hook) : null; //run hook
 		$SQL->build($update_query);
 	}
-	elseif (strstr($agent, 'Yahoo'))
+	elseif (strstr($agent, 'Bing'))
 	{
 		$update_query = array(
 								'UPDATE'	=> "{$dbprefix}stats",

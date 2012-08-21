@@ -461,13 +461,8 @@ if (($stat_sizes >= ($config['total_size'] *(1048576))) && !defined('IN_LOGIN') 
 	kleeja_info($lang['SIZES_EXCCEDED'], $lang['STOP_FOR_SIZE']);
 }
 
-//calculate  onlines ...  
-if ((int) $config['allow_online'] == '1' && defined('IN_REAL_INDEX'))
-{
-	//it's only work in index page .. so we reduce some loads
-	KleejaOnline();
-}
 
+kleeja_detecting_bots();
 
 //check for page numbr
 if(empty($perpage) || intval($perpage) == 0)

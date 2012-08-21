@@ -91,6 +91,7 @@ class usrcp
 		$query = array(
 					'SELECT'	=> '*',
 					'FROM'		=> "`{$dbprefix}users`",
+					'LIMIT'		=> '1'
 					);
 
 		if($hashed)
@@ -105,7 +106,7 @@ class usrcp
 		($hook = kleeja_run_hook('qr_select_usrdata_n_usr_class')) ? eval($hook) : null; //run hook			
 		$result = $SQL->build($query);
 
-		if ($SQL->num_rows($result) != 0) 
+		if ($SQL->num_rows($result)) 
 		{
 			while($row=$SQL->fetch_array($result))
 			{
@@ -144,12 +145,13 @@ class usrcp
 						return false;
 					}
 				}
+
 				if(($phppass != $row['password'] && $hashed) || ($this->kleeja_hash_password($phppass, $row['password']) != true && $hashed == false))
 				{
 					return false;
 				}
 
-				//Avoid dfining constants again
+				//Avoid dfining constants again for admin panel login
 				if(!$loginadm)
 				{
 					define('USER_ID', $row['id']);
@@ -161,29 +163,27 @@ class usrcp
 
 				//all user fileds info
 				$userinfo = $row;
-				
+
 				$user_y = kleeja_base64_encode(serialize(array('id'=>$row['id'], 'name'=>$row['name'], 'mail'=>$row['mail'], 'last_visit'=>$row['last_visit'])));
-				
-				if(!$hashed)
+
+				if(!$hashed && !$loginadm)
 				{
 					$hash_key_expire = sha1(md5($config['h_key'] . $row['password']).  $expire);
-					if(!$loginadm)
-					{
-						$this->kleeja_set_cookie('ulogu', $this->en_de_crypt($row['id'] . '|' . $row['password'] . '|' . $expire . '|' . $hash_key_expire . '|' . $row['group_id'] . '|' . $user_y), $expire);
-					}
-					else
-					{
-						//update now !!
+					$this->kleeja_set_cookie('ulogu', $this->en_de_crypt($row['id'] . '|' . $row['password'] . '|' . $expire . '|' . $hash_key_expire . '|' . $row['group_id'] . '|' . $user_y), $expire);
+				}
+
+				#if last visit > 1 minute then update it 
+				if(empty($row['last_visit']) || time() - $row['last_visit'] > 60)
+				{
 						$update_last_visit = array(
 									'UPDATE'	=> "`{$dbprefix}users`",
-									'SET'		=> "last_visit=" . time() . "",
+									'SET'		=> "last_visit=" . time(),
 									'WHERE'		=> "id=" . intval($row['id'])
 							);
 
 						$SQL->build($update_last_visit);
-					}
 				}
-		
+
 				($hook = kleeja_run_hook('qr_while_usrdata_n_usr_class')) ? eval($hook) : null; //run hook
 			}
 			$SQL->freeresult($result);

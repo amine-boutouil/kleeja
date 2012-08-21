@@ -46,12 +46,13 @@ CREATE TABLE `{$dbprefix}groups_acl` (
 $update_sqls['groups_insert'] = "INSERT INTO `{$dbprefix}groups` (`group_id`, `group_name`, `group_is_default`, `group_is_essential`) VALUES
 (1, '{lang.ADMINS}', 0, 1),
 (2, '{lang.GUESTS}', 0, 1),
-(3, '{lang.USERS}', 1, 1),
-(4, 'برونزي', 0, 0);";
+(3, '{lang.USERS}', 1, 1)";
 
 $update_sqls['admin2founder'] = "ALTER TABLE  `{$dbprefix}users` CHANGE  `admin`  `founder` TINYINT( 1 ) NOT NULL DEFAULT  '0'";
 $update_sqls['group_id4users'] = "ALTER TABLE  `{$dbprefix}users` ADD  `group_id` INT( 11 ) UNSIGNED NOT NULL DEFAULT  '3' AFTER  `name` , ADD INDEX (  `group_id` )";
 $update_sqls['group_id4adm'] = "UPDATE  `{$dbprefix}users` SET  `group_id` =  '1' WHERE  `founder`= '1';";
+
+$update_sqls['stats_yahoo'] = "ALTER TABLE  `{$dbprefix}stats` CHANGE  `last_yahoo`  `last_bing` INT( 11 ) UNSIGNED NOT NULL;"
 
 #Acls!!
 #1 = admin, 2 = guests, 3 = users [ 1 = true, 0  = false ]

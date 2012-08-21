@@ -73,7 +73,7 @@ CREATE TABLE `{$dbprefix}stats` (
   `last_google` int(11) unsigned NOT NULL,
   `google_num` int(11) unsigned NOT NULL,
   `last_bing` int(11) unsigned NOT NULL,
-  `yahoo_num` int(11) unsigned NOT NULL,
+  `bing_num` int(11) unsigned NOT NULL,
   `rules` text collate utf8_bin NOT NULL,
   `ex_header` text collate utf8_bin NOT NULL,
   `ex_footer` text collate utf8_bin NOT NULL,

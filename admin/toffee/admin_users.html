@@ -161,75 +161,48 @@ $(document).ready( function(){
 
 <ELSEIF NAME="show_results">
 <!-- the big box begin -->
-   <div class="tit_con">
-<h1>{lang.R_USERS} 
-<IF NAME="is_search"> &raquo; <IF NAME="current_smt == show_group">{group_name}<ELSE>{lang.SEARCH_USERS}</IF> ( {nums_rows} )</IF>
-</h1>
-   </div>
-<div class="big-box">
+<div class="big-box group_users">
+<div class="tit_con">
+	<h1>{lang.R_USERS} 
+	<IF NAME="is_search"> &raquo; <IF NAME="current_smt == show_group">{group_name}<ELSE>{lang.SEARCH_USERS}</IF> ( {nums_rows} )</IF>
+	</h1>
+</div>
+<!-- the big box begin -->
+
+
 <!-- if not normal user system, tell him --> 
 <IF NAME="user_not_normal">
-<div class="note-info">{lang.USERS_NOT_NORMAL_SYS}</div>
+<div id="system-message">
+	<div class="info">{lang.USERS_NOT_NORMAL_SYS}</div>
+</div>
 </IF>
 
-<form method="post" name="userform" action="{action}" id="users_form">
+<div class="br"></div>
 
-	<!-- start clear  -->
-	<div class="clr"></div><br />
-	<!-- end clear  -->
-<!-- start data table -->
-<table>
-	<tr class="first">
-		<td>{lang.USERNAME}</td>
-		<td>{lang.EMAIL}</td>
-		<td>{lang.PASSWORD}</td>
-		<td>{lang.IS_ADMIN}</td>
-		<td><a href="javascript:void(0);" onclick="checkAll(document.userform, '_del', 'su');">{lang.DELETE}</a></td>
-		<!-- admin users info tr extra -->
-	</tr>
-	<IF NAME="no_results">
-	...		
-	<ELSE>
-	
-	<LOOP NAME="arr">
-	<tr id="su[{{id}}]" class="osilver">
-		<td>
-			<label><input type="text" name="nm_{{id}}" value="{{name}}" size="32"></label> <br />
-				<small><a href="{{delusrfile_link}}&amp;{GET_FORM_KEY}" onclick="javascript:return confirm_from();">{lang.ADMIN_DELETE_FILES}</a>
-				 | <a target="_blank" href="{{userfile_link}}">{lang.BROSWERF}</a></small>
-		</td>
-		<td><label><input type="text" name="ml_{{id}}" value="{{mail}}" size="20" style="direction:ltr"></label></td>
-		<td><label><input type="password" name="ps_{{id}}" value="" size="10" style="text-align:center;"></label></td>
-		<td>{{admin}}</td>
-		<td>
-		<IF LOOP="id==1">
-			<img  src="{STYLE_PATH_ADMIN}images/locked.png" alt="--- founder ---"  style="border:0" />
-		<ELSE>
-			<input type="checkbox"  name="del_{{id}}" value="{{id}}" onclick="change_color(this,'su[{{id}}]');" rel="_del">
-		</IF>
-		</td>
-		<!-- admin users data tr extra -->
-	</tr>
-	</LOOP>
-	</IF>
-</table>
+<IF NAME="arr">
+<LOOP NAME="arr">
+<div class="section">
+	<h3>{{name}}<IF LOOP="founder==1"><img  src="{STYLE_PATH_ADMIN}images/founder.png" alt="{lang.FOUNDER}" title="{lang.FOUNDER}" /></IF></h3>
+	<div class="box">
+		{lang.GROUP}: {{group}}, {lang.LAST_VISIT}: {{last_visit}}
+		<div class="x_options">
+			<a target="_blank" href="{{userfile_link}}" title="{lang.BROSWERF}"><img src="{STYLE_PATH_ADMIN}images/show_files.png" alt="{lang.BROSWERF}" /></a>
+			<a href="{{delusrfile_link}}&amp;{GET_FORM_KEY}" onclick="javascript:return confirm_from();" title="{lang.ADMIN_DELETE_FILES}"><img src="{STYLE_PATH_ADMIN}images/delete_all_files.png" alt="{lang.ADMIN_DELETE_FILES}" /></a>
+			<a href="{{deluser_link}}&amp;{GET_FORM_KEY}" title="{lang.DELETE}"><img src="{STYLE_PATH_ADMIN}images/user_delete.png" alt="{lang.DELETE}" /></a>
+			<a href="{{userfile_link}}" title="{lang.EDIT}"><img src="{STYLE_PATH_ADMIN}images/user_edit.png" alt="{lang.EDIT}" /></a>
+		</div>
+	</div>
+</div>
+<div class="clear"></div>
+</LOOP>
+</IF>
+
 <!-- end data table -->
 
 <div class="br"></div>
 
 <!-- pagination -->
 {page_nums}
-
-	
-<!-- button -->
-<p>
-	<input type="hidden" name="submit" value="1" />
-	<button type="submit" name="submit" class="btn"  onclick="javascript:submit_kleeja_data('#users_form', '#content', 1); return false;"><span>{lang.UPDATE_USERS}</span></button>
-</p>
-	
-{H_FORM_KEYS}
-</form>
-
 </div>
 <!-- the big box end -->
 

@@ -16,22 +16,7 @@ if (!defined('IN_COMMON'))
 }
 
 
-/**
-* To return file size in propriate format
-*/
-function Customfile_size($size)
-{
-	$sizes = array(' B', ' KB', ' MB', ' GB', ' TB', 'PB', ' EB');
-	$ext = $sizes[0];
-	for ($i=1; (($i < count($sizes)) && ($size >= 1024)); $i++)
-	{
-		$size = $size / 1024;
-		$ext  = $sizes[$i];
-	}
-	$result	=	 round($size, 2).$ext;
-	($hook = kleeja_run_hook('func_Customfile_size')) ? eval($hook) : null; //run hook
-	return  $result;
-}
+
 
 /**
 * For recording who onlines now .. 

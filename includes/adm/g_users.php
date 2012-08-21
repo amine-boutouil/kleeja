@@ -166,6 +166,34 @@ if(isset($_GET['deleteuserfile']))
 		kleeja_admin_info($lang['ADMIN_DELETE_FILE_OK'], true, '', true, $action_all, 3);
 	}
 }
+//
+//Delete a user
+//
+if(isset($_GET['del_user']))
+{
+	//check _GET Csrf token
+	if(!kleeja_check_form_key_get('adm_users'))
+	{
+		kleeja_admin_err($lang['INVALID_GET_KEY'], true, $lang['ERROR'], true, $action_all, 2);
+	}
+
+	//is exists ?
+	if(!$SQL->num_rows($SQL->query("SELECT * FROM `{$dbprefix}users` WHERE id=" . intval($_GET['del_user']))))
+	{
+		redirect($action_all);
+	}
+	
+	//delete all files in just one query
+	$d_query	= array(
+						'DELETE'	=> "{$dbprefix}users",
+						'WHERE'		=> "id=" . intval($_GET['del_user']),
+						);
+
+	$SQL->build($d_query);
+
+	kleeja_admin_info($lang['USER_DELETED'], true, '', true, $action_all, 3);
+}
+
 
 //
 //add new user
@@ -855,59 +883,29 @@ case 'users':
 
 	if ($nums_rows > 0)
 	{
-		$query['SELECT'] =	'*';
+		$query['SELECT'] =	'id, name, founder, group_id, last_visit';
 		$query['LIMIT']	=	"$start, $perpage";
 
 		$result = $SQL->build($query);
 
 		while($row=$SQL->fetch_array($result))
 		{
-			//make new lovely arrays !!
-			$ids[$row['id']]	= $row['id'];
-			$name[$row['id']] 	= isset($_POST['nm_' . $row['id']]) ? $_POST['nm_' . $row['id']] : $row['name'];
-			$mail[$row['id']]	= isset($_POST['ml_' . $row['id']]) ? $_POST['ml_' . $row['id']] : $row['mail'];
-			$pass[$row['id']]	= isset($_POST['ps_' . $row['id']]) ? $_POST['ps_' . $row['id']] : '';
-			$admin[$row['id']]	= $row['admin'];
-			$del[$row['id']] 	= isset($_POST['del_' . $row['id']]) ? $_POST['del_' . $row['id']] : '';
-
 			$userfile =  $config['siteurl'] . ($config['mod_writer'] ? 'fileuser-' . $row['id'] . '.html' : 'ucp.php?go=fileuser&amp;id=' . $row['id']);
 
 			$arr[]	= array(
-						'id'	=> $ids[$row['id']],
-						'name'	=> $name[$row['id']],
-						'mail'	=> $mail[$row['id']],
+						'id'		=> $row['id'],
+						'name'		=> $row['name'],
 						'userfile_link' => $userfile,
-						'delusrfile_link' => basename(ADMIN_PATH) .'?cp=' . basename(__file__, '.php') . '&amp;deleteuserfile='. $row['id'] . (isset($_GET['page']) ? '&amp;page=' . intval($_GET['page']) : ''),
-						'admin'	=> !empty($admin[$row['id']]) ? '<input name="ad_' . $row['id'] . '" type="checkbox" checked="checked" />' : '<input name="ad_' . $row['id'] . '" type="checkbox" />'
+						'delusrfile_link'	=> basename(ADMIN_PATH) .'?cp=' . basename(__file__, '.php') . '&amp;deleteuserfile='. $row['id'] . (isset($_GET['page']) ? '&amp;page=' . intval($_GET['page']) : ''),
+						'delusr_link'		=> basename(ADMIN_PATH) .'?cp=' . basename(__file__, '.php') . '&amp;del_user='. $row['id'] . (isset($_GET['page']) ? '&amp;page=' . intval($_GET['page']) : ''),
+						'founder'			=> (int) $row['founder'],
+						'last_visit'		=> kleeja_date($row['last_visit']),
+						'group'				=> preg_replace('!{lang.([A-Z0-9]+)}!e', '$lang[\'\\1\']', $d_groups[$row['group_id']]['data']['group_name'])
 				);
 
 			//when submit !!
-			if (isset($_POST['submit']))
+			/*if (isset($_POST['submit']))
 			{
-				if ($del[$row['id']])
-				{
-					//delete user
-					$query_del	= array(
-									'DELETE'	=> "{$dbprefix}users",
-									'WHERE'		=> 'id=' . intval($ids[$row['id']])
-								);
-
-					$SQL->build($query_del);
-
-					//update number of stats
-					$update_query	= array(
-										'UPDATE'	=> "{$dbprefix}stats",
-										'SET'		=> 'users=users-1',
-									);
-
-					$SQL->build($update_query);
-						
-					if($SQL->affected())
-					{
-						$affected = true;
-						delete_cache('data_stats');
-					}
-				}
 
 				//update
 				$admin[$row['id']] = isset($_POST['ad_' . $row['id']])  ? 1 : 0 ;
@@ -930,7 +928,7 @@ case 'users':
 				{
 					$affected = true;
 				}
-			}
+			}*/
 		}
 
 		$SQL->freeresult($result);

@@ -69,7 +69,7 @@ $lang = array_merge($lang, array(
 	'REPLY_CALL' 			=> 'رد على رسالة',
 	'REPLIED_ON_CAL' 		=> 'بخصوص مراسلتك ',
 	'CALLS_UPDATED' 		=> 'تم تحديث المراسلات',
-	'IS_ADMIN' 				=> 'مدير',
+	'FOUNDER' 				=> 'مؤسس',
 	'UPDATE_USERS' 			=> 'تحديث المستخدمين',
 	'USERS_UPDATED' 		=> 'تم تحديث المستخدمين',
 	'E_BACKUP' 				=> 'اختر الجداول التي تريد تضمينها في النسخة الاحتياطية ومن ثم اضغط على تحميل',
@@ -331,4 +331,5 @@ $lang = array_merge($lang, array(
 	'GROUP_ADDED'				=> 'تم اضافة المجموعة "%s" بنجاح... ',
 	'SEARCH4FILES_BYIP'			=> 'بحث عن الملفات بواسطة الـ IP',
 	'SEARCH4FILES_BYUSER'		=> 'بحث عن الملفات لهذا المستخدم',
+	'USER_DELETED'				=> 'تم حذف المستخدم بنجاح !.',
 ));

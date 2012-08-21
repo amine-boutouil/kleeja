@@ -25,7 +25,8 @@
 -[ ] Security situation page 
 -[-] ACP firstpage !  
 -[ ] Test upgrades under any curcumstances, and avoids problems that happened before !
--[ ] Files, images ACP -> search files from this IP,user
+-[x] images ACP -> search files from this IP,user
+-[ ] files ACP -> search files from this IP,user
 -[ ] Dealing with the huge invasion of Nginx
 -[ ] Add phrases from within ACP, (show how to embed them in template ?)
 -[ ] Mobile style, see admin/mobile [ related files common.php+admin/index.php ]
@@ -33,7 +34,7 @@
 	-[ ] filters at images.
 	-[ ] filters at files.
 	-[ ] convert searches to use filters and show last 10 ones.
-
+-[ ] files of deleted user shows as 'deleted' user or 'guest' 
 
 NOTE NOTE NOTE :: 
 use this function to extend the group system all the script/

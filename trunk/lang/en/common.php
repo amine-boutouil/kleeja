@@ -25,7 +25,7 @@ $lang = array_merge($lang, array(
 	'SIZES_EXCCEDED' 		=> 'We have ran out of space ... we will be back soon.',
 	'ENTER_CODE_IMG' 		=> 'Enter verification code.',
 	'SAFE_CODE' 			=> 'Enable safety code for downloads',
-	'LAST_VISIT' 			=> 'Your last visit',
+	'LAST_VISIT' 			=> 'Last visit',
 	'FLS_LST_VST_SEARCH' 	=> 'Show files since',
 	'IMG_LST_VST_SEARCH' 	=> 'Show images since',
 	'NEXT' 					=> 'Next &raquo;',
@@ -276,6 +276,14 @@ $lang = array_merge($lang, array(
 	'USERS'						=> 'Users',
 	'DELETE_INSTALL_FOLDER'		=> 'To start using Kleeja, delete "install" folder, Kleeja will never work while this folder exists.',
 	'HV_NOT_PRVLG_ACCESS'		=> 'You don\'t have privilege to access this page.',
+	'W_PERIODS' 		=> array("a second", "a minute", "an hour", "a day", "a week", "a month", "a year", "a decade"),
+	'W_PERIODS2'		=> array("two seconds", "two minutes", "two hours", "two days", "two weeks", "two months", "two years", "two decades"),
+	'W_PERIODS_P'		=> array("seconds", "minutes", "hours", "days", "weeks", "months", "years", "decades"),
+	'W_FROM' 			=> 'from',
+	'W_AGO' 			=> 'ago',
+	'W_FROM NOW'		=> 'from now',
+	'TIME_PM'			=> 'pm',
+	'TIME_AM'			=> 'am',
 
 	//last line of this file ...					 
 	'S_TRANSLATED_BY' 			=> 'Translated By <a href="http://www.fenix4web.com/" target="_blank">Fenix4Web</a> &amp; Kleeja Team',

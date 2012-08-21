@@ -165,6 +165,23 @@ function Saafooter($outscript = false)
 }
 
 /**
+* To return file size in propriate format
+*/
+function Customfile_size($size)
+{
+	$sizes = array(' B', ' KB', ' MB', ' GB', ' TB', 'PB', ' EB');
+	$ext = $sizes[0];
+	for ($i=1; (($i < count($sizes)) && ($size >= 1024)); $i++)
+	{
+		$size = $size / 1024;
+		$ext  = $sizes[$i];
+	}
+	$result	=	 round($size, 2).$ext;
+	($hook = kleeja_run_hook('func_Customfile_size')) ? eval($hook) : null; //run hook
+	return  $result;
+}
+
+/**
 * print error message 
 * parameters : msg : text that will show as error mressage
 					title : <title>title of page</title>
@@ -812,4 +829,50 @@ function echo_ajax($code_number, $content, $menu = '')
 	$SQL->close();
 
 	exit(generate_json(array('code' => $code_number, 'content' => $content, 'menu' => $menu)));
+}
+
+
+/**
+* show date in a human-readable-text
+*/
+define('TIME_FORMAT', 'd-m-Y h:m i'); # to be moved to configs later
+function kleeja_date($time, $format = false)
+{
+	global $lang;
+
+	if(time() - $time > (86400 * 3) or $format)
+	{
+		$format = !$format ? TIME_FORMAT : $format;
+		return str_replace(array('am', 'pm'), array($lang['TIME_AM'], $lang['TIME_PM']), date($format, $time));
+	}
+
+	$lengths	= array("60","60","24","7","4.35","12","10");
+	$now		= time();
+	$difference	= ($now > $time) ? $now - $time :  $time - $now;
+	$tense		= ($now > $time) ? $lang['W_AGO'] : $lang['W_FROM'];
+	for($j = 0; $difference >= $lengths[$j] && $j < sizeof($lengths)-1; $j++)
+	{
+		$difference /= $lengths[$j];
+	}
+	$difference = round($difference);
+	$return = $difference;	
+	if($difference != 1)
+	{
+		if($difference == 2)
+		{
+			$return = $lang['W_PERIODS2'][$j];
+		}
+		else
+		{		
+			$return = $difference . ' ' . ($difference > 10 ? $lang['W_PERIODS'][$j] :  $lang['W_PERIODS_P'][$j]);
+		}
+	}
+	else
+	{
+		$return = $lang['W_PERIODS'][$j];
+	}
+
+	$return = $lang['W_FROM'] .  ' ' . $return;
+
+	return $return;
 }

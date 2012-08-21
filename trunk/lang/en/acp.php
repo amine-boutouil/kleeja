@@ -69,7 +69,7 @@ $lang = array_merge($lang, array(
 	'REPLY_CALL' 			=> 'Reply on the message',
 	'REPLIED_ON_CAL' 		=> 'About your Message ',
 	'CALLS_UPDATED' 		=> 'Messagess updated successfully.',
-	'IS_ADMIN' 				=> 'Admin',
+	'FOUNDER' 				=> 'Founder',
 	'UPDATE_USERS' 			=> 'Update Users',
 	'USERS_UPDATED' 		=> 'Users updated successfully.',
 	'E_BACKUP' 				=> 'Select the tables you want to make a backup for:',
@@ -328,5 +328,6 @@ $lang = array_merge($lang, array(
 	'GROUP_ADDED'				=> 'Group "%s" has been added successfully ...',
 	'SEARCH4FILES_BYIP'			=> 'Search files via selected IP',
 	'SEARCH4FILES_BYUSER'		=> 'Search files for this user',
-	
+	'USER_DELETED'				=> 'User has been deleted successfully ...',
+
 ));

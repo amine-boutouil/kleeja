@@ -562,6 +562,26 @@ fieldset.fieldset_groups legend {
 	float:left;
 }
 
+.group_users .section:hover{
+	background-color:#FAFFD6;
+}
+.group_users .section {
+	border-bottom:1px dotted #ccc;
+	padding:3px;
+	height:25px;
+}
+.group_users .section h3{
+	font-size:20px !important;
+	padding-right:10px !important;
+	font-family:Georgia, Times, "Times New Roman", serif;
+}
+.group_users .section .box{
+	text-align:center !important;
+}
+.group_users .section .box .x_options{
+	float:left;
+}
+
 
 /*configs page*/
 .configs_page .section:hover{

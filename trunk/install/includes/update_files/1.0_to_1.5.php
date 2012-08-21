@@ -52,7 +52,7 @@ $update_sqls['admin2founder'] = "ALTER TABLE  `{$dbprefix}users` CHANGE  `admin`
 $update_sqls['group_id4users'] = "ALTER TABLE  `{$dbprefix}users` ADD  `group_id` INT( 11 ) UNSIGNED NOT NULL DEFAULT  '3' AFTER  `name` , ADD INDEX (  `group_id` )";
 $update_sqls['group_id4adm'] = "UPDATE  `{$dbprefix}users` SET  `group_id` =  '1' WHERE  `founder`= '1';";
 
-$update_sqls['stats_yahoo'] = "ALTER TABLE  `{$dbprefix}stats` CHANGE  `last_yahoo`  `last_bing` INT( 11 ) UNSIGNED NOT NULL;"
+$update_sqls['stats_yahoo'] = "ALTER TABLE  `{$dbprefix}stats` CHANGE  `last_yahoo`  `last_bing` INT( 11 ) UNSIGNED NOT NULL;";
 
 #Acls!!
 #1 = admin, 2 = guests, 3 = users [ 1 = true, 0  = false ]

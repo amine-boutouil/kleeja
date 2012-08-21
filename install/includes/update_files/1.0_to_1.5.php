@@ -53,7 +53,7 @@ $update_sqls['group_id4users'] = "ALTER TABLE  `{$dbprefix}users` ADD  `group_id
 $update_sqls['group_id4adm'] = "UPDATE  `{$dbprefix}users` SET  `group_id` =  '1' WHERE  `founder`= '1';";
 
 $update_sqls['stats_yahoo'] = "ALTER TABLE  `{$dbprefix}stats` CHANGE  `last_yahoo`  `last_bing` INT( 11 ) UNSIGNED NOT NULL;";
-
+$update_sqls['stats_yahoo2'] = "ALTER TABLE  `{$dbprefix}stats` CHANGE  `yahoo_num`  `bing_num`  INT( 11 ) UNSIGNED NOT NULL;";
 #Acls!!
 #1 = admin, 2 = guests, 3 = users [ 1 = true, 0  = false ]
 $update_sqls['groups_acls_enter_acp'] = "INSERT INTO `{$dbprefix}groups_acl` (`acl_name`, `group_id`, `acl_can`) VALUES ('enter_acp', 1, 1), ('enter_acp', 2, 0), ('enter_acp', 3, 0);";

@@ -202,7 +202,7 @@ if (!($stats = $cache->get('data_stats')))
 {
 	$query = array(
 					'SELECT'	=> 's.files, s.sizes, s.users, s.last_file, s.last_f_del, s.last_google' . 
-									', s.last_yahoo, s.google_num, s.yahoo_num, s.lastuser',
+									', s.last_bing, s.google_num, s.bing_num, s.lastuser',
 					'FROM'		=> "{$dbprefix}stats s"
 			);
 
@@ -219,9 +219,9 @@ if (!($stats = $cache->get('data_stats')))
 			'stat_last_file'	=> $row['last_file'],
 			'stat_last_f_del'	=> $row['last_f_del'],
 			'stat_last_google'	=> $row['last_google'],
-			'stat_last_yahoo'	=> $row['last_yahoo'],
+			'stat_last_bing'	=> $row['last_bing'],
 			'stat_google_num'	=> $row['google_num'],
-			'stat_yahoo_num'	=> $row['yahoo_num'],
+			'stat_bing_num'	=> $row['bing_num'],
 			'stat_last_user'	=> $row['lastuser']
 		);
 	

@@ -38,8 +38,8 @@ $post_max_size 		= function_exists('ini_get') ?  @ini_get('post_max_size') : @ge
 $memory_limit 		= function_exists('ini_get') ?  @ini_get('memory_limit') : @get_cfg_var('memory_limit');
 $s_last_google		= ($stat_last_google == 0) ? '[ ? ]' : date('d-m-Y h:i a', $stat_last_google);
 $s_google_num		= $stat_google_num;
-$s_last_yahoo		= ($stat_last_yahoo == 0) ? '[ ? ]' : date('d-m-Y h:i a', $stat_last_yahoo);
-$s_yahoo_num		= $stat_yahoo_num;
+$s_last_bing		= ($stat_last_bing == 0) ? '[ ? ]' : date('d-m-Y h:i a', $stat_last_bing);
+$s_bing_num		= $stat_bing_num;
 $usernamelang		= sprintf($lang['KLEEJA_CP_W'], $username);
 
 //size board by percent

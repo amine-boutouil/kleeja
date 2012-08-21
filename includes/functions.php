@@ -42,9 +42,9 @@ function kleeja_detecting_bots ()
 	{
 		$update_query = array(
 								'UPDATE'	=> "{$dbprefix}stats",
-								'SET'		=> "last_yahoo='$time', yahoo_num=yahoo_num+1"
+								'SET'		=> "last_bing='$time', bing_num=bing_num+1"
 							);
-		($hook = kleeja_run_hook('qr_update_yahoo_lst_num')) ? eval($hook) : null; //run hook	
+		($hook = kleeja_run_hook('qr_update_bing_lst_num')) ? eval($hook) : null; //run hook	
 		$SQL->build($update_query);
 	}
 

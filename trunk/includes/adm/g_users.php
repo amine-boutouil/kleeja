@@ -33,6 +33,7 @@ $H_FORM_KEYS4	= kleeja_add_form_key('adm_users_delgroup');
 $H_FORM_KEYS5	= kleeja_add_form_key('adm_users_editacl');
 $H_FORM_KEYS6	= kleeja_add_form_key('adm_users_editdata');
 $H_FORM_KEYS7	= kleeja_add_form_key('adm_users_editexts');
+$H_FORM_KEYS8	= kleeja_add_form_key('adm_users_edituser');
 
 //
 // Check form key
@@ -47,6 +48,13 @@ if (isset($_POST['submit']))
 if (isset($_POST['newuser']))
 {
 	if(!kleeja_check_form_key('adm_users_newuser'))
+	{
+		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $action, 1);
+	}
+}
+if (isset($_POST['edituser']))
+{
+	if(!kleeja_check_form_key('adm_users_edituser'))
 	{
 		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $action, 1);
 	}
@@ -231,9 +239,9 @@ else if (isset($_POST['newuser']))
 		$clean_name		= (string) $usrcp->cleanusername($name);
 
 		$insert_query	= array(
-								'INSERT'	=> 'name ,password, password_salt ,mail,admin, session_id, clean_name',
+								'INSERT'	=> 'name ,password, password_salt ,group, mail,founder, session_id, clean_name',
 								'INTO'		=> "{$dbprefix}users",
-								'VALUES'	=> "'$name', '$pass', '$user_salt', '$mail','0','','$clean_name'"
+								'VALUES'	=> "'$name', '$pass', '$user_salt'," . $config['default_group'] .  ", '$mail', '0' , '', '$clean_name'"
 						);
 
 		if ($SQL->build($insert_query))
@@ -268,6 +276,34 @@ else if (isset($_POST['newuser']))
 		kleeja_admin_err($errs, true, '', true, $action_all, 3);
 	}
 }
+
+//
+//edit user
+//
+if(isset($_POST['edituser']))
+{
+	if (trim($_POST['lname']) == '' || trim($_POST['lmail']) == '')
+	{
+		$ERRORS[] = $lang['EMPTY_FIELDS'];
+	}
+	else if (!preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/i", trim(strtolower($_POST['lmail']))))
+	{
+		$ERRORS[] = $lang['WRONG_EMAIL'];
+	}
+	else if (strlen(trim($_POST['lname'])) < 2 || strlen(trim($_POST['lname'])) > 100)
+	{
+		$ERRORS[] = str_replace('4', '2', $lang['WRONG_NAME']);
+	}
+	else if ($SQL->num_rows($SQL->query("SELECT * FROM `{$dbprefix}users` WHERE clean_name='" . trim($SQL->escape($usrcp->cleanusername($_POST["lname"]))) . "'")) != 0)
+	{
+		$ERRORS[] = $lang['EXIST_NAME'];
+	}
+	else if ($SQL->num_rows($SQL->query("SELECT * FROM `{$dbprefix}users` WHERE mail='" . trim($SQL->escape(strtolower($_POST["lmail"]))) . "'")) != 0)
+	{
+		$ERRORS[] = $lang['EXIST_EMAIL'];
+	}
+}
+
 
 //
 //add new group
@@ -898,6 +934,7 @@ case 'users':
 						'userfile_link' => $userfile,
 						'delusrfile_link'	=> $row['founder'] && (int) $userinfo['founder'] == 0 ? false : basename(ADMIN_PATH) .'?cp=' . basename(__file__, '.php') . '&amp;deleteuserfile='. $row['id'] . (isset($_GET['page']) ? '&amp;page=' . intval($_GET['page']) : ''),
 						'delusr_link'		=> $row['founder'] && (int) $userinfo['founder'] == 0 ? false : basename(ADMIN_PATH) .'?cp=' . basename(__file__, '.php') . '&amp;del_user='. $row['id'] . (isset($_GET['page']) ? '&amp;page=' . intval($_GET['page']) : ''),
+						'editusr_link'		=> $row['founder'] && (int) $userinfo['founder'] == 0 ? false : basename(ADMIN_PATH) .'?cp=' . basename(__file__, '.php') . '&amp;smt=edit_user&amp;uid='. $row['id'] . (isset($_GET['page']) ? '&amp;page=' . intval($_GET['page']) : ''),
 						'founder'			=> (int) $row['founder'],
 						'last_visit'		=> kleeja_date($row['last_visit']),
 						'group'				=> preg_replace('!{lang.([A-Z0-9]+)}!e', '$lang[\'\\1\']', $d_groups[$row['group_id']]['data']['group_name'])
@@ -949,6 +986,54 @@ case 'users':
 	
 	$show_results = true;
 break;
+
+#editing a user, form
+case 'edit_user':
+
+	$userid = intval($_GET['uid']);
+
+	//is exists ?
+	if(!$SQL->num_rows($SQL->query("SELECT * FROM `{$dbprefix}users` WHERE id=" . $userid)))
+	{
+		redirect($action_all);
+	}
+
+	$query = array(
+					'SELECT'	=> 'name, mail, group_id, founder',
+					'FROM'		=> "{$dbprefix}users",
+					'WHERE'		=> 'id=' . $userid,
+				);
+
+	$result = $SQL->build($query);
+	$udata = $SQL->fetch_array($result);
+	$SQL->freeresult($result);
+	
+	#TODO: if founder, just founder can edit him;
+
+	#prepare them for the template
+	$u_name = $udata['name'];
+	$u_mail = $udata['mail'];
+	$u_group = $udata['group_id'];
+	$u_founder = $udata['founder'];
+	$u_show_filecp = $udata['show_my_filecp'];
+
+	$u_page = isset($_GET['page']) ? intval($_GET['page']) : 0;
+
+	$k_groups = array_keys($d_groups);
+	$u_groups = array();
+	foreach($k_groups as $id)
+	{
+		$u_groups[] = array(
+					'id'		=> $id,
+					'name'		=> preg_replace('!{lang.([A-Z0-9]+)}!e', '$lang[\'\\1\']', $d_groups[$id]['data']['group_name']),
+					'default'	=> $config['default_group'] == $id ? true : false,
+					'selected'	=> $id == $u_group
+		);
+	}
+
+	
+break;
+
 endswitch;
 
 //if not noraml user system 

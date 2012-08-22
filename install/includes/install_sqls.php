@@ -20,13 +20,6 @@ if(empty($install_sqls) || !is_array($install_sqls))
 	$install_sqls = array();
 }
 
-/* droping process is not a good idea !
-$install_sqls['DROP_TABLES'] = "
-DROP TABLE IF EXISTS `{$dbprefix}call`, `{$dbprefix}config`, `{$dbprefix}exts`, `{$dbprefix}files`, `{$dbprefix}hooks`, 
-				`{$dbprefix}online`, `{$dbprefix}plugins`, `{$dbprefix}reports`, `{$dbprefix}stats`,`{$dbprefix}users`, `{$dbprefix}lang`;
-";
-*/
-
 $install_sqls['ALTER_DATABASE_UTF'] = "
 ALTER DATABASE `{$dbname}` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin
 ";

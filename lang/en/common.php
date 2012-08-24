@@ -284,6 +284,7 @@ $lang = array_merge($lang, array(
 	'W_FROM NOW'		=> 'from now',
 	'TIME_PM'			=> 'pm',
 	'TIME_AM'			=> 'am',
+	'NOT_YET'			=> 'Not yet!',
 
 	//last line of this file ...					 
 	'S_TRANSLATED_BY' 			=> 'Translated By <a href="http://www.fenix4web.com/" target="_blank">Fenix4Web</a> &amp; Kleeja Team',

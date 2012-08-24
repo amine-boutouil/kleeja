@@ -71,7 +71,7 @@ $lang = array_merge($lang, array(
 	'CALLS_UPDATED' 		=> 'Messagess updated successfully.',
 	'FOUNDER' 				=> 'Founder',
 	'UPDATE_USERS' 			=> 'Update Users',
-	'USERS_UPDATED' 		=> 'Users updated successfully.',
+	'USER_UPDATED' 			=> 'User data has been updated successfully.',
 	'E_BACKUP' 				=> 'Select the tables you want to make a backup for:',
 	'TAKE_BK' 				=> 'Back-Up',
 	'REPAIRE_TABLE' 		=> '[Tables] Repaired. ',
@@ -329,5 +329,6 @@ $lang = array_merge($lang, array(
 	'SEARCH4FILES_BYIP'			=> 'Search files via selected IP',
 	'SEARCH4FILES_BYUSER'		=> 'Search files for this user',
 	'USER_DELETED'				=> 'User has been deleted successfully ...',
+	'USER_ADDED'				=> 'User has been added successfully ...',
 
 ));

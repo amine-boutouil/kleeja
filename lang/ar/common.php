@@ -274,6 +274,8 @@ $lang = array_merge($lang, array(
 	'W_FROM NOW'		=> 'من الآن',
 	'TIME_PM'			=> 'م',
 	'TIME_AM'			=> 'ص',
+	'NOT_YET'			=> 'ليس بعد!',
+
 	));
 
 #<-- EOF

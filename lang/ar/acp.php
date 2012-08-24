@@ -332,4 +332,5 @@ $lang = array_merge($lang, array(
 	'SEARCH4FILES_BYIP'			=> 'بحث عن الملفات بواسطة الـ IP',
 	'SEARCH4FILES_BYUSER'		=> 'بحث عن الملفات لهذا المستخدم',
 	'USER_DELETED'				=> 'تم حذف المستخدم بنجاح !.',
+	'USER_ADDED'				=> 'تم اضافة المستخدم بنجاح..',
 ));

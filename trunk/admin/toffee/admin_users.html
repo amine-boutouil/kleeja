@@ -209,26 +209,41 @@ $(document).ready( function(){
 <!-- add new user -->
 <ELSEIF NAME="current_smt == new_u">
 <!-- the big box begin -->
-   <div class="tit_con">
-<h1>{lang.R_USERS} &raquo; {lang.NEW_USER}</h1>
-   </div>
 <div class="big-box">
+<div class="tit_con">
+<h1>{lang.R_USERS} &raquo; {lang.NEW_USER}</h1>
+</div>
 
-<form method="post" action="{action_all}" id="add_user_form">
+<IF NAME="errs">
+	<div id="system-message">
+		<div class="error">{errs}</div>
+	</div>
+</IF>
 
+<form method="post" action="{action}" id="add_user_form">
 <div class="section">
 	<h3><label for="lname">{lang.USERNAME}</label></h3>
-	<div class="box"><input type="text" name="lname" id="lname" value="" size="30" /></div>
+	<div class="box"><input type="text" name="lname" id="lname" value="{uname}" size="30" /></div>
 </div>
 <div class="clear"></div>
 <div class="section">
 	<h3><label for="lmail">{lang.EMAIL}</label></h3>
-	<div class="box"><input type="text" name="lmail"  id="lmail" value=""size="30" style="direction:ltr" /></div>
+	<div class="box"><input type="text" name="lmail"  id="lmail" value="{umail}"size="30" style="direction:ltr" /></div>
 </div>
 <div class="clear"></div>
 <div class="section">
 	<h3><label for="lpass">{lang.PASSWORD}</label></h3>
 	<div class="box"><input type="password" name="lpass" id="lpass" value=""size="30" /></div>
+</div>
+<div class="clear"></div>
+<div class="section">
+	<h3><label for="lgroup">{lang.GROUP}</label></h3>
+	<div class="box">
+		<select name="lgroup" id="lgroup">
+		<LOOP NAME="u_groups">
+			<option value="{{id}}"<IF LOOP="selected"> selected="selected"</IF>>{{name}} <IF LOOP="default">({lang.DEFAULT_GROUP})</IF></option>
+		</LOOP>
+		</select>
 </div>
 <div class="clear"></div>
 

@@ -237,11 +237,12 @@ else if (isset($_POST['newuser']))
 		$pass			= (string) $usrcp->kleeja_hash_password($SQL->escape(trim($_POST['lpass'])) . $user_salt);
 		$mail			= (string) trim(strtolower($_POST['lmail']));
 		$clean_name		= (string) $usrcp->cleanusername($name);
-
+		$group			= (int) $_POST['lgroup'];	
+	
 		$insert_query	= array(
-								'INSERT'	=> 'name ,password, password_salt ,group, mail,founder, session_id, clean_name',
+								'INSERT'	=> 'name ,password, password_salt ,group_id, mail,founder, session_id, clean_name',
 								'INTO'		=> "{$dbprefix}users",
-								'VALUES'	=> "'$name', '$pass', '$user_salt'," . $config['default_group'] .  ", '$mail', '0' , '', '$clean_name'"
+								'VALUES'	=> "'$name', '$pass', '$user_salt', $group , '$mail', 0 , '', '$clean_name'"
 						);
 
 		if ($SQL->build($insert_query))
@@ -260,10 +261,9 @@ else if (isset($_POST['newuser']))
 				delete_cache('data_stats');
 			}
 		}
-	
-	
+
 		#User added ..
-		kleeja_admin_info($lang['USERS_UPDATED'], true, '', true, $action, 3);
+		kleeja_admin_info($lang['USER_ADDED'], true, '', true, basename(ADMIN_PATH) . '?cp=g_users', 3);
 	}
 	else
 	{
@@ -272,8 +272,9 @@ else if (isset($_POST['newuser']))
 		{
 			$errs .= '- ' . $r . '. <br />';
 		}
-
-		kleeja_admin_err($errs, true, '', true, $action_all, 3);
+		
+		$current_smt = 'new_u';
+		#kleeja_admin_err($errs, true, '', true, $action_all, 3);
 	}
 }
 
@@ -362,11 +363,11 @@ if(isset($_POST['edituser']))
 
 		if($SQL->affected())
 		{
-			kleeja_admin_info($lang['USER_UPDATED'], true, '', true, $action . '&smt=show_group&qg=' . intval($_POST['l_qg']) . '&page='. intval($_POST['l_page']), 3);
+			kleeja_admin_info($lang['USER_UPDATED'], true, '', true, basename(ADMIN_PATH) . '?cp=g_users&smt=show_group&qg=' . intval($_POST['l_qg']) . '&page='. intval($_POST['l_page']), 3);
 		}
 		else
 		{
-			kleeja_admin_info($lang['NO_UP_CHANGE_S'], true, '', true, $action . '&smt=show_group&qg=' . intval($_POST['l_qg']) . '&page='. intval($_POST['l_page']), 3);
+			kleeja_admin_info($lang['NO_UP_CHANGE_S'], true, '', true, basename(ADMIN_PATH) . '?cp=g_users&smt=show_group&qg=' . intval($_POST['l_qg']) . '&page='. intval($_POST['l_page']), 3);
 		}
 	}
 	else
@@ -1016,7 +1017,7 @@ case 'users':
 						'delusr_link'		=> $userinfo['id'] == $row['id'] || ($row['founder'] && (int) $userinfo['founder'] == 0) ? false : basename(ADMIN_PATH) .'?cp=' . basename(__file__, '.php') . '&amp;del_user='. $row['id'] . (isset($_GET['page']) ? '&amp;page=' . intval($_GET['page']) : ''),
 						'editusr_link'		=> $row['founder'] && (int) $userinfo['founder'] == 0 ? false : basename(ADMIN_PATH) .'?cp=' . basename(__file__, '.php') . '&amp;smt=edit_user&amp;uid='. $row['id'] . (isset($_GET['page']) ? '&amp;page=' . intval($_GET['page']) : ''),
 						'founder'			=> (int) $row['founder'],
-						'last_visit'		=> kleeja_date($row['last_visit']),
+						'last_visit'		=> empty($row['last_visit']) ? $lang['NOT_YET'] : kleeja_date($row['last_visit']),
 						'group'				=> preg_replace('!{lang.([A-Z0-9]+)}!e', '$lang[\'\\1\']', $d_groups[$row['group_id']]['data']['group_name'])
 				);
 		}
@@ -1091,7 +1092,29 @@ case 'edit_user':
 		);
 	}
 
-	
+break;
+
+
+#new user adding form
+case 'new_u':
+
+	#preparing the template
+	$errs	= isset($errs) ? $errs : false;
+	$uname	= isset($_POST['lname']) ? htmlspecialchars($_POST['lname'])  : '';
+	$umail	= isset($_POST['lmail']) ? htmlspecialchars($_POST['lmail'])  : '';
+
+	$k_groups = array_keys($d_groups);
+	$u_groups = array();
+	foreach($k_groups as $id)
+	{
+		$u_groups[] = array(
+					'id'		=> $id,
+					'name'		=> preg_replace('!{lang.([A-Z0-9]+)}!e', '$lang[\'\\1\']', $d_groups[$id]['data']['group_name']),
+					'default'	=> $config['default_group'] == $id ? true : false,
+					'selected'	=> isset($_POST['lgroup']) ? $_POST['lgroup'] == $id : $id == $config['default_group']
+		);
+	}
+
 break;
 
 endswitch;
@@ -1100,7 +1123,7 @@ endswitch;
 $user_not_normal = (int) $config['user_system'] != 1 ?  true : false;
 
 //after submit 
-if (isset($_POST['submit']) || isset($_POST['newuser']))
+if (isset($_POST['submit']))
 {
 	$g_link = basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;page=' . (isset($_GET['page'])  ? intval($_GET['page']) : 1) . 
 				(isset($_GET['search']) ? '&amp;search=' . strip_tags($_GET['search']) : '') . '&amp;smt=' . $current_smt;
@@ -1109,7 +1132,6 @@ if (isset($_POST['submit']) || isset($_POST['newuser']))
 				'<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . str_replace('&amp;', '&', $g_link) . '\');", 2000);</script>' . "\n";
 	$stylee	= "admin_info";
 }
-
 
 
 //secondary menu

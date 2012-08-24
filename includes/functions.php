@@ -51,29 +51,10 @@ function kleeja_detecting_bots ()
 	//put another bots as a hook if you want !
 	($hook = kleeja_run_hook('anotherbots_onlline_func')) ? eval($hook) : null; //run hook
 
-	//---
-	if(!empty($ip) && !empty($agent) && !empty($session))
-	{
-		$rep_query = array(
-							'REPLACE'	=> 'ip, username, agent, time, session',
-							'INTO'		=> "{$dbprefix}online",
-							'VALUES'	=> "'$ip','$username','$agent','$time','$session'",
-							'UNIQUE'	=>  "session='$session'"
-						);
-		($hook = kleeja_run_hook('qr_rep_ifnot_onlline_func')) ? eval($hook) : null; //run hook
-		$SQL->build($rep_query);
-	}
-
 	//clean online table
 	if((time() - $config['last_online_time_update']) >= 3600)
 	{
-		$query_del = array(
-							'DELETE'	=> "{$dbprefix}online",
-							'WHERE'		=> "time < '$timeout2'"
-						);
-		($hook = kleeja_run_hook('qr_del_ifgo_onlline_func')) ? eval($hook) : null; //run hook									
-		$SQL->build($query_del);
-
+		#what to add here ?
 		//update last_online_time_update 
 		update_config('last_online_time_update', time());
 	}

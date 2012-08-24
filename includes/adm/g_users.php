@@ -56,7 +56,7 @@ if (isset($_POST['edituser']))
 {
 	if(!kleeja_check_form_key('adm_users_edituser'))
 	{
-		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $action, 1);
+		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $action . '&uid=' . intval($_POST['uid']), 1);
 	}
 }
 if (isset($_POST['delgroup']))
@@ -282,25 +282,105 @@ else if (isset($_POST['newuser']))
 //
 if(isset($_POST['edituser']))
 {
-	if (trim($_POST['lname']) == '' || trim($_POST['lmail']) == '')
+	$userid = intval($_POST['uid']);
+	
+
+	//is exists ?
+	if(!$SQL->num_rows($SQL->query("SELECT id FROM `{$dbprefix}users` WHERE id=" . $userid)))
 	{
-		$ERRORS[] = $lang['EMPTY_FIELDS'];
+		kleeja_admin_err('ERROR-NO-ID', true, '', true,  basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'));
 	}
-	else if (!preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/i", trim(strtolower($_POST['lmail']))))
+
+	$query = array(
+					'SELECT'	=> 'name, mail, clean_name, group_id, founder, show_my_filecp',
+					'FROM'		=> "{$dbprefix}users",
+					'WHERE'		=> 'id=' . $userid,
+				);
+
+	$result = $SQL->build($query);
+	$udata = $SQL->fetch_array($result);
+	$SQL->freeresult($result);
+	
+	$new_clean_name = trim($SQL->escape($usrcp->cleanusername($_POST["l_name"])));
+
+	$new_name = $new_mail = false;
+	$pass  = '';
+
+	if (trim($_POST['l_name']) == '')
+	{
+		$ERRORS[] = $lang['EMPTY_FIELDS'] . ' (' . $lang['USERNAME'] . ')';
+	}
+	elseif (trim($_POST['l_mail']) == '')
+	{
+		$ERRORS[] = $lang['EMPTY_FIELDS'] . ' (' . $lang['EMAIL'] . ')';
+	}
+	else if (!preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/i", trim(strtolower($_POST['l_mail']))))
 	{
 		$ERRORS[] = $lang['WRONG_EMAIL'];
 	}
-	else if (strlen(trim($_POST['lname'])) < 2 || strlen(trim($_POST['lname'])) > 100)
+	elseif($udata['clean_name'] != $new_clean_name)
 	{
-		$ERRORS[] = str_replace('4', '2', $lang['WRONG_NAME']);
+		$new_name = true;
+		if (strlen(trim($_POST['l_name'])) < 2 || strlen(trim($_POST['l_name'])) > 100)
+		{
+			$ERRORS[] = str_replace('4', '2', $lang['WRONG_NAME']);
+		}
+		else if ($SQL->num_rows($SQL->query("SELECT * FROM `{$dbprefix}users` WHERE clean_name='" . $new_clean_name . "'")) != 0)
+		{
+			$ERRORS[] = $lang['EXIST_NAME'];
+		}
 	}
-	else if ($SQL->num_rows($SQL->query("SELECT * FROM `{$dbprefix}users` WHERE clean_name='" . trim($SQL->escape($usrcp->cleanusername($_POST["lname"]))) . "'")) != 0)
+	else if ($udata['mail'] != trim($_POST['l_mail']))
 	{
-		$ERRORS[] = $lang['EXIST_NAME'];
+		$new_mail = true;
+		if($SQL->num_rows($SQL->query("SELECT * FROM `{$dbprefix}users` WHERE mail='" . trim($SQL->escape(strtolower($_POST["lmail"]))) . "'")) != 0)
+		{
+			$ERRORS[] = $lang['EXIST_EMAIL'];
+		}
 	}
-	else if ($SQL->num_rows($SQL->query("SELECT * FROM `{$dbprefix}users` WHERE mail='" . trim($SQL->escape(strtolower($_POST["lmail"]))) . "'")) != 0)
+	else if (trim($_POST['l_pass']) != '')
 	{
-		$ERRORS[] = $lang['EXIST_EMAIL'];
+		$user_salt	= substr(kleeja_base64_encode(pack("H*", sha1(mt_rand()))), 0, 7);
+		$pass		= "password = '" . $usrcp->kleeja_hash_password(trim($_POST['l_pass']) . $user_salt) . "', password_salt='" . $user_salt . "',";
+	}
+	
+	//no errors, lets do process
+	if(empty($ERRORS))	 
+	{
+		$update_query	= array(
+									'UPDATE'	=> "{$dbprefix}users",
+									'SET'		=>  ($new_name ? "name = '" . $SQL->escape($_POST['l_name']) . "', clean_name='" . $SQL->escape($new_clean_name) . "', " : '') .
+													($new_mail ? "mail = '" . $SQL->escape($_POST['l_mail']) . "'," : '') . 
+													$pass . 
+													"founder=" . intval($_POST['l_founder']) . "," .
+													"group_id=" . intval($_POST['l_group']) . "," . 
+													"show_my_filecp=" . intval($_POST['l_show_filecp']), 
+									'WHERE'		=>	'id=' . $userid
+								);
+
+		$SQL->build($update_query);
+
+		if($SQL->affected())
+		{
+			kleeja_admin_info($lang['USER_UPDATED'], true, '', true, $action . '&smt=show_group&qg=' . intval($_POST['l_qg']) . '&page='. intval($_POST['l_page']), 3);
+		}
+		else
+		{
+			kleeja_admin_info($lang['NO_UP_CHANGE_S'], true, '', true, $action . '&smt=show_group&qg=' . intval($_POST['l_qg']) . '&page='. intval($_POST['l_page']), 3);
+		}
+	}
+	else
+	{
+		$errs =	'';
+		foreach($ERRORS as $r)
+		{
+			$errs .= '- ' . $r . '. <br />';
+		}
+
+		$current_smt = 'edit_user';
+		$_GET['uid'] = $_POST['uid'];
+		$_GET['page'] = $_POST['l_page'];
+		//kleeja_admin_err($errs, true, '', true, $action_all, 3);
 	}
 }
 
@@ -343,7 +423,7 @@ if(isset($_POST['newgroup']))
 		$org_group_id = intval($_POST['cfrom']);
 		if(!$new_group_id or !$org_group_id)
 		{
-			kleeja_admin_err('ERROR-NO-ID', true, '', true,  $action);
+			kleeja_admin_err('ERROR-NO-ID', true, '', true,  basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'));
 		}
 		if($org_group_id == -1)
 		{
@@ -739,7 +819,7 @@ case 'group_exts':
 	$req_group = isset($_GET['qg']) ? intval($_GET['qg']) : 0;
 	if(!$req_group)
 	{
-		kleeja_admin_err('ERROR-NO-ID', true, '', true,  $action);
+		kleeja_admin_err('ERROR-NO-ID', true, '', true,  basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'));
 	}
 
 	$group_name	= preg_replace('!{lang.([A-Z0-9]+)}!e', '$lang[\'\\1\']', $d_groups[$req_group]['data']['group_name']);
@@ -757,7 +837,7 @@ case 'group_exts':
 		$req_ext = isset($_GET['del']) ? intval($_GET['del']) : 0;
 		if(!$req_ext)
 		{
-			kleeja_admin_err('ERROR-NO-EXT-ID', true, '', true,  $action);
+			kleeja_admin_err('ERROR-NO-EXT-ID', true, '', true,  basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'));
 		}
 
 		$query_del	= array(
@@ -933,39 +1013,12 @@ case 'users':
 						'name'		=> $row['name'],
 						'userfile_link' => $userfile,
 						'delusrfile_link'	=> $row['founder'] && (int) $userinfo['founder'] == 0 ? false : basename(ADMIN_PATH) .'?cp=' . basename(__file__, '.php') . '&amp;deleteuserfile='. $row['id'] . (isset($_GET['page']) ? '&amp;page=' . intval($_GET['page']) : ''),
-						'delusr_link'		=> $row['founder'] && (int) $userinfo['founder'] == 0 ? false : basename(ADMIN_PATH) .'?cp=' . basename(__file__, '.php') . '&amp;del_user='. $row['id'] . (isset($_GET['page']) ? '&amp;page=' . intval($_GET['page']) : ''),
+						'delusr_link'		=> $userinfo['id'] == $row['id'] || ($row['founder'] && (int) $userinfo['founder'] == 0) ? false : basename(ADMIN_PATH) .'?cp=' . basename(__file__, '.php') . '&amp;del_user='. $row['id'] . (isset($_GET['page']) ? '&amp;page=' . intval($_GET['page']) : ''),
 						'editusr_link'		=> $row['founder'] && (int) $userinfo['founder'] == 0 ? false : basename(ADMIN_PATH) .'?cp=' . basename(__file__, '.php') . '&amp;smt=edit_user&amp;uid='. $row['id'] . (isset($_GET['page']) ? '&amp;page=' . intval($_GET['page']) : ''),
 						'founder'			=> (int) $row['founder'],
 						'last_visit'		=> kleeja_date($row['last_visit']),
 						'group'				=> preg_replace('!{lang.([A-Z0-9]+)}!e', '$lang[\'\\1\']', $d_groups[$row['group_id']]['data']['group_name'])
 				);
-
-			//when submit !!
-			/*if (isset($_POST['submit']))
-			{
-
-				//update
-				$admin[$row['id']] = isset($_POST['ad_' . $row['id']])  ? 1 : 0 ;
-				$user_salt		   = substr(kleeja_base64_encode(pack("H*", sha1(mt_rand()))), 0, 7);
-				$pass[$row['id']]  = ($pass[$row['id']] != '') ? "password = '" . $usrcp->kleeja_hash_password($SQL->escape($pass[$row['id']]) . $user_salt) . "', password_salt='" . $user_salt . "'," : '';
-
-				$update_query	= array(
-										'UPDATE'	=> "{$dbprefix}users",
-										'SET'		=> 	"name = '" . $SQL->escape($name[$row['id']]) . "',
-													mail = '" . $SQL->escape($mail[$row['id']]) . "',
-													" . $pass[$row['id']] . "
-													admin = " . intval($admin[$row['id']]) . ",
-													clean_name = '" . $SQL->escape($usrcp->cleanusername($name[$row['id']])) . "'",
-										'WHERE'		=>	'id=' . $row['id']
-								);
-
-				$SQL->build($update_query);
-
-				if($SQL->affected())
-				{
-					$affected = true;
-				}
-			}*/
 		}
 
 		$SQL->freeresult($result);
@@ -989,17 +1042,16 @@ break;
 
 #editing a user, form
 case 'edit_user':
-
 	$userid = intval($_GET['uid']);
 
 	//is exists ?
 	if(!$SQL->num_rows($SQL->query("SELECT * FROM `{$dbprefix}users` WHERE id=" . $userid)))
 	{
-		redirect($action_all);
+		kleeja_admin_err('ERROR-NO-ID', true, '', true,  basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'));
 	}
 
 	$query = array(
-					'SELECT'	=> 'name, mail, group_id, founder',
+					'SELECT'	=> 'name, mail, group_id, founder, show_my_filecp',
 					'FROM'		=> "{$dbprefix}users",
 					'WHERE'		=> 'id=' . $userid,
 				);
@@ -1007,15 +1059,23 @@ case 'edit_user':
 	$result = $SQL->build($query);
 	$udata = $SQL->fetch_array($result);
 	$SQL->freeresult($result);
-	
-	#TODO: if founder, just founder can edit him;
 
+	//If founder, just founder can edit him;
+	$u_founder	= isset($_POST['l_founder']) ? intval($_POST['l_founder']) : (int) $udata['founder'];
+	$im_founder	= (int) $userinfo['founder'];
+	$u_group	= isset($_POST['l_group']) ? intval($_POST['l_group']) : $udata['group_id'];
+	$u_qg		= isset($_POST['l_qg']) ? intval($_POST['u_qg']) : $udata['group_id'];
+	if($u_founder && !$im_founder)
+	{
+		kleeja_admin_err($lang['HV_NOT_PRVLG_ACCESS'], true, '', true,  basename(ADMIN_PATH) . '?cp=g_users&smt=show_group&gq=' . $u_group);		
+	}
+
+	$errs = isset($errs) ? $errs : false;
 	#prepare them for the template
-	$u_name = $udata['name'];
-	$u_mail = $udata['mail'];
-	$u_group = $udata['group_id'];
-	$u_founder = $udata['founder'];
-	$u_show_filecp = $udata['show_my_filecp'];
+	$title_name	= $udata['name']; 
+	$u_name = isset($_POST['l_name']) ? htmlspecialchars($_POST['l_name']) : $udata['name'];
+	$u_mail = isset($_POST['l_mail']) ? htmlspecialchars($_POST['l_mail']) :  $udata['mail'];
+	$u_show_filecp = isset($_POST['l_show_filecp']) ? intval($_POST['l_show_filecp']) : (int) $udata['show_my_filecp'];
 
 	$u_page = isset($_GET['page']) ? intval($_GET['page']) : 0;
 

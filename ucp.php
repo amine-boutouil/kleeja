@@ -97,19 +97,6 @@ switch ($_GET['go'])
 
 			if(empty($ERRORS))
 			{
-				//delete him from online as guest
-				if ((int) $config['allow_online'] == 1)
-				{
-					$query_del	= array(
-								'DELETE'	=> "{$dbprefix}online",
-								'WHERE'		=> "ip='" . get_ip() . "'"
-							);
-
-					($hook = kleeja_run_hook('qr_delete_onlines_in_login')) ? eval($hook) : null; //run hook
-					
-					$SQL->build($query_del);
-				}
-
 				if(isset($_GET['return']))
 				{
 					redirect(urldecode($_GET['return']));
@@ -294,18 +281,6 @@ switch ($_GET['go'])
 		
 		if ($usrcp->logout())
 		{
-			if ((int) $config['allow_online'] == 1)
-			{
-				$query_del	= array(
-							'DELETE'	=> "{$dbprefix}online",
-							'WHERE'		=> "ip='" .  get_ip() . "'"
-						);
-
-				($hook = kleeja_run_hook('qr_delete_onlines_in_logout')) ? eval($hook) : null; //run hook
-
-				$SQL->build($query_del);
-			}
-
 			$text = $lang['LOGOUT_SUCCESFUL'] . '<br /> <a href="' .  $config['siteurl']  . '">' . $lang['HOME'] . '</a>';
 			kleeja_info($text, $lang['LOGOUT'], true, $config['siteurl'], 1);
 		}

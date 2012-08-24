@@ -250,39 +250,67 @@ $(document).ready( function(){
 <!-- the big box begin -->
 <div class="big-box">
 <div class="tit_con">
-<h1>{lang.R_USERS} &raquo; {lang.EDIT} ({u_name})</h1>
+<h1>{lang.R_USERS} &raquo; {lang.EDIT} ({title_name})</h1>
 </div>
+
+<IF NAME="errs">
+	<div id="system-message">
+		<div class="error">{errs}</div>
+	</div>
+</IF>
+
 <form method="post" action="{action}" id="edit_user_form">
 
 <div class="section">
-	<h3><label for="lname">{lang.USERNAME}</label></h3>
-	<div class="box"><input type="text" name="lname" id="lname" value="{u_name}" size="30" /></div>
+	<h3><label for="l_name">{lang.USERNAME}</label></h3>
+	<div class="box"><input type="text" name="l_name" id="l_name" value="{u_name}" size="30" /></div>
 </div>
 <div class="clear"></div>
 <div class="section">
-	<h3><label for="lmail">{lang.EMAIL}</label></h3>
-	<div class="box"><input type="text" name="lmail"  id="lmail" value="{u_mail}"size="30" style="direction:ltr" /></div>
+	<h3><label for="l_mail">{lang.EMAIL}</label></h3>
+	<div class="box"><input type="text" name="l_mail"  id="l_mail" value="{u_mail}"size="30" style="direction:ltr" /></div>
 </div>
 <div class="clear"></div>
 <div class="section">
-	<h3><label for="lpass">{lang.PASS_ON_CHANGE}</label></h3>
-	<div class="box"><input type="password" name="lpass" id="lpass" value=""size="30" /><small></small></div>
+	<h3><label for="l_pass">{lang.PASS_ON_CHANGE}</label></h3>
+	<div class="box"><input type="password" name="l_pass" id="l_pass" value=""size="30" /><small></small></div>
 </div>
 <div class="clear"></div>
 <div class="section">
-	<h3><label for="lpass">{lang.GROUP}</label></h3>
+	<h3><label for="l_show_filecp">{lang.SHOW_MY_FILECP}</label></h3>
 	<div class="box">
-		<select name="l_group">
+	<select name="l_show_filecp" id="l_show_filecp">
+			<option value="1"<IF NAME="u_show_filecp"> selected="selected"</IF>>{lang.YES}</option>
+			<option value="0"<IF NAME="u_show_filecp"><ELSE> selected="selected"</IF>>{lang.NO}</option>
+		</select>
+</div>
+<div class="clear"></div>
+<div class="section">
+	<h3><label for="l_group">{lang.GROUP}</label></h3>
+	<div class="box">
+		<select name="l_group" id="l_group">
 		<LOOP NAME="u_groups">
 			<option value="{{id}}"<IF LOOP="selected"> selected="selected"</IF>>{{name}} <IF LOOP="default">({lang.DEFAULT_GROUP})</IF></option>
 		</LOOP>
 		</select>
 </div>
 <div class="clear"></div>
+<IF NAME="im_founder">
+<div class="section">
+	<h3><label for="l_founder">{lang.FOUNDER}</label></h3>
+	<div class="box">
+	<select name="l_founder" id="l_founder">
+			<option value="1"<IF NAME="u_founder"> selected="selected"</IF>>{lang.YES}</option>
+			<option value="0"<IF NAME="u_founder"><ELSE> selected="selected"</IF>>{lang.NO}</option>
+		</select>
+</div>
+<div class="clear"></div>
+</IF>
 
 <div class="br"></div>
-<input type="hidden" name="l_qg" value="{u_group}" />
+<input type="hidden" name="l_qg" value="{u_qg}" />
 <input type="hidden" name="l_page" value="{u_page}" />
+<input type="hidden" name="uid" value="{userid}" />
 
 <!-- button -->
 <p class="submit">

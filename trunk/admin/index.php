@@ -49,19 +49,6 @@ if(
 	{
 		if (isset($_POST['submit']))
 		{
-			//for onlines
-			$ip	= get_ip();
-
-			if ((int) $config['allow_online'] == 1)
-			{
-				$query_del	= array(
-									'DELETE'	=> "{$dbprefix}online",
-									'WHERE'		=> "ip='" . $ip . "'"
-								);
-
-				$SQL->build($query_del);
-			}
-
 			//login
 			$ERRORS	= array();
 			$pass_field = 'lpass_' .  preg_replace('/[^0-9]/', '', sha1($klj_session . sha1($config['h_key']) . $_POST['kid']));
@@ -306,8 +293,8 @@ foreach($adm_extensions as $m)
 }
 
 
-
-
+#to attach kleeja version in the menu start item
+$assigned_klj_ver = preg_replace('!#([a-z0-9]+)!', '', KLEEJA_VERSION);
 
 //get it 
 if (file_exists($path_adm . '/' . $go_to . '.php'))

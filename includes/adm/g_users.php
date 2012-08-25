@@ -353,7 +353,7 @@ if(isset($_POST['edituser']))
 									'SET'		=>  ($new_name ? "name = '" . $SQL->escape($_POST['l_name']) . "', clean_name='" . $SQL->escape($new_clean_name) . "', " : '') .
 													($new_mail ? "mail = '" . $SQL->escape($_POST['l_mail']) . "'," : '') . 
 													$pass . 
-													"founder=" . intval($_POST['l_founder']) . "," .
+													(isset($_POST['l_founder']) ? "founder=" . intval($_POST['l_founder']) . "," : '') .
 													"group_id=" . intval($_POST['l_group']) . "," . 
 													"show_my_filecp=" . intval($_POST['l_show_filecp']), 
 									'WHERE'		=>	'id=' . $userid
@@ -1028,7 +1028,7 @@ case 'users':
 	{ 
 		$no_results = true;
 	}
-		
+
 	//pages
 	$total_pages 	= $Pager->getTotalPages(); 
 	$page_nums 		= $Pager->print_nums(
@@ -1037,7 +1037,6 @@ case 'users':
 								'onclick="javascript:get_kleeja_link($(this).attr(\'href\'), \'#content\'); return false;"' 
 							); 
 
-	
 	$show_results = true;
 break;
 

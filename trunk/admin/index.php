@@ -342,15 +342,15 @@ else
 	{
 		foreach($go_menu as $m=>$d)
 		{
-			//if(!is_browser('mobile'))
-			//{
+			if(!is_browser('mobile') || defined('IN_MOBILE'))
+			{
 				$go_menu_html .= '<li class="' . ($d['current']?'active':'') .'" id="c_' . $d['goto'] . '"><a href="' . $d['link'] . '" onclick="javascript:get_kleeja_link(\'' . 
 							$d['link'] . '\', \'#content\', {\'current_id\':\'c_' . $d['goto'] . '\', \'current_class\':\'active\'' . ($d['confirm'] ? ', \'confirm\':true' : '') . '}); return false;">' . $d['name'] . '</a></li>';
-			//}
-			//else
-			//{
-			//	$go_menu_html .= '<option '. ($d['current']?'selected="selected"':'') .'" value="'.$d['link'].'" '. ($d['confirm'] ? ' confirm="1" ' : '') . '>' . $d['name'] . '</option>';
-			//}
+			}
+			else
+			{
+				$go_menu_html .= '<option '. ($d['current']?'selected="selected"':'') .'" value="'.$d['link'].'" '. ($d['confirm'] ? ' confirm="1" ' : '') . '>' . $d['name'] . '</option>';
+			}
 		}
 	}
 	echo_ajax(1, $tpl->display($stylee), $go_menu_html);

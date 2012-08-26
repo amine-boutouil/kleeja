@@ -24,7 +24,7 @@ include ('includes/common.php');
 if(empty($d_groups[2]['exts']) && !$usrcp->name())
 {
 	// Send a 503 HTTP response code to prevent search bots from indexing this message
-	header('HTTP/1.1 503 Service Temporarily Unavailable');
+	//header('HTTP/1.1 503 Service Temporarily Unavailable');
 	kleeja_info($lang['SITE_FOR_MEMBER_ONLY'], $lang['HOME']);
 }
 

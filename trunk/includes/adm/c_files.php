@@ -43,11 +43,6 @@ if (isset($_POST['search_file']))
 {
 	if(!kleeja_check_form_key('adm_files_search'))
 	{
-		if(isset($_GET['_ajax_']))
-		{
-			echo_ajax(888, $lang['INVALID_FORM_KEY']);
-		}
-
 		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, basename(ADMIN_PATH) . '?cp=h_search', 1);
 	}
 }
@@ -56,11 +51,6 @@ if (isset($_POST['submit']))
 {
 	if(!kleeja_check_form_key('adm_files'))
 	{
-		if(isset($_GET['_ajax_']))
-		{
-			echo_ajax(888, $lang['INVALID_FORM_KEY']);
-		}
-
 		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $action, 1);
 	}
 
@@ -336,8 +326,11 @@ if ($nums_rows > 0)
 						'name'		=> "<a title=\" " . ($row['real_filename'] == '' ? $row['name'] : $row['real_filename']) . "\" href=\"./" . PATH . $row['folder'] . "/" . $row['name'] . "\" target=\"blank\">" . ($row['real_filename'] == '' ? ((strlen($row['name']) > 20) ? substr($row['name'], 0, 20) . '...' : $row['name']) : ((strlen($row['real_filename']) > 20) ? substr($row['real_filename'], 0, 20) . '...' : $row['real_filename'])) . "</a>",
 						'size'		=> Customfile_size($row['size']),
 						'ups'		=> $row['uploads'],
+						'direct'	=> $row['id_form'] == 'direct' ? true : true,
+						'time_human'=> kleeja_date($row['time']),
 						'time'		=> date('d-m-Y H:i a', $row['time']),
 						'type'		=> $row['type'],
+						'typeicon'	=> file_exists(PATH . "images/filetypes/".  $row['type'] . ".png") ? PATH . "images/filetypes/" . $row['type'] . ".png" : PATH. 'images/filetypes/file.png',
 						'folder'	=> $row['folder'],
 						'report'	=> ($row['report'] > 4) ? "<span style=\"color:red;font-weight:bold\">" . $row['report'] . "</span>":$row['report'],
 						'user'		=> ($row['user'] == '-1') ? $lang['GUST'] :  '<a href="' . $userfile . '" target="_blank">' . $row['username'] . '</a>',

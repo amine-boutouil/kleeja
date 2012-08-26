@@ -608,3 +608,11 @@ content:",";
 }.configs_page .section .box label[for=thumbs_imgs]:after{
 content:":	";
 }
+
+/*files*/
+.check_all_table{
+	padding-right: 35px;
+	padding-top:5px;
+	height:20px;
+	background:transparent url(../images/arrow_rtl.png) 100% 25% no-repeat !important;
+}

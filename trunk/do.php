@@ -313,7 +313,7 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 	if(!is_readable($path_file))
 	{
 		($hook = kleeja_run_hook('down_file_not_exists')) ? eval($hook) : null; //run hook
-		big_error('----', 'Error - can not open file.');
+		big_error($lang['FILE_NO_FOUNDED'],  $lang['NOT_FOUND']);
 	}
 
 	if(!($size = @kleeja_filesize($path_file)))
@@ -372,7 +372,7 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 	{
 		#so ... it's failed to open !
 		header("HTTP/1.0 404 Not Found");
-		big_error('----', 'Error - can not open file.');
+		big_error($lang['FILE_NO_FOUNDED'],  $lang['NOT_FOUND']);
 	}
 
 	#sending some headers

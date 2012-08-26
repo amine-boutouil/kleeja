@@ -67,32 +67,36 @@ switch ($_GET['go'])
 		$titlee	= $lang['REPORT'];
 		$id_d	= isset($_GET['id']) ? intval($_GET['id']) : (isset($_POST['rid']) ? intval($_POST['rid']) : 0);
 		$url_id	= (int) $config['mod_writer'] == 1 ? $config['siteurl'] . 'download' . $id_d . '.html' : $config['siteurl'] . 'do.php?id=' . $id_d;
-		$action	= './go.php?go=report';
+		$action	= $config['siteurl'] . 'go.php?go=report';
 		$H_FORM_KEYS	= kleeja_add_form_key('report');
 		$NOT_USER		= !$usrcp->name() ? true : false; 
+		$s_url			= isset($_POST['surl']) ? htmlspecialchars($_POST['surl']) : '';
 
 		#Does this file exists ?
-		$query = array(
-						'SELECT'	=> 'f.real_filename, f.name',
-						'FROM'		=> "{$dbprefix}files f",
-						'WHERE'		=> 'id=' . $id_d
-					);
-
-		($hook = kleeja_run_hook('qr_report_go_id')) ? eval($hook) : null; //run hook
-		
-		$result	= $SQL->build($query);
-
-		if ($SQL->num_rows($result) != 0)
+		if(isset($_GET['id']) || isset($_POST['rid']))
 		{
-			$row = $SQL->fetch_array($result);
-			$filename_for_show = $row['real_filename'] == '' ? $row['name'] : $row['real_filename']; 
+			$query = array(
+							'SELECT'	=> 'f.real_filename, f.name',
+							'FROM'		=> "{$dbprefix}files f",
+							'WHERE'		=> 'id=' . $id_d
+						);
+
+			($hook = kleeja_run_hook('qr_report_go_id')) ? eval($hook) : null; //run hook
+
+			$result	= $SQL->build($query);
+
+			if ($SQL->num_rows($result))
+			{
+				$row = $SQL->fetch_array($result);
+				$filename_for_show	= $row['real_filename'] == '' ? $row['name'] : $row['real_filename'];
+			}
+			else
+			{
+				($hook = kleeja_run_hook('not_exists_qr_report_go_id')) ? eval($hook) : null; //run hook
+				kleeja_err($lang['FILE_NO_FOUNDED']);
+			}
+			$SQL->freeresult($result);
 		}
-		else
-		{
-			($hook = kleeja_run_hook('not_exists_qr_report_go_id')) ? eval($hook) : null; //run hook
-			kleeja_err($lang['FILE_NO_FOUNDED']);
-		}
-		$SQL->freeresult($result);
 
 		//no error yet 
 		$ERRORS = false;
@@ -105,11 +109,6 @@ switch ($_GET['go'])
 		if (!isset($_POST['submit']))
 		{
 			// first
-			if (!isset($_GET['id']) || intval($_GET['id']) == 0)
-			{
-				kleeja_err($lang['NO_ID']);
-			}
-
 			($hook = kleeja_run_hook('no_submit_report_go_page')) ? eval($hook) : null; //run hook
 		}
 		else
@@ -127,37 +126,41 @@ switch ($_GET['go'])
 			{
 				$ERRORS['captcha']	= $lang['WRONG_VERTY_CODE'];
 			}
-			if ((empty($_POST['rname']) && $NOT_USER) || empty($_POST['rurl']))
+			if ((empty($_POST['rname']) && $NOT_USER))
 			{
-				$ERRORS['rname']	= $lang['EMPTY_FIELDS'] . ' : ' . (empty($_POST['rname']) && $NOT_USER ? ' [ ' . $lang['YOURNAME'] . ' ] ' : '')  
+				$ERRORS['rname'] = $lang['EMPTY_FIELDS'] . ' : ' . (empty($_POST['rname']) && $NOT_USER ? ' [ ' . $lang['YOURNAME'] . ' ] ' : '')  
 									. (empty($_POST['rurl']) ? '  [ ' . $lang['URL']  . ' ] ': '');
 			}
-			if(empty($_POST['rid']))
+			if(isset($_POST['surl']) && trim($_POST['surl']) == '')
 			{
-				$ERRORS['rid']	= $lang['NO_ID'];
+				$ERRORS['surl']	=  $lang['EMPTY_FIELDS'] . ' : [ ' . $lang['URL_F_FILE'] . ' ]'; 
 			}
 			if (isset($_POST['rmail']) &&  !preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/i", trim(strtolower($_POST['rmail']))) && $NOT_USER)
 			{
-				$ERRORS['rmail']	= $lang['WRONG_EMAIL'];
+				$ERRORS['rmail'] = $lang['WRONG_EMAIL'];
 			}
 			if (strlen($_POST['rtext']) > 300)
 			{
-				$ERRORS['rtext']	= $lang['NO_ME300RES'];
+				$ERRORS['rtext'] = $lang['NO_ME300RES'];
 			}
-			
+			if (!isset($_POST['surl'])  && !isset($_POST['rid']))
+			{
+				$ERRORS['rid'] = $lang['NO_ID'];
+			}
+
 			($hook = kleeja_run_hook('submit_report_go_page2')) ? eval($hook) : null; //run hook
-		
+
 			//no error , lets do process
 			if(empty($ERRORS))
 			{
 				$name	= $NOT_USER ? (string) $SQL->escape($_POST['rname']) : $usrcp->name();
 				$text	= (string) $SQL->escape($_POST['rtext']);
 				$mail	= $NOT_USER ? (string) strtolower(trim($SQL->escape($_POST['rmail']))) : $usrcp->mail();
-				$url	= (string) $SQL->real_escape($_POST['rurl']);
+				$url	= (string) isset($_POST['rid']) ? $SQL->escape($url_id) : $SQL->real_escape(htmlspecialchars($_POST['surl']));
 				$time 	= (int) time();
-				$rid	= (int) intval($_POST['rid']);
+				$rid	= isset($_POST['rid']) ? 0 : intval($_POST['rid']);
 				$ip		=  get_ip();
-
+				
 
 				$insert_query	= array(
 										'INSERT'	=> '`name` ,`mail` ,`url` ,`text` ,`time` ,`ip`',

@@ -309,7 +309,7 @@
 	16. Template & Report a File > report.html
 	-------------------------------------------------- */
 	.rebort{margin:5px 0;padding: 5px 0;}
-	input.urlcolor{letter-spacing:1px;width:70%;}
+	input.urlcolor,input.urlnoncolor{letter-spacing:1px;width:70%;}
 	input.urlcolor:focus,input.urlcolor:hover{cursor:default;}
 /* @end */      
 

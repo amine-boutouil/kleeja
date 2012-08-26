@@ -88,10 +88,10 @@ if ($nums_rows > 0)
 						'mail' 		=> $row['mail'],
 						'url'  		=> $row['url'],
 						'text' 		=> $row['text'],
-						'time' 		=> date('d-m-Y H:i a', $row['time']),
+						'time' 		=> kleeja_date($row['time']),
 						'ip'	 	=> $row['ip'],
 						'sent'		=> $row['id'] == $msg_sent,
-						'ip_finder'	=> 'http://www.ripe.net/whois?form_type=simple&full_query_string=&searchtext=' . $row['ip'] . '&do_search=Search'
+						'ip_finder'	=> 'http://www.ripe.net/whois?form_type=simple&full_query_string=&searchtext=' . htmlspecialchars($row['ip']) . '&do_search=Search'
 				);
 
 		$del[$row['id']] = isset($_POST['del_' . $row['id']]) ? $_POST['del_' . $row['id']] : '';

@@ -271,7 +271,8 @@
 	-------------------------------------------------- */
 	.rebort{background:transparent url("../images/file_rebort.gif") no-repeat 2% 50%;}
 	input.urlcolor{background:#FFDFDF !important;	border:1px solid #D88D8D !important;}
-	input.urlcolor:focus,input.urlcolor:hover{background:#FFDFDF !important;border-color:#D88D8D !important;}
+	input.urlnoncolor{background:#fff !important;	border:1px solid #D88D8D !important;}
+	input.urlcolor:focus,input.urlcolor:hover,input.urlnoncolor:hover{background:#FFDFDF !important;border-color:#D88D8D !important;}
 /* @end */      
 
 /*	--------------------------------------------------

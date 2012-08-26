@@ -331,5 +331,5 @@ $lang = array_merge($lang, array(
 	'SEARCH4FILES_BYUSER'		=> 'Search files for this user',
 	'USER_DELETED'				=> 'User has been deleted successfully ...',
 	'USER_ADDED'				=> 'User has been added successfully ...',
-
+	'DIRECT_FILE_NOTE'			=> 'This is a Direct file. Direct files have no stats.',
 ));

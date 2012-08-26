@@ -238,5 +238,4 @@ $install_sqls['TeamMsg_insert'] = "INSERT INTO `{$dbprefix}call` (`name`,`text`,
 $install_sqls['groups_insert'] = "INSERT INTO `{$dbprefix}groups` (`group_id`, `group_name`, `group_is_default`, `group_is_essential`) VALUES
 (1, '{lang.ADMINS}', 0, 1),
 (2, '{lang.GUESTS}', 0, 1),
-(3, '{lang.USERS}', 1, 1),
-(4, 'برونزي', 0, 0);";
+(3, '{lang.USERS}', 1, 1);";

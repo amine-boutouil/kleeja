@@ -74,6 +74,7 @@ $update_sqls['groups_acls_access_fileuser'] = "INSERT INTO `{$dbprefix}groups_ac
 $update_sqls['groups_acls_access_filecp'] = "INSERT INTO `{$dbprefix}groups_acl` (`acl_name`, `group_id`, `acl_can`) VALUES ('access_filecp', 1, 1), ('access_filecp', 2, 0), ('access_filecp', 3, 1);";
 $update_sqls['groups_acls_access_stats'] = "INSERT INTO `{$dbprefix}groups_acl` (`acl_name`, `group_id`, `acl_can`) VALUES ('access_stats', 1, 1), ('access_stats', 2, 1), ('access_stats', 3, 1);";
 $update_sqls['groups_acls_access_call'] = "INSERT INTO `{$dbprefix}groups_acl` (`acl_name`, `group_id`, `acl_can`) VALUES ('access_call', 1, 1), ('access_call', 2, 1), ('access_call', 3, 1);";
+$update_sqls['groups_acls_access_report'] = "INSERT INTO `{$dbprefix}groups_acl` (`acl_name`, `group_id`, `acl_can`) VALUES ('access_report', 1, 0), ('access_report', 2, 0), ('access_report', 3, 0);";
 
 #exts !!
 $update_sqls['groups_exts'] = "

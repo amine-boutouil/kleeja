@@ -39,12 +39,9 @@ include_once ('includes/functions_install.php');
 
 
 $order_update_files = array(
-'RC2_to_RC3' => 3,
-'RC4_to_RC5' => 5,
-'RC5_to_RC6' => 6,
-'RC6_to_1.0.0'=>7,
+'OLD_to_1.0'=>7,
 '1.0_to_1.5'  =>8,
-); 
+);
 
 $SQL = new SSQL($dbserver, $dbuser, $dbpass, $dbname);
 			

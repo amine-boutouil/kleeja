@@ -33,8 +33,13 @@
 				<label>{lang.EMAIL} : </label>
 				<input type="text" name="rmail" value="{t_rmail}" size="30" style="direction:ltr" tabindex="2" />
 			</IF>
-			<label>{lang.FILENAME} : </label>
-			<input class="urlcolor" type="text" name="rurl" value="{filename_for_show}"  readonly="readonly" style="direction:ltr" />
+			<IF NAME="id_d">
+				<label>{lang.FILENAME} : </label>
+				<input class="urlcolor" type="text" name="rurl" value="{filename_for_show}"  readonly="readonly" style="direction:ltr" />
+			<ELSE>
+				<label>{lang.URL_F_FILE} : </label>
+				<input class="urlnoncolor" type="text" name="surl" value="{s_url}" style="direction:ltr" />
+			</IF>
 			<label>{lang.REASON} : </label>
 			<textarea name="rtext" class="text_area" rows="3" cols="42" tabindex="3">{t_rtext}</textarea>
 		</div>
@@ -58,8 +63,10 @@
 		
 		<div class="clr"></div>
 		
+		<IF NAME="id_d">
 		<input name="rid" value="{id_d}" type="hidden" />
-		
+		</IF>
+
 		{H_FORM_KEYS}
 
 		<input type="submit" name="submit" value="{lang.REPORT}" tabindex="5" />

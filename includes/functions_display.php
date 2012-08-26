@@ -99,7 +99,7 @@ function Saafooter($outscript = false)
 	$page_stats = '';
 	if ($config['statfooter'] != 0) 
 	{
-		$gzip			= $do_gzip_compress !=0 ?  "Enabled" : "Disabled";
+		$gzip			= $config['gzip'] == '1' ?  "Enabled" : "Disabled";
 		$hksys			= !defined('STOP_HOOKS') ? "Enabled" : "Disabled";
 		$endtime		= get_microtime();
 		$loadtime		= number_format($endtime - $starttm , 4);
@@ -283,7 +283,7 @@ function kleeja_admin_info($msg, $navigation=true, $title='', $exit=true, $redir
 * 
 * parameters: none
 */
-function kleeja_debug ()
+function kleeja_debug()
 {
 	global $SQL,$do_gzip_compress, $all_plg_hooks;
 
@@ -306,7 +306,7 @@ function kleeja_debug ()
 		echo '<fieldset  dir="ltr"><legend><br /><br /><em style="font-family: Tahoma; color:red">[Page Analysis]</em></legend>';
 		echo '<p>&nbsp;</p>';
 		echo '<p><h2><strong>General Information :</strong></h2></p>';
-		echo '<p>Gzip : <em>' . (($do_gzip_compress !=0 )?  "Enabled" : "Disabled") . '</em></p>';
+		echo '<p>Gzip : <em>' . ($do_gzip_compress !=0 ?  "Enabled" : "Disabled") . '</em></p>';
 		echo '<p>Queries Number :<em> ' .  $SQL->query_num . ' </i></p>';
 		echo '<p>Hook System :<em> ' .  ((!defined('STOP_HOOKS'))?  "Enabled" : "Disabled"). ' </em></p>';
 		echo '<p>Active Hooks :<em> ' .  sizeof($all_plg_hooks). ' </em></p>';

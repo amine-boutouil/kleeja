@@ -326,7 +326,7 @@ if ($nums_rows > 0)
 						'name'		=> "<a title=\" " . ($row['real_filename'] == '' ? $row['name'] : $row['real_filename']) . "\" href=\"./" . PATH . $row['folder'] . "/" . $row['name'] . "\" target=\"blank\">" . ($row['real_filename'] == '' ? ((strlen($row['name']) > 20) ? substr($row['name'], 0, 20) . '...' : $row['name']) : ((strlen($row['real_filename']) > 20) ? substr($row['real_filename'], 0, 20) . '...' : $row['real_filename'])) . "</a>",
 						'size'		=> Customfile_size($row['size']),
 						'ups'		=> $row['uploads'],
-						'direct'	=> $row['id_form'] == 'direct' ? true : true,
+						'direct'	=> $row['id_form'] == 'direct' ? true : false,
 						'time_human'=> kleeja_date($row['time']),
 						'time'		=> date('d-m-Y H:i a', $row['time']),
 						'type'		=> $row['type'],

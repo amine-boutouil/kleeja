@@ -705,8 +705,14 @@ switch ($_GET['go'])
 		{
 			($hook = kleeja_run_hook('get_pass_activation_key')) ? eval($hook) : null; //run hook
 
-			$h_key = htmlspecialchars($_GET['activation_key']);
+			$h_key = preg_replace('![^a-z0-5]!', '', $_GET['activation_key']);
 			$u_id = intval($_GET['uid']);
+
+			#if it's empty ? 
+			if(trim($h_key) == '')
+			{	
+				big_error('No hash key', 'This is not a good link ... try again!');
+			}
 
 			$result = $SQL->query("SELECT new_password FROM `{$dbprefix}users` WHERE hash_key='" . $SQL->escape($h_key) . "' AND id=" . $u_id . "");
 			if($SQL->num_rows($result))

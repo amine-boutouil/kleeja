@@ -310,6 +310,7 @@ $lang = array_merge($lang, array(
 		'ACLS_ACCESS_FILEUSER'	=> 'Access his own files\' folder',
 		'ACLS_ACCESS_FILECP'	=> 'Access his own files\s CP',
 		'ACLS_ACCESS_CALL'		=> 'Access "call us" page',
+		'ACLS_ACCESS_REPORT'	=> 'Show "Report" page',
 		'ACLS_ACCESS_STATS'		=> 'Access "statistics" page',
 
 	'GROUP_IS_DEFAULT'			=> 'This group is default at registeration',

@@ -23,7 +23,7 @@ if(file_exists($_path . 'config.php'))
 {
 	include_once ($_path . 'config.php');
 }
-
+include_once ($_path . 'includes/functions_display.php');
 include_once ($_path . 'includes/functions_alternative.php');
 include_once ($_path . 'includes/functions.php');
 
@@ -220,6 +220,7 @@ case 'data' :
 		$config_sitename	= $SQL->escape($_POST['sitename']);
 		$config_siteurl		= $SQL->escape($_POST['siteurl']);
 		$config_sitemail	= $SQL->escape($_POST['sitemail']);
+		$config_time_zone	= $SQL->escape($_POST['time_zone']);
 		//$config_style		= isset($_POST['style']) ? $SQL->escape($_POST['style']) : '';
 		$config_urls_type	= in_array($_POST['urls_type'], array('id', 'filename', 'direct')) ? $_POST['urls_type'] : 'id';
 		$clean_name			= $usrcp->cleanusername($SQL->escape($user_name));

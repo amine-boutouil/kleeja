@@ -36,6 +36,12 @@ switch ($_GET['go'])
 		$same_group= $rando = 0;
 		foreach($tgroups as $gid)
 		{
+			#if this is admin group, dont show it public
+			if($gid == 1 && (int) $userinfo['group_id'] != 1)
+			{
+				continue;
+			}
+
 			#TODO: if no exts, show that
 			foreach($d_groups[$gid]['exts'] as $ext=>$size)
 			{

@@ -285,8 +285,8 @@ $lang = array_merge($lang, array(
 	'TIME_PM'			=> 'pm',
 	'TIME_AM'			=> 'am',
 	'NOT_YET'			=> 'Not yet!',
-	'NOT_FOUND'			=> 'إما انه غير موجود , او تم حذفه من قبل المستخدم نفسه , او الادارة , او هناك خطأء في فتح الملف!.',
-
+	'NOT_FOUND'			=> 'This file is not exist. either deleted by the user or the administrator or there is an error opening the file!.',
+	'TIME_ZONE'			=> 'Time zone',
 
 	//last line of this file ...					 
 	'S_TRANSLATED_BY' 			=> 'Translated By <a href="http://www.fenix4web.com/" target="_blank">Fenix4Web</a> &amp; Kleeja Team',

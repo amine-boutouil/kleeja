@@ -14,9 +14,10 @@ body{
 	color:#6F7072;
 	font: 11px Tahoma, arial, Helvetica, sans-serif;
 	overflow: auto;
-	text-align:left;
-	direction:ltr;
+
 	background:#fff url(../images/bg.png) no-repeat fixed top left;
+	    direction:rtl;
+	text-align: right;
 }
 	
 a:visited, a:hover, a:link, .a:active {
@@ -92,7 +93,7 @@ select:active {
 #sign_ajax,#sign_ajax_error{
 	position:fixed;
 	top:180px;
-	left:40%;
+	right:40%;
 	padding:10px 15px;
 	color:#51250B;
 	font-size:16px;
@@ -138,7 +139,7 @@ select:active {
 
 
 /*CSS style pagination*/
-#pagination	{ text-align:right; margin:0 0 10px 0; float:right; }
+#pagination	{ text-align:left; margin:0 0 10px 0; float:left; }
 	a.paginate { display:inline-block;height:23px; padding:0 3px; font-size:80%; font-weight:bold; color:#333; text-shadow:1px 1px 0 #fff 
 	;background:url(../images/pagination.png) 0 0 no-repeat; white-space:nowrap; border:none; overflow:visible; cursor:pointer; text-decoration:none; }
 	a.paginate > span {display:block; height:23px; padding:0 10px 0 8px; line-height:23px; background:url(../images/pagination.png) 100% 0 no-repeat; }

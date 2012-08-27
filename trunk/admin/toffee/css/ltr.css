@@ -1,0 +1,36 @@
+/**
+* LEFT-To-RIGHT CSS file
+*/
+
+
+/* global.css */
+body{
+	text-align:left;
+	direction:ltr;
+}
+
+#pagination { text-align:right;  float:right; }
+
+#sign_ajax,#sign_ajax_error{
+	left:40%;
+}
+
+
+/* byname.css 
+*/
+#content{
+
+}
+	#content .section h3{
+		float:left;
+	}
+	#content .section .box{
+		text-align:left;
+		float:left;
+	}
+
+
+.quick_edit_tpls td {
+	text-align:left;
+}
+

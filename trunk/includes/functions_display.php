@@ -837,14 +837,15 @@ function echo_ajax($code_number, $content, $menu = '')
 * show date in a human-readable-text
 */
 define('TIME_FORMAT', 'd-m-Y h:i a'); # to be moved to configs later
-function kleeja_date($time, $format = false)
+function kleeja_date($time, $formmated = false, $format = false)
 {
-	global $lang;
+	global $lang, $config;
 
-	if(time() - $time > (86400 * 3) or $format)
+	if(time() - $time > (86400 * 9) || $format || $formatted)
 	{
 		$format = !$format ? TIME_FORMAT : $format;
-		return str_replace(array('am', 'pm'), array($lang['TIME_AM'], $lang['TIME_PM']), date($format, $time));
+		$time	= $time + ((int)$config['time_zone']*60*60);
+		return str_replace(array('am', 'pm'), array($lang['TIME_AM'], $lang['TIME_PM']), gmdate($format, $time));
 	}
 
 	$lengths	= array("60","60","24","7","4.35","12","10");
@@ -876,4 +877,48 @@ function kleeja_date($time, $format = false)
 	$return = $lang['W_FROM'] .  ' ' . $return;
 
 	return $return;
+}
+
+
+/*
+ * World Time Zones
+ */
+function time_zones()
+{
+	return array(
+        'Kwajalein' => -12.00,
+        'Pacific/Midway' => -11.00,
+        'Pacific/Honolulu' => -10.00,
+        'America/Anchorage' => -9.00,
+        'America/Los_Angeles' => -8.00,
+        'America/Denver' => -7.00,
+        'America/Tegucigalpa' => -6.00,
+        'America/New_York' => -5.00,
+        'America/Caracas' => -4.30,
+        'America/Halifax' => -4.00,
+        'America/St_Johns' => -3.30,
+        'America/Argentina/Buenos_Aires' => -3.00,
+        'America/Sao_Paulo' => -3.00,
+        'Atlantic/South_Georgia' => -2.00,
+        'Atlantic/Azores' => -1.00,
+        'Europe/Dublin' => 0,
+        'Europe/Belgrade' => 1.00,
+        'Europe/Minsk' => 2.00,
+        'Asia/Riyadh' => 3.00,
+        'Asia/Tehran' => 3.30,
+        'Asia/Muscat' => 4.00,
+        'Asia/Yekaterinburg' => 5.00,
+        'Asia/Kolkata' => 5.30,
+        'Asia/Katmandu' => 5.45,
+        'Asia/Dhaka' => 6.00,
+        'Asia/Rangoon' => 6.30,
+        'Asia/Krasnoyarsk' => 7.00,
+        'Asia/Brunei' => 8.00,
+        'Asia/Seoul' => 9.00,
+        'Australia/Darwin' => 9.30,
+        'Australia/Canberra' => 10.00,
+        'Asia/Magadan' => 11.00,
+        'Pacific/Fiji' => 12.00,
+        'Pacific/Tongatapu' => 13.00
+    );
 }

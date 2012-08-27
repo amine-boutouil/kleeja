@@ -47,6 +47,16 @@
 		<h2><img src="style/images/klj_info.png" alt="" class="img" />{{echo $lang['INST_OTHER_INFO']}}</h2>
 		<table class="DataTable" dir="{{echo $lang['DIR']}}">
 			<tr>
+				<td class="tdd">{{echo $lang['TIME_ZONE']}}</td>
+				<td>
+						<select name="time_zone" id="time_zone" style="text-align:left;direction:ltr">
+							{{foreach(time_zones() as $z=>$t):}}
+								<option value="{{echo $t}}" {{if($t=='3'):}}selected="selected"{{endif;}}>{{echo $z}}</option>
+							{{endforeach}}
+						</select>
+				</td>
+			</tr>
+			<tr>
 				<td class="tdd">{{echo $lang['URLS_TYPES']}}</td>
 				<td>
 					<script type="text/javascript">

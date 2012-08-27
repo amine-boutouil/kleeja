@@ -497,7 +497,7 @@ function process ()
 			{
 				($hook = kleeja_run_hook('submit_urlupload_kljuploader')) ? eval($hook) : null; //run hook
 				//looop text inputs
-				for($i=0;$i<$this->filesnum;$i++)
+				for($i=0;$i<=$this->filesnum;$i++)
 				{
 					$check 				.= (isset($_POST['file_' . $i . '_']) && trim($_POST['file_' . $i . '_']) != $lang['PAST_URL_HERE']) ? $_POST['file_' . $i . '_'] : '';
 					$filename 			= (isset($_POST['file_' . $i . '_'])) ? basename($_POST['file_' . $i . '_']) : '';

@@ -375,12 +375,14 @@ function process ()
 						// decoding
 						if($this->decode == "time")
 						{
-							$zaid = time();
+							list($usec, $sec) = explode(" ", microtime());
+							$zaid = str_replace('.', '', (float)$usec + (float)$sec);
 							$this->filename2 = $this->filename . $zaid . $i . "." . $this->filename2;
 						}
 						elseif($this->decode == "md5")
 						{
-							$zaid	= md5(time());
+							list($usec, $sec) = explode(" ", microtime());
+							$zaid = md5(((float)$usec + (float)$sec));
 							$zaid	= substr($zaid, 0, 10);
 							$this->filename2 = $this->filename . $zaid . $i . "." . $this->filename2;
 						}  
@@ -392,7 +394,6 @@ function process ()
 							$this->filename2 = preg_replace('/-+/', '-', $this->filename2);
 							($hook = kleeja_run_hook('another_decode_type_kljuploader')) ? eval($hook) : null; //run hook
 						}
-						
 
 						if(empty($_FILES['file_' . $i . '_']['tmp_name']))
 						{
@@ -654,7 +655,7 @@ function process ()
 				$folder	= (string)	$SQL->escape($folderee);
 				$timeww	= (int)		time();
 				$user	= (int)		$this->id_user;
-				$code_del=(string)	md5($name);
+				$code_del=(string)	md5($name . uniqid());
 				$ip		= get_ip();
 				$realf	= (string)	$SQL->escape($real_filename);
 				$id_form= (string)	$SQL->escape($config['id_form']);
@@ -694,86 +695,84 @@ function process ()
 				{
 					$extra_del	= get_up_tpl_box('del_file_code', array('b_title'=> $lang['URL_F_DEL'], 'b_code_link'=> kleeja_get_link('del', array('::CODE::'=>$code_del))));
 				}
-					
-
-
-					//show imgs
-					if (in_array(strtolower($this->typet), array('png','gif','jpg','jpeg','tif','tiff', 'bmp')))
+				
+				//show imgs
+				if (in_array(strtolower($this->typet), array('png','gif','jpg','jpeg','tif','tiff', 'bmp')))
+				{
+					//make thumbs
+					$img_html_result = '';
+					if( ($config['thumbs_imgs'] != 0) && in_array(strtolower($this->typet), array('png','jpg','jpeg','gif', 'bmp')))
 					{
-						//make thumbs
-						$img_html_result = '';
-						if( ($config['thumbs_imgs'] != 0) && in_array(strtolower($this->typet), array('png','jpg','jpeg','gif', 'bmp')))
-						{
-							list($thmb_dim_w, $thmb_dim_h) = @explode('*', $config['thmb_dims']);
-							$this->createthumb($folderee . '/' . $filname, strtolower($this->typet), $folderee . '/thumbs/' . $filname, $thmb_dim_w, $thmb_dim_h);
+						list($thmb_dim_w, $thmb_dim_h) = @explode('*', $config['thmb_dims']);
+						$this->createthumb($folderee . '/' . $filname, strtolower($this->typet), $folderee . '/thumbs/' . $filname, $thmb_dim_w, $thmb_dim_h);
 							
-							$img_html_result .= get_up_tpl_box('image_thumb', array(
+						$img_html_result .= get_up_tpl_box('image_thumb', array(
 																				'b_title'	=> $lang['URL_F_THMB'], 
 																				'b_url_link'=> kleeja_get_link('image', $file_info), 
 																				'b_img_link'=> kleeja_get_link('thumb', $file_info)
 																				));
 
-						}
+					}
 						
-						//write on image
-						if( ($config['write_imgs'] != 0) && in_array(strtolower($this->typet), array('gif', 'png', 'jpg', 'jpeg', 'bmp')))
-						{
-							$this->watermark($folderee . "/" . $filname,strtolower($this->typet));
-						}
+					//write on image
+					if( ($config['write_imgs'] != 0) && in_array(strtolower($this->typet), array('gif', 'png', 'jpg', 'jpeg', 'bmp')))
+					{
+						$this->watermark($folderee . "/" . $filname,strtolower($this->typet));
+					}
 
-						//then show
-						$img_html_result .= get_up_tpl_box('image', array(
+					//then show
+					$img_html_result .= get_up_tpl_box('image', array(
 																			'b_title'	=> $lang['URL_F_IMG'], 
 																			'b_bbc_title'=> $lang['URL_F_BBC'], 
 																			'b_url_link'=> kleeja_get_link('image', $file_info),
 																			));
 	
-						$img_html_result .= $extra_del;
+					$img_html_result .= $extra_del;
 						
-						($hook = kleeja_run_hook('saveit_func_img_res_kljuploader')) ? eval($hook) : null; //run hook
-						$this->total++;
+					($hook = kleeja_run_hook('saveit_func_img_res_kljuploader')) ? eval($hook) : null; //run hook
+					$this->total++;
 						
-						$this->errs[] = array($lang['IMG_DOWNLAODED'] . '<br />' . $img_html_result, 'index_info');
-					}
-					else 
-					{
-						//then show other files
-						$else_html_result = get_up_tpl_box('file', array(
+					$this->errs[] = array($lang['IMG_DOWNLAODED'] . '<br />' . $img_html_result, 'index_info');
+				}
+				else 
+				{
+					//then show other files
+					$else_html_result = get_up_tpl_box('file', array(
 																			'b_title'	=> $lang['URL_F_FILE'], 
 																			'b_bbc_title'=> $lang['URL_F_BBC'], 
 																			'b_url_link'=> kleeja_get_link('file', $file_info),
 																			));
 
-						$else_html_result .= $extra_del;
+					$else_html_result .= $extra_del;
 
-						($hook = kleeja_run_hook('saveit_func_else_res_kljuploader')) ? eval($hook) : null; //run hook
-						$this->total++;
-						$this->errs[] = array($lang['FILE_DOWNLAODED'] . '<br />' . $else_html_result, 'index_info');	
-					}
+					($hook = kleeja_run_hook('saveit_func_else_res_kljuploader')) ? eval($hook) : null; //run hook
+					$this->total++;
+					$this->errs[] = array($lang['FILE_DOWNLAODED'] . '<br />' . $else_html_result, 'index_info');	
+				}
 
-					($hook = kleeja_run_hook('saveit_func_kljuploader')) ? eval($hook) : null; //run hook
+				($hook = kleeja_run_hook('saveit_func_kljuploader')) ? eval($hook) : null; //run hook
 					
-					if (isset($_POST['submitr']))
+				if (isset($_POST['submitr']))
+				{
+					if(isset($_SESSION['FIILES_NOT_DUPLI']))
 					{
-						if(isset($_SESSION['FIILES_NOT_DUPLI']))
-						{
-							unset($_SESSION['FIILES_NOT_DUPLI']);
-						}
-					
-						$_SESSION['FIILES_NOT_DUPLI'] = $_FILES;
+						unset($_SESSION['FIILES_NOT_DUPLI']);
 					}
-					elseif(isset($_POST['submittxt']))
+					
+					$_SESSION['FIILES_NOT_DUPLI'] = $_FILES;
+				}
+				elseif(isset($_POST['submittxt']))
+				{
+					if(isset($_SESSION['FIILES_NOT_DUPLI_LINKS']))
 					{
-						if(isset($_SESSION['FIILES_NOT_DUPLI_LINKS']))
-						{
-							unset($_SESSION['FIILES_NOT_DUPLI_LINKS']);
-						}
-					
-						$_SESSION['FIILES_NOT_DUPLI_LINKS'] = $_POST;
+						unset($_SESSION['FIILES_NOT_DUPLI_LINKS']);
 					}
+					
+					$_SESSION['FIILES_NOT_DUPLI_LINKS'] = $_POST;
+				}
 						
-					unset ($filename, $folderee, $sizeee, $typeee);
-					//unset ($_SESSION['NO_UPLOADING_YET']);
+				unset ($filename, $folderee, $sizeee, $typeee);
+				//unset ($_SESSION['NO_UPLOADING_YET']);
 
 	}#save it
 

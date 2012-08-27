@@ -30,7 +30,7 @@ $H_FORM_KEYS	= kleeja_add_form_key('adm_configs');
 $query	= array(
 				'SELECT'	=> 'DISTINCT(type)',
 				'FROM'		=> "{$dbprefix}config",
-				'WHERE'		=> '`option` != \'\'',
+				'WHERE'		=> "`option` <> '' AND `type` <> 'groups'",
 				'ORDER BY'	=> 'display_order'
 			);
 
@@ -60,7 +60,7 @@ if (isset($_POST['submit']))
 //general varaibles
 #$action		= basename(ADMIN_PATH) . '?cp=options&amp;type=' .$current_type;
 $STAMP_IMG_URL = file_exists(PATH . 'images/watermark.gif') ? PATH . 'images/watermark.gif' : PATH . 'images/watermark.png';
-$stylfiles	= $lngfiles	= $authtypes = '';
+$stylfiles	= $lngfiles	= $authtypes =  $time_zones = '';
 $optionss	= array();
 $n_googleanalytics = '<a href="http://www.google.com/analytics">Google Analytics</a>';
 
@@ -89,6 +89,14 @@ while($row=$SQL->fetch_array($result))
 	if($row['name'] == 'thmb_dims') 
 	{
 		list($thmb_dim_w, $thmb_dim_h) = @explode('*', $con['thmb_dims']);
+	}
+	else if($row['name'] == 'time_zone') 
+	{
+		$zones = time_zones();
+		foreach($zones as $z=>$t)
+		{
+			$time_zones .= '<option ' . ($con['time_zone'] == $t ? 'selected="selected"' : '') . ' value="' . $t . '">' . $z . '</option>' . "\n";
+		}
 	}
 	else if($row['name'] == 'language') 
 	{

@@ -88,7 +88,8 @@ if ($nums_rows > 0)
 						'name' 		=> $row['name'],
 						'mail' 		=> $row['mail'],
 						'text' 		=> htmlspecialchars($row['text']),
-						'time' 		=> kleeja_date($row['time']),
+						'human_time'=> kleeja_date($row['time']),
+						'time' 		=> kleeja_date($row['time'], false),
 						'ip' 		=> $row['ip'],
 						'sent'		=> $row['id'] == $msg_sent,
 						'ip_finder'	=> 'http://www.ripe.net/whois?form_type=simple&full_query_string=&searchtext=' . $row['ip'] . '&do_search=Search'

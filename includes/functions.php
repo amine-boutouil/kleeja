@@ -302,7 +302,7 @@ function fetch_remote_file($url, $save_in = false, $timeout = 20, $head_only = f
 	{
 	    $url_parsed = parse_url($url);
 	    $host = $url_parsed['host'];
-	    $port = empty($url_parsed['port']) or $url_parsed['port'] == 0 ? 80 : $url_parsed['port'];
+	    $port = empty($url_parsed['port']) || $url_parsed['port'] == 0 ? 80 : $url_parsed['port'];
 		$path = $url_parsed['path'];
 
 		if (isset($url_parsed["query"]) && $url_parsed["query"] != '')
@@ -527,7 +527,7 @@ function delete_cache($name, $all=false)
 	}
 	else
 	{
-		if(strpos($name, 'tpl_') !== false and strpos($name, '.html') !== false)
+		if(strpos($name, 'tpl_') !== false && strpos($name, '.html') !== false)
 		{
 			$name = str_replace('.html', '', $name);
 		}
@@ -1091,7 +1091,7 @@ function klj_clean_old_files($from = 0)
 		$query = array(
 					'SELECT'	=> 'f.id, f.last_down, f.name, f.type, f.folder, f.time, f.size, f.id_form',
 					'FROM'		=> "{$dbprefix}files f",
-					'WHERE'		=> "(f.last_down < $totaldays AND f.time < $not_today AND f.id > $from) AND (f.id_form <> '' OR f.id_form <> 'direct')",
+					'WHERE'		=> "f.last_down < $totaldays AND f.time < $not_today AND f.id > $from AND f.id_form <> '' AND f.id_form <> 'direct'",
 					'ORDER BY'	=> 'f.id ASC',
 					'LIMIT'		=> '20',
 					);
@@ -1099,7 +1099,7 @@ function klj_clean_old_files($from = 0)
 		($hook = kleeja_run_hook('qr_select_klj_clean_old_files_func')) ? eval($hook) : null; //run hook
 
 		$result	= $SQL->build($query);					
-		
+
 		$num_of_files_to_delete = $SQL->num_rows($result);
 		if($num_of_files_to_delete == 0)
 		{
@@ -1143,12 +1143,12 @@ function klj_clean_old_files($from = 0)
 			*/
 
 			//excpetions
-			if($config['id_form'] == 'direct')
-			{
+			//if($config['id_form'] == 'direct')
+			//{
 				//$ex_ids[] = $row['id'];
 				//move on
 				//continue;
-			}
+			//}
 
 			//your exepctions
 			($hook = kleeja_run_hook('while_klj_clean_old_files_func')) ? eval($hook) : null; //run hook

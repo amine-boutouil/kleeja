@@ -13,10 +13,10 @@
 </script>
 
 <!-- the big box begin -->
-   <div class="tit_con">
-<h1>{lang.R_REPORTS}<IF NAME="current_smt == show_h24"> &raquo; {lang.SHOW_FROM_24H}</IF></h1>
-   </div>
 <div class="big-box">
+<div class="tit_con">
+<h1>{lang.R_REPORTS}<IF NAME="current_smt == show_h24"> &raquo; {lang.SHOW_FROM_24H}</IF></h1>
+</div>
 
 <!-- mail here  -->
 <IF NAME="no_results"><ELSE>
@@ -34,26 +34,24 @@
 <!-- start data table -->
 <table>
 	<tr class="first">
-		<td>#</td>
+		<td style="width:20px;"><a href="javascript:void(0);" onclick="checkAll(document.reportform, '_del', 'su');" title="{lang.DELETE}">#</a></td>
 		<td>{lang.NAME}</td>
+		<td>{lang.IP}</td>
 		<td>{lang.URL}</td>
 		<td>{lang.TIME}</td>
-		<td>{lang.IP}</td>
-		<td><a href="javascript:void(0);" onclick="checkAll(document.reportform, '_del', 'su');">{lang.DELETE}</a></td>
 		<!-- admin reports info td1 extra -->
 	</tr>
 
 <LOOP NAME="arr">
 	<tr id="su[{{id}}]" class="osilver<IF LOOP="sent"> is_sent</IF>">
-		<td><a href="javascript:void(0);" onclick="javascript:show_msg('textva_{{id}}',{{id}});">{lang.VIEW}</a></td>
+	<td><input type="checkbox" name="del_{{id}}" value="{{id}}" onclick="change_color(this,'su[{{id}}]');" rel="_del"></td>
 		<td>
-			<a title="{lang.EMAIL}:{{mail}}" onclick="javascript:show_msg('textva_{{id}}',{{id}});">{{name}}</a>
+			<a title="{lang.VIEW}" onclick="javascript:show_msg('textva_{{id}}',{{id}});" href="#">{{name}}</a>
 			<input type="hidden" value="&lt;div class='email-for-msg'&gt;{{name}}  ({{mail}}) :&lt;/div&gt;&lt;div class='text-for-msg'&gt;{{text}}&lt;/div&gt;" id="textva_{{id}}">
-		</td>
+
+	<td><a target="_blank" href="{{ip_finder}}" target="_blank">{{ip}}</a></td>		</td>
 		<td><a target="_blank" href="{{url}}">{lang.CLICKHERE}<a/></td>
-		<td>{{time}}</td>
-		<td><a target="_blank" href="{{ip_finder}}" target="_blank">{{ip}}</a></td>
-		<td><input type="checkbox" name="del_{{id}}" value="{{id}}" onclick="change_color(this,'su[{{id}}]');" rel="_del"></td>
+		<td title="{{time}}">{{human_time}}</td>
 		<!-- admin reports info td2 extra -->
 	</tr>
 </LOOP>
@@ -62,14 +60,16 @@
 <!-- end data table -->
 
 <div class="br"></div>
+<div class="left check_all check_all_table">[ <a href="javascript:void(0);" onclick="checkAll(document.reportform, '_del', 'su');">{lang.CHECK_ALL}</a> ]</div>
+
 
 <!-- pagination -->
 {page_nums}
 
 <!-- button -->
-<p>
+<p class="submit">
 	<input type="hidden" name="submit" value="1" />
-	<button type="submit" name="submit" class="btn" onclick="javascript:submit_kleeja_data('#reports_form', '#content', 0); return false;"><span>{lang.UPDATE_REPORTS}</span></button>
+	<button type="submit" name="submit" class="btn" onclick="javascript:submit_kleeja_data('#reports_form', '#content', 0); return false;"><span>{lang.DELETE}</span></button>
 </p>
 		
 

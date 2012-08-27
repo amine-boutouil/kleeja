@@ -211,7 +211,7 @@ $(document).ready( function(){
 <!-- the big box begin -->
 <div class="big-box">
 <div class="tit_con">
-<h1>{lang.R_USERS} &raquo; {lang.NEW_USER}</h1>
+<h1><a href="{action}&amp;smt=general" onclick="javascript:get_kleeja_link(this.href); return false;">{lang.R_GROUPS}</a> &raquo; {lang.NEW_USER}</h1>
 </div>
 
 <IF NAME="errs">
@@ -265,7 +265,7 @@ $(document).ready( function(){
 <!-- the big box begin -->
 <div class="big-box">
 <div class="tit_con">
-<h1>{lang.R_USERS} &raquo; {lang.EDIT} ({title_name})</h1>
+<h1><a href="{action}&amp;smt=general" onclick="javascript:get_kleeja_link(this.href); return false;">{lang.R_GROUPS}</a> &raquo; {lang.EDIT} ({title_name})</h1>
 </div>
 
 <IF NAME="errs">

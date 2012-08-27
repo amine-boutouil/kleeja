@@ -107,16 +107,16 @@ class kplugins
 		$plg_options		= empty($tree['options']) ? null : $tree['options'];
 		$plg_files			= empty($tree['files']) ? null : $tree['files'];
 
-		
 		//important tags not exists 
 		if(empty($plg_info))
 		{
-			big_error('Error',$lang['ERR_XML_NO_G_TAGS'] . (defined('DEV_STAGE') ? __file__ . ':'. __line__ : ''));
+			big_error('Error', $lang['ERR_XML_NO_G_TAGS'] . (defined('DEV_STAGE') ? __file__ . ':'. __line__ : ''));
 		}
 
-		if(!empty($plg_info['plugin_kleeja_version']['value']) && version_compare(strtolower(KLEEJA_VERSION), strtolower($plg_info['plugin_kleeja_version']['value']), '>=') == false)
+		if(!empty($plg_info['plugin_kleeja_version']['value']) && version_compare(strtolower($plg_info['plugin_kleeja_version']['value']),  strtolower(preg_replace('!#([a-z0-9]+)!', '', KLEEJA_VERSION)), '>=') == false)
 		{
-			big_error('Error', $lang['PLUGIN_N_CMPT_KLJ']);
+			
+			big_error('Error', $lang['PLUGIN_N_CMPT_KLJ'] . '[' . strtolower($plg_info['plugin_kleeja_version']['value']) . '>=' . strtolower(preg_replace('!#([a-z0-9]+)!', '', KLEEJA_VERSION)) . ']');
 		}
 
 		$plg_errors	=	array();

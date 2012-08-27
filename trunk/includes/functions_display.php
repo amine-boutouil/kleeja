@@ -490,7 +490,7 @@ function kleeja_check_form_key($form_name, $require_time = 150 /*seconds*/ )
 		$key_was = trim($_POST['k_form_key']);
 		$time_was = intval($_POST['k_form_time']);
 		$different = time() - $time_was;
-		
+
 		//check time that user spent in the form 
 		if($different && (!$require_time || $require_time >= $different))
 		{

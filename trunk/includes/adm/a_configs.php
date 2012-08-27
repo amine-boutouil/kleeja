@@ -77,6 +77,10 @@ if($current_smt != 'all')
 {
 	$query['WHERE'] = "type = '" . $SQL->escape($current_smt) . "' OR type = ''";
 }
+else if($current_smt == 'all')
+{
+	$query['WHERE'] = "type <> 'groups' OR type = ''";
+}
 
 $result = $SQL->build($query);
 

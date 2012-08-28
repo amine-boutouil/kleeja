@@ -66,7 +66,7 @@ function kleeja_detecting_bots ()
 /**
 * For ban ips .. 
 */
-function get_ban ()
+function get_ban()
 {
 	global $banss, $lang, $tpl, $text;
 	
@@ -79,16 +79,16 @@ function get_ban ()
 		foreach ($banss as $ip2)
 		{
 			$ip2 = trim($ip2);
-				
+
 			if(empty($ip2))
 			{
 				continue;
 			}
-				
+
 			//first .. replace all * with something good .
 			$replace_it = str_replace("*", '([0-9]{1,3})', $ip2);
 			$replace_it = str_replace(".", '\.', $replace_it);
-			
+
 			if ($ip == $ip2 || @preg_match('/' . preg_quote($replace_it, '/') . '/i', $ip))
 			{
 				($hook = kleeja_run_hook('banned_get_ban_func')) ? eval($hook) : null; //run hook	

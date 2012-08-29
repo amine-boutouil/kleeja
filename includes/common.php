@@ -216,7 +216,7 @@ if (!file_exists(PATH . KLEEJA_CONFIG_FILE))
 }
 
 // there is a config
-require (PATH . KLEEJA_CONFIG_FILE);
+include (PATH . KLEEJA_CONFIG_FILE);
 
 //no enough data
 if (!$dbname || !$dbuser)
@@ -229,23 +229,31 @@ if (!$dbname || !$dbuser)
 $root_path = PATH;
 $db_type = isset($db_type) ? $db_type : 'mysql';
 
-require (PATH . 'includes/functions_alternative.php');
-require (PATH . 'includes/version.php');
+include (PATH . 'includes/functions_alternative.php');
+include (PATH . 'includes/version.php');
 
 switch ($db_type)
 {
 	case 'mysqli':
-		require (PATH . 'includes/mysqli.php');
+		include (PATH . 'includes/mysqli.php');
 	break;
 	default:
-		require (PATH . 'includes/mysql.php');
+		include (PATH . 'includes/mysql.php');
 }
-require (PATH . 'includes/style.php');
-require (PATH . 'includes/KljUploader.php');
-require (PATH . 'includes/usr.php');
-require (PATH . 'includes/pager.php');
-require (PATH . 'includes/functions.php');
-require (PATH . 'includes/functions_display.php');
+include (PATH . 'includes/style.php');
+include (PATH . 'includes/usr.php');
+include (PATH . 'includes/pager.php');
+include (PATH . 'includes/functions.php');
+include (PATH . 'includes/functions_display.php');
+if(defined('IN_ADMIN'))
+{
+	include (PATH . 'includes/functions_adm.php');
+}
+else
+{
+	include (PATH . 'includes/KljUploader.php');
+	$kljup	= new KljUploader;
+}
 	
 //fix intregation problems
 if(empty($script_encoding))
@@ -258,11 +266,10 @@ $SQL	= new SSQL($dbserver, $dbuser, $dbpass, $dbname);
 //no need after now 
 unset($dbpass);
 $tpl	= new kleeja_style;
-$kljup	= new KljUploader;
 $usrcp	= new usrcp;
 
 //then get caches
-require (PATH . 'includes/cache.php');
+include (PATH . 'includes/cache.php');
 
 //getting dynamic configs
 $query = array(

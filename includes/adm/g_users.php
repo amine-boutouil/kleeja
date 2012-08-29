@@ -19,7 +19,7 @@ if (!defined('IN_ADMIN'))
 $stylee			= "admin_users";
 $current_smt	= isset($_GET['smt']) ? (preg_match('![a-z0-9_]!i', trim($_GET['smt'])) ? trim($_GET['smt']) : 'general') : 'general';
 $action			= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . (isset($_GET['page'])  ? '&amp;page=' . intval($_GET['page']) : '');
-$action			.= (isset($_GET['search']) ? '&amp;search=' . $SQL->escape($_GET['search']) : '');
+$action			.= (isset($_GET['search_id']) ? '&amp;search_id=' . htmlspecialchars($_GET['search']) : '');
 $action			.= (isset($_GET['qg']) ? '&amp;qg=' . intval($_GET['qg']) : '') . '&amp;smt=' . $current_smt;
 $action_all		= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php')  . '&amp;smt=' . $current_smt . (isset($_GET['page']) ? '&amp;page=' . intval($_GET['page']) : '');
 
@@ -85,13 +85,6 @@ if (isset($_POST['editdata']))
 	if(!kleeja_check_form_key('adm_users_editdata'))
 	{
 		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $action, 1);
-	}
-}
-if (isset($_POST['search_user']))
-{
-	if(!kleeja_check_form_key('adm_users_search'))
-	{
-		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, basename(ADMIN_PATH) . '?cp=h_search', 1);
 	}
 }
 if (isset($_POST['newext']) or isset($_POST['editexts']))
@@ -952,33 +945,35 @@ break;
 
 #show users (from search keyword)
 case 'show_su':
-	if(isset($_POST['search_user']))
+
+	$filter = get_filter($_GET['search_id'], 'filter_uid');
+	if(!$filter)
 	{
-		$search = $_POST;
-		$_GET['search'] = kleeja_base64_encode(serialize($_POST));
-	}
-	else
-	{
-		$search	= unserialize(kleeja_base64_decode($_GET['search']));
+		kleeja_admin_err($lang['ERROR_TRY_AGAIN'], true, $lang['ERROR'], true, basename(ADMIN_PATH) . '?cp=h_search&smt=users', 1);
 	}
 
-	$usernamee	= $search['username'] != '' ? 'AND name  LIKE \'%' . $SQL->escape($search['username']) . '%\' ' : ''; 
+	$search	= unserialize(htmlspecialchars_decode($filter['filter_value']));
+
+	$usernamee	= $search['username'] != '' ? 'AND (name  LIKE \'%' . $SQL->escape($search['username']) . '%\' OR clean_name LIKE \'%' . $SQL->escape($search['username']) . '%\') ' : ''; 
 	$usermailee	= $search['usermail'] != '' ? 'AND mail  LIKE \'%' . $SQL->escape($search['usermail']) . '%\' ' : ''; 
 	$is_search	= true;
 	$isn_search	= false;
-	$query['WHERE']	=	"name != '' $usernamee $usermailee";
+	$query['WHERE']	=	"name <> '' $usernamee $usermailee";
 	
 #show users (for requested group)
 case 'show_group':
-	$is_search	= true;
-	$isn_search	= false;
-	$is_asearch = true;
-	$req_group	= isset($_GET['qg']) ? intval($_GET['qg']) : 0;
-	$group_name	= preg_replace('!{lang.([A-Z0-9]+)}!e', '$lang[\'\\1\']', $d_groups[$req_group]['data']['group_name']);
+	if($current_smt != 'show_su')
+	{
+		$is_search	= true;
+		$isn_search	= false;
+		$is_asearch = true;
+		$req_group	= isset($_GET['qg']) ? intval($_GET['qg']) : 0;
+		$group_name	= preg_replace('!{lang.([A-Z0-9]+)}!e', '$lang[\'\\1\']', $d_groups[$req_group]['data']['group_name']);
 
-	$query['WHERE']	= "name != '' AND group_id =  " . $req_group;
+		$query['WHERE']	= "name != '' AND group_id =  " . $req_group;
+	}
 
-#show users (all) 
+#show users (all)
 case 'users':
 
 	$query['SELECT']	= 'COUNT(id) AS total_users';
@@ -1032,7 +1027,7 @@ case 'users':
 	//pages
 	$total_pages 	= $Pager->getTotalPages(); 
 	$page_nums 		= $Pager->print_nums(
-								basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . (isset($_GET['search']) ? '&search=' . strip_tags($_GET['search']) : '') 
+								basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . (isset($_GET['search_id']) ? '&search_id=' . htmlspecialchars($_GET['search_id']) : '') 
 								. (isset($_GET['qg']) ? '&qg=' . intval($_GET['qg']) : '') . (isset($_GET['smt']) ? '&smt=' . $current_smt : ''),
 								'onclick="javascript:get_kleeja_link($(this).attr(\'href\'), \'#content\'); return false;"' 
 							); 
@@ -1125,7 +1120,7 @@ $user_not_normal = (int) $config['user_system'] != 1 ?  true : false;
 if (isset($_POST['submit']))
 {
 	$g_link = basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;page=' . (isset($_GET['page'])  ? intval($_GET['page']) : 1) . 
-				(isset($_GET['search']) ? '&amp;search=' . strip_tags($_GET['search']) : '') . '&amp;smt=' . $current_smt;
+				(isset($_GET['search_id']) ? '&amp;search_id=' . htmlspecialchars($_GET['search_id']) : '') . '&amp;smt=' . $current_smt;
 
 	$text	= ($affected ? $lang['USERS_UPDATED'] : $lang['NO_UP_CHANGE_S']) .
 				'<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . str_replace('&amp;', '&', $g_link) . '\');", 2000);</script>' . "\n";

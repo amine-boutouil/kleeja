@@ -79,8 +79,19 @@ if (isset($_POST['search_file']))
 
 	#add as a file_search filter
 	$s = $_POST;
+
+	#reduce number of array keys
 	unset($s['search_file'], $s['k_form_key'], $s['k_form_time']);
+	foreach ($s as $key => $v)
+	{
+		if ($s[$key] == '')
+		{
+			unset($s[$key]);
+		}
+	}
+
 	$d = serialize($s);
+
 	if(($search_id = insert_filter('file_search', $d)))
 	{
 		$filter = get_filter($search_id);

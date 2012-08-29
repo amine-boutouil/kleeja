@@ -36,12 +36,13 @@ $H_FORM_KEYS	= kleeja_add_form_key('adm_files');
 
 if (isset($_POST['submit']))
 {
+	#wrong form
 	if(!kleeja_check_form_key('adm_files'))
 	{
 		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $action, 1);
 	}
 
-	
+	#gather to-be-deleted file ids
 	foreach ($_POST as $key => $value) 
     {
         if(preg_match('/del_(?P<digit>\d+)/', $key))
@@ -49,16 +50,17 @@ if (isset($_POST['submit']))
             $del[$key] = $value;
         }
     }
-    
+   
+   #delete them once by once
     foreach ($del as $key => $id)
-    { 
-        $query	= array('SELECT'	=> '*',
-					'FROM'		=> "{$dbprefix}files",
-					'WHERE'	=> 'id = \'' . intval($id) . "'",
+    {
+        $query	= array(
+						'SELECT'	=> '*',
+						'FROM'			=> "{$dbprefix}files",
+						'WHERE'			=> 'id = ' . intval($id),
 					);
-                    
-         $result = $SQL->build($query);
 
+		$result = $SQL->build($query);
 
 		while($row=$SQL->fetch_array($result))
 		{
@@ -74,9 +76,9 @@ if (isset($_POST['submit']))
 			$sizes += $row['size'];	
 		}
 	}
-    
+   
 	$SQL->freeresult($result);
-	   
+  
 	//no files to delete
 	if(isset($ids) && sizeof($ids))
 	{
@@ -99,11 +101,12 @@ if (isset($_POST['submit']))
 			delete_cache('data_stats');
 			$affected = true;
 		}
-		
-		$text	= ($affected ? $lang['FILES_UPDATED'] : $lang['NO_UP_CHANGE_S']) .
-				'<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . str_replace('&amp;', '&', $action) .  '\');", 2000);</script>' . "\n";
-		$stylee	= "admin_info";
 	}
+	
+	#show msg now
+	$text	= ($affected ? $lang['FILES_UPDATED'] : $lang['NO_UP_CHANGE_S']) .
+				'<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . str_replace('&amp;', '&', $action) .  '\');", 2000);</script>' . "\n";
+	$stylee	= "admin_info";
 }
 else
 {
@@ -120,7 +123,18 @@ if(isset($_GET['deletefiles']))
 
 	#get search filter
 	$filter = get_filter($_GET['search_id'], 'filter_uid');
+	
+	if(!$filter)
+	{
+		kleeja_admin_err($lang['ADMIN_DELETE_FILES_NOF']);
+	}
+
 	$query['WHERE'] = build_search_query(unserialize($filter['value']));
+
+	if($query['WHERE'] == '')
+	{
+		kleeja_admin_err($lang['ADMIN_DELETE_FILES_NOF']);
+	}
 
 	$result = $SQL->build($query);
 	$sizes  = false;

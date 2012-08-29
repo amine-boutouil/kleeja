@@ -130,12 +130,12 @@ function build_search_query($search)
 
 	$search['filename'] = !isset($search['filename']) ? '' : $search['filename']; 
 	$search['username'] = !isset($search['username']) ? '' : $search['username'];
-	$search['than']		= !isset($search['than']) ? 1 : $search['than'];
+	$search['than']		= !isset($search['than']) ? '' : $search['than'];
 	$search['size']		= !isset($search['size']) ? '' : $search['size'];
 	$search['ups']		= !isset($search['ups']) ? '' : $search['ups'];
-	$search['uthan']	= !isset($search['uthan']) ? 1 : $search['uthan'];
+	$search['uthan']	= !isset($search['uthan']) ? '' : $search['uthan'];
 	$search['rep']		= !isset($search['rep']) ? '' : $search['rep'];
-	$search['rthan']	= !isset($search['rthan']) ? 1 : $search['rthan'];
+	$search['rthan']	= !isset($search['rthan']) ? '' : $search['rthan'];
 	$search['lastdown'] = !isset($search['lastdown']) ? '' : $search['lastdown'];
 	$search['ext']		= !isset($search['ext']) ? '' : $search['ext'];
 	$search['user_ip']	= !isset($search['user_ip']) ? '' : $search['user_ip'];

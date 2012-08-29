@@ -253,7 +253,7 @@ $lang = array_merge($lang, array(
 	'WE_UPDATING_KLEEJA_NOW'	=> 'الموقع مغلق للتطوير والترقيه لاخر نسخة , لذا يرجى الصبر ...',
 	'ERROR_TRY_AGAIN'			=> 'خطأ , حاول مجدداً.',
 	'VIEW'						=> 'عرض',
-	'http://vbmxmx.com/up/do.php?down=148'						=> 'لا شيء',
+	'NONE'						=> 'لا شيء',
 	'NOTHING'					=> 'لا يوجد اي ملفات أو صور جديدة ..!!',
 	'YOU_HAVE_TO_WAIT'			=> 'انتظر %s ثانية وبعد انقضاء الفترة الزمنيه قم بإعادة رفع الملفات',
 	'REPEAT_PASS'				=> 'اعد كلمة المرور',

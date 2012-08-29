@@ -226,57 +226,6 @@ function kleeja_info($msg, $title='', $exit = true, $redirect = false, $rs = 5, 
 	return kleeja_err($msg, $title, $exit, $redirect, $rs, $extra_code_header, 'info');
 }
 
-/**
-* Print cp error function handler
-*
-* For admin
-*/
-function kleeja_admin_err($msg, $navigation = true, $title='', $exit = true, $redirect = false, $rs = 5, $style = 'admin_err')
-{
-	global $text, $tpl, $SHOW_LIST, $adm_extensions, $adm_extensions_menu;
-	global $STYLE_PATH_ADMIN, $lang, $olang, $SQL, $MINI_MENU;
-
-	($hook = kleeja_run_hook('kleeja_admin_err_func')) ? eval($hook) : null; //run hook
-
-	#Exception for ajax
-	if(isset($_GET['_ajax_']))
-	{
-		$text = $msg  . "\n" . '<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . str_replace('&amp;', '&', $redirect) . '\');", 2000);</script>';
-		echo_ajax(1, $tpl->display($style));
-		$SQL->close();
-		exit();
-	}
-
-	// assign {text} in err template
-	$text		= $msg . ($redirect != false ? redirect($redirect, false, false, $rs, true) : '');
-	$SHOW_LIST	= $navigation;
-
-	//header
-	echo $tpl->display("admin_header");
-	//show tpl
-	echo $tpl->display($style);
-	//footer
-	echo $tpl->display("admin_footer");
-		
-	if($exit)
-	{
-		$SQL->close();
-		exit();
-	}
-}
-
-
-/**
-* Print inforamtion message on admin panel
-*
-* For admin
-*/
-function kleeja_admin_info($msg, $navigation=true, $title='', $exit=true, $redirect = false, $rs = 2)
-{
-	($hook = kleeja_run_hook('kleeja_admin_info_func')) ? eval($hook) : null; //run hook
-
-	return kleeja_admin_err($msg, $navigation, $title, $exit, $redirect, $rs, 'admin_info');
-}
 
 /**
 * Show debug information 
@@ -403,14 +352,29 @@ function redirect($url, $header = true, $exit = true, $sec = 0, $return = false)
     }
 	else
 	{
-		$gre = '<script type="text/javascript"> setTimeout("window.location.href = \'' .  str_replace(array('&amp;'), array('&'), $url) . '\'", ' . $sec*1000 . '); </script>';
-		$gre .= '<noscript><meta http-equiv="refresh" content="' . $sec . ';url=' . $url . '" /></noscript>';
+		#if ajax, mostly in acp
+		if(isset($_GET['_ajax_']))
+		{
+			global $lang, $tpl, $text;
+			$text = $lang['WAIT'] . '<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . str_replace(array('&amp;'), array('&'), $url) . '\');", ' . $sec*1000 . ');</script>';
+			if($exit)
+			{
+				echo_ajax(1, $tpl->display('admin_info'));
+				$SQL->close();
+				exit;
+			}
+		}
+		else
+		{
+			$gre = '<script type="text/javascript"> setTimeout("window.location.href = \'' .  str_replace(array('&amp;'), array('&'), $url) . '\'", ' . $sec*1000 . '); </script>';
+			$gre .= '<noscript><meta http-equiv="refresh" content="' . $sec . ';url=' . $url . '" /></noscript>';
+		}
 
 		if($return)
 		{
 			return $gre;
 		}
-		
+
 		echo $gre;
 	}
 

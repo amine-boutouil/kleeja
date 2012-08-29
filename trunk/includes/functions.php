@@ -21,7 +21,7 @@ if (!defined('IN_COMMON'))
 /**
 * For recording who onlines now .. 
 */
-function kleeja_detecting_bots ()
+function kleeja_detecting_bots()
 {
 	global $SQL, $usrcp, $dbprefix, $config, $klj_session;
 

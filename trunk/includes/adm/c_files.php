@@ -129,7 +129,7 @@ if(isset($_GET['deletefiles']))
 		kleeja_admin_err($lang['ADMIN_DELETE_FILES_NOF']);
 	}
 
-	$query['WHERE'] = build_search_query(unserialize($filter['value']));
+	$query['WHERE'] = build_search_query(unserialize(htmlspecialchars_decode($filter['filter_value'])));
 
 	if($query['WHERE'] == '')
 	{
@@ -215,7 +215,7 @@ if(isset($_GET['search_id']))
 	$filter = get_filter($_GET['search_id'], 'filter_uid');
 	$deletelink = basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&deletefiles=' . htmlspecialchars($_GET['search_id']);
 	$is_search	= true;
-	$query['WHERE'] = build_search_query(unserialize($filter['value']));
+	$query['WHERE'] = build_search_query(unserialize(htmlspecialchars_decode($filter['filter_value'])));
 }
 else if(isset($_REQUEST['last_visit']))
 {
@@ -285,14 +285,14 @@ if ($nums_rows > 0)
 						'ups'		=> $row['uploads'],
 						'direct'	=> $row['id_form'] == 'direct' ? true : false,
 						'time_human'=> kleeja_date($row['time']),
-						'time'		=> date('d-m-Y H:i a', $row['time']),
+						'time'		=> kleeja_date($row['time'], false),
 						'type'		=> $row['type'],
 						'typeicon'	=> file_exists(PATH . "images/filetypes/".  $row['type'] . ".png") ? PATH . "images/filetypes/" . $row['type'] . ".png" : PATH. 'images/filetypes/file.png',
 						'folder'	=> $row['folder'],
 						'report'	=> ($row['report'] > 4) ? "<span style=\"color:red;font-weight:bold\">" . $row['report'] . "</span>":$row['report'],
 						'user'		=> ($row['user'] == '-1') ? $lang['GUST'] :  '<a href="' . $userfile . '" target="_blank">' . $row['username'] . '</a>',
 						'ip'		=> '<a href="http://www.ripe.net/whois?form_type=simple&amp;full_query_string=&amp;searchtext=' . $row['user_ip'] . '&amp;do_search=Search" target="_new">' . $row['user_ip'] . '</a>',
-						'showfilesbyip' => basename(ADMIN_PATH) . '?cp=h_search&s_input=1&amp;s_value=' . $row['user_ip']
+						'showfilesbyip' => basename(ADMIN_PATH) . '?cp=h_search&amp;s_input=1&amp;s_value=' . $row['user_ip']
 					);
 
 		$del[$row['id']] = isset($_POST['del_' . $row['id']]) ? $_POST['del_' . $row['id']] : '';

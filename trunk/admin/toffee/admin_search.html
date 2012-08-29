@@ -49,7 +49,7 @@ function check_search_users_form(form)
 <div class="big-box">
 
 
-<form method="post" action="{action1}" onsubmit="return check_search_files_form(this);" id="adv_search">
+<form method="post" action="{action}" onsubmit="return check_search_files_form(this);" id="adv_search">
 
 <div class="section">
 	<h3><label for="filename">{lang.FILENAME}</label></h3>
@@ -115,7 +115,7 @@ function check_search_users_form(form)
 <div class="br"></div>
 	
 <!-- button adv -->
-<p>
+<p class="submit">
 	<input type="hidden" name="search_file" value="1" />
 	<button type="submit" id="submit" name="search_file" class="btn" onclick="javascript:submit_kleeja_data('#adv_search', '#content', 0); return false;"><span>{lang.SEARCH_SUBMIT}</span></button>
 </p>
@@ -135,7 +135,7 @@ function check_search_users_form(form)
 <!-- the big box begin -->
 <div class="big-box">
 
-<form method="post" action="{action2}" onsubmit="return check_search_users_form(this);" id="user_search">
+<form method="post" action="{action}" onsubmit="return check_search_users_form(this);" id="user_search">
 
 <div class="section">
 	<h3><label for="username">{lang.USERNAME}</label></h3>
@@ -151,7 +151,7 @@ function check_search_users_form(form)
 <div class="br"></div>
 
 <!-- button user -->
-<p>
+<p class="submit">
 	<input type="hidden" name="search_user" value="1" />
 	<button type="submit" id="submit" name="search_user" class="btn" onclick="javascript:submit_kleeja_data('#user_search', '#content', 0); return false;"><span>{lang.SEARCH_SUBMIT}</span></button>
 </p>

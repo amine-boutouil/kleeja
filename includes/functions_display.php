@@ -425,9 +425,9 @@ function kleeja_check_form_key_get($request_id)
 */
 function kleeja_add_form_key($form_name)
 {
-	global $config, $klj_session;
+	global $config;
 	$now = time();
-	$return = '<input type="hidden" name="k_form_key" value="' . sha1($config['h_key'] . $form_name . $now . $klj_session) . '" /><input type="hidden" name="k_form_time" value="' . $now . '" />' . "\n";
+	$return = '<input type="hidden" name="k_form_key" value="' . sha1($config['h_key'] . $form_name . $now) . '" /><input type="hidden" name="k_form_time" value="' . $now . '" />' . "\n";
 	
 	($hook = kleeja_run_hook('kleeja_add_form_key_func')) ? eval($hook) : null; //run hook
 	return $return;
@@ -440,14 +440,14 @@ function kleeja_add_form_key($form_name)
 */
 function kleeja_check_form_key($form_name, $require_time = 150 /*seconds*/ )
 {
-	global $config, $klj_session;
+	global $config;
 
 	if(defined('IN_ADMIN'))
 	{
 		//we increase it for admin to be a duble 
 		$require_time *= 2;
 	}
-	
+
 	$return = false;
 	if (isset($_POST['k_form_key']) && isset($_POST['k_form_time']))
 	{
@@ -458,7 +458,7 @@ function kleeja_check_form_key($form_name, $require_time = 150 /*seconds*/ )
 		//check time that user spent in the form 
 		if($different && (!$require_time || $require_time >= $different))
 		{
-			if(sha1($config['h_key'] . $form_name . $time_was . $klj_session) === $key_was)
+			if(sha1($config['h_key'] . $form_name . $time_was) === $key_was)
 			{
 				$return = true;
 			}

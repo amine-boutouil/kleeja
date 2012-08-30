@@ -19,13 +19,15 @@ $update_sqls['time_zone'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `
 $update_sqls['filters'] = "
 CREATE TABLE `{$dbprefix}filters` (
   `filter_id` int(11) NOT NULL AUTO_INCREMENT,
+  `filter_uid` varchar(30) COLLATE utf8_bin NOT NULL,
   `filter_type` varchar(20) COLLATE utf8_bin NOT NULL,
   `filter_value` varchar(255) COLLATE utf8_bin NOT NULL,
   `filter_time` int(11) unsigned NOT NULL,
   `filter_user` int(11) unsigned NOT NULL DEFAULT '0',
   `filter_status` varchar(50) COLLATE utf8_bin NOT NULL DEFAULT '',
   PRIMARY KEY (`filter_id`),
-  KEY `filter_user` (`filter_user`)
+  KEY `filter_user` (`filter_user`),
+  KEY `filter_uid` (`filter_uid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
 ";
 

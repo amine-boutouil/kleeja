@@ -32,8 +32,8 @@ $(document).ready(function() { $('#template_content').markItUp(mySettings); });
 <div class="note-info">{lang.STYLE_DIR_NOT_WR} !</div>
 <ELSE>
 <!-- button -->
-<p>
-	<input type="hidden" name="submit_new_tpl" value="1" />
+<p class="submit">
+	<input type="hidden" name="tpl_edit_submit" value="1" />
 	<button type="submit" id="submit" name="tpl_edit_submit" class="btn" onclick="javascript:submit_kleeja_data('#edit_form', '#content', 0); return false;"><span>{lang.SUBMIT}</span></button>
 </p>
 

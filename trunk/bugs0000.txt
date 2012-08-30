@@ -3,6 +3,10 @@
 
 
 
+[ ] not yet
+[-] will be ignored
+[x] done
+
 
 
 
@@ -35,7 +39,7 @@
 	-[ ] filters at files.
 	-[ ] convert searches to use filters and show last 10 ones.
 -[ ] files of deleted user shows as 'deleted' user or 'guest' 
--[ ] increase csrf time of some time-wanted forms
+-[x] increase csrf time of some time-wanted forms
 
 NOTE NOTE NOTE :: 
 use this function to extend the group system all the script/

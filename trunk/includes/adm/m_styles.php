@@ -261,7 +261,7 @@ switch ($_GET['sty_t'])
 			//
 			// Check form key
 			//
-			if(!kleeja_check_form_key('adm_style_order_del_edit') && !isset($_GET['tpl_choose']))
+			if(!kleeja_check_form_key('adm_style_order_del_edit', 3600) && !isset($_GET['tpl_choose']))
 			{
 				kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $redirect_to, 1);
 			}

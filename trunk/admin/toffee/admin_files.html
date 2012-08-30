@@ -42,7 +42,7 @@ jQuery(document).ready(function($){
 
 
 <IF NAME="is_search">
-<h2>{lang.FIND_IP_FILES} ( {nums_rows} ) {lang.FILE}  | <a href="{deletelink}"  onclick="javascript:get_kleeja_link(this.href, '#content', {confirm:true}); return false;">{lang.DELETEALLRES}</a></h2>
+<h2>{lang.FIND_IP_FILES} ( {nums_rows} ) {lang.FILE}  <IF NAME="nums_rows"> | <a href="{deletelink}"  onclick="javascript:get_kleeja_link(this.href, '#content', {confirm:true}); return false;">{lang.DELETEALLRES}</a></IF></h2>
 <ELSE></IF>
 
 <div class="br"></div>

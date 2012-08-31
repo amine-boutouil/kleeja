@@ -36,7 +36,7 @@
 	/* @Orange Shadow --------------- */
 	input[type="text"]:hover, input[type="text"]:focus, input[type="password"]:hover, input[type="password"]:focus,
 	textarea:focus, textarea:hover,	select:hover, select:focus{
-	-moz-box-shadow:0 0 4px #D26900;-webkit-box-shadow:0 0 4px #D26900;-khtml-box-shadow:0 0 4px #D26900;box-shadow:0 0 4px #D26900;}
+	-moz-box-shadow:0 0 4px #62B4E8;-webkit-box-shadow:0 0 4px #62B4E8;-khtml-box-shadow:0 0 4px #62B4E8;box-shadow:0 0 4px #62B4E8;}
 	
 	/* @White Shadow (4) pixel ------------- */
 	.border_radius,	.tabbertab,	ul.tabbernav li a,	#footer a.admin_cp_link,	.data_file .filereport {

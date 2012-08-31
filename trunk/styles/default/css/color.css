@@ -53,8 +53,8 @@
 	input[type="text"], input[type="password"]{border: 1px solid #AFAEAA;border-top-color:#AFAEAA;border-right-color: #D5D5C8;border-bottom-color: #D5D5C8;}
 	input[type="text"]:hover, input[type="password"]:hover, textarea:hover, select:hover{border: 1px solid #888;}
 	select:focus, textarea:focus, input[type="password"]:focus, input[type="text"]:focus ,
-	select.remme:hover,select.remme:focus{background-color:#ffd;border: 1px solid #D26900;}
-	input[type="submit"]:hover  {color:#D74E00;}
+	select.remme:hover,select.remme:focus{background-color:#BED9ED;border: 1px solid #62B4E8;}
+	input[type="submit"]:hover  {color:#62B4E8;}
 
 	/* @Links -------------------- */
 	a:link, a:visited{color: #474747;}
@@ -278,10 +278,10 @@
 /*	--------------------------------------------------
 	17. Template & Profile > profile.html
 	-------------------------------------------------- */
-	#profile  select, #profile  option{background:#FFD;color:black;}
+	#profile  select, #profile  option{background:#BED9ED;color:black;}
 	#profile .boxdata{border:1px solid white;background:white url("../images/bg_tabbertab.png") repeat-x bottom left;}
-	#profile .boxdata .tit{background:#FF9A1D url("../images/bg_tile_tab.png") repeat-x bottom left;color:white;}
-	#profile .boxdata .boxdata_inner input, #profile .boxdata .boxdata_inner select  {color:#FF5502;}
+	#profile .boxdata .tit{background:#8EC1DA url("../images/bg_tile_tab.png") repeat-x bottom left;color:white;}
+	#profile .boxdata .boxdata_inner input, #profile .boxdata .boxdata_inner select  {color:#4B4F52;}
 /* @end */
 
 /*	--------------------------------------------------
@@ -298,7 +298,7 @@
 	.file_cp  a:link {color:#444;}
 	.file_cp a:visited {color:black;}
 	.file_cp  a:hover {color:#D2691E;}
-	.checkall a:link{color:#FF6500;}
+	.checkall a:link{color:#62B4E8;}
 	.ored,.ored:hover,.ored a:link, .ored a:hover, .ored a:visited {background:#FFE1E2;color:red !important;}
 	.ored td,.ored:hover td{border-top-color:#aaa !important;border-bottom-color:white !important;}
 /* @end */

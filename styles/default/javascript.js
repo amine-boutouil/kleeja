@@ -53,14 +53,6 @@
 		document.uploader.submit();
 	}
 	
-	//acceept terms of uploads
-	function accept_terms (sub,ch)
-	{
-		var submit = $(sub);
-		var checker = $(ch);
-		submit.disabled = ( checker.checked ) ?  "" : "disabled";
-	}
-	
 	//show or hide some fields
 	function showhide()
 	{

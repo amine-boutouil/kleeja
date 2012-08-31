@@ -332,4 +332,8 @@ $lang = array_merge($lang, array(
 	'USER_DELETED'				=> 'User has been deleted successfully ...',
 	'USER_ADDED'				=> 'User has been added successfully ...',
 	'DIRECT_FILE_NOTE'			=> 'This is a Direct file. Direct files have no stats.',
+	'IMAGEFOLDER'				=> 'live folder',
+	'IMAGEFOLDEREXTS'			=> 'Extensions of the live links files',
+	'IMAGEFOLDERE'				=> 'Change file name',
+	'CONFIG_KLJ_MENUS_KLIVE'	=> 'Kleeja Live links settings',
 ));

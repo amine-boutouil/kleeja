@@ -755,26 +755,26 @@ function process ()
 				//delete cache of stats !
 				delete_cache('data_stats');
 
-				//inforantion of file 
+				//inforamation of file 
 				$file_info = array('::ID::'=>$this->id_for_url, '::NAME::'=>$this->name_for_url, '::DIR::'=> $folderee, '::FNAME::'=>$realf);
-					
+
 				//show del code link
 				$extra_del = '';
 				if ($config['del_url_file'])
 				{
 					$extra_del	= get_up_tpl_box('del_file_code', array('b_title'=> $lang['URL_F_DEL'], 'b_code_link'=> kleeja_get_link('del', array('::CODE::'=>$code_del))));
 				}
-				
+
 				//show imgs
 				if (in_array(strtolower($this->typet), array('png','gif','jpg','jpeg','tif','tiff', 'bmp')))
 				{
 					//make thumbs
 					$img_html_result = '';
+					list($thmb_dim_w, $thmb_dim_h) = @explode('*', $config['thmb_dims']);
+					$this->createthumb($folderee . '/' . $filname, strtolower($this->typet), $folderee . '/thumbs/' . $filname, $thmb_dim_w, $thmb_dim_h);
+
 					if( ($config['thumbs_imgs'] != 0) && in_array(strtolower($this->typet), array('png','jpg','jpeg','gif', 'bmp')))
-					{
-						list($thmb_dim_w, $thmb_dim_h) = @explode('*', $config['thmb_dims']);
-						$this->createthumb($folderee . '/' . $filname, strtolower($this->typet), $folderee . '/thumbs/' . $filname, $thmb_dim_w, $thmb_dim_h);
-							
+					{		
 						$img_html_result .= get_up_tpl_box('image_thumb', array(
 																				'b_title'	=> $lang['URL_F_THMB'], 
 																				'b_url_link'=> kleeja_get_link('image', $file_info), 
@@ -782,7 +782,7 @@ function process ()
 																				));
 
 					}
-						
+
 					//write on image
 					if( ($config['write_imgs'] != 0) && in_array(strtolower($this->typet), array('gif', 'png', 'jpg', 'jpeg', 'bmp')))
 					{
@@ -800,7 +800,7 @@ function process ()
 						
 					($hook = kleeja_run_hook('saveit_func_img_res_kljuploader')) ? eval($hook) : null; //run hook
 					$this->total++;
-						
+
 					$this->errs[] = array($lang['IMG_DOWNLAODED'] . '<br />' . $img_html_result, 'index_info');
 				}
 				else 
@@ -820,14 +820,14 @@ function process ()
 				}
 
 				($hook = kleeja_run_hook('saveit_func_kljuploader')) ? eval($hook) : null; //run hook
-					
+
 				if (isset($_POST['submitr']))
 				{
 					if(isset($_SESSION['FIILES_NOT_DUPLI']))
 					{
 						unset($_SESSION['FIILES_NOT_DUPLI']);
 					}
-					
+
 					$_SESSION['FIILES_NOT_DUPLI'] = $_FILES;
 				}
 				elseif(isset($_POST['submittxt']))
@@ -839,10 +839,9 @@ function process ()
 					
 					$_SESSION['FIILES_NOT_DUPLI_LINKS'] = $_POST;
 				}
-						
+
 				unset ($filename, $folderee, $sizeee, $typeee);
 				//unset ($_SESSION['NO_UPLOADING_YET']);
-
 	}#save it
 
 	//

@@ -364,7 +364,8 @@ case 'data' :
 	}
 
 break;
-case 'plugins' :
+case 'plugins':
+/*
 	//connect .. for check
 	$SQL = new SSQL($dbserver, $dbuser, $dbpass, $dbname);
 	//install built in plugins
@@ -470,6 +471,7 @@ case 'plugins' :
 		}
 		echo gettpl('plugins_options.html');
 	}
+	*/
 break;
 
 case 'end' :

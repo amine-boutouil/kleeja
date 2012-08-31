@@ -226,6 +226,8 @@ button, input[type='submit'] {
 .team-info .section{
 	height:90px !important;
 	border-bottom:1px dotted #ccc;
+	background-repeat:no-repeat !important;
+	background-position:1% 90% !important;
 }
 
 .team-info .section h3{

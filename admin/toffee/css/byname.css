@@ -222,6 +222,22 @@ button, input[type='submit'] {
 .firstime-button{
 	float:left;
 }
+
+.team-info .section{
+	height:90px !important;
+	border-bottom:1px dotted #ccc;
+}
+
+.team-info .section h3{
+	width:73px !important;
+	height:73px !important;
+	background-repeat:no-repeat;
+	background-size:73px 73px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
 /* end: admin_start.html */
 
 /* start: admin_calls.html*/

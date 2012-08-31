@@ -118,7 +118,7 @@ $(document).ready( function(){
 <div class="br"></div>
 
 <!-- button -->
-<p>
+<p class="submit">
 	<input type="hidden" name="newgroup" value="1" />
 	<button type="submit" id="submit" name="newgroup" class="btn" onclick="javascript:$.facybox.close(); submit_kleeja_data('#add_group_form--change--', '#content', 0); return false;"><span>{lang.SUBMIT}</span></button>
 </p>
@@ -163,7 +163,7 @@ $(document).ready( function(){
 <!-- the big box begin -->
 <div class="big-box group_users">
 <div class="tit_con">
-	<h1>{lang.R_USERS} 
+	<h1><a href="{action}&amp;smt=general" onclick="javascript:get_kleeja_link(this.href); return false;">{lang.R_USERS}</a>
 	<IF NAME="is_search"> &raquo; <IF NAME="current_smt == show_group">{group_name}<ELSE>{lang.SEARCH_USERS}</IF> ( {nums_rows} )</IF>
 	</h1>
 </div>
@@ -250,7 +250,7 @@ $(document).ready( function(){
 <div class="br"></div>
 
 <!-- button -->
-<p>
+<p class="submit">
 	<input type="hidden" name="newuser" value="1" />
 	<button type="submit" id="submit" name="newuser" class="btn" onclick="javascript:submit_kleeja_data('#add_user_form', '#content', 0); return false;"><span>{lang.SUBMIT}</span></button>
 </p>
@@ -366,7 +366,7 @@ $(document).ready( function(){
 <div class="br"></div>
 
 <!-- button -->
-<p>
+<p class="submit">
 	<input type="hidden" name="editacl" value="1" />
 	<button type="submit" id="submit" name="editacl" class="btn" onclick="javascript:submit_kleeja_data('#edit_acl_form', '#content', 0); return false;"><span>{lang.SUBMIT}</span></button>
 </p>
@@ -571,7 +571,7 @@ $(document).ready( function(){
 </LOOP>
 <div class="br"></div>
 <!-- button -->
-<p>
+<p class="submit">
 	<input type="hidden" name="editdata" value="1" />
 	<button type="submit" id="submit" name="editdata" class="btn" onclick="javascript:submit_kleeja_data('#edit_data_form', '#content', 0); return false;"><span>{lang.SUBMIT}</span></button>
 </p>

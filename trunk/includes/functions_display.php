@@ -43,7 +43,7 @@ function Saaheader($title, $outscript = false, $extra = '')
 			 array('name'=>'login', 'title'=>$lang['LOGIN'], 'url'=>$config['mod_writer'] ? 'login.html' : 'ucp.php?go=login', 'show'=>true),
 		5 => array('name'=>'register', 'title'=>$lang['REGISTER'], 'url'=>$config['mod_writer'] ? 'register.html' : 'ucp.php?go=register', 'show'=>!$user_is && $config['register']),
 	);
-	
+
 	$top_menu = array(
 		1 => array('name'=>'index', 'title'=>$lang['INDEX'], 'url'=>$config['siteurl'], 'show'=>true),
 		2 => array('name'=>'rules', 'title'=>$lang['RULES'], 'url'=>$config['mod_writer'] ? 'rules.html' : 'go.php?go=rules', 'show'=>true),

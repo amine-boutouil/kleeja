@@ -256,7 +256,40 @@ function process ()
 		}
 		
 		($hook = kleeja_run_hook('no_folder_check_kljuploader')) ? eval($hook) : null; //run hook
-		
+        
+		// check folder [phpfalcon plugin]
+		if(!file_exists($config['imagefolder'])) 
+		{
+			$jadid	=	mkdir($config['imagefolder']);
+			$jadid2	=	mkdir($config['imagefolder'] . '/thumbs');
+			
+			if($jadid)
+			{
+				$this->errs[] = array($lang['NEW_DIR_CRT'], 'index_info');
+				
+				$htaccess_data = "<Files ~ \"^.*\.(php|php*|cgi|pl|phtml|shtml|sql|asp|aspx)\">\nOrder allow,deny\nDeny from all\n</Files>\n<IfModule mod_php4.c>\nphp_flag engine off\n</IfModule>\n<IfModule mod_php5.c>\nphp_flag engine off\n</IfModule>\nRemoveType .php .php* .phtml .pl .cgi .asp .aspx .sql";
+				$fo		= @fopen($config['imagefolder'] . "/index.html","w");
+				$fo2	= @fopen($config['imagefolder'] . "/thumbs/index.html","w");
+				$fw		= @fwrite($fo,'<a href="http://kleeja.com"><p>KLEEJA ..</p></a>');
+				$fw2	= @fwrite($fo2,'<a href="http://kleeja.com"><p>KLEEJA ..</p></a>');
+				$fi		= @fopen($config['imagefolder'] . "/.htaccess", "w");
+				$fi2	= @fopen($config['imagefolder'] . "/thumbs/.htaccess","w");
+				$fy		= @fwrite($fi, $htaccess_data);
+				$fy2	= @fwrite($fi2, $htaccess_data);
+				$chmod	= @chmod($config['imagefolder'], 0777);
+				$chmod2	= @chmod($config['imagefolder'] . '/thumbs/', 0777);
+
+				if(!$chmod)
+				{
+					$this->errs[] = array($lang['PR_DIR_CRT'], 'index_err');
+				} 
+			}
+			else
+			{
+				$this->errs[] = array($lang['CANT_DIR_CRT'], 'index_err');
+			}
+		}
+        
 		// check folder
 		if(!file_exists($this->folder)) 
 		{
@@ -440,7 +473,26 @@ function process ()
 								//if (!$use_ftp)
 								//{
 										($hook = kleeja_run_hook('move_uploaded_file_kljuploader')) ? eval($hook) : null; //run hook	
-										$file = move_uploaded_file($_FILES['file_' . $i . '_']['tmp_name'], $this->folder . "/" . $this->filename2);
+										
+                                        
+                                        //phpfalcon plugin
+                                        $ex	= explode(',',$config['imagefolderexts']);
+                                        if (in_array(strtolower($this->typet), $ex))
+                                        {
+                                            if($config['imagefoldere'])
+                                            {
+                                                $zaid = time();
+                                                $this->filename2 = $this->filename . $zaid . $i . '.' . $this->typet;
+                                            }
+                                            
+                                            $this->folder = $config['imagefolder'];
+                                        }
+                                        else
+                                        {
+                                            $this->folder = $config['foldername']; //default folder (fix bug #435)
+                                        }
+                                        
+                                        $file = move_uploaded_file($_FILES['file_' . $i . '_']['tmp_name'], $this->folder . "/" . $this->filename2);
 								/*}
 								else // use ftp account
 								{
@@ -568,6 +620,23 @@ function process ()
 							
 							($hook = kleeja_run_hook('start_upload_wut2_kljuploader')) ? eval($hook) : null; //run hook
 							
+                            //phpfalcon plugin
+                            $ex	= explode(',',$config['imagefolderexts']);
+                            if (in_array(strtolower($this->typet), $ex))
+                            {
+                                if($config['imagefoldere'])
+                                {
+                                    $zaid = time();
+                                    $this->filename2 = $this->filename . $zaid . $i . '.' . $this->typet;
+                                }
+                                
+                                $this->folder = $config['imagefolder'];
+                            }
+                            else
+                            {
+                                $this->folder = $config['foldername']; //default folder (fix bug #435)
+                            }
+                            
 							//
 							//end err .. start upload from url
 							//

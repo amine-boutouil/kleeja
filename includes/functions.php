@@ -1123,9 +1123,14 @@ function klj_clean_old_files($from = 0)
 		$ids = array();
 		$ex_ids =  array();
 		//$ex_types = explode(',', $config['livexts']);
+        
 
 		($hook = kleeja_run_hook('beforewhile_klj_clean_old_files_func')) ? eval($hook) : null; //run hook
 		
+        
+        //phpfalcon plugin
+        $exlive_types = explode(',', $config['imagefolderexts']);
+        
 		//delete files 
 		while($row=$SQL->fetch_array($result))
 		{
@@ -1151,8 +1156,19 @@ function klj_clean_old_files($from = 0)
 			//}
 
 			//your exepctions
-			($hook = kleeja_run_hook('while_klj_clean_old_files_func')) ? eval($hook) : null; //run hook
-
+            ($hook = kleeja_run_hook('while_klj_clean_old_files_func')) ? eval($hook) : null; //run hook
+            
+            
+            //phpfalcon plugin
+            if(in_array($row['type'], $exlive_types))
+            {
+                $ex_ids[] = $row['id'];
+                if($real_num != $num_of_files_to_delete)
+                {
+                    $continue = false;
+                }
+            }
+            
 			if($continue)
 			{
 				//delete from folder ..

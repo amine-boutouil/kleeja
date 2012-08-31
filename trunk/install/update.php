@@ -213,11 +213,13 @@ case 'update_now':
 
 			if($complete_upate or defined('DEV_STAGE'))
 			{
+				/*
 				include PATH . 'includes/plugins.php';
 				$plg = new kplugins;
 				$XML = new kxml;
 
 				//check plugins
+				
 				$pl_path = "includes/plugins";
 				$dh = opendir($pl_path);
 				while (($file = readdir($dh)) !== false)
@@ -244,6 +246,7 @@ case 'update_now':
 
 				$plg->atend();
 				delete_cache(null, true);
+				*/
 			}
 
 			echo gettpl('update_end.html');

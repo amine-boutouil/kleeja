@@ -34,8 +34,8 @@
 	-------------------------------------------------- */
 	body {color:#474747;}
 	h1, h2, h3, h4, h5, h6 { color: #333;}
-	h1 { color:#FF6A15;}
-	h6 { color:#FF6A15;}
+	h1 { color:#8EC1DA;}
+	h6 { color:#8EC1DA;}
 	strong {color: #FF5502;}
 	small {color: #444;; }
 	hr {border:solid #ddd; }
@@ -100,8 +100,8 @@
 	h1.title {background:url("../images/headline_bg.png") repeat-x top;}
 	
 	/* verification code */
-	.safe_code {	border:1px solid #F3C1A3;background:#F9F9F0 url("../images/saf3_code01.gif") no-repeat 0% 50%;}
-	.safe_code p {color:#FF5502;}
+	.safe_code {	border:1px solid #BED9ED;background:#F9F9F0 url("../images/saf3_code01.gif") no-repeat 0% 50%;}
+	.safe_code p {color:#62B4E8;}
 	p.explain {color:#666;}
 
 /* @end */
@@ -146,8 +146,8 @@
 	/* @Top Navigation -------------------- */       
 	.top_nav {background:url("../images/menu-bg.gif") repeat-x top left;}
 	.top_nav .menu li a {color: #444;}
-	.top_nav .menu li a:hover {color:#F68618;background:url("../images/hover.png") repeat-x top left;}
-	.top_nav .menu li a.current {color:white;background:url("../images/current-bg.gif") top left repeat-x;}
+	.top_nav .menu li a:hover {color:#8EC1DA;background:url("../images/hover.png") repeat-x top left;}
+	.top_nav .menu li a.current {color:#4B4F52;background:url("../images/current-bg.gif") top left repeat-x;}
 	/* @right menu -------------------- */
 	#right_menu .list .imgtop{background:url("../images/menu-right-top.gif") no-repeat;color:black;}
 	#right_menu .list .imgbottom{background:url("../images/menu_right_bottom.gif") no-repeat;color: #F1F7E1;border-top: 1px solid #666;}
@@ -163,7 +163,7 @@
 	.url {color:#F45E13;}
 	.inum {color:#888;}
 	input.input_num {background:white;border: 1px solid #B3B9C4;outline:1px solid #ccc;}
-	.waitloading{color:#FF6A15;}
+	.waitloading{color:#8EC1DA;}
 
 	/*	Tabs -------------------- */
 	.tabberlive .tabbertab {background:white url("../images/bg_tabbertab.png") repeat-x bottom left;border:1px solid #ccc;border-top:none;}
@@ -172,7 +172,7 @@
 	ul.tabbernav li a{background:#FFF3E5;border: 1px solid #ccc;border-bottom: none;}
 	ul.tabbernav li a:link ,ul.tabbernav li a:visited {color:#C8740D;}
 	ul.tabbernav li a:hover{color:black;background:#CAA397 url("../images/bg_tabbernav.gif") repeat-x;border-color: #ccc;}
-	ul.tabbernav li.tabberactive a{color:#FF6A15;background:white url("../images/bg_tabbernav.gif") repeat-x center;border-bottom: 1px solid white;}
+	ul.tabbernav li.tabberactive a{color:#8EC1DA;background:white url("../images/bg_tabbernav.gif") repeat-x center;border-bottom: 1px solid white;}
 
 	/*	ONLINE -------------------- */
 	.onlineall, .onlinevisitor, 
@@ -200,7 +200,7 @@
 	-------------------------------------------------- */
 	.stats  {color:#333;background: url("../images/stats.gif") no-repeat 2% 40%;}
 	.stats  ul li {background:transparent url("../images/list_stat.gif") no-repeat right center;}
-	.st i{background:white;color: #FF5502;border-top:1px solid #ECCEBB;border-bottom:1px solid #ECCEBB;}
+	.st i{background:white;color: #62B4E8;border-top:1px solid #BED9ED;border-bottom:1px solid #BED9ED;}
 /* @end */
 
 /*	--------------------------------------------------
@@ -219,19 +219,19 @@
 	#footer .admin_cp_link span:hover {color:#111;}
 	#footer .footer_stats, #footer .footer_stats strong {color:#777;}
 	#footer a:link, #footer a:active, #footer a:visited{color:#474747;}
-	#footer a:hover{color:#FF6A15;}
+	#footer a:hover{color:#8EC1DA;}
 /* @end */
 
 /*	--------------------------------------------------
 	11. Template & login > login.html
 	-------------------------------------------------- */
 	.login {background:transparent url("../images/login.gif") no-repeat 0% 50%;}
-	.title_login {background:#F7EDE7 url("../images/title_login.gif") no-repeat 99% 50%;color:#FF6A15;}
+	.title_login {background:#F7EDE7 url("../images/title_login.gif") no-repeat 99% 50%;color:#8EC1DA;}
 	input.username{background:white url("../images/username.gif") no-repeat 2px 2px;}
 	input.password{background:white url("../images/password.gif") no-repeat 2px 2px;}
 	.forget_pass {background:white url("../images/forget_pass.png") no-repeat 96% 50%;}
 	.forget_pass  a{color:#444;}
-	.forget_pass a:hover {color:#FF6A15;}
+	.forget_pass a:hover {color:#8EC1DA;}
 /* @end */
 
 /*	--------------------------------------------------
@@ -241,7 +241,7 @@
 	#boxfileuser .public {background:#8C8C8C url("../images/bg_tile.gif") repeat-x bottom;color:white;border-top:1px dashed #EEE;border-bottom:1px dashed #EEE;}
 	#boxfileuser .uname, #boxfileuser .nums{color:#FF6600;}
 	#filecplink fieldset{border: 1px solid #aaa;}
-	#filecplink  input.link_user {color:#FF6A15;}
+	#filecplink  input.link_user {color:#8EC1DA;}
 	#filecplink legend.copylink {color:black;}
 	.xthumbs {background:#E6E6E6 url("../images/bg_user_box.gif") repeat-x top left;}
 
@@ -306,7 +306,7 @@
 /*	--------------------------------------------------
 	19. Template & List of allowed file upload > guide.html
 	-------------------------------------------------- */
-	.guide_right_th, .guide_left_th{color:white;border: 1px solid #D54D10;}
+	.guide_right_th, .guide_left_th{color:white;border: 1px solid #62B4E8;}
 	.guide_right_th  {background:#767676 url("../images/bg_tile.gif") repeat-x bottom right;border-color:#727272;}
 	.guide_left_th {background:#FF9A1D url("../images/bg_tile_tab.png") repeat-x bottom left;}
 	.guide_right_box{background:white url("../images/bg_box_1.gif") repeat-x top left;border-right:1px solid white;border-left:1px solid white;}

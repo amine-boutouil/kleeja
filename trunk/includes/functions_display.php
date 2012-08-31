@@ -560,7 +560,40 @@ function kleeja_get_link ($pid, $extra = array())
 	}
 
 	($hook = kleeja_run_hook('kleeja_get_link_func')) ? eval($hook) : null; //run hook
+    
+    //phpfalcon plugin
+   	if(isset($extra['::NAME::']))
+	{
+		if($config['mod_writer'] && !empty($extra['::NAME::']) && $config['id_form'] != 'direct')
+		{
+			$ext = @explode("-", $extra['::NAME::']);
+		}
+		else
+		{
+			$ext = @explode(".", $extra['::NAME::']);
+		}
 
+		
+		//$ext = $ext[sizeof($ext)-1];
+		$ex	= explode(',',$config['imagefolderexts']);
+		
+		if(in_array(strtolower(array_pop($ext)), $ex))
+		{
+			
+			if($config['mod_writer'] && !empty($extra['::NAME::']) && $config['id_form'] != 'direct')
+			{
+				$extra['::NAME::'] = $extra['::NAME::'] = preg_replace('!-([^-]+)$!', ".$1", $extra['::NAME::']);	
+			}
+			
+			$links = array_merge($links, array(
+						'thumb' => '::DIR::/thumbs/::NAME::',
+						'image' => '::DIR::/::NAME::',
+						'file'	=> '::DIR::/::NAME::',
+						));
+		}
+	}
+    
+    
 	$return = $config['siteurl'] . str_replace(array_keys($extra), array_values($extra), $links[$pid]);
 	
 	($hook = kleeja_run_hook('kleeja_get_link_func_rerun')) ? eval($hook) : null; //run hook

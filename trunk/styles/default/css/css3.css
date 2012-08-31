@@ -17,7 +17,7 @@
 	--------------------------------------- */
 	/* @White text shadow ------- */
 	body {text-shadow: 0 0 2px #fff;}
-	h1 { text-shadow: 0px 0px 2px #FFFF80;}
+	h1 { text-shadow: 0px 0px 2px #BED9ED;}
 	/* @Dark gray text shadow ------- */
 	.top_nav .menu li a.current, .guide_right_th, .guide_left_th, .tit , .file_cp thead th ,
 	#right_menu .list a,	#right_menu .list a.current,	#footer .admin_cp_link span,	#boxfileuser .public {
@@ -28,7 +28,7 @@
 	#Box Shadow
 	--------------------------------------- */	
 	/* @Orange Light Shadow --------------- */
-	input, textarea, select{-moz-box-shadow: 0px 0px 8px #F3CFB3;-webkit-box-shadow: 0px 0px 8px #F3CFB3;-khtml-box-shadow: 0px 0px 8px #F3CFB3;box-shadow: 0px 0px 8px #F3CFB3;}
+	input, textarea, select{-moz-box-shadow: 0px 0px 8px #62B4E8;-webkit-box-shadow: 0px 0px 8px #62B4E8;-khtml-box-shadow: 0px 0px 8px #62B4E8;box-shadow: 0px 0px 8px #62B4E8;}
 	
 	/* @Orange Light Shadow --------------- */
 	input[type="file"]{-moz-box-shadow: none;-webkit-box-shadow: none;-khtml-box-shadow: none;box-shadow:none;}

@@ -40,6 +40,9 @@
 	-[ ] convert searches to use filters and show last 10 ones.
 -[ ] files of deleted user shows as 'deleted' user or 'guest' 
 -[x] increase csrf time of some time-wanted forms
+-[ ] remove [remember me ... choices ] and make it simple 
+-[ ] fix total size bar in acp
+-[ ] add last-visit 'images' or 'files' page ..	
 
 NOTE NOTE NOTE :: 
 use this function to extend the group system all the script/

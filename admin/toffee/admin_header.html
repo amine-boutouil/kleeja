@@ -32,6 +32,8 @@ var go_to = '{go_to}';
 <script type="text/javascript">
 <!--//
 jQuery(document).ready(function($){
+if ("onhashchange" in window){
+window.onhashchange = function () {
 	$.pop();
 	$('a[title]').tipsy({gravity: $.fn.tipsy.autoNS});
 	$('a[rel*=facebox]', 'a[rel*=facybox]').facybox();
@@ -41,6 +43,7 @@ jQuery(document).ready(function($){
 	where_are_we = hash.match(/cp\=([0-9a-z_]+)/);
 	if(!where_are_we){
 		where_are_we = 'index';
+		hash = 'cp=start';
 	}else{
 		where_are_we = where_are_we[1];
 	}
@@ -59,12 +62,16 @@ jQuery(document).ready(function($){
 
 	console.debug('div_id='+div_id);
 	console.debug('gomenu_id='+gomenu_id);	
-	//if(hash != '')
-	//{
+	if(hash != '')
+	{
 		//alert(hash)
 	get_kleeja_link('./?' + hash, '#content', {'current_id':div_id, 'current_class':'link_current', 'gomenu_id':gomenu_id});
-	//}
-	
+	}
+
+	//if ("onhashchange" in window){ // does the browser support the hashchange event?
+		
+		//	get_kleeja_link('./?' + , '#content', {'current_id':div_id, 'current_class':'link_current', 'gomenu_id':gomenu_id});
+    }}
 });
 
 function get_kleeja_link(URL, ID, p)

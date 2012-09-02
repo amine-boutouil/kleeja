@@ -12,7 +12,7 @@
 <link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/global.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/byname.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/facybox.css" />
-<link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}js/tipsy/tipsy.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/tiptip.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/pop.css" />
 <IF NAME="{lang.DIR}==ltr"><link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/ltr.css" /></IF>	
 <IS_BROWSER="ie6"><link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/ie6.css" /></IS_BROWSER>
@@ -27,17 +27,17 @@ var go_to = '{go_to}';
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.min.js"></script>
 <!--script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.ui.min.js"></script-->
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}js/facybox.js"></script>
-<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/tipsy/tipsy.js"></script>
+<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.tiptip.js"></script>
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.pop.js"></script>
 <script type="text/javascript">
 <!--//
 jQuery(document).ready(function($){
-if ("onhashchange" in window){
-window.onhashchange = function () {
 	$.pop();
-	$('a[title]').tipsy({gravity: $.fn.tipsy.autoNS});
 	$('a[rel*=facebox]', 'a[rel*=facybox]').facybox();
 
+if ("onhashchange" in window){
+window.onhashchange = function () {
+	$('a[rel*=facebox]', 'a[rel*=facybox]').facybox();
 	//for # in address bar
 	hash = window.location.hash.replace('#!', '');
 	where_are_we = hash.match(/cp\=([0-9a-z_]+)/);

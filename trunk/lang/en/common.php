@@ -237,6 +237,7 @@ $lang = array_merge($lang, array(
 	'CHECK_ALL'	 				=> 'Check all',
 	'BROSWERF'					=> 'User files',
 	'REMME'						=> 'Remmeber me',
+	'REMME_EXP'					=> 'Check this if your device isn\'t shared with others',
 	'HOUR'						=> 'an hour',
 	'5HOURS'					=> '5 hours',
 	'DAY'						=> 'a day',

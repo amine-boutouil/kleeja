@@ -16,34 +16,24 @@
 	</IF>
 
 	<!-- form login  --> 
-	<form action="{action}" method="post">
+	<form action="{action}" method="post" name="login_form">
 		<div class="login">
 			<div class="title_login">{lang.USER_LOGIN}</div>
 			<div class="box_form_login">
 				<label>{lang.USERNAME} :</label>
-				<input class="username" type="text" name="lname" value="{t_lname}" size="30" tabindex="1" />
+				<input class="username" type="text" id="lname" name="lname" value="{t_lname}" size="30" tabindex="1" />
 				<div class="clr"></div>
 				<label>{lang.PASSWORD} :</label>
 				<input class="password" type="password" name="lpass" value="{t_lpass}" size="30" tabindex="2" />
 				<div class="clr"></div>
-				<label>{lang.REMME} :</label>
-				<select class="remme" name="remme" tabindex="3">
-					<option value="3600">{lang.HOUR}</option>
-					<option value="18000">{lang.5HOURS}</option>
-					<option value="864000" selected="selected">{lang.DAY}</option>
-					<option value="6048000">{lang.WEEK}</option>
-					<option value="25920000">{lang.MONTH}</option>
-					<option value="31536000">{lang.YEAR}</option>
-				</select>
+				<br />
+				<label>{lang.REMME} :<input type="checkbox" name="remme" value="31536000" checked="checked" /> <p class="explain">({lang.REMME_EXP})</p></label> 
 					
-				<div class="clr"></div><br />
-				
-				<input type="submit" name="submit" value="{lang.LOGIN}" tabindex="4" />
-				
+				<div class="clr"></div><br />				
+				<input type="submit" name="submit" value="{lang.LOGIN}" tabindex="3" />
+
 				<div class="forget_pass"><a tabindex="5" href="{forget_pass_link}">{lang.LOSS_PASSWORD}</a></div>
-				
 				{H_FORM_KEYS}	
-			
 			</div>		
 		</div>
 	</form>

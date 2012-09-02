@@ -2,19 +2,18 @@
 <!--
 jQuery(document).ready(function($){
 	// preload images
-	$('a[rel*=facebox]').facybox('', 'img_facybox_css');
+	$('a[rel*=facebox]').facybox();
 	//$.preload('#Kload img', {placeholder:'{STYLE_PATH_ADMIN}images/ajax-loader-small.gif',notFound:'{STYLE_PATH_ADMIN}images/failerror.jpg',	enforceCache: true,	threshold: 2 });
 
 	$("img.mask").hover(function(){$(this).stop().animate({'opacity': '0'}, 'fast');},function() {$(this).stop().animate({'opacity': '1'}, 'fast');});
 	
 	
-	$('.tip').tipsy({
-		title: function() { return $(this).children('.ktip').html() },
-		html: true,
-		fade:true,
-		gravity: $.fn.tipsy.autoNS
-		//gravity: $.fn.tipsy.autoNS
-	   });
+	$(".tip").tipTip({
+			maxWidth: "auto",
+			edgeOffset: 10,
+			//content: function() { return $(this).children('.ktip').html() },
+			delay:100
+			});
 
 	//Navigate to pages by arrows
 	$(document).keydown(function(e) {
@@ -106,17 +105,20 @@ jQuery(document).ready(function($){
 <div class="xthumbs">
 	<LOOP NAME="arr">
 	{{tdnum}}
-	<li id="su[{{id}}]" class="tip">
-		<a href="{{href}}" rel="facebox">
-			<div id="Kload"><img src="{{thumb_link}}" alt=""  /></div>
-		</a>
-		<div class="ktip" style="display: none;">
+	<li id="su[{{id}}]" class="tip" title="
 			<span>{lang.FILENAME} : </span>{{name}}<br />
 			<span>{lang.FILEUPS} : </span> {{ups}}<br />
 			<span>{lang.FILESIZE} : </span> {{size}}<br />
 			<span>{lang.FILEDATE} : </span> {{time}}<br />
-			<span>{lang.BY} : </span> <span id="user_{{id}}">{{user}}</span><br />
-			<span>{lang.IP} : </span> <span id="ip_{{id}}">{{ip}}</span>
+			<span>{lang.BY} : </span> {{user}}<br />
+			<span>{lang.IP} : </span> {{ip}}
+	">
+		<a href="{{href}}" rel="facebox">
+			<div id="Kload"><img src="{{thumb_link}}" alt=""  /></div>
+		</a>
+		<div class="ktip" style="display: none;">
+			 <span id="user_{{id}}">{{user}}</span>
+			  <span id="ip_{{id}}">{{ip}}</span>
 		</div>
 		<p class="kcheck"><input id="del_{{id}}" name="del_{{id}}" type="checkbox" value="{{id}}" rel="_del" /></p>
 	</li>

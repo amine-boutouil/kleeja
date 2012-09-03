@@ -107,14 +107,12 @@ jQuery(document).ready(function($){
 <div class="xthumbs">
 	<LOOP NAME="arr">
 	{{tdnum}}
-	<li id="su[{{id}}]" class="tip" title="
-			<span>{lang.FILENAME} : </span>{{name}}<br />
+	<li id="su[{{id}}]" class="tip" title="<span>{lang.FILENAME} : </span>{{name}}<br />
 			<span>{lang.FILEUPS} : </span> {{ups}}<br />
 			<span>{lang.FILESIZE} : </span> {{size}}<br />
 			<span>{lang.FILEDATE} : </span> {{time}}<br />
 			<span>{lang.BY} : </span> {{user}}<br />
-			<span>{lang.IP} : </span> {{ip}}
-	">
+			<span>{lang.IP} : </span> {{ip}}">
 		<a href="{{href}}" rel="facebox" class="pload">
 			<div class="Kload"><img src="{{thumb_link}}" alt=""  /></div>
 		</a>
@@ -151,6 +149,8 @@ jQuery(document).ready(function($){
 	<input type="hidden" name="submit" value="1" />
 	<button type="submit" name="submit" class="btn" onclick="javascript:submit_kleeja_data('#imgs_form', '#content', 1); return false;"><span>{lang.DEL_SELECTED}</span></button>
 </p>
+<div class="br"></div>
+<div class="br"></div>
 </IF>
 	
 {H_FORM_KEYS}

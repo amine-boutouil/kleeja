@@ -1,3 +1,4 @@
+<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.waitforimages.js"></script>
 <script type="text/javascript">
 <!--
 $.fn.preload = function() {
@@ -7,7 +8,7 @@ $.fn.preload = function() {
     });
 }
 
-jQuery(window).load(function(){
+$('.xthumbs').waitForImages(function(){
 	$('#imgs_loading').fadeOut(2000);
 	$('.second-action').css('display', 'none');
 });

@@ -32,12 +32,41 @@ var go_to = '{go_to}';
 <script type="text/javascript">
 <!--//
 jQuery(document).ready(function($){
-	$.pop();
-	$('a[rel*=facebox]', 'a[rel*=facybox]').facybox();
+$.pop();
+$('a[rel*=facebox]', 'a[rel*=facybox]').facybox();
 
-if ("onhashchange" in window){
+if(window.location.hash.indexOf("#!") != -1){
+	hash = window.location.hash.replace('#!', '');
+	where_are_we = hash.match(/cp\=([0-9a-z_]+)/);
+	if(!where_are_we){
+		where_are_we = 'index';
+		hash = 'cp=start';
+	}else{
+		where_are_we = where_are_we[1];
+	}
+
+	console.debug('where_are_we='+where_are_we);
+	//for go menu
+	if(where_are_we != 'php_info'){
+		div_id = $('div[goto='+ where_are_we +']').attr('id');
+		gomenu_id = $("div[goto='"+ where_are_we +"']").attr('gomenu_id');
+		if(gomenu_id){
+			gomenu_id = gomenu_id.replace(/^\s+|\s+$/g,"");
+		}
+	}else if(where_are_we == 'php_info'){
+		div_id = 'menu_item1'; gomenu_id = '1';
+	}
+
+	console.debug('div_id='+div_id);
+	console.debug('gomenu_id='+gomenu_id);	
+	if(hash != '')
+	{
+		//alert(hash)
+		get_kleeja_link('./?' + hash, '#content', {'current_id':div_id, 'current_class':'link_current', 'gomenu_id':gomenu_id});
+	}
+}
+
 window.onhashchange = function () {
-	$('a[rel*=facebox]', 'a[rel*=facybox]').facybox();
 	//for # in address bar
 	hash = window.location.hash.replace('#!', '');
 	where_are_we = hash.match(/cp\=([0-9a-z_]+)/);
@@ -71,7 +100,7 @@ window.onhashchange = function () {
 	//if ("onhashchange" in window){ // does the browser support the hashchange event?
 		
 		//	get_kleeja_link('./?' + , '#content', {'current_id':div_id, 'current_class':'link_current', 'gomenu_id':gomenu_id});
-    }}
+    }
 });
 
 function get_kleeja_link(URL, ID, p)
@@ -105,9 +134,6 @@ function get_kleeja_link(URL, ID, p)
 	}
 
 	$("#sign_ajax").show();
-
-	$('.tip').remove();
-	$('.tip').tipsy('hide');
 
 	$.ajax({
 		url: URL.replace('&amp;', '&') + '&_ajax_=1',
@@ -332,7 +358,7 @@ function uncheckAll_exts(form, id, _do_c_) {
                 <ul>
                     <li><a href="http://www.moffed.com" target="_blank">{lang.SUPPORT_MOFFED}</a></li>
                     <li><a href="{config.siteurl}">{lang.RETURN_HOME}</a></li>
-                    <li><a href="./?cp=b_lgoutcp&amp;{GET_FORM_KEY_GLOBAL}" onclick="javascript:return confirm_from();" >{lang.R_LGOUTCP}</a></li>
+                    <li><a href="./?cp=b_lgoutcp&amp;{GET_FORM_KEY_GLOBAL}#" onclick="javascript:return confirm_from();" >{lang.R_LGOUTCP}</a></li>
                 </ul>
             </div>
 		</div>
@@ -345,7 +371,7 @@ function uncheckAll_exts(form, id, _do_c_) {
 			</div>
 			<LOOP NAME="adm_extensions_menu">
 			<div class="({{current}}?link_current:) link_menu" id="menu_item{{i}}" gomenu_id="{{i}}" goto="{{goto}}">
-				<a title="{{title}}" href="{{link}}" onclick="javascript:get_kleeja_link(this.href, '#content', {'current_id':'menu_item{{i}}', 'current_class':'link_current', 'gomenu_id':{{i}}<IF LOOP="confirm">, confirm:true</IF>}); return false;"><img src="{{icon}}" alt="{{title}}" style="margin:0 8px;vertical-align:middle;" /><span>{{title}}</span>{{kbubble}}</a>
+				<a title="{{title}}" href="{{link}}#!cp={{goto}}" onclick="javascript:get_kleeja_link(this.href.replace('#!cp={{goto}}', ''), '#content', {'current_id':'menu_item{{i}}', 'current_class':'link_current', 'gomenu_id':{{i}}<IF LOOP="confirm">, confirm:true</IF>}); return false;"><img src="{{icon}}" alt="{{title}}" style="margin:0 8px;vertical-align:middle;" /><span>{{title}}</span>{{kbubble}}</a>
 				<div id="menu_left"><ul class="go_menu" id="gomenu{{i}}"></ul></div>
 			</div>
 			</LOOP>

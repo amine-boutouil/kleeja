@@ -1,13 +1,15 @@
 <script type="text/javascript">
 <!--
-jQuery(document).ready(function($){
-	// preload images
-	$('a[rel*=facebox]').facybox();
-	//$.preload('#Kload img', {placeholder:'{STYLE_PATH_ADMIN}images/ajax-loader-small.gif',notFound:'{STYLE_PATH_ADMIN}images/failerror.jpg',	enforceCache: true,	threshold: 2 });
+$.fn.preload = function() {
+    this.each(function(){
+        //$('<img/>')[0].src = $(this).attr('src');
+        $('<img />').attr('src', $(this).attr('href')).appendTo('#content').css('display','none');
+    });
+}
 
-	$("img.mask").hover(function(){$(this).stop().animate({'opacity': '0'}, 'fast');},function() {$(this).stop().animate({'opacity': '1'}, 'fast');});
-	
-	
+jQuery(document).ready(function($){
+	$('a[rel*=facebox]').facybox();
+	$('.pload').preload();	
 	$(".tip").tipTip({
 			maxWidth: "auto",
 			edgeOffset: 10,
@@ -113,8 +115,8 @@ jQuery(document).ready(function($){
 			<span>{lang.BY} : </span> {{user}}<br />
 			<span>{lang.IP} : </span> {{ip}}
 	">
-		<a href="{{href}}" rel="facebox">
-			<div id="Kload"><img src="{{thumb_link}}" alt=""  /></div>
+		<a href="{{href}}" rel="facebox" class="pload">
+			<div class="Kload"><img src="{{thumb_link}}" alt=""  /></div>
 		</a>
 		<div class="ktip" style="display: none;">
 			 <span id="user_{{id}}">{{user}}</span>

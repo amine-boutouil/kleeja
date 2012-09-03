@@ -834,14 +834,14 @@ function echo_ajax($code_number, $content, $menu = '')
 * show date in a human-readable-text
 */
 define('TIME_FORMAT', 'd-m-Y h:i a'); # to be moved to configs later
-function kleeja_date($time, $formmated = false, $format = false)
+function kleeja_date($time, $human_time = true, $format = false)
 {
 	global $lang, $config;
 
-	if(time() - $time > (86400 * 9) || $format || $formatted)
+	if((time() - $time > (86400 * 9)) || $format || !$human_time)
 	{
 		$format = !$format ? TIME_FORMAT : $format;
-		$time	= $time + ((int)$config['time_zone']*60*60);
+		$time	= $time + ((int) $config['time_zone']*60*60);
 		return str_replace(array('am', 'pm'), array($lang['TIME_AM'], $lang['TIME_PM']), gmdate($format, $time));
 	}
 

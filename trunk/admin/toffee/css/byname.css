@@ -483,7 +483,11 @@ background-color:#E3F2FF;
 /* thumbnail Table */
 .xthumbs ul{width:100%;float:right;margin:3px auto;}
 .xthumbs li {float:right;cursor:pointer;padding:0;margin:0 0 0 3px;}
-#Kload img{width:124px !important;height:124px !important;z-index:700;overflow:hidden}
+.Kload img{width:124px !important;height:124px !important;z-index:700;overflow:hidden;
+	border:1px solid #ccc;
+	padding:3px;
+	background:url(../images/failerror.jpg) no-repeat center center !important;
+}
 #boxs img.mask {position:absolute;top:0;left:0;z-index: 701;}
 #boxs img.expand {position:absolute;top:0;left:0;}
 #boxs img.expand:hover {background:url(../images/expand.png) no-repeat center center !important;}
@@ -647,3 +651,6 @@ content:":	";
 	height:20px;
 	background:transparent url(../images/arrow_rtl.png) 100% 25% no-repeat !important;
 }
+
+/*admin_img*/
+

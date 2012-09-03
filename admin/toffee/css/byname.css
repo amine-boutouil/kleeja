@@ -486,7 +486,7 @@ background-color:#E3F2FF;
 .Kload img{width:124px !important;height:124px !important;z-index:700;overflow:hidden;
 	border:1px solid #ccc;
 	padding:3px;
-	background:url(../images/failerror.jpg) no-repeat center center !important;
+	background:url(../images/img_container.png) no-repeat center center !important;
 }
 
 .kcheck {bottom:1px;right:0;z-index:703;padding:0 !important;margin:1px 0 !important; background-color:#FAFAFA;}

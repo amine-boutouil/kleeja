@@ -43,6 +43,7 @@
 -[ ] remove [remember me ... choices ] and make it simple 
 -[ ] fix total size bar in acp
 -[ ] add last-visit 'images' or 'files' page ..	
+-[ ] check live plugin codes ... make it ok ..
 
 NOTE NOTE NOTE :: 
 use this function to extend the group system all the script/

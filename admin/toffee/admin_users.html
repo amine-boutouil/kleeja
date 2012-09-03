@@ -21,8 +21,17 @@ $(document).ready( function(){
 <div class="big-box">
 <div class="tit_con">
 	<h1>{lang.R_GROUPS}</h1>
-	<div class="second-action tit_groups_icon" onclick="javascript:jQuery.facybox({div:'#group_add_new'}); return false;">{lang.ADD_NEW_GROUP}</div>
+	<IF NAME="user_not_normal"><ELSE><div class="second-action tit_groups_icon" onclick="javascript:jQuery.facybox({div:'#group_add_new'}); return false;">{lang.ADD_NEW_GROUP}</div></IF>
 </div>
+
+<!-- if not normal user system, tell him --> 
+<IF NAME="user_not_normal">
+<div id="system-message">
+	<div class="info">{lang.USERS_NOT_NORMAL_SYS}</div>
+</div>
+</IF>
+
+<div class="br"></div>
 
 <div class="clear"></div>
 <!-- start data table -->
@@ -34,7 +43,7 @@ $(document).ready( function(){
 <div class="groups_list">
 	<LOOP NAME="e_groups">
 	<div class="group_line">
-		<div class="r1">{{name}} <IF LOOP="is_default"><img src="{STYLE_PATH_ADMIN}images/default_group.png" alt="{lang.GROUP_IS_DEFAULT}" title="{lang.GROUP_IS_DEFAULT}" /></IF></div>
+		<div class="r1">{{name}} <IF NAME="user_not_normal"><ELSE><IF LOOP="is_default"><img src="{STYLE_PATH_ADMIN}images/default_group.png" alt="{lang.GROUP_IS_DEFAULT}" title="{lang.GROUP_IS_DEFAULT}" /></IF></IF></div>
 		<div class="r2">
 			<a href="{action}&amp;smt=group_data&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.EDIT_DATA}">
 				<img  src="{STYLE_PATH_ADMIN}images/data_edit.png" alt="{lang.EDIT_DATA}" />
@@ -45,9 +54,9 @@ $(document).ready( function(){
 			<a href="{action}&amp;smt=group_exts&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.R_EXTS}">
 				<img  src="{STYLE_PATH_ADMIN}images/exts_edit.png" alt="{lang.R_EXTS}" />
 			</a>
-			<a href="{action}&amp;smt=show_group&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.USERS}">
+			<IF NAME="user_not_normal"><ELSE><a href="{action}&amp;smt=show_group&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.USERS}">
 				<img  src="{STYLE_PATH_ADMIN}images/users_show.png" alt="{lang.USERS}" />
-			</a>
+			</a></IF>
 		</div>
 	<div class="clear"></div>
 	</div>
@@ -544,6 +553,7 @@ $(document).ready( function(){
 <!-- the big box begin -->
 <div class="big-box groups_edit">
 <form method="post" action="{action}" id="edit_data_form">
+<IF NAME="user_not_normal"><ELSE>
 <div class="section">
 	<h3><label for="group_name">{lang.GROUP_NAME}</label></h3>
 	<div class="box">
@@ -555,6 +565,7 @@ $(document).ready( function(){
 	</div>
 </div>
 <div class="br"></div>
+
 <div class="section">
 	<h3><label for="group_name">{lang.GROUP_IS_DEFAULT}</label></h3>
 	<div class="box">
@@ -565,6 +576,7 @@ $(document).ready( function(){
 <div class="br"></div>
 
 <hr />
+</IF>
 
 <LOOP NAME="data">
 	{{option}}

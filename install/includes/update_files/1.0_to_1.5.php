@@ -24,7 +24,7 @@ if(($klive_id = kleeja_plugin_exists('kleeja-live-folder-name')))
 else
 {
 	$update_sqls['klive1'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`, `type`, `plg_id`, `dynamic`) VALUES ('imagefolder', 'uploads', '<input type=\"text\" id=\"imagefolder\" name=\"imagefolder\" value=\"{con.imagefolder}\" size=\"40\">', '10', 'KLIVE', '0', '0');";
-	$update_sqls['klive2'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`, `type`, `plg_id`, `dynamic`) VALUES ('imagefolderexts', 'png,gif,jpg,jpeg,tif,tiff,swf', '<input type=\"text\" id=\"imagefolderexts\" name=\"imagefolderexts\" value=\"{con.imagefolderexts}\" size=\"80\">', '20', 'KLIVE', '0', '0');";
+	$update_sqls['klive2'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`, `type`, `plg_id`, `dynamic`) VALUES ('imagefolderexts', '', '<input type=\"text\" id=\"imagefolderexts\" name=\"imagefolderexts\" value=\"{con.imagefolderexts}\" size=\"80\">', '20', 'KLIVE', '0', '0');";
 	$update_sqls['klive3'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`, `type`, `plg_id`, `dynamic`) VALUES ('imagefoldere', '1', '<label>{lang.YES}<input type=\"radio\" id=\"imagefoldere\" name=\"imagefoldere\" value=\"1\"  <IF NAME=\"con.imagefoldere\"> checked=\"checked\"</IF>></label><label>{lang.NO}<input type=\"radio\" id=\"imagefoldere\" name=\"imagefoldere\" value=\"0\"  <IF NAME=\"con.imagefoldere\"> <ELSE> checked=\"checked\"</IF>></label>', '30', 'KLIVE', '0', '0');";
 }
 

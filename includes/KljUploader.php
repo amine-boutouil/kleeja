@@ -258,7 +258,7 @@ function process ()
 		($hook = kleeja_run_hook('no_folder_check_kljuploader')) ? eval($hook) : null; //run hook
         
 		// check folder [phpfalcon plugin]
-		if(!file_exists($config['imagefolder'])) 
+		if(!empty($config['imagefolderexts']) && !file_exists($config['imagefolder'])) 
 		{
 			$jadid	=	mkdir($config['imagefolder']);
 			$jadid2	=	mkdir($config['imagefolder'] . '/thumbs');

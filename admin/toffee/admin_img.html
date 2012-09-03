@@ -7,6 +7,11 @@ $.fn.preload = function() {
     });
 }
 
+jQuery(window).load(function(){
+	$('#imgs_loading').fadeOut(2000);
+	$('.second-action').css('display', 'none');
+});
+
 jQuery(document).ready(function($){
 	$('a[rel*=facebox]').facybox();
 	$('.pload').preload();	
@@ -81,11 +86,13 @@ jQuery(document).ready(function($){
 
 
 <!-- the big box begin -->
-   <div class="tit_con">
-<h1>{lang.R_IMG_CTRL}  [{current_page}/{total_pages}]</h1>
-   </div>
 <div class="big-box">
-
+<div class="tit_con">
+<h1>{lang.R_IMG_CTRL}  [{current_page}/{total_pages}]</h1>
+	<div class="second-action">
+		<div id="imgs_loading"><img src="{STYLE_PATH_ADMIN}images/ajax-loader.gif" /></div>
+	</div>
+</div>
 
 <div class="br"></div>
 <IF NAME="config.thumbs_imgs"><ELSE>

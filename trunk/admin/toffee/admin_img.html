@@ -11,11 +11,11 @@ $.fn.preload = function() {
 $('.xthumbs').waitForImages(function(){
 	$('#imgs_loading').fadeOut(2000);
 	$('.second-action').css('display', 'none');
+	$('.pload').preload();	
 });
 
 jQuery(document).ready(function($){
 	$('a[rel*=facebox]').facybox();
-	$('.pload').preload();	
 	$(".tip").tipTip({
 			maxWidth: "auto",
 			edgeOffset: 10,

@@ -22,7 +22,8 @@ $action			= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . (isset(
 $action			.= (isset($_GET['search_id']) ? '&amp;search_id=' . htmlspecialchars($_GET['search']) : '');
 $action			.= (isset($_GET['qg']) ? '&amp;qg=' . intval($_GET['qg']) : '') . '&amp;smt=' . $current_smt;
 $action_all		= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php')  . '&amp;smt=' . $current_smt . (isset($_GET['page']) ? '&amp;page=' . intval($_GET['page']) : '');
-
+//if not noraml user system 
+$user_not_normal = (int) $config['user_system'] != 1 ?  true : false;
 $is_search	= $affected = $is_asearch = false;
 $isn_search	= true;
 $GET_FORM_KEY	= kleeja_add_form_key_get('adm_users');
@@ -628,6 +629,11 @@ case 'general':
 		}
 	}
 	
+	if($user_not_normal)
+	{
+		$c_groups = false;
+	}
+	
 	$SQL->freeresult($result);
 
 break;
@@ -1113,8 +1119,6 @@ break;
 
 endswitch;
 
-//if not noraml user system 
-$user_not_normal = (int) $config['user_system'] != 1 ?  true : false;
 
 //after submit 
 if (isset($_POST['submit']))
@@ -1133,5 +1137,10 @@ $go_menu = array(
 				'general' => array('name'=>$lang['R_GROUPS'], 'link'=> basename(ADMIN_PATH) . '?cp=g_users&amp;smt=general', 'goto'=>'general', 'current'=> $current_smt == 'general'),
 				#'users' => array('name'=>$lang['R_USERS'], 'link'=> basename(ADMIN_PATH) . '?cp=g_users&amp;smt=users', 'goto'=>'users', 'current'=> $current_smt == 'users'),
 				'show_su' => array('name'=>$lang['SEARCH_USERS'], 'link'=> basename(ADMIN_PATH) . '?cp=h_search&amp;smt=users', 'goto'=>'show_su', 'current'=> $current_smt == 'show_su'),
-				'new_u' => array('name'=>$lang['NEW_USER'], 'link'=> basename(ADMIN_PATH) . '?cp=g_users&amp;smt=new_u', 'goto'=>'new_u', 'current'=> $current_smt == 'new_u'),
 	);
+
+#user adding is not allowed in integration	
+if(!$user_not_normal)
+{
+	$go_menu['new_u'] = array('name'=>$lang['NEW_USER'], 'link'=> basename(ADMIN_PATH) . '?cp=g_users&amp;smt=new_u', 'goto'=>'new_u', 'current'=> $current_smt == 'new_u');
+}

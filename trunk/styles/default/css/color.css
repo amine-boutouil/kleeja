@@ -332,7 +332,7 @@
 	textarea.up_input {color:#54270A;}
 /* @end */
 
-#sidebar{width:210px;float:right;background:#fff url(../images/sidebar.png) 0 bottom no-repeat;margin:0px;padding:5px 6px 10px 8px;border-right: 4px solid #8EC1DA;border-left: 4px solid #8EC1DA;border-bottom: 4px solid #8EC1DA;-moz-border-radius: 4px; -khtml-border-radius: 0px 0px 8px 8px; -webkit-border-radius: 0px 0px 8px 8px; border-radius: 0px 0px 8px 8px;}
+#sidebar{width:210px;float:right;background:#fff url(../images/sidebar.png) 0 bottom no-repeat;margin:0px;padding:5px 6px 10px 8px;-moz-border-radius: 4px; -khtml-border-radius: 0px 0px 8px 8px; -webkit-border-radius: 0px 0px 8px 8px; border-radius: 0px 0px 8px 8px;}
 #sidebar_box{text-align: center;background: #F8F8F8;width:210px;margin-bottom:10px;border: 1px solid #DFDFDF; -moz-border-radius: 4px; -khtml-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;position:relative;}
 #sidebar_box .menu li{margin:2px 4px;}
 #sidebar_box .menu li a{display:block;padding:8px 6px;background:#8EC1DA url(../imagest/li_bg.png) 35px 0 repeat-x;color:#000;border:0;border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;text-align:center;}

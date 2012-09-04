@@ -20,7 +20,7 @@
 	h1 { text-shadow: 0px 0px 2px #BED9ED;}
 	/* @Dark gray text shadow ------- */
 	.top_nav .menu li a.current, .guide_right_th, .guide_left_th, .tit , .file_cp thead th ,
-	#right_menu .list a,	#right_menu .list a.current,	#footer .admin_cp_link span,	#boxfileuser .public {
+    #footer .admin_cp_link span,	#boxfileuser .public {
 	text-shadow: 0 0 2px #444;}
 /* @end */
 

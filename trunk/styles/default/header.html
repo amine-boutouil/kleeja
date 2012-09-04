@@ -74,20 +74,23 @@
 
 	<div class="clr"></div>
 
-	<!-- begin menu right -->
-	<div id="right_menu">
-		<div class="list">
-			<ul>
-				<li class="imgtop">&nbsp;</li>
+	<!-- begin menu right #New Style -->
+    <div id="sidebar">  
+      <div id="sidebar_box">
+	   <img class="ImgAdmin" src="{STYLE_PATH}images/user_avater.png" alt="" height="100" width="100" />
+			<ul class="menu">
 				<LOOP NAME="side_menu"><IF LOOP="show">
-				<li><a href="{{url}}" (go_current=={{name}}?class="current":)><img src="{STYLE_PATH}images/{{name}}.png" class="pngfix" alt="{lang.LOGIN}" style="vertical-align:middle;" />{{title}} <IF LOOP="name==logout">[ {username} ]</IF></a></li>
+				<li><a href="{{url}}" (go_current=={{name}}?class="current":)><img src="{STYLE_PATH}images/{{name}}.png" style="float:right;" class="pngfix" alt="{lang.LOGIN}" style="vertical-align:middle;" />{{title}} <IF LOOP="name==logout">[ {username} ]</IF></a></li>
 				</IF></LOOP>
-				<li class="imgbottom">&nbsp;</li>
 			</ul>
-		</div>
-		<div class="clr"></div>
+      </div>
+	  <div class="dot"></div>
+      <div id="sidebar_box">
 		<div class="css_xhtml">
 			<a class="xhtml" title="Valid XHTML" onclick="window.open(this.href,'_blank');return false;" href="http://validator.w3.org/check?uri=referer"><img src="{STYLE_PATH}images/xhtml.gif" alt="Valid XHTML" /></a>
 			<a class="css" title="CSS" onclick="window.open(this.href,'_blank');return false;" href="http://jigsaw.w3.org/css-validator/check/referer?profile=css3"><img src="{STYLE_PATH}images/css.gif" alt="CSS" /></a>
 		</div>
-	</div><!-- @end-menu-right -->
+      </div>
+      </div>
+	  
+	<!-- @end-menu-right -->

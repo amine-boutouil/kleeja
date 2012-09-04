@@ -31,8 +31,7 @@
 	.top_nav {width: 100%;}
 	.top_nav .menu li {font-size:xx-small;}
 	#content, #content_index  {width:60%;padding:0;margin:4px auto;}
-	#right_menu{width:22%;}
-	#right_menu .list{width:18%;}
+
 		
 /* last update */
 #header .logo {height:30px; text-indent:0px; background-image:none; font-size:16px;color: #FF8800;}
@@ -42,5 +41,5 @@
 .top_nav .menu li a:hover {color:#F68618;background:#FFDFA5 none repeat-x top left;}
 .top_nav .menu li a.current {color:white;background:#FCCC74 none top left repeat-x;}
 .css_xhtml{display:none;height:0;}
-#right_menu{width:auto;font-size:80%;font-weight:500;}
+
 #content_index, #content {min-height:220px;float:right;padding:1px; font-size:80%;}

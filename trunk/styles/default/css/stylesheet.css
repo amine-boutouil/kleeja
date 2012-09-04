@@ -113,7 +113,7 @@
 	a.phover:hover, a.phover:focus {text-decoration:none;}
 	
 	/* xhtml and css */
-	.css_xhtml{margin:0;height:30px;text-align:center;}
+	.css_xhtml{margin:0;height:30px;text-align:center;padding:8px;}
 
 	/* titles all */
 	h1.title {width:100%;padding:5px 0;font-size:140%;}
@@ -148,8 +148,8 @@
 	-------------------------------------------------- */
 	body {width:100%;height:100%;}
 	#main {width:960px;margin:10px auto;}
-	#wrapper {height:100%;padding:15px 40px 10px 40px;}
-	#content, #content_index  {float:left;width:73%;padding:10px 15px;margin:0;}
+	#wrapper {height:100%;padding:0px 15px 10px 15px;}
+	#content, #content_index  {float:left;width:70%;padding:10px 15px;margin:5px 0 0 0;}
 	#content_index {min-height:220px;float:right;padding:0 20px;}
 /* @end */
 	
@@ -160,19 +160,14 @@
 	/* @Logo -------------------- */  
 	#header .logo {float:right;display:inline;text-indent:-99999px;overflow: hidden;margin:0 40px 0 10px;width:300px;height:100px;}
 	/* @Top Navigation -------------------- */       
-	.top_nav {width:938px;height:50px;margin:0 auto;display: block;}
+	.top_nav {width:938px;height:40px;margin:0 auto;display: block;}
 	.top_nav .menu {margin:0 40px;}
 	.top_nav .menu ul{list-style-type: none;float:right;}
 	.top_nav .menu li {display: block;float:right;margin-left:2px;}
-	.top_nav .menu li a {height:47px;line-height:40px;display: block;float: left;padding:0 20px;font-size:90%;font-weight:700;}
+	.top_nav .menu li a {height:40px;line-height:40px;display: block;float: left;padding:0 20px;font-size:90%;font-weight:700;}
 	.top_nav .menu li a.current {padding:0px 20px;}
 	/* @right menu -------------------- */
-	#right_menu{width:180px;float:right;padding:0 0 0 10px;position:relative;display:inline;font-size:90%;font-weight:700;}
-	#right_menu .list ul{list-style-type: none;line-height:16px;}
-	#right_menu .list .imgtop{height:36px;width:160px;display:block;padding:0px 10px;text-align:left;}
-	#right_menu .list .imgbottom{height:37px;width:160px;display:block;padding:0px 10px;}
-	#right_menu .list img{margin:0 10px;width: 16px;height: 16px;}
-	#right_menu .list a{padding:6px 10px;display: block;width:160px;}
+	
 /* @end */
 
 /*	--------------------------------------------------

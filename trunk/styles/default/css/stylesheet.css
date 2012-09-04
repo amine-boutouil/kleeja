@@ -112,8 +112,6 @@
 	a.current > span {cursor:default;}
 	a.phover:hover, a.phover:focus {text-decoration:none;}
 	
-	/* xhtml and css */
-	.css_xhtml{margin:0;height:30px;text-align:center;padding:8px;}
 
 	/* titles all */
 	h1.title {width:100%;padding:5px 0;font-size:140%;}

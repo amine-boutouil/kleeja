@@ -33,6 +33,10 @@ body{
 #top-header {
 	text-align:right;
  }
+#menu .link_current {
+    border-left: 2px dotted #DA7C0C;
+    border-right: none;
+}
 .quick_edit_tpls td {
 	text-align:left;
 }

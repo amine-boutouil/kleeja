@@ -300,7 +300,7 @@
 	-------------------------------------------------- */
 	.guide_right_th, .guide_left_th{color:white;border: 1px solid #62B4E8;}
 	.guide_right_th  {background:#767676 url("../images/bg_tile.gif") repeat-x bottom right;border-color:#727272;}
-	.guide_left_th {background:#FF9A1D url("../images/bg_tile_tab.png") repeat-x bottom left;}
+	.guide_left_th {background:#62B4E8 url("../images/bg_tile_tab.png") repeat-x bottom left;}
 	.guide_right_box{background:white url("../images/bg_box_1.gif") repeat-x top left;border-right:1px solid white;border-left:1px solid white;}
 	.guide_right_img,.guide_right_n4me, .guide_left_img {color:#333;}
 	.guide_right_img {background-color:white;border:1px solid #DBDBDB;}

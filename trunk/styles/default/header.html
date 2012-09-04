@@ -77,7 +77,7 @@
 	<!-- begin menu right #New Style -->
     <div id="sidebar">  
       <div id="sidebar_box">
-	   <img class="ImgAdmin" src="{STYLE_PATH}images/user_avater.png" alt="" height="100" width="100" />
+	   <img class="ImgAdmin" src="{user_avatar}" alt="" height="100" width="100" />
 			<ul class="menu">
 				<LOOP NAME="side_menu"><IF LOOP="show">
 				<li><a href="{{url}}" (go_current=={{name}}?class="current":)><img src="{STYLE_PATH}images/{{name}}.png" style="float:right;" class="pngfix" alt="{lang.LOGIN}" style="vertical-align:middle;" />{{title}} <IF LOOP="name==logout">[ {username} ]</IF></a></li>

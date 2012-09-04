@@ -44,6 +44,9 @@
 -[ ] fix total size bar in acp
 -[ ] add last-visit 'images' or 'files' page ..	
 -[x] check live plugin codes ... make it ok ..
+-[ ] error message on user and group 
+-[ ] error message after delte or add new ext. to the groups
+-[ ] error message after mass maint. to the center
 
 NOTE NOTE NOTE :: 
 use this function to extend the group system all the script/

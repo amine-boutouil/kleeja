@@ -44,6 +44,15 @@ body{
 .group_line .r2 {
     float: right;
 }
+
+#content .tit_con .tit_groups_icon {
+    background: url("../images/group_add.png") no-repeat scroll 100% 1% transparent;
+    padding-right: 24px;
+}
+#content .second-action {
+    float: right;
+    text-align: right;
+}
 .quick_edit_tpls td {
 	text-align:left;
 }

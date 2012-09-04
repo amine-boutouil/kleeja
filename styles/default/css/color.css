@@ -93,8 +93,8 @@
  	
 	/* xhtml and css */
 	a.css img ,a.xhtml img{border:1px solid white;}
-	a.css img:hover {border:1px solid #FF8F21;border-bottom-width:4px;}
-	a.xhtml img:hover {border:1px solid #82C522;border-bottom-width:4px;}
+	a.css img:hover {border:1px solid #8EC1DA;border-bottom-width:4px;}
+	a.xhtml img:hover {border:1px solid #4B4F52;border-bottom-width:4px;}
 
 	/* titles all */
 	h1.title {background:url("../images/headline_bg.png") repeat-x top;}
@@ -149,11 +149,7 @@
 	.top_nav .menu li a:hover {color:#8EC1DA;background:url("../images/hover.png") repeat-x top left;}
 	.top_nav .menu li a.current {color:#4B4F52;background:url("../images/current-bg.gif") top left repeat-x;}
 	/* @right menu -------------------- */
-	#right_menu .list .imgtop{background:url("../images/menu-right-top.gif") no-repeat;color:black;}
-	#right_menu .list .imgbottom{background:url("../images/menu_right_bottom.gif") no-repeat;color: #F1F7E1;border-top: 1px solid #666;}
-	#right_menu .list a{background-color:#777;color:white;border-top: 1px solid #666;}
-	#right_menu .list a:hover,#right_menu .list a.current{background:#666 url("../images/bg_right_menu.gif") repeat-y right;}
-	#right_menu .list a:active {background:#666;}
+
 /* @end */
 
 /*	--------------------------------------------------
@@ -335,3 +331,10 @@
 	td.all_box_link {border-right:none;}
 	textarea.up_input {color:#54270A;}
 /* @end */
+
+#sidebar{width:210px;float:right;background:#fff url(../images/sidebar.png) 0 bottom no-repeat;margin:0px;padding:5px 6px 10px 8px;border-right: 4px solid #8EC1DA;border-left: 4px solid #8EC1DA;border-bottom: 4px solid #8EC1DA;-moz-border-radius: 4px; -khtml-border-radius: 0px 0px 8px 8px; -webkit-border-radius: 0px 0px 8px 8px; border-radius: 0px 0px 8px 8px;}
+#sidebar_box{text-align: center;background: #F8F8F8;width:210px;margin-bottom:10px;border: 1px solid #DFDFDF; -moz-border-radius: 4px; -khtml-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;position:relative;}
+#sidebar_box .menu li{margin:2px 4px;}
+#sidebar_box .menu li a{display:block;padding:8px 6px;background:#8EC1DA url(../imagest/li_bg.png) 35px 0 repeat-x;color:#000;border:0;border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;text-align:center;}
+#sidebar_box .menu a:hover{background:#4B4F52;color:#fff;}
+

@@ -211,7 +211,7 @@
 	-------------------------------------------------- */
 	#footer{background:#EBEBEB url("../images/bg_footer.gif") repeat;border-top:1px solid #D8D8D8;}
 	#footer .footer_inner{color:#474747;}
-	#footer .admin_cp_link span{background:url("../images/admin_cp.gif") no-repeat center left;border:1px solid white;color:white;}
+	#footer .admin_cp_link span{background:url("../images/admin_cp.gif") no-repeat center left;border:1px solid white;color:#4B4F52;}
 	#footer .admin_cp_link span:hover {color:#111;}
 	#footer .footer_stats, #footer .footer_stats strong {color:#777;}
 	#footer a:link, #footer a:active, #footer a:visited{color:#474747;}

@@ -68,6 +68,7 @@ function Saaheader($title, $outscript = false, $extra = '')
 	$tpl->assign("H_FORM_KEYS_LOGIN", kleeja_add_form_key('login'));
 	$tpl->assign("action_login", 'ucp.php?go=login' . (isset($_GET['return']) ? '&amp;return=' . htmlspecialchars($_GET['return']) : ''));
 	$tpl->assign("EXTRA_CODE_META", $extra);
+	$tpl->assign("user_avatar", 'http://www.gravatar.com/avatar/' . md5(strtolower(trim($userinfo['mail']))) . '?s=100');
 
 	$header = $tpl->display("header");
 
@@ -106,7 +107,7 @@ function Saafooter($outscript = false)
 		$queries_num	= $SQL->query_num;
 		$time_sql		= round($SQL->query_num / $loadtime) ;
 		$page_url		= preg_replace(array('/([\&\?]+)debug/i', '/&amp;/i'), array('', '&'), kleeja_get_page());
-		$link_dbg		= $usrcp->admin() &&  $config['mod_writer'] != '1' ? '[ <a href="' .  str_replace('&', '&amp;', $page_url) . (strpos($page_url, '?') === false ? '?' : '&amp;') . 'debug">More Details ... </a> ]' : null;
+		$link_dbg		= user_can('enter_acp') &&  $config['mod_writer'] != '1' ? '[ <a href="' .  str_replace('&', '&amp;', $page_url) . (strpos($page_url, '?') === false ? '?' : '&amp;') . 'debug">More Details ... </a> ]' : null;
 		$page_stats		= "<strong>[</strong> GZIP : $gzip - Generation Time: $loadtime Sec  - Queries: $queries_num - Hook System:  $hksys <strong>]</strong>  " . $link_dbg ;
 	}
 		

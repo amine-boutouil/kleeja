@@ -1,8 +1,9 @@
 <!-- the big box begin -->
-   <div class="tit_con">
-<h1>{lang.R_BAN}</h1>
-   </div>
 <div class="big-box">
+<div class="tit_con">
+	<h1>{lang.R_BAN}</h1>
+</div>
+   
 <h2>{lang.BAN_EXP1}</h2>
 
 
@@ -14,10 +15,11 @@
 <div class="br"></div>
 
 <!-- button -->
-<p>
+<p class="submit">
 	<input type="hidden" name="submit" value="1" />
 	<button type="submit" id="submit" name="submit" class="btn" onclick="javascript:submit_kleeja_data('#ban_form', '#content', 0); return false;"><span>{lang.UPDATE_BAN}</span></button>
 </p>
+<div class="br"></div>
 
 {H_FORM_KEYS}
 </form>
@@ -27,3 +29,4 @@
 
 <!-- note -->
 <div class="note-info">{lang.BAN_EXP2}</div>
+

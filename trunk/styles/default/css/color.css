@@ -319,10 +319,10 @@
 /*	--------------------------------------------------
 	20. Template & Copy the links after upload > up_boxes.html
 	-------------------------------------------------- */
-	.thumb_img a img{background:white;border:2px solid #CABE7E;}
+	.thumb_img a img{background:white;border:2px solid #62B4E8;}
 	.thumb_img a img:hover{border-color:#FEA53D;}
 	.up_box_input {border: 1px solid white;background:#ECECEC;}
-	td.btitle ,td.all_box_link{border:1px solid #C8BD7C;}
+	td.btitle ,td.all_box_link{border:1px solid #62B4E8;}
 	td.btitle {color:#333;border-left:none;}
 	td.all_box_link {border-right:none;}
 	textarea.up_input {color:#54270A;}

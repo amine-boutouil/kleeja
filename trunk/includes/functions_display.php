@@ -26,6 +26,7 @@ function Saaheader($title, $outscript = false, $extra = '')
 {
 	global $tpl, $usrcp, $lang, $olang, $user_is, $username, $config;
 	global $extras, $script_encoding, $errorpage, $userinfo, $charset;
+	global $STYLE_PATH;
 
 	//is user ? and username
 	$user_is = ($usrcp->name()) ? true: false;
@@ -68,11 +69,12 @@ function Saaheader($title, $outscript = false, $extra = '')
 	$tpl->assign("H_FORM_KEYS_LOGIN", kleeja_add_form_key('login'));
 	$tpl->assign("action_login", 'ucp.php?go=login' . (isset($_GET['return']) ? '&amp;return=' . htmlspecialchars($_GET['return']) : ''));
 	$tpl->assign("EXTRA_CODE_META", $extra);
-	$tpl->assign("user_avatar", 'http://www.gravatar.com/avatar/' . md5(strtolower(trim($userinfo['mail']))) . '?s=100');
+	$default_avatar = $STYLE_PATH . 'images/user_avater.png';
+	$tpl->assign("user_avatar", 'http://www.gravatar.com/avatar/' . md5(strtolower(trim($userinfo['mail']))) . '?s=100&amp;d=' . urlencode($default_avatar));
 
 	$header = $tpl->display("header");
 
-	if($config['siteclose'] == '1' && $usrcp->admin() && !defined('IN_ADMIN'))
+	if($config['siteclose'] == '1' && user_can('enter_acp') && !defined('IN_ADMIN'))
 	{
 		//add notification bar 
 		$header = preg_replace('/<body([^\>]*)>/i', "<body\\1>\n<!-- site is closed -->\n<p style=\"width: 100%; text-align:center; background:#FFFFA6; color:black; border:thin;top:0;left:0; position:absolute; width:100%;clear:both;\">" . $lang['NOTICECLOSED'] . "</p>\n<!-- #site is closed -->", $header);

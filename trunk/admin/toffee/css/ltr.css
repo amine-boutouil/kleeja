@@ -37,6 +37,13 @@ body{
     border-left: 2px dotted #DA7C0C;
     border-right: none;
 }
+
+.group_line .r1 {
+    float: left;
+}
+.group_line .r2 {
+    float: right;
+}
 .quick_edit_tpls td {
 	text-align:left;
 }

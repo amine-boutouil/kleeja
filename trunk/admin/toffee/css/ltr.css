@@ -18,8 +18,9 @@ body{
 
 /* byname.css 
 */
+#menu {float:left;}
 #content{
-
+     float: right;
 }
 	#content .section h3{
 		float:left;
@@ -29,7 +30,9 @@ body{
 		float:left;
 	}
 
-
+#top-header {
+	text-align:right;
+ }
 .quick_edit_tpls td {
 	text-align:left;
 }

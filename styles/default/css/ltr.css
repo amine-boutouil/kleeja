@@ -35,7 +35,7 @@
 	.top_nav .menu ul{float:left;}
 	.top_nav .menu li {float:left;margin-left:0;margin-right:2px;}
 	.top_nav .menu li a {float:left;}
-
+    #sidebar {float:left;}
 	/* @Template & Index > index_body.html -------------- */
 	.waitloading{font-size:140%;}
 	ul.tabbernav li a{margin-left:0;margin-right: 4px;}

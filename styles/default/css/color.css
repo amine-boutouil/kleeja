@@ -36,7 +36,7 @@
 	h1, h2, h3, h4, h5, h6 { color: #333;}
 	h1 { color:#8EC1DA;}
 	h6 { color:#8EC1DA;}
-	strong {color: #FF5502;}
+	strong {color: #62B4E8;}
 	small {color: #444;; }
 	hr {border:solid #ddd; }
 	code, pre { color: #e33100; }
@@ -58,7 +58,7 @@
 
 	/* @Links -------------------- */
 	a:link, a:visited{color: #474747;}
-	a:hover, a:active {color:#FF5502;}
+	a:hover, a:active {color:#62B4E8;}
 	h1 a, h2 a, h3 a {color: #333;}
 	h3 a:hover { color: #FF5502; }
 /* @end */

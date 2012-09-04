@@ -8,7 +8,6 @@ input:focus, input.sffocus { background-color:#ffd;border: 1px solid #D26900;}
 .safe_code ,.call,.register,.get_password,.tabbertab{width:94%;}
 .data_menu td{border:2px solid #F6EBE4;}
 #wrapper {position: relative;z-index: inherit;zoom: 1; /* For IE6 */}
-.css_xhtml{margin:0;}
 #content, #content_index  {width:70%;margin:5px 15px 0 15px;}
 .IEs_c {width:97%;}
 #filecplink  input.link_user {margin-top:10px;}

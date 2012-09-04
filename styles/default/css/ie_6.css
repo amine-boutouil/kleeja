@@ -7,7 +7,6 @@ input, textarea, select, option {font:normal 12px Tahoma, Arial, Verdana, sans-s
 .guide_user_th , .guide_visitor_th,.user_ext , .visitor_ext{background-image:none;}
 .go_up{background:url(../images/goup.png) no-repeat 6% 100%;}
 .title {margin:10px 0;}
-.css_xhtml{display:none;}
 .left_button input{cursor: hand;}
 .up_input {direction:ltr;width:97%;color:#111;padding:3px;letter-spacing:1px;vertical-align:middle;}
 .agree{position:relative}

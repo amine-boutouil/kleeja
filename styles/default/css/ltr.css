@@ -28,7 +28,6 @@
 	#kleeja_img_captcha {float:left;}
 	/* @group Infos & Alerts & Errors -------------- */
 	dd.info  ul li, dd.error ul li,ul.index_info  li, ul.index_err li { background-position:left top;font-size:120%;}
-	.css_xhtml{padding-left:15px;}
 	/* @Main Structure -------------- */
 	#content {float:right;}
 	/* @Template & Header > header.html -------------- */

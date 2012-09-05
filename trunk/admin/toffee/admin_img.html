@@ -3,8 +3,8 @@
 <!--
 $.fn.preload = function() {
     this.each(function(){
-        //$('<img/>')[0].src = $(this).attr('src');
-        $('<img />').attr('src', $(this).attr('href')).appendTo('#content').css('display','none');
+        $('<img/>')[0].src =  $(this).attr('href');
+        //$('<img />').attr('src', $(this).attr('href')).appendTo('#content').css('display','none');
     });
 }
 

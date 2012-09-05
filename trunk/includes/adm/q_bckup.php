@@ -32,18 +32,22 @@ if (isset($_POST['submit']))
 }
 
 
-
 $query	= 'SHOW TABLE STATUS';
 $result	= $SQL->query($query);
 $i = 0;
+$total_size = 0;
 while($row=$SQL->fetch_array($result))
 {
 	//make new lovely arrays !!
 	$size[$row['Name']]	= round($row['Data_length']/1024, 2);
+	$total_size  += $row['Data_length'];
 }
 	
 $SQL->freeresult($result);
 
+
+#total size
+$total_size = Customfile_size($total_size);
 
 //
 //Use hook in admin/index.php to add your tables here
@@ -54,8 +58,11 @@ $tables_sho[]  	= array('name' =>"{$dbprefix}files",	'size' =>$size["{$dbprefix}
 $tables_sho[]  	= array('name' =>"{$dbprefix}stats",	'size' =>$size["{$dbprefix}stats"]);
 $tables_sho[]  	= array('name' =>"{$dbprefix}users",	'size' =>$size["{$dbprefix}users"]);
 $tables_sho[]  	= array('name' =>"{$dbprefix}call",		'size' =>$size["{$dbprefix}call"]);
-$tables_sho[]  	= array('name' =>"{$dbprefix}exts",		'size' =>$size["{$dbprefix}exts"]);
-$tables_sho[]  	= array('name' =>"{$dbprefix}online",	'size' =>$size["{$dbprefix}online"]);
+$tables_sho[]  	= array('name' =>"{$dbprefix}filters",		'size' =>$size["{$dbprefix}filters"]);
+$tables_sho[]  	= array('name' =>"{$dbprefix}groups",	'size' =>$size["{$dbprefix}groups"]);
+$tables_sho[]  	= array('name' =>"{$dbprefix}groups_acl",	'size' =>$size["{$dbprefix}groups_acl"]);
+$tables_sho[]  	= array('name' =>"{$dbprefix}groups_data",	'size' =>$size["{$dbprefix}groups_data"]);
+$tables_sho[]  	= array('name' =>"{$dbprefix}groups_exts",	'size' =>$size["{$dbprefix}groups_exts"]);
 $tables_sho[]  	= array('name' =>"{$dbprefix}reports",	'size' =>$size["{$dbprefix}reports"]);
 $tables_sho[]  	= array('name' =>"{$dbprefix}hooks",	'size' =>$size["{$dbprefix}hooks"]);
 $tables_sho[]  	= array('name' =>"{$dbprefix}plugins",	'size' =>$size["{$dbprefix}plugins"]);
@@ -107,7 +114,7 @@ if (isset($_POST['submit']))
 			}
 			if(is_array($values))
 			{
-					$values = implode(', ', $values);
+				$values = implode(', ', $values);
 			}
 
 			$q = "INSERT INTO `" . $table . "` ($fields) VALUES ($values);";

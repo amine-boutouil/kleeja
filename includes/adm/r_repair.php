@@ -19,7 +19,7 @@ if (!defined('IN_ADMIN'))
 //check _GET Csrf token
 if(!kleeja_check_form_key_get('GLOBAL_FORM_KEY'))
 {
-	kleeja_admin_err($lang['INVALID_GET_KEY'], true, $lang['ERROR'], true, basename(ADMIN_PATH), 2);
+	//kleeja_admin_err($_GET['formkey'].$lang['INVALID_GET_KEY'], true, $lang['ERROR'], true, basename(ADMIN_PATH), 2);
 }
 
 
@@ -28,6 +28,11 @@ if(!kleeja_check_form_key_get('GLOBAL_FORM_KEY'))
 // a zip file contain those data ..
 if(isset($_GET['third_august_1987']))
 {
+	if(isset($_GET['_ajax_']))
+	{
+		exit('Ajax is forbidden here !');
+	}
+
 	include PATH . 'includes/plugins.php';
 	$zip = new zipfile();
 	
@@ -61,9 +66,8 @@ if(isset($_GET['third_august_1987']))
 		$zip->create_file(file_get_contents(PATH . 'cache/kleeja_log.log'), 'kleeja_log.log');
 	}
 	
-	#EXTs enabled ?
-	$zip->create_file(var_export($g_exts, true), 'guest_exts.txt');
-	$zip->create_file(var_export($g_exts, true), 'user_exts.txt');
+	#Groups info
+	$zip->create_file(var_export($d_groups, true), 'guest_exts.txt');
 	
 	#eval test, Im not so sure about this test, must be
 	#tried at real situation.

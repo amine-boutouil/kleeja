@@ -653,3 +653,26 @@ content:":	";
 
 /*admin_img*/
 
+
+
+/*admin_search*/
+.search_container .section:hover{
+	background-color:#FAFFD6;
+}
+.search_container .section {
+	border-bottom:1px dotted #ccc;
+	padding:3px;
+	height:25px;
+	font-size:14px;
+	background-position:98% 50%;
+	background-repeat:no-repeat;
+}
+.search_container .section h3{
+	font-size:20px !important;
+	padding:0 10px !important;
+}
+.search_container .section .box{
+	
+}
+
+

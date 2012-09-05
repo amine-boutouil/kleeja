@@ -77,6 +77,17 @@ form .submit {
     background: url("../images/small_add.png") no-repeat 100% 0;
     padding-right: 24px;
 }
+.plugin_box {
+    margin-right: 20px;
+}
+#content .tit_con .tit_ext_icon {
+    background: url("../images/ext_add.png") no-repeat 100% 0;
+    padding-right: 24px;
+}
+.groups_edit .section .box img {
+    float: right;
+    margin-left: 20px;
+}
 .quick_edit_tpls td {
 	text-align:left;
 }

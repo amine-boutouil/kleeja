@@ -42,11 +42,11 @@ function check_search_users_form(form)
 </script>
 
 <IF NAME="current_smt==files">
-   <div class="tit_con">
-<h1>{lang.R_SEARCH}</h1>   
-   </div>
 <!-- the big box begin -->
-<div class="big-box">
+<div class="big-box search_container">
+<div class="tit_con">
+	<h1>{lang.R_SEARCH}</h1>   
+</div>
 
 
 <form method="post" action="{action}" onsubmit="return check_search_files_form(this);" id="adv_search">
@@ -129,11 +129,12 @@ function check_search_users_form(form)
 
 <!-- start users search  -->
 <IF NAME="default_user_system">
-   <div class="tit_con">
-<h1>{lang.SEARCH_USERS}</h1>
-   </div>
 <!-- the big box begin -->
-<div class="big-box">
+<div class="big-box search_container">
+<div class="tit_con">
+	<h1>{lang.SEARCH_USERS}</h1>
+</div>
+
 
 <form method="post" action="{action}" onsubmit="return check_search_users_form(this);" id="user_search">
 

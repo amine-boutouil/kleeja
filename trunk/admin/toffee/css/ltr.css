@@ -53,6 +53,15 @@ body{
     float: right;
     text-align: right;
 }
+#menu_left ul li {
+    margin-left: 20px;
+}
+#content .section .box {
+    float: right;
+}
+.team-info .section {
+    background-position: 100% 90% !important;
+}
 .quick_edit_tpls td {
 	text-align:left;
 }

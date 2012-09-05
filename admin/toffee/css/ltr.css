@@ -46,7 +46,7 @@ body{
 }
 
 #content .tit_con .tit_groups_icon {
-    background: url("../images/group_add.png") no-repeat scroll 100% 1% transparent;
+    background: url("../images/group_add.png") no-repeat 100% 1%;
     padding-right: 24px;
 }
 #content .second-action {
@@ -61,6 +61,21 @@ body{
 }
 .team-info .section {
     background-position: 100% 90% !important;
+}
+form .submit {
+    float: right;
+    margin-right: -3px;
+}
+.check_all_table {
+    background: url("../images/arrow_ltr.png") no-repeat  0 0 !important;
+    padding-left: 35px;
+}
+.delf_caution {
+    font-size: 9px;
+}
+#content .tit_con .tit_plugins_icon {
+    background: url("../images/small_add.png") no-repeat 100% 0;
+    padding-right: 24px;
 }
 .quick_edit_tpls td {
 	text-align:left;

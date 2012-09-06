@@ -141,7 +141,7 @@ if(isset($_GET['deleteuserfile']))
 
 	if($num == 0)
 	{
-		kleeja_admin_err($lang['ADMIN_DELETE_NO_FILE']);
+		kleeja_admin_err($lang['ADMIN_DELETE_NO_FILE'], true, '', true, $action_all, 2);
 	}
 	else
 	{
@@ -184,7 +184,7 @@ if(isset($_GET['del_user']))
 	{
 		redirect($action_all);
 	}
-	
+
 	//delete all files in just one query
 	$d_query	= array(
 						'DELETE'	=> "{$dbprefix}users",
@@ -193,7 +193,7 @@ if(isset($_GET['del_user']))
 
 	$SQL->build($d_query);
 
-	kleeja_admin_info($lang['USER_DELETED'], true, '', true, $action_all, 3);
+	kleeja_admin_info($lang['USER_DELETED'], true, '', true, $action, 2);
 }
 
 
@@ -831,13 +831,13 @@ case 'group_exts':
 		//check _GET Csrf token
 		if(!kleeja_check_form_key_get('adm_users'))
 		{
-			kleeja_admin_err($lang['INVALID_GET_KEY'], true, $lang['ERROR'], true, $action_all, 2);
+			kleeja_admin_err($lang['INVALID_GET_KEY'], true, $lang['ERROR'], true, $action, 2);
 		}
-		
+
 		$req_ext = isset($_GET['del']) ? intval($_GET['del']) : 0;
 		if(!$req_ext)
 		{
-			kleeja_admin_err('ERROR-NO-EXT-ID', true, '', true,  basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'));
+			kleeja_admin_err('ERROR-NO-EXT-ID', true, '', true,  $action, 2);
 		}
 
 		$query_del	= array(
@@ -848,10 +848,10 @@ case 'group_exts':
 		$SQL->build($query_del);
 		
 		#done
-		$DELETED_EXT = $GE_INFO =  $SQL->affected() ? 2 : 3;
+		$DELETED_EXT = $GE_INFO = 2;
 		delete_cache('data_groups');
 	}
-	
+
 	#add ext?
 	$ADDED_EXT = false;
 	if(isset($_POST['newext']))
@@ -898,7 +898,7 @@ case 'group_exts':
 		$SQL->build($insert_query);
 
 		#done
-		$ADDED_EXT = $GE_INFO =  $SQL->affected() ? 2 : 3;
+		$ADDED_EXT = $GE_INFO =  2;
 		delete_cache('data_groups');
 	}
 	

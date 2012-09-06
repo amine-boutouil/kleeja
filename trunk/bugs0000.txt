@@ -34,18 +34,19 @@
 -[ ] Dealing with the huge invasion of Nginx
 -[ ] Add phrases from within ACP, (show how to embed them in template ?)
 -[ ] Mobile style, see admin/mobile [ related files common.php+admin/index.php ] { to test it, add define('IN_MOBILE', 1); to config.php } 
--[ ] filters at images & files (same db tables for searchs !)
-	-[ ] filters at images.
-	-[ ] filters at files.
-	-[ ] convert searches to use filters and show last 10 ones.
+-[-] filters at images & files (same db tables for searchs !)
+	-[-] filters at images.
+	-[-] filters at files.
+	-[x] convert searches to use filters and 
+		-[ ] show last 10 ones.
 -[ ] files of deleted user shows as 'deleted' user or 'guest' 
 -[x] increase csrf time of some time-wanted forms
--[ ] remove [remember me ... choices ] and make it simple 
+-[x] remove [remember me ... choices ] and make it simple 
 -[ ] fix total size bar in acp
 -[ ] add last-visit 'images' or 'files' page ..	
 -[x] check live plugin codes ... make it ok ..
--[ ] error message on user and group 
--[ ] error message after delte or add new ext. to the groups
+-[ ] after deleting a user, msg will appear be for ever 
+-[x] error message after delte or add new ext. to the groups
 -[x] error message after mass maint. to the center
 
 

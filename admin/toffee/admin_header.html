@@ -65,6 +65,9 @@ if(window.location.hash.indexOf("#!") != -1){
 		get_kleeja_link('./?' + hash, '#content', {'current_id':div_id, 'current_class':'link_current', 'gomenu_id':gomenu_id});
 	}
 }
+else{
+	window.location.hash = '#!'
+}
 
 window.onhashchange = function () {
 	//for # in address bar

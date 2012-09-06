@@ -30,7 +30,7 @@ class kplugins
 	var $f			= null;
 	var $plg_id		= 0;
 	var $zipped_files	= '';
-	var $is_ftp_supported = false;
+	var $is_ftp_supported = true;
 
 	function kplugins()
 	{
@@ -43,7 +43,7 @@ class kplugins
 			$this->f_method = 'kfile';
 		}
 		//it's not finished yet, it's enabled for developers right now !
-		else if (@extension_loaded('ftp') && defined('DEV_STAGE'))
+		else if (@extension_loaded('ftp'))
 		{
 			$this->is_ftp_supported = true;
 			$this->f_method = 'kftp';

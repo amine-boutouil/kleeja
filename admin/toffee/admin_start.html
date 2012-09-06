@@ -1,7 +1,9 @@
 
 <!-- general -->
+
 <IF NAME="current_smt == general">
 
+<!-- start general -->
 
 <LOOP NAME="ADM_NOTIFICATIONS">
 <div class="note-{{msg_type}}">
@@ -11,12 +13,11 @@
 </LOOP>
 
 
-<!-- the big box begin -->
-<div class="tit_con">
-<h1>{usernamelang}</h1>   
-</div>
-
+<!-- the big box begin general -->
 <div class="big-box">
+<div class="tit_con">
+	<h1>{usernamelang}</h1>   
+</div>
 
 <IF NAME="last_visit">
 <div class="section">
@@ -65,17 +66,19 @@
 
 <div class="clear"></div>
 
+<!-- admin start general section -->
+
 </div>
-<!-- the big box end -->
+<!-- the big box end general -->
 
 
 
-
-<!-- the big box begin -->
-   <div class="tit_con">
-<h1>{lang.GENERAL_STAT}</h1>   
-   </div>
+<!-- the big box begin general2 -->
 <div class="big-box">
+<div class="tit_con">
+	<h1>{lang.GENERAL_STAT}</h1>   
+</div>
+
 
 <div class="section">
 	<h3>{lang.AUSERS_NUM}</h3>
@@ -112,15 +115,18 @@
 </div>
 <div class="clear"></div>
 
+<!-- admin start general section2 -->
+
 </div>
-<!-- the big box end -->
+<!-- the big box end general2 -->
 
 <ELSEIF NAME="current_smt == other">
-   <div class="tit_con">
-<h1>{lang.OTHER_INFO}</h1>
-   </div>
-<!-- the big box begin -->
-<div class="big-box">
+ <!-- the big box begin other -->
+<div class="big-box"> 
+<div class="tit_con">
+	<h1>{lang.OTHER_INFO}</h1>
+</div>
+
 
 <div class="section">
 	<h3>{lang.KLEEJA_VERSION}</h3>
@@ -150,14 +156,18 @@
 	</div>
 </div>
 <div class="clear"></div>
-</div>
-<!-- the big box end -->
 
-<!-- the big box begin -->
-   <div class="tit_con">
-<h1>{lang.SEARCH_STAT}</h1>   
-   </div>
+<!-- admin start general other -->
+
+</div>
+<!-- the big box end other -->
+
+<!-- the big box begin other2 -->
 <div class="big-box">
+<div class="tit_con">
+	<h1>{lang.SEARCH_STAT}</h1>   
+</div>
+
 
 <div class="section">
 	<h3>Google</h3>
@@ -176,39 +186,44 @@
 	</div>
 </div>
 <div class="clear"></div>
+
+<!-- admin start other section2 -->
+
 </div>
-<!-- the big box end -->
+<!-- the big box end other2 -->
 
 
 <IF NAME="sql_debug">
-<!-- the big box begin -->
-   <div class="tit_con">
-<h1>SQL DEBUGS</h1>   
-   </div>
+<!-- the big box begin debug -->
 <div class="big-box">
+<div class="tit_con">
+	<h1>SQL DEBUGS</h1>   
+</div>
+
 <div class="dir left" style="direction:ltr;overflow:scroll;height:200px;border:1px #ccc dotted;width:100%">
 	<table>
-	<LOOP NAME="sql_debug">
+<LOOP NAME="sql_debug">
 	<tr style="color:{{colored}}">
 	<td style="width:20%">{{type}}</td>
 	<td style="width:20%">{{time}}</td>
 	<td>{{content}}</td>
 	</tr>
-	</LOOP>
+</LOOP>
 	</table>
 </div>
 </div>
-<!-- the big box end -->
+<!-- the big box end debug-->
 </IF>
 
 
 
 <ELSEIF NAME="current_smt == team">
-<!-- the big box begin -->
-   <div class="tit_con">
-<h1>{lang.KLEEJA_TEAM}</h1>
-   </div>
+<!-- the big box begin team-->
 <div class="big-box team-info">
+<div class="tit_con">
+	<h1>{lang.KLEEJA_TEAM}</h1>
+</div>
+
 <div class="section" style="background:url({STYLE_PATH_ADMIN}images/sa.png)";>
 	<h3 style="background:url(https://api.twitter.com/1/users/profile_image?screen_name=abdumu&size=bigger)";>
 		<!-- oh my God. I like my pic ;) -->
@@ -290,18 +305,18 @@
 </div>
 <div class="clear"></div>
 </div>
-<!-- the big box end -->
+<!-- the big box end team -->
 
 <IF NAME="translator_copyrights">
-<!-- the big box begin -->
+<!-- the big box begin trns -->
 <div class="big-box">
-<h1>{translator_copyrights}</h1>
+	<h1>{translator_copyrights}</h1>
 </div>
-<!-- the big box end -->
+<!-- the big box end trns -->
 </IF>
 
 <ELSEIF NAME="current_smt == firstime">
-<!-- the big box begin -->
+<!-- the big box begin frst -->
 <div class="big-box">
 <h1>{lang.FIRST_TIME_CP}</h1>
 
@@ -327,10 +342,18 @@
 
 <button class="firstime-button" onclick="get_kleeja_link('./');$('#menu').css('display', '');">{lang.FIRST_TIME_DONE}</button>
 </div>
-<!-- the big box end -->
+<!-- the big box end frst-->
 
 
 <script type="text/javascript">
 $('#menu').css('display', 'none');
 </script>
+
+<!-- admin start another elseif -->
+
 </IF>
+
+<!-- admin start endoffile -->
+
+
+

@@ -178,11 +178,11 @@
 	.data_file .tit {background:#8C8C8C url("../images/bg_tile.gif") repeat-x bottom;border:1px solid #727272;color:white;}
 	.data_file .data_menu tr{background:white;border-top:1px solid #C7C7C7;border-bottom:1px solid #bbb;}
 	.data_file .data_menu td{border:none;}
-	.data_file .data_menu .td  {background:#FFEDC1 url("../images/headline_bg.png") repeat-x top right;color:#333;}
+	.data_file .data_menu .td  {background:#BED9ED url("../images/headline_bg.png") repeat-x top right;color:#333;}
 	.data_file .filereport {background:url("../images/bg_onlinevisitor.gif") repeat-x bottom left;border-top:1px solid #D88181;border-bottom:1px solid #D88181;color:#D80000;}
 	.data_file .filereport:hover {background:#F9B6C1;border-color:#B14F4F;}
-	.data_file_down .wait {color:#F04C2D;}
-	.download a{background:#FA9A00 url("../images/bg_animated.gif") repeat;border:1px solid #C16600;color:#6F3A00;}
+	.data_file_down .wait {color:#4B4F52;}
+	.download a{background:#8EC1DA url("../images/bg_animated.gif") repeat;border:1px solid #fff;color:#4B4F52;}
 	.download a:hover {border-color:white;color:#222;}
 	.download span{color:#777;}
 /* @end */

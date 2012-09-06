@@ -54,9 +54,7 @@ $(document).ready( function(){
 			<a href="{action}&amp;smt=group_exts&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.R_EXTS}">
 				<img  src="{STYLE_PATH_ADMIN}images/exts_edit.png" alt="{lang.R_EXTS}" />
 			</a>
-			<IF NAME="user_not_normal"><ELSEIF LOOP="id == 2">
-				<img  src="{STYLE_PATH_ADMIN}images/spacer.gif" style="width:16px;height:16px;" />
-				<ELSE><a href="{action}&amp;smt=show_group&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.USERS}">
+			<IF NAME="user_not_normal"><ELSE><a href="{action}&amp;smt=show_group&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.USERS}">
 				<img  src="{STYLE_PATH_ADMIN}images/users_show.png" alt="{lang.USERS}" />
 			</a></IF>
 		</div>
@@ -119,7 +117,7 @@ $(document).ready( function(){
 	<div class="box">
 		<select name="cfrom" id="cfrom">
 			<option value="-1">{lang.DEFAULT_GROUP}</option>
-			<LOOP NAME="e_groups"><IF LOOP="id == 2"><ELSE><option value="{{id}}">{{name}}</option></IF></LOOP>
+			<LOOP NAME="e_groups"><option value="{{id}}">{{name}}</option></LOOP>
 			<LOOP NAME="c_groups"><option value="{{id}}">{{name}}</option></LOOP>
 		</select>
 	</div>
@@ -151,7 +149,7 @@ $(document).ready( function(){
 	<div class="box">
 		<select name="tgroup" id="tgroup">
 			<IF LOOP="is_default"><ELSE><option value="-1">{lang.DEFAULT_GROUP}</option></IF>
-			<LOOP NAME="e_groups"><IF LOOP="id == 2"><ELSE><option value="{{id}}">{{name}}</option></IF></LOOP>
+			<LOOP NAME="e_groups"><option value="{{id}}">{{name}}</option></LOOP>
 			<LOOP NAME="c_groups"><option value="{{id}}">{{name}}</option></LOOP>
 		</select>
 	</div>
@@ -198,8 +196,8 @@ $(document).ready( function(){
 		{lang.GROUP}: {{group}}, {lang.LAST_VISIT}: {{last_visit}}
 		<div class="x_options">
 			<a target="_blank" href="{{userfile_link}}" title="{lang.BROSWERF}"><img src="{STYLE_PATH_ADMIN}images/show_files.png" alt="{lang.BROSWERF}" /></a>
-			<a href="{{delusrfile_link}}&amp;{GET_FORM_KEY}" onclick="javascript:get_kleeja_link(this.href, '#content', {confirm:true}); return false;" title="{lang.ADMIN_DELETE_FILES}"><img src="{STYLE_PATH_ADMIN}images/delete_all_files.png" alt="{lang.ADMIN_DELETE_FILES}" /></a>
-			<IF LOOP="delusr_link"><a href="{{delusr_link}}&amp;{GET_FORM_KEY}" onclick="javascript:get_kleeja_link(this.href, '#content', {confirm:true}); return false;" title="{lang.DELETE}"><img src="{STYLE_PATH_ADMIN}images/user_delete.png" alt="{lang.DELETE}" /></a></IF>
+			<a href="{{delusrfile_link}}&amp;{GET_FORM_KEY}" onclick="javascript:get_kleeja_link(this.href, '#content', {confirm:true}); return false;"title="{lang.ADMIN_DELETE_FILES}"><img src="{STYLE_PATH_ADMIN}images/delete_all_files.png" alt="{lang.ADMIN_DELETE_FILES}" /></a>
+			<IF LOOP="delusr_link"><a href="{{delusr_link}}&amp;{GET_FORM_KEY}" onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.DELETE}"><img src="{STYLE_PATH_ADMIN}images/user_delete.png" alt="{lang.DELETE}" /></a></IF>
 			<a href="{{editusr_link}}" onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.EDIT}"><img src="{STYLE_PATH_ADMIN}images/user_edit.png" alt="{lang.EDIT}" /></a>
 		</div>
 	</div>
@@ -316,9 +314,7 @@ $(document).ready( function(){
 	<div class="box">
 		<select name="l_group" id="l_group">
 		<LOOP NAME="u_groups">
-			<IF LOOP="id == 2"><ELSE>
 			<option value="{{id}}"<IF LOOP="selected"> selected="selected"</IF>>{{name}} <IF LOOP="default">({lang.DEFAULT_GROUP})</IF></option>
-			</IF>
 		</LOOP>
 		</select>
 </div>
@@ -429,7 +425,7 @@ $(document).ready( function(){
 	<div class="box">
 		<input type="text" name="size[{{ext_id}}]" value="{{ext_size}}" size="6" /> {lang.KILOBYTE}	
 		<div class="xdel">
-			<a href="{action}&del={{ext_id}}&{GET_FORM_KEY}"  onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.DELETE}">
+			<a href="{action}&amp;smt=group_exts&amp;del={{ext_id}}&amp;{GET_FORM_KEY}"  onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.DELETE}">
 				<img  src="{STYLE_PATH_ADMIN}images/do_delete.png" alt="{lang.DELETE}" />
 			</a>
 		</div>

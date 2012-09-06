@@ -16,7 +16,7 @@
 	#Text Shadow
 	--------------------------------------- */
 	/* @White text shadow ------- */
-	body {text-shadow: 0 0 2px #ccc;}
+	body {text-shadow: 0 0 2px #fff;}
 /* @end */
 
 /*	---------------------------------------
@@ -34,12 +34,12 @@
 	-moz-box-shadow:0 0 4px #62B4E8;-webkit-box-shadow:0 0 4px #62B4E8;-khtml-box-shadow:0 0 4px #62B4E8;box-shadow:0 0 4px #62B4E8;}
 	
 	/* @White Shadow (4) pixel ------------- */
-	.tabbertab,	ul.tabbernav li a,	#footer a.admin_cp_link,	.data_file .filereport {
+	.border_radius,	.tabbertab,	ul.tabbernav li a,	#footer a.admin_cp_link,	.data_file .filereport {
 	-moz-box-shadow : 0px 0px 4px #FFFFFF;-webkit-box-shadow : 0px 0px 4px #FFFFFF;-khtml-box-shadow : 0px 0px 4px #FFFFFF;box-shadow : 0px 0px 4px #FFFFFF;}
 	
 	/* @White Shadow (7) pixel ------------- */	
 	.pagination a:hover , .pagination span.current{-moz-box-shadow:0 0 7px #fff;-webkit-box-shadow:0 0 7px #fff;box-shadow:0 0 7px #fff;}
-	
+	#content{-moz-box-shadow:0 0 15px #fff;-webkit-box-shadow:0 0 15px #fff;box-shadow:0 0 15px #fff;}
 
 	/* @Gray Shadow --------------- */	
 	.onlineall,	.onlinevisitor,	.onlineusers, .name_users, .guide_user_th, .guide_visitor_th, .user_box,.forget_pass,
@@ -63,6 +63,6 @@
 	-moz-border-radius : 5px;-webkit-border-radius : 5px;-khtml-border-radius : 5px; border-radius : 5px;}
 
 	/* @Borders all Corners (10)Pixel ----------- */	
-	.admin_cp_link span,	.guide_right_img,.guide_left_img  {
+	.border_radius,	.admin_cp_link span,	.guide_right_img,.guide_left_img  {
 	-moz-border-radius : 10px;-webkit-border-radius : 10px;-khtml-border-radius : 10px;border-radius : 10px;}
 /* @end */

@@ -130,7 +130,7 @@ function get_kleeja_link(URL, ID, p)
 	
 	window.location.hash = '!' + URL.replace('&amp;', '&').split('?', 2)[1];
 	if(window.location.hash.indexOf('formkey') != -1){
-		//window.location.hash = window.location.hash.replace(/&formkey=[a-z0-9]+/, '');
+		window.location.hash = window.location.hash.replace(/&formkey=[a-z0-9]+/, '');
 	}
 
 	$("#sign_ajax").show();
@@ -187,6 +187,7 @@ function get_kleeja_link(URL, ID, p)
 			$("#sign_ajax").css('display', 'none');
 			$("#sign_ajax_error").show();
 			$("#sign_ajax_error .error_msg_content").show();
+			
 		}
 	});
 }
@@ -245,11 +246,11 @@ function submit_kleeja_data(FORM_ID, ID, CONFIRM)
 				}else if($('html').scrollTop() > 0 && $('html').scrollTop() > 230){
 					$('html').animate({scrollTop:0}, 'slow');
 				}
-
-				if(gomenu_id){
+				
+				if(p['gomenu_id']){
 					$('.go_menu').html('').fadeOut("slow")
 					if(R.menu){
-						$('#gomenu'+gomenu_id).html(R.menu).fadeIn("slow");
+						$('#gomenu'+p['gomenu_id']).html(R.menu).fadeIn("slow");
 					}
 				}else{
 					if(R.menu){

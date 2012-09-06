@@ -34,7 +34,7 @@
 	-------------------------------------------------- */
 	body {color:#474747;}
 	h1, h2, h3, h4, h5, h6 { color: #333;}
-	h1 { color:#145E6A;}
+	h1 { color:#8EC1DA;}
 	h6 { color:#8EC1DA;}
 	strong {color: #62B4E8;}
 	small {color: #444;; }
@@ -68,6 +68,7 @@
 	-------------------------------------------------- */
 	.dot {background: url("../images/bg_dots.gif") repeat-x;}
 	.line {background:url("../images/line.png") repeat-x right top;}
+	.FooterLine{background:white;}
 
 	/* debug kleeja */
 	.debug_kleeja{background-color:white;border:1px #666 solid;}
@@ -95,8 +96,8 @@
 	h1.title {background:url("../images/headline_bg.png") repeat-x top;}
 	
 	/* verification code */
-
-	.safe_code p {color:#145E6A;}
+	.safe_code {	border:1px solid #BED9ED;background:#F9F9F0 url("../images/saf3_code01.gif") no-repeat 0% 50%;}
+	.safe_code p {color:#62B4E8;}
 	p.explain {color:#666;}
 
 /* @end */
@@ -127,9 +128,9 @@
 /*	--------------------------------------------------
 	4. Main Structure
 	-------------------------------------------------- */
-	body {background: #E4ECF1 url("../images/bg_body.png") repeat;}
-	#wrapper{background:#EBEBEB url("../images/bg_footer.png") repeat;border-top:1px solid #D8D8D8;border-bottom:1px solid #D8D8D8;}
-	#content, #content_index  {}
+	body {background: #ececec url("../images/bg_body.png") repeat-x top center;}
+	#main {background:url("../images/bg_main.png") no-repeat top right;}
+	#content, #content_index  {background:#DFDFDF url("../images/bg_content.png") repeat-x;border:1px solid #C9C9C9;}
 	#content_index {background-color:transparent;background-image:none;border:none;}
 /* @end */
 	
@@ -139,8 +140,8 @@
 	/* @Logo -------------------- */  
 	#header .logo {background:transparent url("../images/logo.png") right center no-repeat;}
 	/* @Top Navigation -------------------- */       
-	.top_nav {background:url("../images/top_nav_bg.png") repeat-x center;}
-	.top_nav .menu li a {color: #fff;}
+	.top_nav {background:url("../images/menu-bg.gif") repeat-x top left;}
+	.top_nav .menu li a {color: #444;}
 	.top_nav .menu li a:hover {color:#8EC1DA;background:url("../images/hover.png") repeat-x top left;}
 	.top_nav .menu li a.current {color:#4B4F52;background:url("../images/current-bg.gif") top left repeat-x;}
 	/* @right menu -------------------- */
@@ -189,7 +190,7 @@
 /*	--------------------------------------------------
 	8. Template & Stats > stats.html
 	-------------------------------------------------- */
-	.stats  {color:#333;}
+	.stats  {color:#333;background: url("../images/stats.gif") no-repeat 2% 40%;}
 	.stats  ul li {background:transparent url("../images/list_stat.gif") no-repeat right center;}
 	.st i{background:white;color: #62B4E8;border-top:1px solid #BED9ED;border-bottom:1px solid #BED9ED;}
 /* @end */
@@ -204,6 +205,7 @@
 /*	--------------------------------------------------
 	10. Template & Footer > footer.html
 	-------------------------------------------------- */
+	#footer{background:#EBEBEB url("../images/bg_footer.gif") repeat;border-top:1px solid #D8D8D8;}
 	#footer .footer_inner{color:#474747;}
 	#footer .admin_cp_link span{background:url("../images/admin_cp.gif") no-repeat center left;border:1px solid white;color:#4B4F52;}
 	#footer .admin_cp_link span:hover {color:#111;}
@@ -238,9 +240,15 @@
 /* @end */
 
 /*	--------------------------------------------------
+	13. Template & Register > register.html
+	-------------------------------------------------- */
+	.register {background:transparent url("../images/register.gif") no-repeat 0% 50%;}
+/* @end */
+
+/*	--------------------------------------------------
 	14. Template & Contact Us > call.html
 	-------------------------------------------------- */
-	.call{}
+	.call{background:transparent url("../images/call.gif") no-repeat 0% 50%;}
 /* @end */
 
 /*	--------------------------------------------------
@@ -276,7 +284,7 @@
 	.file_cp thead th, .file_cp tfoot th, .file_cp tbody td {border: 1px solid #aaa;border-top-color: white;border-left-color: white;border-bottom-color: #aaa;}
 	.file_cp thead th{background:#D54D10 url("../images/bg_tile_tab.png") repeat-x top left;color:white;border:none;}
 	.file_cp thead th a:link{color:white;}
-	.file_cp tfoot th{background:#ECECEC url("../images/bg_footer.png") repeat-x center right;}
+	.file_cp tfoot th{background:#ECECEC url("../images/bg_footer.gif") repeat-x center right;}
 	.file_cp tbody tr:hover td{border-top-color:#aaa;border-bottom-color:white;}
 	.file_cp tbody tr:hover td a{color:black;}
 	.file_cp  a:link {color:#444;}
@@ -322,7 +330,7 @@
 
 #sidebar{width:210px;float:right;background:#f7f7f7 url(../images/sidebar.png) 0 bottom no-repeat;margin:0px;padding:5px 6px 10px 8px;-moz-border-radius: 4px; -khtml-border-radius: 0px 0px 8px 8px; -webkit-border-radius: 0px 0px 8px 8px; border-radius: 0px 0px 8px 8px;}
 #sidebar_box{text-align: center;background: #F8F8F8;width:210px;margin-bottom:10px;padding-top: 5px;border: 1px solid #DFDFDF; -moz-border-radius: 4px; -khtml-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;position:relative;}
-#sidebar_box img.img-user{border: 1px solid #7CA7BD;padding: 4px;}
+#sidebar_box img.img-user{border: 1px solid #62B4E8;padding: 4px;}
 #sidebar_box .menu li{margin:2px 4px;}
 #sidebar_box .menu li a{display:block;padding:8px 6px;background:#8EC1DA url(../imagest/li_bg.png) 35px 0 repeat-x;color:#000;border:0;border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;text-align:center;}
 #sidebar_box .menu a:hover{background:#4B4F52;color:#fff;}

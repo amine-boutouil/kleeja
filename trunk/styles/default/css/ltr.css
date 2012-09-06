@@ -22,8 +22,7 @@
 	.right, img.right {float:left;}
 	/* @Pagination -------------- */
 	.pagination a, .pagination span.current, .pagination span.three_dots {float:left;margin-left:0;margin-right:3px;}
-	/* @verification code -------------- */
-	.safe_code {background:#F9F5F0 url(../images/saf3_code_ltr.gif) no-repeat 100% 50%;}
+
 	/* @captcha stuff -------------- */
 	#kleeja_img_captcha {float:left;}
 	/* @group Infos & Alerts & Errors -------------- */
@@ -48,7 +47,7 @@
 	.data_file .data_menu .td  {width:125px;}
 	.data_file_down .wait {font-size:x-large;}
 	/* @Template & Stats > stats.html -------------- */
-	.stats  {font-size:100%;font-weight:400;background-position: 94% 50%;}
+	.stats  {font-size:100%;font-weight:400;}
 	.stats  ul li {background-position:left center;padding-right:0;padding-left:10px;}
 	/* @Template & Rules > rules.html -------------- */
 	#rules {font-size:100%;font-weight:400;}
@@ -69,10 +68,7 @@
 	#boxfileuser .us3r_n4me {float:left;}
 	#boxfileuser .box_user {float:left;}
 	#boxfileuser .us3r_n4me {float:right;}
-	/* @Template & Register > register.html ------ */
-	.register {background-position:85% 50%;}
-	/* @Template & Contact Us > call.html -------------- */
-	.call {background-position:100% 50%;}
+
 	/* @Template & Password Recovery > get_pass.html ------- */
 	.get_password{background-position:60% 50%;}
 	/* @Template & Report a File > report.html ----- */

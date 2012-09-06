@@ -68,7 +68,6 @@
 	-------------------------------------------------- */
 	.dot {background: url("../images/bg_dots.gif") repeat-x;}
 	.line {background:url("../images/line.png") repeat-x right top;}
-	.FooterLine{background:white;}
 
 	/* debug kleeja */
 	.debug_kleeja{background-color:white;border:1px #666 solid;}
@@ -129,7 +128,7 @@
 	4. Main Structure
 	-------------------------------------------------- */
 	body {background: #E4ECF1 url("../images/bg_body.png") repeat;}
-	
+	#wrapper{background:#EBEBEB url("../images/bg_footer.png") repeat;border-top:1px solid #D8D8D8;border-bottom:1px solid #D8D8D8;}
 	#content, #content_index  {}
 	#content_index {background-color:transparent;background-image:none;border:none;}
 /* @end */
@@ -205,7 +204,6 @@
 /*	--------------------------------------------------
 	10. Template & Footer > footer.html
 	-------------------------------------------------- */
-	#footer{background:#EBEBEB url("../images/bg_footer.png") repeat;border-top:1px solid #D8D8D8;}
 	#footer .footer_inner{color:#474747;}
 	#footer .admin_cp_link span{background:url("../images/admin_cp.gif") no-repeat center left;border:1px solid white;color:#4B4F52;}
 	#footer .admin_cp_link span:hover {color:#111;}

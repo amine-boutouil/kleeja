@@ -35,7 +35,7 @@ jQuery(document).ready(function($){
 $.pop();
 $('a[rel*=facebox]', 'a[rel*=facybox]').facybox();
 
-if(window.location.hash.indexOf("#!") != -1){
+if(window.location.hash.indexOf("#!") != -1 && '{current_smt}' != 'newplg'){
 	hash = window.location.hash.replace('#!', '');
 	where_are_we = hash.match(/cp\=([0-9a-z_]+)/);
 	if(!where_are_we){
@@ -66,7 +66,9 @@ if(window.location.hash.indexOf("#!") != -1){
 	}
 }
 else{
+if ('{current_smt}' != 'newplg'){
 	window.location.hash = '#!'
+}
 }
 
 window.onhashchange = function () {

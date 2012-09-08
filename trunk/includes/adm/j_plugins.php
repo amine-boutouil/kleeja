@@ -73,11 +73,11 @@ if ($dh = @opendir(PATH . 'cache'))
 
 $cache->clean('__changes_files__');
 
-redirect(basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'));
-
+//redirect(basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'));
+endif;
 
 //show icon of plugin
-elseif(isset($_GET['iconp'])):
+if(isset($_GET['iconp'])):
 
 //is there any changes from recent installing plugins
 $icon = false;
@@ -224,10 +224,10 @@ else:
 	//remember to add token at every m=? request !
 	if(!in_array($_GET['m'], array(4 ,6)))
 	{
-		if(!kleeja_check_form_key_get('adm_plugins'))
-		{
-			kleeja_admin_err($lang['INVALID_GET_KEY'], true, $lang['ERROR'], true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'), 2);
-		}
+	//	if(!kleeja_check_form_key_get('adm_plugins'))
+		//{
+			//kleeja_admin_err($lang['INVALID_GET_KEY'], true, $lang['ERROR'], true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'), 2);
+		//}
 	}
 
 	//handle all m=?
@@ -521,15 +521,15 @@ if(isset($_POST['submit_new_plg']))
 
 			#--->weiredooo stuff
 			case 'inst':
-				$text = $lang['NEW_PLUGIN_ADDED'] . '<meta HTTP-EQUIV="REFRESH" content="1; url=' . basename(ADMIN_PATH) . '?#!cp=' . basename(__file__, '.php') . '&amp;do_plg=' . $plg->plg_id . '&amp;m=4&amp;' . $GET_FORM_KEY . '">' . "\n";
+				$text = $lang['NEW_PLUGIN_ADDED'] . '<meta HTTP-EQUIV="REFRESH" content="1; url=' . basename(ADMIN_PATH) . '?#!cp=' . basename(__file__, '.php') . '&do_plg=' . $plg->plg_id . '&m=4&amp;' . $GET_FORM_KEY . '">' . "\n";
 			break;
 			case 'zipped':
-				$text = sprintf($lang['PLUGIN_ADDED_ZIPPED'], '<a onclick="javascript:get_kleeja_link(this.href); return false;" href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;do_plg=' . $plg->plg_id . '&amp;m=6&amp;fn=' . $plg->zipped_files . '&amp;' . $GET_FORM_KEY . '">', '</a>');
+				$text = sprintf($lang['PLUGIN_ADDED_ZIPPED'], '<a target="_blank" href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;do_plg=' . $plg->plg_id . '&amp;m=6&amp;fn=' . $plg->zipped_files . '&amp;' . $GET_FORM_KEY . '">', '</a>');
 				$text .= '<br /><br /><a onclick="javascript:get_kleeja_link(this.href); return false;" href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '">' . $lang['GO_BACK_BROWSER'] . '</a>';
 			break;
 			case 'zipped/inst':
 				$text = sprintf($lang['PLUGIN_ADDED_ZIPPED_INST'], 
-								'<a onclick="javascript:get_kleeja_link(this.href); return false;" href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;do_plg=' . $plg->plg_id . '&amp;m=6&amp;fn=' . $plg->zipped_files . '&amp;' . $GET_FORM_KEY . '">',
+								'<a target="_blank" href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;do_plg=' . $plg->plg_id . '&amp;m=6&amp;fn=' . $plg->zipped_files . '&amp;' . $GET_FORM_KEY . '">',
 								'</a>',
 								'<a onclick="javascript:get_kleeja_link(this.href); return false;" href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;do_plg=' . $plg->plg_id . '&amp;m=4&amp;' . $GET_FORM_KEY . '">',
 								'</a>'

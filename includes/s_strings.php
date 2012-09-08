@@ -40,7 +40,7 @@ class sa_srch
 	/**
 	* initiate class
 	*/
-	function do_search($type_of_do=1)
+	function do_search($type_of_do=2)
 	{
 		if($this->text == '')
 		{
@@ -109,7 +109,7 @@ class sa_srch
 	function type_after($same_line=false)
 	{
 		$md5_f = md5($this->text);
-		$this->text	=	preg_replace('#' . $this->ig_sp_exper(preg_quote($this->find_word, '#'))  . '#',  $this->find_word . (!$same_line ? "\n" : "") . $this->another_word . (!$same_line ? "\n" : ""), $this->text);
+		$this->text	=	preg_replace('#' . $this->ig_sp_exper(preg_quote($this->find_word, '#'))  . '#i',  $this->find_word . (!$same_line ? "\n" : "") . $this->another_word . (!$same_line ? "\n" : ""), $this->text);
 
 		//lets do it with another idea
 		if($md5_f == md5($this->text))
@@ -125,7 +125,7 @@ class sa_srch
 	function type_before($same_line=false)
 	{
 		$md5_f = md5($this->text);
-		$this->text	=	preg_replace('#' . $this->ig_sp_exper(preg_quote($this->find_word, '#')) . '#',   (!$same_line ? "\n" : "") . $this->another_word . (!$same_line ? "\n" : "")  . $this->find_word, $this->text);
+		$this->text	=	preg_replace('#' . $this->ig_sp_exper(preg_quote($this->find_word, '#')) . '#i',   (!$same_line ? "\n" : "") . $this->another_word . (!$same_line ? "\n" : "")  . $this->find_word, $this->text);
 		
 		//lets do it with another idea
 		if($md5_f == md5($this->text))
@@ -141,7 +141,7 @@ class sa_srch
 	function ig_sp_exper($text)
 	{
 		//clean spaces
-		$text = str_replace("\t", ' ', $text);
+		$text = str_replace("\t", ' ', trim($text));
 		$text = preg_replace("#\s{2,}#", ' ', $text);
 
 		//i can put * here, and will be very usefull, but will make

@@ -14,13 +14,20 @@ if (!defined('IN_ADMIN'))
 	exit();
 }
 
-//
-//todo : 
-// imporve FTP, it's enabled for developers now, so it want alot of testing
+
+#security vars
+$H_FORM_KEYS	= kleeja_add_form_key('adm_plugins');
+$GET_FORM_KEY	= kleeja_add_form_key_get('adm_plugins');
 
 
+#initiate plugins class
 include PATH . 'includes/plugins.php';
-$plg = new kplugins;
+$plg = new kplugins(
+	#folders that must be writable so, we dont use zips or ftp
+	array(
+		PATH . 'styles',
+		PATH . 'admin/toffee')
+);
 
 //check methods of files handler, if there is nothing of them, so 
 //we have disable uploading.
@@ -39,8 +46,9 @@ if($plg->f_method != '')
 	else
 	{
 		//todo : make sure to figure this from OS, and some other things
-		$ftp_info['path'] = '/public_html' . str_replace('/admin', '', dirname($_SERVER['PHP_SELF'])) . '/';
+		$ftp_info['path'] = str_replace('/includes/adm', '', dirname(__file__)) . '/';
 		$ftp_info['port'] = 21;
+		$ftp_info['host'] = 'ft.example.com';
 	}
 }
 
@@ -95,6 +103,7 @@ $SQL->close();
 exit;
 
 
+
 //show first page of plugins
 elseif (!isset($_GET['do_plg'])):
 
@@ -107,8 +116,6 @@ $no_plugins	= false;
 //kleeja depend on its users .. and kleeja love them .. so let's tell them about that ..
 $klj_d_s = $lang['KLJ_MORE_PLUGINS'][rand(0, sizeof($lang['KLJ_MORE_PLUGINS'])-1)];
 
-$H_FORM_KEYS	= kleeja_add_form_key('adm_plugins');
-$GET_FORM_KEY	= kleeja_add_form_key_get('adm_plugins');
 
 //
 // Check form key
@@ -215,11 +222,13 @@ else:
 
 	//check _GET Csrf token
 	//remember to add token at every m=? request !
-	if(!kleeja_check_form_key_get('adm_plugins'))
+	if(!in_array($_GET['m'], array(4 ,6)))
 	{
-		kleeja_admin_err($lang['INVALID_GET_KEY'], true, $lang['ERROR'], true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'), 2);
+		if(!kleeja_check_form_key_get('adm_plugins'))
+		{
+			kleeja_admin_err($lang['INVALID_GET_KEY'], true, $lang['ERROR'], true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'), 2);
+		}
 	}
-
 
 	//handle all m=?
 	switch($_GET['m'])
@@ -274,7 +283,7 @@ else:
 			}
 
 			$stylee		= "admin_plugin_mfile";
-			$action		= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;m=3&amp;un=1&amp;pn=' . htmlspecialchars($_GET['pn']) . '&amp;do_plg=' . $plg_id;
+			$action		= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;m=3&amp;un=1&amp;pn=' . htmlspecialchars($_GET['pn']) . '&amp;do_plg=' . $plg_id . '&amp;' . $GET_FORM_KEY;
 			$for_unistalling = true;
 
 			//after submit
@@ -385,189 +394,6 @@ else:
 							);
 
 		break;
-		case '5': //plugins exporting
-			if(!isset($plg_id))
-			{
-				kleeja_admin_err($lang['ERROR']);
-			}
-			
-			
-			//get plugin information
-			$query = array(
-				'SELECT'	=> '*',
-				'FROM'		=> "{$dbprefix}plugins",
-				'WHERE'		=> "plg_id=" . $plg_id
-			);
-
-			$result = $SQL->build($query);
-		
-			if($SQL->num_rows($result)>0)
-			{
-				$arr = array();
-
-				$row=$SQL->fetch_array($result);
-				
-				
-				//start xml
-				$name = $row['plg_name'] . '-' . str_replace('.', '-', $row['plg_ver']) . '.klj';
-
-				if (is_browser('mozilla'))
-				{
-					$h_name = "filename*=UTF-8''" . rawurlencode(htmlspecialchars_decode($name));
-				}
-				else if (is_browser('opera, safari, konqueror'))
-				{
-					$h_name = 'filename="' . str_replace('"', '', htmlspecialchars_decode($name)) . '"';
-				}
-				else
-				{
-					$h_name = 'filename="' . rawurlencode(htmlspecialchars_decode($name)) . '"';
-				}
-
-				if (@ob_get_length())
-				{
-					@ob_end_clean();
-				}
-
-				// required for IE, otherwise Content-Disposition may be ignored
-				if(@ini_get('zlib.output_compression'))
-				{
-					@ini_set('zlib.output_compression', 'Off');
-				}
-				
-				header('Pragma: public');
-				header('Content-Type: text/xml');
-				header('X-Download-Options: noopen');
-				header('Content-Disposition: attachment; '  . $h_name);
-				
-				function clean_xml($str)
-				{
-					 return str_replace(array('"', "'", '<', '>', '&'), array('&quot;', '&apos;', '&lt;', '&gt;', '&amp;'), $str);
-				}
-				
-				function clean_xml_cdata($str)
-				{
-					return str_replace(array('<![CDATA', ']]>'), array('&lt;![CDATA', ']]&gt;'), $str);
-				}
-				
-				echo '<?xml version="1.0" encoding="utf-8"?>' . "\n";
-				echo '<kleeja>' . "\n";
-				echo "\t" . '<info>' . "\n";
-				echo "\t\t" . '<plugin_name>' . clean_xml($row['plg_name']) . '</plugin_name>' . "\n";
-				echo "\t\t" . '<plugin_version>' . clean_xml($row['plg_ver']) . '</plugin_version>' . "\n";
-				echo "\t\t" . '<plugin_description>' . "\n";
-				$plgdsc = unserialize(kleeja_base64_decode($row['plg_dsc']));
-				foreach($plgdsc as $ln => $cn)
-				{
-					echo "\t\t\t" . '<description lang="' . $ln . '">' . clean_xml($cn) . '</description>' . "\n";
-				}
-				echo "\t\t" . '</plugin_description>' . "\n";
-				echo "\t\t" . '<plugin_author>' . clean_xml($row['plg_author']) . '</plugin_author>' . "\n";
-				echo "\t\t" . '<plugin_kleeja_version>' . clean_xml(KLEEJA_VERSION) . '</plugin_kleeja_version>' . "\n";
-				echo "\t\t" . '<plugin_icon><![CDATA[' . clean_xml_cdata($row['plg_icon']) . ']]></plugin_icon>' . "\n";
-				echo "\t" . '</info>' . "\n";
-				
-				if(!empty($row['plg_instructions']))
-				{
-					echo  "\t" . '<instructions>' . "\n";
-					$inst = unserialize(kleeja_base64_decode($row['plg_instructions']));
-					foreach($inst as $lang => $instruction)
-					{
-						echo  "\t\t" . '<instruction lang="' . $lang . '"><![CDATA[' .  clean_xml_cdata($instruction)  . ']]></instruction>' . "\n";
-					}
-					echo  "\t" . '</instructions>' . "\n";
-				}
-				
-				echo "\t" . '<uninstall><![CDATA[' . "\n";
-				echo clean_xml_cdata($row['plg_uninstall']);
-				echo "\t" . ']]></uninstall>' . "\n";
-
-				echo "\t" . $row['plg_store'] . "\n";
-
-				$querylang = $SQL->build(array(
-												'SELECT'=> 'DISTINCT(lang_id)', 
-												'FROM'	=> "{$dbprefix}lang",
-												'WHERE' => "plg_id=" . $plg_id
-											));
-
-				if($SQL->num_rows($querylang)>0)
-				{
-					echo "\t" . '<phrases>' . "\n";
-					while($phrases=$SQL->fetch_array($querylang))
-					{
-						echo "\t\t" . '<lang name="' . $phrases['lang_id'] . '">' . "\n";
-
-						$queryp = $SQL->build(array(
-													'SELECT'	=> '*',
-						 							'FROM'		=> "{$dbprefix}lang",
-													'WHERE'		=> "plg_id='" . $plg_id . "' AND lang_id='" . $phrases['lang_id'] . "'"
-												));
-
-						while($phrase=$SQL->fetch_array($queryp))
-						{
-							echo "\t\t\t" . '<phrase name="' . $phrase['word'] . '"><![CDATA[' . clean_xml_cdata($phrase['trans']) . ']]></phrase>' . "\n";
-						}
-						echo "\t\t" . '</lang>' . "\n";
-					}
-					echo "\t" . '</phrases>' . "\n";
-				}
-
-				$queryconfig = $SQL->build(array(
-												'SELECT'	=> '*', 
-												'FROM'	=> "{$dbprefix}config",
-												'WHERE' => "plg_id=" . $plg_id)
-												);
-
-				if($SQL->num_rows($queryconfig)>0)
-				{
-					echo "\t" . '<options>' . "\n";
-					while($config=$SQL->fetch_array($queryconfig))
-					{
-						echo "\t\t" . '<option name="' . $config['name'] . '" value="' . $config['value'] . '" order="' . $config['display_order'] . '" menu="' . $config['type'] . '"><![CDATA[' . clean_xml_cdata($config['option']) . ']]></option>' . "\n";
-					}
-					echo "\t" . '</options>' . "\n";
-				}
-
-				$queryhooks = $SQL->build(array(
-												'SELECT'	=> '*', 
-												'FROM'		=> "{$dbprefix}hooks",
-												'WHERE'		=> "plg_id=" . $plg_id
-											));
-
-				if($SQL->num_rows($queryhooks)>0)
-				{
-					echo "\t" . '<hooks>' . "\n";
-					while($hook=$SQL->fetch_array($queryhooks))
-					{
-						echo "\t\t" . '<hook name="' . $hook['hook_name'] . '"><![CDATA[' . clean_xml_cdata($hook['hook_content']) . ']]></hook>' . "\n";
-					}
-					echo "\t" . '</hooks>' . "\n";
-				}
-				
-				if(!empty($row['plg_files']))
-				{
-					$nfiles = unserialize(kleeja_base64_decode($row['plg_files']));
-					echo "\t" . '<files>' . "\n";
-					foreach($nfiles as $f)
-					{
-						if($f[0] == '/')
-						{
-							$f = substr($f, 1);
-						}
-						echo "\t\t" . '<file path="' . $f . '"><![CDATA[' . kleeja_base64_encode(@file_get_contents(PATH . $f)) . ']]></file>' . "\n";
-					}
-					echo "\t" . '</files>' . "\n";
-				}
-
-				echo '</kleeja>';
-				exit;
-			}
-			else
-			{
-				kleeja_admin_err($lang['ERROR']);
-			}
-
-		break;
 		
 		//downaloding zipped changes ..
 		case 6:
@@ -659,7 +485,6 @@ if(isset($_POST['submit_new_plg']))
 			}
 			else
 			{
-				
 				$plg->info = $ftpinfo = array('host'=>$_POST['ftp_host'], 'port'=>$_POST['ftp_port'], 'user'=>$_POST['ftp_user'], 'pass'=>$_POST['ftp_pass'], 'path'=>$_POST['ftp_path']);
 
 				$ftpinfo['pass'] = '';
@@ -675,7 +500,6 @@ if(isset($_POST['submit_new_plg']))
 		{
 			$plg->f_method = 'zfile';
 			$plg->check_connect();
-			
 		}
 
 		$return = $plg->add_plugin($contents);
@@ -694,6 +518,8 @@ if(isset($_POST['submit_new_plg']))
 			case 'upd': // updated success
 				$text = $lang['PLUGIN_UPDATED_SUCCESS'];
 			break;
+
+			#--->weiredooo stuff
 			case 'inst':
 				$text = $lang['NEW_PLUGIN_ADDED'] . '<meta HTTP-EQUIV="REFRESH" content="1; url=' . basename(ADMIN_PATH) . '?#!cp=' . basename(__file__, '.php') . '&amp;do_plg=' . $plg->plg_id . '&amp;m=4&amp;' . $GET_FORM_KEY . '">' . "\n";
 			break;

@@ -35,12 +35,11 @@ jQuery(document).ready(function($){
 </script>
 
 <!-- the big box begin -->
-   <div class="tit_con">
-<h1>{lang.R_FILES}  [{current_page}/{total_pages}]</h1>
-   </div>
 <div class="big-box">
-
-
+<div class="tit_con">
+	<h1>{lang.R_FILES}  [{current_page}/{total_pages}]</h1>
+</div>
+ 
 <IF NAME="is_search">
 <h2>{lang.FIND_IP_FILES} ( {nums_rows} ) {lang.FILE}  <IF NAME="nums_rows"> | <a href="{deletelink}"  onclick="javascript:get_kleeja_link(this.href, '#content', {confirm:true}); return false;">{lang.DELETEALLRES}</a></IF></h2>
 <ELSE></IF>

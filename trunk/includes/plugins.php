@@ -26,33 +26,60 @@ class kplugins
 	//everytime we install plugin
 	//we ask user for this..
 	var $info		= array();
-	var $f_method	= 'kfile';
+	var $f_method	= 'zfile';
 	var $f			= null;
 	var $plg_id		= 0;
 	var $zipped_files	= '';
 	var $is_ftp_supported = true;
+	var $check_writable_paths = PATH; //use comma for seperation
 
-	function kplugins()
+	function kplugins($paths = '')
 	{
-		//check for the best method of files handling
+		//zip file is default
 		$this->f_method = 'zfile';
 		$disabled_functions = explode(',', @ini_get('disable_functions'));
-
-		if(is_writable(PATH))
+		if($paths != '')
 		{
-			$this->f_method = 'kfile';
+			$this->check_writable_paths = $paths;
 		}
-		//it's not finished yet, it's enabled for developers right now !
-		else if (@extension_loaded('ftp'))
+
+		#kfile, is good if it's allowd!
+		$p_check = array();
+		if(trim($this->check_writable_paths) != '')
+		{
+			if(strpos($this->check_writable_paths, ',') !== false)
+			{
+				$p_check = array_map('trim', explode(',', $this->check_writable_paths));
+				$this->f_method = 'kfile';
+				foreach($p_check as $path)
+				{
+					if(!is_writable($path))
+					{
+						$this->f_method = 'zfile';
+						break;
+					}
+				}
+			}
+			else
+			{
+				if(is_writable(trim($this->check_writable_paths)))
+				{
+					$this->f_method = 'kfile';
+				}
+			}
+		}
+
+		#last choice, ftp ..
+		if ($this->f_method == 'zfile' && @extension_loaded('ftp'))
 		{
 			$this->is_ftp_supported = true;
 			$this->f_method = 'kftp';
 		}
-		else if (!in_array('fsockopen', $disabled_functions))
-		{
+		//else if (!in_array('fsockopen', $disabled_functions))
+		//{
 			//not supported yet !
 			//$this->f_method = 'kfsock';
-		}
+		//}
 
 		$this->check_connect();
 	}
@@ -80,7 +107,7 @@ class kplugins
 
 	function add_plugin($contents)
 	{
-		global $dbprefix, $SQL, $lang, $config, $STYLE_PATH_ADMIN , $STYLE_PATH, $THIS_STYLE_PATH, $olang;
+		global $dbprefix, $SQL, $lang, $config, $DEFAULT_PATH_ADMIN_ABS, $THIS_STYLE_PATH_ABS, $olang;
 
 		//initiate file handler
 		if(empty($this->f) && $this->f_method != '')
@@ -413,7 +440,7 @@ class kplugins
 						case 'replace_with': $action_type =1; break;
 					endswitch;
 
-					$style_path = (substr($template_name, 0, 6) == 'admin_') ? $STYLE_PATH_ADMIN : $THIS_STYLE_PATH;
+					$style_path = (substr($template_name, 0, 6) == 'admin_') ? $DEFAULT_PATH_ADMIN_ABS : $THIS_STYLE_PATH_ABS;
 
 					//if template not found and default style is there and not admin tpl
 					$template_path = $style_path . $template_name . '.html';
@@ -474,7 +501,7 @@ class kplugins
 
 				foreach($plg_tpl['new']['template'] as $temp)
 				{
-					$style_path = (substr($template_name, 0, 6) == 'admin_') ? $STYLE_PATH_ADMIN : $THIS_STYLE_PATH;
+					$style_path = (substr($template_name, 0, 6) == 'admin_') ? $DEFAULT_PATH_ADMIN_ABS : $THIS_STYLE_PATH_ABS;
 					$template_name		= $temp['attributes']['name'];
 					$template_content	= trim($temp['value']);
 
@@ -558,7 +585,7 @@ class kplugins
 				fclose($filename);
 			}
 
-			if($this->f_method === 'zfile')
+			if($this->f_method == 'zfile')
 			{
 				if($this->f->check())
 				{
@@ -588,7 +615,7 @@ class kplugins
 	*/
 	function delete_ch_tpl($template_name, $delete_txt = array())
 	{
-		global $dbprefix, $lang, $config, $STYLE_PATH_ADMIN , $STYLE_PATH, $THIS_STYLE_PATH;
+		global $dbprefix, $lang, $config, $DEFAULT_PATH_ADMIN_ABS, $THIS_STYLE_PATH_ABS;
 		
 		if(is_array($template_name))
 		{
@@ -600,7 +627,7 @@ class kplugins
 		}
 
 
-		$style_path = (substr($template_name, 0, 6) == 'admin_') ? $STYLE_PATH_ADMIN : $THIS_STYLE_PATH;
+		$style_path = (substr($template_name, 0, 6) == 'admin_') ? $DEFAULT_PATH_ADMIN_ABS : $THIS_STYLE_PATH_ABS;
 		$is_admin_template = (substr($template_name, 0, 6) == 'admin_') ? true : false;
 
 		//if template not found and default style is there and not admin tpl

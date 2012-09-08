@@ -475,6 +475,29 @@ background-color:#E3F2FF;
 	text-align:right;	
 }
 
+.fmethod h2{
+	font-size:16px;
+	font-weight:bold !important;
+}
+
+.fmethod .filemethod{
+	font-size:12px;
+	padding:1px;
+}
+
+#ftp_info_div{
+	margin-top:3px;
+}
+#ftp_info_div table{
+	border:1px solid #ccc;
+	padding:3px;
+}
+
+#ftp_info_div td{
+	text-align:right !important;
+	border-bottom:1px dotted #ccc;
+}
+
 
 
 /*plugin img*/

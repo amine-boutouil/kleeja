@@ -193,7 +193,7 @@ if(isset($_GET['del_user']))
 
 	$SQL->build($d_query);
 
-	kleeja_admin_info($lang['USER_DELETED'], true, '', true, $action, 2);
+	kleeja_admin_info($lang['USER_DELETED'], true, '', true, './');
 }
 
 

@@ -22,11 +22,11 @@
 <div id="plugin_boxes">
 <LOOP NAME="arr">
 <div class="plugin_box" onclick="javascript:jQuery.facybox({div:'#plugin-{{plg_id}}'});" 
-	onmouseover="javascript:$('.plugin_info_show').show();$('.plugin_else').hide();" 
-	onmouseout="javascript:$('.plugin_info_show').hide();$('.plugin_else').show();"
+	onmouseover="javascript:$('.plugin_info_show-{{plg_id}}').show();$('.plugin_else-{{plg_id}}').hide();" 
+	onmouseout="javascript:$('.plugin_info_show-{{plg_id}}').hide();$('.plugin_else-{{plg_id}}').show();"
 	style="float:<IF LOOP="i">left<ELSE>right</IF>">
-	<div class="plugin_info_show"><div class="f_text">{lang.VIEW}</div></div>
-	<div class="plugin_else">
+	<div class="plugin_info_show plugin_info_show-{{plg_id}}"><div class="f_text">{lang.VIEW}</div></div>
+	<div class="plugin_else plugin_else-{{plg_id}}">
 		<div class="plugin_img"><img src="{{plg_icon_url}}" /></div>
 		<div class="plugin_title">{{plg_name}} {{plg_ver}}</div>
 		<div class="plugin_by">{{plg_author}}</div>
@@ -43,7 +43,6 @@
 		<a onclick="javascript:$.facybox.close(); get_kleeja_link(this.href); return false;" href="{action}&amp;do_plg={{plg_id}}&amp;m=1&amp;pn={{plg_name}}&amp;{GET_FORM_KEY}" title="{lang.DISABLE}"><img src="{STYLE_PATH_ADMIN}images/disable.png" alt="{lang.DISABLE}" /> {lang.DISABLE}</a>
 		</IF>
 		<a onclick="javascript:$.facybox.close(); get_kleeja_link(this.href, '#content', {confirm:true}); return false;" href="{action}&amp;do_plg={{plg_id}}&amp;m=3&amp;pn={{plg_name}}&amp;{GET_FORM_KEY}" title="{lang.DELETE}"><img src="{STYLE_PATH_ADMIN}images/del.png" alt="{lang.DELETE}" /> {lang.DELETE}</a>
-		<!--a onclick="javascript:get_kleeja_link(this.href); return false;" href="{action}&amp;do_plg={{plg_id}}&amp;m=5&amp;{GET_FORM_KEY}" title="{lang.EXPORT_AS_XML}"><img src="{STYLE_PATH_ADMIN}images/export.png" alt="{lang.EXPORT_AS_XML}" /></a-->
 		<IF LOOP="plg_instructions">
 		<a onclick="javascript:$.facybox.close(); get_kleeja_link(this.href); return false;" href="{action}&amp;do_plg={{plg_id}}&amp;m=4&amp;{GET_FORM_KEY}" title="{lang.INFORMATION}"><img src="{STYLE_PATH_ADMIN}images/help.png" alt="{lang.INFORMATION}" /> {lang.INFORMATION}</a>
 		</IF>
@@ -96,12 +95,12 @@
 <!-- the big box begin -->
 <div class="big-box">
 <div class="tit_con">
-<h1><a href="{action}&amp;smt=general" onclick="javascript:get_kleeja_link(this.href); return false;">{lang.R_PLUGINS}</a> &raquo; {lang.ADD_NEW_PLUGIN}</h1>   
+	<h1><a href="{action}&amp;smt=general" onclick="javascript:get_kleeja_link(this.href); return false;">{lang.R_PLUGINS}</a> &raquo; {lang.ADD_NEW_PLUGIN}</h1>   
 </div>
 
 <div class="note-info"><strong>{lang.NOTE} !</strong> {lang.PLUGIN_CONFIRM_ADD}</div>
 
-<form method="post" action="{action}" enctype="multipart/form-data">
+<form method="post" action="{action}" enctype="multipart/form-data" id="add_plugin_form">
 
 <div class="section">
 	<h3><label for="imp_file">{lang.ADD_NEW_PLUGIN_EXP}</label></h3>
@@ -113,6 +112,7 @@
 
 <IF NAME="there_is_files_method != kfile">
 	<div class="br"></div>
+	<div class="hr"></div>
 	<INCLUDE NAME="admin_plugin_mfile"> 
 </IF>
 
@@ -120,9 +120,9 @@
 
 <p class="submit">
 	<input type="hidden" name="submit_new_plg" value="1" />
-	<button type="submit" id="submit" name="submit_new_plg" class="btn"><span>{lang.SUBMIT}</span></button>
+	<button type="submit" name="submit_new_plg" class="btn"><span>{lang.SUBMIT}</span></button>
 </p>
-	
+
 {H_FORM_KEYS}
 </form>
 </div>

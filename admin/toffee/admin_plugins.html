@@ -12,10 +12,6 @@
 </div>
 <!-- the big box begin -->
 <div class="big-box">
-
-<h2>{lang.PLUGINS_EX}</h2>
-
-
 <IF NAME="no_plugins">
 {lang.NO_PLUGINS}
 <ELSE>
@@ -66,8 +62,10 @@
 <!-- note for user  -->
 <!-- cached changed -->
 <IF NAME="is_there_changes_files">
-<!-- the big box begin -->
-<div class="big-box">
+<div class="hr"></div>
+
+<!-- the big box begin#changes_files -->
+<div class="big-box changes_files">
 <h1>{lang.PLUGINS_CHANGES_FILES} </h1>
 <h2>{lang.PLUGINS_CHANGES_FILES_EXP}</h2>
 
@@ -76,16 +74,21 @@
 	<LOOP NAME="changes_files">	
 	<tr>
 			<td>{{file}}</td>
-			<td><a href="{{path}}">{lang.DOWNLAOD}</a></td>
+			<td class="downloadchf"><a href="{{path}}">{lang.DOWNLAOD}</a></td>
 	</tr>
 	</LOOP>
-	<tr>
-		<td colspan="2" style="text-align:center;padding:6px;font-size:16px"> [ <a href="{action}&amp;cc=1">{lang.DELETE}</a> ] </td>
-	</tr>
 </table>
 
+<p class="submit">
+	<button type="submit" class="btn" onclick="javascript:get_kleeja_link('{action}&amp;cc=1'); return false;"><span>{lang.DELETE}</span></button>
+</p>
+
+<div class="br"></div>
+<div class="br"></div>
+<div class="clear"></div>
+
 </div>
-<!-- the big box end -->
+<!-- the big box end#changes_files -->
 </IF>
 
 <div class="note-info"><strong>{lang.NOTE} !</strong> {klj_d_s}</div>

@@ -222,12 +222,12 @@ else:
 
 	//check _GET Csrf token
 	//remember to add token at every m=? request !
-	if(!in_array($_GET['m'], array(4 ,6)))
+	if((int) $_GET['m'] != 6 && (int) $_GET['m'] != 4)
 	{
-	//	if(!kleeja_check_form_key_get('adm_plugins'))
-		//{
-			//kleeja_admin_err($lang['INVALID_GET_KEY'], true, $lang['ERROR'], true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'), 2);
-		//}
+		if(!kleeja_check_form_key_get('adm_plugins'))
+		{
+			kleeja_admin_err($lang['INVALID_GET_KEY'], true, $lang['ERROR'], true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'), 2);
+		}
 	}
 
 	//handle all m=?
@@ -355,18 +355,16 @@ else:
 				delete_cache(array('data_plugins', 'data_config'));
 
 				$plg->atend();
-				
+
 				if(empty($plg->zipped_files))
 				{
-					$text = $lang['PLUGIN_DELETED'];
+					kleeja_admin_info($lang['PLUGIN_DELETED'], false, '', true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;' . $current_smt);
 				}
-				else
-				{
-					$text = sprintf($lang['PLUGIN_DELETED_ZIPPED'], '<a  onclick="javascript:get_kleeja_link(this.href); return false;"  href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;do_plg=' . $plg->plg_id . '&amp;m=6&amp;fn=' . $plg->zipped_files . '&amp;smt=' . $current_smt . '">', '</a>');
-					$text .= '<br /><br /><a  onclick="javascript:get_kleeja_link(this.href); return false;"  href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;smt=' . $current_smt . '">' . $lang['GO_BACK_BROWSER'] . '</a>';
-				}
-
-				kleeja_admin_info($text, false, '', true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;' . $current_smt);
+				
+				//if there is a zip?
+				$text = sprintf($lang['PLUGIN_DELETED_ZIPPED'], '<a target="_blank"  href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;do_plg=' . $plg->plg_id . '&amp;m=6&amp;fn=' . $plg->zipped_files . '&amp;smt=' . $current_smt . '">', '</a>');
+				$text .= '<br /><br /><a  onclick="javascript:get_kleeja_link(this.href); return false;"  href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;smt=' . $current_smt . '">' . $lang['GO_BACK_BROWSER'] . '</a>';
+				kleeja_admin_info($text, false, '', true, false);
 			}
 
 		break;

@@ -333,10 +333,12 @@ if(!isset($_GET['_ajax_']))
 //body
 if(!isset($_GET['_ajax_']))
 {
+	$is_ajax = 'no';
 	echo $tpl->display($stylee);
 }
 else
 {
+	$is_ajax = 'yes';
 	$go_menu_html = '';
 	if(isset($go_menu))
 	{

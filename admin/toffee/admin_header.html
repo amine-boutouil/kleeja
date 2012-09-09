@@ -35,7 +35,7 @@ jQuery(document).ready(function($){
 $.pop();
 $('a[rel*=facebox]', 'a[rel*=facybox]').facybox();
 
-if(window.location.hash.indexOf("#!") != -1 && '{current_smt}' != 'newplg'){
+if(window.location.hash.indexOf("#!") != -1 && '{is_ajax}' != 'newplg'){
 	hash = window.location.hash.replace('#!', '');
 	where_are_we = hash.match(/cp\=([0-9a-z_]+)/);
 	if(!where_are_we){
@@ -75,6 +75,10 @@ window.onhashchange = function () {
 	//for # in address bar
 	hash = window.location.hash.replace('#!', '');
 	where_are_we = hash.match(/cp\=([0-9a-z_]+)/);
+	if(window.location.hash.indexOf("plugins") != -1){
+		return;
+	}
+	
 	if(!where_are_we){
 		where_are_we = 'index';
 		hash = 'cp=start';

@@ -402,22 +402,22 @@ background-color:#E3F2FF;
 
 /*start plugins page*/
 #plugin_boxes{
-	width:530px !important;
-	margin:0 60px;
+	width:535px !important;
 }
 
 .plugin_box{
-	width:240px;
-	height:200px;
+	width:230px;
+	height:197px;
 	background-color:#F8F8F8;
 	border:1px #ccc solid;
 	cursor:pointer;
-	margin-top:30px;
-	margin-left:20px;
+	margin-top:20px;
+	margin-left:10px;
+	
 }
 .plugin_box .plugin_info_show{
-	width:240px;
-	height:200px;
+	width:230px;
+	height:197px;
 	display:none;
 	background:#fff url(../images/plugin_show_info.png) no-repeat;
 }
@@ -431,7 +431,7 @@ background-color:#E3F2FF;
 	width:222px;
 	height:142px;
 	background:#fff url(../images/default_plguin_icon.png) no-repeat;
-	margin:9px auto;
+	margin:3px auto;
 }
 .plugin_box  .plugin_else .plugin_img img{
 	display:block;

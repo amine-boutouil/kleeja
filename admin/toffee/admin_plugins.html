@@ -16,7 +16,10 @@
 {lang.NO_PLUGINS}
 <ELSE>
 <div id="plugin_boxes">
+<table style="width:100%">
+<tr>
 <LOOP NAME="arr">
+<td>
 <div class="plugin_box" onclick="javascript:jQuery.facybox({div:'#plugin-{{plg_id}}'});" 
 	onmouseover="javascript:$('.plugin_info_show-{{plg_id}}').show();$('.plugin_else-{{plg_id}}').hide();" 
 	onmouseout="javascript:$('.plugin_info_show-{{plg_id}}').hide();$('.plugin_else-{{plg_id}}').show();"
@@ -45,10 +48,12 @@
 	</div>
 </div>
 </div>
-
 </div>
-<IF LOOP="i"><div class="clear"></div></IF>
+</td>
+<IF LOOP="i"></tr><tr></IF>
 </LOOP>
+</tr>
+</table>
 <div class="clear"></div>
 </div>
 </IF>
@@ -102,11 +107,13 @@
 </div>
 
 <div class="note-info"><strong>{lang.NOTE} !</strong> {lang.PLUGIN_CONFIRM_ADD}</div>
+<div class="hr"></div>
 
 <form method="post" action="{action}" enctype="multipart/form-data" id="add_plugin_form">
 
+<h2>{lang.ADD_NEW_PLUGIN_EXP}</h2>
 <div class="section">
-	<h3><label for="imp_file">{lang.ADD_NEW_PLUGIN_EXP}</label></h3>
+	<h3><label for="imp_file"></label></h3>
 	<div class="box">
 		<input name="imp_file" id="imp_file" type="file" />
 	</div>

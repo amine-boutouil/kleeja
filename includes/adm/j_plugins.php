@@ -137,7 +137,7 @@ if($SQL->num_rows($result)>0)
 		$desc = unserialize(kleeja_base64_decode($row['plg_dsc']));
 
 		$arr[]	= array(
-						'i'					=> $i % 2 == 0,
+						'i'					=> $i % 3 == 0,
 						'plg_id'			=> $row['plg_id'],
 						'plg_name'			=> str_replace('-', ' ', $row['plg_name']) . ($row['plg_disabled'] == 1 ? ' [ x ]': ''),
 						'plg_disabled'		=> (int) $row['plg_disabled'] == 1 ? true : false,
@@ -346,7 +346,7 @@ else:
 				{
 					kleeja_admin_info($lang['PLUGIN_DELETED'], false, '', true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;' . $current_smt);
 				}
-				
+
 				//if there is a zip?
 				$text = sprintf($lang['PLUGIN_DELETED_ZIPPED'], '<a target="_blank"  href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;do_plg=' . $plg->plg_id . '&amp;m=6&amp;fn=' . $plg->zipped_files . '&amp;smt=' . $current_smt . '">', '</a>');
 				$text .= '<br /><br /><a  onclick="javascript:get_kleeja_link(this.href); return false;"  href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;smt=' . $current_smt . '">' . $lang['GO_BACK_BROWSER'] . '</a>';

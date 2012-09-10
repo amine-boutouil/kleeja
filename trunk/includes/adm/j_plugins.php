@@ -302,7 +302,7 @@ else:
 					$plg->f_method = 'zfile';
 					$plg->check_connect();
 				}
-			
+
 				//before delete we have look for unistalling 
 				$query	= array(
 								'SELECT'	=> 'plg_uninstall, plg_files',

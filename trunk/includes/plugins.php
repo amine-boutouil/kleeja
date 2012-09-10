@@ -433,12 +433,12 @@ class kplugins
 							}
 						}
 					}
-					
+
 					$d_contents = file_exists($template_path) ? file_get_contents($template_path) : '';
 					$finder->text = trim($d_contents);
 					$finder->do_search($action_type);
-									
-					if($d_contents  == '' && $finder->text != $d_contents)
+
+					if($d_contents  != '' && $finder->text != $d_contents)
 					{
 						//update
 						$this->_write($style_path . $template_name . '.html', $finder->text);
@@ -679,7 +679,7 @@ class kplugins
 	*/
 	function delete_files($files = array())
 	{
-		if(empty($files) || $this->f_method == 'zfile')
+		if(empty($files))
 		{
 			return true;
 		}
@@ -716,17 +716,21 @@ class kplugins
 		$chmod_dir = false;
 		if (!file_exists($this->_fixpath($filepath)))
 		{
+			kleeja_log('1. not exsist: ' . $this->_fixpath($filepath));
 			if (!is_writable(dirname($this->_fixpath($filepath))))
 			{
+				kleeja_log('2. not writable: ' . dirname($this->_fixpath($filepath)));
 				#chmod is not a good boy. it doesnt help sometime ..
 				$chmod_dir = $this->_chmod(dirname($this->_fixpath($filepath)), 0777);
 			}
 		}
 		else
 		{
+			kleeja_log('3. exsist: ' . $this->_fixpath($filepath));
 			#file isnt writable? chmod it ..
 			if (!is_writable($this->_fixpath($filepath)))
 			{
+				kleeja_log('4. not wriable : ' . $this->_fixpath($filepath));
 				#chmod is not a good boy. it doesnt help sometime ..
 				$this->_chmod($this->_fixpath($filepath), 0666);
 			}
@@ -736,10 +740,11 @@ class kplugins
 		$filename = @fopen($this->_fixpath($filepath), 'w');
 		$fw = fwrite($filename, $content);
 		@fclose($filename);
-		
+
 		#fwrite return false if it can not write ..
 		if($fw === false)
 		{
+			kleeja_log('5 . fw === false : ' . $this->_fixpath($filepath));
 			$fw = $this->f->_write($this->_fixpath($filepath), $content);
 		}
 

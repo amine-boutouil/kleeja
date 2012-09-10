@@ -22,34 +22,21 @@ $GET_FORM_KEY	= kleeja_add_form_key_get('adm_plugins');
 
 #initiate plugins class
 include PATH . 'includes/plugins.php';
-$plg = new kplugins(
-	#folders that must be writable so, we dont use zips or ftp
-	array(
-		PATH . 'styles',
-		PATH . 'admin/toffee')
-);
+$plg = new kplugins();
 
-//check methods of files handler, if there is nothing of them, so 
-//we have disable uploading.
-$there_is_files_method = false;
-if($plg->f_method != '')
+//return values of ftp from config, if not get suggested one 
+$ftp_info = array('host', 'user', 'pass', 'path', 'port');
+
+if(!empty($config['ftp_info']))
 {
-	$there_is_files_method = $plg->f_method;
-
-	//return values of ftp from config, if not get suggested one 
-	$ftp_info = array('host', 'user', 'pass', 'path', 'port');
-
-	if(!empty($config['ftp_info']))
-	{
-		$ftp_info = @unserialize($config['ftp_info']);
-	}
-	else
-	{
-		//todo : make sure to figure this from OS, and some other things
-		$ftp_info['path'] = str_replace('/includes/adm', '', dirname(__file__)) . '/';
-		$ftp_info['port'] = 21;
-		$ftp_info['host'] = 'ft.example.com';
-	}
+	$ftp_info = @unserialize($config['ftp_info']);
+}
+else
+{
+	//todo : make sure to figure this from OS, and some other things
+	$ftp_info['path'] = str_replace('/includes/adm', '', dirname(__file__)) . '/';
+	$ftp_info['port'] = 21;
+	$ftp_info['host'] = 'ft.example.com';
 }
 
 $is_ftp_supported = $plg->is_ftp_supported;
@@ -315,7 +302,6 @@ else:
 					$plg->f_method = 'zfile';
 					$plg->check_connect();
 				}
-
 			
 				//before delete we have look for unistalling 
 				$query	= array(
@@ -477,6 +463,7 @@ if(isset($_POST['submit_new_plg']))
 	{
 		if(isset($_POST['_fmethod']) && $_POST['_fmethod'] == 'kftp')
 		{
+			$plg->f_method = 'kftp';
 			if(empty($_POST['ftp_host']) || empty($_POST['ftp_port']) || empty($_POST['ftp_user']) ||empty($_POST['ftp_pass']))
 			{
 				kleeja_admin_err($lang['EMPTY_FIELDS'], true,'', true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'));

@@ -36,44 +36,13 @@ class kplugins
 	function kplugins($paths = '')
 	{
 		//zip file is default
-		$this->f_method = 'zfile';
 		$disabled_functions = explode(',', @ini_get('disable_functions'));
-		if($paths != '')
-		{
-			$this->check_writable_paths = $paths;
-		}
-
-		#kfile, is good if it's allowd!
-		$p_check = array();
-		if(trim($this->check_writable_paths) != '')
-		{
-			if(strpos($this->check_writable_paths, ',') !== false)
-			{
-				$p_check = array_map('trim', explode(',', $this->check_writable_paths));
-				$this->f_method = 'kfile';
-				foreach($p_check as $path)
-				{
-					if(!is_writable($path))
-					{
-						$this->f_method = 'zfile';
-						break;
-					}
-				}
-			}
-			else
-			{
-				if(is_writable(trim($this->check_writable_paths)))
-				{
-					$this->f_method = 'kfile';
-				}
-			}
-		}
 
 		#last choice, ftp ..
-		if ($this->f_method == 'zfile' && @extension_loaded('ftp'))
+		if (@extension_loaded('ftp'))
 		{
 			$this->is_ftp_supported = true;
-			$this->f_method = 'kftp';
+			//$this->f_method = 'kftp';
 		}
 		//else if (!in_array('fsockopen', $disabled_functions))
 		//{
@@ -392,9 +361,9 @@ class kplugins
 		{
 			foreach($newfiles as $path => $content)
 			{
-				$this->f->_write($this->_fixpath_newfile($path), kleeja_base64_decode($content));
+				$this->_write($this->_fixpath_newfile($path), kleeja_base64_decode($content));
 			}
-			
+
 			unset($newfiles);
 		}
 
@@ -455,7 +424,7 @@ class kplugins
 								$template_path = $template_path_alternative;
 							}
 						}
-						else if($config['style'] != 'default' && !$is_admin_template)
+						else if($config['style'] != 'default' && substr($template_name, 0, 6) != 'admin_')
 						{
 							$template_path_alternative = str_replace('/' . $config['style'] . '/', '/default/', $template_path);
 							if(file_exists($template_path_alternative))
@@ -469,10 +438,10 @@ class kplugins
 					$finder->text = trim($d_contents);
 					$finder->do_search($action_type);
 									
-					if($d_contents  != '' && $finder->text != $d_contents)
+					if($d_contents  == '' && $finder->text != $d_contents)
 					{
 						//update
-						$this->f->_write($style_path . $template_name . '.html', $finder->text);
+						$this->_write($style_path . $template_name . '.html', $finder->text);
 						//delete cache ..
 						delete_cache('tpl_' . $template_name);
 					}
@@ -490,7 +459,6 @@ class kplugins
 			//new templates 
 			if(isset($plg_tpl['new']))
 			{
-
 				if(is_array($plg_tpl['new']['template']))
 				{
 					if(array_key_exists("attributes",$plg_tpl['new']['template']))
@@ -505,7 +473,7 @@ class kplugins
 					$template_name		= $temp['attributes']['name'];
 					$template_content	= trim($temp['value']);
 
-					$this->f->_write($style_path . $template_name . '.html', $template_content);
+					$this->_write($style_path . $template_name . '.html', $template_content);
 
 					/**
 						$cached_instructions[$template_name] = array(
@@ -664,7 +632,7 @@ class kplugins
 		if($d_contents  != '' && md5($finder->text) != md5($d_contents) && is_writable($style_path))
 		{
 			//update
-			$this->f->_write($style_path . $template_name . '.html', $finder->text);
+			$this->_write($style_path . $template_name . '.html', $finder->text);
 			//delete cache ..
 			delete_cache('tpl_' . $template_name);
 		}
@@ -718,7 +686,7 @@ class kplugins
 
 		foreach($files as $path)
 		{
-			$this->f->_delete($this->_fixpath_newfile($path));
+			$this->_delete($this->_fixpath_newfile($path));
 		}
 		
 		return true;
@@ -738,59 +706,136 @@ class kplugins
 
 		return $path;
 	}
-}
-
-/**
-* Make changes with files using normal functions
-* @package Kleeja
-*/
-class kfile
-{
-	var $handler = null;
-	var $n = 'kfile';
-
-	function _open($info = array())
-	{
-		return true;
-	}
 	
-	function _close()
-	{
-		return true;
-	}
-
+	##
+	## handler
+	##
 	function _write($filepath, $content)
-	{
+	{		
+		#is this file exists ? well let see
+		$chmod_dir = false;
+		if (!file_exists($this->_fixpath($filepath)))
+		{
+			if (!is_writable(dirname($this->_fixpath($filepath))))
+			{
+				#chmod is not a good boy. it doesnt help sometime ..
+				$chmod_dir = $this->_chmod(dirname($this->_fixpath($filepath)), 0777);
+			}
+		}
+		else
+		{
+			#file isnt writable? chmod it ..
+			if (!is_writable($this->_fixpath($filepath)))
+			{
+				#chmod is not a good boy. it doesnt help sometime ..
+				$this->_chmod($this->_fixpath($filepath), 0666);
+			}
+		}
+
+		#now write in a simple way ..
 		$filename = @fopen($this->_fixpath($filepath), 'w');
-		fwrite($filename, $content);
+		$fw = fwrite($filename, $content);
 		@fclose($filename);
+		
+		#fwrite return false if it can not write ..
+		if($fw === false)
+		{
+			$fw = $this->f->_write($this->_fixpath($filepath), $content);
+		}
+
+		#re chmode it to 644 for the file, and 755 for the folder
+		$this->_chmod($this->_fixpath($filepath), 0666);
+		if($chmod_dir)
+		{
+			$this->_chmod(dirname($this->_fixpath($filepath)), 0755);
+		}
+		
+		return $fw;
 	}
 
 	function _delete($filepath)
 	{
-		return kleeja_unlink($this->_fixpath($filepath));
+		#do we need to chmod it and delete it ? i dont know this for now
+		$this->_chmod($this->_fixpath($filepath), 0666);
+		#if we cant delete in the old school way, let move to the handler	
+		if(($return = kleeja_unlink($this->_fixpath($filepath))))
+		{
+			$return = $this->f->_delete($this->_fixpath($filepath));
+		}
+		return $return;
 	}
 	
 	function _rename($oldfile, $newfile)
 	{
-		return @rename($this->_fixpath($oldfile), $this->_fixpath($newfile));
+		$this->_chmod($this->_fixpath($filepath), 0666);
+		#if we cant rename in the old school way, let move to the handler	
+		if(($return = @rename($this->_fixpath($oldfile), $this->_fixpath($newfile))))
+		{
+			$return = $this->f->_rename($this->_fixpath($oldfile), $this->_fixpath($newfile));
+		}
+		return $return;
 	}
-	
+
 	function _chmod($filepath, $perm = 0644)
 	{
-		return @chmod($this->_fixpath($filepath), $perm);
+		#I told ya before this motherfucker is not helping so much .. 
+		#it need alot of checking and stuff and I really dont like 
+		#to spend alot doing that since systems are widly differnt.
+		if(($return = @chmod($this->_fixpath($filepath), $perm)))
+		{
+			$return = $this->f->_chmod($this->_fixpath($filepath), $perm);
+		}
+		return $return;
 	}
-	
+
 	function _mkdir($dir, $perm = 0777)
 	{
-		return @mkdir($this->_fixpath($dir), $perm);
+		#make sure the root folder is writable so we can add folder to it
+		$chmod_dir = false;
+		if (!is_writable(dirname($this->_fixpath($filepath))))
+		{
+			$chmod_dir = $this->_chmod(dirname($this->_fixpath($filepath)), 0777);
+		}
+
+		#old school or handler if failed?
+		if(($return = @mkdir($this->_fixpath($dir), $perm)))
+		{
+			$return = $this->f->_mkdir($this->_fixpath($dir), $perm);
+		}
+
+		#did we changed the perm of the root foldr ? let revert 
+		if($chmod_dir)
+		{
+			$this->_chmod(dirname($this->_fixpath($filepath)), 0755);
+		}
+
+		return $return;
 	}
 	
 	function _rmdir($dir)
 	{
-		return @rmdir($this->_fixpath($dir));
+		#make sure the root folder is writable so we can delete folder from it
+		$chmod_dir = false;
+		if (!is_writable(dirname($this->_fixpath($filepath))))
+		{
+			$chmod_dir = $this->_chmod(dirname($this->_fixpath($filepath)), 0777);
+		}
+
+		#old school or handler if failed?
+		if(($return = @rmdir($this->_fixpath($dir))))
+		{
+			$return = $this->f->_rmdir($this->_fixpath($dir));
+		}
+
+		#did we changed the perm of the root foldr ? let revert 
+		if($chmod_dir)
+		{
+			$this->_chmod(dirname($this->_fixpath($filepath)), 0755);
+		}
+		
+		return $return;
 	}
-	
+
 	function _fixpath($path)
 	{
 		if($path[0] == '/')
@@ -802,6 +847,7 @@ class kfile
 	}
 }
 
+
 /**
 * It's not a real method, it's just for save files changes
 * @package Kleeja
@@ -812,11 +858,14 @@ class zfile
 	var $files = array();
 	var $n = 'zfile';
 
+	#no need to open or close this handler .. 
 	function _open($info = array()){ return true; }
 	function _close() { return true; }
 
 	function _write($filepath, $content)
 	{
+		//isnt that simple ? ya it is.
+		//see last function here.
 		$this->files[$filepath] = $content;
 	}
 
@@ -838,19 +887,33 @@ class zfile
 	
 	function _chmod($filepath, $perm = 0644)
 	{
-		//i hv no idea ...
-		return true;
+		//tell me why 'false', well if it returning false that mean
+		//we will trying other methods and not relying on it .. so 
+		//it's a wise call.
+		return false;
 	}
-	
+
 	function _mkdir($dir, $perm = 0777)
 	{
-		//we can make dir in zip file, so wut ?
+		//kleeja figure out in zip class itself that,
+		//so no need for standing here and yelling waiting
+		//the zip class listen, it is already did that .. 
 		return true;
 	}
-	function _rmdir($dir){ return true; }
-	
+	function _rmdir($dir)
+	{
+		//who cares ? 
+		//the most important part is creating folders or
+		//editing files .. deleting in zip is not helping
+		//or let say it's crazy to think of it.
+		return true;
+	}
+
 	function check()
 	{
+		//let tell kleeja that there is files here 
+		//so give the user the ability to download them and apply
+		//the changes to the root folder.
 		return @sizeof($this->files) ? true : false;
 	}
 	
@@ -1157,7 +1220,7 @@ class zipfile
 
 	function check_file_path($filepath)
 	{
-		// todo : check dir and creat them
+		// todo : check dir and create them
 		// path/path2/path3/filename.ext
 		// here there is 3 folder, so you have to make them
 		// before creating file

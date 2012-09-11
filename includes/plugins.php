@@ -59,7 +59,7 @@ class kplugins
 			$this->f = new $this->f_method;
 		}
 
-		if($this->f->_open($this->info))
+		if(!$this->f->_open($this->info))
 		{
 			return false;
 		}

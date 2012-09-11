@@ -58,7 +58,110 @@
 			</tr>
 		</table>
 	</div>
-	<!-- @end-box-Downlod -->   
+	
+<!-- kleeja-comments-2 --><IF NAME="config.kljc_comments">
+<br />
+<h2>{olang.KLJC_COMMENTS}.. <IF NAME="nums_rows">(<em>{nums_rows}</em>)</IF></h2> 
+<div style="margin-bottom: 12px; background-color: #3B6EBF; height: 1.5px;"></div>
+
+<div id="comments">
+
+<IF NAME="no_results">
+<div align="center"><h2>{olang.KLJC_NO_COMMENTS_YET}</h2></div>
+<ELSE>
+
+<IF NAME="user_is_admin">
+<script language="JavaScript">
+<!-- Begin
+function toggleAll(cb) 
+{
+	var val = cb.checked;
+	var frm = document.forms[0];
+	var len = frm.elements.length;
+	var i=0;
+	for( i=0 ; i<len ; i++) 
+	{
+		if (frm.elements[i].type=="checkbox" && frm.elements[i]!=cb) 
+		{
+			frm.elements[i].checked=val;
+		}
+	}
+}
+
+//  End -->
+</script>
+<form name="commentx" action="{action}" method="post">
+</IF>
+<table style="width:100%">
+		<LOOP NAME="klj_comments">
+		<tr>
+			<td style="width:36px;vertical-align:top">{{avatar}}</td>
+			<td style="background-color:<RAND="#EBEBEB","#F7F7F7">">
+				<srong><IF LOOP="website"><a href="{{website}}">{{username}}</a><ELSE>{{username}}</IF></srong> : <br />
+				{{comment}}
+				<br />
+				<br />
+				<div style="margin-bottom: 4px; background-color: #CCCCCC; height: 1px;"></div>
+<IF NAME="user_is_admin">{lang.DELETE} : <input type="checkbox" name="checkbox[]" id="checkboc[]" value="{{id}}"> - <em>IP : {{ip}}</em> - </IF>{{date}}	
+			<br /><br />
+			</td>
+		</tr>
+		</LOOP>
+	</table>
+<IF NAME="user_is_admin">
+<br />
+{olang.KLJC_CHECKUNCHECKALL}<input type="checkbox" name="checkall" onclick="toggleAll(this)" id="Checkbox1" />
+<input type="submit" name="submit_comments" value="{lang.DEL_SELECTED}" />
+</form>
+</IF>
+<br />
+<div style="text-align:center"><b>{page_nums}</b></div>
+<br />	
+</IF>
+<IF NAME="promition">
+<h2>{olang.KLJC_ADD_COMMENT} : </h2> 
+<div style="margin-bottom: 12px; background-color: #3B6EBF; height: 1.5px;"></div>
+	<form name="comment" action="{action}" method="post">
+		<table width="540" align="center" border="0" cellspacing="4" cellpadding="4">
+	<IF NAME="klj_noname">
+		<tr>
+		<td>{olang.KLJC_NAME}</td>
+		<td><input type="text" name="name" value="" /></td>
+		</tr>
+	</IF>
+	<IF NAME="klj_nomail">
+	<tr>
+		<td>{olang.KLJC_EMAIL}</td>
+		<td><input type="text" name="mail" value="" style="direction:ltr" /> [ {olang.KLJC_EMAIL_W} ]</td>
+	</tr>
+	</IF>
+		<tr>
+		<td>{olang.KLJC_WEBSITE}</td>
+		<td><input type="text" name="website" value="http://" style="direction:ltr" /></td>
+	</tr>
+			<tr>
+			<td align="right" valign="top">{olang.KLJC_TEXT}</td>
+			<td valign="top">
+			<textarea name="comment" style="width: 377px; height: 130px"></textarea>
+			<span></span></td>
+				</tr>
+				<tr>
+		<td>{kljc_math}</td>
+		<td><input type="text" name="math" value="" style="direction:ltr;width:40px" /></td>
+	</tr>
+		<tr>
+			<td></td>
+			<td align="left">
+			<input type="hidden" name="kljc_fileid" value="{id}" />
+			<input type="hidden" name="kljc_filename" value="{name}" />
+			<input type="submit" name="submit_comment" value="{olang.KLJC_ADD_COMMENT}"></td>
+		</tr>
+		</table>
+	</form>
+</IF>	
+</div>
+</IF><!-- #kleeja-comments-2 -->
+<!-- @end-box-Downlod -->   
 
 	<script type="text/javascript">
 	<!--

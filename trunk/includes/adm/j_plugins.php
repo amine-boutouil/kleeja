@@ -502,7 +502,7 @@ if(isset($_POST['submit_new_plg']))
 				
 				if(!$plg->check_connect())
 				{
-					kleeja_admin_err($lang['LOGIN_ERROR'], true,'', true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'));
+					kleeja_admin_err($lang['LOGIN_ERROR'], true,'', true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '?#!cp=' . basename(__file__, '.php'));
 				}
 			}
 		}

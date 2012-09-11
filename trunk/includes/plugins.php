@@ -49,7 +49,7 @@ class kplugins
 			//$this->f_method = 'kfsock';
 		//}
 
-		$this->check_connect();
+		//$this->check_connect();
 	}
 
 	function check_connect()
@@ -59,15 +59,12 @@ class kplugins
 			$this->f = new $this->f_method;
 		}
 
-		if(!$this->f->_open($this->info))
-		{
-			return false;
-		}
+		return $this->f->_open($this->info);
 	}
 
 	function atend()
 	{
-		if(!empty($this->f) && $this->f_method != 'zfile')
+		if(!empty($this->f))
 		{
 			$this->f->_close();
 		}
@@ -81,6 +78,7 @@ class kplugins
 		if(empty($this->f) && $this->f_method != '')
 		{
 			$this->f = new $this->f_method;
+			$this->check_connect();
 		}
 
 		//parse xml content
@@ -1098,10 +1096,11 @@ class kftp
 	function _open($info = array())
 	{
 		// connect to the server
-		$this->handler = ftp_connect($info['host'], $info['port'], $this->timeout);
-
+		$this->handler = @ftp_connect($info['host'], $info['port'], $this->timeout);
+		//kleeja_log(var_export($info))
 		if (!$this->handler)
 		{
+			//kleeja_log('!ftp_connect');
 			return false;
 		}
 
@@ -1111,6 +1110,7 @@ class kftp
 		// login to the server
 		if (!ftp_login($this->handler, $info['user'], $info['pass']))
 		{
+			//kleeja_log('!ftp_login');
 			return false;
 		}
 
@@ -1118,10 +1118,12 @@ class kftp
 
 		if (!$this->_chdir($this->root))
 		{
+			//kleeja_log('!_chdir');
 			$this->_close();
 			return false;
 		}
 
+		//kleeja_log('nice work kftp');
 		return true;
 	}
 

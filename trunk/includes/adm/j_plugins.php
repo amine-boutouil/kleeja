@@ -45,7 +45,7 @@ else
 	{
 		$ftp_info['path'] = '/public_html/';
 	}
-	
+
 	$ftp_info['port'] = 21;
 	$ftp_info['host'] = str_replace(array('http://', 'https://'), array('', ''), $config['siteurl']);
 
@@ -300,9 +300,8 @@ else:
 			$for_unistalling = true;
 
 			//after submit
-			if(isset($_GET['un']) || $plg->f_method == 'kfile')
+			if(isset($_GET['un']))
 			{
-			
 				if(isset($_POST['_fmethod']) && $_POST['_fmethod'] == 'kftp')
 				{
 					if(empty($_POST['ftp_host']) || empty($_POST['ftp_port']) || empty($_POST['ftp_user']) ||empty($_POST['ftp_pass']))

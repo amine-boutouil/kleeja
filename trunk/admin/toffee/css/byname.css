@@ -486,16 +486,27 @@ background-color:#E3F2FF;
 }
 
 #ftp_info_div{
-	margin-top:3px;
+	margin-top:15px;
+	background:#F9F9F9 url(../images/ftp.png) no-repeat 1% 5%;
 }
 #ftp_info_div table{
 	border:1px solid #ccc;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
 	padding:3px;
 }
 
+#ftp_info_div tr:hover{
+	background-color:#FFFFE5
+}
 #ftp_info_div td{
 	text-align:right !important;
 	border-bottom:1px dotted #ccc;
+}
+
+#ftp_info_div td:before{
+	content:"  ";
 }
 
 .changes_files td{

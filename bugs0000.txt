@@ -4,7 +4,7 @@
 
 
 [ ] not yet
-[-] will be ignored
+[-] will be ignored, or to be done at next release
 [x] done
 
 
@@ -24,28 +24,28 @@
 	-- IE9 [ ok ]
 	[  ] check LTR, RTL , other languages looks
 	
--[ ] Make sure that vb, phpbb integration work with the new group system !
+-[x] Make sure that vb, phpbb integration work with the new group system !
 -[ ] Try the group system with all siutations that may happin ?!!!
 -[ ] Security situation page 
 -[-] ACP firstpage !  
 -[ ] Test upgrades under any curcumstances, and avoids problems that happened before !
 -[x] images ACP -> search files from this IP,user
 -[ ] files ACP -> search files from this IP,user
--[ ] Dealing with the huge invasion of Nginx
+-[-] Dealing with the huge invasion of Nginx
 -[ ] Add phrases from within ACP, (show how to embed them in template ?)
--[ ] Mobile style, see admin/mobile [ related files common.php+admin/index.php ] { to test it, add define('IN_MOBILE', 1); to config.php } 
--[ ] filters at images & files (same db tables for searchs !)
-	-[ ] filters at images.
-	-[ ] filters at files.
-	-[ ] convert searches to use filters and show last 10 ones.
+-[-] Mobile style, see admin/mobile [ related files common.php+admin/index.php ] { to test it, add define('IN_MOBILE', 1); to config.php } 
+-[x] filters at images & files (same db tables for searchs !)
+	-[-] filters at images.
+	-[-] filters at files.
+	-[x] convert searches to use filters and show last 10 ones.
 -[ ] files of deleted user shows as 'deleted' user or 'guest' 
 -[x] increase csrf time of some time-wanted forms
--[ ] remove [remember me ... choices ] and make it simple 
--[ ] fix total size bar in acp
+-[x] remove [remember me ... choices ] and make it simple 
+-[x] fix total size bar in acp
 -[ ] add last-visit 'images' or 'files' page ..	
 -[x] check live plugin codes ... make it ok ..
--[ ] error message on user and group 
--[ ] error message after delte or add new ext. to the groups
+-[x] error message on user and group 
+-[x] error message after delte or add new ext. to the groups
 -[x] error message after mass maint. to the center
 
 

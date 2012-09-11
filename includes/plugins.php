@@ -781,16 +781,155 @@ class kplugins
 		return $return;
 	}
 
+	/**
+	 * @author faw, phpBB Group and Kleeja team
+	 */
 	function _chmod($filepath, $perm = 0644)
 	{
-		#I told ya before this motherfucker is not helping so much .. 
-		#it need alot of checking and stuff and I really dont like 
-		#to spend alot doing that since systems are widly differnt.
-		if(($return = @chmod($this->_fixpath($filepath), $perm)))
+		static $continue;
+
+		if(empty($continue))
 		{
-			$return = $this->f->_chmod($this->_fixpath($filepath), $perm);
+			if (!function_exists('fileowner') || !function_exists('filegroup'))
+			{
+				#if we cant get those data, no need to complete the check
+				$continue['process'] = false;
+			}
+			else
+			{
+				#get the owner and group of the common.php file, why common.php? it's the master
+				$common_php_owner = @fileowner(PATH . 'includes/common.php');
+				$common_php_group = @filegroup(PATH . 'includes/common.php');
+				// And the owner and the groups PHP is running under.
+				$php_uid = (function_exists('posix_getuid')) ? @posix_getuid() : false;
+				$php_gids = (function_exists('posix_getgroups')) ? @posix_getgroups() : false;
+				
+				// If we are unable to get owner/group, then do not try to set them by guessing
+				if (!$php_uid || empty($php_gids) || !$common_php_owner || !$common_php_group)
+				{
+					$continue['process'] = false;
+				}
+				else
+				{
+					$continue = array(
+						'process'		=> true,
+						'common_owner'	=> $common_php_owner,
+						'common_group'	=> $common_php_group,
+						'php_uid'		=> $php_uid,
+						'php_gids'		=> $php_gids,
+					);
+				}
+			}
 		}
-		return $return;
+		
+		# From static, or not .. lets continue
+		if ($continue['process'])
+		{
+			$file_uid = @fileowner($this->_fixpath($filepath));
+			$file_gid = @filegroup($this->_fixpath($filepath));
+
+			// Change owner
+			if (@chown($this->_fixpath($filepath), $continue['common_owner']))
+			{
+				clearstatcache();
+				$file_uid = @fileowner($this->_fixpath($filepath));
+			}
+
+			// Change group
+			if (@chgrp($this->_fixpath($filepath), $continue['common_group']))
+			{
+				clearstatcache();
+				$file_gid = @filegroup($this->_fixpath($filepath));
+			}
+
+			// If the file_uid/gid now match the one from common.php we can process further, else we are not able to change something
+			if ($file_uid != $continue['common_owner'] || $file_gid != $continue['common_group'])
+			{
+				$continue['process'] = false;
+			}
+		}
+
+		# Still able to process?
+		if ($continue['process'])
+		{
+			if ($file_uid == $continue['php_uid'])
+			{
+				$php = 'owner';
+			}
+			else if (in_array($file_gid, $continue['php_gids']))
+			{
+				$php = 'group';
+			}
+			else
+			{
+				// Since we are setting the everyone bit anyway, no need to do expensive operations
+				$continue['process'] = false;
+			}
+		}
+
+		// We are not able to determine or change something
+		if (!$continue['process'])
+		{
+			$php = 'other';
+		}
+
+		// Owner always has read/write permission
+		$owner = 4 | 2;
+		if (is_dir($this->_fixpath($filepath)))
+		{
+			$owner |= 1;
+
+			// Only add execute bit to the permission if the dir needs to be readable
+			if ($perm & 4)
+			{
+				$perm |= 1;
+			}
+		}
+
+		switch ($php)
+		{
+			case 'owner':
+				$result = @chmod($this->_fixpath($filepath), ($owner << 6) + (0 << 3) + (0 << 0));
+
+				clearstatcache();
+
+				if (is_readable($this->_fixpath($filepath)) && is_writable($this->_fixpath($filepath)))
+				{
+					break;
+				}
+
+			case 'group':
+				$result = @chmod($this->_fixpath($filepath), ($owner << 6) + ($perm << 3) + (0 << 0));
+
+				clearstatcache();
+
+				if ((!($perm & 4) || is_readable($this->_fixpath($filepath))) && (!($perm & 2) || is_writable($this->_fixpath($filepath))))
+				{
+					break;
+				}
+
+			case 'other':
+				$result = @chmod($this->_fixpath($filepath), ($owner << 6) + ($perm << 3) + ($perm << 0));
+
+				clearstatcache();
+
+				if ((!($perm & 4) || is_readable($this->_fixpath($filepath))) && (!($perm & 2) || is_writable($this->_fixpath($filepath))))
+				{
+					break;
+				}
+
+			default:
+				return false;
+			break;
+		}
+
+		# if nothing works well use the handler...
+		if(!$result)
+		{
+			$result = $this->f->_chmod($this->_fixpath($filepath), $perm);
+		}
+
+		return $result;
 	}
 
 	function _mkdir($dir, $perm = 0777)

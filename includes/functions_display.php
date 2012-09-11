@@ -742,38 +742,39 @@ function is_browser($b)
 	}
 	
     //if no agent, let's take the worst case
-	$u_agent = (!empty($_SERVER['HTTP_USER_AGENT'])) ? htmlspecialchars((string) strtolower($_SERVER['HTTP_USER_AGENT'])) : (function_exists('getenv') ? getenv('HTTP_USER_AGENT') : '');
-	$t = trim(preg_replace('/[0-9.]/', '', $b));
+	$u_agent = (!empty($_SERVER['HTTP_USER_AGENT'])) ? htmlspecialchars((string) $_SERVER['HTTP_USER_AGENT']) : (function_exists('getenv') ? getenv('HTTP_USER_AGENT') : '');
+	$t = trim(preg_replace('/[^a-z]/', '', $b));
 	$r = trim(preg_replace('/[a-z]/', '', $b));
+
 	$return = false;
 	switch($t)
 	{
 		case 'ie':
-			$return = strpos($u_agent, trim('msie ' . $r)) !== false ? true : false;
+			$return = strpos(strtolower($u_agent), trim('msie ' . $r)) !== false ? true : false;
 		break;
 		case 'firefox':
-			$return = strpos(str_replace('/', ' ', $u_agent), trim('firefox ' . $r)) !== false ? true : false;
+			$return = strpos(str_replace('/', ' ', strtolower($u_agent)), trim('firefox ' . $r)) !== false ? true : false;
 		break;
 		case 'safari':
-			$return = strpos($u_agent, trim('safari/' . $r)) !== false ? true : false;
+			$return = strpos(strtolower($u_agent), trim('safari/' . $r)) !== false ? true : false;
 		break;
 		case 'chrome':
-			$return = strpos($u_agent, trim('chrome ' . $r)) !== false ? true : false;
+			$return = strpos(strtolower($u_agent), trim('chrome ' . $r)) !== false ? true : false;
 		break;
 		case 'flock':
-			$return = strpos($u_agent, trim('flock ' . $r)) !== false ? true : false;
+			$return = strpos(strtolower($u_agent), trim('flock ' . $r)) !== false ? true : false;
 		break;
 		case 'opera':
-			$return = strpos($u_agent, trim('opera ' . $r)) !== false ? true : false;
+			$return = strpos(strtolower($u_agent), trim('opera ' . $r)) !== false ? true : false;
 		break;
 		case 'konqueror':
-			$return = strpos($u_agent, trim('konqueror/' . $r)) !== false ? true : false;
+			$return = strpos(strtolower($u_agent), trim('konqueror/' . $r)) !== false ? true : false;
 		break;
 		case 'mozilla':
-			$return = strpos($u_agent, trim('gecko/' . $r)) !== false ? true : false;
+			$return = strpos(strtolower($u_agent), trim('gecko/' . $r)) !== false ? true : false;
 		break;
 		case 'webkit':
-			$return = strpos($u_agent, trim('applewebkit/' . $r)) !== false ? true : false;
+			$return = strpos(strtolower($u_agent), trim('applewebkit/' . $r)) !== false ? true : false;
 		break;
 		/**
 		 * Mobile Phones are so popular those days, so we have to support them ...
@@ -783,7 +784,7 @@ function is_browser($b)
 		case 'mobile':
 			$mobile_agents = array('iPhone;', 'iPod;', 'iPad;', 'blackberry', 'Android', 'HTC' , 'IEMobile', 'LG/', 'LG-',
 									'LGE-', 'MOT-', 'Nokia', 'SymbianOS', 'nokia_', 'PalmSource', 'webOS', 'SAMSUNG-', 
-									'SEC-SGHU', 'SonyEricsson');
+									'SEC-SGHU', 'SonyEricsson', 'BOLT/', 'Mobile Safari', 'Fennec/', 'Opera Mini');
 			$return = false;
 			foreach($mobile_agents as $agent)
 			{

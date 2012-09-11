@@ -384,8 +384,8 @@ if(empty($config['h_key']))
 $STYLE_PATH				= $config['siteurl'] . 'styles/' . (trim($config['style_depend_on']) == '' ? $config['style'] : $config['style_depend_on']) . '/';
 $THIS_STYLE_PATH		= $config['siteurl'] . 'styles/' . $config['style'] . '/';
 $THIS_STYLE_PATH_ABS	= PATH . 'styles/' . $config['style'] . '/';
-$STYLE_PATH_ADMIN 		= $config['siteurl'] . 'admin/'. (is_browser('mobile') || defined('IN_MOBILE') ? 'mobile/' : 'toffee/');
-$STYLE_PATH_ADMIN_ABS	= PATH . 'admin/'. (is_browser('mobile') || defined('IN_MOBILE') ? 'mobile/' : 'toffee/');
+$STYLE_PATH_ADMIN 		= $config['siteurl'] . 'admin/'. (is_browser('mobile') || defined('IN_MOBILE') ? 'toffee/' : 'toffee/');
+$STYLE_PATH_ADMIN_ABS	= PATH . 'admin/'. (is_browser('mobile') || defined('IN_MOBILE') ? 'toffee/' : 'toffee/');
 $DEFAULT_PATH_ADMIN_ABS = PATH . 'admin/toffee/';
 $DEFAULT_PATH_ADMIN		= $config['siteurl'] . 'admin/toffee/';
 

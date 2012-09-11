@@ -1,4 +1,3 @@
-
 <!-- general -->
 
 <IF NAME="current_smt == general">
@@ -121,6 +120,29 @@
 
 </div>
 <!-- the big box end general2 -->
+<!-- kleeja-comments-2 --><div class="big-box">
+<div class="tit_con">
+	<h1>{olang.KLJC_COMMENTS}</h1>   
+</div>
+
+<div class="section">
+	<h3>{olang.KLJC_COMMENTS}</h3>
+	<div class="box">{last_del_fles}</div>
+</div>
+<div class="clear"></div>
+
+<div class="section">
+	<h3>{olang.KLJC_LAST_10COMMENTS}</h3>
+	<div class="box">
+		<ol>
+			  {last10comments}
+		</ol>
+	
+	</div>
+</div>
+<div class="clear"></div>
+</div><!-- #kleeja-comments-2 -->
+
 
 <ELSEIF NAME="current_smt == other">
  <!-- the big box begin other -->
@@ -356,6 +378,3 @@ $('#menu').css('display', 'none');
 </IF>
 
 <!-- admin start endoffile -->
-
-
-

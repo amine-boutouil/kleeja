@@ -35,8 +35,34 @@ else
 {
 	//todo : make sure to figure this from OS, and some other things
 	$ftp_info['path'] = str_replace('/includes/adm', '', dirname(__file__)) . '/';
+	#mose 
+	if(strpos($ftp_info['path'], 'public_html') !== false)
+	{
+		$ftppath_parts = explode('public_html', $ftp_info['path']);
+		$ftp_info['path'] = '/public_html'. $ftppath_parts[1];
+	}
+	else
+	{
+		$ftp_info['path'] = '/public_html/';
+	}
+	
 	$ftp_info['port'] = 21;
-	$ftp_info['host'] = 'ft.example.com';
+	$ftp_info['host'] = str_replace(array('http://', 'https://'), array('', ''), $config['siteurl']);
+
+	#ie. up.anmmy.com, www.anmmy.com
+	if(sizeof(explode('.', $ftp_info['host'])) > 1 || (sizeof(explode('.', $ftp_info['host'])) == 2 && strpos($ftp_info['host'], 'www.') === false))
+	{
+		$siteurl_parts = explode('.', $ftp_info['host']);
+		$ftp_info['host'] = 'ftp.' . $siteurl_parts[sizeof($siteurl_parts)-2] . '.' . $siteurl_parts[sizeof($siteurl_parts)-1];
+	}
+
+	$ftp_info['host'] = str_replace('www.', 'ftp.', $ftp_info['host']);
+
+	if(strpos($ftp_info['host'], '/') !== false)
+	{
+		$siteurl_parts = explode('/', $ftp_info['host']);
+		$ftp_info['host'] = $siteurl_parts[0];
+	}
 }
 
 $is_ftp_supported = $plg->is_ftp_supported;

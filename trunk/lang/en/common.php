@@ -289,7 +289,7 @@ $lang = array_merge($lang, array(
 	'NOT_FOUND'			=> 'This file is not exist. either deleted by the user or the administrator or there is an error opening the file!.',
 	'TIME_ZONE'			=> 'Time zone',
 	'OR'				=> 'or',
-	'AND'				=> 'and'
+	'AND'				=> 'and',
 
 	//last line of this file ...					 
 	'S_TRANSLATED_BY' 			=> 'Translated By <a href="http://www.fenix4web.com/" target="_blank">Fenix4Web</a> &amp; Kleeja Team',

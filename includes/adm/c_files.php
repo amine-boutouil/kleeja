@@ -306,6 +306,20 @@ else
 	$no_results = true;
 }
 
+#update f_lastvisit
+if(!$is_search)
+{
+	if(filter_exists('f_lastvisit', 'filter_uid'))
+	{
+		update_filter('f_lastvisit', time());
+	}
+	else
+	{
+		insert_filter('lastvisit', time(), false, false, '', 'f_lastvisit');
+	}
+}
+
+
 //some vars
 $total_pages	= $Pager->getTotalPages(); 
 $page_nums 		= $Pager->print_nums($page_action, 'onclick="javascript:get_kleeja_link($(this).attr(\'href\'), \'#content\'); return false;"'); 

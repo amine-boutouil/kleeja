@@ -256,10 +256,16 @@ if(!$config['firstime'])
 	//$go_menu['firstime'] = array('name'=>$lang['FIRST_TIME_CP'], 'link'=> basename(ADMIN_PATH) . '?cp=start&amp;smt=firstime', 'goto'=>'firstime', 'current'=> $current_smt == 'firstime');
 }
 
+#if this is your first time, let make sure that it's the last
 if($current_smt == 'firstime')
 {
 	update_config('firstime', '1');
 }
+
+#is there a last visit of images and files ?
+$files_last_visit = filter_exists('f_lastvisit', 'filter_uid') ? get_filter('f_lastvisit', 'filter_uid', true) : false;
+$image_last_visit = filter_exists('i_lastvisit', 'filter_uid') ? get_filter('i_lastvisit', 'filter_uid', true) : false;
+
 
 
 ($hook = kleeja_run_hook('default_admin_page')) ? eval($hook) : null; //run hook 

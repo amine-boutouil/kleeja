@@ -23,11 +23,11 @@ if(!isset($images_cp_perpage) || !$images_cp_perpage)
 
 //for style ..
 $stylee	= "admin_img";
-$action	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php')  . (isset($_GET['page']) ? '&amp;page='.intval($_GET['page']) : '') . 
+$action	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php')  . (isset($_GET['page']) ? '&amp;page=' . intval($_GET['page']) : '') . 
 			(isset($_GET['last_visit']) ? '&amp;last_visit='.intval($_GET['last_visit']) : '');
-$action_search = basename(ADMIN_PATH) . "?cp=h_search#!cp=h_search";
+$action_search	= basename(ADMIN_PATH) . "?cp=h_search#!cp=h_search";
 $H_FORM_KEYS	= kleeja_add_form_key('adm_img_ctrl');
-
+$is_search		= false;
 
 //
 // Check form key
@@ -264,6 +264,19 @@ if ($nums_rows > 0)
 else
 {
 	$no_results = true;
+}
+
+#update f_lastvisit
+if(!$is_search)
+{
+	if(filter_exists('i_lastvisit', 'filter_uid'))
+	{
+		update_filter('i_lastvisit', time());
+	}
+	else
+	{
+		insert_filter('lastvisit', time(), false, false, '', 'i_lastvisit');
+	}
 }
 
 //pages

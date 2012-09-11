@@ -339,4 +339,5 @@ $lang = array_merge($lang, array(
 	'IMAGEFOLDEREXTS'			=> 'صيغ الصور والملفات المباشره',
 	'IMAGEFOLDERE'				=> 'تغيير اسم الملف او الصوره المباشره',
 	'CONFIG_KLJ_MENUS_KLIVE'	=> 'اعدادات الروابط المباشرة',
+	'LAST_VIEW'					=> 'آخر استعراض',
 ));

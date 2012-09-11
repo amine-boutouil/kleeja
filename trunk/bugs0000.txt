@@ -42,7 +42,7 @@
 -[x] increase csrf time of some time-wanted forms
 -[x] remove [remember me ... choices ] and make it simple 
 -[x] fix total size bar in acp
--[ ] add last-visit 'images' or 'files' page ..	
+-[x] add last-visit 'images' or 'files' page ..	
 -[x] check live plugin codes ... make it ok ..
 -[x] error message on user and group 
 -[x] error message after delte or add new ext. to the groups

@@ -71,7 +71,7 @@ function kleeja_admin_info($msg, $navigation=true, $title='', $exit=true, $redir
 * generate a filter..
 * @adm
 */
-function insert_filter($type, $value, $time = false, $user = false, $status = '')
+function insert_filter($type, $value, $time = false, $user = false, $status = '', $uid = false)
 {
 	global $SQL, $dbprefix, $userinfo;
 
@@ -81,7 +81,7 @@ function insert_filter($type, $value, $time = false, $user = false, $status = ''
 	$insert_query	= array(
 							'INSERT'	=> '`filter_uid`, `filter_type` ,`filter_value` ,`filter_time` ,`filter_user`, `filter_status`',
 							'INTO'		=> "{$dbprefix}filters",
-							'VALUES'	=> "'" . uniqid() . "', '" . $SQL->escape($type) . "','" . $SQL->escape($value) . "', " . intval($time) . "," . intval($user) . ",'" . $SQL->escape($status) . "'"
+							'VALUES'	=> "'" . ($uid ? $uid : uniqid()) . "', '" . $SQL->escape($type) . "','" . $SQL->escape($value) . "', " . intval($time) . "," . intval($user) . ",'" . $SQL->escape($status) . "'"
 						);
 	($hook = kleeja_run_hook('insert_sql_insert_filter_func')) ? eval($hook) : null; //run hook
 
@@ -92,11 +92,40 @@ function insert_filter($type, $value, $time = false, $user = false, $status = ''
 	return false;
 }
 
+
+
+/**
+* update filter value..
+* @adm
+*/
+function update_filter($item, $value)
+{
+	global $SQL, $dbprefix;
+
+	$value = ($escape) ? $SQL->escape($value) : $value;
+
+	$update_query	= array(
+							'UPDATE'	=> "{$dbprefix}filters",
+							'SET'		=> "filter_value='" . ($escape ? $SQL->escape($value) : $value) . "'",
+							'WHERE'		=> strval(intval($item)) == strval($item) ? 'filter_id=' . intval($item) : "filter_uid='" . $SQL->escape($item) . "'"
+					);
+
+	($hook = kleeja_run_hook('update_filter_func')) ? eval($hook) : null; //run hook
+
+	$SQL->build($update_query);
+	if($SQL->affected())
+	{
+		return true;
+	}
+
+	return false;
+}
+
 /**
 * get filter from db..
 * @adm
 */
-function get_filter($item, $get_by = 'filter_id')
+function get_filter($item, $get_by = 'filter_id', $just_value = false)
 {
 	global $dbprefix, $SQL;
 
@@ -110,7 +139,33 @@ function get_filter($item, $get_by = 'filter_id')
 	$v		= $SQL->fetch($result);
 
 	($hook = kleeja_run_hook('get_filter_func')) ? eval($hook) : null; //run hook
+	
+	if($just_value)
+	{
+		return $v['filter_value'];
+	}
+
 	return $v;
+}
+
+/**
+* check if filter exists or not
+* @adm
+*/
+function filter_exists($item, $get_by = 'filter_id')
+{
+	global $dbprefix, $SQL;
+
+	$query = array(
+					'SELECT'	=> 'f.filter_id',
+					'FROM'		=> "{$dbprefix}filters f",
+					'WHERE'		=> "f." . $get_by . " = " . ($get_by == 'filter_id' ? intval($item) : "'" . $SQL->escape($item) . "'")
+				);
+
+	($hook = kleeja_run_hook('filter_exists_func')) ? eval($hook) : null; //run hook
+
+	$result	= $SQL->build($query);					
+	return $SQL->num_rows($result);
 }
 
 
@@ -120,7 +175,6 @@ function get_filter($item, $get_by = 'filter_id')
 */
 function build_search_query($search)
 {
-
 	if(!is_array($search))
 	{
 		return '';

@@ -29,8 +29,9 @@
 <div class="section">
 	<h3>{lang.IMG_LST_VST_SEARCH}</h3>
 	<div class="box">
+		<IF NAME="image_last_visit"><a href="{h_lst_imgs}{image_last_visit}" onclick="javascript:get_kleeja_link(this.href); return false;">{lang.LAST_VIEW}</a> &nbsp; {lang.OR} &nbsp;</IF>
 		<select class="show_since_time" tabindex="3" onchange="javascript:get_kleeja_link('{h_lst_imgs}' + (Math.round((new Date()).getTime() / 1000) - $(this).val()), '#content');">">
-			<option>-----</option>
+			<option>{lang.TIME}...</option>
 			<option value="3600">{lang.HOUR}</option>
 			<option value="18000">{lang.5HOURS}</option>
 			<option value="864000">{lang.DAY}</option>
@@ -45,8 +46,9 @@
 <div class="section">
 	<h3>{lang.FLS_LST_VST_SEARCH}</h3>
 	<div class="box">
+		<IF NAME="files_last_visit"><a href="{h_lst_files}{files_last_visit}" onclick="javascript:get_kleeja_link(this.href); return false;">{lang.LAST_VIEW}</a> &nbsp; {lang.OR} &nbsp;</IF>
 		<select class="show_since_time" tabindex="3" onchange="javascript:get_kleeja_link('{h_lst_files}' + (Math.round((new Date()).getTime() / 1000) - $(this).val()), '#content');">">
-			<option>-----</option>
+			<option>{lang.TIME}...</option>
 			<option value="3600">{lang.HOUR}</option>
 			<option value="18000">{lang.5HOURS}</option>
 			<option value="864000">{lang.DAY}</option>

@@ -31,7 +31,6 @@ class kplugins
 	var $plg_id		= 0;
 	var $zipped_files	= '';
 	var $is_ftp_supported = true;
-	var $check_writable_paths = PATH; //use comma for seperation
 
 	function kplugins($paths = '')
 	{
@@ -1093,11 +1092,13 @@ class kftp
 	var $timeout = 15;
 	var $root	 = '';
 	var $n = 'kftp';
+	var $debug = false;
+
 
 	function _open($info = array())
 	{
 		// connect to the server
-		$this->handler = @ftp_connect($info['host'], $info['port'], $this->timeout);
+		$this->handler = ftp_connect($info['host'], $info['port'], $this->timeout);
 
 		if (!$this->handler)
 		{
@@ -1108,15 +1109,16 @@ class kftp
 		@ftp_pasv($this->handler, true);
 
 		// login to the server
-		if (!@ftp_login($this->handler, $info['user'], $info['pass']))
+		if (!ftp_login($this->handler, $info['user'], $info['pass']))
 		{
 			return false;
 		}
 
 		$this->root = ($info['path'][0] != '/' ? '/' : '') . $info['path'] . ($info['path'][strlen($info['path'])-1] != '/' ? '/' : '');
 
-		if (!$this->_chdir(PATH))
+		if (!$this->_chdir($this->root))
 		{
+			$this->_close();
 			return false;
 		}
 
@@ -1133,7 +1135,11 @@ class kftp
 		return @ftp_quit($this->handler);
 	}
 
-	
+	function _pwd()
+	{
+		return ftp_pwd($this->handler);
+	}
+
 	function _chdir($dir = '')
 	{
 		if ($dir && $dir !== '/')
@@ -1144,7 +1150,7 @@ class kftp
 			}
 		}
 
-		return @ftp_chdir($this->handler, $this->_fixpath($dir));
+		return @ftp_chdir($this->handler, $dir);
 	}
 	
 	function _chmod($file, $perm = 0644)
@@ -1219,7 +1225,7 @@ class kftp
 	{
 		return @ftp_rmdir($this->handler, $this->_fixpath($dir));
 	}
-	
+
 	function _fixpath($path)
 	{
 		return $this->root . str_replace(PATH, '', $path);

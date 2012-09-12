@@ -130,7 +130,7 @@
 	-------------------------------------------------- */
 	body {background: #ececec url("../images/bg_body.png") repeat-x top center;}
 	#main {background:url("../images/bg_main.png") no-repeat top right;}
-	#content, #content_index  {background:#DFDFDF url("../images/bg_content.png") repeat-x;border:1px solid #C9C9C9;}
+	#content, #content_index  {background:#BED9ED url("../images/bg_content.png") repeat-x;border:1px solid #C9C9C9;}
 	#content_index {background-color:transparent;background-image:none;border:none;}
 /* @end */
 	

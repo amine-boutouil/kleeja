@@ -47,6 +47,8 @@
 -[x] error message on user and group 
 -[x] error message after delte or add new ext. to the groups
 -[x] error message after mass maint. to the center
+-[ ] quick change of language and style at first page
+-[ ] what if we update_config group-related config ? 
 
 
 NOTE NOTE NOTE :: 

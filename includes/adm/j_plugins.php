@@ -15,6 +15,36 @@ if (!defined('IN_ADMIN'))
 }
 
 
+
+//show icon of plugin
+if(isset($_GET['iconp'])):
+
+//is there any changes from recent installing plugins
+$icon = false;
+if (($plgicons = $cache->get('__plugins_icons__')))
+{
+	if(!empty($plgicons[$_GET['iconp']]))
+	{
+		$icon = base64_decode($plgicons[$_GET['iconp']]);
+	}
+}
+
+if(!$icon)
+{
+	$icon = file_get_contents($STYLE_PATH_ADMIN . 'images/default_plguin_icon.png');
+}
+
+header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
+header('Accept-Ranges: bytes');
+header('Content-Length: ' . strlen($icon));
+header('Content-Type: image/png');
+echo $icon;
+$SQL->close();
+exit;
+
+endif;
+
+
 #security vars
 $H_FORM_KEYS	= kleeja_add_form_key('adm_plugins');
 $GET_FORM_KEY	= kleeja_add_form_key_get('adm_plugins');
@@ -87,35 +117,6 @@ if ($dh = @opendir(PATH . 'cache'))
 $cache->clean('__changes_files__');
 
 //redirect(basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'));
-endif;
-
-//show icon of plugin
-if(isset($_GET['iconp'])):
-
-//is there any changes from recent installing plugins
-$icon = false;
-if ($plgicons = $cache->get('__plugins_icons__'))
-{
-	if(!empty($plgicons[$_GET['iconp']]))
-	{
-		$icon = base64_decode($plgicons[$_GET['iconp']]);
-	}
-}
-
-if(!$icon)
-{
-	$icon = file_get_contents($STYLE_PATH_ADMIN . 'images/default_plguin_icon.png');
-}
-
-header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
-header('Accept-Ranges: bytes');
-header('Content-Length: ' . strlen($icon));
-header('Content-Type: image/png');
-echo $icon;
-$SQL->close();
-exit;
-
-
 
 //show first page of plugins
 elseif (!isset($_GET['do_plg'])):
@@ -190,7 +191,7 @@ else
 $SQL->freeresult($result);
 
 //save icons in cache ...
-if (!$cache->exists('__plugins_icons__'))
+if (!$cache->exists('__plugins_icons__') || $cache->get('__plugins_icons__') === false)
 {
 	$cache->save('__plugins_icons__', $plugins_icons);
 }

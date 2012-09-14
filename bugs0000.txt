@@ -50,7 +50,7 @@
 -[ ] quick change of language and style at first page
 -[x] what if we update_config group-related config ? 
 -[ ] make total files and images sync, so no more crashes at acp
-
+-[ ] del_f_day, fix the function, make sure we depend on every user's group
 
 NOTE NOTE NOTE :: 
 use this function to extend the group system all the script/

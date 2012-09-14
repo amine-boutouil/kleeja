@@ -11,6 +11,20 @@ if (!defined('IN_COMMON'))
 define ('DB_VERSION' , '8');
 
 
+#configs, groups_data .. things are not quite simple here
+include dirname(__file__) . '/../default_values.php';
+
+$update_sqls['configs_2_groups'] = "UPDATE  `{$dbprefix}config` SET  `type` =  'groups' WHERE `name` IN('del_f_day', 'language', 'enable_userfile', 'filesnum', 'sec_down', 'write_imgs', 'usersectoupload', 'style');";
+
+foreach($config_values as $m=>$t)
+{
+	if($t[4] == 'groups')
+	{
+		$update_sqls['groups_data_' . $t[0]] = "INSERT INTO `{$dbprefix}groups_data` (`name`, `value`, `group_id`) VALUES ('" . $m[0] . "', '" . $m[1] . "', 1), ('" . $m[0] . "', '" . $m[1] . "', 2), ('" . $m[0] . "', '" . $m[1] . "', 3);";
+	}
+}
+
+
 #new configs
 $update_sqls['groups'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`, `type`, `plg_id`, `dynamic`) VALUES ('default_group', '3', '', '', '0', '0', '0');";
 $update_sqls['time_zone'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`, `type`, `plg_id`, `dynamic`) VALUES ('time_zone', '3', '<select name=\"time_zone\" id=\"time_zone\">\r\n {time_zones}\r\n </select>', '10', 'general', '0', '0');";

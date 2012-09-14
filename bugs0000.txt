@@ -32,7 +32,7 @@
 -[x] images ACP -> search files from this IP,user
 -[ ] files ACP -> search files from this IP,user
 -[-] Dealing with the huge invasion of Nginx
--[ ] Add phrases from within ACP, (show how to embed them in template ?)
+-[ ] Add phrases from within ACP, (show how to embed them in template ?), fix bug with pages there too
 -[-] Mobile style, see admin/mobile [ related files common.php+admin/index.php ] { to test it, add define('IN_MOBILE', 1); to config.php } 
 -[x] filters at images & files (same db tables for searchs !)
 	-[-] filters at images.

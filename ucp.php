@@ -36,6 +36,9 @@ include ('includes/common.php');
 
 ($hook = kleeja_run_hook('begin_usrcp_page')) ? eval($hook) : null; //run hook
 
+//difne empty var
+$extra = '';
+
 //now we will navigate ;)
 if(!isset($_GET['go']))
 {
@@ -313,8 +316,31 @@ switch ($_GET['go'])
 			kleeja_info($lang['USERFILE_CLOSED'], $lang['CLOSED_FEATURE']);
 		}
 
-		//some vars
-		$stylee	= 'fileuser';
+
+        //$extra  = '<script type="text/javascript" src="' . $STYLE_PATH . 'ucp.js"></script>' . "\n\r";
+//some vars
+        /*$extra .= '
+      <script type="text/javascript">
+        enl_ani = 0;
+        enl_brdsize = 24;
+        enl_shadow = 0;
+        enl_center = 0;
+        enl_dark = 0;
+        enl_darkprct = 20;
+        enl_drgdrop = 0;
+        enl_keynav = 1;
+        enl_wheelnav = 0;
+        enl_titlebar=0;
+      </script>';
+      
+      /*
+        $extra .= '<link rel="stylesheet" type="text/css" media="all" href="' . $STYLE_PATH . 'css/highslide.css" />' . "\n\r";
+		$extra .= '<script type="text/javascript">
+	hs.graphicsDir = \'../highslide/graphics/\';
+	hs.wrapperClassName = \'wide-border\';
+</script>';*/
+
+        $stylee	= 'fileuser';
 		$titlee	= $lang['FILEUSER'];
 
 		$user_id_get	= isset($_GET['id']) ? intval($_GET['id']) : null;
@@ -346,7 +372,7 @@ switch ($_GET['go'])
 					'ORDER BY'	=> 'f.id DESC'
 				);
 
-		//pager 
+		//pager
 		$result_p		= $SQL->build($query);
 		$nums_rows		= $SQL->num_rows($result_p);
 		$currentPage	= (isset($_GET['page'])) ? intval($_GET['page']) : 1;
@@ -389,13 +415,18 @@ switch ($_GET['go'])
 				$is_image = in_array(strtolower(trim($row['type'])), array('gif', 'jpg', 'jpeg', 'bmp', 'png', 'tiff', 'tif')) ? true : false;
 		
 				$url = $is_image ? kleeja_get_link('image', $file_info) : kleeja_get_link('file', $file_info);
-			
+			     
+                 
+                 $url_thumb = $is_image ? kleeja_get_link('thumb', $file_info) : kleeja_get_link('thumb', $file_info);
+                 
 				$url_fileuser = $is_image ? $url : (file_exists("images/filetypes/".  $row['type'] . ".png")? "images/filetypes/" . $row['type'] . ".png" : 'images/filetypes/file.png');
                 
 				$tdnum = $tdnum == 4 ? 0 : $tdnum+1;
 				
 				//make new lovely arrays !!
-				$arr[] 	= array(
+				if ($is_image)
+                {
+				    $arr[] 	= array(
 						'id'		=> $row['id'],
 						'name'		=> ($row['real_filename'] == '' ? ((strlen($row['name']) > 40) ? substr($row['name'], 0, 40) . '...' : $row['name']) : ((strlen($row['real_filename']) > 40) ? substr($row['real_filename'], 0, 40) . '...' : $row['real_filename'])),
 						'url_thumb' => '<a title="' . ($row['real_filename'] == '' ? $row['name'] : $row['real_filename']) . '"  href="' . $url . '" onclick="window.open(this.href,\'_blank\');return false;"><img src="' . $url_fileuser . '" alt="' . $row['type'] . '" /></a>',
@@ -406,8 +437,25 @@ switch ($_GET['go'])
 						'tdnum2'	=> $tdnum == 4 ? '</ul>' : '',
 						'href'		=> $url,
 						'last_down'	=> !empty($row['last_down']) ? date('d-m-Y h:i a', $row['last_down']) : '...',
+						'thumb_link'=> $url_thumb,
+					);
+                }
+                else
+                {
+                    $arrfiles[] 	= array(
+						'id'		=> $row['id'],
+						'name'		=> '<a title="' . ($row['real_filename'] == '' ? $row['name'] : $row['real_filename']) . '"  href="' . $url . '" onclick="window.open(this.href,\'_blank\');return false;">' . ($row['real_filename'] == '' ? ((strlen($row['name']) > 40) ? substr($row['name'], 0, 40) . '...' : $row['name']) : ((strlen($row['real_filename']) > 40) ? substr($row['real_filename'], 0, 40) . '...' : $row['real_filename'])) . '</a>',
+						'url_thumb' => '<a title="' . ($row['real_filename'] == '' ? $row['name'] : $row['real_filename']) . '"  href="' . $url . '" onclick="window.open(this.href,\'_blank\');return false;"><img src="' . $url_fileuser . '" alt="' . $row['type'] . '" /></a>',
+						'file_type'	=> $row['type'],
+						'image_path'=> $is_image ? $url : '',
+						'uploads'	=> $row['uploads'],
+						'tdnum'		=> $tdnum == 0 ? '<ul>': '',
+						'tdnum2'	=> $tdnum == 4 ? '</ul>' : '',
+						'href'		=> $url,
+						'last_down'	=> !empty($row['last_down']) ? date('d-m-Y h:i a', $row['last_down']) : '...',
 						'thumb_link'=> $url_fileuser,
 					);
+                }
 			}
 			
 			$SQL->freeresult($result_p);
@@ -878,7 +926,7 @@ $titlee = empty($titlee) ? $lang['USERS_SYSTEM'] : $titlee;
 $stylee = empty($stylee) ? 'info' : $stylee;
 
 //header
-Saaheader($titlee);
+Saaheader($titlee, false, $extra);
 
 echo $tpl->display($stylee);
 //footer

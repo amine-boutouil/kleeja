@@ -52,26 +52,37 @@
         <ELSE>
        
         <!-- table all files -->
+        		<!-- upload boxes -->
+		<div class="tabber">
+		
+		<!-- uplaod normal -->
+		<div class="tabbertab" title="{lang.DOWNLOAD_F}" id="filetype">
 <div class="xthumbs">
 	<LOOP NAME="arr">
 	{{tdnum}}
 	<li id="su[{{id}}]" class="tip">
-		<a href="{{href}}" rel="facebox">
-			<div id="Kload"><img src="{{thumb_link}}" alt=""  /></div>
-		</a>
-		<ul class='ktip' style="display: none;">
-			<ul>
-			<li><span>{lang.FILENAME} :</span>{{name}}</li>
-			<li><span>{lang.FILEUPS} :</span> {{ups}}</li>
-			<li><span>{lang.FILESIZE} :</span> {{size}}</li>
-			<li><span>{lang.FILEDATE} :</span> {{time}}</li>
-			<li><span>{lang.FILEUPS}</span>{{uploads}}</li>
-			<li><span>{lang.LAST_DOWN}</span>{{last_down}}</li>
-			</ul>
-		</ul>
+    <div>
+		
+			<img src="{{thumb_link}}" onclick="enlarge(this);" longdesc="{{href}}" alt=""  />
+
+        </div>
+		<div class="ktip" style="display: none;">
+			<span>{lang.FILENAME} : </span>{{name}}<br />
+			<span>{lang.FILEUPS} : </span> {{ups}}<br />
+			<span>{lang.FILESIZE} : </span> {{size}}<br />
+			<span>{lang.FILEDATE} : </span> {{time}}<br />
+			<span>{lang.BY} : </span> <span id="user_{{id}}">{{user}}</span><br />
+			<span>{lang.IP} : </span> <span id="ip_{{id}}">{{ip}}</span>
+		</div>
+		<p class="kcheck"><input id="del_{{id}}" name="del_{{id}}" type="checkbox" value="{{id}}" rel="_del" /></p>
 	</li>
 	{{tdnum2}}
 	</LOOP>
+</div>
+</div>
+
+<div class="tabbertab" title="{lang.DOWNLOAD_T}" id="texttype">
+</div>
 </div>
 
         <!-- @end-table-all-files -->

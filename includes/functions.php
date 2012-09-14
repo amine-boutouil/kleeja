@@ -855,12 +855,22 @@ function get_lang($name, $folder = '')
 */
 function get_config($name)
 {
-	global $dbprefix, $SQL;
+	global $dbprefix, $SQL, $d_groups, $userinfo;
+
+	$table = "{$dbprefix}config c";
+
+	#what if this config is a group-configs related ?
+	$group_id_sql = '';
+	if(array_key_exists($name, $d_groups[$userinfo['group_id']]['configs']))
+	{
+		$table = "{$dbprefix}groups_data c";
+		$group_id_sql = ", group_id=" . $userinfo['group_id'];
+	}
 
 	$query = array(
 					'SELECT'	=> 'c.value',
-					'FROM'		=> "{$dbprefix}config c",
-					'WHERE'		=> "c.name = '" . $SQL->escape($name) . "'"
+					'FROM'		=> $table,
+					'WHERE'		=> "c.name = '" . $SQL->escape($name) . "'" . $group_id_sql
 				);
 
 	$result	= $SQL->build($query);
@@ -876,11 +886,29 @@ function get_config($name)
 */
 function add_config ($name, $value, $order = '0', $html = '', $type = 'other', $plg_id = '0', $dynamic = false)
 {
-	global $dbprefix, $SQL, $config;
+	global $dbprefix, $SQL, $config, $d_groups;
 	
 	if(get_config($name))
 	{
 		return true;
+	}
+
+	if($type == 'groups')
+	{
+		#add this option to all groups
+		$group_ids = array_keys($d_groups);
+		foreach($group_ids as $g_id)
+		{
+			$insert_query	= array(
+									'INSERT'	=> '`name` ,`value` ,`group_id`',
+									'INTO'		=> "{$dbprefix}groups_data",
+									'VALUES'	=> "'" . $SQL->escape($name) . "','" . $SQL->escape($value) . "', group_id" . $g_id,
+								);
+
+			($hook = kleeja_run_hook('insert_sql_add_config_func_groups_data')) ? eval($hook) : null; //run hook
+
+			$SQL->build($insert_query);
+		}
 	}
 
 	$insert_query	= array(
@@ -888,6 +916,7 @@ function add_config ($name, $value, $order = '0', $html = '', $type = 'other', $
 							'INTO'		=> "{$dbprefix}config",
 							'VALUES'	=> "'" . $SQL->escape($name) . "','" . $SQL->escape($value) . "', '" . $SQL->real_escape($html) . "','" . intval($order) . "','" . $SQL->escape($type) . "','" . intval($plg_id) . "','"  . (($dynamic) ? '1' : '0') . "'",
 						);
+
 	($hook = kleeja_run_hook('insert_sql_add_config_func')) ? eval($hook) : null; //run hook
 
 	$SQL->build($insert_query);	
@@ -920,20 +949,37 @@ function add_config_r($configs)
 
 function update_config($name, $value, $escape = true)
 {
-	global $SQL, $dbprefix;
+	global $SQL, $dbprefix, $d_groups, $userinfo;
 
 	$value = ($escape) ? $SQL->escape($value) : $value;
+	$table = "{$dbprefix}config";
+
+	#what if this config is a group-configs related ?
+	$group_id_sql = '';
+	if(array_key_exists($name, $d_groups[$userinfo['group_id']]['configs']))
+	{
+		$table = "{$dbprefix}groups_data";
+		$group_id_sql = ", group_id=" . $userinfo['group_id'];
+	}
 
 	$update_query	= array(
-							'UPDATE'	=> "{$dbprefix}config",
+							'UPDATE'	=> $table,
 							'SET'		=> "value='" . ($escape ? $SQL->escape($value) : $value) . "'",
-							'WHERE'		=> 'name = "' . $SQL->escape($name) . '"'
+							'WHERE'		=> 'name = "' . $SQL->escape($name) . '"' . $group_id_sql
 					);
+
 	($hook = kleeja_run_hook('update_sql_update_config_func')) ? eval($hook) : null; //run hook
 
 	$SQL->build($update_query);
 	if($SQL->affected())
 	{
+		if($table == "{$dbprefix}groups_data")
+		{
+			$d_groups[$userinfo['group_id']]['configs'][$name] = $value;
+			delete_cache('data_groups');
+			return true;
+		}
+
 		$config[$name] = $value;
 		delete_cache('data_config');
 		return true;
@@ -947,8 +993,6 @@ function update_config($name, $value, $escape = true)
 */
 function delete_config($name) 
 {
-	global $dbprefix, $SQL;
-
 	if(is_array($name))
 	{
 		foreach($name as $n)
@@ -959,6 +1003,8 @@ function delete_config($name)
 		return;
 	}
 
+	global $dbprefix, $SQL, $d_groups, $userinfo;
+
 	//
 	// 'IN' doesnt work here with delete, i dont know why ? 
 	//
@@ -967,8 +1013,19 @@ function delete_config($name)
 								'WHERE'		=>  "name  = '" . $SQL->escape($name) . "'"
 						);
 	($hook = kleeja_run_hook('del_sql_delete_config_func')) ? eval($hook) : null; //run hook
-
+	
 	$SQL->build($delete_query);
+
+	if(array_key_exists($name, $d_groups[$userinfo['group_id']]['configs']))
+	{
+		$delete_query	= array(
+									'DELETE'	=> "{$dbprefix}groups_data",
+									'WHERE'		=>  "name  = '" . $SQL->escape($name) . "'"
+							);
+		($hook = kleeja_run_hook('del_sql_delete_config_func2')) ? eval($hook) : null; //run hook
+
+		$SQL->build($delete_query);
+	}
 
 	if($SQL->affected())
 	{
@@ -1330,9 +1387,9 @@ function kleeja_check_captcha()
 	$return = false;
 	if(!empty($_SESSION['klj_sec_code']) && !empty($_POST['kleeja_code_answer']))
 	{
-		if($_SESSION['klj_sec_code'] == $_POST['kleeja_code_answer'])
+		if($_SESSION['klj_sec_code'] == trim($_POST['kleeja_code_answer']))
 		{
-			$_SESSION['klj_sec_code'] = '';
+			unset($_SESSION['klj_sec_code']);
 			$return = true;
 		}
 	}

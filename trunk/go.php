@@ -30,7 +30,7 @@ switch ($_GET['go'])
 
 		$stylee	= 'guide';
 		$titlee	= $lang['GUIDE'];
-	
+
 		$tgroups = $ttgroups = array();
 		$tgroups = array_keys($d_groups);
 		$same_group= $rando = 0;
@@ -58,7 +58,7 @@ switch ($_GET['go'])
 			}
 			$rando = $rando ? 0 : 1;
 		}
-	
+
 		($hook = kleeja_run_hook('guide_go_page')) ? eval($hook) : null; //run hook
 
 	break;
@@ -391,10 +391,11 @@ switch ($_GET['go'])
 				$extra_codes = '<script type="text/javascript">
 						function confirm_from()
 						{
-							if(confirm(\'' . $lang['ARE_YOU_SURE_DO_THIS'] . '\'))
+							if(confirm(\'' . $lang['ARE_YOU_SURE_DO_THIS'] . '\')){
 								window.location = "go.php?go=del&sure=ok&cd=' . $cd . '";
-							else
+							}else{
 								window.location = "index.php";
+							}
 						}
 						window.onload=confirm_from;
 					</script>';
@@ -439,10 +440,10 @@ switch ($_GET['go'])
 		$files_st	= $stat_files;
 		$users_st	= $stat_users;
 		$sizes_st	= Customfile_size($stat_sizes);	
-		$lst_dl_st	= ((int)$config['del_f_day'] <= 0) ? ' [ ' . $lang['CLOSED_FEATURE'] . ' ] ' : gmdate('d-m-Y h:i a', $stat_last_f_del);
-		$lst_reg	= (empty($stat_last_user)) ? $lang['UNKNOWN'] : $stat_last_user;
-		$on_muoe	 = date('d-m-Y h:i a', $on_muoe);
-	
+		$lst_dl_st	= (int) $config['del_f_day'] <= 0 ? false : kleeja_date($stat_last_f_del);
+		$lst_reg	= empty($stat_last_user) ? $lang['UNKNOWN'] : $stat_last_user;
+		$on_muoe	= kleeja_data($on_muoe);
+
 		($hook = kleeja_run_hook('stats_go_page')) ? eval($hook) : null; //run hook
 
 	break; 

@@ -47,10 +47,12 @@
 -[x] error message on user and group 
 -[x] error message after delte or add new ext. to the groups
 -[x] error message after mass maint. to the center
--[ ] quick change of language and style at first page
+-[ ] quick change of language and style at first page, hurry hurry! 
 -[x] what if we update_config group-related config ? 
 -[ ] make total files and images sync, so no more crashes at acp
--[ ] del_f_day, fix the function, make sure we depend on every user's group
+-[x] if inactive-files-deleting feature is off, dont show it at acp firstpage and stats page
+-[ ] last ten days stats, files and images, morris.js
+
 
 NOTE NOTE NOTE :: 
 use this function to extend the group system all the script/

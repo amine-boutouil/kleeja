@@ -959,7 +959,7 @@ function update_config($name, $value, $escape = true)
 	if(array_key_exists($name, $d_groups[$userinfo['group_id']]['configs']))
 	{
 		$table = "{$dbprefix}groups_data";
-		$group_id_sql = ' AND group_id="' . $userinfo['group_id'] . '"';
+		$group_id_sql = ' AND group_id=' . $userinfo['group_id'];
 	}
 
 	$update_query	= array(

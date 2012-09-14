@@ -23,23 +23,23 @@ $h_lst_imgs		= basename(ADMIN_PATH) . '?cp=d_img_ctrl&amp;last_visit=';
 $current_smt	= isset($_GET['smt']) ? (preg_match('![a-z0-9_]!i', trim($_GET['smt'])) ? trim($_GET['smt']) : 'general') : 'general';
 
 //data
-$lst_reg			= (empty($stat_last_user)) ? $lang['UNKNOWN'] : $stat_last_user;
+$lst_reg			= empty($stat_last_user) ? $lang['UNKNOWN'] : $stat_last_user;
 $files_number 		= $stat_files;
 $files_sizes 		= Customfile_size($stat_sizes);
 $users_number 		= $stat_users;
 $last_file_up_url	= PATH . $stat_last_file;
 $last_file_up		= (strlen($stat_last_file) > 25) ? substr($stat_last_file, 0, 25) . '...' : $stat_last_file;
-$last_del_fles 		= date('d-m-Y h:i a', $stat_last_f_del);
+$last_del_fles 		= (int) $config['del_f_day'] <= 0 ? $lang['CLOSED_FEATURE'] : kleeja_date($stat_last_f_del);
 $php_version 		= isset($NO_PHPINFO) || !function_exists('phpinfo') ? phpversion() : '<a href="' . basename(ADMIN_PATH) . '?cp=php_info" title="php_info" onclick="javascript:get_kleeja_link(\'' . basename(ADMIN_PATH) . '?cp=php_info\', \'#content\'); return false;">php ' . phpversion() . '</a>';
 $mysql_version 		= 'MYSQL ' . $SQL->mysql_version();
 $max_execution_time = function_exists('ini_get') ?  @ini_get('max_execution_time') : @get_cfg_var('max_execution_time');
 $upload_max_filesize= function_exists('ini_get') ?  @ini_get('upload_max_filesize') : @get_cfg_var('upload_max_filesize');
 $post_max_size 		= function_exists('ini_get') ?  @ini_get('post_max_size') : @get_cfg_var('post_max_size');
 $memory_limit 		= function_exists('ini_get') ?  @ini_get('memory_limit') : @get_cfg_var('memory_limit');
-$s_last_google		= ($stat_last_google == 0) ? '[ ? ]' : date('d-m-Y h:i a', $stat_last_google);
+$s_last_google		= ($stat_last_google == 0) ? '[ ? ]' : kleeja_date($stat_last_google);
 $s_google_num		= $stat_google_num;
-$s_last_bing		= ($stat_last_bing == 0) ? '[ ? ]' : date('d-m-Y h:i a', $stat_last_bing);
-$s_bing_num		= $stat_bing_num;
+$s_last_bing		= ($stat_last_bing == 0) ? '[ ? ]' : kleeja_date($stat_last_bing);
+$s_bing_num			= $stat_bing_num;
 $usernamelang		= sprintf($lang['KLEEJA_CP_W'], $username);
 
 //size board by percent

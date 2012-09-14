@@ -14,7 +14,7 @@ define ('DB_VERSION' , '8');
 #configs, groups_data .. things are not quite simple here
 include dirname(__file__) . '/../default_values.php';
 
-$update_sqls['configs_2_groups'] = "UPDATE  `{$dbprefix}config` SET  `type` =  'groups' WHERE `name` IN('del_f_day', 'language', 'enable_userfile', 'filesnum', 'sec_down', 'write_imgs', 'usersectoupload', 'style');";
+$update_sqls['configs_2_groups'] = "UPDATE  `{$dbprefix}config` SET  `type` =  'groups' WHERE `name` IN('language', 'enable_userfile', 'filesnum', 'sec_down', 'write_imgs', 'usersectoupload');";
 
 foreach($config_values as $m=>$t)
 {

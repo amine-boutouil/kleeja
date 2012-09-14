@@ -18,7 +18,9 @@
 			<li>{lang.LAST_REG} : <span>[ {lst_reg} ]  </span></li>
 		</IF>
 		<li>{lang.SIZES_ST} : <span style="color:red;">[ {sizes_st} ] </span></li>
-		<li>{lang.LSTDELST} : <span>{lst_dl_st} </span></li>
+		<IF NAME="lst_dl_st">
+			<li>{lang.LSTDELST} : <span>{lst_dl_st} </span></li>
+		</IF>
 		<IF NAME="config.allow_online==1">
 			<li>{lang.MOST_EVER_ONLINE} : <span>[ {most_online} ]</span> {lang.ON} <span>[ {on_muoe} ]</span></li>
 		</IF>

@@ -21,14 +21,13 @@ $stylee			= "admin_start";
 $h_lst_files	= basename(ADMIN_PATH) . '?cp=c_files&amp;last_visit=';
 $h_lst_imgs		= basename(ADMIN_PATH) . '?cp=d_img_ctrl&amp;last_visit=';
 $current_smt	= isset($_GET['smt']) ? (preg_match('![a-z0-9_]!i', trim($_GET['smt'])) ? trim($_GET['smt']) : 'general') : 'general';
+$GET_FORM_KEY	= kleeja_add_form_key_get('adm_start_actions');
 
 //data
 $lst_reg			= empty($stat_last_user) ? $lang['UNKNOWN'] : $stat_last_user;
 $files_number 		= $stat_files;
 $files_sizes 		= Customfile_size($stat_sizes);
 $users_number 		= $stat_users;
-$last_file_up_url	= PATH . $stat_last_file;
-$last_file_up		= (strlen($stat_last_file) > 25) ? substr($stat_last_file, 0, 25) . '...' : $stat_last_file;
 $last_del_fles 		= (int) $config['del_f_day'] <= 0 ? $lang['CLOSED_FEATURE'] : kleeja_date($stat_last_f_del);
 $php_version 		= isset($NO_PHPINFO) || !function_exists('phpinfo') ? phpversion() : '<a href="' . basename(ADMIN_PATH) . '?cp=php_info" title="php_info" onclick="javascript:get_kleeja_link(\'' . basename(ADMIN_PATH) . '?cp=php_info\', \'#content\'); return false;">php ' . phpversion() . '</a>';
 $mysql_version 		= 'MYSQL ' . $SQL->mysql_version();
@@ -266,6 +265,43 @@ if($current_smt == 'firstime')
 $files_last_visit = filter_exists('f_lastvisit', 'filter_uid') ? get_filter('f_lastvisit', 'filter_uid', true) : false;
 $image_last_visit = filter_exists('i_lastvisit', 'filter_uid') ? get_filter('i_lastvisit', 'filter_uid', true) : false;
 
+
+#hurry, hurry section, get styles
+$hurry_style_link	= basename(ADMIN_PATH) . '?cp=m_styles&amp;sty_t=st&amp;method=2&amp;home=1&amp;smt=curstyle&amp;' . $GET_FORM_KEY . '&amp;style_choose=';
+$hurry_styles_list	= '';
+if ($dh = @opendir(PATH . 'styles'))
+{
+	while (($file = @readdir($dh)) !== false)
+	{
+		if(strpos($file, '.') === false && $file != '..' && $file != '.')
+		{
+			$hurry_styles_list .= '<option value="' . htmlspecialchars($file) . '"' . ($config['style'] == $file ? ' selected="selected"' : '') . '>' . $file . '</option>';
+		}
+	}
+	@closedir($dh);
+}
+
+#hurry, hurry section, get languages
+$hurry_lang_link	= basename(ADMIN_PATH) . '?cp=g_users&smt=general&amp;smt=group_data&' . $GET_FORM_KEY . '&amp;lang_change=';
+$hurry_langs_list	= '';
+if ($dh = @opendir(PATH . 'lang'))
+{
+	while (($file = @readdir($dh)) !== false)
+	{
+		if(strpos($file, '.') === false && $file != '..' && $file != '.')
+		{
+			$hurry_langs_list .= '<option value="' . htmlspecialchars($file) . '"' . ($d_groups[$config['default_group']]['configs']['language'] == $file ? ' selected="selected"' : '') . '>' . $file . '</option>';
+		}
+	}
+	@closedir($dh);
+}
+
+$hurry_groups_list = '<option value="' . $config['default_group'] . '" selected="selected">' . $lang['DEFAULT_GROUP'] . '</option>';
+$hurry_groups_list .= '<option value="-1">' . $lang['ALL'] . '</option>';
+foreach($d_groups as $id=>$ddt)
+{
+	$hurry_groups_list .= '<option value="' . $id . '">' . preg_replace('!{lang.([A-Z0-9]+)}!e', '$lang[\'\\1\']', $d_groups[$id]['data']['group_name']) . '</option>';
+}
 
 
 ($hook = kleeja_run_hook('default_admin_page')) ? eval($hook) : null; //run hook 

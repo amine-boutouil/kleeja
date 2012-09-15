@@ -722,6 +722,38 @@ case 'group_data':
 		kleeja_admin_err('ERROR-NO-ID', true, '', true,  basename(ADMIN_PATH) . '?cp=g_users');
 	}
 
+
+	# When user change langauge from start page, hurry hurry section, he comes here
+	if(isset($_GET['lang_change']))
+	{
+		//check _GET Csrf token
+		if(!kleeja_check_form_key_get('adm_start_actions'))
+		{
+			kleeja_admin_err($lang['INVALID_GET_KEY'], true, $lang['ERROR'], true, basename(ADMIN_PATH) . '?cp=start', 2);
+		}
+		
+		$got_lang = preg_replace('[^a-zA-Z0-9]', '', $_GET['lang_change']);
+		
+		# -1 means all
+		if($req_group == -1)
+		{
+			update_config('language', $got_lang);
+			$group_name = $lang['ALL'];
+		}
+		else
+		{
+			update_config('language', $got_lang, true, $req_group);
+			$group_name	= preg_replace('!{lang.([A-Z0-9]+)}!e', '$lang[\'\\1\']', $d_groups[$req_group]['data']['group_name']);
+		}
+
+		#unset _ajax so page will refresh to get all the html with all new language variables
+		unset($_GET['_ajax_']);
+		#msg, done
+		kleeja_admin_info($lang['CONFIGS_UPDATED'] . ', ' . $lang['LANGUAGE']  . ':' . $got_lang . ' - ' . $lang['FOR'] . ':' . $group_name,
+				true, '', true, basename(ADMIN_PATH) . '?cp=start');
+	}
+
+
 	$group_name	= preg_replace('!{lang.([A-Z0-9]+)}!e', '$lang[\'\\1\']', $d_groups[$req_group]['data']['group_name']);
 	$gdata		= $d_groups[$req_group]['data'];
 

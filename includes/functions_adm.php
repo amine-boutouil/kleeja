@@ -205,3 +205,19 @@ function build_search_query($search)
 
 	return "$size_than $file_namee $ups_than $exte $rep_than $usernamee $lstd_than $exte $ipp";
 }
+
+/**
+ * To re-count the total files, without making the server goes down haha 
+ */
+function resync_total_files()
+{
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}

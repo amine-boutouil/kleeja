@@ -183,7 +183,7 @@ $lang = array_merge($lang, array(
 	'YES' 					=> 'Yes',
 	'NO' 					=> 'No',
 	'LANGUAGE' 				=> 'Language',
-	'STYLE' 				=> 'Service style',
+	'STYLE' 				=> 'Style',
 	'NORMAL' 				=> 'Normal',
 	'W_PHPBB' 				=> 'Attached to phpbb',
 	'W_MYSBB' 				=> 'Attached to MySmartBB',
@@ -290,6 +290,9 @@ $lang = array_merge($lang, array(
 	'TIME_ZONE'			=> 'Time zone',
 	'OR'				=> 'or',
 	'AND'				=> 'and',
+	'CHANGE'			=> 'Change',
+	'FOR'				=> 'for',
+	'ALL'				=> 'All',
 
 	//last line of this file ...					 
 	'S_TRANSLATED_BY' 			=> 'Translated By <a href="http://www.fenix4web.com/" target="_blank">Fenix4Web</a> &amp; Kleeja Team',

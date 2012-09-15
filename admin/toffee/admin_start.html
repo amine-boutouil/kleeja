@@ -60,19 +60,50 @@
 <div class="clear"></div>
 </IF>
 
-<div class="section">
-	<h3>{lang.LSTFLE_ST}</h3>
-	<div class="box"><IF NAME="stat_last_file!='0'"><a href="{last_file_up_url}"  onclick="window.open(this.href,'_blank');return false;">{last_file_up}</a><ELSE>{lang.UNKNOWN}</IF></div>
-</div>
-
-<div class="clear"></div>
-
 <!-- admin start general section -->
 
 </div>
 <!-- the big box end general -->
 
 
+<!-- the big box begin general1 -->
+<div class="big-box">
+<div class="tit_con">
+	<h1>{lang.HURRY_HURRY}</h1>   
+</div>
+
+
+<div class="section">
+	<h3>{lang.STYLE}</h3>
+	<div class="box">
+		<select name="style_change" id="style_change">
+			{hurry_styles_list}
+		</select>
+		<button class="btn" onclick="javascript:get_kleeja_link('{hurry_style_link}' + $('#style_change').val()); return false;"><span>{lang.CHANGE}</span></button>
+	</div>
+</div>
+<div class="clear"></div>
+
+<div class="section">
+	<h3>{lang.LANGUAGE}</h3>
+	<div class="box">
+		<select	 name="lang_change" id="lang_change">
+			{hurry_langs_list}
+		</select> 
+		&nbsp; {lang.FOR} &nbsp;  
+		<select	 name="groups_list" id="groups_list">
+			{hurry_groups_list}
+		</select>
+		<button class="btn" onclick="javascript:get_kleeja_link('{hurry_lang_link}' + $('#lang_change').val() + '&qg=' + $('#groups_list').val()); return false;"><span>{lang.CHANGE}</span></button>
+	</div>
+</div>
+<div class="clear"></div>
+
+
+<!-- admin start general section1 -->
+
+</div>
+<!-- the big box end general1 -->
 
 <!-- the big box begin general2 -->
 <div class="big-box">

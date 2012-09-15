@@ -87,7 +87,7 @@ switch ($_GET['sty_t'])
 				//there is no possiblity to write on files
 				$not_style_writeable = false;
 			}
-			
+
 			$lang['STYLE_DIR_NOT_WR'] = sprintf($lang['STYLE_DIR_NOT_WR'], $d_style_path);
 
 			//handling styles, show or make default ...
@@ -175,6 +175,12 @@ switch ($_GET['sty_t'])
 
 				case '2': // make as default
 
+					//check _GET Csrf token
+					if(isset($_REQUEST['home']) && !kleeja_check_form_key_get('adm_start_actions'))
+					{
+						kleeja_admin_err($lang['INVALID_GET_KEY'], true, $lang['ERROR'], true, basename(ADMIN_PATH) . '?cp=start', 2);
+					}
+	
 					//
 					//check if this style depend on other style and 
 					//check kleeja version that required by this style
@@ -233,14 +239,10 @@ switch ($_GET['sty_t'])
 					delete_cache('', true);
 
 					//show msg
-					$text = sprintf($lang['STYLE_NOW_IS_DEFAULT'], htmlspecialchars($style_id)) . '<meta HTTP-EQUIV="REFRESH" content="2; url=' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') .  '">' . "\n";
-					$stylee	= "admin_info";
-						
+					kleeja_admin_info(sprintf($lang['STYLE_NOW_IS_DEFAULT'], htmlspecialchars($style_id)), true, '', true, basename(ADMIN_PATH) . '?cp=' . (isset($_REQUEST['home']) ? 'start' : basename(__file__, '.php')));
 				break;				
 			}
 		}
-		
-
 
 	break;
 

@@ -337,4 +337,5 @@ $lang = array_merge($lang, array(
 	'IMAGEFOLDERE'				=> 'Change file name',
 	'CONFIG_KLJ_MENUS_KLIVE'	=> 'Kleeja Live links settings',
 	'LAST_VIEW'					=> 'Last viewing',
+	'HURRY_HURRY'				=> 'Hurry, Hurry',
 ));

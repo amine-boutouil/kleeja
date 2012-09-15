@@ -26,7 +26,7 @@ foreach($config_values as $m=>$t)
 
 
 #new configs
-$update_sqls['groups'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`, `type`, `plg_id`, `dynamic`) VALUES ('default_group', '3', '', '', '0', '0', '0');";
+$update_sqls['config_default_group'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`, `type`, `plg_id`, `dynamic`) VALUES ('default_group', '3', '', '', '0', '0', '0');";
 $update_sqls['time_zone'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`, `type`, `plg_id`, `dynamic`) VALUES ('time_zone', '3', '<select name=\"time_zone\" id=\"time_zone\">\r\n {time_zones}\r\n </select>', '10', 'general', '0', '0');";
 
 #remove plugin kleeja-live-folder-name

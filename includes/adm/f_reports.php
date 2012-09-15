@@ -166,7 +166,7 @@ if (isset($_POST['submit']))
 $go_menu = array(
 				'general' => array('name'=>$lang['R_REPORTS'], 'link'=> basename(ADMIN_PATH) . '?cp=f_reports&amp;smt=general', 'goto'=>'general', 'current'=> $current_smt == 'general'),
 				'show_h24' => array('name'=>$lang['SHOW_FROM_24H'], 'link'=> basename(ADMIN_PATH) . '?cp=f_reports&amp;smt=show_h24', 'goto'=>'show_h24', 'current'=> $current_smt == 'show_h24'),
-				#CHECK IF IT'S ALREADY DONE ?
+				#TODO : CHECK IF IT'S ALREADY DONE ?
 				'del_d30' => array('name'=>$lang['DELETE_EARLIER_30DAYS'], 'link'=> basename(ADMIN_PATH) . '?cp=f_reports&amp;smt=del_d30', 'goto'=>'del_d30', 'current'=> $current_smt == 'del_d30', 'confirm'=>true),
 				'del_all' => array('name'=>$lang['DELETE_ALL'], 'link'=> basename(ADMIN_PATH) . '?cp=f_reports&amp;smt=del_all', 'goto'=>'del_all', 'current'=> $current_smt == 'del_all', 'confirm'=>true),
 	);

@@ -87,6 +87,7 @@ CREATE TABLE `{$dbprefix}users` (
   `session_id` char(32) collate utf8_bin NOT NULL,
   `clean_name` varchar(300) collate utf8_bin NOT NULL,
   `last_visit` INT(11) NOT NULL,
+  `register_time` int(11) unsigned NOT NULL DEFAULT '0',
   `show_my_filecp` tinyint(1) unsigned NOT NULL default '1',
   `new_password` varchar(200) COLLATE utf8_bin NOT NULL DEFAULT '',
   `hash_key` varchar(200) COLLATE utf8_bin NOT NULL DEFAULT '',

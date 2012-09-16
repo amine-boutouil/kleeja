@@ -239,9 +239,9 @@ switch ($_GET['go'])
 				$clean_name		= (string) $usrcp->cleanusername($name);
 					
 				$insert_query	= array(
-								'INSERT'	=> 'name ,password, password_salt ,mail, session_id, clean_name',
+								'INSERT'	=> 'name ,password, password_salt ,mail, register_time, session_id, clean_name, group_id',
 								'INTO'		=> "{$dbprefix}users",
-								'VALUES'	=> "'$name', '$pass', '$user_salt', '$mail','$session_id','$clean_name'"
+								'VALUES'	=> "'$name', '$pass', '$user_salt', '$mail', " . time() . ", '$session_id','$clean_name', " . $config['default_group']
 							);
 
 				($hook = kleeja_run_hook('qr_insert_new_user_register')) ? eval($hook) : null; //run hook
@@ -311,7 +311,7 @@ switch ($_GET['go'])
 		}
 
 		//fileuser is closed ?
-		if ((int) $config['enable_userfile'] != 1 && !$usrcp->admin())
+		if ((int) $config['enable_userfile'] != 1 && !user_can('enter_acp'))
 		{
 			kleeja_info($lang['USERFILE_CLOSED'], $lang['CLOSED_FEATURE']);
 		}
@@ -360,7 +360,7 @@ switch ($_GET['go'])
 			kleeja_err($lang['NOT_EXSIT_USER'], $lang['PLACE_NO_YOU']);
 		}
 
-		if(!$data_user['show_my_filecp'] && ($usrcp->id() != $user_id) && !$usrcp->admin())
+		if(!$data_user['show_my_filecp'] && ($usrcp->id() != $user_id) && !user_can('enter_acp'))
 		{
 			kleeja_info($lang['USERFILE_CLOSED'], $lang['CLOSED_FEATURE']);
 		}

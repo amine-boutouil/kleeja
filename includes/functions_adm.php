@@ -214,7 +214,7 @@ function sync_total_files($files = true, $start = false)
 {
 	@set_time_limit(0);
 
-	$SQL, $dbprefix;
+	global $SQL, $dbprefix;
 
 	$query	= array(
 				'SELECT'	=> 'MIN(f.id) as min_file_id, MAX(f.id) as max_file_id',
@@ -232,14 +232,14 @@ function sync_total_files($files = true, $start = false)
 	#if no data, turn them to number
 	$min_id = (int) $v['min_file_id'];
 	$max_id = (int) $v['max_file_id'];
-	
+
 	#every time batch
 	$batch_size = 2000;
-	
+
 	#no start? start = min
 	$start	= !$start ? $min_id : $start;
 	$end	= $start + $batch_size;
-	
+
 	#now lets get this step's files number 
 	unset($v, $result);
 
@@ -259,7 +259,7 @@ function sync_total_files($files = true, $start = false)
 	#update stats table
 	$update_query = array(
 							'UPDATE'	=> "{$dbprefix}stats",
-							'SET'		=> ($files ? 'files' : 'imgs') . "=" . ($files ? 'files' : 'imgs') . '+' . $this_step_count;
+							'SET'		=> ($files ? 'files' : 'imgs') . "=" . ($files ? 'files' : 'imgs') . '+' . $this_step_count
 							);
 
 	$SQL->build($update_query);

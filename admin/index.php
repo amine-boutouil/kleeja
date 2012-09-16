@@ -163,7 +163,7 @@ $ext_expt[]	= 'i_exts';
 
 //confirm msgs
 $ext_confirm	= array();
-$ext_confirm[]	= 'repair';	
+//$ext_confirm[]	= 'repair';	
 
 //formkey extension, Csrf protection
 $GET_FORM_KEY_GLOBAL = kleeja_add_form_key_get('GLOBAL_FORM_KEY');

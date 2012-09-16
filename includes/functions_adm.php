@@ -140,6 +140,7 @@ function get_filter($item, $get_by = 'filter_id', $just_value = false)
 
 	($hook = kleeja_run_hook('get_filter_func')) ? eval($hook) : null; //run hook
 	
+	$SQL->freeresult($result);
 	if($just_value)
 	{
 		return $v['filter_value'];
@@ -164,7 +165,7 @@ function filter_exists($item, $get_by = 'filter_id')
 
 	($hook = kleeja_run_hook('filter_exists_func')) ? eval($hook) : null; //run hook
 
-	$result	= $SQL->build($query);					
+	$result	= $SQL->build($query);				
 	return $SQL->num_rows($result);
 }
 
@@ -209,15 +210,59 @@ function build_search_query($search)
 /**
  * To re-count the total files, without making the server goes down haha 
  */
-function resync_total_files()
+function sync_total_files($files = true, $start = false)
 {
+	@set_time_limit(0);
+
+	$SQL, $dbprefix;
+
+	$query	= array(
+				'SELECT'	=> 'MIN(f.id) as min_file_id, MAX(f.id) as max_file_id',
+				'FROM'		=> "{$dbprefix}files f",
+		);
+
+	#!files == images
+	$img_types = array('gif','jpg','png','bmp','jpeg','tif','tiff','GIF','JPG','PNG','BMP','JPEG','TIF','TIFF');
+	$query['WHERE'] = "f.type" . ($files  ? ' NOT' : '') ." IN ('" . implode("', '", $img_types) . "')";
+
+	$result	= $SQL->build($query);
+	$v		= $SQL->fetch($result);
+	$SQL->freeresult($result);
 	
+	#if no data, turn them to number
+	$min_id = (int) $v['min_file_id'];
+	$max_id = (int) $v['max_file_id'];
 	
+	#every time batch
+	$batch_size = 2000;
 	
+	#no start? start = min
+	$start	= !$start ? $min_id : $start;
+	$end	= $start + $batch_size;
 	
+	#now lets get this step's files number 
+	unset($v, $result);
+
+	$query['SELECT'] = 'COUNT(f.id) as num_files';
+	$query['WHERE'] .= ' AND f.id BETWEEN ' . $start . ' AND ' . $end;
+
+	$result	= $SQL->build($query);
+	$v		= $SQL->fetch($result);
+	$SQL->freeresult($result);
 	
+	$this_step_count = $v['num_files'];
+	if($this_step_count == 0)
+	{
+		return false;
+	}
+
+	#update stats table
+	$update_query = array(
+							'UPDATE'	=> "{$dbprefix}stats",
+							'SET'		=> ($files ? 'files' : 'imgs') . "=" . ($files ? 'files' : 'imgs') . '+' . $this_step_count;
+							);
+
+	$SQL->build($update_query);
 	
-	
-	
-	
+	return $end;
 }

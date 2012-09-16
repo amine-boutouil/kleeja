@@ -46,6 +46,10 @@ else
 #register time to users table
 $update_sqls['register_time'] = "ALTER TABLE  `{$dbprefix}users` ADD  `register_time` INT( 11 ) UNSIGNED NOT NULL DEFAULT  '0' AFTER  `last_visit`;";
 
+#alter stats table
+$update_sqls['alter_stats_add_imgs'] = "ALTER TABLE  `{$dbprefix}stats` ADD  `imgs` INT( 11 ) UNSIGNED NOT NULL DEFAULT  '0' AFTER  `files`;";
+
+
 #new tables
 $update_sqls['filters'] = "
 CREATE TABLE `{$dbprefix}filters` (

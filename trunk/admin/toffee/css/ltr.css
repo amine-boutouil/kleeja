@@ -18,7 +18,12 @@ body{
 
 /* byname.css 
 */
-#menu {float:left;}
+#menu, #menu_left{float:left;}
+#menu .link_current {
+    border-left: 2px dotted #DA7C0C;
+    border-right: none;
+}
+
 #content{
      float: right;
 }
@@ -33,10 +38,7 @@ body{
 #top-header {
 	text-align:right;
  }
-#menu .link_current {
-    border-left: 2px dotted #DA7C0C;
-    border-right: none;
-}
+
 
 .group_line .r1 {
     float: left;

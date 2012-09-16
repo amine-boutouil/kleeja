@@ -52,6 +52,12 @@
 -[ ] make total files and images sync, so no more crashes at acp
 -[x] if inactive-files-deleting feature is off, dont show it at acp firstpage and stats page
 -[ ] last ten days stats, files and images, morris.js
+-[ ] remove last_file code from files and sql .. 
+-[ ] change 'total repair' page to 'maintenance'
+	-[ ] clean style's templates section
+	-[ ] clean cached data section 
+	-[ ] resync total number of files
+	-[ ] repair db tables
 
 
 NOTE NOTE NOTE :: 

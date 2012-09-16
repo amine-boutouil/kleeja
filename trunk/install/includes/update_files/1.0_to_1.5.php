@@ -42,6 +42,10 @@ else
 	$update_sqls['klive3'] = "INSERT INTO `{$dbprefix}config` (`name`, `value`, `option`, `display_order`, `type`, `plg_id`, `dynamic`) VALUES ('imagefoldere', '1', '<label>{lang.YES}<input type=\"radio\" id=\"imagefoldere\" name=\"imagefoldere\" value=\"1\"  <IF NAME=\"con.imagefoldere\"> checked=\"checked\"</IF>></label><label>{lang.NO}<input type=\"radio\" id=\"imagefoldere\" name=\"imagefoldere\" value=\"0\"  <IF NAME=\"con.imagefoldere\"> <ELSE> checked=\"checked\"</IF>></label>', '30', 'KLIVE', '0', '0');";
 }
 
+
+#register time to users table
+$update_sqls['register_time'] = "ALTER TABLE  `{$dbprefix}users` ADD  `register_time` INT( 11 ) UNSIGNED NOT NULL DEFAULT  '0' AFTER  `last_visit`;";
+
 #new tables
 $update_sqls['filters'] = "
 CREATE TABLE `{$dbprefix}filters` (

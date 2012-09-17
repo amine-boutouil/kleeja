@@ -130,7 +130,7 @@
 	-------------------------------------------------- */
 	body {background: #ececec url("../images/bg_body.png") repeat-x top center;}
 	#main {background:url("../images/bg_main.png") no-repeat top right;}
-	#content, #content_index  {background:#BED9ED url("../images/bg_content.png") repeat-x;border:1px solid #C9C9C9;}
+	#content, #content_index  {background:#F8F8F8;border:1px solid #C9C9C9;}
 	#content_index {background-color:transparent;background-image:none;border:none;}
 /* @end */
 	
@@ -282,7 +282,7 @@
 	.file_cp {background:#ECECEC url("../images/table_file_cp.gif") no-repeat 40% 45%;color:#444;border:1px solid white;}
 	.file_cp .nbr  {color:black;}
 	.file_cp thead th, .file_cp tfoot th, .file_cp tbody td {border: 1px solid #aaa;border-top-color: white;border-left-color: white;border-bottom-color: #aaa;}
-	.file_cp thead th{background:#D54D10 url("../images/bg_tile_tab.png") repeat-x top left;color:white;border:none;}
+	.file_cp thead th{background:#8EC1DA url("../images/bg_tile_tab.png") repeat-x top left;color:white;border:none;}
 	.file_cp thead th a:link{color:white;}
 	.file_cp tfoot th{background:#ECECEC url("../images/bg_footer.gif") repeat-x center right;}
 	.file_cp tbody tr:hover td{border-top-color:#aaa;border-bottom-color:white;}

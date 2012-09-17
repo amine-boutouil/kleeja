@@ -52,10 +52,13 @@ if (isset($_POST['submit']))
     }
    
    #delete them once by once
+   $ids = array();
+   $files_num = $imgs_num = 0;
+
     foreach ($del as $key => $id)
     {
         $query	= array(
-						'SELECT'	=> '*',
+						'SELECT'	=> 'f.id, f.name, f.folder, f.size, f.type',
 						'FROM'			=> "{$dbprefix}files",
 						'WHERE'			=> 'id = ' . intval($id),
 					);
@@ -71,8 +74,18 @@ if (isset($_POST['submit']))
 			{
 				@kleeja_unlink (PATH . $row['folder'] . '/thumbs/' . $row['name'] );
 			}
+
+			$is_image = in_array(strtolower(trim($row['type'])), array('gif', 'jpg', 'jpeg', 'bmp', 'png', 'tiff', 'tif')) ? true : false;
+
 			$ids[] = $row['id'];
-			$num++;	
+			if($is_image)
+			{
+				$imgs_num++;
+			}
+			else
+			{
+				$files_num++;
+			}
 			$sizes += $row['size'];	
 		}
 	}
@@ -92,7 +105,7 @@ if (isset($_POST['submit']))
 		//update number of stats
 		$update_query	= array(
 									'UPDATE'	=> "{$dbprefix}stats",
-									'SET'		=> "sizes=sizes-$sizes, files=files-$num",
+									'SET'		=> "sizes=sizes-$sizes, files=files-$files_num, imgs=imgs-$imgs_num",
 								);
 
 		$SQL->build($update_query);
@@ -117,8 +130,8 @@ else
 if(isset($_GET['deletefiles']))
 {
 	$query	= array(
-					'SELECT'	=> 'id,size,name,folder',
-					'FROM'		=> "{$dbprefix}files AS f",
+					'SELECT'	=> 'f.id, f.size, f.name, f.folder',
+					'FROM'		=> "{$dbprefix}files f",
 				);
 
 	#get search filter
@@ -138,26 +151,36 @@ if(isset($_GET['deletefiles']))
 
 	$result = $SQL->build($query);
 	$sizes  = false;
-	$num = 0;
+	$ids = array();
+	$files_num = $imgs_num = 0;
 	while($row=$SQL->fetch_array($result))
 	{
-			//delete from folder ..
-			@kleeja_unlink (PATH . $row['folder'] . "/" . $row['name']);
+		//delete from folder ..
+		@kleeja_unlink (PATH . $row['folder'] . "/" . $row['name']);
 
-			//delete thumb
-			if (file_exists(PATH . $row['folder'] . "/thumbs/" . $row['name']))
-			{
-				@kleeja_unlink (PATH . $row['folder'] . "/thumbs/" . $row['name']);
-			}
+		//delete thumb
+		if (file_exists(PATH . $row['folder'] . "/thumbs/" . $row['name']))
+		{
+			@kleeja_unlink (PATH . $row['folder'] . "/thumbs/" . $row['name']);
+		}
 
-			$ids[] = $row['id'];
-			$num++;		
-			$sizes += $row['size'];
+		$is_image = in_array(strtolower(trim($row['type'])), array('gif', 'jpg', 'jpeg', 'bmp', 'png', 'tiff', 'tif')) ? true : false;
+
+		$ids[] = $row['id'];
+		if($is_image)
+		{
+			$imgs_num++;
+		}
+		else
+		{
+			$files_num++;
+		}
+		$sizes += $row['size'];
 	}
 
 	$SQL->freeresult($result);
 
-	if($num == 0)
+	if(($files_num + $imgs_num) == 0)
 	{
 		kleeja_admin_err($lang['ADMIN_DELETE_FILES_NOF']);
 	}
@@ -166,7 +189,7 @@ if(isset($_GET['deletefiles']))
 		//update number of stats
 		$update_query	= array(
 								'UPDATE'	=> "{$dbprefix}stats",
-								'SET'		=> "sizes=sizes-$sizes, files=files-$num",
+								'SET'		=> "sizes=sizes-$sizes, files=files-$files_num, imgs=imgs-$imgs_num",
 						);
 
 		$SQL->build($update_query);

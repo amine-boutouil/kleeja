@@ -126,6 +126,7 @@ $lang = array_merge($lang, array(
 	'STATS_CLOSED' 			=> 'The statistics page is closed by the administrator.',
 	'FILES_ST' 				=> 'Uploaded',
 	'FILE' 					=> 'File',
+	'IMAGE' 				=> 'Image',
 	'USERS_ST' 				=> 'Total Users',
 	'USER' 					=> 'user',
 	'SIZES_ST' 				=> 'Total size of uploaded files',

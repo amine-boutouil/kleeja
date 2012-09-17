@@ -1190,7 +1190,7 @@ function klj_clean_old_files($from = 0)
 			return;
 		}
 
-		$last_id_from = $num = $real_num = $sizes = 0;
+		$last_id_from = $files_num = $imgs_num = $real_num = $sizes = 0;
 		$ids = array();
 		$ex_ids =  array();
 		//$ex_types = explode(',', $config['livexts']);
@@ -1208,6 +1208,7 @@ function klj_clean_old_files($from = 0)
 			$continue = true;
 			$real_num++;
 			$last_id_from = $row['id'];
+			$is_image = in_array(strtolower(trim($row['type'])), array('gif', 'jpg', 'jpeg', 'bmp', 'png', 'tiff', 'tif')) ? true : false;
 
 			/*
 			//excpetions
@@ -1252,9 +1253,16 @@ function klj_clean_old_files($from = 0)
 				{
 					@kleeja_unlink ($row['folder'] . "/thumbs/" . $row['name'] );
 				}
-					
+
 				$ids[] = $row['id'];
-				$num++;		
+				if($is_image)
+				{
+					$imgs_num++;
+				}
+				else
+				{
+					$files_num++;
+				}
 				$sizes += $row['size'];
 			}
 	    }#END WHILE
@@ -1282,7 +1290,7 @@ function klj_clean_old_files($from = 0)
 			//update number of stats
 			$update_query	= array(
 									'UPDATE'	=> "{$dbprefix}stats",
-									'SET'		=> "sizes=sizes-$sizes,files=files-$num",
+									'SET'		=> "sizes=sizes-$sizes,files=files-$files_num, imgs=imgs-$imgs_num",
 									);
 
 			($hook = kleeja_run_hook('qr_del_delf_old_files')) ? eval($hook) : null; //run hook

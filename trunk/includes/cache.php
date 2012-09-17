@@ -35,7 +35,7 @@ class cache
 	
 		if (file_exists(PATH . 'cache/' . $name . '.php'))
 		{
-			include_once (PATH . 'cache/' . $name . '.php');
+			include PATH . 'cache/' . $name . '.php';
 			return  empty($data) ? false : $data;
 		}
 		else
@@ -201,7 +201,7 @@ if (!($olang = $cache->get('data_lang')))
 if (!($stats = $cache->get('data_stats')))
 {
 	$query = array(
-					'SELECT'	=> 's.files, s.sizes, s.users, s.last_file, s.last_f_del, s.last_google' . 
+					'SELECT'	=> 's.files, s.imgs, s.sizes, s.users, s.last_file, s.last_f_del, s.last_google' . 
 									', s.last_bing, s.google_num, s.bing_num, s.lastuser',
 					'FROM'		=> "{$dbprefix}stats s"
 			);

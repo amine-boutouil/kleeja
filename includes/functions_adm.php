@@ -212,8 +212,6 @@ function build_search_query($search)
  */
 function sync_total_files($files = true, $start = false)
 {
-	@set_time_limit(0);
-
 	global $SQL, $dbprefix;
 
 	$query	= array(
@@ -237,6 +235,7 @@ function sync_total_files($files = true, $start = false)
 	$batch_size = 2000;
 
 	#no start? start = min
+	$first_loop = !$start ? true : false;
 	$start	= !$start ? $min_id : $start;
 	$end	= $start + $batch_size;
 
@@ -257,13 +256,22 @@ function sync_total_files($files = true, $start = false)
 	}
 
 	#update stats table
+
 	$update_query = array(
-							'UPDATE'	=> "{$dbprefix}stats",
-							'SET'		=> ($files ? 'files' : 'imgs') . "=" . ($files ? 'files' : 'imgs') . '+' . $this_step_count
+							'UPDATE'	=> "{$dbprefix}stats"
 							);
 
-	$SQL->build($update_query);
+	#make it zero, firstly
+	if($first_loop)
+	{
+		$update_query['SET'] = ($files ? 'files' : 'imgs') . "= 0"; 
+		$SQL->build($update_query);
+	}
 	
+	$update_query['SET'] = ($files ? 'files' : 'imgs') . "=" . ($files ? 'files' : 'imgs') . '+' . $this_step_count;
+	$SQL->build($update_query);
+
+
 	return $end;
 }
 

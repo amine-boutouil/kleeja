@@ -25,11 +25,14 @@ if(isset($_GET['case']))
 }
 
 
+#set form ket
+$GET_FORM_KEY = kleeja_add_form_key_get('REPAIR_FORM_KEY');
+
 
 //check _GET Csrf token
-if($case && in_array($case, array('')))
+if($case && in_array($case, array('clearc')))
 {
-	if(!kleeja_check_form_key_get('GLOBAL_FORM_KEY'))
+	if(!kleeja_check_form_key_get('REPAIR_FORM_KEY'))
 	{
 		kleeja_admin_err($lang['INVALID_GET_KEY'], true, $lang['ERROR'], true, basename(ADMIN_PATH), 2);
 	}
@@ -39,7 +42,14 @@ switch($case):
 
 default:
 
+# Get real number from database right now
+$all_files = get_actual_stats('files');
+$all_images = get_actual_stats('imgs');
+$all_users = get_actual_stats('users');
 
+
+#links
+$del_cache_link = basename(ADMIN_PATH) . '?cp=r_repair&amp;case=clearc&amp;' . $GET_FORM_KEY;
 
 $stylee = "admin_repair";
 
@@ -216,10 +226,16 @@ break;
 //
 //clear all cache ..
 //
-case 'clear_cache':
+case 'clearc':
 
+#clear cache
 delete_cache('', true);
+
+#show done, msg
 $text .= '<li>' . $lang['REPAIRE_CACHE'] . '</li>';
+$text .= '<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . basename(ADMIN_PATH) . '?cp=r_repair' .  '\');", 2000);</script>' . "\n";
+
+$stylee = 'admin_info';
 
 break;
 

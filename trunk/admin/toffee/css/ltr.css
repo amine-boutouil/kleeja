@@ -14,7 +14,9 @@ body{
 #sign_ajax,#sign_ajax_error{
 	left:40%;
 }
-
+.btn{
+	float:right;
+}
 
 /* byname.css 
 */

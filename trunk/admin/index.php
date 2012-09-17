@@ -168,7 +168,7 @@ $ext_confirm	= array();
 //formkey extension, Csrf protection
 $GET_FORM_KEY_GLOBAL = kleeja_add_form_key_get('GLOBAL_FORM_KEY');
 $ext_formkey	= array();
-$ext_formkey[] = 'repair';
+//$ext_formkey[] = 'repair';
 
 ($hook = kleeja_run_hook('begin_admin_page')) ? eval($hook) : null; //run hook 
 

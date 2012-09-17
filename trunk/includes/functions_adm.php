@@ -266,3 +266,25 @@ function sync_total_files($files = true, $start = false)
 	
 	return $end;
 }
+
+/**
+ * get the *right* now number of the given stat fro stats table
+ */
+function get_actual_stats($name)
+{
+	global $dbprefix, $SQL;
+
+	$query = array(
+					'SELECT'	=> 's.' . $name,
+					'FROM'		=> "{$dbprefix}stats s"
+			);
+
+	$result	= $SQL->build($query);
+	$v		= $SQL->fetch($result);
+
+	($hook = kleeja_run_hook('get_actual_stats_func')) ? eval($hook) : null; //run hook
+	
+	$SQL->freeresult($result);
+
+	return $v[$name];
+}

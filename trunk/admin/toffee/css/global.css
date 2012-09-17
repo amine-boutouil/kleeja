@@ -88,9 +88,13 @@ select:active {
 .clear{
 		clear:both;
 		}
+.btn{
+	float:left;
+}
 #wrap{
 	width:960px !important;
 	margin:0 auto;
+	margin-bottom:50px;
 }
 #sign_ajax,#sign_ajax_error{
 	position:fixed;

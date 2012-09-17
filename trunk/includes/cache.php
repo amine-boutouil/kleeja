@@ -207,13 +207,14 @@ if (!($stats = $cache->get('data_stats')))
 			);
 
 	($hook = kleeja_run_hook('qr_select_stats_cache')) ? eval($hook) : null; //run hook
-	
+
 	$result = $SQL->build($query);
 
 	while($row=$SQL->fetch_array($result))
 	{
 		$stats = array(
 			'stat_files'		=> $row['files'],
+			'stat_imgs'			=> $row['imgs'],
 			'stat_sizes'		=> $row['sizes'],
 			'stat_users'		=> $row['users'],
 			'stat_last_file'	=> $row['last_file'],
@@ -221,10 +222,10 @@ if (!($stats = $cache->get('data_stats')))
 			'stat_last_google'	=> $row['last_google'],
 			'stat_last_bing'	=> $row['last_bing'],
 			'stat_google_num'	=> $row['google_num'],
-			'stat_bing_num'	=> $row['bing_num'],
+			'stat_bing_num'		=> $row['bing_num'],
 			'stat_last_user'	=> $row['lastuser']
 		);
-	
+
 		($hook = kleeja_run_hook('while_fetch_stats_in_cache')) ? eval($hook) : null; //run hook
 	}
 

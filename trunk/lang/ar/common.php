@@ -248,6 +248,7 @@ $lang = array_merge($lang, array(
 	'FILES_DELETED' 			=> 'تم حذف الملفات المحدده بنجاح !',
 	'GUIDE_GROUPS' 			    => 'مجموعة',
 	'ALL_FILES' 			    => 'عدد جميع الملفات',
+	'ALL_IMAGES' 			    => 'عدد جميع الصور',
 	'WAIT_LOADING'				=> 'فضلاً انتظر جاري رفع الملفات .....',
 	'NOTICECLOSED'				=> 'تنبيه : المركز مغلق',
 	'UNKNOWN'					=> 'غير معروف',

@@ -90,10 +90,7 @@
 	a.phover > span { background-position:100% -150px;}
 	a.phover:hover, a.phover:focus {color:white; background-position:0 -90px; }
 	a.phover:hover > span, a.phover:focus > span { background-position:100% -90px;}
- 	
 
-	/* titles all */
-	h1.title {background:url("../images/headline_bg.png") repeat-x top;}
 	
 	/* verification code */
 	.safe_code {	border:1px solid #BED9ED;background:#F9F9F0 url("../images/saf3_code01.gif") no-repeat 0% 50%;}

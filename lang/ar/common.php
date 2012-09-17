@@ -128,6 +128,7 @@ $lang = array_merge($lang, array(
 	'STATS_CLOSED' 			=> 'صفحة الإحصائيات معطلة من المدير!',
 	'FILES_ST' 				=> 'تم  تحميل ',
 	'FILE' 					=> 'ملف',
+	'IMAGE' 				=> 'صورة',
 	'USERS_ST' 				=> 'عدد الأعضاء',
 	'USER' 					=> 'عضو',
 	'SIZES_ST' 				=> 'حجم جميع الملفات',

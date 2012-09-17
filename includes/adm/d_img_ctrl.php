@@ -88,7 +88,7 @@ if (isset($_POST['submit']))
 		//update number of stats
 		$update_query	= array(
 									'UPDATE'	=> "{$dbprefix}stats",
-									'SET'		=> "sizes=sizes-$sizes, files=files-$num",
+									'SET'		=> "sizes=sizes-$sizes, imgs=imgs-$num",
 								);
 
 		$SQL->build($update_query);
@@ -102,7 +102,7 @@ if (isset($_POST['submit']))
     //after submit 
 	$text	= ($affected ? $lang['FILES_UPDATED'] : $lang['NO_UP_CHANGE_S']) .
 				'<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . 
-				'&amp;page=' . (isset($_GET['page']) ? intval($_GET['page']) : '1') . '\');", 2000);</script>' . "\n";
+				'&page=' . (isset($_GET['page']) ? intval($_GET['page']) : '1') . '\');", 2000);</script>' . "\n";
 
 	$stylee	= "admin_info";
 }

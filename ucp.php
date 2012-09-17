@@ -523,7 +523,7 @@ switch ($_GET['go'])
 
 			$result	= $SQL->build($query);
 
-			$sizes = $num = 0;
+			$sizes = $files_num = $imgs_num = 0;
 			$i = ($currentPage * $perpage) - $perpage;
 			while($row=$SQL->fetch_array($result))
 			{
@@ -565,7 +565,15 @@ switch ($_GET['go'])
 						}
 
 						$ids[] = $row['id'];
-						$num++;		
+						if($is_image)
+						{
+							$imgs_num++;
+						}
+						else
+						{
+							$files_num++;
+						}
+
 						$sizes += $row['size'];
 					}
 				}
@@ -590,7 +598,7 @@ switch ($_GET['go'])
 					//update number of stats
 					$update_query	= array(
 								'UPDATE'	=> "{$dbprefix}stats",
-								'SET'		=> "sizes=sizes-$sizes,files=files-$num",
+								'SET'		=> "sizes=sizes-$sizes,files=files-$files_num, imgs=imgs-$imgs_num",
 								);
 
 					$SQL->build($update_query);

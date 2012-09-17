@@ -333,7 +333,7 @@ switch ($_GET['go'])
 			if(isset($_GET['sure']) && $_GET['sure'] == 'ok')
 			{
 				$query	= array(
-								'SELECT'=> 'f.id, f.name, f.folder, f.size',
+								'SELECT'=> 'f.id, f.name, f.folder, f.size, f.type',
 								'FROM'	=> "{$dbprefix}files f",
 								'WHERE'	=> "f.code_del='" . $cd . "'",
 								'LIMIT'	=> '1',
@@ -353,6 +353,8 @@ switch ($_GET['go'])
 						{
 							@kleeja_unlink ($row['folder'] . '/thumbs/' . $row['name']);
 						}
+						
+						$is_img = in_array($row['type'], array('png','gif','jpg','jpeg','tif','tiff', 'bmp')) ? true : false;
 
 						$query_del	= array(
 											'DELETE' => "{$dbprefix}files",
@@ -368,7 +370,7 @@ switch ($_GET['go'])
 							//update number of stats
 							$update_query	= array(
 													'UPDATE'	=> "{$dbprefix}stats",
-													'SET'		=> 'files=files-1,sizes=sizes-' . $row['size'],
+													'SET'		=> ($is_img ? 'imgs=imgs-1':'files=files-1') . ',sizes=sizes-' . $row['size'],
 												);
 
 							$SQL->build($update_query);
@@ -406,7 +408,7 @@ switch ($_GET['go'])
 	break;
 
 	//
-	//Page of last stats
+	//Page of Kleeja stats
 	//
 	case 'stats' :
 
@@ -438,6 +440,7 @@ switch ($_GET['go'])
 		$titlee		= $lang['STATS'];
 		$stylee		= 'stats';
 		$files_st	= $stat_files;
+		$imgs_st	= $stat_imgs;
 		$users_st	= $stat_users;
 		$sizes_st	= Customfile_size($stat_sizes);	
 		$lst_dl_st	= (int) $config['del_f_day'] <= 0 ? false : kleeja_date($stat_last_f_del);

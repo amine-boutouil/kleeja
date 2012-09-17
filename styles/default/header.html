@@ -78,10 +78,12 @@
 	<!-- begin menu right #New Style -->
     <div id="sidebar">  
       <div id="sidebar_box">
-	   <img class="img-user" src="{user_avatar}" alt="{username}" title="{username}" height="90" width="100" />
+	   <IS_BROWSER!="mobile">
+	    <img src="{user_avatar}" alt="{username}" title="{username}" height="90" width="100" />
+	   </IS_BROWSER>
 			<ul class="menu">
 				<LOOP NAME="side_menu"><IF LOOP="show">
-				<li><a href="{{url}}" (go_current=={{name}}?class="current":)><img src="{STYLE_PATH}images/{{name}}.png" style="float:right;" class="pngfix" alt="{lang.LOGIN}" style="vertical-align:middle;" />{{title}} <IF LOOP="name==logout">[ {username} ]</IF></a></li>
+				<li><a href="{{url}}" (go_current=={{name}}?class="current":)><IS_BROWSER!="mobile"><img src="{STYLE_PATH}images/{{name}}.png" style="float:right;" class="pngfix" alt="{lang.LOGIN}" style="vertical-align:middle;" /></IS_BROWSER>{{title}} <IF LOOP="name==logout">[ {username} ]</IF></a></li>
 				</IF></LOOP>
 			</ul>
       </div>

@@ -104,9 +104,11 @@ jQuery(document).ready(function($){
 </IF>
 
 <form method="post" name="imgform" action="{action}" id="imgs_form">
-	
+
 <IF NAME="no_results">
-	<h2>{lang.NOTHING}</h2>
+	<div class="note-info">
+		<h2>{lang.NO_RESULT_USE_SYNC}</h2>
+	</div>
 <ELSE>
 
 

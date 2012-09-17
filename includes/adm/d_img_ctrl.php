@@ -136,19 +136,29 @@ $img_types = array('gif','jpg','png','bmp','jpeg','tif','tiff','GIF','JPG','PNG'
 
 $query['WHERE'] = "(f.type = '" . implode("' OR f.type = '", $img_types) . "')";
 
+$do_not_query_total_files = false;
 
 if(isset($_GET['last_visit']))
 {
 	$query['WHERE']	.= " AND f.time > " . intval($_GET['last_visit']);
 }
-
-
-$result_p = $SQL->build($query);
+else
+{
+	$do_not_query_total_files = true;
+}
 
 $nums_rows = 0;
-$n_fetch	= $SQL->fetch_array($result_p);
-$nums_rows	= $n_fetch['total_files'];
-$SQL->freeresult($result_p);
+if($do_not_query_total_files)
+{
+	$nums_rows = get_actual_stats('imgs');
+}
+else
+{
+	$result_p = $SQL->build($query);
+	$n_fetch = $SQL->fetch_array($result_p);
+	$nums_rows = $n_fetch['total_files'];
+	$SQL->freeresult($result_p);
+}
 
 //pager
 $currentPage= isset($_GET['page']) ? intval($_GET['page']) : 1;

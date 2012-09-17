@@ -728,30 +728,31 @@ function process ()
 				$ip		= get_ip();
 				$realf	= (string)	$SQL->escape($real_filename);
 				$id_form= (string)	$SQL->escape($config['id_form']);
+				$is_img = in_array($type, array('png','gif','jpg','jpeg','tif','tiff', 'bmp')) ? true : false;
 				
 				$insert_query = array(
 									'INSERT'	=> '`name` ,`size` ,`time` ,`folder` ,`type`,`user`,`code_del`,`user_ip`, `real_filename`, `id_form`',
 									'INTO'		=> "`{$dbprefix}files`",
 									'VALUES'	=> "'$name', '$size', '$timeww', '$folder','$type', '$user', '$code_del', '$ip', '$realf', '$id_form'"
 									);
-									
+
 				($hook = kleeja_run_hook('qr_insert_new_file_kljuploader')) ? eval($hook) : null; //run hook
-				
+
 				$SQL->build($insert_query);
-				
+
 				$this->name_for_url  = $name;
 				$this->id_for_url  = $SQL->insert_id();
 
 				//calculate stats ..s
 				$update_query = array(
 									'UPDATE'	=> "{$dbprefix}stats",
-									'SET'		=> "`files`=files+1,`sizes`=sizes+" . $size . ",`last_file`='" . $folder . "/" . $name . "'"
+									'SET'		=> ($is_img ? "`imgs`=imgs+1" : "`files`=files+1") . ",`sizes`=sizes+" . $size . ",`last_file`='" . $folder . "/" . $name . "'"
 								);
-								
+
 				($hook = kleeja_run_hook('qr_update_no_files_kljuploader')) ? eval($hook) : null; //run hook
 				
 				$SQL->build($update_query);
-				
+	
 				//delete cache of stats !
 				delete_cache('data_stats');
 
@@ -766,7 +767,7 @@ function process ()
 				}
 
 				//show imgs
-				if (in_array(strtolower($this->typet), array('png','gif','jpg','jpeg','tif','tiff', 'bmp')))
+				if($is_img)
 				{
 					//make thumbs
 					$img_html_result = '';

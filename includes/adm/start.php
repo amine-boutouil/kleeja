@@ -303,5 +303,9 @@ foreach($d_groups as $id=>$ddt)
 	$hurry_groups_list .= '<option value="' . $id . '">' . preg_replace('!{lang.([A-Z0-9]+)}!e', '$lang[\'\\1\']', $d_groups[$id]['data']['group_name']) . '</option>';
 }
 
+#hurry, hurry section, links
+$del_cache_link		= basename(ADMIN_PATH) . '?cp=r_repair&amp;case=clearc&amp;' . kleeja_add_form_key_get('REPAIR_FORM_KEY');
+
 
 ($hook = kleeja_run_hook('default_admin_page')) ? eval($hook) : null; //run hook 
+

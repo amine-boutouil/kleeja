@@ -18,9 +18,9 @@ if (!defined('IN_ADMIN'))
 //for style ..
 $stylee		= "admin_files";
 
-$url_or		= isset($_REQUEST['order_by']) ? '&amp;order_by=' . $SQL->escape($_REQUEST['order_by']) . (isset($_REQUEST['order_way']) ? '&amp;order_by=1' : '') : '';
-$url_or2	= isset($_REQUEST['order_by']) ? '&amp;order_by=' . $SQL->escape($_REQUEST['order_by'])  : '';
-$url_lst	= isset($_REQUEST['last_visit']) ? '&amp;last_visit=' . $SQL->escape($_REQUEST['last_visit']) : '';
+$url_or		= isset($_REQUEST['order_by']) ? '&amp;order_by=' . htmlspecialchars($_REQUEST['order_by']) . (isset($_REQUEST['order_way']) ? '&amp;order_by=1' : '') : '';
+$url_or2	= isset($_REQUEST['order_by']) ? '&amp;order_by=' . htmlspecialchars($_REQUEST['order_by'])  : '';
+$url_lst	= isset($_REQUEST['last_visit']) ? '&amp;last_visit=' . htmlspecialchars($_REQUEST['last_visit']) : '';
 $url_sea	= isset($_GET['search_id']) ? '&amp;search_id=' . htmlspecialchars($_GET['search_id']) : '';
 $url_pg		= isset($_GET['page']) ? '&amp;page=' . intval($_GET['page']) : '';
 $page_action	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php')  . $url_or . $url_sea . $url_lst;
@@ -208,6 +208,8 @@ if((int) $config['user_system'] == 1)
 							);
 }
 
+$do_not_query_total_files = false;
+
 //posts search ..
 if(isset($_GET['search_id']))
 {
@@ -226,6 +228,10 @@ if(isset($_REQUEST['order_by']) && in_array($_REQUEST['order_by'], array('real_f
 {
 	$query['ORDER BY'] = "f." . $SQL->escape($_REQUEST['order_by']);
 }
+else
+{
+	$do_not_query_total_files = true;
+}
 
 if(!isset($_GET['search_id']))
 {
@@ -235,12 +241,20 @@ if(!isset($_GET['search_id']))
 }
 
 $query['ORDER BY'] .= (isset($_REQUEST['order_way']) && (int) $_REQUEST['order_way'] == 1) ? ' ASC' : ' DESC';
-$result_p = $SQL->build($query);
 
 $nums_rows = 0;
-$n_fetch = $SQL->fetch_array($result_p);
-$nums_rows = $n_fetch['total_files'];
-$SQL->freeresult($result_p);
+if($do_not_query_total_files)
+{
+	$nums_rows = get_actual_stats('files');
+}
+else
+{
+	$result_p = $SQL->build($query);
+	$n_fetch = $SQL->fetch_array($result_p);
+	$nums_rows = $n_fetch['total_files'];
+	$SQL->freeresult($result_p);
+}
+
 
 //pager 
 $currentPage= isset($_GET['page']) ? intval($_GET['page']) : 1;
@@ -305,6 +319,7 @@ else
 	//no result ..
 	$no_results = true;
 }
+
 
 #update f_lastvisit
 if(!$is_search)

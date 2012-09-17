@@ -63,6 +63,6 @@
 	-moz-border-radius : 5px;-webkit-border-radius : 5px;-khtml-border-radius : 5px; border-radius : 5px;}
 
 	/* @Borders all Corners (10)Pixel ----------- */	
-	.border_radius,	.admin_cp_link span,	.guide_right_img,.guide_left_img  {
+	.admin_cp_link span,	.guide_right_img,.guide_left_img  {
 	-moz-border-radius : 10px;-webkit-border-radius : 10px;-khtml-border-radius : 10px;border-radius : 10px;}
 /* @end */

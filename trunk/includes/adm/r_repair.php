@@ -16,6 +16,8 @@ if (!defined('IN_ADMIN'))
 }
 
 
+#turn time-limit off
+@set_time_limit(0);
 
 #get current case
 $case = false;
@@ -30,7 +32,7 @@ $GET_FORM_KEY = kleeja_add_form_key_get('REPAIR_FORM_KEY');
 
 
 //check _GET Csrf token
-if($case && in_array($case, array('clearc')))
+if($case && in_array($case, array('clearc', 'sync_files', 'sync_images', 'sync_users', 'tables', 'sync_sizes', 'status_file')))
 {
 	if(!kleeja_check_form_key_get('REPAIR_FORM_KEY'))
 	{
@@ -46,10 +48,19 @@ default:
 $all_files = get_actual_stats('files');
 $all_images = get_actual_stats('imgs');
 $all_users = get_actual_stats('users');
+$all_sizes = get_actual_stats('sizes');
 
 
 #links
-$del_cache_link = basename(ADMIN_PATH) . '?cp=r_repair&amp;case=clearc&amp;' . $GET_FORM_KEY;
+$del_cache_link		= basename(ADMIN_PATH) . '?cp=r_repair&amp;case=clearc&amp;' . $GET_FORM_KEY;
+$resync_files_link	= basename(ADMIN_PATH) . '?cp=r_repair&amp;case=sync_files&amp;' . $GET_FORM_KEY;
+$resync_images_link	= basename(ADMIN_PATH) . '?cp=r_repair&amp;case=sync_images&amp;' . $GET_FORM_KEY;
+$resync_users_link	= basename(ADMIN_PATH) . '?cp=r_repair&amp;case=sync_users&amp;' . $GET_FORM_KEY;
+$resync_sizes_link	= basename(ADMIN_PATH) . '?cp=r_repair&amp;case=sync_sizes&amp;' . $GET_FORM_KEY;
+$repair_tables_link	= basename(ADMIN_PATH) . '?cp=r_repair&amp;case=tables&amp;' . $GET_FORM_KEY;
+$status_file_link	= basename(ADMIN_PATH) . '?cp=r_repair&amp;case=status_file&amp;' . $GET_FORM_KEY;
+
+
 
 $stylee = "admin_repair";
 
@@ -94,14 +105,14 @@ $zip->create_file($config_file_data, 'config.php');
 unset($config_file_data);
 
 #kleeja log
-if(file_exists(PATH . 'cache/kleeja_log.log'))
+if(file_exists(PATH . 'cache/kleeja_log.log') && defined('DEV_STAGE'))
 {
 	$zip->create_file(file_get_contents(PATH . 'cache/kleeja_log.log'), 'kleeja_log.log');
 }
 	
 #Groups info
-$zip->create_file(var_export($d_groups, true), 'guest_exts.txt');
-	
+$zip->create_file(var_export($d_groups, true), 'groups.txt');
+
 #eval test, Im not so sure about this test, must be
 #tried at real situation.
 $t = 'OFF';
@@ -116,7 +127,7 @@ $zip->create_file(var_export($all_plg_plugins, true), 'plugins_info.txt');
 $zip->create_file(var_export($banss, true), 'ban_info.txt');
 
 #stats
-$stat_vars = array('stat_files', 'stat_sizes', 'stat_users', 'stat_last_file', 'stat_last_f_del',
+$stat_vars = array('stat_files', 'stat_imgs', 'stat_sizes', 'stat_users', 'stat_last_file', 'stat_last_f_del',
 				'stat_last_google', 'stat_last_bing', 'stat_google_num', 'stat_bing_num', 'stat_last_user');
 $zip->create_file(var_export(compact($stat_vars), true), 'stats.txt');
 unset($stat_vars);
@@ -152,7 +163,11 @@ while($row=$SQL->fetch_array($result))
 }
 	
 $SQL->freeresult($result);
-	
+
+$text .= '<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . basename(ADMIN_PATH) . '?cp=r_repair' .  '\');", 2000);</script>' . "\n";
+$stylee = 'admin_info';
+
+
 break;
 
 //
@@ -188,10 +203,70 @@ if ($SQL->build($update_query))
 	$text .= '<li>' . $lang['REPAIRE_F_STAT'] . '</li>';
 }
 
+$stylee = 'admin_info';
+
 break;
 
 //
-//re-sync user number ..
+//re-sync total files number ..
+//
+case 'sync_files':
+
+#no start ? or there 
+$start = !isset($_GET['start']) ? false : intval($_GET['start']);
+
+$end = sync_total_files(true, $start);
+
+#no end, then sync'ing is done...
+if(!$end)
+{
+	$text = sprintf($lang['SYNCING_DONE'], $lang['ALL_FILES']);
+	$link_to_go = basename(ADMIN_PATH) . '?cp=r_repair';
+}
+else
+{
+	$text = sprintf($lang['SYNCING'], $lang['ALL_FILES']);
+	$link_to_go = basename(ADMIN_PATH) . '?cp=r_repair&case=sync_files&start=' . $end . '&' . $GET_FORM_KEY;
+}
+
+$text .= '<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . $link_to_go .  '\');", 2000);</script>' . "\n";
+
+$stylee = 'admin_info';
+
+break;
+
+
+//
+//re-sync total images number ..
+//
+case 'sync_images':
+
+#no start ? or there 
+$start = !isset($_GET['start']) ? false : intval($_GET['start']);
+
+$end = sync_total_files(false, $start);
+
+#no end, then sync'ing is done...
+if(!$end)
+{
+	$text = sprintf($lang['SYNCING_DONE'], $lang['ALL_IMAGES']);
+	$link_to_go = basename(ADMIN_PATH) . '?cp=r_repair';
+}
+else
+{
+	$text = sprintf($lang['SYNCING'], $lang['ALL_IMAGES']);
+	$link_to_go = basename(ADMIN_PATH) . '?cp=r_repair&case=sync_images&start=' . $end . '&' . $GET_FORM_KEY;
+}
+
+$text .= '<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . $link_to_go .  '\');", 2000);</script>' . "\n";
+
+$stylee = 'admin_info';
+
+break;
+
+
+//
+//re-sync total users number ..
 //
 case 'sync_users':
 
@@ -215,10 +290,13 @@ $update_query	= array(
 						'SET'		=> "users=" . $user_number
 					);
 
-if ($SQL->build($update_query))
-{
-	$text .= '<li>' . $lang['REPAIRE_S_STAT'] . '</li>';
-}
+$result = $SQL->build($update_query);
+
+$text = sprintf($lang['SYNCING'], $lang['USERS_ST']);
+$text .= '<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . basename(ADMIN_PATH) . '?cp=r_repair' .  '\');", 2000);</script>' . "\n";
+
+$stylee = 'admin_info';
+
 
 break;
 

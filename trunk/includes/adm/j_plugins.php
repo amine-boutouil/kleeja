@@ -521,7 +521,8 @@ if(isset($_POST['submit_new_plg']))
 		{
 			//plugin added
 			case 'done':
-				$text = $lang['NEW_PLUGIN_ADDED'] . '<meta HTTP-EQUIV="REFRESH" content="1; url=' . basename(ADMIN_PATH) . '?#!cp=' . basename(__file__, '.php') . '">' . "\n";
+				$text = $lang['NEW_PLUGIN_ADDED'];
+				$text .= '<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . basename(ADMIN_PATH) . '?cp=' .  basename(__file__, '.php') .  '\');", 2000);</script>' . "\n";
 			break;
 			case 'xyz': //exists before
 				kleeja_admin_err($lang['PLUGIN_EXISTS_BEFORE'],true,'',true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'));			
@@ -532,7 +533,8 @@ if(isset($_POST['submit_new_plg']))
 
 			#--->weiredooo stuff
 			case 'inst':
-				$text = $lang['NEW_PLUGIN_ADDED'] . '<meta HTTP-EQUIV="REFRESH" content="1; url=' . basename(ADMIN_PATH) . '?#!cp=' . basename(__file__, '.php') . '&do_plg=' . $plg->plg_id . '&m=4&amp;' . $GET_FORM_KEY . '">' . "\n";
+				$text = $lang['NEW_PLUGIN_ADDED'];
+				$text .= '<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . basename(ADMIN_PATH) . '?cp=' .  basename(__file__, '.php') . '&do_plg=' . $plg->plg_id . '&m=4&' . $GET_FORM_KEY '\');", 2000);</script>' . "\n";
 			break;
 			case 'zipped':
 				$text = sprintf($lang['PLUGIN_ADDED_ZIPPED'], '<a target="_blank" href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;do_plg=' . $plg->plg_id . '&amp;m=6&amp;fn=' . $plg->zipped_files . '&amp;' . $GET_FORM_KEY . '">', '</a>');

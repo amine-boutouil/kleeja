@@ -534,7 +534,7 @@ if(isset($_POST['submit_new_plg']))
 			#--->weiredooo stuff
 			case 'inst':
 				$text = $lang['NEW_PLUGIN_ADDED'];
-				$text .= '<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . basename(ADMIN_PATH) . '?cp=' .  basename(__file__, '.php') . '&do_plg=' . $plg->plg_id . '&m=4&' . $GET_FORM_KEY '\');", 2000);</script>' . "\n";
+				$text .= '<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . basename(ADMIN_PATH) . '?cp=' .  basename(__file__, '.php') . '&do_plg=' . $plg->plg_id . '&m=4&' . $GET_FORM_KEY . '\');", 2000);</script>' . "\n";
 			break;
 			case 'zipped':
 				$text = sprintf($lang['PLUGIN_ADDED_ZIPPED'], '<a target="_blank" href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;do_plg=' . $plg->plg_id . '&amp;m=6&amp;fn=' . $plg->zipped_files . '&amp;' . $GET_FORM_KEY . '">', '</a>');

@@ -442,7 +442,7 @@ switch ($_GET['go'])
 		$sizes_st	= Customfile_size($stat_sizes);	
 		$lst_dl_st	= (int) $config['del_f_day'] <= 0 ? false : kleeja_date($stat_last_f_del);
 		$lst_reg	= empty($stat_last_user) ? $lang['UNKNOWN'] : $stat_last_user;
-		$on_muoe	= kleeja_data($on_muoe);
+		$on_muoe	= kleeja_date($on_muoe);
 
 		($hook = kleeja_run_hook('stats_go_page')) ? eval($hook) : null; //run hook
 

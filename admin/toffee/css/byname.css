@@ -36,6 +36,9 @@
 	padding:10px 0;
 }
 
+#menu{
+margin-bottom:50px;}
+
 #menu_left ul li { position: relative;}
 
 #menu .link_menu, #menu_left ul li { 

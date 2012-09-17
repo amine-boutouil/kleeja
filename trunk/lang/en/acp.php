@@ -343,4 +343,5 @@ $lang = array_merge($lang, array(
 	'WHY_SYNCING'				=> 'Kleeja uses auto increment to not perform calculation of total numbers everytime, this rises Kleeja performance. Use this after upgrade or when Kleeja asks you to.',
 	'REPAIR_DB_TABLES'			=> 'Repair Data base tables',
 	'SUPPORT_ZIP_FILE'			=> 'A compress file contains information about Kleeja on your website, to be give to the support',
+	'NO_RESULT_USE_SYNC'		=> 'There are no results, if you just installed Kleeja then that ok. <br /> If you just made an upgrade, then go to "Mentenance page" then do a "re-sync" for files or images.',
 ));

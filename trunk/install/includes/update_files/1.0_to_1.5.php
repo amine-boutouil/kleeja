@@ -49,6 +49,9 @@ $update_sqls['register_time'] = "ALTER TABLE  `{$dbprefix}users` ADD  `register_
 #alter stats table
 $update_sqls['alter_stats_add_imgs'] = "ALTER TABLE  `{$dbprefix}stats` ADD  `imgs` INT( 11 ) UNSIGNED NOT NULL DEFAULT  '0' AFTER  `files`;";
 
+#reset stats
+$update_sqls['stats_to_0'] = "UPDATE  `{$dbprefix}stats` SET  `files` =  '0', `imgs` =  '0';";
+
 
 #new tables
 $update_sqls['filters'] = "

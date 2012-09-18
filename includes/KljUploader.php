@@ -725,7 +725,7 @@ function process ()
 				$timeww	= (int)		time();
 				$user	= (int)		$this->id_user;
 				$code_del=(string)	md5($name . uniqid());
-				$ip		= get_ip();
+				$ip		= (string)	$SQL->escape(get_ip());
 				$realf	= (string)	$SQL->escape($real_filename);
 				$id_form= (string)	$SQL->escape($config['id_form']);
 				$is_img = in_array($type, array('png','gif','jpg','jpeg','tif','tiff', 'bmp')) ? true : false;

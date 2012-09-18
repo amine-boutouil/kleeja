@@ -93,7 +93,7 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 
 		$REPORT		= ($config['mod_writer']) ?  $config['siteurl'] . "report-" . $id . ".html" :  $config['siteurl'] . "go.php?go=report&amp;id=" . $id;
 		$seconds_w	= $config['sec_down'];
-		$time		= date("d-m-Y H:i a", $time);
+		$time		= kleeja_date($time);
 		$size		= Customfile_size($size);
 				
 		$file_ext_icon = file_exists('images/filetypes/' . $type . '.png') ? 'images/filetypes/' . $type . '.png' : 'images/filetypes/file.png';

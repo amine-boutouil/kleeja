@@ -167,6 +167,35 @@
 </div>
 <!-- the big box end general2 -->
 
+<IF NAME="stats_chart">
+<!-- the big box begin general3 -->
+<div class="big-box">
+<div class="tit_con">
+	<h1>{lang.STATS}</h1>   
+</div>
+
+<div id="chart_stats"></div>
+
+<!-- admin start general section3 -->
+<script type="text/javascript">
+{stats_chart}
+
+$('#chart_stats').jqBarGraph({
+	data: arrayOfDataMulti,
+		colors: ['#2D6BA9','#91C7E5'] ,
+   legends: ['{lang.FILE}','{lang.IMAGE}'],
+   legend: true,
+   height: 200,
+   barSpace: 5,
+   width:700
+   
+});
+</script>
+</div>
+<!-- the big box end general3 -->
+</IF>
+
+
 <ELSEIF NAME="current_smt == other">
  <!-- the big box begin other -->
 <div class="big-box"> 

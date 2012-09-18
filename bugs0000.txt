@@ -49,16 +49,16 @@
 -[x] error message after mass maint. to the center
 -[x] quick change of language and style at first page, hurry hurry! 
 -[x] what if we update_config group-related config ? 
--[ ] make total files and images sync, so no more crashes at acp
+-[x] make total files and images sync, so no more crashes at acp
 -[x] if inactive-files-deleting feature is off, dont show it at acp firstpage and stats page
--[ ] last ten days stats, files and images, morris.js
--[ ] remove last_file code from files and sql .. 
--[ ] change 'total repair' page to 'maintenance'
-	-[ ] clean style's templates section
-	-[ ] clean cached data section 
-	-[ ] resync total number of files
-	-[ ] repair db tables
-
+-[x] last ten days stats, files and images, [del]morris.js[/del] jqbargraph.js
+-[-] remove last_file code from files and sql .. 
+-[x] change 'total repair' page to 'maintenance'
+	-[x] clean style's templates section
+	-[x] clean cached data section 
+	-[x] resync total number of files
+	-[x] repair db tables
+-[ ] copyrights removal atteps
 
 NOTE NOTE NOTE :: 
 use this function to extend the group system all the script/

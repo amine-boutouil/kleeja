@@ -11,9 +11,9 @@
 	<div class="second-action tit_plugins_icon" onclick="javascript:get_kleeja_link('./?cp=j_plugins&amp;smt=newplg', '#content'); return false;">{lang.ADD_NEW_PLUGIN}</div>
 </div>
 <!-- the big box begin -->
-<div class="big-box">
+<div class="big-box <IF NAME="no_plugins">no-plugins-bg</IF>">
 <IF NAME="no_plugins">
-{lang.NO_PLUGINS}
+<div class="">{lang.NO_PLUGINS}</div>
 <ELSE>
 <div id="plugin_boxes">
 <table style="width:100%">
@@ -56,6 +56,8 @@
 </table>
 <div class="clear"></div>
 </div>
+<div class="note-info"><strong>{lang.NOTE} !</strong> {klj_d_s}</div>
+
 </IF>
 
 </div>
@@ -96,7 +98,6 @@
 <!-- the big box end#changes_files -->
 </IF>
 
-<div class="note-info"><strong>{lang.NOTE} !</strong> {klj_d_s}</div>
 
 <ELSEIF NAME="current_smt == newplg">
 <!-- add new plugin -->

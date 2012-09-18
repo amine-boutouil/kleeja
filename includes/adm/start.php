@@ -16,6 +16,11 @@ if (!defined('IN_ADMIN'))
 }
 
 
+#hook to use it for start page, also there is a hook at admin/index.php that you
+#can use it with all includes/adm files, just hook your codes and gooo...
+($hook = kleeja_run_hook('default_admin_page')) ? eval($hook) : null; //run hook 
+
+
 //style of
 $stylee			= "admin_start";
 $h_lst_files	= basename(ADMIN_PATH) . '?cp=c_files&amp;last_visit=';
@@ -307,5 +312,59 @@ foreach($d_groups as $id=>$ddt)
 $del_cache_link		= basename(ADMIN_PATH) . '?cp=r_repair&amp;case=clearc&amp;' . kleeja_add_form_key_get('REPAIR_FORM_KEY');
 
 
-($hook = kleeja_run_hook('default_admin_page')) ? eval($hook) : null; //run hook 
+# get stats filter so we can draw a chart for the user
+$stats_chart = false;
+
+$cf_query = array(
+					'SELECT'	=> 'f.filter_uid, f.filter_value, f.filter_time',
+					'FROM'		=> "{$dbprefix}filters f",
+					'WHERE'		=> "f.filter_type = 'stats_for_acp'",
+					'ORDER BY'	=> 'f.filter_time DESC',
+				);
+
+$cf_result	= $SQL->build($cf_query);
+$cf_num	= $SQL->num_rows($cf_result);
+if($cf_num > 4)
+{
+	$stats_chart = 'arrayOfDataMulti = new Array(';
+	
+	$comma = false;
+	$prv_files = $prev_imgs = 0;
+	while($row=$SQL->fetch_array($cf_result))
+	{
+		list($s_files, $s_imgs, $s_sizes) = explode(':', $row['filter_value']);
+
+		if($prv_files == 0 && $prv_imgs == 0)
+		{
+			$prv_files = $s_files;
+			$prev_imgs = $s_imgs;
+			continue;
+		}
+
+		$t_files = $s_files - $prv_files;
+		$t_imgs = $s_imgs - $prev_imgs;
+
+		$day = date('d-m-Y') == $row['filter_uid'] ? $lang['TODAY'] : $row['filter_uid'];
+		
+		$stats_chart .= ($comma ? ',': '') . "[[$t_files,$t_imgs],'" . ($cf_num > 6 ? str_replace(date('-Y'), '', $day) : $day) . "']";
+
+		$comma = true;
+		$prv_files = $s_files;
+		$prev_imgs = $s_imgs;
+	}
+
+	$stats_chart .= ');';
+	
+	$SQL->freeresult($cf_result);
+
+	#clean old chart stats
+	if($cf_num > 10)
+	{
+		$query_del	= array(
+								'DELETE'	=> "{$dbprefix}filters",
+								'WHERE'		=> "filter_type = 'stats_for_acp' AND filter_time < " . (time() - (3600 * 24 * 10))
+							);
+		 $SQL->build($query_del);
+	}
+}
 

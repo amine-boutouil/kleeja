@@ -232,7 +232,36 @@ if (!($stats = $cache->get('data_stats')))
 	$SQL->freeresult($result);
 
 	$cache->save('data_stats', $stats, 3600);
+	
+	#also, save the data for the charts later
+	$query = array(
+					'SELECT'	=> 'f.filter_uid',
+					'FROM'		=> "{$dbprefix}filters f",
+					'WHERE'		=> "f.filter_type= 'filter_type' AND f.filter_uid = '" . date('d-m-Y') . "'"
+				);
+
+	$result	= $SQL->build($query);		
+		
+	if($SQL->num_rows($result))
+	{
+		$f_query	= array(
+							'UPDATE'	=> "{$dbprefix}filters",
+							'SET'		=> "filter_value='" . implode(':', array($stats['stat_files'], $stats['stat_imgs'], $stats['stat_sizes']))  . "'",
+							'WHERE'		=> "f.filter_type= 'filter_type' AND f.filter_uid = '" . date('d-m-Y') . "'"
+					);
+	}
+	else
+	{
+		$f_query = array(
+							'INSERT'	=> '`filter_uid`, `filter_type` ,`filter_value` ,`filter_time`',
+							'INTO'		=> "`{$dbprefix}filters`",
+							'VALUES'	=> "'" . date('d-m-Y') . "', 'stats_for_acp', '" . implode(':', array($stats['stat_files'], $stats['stat_imgs'], $stats['stat_sizes'])) . "', " . time()
+					);
+	}
+	
+	$SQL->build($f_query);
 }
+
 
 //make them as seperated vars
 extract($stats);

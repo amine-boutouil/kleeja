@@ -237,17 +237,17 @@ if (!($stats = $cache->get('data_stats')))
 	$query = array(
 					'SELECT'	=> 'f.filter_uid',
 					'FROM'		=> "{$dbprefix}filters f",
-					'WHERE'		=> "f.filter_type= 'filter_type' AND f.filter_uid = '" . date('d-m-Y') . "'"
+					'WHERE'		=> "f.filter_type='stats_for_acp' AND f.filter_uid = '" . date('d-m-Y') . "'"
 				);
 
 	$result	= $SQL->build($query);		
-		
-	if($SQL->num_rows($result))
+
+	if($SQL->num_rows($result))	
 	{
 		$f_query	= array(
 							'UPDATE'	=> "{$dbprefix}filters",
 							'SET'		=> "filter_value='" . implode(':', array($stats['stat_files'], $stats['stat_imgs'], $stats['stat_sizes']))  . "'",
-							'WHERE'		=> "f.filter_type= 'filter_type' AND f.filter_uid = '" . date('d-m-Y') . "'"
+							'WHERE'		=> "filter_type='stats_for_acp' AND filter_uid = '" . date('d-m-Y') . "'"
 					);
 	}
 	else
@@ -258,7 +258,7 @@ if (!($stats = $cache->get('data_stats')))
 							'VALUES'	=> "'" . date('d-m-Y') . "', 'stats_for_acp', '" . implode(':', array($stats['stat_files'], $stats['stat_imgs'], $stats['stat_sizes'])) . "', " . time()
 					);
 	}
-	
+
 	$SQL->build($f_query);
 }
 

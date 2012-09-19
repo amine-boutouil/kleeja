@@ -1,7 +1,7 @@
 @charset "UTF-8";
-/** @package Name: Kleeja  	Copyright (c) 2007 (http://kleeja.com)
-	@version: 1.0.0			Theme: default V1
-	@Author: Tar3Q (http://Tar3Q.com)
+/** @package Name: Kleeja  	Copyright (c) 2007-2012 (http://kleeja.com)
+	@version: 1.5			Theme: default V2
+	@Author: Tar3Q (http://Tar3Q.com), KLEEJA TEAM
 	******************************************************
 	$Id$
 	******************************************************/
@@ -175,10 +175,10 @@
 	6. Template & Index > index_body.html
 	-------------------------------------------------- */
 	.wolcome_msg {text-indent:5px;font-size:12px;padding:3px 6px;}
-	.agree{margin:10px 0;padding:3px 0;}
+	.agree{margin-top:20px;padding:3px 0;}
 	.agree span{font-size:90%;font-weight:700;}
 	.zx, .zl {cursor:pointer;padding:4px;}
-	.bn_up {margin-top:10px;}
+	.bn_up {margin-top:7px;}
 	.url {margin-top:3px;direction:ltr;}
 	.inum {text-align:center;}
 	input.input_num {font-weight:400;font-size:10px;padding:2px 1px;}
@@ -186,6 +186,7 @@
 	.waitloading{font-size:120%;margin:5px;}
 
 	/*	Tabs -------------------- */
+	.go_up{margin-top:20px;}
 	.tabberlive .tabbertabhide,.tabber {display:none;}
 	.tabberlive {margin-top:10px;}
 	.tabberlive .tabbertab {padding:20px;}

@@ -1,12 +1,8 @@
 	<div class="clr"></div>
 
-	<IF NAME="extras.footer">
-		<!-- Extras Footer -->
-		<div class="dot"></div>
-			<div class="extras_footer">{extras.footer}</div>
-		<div class="dot"></div>
-		<!-- @end-extras-footer -->
-	</IF>
+	<!-- Extras Footer -->
+	(extras.footer?<div class="dot"></div><div class="extras_footer">{extras.footer}</div><div class="dot"></div>:)
+	<!-- @end-extras-footer -->
 	
 	</div><!-- @end-wrapper -->
 </div><!-- @end-main -->
@@ -31,20 +27,14 @@
 		</div>
 
 		<div class="clr"></div>
-		
-		<!-- button panel -->
-		<div class="bu-panel">{admin_page}</div><!-- @end-button-panel -->
 
-		<IF NAME="page_stats">
-			<!-- footer stats -->
-			<div class="footer_stats">{page_stats}</div><!-- @end-footer-stats -->
-		</IF>
-		<IF NAME="googleanalytics">
-			<!-- google analytics -->
-			<div class="footer_stats">{googleanalytics}</div><!-- @end-google-analytics -->
-		</IF>
+		<!-- button panel --><div class="bu-panel">{admin_page}</div><!-- @end-button-panel -->
+		<!-- footer stats -->(page_stats?<div class="footer_stats">{page_stats}</div>:)<!-- @end-footer-stats -->
+		<!-- google analytics -->(googleanalytics?<div class="footer_stats">{googleanalytics}</div>:)<!-- @end-google-analytics -->
+		
 	</div>
-</div><!-- @end-footer -->
+</div>
+<!-- @end-footer -->
 
 <!-- don't ever delete this -->
 {run_queue}

@@ -110,7 +110,7 @@ if(
 
 	if(isset($_GET['_ajax_']))
 	{
-		echo_ajax(999, '');
+		//echo_ajax(999, '');
 	}
 
 	//prevent indexing this page by bots
@@ -131,7 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && defined('STOP_CSRF'))
 		$usrcp->logout_cp();
 		if(isset($_GET['_ajax_']))
 		{
-			echo_ajax(999, '');
+			//echo_ajax(999, '');
 		}
 
 		redirect($config['siteurl']);

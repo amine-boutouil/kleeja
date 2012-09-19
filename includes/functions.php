@@ -436,65 +436,6 @@ function fetch_remote_file($url, $save_in = false, $timeout = 20, $head_only = f
 }
 
 
-//1rc6+ for check file mime
-//this function is under TESTING !
-// you can share your experinces with us from our site kleeja.com...
-function kleeja_check_mime ($mime, $this_is_image,$file_path)
-{
-	//This code for images only
-	//it's must be improved for all files in future !
-	if($this_is_image == false)
-	{
-		return true;
-	}
-
-	
-	$return = false;
-	$s_items = @explode(':', 'image:png:jpg:tif:tga:targa');
-	foreach($s_items as $r)
-	{
-		if(strpos($mime, $r) !== false)
-		{
-			$return = true;
-			break;
-		}
-	}
-
-	//onther check
-	//$w = @getimagesize($file_path);
-	//$return =  ($w && (strpos($w['mime'], 'image') !== false)) ? true : false;
-
-	//another check
-	if($return == true)
-	{
-		if(@kleeja_filesize($file_path) > 4*(1000*1024))
-		{
-			return true;
-		}
-		
-		//check for bad things inside files ...
-		//<.? i cant add it here cuz alot of files contain it 
-		$maybe_bad_codes_are = array('<script', 'zend', 'base64_decode');
-		
-		if(!($data = @file_get_contents($file_path)))
-		{
-			return true;
-		}
-		
-		foreach($maybe_bad_codes_are as $i)
-		{
-			if(strpos(strtolower($data), $i) !== false)
-			{
-				$return = false;
-				break;
-			}
-		}
-	}
-
-	($hook = kleeja_run_hook('kleeja_check_mime_func')) ? eval($hook) : null; //run hook
-	
-	return $return;
-}
 
 /**
 * Delete cache

@@ -44,8 +44,7 @@ endswitch;
 //
 //start uploader class .. 
 //
-$kljup->decode		= $decode;              
-$kljup->linksite	= $config['siteurl']; 
+$kljup->decode		= $decode;
 $kljup->folder		= $config['foldername'];
 $kljup->filename	= $config['prefixname'];
 $kljup->action		= $action = "index.php";
@@ -67,7 +66,7 @@ foreach(range(1, $config['filesnum']) as $i)
 
 //show errors and info
 $info = array();
-foreach($kljup->errs as $t=>$s)	
+foreach($kljup->messages as $t=>$s)	
 {
 	$info[] = array('t'=>$s[1], 'i' => $s[0]);
 }

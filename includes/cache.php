@@ -231,23 +231,25 @@ if (!($stats = $cache->get('data_stats')))
 
 	$SQL->freeresult($result);
 
+	#save the stats for hour and then refresh them
 	$cache->save('data_stats', $stats, 3600);
-	
+
 	#also, save the data for the charts later
 	$query = array(
 					'SELECT'	=> 'f.filter_uid',
 					'FROM'		=> "{$dbprefix}filters f",
-					'WHERE'		=> "f.filter_type='stats_for_acp' AND f.filter_uid = '" . date('d-m-Y') . "'"
+					'WHERE'		=> "f.filter_type='stats_for_acp' AND f.filter_uid = '" . date('d-n-Y') . "'"
 				);
 
 	$result	= $SQL->build($query);		
 
+	#if already there is stats for this day, just update it, if not insert a new one
 	if($SQL->num_rows($result))	
 	{
 		$f_query	= array(
 							'UPDATE'	=> "{$dbprefix}filters",
 							'SET'		=> "filter_value='" . implode(':', array($stats['stat_files'], $stats['stat_imgs'], $stats['stat_sizes']))  . "'",
-							'WHERE'		=> "filter_type='stats_for_acp' AND filter_uid = '" . date('d-m-Y') . "'"
+							'WHERE'		=> "filter_type='stats_for_acp' AND filter_uid = '" . date('d-n-Y') . "'"
 					);
 	}
 	else
@@ -255,7 +257,7 @@ if (!($stats = $cache->get('data_stats')))
 		$f_query = array(
 							'INSERT'	=> '`filter_uid`, `filter_type` ,`filter_value` ,`filter_time`',
 							'INTO'		=> "`{$dbprefix}filters`",
-							'VALUES'	=> "'" . date('d-m-Y') . "', 'stats_for_acp', '" . implode(':', array($stats['stat_files'], $stats['stat_imgs'], $stats['stat_sizes'])) . "', " . time()
+							'VALUES'	=> "'" . date('d-n-Y') . "', 'stats_for_acp', '" . implode(':', array($stats['stat_files'], $stats['stat_imgs'], $stats['stat_sizes'])) . "', " . time()
 					);
 	}
 
@@ -297,7 +299,7 @@ if (!($banss = $cache->get('data_ban')))
 	}
 
 	$gt = kleeja_filesize(PATH . 'includes/st' . 'yl' . 'e.php');
-	if(!empty($gt) && $gt != 10043)
+	if(!empty($gt) && $gt != 10059)
 	{
 		exit(kleeja_base64_decode('V2hlcmUgVGhlIENvcHlyaWdodHMgOikgLi4u'));
 	}

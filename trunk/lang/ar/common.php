@@ -285,6 +285,7 @@ $lang = array_merge($lang, array(
 	'CHANGE'			=> 'تغيير',
 	'FOR'				=> 'لـ',
 	'ALL'				=> 'الجميع',
+	'NOW'				=> 'الآن',
 
 	));
 

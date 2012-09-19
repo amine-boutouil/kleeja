@@ -335,17 +335,19 @@ if($cf_num > 4)
 	$prev_date = date('d-n-Y');	
 	while($row=$SQL->fetch_array($cf_result))
 	{
-		list($s_files, $s_imgs, $s_sizes) = explode(':', $row['filter_value']);
-
+		#jump today
 		if($prev_date == $row['filter_uid'])
 		{
 			continue;
 		}
 
-		$t_files = $s_files - $prv_files;
-		$t_imgs = $s_imgs - $prev_imgs;
+		#get this row data
+		list($s_files, $s_imgs, $s_sizes) = explode(':', $row['filter_value']);
+	
+		$t_files = $prv_files - $s_files;
+		$t_imgs = $prev_imgs - $s_imgs;
 
-		$day = date('d-n-Y') == $prev_date ? $lang['TODAY'] . '-' . $lang['HOUR'] : $prev_date;
+		$day = date('d-n-Y') == $prev_date ? $lang['TODAY'] . ' ~ ' . $lang['NOW'] : $prev_date;
 
 		$stats_chart .= ($comma ? ',': '') . "[[$t_files,$t_imgs],'" . ($cf_num > 6 ? str_replace(date('-Y'), '', $day) : $day) . "']";
 
@@ -356,7 +358,7 @@ if($cf_num > 4)
 	}
 
 	$stats_chart .= ');';
-	
+
 	$SQL->freeresult($cf_result);
 
 	#clean old chart stats

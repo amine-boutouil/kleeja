@@ -295,6 +295,7 @@ $lang = array_merge($lang, array(
 	'CHANGE'			=> 'Change',
 	'FOR'				=> 'for',
 	'ALL'				=> 'All',
+	'NOW'				=> 'Now',
 
 	//last line of this file ...					 
 	'S_TRANSLATED_BY' 			=> 'Translated By <a href="http://www.fenix4web.com/" target="_blank">Fenix4Web</a> &amp; Kleeja Team',

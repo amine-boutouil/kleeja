@@ -142,7 +142,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && defined('STOP_CSRF'))
 
 
 $gt = kleeja_filesize(PATH . 'includes/st' . 'yl' .'e.php');
-if(!empty($gt) && $gt != 10043)
+if(!empty($gt) && $gt != 10059)
 {
 	exit(kleeja_base64_decode('V2hlcmUgVGhlIENvcHlyaWdodHMgOikgLi4u'));
 }

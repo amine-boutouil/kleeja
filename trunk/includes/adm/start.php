@@ -329,28 +329,30 @@ if($cf_num > 4)
 	$stats_chart = 'arrayOfDataMulti = new Array(';
 	
 	$comma = false;
-	$prv_files = $prev_imgs = 0;
+	#get currently right now stats
+	$prv_files = get_actual_stats('files');
+	$prev_imgs = get_actual_stats('imgs');
+	$prev_date = date('d-n-Y');	
 	while($row=$SQL->fetch_array($cf_result))
 	{
 		list($s_files, $s_imgs, $s_sizes) = explode(':', $row['filter_value']);
 
-		if($prv_files == 0 && $prv_imgs == 0)
+		if($prev_date == $row['filter_uid'])
 		{
-			$prv_files = $s_files;
-			$prev_imgs = $s_imgs;
 			continue;
 		}
 
 		$t_files = $s_files - $prv_files;
 		$t_imgs = $s_imgs - $prev_imgs;
 
-		$day = date('d-m-Y') == $row['filter_uid'] ? $lang['TODAY'] : $row['filter_uid'];
-		
+		$day = date('d-n-Y') == $prev_date ? $lang['TODAY'] . '-' . $lang['HOUR'] : $prev_date;
+
 		$stats_chart .= ($comma ? ',': '') . "[[$t_files,$t_imgs],'" . ($cf_num > 6 ? str_replace(date('-Y'), '', $day) : $day) . "']";
 
 		$comma = true;
 		$prv_files = $s_files;
 		$prev_imgs = $s_imgs;
+		$prev_date = $row['filter_uid'];
 	}
 
 	$stats_chart .= ');';

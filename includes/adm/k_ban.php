@@ -69,6 +69,6 @@ $SQL->freeresult($result);
 if (isset($_POST['submit']))
 {
 	$text	= ($affected ? $lang['BAN_UPDATED'] : $lang['NO_UP_CHANGE_S']);
-	$text	.= '<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . basename(ADMIN_PATH) . '?cp=' .  . basename(__file__, '.php') .  '\');", 2000);</script>' . "\n";
+	$text	.= '<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') .  '\');", 2000);</script>' . "\n";
 	$stylee	= "admin_info";
 }

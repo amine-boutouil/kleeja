@@ -534,15 +534,6 @@ class KljUploader
 		
 		# clear some variables from memory
 		unset($filename, $folderee, $sizeee, $typeee);
-}
-
-	//
-	//get file size 
-	//source : http://nopaste.planerd.net/1139
-
-    
-
+	}
+	
 }#end class
-
-
-//<-- EOF

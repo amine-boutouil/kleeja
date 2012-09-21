@@ -19,17 +19,6 @@ if (!defined('IN_COMMON'))
 #
 
 
-
-
-/**
- * return good ratio for thumb image
- * need imporovment, now only depend on new_h
- */
-function get_scale_thumb($old_x, $old_y, $new_w, $new_h, $ext = '')
-{
-	($hook = kleeja_run_hook('get_scale_thumb_func')) ? eval($hook) : null; //run hook	
-	return array(round($old_x * $new_h / $old_y), $new_h);
-}
 	
 /**
  * Creates a resized image
@@ -61,28 +50,38 @@ function helper_thumb($source_path, $ext, $dest_image, $dw, $dh)
 		return;
 	}
 
-	#no getimagesize, then go to other helper
-	if(!function_exists('getimagesize'))
+	//get file info
+	list($source_width, $source_height, $source_type) = array(false, false, false);
+	if(function_exists('getimagesize'))
 	{
-		helper_generate_thumb2($source_path, $ext, $dest_image, $dw, $dh);
-		return;
+		list($source_width, $source_height, $source_type) = @getimagesize($source_path);
 	}
 
-	//get file info
-	list($source_width, $source_height, $source_type) = getimagesize($source_path);
-
-	switch ($source_type)
+	switch(strtolower(preg_replace('/^.*\./', '', $source_path)))
 	{
-		case IMAGETYPE_GIF:
+		case 'gif':
 			$source_gdim = imagecreatefromgif( $source_path );
 			break;
-		case IMAGETYPE_JPEG:
+		case 'jpg':
+		case 'jpeg':
 			$source_gdim = imagecreatefromjpeg( $source_path );
 			break;
-		case IMAGETYPE_PNG:
+		case 'png':
 			$source_gdim = imagecreatefrompng( $source_path );
 			break;
+		case 'bmp':
+			if(!defined('BMP_CLASS_INCLUDED'))
+			{
+				include dirname(__file__) . '/BMP.php';
+				 define('BMP_CLASS_INCLUDED', true);
+			}
+
+			$source_gdim = imagecreatefrombmp( $source_path );
+			break;
 	}
+
+	$source_width = !$source_width ? ImageSX($source_gdim) : $source_width;
+	$source_height = !$source_height ? ImageSY($source_gdim) : $source_height;
 
 	$source_aspect_ratio = $source_width / $source_height;
 	$desired_aspect_ratio = $dw / $dh;
@@ -137,6 +136,9 @@ function helper_thumb($source_path, $ext, $dest_image, $dw, $dh)
 		case 'gif':
 			$return = @imagegif($desired_gdim, $dest_image);
 		break;
+		case 'bmp':
+			$return = @imagebmp($desired_gdim, $dest_image);
+			break;
 		default:
 			// Unsupported format
 		$return = false;
@@ -145,77 +147,66 @@ function helper_thumb($source_path, $ext, $dest_image, $dw, $dh)
 
 	@imagedestroy($desired_gdim);
 	@imagedestroy($src_img);
-	
+
 	return $return;
 }
 
 
 
 /**
- * thumb helper if no getimagesize
- */
-function helper_thumb2($name, $ext, $filename, $new_w, $new_h)
-{
-	($hook = kleeja_run_hook('helper_generate_thumb_func')) ? eval($hook) : null; //run hook	
-
-	#no file, quit it
-	if(!file_exists($name))
-	{
-		return;
-	}
-
-	#if there is imagick lib, then we should use it
-	if(function_exists('phpversion') && phpversion('imagick'))
-	{
-		helper_generate_thumb_imagick($name, $ext, $filename, $new_w, $new_h);
-		return;
-	}
-
-	#if the responsible function is not avaliable, then quit it
-	$function_create = 'imagecreatefrom' . str_replace('jpg', 'jpeg', $ext);
-	if(!function_exists($function_create))
-	{
-		return;
-	}
-
-	#original height, weight
-	$src_img = @$function_create($name);
-	$old_x = imageSX($src_img);
-	$old_y = imageSY($src_img);
-	
-	#gussing the right thumb height, weight
-	list($thumb_w, $thumb_h) = get_scale_thumb($old_x, $old_y, $new_w, $new_h, $ext);
-
-	#create it
-	$dst_img = @ImageCreateTrueColor($thumb_w, $thumb_h);
-	@imagecopyresampled($dst_img, $src_img, 0, 0, 0, 0, $thumb_w, $thumb_h, $old_x, $old_y);
-
-	$function = 'image' . str_replace('jpg', 'jpeg', $ext);
-	if(function_exists($function))
-	{
-			@$function($dst_img, $filename);
-	}
-
-	@imagedestroy($dst_img);
-	@imagedestroy($src_img);
-}
-
-
-/**
  * generating thumb from image using Imagick
  * 
  */
+function scale_image_imagick($x, $y, $cx, $cy)
+{
+	//Set the default NEW values to be the old, in case it doesn't even need scaling
+	list($nx,$ny) = array($x, $y);
+
+	//If image is generally smaller, don't even bother
+	if ($x >= $cx || $y >= $cx)
+	{        
+		//Work out ratios
+		if ($x > 0)
+		{
+			$rx = $cx / $x;
+		}
+
+		if ($y>0)
+		{
+			$ry = $cy / $y;
+        }
+
+		//Use the lowest ratio, to ensure we don't go over the wanted image size
+		if ($rx>$ry)
+		{
+            $r = $ry;
+        }
+        else
+        {
+            $r = $rx;
+        }
+
+		//Calculate the new size based on the chosen ratio
+		$nx = intval($x * $r);
+		$ny = intval($y * $r);
+	}
+
+	//Return the results
+	return array($nx, $ny);
+}
+
 function helper_thumb_imagick($name, $ext, $filename, $new_w, $new_h)
 {
 	#intiating the Imagick lib	
 	$im = new Imagick($name);
 
-	#get the image height, weight
-	$old_x = $im->getImageWidth();
-	$old_y = $im->getImageHeight();
-	
 	#guess the right thumb height, weights
-	list($thumb_w, $thumb_h) = get_scale_thumb($old_x, $old_y, $new_w, $new_h, $ext);
+	list($thumb_w, $thumb_h) = scale_image_imagick(
+					$im->getImageWidth(),
+					$im->getImageHeight(),
+					$new_w,
+					$new_h);
+
 
 	#an exception for gif image
 	#generating thumb with 10 frames only, big gif is a devil

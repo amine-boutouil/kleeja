@@ -34,9 +34,127 @@ function get_scale_thumb($old_x, $old_y, $new_w, $new_h, $ext = '')
 /**
  * Creates a resized image
  * @example createthumb('pics/apple.jpg','thumbs/tn_apple.jpg',100,100);
- * @url http://icant.co.uk/articles/phpthumbnails/
  */
-function helper_thumb($name, $ext, $filename, $new_w, $new_h)
+function helper_thumb($source_path, $ext, $dest_image, $dw, $dh)
+{
+	#no file, quit it
+	if(!file_exists($source_path))
+	{
+		return;
+	}
+
+	#check width, height
+	if(intval($dw) == 0 || intval($dw) < 10)
+	{
+		$dw = 100;
+	}
+
+	if(intval($dh) == 0 || intval($dh) < 10)
+	{
+		$dh = $dw;
+	}
+
+	#if there is imagick lib, then we should use it
+	if(function_exists('phpversion') && phpversion('imagick'))
+	{
+		helper_generate_thumb_imagick($source_path, $ext, $dest_image, $dw, $dh);
+		return;
+	}
+
+	#no getimagesize, then go to other helper
+	if(!function_exists('getimagesize'))
+	{
+		helper_generate_thumb2($source_path, $ext, $dest_image, $dw, $dh);
+		return;
+	}
+
+	//get file info
+	list($source_width, $source_height, $source_type) = getimagesize($source_path);
+
+	switch ($source_type)
+	{
+		case IMAGETYPE_GIF:
+			$source_gdim = imagecreatefromgif( $source_path );
+			break;
+		case IMAGETYPE_JPEG:
+			$source_gdim = imagecreatefromjpeg( $source_path );
+			break;
+		case IMAGETYPE_PNG:
+			$source_gdim = imagecreatefrompng( $source_path );
+			break;
+	}
+
+	$source_aspect_ratio = $source_width / $source_height;
+	$desired_aspect_ratio = $dw / $dh;
+
+	if ($source_aspect_ratio > $desired_aspect_ratio)
+	{
+		// Triggered when source image is wider
+		$temp_height = $dh;
+		$temp_width = (int) ($dh * $source_aspect_ratio);
+	}
+	else
+	{
+		// Triggered otherwise (i.e. source image is similar or taller)
+		$temp_width = $dw;
+		$temp_height = (int) ($dw / $source_aspect_ratio);
+	}
+
+	// Resize the image into a temporary GD image
+	$temp_gdim = imagecreatetruecolor( $temp_width, $temp_height );
+	imagecopyresampled(
+		$temp_gdim,
+		$source_gdim,
+		0, 0,
+		0, 0,
+		$temp_width, $temp_height,
+		$source_width, $source_height
+	);
+
+	// Copy cropped region from temporary image into the desired GD image
+	$x0 = ($temp_width - $dw) / 2;
+	$y0 = ($temp_height - $dh) / 2;
+
+	$desired_gdim = imagecreatetruecolor($dw, $dh);
+	imagecopy(
+		$desired_gdim,
+		$temp_gdim,
+		0, 0,
+		$x0, $y0,
+		$dw, $dh
+	);
+
+	// Create thumbnail
+	switch(strtolower(preg_replace('/^.*\./', '', $dest_image)))
+	{
+		case 'jpg':
+		case 'jpeg':
+			$return = @imagejpeg($desired_gdim, $dest_image, 90);
+			break;
+		case 'png':
+			$return = @imagepng($desired_gdim, $dest_image);
+			break;
+		case 'gif':
+			$return = @imagegif($desired_gdim, $dest_image);
+		break;
+		default:
+			// Unsupported format
+		$return = false;
+		break;
+	}
+
+	@imagedestroy($desired_gdim);
+	@imagedestroy($src_img);
+	
+	return $return;
+}
+
+
+
+/**
+ * thumb helper if no getimagesize
+ */
+function helper_thumb2($name, $ext, $filename, $new_w, $new_h)
 {
 	($hook = kleeja_run_hook('helper_generate_thumb_func')) ? eval($hook) : null; //run hook	
 

@@ -102,12 +102,14 @@ function imagecreatefrombmp($filename)
 
     if ($header['identifier1'] != 66 or $header['identifier2'] != 77)
     {
-    	die('Not a valid bmp file');
+    	//die('Not a valid bmp file');
+    	return false;
     }
     
     if ($header['bits_per_pixel'] != 24)
     {
-    	die('Only 24bit BMP images are supported');
+    	//die('Only 24bit BMP images are supported');
+    	return false;
     }
     
     $wid2 = ceil((3*$header['width']) / 4) * 4;

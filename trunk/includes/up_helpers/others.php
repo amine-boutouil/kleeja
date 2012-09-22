@@ -164,7 +164,7 @@ function check_mime_type($mime, $this_is_image,$file_path)
 	}
 
 	$return = false;
-	$s_items = @explode(':', 'image:png:jpg:tif:tga:targa');
+	$s_items = @explode(':', 'image:png:jpg:gif:bmp:jpeg');
 	foreach($s_items as $r)
 	{
 		if(strpos($mime, $r) !== false)

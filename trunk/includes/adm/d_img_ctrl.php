@@ -126,7 +126,7 @@ if((int) $config['user_system'] == 1)
 							);
 }
 
-$img_types = array('gif','jpg','png','bmp','jpeg','tif','tiff','GIF','JPG','PNG','BMP','JPEG','TIF','TIFF');
+$img_types = array('gif','jpg','png','bmp','jpeg','GIF','JPG','PNG','BMP','JPEG');
 
 #
 # There is a bug with IN statment in MySQL and they said it will solved at 6.0 version

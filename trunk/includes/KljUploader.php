@@ -460,7 +460,7 @@ class KljUploader
 	
 			# generate thumb now
 			helper_thumb($folderee . '/' . $filname, strtolower($this->typet), $folderee . '/thumbs/' . $filname, $thmb_dim_w, $thmb_dim_h);
-	
+
 			if(($config['thumbs_imgs'] != 0) && in_array(strtolower($this->typet), array('png','jpg','jpeg','gif', 'bmp')))
 			{		
 				$img_html_result .= get_up_tpl_box('image_thumb', array(

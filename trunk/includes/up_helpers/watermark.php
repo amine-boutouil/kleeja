@@ -43,13 +43,18 @@ function helper_watermark($name, $ext)
 	{
 		$src_img = @imagecreatefrompng($name);
 	}
-	#todo : try to use some avilable php library to make gif thumb
 	elseif (strpos($ext, 'gif') !== false)
 	{
 		$src_img = @imagecreatefromgif($name);
 	}
 	elseif(strpos($ext, 'bmp') !== false)
 	{
+		if(!defined('BMP_CLASS_INCLUDED'))
+		{
+			include dirname(__file__) . '/BMP.php';
+			 define('BMP_CLASS_INCLUDED', true);
+		}
+
 		$src_img = imagecreatefrombmp($name);
 	}
 	else
@@ -57,13 +62,20 @@ function helper_watermark($name, $ext)
 		return;
 	}
 
-	if(file_exists('../../' . dirname(__file__) . '/images/watermark.png'))
+	$src_logo = false;
+	if(file_exists(dirname(__FILE__) . '/../../images/watermark.png'))
 	{
-		$src_logo = imagecreatefrompng('../../' . dirname(__file__) . '/images/watermark.png');
+		$src_logo = imagecreatefrompng(dirname(__FILE__) . '/../../images/watermark.png');
 	}
-	elseif(file_exists('../../' . dirname(__file__) . '/images/watermark.gif'))
+	elseif(file_exists(dirname(__FILE__) . '/../../images/watermark.gif'))
 	{
-		$src_logo = imagecreatefromgif('../../' . dirname(__file__) . '/images/watermark.gif');
+		$src_logo = imagecreatefromgif(dirname(__FILE__) . '/../../images/watermark.gif');
+	}
+
+	#no watermark pic
+	if(!$src_logo)
+	{
+		return;
 	}
 
 	#detect width, height for the image

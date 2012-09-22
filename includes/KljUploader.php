@@ -406,7 +406,7 @@ class KljUploader
 		$ip		= (string)	$SQL->escape(get_ip());
 		$realf	= (string)	$SQL->escape($real_filename);
 		$id_form= (string)	$SQL->escape($config['id_form']);
-		$is_img = in_array($type, array('png','gif','jpg','jpeg','tif','tiff', 'bmp')) ? true : false;
+		$is_img = in_array($type, array('png','gif','jpg','jpeg', 'bmp')) ? true : false;
 	
 		# insertion query
 		$insert_query = array(

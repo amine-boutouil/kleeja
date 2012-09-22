@@ -1149,7 +1149,7 @@ function klj_clean_old_files($from = 0)
 			$continue = true;
 			$real_num++;
 			$last_id_from = $row['id'];
-			$is_image = in_array(strtolower(trim($row['type'])), array('gif', 'jpg', 'jpeg', 'bmp', 'png', 'tiff', 'tif')) ? true : false;
+			$is_image = in_array(strtolower(trim($row['type'])), array('gif', 'jpg', 'jpeg', 'bmp', 'png')) ? true : false;
 
 			/*
 			//excpetions

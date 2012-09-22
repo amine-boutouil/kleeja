@@ -220,7 +220,7 @@ function sync_total_files($files = true, $start = false)
 		);
 
 	#!files == images
-	$img_types = array('gif','jpg','png','bmp','jpeg','tif','tiff','GIF','JPG','PNG','BMP','JPEG','TIF','TIFF');
+	$img_types = array('gif','jpg','png','bmp','jpeg','GIF','JPG','PNG','BMP','JPEG');
 	$query['WHERE'] = "f.type" . ($files  ? ' NOT' : '') ." IN ('" . implode("', '", $img_types) . "')";
 
 	$result	= $SQL->build($query);

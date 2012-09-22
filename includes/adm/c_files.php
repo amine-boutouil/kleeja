@@ -75,7 +75,7 @@ if (isset($_POST['submit']))
 				@kleeja_unlink (PATH . $row['folder'] . '/thumbs/' . $row['name'] );
 			}
 
-			$is_image = in_array(strtolower(trim($row['type'])), array('gif', 'jpg', 'jpeg', 'bmp', 'png', 'tiff', 'tif')) ? true : false;
+			$is_image = in_array(strtolower(trim($row['type'])), array('gif', 'jpg', 'jpeg', 'bmp', 'png')) ? true : false;
 
 			$ids[] = $row['id'];
 			if($is_image)
@@ -164,7 +164,7 @@ if(isset($_GET['deletefiles']))
 			@kleeja_unlink (PATH . $row['folder'] . "/thumbs/" . $row['name']);
 		}
 
-		$is_image = in_array(strtolower(trim($row['type'])), array('gif', 'jpg', 'jpeg', 'bmp', 'png', 'tiff', 'tif')) ? true : false;
+		$is_image = in_array(strtolower(trim($row['type'])), array('gif', 'jpg', 'jpeg', 'bmp', 'png')) ? true : false;
 
 		$ids[] = $row['id'];
 		if($is_image)
@@ -259,7 +259,7 @@ else
 if(!isset($_GET['search_id']))
 {
 	//display files or display pics and files only in search
-	$img_types = array('gif','jpg','png','bmp','jpeg','tif','tiff','GIF','JPG','PNG','BMP','JPEG','TIF','TIFF');
+	$img_types = array('gif','jpg','png','bmp','jpeg','GIF','JPG','PNG','BMP','JPEG');
 	$query['WHERE'] = $query['WHERE'] . (empty($query['WHERE']) ? '' : ' AND ') . "f.type NOT IN ('" . implode("', '", $img_types) . "')";
 }
 

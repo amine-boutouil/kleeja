@@ -45,14 +45,13 @@ button, input[type='submit'] {
 	text-decoration: none;
 	font: 11px Tahoma, arial, Helvetica, sans-serif;
 	padding:0 15px;
-	text-shadow: 0 1px 1px rgba(0,0,0,.3);
 	box-shadow: 0 1px 2px rgba(0,0,0,.2);
-	color: #fef4e9;
-	border: solid 1px #da7c0c;
+	color: #4B4F52;
+	border: solid 1px #8EC1DA;
 	background: #f78d1d;
-	background: -webkit-gradient(linear, left top, left bottom, from(#faa51a), to(#f47a20));
-	background: -moz-linear-gradient(top,  #faa51a,  #f47a20);
-	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#faa51a', endColorstr='#f47a20');
+	background: -webkit-gradient(linear, left top, left bottom, from(#BED9ED), to(#62B4E8));
+	background: -moz-linear-gradient(top,  #BED9ED, #62B4E8);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#BED9ED', endColorstr='#62B4E8');
 	}
 button:hover, input[type='submit']:hover {
 	  text-decoration: none;
@@ -131,7 +130,7 @@ select:active {
 /* usefull colors */
 .ored,.ored:hover {background:#D8D8CC;}
 .osilver,.undefined{background:#F9F9F9;}
-.osilver:hover,.undefined:hover{background:#FFFCE8;}
+.osilver:hover,.undefined:hover{background:#DFEDF8;}
 .oblue{background:#EDFFEA;}
 .oblue td{border-top:1px solid #87C87C;border-bottom:1px solid #87C87C;}
 .oblue:hover {background:#DEEFDB;}

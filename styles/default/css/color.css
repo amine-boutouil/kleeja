@@ -308,9 +308,9 @@
 	.guide_right_ext_color{color:#222;}
 	.guide_right_ext_lang{color:black;}
 	.guide_left_box{background:white url("../images/bg_box.gif") repeat-x top left;border-right:1px solid white;border-left:1px solid white;}
-	.guide_left_img {background-color:white;border: 1px solid #FFD1BF;}
+	.guide_left_img {background-color:white;border: 1px solid #62B4E8;}
 	.guide_left_n4me{color:#F45E13;}
-	.guide_left_ext{background:#FEFAF6 url("../images/headline_bg.png") repeat-x top right;border-bottom: 1px solid #FFE3D9;border-top: 1px solid #FFD1BF;}
+	.guide_left_ext{background:#DFEDF8 url("../images/headline_bg.png") repeat-x top right;border-bottom: 1px solid #62B4E8;border-top: 1px solid #62B4E8;}
 	.guide_left_ext_color{color:#333;}
 	.guide_left_ext_lang{color:black;}
 	.guide_right_ext:hover{background-color:white;}

@@ -20,13 +20,24 @@ if (!defined('IN_COMMON'))
 #http://www.developer.nokia.com/Community/Wiki/Extract_GPS_coordinates_from_digital_camera_images_using_PHP
 function get_gps_from_image($image_path)
 {
-	$exif=exif_read_data($image_path, 0, true);
-	if(!$exif || $exif['GPS']['GPSLatitude'] == )
+	if(!function_exists('exif_read_data'))
+	{
+		return false;
+	}
+	
+	$exif = exif_read_data($image_path, 0, true);
+	
+	if(!$exif || !is_array($exif))
 	{
 		return false;
 	}
 	else
 	{
+		if(!in_array('GPS', $exif))
+		{
+			return false;
+		}
+
 		$lat_ref = $exif['GPS']['GPSLatitudeRef'];
 		$lat = $exif['GPS']['GPSLatitude'];
 		list($num, $dec) = explode('/', $lat[0]);

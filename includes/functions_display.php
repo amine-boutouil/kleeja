@@ -321,8 +321,7 @@ function big_error ($error_title,  $msg_text, $error = true)
 	echo '<title>' . htmlspecialchars($error_title) . '</title>' . "\n";
 	echo '<style type="text/css">' . "\n\t";
 	echo '* { margin: 0; padding: 0; }' . "\n\t";
-	echo 'body { background: #fff;color: #444;font-family:tahoma, verdana, arial, sans-serif;font-size: 11px;margin: 0 auto;padding: 50px;width: 767px;}' . "\n\t";
-	echo '.error {color: #333;background:#ffebe8;border: 1px solid #dd3c10;} .info {color: #333;background:#fff9d7;border: 1px solid #e2c822;}' . "\n\t";
+	echo '.error {color: #333;background:#ffebe8;float:left;width:73%;text-align:left;margin-top:10px;border: 1px solid #dd3c10;} .info {color: #333;background:#fff9d7;border: 1px solid #e2c822;}' . "\n\t";
 	echo '.error,.info {padding: 10px;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size: 12px;}' . "\n";
 	echo '</style>' . "\n";
 	echo '</head>' . "\n";

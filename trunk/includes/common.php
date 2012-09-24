@@ -92,8 +92,7 @@ function kleeja_show_error($errno, $errstr = '', $errfile = '', $errline = '')
 			echo '<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">' . "\n<head>\n";
 			echo '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />' . "\n";
 			echo '<title>Kleeja Error</title>' . "\n" . '<style type="text/css">' . "\n\t";
-			echo '* { margin: 0; padding: 0; }' . "\n\t" . 'body { background: #fff;margin: 0 auto;padding: 50px;width: 767px;}' . "\n\t";
-			echo '.error {color: #333;background:#ffebe8;border: 1px solid #dd3c10; padding: 10px;font-family:tahoma,arial;font-size: 12px;}' . "\n";
+			echo '.error {color: #333;background:#ffebe8;float:left;width:73%;text-align:left;margin-top:10px;border: 1px solid #dd3c10; padding: 10px;font-family:tahoma,arial;font-size: 12px;}' . "\n";
 			echo "</style>\n</head>\n<body>\n\t" . '<div class="error">' . "\n\n\t\t<h2>Kleeja error  : </h2><br />" . "\n";
 			echo "\n\t\t<strong> [ " . $errno . ':' . basename($errfile) . ':' . $errline . ' ] </strong><br /><br />' . "\n\t\t" . $errstr . "\n\t";
 			echo "\n\t\t" . '<br /><br /><small>Visit <a href="http://www.kleeja.com/" title="kleeja">Kleeja</a> Website for more details.</small>' . "\n\t";

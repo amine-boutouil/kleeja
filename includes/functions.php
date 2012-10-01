@@ -841,7 +841,7 @@ function add_config ($name, $value, $order = '0', $html = '', $type = 'other', $
 		foreach($group_ids as $g_id)
 		{
 			$insert_query	= array(
-									'INSERT'	=> '`name` ,`value` ,`group_id`',
+									'INSERT'	=> 'name, value, group_id',
 									'INTO'		=> "{$dbprefix}groups_data",
 									'VALUES'	=> "'" . $SQL->escape($name) . "','" . $SQL->escape($value) . "', group_id" . $g_id,
 								);
@@ -853,7 +853,7 @@ function add_config ($name, $value, $order = '0', $html = '', $type = 'other', $
 	}
 
 	$insert_query	= array(
-							'INSERT'	=> '`name` ,`value` ,`option` ,`display_order`, `type`, `plg_id`, `dynamic`',
+							'INSERT'	=> 'name ,value ,option ,display_order, type, plg_id, dynamic',
 							'INTO'		=> "{$dbprefix}config",
 							'VALUES'	=> "'" . $SQL->escape($name) . "','" . $SQL->escape($value) . "', '" . $SQL->real_escape($html) . "','" . intval($order) . "','" . $SQL->escape($type) . "','" . intval($plg_id) . "','"  . (($dynamic) ? '1' : '0') . "'",
 						);
@@ -1019,7 +1019,7 @@ function add_olang($words = array(), $lang = 'en', $plg_id = '0')
 	foreach($words as $w=>$t)
 	{
 		$insert_query = array(
-								'INSERT'	=> '`word` ,`trans` ,`lang_id`, `plg_id`',
+								'INSERT'	=> 'word ,trans ,lang_id, plg_id',
 								'INTO'		=> "{$dbprefix}lang",
 								'VALUES'	=> "'" . $SQL->escape($w) . "','" . $SQL->real_escape($t) . "', '" . $SQL->escape($lang) . "','" . intval($plg_id) . "'",
 						);

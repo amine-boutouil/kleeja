@@ -109,7 +109,7 @@ if(isset($_GET['deleteuserfile']))
 	}
 
 	//is exists ?
-	if(!$SQL->num_rows($SQL->query("SELECT * FROM `{$dbprefix}users` WHERE id=" . intval($_GET['deleteuserfile']))))
+	if(!$SQL->num_rows($SQL->query("SELECT * FROM {$dbprefix}users WHERE id=" . intval($_GET['deleteuserfile']))))
 	{
 		redirect($action_all);
 	}
@@ -180,7 +180,7 @@ if(isset($_GET['del_user']))
 	}
 
 	//is exists ?
-	if(!$SQL->num_rows($SQL->query("SELECT * FROM `{$dbprefix}users` WHERE id=" . intval($_GET['del_user']))))
+	if(!$SQL->num_rows($SQL->query("SELECT * FROM {$dbprefix}users WHERE id=" . intval($_GET['del_user']))))
 	{
 		redirect($action_all);
 	}
@@ -214,11 +214,11 @@ else if (isset($_POST['newuser']))
 	{
 		$ERRORS[] = str_replace('4', '2', $lang['WRONG_NAME']);
 	}
-	else if ($SQL->num_rows($SQL->query("SELECT * FROM `{$dbprefix}users` WHERE clean_name='" . trim($SQL->escape($usrcp->cleanusername($_POST["lname"]))) . "'")) != 0)
+	else if ($SQL->num_rows($SQL->query("SELECT * FROM {$dbprefix}users WHERE clean_name='" . trim($SQL->escape($usrcp->cleanusername($_POST["lname"]))) . "'")) != 0)
 	{
 		$ERRORS[] = $lang['EXIST_NAME'];
 	}
-	else if ($SQL->num_rows($SQL->query("SELECT * FROM `{$dbprefix}users` WHERE mail='" . trim($SQL->escape(strtolower($_POST["lmail"]))) . "'")) != 0)
+	else if ($SQL->num_rows($SQL->query("SELECT * FROM {$dbprefix}users WHERE mail='" . trim($SQL->escape(strtolower($_POST["lmail"]))) . "'")) != 0)
 	{
 		$ERRORS[] = $lang['EXIST_EMAIL'];
 	}
@@ -281,7 +281,7 @@ if(isset($_POST['edituser']))
 	
 
 	//is exists ?
-	if(!$SQL->num_rows($SQL->query("SELECT id FROM `{$dbprefix}users` WHERE id=" . $userid)))
+	if(!$SQL->num_rows($SQL->query("SELECT id FROM {$dbprefix}users WHERE id=" . $userid)))
 	{
 		kleeja_admin_err('ERROR-NO-ID', true, '', true,  basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'));
 	}
@@ -320,7 +320,7 @@ if(isset($_POST['edituser']))
 		{
 			$ERRORS[] = str_replace('4', '2', $lang['WRONG_NAME']);
 		}
-		else if ($SQL->num_rows($SQL->query("SELECT * FROM `{$dbprefix}users` WHERE clean_name='" . $new_clean_name . "'")) != 0)
+		else if ($SQL->num_rows($SQL->query("SELECT * FROM {$dbprefix}users WHERE clean_name='" . $new_clean_name . "'")) != 0)
 		{
 			$ERRORS[] = $lang['EXIST_NAME'];
 		}
@@ -328,7 +328,7 @@ if(isset($_POST['edituser']))
 	else if ($udata['mail'] != trim($_POST['l_mail']))
 	{
 		$new_mail = true;
-		if($SQL->num_rows($SQL->query("SELECT * FROM `{$dbprefix}users` WHERE mail='" . trim($SQL->escape(strtolower($_POST["lmail"]))) . "'")) != 0)
+		if($SQL->num_rows($SQL->query("SELECT * FROM {$dbprefix}users WHERE mail='" . trim($SQL->escape(strtolower($_POST["lmail"]))) . "'")) != 0)
 		{
 			$ERRORS[] = $lang['EXIST_EMAIL'];
 		}
@@ -393,7 +393,7 @@ if(isset($_POST['newgroup']))
 	{
 		$ERRORS[] = str_replace('4', '1', $lang['WRONG_NAME']);
 	}
-	else if ($SQL->num_rows($SQL->query("SELECT * FROM `{$dbprefix}groups` WHERE group_name='" . trim($SQL->escape($_POST["gname"])) . "'")) != 0)
+	else if ($SQL->num_rows($SQL->query("SELECT * FROM {$dbprefix}groups WHERE group_name='" . trim($SQL->escape($_POST["gname"])) . "'")) != 0)
 	{
 		$ERRORS[] = $lang['EXIST_NAME'];
 	}
@@ -407,8 +407,8 @@ if(isset($_POST['newgroup']))
 	{
 		#Insert the group ..
 		$insert_query	= array(
-									'INSERT'	=> '`group_name`',
-									'INTO'		=> "`{$dbprefix}groups`",
+									'INSERT'	=> 'group_name',
+									'INTO'		=> "{$dbprefix}groups",
 									'VALUES'	=> "'" . trim($SQL->escape($_POST["gname"])) . "'"
 							);
 
@@ -437,8 +437,8 @@ if(isset($_POST['newgroup']))
 		while($row=$SQL->fetch_array($result))
 		{
 			$insert_query	= array(
-										'INSERT'	=> '`acl_name`, `acl_can`, `group_id`',
-										'INTO'		=> "`{$dbprefix}groups_acl`",
+										'INSERT'	=> 'acl_name, acl_can, group_id',
+										'INTO'		=> "{$dbprefix}groups_acl",
 										'VALUES'	=>  "'" . $row['acl_name'] . "', " . $row['acl_can'] . ", " . $new_group_id
 								);
 			$SQL->build($insert_query);
@@ -457,8 +457,8 @@ if(isset($_POST['newgroup']))
 		while($row=$SQL->fetch_array($result))
 		{
 			$insert_query	= array(
-										'INSERT'	=> '`name`, `value`, `group_id`',
-										'INTO'		=> "`{$dbprefix}groups_data`",
+										'INSERT'	=> 'name, value, group_id',
+										'INTO'		=> "{$dbprefix}groups_data",
 										'VALUES'	=>  "'" . $row['name'] . "', '" . $SQL->escape($row['value']) . "', " . $new_group_id
 								);
 			$SQL->build($insert_query);
@@ -477,8 +477,8 @@ if(isset($_POST['newgroup']))
 		while($row=$SQL->fetch_array($result))
 		{
 			$insert_query	= array(
-										'INSERT'	=> '`ext`, `size`, `group_id`',
-										'INTO'		=> "`{$dbprefix}groups_exts`",
+										'INSERT'	=> 'ext, size, group_id',
+										'INTO'		=> "{$dbprefix}groups_exts",
 										'VALUES'	=>  "'" . $row['ext'] . "', " . $row['size'] . ", " . $new_group_id
 								);
 			$SQL->build($insert_query);
@@ -564,8 +564,8 @@ if(isset($_POST['delgroup']))
 	#then, move users to the dest. group
 	$update_query = array(
 							'UPDATE'	=> "{$dbprefix}users",
-							'SET'		=> "`group_id`=" . $to_group,
-							'WHERE'		=> "`group_id`=". $from_group
+							'SET'		=> "group_id=" . $to_group,
+							'WHERE'		=> "group_id=". $from_group
 						);
 
 	$SQL->build($update_query);
@@ -689,8 +689,8 @@ case 'group_acl':
 		{
 			$update_query = array(
 									'UPDATE'	=> "{$dbprefix}groups_acl",
-									'SET'		=> "`acl_can`=1",
-									'WHERE'		=> "`acl_name` IN ('" . implode("', '", $submitted_on_acls) . "') AND `group_id`=". $req_group
+									'SET'		=> "acl_can=1",
+									'WHERE'		=> "acl_name IN ('" . implode("', '", $submitted_on_acls) . "') AND group_id=". $req_group
 								);
 
 			$SQL->build($update_query);
@@ -701,8 +701,8 @@ case 'group_acl':
 		{
 			$update_query2 = array(
 									'UPDATE'	=> "{$dbprefix}groups_acl",
-									'SET'		=> "`acl_can`=0",
-									'WHERE'		=> "`acl_name` IN ('" . implode("', '", $submitted_off_acls) . "') AND `group_id`=". $req_group
+									'SET'		=> "acl_can=0",
+									'WHERE'		=> "acl_name IN ('" . implode("', '", $submitted_off_acls) . "') AND group_id=". $req_group
 								);
 
 			$SQL->build($update_query2);
@@ -781,8 +781,8 @@ case 'group_data':
 
 			$update_query = array(
 									'UPDATE'	=> "{$dbprefix}groups_data",
-									'SET'		=> "`value`='" . $SQL->escape($new[$row['name']]) . "'",
-									'WHERE'		=> "`name`='" . $row['name'] . "' AND `group_id`=". $req_group
+									'SET'		=> "value='" . $SQL->escape($new[$row['name']]) . "'",
+									'WHERE'		=> "name='" . $row['name'] . "' AND group_id=". $req_group
 								);
 
 			$SQL->build($update_query);
@@ -821,8 +821,8 @@ case 'group_data':
 		{
 			$update_query = array(
 									'UPDATE'	=> "{$dbprefix}groups",
-									'SET'		=> "`group_is_default`=0",
-									'WHERE'		=> "`group_is_default`=1"
+									'SET'		=> "group_is_default=0",
+									'WHERE'		=> "group_is_default=1"
 									);
 			$SQL->build($update_query);
 
@@ -834,8 +834,8 @@ case 'group_data':
 		#update not-configs data
 		$update_query = array(
 								'UPDATE'	=> "{$dbprefix}groups",
-								'SET'		=> "`group_is_default`=" . intval($_POST['group_is_default']) . (isset($_POST['group_name']) ? ", `group_name`='" . $SQL->escape($_POST['group_name']) . "'" : ''),
-								'WHERE'		=> "`group_id`=". $req_group
+								'SET'		=> "group_is_default=" . intval($_POST['group_is_default']) . (isset($_POST['group_name']) ? ", group_name='" . $SQL->escape($_POST['group_name']) . "'" : ''),
+								'WHERE'		=> "group_id=". $req_group
 								);
 		$SQL->build($update_query);
 		
@@ -922,8 +922,8 @@ case 'group_exts':
 		#add
 		$default_size = '2097152';#bytes
 		$insert_query	= array(
-									'INSERT'	=> '`ext` ,`group_id`, `size`',
-									'INTO'		=> "`{$dbprefix}groups_exts`",
+									'INSERT'	=> 'ext ,group_id, size',
+									'INTO'		=> "{$dbprefix}groups_exts",
 									'VALUES'	=> "'$new_ext', $req_group, $default_size"
 							);
 
@@ -944,8 +944,8 @@ case 'group_exts':
 			{
 				$update_query = array(
 										'UPDATE'	=> "{$dbprefix}groups_exts",
-										'SET'		=> "`size`=" . (intval($e_val)*1024),
-										'WHERE'		=> "`ext_id`=" . intval($e_id) . " AND `group_id`=". $req_group
+										'SET'		=> "size=" . (intval($e_val)*1024),
+										'WHERE'		=> "ext_id=" . intval($e_id) . " AND group_id=". $req_group
 										);
 				$SQL->build($update_query);
 			}
@@ -1078,7 +1078,7 @@ case 'edit_user':
 	$userid = intval($_GET['uid']);
 
 	//is exists ?
-	if(!$SQL->num_rows($SQL->query("SELECT * FROM `{$dbprefix}users` WHERE id=" . $userid)))
+	if(!$SQL->num_rows($SQL->query("SELECT * FROM {$dbprefix}users WHERE id=" . $userid)))
 	{
 		kleeja_admin_err('ERROR-NO-ID', true, '', true,  basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'));
 	}

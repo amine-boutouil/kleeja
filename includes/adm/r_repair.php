@@ -154,7 +154,7 @@ $text = '';
 	
 while($row=$SQL->fetch_array($result))
 {
-	$queryf	=	"REPAIR TABLE `" . $row['Name'] . "`";
+	$queryf	=	"REPAIR TABLE " . $row['Name'] . "";
 	$resultf = $SQL->query($queryf);
 	if ($resultf)
 	{
@@ -178,7 +178,7 @@ case 'sync_sizes':
 
 $query_s	= array(
 					'SELECT'	=> 'size',
-					'FROM'		=> "`{$dbprefix}files`"
+					'FROM'		=> "{$dbprefix}files"
 				);
 
 $result_s = $SQL->build($query_s);
@@ -272,7 +272,7 @@ case 'sync_users':
 
 $query_w	= array(
 					'SELECT'	=> 'name',
-					'FROM'		=> "`{$dbprefix}users`"
+					'FROM'		=> "{$dbprefix}users"
 				);
 
 $result_w = $SQL->build($query_w);

@@ -255,8 +255,8 @@ if (!($stats = $cache->get('data_stats')))
 	else
 	{
 		$f_query = array(
-							'INSERT'	=> '`filter_uid`, `filter_type` ,`filter_value` ,`filter_time`',
-							'INTO'		=> "`{$dbprefix}filters`",
+							'INSERT'	=> 'filter_uid, filter_type ,filter_value ,filter_time',
+							'INTO'		=> "{$dbprefix}filters",
 							'VALUES'	=> "'" . date('d-n-Y') . "', 'stats_for_acp', '" . implode(':', array($stats['stat_files'], $stats['stat_imgs'], $stats['stat_sizes'])) . "', " . time()
 					);
 	}

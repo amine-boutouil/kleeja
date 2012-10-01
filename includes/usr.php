@@ -90,7 +90,7 @@ class usrcp
 
 		$query = array(
 					'SELECT'	=> '*',
-					'FROM'		=> "`{$dbprefix}users`",
+					'FROM'		=> "{$dbprefix}users",
 					'LIMIT'		=> '1'
 					);
 
@@ -133,7 +133,7 @@ class usrcp
 
 						////update now !!
 						$update_query = array(
-									'UPDATE'	=> "`{$dbprefix}users`",
+									'UPDATE'	=> "{$dbprefix}users",
 									'SET'		=> "password='" . $new_password . "' ,password_salt='" . $new_salt . "'",
 									'WHERE'		=>	"id=" . intval($row['id'])
 							);
@@ -176,7 +176,7 @@ class usrcp
 				if(empty($row['last_visit']) || time() - $row['last_visit'] > 60)
 				{
 						$update_last_visit = array(
-									'UPDATE'	=> "`{$dbprefix}users`",
+									'UPDATE'	=> "{$dbprefix}users",
 									'SET'		=> "last_visit=" . time(),
 									'WHERE'		=> "id=" . intval($row['id'])
 							);

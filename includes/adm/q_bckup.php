@@ -82,7 +82,7 @@ if (isset($_POST['submit']))
 		//clean 
 		$table = preg_replace('/[^0-9a-z\-_. ]/i', '', $table);
 	
-		$query	= 'SHOW CREATE TABLE `' . $table . '`';
+		$query	= 'SHOW CREATE TABLE ' . $table . '';
 
 		 //get code of tables ceation
 		$result = $SQL->query($query);
@@ -92,7 +92,7 @@ if (isset($_POST['submit']))
 		$outta .= "\r\n# Table: " . $table . "\r\n";
 		$outta .= $que['Create Table'] . ";\r\n";
 
-		$query2	= 'SELECT * FROM `' . $table . '`';
+		$query2	= 'SELECT * FROM ' . $table . '';
 
 		//gets rows of table
 		$result2 = $SQL->query($query2);
@@ -103,7 +103,7 @@ if (isset($_POST['submit']))
 			$fields	= $values = array();
 			while($res = current($ro))
 			{
-				$fields[] = '`' . key($ro) . '`';
+				$fields[] = '' . key($ro) . '';
 				$values[] = "'" . str_replace("'", "\'", $res) . "'";
 				next($ro);
 			}
@@ -117,7 +117,7 @@ if (isset($_POST['submit']))
 				$values = implode(', ', $values);
 			}
 
-			$q = "INSERT INTO `" . $table . "` ($fields) VALUES ($values);";
+			$q = "INSERT INTO " . $table . " ($fields) VALUES ($values);";
 			$outta .= $q . "\r\n";
 			
 			unset($fields, $values);

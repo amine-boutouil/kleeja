@@ -217,11 +217,11 @@ switch ($_GET['go'])
 			{
 				$ERRORS['lname'] = $lang['WRONG_NAME'];
 			}
-			else if ($SQL->num_rows($SQL->query("SELECT * FROM `{$dbprefix}users` WHERE clean_name='" . trim($SQL->escape($usrcp->cleanusername($_POST["lname"]))) . "'")) != 0)
+			else if ($SQL->num_rows($SQL->query("SELECT * FROM {$dbprefix}users WHERE clean_name='" . trim($SQL->escape($usrcp->cleanusername($_POST["lname"]))) . "'")) != 0)
 			{
 				$ERRORS['name_exists_before'] = $lang['EXIST_NAME'];
 			}
-			else if ($SQL->num_rows($SQL->query("SELECT * FROM `{$dbprefix}users` WHERE mail='" . strtolower(trim($SQL->escape($_POST["lmail"]))) . "'")) != 0)
+			else if ($SQL->num_rows($SQL->query("SELECT * FROM {$dbprefix}users WHERE mail='" . strtolower(trim($SQL->escape($_POST["lmail"]))) . "'")) != 0)
 			{
 				$ERRORS['mail_exists_before'] = $lang['EXIST_EMAIL'];
 			}
@@ -770,7 +770,7 @@ switch ($_GET['go'])
 				big_error('No hash key', 'This is not a good link ... try again!');
 			}
 
-			$result = $SQL->query("SELECT new_password FROM `{$dbprefix}users` WHERE hash_key='" . $SQL->escape($h_key) . "' AND id=" . $u_id . "");
+			$result = $SQL->query("SELECT new_password FROM {$dbprefix}users WHERE hash_key='" . $SQL->escape($h_key) . "' AND id=" . $u_id . "");
 			if($SQL->num_rows($result))
 			{
 				$npass = $SQL->fetch_array($result);
@@ -834,7 +834,7 @@ switch ($_GET['go'])
 			{
 				$ERRORS['rmail'] = $lang['WRONG_EMAIL'];
 			}
-			else if ($SQL->num_rows($SQL->query("SELECT name FROM `{$dbprefix}users` WHERE mail='" . $SQL->escape(strtolower($_POST['rmail'])) . "'")) == 0)
+			else if ($SQL->num_rows($SQL->query("SELECT name FROM {$dbprefix}users WHERE mail='" . $SQL->escape(strtolower($_POST['rmail'])) . "'")) == 0)
 			{
 				$ERRORS['no_rmail'] = $lang['WRONG_DB_EMAIL'];
 			}

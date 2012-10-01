@@ -169,8 +169,8 @@ switch ($_GET['go'])
 				
 
 				$insert_query	= array(
-										'INSERT'	=> '`name` ,`mail` ,`url` ,`text` ,`time` ,`ip`',
-										'INTO'		=> "`{$dbprefix}reports`",
+										'INSERT'	=> 'name ,mail ,url ,text ,time ,ip',
+										'INTO'		=> "{$dbprefix}reports",
 										'VALUES'	=> "'$name', '$mail', '$url', '$text', $time, '$ip'"
 									);
 
@@ -285,8 +285,8 @@ switch ($_GET['go'])
 				$ip		=  get_ip();
 
 				$insert_query	= array(
-										'INSERT'	=> "`name` ,`text` ,`mail` ,`time` ,`ip`",
-										'INTO'		=> "`{$dbprefix}call`",
+										'INSERT'	=> "name ,text ,mail ,time ,ip",
+										'INTO'		=> "{$dbprefix}call",
 										'VALUES'	=> "'$name', '$text', '$mail', $timee, '$ip'"
 									);
 

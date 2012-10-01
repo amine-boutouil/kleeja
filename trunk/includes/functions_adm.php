@@ -79,7 +79,7 @@ function insert_filter($type, $value, $time = false, $user = false, $status = ''
 	$time = !$time ? time() : $time;
 
 	$insert_query	= array(
-							'INSERT'	=> '`filter_uid`, `filter_type` ,`filter_value` ,`filter_time` ,`filter_user`, `filter_status`',
+							'INSERT'	=> 'filter_uid, filter_type ,filter_value ,filter_time ,filter_user, filter_status',
 							'INTO'		=> "{$dbprefix}filters",
 							'VALUES'	=> "'" . ($uid ? $uid : uniqid()) . "', '" . $SQL->escape($type) . "','" . $SQL->escape($value) . "', " . intval($time) . "," . intval($user) . ",'" . $SQL->escape($status) . "'"
 						);

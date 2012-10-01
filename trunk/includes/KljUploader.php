@@ -410,8 +410,8 @@ class KljUploader
 	
 		# insertion query
 		$insert_query = array(
-								'INSERT'	=> '`name` ,`size` ,`time` ,`folder` ,`type`,`user`,`code_del`,`user_ip`, `real_filename`, `id_form`',
-								'INTO'		=> "`{$dbprefix}files`",
+								'INSERT'	=> 'name ,size ,time ,folder ,type,user,code_del,user_ip, real_filename, id_form',
+								'INTO'		=> "{$dbprefix}files",
 								'VALUES'	=> "'$name', '$size', '$timeww', '$folder','$type', '$user', '$code_del', '$ip', '$realf', '$id_form'"
 								);
 
@@ -428,7 +428,7 @@ class KljUploader
 		# update Kleeja stats
 		$update_query = array(
 								'UPDATE'	=> "{$dbprefix}stats",
-								'SET'		=> ($is_img ? "`imgs`=imgs+1" : "`files`=files+1") . ",`sizes`=sizes+" . $size . ""
+								'SET'		=> ($is_img ? "imgs=imgs+1" : "files=files+1") . ",sizes=sizes+" . $size . ""
 							);
 
 		($hook = kleeja_run_hook('qr_update_no_files_kljuploader')) ? eval($hook) : null; //run hook

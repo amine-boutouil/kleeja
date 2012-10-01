@@ -29,8 +29,8 @@ $H_FORM_KEYS	= kleeja_add_form_key('adm_configs');
 //secondary menu
 $query	= array(
 				'SELECT'	=> 'DISTINCT(type)',
-				'FROM'		=> "{$dbprefix}config",
-				'WHERE'		=> "`option` <> '' AND `type` <> 'groups'",
+				'FROM'		=> "{$dbprefix}config c",
+				'WHERE'		=> "c.option <> '' AND c.type <> 'groups'",
 				'ORDER BY'	=> 'display_order'
 			);
 

@@ -59,6 +59,8 @@
 	-[x] resync total number of files
 	-[x] repair db tables
 -[x] copyrights removal atteps
+-[ ] when chaning email, check it's not used before
+
 
 NOTE NOTE NOTE :: 
 use this function to extend the group system all the script/

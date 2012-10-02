@@ -70,8 +70,6 @@ function Saaheader($title, $outscript = false, $extra = '')
 	$tpl->assign("action_login", 'ucp.php?go=login' . (isset($_GET['return']) ? '&amp;return=' . htmlspecialchars($_GET['return']) : ''));
 	$tpl->assign("EXTRA_CODE_META", $extra);
 	$default_avatar = $STYLE_PATH . 'images/user_avater.png';
-	$tpl->assign("user_avatar", 'http://www.gravatar.com/avatar/' . md5(strtolower(trim($userinfo['mail']))) . '?s=100&amp;d=' . urlencode($default_avatar));
-
 	$header = $tpl->display("header");
 
 	if($config['siteclose'] == '1' && user_can('enter_acp') && !defined('IN_ADMIN'))

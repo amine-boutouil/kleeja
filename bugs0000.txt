@@ -60,6 +60,10 @@
 	-[x] repair db tables
 -[x] copyrights removal atteps
 -[ ] when chaning email, check it's not used before
+-[ ] add url rules page bottom inputs file
+-[ ] Mobile Style ..
+-[ ] avater setting
+-[ ] style for Fix.php file
 
 
 NOTE NOTE NOTE :: 

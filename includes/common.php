@@ -438,6 +438,12 @@ if (file_exists(PATH . 'install') && !defined('IN_ADMIN') && !defined('IN_LOGIN'
 	kleeja_info((user_can('enter_acp') ? $lang['DELETE_INSTALL_FOLDER'] : $lang['WE_UPDATING_KLEEJA_NOW']), $lang['SITE_CLOSED']);
 }
 
+//lock file exists
+if (file_exists(PATH . 'cache/_lock_') && !defined('IN_FIX'))
+{
+	kleeja_info('Kleeja can not work while there is "Fix.php" file exists..., delete it and try again', 'Fix.php exists');
+}
+
 //site close ..
 $login_page = '';
 if ($config['siteclose'] == '1' && !user_can('enter_acp') && !defined('IN_LOGIN') && !defined('IN_ADMIN'))

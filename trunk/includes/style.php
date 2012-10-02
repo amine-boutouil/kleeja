@@ -223,10 +223,11 @@ class kleeja_style
 			global $config, $SQL;
 
 			$this->vars 	= &$GLOBALS;
-			$k 				= '<div sty' . 'le="backgrou' . 'nd:#ECECE' . 'C;margin:5p' . 'x; padding:2px 3px; position:fi' . 'xed;bottom' .
-								':0px;left:1%' . ';z-index:9' . '9999;text' . '-align:center;">P' . 'owe' . 'red b' . 'y <a style="color:#6' . 
-								'2B4E8;" href="http:' . '//www.kl' . 'ee' . 'ja.c' . 'om/" onclic' . 'k="windo' . 'w.open(this.href,' . '\'_b' .
-								'lank\');retur' . 'n false;" title' . '="Po' . 'wer' . 'ed b' . 'y K' . 'lee' . 'ja">K' . 'lee' . 'ja</a></div>' . "\n";
+			$k 				= '<div sty' . 'le="di' . 'spl'. 'ay:bl'. 'oc' . 'k !im' . 'po' . 'rt' . 'ant;' . 'backgrou' . 'nd:#ECE' .'CE' . 'C !im' . 'po' . 'rt' . 
+								'ant;margin:5p' . 'x; padding:2px 3px; position:fi' . 'xed;bottom' . ':0px;left:1%' . ';z-index:9' . '9999;text' . '-align:center;">P' . 
+								'owe' . 'red b' . 'y <a style="di' . 'spl'. 'ay:in'. 'li' . 'ne  !im' . 'po' . 'rt' . 'ant;' . 'color:#6' . 
+								'2B4E8 !im' . 'po' . 'rt' . 'ant;" href="http:' . '/' . '/ww' . 'w.kl' . 'ee' . 'ja.c' . 'om/" onclic' . 'k="windo' . 'w.op' . 'en(this.h' . 
+								'ref,' . '\'_b' . 'lank\');retur' . 'n false;" title' . '="K' . 'lee' . 'ja">K' . 'lee' . 'ja</a></div>' . "\n";
 			//is there ?
 			if(!file_exists(PATH . 'cache/tpl_' . $this->re_name_tpl($template_name) . '.php') or !$this->caching)
 			{
@@ -238,13 +239,13 @@ class kleeja_style
 			$page = ob_get_contents();
 			ob_end_clean();
 
-			if($template_name == strip_tags('<!--Kleeja-->fo<!--Is-->ot<!--Queen Of-->er'))
+			if($template_name == strip_tags('<!--it-->he<!--Is-->ad<!--Queen-->er'))
 			{
 				$v = @unserialize($config['new_version']);
-				if((int) $v[strip_tags('co<!--Kleeja-->py<!--made-->ri<!--for-->ghts<!--you-->')] == /*kleeja is sweety*/0/*SO, be sweety*/)
+				if((int) $v[strip_tags('co<!--it-->py<!--made-->ri<!--for-->gh<!--you-->ts<!--yub-->')] == /*kleeja is sweety*/0/*SO, be sweety*/)
 				{
 					$t = strip_tags('<!--y-->b<!--o-->o<!--n-->d<!--b-->y');
-					$page = preg_replace('/<\/' . $t . '>/', $k . '</' . $t . '>', $page, -1, $c);
+					$page = preg_replace('/<' . $t . '[^>]*>/', '<' . $t . ">\n" . $k, $page, -1, $c);
 					if(!$c)
 					{
 						$page .= $k;

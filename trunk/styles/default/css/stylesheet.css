@@ -145,7 +145,7 @@
 	4. Main Structure
 	-------------------------------------------------- */
 	body {width:100%;height:100%;}
-	#main {width:960px;margin:10px auto;}
+	#main {width:960px;margin:10px auto;padding-top:35px;}
 	#wrapper {height:100%;padding:0px 15px 10px 15px;}
 	#content, #content_index  {float:left;width:70%;padding:10px 15px;margin:5px 0 0 10px;}
 	#content_index {min-height:220px;float:right;padding:0 20px;}
@@ -154,9 +154,9 @@
 /*	--------------------------------------------------
 	5. Template & Header > header.html
 	-------------------------------------------------- */
-	#header {width:100%;padding:10px 0;}
+	#header {width:940px;padding:0;height:180px;margin:0 10px 0 0;}
 	/* @Logo -------------------- */  
-	#header .logo {float:right;display:inline;text-indent:-99999px;overflow: hidden;margin:0 40px 0 10px;width:300px;height:100px;}
+	#header .logo {float:right;display:inline;text-indent:-99999px;overflow: hidden;margin:0 40px 0 10px;width:300px;height:138px;}
 	/* @Top Navigation -------------------- */       
 	.top_nav {width:938px;height:40px;margin:0 auto;display: block;}
 	.top_nav .menu {margin:0 40px;}

@@ -299,7 +299,7 @@ if (!($banss = $cache->get('data_ban')))
 	}
 
 	$gt = kleeja_filesize(PATH . 'includes/st' . 'yl' . 'e.php');
-	if(!empty($gt) && $gt != 10251)
+	if(!empty($gt) && $gt != 10235)
 	{
 		exit(kleeja_base64_decode('V2hlcmUgVGhlIENvcHlyaWdodHMgOikgLi4u'));
 	}

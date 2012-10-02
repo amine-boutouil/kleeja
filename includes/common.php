@@ -441,7 +441,11 @@ if (file_exists(PATH . 'install') && !defined('IN_ADMIN') && !defined('IN_LOGIN'
 //lock file exists
 if (file_exists(PATH . 'cache/_lock_') && !defined('IN_FIX'))
 {
-	kleeja_info('Kleeja can not work while there is "Fix.php" file exists..., delete it and try again', 'Fix.php exists');
+	$g = file_get_contents(PATH . 'cache/_lock_');
+	if(trim($g) != '' && file_exists(trim($g)))
+	{
+		kleeja_info('Kleeja can not work while there is "Fix.php" file exists..., delete it and try again', 'Fix.php exists');
+	}
 }
 
 //site close ..

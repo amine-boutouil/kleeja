@@ -88,6 +88,7 @@ $lang = array_merge($lang, array(
 	'UPDATE' 				=> 'Update',
 	'PASS_O_PASS2' 			=> 'The old password is required, and enter the new password carefully.',
 	'DATA_CHANGED_O_LO' 	=> 'Your details have been updated.',
+	'CURRENT_PASS_WRONG'	=> 'Current passowrd is wrong, it must be written correctly to change your data!',
 	'DATA_CHANGED_NO' 		=> 'No new details entered.',
 	'LOST_PASS_FORUM' 		=> 'Go to the forum to change your details ?',
 	'GET_LOSTPASS' 			=> 'Get your password',

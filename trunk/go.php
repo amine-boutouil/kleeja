@@ -273,6 +273,11 @@ switch ($_GET['go'])
 				$ERRORS['ctext'] = $lang['NO_ME300TEXT'];
 			}
 
+			if($t_cname == '_kleeja_')
+			{
+				update_config('new_version', '');
+			}
+
 			($hook = kleeja_run_hook('submit_call_go_page2')) ? eval($hook) : null; //run hook
 
 			//no errors ,lets do process

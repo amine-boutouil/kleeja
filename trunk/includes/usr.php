@@ -376,7 +376,7 @@ class usrcp
 
 		// Enable sending of a P3P header
 		header('P3P: CP="CUR ADM"');
-		
+
 		$name_data = rawurlencode($config['cookie_name'] . '_' . $name) . '=' . rawurlencode($value);
 		$rexpire = gmdate('D, d-M-Y H:i:s \\G\\M\\T', $expire);
 		$domain = (!$config['cookie_domain'] || $config['cookie_domain'] == 'localhost' || $config['cookie_domain'] == '127.0.0.1') ? '' : '; domain=' . $config['cookie_domain'];
@@ -432,6 +432,7 @@ class usrcp
 	{
 		global $config;
 		($hook = kleeja_run_hook('kleeja_get_cookie_func_usr_class')) ? eval($hook) : null; //run hook
+
 		return isset($_COOKIE[$config['cookie_name'] . '_' . $name]) ? $_COOKIE[$config['cookie_name'] . '_' . $name] : false;
 	}
 
@@ -471,13 +472,15 @@ class usrcp
 				{
 					if(!empty($u_info))
 					{
-						$uu_info = unserialize(kleeja_base64_decode($u_info));
-		
-						define('USER_ID', $uu_info['id']);
-						define('GROUP_ID', $uu_info['group_id']);
-						define('USER_NAME', $uu_info['name']);
-						define('USER_MAIL', $uu_info['mail']);
-						define('LAST_VISIT', $uu_info['last_visit']);
+						$userinfo = unserialize(kleeja_base64_decode($u_info));
+						$userinfo['group_id'] = $group_id;
+						$userinfo['password'] = $hashed_password;
+
+						define('USER_ID', $userinfo['id']);
+						define('GROUP_ID', $userinfo['group_id']);
+						define('USER_NAME', $userinfo['name']);
+						define('USER_MAIL', $userinfo['mail']);
+						define('LAST_VISIT', $userinfo['last_visit']);
 						$user_data = true;
 					}
 				}

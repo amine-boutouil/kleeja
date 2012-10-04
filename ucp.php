@@ -644,7 +644,7 @@ switch ($_GET['go'])
 		$action		= 'ucp.php?go=profile';
 		$name		= $usrcp->name();
 		$mail		= $usrcp->mail();
-		$show_my_filecp	= $usrcp->get_data('show_my_filecp');
+		extract($usrcp->get_data('show_my_filecp, password_salt'));
 		$data_forum		= (int) $config['user_system'] == 1 ? true : false ;
 		$H_FORM_KEYS = kleeja_add_form_key('profile');
 		//no error yet 
@@ -659,11 +659,11 @@ switch ($_GET['go'])
 			if(isset($script_path))
 			{
 				$goto_forum_link = ($config['user_system'] == 'api') ? dirname($script_path) : $script_path;
-				if($config['user_system'] == 'phpbb' || ($config['user_system'] == 'api' && strpos($script_path, 'phpbb') !== false))
+				if($config['user_system'] == 'phpbb' || ($config['user_system'] == 'api' && strpos(strtolower($script_path), 'phpbb') !== false))
 				{
 					$goto_forum_link .= '/ucp.php?i=164';
 				}
-				else if($config['user_system'] == 'vb' || ($config['user_system'] == 'api' && strpos($script_path, 'vb') !== false))
+				else if($config['user_system'] == 'vb' || ($config['user_system'] == 'api' && strpos(strtolower($script_path), 'vb') !== false))
 				{
 					$goto_forum_link .= '/profile.php?do=editprofile';
 				}
@@ -696,38 +696,75 @@ switch ($_GET['go'])
 			{
 				$ERRORS['form_key'] = $lang['INVALID_FORM_KEY'];
 			}
-			if((!empty($_POST['ppass_new']) || !empty($_POST['ppass_new2']))  && (($_POST['ppass_new'] !=  $_POST['ppass_new2']) 
-				||  empty($_POST['ppass_old']) || (!$usrcp->data($usrcp->name(), $_POST['ppass_old'], false, 900))))
+
+			#if there is new pass AND new pass1 = new pass2 AND old pass is exists & true
+			if(!empty($_POST['ppass_new']))
 			{
-				$ERRORS['pass1_neq_pass2'] = $lang['PASS_O_PASS2'];
+				if($_POST['ppass_new'] != $_POST['ppass_new2'])
+				{
+					$ERRORS['pass1_neq_pass2'] = $lang['PASS_O_PASS2'];
+				}
+				#if current pass is not correct
+				elseif(empty($_POST['ppass_old']) || !$usrcp->kleeja_hash_password($_POST['ppass_old'] . $password_salt, $userinfo['password']))
+				{
+					$ERRORS['curnt_old_pass'] = $lang['CURRENT_PASS_WRONG'];
+				}
 			}
-			if (!empty($_POST['pppass_old'])  && (!preg_match('/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/i', trim($_POST['pmail'])) || empty($_POST['pmail']) || (!$usrcp->data($usrcp->name(), $_POST['pppass_old'], false, 900))))
+
+			#if email is not equal to current email AND email not exists before
+			$new_mail = false;
+			if($usrcp->mail() != trim(strtolower($_POST['pmail'])))
 			{
-				$ERRORS['pmail'] = $lang['WRONG_EMAIL'];
+				#if current pass is not correct
+				if(empty($_POST['pppass_old']) || !$usrcp->kleeja_hash_password($_POST['pppass_old'] . $password_salt, $userinfo['password']))
+				{
+					$ERRORS['curnt_old_pass'] = $lang['CURRENT_PASS_WRONG'];
+				}
+				#If email is not valid
+				elseif(!preg_match('/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/i', trim($_POST['pmail'])) || trim($_POST['pmail']) == '')
+				{
+					$ERRORS['wrong_email'] = $lang['WRONG_EMAIL'];
+				}
+				#if email already exists
+				elseif ($SQL->num_rows($SQL->query("SELECT * FROM {$dbprefix}users WHERE mail='" . strtolower(trim($SQL->escape($_POST['pmail']))) . "'")) != 0)
+				{
+					$ERRORS['mail_exists_before'] = $lang['EXIST_EMAIL'];
+				}
+				
+				$new_mail = true;
 			}
-	
+
 			($hook = kleeja_run_hook('submit_profile2')) ? eval($hook) : null; //run hook
 
 			//no errors , do it
 			if(empty($ERRORS))
 			{
 				$user_salt 	= substr(kleeja_base64_encode(pack("H*", sha1(mt_rand()))), 0, 7);
-				$mail		= (!empty($_POST['pppass_old'])) ? "mail='" . $SQL->escape(strtolower(trim($_POST['pmail']))) . "'," : '';
-				$show_my_filecp	= "show_my_filecp='" . intval($_POST['show_my_filecp']) . "'";
-				$pass		= (!empty($_POST['ppass_new'])) ? "password='" . $usrcp->kleeja_hash_password($SQL->escape($_POST['ppass_new']) . $user_salt) . "', password_salt='" . $user_salt . "'" : "";
-				$comma		= (!empty($_POST['ppass_new']))? "," : "";
+				$mail		= $new_mail ? "mail='" . $SQL->escape(strtolower(trim($_POST['pmail']))) . "'" : '';
+				$showmyfile	= intval($_POST['show_my_filecp']) != $show_my_filecp ?  ($mail == '' ? '': ',') . "show_my_filecp='" . intval($_POST['show_my_filecp']) . "'" : '';
+				$pass		= !empty($_POST['ppass_new']) ? ($showmyfile != ''  || $mail != '' ? ',' : '') . "password='" . $usrcp->kleeja_hash_password($SQL->escape($_POST['ppass_new']) . $user_salt) . 
+								"', password_salt='" . $user_salt . "'" : "";
 				$id			= (int) $usrcp->id();
 
 				$update_query	= array(
 								'UPDATE'	=> "{$dbprefix}users",
-								'SET'		=> $mail . $show_my_filecp . $comma . $pass, //comma mean "," char
+								'SET'		=> $mail . $showmyfile . $pass,
 								'WHERE'		=> 'id=' . $id,
 								);
 
 				($hook = kleeja_run_hook('qr_update_data_in_profile')) ? eval($hook) : null; //run hook
 
-				$SQL->build($update_query);
-				kleeja_info($lang['DATA_CHANGED_O_LO'], '', true, $action);
+				if(trim($update_query['SET']) == '')
+				{
+					$text = $lang['DATA_CHANGED_NO'];
+				}
+				else
+				{
+					$text = $lang['DATA_CHANGED_O_LO'];
+					$SQL->build($update_query);
+				}
+
+				kleeja_info($text, '', true, $action);
 			}
 
 		}#else submit
@@ -783,6 +820,7 @@ switch ($_GET['go'])
 							);
 
 				($hook = kleeja_run_hook('qr_update_newpass_activation')) ? eval($hook) : null; //run hook
+
 				$SQL->build($update_query);
 
 				$text = $lang['OK_APPLY_NEWPASS'] . '<br /><a href="' . $config['siteurl']  . ($config['mod_writer'] ?  'login.html' : 'ucp.php?go=login') . '">' . $lang['LOGIN'] . '</a>';

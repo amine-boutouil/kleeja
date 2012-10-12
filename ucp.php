@@ -646,6 +646,7 @@ switch ($_GET['go'])
 		$mail		= $usrcp->mail();
 		extract($usrcp->get_data('show_my_filecp, password_salt'));
 		$data_forum		= (int) $config['user_system'] == 1 ? true : false ;
+		$link_avater	= sprintf($lang['EDIT_U_AVATER_LINK'], '<a target="_blank" href="http://www.gravatar.com/">' , '</a>');
 		$H_FORM_KEYS = kleeja_add_form_key('profile');
 		//no error yet 
 		$ERRORS = false;

@@ -1,12 +1,12 @@
 <!-- Users Files template -->
-<div id="content" class="border_radius">
+<div id="content" class="border_radius filecp-page">
 
         <!-- title -->
         <h1 class="title"><IF NAME="user_is">&#9679; {lang.YOUR_FILEUSER}<ELSE>&#9679; {title}</IF></h1>
         <!-- @end-title -->
 
         <!-- line top -->
-                <div class="line"></div>
+		<div class="line"></div>
         <!-- @end-line -->
 
         <IF NAME="user_name">
@@ -27,67 +27,50 @@
         <!-- @end-box-user-name-and-all-files -->
         </IF>
 
-        <IF NAME="filecp_link">
-        <!-- link user -->
-        <div id="filecplink">
-                <div class="clr"></div>
-                        <fieldset>
-                                <legend class="copylink">{lang.COPY_AND_GET_DUD}</legend>
-                                <input class="link_user" readonly="readonly" onclick="this.select();" type="text" name="option" value="{your_fileuser}" />
-                         </fieldset>
-                <div class="clr"></div>
-        </div>
-        <!-- @end-link-user -->
-        </IF>
-
-        <IF NAME="no_results">
-        <!-- no files user -->
-        <div id="boxfileuser" style="text-align:center">
-                <img class="pngfix" src="{STYLE_PATH}images/warning_nofile.png" />
-                <br />
-                <h1>{lang.NO_FILE_USER}</h1>
-        </div>
-        <!-- @end-no-files-user -->
-
-        <ELSE>
-       
-        <!-- table all files -->
-        		<!-- upload boxes -->
-		<div class="tabber">
-		
-		<!-- uplaod normal -->
-		<div class="tabbertab" title="{lang.DOWNLOAD_F}" id="filetype">
-<div class="xthumbs">
-	<LOOP NAME="arr">
-	{{tdnum}}
-	<li id="su[{{id}}]" class="tip">
-    <div>
-		
-			<img src="{{thumb_link}}" onclick="enlarge(this);" longdesc="{{href}}" alt=""  />
-
-        </div>
-		<div class="ktip" style="display: none;">
-			<span>{lang.FILENAME} : </span>{{name}}<br />
-			<span>{lang.FILEUPS} : </span> {{ups}}<br />
-			<span>{lang.FILESIZE} : </span> {{size}}<br />
-			<span>{lang.FILEDATE} : </span> {{time}}<br />
-			<span>{lang.BY} : </span> <span id="user_{{id}}">{{user}}</span><br />
-			<span>{lang.IP} : </span> <span id="ip_{{id}}">{{ip}}</span>
+		<IF NAME="no_results">
+		<!-- no files user -->
+		<div id="boxfileuser" style="text-align:center">
+			<img class="pngfix" src="{STYLE_PATH}images/warning_nofile.png" />
+			<br />
+			<h1>{lang.NO_FILE_USER}</h1>
 		</div>
-		<p class="kcheck"><input id="del_{{id}}" name="del_{{id}}" type="checkbox" value="{{id}}" rel="_del" /></p>
-	</li>
-	{{tdnum2}}
-	</LOOP>
-</div>
-  <div class="clr"></div>
-</div>
+		<!-- @end-no-files-user -->
 
-<div class="tabbertab" title="{lang.DOWNLOAD_T}" id="texttype">
-</div>
-</div>
+		<ELSE>
 
-        <!-- @end-table-all-files -->
-        </IF>
+		<!-- fileuser_files -->
+		<div class="fileuser_files">
+			<div class="fileuser-thumbs">
+				<LOOP NAME="arr">
+					{{tdnum}}
+					<li<IF LOOP="is_image"><ELSE> class="is_file" style="background-image:url({{thumb_link}})"</IF>>
+					<IF LOOP="is_image">
+					<a href="{{href}}" target="_blank" title="{lang.FILEUPS}:{{uploads}}, {lang.FILESIZE}:{{size}}, {lang.FILEDATE}:{{time}}"><img src="{{thumb_link}}" alt="{lang.FILEUPS}:{{ups}}, {lang.FILESIZE}:{{size}}, {lang.FILEDATE}:{{time}}" /></a>
+					<p class="kcheck"><input id="del_{{id}}" name="del_{{id}}" type="checkbox" value="{{id}}" rel="_del" /></p>
+					<ELSE>
+						<div class="this_file">
+							{{name_file}}
+
+							<div class="fileinfo">
+							<span>{lang.FILEUPS}: {{uploads}}</span>
+							<span>{lang.FILESIZE}: {{size}}</span>
+							<span>{lang.FILEDATE}: {{time}}</span>
+							</div>
+						
+						</div>
+						<div class="this_file_select">
+							<input id="del_{{id}}" name="del_{{id}}" type="checkbox" value="{{id}}" rel="_del" />
+						</div>
+					</IF>
+					</li>
+					{{tdnum2}}
+				</LOOP>
+			</div>
+			<div class="clr"></div>
+		</div>
+		 <!-- end#fileuser_files-->
+
+		</IF>
        
 
         <div class="clr"></div><br />
@@ -100,6 +83,18 @@
         <!-- button filecp -->
         <div class="left_button"><input type="submit" name="submit_files" value="{lang.GO_FILECP}" onclick="location.href='{filecp_link}';" /></div>
         <!-- @end-button-filecp -->
+
+        <!-- link user -->
+        <div id="filecplink">
+                <div class="clr"></div>
+                        <fieldset>
+                                <legend class="copylink">{lang.COPY_AND_GET_DUD}</legend>
+                                <input class="link_user" readonly="readonly" onclick="this.select();" type="text" name="option" value="{your_fileuser}" />
+                         </fieldset>
+                <div class="clr"></div>
+        </div>
+        <!-- @end-link-user -->
+
         </IF>
  
         <div class="clr"></div>

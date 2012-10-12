@@ -422,7 +422,7 @@ switch ($_GET['go'])
 				$url_fileuser = $is_image ? $url : (file_exists("images/filetypes/".  $row['type'] . ".png")? "images/filetypes/" . $row['type'] . ".png" : 'images/filetypes/file.png');
                 
 				$tdnum = $tdnum == 4 ? 0 : $tdnum+1;
-				
+				// here
 				//make new lovely arrays !!
 				if ($is_image)
                 {

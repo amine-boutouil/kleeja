@@ -366,7 +366,7 @@ switch ($_GET['go'])
 		}
 
 		$query	= array(
-					'SELECT'	=> 'f.id, f.name, f.real_filename, f.folder, f.type, f.uploads, f.last_down',
+					'SELECT'	=> 'f.id, f.name, f.real_filename, f.folder, f.type, f.uploads, f.time, f.size',
 					'FROM'		=> "{$dbprefix}files f",
 					'WHERE'		=> 'f.user=' . $user_id,
 					'ORDER BY'	=> 'f.id DESC'
@@ -400,64 +400,46 @@ switch ($_GET['go'])
 			($hook = kleeja_run_hook('qr_select_files_in_fileuser')) ? eval($hook) : null; //run hook
 
 			$result	= $SQL->build($query);
+
 			if((int) $config['user_system'] != 1 && ($usrcp->id() != $user_id))
 			{
 				$data_user['name'] = $usrcp->usernamebyid($user_id);
 			}
+
 			$user_name = (!$data_user['name']) ? false : $data_user['name'];
 			$i = ($currentPage * $perpage) - $perpage;
-			$tdnum = $num = 0;
+			$tdnumi = $num = 0;
 			while($row=$SQL->fetch_array($result))
 			{
 				++$i;
 				$file_info = array('::ID::' => $row['id'], '::NAME::' => $row['name'], '::DIR::' => $row['folder'], '::FNAME::' => $row['real_filename']);
 
-				$is_image = in_array(strtolower(trim($row['type'])), array('gif', 'jpg', 'jpeg', 'bmp', 'png', 'tiff', 'tif')) ? true : false;
-		
+				$is_image = in_array(strtolower(trim($row['type'])), array('gif', 'jpg', 'jpeg', 'bmp', 'png')) ? true : false;
 				$url = $is_image ? kleeja_get_link('image', $file_info) : kleeja_get_link('file', $file_info);
-			     
-                 
-                 $url_thumb = $is_image ? kleeja_get_link('thumb', $file_info) : kleeja_get_link('thumb', $file_info);
-                 
+				$url_thumb = $is_image ? kleeja_get_link('thumb', $file_info) : kleeja_get_link('thumb', $file_info);
 				$url_fileuser = $is_image ? $url : (file_exists("images/filetypes/".  $row['type'] . ".png")? "images/filetypes/" . $row['type'] . ".png" : 'images/filetypes/file.png');
-                
-				$tdnum = $tdnum == 4 ? 0 : $tdnum+1;
-				// here
+
 				//make new lovely arrays !!
-				if ($is_image)
-                {
-				    $arr[] 	= array(
+				$arr[] 	= array(
 						'id'		=> $row['id'],
-						'name'		=> ($row['real_filename'] == '' ? ((strlen($row['name']) > 40) ? substr($row['name'], 0, 40) . '...' : $row['name']) : ((strlen($row['real_filename']) > 40) ? substr($row['real_filename'], 0, 40) . '...' : $row['real_filename'])),
-						'url_thumb' => '<a title="' . ($row['real_filename'] == '' ? $row['name'] : $row['real_filename']) . '"  href="' . $url . '" onclick="window.open(this.href,\'_blank\');return false;"><img src="' . $url_fileuser . '" alt="' . $row['type'] . '" /></a>',
+						'name_img'	=> ($row['real_filename'] == '' ? ((strlen($row['name']) > 40) ? substr($row['name'], 0, 40) . '...' : $row['name']) : ((strlen($row['real_filename']) > 40) ? substr($row['real_filename'], 0, 40) . '...' : $row['real_filename'])),
+						'url_thumb_img'	=> '<a title="' . ($row['real_filename'] == '' ? $row['name'] : $row['real_filename']) . '"  href="' . $url . '" onclick="window.open(this.href,\'_blank\');return false;"><img src="' . $url_fileuser . '" alt="' . $row['type'] . '" /></a>',
+						'name_file'		=> '<a title="' . ($row['real_filename'] == '' ? $row['name'] : $row['real_filename']) . '"  href="' . $url . '" onclick="window.open(this.href,\'_blank\');return false;">' . ($row['real_filename'] == '' ? ((strlen($row['name']) > 40) ? substr($row['name'], 0, 40) . '...' : $row['name']) : ((strlen($row['real_filename']) > 40) ? substr($row['real_filename'], 0, 40) . '...' : $row['real_filename'])) . '</a>',
+						'url_thumb_file'=> '<a title="' . ($row['real_filename'] == '' ? $row['name'] : $row['real_filename']) . '"  href="' . $url . '" onclick="window.open(this.href,\'_blank\');return false;"><img src="' . $url_fileuser . '" alt="' . $row['type'] . '" /></a>',
 						'file_type'	=> $row['type'],
-						'image_path'=> $is_image ? $url : '',
 						'uploads'	=> $row['uploads'],
-						'tdnum'		=> $tdnum == 0 ? '<ul>': '',
-						'tdnum2'	=> $tdnum == 4 ? '</ul>' : '',
+						'tdnum'		=> $tdnumi == 0 ? '<ul>': '',
+						'tdnum2'	=> $tdnumi == 4 ? '</ul>' : '',
 						'href'		=> $url,
-						'last_down'	=> !empty($row['last_down']) ? date('d-m-Y h:i a', $row['last_down']) : '...',
-						'thumb_link'=> $url_thumb,
+						'size'		=> Customfile_size($row['size']),
+						'time'		=> !empty($row['time']) ? kleeja_date($row['time']) : '...',
+						'thumb_link'=> $is_image ? $url_thumb : $url_fileuser,
+						'is_image'	=> $is_image,
 					);
-                }
-                else
-                {
-                    $arrfiles[] 	= array(
-						'id'		=> $row['id'],
-						'name'		=> '<a title="' . ($row['real_filename'] == '' ? $row['name'] : $row['real_filename']) . '"  href="' . $url . '" onclick="window.open(this.href,\'_blank\');return false;">' . ($row['real_filename'] == '' ? ((strlen($row['name']) > 40) ? substr($row['name'], 0, 40) . '...' : $row['name']) : ((strlen($row['real_filename']) > 40) ? substr($row['real_filename'], 0, 40) . '...' : $row['real_filename'])) . '</a>',
-						'url_thumb' => '<a title="' . ($row['real_filename'] == '' ? $row['name'] : $row['real_filename']) . '"  href="' . $url . '" onclick="window.open(this.href,\'_blank\');return false;"><img src="' . $url_fileuser . '" alt="' . $row['type'] . '" /></a>',
-						'file_type'	=> $row['type'],
-						'image_path'=> $is_image ? $url : '',
-						'uploads'	=> $row['uploads'],
-						'tdnum'		=> $tdnum == 0 ? '<ul>': '',
-						'tdnum2'	=> $tdnum == 4 ? '</ul>' : '',
-						'href'		=> $url,
-						'last_down'	=> !empty($row['last_down']) ? date('d-m-Y h:i a', $row['last_down']) : '...',
-						'thumb_link'=> $url_fileuser,
-					);
-                }
+
+					$tdnumi = $tdnumi == 2 ? 0 : $tdnumi+1;
 			}
-			
+
 			$SQL->freeresult($result_p);
 			$SQL->freeresult($result);
 		}

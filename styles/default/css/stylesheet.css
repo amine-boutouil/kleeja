@@ -278,9 +278,42 @@
 	#filecplink fieldset{padding: 15px;margin:8px auto;}
 	#filecplink  input.link_user {direction:ltr;width:98%;margin:0 auto;padding:6px;font-size:90%;font-weight: 700;letter-spacing:1px;}
 	#filecplink legend.copylink {font-size:90%;font-weight: 400;padding:0 5px;}
-	.xthumbs {width:100%;}
-	.xthumbs ul{list-style: none;}
+	.fileuser_files{padding:10px}
+	.fileuser-thumbs {width:100%;}
+	.fileuser-thumbs ul{list-style-type: none;}
+	.fileuser-thumbs li{
+		display: inline;
+		list-style: none;
+		width: 150px;
+		min-height: 175px;
+		float: left;
+		margin: 0 5px 10px 0;
+		text-align: center;
+	}
+	.fileuser-thumbs li.is_file{
+		background-repeat:no-repeat;
+		background-position:50% 15%;
+		border:1px solid #ccc;
+		background-color:#EFEFFF;
+		min-height: 160px !important;
+	}
 
+	.fileuser-thumbs .this_file{
+		margin-top:50px;
+	}
+	.fileuser-thumbs .this_file_select{
+		margin-top:20px;
+	}
+	.fileuser-thumbs .fileinfo{
+		margin-top:10px;
+		text-align:right;
+		padding-right:10px;
+	}
+	.fileuser-thumbs .fileinfo span{
+		font-size:10px;
+		padding:2px;
+		display:block;
+	}
 /* @end */
 
 /*	--------------------------------------------------
@@ -366,17 +399,4 @@
 	td.btitle {width:160px;text-align:left;white-space:nowrap}
 	td.all_box_link {padding:0 !important;text-align:right;}
 	textarea.up_input {direction:ltr;width:400px;padding:3px;letter-spacing:1px;vertical-align:middle;margin:5px;}
-/* @end */
-
-/*	--------------------------------------------------
-	20. Moayead CSS - Thumns ..
-	-------------------------------------------------- */
-.xthumbs ul{float:right;margin:3px auto;}
-.xthumbs li {float:right;cursor:pointer;padding:0;margin:0 0 0 3px;}
-#Kload img{width:124px !important;height:124px !important;z-index:700;overflow:hidden}
-.kcheck {bottom:1px;right:0;z-index:703;padding:0 !important;margin:1px 0 !important; background-color:#FAFAFA;}
-.kfocus {background-color:#ccc;}
-ul.ktip{float:right;}
-ul.ktip li{width:240px;height:22px;line-height:22px;float: right;border-bottom:1px solid #F0DE7D;text-align:right;}
-ul.ktip li span{float:right;width:84px !important;text-align:left;font-weight:400;padding-left: 10px;}
 /* @end */

@@ -75,6 +75,7 @@ foreach($kljup->messages as $t=>$s)
 $welcome_msg	= $config['welcome_msg'];
 $filecp_link	= $usrcp->id() ? $config['siteurl'] . ($config['mod_writer'] ? 'filecp.html' : 'ucp.php?go=filecp') : false;
 $terms_msg		= sprintf($lang['AGREE_RULES'], '<a href="' . ($config['mod_writer'] ? 'rules.html' : 'go.php?go=rules') . '">' , '</a>');
+$link_avater		= sprintf($lang['EDIT_U_AVATER_LINK'], '<a href="http://www.gravatar.com/">' , '</a>');
 //
 //For who online now..  
 //I dont like this feature and I prefer to disable it

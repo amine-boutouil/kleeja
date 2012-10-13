@@ -112,7 +112,6 @@ $update_sqls['stats_yahoo2'] = "ALTER TABLE  `{$dbprefix}stats` CHANGE  `yahoo_n
 #1 = admin, 2 = guests, 3 = users [ 1 = true, 0  = false ]
 $update_sqls['groups_acls_enter_acp'] = "INSERT INTO `{$dbprefix}groups_acl` (`acl_name`, `group_id`, `acl_can`) VALUES ('enter_acp', 1, 1), ('enter_acp', 2, 0), ('enter_acp', 3, 0);";
 $update_sqls['groups_acls_access_fileuser'] = "INSERT INTO `{$dbprefix}groups_acl` (`acl_name`, `group_id`, `acl_can`) VALUES ('access_fileuser', 1, 1), ('access_fileuser', 2, 0), ('access_fileuser', 3, 1);";
-$update_sqls['groups_acls_access_filecp'] = "INSERT INTO `{$dbprefix}groups_acl` (`acl_name`, `group_id`, `acl_can`) VALUES ('access_filecp', 1, 1), ('access_filecp', 2, 0), ('access_filecp', 3, 1);";
 $update_sqls['groups_acls_access_stats'] = "INSERT INTO `{$dbprefix}groups_acl` (`acl_name`, `group_id`, `acl_can`) VALUES ('access_stats', 1, 1), ('access_stats', 2, 1), ('access_stats', 3, 1);";
 $update_sqls['groups_acls_access_call'] = "INSERT INTO `{$dbprefix}groups_acl` (`acl_name`, `group_id`, `acl_can`) VALUES ('access_call', 1, 1), ('access_call', 2, 1), ('access_call', 3, 1);";
 $update_sqls['groups_acls_access_report'] = "INSERT INTO `{$dbprefix}groups_acl` (`acl_name`, `group_id`, `acl_can`) VALUES ('access_report', 1, 0), ('access_report', 2, 0), ('access_report', 3, 0);";

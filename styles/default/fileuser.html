@@ -1,32 +1,33 @@
 <!-- Users Files template -->
 <div id="content" class="border_radius filecp-page">
 
-        <!-- title -->
-        <h1 class="title"><IF NAME="user_is">&#9679; {lang.YOUR_FILEUSER}<ELSE>&#9679; {title}</IF></h1>
-        <!-- @end-title -->
+		<!-- title -->
+		<h1 class="title"><IF NAME="user_is">&#9679; {lang.YOUR_FILEUSER}<ELSE>&#9679; {title}</IF></h1>
+		<!-- @end-title -->
 
-        <!-- line top -->
+		<!-- line top -->
 		<div class="line"></div>
-        <!-- @end-line -->
+		<!-- @end-line -->
 
-        <IF NAME="user_name">
-        <!-- box user name and all files  -->
-        <div id="boxfileuser">
-                <div class="box_user">
-                <img class="right pngfix" src="{STYLE_PATH}images/imguser.png" alt="image user" />
-                        <div class="public">{lang.PUBLIC_USER_FILES}</div>
-                        <div class="uname">{user_name}</div>
-                </div>
-                <div class="us3r_n4me">
-                        <img class="right pngfix" src="{STYLE_PATH}images/boxfileuser.png" alt="files number" />
-                        <div class="public">{lang.ALL_FILES}</div>
-                        <div class="nums">{nums_rows}</div>
-                </div>
-                <div class="clr"></div>
-        </div>
-        <!-- @end-box-user-name-and-all-files -->
-        </IF>
+		<IF NAME="user_name">
+		<!-- box user name and all files  -->
+		<div id="boxfileuser">
+				<div class="box_user">
+				<img class="right pngfix" src="{STYLE_PATH}images/imguser.png" alt="image user" />
+						<div class="public">{lang.PUBLIC_USER_FILES}</div>
+						<div class="uname">{user_name}</div>
+				</div>
+				<div class="us3r_n4me">
+						<img class="right pngfix" src="{STYLE_PATH}images/boxfileuser.png" alt="files number" />
+						<div class="public">{lang.ALL_FILES}</div>
+						<div class="nums">{nums_rows}</div>
+				</div>
+				<div class="clr"></div>
+		</div>
+		<!-- @end-box-user-name-and-all-files -->
+		</IF>
 
+		<form name="c" action="{action}" method="post" onsubmit="javascript:return confirm_from();">
 		<IF NAME="no_results">
 		<!-- no files user -->
 		<div id="boxfileuser" style="text-align:center">
@@ -71,33 +72,35 @@
 		 <!-- end#fileuser_files-->
 
 		</IF>
-       
 
-        <div class="clr"></div><br />
 
-        <!-- pagination -->
-        {page_nums}
-        <!-- @end-pagination -->
+		<div class="clr"></div><br />
 
-        <IF NAME="filecp_link">
-	    <!-- button -->
-	    <div class="left_button"><input type="submit" name="submit_files" value="{lang.DEL_SELECTED}" /></div>
-	    <!-- @end-button -->
+		<!-- pagination -->
+		{page_nums}
+		<!-- @end-pagination -->
 
-        <!-- link user -->
-        <div id="filecplink">
-                <div class="clr"></div>
-                        <fieldset>
-                                <legend class="copylink">{lang.COPY_AND_GET_DUD}</legend>
-                                <input class="link_user" readonly="readonly" onclick="this.select();" type="text" name="option" value="{your_fileuser}" />
-                         </fieldset>
-                <div class="clr"></div>
-        </div>
-        <!-- @end-link-user -->
+		<IF NAME="filecp_link">
+		<!-- button -->
+		<div class="left_button"><input type="submit" name="submit_files" value="{lang.DEL_SELECTED}" /></div>
+		{H_FORM_KEYS}
+		<!-- @end-button -->
+		</form>
+		
+		<!-- link user -->
+		<div id="filecplink">
+				<div class="clr"></div>
+						<fieldset>
+								<legend class="copylink">{lang.COPY_AND_GET_DUD}</legend>
+								<input class="link_user" readonly="readonly" onclick="this.select();" type="text" name="option" value="{your_fileuser}" />
+						 </fieldset>
+				<div class="clr"></div>
+		</div>
+		<!-- @end-link-user -->
 
-        </IF>
+		</IF>
  
-        <div class="clr"></div>
+		<div class="clr"></div>
    
 </div>
 <!-- @end-Users-Files -->

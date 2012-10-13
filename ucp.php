@@ -316,32 +316,9 @@ switch ($_GET['go'])
 			kleeja_info($lang['USERFILE_CLOSED'], $lang['CLOSED_FEATURE']);
 		}
 
-
-        //$extra  = '<script type="text/javascript" src="' . $STYLE_PATH . 'ucp.js"></script>' . "\n\r";
-//some vars
-        /*$extra .= '
-      <script type="text/javascript">
-        enl_ani = 0;
-        enl_brdsize = 24;
-        enl_shadow = 0;
-        enl_center = 0;
-        enl_dark = 0;
-        enl_darkprct = 20;
-        enl_drgdrop = 0;
-        enl_keynav = 1;
-        enl_wheelnav = 0;
-        enl_titlebar=0;
-      </script>';
-      
-      /*
-        $extra .= '<link rel="stylesheet" type="text/css" media="all" href="' . $STYLE_PATH . 'css/highslide.css" />' . "\n\r";
-		$extra .= '<script type="text/javascript">
-	hs.graphicsDir = \'../highslide/graphics/\';
-	hs.wrapperClassName = \'wide-border\';
-</script>';*/
-
         $stylee	= 'fileuser';
 		$titlee	= $lang['FILEUSER'];
+		$H_FORM_KEYS = kleeja_add_form_key('fileuser');
 
 		$user_id_get	= isset($_GET['id']) ? intval($_GET['id']) : null;
 		$user_id		= (!$user_id_get && $usrcp->id()) ? $usrcp->id() : $user_id_get;
@@ -385,28 +362,24 @@ switch ($_GET['go'])
 		$linkgoto		= $config['siteurl'] . ($config['mod_writer'] ?  'fileuser-' . $user_id : 'ucp.php?go=fileuser&amp;id=' . $user_id);
 		$page_nums		= $Pager->print_nums($linkgoto); 
 
-		$no_results = false;
-		if($nums_rows == 0) 
+		$no_results = true;
+
+		if((int) $config['user_system'] != 1 && ($usrcp->id() != $user_id))
 		{
-			if((int) $config['user_system'] != 1 && ($usrcp->id() != $user_id))
-			{
-				$data_user['name'] = $usrcp->usernamebyid($user_id);
-			}
-			$user_name = !$data_user['name'] ? false : $data_user['name'];
+			$data_user['name'] = $usrcp->usernamebyid($user_id);
 		}
+		$user_name = !$data_user['name'] ? false : $data_user['name'];
+
+		#there is result ? show them
 		if($nums_rows != 0)
 		{
+			$no_results = false;
+
 			$query['LIMIT'] = "$start, $perpage";
 			($hook = kleeja_run_hook('qr_select_files_in_fileuser')) ? eval($hook) : null; //run hook
 
 			$result	= $SQL->build($query);
 
-			if((int) $config['user_system'] != 1 && ($usrcp->id() != $user_id))
-			{
-				$data_user['name'] = $usrcp->usernamebyid($user_id);
-			}
-
-			$user_name = (!$data_user['name']) ? false : $data_user['name'];
 			$i = ($currentPage * $perpage) - $perpage;
 			$tdnumi = $num = 0;
 			while($row=$SQL->fetch_array($result))
@@ -437,17 +410,18 @@ switch ($_GET['go'])
 						'is_image'	=> $is_image,
 					);
 
-					$tdnumi = $tdnumi == 2 ? 0 : $tdnumi+1;
-									if (isset($_POST['submit_files']))
+				$tdnumi = $tdnumi == 2 ? 0 : $tdnumi+1;
+				
+				if (isset($_POST['submit_files']))
 				{
-					($hook = kleeja_run_hook('submit_in_filecp')) ? eval($hook) : null; //run hook	
+					($hook = kleeja_run_hook('submit_in_fileuser')) ? eval($hook) : null; //run hook	
 
 					//check for form key
-					if(!kleeja_check_form_key('filecp', 1800 /* half hour */))
+					if(!kleeja_check_form_key('fileuser', 1800 /* half hour */))
 					{
 						kleeja_info($lang['INVALID_FORM_KEY']);
 					}
-	
+
 					if ($del[$row['id']])
 					{
 						//delete from folder .. 
@@ -473,7 +447,10 @@ switch ($_GET['go'])
 					}
 				}
 			}
-			
+
+			$SQL->freeresult($result_p);
+			$SQL->freeresult($result);
+
 			//
 			//after submit
 			//
@@ -497,41 +474,17 @@ switch ($_GET['go'])
 								);
 
 					$SQL->build($update_query);
+					
+					//delte is ok, show msg
+					kleeja_info($lang['FILES_DELETED'], '', true, $action);
+				}
+				else
+				{
+					//no file selected, show msg
+					kleeja_info($lang['NO_FILE_SELECTED'], '', true, $action);
 				}
 			}
-
-			$SQL->freeresult($result_p);
-			$SQL->freeresult($result);
-
-			($hook = kleeja_run_hook('end_filecp')) ? eval($hook) : null; //run hook
-		}
-		else #nums_rows
-		{
-			$no_results = true;
-		}
-
-		//after submit 
-		if (isset($_POST['submit_files']))
-		{
-			//show msg
-			if(isset($ids) && !empty($ids))
-			{
-				kleeja_info($lang['FILES_DELETED'], '', true, $action);
-			}
-			else
-			{
-				kleeja_info($lang['NO_FILE_SELECTED'], '', true, $action);
-			}
-		}
-			}
-
-			$SQL->freeresult($result_p);
-			$SQL->freeresult($result);
-		}
-		else #nums_rows
-		{ 
-			$no_results = true;
-		}
+		}#num result
 
 		($hook = kleeja_run_hook('end_fileuser')) ? eval($hook) : null; //run hook
 

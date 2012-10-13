@@ -438,94 +438,7 @@ switch ($_GET['go'])
 					);
 
 					$tdnumi = $tdnumi == 2 ? 0 : $tdnumi+1;
-			}
-
-			$SQL->freeresult($result_p);
-			$SQL->freeresult($result);
-		}
-		else #nums_rows
-		{ 
-			$no_results = true;
-		}
-
-		($hook = kleeja_run_hook('end_fileuser')) ? eval($hook) : null; //run hook
-
-		break;
-
-		//
-		//control files page
-		//
-		case 'filecp' :
-
-		($hook = kleeja_run_hook('begin_filecp')) ? eval($hook) : null; //run hook
-
-		//Not allowed to access this page ?
-		if (!user_can('access_filecp'))
-		{
-			($hook = kleeja_run_hook('user_cannot_access_filecp')) ? eval($hook) : null; //run hook
-			kleeja_info($lang['HV_NOT_PRVLG_ACCESS']);
-		}
-
-		$stylee		= 'filecp';
-		$titlee		= $lang['FILECP'];
-		$H_FORM_KEYS = kleeja_add_form_key('filecp');
-
-		//no logon before
-		if (!$usrcp->name())
-		{
-			kleeja_info($lang['PLACE_NO_YOU'], $lang['USER_PLACE']);
-		}
-
-		//te get files and update them !!
-		$query = array(
-					'SELECT'	=> 'f.id ,f.name, f.real_filename, f.type, f.folder, f.size',
-					'FROM'		=> "{$dbprefix}files f",
-					'WHERE'		=> 'f.user=' . $usrcp->id(),
-					'ORDER BY'	=> 'f.id DESC',
-				);
-
-		//pager 
-		$result_p		= $SQL->build($query);
-		$nums_rows		= $SQL->num_rows($result_p);
-		$currentPage	= (isset($_GET['page']))? intval($_GET['page']) : 1;
-		$Pager			= new SimplePager($perpage, $nums_rows, $currentPage);
-		$start			= $Pager->getStartRow();
-		$linkgoto		= $config['siteurl'] . ($config['mod_writer'] ? 'filecp' : 'ucp.php?go=filecp');
-		$page_nums		= $Pager->print_nums($linkgoto); 
-		$action			= "ucp.php?go=filecp&amp;page={$currentPage}";
-		$total_pages	= $Pager->getTotalPages(); 
-
-		//now, there is no result
-		$no_results = false;
-
-		if($nums_rows != 0)
-		{
-			$query['LIMIT']	 = "$start, $perpage";
-			($hook = kleeja_run_hook('qr_select_files_in_filecp')) ? eval($hook) : null; //run hook
-
-			$result	= $SQL->build($query);
-
-			$sizes = $files_num = $imgs_num = 0;
-			$i = ($currentPage * $perpage) - $perpage;
-			while($row=$SQL->fetch_array($result))
-			{
-				$del[$row['id']] = (isset($_POST['del_' . $row['id']])) ? $_POST['del_' . $row['id']] : '';
-
-				$file_info = array('::ID::' => $row['id'], '::NAME::' => $row['name'], '::DIR::' => $row['folder'], '::FNAME::' => $row['real_filename']);
-
-				$is_image = in_array(strtolower(trim($row['type'])), array('gif', 'jpg', 'jpeg', 'bmp', 'png', 'tiff', 'tif')) ? true : false;
-				$url = ($is_image) ? kleeja_get_link('image', $file_info) : kleeja_get_link('file', $file_info);
-				++$i;
-				//make new lovely arrays !!
-				$arr[]	= array(
-						'id'	=> $row['id'],
-						'name'	=> '<a title="' . ($row['real_filename'] == '' ? $row['name'] : $row['real_filename']) . '" href="' .  $url . '" onclick="window.open(this.href,\'_blank\');return false;">' . ($row['real_filename'] == '' ? ((strlen($row['name']) > 40) ? substr($row['name'], 0, 40) . '...' : $row['name']) : ((strlen($row['real_filename']) > 40) ? substr($row['real_filename'], 0, 40) . '...' : $row['real_filename'])) . '</a>',
-						'i'		=> $i,
-						'file_type'	=> $row['type'],
-						);
-
-				//when submit !!
-				if (isset($_POST['submit_files']))
+									if (isset($_POST['submit_files']))
 				{
 					($hook = kleeja_run_hook('submit_in_filecp')) ? eval($hook) : null; //run hook	
 
@@ -610,6 +523,17 @@ switch ($_GET['go'])
 				kleeja_info($lang['NO_FILE_SELECTED'], '', true, $action);
 			}
 		}
+			}
+
+			$SQL->freeresult($result_p);
+			$SQL->freeresult($result);
+		}
+		else #nums_rows
+		{ 
+			$no_results = true;
+		}
+
+		($hook = kleeja_run_hook('end_fileuser')) ? eval($hook) : null; //run hook
 
 		break;
 

@@ -38,11 +38,10 @@ function Saaheader($title, $outscript = false, $extra = '')
 	$side_menu = array(
 		1 => array('name'=>'profile', 'title'=>$lang['PROFILE'], 'url'=>$config['mod_writer'] ? 'profile.html' : 'ucp.php?go=profile', 'show'=>$user_is),
 		2 => array('name'=>'fileuser', 'title'=>$lang['YOUR_FILEUSER'], 'url'=>$config['mod_writer'] ? 'fileuser.html' : 'ucp.php?go=fileuser', 'show'=>$config['enable_userfile'] && user_can('access_fileuser')),
-		3 => array('name'=>'filecp', 'title'=>$lang['FILECP'], 'url'=>$config['mod_writer'] ? 'filecp.html' : 'ucp.php?go=filecp', 'show'=>user_can('access_filecp')),
-		4 => $user_is ?
+        3 => $user_is ?
 			 array('name'=>'logout', 'title'=>$lang['LOGOUT'], 'url'=>$config['mod_writer'] ? 'logout.html' : 'ucp.php?go=logout', 'show'=>true) : 
 			 array('name'=>'login', 'title'=>$lang['LOGIN'], 'url'=>$config['mod_writer'] ? 'login.html' : 'ucp.php?go=login', 'show'=>true),
-		5 => array('name'=>'register', 'title'=>$lang['REGISTER'], 'url'=>$config['mod_writer'] ? 'register.html' : 'ucp.php?go=register', 'show'=>!$user_is && $config['register']),
+		4 => array('name'=>'register', 'title'=>$lang['REGISTER'], 'url'=>$config['mod_writer'] ? 'register.html' : 'ucp.php?go=register', 'show'=>!$user_is && $config['register']),
 	);
 
 	$top_menu = array(

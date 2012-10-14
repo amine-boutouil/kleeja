@@ -309,7 +309,7 @@ $lang = array_merge($lang, array(
 		#ACLS roles
 		'ACLS_ENTER_ACP'		=> 'دخول لوحة التحكم',
 		'ACLS_ACCESS_FILEUSER'	=> 'الوصول لمجلد ملفاته',
-		'ACLS_ACCESS_FILECP'	=> 'الوصول لادارة ملفاته',
+		'ACLS_ACCESS_FILEUSERS'	=> 'تصفح مجلدات الملفات للاعضاء',
 		'ACLS_ACCESS_CALL'		=> 'الوصول لصفحة اتصل بنا',
 		'ACLS_ACCESS_REPORT'	=> 'إظهار صفحة ابلاغ عن محتوى',
 		'ACLS_ACCESS_STATS'		=> 'الوصول لصفحة الإحصائيات',

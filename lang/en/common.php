@@ -51,6 +51,7 @@ $lang = array_merge($lang, array(
 	'LOGIN_ERROR' 			=> 'Error ... cannot login!',
 	'REGISTER_CLOSED' 		=> 'Sorry, the registration is currently closed.',
 	'PLACE_NO_YOU' 			=> 'Restricted Area',
+	'NOT_EXSIT_USER'		=> 'The requested user doesn\'t exist, or it has been deleted.',
 	'REGISTERED_BEFORE' 	=> 'already',
 	'REGISTER' 				=> 'Register',
 	'EMAIL' 				=> 'Email address',

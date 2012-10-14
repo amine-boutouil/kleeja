@@ -303,29 +303,37 @@ switch ($_GET['go'])
 
 		($hook = kleeja_run_hook('begin_fileuser')) ? eval($hook) : null; //run hook
 
+        $stylee	= 'fileuser';
+		$H_FORM_KEYS = kleeja_add_form_key('fileuser');
+
+		$user_id_get	= isset($_GET['id']) ? intval($_GET['id']) : null;
+		$user_id		= (!$user_id_get && $usrcp->id()) ? $usrcp->id() : $user_id_get;
+		$user_himself	= $usrcp->id() == $user_id;
+
+		//no logon before 
+		if (!$usrcp->name() && !isset($_GET['id']))
+		{
+			kleeja_err($lang['USER_PLACE'], $lang['PLACE_NO_YOU'], true, 'index.php');
+		}
+
+		//Not allowed to browse files's folders
+		if (!user_can('access_fileusers'))
+		{
+			($hook = kleeja_run_hook('user_cannot_access_fileusers')) ? eval($hook) : null; //run hook
+			kleeja_info($lang['HV_NOT_PRVLG_ACCESS'], $lang['HV_NOT_PRVLG_ACCESS']);
+		}
+
 		//Not allowed to access this page ?
-		if (!user_can('access_fileuser'))
+		if (!user_can('access_fileuser') && $user_himself)
 		{
 			($hook = kleeja_run_hook('user_cannot_access_fileuser')) ? eval($hook) : null; //run hook
-			kleeja_info($lang['HV_NOT_PRVLG_ACCESS']);
+			kleeja_info($lang['HV_NOT_PRVLG_ACCESS'], $lang['HV_NOT_PRVLG_ACCESS']);
 		}
 
 		//fileuser is closed ?
 		if ((int) $config['enable_userfile'] != 1 && !user_can('enter_acp'))
 		{
 			kleeja_info($lang['USERFILE_CLOSED'], $lang['CLOSED_FEATURE']);
-		}
-
-        $stylee	= 'fileuser';
-		$H_FORM_KEYS = kleeja_add_form_key('fileuser');
-
-		$user_id_get	= isset($_GET['id']) ? intval($_GET['id']) : null;
-		$user_id		= (!$user_id_get && $usrcp->id()) ? $usrcp->id() : $user_id_get;
-
-		//no logon before 
-		if (!$usrcp->name() && !isset($_GET['id']))
-		{
-			kleeja_err($lang['USER_PLACE'], $lang['PLACE_NO_YOU'], true, 'index.php');
 		}
 
 		//to get userdata!!
@@ -357,7 +365,6 @@ switch ($_GET['go'])
 		$start			= $Pager->getStartRow();
 
 		$your_fileuser	= $config['siteurl'] . ($config['mod_writer'] ? 'fileuser-' . dechex($usrcp->id()) . '.html' : 'ucp.php?go=fileuser&amp;id=' .  $usrcp->id());
-		$filecp_link	= $user_id == $usrcp->id() ? $config['siteurl'] . ($config['mod_writer'] ? 'filecp.html' : 'ucp.php?go=filecp') : false;
 		$total_pages	= $Pager->getTotalPages(); 
 		$linkgoto		= $config['siteurl'] . ($config['mod_writer'] ?  'fileuser-' . $user_id : 'ucp.php?go=fileuser&amp;id=' . $user_id);
 		$page_nums		= $Pager->print_nums($linkgoto);

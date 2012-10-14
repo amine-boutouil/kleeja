@@ -1,4 +1,18 @@
 <!-- Users Files template -->
+<script type="text/javascript">
+<!--
+	function confirm_from()
+	{
+		if(confirm('{lang.ARE_YOU_SURE_DO_THIS}'))
+			return true;
+		else
+			return false;
+	}
+	function change_color(obj,id,c,c2){c=(c==null)?'ored':c;c2=(c==null)?'osilver':c2;var ii=document.getElementById(id);if(obj.checked){ii.setAttribute("class",c);ii.setAttribute("className",c)}else{ii.setAttribute("class",c2);ii.setAttribute("className",c2)}}function checkAll(form,id,_do_c_,c,c2){for(var i=0;i<form.elements.length;i++){if(form.elements[i].getAttribute("rel")!=id)continue;if(form.elements[i].checked){uncheckAll(form,id,_do_c_,c,c2);break}form.elements[i].checked=true;change_color(form.elements[i],_do_c_+'['+form.elements[i].value+']',c,c2)}}function uncheckAll(form,id,_do_c_,c,c2){for(var i=0;i<form.elements.length;i++){if(form.elements[i].getAttribute("rel")!=id)continue;form.elements[i].checked=false;change_color(form.elements[i],_do_c_+'['+form.elements[i].value+']',c,c2)}}function change_color_exts(id){eval('var ii = document.getElementById("su['+id+']");');eval('var g_obj = document.getElementById("gal_'+id+'");');eval('var u_obj = document.getElementById("ual_'+id+'");');if(g_obj.checked&&u_obj.checked){ii.setAttribute("class",'o_all');ii.setAttribute("className",'o_all')}else if(g_obj.checked){ii.setAttribute("class",'o_g');ii.setAttribute("className",'o_g')}else if(u_obj.checked){ii.setAttribute("class",'o_u');ii.setAttribute("className",'o_u')}else{ii.setAttribute("class",'');ii.setAttribute("className",'')}}function checkAll_exts(form,id,_do_c_){for(var i=0;i<form.elements.length;i++){if(form.elements[i].getAttribute("rel")!=id)continue;if(form.elements[i].checked){uncheckAll_exts(form,id,_do_c_);break}form.elements[i].checked=true;change_color_exts(form.elements[i].value)}}function uncheckAll_exts(form,id,_do_c_){for(var i=0;i<form.elements.length;i++){if(form.elements[i].getAttribute("rel")!=id)continue;form.elements[i].checked=false;change_color_exts(form.elements[i].value)}}
+//-->
+</script>
+
+
 <div id="content" class="border_radius filecp-page">
 
 		<!-- title -->
@@ -44,23 +58,25 @@
 			<div class="fileuser-thumbs">
 				<LOOP NAME="arr">
 					{{tdnum}}
-					<li<IF LOOP="is_image"><ELSE> class="is_file" style="background-image:url({{thumb_link}})"</IF>>
+					<li id="su[{{id}}]"<IF LOOP="is_image"><ELSE> class="is_file"</IF>>
 					<IF LOOP="is_image">
 					<a href="{{href}}" target="_blank" title="{lang.FILEUPS}:{{uploads}}, {lang.FILESIZE}:{{size}}, {lang.FILEDATE}:{{time}}"><img src="{{thumb_link}}" alt="{lang.FILEUPS}:{{ups}}, {lang.FILESIZE}:{{size}}, {lang.FILEDATE}:{{time}}" /></a>
-					<p class="kcheck"><input id="del_{{id}}" name="del_{{id}}" type="checkbox" value="{{id}}" rel="_del" /></p>
+					<p class="kcheck"><input id="del_{{id}}" name="del_{{id}}" type="checkbox" value="{{id}}" rel="_del" onclick="change_color(this,'su[{{id}}]');"  /></p>
 					<ELSE>
-						<div class="this_file">
-							{{name_file}}
+						<div class="filebox" style="background-image:url({{thumb_link}})">
+							<div class="this_file">
+								{{name_file}}
 
-							<div class="fileinfo">
-							<span>{lang.FILEUPS}: {{uploads}}</span>
-							<span>{lang.FILESIZE}: {{size}}</span>
-							<span>{lang.FILEDATE}: {{time}}</span>
+								<div class="fileinfo">
+								<span>{lang.FILEUPS}: {{uploads}}</span>
+								<span>{lang.FILESIZE}: {{size}}</span>
+								<span>{lang.FILEDATE}: {{time}}</span>
+								</div>
+							
 							</div>
-						
 						</div>
 						<div class="this_file_select">
-							<input id="del_{{id}}" name="del_{{id}}" type="checkbox" value="{{id}}" rel="_del" />
+							<input id="del_{{id}}" name="del_{{id}}" type="checkbox" value="{{id}}" rel="_del"  onclick="change_color(this,'su[{{id}}]');" />
 						</div>
 					</IF>
 					</li>
@@ -80,9 +96,12 @@
 		{page_nums}
 		<!-- @end-pagination -->
 
+		<div class="clr"></div><br />
+
 		<IF NAME="filecp_link">
 		<!-- button -->
 		<div class="left_button"><input type="submit" name="submit_files" value="{lang.DEL_SELECTED}" /></div>
+		<div class="right_button">[ <a href="javascript:void(0);" onclick="checkAll(document.c, '_del', 'su');" title="{lang.CHECK_ALL}">{lang.CHECK_ALL}</a> ]</div>
 		{H_FORM_KEYS}
 		<!-- @end-button -->
 		</form>

@@ -224,7 +224,7 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 
 	$is_live = false;
 	$pre_ext = array_pop(@explode('.', $filename));
-	$is_image = in_array(strtolower(trim($pre_ext)), array('gif', 'jpg', 'jpeg', 'bmp', 'png', 'tiff', 'tif')) ? true : false; 
+	$is_image = in_array(strtolower(trim($pre_ext)), array('gif', 'jpg', 'jpeg', 'bmp', 'png')) ? true : false; 
 
 	if ($SQL->num_rows($result) != 0)
 	{
@@ -239,7 +239,7 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 			$d_size	= $row['size'];
 
 			//img or not
-			$is_image = in_array($t, array('gif', 'jpg', 'jpeg', 'bmp', 'png', 'tiff', 'tif')) ? true : false; 
+			$is_image = in_array($t, array('gif', 'jpg', 'jpeg', 'bmp', 'png')) ? true : false; 
 			//live url
 			$is_live = in_array($t, $livexts) ? true : false; 
 		}
@@ -308,6 +308,16 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 	$resuming_on = true;
 
 	($hook = kleeja_run_hook('down_go_page')) ? eval($hook) : null; //run hook	
+
+	# this is a solution to ignore downloading through the file, redirecct to the actual file
+	# where you can add 'define("MAKE_DOPHP_301_HEADER", true);' in config.php to stop the load
+	# if there is any.
+	if(defined('MAKE_DOPHP_301_HEADER'))
+	{
+		header('HTTP/1.1 301 Moved Permanently');
+		header('Location: ' . $path_file);
+		exit;
+	}
 
 	//start download ,,
 	if(!is_readable($path_file))

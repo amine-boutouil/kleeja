@@ -309,6 +309,7 @@ switch ($_GET['go'])
 		$user_id_get	= isset($_GET['id']) ? intval($_GET['id']) : null;
 		$user_id		= (!$user_id_get && $usrcp->id()) ? $usrcp->id() : $user_id_get;
 		$user_himself	= $usrcp->id() == $user_id;
+		$action			= $config['siteurl'] . 'ucp.php?go=fileuser';
 
 		//no logon before 
 		if (!$usrcp->name() && !isset($_GET['id']))
@@ -476,21 +477,24 @@ switch ($_GET['go'])
 					($hook = kleeja_run_hook('qr_del_files_in_filecp')) ? eval($hook) : null; //run hook	
 					$SQL->build($query_del);
 
-					//update number of stats
-					$update_query	= array(
-								'UPDATE'	=> "{$dbprefix}stats",
-								'SET'		=> "sizes=sizes-$sizes,files=files-$files_num, imgs=imgs-$imgs_num",
-								);
+					if(($files_num <= $stat_files) && ($imgs_num <= $stat_imgs))
+					{
+						//update number of stats
+						$update_query	= array(
+									'UPDATE'	=> "{$dbprefix}stats",
+									'SET'		=> "sizes=sizes-$sizes,files=files-$files_num, imgs=imgs-$imgs_num",
+									);
 
-					$SQL->build($update_query);
-					
+						$SQL->build($update_query);
+					}
+
 					//delte is ok, show msg
-					kleeja_info($lang['FILES_DELETED'], '', true, $action);
+					kleeja_info($lang['FILES_DELETED'], '', true, $linkgoto, 2);
 				}
 				else
 				{
 					//no file selected, show msg
-					kleeja_info($lang['NO_FILE_SELECTED'], '', true, $action);
+					kleeja_info($lang['NO_FILE_SELECTED'], '', true, $linkgoto, 2);
 				}
 			}
 		}#num result

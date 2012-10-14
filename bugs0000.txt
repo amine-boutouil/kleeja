@@ -74,3 +74,7 @@ use this function to extend the group system all the script/
 	like : 
 	if(user_can('enter_acp')){
 	}
+
+	* áÇÊãáß ÕáÇÍíÇÊ áÏÎæá ÇáÕİÍå .. 
+	
+	ÚäÏ ÊÛííÑ " ÇáÓãÇÍ ÈÚÑÖ ãáİÇÊí " íÙåÑ ÎØÇ .. 

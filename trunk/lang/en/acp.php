@@ -306,7 +306,7 @@ $lang = array_merge($lang, array(
 		#ACLS roles
 		'ACLS_ENTER_ACP'		=> 'Access ACP',
 		'ACLS_ACCESS_FILEUSER'	=> 'Access his own files\' folder',
-		'ACLS_ACCESS_FILECP'	=> 'Access his own files\s CP',
+		'ACLS_ACCESS_FILEUSERS'	=> 'Browse Any user files\s folder',
 		'ACLS_ACCESS_CALL'		=> 'Access "call us" page',
 		'ACLS_ACCESS_REPORT'	=> 'Show "Report" page',
 		'ACLS_ACCESS_STATS'		=> 'Access "statistics" page',

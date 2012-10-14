@@ -51,6 +51,7 @@ $lang = array_merge($lang, array(
 	'LOGIN_ERROR' 			=> 'خطأ.. لا يمكن الدخول !',
 	'REGISTER_CLOSED' 		=> 'نأسف.. التسجيل مقفل حالياً',
 	'PLACE_NO_YOU' 			=> 'منطقة محظورة',
+	'NOT_EXSIT_USER'		=> 'لا يوجد لدينا عضو بهذه البيانات , او انه تم حذفه!',
 	'REGISTERED_BEFORE' 	=> 'لقد قمت بالتسجيل سابقاً',
 	'REGISTER' 				=> 'تسجيل عضوية جديده',
 	'EMAIL' 				=> 'البريد الإلكتروني',

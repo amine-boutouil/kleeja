@@ -141,6 +141,7 @@ $acls_values = array();
 //$acls_values['name of acl'] = array(admins, guests, users);
 $acls_values['enter_acp'] = array(1, 0, 0);
 $acls_values['access_fileuser'] = array(1, 0, 1);
+$acls_values['access_fileusers'] = array(1, 1, 1);
 $acls_values['access_stats'] = array(1, 1, 1);
 $acls_values['access_call'] = array(1, 1, 1);
 $acls_values['access_report'] = array(0, 0, 0);

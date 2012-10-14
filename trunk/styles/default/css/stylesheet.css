@@ -285,27 +285,34 @@
 		display: inline;
 		list-style: none;
 		width: 150px;
-		min-height: 175px;
+		height: 175px;
 		float: left;
 		margin: 0 5px 10px 0;
 		text-align: center;
 	}
-	.fileuser-thumbs li.is_file{
+	.fileuser-thumbs img{
+		height: 150px !important;
+		width: 150px !important;
+	}
+	.fileuser-thumbs .filebox{
 		background-repeat:no-repeat;
 		background-position:50% 15%;
 		border:1px solid #ccc;
 		background-color:#EFEFFF;
-		min-height: 160px !important;
+		width:150px;
+		height:150px;
 	}
-
-	.fileuser-thumbs .this_file{
-		margin-top:50px;
+	
+	
+	
+	.filebox .this_file{
+		padding-top:50px;
 	}
-	.fileuser-thumbs .this_file_select{
-		margin-top:20px;
+	.filebox .this_file_select{
+		padding-top:20px;
 	}
-	.fileuser-thumbs .fileinfo{
-		margin-top:10px;
+	.filebox .fileinfo{
+		padding-top:10px;
 		text-align:right;
 		padding-right:10px;
 	}

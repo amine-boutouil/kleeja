@@ -317,7 +317,6 @@ switch ($_GET['go'])
 		}
 
         $stylee	= 'fileuser';
-		$titlee	= $lang['FILEUSER'];
 		$H_FORM_KEYS = kleeja_add_form_key('fileuser');
 
 		$user_id_get	= isset($_GET['id']) ? intval($_GET['id']) : null;
@@ -350,18 +349,19 @@ switch ($_GET['go'])
 				);
 
 		//pager
+		$perpage		= 16;
 		$result_p		= $SQL->build($query);
 		$nums_rows		= $SQL->num_rows($result_p);
 		$currentPage	= (isset($_GET['page'])) ? intval($_GET['page']) : 1;
 		$Pager			= new SimplePager($perpage,$nums_rows,$currentPage);
 		$start			= $Pager->getStartRow();
 
-		$your_fileuser	= $config['siteurl'] . ($config['mod_writer'] ? 'fileuser-' . $usrcp->id() . '.html' : 'ucp.php?go=fileuser&amp;id=' . $usrcp->id());
+		$your_fileuser	= $config['siteurl'] . ($config['mod_writer'] ? 'fileuser-' . dechex($usrcp->id()) . '.html' : 'ucp.php?go=fileuser&amp;id=' .  $usrcp->id());
 		$filecp_link	= $user_id == $usrcp->id() ? $config['siteurl'] . ($config['mod_writer'] ? 'filecp.html' : 'ucp.php?go=filecp') : false;
 		$total_pages	= $Pager->getTotalPages(); 
 		$linkgoto		= $config['siteurl'] . ($config['mod_writer'] ?  'fileuser-' . $user_id : 'ucp.php?go=fileuser&amp;id=' . $user_id);
-		$page_nums		= $Pager->print_nums($linkgoto); 
-
+		$page_nums		= $Pager->print_nums($linkgoto);
+ 
 		$no_results = true;
 
 		if((int) $config['user_system'] != 1 && ($usrcp->id() != $user_id))
@@ -370,6 +370,8 @@ switch ($_GET['go'])
 		}
 		$user_name = !$data_user['name'] ? false : $data_user['name'];
 
+		#set page title
+		$titlee	= $lang['FILEUSER'] . ': ' . $user_name;
 		#there is result ? show them
 		if($nums_rows != 0)
 		{
@@ -381,7 +383,7 @@ switch ($_GET['go'])
 			$result	= $SQL->build($query);
 
 			$i = ($currentPage * $perpage) - $perpage;
-			$tdnumi = $num = 0;
+			$tdnumi = $num = $files_num = $imgs_num = 0;
 			while($row=$SQL->fetch_array($result))
 			{
 				++$i;
@@ -422,7 +424,7 @@ switch ($_GET['go'])
 						kleeja_info($lang['INVALID_FORM_KEY']);
 					}
 
-					if ($del[$row['id']])
+					if ($_POST['del_' . $row['id']])
 					{
 						//delete from folder .. 
 						@kleeja_unlink ($row['folder'] . '/' . $row['name'] );

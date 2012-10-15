@@ -39,8 +39,8 @@ include_once ('includes/functions_install.php');
 
 
 $order_update_files = array(
-'OLD_to_1.0'=>7,
-'1.0_to_1.5'  =>8,
+'RC_to_1.5'		=> 7,
+'1.0_to_1.5'	=> 8,
 );
 
 $SQL = new SSQL($dbserver, $dbuser, $dbpass, $dbname);
@@ -51,7 +51,7 @@ $SQL = new SSQL($dbserver, $dbuser, $dbpass, $dbname);
 $config['db_version'] = inst_get_config('db_version');
 if($config['db_version'] == false)
 {
-	$SQL->query("INSERT INTO `{$dbprefix}config` (`name` ,`value`)VALUES ('db_version', '')");
+	$SQL->query("INSERT INTO `{$dbprefix}config` (`name` ,`value`) VALUES ('db_version', '')");
 }
 
 if(!isset($_GET['step']))

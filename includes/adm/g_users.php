@@ -856,6 +856,43 @@ case 'group_exts':
 
 	$group_name	= preg_replace('!{lang.([A-Z0-9]+)}!e', '$lang[\'\\1\']', $d_groups[$req_group]['data']['group_name']);
 
+
+	#check if there is klj_exts which means this is an upgraded website !
+	if(empty($config['exts_upraded1_5']))
+	{
+		$ex_exts = $SQL->query("SHOW TABLES LIKE '{$dbprefix}exts';");
+		if($SQL->num_rows($ex_exts))
+		{
+			$xquery = array(
+							'SELECT'	=> 'ext, gust_size, user_size, gust_allow, user_allow',
+							'FROM'		=> "{$dbprefix}exts",
+							'WHERE'		=> 'gust_allow=1 OR user_allow=1',
+					);
+
+			$xresult = $SQL->build($xquery);
+			
+			$xexts = '';
+			while($row=$SQL->fetch_array($xresult))
+			{
+				if($row['gust_allow'])
+				{
+					$xexts .= ($xexts == '' ? '' : ',') . "('" . $SQL->escape($row['ext']) . "', 2, " . $row['gust_size'] . ")";
+				}
+
+				if($row['user_allow'])
+				{
+					$xexts .= ($xexts == '' ? '' : ',') . "('" . $SQL->escape($row['ext']) . "', 3, " . $row['user_size'] . ")";
+				}
+			}
+
+			$SQL->freeresult($result);
+
+			$SQL->query("INSERT INTO {$dbprefix}groups_exts (ext, group_id, size) VALUES " . $xexts . ";");
+
+			add_config('exts_upraded1_5', 'done');
+		}
+	}
+
 	#delete ext?
 	$DELETED_EXT = $GE_INFO =  false;
 	if(isset($_GET['del']))

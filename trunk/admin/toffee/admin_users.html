@@ -188,6 +188,17 @@ $(document).ready( function(){
 </div>
 </IF>
 
+<IF NAME="GE_INFO">
+	<script type="text/javascript">
+		setTimeout(function() {
+			$('.infoexts').fadeOut('fast');
+		}, 5000);
+	</script>
+	<div id="system-message" class="infoexts">
+		<div class="info">{GE_INFO}</div>
+	</div>
+</IF>
+
 <div class="br"></div>
 
 <IF NAME="arr">
@@ -276,7 +287,7 @@ $(document).ready( function(){
 <!-- the big box begin -->
 <div class="big-box">
 <div class="tit_con">
-<h1><a href="{action}&amp;smt=general" onclick="javascript:get_kleeja_link(this.href); return false;">{lang.R_GROUPS}</a> &raquo; {lang.EDIT} ({title_name})</h1>
+<h1><a href="{action_all}&amp;smt=general" onclick="javascript:get_kleeja_link(this.href); return false;">{lang.R_GROUPS}</a> &raquo; {lang.EDIT} ({title_name})</h1>
 </div>
 
 <IF NAME="errs">
@@ -285,7 +296,7 @@ $(document).ready( function(){
 	</div>
 </IF>
 
-<form method="post" action="{action}" id="edit_user_form">
+<form method="post" action="{action}&amp;uid={userid}&amp;qg={u_qg}&amp;page={u_page}" id="edit_user_form">
 
 <div class="section">
 	<h3><label for="l_name">{lang.USERNAME}</label></h3>
@@ -336,9 +347,9 @@ $(document).ready( function(){
 </IF>
 
 <div class="br"></div>
-<input type="hidden" name="l_qg" value="{u_qg}" />
-<input type="hidden" name="l_page" value="{u_page}" />
-<input type="hidden" name="uid" value="{userid}" />
+<input type="text" style="display:none;" name="l_qg" value="{u_qg}" />
+<input type="text" style="display:none;" name="l_page" value="{u_page}" />
+<input type="text" style="display:none;" name="uid" value="{userid}" />
 
 <!-- button -->
 <p class="submit">

@@ -357,11 +357,11 @@ if(isset($_POST['edituser']))
 
 		if($SQL->affected())
 		{
-			kleeja_admin_info($lang['USER_UPDATED'], true, '', true, basename(ADMIN_PATH) . '?cp=g_users&smt=show_group&qg=' . intval($_POST['l_qg']) . '&page='. intval($_POST['l_page']), 3);
+			kleeja_admin_info($lang['USER_UPDATED'], true, '', true, basename(ADMIN_PATH) . '?cp=g_users&smt=show_group&qg=' . intval($_POST['l_qg']) . '&page='. intval($_POST['l_page']), 2);
 		}
 		else
 		{
-			kleeja_admin_info($lang['NO_UP_CHANGE_S'], true, '', true, basename(ADMIN_PATH) . '?cp=g_users&smt=show_group&qg=' . intval($_POST['l_qg']) . '&page='. intval($_POST['l_page']), 3);
+			kleeja_admin_info($lang['NO_UP_CHANGE_S'], true, '', true, basename(ADMIN_PATH) . '?cp=g_users&smt=show_group&qg=' . intval($_POST['l_qg']) . '&page='. intval($_POST['l_page']), 2);
 		}
 	}
 	else
@@ -373,7 +373,7 @@ if(isset($_POST['edituser']))
 		}
 
 		$current_smt = 'edit_user';
-		$_GET['uid'] = $_POST['uid'];
+		$_GET['uid'] = $userid;
 		$_GET['page'] = $_POST['l_page'];
 		//kleeja_admin_err($errs, true, '', true, $action_all, 3);
 	}
@@ -1075,12 +1075,15 @@ break;
 
 #editing a user, form
 case 'edit_user':
-	$userid = intval($_GET['uid']);
 
 	//is exists ?
-	if(!$SQL->num_rows($SQL->query("SELECT * FROM {$dbprefix}users WHERE id=" . $userid)))
+	if(!isset($userid))
 	{
-		kleeja_admin_err('ERROR-NO-ID', true, '', true,  basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'));
+		$userid = intval($_GET['uid']);
+		if(!$SQL->num_rows($SQL->query("SELECT * FROM {$dbprefix}users WHERE id=" . $userid)))
+		{
+			kleeja_admin_err('ERROR-NO-USER-FOUND', true, '', true,  basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'));
+		}
 	}
 
 	$query = array(

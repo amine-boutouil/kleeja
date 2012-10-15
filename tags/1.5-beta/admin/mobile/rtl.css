@@ -1,0 +1,13 @@
+/**
+* Right-To-Left CSS file
+*/
+
+
+/* global.css */
+body{
+    direction:rtl;
+	text-align: right;
+}
+
+#pagination { text-align:left;  float:left; }
+

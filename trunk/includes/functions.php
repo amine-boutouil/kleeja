@@ -824,14 +824,23 @@ function get_config($name)
 
 /*
 * Add new config option
+* type: where does your config belone, 0 = system, genetal = has no specifc cat., other = other items.
+* html: the input or radio to let the user type or choose from them, see the database:configs to understand.
+* dynamic: every refresh of the page, the config data will be brought from db, not from the cache !
+* plg_id: if this config belong to plugin .. see devKit. 
 */
-function add_config ($name, $value, $order = '0', $html = '', $type = 'other', $plg_id = '0', $dynamic = false)
+function add_config($name, $value, $order = '0', $html = '1', $type = '0', $plg_id = '0', $dynamic = false)
 {
 	global $dbprefix, $SQL, $config, $d_groups;
 	
 	if(get_config($name))
 	{
 		return true;
+	}
+
+	if($html != '' && $type == '0')
+	{
+		$type = 'other';
 	}
 
 	if($type == 'groups')
@@ -841,7 +850,7 @@ function add_config ($name, $value, $order = '0', $html = '', $type = 'other', $
 		foreach($group_ids as $g_id)
 		{
 			$insert_query	= array(
-									'INSERT'	=> 'name, value, group_id',
+									'INSERT'	=> '`name`, `value`, `group_id`',
 									'INTO'		=> "{$dbprefix}groups_data",
 									'VALUES'	=> "'" . $SQL->escape($name) . "','" . $SQL->escape($value) . "', group_id" . $g_id,
 								);
@@ -853,9 +862,9 @@ function add_config ($name, $value, $order = '0', $html = '', $type = 'other', $
 	}
 
 	$insert_query	= array(
-							'INSERT'	=> 'name ,value ,option ,display_order, type, plg_id, dynamic',
+							'INSERT'	=> '`name` ,`value` ,`option` ,`display_order`, `type`, `plg_id`, `dynamic`',
 							'INTO'		=> "{$dbprefix}config",
-							'VALUES'	=> "'" . $SQL->escape($name) . "','" . $SQL->escape($value) . "', '" . $SQL->real_escape($html) . "','" . intval($order) . "','" . $SQL->escape($type) . "','" . intval($plg_id) . "','"  . (($dynamic) ? '1' : '0') . "'",
+							'VALUES'	=> "'" . $SQL->escape($name) . "','" . $SQL->escape($value) . "', '" . $SQL->real_escape($html) . "','" . intval($order) . "','" . $SQL->escape($type) . "','" . intval($plg_id) . "','"  . ($dynamic ? '1' : '0') . "'",
 						);
 
 	($hook = kleeja_run_hook('insert_sql_add_config_func')) ? eval($hook) : null; //run hook

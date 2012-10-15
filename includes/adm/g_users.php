@@ -887,6 +887,14 @@ case 'group_exts':
 
 			$SQL->freeresult($result);
 
+			#delete prev exts before adding
+			$query_del	= array(
+								'DELETE'	=> "{$dbprefix}groups_exts",
+								'WHERE'		=> 'group_id=2 OR group_id=3'
+							);
+
+			$SQL->build($query_del);
+
 			$SQL->query("INSERT INTO {$dbprefix}groups_exts (ext, group_id, size) VALUES " . $xexts . ";");
 
 			add_config('exts_upraded1_5', 'done');

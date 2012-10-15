@@ -8,7 +8,7 @@ if (!defined('IN_COMMON'))
 //
 //db version when this update was released
 //
-define ('DB_VERSION' , '7');
+define ('DB_VERSION' , '8');
 
 //////////////////////////////////////////////
 // sqls ////////////////////////////////////////
@@ -163,12 +163,14 @@ $update_sqls['index_k14'] = "ALTER TABLE  `{$dbprefix}users` ADD INDEX (  `clean
 $update_sqls['index_k15'] = "ALTER TABLE  `{$dbprefix}plugins` ADD INDEX (  `plg_name` )";
 
 
+#also add sqls of 1.0_to_1.5
+include dirname(__file__) . '/1.0_to_1.5.php'; 
 
 //////////////////////////////////////////////////
 //notes ///////////////////////////////////////////
 //////////////////////////////////////////////////
 
-$update_notes[]	= $lang['INST_NOTE_RC6_TO_1.0.0'];
+$update_notes[]	= $lang['INST_NOTE_RC6_TO_1.5'];
 
 
 ////////////////////////////////////////////////

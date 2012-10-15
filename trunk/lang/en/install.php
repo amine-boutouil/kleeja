@@ -96,6 +96,7 @@
 	$lang['INST_UPDATE_CUR_VER_IS_UP']				= 'Your current version is newer than this update.';
 	
 	$lang['INST_NOTES_UPDATE']						= 'Update Notes';
+	$lang['INST_NOTE_RC6_TO_1.5']					= 
 	$lang['INST_NOTE_1.0_TO_1.5']					= 'You need to replace all new the script files with the old ones !.';
 	$lang['RC6_1_CNV_CLEAN_NAMES']					= 'Cleaning every username ...';
 	$lang['INST_UPDATE_IS_FINISH']					= 'Installation completed! you can now delete the INSTALL directory...';

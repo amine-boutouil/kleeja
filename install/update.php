@@ -93,6 +93,7 @@ case 'action_file':
 		$s_path = "includes/update_files";
 		$dh = opendir($s_path);
 		$upfiles = array();
+		$config['db_version'] = 6;
 		while (($file = readdir($dh)) !== false)
 		{
 			if($file != "." && $file != ".."  && $file != "index.html" && $file != ".svn")
@@ -100,15 +101,14 @@ case 'action_file':
 				$file = str_replace('.php','', $file);
 				$db_ver = $order_update_files[$file];
 
-				//condition DEV, this will be removed later...
-				if(defined('DEV_STAGE'))
-				{
-					$config['db_version']--;
-				}
-
-				if((empty($config['db_version']) or $db_ver > $config['db_version']))
+				if((empty($config['db_version']) || $db_ver > $config['db_version']))
 				{
 					$upfiles[$db_ver] = $file;
+					#this just for RC_to_1.5
+					if($db_ver == 7 && !defined('DEV_STAGE'))
+					{
+						unset($upfiles[8]);
+					}
 				}
 			}
 		}
@@ -166,7 +166,7 @@ case 'update_now':
 						$err = '';
 						$SQL->query($sql_content);
 						$err = $SQL->get_error();
-						
+
 						if(strpos($err[1], 'Duplicate') !== false || $err[0] == '1062' || $err[0] == '1060')
 						{
 							$sql = "UPDATE `{$dbprefix}config` SET `value` = '" . DB_VERSION . "' WHERE `name` = 'db_version'";

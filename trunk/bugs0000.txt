@@ -12,8 +12,8 @@
  
 
 1.5 - version :
--[ 97% done ] Groups system
--[ 97% done ] New ACP style.
+-[x] Groups system
+-[x] New ACP style.
 	-- Opera 11 [ OK, top menu wont work ok ], On WIN
 	-- Opera 12 [ OK, top menu wont work ok ], On WIN
 	-- Chrome 19 [ OK ], on WIN
@@ -22,23 +22,23 @@
 		--- IE5.5, IE6  [ it just work :), No plans to support them !!! ]
 		--- IE7, IE8 [ OK, but we need to test them as a standalone app ]
 	-- IE9 [ ok ]
-	[  ] check LTR, RTL , other languages looks
+	[x] check LTR, RTL , other languages looks
 	
 -[x] Make sure that vb, phpbb integration work with the new group system !
--[ ] Try the group system with all siutations that may happin ?!!!
+-[x] Try the group system with all siutations that may happin ?!!!
 -[-] Security situation page 
 -[-] ACP firstpage !  
--[ ] Test upgrades under any curcumstances, and avoids problems that happened before !
+-[x] Test upgrades under any curcumstances, and avoids problems that happened before !
 -[x] images ACP -> search files from this IP,user
--[ ] files ACP -> search files from this IP,user
+-[-] files ACP -> search files from this IP,user
 -[-] Dealing with the huge invasion of Nginx
--[ ] Add phrases from within ACP, (show how to embed them in template ?), fix bug with pages there too
+-[-] Add phrases from within ACP, (show how to embed them in template ?), fix bug with pages there too
 -[-] Mobile style, see admin/mobile [ related files common.php+admin/index.php ] { to test it, add define('IN_MOBILE', 1); to config.php } 
 -[x] filters at images & files (same db tables for searchs !)
 	-[-] filters at images.
 	-[-] filters at files.
 	-[x] convert searches to use filters and show last 10 ones.
--[ ] files of deleted user shows as 'deleted' user or 'guest' 
+-[-] files of deleted user shows as 'deleted' user or 'guest' 
 -[x] increase csrf time of some time-wanted forms
 -[x] remove [remember me ... choices ] and make it simple 
 -[x] fix total size bar in acp
@@ -59,22 +59,13 @@
 	-[x] resync total number of files
 	-[x] repair db tables
 -[x] copyrights removal atteps
--[ ] when chaning email, check it's not used before
--[ ] add url rules page bottom inputs file
+-[x] when chaning email, check it's not used before
+-[x] add url rules page bottom inputs file
 -[ ] Mobile Style ..
--[ ] avater setting
--[ ] style for Fix.php file
+-[x] avater setting
+-[x] style for Fix.php file
 
+============== After 1.5 ===============
+[x] fix extra footer, when click no action ...
+[x] fix rules+extra html editor .. 
 
-NOTE NOTE NOTE :: 
-use this function to extend the group system all the script/
-	user_can($acl_name, $group_id = 0)
-	
-	it will return true of user can or false if he cant 
-	like : 
-	if(user_can('enter_acp')){
-	}
-
-	* ·« „·ﬂ ’·«ÕÌ«  ·œŒÊ· «·’›ÕÂ .. 
-	
-	⁄‰œ  €ÌÌ— " «·”„«Õ »⁄—÷ „·›« Ì " ÌŸÂ— Œÿ« .. 

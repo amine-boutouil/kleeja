@@ -53,7 +53,7 @@ if($current_smt == 'del_d30' || $current_smt == 'del_all')
 
 $query	= array(
 				'SELECT'	=> 'c.*',
-				'FROM'		=> "{$dbprefix}call c",
+				'FROM'		=> "`{$dbprefix}call` c",
 				'ORDER BY'	=> 'c.id DESC'
 		);
 

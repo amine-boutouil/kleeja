@@ -13,13 +13,13 @@ desc:ar = الستايل الافتراضي مع النسخه, وهذا مايق
 
 
 #Style copyright
-copyright = 2009 Kleeja.com
+copyright = 2009-2012 Kleeja.com
 
 #Version of style
-version = 1.0.0
+version = 1.5
 
 #Min. required version of kleeja
-kleeja_version = 1.0.0
+kleeja_version = 1.5
 
 #name of the style required by this style 
 #depend_on = default

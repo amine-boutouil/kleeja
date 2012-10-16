@@ -807,7 +807,7 @@ case 'group_data':
 		$data[] = array(
 						'option'	=> '<div class="section">' . "\n" .  
 										"\t" . '<h3><label for="' . $row['name'] . '">' . (!empty($lang[strtoupper($row['name'])]) ? $lang[strtoupper($row['name'])] : $olang[strtoupper($row['name'])]) . '</label></h3>' . "\n" .
-										"\t" . '<div class="box">' . (empty($row['option']) ? '' : $tpl->admindisplayoption(preg_replace('!{con.[a-z0-9_]+}!', '{cdata.' . $row['name'] . '}', $row['option']))) . '</div>' . "\n" .
+										"\t" . '<div class="box">' . (empty($row['option']) ? '' : $tpl->admindisplayoption(preg_replace(array('!{con.[a-z0-9_]+}!', '!NAME="con.!'), array('{cdata.' . $row['name'] . '}', 'NAME="cdata.'), $row['option']))) . '</div>' . "\n" .
 										'</div>' . "\n" . '<div class="br"></div>',
 			);
 	}

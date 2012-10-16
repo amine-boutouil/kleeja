@@ -829,7 +829,7 @@ function get_config($name)
 * dynamic: every refresh of the page, the config data will be brought from db, not from the cache !
 * plg_id: if this config belong to plugin .. see devKit. 
 */
-function add_config($name, $value, $order = '0', $html = '1', $type = '0', $plg_id = '0', $dynamic = false)
+function add_config($name, $value, $order = '0', $html = '', $type = '0', $plg_id = '0', $dynamic = false)
 {
 	global $dbprefix, $SQL, $config, $d_groups;
 	

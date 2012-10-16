@@ -238,7 +238,7 @@ foreach(array('call'=>'calls', 'reports'=>'reports') as $table=>$n)
 {
 	$query	= array(
 					'SELECT'	=> 'COUNT(' . $table[0] . '.id) AS total_rows',
-					'FROM'		=> "{$dbprefix}" . $table . " " . $table[0]
+					'FROM'		=> "`{$dbprefix}" . $table . "` " . $table[0]
 				);
 
 	$fetched = $SQL->fetch_array($SQL->build($query));

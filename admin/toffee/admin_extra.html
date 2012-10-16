@@ -3,8 +3,8 @@
 
 <head>
 <link rel="stylesheet" type="text/css" href="{STYLE_PATH_ADMIN}js/markitup/skins/markitup/style.css" />
-<link rel="stylesheet" type="text/css" href="{STYLE_PATH_ADMIN}js/markitup/sets/html/style.css" />
-<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/markitup/sets/html/set.js"></script>
+<link rel="stylesheet" type="text/css" href="{STYLE_PATH_ADMIN}js/markitup/sets/default/style.css" />
+<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/markitup/sets/default/set.js"></script>
 <script type="text/javascript">
 <!--
 $(document).ready(function() { $('#ex_header').markItUp(mySettings);$('#ex_footer').markItUp(mySettings); });
@@ -13,13 +13,15 @@ $(document).ready(function() { $('#ex_header').markItUp(mySettings);$('#ex_foote
 <!-- / markItUp! -->
 <!-- the big box begin -->
 </head>
+
+<form method="post" action="{action}" id="extra_form">
 <IF NAME="current_smt == he">
 <!-- header extra -->
    <div class="tit_con">
 <h1>{lang.ADD_HEADER_EXTRA}</h1>
    </div>
 <div class="big-box">
-<form method="post" action="{action}" id="extra_form">
+
 
 <h2>{lang.EX_HEADER_N}</h2>
 

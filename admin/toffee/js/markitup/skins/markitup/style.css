@@ -12,10 +12,12 @@
 	text-decoration:none;
 }
 .markItUp  {
-	width:99%;
-	margin:5px 0;
+	width:700px;
+	margin:5px 0 5px 0;
+	border:5px solid #F5F5F5;	
 }
 .markItUpContainer  {
+	border:1px solid #3C769D;	
 	background:#FFF url(images/bg-container.png) repeat-x top left;
 	padding:5px 5px 2px 5px;
 	font:11px Verdana, Arial, Helvetica, sans-serif;
@@ -23,14 +25,13 @@
 .markItUpEditor {
 	font:12px 'Courier New', Courier, monospace;
 	padding:5px 5px 5px 35px;
-	border:1px solid #3C769D;
-	width:92%;
+	border:3px solid #3C769D;
+	width:643px;
 	height:320px;
-	background:#FFF url(images/bg-editor.png) no-repeat top left;
-	clear:both; display:block;
+	background:#FFF url(images/bg-editor.png) no-repeat;
+	clear:both;
 	line-height:18px;
-	overflow:scroll;
-	margin-bottom:5px;
+	overflow:auto;
 }
 .markItUpPreviewFrame	{
 	overflow:auto;
@@ -46,10 +47,10 @@
 }
 .markItUpResizeHandle {
 	overflow:hidden;
-	width:16px; height:16px;
+	width:22px; height:5px;
 	margin-left:auto;
 	margin-right:auto;
-	background:url(images/handle.png) no-repeat top left;
+	background-image:url(images/handle.png);
 	cursor:n-resize;
 }
 /***************************************************************************************/
@@ -129,20 +130,18 @@
 }
 /***************************************************************************************/
 .html .markItUpEditor {
-	background:#FFF url(images/bg-editor-html.png) no-repeat top left;
+	background-image:url(images/bg-editor-html.png);
 }
 .markdown .markItUpEditor {
-	background:#FFF url(images/bg-editor-markdown.png) no-repeat top left;
+	background-image:url(images/bg-editor-markdown.png);
 }
 .textile .markItUpEditor {
-	background:#FFF url(images/bg-editor-textile.png) no-repeat top left;
+	background-image:url(images/bg-editor-textile.png);
 }
 .bbcode .markItUpEditor {
-	background:#FFF url(images/bg-editor-bbcode.png) no-repeat top left;
+	background-image:url(images/bg-editor-bbcode.png);
 }
 .wiki .markItUpEditor,
 .dotclear .markItUpEditor {
-	background:#FFF url(images/bg-editor-wiki.png) no-repeat top left;
+	background-image:url(images/bg-editor-wiki.png);
 }
-
-textarea:focus {border: 1px solid #FFA833}

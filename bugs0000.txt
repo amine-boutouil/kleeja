@@ -68,4 +68,7 @@
 ============== After 1.5 ===============
 [x] fix extra footer, when click no action ...
 [x] fix rules+extra html editor .. 
+[x] fix bug when add-config use other instead of 0 as a type for system configs.
+[x] fix bug when you enable user_files at groups-data but doesnt change.
+
 

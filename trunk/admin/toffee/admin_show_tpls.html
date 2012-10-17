@@ -39,34 +39,32 @@
 <div class="big-box">
 <h1>{lang.SHOW_TPLS} &raquo; {style_id}</h1>
 
-<form method="post" action="{action}" id="showtpl_form">
-
 <!-- start showtpl table -->
 <table>
 	<tr >
 	<td style="text-align:(lang.DIR==ltr?left:right);">
 		<IF NAME="not_style_writeable"><div class="not-info">{lang.STYLE_DIR_NOT_WR} !</div></IF>
-		<select name="tpl_choose" size="11" class="s_tpl_x">
-			<OPTGROUP class="TPLS_RE_BASIC" LABEL="{lang.TPLS_RE_BASIC}" style="direction:{lang.DIR}">
+		<select name="tpl_choose" size="11" class="s_tpl_x" id="tpl_choose">
+			<optgroup class="TPLS_RE_BASIC" LABEL="{lang.TPLS_RE_BASIC}" style="direction:{lang.DIR}">
 			<LOOP NAME="tpls_basic">
-			<option name="{{template_name}}"<IF LOOP="template_name==header.html"> selected="selected"</IF>>{{template_name}}</option>
+			<option value="{{template_name}}"<IF LOOP="template_name==header.html"> selected="selected"</IF>>{{template_name}}</option>
 			</LOOP>
-			</OPTGROUP>
-			<OPTGROUP LABEL="{lang.TPLS_RE_MSG}" style="direction:{lang.DIR}">
+			</optgroup>
+			<optgroup LABEL="{lang.TPLS_RE_MSG}" style="direction:{lang.DIR}">
 			<LOOP NAME="tpls_msg">
-			<option name="{{template_name}}">{{template_name}}</option>
+			<option value="{{template_name}}">{{template_name}}</option>
 			</LOOP>
-			</OPTGROUP>
-			<OPTGROUP LABEL="{lang.TPLS_RE_USER}" style="direction:{lang.DIR}">
+			</optgroup>
+			<optgroup LABEL="{lang.TPLS_RE_USER}" style="direction:{lang.DIR}">
 			<LOOP NAME="tpls_user">
-			<option name="{{template_name}}">{{template_name}}</option>
+			<option value="{{template_name}}">{{template_name}}</option>
 			</LOOP>
-			</OPTGROUP>
-			<OPTGROUP LABEL="{lang.TPLS_RE_OTHER}" style="direction:{lang.DIR}">
+			</optgroup>
+			<optgroup LABEL="{lang.TPLS_RE_OTHER}" style="direction:{lang.DIR}">
 			<LOOP NAME="tpls_other">
-			<option name="{{template_name}}">{{template_name}}</option>
+			<option value="{{template_name}}">{{template_name}}</option>
 			</LOOP>
-			</OPTGROUP>
+			</optgroup>
 		</select>
 
 		<br /><br />
@@ -83,11 +81,9 @@
 <!-- button -->
 <p class="submit">
 	<input type="hidden" name="tpls_submit" value="1" />
-	<button type="submit" id="submit" name="tpls_submit" class="btn" onclick="javascript:submit_kleeja_data('#showtpl_form', '#content', 0); return false;"><span>{lang.SUBMIT}</span></button>
+	<button type="submit" id="submit" name="tpls_submit" class="btn" onclick="javascript:get_kleeja_link('{edit_tpl_action}'+ $('#tpl_choose option:selected').val() + '&method='+ $('input[name=method]:checked').val() + '&{GET_FORM_KEY}', '#content'); return false;"><span>{lang.SUBMIT}</span></button>
 </p>
 
-{H_FORM_KEYS}
-</form>
 </div>
 <!-- the big box end -->
 

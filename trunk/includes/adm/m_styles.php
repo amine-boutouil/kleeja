@@ -33,7 +33,7 @@ switch ($_GET['sty_t'])
 		$action 	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') .'&amp;sty_t=st' . '&amp;smt=' . $current_smt;
 		$edit_tpl_action		= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') .'&amp;sty_t=style_orders&amp;style_id=' . $config['style'] .  '&amp;smt=' . $current_smt . '&amp;method=1&amp;tpl_choose=';
 		$show_all_tpls_action	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') .'&amp;style_choose=' . $config['style'] . '&amp;method=1' . '&amp;smt=' . $current_smt;
-		$H_FORM_KEYS			= kleeja_add_form_key('adm_style_order_del_edit');
+		$GET_FORM_KEY			= kleeja_add_form_key_get('adm_style_del_edit');
 		$H_FORM_KEYS2			= kleeja_add_form_key('adm_style_order_add');
 		$H_FORM_KEYS3			= kleeja_add_form_key('adm_style_order_bkup');
 
@@ -249,47 +249,45 @@ switch ($_GET['sty_t'])
 	case 'style_orders' :
 
 		//style id ..
-		$style_id = str_replace('..', '', $SQL->escape($_REQUEST['style_id']));
+		$style_id = str_replace('..', '', htmlspecialchars($_GET['style_id']));
 		$redirect_to = basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&style_choose=' . $style_id . '&method=1';
 
-		if(empty($_REQUEST['tpl_choose']))
+		if(empty($_GET['tpl_choose']))
 		{
 			#redirect($redirect_to);
 		}
 
 		//edit or del tpl 
-		if(isset($_REQUEST['tpl_choose']) && !empty($_REQUEST['tpl_choose']) && isset($_REQUEST['style_id']) && isset($_REQUEST['method']))
+		if(isset($_GET['tpl_choose']) && !empty($_GET['tpl_choose']) && isset($_GET['style_id']) && isset($_GET['method']))
 		{
-			//
-			// Check form key
-			//
-			if(!kleeja_check_form_key('adm_style_order_del_edit', 3600) && !isset($_GET['tpl_choose']))
+			//check _GET Csrf token
+			if(!kleeja_check_form_key_get('adm_style_del_edit'))
 			{
-				kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $redirect_to, 1);
+				kleeja_admin_err($lang['INVALID_GET_KEY'], true, $lang['ERROR'], true, $redirect_to, 2);
 			}
 
 			//tpl name 
-			$tpl_name =	$SQL->escape($_REQUEST['tpl_choose']);
+			$tpl_name =	str_replace('..', '', htmlspecialchars($_GET['tpl_choose']));
 			$tpl_path = PATH . 'styles/' . $style_id . '/' . $tpl_name;
 			$d_style_path = PATH . 'styles/' . $style_id; 
 
 			if(!file_exists($tpl_path))
 			{
 				$text = sprintf($lang['TPL_PATH_NOT_FOUND'], $tpl_path);
-				$_REQUEST['method'] = 0;
+				$_GET['method'] = 0;
 			}
 			else if (!is_writable($d_style_path))
 			{
 				$text = sprintf($lang['STYLE_DIR_NOT_WR'], $d_style_path);
-				$_REQUEST['method'] = 0;
+				$_GET['method'] = 0;
 			}
 	
-			if(!isset($_REQUEST['method']))
+			if(!isset($_GET['method']))
 			{
-				$_REQUEST['method'] = 0;
+				$_GET['method'] = 0;
 			}
 
-			switch((int) $_REQUEST['method'])
+			switch((int) $_GET['method'])
 			{
 				case 0:
 					$stylee = "admin_info";
@@ -301,8 +299,7 @@ switch ($_GET['sty_t'])
 					$stylee = "admin_edit_tpl";
 					$action = basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;sty_t=style_orders';
 					$action_return	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;style_choose=' . $style_id . '&amp;method=1';
-					$H_FORM_KEYS	= kleeja_add_form_key('adm_style_order_edit_content');
-			
+	
 					//is there any possiablity to write on files
 					$not_style_writeable = true;
 					$d_style_path = PATH . 'styles/' . $style_id; 
@@ -342,20 +339,13 @@ switch ($_GET['sty_t'])
 		// submit edit of tpl
 		if(isset($_POST['template_content']))
 		{
-			//
-			// Check form key
-			//
-			if(!kleeja_check_form_key('adm_style_order_edit_content', 3600))
-			{
-				kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $redirect_to, 1);
-			}
-
 			$style_id = str_replace('..', '', $SQL->escape($_POST['style_id']));
 			//tpl name 
 			$tpl_name =	htmlspecialchars_decode($_POST['tpl_choose']);
 			$tpl_path = PATH . 'styles/' . $style_id . '/' . $tpl_name;
 			$tpl_content = stripslashes($_POST['template_content']);
-
+			$link	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;sty_t=st&amp;style_choose=' . $style_id . '&amp;method=1';
+			
 			//try to make template writable
 			if (!is_writable($tpl_path)) 
 			{
@@ -368,20 +358,21 @@ switch ($_GET['sty_t'])
 				$filename = @fopen($tpl_path, 'w');
 				fwrite($filename, $tpl_content);
 				fclose($filename);
+				//delete cache ..
+				delete_cache('tpl_' . str_replace('html', 'php', $tpl_name));
+				//show msg
+				$text = $lang['TPL_UPDATED'];
+				$stylee = 'admin_info';
 			}
 			else
 			{
-				kleeja_admin_err(sprintf($lang['T_ISNT_WRITEABLE'], $tpl_name));
+				$text = sprintf($lang['T_ISNT_WRITEABLE'], $tpl_name);
+				$stylee = 'admin_err';
+				//kleeja_admin_err(, true,'', true, $link, 5);
 			}
-
-			//delete cache ..
-			delete_cache('tpl_' . str_replace('html', 'php', $tpl_name));
-			//show msg
-			$link	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;sty_t=st&amp;style_choose=' . $style_id . '';
-			$text	= $lang['TPL_UPDATED'] . '<br /><meta HTTP-EQUIV="REFRESH" content="3; url=' . $link . '">' ."\n";
-			$stylee	= "admin_info";
+			//kleeja_admin_info(, true,'', true, $link, 5);
 		}
-			
+
 		//new template file
 		if(isset($_POST['submit_new_tpl']))
 		{
@@ -633,6 +624,12 @@ switch ($_GET['sty_t'])
 		$stylee = 'admin_info';
 
 	break;
+}
+
+if(!isset($stylee))
+{
+	$text	= '--------';
+	$stylee  = 'admin_info';
 }
 
 $arrow_html = $lang['DIR'] == 'rtl' ? ' &rarr; ' : ' &larr; ';

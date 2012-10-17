@@ -52,11 +52,10 @@ if (isset($_POST['submit']))
         $query	= array(
 						'SELECT'	=> '*',
 						'FROM'		=> "{$dbprefix}files",
-						'WHERE'		=> 'id = ' . intval($id),
+						'WHERE'		=> '`id` = ' . intval($id),
 					);
-                    
-         $result = $SQL->build($query);
 
+		$result = $SQL->build($query);
 
 		while($row=$SQL->fetch_array($result))
 		{
@@ -80,7 +79,7 @@ if (isset($_POST['submit']))
 	{
 		$query_del = array(
 								'DELETE'	=> "{$dbprefix}files",
-								'WHERE'	=> "id IN (" . implode(',', $ids) . ")"
+								'WHERE'	=> "`id` IN (" . implode(',', $ids) . ")"
 							);
 			
 		$SQL->build($query_del);

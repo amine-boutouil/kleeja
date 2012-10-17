@@ -97,7 +97,7 @@ if (isset($_POST['submit']))
 	{
 		$query_del = array(
 								'DELETE'	=> "{$dbprefix}files",
-								'WHERE'	=> "id IN (" . implode(',', $ids) . ")"
+								'WHERE'	=> "`id` IN (" . implode(',', $ids) . ")"
 							);
 			
 		$SQL->build($query_del);
@@ -201,7 +201,7 @@ if(isset($_GET['deletefiles']))
 		//delete all files in just one query
 		$query_del	= array(
 							'DELETE'	=> "{$dbprefix}files",
-							'WHERE'	=> "id IN (" . implode(',', $ids) . ")"
+							'WHERE'	=> "`id` IN (" . implode(',', $ids) . ")"
 						);
 
 		$SQL->build($query_del);

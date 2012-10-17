@@ -48,7 +48,7 @@ default:
 $all_files = get_actual_stats('files');
 $all_images = get_actual_stats('imgs');
 $all_users = get_actual_stats('users');
-$all_sizes = get_actual_stats('sizes');
+$all_sizes = Customfile_size(get_actual_stats('sizes'));
 
 
 #links

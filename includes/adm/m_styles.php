@@ -362,11 +362,13 @@ switch ($_GET['sty_t'])
 				delete_cache('tpl_' . str_replace('html', 'php', $tpl_name));
 				//show msg
 				$text = $lang['TPL_UPDATED'];
+				$text	.= '<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . $link .  '\');", 2000);</script>' . "\n";
 				$stylee = 'admin_info';
 			}
 			else
 			{
 				$text = sprintf($lang['T_ISNT_WRITEABLE'], $tpl_name);
+				$text	.= '<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . $link .  '\');", 2000);</script>' . "\n";
 				$stylee = 'admin_err';
 				//kleeja_admin_err(, true,'', true, $link, 5);
 			}

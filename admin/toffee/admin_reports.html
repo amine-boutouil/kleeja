@@ -46,7 +46,7 @@
 	<tr id="su[{{id}}]" class="osilver<IF LOOP="sent"> is_sent</IF>">
 	<td><input type="checkbox" name="del_{{id}}" value="{{id}}" onclick="change_color(this,'su[{{id}}]');" rel="_del"></td>
 		<td>
-			<a title="{lang.VIEW}" onclick="javascript:show_msg('textva_{{id}}',{{id}});" href="#">{{name}}</a>
+			<a title="{lang.VIEW}" onclick="javascript:show_msg('textva_{{id}}',{{id}});" href="javascript:void(0);">{{name}}</a>
 			<input type="hidden" value="&lt;div class='email-for-msg'&gt;{{name}}  ({{mail}}) :&lt;/div&gt;&lt;div class='text-for-msg'&gt;{{text}}&lt;/div&gt;" id="textva_{{id}}">
 
 	<td><a target="_blank" href="{{ip_finder}}" target="_blank">{{ip}}</a></td>		</td>

@@ -60,7 +60,7 @@ if (isset($_POST['submit']))
         $query	= array(
 						'SELECT'	=> 'f.id, f.name, f.folder, f.size, f.type',
 						'FROM'			=> "{$dbprefix}files",
-						'WHERE'			=> 'id = ' . intval($id),
+						'WHERE'			=> 'f.id = ' . intval($id),
 					);
 
 		$result = $SQL->build($query);

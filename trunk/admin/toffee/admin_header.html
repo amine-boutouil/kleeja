@@ -79,6 +79,9 @@ window.onhashchange = function () {
 	if(window.location.hash.indexOf("plugins") != -1){
 		return;
 	}
+	if(window.location.hash.indexOf("style_orders") != -1){
+		return;
+	}
 	
 	if(!where_are_we){
 		where_are_we = 'index';

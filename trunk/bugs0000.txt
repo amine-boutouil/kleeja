@@ -72,4 +72,6 @@
 [x] fix bug when you enable user_files at groups-data but doesnt change.
 [x] fix bugs at editing style templates.
 [x] at repair page, cover bytes to human readable sizes.
+[x] fix bug at englisg lanuage
+[x] fix bugs when deleting files.
 

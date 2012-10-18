@@ -2,10 +2,10 @@
 /*	--------------------------------------------------
 	Theme Name: 	default V1
 	Filename: 		styles/default/mobile.css
-	package:		Kleeja  copyright(c)2007-2011
-	version:		1.0.0
+	package:		Kleeja  copyright(c)2007-2012
+	version:		1.5
 	URL:			http://www.kleeja.com
-	Date:			2010-07-10
+	Date:			2012-10-18
 	Author: 		Kleeja team
 	-------------------------------------------------- */
 	
@@ -18,12 +18,14 @@
 
 /*  @mobile styles -------------------- */
 
-	html, body {font:normal 100% Tahoma, Arial, Verdana, sans-serif, "Lucida Grande", "Lucida Sans Unicode"; height:100%;width: 100%;background:#fff;padding:3px;color: #000;margin: 0;font-size:16px}
+	html, body {font:normal 100% Tahoma, Arial, Verdana, sans-serif, "Lucida Grande", "Lucida Sans Unicode"; height:100%;width: 100%;background:#ECECEC;padding:3px;color: #000;margin: 0;font-size:16px}
 	h1, h2, h3, h4, h5, h6 {font-weight: normal;font-size:x-small;}
-	a:link, a:visited {text-decoration: underline;color: #0000CC;}
-	a:hover, a:active {text-decoration: none;color: #660066;}
+	a:link, a:visited {text-decoration: underline;color: #8EC1DA;text-decoration: none;}
+	a:hover, a:active {text-decoration: none;color: #8EC1DA;}
 	h2 {font-size: 13px;color:#EF5E00;margin: 5px 0;}
+	h6, .wolcome_msg{display:none;}
 	p, ul, ol {line-height:100%;}
+	#header {text-align:center; width:20%;margin: 0px auto;}
 	#main {width:100%;margin:0px auto;background-image: none;}
 	.title {font-size:85%;}
 	#footer,.extras_header, .extras_footer {display:none;}
@@ -34,11 +36,23 @@
 
 		
 /* last update */
-#header .logo {height:30px; text-indent:0px; background-image:none; font-size:16px;color: #FF8800;}
-.logo a{color: #FF8800 !important;}
-.top_nav {background:#FDEDD1 none repeat-x top left;}
-.top_nav .menu li a {color: #444; font-size:12px}
-.top_nav .menu li a:hover {color:#F68618;background:#FFDFA5 none repeat-x top left;}
-.top_nav .menu li a.current {color:white;background:#FCCC74 none top left repeat-x;}
-
-#content_index, #content {min-height:220px;float:right;padding:1px; font-size:80%;}
+#wrapper {padding:0px;}
+#header .logo {height:30px; text-indent:0px; background-image:none; font-size:26px;}
+#content, #content_index {float:none;width:400px;}
+.logo a{color: #8EC1DA !important;}
+.top_nav {background:#8EC1DA none repeat-x top center;}
+.top_nav .menu {margin:0px auto;width: 50%;}
+.top_nav .menu li a {color: #4B4F52; font-size:12px}
+.top_nav .menu li a:hover {color:#4B4F52;background:#DFEDF8 none repeat-x top center;}
+.top_nav .menu li a.current {color:white;background:#DFEDF8 none top center repeat-x;}
+.agree, .bn_up {margin-top: 5px;text-align:center;}
+.login {text-align:center;}
+.box_form_login {width: 100%;}
+.title_login {text-indent: 0px;}
+.forget_pass {float: none;}
+#sidebar {background:#4B4F52 none repeat-x top center;float: none;border-radius: 0 ;margin: 0;padding: 0;width: 100%;height:40px;}
+#sidebar_box {margin-bottom:0px;padding-top: 0px;text-align: center;width: 100%;}
+#sidebar_box  .menu{margin:0px auto;width: 35%;}
+#sidebar_box .menu li {margin: 2px 4px;float:right;display:block;}
+#sidebar_box .menu li a{display: block;font-size: 90%;font-weight: 700;height: 40px;line-height: 35px;padding: 0 10px;}
+#content_index, #content {min-height:220px;padding:1px; font-size:80%;}

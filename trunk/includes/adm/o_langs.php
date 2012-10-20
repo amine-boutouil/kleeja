@@ -21,9 +21,12 @@ if(!isset($_REQUEST['lang']))
 	$_REQUEST['lang'] = 'en';
 }
 
+$lang_id = preg_replace('![^a-z]!', '', $_REQUEST['lang']);
+
+
 //for style ..
 $stylee 	= "admin_langs";
-$action 	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;page=' .  (isset($_GET['page']) ? intval($_GET['page']) : 1) . '&amp;lang=' . $SQL->escape($_REQUEST['lang']);
+$action 	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;page=' .  (isset($_GET['page']) ? intval($_GET['page']) : 1) . '&amp;lang=' . $lang_id;
 $action2 	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php');
 $H_FORM_KEYS= kleeja_add_form_key('adm_langs');
 
@@ -35,7 +38,7 @@ if (isset($_POST['submit']))
 {
 	if(!kleeja_check_form_key('adm_langs'))
 	{
-		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $action, 1);
+		kleeja_admin_err($lang['INVALID_FORM_KEY'], true, $lang['ERROR'], true, $action, 3);
 	}
 }
 
@@ -47,7 +50,7 @@ if ($dh = @opendir(PATH . 'lang'))
 	{
 		if(strpos($file, '.') === false && $file != '..' && $file != '.')
 		{
-			$lngfiles .= '<option ' . ($_REQUEST['lang'] == $file ? 'selected="selected"' : '') . ' value="' . $file . '">' . $file . '</option>' . "\n";
+			$lngfiles .= '<option ' . ($lang_id == $file ? 'selected="selected"' : '') . ' value="' . $file . '">' . $file . '</option>' . "\n";
 		}
 	}
 	closedir($dh);
@@ -56,7 +59,7 @@ if ($dh = @opendir(PATH . 'lang'))
 $query = array(
 				'SELECT'	=> '*',
 				'FROM'		=> "{$dbprefix}lang",
-				'WHERE'		=> "lang_id='" .  $SQL->escape($_REQUEST['lang']) . "'",
+				'WHERE'		=> "lang_id='" .  $lang_id . "'",
 				'ORDER BY'	=> 'word DESC'
 		);
 
@@ -96,7 +99,7 @@ if ($nums_rows > 0)
 			{
 				$query_del = array(
 										'DELETE'	=> "{$dbprefix}lang",
-										'WHERE'		=>	"word='" . $SQL->escape($row['word']) . "' AND lang_id='" .  $SQL->escape($_REQUEST['lang']) . "'"
+										'WHERE'		=>	"word='" . $SQL->escape($row['word']) . "' AND lang_id='" .  $lang_id . "'"
 									);
 
 				$SQL->build($query_del);
@@ -105,7 +108,7 @@ if ($nums_rows > 0)
 			$update_query = array(
 									'UPDATE'	=> "{$dbprefix}lang",
 									'SET'		=> 	"trans = '" . $SQL->escape($transs[$row['word']]) . "'",
-									'WHERE'		=>	"word='" . $SQL->escape($row['word']) . "' AND lang_id='" .  $SQL->escape($_REQUEST['lang']) . "'"
+									'WHERE'		=>	"word='" . $SQL->escape($row['word']) . "' AND lang_id='" .  $lang_id . "'"
 								);
 
 			$SQL->build($update_query);
@@ -135,6 +138,6 @@ if (isset($_POST['submit']))
 		$text = $lang['WORDS_UPDATED'];
 	}
 	
-	$text	.= '<meta HTTP-EQUIV="REFRESH" content="0; url=' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;page=' . (isset($_GET['page']) ? intval($_GET['page']) : '1') . '&amp;lang=' . $SQL->escape($_REQUEST['lang']) . '">' . "\n";
+	$text	.= '<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . $action .  '\');", 2000);</script>' . "\n";
 	$stylee	= "admin_info";
 }

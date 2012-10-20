@@ -65,7 +65,7 @@
 -[x] avater setting
 -[x] style for Fix.php file
 
-============== After 1.5 ===============
+============== 1.5 beta-1 fixes ===============
 [x] fix extra footer, when click no action ...
 [x] fix rules+extra html editor .. 
 [x] fix bug when add-config use other instead of 0 as a type for system configs.
@@ -74,4 +74,4 @@
 [x] at repair page, cover bytes to human readable sizes.
 [x] fix bug at englisg lanuage
 [x] fix bugs when deleting files.
-
+[x] fix bugs at o_langs page, where you can not update && specific language doesnt stay after submitting 

@@ -1,0 +1,77 @@
+ 
+!! warrning !! dont open this file with WINDOWS notepad !!
+
+ 
+
+[ ] not yet
+[-] will be ignored, or to be done at next release
+[x] done
+
+
+
+ 
+
+1.5 - version :
+-[x] Groups system
+-[x] New ACP style.
+	-- Opera 11 [ OK, top menu wont work ok ], On WIN
+	-- Opera 12 [ OK, top menu wont work ok ], On WIN
+	-- Chrome 19 [ OK ], on WIN
+	-- Firefox 12 [ OK ], on WIN
+	-- IEtester
+		--- IE5.5, IE6  [ it just work :), No plans to support them !!! ]
+		--- IE7, IE8 [ OK, but we need to test them as a standalone app ]
+	-- IE9 [ ok ]
+	[x] check LTR, RTL , other languages looks
+	
+-[x] Make sure that vb, phpbb integration work with the new group system !
+-[x] Try the group system with all siutations that may happin ?!!!
+-[-] Security situation page 
+-[-] ACP firstpage !  
+-[x] Test upgrades under any curcumstances, and avoids problems that happened before !
+-[x] images ACP -> search files from this IP,user
+-[-] files ACP -> search files from this IP,user
+-[-] Dealing with the huge invasion of Nginx
+-[-] Add phrases from within ACP, (show how to embed them in template ?), fix bug with pages there too
+-[-] Mobile style, see admin/mobile [ related files common.php+admin/index.php ] { to test it, add define('IN_MOBILE', 1); to config.php } 
+-[x] filters at images & files (same db tables for searchs !)
+	-[-] filters at images.
+	-[-] filters at files.
+	-[x] convert searches to use filters and show last 10 ones.
+-[-] files of deleted user shows as 'deleted' user or 'guest' 
+-[x] increase csrf time of some time-wanted forms
+-[x] remove [remember me ... choices ] and make it simple 
+-[x] fix total size bar in acp
+-[x] add last-visit 'images' or 'files' page ..	
+-[x] check live plugin codes ... make it ok ..
+-[x] error message on user and group 
+-[x] error message after delte or add new ext. to the groups
+-[x] error message after mass maint. to the center
+-[x] quick change of language and style at first page, hurry hurry! 
+-[x] what if we update_config group-related config ? 
+-[x] make total files and images sync, so no more crashes at acp
+-[x] if inactive-files-deleting feature is off, dont show it at acp firstpage and stats page
+-[x] last ten days stats, files and images, [del]morris.js[/del] jqbargraph.js
+-[-] remove last_file code from files and sql .. 
+-[x] change 'total repair' page to 'maintenance'
+	-[x] clean style's templates section
+	-[x] clean cached data section 
+	-[x] resync total number of files
+	-[x] repair db tables
+-[x] copyrights removal atteps
+-[x] when chaning email, check it's not used before
+-[x] add url rules page bottom inputs file
+-[ ] Mobile Style ..
+-[x] avater setting
+-[x] style for Fix.php file
+
+============== 1.5 beta-1 fixes ===============
+[x] fix extra footer, when click no action ...
+[x] fix rules+extra html editor .. 
+[x] fix bug when add-config use other instead of 0 as a type for system configs.
+[x] fix bug when you enable user_files at groups-data but doesnt change.
+[x] fix bugs at editing style templates.
+[x] at repair page, cover bytes to human readable sizes.
+[x] fix bug at englisg lanuage
+[x] fix bugs when deleting files.
+[x] fix bugs at o_langs page, where you can not update && specific language doesnt stay after submitting 

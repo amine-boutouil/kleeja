@@ -9,50 +9,68 @@
 	Author: 		Kleeja team
 	-------------------------------------------------- */
 	
-/*  @iPhone-specific styles -------------------- */
-	@media only screen and (max-device-width: 480px) {html {webkit-text-size-adjust: none;}}
-	
-	html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-weight:inherit;font-style:inherit;font-size:inherit;font-family:inherit;vertical-align:baseline;}
-	body{overflow-x:hidden;}
-	img{vertical-align:middle;}
 
 /*  @mobile styles -------------------- */
-
-	html, body {font:normal 100% Tahoma, Arial, Verdana, sans-serif, "Lucida Grande", "Lucida Sans Unicode"; height:100%;width: 100%;background:#ECECEC;padding:3px;color: #000;margin: 0;font-size:16px}
-	h1, h2, h3, h4, h5, h6 {font-weight: normal;font-size:x-small;}
+	html, body {
+		font:normal 100% Tahoma, Arial, Verdana, sans-serif, "Lucida Grande", "Lucida Sans Unicode"; 
+		height:100% !important;width:auto !important;
+		background:#ECECEC;
+		padding:0;
+		color: #000;
+		margin: 0;
+		font-size:14px
+		webkit-text-size-adjust: none;
+	}
+	h1, h2, h3, h4, h5, h6 {font-weight: bold;font-size:12px;}
 	a:link, a:visited {text-decoration: underline;color: #8EC1DA;text-decoration: none;}
 	a:hover, a:active {text-decoration: none;color: #8EC1DA;}
-	h2 {font-size: 13px;color:#EF5E00;margin: 5px 0;}
-	h6, .wolcome_msg{display:none;}
+	.wolcome_msg{display:none;}
 	p, ul, ol {line-height:100%;}
-	#header {text-align:center; width:20%;margin: 0px auto;}
+	#header {text-align:center; margin: 0px auto;}
 	#main {width:100%;margin:0px auto;background-image: none;}
-	.title {font-size:85%;}
+	h1.title {font-size:12px; width:100% !important;}
 	#footer,.extras_header, .extras_footer {display:none;}
-	.logo {	max-width:200px;}
-	.top_nav {width: 100%;}
-	.top_nav .menu li {font-size:xx-small;}
-	#content, #content_index  {width:60%;padding:0;margin:4px auto;}
+	#header .logo {height:auto; padding:2px; width:auto; text-indent:0px; background-image:none; font-size:20px;}
+	#content, #content_index  {padding:0;margin:4px auto;float:none;width:auto;}
 
-		
 /* last update */
 #wrapper {padding:0px;}
-#header .logo {height:30px; text-indent:0px; background-image:none; font-size:26px;}
-#content, #content_index {float:none;width:400px;}
+
 .logo a{color: #8EC1DA !important;}
-.top_nav {background:#8EC1DA none repeat-x top center;}
-.top_nav .menu {margin:0px auto;width: 50%;}
-.top_nav .menu li a {color: #4B4F52; font-size:12px}
-.top_nav .menu li a:hover {color:#4B4F52;background:#DFEDF8 none repeat-x top center;}
-.top_nav .menu li a.current {color:white;background:#DFEDF8 none top center repeat-x;}
-.agree, .bn_up {margin-top: 5px;text-align:center;}
+.top_nav {background:#8EC1DA none repeat-x top center; width:auto;}
+.top_nav .menu {margin:0px auto; padding:0; text-align:center;
+}
+.top_nav .menu li{padding:0;
+display:block;margin:0 0.5em;
+}
+.top_nav .menu li:nth-child(1){display:none}
+.top_nav .menu li:nth-child(2){display:none}
+.top_nav .menu li a {color: #000; font-size:10px; padding:0; margin:0;font-weight:normal}
+.top_nav .menu li a:hover {color:#4B4F52;background-color:#DFEDF8;padding:0;}
+.top_nav .menu li a.current {color:#4B4F52;background-color:#DFEDF8; padding:0;}
+.agree {margin: 5px auto;text-align:center;display:none}
+.go_up,.bn_up{margin: 20px auto;text-align:center;}
+.go_up input{width:auto;}
 .login {text-align:center;}
 .box_form_login {width: 100%;}
 .title_login {text-indent: 0px;}
 .forget_pass {float: none;}
-#sidebar {background:#4B4F52 none repeat-x top center;float: none;border-radius: 0 ;margin: 0;padding: 0;width: 100%;height:40px;}
-#sidebar_box {margin-bottom:0px;padding-top: 0px;text-align: center;width: 100%;}
-#sidebar_box  .menu{margin:0px auto;width: 35%;}
-#sidebar_box .menu li {margin: 2px 4px;float:right;display:block;}
-#sidebar_box .menu li a{display: block;font-size: 90%;font-weight: 700;height: 40px;line-height: 35px;padding: 0 10px;}
-#content_index, #content {min-height:220px;padding:1px; font-size:80%;}
+#sidebar {background-color:#4B4F52;float: none;margin: 0;padding: 0;width:auto;height:auto;border-radius:0;}
+#sidebar_box {margin:0;padding:0; text-align:center;}
+#sidebar_box  .menu{margin:0px auto;}
+#sidebar_box .menu li {margin:0; padding:0; display:inline-block;}
+#sidebar_box .menu li a{color:#fff;display: inline-block;font-size: 10px;;height: 40px;line-height: 35px;padding: 0 10px;}
+#content_index, #content {min-height:auto;padding:1px; font-size:11px;}
+
+#profile .boxdata{
+	width: auto;
+	float:none;
+	height:auto;
+	clear:both;
+	margin-bottom:10px;
+}
+
+#profile div:nth-child(4){
+	display:none
+}
+

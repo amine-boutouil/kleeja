@@ -779,7 +779,7 @@ function is_browser($b)
 		 * @see http://en.wikipedia.org/wiki/List_of_user_agents_for_mobile_phones
 		 **/
 		case 'mobile':
-			$mobile_agents = array('iPhone;', 'iPod;', 'iPad;', 'blackberry', 'Android', 'HTC' , 'IEMobile', 'LG/', 'LG-',
+			$mobile_agents = array('iPhone;', 'iPod;', 'blackberry', 'Android', 'HTC' , 'IEMobile', 'LG/', 'LG-',
 									'LGE-', 'MOT-', 'Nokia', 'SymbianOS', 'nokia_', 'PalmSource', 'webOS', 'SAMSUNG-', 
 									'SEC-SGHU', 'SonyEricsson', 'BOLT/', 'Mobile Safari', 'Fennec/', 'Opera Mini');
 			$return = false;

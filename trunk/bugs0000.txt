@@ -75,3 +75,6 @@
 [x] fix bug at englisg lanuage
 [x] fix bugs when deleting files.
 [x] fix bugs at o_langs page, where you can not update && specific language doesnt stay after submitting 
+
+============= 1.5 beta-2 fixes ================
+[x] fix bug related to group_id [file inputs stay same] (reported by: night-dream)

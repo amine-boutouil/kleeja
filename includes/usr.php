@@ -82,7 +82,7 @@ class usrcp
 	function normal ($name, $pass, $hashed = false, $expire, $loginadm = false)
 	{
 		global $SQL, $dbprefix, $config, $userinfo;
-		
+
 		$userinfo = array(
 							'id'		=> 0,
 							'group_id'	=> 2,
@@ -243,7 +243,7 @@ class usrcp
 	{
 		($hook = kleeja_run_hook('group_id_func_usr_class')) ? eval($hook) : null; //run hook
 		
-		return defined('GROUP_ID') ? USER_ID : false;
+		return defined('GROUP_ID') ? GROUP_ID : false;
 	}
 
 	/*
@@ -446,7 +446,7 @@ class usrcp
 
 		#to make sure
 		$userinfo = array(
-							'id'		=> 0,
+							'id'		=> -1,
 							'group_id'	=> 2,
 			);
 
@@ -494,6 +494,12 @@ class usrcp
 			{
 				return $user_data;
 			}
+		}
+		else
+		{
+			#guest
+			define('USER_ID', $userinfo['id']);
+			define('GROUP_ID', $userinfo['group_id']);
 		}
 
 		return false; //nothing

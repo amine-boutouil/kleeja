@@ -78,3 +78,4 @@
 
 ============= 1.5 beta-2 fixes ================
 [x] fix bug related to group_id [file inputs stay same] (reported by: night-dream)
+[x] fix bug when decoding = '', also no more 'file existed before' msg (reported by: WeAraBs.Net) 

@@ -253,11 +253,11 @@ else
 	include (PATH . 'includes/KljUploader.php');
 	$kljup	= new KljUploader;
 }
-	
+
 //fix intregation problems
 if(empty($script_encoding))
 {
-	$script_encoding = 'widnows-1256';
+	$script_encoding = 'windows-1256';
 }
 
 // start classes ..

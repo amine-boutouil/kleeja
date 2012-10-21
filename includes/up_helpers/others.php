@@ -118,11 +118,16 @@ function change_filename_decoding($filename, $i_loop, $ext, $decoding_type)
 		$extra	= substr($extra, 0, 10);
 		$return	= $filename . $extra . $i_loop . "." . $ext;
 	}
+	# exists before, change it a little
+	if($decoding_type == 'exists')
+	{
+		$return = substr($filename, 0, -(strlen($ext)+1)) . '_' . substr(md5($rand . time() . $i_loop), rand(0, 20), 5) . '.' . $ext;
+	}
 	#nothing
 	else
 	{
-		$filename = substr($filename, 0, -(strlen($ext)-1));
-		$return = $filename . preg_replace('/[,.?\/*&^\\\$%#@()_!|"\~\'><=+}{; ]/', '-', $filename) . '.' . $ext;
+		$filename = substr($filename, 0, -(strlen($ext)+1));
+		$return = preg_replace('/[,.?\/*&^\\\$%#@()_!|"\~\'><=+}{; ]/', '-', $filename) . '.' . $ext;
 		$return = preg_replace('/-+/', '-', $return);
 	}
 
@@ -134,7 +139,7 @@ function change_filename_decoding($filename, $i_loop, $ext, $decoding_type)
 /**
  * Change the file name depend on used templates {rand:..} {date:..}
  */
-function change_filename_templates($filesname)
+function change_filename_templates($filename)
 {
 	#random number...
 	if (preg_match("/{rand:([0-9]+)}/i", $filename, $m))

@@ -172,6 +172,12 @@ class KljUploader
 			# loop the uploaded files
 			for($i=0; $i<=$this->filesnum; $i++)
 			{
+				//no file!
+				if(empty($_FILES['file_' . $i . '_']['tmp_name']))
+				{
+					continue;
+				}
+
 				# file name
 				$this->filename = isset($_FILES['file_' . $i . '_']['name']) ? $_FILES['file_' . $i . '_']['name'] : '';
 				# filename templates {rand:..}, {date:..}
@@ -184,17 +190,18 @@ class KljUploader
 				$this->sizet = !empty($_FILES['file_' . $i . '_']['size']) ?  $_FILES['file_' . $i . '_']['size'] : null;
 
 				# get the other filename, changed depend on kleeja settings
-				$this->filename2 =  change_filename_decoding($filename, $i, $this->typet, $this->decode);
+				$this->filename2 =  change_filename_decoding($this->filename, $i, $this->typet, $this->decode);
 	
 				($hook = kleeja_run_hook('kljuploader_process_func_uploading_type_1_loop')) ? eval($hook) : null; //run hook
 
-				# now, let process it
-				if(empty($_FILES['file_' . $i . '_']['tmp_name']))
+				# file exists before? change it a little
+				if(file_exists($this->folder . '/' . $this->filename2))
 				{
-					// if no file ? nothing to do ,, why ? becuase its multiple fields
+					$this->filename2 = change_filename_decoding($this->filename2, $i, $this->typet, 'exists');
 				}
-				# forbbiden extension
-				elseif(!in_array(strtolower($this->typet), array_keys($this->types)))
+
+				# now, let process it
+				if(!in_array(strtolower($this->typet), array_keys($this->types)))
 				{
 					# guest
 					if($this->id_user == '-1')
@@ -206,11 +213,6 @@ class KljUploader
 					{
 						$this->messages[] = array(sprintf($lang['FORBID_EXT'], $this->typet), 'index_err');
 					}
-				}
-				# file exists before? quit it
-				elseif(file_exists($this->folder . '/' . $this->filename2))
-				{
-					$this->messages[] = array(sprintf($lang['SAME_FILE_EXIST'], htmlspecialchars($_FILES['file_' . $i . '_']['name'])), 'index_err');
 				}
 				# bad chars in the filename
 				elseif(preg_match ("#[\\\/\:\*\?\<\>\|\"]#", $this->filename2))

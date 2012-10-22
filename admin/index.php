@@ -225,9 +225,11 @@ $adm_extensions_menu =	$adm_topmenu = array();
 //re oreder the items as alphapatic !
 sort($adm_extensions);
 $i = 0;
-
-// calls numbers
 $cr_time = LAST_VISIT > 0 ? LAST_VISIT : time() - 3600*12;
+
+
+// check calls and reports numbers
+if(isset($_GET['check_msgs']) || !isset($_GET['_ajax_'])):
 
 //small bubble system 
 //any item can show what is inside it as unread messages
@@ -242,16 +244,23 @@ foreach(array('call'=>'calls', 'reports'=>'reports') as $table=>$n)
 				);
 
 	$fetched = $SQL->fetch_array($SQL->build($query));
-	if($fetched['total_rows'])
-	{
-		$kbubbles[$n] = $fetched['total_rows'];
-	}
+
+	$kbubbles[$n] = $fetched['total_rows'];
+
 	$SQL->freeresult();
+}
+
+#if ajax, echo differntly
+if(isset($_GET['check_msgs']))
+{
+	$SQL->close();
+	exit($kbubbles['calls'] . '::' . $kbubbles['reports']);
 }
 
 //add your own bubbles here
 ($hook = kleeja_run_hook('kbubbles_admin_page')) ? eval($hook) : null; //run hook 
 
+endif;
 
 foreach($adm_extensions as $m)
 {
@@ -277,7 +286,7 @@ foreach($adm_extensions as $m)
 										'confirm'	=> (@in_array($m, $ext_confirm)) ? true : false,
 										'current'	=> ($s == $go_to) ? true : false,
 										'goto'		=> str_replace('a_configs', 'options', $s),
-										'kbubble'	=> in_array($m, array_keys($kbubbles)) ? '<span class="kbubbles">' . $kbubbles[$m] . '</span>' : ''
+										'kbubble'	=> in_array($m, array_keys($kbubbles)) ? '<span class="kbubbles" id="t_' . $m . '"' . ($kbubbles[$m] == 0 ? ' style="display:none"' : '') . '>' . $kbubbles[$m] . '</span>' : ''
 									);
 
 	//add another item to array for title='' in href or other thing
@@ -344,15 +353,15 @@ else
 	{
 		foreach($go_menu as $m=>$d)
 		{
-			if(!is_browser('mobile') || defined('IN_MOBILE'))
-			{
+			//if(!is_browser('mobile') || defined('IN_MOBILE'))
+			//{
 				$go_menu_html .= '<li class="' . ($d['current']?'active':'') .'" id="c_' . $d['goto'] . '"><a href="' . $d['link'] . '" onclick="javascript:get_kleeja_link(\'' . 
 							$d['link'] . '\', \'#content\', {\'current_id\':\'c_' . $d['goto'] . '\', \'current_class\':\'active\'' . ($d['confirm'] ? ', \'confirm\':true' : '') . '}); return false;">' . $d['name'] . '</a></li>';
-			}
-			else
-			{
-				$go_menu_html .= '<option '. ($d['current']?'selected="selected"':'') .'" value="'.$d['link'].'" '. ($d['confirm'] ? ' confirm="1" ' : '') . '>' . $d['name'] . '</option>';
-			}
+			//}
+			//else
+			//{
+				//$go_menu_html .= '<option '. ($d['current']?'selected="selected"':'') .'" value="'.$d['link'].'" '. ($d['confirm'] ? ' confirm="1" ' : '') . '>' . $d['name'] . '</option>';
+			//}
 		}
 	}
 	echo_ajax(1, $tpl->display($stylee), $go_menu_html);

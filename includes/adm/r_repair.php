@@ -203,6 +203,8 @@ if ($SQL->build($update_query))
 	$text .= '<li>' . $lang['REPAIRE_F_STAT'] . '</li>';
 }
 
+delete_cache('data_stats');
+
 $stylee = 'admin_info';
 
 break;
@@ -220,6 +222,7 @@ $end = sync_total_files(true, $start);
 #no end, then sync'ing is done...
 if(!$end)
 {
+	delete_cache('data_stats');
 	$text = sprintf($lang['SYNCING_DONE'], $lang['ALL_FILES']);
 	$link_to_go = basename(ADMIN_PATH) . '?cp=r_repair';
 }
@@ -249,6 +252,7 @@ $end = sync_total_files(false, $start);
 #no end, then sync'ing is done...
 if(!$end)
 {
+	delete_cache('data_stats');
 	$text = sprintf($lang['SYNCING_DONE'], $lang['ALL_IMAGES']);
 	$link_to_go = basename(ADMIN_PATH) . '?cp=r_repair';
 }
@@ -292,6 +296,7 @@ $update_query	= array(
 
 $result = $SQL->build($update_query);
 
+delete_cache('data_stats');
 $text = sprintf($lang['SYNCING'], $lang['USERS_ST']);
 $text .= '<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . basename(ADMIN_PATH) . '?cp=r_repair' .  '\');", 2000);</script>' . "\n";
 

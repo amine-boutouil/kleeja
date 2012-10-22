@@ -116,6 +116,29 @@ window.onhashchange = function () {
     }
 });
 
+//check for msg, reports every 5min
+// set timeout
+var tid = setTimeout(check_msg_and_reports, 240000);
+function check_msg_and_reports(){
+$.ajax({
+	url: './?check_msgs=1',
+	success: function(data) {
+		if(data.indexOf("::") != -1){
+			var nums = data.split("::");
+			if(nums[0] != 0){
+				$('#t_calls').html(nums[0]).css('display', 'inline');
+			}
+			if(nums[1] != 0){
+				$('#t_reports').html(nums[1]).css('display', 'inline');
+			}
+		}
+  }
+});
+ 
+  tid = setTimeout(check_msg_and_reports, 240000);
+}
+
+
 function get_kleeja_link(URL, ID, p)
 {
 	if(!p){

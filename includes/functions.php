@@ -1264,7 +1264,7 @@ function klj_clean_old($table, $for = 'all')
 
 	$query = array(
 					'SELECT'	=> 'f.id, f.time',
-					'FROM'		=> "{$dbprefix}" . $table . " f",
+					'FROM'		=> "`{$dbprefix}" . $table . "` f",
 					'ORDER BY'	=> 'f.id ASC',
 					'LIMIT'		=> '20',
 					);

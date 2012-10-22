@@ -157,8 +157,9 @@ $page_nums 		= $Pager->print_nums(basename(ADMIN_PATH)  . '?cp=' . basename(__fi
 //after submit
 if (isset($_POST['submit']))
 {
-	kleeja_admin_info(($SQL->affected() ? $lang['CALLS_UPDATED'] : $lang['NO_UP_CHANGE_S']),
-						true, '', true,  $action);
+	$text	= ($SQL->affected() ? $lang['REPORTS_UPDATED'] : $lang['NO_UP_CHANGE_S']);
+	$text	.= '<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . $action .  '\'); check_msg_and_reports();", 2000);</script>' . "\n";
+	kleeja_admin_info($text, true, '', true,  $action);
 }
 
 

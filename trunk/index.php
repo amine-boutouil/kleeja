@@ -86,7 +86,7 @@ if ($show_online)
 {
 	$usersnum	=	0;
 	$online_names	= array();
-	$timeout		= 100; //100 second  
+	$timeout		= 30; //30 second  
 	$timeout2		= time()-$timeout;  
 
 	//put another bot name
@@ -95,7 +95,7 @@ if ($show_online)
 	$query = array(
 					'SELECT'	=> 'u.name',
 					'FROM'		=> "{$dbprefix}users u",
-					'WHERE'		=> "u.last_visit > '$timeout2'"
+					'WHERE'		=> "u.last_visit > $timeout2"
 				);
 
 	($hook = kleeja_run_hook('qr_select_online_index_page')) ? eval($hook) : null; //run hook
@@ -109,7 +109,7 @@ if ($show_online)
 		$usersnum++; 
 		$online_names[$row['name']] = $row['name'];
 	}#while
-		
+
 	$SQL->freeresult($result);
 
 	//make names as array to print them in template

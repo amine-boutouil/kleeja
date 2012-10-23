@@ -1271,7 +1271,7 @@ function klj_clean_old($table, $for = 'all')
 
 	if($for != 'all')
 	{
-		$query['WHERE']	= "t.time < $days";
+		$query['WHERE']	= "f.time < $days";
 	}
 
 	($hook = kleeja_run_hook('qr_select_klj_clean_old_func')) ? eval($hook) : null; //run hook
@@ -1297,7 +1297,7 @@ function klj_clean_old($table, $for = 'all')
 	$SQL->freeresult($result);
 
 	$query_del	= array(
-							'DELETE'	=> "{$dbprefix}" . $table,
+							'DELETE'	=> "`" . $dbprefix . $table . "`",
 							'WHERE'	=> "id IN (" . implode(',', $ids) . ")"
 						);
 

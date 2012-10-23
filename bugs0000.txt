@@ -84,3 +84,4 @@
 [x] fix bugs wtih reserved table names, also many other SQL queries to be compatible with last mysql version (reported by: the_traveller)
 [x] fix bugs at calls+reports where when you delete items, counter doesnt change (reported by: WeAraBs.Net)
 [x] show online users who where active last 30 seconds, was 100 seoncds !  (reported by: WeAraBs.Net)
+[x] fix unkown t.time sql error [functions.php] (reported by: mohmedkasem)

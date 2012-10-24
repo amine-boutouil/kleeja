@@ -85,3 +85,4 @@
 [x] fix bugs at calls+reports where when you delete items, counter doesnt change (reported by: WeAraBs.Net)
 [x] show online users who where active last 30 seconds, was 100 seoncds !  (reported by: WeAraBs.Net)
 [x] fix unkown t.time sql error [functions.php] (reported by: mohmedkasem)
+[x] fix bug when user delete files from his folder then redirect it to wrong url (reported by: 	mohmedkasem)

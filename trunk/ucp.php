@@ -306,7 +306,7 @@ switch ($_GET['go'])
         $stylee	= 'fileuser';
 		$H_FORM_KEYS = kleeja_add_form_key('fileuser');
 
-		$user_id_get	= isset($_GET['id']) ? intval($_GET['id']) : null;
+		$user_id_get	= isset($_GET['id']) ? intval($_GET['id']) : false;
 		$user_id		= (!$user_id_get && $usrcp->id()) ? $usrcp->id() : $user_id_get;
 		$user_himself	= $usrcp->id() == $user_id;
 		$action			= $config['siteurl'] . 'ucp.php?go=fileuser';
@@ -365,9 +365,9 @@ switch ($_GET['go'])
 		$Pager			= new SimplePager($perpage,$nums_rows,$currentPage);
 		$start			= $Pager->getStartRow();
 
-		$your_fileuser	= $config['siteurl'] . ($config['mod_writer'] ? 'fileuser-' . dechex($usrcp->id()) . '.html' : 'ucp.php?go=fileuser&amp;id=' .  $usrcp->id());
+		$your_fileuser	= $config['siteurl'] . ($config['mod_writer'] ? 'fileuser-' . $usrcp->id() . '.html' : 'ucp.php?go=fileuser&amp;id=' .  $usrcp->id());
 		$total_pages	= $Pager->getTotalPages(); 
-		$linkgoto		= $config['siteurl'] . ($config['mod_writer'] ?  'fileuser-' . $user_id : 'ucp.php?go=fileuser&amp;id=' . $user_id);
+		$linkgoto		= $config['siteurl'] . ($config['mod_writer'] ?  'fileuser-' . $user_id  . '.html' : 'ucp.php?go=fileuser&amp;id=' . $user_id);
 		$page_nums		= $Pager->print_nums($linkgoto);
  
 		$no_results = true;

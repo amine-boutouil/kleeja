@@ -127,7 +127,7 @@ $install_sqls['config'] = "
 CREATE TABLE `{$dbprefix}config` (
   `name` varchar(255) collate utf8_bin NOT NULL,
   `value` varchar(255) collate utf8_bin NOT NULL,
-  `option` mediumtext collate utf8_bin  NOT NULL DEFAULT '',
+  `option` mediumtext collate utf8_bin  NOT NULL,
   `display_order` int(10)  NOT NULL DEFAULT '1',
   `type` varchar(20) NULL DEFAULT 'other',
   `plg_id` int(11) NOT NULL DEFAULT '0',

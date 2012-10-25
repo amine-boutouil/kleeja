@@ -63,9 +63,9 @@ $update_sqls['configs_2_groups'] = "UPDATE  `{$dbprefix}config` SET  `type` =  '
 
 foreach($config_values as $m=>$t)
 {
-	if($t[4] == 'groups')
+	if($t[4] === 'groups')
 	{
-		$update_sqls['groups_data_' . $t[0]] = "INSERT INTO `{$dbprefix}groups_data` (`name`, `value`, `group_id`) VALUES ('" . $m[0] . "', '" . $m[1] . "', 1), ('" . $m[0] . "', '" . $m[1] . "', 2), ('" . $m[0] . "', '" . $m[1] . "', 3);";
+		$update_sqls['groups_data_' . $t[0]] = "INSERT INTO `{$dbprefix}groups_data` (`name`, `value`, `group_id`) VALUES ('" . $t[0] . "', '" . $t[1] . "', 1), ('" . $t[0] . "', '" . $t[1] . "', 2), ('" . $t[0] . "', '" . $t[1] . "', 3);";
 	}
 }
 

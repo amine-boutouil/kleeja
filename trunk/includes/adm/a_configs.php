@@ -181,6 +181,13 @@ while($row=$SQL->fetch_array($result))
 			{
 				$new['siteurl'] .= '/';
 			}
+			
+			if($config['siteurl'] != $new['siteurl'])
+			{
+				#when site url changed, cookies will be currptued !
+				//update_config('cookie_path', '');
+				unset($_GET['_ajax_']);
+			}
 		}
 
 		($hook = kleeja_run_hook('after_submit_adm_config')) ? eval($hook) : null; //run hook

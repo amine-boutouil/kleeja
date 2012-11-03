@@ -88,3 +88,7 @@
 [x] Fix bug that inserting empty values to groups_data at upgrading (reported by:  sadiq6210)
 [x] Fix bug when submitting options page, it return you to acp home (reported by: محمد القرادي)
 [x] Default style support mobile now (reported by: Elite-Ar.com) 
+[x] Fix bug with password reset (reported by: الـصـاعـقـة)
+[x] Improve send_mail function to be compatible with many mail providers
+[x] Fix bug when Kleeja doesnt record the last time search engine visited (reported by: Arabs up) 
+[x] Improve browsing images by disabling the page effects while you in images control page

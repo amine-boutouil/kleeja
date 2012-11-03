@@ -196,12 +196,14 @@ function get_kleeja_link(URL, ID, p)
 				}
 
 				$(ID).removeClass('show_less');
-				$(ID).fadeIn(100);
-
-				if($('body').scrollTop() > 0 && $('body').scrollTop() > 200){
-					$('body').animate({scrollTop:0}, 'slow');
-				} else if($('html').scrollTop() > 0 && $('html').scrollTop() > 230){
-					$('html').animate({scrollTop:0}, 'slow');
+				$(ID).fadeIn(50);
+				
+				if(URL.indexOf('img_ctrl') == -1){
+					if($('body').scrollTop() > 0 && $('body').scrollTop() > 200){
+						$('body').animate({scrollTop:0}, 'slow');
+					} else if($('html').scrollTop() > 0 && $('html').scrollTop() > 230){
+						$('html').animate({scrollTop:0}, 'slow');
+					}
 				}
 
 				if(p['gomenu_id']) {

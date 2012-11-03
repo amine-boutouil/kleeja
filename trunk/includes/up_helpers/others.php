@@ -108,15 +108,15 @@ function change_filename_decoding($filename, $i_loop, $ext, $decoding_type)
 	{
 		list($usec, $sec) = explode(" ", microtime());
 		$extra = str_replace('.', '', (float)$usec + (float)$sec);
-		$return = substr($filename, 0, -(strlen($ext)+1)) . $extra . $i_loop . '.' . $ext;
+		$return = $extra . $i_loop . '.' . $ext;
 	}
 	# md5
 	elseif($decoding_type == "md5")
 	{
 		list($usec, $sec) = explode(" ", microtime());
-		$extra	= md5(((float)$usec + (float)$sec));
-		$extra	= substr($extra, 0, 10);
-		$return	= substr($filename, 0, -(strlen($ext)+1)) . $extra . $i_loop . "." . $ext;
+		$extra	= md5(((float)$usec + (float)$sec) . $filename);
+		$extra	= substr($extra, 0, 12);
+		$return	= $extra . $i_loop . "." . $ext;
 	}
 	# exists before, change it a little
 	elseif($decoding_type == 'exists')

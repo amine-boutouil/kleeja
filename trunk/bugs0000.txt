@@ -77,12 +77,14 @@
 [x] fix bugs at o_langs page, where you can not update && specific language doesnt stay after submitting 
 
 ============= 1.5 beta-2 fixes ================
-[x] fix bug related to group_id [file inputs stay the same] (reported by: night-dream)
-[x] fix bug when decoding = '', also no more 'file existed before' msg (reported by: WeAraBs.Net) 
-[x] fix bug when you re-sync [images+files+sizes] but stats still the same !
-[x] fix bugs wtih reserved table names, also many other SQL queries to be compatible with last mysql version (reported by: the_traveller)
-[x] fix bugs at calls+reports where when you delete items, counter doesnt change (reported by: WeAraBs.Net)
-[x] show online users who where active last 30 seconds, was 100 seoncds !  (reported by: WeAraBs.Net)
-[x] fix unkown t.time sql error [functions.php] (reported by: mohmedkasem)
-[x] fix bug when user delete files from his folder then redirect it to wrong url (reported by: 	mohmedkasem)
-[x] fix bug that inserting empty values to groups_data at upgrading (reported by:  sadiq6210)
+[x] Fix bug related to group_id [file inputs stay the same] (reported by: night-dream)
+[x] Fix bug when decoding = '', also no more 'file existed before' msg (reported by: WeAraBs.Net) 
+[x] Fix bug when you re-sync [images+files+sizes] but stats still the same !
+[x] Fix bugs wtih reserved table names, also many other SQL queries to be compatible with last mysql version (reported by: the_traveller)
+[x] Fix bugs at calls+reports where when you delete items, counter doesnt change (reported by: WeAraBs.Net)
+[x] Show online users who where active last 30 seconds, was 100 seoncds !  (reported by: WeAraBs.Net)
+[x] Fix unkown t.time sql error [functions.php] (reported by: mohmedkasem)
+[x] Fix bug when user delete files from his folder then redirect it to wrong url (reported by: 	mohmedkasem)
+[x] Fix bug that inserting empty values to groups_data at upgrading (reported by:  sadiq6210)
+[x] Fix bug when submitting options page, it return you to acp home (reported by: محمد القرادي)
+[x] Default style support mobile now (reported by: Elite-Ar.com) 

@@ -251,7 +251,7 @@ if (isset($_POST['submit']))
 	else
 	{
 	*/
-	
+
 	#delete cache ..
 	delete_cache('data_config');
 
@@ -266,6 +266,6 @@ if (isset($_POST['submit']))
 		}
 	}
 
-	kleeja_admin_info($lang['CONFIGS_UPDATED'], true, '', true,  basename(ADMIN_PATH) . '?cp=options');
+	kleeja_admin_info($lang['CONFIGS_UPDATED'], true, '', true,  basename(ADMIN_PATH) . '?cp=options', 3);
 	//}
 }#submit

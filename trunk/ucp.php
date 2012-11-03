@@ -704,7 +704,6 @@ switch ($_GET['go'])
 			//no else .. just do nothing cuz it's wrong and wrong mean spams !
 			redirect($config['siteurl'], true, true);
 			exit;//i dont trust functions :)
-
 		}
 
 		//logon before ?
@@ -716,7 +715,7 @@ switch ($_GET['go'])
 
 		//_post
 		$t_rmail = isset($_POST['rmail']) ? htmlspecialchars($_POST['rmail']) : ''; 
-		
+
 		//no submit
 		if (!isset($_POST['submit']))
 		{
@@ -767,7 +766,7 @@ switch ($_GET['go'])
 				$row = $SQL->fetch_array($result);
 
 				//generate password
-				$chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+				$chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
 				$newpass = '';
 				for ($i = 0; $i < 7; ++$i)
 				{
@@ -789,7 +788,6 @@ switch ($_GET['go'])
 							
 				($hook = kleeja_run_hook('qr_update_newpass_get_pass')) ? eval($hook) : null; //run hook
 				$SQL->build($update_query);
-				
 
 				$SQL->freeresult($result);
 

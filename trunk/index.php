@@ -31,13 +31,12 @@ if(empty($d_groups[2]['exts']) && !$usrcp->name())
 //
 //Type of how will decoding name ..
 //
-$decode = '';
-switch((int) $config['decode']):
+$decode = 0;
+switch(intval($config['decode'])):
 	case 1:	$decode = 'time';	break;
 	case 2:	$decode = 'md5';	break;
 	default:
 		//add you own decode
-		$decode = '0';
 		($hook = kleeja_run_hook('decode_config_default')) ? eval($hook) : null; //run hook
 	break;
 endswitch;

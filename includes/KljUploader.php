@@ -59,7 +59,7 @@ class KljUploader
 	var $name_for_url;
 
 	# decoding type: md5 or time or no
-	var $decode;
+	var $decode = 0;
 
 	# current user id, -1 = guest
 	var $id_user;
@@ -181,17 +181,16 @@ class KljUploader
 
 				# file name
 				$this->filename = isset($_FILES['file_' . $i . '_']['name']) ? $_FILES['file_' . $i . '_']['name'] : '';
-				# filename templates {rand:..}, {date:..}
-				$this->filename = change_filename_templates($this->filename);
 				# add the file to the check-list
 				$check .= isset($_FILES['file_' . $i . '_']['name']) ? $_FILES['file_' . $i . '_']['name'] : '';
 				# get the extension of file
 				$this->typet = strtolower(array_pop(explode('.', $_FILES['file_' . $i . '_']['name'])));
 				# them the size
 				$this->sizet = !empty($_FILES['file_' . $i . '_']['size']) ?  $_FILES['file_' . $i . '_']['size'] : null;
-
 				# get the other filename, changed depend on kleeja settings
-				$this->filename2 = trim($var->prefix) . change_filename_decoding($this->filename, $i, $this->typet, $this->decode);
+				$this->filename2 = change_filename_decoding($this->filename, $i, $this->typet, $this->decode);
+				# filename templates {rand:..}, {date:..}
+				$this->filename2 = change_filename_templates(trim($this->prefix) . $this->filename2);
 
 				($hook = kleeja_run_hook('kljuploader_process_func_uploading_type_1_loop')) ? eval($hook) : null; //run hook
 
@@ -242,14 +241,14 @@ class KljUploader
 
 					#if this is listed as live-ext from Kleeja settings 
 					$live_exts	= array_map('trim', explode(',', $config['imagefolderexts']));
-					if(in_array(strtolower($this->typet), $live_exts) && intval($this->decode) == 0)
+					if(in_array(strtolower($this->typet), $live_exts) && $this->decode === 0)
 					{
 						# live-exts folder, if empty use default folder
 						$this->folder = trim($config['imagefolder']) == '' ? trim($config['foldername']) : trim($config['imagefolder']);
 						# change to time decoding for filename
 						if((int) $config['imagefoldere'])
 						{
-							$this->filename2 = change_filename_decoding($this->filename, $i, $this->typet, 'time');
+							$this->filename2 = change_filename_decoding($this->filename2, $i, $this->typet, 'time');
 						}
 					}
 
@@ -305,7 +304,8 @@ class KljUploader
 					$this->typet = strtolower($this->typet[count($this->typet)-1]);
 				}
 				# change to another filename depend on kleeja settings
-				$this->filename2 = trim($var->prefix) . change_filename_decoding($filename, $i, $this->typet, $this->decode);
+				$this->filename2 = change_filename_decoding($filename, $i, $this->typet, $this->decode);
+				$this->filename2 = change_filename_templates(trim($this->prefix) . $this->filename2);
 
 				($hook = kleeja_run_hook('kljuploader_process_func_uploading_type_2_loop')) ? eval($hook) : null; //run hook
 
@@ -331,14 +331,14 @@ class KljUploader
 
                     #if this is listed as live-ext from Kleeja settings 
 					$live_exts	= explode(',', $config['imagefolderexts']);
-					if(in_array(strtolower($this->typet), $live_exts))
+					if(in_array(strtolower($this->typet), $live_exts) && $this->decode === 0)
 					{
 						# live-exts folder, if empty use default folder
 						$this->folder = trim($config['imagefolder']) == '' ? trim($config['foldername']) : trim($config['imagefolder']);
 						# change to time decoding for filename
 						if((int) $config['imagefoldere'])
 						{
-							$this->filename2 = change_filename_decoding($this->filename, $i, $this->typet, 'time');
+							$this->filename2 = change_filename_decoding($this->filename2, $i, $this->typet, 'time');
 						}
 					}
                             

@@ -667,11 +667,13 @@ switch ($_GET['go'])
 		$ERRORS = false;
 
 		//after sent mail .. come here 
+		//example: http://www.moyad.com/up/ucp.php?go=get_pass&activation_key=1af3405662ec373d672d003cf27cf998&uid=1 
+		#
 		if(isset($_GET['activation_key']) && isset($_GET['uid']))
 		{
 			($hook = kleeja_run_hook('get_pass_activation_key')) ? eval($hook) : null; //run hook
 
-			$h_key = preg_replace('![^a-z0-5]!', '', $_GET['activation_key']);
+			$h_key = preg_replace('![^a-z0-9]!', '', $_GET['activation_key']);
 			$u_id = intval($_GET['uid']);
 
 			#if it's empty ? 
@@ -785,7 +787,7 @@ switch ($_GET['go'])
 								'SET'	=> "new_password = '" . $SQL->escape($pass) . "', hash_key = '" . $hash_key . "'",
 								'WHERE'	=> 'id=' . $row['id'],
 							);
-							
+
 				($hook = kleeja_run_hook('qr_update_newpass_get_pass')) ? eval($hook) : null; //run hook
 				$SQL->build($update_query);
 

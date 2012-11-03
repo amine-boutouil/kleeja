@@ -32,29 +32,29 @@ class KljUploader
 	var $folder;
 
 	# number of fields
-    var $filesnum;
-    
-    # allowed file types
+	var $filesnum;
+
+	# allowed file types
 	var $types;
 
 	# current file name
-    var $filename;
-    
-    # current file name after we change it
+	var $filename;
+
+	# current file name after we change it
 	var $filename2;
 
-    # total uploaded files
+	# total uploaded files
 	var $total = 0;
 
 	# current file extension, aka type
 	var $typet;
-	
+
 	# current file size
 	var $sizet;
-	
+
 	# MySQL insert-id for current file
 	var $id_for_url;
-	
+
 	# orginal file name, this is exactly what in upload folder
 	var $name_for_url;
 
@@ -160,7 +160,6 @@ class KljUploader
 		# add your uploading_type through the hook
 		($hook = kleeja_run_hook('kljuploader_process_func_uploading_type_later')) ? eval($hook) : null; //run hook
 
-		
 		# do upload
 		switch($uploading_type)
 		{
@@ -191,7 +190,7 @@ class KljUploader
 
 				# get the other filename, changed depend on kleeja settings
 				$this->filename2 =  change_filename_decoding($this->filename, $i, $this->typet, $this->decode);
-	
+
 				($hook = kleeja_run_hook('kljuploader_process_func_uploading_type_1_loop')) ? eval($hook) : null; //run hook
 
 				# file exists before? change it a little
@@ -239,9 +238,9 @@ class KljUploader
 				{
 					($hook = kleeja_run_hook('kljuploader_process_func_uploading_type_1_loop_upload')) ? eval($hook) : null; //run hook	
 
-                     #if this is listed as live-ext from Kleeja settings 
-					$live_exts	= explode(',', $config['imagefolderexts']);
-					if(in_array(strtolower($this->typet), $live_exts))
+					#if this is listed as live-ext from Kleeja settings 
+					$live_exts	= array_map('trim', explode(',', $config['imagefolderexts']));
+					if(in_array(strtolower($this->typet), $live_exts) && intval($this->decode) == 0)
 					{
 						# live-exts folder, if empty use default folder
 						$this->folder = trim($config['imagefolder']) == '' ? trim($config['foldername']) : trim($config['imagefolder']);
@@ -251,7 +250,7 @@ class KljUploader
 							$this->filename2 = change_filename_decoding($this->filename, $i, $this->typet, 'time');
 						}
 					}
-				
+
 					# now, upload the file
 					$file = move_uploaded_file($_FILES['file_' . $i . '_']['tmp_name'], $this->folder . "/" . $this->filename2);
 
@@ -273,7 +272,6 @@ class KljUploader
 			}
 
 			break;
-
 
 
 			#uploading from a url text-input

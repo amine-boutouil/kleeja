@@ -198,31 +198,45 @@ function _sm_mk_utf8($text)
 	return "=?UTF-8?B?" . kleeja_base64_encode($text) . "?=";
 }
 
-function send_mail($to, $body, $subject, $fromaddress, $fromname,$bcc='')
+function send_mail($to, $body, $subject, $fromaddress, $fromname, $bcc='')
 {
 	$eol = "\r\n";
 	$headers = '';
-	$headers .= 'From: ' . _sm_mk_utf8($fromname) . ' <' . $fromaddress . '>' . $eol;
-	$headers .= 'Sender: ' . _sm_mk_utf8($fromname) . ' <' . $fromaddress . '>' . $eol;
+	$headers .= 'From: ' . _sm_mk_utf8(trim(preg_replace('#[\n\r:]+#s', '', $fromname))) . ' <' . trim(preg_replace('#[\n\r:]+#s', '', $fromaddress)) . '>' . $eol;
+	//$headers .= 'Sender: ' . _sm_mk_utf8($fromname) . ' <' . $fromaddress . '>' . $eol;
+	$headers .= 'MIME-Version: 1.0' . $eol;
+	$headers .= 'Content-transfer-encoding: 8bit' . $eol; // 7bit
+	$headers .= 'Content-Type: text/plain; charset=utf-8' . $eol; // format=flowed
+	$headers .= 'X-Mailer: Kleeja Mailer' . $eol;
+	$headers .= 'Reply-To: ' . _sm_mk_utf8(trim(preg_replace('#[\n\r:]+#s', '', $fromname))) . ' <' . trim(preg_replace('#[\n\r:]+#s', '', $fromaddress)) . '>' . $eol;
+	//$headers .= 'Return-Path: <' . $fromaddress . '>' . $eol;
 	if (!empty($bcc)) 
 	{
-		$headers .= 'Bcc: ' . $bcc . $eol;
+		$headers .= 'Bcc: ' . trim(preg_replace('#[\n\r:]+#s', '', $bbc)) . $eol;
 	}
-	$headers .= 'Reply-To: ' . $fromaddress . $eol;
-	$headers .= 'Return-Path: <' . $fromaddress . '>' . $eol;
-	$headers .= 'MIME-Version: 1.0' . $eol;
-	$headers .= 'Message-ID: <' . md5(uniqid(time())) . '@' . _sm_mk_utf8($fromname) . '>' . $eol;
-	$headers .= 'Date: ' . date('r') . $eol;
-	$headers .= 'Content-Type: text/plain; charset=UTF-8' . $eol; // format=flowed
-	$headers .= 'Content-Transfer-Encoding: 8bit' . $eol; // 7bit
-	$headers .= 'X-Priority: 3' . $eol;
-	$headers .= 'X-MSMail-Priority: Normal' . $eol;
-	$headers .= 'X-Mailer: : PHP v' . phpversion() . $eol;
-	$headers .= 'X-MimeOLE: kleeja' . $eol;
+	//$headers .= 'Message-ID: <' . md5(uniqid(time())) . '@' . _sm_mk_utf8($fromname) . '>' . $eol;
+	//$headers .= 'Date: ' . date('r') . $eol;
+	
+	//$headers .= 'X-Priority: 3' . $eol;
+	//$headers .= 'X-MSMail-Priority: Normal' . $eol;
+	
+	//$headers .= 'X-MimeOLE: kleeja' . $eol;
 
 	($hook = kleeja_run_hook('kleeja_send_mail')) ? eval($hook) : null; //run hook
 
-	$mail_sent = @mail($to, _sm_mk_utf8($subject), preg_replace("#(?<!\r)\n#s", "\n", $body), $headers);
+	$body = str_replace(array("\n", "\0"), array("\r\n", ''), $body);
+
+	// Change the linebreaks used in the headers according to OS
+	if (strtoupper(substr(PHP_OS, 0, 3)) == 'MAC')
+	{
+		$headers = str_replace("\r\n", "\r", $headers);
+	}
+	else if (strtoupper(substr(PHP_OS, 0, 3)) != 'WIN')
+	{
+		$headers = str_replace("\r\n", "\n", $headers);
+	}
+
+	$mail_sent = @mail(trim(preg_replace('#[\n\r]+#s', '', $to)), _sm_mk_utf8(trim(preg_replace('#[\n\r]+#s', '', $subject))), $body, $headers);
 
 	return $mail_sent;
 }

@@ -73,6 +73,8 @@ class KljUploader
 	# check if user is administrator, true = yes
 	var $user_is_adm = false;
 
+	#prefix of filename
+	var $prefix = '';
 
 	/**
 	 * Processing current upload, aka 'after user click upload button to upload his files'
@@ -189,7 +191,7 @@ class KljUploader
 				$this->sizet = !empty($_FILES['file_' . $i . '_']['size']) ?  $_FILES['file_' . $i . '_']['size'] : null;
 
 				# get the other filename, changed depend on kleeja settings
-				$this->filename2 =  change_filename_decoding($this->filename, $i, $this->typet, $this->decode);
+				$this->filename2 = trim($var->prefix) . change_filename_decoding($this->filename, $i, $this->typet, $this->decode);
 
 				($hook = kleeja_run_hook('kljuploader_process_func_uploading_type_1_loop')) ? eval($hook) : null; //run hook
 
@@ -303,7 +305,7 @@ class KljUploader
 					$this->typet = strtolower($this->typet[count($this->typet)-1]);
 				}
 				# change to another filename depend on kleeja settings
-				$this->filename2 = change_filename_decoding($filename, $i, $this->typet, $this->decode);
+				$this->filename2 = trim($var->prefix) . change_filename_decoding($filename, $i, $this->typet, $this->decode);
 
 				($hook = kleeja_run_hook('kljuploader_process_func_uploading_type_2_loop')) ? eval($hook) : null; //run hook
 

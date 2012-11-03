@@ -47,7 +47,7 @@ endswitch;
 //
 $kljup->decode		= $decode;
 $kljup->folder		= $config['foldername'];
-$kljup->filename	= $config['prefixname'];
+$kljup->prefix		= $config['prefixname'];
 $kljup->action		= $action = "index.php";
 $kljup->filesnum	= $config['filesnum'];
 //--------------------- start user system part

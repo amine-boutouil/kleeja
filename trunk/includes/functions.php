@@ -26,23 +26,24 @@ function kleeja_detecting_bots()
 	global $SQL, $usrcp, $dbprefix, $config, $klj_session;
 
 	// get information .. 
-	$agent			= $SQL->escape($_SERVER['HTTP_USER_AGENT']);
+	$agent	= $SQL->escape($_SERVER['HTTP_USER_AGENT']);
+	$time	= time();
 
 	//for stats 
-	if (strstr($agent, 'Google'))
+	if (strpos($agent, 'Google') !== false)
 	{
 		$update_query = array(
 								'UPDATE'	=> "{$dbprefix}stats",
-								'SET'		=> "last_google='$time', google_num=google_num+1"
+								'SET'		=> "last_google=$time, google_num=google_num+1"
 							);
 		($hook = kleeja_run_hook('qr_update_google_lst_num')) ? eval($hook) : null; //run hook
 		$SQL->build($update_query);
 	}
-	elseif (strstr($agent, 'Bing'))
+	elseif (strpos($agent, 'Bing') !== false)
 	{
 		$update_query = array(
 								'UPDATE'	=> "{$dbprefix}stats",
-								'SET'		=> "last_bing='$time', bing_num=bing_num+1"
+								'SET'		=> "last_bing=$time, bing_num=bing_num+1"
 							);
 		($hook = kleeja_run_hook('qr_update_bing_lst_num')) ? eval($hook) : null; //run hook	
 		$SQL->build($update_query);

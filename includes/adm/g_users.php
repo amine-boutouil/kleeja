@@ -673,11 +673,17 @@ case 'group_acl':
 			}
 		}
 
+		if($req_group == 2 && in_array($row['acl_name'], array('access_fileuser', 'enter_acp')))
+		{
+			continue;
+		}
+
 		$acls[] = array(
-						'acl_title'	=> $lang['ACLS_' .  strtoupper($row['acl_name'])],
-						'acl_name'	=> $row['acl_name'],
-						'acl_can'	=> (int) $row['acl_can']
-			);
+							'acl_title'	=> $lang['ACLS_' .  strtoupper($row['acl_name'])],
+							'acl_name'	=> $row['acl_name'],
+							'acl_can'	=> (int) $row['acl_can']
+				);
+		
 	}
 	$SQL->freeresult($result);
 
@@ -788,7 +794,7 @@ case 'group_data':
 			$SQL->build($update_query);
 			continue;
 		}
-	
+
 		if($row['name'] == 'language')
 		{
 			//get languages
@@ -804,6 +810,12 @@ case 'group_data':
 				@closedir($dh);
 			}
 		}
+
+		if($req_group == 2 && in_array($row['name'], array('enable_userfile')))
+		{
+			continue;
+		}
+
 		$data[] = array(
 						'option'	=> '<div class="section">' . "\n" .  
 										"\t" . '<h3><label for="' . $row['name'] . '">' . (!empty($lang[strtoupper($row['name'])]) ? $lang[strtoupper($row['name'])] : $olang[strtoupper($row['name'])]) . '</label></h3>' . "\n" .

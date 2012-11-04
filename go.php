@@ -508,6 +508,87 @@ switch ($_GET['go'])
 
 	break;
 	
+	//
+	//this is a part of ACP, only admins can access this part of page
+	//
+	case 'resync':
+		
+		if(!user_can('enter_acp'))
+		{
+			kleeja_info($lang['HV_NOT_PRVLG_ACCESS']);
+			exit;
+		}
+
+		#get admin functions
+		include 'includes/functions_adm.php';
+		#get admin langauge
+		get_lang('acp');
+
+		switch($_GET['case']):
+		//
+		//re-sync total files number ..
+		//
+		case 'sync_files':
+
+		#no start ? or there 
+		$start = !isset($_GET['start']) ? false : intval($_GET['start']);
+
+		$end = sync_total_files(true, $start);
+
+		#no end, then sync'ing is done...
+		if(!$end)
+		{
+			delete_cache('data_stats');
+			$text = $title = sprintf($lang['SYNCING_DONE'], $lang['ALL_FILES']);
+			$link_to_go = './admin/?cp=r_repair#!cp=r_repair';
+		}
+		else
+		{
+			$text = $title = sprintf($lang['SYNCING'], $lang['ALL_FILES']) . ' (' . (!$start ? 0 : $start) . '->'  . (!$end  ? '?' : $end) . ')';
+			$link_to_go = './go.php?go=resync&case=sync_files&start=' . $end;
+		}
+
+		//to be sure !
+		$text .= '<script type="text/javascript"> setTimeout("location.href=\'' . $link_to_go .  '\';", 3000);</script>' . "\n";
+	
+		kleeja_info($text, $title, true, $link_to_go, 2);
+
+		break;
+
+
+		//
+		//re-sync total images number ..
+		//
+		case 'sync_images':
+
+		#no start ? or there 
+		$start = !isset($_GET['start']) ? false : intval($_GET['start']);
+
+		$end = sync_total_files(false, $start);
+
+		#no end, then sync'ing is done...
+		if(!$end)
+		{
+			delete_cache('data_stats');
+			$text = $title = sprintf($lang['SYNCING_DONE'], $lang['ALL_IMAGES']) . ' (' . (!$start ? 0 : $start) . '->' . (!$end  ? '?' : $end) . ')';
+			$link_to_go = './admin/?cp=r_repair#!cp=r_repair';
+		}
+		else
+		{
+			$text = $title = sprintf($lang['SYNCING'], $lang['ALL_IMAGES']);
+			$link_to_go = './go.php?go=resync&case=sync_images&start=' . $end;
+		}
+
+		//to be sure !
+		$text .= '<script type="text/javascript"> setTimeout("location.href=\'' . $link_to_go .  '\';", 3000);</script>' . "\n";
+	
+		kleeja_info($text, $title, true, $link_to_go, 2);
+
+		break;
+		endswitch;
+
+	break;
+	
 	
 	//
 	// Default , if you are a developer , you can embed your page here with this hook

@@ -53,8 +53,8 @@ $all_sizes = Customfile_size(get_actual_stats('sizes'));
 
 #links
 $del_cache_link		= basename(ADMIN_PATH) . '?cp=r_repair&amp;case=clearc&amp;' . $GET_FORM_KEY;
-$resync_files_link	= basename(ADMIN_PATH) . '?cp=r_repair&amp;case=sync_files&amp;' . $GET_FORM_KEY;
-$resync_images_link	= basename(ADMIN_PATH) . '?cp=r_repair&amp;case=sync_images&amp;' . $GET_FORM_KEY;
+$resync_files_link	= $config['siteurl'] . 'go.php?go=resync&amp;case=sync_files';
+$resync_images_link	= $config['siteurl'] . 'go.php?go=resync&amp;case=sync_images';
 $resync_users_link	= basename(ADMIN_PATH) . '?cp=r_repair&amp;case=sync_users&amp;' . $GET_FORM_KEY;
 $resync_sizes_link	= basename(ADMIN_PATH) . '?cp=r_repair&amp;case=sync_sizes&amp;' . $GET_FORM_KEY;
 $repair_tables_link	= basename(ADMIN_PATH) . '?cp=r_repair&amp;case=tables&amp;' . $GET_FORM_KEY;
@@ -204,65 +204,6 @@ if ($SQL->build($update_query))
 }
 
 delete_cache('data_stats');
-
-$stylee = 'admin_info';
-
-break;
-
-//
-//re-sync total files number ..
-//
-case 'sync_files':
-
-#no start ? or there 
-$start = !isset($_GET['start']) ? false : intval($_GET['start']);
-
-$end = sync_total_files(true, $start);
-
-#no end, then sync'ing is done...
-if(!$end)
-{
-	delete_cache('data_stats');
-	$text = sprintf($lang['SYNCING_DONE'], $lang['ALL_FILES']);
-	$link_to_go = basename(ADMIN_PATH) . '?cp=r_repair';
-}
-else
-{
-	$text = sprintf($lang['SYNCING'], $lang['ALL_FILES']) . '(' . $start . '->'  . $end . ')';
-	$link_to_go = basename(ADMIN_PATH) . '?cp=r_repair&case=sync_files&start=' . $end . '&' . $GET_FORM_KEY;
-}
-
-$text .= '<script type="text/javascript"> setTimeout("location.href=\'' . $link_to_go .  '\';", 2500);</script>' . "\n";
-
-$stylee = 'admin_info';
-
-break;
-
-
-//
-//re-sync total images number ..
-//
-case 'sync_images':
-
-#no start ? or there 
-$start = !isset($_GET['start']) ? false : intval($_GET['start']);
-
-$end = sync_total_files(false, $start);
-
-#no end, then sync'ing is done...
-if(!$end)
-{
-	delete_cache('data_stats');
-	$text = sprintf($lang['SYNCING_DONE'], $lang['ALL_IMAGES']) . '(' . $start . '->'  . $end . ')';
-	$link_to_go = basename(ADMIN_PATH) . '?cp=r_repair';
-}
-else
-{
-	$text = sprintf($lang['SYNCING'], $lang['ALL_IMAGES']);
-	$link_to_go = basename(ADMIN_PATH) . '?cp=r_repair&case=sync_images&start=' . $end . '&' . $GET_FORM_KEY;
-}
-
-$text .= '<script type="text/javascript"> setTimeout("location.href=\'' . $link_to_go .  '\';", 2500);</script>' . "\n";
 
 $stylee = 'admin_info';
 

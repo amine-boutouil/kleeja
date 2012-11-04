@@ -27,7 +27,7 @@
 -[x] Make sure that vb, phpbb integration work with the new group system !
 -[x] Try the group system with all siutations that may happin ?!!!
 -[-] Security situation page 
--[-] ACP firstpage !  
+-[x] ACP firstpage !  
 -[x] Test upgrades under any curcumstances, and avoids problems that happened before !
 -[x] images ACP -> search files from this IP,user
 -[-] files ACP -> search files from this IP,user

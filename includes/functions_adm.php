@@ -232,7 +232,7 @@ function sync_total_files($files = true, $start = false)
 	$max_id = (int) $v['max_file_id'];
 
 	#every time batch
-	$batch_size = 2000;
+	$batch_size = 1500;
 
 	#no start? start = min
 	$first_loop = !$start ? true : false;

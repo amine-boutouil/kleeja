@@ -228,7 +228,7 @@ if(!$end)
 }
 else
 {
-	$text = sprintf($lang['SYNCING'], $lang['ALL_FILES']);
+	$text = sprintf($lang['SYNCING'], $lang['ALL_FILES']) . '(' . $start . '->'  . $end . ')';
 	$link_to_go = basename(ADMIN_PATH) . '?cp=r_repair&case=sync_files&start=' . $end . '&' . $GET_FORM_KEY;
 }
 
@@ -253,7 +253,7 @@ $end = sync_total_files(false, $start);
 if(!$end)
 {
 	delete_cache('data_stats');
-	$text = sprintf($lang['SYNCING_DONE'], $lang['ALL_IMAGES']);
+	$text = sprintf($lang['SYNCING_DONE'], $lang['ALL_IMAGES']) . '(' . $start . '->'  . $end . ')';
 	$link_to_go = basename(ADMIN_PATH) . '?cp=r_repair';
 }
 else

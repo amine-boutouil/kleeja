@@ -248,7 +248,7 @@ function sync_total_files($files = true, $start = false)
 	$result	= $SQL->build($query);
 	$v		= $SQL->fetch($result);
 	$SQL->freeresult($result);
-	
+
 	$this_step_count = $v['num_files'];
 	if($this_step_count == 0)
 	{

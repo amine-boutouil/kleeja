@@ -232,7 +232,7 @@ else
 	$link_to_go = basename(ADMIN_PATH) . '?cp=r_repair&case=sync_files&start=' . $end . '&' . $GET_FORM_KEY;
 }
 
-$text .= '<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . $link_to_go .  '\');", 2000);</script>' . "\n";
+$text .= '<script type="text/javascript"> setTimeout("location.href=\'' . $link_to_go .  '\';", 2500);</script>' . "\n";
 
 $stylee = 'admin_info';
 
@@ -262,7 +262,7 @@ else
 	$link_to_go = basename(ADMIN_PATH) . '?cp=r_repair&case=sync_images&start=' . $end . '&' . $GET_FORM_KEY;
 }
 
-$text .= '<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . $link_to_go .  '\');", 2000);</script>' . "\n";
+$text .= '<script type="text/javascript"> setTimeout("location.href=\'' . $link_to_go .  '\';", 2500);</script>' . "\n";
 
 $stylee = 'admin_info';
 

@@ -170,7 +170,14 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 
 				if(!$hashed && !$loginadm)
 				{
-					$usrcp->kleeja_set_cookie('ulogu', $usrcp->en_de_crypt($row['user_id'] . '|' . $row['user_password'] . '|' . $expire . '|' . sha1(md5($config['h_key'] . $row['user_password']) .  $expire) . '|' . GROUP_ID . '|' . $user_y), $expire);
+					$usrcp->kleeja_set_cookie('ulogu', $usrcp->en_de_crypt(
+													$row['user_id'] . '|' . 
+													$row['user_password'] . '|' . 
+													$expire . '|' . 
+													sha1(md5($config['h_key'] . $row['user_password']) .  $expire) . '|' . 
+													GROUP_ID . '|' . 
+													$user_y
+											), $expire);
 				}
 
 				($hook = kleeja_run_hook('qr_while_usrdata_phpbb_usr_class')) ? eval($hook) : null; //run hook

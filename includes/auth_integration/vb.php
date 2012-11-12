@@ -150,10 +150,10 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 						if(!$loginadm)
 						{
 							define('USER_ID', $row['userid']);
-							define('GROUP_ID', $row['usergroupid'] == 6 ? 1 : 3);
+							define('GROUP_ID', ($row['usergroupid'] == 6 ? 1 : 3));
 							define('USER_NAME', empty($script_cp1256) || !$script_cp1256 ? $row['username'] : $usrcp->kleeja_utf8($row['username']));
 							define('USER_MAIL', $row['email']);
-							define('USER_ADMIN', $row['usergroupid'] == 6 ? 1 : 0);
+							define('USER_ADMIN', ($row['usergroupid'] == 6 ? 1 : 0));
 						}
 
 						//define('LAST_VISIT',$row['last_visit']);
@@ -165,7 +165,14 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 						$hash_key_expire = sha1(md5($config['h_key'] . $row['password']) .  $expire);
 						if(!$loginadm)
 						{
-							$usrcp->kleeja_set_cookie('ulogu', $usrcp->en_de_crypt($row['userid'] . '|' . $row['password'] . '|' . $expire . '|' . $hash_key_expire . '|' . GROUP_ID . '|' . $user_y), $expire);
+							$usrcp->kleeja_set_cookie('ulogu', $usrcp->en_de_crypt(
+													$row['userid'] . '|' . 
+													$row['password'] . '|' . 
+													$expire . '|' . 
+													$hash_key_expire . '|' . 
+													GROUP_ID . '|' . 
+													$user_y
+												), $expire);
 						}
 
 						($hook = kleeja_run_hook('qr_while_usrdata_vb_usr_class')) ? eval($hook) : null; //run hook

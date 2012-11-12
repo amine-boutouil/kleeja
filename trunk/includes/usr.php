@@ -466,7 +466,7 @@ class usrcp
 				 /*
 				 	!defined('IN_DOWNLOAD') 
 				 */
-				exit(print_r( @explode('|', $this->en_de_crypt($this->kleeja_get_cookie('ulogu'), 2))));
+				//exit(print_r( @explode('|', $this->en_de_crypt($this->kleeja_get_cookie('ulogu'), 2))));
 				if(user_can('enter_acp', $group_id))
 				{
 					$user_data = $this->data($user_id, $hashed_password, true, $expire_at);

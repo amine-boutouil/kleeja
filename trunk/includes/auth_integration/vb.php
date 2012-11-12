@@ -186,7 +186,9 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 					define('USER_NAME', empty($script_cp1256) || !$script_cp1256 ? $row1['username'] : $usrcp->kleeja_utf8($row1['username']));
 					define('USER_MAIL',$row1['email']);
 					define('USER_ADMIN',($row1['usergroupid'] == 6) ? 1 : 0);
+					define('GROUP_ID',($row1['usergroupid'] == 6) ? 1 : 3);
 					$userinfo = $row1;
+					$userinfo['group_id'] = GROUP_ID;
 				}
 			}
 		}#whil1

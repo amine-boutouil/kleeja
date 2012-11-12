@@ -122,7 +122,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 			
 		}
 
-		$SQLMS->freeresult($result);   
+		$SQLMS->freeresult($result); 
 		unset($pass);
 		$SQLMS->close();
 

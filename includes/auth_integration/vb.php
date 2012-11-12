@@ -159,7 +159,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 						//define('LAST_VISIT',$row['last_visit']);
 
 						$userinfo = $row;
-						$userinfo['group_id'] = GROUP_ID;
+						$userinfo['group_id'] =  ($row['usergroupid'] == 6 ? 1 : 3);
 						$user_y = kleeja_base64_encode(serialize(array('id'=>$row['userid'], 'name'=>USER_NAME, 'mail'=>$row['email'], 'last_visit'=>time())));
 						
 						$hash_key_expire = sha1(md5($config['h_key'] . $row['password']) .  $expire);
@@ -170,7 +170,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 													$row['password'] . '|' . 
 													$expire . '|' . 
 													$hash_key_expire . '|' . 
-													GROUP_ID . '|' . 
+													($row['usergroupid'] == 6 ? 1 : 3) . '|' . 
 													$user_y
 												), $expire);
 						}
@@ -195,7 +195,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 					define('USER_ADMIN',($row1['usergroupid'] == 6) ? 1 : 0);
 					define('GROUP_ID',($row1['usergroupid'] == 6) ? 1 : 3);
 					$userinfo = $row1;
-					$userinfo['group_id'] = GROUP_ID;
+					$userinfo['group_id'] = ($row1['usergroupid'] == 6 ? 1 : 3);
 				}
 			}
 		}#whil1

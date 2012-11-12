@@ -26,7 +26,7 @@ class usrcp
 	// this function like a traffic sign :)
 	function data ($name, $pass, $hashed = false, $expire = 86400, $loginadm = false)
 	{
-		global $config;
+		global $config, $userinfo;
 
 		//return user system to normal
 		if(defined('DISABLE_INTR') || $config['user_system'] == '' || empty($config['user_system']))
@@ -45,7 +45,9 @@ class usrcp
 			if(file_exists(PATH . 'includes/auth_integration/' . trim($config['user_system']) . '.php'))
 			{	
 				include_once (PATH . 'includes/auth_integration/' . trim($config['user_system']) . '.php');
-				return (kleeja_auth_login(trim($name), trim($pass), $hashed, $expire, $loginadm) ? true : false);
+				$login_status = kleeja_auth_login(trim($name), trim($pass), $hashed, $expire, $loginadm);
+				//exit($userinfo['group_id']);
+				return $login_status;
 			}
 		}
 
@@ -464,6 +466,7 @@ class usrcp
 				 /*
 				 	!defined('IN_DOWNLOAD') 
 				 */
+				exit(print_r( @explode('|', $this->en_de_crypt($this->kleeja_get_cookie('ulogu'), 2))));
 				if(user_can('enter_acp', $group_id))
 				{
 					$user_data = $this->data($user_id, $hashed_password, true, $expire_at);

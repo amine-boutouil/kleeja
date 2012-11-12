@@ -154,7 +154,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 				if(!$loginadm)
 				{
 					define('USER_ID', $row['user_id']);
-					define('GROUP_ID', ($row[$row_leve] == $admin_level ? 1 : 3));
+					define('GROUP_ID', ($row[$row_leve] == $admin_level ? '1' : '3'));
 					define('USER_NAME', $row['username']);
 					define('USER_MAIL',$row['user_email']);
 					if($row[$row_leve] == $admin_level)
@@ -164,7 +164,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 				}
 
 				$userinfo = $row;
-				$userinfo['group_id'] = GROUP_ID;
+				$userinfo['group_id'] = ($row[$row_leve] == $admin_level ? '1' : '3');
 
 				$user_y = kleeja_base64_encode(serialize(array('id'=>$row['user_id'], 'name'=>$row['username'], 'mail'=>$row['user_email'], 'last_visit'=>time())));
 
@@ -175,7 +175,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 													$row['user_password'] . '|' . 
 													$expire . '|' . 
 													sha1(md5($config['h_key'] . $row['user_password']) .  $expire) . '|' . 
-													GROUP_ID . '|' . 
+													($row[$row_leve] == $admin_level ? '1' : '3') . '|' . 
 													$user_y
 											), $expire);
 				}

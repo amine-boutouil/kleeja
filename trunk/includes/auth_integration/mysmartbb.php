@@ -102,23 +102,20 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 			if(!$loginadm)
 			{
 				define('USER_ID',$row['id']);
-				define('GROUP_ID', 3);
+				define('GROUP_ID', ($row['usergroup'] == 1 ? 1 : 3));
 				define('USER_NAME', $usrcp->kleeja_utf8($row['username']))
 				define('USER_MAIL',$row['email']);
-				define('USER_ADMIN',($row['usergroup'] == 1) ? 1 : 0);
+				define('USER_ADMIN',($row['usergroup'] == 1 ? 1 : 0));
 			}
 
 			$userinfo = $row;
+			$userinfo['group_id'] = GROUP_ID;
 			$user_y = kleeja_base64_encode(serialize(array('id'=>$row['id'], 'name'=>$usrcp->kleeja_utf8($row['username']), 'mail'=>$row['email'], 'last_visit'=>time())));
 
-			if(!$hashed)
+			$hash_key_expire = sha1(md5($config['h_key'] . $row['password']) .  $expire);
+			if(!$hashed && !$loginadm)
 			{
-				$hash_key_expire = sha1(md5($config['h_key'] . $row['password']) .  $expire);
-
-				if(!$loginadm)
-				{
-					$usrcp->kleeja_set_cookie('ulogu', $usrcp->en_de_crypt($row['id'] . '|' . $row['password'] . '|' . $expire . '|' . $hash_key_expire . '|' . $row['usergroup'] . '|' . $user_y), $expire);
-				}
+				$usrcp->kleeja_set_cookie('ulogu', $usrcp->en_de_crypt($row['id'] . '|' . $row['password'] . '|' . $expire . '|' . $hash_key_expire . '|' . GROUP_ID . '|' . $user_y), $expire);
 			}
 
 			($hook = kleeja_run_hook('qr_while_usrdata_mysbb_usr_class')) ? eval($hook) : null; //run hook

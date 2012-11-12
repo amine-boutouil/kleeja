@@ -16,6 +16,37 @@ if (!defined('IN_COMMON'))
 }
 
 
+# check entries functions 
+# to be added at 1.7 or later
+function ig($name)
+{
+	return isset($_GET[$name]) ? true : false;
+}
+
+function ip($name)
+{
+	return isset($_POST[$name]) ? true : false;
+}
+
+function _g($name, $type = 'str')
+{
+	if(isset($_GET[$name]))
+	{
+		return $type == 'str' ? htmlspecialchars($_GET[$name]) : intval($_GET[$name]);
+	}
+	return false;
+}
+
+function _p($name, $type = 'str')
+{
+	if(isset($_POST[$name]))
+	{
+		return $type == 'str' ? htmlspecialchars($_POST[$name]) : intval($_POST[$name]);
+	}
+	return false;
+}
+
+
 #function_exists('exif_read_data') ? 
 #http://www.developer.nokia.com/Community/Wiki/Extract_GPS_coordinates_from_digital_camera_images_using_PHP
 function get_gps_from_image($image_path)

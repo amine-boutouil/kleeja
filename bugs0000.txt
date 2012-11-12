@@ -65,7 +65,7 @@
 -[x] avater setting
 -[x] style for Fix.php file
 
-============== 1.5 beta-1 fixes ===============
+============== post-1.5 beta-1 fixes ===============
 [x] fix extra footer, when click no action ...
 [x] fix rules+extra html editor .. 
 [x] fix bug when add-config use other instead of 0 as a type for system configs.
@@ -76,7 +76,7 @@
 [x] fix bugs when deleting files.
 [x] fix bugs at o_langs page, where you can not update && specific language doesnt stay after submitting 
 
-============= 1.5 beta-2 fixes ================
+============= post-1.5 beta-2 fixes ================
 [x] Fix bug related to group_id [file inputs stay the same] (reported by: night-dream)
 [x] Fix bug when decoding = '', also no more 'file existed before' msg (reported by: WeAraBs.Net) 
 [x] Fix bug when you re-sync [images+files+sizes] but stats still the same !
@@ -93,5 +93,5 @@
 [x] Fix bug when Kleeja doesnt record the last time search engine visited (reported by: Arabs up) 
 [x] Improve browsing images by disabling the page effects while you in images control page
 [x] Improve resync performance .. now it's so smooth like a galaxy chocolate with a good taste coffee ..
-[x] Some options and ACLs excluded when you browsw Guest group, like enable_userfiles etc .. (reported by: @imn9or)
+[x] Some options and ACLs excluded when you browse Guest group, like enable_userfiles etc .. (reported by: @imn9or)
 

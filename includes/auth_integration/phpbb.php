@@ -99,7 +99,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 					'SELECT'	=> '*',
 					'FROM'		=> "`{$forum_prefix}users`",
 				);
-	
+
 	$query2['WHERE'] = $hashed ?  "user_id=" . intval($name) . "  AND user_password='" . $SQLBB->real_escape($pass) . "' " : "username_clean='" .  $SQLBB->real_escape(utf8_clean_string($name)) . "'";
 		
 	if($return_name)
@@ -154,18 +154,23 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 				if(!$loginadm)
 				{
 					define('USER_ID', $row['user_id']);
-					define('GROUP_ID', 3);
+					define('GROUP_ID', ($row[$row_leve] == $admin_level ? 1 : 3));
 					define('USER_NAME', $row['username']);
 					define('USER_MAIL',$row['user_email']);
-					define('USER_ADMIN',($row[$row_leve] == $admin_level) ? 1 : 0);
+					if($row[$row_leve] == $admin_level)
+					{
+						define('USER_ADMIN', true);
+					}
 				}
 
 				$userinfo = $row;
+				$userinfo['group_id'] = GROUP_ID;
+
 				$user_y = kleeja_base64_encode(serialize(array('id'=>$row['user_id'], 'name'=>$row['username'], 'mail'=>$row['user_email'], 'last_visit'=>time())));
 
 				if(!$hashed && !$loginadm)
 				{
-					$usrcp->kleeja_set_cookie('ulogu', $usrcp->en_de_crypt($row['user_id'] . '|' . $row['user_password'] . '|' . $expire . '|' . sha1(md5($config['h_key'] . $row['user_password']) .  $expire) . '|' . (defined('USER_ADMIN') ? '1': '0') . '|' . $user_y), $expire);
+					$usrcp->kleeja_set_cookie('ulogu', $usrcp->en_de_crypt($row['user_id'] . '|' . $row['user_password'] . '|' . $expire . '|' . sha1(md5($config['h_key'] . $row['user_password']) .  $expire) . '|' . GROUP_ID . '|' . $user_y), $expire);
 				}
 
 				($hook = kleeja_run_hook('qr_while_usrdata_phpbb_usr_class')) ? eval($hook) : null; //run hook

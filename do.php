@@ -80,11 +80,11 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 			{
 				if (isset($_GET['filename']))
 				{
-					$url_filex	= ($config['mod_writer']) ? $config['siteurl'] . "downexf-" . $fname2 . ".html" : $config['siteurl'] . "do.php?downexf=" . $fname;
+					$url_filex	= $config['mod_writer'] ? $config['siteurl'] . "downexf-" . $fname2 . ".html" : $config['siteurl'] . "do.php?downexf=" . $fname;
 				}
 				else
 				{
-					$url_filex	= ($config['mod_writer']) ? $config['siteurl'] . "downex-" . $id . ".html" : $config['siteurl'] . "do.php?downex=" . $id;
+					$url_filex	= $config['mod_writer'] ? $config['siteurl'] . "downex-" . $id . ".html" : $config['siteurl'] . "do.php?downex=" . $id;
 				}
 						
 				redirect($url_filex, false);
@@ -112,11 +112,11 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 	//add http reffer to session to prevent errors with some browsers ! 
 	if (isset($_GET['filename']))
 	{
-		$_SESSION['HTTP_REFERER'] = $config['siteurl'] . (($config['mod_writer']) ? "downloadf" . $fname . ".html" : "do.php?filename=" . $fname);
+		$_SESSION['HTTP_REFERER'] = $config['siteurl'] . ($config['mod_writer'] ? "downloadf" . $fname . ".html" : "do.php?filename=" . $fname);
 	}
 	else
 	{
-		$_SESSION['HTTP_REFERER'] = $config['siteurl'] . (($config['mod_writer']) ? "download" . $id . ".html" : "do.php?id=" . $id);
+		$_SESSION['HTTP_REFERER'] = $config['siteurl'] . ($config['mod_writer'] ? "download" . $id . ".html" : "do.php?id=" . $id);
 	}
 
 	// show style ...
@@ -128,7 +128,24 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 //
 //download file 
 //
-else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) || isset($_GET['thmb']) ||  isset($_GET['imgf']) || isset($_GET['thmbf']) || isset($_GET['downex']) || isset($_GET['downexf']))
+# guidline for _get variable names
+# down: [0-9], default, came from do.php?id=[0-9]
+# downf: [a-z0-9].[ext], came from do.php?filename=[a-z0-9].[ext]
+#
+# img: [0-9], default, direct from do.php?img=[0-9]
+# imgf: [a-z0-9].[ext], direct from do.php?imgf=[a-z0-9].[ext]
+#
+# thmb: [0-9], default, direct from do.php?thmb=[0-9]
+# thmbf: [a-z0-9].[ext], direct from do.php?thmbf=[a-z0-9].[ext]
+#
+# live extensions feature uses downex, downexf as in down & downf  
+#
+# x : used only for html links, where x = extension, downf is filename without extension
+
+else if (isset($_GET['down']) || isset($_GET['downf']) ||
+		isset($_GET['img']) || isset($_GET['imgf']) ||  
+		isset($_GET['thmb']) || isset($_GET['thmbf']) || 
+		isset($_GET['downex']) || isset($_GET['downexf']))
 {
 	($hook = kleeja_run_hook('begin_down_go_page')) ? eval($hook) : null; //run hook	
 
@@ -137,7 +154,7 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 
 	//must know from where he came ! and stop him if not image
 	//todo: if it's download manger, let's pass this
-	if((isset($_GET['down']) || isset($_GET['downf'])) && !defined('DEV_STAGE'))
+	if(isset($_GET['down']) || isset($_GET['downf']))
 	{
 		if(!isset($_SERVER['HTTP_REFERER']) || empty($_SERVER['HTTP_REFERER']))
 		{
@@ -157,20 +174,20 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 		}
 
 		//if not from our site and the waiting page
-		$isset_down_h = (isset($_GET['downf']) && isset($_GET['x'])) ? 'downloadf-' . $_GET['downf'] . '-' . $_GET['x'] . '.html' : (isset($_GET['down']) ? 'download' . $_GET['down'] . '.html' : '');
+		$isset_down_h = isset($_GET['downf']) && isset($_GET['x']) ? 'downloadf-' . htmlspecialchars($_GET['downf']) . '-' . htmlspecialchars($_GET['x']) . '.html' : (isset($_GET['down']) ? 'download' . htmlspecialchars($_GET['down']) . '.html' : '');
 		$not_reffer = true;
 		if(strpos($_SERVER['HTTP_REFERER'], $isset_down_h) !== false)
 		{
 			$not_reffer = false;
 		}
 
-		$isset_down = (isset($_GET['downf'])) ? 'do.php?filename=' . $_GET['downf'] : (isset($_GET['down']) ? 'do.php?id=' . $_GET['down'] : '');
+		$isset_down = isset($_GET['downf']) ? 'do.php?filename=' . htmlspecialchars($_GET['downf']) : (isset($_GET['down']) ? 'do.php?id=' .htmlspecialchars($_GET['down']) : '');
 		if(strpos($_SERVER['HTTP_REFERER'], $isset_down) !== false)
 		{
 			$not_reffer = false;
 		}
 
-		if(empty($_SERVER['HTTP_REFERER']) || strpos($config['siteurl'], str_replace(array('http://', 'www.'), '', $_SERVER['HTTP_REFERER'])))
+		if(empty($_SERVER['HTTP_REFERER']) || strpos($config['siteurl'], str_replace(array('http://', 'www.'), '', htmlspecialchars($_SERVER['HTTP_REFERER']))))
 		{
 			$not_reffer = false;
 		}
@@ -179,11 +196,11 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 		{
 			if(isset($_GET['downf']))
 			{
-				$go_to = $config['siteurl'] . (($config['mod_writer'] && isset($_GET['x'])) ? "downloadf-" . $_GET['downf'] . '-' . $_GET['x'] . ".html" : "do.php?filename=" . $_GET['downf']);
+				$go_to = $config['siteurl'] . ($config['mod_writer'] && isset($_GET['x']) ? "downloadf-" . htmlspecialchars($_GET['downf']) . '-' . htmlspecialchars($_GET['x']) . ".html" : "do.php?filename=" . htmlspecialchars($_GET['downf']));
 			}
 			else
 			{
-				$go_to = $config['siteurl'] . (($config['mod_writer']) ? "download" . $_GET['down'] . ".html" : "do.php?id=" . $_GET['down']);
+				$go_to = $config['siteurl'] . ($config['mod_writer'] ? 'download' . htmlspecialchars($_GET['down']) . '.html' : 'do.php?id=' . htmlspecialchars($_GET['down']));
 			}
 
 			redirect($go_to);
@@ -193,11 +210,22 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 	}
 
 	//download by id or filename
+	//is the comming variable is filename(filename123.gif) or id (123) ?
 	$is_id_filename = (isset($_GET['downf']) || isset($_GET['imgf']) || isset($_GET['thmbf']) || isset($_GET['downexf'])) ? true : false;
 
 	if($is_id_filename)
 	{
-		$filename = ($config['mod_writer']) ? (isset($_GET['downf']) && isset($_GET['x'])) ? $SQL->escape($_GET['downf']) . '.' . $SQL->escape($_GET['x']) : ((isset($_GET['imgf']) && isset($_GET['x'])) ? $SQL->escape($_GET['imgf']) . '.' . $SQL->escape($_GET['x']) : ((isset($_GET['thmbf']) && isset($_GET['x'])) ? $SQL->escape($_GET['thmbf']) . '.' . $SQL->escape($_GET['x']) : ((isset($_GET['downexf']) && isset($_GET['x'])) ? $SQL->escape($_GET['downexf']) . '.' . $SQL->escape($_GET['x']) : null))) : $filename = (isset($_GET['downf'])) ? $SQL->escape($_GET['downf']) : ((isset($_GET['imgf'])) ? $SQL->escape($_GET['imgf']) : ((isset($_GET['thmbf'])) ? $SQL->escape($_GET['thmbf']) : ((isset($_GET['downexf'])) ? $SQL->escape($_GET['downexf']) : null)));
+		$var = isset($_GET['downf']) ? 'downf' : (isset($_GET['imgf']) ? 'imgf' : (isset($_GET['thmbf']) ? 'thmbf' : (isset($_GET['downexf']) ? 'downexf' : false)));
+		
+		#x, represent the extension, came from html links
+		if(isset($_GET['x']) && $var)
+		{
+			$filename = $SQL->escape($_GET[$var]) . '.' . $SQL->escape($_GET['x']);
+		}
+		else
+		{
+			$filename = $SQL->escape($_GET[$var]);
+		}
 	}
 	else
 	{
@@ -214,9 +242,8 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 	//get info file
 	$query = array('SELECT'	=> 'f.id, f.name, f.real_filename, f.folder, f.type, f.size, f.time',
 					'FROM'		=> "{$dbprefix}files f",
-					'WHERE'		=> ($is_id_filename) ? "f.name='" . $filename . "'" . 
-									(isset($_GET['downexf']) ? " AND f.type IN ('" . implode("', '", $livexts) . "')" : '') : 'f.id=' . $id  . 
-									(isset($_GET['downex']) ? " AND f.type IN ('" . implode("', '", $livexts) . "')" : ''),
+					'WHERE'		=> $is_id_filename ? "f.name='" . $filename . "'" .  (isset($_GET['downexf']) ? " AND f.type IN ('" . implode("', '", $livexts) . "')" : '') :
+													'f.id=' . $id  . (isset($_GET['downex']) ? " AND f.type IN ('" . implode("', '", $livexts) . "')" : ''),
 					);
 	
 	($hook = kleeja_run_hook('qr_down_go_page_filename')) ? eval($hook) : null; //run hook
@@ -382,6 +409,7 @@ else if (isset($_GET['down']) || isset($_GET['downf']) || isset($_GET['img']) ||
 	{
 		#so ... it's failed to open !
 		header("HTTP/1.0 404 Not Found");
+		@fclose($pfile);
 		big_error($lang['FILE_NO_FOUNDED'],  $lang['NOT_FOUND']);
 	}
 

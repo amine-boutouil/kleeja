@@ -130,7 +130,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 			{
 				return empty($script_cp1256) || !$script_cp1256 ? $row1['username'] : $usrcp->kleeja_utf8($row1['username']);
 			}
-	
+
 			if(!$hashed)
 			{
 				$pass = md5(md5($pass) . $row1['salt']);  // without normal md5
@@ -163,6 +163,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 						$user_y = kleeja_base64_encode(serialize(array('id'=>$row['userid'], 'name'=>USER_NAME, 'mail'=>$row['email'], 'last_visit'=>time())));
 						
 						$hash_key_expire = sha1(md5($config['h_key'] . $row['password']) .  $expire);
+
 						if(!$loginadm)
 						{
 							$usrcp->kleeja_set_cookie('ulogu', $usrcp->en_de_crypt(
@@ -201,11 +202,10 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 		}#whil1
 
 		$SQLVB->freeresult($result_salt); 
-		
+
 		unset($pass);
 		$SQLVB->close();
-		
-		
+
 		return true;
 	}
 	else

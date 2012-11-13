@@ -94,4 +94,4 @@
 [x] Improve browsing images by disabling the page effects while you in images control page
 [x] Improve resync performance .. now it's so smooth like a galaxy chocolate with a good taste coffee ..
 [x] Some options and ACLs excluded when you browse Guest group, like enable_userfiles etc .. (reported by: @imn9or)
-
+[x] Fix small bug, at do.php, where downexf written as downex (reported by: Top4toP)

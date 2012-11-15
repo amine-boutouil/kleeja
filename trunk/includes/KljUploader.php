@@ -360,7 +360,7 @@ class KljUploader
 					else
 					{
 						#get remote data, if no data quit it
-						$data = fetch_remote_file($_POST['file_' . $i . '_'], $this->folder . "/" . $this->filename2, 6, false, 2);
+						$data = fetch_remote_file($_POST['file_' . $i . '_'], $this->folder . "/" . $this->filename2, 6, false, 2, true);
 						if($data === false)
 						{
 							$this->messages[] = array($lang['URL_CANT_GET'], 'index_err');

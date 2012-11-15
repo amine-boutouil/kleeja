@@ -291,11 +291,12 @@ class KljUploader
 			{
 				# get file name
 				$this->filename = (isset($_POST['file_' . $i . '_'])) ? basename($_POST['file_' . $i . '_']) : '';
+				//print $this->filename;
 				# add it to the check-list
 				$check .= (isset($_POST['file_' . $i . '_']) && trim($_POST['file_' . $i . '_']) != $lang['PAST_URL_HERE']) ? $_POST['file_' . $i . '_'] : '';
 				# file extension, type 
-				$this->typet = explode(".", $filename);
-				if(in_array($this->filename2[count($this->typet)-1], array('html', 'php', 'html')))
+				$this->typet = explode(".", $this->filename);
+				if(in_array($this->typet[count($this->typet)-1], array('html', 'php', 'html')))
 				{
 					$this->typet = strtolower($this->typet[count($this->typet)-2]);
 				}
@@ -303,8 +304,9 @@ class KljUploader
 				{
 					$this->typet = strtolower($this->typet[count($this->typet)-1]);
 				}
+
 				# change to another filename depend on kleeja settings
-				$this->filename2 = change_filename_decoding($filename, $i, $this->typet, $this->decode);
+				$this->filename2 = change_filename_decoding($this->filename, $i, $this->typet, $this->decode);
 				$this->filename2 = change_filename_templates(trim($this->prefix) . $this->filename2);
 
 				($hook = kleeja_run_hook('kljuploader_process_func_uploading_type_2_loop')) ? eval($hook) : null; //run hook
@@ -320,9 +322,9 @@ class KljUploader
 					$this->messages[] = array(sprintf($lang['FORBID_EXT'], htmlspecialchars($_POST['file_' . $i . '_']), $this->typet), 'index_err');
 				}
 				# file exists before ? quit it
-				elseif(file_exists($this->folder . '/' . $filename))
+				elseif(file_exists($this->folder . '/' . $this->filename2))
 				{
-					$this->messages[] = array(sprintf($lang['SAME_FILE_EXIST'], htmlspecialchars($_POST['file_' . $i . '_'])), 'index_err');
+					$this->messages[] = array(sprintf($lang['SAME_FILE_EXIST'], htmlspecialchars($this->filename2)), 'index_err');
 				}
 				# no errors, ok, lets upload now
 				else
@@ -349,7 +351,7 @@ class KljUploader
 					}
 
 					#get size, if big quit it
-					$this->sizet = $this->get_remote_file_size($_POST['file_' . $i . '_']);
+					$this->sizet = get_remote_file_size($_POST['file_' . $i . '_']);
 
 					if($this->types[strtolower($this->typet)] > 0 && $this->sizet >= $this->types[strtolower($this->typet)])
 					{
@@ -358,16 +360,16 @@ class KljUploader
 					else
 					{
 						#get remote data, if no data quit it
-						$data = fetch_remote_file($_POST['file_' . $i . '_'], $this->folder . "/" . $this->filename2);
+						$data = fetch_remote_file($_POST['file_' . $i . '_'], $this->folder . "/" . $this->filename2, 6, false, 2);
 						if($data === false)
 						{
-							$this->messages[] = array($lang['URL_CANT_GET'], 'index_err');		
+							$this->messages[] = array($lang['URL_CANT_GET'], 'index_err');
 						}
 						else
 						{
 							$this->saveit($this->filename2, $this->folder, $this->sizet, $this->typet);
 						}
-					}			
+					}
 				}#else
 
 			}#end loop

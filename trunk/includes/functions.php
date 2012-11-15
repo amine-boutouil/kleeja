@@ -349,7 +349,7 @@ function fetch_remote_file($url, $save_in = false, $timeout = 20, $head_only = f
 		//let's open new file to save it in.
 		if($save_in)
 		{
-			$fp2 = @fopen($save_in, 'w' . ($binary ? 'b' : ''));
+			$fp2 = @fopen($save_in, 'w' . ($binary ? '' : ''));
 		}
 
 		// Fetch the response 1024 bytes at a time and watch out for a timeout
@@ -373,7 +373,7 @@ function fetch_remote_file($url, $save_in = false, $timeout = 20, $head_only = f
 				//}
 				//if ($h == "passed")
 				//{
-					if($s == "\r\n" || $s == "\n")
+					if($s == "\r\n") //|| $s == "\n")
 					{
 						$h = true;
 						continue;

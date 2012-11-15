@@ -373,7 +373,7 @@ function fetch_remote_file($url, $save_in = false, $timeout = 20, $head_only = f
 				//}
 				//if ($h == "passed")
 				//{
-					if(strpos($s, "\r\n") !== false)
+					if($s == "\r\n" || $s == "\n")
 					{
 						$h = true;
 						continue;

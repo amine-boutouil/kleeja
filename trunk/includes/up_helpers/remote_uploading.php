@@ -41,7 +41,7 @@ function get_remote_file_size($url, $method = "GET", $data = "", $redirect = 10)
 			list(, $code ) = explode(" ", $scheme);
 			$headers = array("Scheme" => $scheme);
 		}
-	
+
 		while (!feof($fp))
 		{
 			$h = fgets($fp);

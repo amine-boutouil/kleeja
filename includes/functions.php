@@ -247,7 +247,7 @@ function send_mail($to, $body, $subject, $fromaddress, $fromname, $bcc='')
 * Get remote files
 * (c) punbb
 */
-function fetch_remote_file($url, $save_in = false, $timeout = 20, $head_only = false, $max_redirects = 10)
+function fetch_remote_file($url, $save_in = false, $timeout = 20, $head_only = false, $max_redirects = 10, $binary = false)
 {
 	($hook = kleeja_run_hook('kleeja_fetch_remote_file_func')) ? eval($hook) : null; //run hook
 
@@ -258,7 +258,7 @@ function fetch_remote_file($url, $save_in = false, $timeout = 20, $head_only = f
 	}
 	$allow_url_fopen = function_exists('ini_get') ? strtolower(@ini_get('allow_url_fopen')) : strtolower(@get_cfg_var('allow_url_fopen'));
 
-	if(function_exists('curl_init'))
+	if(function_exists('curl_init') && !$save_in)
 	{
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $url);
@@ -349,19 +349,45 @@ function fetch_remote_file($url, $save_in = false, $timeout = 20, $head_only = f
 		//let's open new file to save it in.
 		if($save_in)
 		{
-			$fp2 = @fopen($save_in, "w");
+			$fp2 = @fopen($save_in, 'w' . ($binary ? 'b' : ''));
 		}
 
 		// Fetch the response 1024 bytes at a time and watch out for a timeout
 		$in = false;
+		$h = false;
+		$s = '';
 		while (!feof($fp) && !$stream_meta['timed_out'])
 		{
-			$in .= fgets($fp, 1024);
+			$s = fgets($fp, 1024);
 			if($save_in)
 			{
-				@fwrite($fp2, $in);
-			}
+				//if($binary)
+				//{
+				//	@fwrite($fp2, pack('L', $in));
+				//}
+				//else
+				//{
+				//if ($s == "\r\n")
+				//{
+				//	$h = "passed";
+				//}
+				//if ($h == "passed")
+				//{
+					if(strpos($s, "\r\n") !== false)
+					{
+						$h = true;
+						continue;
+					}
 
+					if($h)
+					{
+						@fwrite($fp2, $s);
+					}
+				//}
+				//}
+			}
+			
+			$in .= $s;
 			$stream_meta = stream_get_meta_data($fp);
 		}
 
@@ -443,6 +469,16 @@ function fetch_remote_file($url, $save_in = false, $timeout = 20, $head_only = f
 			{
 				return $http_response_header;
 			}
+			
+			if($save_in)
+			{
+				$fp2 = fopen($save_in, 'w' . ($binary ? 'b' : ''));
+				@fwrite($fp2, $content);
+				@fclose($fp2);
+				unset($content);
+				return true;
+			}
+
 			return $content;
 		}
 	}

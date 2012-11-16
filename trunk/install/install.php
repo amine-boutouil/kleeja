@@ -38,6 +38,14 @@ switch ($db_type)
 include_once ('includes/functions_install.php');
 
 
+if(!isset($_GET['step']))
+{
+	//if anyone request this file directly without passing index.php we will return him to index.php
+	header('Location: index.php');
+	exit;
+}
+
+
 //
 // Kleeja must be safe ..
 //
@@ -46,15 +54,9 @@ if(!empty($dbuser) && !empty($dbname) && !(isset($_GET['step']) && in_array($_GE
 	$d = inst_get_config('language');
 	if(!empty($d))
 	{
-		//header('Location: ../');
+		header('Location: index.php');
 		exit;
 	}
-}
-
-if(!isset($_GET['step']))
-{
-	//if anyone request this file directly without passing index.php we will return him to index.php
-	header('Location: index.php');
 }
 
 /**

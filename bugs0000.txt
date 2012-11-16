@@ -9,6 +9,12 @@
 
 
 
+1.5.1 - version : 
+[x] Fix bug with uploading from URL.
+[x] Fix bug in SQL when reparing tables.
+[x] FIx bug where function is miswritten [helper_thumb_imagick]
+ 
+
 
 1.7 - version :
 -[-] Security situation page 

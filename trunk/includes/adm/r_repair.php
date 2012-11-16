@@ -154,7 +154,7 @@ $text = '';
 	
 while($row=$SQL->fetch_array($result))
 {
-	$queryf	=	"REPAIR TABLE " . $row['Name'] . "";
+	$queryf	=	"REPAIR TABLE `" . $row['Name'] . "`";
 	$resultf = $SQL->query($queryf);
 	if ($resultf)
 	{

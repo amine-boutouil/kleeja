@@ -46,7 +46,7 @@ function helper_thumb($source_path, $ext, $dest_image, $dw, $dh)
 	#if there is imagick lib, then we should use it
 	if(function_exists('phpversion') && phpversion('imagick'))
 	{
-		helper_generate_thumb_imagick($source_path, $ext, $dest_image, $dw, $dh);
+		helper_thumb_imagick($source_path, $ext, $dest_image, $dw, $dh);
 		return;
 	}
 

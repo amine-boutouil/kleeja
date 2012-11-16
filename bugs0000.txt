@@ -13,7 +13,7 @@
 [x] Fix bug with uploading from URL.
 [x] Fix bug in SQL when reparing tables.
 [x] FIx bug where function is miswritten [helper_thumb_imagick]
- 
+[x] Fix unclear halt at install.php file 
 
 
 1.7 - version :

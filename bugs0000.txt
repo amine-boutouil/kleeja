@@ -8,6 +8,9 @@
 [x] done
 
 
+1.5.2 - version : 
+[x] Add Persian language
+
 
 1.5.1 - version : 
 [x] Fix bug with uploading from URL.

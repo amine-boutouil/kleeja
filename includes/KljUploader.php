@@ -457,11 +457,11 @@ class KljUploader
 
 			# get default thumb dimensions
 			$thmb_dim_w = $thmb_dim_h = 150;
-			if(strpos('*', $config['thmb_dims']) !== false)
+			if(strpos($config['thmb_dims'], '*') !== false)
 			{
-				list($thmb_dim_w, $thmb_dim_h) = @explode('*', $config['thmb_dims']);
+				list($thmb_dim_w, $thmb_dim_h) = array_map('trim', explode('*', $config['thmb_dims']));
 			}
-	
+
 			# generate thumb now
 			helper_thumb($folderee . '/' . $filname, strtolower($this->typet), $folderee . '/thumbs/' . $filname, $thmb_dim_w, $thmb_dim_h);
 

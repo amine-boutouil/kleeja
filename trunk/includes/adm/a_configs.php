@@ -84,15 +84,16 @@ else if($current_smt == 'all')
 
 $result = $SQL->build($query);
 
-list($thmb_dim_w, $thmb_dim_h) = @explode('*', $config['thmb_dims']);
+$thumbs_are = get_config('thmb_dims');
+
 while($row=$SQL->fetch_array($result))
 {
 	#make new lovely array !!
 	$con[$row['name']] = $row['value'];
 
-	if($row['name'] == 'thmb_dims') 
+	if($row['name'] == 'thumbs_imgs') 
 	{
-		list($thmb_dim_w, $thmb_dim_h) = @explode('*', $con['thmb_dims']);
+		list($thmb_dim_w, $thmb_dim_h) = array_map('trim', @explode('*', $thumbs_are));
 	}
 	else if($row['name'] == 'time_zone') 
 	{
@@ -163,9 +164,20 @@ while($row=$SQL->fetch_array($result))
 		$new[$row['name']] = (isset($_POST[$row['name']])) ? $_POST[$row['name']] : $con[$row['name']];
 
 		//save them as you want ..
-		if($row['name'] == 'thmb_dims')
+		if($row['name'] == 'thumbs_imgs')
 		{
-			$new['thmb_dims'] = intval($_POST['thmb_dim_w']) . '*' . intval($_POST['thmb_dim_h']);
+			if(intval($_POST['thmb_dim_w']) < 10)
+			{
+				$_POST['thmb_dim_w'] = 10;
+			}
+
+			if(intval($_POST['thmb_dim_h']) < 10)
+			{
+				$_POST['thmb_dim_h'] = 10;
+			}
+
+			$thumbs_were = trim($_POST['thmb_dim_w']) . '*' . trim($_POST['thmb_dim_h']);
+			update_config('thmb_dims', $thumbs_were);
 		}
 		else if($row['name'] == 'livexts')
 		{

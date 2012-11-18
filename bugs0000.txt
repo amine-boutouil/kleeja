@@ -9,8 +9,8 @@
 
 
 1.5.2 - version : 
-[x] Add Persian language
-
+[x] Add Persian language (thanx for dverbame)
+[x] Fix bug with thumbs size (reported by : Tony Broomfield)
 
 1.5.1 - version : 
 [x] Fix bug with uploading from URL.

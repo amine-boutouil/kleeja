@@ -241,23 +241,24 @@ class KljUploader
 
 					#if this is listed as live-ext from Kleeja settings 
 					$live_exts	= array_map('trim', explode(',', $config['imagefolderexts']));
+					$folder_to_upload = $this->folder;
 					if(in_array(strtolower($this->typet), $live_exts) && $this->decode === 0)
 					{
 						# live-exts folder, if empty use default folder
-						$this->folder = trim($config['imagefolder']) == '' ? trim($config['foldername']) : trim($config['imagefolder']);
+						$folder_to_upload = trim($config['imagefolder']) == '' ? trim($config['foldername']) : trim($config['imagefolder']);
 						# change to time decoding for filename
 						if((int) $config['imagefoldere'])
 						{
-							$this->filename2 = change_filename_decoding($this->filename2, $i, $this->typet, 'time');
+							//$this->filename2 = change_filename_decoding($this->filename2, $i, $this->typet, 'time');
 						}
 					}
 
 					# now, upload the file
-					$file = move_uploaded_file($_FILES['file_' . $i . '_']['tmp_name'], $this->folder . "/" . $this->filename2);
+					$file = move_uploaded_file($_FILES['file_' . $i . '_']['tmp_name'], $folder_to_upload . "/" . $this->filename2);
 
 					if ($file)
 					{
-						$this->saveit($this->filename2, $this->folder, $this->sizet, $this->typet, $_FILES['file_' . $i . '_']['name']);
+						$this->saveit($this->filename2, $folder_to_upload, $this->sizet, $this->typet, $_FILES['file_' . $i . '_']['name']);
 					} 
 					else 
 					{
@@ -277,7 +278,7 @@ class KljUploader
 
 			#uploading from a url text-input
 			case 2:
-			
+
 			#if not enabled, quit it
 			if((int) $config['www_url'] != '1')
 			{
@@ -333,14 +334,15 @@ class KljUploader
 
                     #if this is listed as live-ext from Kleeja settings 
 					$live_exts	= explode(',', $config['imagefolderexts']);
+					$folder_to_upload = $this->folder;
 					if(in_array(strtolower($this->typet), $live_exts) && $this->decode === 0)
 					{
 						# live-exts folder, if empty use default folder
-						$this->folder = trim($config['imagefolder']) == '' ? trim($config['foldername']) : trim($config['imagefolder']);
+						$folder_to_upload = trim($config['imagefolder']) == '' ? trim($config['foldername']) : trim($config['imagefolder']);
 						# change to time decoding for filename
 						if((int) $config['imagefoldere'])
 						{
-							$this->filename2 = change_filename_decoding($this->filename2, $i, $this->typet, 'time');
+							//$this->filename2 = change_filename_decoding($this->filename2, $i, $this->typet, 'time');
 						}
 					}
                             
@@ -360,14 +362,14 @@ class KljUploader
 					else
 					{
 						#get remote data, if no data quit it
-						$data = fetch_remote_file($_POST['file_' . $i . '_'], $this->folder . "/" . $this->filename2, 6, false, 2, true);
+						$data = fetch_remote_file($_POST['file_' . $i . '_'], $folder_to_upload . "/" . $this->filename2, 6, false, 2, true);
 						if($data === false)
 						{
 							$this->messages[] = array($lang['URL_CANT_GET'], 'index_err');
 						}
 						else
 						{
-							$this->saveit($this->filename2, $this->folder, $this->sizet, $this->typet);
+							$this->saveit($this->filename2, $folder_to_upload, $this->sizet, $this->typet);
 						}
 					}
 				}#else

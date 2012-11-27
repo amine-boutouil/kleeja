@@ -207,32 +207,33 @@ function helper_thumb_imagick($name, $ext, $filename, $new_w, $new_h)
 					$new_w,
 					$new_h);
 
-
 	#an exception for gif image
 	#generating thumb with 10 frames only, big gif is a devil
 	if($ext == 'gif')
 	{
 		$i = 0;
+		//$gif_new = new Imagick(); 
 		foreach ($im as $frame)
 		{
 			$frame->thumbnailImage($thumb_w, $thumb_h);
 			$frame->setImagePage($thumb_w, $thumb_h, 0, 0);
-			if($i > 10)
+		//	$gif_new->addImage($frame->getImage()); 
+			if($i >= 10)
 			{
 				# more than 10 frames, quit it
 				break;
 			}
 			$i++;
 		}
-	}
-	else
-	{
-		#and other image extenion use one way
-		$im->thumbnailImage($thumb_w, $thumb_h);
+		$im->writeImages($filename, true);
+		return;
 	}
 
+	#and other image extenion use one way
+	$im->thumbnailImage($thumb_w, $thumb_h);
+
 	#right it
-	$im->writeImages($filename, ($ext == 'gif'));
+	$im->writeImages($filename, false);
 	return;
 }
 

@@ -264,7 +264,7 @@ $lang = array_merge($lang, array(
 	'ALPHABETICAL_ORDER_FILES'	=> 'ترتيب الملفات حسب التسلسل الأبجدي', 
 	'ORDER_SIZE'				=> 'ترتيب الملفات حسب أحجامها من الأكبر حتى الأصغر',
 	'ORDER_TOTAL_DOWNLOADS'		=> 'ترتيب الملفات حسب عدد مرات التحميل',
-	'LIVEXTS'					=> 'الامتدادات المباشره',
+	'LIVEXTS'					=> 'الامتدادات التي لاتمر على صفحة الانتظار',
 	'COMMA_X'					=> '<p class="live_xts">افصل بين الامتدادات باستخدام الفاصلة (<font style="font-size:large"> , </font>)</p>', 
 	'NO_SEARCH_WORD'			=> 'لم تقم بكتابة كلمة بحث !',
 	'USERSECTOUPLOAD'			=> 'عدد الثواني بين كل عملية رفع',

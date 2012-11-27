@@ -259,7 +259,7 @@ $lang = array_merge($lang, array(
 	'ALPHABETICAL_ORDER_FILES'	=> 'Sort files by alphabetical order', 
 	'ORDER_SIZE'				=> 'Sort files by size from largest to smallest',
 	'ORDER_TOTAL_DOWNLOADS'		=> 'Sort files by number of downloads', 
-	'LIVEXTS'					=> 'Live Extensions',
+	'LIVEXTS'					=> 'Live Extensions (No waiting page)',
 	'COMMA_X'					=> '<p class="live_xts">separate by comma (<font style="font-size:large"> , </font>)</p>',
 	'NO_SEARCH_WORD'			=> 'You didn\'t type anything in the search form !',
 	'USERSECTOUPLOAD'			=> 'The seconds between each upload process',

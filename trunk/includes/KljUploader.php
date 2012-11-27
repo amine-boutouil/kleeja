@@ -242,7 +242,7 @@ class KljUploader
 					#if this is listed as live-ext from Kleeja settings 
 					$live_exts	= array_map('trim', explode(',', $config['imagefolderexts']));
 					$folder_to_upload = $this->folder;
-					if(in_array(strtolower($this->typet), $live_exts) && $this->decode === 0)
+					if(in_array(strtolower($this->typet), $live_exts))
 					{
 						# live-exts folder, if empty use default folder
 						$folder_to_upload = trim($config['imagefolder']) == '' ? trim($config['foldername']) : trim($config['imagefolder']);
@@ -335,7 +335,7 @@ class KljUploader
                     #if this is listed as live-ext from Kleeja settings 
 					$live_exts	= explode(',', $config['imagefolderexts']);
 					$folder_to_upload = $this->folder;
-					if(in_array(strtolower($this->typet), $live_exts) && $this->decode === 0)
+					if(in_array(strtolower($this->typet), $live_exts))
 					{
 						# live-exts folder, if empty use default folder
 						$folder_to_upload = trim($config['imagefolder']) == '' ? trim($config['foldername']) : trim($config['imagefolder']);

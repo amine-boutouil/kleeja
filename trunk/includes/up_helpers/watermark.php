@@ -122,3 +122,10 @@ function helper_watermark($name, $ext)
 }
 
 
+#
+# generate watermarked images by imagick
+#
+function helper_watermark_imagick($name, $ext)
+{
+	//to be arrived soon
+}

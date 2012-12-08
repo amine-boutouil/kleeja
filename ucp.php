@@ -303,106 +303,16 @@ switch ($_GET['go'])
 
 		($hook = kleeja_run_hook('begin_fileuser')) ? eval($hook) : null; //run hook
 
-        $stylee	= 'fileuser';
-		$H_FORM_KEYS = kleeja_add_form_key('fileuser');
-        $H_FORM_KEYS_PAGINTION = kleeja_add_form_key_get('fileuserpageintion');
-        $user_id_get	= isset($_GET['id']) ? intval($_GET['id']) : false;
-		$user_id		= (!$user_id_get && $usrcp->id()) ? $usrcp->id() : $user_id_get;
-		$user_himself	= $usrcp->id() == $user_id;
-		$action			= $config['siteurl'] . 'ucp.php?go=fileuser';
+        $stylee	                = 'fileuser';
+		$H_FORM_KEYS            = kleeja_add_form_key('fileuser');
+        $H_FORM_KEYS_PAGINTION  = kleeja_add_form_key_get('fileuserpageintion');
+        $MY_CURRENT_LOCATION    = $config['siteurl'] . ($config['mod_writer'] ?  'fileuser-' . $user_id  . '.html' : 'ucp.php?go=fileuser&amp;id=' . $user_id);
+        $user_id_get	        = isset($_GET['id']) ? intval($_GET['id']) : false;
+		$user_id		        = (!$user_id_get && $usrcp->id()) ? $usrcp->id() : $user_id_get;
+		$user_himself	        = $usrcp->id() == $user_id;
+		$action			        = $config['siteurl'] . 'ucp.php?go=fileuser';
         
-        if(isset($_GET['page']) && isset($_GET['formkey']))
-        {
-            //check for form key
-            if(!kleeja_check_form_key('fileuserpageintion', 1800 /* half hour */))
-            {
-                //kleeja_info($lang['INVALID_FORM_KEY']);
-            }
-                    
-      		$query	= array(
-					'SELECT'	=> 'f.id, f.name, f.real_filename, f.folder, f.type, f.uploads, f.time, f.size',
-					'FROM'		=> "{$dbprefix}files f",
-					'WHERE'		=> 'f.user=' . $user_id,
-					'ORDER BY'	=> 'f.id DESC'
-				);
 
-		      //pager
-		      $perpage		= 16;
-		      $result_p		= $SQL->build($query);
-		      $nums_rows		= $SQL->num_rows($result_p);
-		      $currentPage	= (isset($_GET['page'])) ? intval($_GET['page']) : 1;
-		      $Pager			= new SimplePager($perpage,$nums_rows,$currentPage);
-		      $start			= $Pager->getStartRow();
-              		$linkgoto		= $config['siteurl'] . ($config['mod_writer'] ?  'fileuser-' . $user_id  . '.html' : 'ucp.php?go=fileuser&amp;id=' . $user_id);
-		      $page_nums		= $Pager->print_nums(str_replace('.html', '', $linkgoto), '', true);
-              //$arr['page']      = $page_nums;
-        
-		      $no_results = true;
-
-		      if((int) $config['user_system'] != 1 && ($usrcp->id() != $user_id))
-		      {
-			     $data_user['name'] = $usrcp->usernamebyid($user_id);
-		      }
-		      $user_name = !$data_user['name'] ? false : $data_user['name'];
-              
-              #there is result ? show them
-		      if($nums_rows != 0)
-		      {
-			     $no_results = false;
-
-			     $query['LIMIT'] = "$start, $perpage";
-
-			     $result	= $SQL->build($query);
-
-			     $i = ($currentPage * $perpage) - $perpage;
-			     $tdnumi = $num = $files_num = $imgs_num = 0;
-            
-			     while($row=$SQL->fetch_array($result))
-			     {
-                    ++$i;
-				    $file_info = array('::ID::' => $row['id'], '::NAME::' => $row['name'], '::DIR::' => $row['folder'], '::FNAME::' => $row['real_filename']);
-
-				    $is_image = in_array(strtolower(trim($row['type'])), array('gif', 'jpg', 'jpeg', 'bmp', 'png')) ? true : false;
-				    $url = $is_image ? kleeja_get_link('image', $file_info) : kleeja_get_link('file', $file_info);
-				    $url_thumb = $is_image ? kleeja_get_link('thumb', $file_info) : kleeja_get_link('thumb', $file_info);
-				    $url_fileuser = $is_image ? $url : (file_exists("images/filetypes/".  $row['type'] . ".png")? "images/filetypes/" . $row['type'] . ".png" : 'images/filetypes/file.png');
-
-				    //make new lovely arrays !!
-				    $arr[] 	= array(
-						'id'		=> $row['id'],
-						'name_img'	=> ($row['real_filename'] == '' ? ((strlen($row['name']) > 40) ? substr($row['name'], 0, 40) . '...' : $row['name']) : ((strlen($row['real_filename']) > 40) ? substr($row['real_filename'], 0, 40) . '...' : $row['real_filename'])),
-						'url_thumb_img'	=> '<a title="' . ($row['real_filename'] == '' ? $row['name'] : $row['real_filename']) . '"  href="' . $url . '" onclick="window.open(this.href,\'_blank\');return false;"><img src="' . $url_fileuser . '" alt="' . $row['type'] . '" /></a>',
-						'name_file'		=> '<a title="' . ($row['real_filename'] == '' ? $row['name'] : $row['real_filename']) . '"  href="' . $url . '" onclick="window.open(this.href,\'_blank\');return false;">' . ($row['real_filename'] == '' ? ((strlen($row['name']) > 40) ? substr($row['name'], 0, 40) . '...' : $row['name']) : ((strlen($row['real_filename']) > 40) ? substr($row['real_filename'], 0, 40) . '...' : $row['real_filename'])) . '</a>',
-						'url_thumb_file'=> '<a title="' . ($row['real_filename'] == '' ? $row['name'] : $row['real_filename']) . '"  href="' . $url . '" onclick="window.open(this.href,\'_blank\');return false;"><img src="' . $url_fileuser . '" alt="' . $row['type'] . '" /></a>',
-						'file_type'	=> $row['type'],
-						'uploads'	=> $row['uploads'],
-						'tdnum'		=> $tdnumi == 0 ? '<ul>': '',
-						'tdnum2'	=> $tdnumi == 4 ? '</ul>' : '',
-						'href'		=> $url,
-						'size'		=> Customfile_size($row['size']),
-						'time'		=> !empty($row['time']) ? kleeja_date($row['time']) : '...',
-						'thumb_link'=> $is_image ? $url_thumb : $url_fileuser,
-						'is_image'	=> $is_image,
-					);
-
-				    $tdnumi = $tdnumi == 2 ? 0 : $tdnumi+1;
-				
-			
-			     }
-
-			     $SQL->freeresult($result_p);
-			     $SQL->freeresult($result);
-                 
-                 //echo json_encode($arr);
-                 echo json_encode(array(
-   'files' => $arr,
-   'page' => $page_nums
-));
-                 @$SQL->close();
-                 exit;
-
-            }#num result
-        }
 		
 
 		//no logon before 
@@ -443,6 +353,7 @@ switch ($_GET['go'])
 		{
 			kleeja_info($lang['USERFILE_CLOSED'], $lang['CLOSED_FEATURE']);
 		}
+
 
 		$query	= array(
 					'SELECT'	=> 'f.id, f.name, f.real_filename, f.folder, f.type, f.uploads, f.time, f.size',
@@ -555,7 +466,23 @@ switch ($_GET['go'])
 
 			$SQL->freeresult($result_p);
 			$SQL->freeresult($result);
-
+            
+            if(isset($_GET['formkey']))
+            {
+                //check for form key
+                if(!kleeja_check_form_key_get('fileuserpageintion'))
+                {
+                    kleeja_info($lang['INVALID_FORM_KEY']);
+                }
+            
+                echo json_encode(array(
+                 'files' => $arr,
+                 'page' => $page_nums
+                 ));
+                 @$SQL->close();
+                 exit;
+            }
+            
 			//
 			//after submit
 			//

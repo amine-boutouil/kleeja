@@ -856,7 +856,7 @@ function get_config($name)
 	if(array_key_exists($name, $d_groups[$userinfo['group_id']]['configs']))
 	{
 		$table = "{$dbprefix}groups_data c";
-		$group_id_sql = ", group_id=" . $userinfo['group_id'];
+		$group_id_sql = " AND c.group_id=" . $userinfo['group_id'];
 	}
 
 	$query = array(

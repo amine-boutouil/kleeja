@@ -832,6 +832,18 @@ function echo_ajax($code_number, $content, $menu = '')
 
 
 /**
+* Send an answer for ajax request [ARRAY]
+*/
+function echo_array_ajax($array)
+{
+	global $SQL;
+	$SQL->close();
+    
+    //generate_json has some bugs so I will use json_encode insted :[
+	exit(@json_encode($array));
+}
+
+/**
 * show date in a human-readable-text
 */
 define('TIME_FORMAT', 'd-m-Y h:i a'); # to be moved to configs later

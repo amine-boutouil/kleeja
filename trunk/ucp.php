@@ -311,7 +311,7 @@ switch ($_GET['go'])
 		$user_id		        = (!$user_id_get && $usrcp->id()) ? $usrcp->id() : $user_id_get;
 		$user_himself	        = $usrcp->id() == $user_id;
 		$action			        = $config['siteurl'] . 'ucp.php?go=fileuser';
-        $AJAXED                 = false; //$config['ajaxed']
+        $AJAXED                 = true; //$config['ajaxed']
 
 		//no logon before 
 		if (!$usrcp->name() && !isset($_GET['id']))

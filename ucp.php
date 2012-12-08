@@ -311,7 +311,7 @@ switch ($_GET['go'])
 		$user_id		        = (!$user_id_get && $usrcp->id()) ? $usrcp->id() : $user_id_get;
 		$user_himself	        = $usrcp->id() == $user_id;
 		$action			        = $config['siteurl'] . 'ucp.php?go=fileuser';
-        $AJAXED                 = true; //$config['ajaxed']
+        $AJAXED                 = false; //$config['ajaxed']
 
 		//no logon before 
 		if (!$usrcp->name() && !isset($_GET['id']))
@@ -371,7 +371,7 @@ switch ($_GET['go'])
 		$your_fileuser	= $config['siteurl'] . ($config['mod_writer'] ? 'fileuser-' . $usrcp->id() . '.html' : 'ucp.php?go=fileuser&amp;id=' .  $usrcp->id());
 		$total_pages	= $Pager->getTotalPages(); 
 		$linkgoto		= $config['siteurl'] . ($config['mod_writer'] ?  'fileuser-' . $user_id  . '.html' : 'ucp.php?go=fileuser&amp;id=' . $user_id);
-		$page_nums		= $Pager->print_nums(str_replace('.html', '', $linkgoto), '', true);
+		$page_nums		= $Pager->print_nums(str_replace('.html', '', $linkgoto), '', $AJAXED);
 
  
 		$no_results = true;

@@ -1,7 +1,9 @@
 <?php
 //
 // kleeja language, admin
-// English
+// Persian
+// By:Dverbame  
+// Persian Rapidleech Center  | www.dverleech.com
 //
 
 if (!defined('IN_COMMON'))

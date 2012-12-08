@@ -70,6 +70,7 @@ function helper_watermark($name, $ext)
 	}
 	elseif (strpos($ext, 'gif') !== false)
 	{
+		return;
 		$src_img = @imagecreatefromgif($name);
 	}
 	elseif(strpos($ext, 'bmp') !== false)

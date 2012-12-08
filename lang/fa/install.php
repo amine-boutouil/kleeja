@@ -3,7 +3,6 @@
 //  By:Dverbame  
 //  Persian Rapidleech Center  
 
-
 	if(!isset($lang) || !is_array($lang)) $lang = array();
 
 	$lang['DIR']									= 'rtl';

@@ -426,7 +426,7 @@ switch ($_GET['go'])
 
 				$tdnumi = $tdnumi == 2 ? 0 : $tdnumi+1;
 				
-				if (isset($_POST['submit_files']))
+				if (isset($_POST['submit_files']) && $user_himself)
 				{
 					($hook = kleeja_run_hook('submit_in_fileuser')) ? eval($hook) : null; //run hook	
 
@@ -479,7 +479,7 @@ switch ($_GET['go'])
 			//
 			//after submit
 			//
-			if (isset($_POST['submit_files']))
+			if (isset($_POST['submit_files']) && $user_himself)
 			{
 				//no files to delete
 				if(isset($ids) && !empty($ids))

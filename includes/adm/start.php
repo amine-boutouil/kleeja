@@ -30,7 +30,7 @@ $GET_FORM_KEY	= kleeja_add_form_key_get('adm_start_actions');
 
 //data
 $lst_reg			= empty($stat_last_user) ? $lang['UNKNOWN'] : $stat_last_user;
-$files_number 		= $stat_files;
+$files_number 		= $stat_files + $stat_imgs;
 $files_sizes 		= Customfile_size($stat_sizes);
 $users_number 		= $stat_users;
 $last_del_fles 		= (int) $config['del_f_day'] <= 0 ? $lang['CLOSED_FEATURE'] : kleeja_date($stat_last_f_del);

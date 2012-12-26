@@ -334,7 +334,7 @@ switch ($_GET['go'])
 		}
 
 		//fileuser is closed ?
-		if ((int) $config['enable_userfile'] != 1 && !user_can('enter_acp'))
+		if ((int) $config['enable_userfile'] != 1 && !user_can('enter_acp') && $usrcp->name())
 		{
 			kleeja_info($lang['USERFILE_CLOSED'], $lang['CLOSED_FEATURE']);
 		}

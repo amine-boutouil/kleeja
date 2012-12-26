@@ -11,6 +11,9 @@
 1.5.2 - version : 
 [x] Add Persian language (thanx for dverbame)
 [x] Fix bug with thumbs size (reported by : Tony Broomfield)
+[x] fix bug where Last visit in ACP doesnt use Kleeja zone (reborted by: Bader_vip)
+[x] fix bug where total files number excludes images (reborted by: Bader_vip)
+[x] fix bug where guests can not access user folders, ucp.php?go=fileuser&id=[userid] (reported by: ibragate)
 
 1.5.1 - version : 
 [x] Fix bug with uploading from URL.
@@ -19,7 +22,9 @@
 [x] Fix unclear halt at install.php file 
 
 
-1.7 - version :
+
+------------ BE CAREFUL! .. AFTER THIS LINE YOU WILL TRAVEL THROUGH THE TIME TO THE FUTURE f=0--->f++
+1.7 - version (---- NOT YET ---):
 -[-] Security situation page 
 -[-] files ACP -> search files from this IP,user
 -[-] Dealing with the huge invasion of Nginx

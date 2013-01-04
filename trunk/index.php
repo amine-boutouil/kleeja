@@ -30,7 +30,7 @@ if(empty($d_groups[2]['exts']) && !$usrcp->name())
 //
 //Type of how will decoding name ..
 //
-$decode = 0;
+$decode = 'none';
 switch(intval($config['decode'])):
 	case 1:	$decode = 'time';	break;
 	case 2:	$decode = 'md5';	break;

@@ -40,7 +40,7 @@ get_lang('acp');
 //need to login again
 //
 if(
-	(empty($_SESSION['ADMINLOGIN']) || $_SESSION['ADMINLOGIN'] != md5($usrcp->name() . $config['siteurl'])) || 
+	(empty($_SESSION['ADMINLOGIN']) || $_SESSION['ADMINLOGIN'] != md5(sha1($config['h_key']) . $usrcp->name() . $config['siteurl'])) || 
 	(empty($_SESSION['USER_SESS']) || $_SESSION['USER_SESS'] != session_id()) ||
 	(empty($_SESSION['ADMINLOGIN_T']) || $_SESSION['ADMINLOGIN_T'] < time())	 
 )
@@ -70,7 +70,7 @@ if(
 				if($f = $usrcp->data($_POST['lname'], $_POST[$pass_field], false, $adm_time, true))
 				{
 					$_SESSION['USER_SESS'] = session_id();
-					$_SESSION['ADMINLOGIN'] = md5($usrcp->name() . $config['siteurl']);
+					$_SESSION['ADMINLOGIN'] = md5(sha1($config['h_key']) . $usrcp->name() . $config['siteurl']);
 					//to make sure, sometime setting time from fucntions doesnt work
 					$_SESSION['ADMINLOGIN_T'] = time() + $adm_time;
 					redirect('./' . basename(ADMIN_PATH) . '?cp=' . $go_to);

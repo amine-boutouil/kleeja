@@ -14,6 +14,7 @@
 [x] fix bug where Last visit in ACP doesnt use Kleeja zone (reborted by: Bader_vip)
 [x] fix bug where total files number excludes images (reborted by: Bader_vip)
 [x] fix bug where guests can not access user folders, ucp.php?go=fileuser&id=[userid] (reported by: ibragate)
+[x] fix bug where kleeja doesnt respect decoding type when it set to nothing (reported by: althani)
 
 1.5.1 - version : 
 [x] Fix bug with uploading from URL.

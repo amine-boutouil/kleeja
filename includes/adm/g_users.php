@@ -210,7 +210,7 @@ else if (isset($_POST['newuser']))
 	{
 		$ERRORS[] = $lang['WRONG_EMAIL'];
 	}
-	else if (strlen(trim($_POST['lname'])) < 2 || strlen(trim($_POST['lname'])) > 100)
+	else if (strlen(trim($_POST['lname'])) < 2 || strlen(trim($_POST['lname'])) > 25)
 	{
 		$ERRORS[] = str_replace('4', '2', $lang['WRONG_NAME']);
 	}

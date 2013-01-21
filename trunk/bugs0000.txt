@@ -15,6 +15,8 @@
 [x] fix bug where total files number excludes images (reborted by: Bader_vip)
 [x] fix bug where guests can not access user folders, ucp.php?go=fileuser&id=[userid] (reported by: ibragate)
 [x] fix bug where kleeja doesnt respect decoding type when it set to nothing (reported by: althani)
+[x] fix security issue .. 
+[x] Username at registering now should be between 4 to 25 characters (reported by ibragate)
 
 1.5.1 - version : 
 [x] Fix bug with uploading from URL.

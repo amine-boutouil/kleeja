@@ -106,10 +106,9 @@ class kplugins
 			big_error('Error', $lang['ERR_XML_NO_G_TAGS'] . (defined('DEV_STAGE') ? __file__ . ':'. __line__ : ''));
 		}
 
-		if(!empty($plg_info['plugin_kleeja_version']['value']) && version_compare(strtolower($plg_info['plugin_kleeja_version']['value']),  strtolower(preg_replace('!#([a-z0-9]+)!', '', KLEEJA_VERSION)), '>=') == false)
+		if(!empty($plg_info['plugin_kleeja_version']['value']) && version_compare(strtolower(rtrim($plg_info['plugin_kleeja_version']['value'], '.0')),  strtolower(preg_replace('!#([a-z0-9]+)!', '', rtrim(KLEEJA_VERSION,'.0'))), '>=') == false)
 		{
-			
-			big_error('Error', $lang['PLUGIN_N_CMPT_KLJ'] . '[' . strtolower($plg_info['plugin_kleeja_version']['value']) . '>=' . strtolower(preg_replace('!#([a-z0-9]+)!', '', KLEEJA_VERSION)) . ']');
+			big_error('Error', $lang['PLUGIN_N_CMPT_KLJ'] . '<br />[plugin:' . strtolower($plg_info['plugin_kleeja_version']['value']) . '< kleeja:' . strtolower(preg_replace('!#([a-z0-9]+)!', '', KLEEJA_VERSION)) . ']');
 		}
 
 		$plg_errors	=	array();
@@ -125,7 +124,7 @@ class kplugins
 						);
 
 		$res = $SQL->build($is_query);
-	
+
 		if($SQL->num_rows($res))
 		{
 			//it's not new one ! , let's see if it same version

@@ -213,7 +213,7 @@ switch ($_GET['go'])
 			{
 				$ERRORS['lmail'] = $lang['WRONG_EMAIL'];
 			}
-			if (strlen(trim($_POST['lname'])) < 3 || strlen(trim($_POST['lname'])) > 50)
+			if (strlen(trim($_POST['lname'])) < 4 || strlen(trim($_POST['lname'])) > 25)
 			{
 				$ERRORS['lname'] = $lang['WRONG_NAME'];
 			}

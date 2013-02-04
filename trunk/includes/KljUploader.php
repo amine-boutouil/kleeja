@@ -156,6 +156,29 @@ class KljUploader
 			}
 		}
 
+		# flooding code, making sure every ok session is cleared
+		if (isset($_POST['submitr']))
+		{
+			if(isset($_SESSION['FIILES_NOT_DUPLI']))
+			{
+				unset($_SESSION['FIILES_NOT_DUPLI']);
+			}
+
+			$_SESSION['FIILES_NOT_DUPLI'] = $_FILES;
+		}
+		elseif(isset($_POST['submittxt']))
+		{
+			if(isset($_SESSION['FIILES_NOT_DUPLI_LINKS']))
+			{
+				unset($_SESSION['FIILES_NOT_DUPLI_LINKS']);
+			}
+
+			$_SESSION['FIILES_NOT_DUPLI_LINKS'] = $_POST;
+		}
+		
+		#now close session to let user open any other page in Kleeja
+		@session_write_close();
+
 		# uploading process, empty check-list for now
 		$check = false;
 
@@ -518,26 +541,6 @@ class KljUploader
 
 		($hook = kleeja_run_hook('saveit_func_kljuploader')) ? eval($hook) : null; //run hook
 
-		# flooding code, making sure every ok session is cleared
-		if (isset($_POST['submitr']))
-		{
-			if(isset($_SESSION['FIILES_NOT_DUPLI']))
-			{
-				unset($_SESSION['FIILES_NOT_DUPLI']);
-			}
-
-			$_SESSION['FIILES_NOT_DUPLI'] = $_FILES;
-		}
-		elseif(isset($_POST['submittxt']))
-		{
-			if(isset($_SESSION['FIILES_NOT_DUPLI_LINKS']))
-			{
-				unset($_SESSION['FIILES_NOT_DUPLI_LINKS']);
-			}
-					
-			$_SESSION['FIILES_NOT_DUPLI_LINKS'] = $_POST;
-		}
-		
 		# clear some variables from memory
 		unset($filename, $folderee, $sizeee, $typeee);
 	}

@@ -17,6 +17,7 @@
 [x] fix bug where kleeja doesnt respect decoding type when it set to nothing (reported by: althani)
 [x] fix security issue .. 
 [x] Username at registering now should be between 4 to 25 characters (reported by ibragate)
+[x] fix bug where user can not open other page while uploading files (reported by gulfup.com)
 
 1.5.1 - version : 
 [x] Fix bug with uploading from URL.

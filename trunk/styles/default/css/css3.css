@@ -58,4 +58,8 @@
 	/* @Borders all Corners (10)Pixel ----------- */	
 	.admin_cp_link span,	.guide_right_img,.guide_left_img  {
 	-moz-border-radius : 10px;-webkit-border-radius : 10px;-khtml-border-radius : 10px;border-radius : 10px;}
+	
+   /* @Borders tabs (5)Pixel ----------- */	
+   .tabnav li{-webkit-border-top-right-radius: 5px;-webkit-border-top-left-radius: 5px;-moz-border-radius-topright: 5px;-moz-border-radius-topeft: 5px;border-top-right-radius: 5px;border-top-left-radius: 5px;}
+
 /* @end */

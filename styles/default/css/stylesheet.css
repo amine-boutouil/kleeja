@@ -199,6 +199,18 @@
 	/*	ONLINE -------------------- */
 	.online{width:100%;float:right;padding:2px 0;display:block;}
 	.onlineall, .onlinevisitor, .onlineusers, .name_users {float:right;line-height:16px;margin: 0 0 8px 5px;padding:2px 10px;font-weight:400;}
+
+   /*	New Tabs -------------------- */
+   .tabnav{height:22px;padding:0px;margin:0px;border-bottom:1px solid #cccccc;}
+   .tabnav li{width:auto;height:12px;display:block;font-size:11px;float:right;background:#bed9ed;border: 1px solid #cccccc;border-bottom-style:none;padding: 5px 12px 5px 12px;margin-left: 4px;cursor:pointer;}
+   .tabnav li:hover{background-color:#deebf1;}
+   li.tabactive{color:#8EC1DA;background-color:white;}
+   li.tabactive:hover{background-color:white;}
+   .tabmain{width:650px;margin-top:10px;}
+   .tabcon{border:1px solid #cccccc;border-top-style:none;background:white url("../images/bg_tabbertab.png") repeat-x bottom left;padding:20px 20px 20px 20px;display:none;}
+   .tabcon div{background:url("../images/go_up.png") no-repeat 0% 100%;text-align:right;margin-top:14px;}
+   .tabcon:nth-child(2){display:block;}
+
 /* @end */
 
 /*	--------------------------------------------------

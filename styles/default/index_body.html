@@ -23,47 +23,64 @@
 	
 	<!-- form upload -->
 	<form id="uploader" action="{action}" method="post" enctype="multipart/form-data"<IS_BROWSER!="ie6"> onsubmit="form_submit();"</IS_BROWSER>>
-		
-		<IF NAME="config.www_url">
-		<!-- upload boxes -->
-		<div class="tabber">
-		
-		<!-- uplaod normal -->
-		<div class="tabbertab" title="{lang.DOWNLOAD_F}" id="filetype">
-		</IF>
-		
-		<div class="go_up">
-			<LOOP NAME=FILES_NUM_LOOP>
-				<input type="file" name="file_{{i}}_" id="file_{{i}}_" style="{{show}}" size="60" onchange="javascript:plus({{i}}, 1);" /><br id="br_{{i}}_" style="{{show}}" />
-			</LOOP>
-				<div id="upload_forum"></div>
-				<div class="agree"><span>{terms_msg}</span></div>
-				<div class="bn_up"><input type="submit" id="submitr" name="submitr" value="{lang.DOWNLOAD_F}" /></div>
-				<div class="clr"></div>
-		</div>
-		
-		<IF NAME="config.www_url">
-		</div><!-- @end-uplaod-normal -->		
-		</IF>
-		 
-		<IF NAME="config.www_url">
-		<!-- uplaod URL -->   
-		<div class="tabbertab" title="{lang.DOWNLOAD_T}" id="texttype">
-			<div class="go_up">
-			<LOOP NAME=FILES_NUM_LOOP>
-				<input class="url" type="text" name="file_{{i}}_" id="fileu_{{i}}_" style="{{show}}" size="70" value="{lang.PAST_URL_HERE}" onclick="this.value='';javascript:plus({{i}}, 2);" /><br id="bru_{{i}}_" style="{{show}}" />
-			</LOOP>
-				<div id="upload_f_forum"></div>
-				<div class="agree"><span>{terms_msg}</span></div>
-				<div class="bn_up"><input type="submit" id="submittxt" name="submittxt" value="{lang.DOWNLOAD_T}" /> </div>
-				<div class="clr"></div>
-			</div>
-		</div><!-- @end-uplaod-URL -->	
-		</IF>
 
-		<IF NAME="config.www_url">
-		</div><!-- @end-upload-boxes -->
-		</IF>
+      <!-- upload boxes -->
+      <div class="tabmain">
+
+         <ul class="tabnav">
+            <!-- First-Tab -->
+            <li title="{lang.DOWNLOAD_F}">{lang.DOWNLOAD_F}</li>
+            <!-- @First-Tab -->
+            
+            <IF NAME="config.www_url">
+            <!-- Second-Tab -->
+            <li title="{lang.DOWNLOAD_T}">{lang.DOWNLOAD_T}</li>
+            <!-- @Second-Tab --> 
+            </IF>
+         </ul>
+
+         <!-- First-Box -->
+         <div class="tabcon" title="{lang.DOWNLOAD_F}">
+            <div>
+               <!-- uplaod normal -->
+               <LOOP NAME=FILES_NUM_LOOP>
+               <input type="file" name="file_{{i}}_" id="file_{{i}}_" style="{{show}}" size="60" onchange="javascript:plus({{i}}, 1);" /><br id="br_{{i}}_" style="{{show}}" />
+               </LOOP>
+               <div id="upload_forum"></div>
+               <div class="agree"><span>{terms_msg}</span></div>
+               <div class="bn_up"><input type="submit" id="submitr" name="submitr" value="{lang.DOWNLOAD_F}" /></div>
+               <div class="clr"></div>
+               <!-- @uplaod normal -->
+            </div>
+         </div>
+         <!-- @First-Box -->
+
+         <IF NAME="config.www_url">
+         <!-- Second-Box -->
+         <div class="tabcon" title="{lang.DOWNLOAD_T}">
+            <div>
+               <!-- uplaod URL -->  
+               <LOOP NAME=FILES_NUM_LOOP>
+               <input class="url" type="text" name="file_{{i}}_" id="fileu_{{i}}_" style="{{show}}" size="70" value="{lang.PAST_URL_HERE}" onclick="this.value='';javascript:plus({{i}}, 2);" /><br id="bru_{{i}}_" style="{{show}}" />
+               </LOOP>
+               <div id="upload_f_forum"></div>
+               <div class="agree"><span>{terms_msg}</span></div>
+               <div class="bn_up"><input type="submit" id="submittxt" name="submittxt" value="{lang.DOWNLOAD_T}" /> </div>
+               <div class="clr"></div>
+               <!-- @uplaod URL -->  
+            </div>
+         </div>
+         <!-- @Second-Box -->
+         </IF>
+
+      </div>
+      <!-- @upload boxes -->
+
+
+
+
+
+
 	
 		<IF NAME="config.safe_code">
 		<!-- verification code -->	

@@ -38,7 +38,7 @@ function Saaheader($title, $outscript = false, $extra = '')
 	$side_menu = array(
 		1 => array('name'=>'profile', 'title'=>$lang['PROFILE'], 'url'=>$config['mod_writer'] ? 'profile.html' : 'ucp.php?go=profile', 'show'=>$user_is),
 		2 => array('name'=>'fileuser', 'title'=>$lang['YOUR_FILEUSER'], 'url'=>$config['mod_writer'] ? 'fileuser.html' : 'ucp.php?go=fileuser', 'show'=>$config['enable_userfile'] && user_can('access_fileuser')),
-        3 => $user_is ?
+		3 => $user_is ?
 			 array('name'=>'logout', 'title'=>$lang['LOGOUT'], 'url'=>$config['mod_writer'] ? 'logout.html' : 'ucp.php?go=logout', 'show'=>true) : 
 			 array('name'=>'login', 'title'=>$lang['LOGIN'], 'url'=>$config['mod_writer'] ? 'login.html' : 'ucp.php?go=login', 'show'=>true),
 		4 => array('name'=>'register', 'title'=>$lang['REGISTER'], 'url'=>$config['mod_writer'] ? 'register.html' : 'ucp.php?go=register', 'show'=>!$user_is && $config['register']),
@@ -348,7 +348,7 @@ function redirect($url, $header = true, $exit = true, $sec = 0, $return = false)
 
     if (!headers_sent() && $header && !$return)
 	{
-        header('Location: ' . str_replace(array('&amp;'), array('&'), $url)); 
+		header('Location: ' . str_replace(array('&amp;'), array('&'), $url)); 
     }
 	else
 	{
@@ -610,7 +610,7 @@ function get_up_tpl_box($box_name, $extra = array())
 {
 	global $THIS_STYLE_PATH_ABS, $config;
 	static $boxes = false;
-	
+
 	//prevent loads
 	//also this must be cached in future
 	if($boxes !== true)
@@ -646,20 +646,24 @@ function get_up_tpl_box($box_name, $extra = array())
 			$boxes[$match[1][$i]] = $match[2][$i];
 		}
 	}
-	
+
 	//extra value 
 	$extra += array(
 				'siteurl' => $config['siteurl'],
 				'sitename' => $config['sitename'],
 			);
-	
+
 	//return compiled value
 	$return = $boxes[$box_name];
 	foreach($extra as $var=>$val)
 	{
 		$return = preg_replace('/{' . $var . '}/', $val, $return);
 	}
-	
+
+	/*
+	 * We add this hook here so you can subtitue you own vars
+	 * and even add your own boxes to this template.
+	 */
 	($hook = kleeja_run_hook('get_up_tpl_box_func')) ? eval($hook) : null; //run hook
 
 	return $return;
@@ -738,7 +742,7 @@ function is_browser($b)
 		return false;
 	}
 	
-    //if no agent, let's take the worst case
+	//if no agent, let's take the worst case
 	$u_agent = (!empty($_SERVER['HTTP_USER_AGENT'])) ? htmlspecialchars((string) $_SERVER['HTTP_USER_AGENT']) : (function_exists('getenv') ? getenv('HTTP_USER_AGENT') : '');
 	$t = trim(preg_replace('/[^a-z]/', '', $b));
 	$r = trim(preg_replace('/[a-z]/', '', $b));
@@ -896,39 +900,39 @@ function kleeja_date($time, $human_time = true, $format = false)
 function time_zones()
 {
 	return array(
-        'Kwajalein' => -12.00,
-        'Pacific/Midway' => -11.00,
-        'Pacific/Honolulu' => -10.00,
-        'America/Anchorage' => -9.00,
-        'America/Los_Angeles' => -8.00,
-        'America/Denver' => -7.00,
-        'America/Tegucigalpa' => -6.00,
-        'America/New_York' => -5.00,
-        'America/Caracas' => -4.30,
-        'America/Halifax' => -4.00,
-        'America/St_Johns' => -3.30,
-        'America/Argentina/Buenos_Aires' => -3.00,
-        'America/Sao_Paulo' => -3.00,
-        'Atlantic/South_Georgia' => -2.00,
-        'Atlantic/Azores' => -1.00,
-        'Europe/Dublin' => 0,
-        'Europe/Belgrade' => 1.00,
-        'Europe/Minsk' => 2.00,
-        'Asia/Riyadh' => 3.00,
-        'Asia/Tehran' => 3.30,
-        'Asia/Muscat' => 4.00,
-        'Asia/Yekaterinburg' => 5.00,
-        'Asia/Kolkata' => 5.30,
-        'Asia/Katmandu' => 5.45,
-        'Asia/Dhaka' => 6.00,
-        'Asia/Rangoon' => 6.30,
-        'Asia/Krasnoyarsk' => 7.00,
-        'Asia/Brunei' => 8.00,
-        'Asia/Seoul' => 9.00,
-        'Australia/Darwin' => 9.30,
-        'Australia/Canberra' => 10.00,
-        'Asia/Magadan' => 11.00,
-        'Pacific/Fiji' => 12.00,
-        'Pacific/Tongatapu' => 13.00
-    );
+		'Kwajalein' => -12.00,
+		'Pacific/Midway' => -11.00,
+		'Pacific/Honolulu' => -10.00,
+		'America/Anchorage' => -9.00,
+		'America/Los_Angeles' => -8.00,
+		'America/Denver' => -7.00,
+		'America/Tegucigalpa' => -6.00,
+		'America/New_York' => -5.00,
+		'America/Caracas' => -4.30,
+		'America/Halifax' => -4.00,
+		'America/St_Johns' => -3.30,
+		'America/Argentina/Buenos_Aires' => -3.00,
+		'America/Sao_Paulo' => -3.00,
+		'Atlantic/South_Georgia' => -2.00,
+		'Atlantic/Azores' => -1.00,
+		'Europe/Dublin' => 0,
+		'Europe/Belgrade' => 1.00,
+		'Europe/Minsk' => 2.00,
+		'Asia/Riyadh' => 3.00,
+		'Asia/Tehran' => 3.30,
+		'Asia/Muscat' => 4.00,
+		'Asia/Yekaterinburg' => 5.00,
+		'Asia/Kolkata' => 5.30,
+		'Asia/Katmandu' => 5.45,
+		'Asia/Dhaka' => 6.00,
+		'Asia/Rangoon' => 6.30,
+		'Asia/Krasnoyarsk' => 7.00,
+		'Asia/Brunei' => 8.00,
+		'Asia/Seoul' => 9.00,
+		'Australia/Darwin' => 9.30,
+		'Australia/Canberra' => 10.00,
+		'Asia/Magadan' => 11.00,
+		'Pacific/Fiji' => 12.00,
+		'Pacific/Tongatapu' => 13.00
+	);
 }

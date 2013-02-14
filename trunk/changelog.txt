@@ -18,6 +18,9 @@
 [x] fix security issue .. 
 [x] Username at registering now should be between 4 to 25 characters (reported by ibragate)
 [x] fix bug where user can not open other page while uploading files (reported by gulfup.com)
+[x] faster home page with new inproved javascript tabs
+[x] Juqery.js library is included offically with Kleeja now
+
 
 1.5.1 - version : 
 [x] Fix bug with uploading from URL.

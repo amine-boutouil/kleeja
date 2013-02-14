@@ -13,6 +13,7 @@
 	<link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
 	<link rel="apple-touch-startup-image" href="images/iPhone.png" />
 	<link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH}css/stylesheet.css" />
+	<script type="text/javascript" src="{STYLE_PATH}jquery.js"></script>
 	<IS_BROWSER!="mobile">
 	<link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH}css/color.css" />
 	<IF NAME="{lang.DIR}==ltr"><link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH}css/ltr.css" /></IF>
@@ -27,6 +28,7 @@
 	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
 	<link rel="stylesheet" type="text/css" href="{STYLE_PATH}css/mobile.css"  />
 	</IS_BROWSER>
+
 	<script type="text/javascript">
 	<!--
 	var number_of_uploads={config.filesnum};
@@ -35,21 +37,21 @@
 	var STYLE_PATH  = "{STYLE_PATH}";
 	-->
 	</script>
-    <!-- <script type="text/javascript" src="{STYLE_PATH}ucp.js"></script> -->
+
 	<script type="text/javascript" src="{STYLE_PATH}javascript.js"></script>
-	
+
 	<IF NAME="go_current == index">
 	<script type="text/javascript">
 	<!--
-   //run tabs
-   addLoadEvent(function(){
-      var mah;
-      mah = new tabs('tabmain','tabnav','tabcon','tabactive');
-   });
+	//run tabs
+	addLoadEvent(function(){
+		var mah;
+		mah = new tabs('tabmain','tabnav','tabcon','tabactive');
+	});
 	-->
 	</script>
 	</IF>
-	
+
 	<!-- Extra code -->
 	{EXTRA_CODE_META}
 </head>
@@ -62,7 +64,7 @@
 		<h1><a title="{config.sitename}" href="{config.siteurl}" class="logo">{config.sitename}</a></h1>
 	</div>
 	<!-- @end-Header -->
-	
+
 	<div class="clr"></div>
 
 	<!-- begin Top Navigation -->
@@ -90,17 +92,16 @@
 	<div class="clr"></div>
 
 	<!-- begin menu right -->
-    <div id="sidebar">  
-      <div id="sidebar_box">
-	  <IS_BROWSER!="mobile"> 		
-        <img src="{user_avatar}" alt="{username}" title="{username}" height="90" width="100" /> 		
-      </IS_BROWSER>
+	<div id="sidebar">  
+		<div id="sidebar_box">
+		<IS_BROWSER!="mobile"> 
+			<img src="{user_avatar}" alt="{username}" title="{username}" height="90" width="100" />
+		</IS_BROWSER>
 			<ul class="menu">
 				<LOOP NAME="side_menu"><IF LOOP="show">
 				<li><a href="{{url}}" (go_current=={{name}}?class="current":)><IS_BROWSER!="mobile"><img src="{STYLE_PATH}images/{{name}}.png" style="float:right;" class="pngfix" alt="{lang.LOGIN}" style="vertical-align:middle;" /></IS_BROWSER>{{title}} <IF LOOP="name==logout">[ {username} ]</IF></a></li>
 				</IF></LOOP>
 			</ul>
-      </div>
-	  <div class="dot clr"></div>
-
-      </div><!-- @end-menu-right -->
+		</div>
+		<div class="dot clr"></div>
+	</div><!-- @end-menu-right -->

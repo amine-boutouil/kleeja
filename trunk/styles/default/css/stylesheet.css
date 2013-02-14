@@ -186,15 +186,6 @@
 	#loadbox {padding: 15px;	display:none;}
 	.waitloading{font-size:120%;margin:5px;}
 
-	/*	Tabs -------------------- */
-	.go_up{margin-top:20px;}
-	.tabberlive .tabbertabhide,.tabber {display:none;}
-	.tabberlive {margin-top:10px;}
-	.tabberlive .tabbertab {padding:20px;}
-	ul.tabbernav{margin:0;padding: 4px 0;font-size:11px;}
-	ul.tabbernav li{list-style: none;margin: 0;display: inline;}
-	ul.tabbernav li a{padding: 3px 1em; margin-left: 4px;}
-
 
 	/*	ONLINE -------------------- */
 	.online{width:100%;float:right;padding:2px 0;display:block;}

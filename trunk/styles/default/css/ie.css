@@ -4,8 +4,7 @@ html {background: #EBEBEB url(../images/bg_footer.gif) repeat;}
 input[type="submit"]{cursor: pointer;}
 input[type="text"]:hover, input[type="password"]:hover, textarea:hover, select:hover{border: 1px solid #D26900;}
 input:focus, input.sffocus { background-color:#ffd;border: 1px solid #D26900;}
-.tabber {width:auto;}
-.safe_code ,.call,.register,.get_password,.tabbertab{width:94%;}
+.safe_code ,.call,.register,.get_password{width:94%;}
 .data_menu td{border:2px solid #F6EBE4;}
 #wrapper {position: relative;z-index: inherit;zoom: 1; /* For IE6 */}
 #content, #content_index  {width:70%;margin:5px 15px 0 15px;}

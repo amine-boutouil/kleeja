@@ -157,15 +157,6 @@
 	input.input_num {background:white;border: 1px solid #B3B9C4;outline:1px solid #ccc;}
 	.waitloading{color:#8EC1DA;}
 
-	/*	Tabs -------------------- */
-	.tabberlive .tabbertab {background:white url("../images/bg_tabbertab.png") repeat-x bottom left;border:1px solid #ccc;border-top:none;}
-	.go_up{background:url("../images/go_up.png") no-repeat 0% 100%;}
-	ul.tabbernav{border-bottom: 1px solid #ccc;}
-	ul.tabbernav li a{background:#BED9ED;border: 1px solid #ccc;border-bottom: none;}
-	ul.tabbernav li a:link ,ul.tabbernav li a:visited {color:#4B4F52;}
-	ul.tabbernav li a:hover{color:black;background:#CAA397 url("../images/bg_tabbernav.gif") repeat-x;border-color: #ccc;}
-	ul.tabbernav li.tabberactive a{color:#8EC1DA;background:white url("../images/bg_tabbernav.gif") repeat-x center;border-bottom: 1px solid white;}
-
 	/*	ONLINE -------------------- */
 	.onlineall, .onlinevisitor, 
 	.onlineusers, .name_users {background:#FAFAE7 url("../images/bg_onlineall.gif") repeat-x center left;border:1px solid white;color:#4E4E07;}

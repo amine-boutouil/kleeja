@@ -49,8 +49,8 @@ display:block;margin:0 0.5em;
 .top_nav .menu li a:hover {color:#4B4F52;background-color:#DFEDF8;padding:0;}
 .top_nav .menu li a.current {color:#4B4F52;background-color:#DFEDF8; padding:0;}
 .agree {margin: 5px auto;text-align:center;display:none}
-.go_up,.bn_up{margin: 20px auto;text-align:center;}
-.go_up input{width:auto;}
+.bn_up{margin: 20px auto;text-align:center;}
+.tabcon input{width:auto;}
 .login {text-align:center;}
 .box_form_login {width: 100%;}
 .title_login {text-indent: 0px;}

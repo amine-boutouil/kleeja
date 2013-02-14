@@ -288,11 +288,18 @@
 		display: inline;
 		list-style: none;
 		width: 150px;
-		height: 175px;
+		height: 150px;
 		float: left;
-		margin: 0 5px 10px 0;
+		margin: 0 5px 20px 0;
 		text-align: center;
 	}
+	.fileuser-thumbs li.is_image{
+		background:#CCCCCC url(../images/img_container.png) no-repeat 50% 50%;
+	}
+	.fileus-thumbs .kcheck{
+		
+	}
+
 	.fileuser-thumbs img{
 		height: 150px !important;
 		width: 150px !important;
@@ -305,9 +312,7 @@
 		width:150px;
 		height:150px;
 	}
-	
-	
-	
+
 	.filebox .this_file{
 		padding-top:50px;
 	}

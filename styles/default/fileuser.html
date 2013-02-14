@@ -63,12 +63,11 @@
 			<div class="fileuser-thumbs">
 				<LOOP NAME="arr">
 					{{tdnum}}
-					<li id="su[{{id}}]"<IF LOOP="is_image"><ELSE> class="is_file"</IF>>
+					<li id="su[{{id}}]" class="<IF LOOP="is_image">is_image<ELSE>is_file</IF>">
 					<IF LOOP="is_image">
-					<a href="{{href}}" target="_blank" title="{lang.FILEUPS}:{{uploads}}, {lang.FILESIZE}:{{size}}, {lang.FILEDATE}:{{time}}"><img src="{{thumb_link}}" alt="{lang.FILEUPS}:{{ups}}, {lang.FILESIZE}:{{size}}, {lang.FILEDATE}:{{time}}" /></a>
-					<IF NAME="user_himself">
-					<p class="kcheck"><input id="del_{{id}}" name="del_{{id}}" type="checkbox" value="{{id}}" rel="_del" onclick="change_color(this,'su[{{id}}]');"  /></p>
-					</IF>
+						<a href="{{href}}" target="_blank" title="{lang.FILEUPS}:{{uploads}}, {lang.FILESIZE}:{{size}}, {lang.FILEDATE}:{{time}}">
+							<img src="{{thumb_link}}" alt="{lang.FILEUPS}:{{ups}}, {lang.FILESIZE}:{{size}}, {lang.FILEDATE}:{{time}}" />
+						</a>
 					<ELSE>
 						<div class="filebox" style="background-image:url({{thumb_link}})">
 							<div class="this_file">
@@ -79,14 +78,13 @@
 								<span>{lang.FILESIZE}: {{size}}</span>
 								<span>{lang.FILEDATE}: {{time}}</span>
 								</div>
-							
 							</div>
 						</div>
-						<IF NAME="user_himself">
-						<div class="this_file_select">
+					</IF>
+					<IF NAME="user_himself">
+						<p class="kcheck">
 							<input id="del_{{id}}" name="del_{{id}}" type="checkbox" value="{{id}}" rel="_del"  onclick="change_color(this,'su[{{id}}]');" />
-						</div>
-						</IF>
+						</p>
 					</IF>
 					</li>
 					{{tdnum2}}

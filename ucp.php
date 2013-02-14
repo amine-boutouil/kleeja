@@ -213,7 +213,7 @@ switch ($_GET['go'])
 			{
 				$ERRORS['lmail'] = $lang['WRONG_EMAIL'];
 			}
-			if (strlen(trim($_POST['lname'])) < 4 || strlen(trim($_POST['lname'])) > 25)
+			if (strlen(trim($_POST['lname'])) < 3 || strlen(trim($_POST['lname'])) > 50)
 			{
 				$ERRORS['lname'] = $lang['WRONG_NAME'];
 			}
@@ -264,11 +264,11 @@ switch ($_GET['go'])
 						//delete cache ..
 						delete_cache('data_stats');
 					}
-                    
-                    //auto login
-                    $usrcp->data($t_lname, $t_lpass, false, false);
-                    kleeja_info($text, '', true, $config['siteurl'], 3);
-                    
+					
+					//auto login
+					$usrcp->data($t_lname, $t_lpass, false, false);
+					kleeja_info($text, '', true, $config['siteurl'], 3);
+					
 				}
 			}
 		}
@@ -303,15 +303,13 @@ switch ($_GET['go'])
 
 		($hook = kleeja_run_hook('begin_fileuser')) ? eval($hook) : null; //run hook
 
-        $stylee	                = 'fileuser';
-		$H_FORM_KEYS            = kleeja_add_form_key('fileuser');
-        $H_FORM_KEYS_PAGINTION  = kleeja_add_form_key_get('fileuserpageintion');
-        $MY_CURRENT_LOCATION    = $config['siteurl'] . ($config['mod_writer'] ?  'fileuser-' . $user_id  . '.html' : 'ucp.php?go=fileuser&amp;id=' . $user_id);
-        $user_id_get	        = isset($_GET['id']) ? intval($_GET['id']) : false;
-		$user_id		        = (!$user_id_get && $usrcp->id()) ? $usrcp->id() : $user_id_get;
-		$user_himself	        = $usrcp->id() == $user_id;
-		$action			        = $config['siteurl'] . 'ucp.php?go=fileuser';
-        $AJAXED                 = true; //$config['ajaxed']
+		$stylee	= 'fileuser';
+		$H_FORM_KEYS = kleeja_add_form_key('fileuser');
+
+		$user_id_get	= isset($_GET['id']) ? intval($_GET['id']) : false;
+		$user_id		= (!$user_id_get && $usrcp->id()) ? $usrcp->id() : $user_id_get;
+		$user_himself	= $usrcp->id() == $user_id;
+		$action			= $config['siteurl'] . 'ucp.php?go=fileuser';
 
 		//no logon before 
 		if (!$usrcp->name() && !isset($_GET['id']))
@@ -334,7 +332,7 @@ switch ($_GET['go'])
 		}
 
 		//fileuser is closed ?
-		if ((int) $config['enable_userfile'] != 1 && !user_can('enter_acp') && $usrcp->name())
+		if ((int) $config['enable_userfile'] != 1 && !user_can('enter_acp'))
 		{
 			kleeja_info($lang['USERFILE_CLOSED'], $lang['CLOSED_FEATURE']);
 		}
@@ -351,7 +349,6 @@ switch ($_GET['go'])
 		{
 			kleeja_info($lang['USERFILE_CLOSED'], $lang['CLOSED_FEATURE']);
 		}
-
 
 		$query	= array(
 					'SELECT'	=> 'f.id, f.name, f.real_filename, f.folder, f.type, f.uploads, f.time, f.size',
@@ -371,8 +368,7 @@ switch ($_GET['go'])
 		$your_fileuser	= $config['siteurl'] . ($config['mod_writer'] ? 'fileuser-' . $usrcp->id() . '.html' : 'ucp.php?go=fileuser&amp;id=' .  $usrcp->id());
 		$total_pages	= $Pager->getTotalPages(); 
 		$linkgoto		= $config['siteurl'] . ($config['mod_writer'] ?  'fileuser-' . $user_id  . '.html' : 'ucp.php?go=fileuser&amp;id=' . $user_id);
-		$page_nums		= $Pager->print_nums(str_replace('.html', '', $linkgoto), '', $AJAXED);
-
+		$page_nums		= $Pager->print_nums(str_replace('.html', '', $linkgoto));
  
 		$no_results = true;
 
@@ -433,16 +429,7 @@ switch ($_GET['go'])
 					//check for form key
 					if(!kleeja_check_form_key('fileuser', 1800 /* half hour */))
 					{
-					   //return err in ajax
-					   if(isset($_GET['formkey']))
-                       {
-                            echo_array_ajax(array(
-                                'type' => '2',
-                                'resp' => $lang['INVALID_FORM_KEY']
-                            ));
-                       }
-                       
-                       kleeja_info($lang['INVALID_FORM_KEY']);
+						kleeja_info($lang['INVALID_FORM_KEY']);
 					}
 
 					if ($_POST['del_' . $row['id']])
@@ -473,9 +460,7 @@ switch ($_GET['go'])
 
 			$SQL->freeresult($result_p);
 			$SQL->freeresult($result);
-            
 
-            
 			//
 			//after submit
 			//
@@ -502,56 +487,16 @@ switch ($_GET['go'])
 
 						$SQL->build($update_query);
 					}
-                    
-                    //return OK in ajax
-				    if(isset($_GET['formkey']))
-                    {
-                        echo_array_ajax(array(
-                        'type' => '1',
-                        'resp' => $lang['FILES_DELETED']
-                        ));
-                    }
+
 					//delte is ok, show msg
 					kleeja_info($lang['FILES_DELETED'], '', true, $linkgoto, 2);
 				}
 				else
-				{   
-				    //return err in ajax
-				    if(isset($_GET['formkey']))
-                    {
-                        echo_array_ajax(array(
-                        'type' => '2',
-                        'resp' => $lang['NO_FILE_SELECTED']
-                        ));
-                    }
-                    
+				{
 					//no file selected, show msg
 					kleeja_info($lang['NO_FILE_SELECTED'], '', true, $linkgoto, 2);
 				}
 			}
-            
-            //KLEEJA - SIMPLE AJAX REQUEST
-            if(isset($_GET['formkey']))
-            {
-                //check for form key
-                if(!kleeja_check_form_key_get('fileuserpageintion'))
-                {
-                    kleeja_info($lang['INVALID_FORM_KEY']);
-                }
-                
-                /** **************************************************** * /
-                / *                                                      * /
-                / * We have to replace this function "json_encode" later * /
-                / *                                                      * /
-                / ** **************************************************  **/
-                                  
-                echo_array_ajax(array(
-                 'files' => $arr,
-                 'page' => $page_nums
-                 ));
-
-                 
-            }
 		}#num result
 
 		($hook = kleeja_run_hook('end_fileuser')) ? eval($hook) : null; //run hook

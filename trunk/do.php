@@ -216,7 +216,7 @@ else if (isset($_GET['down']) || isset($_GET['downf']) ||
 	if($is_id_filename)
 	{
 		$var = isset($_GET['downf']) ? 'downf' : (isset($_GET['imgf']) ? 'imgf' : (isset($_GET['thmbf']) ? 'thmbf' : (isset($_GET['downexf']) ? 'downexf' : false)));
-		
+
 		#x, represent the extension, came from html links
 		if(isset($_GET['x']) && $var)
 		{
@@ -245,7 +245,7 @@ else if (isset($_GET['down']) || isset($_GET['downf']) ||
 					'WHERE'		=> $is_id_filename ? "f.name='" . $filename . "'" .  (isset($_GET['downexf']) ? " AND f.type IN ('" . implode("', '", $livexts) . "')" : '') :
 													'f.id=' . $id  . (isset($_GET['downex']) ? " AND f.type IN ('" . implode("', '", $livexts) . "')" : ''),
 					);
-	
+
 	($hook = kleeja_run_hook('qr_down_go_page_filename')) ? eval($hook) : null; //run hook
 	$result	= $SQL->build($query);
 
@@ -323,6 +323,7 @@ else if (isset($_GET['down']) || isset($_GET['downf']) ||
 		}
 		else
 		{
+			
 			//not exists file
 			($hook = kleeja_run_hook('not_exists_qr_down_file')) ? eval($hook) : null; //run hook
 			kleeja_err($lang['FILE_NO_FOUNDED']);
@@ -350,7 +351,14 @@ else if (isset($_GET['down']) || isset($_GET['downf']) ||
 	if(!is_readable($path_file))
 	{
 		($hook = kleeja_run_hook('down_file_not_exists')) ? eval($hook) : null; //run hook
-		big_error($lang['FILE_NO_FOUNDED'],  $lang['NOT_FOUND']);
+		if($is_image)
+		{
+			$path_file = 'images/not_exists.jpg';
+		}
+		else
+		{
+			big_error($lang['FILE_NO_FOUNDED'],  $lang['NOT_FOUND']);
+		}
 	}
 
 	if(!($size = @kleeja_filesize($path_file)))
@@ -425,7 +433,7 @@ else if (isset($_GET['down']) || isset($_GET['downf']) ||
 	{
 		header('HTTP/1.1 206 Partial Content');
 
-        $ranges		= explode(',', substr(trim($_SERVER['HTTP_RANGE']), 6));
+		$ranges		= explode(',', substr(trim($_SERVER['HTTP_RANGE']), 6));
 		$boundary	= substr(md5($name . microtime()), 24);
 
 		# many ranges requested 
@@ -438,7 +446,7 @@ else if (isset($_GET['down']) || isset($_GET['downf']) ||
 				$content_length += strlen("\r\n--$boundary\r\n");
 				$content_length += strlen("Content-Type: $mime_type\r\n");
 				$content_length += strlen("Content-range: bytes $first-$last/$size\r\n\r\n");
-				$content_length += $last-$first+1;          
+				$content_length += $last-$first+1;
 			}
 			$content_length += strlen("\r\n--$boundary--\r\n");
 
@@ -452,7 +460,7 @@ else if (isset($_GET['down']) || isset($_GET['downf']) ||
 				echo "Content-Type: $mime_type\r\n";
 				echo "Content-range: bytes $first-$last/$size\r\n\r\n";
 				fseek($pfile, $first);
-				kleeja_buffere_range($pfile, $last-$first+1, $chunksize);          
+				kleeja_buffere_range($pfile, $last-$first+1, $chunksize);
 			}
 			echo "\r\n--$boundary--\r\n";
 		}
@@ -471,8 +479,8 @@ else if (isset($_GET['down']) || isset($_GET['downf']) ||
 	{
 
 		header("Content-Length: " . $size);
-		header("Content-Type: $mime_type");  
-		
+		header("Content-Type: $mime_type");
+
 		if(!$size)
 		{
 			while (!feof($pfile))

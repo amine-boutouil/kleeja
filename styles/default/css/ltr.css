@@ -40,7 +40,6 @@
 	#content, #content_index {margin: 5px 10px 0 0;}
 	/* @Template & Index > index_body.html -------------- */
 	.waitloading{font-size:140%;}
-	ul.tabbernav li a{margin-left:0;margin-right: 4px;}
 	.online{float:left;}
 	.onlineall, .onlinevisitor, .onlineusers, .name_users {float:left;margin-left:0;margin-right:6px;}
 	/* @Template & Downlod > download.html -------------- */

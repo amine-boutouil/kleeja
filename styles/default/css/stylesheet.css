@@ -199,7 +199,7 @@
 	li.tabactive:hover{background-color:white;}
 	.tabmain{width:650px;margin-top:10px;}
 	.tabcon{border:1px solid #cccccc;border-top-style:none;background:white url("../images/bg_tabbertab.png") repeat-x bottom left;padding:20px 20px 20px 20px;display:none;}
-	.tabcon div{background:url("../images/go_up.png") no-repeat 0% 100%;text-align:right;margin-top:14px;}
+	.tabcon .go_up{background:url("../images/go_up.png") no-repeat 0% 100%;text-align:right;margin-top:14px;}
 	.tabcon:nth-child(2){display:block;}
 
 /* @end */

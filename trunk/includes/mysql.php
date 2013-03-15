@@ -372,10 +372,11 @@ class SSQL
 	function escape($msg)
 	{
 		$msg = htmlspecialchars($msg , ENT_QUOTES);
-		$msg = (!get_magic_quotes_gpc()) ? addslashes ($msg) : $msg;
+		#$msg = (!get_magic_quotes_gpc()) ? addslashes ($msg) : $msg;
+		$msg = $this->real_escape($msg);
 		return $msg;
 	}
-	
+
 	/*
 	 * real escape .. 
 	 */

@@ -22,6 +22,7 @@
 [x] Juqery.js library is included offically with Kleeja now
 [x] fix bug when there is no file and request thumbf=..., it shows txt error instead of image error.
 [x] good look of images at userfile while loading instead of just white spaces. 
+[x] return back to "mysql_real_escape_string, (reported by twitter/Abdullah_says)
 
 1.5.1 - version : 
 [x] Fix bug with uploading from URL.

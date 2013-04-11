@@ -13,7 +13,6 @@
 <link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/byname.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/facybox.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/tiptip.css" />
-<link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/pop.css" />
 <IF NAME="{lang.DIR}==ltr"><link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/ltr.css" /></IF>	
 <IS_BROWSER="ie6"><link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/ie6.css" /></IS_BROWSER>
 <IS_BROWSER="ie"><link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/ie.css" /></IS_BROWSER>
@@ -28,14 +27,13 @@ var go_to = '{go_to}';
 <!--script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.ui.min.js"></script-->
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}js/facybox.js"></script>
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.tiptip.js"></script>
-<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.pop.js"></script>
 <script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jqBarGraph.js"></script>
 <script type="text/javascript">
 <!--//
 jQuery(document).ready(function($){
-$.pop();
 $('a[rel*=facebox]', 'a[rel*=facybox]').facybox();
 
+<IF NAME="AJAX_ACP">
 if(window.location.hash.indexOf("#!") != -1 && '{is_ajax}' != 'newplg'){
 	hash = window.location.hash.replace('#!', '');
 	where_are_we = hash.match(/cp\=([0-9a-z_]+)/);
@@ -114,7 +112,9 @@ window.onhashchange = function () {
 		
 		//	get_kleeja_link('./?' + , '#content', {'current_id':div_id, 'current_class':'link_current', 'gomenu_id':gomenu_id});
     }
+   </IF>
 });
+
 
 //check for msg, reports every 5min
 // set timeout
@@ -141,6 +141,7 @@ $.ajax({
 
 function get_kleeja_link(URL, ID, p)
 {
+	<IF NAME="AJAX_ACP">
 	if(!p){
 		p = {};
 	}
@@ -233,10 +234,16 @@ function get_kleeja_link(URL, ID, p)
 			$("#sign_ajax_error .error_msg_content").show();
 		}
 	});
+	
+	<ELSE>
+	location.href=URL;
+	return;
+	</IF>
 }
 
 function submit_kleeja_data(FORM_ID, ID, CONFIRM)
 {
+	<IF NAME="AJAX_ACP">
 	if(!ID){
 		ID = '#content';
 	}
@@ -312,6 +319,10 @@ function submit_kleeja_data(FORM_ID, ID, CONFIRM)
 			$("#sign_ajax_error .error_msg_content").show();
 		}
 	});
+	<ELSE>
+	$(FORM_ID).submit();
+	return;
+	</IF>
 }
 
 function change_color(obj, id, c, c2) {
@@ -330,8 +341,8 @@ function checkAll(form, id, _do_c_, c, c2) {
     for (var i = 0; i < form.elements.length; i++) {
         if (form.elements[i].getAttribute("rel") != id) continue;
         if (form.elements[i].checked) {
-            uncheckAll(form, id, _do_c_, c, c2);
-            break
+			uncheckAll(form, id, _do_c_, c, c2);
+			break
         }
         form.elements[i].checked = true;
         change_color(form.elements[i], _do_c_ + '[' + form.elements[i].value + ']', c, c2)
@@ -366,8 +377,8 @@ function checkAll_exts(form, id, _do_c_) {
     for (var i = 0; i < form.elements.length; i++) {
         if (form.elements[i].getAttribute("rel") != id) continue;
         if (form.elements[i].checked) {
-            uncheckAll_exts(form, id, _do_c_);
-            break
+			uncheckAll_exts(form, id, _do_c_);
+			break
         }
         form.elements[i].checked = true;
         change_color_exts(form.elements[i].value)
@@ -395,15 +406,12 @@ function uncheckAll_exts(form, id, _do_c_) {
 <div id="wrap">
 	<!-- top header -->
 	<div id="top-header" style="text-transform:capitalize;">
-		{username}
 			<div class="pop">
-            <div class="popup_menu">
-                <ul>
-                    <li><a href="http://www.moffed.com" target="_blank">{lang.SUPPORT_MOFFED}</a></li>
-                    <li><a href="{config.siteurl}">{lang.RETURN_HOME}</a></li>
-                    <li><a href="./?cp=b_lgoutcp&amp;{GET_FORM_KEY_GLOBAL}#" onclick="javascript:return confirm_from();" >{lang.R_LGOUTCP}</a></li>
-                </ul>
-            </div>
+			<ul>
+				<li><a href="http://www.moffed.com" target="_blank">{lang.SUPPORT_MOFFED}</a></li>
+				<li><a href="{config.siteurl}">{lang.RETURN_HOME}</a></li>
+				<li><a href="./?cp=b_lgoutcp&amp;{GET_FORM_KEY_GLOBAL}#" onclick="javascript:return confirm_from();" >{lang.R_LGOUTCP} [ {username} ]</a></li>
+			</ul>
 		</div>
 	</div>
 	<!--  menu -->

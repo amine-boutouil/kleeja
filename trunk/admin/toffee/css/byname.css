@@ -382,29 +382,14 @@ button, input[type='submit'] {
 
  
 /* Start top popup_menu */
-.popup_menu {width:100%;}
-.popup_menu ul {margin:0px; padding:0px;}
-.popup_menu li {list-style: none;}
-
-.popup_menu ul {background:#fff;}
-.popup_menu ul li {
-	cursor: pointer;
+.pop {width:100%;}
+.pop ul {margin:0px; padding:0px;}
+.pop li {
+	display: inline;
+	list-style-type: none;
+	padding-right: 10px;
+	font-size:10px;
 }
-
-.popup_menu a {
- color:#000 !important;
- height:30px;
- display:block;
- line-height: 25px;
- text-indent: 10px;                   
- text-decoration:none;
- width:100%;
- text-align:center;
-}
-.popup_menu a:hover{
-background-color:#E3F2FF;
-}
-
 
 /*start plugins page*/
 #plugin_boxes{

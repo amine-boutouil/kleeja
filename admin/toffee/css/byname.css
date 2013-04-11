@@ -174,7 +174,6 @@ margin-bottom:50px;}
 	
 	#content table{
 		width:100%;
-		
 	}
 	#content table td{
 		text-align:center;
@@ -182,8 +181,10 @@ margin-bottom:50px;}
 		padding:3px;
 	}
 	#content table .first, #content .first{
-		background: #ccc url('../images/input.png') repeat-x;
+		background: #C4E6F9 url('../images/input.png') repeat-x;
 		height:25px;
+		color:#333;
+		font-size: 12px;
 	}
 	
 	#content h2{
@@ -327,6 +328,7 @@ button, input[type='submit'] {
 	
 .osilver td{
 	text-align:right;
+	border-bottom:1px dotted #ccc;
 }
 /* end: admin_cslls.html */
 

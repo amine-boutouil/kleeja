@@ -36,18 +36,18 @@ input {
 }
 
 
-button, input[type='submit'] {
+button, input[type='submit'], btn {
 	display: inline-block;
-	height:23px;
 	outline: none;
 	cursor: pointer;
 	text-align: center;
 	text-decoration: none;
-	font: 11px Tahoma, arial, Helvetica, sans-serif;
-	padding:0 15px;
+	font: 12px Tahoma, arial, Helvetica, sans-serif;
+	padding: 8px 15px;
 	box-shadow: 0 1px 2px rgba(0,0,0,.2);
-	color: #4B4F52;
-	border: solid 1px #8EC1DA;
+	color: #333;
+	border: 1px solid rgba(0,0,0,0.15);
+	border-radius: 4px;
 	background: #f78d1d;
 	background: -webkit-gradient(linear, left top, left bottom, from(#BED9ED), to(#62B4E8));
 	background: -moz-linear-gradient(top,  #BED9ED, #62B4E8);
@@ -90,6 +90,27 @@ select:active {
 .btn{
 	float:left;
 }
+
+input[type=text], textarea {
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  outline: none;
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid #DDDDDD;
+}
+
+input[type=text]:focus, textarea:focus {
+  -webkit-box-shadow: 0 0 5px #51cbee;
+  -moz-box-shadow: 0 0 5px #51cbee;
+  box-shadow: 0 0 5px #51cbee;
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid #51cbee;
+}
+
 #wrap{
 	width:960px !important;
 	margin:0 auto;

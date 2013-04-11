@@ -25,6 +25,7 @@ require_once (PATH . 'includes/common.php');
 //go to ..
 $go_to		= isset($_GET['cp']) ? htmlspecialchars($_GET['cp']) : 'start';
 $username	= $usrcp->name();
+$AJAX_ACP	= defined('AJAX_ACP') ? true : false;
 
 //for security
 if (!$username)

@@ -33,6 +33,15 @@ var go_to = '{go_to}';
 jQuery(document).ready(function($){
 $('a[rel*=facebox]', 'a[rel*=facybox]').facybox();
 
+$('#menu li:gt(7)').hide();
+$('li[goto='+ location.href.match(/cp\=([0-9a-z_]+)/)[1] +']').css('display', 'block');
+$('.show_button').click(function() {
+    $('#menu li:gt(7)').toggle();
+});
+
+
+
+
 <IF NAME="AJAX_ACP">
 if(window.location.hash.indexOf("#!") != -1 && '{is_ajax}' != 'newplg'){
 	hash = window.location.hash.replace('#!', '');
@@ -47,8 +56,8 @@ if(window.location.hash.indexOf("#!") != -1 && '{is_ajax}' != 'newplg'){
 	console.debug('where_are_we='+where_are_we);
 	//for go menu
 	if(where_are_we != 'php_info'){
-		div_id = $('div[goto='+ where_are_we +']').attr('id');
-		gomenu_id = $("div[goto='"+ where_are_we +"']").attr('gomenu_id');
+		div_id = $('li[goto='+ where_are_we +']').attr('id');
+		gomenu_id = $("li[goto='"+ where_are_we +"']").attr('gomenu_id');
 		if(gomenu_id){
 			gomenu_id = gomenu_id.replace(/^\s+|\s+$/g,"");
 		}
@@ -91,8 +100,8 @@ window.onhashchange = function () {
 	console.debug('where_are_we='+where_are_we);
 	//for go menu
 	if(where_are_we != 'php_info'){
-		div_id = $('div[goto='+ where_are_we +']').attr('id');
-		gomenu_id = $("div[goto='"+ where_are_we +"']").attr('gomenu_id');
+		div_id = $('li[goto='+ where_are_we +']').attr('id');
+		gomenu_id = $("li[goto='"+ where_are_we +"']").attr('gomenu_id');
 		if(gomenu_id){
 			gomenu_id = gomenu_id.replace(/^\s+|\s+$/g,"");
 		}
@@ -408,7 +417,7 @@ function uncheckAll_exts(form, id, _do_c_) {
 	<div id="top-header" style="text-transform:capitalize;">
 			<div class="pop">
 			<ul>
-				<li><a href="http://www.moffed.com" target="_blank">{lang.SUPPORT_MOFFED}</a></li>
+				<li><a href="http://www.kleeja.com/support/" target="_blank">{lang.SUPPORT_MOFFED}</a></li>
 				<li><a href="{config.siteurl}">{lang.RETURN_HOME}</a></li>
 				<li><a href="./?cp=b_lgoutcp&amp;{GET_FORM_KEY_GLOBAL}#" onclick="javascript:return confirm_from();" >{lang.R_LGOUTCP} [ {username} ]</a></li>
 			</ul>
@@ -416,16 +425,19 @@ function uncheckAll_exts(form, id, _do_c_) {
 	</div>
 	<!--  menu -->
 	<div id="menu">
-			<div class="link_menu" id="menu_item1" gomenu_id="1" goto="start">
+		<ul>
+			<li class="link_menu" id="menu_item1" gomenu_id="1" goto="start">
 				<a title="{lang.R_CPINDEX}" href="./"  onclick="javascript:get_kleeja_link(this.href, '#content', {'current_id':'menu_item1', 'current_class':'link_current',gomenu_id:1}); return false;"><img src="{STYLE_PATH_ADMIN}images/menu/index_button.png" alt="{lang.R_CPINDEX}" style="margin:0 8px;vertical-align:middle;" /><span>{lang.R_CPINDEX}</span><span style="font-size:9px;vertical-align: top;color:#666;">{assigned_klj_ver}</span></a>
 				<div id="menu_left"><ul class="go_menu" id="gomenu1"></ul></div>
-			</div>
+			</li>
 			<LOOP NAME="adm_extensions_menu">
-			<div class="({{current}}?link_current:) link_menu" id="menu_item{{i}}" gomenu_id="{{i}}" goto="{{goto}}">
+			<li class="({{current}}?link_current:) link_menu" id="menu_item{{i}}" gomenu_id="{{i}}" goto="{{goto}}">
 				<a title="{{title}}" href="{{link}}#!cp={{goto}}" onclick="javascript:get_kleeja_link(this.href.replace('#!cp={{goto}}', ''), '#content', {'current_id':'menu_item{{i}}', 'current_class':'link_current', 'gomenu_id':{{i}}<IF LOOP="confirm">, confirm:true</IF>}); return false;"><img src="{{icon}}" alt="{{title}}" style="margin:0 8px;vertical-align:middle;" /><span>{{title}}</span>{{kbubble}}</a>
 				<div id="menu_left"><ul class="go_menu" id="gomenu{{i}}"></ul></div>
-			</div>
+			</li>
 			</LOOP>
+		</ul>
+		<div class="show_more_box"><a href="#" class="show_button">{lang.MORE}</a></div>
 	</div>
-
+	
 	<div id="content">

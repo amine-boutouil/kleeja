@@ -36,10 +36,10 @@ $('a[rel*=facebox]', 'a[rel*=facybox]').facybox();
 $('#menu li:gt(7)').hide();
 $('li[goto='+ location.href.match(/cp\=([0-9a-z_]+)/)[1] +']').css('display', 'block');
 $('.show_button').click(function() {
-    $('#menu li:gt(7)').toggle();
+	$('#menu li:gt(7)').toggle();
+	$('.show_button span').toggle();
+	$('li[goto='+ location.href.match(/cp\=([0-9a-z_]+)/)[1] +']').css('display', 'block');
 });
-
-
 
 
 <IF NAME="AJAX_ACP">
@@ -437,7 +437,7 @@ function uncheckAll_exts(form, id, _do_c_) {
 			</li>
 			</LOOP>
 		</ul>
-		<div class="show_more_box"><a href="#" class="show_button">{lang.MORE}</a></div>
+		<div class="show_more_box"><a href="#" class="show_button"><span style="display:">{lang.MORE}</span><span style="display:none">{lang.LESS}</span></a></div>
 	</div>
 	
 	<div id="content">

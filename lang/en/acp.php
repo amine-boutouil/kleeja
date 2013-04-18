@@ -284,6 +284,7 @@ $lang = array_merge($lang, array(
 	'LOADING'					=> 'Loading',
 	'ERROR_AJAX'				=> 'There is an error, try again!.',
 	'MORE'						=> 'More',
+	'LESS'						=> 'Less',
 	'MENU'						=> 'Menu',
 	'WELCOME'					=> 'Welcome',
 	'ENABLE_CAPTCHA'			=> 'Enable Captcha in Kleeja',

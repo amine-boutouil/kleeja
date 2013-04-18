@@ -8,6 +8,14 @@
 [x] done
 
 
+1.5.3 - version : 
+[x] add turkish language.
+[x] disable ajax by default at ACP ( you can add AJAX_ACP in config.php to turn ajax on )
+[x] some style improvments at ACP 
+[x] hide un-important items from ACP menu and add a button to show them.
+[x] fix problems with login + captcha that's appeared at 1.5.2
+
+
 1.5.2 - version : 
 [x] Add Persian language (thanx for dverbame)
 [x] Fix bug with thumbs size (reported by : Tony Broomfield)

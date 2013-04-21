@@ -370,6 +370,11 @@ class SSQL
 			return $msg;
 		}
 
+		if(!$this->connect_id)
+		{
+			return 0;
+		}
+
 		//escaping _ made alot of problems
 		//return addcslashes(mysqli_real_escape_string($this->connect_id, $msg), '%_');
 		return mysqli_real_escape_string($this->connect_id, $msg);

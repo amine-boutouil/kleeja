@@ -34,11 +34,18 @@ jQuery(document).ready(function($){
 $('a[rel*=facebox]', 'a[rel*=facybox]').facybox();
 
 $('#menu li:gt(7)').hide();
-$('li[goto='+ location.href.match(/cp\=([0-9a-z_]+)/)[1] +']').css('display', 'block');
+
+if(location.href.match(/cp\=([0-9a-z_]+)/)){
+	cp_var = location.href.match(/cp\=([0-9a-z_]+)/)[1];
+}else{
+	cp_var = 'start';
+}
+
+$('li[goto='+ cp_var +']').css('display', 'block');
 $('.show_button').click(function() {
 	$('#menu li:gt(7)').toggle();
 	$('.show_button span').toggle();
-	$('li[goto='+ location.href.match(/cp\=([0-9a-z_]+)/)[1] +']').css('display', 'block');
+	$('li[goto='+ cp_var +']').css('display', 'block');
 });
 
 

@@ -388,6 +388,10 @@ class SSQL
 		}
 		else if (function_exists('mysql_real_escape_string'))
 		{
+			if(!$this-connect_id)
+			{
+				return 0;
+			}
 			return mysql_real_escape_string($msg, $this->connect_id);
 		}
 		else

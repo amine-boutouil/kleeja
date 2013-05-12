@@ -445,6 +445,13 @@ class SSQL
 			$error_sql = preg_replace("#password\s*=\s*'[^']+'#i", "password='<span style=\"color:blue\">hidden</span>'", $error_sql);
 		}
 
+		#is this error related to updating?
+		$updating_related = false;
+		if(strpos($error_msg, 'Unknown column') !== false)
+		{
+			$updating_related = true;
+		}
+
 		echo "<html><head><title>ERROR IM MYSQL</title>";
 		echo "<style>BODY{FONT-FAMILY:tahoma;FONT-SIZE:12px;}.error {}</style></head><body>";
 		echo '<br />';
@@ -456,6 +463,11 @@ class SSQL
 			echo "<br />--[query]-------------------------- <br />$error_sql<br />---------------------------------<br /><br />";
 		}
 		echo "[$error_no : $error_msg] <br />";
+		if($updating_related)
+		{
+			global $config;
+			echo "<br /><strong>Your Kleeja database seems to be old, try to update it now from: " . $config['siteurl'] . "install/</strong>";
+		}
 		echo "<br /><br /><strong>Script: Kleeja <br /><a href='http://www.kleeja.com'>Kleeja Website</a></strong>";
 		echo '</b></div>';
 		echo '</body></html>';

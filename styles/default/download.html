@@ -37,6 +37,12 @@
 							<td class="td">{lang.FILEUPS}</td>
 							<td class="tddata">{uploads}</td>
 						</tr>
+						<IF NAME="fusername">
+						<tr>
+							<td class="td">{lang.USERNAME}</td>
+							<td class="tddata"><a href="{userfolder}">{fusername}</a></td>
+						</tr>
+						</IF>
 					</table>
 					<div class="filereport" onclick="window.location.href='{REPORT}';"><img src="{STYLE_PATH}images/zl.png" alt="file Report" class="pngfix" style="vertical-align:middle;" />&nbsp;&nbsp; {lang.FILEREPORT}</div>
 				</td>

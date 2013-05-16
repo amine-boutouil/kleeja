@@ -10,6 +10,7 @@
 1.5.4 - version:
 [x] When the database old, tell the user to update.
 [x] fix bug in ACP where secondary menu not appear
+[x] add link to user folder at do.php?id=.. page
  
 
 1.5.3 - version : 

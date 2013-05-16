@@ -33,7 +33,8 @@ var go_to = '{go_to}';
 jQuery(document).ready(function($){
 $('a[rel*=facebox]', 'a[rel*=facybox]').facybox();
 
-$('#menu li:gt(7)').hide();
+$('#menu li.link_menu:gt(7)').hide();
+
 
 if(location.href.match(/cp\=([0-9a-z_]+)/)){
 	cp_var = location.href.match(/cp\=([0-9a-z_]+)/)[1];
@@ -43,7 +44,7 @@ if(location.href.match(/cp\=([0-9a-z_]+)/)){
 
 $('li[goto='+ cp_var +']').css('display', 'block');
 $('.show_button').click(function() {
-	$('#menu li:gt(7)').toggle();
+	$('#menu li.link_menu:gt(7)').toggle();
 	$('.show_button span').toggle();
 	$('li[goto='+ cp_var +']').css('display', 'block');
 });
@@ -435,12 +436,12 @@ function uncheckAll_exts(form, id, _do_c_) {
 		<ul>
 			<li class="link_menu" id="menu_item1" gomenu_id="1" goto="start">
 				<a title="{lang.R_CPINDEX}" href="./"  onclick="javascript:get_kleeja_link(this.href, '#content', {'current_id':'menu_item1', 'current_class':'link_current',gomenu_id:1}); return false;"><img src="{STYLE_PATH_ADMIN}images/menu/index_button.png" alt="{lang.R_CPINDEX}" style="margin:0 8px;vertical-align:middle;" /><span>{lang.R_CPINDEX}</span><span style="font-size:9px;vertical-align: top;color:#666;">{assigned_klj_ver}</span></a>
-				<div id="menu_left"><ul class="go_menu" id="gomenu1"></ul></div>
+				<div id="menu_left"><ul class="go_menu" id="gomenu1"><IF NAME="go_to==start">{go_menu_html}</IF></ul></div>
 			</li>
 			<LOOP NAME="adm_extensions_menu">
 			<li class="({{current}}?link_current:) link_menu" id="menu_item{{i}}" gomenu_id="{{i}}" goto="{{goto}}">
 				<a title="{{title}}" href="{{link}}#!cp={{goto}}" onclick="javascript:get_kleeja_link(this.href.replace('#!cp={{goto}}', ''), '#content', {'current_id':'menu_item{{i}}', 'current_class':'link_current', 'gomenu_id':{{i}}<IF LOOP="confirm">, confirm:true</IF>}); return false;"><img src="{{icon}}" alt="{{title}}" style="margin:0 8px;vertical-align:middle;" /><span>{{title}}</span>{{kbubble}}</a>
-				<div id="menu_left"><ul class="go_menu" id="gomenu{{i}}"></ul></div>
+				<div id="menu_left"><ul class="go_menu" id="gomenu{{i}}"><IF LOOP="current">{go_menu_html}</IF></ul></div>
 			</li>
 			</LOOP>
 		</ul>

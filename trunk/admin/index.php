@@ -334,11 +334,24 @@ if(empty($stylee))
 }
 
 
+
+
+$go_menu_html = '';
+if(isset($go_menu))
+{
+	foreach($go_menu as $m=>$d)
+	{
+		$go_menu_html .= '<li class="' . ($d['current']?'active':'') .'" id="c_' . $d['goto'] . '"><a href="' . $d['link'] . '" onclick="javascript:get_kleeja_link(\'' . 
+							$d['link'] . '\', \'#content\', {\'current_id\':\'c_' . $d['goto'] . '\', \'current_class\':\'active\'' . ($d['confirm'] ? ', \'confirm\':true' : '') . '}); return false;">' . $d['name'] . '</a></li>';
+	}
+}
+
 //header
 if(!isset($_GET['_ajax_']))
 {
 	echo $tpl->display("admin_header");
 }
+
 
 //body
 if(!isset($_GET['_ajax_']))
@@ -349,22 +362,6 @@ if(!isset($_GET['_ajax_']))
 else
 {
 	$is_ajax = 'yes';
-	$go_menu_html = '';
-	if(isset($go_menu))
-	{
-		foreach($go_menu as $m=>$d)
-		{
-			//if(!is_browser('mobile') || defined('IN_MOBILE'))
-			//{
-				$go_menu_html .= '<li class="' . ($d['current']?'active':'') .'" id="c_' . $d['goto'] . '"><a href="' . $d['link'] . '" onclick="javascript:get_kleeja_link(\'' . 
-							$d['link'] . '\', \'#content\', {\'current_id\':\'c_' . $d['goto'] . '\', \'current_class\':\'active\'' . ($d['confirm'] ? ', \'confirm\':true' : '') . '}); return false;">' . $d['name'] . '</a></li>';
-			//}
-			//else
-			//{
-				//$go_menu_html .= '<option '. ($d['current']?'selected="selected"':'') .'" value="'.$d['link'].'" '. ($d['confirm'] ? ' confirm="1" ' : '') . '>' . $d['name'] . '</option>';
-			//}
-		}
-	}
 	echo_ajax(1, $tpl->display($stylee), $go_menu_html);
 }
 

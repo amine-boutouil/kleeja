@@ -28,22 +28,34 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 					'FROM'		=> "{$dbprefix}files f",
 				);
 
+	#if user system is default, we use users table
+	if((int) $config['user_system'] == 1)
+	{
+		$query['SELECT'] .= ', u.name AS fusername, u.id AS fuserid';
+		$query['JOINS']	=	array(
+									array(
+										'LEFT JOIN'	=> "{$dbprefix}users u",
+										'ON'		=> 'u.id=f.user'
+									)
+								);
+	}
+
 	if (isset($_GET['filename']))
 	{
 		$filename_l  = (string) $SQL->escape($_GET['filename']);
 		if(isset($_GET['x']))
 		{ 
-			$query['WHERE']	= "name='" . $filename_l . '.' . $SQL->escape($_GET['x']) . "'";
+			$query['WHERE']	= "f.name='" . $filename_l . '.' . $SQL->escape($_GET['x']) . "'";
 		}
 		else 
 		{
-			$query['WHERE']	= "name='" . $filename_l . "'";
+			$query['WHERE']	= "f.name='" . $filename_l . "'";
 		}
 	}
 	else
 	{
 		$id_l = intval($_GET['id']);
-		$query['WHERE']	= "id=" . $id_l;
+		$query['WHERE']	= "f.id=" . $id_l;
 	}
 
 	($hook = kleeja_run_hook('qr_download_id_filename')) ? eval($hook) : null; //run hook
@@ -63,6 +75,8 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 		$fname2 	= str_replace('.', '-', htmlspecialchars($name));
 		$name 		= $real_filename != '' ? str_replace('.' . $type, '', htmlspecialchars($real_filename)) : $name;
 		$name		= (strlen($name) > 70) ? substr($name, 0, 70) . '...' : $name;
+		$fusername	= $config['user_system'] == 1 && $fuserid > -1 ? $fusername : false;
+		$userfolder	= $config['siteurl'] . ($config['mod_writer'] ? 'fileuser-' . $fuserid . '.html' : 'ucp.php?go=fileuser&amp;id=' .  $fuserid);
 
 		if (isset($_GET['filename']))
 		{
@@ -95,7 +109,7 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 		$seconds_w	= $config['sec_down'];
 		$time		= kleeja_date($time);
 		$size		= Customfile_size($size);
-				
+
 		$file_ext_icon = file_exists('images/filetypes/' . $type . '.png') ? 'images/filetypes/' . $type . '.png' : 'images/filetypes/file.png';
 		$sty		= 'download';
 		$title 		=  $name . ' ' . $lang['DOWNLAOD'];

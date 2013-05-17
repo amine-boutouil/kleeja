@@ -24,7 +24,7 @@ if(defined('DEV_STAGE'))
 	$dev_m = '#dev' . $m[1];
 }
 
-define ('KLEEJA_VERSION' , '1.5.3' . $dev_m);
+define ('KLEEJA_VERSION' , '1.5.4' . $dev_m);
  
 /*
 	

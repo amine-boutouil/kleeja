@@ -309,7 +309,7 @@ switch ($_GET['go'])
 		$user_id_get	= isset($_GET['id']) ? intval($_GET['id']) : false;
 		$user_id		= (!$user_id_get && $usrcp->id()) ? $usrcp->id() : $user_id_get;
 		$user_himself	= $usrcp->id() == $user_id;
-		$action			= $config['siteurl'] . 'ucp.php?go=fileuser';
+		$action			= $config['siteurl'] . 'ucp.php?go=fileuser' . (isset($_GET['page']) ? '&amp;page=' . intval($_GET['page']) : '');
 
 		//no logon before 
 		if (!$usrcp->name() && !isset($_GET['id']))
@@ -367,7 +367,7 @@ switch ($_GET['go'])
 
 		$your_fileuser	= $config['siteurl'] . ($config['mod_writer'] ? 'fileuser-' . $usrcp->id() . '.html' : 'ucp.php?go=fileuser&amp;id=' .  $usrcp->id());
 		$total_pages	= $Pager->getTotalPages(); 
-		$linkgoto		= $config['siteurl'] . ($config['mod_writer'] ?  'fileuser-' . $user_id  . '.html' : 'ucp.php?go=fileuser&amp;id=' . $user_id);
+		$linkgoto		= $config['siteurl'] . ($config['mod_writer'] ?  'fileuser-' . $user_id  . '-' . $currentPage . '.html' : 'ucp.php?go=fileuser&amp;id=' . $user_id . '&amp;page=' . $currentPage);
 		$page_nums		= $Pager->print_nums(str_replace('.html', '', $linkgoto));
  
 		$no_results = true;

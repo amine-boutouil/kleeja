@@ -10,7 +10,7 @@
 
 1.5.5 - version:
 [x] fix bug#1099, wrong time at show last visit files/images (reported by: bader_vip)
-
+[x] fix bug:1104, where kleeja_date doesnt respect user time zone  (reported by: bader_vip)
 
 1.5.4 - version:
 [x] When the database old, tell the user to update.

@@ -318,7 +318,7 @@ switch ($_GET['go'])
 		}
 
 		//Not allowed to browse files's folders
-		if (!user_can('access_fileusers'))
+		if (!user_can('access_fileusers') && !$user_himself)
 		{
 			($hook = kleeja_run_hook('user_cannot_access_fileusers')) ? eval($hook) : null; //run hook
 			kleeja_info($lang['HV_NOT_PRVLG_ACCESS'], $lang['HV_NOT_PRVLG_ACCESS']);

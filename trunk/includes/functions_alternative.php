@@ -23,6 +23,29 @@ if (!defined('IN_COMMON'))
 }
 
 
+include_once (PATH . 'includes/json.php');	
+
+//  json_encode php 4
+if(!function_exists('json_encode')) 
+{
+    function json_encode($data) 
+    {
+        $json = new Services_JSON();
+        return $json->encode($data);
+    }
+}
+ 
+//  json_decode php 4 
+if(!function_exists('json_decode'))  
+{ 
+	function json_decode($data, $output_mode = false) 
+	{ 
+		$param = $output_mode ? 16 : null;
+		$json = new Services_JSON($param); 
+		return( $json->decode($data) ); 
+	} 
+}
+
 if(!function_exists('htmlspecialchars_decode'))
 {
 	function htmlspecialchars_decode($string, $style=ENT_COMPAT)

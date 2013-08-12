@@ -305,10 +305,11 @@ class usrcp
 	//clean usernames
 	function cleanusername($uname) 
 	{
-		if(!function_exists('kleeja_base64_decode'))
+		//already included in common file 
+		/*if(!function_exists('kleeja_base64_decode'))
 		{
 			include_once (PATH . 'includes/functions_alternative.php');	
-		}
+		}*/
 
 		($hook = kleeja_run_hook('cleanusername_func_usr_class')) ? eval($hook) : null; //run hook
 

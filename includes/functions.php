@@ -1512,3 +1512,26 @@ function user_can($acl_name, $group_id = 0)
 
 	return (bool) $d_groups[$group_id]['acls'][$acl_name];
 }
+
+/*
+ * this function for the future , made specially for kleeja 
+ */
+function get_Domain_only($domain)
+{
+    if(strpos($domain, '.' )  !== false)
+    {
+        $domain = parse_url($domain,  PHP_URL_HOST);
+        $darray = explode('.', $domain);
+
+        if(count($darray) == 2)
+        {   
+            $domain = $darray[0];
+        }
+        else
+        {   
+            $domain = $darray[1];
+        }
+    }
+
+    return $domain;
+}

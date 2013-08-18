@@ -1,0 +1,6 @@
+the new theme called Marya 
+it uses bootstrap 3
+check http://getbootstrap.com/
+please read the documentation there every time you code the theme .. 
+
+thank you

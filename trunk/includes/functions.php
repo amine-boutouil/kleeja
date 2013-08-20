@@ -1577,13 +1577,12 @@ function untar($file, $dest = "./")
 		}
 	}
 	
-	$fh = @fopen($file, 'rb');
 	$total = 0;
 
-	if($fh)
+	if($fh = @fopen($file, 'rb'))
 	{
 		$files = array();
-		while (false !== ($block = fread($fh, 512))) 
+		while (($block = fread($fh, 512)) !== false) 
 		{
 		
 			$total += 512;
@@ -1609,7 +1608,7 @@ function untar($file, $dest = "./")
 				@chmod($dest . $meta['filename'], $meta['mode']);
 			}
 		
-			if ($meta['databytes'] > 0) 
+			if ($meta['databytes'] >= 0 && $meta['header_checksum'] != 0) 
 			{
 				$block = @fread($fh, $meta['databytes']);
 				// Extract data
@@ -1632,7 +1631,11 @@ function untar($file, $dest = "./")
 				}
 
 				$total += $meta['databytes'];
+				$files[] = $meta;
+				
 			}
+
+
 		
 			if ($total >= $filesize-1024) 
 			{

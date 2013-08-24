@@ -10,6 +10,7 @@
 <link rel="icon" type="image/gif" href="{STYLE_PATH_ADMIN}images/favicon.gif" />
 
 <link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/bootstrap-theme.min.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/stylesheet.css" />
 
 <IF NAME="{lang.DIR} == rtl">
@@ -36,11 +37,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Kleeja</a>
+          <a class="navbar-brand" href="#">Kleeja <span class="label label-default">{assigned_klj_ver}</span></a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav <IF NAME="{lang.DIR} == ltr">navbar-right</IF>">
-            <li><a href="{config.siteurl}">{lang.RETURN_HOME}</a></li>
+            <li><a href="{config.siteurl}"><span class="glyphicon glyphicon-search"></span>{lang.RETURN_HOME}</a></li>
             <li><a href="./?cp=b_lgoutcp&amp;{GET_FORM_KEY_GLOBAL}#" onclick="javascript:return confirm_from();" >{lang.R_LGOUTCP} [ {username} ]</a></li>
             <li><a href="http://www.kleeja.com/support/" target="_blank">{lang.SUPPORT_MOFFED}</a></li>
           </ul>
@@ -55,13 +56,14 @@
       <div class="well sidebar-nav">
         <ul class="nav">
 			<li>
-				<a title="{lang.R_CPINDEX}" href="./">{lang.R_CPINDEX}<span class="label label-default">{assigned_klj_ver}</span></a>
+				<a title="{lang.R_CPINDEX}" href="./">{lang.R_CPINDEX}</a>
 			</li>
 	
 			<LOOP NAME="adm_extensions_menu">
 			<li class="({{current}}?active:)">
-				<!-- {{icon}}, {{kbubble}} -->
-				<a title="{{title}}" href="{{link}}#!cp={{goto}}" <IF LOOP="confirm">onclick="javascript:confirm_from();"</IF>>{{title}} {{kbubble}}</a>
+				<a title="{{title}}" href="{{link}}#!cp={{goto}}" <IF LOOP="confirm">onclick="javascript:confirm_from();"</IF>>
+					{{title}} {{kbubble}}
+				</a>
 			</li>
 			</LOOP>
         </ul>

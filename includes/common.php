@@ -384,7 +384,7 @@ $STYLE_PATH				= $config['siteurl'] . 'styles/' . (trim($config['style_depend_on
 $THIS_STYLE_PATH		= $config['siteurl'] . 'styles/' . $config['style'] . '/';
 $THIS_STYLE_PATH_ABS	= PATH . 'styles/' . $config['style'] . '/';
 $STYLE_PATH_ADMIN 		= $config['siteurl'] . 'admin/marya/';
-$STYLE_PATH_ADMIN_ABS	= PATH . 'admin/marya';
+$STYLE_PATH_ADMIN_ABS	= PATH . 'admin/marya/';
 $DEFAULT_PATH_ADMIN_ABS = PATH . 'admin/marya/';
 $DEFAULT_PATH_ADMIN		= $config['siteurl'] . 'admin/marya/';
 

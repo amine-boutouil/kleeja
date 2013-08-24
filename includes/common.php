@@ -383,52 +383,16 @@ if(empty($config['h_key']))
 $STYLE_PATH				= $config['siteurl'] . 'styles/' . (trim($config['style_depend_on']) == '' ? $config['style'] : $config['style_depend_on']) . '/';
 $THIS_STYLE_PATH		= $config['siteurl'] . 'styles/' . $config['style'] . '/';
 $THIS_STYLE_PATH_ABS	= PATH . 'styles/' . $config['style'] . '/';
-$STYLE_PATH_ADMIN 		= $config['siteurl'] . 'admin/'. (is_browser('mobile') || defined('IN_MOBILE') ? 'toffee/' : 'toffee/');
-$STYLE_PATH_ADMIN_ABS	= PATH . 'admin/'. (is_browser('mobile') || defined('IN_MOBILE') ? 'toffee/' : 'toffee/');
-$DEFAULT_PATH_ADMIN_ABS = PATH . 'admin/toffee/';
-$DEFAULT_PATH_ADMIN		= $config['siteurl'] . 'admin/toffee/';
+$STYLE_PATH_ADMIN 		= $config['siteurl'] . 'admin/marya/';
+$STYLE_PATH_ADMIN_ABS	= PATH . 'admin/marya';
+$DEFAULT_PATH_ADMIN_ABS = PATH . 'admin/marya/';
+$DEFAULT_PATH_ADMIN		= $config['siteurl'] . 'admin/marya/';
 
 
 //get languge of common
 get_lang('common');
 //ban system 
 get_ban();
-
-/** Enable this if you want it !
-$load = 0;
-if (stristr(PHP_OS, 'win'))
-{
-	ob_start();
-	passthru('typeperf -sc 1 "\processor(_total)\% processor time"',$status);
-	$content = ob_get_contents();
-	ob_end_clean();
-	if ($status === 0)
-	{
-		if (preg_match("/\,\"([0-9]+\.[0-9]+)\"/",$content,$load))
-		{
-			$load = $load[1];
-		}
-	}
-	echo $load;
-}
-else
-{
-	if((function_exists('sys_getloadavg') && $load = sys_getloadavg()) || ($load = explode(' ', @file_get_contents('/proc/loadavg'))))
-	{
-		$load = $load[0];
-	}
-}
-
-if ($load > 80  && !defined('IN_ADMIN') && !defined('IN_LOGIN'))
-{
-	#tell the BOTs to not cache this page in thier search engines
-	if(is_bot())
-	{
-		header('HTTP/1.1 503 Too busy, try again later');
-	}
-	kleeja_info($lang['LOAD_IS_HIGH_NOW'], $lang['SITE_CLOSED']);
-}
-*/	
 
 
 //install.php exists

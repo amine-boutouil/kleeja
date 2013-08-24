@@ -287,7 +287,7 @@ foreach($adm_extensions as $m)
 										'confirm'	=> (@in_array($m, $ext_confirm)) ? true : false,
 										'current'	=> ($s == $go_to) ? true : false,
 										'goto'		=> str_replace('a_configs', 'options', $s),
-										'kbubble'	=> in_array($m, array_keys($kbubbles)) ? '<span class="kbubbles" id="t_' . $m . '"' . ($kbubbles[$m] == 0 ? ' style="display:none"' : '') . '>' . $kbubbles[$m] . '</span>' : ''
+										'kbubble'	=> in_array($m, array_keys($kbubbles)) ? '<span class="badge" id="t_' . $m . '"' . ($kbubbles[$m] == 0 ? ' style="display:none"' : '') . '>' . $kbubbles[$m] . '</span>' : ''
 									);
 
 	//add another item to array for title='' in href or other thing

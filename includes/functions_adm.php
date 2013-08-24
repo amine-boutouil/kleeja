@@ -276,7 +276,7 @@ function sync_total_files($files = true, $start = false)
 }
 
 /**
- * get the *right* now number of the given stat fro stats table
+ * get the *right* now number of the given stat from stats table
  */
 function get_actual_stats($name)
 {

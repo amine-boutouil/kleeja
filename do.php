@@ -246,6 +246,8 @@ else if (isset($_GET['down']) || isset($_GET['downf']) ||
 		$id = isset($_GET['down']) ? intval($_GET['down']) : (isset($_GET['img']) ? intval($_GET['img']) : (isset($_GET['thmb']) ? intval($_GET['thmb']) : (isset($_GET['downex']) ? intval($_GET['downex']) : null)));
 	}
 
+
+
 	//is internet explore 8 ?
 	$is_ie8 = is_browser('ie8');
 	//is internet explore 6 ?
@@ -267,7 +269,7 @@ else if (isset($_GET['down']) || isset($_GET['downf']) ||
 	$pre_ext = array_pop(@explode('.', $filename));
 	$is_image = in_array(strtolower(trim($pre_ext)), array('gif', 'jpg', 'jpeg', 'bmp', 'png')) ? true : false; 
 
-	if ($SQL->num_rows($result) != 0)
+	if ($SQL->num_rows($result))
 	{
 		while($row=$SQL->fetch_array($result))
 		{
@@ -344,12 +346,22 @@ else if (isset($_GET['down']) || isset($_GET['downf']) ||
 		}
 	}
 
+	//prevent bug, where you can download file, not image using imagef- url, bug:1134
+	if((isset($_GET['img']) || isset($_GET['thmb']) || isset($_GET['thmbf']) || isset($_GET['imgf'])) && !$is_image)
+	{
+		$f = 'images';
+		$n = 'not_exists.jpg';
+		$is_image = true;
+	}
+
 	//downalod porcess
 	$path_file = (isset($_GET['thmb']) || isset($_GET['thmbf']))  ? "./{$f}/thumbs/{$n}" : "./{$f}/{$n}";
 	$chunksize = 1024*120; //1 kelobyte * 120 = 120kb that will send to user every loop
 	$resuming_on = true;
 
 	($hook = kleeja_run_hook('down_go_page')) ? eval($hook) : null; //run hook	
+
+
 
 	# this is a solution to ignore downloading through the file, redirecct to the actual file
 	# where you can add 'define("MAKE_DOPHP_301_HEADER", true);' in config.php to stop the load

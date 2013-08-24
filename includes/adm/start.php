@@ -329,7 +329,7 @@ if($cf_num > 4)
 	$stats_chart = 'arrayOfDataMulti = new Array(';
 	
 	$comma = false;
-	#get currently right now stats
+	#get currently right now stats, not cached one
 	$prv_files = get_actual_stats('files');
 	$prev_imgs = get_actual_stats('imgs');
 	$prev_date = date('d-n-Y');	

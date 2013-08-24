@@ -5,28 +5,15 @@
 	<meta http-equiv="Content-Language" content="ar" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="robots" content="noindex, follow" />
-	<link rel="stylesheet" type="text/css" href="{STYLE_PATH_ADMIN}css/global.css" />
-	<link rel="stylesheet" type="text/css" href="{STYLE_PATH_ADMIN}css/byname.css" />
-	<IF NAME="{lang.DIR}==ltr"><link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH_ADMIN}css/ltr.css" /></IF>
-	<IS_BROWSER="ie6"><link rel="stylesheet" type="text/css" href="{STYLE_PATH_ADMIN}css/ie.css" /></IS_BROWSER>
 
-	<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jquery.min.js"></script>
-	<script type="text/javascript">
-	<!--
-		$(document).ready(function() {
-			hash = window.location.hash.replace('#!', '');
-			if(hash != ''){
-				$('#login_form').attr('action', $('form').attr('action') + '#!' + hash);
-			}
-			
-			$('#toggler').focus();
-			$('#toggler').keydown(function() {
-    			$('#toggler').toggle();
-    			$('#lpass_{KEY_FOR_PASS}').toggle().focus();
-			})
-		});
-	//-->
-	</script>
+	<link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="{STYLE_PATH_ADMIN}css/stylesheet.css" />
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	  <script src="{STYLE_PATH_ADMIN}js//html5shiv.js"></script>
+	  <script src="{STYLE_PATH_ADMIN}js/respond.min.js"></script>
+	<![endif]-->
 </head>
 <body id="login_body">
 	<div id="login_top">
@@ -66,5 +53,25 @@
 		</div>
 	</form>	
 	</div>
+	
+	<script src="{STYLE_PATH_ADMIN}js/jquery.min.js"></script>
+	<script src="{STYLE_PATH_ADMIN}js/bootstrap.min.js"></script>
+
+	<script type="text/javascript">
+	<!--
+		$(document).ready(function() {
+			hash = window.location.hash.replace('#!', '');
+			if(hash != ''){
+				$('#login_form').attr('action', $('form').attr('action') + '#!' + hash);
+			}
+			
+			$('#toggler').focus();
+			$('#toggler').keydown(function() {
+    			$('#toggler').toggle();
+    			$('#lpass_{KEY_FOR_PASS}').toggle().focus();
+			})
+		});
+	//-->
+	</script>
 </body>
 </html>

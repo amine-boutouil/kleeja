@@ -15,7 +15,7 @@
 [x] fix bug:1124, fix permission for fileuser (reported by: sadiq6210)
 [x] fix bug 1102, where mobile devices users can not copy urls from inputs
 [x] fix bug:1134, where you can download files without waiting using imgf links (reported by: 2mka)
-
+[x] fix bug:1121, where kleeja web site links are wrong (reported by: yasorno)
 
 1.5.4 - version:
 [x] When the database old, tell the user to update.

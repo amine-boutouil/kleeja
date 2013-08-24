@@ -9,10 +9,12 @@
 
 
 1.5.5 - version:
-[x] fix bug#1099, wrong time at show last visit files/images (reported by: bader_vip)
+[x] fix bug;1099, wrong time at show last visit files/images (reported by: bader_vip)
 [x] fix bug:1104, where kleeja_date doesnt respect user time zone  (reported by: bader_vip)
 [x] fix bug:1117, deleteing files from user folder other than page 1 won't work (reported by: bader_vip)
 [x] fix bug:1124, fix permission for fileuser (reported by: sadiq6210)
+[x] fix bug 1102, where mobile devices users can not copy urls from inputs
+[x] fix bug:1134, where you can download files without waiting using imgf links (reported by: 2mka)
 
 
 1.5.4 - version:

@@ -640,6 +640,7 @@ break;
 
 #handling editing ACLs(permissions) for the requesting groups
 case 'group_acl':
+
 	$req_group = isset($_GET['qg']) ? intval($_GET['qg']) : 0;
 	if(!$req_group)
 	{
@@ -661,13 +662,15 @@ case 'group_acl':
 	while($row=$SQL->fetch_array($result))
 	{
 		#if submit
-		if($_POST['editacl'])
+		if(isset($_POST['editacl']))
 		{
-			if(isset($_POST[$row['acl_name']]) and (int) $row['acl_can'] == 0)
+			//if(isset($_POST[$row['acl_name']]) && (int) $row['acl_can'] == 0)
+			if(isset($_POST[$row['acl_name']]))
 			{
 				$submitted_on_acls[] = $row['acl_name'];
 			}
-			else if(!isset($_POST[$row['acl_name']]) and (int) $row['acl_can'] == 1)
+			//else if(!isset($_POST[$row['acl_name']]) && (int) $row['acl_can'] == 1)
+			else if(!isset($_POST[$row['acl_name']]))
 			{
 				$submitted_off_acls[] = $row['acl_name'];
 			}
@@ -688,7 +691,7 @@ case 'group_acl':
 	$SQL->freeresult($result);
 
 	#if submit
-	if($_POST['editacl'])
+	if(isset($_POST['editacl']))
 	{
 		#update 'can' acls
 		if(sizeof($submitted_on_acls))

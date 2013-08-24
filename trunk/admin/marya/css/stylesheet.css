@@ -1,3 +1,9 @@
+/*admin_header*/
 .navbar-static-top {
   margin-bottom: 19px;
 }
+.icon-for-menu {
+	background-repeat:no-repeat !important;
+    background-position: center center;
+}
+

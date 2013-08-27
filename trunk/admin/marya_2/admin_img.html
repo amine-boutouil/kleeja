@@ -136,7 +136,9 @@ jQuery(document).ready(function($){
 			<span>{lang.IP} : </span> {{ip}}
 		</div>
 		<div class="clear"></div>
+		<div class="btn-group" data-toggle="buttons">
 		<p class="kcheck"><input id="del_{{id}}" name="del_{{id}}" type="checkbox" value="{{id}}" rel="_del" class="delete"/></p>
+		</div>
 
 	</li>
 	</label>
@@ -149,8 +151,8 @@ jQuery(document).ready(function($){
 
 <div class="br"></div>
 
+
 <div class="left check_all"><p class="text-info" style="font-weight : 800; margin-top : 10px;">[ <a href="javascript:void(0);" onclick="checkAll(document.imgform, '_del', 'su');">{lang.CHECK_ALL}</a> ]</p></div>
-	
 <!-- pagination -->
 {page_nums}
 

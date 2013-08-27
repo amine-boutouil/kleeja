@@ -43,24 +43,24 @@ $(document).ready( function(){
 <div class="groups_list">
 	<LOOP NAME="e_groups">
 	<div class="group_line">
-		<div class="r1">{{name}} <IF NAME="user_not_normal"><ELSE><IF LOOP="is_default"><img src="{STYLE_PATH_ADMIN}images/default_group.png" alt="{lang.GROUP_IS_DEFAULT}" title="{lang.GROUP_IS_DEFAULT}" /></IF></IF></div>
+		<div class="r1"><p class="text-muted" style="font-weight: 800; display : inline; margin : 6px 0;">{{name}}</p><IF NAME="user_not_normal"><ELSE><IF LOOP="is_default"><img src="{STYLE_PATH_ADMIN}images/default_group.png" alt="{lang.GROUP_IS_DEFAULT}" title="{lang.GROUP_IS_DEFAULT}" /></IF></IF></div>
 		<div class="r2">
-			<a href="{action}&amp;smt=group_data&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.EDIT_DATA}">
-				<img  src="{STYLE_PATH_ADMIN}images/data_edit.png" alt="{lang.EDIT_DATA}" />
+			<a href="{action}&amp;smt=group_data&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.EDIT_DATA}" class="btn btn-default btn-sx">
+				<span class="glyphicon glyphicon-cog"></span>
 			</a>
-			<a href="{action}&amp;smt=group_acl&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.EDIT_ACL}">
-				<img  src="{STYLE_PATH_ADMIN}images/acls_edit.png" alt="{lang.EDIT_ACL}" />
+			<a href="{action}&amp;smt=group_acl&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.EDIT_ACL}" class="btn btn-default btn-sx">
+				<span class="glyphicon glyphicon-lock"></span>
 			</a>
-			<a href="{action}&amp;smt=group_exts&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.R_EXTS}">
-				<img  src="{STYLE_PATH_ADMIN}images/exts_edit.png" alt="{lang.R_EXTS}" />
+			<a href="{action}&amp;smt=group_exts&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.R_EXTS}" class="btn btn-default btn-sx">
+				<span class="glyphicon glyphicon-list-alt"></span>
 			</a>
 			<IF NAME="user_not_normal"><ELSEIF LOOP="id == 2">
-				<img  src="{STYLE_PATH_ADMIN}images/spacer.gif" style="width:16px;height:16px;" />
-				<ELSE><a href="{action}&amp;smt=show_group&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.USERS}">
-				<img  src="{STYLE_PATH_ADMIN}images/users_show.png" alt="{lang.USERS}" />
+				<img  src="{STYLE_PATH_ADMIN}images/spacer.gif" style="width:16px;height:16px;display:none;" />
+				<ELSE><a href="{action}&amp;smt=show_group&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.USERS}" class="btn btn-default btn-sx">
+				<span class="glyphicon glyphicon-user"></span>
 			</a></IF>
 		</div>
-	<div class="clear"></div>
+	<div class="clear"></div><hr>
 	</div>
 	</LOOP>
 </div>
@@ -75,20 +75,20 @@ $(document).ready( function(){
 	<div class="group_line">
 		<div class="r1">{{name}}  <IF LOOP="is_default"><img src="{STYLE_PATH_ADMIN}images/default_group.png" alt="{lang.GROUP_IS_DEFAULT}" title="{lang.GROUP_IS_DEFAULT}" /></IF></div>
 		<div class="r2">
-			<a href="{action}&amp;smt=group_data&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.EDIT_DATA}">
-				<img  src="{STYLE_PATH_ADMIN}images/data_edit.png" alt="{lang.EDIT_DATA}" />
+			<a href="{action}&amp;smt=group_data&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.EDIT_DATA}" class="btn btn-default btn-sx">
+				<span class="glyphicon glyphicon-cog"></span>
 			</a>
-			<a href="{action}&amp;smt=group_acl&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.EDIT_ACL}">
-				<img  src="{STYLE_PATH_ADMIN}images/acls_edit.png" alt="{lang.EDIT_ACL}" />
+			<a href="{action}&amp;smt=group_acl&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.EDIT_ACL}" class="btn btn-default btn-sx">
+				<span class="glyphicon glyphicon-lock"></span>
 			</a>
-			<a href="{action}&amp;smt=group_exts&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.R_EXTS}">
-				<img  src="{STYLE_PATH_ADMIN}images/exts_edit.png" alt="{lang.R_EXTS}" />
+			<a href="{action}&amp;smt=group_exts&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.R_EXTS}" class="btn btn-default btn-sx">
+				<span class="glyphicon glyphicon-list-alt"></span>
 			</a>
-			<a href="{action}&amp;smt=show_group&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.USERS}">
-				<img  src="{STYLE_PATH_ADMIN}images/users_show.png" alt="{lang.USERS}" />
+			<a href="{action}&amp;smt=show_group&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.USERS}" class="btn btn-default btn-sx">
+				<span class="glyphicon glyphicon-user"></span>
 			</a>
-			<a href="#" onclick="javascript:jQuery.facybox({div:'#delete_group_{{id}}'});  return false;" title="{lang.DELETE}">
-				<img  src="{STYLE_PATH_ADMIN}images/do_delete.png" alt="{lang.DELETE}" />
+			<a href="#" onclick="javascript:jQuery.facybox({div:'#delete_group_{{id}}'});  return false;" title="{lang.DELETE}" class="btn btn-default btn-sx">
+				<span class="glyphicon glyphicon-trash"></span>
 			</a>
 		</div>
 	<div class="clear"></div>
@@ -104,38 +104,29 @@ $(document).ready( function(){
 
 
 <!-- the big box begin -->
-<div id="group_add_new" style="display:none">
-<b>{lang.ADD_NEW_GROUP}</b>   
-<br />
-<br />
-<form method="post" action="{action}" id="add_group_form--change--">
-<div class="section">
-	<h3><label for="gname">{lang.GROUP_NAME}</label></h3>
-	<div class="box"><input type="text" name="gname" id="gname" value="" size="30" /></div>
-</div>
-<div class="clear"></div>
-<div class="section">
-	<h3><label for="cfrom">{lang.COPY_FROM}</label></h3>
+<div id="group_add_new" style="background : rgba(0,0,0,.02); padding : 20px 0 0 10px;margin-top: -20px;">
+<b>{lang.ADD_NEW_GROUP}</b>
+<form method="post" action="{action}" id="add_group_form--change--" class="form-inline" role="form">
+	<div class="form-group">
+    <label class="sr-only" for="groupe_name">{lang.GROUP_NAME}</label>
+    <input type="email" class="form-control" id="groupe_name" placeholder="{lang.GROUP_NAME}">
+  </div>
+<div class="form-group">
+	<label for="cfrom" class="sr-only">{lang.COPY_FROM}</label>
 	<div class="box">
-		<select name="cfrom" id="cfrom">
+		<select name="cfrom" id="cfrom" class="form-control" style="width : 177px;">
 			<option value="-1">{lang.DEFAULT_GROUP}</option>
 			<LOOP NAME="e_groups"><IF LOOP="id == 2"><ELSE><option value="{{id}}">{{name}}</option></IF></LOOP>
 			<LOOP NAME="c_groups"><option value="{{id}}">{{name}}</option></LOOP>
 		</select>
 	</div>
 </div>
-<div class="clear"></div>
-
-<div class="br"></div>
-
 <!-- button -->
-<p class="submit">
 	<input type="hidden" name="newgroup" value="1" />
-	<button type="submit" id="submit" name="newgroup" class="btn" onclick="javascript:$.facybox.close(); submit_kleeja_data('#add_group_form--change--', '#content', 0); return false;"><span>{lang.SUBMIT}</span></button>
-</p>
+	<button type="submit" id="submit" name="newgroup" class="btn btn-primary btn-lg" onclick="javascript:$.facybox.close(); submit_kleeja_data('#add_group_form--change--', '#content', 0); return false;" ><span>{lang.SUBMIT}</span></button>
 
 {H_FORM_KEYS3}
-</form>
+</form><hr>
 <!-- the big box end -->
 </div>
 

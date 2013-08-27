@@ -15,7 +15,7 @@
 <!-- the big box begin -->
 <div class="big-box">
 <div class="tit_con">
-<h1>{lang.R_REPORTS}<IF NAME="current_smt == show_h24"> &raquo; {lang.SHOW_FROM_24H}</IF></h1>
+<h2>{lang.R_REPORTS}<IF NAME="current_smt == show_h24"> &raquo; {lang.SHOW_FROM_24H}</IF></h2>
 </div>
 
 <!-- mail here  -->
@@ -26,13 +26,13 @@
 <form method="post" name="reportform" action="{action}" id="reports_form">
 
 <IF NAME="no_results">
-<h2>{lang.MESSAGE_NONE}</h2>
+<p class="text-muted">{lang.MESSAGE_NONE}</p>
 <ELSE>
 
 <div class="br"></div>
 
 <!-- start data table -->
-<table>
+<table class="table table-bordered table-striped">
 	<tr class="first">
 		<td style="width:20px;"><a href="javascript:void(0);" onclick="checkAll(document.reportform, '_del', 'su');" title="{lang.DELETE}">#</a></td>
 		<td>{lang.NAME}</td>

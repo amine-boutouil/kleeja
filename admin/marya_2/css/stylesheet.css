@@ -29,7 +29,7 @@
 #del_f_day, #user_system, #cookie_name, cookie_path, #cookie_domain,
 #imagefolder, #imagefolderexts, #total_size, #foldername, #prefixname,
 #decode, #id_form, #thmb_dim_w, #thmb_dim_h, #livexts,
-#welcome_msg, #googleanalytics{
+#welcome_msg, #googleanalytics, #cookie_path{
 	display: inline;
 	  height: 34px;
 	  padding: 6px 12px;
@@ -49,7 +49,7 @@
 #del_f_day:focus, #user_system:focus, #cookie_name:focus, cookie_path:focus, #cookie_domain:focus,
 #imagefolder:focus, #imagefolderexts:focus, #total_size:focus, #foldername:focus, #prefixname:focus,
 #decode:focus, #id_form:focus, #thmb_dim_w:focus, #thmb_dim_h:focus, #livexts:focus,
-#welcome_msg:focus, #googleanalytics:focus{
+#welcome_msg:focus, #googleanalytics:focus, #cookie_path:focus{
 	 border-color: #66afe9;
   outline: 0;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
@@ -63,6 +63,11 @@
 	color: #d9534f;
 	font-weight: 800;
 	padding-left: 8px;
+}
+.clear{
+	clear: both;
+	width: 100%;
+	overflow: hidden;
 }
 /*Side Bar*/
 .side_anchor{
@@ -91,4 +96,44 @@ ul.side{
 .cpindex:active{
 	color: #999999;
 	text-shadow : 0 1px 1px #fff;
+}
+
+/*Images cotrol MSG*/
+ul.nav_img{
+	margin: 0;
+	padding: 0;
+}
+
+ul.nav_img li{
+	text-align: left;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	position: relative;
+}
+.Kload{
+	float: left;
+}
+.Kload img{
+	margin-top: 10px;
+	margin-left: 10px;
+	border-radius: 50%;
+	box-shadow: 0 4px 4px rgba(0,0,0,.3);
+}
+.info{
+	float: left;
+	margin-left: 10px;
+}
+.info span{
+	color: #202020;
+	text-shadow : 0 1px 1px #fff;
+}
+label.del{
+	width: 100%;
+}
+.delete{
+	right: 20px;
+	position: absolute;
+	top: 60px;
 }

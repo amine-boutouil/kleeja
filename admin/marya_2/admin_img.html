@@ -90,9 +90,9 @@ jQuery(document).ready(function($){
 <div class="big-box">
 <div class="tit_con">
 <h1>{lang.R_IMG_CTRL}  [{current_page}/{total_pages}]</h1>
-	<div class="second-action">
+	<!-- <div class="second-action">
 		<div id="imgs_loading"><img src="{STYLE_PATH_ADMIN}images/ajax-loader.gif" /></div>
-	</div>
+	</div> -->
 </div>
 
 <div class="br"></div>
@@ -107,22 +107,19 @@ jQuery(document).ready(function($){
 
 <IF NAME="no_results">
 	<div class="note-info">
-		<h2>{lang.NO_RESULT_USE_SYNC}</h2>
+		<p class="lead">{lang.NO_RESULT_USE_SYNC}</p>
 	</div>
 <ELSE>
 
 
 <!-- start data div -->
 <div id="boxs">
+	<ul class="nav_img">
 <div class="xthumbs">
 	<LOOP NAME="arr">
 	{{tdnum}}
-	<li id="su[{{id}}]" class="tip" title="<span>{lang.FILENAME} : </span>{{name}}<br />
-			<span>{lang.FILEUPS} : </span> {{ups}}<br />
-			<span>{lang.FILESIZE} : </span> {{size}}<br />
-			<span>{lang.FILEDATE} : </span> {{time}}<br />
-			<span>{lang.BY} : </span> {{user}}<br />
-			<span>{lang.IP} : </span> {{ip}}">
+	<label for="del_{{id}}" class="del">
+	<li id="su[{{id}}]" class="tip btn btn-info" title="{lang.FILENAME} : {{name}}">
 		<a href="{{href}}" rel="" target="_blank" class="pload">
 			<div class="Kload"><img src="{{thumb_link}}" alt=""  /></div>
 		</a>
@@ -130,17 +127,29 @@ jQuery(document).ready(function($){
 			 <span id="user_{{id}}">{{user}}</span>
 			  <span id="ip_{{id}}">{{ip}}</span>
 		</div>
-		<p class="kcheck"><input id="del_{{id}}" name="del_{{id}}" type="checkbox" value="{{id}}" rel="_del" /></p>
+		<div class="info">
+			<span>{lang.FILENAME} : </span>{{name}}<br>
+			<span>{lang.FILEUPS} : </span> {{ups}}<br>
+			<span>{lang.FILESIZE} : </span> {{size}}<br>
+			<span>{lang.FILEDATE} : </span> {{time}}<br>
+			<span>{lang.BY} : </span> {{user}}<br>
+			<span>{lang.IP} : </span> {{ip}}
+		</div>
+		<div class="clear"></div>
+		<p class="kcheck"><input id="del_{{id}}" name="del_{{id}}" type="checkbox" value="{{id}}" rel="_del" class="delete"/></p>
+
 	</li>
+	</label>
 	{{tdnum2}}
 	</LOOP>
 </div>
+</ul>
 </div>
 <!-- end data div -->
 
 <div class="br"></div>
 
-<div class="left check_all">[ <a href="javascript:void(0);" onclick="checkAll(document.imgform, '_del', 'su', 'kfocus');">{lang.CHECK_ALL}</a> ]</div>
+<div class="left check_all"><p class="text-info" style="font-weight : 800; margin-top : 10px;">[ <a href="javascript:void(0);" onclick="checkAll(document.imgform, '_del', 'su');">{lang.CHECK_ALL}</a> ]</p></div>
 	
 <!-- pagination -->
 {page_nums}
@@ -151,14 +160,14 @@ jQuery(document).ready(function($){
 <!-- button -->
 <p class="submit">
 <span id="search-one-item" style="display:none">
-	<select>
+	<select class="form-control">
 		<option value="0">{lang.SEARCH_SUBMIT} : </option>
 		<option value="1">{lang.SEARCH4FILES_BYIP}</option>
 		<option value="2">{lang.SEARCH4FILES_BYUSER}</option>
 	</select> | 
 	</span>
 	<input type="hidden" name="submit" value="1" />
-	<button type="submit" name="submit" class="" onclick="javascript:submit_kleeja_data('#imgs_form', '#content', 1); return false;"><span>{lang.DEL_SELECTED}</span></button>
+	<button type="submit" class="btn btn-primary" name="submit" class="" onclick="javascript:submit_kleeja_data('#imgs_form', '#content', 1); return false;"><span>{lang.DEL_SELECTED}</span></button>
 </p>
 <div class="br"></div>
 <div class="br"></div>

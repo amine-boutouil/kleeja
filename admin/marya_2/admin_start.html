@@ -151,7 +151,11 @@
 <div class="section">
 	<h3>{lang.AFILES_SIZE_SPACE}</h3>
 	<div class="box">
-		<div style="font-size:10px;"><div style="width:200px;height:7px;background-color:#ddd;"><img src="{STYLE_PATH_ADMIN}images/spacer.gif" style="width:{per1}%;height:7px;background-color:#000;" /></div> {per1}/100%</div>
+		<!-- <div style="font-size:10px;"><div style="width:200px;height:7px;background-color:#ddd;"><img src="{STYLE_PATH_ADMIN}images/spacer.gif" style="width:height:7px;background-color:#000;" /></div> {per1}/100%</div> -->
+		<div class="progress progress-striped">
+		  <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{per1}" aria-valuemin="0" aria-valuemax="100" style="width: {per1}%;">
+		    <span class="sr-only">{per1}/100% Complete</span>
+		  </div>
 	</div>
 </div>
 <div class="clear"></div><hr>

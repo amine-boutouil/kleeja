@@ -136,4 +136,5 @@ label.del{
 	right: 20px;
 	position: absolute;
 	top: 60px;
+	display: none;
 }

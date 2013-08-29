@@ -29,7 +29,8 @@
 #del_f_day, #user_system, #cookie_name, cookie_path, #cookie_domain,
 #imagefolder, #imagefolderexts, #total_size, #foldername, #prefixname,
 #decode, #id_form, #thmb_dim_w, #thmb_dim_h, #livexts,
-#welcome_msg, #googleanalytics, #cookie_path{
+#welcome_msg, #googleanalytics, #cookie_path, 
+#language, #filesnum, #sec_down,#usersectoupload{
 	display: inline;
 	  height: 34px;
 	  padding: 6px 12px;
@@ -49,7 +50,8 @@
 #del_f_day:focus, #user_system:focus, #cookie_name:focus, cookie_path:focus, #cookie_domain:focus,
 #imagefolder:focus, #imagefolderexts:focus, #total_size:focus, #foldername:focus, #prefixname:focus,
 #decode:focus, #id_form:focus, #thmb_dim_w:focus, #thmb_dim_h:focus, #livexts:focus,
-#welcome_msg:focus, #googleanalytics:focus, #cookie_path:focus{
+#welcome_msg:focus, #googleanalytics:focus, #cookie_path:focus,
+#language:focus, #filesnum:focus, #sec_down:focus, #usersectoupload:focus{
 	 border-color: #66afe9;
   outline: 0;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);

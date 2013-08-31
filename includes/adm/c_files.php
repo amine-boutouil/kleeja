@@ -135,7 +135,7 @@ if(isset($_GET['deletefiles']))
 				);
 
 	#get search filter
-	$filter = get_filter($_GET['search_id'], 'filter_uid');
+	$filter = get_filter($_GET['deletefiles'], 'filter_uid');
 	
 	if(!$filter)
 	{

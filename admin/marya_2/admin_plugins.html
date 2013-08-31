@@ -8,46 +8,39 @@
 </IF>
 <div class="tit_con">
 	<h1>{lang.R_PLUGINS}</h1>
-	<div class="second-action tit_plugins_icon" onclick="javascript:get_kleeja_link('./?cp=j_plugins&amp;smt=newplg', '#content'); return false;">{lang.ADD_NEW_PLUGIN}</div>
-</div>
+	<a class="btn btn-primary" onclick="javascript:get_kleeja_link('./?cp=j_plugins&amp;smt=newplg', '#content'); return false;">{lang.ADD_NEW_PLUGIN}</a>
+</div><hr>
 <!-- the big box begin -->
 <div class="big-box <IF NAME="no_plugins">no-plugins-bg</IF>">
 <IF NAME="no_plugins">
-<div class="">{lang.NO_PLUGINS}</div>
+<p class="text-danger">{lang.NO_PLUGINS}</p>
 <ELSE>
 <div id="plugin_boxes">
-<table style="width:100%">
+<table style="width:100%" class="table table-striped">
 <tr>
 <LOOP NAME="arr">
 <td>
-<div class="plugin_box" onclick="javascript:jQuery.facybox({div:'#plugin-{{plg_id}}'});" 
-	onmouseover="javascript:$('.plugin_info_show-{{plg_id}}').show();$('.plugin_else-{{plg_id}}').hide();" 
-	onmouseout="javascript:$('.plugin_info_show-{{plg_id}}').hide();$('.plugin_else-{{plg_id}}').show();"
-	style="float:<IF LOOP="i">left<ELSE>right</IF>">
-	<div class="plugin_info_show plugin_info_show-{{plg_id}}"><div class="f_text">{lang.VIEW}</div></div>
-	<div class="plugin_else plugin_else-{{plg_id}}">
-		<div class="plugin_img"><img src="{{plg_icon_url}}" /></div>
-		<div class="plugin_title">{{plg_name}} {{plg_ver}}</div>
-		<div class="plugin_by">{{plg_author}}</div>
+<div class="plugin_box">
+	<div class="plugin_info_show plugin_info_show-{{plg_id}}"><p class="f_text lead text-primary">{lang.VIEW} : {{plg_name}} {{plg_ver}}</p></div>
+	<div class="plugin_else plugin_else-{{plg_id}} row">
+		<div class="plugin_img col-md-4"><img src="{{plg_icon_url}}" /></div>
+		<div class="col-md-8">
+			<div class="plugin_title"><p class="text-info">{{plg_name}} {{plg_ver}}</p></div>
+			<div class="plugin_by"><p class="text-info">{{plg_author}}</p></div>
+			<div class="plugin_info_desc"><p class="text-info">{{plg_dsc}}</p></div>
+			<div class="plugin_info_settings">
+				<IF LOOP="plg_disabled">
+				<a onclick="javascript:$.facybox.close(); get_kleeja_link(this.href); return false;" href="{action}&amp;do_plg={{plg_id}}&amp;m=2&amp;{GET_FORM_KEY}" title="{lang.ENABLE}" class="btn btn-success"><span class="glyphicon glyphicon-play"></span> {lang.ENABLE}</a>
+				<ELSE>
+				<a onclick="javascript:$.facybox.close(); get_kleeja_link(this.href); return false;" href="{action}&amp;do_plg={{plg_id}}&amp;m=1&amp;pn={{plg_name}}&amp;{GET_FORM_KEY}" title="{lang.DISABLE}" class="btn btn-warning"><span class="glyphicon glyphicon-pause"></span> {lang.DISABLE}</a>
+				</IF>
+				<a onclick="javascript:$.facybox.close(); get_kleeja_link(this.href, '#content', {confirm:true}); return false;" href="{action}&amp;do_plg={{plg_id}}&amp;m=3&amp;pn={{plg_name}}&amp;{GET_FORM_KEY}" title="{lang.DELETE}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> {lang.DELETE}</a>
+				<IF LOOP="plg_instructions">
+				<a onclick="javascript:$.facybox.close(); get_kleeja_link(this.href); return false;" href="{action}&amp;do_plg={{plg_id}}&amp;m=4&amp;{GET_FORM_KEY}" title="{lang.INFORMATION}"><img src="{STYLE_PATH_ADMIN}images/help.png" alt="{lang.INFORMATION}" /> {lang.INFORMATION}</a>
+				</IF>
+			</div>
+		</div>
 	</div>
-
-<div id="plugin-{{plg_id}}" style="display:none;">
-<div class="plugin_information">
-	<div class="plugin_info_title">{{plg_name}} {{plg_ver}}</div>
-	<div class="plugin_info_desc">{{plg_dsc}}</div>
-	<div class="plugin_info_settings">
-		<IF LOOP="plg_disabled">
-		<a onclick="javascript:$.facybox.close(); get_kleeja_link(this.href); return false;" href="{action}&amp;do_plg={{plg_id}}&amp;m=2&amp;{GET_FORM_KEY}" title="{lang.ENABLE}"><img src="{STYLE_PATH_ADMIN}images/enable.png" alt="{lang.ENABLE}" /> {lang.ENABLE}</a>
-		<ELSE>
-		<a onclick="javascript:$.facybox.close(); get_kleeja_link(this.href); return false;" href="{action}&amp;do_plg={{plg_id}}&amp;m=1&amp;pn={{plg_name}}&amp;{GET_FORM_KEY}" title="{lang.DISABLE}"><img src="{STYLE_PATH_ADMIN}images/disable.png" alt="{lang.DISABLE}" /> {lang.DISABLE}</a>
-		</IF>
-		<a onclick="javascript:$.facybox.close(); get_kleeja_link(this.href, '#content', {confirm:true}); return false;" href="{action}&amp;do_plg={{plg_id}}&amp;m=3&amp;pn={{plg_name}}&amp;{GET_FORM_KEY}" title="{lang.DELETE}"><img src="{STYLE_PATH_ADMIN}images/del.png" alt="{lang.DELETE}" /> {lang.DELETE}</a>
-		<IF LOOP="plg_instructions">
-		<a onclick="javascript:$.facybox.close(); get_kleeja_link(this.href); return false;" href="{action}&amp;do_plg={{plg_id}}&amp;m=4&amp;{GET_FORM_KEY}" title="{lang.INFORMATION}"><img src="{STYLE_PATH_ADMIN}images/help.png" alt="{lang.INFORMATION}" /> {lang.INFORMATION}</a>
-		</IF>
-	</div>
-</div>
-</div>
 </div>
 </td>
 <IF LOOP="i"></tr><tr></IF>
@@ -77,7 +70,7 @@
 <h2>{lang.PLUGINS_CHANGES_FILES_EXP}</h2>
 
 <div class="br"></div>
-<table style="width:100%">
+<table style="width:100%" class="table table-striped">
 	<LOOP NAME="changes_files">	
 	<tr>
 			<td>{{file}}</td>
@@ -86,8 +79,8 @@
 	</LOOP>
 </table>
 
-<p class="submit">
-	<button type="submit" class="btn" onclick="javascript:get_kleeja_link('{action}&amp;cc=1'); return false;"><span>{lang.DELETE}</span></button>
+<hr><p class="submit">
+	<button type="submit" class="btn btn-primary btn-mg" onclick="javascript:get_kleeja_link('{action}&amp;cc=1'); return false;"><span>{lang.DELETE}</span></button>
 </p>
 
 <div class="br"></div>
@@ -112,13 +105,13 @@
 
 <form method="post" action="{action}" enctype="multipart/form-data" id="add_plugin_form">
 
-<h2>{lang.ADD_NEW_PLUGIN_EXP}</h2>
+<h2>{lang.ADD_NEW_PLUGIN_EXP}</h2><hr>
 <div class="section">
 	<h3><label for="imp_file"></label></h3>
 	<div class="box">
-		<input name="imp_file" id="imp_file" type="file" />
+		<input name="imp_file" id="imp_file" type="file" class="btn btn-primary"/>
 	</div>
-</div>
+</div><hr>
 <div class="clear"></div>
 
 
@@ -131,7 +124,7 @@
 
 <p class="submit">
 	<input type="hidden" name="submit_new_plg" value="1" />
-	<button type="submit" name="submit_new_plg" class="btn"><span>{lang.SUBMIT}</span></button>
+	<button type="submit" name="submit_new_plg" class="btn btn-primary btn-lg"><span>{lang.SUBMIT}</span></button>
 </p>
 
 {H_FORM_KEYS}

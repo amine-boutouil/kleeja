@@ -140,3 +140,10 @@ label.del{
 	top: 60px;
 	display: none;
 }
+.plugin_box .text-info,.f_text{
+	text-transform: uppercase;
+	font-weight: 800;
+}
+.f_text{
+	border-bottom : 1px dashed rgba(0,0,0,.1);
+}

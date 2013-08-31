@@ -383,10 +383,10 @@ if(empty($config['h_key']))
 $STYLE_PATH				= $config['siteurl'] . 'styles/' . (trim($config['style_depend_on']) == '' ? $config['style'] : $config['style_depend_on']) . '/';
 $THIS_STYLE_PATH		= $config['siteurl'] . 'styles/' . $config['style'] . '/';
 $THIS_STYLE_PATH_ABS	= PATH . 'styles/' . $config['style'] . '/';
-$STYLE_PATH_ADMIN 		= $config['siteurl'] . 'admin/marya_2/';
-$STYLE_PATH_ADMIN_ABS	= PATH . 'admin/marya_2/';
-$DEFAULT_PATH_ADMIN_ABS = PATH . 'admin/marya_2/';
-$DEFAULT_PATH_ADMIN		= $config['siteurl'] . 'admin/marya_2/';
+$STYLE_PATH_ADMIN 		= $config['siteurl'] . 'admin/marya/';
+$STYLE_PATH_ADMIN_ABS	= PATH . 'admin/marya/';
+$DEFAULT_PATH_ADMIN_ABS = PATH . 'admin/marya/';
+$DEFAULT_PATH_ADMIN		= $config['siteurl'] . 'admin/marya/';
 
 
 //get languge of common

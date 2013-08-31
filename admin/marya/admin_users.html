@@ -1,0 +1,597 @@
+<script type="text/javascript">
+<!--//
+$(document).ready( function(){ 
+    $(".cb-enable").click(function(){
+        var parent = $(this).parents('.switch');
+        $('.cb-disable',parent).removeClass('selected');
+        $(this).addClass('selected');
+        $('.checkbox',parent).attr('checked', true);
+    });
+    $(".cb-disable").click(function(){
+        var parent = $(this).parents('.switch');
+        $('.cb-enable',parent).removeClass('selected');
+        $(this).addClass('selected');
+        $('.checkbox',parent).attr('checked', false);
+    });
+});
+//-->
+</script>
+<IF NAME="current_smt == general">
+<!-- the big box begin -->
+<div class="big-box">
+<div class="tit_con">
+	<h1>{lang.R_GROUPS}</h1>
+	<IF NAME="user_not_normal"><ELSE><div class="second-action tit_groups_icon" onclick="javascript:jQuery.facybox({div:'#group_add_new'}); return false;">{lang.ADD_NEW_GROUP}</div></IF>
+</div>
+
+<!-- if not normal user system, tell him --> 
+<IF NAME="user_not_normal">
+<div id="system-message">
+	<div class="info">{lang.USERS_NOT_NORMAL_SYS}</div>
+</div>
+</IF>
+<div class="br"></div>
+
+<div class="clear"></div>
+<!-- start data table -->
+<IF NAME="no_results">
+...		
+<ELSE>
+<fieldset class="fieldset_groups">
+<legend>{lang.ESSENTIAL_GROUPS}</legend>
+<div class="groups_list">
+	<LOOP NAME="e_groups">
+	<div class="group_line">
+		<div class="r1"><p class="text-muted" style="font-weight: 800; display : inline; margin : 6px 0;">{{name}}</p><IF NAME="user_not_normal"><ELSE><IF LOOP="is_default"><img src="{STYLE_PATH_ADMIN}images/default_group.png" alt="{lang.GROUP_IS_DEFAULT}" title="{lang.GROUP_IS_DEFAULT}" /></IF></IF></div>
+		<div class="r2">
+			<a href="{action}&amp;smt=group_data&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.EDIT_DATA}" class="btn btn-default btn-sx">
+				<span class="glyphicon glyphicon-cog"></span>
+			</a>
+			<a href="{action}&amp;smt=group_acl&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.EDIT_ACL}" class="btn btn-default btn-sx">
+				<span class="glyphicon glyphicon-lock"></span>
+			</a>
+			<a href="{action}&amp;smt=group_exts&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.R_EXTS}" class="btn btn-default btn-sx">
+				<span class="glyphicon glyphicon-list-alt"></span>
+			</a>
+			<IF NAME="user_not_normal"><ELSEIF LOOP="id == 2">
+				<img  src="{STYLE_PATH_ADMIN}images/spacer.gif" style="width:16px;height:16px;display:none;" />
+				<ELSE><a href="{action}&amp;smt=show_group&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.USERS}" class="btn btn-default btn-sx">
+				<span class="glyphicon glyphicon-user"></span>
+			</a></IF>
+		</div>
+	<div class="clear"></div><hr>
+	</div>
+	</LOOP>
+</div>
+</fieldset>
+
+<div class="br"></div>
+<IF NAME="c_groups">
+<fieldset class="fieldset_groups">
+<legend>{lang.CUSTOM_GROUPS}</legend>
+<div class="groups_list">
+	<LOOP NAME="c_groups">
+	<div class="group_line">
+		<div class="r1">{{name}}  <IF LOOP="is_default"><img src="{STYLE_PATH_ADMIN}images/default_group.png" alt="{lang.GROUP_IS_DEFAULT}" title="{lang.GROUP_IS_DEFAULT}" /></IF></div>
+		<div class="r2">
+			<a href="{action}&amp;smt=group_data&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.EDIT_DATA}" class="btn btn-default btn-sx">
+				<span class="glyphicon glyphicon-cog"></span>
+			</a>
+			<a href="{action}&amp;smt=group_acl&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.EDIT_ACL}" class="btn btn-default btn-sx">
+				<span class="glyphicon glyphicon-lock"></span>
+			</a>
+			<a href="{action}&amp;smt=group_exts&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.R_EXTS}" class="btn btn-default btn-sx">
+				<span class="glyphicon glyphicon-list-alt"></span>
+			</a>
+			<a href="{action}&amp;smt=show_group&amp;qg={{id}}"  onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.USERS}" class="btn btn-default btn-sx">
+				<span class="glyphicon glyphicon-user"></span>
+			</a>
+			<a href="#" onclick="javascript:jQuery.facybox({div:'#delete_group_{{id}}'});  return false;" title="{lang.DELETE}" class="btn btn-default btn-sx">
+				<span class="glyphicon glyphicon-trash"></span>
+			</a>
+		</div>
+	<div class="clear"></div>
+	</div>
+	</LOOP>
+</div>
+</fieldset>
+</IF>
+</IF>
+<!-- end data table -->
+</div>
+<!-- the big box end -->
+
+
+<!-- the big box begin -->
+<div id="group_add_new" style="background : rgba(0,0,0,.02); padding : 20px 0 0 10px;margin-top: -20px;">
+<b>{lang.ADD_NEW_GROUP}</b>
+<form method="post" action="{action}" id="add_group_form--change--" class="form-inline" role="form">
+	<div class="form-group">
+    <label class="sr-only" for="groupe_name">{lang.GROUP_NAME}</label>
+    <input type="email" class="form-control" id="groupe_name" placeholder="{lang.GROUP_NAME}">
+  </div>
+<div class="form-group">
+	<label for="cfrom" class="sr-only">{lang.COPY_FROM}</label>
+	<div class="box">
+		<select name="cfrom" id="cfrom" class="form-control" style="width : 177px;">
+			<option value="-1">{lang.DEFAULT_GROUP}</option>
+			<LOOP NAME="e_groups"><IF LOOP="id == 2"><ELSE><option value="{{id}}">{{name}}</option></IF></LOOP>
+			<LOOP NAME="c_groups"><option value="{{id}}">{{name}}</option></LOOP>
+		</select>
+	</div>
+</div>
+<!-- button -->
+	<input type="hidden" name="newgroup" value="1" />
+	<button type="submit" id="submit" name="newgroup" class="btn btn-primary btn-lg" onclick="javascript:$.facybox.close(); submit_kleeja_data('#add_group_form--change--', '#content', 0); return false;" ><span>{lang.SUBMIT}</span></button>
+
+{H_FORM_KEYS3}
+</form><hr>
+<!-- the big box end -->
+</div>
+
+<!-- the big box begin -->
+<LOOP NAME="c_groups">
+<div id="delete_group_{{id}}" style="">
+<b>{lang.DELETE_GROUP} : {{name}}</b>
+<br /><br />
+<form method="post" action="{action}" id="del_group_form--change--">
+<input type="hidden" name="dgroup" id="dgroup" value="{{id}}"  />
+<div class="section">
+	<h3><label for="tgroup">{lang.G_USERS_MOVE_TO}</label></h3>
+	<div class="box">
+		<select name="tgroup" id="tgroup">
+			<IF LOOP="is_default"><ELSE><option value="-1">{lang.DEFAULT_GROUP}</option></IF>
+			<LOOP NAME="e_groups"><IF LOOP="id == 2"><ELSE><option value="{{id}}">{{name}}</option></IF></LOOP>
+			<LOOP NAME="c_groups"><option value="{{id}}">{{name}}</option></LOOP>
+		</select>
+	</div>
+</div>
+<div class="clear"></div>
+<div class="br"></div>
+<!-- button -->
+<p>
+	<input type="hidden" name="delgroup" value="1" />
+	<button type="submit" id="submit" name="delgroup" class="btn" onclick="javascript:$.facybox.close(); submit_kleeja_data('#del_group_form--change--', '#content', 0); return false;"><span>{lang.SUBMIT}</span></button>
+</p>
+{H_FORM_KEYS4}
+</form>
+</div>
+</LOOP>
+<!-- the big box end -->
+
+
+<ELSEIF NAME="show_results">
+<!-- the big box begin -->
+<div class="big-box group_users">
+<div class="tit_con">
+	<h1><a href="{action}&amp;smt=general" onclick="javascript:get_kleeja_link(this.href); return false;">{lang.R_USERS}</a>
+	<IF NAME="is_search"> &raquo; <IF NAME="current_smt == show_group">{group_name}<ELSE>{lang.SEARCH_USERS}</IF> ( {nums_rows} )</IF>
+	</h1>
+</div>
+<!-- the big box begin -->
+
+
+<!-- if not normal user system, tell him --> 
+<IF NAME="user_not_normal">
+<div id="system-message">
+	<div class="info">{lang.USERS_NOT_NORMAL_SYS}</div>
+</div>
+</IF>
+
+<IF NAME="GE_INFO">
+	<script type="text/javascript">
+		setTimeout(function() {
+			$('.infoexts').fadeOut('fast');
+		}, 5000);
+	</script>
+	<div id="system-message" class="infoexts">
+		<div class="info">{GE_INFO}</div>
+	</div>
+</IF>
+
+<div class="br"></div>
+
+<IF NAME="arr">
+<LOOP NAME="arr">
+<div class="section">
+	<h3>{{name}}<IF LOOP="founder==1"><span style="margin-left : 8px; color:rgb(66,202,213);"class="glyphicon glyphicon-copyright-mark" title="{lang.FOUNDER}"></span></IF></h3>
+	<div class="box">
+		{lang.GROUP}: {{group}}, {lang.LAST_VISIT}: {{last_visit}}
+		<div class="x_options">
+			<a target="_blank" href="{{userfile_link}}" title="{lang.BROSWERF}" class="btn btn-info"><span class="glyphicon glyphicon-file"></span></a>
+			<a href="{{delusrfile_link}}&amp;{GET_FORM_KEY}" onclick="javascript:get_kleeja_link(this.href, '#content', {confirm:true}); return false;" title="{lang.ADMIN_DELETE_FILES}" class="btn btn-danger"><span class="glyphicon glyphicon-floppy-remove"></span></a>
+			<IF LOOP="delusr_link"><a href="{{delusr_link}}&amp;{GET_FORM_KEY}" onclick="javascript:get_kleeja_link(this.href, '#content', {confirm:true}); return false;" title="{lang.DELETE}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a></IF>
+			<a href="{{editusr_link}}" onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.EDIT}" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span></a>
+	</div>
+</div>
+<div class="clear"></div>
+</LOOP>
+</IF>
+
+<!-- end data table -->
+
+<div class="br"></div>
+
+<!-- pagination -->
+{page_nums}
+</div>
+<!-- the big box end -->
+
+<!-- add new user -->
+<ELSEIF NAME="current_smt == new_u">
+<!-- the big box begin -->
+<div class="big-box">
+<div class="tit_con">
+<h1><a href="{action}&amp;smt=general" onclick="javascript:get_kleeja_link(this.href); return false;">{lang.R_GROUPS}</a> &raquo; {lang.NEW_USER}</h1>
+</div>
+
+<IF NAME="errs">
+	<div id="system-message">
+		<div class="error">{errs}</div>
+	</div>
+</IF>
+
+<form method="post" action="{action}" id="add_user_form">
+<div class="section">
+	<div class="box"><input type="text" name="lname" id="lname" value="{uname}" size="30" class="form-control" placeholder="{lang.USERNAME}"/></div><hr>
+</div>
+<div class="clear"></div>
+<div class="section">
+	<div class="box"><input type="text" name="lmail"  id="lmail" value="{umail}"size="30" style="direction:ltr" class="form-control" placeholder="{lang.EMAIL}"/></div><hr>
+</div>
+<div class="clear"></div>
+<div class="section">
+	<div class="box"><input type="password" name="lpass" id="lpass" value=""size="30" class="form-control" placeholder="{lang.PASSWORD}"/></div><hr>
+</div>
+<div class="clear"></div>
+<div class="section">
+	<div class="box">
+		<select name="lgroup" id="lgroup" class="form-control" style="width: 237px;">
+		<LOOP NAME="u_groups">
+			<option value="{{id}}"<IF LOOP="selected"> selected="selected"</IF>>{{name}} <IF LOOP="default">({lang.DEFAULT_GROUP})</IF></option>
+		</LOOP>
+		</select>
+</div><hr>
+<div class="clear"></div>
+
+<div class="br"></div>
+
+<!-- button -->
+<p class="submit">
+	<input type="hidden" name="newuser" value="1" />
+	<button type="submit" id="submit" name="newuser" class="btn btn-primary btn-lg" onclick="javascript:submit_kleeja_data('#add_user_form', '#content', 0); return false;"><span>{lang.SUBMIT}</span></button>
+</p>
+
+{H_FORM_KEYS2}
+</form>
+</div>
+<!-- the big box end -->
+
+<!-- edit a user -->
+<ELSEIF NAME="current_smt == edit_user">
+<!-- the big box begin -->
+<div class="big-box">
+<div class="page-header">
+<h1><a href="{action_all}&amp;smt=general" onclick="javascript:get_kleeja_link(this.href); return false;">{lang.R_GROUPS}</a> &raquo; {lang.EDIT} ({title_name})</h1>
+</div>
+
+<IF NAME="errs">
+	<div id="system-message">
+		<div class="error">{errs}</div>
+	</div>
+</IF>
+
+<form method="post" action="{action}&amp;uid={userid}&amp;qg={u_qg}&amp;page={u_page}" id="edit_user_form">
+
+<div class="section">
+	<h4><label for="l_name">{lang.USERNAME}</label></h4>
+	<div class="box"><input type="text" name="l_name" id="l_name" value="{u_name}" size="30" class="form-control"/></div>
+</div><hr>
+<div class="clear"></div>
+<div class="section">
+	<h4><label for="l_mail">{lang.EMAIL}</label></h4>
+	<div class="box"><input type="text" name="l_mail"  id="l_mail" value="{u_mail}"size="30" style="direction:ltr" class="form-control"/></div>
+</div><hr>
+<div class="clear"></div>
+<div class="section">
+	<h4><label for="l_pass">{lang.PASS_ON_CHANGE}</label></h4>
+	<div class="box"><input type="password" name="l_pass" id="l_pass" value=""size="30" class="form-control"/><small></small></div>
+</div><hr>
+<div class="clear"></div>
+<div class="section">
+	<h4><label for="l_show_filecp">{lang.SHOW_MY_FILECP}</label></h4>
+	<div class="box">
+	<select name="l_show_filecp" id="l_show_filecp" class="form-control">
+			<option value="1"<IF NAME="u_show_filecp"> selected="selected"</IF>>{lang.YES}</option>
+			<option value="0"<IF NAME="u_show_filecp"><ELSE> selected="selected"</IF>>{lang.NO}</option>
+		</select>
+</div><hr>
+<div class="clear"></div>
+<div class="section">
+	<h4><label for="l_group">{lang.GROUP}</label></h4>
+	<div class="box">
+		<select name="l_group" id="l_group" class="form-control">
+		<LOOP NAME="u_groups">
+			<IF LOOP="id == 2"><ELSE>
+			<option value="{{id}}"<IF LOOP="selected"> selected="selected"</IF>>{{name}} <IF LOOP="default">({lang.DEFAULT_GROUP})</IF></option>
+			</IF>
+		</LOOP>
+		</select>
+</div><hr>
+<div class="clear"></div>
+<IF NAME="im_founder">
+<div class="section">
+	<h4><label for="l_founder">{lang.FOUNDER}</label></h4>
+	<div class="box">
+	<select name="l_founder" id="l_founder" class="form-control">
+			<option value="1"<IF NAME="u_founder"> selected="selected"</IF>>{lang.YES}</option>
+			<option value="0"<IF NAME="u_founder"><ELSE> selected="selected"</IF>>{lang.NO}</option>
+		</select>
+</div><hr>
+<div class="clear"></div>
+</IF>
+
+<div class="br"></div>
+<input type="text" style="display:none;" name="l_qg" class="btn btn-primary" value="{u_qg}" />
+<input type="text" style="display:none;" name="l_page" class="btn btn-primary" value="{u_page}" />
+<input type="text" style="display:none;" name="uid" class="btn btn-primary" value="{userid}" />
+
+<!-- button -->
+<p class="submit">
+	<input type="hidden" name="edituser" value="1" />
+	<button type="submit" id="submit" name="edituser" class="btn btn-primary btn-lg" onclick="javascript:submit_kleeja_data('#edit_user_form', '#content', 0); return false;"><span>{lang.SUBMIT}</span></button>
+</p>
+
+{H_FORM_KEYS8}
+</form>
+</div>
+<!-- the big box end -->
+
+
+<ELSEIF NAME="current_smt == group_acl">
+<!-- the big box begin -->
+<div class="big-box">
+<div class="tit_con">
+	<h1><a href="{action}&amp;smt=general" onclick="javascript:get_kleeja_link(this.href); return false;">{lang.R_GROUPS}</a> &raquo; {lang.EDIT_ACL} ({group_name})</h1>   
+</div>
+
+<form method="post" action="{action}" id="edit_acl_form">
+
+<LOOP NAME="acls">
+<div class="section acls_tab">
+	<h3>{{acl_title}}</h3>
+	<div class="box">
+	<p class="field switch">
+		<label class="cb-enable<IF LOOP="acl_can == 1"> selected</IF>"><span>{lang.HE_CAN}</span></label>
+		<label class="cb-disable<IF LOOP="acl_can == 0"> selected</IF>"><span>{lang.HE_CAN_NOT}</span></label>
+		<input type="checkbox" id="acls_{{acl_name}}" class="checkbox" name="{{acl_name}}" <IF LOOP="acl_can == 1">checked="checked"</IF> />
+	</p>
+	</div>
+</div>
+<div class="clear"></div>
+</LOOP>
+
+
+<div class="br"></div>
+
+<!-- button -->
+<p class="submit">
+	<input type="hidden" name="editacl" value="1" />
+	<button type="submit" id="submit" name="editacl" class="btn btn-primary btn-lg" onclick="javascript:submit_kleeja_data('#edit_acl_form', '#content', 0); return false;"><span>{lang.SUBMIT}</span></button>
+</p>
+
+{H_FORM_KEYS5}
+</form>
+</div>
+<!-- the big box end -->
+
+<ELSEIF NAME="current_smt == group_exts">
+<!-- the big box begin -->
+<div class="big-box group_exts">
+<div class="page-header">
+	<h1><a href="{action}&amp;smt=general" onclick="javascript:get_kleeja_link(this.href); return false;">{lang.R_GROUPS}</a> &raquo; {lang.R_EXTS} ({group_name})</h1>   
+	<div class="second-action tit_ext_icon" onclick="javascript:jQuery.facybox({div:'#new_ext_form'}); return false;">{lang.ADD_NEW_EXT}</div>
+</div>
+
+<IF NAME="GE_INFO">
+	<script type="text/javascript">
+		setTimeout(function() {
+			$('.infoexts').fadeOut('fast');
+		}, 5000);
+	</script>
+	<div id="system-message" class="infoexts">
+	<IF NAME="DELETED_EXT">
+		<IF NAME="{DELETED_EXT} == 2">
+		<div class="info">{lang.EXT_DELETED}</div>
+		<ELSE>
+		<div class="error">{lang.DATA_CHANGED_NO}</div>
+		</IF>
+	</IF>
+	<IF NAME="ADDED_EXT">
+		<IF NAME="{ADDED_EXT} == 2">
+		<div class="info">{lang.NEW_EXT_ADD}</div>
+		<ELSE>
+		<div class="error">{lang.DATA_CHANGED_NO}</div>
+		</IF>
+	</IF>
+	</div>
+</IF>
+
+<form method="post" action="{action}" id="edit_exts_form">
+<div class="br"></div>
+<LOOP NAME="exts">
+<div class="section" style="background-image:url('{{ext_icon}}') no-repeat;">
+	<img src="{{ext_icon}}" alt="{{ext_name}}" title="{{ext_name}}" style="float:left;margin-right:8px;">
+	<div class="box">
+		<input type="text" name="size[{{ext_id}}]" value="{{ext_size}}" size="6" class="form-control" style="float:left;"/> <span style="float:left;font-weight:800;margin:8px 0 0 8px;">{lang.KILOBYTE}</span>
+		<div class="xdel">
+			<a href="{action}&del={{ext_id}}&{GET_FORM_KEY}"  onclick="javascript:get_kleeja_link(this.href); return false;" title="{lang.DELETE}" class="btn btn-danger" style="float:left;margin-left:8px;">
+				<span class="glyphicon glyphicon-trash"></span>
+			</a><div class="clear"></div>
+		</div>
+	</div><hr>
+</div>
+<div class="clear"></div>
+</LOOP>
+
+<div class="br"></div>
+
+<!-- button -->
+<p class="submit">
+	<input type="hidden" name="editexts" value="1" />
+	<button type="submit" id="submit" name="editexts" class="btn btn-primary btn-lg" onclick="javascript:submit_kleeja_data('#edit_exts_form', '#content', 0); return false;"><span>{lang.SUBMIT}</span></button>
+</p>
+<div class="clear"></div>
+<div class="br"></div>
+<blockquote style="margin-top : 20px;">
+{lang.E_EXTS} (<a href="#converter_form" onclick="javascript:jQuery.facybox({div:'#converter_form'}); return false;">{lang.BCONVERTER}</a>)
+</blockquote>
+{H_FORM_KEYS7}
+</form>
+</div><hr>
+<!-- the big box end -->
+
+
+<!-- add new EXT. -->
+<div id="new_ext_form" style="">
+<b>{lang.ADD_NEW_EXT}</b>   
+<br />
+<br />
+<form method="post" action="{action}" id="add_new_ext--change--">
+<div class="section">
+	<h4><label>{lang.ADD_NEW_EXT_EXP}</label></h4>
+	<div class="box">
+		<input type="text" name="extisnew" value="" class="form-control"/>
+	</div>
+</div>
+<div class="clear"></div>
+
+<div class="br"></div>
+
+<!-- button -->
+<p class="submit">
+	<input type="hidden" name="newext" value="1" />
+	<button type="submit" id="submit" name="newext" class="btn btn-primary btn-lg" style="margin-top : 15px;" onclick="javascript:submit_kleeja_data('#add_new_ext--change--', '#content', 0); $.facybox.close(); return false;"><span>{lang.SUBMIT}</span></button>
+</p>
+
+{H_FORM_KEYS7}
+</form>
+</div><hr>
+<!-- the big box end -->
+
+<div id="converter_form" style="">
+<b>{lang.BCONVERTER}</b>   
+<br />
+<br />
+<!-- converter table -->
+<script type="text/javascript">
+/*Created by: Uncle Jim :: http://jdstiles.com/javamain.html */
+
+	function convert(f) 
+	{
+	  f.kb.value=Math.round(f.byte.value/1024*100000)/100000
+	  f.mb.value=Math.round(f.byte.value/1048576*100000)/100000
+	  f.gb.value=Math.round(f.byte.value/1073741824*100000)/100000
+	}
+
+	function convertkb(f) 
+	{
+	  f.byte.value=Math.round(f.kb.value*1024*100000)/100000
+	  f.mb.value=Math.round(f.kb.value/1024*100000)/100000
+	  f.gb.value=Math.round(f.kb.value/1048576*100000)/100000
+	}
+
+	function convertmb(f)
+	{
+	  f.byte.value=Math.round(f.mb.value*1048576*100000)/100000
+	  f.kb.value=Math.round(f.mb.value*1024*100000)/100000
+	  f.gb.value=Math.round(f.mb.value/1024*100000)/100000
+	}
+
+	function convertgb(f) 
+	{
+	  f.byte.value=Math.round(f.gb.value*1073741824*100000)/100000
+	  f.kb.value=Math.round(f.gb.value*1048576*100000)/100000
+	  f.mb.value=Math.round(f.gb.value*1024*100000)/100000
+	}
+</script>
+
+
+<!-- start c table -->
+<form class="table table-striped">
+<table>
+	<tr class="first"> 
+		<td>Byte</td>
+		<td>Kilobyte</td>
+		<td>Megabyte</td>
+		<td>Gigabyte</td>
+	</tr>
+	<tr> 
+		<td><input type="text" size="10" name="byte" value="0" class="form-control" /></td>
+		<td><input type="text" size="10" name="kb" value="0" class="form-control" /></td>
+		<td><input type="text" size="10" name="mb" value="0" class="form-control" /></td>
+		<td><input type="text" size="10" name="gb" value="0" class="form-control" /></td>
+	</tr>
+
+	<tr> 
+		<td style="border-width:0px"><button type="button" name="B2" class="btn btn-default" onClick="javascript:convert(this.form)"><span class="bc">  &gt;  </span></button></td>
+		<td style="border-width:0px"><button type="button" name="B22" class="btn btn-default" onClick="javascript:convertkb(this.form)"><span class="bc">  &lt; &gt;  </span></button></td>
+		<td style="border-width:0px"><button type="button" name="B23" class="btn btn-default" onClick="javascript:convertmb(this.form)"><span class="bc">  &lt; &gt;  </span></td>
+		<td style="border-width:0px"><button type="button" name="B24" class="btn btn-default" onClick="javascript:convertgb(this.form)"><span class="bc">  &lt;  </span></td>
+	</tr>
+</table>
+</form>
+</div>
+<!-- the big box end -->
+<!-- end c table -->
+
+	
+
+<ELSEIF NAME="current_smt == group_data">
+<div class="tit_con">
+	<h1><a href="{action}&amp;smt=general" onclick="javascript:get_kleeja_link(this.href); return false;">{lang.R_GROUPS}</a> &raquo; {lang.EDIT_DATA} ({group_name})</h1>
+</div>
+
+<!-- the big box begin -->
+<div class="big-box groups_edit">
+<form method="post" action="{action}" id="edit_data_form">
+<IF NAME="user_not_normal"><ELSE>
+<div class="section">
+	<h3><label for="group_name">{lang.GROUP_NAME}</label></h3><hr>
+	<div class="btn btn-info" style="width:100%;font-size:25px;">
+		<IF NAME="gdata.group_is_essential">
+			{group_name}<hr>
+		<ELSE>
+			<input type="text" name="group_name" id="group_name" value="{gdata.group_name}" size="30" class="form-control"/>
+		</IF>
+	</div>
+</div>
+<div class="br"></div>
+
+<div class="section">
+	<h3><label for="group_name">{lang.GROUP_IS_DEFAULT}</label></h3>
+	<div class="box">
+		<input type="radio" name="group_is_default" id="group_is_default" value="1" <IF NAME="gdata.group_is_default == 1">checked="checked"</IF> /> <span style="color:green">{lang.YES}</span> &nbsp; &nbsp; &nbsp; &nbsp;
+		<input type="radio" name="group_is_default" id="group_is_default" value="0" <IF NAME="gdata.group_is_default == 0">checked="checked"</IF> /> <span style="color:red">{lang.NO}</span>
+	</div>
+</div>
+<div class="br"></div>
+
+<hr />
+</IF>
+
+<LOOP NAME="data">
+	{{option}}<hr>
+</LOOP>
+<div class="br"></div>
+<!-- button -->
+<hr><p class="submit">
+	<input type="hidden" name="editdata" value="1" />
+	<button type="submit" id="submit" name="editdata" class="btn btn-primary btn-lg" onclick="javascript:submit_kleeja_data('#edit_data_form', '#content', 0); return false;"><span>{lang.SUBMIT}</span></button>
+</p>
+
+{H_FORM_KEYS6}
+</form>
+</div>
+<!-- the big box end -->
+</IF>

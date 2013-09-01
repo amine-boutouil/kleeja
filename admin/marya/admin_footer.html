@@ -9,9 +9,23 @@
 
 <script src="{STYLE_PATH_ADMIN}js/jquery.min.js"></script>
 <script src="{STYLE_PATH_ADMIN}js/bootstrap.min.js"></script>
+<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jqBarGraph.js"></script>
 
 <script type="text/javascript">
 <!--
+<IF NAME="{go_to}==start">
+$('#chart_stats').jqBarGraph({
+	data: arrayOfDataMulti,
+		colors: ['#2D6BA9','#91C7E5'] ,
+   legends: ['{lang.FILE}','{lang.IMAGE}'],
+   legend: true,
+   height: 200,
+   barSpace: 5,
+   width:700
+   
+});
+</IF>
+
 var STYLE_PATH_ADMIN = '{STYLE_PATH_ADMIN}';
 var go_to = '{go_to}';
 

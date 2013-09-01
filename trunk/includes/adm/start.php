@@ -49,7 +49,8 @@ $usernamelang		= sprintf($lang['KLEEJA_CP_W'], $username);
 //size board by percent
 $per	= $stat_sizes / ($config['total_size'] * 1048576);
 $per1	= round($per*100, 2);
-$per1	= $per1 >= 100 ? 100 : $per1;
+$per1	= $per1 >= 100 ? 100 : ($per1 == 0 ? 1 : $per1);
+
 
 //ppl must know about kleeja version!
 $kleeja_version	 = '<a href="' . basename(ADMIN_PATH) . '?cp=p_check_update" onclick="javascript:get_kleeja_link(this.href, \'#content\'); return false;" title="' . $lang['R_CHECK_UPDATE'] . '">' . KLEEJA_VERSION . '</a>';
@@ -61,7 +62,7 @@ $ADM_NOTIFICATIONS = array();
 $u_agent = (!empty($_SERVER['HTTP_USER_AGENT'])) ? htmlspecialchars((string) strtolower($_SERVER['HTTP_USER_AGENT'])) : (function_exists('getenv') ? getenv('HTTP_USER_AGENT') : '');
 if(is_browser('ie6') && !is_browser('ie8, ie7'))
 {
-	$ADM_NOTIFICATIONS[]  = array('id' => 'IE6', 'msg_type'=> 'error', 'title'=> $lang['NOTE'], 'msg'=> $lang['ADMIN_USING_IE6']);
+	$ADM_NOTIFICATIONS[]  = array('id' => 'IE6', 'msg_type'=> 'warning', 'title'=> $lang['NOTE'], 'msg'=> $lang['ADMIN_USING_IE6']);
 }
 
 //if upgrading from 1rc6 to 1.0, some files must be deleted ! 
@@ -82,7 +83,7 @@ if(version_compare(strtolower(KLEEJA_VERSION), strtolower($v['version_number']),
 {
 	$ADM_NOTIFICATIONS[]  = array(
 									'id' => 'up_ver_klj',//this not so important row 
-									'msg_type'=> 'error', 'title'=> $lang['R_CHECK_UPDATE'], 
+									'msg_type'=> 'warning', 'title'=> $lang['R_CHECK_UPDATE'], 
 									'msg'=> sprintf($lang['UPDATE_NOW_S'] , KLEEJA_VERSION, $v['version_number']) . '<br />' . '<a href="http://www.kleeja.com/">www.kleeja.com</a>'
 							);
 
@@ -174,11 +175,11 @@ if(function_exists('fileperms') && !defined('KLEEJA_NO_CONFIG_CHECK') && strtoup
 //no htaccess
 if(!file_exists(PATH . $config['foldername'] . '/.htaccess'))
 {
-	$ADM_NOTIFICATIONS[]  = array('id' => 'htaccess_u', 'msg_type'=> 'error', 'title'=> $lang['WARN'], 'msg'=> sprintf($lang['NO_HTACCESS_DIR_UP'], $config['foldername']));
+	$ADM_NOTIFICATIONS[]  = array('id' => 'htaccess_u', 'msg_type'=> 'warning', 'title'=> $lang['WARN'], 'msg'=> sprintf($lang['NO_HTACCESS_DIR_UP'], $config['foldername']));
 }
 if(!file_exists(PATH . $config['foldername'] . '/thumbs/.htaccess'))
 {
-	$ADM_NOTIFICATIONS[]  = array('id' => 'htaccess_t', 'msg_type'=> 'error', 'title'=> $lang['WARN'], 'msg'=> sprintf($lang['NO_HTACCESS_DIR_UP_THUMB'], $config['foldername'] . '/thumbs'));
+	$ADM_NOTIFICATIONS[]  = array('id' => 'htaccess_t', 'msg_type'=> 'warning', 'title'=> $lang['WARN'], 'msg'=> sprintf($lang['NO_HTACCESS_DIR_UP_THUMB'], $config['foldername'] . '/thumbs'));
 }
 
 
@@ -196,7 +197,7 @@ if(file_exists($STYLE_PATH . 'footer.html'))
 		{
 			//it's not so usefull ...
 			//$copy_msg = sprintf($lang['NO_KLEEJA_COPYRIGHTS'], '<a href="http://www.kleeja.com/buy/">' . $lang['CLICKHERE'] .'</a>');
-			//$ADM_NOTIFICATIONS[]  = array('id' => 'copyrights_t', 'msg_type'=> 'error', 'title'=> $lang['NOTE'], 'msg'=> $copy_msg);
+			//$ADM_NOTIFICATIONS[]  = array('id' => 'copyrights_t', 'msg_type'=> 'warning', 'title'=> $lang['NOTE'], 'msg'=> $copy_msg);
 		}
 	}
 }
@@ -273,14 +274,14 @@ $image_last_visit = filter_exists('i_lastvisit', 'filter_uid') ? get_filter('i_l
 
 #hurry, hurry section, get styles
 $hurry_style_link	= basename(ADMIN_PATH) . '?cp=m_styles&amp;sty_t=st&amp;method=2&amp;home=1&amp;smt=curstyle&amp;' . $GET_FORM_KEY . '&amp;style_choose=';
-$hurry_styles_list	= '';
+$hurry_styles_list	= array();
 if ($dh = @opendir(PATH . 'styles'))
 {
 	while (($file = @readdir($dh)) !== false)
 	{
 		if(strpos($file, '.') === false && $file != '..' && $file != '.')
 		{
-			$hurry_styles_list .= '<option value="' . htmlspecialchars($file) . '"' . ($config['style'] == $file ? ' selected="selected"' : '') . '>' . $file . '</option>';
+			$hurry_styles_list[] = array('name' => $file);
 		}
 	}
 	@closedir($dh);
@@ -288,25 +289,20 @@ if ($dh = @opendir(PATH . 'styles'))
 
 #hurry, hurry section, get languages
 $hurry_lang_link	= basename(ADMIN_PATH) . '?cp=g_users&smt=general&amp;smt=group_data&' . $GET_FORM_KEY . '&amp;lang_change=';
-$hurry_langs_list	= '';
+$hurry_langs_list	= array();
 if ($dh = @opendir(PATH . 'lang'))
 {
 	while (($file = @readdir($dh)) !== false)
 	{
 		if(strpos($file, '.') === false && $file != '..' && $file != '.')
 		{
-			$hurry_langs_list .= '<option value="' . htmlspecialchars($file) . '"' . ($d_groups[$config['default_group']]['configs']['language'] == $file ? ' selected="selected"' : '') . '>' . $file . '</option>';
+			$hurry_langs_list[] = array('name' => $file);
 		}
 	}
 	@closedir($dh);
 }
 
-$hurry_groups_list = '<option value="' . $config['default_group'] . '" selected="selected">' . $lang['DEFAULT_GROUP'] . '</option>';
-$hurry_groups_list .= '<option value="-1">' . $lang['ALL'] . '</option>';
-foreach($d_groups as $id=>$ddt)
-{
-	$hurry_groups_list .= '<option value="' . $id . '">' . preg_replace('!{lang.([A-Z0-9]+)}!e', '$lang[\'\\1\']', $d_groups[$id]['data']['group_name']) . '</option>';
-}
+
 
 #hurry, hurry section, links
 $del_cache_link		= basename(ADMIN_PATH) . '?cp=r_repair&amp;case=clearc&amp;' . kleeja_add_form_key_get('REPAIR_FORM_KEY');

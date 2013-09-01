@@ -3,202 +3,157 @@
 <IF NAME="current_smt == general">
 
 <!-- start general -->
+<div class="page-header">
+  <h1>{usernamelang} <small>,{lang.LAST_VISIT} {last_visit}</small></h1>
+</div>
 
+<!-- notes general -->
 <LOOP NAME="ADM_NOTIFICATIONS">
-<div class="note-{{msg_type}}">
+<div class="alert alert-{{msg_type}}">
 	<strong>{{title}}!</strong>
 		{{msg}}
 </div>
 </LOOP>
 
-
-<!-- the big box begin general -->
-<div class="big-box">
-<div class="tit_con">
-	<h1>{usernamelang}</h1>   
-</div>
-
+<!-- last visists -->
 <IF NAME="last_visit">
-<div class="section">
-	<h4>{lang.LAST_VISIT}</h4>
-	<div class="box"><p class="text-success  last_visit">{last_visit}</p></div><hr>
+<div class="row">
+	<div class="col-md-6">
+		<h4>{lang.IMG_LST_VST_SEARCH}</h4>
+
+		<div class="btn-group">
+			<IF NAME="image_last_visit">
+				<button type="button" class="btn btn-default"onclick="javascript:get_kleeja_link('{h_lst_imgs}{image_last_visit}'); return false;">{lang.LAST_VIEW}</button>
+			</IF>
+
+		    <div class="btn-group">
+		      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+		        <span class="glyphicon glyphicon-time"></span> {lang.TIME}...
+		        <span class="caret"></span>
+		      </button>
+		      <ul class="dropdown-menu">
+		        <li><a href="javascript:void(0)" onclick="javascript:location.href='{h_lst_imgs}' + (Math.round((new Date()).getTime() / 1000) - 3600);">{lang.HOUR}</a></li>
+		        <li><a href="javascript:void(0)" onclick="javascript:location.href='{h_lst_imgs}' + (Math.round((new Date()).getTime() / 1000) - 18000);">{lang.5HOURS}</a></li>
+		        <li><a href="javascript:void(0)" onclick="javascript:location.href='{h_lst_imgs}' + (Math.round((new Date()).getTime() / 1000) - 86400);">{lang.DAY}</a></li>
+		        <li><a href="javascript:void(0)" onclick="javascript:location.href='{h_lst_imgs}' + (Math.round((new Date()).getTime() / 1000) - 604800);">{lang.WEEK}</a></li>
+		        <li><a href="javascript:void(0)" onclick="javascript:location.href='{h_lst_imgs}' + (Math.round((new Date()).getTime() / 1000) - 2592000);">{lang.MONTH}</a></li>
+		        <li><a href="javascript:void(0)" onclick="javascript:location.href='{h_lst_imgs}' + (Math.round((new Date()).getTime() / 1000) - 31536000);">{lang.YEAR}</a></li>
+		      </ul>
+		    </div>
+	  </div>
+
+	</div>
+	<div class="col-md-6">
+		<h4>{lang.FLS_LST_VST_SEARCH}</h4>
+		
+		<div class="btn-group">
+			<IF NAME="image_last_visit">
+				<button type="button" class="btn btn-default"onclick="javascript:get_kleeja_link('{h_lst_files}{files_last_visit}'); return false;">{lang.LAST_VIEW}</button>
+			</IF>
+
+		    <div class="btn-group">
+		      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+		        <span class="glyphicon glyphicon-time"></span> {lang.TIME}...
+		        <span class="caret"></span>
+		      </button>
+		      <ul class="dropdown-menu">
+		        <li><a href="javascript:void(0)" onclick="javascript:location.href='{h_lst_files}' + (Math.round((new Date()).getTime() / 1000) - 3600);">{lang.HOUR}</a></li>
+		        <li><a href="javascript:void(0)" onclick="javascript:location.href='{h_lst_files}' + (Math.round((new Date()).getTime() / 1000) - 18000);">{lang.5HOURS}</a></li>
+		        <li><a href="javascript:void(0)" onclick="javascript:location.href='{h_lst_files}' + (Math.round((new Date()).getTime() / 1000) - 86400);">{lang.DAY}</a></li>
+		        <li><a href="javascript:void(0)" onclick="javascript:location.href='{h_lst_files}' + (Math.round((new Date()).getTime() / 1000) - 604800);">{lang.WEEK}</a></li>
+		        <li><a href="javascript:void(0)" onclick="javascript:location.href='{h_lst_files}' + (Math.round((new Date()).getTime() / 1000) - 2592000);">{lang.MONTH}</a></li>
+		        <li><a href="javascript:void(0)" onclick="javascript:location.href='{h_lst_files}' + (Math.round((new Date()).getTime() / 1000) - 31536000);">{lang.YEAR}</a></li>
+		      </ul>
+		    </div>
+	  </div>
+
+	</div>
 </div>
-<div class="clear"></div>
-
-<div class="section">
-	<h4>{lang.IMG_LST_VST_SEARCH}</h4>
-	<div class="box">
-		<IF NAME="image_last_visit"><a href="{h_lst_imgs}{image_last_visit}" onclick="javascript:get_kleeja_link(this.href); return false;">{lang.LAST_VIEW}</a> &nbsp; {lang.OR} &nbsp;</IF>
-		<select class="show_since_time form-control" tabindex="3" onchange="javascript:get_kleeja_link('{h_lst_imgs}' + (Math.round((new Date()).getTime() / 1000) - $(this).val()), '#content');">">
-			<option>{lang.TIME}...</option>
-			<option value="3600">{lang.HOUR}</option>
-			<option value="18000">{lang.5HOURS}</option>
-			<option value="86400">{lang.DAY}</option>
-			<option value="604800">{lang.WEEK}</option>
-			<option value="2592000">{lang.MONTH}</option>
-			<option value="31536000">{lang.YEAR}</option>
-		</select>
-	</div>
-</div><hr>
-<div class="clear"></div>
-
-<div class="section">
-	<h4>{lang.FLS_LST_VST_SEARCH}</h4>
-	<div class="box">
-		<IF NAME="files_last_visit"><a href="{h_lst_files}{files_last_visit}" onclick="javascript:get_kleeja_link(this.href); return false;">{lang.LAST_VIEW}</a> &nbsp; {lang.OR} &nbsp;</IF>
-		<select class="show_since_time form-control" tabindex="3" onchange="javascript:get_kleeja_link('{h_lst_files}' + (Math.round((new Date()).getTime() / 1000) - $(this).val()), '#content');">">
-			<option>{lang.TIME}...</option>
-			<option value="3600">{lang.HOUR}</option>
-			<option value="18000">{lang.5HOURS}</option>
-			<option value="86400">{lang.DAY}</option>
-			<option value="604800">{lang.WEEK}</option>
-			<option value="2592000">{lang.MONTH}</option>
-			<option value="31536000">{lang.YEAR}</option>
-		</select>
-	</div>
-</div><hr>
-<div class="clear"></div>
 </IF>
+<!-- end last visits -->
 
-<!-- admin start general section -->
 
+<!-- hurry-hurry -->
+<hr>
+<h2>{lang.HURRY_HURRY}</h2>   
+
+<div class="row">
+  <div class="col-md-4">
+  	<p>
+		<div class="btn-group">
+			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+			{lang.CHANGE}: {lang.STYLE} <span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu" role="menu">
+			<LOOP NAME="hurry_styles_list">
+			<li><a href="{hurry_style_link}{{name}}">{{name}}</a></li>
+			</LOOP>
+			</ul>
+		</div>
+  	</p>
+
+  </div>
+  <div class="col-md-4">
+  	<p>
+		<div class="btn-group">
+			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+			<span class="glyphicon glyphicon-globe"></span> {lang.CHANGE}: {lang.LANGUAGE} / {lang.ALL} <span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu" role="menu">
+			<LOOP NAME="hurry_langs_list">
+			<li><a href="{hurry_lang_link}{{name}}&amp;qg=1">{{name}}</a></li>
+			</LOOP>
+			</ul>
+		</div>
+ 	</p>
+  </div>
+  <div class="col-md-4">
+  	<p>
+		<div class="btn-group">
+  			<button class="btn btn-default" onclick="javascript:get_kleeja_link('{del_cache_link}'); return false;"><span class="glyphicon glyphicon-trash"></span> {lang.DEL_CACHE}</button>
+		</div>
+	</p>
+  </div>
 </div>
-<!-- the big box end general -->
 
-
-<!-- the big box begin general1 -->
-<div class="big-box">
-<div class="tit_con">
-	<h1>{lang.HURRY_HURRY}</h1>   
-</div><hr>
-
-
-<div class="section">
-	<h3>{lang.STYLE}</h3>
-	<div class="box">
-		<select name="style_change" id="style_change" class="form-control">
-			{hurry_styles_list}
-		</select>
-		<button class="btn btn-default" onclick="javascript:get_kleeja_link('{hurry_style_link}' + $('#style_change').val()); return false;"><span>{lang.CHANGE}</span></button>
-	</div>
-</div><hr>
-<div class="clear"></div>
-
-<div class="section">
-	<h3>{lang.LANGUAGE}</h3>
-	<div class="box">
-		<select	 name="lang_change" id="lang_change" class="form-control">
-			{hurry_langs_list}
-		</select> 
-		&nbsp; {lang.FOR} &nbsp;  
-		<select	 name="groups_list" id="groups_list" class="form-control">
-			{hurry_groups_list}
-		</select>
-		<button class="btn btn-default" onclick="javascript:get_kleeja_link('{hurry_lang_link}' + $('#lang_change').val() + '&qg=' + $('#groups_list').val()); return false;"><span>{lang.CHANGE}</span></button>
-	</div>
-</div><hr>
-<div class="clear"></div>
-
-<div class="hr"></div>
-
-<div class="section">
-	<h3>{lang.R_REPAIR}</h3>
-	<div class="box">
-		<button class="btn btn-default" onclick="javascript:get_kleeja_link('{del_cache_link}'); return false;"><span>{lang.DEL_CACHE}</span></button>
-	</div>
-</div><hr>
-<div class="clear"></div>
-
-<!-- admin start general section1 -->
-
-</div>
-<!-- the big box end general1 -->
 
 <!-- the big box begin general2 -->
-<div class="big-box">
-<div class="tit_con">
-	<h1>{lang.GENERAL_STAT}</h1>   
+<hr>
+<h2>{lang.GENERAL_STAT}</h2>   
+
+<div class="row">
+	<div class="col-md-3"><strong>{lang.AFILES_NUM}:</strong> {files_number} {lang.FILE}</div>
+	<div class="col-md-2"><strong>{lang.AUSERS_NUM}:</strong> {users_number}</div>
+	<IF NAME="config.user_system==1">
+	<div class="col-md-3"><strong>{lang.LAST_REG}:</strong> {lst_reg}</div>
+	</IF> 
+	<div class="col-md-3"><strong>{lang.LSTDELST}:</strong> {last_del_fles}</div>
 </div>
 
-
-<div class="section">
-	<h3>{lang.AUSERS_NUM}</h3>
-	<div class="box">{users_number}</div>
-</div>
-<div class="clear"></div><hr>
-
-
-<IF NAME="config.user_system==1">
-<div class="section">
-	<h3>{lang.LAST_REG}</h3>
-	<div class="box">{lst_reg}</div>
-</div>
-<div class="clear"></div><hr>
-</IF>
-
-<div class="section">
-	<h3>{lang.AFILES_NUM}</h3>
-	<div class="box">{files_number} {lang.FILE}</div>
-</div>
-<div class="clear"></div><hr>
-
-<div class="section">
-	<h3>{lang.LSTDELST}</h3>
-	<div class="box">{last_del_fles}</div>
-</div>
-<div class="clear"></div><hr>
-
-<div class="section">
-	<h3>{lang.AFILES_SIZE_SPACE}</h3>
-	<div class="box">
-		<!-- <div style="font-size:10px;"><div style="width:200px;height:7px;background-color:#ddd;"><img src="{STYLE_PATH_ADMIN}images/spacer.gif" style="width:height:7px;background-color:#000;" /></div> {per1}/100%</div> -->
-		<div class="progress progress-striped">
-		  <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{per1}" aria-valuemin="0" aria-valuemax="100" style="width: {per1}%;">
-		    <span class="sr-only">{per1}/100% Complete</span>
+<div class="row">
+	<div class="col-md-12">
+		<strong>{lang.AFILES_SIZE_SPACE}</strong>
+		<div class="progress">
+		  <div class="progress-bar" role="progressbar" aria-valuenow="{per1}" aria-valuemin="0" aria-valuemax="100" style="width: {per1}%;">
+		    <span class="sr-only">{per1}/100%</span>
 		  </div>
+		</div>
 	</div>
 </div>
-<div class="clear"></div><hr>
-
-<div class="section">
-	<h3>{lang.KLEEJA_VERSION}</h3>
-	<div class="box">{kleeja_version}</div>
-</div>
-<div class="clear"></div><hr>
-
 <!-- admin start general section2 -->
 
-</div>
-<!-- the big box end general2 -->
-
 <IF NAME="stats_chart">
-<!-- the big box begin general3 -->
-<div class="big-box">
-<div class="tit_con">
-	<h1>{lang.STATS}</h1>   
+<hr>
+<h2>{lang.STATS}</h2>   
+<div class="row">
+	<div class="col-md-12" id="chart_stats">
+		<script type="text/javascript">
+		{stats_chart}
+		</script>
 </div>
-
-<div id="chart_stats"></div>
-
-<!-- admin start general section3 -->
-<script type="text/javascript">
-{stats_chart}
-
-$('#chart_stats').jqBarGraph({
-	data: arrayOfDataMulti,
-		colors: ['#2D6BA9','#91C7E5'] ,
-   legends: ['{lang.FILE}','{lang.IMAGE}'],
-   legend: true,
-   height: 200,
-   barSpace: 5,
-   width:700
-   
-});
-</script>
-</div>
-<!-- the big box end general3 -->
 </IF>
 
+<!-- end first section general -->
 
 <ELSEIF NAME="current_smt == other">
  <!-- the big box begin other -->

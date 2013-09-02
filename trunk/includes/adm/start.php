@@ -36,10 +36,14 @@ $users_number 		= $stat_users;
 $last_del_fles 		= (int) $config['del_f_day'] <= 0 ? $lang['CLOSED_FEATURE'] : kleeja_date($stat_last_f_del);
 $php_version 		= isset($NO_PHPINFO) || !function_exists('phpinfo') ? phpversion() : '<a href="' . basename(ADMIN_PATH) . '?cp=php_info" title="php_info" onclick="javascript:get_kleeja_link(\'' . basename(ADMIN_PATH) . '?cp=php_info\', \'#content\'); return false;">php ' . phpversion() . '</a>';
 $mysql_version 		= 'MYSQL ' . $SQL->mysql_version();
-$max_execution_time = function_exists('ini_get') ?  @ini_get('max_execution_time') : @get_cfg_var('max_execution_time');
+#info from php ini
+$file_uploads_ini	= function_exists('ini_get') ?  @ini_get('file_uploads') : @get_cfg_var('file_uploads');
+$max_file_uploads_ini= function_exists('ini_get') ?  @ini_get('max_file_uploads') : @get_cfg_var('max_file_uploads');
 $upload_max_filesize= function_exists('ini_get') ?  @ini_get('upload_max_filesize') : @get_cfg_var('upload_max_filesize');
 $post_max_size 		= function_exists('ini_get') ?  @ini_get('post_max_size') : @get_cfg_var('post_max_size');
+$max_execution_time = function_exists('ini_get') ?  @ini_get('max_execution_time') : @get_cfg_var('max_execution_time');
 $memory_limit 		= function_exists('ini_get') ?  @ini_get('memory_limit') : @get_cfg_var('memory_limit');
+
 $s_last_google		= ($stat_last_google == 0) ? '[ ? ]' : kleeja_date($stat_last_google);
 $s_google_num		= $stat_google_num;
 $s_last_bing		= ($stat_last_bing == 0) ? '[ ? ]' : kleeja_date($stat_last_bing);

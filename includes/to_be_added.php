@@ -16,8 +16,8 @@ if (!defined('IN_COMMON'))
 }
 
 
-# check entries functions 
-# to be added at 1.7 or later
+##### kleeja 2.0 #####
+
 function ig($name)
 {
 	return isset($_GET[$name]) ? true : false;
@@ -28,7 +28,7 @@ function ip($name)
 	return isset($_POST[$name]) ? true : false;
 }
 
-function _g($name, $type = 'str')
+function g($name, $type = 'str')
 {
 	if(isset($_GET[$name]))
 	{
@@ -37,7 +37,7 @@ function _g($name, $type = 'str')
 	return false;
 }
 
-function _p($name, $type = 'str')
+function p($name, $type = 'str')
 {
 	if(isset($_POST[$name]))
 	{

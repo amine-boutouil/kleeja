@@ -25,7 +25,6 @@ require_once (PATH . 'includes/common.php');
 //go to ..
 $go_to		= isset($_GET['cp']) ? htmlspecialchars($_GET['cp']) : 'start';
 $username	= $usrcp->name();
-$AJAX_ACP	= defined('AJAX_ACP') ? true : false;
 
 //for security
 if (!$username)
@@ -109,10 +108,6 @@ if(
 		$err = true;
 	}
 
-	if(isset($_GET['_ajax_']))
-	{
-		//echo_ajax(999, '');
-	}
 
 	//prevent indexing this page by bots
 	header('HTTP/1.1 503 Service Temporarily Unavailable');
@@ -130,11 +125,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && defined('STOP_CSRF'))
 	if ($t_reff[2] != $t_host[0])
 	{
 		$usrcp->logout_cp();
-		if(isset($_GET['_ajax_']))
-		{
-			//echo_ajax(999, '');
-		}
-
 		redirect($config['siteurl']);
 		$SQL->close();
 		exit;
@@ -194,11 +184,6 @@ if(($dh = @opendir($path_adm)) !== false)
 //no extensions ?
 if(!$adm_extensions || !is_array($adm_extensions))
 {
-	if(isset($_GET['_ajax_']))
-	{
-		echo_ajax(888, 'Error while loading admin extensions!.');
-	}
-
 	big_error('No Extensions', 'Error while loading admin extensions !');
 }
 
@@ -315,11 +300,6 @@ if (file_exists($path_adm . '/' . $go_to . '.php'))
 }
 else
 {
-	if(isset($_GET['_ajax_']))
-	{
-		echo_ajax(888, 'Error while loading : ' . $go_to);
-	}
-
 	big_error('In Loading !', 'Error while loading : ' . $go_to);
 }
 
@@ -358,11 +338,6 @@ if(!isset($_GET['_ajax_']))
 {
 	$is_ajax = 'no';
 	echo $tpl->display($stylee);
-}
-else
-{
-	$is_ajax = 'yes';
-	echo_ajax(1, $tpl->display($stylee), $go_menu_html);
 }
 
 //footer

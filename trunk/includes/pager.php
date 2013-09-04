@@ -57,16 +57,16 @@ class SimplePager
 
 		$link_plus .= $link_plus != '' ? ' ' : '';
 
-		$re = '<div id="pagination">';
+		$re = '<ul class="pagination">';
 
 		// Add a previous page link
 		if ($this->totalPages > 1 && $this->currentPage > 1)
 		{
-			$re .= ($config['mod_writer'] && !defined('IN_ADMIN')) ? '<a class="paginate phover" href="' . $link . '-' . ($this->currentPage-1) . '.html"' . $link_plus . '><span>' . $lang['PREV'] . '</span></a>' : '<a class="paginate phover" href="' . $link . '&amp;page=' . ($this->currentPage-1) . '"' . $link_plus . '><span>' . $lang['PREV'] . '</span></a>';
+			$re .= ($config['mod_writer'] && !defined('IN_ADMIN')) ? '<li><a href="' . $link . '-' . ($this->currentPage-1) . '.html"' . $link_plus . '>' . $lang['PREV'] . '</a><li>' : '<li><a href="' . $link . '&amp;page=' . ($this->currentPage-1) . '"' . $link_plus . '>' . $lang['PREV'] . '</a><li>';
 		}
 		if ($this->currentPage > 3)
 		{
-			$re .= ($config['mod_writer'] && !defined('IN_ADMIN')) ? '<a class="paginate" href="' . $link . '-1.html"' . $link_plus . '><span>1</span></a>' . (($this->currentPage > 5) ? '<a class="paginate dots"><span>...</span></a>' : '') : '<a class="paginate" href="' . $link . '&amp;page=1"' . $link_plus . '><span>1</span></a>' . (($this->currentPage > 5) ? '<a class="paginate dots"><span>...</span></a>' : '');
+			$re .= ($config['mod_writer'] && !defined('IN_ADMIN')) ? '<li><a href="' . $link . '-1.html"' . $link_plus . '>1</a></li>' . (($this->currentPage > 5) ? '<li><a href="#">...</a></li>' : '') : '<li><a href="' . $link . '&amp;page=1"' . $link_plus . '>1</a></li>' . (($this->currentPage > 5) ? '<li><a href="#">...</a></li>' : '');
 		}
 
 		for ($current = ($this->currentPage == 5) ? $this->currentPage - 3 : $this->currentPage - 2, $stop = ($this->currentPage + 4 == $this->totalPages) ? $this->currentPage + 4 : $this->currentPage + 3; $current < $stop; ++$current)
@@ -77,11 +77,11 @@ class SimplePager
 			}
 			else if ($current != $this->currentPage)
 			{
-				$re .= ($config['mod_writer'] && !defined('IN_ADMIN')) ? '<a class="paginate" href="' . $link . '-' . $current . '.html"' . $link_plus . '><span>' . $current . '</span></a>' : '<a class="paginate" href="' . $link . '&amp;page=' . $current . '"' . $link_plus . '><span>' . $current . '</span></a>';
+				$re .= ($config['mod_writer'] && !defined('IN_ADMIN')) ? '<li><a href="' . $link . '-' . $current . '.html"' . $link_plus . '>' . $current . '</a></li>' : '<li><a href="' . $link . '&amp;page=' . $current . '"' . $link_plus . '>' . $current . '</a></li>';
 			}
 			else
 			{
-				$re .= '<a class="paginate current"><span>' . $current . '</span></a>';
+				$re .= '<li class="active"><a>' . $current . '</a></li>';
 			}
 		}
 
@@ -89,19 +89,19 @@ class SimplePager
 		{
 			if ($this->currentPage != ($this->totalPages-3) && $this->currentPage != ($this->totalPages-4))
 			{
-				$re .= '<a class="paginate dots"><span>...</span></a>';
+				$re .= '<li><a href="#">...</a></li>';
 			}
 
-			$re .= ($config['mod_writer'] && !defined('IN_ADMIN')) ? '<a class="paginate" href="' . $link . '-' . $this->totalPages . '.html"' . $link_plus . '><span>' . $this->totalPages . '</span></a>' : '<a class="paginate" href="' . $link . '&amp;page=' . $this->totalPages . '"' . $link_plus . '><span>' . $this->totalPages . '</span></a>';
+			$re .= ($config['mod_writer'] && !defined('IN_ADMIN')) ? '<li><a href="' . $link . '-' . $this->totalPages . '.html"' . $link_plus . '>' . $this->totalPages . '</a></li>' : '<li><a class="paginate" href="' . $link . '&amp;page=' . $this->totalPages . '"' . $link_plus . '>' . $this->totalPages . '</a></li>';
 		}
 
 		// Add a next page link
 		if ($this->totalPages > 1 && $this->currentPage < $this->totalPages)
 		{
-			$re .= ($config['mod_writer'] && !defined('IN_ADMIN')) ? '<a class="paginate phover" href="' . $link . '-' . ($this->currentPage+1) . '.html"' . $link_plus . '><span>' . $lang['NEXT'] . '</span></a>' :  '<a class="paginate phover" href="' . $link . '&amp;page=' . ($this->currentPage+1) . '"' . $link_plus . '><span>' . $lang['NEXT'] . '</span></a>';
+			$re .= ($config['mod_writer'] && !defined('IN_ADMIN')) ? '<li><a  href="' . $link . '-' . ($this->currentPage+1) . '.html"' . $link_plus . '>' . $lang['NEXT'] . '</a></li>' :  '<li><a href="' . $link . '&amp;page=' . ($this->currentPage+1) . '"' . $link_plus . '>' . $lang['NEXT'] . '</a></li>';
 		}
 
-		$re .= '</div>'; 
+		$re .= '</ul>'; 
 
 		return $re;
 	}

@@ -24,6 +24,34 @@ $('#chart_stats').jqBarGraph({
    width:700
    
 });
+<ELSEIF NAME="{go_to}==c_files">
+ $(document).keydown(function(e) {
+
+	if (!$('.pagination').length) {
+		return;
+	}
+
+	var current_page = parseInt($('.pagination .active a').html());
+	var is_there_next = $('.pagination li').length < 2 && current_page > 1 ? false : true;
+	var current_location = '{action}'.replace('&amp;', '&').replace(/[&]*page=[0-9]+/i, '').replace(/&&/, '');
+
+	switch(e.keyCode) { 
+		//left, next
+		case 37:
+			if(!is_there_next){
+				return;
+			}
+			get_kleeja_link(current_location + '&page=' + (current_page+1), '#content');
+		break;
+		//right, prev
+		case 39:
+			if(current_page <= 1){
+				return;
+			}
+			get_kleeja_link(current_location + '&page=' + (current_page-1), '#content');
+		break;
+	}
+});
 </IF>
 
 var STYLE_PATH_ADMIN = '{STYLE_PATH_ADMIN}';
@@ -64,20 +92,28 @@ $.ajax({
 
 function get_kleeja_link(URL, ID, p)
 {
+	if($.isArray(p) && p.confirm) {
+		confirm_from();
+	}
+
 	location.href=URL;
 	return;
 }
 
-function submit_kleeja_data(FORM_ID, ID, CONFIRM)
+function submit_kleeja_data(FORM_ID, ID, p)
 {
+	if(p){
+		confirm_from();
+	}
+
 	$(FORM_ID).submit();
-	return;
+	//return;
 }
 
 function change_color(obj, id, c, c2)
 {
-    c = (c == null) ? 'ored' : c;
-    c2 = (c == null) ? 'osilver' : c2;
+    c = (c == null) ? 'danger' : c;
+    c2 = (c == null) ? 'warning' : c2;
     var ii = document.getElementById(id);
     if (obj.checked) {
         ii.setAttribute("class", c);

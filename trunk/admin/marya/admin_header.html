@@ -37,11 +37,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Kleeja <span class="label label-default">{assigned_klj_ver}</span></a>
+          <a class="navbar-brand" href="./"><img src="{STYLE_PATH_ADMIN}images/logo.png" style="height:25px" title="kleeja"> <span class="label label-default">{assigned_klj_ver}</span></a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav <IF NAME="{lang.DIR} == ltr">navbar-right</IF>">
-            <li><a href="{config.siteurl}">{lang.RETURN_HOME}</a></li>
+            <li><a href="{config.siteurl}">{lang.RETURN_HOME} <span class="glyphicon glyphicon-arrow-left"></span></a></li>
             <li><a href="./?cp=b_lgoutcp&amp;{GET_FORM_KEY_GLOBAL}#" onclick="javascript:return confirm_from();" >{lang.R_LGOUTCP} [ {username} ]</a></li>
             <li><a href="http://www.kleeja.com/support/" target="_blank">{lang.SUPPORT_MOFFED}</a></li>
           </ul>
@@ -71,10 +71,11 @@
     </div><!--/span-->
 
  <!-- content -->
-<div class="col-md-9">
-
-  <ul class="nav nav-({go_to}==options?pills:tabs) nav-justified">
+<div class="col-md-9" id="content">
+<IF NAME="{go_to}==a_configs"><div class="panel panel-default"><div class="panel-body" style="font-size:12px;"></IF>
+  <ul class="nav nav-({go_to}==a_configs?pills:tabs nav-justified)">
 	  {go_menu_html}
   </ul>
+<IF NAME="{go_to}==a_configs"></div></div></IF>
  
 

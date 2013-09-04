@@ -147,11 +147,25 @@ while($row=$SQL->fetch_array($result))
 	//options from database [UNDER TEST]
 	if(!empty($row['option'])) 
 	{
+		$option_value = $tpl->admindisplayoption($row['option']);
+
+		if(strpos($option_value, 'delf_caution') !== false){
+			$option_value = str_replace('delf_caution', 'text-warning', $option_value);
+		}
+
+		$is_it_radio = strpos($option_value, 'type="radio"') !== false;
+		
+		if($is_it_radio){
+			$option_value = str_replace(array('<label>', '</label>'), array('<div class="radio"><label>', '</label></div>'), $option_value);
+		}
+		
+		$option_value = str_replace(array('<select ', 'type="text" '), array('<select class="form-control" ', 'type="text" class="form-control" '), $option_value);
+
 		$optionss[$row['name']] = array(
-				'option'		 => '<div class="section">' . "\n" .  
-									'<h3><label for="' . $row['name'] . '">' . (!empty($lang[strtoupper($row['name'])]) ? $lang[strtoupper($row['name'])] : $olang[strtoupper($row['name'])]) . '</label></h3>' . "\n" .
-									'<div class="box">' . (empty($row['option']) ? '' : $tpl->admindisplayoption($row['option'])) . '</div>' . "\n" .
-									'</div>' . "\n" . '<div class="clear"></div>',
+				'option'		 => '<li class="list-group-item form-group">' . "\n" .  
+									'<h4 class="list-group-item-heading"><label for="' . $row['name'] . '">' . (!empty($lang[strtoupper($row['name'])]) ? $lang[strtoupper($row['name'])] : $olang[strtoupper($row['name'])]) . '</label></h4>' . "\n" .
+									'<p class="list-group-item-text">' . $option_value . '</p>' . "\n" .
+									'</li>' . "\n" . '',
 				'type'			=> $row['type'],
 				'display_order' => $row['display_order'],
 			);
@@ -226,7 +240,7 @@ foreach($optionss as $key => $option)
 {
 	if(empty($types[$option['type']]))
 	{ 
-		$types[$option['type']] = '<div class="tit_con"><h1>' . $go_menu[$option['type']]['name'] . '</h1></div>';
+		$types[$option['type']] = '<h2>' . $go_menu[$option['type']]['name'] . '</h2><ul class="list-group">';
 	}
 }
 
@@ -240,7 +254,7 @@ foreach($types as $typekey => $type)
 			$options .= $option['option'];
 		}
 	}
-	$options .= '<div class="br"></div>';
+	$options .= '</ul>';
 }
 
 //after submit

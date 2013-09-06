@@ -4,7 +4,7 @@
 
 <footer>
 	<hr>
-  <p>&copy; Kleeja 2007-2013</p>
+	<p class="text-center text-muted">&copy; Kleeja 2007-2013</p>
 </footer>
 
 <script src="{STYLE_PATH_ADMIN}js/jquery.min.js"></script>
@@ -24,13 +24,11 @@ $('#chart_stats').jqBarGraph({
    width:700
    
 });
-<ELSEIF NAME="{go_to}==c_files">
+<ELSEIF NAME="{go_to}==c_files or {go_to}==d_img_ctrl">
  $(document).keydown(function(e) {
-
 	if (!$('.pagination').length) {
 		return;
 	}
-
 	var current_page = parseInt($('.pagination .active a').html());
 	var is_there_next = $('.pagination li').length < 2 && current_page > 1 ? false : true;
 	var current_location = '{action}'.replace('&amp;', '&').replace(/[&]*page=[0-9]+/i, '').replace(/&&/, '');
@@ -52,6 +50,50 @@ $('#chart_stats').jqBarGraph({
 		break;
 	}
 });
+
+	<IF NAME="{go_to}==d_img_ctrl">
+	//when checked one checkbox?
+	$(".kcheck input[type=checkbox]").change( function(){
+		if($('.kcheck input[type=checkbox]:checked').length == 1){
+			$('#search-one-item').css('display', 'inline');
+		} else{
+			$('#search-one-item select').prop('selectedIndex', 0);
+			$('#search-one-item').css('display', 'none');
+		}
+	});
+
+	$(".kcheck input[type=checkbox]").click( function(){
+		//$(this).attr('checked', !$(this).attr('checked'));
+		$(this).trigger('change');
+	});
+
+	$(".kcheck label").click( function(){
+		//$(this).find('input').attr('checked', !$(this).find('input').attr('checked'));
+		$(this).find('input').trigger('change');
+	});
+
+	$('#search-one-item').change(function(){
+		tt = this.options[this.selectedIndex].value;
+		dd = $('.kcheck input[type=checkbox]:checked').val();
+		if(tt == 1){
+			s_value = $('#ip_'+dd).html();
+		}else if(tt == 2){
+			s_value = $('#user_'+dd).html();
+		}
+
+		window.open("{action_search}&s_input="+tt+"&s_value=" + encodeURI(s_value), '_newtab');	
+	});
+	
+	$('[rel="popover"]').popover({
+		html:true,
+		trigger:'hover',
+		delay: { show: 500, hide: 100 },
+		content:function(){
+			return $(this).parent().children('.extra_info').html();
+		}
+	});
+
+	</IF>
 </IF>
 
 var STYLE_PATH_ADMIN = '{STYLE_PATH_ADMIN}';
@@ -113,7 +155,7 @@ function submit_kleeja_data(FORM_ID, ID, p)
 function change_color(obj, id, c, c2)
 {
     c = (c == null) ? 'danger' : c;
-    c2 = (c == null) ? 'warning' : c2;
+    c2 = (c == null) ? 'nothing_is_here' : c2;
     var ii = document.getElementById(id);
     if (obj.checked) {
         ii.setAttribute("class", c);
@@ -182,8 +224,6 @@ function uncheckAll_exts(form, id, _do_c_) {
     }
 }
 
-//Buttons
-$('.nav-tabs').button();
 //-->
 </script>
 </body>

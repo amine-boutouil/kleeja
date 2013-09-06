@@ -199,8 +199,8 @@ if ($nums_rows > 0)
 		//make new lovely arrays !!
 		$arr[]	= array(
 						'id'		=> $row['id'],
-						'tdnum'		=> $tdnum == 0 ? '<ul>': '',
-						'tdnum2'	=> $tdnum == 4 ? '</ul>' : '',
+						'tdnum'		=> $tdnum == 0 ? true : false,
+						'tdnum2'	=> $tdnum == 4 ? true : false,
 						'name'		=> ($row['real_filename'] == '' ? ((strlen($row['name']) > 25) ? substr($row['name'], 0, 20) . '...' : $row['name']) : ((strlen($row['real_filename']) > 20) ? str_replace('\'', "\'", substr($row['real_filename'], 0, 20)) . '...' : str_replace('\'', "\'", $row['real_filename']))),
 						'ip' 		=> htmlspecialchars($row['user_ip']),
 						'href'		=> PATH . $row['folder'] . '/' . $row['name'],

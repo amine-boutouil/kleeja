@@ -7,3 +7,25 @@
     background-position: center center;
 }
 
+
+/*admin_img*/
+.max-thumbnail-size{
+	max-width:150px;
+	height:auto;
+	margin:5px;
+}
+
+.thumbnail-selected{
+	border:1px solid red;
+}
+
+.kcheck {
+	margin:0;
+}
+
+#search-one-item{
+	width:50%;
+}
+.img-info-box{
+	font-size:11px;
+}

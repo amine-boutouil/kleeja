@@ -17,6 +17,7 @@
 [x] fix bug:1134, where you can download files without waiting using imgf links (reported by: 2mka)
 [x] fix bug:1121, where kleeja web site links are wrong (reported by: yasorno)
 [x] fix bug:1120, where editing ACLs doesn't work .. (reported by: sadiq6210)
+[x] fix bug where calls+reports deleting queue doesnt work!  (un-reported)
 
 1.5.4 - version:
 [x] When the database old, tell the user to update.

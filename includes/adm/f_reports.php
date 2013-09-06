@@ -87,7 +87,7 @@ if ($nums_rows > 0)
 						'name' 		=> $row['name'],
 						'mail' 		=> $row['mail'],
 						'url'  		=> $row['url'],
-						'text' 		=> $row['text'],
+						'text' 		=> nl2br(htmlspecialchars($row['text'])),
 						'human_time'=> kleeja_date($row['time']),
 						'time' 		=> kleeja_date($row['time'], false),
 						'ip'	 	=> $row['ip'],

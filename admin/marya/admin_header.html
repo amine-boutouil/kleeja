@@ -72,10 +72,11 @@
 
  <!-- content -->
 <div class="col-md-9" id="content">
+<IF NAME="go_menu_html">
 <IF NAME="{go_to}==a_configs"><div class="panel panel-default"><div class="panel-body" style="font-size:12px;"></IF>
-  <ul class="nav nav-({go_to}==a_configs?pills:tabs nav-justified)">
+  <ul class="nav nav-({go_to}==a_configs?pills:tabs)">
 	  {go_menu_html}
   </ul>
 <IF NAME="{go_to}==a_configs"></div></div></IF>
- 
+</IF>
 

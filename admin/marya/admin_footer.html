@@ -96,6 +96,14 @@ $('#chart_stats').jqBarGraph({
 	</IF>
 </IF>
 
+$('.popover-send').popover({
+	html:true,
+	placement:'auto top',
+	content:function(){
+		return $(this).next('.form4send').html();
+	}
+});
+
 var STYLE_PATH_ADMIN = '{STYLE_PATH_ADMIN}';
 var go_to = '{go_to}';
 

@@ -12,64 +12,74 @@
 	-->
 </script>
 
-<!-- the big box begin -->
-<div class="big-box">
-<div class="tit_con">
-<h2>{lang.R_REPORTS}<IF NAME="current_smt == show_h24"> &raquo; {lang.SHOW_FROM_24H}</IF></h2>
+<!-- reports begins -->
+<!-- call begins -->
+<div class="page-header">
+  <h1>{lang.R_REPORTS} <small><IF NAME="current_smt == show_h24"> &raquo; {lang.SHOW_FROM_24H}<ELSE> &raquo; {lang.ALL}</IF></small></h1>
 </div>
 
-<!-- mail here  -->
-<IF NAME="no_results"><ELSE>
-	<div id="mail_here">{lang.E_CLICK}</div>
-</IF>
 
-<form method="post" name="reportform" action="{action}" id="reports_form">
 
 <IF NAME="no_results">
-<p class="text-muted">{lang.MESSAGE_NONE}</p>
+<div class="alert alert-info">{lang.MESSAGE_NONE}</div>
 <ELSE>
 
-<div class="br"></div>
 
-<!-- start data table -->
-<table class="table table-bordered table-striped">
-	<tr class="first">
-		<td style="width:20px;"><a href="javascript:void(0);" onclick="checkAll(document.reportform, '_del', 'su');" title="{lang.DELETE}">#</a></td>
-		<td>{lang.NAME}</td>
-		<td>{lang.IP}</td>
-		<td>{lang.URL}</td>
-		<td>{lang.TIME}</td>
-		<!-- admin reports info td1 extra -->
-	</tr>
-
+<form method="post" name="reportform" action="{action}" id="reports_form" rol="form">
+	
+<!-- start data group -->
+<div class="panel-group" id="accordion">
 <LOOP NAME="arr">
-	<tr id="su[{{id}}]" class="osilver<IF LOOP="sent"> is_sent</IF>">
-	<td><input type="checkbox" name="del_{{id}}" value="{{id}}" onclick="change_color(this,'su[{{id}}]');" rel="_del"></td>
-		<td>
-			<a title="{lang.VIEW}" onclick="javascript:show_msg('textva_{{id}}',{{id}});" href="javascript:void(0);">{{name}}</a>
-			<input type="hidden" value="&lt;div class='email-for-msg'&gt;{{name}}  ({{mail}}) :&lt;/div&gt;&lt;div class='text-for-msg'&gt;{{text}}&lt;/div&gt;" id="textva_{{id}}">
-
-	<td><a target="_blank" href="{{ip_finder}}" target="_blank">{{ip}}</a></td>		</td>
-		<td><a target="_blank" href="{{url}}">{lang.CLICKHERE}<a/></td>
-		<td title="{{time}}">{{human_time}}</td>
-		<!-- admin reports info td2 extra -->
-	</tr>
+    <div class="panel panel-default" id="su[{{id}}]">
+       <div class="panel-heading">
+         <h4 class="panel-title">
+			<input type="checkbox" name="del_{{id}}" value="{{id}}" onclick="change_color(this,'su[{{id}}]', 'panel panel-danger', 'panel panel-default');" rel="_del">
+          	<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse{{id}}">
+				{{name}} @ {{human_time}}
+			    <span class="label label-default"><IF LOOP="sent">{lang.IS_SEND_MAIL}</IF></span>
+		   </a>
+		 </h4>
+		</div>
+		 <div id="collapse{{id}}" class="panel-collapse collapse out">
+		 <div class="panel-body">
+			 {{text}}
+			 <br>
+			 <br>
+			 ____<br>
+		 	<span class="text-muted">{lang.EMAIL}:</span> {{mail}}<br>
+			<span class="text-muted">{lang.IP}:</span> <a href="{{ip_finder}}" target="_blank">{{ip}}</a><br>
+			<span class="text-muted">{lang.TIME}:</span> {{time}}<br>
+			<span class="text-muted">{lang.URL}:</span> <a target="_blank" href="{{url}}">{lang.CLICKHERE}<a/><br>
+			<hr>
+			<button type="button" class="btn btn-default popover-send" data-toggle="popover" data-title="{lang.REPLY}: {{mail}}">{lang.REPLY_CALL}</button>
+			
+			
+			<div class="form4send" style="display:none;">
+			<form method="post" action="{action}" id="send_form" role="form">
+			<textarea name="v_{{id}}" cols="80" class="form-control" rows="3"></textarea>
+			<input type="hidden" name="reply_submit" value="1">
+			<br>
+			<p class="submit <IF NAME="{lang.DIR} == rtl">pull-left</IF>">
+				<button type='submit' name="reply_submit" class="btn btn-primary btn-sm" onclick='javascript:submit_kleeja_data("#send_form", "#content", 0);'><span>{lang.REPLY}</span></button>
+			</p>
+			</form>
+			</div>
+	    </div>
+	    </div>
+	  </div>
 </LOOP>
-
-</table>
+</div>
 <!-- end data table -->
 
-<div class="br"></div>
-<div class="left check_all check_all_table">[ <a href="javascript:void(0);" onclick="checkAll(document.reportform, '_del', 'su');">{lang.CHECK_ALL}</a> ]</div>
-<div class="br"></div>
 
 <!-- pagination -->
 {page_nums}
-<div class="clear"></div>
+<hr>
 
 <!-- button -->
-<p class="submit">
-	<input type="hidden" name="submit" value="1" />
+<p class="submit <IF NAME="{lang.DIR} == rtl">pull-left</IF>">
+	<input type="hidden" name="submit" value="1">
+	<button type="button" class="btn btn-default" onclick="javascript:checkAll(document.reportform, '_del', 'su', 'panel panel-danger', 'panel panel-default');"><span class="glyphicon glyphicon-th-list"></span> {lang.CHECK_ALL}</button>
 	<button type="submit" name="submit" class="btn" onclick="javascript:submit_kleeja_data('#reports_form', '#content', 0); return false;"><span>{lang.DEL_SELECTED}</span></button>
 </p>
 		
@@ -78,10 +88,12 @@
 {H_FORM_KEYS}
 </form>
 </IF>
-</div>
-<!-- the big box end -->
+<!-- reports ends -->
 
 <IF NAME="there_queue">
-<div class="br"></div>
-<div class="note-info">{lang.DELETE_PROCESS_IN_WORK}</div>
+<div class="clearfix"></div>
+<hr>
+<div class="alert alert-info">
+	{lang.DELETE_PROCESS_IN_WORK}
+</div>
 </IF>

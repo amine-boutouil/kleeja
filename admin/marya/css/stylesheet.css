@@ -29,3 +29,9 @@
 .img-info-box{
 	font-size:11px;
 }
+
+/*general*/
+.popover {
+	max-width: 800px;
+	width: auto;
+}

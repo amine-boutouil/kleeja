@@ -321,8 +321,7 @@ if(isset($go_menu))
 {
 	foreach($go_menu as $m=>$d)
 	{
-		$go_menu_html .= '<li class="' . ($d['current']?'active':'') .'" id="c_' . $d['goto'] . '"><a href="' . $d['link'] . '" onclick="javascript:get_kleeja_link(\'' . 
-							$d['link'] . '\', \'#content\', {\'current_id\':\'c_' . $d['goto'] . '\', \'current_class\':\'active\'' . ($d['confirm'] ? ', \'confirm\':true' : '') . '}); return false;">' . $d['name'] . '</a></li>';
+		$go_menu_html .= '<li class="' . ($d['current']?'active':'') .'" id="c_' . $d['goto'] . '"><a href="' . $d['link'] . '" onclick="' . ($d['confirm'] ? 'javascript:return confirm_from();' : '') . '">' . $d['name'] . '</a></li>';
 	}
 }
 

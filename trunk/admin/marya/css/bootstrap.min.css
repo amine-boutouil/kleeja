@@ -3851,7 +3851,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .nav-tabs > li {
-  float: left;
+  float: right;
   margin-bottom: -1px;
 }
 

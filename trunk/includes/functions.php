@@ -1320,11 +1320,14 @@ function klj_clean_old($table, $for = 'all')
 					'LIMIT'		=> '20',
 					);
 
+
 	if($for != 'all')
 	{
 		$query['WHERE']	= "f.time < $days";
 	}
 
+
+	
 	($hook = kleeja_run_hook('qr_select_klj_clean_old_func')) ? eval($hook) : null; //run hook
 
 	$result	= $SQL->build($query);					
@@ -1355,6 +1358,8 @@ function klj_clean_old($table, $for = 'all')
 	($hook = kleeja_run_hook('qr_del_delf_old_table')) ? eval($hook) : null; //run hook
 
 	$SQL->build($query_del);
+
+
 
 	return;
 }

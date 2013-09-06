@@ -491,11 +491,11 @@ switch ($_GET['go'])
 		#do some of the queue ..
 		if(preg_match('!:del_[a-z0-9]{0,3}calls:!i', $config['queue']))
 		{
-			klj_clean_old('call', (strpos('!:del_allcalls:!i', $config['queue']) !== false ? 'all': 30));
+			klj_clean_old('call', (strpos($config['queue'], ':del_allcalls:') !== false ? 'all': 30));
 		}
 		elseif(preg_match('!:del_[a-z0-9]{0,3}reports:!i', $config['queue']))
 		{
-			klj_clean_old('reports', (strpos('!:del_allreports:!i', $config['queue']) !== false ? 'all': 30));
+			klj_clean_old('reports', (strpos($config['queue'], ':del_allreports:') !== false ? 'all': 30));
 		}
 		elseif((int) $config['del_f_day'] > 0)
 		{

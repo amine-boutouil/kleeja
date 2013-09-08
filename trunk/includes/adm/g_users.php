@@ -818,12 +818,22 @@ case 'group_data':
 		{
 			continue;
 		}
+		
+		$option_o = '';
+		if(trim($row['option']) !== '')
+		{
+			$option_o = $tpl->admindisplayoption(preg_replace(array('!{con.[a-z0-9_]+}!', '!NAME="con.!'), array('{cdata.' . $row['name'] . '}', 'NAME="cdata.'), $row['option']));
+			if(strpos($option_o, 'radio') !== false)
+			{
+				$option_o = '<div class="checkbox">' . $option_o . '</div>';
+			}
+		}
+		
 
 		$data[] = array(
-						'option'	=> '<div class="section">' . "\n" .  
-										"\t" . '<h3><label for="' . $row['name'] . '">' . (!empty($lang[strtoupper($row['name'])]) ? $lang[strtoupper($row['name'])] : $olang[strtoupper($row['name'])]) . '</label></h3>' . "\n" .
-										"\t" . '<div class="box">' . (empty($row['option']) ? '' : $tpl->admindisplayoption(preg_replace(array('!{con.[a-z0-9_]+}!', '!NAME="con.!'), array('{cdata.' . $row['name'] . '}', 'NAME="cdata.'), $row['option']))) . '</div>' . "\n" .
-										'</div>' . "\n" . '<div class="br"></div>',
+						'label'		=> (!empty($lang[strtoupper($row['name'])]) ? $lang[strtoupper($row['name'])] : $olang[strtoupper($row['name'])]),
+						'name'		=> $row['name'],  
+						'option'	=> $option_o
 			);
 	}
 	$SQL->freeresult($result);

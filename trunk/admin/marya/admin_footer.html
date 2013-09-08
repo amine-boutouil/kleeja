@@ -13,6 +13,9 @@
 
 <script type="text/javascript">
 <!--
+var STYLE_PATH_ADMIN = '{STYLE_PATH_ADMIN}';
+var go_to = '{go_to}';
+
 <IF NAME="{go_to}==start">
 $('#chart_stats').jqBarGraph({
 	data: arrayOfDataMulti,
@@ -94,8 +97,7 @@ $('#chart_stats').jqBarGraph({
 	});
 
 	</IF>
-</IF>
-
+<ELSEIF NAME="{go_to}==e_call or {go_to}==f_reports">
 $('.popover-send').popover({
 	html:true,
 	placement:'auto top',
@@ -103,9 +105,28 @@ $('.popover-send').popover({
 		return $(this).next('.form4send').html();
 	}
 });
+<ELSEIF NAME="{go_to}==g_users">
+$('.del-usergroup').popover({
+	html:true,
+	placement:'auto left',
+	content:function(){
+		f = $(this).data('id2del');
+		return $('#delete_group_' + f).html();
+	}
+});
+$('.new-ext-popover').popover({
+	html:true,
+	placement:'auto right',
+	content:function(){return $('#new_ext_form').html();}
+});
+$('.converter-popover').popover({
+	html:true,
+	placement:'auto top',
+	content:function(){return $('#converter_form').html();}
+});
+$('.acls-radios').button();
+</IF>
 
-var STYLE_PATH_ADMIN = '{STYLE_PATH_ADMIN}';
-var go_to = '{go_to}';
 
 function confirm_from(r)
 {

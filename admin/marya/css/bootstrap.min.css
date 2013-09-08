@@ -3380,7 +3380,7 @@ input[type="button"].btn-block {
 .btn-group > .btn,
 .btn-group-vertical > .btn {
   position: relative;
-  float: left;
+  float: right;
 }
 
 .btn-group > .btn:hover,
@@ -3434,7 +3434,7 @@ input[type="button"].btn-block {
 .btn-toolbar > .btn-group + .btn,
 .btn-toolbar > .btn + .btn-group,
 .btn-toolbar > .btn-group + .btn-group {
-  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .btn-group > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle) {
@@ -3442,22 +3442,22 @@ input[type="button"].btn-block {
 }
 
 .btn-group > .btn:first-child {
-  margin-left: 0;
+  margin-right: 0;
 }
 
 .btn-group > .btn:first-child:not(:last-child):not(.dropdown-toggle) {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
 
 .btn-group > .btn:last-child:not(:first-child),
 .btn-group > .dropdown-toggle:not(:first-child) {
-  border-bottom-left-radius: 0;
-  border-top-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
 }
 
 .btn-group > .btn-group {
-  float: left;
+  float: right;
 }
 
 .btn-group > .btn-group:not(:first-child):not(:last-child) > .btn {
@@ -3466,13 +3466,13 @@ input[type="button"].btn-block {
 
 .btn-group > .btn-group:first-child > .btn:last-child,
 .btn-group > .btn-group:first-child > .dropdown-toggle {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
 
 .btn-group > .btn-group:last-child > .btn:first-child {
-  border-bottom-left-radius: 0;
-  border-top-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
 }
 
 .btn-group .dropdown-toggle:active,
@@ -3518,7 +3518,7 @@ input[type="button"].btn-block {
 }
 
 .btn .caret {
-  margin-left: 0;
+  margin-right	: 0;
 }
 
 .btn-lg .caret {
@@ -3734,8 +3734,8 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .input-group-btn:first-child > .btn,
 .input-group-btn:first-child > .dropdown-toggle,
 .input-group-btn:last-child > .btn:not(:last-child):not(.dropdown-toggle) {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
 
 .input-group-addon:first-child {
@@ -3747,12 +3747,12 @@ textarea.input-group-sm > .input-group-btn > .btn {
 .input-group-btn:last-child > .btn,
 .input-group-btn:last-child > .dropdown-toggle,
 .input-group-btn:first-child > .btn:not(:first-child) {
-  border-bottom-left-radius: 0;
-  border-top-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
 }
 
 .input-group-addon:last-child {
-  border-left: 0;
+  border-right: 0;
 }
 
 .input-group-btn {
@@ -5863,7 +5863,7 @@ body.modal-open,
   display: none;
   max-width: 276px;
   padding: 1px;
-  text-align: left;
+  text-align: right;
   white-space: normal;
   background-color: #ffffff;
   border: 1px solid #cccccc;

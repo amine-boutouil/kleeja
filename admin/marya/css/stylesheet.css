@@ -30,6 +30,11 @@
 	font-size:11px;
 }
 
+/*admin_users*/
+.user-group-box{
+	padding:4px;
+}
+
 /*general*/
 .popover {
 	max-width: 800px;

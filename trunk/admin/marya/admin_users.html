@@ -93,7 +93,7 @@
 </div>
 <div class="form-group">
 	<br>
-	<input type="hidden" name="newgroup" value="1" >
+	<input type="hidden" name="newgroup" value="1">
 	<button type="submit" id="submit" name="newgroup" class="btn btn-primary" onclick="javascript:submit_kleeja_data('#add_group_form', '#content', 0);" >{lang.SUBMIT}</button>
 </div>
 {H_FORM_KEYS3}
@@ -108,7 +108,7 @@
 <div id="delete_group_{{id}}" style="display:none">
 
 <form method="post" action="{action}" id="del_group_form" role="form">
-<input type="hidden" name="dgroup" id="dgroup" value="{{id}}"  >
+<input type="hidden" name="dgroup" id="dgroup" value="{{id}}"  />
 <div class="form-group">
 	<label for="tgroup">{lang.G_USERS_MOVE_TO}</label>
 		<select name="tgroup" id="tgroup" class="form-control">
@@ -121,7 +121,7 @@
 <div class="br"></div>
 <!-- button -->
 <p>
-	<input type="hidden" name="delgroup" value="1" >
+	<input type="hidden" name="delgroup" value="1" />
 	<button type="submit" id="submit" name="delgroup" class="btn btn-primary"  onclick="javascript:$.facybox.close(); submit_kleeja_data('#del_group_form', '#content', 0); return false;"><span>{lang.SUBMIT}</span></button>
 </p>
 {H_FORM_KEYS4}
@@ -232,7 +232,7 @@
 
 <!-- button -->
 <p class="submit <IF NAME="{lang.DIR} == rtl">pull-left</IF>">
-	<input type="hidden" name="newuser" value="1" >
+	<input type="hidden" name="newuser" value="1" />
 	<button type="submit" id="submit" name="newuser" class="btn btn-primary" onclick="javascript:submit_kleeja_data('#add_user_form', '#content', 0);">{lang.SUBMIT}</button>
 </p>
 
@@ -265,7 +265,7 @@
 </div>
 <div class="form-group">
 	<label for="l_pass">{lang.PASS_ON_CHANGE}</label>
-	<input type="password" name="l_pass" id="l_pass" value=""size="30" class="form-control">
+	<input type="password" name="l_pass" id="l_pass" value=""size="30" class="form-control"/>
 </div>
 <div class="form-group">
 	<label for="l_show_filecp">{lang.SHOW_MY_FILECP}</label>
@@ -298,13 +298,13 @@
 </IF>
 
 
-<input type="text" style="display:none;" name="l_qg" class="btn btn-primary" value="{u_qg}" >
-<input type="text" style="display:none;" name="l_page" class="btn btn-primary" value="{u_page}" >
-<input type="text" style="display:none;" name="uid" class="btn btn-primary" value="{userid}" >
+<input type="text" style="display:none;" name="l_qg" class="btn btn-primary" value="{u_qg}" />
+<input type="text" style="display:none;" name="l_page" class="btn btn-primary" value="{u_page}" />
+<input type="text" style="display:none;" name="uid" class="btn btn-primary" value="{userid}" />
 
 <!-- button -->
 <p class="submit <IF NAME="{lang.DIR} == rtl">pull-left</IF>">
-	<input type="hidden" name="edituser" value="1" >
+	<input type="hidden" name="edituser" value="1" />
 	<button type="submit" id="submit" name="edituser" class="btn btn-primary" onclick="javascript:submit_kleeja_data('#edit_user_form', '#content', 0);">{lang.SUBMIT}</button>
 </p>
 
@@ -341,7 +341,7 @@
 
 <!-- button -->
 <p class="submit <IF NAME="{lang.DIR} == rtl">pull-left</IF>">
-	<input type="hidden" name="editacl" value="1" >
+	<input type="hidden" name="editacl" value="1" />
 	<button type="submit" id="submit" name="editacl" class="btn btn-primary" onclick="javascript:submit_kleeja_data('#edit_acl_form', '#content', 0);">{lang.SUBMIT}</button>
 </p>
 
@@ -416,7 +416,7 @@
 
 <!-- button -->
 <p class="submit <IF NAME="{lang.DIR} == rtl">pull-left</IF>">
-	<input type="hidden" name="editexts" value="1" >
+	<input type="hidden" name="editexts" value="1" />
 	<button type="submit" id="submit" name="editexts" class="btn btn-primary" onclick="javascript:submit_kleeja_data('#edit_exts_form', '#content', 0);"><span>{lang.SUBMIT}</span></button>
 </p>
 {H_FORM_KEYS7}
@@ -435,14 +435,14 @@
 
 <form method="post" action="{action}" id="add_new_ext" role="form">
 	<label>{lang.ADD_NEW_EXT_EXP}</h4>
-	<input type="text" name="extisnew" value="" class="form-control">
+	<input type="text" name="extisnew" value="" class="form-control"/>
 	</label>
 
 
 
 <!-- button -->
 <p class="submit <IF NAME="{lang.DIR} == rtl">pull-left</IF>">
-	<input type="hidden" name="newext" value="1" >
+	<input type="hidden" name="newext" value="1" />
 	<button type="submit" id="submit" name="newext" class="btn btn-primary" onclick="javascript:submit_kleeja_data('#add_new_ext', '#content', 0);"><span>{lang.SUBMIT}</span></button>
 </p>
 
@@ -496,10 +496,10 @@
 		<td>Gigabyte</td>
 	</tr>
 	<tr> 
-		<td><input type="text" size="10" name="byte" value="0" class="form-control" ></td>
-		<td><input type="text" size="10" name="kb" value="0" class="form-control" ></td>
-		<td><input type="text" size="10" name="mb" value="0" class="form-control" ></td>
-		<td><input type="text" size="10" name="gb" value="0" class="form-control" ></td>
+		<td><input type="text" size="10" name="byte" value="0" class="form-control" /></td>
+		<td><input type="text" size="10" name="kb" value="0" class="form-control" /></td>
+		<td><input type="text" size="10" name="mb" value="0" class="form-control" /></td>
+		<td><input type="text" size="10" name="gb" value="0" class="form-control" /></td>
 	</tr>
 
 	<tr> 
@@ -525,8 +525,9 @@
 </div>
 
 
-<ul class="list-group">
+
 <form method="post" action="{action}" id="edit_data_form">
+<ul class="list-group">
 <IF NAME="user_not_normal"><ELSE>
 <li class="list-group-item form-group">
 	<h4 class="list-group-item-heading"><label for="group_name">{lang.GROUP_NAME}</label></h4>
@@ -567,7 +568,7 @@
 
 <!-- button -->
 <p class="submit <IF NAME="{lang.DIR} == rtl">pull-left</IF>">
-	<input type="hidden" name="editdata" value="1" >
+	<input type="hidden" name="editdata" value="1" />
 	<button type="submit" id="submit" name="editdata" class="btn btn-primary" onclick="javascript:submit_kleeja_data('#edit_data_form', '#content', 0);">{lang.SUBMIT}</button>
 </p>
 

@@ -827,6 +827,10 @@ case 'group_data':
 			{
 				$option_o = '<div class="checkbox">' . $option_o . '</div>';
 			}
+			else
+			{
+				$option_o = str_replace(array('<input', '<select'), array('<input class="form-control"', '<select class="form-control"'), $option_o);
+			}
 		}
 		
 

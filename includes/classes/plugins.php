@@ -373,7 +373,7 @@ class kplugins
 			//edit template
 			if(isset($plg_tpl['edit']))
 			{
-				include_once "s_strings.php";
+				include_once PATH 'includes/classes/s_strings.php';
 				$finder	= new sa_srch;
 							
 				if(is_array($plg_tpl['edit']['template']) && array_key_exists("attributes", $plg_tpl['edit']['template']))
@@ -617,7 +617,7 @@ class kplugins
 			$d_contents = '';
 		}
 		
-		include_once "s_strings.php";
+		include_once PATH 'includes/classes/s_strings.php';
 		$finder	= new sa_srch;
 		$finder->find_word		= $delete_txt;
 		$finder->another_word	= '<!-- deleted ' . md5(implode(null, $delete_txt)) . ' -->';

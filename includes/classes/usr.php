@@ -338,7 +338,7 @@ class usrcp
 	//depand on phpass class
 	function kleeja_hash_password($password, $check_pass = false)
 	{
-		include_once('phpass.php');
+		include_once(PATH . 'includes/classes/phpass.php');
 
 		($hook = kleeja_run_hook('kleeja_hash_password_func_usr_class')) ? eval($hook) : null; //run hook
 
@@ -546,7 +546,7 @@ class kleeja_utf8
 		static $lines = array();
 		if(empty($lines))
 		{
-			$lines = explode("\n", preg_replace(array("/#.*$/m", "/\n\n/"), '', file_get_contents(PATH . 'includes/CP1256.MAP')));
+			$lines = explode("\n", preg_replace(array("/#.*$/m", "/\n\n/"), '', file_get_contents(PATH . 'includes/resources/CP1256.MAP')));
 		}
 		if(empty($this->ascMap))
 		{

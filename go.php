@@ -520,7 +520,7 @@ switch ($_GET['go'])
 		}
 
 		#get admin functions
-		include 'includes/functions_adm.php';
+		include PATH . 'includes/functions_adm.php';
 		#get admin langauge
 		get_lang('acp');
 
@@ -540,7 +540,7 @@ switch ($_GET['go'])
 		{
 			delete_cache('data_stats');
 			$text = $title = sprintf($lang['SYNCING_DONE'], $lang['ALL_FILES']);
-			$link_to_go = './admin/?cp=r_repair#!cp=r_repair';
+			$link_to_go = ADMIN_PATH . '?cp=r_repair#!cp=r_repair';
 		}
 		else
 		{
@@ -571,7 +571,7 @@ switch ($_GET['go'])
 		{
 			delete_cache('data_stats');
 			$text = $title = sprintf($lang['SYNCING_DONE'], $lang['ALL_IMAGES']) . ' (' . (!$start ? 0 : $start) . '->' . (!$end  ? '?' : $end) . ')';
-			$link_to_go = './admin/?cp=r_repair#!cp=r_repair';
+			$link_to_go = ADMIN_PATH . '?cp=r_repair#!cp=r_repair';
 		}
 		else
 		{

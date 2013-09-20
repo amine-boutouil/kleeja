@@ -17,6 +17,38 @@ if (!defined('IN_COMMON'))
 
 
 
+/**
+* function to get variables from _GET, _POST
+* kleeja 2.0
+*/
+function ig($name)
+{
+	return isset($_GET[$name]) ? true : false;
+}
+
+function ip($name)
+{
+	return isset($_POST[$name]) ? true : false;
+}
+
+function g($name, $type = 'str')
+{
+	if(isset($_GET[$name]))
+	{
+		return $type == 'str' ? htmlspecialchars($_GET[$name]) : intval($_GET[$name]);
+	}
+	return false;
+}
+
+function p($name, $type = 'str')
+{
+	if(isset($_POST[$name]))
+	{
+		return $type == 'str' ? htmlspecialchars($_POST[$name]) : intval($_POST[$name]);
+	}
+	return false;
+}
+
 
 /**
 * For recording who onlines now .. 
@@ -1406,9 +1438,9 @@ function kleeja_check_captcha()
 	}
 
 	$return = false;
-	if(!empty($_SESSION['klj_sec_code']) && !empty($_POST['kleeja_code_answer']))
+	if(!empty($_SESSION['klj_sec_code']) && p('kleeja_code_answer') != '')	
 	{
-		if($_SESSION['klj_sec_code'] == trim($_POST['kleeja_code_answer']))
+		if($_SESSION['klj_sec_code'] == trim(g('kleeja_code_answer')))
 		{
 			unset($_SESSION['klj_sec_code']);
 			$return = true;
@@ -1651,3 +1683,4 @@ function untar($file, $dest = "./")
 
 	return false;
 }
+

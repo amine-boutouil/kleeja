@@ -16,17 +16,17 @@ if (!defined('IN_COMMON'))
 }
 
 #includes imortant functions
-include dirname(__file__) . '/up_helpers/others.php';
-include dirname(__file__) . '/up_helpers/thumbs.php';
-include dirname(__file__) . '/up_helpers/watermark.php';
-include dirname(__file__) . '/up_helpers/remote_uploading.php';
+include PATH . 'includes/up_helpers/others.php';
+include PATH . 'includes/up_helpers/thumbs.php';
+include PATH . 'includes/up_helpers/watermark.php';
+include PATH . 'includes/up_helpers/remote_uploading.php';
 
 
 /*
  * uploading class, the most important class in Kleeja
  * Where files uploaded by this class, depend on Kleeja settings
  */
-class KljUploader
+class uploader
 {
 	# folder name
 	var $folder;

@@ -66,9 +66,9 @@ if(function_exists('ini_set'))
 		ini_set('session.hash_function', 1);
 		ini_set('session.hash_bits_per_character', 6);
 	}
-	ini_set('session.use_only_cookies', false);
+	ini_set('session.use_only_cookies', true);
 	ini_set('session.auto_start', false);
-	ini_set('session.use_trans_sid', true);
+	ini_set('session.use_trans_sid', false);
 	ini_set('session.cookie_lifetime', $s_time);
 	ini_set('session.gc_maxlifetime', $s_time);
 	//& is not valid xhtml, so we replaced with &amp;
@@ -228,30 +228,30 @@ if (!$dbname || !$dbuser)
 $root_path = PATH;
 $db_type = isset($db_type) ? $db_type : 'mysql';
 
-include (PATH . 'includes/functions_alternative.php');
+include (PATH . 'includes/functions/functions_alternative.php');
 include (PATH . 'includes/version.php');
 
 switch ($db_type)
 {
 	case 'mysqli':
-		include (PATH . 'includes/mysqli.php');
+		include (PATH . 'includes/classes/mysqli.php');
 	break;
 	default:
-		include (PATH . 'includes/mysql.php');
+		include (PATH . 'includes/classes/mysql.php');
 }
-include (PATH . 'includes/style.php');
-include (PATH . 'includes/usr.php');
-include (PATH . 'includes/pager.php');
-include (PATH . 'includes/functions.php');
-include (PATH . 'includes/functions_display.php');
+include (PATH . 'includes/classes/style.php');
+include (PATH . 'includes/classes/usr.php');
+include (PATH . 'includes/classes/pager.php');
+include (PATH . 'includes/functions/functions.php');
+include (PATH . 'includes/functions/functions_display.php');
 if(defined('IN_ADMIN'))
 {
-	include (PATH . 'includes/functions_adm.php');
+	include (PATH . 'includes/functions/functions_adm.php');
 }
 else
 {
-	include (PATH . 'includes/KljUploader.php');
-	$kljup	= new KljUploader;
+	include (PATH . 'includes/classes/uploader.php');
+	$kljup	= new uploader;
 }
 
 //fix intregation problems
@@ -305,7 +305,7 @@ $klj_session = $SQL->escape(session_id());
 
 
 //admin path
-$adminpath = 'admin/index.php';
+$adminpath = 'admin/';
 !defined('ADMIN_PATH') ? define('ADMIN_PATH', $config['siteurl'] . $adminpath) : null;
 
 //site url must end with /
@@ -408,7 +408,7 @@ $login_page = '';
 if ($config['siteclose'] == '1' && !user_can('enter_acp') && !defined('IN_LOGIN') && !defined('IN_ADMIN'))
 {
 	//if download, images ?
-	if(defined('IN_DOWNLOAD') && (isset($_GET['img']) || isset($_GET['thmb']) || isset($_GET['thmbf']) || isset($_GET['imgf'])))
+	if(defined('IN_DOWNLOAD') && (ig('img') || ig('thmb') || ig('thmbf') || ig('imgf')))
 	{
 		@$SQL->close();
 		$fullname = "images/site_closed.jpg";

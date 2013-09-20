@@ -16,35 +16,6 @@ if (!defined('IN_COMMON'))
 }
 
 
-##### kleeja 2.0 #####
-
-function ig($name)
-{
-	return isset($_GET[$name]) ? true : false;
-}
-
-function ip($name)
-{
-	return isset($_POST[$name]) ? true : false;
-}
-
-function g($name, $type = 'str')
-{
-	if(isset($_GET[$name]))
-	{
-		return $type == 'str' ? htmlspecialchars($_GET[$name]) : intval($_GET[$name]);
-	}
-	return false;
-}
-
-function p($name, $type = 'str')
-{
-	if(isset($_POST[$name]))
-	{
-		return $type == 'str' ? htmlspecialchars($_POST[$name]) : intval($_POST[$name]);
-	}
-	return false;
-}
 
 
 #function_exists('exif_read_data') ? 

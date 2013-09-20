@@ -819,7 +819,7 @@ switch ($_GET['go'])
 		// Wrapper for captcha file
 		//
 		case 'captcha':
-			include PATH . 'includes/captcha.php';
+			include PATH . 'includes/functions/captcha.php';
 		exit;
 		
 		break;;

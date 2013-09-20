@@ -102,13 +102,13 @@ switch ($_GET['sty_t'])
 					$action2 = basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') .'&amp;sty_t=style_orders';
 
 					//get backup templates
-					$show_bk_templates = false;
-					include_once  PATH . 'includes/bk_templates.php';
-					if (version_compare(strtolower(KLEEJA_VERSION), strtolower($bk_version), '='))
-					{
-						$show_bk_templates = true;
-						$bkup_templates = array_keys($bkup_templates);
-					}
+					#$show_bk_templates = false;
+					#include_once  PATH . 'includes/bk_templates.php';
+					#if (version_compare(strtolower(KLEEJA_VERSION), strtolower($bk_version), '='))
+					#{
+					#	$show_bk_templates = true;
+					#	$bkup_templates = array_keys($bkup_templates);
+					#}
 
 					//get style detalis
 					$style_details1 = array('name'=>'[!]', 'desc'=> '[!]', 'version'=> '[!]', 'copyright'=>'[!]', 'kleeja_version'=>'[!]', 'depend_on' => $lang['NONE'], 'plugins_required'=>'[!]');
@@ -411,7 +411,7 @@ switch ($_GET['sty_t'])
 		}
 
 		//return bakup template
-		if(isset($_POST['submit_bk_tpl']))
+		/*if(isset($_POST['submit_bk_tpl']))
 		{
 			//
 			// Check form key
@@ -466,7 +466,7 @@ switch ($_GET['sty_t'])
 			$link	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;style_choose=' . $style_id . '&amp;method=1';
 			$text	= sprintf($lang['TPL_BK_RETURNED'], $tpl_name)  . '<br /> <a href="' . $link . '">' . $lang['GO_BACK_BROWSER'] . '</a><meta HTTP-EQUIV="REFRESH" content="1; url=' . $link . '">' ."\n";
 			$stylee	= "admin_info";
-		}
+		}*/
 
 	break;
 
@@ -579,7 +579,7 @@ switch ($_GET['sty_t'])
 	//
 	// Create backup version of default style, this work for developers only
 	//
-	case 'bk':
+	/*case 'bk':
 
 		//must be writable
 		if(!is_writable(PATH . 'includes/bk_templates.php') || !defined('DEV_STAGE'))
@@ -625,7 +625,7 @@ switch ($_GET['sty_t'])
 		$text ='Done, ' . $f . ' files !';
 		$stylee = 'admin_info';
 
-	break;
+	break;*/
 }
 
 if(!isset($stylee))

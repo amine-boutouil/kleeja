@@ -14,6 +14,8 @@ if (!defined('IN_ADMIN'))
 	exit();
 }
 
+
+
 $stylee	= "admin_check_update";
 $current_smt	= isset($_GET['smt']) ? (preg_match('![a-z0-9_]!i', trim($_GET['smt'])) ? trim($_GET['smt']) : 'general') : 'general';
 $error = false;
@@ -40,10 +42,21 @@ else
 
 	$version_data = trim(htmlspecialchars($b_data[0]));
 
+	//auto update requirements 
+	$aupdate = false;
+
 	if (version_compare(strtolower(KLEEJA_VERSION), strtolower($version_data), '<'))
 	{
-		$text	= sprintf($lang['UPDATE_NOW_S'] , KLEEJA_VERSION, strtolower($version_data)) . '<br /><br />' . $lang['UPDATE_KLJ_NOW'];
-		$error	= true;
+
+		$error = true;
+
+		if(@is_writable(PATH))
+		{
+			//ECHO AUTOUPDATE ON
+			$aupdate 	= true;
+		}
+
+		$text = sprintf($lang['UPDATE_NOW_S'] , KLEEJA_VERSION, strtolower($version_data)) . '<br /><br />' . $lang['UPDATE_KLJ_NOW'];
 	}
 	else if (version_compare(strtolower(KLEEJA_VERSION), strtolower($version_data), '='))
 	{
@@ -51,8 +64,18 @@ else
 	}
 	else if (version_compare(strtolower(KLEEJA_VERSION), strtolower($version_data), '>'))
 	{
-		$text	= $lang['U_USE_PRE_RE'];
+		//$text	= $lang['U_USE_PRE_RE'];
+
+		if(@is_writable(PATH))
+		{
+			//ECHO AUTOUPDATE ON
+			$aupdate 	= true;
+
+		}
+
+		$text = sprintf($lang['UPDATE_NOW_S'] , KLEEJA_VERSION, strtolower($version_data)) . '<br /><br />' . $lang['UPDATE_KLJ_NOW'];
 	}
+
 
 	//lets recore it
 	$v = @unserialize($config['new_version']);
@@ -86,7 +109,12 @@ else
 
 	update_config('new_version', $SQL->real_escape($data), false);
 	delete_cache('data_config');
+
+
+
 }
+
+
 
 //then go back  to start
 if(isset($_GET['show_msg']))

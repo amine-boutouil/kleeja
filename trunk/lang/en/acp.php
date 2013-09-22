@@ -345,4 +345,8 @@ $lang = array_merge($lang, array(
 	'REPAIR_DB_TABLES'			=> 'Repair Data base tables',
 	'SUPPORT_ZIP_FILE'			=> 'A compress file contains information about Kleeja on your website, to be give to the support',
 	'NO_RESULT_USE_SYNC'		=> 'There are no results, if you just installed Kleeja then that ok. <br /> If you just made an upgrade, then go to "Mentenance page" then do a "re-sync" for files or images.',
+	'KLJ_DIR_NOT_WR'			=>	'The root directory is not writeable therefore, you cannot update until you CHMOD it to 777 , or you can use FTP instead.',
+	'AUTO_UPDATE'				=> 'Auto upgrade system',
+	'UPDATE_WT_FILE_METHOD'		=> 'Sometimes we need ftp information to proceed without problems , choose the way you want to handle the files if we can not edit them directly:',
+	'UPDATE_GOING_TODOWN'		=> 'The update files are currently being downloaded.',
 ));

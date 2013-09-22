@@ -151,6 +151,7 @@ $ext_expt[]	= 'start';
 $ext_expt[]	= 'php_info';
 $ext_expt[]	= 'b_lgoutcp';
 $ext_expt[]	= 'i_exts';
+$ext_expt[]	= 'aupdate';
 
 //confirm msgs
 $ext_confirm	= array();

@@ -348,6 +348,10 @@ $lang = array_merge($lang, array(
 	'REPAIR_DB_TABLES'			=> 'إصلاح جداول قاعدة البيانات',
 	'SUPPORT_ZIP_FILE'			=> 'ملف يحتوي على معلومات عن مركزك لتعطيها للدعم الفني عند السؤال',
 	'NO_RESULT_USE_SYNC'		=> 'لايوجد نتائج, اذا كان المركز جديد فهذا امر عادي. <br/> اما اذا كنت قد قمت بالترقيه مؤخرا فقم بعمل مزامنة من صفحة الصيانة لعدد الملفات او الصور.',
+	'KLJ_DIR_NOT_WR'			=>	'المجلد الذي يضم كليجا يحتاج الى تصريح ٧٧٧ للاستمرار في عملية التحديث ، او قم بادخال بيانات الافتيبي للمتابعه',
+	'AUTO_UPDATE'				=> 'Auto upgrade system',
+	'UPDATE_WT_FILE_METHOD'		=> 'Sometimes we need ftp information to proceed without problems , choose the way you want to handle the files if we can not edit them directly:',
+	'UPDATE_GOING_TODOWN'		=> 'The update files are currently being downloaded.',
 ));
 
 

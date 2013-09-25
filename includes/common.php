@@ -305,7 +305,7 @@ $klj_session = $SQL->escape(session_id());
 
 
 //admin path
-$adminpath = 'admin/';
+$adminpath = 'admin/index.php';
 !defined('ADMIN_PATH') ? define('ADMIN_PATH', $config['siteurl'] . $adminpath) : null;
 
 //site url must end with /

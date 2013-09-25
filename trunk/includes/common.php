@@ -308,6 +308,9 @@ $klj_session = $SQL->escape(session_id());
 $adminpath = 'admin/index.php';
 !defined('ADMIN_PATH') ? define('ADMIN_PATH', $config['siteurl'] . $adminpath) : null;
 
+//Admin style name
+!defined('ADMIN_STYLE_NAME') ? define('ADMIN_STYLE_NAME', 'marya') : null;
+
 //site url must end with /
 if($config['siteurl'])
 {
@@ -383,10 +386,10 @@ if(empty($config['h_key']))
 $STYLE_PATH				= $config['siteurl'] . 'styles/' . (trim($config['style_depend_on']) == '' ? $config['style'] : $config['style_depend_on']) . '/';
 $THIS_STYLE_PATH		= $config['siteurl'] . 'styles/' . $config['style'] . '/';
 $THIS_STYLE_PATH_ABS	= PATH . 'styles/' . $config['style'] . '/';
-$STYLE_PATH_ADMIN 		= $config['siteurl'] . 'admin/marya/';
-$STYLE_PATH_ADMIN_ABS	= PATH . 'admin/marya/';
-$DEFAULT_PATH_ADMIN_ABS = PATH . 'admin/marya/';
-$DEFAULT_PATH_ADMIN		= $config['siteurl'] . 'admin/marya/';
+$STYLE_PATH_ADMIN 		= $config['siteurl'] . 'admin/' . ADMIN_STYLE_NAME . '/';
+$STYLE_PATH_ADMIN_ABS	= PATH . 'admin/' . ADMIN_STYLE_NAME . '/';
+$DEFAULT_PATH_ADMIN_ABS = PATH . 'admin/' . ADMIN_STYLE_NAME . '/';
+$DEFAULT_PATH_ADMIN		= $config['siteurl'] . 'admin/' . ADMIN_STYLE_NAME . '/';
 
 
 //get languge of common

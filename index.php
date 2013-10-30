@@ -9,11 +9,15 @@
 */
 
  
-define ('IN_INDEX', true);
-define ('IN_REAL_INDEX', true);
-define ('IN_SUBMIT_UPLOADING' , (isset($_POST['submitr']) || isset($_POST['submittxt'])));
+#where are we?
+define('IN_INDEX', true);
+define('IN_REAL_INDEX', true);
+define('IN_SUBMIT_UPLOADING' , (isset($_POST['submitr']) || isset($_POST['submittxt'])));
 
-include ('includes/common.php');
+#get the core
+define('PATH', dirname(__FILE__) . DIRECTORY_SEPARATOR);
+include PATH . 'includes/common.php';
+
 
 ($hook = kleeja_run_hook('begin_index_page')) ? eval($hook) : null; //run hook
 

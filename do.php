@@ -9,9 +9,11 @@
 */
 
 
-define ('IN_INDEX' , true);
-define ('IN_DOWNLOAD', true);
+#place
+define('IN_INDEX' , true);
+define('IN_DOWNLOAD', true);
 
+#get the core
 define('PATH', dirname(__FILE__) . DIRECTORY_SEPARATOR);
 include PATH . 'includes/common.php';
 include PATH . 'includes/functions/functions_down.php';

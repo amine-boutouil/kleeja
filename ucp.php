@@ -9,7 +9,8 @@
 */
 
 
-define ( 'IN_INDEX' , true);
+#where are we?
+define('IN_INDEX' , true);
 
 if(isset($_GET['go']))
 {
@@ -31,8 +32,9 @@ if(isset($_GET['go']) && $_GET['go'] == 'login' && isset($_POST['submit']))
 	define('IN_LOGIN_POST', true);
 }
 
-//include imprtant file .. 
-include ('includes/common.php');
+#get the core
+define('PATH', dirname(__FILE__) . DIRECTORY_SEPARATOR);
+include PATH . 'includes/common.php';
 
 ($hook = kleeja_run_hook('begin_usrcp_page')) ? eval($hook) : null; //run hook
 

@@ -8,10 +8,15 @@
 *
 */
 
-define ('IN_INDEX' , true);
-define ('IN_GO' , true);
+#where are we?
+define('IN_INDEX' , true);
+define('IN_GO' , true);
 
-include ('includes/common.php');
+
+#get the core
+define('PATH', dirname(__FILE__) . DIRECTORY_SEPARATOR);
+include PATH . 'includes/common.php';
+
 
 ($hook = kleeja_run_hook('begin_go_page')) ? eval($hook) : null; //run hook
 

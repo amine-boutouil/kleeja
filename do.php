@@ -12,7 +12,10 @@
 define ('IN_INDEX' , true);
 define ('IN_DOWNLOAD', true);
 
-include ('includes/common.php');
+define('PATH', dirname(__FILE__) . DIRECTORY_SEPARATOR);
+include PATH . 'includes/common.php';
+include PATH . 'includes/functions/functions_down.php';
+
 
 ($hook = kleeja_run_hook('begin_download_page')) ? eval($hook) : null; //run hook
 

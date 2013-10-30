@@ -106,9 +106,7 @@ function Saafooter($outscript = false)
 		$loadtime		= number_format($endtime - $starttm , 4);
 		$queries_num	= $SQL->query_num;
 		$time_sql		= round($SQL->query_num / $loadtime) ;
-		$page_url		= preg_replace(array('/([\&\?]+)debug/i', '/&amp;/i'), array('', '&'), kleeja_get_page());
-		$link_dbg		= user_can('enter_acp') &&  $config['mod_writer'] != '1' ? '[ <a href="' .  str_replace('&', '&amp;', $page_url) . (strpos($page_url, '?') === false ? '?' : '&amp;') . 'debug">More Details ... </a> ]' : null;
-		$page_stats		= "<strong>[</strong> GZIP : $gzip - Generation Time: $loadtime Sec  - Queries: $queries_num - Hook System:  $hksys <strong>]</strong>  " . $link_dbg ;
+		$page_stats		= "<strong>[</strong> GZIP : $gzip - Generation Time: $loadtime Sec  - Queries: $queries_num - Hook System:  $hksys <strong>]</strong>  " ;
 	}
 		
 	$tpl->assign("page_stats", $page_stats);
@@ -155,12 +153,6 @@ function Saafooter($outscript = false)
 	($hook = kleeja_run_hook('Saafooter_func')) ? eval($hook) : null; //run hook
 
 	echo $footer;
-
-	//page analysis 
-	if (isset($_GET['debug']) && user_can('enter_acp'))
-	{
-		kleeja_debug();
-	}
 
 	//at end, close sql connections
 	$SQL->close();
@@ -215,8 +207,8 @@ function kleeja_err($msg, $title = '', $exit = true, $redirect = false, $rs = 2,
 /**
 * print inforamtion message 
 * parameters : msg : text that will show as inforamtion
-					title : <title>title of page</title>
-					exit : stop script after showing msg 
+* title : <title>title of page</title>
+* exit : stop script after showing msg 
 */
 function kleeja_info($msg, $title='', $exit = true, $redirect = false, $rs = 5, $extra_code_header = '')
 {
@@ -228,81 +220,7 @@ function kleeja_info($msg, $title='', $exit = true, $redirect = false, $rs = 5, 
 }
 
 
-/**
-* Show debug information 
-* 
-* parameters: none
-*/
-function kleeja_debug()
-{
-	global $SQL,$do_gzip_compress, $all_plg_hooks;
 
-	($hook = kleeja_run_hook('kleeja_debug_func')) ? eval($hook) : null; //run hook
-	
-		//get memory usage ; code of phpbb
-		if (function_exists('memory_get_usage'))
-		{
-				if ($memory_usage = memory_get_usage())
-				{
-					$base_memory_usage	=	0;
-					$memory_usage -= $base_memory_usage;
-					$memory_usage = ($memory_usage >= 1048576) ? round((round($memory_usage / 1048576 * 100) / 100), 2) . ' MB' : (($memory_usage >= 1024) ? round((round($memory_usage / 1024 * 100) / 100), 2) . ' KB' : $memory_usage . ' BYTES');
-					$debug_output = 'Memory Usage : <em>' . $memory_usage . '</em>';
-				}
-		}
-		
-		//thrn show it
-		echo '<div class="debug_kleeja">';
-		echo '<fieldset  dir="ltr"><legend><br /><br /><em style="font-family: Tahoma; color:red">[Page Analysis]</em></legend>';
-		echo '<p>&nbsp;</p>';
-		echo '<p><h2><strong>General Information :</strong></h2></p>';
-		echo '<p>Gzip : <em>' . ($do_gzip_compress !=0 ?  "Enabled" : "Disabled") . '</em></p>';
-		echo '<p>Queries Number :<em> ' .  $SQL->query_num . ' </i></p>';
-		echo '<p>Hook System :<em> ' .  ((!defined('STOP_HOOKS'))?  "Enabled" : "Disabled"). ' </em></p>';
-		echo '<p>Active Hooks :<em> ' .  sizeof($all_plg_hooks). ' </em></p>';
-		echo '<p>' . $debug_output . '</p>';
-		echo '<p>&nbsp;</p>';
-		echo '<p><h2><strong><em>SQL</em> Information :</strong></h2></p> ';
-		
-		if(is_array($SQL->debugr))
-		{ 
-			foreach($SQL->debugr as $key=>$val)
-			{
-				echo '<fieldset name="sql"  dir="ltr" style="background:white"><legend><em>Query # [' . ($key+1) . '</em>]</legend> ';
-				echo '<textarea style="font-family:Courier New,monospace;width:99%; background:#F4F4F4" rows="5" cols="10">' . $val[0] . '';
-				echo '</textarea>	<br />';
-				echo 'Duration :' . $val[1] . ''; 
-				echo '</fieldset>';
-				echo '<br /><br />';
-			}
-		}
-		else
-		{
-			echo '<p><strong>NO SQLs</strong></p>';
-		}
-		
-		echo '<p>&nbsp;</p><p><h2><strong><em>HOOKS</em> Information :</strong></h2></p> ';
-		echo '<ul>';
-		
-		if(sizeof($all_plg_hooks) > 0)
-		{ 
-				foreach($all_plg_hooks as $k=>$v)
-				{
-					foreach($v as $p=>$c) $p=$p; $c=$c; // exactly 
-					
-					echo '<li><em>Plugin  # [' . $p . ']</em>';
-					//echo '<textarea style="font-family:Courier New,monospace;width:99%; background:#F4F4F4" rows="5" cols="10">' . htmlspecialchars($c) . '</textarea><br />';
-					echo ' : hook_name :' . $k . '</li>';
-				}
-		}
-		else
-		{
-			echo '<p><strong>NO-HOOKS</strong></p>';
-		}
-		
-		echo '</ul>';
-		echo '</div>';
-}
 
 /**
 * Show error of critical problem !

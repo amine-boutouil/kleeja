@@ -17,8 +17,9 @@ if (!defined('IN_COMMON'))
 @set_time_limit(0); 
 
 
-//we don't want to repeat things .. I think we should move the write / delete .. functions later
-include (PATH . 'includes/plugins.php');  #FTP SUCKS
+/* get kftp, zfile class */
+include PATH . 'includes/classes/ftp.php'; 
+include PATH . 'includes/classes/zip.php'; 
 
 
 /**
@@ -32,9 +33,9 @@ class kupdate
 	//we ask user for this..
 	var $info				= array();
 	var $f_method 			= 'zfile';
+	var $f					= null;
 	var $is_ftp_supported 	= true;
 	var $zipped_files		= '';
-	var $plg				= null;
 
 	function kupdate()
 	{
@@ -43,21 +44,19 @@ class kupdate
 		{
 			$this->is_ftp_supported = true;
 		}
-
-		$this->plg 		 	 = new kplugins();
-		$this->plg->info 	 = $this->info;
-		$this->plg->f_method = $this->f_method;
-
 	}
 
 	function check_connect()
 	{
-		return $this->plg->check_connect();
+		$this->f = new $this->f_method;
 	}
 
 	function atend()
 	{
-		$this->plg->atend();
+		if(!empty($this->f))
+		{
+			$this->f->_close();
+		}
 	}
 
 	function check_what_method()
@@ -87,24 +86,24 @@ class kupdate
 		global $dbprefix, $SQL, $lang, $config;
 
 		$ftp = $this->check_what_method();
-		//$this->plg->f_method = 'zfile';  //standard
+		//$this->f_method = 'zfile';  //standard
 
 		if($ftp && $this->is_ftp_supported)
 		{
-			$this->plg->f_method = 'kftp';
+			$this->f_method = 'kftp';
 
 			if(!empty($this->info))
 			{
-				$this->plg->info = $this->info;
+				$this->info = $this->info;
 			}
 			else if(!empty($config['ftp_info']))
 			{
 				$ftp_info = @unserialize($config['ftp_info']);
-				$this->plg->info = $ftp_info;
+				$this->info = $ftp_info;
 			}
 			else //no info
 			{
-				$this->plg->f_method = 'zfile'; //return to file
+				$this->f_method = 'zfile'; //return to file
 			}
 		}
 
@@ -128,10 +127,10 @@ class kupdate
 					//then ..write new file
 					$re = $this->plg->_write(PATH . $config['foldername'] . '/' . 'aupdatekleeja' . $v . '.tar', $data);
 
-					if($this->plg->f->check())
+					if($this->f->check())
 					{
 				
-						$this->zipped_files = $this->plg->f->push('aupdate' . $v);
+						$this->zipped_files = $this->f->push('aupdate' . $v);
 						return 'zipped';
 											
 					}
@@ -225,8 +224,8 @@ class kupdate
 				if ($meta['link_flag'] == 5)  //folder
 				{
 					// Create folder
-					$this->plg->_mkdir($dest . $meta['filename'], 0777);
-					$this->plg->_chmod($dest . $meta['filename'], $meta['mode']);
+					$this->f->_mkdir($dest . $meta['filename'], 0777);
+					$this->f->_chmod($dest . $meta['filename'], $meta['mode']);
 				}
 			
 				if ($meta['databytes'] >= 0 && $meta['header_checksum'] != 0)  //files
@@ -235,14 +234,14 @@ class kupdate
 					// Extract data
 					$data = substr($block, 0, $meta['filesize']);
 
-					$this->plg->_write($dest . $meta['filename'], $data);  //write
+					$this->f->_write($dest . $meta['filename'], $data);  //write
 
 					if ($meta['mode'] == 0744)
 					{
 						$meta['mode'] = 0644;
 					}
 
-					$this->plg->_chmod($dest . $meta['filename'], $meta['mode']); //privileges stuff  
+					$this->f->_chmod($dest . $meta['filename'], $meta['mode']); //privileges stuff  
 
 					/*
 					// Write data and set permissions

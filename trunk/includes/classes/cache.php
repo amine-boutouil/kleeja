@@ -103,44 +103,7 @@ class cache
 
 $cache = new cache;
 
-//	
-//get hooks data from hooks table  ... 
-//
-if(!defined('STOP_HOOKS'))
-{
-	if (!($all_plg_h_p = $cache->get('data_plugins')))
-	{
-		//get all hooks
-		$query = array(
-			'SELECT'	=> 'h.hook_id,h.hook_name, h.hook_content, h.plg_id, p.plg_name',
-			'FROM'		=> "{$dbprefix}hooks AS h",
-			'JOINS'		=> array(
-				array(
-					'INNER JOIN'	=> "{$dbprefix}plugins AS p",
-					'ON'			=> 'p.plg_id=h.plg_id'
-				)
-			),
-			'WHERE'		=> 'p.plg_disabled=0',
-			'ORDER BY'	=> 'h.hook_id'
-		);
 
-		($hook = kleeja_run_hook('qr_select_hooks_cache')) ? eval($hook) : null; //run hook
-
-		$result = $SQL->build($query);
-
-		while($row=$SQL->fetch_array($result))
-		{
-			$all_plg_hooks[$row['hook_name']][$row['plg_name']] =	$row['hook_content'];
-			$all_plg_plugins[$row['plg_name']] = null;
-		}
-	 	$SQL->freeresult($result);
-
-		$cache->save('data_plugins', array($all_plg_plugins, $all_plg_hooks));
-	}
-
-	list($all_plg_plugins, $all_plg_hooks) = $all_plg_h_p;
-
-}#plugins is on
 
 
 //

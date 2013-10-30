@@ -60,10 +60,6 @@ class SSQL
 			$this->error_msg("we can not connect to the server ...");
 			return false;
 		}
-
-		#loggin -> connecting 
-		kleeja_log('[Connected] : ' . kleeja_get_page());
-
 	
 		if ((!preg_match('/utf/i', strtolower($script_encoding)) && !defined('IN_LOGINPAGE') && !defined('IN_ADMIN_LOGIN') && !defined('DISABLE_INTR')) || (empty($script_encoding) || preg_match('/utf/i', strtolower($script_encoding)) || defined('DISABLE_INTR')))
 		{
@@ -89,9 +85,6 @@ class SSQL
 			{
 				mysqli_commit($this->connect_id);
 			}
-
-			#loggin -> close connection
-			kleeja_log('[Closing connection] : ' . kleeja_get_page());
 
 			return @mysqli_close($this->connect_id);
 		}

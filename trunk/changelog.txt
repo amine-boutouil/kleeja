@@ -8,7 +8,7 @@
 [x] done
 
 
-1.5.5 - version:
+2.0.0 - version:
 [x] fix bug;1099, wrong time at show last visit files/images (reported by: bader_vip)
 [x] fix bug:1104, where kleeja_date doesnt respect user time zone  (reported by: bader_vip)
 [x] fix bug:1117, deleteing files from user folder other than page 1 won't work (reported by: bader_vip)
@@ -18,6 +18,7 @@
 [x] fix bug:1121, where kleeja web site links are wrong (reported by: yasorno)
 [x] fix bug:1120, where editing ACLs doesn't work .. (reported by: sadiq6210)
 [x] fix bug where calls+reports deleting queue doesnt work!  (un-reported)
+
 
 1.5.4 - version:
 [x] When the database old, tell the user to update.
@@ -58,7 +59,7 @@
 
 
 ------------ BE CAREFUL! .. AFTER THIS LINE YOU WILL TRAVEL THROUGH THE TIME TO THE FUTURE f=0--->f++
-1.7 - version (---- NOT YET ---):
+2.0.0 - version (---- NOT YET ---):
 -[-] Security situation page 
 -[-] files ACP -> search files from this IP,user
 -[-] Dealing with the huge invasion of Nginx
@@ -70,3 +71,4 @@
 	-[x] convert searches to use filters and show last 10 ones.
 -[-] files of deleted user shows as 'deleted' user or 'guest' 
 -[-] remove last_file code from files and sql .. 
+-[-] support PHP 5.4

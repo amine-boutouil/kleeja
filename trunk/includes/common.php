@@ -228,29 +228,29 @@ if (!$dbname || !$dbuser)
 $root_path = PATH;
 $db_type = isset($db_type) ? $db_type : 'mysql';
 
-include (PATH . 'includes/functions/functions_alternative.php');
-include (PATH . 'includes/version.php');
+include PATH . 'includes/functions/functions_alternative.php';
+include PATH . 'includes/version.php';
 
 switch ($db_type)
 {
 	case 'mysqli':
-		include (PATH . 'includes/classes/mysqli.php');
+		include PATH . 'includes/classes/mysqli.php';
 	break;
 	default:
-		include (PATH . 'includes/classes/mysql.php');
+		include PATH . 'includes/classes/mysql.php';
 }
-include (PATH . 'includes/classes/style.php');
-include (PATH . 'includes/classes/usr.php');
-include (PATH . 'includes/classes/pager.php');
-include (PATH . 'includes/functions/functions.php');
-include (PATH . 'includes/functions/functions_display.php');
+include PATH . 'includes/classes/style.php';
+include PATH . 'includes/classes/usr.php';
+include PATH . 'includes/classes/pager.php';
+include PATH . 'includes/functions/functions.php';
+include PATH . 'includes/functions/functions_display.php';
 if(defined('IN_ADMIN'))
 {
-	include (PATH . 'includes/functions/functions_adm.php');
+	include PATH . 'includes/functions/functions_adm.php';
 }
 else
 {
-	include (PATH . 'includes/classes/uploader.php');
+	include PATH . 'includes/classes/uploader.php';
 	$kljup	= new uploader;
 }
 
@@ -268,7 +268,7 @@ $tpl	= new kleeja_style;
 $usrcp	= new usrcp;
 
 //then get caches
-include (PATH . 'includes/cache.php');
+include PATH . 'includes/classes/cache.php';
 
 //getting dynamic configs
 $query = array(

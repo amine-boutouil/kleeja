@@ -54,9 +54,6 @@ class SSQL
 
 		if($this->connect_id)
 		{
-			#loggin -> connecting 
-			kleeja_log('[Connected] : ' . kleeja_get_page());
-
 			if(!empty($db_name))
 			{
 				$dbselect = @mysql_select_db($this->db_name) or die($this->error_msg("we can not select database"));
@@ -104,8 +101,6 @@ class SSQL
 				mysql_query("COMMIT", $this->connect_id);
 			}
 
-			#loggin -> close connection
-			kleeja_log('[Closing connection] :' . kleeja_get_page());
 
 			return @mysql_close($this->connect_id);
 		}

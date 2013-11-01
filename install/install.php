@@ -9,33 +9,38 @@
 */
 
 
-// Report all errors, except notices
+#Report all errors, except notices
 @error_reporting(E_ALL ^ E_NOTICE);
 
 
-/**
-* include important files
-*/
+
+#include important files
+$_path = '../';
+$is_there_config = false;
+$db_type = 'mysqli';
+
 define('IN_COMMON', true);
-$_path = "../";
 define('PATH', $_path);
-if(file_exists($_path . 'config.php'))
+
+if(file_exists(PATH . 'config.php'))
 {
-	include_once ($_path . 'config.php');
+	$is_there_config = true;
+	include PATH . 'config.php';
 }
-include_once ($_path . 'includes/functions_display.php');
-include_once ($_path . 'includes/functions_alternative.php');
-include_once ($_path . 'includes/functions.php');
+
+include PATH . 'includes/functions/functions_display.php';
+include PATH. 'includes/functions/functions_alternative.php';
+include PATH . 'includes/functions/functions.php';
 
 switch ($db_type)
 {
 	case 'mysqli':
-		include_once ($_path . 'includes/mysqli.php');
+		include PATH . 'includes/classes/mysqli.php';
 	break;
 	default:
-		include_once ($_path . 'includes/mysql.php');
+		include PATH . 'includes/classes/mysql.php';
 }
-include_once ('includes/functions_install.php');
+include  'includes/functions_install.php';
 
 
 if(!isset($_GET['step']))
@@ -366,115 +371,7 @@ case 'data' :
 	}
 
 break;
-case 'plugins':
-/*
-	//connect .. for check
-	$SQL = new SSQL($dbserver, $dbuser, $dbpass, $dbname);
-	//install built in plugins
-	$pl_path = "includes/plugins";
-	include PATH . 'includes/plugins.php';
-	$XML = new kxml;
 
-	if (isset($_POST['datasubmit']))
-	{
-		$p = $_POST['plugin_file'];
-		if(empty($p))
-		{
-			header('Location: ' . $_SERVER['PHP_SELF'] . '?step=end&' . getlang(1));
-			exit;
-		}
-
-		$plg = new kplugins;
-
-		//search for plugins
-		foreach($p as $file)
-		{
-			if(file_exists($pl_path . '/' . $file)) //only plugins ;)
-			{
-				$contents 	= @file_get_contents($pl_path . '/' . $file);
-				$gtree		= $XML->xml_to_array($contents);
-				
-				if($gtree != false) //great !! it's well-formed xml 
-				{
-					$plg_dsc = $gtree['kleeja']['info']['plugin_description'];
-					if(isset($plg_dsc))
-					{
-						if(is_array($plg_dsc['description']) && array_key_exists("attributes", $plg_dsc['description']))
-						{
-							$plg_dsc['description'] = array($plg_dsc['description']);
-						}
-
-						$p_desc = array();		
-						foreach($plg_dsc['description'] as $in)
-						{
-							$p_desc[$in['attributes']['lang']] = $in['value'];
-						}
-					}
-		
-					$installed_plugins[] = array(
-								'p_file' => $file,
-								'p_name' => htmlspecialchars($gtree['kleeja']['info']['plugin_name']['value']),
-								'p_ver'  => htmlspecialchars($gtree['kleeja']['info']['plugin_version']['value']),
-								'p_des'  => isset($p_desc[getlang()]) ? $p_desc[getlang()] : $p_desc['en'],
-								//'p_size' => @filesize($pl_path . '/' . $file),
-					);
-
-					//we dont care about the return value here !
-					$plg->add_plugin($contents);
-				}
-			}
-		}
-		
-		$plg->atend();
-
-		//clean cache
-		delete_cache(null, true);
-		echo gettpl('plugins_done.html');
-	}
-	else
-	{
-		$plugins = array();
-		$dh = opendir($pl_path);
-		while (($file = readdir($dh)) !== false)
-		{
-			$e	= @explode(".", $file);
-			$e	= strtolower($e[sizeof($e)-1]);
-			if($e == "klj") //only plugins ;)
-			{
-				$contents 	= @file_get_contents($pl_path . '/' . $file);
-				$gtree		= $XML->xml_to_array($contents);
-				
-				if($gtree != false) //great !! it's well-formed xml 
-				{
-					$plg_dsc = $gtree['kleeja']['info']['plugin_description'];
-					if(isset($plg_dsc))
-					{
-						if(is_array($plg_dsc['description']) && array_key_exists("attributes", $plg_dsc['description']))
-						{
-							$plg_dsc['description'] = array($plg_dsc['description']);
-						}
-
-						$p_desc = array();		
-						foreach($plg_dsc['description'] as $in)
-						{
-							$p_desc[$in['attributes']['lang']] = $in['value'];
-						}
-					}
-				
-					$plugins[]	= array(
-						'p_file' => $file,
-						'p_name' => htmlspecialchars($gtree['kleeja']['info']['plugin_name']['value']),
-						'p_ver'  => htmlspecialchars($gtree['kleeja']['info']['plugin_version']['value']),
-						'p_des'  => isset($p_desc[getlang()]) ? $p_desc[getlang()] : $p_desc['en'],
-						//'p_size' => @filesize($pl_path . '/' . $file),
-					);
-				}
-			}			
-		}
-		echo gettpl('plugins_options.html');
-	}
-	*/
-break;
 
 case 'end' :
 

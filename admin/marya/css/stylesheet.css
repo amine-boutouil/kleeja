@@ -40,3 +40,7 @@
 	max-width: 800px;
 	width: auto;
 }
+/*admin_start*/
+.graphLabelchart_stats{
+	font-size:10px;
+}

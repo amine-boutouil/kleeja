@@ -9,7 +9,9 @@
 */
 
 
-//no for directly open
+/**
+* @ignore
+*/
 if (!defined('IN_COMMON'))
 {
 	exit();
@@ -18,19 +20,36 @@ if (!defined('IN_COMMON'))
 
 
 /**
-* function to get variables from _GET, _POST
-* kleeja 2.0
-*/
+ * Is given _GET variable exists?
+ * 
+ * @since 2.0
+ * @param string $name The name of _GET variable
+ * @return bool
+ */
 function ig($name)
 {
 	return isset($_GET[$name]) ? true : false;
 }
 
+/**
+ * Is given _POST variable exists?
+ * 
+ * @since 2.0
+ * @param string $name The name of _POST variable
+ * @return bool
+ */
 function ip($name)
 {
 	return isset($_POST[$name]) ? true : false;
 }
 
+/**
+ *  clean _GET variable if exists and return it
+ * 
+ * @since 2.0
+ * @param string $name The name of _GET variable
+ * @return string|bool
+ */
 function g($name, $type = 'str')
 {
 	if(isset($_GET[$name]))
@@ -40,6 +59,13 @@ function g($name, $type = 'str')
 	return false;
 }
 
+/**
+ *  clean _GET variable if exists and return it
+ * 
+ * @since 2.0
+ * @param string $name The name of _GET variable
+ * @return string|bool
+ */
 function p($name, $type = 'str')
 {
 	if(isset($_POST[$name]))
@@ -535,329 +561,11 @@ function delete_config($name)
 	return false;
 }
 
-//
-//update words to lang
-//
-function update_olang($name, $lang = 'en', $value)
-{
-	global $SQL, $dbprefix;
-
-	$value = ($escape) ? $SQL->escape($value) : $value;
-
-	$update_query	= array(
-							'UPDATE'	=> "{$dbprefix}lang",
-							'SET'		=> "trans='" . $SQL->escape($value) . "'",
-							'WHERE'		=> 'word = "' . $SQL->escape($name) . '", lang_id = "' .  $SQL->escape($lang) . '"'
-					);
-	($hook = kleeja_run_hook('update_sql_update_olang_func')) ? eval($hook) : null; //run hook
-
-	$SQL->build($update_query);
-	if($SQL->affected())
-	{
-		$olang[$name] = $value;
-		return true;
-	}
-
-	return false;
-}
-
-//
-//add words to lang
-//
-function add_olang($words = array(), $lang = 'en', $plg_id = '0')
-{
-	global $dbprefix, $SQL;
-
-	foreach($words as $w=>$t)
-	{
-		$insert_query = array(
-								'INSERT'	=> 'word ,trans ,lang_id, plg_id',
-								'INTO'		=> "{$dbprefix}lang",
-								'VALUES'	=> "'" . $SQL->escape($w) . "','" . $SQL->real_escape($t) . "', '" . $SQL->escape($lang) . "','" . intval($plg_id) . "'",
-						);
-		($hook = kleeja_run_hook('insert_sql_add_olang_func')) ? eval($hook) : null; //run hook
-		$SQL->build($insert_query);
-	}
-
-	delete_cache('data_lang');
-	return;
-}
-
-//
-//delete words from lang
-//
-function delete_olang ($words = '', $lang='en', $plg_id = '') 
-{
-	global $dbprefix, $SQL;
-
-	if(is_array($words))
-	{
-		foreach($words as $w)
-		{
-			delete_olang ($w, $lang);
-		}
-
-		return;
-	}
-
-	$delete_query	= array(
-							'DELETE'	=> "{$dbprefix}lang",
-							'WHERE'		=> "word = '" . $SQL->escape($words) . "' AND lang_id = '" . $SQL->escape($lang) . "'"
-						);
-
-	if(isset($plg_id) && !empty($plg_id))
-	{
-		$delete_query['WHERE'] = "plg_id = '" . intval($plg_id) . "'";
-	}
-
-	($hook = kleeja_run_hook('del_sql_delete_olang_func')) ? eval($hook) : null; //run hook
-		
-	$SQL->build($delete_query);
-
-	if($SQL->affected())
-	{
-		return true;
-	}
-
-	return false;
-}
-
-
-
-//
-// administarator sometime need some files and delete other .. we
-// do that for him .. becuase he has no time .. :)   
-//last_down - $config[del_f_day]
-//
-function klj_clean_old_files($from = 0)
-{
-	global $config, $SQL, $stat_last_f_del, $dbprefix;
-	
-	$return = false;
-	($hook = kleeja_run_hook('klj_clean_old_files_func')) ? eval($hook) : null; //run hook
-
-	if((int) $config['del_f_day'] <= 0 || $return)
-	{
-		return;
-	}
-
-	if(!$stat_last_f_del || empty($stat_last_f_del))
-	{
-		$stat_last_f_del = time();
-	}
-	
-	if ((time() - $stat_last_f_del) >= 86400)
-	{
-		$totaldays	= (time() - ($config['del_f_day']*86400));
-		$not_today	= time() - 86400;
-		
-		#This feature will work only if id_form is not empty or direct !
-		$query = array(
-					'SELECT'	=> 'f.id, f.last_down, f.name, f.type, f.folder, f.time, f.size, f.id_form',
-					'FROM'		=> "{$dbprefix}files f",
-					'WHERE'		=> "f.last_down < $totaldays AND f.time < $not_today AND f.id > $from AND f.id_form <> '' AND f.id_form <> 'direct'",
-					'ORDER BY'	=> 'f.id ASC',
-					'LIMIT'		=> '20',
-					);
-
-		($hook = kleeja_run_hook('qr_select_klj_clean_old_files_func')) ? eval($hook) : null; //run hook
-
-		$result	= $SQL->build($query);					
-
-		$num_of_files_to_delete = $SQL->num_rows($result);
-		if($num_of_files_to_delete == 0)
-		{
-		   	 //update $stat_last_f_del !!
-			$update_query = array(
-								'UPDATE'	=> "{$dbprefix}stats",
-								'SET'		=> "last_f_del ='" . time() . "'",
-							);
-
-			($hook = kleeja_run_hook('qr_update_lstf_del_date_kcof')) ? eval($hook) : null; //run hook
-
-			$SQL->build($update_query);		
-			//delete stats cache
-			delete_cache("data_stats");
-			update_config('klj_clean_files_from', '0');
-			$SQL->freeresult($result);
-			return;
-		}
-
-		$last_id_from = $files_num = $imgs_num = $real_num = $sizes = 0;
-		$ids = array();
-		$ex_ids =  array();
-		//$ex_types = explode(',', $config['livexts']);
-        
-
-		($hook = kleeja_run_hook('beforewhile_klj_clean_old_files_func')) ? eval($hook) : null; //run hook
-		
-        
-        //phpfalcon plugin
-        $exlive_types = explode(',', $config['imagefolderexts']);
-        
-		//delete files 
-		while($row=$SQL->fetch_array($result))
-		{
-			$continue = true;
-			$real_num++;
-			$last_id_from = $row['id'];
-			$is_image = in_array(strtolower(trim($row['type'])), array('gif', 'jpg', 'jpeg', 'bmp', 'png')) ? true : false;
-
-			/*
-			//excpetions
-			if(in_array($row['type'], $ex_types) || $config['id_form'] == 'direct')
-			{
-				$ex_ids[] = $row['id'];
-				continue;
-			}
-			*/
-
-			//excpetions
-			//if($config['id_form'] == 'direct')
-			//{
-				//$ex_ids[] = $row['id'];
-				//move on
-				//continue;
-			//}
-
-			//your exepctions
-            ($hook = kleeja_run_hook('while_klj_clean_old_files_func')) ? eval($hook) : null; //run hook
-            
-            
-            //phpfalcon plugin
-            if(in_array($row['type'], $exlive_types))
-            {
-                $ex_ids[] = $row['id'];
-                if($real_num != $num_of_files_to_delete)
-                {
-                    $continue = false;
-                }
-            }
-            
-			if($continue)
-			{
-				//delete from folder ..
-				if (file_exists($row['folder'] . "/" . $row['name']))
-				{
-					@kleeja_unlink ($row['folder'] . "/" . $row['name']);
-				}
-				//delete thumb
-				if (file_exists($row['folder'] . "/thumbs/" . $row['name'] ))
-				{
-					@kleeja_unlink ($row['folder'] . "/thumbs/" . $row['name'] );
-				}
-
-				$ids[] = $row['id'];
-				if($is_image)
-				{
-					$imgs_num++;
-				}
-				else
-				{
-					$files_num++;
-				}
-				$sizes += $row['size'];
-			}
-	    }#END WHILE
-
-		$SQL->freeresult($result);
-
-		if(sizeof($ex_ids))
-		{
-			$update_query	= array(
-									'UPDATE'	=> "{$dbprefix}files",
-									'SET'		=> "last_down = '" . (time() + 2*86400) . "'",
-									'WHERE'		=> "id IN (" . implode(',', $ex_ids) . ")"
-									);
-			($hook = kleeja_run_hook('qr_update_lstdown_old_files')) ? eval($hook) : null; //run hook						
-			$SQL->build($update_query);
-		}
-
-		if(sizeof($ids))
-		{
-			$query_del	= array(
-								'DELETE'	=> "{$dbprefix}files",
-								'WHERE'	=> "id IN (" . implode(',', $ids) . ")"
-								);
-
-			//update number of stats
-			$update_query	= array(
-									'UPDATE'	=> "{$dbprefix}stats",
-									'SET'		=> "sizes=sizes-$sizes,files=files-$files_num, imgs=imgs-$imgs_num",
-									);
-
-			($hook = kleeja_run_hook('qr_del_delf_old_files')) ? eval($hook) : null; //run hook
-
-			$SQL->build($query_del);
-			$SQL->build($update_query);
-		}
-
-		update_config('klj_clean_files_from', $last_id_from);
-    } //stat_del
-}
 
 /**
-* klj_clean_old 
-*/
-function klj_clean_old($table, $for = 'all')
-{
-	global $SQL, $config, $dbprefix;
-
-	$days = intval(time() - 3600 * 24 * intval($for));
-
-	$query = array(
-					'SELECT'	=> 'f.id, f.time',
-					'FROM'		=> "`{$dbprefix}" . $table . "` f",
-					'ORDER BY'	=> 'f.id ASC',
-					'LIMIT'		=> '20',
-					);
-
-
-	if($for != 'all')
-	{
-		$query['WHERE']	= "f.time < $days";
-	}
-
-
-	
-	($hook = kleeja_run_hook('qr_select_klj_clean_old_func')) ? eval($hook) : null; //run hook
-
-	$result	= $SQL->build($query);					
-	$num_to_delete = $SQL->num_rows($result);
-	if($num_to_delete == 0)
-	{
-		$t = $table == 'call' ? 'calls' : $table;
-		update_config('queue', preg_match('!:del_' . $for . $t . ':!i', '', $config['queue']));
-		$SQL->freeresult($result);
-		return;
-	}
-
-	$ids = array();
-	$num = 0;
-	while($row=$SQL->fetch_array($result))
-	{
-		$ids[] = $row['id'];
-		$num++;
-	}
-
-	$SQL->freeresult($result);
-
-	$query_del	= array(
-							'DELETE'	=> "`" . $dbprefix . $table . "`",
-							'WHERE'	=> "id IN (" . implode(',', $ids) . ")"
-						);
-
-	($hook = kleeja_run_hook('qr_del_delf_old_table')) ? eval($hook) : null; //run hook
-
-	$SQL->build($query_del);
-
-
-
-	return;
-}
-
-/**
-* get_ip() for the user
+* Get the current IP of the user
+*
+* @return string
 */
 function get_ip()
 {
@@ -888,7 +596,11 @@ function get_ip()
 	return $return;
 }
 
-//check captcha field after submit
+/**
+ * Check if the given value of CAPTCHA is valid
+ *
+ * @return bool
+ */
 function kleeja_check_captcha()
 {
 	global $config;
@@ -913,14 +625,17 @@ function kleeja_check_captcha()
 
 
 /**
-* for logging and testing
-* enables only in DEV. stage !
+* Logging and testing, enabled only in DEV. stage !
+*
+* @param string $text The string you want to save to the log file
+* @return bool
 */
 function kleeja_log($text, $reset = false)
 {
+	//if not in development stage, abort
 	if(!defined('DEV_STAGE'))
 	{
-		return;
+		return false;
 	}
 
 	$log_file = PATH . 'cache/kleeja_log.log';
@@ -928,12 +643,17 @@ function kleeja_log($text, $reset = false)
 	$fp = @fopen($log_file, 'w');
 	@fwrite($fp, $text . " [time : " . date('H:i a, d-m-Y') . "] \r\n" . $l_c);
 	@fclose($fp);
-	return;
+	return true;
 }
 
 
 /**
-* user_can, used for checking the acl for the current user
+* Used for checking the acl for the current user
+*
+* @param string $acl_name The privilege you want check if this group of user has or not
+* @param int $group_id [optional] The group you want to check agaist, if not given will 
+* use the current user group id.
+* @return bool
 */
 function user_can($acl_name, $group_id = 0)
 {
@@ -947,39 +667,30 @@ function user_can($acl_name, $group_id = 0)
 	return (bool) $d_groups[$group_id]['acls'][$acl_name];
 }
 
-/*
- * this function for the future , made specially for kleeja 
+/**
+ * Get domain from a url
+ * 
+ * @param string $url The link you want to get the domain from
+ * @return mixed
  */
-function get_Domain_only($domain)
+function get_domain($url)
 {
-    if(strpos($domain, '.' )  !== false)
-    {
-        $domain = parse_url($domain,  PHP_URL_HOST);
-        $darray = explode('.', $domain);
-
-        if(count($darray) == 2)
-        {   
-            $domain = $darray[0];
-        }
-        else
-        {   
-            $domain = $darray[1];
-        }
-    }
-
-    return $domain;
+	$pieces = parse_url($url);
+	$domain = isset($pieces['host']) ? $pieces['host'] : '';
+	if (preg_match('/(?P<domain>[a-z0-9][a-z0-9\-]{1,63}\.[a-z\.]{2,6})$/i', $domain, $regs))
+	{
+		return $regs['domain'];
+ 	}
+ 	return false;
 }
 
 
-/**
- *
- * We need to develop this .. add ftp - etc
- * 
- * Simple script to extract files from a .tar archive
+/** 
+ * Extract files from a .tar archive
  *
  * @param string $file The .tar archive filepath
  * @param string $dest [optional] The extraction destination filepath, defaults to "./"
- * @return boolean Success or failure
+ * @return bool
  */
 function untar($file, $dest = "./") 
 {

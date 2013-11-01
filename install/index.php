@@ -15,25 +15,32 @@
 /**
 * include important files
 */
+#include important files
+$_path = '../';
+$is_there_config = false;
+$db_type = 'mysqli';
+
 define('IN_COMMON', true);
-$_path = "../";
-if(file_exists($_path . 'config.php'))
+define('PATH', $_path);
+
+if(file_exists(PATH . 'config.php'))
 {
-	include_once ($_path . 'config.php');
+	$is_there_config = true;
+	include PATH . 'config.php';
 }
 
-include_once ($_path . 'includes/functions.php');
+include PATH . 'includes/functions/functions_display.php';
+include PATH . 'includes/functions/functions.php';
 
 switch ($db_type)
 {
 	case 'mysqli':
-		include_once ($_path . 'includes/mysqli.php');
+		include PATH . 'includes/classes/mysqli.php';
 	break;
 	default:
-		include_once ($_path . 'includes/mysql.php');
+		include PATH . 'includes/classes/mysql.php';
 }
-include_once ('includes/functions_install.php');
-
+include  'includes/functions_install.php';
 
 
 /**
@@ -46,7 +53,7 @@ if (!isset($_POST['lang']))
 
 if(!isset($_GET['step']))
 {
-	$_GET['step'] = 'language';
+	$_GET['step'] = 'choose';
 }
 
 /**
@@ -55,27 +62,6 @@ if(!isset($_GET['step']))
 switch ($_GET['step']) 
 {
 default:
-case 'language':
-
-	if(isset($_GET['ln']) && !empty($_GET['ln']))
-	{
-		echo '<meta http-equiv="refresh" content="0;url=' . $_SERVER['PHP_SELF'] . '?step=official&lang=' . htmlspecialchars($_GET['ln']) . '">';
-		exit;
-	}
-
-	echo gettpl('lang.html');
-
-break;
-case 'what_is_kleeja':
-
-	echo gettpl('what_is_kleeja.html');
-
-break;
-case 'official':
-
-	echo gettpl('official.html');
-
-break;
 case 'choose' :
 
 	$install_or_no	= $php_ver = true;

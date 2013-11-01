@@ -9,7 +9,9 @@
 */
 
 
-//no for directly open
+/**
+* @ignore
+*/
 if (!defined('IN_COMMON'))
 {
 	exit();
@@ -115,7 +117,7 @@ function Saafooter($outscript = false)
 	$tpl->assign("admin_page", (user_can('enter_acp') ? '<a href="' . ADMIN_PATH . '" class="admin_cp_link"><span>' . $lang['ADMINCP'] .  '</span></a>' : ''));
 	
 	//assign cron
-	$tpl->assign("run_queue", '<img src="' . $config['siteurl'] . 'go.php?go=queue" width="1" height="1" alt="queue" />');
+	$tpl->assign("run_queue", '<img src="' . $config['siteurl'] . 'queue.php?image.gif" width="1" height="1" alt="queue" />');
 
 
 	// if google analytics, new version 
@@ -178,8 +180,8 @@ function Customfile_size($size)
 /**
 * print error message 
 * parameters : msg : text that will show as error mressage
-					title : <title>title of page</title>
-					exit : stop script after showing msg 
+* title : <title>title of page</title>
+* exit : stop script after showing msg 
 */
 function kleeja_err($msg, $title = '', $exit = true, $redirect = false, $rs = 2, $extra_code_header, $style = 'err')
 {

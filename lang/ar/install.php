@@ -120,13 +120,7 @@
 	$lang['KLEEJA_TEAM_MSG_NAME']				= 'فريق تطوير كليجا';
 	$lang['KLEEJA_TEAM_MSG_TEXT']				= "شكراً لاختيارك سكربت الرفع الأول كليجا\n نتمنى حقا ان تستمتع بالسكربت و لاتنسى زيارة موقع كليجا لطلب الدعم وتحميل مرفقات السكربت.\nhttp://www.kleeja.com";
 	
-	//PLUGINS
-	$lang['PLUGINS_KLEEJA']						= 'إضافات كليجا .. !';
-	$lang['PLUGINS_BUILT_IN']					= 'هذه اضافات تأتي مع كليجا بشكل افتراضي , اذا اردت ازالة تضمين احدها فكل ماعليك هو ازالة التعليم من أمامها , ولكن ننصحك بعدم فعل ذلك لان هذه الاضافات تم التحقق منها وهي مفيده لعمل كليجا بشكل عام ,, وللحصول على المزيد من الاضافات قم بزيارة موقع <a style="color:red" target="_blank" href="http://www.kleeja.com/plugins/">kleeja.com !</a>';
-	$lang['PLUGINS_NAME']						= 'اسم الاضافة';
-	$lang['PLUGINS_VER']						= 'الإصدار';
-	$lang['PLUGINS_DES']						= 'وصف الاضافة';	
-	$lang['PLUGINS_INSTALLED']					= 'تم تثبيت هذه الاضافات بنجاح !!';		
+
 
 	
 //<-- EOF

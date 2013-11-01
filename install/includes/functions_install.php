@@ -11,10 +11,10 @@
 /*
 * Requirements of Kleeja
 */
-define('MIN_PHP_VERSION', '5.0.0');
+define('MIN_PHP_VERSION', '5.3.0');
 define('MIN_MYSQL_VERSION', '4.2.2');
 //version of latest changes at db
-define ('LAST_DB_VERSION' , '8');
+define ('LAST_DB_VERSION' , '10');
 //set no errors
 define('MYSQL_NO_ERRORS', true);
 
@@ -63,17 +63,21 @@ function getlang ($link = false)
 	return $link ? 'lang=' . $ln : $ln;
 }
 
-function getjquerylink()
+function getlink($type = 'jquery')
 {
 	global $_path;
 
-	if(file_exists($_path . 'admin/buraidah/js/jquery.min.js'))
+	switch($type)
 	{
-		return $_path . 'admin/buraidah/js/jquery.min.js';
-	}
-	else
-	{
-		return 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js';
+		case 'jquery':	
+			return $_path . 'admin/marya/js/jquery.min.js';
+		break;
+		case 'bootstrap':
+			return $_path . 'admin/marya/css/bootstrap.min.css';
+		break;
+		case 'bootstrap_rtl':
+			return $_path . 'admin/marya/css/bootstrap.rtl.css';
+		break;
 	}
 }
 
@@ -102,7 +106,7 @@ function do_config_export($type, $srv, $usr, $pass, $nm, $prf, $fpath = '')
 		
 		if(!in_array($type, array('mysql', 'mysqli')))
 		{
-			$type = 'mysql';
+			$type = 'mysqli';
 		}
 		
 		$data	= '<?php'."\n\n" . '//fill those varaibles with your data' . "\n";
@@ -112,12 +116,6 @@ function do_config_export($type, $srv, $usr, $pass, $nm, $prf, $fpath = '')
 		$data	.= '$dbpass			= \'' . str_replace("'", "\'", $pass) . "'; // database password \n";
 		$data	.= '$dbname			= \'' . str_replace("'", "\'", $nm) . "'; // database name \n";
 		$data	.= '$dbprefix		= \'' . str_replace("'", "\'", $prf) . "'; // if you use perfix for tables , fill it \n";
-		//$data	.= '$adminpath		= \'admin.php\';// if you renamed your acp file , please fill the new name here \n';
-		//$data	.= "\n\n\n";
-		//$data	.= "//for integration with script  must change user systen from admin cp  \n";
-		//$data	.= '$script_path	= \'' . str_replace("'", "\'", $fpath) . "'; // path of script (./forums)  \n";
-		//$data	.= "\n\n";
-		//$data	.= '?'.'>';
 	
 		$written = false;
 		if (is_writable($_path))
@@ -188,26 +186,7 @@ function inst_get_config($name)
 	}
 }
 
-/**
-* Update only plugins you have ! 
-*/
-function updating_exists_plugin($plugin_name)
-{
-	global $dbprefix, $SQL;
 
-	$query = array(
-					'SELECT'	=> 'plg_id',
-					'FROM'		=> "{$dbprefix}plugins",
-					'WHERE'		=> 'plg_name="' . $plugin_name . '"' 
-					);
-
-	$res = $SQL->build($query);
-	if($SQL->num_rows($res))
-	{
-		return true;
-	}
-	return false;
-}
 
 
 /**

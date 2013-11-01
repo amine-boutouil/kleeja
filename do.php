@@ -9,7 +9,7 @@
 */
 
 
-#place
+#where are we?
 define('IN_INDEX' , true);
 define('IN_DOWNLOAD', true);
 

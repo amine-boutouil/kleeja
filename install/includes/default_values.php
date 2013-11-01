@@ -8,7 +8,10 @@
 *
 */
 
-// not for directly open
+
+/**
+* @ignore
+*/
 if (!defined('IN_COMMON'))
 {
 	exit();
@@ -29,7 +32,7 @@ $config_values[] = array('sitename', $config_sitename, '<input type=\"text\" id=
 $config_values[] = array('siteurl', $config_siteurl, '<input type=\"text\" id=\"siteurl\" name=\"siteurl\" value=\"{con.siteurl}\" size=\"50\" style=\"direction:ltr\" />', 2, 'general', 0, 0);
 $config_values[] = array('sitemail', $config_sitemail, '<input type=\"text\" id=\"sitemail\" name=\"sitemail\" value=\"{con.sitemail}\" size=\"25\" style=\"direction:ltr\" />', 3, 'general', 0, 0);
 $config_values[] = array('sitemail2', $config_sitemail, '<input type=\"text\" id=\"sitemail2\" name=\"sitemail2\" value=\"{con.sitemail2}\" size=\"25\" style=\"direction:ltr\" />', '4', 'general', 0, 0);
-$config_values[] = array('del_f_day', '0', '<input type=\"text\" id=\"del_f_day\" name=\"del_f_day\" value=\"{con.del_f_day}\" size=\"6\" style=\"text-align:center\" />{lang.DELF_CAUTION}', 5, 'advanced', 0, 0);
+//$config_values[] = array('del_f_day', '0', '<input type=\"text\" id=\"del_f_day\" name=\"del_f_day\" value=\"{con.del_f_day}\" size=\"6\" style=\"text-align:center\" />{lang.DELF_CAUTION}', 5, 'advanced', 0, 0);
 $config_values[] = array('language', getlang(), '<select name=\"language\" id=\"language\">\r\n {lngfiles}\r\n </select>', 6, 'groups', 0, 0);
 $config_values[] = array('time_zone', $config_time_zone, '<select name=\"time_zone\" id=\"time_zone\">\r\n {time_zones}\r\n </select>', 10, 'general', 0, 0);
 $config_values[] = array('siteclose', '0', '<label>{lang.YES}<input type=\"radio\" id=\"siteclose\" name=\"siteclose\" value=\"1\"  <IF NAME=\"con.siteclose==1\"> checked=\"checked\"</IF> /></label><label>{lang.NO}<input type=\"radio\" id=\"siteclose\" name=\"siteclose\" value=\"0\"  <IF NAME=\"con.siteclose==0\"> checked=\"checked\"</IF> /></label>', 7, 'general', 0, 0);

@@ -8,20 +8,19 @@
 *
 */
 
-// not for directly open
+
+/**
+* @ignore
+*/
 if (!defined('IN_INDEX'))
 {
 	exit();
 }
 
 //we are in the common file 
-define ('IN_COMMON', true);
+define('IN_COMMON', true);
 
-//
-//Development stage;
-//if this enabled, KLeeja will treats you as a developer, things
-//disabled for users, will be enabled for you
-//
+//Development stage: KLeeja will treats you as a developer
 define('DEV_STAGE', true);
 
 // Report all errors, except notices
@@ -30,35 +29,14 @@ defined('DEV_STAGE') ? @error_reporting( E_ALL ) : @error_reporting(E_ALL ^ E_NO
 //filename of config.php
 define('KLEEJA_CONFIG_FILE', 'config.php');
 
-
 if(@extension_loaded('apc'))
 {
 	define('APC_CACHE', true);
 }
 
-//if sessions is started before, let's destroy it!
-if(isset($_SESSION))
-{
-	@session_unset(); // fix bug with php4
-	@session_destroy();
-}
 
 // start session
 $s_time = 86400 * 2; // 2 : two days 
-if(defined('IN_ADMIN'))
-{
-	//session_set_cookie_params($admintime);
-	if (function_exists('session_set_cookie_params'))
-	{
-    	session_set_cookie_params($adm_time, $adm_path);
-  	} 
-	elseif (function_exists('ini_set'))
-	{
-    	ini_set('session.cookie_lifetime', $adm_time);
-    	ini_set('session.cookie_path', $adm_path);
-  	}
-}
-
 if(function_exists('ini_set'))
 {
 	if (version_compare(PHP_VERSION, '5.0.0', 'ge') && substr(PHP_OS, 0 ,3) != 'WIN')
@@ -67,88 +45,24 @@ if(function_exists('ini_set'))
 		ini_set('session.hash_bits_per_character', 6);
 	}
 	ini_set('session.use_only_cookies', true);
-	ini_set('session.auto_start', false);
+	ini_set('session.cookie_httponly', true);
 	ini_set('session.use_trans_sid', false);
 	ini_set('session.cookie_lifetime', $s_time);
 	ini_set('session.gc_maxlifetime', $s_time);
 	//& is not valid xhtml, so we replaced with &amp;
 	ini_set('arg_separator.output', '&amp;');
-	//
-	//this will help people with some problem with their sessions path
-	//
-	//session_save_path('./cache/');
+	
+	#session of upload progress
+	ini_set('session.upload_progress.enabled', true);
 }
+
+@session_name('sid');
+@session_start();
+
 
 /**
 * functions for start
 */
-function kleeja_show_error($errno, $errstr = '', $errfile = '', $errline = '')
-{
-	switch ($errno)
-	{
-		case E_NOTICE: case E_WARNING: case E_USER_WARNING: case E_USER_NOTICE: case E_STRICT: break;
-		default:
-			header('HTTP/1.1 503 Service Temporarily Unavailable');
-			echo '<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">' . "\n<head>\n";
-			echo '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />' . "\n";
-			echo '<title>Kleeja Error</title>' . "\n" . '<style type="text/css">' . "\n\t";
-			echo '.error {color: #333;background:#ffebe8;float:left;width:73%;text-align:left;margin-top:10px;border: 1px solid #dd3c10; padding: 10px;font-family:tahoma,arial;font-size: 12px;}' . "\n";
-			echo "</style>\n</head>\n<body>\n\t" . '<div class="error">' . "\n\n\t\t<h2>Kleeja error  : </h2><br />" . "\n";
-			echo "\n\t\t<strong> [ " . $errno . ':' . basename($errfile) . ':' . $errline . ' ] </strong><br /><br />' . "\n\t\t" . $errstr . "\n\t";
-			echo "\n\t\t" . '<br /><br /><small>Visit <a href="http://www.kleeja.com/" title="kleeja">Kleeja</a> Website for more details.</small>' . "\n\t";
-			echo "</div>\n</body>\n</html>";
-			global $SQL;
-			if(isset($SQL))
-			{
-				@$SQL->close();
-			}
-			exit;
-		break;
-    }
-}
-set_error_handler('kleeja_show_error');
-
-function stripslashes_our($value)
-{
-	return is_array($value) ? array_map('stripslashes_our', $value) : stripslashes($value);  
-}
-function kleeja_clean_string($value)
-{
-	if(is_array($value))
-	{
-		return array_map('kleeja_clean_string', $value);
-	}
-	$value = str_replace(array("\r\n", "\r", "\0"), array("\n", "\n", ''), $value);
-	return $value;
-}
-//unsets all global variables set from a superglobal array
-function unregister_globals() 
-{
-	$register_globals = @ini_get('register_globals');
-	if ($register_globals === "" || $register_globals === "0" || strtolower($register_globals) === "off")
-	{
-		return;
-	}
-
-	if (isset($_REQUEST['GLOBALS']) || isset($_FILES['GLOBALS']))
-	{
-		exit('Kleeja is queen of candies ...');
-	}
-
-	$input = array_merge($_GET, $_POST, $_COOKIE, $_SERVER, $_ENV, $_FILES, isset($_SESSION) && is_array($_SESSION) ? $_SESSION : array());
-	$no_unset = array('GLOBALS', '_GET', '_POST', '_COOKIE', '_REQUEST', '_SERVER', '_ENV', '_FILES');
-	
-	foreach ($input as $k => $v)
-	{
-		if (!in_array($k, $no_unset) && isset($GLOBALS[$k]))
-		{
-			unset($GLOBALS[$k]);
-			unset($GLOBALS[$k]);//make sure
-		}
-	}
-
-	unset($input);
-}
 //time of start and end and wutever
 function get_microtime()
 {
@@ -164,37 +78,9 @@ function is_bot($bots = array('googlebot', 'bing' ,'msnbot'))
 	return false;
 }
 
-$IS_BOT = is_bot();
+define('IS_BOT', is_bot());
+
 $starttm = get_microtime();
-
-//Kill globals varibles
-unregister_globals();
-
-if(!is_bot())
-{
-	@session_name('sid');
-	@session_start();
-}
-
-//try close it
-if (@get_magic_quotes_runtime())
-{
-	@set_magic_quotes_runtime(0);
-}
-
-if(@get_magic_quotes_gpc())
-{
-	$_GET	= stripslashes_our($_GET); 
-	$_POST	= stripslashes_our($_POST);
-	$_COOKIE	= stripslashes_our($_COOKIE); 
-	$_REQUEST	= stripslashes_our($_REQUEST);//we use this sometime
-}
-
-//clean string and remove bad chars
-$_GET		= kleeja_clean_string($_GET);
-$_POST		= kleeja_clean_string($_POST);
-$_REQUEST	= kleeja_clean_string($_REQUEST);
-$_COOKIE	= kleeja_clean_string($_COOKIE);
 
 
 //path 

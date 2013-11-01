@@ -19,8 +19,21 @@ define ('IN_ADMIN' , true);
 $adm_path = preg_replace('/.*?[\\\\|\/]([0-9a-z-_.]+)[\\\\|\/]([0-9a-z-_.]+)[\\\\|\/]' . preg_quote(basename(__file__), '/') . '/i', '/\\1/\\2/', __file__);
 $adm_time = 18000;
 
+
+//session_set_cookie_params($admintime);
+if (function_exists('session_set_cookie_params'))
+{
+   	session_set_cookie_params($adm_time, $adm_path);
+} 
+elseif (function_exists('ini_set'))
+{
+   ini_set('session.cookie_lifetime', $adm_time);
+   ini_set('session.cookie_path', $adm_path);
+}
+
+
 //include imprtant file ..
-require_once (PATH . 'includes/common.php');
+require PATH . 'includes/common.php';
 
 //go to ..
 $go_to		= isset($_GET['cp']) ? htmlspecialchars($_GET['cp']) : 'start';
@@ -132,7 +145,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && defined('STOP_CSRF'))
 }
 
 
-$gt = kleeja_filesize(PATH . 'includes/st' . 'yl' .'e.php');
+$gt = kleeja_filesize(PATH . 'includes/classes/st' . 'yl' .'e.php');
 if(!empty($gt) && $gt != 10235)
 {
 	exit(kleeja_base64_decode('V2hlcmUgVGhlIENvcHlyaWdodHMgOikgLi4u'));
@@ -322,7 +335,7 @@ if(isset($go_menu))
 {
 	foreach($go_menu as $m=>$d)
 	{
-		$go_menu_html .= '<li class="' . ($d['current']?'active':'') .'" id="c_' . $d['goto'] . '"><a href="' . $d['link'] . '" onclick="' . ($d['confirm'] ? 'javascript:return confirm_from();' : '') . '">' . $d['name'] . '</a></li>';
+		$go_menu_html .= '<li class="' . ($d['current']?'active':'') .'" id="c_' . $d['goto'] . '"><a href="' . $d['link'] . '" onclick="' . (isset($d['confirm']) && $d['confirm'] ? 'javascript:return confirm_from();' : '') . '">' . $d['name'] . '</a></li>';
 	}
 }
 

@@ -23,16 +23,58 @@ if (!defined('IN_COMMON'))
 }
 
 
-include_once (PATH . 'includes/json.php');	
-
 //  json_encode php 4
 if(!function_exists('json_encode')) 
 {
-    function json_encode($data) 
-    {
-        $json = new Services_JSON();
-        return $json->encode($data);
-    }
+	function json_encode($val)
+	{
+	    if (is_string($val))
+		{
+			return '"'.addslashes($val).'"';
+		}
+	    elseif (is_numeric($val))
+		{
+			return $val;
+		}
+	    elseif ($val === null)
+		{
+			return 'null';
+		}
+	    elseif ($val === true)
+		{
+			return 'true';
+		}
+	    elseif ($val === false)
+		{
+			return 'false';
+		}
+
+	    $assoc = false;
+	    $i = 0;
+	    foreach ($val as $k=>$v)
+		{
+	        if ($k !== $i++)
+			{
+	            $assoc = true;
+	            break;
+	        }
+	    }
+
+	    $res = array();
+	    foreach ($val as $k=>$v)
+		{
+	        $v = json_encode($v);
+	        if ($assoc)
+			{
+	            $k = '"'.addslashes($k).'"';
+	            $v = $k.':'.$v;
+	        }
+	        $res[] = $v;
+	    }
+
+	    $res = implode(',', $res);
+	    return $assoc ? '{' . $res . '}' : '[' . $res . ']';
+	}
 }
  
 //  json_decode php 4 
@@ -40,9 +82,8 @@ if(!function_exists('json_decode'))
 { 
 	function json_decode($data, $output_mode = false) 
 	{ 
-		$param = $output_mode ? 16 : null;
-		$json = new Services_JSON($param); 
-		return( $json->decode($data) ); 
+		#not yet
+		return false;
 	} 
 }
 

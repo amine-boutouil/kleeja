@@ -281,6 +281,9 @@ class usrcp
 			$this->logout_cp();
 		}
 
+		session_unset();
+		session_destroy();
+
 		//is ther any cookies	
 		$this->kleeja_set_cookie('ulogu', '', time() - 31536000);//31536000 = year
 

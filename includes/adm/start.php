@@ -33,7 +33,6 @@ $lst_reg			= empty($stat_last_user) ? $lang['UNKNOWN'] : $stat_last_user;
 $files_number 		= $stat_files + $stat_imgs;
 $files_sizes 		= Customfile_size($stat_sizes);
 $users_number 		= $stat_users;
-$last_del_fles 		= (int) $config['del_f_day'] <= 0 ? $lang['CLOSED_FEATURE'] : kleeja_date($stat_last_f_del);
 $php_version 		= isset($NO_PHPINFO) || !function_exists('phpinfo') ? phpversion() : '<a href="' . basename(ADMIN_PATH) . '?cp=php_info" title="php_info" onclick="javascript:get_kleeja_link(\'' . basename(ADMIN_PATH) . '?cp=php_info\', \'#content\'); return false;">php ' . phpversion() . '</a>';
 $mysql_version 		= 'MYSQL ' . $SQL->mysql_version();
 #info from php ini

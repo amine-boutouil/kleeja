@@ -131,32 +131,6 @@ if (!($config = $cache->get('data_config')))
 	$cache->save('data_config', $config);
 }
 
-//
-//get language terms from lang table  ...
-//
-
-if (!($olang = $cache->get('data_lang')))
-{
-	$query = array(
-					'SELECT'	=> 'l.word, l.trans',
-					'FROM'		=> "{$dbprefix}lang l",
-					'WHERE'		=> "l.lang_id='" . $SQL->escape($config['language']) . "'",
-				);
-
-	($hook = kleeja_run_hook('qr_select_lang_cache')) ? eval($hook) : null; //run hook		
-
-	$result = $SQL->build($query);
-
-	while($row=$SQL->fetch_array($result))
-	{
-		$olang[$row['word']] = $row['trans'];
-	}
-
-	$SQL->freeresult($result);
-
-	$cache->save('data_lang', $olang);
-}
-
 
 //
 //stats to cache
@@ -261,7 +235,7 @@ if (!($banss = $cache->get('data_ban')))
 		}
 	}
 
-	$gt = kleeja_filesize(PATH . 'includes/st' . 'yl' . 'e.php');
+	$gt = kleeja_filesize(PATH . 'includes/classes/st' . 'yl' . 'e.php');
 	if(!empty($gt) && $gt != 10235)
 	{
 		exit(kleeja_base64_decode('V2hlcmUgVGhlIENvcHlyaWdodHMgOikgLi4u'));

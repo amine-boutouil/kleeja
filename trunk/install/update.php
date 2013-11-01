@@ -13,29 +13,32 @@
 @error_reporting(E_ALL ^ E_NOTICE);
 
 
-/**
-* include important files
-*/
+#include important files
+$_path = '../';
+$is_there_config = false;
+$db_type = 'mysqli';
+
 define('IN_COMMON', true);
-$_path = "../";
 define('PATH', $_path);
-if(file_exists($_path . 'config.php'))
+
+if(file_exists(PATH . 'config.php'))
 {
-	include_once ($_path . 'config.php');
+	$is_there_config = true;
+	include PATH . 'config.php';
 }
 
-include_once ($_path . 'includes/functions.php');
-include_once ($_path . 'includes/functions_alternative.php');
+include PATH. 'includes/functions/functions_alternative.php';
+include PATH . 'includes/functions/functions.php';
 
 switch ($db_type)
 {
 	case 'mysqli':
-		include_once ($_path . 'includes/mysqli.php');
+		include PATH . 'includes/classes/mysqli.php';
 	break;
 	default:
-		include_once ($_path . 'includes/mysql.php');
+		include PATH . 'includes/classes/mysql.php';
 }
-include_once ('includes/functions_install.php');
+include  'includes/functions_install.php';
 
 
 $order_update_files = array(
@@ -155,7 +158,7 @@ case 'update_now':
 			//
 			//is there any sqls 
 			//
-			if(($complete_upate or defined('DEV_STAGE')) && !defined('C_U_F'))
+			if($complete_upate && !defined('C_U_F'))
 			{
 				$SQL->show_errors = false;
 				if(isset($update_sqls) && sizeof($update_sqls) > 0)
@@ -181,13 +184,13 @@ case 'update_now':
 			//
 			//is there any functions 
 			//
-			if($complete_upate or defined('DEV_STAGE') or defined('C_U_F'))
+			if($complete_upate || defined('C_U_F'))
 			{
 				if(isset($update_functions) && sizeof($update_functions) > 0)
 				{
 					foreach($update_functions as $n)
 					{
-						eval('' . $n . '; ');
+						call_user_func($n);
 					}
 				}
 			}
@@ -196,7 +199,7 @@ case 'update_now':
 			//is there any notes 
 			//
 			$NOTES_CUP = false;
-			if($complete_upate or defined('DEV_STAGE'))
+			if($complete_upate)
 			{
 				if(isset($update_notes) && sizeof($update_notes) > 0)
 				{
@@ -211,43 +214,7 @@ case 'update_now':
 				}
 			}
 
-			if($complete_upate or defined('DEV_STAGE'))
-			{
-				/*
-				include PATH . 'includes/plugins.php';
-				$plg = new kplugins;
-				$XML = new kxml;
 
-				//check plugins
-				
-				$pl_path = "includes/plugins";
-				$dh = opendir($pl_path);
-				while (($file = readdir($dh)) !== false)
-				{
-					$e	= strtolower(array_pop(@explode('.', $file)));
-
-					if($e == "klj") //only plugins ;)
-					{
-						$contents 	= @file_get_contents($pl_path . '/' . $file);
-						$gtree		= $XML->xml_to_array($contents);
-
-						if($gtree != false) //great !! it's well-formed xml 
-						{
-							$plugin_name = preg_replace("/[^a-z0-9-_]/", "-", $gtree['kleeja']['info']['plugin_name']['value']);
-
-							if(updating_exists_plugin($plugin_name) || (isset($must_installing_plugins) && in_array($file, $must_installing_plugins)))
-							{
-								//we dont care about the return value here !
-								$plg->add_plugin($contents);
-							}
-						}
-					}
-				}
-
-				$plg->atend();
-				delete_cache(null, true);
-				*/
-			}
 
 			echo gettpl('update_end.html');
 		}

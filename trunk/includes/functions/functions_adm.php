@@ -9,17 +9,25 @@
 */
 
 
-//no for directly open
+/**
+ * @ignore
+ */
 if (!defined('IN_COMMON'))
 {
 	exit();
 }
 
 /**
-* Print cp error function handler
-*
-* For admin
-*/
+ * Print admin area errors
+ *
+ * @param string $msg The message of error
+ * @param bool $navigation [optional] Show the side mneu or not
+ * @param string $title [optional] The title of the error
+ * @param bool $exit [optional] halt after showing the error
+ * @param bool|string $redirect [optional] if link given it will redirected to it after $rs seconds
+ * @param int $rs [optional] if $redirected is given and not false, this will be the time in seconds
+ * @param string $style [optional] this is just here to use it inside kleeja_admin_info to use admin_info
+ */
 function kleeja_admin_err($msg, $navigation = true, $title='', $exit = true, $redirect = false, $rs = 5, $style = 'admin_err')
 {
 	global $text, $tpl, $SHOW_LIST, $adm_extensions, $adm_extensions_menu;
@@ -56,10 +64,15 @@ function kleeja_admin_err($msg, $navigation = true, $title='', $exit = true, $re
 
 
 /**
-* Print inforamtion message on admin panel
-*
-* @adm
-*/
+ * Print admin area inforamtion messages
+ *
+ * @param string $msg The message of information
+ * @param bool $navigation [optional] Show the side mneu or not
+ * @param string $title [optional] The title of the message
+ * @param bool $exit [optional] halt after showing the message
+ * @param bool|string $redirect [optional] if link given it will redirected to it after $rs seconds
+ * @param int $rs [optional] if $redirected is given and not false, this will be the time in seconds
+ */
 function kleeja_admin_info($msg, $navigation=true, $title='', $exit=true, $redirect = false, $rs = 2)
 {
 	($hook = kleeja_run_hook('kleeja_admin_info_func')) ? eval($hook) : null; //run hook
@@ -68,9 +81,10 @@ function kleeja_admin_info($msg, $navigation=true, $title='', $exit=true, $redir
 }
 
 /**
-* generate a filter..
-* @adm
-*/
+ * generate a filter, filiter is a value stored in the database to use it later
+ * 
+ *
+ */
 function insert_filter($type, $value, $time = false, $user = false, $status = '', $uid = false)
 {
 	global $SQL, $dbprefix, $userinfo;
@@ -88,8 +102,6 @@ function insert_filter($type, $value, $time = false, $user = false, $status = ''
 	$SQL->build($insert_query);
 
 	return $SQL->insert_id();
-
-	return false;
 }
 
 
@@ -102,11 +114,10 @@ function update_filter($item, $value)
 {
 	global $SQL, $dbprefix;
 
-	$value = ($escape) ? $SQL->escape($value) : $value;
 
 	$update_query	= array(
 							'UPDATE'	=> "{$dbprefix}filters",
-							'SET'		=> "filter_value='" . ($escape ? $SQL->escape($value) : $value) . "'",
+							'SET'		=> "filter_value='" . $SQL->escape($value) . "'",
 							'WHERE'		=> strval(intval($item)) == strval($item) ? 'filter_id=' . intval($item) : "filter_uid='" . $SQL->escape($item) . "'"
 					);
 

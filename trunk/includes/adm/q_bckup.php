@@ -64,9 +64,6 @@ $tables_sho[]  	= array('name' =>"{$dbprefix}groups_acl",	'size' =>$size["{$dbpr
 $tables_sho[]  	= array('name' =>"{$dbprefix}groups_data",	'size' =>$size["{$dbprefix}groups_data"]);
 $tables_sho[]  	= array('name' =>"{$dbprefix}groups_exts",	'size' =>$size["{$dbprefix}groups_exts"]);
 $tables_sho[]  	= array('name' =>"{$dbprefix}reports",	'size' =>$size["{$dbprefix}reports"]);
-$tables_sho[]  	= array('name' =>"{$dbprefix}hooks",	'size' =>$size["{$dbprefix}hooks"]);
-$tables_sho[]  	= array('name' =>"{$dbprefix}plugins",	'size' =>$size["{$dbprefix}plugins"]);
-$tables_sho[]  	= array('name' =>"{$dbprefix}lang",	'size' =>$size["{$dbprefix}lang"]);
 
 
 //after submit

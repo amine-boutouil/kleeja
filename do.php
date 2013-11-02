@@ -24,7 +24,7 @@ include PATH . 'includes/functions/functions_down.php';
 //
 //page of wait downloading files
 //
-if (isset($_GET['id']) || isset($_GET['filename']))
+if(ig('id') || ig('filename'))
 {
 	($hook = kleeja_run_hook('begin_download_id_filename')) ? eval($hook) : null; //run hook
 
@@ -45,21 +45,14 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 								);
 	}
 
-	if (isset($_GET['filename']))
+	if (ig('filename'))
 	{
-		$filename_l  = (string) $SQL->escape($_GET['filename']);
-		if(isset($_GET['x']))
-		{ 
-			$query['WHERE']	= "f.name='" . $filename_l . '.' . $SQL->escape($_GET['x']) . "'";
-		}
-		else 
-		{
-			$query['WHERE']	= "f.name='" . $filename_l . "'";
-		}
+		$filename_l  = g('filename');
+		$query['WHERE']	= "f.name='" . $SQL->escape($filename_l . (ig('x') ? '.' . g('x') : '')) . "'";
 	}
 	else
 	{
-		$id_l = intval($_GET['id']);
+		$id_l = g('id' ,'int');
 		$query['WHERE']	= "f.id=" . $id_l;
 	}
 
@@ -70,47 +63,32 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 	{
 		while($row=$SQL->fetch_array($result))
 		{
-			@extract ($row);
+			@extract($row);
 		}
 
 		$SQL->freeresult($result);
 
-		// some vars
+		#some vars
 		$fname	 	= $name;
 		$fname2 	= str_replace('.', '-', htmlspecialchars($name));
 		$name 		= $real_filename != '' ? str_replace('.' . $type, '', htmlspecialchars($real_filename)) : $name;
 		$name		= (strlen($name) > 70) ? substr($name, 0, 70) . '...' : $name;
 		$fusername	= $config['user_system'] == 1 && $fuserid > -1 ? $fusername : false;
 		$userfolder	= $config['siteurl'] . ($config['mod_writer'] ? 'fileuser-' . $fuserid . '.html' : 'ucp.php?go=fileuser&amp;id=' .  $fuserid);
+		$url_file	= ($config['mod_writer']) ? $config['siteurl'] . "down" . (ig('filename') ? 'f' : '') . "-" . $fname2 . ".html" : $config['siteurl'] . "do.php?down" . (ig('filename') ? 'f' : '') . "=" . $fname;
 
-		if (isset($_GET['filename']))
-		{
-			$url_file	= ($config['mod_writer']) ? $config['siteurl'] . "downf-" . $fname2 . ".html" : $config['siteurl'] . "do.php?downf=" . $fname;
-		}
-		else
-		{
-			$url_file	= ($config['mod_writer']) ? $config['siteurl'] . "down-" . $id . ".html" : $config['siteurl'] . "do.php?down=" . $id;
-		}
-
+		#live extenstions, those that user doesn't need to wait for
 		if(!empty($config['livexts']))
 		{
 			$livexts = explode(',',$config['livexts']);
 			if(in_array($type,$livexts))
 			{
-				if (isset($_GET['filename']))
-				{
-					$url_filex	= $config['mod_writer'] ? $config['siteurl'] . "downexf-" . $fname2 . ".html" : $config['siteurl'] . "do.php?downexf=" . $fname;
-				}
-				else
-				{
-					$url_filex	= $config['mod_writer'] ? $config['siteurl'] . "downex-" . $id . ".html" : $config['siteurl'] . "do.php?downex=" . $id;
-				}
-						
+				$url_filex	= $config['mod_writer'] ? $config['siteurl'] . "downex" . (ig('filename') ? 'f' : '') . "-" . $fname2 . ".html" : $config['siteurl'] . "do.php?downex" . (ig('filename') ? 'f' : '') . "=" . $fname;		
 				redirect($url_filex, false);
 			}
 		}
 
-		$REPORT		= ($config['mod_writer']) ?  $config['siteurl'] . "report-" . $id . ".html" :  $config['siteurl'] . "go.php?go=report&amp;id=" . $id;
+		$REPORT		= $config['mod_writer'] ?  $config['siteurl'] . "report-" . $id . ".html" :  $config['siteurl'] . "go.php?go=report&amp;id=" . $id;
 		$seconds_w	= $config['sec_down'];
 		$time		= kleeja_date($time);
 		$size		= Customfile_size($size);
@@ -129,7 +107,7 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 	($hook = kleeja_run_hook('b4_showsty_downlaod_id_filename')) ? eval($hook) : null; //run hook
 
 	//add http reffer to session to prevent errors with some browsers ! 
-	if (isset($_GET['filename']))
+	if (ig('filename'))
 	{
 		$_SESSION['HTTP_REFERER'] = $config['siteurl'] . ($config['mod_writer'] ? "downloadf" . $fname . ".html" : "do.php?filename=" . $fname);
 	}
@@ -161,19 +139,17 @@ if (isset($_GET['id']) || isset($_GET['filename']))
 #
 # x : used only for html links, where x = extension, downf is filename without extension
 
-else if (isset($_GET['down']) || isset($_GET['downf']) ||
-		isset($_GET['img']) || isset($_GET['imgf']) ||  
-		isset($_GET['thmb']) || isset($_GET['thmbf']) || 
-		isset($_GET['downex']) || isset($_GET['downexf']))
+else if (ig('down') || ig('downf') ||
+		ig('img') || ig('imgf') ||  
+		ig('thmb') || ig('thmbf') || 
+		ig('downex') || ig('downexf'))
 {
 	($hook = kleeja_run_hook('begin_down_go_page')) ? eval($hook) : null; //run hook	
 
 
-	kleeja_log('downloading file start -  (' . implode(', ', $_GET) . ') -> ' . $_SERVER['HTTP_REFERER']);
 
-	//must know from where he came ! and stop him if not image
-	//todo: if it's download manger, let's pass this
-	if(isset($_GET['down']) || isset($_GET['downf']))
+	#must know from where he came ! and stop him if not image
+	if(ig('down') || ig('downf'))
 	{
 		if(!isset($_SERVER['HTTP_REFERER']) || empty($_SERVER['HTTP_REFERER']))
 		{
@@ -192,15 +168,15 @@ else if (isset($_GET['down']) || isset($_GET['downf']) ||
 			}
 		}
 
-		//if not from our site and the waiting page
-		$isset_down_h = isset($_GET['downf']) && isset($_GET['x']) ? 'downloadf-' . htmlspecialchars($_GET['downf']) . '-' . htmlspecialchars($_GET['x']) . '.html' : (isset($_GET['down']) ? 'download' . htmlspecialchars($_GET['down']) . '.html' : '');
+		#if not from our site and the waiting page or resuming
+		$isset_down_h = ig('downf') && ig('x') ? 'downloadf-' . g('downf') . '-' . g('x') . '.html' : (ig('down') ? 'download' . g('down') . '.html' : '');
 		$not_reffer = true;
 		if(strpos($_SERVER['HTTP_REFERER'], $isset_down_h) !== false)
 		{
 			$not_reffer = false;
 		}
 
-		$isset_down = isset($_GET['downf']) ? 'do.php?filename=' . htmlspecialchars($_GET['downf']) : (isset($_GET['down']) ? 'do.php?id=' .htmlspecialchars($_GET['down']) : '');
+		$isset_down = ig('downf') ? 'do.php?filename=' . g('downf') : (ig('down') ? 'do.php?id=' . g('down') : '');
 		if(strpos($_SERVER['HTTP_REFERER'], $isset_down) !== false)
 		{
 			$not_reffer = false;
@@ -211,46 +187,42 @@ else if (isset($_GET['down']) || isset($_GET['downf']) ||
 			$not_reffer = false;
 		}
 
+		if (isset($_SERVER["HTTP_RANGE"]))
+		{
+			$not_reffer = false;
+		}
+
 		if($not_reffer)
 		{
-			if(isset($_GET['downf']))
+			if(ig('downf'))
 			{
-				$go_to = $config['siteurl'] . ($config['mod_writer'] && isset($_GET['x']) ? "downloadf-" . htmlspecialchars($_GET['downf']) . '-' . htmlspecialchars($_GET['x']) . ".html" : "do.php?filename=" . htmlspecialchars($_GET['downf']));
+				$go_to = $config['siteurl'] . ($config['mod_writer'] && ig('x') ? 'downloadf-' . g('downf') . '-' . g('x') . '.html' : 'do.php?filename=' . g('downf'));
 			}
 			else
 			{
-				$go_to = $config['siteurl'] . ($config['mod_writer'] ? 'download' . htmlspecialchars($_GET['down']) . '.html' : 'do.php?id=' . htmlspecialchars($_GET['down']));
+				$go_to = $config['siteurl'] . ($config['mod_writer'] ? 'download' . g('down') . '.html' : 'do.php?id=' . g('down','int'));
 			}
 
 			redirect($go_to);
-			$SQL->close();
 			exit;
 		}
 	}
 
-	//download by id or filename
+	#download by id or filename
 	//is the comming variable is filename(filename123.gif) or id (123) ?
-	$is_id_filename = (isset($_GET['downf']) || isset($_GET['imgf']) || isset($_GET['thmbf']) || isset($_GET['downexf'])) ? true : false;
+	$is_id_filename = (ig('downf') || ig('imgf') || ig('thmbf') || ig('downexf')) ? true : false;
 
 	if($is_id_filename)
 	{
-		$var = isset($_GET['downf']) ? 'downf' : (isset($_GET['imgf']) ? 'imgf' : (isset($_GET['thmbf']) ? 'thmbf' : (isset($_GET['downexf']) ? 'downexf' : false)));
+		$var = ig('downf') ? 'downf' : (ig('imgf') ? 'imgf' : (ig('thmbf') ? 'thmbf' : (ig('downexf') ? 'downexf' : false)));
 
 		#x, represent the extension, came from html links
-		if(isset($_GET['x']) && $var)
-		{
-			$filename = $SQL->escape($_GET[$var]) . '.' . $SQL->escape($_GET['x']);
-		}
-		else
-		{
-			$filename = $SQL->escape($_GET[$var]);
-		}
+		$filename = $SQL->escape(g($var) . (ig('x') && $var ? '.' . g('x') : ''));
 	}
 	else
 	{
-		$id = isset($_GET['down']) ? intval($_GET['down']) : (isset($_GET['img']) ? intval($_GET['img']) : (isset($_GET['thmb']) ? intval($_GET['thmb']) : (isset($_GET['downex']) ? intval($_GET['downex']) : null)));
+		$id = ig('down') ? g('down', 'int') : (ig('img') ? g('img', 'int') : (ig('thmb') ? g('thmb', 'int') : (ig('downex') ? g('downex', 'int') : null)));
 	}
-
 
 
 	//is internet explore 8 ?
@@ -258,13 +230,14 @@ else if (isset($_GET['down']) || isset($_GET['downf']) ||
 	//is internet explore 6 ?
 	$is_ie6 = is_browser('ie6');
 
-	$livexts = explode(",", $config['livexts']);
 
-	//get info file
+	$livexts = explode(',', $config['livexts']);
+
+	#get info file
 	$query = array('SELECT'	=> 'f.id, f.name, f.real_filename, f.folder, f.type, f.size, f.time',
 					'FROM'		=> "{$dbprefix}files f",
-					'WHERE'		=> $is_id_filename ? "f.name='" . $filename . "'" .  (isset($_GET['downexf']) ? " AND f.type IN ('" . implode("', '", $livexts) . "')" : '') :
-													'f.id=' . $id  . (isset($_GET['downex']) ? " AND f.type IN ('" . implode("', '", $livexts) . "')" : ''),
+					'WHERE'		=> $is_id_filename ? "f.name='" . $filename . "'" .  (ig('downexf') ? " AND f.type IN ('" . implode("', '", $livexts) . "')" : '') :
+									'f.id=' . $id  . (ig('downex') ? " AND f.type IN ('" . implode("', '", $livexts) . "')" : ''),
 					);
 
 	($hook = kleeja_run_hook('qr_down_go_page_filename')) ? eval($hook) : null; //run hook
@@ -276,21 +249,21 @@ else if (isset($_GET['down']) || isset($_GET['downf']) ||
 
 	if ($SQL->num_rows($result))
 	{
-		while($row=$SQL->fetch_array($result))
-		{
-			$ii	= $row['id'];
-			$n	= $row['name'];
-			$rn	= $row['real_filename'];
-			$t	= strtolower(trim($row['type']));
-			$f	= $row['folder'];
-			$ftime	= $row['time'];
-			$d_size	= $row['size'];
+		$row = $SQL->fetch($result);
+		
+		$ii	= $row['id'];
+		$n	= $row['name'];
+		$rn	= $row['real_filename'];
+		$t	= strtolower(trim($row['type']));
+		$f	= $row['folder'];
+		$ftime	= $row['time'];
+		$d_size	= $row['size'];
 
-			//img or not
-			$is_image = in_array($t, array('gif', 'jpg', 'jpeg', 'bmp', 'png')) ? true : false; 
-			//live url
-			$is_live = in_array($t, $livexts) ? true : false; 
-		}
+		#img or not
+		$is_image = in_array($t, array('gif', 'jpg', 'jpeg', 'bmp', 'png')) ? true : false; 
+		#live url
+		$is_live = in_array($t, $livexts) ? true : false; 
+		
 
 		$SQL->freeresult($result);
 
@@ -325,8 +298,8 @@ else if (isset($_GET['down']) || isset($_GET['downf']) ||
 	}
 	else
 	{
-		//not exists img or thumb
-		if(isset($_GET['img']) || isset($_GET['thmb']) || isset($_GET['thmbf']) || isset($_GET['imgf']))
+		#not exists img or thumb
+		if(ig('img') || ig('thmb') || ig('thmbf') || ig('imgf'))
 		{
 			($hook = kleeja_run_hook('not_exists_qr_down_img')) ? eval($hook) : null; //run hook
 
@@ -335,32 +308,26 @@ else if (isset($_GET['down']) || isset($_GET['downf']) ||
 
 			//set image conditon on
 			$is_image = true;
-
-			//unset some var
-			if(isset($_GET['thmb']) || isset($_GET['thmbf']))
-			{
-				unset($_GET['thmb'], $_GET['thmbf']);
-			}
 		}
 		else
 		{
 			
-			//not exists file
+			#not exists file
 			($hook = kleeja_run_hook('not_exists_qr_down_file')) ? eval($hook) : null; //run hook
 			kleeja_err($lang['FILE_NO_FOUNDED']);
 		}
 	}
 
-	//prevent bug, where you can download file, not image using imagef- url, bug:1134
-	if((isset($_GET['img']) || isset($_GET['thmb']) || isset($_GET['thmbf']) || isset($_GET['imgf'])) && !$is_image)
+	#prevent bug, where you can download file, not image using imagef- url, bug:1134
+	if((ig('img') || ig('thmb') || ig('thmbf') || ig('imgf')) && !$is_image)
 	{
 		$f = 'images';
 		$n = 'not_exists.jpg';
 		$is_image = true;
 	}
 
-	//downalod porcess
-	$path_file = (isset($_GET['thmb']) || isset($_GET['thmbf']))  ? "./{$f}/thumbs/{$n}" : "./{$f}/{$n}";
+	#downalod porcess
+	$path_file = (ig('thmb') || ig('thmbf'))  ? "./{$f}/thumbs/{$n}" : "./{$f}/{$n}";
 	$chunksize = 1024*120; //1 kelobyte * 120 = 120kb that will send to user every loop
 	$resuming_on = true;
 
@@ -375,10 +342,11 @@ else if (isset($_GET['down']) || isset($_GET['downf']) ||
 	{
 		header('HTTP/1.1 301 Moved Permanently');
 		header('Location: ' . $path_file);
+		garbage_collection();
 		exit;
 	}
 
-	//start download ,,
+	#unable to read the file?
 	if(!is_readable($path_file))
 	{
 		($hook = kleeja_run_hook('down_file_not_exists')) ? eval($hook) : null; //run hook
@@ -392,6 +360,7 @@ else if (isset($_GET['down']) || isset($_GET['downf']) ||
 		}
 	}
 
+	#get filesize
 	if(!($size = @kleeja_filesize($path_file)))
 	{
 		$size = $d_size;
@@ -399,6 +368,7 @@ else if (isset($_GET['down']) || isset($_GET['downf']) ||
 
 	$name = empty($rn) ? $n : $rn;
 
+	#encode the file name correctly
 	if (is_browser('mozilla'))
 	{
 		$h_name = "filename*=UTF-8''" . rawurlencode(htmlspecialchars_decode($name));
@@ -412,124 +382,96 @@ else if (isset($_GET['down']) || isset($_GET['downf']) ||
 		$h_name = 'filename="' . rawurlencode(htmlspecialchars_decode($name)) . '"';
 	}
 
-	//Figure out the MIME type (if not specified) 
+	#Figure out the MIME type (if not specified) 
 	$ext		= array_pop(explode('.', $path_file));
 	$mime_type	= get_mime_for_header($ext);
 
-	if (@ob_get_length())
-	{
-		@ob_end_clean();
-	}
+	#disable execution time limit
+	@set_time_limit(0);
+	#disable output buffering
+	@ob_end_clean();
+	
+	#close the db connection
+	$SQL->close();
 
-	// required for IE, otherwise Content-Disposition may be ignored
+	#required for IE, otherwise Content-Disposition may be ignored
 	if(@ini_get('zlib.output_compression'))
 	{
 		@ini_set('zlib.output_compression', 'Off');
 	}
 
+	#send file headers
+	header('Pragma: public');
+	header('Accept-Ranges: bytes');
+	header("Content-Description: File Transfer");
+	header("Content-Type: $mime_type");
 	header('Date: ' . gmdate('D, d M Y H:i:s', $ftime) . ' GMT');
-	header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $ftime) . ' GMT');
-	header('Content-Encoding: none');
+	#header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $ftime) . ' GMT');
+	#header('Content-Encoding: none');
 	header('Content-Disposition: ' . (($is_image || $is_live) ? 'inline' : 'attachment') . '; '  . $h_name);
+	
 	#if($is_image)
 	#{
 	#	header('Content-Transfer-Encoding: binary');
 	#}
 
-	if(!$is_image && !$is_live && $is_ie8)
-	{
-		header('X-Download-Options: noopen');
-	}
+	#if(!$is_image && !$is_live && $is_ie8)
+	#{
+	#	header('X-Download-Options: noopen');
+	#}
 
 	#header(($is_ie6 ? 'Expires: -1' : 'Expires: Mon, 26 Jul 1997 05:00:00 GMT'));	
 	#(($is_ie8) ? '; authoritative=true; X-Content-Type-Options: nosniff;' : '')
 
-	if (($pfile = @fopen($path_file, 'rb')) === false)
+
+
+	#add multipart download and resume support                        
+	if (isset($_SERVER["HTTP_RANGE"]))
 	{
-		#so ... it's failed to open !
-		header("HTTP/1.0 404 Not Found");
-		@fclose($pfile);
-		big_error($lang['FILE_NO_FOUNDED'],  $lang['NOT_FOUND']);
-	}
+		list($a, $range) = explode("=", $_SERVER["HTTP_RANGE"],2);
+		list($range) = explode(",", $range, 2);
+		list($range, $range_end) = explode("=", $range);
+		$range = round(floatval($range),0);
+		$range_end = !$range_end ? $size-1 : round(floatval($range_end),0);
 
-	#sending some headers
-	header('Accept-Ranges: bytes');
-
-	#prevent some limits
-	@set_time_limit(0);
-
-	// multipart-download and download resuming support
-	$range_enable = false;
-	if(isset($_SERVER['HTTP_RANGE']) && strpos($_SERVER['HTTP_RANGE'],'bytes=') !== false && !$is_image && !$is_live && $resuming_on)
-	{
-		header('HTTP/1.1 206 Partial Content');
-
-		$ranges		= explode(',', substr(trim($_SERVER['HTTP_RANGE']), 6));
-		$boundary	= substr(md5($name . microtime()), 24);
-
-		# many ranges requested 
-		if(sizeof($ranges) > 1)
-		{
-			$content_length = 0;
-			foreach ($ranges as $range)
-			{
-				list($first, $last) = kleeja_set_range($range, $size);
-				$content_length += strlen("\r\n--$boundary\r\n");
-				$content_length += strlen("Content-Type: $mime_type\r\n");
-				$content_length += strlen("Content-range: bytes $first-$last/$size\r\n\r\n");
-				$content_length += $last-$first+1;
-			}
-			$content_length += strlen("\r\n--$boundary--\r\n");
-
-			header("Content-Length: $content_length");
-			header("Content-Type: multipart/x-byteranges; boundary=$boundary");
-
-			foreach ($ranges as $range)
-			{
-				list($first, $last) = kleeja_set_range($range, $size);
-				echo "\r\n--$boundary\r\n";
-				echo "Content-Type: $mime_type\r\n";
-				echo "Content-range: bytes $first-$last/$size\r\n\r\n";
-				fseek($pfile, $first);
-				kleeja_buffere_range($pfile, $last-$first+1, $chunksize);
-			}
-			echo "\r\n--$boundary--\r\n";
-		}
-		else
-		{
-			#single range is request.
-			list($first, $last) = kleeja_set_range($ranges[0], $size); 
-			header("Content-Length: " . ($last-$first+1));
-			header("Content-Range: bytes $first-$last/$size");
-			header("Content-Type: $mime_type");  
-			fseek($pfile, $first);
-			kleeja_buffere_range($pfile, $last-$first+1, $chunksize);
-		}
+		$partial_length = $range_end-$range+1;
+		header("HTTP/1.1 206 Partial Content");
+		header("Content-Length: $partial_length");
+		header("Content-Range: bytes ".($range - $range_end/$size));
 	}
 	else
 	{
-
-		header("Content-Length: " . $size);
-		header("Content-Type: $mime_type");
-
-		if(!$size)
-		{
-			while (!feof($pfile))
-			{
-				echo fread($pfile, $chunksize);
-				@ob_flush();
-			}
-		}
-		else
-		{
-			kleeja_buffere_range($pfile, $size, $chunksize);
-		}
+		$partial_length = $size;
+		header("Content-Length: $partial_length");
 	}
 
-	flush();
-	fclose($pfile);
-	$SQL->close();
-	exit; // done
+	#output file
+	$bytes_sent = 0;
+	if ($fp = @fopen($path_file, 'r'))
+	{
+		#fast forward within file, if requested
+		if (isset($_SERVER['HTTP_RANGE']))
+		{
+			fseek($fp, $range);
+		}
+		#read and output the file in chunks
+		while( !feof($fp) && (!connection_aborted()) && ($bytes_sent < $partial_length) )
+		{
+			$buffer = fread($fp, $chunksize);
+			print($buffer);
+			flush();
+			$bytes_sent += strlen($buffer);
+		}
+		fclose($fp);
+	}
+	else
+	{
+		#it's failed to open !
+		header("HTTP/1.0 404 Not Found");
+		@fclose($pfile);
+		garbage_collection();
+		big_error($lang['FILE_NO_FOUNDED'],  $lang['NOT_FOUND']);
+	}
 }
 
 //
@@ -542,6 +484,3 @@ else
 }
 
 ($hook = kleeja_run_hook('end_download_page')) ? eval($hook) : null; //run hook
-
-
-#<-- EOF

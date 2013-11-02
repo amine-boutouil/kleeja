@@ -17,6 +17,8 @@ if (!defined('IN_COMMON'))
 	exit();
 }
 
+
+
 /**
  * Print admin area errors
  *
@@ -81,9 +83,15 @@ function kleeja_admin_info($msg, $navigation=true, $title='', $exit=true, $redir
 }
 
 /**
- * generate a filter, filiter is a value stored in the database to use it later
+ * Generate a filter, filiter is a value stored in the database to use it later
  * 
- *
+ * @param string $type Unique name to connect multiple filters together if you want
+ * @param string $value The stored value
+ * @param bool|int $time [optional] timestamp if this filter depends on time  or leave it
+ * @param bool|int $user [optional] user ID if this filter depends on user or leave it
+ * @param string $status [optional] if this filter has status, then fill it or leave it
+ * @param bool|string $uid [optional] filter uid of your choice or leave it for random one
+ * @return int
  */
 function insert_filter($type, $value, $time = false, $user = false, $status = '', $uid = false)
 {
@@ -107,10 +115,13 @@ function insert_filter($type, $value, $time = false, $user = false, $status = ''
 
 
 /**
-* update filter value..
-* @adm
-*/
-function update_filter($item, $value)
+ * Update filter value..
+ * 
+ * @param int|string $id_or_uid Number of filter_id or the unique id string of filter_uid
+ * @param string $value The modified value of filter
+ * @return bool
+ */
+function update_filter($id_or_uid, $value)
 {
 	global $SQL, $dbprefix;
 
@@ -118,7 +129,7 @@ function update_filter($item, $value)
 	$update_query	= array(
 							'UPDATE'	=> "{$dbprefix}filters",
 							'SET'		=> "filter_value='" . $SQL->escape($value) . "'",
-							'WHERE'		=> strval(intval($item)) == strval($item) ? 'filter_id=' . intval($item) : "filter_uid='" . $SQL->escape($item) . "'"
+							'WHERE'		=> strval(intval($id_or_uid)) == strval($id_or_uid) ? 'filter_id=' . intval($id_or_uid) : "filter_uid='" . $SQL->escape($id_or_uid) . "'"
 					);
 
 	($hook = kleeja_run_hook('update_filter_func')) ? eval($hook) : null; //run hook
@@ -133,15 +144,19 @@ function update_filter($item, $value)
 }
 
 /**
-* get filter from db..
-* @adm
-*/
+ * Get filter from db..
+ * 
+ * @param string|int $item The value of $get_by, to get the filter depend on it
+ * @param string $get_by The name of filter column we want to get the filter value from
+ * @param bool $just_value If true the return value should be just filter_value otherwise all filter rows
+ * @return mixed  
+ */
 function get_filter($item, $get_by = 'filter_id', $just_value = false)
 {
 	global $dbprefix, $SQL;
 
 	$query = array(
-					'SELECT'	=> 'f.*',
+					'SELECT'	=> $just_value ? 'f.filter_value' : 'f.*',
 					'FROM'		=> "{$dbprefix}filters f",
 					'WHERE'		=> "f." . $get_by . " = " . ($get_by == 'filter_id' ? intval($item) : "'" . $SQL->escape($item) . "'")
 				);
@@ -161,9 +176,12 @@ function get_filter($item, $get_by = 'filter_id', $just_value = false)
 }
 
 /**
-* check if filter exists or not
-* @adm
-*/
+ * check if filter exists or not
+ *
+ * @param string|int $item The value of $get_by, to find the filter depend on it
+ * @param string $get_by The name of filter column we want to get the filter from
+ * @return bool|int 
+ */
 function filter_exists($item, $get_by = 'filter_id')
 {
 	global $dbprefix, $SQL;
@@ -182,9 +200,11 @@ function filter_exists($item, $get_by = 'filter_id')
 
 
 /**
-* costruct a query for the searches..
-* @adm
-*/
+ * Costruct a query for the file search
+ *
+ * @param array $search The Array of the search values
+ * @return string
+ */
 function build_search_query($search)
 {
 	if(!is_array($search))
@@ -219,7 +239,11 @@ function build_search_query($search)
 }
 
 /**
- * To re-count the total files, without making the server goes down haha 
+ * To re-count the total files, without making the server goes down
+ *
+ * @param bool $files [optional] If true, function will just count files; false, just images
+ * @param bool|int $start This value is used in couning in segments, in loop every refresh 
+ * @return bool|int
  */
 function sync_total_files($files = true, $start = false)
 {
@@ -287,7 +311,10 @@ function sync_total_files($files = true, $start = false)
 }
 
 /**
- * get the *right* now number of the given stat from stats table
+ * Get the *right* now number of the given stat from stats table
+ *
+ * @param string $name The name of stats you want get from the DB
+ * @return string|int 
  */
 function get_actual_stats($name)
 {

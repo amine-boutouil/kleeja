@@ -9,7 +9,9 @@
 */
 
 
-//no for directly open
+/**
+ * @ignore
+ */
 if (!defined('IN_COMMON'))
 {
 	exit();
@@ -18,73 +20,11 @@ if (!defined('IN_COMMON'))
 
 
 /**
-* Return the first and last seek of range to be flushed.
-*/
-function kleeja_set_range($range, $filesize)
-{
-	$dash	= strpos($range, '-');
-	$first	= trim(substr($range, 0, $dash));
-	$last	= trim(substr($range, $dash+1));
-	if (!$first)
-	{
-		$suffix	= $last;
-		$last	= $filesize-1;
-		$first	= $filesize-$suffix;
-		if($first < 0)
-		{
-			$first = 0;
-		}
-	}
-	else
-	{
-		if(!$last || $last > $filesize-1)
-		{
-			$last = $filesize-1;
-		}
-	}
-
-	if($first > $last)
-	{
-		//unsatisfiable range
-		header("Status: 416 Requested range not satisfiable");
-		header("Content-Range: */$filesize");
-		exit;
-	}
-
-	return array($first, $last);
-}
-
-/**
-* Outputs up to $bytes from the file $file to standard output,
-* $buffer_size bytes at a time.
-*/
-function kleeja_buffere_range($file, $bytes, $buffer_size = 1024)
-{
-	$bytes_left = $bytes;
-	while($bytes_left > 0 && !feof($file))
-	{
-		if($bytes_left > $buffer_size)
-		{
-			$bytes_to_read = $buffer_size;
-		}
-		else
-		{
-			$bytes_to_read = $bytes_left;
-		}
-
-		$bytes_left	-= $bytes_to_read;
-		$contents	= fread($file, $bytes_to_read);
-		echo $contents;
-		@flush();
-		@ob_flush();
-	}
-}
-
-
-/**
-* Get mime header
-* 1rc6+ 
-*/
+ * Get mime header
+ * 
+ * @param string $ext the extension of file i.e. gif
+ * @return string The mime type
+ */
 function get_mime_for_header($ext)
 {
 	$mime_types = array(

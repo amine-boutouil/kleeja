@@ -59,13 +59,10 @@ if(ig('id') || ig('filename'))
 	($hook = kleeja_run_hook('qr_download_id_filename')) ? eval($hook) : null; //run hook
 	$result	= $SQL->build($query);
 
-	if ($SQL->num_rows($result) != 0)
+	if ($SQL->num_rows($result))
 	{
-		while($row=$SQL->fetch_array($result))
-		{
-			@extract($row);
-		}
-
+		$row = $SQL->fetch($result);
+		@extract($row);
 		$SQL->freeresult($result);
 
 		#some vars

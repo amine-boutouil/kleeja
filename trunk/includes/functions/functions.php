@@ -60,10 +60,10 @@ function g($name, $type = 'str')
 }
 
 /**
- *  clean _GET variable if exists and return it
+ *  clean _POST variable if exists and return it
  * 
  * @since 2.0
- * @param string $name The name of _GET variable
+ * @param string $name The name of _POST variable
  * @return string|bool
  */
 function p($name, $type = 'str')
@@ -792,3 +792,9 @@ function untar($file, $dest = "./")
 	return false;
 }
 
+
+
+function garbage_collection()
+{
+	#later
+}

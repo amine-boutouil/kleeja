@@ -9,7 +9,9 @@
 */
 
 
-//no for directly open
+/**
+ * @ignore
+ */
 if (!defined('IN_COMMON'))
 {
 	exit();
@@ -24,25 +26,4 @@ if(defined('DEV_STAGE'))
 	$dev_m = '#dev' . $m[1];
 }
 
-define ('KLEEJA_VERSION' , '2.0.0' . $dev_m);
- 
-/*
-	
-	as you know , 
-	kleeja is open source and free ,
-	so any problem , bugs or errors  you must tell us , 
-	even you are a cracker ;) . 
-
-	http://www.kleeja.com/bugs/
-	
-	//wuts "kleeja" mean ? 
-	you have to go wikipedia , but you will not find any thing about this word, why ? 
-	because , kleeja is so so old thing ,, its type of food;  its  a sweet:) 
-	you have to taste it someday ... ;)
-	
-	//is there any TODO list ? 
-	yes , there are alots of things we are starting to add them in kleeja 
-	but we are so lazy .. 
-	
-	
-*/
+define('KLEEJA_VERSION' , '2.0.0' . $dev_m);

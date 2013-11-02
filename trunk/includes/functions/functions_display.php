@@ -24,7 +24,8 @@ if (!defined('IN_COMMON'))
 * To show header in any page you want .. 
 * parameter : title : title of page as in <title></title>
 */	
-function Saaheader($title, $outscript = false, $extra = '')
+function kleeja_header(){}
+function Saaheader($title = '', $outscript = false, $extra = '')
 {
 	global $tpl, $usrcp, $lang, $olang, $user_is, $username, $config;
 	global $extras, $script_encoding, $errorpage, $userinfo, $charset;
@@ -93,6 +94,7 @@ function Saaheader($title, $outscript = false, $extra = '')
 * To show footer of any page you want 
 * paramenters : none
 */
+function kleeja_footer(){}
 function Saafooter($outscript = false)
 {
 	global $tpl, $SQL, $starttm, $config, $usrcp, $lang, $olang;
@@ -156,8 +158,8 @@ function Saafooter($outscript = false)
 
 	echo $footer;
 
-	//at end, close sql connections
-	$SQL->close();
+	#at end, close sql connections & etc
+	garbage_collection();
 }
 
 /**
@@ -200,7 +202,8 @@ function kleeja_err($msg, $title = '', $exit = true, $redirect = false, $rs = 2,
 
 	if($exit)
 	{
-		$SQL->close();
+		#at end, close sql connections & etc
+		garbage_collection();
 		exit();
 	}
 }
@@ -251,7 +254,8 @@ function big_error ($error_title,  $msg_text, $error = true)
 	echo '</div>' . "\n";
 	echo '</body>' . "\n";
 	echo '</html>';
-	@$SQL->close();
+	#at end, close sql connections & etc
+	garbage_collection();
 	exit();
 }
 
@@ -300,7 +304,8 @@ function redirect($url, $header = true, $exit = true, $sec = 0, $return = false)
 
 	if($exit)
 	{
-		$SQL->close();
+		#at end, close sql connections & etc
+		garbage_collection();
 		exit;
 	}
 }
@@ -761,7 +766,9 @@ function echo_ajax($code_number, $content, $menu = '')
 function echo_array_ajax($array)
 {
 	global $SQL;
-	$SQL->close();
+
+	#at end, close sql connections & etc
+	garbage_collection();
     
     //generate_json has some bugs so I will use json_encode insted :[
 	exit(@json_encode($array));

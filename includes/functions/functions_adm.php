@@ -46,20 +46,21 @@ function kleeja_admin_err($msg, $navigation = true, $title='', $exit = true, $re
 		exit();
 	}
 
-	// assign {text} in err template
+	#assign {text} in err template
 	$text		= $msg . ($redirect != false ? redirect($redirect, false, false, $rs, true) : '');
 	$SHOW_LIST	= $navigation;
 
-	//header
+	#header
 	echo $tpl->display("admin_header");
-	//show tpl
+	#show tpl
 	echo $tpl->display($style);
-	//footer
+	#footer
 	echo $tpl->display("admin_footer");
-		
+
+	#if exit, clean it
 	if($exit)
 	{
-		$SQL->close();
+		garbage_collection();
 		exit();
 	}
 }
@@ -79,8 +80,10 @@ function kleeja_admin_info($msg, $navigation=true, $title='', $exit=true, $redir
 {
 	($hook = kleeja_run_hook('kleeja_admin_info_func')) ? eval($hook) : null; //run hook
 
+	#since info message and error message are the same, we use one function callback
 	return kleeja_admin_err($msg, $navigation, $title, $exit, $redirect, $rs, 'admin_info');
 }
+
 
 /**
  * Generate a filter, filiter is a value stored in the database to use it later

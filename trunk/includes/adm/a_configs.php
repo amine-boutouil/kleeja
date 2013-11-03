@@ -36,7 +36,7 @@ $query	= array(
 
 $result = $SQL->build($query);
 
-while($row = $SQL->fetch_array($result))
+while($row = $SQL->fetch($result))
 {
 	$name = !empty($lang['CONFIG_KLJ_MENUS_' . strtoupper($row['type'])]) ? $lang['CONFIG_KLJ_MENUS_' . strtoupper($row['type'])] : (!empty($olang['CONFIG_KLJ_MENUS_' . strtoupper($row['type'])]) ? $olang['CONFIG_KLJ_MENUS_' . strtoupper($row['type'])] : $lang['CONFIG_KLJ_MENUS_OTHER']);
 	$go_menu[$row['type']] = array('name'=>$name, 'link'=>$action . '&amp;smt=' . $row['type'], 'goto'=>$row['type'], 'current'=> $current_smt == $row['type']);
@@ -86,7 +86,7 @@ $result = $SQL->build($query);
 
 $thumbs_are = get_config('thmb_dims');
 
-while($row=$SQL->fetch_array($result))
+while($row=$SQL->fetch($result))
 {
 	#make new lovely array !!
 	$con[$row['name']] = $row['value'];
@@ -233,7 +233,7 @@ while($row=$SQL->fetch_array($result))
 	}
 }
 
-$SQL->freeresult($result);
+$SQL->free($result);
 $types = array();
 
 foreach($optionss as $key => $option)

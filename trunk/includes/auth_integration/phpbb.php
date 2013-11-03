@@ -113,9 +113,9 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 	if(!$hashed)
 	{
 		$result2 = $SQLBB->build($query2);					
-		while($row=$SQLBB->fetch_array($result2))
+		while($row=$SQLBB->fetch($result2))
 		{
-			$SQLBB->freeresult($result2); 
+			$SQLBB->free($result2); 
 
 			if($return_name)
 			{
@@ -145,11 +145,11 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 	$result = $SQLBB->build($query);
 
 
-	if ($SQLBB->num_rows($result) != 0) 
+	if ($SQLBB->num($result) != 0) 
 	{
-		while($row=$SQLBB->fetch_array($result))
+		while($row=$SQLBB->fetch($result))
 		{
-			if($SQLBB->num_rows($SQLBB->query("SELECT ban_userid FROM `{$forum_prefix}banlist` WHERE ban_userid=" . intval($row['user_id']))) == 0)
+			if($SQLBB->num($SQLBB->query("SELECT ban_userid FROM `{$forum_prefix}banlist` WHERE ban_userid=" . intval($row['user_id']))) == 0)
 			{
 				if(!$loginadm)
 				{
@@ -185,7 +185,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 			else
 			{
 				//he is banned from phpBB
-				$SQLBB->freeresult($result);   
+				$SQLBB->free($result);   
 				unset($pass);
 				$SQLBB->close();
 				return false;
@@ -193,7 +193,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 
 		}
 
-		$SQLBB->freeresult($result);   
+		$SQLBB->free($result);   
 		unset($pass);
 		$SQLBB->close();
 		return true;
@@ -201,7 +201,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 	}
 	else
 	{
-		$SQLBB->freeresult($result);
+		$SQLBB->free($result);
 		$SQLBB->close();
 		return false;
 	}

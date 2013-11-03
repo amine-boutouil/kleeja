@@ -61,7 +61,7 @@ if (isset($_POST['search_file']))
 
 	$result = $SQL->build($s_del);
 	$ids = '';
-	while($row=$SQL->fetch_array($result))
+	while($row=$SQL->fetch($result))
 	{
 		$ids .= ($ids != '' ? ', ' : '') . $row['filter_id'];
 	}
@@ -122,7 +122,7 @@ if (isset($_POST['search_user']))
 
 	$result = $SQL->build($s_del);
 	$ids = '';
-	while($row=$SQL->fetch_array($result))
+	while($row=$SQL->fetch($result))
 	{
 		$ids .= ($ids != '' ? ', ' : '') . $row['filter_id'];
 	}

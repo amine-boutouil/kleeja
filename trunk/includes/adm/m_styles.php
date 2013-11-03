@@ -209,10 +209,10 @@ switch ($_GET['sty_t'])
 
 							$result = $SQL->build($query);
 
-							if($SQL->num_rows($result) != 0)
+							if($SQL->num($result) != 0)
 							{
 								$plugins_required = array_flip($plugins_required);
-								while($row=$SQL->fetch_array($result))
+								while($row=$SQL->fetch($result))
 								{
 									if(in_array($row['plg_name'], $plugins_required))
 									{
@@ -221,7 +221,7 @@ switch ($_GET['sty_t'])
 								}
 							}
 
-							$SQL->freeresult($result);
+							$SQL->free($result);
 							
 							$plugins_required = array_flip($plugins_required);
 							if(sizeof($plugins_required))

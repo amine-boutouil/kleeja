@@ -45,13 +45,13 @@ class pagination
 	 * Initiating function
 	 *
 	 * @param int $rows_per_page How many rows you want in one page
-	 * @param int $num_rows The number of real rows
+	 * @param int $num The number of real rows
 	 * @param int $current_page The current page  
 	 */
-	public function __construct($rows_per_page, $num_rows, $current_page = 1)
+	public function __construct($rows_per_page, $num, $current_page = 1)
 	{ 
 		#Calculate the total number of pages 
-		$this->total_pages = ceil($num_rows / $rows_per_page); 
+		$this->total_pages = ceil($num / $rows_per_page); 
 
 		#Check that a valid page has been provided 
 		$this->current_page = $current_page < 1 ? 1 :  ($current_page > $this->total_pages ? $this->total_pages : $current_page); 

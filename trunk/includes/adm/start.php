@@ -322,7 +322,7 @@ $cf_query = array(
 				);
 
 $cf_result	= $SQL->build($cf_query);
-$cf_num	= $SQL->num_rows($cf_result);
+$cf_num	= $SQL->num($cf_result);
 if($cf_num > 4)
 {
 	$stats_chart = 'arrayOfDataMulti = new Array(';
@@ -332,7 +332,7 @@ if($cf_num > 4)
 	$prv_files = get_actual_stats('files');
 	$prev_imgs = get_actual_stats('imgs');
 	$prev_date = date('d-n-Y');	
-	while($row=$SQL->fetch_array($cf_result))
+	while($row=$SQL->fetch($cf_result))
 	{
 		#jump today
 		if($prev_date == $row['filter_uid'])
@@ -358,7 +358,7 @@ if($cf_num > 4)
 
 	$stats_chart .= ');';
 
-	$SQL->freeresult($cf_result);
+	$SQL->free($cf_result);
 
 	#clean old chart stats
 	if($cf_num > 10)

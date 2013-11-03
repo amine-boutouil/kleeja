@@ -43,7 +43,7 @@ $result = $SQL->build($query);
 //is there any change !
 $affected = false;
 
-while($row=$SQL->fetch_array($result))
+while($row=$SQL->fetch($result))
 {
 	$ex_header = isset($_POST['ex_header']) ? $_POST['ex_header'] : $row['ex_header'];
 	$ex_footer = isset($_POST['ex_footer']) ? $_POST['ex_footer'] : $row['ex_footer'];
@@ -77,7 +77,7 @@ while($row=$SQL->fetch_array($result))
 	}
 }
 
-$SQL->freeresult($result);
+$SQL->free($result);
 
 
 //after submit 

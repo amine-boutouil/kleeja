@@ -91,7 +91,7 @@ else
 
 		$result_get =  $SQL->build($query_get);
 
-		if(!$SQL->num_rows($result_get))
+		if(!$SQL->num($result_get))
 		{
 			//add new config value
 			add_config('new_version', '');

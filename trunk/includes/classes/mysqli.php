@@ -9,206 +9,97 @@
 */
 
 
-//no for directly open
+
+/**
+ * @ignore
+ */
 if (!defined('IN_COMMON'))
 {
 	exit();
 }  
 
-if(!defined("SQL_LAYER")):
 
-define("SQL_LAYER","mysqli");
-
-class SSQL 
+/**
+ * Wrapper for MySQLi database driver
+ */
+class database 
 {
-	var $connect_id		= null;		
-	var $result;
-	var $query_num		= 0;
-	var $in_transaction = 0;
-	var $debugr			= false;
-	var $show_errors 	= true;
+	/**
+	 * The connect resource
+	 */
+	private $connect_id = null;
+
+	/**
+	 * The results resource
+	 */
+	private $result = null;
+
+	/**
+	 * The number of queries executed in this session
+	 */
+	public $query_num = 0;
 
 
-	/*
-	 * initiate the class
-	 * with basic data
-	*/
-	function SSQL($host, $db_username, $db_password, $db_name, $new_link = false)
+	/**
+	 * Initiate the database connection
+	 *
+	 * @param string $server The database server
+	 * @param string $user The database user
+	 * @param string $pass The database password
+	 * @param string $dbname The database name
+	 * @return resource
+	 */
+	public function __construct($server, $user , $pass, $dbname)
 	{
-		global $script_encoding;
 		
-		$host 	.= strpos($host, ':') !== false ? '' : ':';
-		$this->host 		= substr($host, 0, strpos($host, ':'));
-		$this->port 		= (int) substr($host, strpos($host, ':')+1);
-		$this->db_username 	= $db_username;
-		$this->db_name     	= $db_name;
-		$this->db_password 	= 'hidden';
-		
-		$this->connect_id = @mysqli_connect($this->host, $this->db_username, $db_password, $this->db_name, (!$this->port ? 3306 : $this->port ));
-	
-		//no error
-		if(defined('MYSQL_NO_ERRORS'))
+		#if port assigned to the server variable
+		$port = 3306;
+		if(strpos($server, ':') !== false)
 		{
-			$this->show_errors = false;
+			$server = substr($server, 0, strpos($server, ':'));
+			$port = intval(substr($server, strpos($server, ':') + 1));
 		}
-		
-		
-		if(!$this->connect_id)
+
+		$this->connect_id = @mysqli_connect($server, $user, $pass, $dbname, $port);
+
+		if(mysqli_connect_error())
 		{
-			#loggin -> no database -> close connection
-			$this->close();
-			$this->error_msg("we can not connect to the server ...");
-			return false;
+			big_error('MySQL Connection Error', 'Database Connect Error (' . mysqli_connect_errno() . '): ' . mysqli_connect_error());
 		}
-	
-		if ((!preg_match('/utf/i', strtolower($script_encoding)) && !defined('IN_LOGINPAGE') && !defined('IN_ADMIN_LOGIN') && !defined('DISABLE_INTR')) || (empty($script_encoding) || preg_match('/utf/i', strtolower($script_encoding)) || defined('DISABLE_INTR')))
-		{
-			if(mysqli_set_charset($this->connect_id, 'utf8'))
-			{
-				#loggin -> set utf8 
-				kleeja_log('[Set to UTF8] : --> ');
-			}
-		}
+
+		#make it utf8
+		$this->query("SET NAMES 'utf8'");
 
 		return $this->connect_id;
 	}
 
-	/*
-	 * close the connection
+	/**
+	 * To execute a query to the db
+	 *
+	 * @param string $q The query string
+	 * @return resource|false
 	 */
-	function close()
-	{		
-		if($this->connect_id)
+	public function query($q)
+	{
+		$this->result = mysqli_query($this->connect_id, $q);
+		if(!$this->result && mysqli_errno($this->connect_id))
 		{
-			// Commit any remaining transactions
-			if($this->in_transaction)
-			{
-				mysqli_commit($this->connect_id);
-			}
+			big_error('MySQL Query Error', $this->error());
+		}
 
-			return @mysqli_close($this->connect_id);
-		}
-		else
-		{
-			return false;
-		}
+		$this->query_num++;
+
+		return $this->result;
 	}
-	
-	/*
-	 * encoding functions
+
+
+	/**
+	 * To build query from an array and execute it
+	 *
+	 * @param array $q The query as an array to build
+	 * @return resource|false
 	 */
-	function set_utf8()
-	{
-		return $this->set_names('utf8');
-	}
-	
-	function set_names($charset)
-	{
-		@mysqli_set_charset($this->connect_id, $charset);
-	}
-	
-	function client_encoding()
-	{
-		return mysqli_client_encoding($this->connect_id);
-	}
-	
-	function mysql_version()
-	{
-		$vr = $this->query('SELECT VERSION() AS v');
-		$vs = $this->fetch_array($vr);
-		$vs = $vs['v'];
-		return preg_replace('/^([^-]+).*$/', '\\1', $vs);
-	}
-	
-	/*
-	 * the query func . its so important to do 
-	 * the quries and give results
-	 */
-	function query($query, $transaction = false)
-	{
-		//no connection
-		if(!$this->connect_id)
-		{
-			return false;
-		}
-
-		//
-		// Remove any pre-existing queries
-		//
-		unset($this->result);
-		
-		if(!empty($query))
-		{
-			//debug .. //////////////
-			$srartum_sql = get_microtime();
-			////////////////
-
-			if($transaction == 1 && !$this->in_transaction)
-			{
-				if(!mysqli_autocommit($this->connect_id, false))
-				{
-					return false;
-				}
-				
-				$this->in_transaction = TRUE;
-			}
-
-			$this->result = mysqli_query($this->connect_id, $query);
-
-			//debug .. //////////////
-			$this->debugr[$this->query_num+1] = array($query, sprintf('%.5f', get_microtime() - $srartum_sql));
-			////////////////
-
-			if(!$this->result)
-			{
-				$this->error_msg('Error In query');
-			}
-			else
-			{
-				//let's debug it
-				kleeja_log('[Query] : --> ' . $query);
-			}
-		}
-		else
-		{
-			if( $transaction == 2 && $this->in_transaction )
-			{
-				$this->result = mysqli_commit($this->connect_id);
-			}
-		}
-					
-		//is there any result
-		if($this->result)
-		{
-			if($transaction == 2 && $this->in_transaction)
-			{
-				$this->in_transaction = false;
-
-				if (!mysqli_commit($this->connect_id))
-				{
-					mysqli_rollback($this->connect_id);
-					return false;
-				}
-			}
-
-			$this->query_num++;
-			return $this->result;
-		}
-		else
-		{
-			if($this->in_transaction)
-			{
-				mysqli_rollback($this->connect_id);
-				$this->in_transaction = false;
-			}
-			return false;
-		}
-	}
-	
-	/*
-	 * query build 
-	 */
-	function build($query)
+	public function build($query)
 	{
 		$sql = '';
 
@@ -274,199 +165,84 @@ class SSQL
 		return $this->query($sql);
 	}
 
-	/*
-	 * free the memmory from the last results
+
+	/**
+	 * To make query
+	 *
+	 * @param resource $q The resource resulted from query function
+	 * @param string $t the type of fetch
+	 * @return array|bool
 	 */
-	function free($query_id = 0)
+	public function fetch($q = 0, $t = 'assoc')
 	{
-		return $this->freeresult($query_id);
+		$t = in_array($t , array('array', 'assoc', 'row', 'field', 'lengths', 'object')) ? "mysqli_fetch_{$t}" : 'mysqli_fetch_assoc'; 
+		return @$t($q ? $q : $this->result); 
 	}
+
+	/**
+	 * To return the inserted ID
+	 *
+	 * @param resource $c [optional] a connection resource
+	 * @return int|false
+	 **/
+	public function id($c = 0) { return @mysqli_insert_id($c ? $c : $this->connect_id); }
+
+	/**
+	 * To return the number of resulted rows
+	 *
+	 * @param resource $q [optional] A result resource
+	 * @return int|false
+	 **/
+	public function num($q = 0) { return @mysqli_num_rows($q ? $q : $this->result); }
+
+	/**
+	 * To return the number of rows affected by the last INSERT, UPDATE, REPLACE or DELETE query
+	 *
+	 * @param resource $c [optional] a connection resource
+	 * @return int
+	 **/
+	public function affected($c = 0) { return @mysqli_affected_rows($c ? $c : $this->connect_id); }
+
+	/**
+	 * To escape a string before use it the in query for safety
+	 *
+	 * @return string
+	 **/
+	public function escape($var) { return @mysqli_real_escape_string($this->connect_id, $var); }
+
+	/**
+	 * Frees the memory associated with the result
+	 *
+	 * @return void
+	 **/
+	function free($q = 0) { @mysqli_free_result(($q ? $q : $this->result)); }
+
+	/**
+	 * Is there a connection resource
+	 *
+	 * @return resource
+	 **/
+	function is_connected() { return $this->connect_id; }
+
+	/**
+	 * Close the current connrection
+	 *
+	 * @return void
+	 **/
+	function close($c = 0) { return @mysqli_close($c ? $c : $this->connect_id); }
+
+	/**
+	 * To return the error if any
+	 *
+	 * @return string
+	 **/
+	public function error(){ return mysqli_errno($this->connect_id) . ': ' . mysqli_error($this->connect_id); }
 	
-	function freeresult($query_id = 0)
-	{
-		if(!$query_id)
-		{
-			$query_id = $this->result;
-		}
 
-		if ($query_id)
-		{
-			mysqli_free_result($query_id);
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-
-	/*
-	 * if the result is an arry ,
-	 * this func is so important to order them as a array
-	 */
-	function fetch($query_id = 0)
-	{
-		return $this->fetch_array($query_id);
-	}
-	
-	function fetch_array($query_id = 0)
-	{
-	 	if(!$query_id)
-		{
-			$query_id = $this->result;
-		}
-		
-		return $query_id  ? mysqli_fetch_array($query_id, MYSQLI_ASSOC) : false;
-	}
-
-	/*
-	 * if we have a result and we have to know 
-	 * the number of it , this is a func ..
-	 */
-	function num_rows($query_id = 0)
-	{
-		if(!$query_id)
-		{
-			$query_id = $this->result;
-		}
-
-		return $query_id ? mysqli_num_rows($query_id) : false;
-	}
-
-	
-	/*
-	 * last id inserted in sql
-	 */
-	function insert_id()
-	{
-		return $this->connect_id ? mysqli_insert_id($this->connect_id) : false;
-	}
-
-	/*
-	 * clean the qurery before insert it
-	 */
-	function escape($msg)
-	{
-		$msg = htmlspecialchars($msg , ENT_QUOTES);
-		#$msg = (!get_magic_quotes_gpc()) ? addslashes ($msg) : $msg;
-		$msg = $this->real_escape($msg);
-		return $msg;
-	}
-
-	/*
-	 * real escape .. 
-	 */
-	function real_escape($msg)
-	{
-		if (is_array($msg) && !$this->connect_id)
-		{
-			return $msg;
-		}
-
-		if(!$this->connect_id)
-		{
-			return 0;
-		}
-
-		//escaping _ made alot of problems
-		//return addcslashes(mysqli_real_escape_string($this->connect_id, $msg), '%_');
-		return mysqli_real_escape_string($this->connect_id, $msg);
-	}
-
-	/*
-	 * get affected records
-	 */
-	function affected()
-	{
-		return $this->connect_id ? mysqli_affected_rows($this->connect_id) : false;
-	}
-
-	/*
-	 * get the information of mysql server
-	 */
-	function server_info()
-	{
-		return 'MySQLi ' . $this->mysql_version;
-	}
-
-	/*
-	 * error message func
-	 */
-	function error_msg($msg)
-	{
-		global $dbprefix;
-
-		if(!$this->show_errors)
-		{
-			return false;
-		}
-
-		$error_no  = $this->connect_id ? @mysqli_errno($this->connect_id) : @mysqli_connect_errno();
-		$error_msg = $this->connect_id ? @mysqli_error($this->connect_id) : @mysqli_connect_error();
-		$error_sql = @current($this->debugr[$this->query_num+1]);
-
-		//some ppl want hide their table names
-		if(!defined('DEV_STAGE'))
-		{
-			$error_sql = preg_replace("#\s{1,3}`*{$dbprefix}([a-z0-9]+)`*\s{1,3}#e", "' <span style=\"color:blue\">' . substr('$1', 0, 1) . '</span> '", $error_sql);
-			$error_msg = preg_replace("#{$this->db_name}.{$dbprefix}([a-z0-9]+)#e", "' <span style=\"color:blue\">' . substr('$1', 0, 1) . '</span> '", $error_msg);
-			$error_sql = preg_replace("#\s{1,3}(from|update|into)\s{1,3}([a-z0-9]+)\s{1,3}#ie", "' $1 <span style=\"color:blue\">' . substr('$2', 0, 1) . '</span> '", $error_sql);
-			$error_msg = preg_replace("#\s{1,3}(from|update|into)\s{1,3}([a-z0-9]+)\s{1,3}#ie", "' $1 <span style=\"color:blue\">' . substr('$2', 0, 1) . '</span> '", $error_msg);
-			$error_msg = preg_replace("#\s'([^']+)'@'([^']+)'#ie", "' <span style=\"color:blue\">hidden</span>@$2 '", $error_msg);
-			$error_sql = preg_replace("#password\s*=\s*'[^']+'#i", "password='<span style=\"color:blue\">hidden</span>'", $error_sql);
-		}
-
-		#is this error related to updating?
-		$updating_related = false;
-		if(strpos($error_msg, 'Unknown column') !== false)
-		{
-			$updating_related = true;
-		}
-		
-		echo "<html><head><title>ERROR IM MYSQL</title>";
-		echo "<style>BODY{FONT-FAMILY:tahoma;FONT-SIZE:12px;}.error {}</style></head><body>";
-		echo '<br />';
-		echo '<div class="error">';
-		echo " <a href='#' onclick='window.location.reload( false );'>click to Refresh this page ...</a><br />";
-		echo "<h2>Sorry , There is an error in mysql " . ($msg !='' ? ", error : $msg" : "") ."</h2>";
-		if($error_sql != '')
-		{
-			echo "<br />--[query]-------------------------- <br />$error_sql<br />---------------------------------<br /><br />";
-		}
-		echo "[$error_no : $error_msg] <br />";
-		if($updating_related)
-		{
-			global $config;
-			echo "<br /><strong>Your Kleeja database seems to be old, try to update it now from: " . $config['siteurl'] . "install/</strong>";
-		}
-		echo "<br /><br /><strong>Script: Kleeja <br /><a href='http://www.kleeja.com'>Kleeja Website</a></strong>";
-		echo '</b></div>';
-		echo '</body></html>';
-		
-		#loggin -> error
-		kleeja_log('[SQL ERROR] : "' . $error_no . ' : ' . $error_msg  . '" -->');
-		
-		@$this->close();
-		exit();
-	}
-
-	/*
-	 * return last error
-	 */
-	function get_error()
-	{
-		if($this->connect_id)
-		{
-			return array(@mysqli_errno($this->connect_id), @mysqli_error($this->connect_id)); 
-		}
-		else
-		{
-			return array(@mysqli_connect_errno(), @mysqli_connect_error()); 
-		}
-	}
-
-}#end of class
-
-endif;
-
-
+	/**
+	 * To return the Mysql version
+	 *
+	 * @return string
+	 **/
+	public function version(){ return mysqli_get_server_info($this->connrec_id); }
+}

@@ -90,9 +90,9 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 	$result = $SQLMS->build($query);
 
 
-	if ($SQLMS->num_rows($result) != 0) 
+	if ($SQLMS->num($result) != 0) 
 	{
-		while($row=$SQLMS->fetch_array($result))
+		while($row=$SQLMS->fetch($result))
 		{
 			if($return_name)
 			{
@@ -122,7 +122,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 			
 		}
 
-		$SQLMS->freeresult($result); 
+		$SQLMS->free($result); 
 		unset($pass);
 		$SQLMS->close();
 

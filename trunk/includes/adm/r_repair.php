@@ -152,7 +152,7 @@ $query	= "SHOW TABLE STATUS";
 $result	= $SQL->query($query);
 $text = '';
 	
-while($row=$SQL->fetch_array($result))
+while($row=$SQL->fetch($result))
 {
 	$queryf	=	"REPAIR TABLE `" . $row['Name'] . "`";
 	$resultf = $SQL->query($queryf);
@@ -162,7 +162,7 @@ while($row=$SQL->fetch_array($result))
 	}
 }
 	
-$SQL->freeresult($result);
+$SQL->free($result);
 
 $text .= '<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . basename(ADMIN_PATH) . '?cp=r_repair' .  '\');", 2000);</script>' . "\n";
 $stylee = 'admin_info';
@@ -185,13 +185,13 @@ $result_s = $SQL->build($query_s);
 
 $files_number = $files_sizes = 0;
 
-while($row=$SQL->fetch_array($result_s))
+while($row=$SQL->fetch($result_s))
 {
 	$files_number++;
 	$files_sizes = $files_sizes+$row['size'];
 }
 
-$SQL->freeresult($result_s);
+$SQL->free($result_s);
 
 $update_query	= array(
 						'UPDATE'	=> "{$dbprefix}stats",
@@ -223,12 +223,12 @@ $query_w	= array(
 $result_w = $SQL->build($query_w);
 		
 $user_number = 0;
-while($row=$SQL->fetch_array($result_w))
+while($row=$SQL->fetch($result_w))
 {
 	$user_number++;
 }
 	
-$SQL->freeresult($result_w);
+$SQL->free($result_w);
 
 $update_query	= array(
 						'UPDATE'	=> "{$dbprefix}stats",

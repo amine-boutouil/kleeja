@@ -15,13 +15,6 @@ if (!defined('IN_COMMON'))
 	exit;
 }
 
-//we are in cache now ..
-define('IN_CACHE', true);
-
-//make sure it's utf8 data
-$SQL->set_utf8();
-
-
 //
 //In the future here will be a real cache class 
 //this codes, it's just a sample and usefull for
@@ -120,12 +113,12 @@ if (!($config = $cache->get('data_config')))
 			
 	$result = $SQL->build($query);
 
-	while($row=$SQL->fetch_array($result))
+	while($row=$SQL->fetch($result))
 	{
 		$config[$row['name']] = $row['value'];
 	}
 
-	$SQL->freeresult($result);
+	$SQL->free($result);
 
 	$cache->save('data_config', $config);
 }
@@ -146,7 +139,7 @@ if (!($stats = $cache->get('data_stats')))
 
 	$result = $SQL->build($query);
 
-	while($row=$SQL->fetch_array($result))
+	while($row=$SQL->fetch($result))
 	{
 		$stats = array(
 			'stat_files'		=> $row['files'],
@@ -165,7 +158,7 @@ if (!($stats = $cache->get('data_stats')))
 		($hook = kleeja_run_hook('while_fetch_stats_in_cache')) ? eval($hook) : null; //run hook
 	}
 
-	$SQL->freeresult($result);
+	$SQL->free($result);
 
 	#save the stats for hour and then refresh them
 	$cache->save('data_stats', $stats, 3600);
@@ -180,7 +173,7 @@ if (!($stats = $cache->get('data_stats')))
 	$result	= $SQL->build($query);		
 
 	#if already there is stats for this day, just update it, if not insert a new one
-	if($SQL->num_rows($result))	
+	if($SQL->num($result))	
 	{
 		$f_query	= array(
 							'UPDATE'	=> "{$dbprefix}filters",
@@ -218,9 +211,9 @@ if (!($banss = $cache->get('data_ban')))
 	($hook = kleeja_run_hook('qr_select_ban_cache')) ? eval($hook) : null; //run hook				
 	$result = $SQL->build($query);
 
-	$row = $SQL->fetch_array($result);
+	$row = $SQL->fetch($result);
 	$ban1 = $row['ban'];
-	$SQL->freeresult($result);
+	$SQL->free($result);
 
 	$banss = array();
 
@@ -258,9 +251,9 @@ if (!($ruless = $cache->get('data_rules')))
 	($hook = kleeja_run_hook('qr_select_rules_cache')) ? eval($hook) : null; //run hook
 	$result = $SQL->build($query);
 
-	$row = $SQL->fetch_array($result);
+	$row = $SQL->fetch($result);
 	$ruless = $row['rules'];
-	$SQL->freeresult($result);
+	$SQL->free($result);
 
 	$cache->save('data_rules', $ruless);
 }	
@@ -279,14 +272,14 @@ if (!($extras = $cache->get('data_extra')))
 	($hook = kleeja_run_hook('qr_select_extra_cache')) ? eval($hook) : null; //run hook
 	$result = $SQL->build($query);
 
-	$row = $SQL->fetch_array($result);
+	$row = $SQL->fetch($result);
 	
 	$extras = array(
 		'header' => $row['ex_header'],
 		'footer' => $row['ex_footer']
 	);
 
-	$SQL->freeresult($result);
+	$SQL->free($result);
 
 	$cache->save('data_extra', $extras);
 }
@@ -310,14 +303,14 @@ if (!($d_groups = $cache->get('data_groups')))
 	$result = $SQL->build($query);
 	
 	#Initiating
-	while($row=$SQL->fetch_array($result))
+	while($row=$SQL->fetch($result))
 	{
 		$d_groups[$row['group_id']]['data'] = $row;
 		$d_groups[$row['group_id']]['configs'] = array(); 
 		$d_groups[$row['group_id']]['acls'] = array();
 		$d_groups[$row['group_id']]['exts'] = array();
 	}
-	$SQL->freeresult($result);
+	$SQL->free($result);
 
 	#configs
 	$query = array(
@@ -329,11 +322,11 @@ if (!($d_groups = $cache->get('data_groups')))
 	($hook = kleeja_run_hook('qr_select_groups_data_cache')) ? eval($hook) : null; //run hook
 	$result = $SQL->build($query);
 
-	while($row=$SQL->fetch_array($result))
+	while($row=$SQL->fetch($result))
 	{
 		$d_groups[$row['group_id']]['configs'][$row['name']] = $row['value'];
 	}
-	$SQL->freeresult($result);
+	$SQL->free($result);
 
 	#acl
 	$query2 = array(
@@ -345,11 +338,11 @@ if (!($d_groups = $cache->get('data_groups')))
 	($hook = kleeja_run_hook('qr_select_groups_acls_cache')) ? eval($hook) : null; //run hook
 	$result2 = $SQL->build($query2);
 
-	while($row=$SQL->fetch_array($result2))
+	while($row=$SQL->fetch($result2))
 	{
 		$d_groups[$row['group_id']]['acls'][$row['acl_name']] = (int) $row['acl_can'];
 	}
-	$SQL->freeresult($result2);
+	$SQL->free($result2);
 
 	#exts
 	$query3 = array(
@@ -361,11 +354,11 @@ if (!($d_groups = $cache->get('data_groups')))
 	($hook = kleeja_run_hook('qr_select_groups_exts_cache')) ? eval($hook) : null; //run hook
 	$result3 = $SQL->build($query3);
 
-	while($row=$SQL->fetch_array($result3))
+	while($row=$SQL->fetch($result3))
 	{
 		$d_groups[$row['group_id']]['exts'][$row['ext']] = (int) $row['size'];
 	}
-	$SQL->freeresult($result3);
+	$SQL->free($result3);
 
 	unset($query, $query2, $query3, $result, $result2, $result3);
 

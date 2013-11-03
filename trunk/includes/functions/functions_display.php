@@ -231,7 +231,7 @@ function kleeja_info($msg, $title='', $exit = true, $redirect = false, $rs = 5, 
 * parameter: error_title : title of prblem
 *			msg_text: message of problem
 */
-function big_error ($error_title,  $msg_text, $error = true)
+function big_error ($error_title, $msg_text, $error = true)
 {
 	global $SQL; 
 	echo '<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">' . "\n";

@@ -109,7 +109,7 @@ if(isset($_GET['deleteuserfile']))
 	}
 
 	//is exists ?
-	if(!$SQL->num_rows($SQL->query("SELECT * FROM {$dbprefix}users WHERE id=" . intval($_GET['deleteuserfile']))))
+	if(!$SQL->num($SQL->query("SELECT * FROM {$dbprefix}users WHERE id=" . intval($_GET['deleteuserfile']))))
 	{
 		redirect($action_all);
 	}
@@ -123,7 +123,7 @@ if(isset($_GET['deleteuserfile']))
 	$result = $SQL->build($query);
 
 	$sizes = $num = 0;
-	while($row=$SQL->fetch_array($result))
+	while($row=$SQL->fetch($result))
 	{
 		//delete from folder ..
 		@kleeja_unlink (PATH . $row['folder'] . "/" . $row['name']);
@@ -137,7 +137,7 @@ if(isset($_GET['deleteuserfile']))
 		$sizes += $row['size'];
 	}
 
-	$SQL->freeresult($result);
+	$SQL->free($result);
 
 	if($num == 0)
 	{
@@ -180,7 +180,7 @@ if(isset($_GET['del_user']))
 	}
 
 	//is exists ?
-	if(!$SQL->num_rows($SQL->query("SELECT * FROM {$dbprefix}users WHERE id=" . intval($_GET['del_user']))))
+	if(!$SQL->num($SQL->query("SELECT * FROM {$dbprefix}users WHERE id=" . intval($_GET['del_user']))))
 	{
 		redirect($action_all);
 	}
@@ -214,11 +214,11 @@ else if (isset($_POST['newuser']))
 	{
 		$ERRORS[] = str_replace('4', '2', $lang['WRONG_NAME']);
 	}
-	else if ($SQL->num_rows($SQL->query("SELECT * FROM {$dbprefix}users WHERE clean_name='" . trim($SQL->escape($usrcp->cleanusername($_POST["lname"]))) . "'")) != 0)
+	else if ($SQL->num($SQL->query("SELECT * FROM {$dbprefix}users WHERE clean_name='" . trim($SQL->escape($usrcp->cleanusername($_POST["lname"]))) . "'")) != 0)
 	{
 		$ERRORS[] = $lang['EXIST_NAME'];
 	}
-	else if ($SQL->num_rows($SQL->query("SELECT * FROM {$dbprefix}users WHERE mail='" . trim($SQL->escape(strtolower($_POST["lmail"]))) . "'")) != 0)
+	else if ($SQL->num($SQL->query("SELECT * FROM {$dbprefix}users WHERE mail='" . trim($SQL->escape(strtolower($_POST["lmail"]))) . "'")) != 0)
 	{
 		$ERRORS[] = $lang['EXIST_EMAIL'];
 	}
@@ -281,7 +281,7 @@ if(isset($_POST['edituser']))
 	
 
 	//is exists ?
-	if(!$SQL->num_rows($SQL->query("SELECT id FROM {$dbprefix}users WHERE id=" . $userid)))
+	if(!$SQL->num($SQL->query("SELECT id FROM {$dbprefix}users WHERE id=" . $userid)))
 	{
 		kleeja_admin_err('ERROR-NO-ID', true, '', true,  basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'));
 	}
@@ -293,8 +293,8 @@ if(isset($_POST['edituser']))
 				);
 
 	$result = $SQL->build($query);
-	$udata = $SQL->fetch_array($result);
-	$SQL->freeresult($result);
+	$udata = $SQL->fetch($result);
+	$SQL->free($result);
 	
 	$new_clean_name = trim($SQL->escape($usrcp->cleanusername($_POST["l_name"])));
 
@@ -320,7 +320,7 @@ if(isset($_POST['edituser']))
 		{
 			$ERRORS[] = str_replace('4', '2', $lang['WRONG_NAME']);
 		}
-		else if ($SQL->num_rows($SQL->query("SELECT * FROM {$dbprefix}users WHERE clean_name='" . $new_clean_name . "'")) != 0)
+		else if ($SQL->num($SQL->query("SELECT * FROM {$dbprefix}users WHERE clean_name='" . $new_clean_name . "'")) != 0)
 		{
 			$ERRORS[] = $lang['EXIST_NAME'];
 		}
@@ -328,7 +328,7 @@ if(isset($_POST['edituser']))
 	else if ($udata['mail'] != trim($_POST['l_mail']))
 	{
 		$new_mail = true;
-		if($SQL->num_rows($SQL->query("SELECT * FROM {$dbprefix}users WHERE mail='" . trim($SQL->escape(strtolower($_POST["lmail"]))) . "'")) != 0)
+		if($SQL->num($SQL->query("SELECT * FROM {$dbprefix}users WHERE mail='" . trim($SQL->escape(strtolower($_POST["lmail"]))) . "'")) != 0)
 		{
 			$ERRORS[] = $lang['EXIST_EMAIL'];
 		}
@@ -393,7 +393,7 @@ if(isset($_POST['newgroup']))
 	{
 		$ERRORS[] = str_replace('4', '1', $lang['WRONG_NAME']);
 	}
-	else if ($SQL->num_rows($SQL->query("SELECT * FROM {$dbprefix}groups WHERE group_name='" . trim($SQL->escape($_POST["gname"])) . "'")) != 0)
+	else if ($SQL->num($SQL->query("SELECT * FROM {$dbprefix}groups WHERE group_name='" . trim($SQL->escape($_POST["gname"])) . "'")) != 0)
 	{
 		$ERRORS[] = $lang['EXIST_NAME'];
 	}
@@ -434,7 +434,7 @@ if(isset($_POST['newgroup']))
 				);
 		$result = $SQL->build($query);
 		
-		while($row=$SQL->fetch_array($result))
+		while($row=$SQL->fetch($result))
 		{
 			$insert_query	= array(
 										'INSERT'	=> 'acl_name, acl_can, group_id',
@@ -454,7 +454,7 @@ if(isset($_POST['newgroup']))
 				);
 		$result = $SQL->build($query);
 		
-		while($row=$SQL->fetch_array($result))
+		while($row=$SQL->fetch($result))
 		{
 			$insert_query	= array(
 										'INSERT'	=> 'name, value, group_id',
@@ -474,7 +474,7 @@ if(isset($_POST['newgroup']))
 				);
 		$result = $SQL->build($query);
 		
-		while($row=$SQL->fetch_array($result))
+		while($row=$SQL->fetch($result))
 		{
 			$insert_query	= array(
 										'INSERT'	=> 'ext, size, group_id',
@@ -597,7 +597,7 @@ case 'general':
 	$result = $SQL->build($query);
 
 	$nums_rows = 0;
-	$n_fetch = $SQL->fetch_array($result);
+	$n_fetch = $SQL->fetch($result);
 	$nums_rows = $n_fetch['total_groups'];
 	$no_results = false;
 	$e_groups	= $c_groups = array();
@@ -610,7 +610,7 @@ case 'general':
 
 		$result = $SQL->build($query);
 
-		while($row=$SQL->fetch_array($result))
+		while($row=$SQL->fetch($result))
 		{
 			$r = array(
 						'id'	=> $row['group_id'],
@@ -634,7 +634,7 @@ case 'general':
 		$c_groups = false;
 	}
 	
-	$SQL->freeresult($result);
+	$SQL->free($result);
 
 break;
 
@@ -659,7 +659,7 @@ case 'group_acl':
 	$result = $SQL->build($query);
 	
 	$acls = $submitted_on_acls = $submitted_ff_acls = array();
-	while($row=$SQL->fetch_array($result))
+	while($row=$SQL->fetch($result))
 	{
 		#if submit
 		if(isset($_POST['editacl']))
@@ -688,7 +688,7 @@ case 'group_acl':
 				);
 		
 	}
-	$SQL->freeresult($result);
+	$SQL->free($result);
 
 	#if submit
 	if(isset($_POST['editacl']))
@@ -779,7 +779,7 @@ case 'group_data':
 	$cdata= $d_groups[$req_group]['configs'];
 	$STAMP_IMG_URL = file_exists(PATH . 'images/watermark.gif') ? PATH . 'images/watermark.gif' : PATH . 'images/watermark.png';
 
-	while($row=$SQL->fetch_array($result))
+	while($row=$SQL->fetch($result))
 	{	
 		#submit, why here ? dont ask me just accept it as it.
 		if(isset($_POST['editdata']))
@@ -840,7 +840,7 @@ case 'group_data':
 						'option'	=> $option_o
 			);
 	}
-	$SQL->freeresult($result);
+	$SQL->free($result);
 
 	#submit
 	if(isset($_POST['editdata']))
@@ -890,7 +890,7 @@ case 'group_exts':
 	if(empty($config['exts_upraded1_5']))
 	{
 		$ex_exts = $SQL->query("SHOW TABLES LIKE '{$dbprefix}exts';");
-		if($SQL->num_rows($ex_exts))
+		if($SQL->num($ex_exts))
 		{
 			$xquery = array(
 							'SELECT'	=> 'ext, gust_size, user_size, gust_allow, user_allow',
@@ -901,7 +901,7 @@ case 'group_exts':
 			$xresult = $SQL->build($xquery);
 			
 			$xexts = '';
-			while($row=$SQL->fetch_array($xresult))
+			while($row=$SQL->fetch($xresult))
 			{
 				if($row['gust_allow'])
 				{
@@ -914,7 +914,7 @@ case 'group_exts':
 				}
 			}
 
-			$SQL->freeresult($result);
+			$SQL->free($result);
 
 			#delete prev exts before adding
 			$query_del	= array(
@@ -988,7 +988,7 @@ case 'group_exts':
 
 		$result = $SQL->build($query);
 
-		if ($SQL->num_rows($result))
+		if ($SQL->num($result))
 		{
 			kleeja_admin_err(sprintf($lang['NEW_EXT_EXISTS_B4'], $new_ext), true, '', true,  $action);
 		}
@@ -1041,7 +1041,7 @@ case 'group_exts':
 	$result = $SQL->build($query);
 	
 	$exts = array();
-	while($row=$SQL->fetch_array($result))
+	while($row=$SQL->fetch($result))
 	{		
 		$exts[] = array(
 						'ext_id'	=> $row['ext_id'],
@@ -1050,7 +1050,7 @@ case 'group_exts':
 						'ext_icon'	=> file_exists(PATH . "images/filetypes/".  $row['ext'] . ".png") ? PATH . "images/filetypes/" . $row['ext'] . ".png" : PATH. 'images/filetypes/file.png'
 			);
 	}
-	$SQL->freeresult($result);
+	$SQL->free($result);
 
 
 break;
@@ -1095,7 +1095,7 @@ case 'users':
 	$result = $SQL->build($query);
 
 	$nums_rows = 0;
-	$n_fetch = $SQL->fetch_array($result);
+	$n_fetch = $SQL->fetch($result);
 	$nums_rows = $n_fetch['total_users'];
 
 	//pagination
@@ -1112,7 +1112,7 @@ case 'users':
 
 		$result = $SQL->build($query);
 
-		while($row=$SQL->fetch_array($result))
+		while($row=$SQL->fetch($result))
 		{
 			$userfile =  $config['siteurl'] . ($config['mod_writer'] ? 'fileuser-' . $row['id'] . '.html' : 'ucp.php?go=fileuser&amp;id=' . $row['id']);
 
@@ -1129,7 +1129,7 @@ case 'users':
 				);
 		}
 
-		$SQL->freeresult($result);
+		$SQL->free($result);
 	}
 	else #num rows
 	{ 
@@ -1154,7 +1154,7 @@ case 'edit_user':
 	if(!isset($userid))
 	{
 		$userid = intval($_GET['uid']);
-		if(!$SQL->num_rows($SQL->query("SELECT * FROM {$dbprefix}users WHERE id=" . $userid)))
+		if(!$SQL->num($SQL->query("SELECT * FROM {$dbprefix}users WHERE id=" . $userid)))
 		{
 			kleeja_admin_err('ERROR-NO-USER-FOUND', true, '', true,  basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php'));
 		}
@@ -1167,8 +1167,8 @@ case 'edit_user':
 				);
 
 	$result = $SQL->build($query);
-	$udata = $SQL->fetch_array($result);
-	$SQL->freeresult($result);
+	$udata = $SQL->fetch($result);
+	$SQL->free($result);
 
 	//If founder, just founder can edit him;
 	$u_founder	= isset($_POST['l_founder']) ? intval($_POST['l_founder']) : (int) $udata['founder'];

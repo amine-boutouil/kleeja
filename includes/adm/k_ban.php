@@ -41,7 +41,7 @@ $query	= array(
 
 $result = $SQL->build($query);
 
-while($row=$SQL->fetch_array($result))
+while($row=$SQL->fetch($result))
 {
 	$ban = isset($_POST["ban_text"]) ? htmlspecialchars($_POST['ban_text']) : $row['ban'];
 
@@ -63,7 +63,7 @@ while($row=$SQL->fetch_array($result))
 	}
 }
 
-$SQL->freeresult($result);
+$SQL->free($result);
 
 //after submit 
 if (isset($_POST['submit']))

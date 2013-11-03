@@ -57,7 +57,7 @@ if (isset($_POST['submit']))
 
 		$result = $SQL->build($query);
 
-		while($row=$SQL->fetch_array($result))
+		while($row=$SQL->fetch($result))
 		{
 			//delete from folder ..
 			@kleeja_unlink (PATH . $row['folder'] . '/' . $row['name']);
@@ -72,7 +72,7 @@ if (isset($_POST['submit']))
 		}
 	}
     
-	$SQL->freeresult($result);
+	$SQL->free($result);
 	   
 	//no files to delete
 	if(isset($ids) && sizeof($ids))
@@ -154,9 +154,9 @@ if($do_not_query_total_files)
 else
 {
 	$result_p = $SQL->build($query);
-	$n_fetch = $SQL->fetch_array($result_p);
+	$n_fetch = $SQL->fetch($result_p);
 	$nums_rows = $n_fetch['total_files'];
-	$SQL->freeresult($result_p);
+	$SQL->free($result_p);
 }
 
 //pager
@@ -177,7 +177,7 @@ if ($nums_rows > 0)
 	#if Kleeja integtared we dont want make alot of queries
 	$ids_and_names = array();
 
-	while($row=$SQL->fetch_array($result))
+	while($row=$SQL->fetch($result))
 	{
 		//thumb ?
 		$is_there_thumb = file_exists(PATH . $row['folder'] . '/thumbs/' . $row['name']) ? true : false;
@@ -238,7 +238,7 @@ if ($nums_rows > 0)
 */
 	}
 
-	$SQL->freeresult($result);
+	$SQL->free($result);
 	
 /*
 	if (isset($_POST['submit']))

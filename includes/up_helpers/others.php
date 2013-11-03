@@ -248,7 +248,7 @@ function user_is_flooding($user_id = '-1')
 					'WHERE'     => 'f.time >= ' . $time . ' AND f.user_ip = \'' .  $SQL->escape(get_ip()) . '\'',
 				);
 
-	if ($SQL->num_rows($SQL->build($query)))
+	if ($SQL->num($SQL->build($query)))
 	{
 		return true;
 	}

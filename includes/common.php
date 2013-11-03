@@ -133,7 +133,7 @@ switch ($db_type)
 }
 include PATH . 'includes/classes/style.php';
 include PATH . 'includes/classes/usr.php';
-include PATH . 'includes/classes/pager.php';
+include PATH . 'includes/classes/pagination.php';
 include PATH . 'includes/functions/functions.php';
 include PATH . 'includes/functions/functions_display.php';
 if(defined('IN_ADMIN'))
@@ -149,7 +149,7 @@ if(empty($script_encoding))
 }
 
 #connect to DB
-$SQL	= new SSQL($dbserver, $dbuser, $dbpass, $dbname);
+$SQL	= new database($dbserver, $dbuser, $dbpass, $dbname);
 #destroy the database password now
 unset($dbpass);
 $tpl	= new kleeja_style;
@@ -167,12 +167,12 @@ $query = array(
 
 $result = $SQL->build($query);
 
-while($row=$SQL->fetch_array($result))
+while($row=$SQL->fetch($result))
 {
 	$config[$row['name']] = $row['value'];
 }
 
-$SQL->freeresult($result);
+$SQL->free($result);
 
 #check user or guest
 $usrcp->kleeja_check_user();

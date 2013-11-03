@@ -108,9 +108,9 @@ class usrcp
 		($hook = kleeja_run_hook('qr_select_usrdata_n_usr_class')) ? eval($hook) : null; //run hook			
 		$result = $SQL->build($query);
 
-		if ($SQL->num_rows($result)) 
+		if ($SQL->num($result)) 
 		{
-			while($row=$SQL->fetch_array($result))
+			while($row=$SQL->fetch($result))
 			{
 				if(empty($row['password'])) //more security
 				{
@@ -188,7 +188,7 @@ class usrcp
 
 				($hook = kleeja_run_hook('qr_while_usrdata_n_usr_class')) ? eval($hook) : null; //run hook
 			}
-			$SQL->freeresult($result);
+			$SQL->free($result);
 
 			unset($pass);
 			return true;
@@ -223,7 +223,7 @@ class usrcp
 					);
 
 		($hook = kleeja_run_hook('qr_select_userdata_in_usrclass')) ? eval($hook) : null; //run hook
-		$data_user = $SQL->fetch_array($SQL->build($query_name));
+		$data_user = $SQL->fetch($SQL->build($query_name));
 
 		return $data_user;
 	}

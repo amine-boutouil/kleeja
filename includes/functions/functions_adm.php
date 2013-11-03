@@ -169,7 +169,7 @@ function get_filter($item, $get_by = 'filter_id', $just_value = false)
 
 	($hook = kleeja_run_hook('get_filter_func')) ? eval($hook) : null; //run hook
 	
-	$SQL->freeresult($result);
+	$SQL->free($result);
 	if($just_value)
 	{
 		return $v['filter_value'];
@@ -198,7 +198,7 @@ function filter_exists($item, $get_by = 'filter_id')
 	($hook = kleeja_run_hook('filter_exists_func')) ? eval($hook) : null; //run hook
 
 	$result	= $SQL->build($query);				
-	return $SQL->num_rows($result);
+	return $SQL->num($result);
 }
 
 
@@ -263,7 +263,7 @@ function sync_total_files($files = true, $start = false)
 
 	$result	= $SQL->build($query);
 	$v		= $SQL->fetch($result);
-	$SQL->freeresult($result);
+	$SQL->free($result);
 	
 	#if no data, turn them to number
 	$min_id = (int) $v['min_file_id'];
@@ -285,7 +285,7 @@ function sync_total_files($files = true, $start = false)
 
 	$result	= $SQL->build($query);
 	$v		= $SQL->fetch($result);
-	$SQL->freeresult($result);
+	$SQL->free($result);
 
 	$this_step_count = $v['num_files'];
 	if($this_step_count == 0)
@@ -333,7 +333,7 @@ function get_actual_stats($name)
 
 	($hook = kleeja_run_hook('get_actual_stats_func')) ? eval($hook) : null; //run hook
 	
-	$SQL->freeresult($result);
+	$SQL->free($result);
 
 	return $v[$name];
 }

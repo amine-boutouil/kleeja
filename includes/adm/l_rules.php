@@ -41,7 +41,7 @@ $query	= array(
 
 $result = $SQL->build($query);
 
-while($row=$SQL->fetch_array($result))
+while($row=$SQL->fetch($result))
 {
 	$rulesw = isset($_POST['rules_text']) ? $_POST['rules_text'] : $row['rules'];
 	$rules = htmlspecialchars($rulesw);
@@ -64,7 +64,7 @@ while($row=$SQL->fetch_array($result))
 	}
 }
 
-$SQL->freeresult($result);
+$SQL->free($result);
 
 
 //after submit 

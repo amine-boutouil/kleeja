@@ -122,9 +122,9 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 	($hook = kleeja_run_hook('qr_select_usrdata_vb_usr_class')) ? eval($hook) : null; //run hook				
 	$result_salt = $SQLVB->build($query_salt);
 
-	if ($SQLVB->num_rows($result_salt) > 0) 
+	if ($SQLVB->num($result_salt) > 0) 
 	{
-		while($row1=$SQLVB->fetch_array($result_salt))
+		while($row1=$SQLVB->fetch($result_salt))
 		{
 			if($return_name)
 			{
@@ -143,9 +143,9 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 		
 				$result = $SQLVB->build($query);
 
-				if ($SQLVB->num_rows($result) != 0)
+				if ($SQLVB->num($result) != 0)
 				{
-					while($row=$SQLVB->fetch_array($result))
+					while($row=$SQLVB->fetch($result))
 					{
 						if(!$loginadm)
 						{
@@ -178,7 +178,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 
 						($hook = kleeja_run_hook('qr_while_usrdata_vb_usr_class')) ? eval($hook) : null; //run hook
 					}
-					$SQLVB->freeresult($result);
+					$SQLVB->free($result);
 				}#nums_sql2
 				else
 				{
@@ -201,7 +201,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 			}
 		}#whil1
 
-		$SQLVB->freeresult($result_salt); 
+		$SQLVB->free($result_salt); 
 
 		unset($pass);
 		$SQLVB->close();

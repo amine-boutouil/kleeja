@@ -65,7 +65,7 @@ if (isset($_POST['submit']))
 
 		$result = $SQL->build($query);
 
-		while($row=$SQL->fetch_array($result))
+		while($row=$SQL->fetch($result))
 		{
 			//delete from folder ..
 			@kleeja_unlink (PATH . $row['folder'] . '/' . $row['name']);
@@ -90,7 +90,7 @@ if (isset($_POST['submit']))
 		}
 	}
    
-	$SQL->freeresult($result);
+	$SQL->free($result);
   
 	//no files to delete
 	if(isset($ids) && sizeof($ids))
@@ -153,7 +153,7 @@ if(isset($_GET['deletefiles']))
 	$sizes  = false;
 	$ids = array();
 	$files_num = $imgs_num = 0;
-	while($row=$SQL->fetch_array($result))
+	while($row=$SQL->fetch($result))
 	{
 		//delete from folder ..
 		@kleeja_unlink (PATH . $row['folder'] . "/" . $row['name']);
@@ -178,7 +178,7 @@ if(isset($_GET['deletefiles']))
 		$sizes += $row['size'];
 	}
 
-	$SQL->freeresult($result);
+	$SQL->free($result);
 
 	if(($files_num + $imgs_num) == 0)
 	{
@@ -273,9 +273,9 @@ if($do_not_query_total_files)
 else
 {
 	$result_p = $SQL->build($query);
-	$n_fetch = $SQL->fetch_array($result_p);
+	$n_fetch = $SQL->fetch($result_p);
 	$nums_rows = $n_fetch['total_files'];
-	$SQL->freeresult($result_p);
+	$SQL->free($result_p);
 }
 
 
@@ -296,7 +296,7 @@ if ($nums_rows > 0)
 	#if Kleeja integtared we dont want make alot of queries
 	$ids_and_names = array();
 
-	while($row=$SQL->fetch_array($result))
+	while($row=$SQL->fetch($result))
 	{
 		$userfile =  $config['siteurl'] . ($config['mod_writer'] ? 'fileuser-' . $row['user'] . '.html' : 'ucp.php?go=fileuser&amp;id=' . $row['user']);
 
@@ -335,7 +335,7 @@ if ($nums_rows > 0)
 		$del[$row['id']] = isset($_POST['del_' . $row['id']]) ? $_POST['del_' . $row['id']] : '';
 	}
 
-	$SQL->freeresult($result);
+	$SQL->free($result);
 }
 else
 {

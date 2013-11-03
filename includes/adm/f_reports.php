@@ -65,7 +65,7 @@ if($current_smt == 'show_h24')
 $result = $SQL->build($query);
 
 //pagination
-$nums_rows		= $SQL->num_rows($result);
+$nums_rows		= $SQL->num($result);
 $currentPage	= isset($_GET['page']) ? intval($_GET['page']) : 1;
 $Pager			= new SimplePager($perpage, $nums_rows, $currentPage);
 $start			= $Pager->getStartRow();
@@ -79,7 +79,7 @@ if ($nums_rows > 0)
 	$query['LIMIT']	=	"$start, $perpage";
 	$result = $SQL->build($query);
 
-	while($row=$SQL->fetch_array($result))
+	while($row=$SQL->fetch($result))
 	{
 		//make new lovely arrays !!
 		$arr[]	= array(
@@ -133,7 +133,7 @@ if ($nums_rows > 0)
 			}
 		}
 	}
-	$SQL->freeresult($result);
+	$SQL->free($result);
 }
 else #num rows
 {

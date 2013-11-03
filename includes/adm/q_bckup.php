@@ -36,14 +36,14 @@ $query	= 'SHOW TABLE STATUS';
 $result	= $SQL->query($query);
 $i = 0;
 $total_size = 0;
-while($row=$SQL->fetch_array($result))
+while($row=$SQL->fetch($result))
 {
 	//make new lovely arrays !!
 	$size[$row['Name']]	= round($row['Data_length']/1024, 2);
 	$total_size  += $row['Data_length'];
 }
 	
-$SQL->freeresult($result);
+$SQL->free($result);
 
 
 #total size
@@ -83,7 +83,7 @@ if (isset($_POST['submit']))
 
 		 //get code of tables ceation
 		$result = $SQL->query($query);
-		$que	= $SQL->fetch_array($result);
+		$que	= $SQL->fetch($result);
 
 		//preivous code iside file
 		$outta .= "\r\n# Table: " . $table . "\r\n";
@@ -95,7 +95,7 @@ if (isset($_POST['submit']))
 		$result2 = $SQL->query($query2);
 
 		$fields	= $values = array();
-		while($ro = $SQL->fetch_array($result2))
+		while($ro = $SQL->fetch($result2))
 		{
 			$fields	= $values = array();
 			while($res = current($ro))
@@ -120,8 +120,8 @@ if (isset($_POST['submit']))
 			unset($fields, $values);
 		}
 
-		$SQL->freeresult($result);
-		$SQL->freeresult($result2);
+		$SQL->free($result);
+		$SQL->free($result2);
 	}
 
 	//download now

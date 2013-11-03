@@ -27,6 +27,7 @@ define ('DB_VERSION' , '10');
 //////////////////////////////////////////////
 
 $update_sqls['delete_del_f_day'] = "DELETE FROM `{$dbprefix}config` WHERE `name` IN('del_f_day', 'gzip');";
+$update_sqls['configs_no_plg_id'] = "ALTER TABLE `{$dbprefix}config` DROP `plg_id`;";
 $update_sqls['configs_to_text'] = "UPDATE `{$dbprefix}config` SET `option`='text' WHERE `name` IN ('sitename', 'siteurl', 'sitemail', 'sitemail2', 'closemsg', 'cookie_name', 'cookie_path', 'cookie_domain', 'foldername', 'prefixname', 'livexts', 'imagefolder','imagefolderexts', 'welcome_msg', 'googleanalytics');";
 $update_sqls['configs_to_number'] = "UPDATE `{$dbprefix}config` SET `option`='number' WHERE `name` IN ('total_size', 'filesnum', 'sec_down', 'usersectoupload');";
 $update_sqls['configs_to_select'] = "UPDATE  `{$dbprefix}config` SET  `option` =  'select' WHERE  `name` IN ('language','time_zone','user_system','decode','id_form');";

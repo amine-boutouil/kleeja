@@ -18,7 +18,6 @@ define('PATH', dirname(__FILE__) . DIRECTORY_SEPARATOR);
 include PATH . 'includes/common.php';
 include PATH . 'includes/functions/functions_down.php';
 
-
 ($hook = kleeja_run_hook('begin_download_page')) ? eval($hook) : null; //run hook
 
 //
@@ -120,6 +119,14 @@ if(ig('id') || ig('filename'))
 	kleeja_footer();
 }
 
+
+
+
+
+
+
+
+
 //
 //download file 
 //
@@ -201,8 +208,8 @@ else if (ig('down') || ig('downf') ||
 				$go_to = $config['siteurl'] . ($config['mod_writer'] ? 'download' . g('down') . '.html' : 'do.php?id=' . g('down','int'));
 			}
 
-			redirect($go_to);
-			exit;
+			#redirect using header and exit
+			redirect($go_to, true, true);
 		}
 	}
 
@@ -354,7 +361,7 @@ else if (ig('down') || ig('downf') ||
 		}
 		else
 		{
-		//	big_error('* ' . $lang['FILE_NO_FOUNDED'], $lang['NOT_FOUND']);
+			big_error('* ' . $lang['FILE_NO_FOUNDED'], $lang['NOT_FOUND']);
 		}
 	}
 
@@ -405,7 +412,6 @@ else if (ig('down') || ig('downf') ||
 		#it's failed to open !
 		header("HTTP/1.0 404 Not Found");
 		@fclose($pfile);
-		garbage_collection();
 		big_error('** ' . $lang['FILE_NO_FOUNDED'], $lang['NOT_FOUND']);
 	}
 
@@ -470,8 +476,6 @@ else if (ig('down') || ig('downf') ||
 		$bytes_sent += strlen($buffer);
 	}
 	fclose($fp);
-	
-
 }
 
 //

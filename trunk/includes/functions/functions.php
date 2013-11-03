@@ -62,7 +62,7 @@ function g($name, $type = 'str', $default_value = false)
 }
 
 /**
- *  clean _POST variable if exists and return it
+ * clean _POST variable if exists and return it
  * 
  * @since 2.0
  * @param string $name The name of _POST variable
@@ -346,7 +346,7 @@ function get_lang($name, $folder = '')
 	}
 
 	$path = PATH . 'lang/' . $config['language'] . '/' . str_replace('.php', '', $name) . '.php';
-	$s = defined('DEBUG') ? include_once($path) : @include_once($path);
+	$s = defined('DEBUG') ? include($path) : @include($path);
 
 	if($s === false)
 	{
@@ -402,8 +402,19 @@ function get_config($name)
 * dynamic: every refresh of the page, the config data will be brought from db, not from the cache !
 * plg_id: if this config belong to plugin .. see devKit. 
 */
-function add_config($name, $value, $order = '0', $html = '', $type = '0', $plg_id = '0', $dynamic = false)
+function add_config($name, $value = '', $order = 0, $field = '', $type = '0', $dynamic = false)
 {
+	#if bulk adding
+	if(is_array($name))
+	{
+		foreach($name as $n=>$v)
+		{
+			add_config($n, $v['order'], $v['field'], $v['type'], $v['dynamic']);
+		}
+
+		return;
+	}
+
 	global $dbprefix, $SQL, $config, $d_groups;
 	
 	if(get_config($name))
@@ -425,7 +436,7 @@ function add_config($name, $value, $order = '0', $html = '', $type = '0', $plg_i
 			$insert_query	= array(
 									'INSERT'	=> '`name`, `value`, `group_id`',
 									'INTO'		=> "{$dbprefix}groups_data",
-									'VALUES'	=> "'" . $SQL->escape($name) . "','" . $SQL->escape($value) . "', group_id" . $g_id,
+									'VALUES'	=> "'" . $SQL->escape($name) . "','" . $SQL->escape($value) . "', " . $g_id,
 								);
 
 			($hook = kleeja_run_hook('insert_sql_add_config_func_groups_data')) ? eval($hook) : null; //run hook
@@ -435,9 +446,9 @@ function add_config($name, $value, $order = '0', $html = '', $type = '0', $plg_i
 	}
 
 	$insert_query	= array(
-							'INSERT'	=> '`name` ,`value` ,`option` ,`display_order`, `type`, `plg_id`, `dynamic`',
+							'INSERT'	=> '`name` ,`value` ,`option` ,`display_order`, `type`, `dynamic`',
 							'INTO'		=> "{$dbprefix}config",
-							'VALUES'	=> "'" . $SQL->escape($name) . "','" . $SQL->escape($value) . "', '" . $SQL->escape($html) . "','" . intval($order) . "','" . $SQL->escape($type) . "','" . intval($plg_id) . "','"  . ($dynamic ? '1' : '0') . "'",
+							'VALUES'	=> "'" . $SQL->escape($name) . "','" . $SQL->escape($value) . "', '" . $SQL->escape($field) . "', " . intval($order) . ",'" . $SQL->escape($type) . "','"  . ($dynamic ? '1' : '0') . "'",
 						);
 
 	($hook = kleeja_run_hook('insert_sql_add_config_func')) ? eval($hook) : null; //run hook
@@ -454,23 +465,8 @@ function add_config($name, $value, $order = '0', $html = '', $type = '0', $plg_i
 	return false;
 }
 
-function add_config_r($configs)
-{
-	if(!is_array($configs))
-	{
-		return false;
-	}
 
-	//array(name=>array(value=>,order=>,html=>),...);
-	foreach($configs as $n=>$m)
-	{
-		add_config($n, $m['value'], $m['order'], $m['html'], $m['type'], $m['plg_id'], $m['dynamic']);
-	}
-
-	return;
-}
-
-function update_config($name, $value, $escape = true, $group = false)
+function update_config($name, $value = '', $escape = true, $group = false)
 {
 	global $SQL, $dbprefix, $d_groups, $userinfo;
 
@@ -636,7 +632,7 @@ function kleeja_check_captcha()
 */
 function kleeja_log($text, $reset = false)
 {
-	//if not in development stage, abort
+	#if not in development stage, abort
 	if(!defined('DEV_STAGE'))
 	{
 		return false;
@@ -800,5 +796,12 @@ function untar($file, $dest = "./")
 
 function garbage_collection()
 {
-	#later
+	if(defined('garbage_collection_done'))
+	{
+		return true;
+	}
+	
+	$SQL
+	
+	define('garbage_collection_done', true);
 }

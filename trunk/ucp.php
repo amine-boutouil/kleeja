@@ -11,26 +11,7 @@
 
 #where are we?
 define('IN_INDEX' , true);
-
-if(isset($_GET['go']))
-{
-	switch($_GET['go'])
-	{
-		case 'login': 
-		define ('IN_LOGINPAGE' , true);
-		case 'logout': case 'get_pass':
-		define ('IN_LOGIN' , true);
-		break;
-		case 'register':
-		define ('IN_REGISTER' , true);
-		break;
-	}
-}
-
-if(isset($_GET['go']) && $_GET['go'] == 'login' && isset($_POST['submit']))
-{
-	define('IN_LOGIN_POST', true);
-}
+define('IN_UCP' , true);
 
 #get the core
 define('PATH', dirname(__FILE__) . DIRECTORY_SEPARATOR);
@@ -38,38 +19,38 @@ include PATH . 'includes/common.php';
 
 ($hook = kleeja_run_hook('begin_usrcp_page')) ? eval($hook) : null; //run hook
 
-//difne empty var
-$extra = '';
 
-//now we will navigate ;)
-if(!isset($_GET['go']))
-{
-	$_GET['go'] = null;	
-}
+#to be avaliable for later, extra code between head tag
+$extra_code_in_header = '';
 
-switch ($_GET['go'])
+
+/**
+ * User Control Page
+ * ucp.php?go=[...]
+ */
+switch (g('go', 'str', 'login'))
 { 
 	//
 	//login page
 	//
 	case 'login' : 
 
-		//page info
+		#page info
 		$stylee				= 'login';
 		$titlee				= $lang['LOGIN'];
 		$action				= 'ucp.php?go=login' . (isset($_GET['return']) ? '&amp;return=' . htmlspecialchars($_GET['return']) : '');
 		$forget_pass_link	= !empty($forgetpass_script_path) && (int) $config['user_system'] != 1 ? $forgetpass_script_path : 'ucp.php?go=get_pass';
 		$H_FORM_KEYS		= kleeja_add_form_key('login');
-		//no error yet 
+		#no error yet 
 		$ERRORS = false;
 
-		//_post
-		$t_lname = isset($_POST['lname']) ? htmlspecialchars($_POST['lname']) : ''; 
-		$t_lpass = isset($_POST['lpass']) ? htmlspecialchars($_POST['lpass']) : ''; 
+		#login variable
+		$t_lname = p('lname', 'str', ''); 
+		$t_lpass = p('lpass', 'str', ''); 
 		
 		($hook = kleeja_run_hook('login_before_submit')) ? eval($hook) : null; //run hook
 		
-		//logon before !
+		#already a user? 
 		if ($usrcp->name())
 		{
 			($hook = kleeja_run_hook('login_logon_before')) ? eval($hook) : null; //run hook
@@ -438,12 +419,12 @@ switch ($_GET['go'])
 					if ($_POST['del_' . $row['id']])
 					{
 						//delete from folder .. 
-						@kleeja_unlink ($row['folder'] . '/' . $row['name'] );
+						@kleeja_unlink($row['folder'] . '/' . $row['name'] );
 
 						//delete thumb
 						if (file_exists($row['folder'] . '/thumbs/' . $row['name'] ))
 						{
-							@kleeja_unlink ($row['folder'] . '/thumbs/' . $row['name'] );
+							@kleeja_unlink($row['folder'] . '/thumbs/' . $row['name'] );
 						}
 
 						$ids[] = $row['id'];
@@ -847,7 +828,7 @@ $titlee = empty($titlee) ? $lang['USERS_SYSTEM'] : $titlee;
 $stylee = empty($stylee) ? 'info' : $stylee;
 
 #header
-kleeja_header($titlee, $extra);
+kleeja_header($titlee, $extra_code_in_header);
 #page template
 echo $tpl->display($stylee);
 #footer

@@ -363,14 +363,15 @@ switch ($_GET['go'])
 		$perpage		= 16;
 		$result_p		= $SQL->build($query);
 		$nums_rows		= $SQL->num_rows($result_p);
-		$currentPage	= (isset($_GET['page'])) ? intval($_GET['page']) : 1;
-		$Pager			= new SimplePager($perpage,$nums_rows,$currentPage);
-		$start			= $Pager->getStartRow();
+		$current_page	= g('page', 'int', 1);
+		$pagination		= new pagination($perpage, $nums_rows, $current_page);
+		$start			= $pagination->get_start_row();
 
 		$your_fileuser	= $config['siteurl'] . ($config['mod_writer'] ? 'fileuser-' . $usrcp->id() . '.html' : 'ucp.php?go=fileuser&amp;id=' .  $usrcp->id());
-		$total_pages	= $Pager->getTotalPages(); 
-		$linkgoto		= $config['siteurl'] . ($config['mod_writer'] ?  'fileuser-' . $user_id  . '-' . $currentPage . '.html' : 'ucp.php?go=fileuser&amp;id=' . $user_id . '&amp;page=' . $currentPage);
-		$page_nums		= $Pager->print_nums(str_replace('.html', '', $linkgoto));
+		$total_pages	= $pagination->get_total_pages(); 
+		$pagination_link= $config['siteurl'] . ($config['mod_writer'] ?  'fileuser-' . $user_id  . '-'  : 'ucp.php?go=fileuser&amp;id=' . $user_id);
+		$linkgoto		= $config['siteurl'] . ($config['mod_writer'] ?  'fileuser-' . $user_id  . '-' . $current_page . '.html' : 'ucp.php?go=fileuser&amp;id=' . $user_id . '&amp;page=' . $current_page);
+		$page_nums		= $pagination->print_nums($pagination_link);
  
 		$no_results = true;
 
@@ -392,7 +393,7 @@ switch ($_GET['go'])
 
 			$result	= $SQL->build($query);
 
-			$i = ($currentPage * $perpage) - $perpage;
+			$i = ($current_page * $perpage) - $perpage;
 			$tdnumi = $num = $files_num = $imgs_num = 0;
 			while($row=$SQL->fetch_array($result))
 			{
@@ -840,17 +841,16 @@ switch ($_GET['go'])
 
 ($hook = kleeja_run_hook('end_usrcp_page')) ? eval($hook) : null; //run hook
 
-//
-//show style ...
-//
+
+#no template, no title, set them to default
 $titlee = empty($titlee) ? $lang['USERS_SYSTEM'] : $titlee;
 $stylee = empty($stylee) ? 'info' : $stylee;
 
-//header
-Saaheader($titlee, false, $extra);
-
+#header
+kleeja_header($titlee, $extra);
+#page template
 echo $tpl->display($stylee);
-//footer
-Saafooter();
+#footer
+kleeja_footer();
 
 

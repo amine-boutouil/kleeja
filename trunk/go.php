@@ -586,14 +586,14 @@ switch ($_GET['go'])
 
 ($hook = kleeja_run_hook('end_go_page')) ? eval($hook) : null; //run hook
 
-//no template ? 
+#no template, no title, set them to default
 $stylee  = empty($stylee) ? 'info' : $stylee;
 $titlee  = empty($titlee) ? '' : $titlee;
 
-//header
-Saaheader($titlee);
-//tpl
-	echo $tpl->display($stylee);
-//footer
-Saafooter();
+#header
+kleeja_header($titlee);
+#page template
+echo $tpl->display($stylee);
+#footer
+kleeja_footer();
 

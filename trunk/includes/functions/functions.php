@@ -48,15 +48,17 @@ function ip($name)
  * 
  * @since 2.0
  * @param string $name The name of _GET variable
+ * @param string $type The type of the varaible, str or int
+ * @param mixed $default_value [optional] The default value to be return if not existed 
  * @return string|bool
  */
-function g($name, $type = 'str')
+function g($name, $type = 'str', $default_value = false)
 {
 	if(isset($_GET[$name]))
 	{
 		return $type == 'str' ? htmlspecialchars($_GET[$name]) : intval($_GET[$name]);
 	}
-	return false;
+	return $default_value;
 }
 
 /**
@@ -64,15 +66,17 @@ function g($name, $type = 'str')
  * 
  * @since 2.0
  * @param string $name The name of _POST variable
+ * @param string $type The type of the varaible, str or int
+ * @param mixed $default_value [optional] The default value to be return if not existed 
  * @return string|bool
  */
-function p($name, $type = 'str')
+function p($name, $type = 'str', $default_value = false)
 {
 	if(isset($_POST[$name]))
 	{
 		return $type == 'str' ? htmlspecialchars($_POST[$name]) : intval($_POST[$name]);
 	}
-	return false;
+	return $default_value;
 }
 
 

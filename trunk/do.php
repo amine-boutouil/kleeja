@@ -59,11 +59,11 @@ if(ig('id') || ig('filename'))
 	($hook = kleeja_run_hook('qr_download_id_filename')) ? eval($hook) : null; //run hook
 	$result	= $SQL->build($query);
 
-	if ($SQL->num_rows($result))
+	if ($SQL->num($result))
 	{
 		$row = $SQL->fetch($result);
 		@extract($row);
-		$SQL->freeresult($result);
+		$SQL->free($result);
 
 		#some vars
 		$fname	 	= $name;
@@ -113,10 +113,11 @@ if(ig('id') || ig('filename'))
 		$_SESSION['HTTP_REFERER'] = $config['siteurl'] . ($config['mod_writer'] ? "download" . $id . ".html" : "do.php?id=" . $id);
 	}
 
-	// show style ...
-	Saaheader($title);
+
+	#show the page
+	kleeja_header($title);
 	echo $tpl->display($sty);
-	Saafooter();
+	kleeja_footer();
 }
 
 //
@@ -166,14 +167,14 @@ else if (ig('down') || ig('downf') ||
 		}
 
 		#if not from our site and the waiting page or resuming
-		$isset_down_h = ig('downf') && ig('x') ? 'downloadf-' . g('downf') . '-' . g('x') . '.html' : (ig('down') ? 'download' . g('down') . '.html' : '');
+		$isset_down_h = ig('downf') && ig('x') ? 'downloadf-' . g('downf') . '-' . g('x') . '.html' : (ig('down') ? 'download' . g('down') . '.html' : '----');
 		$not_reffer = true;
 		if(strpos($_SERVER['HTTP_REFERER'], $isset_down_h) !== false)
 		{
 			$not_reffer = false;
 		}
 
-		$isset_down = ig('downf') ? 'do.php?filename=' . g('downf') : (ig('down') ? 'do.php?id=' . g('down') : '');
+		$isset_down = ig('downf') ? 'do.php?filename=' . g('downf') : (ig('down') ? 'do.php?id=' . g('down') : '----');
 		if(strpos($_SERVER['HTTP_REFERER'], $isset_down) !== false)
 		{
 			$not_reffer = false;
@@ -244,7 +245,7 @@ else if (ig('down') || ig('downf') ||
 	$pre_ext = array_pop(@explode('.', $filename));
 	$is_image = in_array(strtolower(trim($pre_ext)), array('gif', 'jpg', 'jpeg', 'bmp', 'png')) ? true : false; 
 
-	if ($SQL->num_rows($result))
+	if ($SQL->num($result))
 	{
 		$row = $SQL->fetch($result);
 		
@@ -262,7 +263,7 @@ else if (ig('down') || ig('downf') ||
 		$is_live = in_array($t, $livexts) ? true : false; 
 		
 
-		$SQL->freeresult($result);
+		$SQL->free($result);
 
 		//check if the vistor is new in this page before updating kleeja counter
 		if(!preg_match('/,' . $ii . ',/i', $usrcp->kleeja_get_cookie('oldvistor')))
@@ -353,12 +354,12 @@ else if (ig('down') || ig('downf') ||
 		}
 		else
 		{
-			big_error($lang['FILE_NO_FOUNDED'],  $lang['NOT_FOUND']);
+		//	big_error('* ' . $lang['FILE_NO_FOUNDED'], $lang['NOT_FOUND']);
 		}
 	}
 
 	#get filesize
-	if(!($size = @kleeja_filesize($path_file)))
+	if(!($size = @filesize($path_file)))
 	{
 		$size = $d_size;
 	}
@@ -395,6 +396,17 @@ else if (ig('down') || ig('downf') ||
 	if(@ini_get('zlib.output_compression'))
 	{
 		@ini_set('zlib.output_compression', 'Off');
+	}
+
+
+	#open the file
+	if (!($fp = @fopen($path_file, 'r')))
+	{
+		#it's failed to open !
+		header("HTTP/1.0 404 Not Found");
+		@fclose($pfile);
+		garbage_collection();
+		big_error('** ' . $lang['FILE_NO_FOUNDED'], $lang['NOT_FOUND']);
 	}
 
 	#send file headers
@@ -444,31 +456,22 @@ else if (ig('down') || ig('downf') ||
 
 	#output file
 	$bytes_sent = 0;
-	if ($fp = @fopen($path_file, 'r'))
+	#fast forward within file, if requested
+	if (isset($_SERVER['HTTP_RANGE']))
 	{
-		#fast forward within file, if requested
-		if (isset($_SERVER['HTTP_RANGE']))
-		{
-			fseek($fp, $range);
-		}
-		#read and output the file in chunks
-		while( !feof($fp) && (!connection_aborted()) && ($bytes_sent < $partial_length) )
-		{
-			$buffer = fread($fp, $chunksize);
-			print($buffer);
-			flush();
-			$bytes_sent += strlen($buffer);
-		}
-		fclose($fp);
+		fseek($fp, $range);
 	}
-	else
+	#read and output the file in chunks
+	while( !feof($fp) && (!connection_aborted()) && ($bytes_sent < $partial_length) )
 	{
-		#it's failed to open !
-		header("HTTP/1.0 404 Not Found");
-		@fclose($pfile);
-		garbage_collection();
-		big_error($lang['FILE_NO_FOUNDED'],  $lang['NOT_FOUND']);
+		$buffer = fread($fp, $chunksize);
+		print($buffer);
+		flush();
+		$bytes_sent += strlen($buffer);
 	}
+	fclose($fp);
+	
+
 }
 
 //

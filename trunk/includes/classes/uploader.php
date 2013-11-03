@@ -207,7 +207,8 @@ class uploader
 				# add the file to the check-list
 				$check .= isset($_FILES['file_' . $i . '_']['name']) ? $_FILES['file_' . $i . '_']['name'] : '';
 				# get the extension of file
-				$this->typet = strtolower(array_pop(explode('.', $_FILES['file_' . $i . '_']['name'])));
+				$ext = explode('.', $_FILES['file_' . $i . '_']['name']);
+				$this->typet = strtolower(array_pop($ext));
 				# them the size
 				$this->sizet = !empty($_FILES['file_' . $i . '_']['size']) ?  $_FILES['file_' . $i . '_']['size'] : null;
 				# get the other filename, changed depend on kleeja settings
@@ -452,7 +453,7 @@ class uploader
 		# orginal name of file to use it in the file url
 		$this->name_for_url  = $name;
 		# inset id so it can be used in url like in do.php?id={id_for_url}
-		$this->id_for_url  = $SQL->insert_id();
+		$this->id_for_url  = $SQL->id();
 
 		# update Kleeja stats
 		$update_query = array(
@@ -466,13 +467,13 @@ class uploader
 	
 	
 		# inforamation of file, used for generating a url boxes
-		$file_info = array('::ID::'=>$this->id_for_url, '::NAME::'=>$this->name_for_url, '::DIR::'=> $folderee, '::FNAME::'=>$realf);
+		$file_info = array('::ID::'=>$this->id_for_url, '::NAME::'=>$this->name_for_url, '::DIR::'=> $folderee, '::FNAME::'=>$realf, '::EXT::'=> $type, '::CODE::'=>$code_del);
 
 		# show del code link box
 		$extra_del = '';
 		if ($config['del_url_file'])
 		{
-			$extra_del	= get_up_tpl_box('del_file_code', array('b_title'=> $lang['URL_F_DEL'], 'b_code_link'=> kleeja_get_link('del', array('::CODE::'=>$code_del))));
+			$extra_del	= get_up_tpl_box('del_file_code', array('b_title'=> $lang['URL_F_DEL'], 'b_code_link'=> kleeja_get_link('del', $file_info)));
 		}
 
 		//show imgs

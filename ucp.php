@@ -219,11 +219,11 @@ switch ($_GET['go'])
 			{
 				$ERRORS['lname'] = $lang['WRONG_NAME'];
 			}
-			else if ($SQL->num_rows($SQL->query("SELECT * FROM {$dbprefix}users WHERE clean_name='" . trim($SQL->escape($usrcp->cleanusername($_POST["lname"]))) . "'")) != 0)
+			else if ($SQL->num($SQL->query("SELECT * FROM {$dbprefix}users WHERE clean_name='" . trim($SQL->escape($usrcp->cleanusername($_POST["lname"]))) . "'")) != 0)
 			{
 				$ERRORS['name_exists_before'] = $lang['EXIST_NAME'];
 			}
-			else if ($SQL->num_rows($SQL->query("SELECT * FROM {$dbprefix}users WHERE mail='" . strtolower(trim($SQL->escape($_POST["lmail"]))) . "'")) != 0)
+			else if ($SQL->num($SQL->query("SELECT * FROM {$dbprefix}users WHERE mail='" . strtolower(trim($SQL->escape($_POST["lmail"]))) . "'")) != 0)
 			{
 				$ERRORS['mail_exists_before'] = $lang['EXIST_EMAIL'];
 			}
@@ -234,7 +234,7 @@ switch ($_GET['go'])
 			if(empty($ERRORS))	 
 			{
 				$name		= (string) $SQL->escape(trim($_POST['lname']));
-				$user_salt		= (string) substr(kleeja_base64_encode(pack("H*", sha1(mt_rand()))), 0, 7);
+				$user_salt		= (string) substr(base64_encode(pack("H*", sha1(mt_rand()))), 0, 7);
 				$pass		= (string) $usrcp->kleeja_hash_password($SQL->escape(trim($_POST['lpass'])) . $user_salt);
 				$mail		= (string) strtolower(trim($SQL->escape($_POST['lmail'])));
 				$session_id		= (string) session_id();
@@ -362,7 +362,7 @@ switch ($_GET['go'])
 		//pager
 		$perpage		= 16;
 		$result_p		= $SQL->build($query);
-		$nums_rows		= $SQL->num_rows($result_p);
+		$nums_rows		= $SQL->num($result_p);
 		$current_page	= g('page', 'int', 1);
 		$pagination		= new pagination($perpage, $nums_rows, $current_page);
 		$start			= $pagination->get_start_row();
@@ -395,10 +395,10 @@ switch ($_GET['go'])
 
 			$i = ($current_page * $perpage) - $perpage;
 			$tdnumi = $num = $files_num = $imgs_num = 0;
-			while($row=$SQL->fetch_array($result))
+			while($row=$SQL->fetch($result))
 			{
 				++$i;
-				$file_info = array('::ID::' => $row['id'], '::NAME::' => $row['name'], '::DIR::' => $row['folder'], '::FNAME::' => $row['real_filename']);
+				$file_info = array('::ID::' => $row['id'], '::NAME::' => $row['name'], '::DIR::' => $row['folder'], '::FNAME::' => $row['real_filename'], '::EXT::'=>$row['type']);
 
 				$is_image = in_array(strtolower(trim($row['type'])), array('gif', 'jpg', 'jpeg', 'bmp', 'png')) ? true : false;
 				$url = $is_image ? kleeja_get_link('image', $file_info) : kleeja_get_link('file', $file_info);
@@ -461,8 +461,8 @@ switch ($_GET['go'])
 				}
 			}
 
-			$SQL->freeresult($result_p);
-			$SQL->freeresult($result);
+			$SQL->free($result_p);
+			$SQL->free($result);
 
 			//
 			//after submit
@@ -602,7 +602,7 @@ switch ($_GET['go'])
 					$ERRORS['wrong_email'] = $lang['WRONG_EMAIL'];
 				}
 				#if email already exists
-				elseif ($SQL->num_rows($SQL->query("SELECT * FROM {$dbprefix}users WHERE mail='" . strtolower(trim($SQL->escape($_POST['pmail']))) . "'")) != 0)
+				elseif ($SQL->num($SQL->query("SELECT * FROM {$dbprefix}users WHERE mail='" . strtolower(trim($SQL->escape($_POST['pmail']))) . "'")) != 0)
 				{
 					$ERRORS['mail_exists_before'] = $lang['EXIST_EMAIL'];
 				}
@@ -615,7 +615,7 @@ switch ($_GET['go'])
 			//no errors , do it
 			if(empty($ERRORS))
 			{
-				$user_salt 	= substr(kleeja_base64_encode(pack("H*", sha1(mt_rand()))), 0, 7);
+				$user_salt 	= substr(base64_encode(pack("H*", sha1(mt_rand()))), 0, 7);
 				$mail		= $new_mail ? "mail='" . $SQL->escape(strtolower(trim($_POST['pmail']))) . "'" : '';
 				$showmyfile	= intval($_POST['show_my_filecp']) != $show_my_filecp ?  ($mail == '' ? '': ',') . "show_my_filecp='" . intval($_POST['show_my_filecp']) . "'" : '';
 				$pass		= !empty($_POST['ppass_new']) ? ($showmyfile != ''  || $mail != '' ? ',' : '') . "password='" . $usrcp->kleeja_hash_password($SQL->escape($_POST['ppass_new']) . $user_salt) . 
@@ -686,9 +686,9 @@ switch ($_GET['go'])
 			}
 
 			$result = $SQL->query("SELECT new_password FROM {$dbprefix}users WHERE hash_key='" . $SQL->escape($h_key) . "' AND id=" . $u_id . "");
-			if($SQL->num_rows($result))
+			if($SQL->num($result))
 			{
-				$npass = $SQL->fetch_array($result);
+				$npass = $SQL->fetch($result);
 				$npass = $npass['new_password'];
 				//password now will be same as new password
 				$update_query = array(
@@ -749,7 +749,7 @@ switch ($_GET['go'])
 			{
 				$ERRORS['rmail'] = $lang['WRONG_EMAIL'];
 			}
-			else if ($SQL->num_rows($SQL->query("SELECT name FROM {$dbprefix}users WHERE mail='" . $SQL->escape(strtolower($_POST['rmail'])) . "'")) == 0)
+			else if ($SQL->num($SQL->query("SELECT name FROM {$dbprefix}users WHERE mail='" . $SQL->escape(strtolower($_POST['rmail'])) . "'")) == 0)
 			{
 				$ERRORS['no_rmail'] = $lang['WRONG_DB_EMAIL'];
 			}
@@ -768,7 +768,7 @@ switch ($_GET['go'])
 				($hook = kleeja_run_hook('qr_select_mail_get_pass')) ? eval($hook) : null; //run hook
 				$result	=	$SQL->build($query);
 	
-				$row = $SQL->fetch_array($result);
+				$row = $SQL->fetch($result);
 
 				//generate password
 				$chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
@@ -794,7 +794,7 @@ switch ($_GET['go'])
 				($hook = kleeja_run_hook('qr_update_newpass_get_pass')) ? eval($hook) : null; //run hook
 				$SQL->build($update_query);
 
-				$SQL->freeresult($result);
+				$SQL->free($result);
 
 				//send it
 				$send =  send_mail($to, $message, $subject, $config['sitemail'], $config['sitename']);

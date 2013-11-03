@@ -110,7 +110,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 						'FROM'		=> "`{$forum_prefix}user`",
 					);
 
-	$query_salt['WHERE'] = $hashed ? "userid=" . intval($name) . " AND password='" . $SQLVB->real_escape($pass) . "' AND usergroupid != '8'" :  "username='" . $SQLVB->real_escape($name) . "' AND usergroupid != '8'";
+	$query_salt['WHERE'] = $hashed ? "userid=" . intval($name) . " AND password='" . $SQLVB->escape($pass) . "' AND usergroupid != '8'" :  "username='" . $SQLVB->escape($name) . "' AND usergroupid != '8'";
 	
 	//if return only name let's ignore the obove
 	if($return_name)
@@ -138,7 +138,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 				$query	= array(
 								'SELECT'	=> '*',
 								'FROM'	=> "`{$forum_prefix}user`",
-								'WHERE'	=> "username='" . $SQLVB->real_escape($name) . "' AND password='" . $SQLVB->real_escape($pass) . "' AND usergroupid != '8'"
+								'WHERE'	=> "username='" . $SQLVB->escape($name) . "' AND password='" . $SQLVB->escape($pass) . "' AND usergroupid != '8'"
 						);
 		
 				$result = $SQLVB->build($query);

@@ -244,5 +244,5 @@ class database
 	 *
 	 * @return string
 	 **/
-	public function version(){ return mysqli_get_server_info($this->connrec_id); }
+	public function version(){ return mysqli_get_server_info($this->connect_id); }
 }

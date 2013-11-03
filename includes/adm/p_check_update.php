@@ -107,7 +107,7 @@ else
 
 	$data = serialize($data);
 
-	update_config('new_version', $SQL->real_escape($data), false);
+	update_config('new_version', $SQL->escape($data), false);
 	delete_cache('data_config');
 
 

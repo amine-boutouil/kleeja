@@ -10,9 +10,9 @@
 
 
 //define important constants
-define ('PATH' , '../');
-define ('IN_INDEX' , true);
-define ('IN_ADMIN' , true);
+define('PATH' , '../');
+define('IN_INDEX' , true);
+define('IN_ADMIN' , true);
 
 
 //we are in admin path, session and cookies require this
@@ -145,10 +145,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && defined('STOP_CSRF'))
 }
 
 
-$gt = kleeja_filesize(PATH . 'includes/classes/st' . 'yl' .'e.php');
+$gt = filesize(PATH . 'includes/classes/st' . 'yl' .'e.php');
 if(!empty($gt) && $gt != 10235)
 {
-	exit(kleeja_base64_decode('V2hlcmUgVGhlIENvcHlyaWdodHMgOikgLi4u'));
+	exit(base64_decode('V2hlcmUgVGhlIENvcHlyaWdodHMgOikgLi4u'));
 }
 
 (!defined('LAST_VISIT')) ? define('LAST_VISIT', time() - 3600*12) : '';
@@ -243,11 +243,11 @@ foreach(array('call'=>'calls', 'reports'=>'reports') as $table=>$n)
 					'FROM'		=> "`{$dbprefix}" . $table . "` " . $table[0]
 				);
 
-	$fetched = $SQL->fetch_array($SQL->build($query));
+	$fetched = $SQL->fetch($SQL->build($query));
 
 	$kbubbles[$n] = $fetched['total_rows'];
 
-	$SQL->freeresult();
+	$SQL->free();
 }
 
 #if ajax, echo differntly

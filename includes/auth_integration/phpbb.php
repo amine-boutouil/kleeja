@@ -100,7 +100,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 					'FROM'		=> "`{$forum_prefix}users`",
 				);
 
-	$query2['WHERE'] = $hashed ?  "user_id=" . intval($name) . "  AND user_password='" . $SQLBB->real_escape($pass) . "' " : "username_clean='" .  $SQLBB->real_escape(utf8_clean_string($name)) . "'";
+	$query2['WHERE'] = $hashed ?  "user_id=" . intval($name) . "  AND user_password='" . $SQLBB->escape($pass) . "' " : "username_clean='" .  $SQLBB->escape(utf8_clean_string($name)) . "'";
 		
 	if($return_name)
 	{

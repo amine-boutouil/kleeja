@@ -19,13 +19,14 @@ if (!defined('IN_COMMON'))
 
 
 /**
-* Header
-* 
-* To show header in any page you want .. 
-* parameter : title : title of page as in <title></title>
-*/	
-function kleeja_header(){}
-function Saaheader($title = '', $outscript = false, $extra = '')
+ * Print header part of the page
+ * 
+ * @param string $title [optional] The page title
+ * @param string $extra [optional] any extra codes to include it between head tag
+ * @return void
+ * 
+ */	
+function kleeja_header($title = '', $extra = '')
 {
 	global $tpl, $usrcp, $lang, $olang, $user_is, $username, $config;
 	global $extras, $script_encoding, $errorpage, $userinfo, $charset;
@@ -89,41 +90,38 @@ function Saaheader($title = '', $outscript = false, $extra = '')
 
 
 /**
-* Footer
-*
-* To show footer of any page you want 
-* paramenters : none
-*/
-function kleeja_footer(){}
-function Saafooter($outscript = false)
+ * Print footer part of the page
+ *
+ * @return void
+ * 
+ */	
+function kleeja_footer()
 {
 	global $tpl, $SQL, $starttm, $config, $usrcp, $lang, $olang;
-	global $do_gzip_compress, $script_encoding, $errorpage, $extras, $userinfo;
+	global $script_encoding, $errorpage, $extras, $userinfo;
 
 	//show stats ..
 	$page_stats = '';
-	if ($config['statfooter'] != 0) 
+	if ($config['statfooter'] != 0 || DEV_STAGE) 
 	{
-		$gzip			= $config['gzip'] == '1' ?  "Enabled" : "Disabled";
-		$hksys			= !defined('STOP_HOOKS') ? "Enabled" : "Disabled";
+		$hksys			= !defined('STOP_HOOKS') ? 'Enabled' : 'Disabled';
 		$endtime		= get_microtime();
 		$loadtime		= number_format($endtime - $starttm , 4);
 		$queries_num	= $SQL->query_num;
 		$time_sql		= round($SQL->query_num / $loadtime) ;
-		$page_stats		= "<strong>[</strong> GZIP : $gzip - Generation Time: $loadtime Sec  - Queries: $queries_num - Hook System:  $hksys <strong>]</strong>  " ;
+		$page_stats		= "<strong>[</strong> Generation Time: $loadtime Sec  - Queries: $queries_num - Hook System:  $hksys <strong>]</strong>  " ;
 	}
-		
+
 	$tpl->assign("page_stats", $page_stats);
-		
-	//if admin, show admin in the bottom of all page
+
+	#if user is an admin, show admin in the bottom of all page
 	$tpl->assign("admin_page", (user_can('enter_acp') ? '<a href="' . ADMIN_PATH . '" class="admin_cp_link"><span>' . $lang['ADMINCP'] .  '</span></a>' : ''));
-	
+
 	//assign cron
 	$tpl->assign("run_queue", '<img src="' . $config['siteurl'] . 'queue.php?image.gif" width="1" height="1" alt="queue" />');
 
 
-	// if google analytics, new version 
-	//http://www.google.com/support/googleanalytics/bin/answer.py?answer=55488&topic=11126
+	#if google analytics is enabled, show it
 	$googleanalytics = '';
 	if (strlen($config['googleanalytics']) > 4)
 	{

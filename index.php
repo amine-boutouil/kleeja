@@ -17,7 +17,9 @@ define('IN_SUBMIT_UPLOADING' , (isset($_POST['submitr']) || isset($_POST['submit
 #get the core
 define('PATH', dirname(__FILE__) . DIRECTORY_SEPARATOR);
 include PATH . 'includes/common.php';
+include PATH . 'includes/classes/uploader.php';
 
+$kljup	= new uploader;
 
 ($hook = kleeja_run_hook('begin_index_page')) ? eval($hook) : null; //run hook
 
@@ -157,11 +159,11 @@ if ($show_online)
 ($hook = kleeja_run_hook('end_index_page')) ? eval($hook) : null; //run hook	
 
 
-//header
-Saaheader();
-//index
+#header
+kleeja_header();
+#index template
 echo $tpl->display("index_body");
-//footer
-Saafooter();
+#footer
+kleeja_footer();
 
-//<-- EOF
+

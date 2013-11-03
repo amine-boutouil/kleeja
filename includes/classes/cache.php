@@ -29,6 +29,15 @@ $SQL->set_utf8();
 //
 class cache
 {
+
+	public function __construct()
+	{
+		if(@extension_loaded('apc'))
+		{
+			define('APC_CACHE', true);
+		}
+	}
+	
 	function get($name)
 	{
 		$name =  preg_replace('![^a-z0-9_]!', '_', $name);
@@ -55,17 +64,7 @@ class cache
 	}
 	
 	function save($name, $data, $time = 86400)
-	{
-		//
-		//We have problems if APC is enabled, so we disable our cache 
-		//system if it's lodoed to prevent those problems, but we will
-		//try to fix it in the near future .. I hope that.
-		//
-		if(defined('APC_CACHE'))
-		{
-			//return;
-		}
-		
+	{		
 		$name =  preg_replace('![^a-z0-9_]!i', '_', $name);
 		$data_for_save = '<?' . 'php' . "\n";
 		$data_for_save .= '//Cache file, generated for Kleeja at ' . gmdate('d-m-Y h:i A') . "\n\n";
@@ -235,10 +234,10 @@ if (!($banss = $cache->get('data_ban')))
 		}
 	}
 
-	$gt = kleeja_filesize(PATH . 'includes/classes/st' . 'yl' . 'e.php');
+	$gt = filesize(PATH . 'includes/classes/st' . 'yl' . 'e.php');
 	if(!empty($gt) && $gt != 10235)
 	{
-		exit(kleeja_base64_decode('V2hlcmUgVGhlIENvcHlyaWdodHMgOikgLi4u'));
+		exit(base64_decode('V2hlcmUgVGhlIENvcHlyaWdodHMgOikgLi4u'));
 	}
 
 	unset($ban1, $ban2, $gt);

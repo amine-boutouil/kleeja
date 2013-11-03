@@ -453,7 +453,6 @@ switch ($_GET['go'])
 		$imgs_st	= $stat_imgs;
 		$users_st	= $stat_users;
 		$sizes_st	= Customfile_size($stat_sizes);	
-		$lst_dl_st	= (int) $config['del_f_day'] <= 0 ? false : kleeja_date($stat_last_f_del);
 		$lst_reg	= empty($stat_last_user) ? $lang['UNKNOWN'] : $stat_last_user;
 		$on_muoe	= kleeja_date($on_muoe);
 

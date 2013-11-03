@@ -18,7 +18,7 @@ if (!defined('IN_COMMON'))
 }
 	
 	
-//dont change it .. please Dont !! 
+
 $dev_m = '';
 if(defined('DEV_STAGE'))
 {
@@ -26,4 +26,13 @@ if(defined('DEV_STAGE'))
 	$dev_m = '#dev' . $m[1];
 }
 
+/**
+ * Kleeja current version
+ */
 define('KLEEJA_VERSION' , '2.0.0' . $dev_m);
+
+
+/**
+ * Kleeja Database current version
+ */
+define('KLEEJA_DB_VERSION' , '10');

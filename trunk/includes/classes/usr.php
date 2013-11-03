@@ -127,7 +127,7 @@ class usrcp
 					if($row['password'] == $passmd5)
 					{
 						////new salt
-						$new_salt = substr(kleeja_base64_encode(pack("H*", sha1(mt_rand()))), 0, 7);
+						$new_salt = substr(base64_encode(pack("H*", sha1(mt_rand()))), 0, 7);
 						////new password hash
 						$new_password = $this->kleeja_hash_password(trim($pass) . $new_salt);
 
@@ -166,7 +166,7 @@ class usrcp
 				//all user fileds info
 				$userinfo = $row;
 
-				$user_y = kleeja_base64_encode(serialize(array('id'=>$row['id'], 'name'=>$row['name'], 'mail'=>$row['mail'], 'last_visit'=>$row['last_visit'])));
+				$user_y = base64_encode(serialize(array('id'=>$row['id'], 'name'=>$row['name'], 'mail'=>$row['mail'], 'last_visit'=>$row['last_visit'])));
 
 				if(!$hashed && !$loginadm)
 				{
@@ -308,12 +308,6 @@ class usrcp
 	//clean usernames
 	function cleanusername($uname) 
 	{
-		//already included in common file 
-		/*if(!function_exists('kleeja_base64_decode'))
-		{
-			include_once (PATH . 'includes/functions_alternative.php');	
-		}*/
-
 		($hook = kleeja_run_hook('cleanusername_func_usr_class')) ? eval($hook) : null; //run hook
 
 		static $arabic_t = array();
@@ -325,7 +319,7 @@ class usrcp
 		if(empty($arabic_t))
 		{
 			//Arabic chars must be stay in utf8 format, so we encoded them
-			$arabic_t = unserialize(kleeja_base64_decode('YToyOntpOjA7YToxMjp7aTowO3M6Mjoi2KMiO2k6MTtzOjI6ItilIjtpOjI7czoyOiLYpCI7aTozO3M6Mjoi2YAiO2k6NDtzOjI6Itm' .
+			$arabic_t = unserialize(base64_decode('YToyOntpOjA7YToxMjp7aTowO3M6Mjoi2KMiO2k6MTtzOjI6ItilIjtpOjI7czoyOiLYpCI7aTozO3M6Mjoi2YAiO2k6NDtzOjI6Itm' .
 			'LIjtpOjU7czoyOiLZjCI7aTo2O3M6Mjoi2Y8iO2k6NztzOjI6ItmOIjtpOjg7czoyOiLZkCI7aTo5O3M6Mjoi2ZIiO2k6MTA7czoyOiLYoiI7aToxMTtzOjI6ItimIjt9aToxO' .
 			'2E6MTI6e2k6MDtzOjI6ItinIjtpOjE7czoyOiLYpyI7aToyO3M6Mjoi2YgiO2k6MztzOjA6IiI7aTo0O3M6MDoiIjtpOjU7czowOiIiO2k6NjtzOjA6IiI7aTo3O3M6MDoiIjt' . 
 			'pOjg7czowOiIiO2k6OTtzOjA6IiI7aToxMDtzOjI6ItinIjtpOjExO3M6Mjoi2YkiO319'));
@@ -416,14 +410,14 @@ class usrcp
 		switch($type)
 		{
 			case 1:
-				$data = str_replace('=', '_', kleeja_base64_encode($data));
+				$data = str_replace('=', '_', base64_encode($data));
 				$data = strtr($data, $txt);
 			break;
 			case 2:
 				$txtx = array_flip($txt); 
 				$txtx = array_reverse($txtx, true);
 				$data = strtr($data, $txtx);
-				$data = kleeja_base64_decode(str_replace('_', '=', $data));
+				$data = base64_decode(str_replace('_', '=', $data));
 			break;
 		}
 
@@ -479,7 +473,7 @@ class usrcp
 				{
 					if(!empty($u_info))
 					{
-						$userinfo = unserialize(kleeja_base64_decode($u_info));
+						$userinfo = unserialize(base64_decode($u_info));
 						$userinfo['group_id'] = $group_id;
 						$userinfo['password'] = $hashed_password;
 

@@ -17,25 +17,29 @@ if (!defined('IN_INDEX'))
 	exit();
 }
 
-//we are in the common file 
+/**
+ * Files in includes folder need this to be accessible
+ */
 define('IN_COMMON', true);
 
-//Development stage: KLeeja will treats you as a developer
+
+/**
+ * Development stage, KLeeja will treats you as a developer
+ */
 define('DEV_STAGE', true);
 
-// Report all errors, except notices
-defined('DEV_STAGE') ? @error_reporting( E_ALL ) : @error_reporting(E_ALL ^ E_NOTICE);
+/**
+ * Error reporting in Development stage are agressive
+ */
+defined('DEV_STAGE') ? @error_reporting(E_ALL) : @error_reporting(E_ALL ^ E_NOTICE);
 
-//filename of config.php
+/**
+ * The path of the configuration file of Kleeja
+ */
 define('KLEEJA_CONFIG_FILE', 'config.php');
 
-if(@extension_loaded('apc'))
-{
-	define('APC_CACHE', true);
-}
 
-
-// start session
+#start session after setting it right
 $s_time = 86400 * 2; // 2 : two days 
 if(function_exists('ini_set'))
 {
@@ -61,14 +65,17 @@ if(function_exists('ini_set'))
 
 
 /**
-* functions for start
+* Get the current microtime, to calculate page speed
 */
-//time of start and end and wutever
 function get_microtime()
 {
 	list($usec, $sec) = explode(' ', microtime());	return ((float)$usec + (float)$sec);
 }
-//is bot ?
+
+/**
+ * Is the current user a search engine bot?
+ * @param array $bots Check user agent against those given bot names
+ */
 function is_bot($bots = array('googlebot', 'bing' ,'msnbot'))
 {
 	if(isset($_SERVER['HTTP_USER_AGENT']))
@@ -83,7 +90,7 @@ define('IS_BOT', is_bot());
 $starttm = get_microtime();
 
 
-//path 
+#set the current file path 
 if(!defined('PATH'))
 {
 	if(!defined('__DIR__'))
@@ -93,37 +100,36 @@ if(!defined('PATH'))
 	define('PATH', str_replace(DIRECTORY_SEPARATOR . 'includes', '', __DIR__) . DIRECTORY_SEPARATOR);
 }
 
-// no config
+#if no configuration file exists? then go installation
 if (!file_exists(PATH . KLEEJA_CONFIG_FILE))
 {
 	header('Location: ./install/index.php');
 	exit;
 }
 
-// there is a config
-include (PATH . KLEEJA_CONFIG_FILE);
+#load Kleeja configuration file
+include PATH . KLEEJA_CONFIG_FILE;
 
-//no enough data
+#if no enough config. params, go installation
 if (!$dbname || !$dbuser)
 {
 	header('Location: ./install/index.php');
 	exit;
 }
 
-//include files .. & classes ..
+#initiate classes and load functions
 $root_path = PATH;
-$db_type = isset($db_type) ? $db_type : 'mysql';
+$db_type = isset($db_type) ? $db_type : 'mysqli';
 
 include PATH . 'includes/functions/functions_alternative.php';
 include PATH . 'includes/version.php';
 
 switch ($db_type)
 {
+	default:
 	case 'mysqli':
 		include PATH . 'includes/classes/mysqli.php';
 	break;
-	default:
-		include PATH . 'includes/classes/mysql.php';
 }
 include PATH . 'includes/classes/style.php';
 include PATH . 'includes/classes/usr.php';
@@ -134,29 +140,25 @@ if(defined('IN_ADMIN'))
 {
 	include PATH . 'includes/functions/functions_adm.php';
 }
-else
-{
-	include PATH . 'includes/classes/uploader.php';
-	$kljup	= new uploader;
-}
 
-//fix intregation problems
+
+#fix intregation problems
 if(empty($script_encoding))
 {
 	$script_encoding = 'windows-1256';
 }
 
-// start classes ..
+#connect to DB
 $SQL	= new SSQL($dbserver, $dbuser, $dbpass, $dbname);
-//no need after now 
+#destroy the database password now
 unset($dbpass);
 $tpl	= new kleeja_style;
 $usrcp	= new usrcp;
 
-//then get caches
+#load caches
 include PATH . 'includes/classes/cache.php';
 
-//getting dynamic configs
+#getting dynamic configs
 $query = array(
 				'SELECT'	=> 'c.name, c.value',
 				'FROM'		=> "{$dbprefix}config c",
@@ -172,74 +174,40 @@ while($row=$SQL->fetch_array($result))
 
 $SQL->freeresult($result);
 
-//check user or guest
+#check user or guest
 $usrcp->kleeja_check_user();
 
-//+ configs of the current group
+#+ configs of the current group
 $config = array_merge($config, (array) $d_groups[$usrcp->group_id()]['configs']);
 
 
 
-//no tpl caching in dev stage  
+#no tpl caching in dev stage  
 if(defined('DEV_STAGE'))
 {
 	$tpl->caching = false;
 }
 
-//kleeja session id
-$klj_session = $SQL->escape(session_id());
+#admin path
+!defined('ADMIN_PATH') ? define('ADMIN_PATH', $config['siteurl'] . 'admin/index.php') : null;
 
-
-//admin path
-$adminpath = 'admin/index.php';
-!defined('ADMIN_PATH') ? define('ADMIN_PATH', $config['siteurl'] . $adminpath) : null;
-
-//Admin style name
+#Admin style name
 !defined('ADMIN_STYLE_NAME') ? define('ADMIN_STYLE_NAME', 'marya') : null;
 
-//site url must end with /
-if($config['siteurl'])
+#site url must end with /
+if(!empty($config['siteurl']))
 {
 	$config['siteurl'] = ($config['siteurl'][strlen($config['siteurl'])-1] != '/') ? $config['siteurl'] . '/' : $config['siteurl'];
 }
 
-// for gzip : php.net
-//fix bug # 181
-//we stopped this in development stage cuz it's will hide notices
-$do_gzip_compress = false; 
-if ($config['gzip'] == '1' && !defined('IN_DOWNLOAD') && !defined('IN_ADMIN') && !defined('DEV_STAGE') && !defined('IN_SUBMIT_UPLOADING')) 
-{
-	function compress_output($output)
-	{
-		return gzencode($output, 5, FORCE_GZIP);
-	}
 
-	// Check if the browser supports gzip encoding, HTTP_ACCEPT_ENCODING
-	if (strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') !== false && !headers_sent() && @extension_loaded('zlib') && !defined('IN_DOWNLOAD'))
-	{
-		$do_gzip_compress = true; 
-		// Start output buffering, and register compress_output()
-		if(function_exists('gzencode') )
-		{
-			@ob_start("compress_output");
-		}
-		else
-		{
-			@ob_start();
-		}
-
-		// Tell the browser the content is compressed with gzip
-		header("Content-Encoding: gzip");
-	}
-}
-
-//header
+#set display headers
 header('Content-type: text/html; charset=UTF-8');	
 header('Cache-Control: private, no-cache="set-cookie"');
 header('Expires: 0');
 header('Pragma: no-cache');	
 
-//check lang
+#check the current laguage package
 if(!$config['language'] || empty($config['language']))
 {
 	if(isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) && strlen($_SERVER['HTTP_ACCEPT_LANGUAGE']) > 2)
@@ -252,13 +220,13 @@ if(!$config['language'] || empty($config['language']))
 	}
 }
 
-//check style
+#check the current style
 if(!$config['style'] || empty($config['style']))
 {
 	$config['style'] = 'default';
 }
 
-//check h_kay, important for kleeja
+#check h_kay, important for kleeja
 if(empty($config['h_key']))
 {
 	$h_k = sha1(microtime() . rand(0, 100));
@@ -268,23 +236,22 @@ if(empty($config['h_key']))
 	}
 }
 
-//Global vars for Kleeja
+#Global vars for Kleeja
 $STYLE_PATH				= $config['siteurl'] . 'styles/' . (trim($config['style_depend_on']) == '' ? $config['style'] : $config['style_depend_on']) . '/';
 $THIS_STYLE_PATH		= $config['siteurl'] . 'styles/' . $config['style'] . '/';
 $THIS_STYLE_PATH_ABS	= PATH . 'styles/' . $config['style'] . '/';
+#style for admin
 $STYLE_PATH_ADMIN 		= $config['siteurl'] . 'admin/' . ADMIN_STYLE_NAME . '/';
 $STYLE_PATH_ADMIN_ABS	= PATH . 'admin/' . ADMIN_STYLE_NAME . '/';
-$DEFAULT_PATH_ADMIN_ABS = PATH . 'admin/' . ADMIN_STYLE_NAME . '/';
-$DEFAULT_PATH_ADMIN		= $config['siteurl'] . 'admin/' . ADMIN_STYLE_NAME . '/';
 
-
-//get languge of common
+#get languge of common
 get_lang('common');
-//ban system 
+
+#ban system 
 get_ban();
 
 
-//install.php exists
+#install.php exists, raise a message 
 if (file_exists(PATH . 'install') && !defined('IN_ADMIN') && !defined('IN_LOGIN') && !defined('DEV_STAGE')) 
 {
 	#Different message for admins! delete install folder 
@@ -292,11 +259,11 @@ if (file_exists(PATH . 'install') && !defined('IN_ADMIN') && !defined('IN_LOGIN'
 }
 
 
-//site close ..
+#site close message if enabled
 $login_page = '';
 if ($config['siteclose'] == '1' && !user_can('enter_acp') && !defined('IN_LOGIN') && !defined('IN_ADMIN'))
 {
-	//if download, images ?
+	#if download, images ?
 	if(defined('IN_DOWNLOAD') && (ig('img') || ig('thmb') || ig('thmbf') || ig('imgf')))
 	{
 		@$SQL->close();
@@ -308,32 +275,31 @@ if ($config['siteclose'] == '1' && !user_can('enter_acp') && !defined('IN_LOGIN'
 		exit;
 	}
 
-	// Send a 503 HTTP response code to prevent search bots from indexing the maintenace message
+	#Send a 503 HTTP response code to prevent search bots from indexing the maintenace message
 	header('HTTP/1.1 503 Service Temporarily Unavailable');
 	kleeja_info($config['closemsg'], $lang['SITE_CLOSED']);
 }
 
-//exceed total size 
-if (($stat_sizes >= ($config['total_size'] *(1048576))) && !defined('IN_LOGIN') && !defined('IN_ADMIN'))// convert megabytes to bytes
+#exceed total size 
+if (($stat_sizes >= ($config['total_size'] *(1048576))) && !defined('IN_LOGIN') && !defined('IN_ADMIN'))
 { 
 	// Send a 503 HTTP response code to prevent search bots from indexing the maintenace message
 	header('HTTP/1.1 503 Service Temporarily Unavailable');
 	kleeja_info($lang['SIZES_EXCCEDED'], $lang['STOP_FOR_SIZE']);
 }
 
-
+#TODO: move to usr class
 kleeja_detecting_bots();
 
-//check for page numbr
+#check for rows per page number
 if(empty($perpage) || intval($perpage) == 0)
 {
 	$perpage = 14;
 }
 
-//captch file 
+#captcha file path
 $captcha_file_path = $config['siteurl'] . 'ucp.php?go=captcha';
+
 
 ($hook = kleeja_run_hook('end_common')) ? eval($hook) : null; //run hook
 
-
-#<-- EOF

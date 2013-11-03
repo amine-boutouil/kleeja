@@ -77,7 +77,7 @@ function kleeja_auth_login ($name, $pass, $hashed = false, $expire, $loginadm = 
 					'FROM'	=> "`{$forum_prefix}member`",
 				);
 	
-	$query['WHERE'] = $hashed ?  "id=" . intval($name) . " AND password='" . $SQLMS->real_escape($pass) . "'" : "username='" . $SQLMS->real_escape($name) . "' AND password='" . md5($pass) . "'";
+	$query['WHERE'] = $hashed ?  "id=" . intval($name) . " AND password='" . $SQLMS->escape($pass) . "'" : "username='" . $SQLMS->escape($name) . "' AND password='" . md5($pass) . "'";
 	
 	//if return only name let's ignore the obove
 	if($return_name)

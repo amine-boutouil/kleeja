@@ -52,7 +52,7 @@ while($row=$SQL->fetch($result))
 		//update
 		$update_query	= array(
 								'UPDATE'	=> "{$dbprefix}stats",
-								'SET'		=> "rules = '" . $SQL->real_escape($rulesw) . "'"
+								'SET'		=> "rules = '" . $SQL->escape($rulesw) . "'"
 							);
 
 		$SQL->build($update_query);

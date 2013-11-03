@@ -58,7 +58,7 @@ while($row=$SQL->fetch($result))
 		//update
 		$update_query	= array(
 								'UPDATE'	=> "{$dbprefix}stats",
-								'SET'		=> "ex_header = '" . $SQL->real_escape($ex_header) . "', ex_footer = '" . $SQL->real_escape($ex_footer) . "'"
+								'SET'		=> "ex_header = '" . $SQL->escape($ex_header) . "', ex_footer = '" . $SQL->escape($ex_footer) . "'"
 							);
 
 		$SQL->build($update_query);

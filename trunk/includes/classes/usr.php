@@ -102,7 +102,7 @@ class usrcp
 		}
 		else
 		{
-			$query['WHERE'] = "clean_name='" . $SQL->real_escape($this->cleanusername($name)) . "'";
+			$query['WHERE'] = "clean_name='" . $SQL->escape($this->cleanusername($name)) . "'";
 		}
 
 		($hook = kleeja_run_hook('qr_select_usrdata_n_usr_class')) ? eval($hook) : null; //run hook			

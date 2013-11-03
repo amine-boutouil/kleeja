@@ -34,7 +34,7 @@ $files_number 		= $stat_files + $stat_imgs;
 $files_sizes 		= Customfile_size($stat_sizes);
 $users_number 		= $stat_users;
 $php_version 		= isset($NO_PHPINFO) || !function_exists('phpinfo') ? phpversion() : '<a href="' . basename(ADMIN_PATH) . '?cp=php_info" title="php_info" onclick="javascript:get_kleeja_link(\'' . basename(ADMIN_PATH) . '?cp=php_info\', \'#content\'); return false;">php ' . phpversion() . '</a>';
-$mysql_version 		= 'MYSQL ' . $SQL->mysql_version();
+$version 		= 'MYSQL ' . $SQL->version();
 #info from php ini
 $file_uploads_ini	= function_exists('ini_get') ?  @ini_get('file_uploads') : @get_cfg_var('file_uploads');
 $max_file_uploads_ini= function_exists('ini_get') ?  @ini_get('max_file_uploads') : @get_cfg_var('max_file_uploads');

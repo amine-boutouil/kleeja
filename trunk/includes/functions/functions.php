@@ -437,7 +437,7 @@ function add_config($name, $value, $order = '0', $html = '', $type = '0', $plg_i
 	$insert_query	= array(
 							'INSERT'	=> '`name` ,`value` ,`option` ,`display_order`, `type`, `plg_id`, `dynamic`',
 							'INTO'		=> "{$dbprefix}config",
-							'VALUES'	=> "'" . $SQL->escape($name) . "','" . $SQL->escape($value) . "', '" . $SQL->real_escape($html) . "','" . intval($order) . "','" . $SQL->escape($type) . "','" . intval($plg_id) . "','"  . ($dynamic ? '1' : '0') . "'",
+							'VALUES'	=> "'" . $SQL->escape($name) . "','" . $SQL->escape($value) . "', '" . $SQL->escape($html) . "','" . intval($order) . "','" . $SQL->escape($type) . "','" . intval($plg_id) . "','"  . ($dynamic ? '1' : '0') . "'",
 						);
 
 	($hook = kleeja_run_hook('insert_sql_add_config_func')) ? eval($hook) : null; //run hook

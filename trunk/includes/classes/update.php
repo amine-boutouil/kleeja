@@ -125,7 +125,7 @@ class kupdate
 				if($data != false)
 				{
 					//then ..write new file
-					$re = $this->plg->_write(PATH . $config['foldername'] . '/' . 'aupdatekleeja' . $v . '.tar', $data);
+					$re = $this->f>_write(PATH . $config['foldername'] . '/' . 'aupdatekleeja' . $v . '.tar', $data);
 
 					if($this->f->check())
 					{
@@ -142,13 +142,112 @@ class kupdate
 					return false;
 				}
 				break;
-			case '2':   //...... extract / untar
+
+			case '2':   //extract / untar
+				return $this->untar(PATH . $config['foldername'] . '/' . 'aupdatekleeja' . $v . '.tar', PATH);
+				
+				break;
+			case '3':   //database
+
+				include(PATH . 'cache/sqlupdate_' . $v . '.php');
+
+				if($config['db_version'] >= DB_VERSION && !defined('DEV_STAGE'))
+				{
+					$update_msgs_arr[] = '<span style="color:green;">' . $lang['INST_UPDATE_CUR_VER_IS_UP']. '</span>';
+				}
+
+
+				//
+				//is there any sqls 
+				//
+				$SQL->show_errors = false;
+				if(isset($update_sqls) && sizeof($update_sqls) > 0)
+				{
+					$err = '';
+					foreach($update_sqls as $name=>$sql_content)
+					{
+						$err = '';
+						$SQL->query($sql_content);
+						$err = $SQL->get_error();
+
+						if(strpos($err[1], 'Duplicate') !== false || $err[0] == '1062' || $err[0] == '1060')
+						{
+							$sql = "UPDATE `{$dbprefix}config` SET `value` = '" . DB_VERSION . "' WHERE `name` = 'db_version'";
+							$SQL->query($sql);
+							$update_msgs_arr[] = '<span style="color:green;">' . $lang['INST_UPDATE_CUR_VER_IS_UP']. '</span>';
+							$complete_upate = false;
+						}
+					}
+
+					return $update_msgs_arr;
+				}
+				else
+				{
+					return false;
+				}
+				
+
+
 				# code...
 				break;
-			case '3':   //...... database
+
+			case '4': //functions 
+
+				include(PATH . 'cache/sqlupdate_' . $v . '.php');
+
+				if($config['db_version'] >= DB_VERSION && !defined('DEV_STAGE'))
+				{
+					return 'updated';
+				}
+
+
+				//
+				//is there any functions 
+				//
+				if(isset($update_functions) && sizeof($update_functions) > 0)
+				{
+					foreach($update_functions as $n)
+					{
+						call_user_func($n);
+					}
+
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+				
+
 				# code...
 				break;
-			case '4':   //...... finish delete temps show results 
+
+			case '5':
+
+				include(PATH . 'cache/sqlupdate_' . $v . '.php');
+
+				//
+				//is there any notes 
+				//
+				$NOTES_CUP = false;
+
+				if(isset($update_notes) && sizeof($update_notes) > 0)
+				{
+					$i=1;
+					$NOTES_CUP = array();
+					foreach($update_notes as $n)
+					{
+						$NOTES_CUP[$i] = $n;
+						++$i;
+					}
+				}
+
+				return $NOTES_CUP;
+				
+
+				# code...
+				break;
+			case '6':   //finish delete temps show results 
 				# code...
 				break;
 		}

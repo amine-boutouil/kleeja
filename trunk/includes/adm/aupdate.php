@@ -162,19 +162,108 @@ if (!defined('IN_ADMIN'))
 			break;	
 		case '1' : //download
 			
-				//echo ('<h1>heeeeey</h1>');
-				//exit();
 
 				$re = $ups->update_core('1', $v);
 
-					
+				if($re != false)
+				{
+					kleeja_admin_info($lang['WAIT'] . ' ' . $lang['UPDATE_GOING_TOEXTR'], true,'', true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;astep=2&amp;' . $GET_FORM_KEY, 10);
+				}
+				else if($re == 'zipped') //if zipped ignore extract 
+				{
+					$text = sprintf($lang['PLUGIN_ADDED_ZIPPED'], '<a target="_blank" href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;m=6&amp;fn=' . $ups->zipped_files . '&amp;' . $GET_FORM_KEY . '">', '</a>');
+					$text .= '<br /><br /><a onclick="javascript:get_kleeja_link(this.href); return false;" href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;astep=3&amp;' . $GET_FORM_KEY . '">' . $lang['UPDATE_GOING_TODATABASE'] . '</a>';
+					kleeja_admin_info($text, true,'', true); 
+				}
+				else
+				{
+					kleeja_admin_err($lang['ERROR'], true,'', true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '?#!cp=' . basename(__file__, '.php'));
+				}
+
+
+
+			break;
+				
+
+		case '2': //extract
+			
+			$re = $ups->update_core('2', $v);
+
+			if($re != false)
+			{
+				print_r($re);
+
+			}
+			else
+			{
+				kleeja_admin_err($lang['ERROR'], true,'', true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '?#!cp=' . basename(__file__, '.php'));
+			}
 			break;
 
 		case '3': //database update
+
+			if(file_exists(PATH . 'cache/sqlupdate_' . $v['version_number'] . 'php'))
+			{
+				$re = $ups->update_core('3', $v);
+				$result = $lang['WAIT'];
+				if($re != false)
+				{
+
+					foreach ($re as $msg) {
+						$result .=  $msg . "\n";
+					}
+
+				}
+
+				//going next
+				kleeja_admin_info($result, true,'', true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;astep=4&amp;' . $GET_FORM_KEY, 10);
+			}
+			else
+			{
+				//Jump direct to the finish line
+				kleeja_admin_info($lang['UPDATE_LAST_STEP'], true,'', true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;astep=6&amp;' . $GET_FORM_KEY, 10);
+			}
 			# code...
 			break;
 
-		case '4': //delete temp files
+
+
+
+			//undone yet
+			//....
+			//.....
+			//
+
+		case '4': //fucntions callbacks
+
+			if(file_exists(PATH . 'cache/sqlupdate_' . $v['version_number'] . 'php'))
+			{
+				$re = $ups->update_core('4', $v);
+
+				if($re == 'updated')
+				{
+					kleeja_admin_info('<span style="color:green;">' . $lang['INST_UPDATE_CUR_VER_IS_UP']. '</span>', true,'', true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;astep=6&amp;' . $GET_FORM_KEY, 10);
+					//'<span style="color:green;">' . $lang['INST_UPDATE_CUR_VER_IS_UP']. '</span>'
+				}
+			}
+			# code...
+			break;
+
+			case '5': //notes
+
+			if(file_exists(PATH . 'cache/sqlupdate_' . $v['version_number'] . 'php'))
+			{
+				$re = $ups->update_core('3', $v);
+
+				if($re == 'updated')
+				{
+					kleeja_admin_info('<span style="color:green;">' . $lang['INST_UPDATE_CUR_VER_IS_UP']. '</span>', true,'', true, basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;astep=6&amp;' . $GET_FORM_KEY, 10);
+					//'<span style="color:green;">' . $lang['INST_UPDATE_CUR_VER_IS_UP']. '</span>'
+				}
+			}
+			# code...
+			break;
+		case '6': //delete temp files
 			# code..
 			break;
 

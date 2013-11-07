@@ -17,18 +17,17 @@ define('IN_UCP' , true);
 define('PATH', dirname(__FILE__) . DIRECTORY_SEPARATOR);
 include PATH . 'includes/common.php';
 
-($hook = kleeja_run_hook('begin_usrcp_page')) ? eval($hook) : null; //run hook
-
-
 #to be avaliable for later, extra code between head tag
 $extra_code_in_header = '';
 
+
+($hook = kleeja_run_hook('begin_usrcp_page')) ? eval($hook) : null; //run hook
 
 /**
  * User Control Page
  * ucp.php?go=[...]
  */
-switch (g('go', 'str', 'login'))
+switch (g('go', 'str', ''))
 { 
 	case 'login' : 
 

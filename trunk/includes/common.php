@@ -148,12 +148,19 @@ if(empty($script_encoding))
 	$script_encoding = 'windows-1256';
 }
 
-#connect to DB
+#connect to DB, and unset the passowrd
 $SQL	= new database($dbserver, $dbuser, $dbpass, $dbname);
-#destroy the database password now
 unset($dbpass);
+#initaiate the template system
 $tpl	= new kleeja_style;
-$usrcp	= new usrcp;
+#initate the user system
+$usrcp = $user	= new user;
+
+#return to the default user system if this given
+if(defined('DISABLE_INTR'))
+{
+	$config['user_system'] = 1;
+}
 
 #load caches
 include PATH . 'includes/classes/cache.php';
@@ -178,7 +185,7 @@ $SQL->free($result);
 $usrcp->kleeja_check_user();
 
 #+ configs of the current group
-$config = array_merge($config, (array) $d_groups[$usrcp->group_id()]['configs']);
+$config = array_merge($config, (array) $d_groups[$user->data['group_id']]['configs']);
 
 
 

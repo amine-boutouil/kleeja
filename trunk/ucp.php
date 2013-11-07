@@ -47,7 +47,7 @@ switch (g('go', 'str', ''))
 		($hook = kleeja_run_hook('login_before_submit')) ? eval($hook) : null; //run hook
 		
 		#already a user? 
-		if ($usrcp->name())
+		if ($user->name())
 		{
 			($hook = kleeja_run_hook('login_logon_before')) ? eval($hook) : null; //run hook
 
@@ -70,7 +70,7 @@ switch (g('go', 'str', ''))
 			{
 				$ERRORS['empty_fields'] = $lang['EMPTY_FIELDS'];
 			}
-			elseif(!$usrcp->data($t_lname, $t_lpass, false, p('remme', 'int', 0)))
+			elseif(!$user->login($t_lname, $t_lpass, false, p('remme', 'int', 0)))
 			{
 				$ERRORS['login_check'] = $lang['LOGIN_ERROR'];
 			}
@@ -145,7 +145,7 @@ switch (g('go', 'str', ''))
 		}
 
 		#already a user
-		if ($usrcp->name())
+		if ($user->name())
 		{
 			($hook = kleeja_run_hook('register_logon_before')) ? eval($hook) : null; //run hook
 			kleeja_info($lang['REGISTERED_BEFORE']);
@@ -201,7 +201,7 @@ switch (g('go', 'str', ''))
 				$query_chk	= array(
 							'SELECT'	=> 'u.clean_name, u.mail',
 							'FROM'		=> "{$dbprefix}users u",
-							'WHERE'		=> "u.clean_name='" . $SQL->escape($usrcp->cleanusername($t_lname)) . "' OR u.mail='" . strtolower($SQL->escape($t_lmail)) . "'",
+							'WHERE'		=> "u.clean_name='" . $SQL->escape($user->cleanusername($t_lname)) . "' OR u.mail='" . strtolower($SQL->escape($t_lmail)) . "'",
 						);
 	
 				($hook = kleeja_run_hook('register_query_chk')) ? eval($hook) : null; //run hook
@@ -212,7 +212,7 @@ switch (g('go', 'str', ''))
 					$data_chk = $SQL->fetch($result_chk);
 					
 					#well, this username exists before!
-					if($data_chk['clean_name'] == $usrcp->cleanusername($t_lname))
+					if($data_chk['clean_name'] == $user->cleanusername($t_lname))
 					{
 						$ERRORS['name_exists_before'] = $lang['EXIST_NAME'];
 					}
@@ -231,12 +231,12 @@ switch (g('go', 'str', ''))
 			#no errors, lets do process
 			if(empty($ERRORS))	 
 			{
-				$name		= (string) $SQL->escape($t_lname);
-				$user_salt	= (string) substr(base64_encode(pack("H*", sha1(mt_rand()))), 0, 7);
-				$pass		= (string) $usrcp->kleeja_hash_password($SQL->escape($t_lpass) . $user_salt);
-				$mail		= (string) strtolower($SQL->escape($t_lmail));
-				$session_id	= (string) session_id();
-				$clean_name	= (string) $usrcp->cleanusername($name);
+				$name		= $SQL->escape($t_lname);
+				$user_salt	= substr(base64_encode(pack("H*", sha1(mt_rand()))), 0, 7);
+				$pass		= $SQL->escape($user->kleeja_hash_password($t_lpass . $user_salt));
+				$mail		= $SQL->escape($t_lmail);
+				$session_id	= session_id();
+				$clean_name	= $user->cleanusername($name);
 
 				$insert_query	= array(
 								'INSERT'	=> 'name ,password, password_salt ,mail, register_time, session_id, clean_name, group_id',
@@ -266,7 +266,7 @@ switch (g('go', 'str', ''))
 					}
 
 					#auto login after registration and redirect to index
-					$usrcp->data($t_lname, $t_lpass, false, false);
+					$user->login($t_lname, $t_lpass, false, false);
 					kleeja_info($text, '', true, $config['siteurl'], 3);
 				}
 			}
@@ -278,7 +278,7 @@ switch (g('go', 'str', ''))
 		
 		($hook = kleeja_run_hook('begin_logout')) ? eval($hook) : null; //run hook
 
-		if ($usrcp->logout())
+		if ($user->logout())
 		{
 			$text = $lang['LOGOUT_SUCCESFUL'] . '<br /> <a href="' .  $config['siteurl']  . '">' . $lang['HOME'] . '</a>';
 			kleeja_info($text, $lang['LOGOUT'], true, $config['siteurl'], 1);
@@ -302,12 +302,12 @@ switch (g('go', 'str', ''))
 		$H_FORM_KEYS = kleeja_add_form_key('fileuser');
 
 		$user_id_get	= g('id', 'int', false);
-		$user_id		= !$user_id_get && $usrcp->id() ? $usrcp->id() : $user_id_get;
-		$user_himself	= $usrcp->id() == $user_id;
+		$user_id		= !$user_id_get && $user->id() ? $user->id() : $user_id_get;
+		$user_himself	= $user->id() == $user_id;
 		$action			= $config['siteurl'] . 'ucp.php?go=fileuser' . (ig('page') ? '&amp;page=' . g('page', 'int') : '');
 
 		#not a user and no id to view
-		if (!$usrcp->name() && !ig('id'))
+		if (!$user->name() && !ig('id'))
 		{
 			kleeja_err($lang['USER_PLACE'], $lang['PLACE_NO_YOU'], true, 'index.php');
 		}
@@ -333,7 +333,7 @@ switch (g('go', 'str', ''))
 		}
 
 		#get user options and name
-		$data_user = $config['user_system'] == 1 ? $usrcp->get_data('name, show_my_filecp', $user_id) : array('name' => $usrcp->usernamebyid($user_id), 'show_my_filecp' => '1');
+		$data_user = $config['user_system'] == 1 ? $user->get_data('name, show_my_filecp', $user_id) : array('name' => $user->usernamebyid($user_id), 'show_my_filecp' => '1');
 
 		#if there is no username, then there is no user at all
 		if(!$data_user['name'])
@@ -342,7 +342,7 @@ switch (g('go', 'str', ''))
 		}
 
 		#this user closed his folder, and it's not the current user folder
-		if(!$data_user['show_my_filecp'] && ($usrcp->id() != $user_id) && !user_can('enter_acp'))
+		if(!$data_user['show_my_filecp'] && ($user->id() != $user_id) && !user_can('enter_acp'))
 		{
 			kleeja_info($lang['USERFILE_CLOSED'], $lang['CLOSED_FEATURE']);
 		}
@@ -363,7 +363,7 @@ switch (g('go', 'str', ''))
 		$pagination		= new pagination($perpage, $nums_rows, $current_page);
 		$start			= $pagination->get_start_row();
 
-		$your_fileuser	= $config['siteurl'] . ($config['mod_writer'] ? 'fileuser-' . $usrcp->id() . '.html' : 'ucp.php?go=fileuser&amp;id=' .  $usrcp->id());
+		$your_fileuser	= $config['siteurl'] . ($config['mod_writer'] ? 'fileuser-' . $user->id() . '.html' : 'ucp.php?go=fileuser&amp;id=' .  $user->id());
 		$total_pages	= $pagination->get_total_pages(); 
 		$pagination_link= $config['siteurl'] . ($config['mod_writer'] ?  'fileuser-' . $user_id  . '-'  : 'ucp.php?go=fileuser&amp;id=' . $user_id);
 		$linkgoto		= $config['siteurl'] . ($config['mod_writer'] ?  'fileuser-' . $user_id  . '-' . $current_page . '.html' : 'ucp.php?go=fileuser&amp;id=' . $user_id . '&amp;page=' . $current_page);
@@ -371,9 +371,9 @@ switch (g('go', 'str', ''))
  
 		$no_results = true;
 
-		if((int) $config['user_system'] != 1 && ($usrcp->id() != $user_id))
+		if((int) $config['user_system'] != 1 && ($user->id() != $user_id))
 		{
-			$data_user['name'] = $usrcp->usernamebyid($user_id);
+			$data_user['name'] = $user->usernamebyid($user_id);
 		}
 		$user_name = !$data_user['name'] ? false : $data_user['name'];
 
@@ -505,7 +505,7 @@ switch (g('go', 'str', ''))
 		case 'profile':
 		
 		#not a user
-		if (!$usrcp->name())
+		if (!$user->data['name'])
 		{
 			kleeja_info($lang['USER_PLACE'], $lang['PLACE_NO_YOU']);
 		}
@@ -514,9 +514,9 @@ switch (g('go', 'str', ''))
 		$stylee		= 'profile';
 		$titlee		= $lang['PROFILE'];
 		$action		= 'ucp.php?go=profile';
-		$name		= $usrcp->name();
-		$mail		= $usrcp->mail();
-		extract($usrcp->get_data('show_my_filecp, password_salt'));
+		$name		= $user->data['name'];
+		$mail		= $user->data['mail'];
+		extract($user->get_data('show_my_filecp, password_salt'));
 		$data_forum		= (int) $config['user_system'] == 1 ? true : false ;
 		$link_avater	= sprintf($lang['EDIT_U_AVATER_LINK'], '<a target="_blank" href="http://www.gravatar.com/">' , '</a>');
 		$H_FORM_KEYS = kleeja_add_form_key('profile');
@@ -579,7 +579,7 @@ switch (g('go', 'str', ''))
 					$ERRORS['pass1_neq_pass2'] = $lang['PASS_O_PASS2'];
 				}
 				#if current password is not correct
-				elseif($t_ppass_old == '' || !$usrcp->kleeja_hash_password($t_ppass_old . $password_salt, $userinfo['password']))
+				elseif($t_ppass_old == '' || !$user->kleeja_hash_password($t_ppass_old . $password_salt, $userinfo['password']))
 				{
 					$ERRORS['curnt_old_pass'] = $lang['CURRENT_PASS_WRONG'];
 				}
@@ -587,10 +587,10 @@ switch (g('go', 'str', ''))
 
 			#if email is not equal to current email AND email not exists before
 			$new_mail = false;
-			if($usrcp->mail() != $t_pmail)
+			if($user->mail() != $t_pmail)
 			{
 				#if current pass is not correct
-				if($t_pppass_old == '' || !$usrcp->kleeja_hash_password($t_pppass_old . $password_salt, $userinfo['password']))
+				if($t_pppass_old == '' || !$user->kleeja_hash_password($t_pppass_old . $password_salt, $userinfo['password']))
 				{
 					$ERRORS['curnt_old_pass'] = $lang['CURRENT_PASS_WRONG'];
 				}
@@ -631,9 +631,9 @@ switch (g('go', 'str', ''))
 				$user_salt 	= substr(base64_encode(pack("H*", sha1(mt_rand()))), 0, 7);
 				$mail		= $new_mail ? "mail='" . $SQL->escape($t_pmail) . "'" : '';
 				$showmyfile	= $t_show_my_filecp != $show_my_filecp ?  ($mail == '' ? '': ',') . "show_my_filecp='" . $t_show_my_filecp . "'" : '';
-				$pass		= $t_ppass_new != '' ? ($showmyfile != ''  || $mail != '' ? ',' : '') . "password='" . $SQL->escape($usrcp->kleeja_hash_password($t_ppass_new . $user_salt)) . 
+				$pass		= $t_ppass_new != '' ? ($showmyfile != ''  || $mail != '' ? ',' : '') . "password='" . $SQL->escape($user->kleeja_hash_password($t_ppass_new . $user_salt)) . 
 								"', password_salt='" . $user_salt . "'" : "";
-				$id			= (int) $usrcp->id();
+				$id			= (int) $user->id();
 
 				$update_query	= array(
 								'UPDATE'	=> "{$dbprefix}users",
@@ -731,7 +731,7 @@ switch (g('go', 'str', ''))
 		}
 
 		#logon already
-		if ($usrcp->name())
+		if ($user->name())
 		{
 			($hook = kleeja_run_hook('get_pass_logon_before')) ? eval($hook) : null; //run hook
 			kleeja_info($lang['LOGINED_BEFORE']);
@@ -807,7 +807,7 @@ switch (g('go', 'str', ''))
 				}
 
 				$hash_key = md5($newpass . time());
-				$pass		= (string) $usrcp->kleeja_hash_password($SQL->escape($newpass) . $row['password_salt']);
+				$pass		= (string) $user->kleeja_hash_password($SQL->escape($newpass) . $row['password_salt']);
 				$to		= $row['mail'];
 				$subject	= $lang['GET_LOSTPASS'] . ':' . $config['sitename'];
 				$activation_link = $config['siteurl'] . 'ucp.php?go=get_pass&activation_key=' . urlencode($hash_key) . '&uid=' . $row['id'];

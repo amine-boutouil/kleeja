@@ -107,7 +107,7 @@ function clean_var($var, $type = 'str')
 */
 function kleeja_detecting_bots()
 {
-	global $SQL, $usrcp, $dbprefix, $config, $klj_session;
+	global $SQL, $user, $dbprefix, $config, $klj_session;
 
 	// get information .. 
 	$agent	= $SQL->escape($_SERVER['HTTP_USER_AGENT']);

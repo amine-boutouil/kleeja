@@ -82,7 +82,7 @@ function p($name, $type = 'str', $default_value = false)
 function clean_var($var, $type = 'str')
 {
 	$var = trim($var);
-	swtich($type)
+	switch($type)
 	{
 		default:
 		case 'str': case 'string':

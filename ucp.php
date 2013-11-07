@@ -843,17 +843,9 @@ switch (g('go', 'str', ''))
 
 		break; 
 		
-		//
-		// Wrapper for captcha file
-		//
-		case 'captcha':
-			include PATH . 'includes/functions/captcha.php';
-		exit;
-		
-		break;;
 
 		//
-		//add your own code here
+		// add your own code here
 		//
 		default:
 

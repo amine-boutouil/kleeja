@@ -138,7 +138,7 @@ switch (g('go', 'str', ''))
 			{
 				$ERRORS['captcha']	= $lang['WRONG_VERTY_CODE'];
 			}
-			if ($t_rname == '' && $NOT_USER))
+			if ($t_rname == '' && $NOT_USER)
 			{
 				$ERRORS['rname'] = $lang['EMPTY_FIELDS'] . ' : ' . (empty($_POST['rname']) && $NOT_USER ? ' [ ' . $lang['YOURNAME'] . ' ] ' : '')  
 									. (empty($_POST['rurl']) ? '  [ ' . $lang['URL']  . ' ] ': '');

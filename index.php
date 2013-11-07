@@ -23,13 +23,9 @@ $kljup	= new uploader;
 
 ($hook = kleeja_run_hook('begin_index_page')) ? eval($hook) : null; //run hook
 
-//
-//Is kleeja only for memebers ?! 
-//
+#Is kleeja only for memebers ?! 
 if(empty($d_groups[2]['exts']) && !$usrcp->name())
 {
-	// Send a 503 HTTP response code to prevent search bots from indexing this message
-	//header('HTTP/1.1 503 Service Temporarily Unavailable');
 	kleeja_info($lang['SITE_FOR_MEMBER_ONLY'], $lang['HOME']);
 }
 

@@ -298,7 +298,7 @@ if(empty($perpage) || intval($perpage) == 0)
 }
 
 #captcha file path
-$captcha_file_path = $config['siteurl'] . 'ucp.php?go=captcha';
+$captcha_file_path = $config['siteurl'] . 'captcha.php';
 
 
 ($hook = kleeja_run_hook('end_common')) ? eval($hook) : null; //run hook

@@ -8,43 +8,9 @@
 *
 */
 
-/*
-//if sessions is started before, let's destroy it!
-if(isset($_SESSION))
-{
-	@session_unset(); // fix bug with php4
-	@session_destroy();
-}
 
-$s_time = 86400 * 2; // 2 : two days 
 
-//start session
-if(function_exists('ini_set'))
-{
-	if (version_compare(PHP_VERSION, '5.0.0', 'ge') && substr(PHP_OS, 0 ,3) != 'WIN')
-	{
-		ini_set('session.hash_function', 1);
-		ini_set('session.hash_bits_per_character', 6);
-	}
-	ini_set('session.use_only_cookies', false);
-	ini_set('session.auto_start', false);
-	ini_set('session.use_trans_sid', true);
-	ini_set('session.cookie_lifetime', $s_time);
-	ini_set('session.gc_maxlifetime', $s_time);
-	//
-	//this will help people with some problem with their sessions path
-	//
-	//session_save_path('./cache/');
-}
-
-@session_name('sid');
-@session_start();
-
-*/
-
-/*
-* Fix bug with path of font When using versions of the GD library lower than 2.0.18 
-*/
+#Fix bug with path of font When using versions of the GD library lower than 2.0.18 
 if(function_exists('putenv'))
 {
 	@putenv('GDFONTPATH=' . realpath('.'));
@@ -55,16 +21,16 @@ else if(function_exists('ini_set'))
 }
 
 
-/*
- * When any body request this file , he will see an image .. 
- */
+# When any body request this file , he should see an image
 kleeja_cpatcha_image();
 exit();
 
-//
-//this function will just make an image
-//source : http://webcheatsheet.com/php/create_captcha_protection.php
-//
+
+/**
+ * Generate a CAPTCHA
+ *
+ * @return void
+ */
 function kleeja_cpatcha_image()
 {
 	//Let's generate a totally random string using md5

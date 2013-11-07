@@ -54,11 +54,7 @@ function ip($name)
  */
 function g($name, $type = 'str', $default_value = false)
 {
-	if(isset($_GET[$name]))
-	{
-		return $type == 'str' ? htmlspecialchars($_GET[$name]) : intval($_GET[$name]);
-	}
-	return $default_value;
+	return isset($_GET[$name]) ? clean_var($_GET[$name], $type) : $default_value;
 }
 
 /**
@@ -72,16 +68,42 @@ function g($name, $type = 'str', $default_value = false)
  */
 function p($name, $type = 'str', $default_value = false)
 {
-	if(isset($_POST[$name]))
-	{
-		return $type == 'str' ? htmlspecialchars($_POST[$name]) : intval($_POST[$name]);
-	}
-	return $default_value;
+	return isset($_POST[$name]) ? clean_var($_POST[$name], $type) : $default_value;
 }
 
+/**
+ * Clean variable according to the selected type
+ *
+ * @since 2.0
+ * @param mixed $var the variable to be cleaned
+ * @param str $type Validate and clean variable according to this select, string, email ..
+ * @return mixed
+ */
+function clean_var($var, $type = 'str')
+{
+	$var = trim($var);
+	swtich($type)
+	{
+		default:
+		case 'str': case 'string':
+			return htmlspecialchars($var);
+		break;
+		case 'int': case 'number':
+			return intval($var);
+		break;
+		case 'mail': case 'email':
+			return !preg_match('/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/i', $var) ? false : strtolower($var);
+		break;
+		case 'bool':
+			return (bool) $var;
+		break;
+	}
+	return '';
+}
 
 /**
 * For recording who onlines now .. 
+* TODO: move to usr class
 */
 function kleeja_detecting_bots()
 {
@@ -167,7 +189,7 @@ function get_ban()
 /**
 * Run hooks of kleeja
 */
-function kleeja_run_hook ($hook_name)
+function kleeja_run_hook($hook_name)
 {
 	global $all_plg_hooks;
 
@@ -564,7 +586,7 @@ function delete_config($name)
 
 /**
 * Get the current IP of the user
-*
+* TODO: move to usr class 
 * @return string
 */
 function get_ip()
@@ -649,7 +671,7 @@ function kleeja_log($text, $reset = false)
 
 /**
 * Used for checking the acl for the current user
-*
+*TODO: move to usr class
 * @param string $acl_name The privilege you want check if this group of user has or not
 * @param int $group_id [optional] The group you want to check agaist, if not given will 
 * use the current user group id.
@@ -801,7 +823,9 @@ function garbage_collection()
 		return true;
 	}
 	
-	$SQL
+	global $SQL;
+	
+	$SQL->close();
 	
 	define('garbage_collection_done', true);
 }

@@ -96,9 +96,9 @@ switch ($_GET['go'])
 
 			$result	= $SQL->build($query);
 
-			if ($SQL->num_rows($result))
+			if ($SQL->num($result))
 			{
-				$row = $SQL->fetch_array($result);
+				$row = $SQL->fetch($result);
 				$filename_for_show	= $row['real_filename'] == '' ? $row['name'] : $row['real_filename'];
 			}
 			else
@@ -106,7 +106,7 @@ switch ($_GET['go'])
 				($hook = kleeja_run_hook('not_exists_qr_report_go_id')) ? eval($hook) : null; //run hook
 				kleeja_err($lang['FILE_NO_FOUNDED']);
 			}
-			$SQL->freeresult($result);
+			$SQL->free($result);
 		}
 
 		//no error yet 
@@ -353,17 +353,18 @@ switch ($_GET['go'])
 
 				$result	= $SQL->build($query);
 
-				if ($SQL->num_rows($result) != 0)
+				if ($SQL->num($result) != 0)
 				{
-					while($row=$SQL->fetch_array($result))
+					while($row=$SQL->fetch($result))
 					{
-						@kleeja_unlink ($row['folder'] . '/' . $row['name']);
-						//delete thumb
+						kleeja_unlink($row['folder'] . '/' . $row['name']);
+
+						#delete thumb
 						if (file_exists($row['folder'] . '/thumbs/' . $row['name']))
 						{
-							@kleeja_unlink ($row['folder'] . '/thumbs/' . $row['name']);
+							kleeja_unlink($row['folder'] . '/thumbs/' . $row['name']);
 						}
-						
+
 						$is_img = in_array($row['type'], array('png','gif','jpg','jpeg','tif','tiff', 'bmp')) ? true : false;
 
 						$query_del	= array(
@@ -394,7 +395,7 @@ switch ($_GET['go'])
 						break;//to prevent divel actions
 					}
 
-					$SQL->freeresult($result);
+					$SQL->free($result);
 				}
 			}
 			else

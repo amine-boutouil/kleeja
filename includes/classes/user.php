@@ -47,12 +47,6 @@ class user
 	{
 		global $config, $userinfo;
 
-		#if user disable the intengration system or no system chosen, return to normal
-		if(defined('DISABLE_INTR') || $config['user_system'] == '' || empty($config['user_system']))
-		{
-			$config['user_system'] = '1';
-		}
-	
 		#login expire after?
 		$expire = time() + ((int) $expire ? intval($expire) : 86400);
 
@@ -64,8 +58,10 @@ class user
 			if(file_exists(PATH . 'includes/auth_integration/' . trim($config['user_system']) . '.php'))
 			{	
 				include_once PATH . 'includes/auth_integration/' . trim($config['user_system']) . '.php';
-				$login_status = kleeja_auth_login(trim($name), trim($pass), $hashed, $expire, $loginadm);
+				$login_data = kleeja_auth_login(trim($name), trim($pass), $hashed, $expire, $loginadm);
 				return $login_status;
+				
+				#TODO add default $user->data info for those different system
 			}
 		}
 
@@ -205,7 +201,7 @@ class user
 
 		unset($pass);
 		$user->data['password'] = '******';
-		return true;
+		return $this->data;
 	}
 
 
@@ -470,35 +466,20 @@ class user
 		#if not expire 
 		if(($hashed_expire == sha1(md5($config['h_key'] . $hashed_password) . $expire_at)) && ($expire_at > time()))
 		{
-			if(user_can('enter_acp', $group_id))
-			{
-				$user_data = $this->login($user_id, $hashed_password, true, $expire_at);
-			}
-			else
-			{
-				if(!empty($u_info))
-				{
-					$this->data = unserialize(base64_decode($u_info));
-					$this->data['group_id'] = $group_id;
-					$this->data['password'] = $hashed_password;
-
-	
-					$user_data = true;
-				}
-			}
+			$user_data = $this->login($user_id, $hashed_password, true, $expire_at);
 		}
 
 		#no data or wrong data, clear the cookies
 		if($user_data == false)
 		{
 			$this->logout();
+			return false;
 		}
 		else
 		{
-			return $user_data;
+			$this->data = $user_data;
+			return true;
 		}
-	
-		return false;
 	}
 	
 	

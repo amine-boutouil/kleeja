@@ -24,7 +24,7 @@ $kljup	= new uploader;
 ($hook = kleeja_run_hook('begin_index_page')) ? eval($hook) : null; //run hook
 
 #Is kleeja only for memebers ?! 
-if(empty($d_groups[2]['exts']) && !$usrcp->name())
+if(empty($d_groups[2]['exts']) && !$user->is_user())
 {
 	kleeja_info($lang['SITE_FOR_MEMBER_ONLY'], $lang['HOME']);
 }
@@ -51,8 +51,8 @@ $kljup->prefix		= $config['prefixname'];
 $kljup->action		= $action = "index.php";
 $kljup->filesnum	= $config['filesnum'];
 //--------------------- start user system part
-$kljup->types		= $d_groups[$userinfo['group_id']]['exts'];
-$kljup->id_user		= ($usrcp->name()) ? $usrcp->id() : '-1';
+$kljup->types		= $d_groups[$user->data['group_id']]['exts'];
+$kljup->id_user		= $user->data['id'];
 $kljup->user_is_adm = user_can('enter_acp');
 $kljup->safe_code	= $config['safe_code'];
 //--------------------- end user system part
@@ -74,7 +74,7 @@ foreach($kljup->messages as $t=>$s)
 
 //some words for template
 $welcome_msg	= $config['welcome_msg'];
-$filecp_link	= $usrcp->id() ? $config['siteurl'] . ($config['mod_writer'] ? 'filecp.html' : 'ucp.php?go=filecp') : false;
+$filecp_link	= $user->is_user() ? $config['siteurl'] . ($config['mod_writer'] ? 'filecp.html' : 'ucp.php?go=filecp') : false;
 $terms_msg		= sprintf($lang['AGREE_RULES'], '<a href="' . ($config['mod_writer'] ? 'rules.html' : 'go.php?go=rules') . '">' , '</a>');
 $link_avater		= sprintf($lang['EDIT_U_AVATER_LINK'], '<a href="http://www.gravatar.com/">' , '</a>');
 //

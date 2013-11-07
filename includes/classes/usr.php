@@ -9,7 +9,9 @@
 */
 
 
-//no for directly open
+/**
+ * @ignore
+ */
 if (!defined('IN_COMMON'))
 {
 	exit();
@@ -21,52 +23,69 @@ if (!defined('IN_COMMON'))
 * FORCE_COOKIES, DISABLE_INTR
 */
 
-class usrcp
+class user
 {
-	// this function like a traffic sign :)
-	function data ($name, $pass, $hashed = false, $expire = 86400, $loginadm = false)
+	
+	/**
+	 * Array holding the user data, name etc
+	 * Those default values are for guest 
+	 */
+	public $data = array('id'=>-1, 'group_id'=>2);
+
+
+	/**
+	 * Login into Kleeja
+	 *
+	 * @param mexied $name The username if not hashed, ID if hashed
+	 * @param string $pass The password
+	 * @param mixed $hashed does the givvn password hashed or not
+	 * @param int $expire The time will the user stay logon
+	 * @param bool $loginadm If this is a login for admin area, then true
+	 * @return bool true or false
+	 */
+	public function login($name, $pass, $hashed = false, $expire = 86400, $loginadm = false)
 	{
 		global $config, $userinfo;
 
-		//return user system to normal
+		#if user disable the intengration system or no system chosen, return to normal
 		if(defined('DISABLE_INTR') || $config['user_system'] == '' || empty($config['user_system']))
 		{
 			$config['user_system'] = '1';
 		}
 	
-
-		//expire
+		#login expire after?
 		$expire = time() + ((int) $expire ? intval($expire) : 86400);
 
 		($hook = kleeja_run_hook('data_func_usr_class')) ? eval($hook) : null; //run hook
 
-		if((int) $config['user_system'] != 1)
+		#if the user system integrated, then get the right file
+		if($config['user_system'] != 1)
 		{
 			if(file_exists(PATH . 'includes/auth_integration/' . trim($config['user_system']) . '.php'))
 			{	
-				include_once (PATH . 'includes/auth_integration/' . trim($config['user_system']) . '.php');
+				include_once PATH . 'includes/auth_integration/' . trim($config['user_system']) . '.php';
 				$login_status = kleeja_auth_login(trim($name), trim($pass), $hashed, $expire, $loginadm);
-				//exit($userinfo['group_id']);
 				return $login_status;
 			}
 		}
 
-		//normal 
+		#or just use the default system
 		return $this->normal(trim($name), trim($pass), $hashed, $expire, $loginadm);
 	}
 
-	//get username by id
-	function usernamebyid($user_id) 
+
+	/**
+	 * Get the username by its ID
+	 * 
+	 * @param int $use_id The user ID
+	 * @return string Username
+	 */
+	public function usernamebyid($user_id) 
 	{
 		global $config;
 
-		//return user system to normal
-		if(defined('DISABLE_INTR'))
-		{
-			$config['user_system'] = 1;
-		}
-
-		if((int) $config['user_system'] != 1)
+		#if integrated, use its function
+		if($config['user_system'] != 1)
 		{
 			if(file_exists(PATH . 'includes/auth_integration/' . trim($config['user_system']) . '.php'))
 			{	
@@ -75,20 +94,19 @@ class usrcp
 			}
 		}
 
-		//normal system
+		#normal system
 		$u = $this->get_data('name', $user_id);	
 		return $u['name'];
 	}
 
-	//now our table, normal user system
-	function normal ($name, $pass, $hashed = false, $expire, $loginadm = false)
+	/**
+	 * Login using Our system
+	 *
+	 * @see login()
+	 */
+	public function normal($name, $pass, $hashed = false, $expire, $loginadm = false)
 	{
-		global $SQL, $dbprefix, $config, $userinfo;
-
-		$userinfo = array(
-							'id'		=> 0,
-							'group_id'	=> 2,
-			);
+		global $SQL, $dbprefix, $config;
 
 		$query = array(
 					'SELECT'	=> '*',
@@ -108,114 +126,105 @@ class usrcp
 		($hook = kleeja_run_hook('qr_select_usrdata_n_usr_class')) ? eval($hook) : null; //run hook			
 		$result = $SQL->build($query);
 
-		if ($SQL->num($result)) 
-		{
-			while($row=$SQL->fetch($result))
-			{
-				if(empty($row['password'])) //more security
-				{
-					return false;
-				}
-
-				$phppass = $hashed ?  $pass : $pass . $row['password_salt'];
-
-				//CHECK IF IT'S MD5 PASSWORD
-				if(strlen($row['password']) == '32' && empty($row['password_salt']) && defined('CONVERTED_SCRIPT'))   
-				{
-					$passmd5 = md5($pass);
-					////update old md5 hash to phpass hash
-					if($row['password'] == $passmd5)
-					{
-						////new salt
-						$new_salt = substr(base64_encode(pack("H*", sha1(mt_rand()))), 0, 7);
-						////new password hash
-						$new_password = $this->kleeja_hash_password(trim($pass) . $new_salt);
-
-						($hook = kleeja_run_hook('qr_update_usrdata_md5_n_usr_class')) ? eval($hook) : null; //run hook	
-
-						////update now !!
-						$update_query = array(
-									'UPDATE'	=> "{$dbprefix}users",
-									'SET'		=> "password='" . $new_password . "' ,password_salt='" . $new_salt . "'",
-									'WHERE'		=>	"id=" . intval($row['id'])
-							);
-
-						$SQL->build($update_query);
-					}
-					else //if the password is wrong
-					{
-						return false;
-					}
-				}
-
-				if(($phppass != $row['password'] && $hashed) || ($this->kleeja_hash_password($phppass, $row['password']) != true && $hashed == false))
-				{
-					return false;
-				}
-
-				//Avoid dfining constants again for admin panel login
-				if(!$loginadm)
-				{
-					define('USER_ID', $row['id']);
-					define('GROUP_ID', $row['group_id']);
-					define('USER_NAME', $row['name']);
-					define('USER_MAIL', $row['mail']);
-					define('LAST_VISIT', $row['last_visit']);
-				}
-
-				//all user fileds info
-				$userinfo = $row;
-
-				$user_y = base64_encode(serialize(array('id'=>$row['id'], 'name'=>$row['name'], 'mail'=>$row['mail'], 'last_visit'=>$row['last_visit'])));
-
-				if(!$hashed && !$loginadm)
-				{
-					$hash_key_expire = sha1(md5($config['h_key'] . $row['password']).  $expire);
-					$this->kleeja_set_cookie('ulogu', $this->en_de_crypt($row['id'] . '|' . $row['password'] . '|' . $expire . '|' . $hash_key_expire . '|' . $row['group_id'] . '|' . $user_y), $expire);
-				}
-
-				#if last visit > 1 minute then update it 
-				if(empty($row['last_visit']) || time() - $row['last_visit'] > 60)
-				{
-						$update_last_visit = array(
-									'UPDATE'	=> "{$dbprefix}users",
-									'SET'		=> "last_visit=" . time(),
-									'WHERE'		=> "id=" . intval($row['id'])
-							);
-
-						$SQL->build($update_last_visit);
-				}
-
-				($hook = kleeja_run_hook('qr_while_usrdata_n_usr_class')) ? eval($hook) : null; //run hook
-			}
-			$SQL->free($result);
-
-			unset($pass);
-			return true;
-		}
-		else
+		if (!$SQL->num($result))
 		{
 			return false;
 		}
+
+		$row = $SQL->fetch($result);
+
+		#if hacker got able to make the password empty, stop him
+		if(empty($row['password']))
+		{
+			return false;
+		}
+
+		$phppass = $hashed ?  $pass : $pass . $row['password_salt'];
+
+		#is it md5? and converted from other script to kleeja?
+		if(strlen($row['password']) == '32' && empty($row['password_salt']) && defined('CONVERTED_SCRIPT'))   
+		{
+			$passmd5 = md5($pass);
+			#update old md5 hash to phpass hash
+			if($row['password'] == $passmd5)
+			{
+				#make new password hash and salt and upgrade this user to it
+				$new_salt = substr(base64_encode(pack("H*", sha1(mt_rand()))), 0, 7);
+				$new_password = $this->kleeja_hash_password(trim($pass) . $new_salt);
+
+				($hook = kleeja_run_hook('qr_update_usrdata_md5_n_usr_class')) ? eval($hook) : null; //run hook	
+
+				$update_query = array(
+							'UPDATE'	=> "{$dbprefix}users",
+							'SET'		=> "password='" . $new_password . "' ,password_salt='" . $new_salt . "'",
+							'WHERE'		=>	"id=" . intval($row['id'])
+					);
+
+				$SQL->build($update_query);
+			}
+			else
+			{
+				#password is wrong
+				return false;
+			}
+		}
+		
+		#password doesnt match
+		if(($phppass != $row['password'] && $hashed) || ($this->kleeja_hash_password($phppass, $row['password']) != true && $hashed == false))
+		{
+			return false;
+		}
+
+		#all user fileds info
+		$this->data = $row;
+
+		$user_y = base64_encode(serialize(array('id'=>$row['id'], 'name'=>$row['name'], 'mail'=>$row['mail'], 'last_visit'=>$row['last_visit'])));
+
+		#set the cookies
+		if(!$hashed && !$loginadm)
+		{
+			$hash_key_expire = sha1(md5($config['h_key'] . $row['password']).  $expire);
+			$this->kleeja_set_cookie('ulogu', $this->en_de_crypt($row['id'] . '|' . $row['password'] . '|' . $expire . '|' . $hash_key_expire . '|' . $row['group_id'] . '|' . $user_y), $expire);
+		}
+
+		#if last visit > 1 minute then update it 
+		if(empty($row['last_visit']) || time() - $row['last_visit'] > 60)
+		{
+				$update_last_visit = array(
+							'UPDATE'	=> "{$dbprefix}users",
+							'SET'		=> "last_visit=" . time(),
+							'WHERE'		=> "id=" . intval($row['id'])
+					);
+
+				$SQL->build($update_last_visit);
+		}
+
+		($hook = kleeja_run_hook('qr_while_usrdata_n_usr_class')) ? eval($hook) : null; //run hook
+
+		$SQL->free($result);
+
+		unset($pass);
+		$user->data['password'] = '******';
+		return true;
 	}
 
-	/*
-		get user data
-		new function:1rc5+
-	*/
-	function get_data($type="*", $user_id = false)
+
+	/**
+	 * Get any user data, to get current user data use $user->data
+	 *
+	 * @param string $type data to get, i.e name, mail
+	 * @param mixed $user_id If not given, will get current user data
+	 * @return mixed Array or string if one item
+	 */
+	public function get_data($type = "*", $user_id = false)
 	{
 		global $dbprefix, $SQL;
 
 		if(!$user_id)
 		{
-			$user_id = $this->id();
+			$user_id = $this->data['id'];
 		}
-		
-		//todo : 
-		//if type != '*' and contains no , and type in 'name, id, email' return $this->id .. etc
 
-		//te get files and update them !!
 		$query_name = array(
 						'SELECT'	=> $type,
 						'FROM'		=> "{$dbprefix}users",
@@ -225,53 +234,22 @@ class usrcp
 		($hook = kleeja_run_hook('qr_select_userdata_in_usrclass')) ? eval($hook) : null; //run hook
 		$data_user = $SQL->fetch($SQL->build($query_name));
 
+		#if not an array, return as string
+		if($type != '*' && strpos($type, ',') === false)
+		{
+			return $data_user[$type];
+		}
+	
 		return $data_user;
 	}
 
-	/*
-	user ids
-	*/
-	function id ()
-	{
-		($hook = kleeja_run_hook('id_func_usr_class')) ? eval($hook) : null; //run hook
-		
-		return defined('USER_ID') ? USER_ID : false;
-	}
-	
-	/*
-	group ids
-	*/
-	function group_id ()
-	{
-		($hook = kleeja_run_hook('group_id_func_usr_class')) ? eval($hook) : null; //run hook
-		
-		return defined('GROUP_ID') ? GROUP_ID : false;
-	}
 
-	/*
-	user name
-	*/
-	function name ()
-	{
-		($hook = kleeja_run_hook('name_func_usr_class')) ? eval($hook) : null; //run hook
-
-		return defined('USER_NAME') ? USER_NAME : false;
-	}
-
-	/*
-	user mail
-	*/
-	function mail ()
-	{
-		($hook = kleeja_run_hook('mail_func_usr_class')) ? eval($hook) : null; //run hook
-
-		return defined('USER_MAIL') ? USER_MAIL : false;	
-	}
-
-	/*
-	logout func
-	*/
-	function logout()
+	/**
+	 * Logout from Kleeja
+	 * 
+	 * @return void
+	 */
+	public function logout()
 	{
 		($hook = kleeja_run_hook('logout_func_usr_class')) ? eval($hook) : null; //run hook
 
@@ -286,14 +264,14 @@ class usrcp
 
 		//is ther any cookies	
 		$this->kleeja_set_cookie('ulogu', '', time() - 31536000);//31536000 = year
-
-		return true;
 	}
 
-	/*
-	logut just from acp
-	*/
-	function logout_cp()
+	/**
+	 * Logout from Kleeja admin. area only
+	 * 
+	 * @return void
+	 */
+	public function logout_cp()
 	{
 		($hook = kleeja_run_hook('logout_cp_func_usr_class')) ? eval($hook) : null; //run hook
 
@@ -305,8 +283,14 @@ class usrcp
 		return true;
 	}
 
-	//clean usernames
-	function cleanusername($uname) 
+
+	/**
+	 * String normalization, no confusable chars
+	 * 
+	 * @param string $uname The string to be normalized
+	 * @return string the cleaned string
+	 */
+	public function cleanusername($uname) 
 	{
 		($hook = kleeja_run_hook('cleanusername_func_usr_class')) ? eval($hook) : null; //run hook
 
@@ -318,24 +302,36 @@ class usrcp
 
 		if(empty($arabic_t))
 		{
-			//Arabic chars must be stay in utf8 format, so we encoded them
+			#Arabic chars must be stay in utf8 format, so we encoded them
 			$arabic_t = unserialize(base64_decode('YToyOntpOjA7YToxMjp7aTowO3M6Mjoi2KMiO2k6MTtzOjI6ItilIjtpOjI7czoyOiLYpCI7aTozO3M6Mjoi2YAiO2k6NDtzOjI6Itm' .
 			'LIjtpOjU7czoyOiLZjCI7aTo2O3M6Mjoi2Y8iO2k6NztzOjI6ItmOIjtpOjg7czoyOiLZkCI7aTo5O3M6Mjoi2ZIiO2k6MTA7czoyOiLYoiI7aToxMTtzOjI6ItimIjt9aToxO' .
 			'2E6MTI6e2k6MDtzOjI6ItinIjtpOjE7czoyOiLYpyI7aToyO3M6Mjoi2YgiO2k6MztzOjA6IiI7aTo0O3M6MDoiIjtpOjU7czowOiIiO2k6NjtzOjA6IiI7aTo3O3M6MDoiIjt' . 
 			'pOjg7czowOiIiO2k6OTtzOjA6IiI7aToxMDtzOjI6ItinIjtpOjExO3M6Mjoi2YkiO319'));
 		}
-		
-		$uname = str_replace($latin_t[0], $latin_t[1], $uname); //replace confusable Latin chars
-    	$uname = str_replace($arabic_t[0], $arabic_t[1], $uname); //replace confusable Arabic chars
-		$uname = preg_replace('#(?:[\x00-\x1F\x7F]+|(?:\xC2[\x80-\x9F])+)#', '', $uname); //un-wanted utf8 control chars
-		$uname = preg_replace('# {2,}#', ' ', $uname); //2+ spaces with one space
+
+		#replace confusable Latin chars
+		$uname = str_replace($latin_t[0], $latin_t[1], $uname);
+		#replace confusable Arabic chars
+    	$uname = str_replace($arabic_t[0], $arabic_t[1], $uname);
+		#un-wanted utf8 control chars
+		$uname = preg_replace('#(?:[\x00-\x1F\x7F]+|(?:\xC2[\x80-\x9F])+)#', '', $uname);
+		#2+ spaces with one space
+		$uname = preg_replace('# {2,}#', ' ', $uname);
+		#small letters
     	return strtolower($uname);
 	}
 
-	//depand on phpass class
-	function kleeja_hash_password($password, $check_pass = false)
+
+	/**
+	 * Get hashed password depend on phpass lib.
+	 *
+	 * @param string $password The password to be hashed
+	 * @param bool $check_pass If true, only check process will be done
+	 * @return mixed true or false if $chec_pass is true, or string if false
+	 */
+	public function kleeja_hash_password($password, $check_pass = false)
 	{
-		include_once(PATH . 'includes/classes/phpass.php');
+		include_once PATH . 'includes/classes/phpass.php';
 
 		($hook = kleeja_run_hook('kleeja_hash_password_func_usr_class')) ? eval($hook) : null; //run hook
 
@@ -343,29 +339,32 @@ class usrcp
 		$hasher = new PasswordHash(8, true);
 		$return = $hasher->HashPassword($password);
 	
-		//return check or hash
+		#return check or hash
 		return $check_pass != false ?  $hasher->CheckPassword($password, $check_pass) : $return;
 	}
 
-	//kleeja cookie
-	function kleeja_set_cookie($name, $value, $expire)
+	/**
+	 * Set cookies 
+	 *
+	 * @param string $name A unique Cookie name
+	 * @param string $value The value of cookie
+	 * @param int $expire Time to stay alive
+	 * @return void
+	 */ 
+	public function kleeja_set_cookie($name, $value, $expire)
 	{
 		global $config;
 
 		($hook = kleeja_run_hook('kleeja_set_cookie_func_usr_class')) ? eval($hook) : null; //run hook
 
-		//
-		//when user add cookie_* in config this will replace the current ones
-		//
+		#when user add cookie_* in config this will replace the current ones
 		global $config_cookie_name, $config_cookie_domian, $config_cookie_secure, $config_cookie_path;
 		$config['cookie_name']		= isset($config_cookie_name) ? $config_cookie_name : $config['cookie_name'];
 		$config['cookie_domain']	= isset($config_cookie_domain) ? $config_cookie_domain : $config['cookie_domain'];
 		$config['cookie_secure']	= isset($config_cookie_secure) ? $config_cookie_secure : $config['cookie_secure'];
 		$config['cookie_path']		= isset($config_cookie_path) ? $config_cookie_path : $config['cookie_path'];
 
-		//
-		//when user add define('FORCE_COOKIES', true) in config.php we will make our settings of cookies
-		//
+		#when user add define('FORCE_COOKIES', true) in config.php we will make our settings of cookies
 		if(defined('FORCE_COOKIES'))
 		{
 			$config['cookie_domain'] = (!empty($_SERVER['HTTP_HOST'])) ? strtolower($_SERVER['HTTP_HOST']) : ((!empty($_SERVER['SERVER_NAME'])) ? $_SERVER['SERVER_NAME'] : @getenv('SERVER_NAME'));
@@ -374,7 +373,7 @@ class usrcp
 			$config['cookie_secure'] = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') ? true : false;
 		}
 
-		// Enable sending of a P3P header
+		#Enable sending of a P3P header
 		header('P3P: CP="CUR ADM"');
 
 		$name_data = rawurlencode($config['cookie_name'] . '_' . $name) . '=' . rawurlencode($value);
@@ -384,8 +383,29 @@ class usrcp
 		header('Set-Cookie: ' . $name_data . (($expire) ? '; expires=' . $rexpire : '') . '; path=' . $config['cookie_path'] . $domain . ((!$config['cookie_secure']) ? '' : '; secure') . '; HttpOnly', false);
 	}
 
-	//encrypt and decrypt any data with our function
-	function en_de_crypt($data, $type = 1)
+	/**
+	 * Get cookie from browser
+	 *
+	 * @param string $name The name of the cookie
+	 * @return mixed The value of the cookie if exists or false if not 
+	 */
+	public function kleeja_get_cookie($name)
+	{
+		global $config;
+		($hook = kleeja_run_hook('kleeja_get_cookie_func_usr_class')) ? eval($hook) : null; //run hook
+
+		return isset($_COOKIE[$config['cookie_name'] . '_' . $name]) ? $_COOKIE[$config['cookie_name'] . '_' . $name] : false;
+	}
+
+
+	/**
+	 * Encrpy or Decrypt a string mainly for cookies
+	 * 
+	 * @param string $data String to be encrypted or decrypted
+	 * @param int $type Encrypt is 1, Decrypt is 2
+	 * @return string Encyrpted or Decrypted string
+	 */
+	public function en_de_crypt($data, $type = 1)
 	{
 		global $config;
 		static $txt = array();
@@ -425,190 +445,76 @@ class usrcp
 	}
 
 
-	//
-	//get cookie
-	//
-	function kleeja_get_cookie($name)
+	/**
+	 * A check point function used before any thing in Kleeja
+	 *
+	 * @return mixed
+	 */
+	public function kleeja_check_user()
 	{
-		global $config;
-		($hook = kleeja_run_hook('kleeja_get_cookie_func_usr_class')) ? eval($hook) : null; //run hook
-
-		return isset($_COOKIE[$config['cookie_name'] . '_' . $name]) ? $_COOKIE[$config['cookie_name'] . '_' . $name] : false;
-	}
-
-	//check if user is admin or not 
-	//return : mean return true or false, but if return is false will show msg
-	function kleeja_check_user()
-	{
-		global $config, $SQL, $dbprefix, $userinfo;
+		global $config, $SQL, $dbprefix;
 
 		($hook = kleeja_run_hook('kleeja_check_user_func_usr_class')) ? eval($hook) : null; //run hook
 
-		#to make sure
-		$userinfo = array(
-							'id'		=> -1,
-							'group_id'	=> 2,
-			);
 
-		//if login up
-		if($this->kleeja_get_cookie('ulogu'))
+		#if there is no login cookie
+		if(!$this->kleeja_get_cookie('ulogu'))
 		{
-			$user_data = false;
+		 	return false;	
+		}
+		
+		$user_data = false;
 
-			list($user_id, $hashed_password, $expire_at, $hashed_expire, $group_id, $u_info) =  @explode('|', $this->en_de_crypt($this->kleeja_get_cookie('ulogu'), 2));
+		list($user_id, $hashed_password, $expire_at, $hashed_expire, $group_id, $u_info) =  @explode('|', $this->en_de_crypt($this->kleeja_get_cookie('ulogu'), 2));
 
-			//if not expire 
-			if(($hashed_expire == sha1(md5($config['h_key'] . $hashed_password) . $expire_at)) && ($expire_at > time()))
+		#if not expire 
+		if(($hashed_expire == sha1(md5($config['h_key'] . $hashed_password) . $expire_at)) && ($expire_at > time()))
+		{
+			if(user_can('enter_acp', $group_id))
 			{
-				 /* For better performance we will take the risks */
-				 /*
-				 	!defined('IN_DOWNLOAD') 
-				 */
-				//exit(print_r( @explode('|', $this->en_de_crypt($this->kleeja_get_cookie('ulogu'), 2))));
-				if(user_can('enter_acp', $group_id))
-				{
-					$user_data = $this->data($user_id, $hashed_password, true, $expire_at);
-				}
-				else
-				{
-					if(!empty($u_info))
-					{
-						$userinfo = unserialize(base64_decode($u_info));
-						$userinfo['group_id'] = $group_id;
-						$userinfo['password'] = $hashed_password;
-
-						define('USER_ID', $userinfo['id']);
-						define('GROUP_ID', $userinfo['group_id']);
-						define('USER_NAME', $userinfo['name']);
-						define('USER_MAIL', $userinfo['mail']);
-						define('LAST_VISIT', $userinfo['last_visit']);
-						$user_data = true;
-					}
-				}
-			}
-
-			if($user_data == false)
-			{
-				$this->logout();
+				$user_data = $this->login($user_id, $hashed_password, true, $expire_at);
 			}
 			else
 			{
-				return $user_data;
+				if(!empty($u_info))
+				{
+					$this->data = unserialize(base64_decode($u_info));
+					$this->data['group_id'] = $group_id;
+					$this->data['password'] = $hashed_password;
+
+	
+					$user_data = true;
+				}
 			}
+		}
+
+		#no data or wrong data, clear the cookies
+		if($user_data == false)
+		{
+			$this->logout();
 		}
 		else
 		{
-			#guest
-			define('USER_ID', $userinfo['id']);
-			define('GROUP_ID', $userinfo['group_id']);
+			return $user_data;
 		}
-
-		return false; //nothing
+	
+		return false;
 	}
 	
-
-	/*
-	* convert from utf8 to cp1256 and vice versa
-	*/
-	function kleeja_utf8($str, $to_utf8 = true)
+	
+	/**
+	 * Check if the current visitor is a user
+	 *
+	 * @return bool true or false 
+	 */
+	public function is_user()
 	{
-		$utf8 = new kleeja_utf8;
-		if($to_utf8)
+		if($this->data['id'] >= 1)
 		{
-			//return iconv('CP1256', "UTF-8//IGNORE", $str);
-			return $utf8->to_utf8($str);
+			return true;
 		}
-		return $utf8->from_utf8($str);
-		//return iconv('UTF-8', "CP1256//IGNORE", $str);
-	}
 
-}#end class
-
-
-/**
-* Deep modifieded by Kleeja team ...
-* depend on class by Alexander Minkovsky (a_minkovsky@hotmail.com)
-*/
-class kleeja_utf8
-{
-	var $ascMap = array();
-	var $utfMap = array();
-	//ignore the untranslated char, of you put true we will translate it to html tags
-	//it's same the action of //IGNORE in iconv
-	var $ignore = false;
-
-	//Constructor
-	function kleeja_utf8()
-	{
-		static $lines = array();
-		if(empty($lines))
-		{
-			$lines = explode("\n", preg_replace(array("/#.*$/m", "/\n\n/"), '', file_get_contents(PATH . 'includes/resources/CP1256.MAP')));
-		}
-		if(empty($this->ascMap))
-		{
-			foreach($lines as $line)
-			{
-				$parts = explode('0x', $line);
-				if(sizeof($parts) == 3)
-					$this->ascMap[hexdec(trim($parts[1]))] = hexdec(trim($parts[2]));
-			}
-			$this->utfMap = array_flip($this->ascMap);
-		}
-	}
-
-	//Translate string ($str) to UTF-8 from given charset
-	function to_utf8($str)
-	{
-		$chars = unpack('C*', $str);
-		$cnt = sizeof($chars);
-		for($i=1;$i <= $cnt; ++$i)
-			$this->_charToUtf8($chars[$i]);
-		return implode('', $chars);
-	}
-
-	//Translate UTF-8 string to single byte string in the given charset
-	function from_utf8($utf)
-	{
-		$chars = unpack('C*', $utf);
-		$cnt = sizeof($chars);
-		$res = ''; //No simple way to do it in place... concatenate char by char
-		for ($i=1;$i<=$cnt;$i++)
-			$res .= $this->_utf8ToChar($chars, $i);
-		return $res;
-	}
-
-	//Char to UTF-8 sequence
-	function _charToUtf8(&$char)
-	{
-		$c = (int) $this->ascMap[$char];
-		if ($c < 0x80)
-			$char = chr($c);
-		else if($c<0x800) // 2 bytes
-			$char = (chr(0xC0 | $c>>6) . chr(0x80 | $c & 0x3F));
-		else if($c<0x10000) // 3 bytes
-			$char = (chr(0xE0 | $c>>12) . chr(0x80 | $c>>6 & 0x3F) . chr(0x80 | $c & 0x3F));
-		else if($c<0x200000) // 4 bytes
-			$char = (chr(0xF0 | $c>>18) . chr(0x80 | $c>>12 & 0x3F) . chr(0x80 | $c>>6 & 0x3F) . chr(0x80 | $c & 0x3F));
-	}
-
-	//UTF-8 sequence to single byte character
-	function _utf8ToChar(&$chars, &$idx)
-	{
-		if(($chars[$idx] >= 240) && ($chars[$idx] <= 255))// 4 bytes
-			$utf = (intval($chars[$idx]-240)   << 18) + (intval($chars[++$idx]-128) << 12) + (intval($chars[++$idx]-128) << 6) + (intval($chars[++$idx]-128) << 0);
-		else if (($chars[$idx] >= 224) && ($chars[$idx] <= 239)) // 3 bytes
-			$utf = (intval($chars[$idx]-224)   << 12) + (intval($chars[++$idx]-128) << 6) + (intval($chars[++$idx]-128) << 0);
-		else if (($chars[$idx] >= 192) && ($chars[$idx] <= 223))// 2 bytes
-			$utf = (intval($chars[$idx]-192)   << 6) + (intval($chars[++$idx]-128) << 0);
-		else// 1 byte
-			$utf = $chars[$idx];
-
-		if(array_key_exists($utf, $this->utfMap))
-			return chr($this->utfMap[$utf]);
-		else
-		  return $this->ignore ? '' : '&#' . $utf . ';';
+		return false;
 	}
 }
 
-#<-- EOF

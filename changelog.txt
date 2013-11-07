@@ -72,4 +72,8 @@
 	-[x] convert searches to use filters and show last 10 ones.
 -[-] files of deleted user shows as 'deleted' user or 'guest' 
 -[-] remove last_file code from files and sql .. 
--[-] support PHP 5.4
+-[-] support PHP 5.4 and above
+-[-] support php-clamav
+-[-] ftp uploads and ability to add many ftp servers
+-[-] templates will use php no more template system compelling
+-[-] different hooks and plugins system

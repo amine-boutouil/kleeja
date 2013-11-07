@@ -252,13 +252,15 @@ function get_mime_for_header($ext)
 
 /**
 * Get remote files
-* (c) punbb
+*
+* @
+* @author punbb and kleeja team
 */
 function fetch_remote_file($url, $save_in = false, $timeout = 20, $head_only = false, $max_redirects = 10, $binary = false)
 {
 	($hook = kleeja_run_hook('kleeja_fetch_remote_file_func')) ? eval($hook) : null; //run hook
 
-	// Quite unlikely that this will be allowed on a shared host, but it can't hurt
+	#Quite unlikely that this will be allowed on a shared host, but it can't hurt
 	if (function_exists('ini_set'))
 	{
 		@ini_set('default_socket_timeout', $timeout);
@@ -368,19 +370,7 @@ function fetch_remote_file($url, $save_in = false, $timeout = 20, $head_only = f
 			$s = fgets($fp, 1024);
 			if($save_in)
 			{
-				//if($binary)
-				//{
-				//	@fwrite($fp2, pack('L', $in));
-				//}
-				//else
-				//{
-				//if ($s == "\r\n")
-				//{
-				//	$h = "passed";
-				//}
-				//if ($h == "passed")
-				//{
-					if($s == "\r\n") //|| $s == "\n")
+					if($s == "\r\n")
 					{
 						$h = true;
 						continue;
@@ -390,8 +380,6 @@ function fetch_remote_file($url, $save_in = false, $timeout = 20, $head_only = f
 					{
 						@fwrite($fp2, $s);
 					}
-				//}
-				//}
 			}
 			
 			$in .= $s;
@@ -407,7 +395,7 @@ function fetch_remote_file($url, $save_in = false, $timeout = 20, $head_only = f
 			return true;
 		}
 
-		// Process 301/302 redirect
+		#Process 301/302 redirect
 		if ($in !== false && $max_redirects > 0 && preg_match('#^HTTP/1.[01] 30[12]#', $in))
 		{
 			$headers = explode("\r\n", trim($in));
@@ -425,7 +413,7 @@ function fetch_remote_file($url, $save_in = false, $timeout = 20, $head_only = f
 			}
 		}
 
-		// Ignore everything except a 200 response code
+		#Ignore everything except a 200 response code
 		if ($in !== false && preg_match('#^HTTP/1.[01] 200 OK#', $in))
 		{
 			if ($head_only)
@@ -443,13 +431,13 @@ function fetch_remote_file($url, $save_in = false, $timeout = 20, $head_only = f
 		}
 		return $in;
 	}
-	// Last case scenario, we use file_get_contents provided allow_url_fopen is enabled (any non 200 response results in a failure)
+	#Last case scenario, we use file_get_contents provided allow_url_fopen is enabled (any non 200 response results in a failure)
 	else if (in_array($allow_url_fopen, array('on', 'true', '1')))
 	{
-		// PHP5's version of file_get_contents() supports stream options
+		#PHP5's version of file_get_contents() supports stream options
 		if (version_compare(PHP_VERSION, '5.0.0', '>='))
 		{
-			// Setup a stream context
+			#Setup a stream context
 			$stream_context = stream_context_create(
 				array(
 					'http' => array(
@@ -468,10 +456,10 @@ function fetch_remote_file($url, $save_in = false, $timeout = 20, $head_only = f
 			$content = @file_get_contents($url);
 		}
 
-		// Did we get anything?
+		# Did we get anything?
 		if ($content !== false)
 		{
-			// Gotta love the fact that $http_response_header just appears in the global scope (*cough* hack! *cough*)
+			#Gotta love the fact that $http_response_header just appears in the global scope (*cough* hack! *cough*)
 			if ($head_only)
 			{
 				return $http_response_header;

@@ -16,7 +16,7 @@ define('IN_DOWNLOAD', true);
 #get the core
 define('PATH', dirname(__FILE__) . DIRECTORY_SEPARATOR);
 include PATH . 'includes/common.php';
-include PATH . 'includes/functions/functions_down.php';
+include PATH . 'includes/functions/functions_files.php';
 
 ($hook = kleeja_run_hook('begin_download_page')) ? eval($hook) : null; //run hook
 

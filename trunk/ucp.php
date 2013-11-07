@@ -302,12 +302,12 @@ switch (g('go', 'str', ''))
 		$H_FORM_KEYS = kleeja_add_form_key('fileuser');
 
 		$user_id_get	= g('id', 'int', false);
-		$user_id		= !$user_id_get && $user->id() ? $user->id() : $user_id_get;
-		$user_himself	= $user->id() == $user_id;
+		$user_id		= !$user_id_get && $user->is_user() ? $user->data['id'] : $user_id_get;
+		$user_himself	= $user->data['id'] == $user_id;
 		$action			= $config['siteurl'] . 'ucp.php?go=fileuser' . (ig('page') ? '&amp;page=' . g('page', 'int') : '');
 
 		#not a user and no id to view
-		if (!$user->name() && !ig('id'))
+		if (!$user->is_user() && !ig('id'))
 		{
 			kleeja_err($lang['USER_PLACE'], $lang['PLACE_NO_YOU'], true, 'index.php');
 		}
@@ -363,7 +363,7 @@ switch (g('go', 'str', ''))
 		$pagination		= new pagination($perpage, $nums_rows, $current_page);
 		$start			= $pagination->get_start_row();
 
-		$your_fileuser	= $config['siteurl'] . ($config['mod_writer'] ? 'fileuser-' . $user->id() . '.html' : 'ucp.php?go=fileuser&amp;id=' .  $user->id());
+		$your_fileuser	= $config['siteurl'] . ($config['mod_writer'] ? 'fileuser-' . $user->data['id'] . '.html' : 'ucp.php?go=fileuser&amp;id=' .  $user->data['id']);
 		$total_pages	= $pagination->get_total_pages(); 
 		$pagination_link= $config['siteurl'] . ($config['mod_writer'] ?  'fileuser-' . $user_id  . '-'  : 'ucp.php?go=fileuser&amp;id=' . $user_id);
 		$linkgoto		= $config['siteurl'] . ($config['mod_writer'] ?  'fileuser-' . $user_id  . '-' . $current_page . '.html' : 'ucp.php?go=fileuser&amp;id=' . $user_id . '&amp;page=' . $current_page);

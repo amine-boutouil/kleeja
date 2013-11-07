@@ -44,7 +44,7 @@ function kleeja_header($title = '', $extra = '')
 		3 => $user->is_user() ?
 			 array('name'=>'logout', 'title'=>$lang['LOGOUT'], 'url'=>$config['mod_writer'] ? 'logout.html' : 'ucp.php?go=logout', 'show'=>true) : 
 			 array('name'=>'login', 'title'=>$lang['LOGIN'], 'url'=>$config['mod_writer'] ? 'login.html' : 'ucp.php?go=login', 'show'=>true),
-		4 => array('name'=>'register', 'title'=>$lang['REGISTER'], 'url'=>$config['mod_writer'] ? 'register.html' : 'ucp.php?go=register', 'show'=>!$user_is && $config['register']),
+		4 => array('name'=>'register', 'title'=>$lang['REGISTER'], 'url'=>$config['mod_writer'] ? 'register.html' : 'ucp.php?go=register', 'show'=>!$user->is_user() && $config['register']),
 	);
 
 	$top_menu = array(

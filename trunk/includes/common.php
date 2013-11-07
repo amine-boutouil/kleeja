@@ -132,7 +132,7 @@ switch ($db_type)
 	break;
 }
 include PATH . 'includes/classes/style.php';
-include PATH . 'includes/classes/usr.php';
+include PATH . 'includes/classes/user.php';
 include PATH . 'includes/classes/pagination.php';
 include PATH . 'includes/functions/functions.php';
 include PATH . 'includes/functions/functions_display.php';

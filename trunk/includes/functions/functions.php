@@ -490,14 +490,14 @@ function add_config($name, $value = '', $order = 0, $field = '', $type = '0', $d
 
 function update_config($name, $value = '', $escape = true, $group = false)
 {
-	global $SQL, $dbprefix, $d_groups, $userinfo;
+	global $SQL, $dbprefix, $d_groups, $user;
 
 	$value = ($escape) ? $SQL->escape($value) : $value;
 	$table = "{$dbprefix}config";
 
 	#what if this config is a group-configs related ?
 	$group_id_sql = '';
-	if(array_key_exists($name, $d_groups[$userinfo['group_id']]['configs']))
+	if(array_key_exists($name, $d_groups[$user->data['group_id']]['configs']))
 	{
 		$table = "{$dbprefix}groups_data";
 		if($group == -1)
@@ -679,11 +679,11 @@ function kleeja_log($text, $reset = false)
 */
 function user_can($acl_name, $group_id = 0)
 {
-	global $d_groups, $userinfo;
+	global $d_groups, $user;
 
 	if($group_id == 0)
 	{
-		$group_id = $userinfo['group_id'];
+		$group_id = $user->data['group_id'];
 	}
 
 	return (bool) $d_groups[$group_id]['acls'][$acl_name];

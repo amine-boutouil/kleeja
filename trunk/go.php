@@ -8,6 +8,7 @@
 *
 */
 
+
 #where are we?
 define('IN_INDEX' , true);
 define('IN_GO' , true);
@@ -18,24 +19,26 @@ define('PATH', dirname(__FILE__) . DIRECTORY_SEPARATOR);
 include PATH . 'includes/common.php';
 
 
+#to be avaliable for later, extra code between head tag
+$extra_code_in_header = '';
+
 ($hook = kleeja_run_hook('begin_go_page')) ? eval($hook) : null; //run hook
 
-if(!isset($_GET['go']))
-{
-	$_GET['go'] = null;
-}
 
-switch ($_GET['go'])
+/**
+ * General Pages of Kleeja
+ * ucp.php?go=[...]
+ */
+switch (g('go', 'str', ''))
 {
-	//
-	//Page of allowed extensions for all groups
-	//
 	case 'exts' :
 	case 'guide' :
 
+		#page info
 		$stylee	= 'guide';
 		$titlee	= $lang['GUIDE'];
 
+		#orgnize the extensions to be shown in categories
 		$tgroups = $ttgroups = array();
 		$tgroups = array_keys($d_groups);
 		$same_group= $rando = 0;
@@ -68,23 +71,20 @@ switch ($_GET['go'])
 
 	break;
 
-	//
-	//Page of reporting
-	//
 	case 'report' :
 
-		//page info
+		#page info
 		$stylee	= 'report';
 		$titlee	= $lang['REPORT'];
-		$id_d	= isset($_GET['id']) ? intval($_GET['id']) : (isset($_POST['rid']) ? intval($_POST['rid']) : 0);
-		$url_id	= (int) $config['mod_writer'] == 1 ? $config['siteurl'] . 'download' . $id_d . '.html' : $config['siteurl'] . 'do.php?id=' . $id_d;
+		$id_d	= ig('id') ? g('id', 'int') : p('rid', 'int', 0);
+		$url_id	= $config['mod_writer'] == 1 ? $config['siteurl'] . 'download' . $id_d . '.html' : $config['siteurl'] . 'do.php?id=' . $id_d;
 		$action	= $config['siteurl'] . 'go.php?go=report';
 		$H_FORM_KEYS	= kleeja_add_form_key('report');
 		$NOT_USER		= !$usrcp->name() ? true : false; 
-		$s_url			= isset($_POST['surl']) ? htmlspecialchars($_POST['surl']) : '';
+		$s_url			= p('surl', 'str', '');
 
 		#Does this file exists ?
-		if(isset($_GET['id']) || isset($_POST['rid']))
+		if(ig('id') || ip('rid'))
 		{
 			$query = array(
 							'SELECT'	=> 'f.real_filename, f.name',
@@ -109,19 +109,20 @@ switch ($_GET['go'])
 			$SQL->free($result);
 		}
 
-		//no error yet 
+		#no error yet 
 		$ERRORS = false;
 
-		//_post
-		$t_rname = isset($_POST['rname']) ? htmlspecialchars($_POST['rname']) : ''; 
-		$t_rmail = isset($_POST['rmail']) ? htmlspecialchars($_POST['rmail']) : ''; 
-		$t_rtext = isset($_POST['rtext']) ? htmlspecialchars($_POST['rtext']) : ''; 
+		#set variables
+		$t_rname = p('rname', 'str', '');
+		$t_rmail = p('rmail', 'mail', '');
+		$t_rtext = p('rtext', 'str', '');
 
-		if (!isset($_POST['submit']))
+		#no submit yet
+		if (!ip('submit'))
 		{
-			// first
 			($hook = kleeja_run_hook('no_submit_report_go_page')) ? eval($hook) : null; //run hook
 		}
+		#submited
 		else
 		{
 			$ERRORS	= array();
@@ -137,41 +138,40 @@ switch ($_GET['go'])
 			{
 				$ERRORS['captcha']	= $lang['WRONG_VERTY_CODE'];
 			}
-			if ((empty($_POST['rname']) && $NOT_USER))
+			if ($t_rname == '' && $NOT_USER))
 			{
 				$ERRORS['rname'] = $lang['EMPTY_FIELDS'] . ' : ' . (empty($_POST['rname']) && $NOT_USER ? ' [ ' . $lang['YOURNAME'] . ' ] ' : '')  
 									. (empty($_POST['rurl']) ? '  [ ' . $lang['URL']  . ' ] ': '');
 			}
-			if(isset($_POST['surl']) && trim($_POST['surl']) == '')
+			if($t_surl == '')
 			{
 				$ERRORS['surl']	=  $lang['EMPTY_FIELDS'] . ' : [ ' . $lang['URL_F_FILE'] . ' ]'; 
 			}
-			if (isset($_POST['rmail']) &&  !preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/i", trim(strtolower($_POST['rmail']))) && $NOT_USER)
+			if (!$t_rmail && $NOT_USER)
 			{
 				$ERRORS['rmail'] = $lang['WRONG_EMAIL'];
 			}
-			if (strlen($_POST['rtext']) > 300)
+			if (strlen($t_rtext) > 300)
 			{
 				$ERRORS['rtext'] = $lang['NO_ME300RES'];
 			}
-			if (!isset($_POST['surl'])  && !isset($_POST['rid']))
+			if ($t_surl == ''  && !$id_d)
 			{
 				$ERRORS['rid'] = $lang['NO_ID'];
 			}
 
 			($hook = kleeja_run_hook('submit_report_go_page2')) ? eval($hook) : null; //run hook
 
-			//no error , lets do process
+			#no error , lets do process
 			if(empty($ERRORS))
 			{
-				$name	= $NOT_USER ? (string) $SQL->escape($_POST['rname']) : $usrcp->name();
-				$text	= (string) $SQL->escape($_POST['rtext']);
-				$mail	= $NOT_USER ? (string) strtolower(trim($SQL->escape($_POST['rmail']))) : $usrcp->mail();
-				$url	= (string) isset($_POST['rid']) ? $SQL->escape($url_id) : $SQL->real_escape(htmlspecialchars($_POST['surl']));
+				$name	= $SQL->escape($NOT_USER ? $t_rname : $usrcp->name());
+				$text	= $SQL->escape($t_rtext);
+				$mail	= $SQL->escape($NOT_USER ? $t_rmail : $usrcp->mail());
+				$url	= $SQL->escape($id_d ? $url_id : $t_surl);
 				$time 	= (int) time();
 				$rid	= isset($_POST['rid']) ? 0 : intval($_POST['rid']);
 				$ip		=  get_ip();
-				
 
 				$insert_query	= array(
 										'INSERT'	=> 'name ,mail ,url ,text ,time ,ip',
@@ -183,7 +183,7 @@ switch ($_GET['go'])
 
 				$SQL->build($insert_query);
 
-				//update number of reports
+				#update number of reports
 				$update_query	= array(
 										'UPDATE'	=> "{$dbprefix}files",
 										'SET'		=> 'report=report+1',
@@ -206,56 +206,54 @@ switch ($_GET['go'])
 		($hook = kleeja_run_hook('report_go_page')) ? eval($hook) : null; //run hook
 
 	break; 
-	
-	//
-	//Pages of rules
-	//
-	case 'rules' :
 
+	case 'rules' :
+		
+		#page info
 		$stylee	= 'rules';
 		$titlee	= $lang['RULES'];
-		$contents = (strlen($ruless) > 3) ? stripslashes($ruless) : $lang['NO_RULES_NOW'];
+		$contents = strlen($ruless) > 3 ? stripslashes($ruless) : $lang['NO_RULES_NOW'];
 
 		($hook = kleeja_run_hook('rules_go_page')) ? eval($hook) : null; //run hook
 
 	break;
 
-	//
-	//Page of call-us
-	//
 	case 'call' : 
 
-		//Not allowed to access this page ?
+		#Not allowed to access this page ?
 		if (!user_can('access_call'))
 		{
 			($hook = kleeja_run_hook('user_cannot_access_call')) ? eval($hook) : null; //run hook
 			kleeja_info($lang['HV_NOT_PRVLG_ACCESS']);
 		}
 
-		//page info
+		#page info
 		$stylee	= 'call';
 		$titlee	= $lang['CALL'];
 		$action	= './go.php?go=call';
 		$H_FORM_KEYS = kleeja_add_form_key('call');
 		$NOT_USER = !$usrcp->name() ? true : false; 
-		//no error yet 
+		#no error yet 
 		$ERRORS = false;
 
-		//_post
-		$t_cname = isset($_POST['cname']) ? htmlspecialchars($_POST['cname']) : ''; 
-		$t_cmail = isset($_POST['cmail']) ? htmlspecialchars($_POST['cmail']) : ''; 
-		$t_ctext = isset($_POST['ctext']) ? htmlspecialchars($_POST['ctext']) : ''; 
+		#set variables
+		$t_cname = p('cname', 'str', ''); 
+		$t_cmail = p('cmail', 'mail', false); 
+		$t_ctext = p('ctext', 'str', ''); 
 
-		($hook = kleeja_run_hook('no_submit_call_go_page')) ? eval($hook) : null; //run hook
-
-		if (isset($_POST['submit']))
+		#submited
+		if (!ip('submit'))
 		{
-			//after sumit
+			($hook = kleeja_run_hook('no_submit_call_go_page')) ? eval($hook) : null; //run hook
+		}
+		#sumbited
+		else
+		{
 			$ERRORS	= array();
 
 			($hook = kleeja_run_hook('submit_call_go_page')) ? eval($hook) : null; //run hook
 
-			//check for form key
+			#check for form key
 			if(!kleeja_check_form_key('call'))
 			{
 				$ERRORS['form_key'] = $lang['INVALID_FORM_KEY'];
@@ -264,16 +262,16 @@ switch ($_GET['go'])
 			{
 				$ERRORS['captcha'] = $lang['WRONG_VERTY_CODE'];
 			}
-			if ((empty($_POST['cname']) && $NOT_USER)  || empty($_POST['ctext']) )
+			if (($t_cname == '' && $NOT_USER)  || $t_ctext =='')
 			{
-				$ERRORS['cname']	= $lang['EMPTY_FIELDS'] . ' : ' . (empty($_POST['cname']) && $NOT_USER ? ' [ ' . $lang['YOURNAME'] . ' ] ' : '') 
-								. (empty($_POST['ctext']) ? '  [ ' . $lang['TEXT']  . ' ] ': '');
+				$ERRORS['cname']	= $lang['EMPTY_FIELDS'] . ' : ' . ($t_cname == '' && $NOT_USER ? ' [ ' . $lang['YOURNAME'] . ' ] ' : '') 
+								. ($t_ctext == '' ? '  [ ' . $lang['TEXT']  . ' ] ': '');
 			}
-			if (isset($_POST['cmail']) && !preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/i", trim(strtolower($_POST['cmail']))) && $NOT_USER)
+			if (!$t_cmail && $NOT_USER)
 			{
 				$ERRORS['cmail'] = $lang['WRONG_EMAIL'];
 			}
-			if (strlen($_POST['ctext']) > 300)
+			if (strlen($t_ctext) > 300)
 			{
 				$ERRORS['ctext'] = $lang['NO_ME300TEXT'];
 			}
@@ -285,14 +283,14 @@ switch ($_GET['go'])
 
 			($hook = kleeja_run_hook('submit_call_go_page2')) ? eval($hook) : null; //run hook
 
-			//no errors ,lets do process
+			#no errors ,lets do process
 			if(empty($ERRORS))
 			{
-				$name	= $NOT_USER ? (string) $SQL->escape($_POST['cname']) : $usrcp->name();
-				$text	= (string) $SQL->escape($_POST['ctext']);
-				$mail	= $NOT_USER ? (string) strtolower(trim($SQL->escape($_POST['cmail']))) : $usrcp->mail();
-				$timee	= (int)	time();
-				$ip		=  get_ip();
+				$name	= $SQL->escape($NOT_USER ? $t_cname : $usrcp->name());
+				$text	= $SQL->escape($t_ctext);
+				$mail	= $SQL->escape($NOT_USER ? $t_cmail : $usrcp->mail());
+				$timee	= time();
+				$ip		= get_ip();
 
 				$insert_query	= array(
 										'INSERT'	=> "name ,text ,mail ,time ,ip",
@@ -314,14 +312,12 @@ switch ($_GET['go'])
 
 	break;
 	
-	//
-	//Page for requesting delete file 
-	//
+
 	case 'del' :
 
 		($hook = kleeja_run_hook('del_go_page')) ? eval($hook) : null; //run hook
 
-		//stop .. check first ..
+		#is it allowd ?
 		if (!$config['del_url_file'])
 		{
 			kleeja_info($lang['NO_DEL_F'], $lang['E_DEL_F']);
@@ -330,8 +326,7 @@ switch ($_GET['go'])
 		//examples : 
 		//f2b3a82060a22a80283ed961d080b79f
 		//aa92468375a456de21d7ca05ef945212
-		//
-		$cd	= preg_replace('/[^0-9a-z]/i', '', $SQL->escape($_GET['cd'])); // may.. will protect
+		$cd	= preg_replace('/[^0-9a-z]/i', '', g('cd', 'str', ''));
 
 		if (empty($cd))
 		{
@@ -339,13 +334,13 @@ switch ($_GET['go'])
 		}
 		else
 		{
-			//to check
-			if(isset($_GET['sure']) && $_GET['sure'] == 'ok')
+			#to check
+			if(g('sure', 'str', '') == 'ok')
 			{
 				$query	= array(
 								'SELECT'=> 'f.id, f.name, f.folder, f.size, f.type',
 								'FROM'	=> "{$dbprefix}files f",
-								'WHERE'	=> "f.code_del='" . $cd . "'",
+								'WHERE'	=> "f.code_del='" . $SQL->escape($cd) . "'",
 								'LIMIT'	=> '1',
 							);
 
@@ -353,47 +348,45 @@ switch ($_GET['go'])
 
 				$result	= $SQL->build($query);
 
-				if ($SQL->num($result) != 0)
+				if ($SQL->num($result))
 				{
-					while($row=$SQL->fetch($result))
+					$row=$SQL->fetch($result);
+	
+					kleeja_unlink($row['folder'] . '/' . $row['name']);
+
+					#delete thumb
+					if (file_exists($row['folder'] . '/thumbs/' . $row['name']))
 					{
-						kleeja_unlink($row['folder'] . '/' . $row['name']);
-
-						#delete thumb
-						if (file_exists($row['folder'] . '/thumbs/' . $row['name']))
-						{
-							kleeja_unlink($row['folder'] . '/thumbs/' . $row['name']);
-						}
-
-						$is_img = in_array($row['type'], array('png','gif','jpg','jpeg','tif','tiff', 'bmp')) ? true : false;
-
-						$query_del	= array(
-											'DELETE' => "{$dbprefix}files",
-											'WHERE'	=> 'id=' . $row['id']
-										);
-
-						($hook = kleeja_run_hook('qr_del_file_with_code_del')) ? eval($hook) : null; //run hook	
-
-						$SQL->build($query_del);
-						
-						if($SQL->affected())
-						{
-							//update number of stats
-							$update_query	= array(
-													'UPDATE'	=> "{$dbprefix}stats",
-													'SET'		=> ($is_img ? 'imgs=imgs-1':'files=files-1') . ',sizes=sizes-' . $row['size'],
-												);
-
-							$SQL->build($update_query);
-							kleeja_info($lang['DELETE_SUCCESFUL']);
-						}
-						else
-						{
-							kleeja_info($lang['ERROR_TRY_AGAIN']);
-						}
-
-						break;//to prevent divel actions
+						kleeja_unlink($row['folder'] . '/thumbs/' . $row['name']);
 					}
+
+					$is_img = in_array($row['type'], array('png','gif','jpg','jpeg','tif','tiff', 'bmp')) ? true : false;
+
+					$query_del	= array(
+										'DELETE' => "{$dbprefix}files",
+										'WHERE'	=> 'id=' . $row['id']
+									);
+
+					($hook = kleeja_run_hook('qr_del_file_with_code_del')) ? eval($hook) : null; //run hook	
+
+					$SQL->build($query_del);
+					
+					if($SQL->affected())
+					{
+						#update number of stats
+						$update_query	= array(
+												'UPDATE'	=> "{$dbprefix}stats",
+												'SET'		=> ($is_img ? 'imgs=imgs-1':'files=files-1') . ',sizes=sizes-' . $row['size'],
+											);
+
+						$SQL->build($update_query);
+						kleeja_info($lang['DELETE_SUCCESFUL']);
+					}
+					else
+					{
+						kleeja_info($lang['ERROR_TRY_AGAIN']);
+					}
+
 
 					$SQL->free($result);
 				}
@@ -418,28 +411,26 @@ switch ($_GET['go'])
 
 	break;
 
-	//
-	//Page of Kleeja stats
-	//
+
 	case 'stats' :
 
-		//Not allowed to access this page ?
+		#Not allowed to access this page ?
 		if (!user_can('access_stats'))
 		{
 			($hook = kleeja_run_hook('user_cannot_access_stats')) ? eval($hook) : null; //run hook
 			kleeja_info($lang['HV_NOT_PRVLG_ACCESS']);
 		}
 
-		//stop .. check first ..
+		#is it allowed?
 		if (!$config['allow_stat_pg'])
 		{
 			kleeja_info($lang['STATS_CLOSED'], $lang['STATS_CLOSED']);
 		}
 
-		//stats of most online users
+		#stats of most online users
 		if(empty($config['most_user_online_ever']) || trim($config['most_user_online_ever']) == '')
 		{
-			$most_online	= 1;// 1 == you 
+			$most_online	= 1; # 1 == you 
 			$on_muoe		= time();
 		}
 		else
@@ -447,7 +438,7 @@ switch ($_GET['go'])
 			list($most_online, $on_muoe) = @explode(':', $config['most_user_online_ever']);
 		}
 
-		//ok .. go on
+		#page info
 		$titlee		= $lang['STATS'];
 		$stylee		= 'stats';
 		$files_st	= $stat_files;
@@ -461,16 +452,14 @@ switch ($_GET['go'])
 
 	break; 
 	
-	//
-	// Page for redirect to downloading a file
-	// [!] depreacted from 1rc6+, see do.php
-	//
+
+	# Depreacted from 1rc6+, see do.php
 	case 'down':
 
-		//go.php?go=down&n=$1&f=$2&i=$3
-		if(isset($_GET['n']))
+		#go.php?go=down&n=$1&f=$2&i=$3
+		if(ig('n'))
 		{
-			$url_file = (int) $config['mod_writer'] == 1 ? $config['siteurl'] . 'download' . intval($_GET['i']) . '.html' : $config['siteurl'] . 'do.php?id=' . intval($_GET['n']);
+			$url_file = $config['mod_writer'] == 1 ? $config['siteurl'] . 'download' . g('i', 'int') . '.html' : $config['siteurl'] . 'do.php?id=' . g('n', 'int');
 		}
 		else
 		{
@@ -478,18 +467,15 @@ switch ($_GET['go'])
 		}
 		
 		$SQL->close();
-		redirect($url_file);
-		exit;
-
+		
+		#redirect and exit
+		redirect($url_file, true, true);
 	break;
 	
 
-	
-	//
-	//this is a part of ACP, only admins can access this part of page
-	//
 	case 'resync':
-		
+
+		#This is a part of ACP, only admins can access this part of page
 		if(!user_can('enter_acp'))
 		{
 			kleeja_info($lang['HV_NOT_PRVLG_ACCESS']);
@@ -501,14 +487,12 @@ switch ($_GET['go'])
 		#get admin langauge
 		get_lang('acp');
 
-		switch($_GET['case']):
-		//
-		//re-sync total files number ..
-		//
-		case 'sync_files':
-
 		#no start ? or there 
-		$start = !isset($_GET['start']) ? false : intval($_GET['start']);
+		$start = g('start', 'int', false);
+
+		switch(g('case', 'str', '')):
+		default:
+		case 'sync_files':
 
 		$end = sync_total_files(true, $start);
 
@@ -532,14 +516,7 @@ switch ($_GET['go'])
 
 		break;
 
-
-		//
-		//re-sync total images number ..
-		//
 		case 'sync_images':
-
-		#no start ? or there 
-		$start = !isset($_GET['start']) ? false : intval($_GET['start']);
 
 		$end = sync_total_files(false, $start);
 
@@ -566,11 +543,9 @@ switch ($_GET['go'])
 
 	break;
 	
-	
-	//
+
 	// Default , if you are a developer , you can embed your page here with this hook
 	// by useing $_GET[go] and your codes.
-	//
 	default:
 
 		$no_request = true;
@@ -592,7 +567,7 @@ $stylee  = empty($stylee) ? 'info' : $stylee;
 $titlee  = empty($titlee) ? '' : $titlee;
 
 #header
-kleeja_header($titlee);
+kleeja_header($titlee, $extra_code_in_header);
 #page template
 echo $tpl->display($stylee);
 #footer

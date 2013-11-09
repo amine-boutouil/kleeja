@@ -9,35 +9,59 @@
 */
 
 
-//no for directly open
+/**
+ * @ignore
+ */
 if (!defined('IN_COMMON'))
 {
 	exit;
 }
 
-//
-//In the future here will be a real cache class 
-//this codes, it's just a sample and usefull for
-//some time ..
-//
+
+
 class cache
 {
+	/**
+	 * Select which cache system you want, apc or file
+	 */
+	public $cache_type = 'file';
 
+	/**
+	 * Initiate the cache system
+	 * @return void
+	 */
 	public function __construct()
 	{
-		if(@extension_loaded('apc'))
+		#If apc is aviable and 
+		if(function_exists('apc_fetch') && defined('APC_CACHE'))
 		{
-			define('APC_CACHE', true);
+			$this->cache_type = 'apc';
 		}
 	}
-	
+
+	/**
+	 * Get cached data
+	 *
+	 * @param string $name The unique name of the cached data
+	 * @return mixed cached data as was given or false if failed or not exists
+	 */
 	public function get($name)
 	{
 		$name =  preg_replace('![^a-z0-9_]!', '_', $name);
-	
-		if (file_exists(PATH . 'cache/' . $name . '.php'))
-		{
-			include PATH . 'cache/' . $name . '.php';
+
+		if ($this->exists($name))
+		{	
+			if($this->cache_type == 'apc')
+			{
+				#get cache from apc
+				$data = apc_fetch($name);
+			}
+			else
+			{
+				#get from file based cache
+				include PATH . 'cache/' . $name . '.php';
+			}
+			
 			return  empty($data) ? false : $data;
 		}
 		else
@@ -45,20 +69,48 @@ class cache
 			return false;
 		}
 	}
-	
-	function exists($name)
+
+	/**
+	 * Check if the cached data exists or not
+	 * 
+	 * @param string $name The unique name of the cached data
+	 * @return bool True if exists, false if not
+	 */
+	public function exists($name)
 	{
 		$name =  preg_replace('![^a-z0-9_]!', '_', $name);
 	
-		if (file_exists(PATH . 'cache/' . $name . '.php'))
+		if($this->cache_type == 'apc')
 		{
-			return true;
+			#check in apc
+			return apc_exists('foo');
+		}
+		else
+		{
+			#check file
+			return file_exists(PATH . 'cache/' . $name . '.php');
 		}
 	}
-	
-	function save($name, $data, $time = 86400)
+
+	/**
+	 * save data as cache
+	 *
+	 * @param string $name The unique name of the cached data
+	 * @param mixed $data The data you want to be cached, any type you want
+	 * @param int $time (optional) Time before delete
+	 * @return mixed cached data as was given or false if failed or not exists
+	 */
+	public function save($name, $data, $time = 86400)
 	{		
 		$name =  preg_replace('![^a-z0-9_]!i', '_', $name);
+
+		#if apc
+		if($this->cache_type == 'apc')
+		{
+			return apc_store($name, $data);
+		}
+
+		#if file based
 		$data_for_save = '<?' . 'php' . "\n";
 		$data_for_save .= '//Cache file, generated for Kleeja at ' . gmdate('d-m-Y h:i A') . "\n\n";
 		$data_for_save .= '//No direct opening' . "\n";
@@ -74,10 +126,16 @@ class cache
 			@flock($fd, LOCK_UN);
 			@fclose($fd);
 		}
-		return;
+		return true;
 	}
 
-	function clean($name)
+	/**
+	 * Delete cached data
+	 * 
+	 * @param mixed $name The unique name of the cached data, or many names as array
+	 * @return bool True if exists, false if not
+	 */
+	public function clean($name)
 	{
 		if(is_array($name))
 		{
@@ -85,11 +143,20 @@ class cache
 			{
 				$this->clean($n);
 			}
-			return;
+			return true;
 		}
 
 		$name =  preg_replace('![^a-z0-9_]!i', '_', $name);
+
+		#if apc
+		if($this->cache_type == 'apc')
+		{
+			return apc_delete($name);
+		}
+
+		#else, file based
 		kleeja_unlink(PATH . 'cache/' . $name . '.php');
+		return true;
 	}
 }
 

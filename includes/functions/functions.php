@@ -827,5 +827,8 @@ function garbage_collection()
 	
 	$SQL->close();
 	
+	#now close session to let user open any other page in Kleeja
+	@session_write_close();
+
 	define('garbage_collection_done', true);
 }

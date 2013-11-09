@@ -134,8 +134,10 @@ switch ($db_type)
 include PATH . 'includes/classes/style.php';
 include PATH . 'includes/classes/user.php';
 include PATH . 'includes/classes/pagination.php';
+include PATH . 'includes/classes/cache.php';
 include PATH . 'includes/functions/functions.php';
 include PATH . 'includes/functions/functions_display.php';
+
 if(defined('IN_ADMIN'))
 {
 	include PATH . 'includes/functions/functions_adm.php';
@@ -153,8 +155,11 @@ $SQL	= new database($dbserver, $dbuser, $dbpass, $dbname);
 unset($dbpass);
 #initaiate the template system
 $tpl	= new kleeja_style;
-#initate the user system
+#initate  user system
 $usrcp = $user	= new user;
+#initate cache system
+$cache = new cache;
+
 
 #return to the default user system if this given
 if(defined('DISABLE_INTR'))
@@ -162,8 +167,9 @@ if(defined('DISABLE_INTR'))
 	$config['user_system'] = 1;
 }
 
-#load caches
-include PATH . 'includes/classes/cache.php';
+#load cached data
+include PATH . 'includes/cache_data.php';
+
 
 #getting dynamic configs
 $query = array(

@@ -255,6 +255,16 @@ case 'clearc':
 #clear cache
 delete_cache('', true);
 
+
+#if apc enabled, then clear all its data
+if(function_exists('apc_fetch') && defined('APC_CACHE'))
+{
+	$info = apc_cache_info('user');
+	foreach ($info['cache_list'] as $obj) {
+		apc_delete($obj['info']);
+	}
+}
+
 #show done, msg
 $text .= '<li>' . $lang['REPAIRE_CACHE'] . '</li>';
 $text .= '<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . basename(ADMIN_PATH) . '?cp=r_repair' .  '\');", 2000);</script>' . "\n";

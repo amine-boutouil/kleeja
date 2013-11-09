@@ -396,8 +396,8 @@ else if (ig('down') || ig('downf') ||
 	#disable output buffering
 	@ob_end_clean();
 	
-	#close the db connection
-	$SQL->close();
+	#close the db connection, and session
+	garbage_collection();
 
 	#required for IE, otherwise Content-Disposition may be ignored
 	if(@ini_get('zlib.output_compression'))

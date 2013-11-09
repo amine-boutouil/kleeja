@@ -18,7 +18,6 @@ if (!defined('IN_COMMON'))
 
 /**
 * Make changes with files using ftp
-* @package Kleeja
 */
 class kftp
 {

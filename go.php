@@ -45,7 +45,7 @@ switch (g('go', 'str', ''))
 		foreach($tgroups as $gid)
 		{
 			#if this is admin group, dont show it public
-			if($gid == 1 && (int) $userinfo['group_id'] != 1)
+			if($gid == 1 && $user->data['group_id'] != 1)
 			{
 				continue;
 			}
@@ -80,7 +80,7 @@ switch (g('go', 'str', ''))
 		$url_id	= $config['mod_writer'] == 1 ? $config['siteurl'] . 'download' . $id_d . '.html' : $config['siteurl'] . 'do.php?id=' . $id_d;
 		$action	= $config['siteurl'] . 'go.php?go=report';
 		$H_FORM_KEYS	= kleeja_add_form_key('report');
-		$NOT_USER		= !$usrcp->name() ? true : false; 
+		$NOT_USER		= !$user->name() ? true : false; 
 		$s_url			= p('surl', 'str', '');
 
 		#Does this file exists ?
@@ -165,9 +165,9 @@ switch (g('go', 'str', ''))
 			#no error , lets do process
 			if(empty($ERRORS))
 			{
-				$name	= $SQL->escape($NOT_USER ? $t_rname : $usrcp->name());
+				$name	= $SQL->escape($NOT_USER ? $t_rname : $user->name());
 				$text	= $SQL->escape($t_rtext);
-				$mail	= $SQL->escape($NOT_USER ? $t_rmail : $usrcp->mail());
+				$mail	= $SQL->escape($NOT_USER ? $t_rmail : $user->mail());
 				$url	= $SQL->escape($id_d ? $url_id : $t_surl);
 				$time 	= (int) time();
 				$rid	= isset($_POST['rid']) ? 0 : intval($_POST['rid']);
@@ -232,7 +232,7 @@ switch (g('go', 'str', ''))
 		$titlee	= $lang['CALL'];
 		$action	= './go.php?go=call';
 		$H_FORM_KEYS = kleeja_add_form_key('call');
-		$NOT_USER = !$usrcp->name() ? true : false; 
+		$NOT_USER = !$user->name() ? true : false; 
 		#no error yet 
 		$ERRORS = false;
 
@@ -286,9 +286,9 @@ switch (g('go', 'str', ''))
 			#no errors ,lets do process
 			if(empty($ERRORS))
 			{
-				$name	= $SQL->escape($NOT_USER ? $t_cname : $usrcp->name());
+				$name	= $SQL->escape($NOT_USER ? $t_cname : $user->name());
 				$text	= $SQL->escape($t_ctext);
-				$mail	= $SQL->escape($NOT_USER ? $t_cmail : $usrcp->mail());
+				$mail	= $SQL->escape($NOT_USER ? $t_cmail : $user->mail());
 				$timee	= time();
 				$ip		= get_ip();
 

@@ -4,7 +4,7 @@
 * @package Kleeja
 * @version $Id: autoupdate.php 2123 2013-01-21 10:19:42Z saanina $
 * @copyright (c) 2007 Kleeja.com
-* @license ./docs/license.txt
+* @license http://www.kleeja.com/license
 *
 */
 //no for directly open

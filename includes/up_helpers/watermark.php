@@ -4,7 +4,7 @@
 * @package Kleeja_up_helpers
 * @version $Id: KljUploader.php 2002 2012-09-18 04:47:35Z saanina $
 * @copyright (c) 2007-2012 Kleeja.com
-* @license ./docs/license.txt
+* @license http://www.kleeja.com/license
 *
 */
 

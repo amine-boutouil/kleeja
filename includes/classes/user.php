@@ -1,7 +1,7 @@
 <?php
 /**
 *
-* @package auth
+* @package Kleeja
 * @version $Id$
 * @copyright (c) 2007 Kleeja.com
 * @license ./docs/license.txt
@@ -18,11 +18,12 @@ if (!defined('IN_COMMON'))
 }
 
 /**
+* Main class for user system
 * Usefull constants to force some settings :
-* 
 * FORCE_COOKIES, DISABLE_INTR
+*
+* @package auth
 */
-
 class user
 {
 	

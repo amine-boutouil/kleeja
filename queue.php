@@ -9,11 +9,15 @@
 */
 
  
-#where are we?
-define('IN_INDEX', true);
+/**
+ * We are in queue.php file, useful for exceptions
+ */
 define('IN_QUEUE', true);
 
-#get the core
+/**
+ * @ignore
+ */
+define('IN_KLEEJA', true);
 define('PATH', dirname(__FILE__) . DIRECTORY_SEPARATOR);
 include PATH . 'includes/common.php';
 

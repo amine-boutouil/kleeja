@@ -9,12 +9,21 @@
 */
 
  
-#where are we?
-define('IN_INDEX', true);
+/**
+ * We are in index.php file, useful for exceptions
+ */
 define('IN_REAL_INDEX', true);
-define('IN_SUBMIT_UPLOADING' , (isset($_POST['submitr']) || isset($_POST['submittxt'])));
 
-#get the core
+/**
+ * We are in middle uploading process, useful for exceptions
+ */
+define('IN_SUBMIT_UPLOADING', (isset($_POST['submitr']) || isset($_POST['submittxt'])));
+
+
+/**
+ * @ignore
+ */
+define('IN_KLEEJA', true);
 define('PATH', dirname(__FILE__) . DIRECTORY_SEPARATOR);
 include PATH . 'includes/common.php';
 include PATH . 'includes/classes/uploader.php';

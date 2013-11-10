@@ -9,11 +9,15 @@
 */
 
 
-#where are we?
-define('IN_INDEX' , true);
-define('IN_UCP' , true);
+/**
+ * We are in ucp.php file, useful for exceptions
+ */
+define('IN_UCP', true);
 
-#get the core
+/**
+ * @ignore
+ */
+define('IN_KLEEJA', true);
 define('PATH', dirname(__FILE__) . DIRECTORY_SEPARATOR);
 include PATH . 'includes/common.php';
 
@@ -152,10 +156,10 @@ switch (g('go', 'str', ''))
 		}
 
 		#get the form variables
-		$t_lname = trim(p('lname', 'str', ''));
-		$t_lpass =  trim(p('lpass', 'str', ''));
-		$t_lpass2 =  trim(p('lpass2', 'str', ''));
-		$t_lmail =  trim(p('lmail', 'str', ''));
+		$t_lname = p('lname', 'str', '');
+		$t_lpass = p('lpass', 'str', '');
+		$t_lpass2 = p('lpass2', 'str', '');
+		$t_lmail = p('lmail', 'str', '');
 
 		#no form submit yet
 		if (!ip('submit'))

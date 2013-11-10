@@ -9,12 +9,16 @@
 */
 
 
-#where are we?
-define('IN_INDEX' , true);
-define('IN_GO' , true);
+/**
+ * We are in do.php file, useful for exceptions
+ */
+define('IN_GO', true);
 
 
-#get the core
+/**
+ * @ignore
+ */
+define('IN_KLEEJA', true);
 define('PATH', dirname(__FILE__) . DIRECTORY_SEPARATOR);
 include PATH . 'includes/common.php';
 

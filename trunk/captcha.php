@@ -9,8 +9,11 @@
 */
 
 
-#define path
+/**
+ * @ignore
+ */
 define('PATH', dirname(__FILE__) . DIRECTORY_SEPARATOR);
+
 
 #Fix bug with path of font When using versions of the GD library lower than 2.0.18 
 if(function_exists('putenv'))

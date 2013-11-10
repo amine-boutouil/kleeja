@@ -12,7 +12,7 @@
 /**
 * @ignore
 */
-if (!defined('IN_INDEX'))
+if (!defined('IN_KLEEJA'))
 {
 	exit();
 }
@@ -37,6 +37,19 @@ defined('DEV_STAGE') ? @error_reporting(E_ALL) : @error_reporting(E_ALL ^ E_NOTI
  * The path of the configuration file of Kleeja
  */
 define('KLEEJA_CONFIG_FILE', 'config.php');
+
+
+/**
+ * @ignore
+ */
+if(!defined('PATH'))
+{
+	if(!defined('__DIR__'))
+	{
+		define('__DIR__', dirname(__FILE__)); 
+	}
+	define('PATH', str_replace(DIRECTORY_SEPARATOR . 'includes', '', __DIR__) . DIRECTORY_SEPARATOR);
+}
 
 
 #start session after setting it right
@@ -69,36 +82,13 @@ if(function_exists('ini_set'))
 */
 function get_microtime()
 {
-	list($usec, $sec) = explode(' ', microtime());	return ((float)$usec + (float)$sec);
+	list($usec, $sec) = explode(' ', microtime());
+	return ((float)$usec + (float)$sec);
 }
-
-/**
- * Is the current user a search engine bot?
- * @param array $bots Check user agent against those given bot names
- */
-function is_bot($bots = array('googlebot', 'bing' ,'msnbot'))
-{
-	if(isset($_SERVER['HTTP_USER_AGENT']))
-	{	
-		return preg_match('/(' . implode('|', $bots) . ')/i', ($_SERVER['HTTP_USER_AGENT'] ? $_SERVER['HTTP_USER_AGENT'] : @getenv('HTTP_USER_AGENT'))) ? true : false;
-	}
-	return false;
-}
-
-define('IS_BOT', is_bot());
 
 $starttm = get_microtime();
 
 
-#set the current file path 
-if(!defined('PATH'))
-{
-	if(!defined('__DIR__'))
-	{
-		define('__DIR__', dirname(__FILE__)); 
-	}
-	define('PATH', str_replace(DIRECTORY_SEPARATOR . 'includes', '', __DIR__) . DIRECTORY_SEPARATOR);
-}
 
 #if no configuration file exists? then go installation
 if (!file_exists(PATH . KLEEJA_CONFIG_FILE))
@@ -150,14 +140,11 @@ if(empty($script_encoding))
 	$script_encoding = 'windows-1256';
 }
 
-#connect to DB, and unset the passowrd
+#initiate classes
 $SQL	= new database($dbserver, $dbuser, $dbpass, $dbname);
 unset($dbpass);
-#initaiate the template system
 $tpl	= new kleeja_style;
-#initate  user system
 $usrcp = $user	= new user;
-#initate cache system
 $cache = new cache;
 
 

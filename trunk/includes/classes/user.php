@@ -31,7 +31,7 @@ class user
 	 * Array holding the user data, name etc
 	 * Those default values are for guest 
 	 */
-	public $data = array('id'=>-1, 'group_id'=>2);
+	public $data = array('id'=>-1, 'group_id'=>2, 'is_bot'=>false);
 
 
 	/**
@@ -201,13 +201,17 @@ class user
 		$SQL->free($result);
 
 		unset($pass);
-		$user->data['password'] = '******';
+
+		#set useful data
+		$this->data['password'] = '******';
+		$this->data['is_bot'] =  preg_match('/(' . implode('|', $bots) . ')/i', ($_SERVER['HTTP_USER_AGENT'] ? $_SERVER['HTTP_USER_AGENT'] : @getenv('HTTP_USER_AGENT'))) ? true : false;
+
 		return $this->data;
 	}
 
 
 	/**
-	 * Get any user data, to get current user data use $user->data
+	 * Get any user data, to get current user data use $user->data[param]
 	 *
 	 * @param string $type data to get, i.e name, mail
 	 * @param mixed $user_id If not given, will get current user data

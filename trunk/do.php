@@ -9,11 +9,15 @@
 */
 
 
-#where are we?
-define('IN_INDEX' , true);
+/**
+ * We are in do.php file, useful for exceptions
+ */
 define('IN_DOWNLOAD', true);
 
-#get the core
+/**
+ * @ignore
+ */
+define('IN_KLEEJA', true);
 define('PATH', dirname(__FILE__) . DIRECTORY_SEPARATOR);
 include PATH . 'includes/common.php';
 include PATH . 'includes/functions/functions_files.php';
@@ -414,6 +418,9 @@ else if (ig('down') || ig('downf') ||
 		@fclose($pfile);
 		big_error('** ' . $lang['FILE_NO_FOUNDED'], $lang['NOT_FOUND']);
 	}
+
+	#Unsetting all previously set headers.
+	header_remove();
 
 	#send file headers
 	header('Pragma: public');

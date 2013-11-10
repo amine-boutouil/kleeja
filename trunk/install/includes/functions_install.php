@@ -8,18 +8,29 @@
 *
 */
 
-/*
-* Requirements of Kleeja
-*/
+
+/**
+ * Minimum PHP version to run Kleeja
+ */
 define('MIN_PHP_VERSION', '5.3.0');
+
+/**
+ * Minimum MySQL version to run Kleeja
+ */
 define('MIN_MYSQL_VERSION', '4.2.2');
-//version of latest changes at db
+
+/**
+ * Current version of Kleeja Database
+ */
 define ('LAST_DB_VERSION' , '10');
-//set no errors
+
+/**
+ * If set false, SQL Errors will be shown 
+ */
 define('MYSQL_NO_ERRORS', true);
 
 
-// Detect choosing another lang while installing
+#Detect choosing another lang while installing
 if(isset($_GET['change_lang']))
 {
 	if (!empty($_POST['lang']))
@@ -28,13 +39,13 @@ if(isset($_GET['change_lang']))
 	}
 }
 
-// Including current language
-include ($_path . 'lang/' . getlang() . '/common.php');
-include ($_path . 'lang/' . getlang() . '/install.php');
+# Including current language
+include $_path . 'lang/' . getlang() . '/common.php';
+include $_path . 'lang/' . getlang() . '/install.php';
 
 
+# Exceptions for development
 $IN_DEV = false;
-// Exceptions for development
 if(file_exists($_path . '.svn/entries') || file_exists('dev.txt'))
 {
 	define('DEV_STAGE', true);
@@ -43,8 +54,11 @@ if(file_exists($_path . '.svn/entries') || file_exists('dev.txt'))
 
 
 /**
-* Return current language of installing wizard 
-*/
+ * Return current language of installing wizard
+ *
+ * @param bool $link Return the langauge as link or not
+ * @return string The langauge short name, i.e. ar, en
+ */
 function getlang ($link = false)
 {
 	global $_path;
@@ -62,6 +76,7 @@ function getlang ($link = false)
 
 	return $link ? 'lang=' . $ln : $ln;
 }
+
 
 function getlink($type = 'jquery')
 {

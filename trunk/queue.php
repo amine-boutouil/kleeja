@@ -88,7 +88,7 @@ $query_del	= array(
 $SQL->build($query_del);
 
 #end
-$SQL->close();
+garbage_collection();
 exit;
 
 

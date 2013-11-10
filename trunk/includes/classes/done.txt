@@ -1,0 +1,10 @@
+#
+#files that are rewritten
+#to be php 5.3 compatible, also documented well
+#
+
+mysqli.php [done, not checked] 
+pagination.php [done, not checked]
+phpass.php [done, no need to be checked]
+cache.php [ not done, some function must be moved to this class like delete_cache … ]
+style.php [ this will be deleted soon, no more html files]

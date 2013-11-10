@@ -18,13 +18,12 @@ if (!defined('IN_COMMON'))
 
 
 /* get kftp, zfile class */
-include PATH . 'includes/classes/ftp.php'; 
-include PATH . 'includes/classes/zip.php'; 
+include PATH . 'includes/classes/ftp.php';
 
 
 /**
 * Kleeja auto update system
-* @package Kleeja
+* @package update_system
 */
 class kupdate
 {

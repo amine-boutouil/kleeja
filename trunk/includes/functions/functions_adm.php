@@ -4,7 +4,7 @@
 * @package adm
 * @version $Id: functions.php 1910 2012-08-28 01:50:53Z saanina $
 * @copyright (c) 2007 Kleeja.com
-* @license ./docs/license.txt
+* @license http://www.kleeja.com/license
 *
 */
 

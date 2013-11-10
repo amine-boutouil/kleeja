@@ -4,7 +4,7 @@
 * @package Kleeja
 * @version $Id: index.php 2195 2013-10-30 02:19:34Z saanina $
 * @copyright (c) 2007 Kleeja.com
-* @license ./docs/license.txt
+* @license http://www.kleeja.com/license
 *
 */
 

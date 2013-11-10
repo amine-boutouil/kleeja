@@ -4,7 +4,7 @@
 * @package Kleeja
 * @version $Id: functions_display.php 1281 2009-11-27 08:43:12Z saanina $
 * @copyright (c) 2007 Kleeja.com
-* @license ./docs/license.txt
+* @license http://www.kleeja.com/license
 *
 */
 

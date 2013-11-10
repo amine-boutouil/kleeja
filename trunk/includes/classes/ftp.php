@@ -4,7 +4,7 @@
 * @package Kleeja
 * @version $Id: pager.php 2190 2013-09-20 02:15:53Z saanina $
 * @copyright (c) 2007 Kleeja.com
-* @license ./docs/license.txt
+* @license http://www.kleeja.com/license
 *
 */
 

@@ -4,13 +4,13 @@
 * @package Kleeja
 * @version $Id$
 * @copyright (c) 2007 Kleeja.com
-* @license ./docs/license.txt
+* @license http://www.kleeja.com/license
 *
 */
 
 
 /**
- * We are in do.php file, useful for exceptions
+ * We are in go.php file, useful for exceptions
  */
 define('IN_GO', true);
 

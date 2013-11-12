@@ -1,7 +1,9 @@
 	<div class="clr"></div>
 
 	<!-- Extras Footer -->
-	(extras.footer?<div class="dot"></div><div class="extras_footer">{extras.footer}</div><div class="dot"></div>:)
+	<?php if($extras['footer']):?>
+	<div class="dot"></div><div class="extras_footer"><?=$extras['footer']?></div><div class="dot"></div>
+	<?php endif;?>
 	<!-- @end-extras-footer -->
 	
 	</div><!-- @end-wrapper -->
@@ -22,22 +24,36 @@
 		<div class="right">
 			<!-- Copyrights-->
 			<div class="Copyrights">
-				{lang.COPYRIGHTS_X} &copy; <a href="{config.siteurl}">{config.sitename}</a>
+				<?=$lang['COPYRIGHTS_X']?> &copy; <a href="<?=$config['siteurl']?>"><?=$config['sitename']?></a>
 			</div><!-- @end-Copyrights -->
 		</div>
 
 		<div class="clr"></div>
 
-		<!-- button panel --><div class="bu-panel">{admin_page}</div><!-- @end-button-panel -->
-		<!-- footer stats -->(page_stats?<div class="footer_stats">{page_stats}</div>:)<!-- @end-footer-stats -->
-		<!-- google analytics -->(googleanalytics?<div class="footer_stats">{googleanalytics}</div>:)<!-- @end-google-analytics -->
+		<!-- button panel -->
+		<?php if(user_can('enter_acp')):?>
+		<div class="bu-panel"><a href="<?=ADMIN_PATH?>" class="admin_cp_link"><span><?=$lang['ADMINCP']?></span></a></div>
+		<?php endif;?>
+		<!-- @end-button-panel -->
+
+		<!-- footer stats -->
+		<?php if($page_stats):?>
+		<div class="footer_stats"><?=$page_stats?></div>
+		<?php endif;?>
+		<!-- @end-footer-stats -->
+
+		<!-- google analytics -->
+		<?php if($google_analytics):?>
+		<div class="footer_stats"><?=$google_analytics?></div>
+		<?php endif;?>
+		<!-- @end-google-analytics -->
 		
 	</div>
 </div>
 <!-- @end-footer -->
 
 <!-- don't ever delete this -->
-{run_queue}
+<img src="<?=$config['siteurl']?>queue.php?image.gif" width="1" height="1" alt="queue" />
 
 </body>
 </html>

@@ -1,3 +1,4 @@
+<?php if(!defined('IN_KLEEJA')) { exit; } ?>
 <!-- Errors template -->
 <div id="content_index">
 	<div class="clr"></div>
@@ -5,7 +6,7 @@
 	<dl id="system-message">
 		<dd class="error">
 			<ul>
-				<li>{text}  <a href="javascript:history.go(-1)">{go_back_browser}</a></li>
+				<li><?=$text?></li>
 			</ul>
 		</dd>
 	</dl>	

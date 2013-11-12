@@ -76,10 +76,6 @@ function kleeja_footer()
 		$page_stats		= "<strong>[</strong> Generation Time: $loadtime Sec  - Queries: $queries_num - Hook System:  $hksys <strong>]</strong>  " ;
 	}
 
-	//assign cron
-	//$tpl->assign("run_queue", '<img src="' . $config['siteurl'] . 'queue.php?image.gif" width="1" height="1" alt="queue" />');
-
-
 	#if google analytics is enabled, show it
 	$google_analytics = false;
 	if (strlen($config['googleanalytics']) > 4)
@@ -94,7 +90,7 @@ function kleeja_footer()
 		$google_analytics .= '<!--' . "\n";
 		$google_analytics .= 'var pageTracker = _gat._getTracker("' . $config['googleanalytics'] . '");' . "\n";
 		$google_analytics .= 'pageTracker._initData();' . "\n";
-		$googleanalytics .= 'pageTracker._trackPageview();' . "\n";
+		$google_analytics .= 'pageTracker._trackPageview();' . "\n";
 		$google_analytics .= '-->' . "\n";
 		$google_analytics .= '</script>' . "\n";
 	}
@@ -194,7 +190,7 @@ function get_template_path($name)
  * @param int $size the size to be costumized 
  * @return string Size in a readable formate 
  */
-function Customfile_size($size)
+function readable_size($size)
 {
 	$sizes = array(' B', ' KB', ' MB', ' GB', ' TB', 'PB', ' EB');
 	$ext = $sizes[0];
@@ -212,7 +208,7 @@ function Customfile_size($size)
 /**
  * Show an Error message 
  * 
- * @param string $msg Text that will show as error message
+ * @param string $text Text that will show as error message
  * @param string $title [optional] Title of the message page
  * @param bool $exit [optional] Stop script after showing the message
  * @param bool|string $redirect [optional] Redirect to given link after message
@@ -221,19 +217,22 @@ function Customfile_size($size)
  * @param string $style [optional] The template of the inforamtion message
  * @return void
  */
-function kleeja_err($msg, $title = '', $exit = true, $redirect = false, $rs = 2, $extra_code_header, $style = 'err')
+function kleeja_error($text, $title = '', $exit = true, $redirect = false, $rs = 2, $extra_code_header, $style = 'error.php')
 {
-	global $text, $tpl, $SQL;
+	global $SQL;
 
-	($hook = kleeja_run_hook('kleeja_err_func')) ? eval($hook) : null; //run hook
+	#if redirect after showing the message
+	 if($redirect)
+	 {
+		 $text .= redirect($redirect, false, $exit, $rs, true);
+	 }
 
-	#assign {text} in err template
-	$text	= $msg . ($redirect ? redirect($redirect, false, $exit, $rs, true) : '');
-	
+	($hook = kleeja_run_hook('kleeja_error_func')) ? eval($hook) : null; //run hook
+
 	#header
 	kleeja_header($title, $extra_code_header);
 	#template
-	echo $tpl->display($style);
+	include get_template_path($style);
 	#footer
 	kleeja_footer();
 
@@ -249,7 +248,7 @@ function kleeja_err($msg, $title = '', $exit = true, $redirect = false, $rs = 2,
 /**
  * Show an inforamtion message 
  * 
- * @param string $msg Text that will show as inforamtion message
+ * @param string $text Text that will show as inforamtion message
  * @param string $title [optional] Title of the message page
  * @param bool $exit [optional] Stop script after showing the message
  * @param bool|string $redirect [optional] Redirect to given link after message
@@ -257,13 +256,13 @@ function kleeja_err($msg, $title = '', $exit = true, $redirect = false, $rs = 2,
  * @param string $extra_code_header [optional] extra codes to be included between head tag
  * @return void
  */
-function kleeja_info($msg, $title='', $exit = true, $redirect = false, $rs = 5, $extra_code_header = '')
+function kleeja_info($text, $title='', $exit = true, $redirect = false, $rs = 5, $extra_code_header = '')
 {
-	global $text, $tpl, $SQL;
+	global $SQL;
 
 	($hook = kleeja_run_hook('kleeja_info_func')) ? eval($hook) : null; //run hook
 
-	return kleeja_err($msg, $title, $exit, $redirect, $rs, $extra_code_header, 'info');
+	return kleeja_error($text, $title, $exit, $redirect, $rs, $extra_code_header, 'info.php');
 }
 
 
@@ -278,6 +277,9 @@ function kleeja_info($msg, $title='', $exit = true, $redirect = false, $rs = 5, 
 function big_error($error_title, $msg_text, $error = true)
 {
 	global $SQL; 
+	
+	($hook = kleeja_run_hook('big_error_func')) ? eval($hook) : null; //run hook
+	
 	echo '<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">' . "\n";
 	echo '<head>' . "\n";
 	echo '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />' . "\n";
@@ -296,6 +298,7 @@ function big_error($error_title, $msg_text, $error = true)
 	echo '</div>' . "\n";
 	echo '</body>' . "\n";
 	echo '</html>';
+
 	#at end, close sql connections & etc
 	garbage_collection();
 	exit();
@@ -843,6 +846,8 @@ function kleeja_date($time, $human_time = true, $format = false)
 	}
 
 	$return = $lang['W_FROM'] .  ' ' . $return;
+
+	($hook = kleeja_run_hook('kleeja_date_func')) ? eval($hook) : null; //run hook
 
 	return $return;
 }

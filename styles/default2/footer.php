@@ -1,3 +1,4 @@
+<?php if(!defined('IN_KLEEJA')) { exit; } ?>
 	<div class="clr"></div>
 
 	<!-- Extras Footer -->

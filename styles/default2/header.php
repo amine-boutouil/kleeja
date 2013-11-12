@@ -75,6 +75,7 @@
 		<?php if(user_can('access_call')):?>
 		<li><a href="<?php echo get_url_of('call');?>"<?php if($current_page == 'call'):?> class="current"<?php endif;?>><?=$lang['CALL']?></a></li>
 		<?php endif;?>
+		<?php ($hook = kleeja_run_hook('header_template_top_menu')) ? eval($hook) : null; ?>
 		</ul>
 	</div><!-- @end-Top-Navigation -->
 
@@ -109,7 +110,7 @@
 				<li><a href="<?php echo get_url_of('register');?>"<?php if($current_page == 'register'):?> class="current"<?php endif;?>><?=$lang['REGISTER']?></a></li>
 				<?php endif;?>
 			<?php endif;?>
-			
+			<?php ($hook = kleeja_run_hook('header_template_side_menu')) ? eval($hook) : null; ?>
 		</ul>
 		</div>
 		<div class="dot clr"></div>

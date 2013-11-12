@@ -36,8 +36,8 @@ switch (g('go', 'str', ''))
 	case 'login' : 
 
 		#page info
-		$stylee				= 'login';
-		$titlee				= $lang['LOGIN'];
+		$current_template				= 'login';
+		$current_title				= $lang['LOGIN'];
 		$action				= 'ucp.php?go=login' . (ig('return') ? '&amp;return=' . g('return') : '');
 		$forget_pass_link	= !empty($forgetpass_script_path) && (int) $config['user_system'] != 1 ? $forgetpass_script_path : 'ucp.php?go=get_pass';
 		$H_FORM_KEYS		= kleeja_add_form_key('login');
@@ -104,8 +104,8 @@ switch (g('go', 'str', ''))
 		case 'register' : 
 
 		#page info
-		$stylee	= 'register';
-		$titlee	= $lang['REGISTER'];
+		$current_template	= 'register';
+		$current_title	= $lang['REGISTER'];
 		$action	= 'ucp.php?go=register';
 		$H_FORM_KEYS = kleeja_add_form_key('register');
 		#no error yet 
@@ -149,7 +149,7 @@ switch (g('go', 'str', ''))
 		}
 
 		#already a user
-		if ($user->name())
+		if ($user->is_user())
 		{
 			($hook = kleeja_run_hook('register_logon_before')) ? eval($hook) : null; //run hook
 			kleeja_info($lang['REGISTERED_BEFORE']);
@@ -159,7 +159,7 @@ switch (g('go', 'str', ''))
 		$t_lname = p('lname', 'str', '');
 		$t_lpass = p('lpass', 'str', '');
 		$t_lpass2 = p('lpass2', 'str', '');
-		$t_lmail = p('lmail', 'str', '');
+		$t_lmail = p('lmail', 'mail', '');
 
 		#no form submit yet
 		if (!ip('submit'))
@@ -190,7 +190,7 @@ switch (g('go', 'str', ''))
 			{
 				$ERRORS['pass_neq_pass2'] = $lang['PASS_NEQ_PASS2'];
  			}
-			if (!preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/i", $t_lmail))
+			if (!$t_lmail)
 			{
 				$ERRORS['lmail'] = $lang['WRONG_EMAIL'];
 			}
@@ -289,7 +289,7 @@ switch (g('go', 'str', ''))
 		}
 		else
 		{
-			kleeja_err($lang['LOGOUT_ERROR']);
+			kleeja_error($lang['LOGOUT_ERROR']);
 		}
 
 		($hook = kleeja_run_hook('end_logout')) ? eval($hook) : null; //run hook
@@ -302,7 +302,7 @@ switch (g('go', 'str', ''))
 		($hook = kleeja_run_hook('begin_fileuser')) ? eval($hook) : null; //run hook
 		
 		#page info
-		$stylee	= 'fileuser';
+		$current_template	= 'fileuser';
 		$H_FORM_KEYS = kleeja_add_form_key('fileuser');
 
 		$user_id_get	= g('id', 'int', false);
@@ -313,7 +313,7 @@ switch (g('go', 'str', ''))
 		#not a user and no id to view
 		if (!$user->is_user() && !ig('id'))
 		{
-			kleeja_err($lang['USER_PLACE'], $lang['PLACE_NO_YOU'], true, 'index.php');
+			kleeja_error($lang['USER_PLACE'], $lang['PLACE_NO_YOU'], true, 'index.php');
 		}
 
 		#Not allowed to browse files's folders
@@ -342,7 +342,7 @@ switch (g('go', 'str', ''))
 		#if there is no username, then there is no user at all
 		if(!$data_user['name'])
 		{
-			kleeja_err($lang['NOT_EXSIT_USER'], $lang['PLACE_NO_YOU']);
+			kleeja_error($lang['NOT_EXSIT_USER'], $lang['PLACE_NO_YOU']);
 		}
 
 		#this user closed his folder, and it's not the current user folder
@@ -375,14 +375,14 @@ switch (g('go', 'str', ''))
  
 		$no_results = true;
 
-		if((int) $config['user_system'] != 1 && ($user->id() != $user_id))
+		if((int) $config['user_system'] != 1 && ($user->data['id'] != $user_id))
 		{
 			$data_user['name'] = $user->usernamebyid($user_id);
 		}
 		$user_name = !$data_user['name'] ? false : $data_user['name'];
 
 		#set page title
-		$titlee	= $lang['FILEUSER'] . ': ' . $user_name;
+		$current_title	= $lang['FILEUSER'] . ': ' . $user_name;
 
 		#there is result ? show them
 		if($nums_rows)
@@ -515,15 +515,11 @@ switch (g('go', 'str', ''))
 		}
 
 		#page info
-		$stylee		= 'profile';
-		$titlee		= $lang['PROFILE'];
-		$action		= 'ucp.php?go=profile';
-		$name		= $user->data['name'];
-		$mail		= $user->data['mail'];
+		$current_template = 'profile.php';
+		$current_title		= $lang['PROFILE'];
 		extract($user->get_data('show_my_filecp, password_salt'));
 		$data_forum		= (int) $config['user_system'] == 1 ? true : false ;
-		$link_avater	= sprintf($lang['EDIT_U_AVATER_LINK'], '<a target="_blank" href="http://www.gravatar.com/">' , '</a>');
-		$H_FORM_KEYS = kleeja_add_form_key('profile');
+
 		#no error yet 
 		$ERRORS = false;
 
@@ -551,13 +547,19 @@ switch (g('go', 'str', ''))
 				$goto_forum_link = '...';
 			}
 		}
+		
+		#if not default user system, then redirect the user to panel of that system
+		if($config['user_system'] != 1)
+		{
+			kleeja_info('<a href="' . $goto_forum_link . '">' . $lang['PFILE_4_FORUM'] . '</a>');
+		}
 
 		#getting form variables
 		$t_pppass_old	= p('pppass_old', 'str', '');
 		$t_ppass_old	= p('ppass_old', 'str', '');
 		$t_ppass_new	= p('ppass_new', 'str', '');
 		$t_ppass_new2	= p('ppass_new2', 'str', '');
-		$t_pmail		= p('pmail', 'mail', false);
+		$t_pmail		= p('pmail', 'mail', $user->data['mail']);
 		$t_show_my_filecp= p('show_my_filecp', 'bool', false);
 
 		($hook = kleeja_run_hook('no_submit_profile')) ? eval($hook) : null; //run hook
@@ -591,7 +593,7 @@ switch (g('go', 'str', ''))
 
 			#if email is not equal to current email AND email not exists before
 			$new_mail = false;
-			if($user->mail() != $t_pmail)
+			if($user->data['mail'] != $t_pmail)
 			{
 				#if current pass is not correct
 				if($t_pppass_old == '' || !$user->kleeja_hash_password($t_pppass_old . $password_salt, $userinfo['password']))
@@ -611,7 +613,7 @@ switch (g('go', 'str', ''))
 					$query_chk	= array(
 								'SELECT'	=> 'u.mail',
 								'FROM'		=> "{$dbprefix}users u",
-								'WHERE'		=> "u.mail='" . strtolower($SQL->escape($t_pmail)) . "'",
+								'WHERE'		=> "u.mail='" . $SQL->escape($t_pmail) . "'",
 							);
 	
 					($hook = kleeja_run_hook('profile_query_chk')) ? eval($hook) : null; //run hook
@@ -637,7 +639,7 @@ switch (g('go', 'str', ''))
 				$showmyfile	= $t_show_my_filecp != $show_my_filecp ?  ($mail == '' ? '': ',') . "show_my_filecp='" . $t_show_my_filecp . "'" : '';
 				$pass		= $t_ppass_new != '' ? ($showmyfile != ''  || $mail != '' ? ',' : '') . "password='" . $SQL->escape($user->kleeja_hash_password($t_ppass_new . $user_salt)) . 
 								"', password_salt='" . $user_salt . "'" : "";
-				$id			= (int) $user->id();
+				$id			= $user->data['id'];
 
 				$update_query	= array(
 								'UPDATE'	=> "{$dbprefix}users",
@@ -657,7 +659,7 @@ switch (g('go', 'str', ''))
 					$SQL->build($update_query);
 				}
 
-				kleeja_info($text, '', true, $action);
+				kleeja_info($text, '', true, get_url_of('profile'));
 			}
 
 		}#else submit
@@ -677,8 +679,8 @@ switch (g('go', 'str', ''))
 		}
 
 		#page info
-		$stylee		= 'get_pass';
-		$titlee		= $lang['GET_LOSTPASS'];
+		$current_template		= 'get_pass';
+		$current_title		= $lang['GET_LOSTPASS'];
 		$action		= 'ucp.php?go=get_pass';
 		$H_FORM_KEYS = kleeja_add_form_key('get_pass');
 		#no error yet 
@@ -833,7 +835,7 @@ switch (g('go', 'str', ''))
 
 				if(!$send)
 				{
-					kleeja_err($lang['CANT_SEND_NEWPASS']);
+					kleeja_error($lang['CANT_SEND_NEWPASS']);
 				}
 				else
 				{
@@ -855,7 +857,7 @@ switch (g('go', 'str', ''))
 
 		($hook = kleeja_run_hook('default_usrcp_page')) ? eval($hook) : null; //run hook
 
-		kleeja_err($lang['ERROR_NAVIGATATION']);
+		kleeja_error($lang['ERROR_NAVIGATATION']);
 
 		break;
 }#end switch
@@ -864,13 +866,14 @@ switch (g('go', 'str', ''))
 
 
 #no template, no title, set them to default
-$titlee = empty($titlee) ? $lang['USERS_SYSTEM'] : $titlee;
-$stylee = empty($stylee) ? 'info' : $stylee;
+$current_title = empty($current_title) ? $lang['USERS_SYSTEM'] : $current_title;
+$current_template = empty($current_template) ? 'info' : $current_template;
+
 
 #header
-kleeja_header($titlee, $extra_code_in_header);
+kleeja_header($current_title, $extra_code_in_header);
 #page template
-echo $tpl->display($stylee);
+include get_template_path($current_template);
 #footer
 kleeja_footer();
 

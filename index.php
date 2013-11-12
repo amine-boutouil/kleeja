@@ -156,7 +156,6 @@ if ($show_online)
 		$show_online = false;
 	}
 
-
 	($hook = kleeja_run_hook('if_online_index_page')) ? eval($hook) : null; //run hook	
 }#allow_online
 
@@ -167,7 +166,7 @@ if ($show_online)
 #header
 kleeja_header();
 #index template
-echo $tpl->display("index_body");
+include get_template_path('index_body.php');
 #footer
 kleeja_footer();
 

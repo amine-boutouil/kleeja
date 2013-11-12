@@ -12,7 +12,7 @@
 	<link rel="icon" type="image/gif" href="images/favicon.gif" />
 	<link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
 	<link rel="apple-touch-startup-image" href="images/iPhone.png" />
-	<link rel="stylesheet" type="text/css" media="all" href="{STYLE_PATH}css/stylesheet.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="<?=STYLE_PATH?>	css/stylesheet.css" />
 	<script type="text/javascript" src="<?=STYLE_PATH?>jquery.js"></script>
 
 	<link rel="stylesheet" type="text/css" media="all" href="<?=STYLE_PATH?>css/color.css" />
@@ -36,9 +36,9 @@
 
 	<script type="text/javascript">
 	<!--
-	var number_of_uploads={config.filesnum};
-	var LANG_PAST_URL_HERE = "{lang.PAST_URL_HERE}";
-	var LANG_MORE_F_FILES = "{lang.MORE_F_FILES}";
+	var number_of_uploads=<?=$config['filesnum']?>;
+	var LANG_PAST_URL_HERE = "<?=$lang['PAST_URL_HERE']?>";
+	var LANG_MORE_F_FILES = "<?=$lang['MORE_F_FILES']?>";
 	var STYLE_PATH  = "<?=STYLE_PATH?>";
 	-->
 	</script>
@@ -54,7 +54,7 @@
 
 	<!--begin Header-->
 	<div id="header" class="clearfix">
-		<h1><a title="?=$config['sitename']?>" href="?=$config['siteurl']?>" class="logo"><?=$config['sitename']?></a></h1>
+		<h1><a title="<?=$config['sitename']?>" href="<?=$config['siteurl']?>" class="logo"><?=$config['sitename']?></a></h1>
 	</div>
 	<!-- @end-Header -->
 
@@ -63,9 +63,18 @@
 	<!-- begin Top Navigation -->
 	<div class="top_nav">
 		<ul class="menu">
-		<LOOP NAME="top_menu"><IF LOOP="show">
-		<li><a href="{{url}}" (go_current=={{name}}?class="current":)>{{title}}</a></li>
-		</IF></LOOP>
+		<li><a href="<?php echo get_url_of('index');?>"<?php if($current_page == 'index'):?> class="current"<?php endif;?>><?=$lang['INDEX']?></a></li>
+		<li><a href="<?php echo get_url_of('rules');?>"<?php if($current_page == 'rules'):?> class="current"<?php endif;?>><?=$lang['RULES']?></a></li>
+		<li><a href="<?php echo get_url_of('guide');?>"<?php if($current_page == 'guide'):?> class="current"<?php endif;?>><?=$lang['GUIDE']?></a></li>
+		<?php if($config['allow_stat_pg'] && user_can('access_stats')):?>
+		<li><a href="<?php echo get_url_of('stats');?>"<?php if($current_page == 'stats'):?> class="current"<?php endif;?>><?=$lang['STATS']?></a></li>
+		<?php endif;?>
+		<?php if(user_can('access_report')):?>
+		<li><a href="<?php echo get_url_of('report');?>"<?php if($current_page == 'report'):?> class="current"<?php endif;?>><?=$lang['REPORT']?></a></li>
+		<?php endif;?>
+		<?php if(user_can('access_call')):?>
+		<li><a href="<?php echo get_url_of('call');?>"<?php if($current_page == 'call'):?> class="current"<?php endif;?>><?=$lang['CALL']?></a></li>
+		<?php endif;?>
 		</ul>
 	</div><!-- @end-Top-Navigation -->
 
@@ -87,14 +96,21 @@
 	<!-- begin menu right -->
 	<div id="sidebar">  
 		<div id="sidebar_box">
-		<IS_BROWSER!="mobile"> 
-			<img src="{user_avatar}" alt="{username}" title="{username}" height="90" width="100" />
-		</IS_BROWSER>
-			<ul class="menu">
-				<LOOP NAME="side_menu"><IF LOOP="show">
-				<li><a href="{{url}}" (go_current=={{name}}?class="current":)><IS_BROWSER!="mobile"><img src="{STYLE_PATH}images/{{name}}.png" style="float:right;" class="pngfix" alt="{lang.LOGIN}" style="vertical-align:middle;" /></IS_BROWSER>{{title}} <IF LOOP="name==logout">[ {username} ]</IF></a></li>
-				</IF></LOOP>
-			</ul>
+		<ul class="menu">
+			<?php if($user->is_user()):?>
+			<li><a href="<?php echo get_url_of('profile');?>"<?php if($current_page == 'profile'):?> class="current"<?php endif;?>><?=$lang['PROFILE']?></a></li>
+				<?php if($config['enable_userfile'] && user_can('access_fileuser')):?>
+				<li><a href="<?php echo get_url_of('fileuser');?>"<?php if($current_page == 'fileuser'):?> class="current"<?php endif;?>><?=$lang['YOUR_FILEUSER']?></a></li>
+				<?php endif;?>
+			<li><a href="<?php echo get_url_of('logout');?>"<?php if($current_page == 'logout'):?> class="current"<?php endif;?>><?=$lang['LOGOUT']?> [ <?=$user->data['name']?> ]</a></li>
+			<?php else:?>
+			<li><a href="<?php echo get_url_of('login');?>"<?php if($current_page == 'login'):?> class="current"<?php endif;?>><?=$lang['LOGIN']?></a></li>
+				<?php if($config['register']):?>
+				<li><a href="<?php echo get_url_of('register');?>"<?php if($current_page == 'register'):?> class="current"<?php endif;?>><?=$lang['REGISTER']?></a></li>
+				<?php endif;?>
+			<?php endif;?>
+			
+		</ul>
 		</div>
 		<div class="dot clr"></div>
 	</div><!-- @end-menu-right -->

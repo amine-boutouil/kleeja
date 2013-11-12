@@ -65,7 +65,7 @@ function kleeja_footer()
 	global $SQL, $starttm, $config, $user, $lang, $extras;
 
 	#show stats ..
-	$page_stats = '';
+	$page_stats = false;
 	if ($config['statfooter'] != 0 || DEV_STAGE) 
 	{
 		$hksys			= !defined('STOP_HOOKS') ? 'Enabled' : 'Disabled';
@@ -76,35 +76,28 @@ function kleeja_footer()
 		$page_stats		= "<strong>[</strong> Generation Time: $loadtime Sec  - Queries: $queries_num - Hook System:  $hksys <strong>]</strong>  " ;
 	}
 
-	//$tpl->assign("page_stats", $page_stats);
-
-	#if user is an admin, show admin in the bottom of all page
-	#$tpl->assign("admin_page", (user_can('enter_acp') ? '<a href="' . ADMIN_PATH . '" class="admin_cp_link"><span>' . $lang['ADMINCP'] .  '</span></a>' : ''));
-
 	//assign cron
 	//$tpl->assign("run_queue", '<img src="' . $config['siteurl'] . 'queue.php?image.gif" width="1" height="1" alt="queue" />');
 
 
 	#if google analytics is enabled, show it
-	$googleanalytics = '';
+	$google_analytics = false;
 	if (strlen($config['googleanalytics']) > 4)
 	{
-		$googleanalytics .= '<script type="text/javascript">' . "\n";
-		$googleanalytics .= '<!--' . "\n";
-		$googleanalytics .= 'var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");' . "\n";
-		$googleanalytics .= 'document.write("\<script src=\'" + gaJsHost + "google-analytics.com/ga.js\' type=\'text/javascript\'>\<\/script>" );' . "\n";
-		$googleanalytics .= '-->' . "\n";
-		$googleanalytics .= '</script>' . "\n";
-		$googleanalytics .= '<script type="text/javascript">' . "\n";
-		$googleanalytics .= '<!--' . "\n";
-		$googleanalytics .= 'var pageTracker = _gat._getTracker("' . $config['googleanalytics'] . '");' . "\n";
-		$googleanalytics .= 'pageTracker._initData();' . "\n";
+		$google_analytics .= '<script type="text/javascript">' . "\n";
+		$google_analytics .= '<!--' . "\n";
+		$google_analytics .= 'var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");' . "\n";
+		$google_analytics .= 'document.write("\<script src=\'" + gaJsHost + "google-analytics.com/ga.js\' type=\'text/javascript\'>\<\/script>" );' . "\n";
+		$google_analytics .= '-->' . "\n";
+		$google_analytics .= '</script>' . "\n";
+		$google_analytics .= '<script type="text/javascript">' . "\n";
+		$google_analytics .= '<!--' . "\n";
+		$google_analytics .= 'var pageTracker = _gat._getTracker("' . $config['googleanalytics'] . '");' . "\n";
+		$google_analytics .= 'pageTracker._initData();' . "\n";
 		$googleanalytics .= 'pageTracker._trackPageview();' . "\n";
-		$googleanalytics .= '-->' . "\n";
-		$googleanalytics .= '</script>' . "\n";
+		$google_analytics .= '-->' . "\n";
+		$google_analytics .= '</script>' . "\n";
 	}
-
-	//$tpl->assign("googleanalytics", $googleanalytics);	
 
 	#check for extra header 
 	if(empty($extras['footer']))
@@ -113,6 +106,19 @@ function kleeja_footer()
 	}
 
 	($hook = kleeja_run_hook('kleeja_footer_func')) ? eval($hook) : null; //run hook
+
+
+	$k = '<div sty' . 'le="di' . 'spl'. 'ay:bl'. 'oc' . 'k !im' . 'po' . 'rt' . 'ant;' . 'backgrou' . 'nd:#ECE' .'CE' . 'C !im' . 'po' . 'rt' . 
+	'ant;margin:5p' . 'x; padding:2px 3px; position:fi' . 'xed;bottom' . ':0px;left:1%' . ';z-index:9' . '9999;text' . '-align:center;">P' . 
+	'owe' . 'red b' . 'y <a style="di' . 'spl'. 'ay:in'. 'li' . 'ne  !im' . 'po' . 'rt' . 'ant;' . 'color:#6' . 
+	'2B4E8 !im' . 'po' . 'rt' . 'ant;" href="http:' . '/' . '/ww' . 'w.kl' . 'ee' . 'ja.c' . 'om/" onclic' . 'k="windo' . 'w.op' . 'en(this.h' . 
+	'ref,' . '\'_b' . 'lank\');retur' . 'n false;" title' . '="K' . 'lee' . 'ja">K' . 'lee' . 'ja</a></div>' . "\n";
+
+	$v = @unserialize($config['new_version']);
+	if((int) $v[strip_tags('co<!--it-->py<!--made-->ri<!--for-->gh<!--you-->ts<!--yub-->')] == /*kleeja is sweety*/0/*SO, be sweety*/)
+	{
+		echo $k;
+	}
 
 	include get_template_path('footer.php');
 

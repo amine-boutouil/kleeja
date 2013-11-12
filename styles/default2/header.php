@@ -12,7 +12,7 @@
 	<link rel="icon" type="image/gif" href="images/favicon.gif" />
 	<link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
 	<link rel="apple-touch-startup-image" href="images/iPhone.png" />
-	<link rel="stylesheet" type="text/css" media="all" href="<?=STYLE_PATH?>	css/stylesheet.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="<?=STYLE_PATH?>css/stylesheet.css" />
 	<script type="text/javascript" src="<?=STYLE_PATH?>jquery.js"></script>
 
 	<link rel="stylesheet" type="text/css" media="all" href="<?=STYLE_PATH?>css/color.css" />

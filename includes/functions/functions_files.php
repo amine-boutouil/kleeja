@@ -481,3 +481,40 @@ function fetch_remote_file($url, $save_in = false, $timeout = 20, $head_only = f
 	return false;
 }
 
+
+/**
+* Try delete files or at least change its name.
+* for those who have dirty hosting 
+*/
+function kleeja_unlink($filepath, $cache_file = false)
+{
+	//99.9% who use this
+	if(function_exists('unlink'))
+	{
+		return @unlink($filepath);
+	}
+	//5% only who use this
+	//else if (function_exists('exec'))
+	//{
+	//	$out = array();
+	//	$return = null;
+	//	exec('del ' . escapeshellarg(realpath($filepath)) . ' /q', $out, $return);
+	//	return $return;
+	//}
+	//5% only who use this
+	//else if (function_exists('system'))
+	//{
+	//	$return = null;
+	//	system ('del ' . escapeshellarg(realpath($filepath)) . ' /q', $return);
+	//	return $return;
+	//}
+	//just rename cache file if there is new thing
+	else if (function_exists('rename') && $cache_file)
+	{
+		$new_name = substr($filepath, 0, strrpos($filepath, '/') + 1) . 'old_' . md5($filepath . time()) . '.php'; 
+		return rename($filepath, $new_name);
+	}
+
+	return false;
+}
+

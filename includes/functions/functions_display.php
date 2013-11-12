@@ -22,68 +22,37 @@ if (!defined('IN_COMMON'))
  * Print header part of the page
  * 
  * @param string $title [optional] The page title
- * @param string $extra [optional] any extra codes to include it between head tag
+ * @param string $extra_head_code [optional] any extra codes to include it between head tag
  * @return void
- * 
  */	
-function kleeja_header($title = '', $extra = '')
+function kleeja_header($title = '', $extra_head_code = '')
 {
-	global $tpl, $user, $lang, $olang, $user_is, $username, $config;
-	global $extras, $script_encoding, $errorpage, $userinfo, $charset;
+	global $user, $lang, $config;
+	global $extras;
 	global $STYLE_PATH;
 
 	#is user ? and username
 	$username = $user->is_user() ? $user->data['name'] : $lang['GUST'];
 
-	//our default charset
+	#our default charset
 	$charset = 'utf-8';
 
-	$side_menu = array(
-		1 => array('name'=>'profile', 'title'=>$lang['PROFILE'], 'url'=>$config['mod_writer'] ? 'profile.html' : 'ucp.php?go=profile', 'show'=>$user->is_user()),
-		2 => array('name'=>'fileuser', 'title'=>$lang['YOUR_FILEUSER'], 'url'=>$config['mod_writer'] ? 'fileuser.html' : 'ucp.php?go=fileuser', 'show'=>$config['enable_userfile'] && user_can('access_fileuser')),
-		3 => $user->is_user() ?
-			 array('name'=>'logout', 'title'=>$lang['LOGOUT'], 'url'=>$config['mod_writer'] ? 'logout.html' : 'ucp.php?go=logout', 'show'=>true) : 
-			 array('name'=>'login', 'title'=>$lang['LOGIN'], 'url'=>$config['mod_writer'] ? 'login.html' : 'ucp.php?go=login', 'show'=>true),
-		4 => array('name'=>'register', 'title'=>$lang['REGISTER'], 'url'=>$config['mod_writer'] ? 'register.html' : 'ucp.php?go=register', 'show'=>!$user->is_user() && $config['register']),
-	);
-
-	$top_menu = array(
-		1 => array('name'=>'index', 'title'=>$lang['INDEX'], 'url'=>$config['siteurl'], 'show'=>true),
-		2 => array('name'=>'rules', 'title'=>$lang['RULES'], 'url'=>$config['mod_writer'] ? 'rules.html' : 'go.php?go=rules', 'show'=>true),
-		3 => array('name'=>'guide', 'title'=>$lang['GUIDE'], 'url'=>$config['mod_writer'] ? 'guide.html' : 'go.php?go=guide', 'show'=>true),
-		4 => array('name'=>'stats', 'title'=>$lang['STATS'], 'url'=>$config['mod_writer'] ? 'stats.html' : 'go.php?go=stats', 'show'=>$config['allow_stat_pg'] && user_can('access_stats')),
-		5 => array('name'=>'report', 'title'=>$lang['REPORT'], 'url'=>$config['mod_writer'] ? 'report.html' : 'go.php?go=report', 'show'=>user_can('access_report')),
-		6 => array('name'=>'call', 'title'=>$lang['CALL'], 'url'=>$config['mod_writer'] ? 'call.html' : 'go.php?go=call', 'show'=>user_can('access_call')),
-	);
-
-	//check for extra header 
+	#check for extra header 
 	$extras['header'] = empty($extras['header']) ? false : $extras['header'];
 
 	($hook = kleeja_run_hook('Saaheader_links_func')) ? eval($hook) : null; //run hook
 
-	//assign some variables
-	$tpl->assign("dir", $lang['DIR']);
-	$tpl->assign("title", $title);
-	$tpl->assign("side_menu", $side_menu);
-	$tpl->assign("top_menu", $top_menu);
-	$tpl->assign("go_current", (isset($_GET['go']) ? htmlentities($_GET['go']) : (empty($_GET) ? 'index': '')));
-	$tpl->assign("go_back_browser", $lang['GO_BACK_BROWSER']);
-	$tpl->assign("H_FORM_KEYS_LOGIN", kleeja_add_form_key('login'));
-	$tpl->assign("action_login", 'ucp.php?go=login' . (isset($_GET['return']) ? '&amp;return=' . htmlspecialchars($_GET['return']) : ''));
-	$tpl->assign("EXTRA_CODE_META", $extra);
-	$default_avatar = $STYLE_PATH . 'images/user_avater.png';
-	$tpl->assign("user_avatar", 'http://www.gravatar.com/avatar/' . md5(strtolower(trim($userinfo['mail']))) . '?s=100&amp;d=' . urlencode($default_avatar));
-	$header = $tpl->display("header");
-
-	if($config['siteclose'] == '1' && user_can('enter_acp') && !defined('IN_ADMIN'))
-	{
-		//add notification bar 
-		$header = preg_replace('/<body([^\>]*)>/i', "<body\\1>\n<!-- site is closed -->\n<p style=\"width: 100%; text-align:center; background:#FFFFA6; color:black; border:thin;top:0;left:0; position:absolute; width:100%;clear:both;\">" . $lang['NOTICECLOSED'] . "</p>\n<!-- #site is closed -->", $header);
-	}
 	
-	($hook = kleeja_run_hook('Saaheader_func')) ? eval($hook) : null; //run hook
+	$current_page = ig('go') ? g('go', 'str') : (empty($_GET) ? 'index' : '');
 
-	echo $header;
+
+	//kleeja_add_form_key('login');
+	//$tpl->assign("action_login", 'ucp.php?go=login' . (isset($_GET['return']) ? '&amp;return=' . htmlspecialchars($_GET['return']) : ''));
+
+	include STYLE_PATH_ABS . 'header.php';
+
+	($hook = kleeja_run_hook('kleeja_header_func')) ? eval($hook) : null; //run hook
+
 	flush();
 }
 
@@ -92,7 +61,6 @@ function kleeja_header($title = '', $extra = '')
  * Print footer part of the page
  *
  * @return void
- * 
  */	
 function kleeja_footer()
 {
@@ -147,17 +115,43 @@ function kleeja_footer()
 		$extras['footer'] = false;
 	}
 
-	($hook = kleeja_run_hook('func_Saafooter')) ? eval($hook) : null; //run hook
 
-	$footer = $tpl->display("footer");
-	
-	($hook = kleeja_run_hook('Saafooter_func')) ? eval($hook) : null; //run hook
+	($hook = kleeja_run_hook('kleeja_footer_func')) ? eval($hook) : null; //run hook
 
-	echo $footer;
+	include STYLE_PATH_ABS . 'footer.php';
 
 	#at end, close sql connections & etc
 	garbage_collection();
 }
+
+
+/**
+ * Get the link of any kleeja page, respect rewrite mod option
+ * 
+ * @param string $name The page you want the url of.
+ * @return string The link  
+ */
+function get_url_of($name)
+{
+	$side_menu = array(
+		1 => array('name'=>'profile', 'title'=>$lang['PROFILE'], 'url'=>$config['mod_writer'] ? 'profile.html' : 'ucp.php?go=profile', 'show'=>$user->is_user()),
+		2 => array('name'=>'fileuser', 'title'=>$lang['YOUR_FILEUSER'], 'url'=>$config['mod_writer'] ? 'fileuser.html' : 'ucp.php?go=fileuser', 'show'=>$config['enable_userfile'] && user_can('access_fileuser')),
+		3 => $user->is_user() ?
+			 array('name'=>'logout', 'title'=>$lang['LOGOUT'], 'url'=>$config['mod_writer'] ? 'logout.html' : 'ucp.php?go=logout', 'show'=>true) : 
+			 array('name'=>'login', 'title'=>$lang['LOGIN'], 'url'=>$config['mod_writer'] ? 'login.html' : 'ucp.php?go=login', 'show'=>true),
+		4 => array('name'=>'register', 'title'=>$lang['REGISTER'], 'url'=>$config['mod_writer'] ? 'register.html' : 'ucp.php?go=register', 'show'=>!$user->is_user() && $config['register']),
+	);
+
+	$top_menu = array(
+		1 => array('name'=>'index', 'title'=>$lang['INDEX'], 'url'=>$config['siteurl'], 'show'=>true),
+		2 => array('name'=>'rules', 'title'=>$lang['RULES'], 'url'=>$config['mod_writer'] ? 'rules.html' : 'go.php?go=rules', 'show'=>true),
+		3 => array('name'=>'guide', 'title'=>$lang['GUIDE'], 'url'=>$config['mod_writer'] ? 'guide.html' : 'go.php?go=guide', 'show'=>true),
+		4 => array('name'=>'stats', 'title'=>$lang['STATS'], 'url'=>$config['mod_writer'] ? 'stats.html' : 'go.php?go=stats', 'show'=>$config['allow_stat_pg'] && user_can('access_stats')),
+		5 => array('name'=>'report', 'title'=>$lang['REPORT'], 'url'=>$config['mod_writer'] ? 'report.html' : 'go.php?go=report', 'show'=>user_can('access_report')),
+		6 => array('name'=>'call', 'title'=>$lang['CALL'], 'url'=>$config['mod_writer'] ? 'call.html' : 'go.php?go=call', 'show'=>user_can('access_call')),
+	);
+}
+
 
 /**
  * To return file size in propriate format

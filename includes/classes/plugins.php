@@ -16,10 +16,11 @@ if (!defined('IN_COMMON'))
 
 /**
 * Kleeja Plugins System
-* @package Kleeja
+* @package plugins
 */
-class kplugins
+class plugins
 {
+	
 
 }
 

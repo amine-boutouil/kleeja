@@ -46,7 +46,7 @@ class user
 	 */
 	public function login($name, $pass, $hashed = false, $expire = 86400, $loginadm = false)
 	{
-		global $config, $userinfo;
+		global $config;
 
 		#login expire after?
 		$expire = time() + ((int) $expire ? intval($expire) : 86400);
@@ -63,6 +63,7 @@ class user
 				return $login_status;
 				
 				#TODO add default $user->data info for those different system
+				#name, mail, last_login ...
 			}
 		}
 
@@ -204,7 +205,6 @@ class user
 
 		#set useful data
 		$this->data['password'] = '******';
-		$this->data['is_bot'] =  preg_match('/(' . implode('|', $bots) . ')/i', ($_SERVER['HTTP_USER_AGENT'] ? $_SERVER['HTTP_USER_AGENT'] : @getenv('HTTP_USER_AGENT'))) ? true : false;
 
 		return $this->data;
 	}
@@ -457,6 +457,8 @@ class user
 
 		($hook = kleeja_run_hook('kleeja_check_user_func_usr_class')) ? eval($hook) : null; //run hook
 
+		#is it a bot? record bot visits stat
+		$this->is_bot(true);
 
 		#if there is no login cookie
 		if(!$this->kleeja_get_cookie('ulogu'))
@@ -483,6 +485,10 @@ class user
 		else
 		{
 			$this->data = $user_data;
+
+			#is it a bot?
+			$this->is_bot();
+
 			return true;
 		}
 	}
@@ -501,6 +507,62 @@ class user
 		}
 
 		return false;
+	}
+	
+	
+	/**
+	 * Is current user a bot?
+	 * 
+	 * @param bool Check and return true or false or record bots visits if true
+	 * @return bool True if a bot, false if not
+	 */
+	public function is_bot($record = false)
+	{
+		global $SQL, $user, $dbprefix, $config;
+
+		#get information .. 
+		$agent	= $_SERVER['HTTP_USER_AGENT'];
+		$time	= time();
+		$bot_name = '';
+
+		#check
+		if (strpos($agent, 'Google') !== false)
+		{
+			$bot_name = 'google';
+		}
+		elseif (strpos($agent, 'Bing') !== false)
+		{
+			$bot_name = 'bing';
+		}
+
+		($hook = kleeja_run_hook('is_bot_func_before_qr')) ? eval($hook) : null; //run hook	
+
+		$this->data['is_bot'] =  $bot_name == '' ? false : true;
+
+		#if no recoring then exit
+		if(!$record || $bot_name == '')
+		{	
+			return $this->data['is_bot'];
+		}
+
+		#update stats
+		$update_query = array(
+								'UPDATE'	=> "{$dbprefix}stats",
+								'SET'		=> "last_$bot_name=$time, $bot_name_num=$bot_name_num+1"
+							);
+
+		($hook = kleeja_run_hook('qr_update_is_bot')) ? eval($hook) : null; //run hook	
+		$SQL->build($update_query);
+
+
+		#clean online table
+		if((time() - $config['last_online_time_update']) >= 3600)
+		{
+			#update last_online_time_update 
+			update_config('last_online_time_update', time());
+		}
+
+		return $this->data['is_bot'];
 	}
 }
 

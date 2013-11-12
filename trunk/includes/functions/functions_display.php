@@ -27,9 +27,7 @@ if (!defined('IN_COMMON'))
  */	
 function kleeja_header($title = '', $extra_head_code = '')
 {
-	global $user, $lang, $config;
-	global $extras;
-	global $STYLE_PATH;
+	global $user, $lang, $config, $extras;
 
 	#is user ? and username
 	$username = $user->is_user() ? $user->data['name'] : $lang['GUST'];
@@ -40,7 +38,7 @@ function kleeja_header($title = '', $extra_head_code = '')
 	#check for extra header 
 	$extras['header'] = empty($extras['header']) ? false : $extras['header'];
 
-	($hook = kleeja_run_hook('Saaheader_links_func')) ? eval($hook) : null; //run hook
+	($hook = kleeja_run_hook('kleeja_header_links_func')) ? eval($hook) : null; //run hook
 
 	
 	$current_page = ig('go') ? g('go', 'str') : (empty($_GET) ? 'index' : '');
@@ -49,7 +47,7 @@ function kleeja_header($title = '', $extra_head_code = '')
 	//kleeja_add_form_key('login');
 	//$tpl->assign("action_login", 'ucp.php?go=login' . (isset($_GET['return']) ? '&amp;return=' . htmlspecialchars($_GET['return']) : ''));
 
-	include STYLE_PATH_ABS . 'header.php';
+	include get_template_path('header.php');
 
 	($hook = kleeja_run_hook('kleeja_header_func')) ? eval($hook) : null; //run hook
 
@@ -64,10 +62,9 @@ function kleeja_header($title = '', $extra_head_code = '')
  */	
 function kleeja_footer()
 {
-	global $tpl, $SQL, $starttm, $config, $user, $lang, $olang;
-	global $script_encoding, $errorpage, $extras, $userinfo;
+	global $SQL, $starttm, $config, $user, $lang, $extras;
 
-	//show stats ..
+	#show stats ..
 	$page_stats = '';
 	if ($config['statfooter'] != 0 || DEV_STAGE) 
 	{
@@ -79,13 +76,13 @@ function kleeja_footer()
 		$page_stats		= "<strong>[</strong> Generation Time: $loadtime Sec  - Queries: $queries_num - Hook System:  $hksys <strong>]</strong>  " ;
 	}
 
-	$tpl->assign("page_stats", $page_stats);
+	//$tpl->assign("page_stats", $page_stats);
 
 	#if user is an admin, show admin in the bottom of all page
-	$tpl->assign("admin_page", (user_can('enter_acp') ? '<a href="' . ADMIN_PATH . '" class="admin_cp_link"><span>' . $lang['ADMINCP'] .  '</span></a>' : ''));
+	#$tpl->assign("admin_page", (user_can('enter_acp') ? '<a href="' . ADMIN_PATH . '" class="admin_cp_link"><span>' . $lang['ADMINCP'] .  '</span></a>' : ''));
 
 	//assign cron
-	$tpl->assign("run_queue", '<img src="' . $config['siteurl'] . 'queue.php?image.gif" width="1" height="1" alt="queue" />');
+	//$tpl->assign("run_queue", '<img src="' . $config['siteurl'] . 'queue.php?image.gif" width="1" height="1" alt="queue" />');
 
 
 	#if google analytics is enabled, show it
@@ -107,18 +104,17 @@ function kleeja_footer()
 		$googleanalytics .= '</script>' . "\n";
 	}
 
-	$tpl->assign("googleanalytics", $googleanalytics);	
+	//$tpl->assign("googleanalytics", $googleanalytics);	
 
-	//check for extra header 
+	#check for extra header 
 	if(empty($extras['footer']))
 	{
 		$extras['footer'] = false;
 	}
 
-
 	($hook = kleeja_run_hook('kleeja_footer_func')) ? eval($hook) : null; //run hook
 
-	include STYLE_PATH_ABS . 'footer.php';
+	include get_template_path('footer.php');
 
 	#at end, close sql connections & etc
 	garbage_collection();
@@ -129,27 +125,60 @@ function kleeja_footer()
  * Get the link of any kleeja page, respect rewrite mod option
  * 
  * @param string $name The page you want the url of.
+ * @param bool $get_default Get default link despite rewrite mod option 
  * @return string The link  
  */
-function get_url_of($name)
+function get_url_of($name, $get_default = false)
 {
-	$side_menu = array(
-		1 => array('name'=>'profile', 'title'=>$lang['PROFILE'], 'url'=>$config['mod_writer'] ? 'profile.html' : 'ucp.php?go=profile', 'show'=>$user->is_user()),
-		2 => array('name'=>'fileuser', 'title'=>$lang['YOUR_FILEUSER'], 'url'=>$config['mod_writer'] ? 'fileuser.html' : 'ucp.php?go=fileuser', 'show'=>$config['enable_userfile'] && user_can('access_fileuser')),
-		3 => $user->is_user() ?
-			 array('name'=>'logout', 'title'=>$lang['LOGOUT'], 'url'=>$config['mod_writer'] ? 'logout.html' : 'ucp.php?go=logout', 'show'=>true) : 
-			 array('name'=>'login', 'title'=>$lang['LOGIN'], 'url'=>$config['mod_writer'] ? 'login.html' : 'ucp.php?go=login', 'show'=>true),
-		4 => array('name'=>'register', 'title'=>$lang['REGISTER'], 'url'=>$config['mod_writer'] ? 'register.html' : 'ucp.php?go=register', 'show'=>!$user->is_user() && $config['register']),
+	global $config;
+
+	$urls = array(
+		'profile' => array('ucp.php?go=profile', 'profile.html'),
+		'fileuser' => array('ucp.php?go=fileuser', 'fileuser.html'),
+		'logout' => array('ucp.php?go=logout', 'logout.html'),
+		'login' => array('ucp.php?go=login', 'login.html'),
+		'register' => array('ucp.php?go=register', 'register.html'),
+
+		'index' => array($config['siteurl'], $config['siteurl']),
+		'rules' => array('go.php?go=rules', 'rules.html'),
+		'guide' => array('go.php?go=guide', 'guide.html'),
+		'stats' => array('go.php?go=stats', 'stats.html'), 
+		'report' => array('go.php?go=report', 'report.html'),
+		'call' => array('go.php?go=call', 'call.html'),
 	);
 
-	$top_menu = array(
-		1 => array('name'=>'index', 'title'=>$lang['INDEX'], 'url'=>$config['siteurl'], 'show'=>true),
-		2 => array('name'=>'rules', 'title'=>$lang['RULES'], 'url'=>$config['mod_writer'] ? 'rules.html' : 'go.php?go=rules', 'show'=>true),
-		3 => array('name'=>'guide', 'title'=>$lang['GUIDE'], 'url'=>$config['mod_writer'] ? 'guide.html' : 'go.php?go=guide', 'show'=>true),
-		4 => array('name'=>'stats', 'title'=>$lang['STATS'], 'url'=>$config['mod_writer'] ? 'stats.html' : 'go.php?go=stats', 'show'=>$config['allow_stat_pg'] && user_can('access_stats')),
-		5 => array('name'=>'report', 'title'=>$lang['REPORT'], 'url'=>$config['mod_writer'] ? 'report.html' : 'go.php?go=report', 'show'=>user_can('access_report')),
-		6 => array('name'=>'call', 'title'=>$lang['CALL'], 'url'=>$config['mod_writer'] ? 'call.html' : 'go.php?go=call', 'show'=>user_can('access_call')),
-	);
+	($hook = kleeja_run_hook('get_url_of_func')) ? eval($hook) : null; //run hook
+
+	$link = $config['siteurl'];
+	if(isset($urls[$name]))
+	{
+		$link .= !$config['mod_writer'] || $get_default ? $urls[$name][0] : $urls[$name][1];
+	}
+
+	return $link;
+}
+
+
+/**
+ * Return the absoulte path of a template, if not exists get it from the parent style
+ *
+ * @param string $name The template name
+ * @return mixed Template path if exists or false if not 
+ */
+function get_template_path($name)
+{
+	if(file_exists(STYLE_PATH_ABS . $name))
+	{
+		return STYLE_PATH_ABS . $name;
+	}
+	else if(file_exists(PARENT_STYLE_PATH_ABS . $name))
+	{
+		return PARENT_STYLE_PATH_ABS . $name;
+	} 
+	else
+	{
+		return false; # or 404 template 
+	}
 }
 
 

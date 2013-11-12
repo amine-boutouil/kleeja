@@ -101,51 +101,7 @@ function clean_var($var, $type = 'str')
 	return '';
 }
 
-/**
-* For recording who onlines now .. 
-* TODO: move to usr class
-*/
-function kleeja_detecting_bots()
-{
-	global $SQL, $user, $dbprefix, $config, $klj_session;
 
-	// get information .. 
-	$agent	= $SQL->escape($_SERVER['HTTP_USER_AGENT']);
-	$time	= time();
-
-	//for stats 
-	if (strpos($agent, 'Google') !== false)
-	{
-		$update_query = array(
-								'UPDATE'	=> "{$dbprefix}stats",
-								'SET'		=> "last_google=$time, google_num=google_num+1"
-							);
-		($hook = kleeja_run_hook('qr_update_google_lst_num')) ? eval($hook) : null; //run hook
-		$SQL->build($update_query);
-	}
-	elseif (strpos($agent, 'Bing') !== false)
-	{
-		$update_query = array(
-								'UPDATE'	=> "{$dbprefix}stats",
-								'SET'		=> "last_bing=$time, bing_num=bing_num+1"
-							);
-		($hook = kleeja_run_hook('qr_update_bing_lst_num')) ? eval($hook) : null; //run hook	
-		$SQL->build($update_query);
-	}
-
-	//put another bots as a hook if you want !
-	($hook = kleeja_run_hook('anotherbots_onlline_func')) ? eval($hook) : null; //run hook
-
-	//clean online table
-	if((time() - $config['last_online_time_update']) >= 3600)
-	{
-		#what to add here ?
-		//update last_online_time_update 
-		update_config('last_online_time_update', time());
-	}
-
-	($hook = kleeja_run_hook('KleejaOnline_func')) ? eval($hook) : null; //run hook	
-}
 
 
 /**
@@ -188,6 +144,7 @@ function get_ban()
 
 /**
 * Run hooks of kleeja
+* @package plugins
 */
 function kleeja_run_hook($hook_name)
 {
@@ -308,42 +265,6 @@ function delete_cache($name, $all=false)
 	}
 
 	return $del;
-}
-
-/**
-* Try delete files or at least change its name.
-* for those who have dirty hosting 
-*/
-function kleeja_unlink($filepath, $cache_file = false)
-{
-	//99.9% who use this
-	if(function_exists('unlink'))
-	{
-		return @unlink($filepath);
-	}
-	//5% only who use this
-	//else if (function_exists('exec'))
-	//{
-	//	$out = array();
-	//	$return = null;
-	//	exec('del ' . escapeshellarg(realpath($filepath)) . ' /q', $out, $return);
-	//	return $return;
-	//}
-	//5% only who use this
-	//else if (function_exists('system'))
-	//{
-	//	$return = null;
-	//	system ('del ' . escapeshellarg(realpath($filepath)) . ' /q', $return);
-	//	return $return;
-	//}
-	//just rename cache file if there is new thing
-	else if (function_exists('rename') && $cache_file)
-	{
-		$new_name = substr($filepath, 0, strrpos($filepath, '/') + 1) . 'old_' . md5($filepath . time()) . '.php'; 
-		return rename($filepath, $new_name);
-	}
-
-	return false;
 }
 
 

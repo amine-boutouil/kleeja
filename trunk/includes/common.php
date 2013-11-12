@@ -236,13 +236,17 @@ if(empty($config['h_key']))
 	}
 }
 
-#Global vars for Kleeja
-$STYLE_PATH				= $config['siteurl'] . 'styles/' . (trim($config['style_depend_on']) == '' ? $config['style'] : $config['style_depend_on']) . '/';
-$THIS_STYLE_PATH		= $config['siteurl'] . 'styles/' . $config['style'] . '/';
-$THIS_STYLE_PATH_ABS	= PATH . 'styles/' . $config['style'] . '/';
+$config['style'] = 'default2';
+
+#style of Kleeja
+define('STYLE_PATH', $config['siteurl'] . 'styles/' . $config['style'] . '/');
+define('STYLE_PATH_ABS', PATH . 'styles/' . $config['style'] . '/');
+define('PARENT_STYLE_PATH', $config['siteurl'] . 'styles/' . (trim($config['style_depend_on']) == '' ? $config['style'] : $config['style_depend_on']) . '/');
+define('PARENT_STYLE_PATH_ABS', PATH . 'styles/' . (trim($config['style_depend_on']) == '' ? $config['style'] : $config['style_depend_on']) . '/');
+
 #style for admin
-$STYLE_PATH_ADMIN 		= $config['siteurl'] . 'admin/' . ADMIN_STYLE_NAME . '/';
-$STYLE_PATH_ADMIN_ABS	= PATH . 'admin/' . ADMIN_STYLE_NAME . '/';
+define('ADMIN_STYLE_PATH', $config['siteurl'] . 'admin/' . ADMIN_STYLE_NAME . '/');
+define('ADMIN_STYLE_PATH_ABS', PATH . 'admin/' . ADMIN_STYLE_NAME . '/');
 
 #get languge of common
 get_lang('common');
@@ -288,8 +292,6 @@ if (($stat_sizes >= ($config['total_size'] *(1048576))) && !defined('IN_LOGIN') 
 	kleeja_info($lang['SIZES_EXCCEDED'], $lang['STOP_FOR_SIZE']);
 }
 
-#TODO: move to usr class
-kleeja_detecting_bots();
 
 #check for rows per page number
 if(empty($perpage) || intval($perpage) == 0)

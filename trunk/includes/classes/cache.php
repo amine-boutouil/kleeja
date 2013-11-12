@@ -18,7 +18,9 @@ if (!defined('IN_COMMON'))
 }
 
 
-
+/**
+ * Kleeja cache system, it supports APC and file-based 
+ */
 class cache
 {
 	/**

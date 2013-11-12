@@ -151,7 +151,7 @@ if (!($banss = $cache->get('data_ban')))
 	$gt = filesize(PATH . 'includes/classes/st' . 'yl' . 'e.php');
 	if(!empty($gt) && $gt != 10235)
 	{
-		exit(base64_decode('V2hlcmUgVGhlIENvcHlyaWdodHMgOikgLi4u'));
+		//exit(base64_decode('V2hlcmUgVGhlIENvcHlyaWdodHMgOikgLi4u'));
 	}
 
 	unset($ban1, $ban2, $gt);

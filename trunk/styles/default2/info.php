@@ -1,3 +1,5 @@
+<?php if(!defined('IN_KLEEJA')) { exit; } ?>
+
 <!-- Infos template -->
 <div id="content_index">
 	<div class="clr"></div>
@@ -5,7 +7,7 @@
 		<dl id="system-message">
 			<dd class="info">
 				<ul>
-					<li>{text} !</li>
+					<li><?=$text?> !</li>
 				</ul>
 			</dd>
 		</dl>

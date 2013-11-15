@@ -300,10 +300,12 @@ switch (g('go', 'str', ''))
 		case 'fileuser': 
 
 		($hook = kleeja_run_hook('begin_fileuser')) ? eval($hook) : null; //run hook
+
+		
+		include PATH . 'includes/functions/functions_files.php';
 		
 		#page info
-		$current_template	= 'fileuser';
-		$H_FORM_KEYS = kleeja_add_form_key('fileuser');
+		$current_template	= 'fileuser.php';
 
 		$user_id_get	= g('id', 'int', false);
 		$user_id		= !$user_id_get && $user->is_user() ? $user->data['id'] : $user_id_get;
@@ -367,7 +369,7 @@ switch (g('go', 'str', ''))
 		$pagination		= new pagination($perpage, $nums_rows, $current_page);
 		$start			= $pagination->get_start_row();
 
-		$your_fileuser	= $config['siteurl'] . ($config['mod_writer'] ? 'fileuser-' . $user->data['id'] . '.html' : 'ucp.php?go=fileuser&amp;id=' .  $user->data['id']);
+		$your_fileuser_link= $config['siteurl'] . ($config['mod_writer'] ? 'fileuser-' . $user->data['id'] . '.html' : 'ucp.php?go=fileuser&amp;id=' .  $user->data['id']);
 		$total_pages	= $pagination->get_total_pages(); 
 		$pagination_link= $config['siteurl'] . ($config['mod_writer'] ?  'fileuser-' . $user_id  . '-'  : 'ucp.php?go=fileuser&amp;id=' . $user_id);
 		$linkgoto		= $config['siteurl'] . ($config['mod_writer'] ?  'fileuser-' . $user_id  . '-' . $current_page . '.html' : 'ucp.php?go=fileuser&amp;id=' . $user_id . '&amp;page=' . $current_page);
@@ -379,10 +381,10 @@ switch (g('go', 'str', ''))
 		{
 			$data_user['name'] = $user->usernamebyid($user_id);
 		}
-		$user_name = !$data_user['name'] ? false : $data_user['name'];
+		$username = !$data_user['name'] ? false : $data_user['name'];
 
 		#set page title
-		$current_title	= $lang['FILEUSER'] . ': ' . $user_name;
+		$current_title	= $lang['FILEUSER'] . ': ' . $username;
 
 		#there is result ? show them
 		if($nums_rows)
@@ -395,40 +397,15 @@ switch (g('go', 'str', ''))
 			$result	= $SQL->build($query);
 
 			$i = ($current_page * $perpage) - $perpage;
-			$tdnumi = $num = $files_num = $imgs_num = 0;
-			while($row=$SQL->fetch($result))
+			$sizes = $num = $files_num = $imgs_num = 0;
+			if (ip('submit_files') && $user_himself)
 			{
-				++$i;
-				$file_info = array('::ID::' => $row['id'], '::NAME::' => $row['name'], '::DIR::' => $row['folder'], '::FNAME::' => $row['real_filename'], '::EXT::'=>$row['type']);
-
-				$is_image = in_array(strtolower(trim($row['type'])), array('gif', 'jpg', 'jpeg', 'bmp', 'png')) ? true : false;
-				$url = $is_image ? kleeja_get_link('image', $file_info) : kleeja_get_link('file', $file_info);
-				$url_thumb = $is_image ? kleeja_get_link('thumb', $file_info) : kleeja_get_link('thumb', $file_info);
-				$url_fileuser = $is_image ? $url : (file_exists("images/filetypes/".  $row['type'] . ".png")? "images/filetypes/" . $row['type'] . ".png" : 'images/filetypes/file.png');
-
-				//make new lovely arrays !!
-				$arr[] 	= array(
-						'id'		=> $row['id'],
-						'name_img'	=> ($row['real_filename'] == '' ? (strlen($row['name']) > 40 ? substr($row['name'], 0, 40) . '...' : $row['name']) : (strlen($row['real_filename'] > 40) ? substr($row['real_filename'], 0, 40) . '...' : $row['real_filename'])),
-						'url_thumb_img'	=> '<a title="' . ($row['real_filename'] == '' ? $row['name'] : $row['real_filename']) . '"  href="' . $url . '" onclick="window.open(this.href,\'_blank\');return false;"><img src="' . $url_fileuser . '" alt="' . $row['type'] . '" /></a>',
-						'name_file'		=> '<a title="' . ($row['real_filename'] == '' ? $row['name'] : $row['real_filename']) . '"  href="' . $url . '" onclick="window.open(this.href,\'_blank\');return false;">' . ($row['real_filename'] == '' ? ((strlen($row['name']) > 40) ? substr($row['name'], 0, 40) . '...' : $row['name']) : ((strlen($row['real_filename']) > 40) ? substr($row['real_filename'], 0, 40) . '...' : $row['real_filename'])) . '</a>',
-						'url_thumb_file'=> '<a title="' . ($row['real_filename'] == '' ? $row['name'] : $row['real_filename']) . '"  href="' . $url . '" onclick="window.open(this.href,\'_blank\');return false;"><img src="' . $url_fileuser . '" alt="' . $row['type'] . '" /></a>',
-						'file_type'	=> $row['type'],
-						'uploads'	=> $row['uploads'],
-						'tdnum'		=> $tdnumi == 0 ? '<ul>': '',
-						'tdnum2'	=> $tdnumi == 4 ? '</ul>' : '',
-						'href'		=> $url,
-						'size'		=> Customfile_size($row['size']),
-						'time'		=> !empty($row['time']) ? kleeja_date($row['time']) : '...',
-						'thumb_link'=> $is_image ? $url_thumb : $url_fileuser,
-						'is_image'	=> $is_image,
-					);
-
-				$tdnumi = $tdnumi == 2 ? 0 : $tdnumi+1;
-				$sizes = 0;
-				
-				if (ip('submit_files') && $user_himself)
+				while($row=$SQL->fetch($result))
 				{
+					++$i;
+					$sizes = 0;
+				
+				
 					($hook = kleeja_run_hook('submit_in_fileuser')) ? eval($hook) : null; //run hook	
 
 					//check for form key
@@ -449,7 +426,7 @@ switch (g('go', 'str', ''))
 						}
 
 						$ids[] = $row['id'];
-						if($is_image)
+						if(is_image($row['type']))
 						{
 							$imgs_num++;
 						}
@@ -459,15 +436,15 @@ switch (g('go', 'str', ''))
 						}
 
 						$sizes += $row['size'];
-					}
-				}
-			}
+					}#if ip del_
+				}#while
+			}#if submit
 
-			$SQL->free($result_p);
-			$SQL->free($result);
+			#$SQL->free($result_p);
+			#$SQL->free($result);
 
 			#after submit
-			if (ip('submit_files') && $user_himself)
+			if(ip('submit_files') && $user_himself)
 			{
 				#no files to delete
 				if(isset($ids) && !empty($ids))
@@ -679,7 +656,7 @@ switch (g('go', 'str', ''))
 		}
 
 		#page info
-		$current_template		= 'get_pass';
+		$current_template	= 'get_pass';
 		$current_title		= $lang['GET_LOSTPASS'];
 		$action		= 'ucp.php?go=get_pass';
 		$H_FORM_KEYS = kleeja_add_form_key('get_pass');

@@ -459,11 +459,11 @@ function kleeja_check_form_key($form_name, $require_time = 150 /*seconds*/ )
  * Files can be many links styles, so this will generate the current style of link.
  *
  * @param string $pid The type of link to return, i.e. thumb or image ...
- * @param array $extra The file information, like filename, file id
+ * @param array $file_info The file information, like filename, file id
  * @return string The link
  */
 
-function kleeja_get_link($pid, $extra = array())
+function kleeja_get_link($pid, $file_info = array())
 {
 	global $config;
 		
@@ -523,14 +523,25 @@ function kleeja_get_link($pid, $extra = array())
 				)
 		);
 
+	#file info as params
+	$keys2replace = array('name' => '::NAME::', 'real_filename'=>'::FNAME::', 'id'=>'::ID::', 'type'=>'::EXT::', 'folder'=>'::DIR::', 'code_del'=>'::CODE::');
 
 	#add another type of links if you want
 	#if $config['id_form']  == 'another things' : do another things .. 
 	($hook = kleeja_run_hook('kleeja_get_link_d_func')) ? eval($hook) : null; //run hook
 
-    
+
+	#if the file infos gives as regular params, then change them
+	foreach($keys2replace as $k=>$v)
+	{
+		if(array_key_exists($k, $file_info))
+		{
+			$file_info[$v] = $file_info[$k];
+		}
+	}
+
 	#Is this file has extension that require to be served as a direct link
-	if(in_array(strtolower($extra['::EXT::']), explode(',', $config['imagefolderexts'])))
+	if(in_array(strtolower($file_info['::EXT::']), explode(',', $config['imagefolderexts'])))
 	{
 		#then change it
 		$id_form = 'direct';
@@ -539,14 +550,14 @@ function kleeja_get_link($pid, $extra = array())
 	#html urls, use - instead of . in name
 	if($link_type == 'html' && $id_form != 'direct')
 	{
-		$extra['::NAME::'] = str_replace('.', '-', $extra['::NAME::']);
+		$file_info['::NAME::'] = str_replace('.', '-', $file_info['::NAME::']);
 	}
- 
+
  	#now choose the link
 	$link = $links[$id_form][$link_type][$pid];
-  
+
   	#now subtitue file inforamtion in the link and return it
-	$return = $config['siteurl'] . str_replace(array_keys($extra), array_values($extra), $link);
+	$return = $config['siteurl'] . str_replace(array_keys($file_info), array_values($file_info), $link);
 
 
 	($hook = kleeja_run_hook('kleeja_get_link_func_rerun')) ? eval($hook) : null; //run hook
@@ -858,7 +869,7 @@ function kleeja_date($time, $human_time = true, $format = false)
  */
 function time_zones()
 {
-	return array(
+	$zones = array(
 		'Kwajalein' => -12.00,
 		'Pacific/Midway' => -11.00,
 		'Pacific/Honolulu' => -10.00,
@@ -894,5 +905,47 @@ function time_zones()
 		'Pacific/Fiji' => 12.00,
 		'Pacific/Tongatapu' => 13.00
 	);
+	
+	($hook = kleeja_run_hook('time_zones_func')) ? eval($hook) : null; //run hook
+	
+	return $zones;
 }
 
+/**
+ * Check if current extension is an image or not
+ *
+ * @param string $ext The file extension i.e. gif 
+ * @return bool True if image, False if not
+ */
+function is_image($ext)
+{
+	$check = in_array(strtolower(trim($ext)), array('gif', 'jpg', 'jpeg', 'bmp', 'png')) ? true : false;
+
+	($hook = kleeja_run_hook('is_image_func')) ? eval($hook) : null; //run hook
+
+	return $check;
+}
+
+/**
+ * Shorten A string
+ *
+ * @param string $text The strings to shorten
+ * @return string Short string
+ */
+function shorten_text($text, $until = 30)
+{
+	$until = $until < 4 ? 4 : $until;
+
+	if (strlen($text) >= $until)
+	{
+		$return =  substr($text, 0, $until-3). " ... " . substr($text, -3);
+	}
+	else
+	{
+		$return = $text;
+	}
+
+	($hook = kleeja_run_hook('shorten_text_func')) ? eval($hook) : null; //run hook
+
+	return $return;
+}

@@ -1,11 +1,12 @@
-<!-- Users Files template -->
+<?php if(!defined('IN_KLEEJA')) { exit; } ?>
 
+<!-- Users Files template -->
 <IF NAME="user_himself">
 <script type="text/javascript">
 <!--
 	function confirm_from()
 	{
-		if(confirm('{lang.ARE_YOU_SURE_DO_THIS}'))
+		if(confirm('<?=$lang['ARE_YOU_SURE_DO_THIS']?>'))
 			return true;
 		else
 			return false;
@@ -18,7 +19,7 @@
 <div id="content" class="border_radius filecp-page">
 
 		<!-- title -->
-		<h1 class="title"><IF NAME="user_himself">&#9679; {lang.YOUR_FILEUSER}<ELSE>&#9679; {title}</IF></h1>
+		<h1 class="title"><?php if($user_himself):?>&#9679; <?=$lang['YOUR_FILEUSER']?><?php else:?>&#9679; <?=$current_title?><?php endif;?></h1>
 		<!-- @end-title -->
 
 		<!-- line top -->
@@ -29,101 +30,125 @@
 		<!-- box user name and all files  -->
 		<div id="boxfileuser">
 				<div class="box_user">
-				<img class="right pngfix" src="{STYLE_PATH}images/imguser.png" alt="image user" />
-						<div class="public">{lang.PUBLIC_USER_FILES}</div>
-						<div class="uname">{user_name}</div>
+				<img class="right pngfix" src="<?=STYLE_PATH?>images/imguser.png" alt="image user" />
+						<div class="public"><?=$lang['PUBLIC_USER_FILES']?></div>
+						<div class="uname"><?=$username?></div>
 				</div>
 				<div class="us3r_n4me">
-						<img class="right pngfix" src="{STYLE_PATH}images/boxfileuser.png" alt="files number" />
-						<div class="public">{lang.ALL_FILES}</div>
-						<div class="nums">{nums_rows}</div>
+						<img class="right pngfix" src="<?=STYLE_PATH?>images/boxfileuser.png" alt="files number" />
+						<div class="public"><?=$lang['ALL_FILES']?></div>
+						<div class="nums"><?=$nums_rows?></div>
 				</div>
 				<div class="clr"></div>
 		</div>
 		<!-- @end-box-user-name-and-all-files -->
 		</IF>
 
-		<IF NAME="user_himself">
-			<form name="c" action="{action}" method="post" onsubmit="javascript:return confirm_from();">
-		</IF>
+		<?php if($user_himself):?>
+		<form name="c" action="<?=$action?>" method="post" onsubmit="javascript:return confirm_from();">
+		<?php endif;?>
 
-		<IF NAME="no_results">
+		<?php if($no_results):?>
 		<!-- no files user -->
 		<div id="boxfileuser" style="text-align:center">
-			<img class="pngfix" src="{STYLE_PATH}images/warning_nofile.png" />
+			<img class="pngfix" src="<?=STYLE_PATH?>images/warning_nofile.png" />
 			<br />
-			<h1>{lang.NO_FILE_USER}</h1>
+			<h1><?=$lang['NO_FILE_USER']?></h1>
 		</div>
 		<!-- @end-no-files-user -->
 
-		<ELSE>
+		<?php else:?>
 
 		<!-- fileuser_files -->
 		<div class="fileuser_files">
 			<div class="fileuser-thumbs">
-				<LOOP NAME="arr">
-					{{tdnum}}
-					<li id="su[{{id}}]" class="<IF LOOP="is_image">is_image<ELSE>is_file</IF>">
-					<IF LOOP="is_image">
-						<a href="{{href}}" target="_blank" title="{lang.FILEUPS}:{{uploads}}, {lang.FILESIZE}:{{size}}, {lang.FILEDATE}:{{time}}">
-							<img src="{{thumb_link}}" alt="{lang.FILEUPS}:{{ups}}, {lang.FILESIZE}:{{size}}, {lang.FILEDATE}:{{time}}" />
+			<ul>
+			<?php /* The loop */ $loop_number = 0;?>
+			<?php while($file=$SQL->fetch($result)):?>
+					
+					<?php /* First row */ ?>
+					<?php if($loop_number == 1):?>
+						
+					<?php endif;?>
+					
+					<?php /* Every 4 rows */ ?>
+					<?php if($loop_number % 4):?>
+
+					<?php endif;?>
+					
+					
+					<li id="su[<?=$file['id']?>]" class="<?php if(is_image($file['type'])):?>is_image<?php else:?>is_file<?php endif;?>">
+					<?php if(is_image($file['type'])):?>
+						<a href="<?=kleeja_get_link('image', $file)?>" target="_blank" title="<?=$lang['FILEUPS']?>: <?=$file['uploads']?>, <?=$lang['FILESIZE']?>: <?=readable_size($file['size'])?>, <?=$lang['FILEDATE']?>: <?=kleeja_date($file['time'])?>">
+							<img src="<?=kleeja_get_link('thumb', $file)?>" />
 						</a>
-					<ELSE>
-						<div class="filebox" style="background-image:url({{thumb_link}})">
+					<?php else:?>
+						<div class="filebox" style="background-image:url(images/filetypes/file.png)">
 							<div class="this_file">
-								{{name_file}}
+								<a href="<?=kleeja_get_link('file', $file)?>" target="_blank"><?=shorten_text($file['real_filename'])?></a>
 
 								<div class="fileinfo">
-								<span>{lang.FILEUPS}: {{uploads}}</span>
-								<span>{lang.FILESIZE}: {{size}}</span>
-								<span>{lang.FILEDATE}: {{time}}</span>
+								<span><?=$lang['FILEUPS']?>: <?=$file['uploads']?></span>
+								<span><?=$lang['FILESIZE']?>: <?=readable_size($file['size'])?></span>
+								<span><?=$lang['FILEDATE']?>: <?=kleeja_date($file['time'])?></span>
 								</div>
 							</div>
 						</div>
-					</IF>
-					<IF NAME="user_himself">
+					<?php endif?>
+					<?php if($user_himself):?>
 						<p class="kcheck">
-							<input id="del_{{id}}" name="del_{{id}}" type="checkbox" value="{{id}}" rel="_del"  onclick="change_color(this,'su[{{id}}]');" />
+							<input id="del_<?=$file['id']?>" name="del_<?=$file['id']?>" type="checkbox" value="<?=$file['id']?>" rel="_del"  onclick="change_color(this,'su[<?=$file['id']?>]');" />
 						</p>
-					</IF>
+					<?php endif;?>
 					</li>
-					{{tdnum2}}
-				</LOOP>
+	
+
+					<?php /* Last Row */ ?>
+					<?php if($loop_number == $perpage):?>
+						
+					<?php endif?>
+			
+			<?php $loop_number++; ?>
+			<?php endwhile;?>
+			</ul>
 			</div>
 			<div class="clr"></div>
 		</div>
 		 <!-- end#fileuser_files-->
 
-		</IF>
+		<?php endif;?>
 
 
 		<div class="clr"></div><br />
 
 		<!-- pagination -->
-		{page_nums}
+		<?=$page_nums?>
 		<!-- @end-pagination -->
 
 		<div class="clr"></div><br />
 
-		<IF NAME="user_himself">
+		<?php if($user_himself):?>
 		<!-- button -->
-		<div class="left_button"><input type="submit" name="submit_files" value="{lang.DEL_SELECTED}" /></div>
-		<div class="right_button">[ <a href="javascript:void(0);" onclick="checkAll(document.c, '_del', 'su');" title="{lang.CHECK_ALL}">{lang.CHECK_ALL}</a> ]</div>
-		{H_FORM_KEYS}
+		<div class="left_button"><input type="submit" name="submit_files" value="<?=$lang['DEL_SELECTED']?>" /></div>
+		<div class="right_button">[ <a href="javascript:void(0);" onclick="checkAll(document.c, '_del', 'su');"><?=$lang['CHECK_ALL']?></a> ]</div>
+
 		<!-- @end-button -->
+		
+		
+		<?=kleeja_add_form_key('fileuser')?>
 		</form>
 		
 		<!-- link user -->
 		<div id="filecplink">
 				<div class="clr"></div>
 						<fieldset>
-								<legend class="copylink">{lang.COPY_AND_GET_DUD}</legend>
-								<input class="link_user" readonly="readonly" onclick="this.select();" type="text" name="option" value="{your_fileuser}" />
+								<legend class="copylink"><?=$lang['COPY_AND_GET_DUD']?></legend>
+								<input class="link_user" readonly="readonly" onclick="this.select();" type="text" name="option" value="<?=$your_fileuser_link?>" />
 						 </fieldset>
 				<div class="clr"></div>
 		</div>
 		<!-- @end-link-user -->
-		</IF>
+		<?php endif;?>
  
 		<div class="clr"></div>
    

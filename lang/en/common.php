@@ -1,16 +1,24 @@
 <?php
-//
-// kleeja language file
-// English
-// By: Kleeja team & (NK, n.k@cityofangelz.com)
-//
+/**
+ * kleeja language file
+ * @package Languages
+ * @subpackage English
+ * 
+ * @author Kleeja team & (NK, n.k@cityofangelz.com)
+ */
 
+/**
+ * @ignore
+ */
 if (!defined('IN_COMMON'))
+{
 	exit;
+}
 
 if (empty($lang) || !is_array($lang))
+{
 	$lang = array();
-
+}
 
 
 $lang = array_merge($lang, array(
@@ -45,7 +53,7 @@ $lang = array_merge($lang, array(
 	'EMPTY_PASSWORD' 		=> 'Please enter your password',
 	'LOSS_PASSWORD' 		=> 'Forgot Password?',
 	'LOGINED_BEFORE' 		=> 'You are already logged in.',
-	'LOGOUT' 				=> 'Logout ',
+	'LOGOUT' 				=> 'Logout',
 	'EMPTY_FIELDS' 			=> 'Error ... Missing Fields!',
 	'LOGIN_SUCCESFUL' 		=> 'You have logged in successfully.',
 	'LOGIN_ERROR' 			=> 'Error ... cannot login!',
@@ -229,8 +237,8 @@ $lang = array_merge($lang, array(
 	'SCRIPT_AUTH_PATH_WRONG'	=> 'Path of %s is not valid, change it now.',
 	'SHOW_MY_FILECP'			=> 'Show my files',
 	'PASS_CHANGE'				=> 'Change password',
-	'EDIT_U_AVATER'				=> 'ُEdit your avater',
-	'EDIT_U_AVATER_LINK'		=> 'to change your avater, go to this site %1$s" Click Here "s%2$s then register via a Email that you register in the uploader site.',
+#	'EDIT_U_AVATER'				=> 'ُEdit your avater',
+#	'EDIT_U_AVATER_LINK'		=> 'to change your avater, go to this site %1$s" Click Here "s%2$s then register via a Email that you register in the uploader site.',
 	'MOST_EVER_ONLINE'			=> 'Most registered users ever online was',
 	'ON'						=> 'on',
 	'LAST_REG'					=> 'newest member',
@@ -255,7 +263,7 @@ $lang = array_merge($lang, array(
 	'CHOSE_F'					=> 'Please select at least one file',
 	'NO_REPEATING_UPLOADING'	=> 'The page should NOT be refreshed after upload!.',
 	'NOTE_CODE' 				=> 'Enter the letters shown in the image accurately',
-	'USER_LOGIN'				=> ' Login + Members Only ',
+	'USER_LOGIN'				=> 'Login + Members Only',
 	'FILES_DELETED' 			=> 'Files successfully deleted.',
 	'GUIDE_GROUPS' 			    => 'Group',
 	'ALL_FILES' 			    => 'Number of all files',
@@ -275,7 +283,7 @@ $lang = array_merge($lang, array(
 	'YOU_HAVE_TO_WAIT'			=> 'Wait %s seconds .. then try to re-upload your files',
 	'REPEAT_PASS'				=> 'Repeat Password',
 	'PASS_NEQ_PASS2'			=> 'Passwords are not equal !',
-	'LOAD_IS_HIGH_NOW'			=> 'Our website facing very high load right now !, please wait and try refresh this page again.',
+#	'LOAD_IS_HIGH_NOW'			=> 'Our website facing very high load right now !, please wait and try refresh this page again.',
 	#1.5
 	'GROUP'						=> 'Group',
 	'ADMINS'					=> 'Admins',

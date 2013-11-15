@@ -16,11 +16,9 @@
 	<dl id="system-message">
 		<dd class="error">
 			<ul>
-				<li>
 				<?php foreach($ERRORS as $n=>$error):?>
-				<strong><?=$lang['INFORMATION']?> </strong> <?=$error?><br />
+				<li> <strong><?=$lang['INFORMATION']?> </strong> <?=$error?></li>
 				<?php endforeach;?>
-				</li>
 			</ul>
 		</dd>
 	</dl>

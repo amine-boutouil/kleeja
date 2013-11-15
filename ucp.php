@@ -36,11 +36,11 @@ switch (g('go', 'str', ''))
 	case 'login' : 
 
 		#page info
-		$current_template				= 'login';
-		$current_title				= $lang['LOGIN'];
+		$current_template	= 'login.php';
+		$current_title		= $lang['LOGIN'];
 		$action				= 'ucp.php?go=login' . (ig('return') ? '&amp;return=' . g('return') : '');
 		$forget_pass_link	= !empty($forgetpass_script_path) && (int) $config['user_system'] != 1 ? $forgetpass_script_path : 'ucp.php?go=get_pass';
-		$H_FORM_KEYS		= kleeja_add_form_key('login');
+
 		#no error yet 
 		$ERRORS = false;
 
@@ -51,7 +51,7 @@ switch (g('go', 'str', ''))
 		($hook = kleeja_run_hook('login_before_submit')) ? eval($hook) : null; //run hook
 		
 		#already a user? 
-		if ($user->name())
+		if ($user->is_user())
 		{
 			($hook = kleeja_run_hook('login_logon_before')) ? eval($hook) : null; //run hook
 
@@ -104,10 +104,10 @@ switch (g('go', 'str', ''))
 		case 'register' : 
 
 		#page info
-		$current_template	= 'register';
+		$current_template	= 'register.php';
 		$current_title	= $lang['REGISTER'];
 		$action	= 'ucp.php?go=register';
-		$H_FORM_KEYS = kleeja_add_form_key('register');
+
 		#no error yet 
 		$ERRORS = false;
 
@@ -656,10 +656,9 @@ switch (g('go', 'str', ''))
 		}
 
 		#page info
-		$current_template	= 'get_pass';
+		$current_template	= 'get_pass.php';
 		$current_title		= $lang['GET_LOSTPASS'];
-		$action		= 'ucp.php?go=get_pass';
-		$H_FORM_KEYS = kleeja_add_form_key('get_pass');
+		$action	= 'ucp.php?go=get_pass'; 
 		#no error yet 
 		$ERRORS = false;
 
@@ -714,7 +713,7 @@ switch (g('go', 'str', ''))
 		}
 
 		#logon already
-		if ($user->name())
+		if ($user->is_user())
 		{
 			($hook = kleeja_run_hook('get_pass_logon_before')) ? eval($hook) : null; //run hook
 			kleeja_info($lang['LOGINED_BEFORE']);

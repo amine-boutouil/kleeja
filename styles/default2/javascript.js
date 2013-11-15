@@ -38,7 +38,7 @@
 		//Get a reference to CAPTCHA image
 		img = document.getElementById('kleeja_img_captcha'); 
 		 //Change the image
-		img.src = captcha_file + '&' + Math.random();
+		img.src = captcha_file + '?' + Math.random();
 	}
 
 	//javascript for tabs

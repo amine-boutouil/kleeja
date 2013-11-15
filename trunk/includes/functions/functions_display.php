@@ -179,7 +179,9 @@ function get_template_path($name)
 	} 
 	else
 	{
-		return false; # or 404 template 
+		global $text;
+		$text = 'Requested "' . $name . '" template doesnt exists or an empty!';
+		return get_template_path('error.php');
 	}
 }
 
@@ -217,7 +219,7 @@ function readable_size($size)
  * @param string $style [optional] The template of the inforamtion message
  * @return void
  */
-function kleeja_error($text, $title = '', $exit = true, $redirect = false, $rs = 2, $extra_code_header, $style = 'error.php')
+function kleeja_error($text, $title = '', $exit = true, $redirect = false, $rs = 2, $extra_code_header = '', $style = 'error.php')
 {
 	global $SQL;
 

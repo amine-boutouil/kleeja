@@ -254,16 +254,13 @@ class user
 	{
 		($hook = kleeja_run_hook('logout_func_usr_class')) ? eval($hook) : null; //run hook
 
-		//acp
-		if(user_can('enter_acp') && !empty($_SESSION['ADMINLOGIN']))
-		{ 
-			$this->logout_cp();
-		}
+		#acp
+		$this->logout_cp();
 
 		session_unset();
 		session_destroy();
 
-		//is ther any cookies	
+		#is ther any cookies	
 		$this->kleeja_set_cookie('ulogu', '', time() - 31536000);//31536000 = year
 	}
 

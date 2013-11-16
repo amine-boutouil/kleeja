@@ -85,17 +85,15 @@ class kupdate
 		global $dbprefix, $SQL, $lang, $config;
 
 		$ftp = $this->check_what_method();
+
+		$v = $v['version_number'];
 		//$this->f_method = 'zfile';  //standard
 
 		if($ftp && $this->is_ftp_supported)
 		{
 			$this->f_method = 'kftp';
 
-			if(!empty($this->info))
-			{
-				$this->info = $this->info;
-			}
-			else if(!empty($config['ftp_info']))
+			if(!empty($config['ftp_info']))
 			{
 				$ftp_info = @unserialize($config['ftp_info']);
 				$this->info = $ftp_info;
@@ -119,7 +117,16 @@ class kupdate
 				}
 
 				$b_url	= empty($_SERVER['SERVER_NAME']) ? $config['siteurl'] : $_SERVER['SERVER_NAME'];
-				$data = fetch_remote_file('http://www.kleeja.com/check_vers2/?i=' . urlencode($b_url));
+
+				if(defined("DEV_STAGE"))
+				{
+					
+					$data = fetch_remote_file('http://localhost/saanina-kleeja/check_vers2/?i=' . urlencode($b_url));
+				}
+				else
+				{
+					$data = fetch_remote_file('http://www.kleeja.com/check_vers2/?i=' . urlencode($b_url));
+				}
 
 				if($data != false)
 				{
@@ -186,8 +193,6 @@ class kupdate
 				}
 				
 
-
-				# code...
 				break;
 
 			case '4': //functions 
@@ -218,7 +223,6 @@ class kupdate
 				}
 				
 
-				# code...
 				break;
 
 			case '5':
@@ -242,9 +246,7 @@ class kupdate
 				}
 
 				return $NOTES_CUP;
-				
 
-				# code...
 				break;
 			case '6':   //finish delete temps show results 
 				# code...

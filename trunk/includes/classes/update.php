@@ -13,7 +13,13 @@ if (!defined('IN_COMMON'))
 	exit();
 }
 
+/*
 
+LATER :
+
+ZIP must be deleted .. 
+
+ */
 @set_time_limit(0); 
 
 

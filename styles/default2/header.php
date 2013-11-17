@@ -63,17 +63,17 @@
 	<!-- begin Top Navigation -->
 	<div class="top_nav">
 		<ul class="menu">
-		<li><a href="<?php echo get_url_of('index');?>"<?php if($current_page == 'index'):?> class="current"<?php endif;?>><?=$lang['INDEX']?></a></li>
-		<li><a href="<?php echo get_url_of('rules');?>"<?php if($current_page == 'rules'):?> class="current"<?php endif;?>><?=$lang['RULES']?></a></li>
-		<li><a href="<?php echo get_url_of('guide');?>"<?php if($current_page == 'guide'):?> class="current"<?php endif;?>><?=$lang['GUIDE']?></a></li>
+		<li><a href="<?=get_url_of('index')?>"<?php if($current_page == 'index'):?> class="current"<?php endif;?>><?=$lang['INDEX']?></a></li>
+		<li><a href="<?=get_url_of('rules')?>"<?php if($current_page == 'rules'):?> class="current"<?php endif;?>><?=$lang['RULES']?></a></li>
+		<li><a href="<?=get_url_of('guide')?>"<?php if($current_page == 'guide'):?> class="current"<?php endif;?>><?=$lang['GUIDE']?></a></li>
 		<?php if($config['allow_stat_pg'] && user_can('access_stats')):?>
-		<li><a href="<?php echo get_url_of('stats');?>"<?php if($current_page == 'stats'):?> class="current"<?php endif;?>><?=$lang['STATS']?></a></li>
+		<li><a href="<?=get_url_of('stats')?>"<?php if($current_page == 'stats'):?> class="current"<?php endif;?>><?=$lang['STATS']?></a></li>
 		<?php endif;?>
 		<?php if(user_can('access_report')):?>
-		<li><a href="<?php echo get_url_of('report');?>"<?php if($current_page == 'report'):?> class="current"<?php endif;?>><?=$lang['REPORT']?></a></li>
+		<li><a href="<?=get_url_of('report')?>"<?php if($current_page == 'report'):?> class="current"<?php endif;?>><?=$lang['REPORT']?></a></li>
 		<?php endif;?>
 		<?php if(user_can('access_call')):?>
-		<li><a href="<?php echo get_url_of('call');?>"<?php if($current_page == 'call'):?> class="current"<?php endif;?>><?=$lang['CALL']?></a></li>
+		<li><a href="<?=get_url_of('call')?>"<?php if($current_page == 'call'):?> class="current"<?php endif;?>><?=$lang['CALL']?></a></li>
 		<?php endif;?>
 		<?php ($hook = kleeja_run_hook('header_template_top_menu')) ? eval($hook) : null; ?>
 		</ul>
@@ -99,15 +99,15 @@
 		<div id="sidebar_box">
 		<ul class="menu">
 			<?php if($user->is_user()):?>
-			<li><a href="<?php echo get_url_of('profile');?>"<?php if($current_page == 'profile'):?> class="current"<?php endif;?>><?=$lang['PROFILE']?></a></li>
+			<li><a href="<?=get_url_of('profile')?>"<?php if($current_page == 'profile'):?> class="current"<?php endif;?>><?=$lang['PROFILE']?></a></li>
 				<?php if($config['enable_userfile'] && user_can('access_fileuser')):?>
-				<li><a href="<?php echo get_url_of('fileuser');?>"<?php if($current_page == 'fileuser'):?> class="current"<?php endif;?>><?=$lang['YOUR_FILEUSER']?></a></li>
+				<li><a href="<?=get_url_of('fileuser')?>"<?php if($current_page == 'fileuser'):?> class="current"<?php endif;?>><?=$lang['YOUR_FILEUSER']?></a></li>
 				<?php endif;?>
-			<li><a href="<?php echo get_url_of('logout');?>"<?php if($current_page == 'logout'):?> class="current"<?php endif;?>><?=$lang['LOGOUT']?> [ <?=$user->data['name']?> ]</a></li>
+			<li><a href="<?=get_url_of('logout')?>"<?php if($current_page == 'logout'):?> class="current"<?php endif;?>><?=$lang['LOGOUT']?> [ <?=$user->data['name']?> ]</a></li>
 			<?php else:?>
-			<li><a href="<?php echo get_url_of('login');?>"<?php if($current_page == 'login'):?> class="current"<?php endif;?>><?=$lang['LOGIN']?></a></li>
+			<li><a href="<?=get_url_of('login')?>"<?php if($current_page == 'login'):?> class="current"<?php endif;?>><?=$lang['LOGIN']?></a></li>
 				<?php if($config['register']):?>
-				<li><a href="<?php echo get_url_of('register');?>"<?php if($current_page == 'register'):?> class="current"<?php endif;?>><?=$lang['REGISTER']?></a></li>
+				<li><a href="<?=get_url_of('register')?>"<?php if($current_page == 'register'):?> class="current"<?php endif;?>><?=$lang['REGISTER']?></a></li>
 				<?php endif;?>
 			<?php endif;?>
 			<?php ($hook = kleeja_run_hook('header_template_side_menu')) ? eval($hook) : null; ?>

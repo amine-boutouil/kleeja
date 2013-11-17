@@ -35,12 +35,12 @@ $extra_code_in_header = '';
  */
 switch (g('go', 'str', ''))
 {
-	case 'exts' :
-	case 'guide' :
+	case 'exts':
+	case 'guide':
 
 		#page info
-		$stylee	= 'guide';
-		$titlee	= $lang['GUIDE'];
+		$current_template	= 'guide.php';
+		$current_title = $lang['GUIDE'];
 
 		#orgnize the extensions to be shown in categories
 		$tgroups = $ttgroups = array();
@@ -54,20 +54,12 @@ switch (g('go', 'str', ''))
 				continue;
 			}
 
-			#TODO: if no exts, show that
-			foreach($d_groups[$gid]['exts'] as $ext=>$size)
-			{
-				$ttgroups[] = array(
-									'ext'	=> $ext,
-									'size'	=> Customfile_size($size),
-									'group'	=> $gid,
-									'group_name'=> preg_replace('!{lang.([A-Z0-9]+)}!e', '$lang[\'\\1\']', $d_groups[$gid]['data']['group_name']),
-									'most_firstrow'=> $same_group == 0 ? true : false,
-									'firstrow'=> $same_group ==0 or $same_group != $gid ? true : false,
-									'rando'	=> $rando,
-				);
-				$same_group = $gid;
-			}
+			$guide_exts[$gid] = array(
+				'group_name' => preg_replace('!{lang.([A-Z0-9]+)}!e', '$lang[\'\\1\']', $d_groups[$gid]['data']['group_name']),
+				'exts' => $d_groups[$gid]['exts']
+			);
+
+
 			$rando = $rando ? 0 : 1;
 		}
 
@@ -78,13 +70,12 @@ switch (g('go', 'str', ''))
 	case 'report' :
 
 		#page info
-		$stylee	= 'report';
-		$titlee	= $lang['REPORT'];
+		$current_template	= 'report.php';
+		$current_title		= $lang['REPORT'];
 		$id_d	= ig('id') ? g('id', 'int') : p('rid', 'int', 0);
 		$url_id	= $config['mod_writer'] == 1 ? $config['siteurl'] . 'download' . $id_d . '.html' : $config['siteurl'] . 'do.php?id=' . $id_d;
 		$action	= $config['siteurl'] . 'go.php?go=report';
-		$H_FORM_KEYS	= kleeja_add_form_key('report');
-		$NOT_USER		= !$user->name() ? true : false; 
+
 		$s_url			= p('surl', 'str', '');
 
 		#Does this file exists ?
@@ -108,7 +99,7 @@ switch (g('go', 'str', ''))
 			else
 			{
 				($hook = kleeja_run_hook('not_exists_qr_report_go_id')) ? eval($hook) : null; //run hook
-				kleeja_err($lang['FILE_NO_FOUNDED']);
+				kleeja_error($lang['FILE_NO_FOUNDED']);
 			}
 			$SQL->free($result);
 		}
@@ -142,16 +133,16 @@ switch (g('go', 'str', ''))
 			{
 				$ERRORS['captcha']	= $lang['WRONG_VERTY_CODE'];
 			}
-			if ($t_rname == '' && $NOT_USER)
+			if ($t_rname == '' && !$user->is_user())
 			{
-				$ERRORS['rname'] = $lang['EMPTY_FIELDS'] . ' : ' . (empty($_POST['rname']) && $NOT_USER ? ' [ ' . $lang['YOURNAME'] . ' ] ' : '')  
-									. (empty($_POST['rurl']) ? '  [ ' . $lang['URL']  . ' ] ': '');
+				$ERRORS['rname'] = $lang['EMPTY_FIELDS'] . ' : ' . (p('rname', 'str') == '' && !$user->is_user() ? ' [ ' . $lang['YOURNAME'] . ' ] ' : '')  
+									. (p('rurl', 'str') == '' ? '  [ ' . $lang['URL']  . ' ] ': '');
 			}
 			if($t_surl == '')
 			{
 				$ERRORS['surl']	=  $lang['EMPTY_FIELDS'] . ' : [ ' . $lang['URL_F_FILE'] . ' ]'; 
 			}
-			if (!$t_rmail && $NOT_USER)
+			if (!$t_rmail && !$user->is_user())
 			{
 				$ERRORS['rmail'] = $lang['WRONG_EMAIL'];
 			}
@@ -169,12 +160,11 @@ switch (g('go', 'str', ''))
 			#no error , lets do process
 			if(empty($ERRORS))
 			{
-				$name	= $SQL->escape($NOT_USER ? $t_rname : $user->name());
+				$name	= $SQL->escape(!$user->is_user() ? $t_rname : $user->name());
 				$text	= $SQL->escape($t_rtext);
-				$mail	= $SQL->escape($NOT_USER ? $t_rmail : $user->mail());
+				$mail	= $SQL->escape(!$user->is_user() ? $t_rmail : $user->mail());
 				$url	= $SQL->escape($id_d ? $url_id : $t_surl);
 				$time 	= (int) time();
-				$rid	= isset($_POST['rid']) ? 0 : intval($_POST['rid']);
 				$ip		=  get_ip();
 
 				$insert_query	= array(
@@ -191,7 +181,7 @@ switch (g('go', 'str', ''))
 				$update_query	= array(
 										'UPDATE'	=> "{$dbprefix}files",
 										'SET'		=> 'report=report+1',
-										'WHERE'		=> 'id=' . $rid,
+										'WHERE'		=> 'id=' . $id_d,
 									);
 
 				($hook = kleeja_run_hook('qr_update_no_file_report')) ? eval($hook) : null; //run hook
@@ -214,8 +204,8 @@ switch (g('go', 'str', ''))
 	case 'rules' :
 		
 		#page info
-		$stylee	= 'rules';
-		$titlee	= $lang['RULES'];
+		$current_template	= 'rules.php';
+		$current_title	= $lang['RULES'];
 		$contents = strlen($ruless) > 3 ? stripslashes($ruless) : $lang['NO_RULES_NOW'];
 
 		($hook = kleeja_run_hook('rules_go_page')) ? eval($hook) : null; //run hook
@@ -232,8 +222,8 @@ switch (g('go', 'str', ''))
 		}
 
 		#page info
-		$stylee	= 'call';
-		$titlee	= $lang['CALL'];
+		$current_template	= 'call';
+		$current_title	= $lang['CALL'];
 		$action	= './go.php?go=call';
 		$H_FORM_KEYS = kleeja_add_form_key('call');
 		$NOT_USER = !$user->name() ? true : false; 
@@ -334,7 +324,7 @@ switch (g('go', 'str', ''))
 
 		if (empty($cd))
 		{
-			kleeja_err($lang['WRONG_URL']);
+			kleeja_error($lang['WRONG_URL']);
 		}
 		else
 		{
@@ -443,12 +433,12 @@ switch (g('go', 'str', ''))
 		}
 
 		#page info
-		$titlee		= $lang['STATS'];
-		$stylee		= 'stats';
+		$current_title		= $lang['STATS'];
+		$current_template		= 'stats';
 		$files_st	= $stat_files;
 		$imgs_st	= $stat_imgs;
 		$users_st	= $stat_users;
-		$sizes_st	= Customfile_size($stat_sizes);	
+		$sizes_st	= readable_size($stat_sizes);	
 		$lst_reg	= empty($stat_last_user) ? $lang['UNKNOWN'] : $stat_last_user;
 		$on_muoe	= kleeja_date($on_muoe);
 
@@ -558,7 +548,7 @@ switch (g('go', 'str', ''))
 		
 		if($no_request)
 		{
-			kleeja_err($lang['ERROR_NAVIGATATION']);
+			kleeja_error($lang['ERROR_NAVIGATATION']);
 		}
 
 	break;
@@ -567,13 +557,13 @@ switch (g('go', 'str', ''))
 ($hook = kleeja_run_hook('end_go_page')) ? eval($hook) : null; //run hook
 
 #no template, no title, set them to default
-$stylee  = empty($stylee) ? 'info' : $stylee;
-$titlee  = empty($titlee) ? '' : $titlee;
+$current_template  = empty($current_template) ? 'info.php' : $current_template;
+$current_title  = empty($current_title) ? '' : $current_title;
+
 
 #header
-kleeja_header($titlee, $extra_code_in_header);
+kleeja_header($current_title, $extra_code_in_header);
 #page template
-echo $tpl->display($stylee);
+include get_template_path($current_template);
 #footer
 kleeja_footer();
-

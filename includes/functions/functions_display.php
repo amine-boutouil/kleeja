@@ -951,3 +951,10 @@ function shorten_text($text, $until = 30)
 
 	return $return;
 }
+
+
+function get_group_name($gid)
+{
+	global $d_groups;
+	return  preg_replace('!{lang.([A-Z0-9]+)}!e', '$lang[\'\\1\']', $d_groups[$gid]['data']['group_name']);
+}

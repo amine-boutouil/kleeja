@@ -109,12 +109,10 @@ function clean_var($var, $type = 'str')
 */
 function get_ban()
 {
-	global $banss, $lang, $tpl, $text;
+	global $banss, $lang, $text;
 	
-	//visitor ip now 
-	$ip	= get_ip();
 
-	//now .. loop for banned ips 
+	#now .. loop for banned ips 
 	if (is_array($banss) && !empty($ip))
 	{
 		foreach ($banss as $ip2)
@@ -130,7 +128,7 @@ function get_ban()
 			$replace_it = str_replace("*", '([0-9]{1,3})', $ip2);
 			$replace_it = str_replace(".", '\.', $replace_it);
 
-			if ($ip == $ip2 || @preg_match('/' . preg_quote($replace_it, '/') . '/i', $ip))
+			if ($ip == $ip2 || @preg_match('/' . preg_quote($replace_it, '/') . '/i', $user->data['ip']))
 			{
 				($hook = kleeja_run_hook('banned_get_ban_func')) ? eval($hook) : null; //run hook	
 				kleeja_info($lang['U_R_BANNED'], $lang['U_R_BANNED']);
@@ -505,39 +503,7 @@ function delete_config($name)
 }
 
 
-/**
-* Get the current IP of the user
-* TODO: move to usr class 
-* @return string
-*/
-function get_ip()
-{
-	$ip = '';
-	if(!empty($_SERVER['REMOTE_ADDR']))
-	{
-		$ip = $_SERVER['REMOTE_ADDR'];
-	}
-	else if (!empty($_SERVER['HTTP_CLIENT_IP']))
-	{
-		$ip = $_SERVER['HTTP_CLIENT_IP'];
-	}
-	else 
-	{
-		$ip = getenv('REMOTE_ADDR');
-		if(getenv('HTTP_X_FORWARDED_FOR'))
-		{
-			if(preg_match("/^([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)/", getenv('HTTP_X_FORWARDED_FOR'), $ip3))
-			{
-				$ip2 = array('/^0\./', '/^127\.0\.0\.1/', '/^192\.168\..*/', '/^172\.16\..*/', '/^10..*/', '/^224..*/', '/^240..*/');
-				$ip = preg_replace($ip2, $ip, $ip3[1]);
-			}
-		}
-	}
 
-	$return = preg_replace('/[^0-9a-z.]/i', '', $ip);
-	($hook = kleeja_run_hook('del_sql_delete_olang_func')) ? eval($hook) : null; //run hook
-	return $return;
-}
 
 /**
  * Check if the given value of CAPTCHA is valid

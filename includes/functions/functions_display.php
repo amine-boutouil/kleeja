@@ -953,6 +953,12 @@ function shorten_text($text, $until = 30)
 }
 
 
+/**
+ * Get group name by its ID
+ *
+ * @param int $gid The group id
+ * @return string Group name
+ */
 function get_group_name($gid)
 {
 	global $d_groups;

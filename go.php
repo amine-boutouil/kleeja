@@ -76,7 +76,9 @@ switch (g('go', 'str', ''))
 		$url_id	= $config['mod_writer'] == 1 ? $config['siteurl'] . 'download' . $id_d . '.html' : $config['siteurl'] . 'do.php?id=' . $id_d;
 		$action	= $config['siteurl'] . 'go.php?go=report';
 
-		$s_url			= p('surl', 'str', '');
+
+		#no error yet 
+		$ERRORS = false;
 
 		#Does this file exists ?
 		if(ig('id') || ip('rid'))
@@ -104,13 +106,11 @@ switch (g('go', 'str', ''))
 			$SQL->free($result);
 		}
 
-		#no error yet 
-		$ERRORS = false;
-
 		#set variables
 		$t_rname = p('rname', 'str', '');
 		$t_rmail = p('rmail', 'mail', '');
 		$t_rtext = p('rtext', 'str', '');
+		$s_url	= p('surl', 'str', '');
 
 		#no submit yet
 		if (!ip('submit'))
@@ -222,11 +222,11 @@ switch (g('go', 'str', ''))
 		}
 
 		#page info
-		$current_template	= 'call';
+		$current_template	= 'call.php';
 		$current_title	= $lang['CALL'];
-		$action	= './go.php?go=call';
-		$H_FORM_KEYS = kleeja_add_form_key('call');
-		$NOT_USER = !$user->name() ? true : false; 
+		$action	= $config['siteurl'] . 'go.php?go=call';
+
+
 		#no error yet 
 		$ERRORS = false;
 
@@ -256,12 +256,12 @@ switch (g('go', 'str', ''))
 			{
 				$ERRORS['captcha'] = $lang['WRONG_VERTY_CODE'];
 			}
-			if (($t_cname == '' && $NOT_USER)  || $t_ctext =='')
+			if (($t_cname == '' && !$user->is_user())  || $t_ctext =='')
 			{
-				$ERRORS['cname']	= $lang['EMPTY_FIELDS'] . ' : ' . ($t_cname == '' && $NOT_USER ? ' [ ' . $lang['YOURNAME'] . ' ] ' : '') 
+				$ERRORS['cname']	= $lang['EMPTY_FIELDS'] . ' : ' . ($t_cname == '' && !$user->is_user() ? ' [ ' . $lang['YOURNAME'] . ' ] ' : '') 
 								. ($t_ctext == '' ? '  [ ' . $lang['TEXT']  . ' ] ': '');
 			}
-			if (!$t_cmail && $NOT_USER)
+			if (!$t_cmail && !$user->is_user())
 			{
 				$ERRORS['cmail'] = $lang['WRONG_EMAIL'];
 			}
@@ -280,11 +280,11 @@ switch (g('go', 'str', ''))
 			#no errors ,lets do process
 			if(empty($ERRORS))
 			{
-				$name	= $SQL->escape($NOT_USER ? $t_cname : $user->name());
+				$name	= $SQL->escape(!$user->is_user() ? $t_cname : $user->name());
 				$text	= $SQL->escape($t_ctext);
-				$mail	= $SQL->escape($NOT_USER ? $t_cmail : $user->mail());
+				$mail	= $SQL->escape(!$user->is_user() ? $t_cmail : $user->mail());
 				$timee	= time();
-				$ip		= get_ip();
+				$ip		= $user->data['ip'];
 
 				$insert_query	= array(
 										'INSERT'	=> "name ,text ,mail ,time ,ip",
@@ -412,7 +412,7 @@ switch (g('go', 'str', ''))
 		if (!user_can('access_stats'))
 		{
 			($hook = kleeja_run_hook('user_cannot_access_stats')) ? eval($hook) : null; //run hook
-			kleeja_info($lang['HV_NOT_PRVLG_ACCESS']);
+			//kleeja_info($lang['HV_NOT_PRVLG_ACCESS']);
 		}
 
 		#is it allowed?
@@ -434,7 +434,7 @@ switch (g('go', 'str', ''))
 
 		#page info
 		$current_title		= $lang['STATS'];
-		$current_template		= 'stats';
+		$current_template	= 'stats.php';
 		$files_st	= $stat_files;
 		$imgs_st	= $stat_imgs;
 		$users_st	= $stat_users;
@@ -539,7 +539,7 @@ switch (g('go', 'str', ''))
 	
 
 	// Default , if you are a developer , you can embed your page here with this hook
-	// by useing $_GET[go] and your codes.
+	// by useing g('go') == 'your_page' and your codes.
 	default:
 
 		$no_request = true;

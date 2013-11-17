@@ -843,7 +843,7 @@ switch (g('go', 'str', ''))
 
 #no template, no title, set them to default
 $current_title = empty($current_title) ? $lang['USERS_SYSTEM'] : $current_title;
-$current_template = empty($current_template) ? 'info' : $current_template;
+$current_template = empty($current_template) ? 'info.php' : $current_template;
 
 
 #header

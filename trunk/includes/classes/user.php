@@ -32,6 +32,11 @@ class user
 	 * Those default values are for guest 
 	 */
 	public $data = array('id'=>-1, 'group_id'=>2, 'is_bot'=>false);
+	
+	/**
+	 * The current user's system
+	 */
+	public $system = 'default';
 
 
 	/**
@@ -60,14 +65,18 @@ class user
 			{	
 				include_once PATH . 'includes/auth_integration/' . trim($config['user_system']) . '.php';
 				$login_data = kleeja_auth_login(trim($name), trim($pass), $hashed, $expire, $loginadm);
-				return $login_status;
 				
-				#TODO add default $user->data info for those different system
-				#name, mail, last_login ...
+				#set current system
+				$this->system = $config['user_system'];
+
+				#now return data
+				#there should [mail, name, last_login, id]
+				return $login_status;
 			}
 		}
 
 		#or just use the default system
+		$this->system = 'default';
 		return $this->normal(trim($name), trim($pass), $hashed, $expire, $loginadm);
 	}
 
@@ -460,36 +469,73 @@ class user
 		#if there is no login cookie
 		if(!$this->kleeja_get_cookie('ulogu'))
 		{
-		 	return false;	
-		}
-		
-		$user_data = false;
-
-		list($user_id, $hashed_password, $expire_at, $hashed_expire, $group_id, $u_info) =  @explode('|', $this->en_de_crypt($this->kleeja_get_cookie('ulogu'), 2));
-
-		#if not expire 
-		if(($hashed_expire == sha1(md5($config['h_key'] . $hashed_password) . $expire_at)) && ($expire_at > time()))
-		{
-			$user_data = $this->login($user_id, $hashed_password, true, $expire_at);
-		}
-
-		#no data or wrong data, clear the cookies
-		if($user_data == false)
-		{
-			$this->logout();
-			return false;
+		 	$return = false;	
 		}
 		else
 		{
-			$this->data = $user_data;
+			$user_data = false;
 
-			#is it a bot?
-			$this->is_bot();
+			list($user_id, $hashed_password, $expire_at, $hashed_expire, $group_id, $u_info) =  @explode('|', $this->en_de_crypt($this->kleeja_get_cookie('ulogu'), 2));
 
-			return true;
+			#if not expire 
+			if(($hashed_expire == sha1(md5($config['h_key'] . $hashed_password) . $expire_at)) && ($expire_at > time()))
+			{
+				$user_data = $this->login($user_id, $hashed_password, true, $expire_at);
+			}
+
+			#no data or wrong data, clear the cookies
+			if($user_data == false)
+			{
+				$this->logout();
+				$return = false;
+			}
+			else
+			{
+				$this->data = $user_data;
+
+				$return = true;
+			}
 		}
+
+		#add other info to user->data
+		$this->extend_data();
+		
+		return $return;
 	}
-	
+
+	/**
+	 * Add other important datas to user->data like ip
+	 * 
+	 * @return void
+	 */
+	private function extend_data()
+	{
+		#is it a bot?
+		$user->data['is_bot'] = $this->is_bot();
+		
+		#current IP
+		$user->data['ip'] = (!empty($_SERVER['REMOTE_ADDR'])) ? (string) $_SERVER['REMOTE_ADDR'] : '';
+		
+		#if IP chain
+		if(strpos($user->data['ip'], ',') !== false)
+		{
+			$user->data['ip'] = explode(',', $user->data['ip']);
+			$user->data['ip'] = trim($user->data['ip'][0]);
+		}
+		
+		#is it IPv6?
+		$ip_v6 = preg_match("/^[0-9a-f]{1,4}:([0-9a-f]{0,4}:){1,6}[0-9a-f]{1,4}$/", $user->data['ip']);
+		if($ip_v6)
+		{
+			#does it IPv4 hide in a IPv6 style
+			if (stripos($user->data['ip'], '::ffff:') === 0)
+			{
+				$user->data['ip'] = substr($user->data['ip'], 7);
+			}
+		}
+		
+			
+	}
 	
 	/**
 	 * Check if the current visitor is a user

@@ -393,7 +393,7 @@ else if (ig('down') || ig('downf') ||
 
 	#Figure out the MIME type (if not specified) 
 	$ext		= array_pop(explode('.', $path_file));
-	$mime_type	= get_mime_for_header($ext);
+	$mime_type	= get_mime_for_header($path_file);
 
 	#disable execution time limit
 	@set_time_limit(0);

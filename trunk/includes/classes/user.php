@@ -511,30 +511,28 @@ class user
 	private function extend_data()
 	{
 		#is it a bot?
-		$user->data['is_bot'] = $this->is_bot();
+		$this->data['is_bot'] = $this->is_bot();
 		
 		#current IP
-		$user->data['ip'] = (!empty($_SERVER['REMOTE_ADDR'])) ? (string) $_SERVER['REMOTE_ADDR'] : '';
-		
+		$this->data['ip'] = (!empty($_SERVER['REMOTE_ADDR'])) ? (string) $_SERVER['REMOTE_ADDR'] : '';
+	
 		#if IP chain
-		if(strpos($user->data['ip'], ',') !== false)
+		if(strpos($this->data['ip'], ',') !== false)
 		{
-			$user->data['ip'] = explode(',', $user->data['ip']);
-			$user->data['ip'] = trim($user->data['ip'][0]);
+			$this->data['ip'] = explode(',', $this->data['ip']);
+			$this->data['ip'] = trim($this->data['ip'][0]);
 		}
 		
 		#is it IPv6?
-		$ip_v6 = preg_match("/^[0-9a-f]{1,4}:([0-9a-f]{0,4}:){1,6}[0-9a-f]{1,4}$/", $user->data['ip']);
+		$ip_v6 = preg_match("/^[0-9a-f]{1,4}:([0-9a-f]{0,4}:){1,6}[0-9a-f]{1,4}$/", $this->data['ip']);
 		if($ip_v6)
 		{
 			#does it IPv4 hide in a IPv6 style
-			if (stripos($user->data['ip'], '::ffff:') === 0)
+			if (stripos($this->data['ip'], '::ffff:') === 0)
 			{
-				$user->data['ip'] = substr($user->data['ip'], 7);
+				$this->data['ip'] = substr($this->data['ip'], 7);
 			}
 		}
-		
-			
 	}
 	
 	/**

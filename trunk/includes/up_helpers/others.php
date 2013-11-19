@@ -97,32 +97,34 @@ function make_folder($folder)
 }
 
 /**
- * Change the file name depend on given decoding type
+ * Change the file name depend on given decoding type and prefix
  */
-function change_filename_decoding($filename, $i_loop, $ext, $decoding_type)
+function change_filename($filename, $ext)
 {
+	global $config;
+
 	$return = '';
 
 	#change it, time..
-	if($decoding_type == "time")
+	if($config['decode'] == 1)
 	{
 		list($usec, $sec) = explode(" ", microtime());
 		$extra = str_replace('.', '', (float)$usec + (float)$sec);
-		$return = $extra . $i_loop . '.' . $ext;
+		$return = $extra . '.' . $ext;
 	}
 	# md5
-	elseif($decoding_type == "md5")
+	elseif($config['decode'] == 2)
 	{
 		list($usec, $sec) = explode(" ", microtime());
 		$extra	= md5(((float)$usec + (float)$sec) . $filename);
 		$extra	= substr($extra, 0, 12);
-		$return	= $extra . $i_loop . "." . $ext;
+		$return	= $extra . "." . $ext;
 	}
 	# exists before, change it a little
-	elseif($decoding_type == 'exists')
-	{
-		$return = substr($filename, 0, -(strlen($ext)+1)) . '_' . substr(md5($rand . time() . $i_loop), rand(0, 20), 5) . '.' . $ext;
-	}
+	//elseif($decoding_type == 'exists')
+	//{
+		//$return = substr($filename, 0, -(strlen($ext)+1)) . '_' . substr(md5($rand . time()), rand(0, 20), 5) . '.' . $ext;
+		//}
 	#nothing
 	else
 	{
@@ -131,84 +133,61 @@ function change_filename_decoding($filename, $i_loop, $ext, $decoding_type)
 		$return = preg_replace('/-+/', '-', $return);
 	}
 
-	($hook = kleeja_run_hook('change_filename_decoding_func')) ? eval($hook) : null; //run hook
+
+	#if filename prefix is enabled
+	if(trim($config['prefixname']) != '')
+	{
+		#random number...
+		if (preg_match("/{rand:([0-9]+)}/i", $config['prefixname'], $m))
+		{
+			$prefix = preg_replace("/{rand:([0-9]+)}/i", substr(md5(time()), 0, $m[1]), $config['prefixname']);
+		}
+	
+		#current date
+		if (preg_match("/{date:([a-zA-Z-_]+)}/i", $config['prefixname'], $m))
+		{
+			$prefix = preg_replace("/{date:([a-zA-Z-_]+)}/i", date($m[1]), $config['prefixname']);
+		}
+
+		$filename = $prefix . $filename;
+	}
+
+
+	($hook = kleeja_run_hook('change_filename_func')) ? eval($hook) : null; //run hook
 
 	return $return;
 }
 
-/**
- * Change the file name depend on used templates {rand:..} {date:..}
- */
-function change_filename_templates($filename)
+
+
+function check_file_content($file_path)
 {
-	#random number...
-	if (preg_match("/{rand:([0-9]+)}/i", $filename, $m))
-	{
-		$filename = preg_replace("/{rand:([0-9]+)}/i", substr(md5(time()), 0, $m[1]), $filename);
-	}
-	
-	#current date
-	if (preg_match("/{date:([a-zA-Z-_]+)}/i", $filename, $m))
-	{
-		$filename = preg_replace("/{date:([a-zA-Z-_]+)}/i", date($m[1]), $filename);
-	}
-	
-	($hook = kleeja_run_hook('change_filename_templates_func')) ? eval($hook) : null; //run hook
+	$return = true;
 
-	return $filename;
-}
-
-
-function check_mime_type($mime, $this_is_image,$file_path)
-{
-	//This code for images only
-	//it's must be improved for all files in future !
-	if($this_is_image == false)
+	if(@filesize($file_path) > 10*(1000*1024))
 	{
 		return true;
 	}
 
-	$return = false;
-	$s_items = @explode(':', 'image:png:jpg:gif:bmp:jpeg');
-	foreach($s_items as $r)
-	{
-		if(strpos($mime, $r) !== false)
-		{
-			$return = true;
-			break;
-		}
-	}
+	#check for bad things inside files
+	$maybe_bad_codes_are = array('body', 'head', 'html', 'img', 'plaintext', 'a href', 'pre', 'script', 'table', 'title');
+	
+	$fp = @fopen($file_path, 'rb');
 
-	//onther check
-	//$w = @getimagesize($file_path);
-	//$return =  ($w && (strpos($w['mime'], 'image') !== false)) ? true : false;
-
-	//another check
-	if($return == true)
+	if ($fp !== false)
 	{
-		if(@kleeja_filesize($file_path) > 4*(1000*1024))
+		$f_content = fread($fp, 256);
+		fclose($fp);
+		foreach ($maybe_bad_codes_are as $forbidden)
 		{
-			return true;
-		}
-		
-		//check for bad things inside files ...
-		//<.? i cant add it here cuz alot of files contain it 
-		$maybe_bad_codes_are = array('<script', 'zend', 'base64_decode');
-		
-		if(!($data = @file_get_contents($file_path)))
-		{
-			return true;
-		}
-		
-		foreach($maybe_bad_codes_are as $i)
-		{
-			if(strpos(strtolower($data), $i) !== false)
+			if (stripos($f_content, '<' . $forbidden) !== false)
 			{
 				$return = false;
 				break;
 			}
 		}
 	}
+
 
 	($hook = kleeja_run_hook('kleeja_check_mime_func')) ? eval($hook) : null; //run hook
 	
@@ -217,11 +196,11 @@ function check_mime_type($mime, $this_is_image,$file_path)
 
 
 /**
- * to prevent flooding at uploading  
+ * To prevent flooding at uploading, waiting between uploads  
  */
-function user_is_flooding($user_id = '-1')
+function user_is_flooding()
 {
-	global $SQL, $dbprefix, $config;
+	global $SQL, $dbprefix, $config, $user;
 
 	$return = 'empty';
 
@@ -232,20 +211,20 @@ function user_is_flooding($user_id = '-1')
 		return $return;
 	}
 
-	//if the value is zero (means that the function is disabled) then return false immediately
-	if(($user_id == '-1' && $config['guestsectoupload'] == 0) || $user_id != '-1' && $config['usersectoupload'] == 0)
+	#if the value is zero (means that the function is disabled) then return false immediately
+	if(intval($config['usersectoupload']) == 0)
 	{
 		return false;
 	}
 
 	//In my point of view I see 30 seconds is not bad rate to stop flooding .. 
 	//even though this minimum rate sometime isn't enough to protect Kleeja from flooding attacks 
-	$time = time() - ($user_id == '-1' ? $config['guestsectoupload'] : $config['usersectoupload']); 
+	$time = time() - intval($config['usersectoupload']); 
 
 	$query = array(
 					'SELECT'	=> 'f.time',
 					'FROM'		=> "{$dbprefix}files f",
-					'WHERE'     => 'f.time >= ' . $time . ' AND f.user_ip = \'' .  $SQL->escape(get_ip()) . '\'',
+					'WHERE'     => 'f.time >= ' . $time . ' AND f.user_ip = \'' .  $SQL->escape($user->data['ip']) . '\'',
 				);
 
 	if ($SQL->num($SQL->build($query)))
@@ -254,4 +233,20 @@ function user_is_flooding($user_id = '-1')
 	}
 
 	return false;
+}
+
+/**
+ * To re-arrange _FILES array
+ */
+function rearrange_files_input($arr)
+{
+    foreach($arr as $key => $all)
+	{
+        foreach($all as $i=>$val)
+		{
+            $new[$i][$key] = $val;    
+        }    
+    }
+
+    return $new;
 }

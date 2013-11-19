@@ -1,77 +1,67 @@
-<!-- Powered by kleeja -->
+<?php if(!defined('IN_KLEEJA')) { exit; } ?>
+
+<!-- index body template -->
 <div id="content_index">
 
 	<!-- welcome -->
-	<h6><img src="{STYLE_PATH}images/Smile.png" width="20" height="20" alt="{lang.WELCOME}" style="vertical-align:middle;" /> {lang.WELCOME} .. <IF NAME="user_is">[ {username} ]</IF></h6>
-	<div class="wolcome_msg">{welcome_msg}</div>
+	<h6>
+		<img src="{STYLE_PATH}images/Smile.png" width="20" height="20" style="vertical-align:middle;" />
+		 <?=$lang['WELCOME']?> <?php if($user->is_user()):?>[ <?=$user->data['name']?> ]<?php endif;?> ...</h6>
+	<div class="wolcome_msg"><?=$welcome_msg?></div>
 	<!-- @end-welcome -->
 
 	<div class="clr"></div>
 
-	<IF NAME="info">
-	<!-- msg, Infos & Alerts & Errors -->
-	<div id="system-message">
-		<LOOP NAME="info">
-		<ul class="{{t}}">
-			<li>{lang.INFORMATION} : <span> {{i}} </span></li>
-		</ul>
-		</LOOP>
-	</div><!-- @end-msg -->
-	</IF>
-
-	<div class="clr"></div>
-	
 	<!-- form upload -->
-	<form id="uploader" action="{action}" method="post" enctype="multipart/form-data">
+	<form id="uploader" action="<?=$config['siteurl']?>" method="post" enctype="multipart/form-data">
 
 		<!-- upload boxes -->
 		<div class="tabmain">
 
 			<ul class="tabnav">
-				<!-- First-Tab -->
-				<li title="{lang.DOWNLOAD_F}">{lang.DOWNLOAD_F}</li>
+				<!-- First-Tab, files upload -->
+				<li><?=$lang['DOWNLOAD_F']?></li>
 				<!-- @First-Tab -->
 
-				<!-- Second-Tab -->
-				<IF NAME="config.www_url">
-				<li title="{lang.DOWNLOAD_T}">{lang.DOWNLOAD_T}</li>
-				</IF>
+				<!-- Second-Tab, urls upload -->
+				<?php /** if(!$config['www_url']):
+				<li><?=$lang['DOWNLOAD_T']?></li>
+				<?php endif;**/?>
 				<!-- @Second-Tab --> 
 
 				<!--you-can-add-another-tab-here-->
-
 			</ul>
 
-			<!-- First-Box -->
-			<div class="tabcon" title="{lang.DOWNLOAD_F}">
+			<!-- First-Box, files upload -->
+			<div class="tabcon" title="<?=$lang['DOWNLOAD_F']?>">
 			<div class="go_up">
 				<!-- upload normal -->
-				<LOOP NAME=FILES_NUM_LOOP>
-				<input class="file" type="file" name="file_{{i}}_" style="{{show}}" size="60" />
-				</LOOP>
-				<div class="agree"><span>{terms_msg}</span></div>
-				<div class="bn_up"><input type="submit" id="submitr" name="submitr" value="{lang.DOWNLOAD_F}" /></div>
+				<?php foreach($FILES_NUM_LOOP as $number=>$show):?>
+				<input class="file" type="file" name="file[]" id="file_<?=$number?>_" style="<?php if(!$show):?>display:none<?php endif;?>" size="60" />
+				<?php endforeach;?>
+				<div class="agree"><span><?=$terms_msg?></span></div>
+				<div class="bn_up"><input type="submit" id="submit_files" name="submit_files" value="<?=$lang['DOWNLOAD_F']?>" /></div>
 				<div class="clr"></div>
 				<!-- @upload normal -->
 			</div>
 			</div>
 			<!-- @First-Box -->
 
-			<!-- Second-Box -->
-			<IF NAME="config.www_url">
-			<div class="tabcon" title="{lang.DOWNLOAD_T}">
+			<!-- Second-Box, urls upload -->
+			<?php /**if(!$config['www_url']):
+			<div class="tabcon">
 			<div class="go_up">
 				<!-- upload URL -->  
-				<LOOP NAME=FILES_NUM_LOOP>
-				<input class="url" type="text" name="file_{{i}}_" style="{{show}}" size="70" value="{lang.PAST_URL_HERE}" />
-				</LOOP>
-				<div class="agree"><span>{terms_msg}</span></div>
-				<div class="bn_up"><input type="submit" id="submittxt" name="submittxt" value="{lang.DOWNLOAD_T}" /> </div>
+				<?php foreach($FILES_NUM_LOOP as $number=>$show):?>
+				<input class="url" type="text" name="file[]" style="<?php if(!$show):?>display:none<?php endif;?>" size="70" value="<?=$lang['PAST_URL_HERE']?>" />
+				<?php endforeach;?>
+				<div class="agree"><span><?=$terms_msg?></span></div>
+				<div class="bn_up"><input type="submit" id="submit_urls" name="submit_urls" value="<?=$lang['DOWNLOAD_T']?>" /> </div>
 				<div class="clr"></div>
 				<!-- @upload URL -->  
 			</div>
 			</div>
-			</IF>
+			endif**/?>
 			<!-- @Second-Box -->
 
 			<!--you-can-add-another-box-here-->
@@ -80,40 +70,48 @@
 		<!-- @upload boxes -->
 
 
-		<IF NAME="config.safe_code">
-		<!-- verification code -->	
-		<div class="safe_code IEs_c">
-			<p>{lang.VERTY_CODE}</p>
+		<!-- verification code -->
+		<?php if($config['enable_captcha'] && $config['safe_code']):?>
+		<div class="safe_code">
+			<p><?=$lang['VERTY_CODE']?></p>
 			<div class="clr"></div>
 			<div>
-				<img style="vertical-align:middle;" id="kleeja_img_captcha" src="{captcha_file_path}" alt="{lang.REFRESH_CAPTCHA}" title="{lang.REFRESH_CAPTCHA}" onclick="javascript:update_kleeja_captcha('{captcha_file_path}', 'kleeja_code_answer');" />
-				<input type="text" name="kleeja_code_answer" id="kleeja_code_answer" />
+				<img style="vertical-align:middle;" id="kleeja_img_captcha" src="<?=$captcha_file_path?>" alt="<?=$lang['REFRESH_CAPTCHA']?>" title="<?=$lang['REFRESH_CAPTCHA']?>" onclick="javascript:update_kleeja_captcha('<?=$captcha_file_path?>', 'kleeja_code_answer');" />
+				<input type="text" name="kleeja_code_answer" id="kleeja_code_answer" tabindex="5" />
 			</div>
 			<div class="clr"></div>
-			<p class="explain">{lang.NOTE_CODE}</p>
+			<p class="explain"><?=$lang['NOTE_CODE']?></p>
 		</div>
-		<div class="clr"></div>
+		<?php endif;?>
 		<!-- @end-verification-code -->
-		</IF>
-	
-	</form><!-- @end-form-upload -->
+
+	</form>
+	<!-- @end-form-upload -->
+
 
 	<!-- box loading -->
 	<div id="loadbox">
-		<div class="waitloading">{lang.WAIT_LOADING}</div>
+		<div class="waitloading"><?=$lang['WAIT_LOADING']?></div>
 		<div class="clr"></div><br />
-			<img src="{STYLE_PATH}images/loading.gif" alt="loading ..." />
+			<img src="<?=STYLE_PATH?>images/loading.gif" alt="loading ..." />
 		<div class="clr"></div><br /><br /><br />
-	</div><!-- @end-box-loading -->
+	</div>
+	<!-- @end-box-loading -->
 
-	<IF NAME="show_online">
-		<!-- OnLine -->
+	<!-- OnLine -->
+	<?php if($show_online):?>
 		<div class="online">
-			<p class="onlineall">{lang.NUMBER_ONLINE} : [ {usersnum} ]</p>
-			<LOOP NAME="shownames">
-			<p class="name_users"><!--{{seperator}}-->{{name}}</p>
-			</LOOP>
-		</div><!-- @end-OnLine -->
-	</IF>
+			<p class="onlineall"><?=$lang['NUMBER_ONLINE']?> : [ <?=$usersnum?> ]</p>
+			<?php foreach ($online_names as $name):?>
+			<p class="name_users"><?=$name?></p>
+			<?php endforeach;?>
+		</div>
+	<?php endif;?>
+	<!-- @end-OnLine -->
+	
+
+	<!-- end of index -->
+	<?php ($hook = kleeja_run_hook('index_body_tpl_end_page')) ? eval($hook) : null;?>
+
 <div class="clr"></div>
 </div>

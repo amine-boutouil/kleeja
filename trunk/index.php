@@ -26,9 +26,10 @@ define('IN_SUBMIT_UPLOADING', (isset($_POST['submitr']) || isset($_POST['submitt
 define('IN_KLEEJA', true);
 define('PATH', dirname(__FILE__) . DIRECTORY_SEPARATOR);
 include PATH . 'includes/common.php';
-include PATH . 'includes/classes/uploader.php';
+include PATH . 'includes/classes/uploading.php';
 
-$kljup	= new uploader;
+$kljup	= new uploading;
+$kljup->allowed_extensions = $d_groups[$user->data['group_id']]['exts'];
 
 ($hook = kleeja_run_hook('begin_index_page')) ? eval($hook) : null; //run hook
 
@@ -38,58 +39,40 @@ if(empty($d_groups[2]['exts']) && !$user->is_user())
 	kleeja_info($lang['SITE_FOR_MEMBER_ONLY'], $lang['HOME']);
 }
 
-//
-//Type of how will decoding name ..
-//
-$decode = 'none';
-switch(intval($config['decode'])):
-	case 1:	$decode = 'time';	break;
-	case 2:	$decode = 'md5';	break;
-	default:
-		//add you own decode
-		($hook = kleeja_run_hook('decode_config_default')) ? eval($hook) : null; //run hook
-	break;
-endswitch;
 
-//
-//start uploader class .. 
-//
-$kljup->decode		= $decode;
-$kljup->folder		= $config['foldername'];
-$kljup->prefix		= $config['prefixname'];
-$kljup->action		= $action = "index.php";
-$kljup->filesnum	= $config['filesnum'];
-//--------------------- start user system part
-$kljup->types		= $d_groups[$user->data['group_id']]['exts'];
-$kljup->id_user		= $user->data['id'];
-$kljup->user_is_adm = user_can('enter_acp');
-$kljup->safe_code	= $config['safe_code'];
-//--------------------- end user system part
-$kljup->process();
+if(ip('submit_files') || ip('submit_urls'))
+{	
+	$kljup->process();
+	
+	#show errors and info
+	$MESSAGES = sizeof($kljup->messages) ? $kljup->messages : false;
 
-//add from 1rc6
+	#after sumbit template
+	$current_template = 'uploading_results.php';
+}
+else
+{
+	#default template
+	$current_template = 'index_body.php';
+}
+
+
+#how many inputs should be shown
 $FILES_NUM_LOOP = array();
 foreach(range(1, $config['filesnum']) as $i)
 {
-	$FILES_NUM_LOOP[] = array('i' => $i, 'show'=>($i == 1 || (!empty($config['filesnum_show']) && (int) $config['filesnum_show'] == 1) ? '' : 'display: none'));
+	$FILES_NUM_LOOP[] = array('i' => $i, 'show'=>($i == 1 || (!empty($config['filesnum_show']) && (int) $config['filesnum_show'] == 1) ? true : false));
 }
 
-//show errors and info
-$info = array();
-foreach($kljup->messages as $t=>$s)	
-{
-	$info[] = array('t'=>$s[1], 'i' => $s[0]);
-}
 
-//some words for template
+#some words for template
 $welcome_msg	= $config['welcome_msg'];
 $filecp_link	= $user->is_user() ? $config['siteurl'] . ($config['mod_writer'] ? 'filecp.html' : 'ucp.php?go=filecp') : false;
 $terms_msg		= sprintf($lang['AGREE_RULES'], '<a href="' . ($config['mod_writer'] ? 'rules.html' : 'go.php?go=rules') . '">' , '</a>');
-$link_avater		= sprintf($lang['EDIT_U_AVATER_LINK'], '<a href="http://www.gravatar.com/">' , '</a>');
-//
-//For who online now..  
+
+
+//who online now feature 
 //I dont like this feature and I prefer to disable it
-//
 $show_online = $config['allow_online'] == 1 ? true : false;
 if ($show_online)
 {
@@ -120,18 +103,6 @@ if ($show_online)
 	}#while
 
 	$SQL->freeresult($result);
-
-	//make names as array to print them in template
-	$shownames = array();
-	$shownames_sizeof =  sizeof($shownames);
-	
-	foreach ($online_names as $k)
-	{
-		$shownames[] = array('name' => $k, 'seperator' => $shownames_sizeof ? ',' : '');
-	}
-
-	//some variables must be destroyed here
-	unset($online_names, $timeout, $timeout2);
 
 	//check & update most ever users and vistors was online
 	if(empty($config['most_user_online_ever']) || trim($config['most_user_online_ever']) == '')
@@ -166,7 +137,7 @@ if ($show_online)
 #header
 kleeja_header();
 #index template
-include get_template_path('index_body.php');
+include get_template_path($current_template);
 #footer
 kleeja_footer();
 

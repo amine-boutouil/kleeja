@@ -178,16 +178,19 @@ class uploading
 					$folder_to_upload = trim($config['imagefolder']) == '' ? trim($config['foldername']) : trim($config['imagefolder']);
 				}
 
+
+				$is_img = in_array($file_extension, array('png','gif','jpg','jpeg', 'bmp')) ? true : false;
+
 				#now upload
 				$upload_result = move_uploaded_file($file['tmp_name'], $folder_to_upload . '/' . $filename);
 
 				if($upload_result)
 				{
-					$this->add_to_database($this->filename, $folder_to_upload, $file['size'], $file_extension, $file['name']);
+					$this->add_to_database($filename, $folder_to_upload, $file['size'], $file_extension, $file['name']);
 				} 
 				else 
 				{
-					$this->messages[] = array(sprintf($lang['CANT_UPLAOD'], $this->filename2), 'error');
+					$this->messages[] = array(sprintf($lang['CANT_UPLAOD'], $filename), 'error');
 				}
 			}
 		}

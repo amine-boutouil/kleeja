@@ -5,7 +5,7 @@
 
 	<!-- welcome -->
 	<h6>
-		<img src="{STYLE_PATH}images/Smile.png" width="20" height="20" style="vertical-align:middle;" />
+		<img src="<?=STYLE_PATH?>images/Smile.png" width="20" height="20" style="vertical-align:middle;" />
 		 <?=$lang['WELCOME']?> <?php if($user->is_user()):?>[ <?=$user->data['name']?> ]<?php endif;?> ...</h6>
 	<div class="wolcome_msg"><?=$welcome_msg?></div>
 	<!-- @end-welcome -->
@@ -15,25 +15,6 @@
 	<!-- form upload -->
 	<form id="uploader" action="<?=$config['siteurl']?>" method="post" enctype="multipart/form-data">
 
-		<!-- upload boxes -->
-		<div class="tabmain">
-
-			<ul class="tabnav">
-				<!-- First-Tab, files upload -->
-				<li><?=$lang['DOWNLOAD_F']?></li>
-				<!-- @First-Tab -->
-
-				<!-- Second-Tab, urls upload -->
-				<?php /** if(!$config['www_url']):
-				<li><?=$lang['DOWNLOAD_T']?></li>
-				<?php endif;**/?>
-				<!-- @Second-Tab --> 
-
-				<!--you-can-add-another-tab-here-->
-			</ul>
-
-			<!-- First-Box, files upload -->
-			<div class="tabcon" title="<?=$lang['DOWNLOAD_F']?>">
 			<div class="go_up">
 				<!-- upload normal -->
 				<?php foreach($FILES_NUM_LOOP as $number=>$show):?>
@@ -44,32 +25,7 @@
 				<div class="clr"></div>
 				<!-- @upload normal -->
 			</div>
-			</div>
-			<!-- @First-Box -->
-
-			<!-- Second-Box, urls upload -->
-			<?php /**if(!$config['www_url']):
-			<div class="tabcon">
-			<div class="go_up">
-				<!-- upload URL -->  
-				<?php foreach($FILES_NUM_LOOP as $number=>$show):?>
-				<input class="url" type="text" name="file[]" style="<?php if(!$show):?>display:none<?php endif;?>" size="70" value="<?=$lang['PAST_URL_HERE']?>" />
-				<?php endforeach;?>
-				<div class="agree"><span><?=$terms_msg?></span></div>
-				<div class="bn_up"><input type="submit" id="submit_urls" name="submit_urls" value="<?=$lang['DOWNLOAD_T']?>" /> </div>
-				<div class="clr"></div>
-				<!-- @upload URL -->  
-			</div>
-			</div>
-			endif**/?>
-			<!-- @Second-Box -->
-
-			<!--you-can-add-another-box-here-->
-
-		</div>
-		<!-- @upload boxes -->
-
-
+		
 		<!-- verification code -->
 		<?php if($config['enable_captcha'] && $config['safe_code']):?>
 		<div class="safe_code">

@@ -62,19 +62,18 @@
 ------------ BE CAREFUL! .. AFTER THIS LINE YOU WILL TRAVEL THROUGH THE TIME TO THE FUTURE f=0--->f++
 2.0.0 - version (---- NOT YET ---):
 -[-] Security situation page
--[-] new plugins system (one-file system), plugins appear in maintenance page
 -[-] files ACP -> search files from this IP,user
 -[-] Dealing with the huge invasion of Nginx
--[-] Add phrases from within ACP, (show how to embed them in template ?), fix bug with pages there too
--[-] Mobile style, bootstrap3 
+-[50%] Mobile style, bootstrap3 
 -[x] filters at images & files (same db tables for searchs !)
 	-[-] filters at images.
 	-[-] filters at files.
 	-[x] convert searches to use filters and show last 10 ones.
 -[-] files of deleted user shows as 'deleted' user or 'guest' 
--[-] remove last_file code from files and sql .. 
--[-] support PHP 5.4 and above
+-[100%] remove last_file code from files and sql .. 
+-[40%] support PHP 5.3 and above
 -[-] support php-clamav
 -[-] ftp uploads and ability to add many ftp servers
--[-] templates will use php no more template system compelling
--[-] different hooks and plugins system
+-[80%] templates will use php no more template system compelling
+-[50%] different hooks and plugins system, one file plugin, plugins appear in maintenance page
+-[20%] remove download from urls feature since this is not a leech script .. 

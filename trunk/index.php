@@ -40,12 +40,15 @@ if(empty($d_groups[2]['exts']) && !$user->is_user())
 }
 
 
-if(ip('submit_files') || ip('submit_urls'))
+if(ip('submit_files'))
 {	
 	$kljup->process();
 	
 	#show errors and info
-	$MESSAGES = sizeof($kljup->messages) ? $kljup->messages : false;
+	$ERRORS = sizeof($kljup->errors) ? $kljup->errors : false;
+
+	#results
+	$RESULTS = $kljup->results;
 
 	#after sumbit template
 	$current_template = 'uploading_results.php';

@@ -34,7 +34,7 @@ CREATE TABLE `{$dbprefix}call` (
   `time` int(11) NOT NULL,
   `ip` varchar(40) collate utf8_bin NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 ";
 
 $install_sqls['reports'] = "
@@ -47,7 +47,7 @@ CREATE TABLE `{$dbprefix}reports` (
   `time` int(11) NOT NULL,
   `ip` varchar(40) collate utf8_bin NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 ";
 
 
@@ -72,7 +72,7 @@ CREATE TABLE `{$dbprefix}stats` (
   `ex_header` text collate utf8_bin NOT NULL,
   `ex_footer` text collate utf8_bin NOT NULL,
   `lastuser` varchar(300) collate utf8_bin NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 ";
 
 
@@ -95,7 +95,7 @@ CREATE TABLE `{$dbprefix}users` (
   PRIMARY KEY (`id`),
   KEY `clean_name` (`clean_name`(300)),
   KEY `group_id` (`group_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 ";
 
 $install_sqls['files'] = "
@@ -114,13 +114,15 @@ CREATE TABLE `{$dbprefix}files` (
   `code_del` varchar(150) collate utf8_bin NOT NULL,
   `user_ip` VARCHAR( 250 ) NOT NULL,
   `id_form` VARCHAR( 100 ) NOT NULL,
+  `ftp_server` INT( 11 ) UNSIGNED NOT NULL DEFAULT  '0',
   PRIMARY KEY (`id`),
   KEY `name` (`name`(300)),
   KEY `user` (`user`),
   KEY `code_del` (`code_del`(150)),
   KEY `time` (`time`),
-  KEY `last_down` (`last_down`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  KEY `last_down` (`last_down`),
+  KEY `ftp_server` (`ftp_server`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 ";
 
 $install_sqls['config'] = "
@@ -135,7 +137,7 @@ CREATE TABLE `{$dbprefix}config` (
   PRIMARY KEY (`name`),
   KEY `type` (`type`),
   KEY `plg_id` (`plg_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 ";
 
 
@@ -148,7 +150,7 @@ CREATE TABLE `{$dbprefix}hooks` (
   `hook_content` mediumtext collate utf8_bin NOT NULL,
   PRIMARY KEY (`hook_id`),
   KEY `plg_id` (`plg_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 ";
 
 
@@ -167,7 +169,7 @@ CREATE TABLE `{$dbprefix}plugins` (
   `plg_files` text COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`plg_id`),
   KEY `plg_name` (`plg_name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 ;
 ";
 
 $install_sqls['lang'] = "
@@ -179,7 +181,7 @@ CREATE TABLE `{$dbprefix}lang` (
   KEY `lang_id` (`lang_id`),
   KEY `plg_id` (`plg_id`),
   KEY `word` (`word`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 ";
 
 $install_sqls['groups'] = "
@@ -189,7 +191,7 @@ CREATE TABLE `{$dbprefix}groups` (
   `group_is_default` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `group_is_essential` tinyint(1) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`group_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 ";
 
 $install_sqls['groups_data'] = "
@@ -198,7 +200,7 @@ CREATE TABLE `{$dbprefix}groups_data` (
   `name` varchar(255) COLLATE utf8_bin NOT NULL,
   `value` varchar(255) COLLATE utf8_bin NOT NULL,
   KEY `group_id` (`group_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 ";
 
 $install_sqls['groups_acl'] = "
@@ -207,7 +209,7 @@ CREATE TABLE `{$dbprefix}groups_acl` (
   `group_id` int(11) unsigned NOT NULL,
   `acl_can` tinyint(1) unsigned NOT NULL DEFAULT '0',
   KEY `group_id` (`group_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 ";
 
 $install_sqls['groups_exts'] = "
@@ -218,7 +220,7 @@ CREATE TABLE `{$dbprefix}groups_exts` (
   `size` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`ext_id`),
   KEY `group_id` (`group_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 ";
 
 $install_sqls['filters'] = "
@@ -233,7 +235,23 @@ CREATE TABLE `{$dbprefix}filters` (
   PRIMARY KEY (`filter_id`),
   KEY `filter_user` (`filter_user`),
   KEY `filter_uid` (`filter_uid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+";
+
+
+$install_sqls['ftp_servers'] = "
+CREATE TABLE `{$dbprefix}ftp_servers` (
+  `ftp_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `ftp_name` varchar(200) NOT NULL,
+  `ftp_host` varchar(200) NOT NULL,
+  `ftp_user` varchar(200) NOT NULL,
+  `ftp_password` varchar(200) NOT NULL,
+  `ftp_port` int(4) unsigned NOT NULL DEFAULT '21',
+  `ftp_folder` varchar(200) NOT NULL,
+  `ftp_url` VARCHAR( 200 ) NOT NULL,
+  `ftp_enabled` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  PRIMARY KEY (`ftp_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 ";
 
 $install_sqls['stats_insert'] = "INSERT INTO `{$dbprefix}stats`  VALUES (0,0,1,0,0," . time() . ",0,0,0,0,'',0,0,0,0,'','','','')";

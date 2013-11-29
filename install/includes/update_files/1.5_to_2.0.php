@@ -34,7 +34,21 @@ $update_sqls['configs_to_select'] = "UPDATE  `{$dbprefix}config` SET  `option` =
 $update_sqls['configs_to_select'] = "UPDATE  `{$dbprefix}config` SET  `option` =  'yes_no' WHERE  `name` IN ('siteclose', 'register', 'enable_userfile', 'mod_writer', 'cookie_secure', 'del_url_file', 'safe_code', 'www_url', 'thumbs_imgs', 'write_imgs', 'filesnum_show', 'imagefoldere', 'allow_stat_pg', 'allow_online', 'statfooter', 'gzip', 'enable_captcha');";
 $update_sqls['drop_tables_plugins_hooks_lang'] = "DROP TABLE `{$dbprefix}hooks`, `{$dbprefix}lang`, `{$dbprefix}plugins`;";
 
-
+$update_sqls['ftp_servers'] = "
+CREATE TABLE `{$dbprefix}ftp_servers` (
+  `ftp_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `ftp_name` varchar(200) NOT NULL,
+  `ftp_host` varchar(200) NOT NULL,
+  `ftp_user` varchar(200) NOT NULL,
+  `ftp_password` varchar(200) NOT NULL,
+  `ftp_port` int(4) unsigned NOT NULL DEFAULT '21',
+  `ftp_folder` varchar(200) NOT NULL,
+  `ftp_url` VARCHAR( 200 ) NOT NULL,
+  `ftp_enabled` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  PRIMARY KEY (`ftp_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+";
+$update_sqls['files_ftp'] = "ALTER TABLE  `{$dbprefix}files` ADD  `ftp_server` INT( 11 ) UNSIGNED NOT NULL DEFAULT  '0', ADD INDEX (  `ftp_server` );";
 
 
 //////////////////////////////////////////////////

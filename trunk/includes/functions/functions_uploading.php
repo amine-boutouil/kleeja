@@ -20,39 +20,6 @@ if (!defined('IN_COMMON'))
 
 
 /**
- * checking the safety and validty of sub-extension of given file
- * @param string $filename The file path
- * @return bool True if ok, false if not
- */
-function ext_check_safe($filename)
-{
-	#bad files extensions
-	$not_allowed =	array('php', 'php3' ,'php5', 'php4', 'asp' ,'shtml' , 'html' ,'htm' ,'xhtml' ,'phtml', 'pl', 'cgi', 'htaccess', 'ini');
-	
-	#let split the file name, suppose it filename.gif.php
-	$tmp = explode('.', $filename);
-
-	#if it's less than 3, that its means normal
-	if(sizeof($tmp) < 3)
-	{
-		return true;
-	}
-
-	$before_last_ext = $tmp[sizeof($tmp)-2];
-
-	#in the bad extenion, return false to tell him
-	if (in_array(strtolower($before_last_ext), $not_allowed)) 
-	{
-		return false;
-	}
-	else
-	{
-		return true;
-	}
-}
-
-
-/**
  * create htaccess files for uploading folder
  * @param string $folder The folder path
  * @return void

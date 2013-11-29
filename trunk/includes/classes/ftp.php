@@ -192,9 +192,13 @@ class kleeja_ftp
 		$ret = ftp_nb_fput($this->handler, $server_file, $local_file, $mode);
 		while ($ret == FTP_MOREDATA)
 		{
-			 #still uploading
-			print ftell ($fh)."\n";
-			$ret = ftp_nb_continue($this->handler);
+			#still uploading
+			 if($this->debug)
+			 {
+			 	print ftell ($fh)."\n";
+			 }
+			
+			 $ret = ftp_nb_continue($this->handler);
 		}
 		#bad uploading
 		if ($ret != FTP_FINISHED)

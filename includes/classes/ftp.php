@@ -9,7 +9,9 @@
 */
 
 
-//no for directly open
+/**
+ * @ignore
+ */
 if (!defined('IN_COMMON'))
 {
 	exit();
@@ -17,52 +19,74 @@ if (!defined('IN_COMMON'))
 
 
 /**
-* Make changes with files using ftp
-*/
-class kftp
+ * Make changes with files using FTP
+ */
+class kleeja_ftp
 {
-	var $handler = null;
-	var $timeout = 15;
-	var $root	 = '';
-	var $n = 'kftp';
-	var $debug = false;
+	/**
+	 * FTP current connection handler
+	 */
+	private $handler = null;
+	/**
+	 * TimeOut before disconnction
+	 */
+	public $timeout = 15;
+	/**
+	 * Move to this folder after connection
+	 */
+	public $root	 = '';
+	/**
+	 * If enabled, debug mode will be activated
+	 */
+	public $debug = false;
 
 
-	function _open($info = array())
+	/**
+	 * Connect to FTP server
+	 *
+	 * @param string $host FTP server address
+	 * @param string $user FTP server username
+	 * @param string $password FTP server password
+	 * @param int $port FTP server port
+	 * @param string $path FTP server path
+	 * @return bool
+	 */
+	public function open($host, $user, $password, $port = 21, $path = '/')
 	{
-		// connect to the server
-		$this->handler = @ftp_connect($info['host'], $info['port'], $this->timeout);
-		//kleeja_log(var_export($info))
+		#connect to the server
+		$this->handler = @ftp_connect($host, $port, $this->timeout);
+
 		if (!$this->handler)
 		{
-			//kleeja_log('!ftp_connect');
 			return false;
 		}
 
-		// pasv mode
+		#pasv mode
 		@ftp_pasv($this->handler, true);
 
-		// login to the server
-		if (!ftp_login($this->handler, $info['user'], $info['pass']))
+		#login to the server
+		if (!ftp_login($this->handler, $user, $password))
 		{
-			//kleeja_log('!ftp_login');
 			return false;
 		}
 
-		$this->root = ($info['path'][0] != '/' ? '/' : '') . $info['path'] . ($info['path'][strlen($info['path'])-1] != '/' ? '/' : '');
+		#move to the path
+		$this->root = ($path[0] != '/' ? '/' : '') . $path . ($info['path'][strlen($path)-1] != '/' ? '/' : '');
 
-		if (!$this->_chdir($this->root))
+		if (!$this->goto($this->root))
 		{
-			//kleeja_log('!_chdir');
-			$this->_close();
+			$this->close();
 			return false;
 		}
 
-		//kleeja_log('nice work kftp');
 		return true;
 	}
 
-	function _close()
+	/**
+	 * Close current FTP connection
+	 * @return bool
+	 */
+	public function close()
 	{
 		if (!$this->handler)
 		{
@@ -72,12 +96,20 @@ class kftp
 		return @ftp_quit($this->handler);
 	}
 
-	function _pwd()
+	/**
+	 * Get the current folder that we are in now
+	 * @return string
+	 */
+	public function current_folder()
 	{
 		return ftp_pwd($this->handler);
 	}
 
-	function _chdir($dir = '')
+	/**
+	 * Go to the given folder 
+	 * @return bool
+	 */
+	public function goto($dir = '')
 	{
 		if ($dir && $dir !== '/')
 		{
@@ -89,8 +121,12 @@ class kftp
 
 		return @ftp_chdir($this->handler, $dir);
 	}
-	
-	function _chmod($file, $perm = 0644)
+
+	/**
+	 * Change the file or folder permssion
+	 * @return bool
+	 */
+	public function chmod($file, $perm = 0644)
 	{
 		if (function_exists('ftp_chmod'))
 		{
@@ -99,71 +135,107 @@ class kftp
 		else
 		{
 			$chmod_cmd = 'CHMOD ' . base_convert($perm, 10, 8) . ' ' . $this->_fixpath($file);
-			$action = $this->_site($chmod_cmd);
+			$action = ftp_site($chmod_cmd);
 		}
 		return $action;
 	}
-	
-	function _site($cmd)
-	{
-		return @ftp_site($this->handler, $cmd);
-	}
-	
-	function _delete($file)
+
+
+	/**
+	 * Delete given file
+	 * @return bool
+	 */
+	public function delete($file)
 	{
 		return @ftp_delete($this->handler, $this->_fixpath($file));
 	}
 
-	function _write($filepath, $content)
-	{
-		
+	/**
+	 * Create a file and write the given content to it
+	 * @return bool
+	 */
+	public function write($filepath, $content)
+	{	
 		$fnames = explode('/', $filepath);
 		$filename = array_pop($fnames);
 		$extension = strtolower(array_pop(explode('.', $filename)));
 		$path = dirname($fnames);
-		$cached_file = PATH . 'cache/plg_system_' . $filename;
+		$cached_file = PATH . 'cache/cached_ftp_' . $filename;
 
-		//make it as a cached one
+		#make it as a cached file
 		$h = @fopen($cached_file, 'wb');
 		fwrite($h, $content);
 		@fclose($h);
-	
-		if(in_array($extension, array('gif', 'jpg', 'png')))
-		{
-			$mode = FTP_BINARY;
-		}
-		else
-		{
-			$mode = FTP_ASCII;
-		}
 
-		$this->_chdir($this->_fixpath($path));
+		$mode = in_array($extension, array('gif', 'jpg', 'png') ? FTP_BINARY : FTP_ASCII;
+
+		$this->goto($this->_fixpath($path));
 
 		$r = @ftp_put($this->handler, $filename, $this->_fixpath($cached_file), $mode);
-		$this->_chdir($this->root);
-		
+		$this->goto($this->root);
+
 		kleeja_unlink($cached_file);
-		
+
 		return $r;
 	}
+
+	/**
+	 * Upload a local file to the FTP server
+	 * @return bool
+	 */
+	public function upload($local_file, $server_file)
+	{		
+		$extension = strtolower(array_pop(explode('.', $local_file)));
+		$mode = in_array($extension, array('gif', 'jpg', 'png') ? FTP_BINARY : FTP_ASCII;
 	
-	function _rename($old_file, $new_file)
+		#Initate the upload
+		$ret = ftp_nb_fput($this->handler, $server_file, $local_file, $mode);
+		while ($ret == FTP_MOREDATA)
+		{
+			 #still uploading
+			print ftell ($fh)."\n";
+			$ret = ftp_nb_continue($this->handler);
+		}
+		#bad uploading
+		if ($ret != FTP_FINISHED)
+		{
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Rename a file
+	 * @return bool
+	 */
+	public function rename($old_file, $new_file)
 	{
 		return @ftp_rename($this->handler, $this->_fixpath($old_file), $this->_fixpath($new_file));
 	}
 	
-	
-	function _mkdir($dir, $perm = 0777)
+	/**
+	 * Cretate a folder
+	 * @return bool
+	 */
+	public function create_folder($dir, $perm = 0777)
 	{
 		return @ftp_mkdir($this->handler, $this->_fixpath($dir));
 	}
 	
-	function _rmdir($dir)
+	/**
+	 * Delete the given folder
+	 * @return bool
+	 */
+	public function delte_folder($dir)
 	{
 		return @ftp_rmdir($this->handler, $this->_fixpath($dir));
 	}
 
-	function _fixpath($path)
+	/**
+	 * fix the given path to be compatible with the FTP
+	 * @return string
+	 */
+	private function _fixpath($path)
 	{
 		return $this->root . str_replace(PATH, '', $path);
 	}

@@ -135,40 +135,46 @@ class uploading
 
 		foreach($files as $file)
 		{
+			#if total uploaded files reached the limit
+			if($this->total >= $config['filesnum'])
+			{
+				break;
+			}
+
 			#no file content
 			if(empty($file['tmp_name']))
 			{
 				continue;
 			}
 
-			#if filename conatins bad chars or doesnt have an extension
-			if(strpos($file['name'], '.') === false || preg_match("#[\\\/\:\*\?\<\>\|\"]#", $file['name']))
+			#filename without extension?
+			if(strpos($file['name'], '.') === false)
 			{
+				#TODO: try to figure out the extension for popular files
 				$this->errors[] = sprintf($lang['WRONG_F_NAME'], htmlspecialchars($file['name']));
 				continue;
 			}
 
-			$file_extension = explode('.', $file['name']);
-			$file_extension = strtolower(array_pop($file_extension));
+			#clean filename, what about other language?
+			$filename = strtr($file['name'], 'ŠŽšžŸÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÑÒÓÔÕÖØÙÚÛÜÝàáâãäåçèéêëìíîïñòóôõöøùúûüýÿ', 'SZszYAAAAAACEEEEIIIINOOOOOOUUUUYaaaaaaceeeeiiiinoooooouuuuyy');
+			$filename = preg_replace(array('/\s/', '/\.[\.]+/', '/[^\w_\.\-]/'), array('_', '.', ''), strtolower($filename));
 
-			#check for bad file extensions
-			if(ext_check_safe($file['name']) == false)
-			{
-				$this->errors[] = sprintf($lang['WRONG_F_NAME'], htmlspecialchars($file['name']));
-				continue;
-			}
+			#get the extension and the right filename
+			$file_extension = strtolower(substr($filename, strrpos($filename, '.')+1));
+			$filename = str_replace('.', '_', substr($filename, 0, strrpos($filename, '.')));
+
 
 			#if file extension is not allowed?
 			if(!in_array($file_extension, array_keys($this->allowed_extensions)))
 			{
-				$this->errors[] = sprintf($lang['FORBID_EXT'], $this->typet);
+				$this->errors[] = sprintf($lang['FORBID_EXT'], $file_extension);
 				continue;
 			}
 
 			#file check for first 265 content
-			if(check_file_content($file['tmp_name']) == false)
+			if(check_file_content($file['tmp_name']) == false && !$just_check)
 			{
-				$this->errors[] = sprintf($lang['NOT_SAFE_FILE'], htmlspecialchars($file['name']));
+				$this->errors[] = sprintf($lang['NOT_SAFE_FILE'], $filename);
 				continue;
 			}
 
@@ -201,7 +207,7 @@ class uploading
 			$upload_result = move_uploaded_file($file['tmp_name'], $folder_to_upload . '/' . $filename);
 
 			#if uploading went ok
-			if($upload_result)
+			if($upload_result  && !$just_check)
 			{
 				#sometime can nott see the file after uploading without this fix
 				@chmod($folder . '/' . $filename , 0644);
@@ -262,7 +268,7 @@ class uploading
 		#end-foreach
 		
 		#total files equal zero, then show a message to tell user to select files
-		if($this->total == 0)
+		if($this->total == 0 && !sizeof($this->errors))
 		{
 			$this->errors[] = $lang['CHOSE_F'];
 		}

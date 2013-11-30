@@ -9,63 +9,50 @@
 */
 
 
-//define important constants
+/**
+ * @ignore
+ */
 define('PATH' , '../');
-define('IN_INDEX' , true);
+define('IN_KLEEJA' , true);
 define('IN_ADMIN' , true);
-
-
-//we are in admin path, session and cookies require this
-$adm_path = preg_replace('/.*?[\\\\|\/]([0-9a-z-_.]+)[\\\\|\/]([0-9a-z-_.]+)[\\\\|\/]' . preg_quote(basename(__file__), '/') . '/i', '/\\1/\\2/', __file__);
-$adm_time = 18000;
-
-
-//session_set_cookie_params($admintime);
-if (function_exists('session_set_cookie_params'))
-{
-   	session_set_cookie_params($adm_time, $adm_path);
-} 
-elseif (function_exists('ini_set'))
-{
-   ini_set('session.cookie_lifetime', $adm_time);
-   ini_set('session.cookie_path', $adm_path);
-}
-
-
-//include imprtant file ..
+#session params
+$s_path = preg_replace('/.*?[\\\\|\/]([0-9a-z-_.]+)[\\\\|\/]([0-9a-z-_.]+)[\\\\|\/]' . preg_quote(basename(__file__), '/') . '/i', '/\\1/\\2/', __file__);
+$s_time = 18000;
+#include core
 require PATH . 'includes/common.php';
 
-//go to ..
-$go_to		= isset($_GET['cp']) ? htmlspecialchars($_GET['cp']) : 'start';
-$username	= $usrcp->name();
 
-//for security
-if (!$username)
+($hook = kleeja_run_hook('begin_admin_page')) ? eval($hook) : null; //run hook 
+
+#current page
+$go_to = g('cp', 'string', 'start');
+
+#for security, if not a user, redirect to login page
+if (!$user->is_user())
 {
 	($hook = kleeja_run_hook('user_not_admin_admin_page')) ? eval($hook) : null; //run hook 
-	redirect(PATH . 'ucp.php?go=login&return=' . urlencode(ADMIN_PATH . '?cp=' . $go_to));
+	redirect($config['siteurl'] . 'ucp.php?go=login&return=' . urlencode(ADMIN_PATH . '?cp=' . $go_to));
 }
 
-//get languge of admin
+#get languge of admin
 get_lang('acp');
 
-//
-//need to login again
-//
+
+#need to login again
 if(
-	(empty($_SESSION['ADMINLOGIN']) || $_SESSION['ADMINLOGIN'] != md5(sha1($config['h_key']) . $usrcp->name() . $config['siteurl'])) || 
+	(empty($_SESSION['ADMINLOGIN']) || $_SESSION['ADMINLOGIN'] != md5(sha1($config['h_key']) . $user->data['name'] . $config['siteurl'])) || 
 	(empty($_SESSION['USER_SESS']) || $_SESSION['USER_SESS'] != session_id()) ||
 	(empty($_SESSION['ADMINLOGIN_T']) || $_SESSION['ADMINLOGIN_T'] < time())	 
 )
 {
-	if(isset($_GET['go']) && $_GET['go'] == 'login') 
+	if(g('go') == 'login') 
 	{
-		if (isset($_POST['submit']))
+		if(ip('submit'))
 		{
-			//login
 			$ERRORS	= array();
-			$pass_field = 'lpass_' .  preg_replace('/[^0-9]/', '', sha1($klj_session . sha1($config['h_key']) . $_POST['kid']));
-			if (empty($_POST['lname']) || empty($_POST[$pass_field]))
+			$pass_field = 'lpass_' . preg_replace('/[^0-9]/', '', sha1(session_id() . sha1($config['h_key']) . $_POST['kid']));
+
+			if(empty($_POST['lname']) || empty($_POST[$pass_field]))
 			{
 				$ERRORS[] = $lang['EMPTY_FIELDS'];
 			}
@@ -113,8 +100,8 @@ if(
 	$action	= './' . basename(ADMIN_PATH) . '?go=login&amp;cp=' . $go_to;
 	$H_FORM_KEYS	= kleeja_add_form_key('admin_login');
 	$KEY_FOR_WEE	= sha1(microtime() . sha1($config['h_key']));
-	$KEY_FOR_PASS	= preg_replace('/[^0-9]/', '', sha1($klj_session . sha1($config['h_key']) . $KEY_FOR_WEE)); 
-	$not_you		= sprintf($lang['USERNAME_NOT_YOU'], '<a href="' .$config['siteurl'] . 'ucp.php?go=logout">', '</a>');
+	$KEY_FOR_PASS	= preg_replace('/[^0-9]/', '', sha1(session_id() . sha1($config['h_key']) . $KEY_FOR_WEE)); 
+	$not_you		= sprintf($lang['USERNAME_NOT_YOU'], '<a href="' . $config['siteurl'] . 'ucp.php?go=logout">', '</a>');
 	$err = false;
 	if(!empty($errs))
 	{
@@ -122,10 +109,11 @@ if(
 	}
 
 
-	//prevent indexing this page by bots
+	#prevent indexing this page by bots
 	header('HTTP/1.1 503 Service Temporarily Unavailable');
-	echo $tpl->display("admin_login");
-	$SQL->close();
+	#index template
+	include get_template_path('login.php');
+	garbage_collection();
 	exit;
 }#end login
 
@@ -145,73 +133,47 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && defined('STOP_CSRF'))
 }
 
 
-$gt = filesize(PATH . 'includes/classes/st' . 'yl' .'e.php');
-if(!empty($gt) && $gt != 10235)
-{
-	exit(base64_decode('V2hlcmUgVGhlIENvcHlyaWdodHMgOikgLi4u'));
-}
-
 (!defined('LAST_VISIT')) ? define('LAST_VISIT', time() - 3600*12) : '';
 //last visit
-$last_visit		= defined('LAST_VISIT') && preg_match('/[0-9]{10}/', LAST_VISIT) ? kleeja_date(LAST_VISIT) : false;
+$last_visit	= defined('LAST_VISIT') && preg_match('/[0-9]{10}/', LAST_VISIT) ? kleeja_date(LAST_VISIT) : false;
 
-//path of admin extensions
+#path of admin extensions
 $path_adm	= PATH . 'includes/adm';
 
-//exception extentions
-$ext_expt	= array();
-$ext_expt[]	= 'start';
-$ext_expt[]	= 'php_info';
-$ext_expt[]	= 'b_lgoutcp';
-$ext_expt[]	= 'i_exts';
-$ext_expt[]	= 'aupdate';
-
-//confirm msgs
+#what pages need a confirm msg
 $ext_confirm	= array();
-//$ext_confirm[]	= 'repair';	
+#$ext_confirm[]	= 'repair';	
 
-//formkey extension, Csrf protection
+#formkey extension, Csrf protection
 $GET_FORM_KEY_GLOBAL = kleeja_add_form_key_get('GLOBAL_FORM_KEY');
-$ext_formkey	= array();
+$ext_formkey = array();
 //$ext_formkey[] = 'repair';
 
-($hook = kleeja_run_hook('begin_admin_page')) ? eval($hook) : null; //run hook 
 
-//
-//We hide list of admin menu and show only if there is auth.
-//
+#We hide list of admin menu and show only if there is auth.
 $SHOW_LIST = true;
 
-//get adm extensions
-if(($dh = @opendir($path_adm)) !== false)
-{
-	while (($file = readdir($dh)) !== false)
-	{
-		if(strpos($file, '.php') !== false)
-		{
-			$adm_extensions[] = str_replace('.php', '', $file);
-		}
-	}
-	closedir($dh);
-}
+#admin categories with order
+$adm_extensions = array(
+	1 => 'options',
+	2 => 'files',
+	3 => 'images',
+	4 => 'calls',
+	5 => 'reports',
+	6 => 'search',
+	7 => 'users',
+	8 => 'ban',
+	9 => 'rules',
+	10 => 'extra',
+	11 => 'check_update',
+	12 => 'maintenance',
+);
 
-//no extensions ?
-if(!$adm_extensions || !is_array($adm_extensions))
-{
-	big_error('No Extensions', 'Error while loading admin extensions !');
-}
 
-/**
-* Exception of 406 ! dirty hosting
-* 'configs' word listed as dangrous requested word
-* so we replaced this word with 'options' instead. 
-*/
-if($go_to == 'options')
-{
-	$go_to = 'a_configs';
-}
+($hook = kleeja_run_hook('adm_extensions_admin_page')) ? eval($hook) : null; //run hook 
 
-//no requst or wrong !
+
+#no requst or wrong !
 if(!$go_to || empty($go_to) ||  !in_array($go_to, $adm_extensions))
 {
 	$go_to = 'start';
@@ -220,10 +182,7 @@ if(!$go_to || empty($go_to) ||  !in_array($go_to, $adm_extensions))
 //make array for menu 
 $adm_extensions_menu =	$adm_topmenu = array();
 
-#$top_menu_items = array('c_files', 'd_img_ctrl', 'h_search', 'i_exts');
-
-//re oreder the items as alphapatic !
-sort($adm_extensions);
+#$top_menu_items = array('c_files', 'd_img_ctrl', 'h_search', 'i_exts')
 $i = 0;
 $cr_time = LAST_VISIT > 0 ? LAST_VISIT : time() - 3600*12;
 
@@ -264,11 +223,6 @@ endif;
 
 foreach($adm_extensions as $m)
 {
-	//some exceptions
-	if(@in_array($m, $ext_expt))
-	{
-		continue;
-	}
 
 	($hook = kleeja_run_hook('foreach_ext_admin_page')) ? eval($hook) : null; //run hook 
 
@@ -323,11 +277,9 @@ else
 //no style defined
 if(empty($stylee))
 {
-	$text = $lang['NO_TPL_SHOOSED'];
+	$text = $lang['NO_TPL'];
 	$stylee = 'admin_info';
 }
-
-
 
 
 $go_menu_html = '';
@@ -350,7 +302,7 @@ if(!isset($_GET['_ajax_']))
 if(!isset($_GET['_ajax_']))
 {
 	$is_ajax = 'no';
-	echo $tpl->display($stylee);
+	include get_template_path($stylee);
 }
 
 //footer

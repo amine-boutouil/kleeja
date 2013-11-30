@@ -21,17 +21,17 @@ if (!defined('IN_ADMIN'))
 ($hook = kleeja_run_hook('default_admin_page')) ? eval($hook) : null; //run hook 
 
 
-//style of
-$stylee			= "admin_start";
-$h_lst_files	= basename(ADMIN_PATH) . '?cp=c_files&amp;last_visit=';
-$h_lst_imgs		= basename(ADMIN_PATH) . '?cp=d_img_ctrl&amp;last_visit=';
+#page info
+$current_template= 'start.php';
+$h_lst_files	= ADMIN_PATH . '?cp=c_files&amp;last_visit=';
+$h_lst_imgs		= ADMIN_PATH . '?cp=d_img_ctrl&amp;last_visit=';
 $current_smt	= isset($_GET['smt']) ? (preg_match('![a-z0-9_]!i', trim($_GET['smt'])) ? trim($_GET['smt']) : 'general') : 'general';
 $GET_FORM_KEY	= kleeja_add_form_key_get('adm_start_actions');
 
 //data
 $lst_reg			= empty($stat_last_user) ? $lang['UNKNOWN'] : $stat_last_user;
 $files_number 		= $stat_files + $stat_imgs;
-$files_sizes 		= Customfile_size($stat_sizes);
+$files_sizes 		= readable_size($stat_sizes);
 $users_number 		= $stat_users;
 $php_version 		= isset($NO_PHPINFO) || !function_exists('phpinfo') ? phpversion() : '<a href="' . basename(ADMIN_PATH) . '?cp=php_info" title="php_info" onclick="javascript:get_kleeja_link(\'' . basename(ADMIN_PATH) . '?cp=php_info\', \'#content\'); return false;">php ' . phpversion() . '</a>';
 $version 		= 'MYSQL ' . $SQL->version();
@@ -47,7 +47,7 @@ $s_last_google		= ($stat_last_google == 0) ? '[ ? ]' : kleeja_date($stat_last_go
 $s_google_num		= $stat_google_num;
 $s_last_bing		= ($stat_last_bing == 0) ? '[ ? ]' : kleeja_date($stat_last_bing);
 $s_bing_num			= $stat_bing_num;
-$usernamelang		= sprintf($lang['KLEEJA_CP_W'], $username);
+$usernamelang		= sprintf($lang['KLEEJA_CP_W'], $user->data['name']);
 
 //size board by percent
 $per	= $stat_sizes / ($config['total_size'] * 1048576);

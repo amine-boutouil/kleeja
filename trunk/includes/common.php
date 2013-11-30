@@ -194,7 +194,7 @@ if(defined('DEV_STAGE'))
 }
 
 #admin path
-!defined('ADMIN_PATH') ? define('ADMIN_PATH', $config['siteurl'] . 'admin/index.php') : null;
+!defined('ADMIN_PATH') ? define('ADMIN_PATH', $config['siteurl'] . 'admin/') : null;
 
 #Admin style name
 !defined('ADMIN_STYLE_NAME') ? define('ADMIN_STYLE_NAME', 'marya') : null;

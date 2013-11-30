@@ -7,34 +7,34 @@
 	<p class="text-center text-muted">&copy; Kleeja 2007-2013</p>
 </footer>
 
-<script src="{STYLE_PATH_ADMIN}js/jquery.min.js"></script>
-<script src="{STYLE_PATH_ADMIN}js/bootstrap.min.js"></script>
-<script type="text/javascript" src="{STYLE_PATH_ADMIN}js/jqBarGraph.js"></script>
+<script src="<?=ADMIN_STYLE_PATH?>js/jquery.min.js"></script>
+<script src="<?=ADMIN_STYLE_PATH?>js/bootstrap.min.js"></script>
+<script type="text/javascript" src="<?=ADMIN_STYLE_PATH?>js/jqBarGraph.js"></script>
 
 <script type="text/javascript">
 <!--
-var STYLE_PATH_ADMIN = '{STYLE_PATH_ADMIN}';
-var go_to = '{go_to}';
+var STYLE_PATH_ADMIN = '<?=ADMIN_STYLE_PATH?>';
+var go_to = '<?=$go_to?>';
 
-<IF NAME="{go_to}==start">
+<?php if($go_to == 'start'):?>
 $('#chart_stats').jqBarGraph({
 	data: arrayOfDataMulti,
 		colors: ['#2D6BA9','#91C7E5'] ,
-   legends: ['{lang.FILE}','{lang.IMAGE}'],
+   legends: ['<?=$lang['FILE']?>','<?=$lang['IMAGE']?>'],
    legend: true,
    height: 200,
    barSpace: 5,
    width:700
    
 });
-<ELSEIF NAME="{go_to}==c_files or {go_to}==d_img_ctrl">
+<?php elseif($go_to == 'files' or $go_to == 'images'):?>
  $(document).keydown(function(e) {
 	if (!$('.pagination').length) {
 		return;
 	}
 	var current_page = parseInt($('.pagination .active a').html());
 	var is_there_next = $('.pagination li').length < 2 && current_page > 1 ? false : true;
-	var current_location = '{action}'.replace('&amp;', '&').replace(/[&]*page=[0-9]+/i, '').replace(/&&/, '');
+	var current_location = '<?=$action?>'.replace('&amp;', '&').replace(/[&]*page=[0-9]+/i, '').replace(/&&/, '');
 
 	switch(e.keyCode) { 
 		//left, next
@@ -54,7 +54,7 @@ $('#chart_stats').jqBarGraph({
 	}
 });
 
-	<IF NAME="{go_to}==d_img_ctrl">
+	<?php if($go_to == 'images'):?>
 	//when checked one checkbox?
 	$(".kcheck input[type=checkbox]").change( function(){
 		if($('.kcheck input[type=checkbox]:checked').length == 1){
@@ -96,8 +96,9 @@ $('#chart_stats').jqBarGraph({
 		}
 	});
 
-	</IF>
-<ELSEIF NAME="{go_to}==e_call or {go_to}==f_reports">
+	<?php endif;?>
+
+<?php elseif($go_to == 'calls' or $go_to=='reports'):?>
 $('.popover-send').popover({
 	html:true,
 	placement:'auto top',
@@ -105,7 +106,7 @@ $('.popover-send').popover({
 		return $(this).next('.form4send').html();
 	}
 });
-<ELSEIF NAME="{go_to}==g_users">
+<?php elseif($go_to == 'users'):?>
 $('.del-usergroup').popover({
 	html:true,
 	placement:'auto left',
@@ -125,12 +126,12 @@ $('.converter-popover').popover({
 	content:function(){return $('#converter_form').html();}
 });
 $('.acls-radios').button();
-</IF>
+<?php endif;?>
 
 
 function confirm_from(r)
 {
-	var msg = !r ? '{lang.ARE_YOU_SURE_DO_THIS}' : r;
+	var msg = !r ? '<?=$lang['ARE_YOU_SURE_DO_THIS']?>' : r;
 	if(confirm(msg)){
 		return true;
 	}else{

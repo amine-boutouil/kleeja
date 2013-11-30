@@ -53,7 +53,8 @@ if(!defined('PATH'))
 
 
 #start session after setting it right
-$s_time = 86400 * 2; // 2 : two days 
+$s_time = isset($s_time) ? $s_time : 86400 * 2; #two days 
+$s_path = isset($s_path) ? $s_path : '/';
 if(function_exists('ini_set'))
 {
 	if (version_compare(PHP_VERSION, '5.0.0', 'ge') && substr(PHP_OS, 0 ,3) != 'WIN')
@@ -71,6 +72,10 @@ if(function_exists('ini_set'))
 	
 	#session of upload progress
 	ini_set('session.upload_progress.enabled', true);
+}
+elseif (function_exists('session_set_cookie_params'))
+{
+	session_set_cookie_params($s_time, $s_path);
 }
 
 @session_name('sid');

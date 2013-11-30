@@ -169,9 +169,11 @@ function get_url_of($name, $get_default = false)
  */
 function get_template_path($name)
 {
-	if(file_exists(STYLE_PATH_ABS . $name))
+	$folder_path = defined('IN_ADMIN') ? ADMIN_STYLE_PATH_ABS : STYLE_PATH_ABS;
+
+	if(file_exists($folder_path . $name))
 	{
-		return STYLE_PATH_ABS . $name;
+		return $folder_path . $name;
 	}
 	else if(file_exists(PARENT_STYLE_PATH_ABS . $name))
 	{

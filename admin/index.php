@@ -45,69 +45,49 @@ if(
 	(empty($_SESSION['ADMINLOGIN_T']) || $_SESSION['ADMINLOGIN_T'] < time())	 
 )
 {
-	if(g('go') == 'login') 
+	if(g('go') == 'login' && ip('submit')) 
 	{
-		if(ip('submit'))
+		$ERRORS	= array();
+		$pass_field = 'lpass_' . preg_replace('/[^0-9]/', '', sha1(session_id() . sha1($config['h_key']) . p('kid')));
+
+		if(p('lname') == '' || p($pass_field) == '')
 		{
-			$ERRORS	= array();
-			$pass_field = 'lpass_' . preg_replace('/[^0-9]/', '', sha1(session_id() . sha1($config['h_key']) . $_POST['kid']));
+			$ERRORS[] = $lang['EMPTY_FIELDS'];
+		}
+		elseif(!user_can('enter_acp'))
+		{
+			$ERRORS[] = $lang['U_NOT_ADMIN'];
+		}
+		elseif(!kleeja_check_form_key('admin_login'))
+		{
+			$ERRORS[] = $lang['INVALID_FORM_KEY'];
+		}
 
-			if(empty($_POST['lname']) || empty($_POST[$pass_field]))
+		if(!sizeof($ERRORS))
+		{
+			if($f = $user->login(p('lname'), p($pass_field), false, $adm_time, true))
 			{
-				$ERRORS[] = $lang['EMPTY_FIELDS'];
+				$_SESSION['USER_SESS'] = session_id();
+				$_SESSION['ADMINLOGIN'] = md5(sha1($config['h_key']) . p('lname') . $config['siteurl']);
+				//to make sure, sometime setting time from fucntions doesnt work
+				$_SESSION['ADMINLOGIN_T'] = time() + $s_time;
+				redirect(ADMIN_PATH . '?cp=' . $go_to);
+				$SQL->close();
+				exit;
 			}
-			elseif(!user_can('enter_acp'))
+			else
 			{
-				$ERRORS[] = $lang['U_NOT_ADMIN'];
-			}
-			elseif(!kleeja_check_form_key('admin_login'))
-			{
-				$ERRORS[] = $lang['INVALID_FORM_KEY'];
-			}
-
-			if(!sizeof($ERRORS))
-			{
-				if($f = $usrcp->data($_POST['lname'], $_POST[$pass_field], false, $adm_time, true))
-				{
-					$_SESSION['USER_SESS'] = session_id();
-					$_SESSION['ADMINLOGIN'] = md5(sha1($config['h_key']) . $usrcp->name() . $config['siteurl']);
-					//to make sure, sometime setting time from fucntions doesnt work
-					$_SESSION['ADMINLOGIN_T'] = time() + $adm_time;
-					redirect('./' . basename(ADMIN_PATH) . '?cp=' . $go_to);
-					$SQL->close();
-					exit;
-				}
-				else
-				{
-					//Wrong entries
-					$ERRORS[] = $lang['LOGIN_ERROR'];
-				}
-			}
-
-			//let's see if there is errors
-			if(sizeof($ERRORS))
-			{
-				$errs =	'';
-				foreach($ERRORS as $r)
-				{
-					$errs .= '- ' . $r . '. <br />';
-				}
+				# wrong entries
+				$ERRORS[] = $lang['LOGIN_ERROR'];
 			}
 		}
 	}
 
-	//show template login .
-	$action	= './' . basename(ADMIN_PATH) . '?go=login&amp;cp=' . $go_to;
-	$H_FORM_KEYS	= kleeja_add_form_key('admin_login');
+	#show template login .
+	$action	= ADMIN_PATH . '?go=login&amp;cp=' . $go_to;
 	$KEY_FOR_WEE	= sha1(microtime() . sha1($config['h_key']));
 	$KEY_FOR_PASS	= preg_replace('/[^0-9]/', '', sha1(session_id() . sha1($config['h_key']) . $KEY_FOR_WEE)); 
 	$not_you		= sprintf($lang['USERNAME_NOT_YOU'], '<a href="' . $config['siteurl'] . 'ucp.php?go=logout">', '</a>');
-	$err = false;
-	if(!empty($errs))
-	{
-		$err = true;
-	}
-
 
 	#prevent indexing this page by bots
 	header('HTTP/1.1 503 Service Temporarily Unavailable');
@@ -138,10 +118,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && defined('STOP_CSRF'))
 $last_visit	= defined('LAST_VISIT') && preg_match('/[0-9]{10}/', LAST_VISIT) ? kleeja_date(LAST_VISIT) : false;
 
 #path of admin extensions
-$path_adm	= PATH . 'includes/adm';
+$path_adm = PATH . 'includes/adm';
 
 #what pages need a confirm msg
-$ext_confirm	= array();
+$ext_confirm = array();
 #$ext_confirm[]	= 'repair';	
 
 #formkey extension, Csrf protection
@@ -155,18 +135,20 @@ $SHOW_LIST = true;
 
 #admin categories with order
 $adm_extensions = array(
-	1 => 'options',
-	2 => 'files',
-	3 => 'images',
-	4 => 'calls',
-	5 => 'reports',
-	6 => 'search',
-	7 => 'users',
-	8 => 'ban',
-	9 => 'rules',
-	10 => 'extra',
-	11 => 'check_update',
-	12 => 'maintenance',
+	#name of file without .php => path of file's folder
+	'options' => $path_adm,
+	'files' => $path_adm,
+	'images' => $path_adm,
+	'calls' => $path_adm,
+	'reports' => $path_adm,
+	'search' => $path_adm,
+	'users' => $path_adm,
+	'ban' => $path_adm,
+	'rules' => $path_adm,
+	'extra' => $path_adm,
+	'check_update' => $path_adm,
+	'maintenance' => $path_adm,
+	'start' => $path_adm,
 );
 
 
@@ -180,21 +162,20 @@ if(!$go_to || empty($go_to) ||  !in_array($go_to, $adm_extensions))
 }
 
 //make array for menu 
-$adm_extensions_menu =	$adm_topmenu = array();
+$adm_extensions_menu = array();
 
-#$top_menu_items = array('c_files', 'd_img_ctrl', 'h_search', 'i_exts')
 $i = 0;
 $cr_time = LAST_VISIT > 0 ? LAST_VISIT : time() - 3600*12;
 
 
-// check calls and reports numbers
-if(isset($_GET['check_msgs']) || !isset($_GET['_ajax_'])):
+#check calls and reports numbers
+if(ig('check_msgs') || !ig('_ajax_')):
 
-//small bubble system 
-//any item can show what is inside it as unread messages
+// Small bubble system 
+// any item can show what is inside it as unread messages
 $kbubbles = array();
 
-//for calls and reports
+#for calls and reports
 foreach(array('call'=>'calls', 'reports'=>'reports') as $table=>$n)
 {
 	$query	= array(
@@ -210,48 +191,42 @@ foreach(array('call'=>'calls', 'reports'=>'reports') as $table=>$n)
 }
 
 #if ajax, echo differntly
-if(isset($_GET['check_msgs']))
+if(ig('check_msgs'))
 {
 	$SQL->close();
 	exit($kbubbles['calls'] . '::' . $kbubbles['reports']);
 }
 
-//add your own bubbles here
+#add your own bubbles here
 ($hook = kleeja_run_hook('kbubbles_admin_page')) ? eval($hook) : null; //run hook 
 
 endif;
 
-foreach($adm_extensions as $m)
+
+foreach($adm_extensions as $m=>$folder_path)
 {
 
 	($hook = kleeja_run_hook('foreach_ext_admin_page')) ? eval($hook) : null; //run hook 
-
-	$s = $m;
-	$m = isset($m[1]) && $m[1] == '_' ? substr($m , 2) : $m;
+	
+	if($m == 'start')
+	{
+		continue;
+	}
 
 	++$i;
 	$adm_extensions_menu[$i]	= array(
 										'i'			=> $i+1,
 										'i2'		=> $i+2,
-										'icon'		=> (file_exists($STYLE_PATH_ADMIN_ABS . 'images/menu/' . ($m == 'configs' ? 'options' : $m) . '_button.png'))	? $STYLE_PATH_ADMIN . 'images/menu/' . ($m == 'configs' ? 'options' : $m) . '_button.png' : $STYLE_PATH_ADMIN . 'images/menu/no_icon.png',
+										'icon'		=> (file_exists(ADMIN_STYLE_PATH_ABS . 'images/menu/' . $m . '_button.png'))	? ADMIN_STYLE_PATH . 'images/menu/' . $m . '_button.png' : ADMIN_STYLE_PATH . 'images/menu/no_icon.png',
 
-										'lang'		=> !empty($lang['R_'. strtoupper($m)]) ? $lang['R_'. strtoupper($m)] : (!empty($olang['R_' . strtoupper($m)]) ? $olang['R_' . strtoupper($m)] : strtoupper($m)),
-										'link'		=> './' . basename(ADMIN_PATH) . '?cp=' . ($m == 'configs' ? 'options' : $s) . (@in_array($m, $ext_formkey) ? '&amp;' . $GET_FORM_KEY_GLOBAL : ''),
+										'title'		=> !empty($lang['R_'. strtoupper($m)]) ? $lang['R_'. strtoupper($m)] : (!empty($olang['R_' . strtoupper($m)]) ? $olang['R_' . strtoupper($m)] : strtoupper($m)),
+										'link'		=> ADMIN_PATH . '?cp=' . $m . (@in_array($m, $ext_formkey) ? '&amp;' . $GET_FORM_KEY_GLOBAL : ''),
 										'confirm'	=> (@in_array($m, $ext_confirm)) ? true : false,
-										'current'	=> ($s == $go_to) ? true : false,
-										'goto'		=> str_replace('a_configs', 'options', $s),
+										'current'	=> ($m == $go_to) ? true : false,
+										'goto'		=> $m,
 										'kbubble'	=> in_array($m, array_keys($kbubbles)) ? '<span class="badge pull-' . ($lang['DIR'] == 'rtl'?'left':'right') . '" id="t_' . $m . '"' . ($kbubbles[$m] == 0 ? ' style="display:none"' : '') . '>' . $kbubbles[$m] . '</span>' : ''
 									);
-
-	//add another item to array for title='' in href or other thing
-	$adm_extensions_menu[$i]['title'] = $adm_extensions_menu[$i]['lang'];
 	
-	#if(@in_array($s, $top_menu_items))
-	#{
-	#	$adm_topmenu[$i] = $adm_extensions_menu[$i];
-	#	unset($adm_extensions_menu[$i]);
-	#}
-
 	($hook = kleeja_run_hook('endforeach_ext_admin_page')) ? eval($hook) : null; //run hook 
 }
 
@@ -259,26 +234,26 @@ foreach($adm_extensions as $m)
 #to attach kleeja version in the menu start item
 $assigned_klj_ver = preg_replace('!#([a-z0-9]+)!', '', KLEEJA_VERSION);
 
-//get it 
-if (file_exists($path_adm . '/' . $go_to . '.php'))
+
+if (file_exists($adm_extensions[$go_to] . '/' . $go_to . '.php'))
 {
 	($hook = kleeja_run_hook("require_admin_page_begin_{$go_to}")) ? eval($hook) : null; //run hook 
-	include_once ($path_adm . '/' . $go_to . '.php');
+	include $adm_extensions[$go_to] . '/' . $go_to . '.php';
 	($hook = kleeja_run_hook("require_admin_page_end_{$go_to}")) ? eval($hook) : null; //run hook 
 }
 else
 {
-	big_error('In Loading !', 'Error while loading : ' . $go_to);
+	big_error('Loading !', 'Error while loading: ' . $adm_extensions[$go_to] . '/' . $go_to);
 }
 
 ($hook = kleeja_run_hook('end_admin_page')) ? eval($hook) : null; //run hook 
 
 
-//no style defined
-if(empty($stylee))
+#no style defined
+if(empty($current_template))
 {
 	$text = $lang['NO_TPL'];
-	$stylee = 'admin_info';
+	$current_template = 'info';
 }
 
 
@@ -291,25 +266,26 @@ if(isset($go_menu))
 	}
 }
 
-//header
-if(!isset($_GET['_ajax_']))
+#header
+if(!ig('_ajax_'))
 {
-	echo $tpl->display("admin_header");
+	include get_template_path('header.php');
 }
 
 
-//body
-if(!isset($_GET['_ajax_']))
+#body
+if(!ig('_ajax_'))
 {
 	$is_ajax = 'no';
-	include get_template_path($stylee);
+	include get_template_path($current_template);
 }
 
-//footer
-if(!isset($_GET['_ajax_']))
+#footer
+if(!ig('_ajax_'))
 {
-	echo $tpl->display("admin_footer");
+	include get_template_path('footer.php');
 }
-//close db
-$SQL->close();
+
+# at end
+garbage_collection();
 exit;

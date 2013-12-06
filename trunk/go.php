@@ -160,9 +160,9 @@ switch (g('go', 'str', ''))
 			#no error , lets do process
 			if(empty($ERRORS))
 			{
-				$name	= $SQL->escape(!$user->is_user() ? $t_rname : $user->name());
+				$name	= $SQL->escape(!$user->is_user() ? $t_rname : $user->data['name']);
 				$text	= $SQL->escape($t_rtext);
-				$mail	= $SQL->escape(!$user->is_user() ? $t_rmail : $user->mail());
+				$mail	= $SQL->escape(!$user->is_user() ? $t_rmail : $user->data['mail']);
 				$url	= $SQL->escape($id_d ? $url_id : $t_surl);
 				$time 	= (int) time();
 				$ip		=  get_ip();
@@ -280,9 +280,9 @@ switch (g('go', 'str', ''))
 			#no errors ,lets do process
 			if(empty($ERRORS))
 			{
-				$name	= $SQL->escape(!$user->is_user() ? $t_cname : $user->name());
+				$name	= $SQL->escape(!$user->is_user() ? $t_cname : $user->data['name']);
 				$text	= $SQL->escape($t_ctext);
-				$mail	= $SQL->escape(!$user->is_user() ? $t_cmail : $user->mail());
+				$mail	= $SQL->escape(!$user->is_user() ? $t_cmail : $user->data['mail']);
 				$timee	= time();
 				$ip		= $user->data['ip'];
 

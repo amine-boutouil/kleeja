@@ -40,7 +40,7 @@ get_lang('acp');
 
 #need to login again
 if(
-	(empty($_SESSION['ADMINLOGIN']) || $_SESSION['ADMINLOGIN'] != md5(sha1($config['h_key']) . $user->data['name'] . $config['siteurl'])) || 
+	(empty($_SESSION['ADMINLOGIN']) || $_SESSION['ADMINLOGIN'] != md5(sha1($config['h_key']) . $user->data['name'] . $config['siteurl'] . (!empty($_SERVER['REMOTE_ADDR'])) ? (string) $_SERVER['REMOTE_ADDR'] : '')) || 
 	(empty($_SESSION['USER_SESS']) || $_SESSION['USER_SESS'] != session_id()) ||
 	(empty($_SESSION['ADMINLOGIN_T']) || $_SESSION['ADMINLOGIN_T'] < time())	 
 )
@@ -65,10 +65,10 @@ if(
 
 		if(!sizeof($ERRORS))
 		{
-			if($f = $user->login(p('lname'), p($pass_field), false, $adm_time, true))
+			if($f = $user->login(p('lname'), p($pass_field), false, $s_time, true))
 			{
 				$_SESSION['USER_SESS'] = session_id();
-				$_SESSION['ADMINLOGIN'] = md5(sha1($config['h_key']) . p('lname') . $config['siteurl']);
+				$_SESSION['ADMINLOGIN'] = md5(sha1($config['h_key']) . p('lname') . $config['siteurl'] . (!empty($_SERVER['REMOTE_ADDR'])) ? (string) $_SERVER['REMOTE_ADDR'] : '');
 				//to make sure, sometime setting time from fucntions doesnt work
 				$_SESSION['ADMINLOGIN_T'] = time() + $s_time;
 				redirect(ADMIN_PATH . '?cp=' . $go_to);

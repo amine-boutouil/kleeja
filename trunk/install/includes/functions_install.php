@@ -180,7 +180,7 @@ function inst_get_config($name)
 		{
 			return false;
 		}
-		$SQL = new SSQL($dbserver, $dbuser, $dbpass, $dbname);
+		$SQL = new database($dbserver, $dbuser, $dbpass, $dbname);
 	}
 
 	if(!$SQL)
@@ -190,13 +190,13 @@ function inst_get_config($name)
 
 	$sql = "SELECT value FROM `{$dbprefix}config` WHERE `name` = '" . $name . "'";
 	$result	= $SQL->query($sql);
-	if($SQL->num_rows($result) == 0)
+	if($SQL->num($result) == 0)
 	{
 		return false;
 	}
 	else
 	{
-		$current_ver  = $SQL->fetch_array($result);
+		$current_ver  = $SQL->fetch($result);
 		return $current_ver['value'];
 	}
 }

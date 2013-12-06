@@ -28,6 +28,7 @@ if(file_exists(PATH . 'config.php'))
 }
 
 include PATH. 'includes/functions/functions_alternative.php';
+include PATH. 'includes/functions/functions_display.php';
 include PATH . 'includes/functions/functions.php';
 
 switch ($db_type)
@@ -44,9 +45,10 @@ include  'includes/functions_install.php';
 $order_update_files = array(
 'RC_to_1.5'		=> 7,
 '1.0_to_1.5'	=> 8,
+'1.5_to_2.0'	=> 9,
 );
 
-$SQL = new SSQL($dbserver, $dbuser, $dbpass, $dbname);
+$SQL = new database($dbserver, $dbuser, $dbpass, $dbname);
 			
 //
 // Is current db is up-to-date ?
@@ -168,7 +170,7 @@ case 'update_now':
 					{
 						$err = '';
 						$SQL->query($sql_content);
-						$err = $SQL->get_error();
+						$err = $SQL->error();
 
 						if(strpos($err[1], 'Duplicate') !== false || $err[0] == '1062' || $err[0] == '1060')
 						{

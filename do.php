@@ -101,7 +101,7 @@ if(ig('id') || ig('filename'))
 	{
 		//file not exists
 		($hook = kleeja_run_hook('not_exists_qr_downlaod_file')) ? eval($hook) : null; //run hook
-		kleeja_err($lang['FILE_NO_FOUNDED']);
+		kleeja_error($lang['FILE_NO_FOUNDED']);
 	}
 
 	($hook = kleeja_run_hook('b4_showsty_downlaod_id_filename')) ? eval($hook) : null; //run hook
@@ -491,7 +491,7 @@ else if (ig('down') || ig('downf') ||
 else
 {
 	($hook = kleeja_run_hook('err_navig_download_page')) ? eval($hook) : null; //run hook
-	kleeja_err($lang['ERROR_NAVIGATATION']);
+	kleeja_error($lang['ERROR_NAVIGATATION']);
 }
 
 ($hook = kleeja_run_hook('end_download_page')) ? eval($hook) : null; //run hook

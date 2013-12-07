@@ -16,7 +16,7 @@ if (!defined('IN_ADMIN'))
 }
 
 //for style ..
-$current_template	= "admin_files";
+$current_template	= "files.php";
 
 $url_or		= isset($_REQUEST['order_by']) ? '&amp;order_by=' . htmlspecialchars($_REQUEST['order_by']) . (isset($_REQUEST['order_way']) ? '&amp;order_by=1' : '') : '';
 $url_or2	= isset($_REQUEST['order_by']) ? '&amp;order_by=' . htmlspecialchars($_REQUEST['order_by'])  : '';
@@ -119,7 +119,7 @@ if (isset($_POST['submit']))
 	#show msg now
 	$text	= ($affected ? $lang['FILES_UPDATED'] : $lang['NO_UP_CHANGE_S']) .
 				'<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . str_replace('&amp;', '&', $action) .  '\');", 2000);</script>' . "\n";
-	$stylee	= "admin_info";
+	$current_template	= "info.php";
 }
 else
 {
@@ -281,8 +281,8 @@ else
 
 //pager 
 $currentPage= isset($_GET['page']) ? intval($_GET['page']) : 1;
-$Pager		= new SimplePager($perpage, $nums_rows, $currentPage);
-$start		= $Pager->getStartRow();
+$Pager		= new pagination($perpage, $nums_rows, $currentPage);
+$start		= $Pager->get_start_row();
 
 $no_results = false;
 	
@@ -318,7 +318,7 @@ if ($nums_rows > 0)
 		$arr[]	= array(
 						'id'		=> $row['id'],
 						'name'		=> "<a title=\" " . ($row['real_filename'] == '' ? $row['name'] : $row['real_filename']) . "\" href=\"./" . PATH . $row['folder'] . "/" . $row['name'] . "\" target=\"blank\">" . ($row['real_filename'] == '' ? ((strlen($row['name']) > 20) ? substr($row['name'], 0, 20) . '...' : $row['name']) : ((strlen($row['real_filename']) > 20) ? substr($row['real_filename'], 0, 20) . '...' : $row['real_filename'])) . "</a>",
-						'size'		=> Customfile_size($row['size']),
+						'size'		=> readable_size($row['size']),
 						'ups'		=> $row['uploads'],
 						'direct'	=> $row['id_form'] == 'direct' ? true : false,
 						'time_human'=> kleeja_date($row['time']),
@@ -359,8 +359,8 @@ if(!$is_search)
 
 
 //some vars
-$total_pages	= $Pager->getTotalPages(); 
+$total_pages	= $Pager->get_total_pages(); 
 $page_nums 		= $Pager->print_nums($page_action, 'onclick="javascript:get_kleeja_link($(this).attr(\'href\'), \'#content\'); return false;"'); 
-$current_page	= $Pager->currentPage;
+$current_page	= g('page', 'int', 1);;
 }
 

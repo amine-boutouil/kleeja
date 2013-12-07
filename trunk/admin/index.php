@@ -253,7 +253,7 @@ else
 if(empty($current_template))
 {
 	$text = $lang['NO_TPL'];
-	$current_template = 'info';
+	$current_template = 'info.php';
 }
 
 $go_menu_html = '';

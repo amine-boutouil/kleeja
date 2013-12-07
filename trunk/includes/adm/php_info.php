@@ -22,7 +22,7 @@ if(isset($NO_PHPINFO) || !function_exists('phpinfo'))
 }
 	
 //for style ..
-$stylee	= "admin_php_info";
+$current_template	= "admin_php_info";
 $action	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php');
 	
 ob_start();

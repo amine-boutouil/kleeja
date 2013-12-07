@@ -15,7 +15,7 @@ if (!defined('IN_ADMIN'))
 }
 
 //for style ..
-$stylee	= "admin_reports";
+$current_template	= "reports.php";
 $current_smt	= isset($_GET['smt']) ? (preg_match('![a-z0-9_]!i', trim($_GET['smt'])) ? trim($_GET['smt']) : 'general') : 'general';
 $action			= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;page=' . (isset($_GET['page']) ? intval($_GET['page']) : 1) . '&amp;smt=' . $current_smt;
 $msg_sent		= isset($_GET['sent']) ? intval($_GET['sent']) : false; 
@@ -66,9 +66,9 @@ $result = $SQL->build($query);
 
 //pagination
 $nums_rows		= $SQL->num($result);
-$currentPage	= isset($_GET['page']) ? intval($_GET['page']) : 1;
-$Pager			= new SimplePager($perpage, $nums_rows, $currentPage);
-$start			= $Pager->getStartRow();
+$currentPage	= g('page', 'int', 1);
+$Pager			= new pagination($perpage, $nums_rows, $currentPage);
+$start			= $Pager->get_start_row();
 
 
 $no_results	= false;
@@ -151,7 +151,7 @@ if(sizeof($del_nums))
 	$SQL->build($query_del);
 }
 
-$total_pages 	= $Pager->getTotalPages(); 
+$total_pages 	= $Pager->get_total_pages(); 
 $page_nums 		= $Pager->print_nums(basename(ADMIN_PATH)  . '?cp=' . basename(__file__, '.php'), 'onclick="javascript:get_kleeja_link($(this).attr(\'href\'), \'#content\'); return false;"'); 
 
 //after submit

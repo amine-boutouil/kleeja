@@ -16,7 +16,7 @@ if (!defined('IN_ADMIN'))
 
 
 //for style ..
-$stylee			= "admin_users";
+$current_template		= "users.php";
 $current_smt	= isset($_GET['smt']) ? (preg_match('![a-z0-9_]!i', trim($_GET['smt'])) ? trim($_GET['smt']) : 'general') : 'general';
 $action			= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . (isset($_GET['page'])  ? '&amp;page=' . intval($_GET['page']) : '');
 $action			.= (isset($_GET['search_id']) ? '&amp;search_id=' . htmlspecialchars($_GET['search']) : '');
@@ -1100,8 +1100,8 @@ case 'users':
 
 	//pagination
 	$currentPage	= isset($_GET['page']) ? intval($_GET['page']) : 1;
-	$Pager			= new SimplePager($perpage, $nums_rows, $currentPage);
-	$start			= $Pager->getStartRow();
+	$Pager			= new pagination($perpage, $nums_rows, $currentPage);
+	$start			= $Pager->get_start_row();
 
 	$no_results = false;
 
@@ -1137,7 +1137,7 @@ case 'users':
 	}
 
 	//pages
-	$total_pages 	= $Pager->getTotalPages(); 
+	$total_pages 	= $Pager->get_total_pages(); 
 	$page_nums 		= $Pager->print_nums(
 								basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . (isset($_GET['search_id']) ? '&search_id=' . htmlspecialchars($_GET['search_id']) : '') 
 								. (isset($_GET['qg']) ? '&qg=' . intval($_GET['qg']) : '') . (isset($_GET['smt']) ? '&smt=' . $current_smt : ''),

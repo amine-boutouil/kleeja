@@ -156,7 +156,7 @@ $adm_extensions = array(
 
 
 #no requst or wrong !
-if(!$go_to || empty($go_to) ||  !in_array($go_to, $adm_extensions))
+if(!$go_to || empty($go_to) || !array_key_exists($go_to, $adm_extensions))
 {
 	$go_to = 'start';
 }
@@ -255,7 +255,6 @@ if(empty($current_template))
 	$text = $lang['NO_TPL'];
 	$current_template = 'info';
 }
-
 
 $go_menu_html = '';
 if(isset($go_menu))

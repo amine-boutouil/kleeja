@@ -16,7 +16,7 @@ if (!defined('IN_ADMIN'))
 }
 
 //for style ..
-$stylee		= "admin_files";
+$current_template	= "admin_files";
 
 $url_or		= isset($_REQUEST['order_by']) ? '&amp;order_by=' . htmlspecialchars($_REQUEST['order_by']) . (isset($_REQUEST['order_way']) ? '&amp;order_by=1' : '') : '';
 $url_or2	= isset($_REQUEST['order_by']) ? '&amp;order_by=' . htmlspecialchars($_REQUEST['order_by'])  : '';

@@ -16,7 +16,7 @@ if (!defined('IN_ADMIN'))
 
 
 //for style ..
-$stylee 		= "admin_configs";
+$current_template = "configs.php";
 $current_smt	= isset($_GET['smt']) ? (preg_match('![a-z0-9_]!i', trim($_GET['smt'])) ? trim($_GET['smt']) : 'general') : 'general';
 //words
 $action 		= basename(ADMIN_PATH) . '?cp=options&amp;smt=' . $current_smt;

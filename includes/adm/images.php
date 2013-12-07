@@ -22,7 +22,7 @@ if(!isset($images_cp_perpage) || !$images_cp_perpage)
 }
 
 //for style ..
-$stylee	= "admin_img";
+$current_template	= "img.php";
 $action	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php')  . (isset($_GET['page']) ? '&amp;page=' . intval($_GET['page']) : '') . 
 			(isset($_GET['last_visit']) ? '&amp;last_visit='.intval($_GET['last_visit']) : '');
 $action_search	= basename(ADMIN_PATH) . "?cp=h_search#!cp=h_search";
@@ -103,7 +103,7 @@ if (isset($_POST['submit']))
 				'<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . 
 				'&page=' . (isset($_GET['page']) ? intval($_GET['page']) : '1') . '\');", 2000);</script>' . "\n";
 
-	$stylee	= "admin_info";
+	$current_template = "info.php";
 }
 else
 {
@@ -161,8 +161,8 @@ else
 
 //pager
 $currentPage= isset($_GET['page']) ? intval($_GET['page']) : 1;
-$Pager		= new SimplePager($images_cp_perpage, $nums_rows, $currentPage);
-$start		= $Pager->getStartRow();
+$Pager		= new pagination($images_cp_perpage, $nums_rows, $currentPage);
+$start		= $Pager->get_start_row();
 
 
 $no_results = $affected = $sizes = false;
@@ -204,7 +204,7 @@ if ($nums_rows > 0)
 						'name'		=> ($row['real_filename'] == '' ? ((strlen($row['name']) > 25) ? substr($row['name'], 0, 20) . '...' : $row['name']) : ((strlen($row['real_filename']) > 20) ? str_replace('\'', "\'", substr($row['real_filename'], 0, 20)) . '...' : str_replace('\'', "\'", $row['real_filename']))),
 						'ip' 		=> htmlspecialchars($row['user_ip']),
 						'href'		=> PATH . $row['folder'] . '/' . $row['name'],
-						'size'		=> Customfile_size($row['size']),
+						'size'		=> readable_size($row['size']),
 						'ups'		=> $row['uploads'],
 						'time'		=> date('d-m-Y h:i a', $row['time']),
 						'user'		=> (int) $row['user'] == -1 ? $lang['GUST'] : $row['username'],
@@ -289,10 +289,10 @@ if(!$is_search)
 }
 
 //pages
-$total_pages 	= $Pager->getTotalPages(); 
+$total_pages 	= $Pager->get_total_pages(); 
 $page_nums 		= $Pager->print_nums(basename(ADMIN_PATH). '?cp=' . basename(__file__, '.php') . (isset($_GET['last_visit']) ? '&last_vists=' . intval($_GET['last_visit']) : '')
 						, 'onclick="javascript:get_kleeja_link($(this).attr(\'href\'), \'#content\'); return false;"'); 
-$current_page	= $Pager->currentPage;
+$current_page	= g('page', 'int', 1);
 }
 
 /*
@@ -303,5 +303,5 @@ if(isset($_POST['submit']))
 				'<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . 
 				'&amp;page=' . (isset($_GET['page']) ? intval($_GET['page']) : '1') . '\');", 2000);</script>' . "\n";
 
-	$stylee	= "admin_info";
+	$current_template = info";
 }*/

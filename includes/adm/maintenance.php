@@ -62,7 +62,7 @@ $status_file_link	= basename(ADMIN_PATH) . '?cp=r_repair&amp;case=status_file&am
 
 
 
-$stylee = "admin_repair";
+$current_template = "repair.php";
 
 break;
 
@@ -165,7 +165,7 @@ while($row=$SQL->fetch($result))
 $SQL->free($result);
 
 $text .= '<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . basename(ADMIN_PATH) . '?cp=r_repair' .  '\');", 2000);</script>' . "\n";
-$stylee = 'admin_info';
+$current_template = 'info.php';
 
 
 break;
@@ -205,7 +205,7 @@ if ($SQL->build($update_query))
 
 delete_cache('data_stats');
 
-$stylee = 'admin_info';
+$current_template = 'info.php';
 
 break;
 
@@ -241,7 +241,7 @@ delete_cache('data_stats');
 $text = sprintf($lang['SYNCING'], $lang['USERS_ST']);
 $text .= '<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . basename(ADMIN_PATH) . '?cp=r_repair' .  '\');", 2000);</script>' . "\n";
 
-$stylee = 'admin_info';
+$current_template = 'info.php';
 
 
 break;
@@ -269,7 +269,9 @@ if(function_exists('apc_fetch') && defined('APC_CACHE'))
 $text .= '<li>' . $lang['REPAIRE_CACHE'] . '</li>';
 $text .= '<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . basename(ADMIN_PATH) . '?cp=r_repair' .  '\');", 2000);</script>' . "\n";
 
-$stylee = 'admin_info';
+
+$current_template = 'info.php';
+
 
 break;
 

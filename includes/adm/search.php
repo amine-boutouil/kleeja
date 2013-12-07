@@ -16,7 +16,7 @@ if (!defined('IN_ADMIN'))
 }
 
 //for style ..
-$stylee = "admin_search";
+$current_template = "search.php";
 //search files
 $action = basename(ADMIN_PATH) . "?cp=h_search";
 

@@ -29,7 +29,7 @@ switch ($_GET['sty_t'])
 	case 'st' :
 
 		//for style ..
-		$stylee 	= "admin_styles";
+		$current_template = "styles.php";
 		$action 	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') .'&amp;sty_t=st' . '&amp;smt=' . $current_smt;
 		$edit_tpl_action		= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') .'&amp;sty_t=style_orders&amp;style_id=' . $config['style'] .  '&amp;smt=' . $current_smt . '&amp;method=1&amp;tpl_choose=';
 		$show_all_tpls_action	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') .'&amp;style_choose=' . $config['style'] . '&amp;method=1' . '&amp;smt=' . $current_smt;
@@ -97,7 +97,7 @@ switch ($_GET['sty_t'])
 				case '1': //show templates
 
 					//for style ..
-					$stylee = 'admin_show_tpls';
+					$current_template = 'show_tpls.php';
 					$action = basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') .'&amp;sty_t=style_orders';
 					$action2 = basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') .'&amp;sty_t=style_orders';
 
@@ -290,13 +290,13 @@ switch ($_GET['sty_t'])
 			switch((int) $_GET['method'])
 			{
 				case 0:
-					$stylee = "admin_info";
+					$current_template = "info";
 				break; 
 				//edit tpl
 				case 1:
 
 					//for style ..
-					$stylee = "admin_edit_tpl";
+					$current_template = "edit_tpl.php";
 					$action = basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;sty_t=style_orders';
 					$action_return	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;style_choose=' . $style_id . '&amp;method=1';
 	
@@ -330,7 +330,7 @@ switch ($_GET['sty_t'])
 					//show msg
 					$link	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;style_choose=' . $style_id . '&amp;method=1';
 					$text	= $lang['TPL_DELETED']  . '<br /> <a href="' . $link . '">' . $lang['GO_BACK_BROWSER'] . '</a><meta HTTP-EQUIV="REFRESH" content="1; url=' . $link . '">' ."\n";
-					$stylee	= "admin_info";	
+					$current_template = "info";	
 
 				break;
 			}
@@ -363,13 +363,13 @@ switch ($_GET['sty_t'])
 				//show msg
 				$text = $lang['TPL_UPDATED'];
 				$text	.= '<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . $link .  '\');", 2000);</script>' . "\n";
-				$stylee = 'admin_info';
+				$current_template = 'info.php';
 			}
 			else
 			{
 				$text = sprintf($lang['T_ISNT_WRITEABLE'], $tpl_name);
 				$text	.= '<script type="text/javascript"> setTimeout("get_kleeja_link(\'' . $link .  '\');", 2000);</script>' . "\n";
-				$stylee = 'admin_err';
+				$current_template = 'err.php';
 				//kleeja_admin_err(, true,'', true, $link, 5);
 			}
 			//kleeja_admin_info(, true,'', true, $link, 5);
@@ -407,7 +407,7 @@ switch ($_GET['sty_t'])
 
 			$link	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;style_choose=' . $style_id . '&amp;method=1';
 			$text	= $lang['TPL_CREATED']  . '<br /> <a href="' . $link . '">' . $lang['GO_BACK_BROWSER'] . '</a><meta HTTP-EQUIV="REFRESH" content="1; url=' . $link . '">' ."\n";
-			$stylee	= "admin_info";
+			$current_template = "info.php";
 		}
 
 		//return bakup template
@@ -465,7 +465,7 @@ switch ($_GET['sty_t'])
 
 			$link	= basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;style_choose=' . $style_id . '&amp;method=1';
 			$text	= sprintf($lang['TPL_BK_RETURNED'], $tpl_name)  . '<br /> <a href="' . $link . '">' . $lang['GO_BACK_BROWSER'] . '</a><meta HTTP-EQUIV="REFRESH" content="1; url=' . $link . '">' ."\n";
-			$stylee	= "admin_info";
+			$current_template = "info";
 		}*/
 
 	break;
@@ -482,12 +482,12 @@ switch ($_GET['sty_t'])
 		{
 			delete_cache('styles_cached');
 			$text	= $lang['CACHED_STYLES_DELETED'];
-			$stylee	= 'admin_info';
+			$current_template	= 'info.php';
 		}
 		elseif(!file_exists($cached_file))
 		{
 			$text = $lang['NO_CACHED_STYLES'];
-			$stylee = 'admin_info';
+			$current_template = 'info.php';
 		}
 		else
 		{
@@ -572,7 +572,7 @@ switch ($_GET['sty_t'])
 			ob_end_clean();
 
 			$text .= '<br /><br /><a href="' . basename(ADMIN_PATH) . '?cp=' . basename(__file__, '.php') . '&amp;sty_t=cached&amp;del=1">' . $lang['DELETE_CACHED_STYLES'] . '</a>';  
-			$stylee = 'admin_info';
+			$current_template = 'info.php';
 		}
 	break;
 		
@@ -628,10 +628,10 @@ switch ($_GET['sty_t'])
 	break;*/
 }
 
-if(!isset($stylee))
+if(!isset($current_template))
 {
 	$text	= '--------';
-	$stylee  = 'admin_info';
+	$current_template  = 'info.php';
 }
 
 $arrow_html = $lang['DIR'] == 'rtl' ? ' &rarr; ' : ' &larr; ';

@@ -47,7 +47,7 @@ $s_last_google		= ($stat_last_google == 0) ? '[ ? ]' : kleeja_date($stat_last_go
 $s_google_num		= $stat_google_num;
 $s_last_bing		= ($stat_last_bing == 0) ? '[ ? ]' : kleeja_date($stat_last_bing);
 $s_bing_num			= $stat_bing_num;
-$usernamelang		= sprintf($lang['KLEEJA_CP_W'], $user->data['name']);
+$usernamelang		= sprintf($lang['KLEEJA_CP_W'], $user->data['name	']);
 
 //size board by percent
 $per	= $stat_sizes / ($config['total_size'] * 1048576);

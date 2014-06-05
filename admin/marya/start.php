@@ -4,7 +4,7 @@
 
 <!-- start general -->
 <div class="page-header">
-  <h1>{usernamelang} <small>,{lang.LAST_VISIT} {last_visit}</small></h1>
+  <h1><?=$lang['WELCOME']?> <?=$user->data['name']?> <small>,<?=$lang['LAST_VISIT']?> <?=$last_visit?></small></h1>
 </div>
 
 <!-- notes general -->

@@ -20,7 +20,6 @@ if (empty($lang) || !is_array($lang))
 	$lang = array();
 }
 
-
 $lang = array_merge($lang, array(
 	//language inforamtion
 	'DIR' 					=> 'ltr',
@@ -231,7 +230,7 @@ $lang = array_merge($lang, array(
 	'NOTE'						=>	'Note',
 	'WARN'						=>	'Warning',
 	'ARE_YOU_SURE_DO_THIS'		=> 'Are you sure you want to do this?',
-	'SITE_FOR_MEMBER_ONLY'		=> 'This center is only for members, register or login to upload your files.',
+	'SITE_FOR_MEMBER_ONLY'		=> 'This website is only for members, register or login to upload your files.',
 	'AUTH_INTEGRATION_N_UTF8_T'	=> '%s is not utf8',
 	'AUTH_INTEGRATION_N_UTF8' 	=> '%s database must be utf8 to be integrated with Kleeja !.',
 	'SCRIPT_AUTH_PATH_WRONG'	=> 'Path of %s is not valid, change it now.',
